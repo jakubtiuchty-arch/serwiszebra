@@ -11,6 +11,9 @@ export interface CartItem {
   quantity: number
   product_type: string
   stock: number
+  image?: string
+  device_model?: string | null
+  resolution_dpi?: number | null
 }
 
 interface CartStore {
