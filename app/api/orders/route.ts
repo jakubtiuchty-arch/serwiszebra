@@ -50,8 +50,9 @@ export async function GET(request: Request) {
     paymentStatus: order.payment_status,
     paymentMethod: order.payment_method,
     deliveryMethod: order.delivery_method,
-    trackingNumber: order.tracking_number,
-    trackingUrl: order.tracking_url,
+   tracking_number: order.tracking_number,  // ✅ NOWE
+courier_name: order.courier_name,        // ✅ zostaje
+tracking_url: order.tracking_url,        // ✅ NOWE
     
     // Dane klienta
     customer: {

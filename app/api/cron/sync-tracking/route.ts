@@ -1,5 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient as createSupabaseAdmin } from '@supabase/supabase-js'
+import { Resend } from 'resend'                                         // DODAJ
+import { getShippingNotificationEmail } from '@/lib/email/templates/shipping-notification'
+
+const resend = new Resend(process.env.RESEND_API_KEY)  // DODAJ TUTAJ
 
 const supabaseAdmin = createSupabaseAdmin(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -102,6 +106,26 @@ for (const blOrder of ordersWithTracking) {
 
   console.log(`✅ [CRON] Updated order ${ourOrder.id} with tracking: ${blOrder.delivery_package_nr}`)
   updatedCount++
+    try {
+    const emailHtml = getShippingNotificationEmail({
+      orderNumber: ourOrder.order_number || blOrder.order_id.toString(),
+      trackingNumber: blOrder.delivery_package_nr,
+      courierName: blOrder.delivery_method?.replace(/^Kurier\s+/i, '') || 'Kurier',
+      customerName: blOrder.delivery_fullname || 'Kliencie'
+    })
+
+  await resend.emails.send({
+  from: 'Sklep serwiszebra.pl <sklep@serwiszebra.pl>',
+  to: [blOrder.email],
+  subject: `📦 Przesyłka wysłana - zamówienie #${blOrder.order_id}`,
+  html: emailHtml
+})
+
+    console.log(`📧 [CRON] Email sent to ${blOrder.email}`)
+  } catch (emailError) {
+    console.error(`❌ [CRON] Failed to send email:`, emailError)
+    // Nie przerywamy - email nie jest krytyczny
+  }
 }
 
     console.log(`🎉 [CRON] Sync completed! Updated ${updatedCount} orders`)
@@ -113,7 +137,6 @@ for (const blOrder of ordersWithTracking) {
   total_baselinker_orders: data.orders.length,
   orders_with_tracking: ordersWithTracking.length,
   updated_count: updatedCount,
-  debug: debugInfo  // DODAJ TĘ LINIĘ
 })
 
   } catch (error: any) {

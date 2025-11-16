@@ -38,6 +38,10 @@ interface Order {
   date: string
   deliveryMethod: string
   invoiceNumber?: string
+  invoiceNumber?: string
+  tracking_number?: string          // DODAJ
+  courier_name?: string              // DODAJ
+  tracking_url?: string 
   items?: {
     id: string
     name: string
@@ -111,6 +115,7 @@ export default function ZamowieniaPage() {
   const [expandedOrders, setExpandedOrders] = useState<string[]>([])
   const [deleteModalOrder, setDeleteModalOrder] = useState<Order | null>(null)
   const [isDeleting, setIsDeleting] = useState(false)
+  const [trackingModalOrder, setTrackingModalOrder] = useState<Order | null>(null)
   
 
   useEffect(() => {
@@ -554,6 +559,16 @@ export default function ZamowieniaPage() {
                                   <Download className="w-3 h-3" />
                                 </button>
                               )}
+                              {/* Tracking button */}
+{(order.status === 'shipped' || order.status === 'delivered') && order.tracking_number && (
+  <button
+  onClick={() => setTrackingModalOrder(order)}
+    className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 bg-purple-100 hover:bg-purple-200 text-purple-700 rounded-lg text-xs sm:text-sm font-medium transition-all"
+  >
+    <Truck className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+    <span>Śledź przesyłkę</span>
+  </button>
+)}
                             </div>
 
                             {canReturnOrder(order.status) && (
@@ -624,7 +639,60 @@ export default function ZamowieniaPage() {
           </div>
         </div>
       )}
+{/* TRACKING MODAL */}
+      {trackingModalOrder && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 animate-fadeIn">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
+                <Truck className="w-6 h-6 text-purple-600" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900">
+                Tracking przesyłki
+              </h3>
+            </div>
+            
+            <div className="space-y-4 mb-6">
+              <div className="bg-gray-50 rounded-xl p-4">
+                <p className="text-sm text-gray-600 mb-1">Numer zamówienia</p>
+                <p className="text-lg font-bold text-gray-900">
+                  #{trackingModalOrder.orderNumber.split('/').pop()}
+                </p>
+              </div>
 
+              <div className="bg-gray-50 rounded-xl p-4">
+                <p className="text-sm text-gray-600 mb-1">Kurier</p>
+                <p className="text-lg font-bold text-gray-900">
+                  {trackingModalOrder.courier_name || 'Kurier'}
+                </p>
+              </div>
+
+              <div className="bg-purple-50 rounded-xl p-4">
+                <p className="text-sm text-purple-600 mb-1">Numer przesyłki</p>
+                <p className="text-lg font-bold text-purple-900 font-mono">
+                  {trackingModalOrder.tracking_number}
+                </p>
+              </div>
+
+              <div className="bg-gray-50 rounded-xl p-4">
+                <p className="text-sm text-gray-600 mb-1">Status</p>
+                <p className="text-lg font-bold text-gray-900">
+                  {trackingModalOrder.status === 'delivered' ? '✅ Dostarczone' : '🚚 W drodze'}
+                </p>
+              </div>
+            </div>
+
+            <div className="flex gap-3">
+              <button
+                onClick={() => setTrackingModalOrder(null)}
+                className="flex-1 px-4 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-xl font-semibold transition-all"
+              >
+                Zamknij
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
       {/* RETURN MODAL */}
       {returnModalOrder && (
         <ReturnModal
