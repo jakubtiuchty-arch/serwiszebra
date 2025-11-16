@@ -363,7 +363,7 @@ export default function AdminOrdersPage() {
                     {/* Klient */}
                     <div className="col-span-2">
                       <div className="text-sm font-semibold text-gray-900">
-                        {order.company_name}
+                        {order.customer_company_name}
                       </div>
                       <div className="text-xs text-gray-600 flex items-center gap-1 mt-1">
                         <User className="w-3 h-3" />
@@ -438,7 +438,7 @@ export default function AdminOrdersPage() {
                           </span>
                         </div>
                         <div className="text-sm font-semibold text-gray-900">
-                          {order.company_name}
+                          {order.customer_company_name}
                         </div>
                       </div>
                       <div className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-semibold ${statusConfig.color}`}>
