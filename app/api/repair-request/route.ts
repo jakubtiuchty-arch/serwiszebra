@@ -134,7 +134,7 @@ export async function POST(request: NextRequest) {
     if (files.length > 0) {
       try {
         console.log('🔵 Uploading photos...')
-        photoUrls = await uploadRepairPhotos(files, newRequest.id)
+        photoUrls = await uploadRepairPhotos(supabase, files, newRequest.id)
         console.log(`✅ Uploaded ${photoUrls.length} photos`)
 
         // Aktualizuj zgłoszenie
