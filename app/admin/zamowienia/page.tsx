@@ -175,7 +175,7 @@ export default function AdminOrdersPage() {
 
   // Policz zamówienia według statusu
   const statusCounts = orders.reduce((acc, order) => {
-    acc[order.status] = (acc[order.status] || 0) + 1
+    acc[order.order_status] = (acc[order.order_status] || 0) + 1
     return acc
   }, {} as Record<string, number>)
 
