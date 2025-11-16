@@ -164,7 +164,7 @@ export async function POST(request: NextRequest) {
 
     if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { error: 'Nieprawidłowe dane formularza', details: error.errors },
+        { error: 'Nieprawidłowe dane formularza', details: error.issues },
         { status: 400 }
       )
     }
