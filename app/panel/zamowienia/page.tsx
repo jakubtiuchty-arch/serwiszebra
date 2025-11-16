@@ -38,7 +38,6 @@ interface Order {
   date: string
   deliveryMethod: string
   invoiceNumber?: string
-  invoiceNumber?: string
   tracking_number?: string          // DODAJ
   courier_name?: string              // DODAJ
   tracking_url?: string 
