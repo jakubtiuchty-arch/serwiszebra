@@ -346,8 +346,8 @@ const randomInRange = (min: number, max: number) => {
                       : 'bg-gray-300'
                   }`}
                   style={{
-                    ringColor: step.isActive ? step.color : undefined
-                  }}
+  '--tw-ring-color': step.isActive ? step.color : undefined
+} as React.CSSProperties}
                 />
               </div>
             )
@@ -399,8 +399,8 @@ const randomInRange = (min: number, max: number) => {
                 ${step.isCurrent ? 'ring-2 ring-offset-2' : ''}
               `}
               style={{
-                ringColor: step.isCurrent ? step.color : undefined
-              }}
+  '--tw-ring-color': step.isCurrent ? step.color : undefined
+} as React.CSSProperties}
               >
                 <div className={`
                   relative overflow-hidden rounded-3xl
