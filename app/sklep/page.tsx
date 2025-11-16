@@ -97,6 +97,7 @@ export default function SklepPage() {
       slug: product.slug || '',
       price: product.price,
       price_brutto: product.price_brutto,
+      product_type: product.product_type,
       image: `/placeholder-${product.product_type}.png`,
       sku: product.sku,
       stock: product.stock,
