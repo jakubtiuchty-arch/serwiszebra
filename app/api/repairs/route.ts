@@ -65,7 +65,6 @@ export async function POST(request: NextRequest) {
       last_name: profile?.last_name || '',
       email: session.user.email || '',
       phone: profile?.phone || body.contact_phone || '',
-      company: profile?.company || null,
       
       device_type: body.device_type || 'terminal',
       device_model: body.device_model,
