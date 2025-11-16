@@ -340,7 +340,7 @@ export default function AdminOrdersPage() {
           {/* TABLE ROWS */}
           <div className="divide-y divide-gray-200">
             {orders.map((order) => {
-              const statusConfig = STATUS_CONFIG[order.status as keyof typeof STATUS_CONFIG] || STATUS_CONFIG.pending
+              const statusConfig = STATUS_CONFIG[order.order_status as keyof typeof STATUS_CONFIG] || STATUS_CONFIG.pending
               const StatusIcon = statusConfig.icon
 
               return (
