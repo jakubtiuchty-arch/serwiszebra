@@ -75,7 +75,7 @@ export async function GET(request: NextRequest) {
         .from('orders')
         .update({
           tracking_number: blOrder.delivery_package_nr,
-          courier_name: blOrder.delivery_package_module || 'Kurier',
+          courier_name: blOrder.delivery_method || 'Kurier',
           order_status: 'shipped',
           updated_at: new Date().toISOString()
         })
