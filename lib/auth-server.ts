@@ -12,7 +12,7 @@ import type { UserRole, UserProfile } from './auth-types'
  */
 export async function isAdminServer(): Promise<boolean> {
   try {
-    const supabase = createClient()
+    const supabase = await createClient()
     
     const { data: { session }, error: sessionError } = await supabase.auth.getSession()
     
@@ -42,7 +42,7 @@ export async function isAdminServer(): Promise<boolean> {
  */
 export async function getCurrentUserProfileServer(): Promise<UserProfile | null> {
   try {
-    const supabase = createClient()
+    const supabase = await createClient()
     
     const { data: { session }, error: sessionError } = await supabase.auth.getSession()
     
