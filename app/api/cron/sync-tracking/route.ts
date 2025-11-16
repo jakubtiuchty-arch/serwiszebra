@@ -67,7 +67,7 @@ for (const blOrder of ordersWithTracking) {
   // Znajdź zamówienie w naszej bazie po baselinker_order_id
   const { data: ourOrder, error: findError } = await supabaseAdmin
     .from('orders')
-    .select('id, tracking_number, order_status, baselinker_order_id')
+      .select('id, tracking_number, order_status, baselinker_order_id, order_number')
     .eq('baselinker_order_id', String(blOrder.order_id))
     .single()
 
