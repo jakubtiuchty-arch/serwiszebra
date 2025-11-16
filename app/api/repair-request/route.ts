@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { supabase } from '@/lib/auth-client'
+import { createClient } from '@/lib/supabase/server'
 import { uploadRepairPhotos, validateFileSize, validateFileType } from '@/lib/supabase/storage'
 import { z } from 'zod'
 
