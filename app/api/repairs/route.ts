@@ -79,9 +79,9 @@ export async function POST(request: NextRequest) {
       
       photo_urls: body.photo_urls || [],
       
-      street: body.street || profile?.street || null,
-      zip_code: body.zip_code || profile?.zip_code || null,
-      city: body.city || profile?.city || null,
+      street: body.street || null,
+zip_code: body.zip_code || null,
+city: body.city || null,
       contact_phone: body.contact_phone || profile?.phone || null,
       
       pickup_date: null,
