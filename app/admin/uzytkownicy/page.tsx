@@ -496,7 +496,7 @@ function StatCard({
   icon: React.ReactNode
   label: string
   value: number
-  color: string
+  color: 'blue' | 'indigo' | 'green' | 'red'
 }) {
   const colorClasses = {
     blue: 'bg-blue-50 text-blue-600',
