@@ -34,6 +34,7 @@ export async function GET() {
 }
 
 export async function POST(request: NextRequest) {
+  const supabase = await createClient()
   console.log('🔵 API /repair-request called')
 
   try {
@@ -70,7 +71,7 @@ export async function POST(request: NextRequest) {
 
     // Wyciągnij pliki
     const files: File[] = []
-    for (const [key, value] of formData.entries()) {
+    for (const [key, value] of Array.from(formData.entries())) {
       if (key.startsWith('photo_') && value instanceof File) {
         if (!validateFileType(value)) {
           return NextResponse.json(
