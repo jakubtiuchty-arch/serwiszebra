@@ -216,9 +216,9 @@ export default function JourneyMapTimeline({ currentStatus, statusHistory }: Jou
                       ${step.isCurrent ? 'ring-3 ring-offset-1' : ''}
                     `}
                     style={{
-                      ringColor: step.isCurrent ? step.color : undefined,
-                      backfaceVisibility: 'hidden'
-                    }}
+  '--tw-ring-color': step.isCurrent ? step.color : undefined,
+  backfaceVisibility: 'hidden'
+} as React.CSSProperties}
                   >
                     {/* Pulsing glow for current */}
                     {step.isCurrent && (
