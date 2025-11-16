@@ -38,14 +38,14 @@ interface Order {
   date: string
   deliveryMethod: string
   invoiceNumber?: string
- items?: {
-  id: string
-  name: string
-  sku: string
-  quantity: number
-  price: number
-  total: number
-}[]
+  items?: {
+    id: string
+    name: string
+    sku: string
+    quantity: number
+    price: number
+    total: number
+  }[]
 }
 
 type FilterType = 'wszystkie' | 'w_trakcie' | 'dostarczone'
@@ -156,6 +156,7 @@ export default function ZamowieniaPage() {
           {
             id: '1',
             name: 'Głowica drukująca Zebra ZD420',
+            sku: 'ZD420-HEAD',
             quantity: 2,
             price: 890.00,
             total: 1780.00
@@ -163,6 +164,7 @@ export default function ZamowieniaPage() {
           {
             id: '2',
             name: 'Wałek gumowy Zebra ZD420',
+            sku: 'ZD420-ROLLER',
             quantity: 1,
             price: 340.00,
             total: 340.00
@@ -170,6 +172,7 @@ export default function ZamowieniaPage() {
           {
             id: '3',
             name: 'Kabel USB Zebra 2m',
+            sku: 'USB-2M',
             quantity: 1,
             price: 330.00,
             total: 330.00
