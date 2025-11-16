@@ -1,0 +1,105 @@
+// app/api/furgonetka/webhook/route.ts
+
+import { NextRequest, NextResponse } from 'next/server'
+import { createClient } from '@supabase/supabase-js'
+
+// Supabase admin client
+const supabaseAdmin = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.SUPABASE_SERVICE_ROLE_KEY!
+)
+
+export async function POST(request: NextRequest) {
+  try {
+    // Weryfikacja tokenu
+    const authHeader = request.headers.get('authorization')
+    const expectedToken = process.env.FURGONETKA_WEBHOOK_TOKEN
+
+    if (!authHeader || !expectedToken) {
+      return NextResponse.json(
+        { error: 'Unauthorized - missing token' },
+        { status: 401 }
+      )
+    }
+
+    const token = authHeader.replace('Bearer ', '').trim()
+
+    if (token !== expectedToken) {
+      console.error('❌ Invalid Furgonetka webhook token')
+      return NextResponse.json(
+        { error: 'Unauthorized - invalid token' },
+        { status: 401 }
+      )
+    }
+
+    // Pobierz dane z webhooka
+    const body = await request.json()
+
+    console.log('📦 Furgonetka webhook received:', JSON.stringify(body, null, 2))
+
+    // Wymagane pola
+    const { sourceOrderId, tracking } = body
+
+    if (!sourceOrderId || !tracking?.number) {
+      console.error('❌ Missing required fields:', body)
+      return NextResponse.json(
+        { error: 'Missing required fields: sourceOrderId or tracking.number' },
+        { status: 400 }
+      )
+    }
+
+    // Znajdź zamówienie po numerze (sourceOrderId = order_number)
+    const { data: order, error: findError } = await supabaseAdmin
+      .from('orders')
+      .select('id, order_number, customer_email, customer_company_name')
+      .eq('order_number', sourceOrderId)
+      .single()
+
+    if (findError || !order) {
+      console.error('❌ Order not found:', sourceOrderId, findError)
+      return NextResponse.json(
+        { error: 'Order not found' },
+        { status: 404 }
+      )
+    }
+
+    // Zaktualizuj zamówienie z danymi trackingowymi
+    const { error: updateError } = await supabaseAdmin
+      .from('orders')
+      .update({
+        tracking_number: tracking.number,
+        courier_name: tracking.courierService || 'DPD',
+        order_status: 'shipped', // Zmień status na "wysłane"
+        updated_at: new Date().toISOString()
+      })
+      .eq('id', order.id)
+
+    if (updateError) {
+      console.error('❌ Error updating order:', updateError)
+      return NextResponse.json(
+        { error: 'Failed to update order' },
+        { status: 500 }
+      )
+    }
+
+    console.log(`✅ Order ${sourceOrderId} updated with tracking: ${tracking.number}`)
+
+    // TODO: Wyślij email do klienta z numerem trackingowym
+    // (możesz użyć Resend jak w /api/orders/route.ts)
+
+    return NextResponse.json({
+      success: true,
+      message: 'Tracking number updated',
+      orderId: order.id,
+      orderNumber: sourceOrderId,
+      trackingNumber: tracking.number
+    })
+
+  } catch (error: any) {
+    console.error('❌ Error in Furgonetka webhook:', error)
+    return NextResponse.json(
+      { error: 'Internal server error', details: error.message },
+      { status: 500 }
+    )
+  }
+}

@@ -1,0 +1,93 @@
+import Link from 'next/link'
+import { formatDistanceToNow } from 'date-fns'
+import { pl } from 'date-fns/locale'
+import { ChevronRight, Package, Calendar, AlertCircle } from 'lucide-react'
+import StatusBadge from './StatusBadge'
+
+interface RepairCardProps {
+  repair: {
+    id: string
+    device_model: string
+    serial_number: string | null
+    issue_description: string
+    status: 'nowe' | 'odebrane' | 'diagnoza' | 'wycena' | 'w_naprawie' | 'zakonczone' | 'wyslane' | 'anulowane'
+    created_at: string
+    urgency: 'niska' | 'srednia' | 'wysoka' | 'krytyczna' | null
+  }
+}
+
+const URGENCY_CONFIG = {
+  niska: { label: 'Niska', className: 'text-gray-600' },
+  srednia: { label: 'Średnia', className: 'text-yellow-600' },
+  wysoka: { label: 'Wysoka', className: 'text-orange-600' },
+  krytyczna: { label: 'Krytyczna', className: 'text-red-600' },
+} as const
+
+export default function RepairCard({ repair }: RepairCardProps) {
+  // Skróć opis do 100 znaków
+  const shortDescription = repair.issue_description.length > 100
+    ? repair.issue_description.substring(0, 100) + '...'
+    : repair.issue_description
+
+  // Formatuj datę
+  const timeAgo = formatDistanceToNow(new Date(repair.created_at), {
+    addSuffix: true,
+    locale: pl,
+  })
+
+  // Skróć ID do 8 znaków
+  const shortId = repair.id.substring(0, 8).toUpperCase()
+
+  // Bezpieczne pobieranie konfiguracji urgency
+  const urgencyConfig = repair.urgency ? URGENCY_CONFIG[repair.urgency] : null
+
+  return (
+    <Link href={`/panel/naprawa/${repair.id}`}>
+      <div className="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg hover:border-orange-300 transition-all duration-200 cursor-pointer group">
+        {/* Header: Model + Status */}
+        <div className="flex items-start justify-between gap-4 mb-4">
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-2 mb-1">
+              <Package className="w-5 h-5 text-gray-400 flex-shrink-0" />
+              <h3 className="text-lg font-semibold text-gray-900 truncate">
+                {repair.device_model}
+              </h3>
+            </div>
+            <p className="text-sm text-gray-500">
+              ID: #{shortId}
+              {repair.serial_number && ` • S/N: ${repair.serial_number}`}
+            </p>
+          </div>
+          <StatusBadge status={repair.status} size="sm" />
+        </div>
+
+        {/* Date + Urgency */}
+        <div className="flex items-center gap-4 text-sm text-gray-600 mb-3">
+          <div className="flex items-center gap-1.5">
+            <Calendar className="w-4 h-4" />
+            <span>{timeAgo}</span>
+          </div>
+          {urgencyConfig && (
+            <div className="flex items-center gap-1.5">
+              <AlertCircle className="w-4 h-4" />
+              <span className={urgencyConfig.className}>
+                {urgencyConfig.label}
+              </span>
+            </div>
+          )}
+        </div>
+
+        {/* Description */}
+        <p className="text-sm text-gray-700 mb-4 line-clamp-2">
+          {shortDescription}
+        </p>
+
+        {/* Footer: View Details Link */}
+        <div className="flex items-center justify-end text-orange-600 group-hover:text-orange-700 font-medium text-sm">
+          <span>Zobacz szczegóły</span>
+          <ChevronRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" />
+        </div>
+      </div>
+    </Link>
+  )
+}

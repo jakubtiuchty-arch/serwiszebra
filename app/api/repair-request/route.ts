@@ -1,0 +1,176 @@
+import { NextRequest, NextResponse } from 'next/server'
+import { supabase } from '@/lib/auth-client'
+import { uploadRepairPhotos, validateFileSize, validateFileType } from '@/lib/supabase/storage'
+import { z } from 'zod'
+
+// Zod schema
+const repairRequestSchema = z.object({
+  firstName: z.string().min(2),
+  lastName: z.string().min(2),
+  email: z.string().email(),
+  phone: z.string().min(9),
+  company: z.string().optional(),
+  deviceModel: z.string().min(1),
+  serialNumber: z.string().optional(),
+  purchaseDate: z.string().optional(),
+  isWarranty: z.enum(['tak', 'nie', 'nie_wiem']),
+  issueDescription: z.string().min(20),
+  urgency: z.enum(['standard', 'express']),
+  street: z.string().min(3),
+  zipCode: z.string().regex(/^\d{2}-\d{3}$/),
+  city: z.string().min(2),
+  contactPhone: z.string().min(9),
+  pickupDate: z.string().min(1),
+  courierNotes: z.string().optional(),
+})
+
+// TEST endpoint GET
+export async function GET() {
+  return NextResponse.json({ 
+    status: 'ok',
+    message: 'API route repair-request działa!',
+    timestamp: new Date().toISOString()
+  })
+}
+
+export async function POST(request: NextRequest) {
+  console.log('🔵 API /repair-request called')
+
+  try {
+    // Parsuj FormData
+    const formData = await request.formData()
+    console.log('🔵 FormData received')
+
+    // Wyciągnij dane
+    const data = {
+      firstName: formData.get('firstName') as string,
+      lastName: formData.get('lastName') as string,
+      email: formData.get('email') as string,
+      phone: formData.get('phone') as string,
+      company: (formData.get('company') as string) || undefined,
+      deviceModel: formData.get('deviceModel') as string,
+      serialNumber: (formData.get('serialNumber') as string) || undefined,
+      purchaseDate: (formData.get('purchaseDate') as string) || undefined,
+      isWarranty: formData.get('isWarranty') as 'tak' | 'nie' | 'nie_wiem',
+      issueDescription: formData.get('issueDescription') as string,
+      urgency: formData.get('urgency') as 'standard' | 'express',
+      street: formData.get('street') as string,
+      zipCode: formData.get('zipCode') as string,
+      city: formData.get('city') as string,
+      contactPhone: formData.get('contactPhone') as string,
+      pickupDate: formData.get('pickupDate') as string,
+      courierNotes: (formData.get('courierNotes') as string) || undefined,
+    }
+
+    console.log('🔵 Data extracted:', data.email)
+
+    // Walidacja
+    const validatedData = repairRequestSchema.parse(data)
+    console.log('✅ Data validated')
+
+    // Wyciągnij pliki
+    const files: File[] = []
+    for (const [key, value] of formData.entries()) {
+      if (key.startsWith('photo_') && value instanceof File) {
+        if (!validateFileType(value)) {
+          return NextResponse.json(
+            { error: 'Nieprawidłowy typ pliku. Dozwolone: JPG, PNG, WEBP' },
+            { status: 400 }
+          )
+        }
+        if (!validateFileSize(value, 5)) {
+          return NextResponse.json(
+            { error: `Plik ${value.name} jest za duży. Max: 5MB` },
+            { status: 400 }
+          )
+        }
+        files.push(value)
+      }
+    }
+
+    console.log(`🔵 Files found: ${files.length}`)
+
+    // 1. Utwórz zgłoszenie
+    console.log('🔵 Creating repair request in database...')
+    const { data: newRequest, error: insertError } = await supabase
+      .from('repair_requests')
+      .insert({
+        first_name: validatedData.firstName,
+        last_name: validatedData.lastName,
+        email: validatedData.email,
+        phone: validatedData.phone,
+        company: validatedData.company || null,
+        device_model: validatedData.deviceModel,
+        serial_number: validatedData.serialNumber || null,
+        purchase_date: validatedData.purchaseDate || null,
+        is_warranty: validatedData.isWarranty,
+        issue_description: validatedData.issueDescription,
+        urgency: validatedData.urgency,
+        photo_urls: [],
+        street: validatedData.street,
+        zip_code: validatedData.zipCode,
+        city: validatedData.city,
+        contact_phone: validatedData.contactPhone,
+        pickup_date: validatedData.pickupDate,
+        courier_notes: validatedData.courierNotes || null,
+        status: 'nowe',
+      })
+      .select()
+      .single()
+
+    if (insertError) {
+      console.error('❌ Database insert error:', insertError)
+      return NextResponse.json(
+        { error: 'Błąd zapisu do bazy danych', details: insertError.message },
+        { status: 500 }
+      )
+    }
+
+    console.log('✅ Request created:', newRequest.id)
+
+    // 2. Upload zdjęć (jeśli są)
+    let photoUrls: string[] = []
+    if (files.length > 0) {
+      try {
+        console.log('🔵 Uploading photos...')
+        photoUrls = await uploadRepairPhotos(files, newRequest.id)
+        console.log(`✅ Uploaded ${photoUrls.length} photos`)
+
+        // Aktualizuj zgłoszenie
+        const { error: updateError } = await supabase
+          .from('repair_requests')
+          .update({ photo_urls: photoUrls })
+          .eq('id', newRequest.id)
+
+        if (updateError) {
+          console.error('⚠️ Photo URLs update error:', updateError)
+        }
+      } catch (uploadError: any) {
+        console.error('⚠️ Photo upload error:', uploadError)
+      }
+    }
+
+    // 3. Sukces
+    console.log('✅ All done!')
+    return NextResponse.json({
+      success: true,
+      requestId: newRequest.id,
+      photoCount: photoUrls.length,
+    })
+
+  } catch (error: any) {
+    console.error('❌ API Error:', error)
+
+    if (error instanceof z.ZodError) {
+      return NextResponse.json(
+        { error: 'Nieprawidłowe dane formularza', details: error.errors },
+        { status: 400 }
+      )
+    }
+
+    return NextResponse.json(
+      { error: 'Błąd serwera', details: error.message },
+      { status: 500 }
+    )
+  }
+}
