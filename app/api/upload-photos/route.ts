@@ -13,7 +13,7 @@ export async function POST(request: NextRequest) {
     const formData = await request.formData()
     const urls: string[] = []
 
-    for (const [key, value] of formData.entries()) {
+    for (const [key, value] of Array.from(formData.entries())) {
       if (key.startsWith('photo-') && value instanceof File) {
         const file = value
         const fileExt = file.name.split('.').pop()
