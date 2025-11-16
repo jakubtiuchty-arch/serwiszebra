@@ -47,3 +47,24 @@ export async function uploadRepairPhotos(
     throw error
   }
 }
+
+/**
+ * Walidacja typu pliku
+ * @param file - Plik do sprawdzenia
+ * @returns true jeśli typ jest dozwolony
+ */
+export function validateFileType(file: File): boolean {
+  const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp']
+  return allowedTypes.includes(file.type)
+}
+
+/**
+ * Walidacja rozmiaru pliku
+ * @param file - Plik do sprawdzenia
+ * @param maxSizeMB - Maksymalny rozmiar w MB
+ * @returns true jeśli plik jest mniejszy niż limit
+ */
+export function validateFileSize(file: File, maxSizeMB: number): boolean {
+  const maxSizeBytes = maxSizeMB * 1024 * 1024
+  return file.size <= maxSizeBytes
+}
