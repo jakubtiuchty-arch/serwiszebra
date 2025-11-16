@@ -471,7 +471,7 @@ useEffect(() => {
           vatAmount: totalVat,
           totalNetto: totalNetto,
           totalBrutto: totalBrutto,
-          orderNumber: null
+          orderNumber: undefined
         }
 
         const orderResponse = await fetch('/api/create-order', {
