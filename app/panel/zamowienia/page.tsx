@@ -38,13 +38,14 @@ interface Order {
   date: string
   deliveryMethod: string
   invoiceNumber?: string
-  items?: {
-    id: string
-    name: string
-    quantity: number
-    price: number
-    total: number
-  }[]
+ items?: {
+  id: string
+  name: string
+  sku: string
+  quantity: number
+  price: number
+  total: number
+}[]
 }
 
 type FilterType = 'wszystkie' | 'w_trakcie' | 'dostarczone'
