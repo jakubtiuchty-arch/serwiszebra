@@ -3,12 +3,13 @@
 
 import { useState } from 'react'
 import { Search, Package, Truck, CheckCircle } from 'lucide-react'
+import { Order } from '@/lib/order-types'
 
 export default function CheckOrderPage() {
   const [orderNumber, setOrderNumber] = useState('')
   const [email, setEmail] = useState('')
   const [loading, setLoading] = useState(false)
-  const [orderData, setOrderData] = useState(null)
+  const [orderData, setOrderData] = useState<Order | null>(null)
   const [error, setError] = useState('')
 
   const handleSubmit = async (e: React.FormEvent) => {
