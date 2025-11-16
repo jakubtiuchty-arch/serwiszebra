@@ -77,7 +77,7 @@ const { data: { user }, error: authError } = await supabase.auth.getUser()
 
 // POST - stwórz nowy zwrot
 export async function POST(request: Request) {
-  const supabase = createClient()
+  const supabase = await createClient()
   
   // Sprawdź autoryzację
   const { data: { user }, error: authError } = await supabase.auth.getUser()
