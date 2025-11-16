@@ -1,9 +1,9 @@
 'use client';
-
+import { Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { XCircle } from 'lucide-react';
 
-export default function OrderCancelPage() {
+function CancelPageContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const orderId = searchParams.get('order_id');
@@ -38,5 +38,13 @@ export default function OrderCancelPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function OrderCancelPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Ładowanie...</div>}>
+      <CancelPageContent />
+    </Suspense>
   );
 }
