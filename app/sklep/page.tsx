@@ -94,9 +94,9 @@ export default function SklepPage() {
     addToCart({
       id: product.id,
       name: product.name,
+      slug: product.slug || '',
       price: product.price,
       price_brutto: product.price_brutto,
-      quantity: 1,
       image: `/placeholder-${product.product_type}.png`,
       sku: product.sku,
       stock: product.stock,
