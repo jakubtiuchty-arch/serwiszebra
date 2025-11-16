@@ -110,7 +110,6 @@ export default function NewRepairModal({ isOpen, onClose, onSuccess }: NewRepair
       // Przygotuj dane zgłoszenia - ✅ DODANY device_type!
       const repairData = {
         device_type: formData.device_type,
-        device_type: formData.device_type,
         device_model: formData.device_model,
         serial_number: formData.serial_number || null,
         issue_description: formData.issue_description,
