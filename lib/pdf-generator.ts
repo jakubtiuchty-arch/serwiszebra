@@ -34,7 +34,7 @@ export async function generateProformaPDF(data: ProformaData) {
   const pdfMake = (await import('pdfmake/build/pdfmake')).default
   const pdfFonts = (await import('pdfmake/build/vfs_fonts')).default
   
-  pdfMake.vfs = pdfFonts.pdfMake.vfs
+  pdfMake.vfs = pdfFonts.vfs
   
   const {
     invoiceNumber,
