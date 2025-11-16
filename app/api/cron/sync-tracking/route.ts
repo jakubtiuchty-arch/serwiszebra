@@ -87,7 +87,7 @@ for (const blOrder of ordersWithTracking) {
     .from('orders')
     .update({
       tracking_number: blOrder.delivery_package_nr,
-      courier_name: blOrder.delivery_method || 'Kurier',
+      courier_name: (blOrder.delivery_method || 'Kurier').replace(/^Kurier\s+/i, ''),
       order_status: 'shipped',
       updated_at: new Date().toISOString()
     })
