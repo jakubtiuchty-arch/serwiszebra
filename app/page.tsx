@@ -135,10 +135,8 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
       <div className="min-h-screen bg-white font-sans antialiased">
-      {/* Hero gradient wrapper - covers top bar, header, and hero section */}
-      <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
         {/* TOP BAR */}
-        <div className="py-1.5 px-3 sm:px-4 border-b border-gray-200/50">
+        <div className="py-1.5 px-3 sm:px-4 border-b border-gray-200 bg-white">
           <div className="max-w-7xl mx-auto">
             <div className="flex items-center justify-between text-[10px] sm:text-xs text-gray-700 relative">
               <span className="flex items-center gap-1.5">
@@ -157,6 +155,8 @@ export default function HomePage() {
           </div>
         </div>
 
+      {/* Hero gradient wrapper - covers header and hero section */}
+      <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
         {/* HEADER */}
         <nav className="md:sticky md:top-0 z-50 pt-4 sm:pt-5 px-2 sm:px-3 pb-1">
         <div className="max-w-7xl mx-auto">
