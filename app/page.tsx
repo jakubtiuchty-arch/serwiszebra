@@ -135,28 +135,30 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
       <div className="min-h-screen bg-white font-sans antialiased">
-      {/* TOP BAR */}
-      <div className="bg-white py-1.5 px-3 sm:px-4 border-b border-gray-200">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex items-center justify-between text-[10px] sm:text-xs text-gray-700 relative">
-            <span className="flex items-center gap-1.5">
-              <Calendar className="w-3 h-3 text-blue-600 flex-shrink-0" />
-              <span className="whitespace-nowrap">Od 25 lat na rynku</span>
-            </span>
-            <span className="flex items-center gap-1.5 absolute left-1/2 -translate-x-1/2">
-              <ThumbsUp className="w-3 h-3 text-green-600 flex-shrink-0" />
-              <span className="whitespace-nowrap">Tysiące skutecznych napraw</span>
-            </span>
-            <span className="hidden sm:flex items-center gap-1.5">
-              <Zap className="w-3 h-3 text-orange-500 flex-shrink-0" />
-              <span className="whitespace-nowrap">Maksymalnie skrócony proces napraw</span>
-            </span>
+      {/* Hero gradient wrapper - covers top bar, header, and hero section */}
+      <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+        {/* TOP BAR */}
+        <div className="py-1.5 px-3 sm:px-4 border-b border-gray-200/50">
+          <div className="max-w-7xl mx-auto">
+            <div className="flex items-center justify-between text-[10px] sm:text-xs text-gray-700 relative">
+              <span className="flex items-center gap-1.5">
+                <Calendar className="w-3 h-3 text-blue-600 flex-shrink-0" />
+                <span className="whitespace-nowrap">Od 25 lat na rynku</span>
+              </span>
+              <span className="flex items-center gap-1.5 absolute left-1/2 -translate-x-1/2">
+                <ThumbsUp className="w-3 h-3 text-green-600 flex-shrink-0" />
+                <span className="whitespace-nowrap">Tysiące skutecznych napraw</span>
+              </span>
+              <span className="hidden sm:flex items-center gap-1.5">
+                <Zap className="w-3 h-3 text-orange-500 flex-shrink-0" />
+                <span className="whitespace-nowrap">Maksymalnie skrócony proces napraw</span>
+              </span>
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* HEADER */}
-      <nav className="md:sticky md:top-0 z-50 pt-4 sm:pt-5 px-2 sm:px-3 pb-1 bg-white">
+        {/* HEADER */}
+        <nav className="md:sticky md:top-0 z-50 pt-4 sm:pt-5 px-2 sm:px-3 pb-1">
         <div className="max-w-7xl mx-auto">
           <div className="bg-white rounded-xl shadow-lg border border-gray-200/50 px-3 sm:px-4 relative">
             <div className="flex items-center justify-between h-12 sm:h-14">
@@ -197,7 +199,7 @@ export default function HomePage() {
       </nav>
 
       {/* HERO + AI CHAT */}
-      <section className="min-h-[61vh] flex items-center justify-center px-3 sm:px-4 lg:px-6 pt-4 pb-6 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 relative overflow-hidden">
+      <section className="min-h-[61vh] flex items-center justify-center px-3 sm:px-4 lg:px-6 pt-4 pb-6 relative overflow-hidden">
         {/* Pionowe paski */}
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-0 left-[10%] w-1 h-full bg-gradient-to-b from-gray-200/20 via-gray-300/25 to-transparent"></div>
@@ -240,6 +242,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+    </div> {/* Close gradient wrapper */}
 
       {/* O NAS - CO NAPRAWIAMY */}
       <section id="co-naprawiamy" className="py-14 px-3 sm:px-4 lg:px-6 bg-white">
