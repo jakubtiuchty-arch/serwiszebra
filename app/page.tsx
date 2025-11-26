@@ -158,7 +158,7 @@ export default function HomePage() {
       {/* Hero gradient wrapper - covers header and hero section */}
       <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
         {/* HEADER */}
-        <nav className="md:sticky md:top-0 z-50 pt-4 sm:pt-5 px-2 sm:px-3 pb-1">
+        <nav className="pt-4 sm:pt-5 px-2 sm:px-3 pb-1">
         <div className="max-w-7xl mx-auto">
           <div className="bg-white rounded-xl shadow-lg border border-gray-200/50 px-3 sm:px-4 relative">
             <div className="flex items-center justify-between h-12 sm:h-14">
