@@ -122,12 +122,7 @@ export default function JourneyMapTimeline({ currentStatus, statusHistory }: Jou
   return (
     <div className="relative">
       {/* Timeline Container - z nagłówkiem w środku */}
-      <div className="relative bg-white/80 backdrop-blur-sm rounded-2xl border border-gray-200 p-2 sm:p-4 overflow-hidden shadow-sm">
-        {/* Header - PRZENIESIONY DO BOXA */}
-        <div className="mb-2 sm:mb-4">
-          <h2 className="text-sm sm:text-lg font-bold text-gray-900">Status naprawy</h2>
-          <p className="text-[10px] sm:text-xs text-gray-500">Śledź postęp w czasie rzeczywistym</p>
-        </div>
+      <div className="relative bg-white/80 backdrop-blur-sm rounded-xl border border-gray-200 p-2 shadow-sm">
         {/* Straight Path - Simple Line - TYLKO DESKTOP */}
         <svg 
           className="hidden sm:block absolute top-1/2 left-0 w-full h-1 -translate-y-1/2 pointer-events-none"
@@ -164,7 +159,7 @@ export default function JourneyMapTimeline({ currentStatus, statusHistory }: Jou
         </svg>
 
         {/* Status Bubbles - TYLKO DESKTOP */}
-        <div className="hidden sm:flex relative items-center justify-between pt-10 pb-4 px-2">
+        <div className="hidden sm:flex relative items-center justify-between py-2 px-4">
           {timelineSteps.map((step, index) => {
             const Icon = step.icon
             const position = (index / (STATUS_ORDER.length - 1)) * 100
@@ -291,46 +286,7 @@ export default function JourneyMapTimeline({ currentStatus, statusHistory }: Jou
                   </motion.div>
                 )}
 
-                {/* Courier - pokazuje się tylko po ostatniej ikonie (Wysłane) */}
-                {isLastStep && step.isActive && (
-                  <motion.div
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.5, duration: 0.8 }}
-                    className="absolute -right-12 top-0"
-                  >
-                    <motion.div
-                      animate={{ 
-                        y: [0, -4, 0],
-                        rotate: [0, 2, 0, -2, 0]
-                      }}
-                      transition={{ 
-                        duration: 2, 
-                        repeat: Infinity,
-                        ease: "easeInOut"
-                      }}
-                      className="relative"
-                    >
-                      <div className="w-10 h-10 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center shadow-lg">
-                        <Truck className="w-5 h-5 text-white" />
-                      </div>
-                      
-                      {/* Puff clouds behind courier */}
-                      <motion.div
-                        className="absolute -left-5 top-1/2 -translate-y-1/2 w-2 h-2 bg-gray-300 rounded-full opacity-40"
-                        animate={{ 
-                          scale: [0, 1, 0],
-                          x: [-6, -12, -18]
-                        }}
-                        transition={{ 
-                          duration: 1.2, 
-                          repeat: Infinity,
-                          ease: "easeOut"
-                        }}
-                      />
-                    </motion.div>
-                  </motion.div>
-                )}
+
               </motion.div>
             )
           })}

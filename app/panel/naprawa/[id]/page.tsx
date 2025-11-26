@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation'
 import { getCurrentUserProfileClient } from '@/lib/auth-client'
 import { createClient } from '@/lib/supabase/client'
 import type { UserProfile } from '@/lib/auth-types'
+import RepairPaymentModal from '@/components/RepairPaymentModal'
 import { 
   ArrowLeft, 
   Package, 
@@ -21,8 +22,11 @@ import {
   Check,
   User,
   ChevronDown,
-  LogOut
+  LogOut,
+  ExternalLink,
+  CreditCard 
 } from 'lucide-react'
+import { getTrackingUrl, formatCourierName } from '@/lib/tracking-links'
 import { format } from 'date-fns'
 import { pl } from 'date-fns/locale'
 import PhotoGallery from '@/components/PhotoGallery'
@@ -48,7 +52,11 @@ interface Repair {
   estimated_price: number | null
   final_price: number | null
   price_accepted_at: string | null
+  payment_status: string | null  // ← DODANE
+  stripe_session_id: string | null  // ← DODANE
+  paid_at: string | null  // ← DODANE
   courier_tracking_number: string | null
+  courier_name: string | null
   courier_notes: string | null
   photo_urls: string[]
   created_at: string
@@ -91,13 +99,25 @@ export default function RepairDetailPage({ params }: { params: { id: string } })
   const [idCopied, setIdCopied] = useState(false)
   const [user, setUser] = useState<UserProfile | null>(null)
   const [userMenuOpen, setUserMenuOpen] = useState(false)
+  const [showPaymentModal, setShowPaymentModal] = useState(false)  // ← DODANE
+  const [paymentLoading, setPaymentLoading] = useState(false)
 
-  useEffect(() => {
-    if (params?.id) {
-      fetchRepairDetails()
-      loadUser()
+  const [acceptModalStep, setAcceptModalStep] = useState<'confirm' | 'payment'>('confirm')
+  
+
+useEffect(() => {
+  if (params?.id) {
+    fetchRepairDetails()
+    loadUser()
+    
+    // Sprawdź URL params - jeśli wrócił z płatności
+    const urlParams = new URLSearchParams(window.location.search)
+    if (urlParams.get('payment') === 'success') {
+      // Usuń parametr z URL
+      window.history.replaceState({}, '', window.location.pathname)
     }
-  }, [])
+  }
+}, [params?.id])
 
   const loadUser = async () => {
     try {
@@ -142,30 +162,28 @@ export default function RepairDetailPage({ params }: { params: { id: string } })
     }
   }
 
-  const handleAcceptPrice = async () => {
-    if (!repair || !params?.id) return
+const handleAcceptPrice = async () => {
+  if (!repair || !params?.id) return
 
-    setActionLoading(true)
-    try {
-      const response = await fetch(`/api/repairs/${params.id}/accept-price`, {
-        method: 'POST'
-      })
+  setActionLoading(true)
+  try {
+    const response = await fetch(`/api/repairs/${params.id}/accept-price`, {
+      method: 'POST'
+    })
 
-      if (!response.ok) {
-        throw new Error('Błąd akceptacji wyceny')
-      }
-
-      const data = await response.json()
-      alert(data.message)
-      
-      setShowAcceptModal(false)
-      fetchRepairDetails()
-    } catch (err: any) {
-      alert(err.message || 'Wystąpił błąd')
-    } finally {
-      setActionLoading(false)
+    if (!response.ok) {
+      throw new Error('Błąd akceptacji wyceny')
     }
+
+    // Zmień stan modalu na "zaakceptowano - przejdź do płatności"
+    setAcceptModalStep('payment')
+    fetchRepairDetails()
+  } catch (err: any) {
+    alert(err.message || 'Wystąpił błąd')
+  } finally {
+    setActionLoading(false)
   }
+}
 
   const handleCancelRepair = async (reason: string) => {
     if (!repair || !params?.id) return
@@ -194,7 +212,16 @@ export default function RepairDetailPage({ params }: { params: { id: string } })
       setActionLoading(false)
     }
   }
+const handlePayment = () => {
+  setShowPaymentModal(true)
+  setShowAcceptModal(false)
+  setAcceptModalStep('confirm')
+}
 
+const handlePaymentSuccess = () => {
+  setShowPaymentModal(false)
+  fetchRepairDetails()
+}
   const copyIdToClipboard = () => {
     navigator.clipboard.writeText(repair?.id || '')
     setIdCopied(true)
@@ -252,488 +279,500 @@ export default function RepairDetailPage({ params }: { params: { id: string } })
         </div>
       </div>
 
-      {/* Header z breadcrumbs - MOBILE: header + 2 boxy */}
-      <div className="pt-1 sm:pt-6 px-3 sm:px-4 lg:px-8 relative z-40">
-        {/* MOBILE - BREADCRUMBS (lewo) + HEADER (prawo) W JEDNEJ LINII */}
-        <div className="md:hidden flex items-center justify-between gap-2 mb-2 max-w-[95%] mx-auto">
-          {/* Breadcrumbs - po lewej */}
-          <button
-            onClick={() => router.push('/panel')}
-            className="flex items-center gap-1.5 text-blue-600 hover:text-blue-700 transition-colors"
-          >
-            <ArrowLeft className="w-3 h-3" />
-            <span className="text-xs font-medium">Powrót do panelu</span>
-          </button>
+{/* Header z breadcrumbs - BEZ USER MENU */}
+<div className="pt-3 px-3 sm:px-4 lg:px-6 relative z-40">
+  {/* MOBILE - BREADCRUMBS + BOXY */}
+  <div className="md:hidden space-y-2 max-w-[95%] mx-auto">
+    {/* Breadcrumbs */}
+    <button
+      onClick={() => router.push('/panel')}
+      className="flex items-center gap-1.5 text-blue-600 hover:text-blue-700 transition-colors"
+    >
+      <ArrowLeft className="w-3 h-3" />
+      <span className="text-xs font-medium">Powrót do panelu</span>
+    </button>
 
-          {/* Header użytkownika - po prawej */}
-          <div className="flex items-center gap-2">
-            <div className="text-right">
-              <p className="text-xs font-semibold text-gray-900">{userName}</p>
-              <p className="text-[10px] text-gray-500">{user?.email}</p>
-            </div>
-            <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
-              <User className="w-4 h-4 text-blue-600" />
-            </div>
-            <div className="relative">
-              <button
-                onClick={() => setUserMenuOpen(!userMenuOpen)}
-                className="hover:bg-white/80 p-1 rounded-lg transition-colors"
-              >
-                <ChevronDown className={`w-3 h-3 text-gray-400 transition-transform ${userMenuOpen ? 'rotate-180' : ''}`} />
-              </button>
+    {/* BOX 1: ID + Data */}
+    <div className="bg-white/80 backdrop-blur-sm border border-gray-200 rounded-lg shadow-sm px-3 py-2">
+      <h1 className="text-sm text-gray-900 mb-0.5">
+        Zgłoszenie #{shortId}
+      </h1>
+      <p className="text-[10px] text-gray-500">
+        Utworzono: {format(new Date(repair.created_at), "d MMMM yyyy 'o' HH:mm", { locale: pl })}
+      </p>
+    </div>
 
-              {userMenuOpen && (
-                <>
-                  <div 
-                    className="fixed inset-0 z-10"
-                    onClick={() => setUserMenuOpen(false)}
-                  />
-                  
-                  <div className="absolute right-0 top-full mt-2 w-48 bg-white rounded-xl shadow-xl border border-gray-200 py-2 z-20">
-                    <Link
-                      href="/panel/profil"
-                      onClick={() => setUserMenuOpen(false)}
-                      className="flex items-center gap-2 px-3 py-2 text-xs text-gray-700 hover:bg-gray-50 transition-colors"
-                    >
-                      <User className="w-3 h-3" />
-                      Mój profil
-                    </Link>
+    {/* BOX 2: Urządzenie */}
+    <div className="bg-white/80 backdrop-blur-sm border border-gray-200 rounded-lg shadow-sm px-3 py-2">
+      <p className="text-[10px] text-gray-500 mb-1">Urządzenie</p>
+      <p className="text-base font-bold text-gray-900 mb-0.5">{repair.device_model}</p>
+      
+      {repair.serial_number && (
+        <p className="text-xs text-gray-600">
+          S/N: {repair.serial_number.length > 16 
+            ? `${repair.serial_number.substring(0, 8)}...${repair.serial_number.substring(repair.serial_number.length - 4)}`
+            : repair.serial_number
+          }
+        </p>
+      )}
+    </div>
+  </div>
 
-                    <button
-                      onClick={() => {
-                        setUserMenuOpen(false)
-                        handleLogout()
-                      }}
-                      className="w-full flex items-center gap-2 px-3 py-2 text-xs text-gray-700 hover:bg-gray-50 transition-colors"
-                    >
-                      <LogOut className="w-3 h-3" />
-                      Wyloguj się
-                    </button>
-                  </div>
-                </>
-              )}
-            </div>
-          </div>
-        </div>
+  {/* DESKTOP - Breadcrumbs + Box ze zgłoszeniem */}
+  <div className="hidden md:block max-w-[90%] mx-auto">
+    {/* Breadcrumbs */}
+    <button
+      onClick={() => router.push('/panel')}
+      className="flex items-center gap-2 text-blue-600 hover:text-blue-700 transition-colors font-semibold mb-2"
+    >
+      <ArrowLeft className="w-4 h-4" />
+      <span className="text-sm">Powrót do panelu</span>
+    </button>
 
-        {/* MOBILE - BOX 1: ID + Data */}
-        <div className="md:hidden bg-white/80 backdrop-blur-sm border border-gray-200 rounded-xl shadow-sm max-w-[95%] mx-auto px-3 py-2 mb-2">
-          {/* ID Zgłoszenia - bez bold */}
-          <h1 className="text-base text-gray-900 mb-1">
+    {/* Box ze zgłoszeniem */}
+    <div className="bg-white/80 backdrop-blur-sm border border-gray-200 rounded-xl shadow-sm px-4 py-3">
+      <div className="flex flex-row items-center justify-between gap-3">
+        <div className="flex items-center gap-3 flex-wrap">
+          <h1 className="text-xl font-bold text-gray-900">
             Zgłoszenie #{shortId}
           </h1>
-
-          {/* Data utworzenia */}
-          <p className="text-[10px] text-gray-500">
-            Utworzono: {format(new Date(repair.created_at), "d MMMM yyyy 'o' HH:mm", { locale: pl })}
-          </p>
+          <span className={`px-2.5 py-1 rounded-lg text-xs font-medium ${statusConfig.className}`}>
+            {statusConfig.label}
+          </span>
         </div>
 
-        {/* MOBILE - BOX 2: Urządzenie */}
-        <div className="md:hidden bg-white/80 backdrop-blur-sm border border-gray-200 rounded-xl shadow-sm max-w-[95%] mx-auto px-3 py-2 mb-4">
-          {/* Urządzenie */}
-          <p className="text-[10px] text-gray-500 mb-1">Urządzenie</p>
-          <p className="text-lg font-bold text-gray-900 mb-1">{repair.device_model}</p>
-          
-          {/* Numer seryjny */}
+        <button
+          onClick={copyIdToClipboard}
+          className="flex items-center gap-1.5 px-3 py-1.5 text-xs text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
+        >
+          {idCopied ? (
+            <>
+              <Check className="w-3.5 h-3.5" />
+              <span>Skopiowano!</span>
+            </>
+          ) : (
+            <>
+              <Copy className="w-3.5 h-3.5" />
+              <span>Kopiuj ID</span>
+            </>
+          )}
+        </button>
+      </div>
+
+      <p className="text-xs text-gray-500 mt-1.5">
+        Utworzono: {format(new Date(repair.created_at), "d MMMM yyyy 'o' HH:mm", { locale: pl })}
+      </p>
+    </div>
+  </div>
+</div>
+{/* TIMELINE - na całą szerokość */}
+{repair.status !== 'anulowane' && (
+  <div className="max-w-[95%] sm:max-w-[90%] mx-auto px-3 sm:px-4 lg:px-6 my-3">
+    <JourneyMapTimeline 
+      currentStatus={repair.status}
+      statusHistory={statusHistory}
+    />
+  </div>
+)}
+
+{/* Content */}
+<div className="max-w-[95%] sm:max-w-[90%] mx-auto py-3 sm:py-4">
+  {/* 2-KOLUMNOWY LAYOUT */}
+  <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 px-3 sm:px-4 lg:px-6">
+    {/* LEWA KOLUMNA (2/3) - Informacje */}
+    <div className="lg:col-span-2 space-y-4">
+      {/* Urządzenie - TYLKO DESKTOP */}
+      <div className="hidden md:block bg-white/80 backdrop-blur-sm rounded-xl shadow-sm border border-gray-200 p-4">
+        <h2 className="text-base font-bold text-gray-900 mb-3 flex items-center gap-2">
+          <Package className="w-4 h-4 text-blue-600" />
+          Urządzenie
+        </h2>
+
+        <div className="grid grid-cols-2 gap-3">
+          <div>
+            <label className="text-xs font-medium text-gray-500">Model</label>
+            <p className="text-sm font-semibold text-gray-900">{repair.device_model}</p>
+          </div>
+
           {repair.serial_number && (
-            <p className="text-xs text-gray-600">
-              S/N: {repair.serial_number.length > 16 
-                ? `${repair.serial_number.substring(0, 8)}...${repair.serial_number.substring(repair.serial_number.length - 4)}`
-                : repair.serial_number
-              }
-            </p>
+            <div>
+              <label className="text-xs font-medium text-gray-500">Numer seryjny</label>
+              <p className="text-sm text-gray-900 font-mono">{repair.serial_number}</p>
+            </div>
+          )}
+
+          {repair.purchase_date && (
+            <div>
+              <label className="text-xs font-medium text-gray-500">Data zakupu</label>
+              <p className="text-sm text-gray-900">
+                {format(new Date(repair.purchase_date), 'd MMMM yyyy', { locale: pl })}
+              </p>
+            </div>
+          )}
+
+          {repair.warranty_status && (
+            <div>
+              <label className="text-xs font-medium text-gray-500">Gwarancja</label>
+              <p className="text-sm text-gray-900 capitalize">{repair.warranty_status}</p>
+            </div>
           )}
         </div>
-
-        {/* DESKTOP - Breadcrumbs + Header w jednej linii */}
-        <div className="hidden md:block max-w-[90%] mx-auto">
-          {/* BREADCRUMBS (lewo) + HEADER (prawo) W JEDNEJ LINII */}
-          <div className="flex items-center justify-between mb-3 relative z-50">
-            {/* Breadcrumbs - po lewej */}
-            <button
-              onClick={() => router.push('/panel')}
-              className="flex items-center gap-2 text-blue-600 hover:text-blue-700 transition-colors font-semibold"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              <span className="text-sm">Powrót do panelu</span>
-            </button>
-
-            {/* Header użytkownika - po prawej */}
-            <div className="flex items-center gap-3">
-              <div className="text-right">
-                <p className="text-sm font-semibold text-gray-900">{userName}</p>
-                <p className="text-xs text-gray-500">{user?.email}</p>
-              </div>
-              <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
-                <User className="w-5 h-5 text-blue-600" />
-              </div>
-              <div className="relative">
-                <button
-                  onClick={() => setUserMenuOpen(!userMenuOpen)}
-                  className="hover:bg-white/80 p-2 rounded-lg transition-colors"
-                >
-                  <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform ${userMenuOpen ? 'rotate-180' : ''}`} />
-                </button>
-
-                {userMenuOpen && (
-                  <>
-                    <div 
-                      className="fixed inset-0 z-10"
-                      onClick={() => setUserMenuOpen(false)}
-                    />
-                    
-                    <div className="absolute right-0 top-full mt-2 w-56 bg-white rounded-xl shadow-xl border border-gray-200 py-2 z-20">
-                      <Link
-                        href="/panel/profil"
-                        onClick={() => setUserMenuOpen(false)}
-                        className="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
-                      >
-                        <User className="w-4 h-4" />
-                        Mój profil
-                      </Link>
-
-                      <button
-                        onClick={() => {
-                          setUserMenuOpen(false)
-                          handleLogout()
-                        }}
-                        className="w-full flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
-                      >
-                        <LogOut className="w-4 h-4" />
-                        Wyloguj się
-                      </button>
-                    </div>
-                  </>
-                )}
-              </div>
-            </div>
-          </div>
-
-          {/* Box ze zgłoszeniem */}
-          <div className="bg-white/80 backdrop-blur-sm border border-gray-200 rounded-2xl shadow-sm px-4 lg:px-8 py-4">
-            <div className="flex flex-row items-center justify-between gap-3">
-              <div className="flex items-center gap-4 flex-wrap">
-                <h1 className="text-2xl font-bold text-gray-900">
-                  Zgłoszenie #{shortId}
-                </h1>
-                <span className={`px-3 py-1 rounded-2xl text-sm font-medium ${statusConfig.className}`}>
-                  {statusConfig.label}
-                </span>
-              </div>
-
-              <button
-                onClick={copyIdToClipboard}
-                className="flex items-center gap-2 px-4 py-2 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-2xl transition-colors"
-              >
-                {idCopied ? (
-                  <>
-                    <Check className="w-4 h-4" />
-                    <span>Skopiowano!</span>
-                  </>
-                ) : (
-                  <>
-                    <Copy className="w-4 h-4" />
-                    <span>Kopiuj ID</span>
-                  </>
-                )}
-              </button>
-            </div>
-
-            <p className="text-sm text-gray-500 mt-2">
-              Utworzono: {format(new Date(repair.created_at), "d MMMM yyyy 'o' HH:mm", { locale: pl })}
-            </p>
-          </div>
-        </div>
       </div>
 
-      {/* Content */}
-      <div className="max-w-[95%] sm:max-w-[90%] mx-auto py-4 sm:py-8">
-        {/* 2-KOLUMNOWY LAYOUT */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 px-3 sm:px-4 lg:px-8">
-          {/* LEWA KOLUMNA (2/3) - Informacje */}
-          <div className="lg:col-span-2 space-y-6">
-            {/* Urządzenie - TYLKO DESKTOP (na mobile jest w headerze) */}
-            <div className="hidden md:block bg-white/80 backdrop-blur-sm rounded-2xl shadow-sm border border-gray-200 p-6">
-              <h2 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-                <Package className="w-5 h-5 text-blue-600" />
-                Urządzenie
-              </h2>
-
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="text-sm font-medium text-gray-500">Model</label>
-                  <p className="text-base font-semibold text-gray-900">{repair.device_model}</p>
-                </div>
-
-                {repair.serial_number && (
-                  <div>
-                    <label className="text-sm font-medium text-gray-500">Numer seryjny</label>
-                    <p className="text-base text-gray-900 font-mono">{repair.serial_number}</p>
-                  </div>
-                )}
-
-                {repair.purchase_date && (
-                  <div>
-                    <label className="text-sm font-medium text-gray-500">Data zakupu</label>
-                    <p className="text-base text-gray-900">
-                      {format(new Date(repair.purchase_date), 'd MMMM yyyy', { locale: pl })}
-                    </p>
-                  </div>
-                )}
-
-                {repair.warranty_status && (
-                  <div>
-                    <label className="text-sm font-medium text-gray-500">Gwarancja</label>
-                    <p className="text-base text-gray-900 capitalize">{repair.warranty_status}</p>
-                  </div>
-                )}
-              </div>
+      {/* Anulowane - specjalny widok */}
+      {repair.status === 'anulowane' && (
+        <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-sm border border-gray-200 p-4">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center">
+              <XCircle className="w-5 h-5 text-gray-600" />
             </div>
-
-            {/* JOURNEY MAP TIMELINE */}
-            {repair.status !== 'anulowane' && (
-              <div>
-                <JourneyMapTimeline 
-                  currentStatus={repair.status}
-                  statusHistory={statusHistory}
-                />
-              </div>
-            )}
-
-            {/* Anulowane - specjalny widok */}
-            {repair.status === 'anulowane' && (
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-sm border border-gray-200 p-6">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center">
-                    <XCircle className="w-6 h-6 text-gray-600" />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-900">Zgłoszenie anulowane</h3>
-                    <p className="text-sm text-gray-600 mt-1">
-                      {format(new Date(repair.updated_at), "d MMMM yyyy 'o' HH:mm", { locale: pl })}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* Opis problemu - UKRYTE NA MOBILE */}
-            <div className="hidden md:block bg-white/80 backdrop-blur-sm rounded-2xl shadow-sm border border-gray-200 p-6">
-              <h2 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-                <AlertCircle className="w-5 h-5 text-blue-600" />
-                Opis problemu
-              </h2>
-
-              <p className="text-gray-700 whitespace-pre-wrap">{repair.issue_description}</p>
-
-              {urgencyConfig && (
-                <div className="mt-4 pt-4 border-t border-gray-200">
-                  <label className="text-sm font-medium text-gray-500">Pilność</label>
-                  <p className={`text-base font-semibold ${urgencyConfig.className}`}>
-                    {urgencyConfig.label}
-                  </p>
-                </div>
-              )}
-            </div>
-
-            {/* Wycena - BEZ IKONY DOLARA */}
-            {(repair.estimated_price || repair.final_price) && (
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-sm border border-gray-200 p-6">
-                <h2 className="text-lg font-bold text-gray-900 mb-4">
-                  Wycena
-                </h2>
-
-                <div className="space-y-3">
-                  {repair.estimated_price && (
-                    <div>
-                      <label className="text-sm font-medium text-gray-500">Szacowana cena</label>
-                      <p className="text-2xl font-bold text-gray-900">{repair.estimated_price} zł</p>
-                    </div>
-                  )}
-
-                  {repair.final_price && (
-                    <div>
-                      <label className="text-sm font-medium text-gray-500">Finalna cena</label>
-                      <p className="text-2xl font-bold text-blue-600">{repair.final_price} zł</p>
-                    </div>
-                  )}
-
-                  {repair.price_accepted_at && (
-                    <div className="pt-3 border-t border-gray-200">
-                      <p className="text-sm text-blue-600 flex items-center gap-2">
-                        <CheckCircle className="w-4 h-4" />
-                        Wycena zaakceptowana {format(new Date(repair.price_accepted_at), "d MMMM yyyy", { locale: pl })}
-                      </p>
-                    </div>
-                  )}
-                </div>
-              </div>
-            )}
-
-            {/* Tracking */}
-            {repair.courier_tracking_number && (
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-sm border border-gray-200 p-6">
-                <h2 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-                  <Truck className="w-5 h-5 text-blue-600" />
-                  Śledzenie przesyłki
-                </h2>
-
-                <div className="space-y-3">
-                  <div>
-                    <label className="text-sm font-medium text-gray-500">Numer przesyłki</label>
-                    <p className="text-lg font-mono font-semibold text-gray-900">{repair.courier_tracking_number}</p>
-                  </div>
-
-                  {repair.courier_notes && (
-                    <div>
-                      <label className="text-sm font-medium text-gray-500">Notatki kuriera</label>
-                      <p className="text-sm text-gray-700">{repair.courier_notes}</p>
-                    </div>
-                  )}
-                </div>
-              </div>
-            )}
-
-            {/* Galeria */}
-            {repair.photo_urls && repair.photo_urls.length > 0 && (
-              <PhotoGallery photos={repair.photo_urls} />
-            )}
-
-            {/* Chat Section */}
-            <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-sm border border-gray-200 p-6">
-              <ChatBox repairId={repair.id} currentUserType="user" />
-            </div>
-          </div>
-
-          {/* PRAWA KOLUMNA (1/3) - Akcje */}
-          <div className="lg:col-span-1">
-            <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-sm border border-gray-200 p-4 sm:p-6 sticky top-24">
-              <h2 className="text-base sm:text-lg font-bold text-gray-900 mb-3 sm:mb-4">Akcje</h2>
-
-              <div className="space-y-2 sm:space-y-3">
-                {/* Akceptuj wycenę */}
-                {repair.status === 'wycena' && !repair.price_accepted_at && (repair.final_price || repair.estimated_price) && (
-                  <button
-                    onClick={() => setShowAcceptModal(true)}
-                    disabled={actionLoading}
-                    className="relative w-full px-3 py-2 sm:px-4 sm:py-3 bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-xl hover:from-green-700 hover:to-emerald-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed font-semibold flex items-center justify-center gap-1.5 sm:gap-2 hover:scale-[1.02] group"
-                  >
-                    <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5" />
-                    <span className="text-xs sm:text-sm">Akceptuj wycenę ({repair.final_price || repair.estimated_price} zł)</span>
-                  </button>
-                )}
-
-                {/* Anuluj */}
-                {['nowe', 'odebrane', 'diagnoza', 'wycena'].includes(repair.status) && (
-                  <button
-                    onClick={() => setShowCancelModal(true)}
-                    disabled={actionLoading}
-                    className="w-full px-3 py-2 sm:px-4 sm:py-3 bg-gray-900 text-white rounded-xl hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-medium flex items-center justify-center gap-1.5 sm:gap-2"
-                  >
-                    <XCircle className="w-4 h-4 sm:w-5 sm:h-5" />
-                    <span className="text-xs sm:text-sm">Anuluj zgłoszenie</span>
-                  </button>
-                )}
-
-                {/* Info */}
-                <div className="pt-3 sm:pt-4 border-t border-gray-200">
-                  <p className="text-xs sm:text-sm text-gray-600">
-                    {repair.status === 'wycena' && !repair.price_accepted_at && (repair.final_price || repair.estimated_price) && (
-                      <>Po zaakceptowaniu wyceny rozpoczniemy naprawę urządzenia.</>
-                    )}
-                    {['nowe', 'odebrane', 'diagnoza', 'wycena'].includes(repair.status) && (
-                      <>Możesz anulować zgłoszenie w każdej chwili przed rozpoczęciem naprawy.</>
-                    )}
-                    {repair.status === 'w_naprawie' && (
-                      <>Urządzenie jest obecnie naprawiane. Poinformujemy Cię o postępach.</>
-                    )}
-                    {repair.status === 'zakonczone' && (
-                      <>Naprawa została zakończona. Urządzenie będzie wkrótce wysłane.</>
-                    )}
-                    {repair.status === 'wyslane' && (
-                      <>Urządzenie jest w drodze do Ciebie. Sprawdź tracking przesyłki powyżej.</>
-                    )}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Modal anulowania */}
-      {showCancelModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-[9998] flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl max-w-md w-full p-6">
-            <h3 className="text-lg font-bold text-gray-900 mb-4">Anuluj zgłoszenie</h3>
-            
-            <p className="text-sm text-gray-600 mb-4">
-              Czy na pewno chcesz anulować to zgłoszenie? Tej operacji nie można cofnąć.
-            </p>
-
-            <div className="flex gap-3">
-              <button
-                onClick={() => setShowCancelModal(false)}
-                className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-2xl hover:bg-gray-50 transition-colors"
-              >
-                Nie, wróć
-              </button>
-              <button
-                onClick={() => handleCancelRepair('Anulowane przez użytkownika')}
-                disabled={actionLoading}
-                className="flex-1 px-4 py-2 bg-gray-900 text-white rounded-2xl hover:bg-gray-800 transition-colors disabled:opacity-50"
-              >
-                {actionLoading ? 'Anulowanie...' : 'Tak, anuluj'}
-              </button>
+            <div>
+              <h3 className="text-base font-semibold text-gray-900">Zgłoszenie anulowane</h3>
+              <p className="text-xs text-gray-600 mt-0.5">
+                {format(new Date(repair.updated_at), "d MMMM yyyy 'o' HH:mm", { locale: pl })}
+              </p>
             </div>
           </div>
         </div>
       )}
 
-      {/* Modal akceptacji wyceny */}
-      {showAcceptModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-[9998] flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl max-w-md w-full p-6">
-            <div className="flex items-center gap-4 mb-4">
-              <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
-                <CheckCircle className="w-6 h-6 text-blue-600" />
-              </div>
+      {/* Opis problemu - UKRYTE NA MOBILE */}
+      <div className="hidden md:block bg-white/80 backdrop-blur-sm rounded-xl shadow-sm border border-gray-200 p-4">
+        <h2 className="text-base font-bold text-gray-900 mb-3 flex items-center gap-2">
+          <AlertCircle className="w-4 h-4 text-blue-600" />
+          Opis problemu
+        </h2>
+
+        <p className="text-sm text-gray-700 whitespace-pre-wrap">{repair.issue_description}</p>
+
+        {urgencyConfig && (
+          <div className="mt-3 pt-3 border-t border-gray-200">
+            <label className="text-xs font-medium text-gray-500">Pilność</label>
+            <p className={`text-sm font-semibold ${urgencyConfig.className}`}>
+              {urgencyConfig.label}
+            </p>
+          </div>
+        )}
+      </div>
+
+      {/* Wycena */}
+      {(repair.estimated_price || repair.final_price) && (
+        <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-sm border border-gray-200 p-4">
+          <h2 className="text-base font-bold text-gray-900 mb-3">
+            Wycena
+          </h2>
+
+          <div className="space-y-2">
+            {repair.estimated_price && (
               <div>
-                <h3 className="text-lg font-bold text-gray-900">Potwierdź akceptację wyceny</h3>
+                <label className="text-xs font-medium text-gray-500">Szacowana cena</label>
+                <p className="text-xl font-bold text-gray-900">{repair.estimated_price} zł</p>
               </div>
-            </div>
-            
-            <div className="bg-gray-50 rounded-2xl p-4 mb-4">
-              <p className="text-sm text-gray-600 mb-2">Koszt naprawy:</p>
-              <p className="text-3xl font-bold text-gray-900">
-                {repair.final_price || repair.estimated_price} zł
+            )}
+
+            {repair.final_price && (
+              <div>
+                <label className="text-xs font-medium text-gray-500">Finalna cena</label>
+                <p className="text-xl font-bold text-blue-600">{repair.final_price} zł</p>
+              </div>
+            )}
+
+            {repair.price_accepted_at && (
+              <div className="pt-2 border-t border-gray-200">
+                <p className="text-xs text-blue-600 flex items-center gap-1.5">
+                  <CheckCircle className="w-3.5 h-3.5" />
+                  Wycena zaakceptowana {format(new Date(repair.price_accepted_at), "d MMMM yyyy", { locale: pl })}
+                </p>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* Tracking */}
+      {repair.courier_tracking_number && (
+        <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-sm border border-gray-200 p-4">
+          <h2 className="text-base font-bold text-gray-900 mb-3 flex items-center gap-2">
+            <Truck className="w-4 h-4 text-blue-600" />
+            Śledzenie przesyłki
+          </h2>
+
+          <div className="space-y-3">
+            {repair.courier_name && (
+              <div>
+                <label className="text-xs font-medium text-gray-500">Kurier</label>
+                <p className="text-sm font-semibold text-gray-900">
+                  {formatCourierName(repair.courier_name)}
+                </p>
+              </div>
+            )}
+
+            <div>
+              <label className="text-xs font-medium text-gray-500">Numer przesyłki</label>
+              <p className="text-base font-mono font-semibold text-gray-900">
+                {repair.courier_tracking_number}
               </p>
             </div>
 
-            <p className="text-sm text-gray-600 mb-6">
-              Po zaakceptowaniu wyceny rozpoczniemy naprawę Twojego urządzenia.
-            </p>
+            {repair.courier_notes && (
+              <div>
+                <label className="text-xs font-medium text-gray-500">Notatki kuriera</label>
+                <p className="text-xs text-gray-700">{repair.courier_notes}</p>
+              </div>
+            )}
 
-            <div className="flex gap-3">
-              <button
-                onClick={() => setShowAcceptModal(false)}
-                disabled={actionLoading}
-                className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-2xl hover:bg-gray-50 transition-colors disabled:opacity-50"
+            {getTrackingUrl(repair.courier_name || '', repair.courier_tracking_number) && (
+              <a 
+                href={getTrackingUrl(repair.courier_name || '', repair.courier_tracking_number) || '#'}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 w-full px-3 py-2 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-lg hover:from-purple-700 hover:to-indigo-700 transition-all text-sm font-semibold hover:scale-[1.02]"
               >
-                Anuluj
-              </button>
-              <button
-                onClick={handleAcceptPrice}
-                disabled={actionLoading}
-                className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-2xl hover:bg-blue-700 transition-colors disabled:opacity-50 font-medium"
-              >
-                {actionLoading ? 'Akceptuję...' : 'Tak, akceptuję'}
-              </button>
-            </div>
+                <ExternalLink className="w-4 h-4" />
+                Śledź u kuriera
+              </a>
+            )}
           </div>
         </div>
       )}
+
+      {/* Galeria */}
+      {repair.photo_urls && repair.photo_urls.length > 0 && (
+        <PhotoGallery photos={repair.photo_urls} />
+      )}
+
+      {/* Chat Section */}
+      <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-sm border border-gray-200 p-4">
+        <ChatBox repairId={repair.id} currentUserType="user" />
+      </div>
+    </div>
+
+    {/* PRAWA KOLUMNA (1/3) - Akcje */}
+    <div className="lg:col-span-1">
+      <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-sm border border-gray-200 p-4">
+        <h2 className="text-base font-bold text-gray-900 mb-3">Akcje</h2>
+
+        <div className="space-y-2">
+          {/* Akceptuj wycenę */}
+          {repair.status === 'wycena' && !repair.price_accepted_at && (repair.final_price || repair.estimated_price) && (
+            <button
+              onClick={() => setShowAcceptModal(true)}
+              disabled={actionLoading}
+              className="relative w-full px-3 py-2 bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-lg hover:from-green-700 hover:to-emerald-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed font-semibold flex items-center justify-center gap-1.5 text-xs hover:scale-[1.02]"
+            >
+              <CheckCircle className="w-4 h-4" />
+              <span>Akceptuj wycenę ({repair.final_price || repair.estimated_price} zł)</span>
+            </button>
+          )}
+
+          {/* Zapłać za naprawę */}
+          {repair.price_accepted_at && 
+           repair.payment_status !== 'succeeded' && 
+            (repair.final_price || repair.estimated_price) && (
+            <button
+              onClick={handlePayment}
+              disabled={paymentLoading}
+              className="relative w-full px-3 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg hover:from-blue-700 hover:to-indigo-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed font-semibold flex items-center justify-center gap-1.5 text-xs hover:scale-[1.02]"
+            >
+              <CreditCard className="w-4 h-4" />
+              <span>
+                {paymentLoading ? 'Przygotowuję...' : `Zapłać za naprawę (${repair.final_price || repair.estimated_price} zł)`}
+              </span>
+            </button>
+          )}
+
+          {/* Info o płatności */}
+          {repair.payment_status === 'succeeded' && (
+            <div className="w-full px-3 py-2 bg-green-50 border border-green-200 text-green-700 rounded-lg flex items-center justify-center gap-2">
+              <CheckCircle className="w-4 h-4" />
+              <span className="text-xs font-medium">Naprawa opłacona</span>
+            </div>
+          )}
+
+          {/* Anuluj */}
+          {['nowe', 'odebrane', 'diagnoza', 'wycena'].includes(repair.status) && (
+            <button
+              onClick={() => setShowCancelModal(true)}
+              disabled={actionLoading}
+              className="w-full px-3 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-medium flex items-center justify-center gap-1.5 text-xs"
+            >
+              <XCircle className="w-4 h-4" />
+              <span>Anuluj zgłoszenie</span>
+            </button>
+          )}
+
+          {/* Info */}
+          <div className="pt-2 border-t border-gray-200">
+            <p className="text-xs text-gray-600">
+              {repair.status === 'wycena' && !repair.price_accepted_at && (repair.final_price || repair.estimated_price) && (
+                <>Po zaakceptowaniu wyceny rozpoczniemy naprawę urządzenia.</>
+              )}
+              {['nowe', 'odebrane', 'diagnoza', 'wycena'].includes(repair.status) && (
+                <>Możesz anulować zgłoszenie w każdej chwili przed rozpoczęciem naprawy.</>
+              )}
+              {repair.status === 'w_naprawie' && (
+                <>Urządzenie jest obecnie naprawiane. Poinformujemy Cię o postępach.</>
+              )}
+              {repair.status === 'zakonczone' && (
+                <>Naprawa została zakończona. Urządzenie będzie wkrótce wysłane.</>
+              )}
+              {repair.status === 'wyslane' && (
+                <>Urządzenie jest w drodze do Ciebie. Sprawdź tracking przesyłki powyżej.</>
+              )}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{/* Modal anulowania */}
+{showCancelModal && (
+  <div className="fixed inset-0 bg-black bg-opacity-50 z-[9998] flex items-center justify-center p-4">
+    <div className="bg-white rounded-xl max-w-md w-full p-4">
+      <h3 className="text-base font-bold text-gray-900 mb-3">Anuluj zgłoszenie</h3>
+      
+      <p className="text-xs text-gray-600 mb-4">
+        Czy na pewno chcesz anulować to zgłoszenie? Tej operacji nie można cofnąć.
+      </p>
+
+      <div className="flex gap-2">
+        <button
+          onClick={() => setShowCancelModal(false)}
+          className="flex-1 px-3 py-1.5 border border-gray-300 text-gray-700 rounded-lg text-xs hover:bg-gray-50 transition-colors"
+        >
+          Nie, wróć
+        </button>
+        <button
+          onClick={() => handleCancelRepair('Anulowane przez użytkownika')}
+          disabled={actionLoading}
+          className="flex-1 px-3 py-1.5 bg-gray-900 text-white rounded-lg text-xs hover:bg-gray-800 transition-colors disabled:opacity-50"
+        >
+          {actionLoading ? 'Anulowanie...' : 'Tak, anuluj'}
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
+{/* Modal akceptacji wyceny - 2 KROKI */}
+{showAcceptModal && (
+  <div className="fixed inset-0 bg-black bg-opacity-50 z-[9998] flex items-center justify-center p-4">
+    <div className="bg-white rounded-xl max-w-md w-full p-4">
+      
+      {/* KROK 1: Potwierdzenie akceptacji */}
+      {acceptModalStep === 'confirm' && (
+        <>
+          <div className="flex items-center gap-3 mb-3">
+            <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
+              <CheckCircle className="w-5 h-5 text-blue-600" />
+            </div>
+            <div>
+              <h3 className="text-base font-bold text-gray-900">Potwierdź akceptację wyceny</h3>
+            </div>
+          </div>
+          
+          <div className="bg-gray-50 rounded-xl p-3 mb-3">
+            <p className="text-xs text-gray-600 mb-1">Koszt naprawy:</p>
+            <p className="text-2xl font-bold text-gray-900">
+              {repair.final_price || repair.estimated_price} zł
+            </p>
+          </div>
+
+          <p className="text-xs text-gray-600 mb-4">
+            Po zaakceptowaniu wyceny przejdziesz do płatności.
+          </p>
+
+          <div className="flex gap-2">
+            <button
+              onClick={() => {
+                setShowAcceptModal(false)
+                setAcceptModalStep('confirm')
+              }}
+              disabled={actionLoading}
+              className="flex-1 px-3 py-1.5 border border-gray-300 text-gray-700 rounded-lg text-xs hover:bg-gray-50 transition-colors disabled:opacity-50"
+            >
+              Anuluj
+            </button>
+            <button
+              onClick={handleAcceptPrice}
+              disabled={actionLoading}
+              className="flex-1 px-3 py-1.5 bg-blue-600 text-white rounded-lg text-xs hover:bg-blue-700 transition-colors disabled:opacity-50 font-medium"
+            >
+              {actionLoading ? 'Akceptuję...' : 'Tak, akceptuję'}
+            </button>
+          </div>
+        </>
+      )}
+
+      {/* KROK 2: Wycena zaakceptowana - przejdź do płatności */}
+      {acceptModalStep === 'payment' && (
+        <>
+          <div className="flex items-center gap-3 mb-3">
+            <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
+              <CheckCircle className="w-5 h-5 text-green-600" />
+            </div>
+            <div>
+              <h3 className="text-base font-bold text-gray-900">Wycena zaakceptowana!</h3>
+            </div>
+          </div>
+          
+          <div className="bg-blue-50 rounded-xl p-3 mb-3">
+            <p className="text-xs text-blue-900 mb-0.5">
+              ✓ Wycena została zaakceptowana
+            </p>
+            <p className="text-xs text-blue-700">
+              Teraz przejdź do bezpiecznej płatności, aby rozpocząć naprawę.
+            </p>
+          </div>
+
+          <div className="bg-gray-50 rounded-xl p-3 mb-4">
+            <p className="text-xs text-gray-600 mb-0.5">Urządzenie:</p>
+            <p className="text-sm font-semibold text-gray-900 mb-2">
+              {repair.device_model}
+            </p>
+            <p className="text-xs text-gray-600 mb-1">Koszt naprawy:</p>
+            <p className="text-2xl font-bold text-gray-900">
+              {repair.final_price || repair.estimated_price} zł
+            </p>
+          </div>
+
+          <div className="flex gap-2">
+            <button
+              onClick={() => {
+                setShowAcceptModal(false)
+                setAcceptModalStep('confirm')
+              }}
+              disabled={paymentLoading}
+              className="flex-1 px-3 py-1.5 border border-gray-300 text-gray-700 rounded-lg text-xs hover:bg-gray-50 transition-colors disabled:opacity-50"
+            >
+              Zamknij
+            </button>
+            <button
+              onClick={handlePayment}
+              className="flex-1 px-3 py-1.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg text-xs hover:from-blue-700 hover:to-indigo-700 transition-colors font-medium"
+            >
+              Przejdź do płatności
+            </button>
+          </div>
+        </>
+      )}
+    </div>
+  </div>
+)}
+
+{/* Modal płatności Stripe */}
+{showPaymentModal && repair && (
+  <RepairPaymentModal
+    isOpen={showPaymentModal}
+    onClose={() => setShowPaymentModal(false)}
+    repairId={repair.id}
+    deviceModel={repair.device_model}
+    totalAmount={repair.final_price || repair.estimated_price || 0}
+    onPaymentSuccess={handlePaymentSuccess}
+  />
+)}
     </div>
   )
 }

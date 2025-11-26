@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@/lib/supabase/server'
+import { createServiceClient } from '@/lib/supabase/server'
 import { uploadRepairPhotos, validateFileSize, validateFileType } from '@/lib/supabase/storage'
 import { z } from 'zod'
 
@@ -34,7 +34,7 @@ export async function GET() {
 }
 
 export async function POST(request: NextRequest) {
-  const supabase = await createClient()
+  const supabase = await createServiceClient()
   console.log('🔵 API /repair-request called')
 
   try {
@@ -104,7 +104,7 @@ export async function POST(request: NextRequest) {
         device_model: validatedData.deviceModel,
         serial_number: validatedData.serialNumber || null,
         purchase_date: validatedData.purchaseDate || null,
-        is_warranty: validatedData.isWarranty,
+        is_warranty: validatedData.isWarranty === 'tak',
         issue_description: validatedData.issueDescription,
         urgency: validatedData.urgency,
         photo_urls: [],

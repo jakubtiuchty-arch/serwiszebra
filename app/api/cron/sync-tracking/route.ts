@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient as createSupabaseAdmin } from '@supabase/supabase-js'
-import { Resend } from 'resend'                                         // DODAJ
-import { getShippingNotificationEmail } from '@/lib/email/templates/shipping-notification'
+import { Resend } from 'resend'
+import { generateShippingNotificationEmail } from '@/lib/email/templates/shipping-notification'  // ⬅️ POPRAWIONE
 
-const resend = new Resend(process.env.RESEND_API_KEY)  // DODAJ TUTAJ
+const resend = new Resend(process.env.RESEND_API_KEY)
 
 const supabaseAdmin = createSupabaseAdmin(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -53,91 +53,93 @@ export async function GET(request: NextRequest) {
 
     console.log(`🚚 [CRON] Found ${ordersWithTracking.length} orders with tracking numbers`)
 
-  let updatedCount = 0
-const debugInfo: any[] = []
+    let updatedCount = 0
+    const debugInfo: any[] = []
 
-// 3. Dla każdego zamówienia z trackingiem - zaktualizuj w bazie
-for (const blOrder of ordersWithTracking) {
-  debugInfo.push({
-    bl_order_id: blOrder.order_id,
-    tracking: blOrder.delivery_package_nr,
-    courier: blOrder.delivery_method
-  })
+    // 3. Dla każdego zamówienia z trackingiem - zaktualizuj w bazie
+    for (const blOrder of ordersWithTracking) {
+      debugInfo.push({
+        bl_order_id: blOrder.order_id,
+        tracking: blOrder.delivery_package_nr,
+        courier: blOrder.delivery_method
+      })
 
-  // Znajdź zamówienie w naszej bazie po baselinker_order_id
-  const { data: ourOrder, error: findError } = await supabaseAdmin
-    .from('orders')
-      .select('id, tracking_number, order_status, baselinker_order_id, order_number')
-    .eq('baselinker_order_id', String(blOrder.order_id))
-    .single()
+      // Znajdź zamówienie w naszej bazie po baselinker_order_id
+      const { data: ourOrder, error: findError } = await supabaseAdmin
+        .from('orders')
+        .select('id, tracking_number, order_status, baselinker_order_id, order_number')
+        .eq('baselinker_order_id', String(blOrder.order_id))
+        .single()
 
-  debugInfo[debugInfo.length - 1].find_error = findError
-  debugInfo[debugInfo.length - 1].found = !!ourOrder
+      debugInfo[debugInfo.length - 1].find_error = findError
+      debugInfo[debugInfo.length - 1].found = !!ourOrder
 
-  if (!ourOrder) {
-    console.log(`⚠️ [CRON] Order ${blOrder.order_id} not found in our database`)
-    continue
-  }
+      if (!ourOrder) {
+        console.log(`⚠️ [CRON] Order ${blOrder.order_id} not found in our database`)
+        continue
+      }
 
-  debugInfo[debugInfo.length - 1].has_tracking = !!ourOrder.tracking_number
+      debugInfo[debugInfo.length - 1].has_tracking = !!ourOrder.tracking_number
 
-  // Jeśli już ma tracking - pomiń
-  if (ourOrder.tracking_number) {
-    continue
-  }
+      // Jeśli już ma tracking - pomiń
+      if (ourOrder.tracking_number) {
+        continue
+      }
 
-  // Aktualizuj tracking w bazie
-  const { error: updateError } = await supabaseAdmin
-    .from('orders')
-    .update({
-      tracking_number: blOrder.delivery_package_nr,
-      courier_name: (blOrder.delivery_method || 'Kurier').replace(/^Kurier\s+/i, ''),
-      order_status: 'shipped',
-      updated_at: new Date().toISOString()
-    })
-    .eq('id', ourOrder.id)
+      // Aktualizuj tracking w bazie
+      const { error: updateError } = await supabaseAdmin
+        .from('orders')
+        .update({
+          tracking_number: blOrder.delivery_package_nr,
+          courier_name: (blOrder.delivery_method || 'Kurier').replace(/^Kurier\s+/i, ''),
+          order_status: 'shipped',
+          updated_at: new Date().toISOString()
+        })
+        .eq('id', ourOrder.id)
 
-  debugInfo[debugInfo.length - 1].update_error = updateError
+      debugInfo[debugInfo.length - 1].update_error = updateError
 
-  if (updateError) {
-    console.error(`❌ [CRON] Error updating order ${ourOrder.id}:`, updateError)
-    continue
-  }
+      if (updateError) {
+        console.error(`❌ [CRON] Error updating order ${ourOrder.id}:`, updateError)
+        continue
+      }
 
-  console.log(`✅ [CRON] Updated order ${ourOrder.id} with tracking: ${blOrder.delivery_package_nr}`)
-  updatedCount++
-    try {
-    const emailHtml = getShippingNotificationEmail({
-      orderNumber: ourOrder.order_number || blOrder.order_id.toString(),
-      trackingNumber: blOrder.delivery_package_nr,
-      courierName: blOrder.delivery_method?.replace(/^Kurier\s+/i, '') || 'Kurier',
-      customerName: blOrder.delivery_fullname || 'Kliencie'
-    })
+      console.log(`✅ [CRON] Updated order ${ourOrder.id} with tracking: ${blOrder.delivery_package_nr}`)
+      updatedCount++
 
-  await resend.emails.send({
-  from: 'Sklep serwiszebra.pl <sklep@serwiszebra.pl>',
-  to: [blOrder.email],
-  subject: `📦 Przesyłka wysłana - zamówienie #${blOrder.order_id}`,
-  html: emailHtml
-})
+      // Wyślij email notification
+      try {
+        const emailHtml = generateShippingNotificationEmail({  // ⬅️ POPRAWIONE
+          orderNumber: ourOrder.order_number || blOrder.order_id.toString(),
+          trackingNumber: blOrder.delivery_package_nr,
+          courierName: blOrder.delivery_method?.replace(/^Kurier\s+/i, '') || 'Kurier',
+          customerName: blOrder.delivery_fullname || 'Kliencie'
+        })
 
-    console.log(`📧 [CRON] Email sent to ${blOrder.email}`)
-  } catch (emailError) {
-    console.error(`❌ [CRON] Failed to send email:`, emailError)
-    // Nie przerywamy - email nie jest krytyczny
-  }
-}
+        await resend.emails.send({
+          from: 'Sklep serwiszebra.pl <sklep@serwiszebra.pl>',
+          to: [blOrder.email],
+          subject: `📦 Przesyłka wysłana - zamówienie #${blOrder.order_id}`,
+          html: emailHtml
+        })
+
+        console.log(`📧 [CRON] Email sent to ${blOrder.email}`)
+      } catch (emailError) {
+        console.error(`❌ [CRON] Failed to send email:`, emailError)
+        // Nie przerywamy - email nie jest krytyczny
+      }
+    }
 
     console.log(`🎉 [CRON] Sync completed! Updated ${updatedCount} orders`)
 
-   return NextResponse.json({
-  success: true,
-  message: `CRON: Successfully synced tracking for ${updatedCount} orders`,
-  timestamp: new Date().toISOString(),
-  total_baselinker_orders: data.orders.length,
-  orders_with_tracking: ordersWithTracking.length,
-  updated_count: updatedCount,
-})
+    return NextResponse.json({
+      success: true,
+      message: `CRON: Successfully synced tracking for ${updatedCount} orders`,
+      timestamp: new Date().toISOString(),
+      total_baselinker_orders: data.orders.length,
+      orders_with_tracking: ordersWithTracking.length,
+      updated_count: updatedCount,
+    })
 
   } catch (error: any) {
     console.error('❌ [CRON] Error syncing Baselinker tracking:', error)

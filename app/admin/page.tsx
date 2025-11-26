@@ -83,56 +83,65 @@ export default function AdminDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 p-8">
-      {/* Header */}
-      <div className="mb-8">
-        <div className="flex items-center gap-3 mb-2">
-          <ClipboardList className="w-8 h-8 text-blue-600" />
-          <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
+    <div className="space-y-3 sm:space-y-4 p-3 sm:p-4 lg:p-6">
+      {/* Header - KOMPAKTOWY */}
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-xl sm:text-2xl font-bold text-gray-900 mb-0.5">Dashboard</h1>
+          <p className="text-xs text-gray-500">Zarządzaj wszystkimi zgłoszeniami serwisowymi</p>
         </div>
-        <p className="text-gray-600">Zarządzaj wszystkimi zgłoszeniami serwisowymi</p>
+        <div className="text-right hidden sm:block">
+          <p className="text-xs text-gray-600">Dzisiaj</p>
+          <p className="text-sm font-semibold text-gray-900">
+            {new Date().toLocaleDateString('pl-PL', { day: 'numeric', month: 'short', year: 'numeric' })}
+          </p>
+        </div>
       </div>
 
-      {/* Statystyki */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+      {/* Statystyki - KOMPAKTOWE */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3">
         <StatCard
-          icon={<ClipboardList className="w-6 h-6" />}
-          label="Wszystkie zgłoszenia"
+          icon={<ClipboardList className="w-4 h-4" />}
+          label="Wszystkie"
+          sublabel="Zgłoszeń razem"
           value={stats.total}
+          color="gray"
+        />
+        <StatCard
+          icon={<Clock className="w-4 h-4" />}
+          label="Aktywne"
+          sublabel="W trakcie"
+          value={stats.active}
           color="blue"
         />
         <StatCard
-          icon={<Clock className="w-6 h-6" />}
-          label="Aktywne"
-          value={stats.active}
-          color="yellow"
-        />
-        <StatCard
-          icon={<CheckCircle className="w-6 h-6" />}
+          icon={<CheckCircle className="w-4 h-4" />}
           label="Zakończone"
+          sublabel="Ukończone naprawy"
           value={stats.completed}
           color="green"
         />
         <StatCard
-          icon={<AlertCircle className="w-6 h-6" />}
+          icon={<AlertCircle className="w-4 h-4" />}
           label="Użytkownicy"
+          sublabel="Klientów w systemie"
           value={stats.users}
           color="indigo"
         />
       </div>
 
-      {/* Filtry i wyszukiwanie */}
-      <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      {/* Filtry i wyszukiwanie - KOMPAKTOWE */}
+      <div className="bg-white border border-gray-200 rounded-xl p-3 sm:p-4 shadow-sm">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-3">
           {/* Wyszukiwanie */}
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
             <input
               type="text"
               placeholder="Szukaj po ID, modelu, S/N, email..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full pl-9 pr-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
 
@@ -141,7 +150,7 @@ export default function AdminDashboard() {
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             >
               <option value="all">Wszystkie statusy</option>
               <option value="nowe">Nowe</option>
@@ -159,97 +168,97 @@ export default function AdminDashboard() {
 
       {/* Tabela zgłoszeń */}
       {loading ? (
-        <div className="bg-white rounded-lg shadow-sm p-12 text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Ładowanie zgłoszeń...</p>
+        <div className="bg-white border border-gray-200 rounded-xl p-8 text-center shadow-sm">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
+          <p className="mt-3 text-sm text-gray-600">Ładowanie zgłoszeń...</p>
         </div>
       ) : repairs.length === 0 ? (
-        <div className="bg-white rounded-lg shadow-sm p-12 text-center">
-          <ClipboardList className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-          <p className="text-gray-600">Brak zgłoszeń do wyświetlenia</p>
+        <div className="bg-white border border-gray-200 rounded-xl p-8 text-center shadow-sm">
+          <ClipboardList className="w-10 h-10 text-gray-300 mx-auto mb-3" />
+          <p className="text-sm text-gray-600">Brak zgłoszeń do wyświetlenia</p>
         </div>
       ) : (
-        <div className="bg-white rounded-lg shadow-sm overflow-hidden">
+        <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="bg-gray-50">
+              <thead className="bg-gray-50 border-b border-gray-200">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-3 sm:px-4 py-2.5 text-left text-[10px] font-semibold text-gray-500 uppercase tracking-wider">
                     ID / Data
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-3 sm:px-4 py-2.5 text-left text-[10px] font-semibold text-gray-500 uppercase tracking-wider">
                     Urządzenie
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-3 sm:px-4 py-2.5 text-left text-[10px] font-semibold text-gray-500 uppercase tracking-wider hidden md:table-cell">
                     Klient
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-3 sm:px-4 py-2.5 text-left text-[10px] font-semibold text-gray-500 uppercase tracking-wider">
                     Status
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-3 sm:px-4 py-2.5 text-left text-[10px] font-semibold text-gray-500 uppercase tracking-wider hidden sm:table-cell">
                     Cena
                   </th>
-                  <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-3 sm:px-4 py-2.5 text-right text-[10px] font-semibold text-gray-500 uppercase tracking-wider">
                     Akcje
                   </th>
                 </tr>
               </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
+              <tbody className="bg-white divide-y divide-gray-100">
                 {repairs.map((repair) => {
                   const statusInfo = getStatusInfo(repair.status)
                   const displayPrice = repair.final_price || repair.estimated_price
 
                   return (
-                    <tr key={repair.id} className="hover:bg-gray-50">
+                    <tr key={repair.id} className="hover:bg-gray-50 transition-colors">
                       {/* ID / Data */}
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm font-medium text-gray-900">
+                      <td className="px-3 sm:px-4 py-2.5 whitespace-nowrap">
+                        <div className="text-xs font-semibold text-gray-900">
                           #{repair.id.slice(0, 8).toUpperCase()}
                         </div>
-                        <div className="text-sm text-gray-500">
+                        <div className="text-[10px] text-gray-500">
                           {format(new Date(repair.created_at), 'dd MMM yyyy', { locale: pl })}
                         </div>
                       </td>
 
                       {/* Urządzenie */}
-                      <td className="px-6 py-4">
-                        <div className="text-sm font-medium text-gray-900">{repair.device_model}</div>
-                        <div className="text-sm text-gray-500">S/N: {repair.serial_number || 'Brak'}</div>
+                      <td className="px-3 sm:px-4 py-2.5">
+                        <div className="text-xs font-medium text-gray-900">{repair.device_model}</div>
+                        <div className="text-[10px] text-gray-500">S/N: {repair.serial_number || 'Brak'}</div>
                       </td>
 
                       {/* Klient */}
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm text-gray-900">
+                      <td className="px-3 sm:px-4 py-2.5 whitespace-nowrap hidden md:table-cell">
+                        <div className="text-xs text-gray-900">
                           {repair.profiles?.first_name || repair.profiles?.last_name
                             ? `${repair.profiles.first_name || ''} ${repair.profiles.last_name || ''}`.trim()
                             : 'Brak danych'}
                         </div>
-                        <div className="text-sm text-gray-500">{repair.profiles?.email || 'Brak email'}</div>
+                        <div className="text-[10px] text-gray-500 truncate max-w-[150px]">{repair.profiles?.email || 'Brak email'}</div>
                       </td>
 
                       {/* Status */}
-                      <td className="px-6 py-4 whitespace-nowrap">
+                      <td className="px-3 sm:px-4 py-2.5 whitespace-nowrap">
                         <span
-                          className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${statusInfo.color}`}
+                          className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium ${statusInfo.color}`}
                         >
                           {statusInfo.label}
                         </span>
                       </td>
 
                       {/* Cena */}
-                      <td className="px-6 py-4 whitespace-nowrap">
+                      <td className="px-3 sm:px-4 py-2.5 whitespace-nowrap hidden sm:table-cell">
                         {displayPrice ? (
-                          <div className="text-sm font-medium text-gray-900">{displayPrice} zł</div>
+                          <div className="text-xs font-semibold text-gray-900">{displayPrice} zł</div>
                         ) : (
-                          <span className="text-sm text-gray-400">Brak wyceny</span>
+                          <span className="text-[10px] text-gray-400">Brak</span>
                         )}
                       </td>
 
                       {/* Akcje */}
-                      <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                      <td className="px-3 sm:px-4 py-2.5 whitespace-nowrap text-right">
                         <button
                           onClick={() => router.push(`/admin/zgloszenie/${repair.id}`)}
-                          className="text-blue-600 hover:text-blue-900 font-medium"
+                          className="text-xs text-blue-600 hover:text-blue-900 font-medium"
                         >
                           Szczegóły
                         </button>
@@ -266,32 +275,44 @@ export default function AdminDashboard() {
   )
 }
 
-// Komponent StatCard
+// Komponent StatCard - KOMPAKTOWY
 function StatCard({
   icon,
   label,
+  sublabel,
   value,
   color,
 }: {
   icon: React.ReactNode
   label: string
+  sublabel?: string
   value: number
   color: string
 }) {
   const colorClasses: Record<string, string> = {
+    gray: 'bg-gray-100 text-gray-900',
     blue: 'bg-blue-50 text-blue-600',
-    yellow: 'bg-yellow-50 text-yellow-600',
     green: 'bg-green-50 text-green-600',
     indigo: 'bg-indigo-50 text-indigo-600',
   }
 
+  const labelColorClasses: Record<string, string> = {
+    gray: 'text-gray-600',
+    blue: 'text-blue-600',
+    green: 'text-green-600',
+    indigo: 'text-indigo-600',
+  }
+
   return (
-    <div className="bg-white rounded-lg shadow-sm p-6">
-      <div className={`inline-flex items-center justify-center w-12 h-12 rounded-lg mb-4 ${colorClasses[color]}`}>
-        {icon}
+    <div className="bg-white border border-gray-200 rounded-xl p-3 shadow-sm hover:shadow-md transition-all hover:border-blue-300">
+      <div className="flex items-center justify-between mb-2">
+        <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${colorClasses[color]}`}>
+          {icon}
+        </div>
+        <span className={`text-[10px] font-medium ${labelColorClasses[color]}`}>{label}</span>
       </div>
-      <p className="text-2xl font-bold text-gray-900">{value}</p>
-      <p className="text-sm text-gray-600">{label}</p>
+      <p className="text-2xl font-bold text-gray-900 mb-0.5">{value}</p>
+      {sublabel && <p className="text-[10px] text-gray-600">{sublabel}</p>}
     </div>
   )
 }

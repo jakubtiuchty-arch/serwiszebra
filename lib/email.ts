@@ -32,7 +32,7 @@ export async function sendOrderConfirmation(data: OrderEmailData) {
   try {
     // Email do klienta
     const customerEmail = await resend.emails.send({
-      from: 'TAKMA Serwis <zamowienia@serwiszebra.pl>',
+      from: 'SERWIS ZEBRA <zamowienia@serwiszebra.pl>',
       to: data.customerEmail,
       subject: `Potwierdzenie zamówienia ${data.orderNumber}`,
       html: generateOrderEmailHTML(data),
@@ -97,15 +97,12 @@ function generateOrderEmailHTML(data: OrderEmailData): string {
     <body style="margin: 0; padding: 0; font-family: Arial, sans-serif; background-color: #f3f4f6;">
       <div style="max-width: 600px; margin: 0 auto; background-color: white;">
         
-        <!-- Header -->
-        <div style="background-color: #111827; padding: 32px 24px; text-align: center;">
-          <h1 style="color: white; margin: 0; font-size: 28px; font-weight: 700;">
-            TAKMA SERWIS
-          </h1>
-          <p style="color: #e5e7eb; margin: 8px 0 0 0; font-size: 14px;">
-            Autoryzowany Serwis Zebra
-          </p>
-        </div>
+       <!-- Header -->
+<div style="background-color: #111827; padding: 32px 24px; text-align: center;">
+  <h1 style="color: white; margin: 0; font-size: 28px; font-weight: 700;">
+    SERWIS ZEBRA
+  </h1>
+</div>
 
         <!-- Content -->
         <div style="padding: 32px 24px;">
@@ -298,6 +295,339 @@ function generateNotificationEmailHTML(data: OrderEmailData): string {
         <strong>Płatność:</strong> ${data.paymentMethod}<br>
         <strong>Suma:</strong> ${data.totalBrutto.toFixed(2)} zł
       </p>
+    </body>
+    </html>
+  `
+}
+// ========== EMAIL O WYSYŁCE NAPRAWY ==========
+
+interface RepairShippedEmailData {
+  customerEmail: string
+  customerName: string
+  repairId: string
+  deviceModel: string
+  courierName: string
+  trackingNumber: string
+  trackingUrl: string
+}
+
+export async function sendRepairShippedEmail(data: RepairShippedEmailData) {
+  try {
+    const email = await resend.emails.send({
+      from: 'Serwis Zebra <serwis@serwiszebra.pl>',
+      to: data.customerEmail,
+      subject: `Twoje urządzenie zostało wysłane! - ${data.deviceModel}`,
+      html: generateRepairShippedHTML(data)
+    })
+    
+    console.log('[Email] Repair shipped email sent:', email)
+    return email
+    
+  } catch (error) {
+    console.error('[Email] Error sending repair shipped email:', error)
+    throw error
+  }
+}
+
+function generateRepairShippedHTML(data: RepairShippedEmailData): string {
+  return `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f3f4f6;">
+      <div style="max-width: 600px; margin: 0 auto; background-color: white;">
+        
+        <!-- Header -->
+        <div style="background-color: #111827; padding: 32px 24px; text-align: center;">
+          <h1 style="color: white; margin: 0; font-size: 28px; font-weight: 700;">
+            SERWIS ZEBRA
+          </h1>
+        </div>
+
+        <!-- Content -->
+        <div style="padding: 32px 24px;">
+          
+          <!-- Success message -->
+          <div style="text-align: center; margin-bottom: 32px;">
+            <div style="display: inline-block; background-color: #10b981; width: 64px; height: 64px; border-radius: 50%; margin-bottom: 16px;">
+              <div style="color: white; font-size: 32px; line-height: 64px;">✓</div>
+            </div>
+            <h2 style="margin: 0 0 8px 0; font-size: 24px; color: #111827;">
+              Twoje urządzenie jest w drodze!
+            </h2>
+            <p style="margin: 0; color: #6b7280;">
+              Naprawa zakończona - wysyłamy Twoje urządzenie
+            </p>
+          </div>
+
+          <!-- Device info -->
+          <div style="background-color: #f9fafb; border-radius: 8px; padding: 20px; margin-bottom: 24px;">
+            <table style="width: 100%;">
+              <tr>
+                <td style="color: #6b7280; font-size: 14px;">Urządzenie:</td>
+                <td style="text-align: right; font-weight: 600; color: #111827;">${data.deviceModel}</td>
+              </tr>
+              <tr>
+                <td style="color: #6b7280; font-size: 14px; padding-top: 8px;">Nr zgłoszenia:</td>
+                <td style="text-align: right; padding-top: 8px; font-family: monospace;">${data.repairId}</td>
+              </tr>
+            </table>
+          </div>
+
+          <!-- Tracking info -->
+          <div style="background-color: #dbeafe; border-radius: 8px; padding: 20px; margin-bottom: 24px;">
+            <h4 style="margin: 0 0 12px 0; font-size: 16px; color: #1e40af;">
+              Śledzenie przesyłki
+            </h4>
+            <table style="width: 100%;">
+              <tr>
+                <td style="color: #1e40af; font-size: 14px; padding: 4px 0;">Kurier:</td>
+                <td style="text-align: right; font-weight: 600; color: #1e3a8a;">${data.courierName}</td>
+              </tr>
+              <tr>
+                <td style="color: #1e40af; font-size: 14px; padding: 4px 0;">Numer przesyłki:</td>
+                <td style="text-align: right; font-weight: 600; color: #1e3a8a; font-family: monospace;">${data.trackingNumber}</td>
+              </tr>
+            </table>
+            
+            <div style="text-align: center; margin-top: 16px;">
+              <a href="${data.trackingUrl}" 
+                 style="display: inline-block; background-color: #2563eb; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600;">
+                Śledź przesyłkę
+              </a>
+            </div>
+          </div>
+
+          <!-- Delivery info -->
+          <div style="background-color: #fef3c7; border-radius: 8px; padding: 20px; margin-bottom: 24px;">
+            <h4 style="margin: 0 0 8px 0; font-size: 16px; color: #92400e;">
+              Szacowany czas dostawy
+            </h4>
+            <p style="margin: 0; color: #451a03; font-weight: 600;">
+              1-2 dni robocze
+            </p>
+          </div>
+
+          <!-- Contact -->
+          <div style="text-align: center; color: #6b7280; font-size: 14px;">
+            <p style="margin: 0 0 8px 0;">Masz pytania? Skontaktuj się z nami:</p>
+            <p style="margin: 0;">
+              <strong>Tel:</strong> +48 607 819 688<br>
+              <strong>Email:</strong> serwis@serwiszebra.pl
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </body>
+    </html>
+  `
+}
+// ========== EMAIL O OPŁACONEJ NAPRAWIE - KLIENT ==========
+
+interface RepairPaidEmailData {
+  to: string
+  customerName: string
+  repairId: string
+  deviceModel: string
+  amount: number
+}
+
+export async function sendRepairPaidEmail(data: RepairPaidEmailData) {
+  try {
+    const shortId = data.repairId.split('-')[0].toUpperCase()
+    
+    const email = await resend.emails.send({
+      from: 'Serwis Zebra <serwis@serwiszebra.pl>',
+      to: data.to,
+      subject: `Płatność potwierdzona - naprawa ${data.deviceModel}`,
+      html: generateRepairPaidClientHTML(data, shortId)
+    })
+    
+    console.log('[Email] Repair paid confirmation sent to client:', email)
+    return email
+    
+  } catch (error) {
+    console.error('[Email] Error sending repair paid email to client:', error)
+    throw error
+  }
+}
+
+function generateRepairPaidClientHTML(data: RepairPaidEmailData, shortId: string): string {
+  return `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f3f4f6;">
+      <div style="max-width: 600px; margin: 0 auto; background-color: white;">
+        
+        <!-- Header -->
+        <div style="background-color: #111827; padding: 32px 24px; text-align: center;">
+          <h1 style="color: white; margin: 0; font-size: 28px; font-weight: 700;">
+            SERWIS ZEBRA
+          </h1>
+        </div>
+
+        <!-- Content -->
+        <div style="padding: 32px 24px;">
+          
+          <!-- Success message -->
+          <div style="text-align: center; margin-bottom: 32px;">
+            <div style="display: inline-block; background-color: #10b981; width: 64px; height: 64px; border-radius: 50%; margin-bottom: 16px;">
+              <div style="color: white; font-size: 32px; line-height: 64px;">✓</div>
+            </div>
+            <h2 style="margin: 0 0 8px 0; font-size: 24px; color: #111827;">
+              Płatność otrzymana!
+            </h2>
+            <p style="margin: 0; color: #6b7280;">
+              Rozpoczynamy naprawę Twojego urządzenia
+            </p>
+          </div>
+
+          <!-- Payment info -->
+          <div style="background-color: #f9fafb; border-radius: 8px; padding: 20px; margin-bottom: 24px;">
+            <table style="width: 100%;">
+              <tr>
+                <td style="color: #6b7280; font-size: 14px;">Urządzenie:</td>
+                <td style="text-align: right; font-weight: 600; color: #111827;">${data.deviceModel}</td>
+              </tr>
+              <tr>
+                <td style="color: #6b7280; font-size: 14px; padding-top: 8px;">Nr zgłoszenia:</td>
+                <td style="text-align: right; padding-top: 8px; font-family: monospace;">#${shortId}</td>
+              </tr>
+              <tr>
+                <td style="color: #6b7280; font-size: 14px; padding-top: 8px;">Kwota:</td>
+                <td style="text-align: right; padding-top: 8px; font-weight: 700; font-size: 18px; color: #059669;">${data.amount.toFixed(2)} zł</td>
+              </tr>
+            </table>
+          </div>
+
+          <!-- Status info -->
+          <div style="background-color: #dbeafe; border-radius: 8px; padding: 20px; margin-bottom: 24px;">
+            <h4 style="margin: 0 0 8px 0; font-size: 16px; color: #1e40af;">
+              Status naprawy: W naprawie
+            </h4>
+            <p style="margin: 0; color: #1e3a8a; font-size: 14px;">
+              Twoje urządzenie jest obecnie naprawiane przez naszych specjalistów. Otrzymasz powiadomienie, gdy naprawa zostanie zakończona.
+            </p>
+          </div>
+
+          <!-- Track repair -->
+          <div style="text-align: center; margin-bottom: 24px;">
+            <a href="https://serwiszebra.pl/panel" 
+               style="display: inline-block; background-color: #2563eb; color: white; padding: 12px 32px; border-radius: 8px; text-decoration: none; font-weight: 600;">
+              Sprawdź status w panelu
+            </a>
+          </div>
+
+          <!-- Contact -->
+          <div style="text-align: center; color: #6b7280; font-size: 14px;">
+            <p style="margin: 0 0 8px 0;">Masz pytania? Skontaktuj się z nami:</p>
+            <p style="margin: 0;">
+              <strong>Tel:</strong> +48 607 819 688<br>
+              <strong>Email:</strong> serwis@serwiszebra.pl
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </body>
+    </html>
+  `
+}
+
+// ========== EMAIL O OPŁACONEJ NAPRAWIE - ADMIN ==========
+
+interface RepairPaidAdminEmailData {
+  to: string
+  repairId: string
+  customerName: string
+  deviceModel: string
+  amount: number
+}
+
+export async function sendRepairPaidAdminEmail(data: RepairPaidAdminEmailData) {
+  try {
+    const shortId = data.repairId.split('-')[0].toUpperCase()
+    
+    const email = await resend.emails.send({
+      from: 'System Serwisowy <system@serwiszebra.pl>',
+      to: data.to,
+      subject: `💳 Płatność otrzymana - naprawa #${shortId}`,
+      html: generateRepairPaidAdminHTML(data, shortId)
+    })
+    
+    console.log('[Email] Repair paid notification sent to admin:', email)
+    return email
+    
+  } catch (error) {
+    console.error('[Email] Error sending repair paid email to admin:', error)
+    throw error
+  }
+}
+
+function generateRepairPaidAdminHTML(data: RepairPaidAdminEmailData, shortId: string): string {
+  return `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="utf-8">
+    </head>
+    <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+      <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
+        
+        <div style="background-color: #10b981; color: white; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+          <h2 style="margin: 0;">💳 Płatność otrzymana</h2>
+        </div>
+
+        <div style="background-color: #f9fafb; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+          <h3 style="margin-top: 0;">Szczegóły naprawy:</h3>
+          <table style="width: 100%; border-collapse: collapse;">
+            <tr>
+              <td style="padding: 8px 0;"><strong>Nr zgłoszenia:</strong></td>
+              <td style="padding: 8px 0; font-family: monospace;">#${shortId}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0;"><strong>Klient:</strong></td>
+              <td style="padding: 8px 0;">${data.customerName}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0;"><strong>Urządzenie:</strong></td>
+              <td style="padding: 8px 0;">${data.deviceModel}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0;"><strong>Kwota:</strong></td>
+              <td style="padding: 8px 0; font-size: 18px; font-weight: bold; color: #059669;">${data.amount.toFixed(2)} zł</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0;"><strong>Status:</strong></td>
+              <td style="padding: 8px 0; color: #2563eb; font-weight: 600;">W naprawie</td>
+            </tr>
+          </table>
+        </div>
+
+        <div style="background-color: #dbeafe; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+          <p style="margin: 0; color: #1e40af;">
+            ℹ️ Status zgłoszenia został automatycznie zmieniony na "W naprawie". Sprawdź szczegóły w panelu administracyjnym.
+          </p>
+        </div>
+
+        <div style="text-align: center;">
+          <a href="https://serwiszebra.pl/admin" 
+             style="display: inline-block; background-color: #111827; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600;">
+            Przejdź do panelu admina
+          </a>
+        </div>
+
+      </div>
     </body>
     </html>
   `

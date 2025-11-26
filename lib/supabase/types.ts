@@ -36,6 +36,10 @@ export interface Database {
           estimated_price: number | null
           final_price: number | null
           price_accepted_at: string | null
+          payment_status: string | null
+          stripe_session_id: string | null
+          stripe_payment_id: string | null  // ← DODAJ TĘ LINIĘ
+          paid_at: string | null
           user_id: string | null
           courier_tracking_number: string | null
         }
@@ -65,6 +69,10 @@ export interface Database {
           estimated_price?: number | null
           final_price?: number | null
           price_accepted_at?: string | null
+          payment_status?: string | null
+          stripe_session_id?: string | null
+          stripe_payment_id?: string | null  // ← DODAJ TĘ LINIĘ
+          paid_at?: string | null
           user_id?: string | null
           courier_tracking_number?: string | null
         }
@@ -94,6 +102,10 @@ export interface Database {
           estimated_price?: number | null
           final_price?: number | null
           price_accepted_at?: string | null
+          payment_status?: string | null
+          stripe_session_id?: string | null
+          stripe_payment_id?: string | null  // ← DODAJ TĘ LINIĘ
+          paid_at?: string | null
           user_id?: string | null
           courier_tracking_number?: string | null
         }

@@ -19,7 +19,7 @@ export async function PATCH(
     const supabase = await createClient()
     const repairId = params.id
     const body = await request.json()
-    const { courier_tracking_number, notes } = body
+    const { courier_name, courier_tracking_number, notes } = body  // ⬅️ DODANO courier_name
 
     // Walidacja
     if (!courier_tracking_number) {
@@ -29,10 +29,18 @@ export async function PATCH(
       )
     }
 
-    // Aktualizacja numeru śledzenia i statusu
+    if (!courier_name) {  // ⬅️ NOWA WALIDACJA
+      return NextResponse.json(
+        { error: 'Nazwa kuriera jest wymagana' },
+        { status: 400 }
+      )
+    }
+
+    // Aktualizacja numeru śledzenia, nazwy kuriera i statusu
     const { data: updatedRepair, error: updateError } = await supabase
       .from('repair_requests')
       .update({
+        courier_name,  // ⬅️ DODANO
         courier_tracking_number,
         status: 'wyslane',
         updated_at: new Date().toISOString()
@@ -50,8 +58,8 @@ export async function PATCH(
     }
 
     // Dodanie wpisu do historii zmian
-    const historyNotes = notes || `Numer przesyłki: ${courier_tracking_number}`
-
+    const historyNotes = notes || `Kurier: ${courier_name}, Numer przesyłki: ${courier_tracking_number}`  // ⬅️ ZAKTUALIZOWANO
+    
     const { error: historyError } = await supabase
       .from('repair_status_history')
       .insert({
@@ -69,7 +77,6 @@ export async function PATCH(
       success: true,
       repair: updatedRepair
     })
-
   } catch (error) {
     console.error('Error in PATCH /api/admin/repairs/[id]/tracking:', error)
     return NextResponse.json(

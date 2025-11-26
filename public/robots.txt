@@ -1,0 +1,35 @@
+# Robots.txt dla Serwis Zebra
+# https://serwiszebra.pl
+
+# Pozwól wszystkim botom na indeksowanie
+User-agent: *
+Allow: /
+
+# Zablokuj prywatne obszary
+Disallow: /api/
+Disallow: /admin/
+Disallow: /panel/
+Disallow: /_next/
+Disallow: /checkout/
+Disallow: /zamowienie/
+
+# Pozwól na indeksowanie sklepu i produktów
+Allow: /sklep
+Allow: /sklep/*
+
+# Sitemap
+Sitemap: https://serwiszebra.pl/sitemap.xml
+
+# Crawl-delay dla botów
+User-agent: *
+Crawl-delay: 1
+
+# Specjalne reguły dla Google
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+# Specjalne reguły dla Bing
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1

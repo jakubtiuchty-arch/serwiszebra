@@ -1,8 +1,9 @@
 import { NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
+import { getTrackingUrl } from '@/lib/tracking-links'  // ⬅️ DODANE
 
 export async function GET(request: Request) {
-  const supabase = await createClient()  // ✅ DODANY AWAIT
+  const supabase = await createClient()
   
   // Sprawdź autoryzację
   const { data: { user }, error: authError } = await supabase.auth.getUser()
@@ -50,9 +51,9 @@ export async function GET(request: Request) {
     paymentStatus: order.payment_status,
     paymentMethod: order.payment_method,
     deliveryMethod: order.delivery_method,
-   tracking_number: order.tracking_number,  // ✅ NOWE
-courier_name: order.courier_name,        // ✅ zostaje
-tracking_url: order.tracking_url,        // ✅ NOWE
+    tracking_number: order.tracking_number,
+    courier_name: order.courier_name,
+    tracking_url: getTrackingUrl(order.courier_name, order.tracking_number),  // ⬅️ ZMIENIONE - generowane dynamicznie
     
     // Dane klienta
     customer: {

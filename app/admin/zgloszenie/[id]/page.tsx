@@ -5,6 +5,7 @@ import { useParams, useRouter } from 'next/navigation'
 import ChatBox from '@/components/chat/ChatBox'
 import { format } from 'date-fns'
 import { pl } from 'date-fns/locale'
+import { CourierModal } from '@/components/ui/courier-modal'
 import {
   Package,
   User,
@@ -36,6 +37,9 @@ interface RepairRequest {
   estimated_price: number | null
   final_price: number | null
   courier_tracking_number: string | null
+  courier_name: string | null
+  pickup_tracking_number: string | null
+  pickup_courier_name: string | null
   photo_urls: string[]
   email: string
   first_name: string
@@ -71,15 +75,15 @@ const STATUS_LABELS: Record<string, string> = {
 }
 
 const STATUS_COLORS: Record<string, string> = {
-  nowe: 'bg-blue-100 text-blue-800 border-blue-300',
-  odebrane: 'bg-purple-100 text-purple-800 border-purple-300',
-  diagnoza: 'bg-yellow-100 text-yellow-800 border-yellow-300',
-  oczekiwanie_na_akceptacje: 'bg-orange-100 text-orange-800 border-orange-300',
-  wycena: 'bg-cyan-100 text-cyan-800 border-cyan-300',
-  w_naprawie: 'bg-indigo-100 text-indigo-800 border-indigo-300',
-  zakonczone: 'bg-green-100 text-green-800 border-green-300',
-  wyslane: 'bg-teal-100 text-teal-800 border-teal-300',
-  anulowane: 'bg-red-100 text-red-800 border-red-300'
+  nowe: 'bg-blue-100 text-blue-800 border-blue-200',
+  odebrane: 'bg-purple-100 text-purple-800 border-purple-200',
+  diagnoza: 'bg-yellow-100 text-yellow-800 border-yellow-200',
+  oczekiwanie_na_akceptacje: 'bg-orange-100 text-orange-800 border-orange-200',
+  wycena: 'bg-cyan-100 text-cyan-800 border-cyan-200',
+  w_naprawie: 'bg-indigo-100 text-indigo-800 border-indigo-200',
+  zakonczone: 'bg-green-100 text-green-800 border-green-200',
+  wyslane: 'bg-teal-100 text-teal-800 border-teal-200',
+  anulowane: 'bg-red-100 text-red-800 border-red-200'
 }
 
 const PRIORITY_LABELS: Record<string, string> = {
@@ -96,6 +100,22 @@ const PRIORITY_COLORS: Record<string, string> = {
   pilny: 'text-red-600'
 }
 
+function getTrackingUrl(courierName: string, trackingNumber: string): string {
+  const courier = courierName.toLowerCase()
+  
+  const trackingUrls: Record<string, string> = {
+    'dpd': `https://tracktrace.dpd.com.pl/parcelDetails?p1=${trackingNumber}`,
+    'inpost': `https://inpost.pl/sledzenie-przesylek?number=${trackingNumber}`,
+    'dhl': `https://www.dhl.com/pl-pl/home/tracking.html?tracking-id=${trackingNumber}`,
+    'ups': `https://www.ups.com/track?tracknum=${trackingNumber}`,
+    'fedex': `https://www.fedex.com/fedextrack/?trknbr=${trackingNumber}`,
+    'poczta polska': `https://śledzenie.poczta-polska.pl/?numer=${trackingNumber}`,
+    'gls': `https://gls-group.eu/PL/pl/sledzenie-paczek?match=${trackingNumber}`
+  }
+  
+  return trackingUrls[courier] || `https://www.google.com/search?q=${courierName}+tracking+${trackingNumber}`
+}
+
 export default function AdminRepairDetailPage() {
   const params = useParams()
   const router = useRouter()
@@ -105,8 +125,8 @@ export default function AdminRepairDetailPage() {
   const [history, setHistory] = useState<StatusHistory[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
+  const [showNotesBox, setShowNotesBox] = useState(false)
 
-  // Stany dla formularzy
   const [statusForm, setStatusForm] = useState({
     status: '',
     notes: ''
@@ -116,15 +136,38 @@ export default function AdminRepairDetailPage() {
     final_price: '',
     notes: ''
   })
-  const [trackingForm, setTrackingForm] = useState({
-    courier_tracking_number: '',
-    notes: ''
+  const [courierForm, setCourierForm] = useState({
+    courier_code: 'dpd',
+    weight: '2.0',
+    side_x: '30',
+    side_y: '20',
+    side_z: '15',
+    pickup_date: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+    direction: 'delivery' as 'delivery' | 'pickup',
+    pickup_time_from: '09',
+    pickup_time_to: '17'
   })
 
   const [submitting, setSubmitting] = useState<string | null>(null)
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
+  const [modal, setModal] = useState<{
+    isOpen: boolean
+    type: 'success' | 'error'
+    title: string
+    message: string
+    details?: {
+      direction?: string
+      trackingNumber?: string
+      courierName?: string
+      waybillLink?: string
+    }
+  }>({
+    isOpen: false,
+    type: 'success',
+    title: '',
+    message: ''
+  })
 
-  // Pobieranie danych
   useEffect(() => {
     fetchRepairDetails()
   }, [repairId])
@@ -142,16 +185,11 @@ export default function AdminRepairDetailPage() {
       setRepair(data.repair)
       setHistory(data.history)
 
-      // Ustaw początkowe wartości formularzy
       if (data.repair) {
         setStatusForm({ status: data.repair.status, notes: '' })
         setPriceForm({
           estimated_price: data.repair.estimated_price || '',
           final_price: data.repair.final_price || '',
-          notes: ''
-        })
-        setTrackingForm({
-          courier_tracking_number: data.repair.courier_tracking_number || '',
           notes: ''
         })
       }
@@ -162,7 +200,6 @@ export default function AdminRepairDetailPage() {
     }
   }
 
-  // Zmiana statusu
   const handleStatusUpdate = async (e: React.FormEvent) => {
     e.preventDefault()
     setSubmitting('status')
@@ -180,69 +217,115 @@ export default function AdminRepairDetailPage() {
 
       await fetchRepairDetails()
       setStatusForm({ ...statusForm, notes: '' })
-      alert('Status zaktualizowany pomyślnie!')
-    } catch (err) {
-      alert(err instanceof Error ? err.message : 'Wystąpił błąd')
-    } finally {
-      setSubmitting(null)
-    }
-  }
-
-  // Aktualizacja wyceny
-  const handlePriceUpdate = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setSubmitting('price')
-
-    try {
-      const response = await fetch(`/api/admin/repairs/${repairId}/price`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(priceForm)
+      setModal({
+        isOpen: true,
+        type: 'success',
+        title: 'Status zaktualizowany',
+        message: 'Status zgłoszenia został pomyślnie zaktualizowany.'
       })
-
-      if (!response.ok) {
-        throw new Error('Nie udało się zaktualizować wyceny')
-      }
-
-      await fetchRepairDetails()
-      setPriceForm({ ...priceForm, notes: '' })
-      alert('Wycena zaktualizowana pomyślnie!')
     } catch (err) {
-      alert(err instanceof Error ? err.message : 'Wystąpił błąd')
-    } finally {
-      setSubmitting(null)
-    }
-  }
-
-  // Aktualizacja tracking
-  const handleTrackingUpdate = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setSubmitting('tracking')
-
-    try {
-      const response = await fetch(`/api/admin/repairs/${repairId}/tracking`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(trackingForm)
+      setModal({
+        isOpen: true,
+        type: 'error',
+        title: 'Błąd',
+        message: err instanceof Error ? err.message : 'Nie udało się zaktualizować statusu'
       })
-
-      if (!response.ok) {
-        throw new Error('Nie udało się zaktualizować numeru śledzenia')
-      }
-
-      await fetchRepairDetails()
-      setTrackingForm({ ...trackingForm, notes: '' })
-      alert('Numer śledzenia zaktualizowany pomyślnie!')
-    } catch (err) {
-      alert(err instanceof Error ? err.message : 'Wystąpił błąd')
     } finally {
       setSubmitting(null)
     }
   }
+
+const handlePriceUpdate = async (e: React.FormEvent) => {
+  e.preventDefault()
+  setSubmitting('price')
+
+  try {
+    const response = await fetch(`/api/admin/repairs/${repairId}/price`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(priceForm)
+    })
+
+    if (!response.ok) {
+      throw new Error('Nie udało się zaktualizować wyceny')
+    }
+
+    await fetchRepairDetails()
+    setPriceForm({ ...priceForm, notes: '' })
+    setModal({
+      isOpen: true,
+      type: 'success',
+      title: 'Wycena zapisana',
+      message: 'Wycena została pomyślnie zaktualizowana.'
+    })
+  } catch (err) {
+    setModal({
+      isOpen: true,
+      type: 'error',
+      title: 'Błąd',
+      message: err instanceof Error ? err.message : 'Nie udało się zaktualizować wyceny'
+    })
+  } finally {
+    setSubmitting(null)
+  }
+}
+
+const handleOrderCourier = async (e: React.FormEvent) => {
+  e.preventDefault()
+  setSubmitting('courier')
+
+  try {
+    const direction = repair!.status === 'nowe' ? 'pickup' : 'delivery'
+
+    const response = await fetch(`/api/admin/repairs/${repairId}/order-courier`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        ...courierForm,
+        direction
+      })
+    })
+
+    if (!response.ok) {
+      const errorData = await response.json()
+      throw new Error(errorData.error || 'Nie udało się zamówić kuriera')
+    }
+
+    const data = await response.json()
+    
+    const directionText = repair!.status === 'nowe' 
+      ? 'Odbiór od klienta' 
+      : 'Wysyłka do klienta'
+
+    setModal({
+      isOpen: true,
+      type: 'success',
+      title: 'Kurier zamówiony!',
+      message: 'Zamówienie kuriera zostało złożone pomyślnie.',
+      details: {
+        direction: directionText,
+        trackingNumber: data.tracking_number,
+        courierName: data.courier_name,
+        waybillLink: data.waybill_link
+      }
+    })
+    
+    await fetchRepairDetails()
+  } catch (err) {
+    setModal({
+      isOpen: true,
+      type: 'error',
+      title: 'Błąd zamówienia',
+      message: err instanceof Error ? err.message : 'Wystąpił błąd podczas zamawiania kuriera'
+    })
+  } finally {
+    setSubmitting(null)
+  }
+}
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
+      <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
         <Loader2 className="w-8 h-8 animate-spin text-blue-600" />
       </div>
     )
@@ -250,13 +333,13 @@ export default function AdminRepairDetailPage() {
 
   if (error || !repair) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
+      <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
         <div className="text-center">
           <XCircle className="w-12 h-12 text-red-500 mx-auto mb-4" />
           <p className="text-red-600 font-medium">{error || 'Zgłoszenie nie znalezione'}</p>
           <button
             onClick={() => router.push('/admin')}
-            className="mt-4 text-blue-600 hover:text-blue-800"
+            className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-colors"
           >
             Powrót do dashboardu
           </button>
@@ -278,18 +361,18 @@ export default function AdminRepairDetailPage() {
   const currentStepIndex = statusSteps.indexOf(repair.status)
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
       {/* Header */}
-      <div className="bg-white border-b border-gray-200 sticky top-0 z-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+      <div className="bg-white/80 backdrop-blur-sm border-b border-gray-200 sticky top-0 z-10 shadow-sm">
+        <div className="w-full px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <button
                 onClick={() => router.push('/admin')}
-                className="flex items-center text-gray-600 hover:text-gray-900"
+                className="flex items-center text-gray-600 hover:text-gray-900 transition-colors group"
               >
-                <ChevronLeft className="w-5 h-5" />
-                <span className="ml-1">Powrót</span>
+                <ChevronLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
+                <span className="ml-1 font-medium">Powrót</span>
               </button>
               <div className="h-6 w-px bg-gray-300" />
               <div>
@@ -302,10 +385,10 @@ export default function AdminRepairDetailPage() {
               </div>
             </div>
             <div className="flex items-center space-x-3">
-              <span className={`px-4 py-2 rounded-lg border font-medium ${STATUS_COLORS[repair.status]}`}>
+              <span className={`px-4 py-2 rounded-xl border font-semibold shadow-sm ${STATUS_COLORS[repair.status]}`}>
                 {STATUS_LABELS[repair.status]}
               </span>
-              <span className={`font-medium ${PRIORITY_COLORS[repair.priority]}`}>
+              <span className={`font-bold ${PRIORITY_COLORS[repair.priority]}`}>
                 {PRIORITY_LABELS[repair.priority]}
               </span>
             </div>
@@ -313,206 +396,168 @@ export default function AdminRepairDetailPage() {
         </div>
       </div>
 
-      {/* Main Content - 3 Column Layout */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="grid grid-cols-1 xl:grid-cols-10 gap-6">
-          
-          {/* LEFT COLUMN - Info (40%) */}
-          <div className="xl:col-span-4 space-y-6">
-            
+      {/* Main Content - 2 kolumny */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          {/* LEWA KOLUMNA */}
+          <div className="space-y-4">
             {/* Urządzenie */}
-            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-              <div className="flex items-center mb-4">
-                <Package className="w-5 h-5 text-blue-600 mr-2" />
-                <h2 className="text-lg font-semibold text-gray-900">Urządzenie</h2>
+            <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow border border-gray-200 p-4">
+              <div className="flex items-center mb-3">
+                <div className="bg-blue-100 p-1.5 rounded-lg">
+                  <Package className="w-4 h-4 text-blue-600" />
+                </div>
+                <h2 className="text-sm font-semibold text-gray-900 ml-2">Urządzenie</h2>
               </div>
-              <div className="space-y-3">
+              <div className="space-y-2">
                 <div>
-                  <p className="text-sm text-gray-500">Model</p>
-                  <p className="font-medium text-gray-900">{repair.device_model}</p>
+                  <p className="text-xs text-gray-500">Model</p>
+                  <p className="font-semibold text-gray-900 text-sm">{repair.device_model}</p>
                 </div>
                 {repair.device_serial_number && (
                   <div>
-                    <p className="text-sm text-gray-500">Numer seryjny</p>
-                    <p className="font-mono text-sm text-gray-900">{repair.device_serial_number}</p>
+                    <p className="text-xs text-gray-500">Numer seryjny</p>
+                    <p className="font-mono text-xs text-gray-900">{repair.device_serial_number}</p>
                   </div>
                 )}
               </div>
             </div>
 
             {/* Opis problemu */}
-            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-              <div className="flex items-center mb-4">
-                <FileText className="w-5 h-5 text-blue-600 mr-2" />
-                <h2 className="text-lg font-semibold text-gray-900">Opis problemu</h2>
+            <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow border border-gray-200 p-4">
+              <div className="flex items-center mb-3">
+                <div className="bg-blue-100 p-1.5 rounded-lg">
+                  <FileText className="w-4 h-4 text-blue-600" />
+                </div>
+                <h2 className="text-sm font-semibold text-gray-900 ml-2">Opis problemu</h2>
               </div>
-              <p className="text-gray-700 whitespace-pre-wrap">{repair.issue_description}</p>
+              <p className="text-sm text-gray-700 whitespace-pre-wrap leading-relaxed">{repair.issue_description}</p>
             </div>
 
             {/* Dane użytkownika */}
-            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-              <div className="flex items-center mb-4">
-                <User className="w-5 h-5 text-blue-600 mr-2" />
-                <h2 className="text-lg font-semibold text-gray-900">Dane użytkownika</h2>
+            <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow border border-gray-200 p-4">
+              <div className="flex items-center mb-3">
+                <div className="bg-blue-100 p-1.5 rounded-lg">
+                  <User className="w-4 h-4 text-blue-600" />
+                </div>
+                <h2 className="text-sm font-semibold text-gray-900 ml-2">Dane użytkownika</h2>
               </div>
-              <div className="space-y-3">
+              <div className="space-y-2">
                 <div>
-                  <p className="text-sm text-gray-500">Imię i nazwisko</p>
-                  <p className="font-medium text-gray-900">
+                  <p className="text-xs text-gray-500">Imię i nazwisko</p>
+                  <p className="font-semibold text-gray-900 text-sm">
                     {repair.first_name} {repair.last_name}
                   </p>
                 </div>
                 {repair.company && (
                   <div>
-                    <p className="text-sm text-gray-500">Firma</p>
-                    <p className="font-medium text-gray-900">{repair.company}</p>
+                    <p className="text-xs text-gray-500">Firma</p>
+                    <p className="font-semibold text-gray-900 text-sm">{repair.company}</p>
                   </div>
                 )}
                 <div>
-                  <p className="text-sm text-gray-500">Email</p>
+                  <p className="text-xs text-gray-500">Email</p>
                   <a
                     href={`mailto:${repair.email}`}
-                    className="text-blue-600 hover:text-blue-800 flex items-center"
+                    className="text-blue-600 hover:text-blue-800 flex items-center text-sm font-medium"
                   >
-                    <Mail className="w-4 h-4 mr-1" />
+                    <Mail className="w-3 h-3 mr-1" />
                     {repair.email}
                   </a>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-500">Telefon</p>
+                  <p className="text-xs text-gray-500">Telefon</p>
                   <a
                     href={`tel:${repair.phone}`}
-                    className="text-blue-600 hover:text-blue-800 flex items-center"
+                    className="text-blue-600 hover:text-blue-800 flex items-center text-sm font-medium"
                   >
-                    <Phone className="w-4 h-4 mr-1" />
+                    <Phone className="w-3 h-3 mr-1" />
                     {repair.phone}
                   </a>
                 </div>
-              
               </div>
             </div>
 
             {/* Wycena */}
-            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-              <div className="flex items-center mb-4">
-                <DollarSign className="w-5 h-5 text-blue-600 mr-2" />
-                <h2 className="text-lg font-semibold text-gray-900">Wycena</h2>
+            <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow border border-gray-200 p-4">
+              <div className="flex items-center mb-3">
+                <div className="bg-green-100 p-1.5 rounded-lg">
+                  <DollarSign className="w-4 h-4 text-green-600" />
+                </div>
+                <h2 className="text-sm font-semibold text-gray-900 ml-2">Wycena</h2>
               </div>
-              <div className="space-y-3">
-                <div>
-                  <p className="text-sm text-gray-500">Cena szacowana</p>
-                  <p className="text-lg font-bold text-gray-900">
-                    {repair.estimated_price ? `${repair.estimated_price} zł` : '—'}
-                  </p>
-                </div>
-                <div>
-                  <p className="text-sm text-gray-500">Cena finalna</p>
-                  <p className="text-lg font-bold text-gray-900">
-                    {repair.final_price ? `${repair.final_price} zł` : '—'}
-                  </p>
-                </div>
+              <div>
+                <p className="text-xs text-gray-500">Kwota</p>
+                <p className="text-xl font-bold text-gray-900">
+                  {repair.final_price ? `${repair.final_price} zł` : '—'}
+                </p>
               </div>
             </div>
 
-            {/* Tracking */}
-            {repair.courier_tracking_number && (
-              <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                <div className="flex items-center mb-4">
-                  <Truck className="w-5 h-5 text-blue-600 mr-2" />
-                  <h2 className="text-lg font-semibold text-gray-900">Przesyłka</h2>
+            {/* Przesyłki */}
+            {(repair.pickup_tracking_number || repair.courier_tracking_number) && (
+              <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow border border-gray-200 p-4">
+                <div className="flex items-center mb-3">
+                  <div className="bg-purple-100 p-1.5 rounded-lg">
+                    <Truck className="w-4 h-4 text-purple-600" />
+                  </div>
+                  <h2 className="text-sm font-semibold text-gray-900 ml-2">Przesyłki</h2>
                 </div>
-                <div>
-                  <p className="text-sm text-gray-500">Numer śledzenia</p>
-                  <p className="font-mono text-sm font-medium text-gray-900">
-                    {repair.courier_tracking_number}
-                  </p>
+                <div className="space-y-3">
+                  {repair.pickup_tracking_number && (
+                    <div className="p-3 bg-purple-50 rounded-lg border border-purple-200">
+                      <p className="text-xs font-semibold text-purple-700 mb-1">📥 Odbiór od klienta</p>
+                      <p className="text-xs text-gray-500 mb-1">Kurier: {repair.pickup_courier_name || 'Nieznany'}</p>
+                      <p className="font-mono text-xs font-medium text-gray-900 mb-2">
+                        {repair.pickup_tracking_number}
+                      </p>
+                      <a
+                        href={getTrackingUrl(repair.pickup_courier_name || '', repair.pickup_tracking_number)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center px-3 py-1.5 bg-purple-600 text-white text-xs font-medium rounded-lg hover:bg-purple-700 transition-colors"
+                      >
+                        <Truck className="w-3 h-3 mr-1" />
+                        Śledź
+                      </a>
+                    </div>
+                  )}
+
+                  {repair.courier_tracking_number && (
+                    <div className="p-3 bg-green-50 rounded-lg border border-green-200">
+                      <p className="text-xs font-semibold text-green-700 mb-1">📤 Wysyłka do klienta</p>
+                      <p className="text-xs text-gray-500 mb-1">Kurier: {repair.courier_name || 'Nieznany'}</p>
+                      <p className="font-mono text-xs font-medium text-gray-900 mb-2">
+                        {repair.courier_tracking_number}
+                      </p>
+                      <a
+                        href={getTrackingUrl(repair.courier_name || '', repair.courier_tracking_number)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center px-3 py-1.5 bg-green-600 text-white text-xs font-medium rounded-lg hover:bg-green-700 transition-colors"
+                      >
+                        <Truck className="w-3 h-3 mr-1" />
+                        Śledź
+                      </a>
+                    </div>
+                  )}
                 </div>
               </div>
             )}
-
           </div>
 
-          {/* MIDDLE COLUMN - Timeline (30%) */}
-          <div className="xl:col-span-3">
-            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 sticky top-24">
-              <div className="flex items-center mb-6">
-                <Clock className="w-5 h-5 text-blue-600 mr-2" />
-                <h2 className="text-lg font-semibold text-gray-900">Status naprawy</h2>
-              </div>
-              
-              {/* Timeline pionowy */}
-              <div className="space-y-0">
-                {statusSteps.map((step, index) => {
-                  const isCompleted = index < currentStepIndex
-                  const isCurrent = index === currentStepIndex
-                  const isPending = index > currentStepIndex
-                  
-                  return (
-                    <div key={step} className="relative">
-                      {/* Linia łącząca (nie dla ostatniego) */}
-                      {index < statusSteps.length - 1 && (
-                        <div
-                          className={`absolute left-3 top-8 w-0.5 h-12 ${
-                            isCompleted ? 'bg-green-500' : 'bg-gray-200'
-                          }`}
-                        />
-                      )}
-                      
-                      {/* Step */}
-                      <div className="flex items-start relative pb-6">
-                        {/* Icon/Circle */}
-                        <div className="flex-shrink-0">
-                          {isCompleted && (
-                            <div className="w-6 h-6 rounded-full bg-green-500 flex items-center justify-center">
-                              <CheckCircle2 className="w-4 h-4 text-white" />
-                            </div>
-                          )}
-                          {isCurrent && (
-                            <div className="w-6 h-6 rounded-full bg-blue-600 flex items-center justify-center animate-pulse">
-                              <div className="w-3 h-3 rounded-full bg-white" />
-                            </div>
-                          )}
-                          {isPending && (
-                            <div className="w-6 h-6 rounded-full border-2 border-gray-300 bg-white" />
-                          )}
-                        </div>
-                        
-                        {/* Label */}
-                        <div className="ml-4">
-                          <p className={`font-medium ${
-                            isCurrent ? 'text-blue-600' : 
-                            isCompleted ? 'text-green-600' : 
-                            'text-gray-400'
-                          }`}>
-                            {STATUS_LABELS[step]}
-                          </p>
-                          {isCurrent && (
-                            <p className="text-xs text-gray-500 mt-1">Aktualny status</p>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  )
-                })}
-              </div>
-            </div>
-          </div>
-
-          {/* RIGHT COLUMN - Akcje admina (30%) */}
-          <div className="xl:col-span-3 space-y-6">
-            
+          {/* PRAWA KOLUMNA - Akcje */}
+          <div className="space-y-4">
             {/* Zmiana statusu */}
-            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Zmień status</h3>
-              <form onSubmit={handleStatusUpdate} className="space-y-4">
+            <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow border border-gray-200 p-4">
+              <h3 className="text-sm font-semibold text-gray-900 mb-3">Zmień status</h3>
+              <form onSubmit={handleStatusUpdate} className="space-y-3">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Nowy status
-                  </label>
+                  <label className="block text-xs font-semibold text-gray-700 mb-1">Nowy status</label>
                   <select
                     value={statusForm.status}
                     onChange={(e) => setStatusForm({ ...statusForm, status: e.target.value })}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
                     required
                   >
                     {Object.entries(STATUS_LABELS).map(([value, label]) => (
@@ -522,33 +567,31 @@ export default function AdminRepairDetailPage() {
                     ))}
                   </select>
                 </div>
-                
+
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Notatka (opcjonalnie)
-                  </label>
+                  <label className="block text-xs font-semibold text-gray-700 mb-1">Notatka (opcjonalnie)</label>
                   <textarea
                     value={statusForm.notes}
                     onChange={(e) => setStatusForm({ ...statusForm, notes: e.target.value })}
-                    rows={3}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    placeholder="Dodaj notatkę do zmiany statusu..."
+                    rows={2}
+                    className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                    placeholder="Dodaj notatkę..."
                   />
                 </div>
-                
+
                 <button
                   type="submit"
                   disabled={submitting === 'status'}
-                  className="w-full bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+                  className="w-full bg-blue-600 text-white px-3 py-2 text-sm rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center font-semibold transition-all"
                 >
                   {submitting === 'status' ? (
                     <>
-                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                      <Loader2 className="w-3 h-3 mr-2 animate-spin" />
                       Zapisywanie...
                     </>
                   ) : (
                     <>
-                      <Save className="w-4 h-4 mr-2" />
+                      <Save className="w-3 h-3 mr-2" />
                       Zapisz status
                     </>
                   )}
@@ -557,63 +600,45 @@ export default function AdminRepairDetailPage() {
             </div>
 
             {/* Wycena */}
-            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Dodaj wycenę</h3>
-              <form onSubmit={handlePriceUpdate} className="space-y-4">
+            <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow border border-gray-200 p-4">
+              <h3 className="text-sm font-semibold text-gray-900 mb-3">Wycena</h3>
+              <form onSubmit={handlePriceUpdate} className="space-y-3">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Cena szacowana (zł)
-                  </label>
-                  <input
-                    type="number"
-                    step="0.01"
-                    value={priceForm.estimated_price}
-                    onChange={(e) => setPriceForm({ ...priceForm, estimated_price: e.target.value })}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    placeholder="np. 450.00"
-                  />
-                </div>
-                
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Cena finalna (zł)
-                  </label>
+                  <label className="block text-xs font-semibold text-gray-700 mb-1">Kwota (zł)</label>
                   <input
                     type="number"
                     step="0.01"
                     value={priceForm.final_price}
                     onChange={(e) => setPriceForm({ ...priceForm, final_price: e.target.value })}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    placeholder="np. 420.00"
+                    className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                    placeholder="np. 450.00"
                   />
                 </div>
-                
+
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Notatka (opcjonalnie)
-                  </label>
+                  <label className="block text-xs font-semibold text-gray-700 mb-1">Notatka (opcjonalnie)</label>
                   <textarea
                     value={priceForm.notes}
                     onChange={(e) => setPriceForm({ ...priceForm, notes: e.target.value })}
                     rows={2}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
                     placeholder="np. Wymiana ekranu + diagnostyka"
                   />
                 </div>
-                
+
                 <button
                   type="submit"
                   disabled={submitting === 'price'}
-                  className="w-full bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+                  className="w-full bg-green-600 text-white px-3 py-2 text-sm rounded-lg hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center font-semibold transition-all"
                 >
                   {submitting === 'price' ? (
                     <>
-                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                      <Loader2 className="w-3 h-3 mr-2 animate-spin" />
                       Zapisywanie...
                     </>
                   ) : (
                     <>
-                      <Save className="w-4 h-4 mr-2" />
+                      <Save className="w-3 h-3 mr-2" />
                       Zapisz wycenę
                     </>
                   )}
@@ -621,122 +646,211 @@ export default function AdminRepairDetailPage() {
               </form>
             </div>
 
-            {/* Tracking */}
-            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Numer przesyłki</h3>
-              <form onSubmit={handleTrackingUpdate} className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Numer śledzenia
-                  </label>
-                  <input
-                    type="text"
-                    value={trackingForm.courier_tracking_number}
-                    onChange={(e) => setTrackingForm({ ...trackingForm, courier_tracking_number: e.target.value })}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    placeholder="np. 123456789012"
-                    required
-                  />
+            {/* Chat z klientem */}
+            <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow border border-gray-200 p-4">
+              <div className="flex items-center mb-3">
+                <div className="bg-blue-100 p-1.5 rounded-lg">
+                  <Mail className="w-4 h-4 text-blue-600" />
                 </div>
-                
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Notatka (opcjonalnie)
-                  </label>
-                  <textarea
-                    value={trackingForm.notes}
-                    onChange={(e) => setTrackingForm({ ...trackingForm, notes: e.target.value })}
-                    rows={2}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    placeholder="np. Wysłane InPost Kurier"
-                  />
-                </div>
-                
-                <button
-                  type="submit"
-                  disabled={submitting === 'tracking'}
-                  className="w-full bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
-                >
-                  {submitting === 'tracking' ? (
-                    <>
-                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                      Zapisywanie...
-                    </>
-                  ) : (
-                    <>
-                      <Save className="w-4 h-4 mr-2" />
-                      Zapisz tracking
-                    </>
-                  )}
-                </button>
-              </form>
+                <h3 className="text-sm font-semibold text-gray-900 ml-2">Chat z klientem</h3>
+              </div>
+              <div className="h-[500px]">
+                <ChatBox repairId={repair.id} currentUserType="admin" />
+              </div>
             </div>
 
-          </div>
+            {/* Zamów kuriera */}
+            {((repair.status === 'nowe' && !repair.pickup_tracking_number) ||
+              (repair.status === 'zakonczone' && !repair.courier_tracking_number)) && (
+              <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow border border-gray-200 p-4">
+                <h3 className="text-sm font-semibold text-gray-900 mb-3">Zamów kuriera</h3>
+                <form onSubmit={handleOrderCourier} className="space-y-3">
+                  <div>
+                    <label className="block text-xs font-semibold text-gray-700 mb-1">Kurier</label>
+                    <select
+                      value={courierForm.courier_code}
+                      onChange={(e) => setCourierForm({ ...courierForm, courier_code: e.target.value })}
+                      className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      required
+                    >
+                      <option value="">-- Wybierz kuriera --</option>
+                      <option value="dpd">DPD</option>
+                    </select>
+                  </div>
 
+                  <div className="grid grid-cols-2 gap-2">
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-700 mb-1">Waga (kg)</label>
+                      <input
+                        type="number"
+                        step="0.1"
+                        value={courierForm.weight}
+                        onChange={(e) => setCourierForm({ ...courierForm, weight: e.target.value })}
+                        className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        placeholder="2.0"
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-700 mb-1">Data</label>
+                      <input
+                        type="date"
+                        value={courierForm.pickup_date}
+                        onChange={(e) => setCourierForm({ ...courierForm, pickup_date: e.target.value })}
+                        className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        min={new Date().toISOString().split('T')[0]}
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-3 gap-2">
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-700 mb-1">Dł. (cm)</label>
+                      <input
+                        type="number"
+                        value={courierForm.side_x}
+                        onChange={(e) => setCourierForm({ ...courierForm, side_x: e.target.value })}
+                        className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        placeholder="30"
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-700 mb-1">Szer.</label>
+                      <input
+                        type="number"
+                        value={courierForm.side_y}
+                        onChange={(e) => setCourierForm({ ...courierForm, side_y: e.target.value })}
+                        className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        placeholder="20"
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-700 mb-1">Wys.</label>
+                      <input
+                        type="number"
+                        value={courierForm.side_z}
+                        onChange={(e) => setCourierForm({ ...courierForm, side_z: e.target.value })}
+                        className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        placeholder="15"
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-2">
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-700 mb-1">Od godz.</label>
+                      <select
+                        value={courierForm.pickup_time_from}
+                        onChange={(e) => setCourierForm({ ...courierForm, pickup_time_from: e.target.value })}
+                        className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        required
+                      >
+                        <option value="08">08:00</option>
+                        <option value="09">09:00</option>
+                        <option value="10">10:00</option>
+                        <option value="11">11:00</option>
+                        <option value="12">12:00</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-700 mb-1">Do godz.</label>
+                      <select
+                        value={courierForm.pickup_time_to}
+                        onChange={(e) => setCourierForm({ ...courierForm, pickup_time_to: e.target.value })}
+                        className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        required
+                      >
+                        <option value="14">14:00</option>
+                        <option value="15">15:00</option>
+                        <option value="16">16:00</option>
+                        <option value="17">17:00</option>
+                        <option value="18">18:00</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={submitting === 'courier'}
+                    className={`w-full text-white px-3 py-2 text-sm rounded-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center font-semibold transition-all ${
+                      repair.status === 'nowe' ? 'bg-purple-600 hover:bg-purple-700' : 'bg-green-600 hover:bg-green-700'
+                    }`}
+                  >
+                    {submitting === 'courier' ? (
+                      <>
+                        <Loader2 className="w-3 h-3 mr-2 animate-spin" />
+                        Zamawianie...
+                      </>
+                    ) : (
+                      <>
+                        <Truck className="w-3 h-3 mr-2" />
+                        {repair.status === 'nowe' ? 'Zamów odbiór' : 'Zamów wysyłkę'}
+                      </>
+                    )}
+                  </button>
+                </form>
+              </div>
+            )}
+          </div>
         </div>
 
-        {/* GALERIA ZDJĘĆ (full width na dole) */}
+        {/* GALERIA ZDJĘĆ (full width) */}
         {repair.photo_urls && repair.photo_urls.length > 0 && (
-          <div className="mt-6 bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-            <div className="flex items-center mb-4">
-              <ImageIcon className="w-5 h-5 text-blue-600 mr-2" />
-              <h2 className="text-lg font-semibold text-gray-900">Zdjęcia ({repair.photo_urls.length})</h2>
+          <div className="mt-4 bg-white/80 backdrop-blur-sm rounded-xl shadow border border-gray-200 p-4">
+            <div className="flex items-center mb-3">
+              <div className="bg-blue-100 p-1.5 rounded-lg">
+                <ImageIcon className="w-4 h-4 text-blue-600" />
+              </div>
+              <h2 className="text-sm font-semibold text-gray-900 ml-2">Zdjęcia ({repair.photo_urls.length})</h2>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
               {repair.photo_urls.map((url, index) => (
                 <div
                   key={index}
                   onClick={() => setSelectedImage(url)}
-                  className="aspect-square rounded-lg overflow-hidden cursor-pointer hover:opacity-75 transition-opacity"
+                  className="aspect-square rounded-lg overflow-hidden cursor-pointer hover:opacity-75 transition-all hover:scale-105 shadow"
                 >
-                  <img
-                    src={url}
-                    alt={`Zdjęcie ${index + 1}`}
-                    className="w-full h-full object-cover"
-                  />
+                  <img src={url} alt={`Zdjęcie ${index + 1}`} className="w-full h-full object-cover" />
                 </div>
               ))}
             </div>
           </div>
         )}
 
-        {/* HISTORIA ZMIAN (full width na dole) */}
+        {/* HISTORIA ZMIAN */}
         {history && history.length > 0 && (
-          <div className="mt-6 bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-            <div className="flex items-center mb-4">
-              <Calendar className="w-5 h-5 text-blue-600 mr-2" />
-              <h2 className="text-lg font-semibold text-gray-900">Historia zmian ({history.length})</h2>
+          <div className="mt-4 bg-white/80 backdrop-blur-sm rounded-xl shadow border border-gray-200 p-4">
+            <div className="flex items-center mb-3">
+              <div className="bg-blue-100 p-1.5 rounded-lg">
+                <Calendar className="w-4 h-4 text-blue-600" />
+              </div>
+              <h2 className="text-sm font-semibold text-gray-900 ml-2">Historia zmian ({history.length})</h2>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full">
-                <thead className="bg-gray-50 border-b border-gray-200">
-                  <tr>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                      Data
-                    </th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                      Status
-                    </th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                      Notatki
-                    </th>
+                <thead>
+                  <tr className="bg-gray-50 border-b border-gray-200">
+                    <th className="px-3 py-2 text-left text-xs font-semibold text-gray-600 uppercase">Data</th>
+                    <th className="px-3 py-2 text-left text-xs font-semibold text-gray-600 uppercase">Status</th>
+                    <th className="px-3 py-2 text-left text-xs font-semibold text-gray-600 uppercase">Notatki</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-200">
+                <tbody className="divide-y divide-gray-100">
                   {history.map((item) => (
-                    <tr key={item.id} className="hover:bg-gray-50">
-                      <td className="px-4 py-3 text-sm text-gray-900 whitespace-nowrap">
+                    <tr key={item.id} className="hover:bg-blue-50/50 transition-colors">
+                      <td className="px-3 py-2 text-xs text-gray-900 whitespace-nowrap font-medium">
                         {format(new Date(item.created_at), 'dd.MM.yyyy HH:mm', { locale: pl })}
                       </td>
-                      <td className="px-4 py-3">
-                        <span className={`px-3 py-1 rounded-full text-xs font-medium ${STATUS_COLORS[item.status]}`}>
+                      <td className="px-3 py-2">
+                        <span className={`px-2 py-1 rounded-lg text-xs font-semibold border ${STATUS_COLORS[item.status]}`}>
                           {STATUS_LABELS[item.status]}
                         </span>
                       </td>
-                      <td className="px-4 py-3 text-sm text-gray-700">
-                        {item.notes || '—'}
-                      </td>
+                      <td className="px-3 py-2 text-xs text-gray-700">{item.notes || '—'}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -746,27 +860,26 @@ export default function AdminRepairDetailPage() {
         )}
       </div>
 
+      {/* Modal kuriera */}
+      <CourierModal
+        isOpen={modal.isOpen}
+        onClose={() => setModal({ ...modal, isOpen: false })}
+        type={modal.type}
+        title={modal.title}
+        message={modal.message}
+        details={modal.details}
+      />
 
-      {/* Chat Section */}
-      <div className="mt-8">
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-          <ChatBox repairId={repair.id} currentUserType="admin" />
-        </div>
-      </div>
       {/* Lightbox dla zdjęć */}
       {selectedImage && (
         <div
           onClick={() => setSelectedImage(null)}
           className="fixed inset-0 z-50 bg-black bg-opacity-90 flex items-center justify-center p-4"
         >
-          <img
-            src={selectedImage}
-            alt="Powiększone zdjęcie"
-            className="max-w-full max-h-full object-contain"
-          />
+          <img src={selectedImage} alt="Powiększone zdjęcie" className="max-w-full max-h-full object-contain rounded-2xl" />
           <button
             onClick={() => setSelectedImage(null)}
-            className="absolute top-4 right-4 text-white hover:text-gray-300"
+            className="absolute top-4 right-4 text-white hover:text-gray-300 bg-black/50 p-2 rounded-full backdrop-blur-sm"
           >
             <XCircle className="w-8 h-8" />
           </button>

@@ -9,8 +9,6 @@ import {
   Unlock,
   Edit,
   Search,
-  Filter,
-  UserCog,
   Users,
   CheckCircle,
   XCircle,
@@ -150,66 +148,83 @@ export default function AdminUsersPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 p-8">
-      {/* Header */}
-      <div className="mb-8">
-        <div className="flex items-center gap-3 mb-2">
-          <UserCog className="w-8 h-8 text-blue-600" />
-          <h1 className="text-3xl font-bold text-gray-900">Zarządzanie użytkownikami</h1>
+    <div className="space-y-3 sm:space-y-4 p-3 sm:p-4 lg:p-6">
+      {/* Header - KOMPAKTOWY */}
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-xl sm:text-2xl font-bold text-gray-900 mb-0.5">Użytkownicy</h1>
+          <p className="text-xs text-gray-500">Zarządzaj użytkownikami i uprawnieniami</p>
         </div>
-        <p className="text-gray-600">Panel administracyjny - zarządzaj użytkownikami i uprawnieniami</p>
       </div>
 
-      {/* Statystyki */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-        <StatCard
-          icon={<Users className="w-6 h-6" />}
-          label="Wszyscy użytkownicy"
-          value={stats.total}
-          color="blue"
-        />
-        <StatCard
-          icon={<Shield className="w-6 h-6" />}
-          label="Administratorzy"
-          value={stats.admins}
-          color="indigo"
-        />
-        <StatCard
-          icon={<CheckCircle className="w-6 h-6" />}
-          label="Aktywni"
-          value={stats.active}
-          color="green"
-        />
-        <StatCard
-          icon={<XCircle className="w-6 h-6" />}
-          label="Zablokowani"
-          value={stats.blocked}
-          color="red"
-        />
+      {/* Statystyki - KOMPAKTOWE */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3">
+        <div className="bg-white border border-gray-200 rounded-xl p-3 shadow-sm hover:shadow-md transition-all hover:border-blue-300">
+          <div className="flex items-center justify-between mb-2">
+            <div className="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center">
+              <Users className="w-4 h-4 text-blue-600" />
+            </div>
+            <span className="text-[10px] font-medium text-blue-600">Wszystkie</span>
+          </div>
+          <p className="text-2xl font-bold text-gray-900 mb-0.5">{stats.total}</p>
+          <p className="text-[10px] text-gray-600">Użytkowników</p>
+        </div>
+
+        <div className="bg-white border border-gray-200 rounded-xl p-3 shadow-sm hover:shadow-md transition-all hover:border-blue-300">
+          <div className="flex items-center justify-between mb-2">
+            <div className="w-8 h-8 bg-indigo-50 rounded-lg flex items-center justify-center">
+              <Shield className="w-4 h-4 text-indigo-600" />
+            </div>
+            <span className="text-[10px] font-medium text-indigo-600">Admini</span>
+          </div>
+          <p className="text-2xl font-bold text-gray-900 mb-0.5">{stats.admins}</p>
+          <p className="text-[10px] text-gray-600">Administratorzy</p>
+        </div>
+
+        <div className="bg-white border border-gray-200 rounded-xl p-3 shadow-sm hover:shadow-md transition-all hover:border-blue-300">
+          <div className="flex items-center justify-between mb-2">
+            <div className="w-8 h-8 bg-green-50 rounded-lg flex items-center justify-center">
+              <CheckCircle className="w-4 h-4 text-green-600" />
+            </div>
+            <span className="text-[10px] font-medium text-green-600">Aktywni</span>
+          </div>
+          <p className="text-2xl font-bold text-gray-900 mb-0.5">{stats.active}</p>
+          <p className="text-[10px] text-gray-600">Aktywnych kont</p>
+        </div>
+
+        <div className="bg-white border border-gray-200 rounded-xl p-3 shadow-sm hover:shadow-md transition-all hover:border-blue-300">
+          <div className="flex items-center justify-between mb-2">
+            <div className="w-8 h-8 bg-red-50 rounded-lg flex items-center justify-center">
+              <XCircle className="w-4 h-4 text-red-600" />
+            </div>
+            <span className="text-[10px] font-medium text-red-600">Zablokowani</span>
+          </div>
+          <p className="text-2xl font-bold text-gray-900 mb-0.5">{stats.blocked}</p>
+          <p className="text-[10px] text-gray-600">Zablokowanych</p>
+        </div>
       </div>
 
-      {/* Filtry i wyszukiwanie */}
-      <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      {/* Filtry i wyszukiwanie - KOMPAKTOWE */}
+      <div className="bg-white border border-gray-200 rounded-xl p-3 sm:p-4 shadow-sm">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-2 sm:gap-3">
           {/* Wyszukiwanie */}
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
             <input
               type="text"
               placeholder="Szukaj po email lub imieniu..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full pl-9 pr-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
           </div>
 
           {/* Filtr roli */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Rola</label>
             <select
               value={roleFilter}
               onChange={(e) => setRoleFilter(e.target.value as any)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none bg-white"
             >
               <option value="all">Wszystkie role</option>
               <option value="admin">Administratorzy</option>
@@ -219,11 +234,10 @@ export default function AdminUsersPage() {
 
           {/* Filtr statusu */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value as any)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none bg-white"
             >
               <option value="all">Wszystkie statusy</option>
               <option value="active">Aktywni</option>
@@ -235,105 +249,106 @@ export default function AdminUsersPage() {
 
       {/* Tabela użytkowników */}
       {loading ? (
-        <div className="bg-white rounded-lg shadow-sm p-12 text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Ładowanie użytkowników...</p>
+        <div className="bg-white border border-gray-200 rounded-xl p-8 text-center shadow-sm">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-3"></div>
+          <p className="text-sm text-gray-600">Ładowanie użytkowników...</p>
         </div>
       ) : users.length === 0 ? (
-        <div className="bg-white rounded-lg shadow-sm p-12 text-center">
-          <Users className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-          <p className="text-gray-600">Brak użytkowników do wyświetlenia</p>
+        <div className="bg-white border border-gray-200 rounded-xl p-8 text-center shadow-sm">
+          <Users className="w-10 h-10 text-gray-300 mx-auto mb-3" />
+          <h3 className="text-sm font-semibold text-gray-900 mb-1">Brak użytkowników</h3>
+          <p className="text-xs text-gray-600">Nie znaleziono użytkowników spełniających kryteria</p>
         </div>
       ) : (
-        <div className="bg-white rounded-lg shadow-sm overflow-hidden">
+        <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="bg-gray-50">
+              <thead className="bg-gray-50 border-b border-gray-200">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-3 sm:px-4 py-2.5 text-left text-[10px] font-semibold text-gray-500 uppercase tracking-wider">
                     Użytkownik
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-3 sm:px-4 py-2.5 text-left text-[10px] font-semibold text-gray-500 uppercase tracking-wider hidden md:table-cell">
                     Kontakt
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-3 sm:px-4 py-2.5 text-left text-[10px] font-semibold text-gray-500 uppercase tracking-wider">
                     Rola
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-3 sm:px-4 py-2.5 text-left text-[10px] font-semibold text-gray-500 uppercase tracking-wider">
                     Status
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-3 sm:px-4 py-2.5 text-left text-[10px] font-semibold text-gray-500 uppercase tracking-wider hidden lg:table-cell">
                     Statystyki
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-3 sm:px-4 py-2.5 text-left text-[10px] font-semibold text-gray-500 uppercase tracking-wider hidden sm:table-cell">
                     Data rejestracji
                   </th>
-                  <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-3 sm:px-4 py-2.5 text-right text-[10px] font-semibold text-gray-500 uppercase tracking-wider">
                     Akcje
                   </th>
                 </tr>
               </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
+              <tbody className="bg-white divide-y divide-gray-100">
                 {users.map((user) => (
-                  <tr key={user.id} className="hover:bg-gray-50">
+                  <tr key={user.id} className="hover:bg-gray-50 transition-colors">
                     {/* Użytkownik */}
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="flex items-center">
-                        <div className="flex-shrink-0 h-10 w-10 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
-                          <span className="text-white font-medium">
+                    <td className="px-3 sm:px-4 py-2.5">
+                      <div className="flex items-center gap-2">
+                        <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
+                          <span className="text-white text-xs font-medium">
                             {(user.first_name || user.last_name || user.email)[0].toUpperCase()}
                           </span>
                         </div>
-                        <div className="ml-4">
-                          <div className="text-sm font-medium text-gray-900">
-                            {user.first_name || user.last_name 
-                              ? `${user.first_name || ''} ${user.last_name || ''}`.trim() 
+                        <div className="min-w-0">
+                          <div className="text-xs font-medium text-gray-900 truncate">
+                            {user.first_name || user.last_name
+                              ? `${user.first_name || ''} ${user.last_name || ''}`.trim()
                               : 'Brak imienia'}
                           </div>
-                          <div className="text-sm text-gray-500 flex items-center gap-1">
-                            <Mail className="w-3 h-3" />
-                            {user.email}
+                          <div className="text-[10px] text-gray-500 flex items-center gap-1 truncate">
+                            <Mail className="w-3 h-3 flex-shrink-0" />
+                            <span className="truncate">{user.email}</span>
                           </div>
                         </div>
                       </div>
                     </td>
 
                     {/* Kontakt */}
-                    <td className="px-6 py-4 whitespace-nowrap">
+                    <td className="px-3 sm:px-4 py-2.5 hidden md:table-cell">
                       {user.phone ? (
-                        <div className="text-sm text-gray-900 flex items-center gap-1">
-                          <Phone className="w-4 h-4 text-gray-400" />
+                        <div className="text-xs text-gray-900 flex items-center gap-1">
+                          <Phone className="w-3.5 h-3.5 text-gray-400" />
                           {user.phone}
                         </div>
                       ) : (
-                        <span className="text-sm text-gray-400">Brak</span>
+                        <span className="text-[10px] text-gray-400">Brak</span>
                       )}
                     </td>
 
                     {/* Rola */}
-                    <td className="px-6 py-4 whitespace-nowrap">
+                    <td className="px-3 sm:px-4 py-2.5">
                       {user.role === 'admin' ? (
-                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800">
+                        <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium bg-indigo-100 text-indigo-800">
                           <Shield className="w-3 h-3 mr-1" />
-                          Administrator
+                          Admin
                         </span>
                       ) : (
-                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                        <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium bg-gray-100 text-gray-800">
                           <User className="w-3 h-3 mr-1" />
-                          Użytkownik
+                          User
                         </span>
                       )}
                     </td>
 
                     {/* Status */}
-                    <td className="px-6 py-4 whitespace-nowrap">
+                    <td className="px-3 sm:px-4 py-2.5">
                       {user.is_active ? (
-                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                        <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium bg-green-100 text-green-800">
                           <CheckCircle className="w-3 h-3 mr-1" />
                           Aktywny
                         </span>
                       ) : (
-                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                        <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium bg-red-100 text-red-800">
                           <XCircle className="w-3 h-3 mr-1" />
                           Zablokowany
                         </span>
@@ -341,54 +356,56 @@ export default function AdminUsersPage() {
                     </td>
 
                     {/* Statystyki */}
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-900">
-                        <div className="flex items-center gap-1">
-                          <Activity className="w-4 h-4 text-gray-400" />
-                          {user.repairs_count} zgłoszeń
-                        </div>
-                        <div className="text-xs text-gray-500 mt-1">
-                          Ost. aktywność: {format(new Date(user.last_activity), 'dd MMM yyyy', { locale: pl })}
-                        </div>
+                    <td className="px-3 sm:px-4 py-2.5 hidden lg:table-cell">
+                      <div className="text-xs text-gray-900 flex items-center gap-1">
+                        <Activity className="w-3.5 h-3.5 text-gray-400" />
+                        {user.repairs_count} zgłoszeń
+                      </div>
+                      <div className="text-[10px] text-gray-500 mt-0.5">
+                        {format(new Date(user.last_activity), 'dd MMM yyyy', { locale: pl })}
                       </div>
                     </td>
 
                     {/* Data rejestracji */}
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-900 flex items-center gap-1">
-                        <Calendar className="w-4 h-4 text-gray-400" />
+                    <td className="px-3 sm:px-4 py-2.5 hidden sm:table-cell">
+                      <div className="text-xs text-gray-900 flex items-center gap-1">
+                        <Calendar className="w-3.5 h-3.5 text-gray-400" />
                         {format(new Date(user.created_at), 'dd MMM yyyy', { locale: pl })}
                       </div>
                     </td>
 
                     {/* Akcje */}
-                    <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                      <div className="flex items-center justify-end gap-2">
+                    <td className="px-3 sm:px-4 py-2.5 text-right">
+                      <div className="flex items-center justify-end gap-1">
                         {/* Zmiana roli */}
                         <button
                           onClick={() => setChangingRoleUser(user)}
-                          className="text-indigo-600 hover:text-indigo-900"
+                          className="p-1.5 text-gray-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors"
                           title="Zmień rolę"
                         >
-                          <Shield className="w-5 h-5" />
+                          <Shield className="w-3.5 h-3.5" />
                         </button>
 
                         {/* Blokowanie/odblokowywanie */}
                         <button
                           onClick={() => setBlockingUser(user)}
-                          className={user.is_active ? 'text-red-600 hover:text-red-900' : 'text-green-600 hover:text-green-900'}
+                          className={`p-1.5 rounded-lg transition-colors ${
+                            user.is_active
+                              ? 'text-gray-400 hover:text-red-600 hover:bg-red-50'
+                              : 'text-gray-400 hover:text-green-600 hover:bg-green-50'
+                          }`}
                           title={user.is_active ? 'Zablokuj' : 'Odblokuj'}
                         >
-                          {user.is_active ? <Lock className="w-5 h-5" /> : <Unlock className="w-5 h-5" />}
+                          {user.is_active ? <Lock className="w-3.5 h-3.5" /> : <Unlock className="w-3.5 h-3.5" />}
                         </button>
 
                         {/* Edycja */}
                         <button
                           onClick={() => setEditingUser(user)}
-                          className="text-blue-600 hover:text-blue-900"
+                          className="p-1.5 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
                           title="Edytuj dane"
                         >
-                          <Edit className="w-5 h-5" />
+                          <Edit className="w-3.5 h-3.5" />
                         </button>
                       </div>
                     </td>
@@ -486,35 +503,6 @@ export default function AdminUsersPage() {
   )
 }
 
-// Komponent StatCard
-function StatCard({
-  icon,
-  label,
-  value,
-  color,
-}: {
-  icon: React.ReactNode
-  label: string
-  value: number
-  color: 'blue' | 'indigo' | 'green' | 'red'
-}) {
-  const colorClasses = {
-    blue: 'bg-blue-50 text-blue-600',
-    indigo: 'bg-indigo-50 text-indigo-600',
-    green: 'bg-green-50 text-green-600',
-    red: 'bg-red-50 text-red-600',
-  }
-
-  return (
-    <div className="bg-white rounded-lg shadow-sm p-6">
-      <div className={`inline-flex items-center justify-center w-12 h-12 rounded-lg mb-4 ${colorClasses[color]}`}>
-        {icon}
-      </div>
-      <p className="text-2xl font-bold text-gray-900">{value}</p>
-      <p className="text-sm text-gray-600">{label}</p>
-    </div>
-  )
-}
 
 // Komponent EditUserModal
 function EditUserModal({

@@ -9,7 +9,7 @@ import ProformaConfirmationModal from '@/components/ProformaConfirmationModal'
 import { CreateOrderRequest } from '@/lib/order-types'
 import { createClient } from '@/lib/supabase/client'
 import StripePaymentModal from '@/components/StripePaymentModal'
-import { 
+import {
   ShoppingCart,
   ChevronLeft,
   Building2,
@@ -29,7 +29,6 @@ import {
   Check,
   Circle,
   User,
-  Lock,
   ShieldCheck
 } from 'lucide-react'
 
@@ -109,7 +108,7 @@ const [profileAddress, setProfileAddress] = useState({
     const checkAuth = async () => {
       const supabase = createClient()
       const { data: { user } } = await supabase.auth.getUser()
-      
+
       setIsAuthenticated(!!user)
       if (user) {
         setUserEmail(user.email || '')
@@ -117,23 +116,49 @@ const [profileAddress, setProfileAddress] = useState({
         setFormData(prev => ({ ...prev, email: user.email || '' }))
       }
     }
+
+    // Sprawdź przy pierwszym załadowaniu
     checkAuth()
+
+    // Nasłuchuj na zmiany w sesji (np. po powrocie z rejestracji/logowania)
+    const supabase = createClient()
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      if (event === 'SIGNED_IN' && session?.user) {
+        setIsAuthenticated(true)
+        setUserEmail(session.user.email || '')
+        setCompletedSections(prev => ({ ...prev, account: true }))
+        setFormData(prev => ({ ...prev, email: session.user.email || '' }))
+      }
+    })
+
+    return () => {
+      subscription.unsubscribe()
+    }
   }, [])
 useEffect(() => {
     const loadProfileData = async () => {
       if (!isAuthenticated) return
 
       try {
-        const supabase = await createClient()
+        console.log('🔵 Loading profile data for autofill...')
+        const supabase = createClient()
         const { data: { user } } = await supabase.auth.getUser()
 
-        if (!user) return
+        if (!user) {
+          console.log('⚠️ No user found')
+          return
+        }
 
+        console.log('✅ User found, fetching company data...')
         const response = await fetch('/api/company-data')
-        
-        if (!response.ok) return
+
+        if (!response.ok) {
+          console.log('⚠️ Failed to fetch company data:', response.status)
+          return
+        }
 
         const { companyData } = await response.json()
+        console.log('📦 Company data received:', companyData)
 
         if (companyData) {
           // Zapisz adres z profilu osobno
@@ -147,8 +172,8 @@ useEffect(() => {
           // Autofill formularza
           setFormData(prev => ({
             ...prev,
-            contactPerson: companyData.first_name && companyData.last_name 
-              ? `${companyData.first_name} ${companyData.last_name}` 
+            contactPerson: companyData.first_name && companyData.last_name
+              ? `${companyData.first_name} ${companyData.last_name}`
               : prev.contactPerson,
             companyName: companyData.name || prev.companyName,
             nip: companyData.nip || prev.nip,
@@ -158,13 +183,20 @@ useEffect(() => {
             city: savedAddress.city || prev.city,
             postalCode: savedAddress.postalCode || prev.postalCode,
           }))
+
+          console.log('✅ Form autofilled with company data')
         }
       } catch (error) {
-        console.error('Błąd autofill:', error)
+        console.error('❌ Błąd autofill:', error)
       }
     }
 
-    loadProfileData()
+    // Dodaj małe opóźnienie dla pewności, że sesja jest zapisana
+    const timer = setTimeout(() => {
+      loadProfileData()
+    }, 300)
+
+    return () => clearTimeout(timer)
   }, [isAuthenticated])
   useEffect(() => {
     if (!mounted) return
@@ -526,28 +558,28 @@ console.log('🎯 Modal should be visible now')
 
       <Header />
 
-      <div className="pt-32 pb-16 px-6 relative z-10">
+      <div className="pt-32 pb-12 px-3 sm:px-4 lg:px-6 relative z-10">
         <div className="max-w-6xl mx-auto">
-          
+
           <Link
             href="/koszyk"
-            className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors mb-6"
+            className="inline-flex items-center gap-1.5 text-xs text-gray-600 hover:text-gray-900 transition-colors mb-3"
           >
-            <ChevronLeft className="w-5 h-5" />
+            <ChevronLeft className="w-3.5 h-3.5" />
             Powrót do koszyka
           </Link>
 
-          <div className="mb-6">
-            <h1 className="text-4xl md:text-5xl font-semibold text-gray-900 mb-2">
+          <div className="mb-4">
+            <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-1">
               Finalizacja zamówienia
             </h1>
-            <p className="text-lg text-gray-600">
+            <p className="text-sm text-gray-600">
               Uzupełnij dane do faktury i dostawy
             </p>
           </div>
 
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-sm border border-gray-200 p-6 mb-8">
-            <div className="flex items-center justify-between mb-4">
+          <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-sm border border-gray-200 p-3 sm:p-4 mb-4">
+            <div className="flex items-center justify-between mb-3">
               {[
                 { key: 'account', label: 'Konto', icon: ShieldCheck },
                 { key: 'contact', label: 'Osoba', icon: User },
@@ -558,33 +590,33 @@ console.log('🎯 Modal should be visible now')
               ].filter(step => isAuthenticated ? step.key !== 'account' : true).map((step, index) => {
                 const Icon = step.icon
                 const isComplete = completedSections[step.key as keyof typeof completedSections]
-                
+
                 return (
                   <div key={step.key} className="flex items-center flex-1">
                     <div className="flex flex-col items-center flex-1">
-                      <div className={`w-10 h-10 rounded-full flex items-center justify-center mb-2 transition-all duration-300 ${
-                        isComplete 
-                          ? 'bg-green-500 text-white' 
+                      <div className={`w-8 h-8 rounded-full flex items-center justify-center mb-1.5 transition-all duration-300 ${
+                        isComplete
+                          ? 'bg-green-500 text-white'
                           : 'bg-gray-200 text-gray-500'
                       }`}>
                         {isComplete ? (
-                          <Check className="w-5 h-5" />
+                          <Check className="w-3.5 h-3.5" />
                         ) : (
-                          <Icon className="w-5 h-5" />
+                          <Icon className="w-3.5 h-3.5" />
                         )}
                       </div>
-                      <span className={`text-xs font-medium transition-colors ${
+                      <span className={`text-[10px] font-medium transition-colors ${
                         isComplete ? 'text-green-600' : 'text-gray-500'
                       }`}>
                         {step.label}
                       </span>
                     </div>
                     {index < (isAuthenticated ? 4 : 5) && (
-                      <div className="flex-1 h-0.5 mx-2 bg-gray-200 relative overflow-hidden">
-                        <div 
+                      <div className="flex-1 h-0.5 mx-1 bg-gray-200 relative overflow-hidden">
+                        <div
                           className={`absolute inset-0 bg-green-500 transition-transform duration-500 ${
                             completedSections[
-                              (isAuthenticated 
+                              (isAuthenticated
                                 ? ['contact', 'company', 'address', 'delivery'][index]
                                 : ['account', 'contact', 'company', 'address', 'delivery'][index]) as keyof typeof completedSections
                             ] ? 'translate-x-0' : '-translate-x-full'
@@ -596,35 +628,35 @@ console.log('🎯 Modal should be visible now')
                 )
               })}
             </div>
-            <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
-              <div 
-                className="bg-gradient-to-r from-green-500 to-emerald-500 h-2 rounded-full transition-all duration-500 ease-out"
+            <div className="w-full bg-gray-200 rounded-full h-1.5 overflow-hidden">
+              <div
+                className="bg-gradient-to-r from-green-500 to-emerald-500 h-1.5 rounded-full transition-all duration-500 ease-out"
                 style={{ width: `${progressPercentage}%` }}
               />
             </div>
-            <p className="text-xs text-gray-600 text-center mt-2">
+            <p className="text-[10px] text-gray-600 text-center mt-1.5">
               Wypełniono {Math.round(progressPercentage)}% formularza
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-3 gap-8">
-            
-            <div className="lg:col-span-2 space-y-6">
+          <div className="grid lg:grid-cols-3 gap-4">
+
+            <div className="lg:col-span-2 space-y-3">
 
               {!isAuthenticated && (
-                <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-sm border border-gray-200 p-6 transition-all duration-300 hover:shadow-md">
-                  <div className="flex items-center justify-between mb-4">
-                    <h2 className="text-lg font-semibold text-gray-900 flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-full bg-gray-900 text-white flex items-center justify-center text-sm font-bold">
+                <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-sm border border-gray-200 p-3 sm:p-4 transition-all duration-300 hover:shadow-md">
+                  <div className="flex items-center justify-between mb-3">
+                    <h2 className="text-sm font-semibold text-gray-900 flex items-center gap-2">
+                      <div className="w-6 h-6 rounded-full bg-gray-900 text-white flex items-center justify-center text-xs font-bold">
                         1
                       </div>
                       Jak chcesz złożyć zamówienie?
                     </h2>
                   </div>
 
-                  <div className="space-y-3">
+                  <div className="space-y-2">
                     <label
-                      className={`flex items-start gap-4 p-4 rounded-xl border-2 cursor-pointer transition-all ${
+                      className={`flex items-start gap-3 p-3 rounded-lg border-2 cursor-pointer transition-all ${
                         checkoutAsGuest
                           ? 'border-gray-900 bg-gray-50 shadow-sm'
                           : 'border-gray-200 bg-white hover:border-gray-300'
@@ -635,35 +667,35 @@ console.log('🎯 Modal should be visible now')
                         name="accountType"
                         checked={checkoutAsGuest}
                         onChange={() => setCheckoutAsGuest(true)}
-                        className="mt-1 w-5 h-5 text-gray-900 focus:ring-gray-900"
+                        className="mt-0.5 w-4 h-4 text-gray-900 focus:ring-gray-900"
                       />
                       <div className="flex-1">
-                        <div className="font-semibold text-gray-900">Kupuję jako gość</div>
-                        <p className="text-sm text-gray-600 mb-3">
+                        <div className="text-sm font-semibold text-gray-900">Kupuję jako gość</div>
+                        <p className="text-xs text-gray-600 mb-2">
                           Złóż zamówienie bez zakładania konta
                         </p>
-                        
+
                         {checkoutAsGuest && (
                           <div>
-                            <label htmlFor="guestEmail" className="block text-sm font-medium text-gray-700 mb-2">
+                            <label htmlFor="guestEmail" className="block text-xs font-medium text-gray-700 mb-1.5">
                               Email *
                             </label>
                             <div className="relative">
-                              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                              <Mail className="absolute left-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                               <input
                                 type="email"
                                 id="guestEmail"
                                 name="guestEmail"
                                 value={formData.guestEmail}
                                 onChange={handleChange}
-                                className={`w-full pl-11 pr-4 py-3 rounded-xl border ${
+                                className={`w-full pl-9 pr-3 py-2 text-sm rounded-lg border ${
                                   errors.guestEmail ? 'border-red-300 bg-red-50 animate-shake' : 'border-gray-200 bg-white'
                                 } focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all`}
                                 placeholder="twoj@email.pl"
                               />
                             </div>
                             {errors.guestEmail && (
-                              <p className="mt-1 text-sm text-red-600 animate-fadeIn">{errors.guestEmail}</p>
+                              <p className="mt-1 text-xs text-red-600 animate-fadeIn">{errors.guestEmail}</p>
                             )}
                           </div>
                         )}
@@ -671,7 +703,7 @@ console.log('🎯 Modal should be visible now')
                     </label>
 
                     <label
-                      className={`flex items-start gap-4 p-4 rounded-xl border-2 cursor-pointer transition-all ${
+                      className={`flex items-start gap-3 p-3 rounded-lg border-2 cursor-pointer transition-all ${
                         !checkoutAsGuest
                           ? 'border-gray-900 bg-gray-50 shadow-sm'
                           : 'border-gray-200 bg-white hover:border-gray-300'
@@ -682,22 +714,33 @@ console.log('🎯 Modal should be visible now')
                         name="accountType"
                         checked={!checkoutAsGuest}
                         onChange={() => setCheckoutAsGuest(false)}
-                        className="mt-1 w-5 h-5 text-gray-900 focus:ring-gray-900"
+                        className="mt-0.5 w-4 h-4 text-gray-900 focus:ring-gray-900"
                       />
                       <div className="flex-1">
-                        <div className="font-semibold text-gray-900">Mam już konto</div>
-                        <p className="text-sm text-gray-600 mb-3">
-                          Zaloguj się, aby kontynuować
+                        <div className="text-sm font-semibold text-gray-900">Utwórz konto</div>
+                        <p className="text-xs text-gray-600 mb-2">
+                          Załóż konto i korzystaj z dodatkowych korzyści
                         </p>
-                        
+
                         {!checkoutAsGuest && (
-                          <Link
-                            href="/logowanie?redirect=/checkout"
-                            className="inline-flex items-center gap-2 px-4 py-2 bg-gray-900 text-white rounded-xl hover:bg-gray-800 transition-colors"
-                          >
-                            <Lock className="w-4 h-4" />
-                            Zaloguj się
-                          </Link>
+                          <div className="space-y-1.5">
+                            <Link
+                              href="/rejestracja?redirect=/checkout"
+                              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors text-sm"
+                            >
+                              <User className="w-3.5 h-3.5" />
+                              Załóż konto
+                            </Link>
+                            <div className="text-xs text-gray-600">
+                              Mam już konto?{' '}
+                              <Link
+                                href="/logowanie?redirect=/checkout"
+                                className="text-blue-600 hover:underline font-semibold"
+                              >
+                                Zaloguj się
+                              </Link>
+                            </div>
+                          </div>
                         )}
                       </div>
                     </label>
@@ -706,23 +749,23 @@ console.log('🎯 Modal should be visible now')
               )}
 
               {isAuthenticated && (
-                <div className="bg-green-50 border border-green-200 rounded-2xl p-4 flex items-center gap-3">
-                  <ShieldCheck className="w-5 h-5 text-green-600" />
+                <div className="bg-green-50 border border-green-200 rounded-lg p-3 flex items-center gap-2">
+                  <ShieldCheck className="w-4 h-4 text-green-600" />
                   <div>
-                    <p className="text-sm font-semibold text-green-900">
+                    <p className="text-xs font-semibold text-green-900">
                       Zalogowany jako: {userEmail}
                     </p>
-                    <p className="text-xs text-green-700">
+                    <p className="text-[10px] text-green-700">
                       Twoje zamówienie zostanie przypisane do konta
                     </p>
                   </div>
                 </div>
               )}
 
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-sm border border-gray-200 p-6 transition-all duration-300 hover:shadow-md">
-                <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-lg font-semibold text-gray-900 flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-full bg-gray-900 text-white flex items-center justify-center text-sm font-bold">
+              <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-sm border border-gray-200 p-3 sm:p-4 transition-all duration-300 hover:shadow-md">
+                <div className="flex items-center justify-between mb-3">
+                  <h2 className="text-sm font-semibold text-gray-900 flex items-center gap-2">
+                    <div className="w-6 h-6 rounded-full bg-gray-900 text-white flex items-center justify-center text-xs font-bold">
                       {isAuthenticated ? '1' : '2'}
                     </div>
                     Osoba zamawiająca
@@ -730,169 +773,168 @@ console.log('🎯 Modal should be visible now')
                 </div>
 
                 <div>
-                  <label htmlFor="contactPerson" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="contactPerson" className="block text-xs font-medium text-gray-700 mb-1.5">
                     Imię i nazwisko *
                   </label>
                   <div className="relative">
-                    <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                    <User className="absolute left-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                     <input
                       type="text"
                       id="contactPerson"
                       name="contactPerson"
                       value={formData.contactPerson}
                       onChange={handleChange}
-                      className={`w-full pl-11 pr-4 py-3 rounded-xl border ${
+                      className={`w-full pl-9 pr-3 py-2 text-sm rounded-lg border ${
                         errors.contactPerson ? 'border-red-300 bg-red-50 animate-shake' : 'border-gray-200 bg-white'
                       } focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all`}
                       placeholder="Jan Kowalski"
                     />
                   </div>
                   {errors.contactPerson && (
-                    <p className="mt-1 text-sm text-red-600 animate-fadeIn">{errors.contactPerson}</p>
+                    <p className="mt-1 text-xs text-red-600 animate-fadeIn">{errors.contactPerson}</p>
                   )}
                 </div>
               </div>
               
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-sm border border-gray-200 p-6 transition-all duration-300 hover:shadow-md">
-                <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-lg font-semibold text-gray-900 flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-full bg-gray-900 text-white flex items-center justify-center text-sm font-bold">
+              <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-sm border border-gray-200 p-3 sm:p-4 transition-all duration-300 hover:shadow-md">
+                <div className="flex items-center justify-between mb-3">
+                  <h2 className="text-sm font-semibold text-gray-900 flex items-center gap-2">
+                    <div className="w-6 h-6 rounded-full bg-gray-900 text-white flex items-center justify-center text-xs font-bold">
                       {isAuthenticated ? '2' : '3'}
                     </div>
                     Dane firmy
                   </h2>
                   {completedSections.company && (
-                    <div className="flex items-center gap-2 text-green-600 text-sm font-medium">
-                      <Check className="w-4 h-4" />
+                    <div className="flex items-center gap-1 text-green-600 text-xs font-medium">
+                      <Check className="w-3.5 h-3.5" />
                       Wypełnione
                     </div>
                   )}
                 </div>
 
-                <div className="space-y-4">
+                <div className="space-y-3">
                   <div>
-                    <label htmlFor="companyName" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label htmlFor="companyName" className="block text-xs font-medium text-gray-700 mb-1.5">
                       Nazwa firmy *
                     </label>
                     <div className="relative">
-                      <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                      <Building2 className="absolute left-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                       <input
                         type="text"
                         id="companyName"
                         name="companyName"
                         value={formData.companyName}
                         onChange={handleChange}
-                        className={`w-full pl-11 pr-4 py-3 rounded-xl border ${
+                        className={`w-full pl-9 pr-3 py-2 text-sm rounded-lg border ${
                           errors.companyName ? 'border-red-300 bg-red-50 animate-shake' : 'border-gray-200 bg-white'
                         } focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all`}
                         placeholder="Nazwa firmy"
                       />
                     </div>
                     {errors.companyName && (
-                      <p className="mt-1 text-sm text-red-600 animate-fadeIn">{errors.companyName}</p>
+                      <p className="mt-1 text-xs text-red-600 animate-fadeIn">{errors.companyName}</p>
                     )}
                   </div>
 
                   <div>
-                    <label htmlFor="nip" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label htmlFor="nip" className="block text-xs font-medium text-gray-700 mb-1.5">
                       NIP *
                     </label>
                     <div className="relative">
-                      <FileText className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                      <FileText className="absolute left-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                       <input
                         type="text"
                         id="nip"
                         name="nip"
                         value={formData.nip}
                         onChange={handleChange}
-                        className={`w-full pl-11 pr-4 py-3 rounded-xl border ${
+                        className={`w-full pl-9 pr-3 py-2 text-sm rounded-lg border ${
                           errors.nip ? 'border-red-300 bg-red-50 animate-shake' : 'border-gray-200 bg-white'
                         } focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all`}
                         placeholder="NIP"
                       />
                     </div>
                     {errors.nip && (
-                      <p className="mt-1 text-sm text-red-600 animate-fadeIn">{errors.nip}</p>
+                      <p className="mt-1 text-xs text-red-600 animate-fadeIn">{errors.nip}</p>
                     )}
                   </div>
 
-                  <div className="grid md:grid-cols-2 gap-4">
+                  <div className="grid md:grid-cols-2 gap-3">
                     <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                      <label htmlFor="email" className="block text-xs font-medium text-gray-700 mb-1.5">
                         Email *
                       </label>
                       <div className="relative">
-                        <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                        <Mail className="absolute left-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                         <input
                           type="email"
                           id="email"
                           name="email"
                           value={formData.email}
                           onChange={handleChange}
-                          className={`w-full pl-11 pr-4 py-3 rounded-xl border ${
+                          className={`w-full pl-9 pr-3 py-2 text-sm rounded-lg border ${
                             errors.email ? 'border-red-300 bg-red-50 animate-shake' : 'border-gray-200 bg-white'
                           } focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all`}
                           placeholder="Email"
                         />
                       </div>
                       {errors.email && (
-                        <p className="mt-1 text-sm text-red-600 animate-fadeIn">{errors.email}</p>
+                        <p className="mt-1 text-xs text-red-600 animate-fadeIn">{errors.email}</p>
                       )}
                     </div>
 
                     <div>
-                      <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
+                      <label htmlFor="phone" className="block text-xs font-medium text-gray-700 mb-1.5">
                         Telefon *
                       </label>
                       <div className="relative">
-                        <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                        <Phone className="absolute left-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                         <input
                           type="tel"
                           id="phone"
                           name="phone"
                           value={formData.phone}
                           onChange={handleChange}
-                          className={`w-full pl-11 pr-4 py-3 rounded-xl border ${
+                          className={`w-full pl-9 pr-3 py-2 text-sm rounded-lg border ${
                             errors.phone ? 'border-red-300 bg-red-50 animate-shake' : 'border-gray-200 bg-white'
                           } focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all`}
                           placeholder="Telefon"
                         />
                       </div>
                       {errors.phone && (
-                        <p className="mt-1 text-sm text-red-600 animate-fadeIn">{errors.phone}</p>
+                        <p className="mt-1 text-xs text-red-600 animate-fadeIn">{errors.phone}</p>
                       )}
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-sm border border-gray-200 p-6 transition-all duration-300 hover:shadow-md">
-                <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-lg font-semibold text-gray-900 flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-full bg-gray-900 text-white flex items-center justify-center text-sm font-bold">
+              <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-sm border border-gray-200 p-3 sm:p-4 transition-all duration-300 hover:shadow-md">
+                <div className="flex items-center justify-between mb-3">
+                  <h2 className="text-sm font-semibold text-gray-900 flex items-center gap-2">
+                    <div className="w-6 h-6 rounded-full bg-gray-900 text-white flex items-center justify-center text-xs font-bold">
                       {isAuthenticated ? '3' : '4'}
                     </div>
                     Adres dostawy
                   </h2>
                   {completedSections.address && (
-                    <div className="flex items-center gap-2 text-green-600 text-sm font-medium">
-                      <Check className="w-4 h-4" />
+                    <div className="flex items-center gap-1 text-green-600 text-xs font-medium">
+                      <Check className="w-3.5 h-3.5" />
                       Wypełnione
                     </div>
                   )}
                 </div>
 
-                <div className="space-y-4">
+                <div className="space-y-3">
                                       {/* CHECKBOX - WKLEJ TUTAJ */}
                   {isAuthenticated && profileAddress.street && (
-                    <label className="flex items-center gap-2 p-3 bg-blue-50 border border-blue-200 rounded-xl cursor-pointer hover:bg-blue-100 transition-all">
+                    <label className="flex items-center gap-2 p-2 bg-blue-50 border border-blue-200 rounded-lg cursor-pointer hover:bg-blue-100 transition-all">
                       <input
                         type="checkbox"
                         checked={!useProfileAddress}
                         onChange={(e) => {
                           setUseProfileAddress(!e.target.checked)
                           if (e.target.checked) {
-                            // Wyczyść pola adresu - klient chce podać inny
                             setFormData(prev => ({
                               ...prev,
                               street: '',
@@ -900,7 +942,6 @@ console.log('🎯 Modal should be visible now')
                               postalCode: ''
                             }))
                           } else {
-                            // Przywróć adres z profilu
                             setFormData(prev => ({
                               ...prev,
                               street: profileAddress.street,
@@ -909,39 +950,39 @@ console.log('🎯 Modal should be visible now')
                             }))
                           }
                         }}
-                        className="w-4 h-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500"
+                        className="w-3.5 h-3.5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"
                       />
-                      <span className="text-sm font-medium text-blue-900">
+                      <span className="text-xs font-medium text-blue-900">
                         Wyślij na inny adres niż zapisany w profilu
                       </span>
                     </label>
                   )}
                   <div>
-                    <label htmlFor="street" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label htmlFor="street" className="block text-xs font-medium text-gray-700 mb-1.5">
                       Ulica i numer *
                     </label>
                     <div className="relative">
-                      <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                      <MapPin className="absolute left-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                       <input
                         type="text"
                         id="street"
                         name="street"
                         value={formData.street}
                         onChange={handleChange}
-                        className={`w-full pl-11 pr-4 py-3 rounded-xl border ${
+                        className={`w-full pl-9 pr-3 py-2 text-sm rounded-lg border ${
                           errors.street ? 'border-red-300 bg-red-50 animate-shake' : 'border-gray-200 bg-white'
                         } focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all`}
                         placeholder="Ulica i numer"
                       />
                     </div>
                     {errors.street && (
-                      <p className="mt-1 text-sm text-red-600 animate-fadeIn">{errors.street}</p>
+                      <p className="mt-1 text-xs text-red-600 animate-fadeIn">{errors.street}</p>
                     )}
                   </div>
 
-                  <div className="grid md:grid-cols-2 gap-4">
+                  <div className="grid md:grid-cols-2 gap-3">
                     <div>
-                      <label htmlFor="postalCode" className="block text-sm font-medium text-gray-700 mb-2">
+                      <label htmlFor="postalCode" className="block text-xs font-medium text-gray-700 mb-1.5">
                         Kod pocztowy *
                       </label>
                       <input
@@ -950,18 +991,18 @@ console.log('🎯 Modal should be visible now')
                         name="postalCode"
                         value={formData.postalCode}
                         onChange={handleChange}
-                        className={`w-full px-4 py-3 rounded-xl border ${
+                        className={`w-full px-3 py-2 text-sm rounded-lg border ${
                           errors.postalCode ? 'border-red-300 bg-red-50 animate-shake' : 'border-gray-200 bg-white'
                         } focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all`}
                         placeholder="Kod pocztowy"
                       />
                       {errors.postalCode && (
-                        <p className="mt-1 text-sm text-red-600 animate-fadeIn">{errors.postalCode}</p>
+                        <p className="mt-1 text-xs text-red-600 animate-fadeIn">{errors.postalCode}</p>
                       )}
                     </div>
 
                     <div>
-                      <label htmlFor="city" className="block text-sm font-medium text-gray-700 mb-2">
+                      <label htmlFor="city" className="block text-xs font-medium text-gray-700 mb-1.5">
                         Miasto *
                       </label>
                       <input
@@ -970,19 +1011,19 @@ console.log('🎯 Modal should be visible now')
                         name="city"
                         value={formData.city}
                         onChange={handleChange}
-                        className={`w-full px-4 py-3 rounded-xl border ${
+                        className={`w-full px-3 py-2 text-sm rounded-lg border ${
                           errors.city ? 'border-red-300 bg-red-50 animate-shake' : 'border-gray-200 bg-white'
                         } focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all`}
                         placeholder="Miasto"
                       />
                       {errors.city && (
-                        <p className="mt-1 text-sm text-red-600 animate-fadeIn">{errors.city}</p>
+                        <p className="mt-1 text-xs text-red-600 animate-fadeIn">{errors.city}</p>
                       )}
                     </div>
                   </div>
 
                   <div>
-                    <label htmlFor="notes" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label htmlFor="notes" className="block text-xs font-medium text-gray-700 mb-1.5">
                       Uwagi do zamówienia (opcjonalnie)
                     </label>
                     <textarea
@@ -991,32 +1032,32 @@ console.log('🎯 Modal should be visible now')
                       value={formData.notes}
                       onChange={handleChange}
                       rows={3}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all resize-none"
+                      className="w-full px-3 py-2 text-sm rounded-lg border border-gray-200 bg-white focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all resize-none"
                       placeholder="Uwagi do zamówienia..."
                     />
                   </div>
                 </div>
               </div>
 
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-sm border border-gray-200 p-6 transition-all duration-300 hover:shadow-md">
-                <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-lg font-semibold text-gray-900 flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-full bg-gray-900 text-white flex items-center justify-center text-sm font-bold">
+              <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-sm border border-gray-200 p-3 sm:p-4 transition-all duration-300 hover:shadow-md">
+                <div className="flex items-center justify-between mb-3">
+                  <h2 className="text-sm font-semibold text-gray-900 flex items-center gap-2">
+                    <div className="w-6 h-6 rounded-full bg-gray-900 text-white flex items-center justify-center text-xs font-bold">
                       {isAuthenticated ? '4' : '5'}
                     </div>
                     Sposób dostawy
                   </h2>
                   {completedSections.delivery && (
-                    <div className="flex items-center gap-2 text-green-600 text-sm font-medium">
-                      <Check className="w-4 h-4" />
+                    <div className="flex items-center gap-1 text-green-600 text-xs font-medium">
+                      <Check className="w-3.5 h-3.5" />
                       Wypełnione
                     </div>
                   )}
                 </div>
 
-                <div className="space-y-3">
+                <div className="space-y-2">
                   <label
-                    className={`flex items-start gap-4 p-4 rounded-xl border-2 cursor-pointer transition-all ${
+                    className={`flex items-start gap-3 p-3 rounded-lg border-2 cursor-pointer transition-all ${
                       deliveryMethod === 'courier'
                         ? 'border-gray-900 bg-gray-50 shadow-sm'
                         : 'border-gray-200 bg-white hover:border-gray-300'
@@ -1031,24 +1072,24 @@ console.log('🎯 Modal should be visible now')
                         setDeliveryMethod('courier')
                         setHasInteractedWith(prev => ({ ...prev, delivery: true }))
                       }}
-                      className="mt-1 w-5 h-5 text-gray-900 focus:ring-gray-900"
+                      className="mt-0.5 w-4 h-4 text-gray-900 focus:ring-gray-900"
                     />
                     <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-1">
-                        <Truck className="w-5 h-5 text-gray-700" />
-                        <span className="font-semibold text-gray-900">Kurier DPD/InPost</span>
+                      <div className="flex items-center gap-1.5 mb-0.5">
+                        <Truck className="w-4 h-4 text-gray-700" />
+                        <span className="text-sm font-semibold text-gray-900">Kurier DPD/InPost</span>
                       </div>
-                      <p className="text-sm text-gray-600">
+                      <p className="text-xs text-gray-600">
                         Dostawa na adres w ciągu 1-2 dni roboczych
                       </p>
-                      <p className="text-sm font-semibold text-gray-900 mt-2">
+                      <p className="text-xs font-semibold text-gray-900 mt-1">
                         Koszt: 20.00 zł netto (24.60 zł brutto)
                       </p>
                     </div>
                   </label>
 
                   <label
-                    className={`flex items-start gap-4 p-4 rounded-xl border-2 cursor-pointer transition-all ${
+                    className={`flex items-start gap-3 p-3 rounded-lg border-2 cursor-pointer transition-all ${
                       deliveryMethod === 'osobisty'
                         ? 'border-gray-900 bg-gray-50 shadow-sm'
                         : 'border-gray-200 bg-white hover:border-gray-300'
@@ -1063,17 +1104,17 @@ console.log('🎯 Modal should be visible now')
                         setDeliveryMethod('osobisty')
                         setHasInteractedWith(prev => ({ ...prev, delivery: true }))
                       }}
-                      className="mt-1 w-5 h-5 text-gray-900 focus:ring-gray-900"
+                      className="mt-0.5 w-4 h-4 text-gray-900 focus:ring-gray-900"
                     />
                     <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-1">
-                        <MapPin className="w-5 h-5 text-gray-700" />
-                        <span className="font-semibold text-gray-900">Odbiór osobisty</span>
+                      <div className="flex items-center gap-1.5 mb-0.5">
+                        <MapPin className="w-4 h-4 text-gray-700" />
+                        <span className="text-sm font-semibold text-gray-900">Odbiór osobisty</span>
                       </div>
-                      <p className="text-sm text-gray-600">
+                      <p className="text-xs text-gray-600">
                         Odbiór w naszym serwisie: ul. Poświęcka 1a, Wrocław
                       </p>
-                      <p className="text-sm font-semibold text-green-600 mt-2">
+                      <p className="text-xs font-semibold text-green-600 mt-1">
                         Koszt: 0.00 zł (Darmowy odbiór)
                       </p>
                     </div>
@@ -1081,25 +1122,25 @@ console.log('🎯 Modal should be visible now')
                 </div>
               </div>
 
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-sm border border-gray-200 p-6 transition-all duration-300 hover:shadow-md">
-                <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-lg font-semibold text-gray-900 flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-full bg-gray-900 text-white flex items-center justify-center text-sm font-bold">
+              <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-sm border border-gray-200 p-3 sm:p-4 transition-all duration-300 hover:shadow-md">
+                <div className="flex items-center justify-between mb-3">
+                  <h2 className="text-sm font-semibold text-gray-900 flex items-center gap-2">
+                    <div className="w-6 h-6 rounded-full bg-gray-900 text-white flex items-center justify-center text-xs font-bold">
                       {isAuthenticated ? '5' : '6'}
                     </div>
                     Metoda płatności
                   </h2>
                   {completedSections.payment && (
-                    <div className="flex items-center gap-2 text-green-600 text-sm font-medium">
-                      <Check className="w-4 h-4" />
+                    <div className="flex items-center gap-1 text-green-600 text-xs font-medium">
+                      <Check className="w-3.5 h-3.5" />
                       Wypełnione
                     </div>
                   )}
                 </div>
 
-                <div className="space-y-3">
+                <div className="space-y-2">
                   <label
-                    className={`flex items-start gap-4 p-4 rounded-xl border-2 cursor-pointer transition-all ${
+                    className={`flex items-start gap-3 p-3 rounded-lg border-2 cursor-pointer transition-all ${
                       paymentMethod === 'bankTransfer'
                         ? 'border-gray-900 bg-gray-50 shadow-sm'
                         : 'border-gray-200 bg-white hover:border-gray-300'
@@ -1114,21 +1155,21 @@ console.log('🎯 Modal should be visible now')
                         setPaymentMethod('bankTransfer')
                         setHasInteractedWith(prev => ({ ...prev, payment: true }))
                       }}
-                      className="mt-1 w-5 h-5 text-gray-900 focus:ring-gray-900"
+                      className="mt-0.5 w-4 h-4 text-gray-900 focus:ring-gray-900"
                     />
                     <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-1">
-                        <Banknote className="w-5 h-5 text-gray-700" />
-                        <span className="font-semibold text-gray-900">Przelew bankowy</span>
+                      <div className="flex items-center gap-1.5 mb-0.5">
+                        <Banknote className="w-4 h-4 text-gray-700" />
+                        <span className="text-sm font-semibold text-gray-900">Przelew bankowy</span>
                       </div>
-                      <p className="text-sm text-gray-600">
+                      <p className="text-xs text-gray-600">
                         Dane do przelewu otrzymasz na email po złożeniu zamówienia
                       </p>
                     </div>
                   </label>
 
                   <label
-                    className={`flex items-start gap-4 p-4 rounded-xl border-2 cursor-pointer transition-all ${
+                    className={`flex items-start gap-3 p-3 rounded-lg border-2 cursor-pointer transition-all ${
                       paymentMethod === 'proforma'
                         ? 'border-gray-900 bg-gray-50 shadow-sm'
                         : 'border-gray-200 bg-white hover:border-gray-300'
@@ -1143,21 +1184,21 @@ console.log('🎯 Modal should be visible now')
                         setPaymentMethod('proforma')
                         setHasInteractedWith(prev => ({ ...prev, payment: true }))
                       }}
-                      className="mt-1 w-5 h-5 text-gray-900 focus:ring-gray-900"
+                      className="mt-0.5 w-4 h-4 text-gray-900 focus:ring-gray-900"
                     />
                     <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-1">
-                        <Download className="w-5 h-5 text-gray-700" />
-                        <span className="font-semibold text-gray-900">Faktura pro forma</span>
+                      <div className="flex items-center gap-1.5 mb-0.5">
+                        <Download className="w-4 h-4 text-gray-700" />
+                        <span className="text-sm font-semibold text-gray-900">Faktura pro forma</span>
                       </div>
-                      <p className="text-sm text-gray-600">
+                      <p className="text-xs text-gray-600">
                         Pobierz fakturę pro forma i opłać ją w dogodnym terminie
                       </p>
                     </div>
                   </label>
 
                   <label
-                    className={`flex items-start gap-4 p-4 rounded-xl border-2 cursor-pointer transition-all ${
+                    className={`flex items-start gap-3 p-3 rounded-lg border-2 cursor-pointer transition-all ${
                       paymentMethod === 'stripe'
                         ? 'border-gray-900 bg-gray-50 shadow-sm'
                         : 'border-gray-200 bg-white hover:border-gray-300'
@@ -1172,14 +1213,14 @@ console.log('🎯 Modal should be visible now')
                         setPaymentMethod('stripe')
                         setHasInteractedWith(prev => ({ ...prev, payment: true }))
                       }}
-                      className="mt-1 w-5 h-5 text-gray-900 focus:ring-gray-900"
+                      className="mt-0.5 w-4 h-4 text-gray-900 focus:ring-gray-900"
                     />
                     <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-1">
-                        <CreditCard className="w-5 h-5 text-gray-700" />
-                        <span className="font-semibold text-gray-900">Płatność online</span>
+                      <div className="flex items-center gap-1.5 mb-0.5">
+                        <CreditCard className="w-4 h-4 text-gray-700" />
+                        <span className="text-sm font-semibold text-gray-900">Płatność online</span>
                       </div>
-                      <p className="text-sm text-gray-600">
+                      <p className="text-xs text-gray-600">
                         Przelewy bankowe przez Przelewy24, BLIK, karty płatnicze
                       </p>
                     </div>
@@ -1190,31 +1231,31 @@ console.log('🎯 Modal should be visible now')
             </div>
 
             <div className="lg:col-span-1">
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-sm border border-gray-200 p-6 sticky top-32 transition-all duration-300">
-                <h2 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-3">
-                  <div className="w-1 h-6 bg-gray-900 rounded-full" />
+              <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-sm border border-gray-200 p-3 sm:p-4 sticky top-32 transition-all duration-300">
+                <h2 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                  <div className="w-1 h-5 bg-gray-900 rounded-full" />
                   Podsumowanie
                 </h2>
 
-                <div className="space-y-3 mb-6 max-h-64 overflow-y-auto">
+                <div className="space-y-2 mb-4 max-h-64 overflow-y-auto">
                   {items.map((item) => {
                     const Icon = PRODUCT_TYPE_ICONS[item.product_type] || Package
-                    
+
                     return (
-                      <div key={item.id} className="flex gap-3 pb-3 border-b border-gray-200 last:border-0">
-                        <div className="w-12 h-12 bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                          <Icon className="w-6 h-6 text-gray-400" />
+                      <div key={item.id} className="flex gap-2 pb-2 border-b border-gray-200 last:border-0">
+                        <div className="w-10 h-10 bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                          <Icon className="w-4 h-4 text-gray-400" />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className="text-sm font-medium text-gray-900 line-clamp-2">
+                          <p className="text-xs font-medium text-gray-900 line-clamp-2">
                             {item.name}
                           </p>
-                          <p className="text-xs text-gray-600 mt-1">
+                          <p className="text-[10px] text-gray-600 mt-0.5">
                             {item.quantity} × {item.price.toFixed(2)} zł
                           </p>
                         </div>
                         <div className="text-right">
-                          <p className="text-sm font-bold text-gray-900">
+                          <p className="text-xs font-bold text-gray-900">
                             {(item.price * item.quantity).toFixed(2)} zł
                           </p>
                         </div>
@@ -1223,15 +1264,15 @@ console.log('🎯 Modal should be visible now')
                   })}
                 </div>
 
-                <div className="space-y-2 pt-4 border-t border-gray-200">
-                  <div className="flex items-center justify-between text-sm text-gray-700">
+                <div className="space-y-1.5 pt-3 border-t border-gray-200">
+                  <div className="flex items-center justify-between text-xs text-gray-700">
                     <span>Suma netto</span>
                     <span className="font-semibold text-gray-900">
                       {getTotalPrice.toFixed(2)} zł
                     </span>
                   </div>
-                  
-                  <div className="flex items-center justify-between text-sm text-gray-700 transition-all duration-300">
+
+                  <div className="flex items-center justify-between text-xs text-gray-700 transition-all duration-300">
                     <span>Dostawa {deliveryMethod === 'courier' ? '(Kurier)' : '(Odbiór osobisty)'}</span>
                     <span className={`font-semibold transition-colors ${
                       deliveryMethod === 'osobisty' ? 'text-green-600' : 'text-gray-900'
@@ -1239,17 +1280,17 @@ console.log('🎯 Modal should be visible now')
                       {deliveryMethod === 'courier' ? '20.00' : '0.00'} zł
                     </span>
                   </div>
-                  
-                  <div className="flex items-center justify-between text-sm text-gray-700 transition-all duration-300">
+
+                  <div className="flex items-center justify-between text-xs text-gray-700 transition-all duration-300">
                     <span>VAT (23%)</span>
                     <span className="font-semibold text-gray-900">
                       {(vatAmount + (deliveryMethod === 'courier' ? 20 * 0.23 : 0)).toFixed(2)} zł
                     </span>
                   </div>
-                  
-                  <div className="flex items-center justify-between pt-2 border-t border-gray-200 transition-all duration-300">
-                    <span className="font-semibold text-gray-700">Suma brutto</span>
-                    <span className="text-xl font-black text-gray-900">
+
+                  <div className="flex items-center justify-between pt-1.5 border-t border-gray-200 transition-all duration-300">
+                    <span className="text-sm font-semibold text-gray-700">Suma brutto</span>
+                    <span className="text-lg font-black text-gray-900">
                       {(getTotalPriceBrutto + (deliveryMethod === 'courier' ? 24.60 : 0.00)).toFixed(2)} zł
                     </span>
                   </div>
@@ -1258,33 +1299,33 @@ console.log('🎯 Modal should be visible now')
                 <button
                   onClick={handleSubmit}
                   disabled={isSubmitting || (!isAuthenticated && !checkoutAsGuest)}
-                  className="w-full mt-6 py-3 px-6 rounded-xl font-semibold text-sm transition-all duration-200 flex items-center justify-center gap-2 bg-gradient-to-r from-green-600 to-emerald-600 text-white hover:from-green-700 hover:to-emerald-700 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full mt-4 py-2.5 px-4 rounded-lg font-semibold text-sm transition-all duration-200 flex items-center justify-center gap-1.5 bg-gradient-to-r from-green-600 to-emerald-600 text-white hover:from-green-700 hover:to-emerald-700 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isSubmitting ? (
                     <>
-                      <Loader2 className="w-4 h-4 animate-spin" />
+                      <Loader2 className="w-3.5 h-3.5 animate-spin" />
                       Przetwarzanie...
                     </>
                   ) : paymentMethod === 'proforma' ? (
                     <>
-                      <Download className="w-4 h-4" />
+                      <Download className="w-3.5 h-3.5" />
                       Złóż zamówienie
                     </>
                   ) : (
                     <>
-                      <ShoppingCart className="w-4 h-4" />
+                      <ShoppingCart className="w-3.5 h-3.5" />
                       Złóż zamówienie
                     </>
                   )}
                 </button>
 
                 {!isAuthenticated && !checkoutAsGuest && (
-                  <p className="text-xs text-red-600 text-center mt-2">
+                  <p className="text-[10px] text-red-600 text-center mt-2">
                     Wybierz opcję konta, aby kontynuować
                   </p>
                 )}
 
-                <p className="text-xs text-gray-500 text-center mt-4">
+                <p className="text-[10px] text-gray-500 text-center mt-3">
                   Składając zamówienie akceptujesz regulamin sklepu
                 </p>
               </div>
@@ -1295,7 +1336,7 @@ console.log('🎯 Modal should be visible now')
         </div>
       </div>
 
-      <footer className="bg-gray-900 text-white py-12 px-6">
+      <footer className="bg-gray-900 text-white py-8 px-6">
         <div className="max-w-7xl mx-auto text-center">
           <p className="text-gray-400">
             © 2025 TAKMA - Autoryzowany Serwis Zebra

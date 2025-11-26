@@ -1,13 +1,15 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import { 
+import {
   ArrowRight,
   MessageSquare,
   User,
   Sparkles,
   Loader2,
-  Send
+  Send,
+  Mic,
+  MicOff
 } from 'lucide-react'
 
 interface Message {
@@ -15,19 +17,21 @@ interface Message {
   content: string
 }
 
+const placeholders = [
+  "Opisz problem z drukarką...",
+  "Opisz problem z terminalem...",
+  "Opisz problem ze skanerem..."
+]
+
 export default function AIChatBox() {
   const [messages, setMessages] = useState<Message[]>([])
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
   const [currentPlaceholder, setCurrentPlaceholder] = useState('')
   const [placeholderIndex, setPlaceholderIndex] = useState(0)
+  const [isRecording, setIsRecording] = useState(false)
   const messagesContainerRef = useRef<HTMLDivElement>(null)
-
-  const placeholders = [
-    "Opisz problem z drukarką...",
-    "Opisz problem z terminalem...",
-    "Opisz problem ze skanerem..."
-  ]
+  const recognitionRef = useRef<any>(null)
 
   // Show button logic:
   // 1. Minimum 6 messages (3 exchanges)
@@ -77,6 +81,50 @@ export default function AIChatBox() {
 
     return () => clearInterval(typingInterval)
   }, [placeholderIndex])
+
+  // Speech recognition setup
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition
+      if (SpeechRecognition) {
+        const recognition = new SpeechRecognition()
+        recognition.lang = 'pl-PL'
+        recognition.continuous = false
+        recognition.interimResults = false
+
+        recognition.onresult = (event: any) => {
+          const transcript = event.results[0][0].transcript
+          setInput(transcript)
+          setIsRecording(false)
+        }
+
+        recognition.onerror = () => {
+          setIsRecording(false)
+        }
+
+        recognition.onend = () => {
+          setIsRecording(false)
+        }
+
+        recognitionRef.current = recognition
+      }
+    }
+  }, [])
+
+  const toggleRecording = () => {
+    if (!recognitionRef.current) {
+      alert('Rozpoznawanie mowy nie jest dostępne w Twojej przeglądarce')
+      return
+    }
+
+    if (isRecording) {
+      recognitionRef.current.stop()
+      setIsRecording(false)
+    } else {
+      recognitionRef.current.start()
+      setIsRecording(true)
+    }
+  }
 
   const handleSend = async (text?: string) => {
     const messageText = text || input
@@ -211,7 +259,7 @@ export default function AIChatBox() {
         )}
 
         <div className="p-8 border-t border-gray-100">
-          <div className="flex items-center gap-4 mb-6">
+          <div className="flex items-center gap-3">
             <input
               type="text"
               value={input}
@@ -221,7 +269,23 @@ export default function AIChatBox() {
               className="flex-1 text-base text-gray-700 placeholder-gray-400 focus:outline-none bg-transparent py-3"
               disabled={loading}
             />
-            <button 
+            <button
+              onClick={toggleRecording}
+              disabled={loading}
+              className={`flex-shrink-0 p-2 rounded-full transition-all disabled:opacity-50 disabled:cursor-not-allowed ${
+                isRecording
+                  ? 'bg-red-500 text-white animate-pulse'
+                  : 'text-gray-400 hover:text-blue-600 hover:bg-blue-50'
+              }`}
+              aria-label={isRecording ? 'Zatrzymaj nagrywanie' : 'Rozpocznij nagrywanie'}
+            >
+              {isRecording ? (
+                <MicOff className="w-6 h-6" />
+              ) : (
+                <Mic className="w-6 h-6" />
+              )}
+            </button>
+            <button
               onClick={() => handleSend()}
               disabled={!input.trim() || loading}
               className="flex-shrink-0 text-gray-400 hover:text-blue-600 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
@@ -234,14 +298,16 @@ export default function AIChatBox() {
             </button>
           </div>
 
-          <div className="flex items-center justify-center gap-6 text-xs text-gray-600 font-medium pt-4 border-t border-gray-100">
-            <div className="flex items-center gap-1.5">
-              <div className="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
-              <span>Wstępna diagnoza w 2 min</span>
-            </div>
-            <div className="flex items-center gap-1.5">
-              <div className="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
-              <span>24/7 dostępny</span>
+          <div className="pt-6 border-t border-gray-100 mt-6">
+            <div className="flex items-center justify-center gap-8 text-sm text-gray-600 font-medium" style={{ marginLeft: '-5%' }}>
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                <span>Wstępna diagnoza w 2 min</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+                <span>24/7 dostępny</span>
+              </div>
             </div>
           </div>
         </div>

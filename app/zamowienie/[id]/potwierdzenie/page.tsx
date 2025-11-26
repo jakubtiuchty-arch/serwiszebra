@@ -6,11 +6,12 @@ import Link from 'next/link'
 import Header from '@/components/Header'
 import { getCurrentUserProfileClient } from '@/lib/actions/profiles'
 import { createClient } from '@/lib/supabase/client'
-import { 
-  CheckCircle, 
-  FileText, 
-  Mail, 
-  ArrowRight, 
+import { OrderRegistrationLightbox } from '@/components/OrderRegistrationLightbox'
+import {
+  CheckCircle,
+  FileText,
+  Mail,
+  ArrowRight,
   Package,
   Download,
   Printer,
@@ -30,11 +31,13 @@ export default function OrderConfirmationPage() {
   const [orderNumber, setOrderNumber] = useState<string>('')
   const [paymentMethod, setPaymentMethod] = useState<string>('')
   const [isInitialized, setIsInitialized] = useState(false)
-  
+  const [contactPerson, setContactPerson] = useState<string>('')
+
   // 🆕 Auth & Registration state
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [guestEmail, setGuestEmail] = useState<string>('')
   const [showRegistration, setShowRegistration] = useState(false)
+  const [showRegistrationLightbox, setShowRegistrationLightbox] = useState(false)
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
@@ -53,14 +56,14 @@ export default function OrderConfirmationPage() {
 
 useEffect(() => {
   if (isInitialized) return
-  
+
   // Pobierz zamówienie z Supabase
   const fetchOrder = async () => {
     try {
       const supabase = createClient()
       const { data, error } = await supabase
         .from('orders')
-        .select('order_number, payment_method, guest_email')
+        .select('order_number, payment_method, guest_email, contact_person')
         .eq('id', orderId)
         .single()
 
@@ -69,6 +72,13 @@ useEffect(() => {
         setPaymentMethod(data.payment_method || '')
         if (data.guest_email) {
           setGuestEmail(data.guest_email)
+          // Pokaż lightbox rejestracji dla gości (po małym opóźnieniu)
+          setTimeout(() => {
+            setShowRegistrationLightbox(true)
+          }, 1000)
+        }
+        if (data.contact_person) {
+          setContactPerson(data.contact_person)
         }
         setIsInitialized(true)
       } else {
@@ -407,6 +417,19 @@ useEffect(() => {
 
         </div>
       </div>
+
+      {/* REGISTRATION LIGHTBOX */}
+      {!isAuthenticated && guestEmail && (
+        <OrderRegistrationLightbox
+          isOpen={showRegistrationLightbox}
+          onClose={() => setShowRegistrationLightbox(false)}
+          orderId={orderId}
+          orderNumber={orderNumber}
+          userEmail={guestEmail}
+          userFirstName={contactPerson.split(' ')[0]}
+          userLastName={contactPerson.split(' ').slice(1).join(' ')}
+        />
+      )}
     </div>
   )
 }

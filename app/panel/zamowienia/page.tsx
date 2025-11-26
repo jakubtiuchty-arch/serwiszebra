@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import { getTrackingUrl, formatCourierName } from '@/lib/tracking-links'
 import { 
   ShoppingCart,
   Package,
@@ -17,7 +18,8 @@ import {
   RefreshCw,
   FileText,
   ChevronDown,
-  Download
+  Download,
+  ExternalLink
 } from 'lucide-react'
 import { format } from 'date-fns'
 import { pl } from 'date-fns/locale'
@@ -26,6 +28,7 @@ import ReturnModal from '@/components/shop/ReturnModal'
 interface Order {
   id: string
   orderNumber: string
+  order_number?: string
   customer: {
     company: string
     nip: string
@@ -38,8 +41,8 @@ interface Order {
   date: string
   deliveryMethod: string
   invoiceNumber?: string
-  tracking_number?: string          // DODAJ
-  courier_name?: string              // DODAJ
+  tracking_number?: string
+  courier_name?: string
   tracking_url?: string 
   items?: {
     id: string
@@ -115,7 +118,6 @@ export default function ZamowieniaPage() {
   const [deleteModalOrder, setDeleteModalOrder] = useState<Order | null>(null)
   const [isDeleting, setIsDeleting] = useState(false)
   const [trackingModalOrder, setTrackingModalOrder] = useState<Order | null>(null)
-  
 
   useEffect(() => {
     loadOrders()
@@ -140,10 +142,10 @@ export default function ZamowieniaPage() {
 
       const data = await response.json()
       
-      // Dodajemy przykładowe dostarczone zamówienie do testów
       const testDeliveredOrder: Order = {
         id: 'test-delivered-1',
         orderNumber: 'PF/2025/999999',
+        order_number: 'PF/2025/999999',
         customer: {
           company: 'Testowa Firma Sp. z o.o.',
           nip: '1234567890',
@@ -156,6 +158,8 @@ export default function ZamowieniaPage() {
         date: '2025-11-01T10:00:00Z',
         deliveryMethod: 'Kurier DPD',
         invoiceNumber: 'FV/2025/999999',
+        tracking_number: 'TEST123456789',
+        courier_name: 'DPD',
         items: [
           {
             id: '1',
@@ -184,10 +188,7 @@ export default function ZamowieniaPage() {
         ]
       }
       
-      // Dane z API są już w poprawnym formacie (po mapowaniu)
       const ordersFromApi = data.orders || []
-      
-      // Dodajemy testowe zamówienie na początek listy
       setOrders([testDeliveredOrder, ...ordersFromApi])
     } catch (err: any) {
       console.error('Error loading orders:', err)
@@ -230,13 +231,14 @@ export default function ZamowieniaPage() {
         : [...prev, orderId]
     )
   }
+
   const handleDeleteOrder = async (orderId: string) => {
     try {
       setIsDeleting(true)
       
-      const response = await fetch(`/api/orders/delete?id=${orderId}`, {
-        method: 'DELETE'
-      })
+     const response = await fetch(`/api/orders/delete?id=${orderId}`, {
+  method: 'DELETE'
+})
 
       if (!response.ok) {
         const error = await response.json()
@@ -244,7 +246,6 @@ export default function ZamowieniaPage() {
         return
       }
 
-      // Usuń z listy lokalnie
       setOrders(prev => prev.filter(o => o.id !== orderId))
       setDeleteModalOrder(null)
       
@@ -256,10 +257,10 @@ export default function ZamowieniaPage() {
     }
   }
 
- const canDeleteOrder = (status: string) => {
-  console.log('🔍 Checking delete for status:', status)
-  return ['pending', 'cancelled'].includes(status)
-}
+  const canDeleteOrder = (status: string) => {
+    return ['pending', 'cancelled'].includes(status)
+  }
+
   if (loading) {
     return (
       <div className="flex items-center justify-center py-20">
@@ -288,84 +289,77 @@ export default function ZamowieniaPage() {
   }
 
   return (
-  <div className="space-y-1 sm:space-y-3">
-    
-    {/* BREADCRUMBS */}
-    <Link
-      href="/sklep"
-      className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors text-base font-medium"
-    >
-      <ChevronLeft className="w-5 h-5" />
-      <span className="hidden sm:inline">Powrót do sklepu</span>
-      <span className="sm:hidden">Sklep</span>
-    </Link>
+    <div className="space-y-1 sm:space-y-3">
+      <Link
+        href="/sklep"
+        className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors text-base font-medium"
+      >
+        <ChevronLeft className="w-5 h-5" />
+        <span className="hidden sm:inline">Powrót do sklepu</span>
+        <span className="sm:hidden">Sklep</span>
+      </Link>
 
-    {/* PAGE TITLE */}
-    <div className="mb-2 sm:mb-4">
-      <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-gray-900 mb-0.5 sm:mb-1">
-        Moje zamówienia
-      </h1>
-      <p className="text-base sm:text-lg text-gray-600">
-        Historia zakupów ze sklepu
-      </p>
-    </div>
+      <div className="mb-2 sm:mb-4">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-gray-900 mb-0.5 sm:mb-1">
+          Moje zamówienia
+        </h1>
+        <p className="text-base sm:text-lg text-gray-600">
+          Historia zakupów ze sklepu
+        </p>
+      </div>
 
-      {/* ORDERS LIST */}
       <div className="bg-white/80 backdrop-blur-sm border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
-        
-     {/* TABS */}
-<div className="border-b border-gray-200 p-4 sm:px-6 sm:py-5">
-  <div className="flex items-center justify-between gap-4">
-    <div className="flex gap-1 sm:gap-2 bg-gray-100 rounded-xl p-1 flex-1 sm:flex-initial">
-      <button 
-        onClick={() => setFilter('wszystkie')} 
-        className={`px-3 sm:px-5 py-2 sm:py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all flex-1 sm:flex-initial ${
-          filter === 'wszystkie' 
-            ? 'bg-white text-gray-900 shadow-sm' 
-            : 'text-gray-600 hover:text-gray-900 hover:bg-white/50'
-        }`}
-      >
-        Wszystkie
-      </button>
-      <button 
-        onClick={() => setFilter('w_trakcie')} 
-        className={`px-3 sm:px-5 py-2 sm:py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all flex-1 sm:flex-initial flex items-center justify-center gap-1.5 ${
-          filter === 'w_trakcie' 
-            ? 'bg-white text-gray-900 shadow-sm' 
-            : 'text-gray-600 hover:text-gray-900 hover:bg-white/50'
-        }`}
-      >
-        <Clock className="w-4 h-4 sm:hidden" />
-        <span className="hidden sm:inline">W trakcie</span>
-        <span className="sm:hidden">Aktywne</span>
-        {stats.inProgress > 0 && (
-          <span className="ml-0.5 px-1.5 sm:px-2 py-0.5 bg-yellow-500 text-white rounded-full text-[10px] sm:text-xs font-bold">
-            {stats.inProgress}
-          </span>
-        )}
-      </button>
-      <button 
-        onClick={() => setFilter('dostarczone')} 
-        className={`px-3 sm:px-5 py-2 sm:py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all flex-1 sm:flex-initial flex items-center justify-center gap-1.5 ${
-          filter === 'dostarczone' 
-            ? 'bg-white text-gray-900 shadow-sm' 
-            : 'text-gray-600 hover:text-gray-900 hover:bg-white/50'
-        }`}
-      >
-        <CheckCircle2 className="w-4 h-4 sm:hidden" />
-        <span className="hidden sm:inline">Dostarczone</span>
-        <span className="sm:hidden">Gotowe</span>
-      </button>
-    </div>
+        <div className="border-b border-gray-200 p-4 sm:px-6 sm:py-5">
+          <div className="flex items-center justify-between gap-4">
+            <div className="flex gap-1 sm:gap-2 bg-gray-100 rounded-xl p-1 flex-1 sm:flex-initial">
+              <button 
+                onClick={() => setFilter('wszystkie')} 
+                className={`px-3 sm:px-5 py-2 sm:py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all flex-1 sm:flex-initial ${
+                  filter === 'wszystkie' 
+                    ? 'bg-white text-gray-900 shadow-sm' 
+                    : 'text-gray-600 hover:text-gray-900 hover:bg-white/50'
+                }`}
+              >
+                Wszystkie
+              </button>
+              <button 
+                onClick={() => setFilter('w_trakcie')} 
+                className={`px-3 sm:px-5 py-2 sm:py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all flex-1 sm:flex-initial flex items-center justify-center gap-1.5 ${
+                  filter === 'w_trakcie' 
+                    ? 'bg-white text-gray-900 shadow-sm' 
+                    : 'text-gray-600 hover:text-gray-900 hover:bg-white/50'
+                }`}
+              >
+                <Clock className="w-4 h-4 sm:hidden" />
+                <span className="hidden sm:inline">W trakcie</span>
+                <span className="sm:hidden">Aktywne</span>
+                {stats.inProgress > 0 && (
+                  <span className="ml-0.5 px-1.5 sm:px-2 py-0.5 bg-yellow-500 text-white rounded-full text-[10px] sm:text-xs font-bold">
+                    {stats.inProgress}
+                  </span>
+                )}
+              </button>
+              <button 
+                onClick={() => setFilter('dostarczone')} 
+                className={`px-3 sm:px-5 py-2 sm:py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all flex-1 sm:flex-initial flex items-center justify-center gap-1.5 ${
+                  filter === 'dostarczone' 
+                    ? 'bg-white text-gray-900 shadow-sm' 
+                    : 'text-gray-600 hover:text-gray-900 hover:bg-white/50'
+                }`}
+              >
+                <CheckCircle2 className="w-4 h-4 sm:hidden" />
+                <span className="hidden sm:inline">Dostarczone</span>
+                <span className="sm:hidden">Gotowe</span>
+              </button>
+            </div>
 
-    <div className="text-xs sm:text-sm text-gray-500 whitespace-nowrap">
-      <span className="font-semibold text-gray-900">{filteredOrders.length}</span>
-      <span className="hidden sm:inline"> {filteredOrders.length === 1 ? 'zamówienie' : 'zamówień'}</span>
-    </div>
-  </div>
-</div>
+            <div className="text-xs sm:text-sm text-gray-500 whitespace-nowrap">
+              <span className="font-semibold text-gray-900">{filteredOrders.length}</span>
+              <span className="hidden sm:inline"> {filteredOrders.length === 1 ? 'zamówienie' : 'zamówień'}</span>
+            </div>
+          </div>
+        </div>
 
-        {/* ORDERS TIMELINE */}
         <div className="p-4 sm:p-6">
           {filteredOrders.length === 0 ? (
             <div className="text-center py-8 sm:py-16">
@@ -394,7 +388,6 @@ export default function ZamowieniaPage() {
             <div className="space-y-4 sm:space-y-6">
               {filteredOrders.map((order, index) => {
                 const statusConfig = ORDER_STATUS_CONFIG[order.status] || ORDER_STATUS_CONFIG['new']
-                console.log('📦 Order:', order.orderNumber, 'Status:', order.status, 'Can delete?', canDeleteOrder(order.status))
                 const StatusIcon = statusConfig.icon
                 const paymentConfig = PAYMENT_STATUS_CONFIG[order.paymentStatus] || PAYMENT_STATUS_CONFIG['pending']
                 const PaymentIcon = paymentConfig.icon
@@ -402,31 +395,25 @@ export default function ZamowieniaPage() {
                 const isExpanded = expandedOrders.includes(order.id)
                 
                 return (
-                  <div
-                    key={order.id}
-                    className="relative"
-                  >
-                    {/* Timeline line - except last item */}
+                  <div key={order.id} className="relative">
                     {index < filteredOrders.length - 1 && (
                       <div className="hidden sm:block absolute left-[52px] top-[80px] w-0.5 h-[calc(100%+24px)] bg-gradient-to-b from-gray-300 to-transparent" />
                     )}
 
                     <div className="bg-white border-2 border-gray-200 rounded-2xl p-4 sm:p-6 shadow-sm hover:shadow-xl hover:border-gray-300 transition-all group relative overflow-hidden">
-                      {/* Hover gradient overlay */}
                       <div className="absolute inset-0 bg-gradient-to-r from-gray-50/0 via-gray-50/50 to-gray-50/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                        {/* DELETE BUTTON - DODAJ TUTAJ */}
-  {canDeleteOrder(order.status) && (
-    <button
-      onClick={() => setDeleteModalOrder(order)}
-      className="absolute top-4 right-4 w-8 h-8 bg-red-500 hover:bg-red-600 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-200 hover:scale-110 z-10 shadow-lg"
-      title="Usuń zamówienie"
-    >
-      <XCircle className="w-5 h-5" />
-    </button>
-  )}
+                      
+                      {canDeleteOrder(order.status) && (
+                        <button
+                          onClick={() => setDeleteModalOrder(order)}
+                          className="absolute top-4 right-4 w-8 h-8 bg-red-500 hover:bg-red-600 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-200 hover:scale-110 z-10 shadow-lg"
+                          title="Usuń zamówienie"
+                        >
+                          <XCircle className="w-5 h-5" />
+                        </button>
+                      )}
+
                       <div className="relative flex gap-4 sm:gap-6">
-                        
-                        {/* LEFT: Timeline dot + icon - hidden on mobile */}
                         <div className="hidden sm:flex flex-col items-center gap-3 flex-shrink-0">
                           <div className={`relative w-14 h-14 ${statusConfig.bg} rounded-full flex items-center justify-center ring-4 ring-white group-hover:scale-110 transition-transform`}>
                             <StatusIcon className={`w-7 h-7 ${statusConfig.text}`} />
@@ -444,10 +431,7 @@ export default function ZamowieniaPage() {
                           </div>
                         </div>
 
-                        {/* MIDDLE: Order details */}
                         <div className="flex-1 min-w-0">
-                          
-                          {/* Mobile: Status icon inline */}
                           <div className="sm:hidden flex items-center gap-2 mb-3">
                             <div className={`relative w-10 h-10 ${statusConfig.bg} rounded-full flex items-center justify-center`}>
                               <StatusIcon className={`w-5 h-5 ${statusConfig.text}`} />
@@ -457,7 +441,6 @@ export default function ZamowieniaPage() {
                             </span>
                           </div>
 
-                          {/* Top row: Status badge + Number + Date */}
                           <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 mb-3">
                             <span className={`hidden sm:inline-flex px-3 py-1.5 ${statusConfig.bg} ${statusConfig.text} rounded-lg text-xs font-bold uppercase tracking-wide`}>
                               {statusConfig.label}
@@ -473,7 +456,6 @@ export default function ZamowieniaPage() {
                             </div>
                           </div>
 
-                          {/* Company name */}
                           <div className="flex items-center gap-2 mb-3">
                             <Building2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-400" />
                             <p className="text-xs sm:text-sm font-semibold text-gray-900 truncate">
@@ -481,7 +463,6 @@ export default function ZamowieniaPage() {
                             </p>
                           </div>
 
-                          {/* Progress bar */}
                           {order.status !== 'cancelled' && (
                             <div className="mb-4">
                               <div className="flex items-center justify-between mb-1.5 sm:mb-2">
@@ -502,7 +483,6 @@ export default function ZamowieniaPage() {
                             </div>
                           )}
 
-                          {/* Products toggle */}
                           <button
                             onClick={() => toggleOrderExpanded(order.id)}
                             className="flex items-center gap-2 text-xs sm:text-sm text-gray-600 hover:text-gray-900 mb-4 transition-colors"
@@ -514,7 +494,6 @@ export default function ZamowieniaPage() {
                             <ChevronDown className={`w-3.5 h-3.5 sm:w-4 sm:h-4 transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
                           </button>
 
-                          {/* Expanded products list */}
                           {isExpanded && order.items && (
                             <div className="mb-4 bg-gray-50 rounded-xl p-3 sm:p-4 space-y-2">
                               {order.items.map((item) => (
@@ -539,7 +518,6 @@ export default function ZamowieniaPage() {
                             </div>
                           )}
 
-                          {/* Bottom row: Payment status + Actions */}
                           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pt-3 border-t border-gray-200">
                             <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
                               <div className={`flex items-center gap-1.5 ${paymentConfig.color} font-semibold text-xs sm:text-sm`}>
@@ -547,7 +525,6 @@ export default function ZamowieniaPage() {
                                 <span>Płatność: {paymentConfig.label}</span>
                               </div>
 
-                              {/* Invoice button */}
                               {order.paymentStatus === 'paid' && order.invoiceNumber && (
                                 <button
                                   onClick={() => window.open(`/api/invoices/${order.invoiceNumber}.pdf`, '_blank')}
@@ -558,16 +535,16 @@ export default function ZamowieniaPage() {
                                   <Download className="w-3 h-3" />
                                 </button>
                               )}
-                              {/* Tracking button */}
-{(order.status === 'shipped' || order.status === 'delivered') && order.tracking_number && (
-  <button
-  onClick={() => setTrackingModalOrder(order)}
-    className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 bg-purple-100 hover:bg-purple-200 text-purple-700 rounded-lg text-xs sm:text-sm font-medium transition-all"
-  >
-    <Truck className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-    <span>Śledź przesyłkę</span>
-  </button>
-)}
+
+                              {(order.status === 'shipped' || order.status === 'delivered') && order.tracking_number && (
+                                <button
+                                  onClick={() => setTrackingModalOrder(order)}
+                                  className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 bg-purple-100 hover:bg-purple-200 text-purple-700 rounded-lg text-xs sm:text-sm font-medium transition-all"
+                                >
+                                  <Truck className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                                  <span>Śledź przesyłkę</span>
+                                </button>
+                              )}
                             </div>
 
                             {canReturnOrder(order.status) && (
@@ -580,9 +557,7 @@ export default function ZamowieniaPage() {
                               </button>
                             )}
                           </div>
-
                         </div>
-
                       </div>
                     </div>
                   </div>
@@ -591,9 +566,8 @@ export default function ZamowieniaPage() {
             </div>
           )}
         </div>
-
       </div>
-      {/* DELETE CONFIRMATION MODAL - DODAJ TUTAJ */}
+
       {deleteModalOrder && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 animate-fadeIn">
@@ -601,9 +575,7 @@ export default function ZamowieniaPage() {
               <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center">
                 <XCircle className="w-6 h-6 text-red-600" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900">
-                Usuń zamówienie?
-              </h3>
+              <h3 className="text-xl font-bold text-gray-900">Usuń zamówienie?</h3>
             </div>
             
             <p className="text-gray-600 mb-6">
@@ -638,53 +610,70 @@ export default function ZamowieniaPage() {
           </div>
         </div>
       )}
-{/* TRACKING MODAL */}
+
       {trackingModalOrder && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 animate-fadeIn">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
-                <Truck className="w-6 h-6 text-purple-600" />
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 space-y-6">
+            <div className="flex items-center gap-4">
+              <div className="p-3 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl">
+                <Truck className="w-6 h-6 text-white" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900">
-                Tracking przesyłki
-              </h3>
+              <div>
+                <h3 className="text-xl font-bold text-gray-900">Tracking przesyłki</h3>
+                <p className="text-sm text-gray-500">
+                  Zamówienie #{(trackingModalOrder.order_number || trackingModalOrder.orderNumber)?.slice(-6)}
+                </p>
+              </div>
             </div>
-            
-            <div className="space-y-4 mb-6">
-              <div className="bg-gray-50 rounded-xl p-4">
-                <p className="text-sm text-gray-600 mb-1">Numer zamówienia</p>
-                <p className="text-lg font-bold text-gray-900">
-                  #{trackingModalOrder.orderNumber.split('/').pop()}
+
+            <div className="space-y-4">
+              <div>
+                <p className="text-xs text-gray-500 mb-1">Kurier</p>
+                <p className="text-base font-semibold text-gray-900">
+                  {formatCourierName(trackingModalOrder.courier_name)}
                 </p>
               </div>
 
-              <div className="bg-gray-50 rounded-xl p-4">
-                <p className="text-sm text-gray-600 mb-1">Kurier</p>
-                <p className="text-lg font-bold text-gray-900">
-                  {trackingModalOrder.courier_name || 'Kurier'}
-                </p>
-              </div>
-
-              <div className="bg-purple-50 rounded-xl p-4">
-                <p className="text-sm text-purple-600 mb-1">Numer przesyłki</p>
-                <p className="text-lg font-bold text-purple-900 font-mono">
+              <div>
+                <p className="text-xs text-gray-500 mb-1">Numer przesyłki</p>
+                <p className="text-sm font-mono bg-purple-50 text-purple-900 px-3 py-2 rounded-lg">
                   {trackingModalOrder.tracking_number}
                 </p>
               </div>
 
-              <div className="bg-gray-50 rounded-xl p-4">
-                <p className="text-sm text-gray-600 mb-1">Status</p>
-                <p className="text-lg font-bold text-gray-900">
-                  {trackingModalOrder.status === 'delivered' ? '✅ Dostarczone' : '🚚 W drodze'}
-                </p>
+              <div>
+                <p className="text-xs text-gray-500 mb-1">Status</p>
+                <div className="flex items-center gap-2">
+                  {trackingModalOrder.status === 'delivered' ? (
+                    <>
+                      <CheckCircle2 className="w-5 h-5 text-green-600" />
+                      <span className="text-sm font-medium text-green-700">Dostarczone</span>
+                    </>
+                  ) : (
+                    <>
+                      <Truck className="w-5 h-5 text-purple-600" />
+                      <span className="text-sm font-medium text-purple-700">W drodze</span>
+                    </>
+                  )}
+                </div>
               </div>
             </div>
 
             <div className="flex gap-3">
+             {getTrackingUrl(trackingModalOrder.courier_name || '', trackingModalOrder.tracking_number || '') && (
+  
+    <a href={getTrackingUrl(trackingModalOrder.courier_name || '', trackingModalOrder.tracking_number || '') || '#'}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-medium transition-all"
+                >
+                  <ExternalLink className="w-4 h-4" />
+                  Śledź u kuriera
+                </a>
+              )}
               <button
                 onClick={() => setTrackingModalOrder(null)}
-                className="flex-1 px-4 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-xl font-semibold transition-all"
+                className="px-4 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg font-medium transition-all"
               >
                 Zamknij
               </button>
@@ -692,19 +681,17 @@ export default function ZamowieniaPage() {
           </div>
         </div>
       )}
-      {/* RETURN MODAL */}
+
       {returnModalOrder && (
         <ReturnModal
           order={returnModalOrder}
           onClose={() => setReturnModalOrder(null)}
           onSubmit={(data) => {
             console.log('Return request:', data)
-            // Tu będzie API call
             setReturnModalOrder(null)
           }}
         />
       )}
-
     </div>
   )
 }

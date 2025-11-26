@@ -1,140 +1,167 @@
-export function getShippingNotificationEmail({
-  orderNumber,
-  trackingNumber,
-  courierName,
-  customerName
-}: {
+import { getTrackingUrl, formatCourierName } from '@/lib/tracking-links'
+
+interface ShippingNotificationData {
   orderNumber: string
   trackingNumber: string
   courierName: string
   customerName: string
-}) {
+}
+
+export function generateShippingNotificationEmail(data: ShippingNotificationData): string {
+  const { orderNumber, trackingNumber, courierName, customerName } = data
+  const trackingUrl = getTrackingUrl(courierName, trackingNumber)
+  const formattedCourier = formatCourierName(courierName)
+
   return `
 <!DOCTYPE html>
 <html lang="pl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Przesyłka wysłana</title>
+  <title>Przesyłka wysłana - serwiszebra.pl</title>
 </head>
-<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif; background-color: #f9fafb;">
+<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f3f4f6;">
   
-  <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #f9fafb; padding: 40px 20px;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #f3f4f6; padding: 40px 20px;">
     <tr>
       <td align="center">
         
-        <!-- Main container -->
-        <table width="600" cellpadding="0" cellspacing="0" style="background-color: #ffffff; border-radius: 12px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);">
+        <!-- Main Container -->
+        <table width="600" cellpadding="0" cellspacing="0" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); border-radius: 16px; overflow: hidden; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);">
           
-          <!-- Truck icon (green gradient) -->
+          <!-- Header -->
           <tr>
-            <td style="padding: 50px 40px 30px; text-align: center;">
-              <div style="display: inline-block; width: 80px; height: 80px; background: linear-gradient(135deg, #10b981 0%, #059669 100%); border-radius: 50%; position: relative; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);">
-                <svg width="50" height="50" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-                  <path d="M1 3h15v13H1z" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M16 8h4l3 3v5h-7V8z" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  <circle cx="5.5" cy="18.5" r="2.5" stroke="#ffffff" stroke-width="2"/>
-                  <circle cx="18.5" cy="18.5" r="2.5" stroke="#ffffff" stroke-width="2"/>
+            <td style="padding: 40px 40px 30px; text-align: center;">
+              <!-- Truck Icon SVG -->
+              <div style="margin-bottom: 20px;">
+                <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: inline-block;">
+                  <rect x="1" y="6" width="15" height="11" rx="2" stroke="white" stroke-width="2" fill="rgba(255,255,255,0.2)"/>
+                  <path d="M16 8h3l3 3v6h-2" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <circle cx="5.5" cy="19.5" r="2.5" stroke="white" stroke-width="2" fill="white"/>
+                  <circle cx="18.5" cy="19.5" r="2.5" stroke="white" stroke-width="2" fill="white"/>
                 </svg>
               </div>
-              
-              <h1 style="margin: 24px 0 8px; color: #111827; font-size: 28px; font-weight: 700; letter-spacing: -0.5px;">
+              <h1 style="margin: 0; color: white; font-size: 32px; font-weight: 700; letter-spacing: -0.5px;">
                 Przesyłka wysłana!
               </h1>
-              <p style="margin: 0; color: #6b7280; font-size: 15px;">
-                Twoje zamówienie jest w drodze do Ciebie
+              <p style="margin: 12px 0 0; color: rgba(255,255,255,0.9); font-size: 18px; font-weight: 500;">
+                Twoje zamówienie jest w drodze
               </p>
             </td>
           </tr>
 
-          <!-- Order number -->
+          <!-- Content -->
           <tr>
-            <td style="padding: 0 40px 30px;">
-              <div style="background-color: #f9fafb; border: 2px solid #e5e7eb; border-radius: 8px; padding: 20px; text-align: center;">
-                <p style="margin: 0 0 8px; color: #9ca3af; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600;">Numer zamówienia</p>
-                <p style="margin: 0; color: #111827; font-size: 32px; font-weight: 800; letter-spacing: -1px;">${orderNumber.split('/').pop()}</p>
-              </div>
-            </td>
-          </tr>
+            <td style="background-color: white; padding: 40px;">
+              
+              <p style="margin: 0 0 24px; color: #374151; font-size: 16px; line-height: 1.6;">
+                Witaj <strong>${customerName}</strong>,
+              </p>
 
-          <!-- Courier & Tracking -->
-          <tr>
-            <td style="padding: 0 40px 30px;">
-              <table width="100%" cellpadding="0" cellspacing="0" style="border: 1px solid #e5e7eb; border-radius: 8px; overflow: hidden;">
+              <p style="margin: 0 0 32px; color: #374151; font-size: 16px; line-height: 1.6;">
+                Twoje zamówienie zostało nadane przez kuriera <strong>${formattedCourier}</strong> i jest w drodze do Ciebie.
+              </p>
+
+              <!-- Order Info Box -->
+              <table width="100%" cellpadding="0" cellspacing="0" style="background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border-radius: 12px; margin-bottom: 24px; border: 2px solid #86efac;">
                 <tr>
-                  <td style="background-color: #f9fafb; padding: 12px 16px; border-bottom: 1px solid #e5e7eb;">
-                    <p style="margin: 0; color: #111827; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">Kurier</p>
-                  </td>
-                  <td style="background-color: #f9fafb; padding: 12px 16px; text-align: right; border-bottom: 1px solid #e5e7eb;">
-                    <p style="margin: 0; color: #111827; font-size: 14px; font-weight: 700;">${courierName}</p>
-                  </td>
-                </tr>
-                <tr>
-                  <td colspan="2" style="padding: 16px; background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%); border-top: 2px solid #10b981;">
-                    <p style="margin: 0 0 8px; color: #065f46; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700; text-align: center;">Numer przesyłki</p>
-                    <p style="margin: 0; color: #064e3b; font-size: 24px; font-weight: 800; letter-spacing: 0.5px; font-family: 'Courier New', monospace; text-align: center;">${trackingNumber}</p>
+                  <td style="padding: 24px;">
+                    
+                    <!-- Order Number -->
+                    <div style="margin-bottom: 16px;">
+                      <p style="margin: 0 0 4px; color: #059669; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">
+                        Numer zamówienia
+                      </p>
+                      <p style="margin: 0; color: #065f46; font-size: 20px; font-weight: 700;">
+                        #${orderNumber.slice(-6)}
+                      </p>
+                    </div>
+
+                    <!-- Courier -->
+                    <div style="margin-bottom: 16px;">
+                      <p style="margin: 0 0 4px; color: #059669; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">
+                        Kurier
+                      </p>
+                      <p style="margin: 0; color: #065f46; font-size: 16px; font-weight: 600;">
+                        ${formattedCourier}
+                      </p>
+                    </div>
+
+                    <!-- Tracking Number -->
+                    <div>
+                      <p style="margin: 0 0 4px; color: #059669; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">
+                        Numer przesyłki
+                      </p>
+                      <p style="margin: 0; color: #065f46; font-size: 16px; font-weight: 700; font-family: 'Courier New', monospace; background-color: rgba(6, 95, 70, 0.1); padding: 8px 12px; border-radius: 6px; display: inline-block;">
+                        ${trackingNumber}
+                      </p>
+                    </div>
+
                   </td>
                 </tr>
               </table>
-            </td>
-          </tr>
 
-          <!-- Info box -->
-          <tr>
-            <td style="padding: 0 40px 30px;">
-              <div style="background-color: #fef3c7; border: 1px solid #f59e0b; border-radius: 8px; padding: 16px;">
-                <table width="100%" cellpadding="0" cellspacing="0">
-                  <tr>
-                    <td width="30" style="vertical-align: top; padding-right: 12px;">
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="12" cy="12" r="10" stroke="#f59e0b" stroke-width="2"/>
-                        <path d="M12 16v-4M12 8h.01" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"/>
-                      </svg>
-                    </td>
-                    <td style="vertical-align: top;">
-                      <p style="margin: 0 0 8px; color: #92400e; font-size: 13px; font-weight: 700;">
-                        Czas dostawy
-                      </p>
-                      <p style="margin: 0; color: #78350f; font-size: 13px; line-height: 1.6;">
-                        Przesyłka powinna dotrzeć w ciągu <strong>1-2 dni roboczych</strong>. Możesz śledzić jej status w panelu klienta.
-                      </p>
-                    </td>
-                  </tr>
-                </table>
-              </div>
-            </td>
-          </tr>
+              <!-- Info Box -->
+              <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #f9fafb; border-radius: 12px; margin-bottom: 32px; border-left: 4px solid #10b981;">
+                <tr>
+                  <td style="padding: 20px;">
+                    <p style="margin: 0; color: #374151; font-size: 14px; line-height: 1.6;">
+                      <strong style="color: #059669;">⏱️ Przewidywany czas dostawy:</strong><br>
+                      1-2 dni robocze od daty wysyłki
+                    </p>
+                  </td>
+                </tr>
+              </table>
 
-          <!-- CTA -->
-          <tr>
-            <td style="padding: 0 40px 40px; text-align: center;">
-              <a href="https://serwiszebraprod.vercel.app/panel/zamowienia"
-                 style="display: inline-block; background: linear-gradient(135deg, #86efac 0%, #4ade80 100%); color: #ffffff; text-decoration: none; padding: 14px 32px; border-radius: 8px; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.3px; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);">
-                Śledź przesyłkę
-              </a>
+              <!-- CTA Buttons -->
+              <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom: 32px;">
+                <tr>
+                  ${trackingUrl ? `
+                  <td style="padding-right: 8px;">
+                    <a href="${trackingUrl}" style="display: block; background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%); color: white; text-decoration: none; padding: 16px 24px; border-radius: 12px; font-weight: 600; font-size: 16px; text-align: center; box-shadow: 0 4px 6px -1px rgba(139, 92, 246, 0.3);">
+                      🔍 Śledź u kuriera →
+                    </a>
+                  </td>
+                  ` : ''}
+                  <td style="padding-left: ${trackingUrl ? '8px' : '0'};">
+                    <a href="https://serwiszebra.vercel.app/klient/zamowienia" style="display: block; background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; text-decoration: none; padding: 16px 24px; border-radius: 12px; font-weight: 600; font-size: 16px; text-align: center; box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.3);">
+                      📦 Moje zamówienia →
+                    </a>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- Divider -->
+              <div style="border-top: 2px solid #e5e7eb; margin: 32px 0;"></div>
+
+              <!-- Footer Info -->
+              <p style="margin: 0 0 8px; color: #6b7280; font-size: 14px;">
+                Masz pytania? Skontaktuj się z nami:
+              </p>
+              <p style="margin: 0 0 4px; color: #374151; font-size: 14px;">
+                <strong>📧 Email:</strong> <a href="mailto:zamowienia@serwiszebra.pl" style="color: #10b981; text-decoration: none;">zamowienia@serwiszebra.pl</a>
+              </p>
+              <p style="margin: 0; color: #374151; font-size: 14px;">
+                <strong>📞 Telefon:</strong> <a href="tel:+48607819688" style="color: #10b981; text-decoration: none;">+48 607 819 688</a>
+              </p>
+
             </td>
           </tr>
 
           <!-- Footer -->
           <tr>
-            <td style="padding: 30px 40px; background-color: #f9fafb; border-top: 1px solid #e5e7eb; text-align: center;">
-              <p style="margin: 0 0 12px; color: #111827; font-size: 14px; font-weight: 600;">
-                Pytania? Skontaktuj się z nami
+            <td style="background: linear-gradient(135deg, #059669 0%, #047857 100%); padding: 24px 40px; text-align: center;">
+              <p style="margin: 0 0 8px; color: rgba(255,255,255,0.9); font-size: 14px;">
+                <strong>serwiszebra.pl</strong>
               </p>
-              <p style="margin: 0 0 4px;">
-                <a href="mailto:zamowienia@serwiszebra.pl" style="color: #10b981; text-decoration: none; font-weight: 600; font-size: 14px;">zamowienia@serwiszebra.pl</a>
-              </p>
-              <p style="margin: 0;">
-                <a href="tel:+48607819688" style="color: #10b981; text-decoration: none; font-weight: 600; font-size: 14px;">+48 607 819 688</a>
-              </p>
-              <p style="margin: 16px 0 0; color: #9ca3af; font-size: 12px;">
-                © 2025 serwiszebra.pl · Autoryzowany Serwis Zebra
+              <p style="margin: 0; color: rgba(255,255,255,0.7); font-size: 12px;">
+                Profesjonalny serwis urządzeń Zebra
               </p>
             </td>
           </tr>
 
         </table>
-        
+
       </td>
     </tr>
   </table>
