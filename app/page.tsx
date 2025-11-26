@@ -186,8 +186,8 @@ export default function HomePage() {
                 <a href="#formularz" className="text-xs sm:text-sm text-gray-700 hover:text-gray-900 transition-colors">
                   Formularz
                 </a>
-                <a href="/sklep" className="text-xs sm:text-sm text-gray-700 hover:text-gray-900 transition-colors">
-                  Sklep
+                <a href="/sklep" className="px-3 py-1.5 bg-gradient-to-r from-blue-50 via-indigo-50 to-purple-50 rounded-full border border-gray-200 shadow-sm">
+                  <span className="text-xs sm:text-sm font-medium bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">Sklep</span>
                 </a>
                 <a href="/login" className="text-xs sm:text-sm text-gray-700 hover:text-gray-900 transition-colors font-medium">
                   Zaloguj
