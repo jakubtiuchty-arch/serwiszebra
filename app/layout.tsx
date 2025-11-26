@@ -1,15 +1,14 @@
 import { Inter } from 'next/font/google'
 import './globals.css'
+import { metadata as seoMetadata } from './metadata'
+import { Analytics } from '@vercel/analytics/react'
 
-const inter = Inter({ 
+const inter = Inter({
   subsets: ['latin'],
   display: 'swap',
 })
 
-export const metadata = {
-  title: 'Serwis Zebra - Profesjonalny serwis drukarek i terminali',
-  description: 'Asystent AI pomoże Ci zdiagnozować problem z urządzeniem Zebra w sekundach. Certyfikowany serwis, 15+ lat doświadczenia.',
-}
+export const metadata = seoMetadata
 
 export default function RootLayout({
   children,
@@ -18,7 +17,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pl" className={inter.className}>
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        {children}
+        <Analytics />
+      </body>
     </html>
   )
 }
