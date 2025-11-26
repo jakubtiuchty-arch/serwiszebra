@@ -156,9 +156,9 @@ export default function HomePage() {
       </div>
 
       {/* HEADER */}
-      <nav className="sticky top-0 z-50 pt-4 sm:pt-5 px-2 sm:px-3 pb-1 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+      <nav className="md:sticky md:top-0 z-50 pt-4 sm:pt-5 px-2 sm:px-3 pb-1 bg-white">
         <div className="max-w-7xl mx-auto">
-          <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-lg border border-gray-200/50 px-3 sm:px-4 relative">
+          <div className="bg-white rounded-xl shadow-lg border border-gray-200/50 px-3 sm:px-4 relative">
             <div className="flex items-center justify-between h-12 sm:h-14">
               <div className="flex items-center gap-2">
                 <div className="w-24 sm:w-32 h-10 sm:h-12 relative">
