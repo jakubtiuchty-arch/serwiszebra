@@ -19,14 +19,14 @@ CREATE TABLE IF NOT EXISTS chat_logs (
 
   -- Metadata
   user_ip TEXT,
-  user_agent TEXT,
-
-  -- Indeksy dla szybkiego wyszukiwania
-  INDEX idx_session_id (session_id),
-  INDEX idx_created_at (created_at DESC),
-  INDEX idx_quality_rating (quality_rating),
-  INDEX idx_is_correct (is_correct)
+  user_agent TEXT
 );
+
+-- Indeksy dla szybkiego wyszukiwania
+CREATE INDEX IF NOT EXISTS idx_chat_logs_session_id ON chat_logs(session_id);
+CREATE INDEX IF NOT EXISTS idx_chat_logs_created_at ON chat_logs(created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_chat_logs_quality_rating ON chat_logs(quality_rating);
+CREATE INDEX IF NOT EXISTS idx_chat_logs_is_correct ON chat_logs(is_correct);
 
 -- Tabela do śledzenia sesji użytkowników
 CREATE TABLE IF NOT EXISTS chat_sessions (

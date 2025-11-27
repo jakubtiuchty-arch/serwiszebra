@@ -1,9 +1,11 @@
 import { GoogleGenAI } from '@google/genai'
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
+import { SearchServiceClient } from '@google-cloud/discoveryengine'
 import OpenAI from 'openai'
 
 const genAI = new GoogleGenAI({ apiKey: process.env.GOOGLE_API_KEY! })
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -14,18 +16,15 @@ const supabase = createClient(
   }
 )
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
+// Initialize Vertex AI Discovery Engine Client
+const searchClient = new SearchServiceClient({
+  keyFilename: process.env.GOOGLE_APPLICATION_CREDENTIALS,
+  apiEndpoint: 'eu-discoveryengine.googleapis.com', // Europe endpoint
 })
 
-// Funkcja do tworzenia embeddings z OpenAI
-async function createEmbedding(text: string): Promise<number[]> {
-  const response = await openai.embeddings.create({
-    model: 'text-embedding-3-small',
-    input: text,
-  })
-  return response.data[0].embedding
-}
+const PROJECT_ID = process.env.GOOGLE_CLOUD_PROJECT_ID!
+const LOCATION = 'eu' // Europe multi-region
+const DATA_STORE_ID = 'zebra-manuals-eu_1764279128042' // EU data store with full bucket import
 
 // Funkcja do zapisywania logów czatu do Supabase
 async function saveChatLog(data: {
@@ -56,15 +55,17 @@ async function saveChatLog(data: {
   }
 }
 
-// Funkcja do tłumaczenia pytania PL→EN dla lepszego dopasowania
+// Funkcja do tłumaczenia polskiego tekstu na angielski za pomocą OpenAI GPT-3.5-turbo
 async function translateToEnglish(text: string): Promise<string> {
   try {
+    console.log('🌐 Tłumaczę na angielski:', text)
+
     const response = await openai.chat.completions.create({
       model: 'gpt-3.5-turbo',
       messages: [
         {
           role: 'system',
-          content: 'You are a translator. Translate Polish technical questions about Zebra printers to English. Keep technical terms. Return ONLY the translation, nothing else.',
+          content: 'You are a translator. Translate the following Polish text to English. Return ONLY the translation, nothing else.',
         },
         {
           role: 'user',
@@ -74,64 +75,140 @@ async function translateToEnglish(text: string): Promise<string> {
       temperature: 0.3,
       max_tokens: 200,
     })
-    const translated = response.choices[0].message.content || text
-    console.log(`🌐 Tłumaczenie: "${text}" → "${translated}"`)
-    return translated
+
+    const translation = response.choices[0]?.message?.content?.trim() || text
+    console.log('✅ Przetłumaczono na:', translation)
+    return translation
   } catch (error) {
-    console.error('⚠️ Błąd tłumaczenia, używam oryginału:', error)
-    return text // Jeśli tłumaczenie nie zadziała, użyj oryginału
+    console.error('❌ Błąd tłumaczenia:', error)
+    return text // Fallback - zwróć oryginalny tekst
   }
 }
 
-// Funkcja do wyszukiwania w bazie wiedzy (RAG)
-async function searchKnowledgeBase(query: string): Promise<string> {
+// Funkcja do wyszukiwania w Vertex AI RAG
+async function searchVertexAI(query: string): Promise<{
+  context: string
+  citations: Array<{ title: string; uri: string; pageNumber?: number }>
+  found: boolean
+}> {
   try {
-    // Przetłumacz pytanie na angielski dla lepszego dopasowania do angielskiego manuala
+    console.log('🔍 Vertex AI search dla:', query)
+
+    // Tłumacz polskie zapytanie na angielski (manuali są w języku angielskim)
     const translatedQuery = await translateToEnglish(query)
+    console.log('🌐 Zapytanie po tłumaczeniu:', translatedQuery)
 
-    // Utwórz embedding dla przetłumaczonego pytania
-    const queryEmbedding = await createEmbedding(translatedQuery)
-    console.log(`📊 Query embedding: długość=${queryEmbedding.length}, typ=${typeof queryEmbedding}`)
+    const servingConfig = `projects/${PROJECT_ID}/locations/${LOCATION}/collections/default_collection/dataStores/${DATA_STORE_ID}/servingConfigs/default_config`
 
-    // Wywołaj funkcję match_documents z Supabase
-    const { data, error } = await supabase.rpc('match_documents', {
-      query_embedding: queryEmbedding,
-      match_threshold: 0.3,  // Bardzo niski threshold dla polsko-angielskiego dopasowania
-      match_count: 15,       // Więcej wyników dla lepszego kontekstu
-    })
-
-    console.log('🔎 RPC match_documents wynik:', {
-      hasData: !!data,
-      dataLength: data?.length || 0,
-      error: error?.message
-    })
-
-    if (error) {
-      console.error('❌ Błąd wyszukiwania w bazie wiedzy:', error)
-      return ''
+    const request = {
+      servingConfig,
+      query: translatedQuery, // Użyj przetłumaczonego zapytania
+      pageSize: 10, // Return top 10 results
+      queryExpansionSpec: { condition: 'AUTO' },
+      spellCorrectionSpec: { mode: 'AUTO' },
+      contentSearchSpec: {
+        snippetSpec: {
+          maxSnippetCount: 5,
+          returnSnippet: true,
+        },
+        // For chunked data stores, we get chunks automatically
+        chunkSpec: {
+          numPreviousChunks: 0,
+          numNextChunks: 0,
+        },
+      },
     }
 
-    if (!data || data.length === 0) {
-      console.log('⚠️ Brak wyników z match_documents')
-      return ''
+    const [response] = await searchClient.search(request as any)
+
+    if (!response || response.length === 0) {
+      console.log('⚠️ Brak wyników z Vertex AI')
+      return { context: '', citations: [], found: false }
     }
 
-    console.log(`✅ Znaleziono ${data.length} dopasowań`)
-    data.forEach((doc: any, idx: number) => {
-      console.log(`  ${idx + 1}. ${doc.manual_name} - similarity: ${(doc.similarity * 100).toFixed(1)}%`)
+    console.log(`✅ Vertex AI zwrócił ${response.length} wyników`)
+
+    const citations: Array<{ title: string; uri: string; pageNumber?: number }> = []
+    const contextParts: string[] = []
+
+    response.forEach((result: any, idx: number) => {
+      // DEBUG: Log całego result
+      console.log(`\n🔍 Result ${idx + 1} FULL:`, JSON.stringify(result, null, 2))
+
+      const document = result.document
+      if (document) {
+        const structData = document.structData || document.derivedStructData
+
+        const title = structData?.fields?.title?.stringValue ||
+                     structData?.title ||
+                     document.name ||
+                     'Unknown Document'
+
+        const uri = structData?.fields?.link?.stringValue ||
+                   structData?.uri ||
+                   document.name ||
+                   ''
+
+        // Try to extract content from multiple sources
+        let content = ''
+
+        // 1. Try chunk content (for chunked data stores)
+        if (result.chunk?.content) {
+          content = result.chunk.content
+        }
+
+        // 2. Try snippets from derivedStructData.fields (nested structure)
+        if (!content && structData?.fields?.snippets?.listValue?.values) {
+          const snippetValues = structData.fields.snippets.listValue.values
+          const snippets = snippetValues
+            .map((v: any) => v.structValue?.fields?.snippet?.stringValue || '')
+            .filter((s: string) => s.length > 0)
+
+          if (snippets.length > 0) {
+            // Remove HTML tags like <b>
+            content = snippets
+              .map((s: string) => s.replace(/<[^>]*>/g, ''))
+              .join('\n\n')
+          }
+        }
+
+        // 3. Try extractive answers (fallback)
+        if (!content && result.document?.derivedStructData?.extractiveAnswers) {
+          const answers = result.document.derivedStructData.extractiveAnswers
+          content = answers.map((a: any) => a.content || '').join('\n\n')
+        }
+
+        // Extract page number if available
+        const pageNumber = structData?.fields?.page_number?.stringValue ||
+                          structData?.fields?.pageNumber?.stringValue ||
+                          structData?.page_number ||
+                          structData?.pageNumber
+
+        console.log(`  ${idx + 1}. ${title}`)
+        console.log(`     Content length: ${content?.length || 0}`)
+
+        if (content) {
+          contextParts.push(`[${title}${pageNumber ? ` - Strona ${pageNumber}` : ''}]\n${content}`)
+        }
+
+        citations.push({
+          title,
+          uri,
+          pageNumber: pageNumber ? parseInt(pageNumber) : undefined,
+        })
+      }
     })
 
-    // Formatuj wyniki do kontekstu
-    const context = data
-      .map((doc: any) => {
-        return `[${doc.manual_name} - Strona ${doc.page_number}]\n${doc.content}\n(Similarity: ${(doc.similarity * 100).toFixed(1)}%)`
-      })
-      .join('\n\n---\n\n')
+    const context = contextParts.join('\n\n---\n\n')
 
-    return context
+    return {
+      context,
+      citations,
+      found: contextParts.length > 0,
+    }
   } catch (error) {
-    console.error('Błąd w searchKnowledgeBase:', error)
-    return ''
+    console.error('❌ Błąd Vertex AI search:', error)
+    return { context: '', citations: [], found: false }
   }
 }
 
@@ -295,18 +372,24 @@ export async function POST(req: NextRequest) {
     // Pobierz ostatnią wiadomość użytkownika
     const lastUserMessage = messages[messages.length - 1]?.content || ''
 
-    // Wyszukaj w bazie wiedzy (RAG)
+    // Wyszukaj w Vertex AI RAG
     let knowledgeContext = ''
     let ragContextFound = false
-    if (lastUserMessage) {
-      console.log('🔍 Szukam w bazie wiedzy dla:', lastUserMessage)
-      knowledgeContext = await searchKnowledgeBase(lastUserMessage)
+    let citations: Array<{ title: string; uri: string; pageNumber?: number }> = []
 
-      if (knowledgeContext) {
-        console.log('✅ Znaleziono kontekst z bazy wiedzy')
-        ragContextFound = true
+    if (lastUserMessage) {
+      console.log('🔍 Szukam w Vertex AI RAG dla:', lastUserMessage)
+      const searchResult = await searchVertexAI(lastUserMessage)
+
+      knowledgeContext = searchResult.context
+      ragContextFound = searchResult.found
+      citations = searchResult.citations
+
+      if (ragContextFound) {
+        console.log('✅ Znaleziono kontekst z Vertex AI')
+        console.log(`📚 Citations: ${citations.length} źródeł`)
       } else {
-        console.log('❌ Nie znaleziono kontekstu w bazie wiedzy')
+        console.log('❌ Nie znaleziono kontekstu w Vertex AI')
       }
     }
 
@@ -346,6 +429,13 @@ export async function POST(req: NextRequest) {
               controller.enqueue(encoder.encode(text))
             }
           }
+
+          // Na końcu dodaj citations jako JSON (jeśli są)
+          if (citations.length > 0) {
+            const citationsJson = JSON.stringify({ citations })
+            controller.enqueue(encoder.encode(`\n\n__CITATIONS__${citationsJson}`))
+          }
+
           controller.close()
 
           // Po zakończeniu streamu zapisz log do Supabase (asynchronicznie, nie blokuj odpowiedzi)
@@ -356,7 +446,7 @@ export async function POST(req: NextRequest) {
             aiResponse: fullAiResponse,
             ragContextFound,
             responseTimeMs: responseTime,
-            modelUsed: 'gemini-3-pro-preview',
+            modelUsed: 'gemini-3-pro-preview + vertex-ai-rag',
           }).catch((err: any) => console.error('Błąd zapisywania logu czatu:', err))
 
         } catch (error) {
