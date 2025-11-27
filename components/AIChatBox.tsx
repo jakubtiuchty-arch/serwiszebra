@@ -12,9 +12,16 @@ import {
   MicOff
 } from 'lucide-react'
 
+interface Citation {
+  title: string
+  uri: string
+  pageNumber?: number
+}
+
 interface Message {
   role: 'user' | 'assistant'
   content: string
+  citations?: Citation[]
 }
 
 const placeholders = [
@@ -36,21 +43,28 @@ export default function AIChatBox() {
 
   // Show button logic:
   // 1. POWAŻNA USTERKA → button po pierwszej konkluzji (AI oznaczy jako "[SERIOUS_ISSUE]")
-  // 2. Normalnie → minimum 6 messages (3 exchanges)
-  // 3. Last message is from AI
-  // 4. Last AI message is NOT a question (no "?")
-  // 5. NOT currently loading (prevents button disappearing during streaming)
+  // 2. AI sugeruje wysłanie do serwisu → button od razu
+  // 3. Normalnie → minimum 6 messages (3 exchanges)
+  // 4. Last message is from AI
+  // 5. Last AI message is NOT a question (no "?")
+  // 6. NOT currently loading (prevents button disappearing during streaming)
   const messageCount = messages.length
   const lastMessage = messages[messages.length - 1]
   const isLastMessageAI = lastMessage?.role === 'assistant'
   const lastMessageIsQuestion = lastMessage?.content?.includes('?') || false
   const isSeriousIssue = lastMessage?.content?.includes('[SERIOUS_ISSUE]') || false
+  const suggestsRepair =
+    lastMessage?.content?.toLowerCase().includes('wysłać do serwisu') ||
+    lastMessage?.content?.toLowerCase().includes('wysłanie do serwisu') ||
+    lastMessage?.content?.toLowerCase().includes('wysłać drukarkę') ||
+    lastMessage?.content?.toLowerCase().includes('wysłać urządzenie') ||
+    false
 
   const shouldShowFormButton =
     isLastMessageAI &&
     !lastMessageIsQuestion &&
     !loading &&
-    (isSeriousIssue || messageCount >= 6)  // ✨ Pokaż wcześniej dla poważnych usterek
+    (isSeriousIssue || suggestsRepair || messageCount >= 6)  // ✨ Pokaż wcześniej dla poważnych usterek lub sugestii naprawy
 
   // Auto-scroll ONLY the chat container, NOT the whole page
   useEffect(() => {
@@ -161,12 +175,28 @@ export default function AIChatBox() {
         while (true) {
           const { done, value } = await reader.read()
           if (done) break
-          
+
           assistantMessage += decoder.decode(value)
-          
+
+          // Sprawdź czy są citations na końcu
+          const citationsMatch = assistantMessage.match(/__CITATIONS__(.+)$/)
+          let content = assistantMessage
+          let citations: Citation[] | undefined = undefined
+
+          if (citationsMatch) {
+            // Oddziel treść od citations
+            content = assistantMessage.substring(0, citationsMatch.index)
+            try {
+              const citationsData = JSON.parse(citationsMatch[1])
+              citations = citationsData.citations
+            } catch (e) {
+              console.error('Błąd parsowania citations:', e)
+            }
+          }
+
           setMessages(prev => [
             ...prev.slice(0, -1),
-            { role: 'assistant', content: assistantMessage }
+            { role: 'assistant', content, citations }
           ])
         }
       }
@@ -212,16 +242,37 @@ export default function AIChatBox() {
                 )}
                 
                 <div
-                  className={`max-w-[80%] rounded-3xl px-5 py-3 ${
+                  className={`max-w-[80%] ${
                     msg.role === 'user'
-                      ? 'bg-blue-600 text-white'
-                      : 'bg-gray-100 text-gray-900'
+                      ? ''
+                      : 'space-y-2'
                   }`}
                 >
-                  <p className="text-sm whitespace-pre-wrap leading-relaxed">
-                    {/* Ukryj znacznik [SERIOUS_ISSUE] przed użytkownikiem */}
-                    {msg.content.replace('[SERIOUS_ISSUE]', '').trim()}
-                  </p>
+                  <div
+                    className={`rounded-3xl px-5 py-3 ${
+                      msg.role === 'user'
+                        ? 'bg-blue-600 text-white'
+                        : 'bg-gray-100 text-gray-900'
+                    }`}
+                  >
+                    <p className="text-sm whitespace-pre-wrap leading-relaxed">
+                      {/* Ukryj znacznik [SERIOUS_ISSUE] przed użytkownikiem */}
+                      {msg.content.replace('[SERIOUS_ISSUE]', '').trim()}
+                    </p>
+                  </div>
+
+                  {/* Citations - tylko dla odpowiedzi AI */}
+                  {msg.role === 'assistant' && msg.citations && msg.citations.length > 0 && (
+                    <div className="px-3 py-2 bg-blue-50 rounded-2xl border border-blue-100">
+                      <p className="text-xs font-semibold text-blue-700 mb-1">Źródła:</p>
+                      {msg.citations.map((citation, citIdx) => (
+                        <div key={citIdx} className="text-xs text-blue-600 flex items-start gap-1">
+                          <span>📄</span>
+                          <span>{citation.title}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
 
                 {msg.role === 'user' && (
