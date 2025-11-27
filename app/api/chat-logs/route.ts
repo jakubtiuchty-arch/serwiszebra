@@ -40,7 +40,7 @@ export async function GET(req: NextRequest) {
     const stats = {
       total: allLogs?.length || 0,
       avgResponseTime: Math.round(
-        allLogs?.reduce((acc, log) => acc + (log.response_time_ms || 0), 0) / (allLogs?.length || 1)
+        (allLogs?.reduce((acc, log) => acc + (log.response_time_ms || 0), 0) || 0) / (allLogs?.length || 1)
       ),
       ragHitRate: Math.round(
         (allLogs?.filter(log => log.rag_context_found).length || 0) / (allLogs?.length || 1) * 100

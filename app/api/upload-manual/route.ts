@@ -63,7 +63,8 @@ export async function POST(req: NextRequest) {
     const buffer = Buffer.from(arrayBuffer)
 
     // Dynamiczny import pdf-parse
-    const pdf = (await import('pdf-parse')).default
+    const pdfParse = await import('pdf-parse') as any
+    const pdf = pdfParse.default || pdfParse
 
     // Parsuj PDF
     const pdfData = await pdf(buffer)
