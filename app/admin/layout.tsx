@@ -2,15 +2,19 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { 
-  LayoutDashboard, 
-  ClipboardList, 
-  UserCog, 
-  LogOut, 
+import {
+  LayoutDashboard,
+  ClipboardList,
+  UserCog,
+  LogOut,
   Shield,
   Package,
   ShoppingCart,
-  BarChart3
+  BarChart3,
+  MessageSquare,
+  BookOpen,
+  Search,
+  Database
 } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
@@ -59,8 +63,36 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     current: pathname === '/admin/uzytkownicy',
   },
   
-  // Analiza AI
-  { type: 'header', name: 'Analiza AI' },
+  // AI & RAG
+  { type: 'header', name: 'AI & RAG' },
+  {
+    name: 'Chat Logs',
+    href: '/admin/chat-logs',
+    icon: MessageSquare,
+    current: pathname === '/admin/chat-logs',
+  },
+  {
+    name: 'Upload Manual',
+    href: '/admin/upload-manual-text',
+    icon: BookOpen,
+    current: pathname === '/admin/upload-manual-text',
+  },
+  {
+    name: 'Test RAG',
+    href: '/admin/test-rag',
+    icon: Search,
+    current: pathname === '/admin/test-rag',
+  },
+  {
+    name: 'Test DB',
+    href: '/api/test-db',
+    icon: Database,
+    current: false,
+    external: true,
+  },
+
+  // Analiza
+  { type: 'header', name: 'Analiza' },
   {
     name: 'Analityka - serwis',
     href: '/admin/analityka-serwis',
@@ -106,10 +138,15 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             }
             
             const Icon = item.icon
+            const linkProps = item.external
+              ? { target: '_blank', rel: 'noopener noreferrer' }
+              : {}
+
             return (
               <Link
                 key={item.name}
                 href={item.href || '#'}
+                {...linkProps}
                 className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-colors text-sm ${
                   item.disabled
                     ? 'text-blue-400 cursor-not-allowed opacity-50'

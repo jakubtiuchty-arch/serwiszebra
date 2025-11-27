@@ -27,6 +27,35 @@ async function createEmbedding(text: string): Promise<number[]> {
   return response.data[0].embedding
 }
 
+// Funkcja do zapisywania logów czatu do Supabase
+async function saveChatLog(data: {
+  sessionId: string
+  userMessage: string
+  aiResponse: string
+  ragContextFound: boolean
+  responseTimeMs: number
+  modelUsed: string
+}) {
+  try {
+    const { error } = await supabase.from('chat_logs').insert({
+      session_id: data.sessionId,
+      user_message: data.userMessage,
+      ai_response: data.aiResponse,
+      rag_context_found: data.ragContextFound,
+      response_time_ms: data.responseTimeMs,
+      model_used: data.modelUsed,
+    })
+
+    if (error) {
+      console.error('❌ Błąd zapisywania logu do Supabase:', error)
+    } else {
+      console.log('✅ Log czatu zapisany pomyślnie')
+    }
+  } catch (error) {
+    console.error('❌ Błąd w saveChatLog:', error)
+  }
+}
+
 // Funkcja do tłumaczenia pytania PL→EN dla lepszego dopasowania
 async function translateToEnglish(text: string): Promise<string> {
   try {
@@ -258,20 +287,24 @@ BAZA WIEDZY - MANUELE ZEBRA:
 Jeśli użytkownik pyta o konkretny problem techniczny, ZAWSZE sprawdź czy w dostarczonym kontekście z bazy wiedzy (poniżej) znajdują się relevantne informacje. Jeśli tak, użyj ich aby udzielić precyzyjnej odpowiedzi, cytując manual.`
 
 export async function POST(req: NextRequest) {
+  const startTime = Date.now()
+
   try {
-    const { messages } = await req.json()
+    const { messages, sessionId } = await req.json()
 
     // Pobierz ostatnią wiadomość użytkownika
     const lastUserMessage = messages[messages.length - 1]?.content || ''
 
     // Wyszukaj w bazie wiedzy (RAG)
     let knowledgeContext = ''
+    let ragContextFound = false
     if (lastUserMessage) {
       console.log('🔍 Szukam w bazie wiedzy dla:', lastUserMessage)
       knowledgeContext = await searchKnowledgeBase(lastUserMessage)
 
       if (knowledgeContext) {
         console.log('✅ Znaleziono kontekst z bazy wiedzy')
+        ragContextFound = true
       } else {
         console.log('❌ Nie znaleziono kontekstu w bazie wiedzy')
       }
@@ -299,18 +332,33 @@ export async function POST(req: NextRequest) {
       contents: fullPrompt,
     })
 
-    // Stwórz readable stream
+    // Stwórz readable stream i zbieraj odpowiedź
     const encoder = new TextEncoder()
+    let fullAiResponse = ''
+
     const readableStream = new ReadableStream({
       async start(controller) {
         try {
           for await (const chunk of responseStream) {
             const text = chunk.text
             if (text) {
+              fullAiResponse += text
               controller.enqueue(encoder.encode(text))
             }
           }
           controller.close()
+
+          // Po zakończeniu streamu zapisz log do Supabase (asynchronicznie, nie blokuj odpowiedzi)
+          const responseTime = Date.now() - startTime
+          saveChatLog({
+            sessionId: sessionId || 'unknown',
+            userMessage: lastUserMessage,
+            aiResponse: fullAiResponse,
+            ragContextFound,
+            responseTimeMs: responseTime,
+            modelUsed: 'gemini-3-pro-preview',
+          }).catch((err: any) => console.error('Błąd zapisywania logu czatu:', err))
+
         } catch (error) {
           console.error('Streaming error:', error)
           controller.error(error)

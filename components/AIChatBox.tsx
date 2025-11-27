@@ -30,6 +30,7 @@ export default function AIChatBox() {
   const [currentPlaceholder, setCurrentPlaceholder] = useState('')
   const [placeholderIndex, setPlaceholderIndex] = useState(0)
   const [isRecording, setIsRecording] = useState(false)
+  const [sessionId] = useState(() => `session_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`)
   const messagesContainerRef = useRef<HTMLDivElement>(null)
   const recognitionRef = useRef<any>(null)
 
@@ -143,7 +144,8 @@ export default function AIChatBox() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          messages: [...messages, userMessage]
+          messages: [...messages, userMessage],
+          sessionId
         }),
       })
 
