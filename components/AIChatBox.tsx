@@ -34,20 +34,22 @@ export default function AIChatBox() {
   const recognitionRef = useRef<any>(null)
 
   // Show button logic:
-  // 1. Minimum 6 messages (3 exchanges)
-  // 2. Last message is from AI
-  // 3. Last AI message is NOT a question (no "?")
-  // 4. NOT currently loading (prevents button disappearing during streaming)
+  // 1. POWAŻNA USTERKA → button po pierwszej konkluzji (AI oznaczy jako "[SERIOUS_ISSUE]")
+  // 2. Normalnie → minimum 6 messages (3 exchanges)
+  // 3. Last message is from AI
+  // 4. Last AI message is NOT a question (no "?")
+  // 5. NOT currently loading (prevents button disappearing during streaming)
   const messageCount = messages.length
   const lastMessage = messages[messages.length - 1]
   const isLastMessageAI = lastMessage?.role === 'assistant'
   const lastMessageIsQuestion = lastMessage?.content?.includes('?') || false
-  
-  const shouldShowFormButton = 
-    messageCount >= 6 && 
-    isLastMessageAI && 
+  const isSeriousIssue = lastMessage?.content?.includes('[SERIOUS_ISSUE]') || false
+
+  const shouldShowFormButton =
+    isLastMessageAI &&
     !lastMessageIsQuestion &&
-    !loading  // Don't show during streaming
+    !loading &&
+    (isSeriousIssue || messageCount >= 6)  // ✨ Pokaż wcześniej dla poważnych usterek
 
   // Auto-scroll ONLY the chat container, NOT the whole page
   useEffect(() => {
@@ -215,7 +217,8 @@ export default function AIChatBox() {
                   }`}
                 >
                   <p className="text-sm whitespace-pre-wrap leading-relaxed">
-                    {msg.content}
+                    {/* Ukryj znacznik [SERIOUS_ISSUE] przed użytkownikiem */}
+                    {msg.content.replace('[SERIOUS_ISSUE]', '').trim()}
                   </p>
                 </div>
 
