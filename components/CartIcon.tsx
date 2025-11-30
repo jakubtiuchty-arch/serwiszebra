@@ -71,18 +71,18 @@ export default function CartIcon({ isAuthenticated = false }: CartIconProps) {
 
       {/* DROPDOWN MENU */}
       {dropdownOpen && (
-        <div className="absolute right-0 mt-2 w-56 bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden animate-in fade-in slide-in-from-top-1 duration-200">
-          
+        <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-gray-200 overflow-hidden animate-in fade-in slide-in-from-top-1 duration-200">
+
           {/* Koszyk - zawsze widoczny */}
           <button
             onClick={() => handleNavigate('/koszyk')}
-            className="w-full flex items-center gap-3 px-5 py-4 hover:bg-gray-50 transition-colors text-left"
+            className="w-full flex items-center gap-2 px-3 py-2 hover:bg-gray-50 transition-colors text-left"
           >
-            <ShoppingCart className="w-5 h-5 text-gray-600" strokeWidth={1.5} />
+            <ShoppingCart className="w-4 h-4 text-gray-600" strokeWidth={1.5} />
             <div className="flex-1">
-              <p className="font-medium text-gray-900">Koszyk</p>
+              <p className="text-xs font-semibold text-gray-900">Koszyk</p>
               {mounted && totalItems > 0 && (
-                <p className="text-xs text-gray-500">{totalItems} {totalItems === 1 ? 'produkt' : 'produktów'}</p>
+                <p className="text-[10px] text-gray-500">{totalItems} {totalItems === 1 ? 'produkt' : 'produktów'}</p>
               )}
             </div>
           </button>
@@ -93,12 +93,12 @@ export default function CartIcon({ isAuthenticated = false }: CartIconProps) {
               <div className="border-t border-gray-100" />
               <button
                 onClick={() => handleNavigate('/panel/zamowienia')}
-                className="w-full flex items-center gap-3 px-5 py-4 hover:bg-gray-50 transition-colors text-left"
+                className="w-full flex items-center gap-2 px-3 py-2 hover:bg-gray-50 transition-colors text-left"
               >
-                <Package className="w-5 h-5 text-gray-600" strokeWidth={1.5} />
+                <Package className="w-4 h-4 text-gray-600" strokeWidth={1.5} />
                 <div className="flex-1">
-                  <p className="font-medium text-gray-900">Moje zamówienia</p>
-                  <p className="text-xs text-gray-500">Historia i status</p>
+                  <p className="text-xs font-semibold text-gray-900">Moje zamówienia</p>
+                  <p className="text-[10px] text-gray-500">Historia i status</p>
                 </div>
               </button>
 
@@ -106,17 +106,17 @@ export default function CartIcon({ isAuthenticated = false }: CartIconProps) {
               <div className="border-t border-gray-100" />
               <button
                 onClick={handleLogout}
-                className="w-full flex items-center gap-3 px-5 py-4 hover:bg-gray-50 transition-colors text-left"
+                className="w-full flex items-center gap-2 px-3 py-2 hover:bg-gray-50 transition-colors text-left"
               >
-                <LogOut className="w-5 h-5 text-gray-600" strokeWidth={1.5} />
+                <LogOut className="w-4 h-4 text-gray-600" strokeWidth={1.5} />
                 <div className="flex-1">
-                  <p className="font-medium text-gray-900">Wyloguj się</p>
-                  <p className="text-xs text-gray-500">Zakończ sesję</p>
+                  <p className="text-xs font-semibold text-gray-900">Wyloguj się</p>
+                  <p className="text-[10px] text-gray-500">Zakończ sesję</p>
                 </div>
               </button>
             </>
           )}
-          
+
         </div>
       )}
 

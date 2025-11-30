@@ -85,6 +85,47 @@ async function translateToEnglish(text: string): Promise<string> {
   }
 }
 
+// Helper function to detect printer model from query
+function detectPrinterModel(query: string): string[] {
+  const models: string[] = []
+  const queryLower = query.toLowerCase()
+
+  // Common Zebra printer models
+  const printerModels = [
+    'zt411', 'zt421', 'zt410', 'zt420',
+    'zd421', 'zd621', 'zd420', 'zd620',
+    'zd888', 'zd500', 'zd510',
+    'zt510', 'zt610',
+    'gc420d', 'gc420t',
+    'tlp2844', 'lp2844'
+  ]
+
+  // Check for each model
+  for (const model of printerModels) {
+    if (queryLower.includes(model)) {
+      models.push(model.toUpperCase())
+    }
+  }
+
+  console.log(`🔍 Wykryte modele w zapytaniu "${query}":`, models.length > 0 ? models : 'BRAK')
+  return models
+}
+
+// Helper function to check if citation matches detected models
+function citationMatchesModel(citation: { title: string; uri: string }, detectedModels: string[]): boolean {
+  if (detectedModels.length === 0) {
+    return true // No specific model detected, show all citations
+  }
+
+  const titleUpper = citation.title.toUpperCase()
+  const uriUpper = citation.uri.toUpperCase()
+
+  // Check if citation title/uri contains any of the detected models
+  return detectedModels.some(model =>
+    titleUpper.includes(model) || uriUpper.includes(model)
+  )
+}
+
 // Funkcja do wyszukiwania w Vertex AI RAG
 async function searchVertexAI(query: string): Promise<{
   context: string
@@ -94,21 +135,35 @@ async function searchVertexAI(query: string): Promise<{
   try {
     console.log('🔍 Vertex AI search dla:', query)
 
+    // Detect printer model from query
+    const detectedModels = detectPrinterModel(query)
+
     // Tłumacz polskie zapytanie na angielski (manuali są w języku angielskim)
-    const translatedQuery = await translateToEnglish(query)
-    console.log('🌐 Zapytanie po tłumaczeniu:', translatedQuery)
+    let translatedQuery = await translateToEnglish(query)
+
+    // Boost search for detected models by appending model to query
+    if (detectedModels.length > 0) {
+      translatedQuery = `${translatedQuery} ${detectedModels.join(' ')}`
+      console.log('🎯 Boosted query with models:', translatedQuery)
+    } else {
+      console.log('🌐 Zapytanie po tłumaczeniu:', translatedQuery)
+    }
 
     const servingConfig = `projects/${PROJECT_ID}/locations/${LOCATION}/collections/default_collection/dataStores/${DATA_STORE_ID}/servingConfigs/default_config`
 
-    const request = {
+    // NOTE: Discovery Engine for unstructured data stores does not support filtering by uri/link
+    // We rely on post-processing citation filtering based on detected models instead
+    // This happens in the citationMatchesModel() function below
+
+    const request: any = {
       servingConfig,
       query: translatedQuery, // Użyj przetłumaczonego zapytania
-      pageSize: 10, // Return top 10 results
+      pageSize: 3, // Reduced from 10 to 3 for faster response
       queryExpansionSpec: { condition: 'AUTO' },
       spellCorrectionSpec: { mode: 'AUTO' },
       contentSearchSpec: {
         snippetSpec: {
-          maxSnippetCount: 5,
+          maxSnippetCount: 2, // Reduced from 5 to 2 for faster response
           returnSnippet: true,
         },
         // For chunked data stores, we get chunks automatically
@@ -191,15 +246,26 @@ async function searchVertexAI(query: string): Promise<{
           contextParts.push(`[${title}${pageNumber ? ` - Strona ${pageNumber}` : ''}]\n${content}`)
         }
 
-        citations.push({
+        // Create citation object
+        const citation = {
           title,
           uri,
           pageNumber: pageNumber ? parseInt(pageNumber) : undefined,
-        })
+        }
+
+        // Only add citation if it matches the detected printer model
+        if (citationMatchesModel(citation, detectedModels)) {
+          console.log(`  ✅ Citation dodany: ${title}`)
+          citations.push(citation)
+        } else {
+          console.log(`  ❌ Citation odrzucony (nie pasuje do modelu): ${title}`)
+        }
       }
     })
 
     const context = contextParts.join('\n\n---\n\n')
+
+    console.log(`📊 Filtorwanie citations: ${citations.length} z ${response.length} wyników`)
 
     return {
       context,
@@ -213,6 +279,22 @@ async function searchVertexAI(query: string): Promise<{
 }
 
 const SYSTEM_PROMPT = `Jesteś AI asystentem serwisu "Serwis Zebra" prowadzonego przez TAKMA Sp. z o.o. - oficjalnego, certyfikowanego Partnera Serwisowego Zebra Technologies (Zebra Premier Partner Repair Specialist).
+
+🚫 **KRYTYCZNE - FILTROWANIE TEMATÓW (ZAWSZE SPRAWDZAJ NAJPIERW!):**
+Odpowiadasz WYŁĄCZNIE na pytania dotyczące:
+- Urządzeń marki Zebra Technologies (drukarki etykiet, terminale mobilne, skanery kodów kreskowych)
+- Serwisu, naprawy, diagnostyki urządzeń Zebra
+- Materiałów eksploatacyjnych do urządzeń Zebra (etykiety, taśmy, ribbony)
+- Konfiguracji i obsługi urządzeń Zebra
+
+Jeśli pytanie NIE dotyczy urządzeń Zebra, odpowiedz KRÓTKO:
+"Przepraszam, ale jestem asystentem specjalizującym się wyłącznie w urządzeniach Zebra Technologies (drukarki etykiet, terminale, skanery). Jeśli masz pytanie dotyczące sprzętu Zebra - chętnie pomogę! 🦓"
+
+NIE odpowiadaj na pytania o:
+- Inne marki drukarek (HP, Brother, Epson, Canon, itp.)
+- Tematy niezwiązane z urządzeniami (pogoda, polityka, programowanie, gotowanie, itp.)
+- Ogólne pytania IT niezwiązane z Zebra
+- Prośby o pisanie tekstów, tłumaczenia, itp.
 
 WAŻNE ZASADY:
 0. **ZAWSZE PYTAJ O MODEL URZĄDZENIA NA POCZĄTKU!**
@@ -284,6 +366,7 @@ PROCES NAPRAWY:
 3. Szczegółowa wycena do akceptacji
 4. Po akceptacji - naprawa (standard 3-5 dni, express 1-2 dni +50 zł)
 5. 12 miesięcy gwarancji na naprawę
+6. BONUS: Po założeniu konta śledzisz każdy etap naprawy na żywo w swoim panelu
 
 TYPOWE PROBLEMY I DIAGNOZY:
 
@@ -309,7 +392,7 @@ STYL KOMUNIKACJI:
 - Zakończ diagnozę KONKLUZJĄ, nie pytaniem
 - NIE pisz "kurier od nas" ani "nasz kurier" - po prostu "kurier"
 - NIE pisz "zapraszam do wypełnienia formularza na stronie" - button się pojawi automatycznie
-- Przykład dobrego zakończenia: "Na podstawie opisu proponuję wysłać drukarkę do serwisu. Kurier odbierze urządzenie bezpłatnie z Twojego adresu. Wykonamy diagnostykę (24-48h), a dokładna wycena zostanie przesłana do akceptacji."
+- Przykład dobrego zakończenia: "Proponuję wysłać drukarkę do serwisu w celu weryfikacji modułu. Kurier odbierze urządzenie bezpłatnie z Twojego adresu. Wykonamy szczegółową diagnostykę (24-48h), a następnie prześlemy dokładną wycenę do akceptacji. Diagnostyka jest bezpłatna przy akceptacji naprawy (w przypadku rezygnacji koszt wynosi 99 zł netto). Po założeniu konta będziesz mógł śledzić każdy etap naprawy na żywo w panelu."
 
 PRZYKŁADOWE KONWERSACJE:
 
@@ -363,6 +446,64 @@ PAMIĘTAJ:
 BAZA WIEDZY - MANUELE ZEBRA:
 Jeśli użytkownik pyta o konkretny problem techniczny, ZAWSZE sprawdź czy w dostarczonym kontekście z bazy wiedzy (poniżej) znajdują się relevantne informacje. Jeśli tak, użyj ich aby udzielić precyzyjnej odpowiedzi, cytując manual.`
 
+// Pre-filtr: sprawdza czy wiadomość jest potencjalnie związana z Zebra/drukarkami/skanerami
+function isZebraRelated(message: string): boolean {
+  const msgLower = message.toLowerCase()
+  
+  // Słowa kluczowe związane z Zebra i urządzeniami
+  const zebraKeywords = [
+    // Marka
+    'zebra', 'takma',
+    // Typy urządzeń
+    'drukark', 'printer', 'terminal', 'skaner', 'scanner', 'czytnik',
+    'etykiet', 'label', 'kodów', 'barcode', 'qr',
+    // Modele Zebra
+    'zt4', 'zt5', 'zt6', 'zd4', 'zd5', 'zd6', 'zd2', 'zd8',
+    'gc42', 'gk42', 'gx4', 'gt8', 'tlp', 'lp28',
+    'tc2', 'tc5', 'tc7', 'tc8', 'mc', 'wt',
+    'ds22', 'ds34', 'ds36', 'ds45', 'ds82', 'li', 'ls',
+    // Komponenty/problemy
+    'głowic', 'ribbon', 'taśm', 'wałek', 'sensor', 'wydruk',
+    'kalibracja', 'papier', 'zacina', 'pasy', 'smugi',
+    'nie drukuje', 'nie skanuje', 'błąd', 'error',
+    'serwis', 'naprawa', 'diagnoz', 'usterka', 'awaria',
+    // Słowa ogólne ale kontekstowe
+    'urządzeni'
+  ]
+  
+  // Sprawdź czy zawiera słowa kluczowe
+  for (const keyword of zebraKeywords) {
+    if (msgLower.includes(keyword)) {
+      return true
+    }
+  }
+  
+  // Jeśli to pierwsza wiadomość i jest krótka, daj szansę (może dopytać)
+  if (message.length < 50) {
+    // Sprawdź czy nie jest to oczywisty spam
+    const spamKeywords = ['bitcoin', 'crypto', 'sex', 'porn', 'viagra', 'casino', 
+      'napisz mi', 'napisz opowiadanie', 'jaki jest', 'kim jesteś', 'opowiedz żart',
+      'pogoda', 'przepis', 'gotowanie', 'polityk']
+    for (const spam of spamKeywords) {
+      if (msgLower.includes(spam)) {
+        return false
+      }
+    }
+    return true // Krótkie wiadomości przepuszczamy - AI dopyta
+  }
+  
+  return false
+}
+
+const OFF_TOPIC_RESPONSE = `Przepraszam, ale jestem asystentem specjalizującym się wyłącznie w urządzeniach Zebra Technologies (drukarki etykiet, terminale mobilne, skanery kodów kreskowych).
+
+Jeśli masz pytanie dotyczące sprzętu Zebra - chętnie pomogę! 🦓
+
+Przykładowe pytania:
+• "Moja drukarka ZD421 ma białe pasy na wydruku"
+• "Jak skalibrować drukarkę Zebra?"
+• "Terminal TC21 nie skanuje kodów"`
+
 export async function POST(req: NextRequest) {
   const startTime = Date.now()
 
@@ -371,6 +512,25 @@ export async function POST(req: NextRequest) {
 
     // Pobierz ostatnią wiadomość użytkownika
     const lastUserMessage = messages[messages.length - 1]?.content || ''
+
+    // 🚫 PRE-FILTR: Odrzuć oczywiste off-topic ZANIM wywołamy drogie modele AI
+    if (lastUserMessage && messages.length <= 2 && !isZebraRelated(lastUserMessage)) {
+      console.log('🚫 Off-topic message rejected:', lastUserMessage.substring(0, 50))
+      
+      // Zapisz log (bez kosztu API)
+      saveChatLog({
+        sessionId: sessionId || 'unknown',
+        userMessage: lastUserMessage,
+        aiResponse: OFF_TOPIC_RESPONSE,
+        ragContextFound: false,
+        responseTimeMs: Date.now() - startTime,
+        modelUsed: 'pre-filter-rejected',
+      }).catch((err: any) => console.error('Błąd zapisywania logu:', err))
+
+      return new Response(OFF_TOPIC_RESPONSE, {
+        headers: { 'Content-Type': 'text/plain; charset=utf-8' },
+      })
+    }
 
     // Wyszukaj w Vertex AI RAG
     let knowledgeContext = ''

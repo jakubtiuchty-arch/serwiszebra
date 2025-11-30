@@ -47,6 +47,8 @@ export default function SklepPage() {
   const [sortBy, setSortBy] = useState('name')
   const [filters, setFilters] = useState<FilterState>({
     productType: '',
+    deviceType: '',
+    deviceCategory: '',
     deviceModel: '',
     resolution: '',
     search: ''
@@ -63,9 +65,11 @@ export default function SklepPage() {
     setLoading(true)
     try {
       const params = new URLSearchParams()
-      
+
       if (filters.search) params.append('search', filters.search)
       if (filters.productType) params.append('productType', filters.productType)
+      if (filters.deviceType) params.append('deviceType', filters.deviceType)
+      if (filters.deviceCategory) params.append('deviceCategory', filters.deviceCategory)
       if (filters.deviceModel) params.append('deviceModel', filters.deviceModel)
       if (filters.resolution) params.append('resolution', filters.resolution)
       if (sortBy) params.append('sortBy', sortBy)

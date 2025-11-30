@@ -123,34 +123,37 @@ export default function ProfilPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <Loader2 className="w-6 h-6 animate-spin text-orange-500" />
+      <div className="flex items-center justify-center py-12">
+        <div className="flex flex-col items-center gap-3">
+          <Loader2 className="w-8 h-8 text-blue-600 animate-spin" />
+          <p className="text-sm text-gray-600">Ładowanie profilu...</p>
+        </div>
       </div>
     )
   }
 
   return (
-    <div className="space-y-4">
-      <div className="mb-4">
-        <h1 className="text-2xl font-bold text-gray-900">Mój profil</h1>
-        <p className="text-sm text-gray-600 mt-0.5">
-          Zarządzaj swoimi danymi osobowymi i adresem dostawy
+    <div className="space-y-3 sm:space-y-4">
+      <div>
+        <h1 className="text-xl sm:text-2xl font-bold text-gray-900 mb-0.5">Mój profil</h1>
+        <p className="text-xs text-gray-500">
+          Zarządzaj swoimi danymi osobowymi i firmowymi
         </p>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-3">
         {/* Dane osobowe */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4">
-          <div className="flex items-center gap-2 mb-4">
+        <div className="bg-white border-2 border-gray-300 rounded-xl shadow-md p-3">
+          <div className="flex items-center gap-2 mb-3">
             <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
               <User className="w-4 h-4 text-blue-600" />
             </div>
-            <h2 className="text-base font-semibold text-gray-900">Dane osobowe</h2>
+            <h2 className="text-sm font-bold text-gray-900">Dane osobowe</h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
             <div>
-              <label className="block text-xs font-medium text-gray-700 mb-1.5">
+              <label className="block text-[10px] font-medium text-gray-700 mb-0.5">
                 Imię *
               </label>
               <input
@@ -159,13 +162,13 @@ export default function ProfilPage() {
                 value={formData.first_name}
                 onChange={handleChange}
                 required
-                className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
+                className="w-full px-2 py-1 text-xs border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
                 placeholder="Jan"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-gray-700 mb-1.5">
+              <label className="block text-[10px] font-medium text-gray-700 mb-0.5">
                 Nazwisko *
               </label>
               <input
@@ -174,13 +177,13 @@ export default function ProfilPage() {
                 value={formData.last_name}
                 onChange={handleChange}
                 required
-                className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
+                className="w-full px-2 py-1 text-xs border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
                 placeholder="Kowalski"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-gray-700 mb-1.5">
+              <label className="block text-[10px] font-medium text-gray-700 mb-0.5">
                 Telefon *
               </label>
               <input
@@ -189,13 +192,13 @@ export default function ProfilPage() {
                 value={formData.phone}
                 onChange={handleChange}
                 required
-                className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
+                className="w-full px-2 py-1 text-xs border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
                 placeholder="+48 123 456 789"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-gray-700 mb-1.5">
+              <label className="block text-[10px] font-medium text-gray-700 mb-0.5">
                 Email
               </label>
               <input
@@ -203,9 +206,9 @@ export default function ProfilPage() {
                 name="email"
                 value={formData.email}
                 disabled
-                className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg bg-gray-50 text-gray-500 cursor-not-allowed"
+                className="w-full px-2 py-1 text-xs border border-gray-300 rounded-lg bg-gray-50 text-gray-500 cursor-not-allowed"
               />
-              <p className="text-[10px] text-gray-500 mt-1">
+              <p className="text-[10px] text-gray-500 mt-0.5">
                 Email nie może być zmieniony
               </p>
             </div>
@@ -213,18 +216,20 @@ export default function ProfilPage() {
         </div>
 
         {/* Dane firmy */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4">
-          <div className="flex items-center gap-2 mb-4">
-            <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center">
-              <Building2 className="w-4 h-4 text-green-600" />
+        <div className="bg-white border-2 border-gray-300 rounded-xl shadow-md p-3">
+          <div className="flex items-center gap-2 mb-3">
+            <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
+              <Building2 className="w-4 h-4 text-blue-600" />
             </div>
-            <h2 className="text-base font-semibold text-gray-900">Dane firmy</h2>
-            <span className="text-xs text-gray-500">(opcjonalnie)</span>
+            <div>
+              <h2 className="text-sm font-bold text-gray-900">Dane firmy</h2>
+              <p className="text-[10px] text-gray-600">(opcjonalnie)</p>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
             <div>
-              <label className="block text-xs font-medium text-gray-700 mb-1.5">
+              <label className="block text-[10px] font-medium text-gray-700 mb-0.5">
                 Nazwa firmy
               </label>
               <input
@@ -232,13 +237,13 @@ export default function ProfilPage() {
                 name="company_name"
                 value={formData.company_name}
                 onChange={handleChange}
-                className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
+                className="w-full px-2 py-1 text-xs border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
                 placeholder="Przykładowa Firma Sp. z o.o."
               />
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-gray-700 mb-1.5">
+              <label className="block text-[10px] font-medium text-gray-700 mb-0.5">
                 NIP
               </label>
               <input
@@ -246,7 +251,7 @@ export default function ProfilPage() {
                 name="nip"
                 value={formData.nip}
                 onChange={handleChange}
-                className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
+                className="w-full px-2 py-1 text-xs border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
                 placeholder="1234567890"
                 maxLength={10}
               />
@@ -255,18 +260,20 @@ export default function ProfilPage() {
         </div>
 
         {/* Adres dostawy */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4">
-          <div className="flex items-center gap-2 mb-4">
+        <div className="bg-white border-2 border-gray-300 rounded-xl shadow-md p-3">
+          <div className="flex items-center gap-2 mb-3">
             <div className="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center">
               <MapPin className="w-4 h-4 text-purple-600" />
             </div>
-            <h2 className="text-base font-semibold text-gray-900">Adres dostawy</h2>
-            <span className="text-xs text-gray-500">(opcjonalnie)</span>
+            <div>
+              <h2 className="text-sm font-bold text-gray-900">Adres dostawy</h2>
+              <p className="text-[10px] text-gray-600">(opcjonalnie)</p>
+            </div>
           </div>
 
-          <div className="space-y-3">
+          <div className="space-y-2">
             <div>
-              <label className="block text-xs font-medium text-gray-700 mb-1.5">
+              <label className="block text-[10px] font-medium text-gray-700 mb-0.5">
                 Ulica i numer
               </label>
               <input
@@ -274,14 +281,14 @@ export default function ProfilPage() {
                 name="street"
                 value={formData.street}
                 onChange={handleChange}
-                className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
+                className="w-full px-2 py-1 text-xs border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
                 placeholder="ul. Przykładowa 123/45"
               />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
               <div>
-                <label className="block text-xs font-medium text-gray-700 mb-1.5">
+                <label className="block text-[10px] font-medium text-gray-700 mb-0.5">
                   Kod pocztowy
                 </label>
                 <input
@@ -289,14 +296,14 @@ export default function ProfilPage() {
                   name="postal_code"
                   value={formData.postal_code}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
+                  className="w-full px-2 py-1 text-xs border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
                   placeholder="00-000"
                   maxLength={6}
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-gray-700 mb-1.5">
+                <label className="block text-[10px] font-medium text-gray-700 mb-0.5">
                   Miasto
                 </label>
                 <input
@@ -304,7 +311,7 @@ export default function ProfilPage() {
                   name="city"
                   value={formData.city}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
+                  className="w-full px-2 py-1 text-xs border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
                   placeholder="Wrocław"
                 />
               </div>
@@ -313,20 +320,20 @@ export default function ProfilPage() {
         </div>
 
         {/* Przyciski */}
-        <div className="flex gap-3">
+        <div className="flex justify-end">
           <button
             type="submit"
             disabled={saving}
-            className="flex-1 bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2.5 px-4 rounded-lg text-sm transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+            className="flex items-center gap-1 px-3 py-1 bg-gray-900 hover:bg-gray-800 text-white rounded-lg text-xs font-semibold transition-all disabled:opacity-50"
           >
             {saving ? (
               <>
-                <Loader2 className="w-4 h-4 animate-spin" />
+                <Loader2 className="w-3 h-3 animate-spin" />
                 Zapisywanie...
               </>
             ) : (
               <>
-                <CheckCircle2 className="w-4 h-4" />
+                <CheckCircle2 className="w-3 h-3" />
                 Zapisz zmiany
               </>
             )}

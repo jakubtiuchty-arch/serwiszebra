@@ -6,6 +6,8 @@ export async function GET(request: Request) {
     const { searchParams } = new URL(request.url)
     const search = searchParams.get('search')
     const productType = searchParams.get('productType')
+    const deviceType = searchParams.get('deviceType')
+    const deviceCategory = searchParams.get('deviceCategory')
     const deviceModel = searchParams.get('deviceModel')
     const resolution = searchParams.get('resolution')
     const sortBy = searchParams.get('sortBy') || 'name'
@@ -23,6 +25,14 @@ export async function GET(request: Request) {
 
     if (productType) {
       query = query.eq('product_type', productType)
+    }
+
+    if (deviceType) {
+      query = query.eq('device_type', deviceType)
+    }
+
+    if (deviceCategory) {
+      query = query.eq('device_category', deviceCategory)
     }
 
     if (deviceModel) {

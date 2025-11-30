@@ -24,7 +24,7 @@ import {
   Zap
 } from 'lucide-react'
 
-type PricingCategory = 'drukarki' | 'terminale' | 'skanery'
+type PricingCategory = 'drukarki' | 'terminale' | 'skanery' | 'tablety'
 
 export default function HomePage() {
   const [activeCategory, setActiveCategory] = useState<PricingCategory>('drukarki')
@@ -135,71 +135,116 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
       <div className="min-h-screen bg-white font-sans antialiased">
-        {/* TOP BAR */}
-        <div className="py-1.5 px-3 sm:px-4 border-b border-gray-200 bg-white">
-          <div className="max-w-7xl mx-auto">
-            <div className="flex items-center justify-between text-[10px] sm:text-xs text-gray-700 relative">
-              <span className="flex items-center gap-1.5">
-                <Calendar className="w-3 h-3 text-blue-600 flex-shrink-0" />
-                <span className="whitespace-nowrap">Od 25 lat na rynku</span>
-              </span>
-              <span className="flex items-center gap-1.5 absolute left-1/2 -translate-x-1/2">
-                <ThumbsUp className="w-3 h-3 text-green-600 flex-shrink-0" />
-                <span className="whitespace-nowrap">Tysiące skutecznych napraw</span>
-              </span>
-              <span className="hidden sm:flex items-center gap-1.5">
-                <Zap className="w-3 h-3 text-orange-500 flex-shrink-0" />
-                <span className="whitespace-nowrap">Maksymalnie skrócony proces napraw</span>
-              </span>
+        {/* HEADER - na całej szerokości */}
+        <div className="bg-white border-b border-gray-200 shadow-sm">
+          {/* TOP BAR - UKRYTE NA MOBILE */}
+          <div className="hidden md:block py-1.5 px-3 sm:px-4 bg-gray-50 border-b border-gray-200 shadow-[inset_0_2px_4px_0_rgba(0,0,0,0.06)]">
+            <div className="max-w-7xl mx-auto">
+              <div className="flex items-center justify-between text-xs text-gray-700 relative">
+                <span className="flex items-center gap-1.5">
+                  <Calendar className="w-3 h-3 text-blue-600 flex-shrink-0" />
+                  <span className="whitespace-nowrap">Od 25 lat na rynku</span>
+                </span>
+                <span className="flex items-center gap-1.5 absolute left-1/2 -translate-x-1/2">
+                  <ThumbsUp className="w-3 h-3 text-green-600 flex-shrink-0" />
+                  <span className="whitespace-nowrap">Tysiące skutecznych napraw</span>
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <Zap className="w-3 h-3 text-orange-500 flex-shrink-0" />
+                  <span className="whitespace-nowrap">Maksymalnie skrócony proces napraw</span>
+                </span>
+              </div>
             </div>
           </div>
-        </div>
 
-      {/* Hero gradient wrapper - covers header and hero section */}
-      <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
-        {/* HEADER */}
-        <nav className="pt-4 sm:pt-5 px-2 sm:px-3 pb-1">
-        <div className="max-w-7xl mx-auto">
-          <div className="bg-white rounded-xl shadow-lg border border-gray-200/50 px-3 sm:px-4 relative">
-            <div className="flex items-center justify-between h-12 sm:h-14">
-              <div className="flex items-center gap-2">
-                <div className="w-24 sm:w-32 h-10 sm:h-12 relative">
-                  <Image
-                    src="/takma_logo_1.png"
-                    alt="TAKMA Logo"
-                    fill
-                    className="object-contain"
-                  />
+          {/* NAVBAR */}
+          <nav className="pr-3 md:pr-0 pl-3 sm:pl-4">
+            <div className="max-w-[1400px] mx-auto">
+              <div className="flex items-center h-14 sm:h-16">
+                <div className="flex items-center gap-2 sm:gap-3 -ml-3 md:-ml-6">
+                  {/* TAKMA Logo - powiększone o 15% (110% × 1.05) */}
+                  <div className="w-[111px] sm:w-[148px] h-[46px] sm:h-[56px] relative">
+                    <Image
+                      src="/takma_logo_1.png"
+                      alt="TAKMA Logo"
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
+
+                  {/* Premier Partner Logo - z hover effect na desktop */}
+                  <div className="w-16 sm:w-20 h-11 sm:h-[53px] relative">
+                    <Image
+                      src="/premier-partner-1.png"
+                      alt="Premier Partner"
+                      fill
+                      className="object-contain transition-transform duration-300 md:hover:scale-[2.5] relative md:hover:z-50"
+                    />
+                  </div>
+
+                  {/* Repair Specialist Logo - powiększone o 5% z hover effect na desktop */}
+                  <div className="w-[67px] sm:w-[84px] h-11 sm:h-[53px] relative">
+                    <Image
+                      src="/repair_specialist.png"
+                      alt="Repair Specialist"
+                      fill
+                      className="object-contain transition-transform duration-300 md:hover:scale-[2.5] relative md:hover:z-50"
+                    />
+                  </div>
+                </div>
+
+                <div className="ml-auto flex items-center gap-1.5 sm:gap-3 md:gap-4 mr-0">
+                  {/* MOBILE - tylko najważniejsze linki */}
+                  <a href="#formularz" className="md:hidden text-xs text-gray-700 hover:text-gray-900 transition-colors">
+                    Formularz
+                  </a>
+                  <a href="/panel" className="md:hidden text-xs text-gray-700 hover:text-gray-900 transition-colors">
+                    Panel
+                  </a>
+                  <a href="/logowanie" className="md:hidden text-xs text-gray-700 hover:text-gray-900 transition-colors font-medium">
+                    Zaloguj
+                  </a>
+
+                  {/* DESKTOP - wszystkie linki */}
+                  <a href="#co-naprawiamy" className="hidden md:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
+                    Co naprawiamy
+                  </a>
+                  <a href="#cennik" className="hidden md:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
+                    Cennik
+                  </a>
+                  <a href="#jak-to-dziala" className="hidden md:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
+                    Jak to działa
+                  </a>
+                  <a href="#formularz" className="hidden md:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
+                    Formularz
+                  </a>
+                  <a href="/panel" className="hidden md:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
+                    Panel serwisowy
+                  </a>
+                  <div className="hidden md:block relative group">
+                    <div className="px-3 py-1.5 bg-gradient-to-r from-blue-50 via-indigo-50 to-purple-50 rounded-full border border-gray-200 shadow-sm cursor-not-allowed">
+                      <span className="text-sm font-semibold text-gray-900">Sklep</span>
+                    </div>
+                    {/* Tooltip */}
+                    <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5 bg-gray-900 text-white text-xs rounded-lg whitespace-nowrap opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all shadow-lg">
+                      Zapraszamy niebawem! 🎉
+                      <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-1 border-4 border-transparent border-t-gray-900"></div>
+                    </div>
+                  </div>
+                  <a href="/logowanie" className="hidden md:block text-sm text-gray-700 hover:text-gray-900 transition-colors font-medium">
+                    Zaloguj
+                  </a>
                 </div>
               </div>
-
-              <div className="flex items-center gap-3 sm:gap-5">
-                <a href="#co-naprawiamy" className="text-xs sm:text-sm text-gray-700 hover:text-gray-900 transition-colors">
-                  Co naprawiamy
-                </a>
-                <a href="#cennik" className="text-xs sm:text-sm text-gray-700 hover:text-gray-900 transition-colors">
-                  Cennik
-                </a>
-                <a href="#jak-to-dziala" className="text-xs sm:text-sm text-gray-700 hover:text-gray-900 transition-colors">
-                  Jak to działa
-                </a>
-                <a href="#formularz" className="text-xs sm:text-sm text-gray-700 hover:text-gray-900 transition-colors">
-                  Formularz
-                </a>
-                <a href="/sklep" className="px-3 py-1.5 bg-gradient-to-r from-blue-50 via-indigo-50 to-purple-50 rounded-full border border-gray-200 shadow-sm">
-                  <span className="text-xs sm:text-sm font-semibold text-gray-900">Sklep</span>
-                </a>
-                <a href="/login" className="text-xs sm:text-sm text-gray-700 hover:text-gray-900 transition-colors font-medium">
-                  Zaloguj
-                </a>
-              </div>
             </div>
-          </div>
+          </nav>
         </div>
-      </nav>
+
+      {/* Hero gradient wrapper */}
+      <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
 
       {/* HERO + AI CHAT */}
-      <section className="min-h-[61vh] flex items-center justify-center px-3 sm:px-4 lg:px-6 pt-4 pb-6 relative overflow-hidden">
+      <section className="min-h-[70vh] flex items-center justify-center px-3 sm:px-4 lg:px-6 py-12 relative overflow-hidden">
         {/* Pionowe paski */}
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-0 left-[10%] w-1 h-full bg-gradient-to-b from-gray-200/20 via-gray-300/25 to-transparent"></div>
@@ -210,29 +255,29 @@ export default function HomePage() {
           <div className="absolute top-0 right-[8%] w-0.5 h-full bg-gradient-to-b from-gray-200/15 via-gray-300/20 to-transparent"></div>
         </div>
 
-        <div className="max-w-7xl mx-auto w-full relative z-10 -mt-4">
+        <div className="max-w-7xl mx-auto w-full relative z-10">
           <div className="text-center mb-3">
             <div className="inline-block px-4 py-2 bg-gradient-to-r from-blue-50 via-indigo-50 to-purple-50 backdrop-blur-sm rounded-full border border-gray-200 mb-1 shadow-sm">
               <p className="text-sm font-medium bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">Autoryzowany</p>
             </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-gray-900 tracking-tight leading-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold text-gray-900 tracking-tight leading-tight">
               Serwis Zebra
             </h1>
           </div>
 
           <div className="relative">
-            {/* Logo Repair jako wytłoczona pieczęć */}
+            {/* Logo Repair jako wytłoczona pieczęć - UKRYTE */}
             <div
-              className="absolute -left-32 -top-8 w-[240px] h-[240px] -rotate-12 pointer-events-none"
+              className="hidden absolute -left-32 -top-8 w-[240px] h-[240px] -rotate-12 pointer-events-none"
               style={{
                 filter: 'grayscale(100%) contrast(150%) brightness(0.95)',
                 opacity: 0.25,
                 mixBlendMode: 'multiply'
               }}
             >
-              <Image 
-                src="/repair_specialist.png" 
-                alt="Zebra Premier Partner Repair Specialist" 
+              <Image
+                src="/repair_specialist.png"
+                alt="Zebra Premier Partner Repair Specialist"
                 fill
                 className="object-contain"
               />
@@ -256,8 +301,8 @@ export default function HomePage() {
           <div className="grid md:grid-cols-4 gap-5 max-w-6xl mx-auto">
             {/* Drukarki */}
             <div className="bg-white rounded-xl p-5 shadow-xl border border-gray-100 hover:shadow-2xl transition-shadow">
-              <div className="w-14 h-14 bg-gray-100 rounded-xl flex items-center justify-center mb-3 border border-gray-200">
-                <Printer className="w-7 h-7 text-gray-700" />
+              <div className="w-14 h-14 bg-gray-50 rounded-xl flex items-center justify-center mb-3 border border-gray-100">
+                <Printer className="w-7 h-7 text-gray-500" strokeWidth={1.5} />
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">
                 Drukarki etykiet
@@ -288,8 +333,8 @@ export default function HomePage() {
 
             {/* Terminale */}
             <div className="bg-white rounded-xl p-5 shadow-xl border border-gray-100 hover:shadow-2xl transition-shadow">
-              <div className="w-14 h-14 bg-gray-100 rounded-xl flex items-center justify-center mb-3 border border-gray-200">
-                <Smartphone className="w-7 h-7 text-gray-700" />
+              <div className="w-14 h-14 bg-gray-50 rounded-xl flex items-center justify-center mb-3 border border-gray-100">
+                <Smartphone className="w-7 h-7 text-gray-500" strokeWidth={1.5} />
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">
                 Terminale mobilne
@@ -316,8 +361,8 @@ export default function HomePage() {
 
             {/* Skanery */}
             <div className="bg-white rounded-xl p-5 shadow-xl border border-gray-100 hover:shadow-2xl transition-shadow">
-              <div className="w-14 h-14 bg-gray-100 rounded-xl flex items-center justify-center mb-3 border border-gray-200">
-                <ScanBarcode className="w-7 h-7 text-gray-700" />
+              <div className="w-14 h-14 bg-gray-50 rounded-xl flex items-center justify-center mb-3 border border-gray-100">
+                <ScanBarcode className="w-7 h-7 text-gray-500" strokeWidth={1.5} />
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">
                 Skanery kodów
@@ -344,8 +389,8 @@ export default function HomePage() {
 
             {/* Tablety */}
             <div className="bg-white rounded-xl p-5 shadow-xl border border-gray-100 hover:shadow-2xl transition-shadow">
-              <div className="w-14 h-14 bg-gray-100 rounded-xl flex items-center justify-center mb-3 border border-gray-200">
-                <TabletSmartphone className="w-7 h-7 text-gray-700" />
+              <div className="w-14 h-14 bg-gray-50 rounded-xl flex items-center justify-center mb-3 border border-gray-100">
+                <TabletSmartphone className="w-7 h-7 text-gray-500" strokeWidth={1.5} />
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">
                 Tablety
@@ -354,6 +399,10 @@ export default function HomePage() {
                 <li className="flex items-start gap-1.5">
                   <CheckCircle2 className="w-3.5 h-3.5 text-green-600 flex-shrink-0 mt-0.5" />
                   <span>Seria ET (ET40, ET45, ET50, ET56)</span>
+                </li>
+                <li className="flex items-start gap-1.5">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-green-600 flex-shrink-0 mt-0.5" />
+                  <span>Seria XSlate (L10, R12, B10)</span>
                 </li>
                 <li className="flex items-start gap-1.5">
                   <CheckCircle2 className="w-3.5 h-3.5 text-green-600 flex-shrink-0 mt-0.5" />
@@ -386,7 +435,7 @@ export default function HomePage() {
           </div>
 
           {/* ZAKŁADKI */}
-          <div className="flex items-center justify-center gap-2 mb-4">
+          <div className="grid grid-cols-2 sm:flex sm:items-center sm:justify-center gap-2 mb-4">
             <button
               onClick={() => setActiveCategory('drukarki')}
               className={`flex items-center gap-1.5 px-4 py-2 rounded-lg font-semibold text-sm transition-all ${
@@ -424,6 +473,19 @@ export default function HomePage() {
               <ScanBarcode className={`w-4 h-4 ${activeCategory === 'skanery' ? 'text-indigo-600' : ''}`} />
               <span className={activeCategory === 'skanery' ? 'bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent' : ''}>
                 Skanery
+              </span>
+            </button>
+            <button
+              onClick={() => setActiveCategory('tablety')}
+              className={`flex items-center gap-1.5 px-4 py-2 rounded-lg font-semibold text-sm transition-all ${
+                activeCategory === 'tablety'
+                  ? 'bg-gradient-to-r from-blue-50 via-indigo-50 to-purple-50 shadow-xl scale-105'
+                  : 'bg-white/50 text-gray-600 hover:bg-white/80 hover:scale-102'
+              }`}
+            >
+              <TabletSmartphone className={`w-4 h-4 ${activeCategory === 'tablety' ? 'text-indigo-600' : ''}`} />
+              <span className={activeCategory === 'tablety' ? 'bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent' : ''}>
+                Tablety
               </span>
             </button>
           </div>
@@ -762,6 +824,117 @@ export default function HomePage() {
               </div>
             )}
 
+            {/* TABLETY */}
+            {activeCategory === 'tablety' && (
+              <div className="divide-y divide-gray-200">
+                <div className="p-4 hover:bg-gray-50 transition-colors">
+                  <div className="flex items-center justify-between">
+                    <div className="flex-1">
+                      <h3 className="text-sm font-semibold text-gray-900 mb-1">
+                        Wymiana wyświetlacza
+                      </h3>
+                      <p className="text-xs text-gray-600">
+                        Oryginalny LCD/dotyk + kalibracja + test działania
+                      </p>
+                    </div>
+                    <div className="text-right ml-4">
+                      <div className="text-lg font-bold text-gray-900">
+                        500-900 zł
+                      </div>
+                      <div className="text-[10px] text-gray-500 mt-0.5">
+                        + VAT 23%
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="p-4 hover:bg-gray-50 transition-colors">
+                  <div className="flex items-center justify-between">
+                    <div className="flex-1">
+                      <h3 className="text-sm font-semibold text-gray-900 mb-1">
+                        Wymiana baterii
+                      </h3>
+                      <p className="text-xs text-gray-600">
+                        Oryginalna bateria Zebra + kalibracja + test wydajności
+                      </p>
+                    </div>
+                    <div className="text-right ml-4">
+                      <div className="text-lg font-bold text-gray-900">
+                        200-350 zł
+                      </div>
+                      <div className="text-[10px] text-gray-500 mt-0.5">
+                        + VAT 23%
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="p-4 hover:bg-gray-50 transition-colors">
+                  <div className="flex items-center justify-between">
+                    <div className="flex-1">
+                      <h3 className="text-sm font-semibold text-gray-900 mb-1">
+                        Naprawa portów/złączy
+                      </h3>
+                      <p className="text-xs text-gray-600">
+                        USB/ładowania + wymiana gniazda + test połączeń
+                      </p>
+                    </div>
+                    <div className="text-right ml-4">
+                      <div className="text-lg font-bold text-gray-900">
+                        150-300 zł
+                      </div>
+                      <div className="text-[10px] text-gray-500 mt-0.5">
+                        + VAT 23%
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="p-4 hover:bg-gray-50 transition-colors">
+                  <div className="flex items-center justify-between">
+                    <div className="flex-1">
+                      <h3 className="text-sm font-semibold text-gray-900 mb-1">
+                        Czyszczenie + konserwacja
+                      </h3>
+                      <p className="text-xs text-gray-600">
+                        Profesjonalne czyszczenie + aktualizacja oprogramowania
+                      </p>
+                    </div>
+                    <div className="text-right ml-4">
+                      <div className="text-lg font-bold text-gray-900">
+                        100-180 zł
+                      </div>
+                      <div className="text-[10px] text-gray-500 mt-0.5">
+                        + VAT 23%
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="p-4 bg-gradient-to-br from-green-50 to-emerald-50">
+                  <div className="flex items-center justify-between">
+                    <div className="flex-1">
+                      <h3 className="text-sm font-semibold text-gray-900 mb-1 flex items-center gap-1.5">
+                        Diagnostyka i wycena
+                        <Sparkles className="w-4 h-4 text-green-600" />
+                      </h3>
+                      <p className="text-xs text-gray-600">
+                        Pełna diagnoza problemu + szczegółowa wycena naprawy
+                      </p>
+                    </div>
+                    <div className="text-right ml-4">
+                      <div className="text-lg font-bold text-green-600">
+                        GRATIS!
+                      </div>
+                      <div className="text-[10px] text-gray-500 mt-0.5">
+                        0 zł
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
             {/* Disclaimer */}
             <div className="bg-orange-50 border-t border-orange-100 p-3">
               <div className="flex items-start gap-2">
@@ -864,7 +1037,7 @@ export default function HomePage() {
                   </h3>
 
                   <p className="text-xs text-gray-600 leading-relaxed">
-                    Nasi technicy przeprowadzą dokładną diagnostykę i prześlą szczegółową wycenę naprawy.
+                    Nasi technicy przeprowadzą dokładną diagnostykę i prześlą szczegółową wycenę naprawy. Otrzymasz dostęp do <strong>Panelu klienta</strong>, gdzie na żywo będziesz mógł podglądać postęp naprawy.
                   </p>
                 </div>
 
@@ -914,7 +1087,7 @@ export default function HomePage() {
       <footer className="bg-gray-900 text-white py-8 px-3 sm:px-4 lg:px-6 relative overflow-hidden">
         {/* Duży napis SERWIS ZEBRA w tle */}
         <div className="absolute left-0 right-0 bottom-0 flex items-end justify-center pointer-events-none" style={{ transform: 'translateY(15%)' }}>
-          <h2 className="text-[8.4rem] md:text-[11.55rem] lg:text-[14.7rem] font-black tracking-tighter whitespace-nowrap leading-none bg-gradient-to-t from-white/10 via-white/3 to-transparent bg-clip-text text-transparent">
+          <h2 className="text-[4rem] sm:text-[6rem] md:text-[11.55rem] lg:text-[14.7rem] font-black tracking-tighter whitespace-nowrap leading-none bg-gradient-to-t from-white/10 via-white/3 to-transparent bg-clip-text text-transparent">
             SERWIS ZEBRA
           </h2>
         </div>

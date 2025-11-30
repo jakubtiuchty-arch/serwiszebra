@@ -6,18 +6,13 @@ import { usePathname } from 'next/navigation'
 import {
   LayoutDashboard,
   Wrench,
-  Package,
   User,
   LogOut,
   Menu,
   X,
   ChevronRight,
   Home,
-  BarChart3,
-  ShoppingBag,
-  PackageX,
-  CreditCard,
-  Settings
+  BarChart3
 } from 'lucide-react'
 
 interface PanelSidebarProps {
@@ -154,95 +149,6 @@ export default function PanelSidebar({ userName, userEmail, onLogout }: PanelSid
     <span className="flex-1">Moje naprawy</span>
     {(pathname?.startsWith('/panel/naprawa') || (pathname === '/panel')) && <ChevronRight className="w-3 h-3 text-blue-600" />}
   </Link>
-
-  {/* Separator */}
-  <div className="border-t border-gray-200 my-2" />
-
-  {/* SEKCJA SKLEP */}
-  <div className="px-3 py-1.5">
-    <p className="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Sklep</p>
-  </div>
-
-  {/* Moje zamówienia */}
-  <Link
-    href="/panel/zamowienia"
-    onClick={() => setMobileMenuOpen(false)}
-    className={`
-      flex items-center gap-2 px-3 py-2 rounded-lg transition-all text-sm mb-0.5
-      ${pathname === '/panel/zamowienia'
-        ? 'bg-blue-50 text-blue-600 font-semibold'
-        : 'text-gray-700 hover:bg-gray-50'
-      }
-    `}
-  >
-    <ShoppingBag className={`w-4 h-4 ${pathname === '/panel/zamowienia' ? 'text-blue-600' : 'text-gray-400'}`} />
-    <span className="flex-1">Moje zamówienia</span>
-    {pathname === '/panel/zamowienia' && <ChevronRight className="w-3 h-3 text-blue-600" />}
-  </Link>
-
-  {/* Zwroty i reklamacje */}
-  <Link
-    href="/panel/zamowienia/zwroty"
-    onClick={() => setMobileMenuOpen(false)}
-    className={`
-      flex items-center gap-2 px-3 py-2 rounded-lg transition-all text-sm mb-0.5
-      ${pathname?.startsWith('/panel/zamowienia/zwroty')
-        ? 'bg-blue-50 text-blue-600 font-semibold'
-        : 'text-gray-700 hover:bg-gray-50'
-      }
-    `}
-  >
-    <PackageX className={`w-4 h-4 ${pathname?.startsWith('/panel/zamowienia/zwroty') ? 'text-blue-600' : 'text-gray-400'}`} />
-    <span className="flex-1">Zwroty i reklamacje</span>
-    {pathname?.startsWith('/panel/zamowienia/zwroty') && <ChevronRight className="w-3 h-3 text-blue-600" />}
-  </Link>
-
-  {/* Dane do zamówień */}
-  <Link
-    href="/panel/zamowienia/dane"
-    onClick={() => setMobileMenuOpen(false)}
-    className={`
-      flex items-center gap-2 px-3 py-2 rounded-lg transition-all text-sm mb-0.5
-      ${pathname?.startsWith('/panel/zamowienia/dane')
-        ? 'bg-blue-50 text-blue-600 font-semibold'
-        : 'text-gray-700 hover:bg-gray-50'
-      }
-    `}
-  >
-    <CreditCard className={`w-4 h-4 ${pathname?.startsWith('/panel/zamowienia/dane') ? 'text-blue-600' : 'text-gray-400'}`} />
-    <span className="flex-1">Dane do zamówień</span>
-    {pathname?.startsWith('/panel/zamowienia/dane') && <ChevronRight className="w-3 h-3 text-blue-600" />}
-  </Link>
-
-  {/* Ustawienia konta */}
-  <Link
-    href="/panel/zamowienia/ustawienia"
-    onClick={() => setMobileMenuOpen(false)}
-    className={`
-      flex items-center gap-2 px-3 py-2 rounded-lg transition-all text-sm mb-0.5
-      ${pathname?.startsWith('/panel/zamowienia/ustawienia')
-        ? 'bg-blue-50 text-blue-600 font-semibold'
-        : 'text-gray-700 hover:bg-gray-50'
-      }
-    `}
-  >
-    <Settings className={`w-4 h-4 ${pathname?.startsWith('/panel/zamowienia/ustawienia') ? 'text-blue-600' : 'text-gray-400'}`} />
-    <span className="flex-1">Ustawienia konta</span>
-    {pathname?.startsWith('/panel/zamowienia/ustawienia') && <ChevronRight className="w-3 h-3 text-blue-600" />}
-  </Link>
-
-  {/* Przeglądaj sklep */}
-  <Link
-    href="/sklep"
-    onClick={() => setMobileMenuOpen(false)}
-    className="flex items-center gap-2 px-3 py-2 rounded-lg transition-all text-sm mb-0.5 text-gray-700 hover:bg-gray-50"
-  >
-    <Package className="w-4 h-4 text-gray-400" />
-    <span className="flex-1">Przeglądaj sklep</span>
-  </Link>
-
-  {/* Separator */}
-  <div className="border-t border-gray-200 my-2" />
 </nav>
 
 {/* PROFIL + WYLOGUJ - nad banerkami */}
@@ -267,33 +173,6 @@ export default function PanelSidebar({ userName, userEmail, onLogout }: PanelSid
     <span>Wyloguj się</span>
   </button>
 </div>
-
-        {/* PROMOTIONAL BANNERS - kompaktowe */}
-        <div className="p-2 border-t border-gray-200 space-y-2">
-          {/* BANER 1 */}
-          <div className="bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg p-2.5 text-white">
-            <p className="text-[10px] font-semibold mb-0.5">🎉 Promocja!</p>
-            <p className="text-xs font-bold mb-1.5">Przedłuż gwarancję -20%</p>
-            <Link
-              href="/sklep/gwarancja"
-              className="inline-block text-[10px] bg-white/20 hover:bg-white/30 px-2 py-1 rounded-md transition-colors"
-            >
-              Zobacz ofertę →
-            </Link>
-          </div>
-
-          {/* BANER 2 */}
-          <div className="bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg p-2.5 text-white">
-            <p className="text-[10px] font-semibold mb-0.5">📦 Nowość</p>
-            <p className="text-xs font-bold mb-1.5">Akcesoria Zebra</p>
-            <Link
-              href="/sklep/akcesoria"
-              className="inline-block text-[10px] bg-white/20 hover:bg-white/30 px-2 py-1 rounded-md transition-colors"
-            >
-              Sprawdź →
-            </Link>
-          </div>
-        </div>
       </aside>
 
       {/* MODAL - Coming Soon */}

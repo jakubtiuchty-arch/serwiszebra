@@ -62,6 +62,12 @@ function RegisterPageContent() {
     }
 
     try {
+      const supabase = createClient()
+
+      // KRYTYCZNE: Wyloguj obecnego użytkownika przed rejestracją nowego
+      await supabase.auth.signOut()
+      console.log('🔓 Wylogowano poprzedniego użytkownika')
+
       const registrationData = {
         email,
         password,
@@ -91,12 +97,16 @@ function RegisterPageContent() {
 
       console.log('✅ Rejestracja zakończona sukcesem!')
 
-      // Zaloguj użytkownika
-      const supabase = createClient()
-      await supabase.auth.signInWithPassword({
+      // Zaloguj NOWEGO użytkownika
+      const { error: signInError } = await supabase.auth.signInWithPassword({
         email,
         password
       })
+
+      if (signInError) {
+        console.error('❌ Błąd logowania po rejestracji:', signInError)
+        throw new Error('Konto utworzone, ale nie udało się zalogować. Przejdź do strony logowania.')
+      }
 
       // Poczekaj chwilę żeby sesja się zapisała
       await new Promise(resolve => setTimeout(resolve, 500))

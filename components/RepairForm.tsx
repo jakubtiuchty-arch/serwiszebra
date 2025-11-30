@@ -249,26 +249,26 @@ export default function RepairForm() {
   }
 
   return (
-    <section id="repair-form" className="py-20 px-6 bg-white scroll-mt-24">
+    <section id="repair-form" className="py-16 px-5 bg-white scroll-mt-24">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-5xl font-semibold text-gray-900 mb-4">
+        <div className="text-center mb-10">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-gray-900 mb-3">
             Formularz zgłoszenia
           </h2>
-          <p className="text-xl text-gray-600">
+          <p className="text-lg text-gray-600">
             Wypełnij formularz, a kurier odbierze urządzenie z Twojego adresu - za darmo!
           </p>
         </div>
 
         {/* Progress Bar */}
-        <div className="mb-12">
-          <div className="flex items-center justify-between mb-4">
+        <div className="mb-10">
+          <div className="flex items-center justify-between mb-3">
             {steps.map((step, index) => (
               <div key={step.number} className="flex items-center flex-1">
                 <div className="flex flex-col items-center flex-1">
                   <div
-                    className={`w-12 h-12 rounded-full flex items-center justify-center font-semibold transition-all ${
+                    className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold transition-all ${
                       currentStep > step.number
                         ? 'bg-green-500 text-white'
                         : currentStep === step.number
@@ -277,7 +277,7 @@ export default function RepairForm() {
                     }`}
                   >
                     {currentStep > step.number ? (
-                      <Check className="w-6 h-6" />
+                      <Check className="w-5 h-5" />
                     ) : (
                       step.number
                     )}
@@ -300,8 +300,8 @@ export default function RepairForm() {
 
         {/* Error Alert */}
         {submitError && (
-          <div className="mb-6 bg-red-50 border border-red-200 rounded-xl p-4 flex items-start gap-3">
-            <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
+          <div className="mb-5 bg-red-50 border border-red-200 rounded-xl p-3 flex items-start gap-2">
+            <AlertCircle className="w-4 h-4 text-red-600 flex-shrink-0 mt-0.5" />
             <div>
               <h4 className="font-semibold text-red-900 mb-1">Błąd wysyłania</h4>
               <p className="text-sm text-red-700">{submitError}</p>
@@ -311,15 +311,15 @@ export default function RepairForm() {
 
         {/* Form */}
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="bg-white rounded-3xl shadow-2xl border border-gray-200 p-8 md:p-12">
+          <div className="bg-white rounded-2xl shadow-2xl border border-gray-200 p-6 md:p-10">
             {/* KROK 1: Dane kontaktowe */}
             {currentStep === 1 && (
-              <div className="space-y-6">
-                <h3 className="text-2xl font-semibold text-gray-900 mb-6">
+              <div className="space-y-5">
+                <h3 className="text-xl font-semibold text-gray-900 mb-5">
                   Dane kontaktowe
                 </h3>
 
-                <div className="grid md:grid-cols-2 gap-6">
+                <div className="grid md:grid-cols-2 gap-5">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
                       Imię *
@@ -327,7 +327,7 @@ export default function RepairForm() {
                     <input
                       {...register('firstName')}
                       type="text"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       placeholder="Jan"
                     />
                     {errors.firstName && (
@@ -342,7 +342,7 @@ export default function RepairForm() {
                     <input
                       {...register('lastName')}
                       type="text"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       placeholder="Kowalski"
                     />
                     {errors.lastName && (
@@ -358,7 +358,7 @@ export default function RepairForm() {
                   <input
                     {...register('email')}
                     type="email"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="jan.kowalski@example.com"
                   />
                   {errors.email && (
@@ -373,7 +373,7 @@ export default function RepairForm() {
                   <input
                     {...register('phone')}
                     type="tel"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="123456789"
                   />
                   {errors.phone && (
@@ -388,7 +388,7 @@ export default function RepairForm() {
                   <input
                     {...register('company')}
                     type="text"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="Nazwa firmy"
                   />
                 </div>
@@ -397,8 +397,8 @@ export default function RepairForm() {
 
             {/* KROK 2: Szczegóły urządzenia */}
             {currentStep === 2 && (
-              <div className="space-y-6">
-                <h3 className="text-2xl font-semibold text-gray-900 mb-6">
+              <div className="space-y-5">
+                <h3 className="text-xl font-semibold text-gray-900 mb-5">
                   Szczegóły urządzenia
                 </h3>
 
@@ -408,7 +408,7 @@ export default function RepairForm() {
                   </label>
                   <select
                     {...register('deviceModel')}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   >
                     {DEVICE_MODELS.map((model) => (
                       <option key={model.value} value={model.value}>
@@ -428,7 +428,7 @@ export default function RepairForm() {
                   <input
                     {...register('serialNumber')}
                     type="text"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="S/N: XXXXXXXXXXXX"
                   />
                 </div>
@@ -440,7 +440,7 @@ export default function RepairForm() {
                   <input
                     {...register('purchaseDate')}
                     type="date"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
 
@@ -448,18 +448,18 @@ export default function RepairForm() {
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Czy urządzenie jest w gwarancji? *
                   </label>
-                  <div className="space-y-3">
+                  <div className="space-y-2">
                     {[
                       { value: 'tak', label: 'Tak, mam gwarancję' },
                       { value: 'nie', label: 'Nie, gwarancja wygasła' },
                       { value: 'nie_wiem', label: 'Nie wiem' },
                     ].map((option) => (
-                      <label key={option.value} className="flex items-center gap-3 cursor-pointer">
+                      <label key={option.value} className="flex items-center gap-2 cursor-pointer">
                         <input
                           {...register('isWarranty')}
                           type="radio"
                           value={option.value}
-                          className="w-5 h-5 text-blue-600 focus:ring-blue-500"
+                          className="w-4 h-4 text-blue-600 focus:ring-blue-500"
                         />
                         <span className="text-gray-700">{option.label}</span>
                       </label>
@@ -474,8 +474,8 @@ export default function RepairForm() {
 
             {/* KROK 3: Opis usterki */}
             {currentStep === 3 && (
-              <div className="space-y-6">
-                <h3 className="text-2xl font-semibold text-gray-900 mb-6">
+              <div className="space-y-5">
+                <h3 className="text-xl font-semibold text-gray-900 mb-5">
                   Opis usterki
                 </h3>
 
@@ -485,7 +485,7 @@ export default function RepairForm() {
                   </label>
                   <textarea
                     {...register('issueDescription')}
-                    rows={6}
+                    rows={5}
                     className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
                     placeholder="Opisz szczegółowo problem, który występuje w urządzeniu..."
                   />
@@ -495,10 +495,10 @@ export default function RepairForm() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-3">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
                     Zdjęcia problemu (opcjonalnie, max 5)
                   </label>
-                  <div className="border-2 border-dashed border-gray-300 rounded-xl p-8 text-center hover:border-blue-500 transition-colors">
+                  <div className="border-2 border-dashed border-gray-300 rounded-xl p-6 text-center hover:border-blue-500 transition-colors">
                     <input
                       type="file"
                       accept="image/*"
@@ -508,7 +508,7 @@ export default function RepairForm() {
                       id="file-upload"
                     />
                     <label htmlFor="file-upload" className="cursor-pointer">
-                      <Upload className="w-12 h-12 mx-auto mb-3 text-gray-400" />
+                      <Upload className="w-10 h-10 mx-auto mb-2 text-gray-400" />
                       <p className="text-gray-600 mb-1">
                         Kliknij aby dodać zdjęcia
                       </p>
@@ -519,7 +519,7 @@ export default function RepairForm() {
                   </div>
 
                   {uploadedFiles.length > 0 && (
-                    <div className="mt-4 grid grid-cols-2 md:grid-cols-3 gap-3">
+                    <div className="mt-3 grid grid-cols-2 md:grid-cols-3 gap-2">
                       {uploadedFiles.map((file, index) => (
                         <div key={index} className="relative group">
                           <div className="aspect-square bg-gray-100 rounded-xl overflow-hidden">
@@ -532,9 +532,9 @@ export default function RepairForm() {
                           <button
                             type="button"
                             onClick={() => removeFile(index)}
-                            className="absolute top-2 right-2 w-8 h-8 bg-red-500 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                            className="absolute top-2 right-2 w-7 h-7 bg-red-500 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
                           >
-                            <X className="w-4 h-4" />
+                            <X className="w-3 h-3" />
                           </button>
                         </div>
                       ))}
@@ -543,12 +543,12 @@ export default function RepairForm() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-3">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
                     Pilność naprawy *
                   </label>
-                  <div className="grid md:grid-cols-2 gap-4">
+                  <div className="grid md:grid-cols-2 gap-3">
                     <label
-                      className={`relative flex items-center justify-between p-6 border-2 rounded-xl cursor-pointer transition-all ${
+                      className={`relative flex items-center justify-between p-5 border-2 rounded-xl cursor-pointer transition-all ${
                         formData.urgency === 'standard'
                           ? 'border-blue-500 bg-blue-50'
                           : 'border-gray-300 hover:border-gray-400'
@@ -562,12 +562,12 @@ export default function RepairForm() {
                         {...register('urgency')}
                         type="radio"
                         value="standard"
-                        className="w-5 h-5 text-blue-600"
+                        className="w-4 h-4 text-blue-600"
                       />
                     </label>
 
                     <label
-                      className={`relative flex items-center justify-between p-6 border-2 rounded-xl cursor-pointer transition-all ${
+                      className={`relative flex items-center justify-between p-5 border-2 rounded-xl cursor-pointer transition-all ${
                         formData.urgency === 'express'
                           ? 'border-blue-500 bg-blue-50'
                           : 'border-gray-300 hover:border-gray-400'
@@ -582,7 +582,7 @@ export default function RepairForm() {
                         {...register('urgency')}
                         type="radio"
                         value="express"
-                        className="w-5 h-5 text-blue-600"
+                        className="w-4 h-4 text-blue-600"
                       />
                     </label>
                   </div>
@@ -592,13 +592,13 @@ export default function RepairForm() {
 
             {/* KROK 4: Adres odbioru */}
             {currentStep === 4 && (
-              <div className="space-y-6">
-                <h3 className="text-2xl font-semibold text-gray-900 mb-6">
+              <div className="space-y-5">
+                <h3 className="text-xl font-semibold text-gray-900 mb-5">
                   Adres odbioru kuriera
                 </h3>
 
-                <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 flex items-start gap-3">
-                  <AlertCircle className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                <div className="bg-blue-50 border border-blue-200 rounded-xl p-3 flex items-start gap-2">
+                  <AlertCircle className="w-4 h-4 text-blue-600 flex-shrink-0 mt-0.5" />
                   <p className="text-sm text-blue-900">
                     Kurier odbierze urządzenie z podanego adresu <strong>całkowicie za darmo</strong>. Upewnij się, że wszystkie dane są poprawne.
                   </p>
@@ -611,7 +611,7 @@ export default function RepairForm() {
                   <input
                     {...register('street')}
                     type="text"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="ul. Przykładowa 123/45"
                   />
                   {errors.street && (
@@ -619,7 +619,7 @@ export default function RepairForm() {
                   )}
                 </div>
 
-                <div className="grid md:grid-cols-2 gap-6">
+                <div className="grid md:grid-cols-2 gap-5">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
                       Kod pocztowy *
@@ -627,7 +627,7 @@ export default function RepairForm() {
                     <input
                       {...register('zipCode')}
                       type="text"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       placeholder="00-000"
                     />
                     {errors.zipCode && (
@@ -642,7 +642,7 @@ export default function RepairForm() {
                     <input
                       {...register('city')}
                       type="text"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       placeholder="Warszawa"
                     />
                     {errors.city && (
@@ -658,7 +658,7 @@ export default function RepairForm() {
                   <input
                     {...register('contactPhone')}
                     type="tel"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="123456789"
                   />
                   {errors.contactPhone && (
@@ -675,7 +675,7 @@ export default function RepairForm() {
                     {...register('pickupDate')}
                     type="date"
                     min={getMinDate()}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                   {errors.pickupDate && (
                     <p className="mt-1 text-sm text-red-600">{errors.pickupDate.message}</p>
@@ -701,16 +701,16 @@ export default function RepairForm() {
 
             {/* KROK 5: Potwierdzenie */}
             {currentStep === 5 && (
-              <div className="space-y-6">
-                <h3 className="text-2xl font-semibold text-gray-900 mb-6">
+              <div className="space-y-5">
+                <h3 className="text-xl font-semibold text-gray-900 mb-5">
                   Podsumowanie zgłoszenia
                 </h3>
 
                 {/* Podsumowanie danych */}
-                <div className="space-y-6">
+                <div className="space-y-5">
                   {/* Dane kontaktowe */}
-                  <div className="bg-gray-50 rounded-xl p-6">
-                    <h4 className="font-semibold text-gray-900 mb-3">Dane kontaktowe</h4>
+                  <div className="bg-gray-50 rounded-xl p-5">
+                    <h4 className="font-semibold text-gray-900 mb-2">Dane kontaktowe</h4>
                     <div className="space-y-2 text-sm">
                       <p><span className="text-gray-600">Imię i nazwisko:</span> <span className="font-medium">{formData.firstName} {formData.lastName}</span></p>
                       <p><span className="text-gray-600">Email:</span> <span className="font-medium">{formData.email}</span></p>
@@ -722,8 +722,8 @@ export default function RepairForm() {
                   </div>
 
                   {/* Urządzenie */}
-                  <div className="bg-gray-50 rounded-xl p-6">
-                    <h4 className="font-semibold text-gray-900 mb-3">Urządzenie</h4>
+                  <div className="bg-gray-50 rounded-xl p-5">
+                    <h4 className="font-semibold text-gray-900 mb-2">Urządzenie</h4>
                     <div className="space-y-2 text-sm">
                       <p><span className="text-gray-600">Model:</span> <span className="font-medium">{DEVICE_MODELS.find(m => m.value === formData.deviceModel)?.label}</span></p>
                       {formData.serialNumber && (
@@ -736,24 +736,24 @@ export default function RepairForm() {
                   </div>
 
                   {/* Opis problemu */}
-                  <div className="bg-gray-50 rounded-xl p-6">
-                    <h4 className="font-semibold text-gray-900 mb-3">Opis problemu</h4>
+                  <div className="bg-gray-50 rounded-xl p-5">
+                    <h4 className="font-semibold text-gray-900 mb-2">Opis problemu</h4>
                     <p className="text-sm text-gray-700 whitespace-pre-wrap">{formData.issueDescription}</p>
-                    <div className="mt-3 text-sm">
+                    <div className="mt-2 text-sm">
                       <span className="text-gray-600">Pilność:</span> <span className="font-medium">
                         {formData.urgency === 'express' ? 'Express (+50 zł)' : 'Standard'}
                       </span>
                     </div>
                     {uploadedFiles.length > 0 && (
-                      <div className="mt-3">
+                      <div className="mt-2">
                         <span className="text-sm text-gray-600">Zdjęcia: {uploadedFiles.length}</span>
                       </div>
                     )}
                   </div>
 
                   {/* Adres odbioru */}
-                  <div className="bg-gray-50 rounded-xl p-6">
-                    <h4 className="font-semibold text-gray-900 mb-3">Adres odbioru</h4>
+                  <div className="bg-gray-50 rounded-xl p-5">
+                    <h4 className="font-semibold text-gray-900 mb-2">Adres odbioru</h4>
                     <div className="space-y-2 text-sm">
                       <p className="font-medium">{formData.street}</p>
                       <p className="font-medium">{formData.zipCode} {formData.city}</p>
@@ -767,48 +767,48 @@ export default function RepairForm() {
                 </div>
 
                 {/* Zgody */}
-                <div className="space-y-4 pt-6 border-t border-gray-200">
-                  <label className="flex items-start gap-3 cursor-pointer group">
+                <div className="space-y-3 pt-5 border-t border-gray-200">
+                  <label className="flex items-start gap-2 cursor-pointer group">
                     <input
                       {...register('privacyConsent')}
                       type="checkbox"
-                      className="mt-1 w-5 h-5 text-blue-600 focus:ring-blue-500 rounded"
+                      className="mt-1 w-4 h-4 text-blue-600 focus:ring-blue-500 rounded"
                     />
                     <span className="text-sm text-gray-700 group-hover:text-gray-900">
                       Wyrażam zgodę na przetwarzanie moich danych osobowych zgodnie z <a href="#" className="text-blue-600 hover:underline">Polityką Prywatności</a> (RODO) *
                     </span>
                   </label>
                   {errors.privacyConsent && (
-                    <p className="ml-8 text-sm text-red-600">{errors.privacyConsent.message}</p>
+                    <p className="ml-6 text-sm text-red-600">{errors.privacyConsent.message}</p>
                   )}
 
-                  <label className="flex items-start gap-3 cursor-pointer group">
+                  <label className="flex items-start gap-2 cursor-pointer group">
                     <input
                       {...register('termsConsent')}
                       type="checkbox"
-                      className="mt-1 w-5 h-5 text-blue-600 focus:ring-blue-500 rounded"
+                      className="mt-1 w-4 h-4 text-blue-600 focus:ring-blue-500 rounded"
                     />
                     <span className="text-sm text-gray-700 group-hover:text-gray-900">
                       Akceptuję <a href="#" className="text-blue-600 hover:underline">Regulamin Serwisu</a> *
                     </span>
                   </label>
                   {errors.termsConsent && (
-                    <p className="ml-8 text-sm text-red-600">{errors.termsConsent.message}</p>
+                    <p className="ml-6 text-sm text-red-600">{errors.termsConsent.message}</p>
                   )}
                 </div>
               </div>
             )}
 
             {/* Navigation Buttons */}
-            <div className="flex items-center justify-between mt-12 pt-8 border-t border-gray-200">
+            <div className="flex items-center justify-between mt-10 pt-6 border-t border-gray-200">
               {currentStep > 1 ? (
                 <button
                   type="button"
                   onClick={handlePrevStep}
                   disabled={isSubmitting}
-                  className="flex items-center gap-2 px-6 py-3 text-gray-700 hover:text-gray-900 font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex items-center gap-2 px-5 py-2 text-gray-700 hover:text-gray-900 font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  <ArrowLeft className="w-5 h-5" />
+                  <ArrowLeft className="w-4 h-4" />
                   Wstecz
                 </button>
               ) : (
@@ -819,25 +819,25 @@ export default function RepairForm() {
                 <button
                   type="button"
                   onClick={handleNextStep}
-                  className="flex items-center gap-2 px-8 py-3 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition-colors"
+                  className="flex items-center gap-2 px-6 py-2 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition-colors"
                 >
                   Dalej
-                  <ArrowRight className="w-5 h-5" />
+                  <ArrowRight className="w-4 h-4" />
                 </button>
               ) : (
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="flex items-center gap-2 px-8 py-3 bg-green-600 text-white rounded-xl font-semibold hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex items-center gap-2 px-6 py-2 bg-green-600 text-white rounded-xl font-semibold hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isSubmitting ? (
                     <>
-                      <Loader2 className="w-5 h-5 animate-spin" />
+                      <Loader2 className="w-4 h-4 animate-spin" />
                       Wysyłanie...
                     </>
                   ) : (
                     <>
-                      <Check className="w-5 h-5" />
+                      <Check className="w-4 h-4" />
                       Wyślij zgłoszenie
                     </>
                   )}

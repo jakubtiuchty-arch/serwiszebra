@@ -42,7 +42,7 @@ function CheckoutForm({
     setIsProcessing(true);
 
     try {
-      const { error } = await stripe.confirmPayment({
+      const { error, paymentIntent } = await stripe.confirmPayment({
         elements,
         confirmParams: {
           return_url: `${window.location.origin}/panel/zgloszenie/${repairId}?payment=success`,
@@ -52,7 +52,25 @@ function CheckoutForm({
 
       if (error) {
         onError(error.message || 'Płatność nie powiodła się');
-      } else {
+      } else if (paymentIntent && paymentIntent.status === 'succeeded') {
+        // Aktualizuj status naprawy w bazie po udanej płatności
+        console.log('✅ Payment succeeded, updating repair status...');
+        try {
+          const response = await fetch(`/api/repairs/${repairId}/confirm-payment`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ paymentIntentId: paymentIntent.id }),
+          });
+
+          if (!response.ok) {
+            console.error('❌ Failed to update repair status after payment');
+          } else {
+            console.log('✅ Repair status updated successfully');
+          }
+        } catch (updateError) {
+          console.error('❌ Error updating repair status:', updateError);
+        }
+
         onSuccess();
       }
     } catch (err) {
@@ -212,56 +230,56 @@ const handleClose = () => {
         onClick={!success ? handleClose : undefined}
       />
 
-      {/* Modal */}
-      <div className="flex min-h-full items-center justify-center p-4">
-        <div className={`relative bg-white rounded-2xl shadow-2xl max-w-lg w-full p-8 transition-transform duration-700 ${
+      {/* Modal - KOMPAKTOWY */}
+      <div className="flex min-h-full items-center justify-center p-3">
+        <div className={`relative bg-white rounded-xl shadow-2xl max-w-md w-full p-6 transition-transform duration-700 ${
           success ? 'animate-flip' : 'animate-fadeIn'
         }`}>
-          
+
           {/* Close button */}
           {!success && !loading && (
             <button
               onClick={handleClose}
-              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
+              className="absolute top-3 right-3 text-gray-400 hover:text-gray-600 transition-colors"
             >
-              <X className="w-6 h-6" />
+              <X className="w-5 h-5" />
             </button>
           )}
 
-          {/* Loading state */}
+          {/* Loading state - KOMPAKTOWY */}
           {loading && (
-            <div className="flex flex-col items-center justify-center py-12">
-              <Loader2 className="w-12 h-12 animate-spin text-blue-600 mb-4" />
-              <p className="text-gray-600">Przygotowywanie płatności...</p>
+            <div className="flex flex-col items-center justify-center py-8">
+              <Loader2 className="w-10 h-10 animate-spin text-blue-600 mb-3" />
+              <p className="text-sm text-gray-600">Przygotowywanie płatności...</p>
             </div>
           )}
 
-          {/* Success state */}
+          {/* Success state - KOMPAKTOWY */}
           {success && (
-            <div className="flex flex-col items-center justify-center py-12">
-              <div className="relative mb-6">
+            <div className="flex flex-col items-center justify-center py-8">
+              <div className="relative mb-4">
                 <div className="absolute inset-0 bg-green-500 rounded-full animate-ping opacity-20"></div>
-                <div className="relative w-24 h-24 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center shadow-2xl">
-                  <CheckCircle className="w-14 h-14 text-white" />
+                <div className="relative w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center shadow-xl">
+                  <CheckCircle className="w-10 h-10 text-white" />
                 </div>
               </div>
-              
-              <h2 className="text-3xl font-bold text-gray-900 mb-3">
+
+              <h2 className="text-xl font-bold text-gray-900 mb-2">
                 Płatność zakończona!
               </h2>
-              <p className="text-lg text-gray-600 text-center mb-6">
+              <p className="text-sm text-gray-600 text-center mb-4">
                 Naprawa <span className="font-bold text-gray-900">#{shortId}</span> została opłacona
               </p>
-              
-              <div className="bg-green-50 border border-green-200 rounded-xl p-4 mb-8 w-full">
-                <p className="text-sm text-green-800 text-center">
+
+              <div className="bg-green-50 border border-green-200 rounded-lg p-3 mb-6 w-full">
+                <p className="text-xs text-green-800 text-center">
                   ✉️ Potwierdzenie wysłaliśmy na Twój email
                 </p>
               </div>
 
               <button
                 onClick={handleClose}
-                className="w-full py-3 px-6 rounded-xl font-semibold text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 transition-colors"
+                className="w-full py-2.5 px-5 rounded-lg text-sm font-semibold text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 transition-colors"
               >
                 Zamknij
               </button>

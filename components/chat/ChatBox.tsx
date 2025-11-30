@@ -144,8 +144,8 @@ export default function ChatBox({ repairId, currentUserType }: ChatBoxProps) {
         <div className="flex items-center gap-2">
           <MessageCircle className="w-4 h-4" />
           <div>
-            <h3 className="text-sm font-semibold">Czat z serwisem</h3>
-            <p className="text-[10px] text-blue-100">
+            <h3 className="text-sm font-bold">Czat z serwisem</h3>
+            <p className="text-xs text-blue-100">
               {messages.length} {messages.length === 1 ? 'wiadomość' : 'wiadomości'}
             </p>
           </div>
@@ -161,39 +161,39 @@ export default function ChatBox({ repairId, currentUserType }: ChatBoxProps) {
         ) : messages.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full text-gray-500">
             <MessageCircle className="w-8 h-8 mb-1 text-gray-400" />
-            <p className="text-xs">Brak wiadomości</p>
-            <p className="text-[10px] text-gray-400 mt-0.5">Rozpocznij rozmowę poniżej</p>
+            <p className="text-xs font-medium">Brak wiadomości</p>
+            <p className="text-xs text-gray-400 mt-0.5">Rozpocznij rozmowę poniżej</p>
           </div>
         ) : (
           <>
             {messages.map((msg) => {
               const isOwnMessage = msg.sender_type === currentUserType
-              
-              let bgColor: string
-              let textColor: string
-              
-              if (msg.sender_type === 'admin') {
-                bgColor = 'bg-blue-600'
-                textColor = 'text-white'
-              } else {
-                bgColor = 'bg-orange-600'
-                textColor = 'text-white'
-              }
 
-              const alignment = msg.sender_type === 'admin' ? 'justify-start' : 'justify-end'
+              // Klient po LEWEJ (szary), Serwisant po PRAWEJ (niebieski)
+              const isFromClient = msg.sender_type === 'user'
+              const bgColor = isFromClient ? 'bg-gray-200' : 'bg-blue-600'
+              const textColor = isFromClient ? 'text-gray-900' : 'text-white'
+              const alignment = isFromClient ? 'justify-start' : 'justify-end'
+              const borderRadius = isFromClient ? 'rounded-bl-sm' : 'rounded-br-sm'
 
               return (
                 <div key={msg.id} className={`flex ${alignment}`}>
-                  <div className={`max-w-[85%] rounded-2xl px-2.5 py-1.5 ${bgColor} ${textColor} ${msg.sender_type === 'admin' ? 'rounded-bl-sm' : 'rounded-br-sm'}`}>
-                    <p className="text-xs whitespace-pre-wrap break-words">{msg.message}</p>
-                    
-                    <div className="flex items-center gap-1 mt-0.5">
-                      <p className={`text-[9px] ${textColor === 'text-white' ? 'text-white/70' : 'text-gray-500'}`}>
-                        {format(new Date(msg.created_at), 'dd MMM yyyy, HH:mm', { locale: pl })}
+                  <div className={`max-w-[85%] rounded-2xl px-2.5 py-1.5 ${bgColor} ${textColor} ${borderRadius} shadow-sm`}>
+                    {/* Nadawca (opcjonalnie) */}
+                    <p className={`text-[10px] font-bold mb-0.5 uppercase tracking-wide ${isFromClient ? 'text-gray-600' : 'text-blue-100'}`}>
+                      {isFromClient ? 'Klient' : 'Serwis'}
+                    </p>
+
+                    <p className="text-xs whitespace-pre-wrap break-words leading-relaxed">{msg.message}</p>
+
+                    <div className="flex items-center gap-1 mt-1 justify-end">
+                      <p className={`text-[10px] font-medium ${isFromClient ? 'text-gray-500' : 'text-white/70'}`}>
+                        {format(new Date(msg.created_at), 'HH:mm', { locale: pl })}
                       </p>
-                      
+
+                      {/* Pokaż status odczytu ZAWSZE (nie tylko dla własnych wiadomości) */}
                       {isOwnMessage && (
-                        <span className={msg.is_read ? 'text-blue-200' : 'text-white/50'}>
+                        <span className={msg.is_read ? (isFromClient ? 'text-blue-500' : 'text-white') : (isFromClient ? 'text-gray-400' : 'text-white/50')}>
                           {msg.is_read ? (
                             <CheckCheck className="w-3 h-3" />
                           ) : (
@@ -220,7 +220,7 @@ export default function ChatBox({ repairId, currentUserType }: ChatBoxProps) {
             onChange={(e) => setNewMessage(e.target.value)}
             placeholder="Wpisz wiadomość..."
             disabled={sending}
-            className="flex-1 px-2.5 py-1.5 text-xs border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100"
+            className="flex-1 px-2.5 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100"
           />
           <button
             type="submit"
@@ -232,7 +232,7 @@ export default function ChatBox({ repairId, currentUserType }: ChatBoxProps) {
             ) : (
               <>
                 <Send className="w-4 h-4" />
-                <span className="text-xs">Wyślij</span>
+                <span className="text-sm font-semibold">Wyślij</span>
               </>
             )}
           </button>

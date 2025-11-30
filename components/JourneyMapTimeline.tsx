@@ -252,14 +252,14 @@ export default function JourneyMapTimeline({ currentStatus, statusHistory }: Jou
                 </motion.div>
 
                 {/* Label */}
-                <p 
+                <p
                   className={`
-                    text-xs mt-2 font-medium text-center max-w-[80px]
+                    text-xs mt-2 font-semibold text-center max-w-[80px]
                     transition-colors duration-200
-                    ${step.isCurrent 
-                      ? step.textColor + ' font-bold' 
-                      : step.isActive 
-                      ? 'text-gray-700' 
+                    ${step.isCurrent
+                      ? step.textColor + ' font-bold'
+                      : step.isActive
+                      ? 'text-gray-700'
                       : 'text-gray-400'
                     }
                   `}
@@ -280,7 +280,7 @@ export default function JourneyMapTimeline({ currentStatus, statusHistory }: Jou
                       className="w-1.5 h-1.5 rounded-full"
                       style={{ backgroundColor: step.color }}
                     />
-                    <span className="text-[9px] font-bold uppercase tracking-wider" style={{ color: step.color }}>
+                    <span className="text-[10px] font-bold uppercase tracking-wider" style={{ color: step.color }}>
                       Teraz
                     </span>
                   </motion.div>
@@ -297,7 +297,7 @@ export default function JourneyMapTimeline({ currentStatus, statusHistory }: Jou
           {timelineSteps.map((step) => {
             if (!step.isCurrent) return null
             const Icon = step.icon
-            
+
             return (
               <motion.div
                 key={step.status}
@@ -306,20 +306,20 @@ export default function JourneyMapTimeline({ currentStatus, statusHistory }: Jou
                 className="text-center"
               >
                 {/* Ikona - MNIEJSZA */}
-                <div 
+                <div
                   className={`w-12 h-12 mx-auto rounded-full flex items-center justify-center mb-1.5 ${step.bgColor}`}
                   style={{
                     boxShadow: `0 0 0 2px ${step.color}20`
                   }}
                 >
-                  <Icon 
+                  <Icon
                     className="w-6 h-6"
                     style={{ color: step.color }}
                   />
                 </div>
 
                 {/* Status label - MNIEJSZY */}
-                <p 
+                <p
                   className="text-sm font-bold uppercase tracking-wide"
                   style={{ color: step.color }}
                 >
@@ -333,8 +333,8 @@ export default function JourneyMapTimeline({ currentStatus, statusHistory }: Jou
         {/* Progress Bar below */}
         <div className="mt-2 sm:mt-3">
           <div className="flex items-center justify-between mb-1">
-            <span className="text-[10px] sm:text-xs text-gray-500">Postęp</span>
-            <span className="text-xs sm:text-sm font-bold text-gray-900">{Math.round(progressPercentage)}%</span>
+            <span className="text-xs font-medium text-gray-500">Postęp</span>
+            <span className="text-sm font-bold text-gray-900">{Math.round(progressPercentage)}%</span>
           </div>
           <div className="h-1.5 sm:h-2 bg-gray-200 rounded-full overflow-hidden">
             <motion.div
@@ -398,17 +398,17 @@ export default function JourneyMapTimeline({ currentStatus, statusHistory }: Jou
                   </motion.div>
 
                   {/* Text */}
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">
                     🎉 Naprawa zakończona!
                   </h3>
-                  <p className="text-gray-600 mb-6">
+                  <p className="text-sm text-gray-700 mb-6 leading-relaxed">
                     Twoje urządzenie jest gotowe i zostanie wkrótce wysłane.
                   </p>
 
                   {/* Button */}
                   <button
                     onClick={() => setShowCelebration(false)}
-                    className="px-6 py-3 bg-gradient-to-r from-emerald-600 to-green-600 text-white rounded-xl font-semibold hover:from-emerald-700 hover:to-green-700 transition-all shadow-lg hover:shadow-xl"
+                    className="px-6 py-3 bg-gradient-to-r from-emerald-600 to-green-600 text-white rounded-xl text-sm font-semibold hover:from-emerald-700 hover:to-green-700 transition-all shadow-lg hover:shadow-xl"
                   >
                     Super! Zamknij
                   </button>

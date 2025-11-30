@@ -235,93 +235,93 @@ export default function AdminRepairDetailPage() {
     }
   }
 
-const handlePriceUpdate = async (e: React.FormEvent) => {
-  e.preventDefault()
-  setSubmitting('price')
+  const handlePriceUpdate = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setSubmitting('price')
 
-  try {
-    const response = await fetch(`/api/admin/repairs/${repairId}/price`, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(priceForm)
-    })
-
-    if (!response.ok) {
-      throw new Error('Nie udało się zaktualizować wyceny')
-    }
-
-    await fetchRepairDetails()
-    setPriceForm({ ...priceForm, notes: '' })
-    setModal({
-      isOpen: true,
-      type: 'success',
-      title: 'Wycena zapisana',
-      message: 'Wycena została pomyślnie zaktualizowana.'
-    })
-  } catch (err) {
-    setModal({
-      isOpen: true,
-      type: 'error',
-      title: 'Błąd',
-      message: err instanceof Error ? err.message : 'Nie udało się zaktualizować wyceny'
-    })
-  } finally {
-    setSubmitting(null)
-  }
-}
-
-const handleOrderCourier = async (e: React.FormEvent) => {
-  e.preventDefault()
-  setSubmitting('courier')
-
-  try {
-    const direction = repair!.status === 'nowe' ? 'pickup' : 'delivery'
-
-    const response = await fetch(`/api/admin/repairs/${repairId}/order-courier`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        ...courierForm,
-        direction
+    try {
+      const response = await fetch(`/api/admin/repairs/${repairId}/price`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(priceForm)
       })
-    })
 
-    if (!response.ok) {
-      const errorData = await response.json()
-      throw new Error(errorData.error || 'Nie udało się zamówić kuriera')
-    }
-
-    const data = await response.json()
-    
-    const directionText = repair!.status === 'nowe' 
-      ? 'Odbiór od klienta' 
-      : 'Wysyłka do klienta'
-
-    setModal({
-      isOpen: true,
-      type: 'success',
-      title: 'Kurier zamówiony!',
-      message: 'Zamówienie kuriera zostało złożone pomyślnie.',
-      details: {
-        direction: directionText,
-        trackingNumber: data.tracking_number,
-        courierName: data.courier_name,
-        waybillLink: data.waybill_link
+      if (!response.ok) {
+        throw new Error('Nie udało się zaktualizować wyceny')
       }
-    })
-    
-    await fetchRepairDetails()
-  } catch (err) {
-    setModal({
-      isOpen: true,
-      type: 'error',
-      title: 'Błąd zamówienia',
-      message: err instanceof Error ? err.message : 'Wystąpił błąd podczas zamawiania kuriera'
-    })
-  } finally {
-    setSubmitting(null)
+
+      await fetchRepairDetails()
+      setPriceForm({ ...priceForm, notes: '' })
+      setModal({
+        isOpen: true,
+        type: 'success',
+        title: 'Wycena zapisana',
+        message: 'Wycena została pomyślnie zaktualizowana.'
+      })
+    } catch (err) {
+      setModal({
+        isOpen: true,
+        type: 'error',
+        title: 'Błąd',
+        message: err instanceof Error ? err.message : 'Nie udało się zaktualizować wyceny'
+      })
+    } finally {
+      setSubmitting(null)
+    }
   }
-}
+
+  const handleOrderCourier = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setSubmitting('courier')
+
+    try {
+      const direction = repair!.status === 'nowe' ? 'pickup' : 'delivery'
+
+      const response = await fetch(`/api/admin/repairs/${repairId}/order-courier`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...courierForm,
+          direction
+        })
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.error || 'Nie udało się zamówić kuriera')
+      }
+
+      const data = await response.json()
+
+      const directionText = repair!.status === 'nowe'
+        ? 'Odbiór od klienta'
+        : 'Wysyłka do klienta'
+
+      setModal({
+        isOpen: true,
+        type: 'success',
+        title: 'Kurier zamówiony!',
+        message: 'Zamówienie kuriera zostało złożone pomyślnie.',
+        details: {
+          direction: directionText,
+          trackingNumber: data.tracking_number,
+          courierName: data.courier_name,
+          waybillLink: data.waybill_link
+        }
+      })
+
+      await fetchRepairDetails()
+    } catch (err) {
+      setModal({
+        isOpen: true,
+        type: 'error',
+        title: 'Błąd zamówienia',
+        message: err instanceof Error ? err.message : 'Wystąpił błąd podczas zamawiania kuriera'
+      })
+    } finally {
+      setSubmitting(null)
+    }
+  }
 
   if (loading) {
     return (
@@ -548,118 +548,7 @@ const handleOrderCourier = async (e: React.FormEvent) => {
 
           {/* PRAWA KOLUMNA - Akcje */}
           <div className="space-y-4">
-            {/* Zmiana statusu */}
-            <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow border border-gray-200 p-4">
-              <h3 className="text-sm font-semibold text-gray-900 mb-3">Zmień status</h3>
-              <form onSubmit={handleStatusUpdate} className="space-y-3">
-                <div>
-                  <label className="block text-xs font-semibold text-gray-700 mb-1">Nowy status</label>
-                  <select
-                    value={statusForm.status}
-                    onChange={(e) => setStatusForm({ ...statusForm, status: e.target.value })}
-                    className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
-                    required
-                  >
-                    {Object.entries(STATUS_LABELS).map(([value, label]) => (
-                      <option key={value} value={value}>
-                        {label}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-semibold text-gray-700 mb-1">Notatka (opcjonalnie)</label>
-                  <textarea
-                    value={statusForm.notes}
-                    onChange={(e) => setStatusForm({ ...statusForm, notes: e.target.value })}
-                    rows={2}
-                    className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
-                    placeholder="Dodaj notatkę..."
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  disabled={submitting === 'status'}
-                  className="w-full bg-blue-600 text-white px-3 py-2 text-sm rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center font-semibold transition-all"
-                >
-                  {submitting === 'status' ? (
-                    <>
-                      <Loader2 className="w-3 h-3 mr-2 animate-spin" />
-                      Zapisywanie...
-                    </>
-                  ) : (
-                    <>
-                      <Save className="w-3 h-3 mr-2" />
-                      Zapisz status
-                    </>
-                  )}
-                </button>
-              </form>
-            </div>
-
-            {/* Wycena */}
-            <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow border border-gray-200 p-4">
-              <h3 className="text-sm font-semibold text-gray-900 mb-3">Wycena</h3>
-              <form onSubmit={handlePriceUpdate} className="space-y-3">
-                <div>
-                  <label className="block text-xs font-semibold text-gray-700 mb-1">Kwota (zł)</label>
-                  <input
-                    type="number"
-                    step="0.01"
-                    value={priceForm.final_price}
-                    onChange={(e) => setPriceForm({ ...priceForm, final_price: e.target.value })}
-                    className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
-                    placeholder="np. 450.00"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs font-semibold text-gray-700 mb-1">Notatka (opcjonalnie)</label>
-                  <textarea
-                    value={priceForm.notes}
-                    onChange={(e) => setPriceForm({ ...priceForm, notes: e.target.value })}
-                    rows={2}
-                    className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
-                    placeholder="np. Wymiana ekranu + diagnostyka"
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  disabled={submitting === 'price'}
-                  className="w-full bg-green-600 text-white px-3 py-2 text-sm rounded-lg hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center font-semibold transition-all"
-                >
-                  {submitting === 'price' ? (
-                    <>
-                      <Loader2 className="w-3 h-3 mr-2 animate-spin" />
-                      Zapisywanie...
-                    </>
-                  ) : (
-                    <>
-                      <Save className="w-3 h-3 mr-2" />
-                      Zapisz wycenę
-                    </>
-                  )}
-                </button>
-              </form>
-            </div>
-
-            {/* Chat z klientem */}
-            <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow border border-gray-200 p-4">
-              <div className="flex items-center mb-3">
-                <div className="bg-blue-100 p-1.5 rounded-lg">
-                  <Mail className="w-4 h-4 text-blue-600" />
-                </div>
-                <h3 className="text-sm font-semibold text-gray-900 ml-2">Chat z klientem</h3>
-              </div>
-              <div className="h-[500px]">
-                <ChatBox repairId={repair.id} currentUserType="admin" />
-              </div>
-            </div>
-
-            {/* Zamów kuriera */}
+            {/* Zamów kuriera - PRIORYTET #1 */}
             {((repair.status === 'nowe' && !repair.pickup_tracking_number) ||
               (repair.status === 'zakonczone' && !repair.courier_tracking_number)) && (
               <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow border border-gray-200 p-4">
@@ -795,6 +684,117 @@ const handleOrderCourier = async (e: React.FormEvent) => {
                 </form>
               </div>
             )}
+
+            {/* Zmiana statusu */}
+            <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow border border-gray-200 p-4">
+              <h3 className="text-sm font-semibold text-gray-900 mb-3">Zmień status</h3>
+              <form onSubmit={handleStatusUpdate} className="space-y-3">
+                <div>
+                  <label className="block text-xs font-semibold text-gray-700 mb-1">Nowy status</label>
+                  <select
+                    value={statusForm.status}
+                    onChange={(e) => setStatusForm({ ...statusForm, status: e.target.value })}
+                    className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                    required
+                  >
+                    {Object.entries(STATUS_LABELS).map(([value, label]) => (
+                      <option key={value} value={value}>
+                        {label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-semibold text-gray-700 mb-1">Notatka (opcjonalnie)</label>
+                  <textarea
+                    value={statusForm.notes}
+                    onChange={(e) => setStatusForm({ ...statusForm, notes: e.target.value })}
+                    rows={2}
+                    className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                    placeholder="Dodaj notatkę..."
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={submitting === 'status'}
+                  className="w-full bg-blue-600 text-white px-3 py-2 text-sm rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center font-semibold transition-all"
+                >
+                  {submitting === 'status' ? (
+                    <>
+                      <Loader2 className="w-3 h-3 mr-2 animate-spin" />
+                      Zapisywanie...
+                    </>
+                  ) : (
+                    <>
+                      <Save className="w-3 h-3 mr-2" />
+                      Zapisz status
+                    </>
+                  )}
+                </button>
+              </form>
+            </div>
+
+            {/* Wycena */}
+            <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow border border-gray-200 p-4">
+              <h3 className="text-sm font-semibold text-gray-900 mb-3">Wycena</h3>
+              <form onSubmit={handlePriceUpdate} className="space-y-3">
+                <div>
+                  <label className="block text-xs font-semibold text-gray-700 mb-1">Kwota (zł)</label>
+                  <input
+                    type="number"
+                    step="0.01"
+                    value={priceForm.final_price}
+                    onChange={(e) => setPriceForm({ ...priceForm, final_price: e.target.value })}
+                    className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                    placeholder="np. 450.00"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-semibold text-gray-700 mb-1">Notatka (opcjonalnie)</label>
+                  <textarea
+                    value={priceForm.notes}
+                    onChange={(e) => setPriceForm({ ...priceForm, notes: e.target.value })}
+                    rows={2}
+                    className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                    placeholder="np. Wymiana ekranu + diagnostyka"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={submitting === 'price'}
+                  className="w-full bg-green-600 text-white px-3 py-2 text-sm rounded-lg hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center font-semibold transition-all"
+                >
+                  {submitting === 'price' ? (
+                    <>
+                      <Loader2 className="w-3 h-3 mr-2 animate-spin" />
+                      Zapisywanie...
+                    </>
+                  ) : (
+                    <>
+                      <Save className="w-3 h-3 mr-2" />
+                      Zapisz wycenę
+                    </>
+                  )}
+                </button>
+              </form>
+            </div>
+
+            {/* Chat z klientem */}
+            <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow border border-gray-200 p-4">
+              <div className="flex items-center mb-3">
+                <div className="bg-blue-100 p-1.5 rounded-lg">
+                  <Mail className="w-4 h-4 text-blue-600" />
+                </div>
+                <h3 className="text-sm font-semibold text-gray-900 ml-2">Chat z klientem</h3>
+              </div>
+              <div className="h-[500px]">
+                <ChatBox repairId={repair.id} currentUserType="admin" />
+              </div>
+            </div>
           </div>
         </div>
 

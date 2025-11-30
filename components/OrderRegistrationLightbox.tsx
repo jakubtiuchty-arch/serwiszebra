@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, Loader2, CheckCircle, ShoppingBag } from 'lucide-react'
 import { ComparisonTable } from './ComparisonTable'
+import { createClient } from '@/lib/supabase/client'
 
 interface OrderRegistrationLightboxProps {
   isOpen: boolean
@@ -54,6 +55,12 @@ export function OrderRegistrationLightbox({
     setIsLoading(true)
 
     try {
+      const supabase = createClient()
+
+      // KRYTYCZNE: Wyloguj obecnego użytkownika przed rejestracją nowego
+      await supabase.auth.signOut()
+      console.log('🔓 Wylogowano poprzedniego użytkownika')
+
       const response = await fetch('/api/auth/register-with-order', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -72,6 +79,22 @@ export function OrderRegistrationLightbox({
       if (!response.ok) {
         throw new Error(data.error || 'Błąd rejestracji')
       }
+
+      console.log('✅ Konto utworzone, loguję użytkownika...')
+
+      // KRYTYCZNE: Zaloguj NOWEGO użytkownika przed przekierowaniem
+      const { error: signInError } = await supabase.auth.signInWithPassword({
+        email: userEmail,
+        password
+      })
+
+      if (signInError) {
+        console.error('❌ Błąd logowania po rejestracji:', signInError)
+        throw new Error('Konto utworzone, ale nie udało się zalogować. Przejdź do strony logowania.')
+      }
+
+      // Poczekaj chwilę żeby sesja się zapisała
+      await new Promise(resolve => setTimeout(resolve, 500))
 
       // Success - redirect to panel zamówień
       window.location.href = '/panel/zamowienia'

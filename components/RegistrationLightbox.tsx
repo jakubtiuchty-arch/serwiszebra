@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, Loader2, CheckCircle } from 'lucide-react'
 import { ComparisonTable } from './ComparisonTable'
+import { createClient } from '@/lib/supabase/client'
 
 interface RegistrationLightboxProps {
   isOpen: boolean
@@ -52,6 +53,12 @@ export function RegistrationLightbox({
     setIsLoading(true)
 
     try {
+      const supabase = createClient()
+
+      // KRYTYCZNE: Wyloguj obecnego użytkownika przed rejestracją nowego
+      await supabase.auth.signOut()
+      console.log('🔓 Wylogowano poprzedniego użytkownika')
+
       const response = await fetch('/api/auth/register-with-repair', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -70,6 +77,22 @@ export function RegistrationLightbox({
       if (!response.ok) {
         throw new Error(data.error || 'Błąd rejestracji')
       }
+
+      console.log('✅ Konto utworzone, loguję użytkownika...')
+
+      // KRYTYCZNE: Zaloguj NOWEGO użytkownika przed przekierowaniem
+      const { error: signInError } = await supabase.auth.signInWithPassword({
+        email: userEmail,
+        password
+      })
+
+      if (signInError) {
+        console.error('❌ Błąd logowania po rejestracji:', signInError)
+        throw new Error('Konto utworzone, ale nie udało się zalogować. Przejdź do strony logowania.')
+      }
+
+      // Poczekaj chwilę żeby sesja się zapisała
+      await new Promise(resolve => setTimeout(resolve, 500))
 
       // Success - redirect to panel
       window.location.href = '/panel'
@@ -105,28 +128,28 @@ export function RegistrationLightbox({
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: 20 }}
                 transition={{ type: 'spring', duration: 0.5 }}
-                className="bg-white rounded-2xl shadow-2xl w-full max-w-4xl relative"
+                className="bg-white rounded-xl shadow-2xl w-full max-w-3xl relative"
                 onClick={(e) => e.stopPropagation()}
               >
                 {/* CLOSE BUTTON */}
                 <button
                   onClick={onClose}
-                  className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors z-10"
+                  className="absolute top-3 right-3 text-gray-400 hover:text-gray-600 transition-colors z-10"
                   aria-label="Zamknij"
                 >
-                  <X className="w-6 h-6" />
+                  <X className="w-5 h-5" />
                 </button>
 
-                <div className="p-8 md:p-10">
+                <div className="p-5 md:p-6">
                   {/* HEADER */}
-                  <div className="text-center mb-8">
-                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-100 mb-4">
-                      <CheckCircle className="w-8 h-8 text-green-600" />
+                  <div className="text-center mb-5">
+                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-green-100 mb-3">
+                      <CheckCircle className="w-6 h-6 text-green-600" />
                     </div>
-                    <h2 className="text-3xl font-bold text-gray-900 mb-2">
+                    <h2 className="text-xl font-bold text-gray-900 mb-1.5">
                       Zgłoszenie wysłane pomyślnie!
                     </h2>
-                    <p className="text-gray-600">
+                    <p className="text-sm text-gray-600">
                       ID zgłoszenia: <span className="font-mono font-semibold text-orange-600">#{repairId.slice(0, 8).toUpperCase()}</span>
                     </p>
                   </div>
@@ -135,28 +158,28 @@ export function RegistrationLightbox({
                   <ComparisonTable />
 
                   {/* REGISTRATION FORM */}
-                  <form onSubmit={handleSubmit} className="space-y-6">
-                    <div className="bg-orange-50 border-2 border-orange-200 rounded-xl p-6">
-                      <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">
+                  <form onSubmit={handleSubmit} className="space-y-4">
+                    <div className="bg-orange-50 border-2 border-orange-200 rounded-lg p-4">
+                      <h3 className="text-base font-bold text-gray-900 mb-3 text-center">
                         Załóż konto w 30 sekund
                       </h3>
 
                       {/* EMAIL (read-only) */}
-                      <div className="mb-4">
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <div className="mb-3">
+                        <label className="block text-xs font-medium text-gray-700 mb-1.5">
                           📧 Email
                         </label>
                         <input
                           type="email"
                           value={userEmail}
                           disabled
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-100 text-gray-600"
+                          className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg bg-gray-100 text-gray-600"
                         />
                       </div>
 
                       {/* PASSWORD */}
-                      <div className="mb-4">
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <div className="mb-3">
+                        <label className="block text-xs font-medium text-gray-700 mb-1.5">
                           🔒 Hasło (min. 8 znaków)
                         </label>
                         <input
@@ -166,14 +189,14 @@ export function RegistrationLightbox({
                           required
                           minLength={8}
                           placeholder="Wpisz hasło"
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
+                          className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
                           autoFocus
                         />
                       </div>
 
                       {/* CONFIRM PASSWORD */}
-                      <div className="mb-4">
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <div className="mb-3">
+                        <label className="block text-xs font-medium text-gray-700 mb-1.5">
                           🔒 Powtórz hasło
                         </label>
                         <input
@@ -183,21 +206,21 @@ export function RegistrationLightbox({
                           required
                           minLength={8}
                           placeholder="Wpisz hasło ponownie"
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
+                          className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
                         />
                       </div>
 
                       {/* CHECKBOXES */}
-                      <div className="space-y-3 mb-6">
-                        <label className="flex items-start gap-3 cursor-pointer group">
+                      <div className="space-y-2 mb-4">
+                        <label className="flex items-start gap-2 cursor-pointer group">
                           <input
                             type="checkbox"
                             checked={termsAccepted}
                             onChange={(e) => setTermsAccepted(e.target.checked)}
                             required
-                            className="mt-1 w-5 h-5 text-orange-600 border-gray-300 rounded focus:ring-orange-500"
+                            className="mt-0.5 w-4 h-4 text-orange-600 border-gray-300 rounded focus:ring-orange-500"
                           />
-                          <span className="text-sm text-gray-700 group-hover:text-gray-900">
+                          <span className="text-xs text-gray-700 group-hover:text-gray-900">
                             Zgadzam się na{' '}
                             <a href="/regulamin" target="_blank" className="text-orange-600 hover:text-orange-700 underline">
                               regulamin
@@ -209,14 +232,14 @@ export function RegistrationLightbox({
                           </span>
                         </label>
 
-                        <label className="flex items-start gap-3 cursor-pointer group">
+                        <label className="flex items-start gap-2 cursor-pointer group">
                           <input
                             type="checkbox"
                             checked={marketingConsent}
                             onChange={(e) => setMarketingConsent(e.target.checked)}
-                            className="mt-1 w-5 h-5 text-orange-600 border-gray-300 rounded focus:ring-orange-500"
+                            className="mt-0.5 w-4 h-4 text-orange-600 border-gray-300 rounded focus:ring-orange-500"
                           />
-                          <span className="text-sm text-gray-700 group-hover:text-gray-900">
+                          <span className="text-xs text-gray-700 group-hover:text-gray-900">
                             Chcę otrzymywać informacje o promocjach, nowościach i rabatach (opcjonalne)
                           </span>
                         </label>
@@ -224,7 +247,7 @@ export function RegistrationLightbox({
 
                       {/* ERROR MESSAGE */}
                       {error && (
-                        <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
+                        <div className="mb-3 p-2 bg-red-50 border border-red-200 rounded-lg text-red-700 text-xs">
                           {error}
                         </div>
                       )}
@@ -233,11 +256,11 @@ export function RegistrationLightbox({
                       <button
                         type="submit"
                         disabled={isLoading}
-                        className="w-full bg-orange-600 hover:bg-orange-700 text-white font-semibold py-4 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                        className="w-full bg-orange-600 hover:bg-orange-700 text-white font-semibold py-2.5 text-sm rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                       >
                         {isLoading ? (
                           <>
-                            <Loader2 className="w-5 h-5 animate-spin" />
+                            <Loader2 className="w-4 h-4 animate-spin" />
                             Tworzenie konta...
                           </>
                         ) : (
@@ -253,7 +276,7 @@ export function RegistrationLightbox({
                       <button
                         type="button"
                         onClick={handleSkip}
-                        className="text-sm text-gray-500 hover:text-gray-700 underline transition-colors"
+                        className="text-xs text-gray-500 hover:text-gray-700 underline transition-colors"
                       >
                         Nie teraz, śledzę przez link
                       </button>
@@ -261,17 +284,17 @@ export function RegistrationLightbox({
                   </form>
 
                   {/* TRUST BADGES */}
-                  <div className="mt-8 pt-6 border-t border-gray-200">
-                    <div className="flex flex-wrap items-center justify-center gap-6 text-xs text-gray-500">
-                      <div className="flex items-center gap-2">
+                  <div className="mt-5 pt-4 border-t border-gray-200">
+                    <div className="flex flex-wrap items-center justify-center gap-4 text-[10px] text-gray-500">
+                      <div className="flex items-center gap-1.5">
                         <span className="text-green-600">🔒</span>
                         <span>Dane szyfrowane SSL</span>
                       </div>
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-1.5">
                         <span className="text-blue-600">✓</span>
                         <span>Zgodność z RODO</span>
                       </div>
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-1.5">
                         <span>🇵🇱</span>
                         <span>Polskie prawo</span>
                       </div>

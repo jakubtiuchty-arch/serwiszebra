@@ -9,7 +9,10 @@ import {
   Loader2,
   Send,
   Mic,
-  MicOff
+  MicOff,
+  Video,
+  Image as ImageIcon,
+  Paperclip
 } from 'lucide-react'
 
 interface Citation {
@@ -38,8 +41,12 @@ export default function AIChatBox() {
   const [placeholderIndex, setPlaceholderIndex] = useState(0)
   const [isRecording, setIsRecording] = useState(false)
   const [sessionId] = useState(() => `session_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`)
+  const [detectedDevice, setDetectedDevice] = useState<string>('urządzenie')
+  const [attachedFiles, setAttachedFiles] = useState<File[]>([])
   const messagesContainerRef = useRef<HTMLDivElement>(null)
   const recognitionRef = useRef<any>(null)
+  const fileInputRef = useRef<HTMLInputElement>(null)
+  const videoInputRef = useRef<HTMLInputElement>(null)
 
   // Show button logic:
   // 1. POWAŻNA USTERKA → button po pierwszej konkluzji (AI oznaczy jako "[SERIOUS_ISSUE]")
@@ -66,12 +73,25 @@ export default function AIChatBox() {
     !loading &&
     (isSeriousIssue || suggestsRepair || messageCount >= 6)  // ✨ Pokaż wcześniej dla poważnych usterek lub sugestii naprawy
 
-  // Auto-scroll ONLY the chat container, NOT the whole page
-  useEffect(() => {
+  // Scroll do dołu - płynnie
+  const scrollToBottom = (smooth = true) => {
     if (messagesContainerRef.current) {
-      messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight
+      messagesContainerRef.current.scrollTo({
+        top: messagesContainerRef.current.scrollHeight,
+        behavior: smooth ? 'smooth' : 'auto'
+      })
     }
-  }, [messages, loading])
+  }
+  
+  // Scroll gdy AI zakończy odpowiedź (loading zmienia się z true na false)
+  const prevLoadingRef = useRef(loading)
+  useEffect(() => {
+    // Scroll gdy: użytkownik wysłał wiadomość (loading: false→true) LUB AI skończył (loading: true→false)
+    if (prevLoadingRef.current !== loading) {
+      setTimeout(() => scrollToBottom(true), 100)
+    }
+    prevLoadingRef.current = loading
+  }, [loading])
 
   const scrollToForm = () => {
     const formElement = document.getElementById('repair-form')
@@ -143,12 +163,74 @@ export default function AIChatBox() {
     }
   }
 
+  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files
+    if (files && files.length > 0) {
+      setAttachedFiles(prev => [...prev, ...Array.from(files)])
+    }
+  }
+
+  const handleVideoCapture = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files
+    if (files && files.length > 0) {
+      setAttachedFiles(prev => [...prev, ...Array.from(files)])
+    }
+  }
+
+  const removeFile = (index: number) => {
+    setAttachedFiles(prev => prev.filter((_, i) => i !== index))
+  }
+
+  // Detect device type from user input
+  const detectDeviceType = (text: string): string => {
+    const textLower = text.toLowerCase()
+
+    // Printer models - if detected, it's a printer
+    const printerModels = [
+      'zt411', 'zt421', 'zt410', 'zt420',
+      'zd421', 'zd621', 'zd420', 'zd620',
+      'zd888', 'zd500', 'zd510',
+      'zt510', 'zt610',
+      'gc420d', 'gc420t',
+      'tlp2844', 'lp2844'
+    ]
+
+    // Check if any printer model is mentioned
+    for (const model of printerModels) {
+      if (textLower.includes(model)) {
+        return 'drukarkę'
+      }
+    }
+
+    // Check for generic device type keywords
+    if (textLower.includes('drukark') || textLower.includes('print')) {
+      return 'drukarkę'
+    }
+    if (textLower.includes('terminal')) {
+      return 'terminal'
+    }
+    if (textLower.includes('skaner') || textLower.includes('scan')) {
+      return 'skaner'
+    }
+    if (textLower.includes('tablet')) {
+      return 'tablet'
+    }
+
+    return 'urządzenie'
+  }
+
   const handleSend = async (text?: string) => {
     const messageText = text || input
     if (!messageText.trim() || loading) return
 
     setInput('')
-    
+
+    // Detect device type from first user message
+    if (messages.length === 0) {
+      const device = detectDeviceType(messageText)
+      setDetectedDevice(device)
+    }
+
     const userMessage: Message = { role: 'user', content: messageText }
     setMessages(prev => [...prev, userMessage])
     setLoading(true)
@@ -225,11 +307,14 @@ export default function AIChatBox() {
     <div className="max-w-4xl mx-auto">
       <div className="bg-white rounded-3xl shadow-2xl overflow-hidden">
         
-        {messages.length > 0 && (
-          <div 
-            ref={messagesContainerRef}
-            className="max-h-96 overflow-y-auto p-8 space-y-4"
-          >
+        {/* Kontener wiadomości */}
+        <div
+          ref={messagesContainerRef}
+          className={`overflow-y-auto transition-all duration-300 ease-out ${
+            messages.length > 0 ? 'max-h-80 p-4 sm:p-6' : 'h-0 p-0'
+          }`}
+        >
+          <div className="space-y-4">
             {messages.map((msg, idx) => (
               <div
                 key={idx}
@@ -286,14 +371,13 @@ export default function AIChatBox() {
             {loading && (
               <div className="flex gap-3">
                 <div className="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center">
-                  <Sparkles className="w-4 h-4 text-white" />
+                  <Sparkles className="w-4 h-4 text-white animate-pulse" />
                 </div>
                 <div className="bg-gray-100 rounded-3xl px-5 py-3">
-                  <div className="flex gap-1">
-                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
-                  </div>
+                  <p className="text-sm text-gray-600 flex items-center gap-2">
+                    <span className="inline-block w-1.5 h-1.5 bg-blue-500 rounded-full animate-pulse"></span>
+                    Diagnosuję Twoją {detectedDevice}... zaraz wracam! ☕
+                  </p>
                 </div>
               </div>
             )}
@@ -312,10 +396,55 @@ export default function AIChatBox() {
               </div>
             )}
           </div>
-        )}
+        </div>
 
-        <div className="p-8 border-t border-gray-100">
+        <div className={`p-4 sm:p-6 md:p-8 ${messages.length > 0 ? 'border-t border-gray-100' : ''}`}>
+          {/* Attached Files Preview */}
+          {attachedFiles.length > 0 && (
+            <div className="mb-4 flex flex-wrap gap-2">
+              {attachedFiles.map((file, index) => (
+                <div key={index} className="relative bg-blue-50 border border-blue-200 rounded-lg px-3 py-2 flex items-center gap-2 group">
+                  <div className="flex items-center gap-2">
+                    {file.type.startsWith('video/') ? (
+                      <Video className="w-4 h-4 text-blue-600" />
+                    ) : (
+                      <ImageIcon className="w-4 h-4 text-blue-600" />
+                    )}
+                    <span className="text-xs text-blue-900 font-medium max-w-[150px] truncate">
+                      {file.name}
+                    </span>
+                  </div>
+                  <button
+                    onClick={() => removeFile(index)}
+                    className="text-blue-600 hover:text-red-600 transition-colors"
+                  >
+                    <span className="text-xs">✕</span>
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Input Row */}
           <div className="flex items-center gap-3">
+            {/* Hidden file inputs */}
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/*,video/*"
+              multiple
+              onChange={handleFileSelect}
+              className="hidden"
+            />
+            <input
+              ref={videoInputRef}
+              type="file"
+              accept="video/*"
+              capture="environment"
+              onChange={handleVideoCapture}
+              className="hidden"
+            />
+
             <input
               type="text"
               value={input}
@@ -325,10 +454,12 @@ export default function AIChatBox() {
               className="flex-1 text-base text-gray-700 placeholder-gray-400 focus:outline-none bg-transparent py-3"
               disabled={loading}
             />
+
+            {/* Mic button - DESKTOP ONLY (mobile has it in bottom bar) */}
             <button
               onClick={toggleRecording}
               disabled={loading}
-              className={`flex-shrink-0 p-2 rounded-full transition-all disabled:opacity-50 disabled:cursor-not-allowed ${
+              className={`hidden md:flex flex-shrink-0 p-2 rounded-full transition-all disabled:opacity-50 disabled:cursor-not-allowed ${
                 isRecording
                   ? 'bg-red-500 text-white animate-pulse'
                   : 'text-gray-400 hover:text-blue-600 hover:bg-blue-50'
@@ -341,9 +472,10 @@ export default function AIChatBox() {
                 <Mic className="w-6 h-6" />
               )}
             </button>
+
             <button
               onClick={() => handleSend()}
-              disabled={!input.trim() || loading}
+              disabled={(!input.trim() && attachedFiles.length === 0) || loading}
               className="flex-shrink-0 text-gray-400 hover:text-blue-600 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? (
@@ -354,8 +486,52 @@ export default function AIChatBox() {
             </button>
           </div>
 
-          <div className="pt-6 border-t border-gray-100 mt-6">
-            <div className="flex items-center justify-center gap-8 text-sm text-gray-600 font-medium" style={{ marginLeft: '-5%' }}>
+          <div className="pt-4 mt-4">
+            {/* MOBILE - features left, media buttons right */}
+            <div className="md:hidden flex items-center justify-between">
+              <div className="flex items-center gap-2 text-xs text-gray-600 font-medium">
+                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                <span>Wstępna diagnoza w 2 min</span>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => videoInputRef.current?.click()}
+                  disabled={loading}
+                  className="flex-shrink-0 p-2 rounded-full text-gray-400 hover:text-blue-600 hover:bg-blue-50 transition-all disabled:opacity-50"
+                  aria-label="Nagraj wideo"
+                >
+                  <Video className="w-5 h-5" />
+                </button>
+                <button
+                  onClick={() => fileInputRef.current?.click()}
+                  disabled={loading}
+                  className="flex-shrink-0 p-2 rounded-full text-gray-400 hover:text-blue-600 hover:bg-blue-50 transition-all disabled:opacity-50"
+                  aria-label="Dodaj załącznik"
+                >
+                  <Paperclip className="w-5 h-5" />
+                </button>
+                <button
+                  onClick={toggleRecording}
+                  disabled={loading}
+                  className={`flex-shrink-0 p-2 rounded-full transition-all disabled:opacity-50 ${
+                    isRecording
+                      ? 'bg-red-500 text-white animate-pulse'
+                      : 'text-gray-400 hover:text-blue-600 hover:bg-blue-50'
+                  }`}
+                  aria-label={isRecording ? 'Zatrzymaj nagrywanie' : 'Rozpocznij nagrywanie'}
+                >
+                  {isRecording ? (
+                    <MicOff className="w-5 h-5" />
+                  ) : (
+                    <Mic className="w-5 h-5" />
+                  )}
+                </button>
+              </div>
+            </div>
+
+            {/* DESKTOP - features centered */}
+            <div className="hidden md:flex items-center justify-center gap-8 text-sm text-gray-600 font-medium">
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-green-500 rounded-full"></div>
                 <span>Wstępna diagnoza w 2 min</span>
@@ -366,6 +542,16 @@ export default function AIChatBox() {
               </div>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Powered by Gemini - OUTSIDE chatbox */}
+      <div className="flex justify-center mt-3">
+        <div className="flex items-center gap-1 px-2 py-1 bg-gray-50 rounded-full border border-gray-200">
+          <span className="text-[10px] text-gray-500">Powered by</span>
+          <span className="text-xs font-medium tracking-tight" style={{ fontFamily: '"Google Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}>
+            Gemini
+          </span>
         </div>
       </div>
     </div>

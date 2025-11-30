@@ -145,10 +145,10 @@ async function loadReturns() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center py-20">
-        <div className="flex flex-col items-center gap-4">
-          <Loader2 className="w-12 h-12 text-gray-900 animate-spin" />
-          <p className="text-sm font-semibold text-gray-700">Ładowanie zwrotów...</p>
+      <div className="flex items-center justify-center py-12">
+        <div className="flex flex-col items-center gap-3">
+          <Loader2 className="w-8 h-8 text-blue-600 animate-spin" />
+          <p className="text-sm text-gray-600">Ładowanie zwrotów...</p>
         </div>
       </div>
     )
@@ -156,13 +156,12 @@ async function loadReturns() {
 
   if (error) {
     return (
-      <div className="bg-red-50/80 backdrop-blur-sm border-2 border-red-200 rounded-2xl p-8 text-center">
-        <XCircle className="w-16 h-16 text-red-500 mx-auto mb-4" />
-        <p className="text-xl font-semibold text-red-900 mb-2">Błąd ładowania zwrotów</p>
-        <p className="text-red-700 mb-6">{error}</p>
+      <div className="bg-red-50 border border-red-200 rounded-xl p-4 text-center">
+        <p className="text-sm text-red-800 font-medium mb-2">Błąd ładowania</p>
+        <p className="text-xs text-red-600 mb-3">{error}</p>
         <button
           onClick={loadReturns}
-          className="bg-gray-900 hover:bg-gray-800 text-white px-6 py-3 rounded-xl font-semibold transition-all hover:shadow-lg"
+          className="bg-gray-900 hover:bg-gray-800 text-white px-3 py-1.5 rounded-lg text-xs font-medium transition-colors"
         >
           Spróbuj ponownie
         </button>
@@ -171,38 +170,36 @@ async function loadReturns() {
   }
 
   return (
-    <div className="space-y-4">
-      
+    <div className="space-y-3 sm:space-y-4">
+
       {/* BREADCRUMBS */}
       <Link
         href="/panel/zamowienia"
-        className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors"
+        className="inline-flex items-center gap-1.5 text-gray-600 hover:text-gray-900 transition-colors text-sm font-medium"
       >
-        <ChevronLeft className="w-5 h-5" />
+        <ChevronLeft className="w-4 h-4" />
         Powrót do zamówień
       </Link>
 
       {/* PAGE TITLE */}
-      <div className="mb-8">
-        <h1 className="text-4xl md:text-5xl font-semibold text-gray-900 mb-2">
+      <div>
+        <h1 className="text-xl sm:text-2xl font-bold text-gray-900 mb-0.5">
           Zwroty i reklamacje
         </h1>
-        <p className="text-lg text-gray-600">
+        <p className="text-xs text-gray-500">
           Wszystkie zgłoszone zwroty produktów
         </p>
       </div>
 
       {/* RETURNS LIST */}
-      <div className="space-y-4">
+      <div className="space-y-3">
         {returns.length === 0 ? (
-          <div className="bg-white/80 backdrop-blur-sm border border-gray-200 rounded-2xl shadow-sm p-16 text-center">
-            <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Package className="w-10 h-10 text-gray-400" />
-            </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">
+          <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-8 text-center">
+            <Package className="w-12 h-12 text-gray-300 mx-auto mb-3" />
+            <h3 className="text-sm font-semibold text-gray-900 mb-1">
               Brak zwrotów
             </h3>
-            <p className="text-gray-600">
+            <p className="text-xs text-gray-600">
               Nie masz jeszcze żadnych zgłoszonych zwrotów lub reklamacji.
             </p>
           </div>
@@ -216,90 +213,73 @@ async function loadReturns() {
             return (
               <div
                 key={returnItem.id}
-                className="bg-white border-2 border-gray-200 rounded-2xl shadow-sm hover:shadow-lg hover:border-gray-300 transition-all overflow-hidden"
+                className="bg-white border-2 border-gray-300 rounded-xl shadow-md hover:shadow-lg hover:border-gray-400 transition-all overflow-hidden"
               >
                 {/* HEADER - Always visible */}
-                <div 
-                  className="p-6 cursor-pointer"
+                <div
+                  className="p-3 cursor-pointer"
                   onClick={() => toggleReturnExpanded(returnItem.id)}
                 >
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-4 flex-1">
-                      {/* Status icon */}
-                      <div className={`w-12 h-12 ${statusConfig.bg} rounded-full flex items-center justify-center flex-shrink-0`}>
-                        <StatusIcon className={`w-6 h-6 ${statusConfig.text}`} />
-                      </div>
-                      
-                      {/* Main info */}
-                      <div className="flex-1 grid grid-cols-1 md:grid-cols-4 gap-4">
-                        {/* Return number */}
-                        <div>
-                          <p className="text-xs text-gray-500 mb-1">Numer zwrotu</p>
-                          <p className="font-bold text-gray-900">
-                            #{returnItem.return_number.split('/').pop()}
-                          </p>
-                        </div>
-                        
-                        {/* Status */}
-                        <div>
-                          <p className="text-xs text-gray-500 mb-1">Status</p>
-                          <span className={`inline-flex px-2.5 py-1 ${statusConfig.bg} ${statusConfig.text} rounded-lg text-xs font-bold`}>
-                            {statusConfig.label}
-                          </span>
-                        </div>
-                        
-                        {/* Order number */}
-                        <div>
-                          <p className="text-xs text-gray-500 mb-1">Zamówienie</p>
-                          <p className="font-medium text-gray-900">
-                            #{returnItem.order_number.split('/').pop()}
-                          </p>
-                        </div>
-                        
-                        {/* Date */}
-                        <div>
-                          <p className="text-xs text-gray-500 mb-1">Data zgłoszenia</p>
-                          <p className="font-medium text-gray-900">
-                            {format(new Date(returnItem.created_at), "d MMM yyyy", { locale: pl })}
-                          </p>
-                        </div>
-                      </div>
-                      
-                      {/* Expand button */}
-                      <button className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
-                        <ChevronDown className={`w-5 h-5 text-gray-500 transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
-                      </button>
+                  <div className="flex items-start gap-3">
+                    {/* Status icon */}
+                    <div className={`w-10 h-10 ${statusConfig.bg} rounded-full flex items-center justify-center flex-shrink-0`}>
+                      <StatusIcon className={`w-5 h-5 ${statusConfig.text}`} />
                     </div>
-                  </div>
-                  
-                  {/* Company name - under main info */}
-                  <div className="flex items-center gap-2 mt-4 pt-4 border-t border-gray-100">
-                    <Building2 className="w-4 h-4 text-gray-400" />
-                    <p className="text-sm font-semibold text-gray-700">
-                      {returnItem.customer_company_name}
-                    </p>
+
+                    {/* Main info */}
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-start justify-between gap-2 mb-2">
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2 flex-wrap mb-1">
+                            <span className="text-sm font-bold text-gray-900">
+                              #{returnItem.return_number.split('/').pop()}
+                            </span>
+                            <span className={`px-2 py-0.5 ${statusConfig.bg} ${statusConfig.text} rounded-md text-[10px] font-bold`}>
+                              {statusConfig.label}
+                            </span>
+                          </div>
+                          <div className="flex items-center gap-2 text-[10px] text-gray-500">
+                            <span>Zamówienie: #{returnItem.order_number.split('/').pop()}</span>
+                            <span>•</span>
+                            <span className="flex items-center gap-1">
+                              <Calendar className="w-3 h-3" />
+                              {format(new Date(returnItem.created_at), "d MMM yyyy", { locale: pl })}
+                            </span>
+                          </div>
+                        </div>
+                        <ChevronDown className={`w-4 h-4 text-gray-500 transition-transform flex-shrink-0 ${isExpanded ? 'rotate-180' : ''}`} />
+                      </div>
+
+                      {/* Company name */}
+                      <div className="flex items-center gap-1.5 pt-2 border-t border-gray-100">
+                        <Building2 className="w-3 h-3 text-gray-400" />
+                        <p className="text-[10px] font-semibold text-gray-700">
+                          {returnItem.customer_company_name}
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
                 {/* EXPANDED CONTENT */}
                 {isExpanded && (
-                  <div className="px-6 pb-6 border-t border-gray-200">
-                    <div className="grid md:grid-cols-2 gap-6 mt-6">
-                      
+                  <div className="px-3 pb-3 border-t border-gray-200">
+                    <div className="grid md:grid-cols-2 gap-3 mt-3">
+
                       {/* LEFT COLUMN */}
-                      <div className="space-y-6">
-                        
+                      <div className="space-y-3">
+
                         {/* Products */}
                         <div>
-                          <h4 className="text-sm font-semibold text-gray-700 mb-3">Zwracane produkty:</h4>
-                          <div className="bg-gray-50 rounded-xl p-4 space-y-2">
+                          <h4 className="text-[10px] font-semibold text-gray-700 mb-1.5">Zwracane produkty:</h4>
+                          <div className="bg-gray-50 rounded-lg p-2.5 space-y-1.5">
                             {returnItem.products.map((product) => (
-                              <div key={product.id} className="flex items-center justify-between">
-                                <div>
-                                  <p className="font-medium text-gray-900">{product.product_name}</p>
-                                  <p className="text-sm text-gray-600">Ilość: {product.quantity} szt.</p>
+                              <div key={product.id} className="flex items-center justify-between text-[10px] gap-2">
+                                <div className="flex-1 min-w-0">
+                                  <p className="font-medium text-gray-900 truncate">{product.product_name}</p>
+                                  <p className="text-gray-600">Ilość: {product.quantity} szt.</p>
                                 </div>
-                                <p className="font-semibold text-gray-900">
+                                <p className="font-semibold text-gray-900 whitespace-nowrap">
                                   {(product.price_brutto * product.quantity).toFixed(2)} zł
                                 </p>
                               </div>
@@ -308,16 +288,16 @@ async function loadReturns() {
                         </div>
 
                         {/* Reason and solution */}
-                        <div className="space-y-3">
+                        <div className="space-y-2">
                           <div>
-                            <p className="text-sm font-semibold text-gray-700">Powód zwrotu:</p>
-                            <p className="text-sm text-gray-900 mt-1">{reasonLabel}</p>
+                            <p className="text-[10px] font-semibold text-gray-700">Powód zwrotu:</p>
+                            <p className="text-[10px] text-gray-900 mt-0.5">{reasonLabel}</p>
                           </div>
                           <div>
-                            <p className="text-sm font-semibold text-gray-700">Preferowane rozwiązanie:</p>
-                            <div className="flex items-center gap-2 mt-1">
-                              <RefreshCw className="w-4 h-4 text-gray-500" />
-                              <p className="text-sm text-gray-900">
+                            <p className="text-[10px] font-semibold text-gray-700">Preferowane rozwiązanie:</p>
+                            <div className="flex items-center gap-1 mt-0.5">
+                              <RefreshCw className="w-3 h-3 text-gray-500" />
+                              <p className="text-[10px] text-gray-900">
                                 {returnItem.preferred_solution === 'refund' ? 'Zwrot pieniędzy' : 'Wymiana produktu'}
                               </p>
                             </div>
@@ -326,13 +306,13 @@ async function loadReturns() {
                       </div>
 
                       {/* RIGHT COLUMN */}
-                      <div className="space-y-6">
-                        
+                      <div className="space-y-3">
+
                         {/* Description */}
                         <div>
-                          <h4 className="text-sm font-semibold text-gray-700 mb-2">Opis problemu:</h4>
-                          <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
-                            <p className="text-sm text-gray-800 leading-relaxed">
+                          <h4 className="text-[10px] font-semibold text-gray-700 mb-1.5">Opis problemu:</h4>
+                          <div className="bg-blue-50 border border-blue-200 rounded-lg p-2.5">
+                            <p className="text-[10px] text-gray-800 leading-relaxed">
                               {returnItem.description || 'Brak opisu'}
                             </p>
                           </div>
@@ -341,11 +321,11 @@ async function loadReturns() {
                         {/* Admin notes */}
                         {returnItem.admin_notes && (
                           <div>
-                            <h4 className="text-sm font-semibold text-gray-700 mb-2">Odpowiedź serwisu:</h4>
-                            <div className="bg-green-50 border border-green-200 rounded-xl p-4">
-                              <div className="flex items-start gap-2">
-                                <AlertCircle className="w-4 h-4 text-green-600 mt-0.5" />
-                                <p className="text-sm text-gray-800 leading-relaxed">
+                            <h4 className="text-[10px] font-semibold text-gray-700 mb-1.5">Odpowiedź serwisu:</h4>
+                            <div className="bg-green-50 border border-green-200 rounded-lg p-2.5">
+                              <div className="flex items-start gap-1.5">
+                                <AlertCircle className="w-3 h-3 text-green-600 mt-0.5 flex-shrink-0" />
+                                <p className="text-[10px] text-gray-800 leading-relaxed">
                                   {returnItem.admin_notes}
                                 </p>
                               </div>
@@ -356,9 +336,9 @@ async function loadReturns() {
                         {/* Images */}
                         {returnItem.images && returnItem.images.length > 0 && (
                           <div>
-                            <h4 className="text-sm font-semibold text-gray-700 mb-2">Załączone zdjęcia:</h4>
-                            <div className="flex items-center gap-2 text-sm text-gray-600">
-                              <ImageIcon className="w-4 h-4" />
+                            <h4 className="text-[10px] font-semibold text-gray-700 mb-1.5">Załączone zdjęcia:</h4>
+                            <div className="flex items-center gap-1.5 text-[10px] text-gray-600">
+                              <ImageIcon className="w-3 h-3" />
                               <span>{returnItem.images.length} {returnItem.images.length === 1 ? 'zdjęcie' : 'zdjęć'}</span>
                             </div>
                           </div>
@@ -367,7 +347,7 @@ async function loadReturns() {
                     </div>
 
                     {/* Last updated */}
-                    <div className="mt-6 pt-6 border-t border-gray-200 text-sm text-gray-500">
+                    <div className="mt-3 pt-3 border-t border-gray-200 text-[10px] text-gray-500">
                       Ostatnia aktualizacja: {format(new Date(returnItem.updated_at), "d MMMM yyyy, HH:mm", { locale: pl })}
                     </div>
                   </div>

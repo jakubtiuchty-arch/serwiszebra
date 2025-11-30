@@ -64,9 +64,9 @@ export default function PhotoGallery({ photos, title = 'Zdjęcia urządzenia' }:
 
   return (
     <>
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-        <h2 className="text-lg font-bold text-gray-900 mb-4">{title}</h2>
-        
+      <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-sm border border-gray-200 p-4">
+        <h2 className="text-base font-bold text-gray-900 mb-3">{title}</h2>
+
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
           {photos.map((photo, index) => (
             <button
@@ -81,10 +81,10 @@ export default function PhotoGallery({ photos, title = 'Zdjęcia urządzenia' }:
                 className="object-cover"
                 sizes="(max-width: 768px) 50vw, 33vw"
               />
-              
+
               {/* Hover overlay */}
               <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all flex items-center justify-center">
-                <span className="text-white text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+                <span className="text-white text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity">
                   Powiększ
                 </span>
               </div>
@@ -92,7 +92,7 @@ export default function PhotoGallery({ photos, title = 'Zdjęcia urządzenia' }:
           ))}
         </div>
 
-        <p className="text-xs text-gray-500 mt-4">
+        <p className="text-xs font-medium text-gray-500 mt-3">
           {photos.length} {photos.length === 1 ? 'zdjęcie' : photos.length < 5 ? 'zdjęcia' : 'zdjęć'}
         </p>
       </div>
@@ -170,7 +170,7 @@ export default function PhotoGallery({ photos, title = 'Zdjęcia urządzenia' }:
           </div>
 
           {/* Counter */}
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white text-sm bg-black bg-opacity-50 px-4 py-2 rounded-full z-[10001]">
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white text-sm font-semibold bg-black bg-opacity-50 px-4 py-2 rounded-full z-[10001]">
             {currentIndex + 1} / {photos.length}
           </div>
         </div>

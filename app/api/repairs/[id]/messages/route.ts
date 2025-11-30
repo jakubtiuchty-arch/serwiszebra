@@ -100,6 +100,13 @@ export async function POST(
     const isAdmin = profile?.role === 'admin'
     const isOwner = repair.user_id === user.id
 
+    console.log('🔍 User profile check:', {
+      user_id: user.id,
+      profile_role: profile?.role,
+      isAdmin,
+      isOwner
+    })
+
     if (!isAdmin && !isOwner) {
       return NextResponse.json({ error: 'Access denied' }, { status: 403 })
     }

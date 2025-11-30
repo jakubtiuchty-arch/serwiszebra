@@ -213,23 +213,23 @@ export default function DashboardPage() {
           <p className="text-[10px] text-gray-600">W trakcie naprawy</p>
         </div>
 
-        <div className="bg-white border border-gray-200 rounded-xl p-3 shadow-sm hover:shadow-md transition-all hover:border-blue-300">
+        <div className="bg-white border border-gray-200 rounded-xl p-3 shadow-sm hover:shadow-md transition-all hover:border-green-300">
           <div className="flex items-center justify-between mb-2">
-            <div className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center">
-              <CheckCircle2 className="w-4 h-4 text-gray-900" />
+            <div className="w-8 h-8 bg-green-50 rounded-lg flex items-center justify-center">
+              <CheckCircle2 className="w-4 h-4 text-green-600" />
             </div>
-            <span className="text-gray-600 text-[10px] font-medium">Ukończone</span>
+            <span className="text-green-600 text-[10px] font-medium">Ukończone</span>
           </div>
           <p className="text-2xl font-bold text-gray-900 mb-0.5">{stats.completed}</p>
           <p className="text-[10px] text-gray-600">Zakończone naprawy</p>
         </div>
 
-        <div className="bg-white border border-gray-200 rounded-xl p-3 shadow-sm hover:shadow-md transition-all hover:border-blue-300">
+        <div className="bg-white border border-gray-200 rounded-xl p-3 shadow-sm hover:shadow-md transition-all hover:border-red-300">
           <div className="flex items-center justify-between mb-2">
-            <div className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center">
-              <XCircle className="w-4 h-4 text-gray-600" />
+            <div className="w-8 h-8 bg-red-50 rounded-lg flex items-center justify-center">
+              <XCircle className="w-4 h-4 text-red-600" />
             </div>
-            <span className="text-gray-600 text-[10px] font-medium">Anulowane</span>
+            <span className="text-red-600 text-[10px] font-medium">Anulowane</span>
           </div>
           <p className="text-2xl font-bold text-gray-900 mb-0.5">{stats.cancelled}</p>
           <p className="text-[10px] text-gray-600">Odrzucone zgłoszenia</p>

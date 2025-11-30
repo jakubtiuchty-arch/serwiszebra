@@ -65,57 +65,56 @@ export default function ChatLogsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 p-8">
+    <div className="min-h-screen bg-gray-50 p-3 sm:p-4 lg:p-6">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="mb-8">
-          <div className="flex items-center gap-3 mb-4">
-            <MessageSquare className="w-10 h-10 text-blue-600" />
+        <div className="mb-3 sm:mb-4">
+          <div className="flex items-center justify-between mb-3">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">
-                Chat Logs - Analiza Konwersacji
+              <h1 className="text-xl sm:text-2xl font-bold text-gray-900 mb-0.5">
+                Chat Logs
               </h1>
-              <p className="text-gray-600">
-                Przeglądaj, oceniaj i ucz AI na podstawie rzeczywistych rozmów z klientami
+              <p className="text-xs text-gray-500">
+                Analiza konwersacji z klientami
               </p>
             </div>
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-4 gap-4">
-            <div className="bg-white p-4 rounded-lg shadow">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
+            <div className="bg-white p-3 rounded-lg shadow">
               <div className="flex items-center gap-2 text-gray-600 mb-1">
                 <Database className="w-4 h-4" />
                 <span className="text-sm">Wszystkie</span>
               </div>
-              <p className="text-2xl font-bold text-gray-900">{stats.total}</p>
+              <p className="text-xl sm:text-2xl font-bold text-gray-900">{stats.total}</p>
             </div>
-            <div className="bg-white p-4 rounded-lg shadow">
+            <div className="bg-white p-3 rounded-lg shadow">
               <div className="flex items-center gap-2 text-gray-600 mb-1">
                 <Clock className="w-4 h-4" />
                 <span className="text-sm">Śr. czas odp.</span>
               </div>
-              <p className="text-2xl font-bold text-gray-900">{stats.avgResponseTime}ms</p>
+              <p className="text-xl sm:text-2xl font-bold text-gray-900">{stats.avgResponseTime}ms</p>
             </div>
-            <div className="bg-white p-4 rounded-lg shadow">
+            <div className="bg-white p-3 rounded-lg shadow">
               <div className="flex items-center gap-2 text-gray-600 mb-1">
                 <TrendingUp className="w-4 h-4" />
                 <span className="text-sm">RAG Hit Rate</span>
               </div>
-              <p className="text-2xl font-bold text-gray-900">{stats.ragHitRate}%</p>
+              <p className="text-xl sm:text-2xl font-bold text-gray-900">{stats.ragHitRate}%</p>
             </div>
-            <div className="bg-white p-4 rounded-lg shadow">
+            <div className="bg-white p-3 rounded-lg shadow">
               <div className="flex items-center gap-2 text-gray-600 mb-1">
                 <Star className="w-4 h-4" />
                 <span className="text-sm">Ocenione</span>
               </div>
-              <p className="text-2xl font-bold text-gray-900">{stats.reviewedPercent}%</p>
+              <p className="text-xl sm:text-2xl font-bold text-gray-900">{stats.reviewedPercent}%</p>
             </div>
           </div>
         </div>
 
         {/* Filters */}
-        <div className="bg-white rounded-lg shadow p-4 mb-6">
+        <div className="bg-white rounded-lg shadow p-3 mb-3 sm:mb-4">
           <div className="flex items-center gap-3">
             <Filter className="w-5 h-5 text-gray-600" />
             <span className="text-sm font-medium text-gray-700">Filtruj:</span>
@@ -153,11 +152,11 @@ export default function ChatLogsPage() {
             <p className="text-gray-600">Brak konwersacji do wyświetlenia</p>
           </div>
         ) : (
-          <div className="space-y-4">
+          <div className="space-y-2 sm:space-y-3">
             {logs.map((log) => (
-              <div key={log.id} className="bg-white rounded-lg shadow-lg p-6">
+              <div key={log.id} className="bg-white rounded-lg shadow p-3 sm:p-4">
                 {/* Header */}
-                <div className="flex items-start justify-between mb-4">
+                <div className="flex items-start justify-between mb-2 sm:mb-3">
                   <div>
                     <span className="text-xs text-gray-500">
                       {new Date(log.created_at).toLocaleString('pl-PL')}
@@ -177,32 +176,32 @@ export default function ChatLogsPage() {
                 </div>
 
                 {/* Conversation */}
-                <div className="space-y-3 mb-4">
+                <div className="space-y-2 mb-3">
                   {/* User Message */}
                   <div className="flex justify-end">
-                    <div className="max-w-[80%] bg-blue-600 text-white rounded-2xl rounded-br-sm px-4 py-2">
-                      <p className="text-sm">{log.user_message}</p>
+                    <div className="max-w-[80%] bg-blue-600 text-white rounded-2xl rounded-br-sm px-3 py-1.5">
+                      <p className="text-xs sm:text-sm">{log.user_message}</p>
                     </div>
                   </div>
 
                   {/* AI Response */}
                   <div className="flex justify-start">
-                    <div className="max-w-[80%] bg-gray-100 text-gray-900 rounded-2xl rounded-bl-sm px-4 py-2">
-                      <p className="text-sm whitespace-pre-wrap">{log.ai_response}</p>
+                    <div className="max-w-[80%] bg-gray-100 text-gray-900 rounded-2xl rounded-bl-sm px-3 py-1.5">
+                      <p className="text-xs sm:text-sm whitespace-pre-wrap">{log.ai_response}</p>
                     </div>
                   </div>
                 </div>
 
                 {/* Rating Section */}
-                <div className="border-t pt-4">
+                <div className="border-t pt-2 sm:pt-3">
                   {log.quality_rating ? (
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-4">
-                        <div className="flex items-center gap-1">
+                      <div className="flex items-center gap-2 sm:gap-4">
+                        <div className="flex items-center gap-0.5">
                           {[1, 2, 3, 4, 5].map((star) => (
                             <Star
                               key={star}
-                              className={`w-5 h-5 ${
+                              className={`w-4 h-4 ${
                                 star <= log.quality_rating!
                                   ? 'text-yellow-400 fill-yellow-400'
                                   : 'text-gray-300'
@@ -210,7 +209,7 @@ export default function ChatLogsPage() {
                             />
                           ))}
                         </div>
-                        <span className={`px-3 py-1 rounded text-sm font-medium ${
+                        <span className={`px-2 py-0.5 rounded text-xs font-medium ${
                           log.is_correct
                             ? 'bg-green-100 text-green-700'
                             : 'bg-red-100 text-red-700'
@@ -219,35 +218,35 @@ export default function ChatLogsPage() {
                         </span>
                       </div>
                       {log.human_feedback && (
-                        <p className="text-sm text-gray-600 italic">"{log.human_feedback}"</p>
+                        <p className="text-xs text-gray-600 italic">"{log.human_feedback}"</p>
                       )}
                     </div>
                   ) : (
-                    <div className="flex items-center gap-3">
-                      <span className="text-sm text-gray-600 font-medium">Oceń odpowiedź:</span>
-                      <div className="flex gap-2">
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs text-gray-600 font-medium">Oceń:</span>
+                      <div className="flex gap-1.5">
                         <button
                           onClick={() => rateConversation(log.id, 5, true)}
-                          className="flex items-center gap-1 px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition"
+                          className="flex items-center gap-1 px-2.5 py-1 bg-green-500 text-white rounded-lg hover:bg-green-600 transition text-xs"
                         >
-                          <ThumbsUp className="w-4 h-4" />
-                          <span className="text-sm">Świetna</span>
+                          <ThumbsUp className="w-3 h-3" />
+                          <span>Świetna</span>
                         </button>
                         <button
                           onClick={() => rateConversation(log.id, 3, true)}
-                          className="flex items-center gap-1 px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition"
+                          className="flex items-center gap-1 px-2.5 py-1 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition text-xs"
                         >
-                          <span className="text-sm">OK</span>
+                          <span>OK</span>
                         </button>
                         <button
                           onClick={() => {
                             const feedback = prompt('Co było nie tak?')
                             if (feedback) rateConversation(log.id, 1, false, feedback)
                           }}
-                          className="flex items-center gap-1 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition"
+                          className="flex items-center gap-1 px-2.5 py-1 bg-red-500 text-white rounded-lg hover:bg-red-600 transition text-xs"
                         >
-                          <ThumbsDown className="w-4 h-4" />
-                          <span className="text-sm">Zła</span>
+                          <ThumbsDown className="w-3 h-3" />
+                          <span>Zła</span>
                         </button>
                       </div>
                     </div>

@@ -77,17 +77,6 @@ export default function PanelLayout({
           {children}
         </div>
       </main>
-
-      {/* FOOTER - TYLKO DLA /panel/zamowienia/* */}
-      {pathname?.startsWith('/panel/zamowienia') && (
-        <footer className="lg:ml-72 bg-gray-900 text-white py-12">
-          <div className="max-w-7xl mx-auto text-center px-6">
-            <p className="text-gray-400">
-              © 2025 TAKMA - Autoryzowany Serwis Zebra
-            </p>
-          </div>
-        </footer>
-      )}
     </div>
   )
 }

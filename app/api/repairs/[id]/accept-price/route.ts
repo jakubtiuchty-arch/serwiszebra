@@ -7,11 +7,12 @@ export async function POST(
 ) {
   try {
     const supabase = await createClient()
-    
-    // Sprawdź czy user jest zalogowany
-    const { data: { session }, error: sessionError } = await supabase.auth.getSession()
-    
-    if (sessionError || !session) {
+
+    // Sprawdź użytkownika (bezpieczniej niż getSession)
+    const { data: { user }, error: userError } = await supabase.auth.getUser()
+
+    if (userError || !user) {
+      console.error('❌ Auth error:', userError)
       return NextResponse.json(
         { error: 'Unauthorized' },
         { status: 401 }
@@ -19,7 +20,7 @@ export async function POST(
     }
 
     const repairId = params.id
-    const userId = session.user.id
+    const userId = user.id
 
     // Sprawdź czy zgłoszenie należy do tego usera
     const { data: repair, error: repairError } = await supabase
@@ -52,23 +53,27 @@ export async function POST(
       )
     }
 
-    // Zaakceptuj wycenę - zmień status na "w_naprawie"
-    const { error: updateError } = await supabase
+    // Zaakceptuj wycenę - NIE zmieniaj statusu (zmieni się po płatności)
+    const { data: updateData, error: updateError } = await supabase
       .from('repair_requests')
       .update({
         price_accepted_at: new Date().toISOString(),
-        status: 'w_naprawie',
+        // Status pozostaje "wycena" do czasu opłacenia
         updated_at: new Date().toISOString()
       })
       .eq('id', repairId)
+      .select()
 
     if (updateError) {
-      console.error('Error accepting price:', updateError)
+      console.error('❌ Error accepting price:', updateError)
+      console.error('❌ Update error details:', JSON.stringify(updateError, null, 2))
       return NextResponse.json(
-        { error: 'Błąd akceptacji wyceny' },
+        { error: `Błąd akceptacji wyceny: ${updateError.message || 'Unknown error'}` },
         { status: 500 }
       )
     }
+
+    console.log('✅ Price accepted successfully:', updateData)
 
     return NextResponse.json({
       success: true,
