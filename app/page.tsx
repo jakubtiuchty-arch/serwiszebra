@@ -215,6 +215,9 @@ export default function HomePage() {
                   <a href="#jak-to-dziala" className="hidden md:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
                     Jak to działa
                   </a>
+                  <a href="/blog" className="hidden md:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
+                    Blog
+                  </a>
                   <a href="#formularz" className="hidden md:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
                     Formularz
                   </a>
