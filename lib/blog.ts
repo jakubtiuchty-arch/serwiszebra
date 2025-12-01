@@ -557,7 +557,7 @@ Standardowa wymiana trwa 1-2 dni robocze od momentu dostarczenia drukarki. W try
     slug: 'zebra-gk420-czerwona-dioda-diagnostyka',
     title: 'Czerwona dioda w Zebra GK420d/GK420t - co oznacza i jak naprawić?',
     excerpt: 'Czerwona lampka w drukarce Zebra serii GK420 może oznaczać różne problemy. Poznaj wszystkie sekwencje mrugania i dowiedz się, jak je naprawić samodzielnie.',
-    coverImage: '/blog/gk420-czerwona-dioda.jpeg',
+    coverImage: '/blog/czerwona-dioda-gk.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
