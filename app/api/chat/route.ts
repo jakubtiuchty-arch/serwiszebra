@@ -718,9 +718,18 @@ export async function POST(req: NextRequest) {
             modelUsed: `gemini-2.0-flash${hasAttachments ? ' (multimodal)' : ''} + vertex-ai-rag`,
           }).catch((err: any) => console.error('Błąd zapisywania logu czatu:', err))
 
-        } catch (error) {
+        } catch (error: any) {
           console.error('Streaming error:', error)
-          controller.error(error)
+          // Zwróć sensowny komunikat błędu zamiast crashować
+          const errorMsg = error?.message || 'Nieznany błąd'
+          if (errorMsg.includes('size') || errorMsg.includes('large') || errorMsg.includes('limit')) {
+            controller.enqueue(encoder.encode('Przepraszam, załączony plik jest za duży. Maksymalny rozmiar to 10MB. Spróbuj mniejszego pliku lub skompresuj wideo.'))
+          } else if (errorMsg.includes('format') || errorMsg.includes('type') || errorMsg.includes('mime')) {
+            controller.enqueue(encoder.encode('Przepraszam, ten format pliku nie jest obsługiwany. Obsługiwane formaty: JPEG, PNG, GIF, WebP, MP4, WebM.'))
+          } else {
+            controller.enqueue(encoder.encode('Przepraszam, wystąpił błąd podczas przetwarzania. Spróbuj ponownie lub wyślij tylko tekst.'))
+          }
+          controller.close()
         }
       },
     })

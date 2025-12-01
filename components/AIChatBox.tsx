@@ -228,6 +228,13 @@ export default function AIChatBox() {
   // Konwersja pliku na base64
   const fileToBase64 = (file: File): Promise<string> => {
     return new Promise((resolve, reject) => {
+      // Limit 10MB dla filmików (Gemini ma limit ~20MB)
+      const maxSize = 10 * 1024 * 1024
+      if (file.size > maxSize) {
+        reject(new Error(`Plik ${file.name} jest za duży (max 10MB). Twój plik: ${(file.size / 1024 / 1024).toFixed(1)}MB`))
+        return
+      }
+      
       const reader = new FileReader()
       reader.readAsDataURL(file)
       reader.onload = () => {
@@ -256,8 +263,15 @@ export default function AIChatBox() {
           data: base64,
           name: file.name
         })
-      } catch (e) {
+      } catch (e: any) {
         console.error('Błąd konwersji pliku:', e)
+        // Pokaż błąd użytkownikowi
+        setMessages(prev => [
+          ...prev,
+          { role: 'assistant', content: `❌ ${e.message || 'Błąd podczas przetwarzania pliku. Spróbuj mniejszego pliku.'}` }
+        ])
+        setAttachedFiles([])
+        return
       }
     }
     
