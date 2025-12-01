@@ -52,6 +52,14 @@
     <priority>0.9</priority>
   </url>
 
+  <!-- Blog - Blady wydruk -->
+  <url>
+    <loc>https://serwiszebra.pl/blog/blady-wydruk-drukarka-zebra-przyczyny-rozwiazania</loc>
+    <lastmod>2025-12-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
   <!-- Sklep -->
   <url>
     <loc>https://serwiszebra.pl/sklep</loc>
