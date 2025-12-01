@@ -372,10 +372,10 @@ DRUKARKI:
 - Naprawa/wymiana sensora: 150-550 zł
 
 TERMINALE:
-- Wymiana wyświetlacza: 400-800 zł
-- Naprawa modułu skanującego: 300-500 zł
-- Wymiana baterii: 150-250 zł
-- Czyszczenie + konserwacja: 100-180 zł
+- Wymiana wyświetlacza: 799-1299 zł
+- Naprawa modułu skanującego: 899-1299 zł
+- Wymiana baterii: 199-449 zł
+- Czyszczenie + konserwacja: 149-189 zł
 
 SKANERY:
 - Naprawa modułu skanującego: 250-450 zł
