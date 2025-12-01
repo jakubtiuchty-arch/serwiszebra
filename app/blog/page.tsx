@@ -141,13 +141,12 @@ export default function BlogPage() {
       <section className="py-4 bg-gray-50 border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap items-center justify-center gap-2">
-            <span className="text-sm text-gray-500 mr-2">Typ treści:</span>
             <button
               onClick={() => setSelectedCategory(null)}
               className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
                 !selectedCategory 
                   ? 'bg-gray-800 text-white' 
-                  : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'
+                  : 'bg-gray-200 text-gray-600 hover:bg-gray-300'
               }`}
             >
               Wszystkie
@@ -158,8 +157,8 @@ export default function BlogPage() {
                 onClick={() => setSelectedCategory(key)}
                 className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
                   selectedCategory === key
-                    ? 'bg-gray-800 text-white'
-                    : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'
+                    ? getCategoryColor(key)
+                    : getCategoryColor(key) + ' opacity-60 hover:opacity-100'
                 }`}
               >
                 {cat.name}
