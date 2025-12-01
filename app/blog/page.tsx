@@ -12,6 +12,7 @@ import {
   Search
 } from 'lucide-react'
 import { useState } from 'react'
+import Header from '@/components/Header'
 
 export default function BlogPage() {
   const allPosts = getAllPosts()
@@ -40,39 +41,21 @@ export default function BlogPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <Link href="/" className="flex items-center gap-3">
-              <Image
-                src="/takma_logo_1.png"
-                alt="TAKMA Logo"
-                width={120}
-                height={50}
-                className="h-10 w-auto"
-              />
-            </Link>
-            <nav className="hidden md:flex items-center gap-6">
-              <Link href="/" className="text-sm text-gray-600 hover:text-gray-900">
-                Strona główna
-              </Link>
-              <Link href="/blog" className="text-sm font-medium text-blue-600">
-                Blog
-              </Link>
-              <Link href="/#cennik" className="text-sm text-gray-600 hover:text-gray-900">
-                Cennik
-              </Link>
-              <Link href="/#formularz" className="text-sm text-gray-600 hover:text-gray-900">
-                Zgłoś naprawę
-              </Link>
-            </nav>
-          </div>
-        </div>
-      </header>
+      <Header currentPage="blog" />
 
       {/* Hero */}
-      <section className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-12 sm:py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <section className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-12 sm:py-16 relative overflow-hidden">
+        {/* Pionowe paski - tapeta */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-0 left-[10%] w-1 h-full bg-gradient-to-b from-gray-200/20 via-gray-300/25 to-transparent"></div>
+          <div className="absolute top-0 left-[25%] w-0.5 h-full bg-gradient-to-b from-gray-200/15 via-gray-300/20 to-transparent"></div>
+          <div className="absolute top-0 left-[40%] w-1 h-full bg-gradient-to-b from-gray-200/20 via-gray-300/25 to-transparent"></div>
+          <div className="absolute top-0 right-[35%] w-0.5 h-full bg-gradient-to-b from-gray-200/15 via-gray-300/20 to-transparent"></div>
+          <div className="absolute top-0 right-[20%] w-1 h-full bg-gradient-to-b from-gray-200/20 via-gray-300/25 to-transparent"></div>
+          <div className="absolute top-0 right-[8%] w-0.5 h-full bg-gradient-to-b from-gray-200/15 via-gray-300/20 to-transparent"></div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-white rounded-full shadow-sm mb-4">
             <BookOpen className="w-4 h-4 text-blue-600" />
             <span className="text-sm font-medium text-gray-700">Blog Serwis Zebra</span>

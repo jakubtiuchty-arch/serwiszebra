@@ -17,6 +17,10 @@ Disallow: /zamowienie/
 Allow: /sklep
 Allow: /sklep/*
 
+# Pozwól na indeksowanie bloga
+Allow: /blog
+Allow: /blog/*
+
 # Sitemap
 Sitemap: https://serwiszebra.pl/sitemap.xml
 

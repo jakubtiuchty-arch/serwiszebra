@@ -52,7 +52,7 @@ export const blogPosts: BlogPost[] = [
     slug: 'drukarka-zebra-nie-drukuje-przyczyny-rozwiazania',
     title: 'Drukarka Zebra nie drukuje - 7 najczęstszych przyczyn i jak je naprawić',
     excerpt: 'Twoja drukarka Zebra przestała drukować? Poznaj 7 najczęstszych przyczyn tego problemu i dowiedz się, jak je samodzielnie zdiagnozować i naprawić.',
-    coverImage: '/blog/zebra-nie-drukuje.jpg',
+    coverImage: '/blog/zebra-nie-drukuje.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
@@ -216,12 +216,14 @@ Jeśli powyższe rozwiązania nie pomogły, problem może wymagać profesjonalne
 
 Jako **autoryzowany partner serwisowy Zebra** oferujemy:
 
-✅ **Bezpłatną diagnozę** problemu  
-✅ **Darmowy odbiór kurierem** z całej Polski  
-✅ **Gwarancję na naprawę** 12 miesięcy  
-✅ **Oryginalne części** Zebra  
+[CHECK] **Bezpłatna diagnoza** problemu*
+[CHECK] **Odbiór kurierem** z całej Polski
+[CHECK] **Gwarancja na naprawę** 12 miesięcy
+[CHECK] **Oryginalne części** Zebra
 
-[**Wyślij zgłoszenie →**](/formularz)
+*Diagnoza jest bezpłatna w przypadku zlecenia naprawy w naszym serwisie.
+
+[**Wyślij zgłoszenie →**](/#formularz)
 
 ---
 
@@ -236,7 +238,7 @@ Standardowa naprawa trwa 3-5 dni roboczych. Oferujemy również tryb express (1-
 ### Czy mogę samodzielnie wymienić głowicę?
 Tak, ale wymaga to odpowiednich narzędzi i wiedzy. Nieprawidłowy montaż może uszkodzić drukarkę. Zalecamy skorzystanie z profesjonalnego serwisu.
 
-### Moja drukarka jest w gwarancji - co robić?
+### Moja drukarka jest na gwarancji - co robić?
 Skontaktuj się z nami - jako autoryzowany serwis Zebra obsługujemy również naprawy gwarancyjne.
 `
   },
@@ -244,7 +246,7 @@ Skontaktuj się z nami - jako autoryzowany serwis Zebra obsługujemy również n
     slug: 'jak-wyczyscic-glowice-drukarki-zebra',
     title: 'Jak wyczyścić głowicę drukującą w drukarkach Zebra - poradnik krok po kroku',
     excerpt: 'Regularne czyszczenie głowicy drukującej wydłuża jej żywotność i poprawia jakość wydruku. Zobacz jak prawidłowo czyścić głowicę w drukarkach Zebra.',
-    coverImage: '/blog/czyszczenie-glowicy.jpg',
+    coverImage: '/blog/czyszczenie-glowicy.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
@@ -354,7 +356,201 @@ Nawet przy prawidłowej konserwacji głowica zużywa się. Oznaki konieczności 
 - Widoczne rysy na powierzchni głowicy
 - Przekroczony resurs (1-3 mln cm)
 
-**Potrzebujesz wymiany głowicy? [Skontaktuj się z nami →](/formularz)**
+**Potrzebujesz wymiany głowicy? [Skontaktuj się z nami →](/#formularz)**
+`
+  },
+  {
+    slug: 'wymiana-glowicy-drukarki-zebra-kiedy-konieczna-ile-kosztuje',
+    title: 'Wymiana głowicy drukującej Zebra - kiedy jest konieczna i ile kosztuje?',
+    excerpt: 'Głowica drukująca to serce każdej drukarki etykiet. Dowiedz się, kiedy wymiana jest nieunikniona, jakie są koszty i czy warto to robić samodzielnie.',
+    coverImage: '/blog/wymiana-glowicy.jpeg',
+    author: {
+      name: 'Zespół Serwis Zebra',
+      role: 'Certyfikowani technicy Zebra'
+    },
+    publishedAt: '2025-12-01',
+    readingTime: 7,
+    category: 'poradniki',
+    tags: ['głowica drukująca', 'wymiana głowicy', 'koszt naprawy', 'drukarka zebra'],
+    seo: {
+      metaTitle: 'Wymiana głowicy drukującej Zebra - kiedy i ile kosztuje? | Serwis Zebra',
+      metaDescription: 'Kiedy wymienić głowicę w drukarce Zebra? Poznaj objawy zużycia, koszty wymiany (300-550 zł) i dowiedz się, czy warto robić to samodzielnie. Poradnik od certyfikowanych techników.',
+      keywords: ['wymiana głowicy zebra', 'głowica drukująca zebra cena', 'koszt wymiany głowicy', 'głowica zebra zd420']
+    },
+    content: `
+## Czym jest głowica drukująca i dlaczego jest tak ważna?
+
+Głowica drukująca (printhead) to **najważniejszy element** każdej drukarki termicznej i termotransferowej. To właśnie ona odpowiada za przenoszenie obrazu na etykietę poprzez precyzyjne nagrzewanie punktów (pikseli).
+
+Głowica składa się z tysięcy mikroskopijnych elementów grzejnych. W drukarce o rozdzielczości 203 DPI jest ich około 800, a przy 300 DPI - już ponad 1200!
+
+---
+
+## Objawy zużytej głowicy - kiedy wymiana jest konieczna?
+
+### Objawy wymagające natychmiastowej wymiany:
+
+[CHECK] **Pionowe białe linie** na całej długości wydruku
+[CHECK] **Przerywany wydruk** w tych samych miejscach
+[CHECK] **Widoczne rysy** lub uszkodzenia na powierzchni głowicy
+[CHECK] **Brak reakcji** na czyszczenie - problemy nie ustępują
+
+### Objawy ostrzegawcze (możliwa jeszcze naprawa):
+
+- Lekko blady wydruk w niektórych miejscach
+- Sporadyczne "pikselowanie" tekstu
+- Nierówna jakość wydruku kodów kreskowych
+
+> **💡 Wskazówka:** Jeśli czyszczenie głowicy alkoholem IPA 99% nie pomaga po 2-3 próbach, prawdopodobnie głowica wymaga wymiany.
+
+---
+
+## Żywotność głowicy - ile powinna wytrzymać?
+
+| Typ drukarki | Żywotność głowicy | Czynniki wpływające |
+|--------------|-------------------|---------------------|
+| Desktop (ZD420, ZD621) | 1-2 mln cm | Jakość etykiet, ribbon |
+| Przemysłowa (ZT411, ZT610) | 2-4 mln cm | Prędkość druku, temperatura |
+| Mobilna (ZQ520) | 0.5-1 mln cm | Warunki pracy, kurz |
+
+### Co skraca żywotność głowicy?
+
+1. **Tanie etykiety** z szorstkimi powierzchniami
+2. **Niewłaściwy ribbon** (źle dopasowany do etykiet)
+3. **Brak regularnego czyszczenia**
+4. **Zbyt wysoka temperatura** druku
+5. **Kurz i zanieczyszczenia** w środowisku pracy
+
+---
+
+## Ile kosztuje wymiana głowicy?
+
+### Cennik wymiany głowicy w Serwis Zebra:
+
+| Model drukarki | Cena głowicy | Koszt wymiany | Razem |
+|----------------|--------------|---------------|-------|
+| ZD220, ZD230 | 200-280 zł | 50-80 zł | 250-360 zł |
+| ZD420, ZD421 | 280-350 zł | 50-80 zł | 330-430 zł |
+| ZD620, ZD621 | 350-450 zł | 50-80 zł | 400-530 zł |
+| ZT230 | 400-500 zł | 80-100 zł | 480-600 zł |
+| ZT411, ZT421 | 500-700 zł | 80-100 zł | 580-800 zł |
+| ZT610, ZT620 | 700-1000 zł | 100-150 zł | 800-1150 zł |
+
+*Ceny netto, orientacyjne. Dokładna wycena po diagnozie.*
+
+### Co wpływa na cenę?
+
+- **Rozdzielczość** głowicy (203 DPI vs 300 DPI vs 600 DPI)
+- **Szerokość** druku (im szersza, tym droższa)
+- **Dostępność** części (popularne modele taniej)
+
+---
+
+## Wymiana samodzielna vs serwis - co wybrać?
+
+### Samodzielna wymiana:
+
+**Zalety:**
+- Szybkość (od ręki)
+- Brak kosztów robocizny
+
+**Wady:**
+- Ryzyko uszkodzenia drukarki
+- Brak gwarancji na montaż
+- Konieczność zakupu narzędzi
+- Ryzyko zakupu nieoryginalnej części
+
+### Wymiana w autoryzowanym serwisie:
+
+**Zalety:**
+- Profesjonalny montaż
+- Kalibracja po wymianie
+- Gwarancja 12 miesięcy
+- Oryginalne części Zebra
+- Kompleksowy przegląd drukarki
+
+**Wady:**
+- Czas oczekiwania (2-5 dni)
+- Koszt robocizny
+
+> **⚠️ Uwaga:** Nieprawidłowy montaż głowicy może uszkodzić płytę główną drukarki! Koszt naprawy płyty to 500-1500 zł.
+
+---
+
+## Jak przedłużyć żywotność głowicy?
+
+### 1. Regularne czyszczenie
+
+- **Desktop**: co 1-2 tygodnie
+- **Przemysłowe**: codziennie przy intensywnej pracy
+- Używaj **tylko alkoholu IPA 99%**
+
+### 2. Stosuj oryginalne materiały
+
+- Etykiety z certyfikatem Zebra
+- Ribbon dopasowany do etykiet (wax, wax-resin, resin)
+
+### 3. Optymalizuj ustawienia
+
+- Nie ustawiaj zbyt wysokiej temperatury (darkness)
+- Dostosuj prędkość druku do materiału
+
+### 4. Dbaj o środowisko pracy
+
+- Minimalizuj kurz i zanieczyszczenia
+- Temperatura 15-30°C, wilgotność 20-80%
+
+---
+
+## Czy warto kupować zamienniki?
+
+### Oryginalna głowica Zebra:
+
+[CHECK] Gwarancja producenta
+[CHECK] Pełna kompatybilność
+[CHECK] Dłuższa żywotność
+[CHECK] Lepsza jakość wydruku
+
+### Zamiennik (aftermarket):
+
+- Cena niższa o 30-50%
+- Brak gwarancji Zebra
+- Możliwe problemy z jakością
+- Ryzyko uszkodzenia drukarki
+
+**Nasza rekomendacja:** Dla drukarek używanych w biznesie zawsze zalecamy **oryginalne głowice Zebra**. Oszczędność 100-200 zł nie rekompensuje ryzyka awarii i przestoju produkcji.
+
+---
+
+## Wymiana głowicy w Serwis Zebra
+
+Jako **autoryzowany partner serwisowy Zebra** oferujemy:
+
+[CHECK] **Bezpłatna diagnostyka** problemu*
+[CHECK] **Oryginalne głowice** Zebra
+[CHECK] **Profesjonalny montaż** + kalibracja
+[CHECK] **Gwarancja 12 miesięcy** na naprawę
+[CHECK] **Odbiór kurierem** z całej Polski
+
+*Diagnostyka bezpłatna w przypadku zlecenia naprawy w naszym serwisie.
+
+[**Wyślij drukarkę do wymiany głowicy →**](/#formularz)
+
+---
+
+## FAQ - Najczęściej zadawane pytania
+
+### Czy mogę sam wymienić głowicę w drukarce Zebra?
+Technicznie tak, ale nie zalecamy. Wymiana wymaga odpowiednich narzędzi, wiedzy i kalibracji. Nieprawidłowy montaż może uszkodzić płytę główną (koszt naprawy 500-1500 zł).
+
+### Jak sprawdzić stan głowicy w drukarce Zebra?
+W menu drukarki znajdziesz licznik "Head Life" lub "Odometer". Pokazuje on przebieg głowicy w centymetrach. Porównaj z zaleceniami producenta dla Twojego modelu.
+
+### Czy wymiana głowicy naprawi białe pasy na wydruku?
+W 90% przypadków tak. Białe pionowe pasy to najczęstszy objaw uszkodzonej głowicy. Przed wymianą warto jednak spróbować dokładnego czyszczenia.
+
+### Ile trwa wymiana głowicy w serwisie?
+Standardowa wymiana trwa 1-2 dni robocze od momentu dostarczenia drukarki. W trybie express możliwa realizacja w 24h (+50 zł).
 `
   }
 ]

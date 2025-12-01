@@ -17,10 +17,38 @@ const supabase = createClient(
 )
 
 // Initialize Vertex AI Discovery Engine Client
-const searchClient = new SearchServiceClient({
-  keyFilename: process.env.GOOGLE_APPLICATION_CREDENTIALS,
-  apiEndpoint: 'eu-discoveryengine.googleapis.com', // Europe endpoint
-})
+// Parse credentials from environment variable (JSON string) for serverless deployment
+const getSearchClient = () => {
+  const credentialsJson = process.env.GOOGLE_APPLICATION_CREDENTIALS_JSON
+  
+  if (credentialsJson) {
+    // Production: use JSON credentials from env variable
+    try {
+      const credentials = JSON.parse(credentialsJson)
+      return new SearchServiceClient({
+        credentials,
+        apiEndpoint: 'eu-discoveryengine.googleapis.com',
+      })
+    } catch (e) {
+      console.error('❌ Failed to parse GOOGLE_APPLICATION_CREDENTIALS_JSON:', e)
+    }
+  }
+  
+  // Fallback: try keyFilename (local development)
+  if (process.env.GOOGLE_APPLICATION_CREDENTIALS) {
+    return new SearchServiceClient({
+      keyFilename: process.env.GOOGLE_APPLICATION_CREDENTIALS,
+      apiEndpoint: 'eu-discoveryengine.googleapis.com',
+    })
+  }
+  
+  // Last resort: use default credentials
+  return new SearchServiceClient({
+    apiEndpoint: 'eu-discoveryengine.googleapis.com',
+  })
+}
+
+const searchClient = getSearchClient()
 
 const PROJECT_ID = process.env.GOOGLE_CLOUD_PROJECT_ID!
 const LOCATION = 'eu' // Europe multi-region

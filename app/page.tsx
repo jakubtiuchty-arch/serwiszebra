@@ -215,13 +215,9 @@ export default function HomePage() {
                   <a href="#jak-to-dziala" className="hidden md:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
                     Jak to działa
                   </a>
-                  <div className="hidden md:block relative group">
-                    <span className="text-sm text-gray-700 cursor-default">Blog</span>
-                    <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5 bg-gray-900 text-white text-xs rounded-lg whitespace-nowrap opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all shadow-lg">
-                      Zapraszamy niebawem
-                      <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-1 border-4 border-transparent border-t-gray-900"></div>
-                    </div>
-                  </div>
+                  <a href="/blog" className="hidden md:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
+                    Blog
+                  </a>
                   <a href="#formularz" className="hidden md:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
                     Formularz
                   </a>

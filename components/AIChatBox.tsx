@@ -376,7 +376,7 @@ export default function AIChatBox() {
                 <div className="bg-gray-100 rounded-3xl px-5 py-3">
                   <p className="text-sm text-gray-600 flex items-center gap-2">
                     <span className="inline-block w-1.5 h-1.5 bg-blue-500 rounded-full animate-pulse"></span>
-                    Diagnosuję Twoją {detectedDevice}... zaraz wracam! ☕
+                    Diagnozuję Twoją {detectedDevice}... zaraz wracam! ☕
                   </p>
                 </div>
               </div>

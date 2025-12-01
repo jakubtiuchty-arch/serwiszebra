@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getPostBySlug, getAllPosts, getRelatedPosts, BLOG_CATEGORIES } from '@/lib/blog'
+import Header from '@/components/Header'
 import { 
   Clock, 
   Calendar, 
@@ -117,6 +118,32 @@ export default function BlogPostPage({
     mainEntity: extractFAQFromContent(post.content)
   } : null
 
+  // BreadcrumbList Schema for navigation
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Strona główna',
+        item: 'https://serwiszebra.pl'
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Blog',
+        item: 'https://serwiszebra.pl/blog'
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: post.title,
+        item: `https://serwiszebra.pl/blog/${post.slug}`
+      }
+    ]
+  }
+
   const getCategoryColor = (category: string) => {
     const colors: Record<string, string> = {
       poradniki: 'bg-blue-100 text-blue-700',
@@ -139,38 +166,14 @@ export default function BlogPostPage({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
         />
       )}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
 
       <div className="min-h-screen bg-white">
         {/* Header */}
-        <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center justify-between h-16">
-              <Link href="/" className="flex items-center gap-3">
-                <Image
-                  src="/takma_logo_1.png"
-                  alt="TAKMA Logo"
-                  width={120}
-                  height={50}
-                  className="h-10 w-auto"
-                />
-              </Link>
-              <nav className="hidden md:flex items-center gap-6">
-                <Link href="/" className="text-sm text-gray-600 hover:text-gray-900">
-                  Strona główna
-                </Link>
-                <Link href="/blog" className="text-sm font-medium text-blue-600">
-                  Blog
-                </Link>
-                <Link href="/#cennik" className="text-sm text-gray-600 hover:text-gray-900">
-                  Cennik
-                </Link>
-                <Link href="/#formularz" className="text-sm text-gray-600 hover:text-gray-900">
-                  Zgłoś naprawę
-                </Link>
-              </nav>
-            </div>
-          </div>
-        </header>
+        <Header currentPage="blog" />
 
         {/* Breadcrumb */}
         <div className="bg-gray-50 border-b border-gray-200">
@@ -224,7 +227,7 @@ export default function BlogPostPage({
               </p>
 
               {/* Author & Date */}
-              <div className="flex flex-wrap items-center gap-4 pb-6 border-b border-gray-200">
+              <div className="w-full flex items-center justify-between pb-6 border-b border-gray-200">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center">
                     <User className="w-5 h-5 text-white" />
@@ -234,7 +237,7 @@ export default function BlogPostPage({
                     <p className="text-sm text-gray-500">{post.author.role}</p>
                   </div>
                 </div>
-                <div className="flex items-center gap-1 text-sm text-gray-500">
+                <div className="flex items-center gap-2 text-sm text-gray-500">
                   <Calendar className="w-4 h-4" />
                   {new Date(post.publishedAt).toLocaleDateString('pl-PL', {
                     day: 'numeric',
@@ -402,54 +405,208 @@ export default function BlogPostPage({
   )
 }
 
-// Simple markdown to HTML parser
+// Improved markdown to HTML parser
 function parseMarkdown(markdown: string): string {
-  let html = markdown
-    // Headers
-    .replace(/^### (.*$)/gim, '<h3>$1</h3>')
-    .replace(/^## (.*$)/gim, '<h2>$1</h2>')
-    .replace(/^# (.*$)/gim, '<h1>$1</h1>')
-    // Bold
-    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-    // Italic
-    .replace(/\*(.*?)\*/g, '<em>$1</em>')
-    // Links
-    .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2">$1</a>')
+  const lines = markdown.split('\n')
+  const result: string[] = []
+  let inList = false
+  let inOrderedList = false
+  let inCodeBlock = false
+  let inTable = false
+  let tableRows: string[][] = []
+  let codeBlockContent: string[] = []
+  let codeBlockLang = ''
+
+  for (let i = 0; i < lines.length; i++) {
+    let line = lines[i]
+
+    // Table detection
+    if (line.trim().startsWith('|') && line.trim().endsWith('|')) {
+      const cells = line.split('|').slice(1, -1).map(c => c.trim())
+      
+      // Check if this is a separator row (|---|---|)
+      if (cells.every(c => /^[-:]+$/.test(c))) {
+        continue // Skip separator row
+      }
+      
+      if (!inTable) {
+        inTable = true
+        tableRows = []
+      }
+      tableRows.push(cells)
+      continue
+    } else if (inTable) {
+      // End of table, render it
+      inTable = false
+      if (tableRows.length > 0) {
+        let tableHtml = '<div class="overflow-x-auto my-6"><table class="w-full border-collapse bg-white rounded-xl overflow-hidden shadow-sm">'
+        tableRows.forEach((row, idx) => {
+          if (idx === 0) {
+            // Header row
+            tableHtml += '<thead class="bg-gray-100"><tr>'
+            row.forEach(cell => {
+              tableHtml += `<th class="px-4 py-3 text-left text-sm font-semibold text-gray-900 border-b border-gray-200">${processInline(cell)}</th>`
+            })
+            tableHtml += '</tr></thead><tbody>'
+          } else {
+            // Body row
+            tableHtml += `<tr class="${idx % 2 === 0 ? 'bg-gray-50' : 'bg-white'}">`
+            row.forEach(cell => {
+              tableHtml += `<td class="px-4 py-3 text-sm text-gray-700 border-b border-gray-100">${processInline(cell)}</td>`
+            })
+            tableHtml += '</tr>'
+          }
+        })
+        tableHtml += '</tbody></table></div>'
+        result.push(tableHtml)
+        tableRows = []
+      }
+    }
+
     // Code blocks
-    .replace(/```(\w+)?\n([\s\S]*?)```/g, '<pre><code class="language-$1">$2</code></pre>')
-    // Inline code
-    .replace(/`([^`]+)`/g, '<code>$1</code>')
-    // Blockquotes
-    .replace(/^> (.*$)/gim, '<blockquote><p>$1</p></blockquote>')
-    // Unordered lists
-    .replace(/^- (.*$)/gim, '<li>$1</li>')
-    // Ordered lists
-    .replace(/^\d+\. (.*$)/gim, '<li>$1</li>')
-    // Horizontal rules
-    .replace(/^---$/gim, '<hr />')
-    // Tables (basic support)
-    .replace(/\|(.+)\|/g, (match) => {
-      const cells = match.split('|').filter(c => c.trim())
-      if (cells.some(c => c.match(/^[-:]+$/))) return ''
-      const cellsHtml = cells.map(c => `<td class="border border-gray-200 px-4 py-2">${c.trim()}</td>`).join('')
-      return `<tr>${cellsHtml}</tr>`
+    if (line.startsWith('```')) {
+      if (!inCodeBlock) {
+        inCodeBlock = true
+        codeBlockLang = line.slice(3).trim()
+        codeBlockContent = []
+        continue
+      } else {
+        inCodeBlock = false
+        result.push(`<pre class="bg-gray-900 text-gray-100 rounded-xl p-4 overflow-x-auto my-4"><code class="language-${codeBlockLang}">${codeBlockContent.join('\n')}</code></pre>`)
+        continue
+      }
+    }
+
+    if (inCodeBlock) {
+      codeBlockContent.push(line.replace(/</g, '&lt;').replace(/>/g, '&gt;'))
+      continue
+    }
+
+    // Horizontal rule
+    if (line.trim() === '---') {
+      if (inList) { result.push('</ul>'); inList = false }
+      if (inOrderedList) { result.push('</ol>'); inOrderedList = false }
+      result.push('<hr class="my-8 border-gray-200" />')
+      continue
+    }
+
+    // Headers
+    if (line.startsWith('### ')) {
+      if (inList) { result.push('</ul>'); inList = false }
+      if (inOrderedList) { result.push('</ol>'); inOrderedList = false }
+      const text = processInline(line.slice(4))
+      result.push(`<h3 class="text-xl font-bold text-gray-900 mt-8 mb-4">${text}</h3>`)
+      continue
+    }
+    if (line.startsWith('## ')) {
+      if (inList) { result.push('</ul>'); inList = false }
+      if (inOrderedList) { result.push('</ol>'); inOrderedList = false }
+      const text = processInline(line.slice(3))
+      result.push(`<h2 class="text-2xl font-bold text-gray-900 mt-10 mb-4">${text}</h2>`)
+      continue
+    }
+
+    // Blockquote
+    if (line.startsWith('> ')) {
+      if (inList) { result.push('</ul>'); inList = false }
+      if (inOrderedList) { result.push('</ol>'); inOrderedList = false }
+      const text = processInline(line.slice(2))
+      result.push(`<blockquote class="border-l-4 border-blue-500 bg-blue-50 pl-4 py-3 my-4 rounded-r-lg"><p class="text-gray-700">${text}</p></blockquote>`)
+      continue
+    }
+
+    // Unordered list
+    if (line.startsWith('- ')) {
+      if (inOrderedList) { result.push('</ol>'); inOrderedList = false }
+      if (!inList) {
+        result.push('<ul class="list-disc list-inside space-y-2 my-4 text-gray-700">')
+        inList = true
+      }
+      const text = processInline(line.slice(2))
+      result.push(`<li>${text}</li>`)
+      continue
+    }
+
+    // Ordered list
+    const orderedMatch = line.match(/^(\d+)\. (.*)/)
+    if (orderedMatch) {
+      if (inList) { result.push('</ul>'); inList = false }
+      if (!inOrderedList) {
+        result.push('<ol class="list-decimal list-inside space-y-2 my-4 text-gray-700">')
+        inOrderedList = true
+      }
+      const text = processInline(orderedMatch[2])
+      result.push(`<li>${text}</li>`)
+      continue
+    }
+
+    // Close lists if not continuing
+    if (inList && !line.startsWith('- ')) {
+      result.push('</ul>')
+      inList = false
+    }
+    if (inOrderedList && !orderedMatch) {
+      result.push('</ol>')
+      inOrderedList = false
+    }
+
+    // Empty line
+    if (line.trim() === '') {
+      continue
+    }
+
+    // Regular paragraph
+    const text = processInline(line)
+    result.push(`<p class="text-gray-700 leading-relaxed my-4">${text}</p>`)
+  }
+
+  // Close any open lists
+  if (inList) result.push('</ul>')
+  if (inOrderedList) result.push('</ol>')
+  
+  // Close any open table
+  if (inTable && tableRows.length > 0) {
+    let tableHtml = '<div class="overflow-x-auto my-6"><table class="w-full border-collapse bg-white rounded-xl overflow-hidden shadow-sm">'
+    tableRows.forEach((row, idx) => {
+      if (idx === 0) {
+        tableHtml += '<thead class="bg-gray-100"><tr>'
+        row.forEach(cell => {
+          tableHtml += `<th class="px-4 py-3 text-left text-sm font-semibold text-gray-900 border-b border-gray-200">${processInline(cell)}</th>`
+        })
+        tableHtml += '</tr></thead><tbody>'
+      } else {
+        tableHtml += `<tr class="${idx % 2 === 0 ? 'bg-gray-50' : 'bg-white'}">`
+        row.forEach(cell => {
+          tableHtml += `<td class="px-4 py-3 text-sm text-gray-700 border-b border-gray-100">${processInline(cell)}</td>`
+        })
+        tableHtml += '</tr>'
+      }
     })
-    // Paragraphs
-    .replace(/\n\n/g, '</p><p>')
-    // Line breaks
-    .replace(/\n/g, '<br />')
+    tableHtml += '</tbody></table></div>'
+    result.push(tableHtml)
+  }
 
-  // Wrap lists
-  html = html.replace(/(<li>.*<\/li>)/gs, '<ul>$1</ul>')
-  
-  // Clean up multiple ul tags
-  html = html.replace(/<\/ul>\s*<ul>/g, '')
-  
-  // Wrap tables
-  html = html.replace(/(<tr>.*<\/tr>)/gs, '<table class="w-full border-collapse my-4">$1</table>')
-  html = html.replace(/<\/table>\s*<table[^>]*>/g, '')
+  return result.join('\n')
+}
 
-  return `<p>${html}</p>`
+// Process inline markdown (bold, italic, links, code)
+function processInline(text: string): string {
+  return text
+    // Custom check icon
+    .replace(/\[CHECK\]/g, '<svg class="inline-block w-5 h-5 text-green-600 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>')
+    // Bold
+    .replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold text-gray-900">$1</strong>')
+    // Italic (but not the asterisk footnote)
+    .replace(/(?<!\s)\*([^*\n]+)\*(?!\*)/g, '<em>$1</em>')
+    // Links
+    .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" class="text-blue-600 hover:underline font-medium">$1</a>')
+    // Inline code
+    .replace(/`([^`]+)`/g, '<code class="bg-gray-100 px-1.5 py-0.5 rounded text-sm font-mono text-gray-800">$1</code>')
+    // Checkmarks (emoji fallback)
+    .replace(/✅/g, '<svg class="inline-block w-5 h-5 text-green-600 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>')
+    .replace(/❌/g, '<svg class="inline-block w-5 h-5 text-red-600 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>')
+    .replace(/⚠️/g, '<svg class="inline-block w-5 h-5 text-yellow-600 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>')
+    .replace(/💡/g, '<svg class="inline-block w-5 h-5 text-yellow-500 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>')
 }
 
 // Extract FAQ items from content
