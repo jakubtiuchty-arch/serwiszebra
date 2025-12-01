@@ -815,7 +815,7 @@ Zebra oficjalnie zakończyła produkcję serii GK, ale jako autoryzowany serwis 
     slug: 'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',
     title: 'Blady wydruk w drukarce Zebra - 5 przyczyn i jak je naprawić',
     excerpt: 'Drukarka Zebra drukuje za jasno? Poznaj 5 najczęstszych przyczyn bladego wydruku i dowiedz się, jak je naprawić samodzielnie lub kiedy oddać do serwisu.',
-    coverImage: '/blog/blady-wydruk-zebra.jpeg',
+    coverImage: '/blog/blady-wydruk.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
