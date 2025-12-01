@@ -347,17 +347,37 @@ export default function AIChatBox() {
                   </div>
 
                   {/* Citations - tylko dla odpowiedzi AI */}
-                  {msg.role === 'assistant' && msg.citations && msg.citations.length > 0 && (
-                    <div className="px-3 py-2 bg-blue-50 rounded-2xl border border-blue-100">
-                      <p className="text-xs font-semibold text-blue-700 mb-1">Źródła:</p>
-                      {msg.citations.map((citation, citIdx) => (
-                        <div key={citIdx} className="text-xs text-blue-600 flex items-start gap-1">
-                          <span>📄</span>
-                          <span>{citation.title}</span>
-                        </div>
-                      ))}
-                    </div>
-                  )}
+                  {msg.role === 'assistant' && msg.citations && msg.citations.length > 0 && (() => {
+                    // Filtruj i formatuj źródła
+                    const cleanCitations = msg.citations
+                      .filter(c => 
+                        c.title && 
+                        c.title.toLowerCase() !== 'untitled' &&
+                        !c.title.endsWith('.book')
+                      )
+                      .map(c => ({
+                        ...c,
+                        // Wyczyść tytuł: usuń rozszerzenia, "- en", itp.
+                        cleanTitle: c.title
+                          .replace(/\.(pdf|book|doc|docx)$/i, '')
+                          .replace(/\s*-\s*en$/i, '')
+                          .replace(/\s*\(en\)$/i, '')
+                          .replace(/_/g, ' ')
+                          .trim()
+                      }))
+                      .slice(0, 3) // Max 3 źródła
+
+                    if (cleanCitations.length === 0) return null
+
+                    return (
+                      <div className="flex items-center gap-2 px-3 py-1.5 bg-gray-50 rounded-xl text-xs text-gray-500">
+                        <span className="font-medium">Źródło:</span>
+                        <span className="truncate">
+                          {cleanCitations.map(c => c.cleanTitle).join(' • ')}
+                        </span>
+                      </div>
+                    )
+                  })()}
                 </div>
 
                 {msg.role === 'user' && (

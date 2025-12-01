@@ -4,7 +4,7 @@
 
 ---
 
-## 📝 Blog - opublikowane artykuły (5 sztuk)
+## 📝 Blog - opublikowane artykuły (6 sztuk)
 
 | # | Tytuł | Slug | Kategoria | Zdjęcie |
 |---|-------|------|-----------|---------|
@@ -13,6 +13,7 @@
 | 3 | Wymiana głowicy drukującej Zebra - kiedy i ile kosztuje? | `wymiana-glowicy-drukarki-zebra-kiedy-konieczna-ile-kosztuje` | Poradniki | ✅ `wymiana-glowicy.jpeg` |
 | 4 | Czerwona dioda w Zebra GK420d/GK420t - diagnostyka | `zebra-gk420-czerwona-dioda-diagnostyka` | Troubleshooting | ✅ `czerwona-dioda-gk.jpeg` |
 | 5 | Blady wydruk w drukarce Zebra - 5 przyczyn | `blady-wydruk-drukarka-zebra-przyczyny-rozwiazania` | Troubleshooting | ✅ `blady-wydruk.jpeg` |
+| 6 | **Kalibracja drukarki Zebra - kompletny poradnik** | `kalibracja-drukarki-zebra-poradnik-krok-po-kroku` | Poradniki | ✅ `kalibracja.jpeg` |
 
 ---
 
@@ -67,12 +68,12 @@
 ## 📁 Pliki zmodyfikowane
 
 ```
-lib/blog.ts                    - 5 artykułów + zaktualizowane ceny
+lib/blog.ts                    - 6 artykułów (+ kalibracja)
 app/page.tsx                   - cennik + odblokowany link Blog
 app/api/chat/route.ts          - SYSTEM_PROMPT cennik
 app/blog/[slug]/page.tsx       - obsługa [X] w markdown
-public/sitemap.xml             - nowe artykuły
-public/blog/                   - 5 zoptymalizowanych zdjęć
+public/sitemap.xml             - 6 artykułów blogowych
+public/blog/                   - 6 zoptymalizowanych zdjęć
 ```
 
 ---
@@ -82,7 +83,7 @@ public/blog/                   - 5 zoptymalizowanych zdjęć
 Wg strategii content marketingowej, kolejne artykuły:
 1. Błąd "Ribbon In" / "Ribbon Out" - diagnostyka
 2. Porównanie ZT231 vs ZT411
-3. Kalibracja drukarki Zebra - poradnik
+3. ~~Kalibracja drukarki Zebra - poradnik~~ ✅ ZROBIONE
 4. Porównanie ZD421 vs ZD621
 5. Koniec wsparcia (EOL) dla starych modeli
 
@@ -96,5 +97,5 @@ Wg strategii content marketingowej, kolejne artykuły:
 
 ---
 
-*Ostatnia aktualizacja: 1 grudnia 2025, ~16:00*
+*Ostatnia aktualizacja: 1 grudnia 2025, ~18:30*
 

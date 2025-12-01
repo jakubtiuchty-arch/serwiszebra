@@ -2,30 +2,37 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { getAllPosts, BLOG_CATEGORIES, BlogPost } from '@/lib/blog'
+import { getAllPosts, BLOG_CATEGORIES, DEVICE_TYPES, BlogPost } from '@/lib/blog'
 import { 
   Clock, 
   Calendar, 
   ArrowRight, 
   Tag,
   BookOpen,
-  Search
+  Search,
+  Printer,
+  Smartphone,
+  ScanLine,
+  Tablet,
+  Package
 } from 'lucide-react'
 import { useState } from 'react'
 import Header from '@/components/Header'
 
 export default function BlogPage() {
   const allPosts = getAllPosts()
+  const [selectedDeviceType, setSelectedDeviceType] = useState<string | null>(null)
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
   const [searchQuery, setSearchQuery] = useState('')
 
   const filteredPosts = allPosts.filter(post => {
+    const matchesDeviceType = !selectedDeviceType || post.deviceType === selectedDeviceType
     const matchesCategory = !selectedCategory || post.category === selectedCategory
     const matchesSearch = !searchQuery || 
       post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       post.excerpt.toLowerCase().includes(searchQuery.toLowerCase()) ||
       post.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()))
-    return matchesCategory && matchesSearch
+    return matchesDeviceType && matchesCategory && matchesSearch
   })
 
   const getCategoryColor = (category: string) => {
@@ -36,6 +43,22 @@ export default function BlogPage() {
       aktualnosci: 'bg-green-100 text-green-700'
     }
     return colors[category] || 'bg-gray-100 text-gray-700'
+  }
+
+  const getDeviceIcon = (deviceType: string) => {
+    const icons: Record<string, React.ReactNode> = {
+      drukarki: <Printer className="w-4 h-4" />,
+      terminale: <Smartphone className="w-4 h-4" />,
+      skanery: <ScanLine className="w-4 h-4" />,
+      tablety: <Tablet className="w-4 h-4" />,
+      inne: <Package className="w-4 h-4" />
+    }
+    return icons[deviceType] || <Package className="w-4 h-4" />
+  }
+
+  const getDeviceColor = (deviceType: string, isSelected: boolean) => {
+    if (isSelected) return 'bg-gray-900 text-white'
+    return 'bg-gray-100 text-gray-700 hover:bg-gray-200'
   }
 
   return (
@@ -82,16 +105,49 @@ export default function BlogPage() {
         </div>
       </section>
 
-      {/* Categories */}
-      <section className="py-6 border-b border-gray-200 bg-white">
+      {/* Device Types - Primary Filter */}
+      <section className="py-6 bg-white border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <button
+              onClick={() => setSelectedDeviceType(null)}
+              className={`px-5 py-2.5 rounded-xl text-sm font-semibold transition-all flex items-center gap-2 ${
+                !selectedDeviceType 
+                  ? 'bg-gray-900 text-white shadow-lg' 
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              }`}
+            >
+              Wszystkie urządzenia
+            </button>
+            {Object.entries(DEVICE_TYPES).map(([key, device]) => (
+              <button
+                key={key}
+                onClick={() => setSelectedDeviceType(key)}
+                className={`px-5 py-2.5 rounded-xl text-sm font-semibold transition-all flex items-center gap-2 ${
+                  selectedDeviceType === key
+                    ? 'bg-gray-900 text-white shadow-lg'
+                    : getDeviceColor(key, false)
+                }`}
+              >
+                {getDeviceIcon(key)}
+                {device.name}
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Content Categories - Secondary Filter */}
+      <section className="py-4 bg-gray-50 border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap items-center justify-center gap-2">
+            <span className="text-sm text-gray-500 mr-2">Typ treści:</span>
             <button
               onClick={() => setSelectedCategory(null)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+              className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
                 !selectedCategory 
-                  ? 'bg-gray-900 text-white' 
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  ? 'bg-gray-800 text-white' 
+                  : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'
               }`}
             >
               Wszystkie
@@ -100,10 +156,10 @@ export default function BlogPage() {
               <button
                 key={key}
                 onClick={() => setSelectedCategory(key)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
                   selectedCategory === key
-                    ? 'bg-gray-900 text-white'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    ? 'bg-gray-800 text-white'
+                    : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'
                 }`}
               >
                 {cat.name}
@@ -120,7 +176,7 @@ export default function BlogPage() {
             <div className="text-center py-16">
               <p className="text-gray-500 text-lg">Nie znaleziono artykułów</p>
               <button
-                onClick={() => { setSelectedCategory(null); setSearchQuery(''); }}
+                onClick={() => { setSelectedDeviceType(null); setSelectedCategory(null); setSearchQuery(''); }}
                 className="mt-4 text-blue-600 hover:underline"
               >
                 Pokaż wszystkie artykuły
@@ -148,7 +204,11 @@ export default function BlogPage() {
                           <BookOpen className="w-16 h-16 text-blue-300" />
                         </div>
                       )}
-                      <div className="absolute top-4 left-4">
+                      <div className="absolute top-4 left-4 flex gap-2">
+                        <span className="px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1.5 bg-white/95 backdrop-blur-sm text-gray-700 shadow-sm">
+                          {getDeviceIcon(post.deviceType)}
+                          {DEVICE_TYPES[post.deviceType].name}
+                        </span>
                         <span className={`px-3 py-1 rounded-full text-xs font-semibold ${getCategoryColor(post.category)}`}>
                           {BLOG_CATEGORIES[post.category].name}
                         </span>

@@ -13,6 +13,7 @@ export interface BlogPost {
   publishedAt: string
   updatedAt?: string
   readingTime: number // w minutach
+  deviceType: 'drukarki' | 'terminale' | 'skanery' | 'tablety' | 'inne'
   category: 'poradniki' | 'troubleshooting' | 'porownania' | 'aktualnosci'
   tags: string[]
   seo: {
@@ -22,7 +23,36 @@ export interface BlogPost {
   }
 }
 
-// Kategorie bloga
+// Typy urządzeń (główna nawigacja)
+export const DEVICE_TYPES = {
+  drukarki: {
+    name: 'Drukarki',
+    description: 'Drukarki etykiet i kart plastikowych',
+    icon: 'Printer'
+  },
+  terminale: {
+    name: 'Terminale',
+    description: 'Terminale mobilne i stacjonarne',
+    icon: 'Smartphone'
+  },
+  skanery: {
+    name: 'Skanery',
+    description: 'Skanery kodów kreskowych',
+    icon: 'ScanLine'
+  },
+  tablety: {
+    name: 'Tablety',
+    description: 'Tablety przemysłowe Zebra',
+    icon: 'Tablet'
+  },
+  inne: {
+    name: 'Inne',
+    description: 'Akcesoria i pozostałe urządzenia',
+    icon: 'Package'
+  }
+}
+
+// Kategorie treści (typ artykułu)
 export const BLOG_CATEGORIES = {
   poradniki: {
     name: 'Poradniki',
@@ -59,6 +89,7 @@ export const blogPosts: BlogPost[] = [
     },
     publishedAt: '2025-11-30',
     readingTime: 8,
+    deviceType: 'drukarki',
     category: 'troubleshooting',
     tags: ['drukarka zebra', 'nie drukuje', 'troubleshooting', 'naprawa'],
     seo: {
@@ -253,6 +284,7 @@ Skontaktuj się z nami - jako autoryzowany serwis Zebra obsługujemy również n
     },
     publishedAt: '2025-11-30',
     readingTime: 6,
+    deviceType: 'drukarki',
     category: 'poradniki',
     tags: ['głowica drukująca', 'czyszczenie', 'konserwacja', 'poradnik'],
     seo: {
@@ -370,6 +402,7 @@ Nawet przy prawidłowej konserwacji głowica zużywa się. Oznaki konieczności 
     },
     publishedAt: '2025-12-01',
     readingTime: 7,
+    deviceType: 'drukarki',
     category: 'poradniki',
     tags: ['głowica drukująca', 'wymiana głowicy', 'koszt naprawy', 'drukarka zebra'],
     seo: {
@@ -564,6 +597,7 @@ Standardowa wymiana trwa 1-2 dni robocze od momentu dostarczenia drukarki. W try
     },
     publishedAt: '2025-12-01',
     readingTime: 10,
+    deviceType: 'drukarki',
     category: 'troubleshooting',
     tags: ['GK420d', 'GK420t', 'czerwona dioda', 'troubleshooting', 'diagnostyka'],
     seo: {
@@ -822,6 +856,7 @@ Zebra oficjalnie zakończyła produkcję serii GK, ale jako autoryzowany serwis 
     },
     publishedAt: '2025-12-01',
     readingTime: 8,
+    deviceType: 'drukarki',
     category: 'troubleshooting',
     tags: ['blady wydruk', 'jakość druku', 'troubleshooting', 'GK420', 'ZD420', 'darkness'],
     seo: {
@@ -1099,6 +1134,336 @@ Nagłe pogorszenie jakości często wskazuje na uszkodzenie głowicy lub problem
 ### Ile kosztuje naprawa bladego wydruku?
 Zależy od przyczyny: czyszczenie mechanizmu 150-360 zł, wymiana wałka 150-290 zł, wymiana głowicy 450-2400 zł. Dokładną wycenę podamy po bezpłatnej diagnozie.
 `
+  },
+  {
+    slug: 'kalibracja-drukarki-zebra-poradnik-krok-po-kroku',
+    title: 'Kalibracja drukarki Zebra - kompletny poradnik krok po kroku',
+    excerpt: 'Drukarka Zebra drukuje na niewłaściwym miejscu lub wypluwa puste etykiety? Prawdopodobnie potrzebuje kalibracji. Poznaj wszystkie metody kalibracji dla różnych modeli Zebra.',
+    coverImage: '/blog/kalibracja.jpeg',
+    author: {
+      name: 'Zespół Serwis Zebra',
+      role: 'Certyfikowani technicy Zebra'
+    },
+    publishedAt: '2025-12-01',
+    readingTime: 12,
+    deviceType: 'drukarki',
+    category: 'poradniki',
+    tags: ['kalibracja', 'sensor', 'gap', 'black mark', 'etykiety', 'GK420', 'ZD420', 'ZT411'],
+    seo: {
+      metaTitle: 'Kalibracja drukarki Zebra - poradnik krok po kroku | Serwis Zebra',
+      metaDescription: 'Jak skalibrować drukarkę Zebra? Kompletny poradnik kalibracji dla serii GK420, ZD420, ZD621, ZT411. Auto-kalibracja, kalibracja ręczna, rozwiązywanie problemów.',
+      keywords: ['kalibracja drukarki zebra', 'kalibracja zebra gk420', 'smart calibration zebra', 'zebra sensor gap', 'kalibracja etykiet zebra']
+    },
+    content: `
+## Czym jest kalibracja drukarki i dlaczego jest ważna?
+
+Kalibracja to proces, podczas którego drukarka Zebra **uczy się rozpoznawać** używane etykiety. Drukarka musi wiedzieć:
+
+- **Gdzie zaczyna się** każda etykieta
+- **Gdzie kończy się** każda etykieta
+- **Jaki jest typ** etykiet (z przerwami, ciągłe, z czarną linią)
+
+Bez prawidłowej kalibracji drukarka nie wie, gdzie drukować, co skutkuje **przesuniętym wydrukiem**, **pustymi etykietami** lub **zatrzymaniem się** w środku rolki.
+
+---
+
+## Kiedy wykonać kalibrację?
+
+Kalibrację należy wykonać zawsze gdy:
+
+[CHECK] Zmieniasz **typ lub rozmiar** etykiet
+[CHECK] Zakładasz **nową rolkę** (szczególnie od innego producenta)
+[CHECK] Wydruk jest **przesunięty** względem etykiety
+[CHECK] Drukarka **wypluwa puste** etykiety przed drukowaniem
+[CHECK] Drukarka **"szuka"** początku etykiety (przesuwa papier tam i z powrotem)
+[CHECK] Po **resecie** do ustawień fabrycznych
+[CHECK] Po **wymianie** głowicy lub wałka
+
+---
+
+## Typy sensorów w drukarkach Zebra
+
+Drukarki Zebra posiadają **dwa typy sensorów** do wykrywania etykiet. Wybór sensora zależy od rodzaju używanych etykiet:
+
+### 1. Sensor transmisyjny (Gap Sensor)
+
+| Właściwość | Opis |
+|------------|------|
+| **Działanie** | Światło przechodzi PRZEZ etykietę |
+| **Wykrywa** | Przerwę między etykietami |
+| **Etykiety** | Z przerwami (die-cut labels) |
+| **Zastosowanie** | 90% zastosowań (standardowe etykiety) |
+
+### 2. Sensor refleksyjny (Black Mark / Reflective)
+
+| Właściwość | Opis |
+|------------|------|
+| **Działanie** | Światło ODBIJA się od etykiety |
+| **Wykrywa** | Czarną linię na spodzie etykiety |
+| **Etykiety** | Ciągłe z czarnym znacznikiem |
+| **Zastosowanie** | Etykiety tekstylne, paragonowe |
+
+> **💡 Wskazówka:** Jeśli nie wiesz, jaki masz typ etykiet - obejrzyj spód rolki. Jeśli są tam **czarne paski** - to etykiety z black mark. Jeśli nie - używaj sensora gap.
+
+---
+
+## Auto-kalibracja (Smart Calibration) - najszybsza metoda
+
+Auto-kalibracja to najłatwiejszy sposób kalibracji drukarki Zebra. Drukarka sama wykryje typ i rozmiar etykiet.
+
+### Seria GK/GX (GK420d, GK420t, GX420d, GX420t)
+
+**Procedura Smart Calibration:**
+
+1. Upewnij się, że etykiety są prawidłowo załadowane
+2. **Wyłącz** drukarkę
+3. **Przytrzymaj** przycisk FEED
+4. **Włącz** drukarkę trzymając przycisk FEED
+5. Obserwuj diodę statusu:
+   - **1 mignięcie** - tryb konfiguracji (nie puszczaj!)
+   - **2 mignięcia** - Smart Calibration ✓ **PUŚĆ TERAZ**
+6. Drukarka wysunie kilka etykiet i skalibruje sensory
+
+> **⚠️ Ważne:** Jeśli przytrzymasz przycisk za długo (powyżej 5-6 mignięć), drukarka wejdzie w tryb resetu do ustawień fabrycznych!
+
+### Seria ZD (ZD420, ZD421, ZD620, ZD621)
+
+**Procedura Auto-Calibration:**
+
+**Metoda 1 - Przycisk FEED:**
+1. Załaduj etykiety
+2. Zamknij pokrywę drukarki
+3. **Przytrzymaj** przycisk FEED przez **5-6 sekund**
+4. Puść przycisk gdy drukarka zacznie wysuwać etykiety
+5. Kalibracja zakończona gdy drukarka się zatrzyma
+
+**Metoda 2 - Z poziomu menu (modele z wyświetlaczem):**
+1. Wejdź w **Menu** → **Media Setup** → **Calibrate**
+2. Wybierz **Auto Calibrate**
+3. Drukarka wykona kalibrację automatycznie
+
+### Seria przemysłowa ZT (ZT230, ZT411, ZT421, ZT610)
+
+**Procedura z wyświetlacza:**
+
+1. Naciśnij **Menu** (lub ikonę hamburgera ☰)
+2. Przejdź do **Media** lub **Print** → **Label Setup**
+3. Wybierz **Media Type**:
+   - \`Gap/Notch\` - dla etykiet z przerwami
+   - \`Continuous\` - dla etykiet ciągłych
+   - \`Mark\` - dla etykiet z czarną linią
+4. Wróć i wybierz **Calibrate**
+5. Potwierdź rozpoczęcie kalibracji
+
+---
+
+## Kalibracja ręczna w Zebra Setup Utilities
+
+Gdy auto-kalibracja nie działa (nietypowe etykiety, transparentne podłoże), użyj kalibracji ręcznej przez oprogramowanie.
+
+### Wymagania
+
+- Komputer z zainstalowanym **Zebra Setup Utilities** (do pobrania z zebra.com)
+- Drukarka podłączona przez USB lub sieć
+
+### Procedura krok po kroku
+
+**Krok 1: Uruchom Zebra Setup Utilities**
+
+1. Otwórz Zebra Setup Utilities
+2. Wybierz swoją drukarkę z listy
+3. Kliknij "Open Printer Tools"
+
+**Krok 2: Przejdź do Media Settings**
+
+1. Zakładka "Action"
+2. Wybierz "Calibrate Media"
+3. Kliknij "Send"
+
+**Krok 3: Zaawansowana konfiguracja (opcjonalnie)**
+
+Jeśli auto-kalibracja przez narzędzie nie pomaga:
+
+1. Zakładka **"Printing"**
+2. Ustaw ręcznie:
+   - **Media Type** (Gap, Continuous, Mark)
+   - **Label Length** (długość etykiety w mm)
+   - **Label Width** (szerokość etykiety)
+3. Wyślij ustawienia do drukarki
+
+---
+
+## Kalibracja pozycji sensora (drukarki przemysłowe)
+
+W drukarkach przemysłowych (ZT230, ZT411, ZT610 i starszych Xi) **sensor jest ruchomy**. Można fizycznie przesuwać jego pozycję.
+
+### Kiedy regulować pozycję sensora?
+
+- Używasz **wąskich etykiet** (mniejszych niż połowa szerokości drukarki)
+- Etykiety mają **przerwę/black mark nie na środku**
+- Drukarka "nie widzi" etykiet mimo kalibracji
+
+### Jak ustawić pozycję sensora?
+
+1. Otwórz pokrywę drukarki
+2. Znajdź sensor (zwykle żółta/zielona plastikowa część pod etykietami)
+3. Poluzuj śrubę blokującą
+4. Przesuń sensor tak, aby był **dokładnie nad przerwą** między etykietami (lub nad black mark)
+5. Zablokuj śrubę
+6. Wykonaj ponowną kalibrację
+
+> **💡 Pro tip:** W serii ZT411/ZT421 sensor ma specjalny uchwyt ułatwiający przesuwanie. Wystarczy lekko unieść i przesunąć w lewo/prawo.
+
+---
+
+## Rozwiązywanie problemów z kalibracją
+
+### Problem: Drukarka wypluwa puste etykiety po kalibracji
+
+**Przyczyny:**
+1. Źle wybrany typ sensora (Gap vs Mark)
+2. Sensor zabrudzony kurzem
+3. Etykiety z transparentnym podłożem
+
+**Rozwiązanie:**
+1. Sprawdź czy używasz właściwego typu sensora
+2. Oczyść sensor sprężonym powietrzem
+3. Dla transparentnych etykiet - użyj etykiet z black mark lub kalibracji ręcznej z podaniem dokładnych wymiarów
+
+---
+
+### Problem: Drukarka "szuka" etykiety przed każdym wydrukiem
+
+**Przyczyny:**
+1. Etykiety są za długie dla ustawień drukarki
+2. Sensor nie jest wyrównany z przerwą
+3. Parametr "Label Length" jest nieprawidłowy
+
+**Rozwiązanie:**
+1. Wykonaj ponowną auto-kalibrację
+2. W ZPL sprawdź komendę \`^LL\` (Label Length)
+3. Ustaw ręcznie długość etykiety w sterowniku
+
+---
+
+### Problem: Kalibracja się nie udaje - dioda mruga na czerwono
+
+**Przyczyny:**
+1. Etykiety załadowane nieprawidłowo
+2. Sensor całkowicie zabrudzony
+3. Uszkodzony sensor
+
+**Rozwiązanie:**
+1. Wyjmij i załaduj ponownie etykiety
+2. Oczyść sensor alkoholem IPA 99%
+3. Jeśli problem persystuje - wymiana sensora w serwisie (150-550 zł)
+
+---
+
+### Problem: Wydruk przesunięty mimo poprawnej kalibracji
+
+**Przyczyny:**
+1. Niewłaściwe marginesy w sterowniku
+2. Źle ustawiona pozycja sensora (drukarki przemysłowe)
+3. Problem z wałkiem dociskowym
+
+**Rozwiązanie:**
+1. Sprawdź ustawienia marginesów (Label Top, Left Position)
+2. Wyreguluj fizyczną pozycję sensora
+3. Sprawdź stan wałka - czy etykieta się nie ślizga
+
+---
+
+## Kody ZPL związane z kalibracją
+
+Dla zaawansowanych użytkowników - komendy ZPL do konfiguracji mediów:
+
+\`\`\`zpl
+^XA
+^MNY              ; Kalibracja mediów przy włączeniu
+^LL800            ; Długość etykiety (w dots, 203dpi = 8 dots/mm)
+^PW812            ; Szerokość druku (4 cale = 812 dots przy 203dpi)
+^LH0,0            ; Pozycja home (0,0)
+^XZ
+\`\`\`
+
+### Ważne komendy:
+
+| Komenda | Opis | Przykład |
+|---------|------|----------|
+| \`^MN\` | Typ mediów | \`^MNY\` (Gap), \`^MNM\` (Mark), \`^MNN\` (Continuous) |
+| \`^LL\` | Długość etykiety | \`^LL800\` (800 dots) |
+| \`^PW\` | Szerokość druku | \`^PW812\` (4 cale) |
+| \`^LT\` | Top offset | \`^LT30\` (przesunięcie 30 dots w dół) |
+| \`~JC\` | Kalibracja | Wykonaj kalibrację |
+
+---
+
+## Tabela - metody kalibracji wg modelu
+
+| Model | Auto-kalibracja | Kalibracja ręczna | Ruchomy sensor |
+|-------|-----------------|-------------------|----------------|
+| GK420d/t | FEED 2x mignięcia | Zebra Setup Utilities | ❌ Nie |
+| GX420d/t | FEED 2x mignięcia | Zebra Setup Utilities | ❌ Nie |
+| ZD420/421 | FEED 5 sek. | Menu + Utilities | ❌ Nie |
+| ZD620/621 | FEED 5 sek. | Menu + Utilities | ❌ Nie |
+| ZT230 | Menu → Calibrate | Menu + Utilities | ✅ Tak |
+| ZT411/421 | Menu → Calibrate | Menu + Utilities | ✅ Tak |
+| ZT610/620 | Menu → Calibrate | Menu + Utilities | ✅ Tak |
+
+---
+
+## Kiedy oddać do serwisu?
+
+Niektóre problemy z kalibracją wymagają profesjonalnej interwencji:
+
+[CHECK] Sensor **nie reaguje** na żadne etykiety
+[CHECK] Kalibracja **zawsze się nie udaje** mimo różnych etykiet
+[CHECK] **Uszkodzenie mechaniczne** sensora
+[CHECK] **Błędy firmware** związane z kalibracją
+[CHECK] Drukarka **przeskakuje etykiety** losowo
+
+---
+
+## Profesjonalna pomoc w Serwis Zebra
+
+Masz problemy z kalibracją drukarki Zebra?
+
+Jako **autoryzowany partner serwisowy Zebra** oferujemy:
+
+[CHECK] **Bezpłatna diagnostyka** problemu*
+[CHECK] **Odbiór kurierem** z całej Polski
+[CHECK] **Gwarancja 12 miesięcy** na naprawę
+[CHECK] **Kalibracja i konfiguracja** pod Twoje etykiety
+
+**Cennik napraw sensorów:** 150-550 zł (w zależności od modelu)
+
+*Diagnostyka bezpłatna w przypadku zlecenia naprawy w naszym serwisie.
+
+[**Wyślij drukarkę do serwisu →**](/#formularz)
+
+---
+
+## FAQ - Najczęściej zadawane pytania
+
+### Jak często trzeba kalibrować drukarkę Zebra?
+Kalibrację wykonuj przy każdej zmianie typu lub rozmiaru etykiet. Jeśli używasz ciągle tych samych etykiet od tego samego producenta - kalibracja przy każdej nowej rolce nie jest konieczna, ale zalecana.
+
+### Czy kalibracja kasuje ustawienia drukarki?
+Nie, sama kalibracja mediów nie kasuje innych ustawień (prędkość, temperatura, sieć). Kalibracja uczy drukarkę tylko parametrów etykiet.
+
+### Dlaczego drukarka nie rozpoznaje moich etykiet?
+Najczęstsze przyczyny: transparentne podłoże (sensor tego nie widzi), bardzo cienkie etykiety, etykiety z nietypowym materiałem. Spróbuj kalibracji ręcznej z podaniem dokładnych wymiarów.
+
+### Czy mogę używać etykiet bez przerw (continuous)?
+Tak, ale musisz ustawić drukarkę w tryb "Continuous" i podać dokładną długość etykiety w sterowniku lub kodzie ZPL. Drukarka nie będzie szukać przerwy.
+
+### Co zrobić gdy Smart Calibration nie działa?
+1. Oczyść sensor sprężonym powietrzem
+2. Spróbuj innego rodzaju etykiet (dla testu)
+3. Wykonaj kalibrację przez Zebra Setup Utilities
+4. Jeśli nadal nie działa - sensor może wymagać wymiany
+`
   }
 ]
 
@@ -1114,9 +1479,14 @@ export function getAllPosts(): BlogPost[] {
   )
 }
 
-// Funkcja do pobierania artykułów po kategorii
+// Funkcja do pobierania artykułów po kategorii treści
 export function getPostsByCategory(category: BlogPost['category']): BlogPost[] {
   return blogPosts.filter(post => post.category === category)
+}
+
+// Funkcja do pobierania artykułów po typie urządzenia
+export function getPostsByDeviceType(deviceType: BlogPost['deviceType']): BlogPost[] {
+  return blogPosts.filter(post => post.deviceType === deviceType)
 }
 
 // Funkcja do pobierania powiązanych artykułów

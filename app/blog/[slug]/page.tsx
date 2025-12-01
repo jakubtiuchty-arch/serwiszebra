@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { getPostBySlug, getAllPosts, getRelatedPosts, BLOG_CATEGORIES } from '@/lib/blog'
+import { getPostBySlug, getAllPosts, getRelatedPosts, BLOG_CATEGORIES, DEVICE_TYPES } from '@/lib/blog'
 import Header from '@/components/Header'
 import { 
   Clock, 
@@ -12,7 +12,12 @@ import {
   Share2,
   BookOpen,
   ArrowRight,
-  User
+  User,
+  Printer,
+  Smartphone,
+  ScanLine,
+  Tablet,
+  Package
 } from 'lucide-react'
 
 // Generate static params for all blog posts
@@ -49,9 +54,11 @@ export async function generateMetadata({
       modifiedTime: post.updatedAt || post.publishedAt,
       authors: [post.author.name],
       tags: post.tags,
+      siteName: 'Serwis Zebra',
+      locale: 'pl_PL',
       images: [
         {
-          url: post.coverImage,
+          url: `https://serwiszebra.pl${post.coverImage}`,
           width: 1200,
           height: 630,
           alt: post.title
@@ -62,6 +69,7 @@ export async function generateMetadata({
       card: 'summary_large_image',
       title: post.seo.metaTitle,
       description: post.seo.metaDescription,
+      images: [`https://serwiszebra.pl${post.coverImage}`],
     },
     alternates: {
       canonical: `https://serwiszebra.pl/blog/${post.slug}`
@@ -83,9 +91,10 @@ export default function BlogPostPage({
   const relatedPosts = getRelatedPosts(params.slug, 3)
 
   // Schema.org structured data for Article
+  const wordCount = post.content.split(/\s+/).length
   const articleSchema = {
     '@context': 'https://schema.org',
-    '@type': 'Article',
+    '@type': 'TechArticle', // Bardziej precyzyjny typ dla artykułów technicznych
     headline: post.title,
     description: post.excerpt,
     image: `https://serwiszebra.pl${post.coverImage}`,
@@ -108,7 +117,15 @@ export default function BlogPostPage({
       '@type': 'WebPage',
       '@id': `https://serwiszebra.pl/blog/${post.slug}`
     },
-    keywords: post.tags.join(', ')
+    keywords: post.tags.join(', '),
+    wordCount: wordCount,
+    timeRequired: `PT${post.readingTime}M`, // ISO 8601 duration format
+    inLanguage: 'pl-PL',
+    isAccessibleForFree: true,
+    about: {
+      '@type': 'Thing',
+      name: 'Zebra Technologies'
+    }
   }
 
   // FAQ Schema if content has FAQ section
@@ -208,7 +225,15 @@ export default function BlogPostPage({
 
             {/* Header */}
             <header className="mb-8">
-              <div className="flex items-center gap-3 mb-4">
+              <div className="flex flex-wrap items-center gap-3 mb-4">
+                <span className="px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1.5 bg-gray-100 text-gray-700">
+                  {post.deviceType === 'drukarki' && <Printer className="w-3.5 h-3.5" />}
+                  {post.deviceType === 'terminale' && <Smartphone className="w-3.5 h-3.5" />}
+                  {post.deviceType === 'skanery' && <ScanLine className="w-3.5 h-3.5" />}
+                  {post.deviceType === 'tablety' && <Tablet className="w-3.5 h-3.5" />}
+                  {post.deviceType === 'inne' && <Package className="w-3.5 h-3.5" />}
+                  {DEVICE_TYPES[post.deviceType].name}
+                </span>
                 <span className={`px-3 py-1 rounded-full text-xs font-semibold ${getCategoryColor(post.category)}`}>
                   {BLOG_CATEGORIES[post.category].name}
                 </span>
