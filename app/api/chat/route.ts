@@ -119,14 +119,27 @@ function detectPrinterModel(query: string): string[] {
   const models: string[] = []
   const queryLower = query.toLowerCase()
 
-  // Common Zebra printer models
+  // Common Zebra printer models - pełna lista
   const printerModels = [
-    'zt411', 'zt421', 'zt410', 'zt420',
-    'zd421', 'zd621', 'zd420', 'zd620',
-    'zd888', 'zd500', 'zd510',
-    'zt510', 'zt610',
-    'gc420d', 'gc420t',
-    'tlp2844', 'lp2844'
+    // ZT Series (przemysłowe)
+    'zt411', 'zt421', 'zt410', 'zt420', 'zt510', 'zt610', 'zt620',
+    'zt230', 'zt231', 'zt200', 'zt111',
+    // ZD Series (desktop)
+    'zd421', 'zd621', 'zd420', 'zd620', 'zd410', 'zd610',
+    'zd888', 'zd500', 'zd510', 'zd220', 'zd230',
+    // GK/GX Series (starsze desktop)
+    'gk420d', 'gk420t', 'gk420', 'gx420d', 'gx420t', 'gx420',
+    'gc420d', 'gc420t', 'gc420',
+    // Mobilne
+    'zq510', 'zq520', 'zq511', 'zq521', 'zq610', 'zq620', 'zq630',
+    // Starsze
+    'tlp2844', 'lp2844',
+    // Karty
+    'zc100', 'zc300', 'zxp1', 'zxp3', 'zxp7', 'zxp8', 'zxp9',
+    // Terminale
+    'tc21', 'tc26', 'tc22', 'tc27', 'tc51', 'tc52', 'tc53', 'tc56', 'tc57',
+    'tc72', 'tc73', 'tc77', 'tc78',
+    'mc33', 'mc93', 'mc94', 'mc2200', 'mc2700', 'mc3300', 'mc3400', 'mc9300',
   ]
 
   // Check for each model
@@ -693,10 +706,12 @@ export async function POST(req: NextRequest) {
           }
 
           // Na końcu dodaj citations i blog links jako JSON (jeśli są)
-          const hasData = citations.length > 0 || blogLinks.length > 0
+          // WAŻNE: Jeśli blog znalazł odpowiedź, NIE pokazuj citations z RAG (często nieodpowiednie)
+          const finalCitations = blogLinks.length > 0 ? [] : citations
+          const hasData = finalCitations.length > 0 || blogLinks.length > 0
           if (hasData) {
             const dataJson = JSON.stringify({ 
-              citations,
+              citations: finalCitations,
               blogLinks: blogLinks.map(b => ({
                 title: b.title,
                 url: `/blog/${b.slug}`
