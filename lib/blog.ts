@@ -552,6 +552,264 @@ W 90% przypadków tak. Białe pionowe pasy to najczęstszy objaw uszkodzonej gł
 ### Ile trwa wymiana głowicy w serwisie?
 Standardowa wymiana trwa 1-2 dni robocze od momentu dostarczenia drukarki. W trybie express możliwa realizacja w 24h (+50 zł).
 `
+  },
+  {
+    slug: 'zebra-gk420-czerwona-dioda-diagnostyka',
+    title: 'Czerwona dioda w Zebra GK420d/GK420t - co oznacza i jak naprawić?',
+    excerpt: 'Czerwona lampka w drukarce Zebra serii GK420 może oznaczać różne problemy. Poznaj wszystkie sekwencje mrugania i dowiedz się, jak je naprawić samodzielnie.',
+    coverImage: '/blog/gk420-czerwona-dioda.jpeg',
+    author: {
+      name: 'Zespół Serwis Zebra',
+      role: 'Certyfikowani technicy Zebra'
+    },
+    publishedAt: '2025-12-01',
+    readingTime: 10,
+    category: 'troubleshooting',
+    tags: ['GK420d', 'GK420t', 'czerwona dioda', 'troubleshooting', 'diagnostyka'],
+    seo: {
+      metaTitle: 'Zebra GK420d czerwona dioda - co oznacza? Diagnostyka | Serwis Zebra',
+      metaDescription: 'Czerwona dioda w Zebra GK420d/GK420t? Poznaj wszystkie sekwencje mrugania: ciągła, pulsująca, migająca. Instrukcja diagnostyki krok po kroku od certyfikowanych techników.',
+      keywords: ['zebra gk420d czerwona dioda', 'gk420t lampka czerwona', 'zebra gk420 błąd', 'gk420d nie drukuje']
+    },
+    content: \`
+## Problem: Czerwona dioda w drukarce Zebra GK420
+
+Drukarki Zebra serii GK (GK420d, GK420t, GX420d, GX420t) mają minimalistyczny interfejs - tylko **jeden przycisk** i **jedną diodę LED**. To sprawia, że interpretacja błędów może być trudna, bo drukarka "komunikuje się" poprzez różne sekwencje świecenia i mrugania.
+
+W tym artykule wyjaśniamy wszystkie możliwe stany diody i jak naprawić każdy z problemów.
+
+---
+
+## Tabela szybkiej diagnostyki
+
+| Stan diody | Co oznacza | Rozwiązanie |
+|------------|------------|-------------|
+| **Ciągła czerwona** | Głowica otwarta (Head Open) | Zamknij pokrywę drukarki |
+| **Migająca czerwona** | Brak papieru (Media Out) | Załaduj nową rolkę etykiet |
+| **Czerwona + żółta** | Przegrzanie głowicy | Wyłącz drukarkę na 15 min |
+| **Szybkie miganie** | Błąd pamięci/firmware | Reset do ustawień fabrycznych |
+| **2x mignięcie** | Błąd kalibracji | Wykonaj kalibrację Smart Cal |
+| **Ciągła zielona** | Drukarka gotowa | Brak błędu ✓ |
+
+---
+
+## 1. Ciągła czerwona dioda - "Head Open"
+
+### Przyczyna
+
+Drukarka wykrywa, że pokrywa (głowica) jest otwarta. Jest to **najczęstszy błąd** w serii GK420.
+
+### Rozwiązania
+
+**Krok 1: Sprawdź pokrywę**
+- Upewnij się, że pokrywa jest całkowicie zamknięta
+- Powinno być słyszalne kliknięcie zatrzasku
+
+**Krok 2: Sprawdź czujnik otwarcia**
+- Znajdź mały mikrostyk (przełącznik) przy zawiasie głowicy
+- Sprawdź, czy nie jest zabrudzony lub uszkodzony
+- Delikatnie oczyść sprężonym powietrzem
+
+**Krok 3: Sprawdź mechanizm zatrzasku**
+- Zatrzask powinien pewnie trzymać głowicę
+- Jeśli jest luźny - może być uszkodzony
+
+> **💡 Wskazówka:** Jeśli pokrywa jest zamknięta, ale błąd nie znika - prawdopodobnie uszkodzony jest mikrostyk czujnika. To wymaga naprawy serwisowej.
+
+---
+
+## 2. Migająca czerwona dioda - "Media Out"
+
+### Przyczyna
+
+Drukarka nie wykrywa etykiet. Może to oznaczać:
+- Brak papieru
+- Źle załadowany papier
+- Rozkalibrowany czujnik
+
+### Rozwiązania
+
+**Krok 1: Sprawdź rolkę etykiet**
+- Czy jest papier na rolce?
+- Czy etykiety są prawidłowo przeprowadzone przez prowadnice?
+
+**Krok 2: Wykonaj kalibrację (Smart Calibration)**
+
+To najważniejsza procedura dla serii GK420!
+
+1. Upewnij się, że etykiety są załadowane
+2. Wyłącz drukarkę
+3. **Przytrzymaj przycisk Feed**
+4. Włącz drukarkę trzymając przycisk
+5. Gdy dioda mignie **2 razy** - puść przycisk
+6. Drukarka wykalibruje czujnik automatycznie
+
+**Krok 3: Sprawdź typ etykiet**
+
+| Typ etykiet | Czujnik | Ustawienie |
+|-------------|---------|------------|
+| Z przerwami (gap) | Transmisyjny | Web Sensing |
+| Ciągłe (continuous) | Refleksyjny | Mark Sensing |
+| Z czarną linią | Refleksyjny | Mark Sensing |
+
+> **⚠️ Uwaga:** Jeśli używasz etykiet transparentnych lub o nietypowej grubości, standardowa kalibracja może nie działać. W takim przypadku wymagana jest ręczna konfiguracja czujników.
+
+---
+
+## 3. Dioda czerwona + żółta - Przegrzanie
+
+### Przyczyna
+
+Głowica drukująca osiągnęła zbyt wysoką temperaturę. Drukarka automatycznie wstrzymuje pracę, aby chronić głowicę przed uszkodzeniem.
+
+### Rozwiązania
+
+**Krok 1: Wyłącz drukarkę**
+- Odczekaj minimum **15-20 minut** na ostygnięcie
+
+**Krok 2: Sprawdź warunki pracy**
+- Temperatura otoczenia powinna wynosić 5-40°C
+- Drukarka nie może stać przy grzejniku lub w nasłonecznionym miejscu
+
+**Krok 3: Zmniejsz intensywność druku**
+- Obniż ustawienie "Darkness" (zaczernienie) w sterowniku
+- Zmniejsz prędkość druku
+- Rób przerwy przy dużych wolumenach
+
+**Krok 4: Sprawdź wentylację**
+- Otwory wentylacyjne nie mogą być zasłonięte
+- Usuń kurz z wnętrza drukarki
+
+---
+
+## 4. Szybkie miganie - Błąd pamięci lub firmware
+
+### Przyczyna
+
+Drukarka napotkała błąd systemowy. Może to być:
+- Uszkodzony firmware
+- Błąd pamięci (Out of Memory)
+- Konflikt konfiguracji
+
+### Rozwiązania
+
+**Krok 1: Restart drukarki**
+- Wyłącz, odczekaj 30 sekund, włącz
+
+**Krok 2: Reset do ustawień fabrycznych**
+
+1. Wyłącz drukarkę
+2. **Przytrzymaj przycisk Feed**
+3. Włącz drukarkę trzymając przycisk
+4. Gdy dioda mignie **6 razy** - puść przycisk
+5. Drukarka przywróci ustawienia domyślne
+
+> **⚠️ Uwaga:** Po resecie konieczna będzie ponowna konfiguracja (prędkość, ciemność, typ etykiet).
+
+**Krok 3: Aktualizacja firmware**
+- Pobierz najnowszy firmware ze strony Zebra
+- Wgraj przez Zebra Setup Utilities
+
+---
+
+## 5. Problemy z jakością wydruku przy czerwonej diodzie
+
+Czasem drukarka pozornie działa (drukuje), ale jakość wydruku jest zła. To może wskazywać na problemy, które wkrótce spowodują czerwoną diodę.
+
+### Blady wydruk
+
+**Przyczyny:**
+- Zbyt niska temperatura głowicy (Darkness)
+- Zużyta głowica
+- Niewłaściwy zasilacz (zamiennik)
+
+**Rozwiązanie:**
+1. Zwiększ "Darkness" w sterowniku (zalecane: 20-25)
+2. Wyczyść głowicę alkoholem IPA 99%
+3. Sprawdź, czy zasilacz to oryginał Zebra (20V)
+
+### "Duchy" na etykiecie (podwójny obraz)
+
+**Przyczyny:**
+- Zużyty wałek dociskowy (Platen Roller)
+- Zbyt wysoka temperatura
+
+**Rozwiązanie:**
+1. Sprawdź wałek - czy ma rowki, nacięcia?
+2. Zmniejsz "Darkness"
+3. Wymień wałek (80-150 zł w serwisie)
+
+### Pionowe białe linie
+
+**Przyczyna:** Uszkodzona głowica drukująca
+
+**Rozwiązanie:**
+1. Wyczyść głowicę
+2. Jeśli nie pomoże - wymiana głowicy (250-400 zł)
+
+---
+
+## Sekwencje diody - pełna tabela diagnostyczna
+
+| Sekwencja | Opis | Priorytet |
+|-----------|------|-----------|
+| Zielona ciągła | Gotowa do pracy | ✅ OK |
+| Zielona pulsująca | Odbiera dane | ✅ OK |
+| Żółta ciągła | Uruchamianie | ⏳ Czekaj |
+| Czerwona ciągła | Head Open | 🔴 Napraw |
+| Czerwona migająca | Media Out | 🔴 Napraw |
+| Czerwona + żółta | Przegrzanie | 🟡 Czekaj |
+| Szybkie miganie | Błąd krytyczny | 🔴 Reset |
+| Brak świecenia | Brak zasilania | 🔴 Sprawdź kabel |
+
+---
+
+## Kiedy oddać drukarkę do serwisu?
+
+Niektóre problemy wymagają interwencji profesjonalisty:
+
+[CHECK] Czerwona dioda **mimo zamkniętej pokrywy** - uszkodzony czujnik
+[CHECK] **Powtarzające się przegrzewanie** - problem z elektroniką
+[CHECK] Błąd **nie znika po resecie** - uszkodzony firmware/płyta
+[CHECK] **Białe pasy po czyszczeniu** - wymiana głowicy
+[CHECK] **Zacięcia papieru** - zużyty mechanizm
+
+---
+
+## Bezpłatna diagnostyka w Serwis Zebra
+
+Masz drukarkę GK420 z czerwoną diodą i nie wiesz co robić?
+
+Jako **autoryzowany partner serwisowy Zebra** oferujemy:
+
+[CHECK] **Bezpłatna diagnostyka** problemu*
+[CHECK] **Odbiór kurierem** z całej Polski
+[CHECK] **Gwarancja 12 miesięcy** na naprawę
+[CHECK] **Oryginalne części** Zebra
+
+*Diagnostyka bezpłatna w przypadku zlecenia naprawy w naszym serwisie.
+
+[**Wyślij drukarkę do diagnozy →**](/#formularz)
+
+---
+
+## FAQ - Najczęściej zadawane pytania
+
+### Dlaczego drukarka GK420 świeci na czerwono mimo zamkniętej pokrywy?
+Prawdopodobnie uszkodzony jest mikrostyk czujnika otwarcia głowicy. To częsty problem w starszych drukarkach. Wymaga naprawy serwisowej (koszt ok. 100-200 zł).
+
+### Jak wykonać kalibrację w GK420d?
+Wyłącz drukarkę, przytrzymaj przycisk Feed, włącz drukarkę trzymając przycisk, puść gdy dioda mignie 2 razy. Drukarka automatycznie skalibruje czujniki.
+
+### Czy mogę używać zamiennika zasilacza do GK420?
+Nie zalecamy. Zasilacze zamienniki często mają niższą moc, co skutkuje bladym wydrukiem i przegrzewaniem. Oryginalny zasilacz Zebra to 20V/2.5A.
+
+### Ile kosztuje naprawa GK420 z czerwoną diodą?
+Zależy od przyczyny: wymiana czujnika 100-200 zł, wymiana głowicy 250-400 zł, naprawa płyty głównej 300-500 zł. Dokładna wycena po bezpłatnej diagnozie.
+
+### Czy seria GK420 jest jeszcze wspierana?
+Zebra oficjalnie zakończyła produkcję serii GK, ale jako autoryzowany serwis nadal naprawiamy te drukarki i mamy dostęp do części zamiennych.
+\`
   }
 ]
 
