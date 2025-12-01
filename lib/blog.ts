@@ -1503,3 +1503,96 @@ export function getRelatedPosts(currentSlug: string, limit: number = 3): BlogPos
     .slice(0, limit)
 }
 
+// Funkcja do wyszukiwania artykułów dla AI Chat
+export function searchBlogForAI(query: string): {
+  found: boolean
+  posts: Array<{
+    title: string
+    slug: string
+    excerpt: string
+    relevantContent: string
+  }>
+} {
+  const queryLower = query.toLowerCase()
+  const queryWords = queryLower.split(/\s+/).filter(w => w.length > 2)
+  
+  // Słowa kluczowe do ignorowania (stop words)
+  const stopWords = ['jak', 'czy', 'jest', 'się', 'nie', 'ale', 'lub', 'oraz', 'dla', 'przy', 'moja', 'mój', 'moje']
+  const meaningfulWords = queryWords.filter(w => !stopWords.includes(w))
+  
+  if (meaningfulWords.length === 0) {
+    return { found: false, posts: [] }
+  }
+  
+  // Scoring każdego artykułu
+  const scoredPosts = blogPosts.map(post => {
+    let score = 0
+    const titleLower = post.title.toLowerCase()
+    const excerptLower = post.excerpt.toLowerCase()
+    const contentLower = post.content.toLowerCase()
+    const tagsLower = post.tags.map(t => t.toLowerCase())
+    
+    for (const word of meaningfulWords) {
+      // Tytuł - najwyższy priorytet
+      if (titleLower.includes(word)) score += 10
+      
+      // Tagi - wysoki priorytet
+      if (tagsLower.some(tag => tag.includes(word))) score += 8
+      
+      // Excerpt - średni priorytet
+      if (excerptLower.includes(word)) score += 5
+      
+      // Content - niski priorytet
+      if (contentLower.includes(word)) score += 2
+    }
+    
+    // Bonus za dokładne frazy
+    if (titleLower.includes(queryLower)) score += 20
+    if (excerptLower.includes(queryLower)) score += 10
+    
+    // Znajdź najrelewantniejszy fragment (do 500 znaków)
+    let relevantContent = ''
+    if (score > 0) {
+      // Szukaj fragmentu zawierającego słowa kluczowe
+      const sentences = post.content.split(/[.!?]\s+/)
+      for (const sentence of sentences) {
+        const sentenceLower = sentence.toLowerCase()
+        if (meaningfulWords.some(word => sentenceLower.includes(word))) {
+          relevantContent += sentence.trim() + '. '
+          if (relevantContent.length > 500) break
+        }
+      }
+      // Fallback do excerpt
+      if (!relevantContent) {
+        relevantContent = post.excerpt
+      }
+    }
+    
+    return {
+      post,
+      score,
+      relevantContent: relevantContent.slice(0, 600)
+    }
+  })
+  
+  // Filtruj i sortuj
+  const relevantPosts = scoredPosts
+    .filter(p => p.score >= 5) // Minimum próg relevancji
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 2) // Max 2 artykuły
+  
+  if (relevantPosts.length === 0) {
+    return { found: false, posts: [] }
+  }
+  
+  return {
+    found: true,
+    posts: relevantPosts.map(p => ({
+      title: p.post.title,
+      slug: p.post.slug,
+      excerpt: p.post.excerpt,
+      relevantContent: p.relevantContent
+    }))
+  }
+}
+

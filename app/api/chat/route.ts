@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 import { SearchServiceClient } from '@google-cloud/discoveryengine'
 import OpenAI from 'openai'
+import { searchBlogForAI } from '@/lib/blog'
 
 const genAI = new GoogleGenAI({ apiKey: process.env.GOOGLE_API_KEY! })
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
@@ -560,12 +561,38 @@ export async function POST(req: NextRequest) {
       })
     }
 
-    // Wyszukaj w Vertex AI RAG
+    // === KROK 1: Szukaj w BLOGU (lokalnie, instant) ===
+    let blogContext = ''
+    let blogFound = false
+    let blogLinks: Array<{ title: string; slug: string }> = []
+
+    if (lastUserMessage) {
+      console.log('📝 Szukam w blogu dla:', lastUserMessage)
+      const blogResult = searchBlogForAI(lastUserMessage)
+      
+      if (blogResult.found) {
+        blogFound = true
+        blogContext = blogResult.posts.map(p => 
+          `[Artykuł: ${p.title}]\n${p.relevantContent}`
+        ).join('\n\n---\n\n')
+        blogLinks = blogResult.posts.map(p => ({ title: p.title, slug: p.slug }))
+        console.log(`✅ Znaleziono ${blogResult.posts.length} artykułów w blogu`)
+      } else {
+        console.log('❌ Nie znaleziono w blogu')
+      }
+    }
+
+    // === KROK 2: Szukaj w Vertex AI RAG (tylko jeśli blog nie wystarczy) ===
     let knowledgeContext = ''
     let ragContextFound = false
     let citations: Array<{ title: string; uri: string; pageNumber?: number }> = []
 
-    if (lastUserMessage) {
+    // Szukaj w RAG tylko jeśli:
+    // - Blog nie znalazł nic, LUB
+    // - Pytanie dotyczy konkretnego modelu (techniczne szczegóły)
+    const needsRAG = !blogFound || lastUserMessage.match(/zt\d|zd\d|gc\d|gk\d|tc\d|mc\d|ds\d/i)
+
+    if (lastUserMessage && needsRAG) {
       console.log('🔍 Szukam w Vertex AI RAG dla:', lastUserMessage)
       const searchResult = await searchVertexAI(lastUserMessage)
 
@@ -579,12 +606,27 @@ export async function POST(req: NextRequest) {
       } else {
         console.log('❌ Nie znaleziono kontekstu w Vertex AI')
       }
+    } else if (blogFound) {
+      console.log('⚡ Pominięto RAG - blog wystarczy')
     }
 
-    // Dodaj kontekst z bazy wiedzy do system prompt
-    const enhancedSystemPrompt = knowledgeContext
-      ? `${SYSTEM_PROMPT}\n\n=== KONTEKST Z BAZY WIEDZY ===\n${knowledgeContext}\n\nUżyj powyższych informacji z manuali aby udzielić precyzyjnej odpowiedzi. Jeśli informacje są relevantne, powołaj się na nie w odpowiedzi (np. "Zgodnie z manualem ZD421...").`
-      : SYSTEM_PROMPT
+    // === KROK 3: Zbuduj kontekst dla AI ===
+    let enhancedSystemPrompt = SYSTEM_PROMPT
+
+    // Dodaj kontekst z bloga (priorytet - po polsku!)
+    if (blogContext) {
+      enhancedSystemPrompt += `\n\n=== ARTYKUŁY Z NASZEGO BLOGA (użyj jako główne źródło!) ===\n${blogContext}\n\nJeśli informacje z bloga są relevantne, KONIECZNIE wspomnij o artykule i podaj link, np.: "Szczegółową instrukcję znajdziesz w naszym artykule: [Tytuł](/blog/slug)"`
+      
+      // Dodaj linki do blogów jako "citations"
+      if (blogLinks.length > 0) {
+        enhancedSystemPrompt += `\n\nDostępne artykuły do linkowania:\n${blogLinks.map(b => `- "${b.title}" → /blog/${b.slug}`).join('\n')}`
+      }
+    }
+
+    // Dodaj kontekst z RAG (techniczne szczegóły z manuali)
+    if (knowledgeContext) {
+      enhancedSystemPrompt += `\n\n=== KONTEKST Z MANUALI TECHNICZNYCH ===\n${knowledgeContext}\n\nUżyj informacji z manuali jako uzupełnienie. Jeśli są relevantne, powołaj się na nie (np. "Zgodnie z manualem ZD421...").`
+    }
 
     // Konwertuj messages do formatu Gemini (nowe API)
     const geminiHistory = messages.slice(0, -1).map((msg: any) => ({

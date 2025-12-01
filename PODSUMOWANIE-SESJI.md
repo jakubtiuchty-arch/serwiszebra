@@ -1,101 +1,160 @@
-# Podsumowanie sesji - 1 grudnia 2025
+# Podsumowanie sesji - 1 grudnia 2025 (część 2)
 
-> **W nowym oknie kontynuacja prac nad blogiem.**
+> **W nowym oknie: implementacja Blog + AI Chat**
 
 ---
 
 ## 📝 Blog - opublikowane artykuły (6 sztuk)
 
-| # | Tytuł | Slug | Kategoria | Zdjęcie |
-|---|-------|------|-----------|---------|
-| 1 | Drukarka Zebra nie drukuje - 7 najczęstszych przyczyn | `drukarka-zebra-nie-drukuje-przyczyny-rozwiazania` | Troubleshooting | ✅ `zebra-nie-drukuje.jpeg` |
-| 2 | Jak wyczyścić głowicę drukującą w drukarkach Zebra | `jak-wyczyscic-glowice-drukarki-zebra` | Poradniki | ✅ `czyszczenie-glowicy.jpeg` |
-| 3 | Wymiana głowicy drukującej Zebra - kiedy i ile kosztuje? | `wymiana-glowicy-drukarki-zebra-kiedy-konieczna-ile-kosztuje` | Poradniki | ✅ `wymiana-glowicy.jpeg` |
-| 4 | Czerwona dioda w Zebra GK420d/GK420t - diagnostyka | `zebra-gk420-czerwona-dioda-diagnostyka` | Troubleshooting | ✅ `czerwona-dioda-gk.jpeg` |
-| 5 | Blady wydruk w drukarce Zebra - 5 przyczyn | `blady-wydruk-drukarka-zebra-przyczyny-rozwiazania` | Troubleshooting | ✅ `blady-wydruk.jpeg` |
-| 6 | **Kalibracja drukarki Zebra - kompletny poradnik** | `kalibracja-drukarki-zebra-poradnik-krok-po-kroku` | Poradniki | ✅ `kalibracja.jpeg` |
+| # | Tytuł | Slug | Kategoria | Urządzenie |
+|---|-------|------|-----------|------------|
+| 1 | Drukarka Zebra nie drukuje - 7 najczęstszych przyczyn | `drukarka-zebra-nie-drukuje-przyczyny-rozwiazania` | Troubleshooting | Drukarki |
+| 2 | Jak wyczyścić głowicę drukującą w drukarkach Zebra | `jak-wyczyscic-glowice-drukarki-zebra` | Poradniki | Drukarki |
+| 3 | Wymiana głowicy drukującej Zebra - kiedy i ile kosztuje? | `wymiana-glowicy-drukarki-zebra-kiedy-konieczna-ile-kosztuje` | Poradniki | Drukarki |
+| 4 | Czerwona dioda w Zebra GK420d/GK420t - diagnostyka | `zebra-gk420-czerwona-dioda-diagnostyka` | Troubleshooting | Drukarki |
+| 5 | Blady wydruk w drukarce Zebra - 5 przyczyn | `blady-wydruk-drukarka-zebra-przyczyny-rozwiazania` | Troubleshooting | Drukarki |
+| 6 | **Kalibracja drukarki Zebra - kompletny poradnik** ✨ | `kalibracja-drukarki-zebra-poradnik-krok-po-kroku` | Poradniki | Drukarki |
 
 ---
 
-## 💰 Zaktualizowany cennik (wszystkie kategorie)
+## 🆕 Nowe funkcje bloga
 
-### Drukarki
-| Usługa | Nowa cena |
-|--------|-----------|
-| Wymiana głowicy drukującej | 450-2400 zł |
-| Wymiana wałka dociskowego | 150-290 zł |
-| Czyszczenie mechanizmu | 150-360 zł |
-| Naprawa/wymiana sensora | 150-550 zł |
+### Kategorie urządzeń (deviceType)
+Blog teraz ma **dwa poziomy filtrowania**:
 
-### Terminale
-| Usługa | Nowa cena |
-|--------|-----------|
-| Wymiana wyświetlacza | 799-1299 zł |
-| Naprawa modułu skanującego | 899-1299 zł |
-| Wymiana baterii | 199-449 zł |
-| Czyszczenie + konserwacja | 149-189 zł |
+1. **Typ urządzenia** (główna nawigacja):
+   - 🖨️ Drukarki
+   - 📱 Terminale
+   - 📊 Skanery
+   - 📋 Tablety
+   - 📦 Inne
 
-### Skanery
-| Usługa | Nowa cena |
-|--------|-----------|
-| Naprawa modułu skanującego | 299-2789 zł |
-| Wymiana okna skanera | 89-1289 zł |
-| Naprawa przycisku/spustu | 270-489 zł |
-| Czyszczenie optyki | 89-189 zł |
+2. **Typ treści** (kolorowe filtry):
+   - 🔵 Poradniki
+   - 🔴 Rozwiązywanie problemów
+   - 🟣 Porównania
+   - 🟢 Aktualności
 
 ---
 
-## 🎨 Zmiany w UI/UX
+## 🔧 AI Chat - naprawione
 
-- ✅ Link do Bloga **odblokowany** w nawigacji
-- ✅ Dodano obsługę `[X]` jako **czerwona ikona X** w markdown
-- ✅ Wszystkie zdjęcia blogowe **zoptymalizowane** (redukcja ~95%)
+### Problem: Chat nie działał na produkcji
+**Przyczyna:** Brak zmiennych środowiskowych w Vercel
+
+### Rozwiązanie:
+Dodano w Vercel → Settings → Environment Variables:
+- `GOOGLE_API_KEY`
+- `OPENAI_API_KEY`
+- `GOOGLE_CLOUD_PROJECT_ID`
+- `GOOGLE_APPLICATION_CREDENTIALS_JSON` (cały JSON w jednej linii)
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `SUPABASE_SERVICE_ROLE_KEY`
+
+### Poprawione źródła (citations):
+- Max 3 źródła
+- Filtrowanie "untitled" i plików `.book`
+- Kompaktowy wygląd w jednej linii
 
 ---
 
-## 📊 SEO
+## 📱 Responsywność mobile - naprawione
 
-- ✅ Zaktualizowany `sitemap.xml` o wszystkie artykuły blogowe
-- ✅ Każdy artykuł ma:
-  - Meta title/description
-  - Keywords
-  - Schema.org (Article, FAQ, BreadcrumbList)
-  - Open Graph tags
-  - Canonical URL
+| Element | Zmiana |
+|---------|--------|
+| Hero section | `min-h-[50vh]` na mobile (było 70vh) |
+| Pionowe paski | Ukryte na mobile |
+| Loga w header | Zmniejszone (TAKMA 90px, badge'y mniejsze) |
+| Tytuł "Serwis Zebra" | `text-2xl` na mobile (było 3xl) |
 
 ---
 
-## 📁 Pliki zmodyfikowane
+## 🔍 SEO 2025 - pełna zgodność
+
+- ✅ Schema.org: `TechArticle` (zamiast Article)
+- ✅ `wordCount`, `timeRequired` (ISO 8601)
+- ✅ Open Graph: pełne URL obrazków
+- ✅ Twitter Cards: images array
+- ✅ `inLanguage: pl-PL`
+- ✅ `isAccessibleForFree: true`
+
+---
+
+## 📋 DO ZROBIENIA (następna sesja)
+
+### 🚀 PRIORYTET: Integracja Blog + AI Chat
+
+**Cel:** AI Chat sprawdza najpierw blog (szybkie, polskie), potem Vertex RAG (techniczne, angielskie)
+
+**Plan implementacji:**
 
 ```
-lib/blog.ts                    - 6 artykułów (+ kalibracja)
-app/page.tsx                   - cennik + odblokowany link Blog
-app/api/chat/route.ts          - SYSTEM_PROMPT cennik
-app/blog/[slug]/page.tsx       - obsługa [X] w markdown
-public/sitemap.xml             - 6 artykułów blogowych
-public/blog/                   - 6 zoptymalizowanych zdjęć
+Pytanie PL
+    ↓
+┌───────────────────────────────────┐
+│ 1. Szukaj w blogu (lokalnie)      │  ← ~5-10ms (instant!)
+│    NIE wymaga tłumaczenia         │
+│    NIE wymaga API call            │
+└───────────────────────────────────┘
+    ↓
+┌───────────────────────────────────┐
+│ 2. Szukaj w Vertex AI RAG         │  ← Równolegle
+│    (angielskie manuali)           │
+└───────────────────────────────────┘
+    ↓
+┌───────────────────────────────────┐
+│ 3. Gemini 3 łączy oba źródła      │
+│    + linkuje do artykułów bloga   │
+└───────────────────────────────────┘
 ```
+
+**Co dodać:**
+1. Funkcja `searchBlogForAI(query)` w `lib/blog.ts`
+2. Integracja w `/api/chat/route.ts`
+3. Blog search RÓWNOLEGLE z RAG (nie sekwencyjnie)
+4. AI może cytować i linkować do artykułów
+
+**Korzyści:**
+- Szybsze odpowiedzi dla typowych pytań
+- Polski kontekst bez tłumaczenia
+- Linki do artykułów = SEO + konwersja
 
 ---
 
-## 📋 Do zrobienia (następna sesja)
+### 📝 Kolejne artykuły blogowe (wg strategii):
 
-Wg strategii content marketingowej, kolejne artykuły:
-1. Błąd "Ribbon In" / "Ribbon Out" - diagnostyka
-2. Porównanie ZT231 vs ZT411
-3. ~~Kalibracja drukarki Zebra - poradnik~~ ✅ ZROBIONE
-4. Porównanie ZD421 vs ZD621
-5. Koniec wsparcia (EOL) dla starych modeli
+1. ❌ Dryfowanie wydruku (Case Study EZD RP) - gotowy opis obrazka
+2. ❌ Błąd "Ribbon In" / "Ribbon Out" - diagnostyka
+3. ❌ Porównanie ZT231 vs ZT411
+4. ❌ Porównanie ZD421 vs ZD621
+5. ❌ Zebra ZXP - błędy Card Jam i Ribbon Error
+6. ❌ Koniec wsparcia (EOL) dla starych modeli
+
+---
+
+## 📁 Pliki zmodyfikowane w tej sesji
+
+```
+lib/blog.ts                    - 6 artykułów + deviceType + DEVICE_TYPES
+app/blog/page.tsx              - filtry urządzeń + kolorowe kategorie
+app/blog/[slug]/page.tsx       - SEO 2025 + badge urządzenia
+app/blog/layout.tsx            - metadata
+app/page.tsx                   - responsywność mobile
+app/api/chat/route.ts          - (bez zmian, Gemini 3 zostaje)
+components/AIChatBox.tsx       - ładniejsze źródła (max 3)
+public/blog/kalibracja.jpeg    - zdjęcie do artykułu
+public/sitemap.xml             - nowy URL artykułu
+```
 
 ---
 
 ## 🔗 Przydatne linki
 
 - Blog: https://serwiszebra.pl/blog
+- Produkcja: https://serwiszebraprod.vercel.app
 - Strategia: `Strategia Content Marketingowa dla SerwisZebra.pl.md`
-- Vertex AI RAG: manuele G-series załadowane
+- Vertex AI RAG: manuali G-series załadowane
 
 ---
 
-*Ostatnia aktualizacja: 1 grudnia 2025, ~18:30*
-
+*Ostatnia aktualizacja: 1 grudnia 2025, ~08:00*
