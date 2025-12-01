@@ -1564,7 +1564,7 @@ export function searchBlogForAI(query: string): {
     expandedWords.push(...variants)
   }
   // Usuń duplikaty
-  const uniqueWords = [...new Set(expandedWords)]
+  const uniqueWords = Array.from(new Set(expandedWords))
   
   console.log(`🔍 Blog search: "${query}" → słowa: [${meaningfulWords.join(', ')}] → rozszerzone: [${uniqueWords.slice(0, 10).join(', ')}${uniqueWords.length > 10 ? '...' : ''}]`)
   
