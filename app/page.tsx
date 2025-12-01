@@ -589,15 +589,15 @@ export default function HomePage() {
                         <Sparkles className="w-4 h-4 text-green-600" />
                       </h3>
                       <p className="text-xs text-gray-600">
-                        Pełna diagnoza problemu + szczegółowa wycena naprawy
+                        Gratis przy realizacji naprawy, w innym przypadku 99 zł + VAT
                       </p>
                     </div>
                     <div className="text-right ml-4">
                       <div className="text-lg font-bold text-green-600">
-                        GRATIS!
+                        GRATIS*
                       </div>
                       <div className="text-[10px] text-gray-500 mt-0.5">
-                        0 zł
+                        *przy naprawie
                       </div>
                     </div>
                   </div>
@@ -700,15 +700,15 @@ export default function HomePage() {
                         <Sparkles className="w-4 h-4 text-green-600" />
                       </h3>
                       <p className="text-xs text-gray-600">
-                        Pełna diagnoza problemu + szczegółowa wycena naprawy
+                        Gratis przy realizacji naprawy, w innym przypadku 99 zł + VAT
                       </p>
                     </div>
                     <div className="text-right ml-4">
                       <div className="text-lg font-bold text-green-600">
-                        GRATIS!
+                        GRATIS*
                       </div>
                       <div className="text-[10px] text-gray-500 mt-0.5">
-                        0 zł
+                        *przy naprawie
                       </div>
                     </div>
                   </div>
@@ -811,15 +811,15 @@ export default function HomePage() {
                         <Sparkles className="w-4 h-4 text-green-600" />
                       </h3>
                       <p className="text-xs text-gray-600">
-                        Pełna diagnoza problemu + szczegółowa wycena naprawy
+                        Gratis przy realizacji naprawy, w innym przypadku 99 zł + VAT
                       </p>
                     </div>
                     <div className="text-right ml-4">
                       <div className="text-lg font-bold text-green-600">
-                        GRATIS!
+                        GRATIS*
                       </div>
                       <div className="text-[10px] text-gray-500 mt-0.5">
-                        0 zł
+                        *przy naprawie
                       </div>
                     </div>
                   </div>
@@ -842,7 +842,7 @@ export default function HomePage() {
                     </div>
                     <div className="text-right ml-4">
                       <div className="text-lg font-bold text-gray-900">
-                        500-900 zł
+                        249-1499 zł
                       </div>
                       <div className="text-[10px] text-gray-500 mt-0.5">
                         + VAT 23%
@@ -863,7 +863,7 @@ export default function HomePage() {
                     </div>
                     <div className="text-right ml-4">
                       <div className="text-lg font-bold text-gray-900">
-                        200-350 zł
+                        199-449 zł
                       </div>
                       <div className="text-[10px] text-gray-500 mt-0.5">
                         + VAT 23%
@@ -884,7 +884,7 @@ export default function HomePage() {
                     </div>
                     <div className="text-right ml-4">
                       <div className="text-lg font-bold text-gray-900">
-                        150-300 zł
+                        149-449 zł
                       </div>
                       <div className="text-[10px] text-gray-500 mt-0.5">
                         + VAT 23%
@@ -905,7 +905,7 @@ export default function HomePage() {
                     </div>
                     <div className="text-right ml-4">
                       <div className="text-lg font-bold text-gray-900">
-                        100-180 zł
+                        149-189 zł
                       </div>
                       <div className="text-[10px] text-gray-500 mt-0.5">
                         + VAT 23%
@@ -922,15 +922,15 @@ export default function HomePage() {
                         <Sparkles className="w-4 h-4 text-green-600" />
                       </h3>
                       <p className="text-xs text-gray-600">
-                        Pełna diagnoza problemu + szczegółowa wycena naprawy
+                        Gratis przy realizacji naprawy, w innym przypadku 99 zł + VAT
                       </p>
                     </div>
                     <div className="text-right ml-4">
                       <div className="text-lg font-bold text-green-600">
-                        GRATIS!
+                        GRATIS*
                       </div>
                       <div className="text-[10px] text-gray-500 mt-0.5">
-                        0 zł
+                        *przy naprawie
                       </div>
                     </div>
                   </div>

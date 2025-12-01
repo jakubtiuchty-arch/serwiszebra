@@ -526,13 +526,13 @@ Głowica składa się z tysięcy mikroskopijnych elementów grzejnych. W drukarc
 
 Jako **autoryzowany partner serwisowy Zebra** oferujemy:
 
-[CHECK] **Bezpłatna diagnostyka** problemu*
+[CHECK] **Bezpłatna diagnostyka** problemu*  
 [CHECK] **Oryginalne głowice** Zebra
 [CHECK] **Profesjonalny montaż** + kalibracja
 [CHECK] **Gwarancja 12 miesięcy** na naprawę
 [CHECK] **Odbiór kurierem** z całej Polski
 
-*Diagnostyka bezpłatna w przypadku zlecenia naprawy w naszym serwisie.
+*Diagnostyka bezpłatna w przypadku realizacji naprawy w naszym serwisie. W innym przypadku koszt diagnostyki wynosi 99 zł + VAT.
 
 [**Wyślij drukarkę do wymiany głowicy →**](/#formularz)
 
@@ -782,12 +782,12 @@ Masz drukarkę GK420 z czerwoną diodą i nie wiesz co robić?
 
 Jako **autoryzowany partner serwisowy Zebra** oferujemy:
 
-[CHECK] **Bezpłatna diagnostyka** problemu*
+[CHECK] **Bezpłatna diagnostyka** problemu*  
 [CHECK] **Odbiór kurierem** z całej Polski
 [CHECK] **Gwarancja 12 miesięcy** na naprawę
 [CHECK] **Oryginalne części** Zebra
 
-*Diagnostyka bezpłatna w przypadku zlecenia naprawy w naszym serwisie.
+*Diagnostyka bezpłatna w przypadku realizacji naprawy w naszym serwisie. W innym przypadku koszt diagnostyki wynosi 99 zł + VAT.
 
 [**Wyślij drukarkę do diagnozy →**](/#formularz)
 
