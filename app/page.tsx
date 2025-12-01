@@ -161,9 +161,9 @@ export default function HomePage() {
           <nav className="pr-3 md:pr-0 pl-3 sm:pl-4">
             <div className="max-w-[1400px] mx-auto">
               <div className="flex items-center h-14 sm:h-16">
-                <div className="flex items-center gap-2 sm:gap-3 -ml-3 md:-ml-6">
-                  {/* TAKMA Logo - powiększone o 15% (110% × 1.05) */}
-                  <div className="w-[111px] sm:w-[148px] h-[46px] sm:h-[56px] relative">
+                <div className="flex items-center gap-1 sm:gap-3 -ml-2 sm:-ml-3 md:-ml-6">
+                  {/* TAKMA Logo */}
+                  <div className="w-[90px] sm:w-[130px] md:w-[148px] h-[38px] sm:h-[50px] md:h-[56px] relative">
                     <Image
                       src="/takma_logo_1.png"
                       alt="TAKMA Logo"
@@ -172,8 +172,8 @@ export default function HomePage() {
                     />
                   </div>
 
-                  {/* Premier Partner Logo - z hover effect na desktop */}
-                  <div className="w-16 sm:w-20 h-11 sm:h-[53px] relative">
+                  {/* Premier Partner Logo - mniejsze na mobile */}
+                  <div className="w-12 sm:w-16 md:w-20 h-8 sm:h-11 md:h-[53px] relative">
                     <Image
                       src="/premier-partner-1.png"
                       alt="Premier Partner"
@@ -182,8 +182,8 @@ export default function HomePage() {
                     />
                   </div>
 
-                  {/* Repair Specialist Logo - powiększone o 5% z hover effect na desktop */}
-                  <div className="w-[67px] sm:w-[84px] h-11 sm:h-[53px] relative">
+                  {/* Repair Specialist Logo - mniejsze na mobile */}
+                  <div className="w-[52px] sm:w-[70px] md:w-[84px] h-8 sm:h-11 md:h-[53px] relative">
                     <Image
                       src="/repair_specialist.png"
                       alt="Repair Specialist"
@@ -247,9 +247,9 @@ export default function HomePage() {
       <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
 
       {/* HERO + AI CHAT */}
-      <section className="min-h-[70vh] flex items-center justify-center px-3 sm:px-4 lg:px-6 py-12 relative overflow-hidden">
-        {/* Pionowe paski */}
-        <div className="absolute inset-0 pointer-events-none">
+      <section className="min-h-[50vh] sm:min-h-[60vh] md:min-h-[70vh] flex items-center justify-center px-3 sm:px-4 lg:px-6 py-8 sm:py-12 relative overflow-hidden">
+        {/* Pionowe paski - ukryte na mobile */}
+        <div className="absolute inset-0 pointer-events-none hidden sm:block">
           <div className="absolute top-0 left-[10%] w-1 h-full bg-gradient-to-b from-gray-200/20 via-gray-300/25 to-transparent"></div>
           <div className="absolute top-0 left-[25%] w-0.5 h-full bg-gradient-to-b from-gray-200/15 via-gray-300/20 to-transparent"></div>
           <div className="absolute top-0 left-[40%] w-1 h-full bg-gradient-to-b from-gray-200/20 via-gray-300/25 to-transparent"></div>
@@ -259,11 +259,11 @@ export default function HomePage() {
         </div>
 
         <div className="max-w-7xl mx-auto w-full relative z-10">
-          <div className="text-center mb-3">
-            <div className="inline-block px-4 py-2 bg-gradient-to-r from-blue-50 via-indigo-50 to-purple-50 backdrop-blur-sm rounded-full border border-gray-200 mb-1 shadow-sm">
-              <p className="text-sm font-medium bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">Autoryzowany</p>
+          <div className="text-center mb-2 sm:mb-3">
+            <div className="inline-block px-3 sm:px-4 py-1.5 sm:py-2 bg-gradient-to-r from-blue-50 via-indigo-50 to-purple-50 backdrop-blur-sm rounded-full border border-gray-200 mb-1 shadow-sm">
+              <p className="text-xs sm:text-sm font-medium bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">Autoryzowany</p>
             </div>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold text-gray-900 tracking-tight leading-tight">
+            <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-semibold text-gray-900 tracking-tight leading-tight">
               Serwis Zebra
             </h1>
           </div>
