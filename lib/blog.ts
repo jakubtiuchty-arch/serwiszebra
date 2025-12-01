@@ -1503,6 +1503,39 @@ export function getRelatedPosts(currentSlug: string, limit: number = 3): BlogPos
     .slice(0, limit)
 }
 
+// Słownik synonimów/odmian słów (stemming po polsku)
+const WORD_STEMS: Record<string, string[]> = {
+  'kalibracja': ['kalibracja', 'kalibrować', 'skalibrować', 'kalibruj', 'kalibrowanie', 'kalibracj'],
+  'czyszczenie': ['czyszczenie', 'czyścić', 'wyczyścić', 'czyszcz', 'czyść'],
+  'głowica': ['głowica', 'głowic', 'głowicę', 'głowicy'],
+  'wymiana': ['wymiana', 'wymienić', 'wymień', 'wymiany', 'wymian'],
+  'drukarka': ['drukarka', 'drukark', 'drukarki', 'drukarkę', 'drukarką'],
+  'naprawa': ['naprawa', 'naprawić', 'napraw', 'naprawy'],
+  'błąd': ['błąd', 'błęd', 'błędy', 'error'],
+  'dioda': ['dioda', 'diody', 'lampka', 'led'],
+  'czerwona': ['czerwona', 'czerwony', 'czerwon'],
+  'blady': ['blady', 'blade', 'bladego', 'jasny', 'słaby'],
+  'wydruk': ['wydruk', 'wydruku', 'drukuje', 'drukować', 'druk'],
+  'ribbon': ['ribbon', 'taśma', 'taśmy', 'taśmę'],
+  'sensor': ['sensor', 'czujnik', 'czujnika'],
+  'papier': ['papier', 'papieru', 'etykiet', 'etykiety'],
+}
+
+// Funkcja do normalizacji słowa (znajdź rdzeń)
+function normalizeWord(word: string): string[] {
+  const wordLower = word.toLowerCase()
+  
+  // Sprawdź czy słowo pasuje do któregoś z rdzeni
+  for (const [stem, variants] of Object.entries(WORD_STEMS)) {
+    if (variants.some(v => wordLower.includes(v) || v.includes(wordLower))) {
+      return variants // Zwróć wszystkie warianty tego rdzenia
+    }
+  }
+  
+  // Jeśli nie znaleziono, zwróć oryginalne słowo
+  return [wordLower]
+}
+
 // Funkcja do wyszukiwania artykułów dla AI Chat
 export function searchBlogForAI(query: string): {
   found: boolean
@@ -1517,12 +1550,23 @@ export function searchBlogForAI(query: string): {
   const queryWords = queryLower.split(/\s+/).filter(w => w.length > 2)
   
   // Słowa kluczowe do ignorowania (stop words)
-  const stopWords = ['jak', 'czy', 'jest', 'się', 'nie', 'ale', 'lub', 'oraz', 'dla', 'przy', 'moja', 'mój', 'moje']
+  const stopWords = ['jak', 'czy', 'jest', 'się', 'nie', 'ale', 'lub', 'oraz', 'dla', 'przy', 'moja', 'mój', 'moje', 'mojej', 'moją', 'mogę', 'można']
   const meaningfulWords = queryWords.filter(w => !stopWords.includes(w))
   
   if (meaningfulWords.length === 0) {
     return { found: false, posts: [] }
   }
+  
+  // Rozszerz słowa o ich warianty (stemming)
+  const expandedWords: string[] = []
+  for (const word of meaningfulWords) {
+    const variants = normalizeWord(word)
+    expandedWords.push(...variants)
+  }
+  // Usuń duplikaty
+  const uniqueWords = [...new Set(expandedWords)]
+  
+  console.log(`🔍 Blog search: "${query}" → słowa: [${meaningfulWords.join(', ')}] → rozszerzone: [${uniqueWords.slice(0, 10).join(', ')}${uniqueWords.length > 10 ? '...' : ''}]`)
   
   // Scoring każdego artykułu
   const scoredPosts = blogPosts.map(post => {
@@ -1531,10 +1575,14 @@ export function searchBlogForAI(query: string): {
     const excerptLower = post.excerpt.toLowerCase()
     const contentLower = post.content.toLowerCase()
     const tagsLower = post.tags.map(t => t.toLowerCase())
+    const slugLower = post.slug.toLowerCase()
     
-    for (const word of meaningfulWords) {
+    for (const word of uniqueWords) {
       // Tytuł - najwyższy priorytet
       if (titleLower.includes(word)) score += 10
+      
+      // Slug - wysoki priorytet (slug zawiera kluczowe słowa)
+      if (slugLower.includes(word)) score += 8
       
       // Tagi - wysoki priorytet
       if (tagsLower.some(tag => tag.includes(word))) score += 8
@@ -1542,13 +1590,9 @@ export function searchBlogForAI(query: string): {
       // Excerpt - średni priorytet
       if (excerptLower.includes(word)) score += 5
       
-      // Content - niski priorytet
+      // Content - niski priorytet (ale tylko raz na słowo)
       if (contentLower.includes(word)) score += 2
     }
-    
-    // Bonus za dokładne frazy
-    if (titleLower.includes(queryLower)) score += 20
-    if (excerptLower.includes(queryLower)) score += 10
     
     // Znajdź najrelewantniejszy fragment (do 500 znaków)
     let relevantContent = ''
@@ -1557,7 +1601,7 @@ export function searchBlogForAI(query: string): {
       const sentences = post.content.split(/[.!?]\s+/)
       for (const sentence of sentences) {
         const sentenceLower = sentence.toLowerCase()
-        if (meaningfulWords.some(word => sentenceLower.includes(word))) {
+        if (uniqueWords.some(word => sentenceLower.includes(word))) {
           relevantContent += sentence.trim() + '. '
           if (relevantContent.length > 500) break
         }
@@ -1575,15 +1619,18 @@ export function searchBlogForAI(query: string): {
     }
   })
   
-  // Filtruj i sortuj
+  // Filtruj i sortuj - WYŻSZY PRÓG dla lepszej trafności
   const relevantPosts = scoredPosts
-    .filter(p => p.score >= 5) // Minimum próg relevancji
+    .filter(p => p.score >= 15) // Wyższy próg = tylko naprawdę relevantne artykuły
     .sort((a, b) => b.score - a.score)
-    .slice(0, 2) // Max 2 artykuły
+    .slice(0, 1) // Max 1 artykuł - tylko najlepiej pasujący
   
   if (relevantPosts.length === 0) {
+    console.log('❌ Blog: brak wystarczająco relevantnych artykułów')
     return { found: false, posts: [] }
   }
+  
+  console.log(`✅ Blog: znaleziono "${relevantPosts[0].post.title}" (score: ${relevantPosts[0].score})`)
   
   return {
     found: true,

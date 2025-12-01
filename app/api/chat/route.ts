@@ -537,13 +537,20 @@ export async function POST(req: NextRequest) {
   const startTime = Date.now()
 
   try {
-    const { messages, sessionId } = await req.json()
+    const { messages, sessionId, attachments } = await req.json()
+    
+    // Sprawdź czy są załączniki (obrazy/wideo)
+    const hasAttachments = attachments && attachments.length > 0
+    if (hasAttachments) {
+      console.log(`📎 Otrzymano ${attachments.length} załączników:`, attachments.map((a: any) => `${a.name} (${a.type})`))
+    }
 
     // Pobierz ostatnią wiadomość użytkownika
     const lastUserMessage = messages[messages.length - 1]?.content || ''
 
     // 🚫 PRE-FILTR: Odrzuć oczywiste off-topic ZANIM wywołamy drogie modele AI
-    if (lastUserMessage && messages.length <= 2 && !isZebraRelated(lastUserMessage)) {
+    // ALE: jeśli są załączniki (zdjęcia/wideo), przepuść - użytkownik może pokazywać urządzenie Zebra
+    if (lastUserMessage && messages.length <= 2 && !isZebraRelated(lastUserMessage) && !hasAttachments) {
       console.log('🚫 Off-topic message rejected:', lastUserMessage.substring(0, 50))
       
       // Zapisz log (bez kosztu API)
@@ -634,15 +641,40 @@ export async function POST(req: NextRequest) {
       parts: [{ text: msg.content }],
     }))
 
-    // Utwórz prompt z historią i system instruction
-    const fullPrompt = `${enhancedSystemPrompt}\n\n${geminiHistory.map((msg: any) =>
+    // Buduj content dla ostatniej wiadomości użytkownika
+    const userParts: any[] = []
+    
+    // Dodaj tekst (z system promptem i historią)
+    const textPrompt = `${enhancedSystemPrompt}\n\n${geminiHistory.map((msg: any) =>
       `${msg.role === 'user' ? 'User' : 'Assistant'}: ${msg.parts[0].text}`
-    ).join('\n\n')}\n\nUser: ${lastUserMessage}\nAssistant:`
+    ).join('\n\n')}\n\nUser: ${lastUserMessage}${hasAttachments ? '\n\n[Użytkownik załączył zdjęcie/wideo urządzenia - przeanalizuj je i zdiagnozuj problem]' : ''}\nAssistant:`
+    
+    userParts.push({ text: textPrompt })
+    
+    // Dodaj załączniki jako inlineData (obrazy/wideo)
+    if (hasAttachments) {
+      for (const attachment of attachments) {
+        // Gemini obsługuje: image/jpeg, image/png, image/gif, image/webp, video/mp4, video/mpeg, video/mov, video/avi, video/webm
+        const supportedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'video/mp4', 'video/mpeg', 'video/quicktime', 'video/x-msvideo', 'video/webm']
+        
+        if (supportedTypes.some(t => attachment.type.startsWith(t.split('/')[0]))) {
+          userParts.push({
+            inlineData: {
+              mimeType: attachment.type,
+              data: attachment.data
+            }
+          })
+          console.log(`✅ Dodano załącznik do Gemini: ${attachment.name} (${attachment.type})`)
+        } else {
+          console.log(`⚠️ Nieobsługiwany typ pliku: ${attachment.type}`)
+        }
+      }
+    }
 
-    // Wywołaj model z nowym API (streaming)
+    // Wywołaj model z nowym API (streaming) - z multimodal jeśli są załączniki
     const responseStream = await genAI.models.generateContentStream({
-      model: 'gemini-3-pro-preview',
-      contents: fullPrompt,
+      model: 'gemini-2.0-flash',  // Flash obsługuje multimodal i jest szybszy
+      contents: [{ role: 'user', parts: userParts }],
     })
 
     // Stwórz readable stream i zbieraj odpowiedź
@@ -660,10 +692,17 @@ export async function POST(req: NextRequest) {
             }
           }
 
-          // Na końcu dodaj citations jako JSON (jeśli są)
-          if (citations.length > 0) {
-            const citationsJson = JSON.stringify({ citations })
-            controller.enqueue(encoder.encode(`\n\n__CITATIONS__${citationsJson}`))
+          // Na końcu dodaj citations i blog links jako JSON (jeśli są)
+          const hasData = citations.length > 0 || blogLinks.length > 0
+          if (hasData) {
+            const dataJson = JSON.stringify({ 
+              citations,
+              blogLinks: blogLinks.map(b => ({
+                title: b.title,
+                url: `/blog/${b.slug}`
+              }))
+            })
+            controller.enqueue(encoder.encode(`\n\n__CITATIONS__${dataJson}`))
           }
 
           controller.close()
@@ -672,11 +711,11 @@ export async function POST(req: NextRequest) {
           const responseTime = Date.now() - startTime
           saveChatLog({
             sessionId: sessionId || 'unknown',
-            userMessage: lastUserMessage,
+            userMessage: lastUserMessage + (hasAttachments ? ` [+${attachments.length} załączników]` : ''),
             aiResponse: fullAiResponse,
             ragContextFound,
             responseTimeMs: responseTime,
-            modelUsed: 'gemini-3-pro-preview + vertex-ai-rag',
+            modelUsed: `gemini-2.0-flash${hasAttachments ? ' (multimodal)' : ''} + vertex-ai-rag`,
           }).catch((err: any) => console.error('Błąd zapisywania logu czatu:', err))
 
         } catch (error) {

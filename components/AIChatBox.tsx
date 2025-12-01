@@ -21,10 +21,16 @@ interface Citation {
   pageNumber?: number
 }
 
+interface BlogLink {
+  title: string
+  url: string
+}
+
 interface Message {
   role: 'user' | 'assistant'
   content: string
   citations?: Citation[]
+  blogLinks?: BlogLink[]
 }
 
 const placeholders = [
@@ -219,11 +225,44 @@ export default function AIChatBox() {
     return 'urządzenie'
   }
 
+  // Konwersja pliku na base64
+  const fileToBase64 = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader()
+      reader.readAsDataURL(file)
+      reader.onload = () => {
+        const result = reader.result as string
+        // Usuń prefix "data:image/jpeg;base64," - zostawiamy tylko base64
+        const base64 = result.split(',')[1]
+        resolve(base64)
+      }
+      reader.onerror = error => reject(error)
+    })
+  }
+
   const handleSend = async (text?: string) => {
     const messageText = text || input
-    if (!messageText.trim() || loading) return
+    if ((!messageText.trim() && attachedFiles.length === 0) || loading) return
 
     setInput('')
+    
+    // Przygotuj załączniki jako base64
+    const attachments: Array<{ type: string; data: string; name: string }> = []
+    for (const file of attachedFiles) {
+      try {
+        const base64 = await fileToBase64(file)
+        attachments.push({
+          type: file.type,
+          data: base64,
+          name: file.name
+        })
+      } catch (e) {
+        console.error('Błąd konwersji pliku:', e)
+      }
+    }
+    
+    // Wyczyść załączniki po wysłaniu
+    setAttachedFiles([])
 
     // Detect device type from first user message
     if (messages.length === 0) {
@@ -231,7 +270,12 @@ export default function AIChatBox() {
       setDetectedDevice(device)
     }
 
-    const userMessage: Message = { role: 'user', content: messageText }
+    // Pokaż załączniki w wiadomości użytkownika
+    const displayContent = attachments.length > 0
+      ? `${messageText}\n\n📎 Załączono: ${attachments.map(a => a.name).join(', ')}`
+      : messageText
+
+    const userMessage: Message = { role: 'user', content: displayContent }
     setMessages(prev => [...prev, userMessage])
     setLoading(true)
 
@@ -240,8 +284,9 @@ export default function AIChatBox() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          messages: [...messages, userMessage],
-          sessionId
+          messages: [...messages, { role: 'user', content: messageText }],
+          sessionId,
+          attachments: attachments.length > 0 ? attachments : undefined
         }),
       })
 
@@ -260,25 +305,27 @@ export default function AIChatBox() {
 
           assistantMessage += decoder.decode(value)
 
-          // Sprawdź czy są citations na końcu
+          // Sprawdź czy są citations i blogLinks na końcu
           const citationsMatch = assistantMessage.match(/__CITATIONS__(.+)$/)
           let content = assistantMessage
           let citations: Citation[] | undefined = undefined
+          let blogLinks: BlogLink[] | undefined = undefined
 
           if (citationsMatch) {
-            // Oddziel treść od citations
+            // Oddziel treść od citations/blogLinks
             content = assistantMessage.substring(0, citationsMatch.index)
             try {
-              const citationsData = JSON.parse(citationsMatch[1])
-              citations = citationsData.citations
+              const data = JSON.parse(citationsMatch[1])
+              citations = data.citations
+              blogLinks = data.blogLinks
             } catch (e) {
-              console.error('Błąd parsowania citations:', e)
+              console.error('Błąd parsowania citations/blogLinks:', e)
             }
           }
 
           setMessages(prev => [
             ...prev.slice(0, -1),
-            { role: 'assistant', content, citations }
+            { role: 'assistant', content, citations, blogLinks }
           ])
         }
       }
@@ -346,7 +393,25 @@ export default function AIChatBox() {
                     </p>
                   </div>
 
-                  {/* Citations - tylko dla odpowiedzi AI */}
+                  {/* Blog Links - tylko dla odpowiedzi AI */}
+                  {msg.role === 'assistant' && msg.blogLinks && msg.blogLinks.length > 0 && (
+                    <div className="flex flex-wrap items-center gap-2 px-3 py-2 bg-blue-50 rounded-xl border border-blue-100">
+                      <span className="text-xs font-medium text-blue-700">📚 Przeczytaj więcej:</span>
+                      {msg.blogLinks.map((link, idx) => (
+                        <a
+                          key={idx}
+                          href={link.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-xs text-blue-600 hover:text-blue-800 underline underline-offset-2 hover:no-underline transition-colors"
+                        >
+                          {link.title}
+                        </a>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Citations z manuali - tylko dla odpowiedzi AI */}
                   {msg.role === 'assistant' && msg.citations && msg.citations.length > 0 && (() => {
                     // Filtruj i formatuj źródła
                     const cleanCitations = msg.citations
@@ -371,7 +436,7 @@ export default function AIChatBox() {
 
                     return (
                       <div className="flex items-center gap-2 px-3 py-1.5 bg-gray-50 rounded-xl text-xs text-gray-500">
-                        <span className="font-medium">Źródło:</span>
+                        <span className="font-medium">📖 Manual:</span>
                         <span className="truncate">
                           {cleanCitations.map(c => c.cleanTitle).join(' • ')}
                         </span>
