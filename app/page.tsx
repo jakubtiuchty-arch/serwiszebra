@@ -731,7 +731,7 @@ export default function HomePage() {
                     </div>
                     <div className="text-right ml-4">
                       <div className="text-lg font-bold text-gray-900">
-                        250-450 zł
+                        299-2789 zł
                       </div>
                       <div className="text-[10px] text-gray-500 mt-0.5">
                         + VAT 23%
@@ -752,7 +752,7 @@ export default function HomePage() {
                     </div>
                     <div className="text-right ml-4">
                       <div className="text-lg font-bold text-gray-900">
-                        180-300 zł
+                        89-1289 zł
                       </div>
                       <div className="text-[10px] text-gray-500 mt-0.5">
                         + VAT 23%
@@ -773,7 +773,7 @@ export default function HomePage() {
                     </div>
                     <div className="text-right ml-4">
                       <div className="text-lg font-bold text-gray-900">
-                        120-200 zł
+                        270-489 zł
                       </div>
                       <div className="text-[10px] text-gray-500 mt-0.5">
                         + VAT 23%
@@ -794,7 +794,7 @@ export default function HomePage() {
                     </div>
                     <div className="text-right ml-4">
                       <div className="text-lg font-bold text-gray-900">
-                        80-150 zł
+                        89-189 zł
                       </div>
                       <div className="text-[10px] text-gray-500 mt-0.5">
                         + VAT 23%

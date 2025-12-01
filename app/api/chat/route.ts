@@ -378,10 +378,10 @@ TERMINALE:
 - Czyszczenie + konserwacja: 149-189 zł
 
 SKANERY:
-- Naprawa modułu skanującego: 250-450 zł
-- Wymiana okna skanera: 180-300 zł
-- Naprawa przycisku/spustu: 120-200 zł
-- Czyszczenie optyki: 80-150 zł
+- Naprawa modułu skanującego: 299-2789 zł
+- Wymiana okna skanera: 89-1289 zł
+- Naprawa przycisku/spustu: 270-489 zł
+- Czyszczenie optyki: 89-189 zł
 
 WAŻNE O DIAGNOSTYCE:
 - Diagnostyka w serwisie jest bezpłatna TYLKO gdy klient zaakceptuje naprawę
