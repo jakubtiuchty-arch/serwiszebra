@@ -571,7 +571,7 @@ Standardowa wymiana trwa 1-2 dni robocze od momentu dostarczenia drukarki. W try
       metaDescription: 'Czerwona dioda w Zebra GK420d/GK420t? Poznaj wszystkie sekwencje mrugania: ciągła, pulsująca, migająca. Instrukcja diagnostyki krok po kroku od certyfikowanych techników.',
       keywords: ['zebra gk420d czerwona dioda', 'gk420t lampka czerwona', 'zebra gk420 błąd', 'gk420d nie drukuje']
     },
-    content: \`
+    content: `
 ## Problem: Czerwona dioda w drukarce Zebra GK420
 
 Drukarki Zebra serii GK (GK420d, GK420t, GX420d, GX420t) mają minimalistyczny interfejs - tylko **jeden przycisk** i **jedną diodę LED**. To sprawia, że interpretacja błędów może być trudna, bo drukarka "komunikuje się" poprzez różne sekwencje świecenia i mrugania.
@@ -809,7 +809,7 @@ Zależy od przyczyny: wymiana czujnika 100-200 zł, wymiana głowicy 250-400 zł
 
 ### Czy seria GK420 jest jeszcze wspierana?
 Zebra oficjalnie zakończyła produkcję serii GK, ale jako autoryzowany serwis nadal naprawiamy te drukarki i mamy dostęp do części zamiennych.
-\`
+`
   }
 ]
 
