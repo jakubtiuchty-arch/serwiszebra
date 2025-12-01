@@ -366,10 +366,10 @@ DROBNE PROBLEMY (pomóż rozwiązać samodzielnie):
 CENNIK ORIENTACYJNY (zawsze wspominaj że to orientacyjne ceny):
 
 DRUKARKI:
-- Wymiana głowicy drukującej: 300-550 zł
-- Wymiana wałka dociskowego: 120-200 zł
-- Czyszczenie mechanizmu: 80-150 zł
-- Naprawa/wymiana sensora: 150-300 zł
+- Wymiana głowicy drukującej: 450-2400 zł
+- Wymiana wałka dociskowego: 150-290 zł
+- Czyszczenie mechanizmu: 150-360 zł
+- Naprawa/wymiana sensora: 150-550 zł
 
 TERMINALE:
 - Wymiana wyświetlacza: 400-800 zł

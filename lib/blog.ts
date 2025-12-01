@@ -145,7 +145,7 @@ Przyłóż kawałek białej kartki do ribbonu i przetrzyj palcem. Strona, która
 
 > **⚠️ Uwaga:** Jeśli czyszczenie nie pomaga, głowica może wymagać wymiany. Jest to część eksploatacyjna o żywotności 1-3 milionów cm wydruku.
 
-**Koszt wymiany głowicy w naszym serwisie: 300-550 zł** (w zależności od modelu)
+**Koszt wymiany głowicy w naszym serwisie: 450-2400 zł** (w zależności od modelu)
 
 ---
 
@@ -230,7 +230,7 @@ Jako **autoryzowany partner serwisowy Zebra** oferujemy:
 ## FAQ - Najczęściej zadawane pytania
 
 ### Ile kosztuje naprawa drukarki Zebra?
-Ceny napraw zaczynają się od 80 zł za czyszczenie mechanizmu. Wymiana głowicy to koszt 300-550 zł w zależności od modelu. Dokładną wycenę otrzymasz po bezpłatnej diagnozie.
+Ceny napraw zaczynają się od 150 zł za czyszczenie mechanizmu. Wymiana głowicy to koszt 450-2400 zł w zależności od modelu. Dokładną wycenę otrzymasz po bezpłatnej diagnozie.
 
 ### Jak długo trwa naprawa?
 Standardowa naprawa trwa 3-5 dni roboczych. Oferujemy również tryb express (1-2 dni) za dodatkową opłatą.
@@ -374,7 +374,7 @@ Nawet przy prawidłowej konserwacji głowica zużywa się. Oznaki konieczności 
     tags: ['głowica drukująca', 'wymiana głowicy', 'koszt naprawy', 'drukarka zebra'],
     seo: {
       metaTitle: 'Wymiana głowicy drukującej Zebra - kiedy i ile kosztuje? | Serwis Zebra',
-      metaDescription: 'Kiedy wymienić głowicę w drukarce Zebra? Poznaj objawy zużycia, koszty wymiany (300-550 zł) i dowiedz się, czy warto robić to samodzielnie. Poradnik od certyfikowanych techników.',
+      metaDescription: 'Kiedy wymienić głowicę w drukarce Zebra? Poznaj objawy zużycia, koszty wymiany (450-2400 zł) i dowiedz się, czy warto robić to samodzielnie. Poradnik od certyfikowanych techników.',
       keywords: ['wymiana głowicy zebra', 'głowica drukująca zebra cena', 'koszt wymiany głowicy', 'głowica zebra zd420']
     },
     content: `
