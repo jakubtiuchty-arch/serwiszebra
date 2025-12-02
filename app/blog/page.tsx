@@ -182,7 +182,7 @@ export default function BlogPage() {
               </button>
             </div>
           ) : (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
               {filteredPosts.map((post) => (
                 <article 
                   key={post.slug}
@@ -190,7 +190,7 @@ export default function BlogPage() {
                 >
                   {/* Cover Image */}
                   <Link href={`/blog/${post.slug}`}>
-                    <div className="relative h-48 bg-gradient-to-br from-blue-100 to-indigo-100 overflow-hidden">
+                    <div className="relative h-40 sm:h-48 bg-gradient-to-br from-blue-100 to-indigo-100 overflow-hidden">
                       {post.coverImage && post.coverImage !== '/blog/placeholder.jpg' ? (
                         <Image
                           src={post.coverImage}
@@ -216,24 +216,24 @@ export default function BlogPage() {
                   </Link>
 
                   {/* Content */}
-                  <div className="p-6">
+                  <div className="p-4 sm:p-6">
                     <Link href={`/blog/${post.slug}`}>
-                      <h2 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors line-clamp-2">
+                      <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors line-clamp-2">
                         {post.title}
                       </h2>
                     </Link>
-                    <p className="text-gray-600 text-sm mb-4 line-clamp-3">
+                    <p className="text-gray-600 text-xs sm:text-sm mb-4 line-clamp-3">
                       {post.excerpt}
                     </p>
 
                     {/* Tags */}
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {post.tags.slice(0, 3).map((tag) => (
+                    <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-4">
+                      {post.tags.slice(0, 2).map((tag) => (
                         <span 
                           key={tag}
-                          className="inline-flex items-center gap-1 px-2 py-1 bg-gray-100 rounded text-xs text-gray-600"
+                          className="inline-flex items-center gap-1 px-1.5 sm:px-2 py-0.5 sm:py-1 bg-gray-100 rounded text-[10px] sm:text-xs text-gray-600"
                         >
-                          <Tag className="w-3 h-3" />
+                          <Tag className="w-2.5 h-2.5 sm:w-3 sm:h-3 hidden sm:block" />
                           {tag}
                         </span>
                       ))}
@@ -241,26 +241,30 @@ export default function BlogPage() {
 
                     {/* Meta */}
                     <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-                      <div className="flex items-center gap-4 text-sm text-gray-500">
+                      <div className="flex items-center gap-2 sm:gap-4 text-xs sm:text-sm text-gray-500">
                         <span className="flex items-center gap-1">
-                          <Calendar className="w-4 h-4" />
-                          {new Date(post.publishedAt).toLocaleDateString('pl-PL', {
+                          <Calendar className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                          <span className="hidden sm:inline">{new Date(post.publishedAt).toLocaleDateString('pl-PL', {
                             day: 'numeric',
                             month: 'short',
                             year: 'numeric'
-                          })}
+                          })}</span>
+                          <span className="sm:hidden">{new Date(post.publishedAt).toLocaleDateString('pl-PL', {
+                            day: 'numeric',
+                            month: 'short'
+                          })}</span>
                         </span>
                         <span className="flex items-center gap-1">
-                          <Clock className="w-4 h-4" />
+                          <Clock className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                           {post.readingTime} min
                         </span>
                       </div>
                       <Link 
                         href={`/blog/${post.slug}`}
-                        className="text-blue-600 hover:text-blue-700 font-medium text-sm flex items-center gap-1"
+                        className="text-blue-600 hover:text-blue-700 font-medium text-xs sm:text-sm flex items-center gap-1"
                       >
                         Czytaj
-                        <ArrowRight className="w-4 h-4" />
+                        <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                       </Link>
                     </div>
                   </div>

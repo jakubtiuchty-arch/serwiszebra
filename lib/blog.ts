@@ -1817,7 +1817,7 @@ Uruchom wbudowane narzędzie diagnostyczne:
 4. Jeśli test **zielony** - problem z konfiguracją
 5. Jeśli test **czerwony** - prawdopodobnie awaria sprzętowa
 
-> **💡 Pro tip:** DDT to Twój najlepszy przyjaciel przy diagnostyce. Znajdziesz go w szufladzie aplikacji - jest preinstalowany na każdym terminalu Zebra.
+> **💡 Pro tip:** DDT to Twój najlepszy przyjaciel przy diagnostyce. Znajdziesz go na liście wszystkich aplikacji - jest preinstalowany na każdym terminalu Zebra.
 
 ### Krok 3: Soft reset
 
@@ -1929,7 +1929,7 @@ DataWedge kontroluje, które typy kodów są rozpoznawane. Domyślnie niektóre 
 | EAN-8 | EAN-8 |
 | UPC-A | UPC-A |
 
-> **💡 Pro tip:** Dla szybszego skanowania **wyłącz nieużywane dekodery**. Im mniej aktywnych symbologii, tym szybsze dekodowanie. W magazynie zwykle wystarczy Code 128 + EAN-13.
+> **💡 Pro tip:** Dla szybszego skanowania **wyłącz nieużywane dekodery**. Im mniej aktywnych symbologii, tym szybsze dekodowanie.
 
 ### Imager vs Laser - co czyta co?
 

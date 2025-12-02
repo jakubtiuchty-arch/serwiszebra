@@ -247,14 +247,14 @@ export default function BlogPostPage({
                 {post.title}
               </h1>
 
-              <p className="text-xl text-gray-600 mb-6">
+              <p className="text-base sm:text-xl text-gray-600 mb-6">
                 {post.excerpt}
               </p>
 
               {/* Author & Date */}
-              <div className="w-full flex items-center justify-between pb-6 border-b border-gray-200">
+              <div className="w-full flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-gray-200">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center">
+                  <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center flex-shrink-0">
                     <User className="w-5 h-5 text-white" />
                   </div>
                   <div>
@@ -294,7 +294,7 @@ export default function BlogPostPage({
 
             {/* Content */}
             <div 
-              className="prose prose-lg max-w-none prose-headings:font-bold prose-headings:text-gray-900 prose-p:text-gray-700 prose-a:text-blue-600 prose-strong:text-gray-900 prose-code:bg-gray-100 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-pre:bg-gray-900 prose-blockquote:border-blue-500 prose-blockquote:bg-blue-50 prose-blockquote:py-1 prose-blockquote:not-italic prose-img:rounded-xl"
+              className="prose prose-sm sm:prose-lg max-w-none prose-headings:font-bold prose-headings:text-gray-900 prose-p:text-gray-700 prose-a:text-blue-600 prose-strong:text-gray-900 prose-code:bg-gray-100 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-pre:bg-gray-900 prose-blockquote:border-blue-500 prose-blockquote:bg-blue-50 prose-blockquote:py-1 prose-blockquote:not-italic prose-img:rounded-xl"
               dangerouslySetInnerHTML={{ __html: parseMarkdown(post.content) }}
             />
 
@@ -317,12 +317,12 @@ export default function BlogPostPage({
             {/* Share */}
             <div className="mt-8 pt-8 border-t border-gray-200">
               <h3 className="text-sm font-semibold text-gray-500 uppercase mb-4">Udostępnij</h3>
-              <div className="flex gap-3">
+              <div className="flex flex-wrap gap-2 sm:gap-3">
                 <a
                   href={`https://www.facebook.com/sharer/sharer.php?u=https://serwiszebra.pl/blog/${post.slug}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
+                  className="px-3 sm:px-4 py-2 bg-blue-600 text-white rounded-lg text-xs sm:text-sm font-medium hover:bg-blue-700 transition-colors"
                 >
                   Facebook
                 </a>
@@ -330,7 +330,7 @@ export default function BlogPostPage({
                   href={`https://www.linkedin.com/shareArticle?mini=true&url=https://serwiszebra.pl/blog/${post.slug}&title=${encodeURIComponent(post.title)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-4 py-2 bg-blue-700 text-white rounded-lg text-sm font-medium hover:bg-blue-800 transition-colors"
+                  className="px-3 sm:px-4 py-2 bg-blue-700 text-white rounded-lg text-xs sm:text-sm font-medium hover:bg-blue-800 transition-colors"
                 >
                   LinkedIn
                 </a>
@@ -338,7 +338,7 @@ export default function BlogPostPage({
                   href={`https://twitter.com/intent/tweet?url=https://serwiszebra.pl/blog/${post.slug}&text=${encodeURIComponent(post.title)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-4 py-2 bg-gray-900 text-white rounded-lg text-sm font-medium hover:bg-gray-800 transition-colors"
+                  className="px-3 sm:px-4 py-2 bg-gray-900 text-white rounded-lg text-xs sm:text-sm font-medium hover:bg-gray-800 transition-colors"
                 >
                   X (Twitter)
                 </a>
@@ -464,20 +464,20 @@ function parseMarkdown(markdown: string): string {
       // End of table, render it
       inTable = false
       if (tableRows.length > 0) {
-        let tableHtml = '<div class="overflow-x-auto my-6"><table class="w-full border-collapse bg-white rounded-xl overflow-hidden shadow-sm">'
+        let tableHtml = '<div class="overflow-x-auto my-4 sm:my-6 -mx-4 sm:mx-0"><table class="w-full border-collapse bg-white sm:rounded-xl overflow-hidden shadow-sm min-w-[320px]">'
         tableRows.forEach((row, idx) => {
           if (idx === 0) {
             // Header row
             tableHtml += '<thead class="bg-gray-100"><tr>'
             row.forEach(cell => {
-              tableHtml += `<th class="px-4 py-3 text-left text-sm font-semibold text-gray-900 border-b border-gray-200">${processInline(cell)}</th>`
+              tableHtml += `<th class="px-2 sm:px-4 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold text-gray-900 border-b border-gray-200 whitespace-nowrap">${processInline(cell)}</th>`
             })
             tableHtml += '</tr></thead><tbody>'
           } else {
             // Body row
             tableHtml += `<tr class="${idx % 2 === 0 ? 'bg-gray-50' : 'bg-white'}">`
             row.forEach(cell => {
-              tableHtml += `<td class="px-4 py-3 text-sm text-gray-700 border-b border-gray-100">${processInline(cell)}</td>`
+              tableHtml += `<td class="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm text-gray-700 border-b border-gray-100">${processInline(cell)}</td>`
             })
             tableHtml += '</tr>'
           }
@@ -497,7 +497,7 @@ function parseMarkdown(markdown: string): string {
         continue
       } else {
         inCodeBlock = false
-        result.push(`<pre class="bg-gray-900 text-gray-100 rounded-xl p-4 overflow-x-auto my-4"><code class="language-${codeBlockLang}">${codeBlockContent.join('\n')}</code></pre>`)
+        result.push(`<pre class="bg-gray-900 text-gray-100 rounded-lg sm:rounded-xl p-3 sm:p-4 overflow-x-auto my-3 sm:my-4 text-xs sm:text-sm -mx-4 sm:mx-0"><code class="language-${codeBlockLang}">${codeBlockContent.join('\n')}</code></pre>`)
         continue
       }
     }
@@ -511,7 +511,7 @@ function parseMarkdown(markdown: string): string {
     if (line.trim() === '---') {
       if (inList) { result.push('</ul>'); inList = false }
       if (inOrderedList) { result.push('</ol>'); inOrderedList = false }
-      result.push('<hr class="my-8 border-gray-200" />')
+      result.push('<hr class="my-6 sm:my-8 border-gray-200" />')
       continue
     }
 
@@ -522,7 +522,7 @@ function parseMarkdown(markdown: string): string {
       const rawText = line.slice(4)
       const text = processInline(rawText)
       const id = generateHeadingId(rawText)
-      result.push(`<h3 id="${id}" class="text-xl font-bold text-gray-900 mt-8 mb-4 scroll-mt-24">${text}</h3>`)
+      result.push(`<h3 id="${id}" class="text-lg sm:text-xl font-bold text-gray-900 mt-6 sm:mt-8 mb-3 sm:mb-4 scroll-mt-24">${text}</h3>`)
       continue
     }
     if (line.startsWith('## ')) {
@@ -531,7 +531,7 @@ function parseMarkdown(markdown: string): string {
       const rawText = line.slice(3)
       const text = processInline(rawText)
       const id = generateHeadingId(rawText)
-      result.push(`<h2 id="${id}" class="text-2xl font-bold text-gray-900 mt-10 mb-4 scroll-mt-24">${text}</h2>`)
+      result.push(`<h2 id="${id}" class="text-xl sm:text-2xl font-bold text-gray-900 mt-8 sm:mt-10 mb-3 sm:mb-4 scroll-mt-24">${text}</h2>`)
       continue
     }
 
@@ -540,7 +540,7 @@ function parseMarkdown(markdown: string): string {
       if (inList) { result.push('</ul>'); inList = false }
       if (inOrderedList) { result.push('</ol>'); inOrderedList = false }
       const text = processInline(line.slice(2))
-      result.push(`<blockquote class="border-l-4 border-blue-500 bg-blue-50 pl-4 py-3 my-4 rounded-r-lg"><p class="text-gray-700">${text}</p></blockquote>`)
+      result.push(`<blockquote class="border-l-4 border-blue-500 bg-blue-50 pl-3 sm:pl-4 py-2 sm:py-3 my-3 sm:my-4 rounded-r-lg text-sm sm:text-base"><p class="text-gray-700">${text}</p></blockquote>`)
       continue
     }
 
@@ -548,7 +548,7 @@ function parseMarkdown(markdown: string): string {
     if (line.startsWith('- ')) {
       if (inOrderedList) { result.push('</ol>'); inOrderedList = false }
       if (!inList) {
-        result.push('<ul class="list-disc list-inside space-y-2 my-4 text-gray-700">')
+        result.push('<ul class="list-disc list-inside space-y-1.5 sm:space-y-2 my-3 sm:my-4 text-gray-700 text-sm sm:text-base">')
         inList = true
       }
       const text = processInline(line.slice(2))
@@ -561,7 +561,7 @@ function parseMarkdown(markdown: string): string {
     if (orderedMatch) {
       if (inList) { result.push('</ul>'); inList = false }
       if (!inOrderedList) {
-        result.push('<ol class="list-decimal list-inside space-y-2 my-4 text-gray-700">')
+        result.push('<ol class="list-decimal list-inside space-y-1.5 sm:space-y-2 my-3 sm:my-4 text-gray-700 text-sm sm:text-base">')
         inOrderedList = true
       }
       const text = processInline(orderedMatch[2])
@@ -586,7 +586,7 @@ function parseMarkdown(markdown: string): string {
 
     // Regular paragraph
     const text = processInline(line)
-    result.push(`<p class="text-gray-700 leading-relaxed my-4">${text}</p>`)
+    result.push(`<p class="text-gray-700 leading-relaxed my-3 sm:my-4 text-sm sm:text-base">${text}</p>`)
   }
 
   // Close any open lists
@@ -595,18 +595,18 @@ function parseMarkdown(markdown: string): string {
   
   // Close any open table
   if (inTable && tableRows.length > 0) {
-    let tableHtml = '<div class="overflow-x-auto my-6"><table class="w-full border-collapse bg-white rounded-xl overflow-hidden shadow-sm">'
+    let tableHtml = '<div class="overflow-x-auto my-4 sm:my-6 -mx-4 sm:mx-0"><table class="w-full border-collapse bg-white sm:rounded-xl overflow-hidden shadow-sm min-w-[320px]">'
     tableRows.forEach((row, idx) => {
       if (idx === 0) {
         tableHtml += '<thead class="bg-gray-100"><tr>'
         row.forEach(cell => {
-          tableHtml += `<th class="px-4 py-3 text-left text-sm font-semibold text-gray-900 border-b border-gray-200">${processInline(cell)}</th>`
+          tableHtml += `<th class="px-2 sm:px-4 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold text-gray-900 border-b border-gray-200 whitespace-nowrap">${processInline(cell)}</th>`
         })
         tableHtml += '</tr></thead><tbody>'
       } else {
         tableHtml += `<tr class="${idx % 2 === 0 ? 'bg-gray-50' : 'bg-white'}">`
         row.forEach(cell => {
-          tableHtml += `<td class="px-4 py-3 text-sm text-gray-700 border-b border-gray-100">${processInline(cell)}</td>`
+          tableHtml += `<td class="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm text-gray-700 border-b border-gray-100">${processInline(cell)}</td>`
         })
         tableHtml += '</tr>'
       }
