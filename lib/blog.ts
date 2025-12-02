@@ -2263,11 +2263,11 @@ export function searchBlogForAI(query: string): {
     .slice(0, 1) // Max 1 artykuł - tylko najlepiej pasujący
   
   if (relevantPosts.length === 0) {
-    console.log('❌ Blog: brak wystarczająco relevantnych artykułów')
+    console.log('Blog: no relevant articles found')
     return { found: false, posts: [] }
   }
   
-  console.log(`✅ Blog: znaleziono "${relevantPosts[0].post.title}" (score: ${relevantPosts[0].score})`)
+  console.log('Blog: found', relevantPosts[0].post.title, 'score:', relevantPosts[0].score)
   
   return {
     found: true,
