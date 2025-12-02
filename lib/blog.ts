@@ -1746,6 +1746,361 @@ Nie. Tryb Fastboot sam w sobie nie usuwa danych. Dopiero jeśli wykonasz flash f
 ### Ile kosztuje naprawa boot loop?
 Zależy od przyczyny: softwareowy (flash firmware): 150-250 zł, sprzętowy (pamięć eMMC): 500-1100 zł.
 `
+  },
+  {
+    slug: 'skaner-terminala-zebra-nie-dziala-diagnostyka-naprawa',
+    title: 'Skaner w terminalu Zebra nie działa - diagnostyka i naprawa krok po kroku',
+    excerpt: 'Skaner w Twoim terminalu Zebra TC21, MC33 lub MC93 przestał działać? Brak wiązki laserowej, przerywane skanowanie lub nie odczytuje kodów 2D? Sprawdź jak zdiagnozować i naprawić problem.',
+    coverImage: '',
+    author: {
+      name: 'Zespół Serwis Zebra',
+      role: 'Certyfikowani technicy Zebra'
+    },
+    publishedAt: '2025-12-02',
+    readingTime: 10,
+    deviceType: 'terminale',
+    category: 'troubleshooting',
+    tags: ['skaner', 'terminal zebra', 'datawedge', 'SE4710', 'SE4750', 'kody kreskowe', 'naprawa', 'TC21', 'MC33', 'MC93'],
+    seo: {
+      metaTitle: 'Skaner terminala Zebra nie działa - diagnostyka i naprawa | Serwis Zebra',
+      metaDescription: 'Skaner w terminalu Zebra nie skanuje? Brak lasera, przerywane skanowanie, nie czyta kodów 2D? Poradnik krok po kroku: czyszczenie, DataWedge, wymiana okienka. TC21, MC33, MC93.',
+      keywords: ['skaner zebra nie działa', 'terminal zebra skaner', 'datawedge konfiguracja', 'SE4710', 'SE4750', 'naprawa skanera zebra']
+    },
+    content: \`
+## Problem: Skaner w terminalu Zebra nie działa
+
+Skaner kodów kreskowych to serce każdego terminala mobilnego. Gdy przestaje działać, cała praca staje. W tym poradniku pokażemy **jak zdiagnozować przyczynę** i **naprawić problem** - od prostych kroków, które wykonasz sam, po sytuacje wymagające serwisu.
+
+---
+
+## Szybka diagnostyka - od czego zacząć?
+
+Zanim zaczniesz szukać usterki, odpowiedz na pytania:
+
+| Objaw | Prawdopodobna przyczyna | Przejdź do sekcji |
+|-------|-------------------------|-------------------|
+| Brak wiązki laserowej | Wyłączony skaner, awaria sprzętowa | [1. Brak wiązki](#1-brak-wiazki-laserowej) |
+| Skaner świeci, ale nie dekoduje | Brudne okienko, zła konfiguracja | [2. Przerywane skanowanie](#2-przerywane-lub-slabe-skanowanie) |
+| Skanuje tylko niektóre kody | Wyłączona symbologia w DataWedge | [3. Nie skanuje kodów 2D](#3-skaner-nie-czyta-niektorych-kodow) |
+| Spust nie reaguje | Uszkodzony przycisk, źle przypisany | [4. Problemy ze spustem](#4-problemy-z-przyciskiem-spustu-trigger) |
+
+---
+
+## 1. Brak wiązki laserowej
+
+### Objawy
+- Po naciśnięciu przycisku skanowania **nic się nie dzieje**
+- Brak czerwonej/zielonej wiązki celowniczej
+- Brak sygnału dźwiękowego
+
+### Krok 1: Sprawdź czy skaner jest włączony
+
+Skaner może być wyłączony w ustawieniach lub przez aplikację MDM.
+
+**Sprawdź w DataWedge:**
+1. Otwórz aplikację **DataWedge**
+2. Wybierz aktywny profil (lub Profile0)
+3. Sprawdź czy **"Barcode input"** jest włączone (Enabled)
+4. Sprawdź czy **"Scanner selection"** wskazuje na wewnętrzny imager
+
+**Sprawdź przypisanie przycisku:**
+1. Idź do **Ustawienia → System → Przyciski** (lub Key Programmer)
+2. Sprawdź czy przycisk skanowania ma przypisaną akcję **"Scan"**
+
+### Krok 2: Test diagnostyczny
+
+Uruchom wbudowane narzędzie diagnostyczne:
+
+1. Otwórz **Device Diagnostic Tool** (DDT)
+2. Wybierz **"Scanner Test"** lub **"Barcode Test"**
+3. Naciśnij przycisk skanowania
+4. Jeśli test **zielony** - problem z konfiguracją
+5. Jeśli test **czerwony** - prawdopodobnie awaria sprzętowa
+
+### Krok 3: Soft reset
+
+Czasem prosty restart rozwiązuje problem:
+
+1. Przytrzymaj **Power** aż pojawi się menu
+2. Wybierz **Restart**
+3. Po uruchomieniu przetestuj skaner
+
+### Kiedy to awaria sprzętowa?
+
+Jeśli DDT pokazuje błąd skanera i restart nie pomaga:
+- **Uszkodzony moduł skanera** (SE4710, SE4750, SE4850)
+- **Luźna taśma** łącząca skaner z płytą główną
+- **Uszkodzony port przycisku skanowania**
+
+**To wymaga naprawy serwisowej.**
+
+---
+
+## 2. Przerywane lub słabe skanowanie
+
+### Objawy
+- Skaner działa, ale **trzeba skanować wielokrotnie**
+- Dekodowanie trwa długo
+- Działa tylko z bardzo bliska lub z daleka
+
+### Krok 1: Wyczyść okienko skanera
+
+To **najczęstsza przyczyna** problemów ze skanowaniem!
+
+**Jak prawidłowo wyczyścić:**
+1. Wyłącz terminal
+2. Użyj **miękkiej ściereczki bez kłaczków** (np. do okularów)
+3. Nawilż ściereczkę **alkoholem izopropylowym (70%+)**
+4. Delikatnie przetrzyj okienko skanera
+5. Poczekaj aż wyschnie (~1 min)
+
+**UWAGA:** Nigdy nie używaj:
+- Acetonu, rozpuszczalników
+- Ostrych przedmiotów
+- Nadmiaru płynu (nie wlewaj!)
+
+### Krok 2: Sprawdź odległość skanowania
+
+Każdy silnik skanera ma optymalny zakres pracy:
+
+| Silnik | Modele | Zakres optymalny |
+|--------|--------|------------------|
+| **SE4710** | TC21, TC26, TC22, TC27 | 5-30 cm |
+| **SE4750 SR** | MC33, MC34 | 10-92 cm |
+| **SE4750 MR** | MC33 z MR | do 6 m |
+| **SE4850** | MC93 | 8 cm - 21 m |
+| **SE58** | MC94 | kontakt - 30+ m |
+
+**Wskazówki skanowania:**
+- Trzymaj terminal **stabilnie** podczas skanowania
+- Upewnij się, że kod jest **w polu celownika** (krzyżyk lub kropka)
+- Unikaj **bezpośredniego światła słonecznego** padającego na kod
+- Sprawdź czy kod nie jest **uszkodzony lub zamazany**
+
+### Krok 3: Sprawdź jakość kodu kreskowego
+
+Skaner może mieć problem z:
+- **Zbyt małymi kodami** - poniżej minimalnego rozmiaru
+- **Słabo wydrukowanymi** kodami (blady druk, rozmazanie)
+- **Uszkodzonymi** etykietami (zarysowania, zagięcia)
+
+**Test:** Zeskanuj **inny, sprawdzony kod** (np. z opakowania produktu). Jeśli ten działa - problem jest z etykietą, nie ze skanerem.
+
+### Krok 4: Zarysowane okienko - kiedy wymiana?
+
+Głębokie zarysowania na okienku **trwale pogarszają** wydajność skanowania.
+
+**Sprawdź okienko:**
+- Obejrzyj pod światło pod kątem
+- Widoczne zarysowania w polu wiązki = problem
+
+**Rozwiązanie:**
+- Lekkie zarysowania - spróbuj folii ochronnej
+- Głębokie zarysowania - **wymiana okienka w serwisie**
+
+---
+
+## 3. Skaner nie czyta niektórych kodów
+
+### Objawy
+- Skanuje kody 1D (kreskowe), ale **nie czyta kodów 2D** (QR, Data Matrix)
+- Skanuje tylko niektóre typy kodów
+- "Nieznany kod" mimo poprawnego wyglądu
+
+### Przyczyna: Wyłączona symbologia w DataWedge
+
+DataWedge kontroluje, które typy kodów są rozpoznawane. Domyślnie niektóre mogą być wyłączone.
+
+### Jak włączyć brakujące symbologie:
+
+1. Otwórz **DataWedge**
+2. Wybierz profil używany przez aplikację
+3. Wejdź w **Barcode input → Decoders**
+4. Znajdź i włącz potrzebną symbologię:
+
+| Typ kodu | Nazwa w DataWedge |
+|----------|-------------------|
+| Kody QR | QR Code |
+| Data Matrix | Data Matrix |
+| Code 128 | Code 128 |
+| Code 39 | Code 39 |
+| EAN-13 | EAN-13 |
+| EAN-8 | EAN-8 |
+| UPC-A | UPC-A |
+
+### Wskazówka: Ograniczaj symbologie
+
+Dla szybszego skanowania **wyłącz nieużywane dekodery**. Im mniej aktywnych symbologii, tym szybsze dekodowanie.
+
+### Imager vs Laser - co czyta co?
+
+| Typ skanera | Kody 1D | Kody 2D |
+|-------------|---------|---------|
+| Imager (SE47xx, SE48xx) | ✅ Tak | ✅ Tak |
+| Laser (SE965) | ✅ Tak | ❌ Nie |
+| Kamera | ✅ Tak | ✅ Tak (wolniej) |
+
+**Wszystkie terminale TC21, TC22, MC33, MC93** mają imagery - czytają zarówno kody 1D jak i 2D.
+
+---
+
+## 4. Problemy z przyciskiem spustu (trigger)
+
+### Objawy
+- Przycisk skanowania **nie reaguje** lub reaguje z opóźnieniem
+- Spust jest **zablokowany** mechanicznie
+- Trzeba mocno naciskać
+
+### Krok 1: Sprawdź przypisanie przycisku
+
+1. **Ustawienia → System → Przyciski** (Key Programmer)
+2. Znajdź przycisk skanowania
+3. Sprawdź czy ma przypisaną akcję **"Scan"**
+4. Jeśli nie - przypisz ręcznie
+
+### Krok 2: Test alternatywnym przyciskiem
+
+Terminale mają kilka przycisków, które można przypisać do skanowania:
+- **Boczne przyciski** (TC21, TC22)
+- **Trigger na uchwycie** (MC33 pistolet)
+- **Przyciski głośności** (można przeprogramować)
+
+Przypisz skanowanie do innego przycisku i sprawdź czy działa. Jeśli tak - oryginalny przycisk jest uszkodzony.
+
+### Krok 3: Wyczyść obszar wokół przycisku
+
+Zanieczyszczenia mogą blokować mechanizm:
+1. Wyłącz terminal
+2. Użyj **sprężonego powietrza** do wydmuchania kurzu
+3. Przetrzyj okolice przycisku alkoholem izopropylowym
+
+### Kiedy wymiana mechanizmu?
+
+Przyciski spustu mają określoną żywotność:
+- **MC33/MC34 pistolet:** 3 miliony naciśnięć
+- **TC21/TC26:** 1 milion naciśnięć
+
+Jeśli przycisk jest:
+- Fizycznie **zablokowany**
+- **Luźny** lub wypada
+- Wymaga **nadmiernej siły** do aktywacji
+
+**Wymaga naprawy serwisowej - wymiana mechanizmu spustu.**
+
+---
+
+## 5. Konfiguracja DataWedge - podstawy
+
+### Czym jest DataWedge?
+
+DataWedge to **preinstalowana aplikacja Zebra**, która obsługuje skanowanie kodów kreskowych. Bez niej (lub bez własnej aplikacji skanującej) terminal nie będzie skanował.
+
+### Jak sprawdzić czy DataWedge działa:
+
+1. Otwórz **DataWedge Demo** (preinstalowana aplikacja)
+2. Dotknij pola tekstowego
+3. Zeskanuj kod
+4. Jeśli kod pojawia się w polu - DataWedge działa
+
+### Tworzenie profilu dla aplikacji
+
+Jeśli Twoja aplikacja nie skanuje:
+
+1. Otwórz **DataWedge**
+2. Menu → **Nowy profil**
+3. Nazwij profil (np. "Moja_aplikacja")
+4. Wejdź w profil → **Powiązane aplikacje**
+5. Dotknij **+** i wybierz swoją aplikację
+6. Włącz **Barcode input** i **Keystroke output**
+
+### Eksport/Import ustawień
+
+Skonfigurowane profile możesz przenieść na inne urządzenia:
+
+**Eksport:**
+DataWedge → Menu → Ustawienia → **Export**
+
+Plik zapisuje się w: \`/storage/sdcard0/Android/data/com.symbol.datawedge/files/\`
+
+**Import:**
+DataWedge → Menu → Ustawienia → **Import** → wybierz plik .db
+
+---
+
+## 6. Silniki skanerów w terminalach Zebra
+
+### SE4710 (TC21, TC22, TC26, TC27)
+- **Typ:** Imager standardowego zasięgu
+- **Kody:** 1D i 2D
+- **Zasięg:** ~5-30 cm
+- **Zastosowanie:** Handel detaliczny, lekka logistyka
+
+### SE4750 (MC33, MC34)
+- **Typ:** Imager standardowy (SR) lub średniego zasięgu (MR)
+- **Kody:** 1D i 2D
+- **Zasięg SR:** do 92 cm
+- **Zasięg MR:** do 6 m
+- **Zastosowanie:** Magazyny, produkcja
+
+### SE4850 (MC93)
+- **Typ:** Imager rozszerzonego zasięgu
+- **Kody:** 1D i 2D
+- **Zasięg:** 8 cm - 21 m
+- **Zastosowanie:** Duże magazyny, centra dystrybucji
+
+### SE58 (MC94)
+- **Typ:** Imager ultra-dalekiego zasięgu
+- **Zasięg:** kontakt - 30+ m
+- **Laser:** Zielony (7x bardziej widoczny)
+- **Zastosowanie:** Magazyny wysokiego składowania
+
+---
+
+## Orientacyjne koszty naprawy skanera
+
+| Naprawa | TC21/TC26 | MC33/MC34 | MC93/MC94 |
+|---------|-----------|-----------|-----------|
+| Wymiana okienka skanera | 150-250 zł | 180-280 zł | 200-350 zł |
+| Wymiana modułu skanera | 400-600 zł | 500-800 zł | 700-1100 zł |
+| Wymiana przycisku spustu | 180-280 zł | 220-350 zł | 280-400 zł |
+| Czyszczenie + kalibracja | 100-150 zł | 100-150 zł | 100-150 zł |
+
+*Diagnostyka bezpłatna przy akceptacji naprawy.*
+
+---
+
+## Bezpłatna diagnostyka w Serwis Zebra
+
+Skaner nadal nie działa mimo powyższych kroków?
+
+Jako **autoryzowany partner serwisowy Zebra** oferujemy:
+
+[CHECK] **Bezpłatna diagnostyka** skanera
+[CHECK] **Odbiór kurierem** z całej Polski  
+[CHECK] **Oryginalne moduły** skanerów Zebra
+[CHECK] **Gwarancja 12 miesięcy** na naprawę
+
+[**Wyślij terminal do diagnozy →**](/#formularz)
+
+---
+
+## FAQ - Najczęściej zadawane pytania
+
+### Dlaczego skaner działa w jednej aplikacji, a w innej nie?
+Każda aplikacja może mieć **osobny profil DataWedge**. Sprawdź czy profil jest poprawnie skojarzony z aplikacją i czy ma włączone skanowanie.
+
+### Czy mogę używać terminala bez DataWedge?
+Tak, jeśli Twoja aplikacja ma **własny moduł skanowania** korzystający z EMDK. Ale większość aplikacji biznesowych używa DataWedge.
+
+### Jak często czyścić okienko skanera?
+W środowisku magazynowym/produkcyjnym - **codziennie**. W biurze/handlu - **raz w tygodniu** lub gdy zauważysz spadek wydajności.
+
+### Skaner świeci na zielono zamiast czerwono - czy to normalne?
+Tak. Nowsze modele (MC94, niektóre TC) mają **zielony laser** - jest 7x bardziej widoczny niż czerwony, szczególnie w jasnym otoczeniu.
+
+### Ile żyje moduł skanera?
+Przy normalnym użytkowaniu **5-7 lat**. Żywotność zależy od liczby skanowań i warunków pracy.
+\`
   }
 ]
 
