@@ -1464,6 +1464,284 @@ Tak, ale musisz ustawić drukarkę w tryb "Continuous" i podać dokładną dług
 3. Wykonaj kalibrację przez Zebra Setup Utilities
 4. Jeśli nadal nie działa - sensor może wymagać wymiany
 `
+  },
+  {
+    slug: 'zebra-terminal-nie-wlacza-sie-fastboot-boot-loop',
+    title: 'Terminal Zebra nie włącza się lub zawiesza na logo - poradnik Fastboot i Boot Loop',
+    excerpt: 'Twój terminal Zebra TC21, MC33 lub MC93 zawiesił się na logo, wpadł w boot loop lub utknął w trybie Fastboot? Poznaj sprawdzone metody naprawy i dowiedz się, kiedy problem wymaga serwisu.',
+    coverImage: '/blog/zebra-nie-drukuje.jpeg',
+    author: {
+      name: 'Zespół Serwis Zebra',
+      role: 'Certyfikowani technicy Zebra'
+    },
+    publishedAt: '2025-12-02',
+    readingTime: 12,
+    deviceType: 'terminale',
+    category: 'troubleshooting',
+    tags: ['terminal zebra', 'boot loop', 'fastboot', 'TC21', 'MC33', 'MC93', 'nie włącza się', 'zawiesza się na logo'],
+    seo: {
+      metaTitle: 'Terminal Zebra nie włącza się - Boot Loop i Fastboot | Serwis Zebra',
+      metaDescription: 'Terminal Zebra TC21, MC33, MC93 zawiesza się na logo lub w boot loop? Poradnik krok po kroku: wyjście z Fastboot, hard reset, Recovery Mode. Kiedy potrzebna naprawa serwisowa.',
+      keywords: ['zebra boot loop', 'zebra fastboot', 'terminal zebra nie włącza się', 'TC21 zawiesza się', 'MC33 boot loop', 'naprawa terminala zebra']
+    },
+    content: `
+## Problem: Terminal Zebra nie włącza się lub zawiesza na logo
+
+Jeden z najczęstszych i najbardziej stresujących problemów z terminalami Zebra to sytuacja, gdy urządzenie:
+
+- **Zawiesza się na logo Zebra** i nie idzie dalej
+- **Wchodzi w boot loop** - ciągle się restartuje
+- **Utknęło w trybie Fastboot** - pokazuje czarny ekran z napisem "Fastboot Mode"
+- **Nie reaguje** na żadne przyciski
+
+W tym poradniku pokażemy jak zdiagnozować problem i **krok po kroku** go rozwiązać.
+
+---
+
+## Szybka diagnostyka - co widzisz na ekranie?
+
+| Co widzisz? | Prawdopodobna przyczyna | Rozwiązanie |
+|-------------|------------------------|-------------|
+| Logo Zebra (zamrożone) | Uszkodzone pliki systemowe | Recovery Mode → Factory Reset |
+| "Fastboot Mode" | Przypadkowe wejście w tryb | Restart lub flash firmware |
+| Boot loop (ciągły restart) | Nieudana aktualizacja / pełna pamięć | Recovery Mode |
+| Czarny ekran | Rozładowana bateria / awaria sprzętu | Ładowanie 30 min → Hard reset |
+| "No command" | Recovery Mode - brak widocznego menu | Power + Volume Up |
+
+---
+
+## 1. Tryb Fastboot - jak wyjść?
+
+### Co to jest Fastboot?
+
+Fastboot to tryb serwisowy używany do flashowania firmware. **Najczęstsza przyczyna wejścia** - przypadkowe naciśnięcie przycisku skanowania zamiast PTT podczas restartu.
+
+### Jak rozpoznać Fastboot?
+
+- Czarny ekran z napisem **"Fastboot Mode"** lub **"=> FASTBOOT mode..."**
+- Czasem widoczne informacje o wersji bootloadera
+- Urządzenie nie reaguje na dotyk
+
+### Jak wyjść z Fastboot?
+
+**Metoda 1: Prosty restart**
+1. Przytrzymaj **przycisk Power przez 10-15 sekund**
+2. Urządzenie powinno się zrestartować normalnie
+
+**Metoda 2: Restart przez menu Fastboot**
+1. Użyj **przycisków głośności** aby nawigować do opcji "Reboot"
+2. Naciśnij **Power** aby wybrać
+3. Wybierz "Reboot to Android"
+
+**Metoda 3: Wyjmij baterię (jeśli możliwe)**
+1. Wyłącz urządzenie (przytrzymaj Power)
+2. Wyjmij baterię na 30 sekund
+3. Włóż baterię i włącz normalnie
+
+> **💡 Wskazówka:** Jeśli Fastboot pojawia się przy każdym włączeniu - prawdopodobnie uszkodzony jest przycisk skanowania (ciągle wciśnięty). To wymaga naprawy serwisowej.
+
+---
+
+## 2. Boot Loop - terminal ciągle się restartuje
+
+### Co to jest Boot Loop?
+
+Boot loop to sytuacja, gdy terminal:
+1. Włącza się
+2. Pokazuje logo Zebra
+3. Restartuje się
+4. ...i tak w kółko
+
+### Przyczyny Boot Loop
+
+| Przyczyna | Częstość | Rozwiązanie |
+|-----------|----------|-------------|
+| Nieudana aktualizacja OS | Bardzo częsta | Recovery → Factory Reset |
+| Pełna pamięć wewnętrzna | Częsta | Recovery → Wipe cache |
+| Uszkodzona aplikacja | Średnia | Safe Mode → odinstaluj |
+| Uszkodzone pliki systemowe | Średnia | Flash firmware przez ADB |
+| **Awaria płyty głównej** | Rzadka | **Wymaga serwisu** |
+| **Uszkodzona pamięć eMMC** | Rzadka | **Wymaga serwisu** |
+
+### Rozwiązanie: Recovery Mode
+
+**Wejście do Recovery Mode według modelu:**
+
+| Model | Kombinacja przycisków |
+|-------|----------------------|
+| **TC21 / TC26** | Wyłącz → Przytrzymaj **Power + Volume Up** przez 5 sek |
+| **TC22 / TC27** | Wyłącz → Przytrzymaj **Power + Volume Up** przez 5 sek |
+| **MC33 / MC34** | Wyłącz → Przytrzymaj **Power + Volume Up** przez 5 sek |
+| **MC93 / MC94** | Wyłącz → Przytrzymaj **Power + Trigger + PTT** przez 5 sek |
+
+**W Recovery Mode:**
+
+1. Jeśli widzisz **"No command"** z robotem Android:
+   - Przytrzymaj **Power** i naciśnij **Volume Up** raz
+   - Pojawi się menu Recovery
+
+2. Nawiguj przyciskami **Volume Up/Down**
+
+3. Wybierz **"Wipe cache partition"** (Power aby wybrać)
+   - To usuwa tymczasowe pliki bez utraty danych
+   - Często naprawia boot loop po aktualizacji
+
+4. Jeśli nie pomoże, wybierz **"Wipe data/factory reset"**
+   - **UWAGA:** To usuwa WSZYSTKIE dane!
+
+5. Po zakończeniu wybierz **"Reboot system now"**
+
+---
+
+## 3. Zawieszone logo Zebra - ekran "zamrożony"
+
+### Diagnostyka
+
+Jeśli terminal zawiesza się na logo Zebra i nie idzie dalej przez **więcej niż 5 minut**:
+
+**Krok 1: Sprawdź czy to nie normalne uruchamianie**
+- Pierwsze uruchomienie po aktualizacji może trwać **10-15 minut**
+- Poczekaj cierpliwie zanim podejmiesz działanie
+
+**Krok 2: Hard Reset**
+
+| Model | Hard Reset |
+|-------|------------|
+| **TC21 / TC26** | Przytrzymaj **Power** przez **8+ sekund** |
+| **TC22 / TC27** | Przytrzymaj **Power + PTT** przez **8+ sekund** |
+| **MC33 / MC34** | Przytrzymaj **Power + Right Scan** przez **8+ sekund** |
+| **MC93 / MC94** | Przytrzymaj **Power + Trigger** przez **16+ sekund** |
+
+**Krok 3: Jeśli hard reset nie pomaga**
+- Wejdź w **Recovery Mode** (instrukcja wyżej)
+- Wykonaj **Factory Reset**
+
+---
+
+## 4. Czarny ekran - terminal nie reaguje
+
+### Diagnostyka krok po kroku
+
+**Krok 1: Sprawdź baterię**
+- Podłącz terminal do ładowarki
+- Poczekaj **minimum 30 minut**
+- Spróbuj włączyć
+
+**Krok 2: Sprawdź czy bateria jest prawidłowo osadzona**
+- Wyjmij baterię
+- Sprawdź styki - czy nie są brudne/uszkodzone
+- Włóż ponownie (powinno być słyszalne kliknięcie)
+
+**Krok 3: Spróbuj innej baterii**
+- Jeśli masz zapasową baterię - przetestuj
+
+**Krok 4: Hard Reset**
+- Nawet przy czarnym ekranie wykonaj hard reset dla swojego modelu
+
+### Czerwone flagi - kiedy to awaria sprzętowa?
+
+Jeśli po wykonaniu wszystkich kroków terminal nadal ma czarny ekran:
+- **Uszkodzony wyświetlacz** - np. po upadku
+- **Awaria płyty głównej**
+- **Uszkodzony port ładowania** - bateria się nie ładuje
+
+**Te problemy wymagają naprawy serwisowej.**
+
+---
+
+## 5. Factory Reset Protection (FRP) - UWAGA!
+
+### Co to jest FRP?
+
+Factory Reset Protection to zabezpieczenie Google, które **blokuje urządzenie** po factory reset jeśli wcześniej było zalogowane konto Google.
+
+### Problem
+
+Po factory reset terminal wyświetla:
+- "Verify your account"
+- "This device was reset. Sign in with a Google Account..."
+
+**I nie pozwala przejść dalej** bez hasła do poprzedniego konta Google.
+
+### Jak uniknąć FRP?
+
+**ZANIM zrobisz factory reset:**
+1. Wejdź w **Ustawienia → Konta**
+2. **Usuń wszystkie konta Google**
+3. Dopiero potem rób reset
+
+### Co jeśli już zablokowało?
+
+- **Nie ma oficjalnego narzędzia Zebra do ominięcia FRP**
+- Jeśli znasz dane konta - zaloguj się
+- Jeśli nie znasz - skontaktuj się z działem IT firmy
+- W ostateczności - **naprawa serwisowa** (wymaga flashowania)
+
+---
+
+## 6. Kiedy problem wymaga serwisu?
+
+### Możesz naprawić samodzielnie:
+
+- Przypadkowe wejście w Fastboot
+- Boot loop po aktualizacji (Recovery → Factory Reset)
+- Zamrożone logo (Hard Reset → Recovery)
+- Rozładowana bateria
+
+### Wymaga profesjonalnej naprawy:
+
+| Objaw | Prawdopodobna przyczyna | 
+|-------|------------------------|
+| Fastboot przy każdym włączeniu | Zacięty przycisk skanowania |
+| Boot loop mimo Factory Reset | Uszkodzona pamięć eMMC |
+| Czarny ekran + dioda ładowania nie świeci | Uszkodzony port ładowania |
+| Ekran świeci ale nic nie pokazuje | Uszkodzony wyświetlacz |
+| Terminal się nagrzewa i nie włącza | Awaria płyty głównej |
+
+---
+
+## Orientacyjne koszty naprawy terminali Zebra
+
+| Naprawa | TC21/TC26 | MC33/MC34 | MC93/MC94 |
+|---------|-----------|-----------|-----------|
+| Wymiana wyświetlacza | 600-800 zł | 700-900 zł | 900-1200 zł |
+| Naprawa płyty głównej | 500-800 zł | 600-900 zł | 800-1100 zł |
+| Wymiana przycisku trigger | 200-350 zł | 250-400 zł | 300-450 zł |
+| Flash firmware (FRP) | 150-250 zł | 150-250 zł | 150-250 zł |
+
+*Diagnostyka bezpłatna przy akceptacji naprawy. W przypadku rezygnacji: 99 zł netto.*
+
+---
+
+## Bezpłatna diagnostyka w Serwis Zebra
+
+Jeśli powyższe rozwiązania nie pomogły lub zdiagnozowałeś awarię sprzętową:
+
+Jako **autoryzowany partner serwisowy Zebra** oferujemy:
+
+[CHECK] **Bezpłatna diagnostyka** problemu*
+[CHECK] **Odbiór kurierem** z całej Polski
+[CHECK] **Gwarancja 12 miesięcy** na naprawę
+[CHECK] **Oryginalne części** Zebra
+
+[**Wyślij terminal do diagnozy →**](/#formularz)
+
+---
+
+## FAQ - Najczęściej zadawane pytania
+
+### Czy factory reset usunie blokadę FRP?
+Nie. Factory reset **aktywuje** FRP jeśli było zalogowane konto Google. Musisz znać dane tego konta lub usunąć je PRZED resetem.
+
+### Jak długo trwa normalne uruchamianie po aktualizacji?
+Pierwsze uruchomienie po dużej aktualizacji (np. Android 10 → 11) może trwać **10-15 minut**. To normalne.
+
+### Terminal wpadł w Fastboot - czy straciłem dane?
+Nie. Tryb Fastboot sam w sobie nie usuwa danych. Dopiero jeśli wykonasz flash firmware lub factory reset.
+
+### Ile kosztuje naprawa boot loop?
+Zależy od przyczyny: softwareowy (flash firmware): 150-250 zł, sprzętowy (pamięć eMMC): 500-1100 zł.
+`
   }
 ]
 
