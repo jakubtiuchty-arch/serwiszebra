@@ -1469,7 +1469,7 @@ Tak, ale musisz ustawić drukarkę w tryb "Continuous" i podać dokładną dług
     slug: 'zebra-terminal-nie-wlacza-sie-fastboot-boot-loop',
     title: 'Terminal Zebra nie włącza się lub zawiesza na logo - poradnik Fastboot i Boot Loop',
     excerpt: 'Twój terminal Zebra TC21, MC33 lub MC93 zawiesił się na logo, wpadł w boot loop lub utknął w trybie Fastboot? Poznaj sprawdzone metody naprawy i dowiedz się, kiedy problem wymaga serwisu.',
-    coverImage: '/blog/zebra-nie-drukuje.jpeg',
+    coverImage: '',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
