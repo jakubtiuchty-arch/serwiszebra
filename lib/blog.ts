@@ -1766,7 +1766,7 @@ Zależy od przyczyny: softwareowy (flash firmware): 150-250 zł, sprzętowy (pam
       metaDescription: 'Skaner w terminalu Zebra nie skanuje? Brak lasera, przerywane skanowanie, nie czyta kodów 2D? Poradnik krok po kroku: czyszczenie, DataWedge, wymiana okienka. TC21, MC33, MC93.',
       keywords: ['skaner zebra nie działa', 'terminal zebra skaner', 'datawedge konfiguracja', 'SE4710', 'SE4750', 'naprawa skanera zebra']
     },
-    content: \`
+    content: `
 ## Problem: Skaner w terminalu Zebra nie działa
 
 Skaner kodów kreskowych to serce każdego terminala mobilnego. Gdy przestaje działać, cała praca staje. W tym poradniku pokażemy **jak zdiagnozować przyczynę** i **naprawić problem** - od prostych kroków, które wykonasz sam, po sytuacje wymagające serwisu.
