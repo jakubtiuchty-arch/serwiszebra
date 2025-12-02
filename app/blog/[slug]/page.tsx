@@ -515,19 +515,23 @@ function parseMarkdown(markdown: string): string {
       continue
     }
 
-    // Headers
+    // Headers with anchor IDs
     if (line.startsWith('### ')) {
       if (inList) { result.push('</ul>'); inList = false }
       if (inOrderedList) { result.push('</ol>'); inOrderedList = false }
-      const text = processInline(line.slice(4))
-      result.push(`<h3 class="text-xl font-bold text-gray-900 mt-8 mb-4">${text}</h3>`)
+      const rawText = line.slice(4)
+      const text = processInline(rawText)
+      const id = generateHeadingId(rawText)
+      result.push(`<h3 id="${id}" class="text-xl font-bold text-gray-900 mt-8 mb-4 scroll-mt-24">${text}</h3>`)
       continue
     }
     if (line.startsWith('## ')) {
       if (inList) { result.push('</ul>'); inList = false }
       if (inOrderedList) { result.push('</ol>'); inOrderedList = false }
-      const text = processInline(line.slice(3))
-      result.push(`<h2 class="text-2xl font-bold text-gray-900 mt-10 mb-4">${text}</h2>`)
+      const rawText = line.slice(3)
+      const text = processInline(rawText)
+      const id = generateHeadingId(rawText)
+      result.push(`<h2 id="${id}" class="text-2xl font-bold text-gray-900 mt-10 mb-4 scroll-mt-24">${text}</h2>`)
       continue
     }
 
@@ -612,6 +616,16 @@ function parseMarkdown(markdown: string): string {
   }
 
   return result.join('\n')
+}
+
+// Generate ID for headings (anchor links)
+function generateHeadingId(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, '') // Remove special chars except spaces and hyphens
+    .replace(/\s+/g, '-')     // Replace spaces with hyphens
+    .replace(/-+/g, '-')      // Replace multiple hyphens with single
+    .replace(/^-|-$/g, '')    // Remove leading/trailing hyphens
 }
 
 // Process inline markdown (bold, italic, links, code)

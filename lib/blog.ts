@@ -1779,10 +1779,10 @@ Zanim zaczniesz szukać usterki, odpowiedz na pytania:
 
 | Objaw | Prawdopodobna przyczyna | Rozwiązanie |
 |-------|-------------------------|-------------|
-| Brak wiązki laserowej | Wyłączony skaner, awaria sprzętowa | Sekcja 1 poniżej |
-| Skaner świeci, ale nie dekoduje | Brudne okienko, zła konfiguracja | Sekcja 2 poniżej |
-| Skanuje tylko niektóre kody | Wyłączona symbologia w DataWedge | Sekcja 3 poniżej |
-| Spust nie reaguje | Uszkodzony przycisk, źle przypisany | Sekcja 4 poniżej |
+| Brak wiązki laserowej | Wyłączony skaner, awaria sprzętowa | [Sekcja 1](#1-brak-wiazki-laserowej) |
+| Skaner świeci, ale nie dekoduje | Brudne okienko, zła konfiguracja | [Sekcja 2](#2-przerywane-lub-slabe-skanowanie) |
+| Skanuje tylko niektóre kody | Wyłączona symbologia w DataWedge | [Sekcja 3](#3-skaner-nie-czyta-niektorych-kodow) |
+| Spust nie reaguje | Uszkodzony przycisk, źle przypisany | [Sekcja 4](#4-problemy-z-przyciskiem-spustu-trigger) |
 
 ---
 
