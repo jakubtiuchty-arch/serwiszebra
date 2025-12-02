@@ -1469,7 +1469,7 @@ Tak, ale musisz ustawić drukarkę w tryb "Continuous" i podać dokładną dług
     slug: 'zebra-terminal-nie-wlacza-sie-fastboot-boot-loop',
     title: 'Terminal Zebra nie włącza się lub zawiesza na logo - poradnik Fastboot i Boot Loop',
     excerpt: 'Twój terminal Zebra TC21, TC52, MC33 lub MC93 zawiesił się na logo, wpadł w boot loop lub utknął w trybie Fastboot? Poznaj sprawdzone metody naprawy i dowiedz się, kiedy problem wymaga serwisu.',
-    coverImage: '',
+    coverImage: '/blog/terminale/tc21-tc26-przyciski.png',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
@@ -1619,6 +1619,22 @@ Jeśli terminal zawiesza się na logo Zebra i nie idzie dalej przez **więcej ni
 **Krok 3: Jeśli hard reset nie pomaga**
 - Wejdź w **Recovery Mode** (instrukcja wyżej)
 - Wykonaj **Factory Reset**
+
+### Diagramy przycisków - gdzie są PTT, Trigger, Power?
+
+Jeśli nie wiesz gdzie jest przycisk PTT lub Trigger na Twoim terminalu, poniżej znajdziesz oficjalne diagramy z manuali Zebra:
+
+**TC21 / TC26:**
+![Przyciski TC21/TC26](/blog/terminale/tc21-tc26-przyciski.png)
+
+**TC52 / TC57:**
+![Przyciski TC52/TC57](/blog/terminale/tc52-tc57-przyciski.png)
+
+**MC33 / MC34:**
+![Przyciski MC33/MC34](/blog/terminale/mc33-mc34-przyciski.png)
+
+**MC93 / MC94:**
+![Przyciski MC93/MC94](/blog/terminale/mc93-mc94-przyciski.png)
 
 ---
 
