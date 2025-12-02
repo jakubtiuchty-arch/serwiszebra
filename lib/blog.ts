@@ -1468,7 +1468,7 @@ Tak, ale musisz ustawić drukarkę w tryb "Continuous" i podać dokładną dług
   {
     slug: 'zebra-terminal-nie-wlacza-sie-fastboot-boot-loop',
     title: 'Terminal Zebra nie włącza się lub zawiesza na logo - poradnik Fastboot i Boot Loop',
-    excerpt: 'Twój terminal Zebra TC21, MC33 lub MC93 zawiesił się na logo, wpadł w boot loop lub utknął w trybie Fastboot? Poznaj sprawdzone metody naprawy i dowiedz się, kiedy problem wymaga serwisu.',
+    excerpt: 'Twój terminal Zebra TC21, TC52, MC33 lub MC93 zawiesił się na logo, wpadł w boot loop lub utknął w trybie Fastboot? Poznaj sprawdzone metody naprawy i dowiedz się, kiedy problem wymaga serwisu.',
     coverImage: '',
     author: {
       name: 'Zespół Serwis Zebra',
@@ -1569,10 +1569,13 @@ Boot loop to sytuacja, gdy terminal:
 
 | Model | Kombinacja przycisków |
 |-------|----------------------|
-| **TC21 / TC26** | Wyłącz → Przytrzymaj **Power + Volume Up** przez 5 sek |
-| **TC22 / TC27** | Wyłącz → Przytrzymaj **Power + Volume Up** przez 5 sek |
-| **MC33 / MC34** | Wyłącz → Przytrzymaj **Power + Volume Up** przez 5 sek |
-| **MC93 / MC94** | Wyłącz → Przytrzymaj **Power + Trigger + PTT** przez 5 sek |
+| **TC21 / TC26** | Power → Restart → przytrzymaj **PTT** aż zawibruje |
+| **TC22 / TC27** | Power → Restart → przytrzymaj **PTT** aż zawibruje |
+| **TC52 / TC57** | Power → Restart → przytrzymaj **PTT** aż zawibruje |
+| **MC33 / MC34** | Power → Restart → przytrzymaj **PTT** aż zawibruje |
+| **MC93 / MC94** | Power → Restart → przytrzymaj **Trigger** aż zawibruje |
+
+> **Uwaga:** Jeśli urządzenie kompletnie nie reaguje (nie można wybrać Restart), najpierw wykonaj Hard Reset (poniżej), a następnie podczas ponownego uruchamiania przytrzymaj PTT/Trigger.
 
 **W Recovery Mode:**
 
@@ -1607,10 +1610,11 @@ Jeśli terminal zawiesza się na logo Zebra i nie idzie dalej przez **więcej ni
 
 | Model | Hard Reset |
 |-------|------------|
-| **TC21 / TC26** | Przytrzymaj **Power** przez **8+ sekund** |
-| **TC22 / TC27** | Przytrzymaj **Power + PTT** przez **8+ sekund** |
-| **MC33 / MC34** | Przytrzymaj **Power + Right Scan** przez **8+ sekund** |
-| **MC93 / MC94** | Przytrzymaj **Power + Trigger** przez **16+ sekund** |
+| **TC21 / TC26** | Przytrzymaj **Power** przez **10-12 sekund** |
+| **TC22 / TC27** | Przytrzymaj **Power** przez **10-12 sekund** |
+| **TC52 / TC57** | Przytrzymaj **Power + Left Scan + Volume Up** przez **4+ sekundy** |
+| **MC33 / MC34** | Przytrzymaj **Power** przez **10-12 sekund** |
+| **MC93 / MC94** | Przytrzymaj **Power** przez **10-12 sekund** |
 
 **Krok 3: Jeśli hard reset nie pomaga**
 - Wejdź w **Recovery Mode** (instrukcja wyżej)
@@ -1702,12 +1706,12 @@ Po factory reset terminal wyświetla:
 
 ## Orientacyjne koszty naprawy terminali Zebra
 
-| Naprawa | TC21/TC26 | MC33/MC34 | MC93/MC94 |
-|---------|-----------|-----------|-----------|
-| Wymiana wyświetlacza | 600-800 zł | 700-900 zł | 900-1200 zł |
-| Naprawa płyty głównej | 500-800 zł | 600-900 zł | 800-1100 zł |
-| Wymiana przycisku trigger | 200-350 zł | 250-400 zł | 300-450 zł |
-| Flash firmware (FRP) | 150-250 zł | 150-250 zł | 150-250 zł |
+| Naprawa | TC21/TC26 | TC52/TC57 | MC33/MC34 | MC93/MC94 |
+|---------|-----------|-----------|-----------|-----------|
+| Wymiana wyświetlacza | 600-800 zł | 700-950 zł | 700-900 zł | 900-1200 zł |
+| Naprawa płyty głównej | 500-800 zł | 550-850 zł | 600-900 zł | 800-1100 zł |
+| Wymiana przycisku trigger | 200-350 zł | 200-350 zł | 250-400 zł | 300-450 zł |
+| Flash firmware (FRP) | 150-250 zł | 150-250 zł | 150-250 zł | 150-250 zł |
 
 *Diagnostyka bezpłatna przy akceptacji naprawy. W przypadku rezygnacji: 99 zł netto.*
 
