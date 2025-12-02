@@ -2100,7 +2100,7 @@ Tak. Nowsze modele (MC94, niektóre TC) mają **zielony laser** - jest 7x bardzi
 
 ### Ile żyje moduł skanera?
 Przy normalnym użytkowaniu **5-7 lat**. Żywotność zależy od liczby skanowań i warunków pracy.
-\`
+`
   }
 ]
 
