@@ -1817,6 +1817,8 @@ Uruchom wbudowane narzędzie diagnostyczne:
 4. Jeśli test **zielony** - problem z konfiguracją
 5. Jeśli test **czerwony** - prawdopodobnie awaria sprzętowa
 
+> **💡 Pro tip:** DDT to Twój najlepszy przyjaciel przy diagnostyce. Znajdziesz go w szufladzie aplikacji - jest preinstalowany na każdym terminalu Zebra.
+
 ### Krok 3: Soft reset
 
 Czasem prosty restart rozwiązuje problem:
@@ -1854,10 +1856,7 @@ To **najczęstsza przyczyna** problemów ze skanowaniem!
 4. Delikatnie przetrzyj okienko skanera
 5. Poczekaj aż wyschnie (~1 min)
 
-**UWAGA:** Nigdy nie używaj:
-- Acetonu, rozpuszczalników
-- Ostrych przedmiotów
-- Nadmiaru płynu (nie wlewaj!)
+> **⚠️ Uwaga:** Nigdy nie używaj acetonu, rozpuszczalników ani ostrych przedmiotów! Mogą trwale uszkodzić powłokę okienka skanera.
 
 ### Krok 2: Sprawdź odległość skanowania
 
@@ -1885,6 +1884,8 @@ Skaner może mieć problem z:
 - **Uszkodzonymi** etykietami (zarysowania, zagięcia)
 
 **Test:** Zeskanuj **inny, sprawdzony kod** (np. z opakowania produktu). Jeśli ten działa - problem jest z etykietą, nie ze skanerem.
+
+> **💡 Wskazówka:** Masz wątpliwości co do jakości kodów? Wydrukuj testowy kod ze strony Zebra i porównaj wyniki skanowania.
 
 ### Krok 4: Zarysowane okienko - kiedy wymiana?
 
@@ -1928,9 +1929,7 @@ DataWedge kontroluje, które typy kodów są rozpoznawane. Domyślnie niektóre 
 | EAN-8 | EAN-8 |
 | UPC-A | UPC-A |
 
-### Wskazówka: Ograniczaj symbologie
-
-Dla szybszego skanowania **wyłącz nieużywane dekodery**. Im mniej aktywnych symbologii, tym szybsze dekodowanie.
+> **💡 Pro tip:** Dla szybszego skanowania **wyłącz nieużywane dekodery**. Im mniej aktywnych symbologii, tym szybsze dekodowanie. W magazynie zwykle wystarczy Code 128 + EAN-13.
 
 ### Imager vs Laser - co czyta co?
 
@@ -1941,6 +1940,8 @@ Dla szybszego skanowania **wyłącz nieużywane dekodery**. Im mniej aktywnych s
 | Kamera | ✅ Tak | ✅ Tak (wolniej) |
 
 **Wszystkie terminale TC21, TC22, MC33, MC93** mają imagery - czytają zarówno kody 1D jak i 2D.
+
+> **⚠️ Ważne:** Stare skanery laserowe (SE965) NIE czytają kodów 2D! Jeśli potrzebujesz skanować QR kody - upewnij się, że masz terminal z imagerem.
 
 ---
 
@@ -1966,6 +1967,8 @@ Terminale mają kilka przycisków, które można przypisać do skanowania:
 - **Przyciski głośności** (można przeprogramować)
 
 Przypisz skanowanie do innego przycisku i sprawdź czy działa. Jeśli tak - oryginalny przycisk jest uszkodzony.
+
+> **💡 Wskazówka:** W MC33 z uchwytem pistoletowym możesz użyć bocznego przycisku skanowania jako tymczasowego rozwiązania, gdy trigger jest uszkodzony.
 
 ### Krok 3: Wyczyść obszar wokół przycisku
 
@@ -2025,6 +2028,8 @@ Plik zapisuje się w: \`/storage/sdcard0/Android/data/com.symbol.datawedge/files
 **Import:**
 DataWedge → Menu → Ustawienia → **Import** → wybierz plik .db
 
+> **💡 Pro tip:** Masz 50 terminali do skonfigurowania? Ustaw jeden, wyeksportuj profil DataWedge i zaimportuj na pozostałe. Oszczędzisz godziny pracy!
+
 ---
 
 ## 6. Silniki skanerów w terminalach Zebra
@@ -2053,6 +2058,8 @@ DataWedge → Menu → Ustawienia → **Import** → wybierz plik .db
 - **Zasięg:** kontakt - 30+ m
 - **Laser:** Zielony (7x bardziej widoczny)
 - **Zastosowanie:** Magazyny wysokiego składowania
+
+> **💡 Wskazówka:** Nie wiesz jaki silnik ma Twój terminal? Wejdź w **Ustawienia → System → Informacje o urządzeniu** i sprawdź pełną nazwę modelu.
 
 ---
 
