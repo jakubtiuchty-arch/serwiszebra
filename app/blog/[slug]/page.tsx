@@ -620,8 +620,19 @@ function parseMarkdown(markdown: string): string {
 
 // Generate ID for headings (anchor links)
 function generateHeadingId(text: string): string {
+  // Map Polish characters to ASCII equivalents
+  const polishMap: Record<string, string> = {
+    'ą': 'a', 'ć': 'c', 'ę': 'e', 'ł': 'l', 'ń': 'n',
+    'ó': 'o', 'ś': 's', 'ź': 'z', 'ż': 'z',
+    'Ą': 'a', 'Ć': 'c', 'Ę': 'e', 'Ł': 'l', 'Ń': 'n',
+    'Ó': 'o', 'Ś': 's', 'Ź': 'z', 'Ż': 'z'
+  }
+  
   return text
     .toLowerCase()
+    .split('')
+    .map(char => polishMap[char] || char)
+    .join('')
     .replace(/[^\w\s-]/g, '') // Remove special chars except spaces and hyphens
     .replace(/\s+/g, '-')     // Replace spaces with hyphens
     .replace(/-+/g, '-')      // Replace multiple hyphens with single
