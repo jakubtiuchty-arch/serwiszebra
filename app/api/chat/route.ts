@@ -398,7 +398,7 @@ DRUKARKI PRZEMYSŁOWE (ZT230, ZT231, ZT411, ZT421):
 - Naprawa sensora: 200-450 zł
 
 DRUKARKI PRZEMYSŁOWE CIĘŻKIE (ZT510, ZT610, ZT620):
-- Wymiana głowicy: 800-1500 zł
+- Wymiana głowicy: 800-2499 zł
 - Wymiana wałka: 250-450 zł
 - Czyszczenie mechanizmu: 250-450 zł
 - Naprawa sensora: 250-550 zł
