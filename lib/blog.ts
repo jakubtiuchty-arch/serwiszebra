@@ -2203,7 +2203,7 @@ export function searchBlogForAI(query: string): {
   // Usuń duplikaty
   const uniqueWords = Array.from(new Set(expandedWords))
   
-  console.log(`[Blog search] "${query}" -> slowa: [${meaningfulWords.join(', ')}] -> rozszerzone: [${uniqueWords.slice(0, 10).join(', ')}${uniqueWords.length > 10 ? '...' : ''}]`)
+  console.log('Blog search:', query, '-> words:', meaningfulWords.length, '-> expanded:', uniqueWords.length)
   
   // Scoring każdego artykułu
   const scoredPosts = blogPosts.map(post => {
