@@ -2129,7 +2129,7 @@ Przy normalnym użytkowaniu **5-7 lat**. Żywotność zależy od liczby skanowa�
       metaDescription: 'Terminal Zebra nie łączy się z WiFi? Bluetooth nie paruje? Poradnik: konfiguracja WiFi korporacyjnego, roaming 802.11r/k/v, parowanie drukarek i skanerów.',
       keywords: ['wifi zebra', 'bluetooth terminal', 'problemy z wifi', 'parowanie bluetooth', 'roaming wifi', '802.11r', 'TC21', 'MC33']
     },
-    content: \`
+    content: `
 ## Problem: Łączność bezprzewodowa w terminalu Zebra
 
 WiFi i Bluetooth to kluczowe funkcje terminali mobilnych Zebra. Problemy z łącznością mogą całkowicie sparaliżować pracę w magazynie czy sklepie. W tym poradniku pokażemy **jak diagnozować i naprawiać** najczęstsze problemy z WiFi i Bluetooth.
@@ -2497,7 +2497,7 @@ Nowsze modele (TC22, TC27, MC94) wspierają **WiFi 6 (802.11ax)** i **WiFi 6E (6
 
 ### Ile urządzeń Bluetooth można sparować jednocześnie?
 Można mieć **7 aktywnych połączeń** Bluetooth jednocześnie (ograniczenie protokołu). W praktyce zwykle używa się 2-3: słuchawka + drukarka + skaner.
-\`
+`
   }
 ]
 
