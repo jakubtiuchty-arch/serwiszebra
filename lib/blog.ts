@@ -2108,6 +2108,396 @@ Tak. Nowsze modele (MC94, niektóre TC) mają **zielony laser** - jest 7x bardzi
 ### Ile żyje moduł skanera?
 Przy normalnym użytkowaniu **5-7 lat**. Żywotność zależy od liczby skanowań i warunków pracy.
 `
+  },
+  // ========== ARTYKUŁ 8: WiFi i Bluetooth ==========
+  {
+    slug: 'problemy-wifi-bluetooth-terminal-zebra',
+    title: 'Problemy z WiFi i Bluetooth w terminalu Zebra - rozwiązania',
+    excerpt: 'Terminal Zebra nie łączy się z WiFi? Bluetooth nie paruje z drukarką lub skanerem? Poznaj sprawdzone rozwiązania problemów z łącznością bezprzewodową.',
+    coverImage: '',
+    author: {
+      name: 'Zespół Serwis Zebra',
+      role: 'Certyfikowani technicy Zebra'
+    },
+    publishedAt: '2025-12-03',
+    readingTime: 12,
+    deviceType: 'terminale',
+    category: 'troubleshooting',
+    tags: ['wifi zebra', 'bluetooth terminal', 'problemy z wifi', 'parowanie bluetooth', 'roaming wifi', '802.11', 'TC21 wifi', 'MC33 bluetooth'],
+    seo: {
+      metaTitle: 'Problemy z WiFi i Bluetooth w terminalu Zebra - rozwiązania | Serwis Zebra',
+      metaDescription: 'Terminal Zebra nie łączy się z WiFi? Bluetooth nie paruje? Poradnik: konfiguracja WiFi korporacyjnego, roaming 802.11r/k/v, parowanie drukarek i skanerów.',
+      keywords: ['wifi zebra', 'bluetooth terminal', 'problemy z wifi', 'parowanie bluetooth', 'roaming wifi', '802.11r', 'TC21', 'MC33']
+    },
+    content: \`
+## Problem: Łączność bezprzewodowa w terminalu Zebra
+
+WiFi i Bluetooth to kluczowe funkcje terminali mobilnych Zebra. Problemy z łącznością mogą całkowicie sparaliżować pracę w magazynie czy sklepie. W tym poradniku pokażemy **jak diagnozować i naprawiać** najczęstsze problemy z WiFi i Bluetooth.
+
+---
+
+## Szybka diagnostyka - sprawdź najpierw
+
+| Objaw | Prawdopodobna przyczyna | Rozwiązanie |
+|-------|-------------------------|-------------|
+| WiFi nie włącza się | Tryb samolotowy, awaria | [Sekcja 1](#wifi-nie-laczy-sie) |
+| "Zapisane" ale nie łączy | Złe hasło, problem AP | [Sekcja 2](#wifi-zapisane-ale-nie-laczy) |
+| Częste rozłączenia | Słaby sygnał, roaming | [Sekcja 3](#wifi-czeste-rozlaczenia) |
+| Bluetooth nie paruje | Tryb discoverable, zasięg | [Sekcja 4](#bluetooth-nie-paruje) |
+| Bluetooth rozłącza się | Interferencje, bateria | [Sekcja 5](#bluetooth-rozlacza-sie) |
+
+---
+
+## 1. WiFi nie łączy się {#wifi-nie-laczy-sie}
+
+### Objawy
+- Ikona WiFi jest szara lub przekreślona
+- Nie widać żadnych sieci
+- WiFi pokazuje "Wyłączone"
+
+### Krok 1: Sprawdź tryb samolotowy
+
+Tryb samolotowy wyłącza wszystkie radia bezprzewodowe.
+
+1. Przesuń palcem w dół od góry ekranu
+2. Sprawdź czy ikona **samolotu** jest aktywna
+3. Jeśli tak - dotknij jej, aby wyłączyć tryb samolotowy
+4. Poczekaj 5-10 sekund na włączenie WiFi
+
+### Krok 2: Włącz/wyłącz WiFi
+
+1. **Ustawienia → Sieć i internet → WiFi**
+2. Przesuń przełącznik na **WYŁ**
+3. Poczekaj 5 sekund
+4. Przesuń przełącznik na **WŁ**
+5. Poczekaj aż pojawią się dostępne sieci
+
+> **💡 Pro tip:** Jeśli WiFi nie chce się włączyć, spróbuj **restartu urządzenia**. Przytrzymaj przycisk Power i wybierz "Restart".
+
+### Krok 3: Test w Device Diagnostic Tool
+
+1. Otwórz **Device Diagnostic Tool** (DDT)
+2. Wybierz **WiFi Test**
+3. Uruchom test - sprawdzi stan radia WiFi
+4. Jeśli test **czerwony** - możliwa awaria sprzętowa anteny
+
+### Kiedy to awaria sprzętowa?
+
+Jeśli:
+- DDT pokazuje błąd WiFi
+- WiFi pokazuje się jako "Wyłączone" i nie reaguje na włączenie
+- Sygnał jest bardzo słaby nawet przy routerze
+
+**To może oznaczać uszkodzenie anteny WiFi - wymaga serwisu.**
+
+---
+
+## 2. WiFi "Zapisane" ale nie łączy {#wifi-zapisane-ale-nie-laczy}
+
+### Objawy
+- Sieć pokazuje status "Zapisane"
+- Nie łączy się automatycznie
+- Czasem pojawia się "Błąd uwierzytelniania"
+
+### Krok 1: Zapomnij i połącz ponownie
+
+1. **Ustawienia → Sieć i internet → WiFi**
+2. Dotknij nazwy sieci
+3. Wybierz **Zapomnij**
+4. Dotknij sieci ponownie
+5. Wprowadź hasło **dokładnie** (uwaga na wielkość liter!)
+
+> **⚠️ Uwaga:** Najczęstsza przyczyna to **błędne hasło**! Sprawdź czy nie masz włączonego Caps Lock i czy hasło nie zawiera spacji na końcu.
+
+### Krok 2: Sprawdź typ zabezpieczeń
+
+Upewnij się, że wybierasz prawidłowy typ zabezpieczeń:
+
+| Typ sieci | Ustawienie |
+|-----------|------------|
+| Domowa/prosta | WPA/WPA2-Personal |
+| Firmowa z hasłem | WPA2-Personal |
+| Firmowa z certyfikatem | WPA2-Enterprise |
+| Otwarta (bez hasła) | None |
+
+### Krok 3: Sprawdź router/AP
+
+Problem może być po stronie sieci:
+- Sprawdź czy inne urządzenia łączą się z tą siecią
+- Zrestartuj router/access point
+- Sprawdź czy nie jest włączone **filtrowanie MAC**
+- Sprawdź czy sieć nie jest **ukryta**
+
+### Konfiguracja sieci ukrytej
+
+Jeśli sieć nie rozgłasza SSID:
+
+1. **Ustawienia → WiFi → Dodaj sieć**
+2. Wpisz **dokładną nazwę sieci** (SSID)
+3. Wybierz typ zabezpieczeń
+4. Wprowadź hasło
+5. Zapisz
+
+---
+
+## 3. WiFi często się rozłącza {#wifi-czeste-rozlaczenia}
+
+### Objawy
+- Połączenie zrywa się co kilka minut
+- "Połączono, brak internetu"
+- Wolne działanie aplikacji sieciowych
+
+### Krok 1: Sprawdź siłę sygnału
+
+1. Przesuń w dół od góry ekranu
+2. Przytrzymaj ikonę WiFi
+3. Sprawdź **poziom sygnału** przy aktywnej sieci
+
+| Sygnał | Jakość | Co robić? |
+|--------|--------|-----------|
+| 4 kreski | Doskonały | OK |
+| 3 kreski | Dobry | OK |
+| 2 kreski | Słaby | Zbliż się do AP |
+| 1 kreska | Bardzo słaby | Problem! |
+
+### Krok 2: Problemy z roamingiem
+
+W dużych obiektach (magazyny, hale) terminal przełącza się między access pointami. Jeśli roaming nie działa płynnie:
+
+**Włącz zaawansowane funkcje roamingu:**
+
+1. **Ustawienia → Sieć i internet → WiFi**
+2. Dotknij **Preferencje WiFi** lub ikonę ustawień
+3. Znajdź **Zaawansowane** lub **Fusion Settings**
+4. Włącz:
+   - **802.11k** (Neighbor Reports) - AP podpowiada gdzie się przenieść
+   - **802.11r** (Fast Transition) - szybkie przełączanie
+   - **802.11v** (BSS Transition) - optymalizacja roamingu
+
+> **💡 Pro tip:** Te opcje muszą być też włączone na **access pointach**! Skontaktuj się z administratorem sieci.
+
+### Krok 3: Wybierz pasmo 5 GHz
+
+Pasmo 5 GHz jest mniej zatłoczone i oferuje wyższe prędkości:
+
+1. **Ustawienia → WiFi → Preferencje WiFi**
+2. Znajdź **Pasmo WiFi** (Wi-Fi frequency band)
+3. Wybierz **5 GHz only** lub **Preferuj 5 GHz**
+
+> **⚠️ Uwaga:** 5 GHz ma **krótszy zasięg** niż 2.4 GHz. W dużych obiektach może być potrzebne więcej access pointów.
+
+### Krok 4: Problem "Połączono, brak internetu"
+
+To oznacza że WiFi działa, ale nie ma dostępu do internetu:
+
+1. Sprawdź **DNS** - spróbuj ustawić Google DNS (8.8.8.8)
+2. Sprawdź **proxy** - wyłącz jeśli nie jest wymagane
+3. Sprawdź **firewall** na routerze
+4. Zrestartuj router
+
+---
+
+## 4. WiFi korporacyjne (802.1x) {#wifi-korporacyjne}
+
+### Konfiguracja EAP-PEAP (najczęstsza)
+
+1. **Ustawienia → WiFi → Dodaj sieć**
+2. Wpisz SSID sieci firmowej
+3. Zabezpieczenia: **WPA2-Enterprise**
+4. Metoda EAP: **PEAP**
+5. Uwierzytelnianie fazy 2: **MSCHAPV2**
+6. Certyfikat CA: **Nie weryfikuj** (lub wybierz certyfikat)
+7. Tożsamość: **twoja_nazwa_uzytkownika**
+8. Hasło: **twoje_hasło**
+
+### Konfiguracja EAP-TLS (z certyfikatem)
+
+Wymaga zainstalowanego certyfikatu klienta:
+
+1. Najpierw zainstaluj certyfikat:
+   - **Ustawienia → Zabezpieczenia → Szyfrowanie i dane logowania**
+   - **Zainstaluj certyfikat**
+2. Następnie skonfiguruj WiFi jak wyżej, ale:
+   - Metoda EAP: **TLS**
+   - Certyfikat klienta: wybierz zainstalowany
+
+> **💡 Pro tip:** Do masowej konfiguracji WiFi korporacyjnego użyj **StageNow** - darmowego narzędzia Zebra do staging'u urządzeń.
+
+---
+
+## 5. Bluetooth nie paruje {#bluetooth-nie-paruje}
+
+### Objawy
+- Nie widać urządzenia na liście
+- Parowanie nie kończy się sukcesem
+- Kod PIN jest odrzucany
+
+### Krok 1: Sprawdź podstawy
+
+1. **Bluetooth włączony** na obu urządzeniach
+2. Urządzenia w **zasięgu** (max 10 metrów / 32 stopy)
+3. Urządzenie docelowe w **trybie parowania** (discoverable)
+
+### Krok 2: Włącz tryb parowania na urządzeniu docelowym
+
+**Drukarki Zebra (ZQ, ZD):**
+- Przytrzymaj przycisk **FEED** przez 5 sekund
+- LED zacznie migać na niebiesko
+
+**Skanery pierścieniowe (RS5100, RS6000):**
+- Zeskanuj kod kreskowy parowania z instrukcji
+- Lub użyj NFC Tap-to-Pair
+
+**Słuchawki Bluetooth:**
+- Zwykle przytrzymaj przycisk zasilania 5-7 sekund
+- LED miga na niebiesko/czerwono
+
+### Krok 3: Parowanie przez NFC (Tap-to-Pair)
+
+Najszybsza metoda dla urządzeń Zebra z NFC:
+
+1. Włącz **NFC** i **Bluetooth** na terminalu
+2. Przyłóż terminal do **logo NFC** na drukarce/skanerze
+3. Poczekaj na sygnał dźwiękowy
+4. Potwierdź parowanie na ekranie
+
+> **💡 Pro tip:** NFC Tap-to-Pair działa z drukarkami ZQ310, ZQ320, ZQ511, ZQ521, ZD410, ZD420, ZD620 i skanerami RS5100, RS6000.
+
+### Krok 4: Wyczyść pamięć podręczną Bluetooth
+
+Jeśli parowanie nadal nie działa:
+
+1. **Ustawienia → Aplikacje**
+2. Dotknij **⋮** → **Pokaż aplikacje systemowe**
+3. Znajdź **Bluetooth**
+4. Dotknij **Pamięć** → **Wyczyść pamięć podręczną**
+5. Zrestartuj urządzenie
+
+---
+
+## 6. Bluetooth rozłącza się {#bluetooth-rozlacza-sie}
+
+### Objawy
+- Połączenie zrywa się losowo
+- Drukarka/skaner "znika" z listy sparowanych
+- Trzeba często parować ponownie
+
+### Krok 1: Sprawdź baterie
+
+Słaba bateria w urządzeniu Bluetooth powoduje niestabilne połączenie:
+- **Słuchawki** - naładuj
+- **Skanery pierścieniowe** - sprawdź poziom baterii
+- **Drukarki przenośne** - naładuj lub wymień akumulator
+
+### Krok 2: Interferencje z WiFi
+
+Bluetooth i WiFi 2.4 GHz używają tego samego pasma! Rozwiązania:
+
+1. **Przełącz WiFi na 5 GHz** (patrz sekcja wyżej)
+2. Zmniejsz odległość między urządzeniami Bluetooth
+3. Unikaj obszarów z dużą ilością sieci WiFi
+
+> **💡 Pro tip:** Terminale Zebra mają **Adaptive Frequency Hopping (AFH)** - automatycznie omijają kanały WiFi. Ale działa to tylko gdy oba urządzenia Bluetooth wspierają AFH.
+
+### Krok 3: Usuń i sparuj ponownie
+
+1. **Ustawienia → Połączone urządzenia → Bluetooth**
+2. Dotknij **⚙️** przy nazwie urządzenia
+3. Wybierz **Zapomnij** lub **Usuń parowanie**
+4. Sparuj urządzenie ponownie
+
+### Krok 4: Sprawdź profil Bluetooth
+
+Niektóre urządzenia mają kilka profili. Upewnij się że właściwy jest włączony:
+
+1. **Ustawienia → Bluetooth**
+2. Dotknij **⚙️** przy sparowanym urządzeniu
+3. Sprawdź które profile są włączone:
+   - **A2DP** - audio stereo
+   - **HFP** - zestaw głośnomówiący
+   - **SPP** - port szeregowy (drukarki)
+   - **HID** - klawiatury, myszy
+
+---
+
+## 7. Specyfikacje WiFi terminali Zebra
+
+| Model | WiFi | Pasma | Bluetooth |
+|-------|------|-------|-----------|
+| TC21/TC26 | 802.11 a/b/g/n/ac | 2.4 + 5 GHz | 5.0 BLE |
+| TC22/TC27 | 802.11 a/b/g/n/ac/ax | 2.4 + 5 + 6 GHz | 5.2 BLE |
+| TC52/TC57 | 802.11 a/b/g/n/ac | 2.4 + 5 GHz | 5.0 BLE |
+| MC33/MC34 | 802.11 a/b/g/n/ac | 2.4 + 5 GHz | 4.1 BLE |
+| MC93/MC94 | 802.11 a/b/g/n/ac/ax | 2.4 + 5 + 6 GHz | 5.2 BLE |
+
+**Wspierane zabezpieczenia WiFi:**
+- WPA / WPA2 / WPA3 (Personal i Enterprise)
+- EAP-TLS, EAP-TTLS, PEAP, LEAP
+- 802.11r/k/v (Fast Roaming)
+
+**Zasięg Bluetooth:**
+- **Class 2** - do 10 metrów (32 stopy)
+- Moc wyjściowa: 2.5 mW
+
+---
+
+## Komunikaty błędów WiFi
+
+| Błąd | Znaczenie | Rozwiązanie |
+|------|-----------|-------------|
+| "Błąd uwierzytelniania" | Złe hasło lub typ zabezpieczeń | Sprawdź dane logowania |
+| "Uzyskiwanie adresu IP..." (zawieszone) | Problem z DHCP | Sprawdź serwer DHCP, spróbuj statyczny IP |
+| "Połączono, brak internetu" | WiFi OK, brak dostępu WAN | Sprawdź DNS, proxy, firewall |
+| "Zapisane" (nie łączy się) | Wielokrotne nieudane próby | Zapomnij i połącz ponownie |
+| "Sieć niedostępna" | AP wyłączony lub poza zasięgiem | Sprawdź AP, zbliż się |
+
+---
+
+## Orientacyjne koszty naprawy
+
+| Naprawa | Koszt |
+|---------|-------|
+| Wymiana anteny WiFi | 200-400 zł |
+| Wymiana modułu WiFi/BT | 350-600 zł |
+| Naprawa NFC | 180-350 zł |
+| Diagnostyka + konfiguracja | 100-150 zł |
+
+*Diagnostyka bezpłatna przy akceptacji naprawy.*
+
+---
+
+## Bezpłatna diagnostyka w Serwis Zebra
+
+Problemy z łącznością mimo powyższych kroków?
+
+Jako **autoryzowany partner serwisowy Zebra** oferujemy:
+
+[CHECK] **Bezpłatna diagnostyka** łączności
+[CHECK] **Odbiór kurierem** z całej Polski  
+[CHECK] **Oryginalne moduły** WiFi/Bluetooth
+[CHECK] **Gwarancja 12 miesięcy** na naprawę
+
+[**Wyślij terminal do diagnozy →**](/#formularz)
+
+---
+
+## FAQ - Najczęściej zadawane pytania
+
+### Czy mogę używać WiFi i Bluetooth jednocześnie?
+Tak! Terminale Zebra są zaprojektowane do jednoczesnej pracy obu technologii. **Adaptive Frequency Hopping** minimalizuje interferencje.
+
+### Dlaczego WiFi 5 GHz ma krótszy zasięg?
+Wyższe częstotliwości są bardziej tłumione przez przeszkody (ściany, regały). W zamian oferują **wyższe prędkości** i **mniej interferencji**.
+
+### Jak sprawdzić wersję Bluetooth w terminalu?
+**Ustawienia → System → Informacje o telefonie → Informacje o sprzęcie** lub w **Device Diagnostic Tool**.
+
+### Czy terminal Zebra wspiera WiFi 6?
+Nowsze modele (TC22, TC27, MC94) wspierają **WiFi 6 (802.11ax)** i **WiFi 6E (6 GHz)**. Starsze modele (TC21, MC33) wspierają do WiFi 5 (802.11ac).
+
+### Ile urządzeń Bluetooth można sparować jednocześnie?
+Można mieć **7 aktywnych połączeń** Bluetooth jednocześnie (ograniczenie protokołu). W praktyce zwykle używa się 2-3: słuchawka + drukarka + skaner.
+\`
   }
 ]
 
@@ -2163,6 +2553,10 @@ const WORD_STEMS: Record<string, string[]> = {
   'ribbon': ['ribbon', 'taśma', 'taśmy', 'taśmę'],
   'sensor': ['sensor', 'czujnik', 'czujnika'],
   'papier': ['papier', 'papieru', 'etykiet', 'etykiety'],
+  'wifi': ['wifi', 'wi-fi', 'wlan', 'bezprzewodow', 'sieć', 'sieci', 'łączność'],
+  'bluetooth': ['bluetooth', 'bt', 'parow', 'paruje', 'sparow'],
+  'połączenie': ['połączenie', 'połączyć', 'łączy', 'łączenie', 'rozłącz'],
+  'roaming': ['roaming', 'roamingu', 'przełącza', 'przełączanie'],
 }
 
 // Funkcja do normalizacji słowa (znajdź rdzeń)
