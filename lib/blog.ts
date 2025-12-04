@@ -3130,6 +3130,246 @@ DDT jest preinstalowany na każdym terminalu Zebra. Znajdziesz go na liście wsz
 ### Skaner świeci na zielono zamiast czerwono - to błąd?
 Nie, to normalne. Nowsze modele (MC94) mają zielony laser - jest 7x bardziej widoczny niż czerwony.
 `
+  },
+  {
+    slug: 'datawedge-konfiguracja-terminal-zebra',
+    title: 'DataWedge - konfiguracja skanera w terminalach Zebra krok po kroku',
+    excerpt: 'Skaner skanuje ale dane nie trafiają do aplikacji? Kompletny poradnik konfiguracji DataWedge: profile, Keystroke Output, Intent, rozwiązywanie problemów.',
+    coverImage: '',
+    author: {
+      name: 'Zespół Serwis Zebra',
+      role: 'Certyfikowani technicy Zebra'
+    },
+    publishedAt: '2025-12-04',
+    readingTime: 12,
+    deviceType: 'terminale',
+    category: 'poradniki',
+    tags: ['DataWedge', 'konfiguracja skanera', 'profile', 'Keystroke Output', 'Intent', 'TC21', 'MC33'],
+    seo: {
+      metaTitle: 'DataWedge - konfiguracja skanera Zebra krok po kroku',
+      metaDescription: 'Skaner Zebra skanuje ale dane nie trafiają do aplikacji? Poradnik DataWedge: profile, Keystroke, Intent. TC21, MC33, MC93.',
+      keywords: ['datawedge konfiguracja', 'datawedge zebra', 'skaner zebra nie wysyła danych', 'keystroke output zebra', 'datawedge profile', 'TC21 datawedge', 'MC33 konfiguracja skanera', 'datawedge intent']
+    },
+    content: `
+## Czym jest DataWedge?
+
+DataWedge to preinstalowana usługa Zebra, która umożliwia **dowolnej aplikacji** odbieranie danych z kodów kreskowych - bez pisania ani jednej linijki kodu. Działa w tle i obsługuje wszystkie skanery wbudowane w terminal.
+
+> 💡 **Jak to działa?** DataWedge przechwytuje zeskanowany kod, przetwarza go według Twoich reguł, a następnie wysyła do aktywnej aplikacji - jakbyś wpisał dane na klawiaturze.
+
+### Kluczowe komponenty DataWedge:
+
+| Komponent | Funkcja |
+|-----------|---------|
+| **Wtyczki wejścia** | Skaner kodów, kamera, Bluetooth scanner |
+| **Wtyczki przetwarzania** | Formatowanie danych, prefiksy, sufiksy |
+| **Wtyczki wyjścia** | Keystroke (klawiatura), Intent, IP (sieć) |
+
+---
+
+## Szybka diagnostyka - dlaczego dane nie trafiają do aplikacji?
+
+| Problem | Prawdopodobna przyczyna | Rozwiązanie |
+|---------|------------------------|-------------|
+| Skaner skanuje, ale nic się nie pojawia | Keystroke Output wyłączony | [Włącz Keystroke](#wlacz-keystroke-output) |
+| Działa w jednej apce, w innej nie | Brak profilu dla aplikacji | [Utwórz profil](#tworzenie-profilu-datawedge) |
+| Błąd SCANNER_IN_USE | Inna aplikacja blokuje skaner | [Zamknij konflikt](#blad-scanner_in_use) |
+| Nie czyta niektórych kodów | Symbologia wyłączona | [Włącz dekoder](#symbologie---wlaczanieylaczanie-dekoderw) |
+| Dane są zniekształcone | Złe opóźnienie między znakami | [Dostosuj timing](#ustawienia-keystroke-output) |
+
+---
+
+## Jak włączyć DataWedge?
+
+DataWedge jest domyślnie **włączony** na wszystkich terminalach Zebra. Jeśli nie działa:
+
+1. Otwórz **szufladę aplikacji** (przesuń palcem w górę)
+2. Znajdź i uruchom aplikację **DataWedge**
+3. Dotknij **⋮** (menu) → **Ustawienia**
+4. Upewnij się, że opcja **DataWedge enabled** jest zaznaczona ✓
+
+> ⚠️ **Uwaga:** Jeśli DataWedge jest wyłączony, żadna aplikacja nie będzie mogła skanować kodów (chyba że ma własny moduł EMDK).
+
+---
+
+## Tworzenie profilu DataWedge
+
+Profile pozwalają **różnie konfigurować skaner dla różnych aplikacji**. Na przykład: aplikacja magazynowa może potrzebować innych symbologii niż aplikacja sprzedażowa.
+
+### Krok 1: Utwórz nowy profil
+
+1. Otwórz aplikację **DataWedge**
+2. Dotknij **⋮** (menu hamburger) → **Nowy profil**
+3. Wpisz nazwę profilu (np. "Moja_Aplikacja_WMS")
+4. Dotknij **OK**
+
+### Krok 2: Powiąż profil z aplikacją
+
+1. W nowym profilu dotknij **Powiązane aplikacje**
+2. Dotknij **⋮** → **Nowa aplikacja/aktywność**
+3. Wybierz pakiet swojej aplikacji z listy
+4. Wybierz ***** (wszystkie aktywności) lub konkretną aktywność
+
+### Krok 3: Włącz profil
+
+1. Upewnij się, że opcja **Profil włączony** jest zaznaczona ✓
+2. Skonfiguruj wejście i wyjście (poniżej)
+
+> 💡 **Co to Profile0?** To domyślny profil, który działa dla wszystkich aplikacji, które **nie mają** własnego dedykowanego profilu.
+
+---
+
+## Włącz Keystroke Output
+
+**Keystroke Output** to najważniejsze ustawienie - bez niego dane nie trafią do pola tekstowego!
+
+### Jak włączyć:
+
+1. W profilu DataWedge przewiń do sekcji **Keystroke output**
+2. Włącz opcję **Enabled** ✓
+3. Upewnij się, że **Send data** jest ustawione na **Send via Key Event**
+
+### Ustawienia Keystroke Output:
+
+| Opcja | Zalecana wartość | Opis |
+|-------|------------------|------|
+| **Enabled** | ✓ ON | Włącza wysyłanie danych jako klawiatura |
+| **Send TAB/ENTER** | ENTER (0x0D) | Automatycznie naciska Enter po skanowaniu |
+| **Inter-character delay** | 0 ms | Opóźnienie między znakami (zwiększ dla wolnych apek) |
+
+> ⚠️ **Częsty błąd:** Jeśli aplikacja nie odbiera wszystkich znaków, zwiększ **Inter-character delay** do 10-20 ms.
+
+---
+
+## Intent Output - dla zaawansowanych aplikacji
+
+Jeśli Twoja aplikacja programowo odbiera dane skanowania (bez pola tekstowego), użyj **Intent Output**.
+
+### Konfiguracja Intent:
+
+1. W profilu włącz **Intent output** → **Enabled** ✓
+2. Ustaw **Intent action**: np. com.myapp.ACTION_BARCODE
+3. Ustaw **Intent category**: np. android.intent.category.DEFAULT
+4. Wybierz **Intent delivery**: Broadcast intent lub Start activity
+
+> 💡 **Kiedy używać Intent?** Gdy tworzysz własną aplikację i chcesz programowo przetwarzać dane skanowania w tle, bez interakcji użytkownika.
+
+---
+
+## Symbologie - włączanie/wyłączanie dekoderów
+
+Symbologie to typy kodów kreskowych, które skaner może odczytywać.
+
+### Jak włączyć konkretną symbologię:
+
+1. W profilu DataWedge przejdź do **Barcode input** → **Decoders**
+2. Znajdź pożądaną symbologię (np. QR Code, Data Matrix)
+3. Włącz przełącznik ✓
+
+### Popularne symbologie:
+
+| Symbologia | Typ | Gdzie używane |
+|------------|-----|---------------|
+| **Code 128** | 1D | Logistyka, magazyny |
+| **Code 39** | 1D | Przemysł, motoryzacja |
+| **EAN-13** | 1D | Handel detaliczny (produkty) |
+| **QR Code** | 2D | Marketing, płatności |
+| **Data Matrix** | 2D | Elektronika, farmacja |
+| **PDF417** | 2D | Dokumenty tożsamości |
+
+> 💡 **Wskazówka:** Wyłącz nieużywane symbologie - skaner będzie działał **szybciej**, bo nie musi sprawdzać wszystkich formatów.
+
+---
+
+## Rozwiązywanie problemów DataWedge
+
+### Błąd SCANNER_IN_USE
+
+**Przyczyna:** Inna aplikacja (np. DWDemo) blokuje dostęp do skanera.
+
+**Rozwiązanie:**
+1. Zamknij wszystkie aplikacje skanujące
+2. Sprawdź profil DWDemo - wyłącz go jeśli niepotrzebny
+3. Zrestartuj terminal
+
+### DataWedge nie wysyła danych
+
+**Lista kontrolna:**
+1. ✓ DataWedge jest włączony globalnie?
+2. ✓ Profil jest włączony?
+3. ✓ Profil jest powiązany z aplikacją?
+4. ✓ Keystroke output jest włączony?
+5. ✓ Pole tekstowe jest w fokusie (kursor miga)?
+
+### Nie czyta kodów 2D (QR, Data Matrix)
+
+**Sprawdź:**
+1. Czy masz skaner 2D (imager)? Skanery laserowe (SE965) czytają **tylko 1D**!
+2. Czy symbologia jest włączona w dekoderach?
+3. Czy kod jest wyraźny i niepokrzywiony?
+
+---
+
+## Kody błędów DataWedge
+
+| Kod błędu | Znaczenie | Rozwiązanie |
+|-----------|-----------|-------------|
+| APP_ALREADY_ASSOCIATED | Aplikacja powiązana z innym profilem | Usuń z poprzedniego profilu |
+| DATAWEDGE_DISABLED | DataWedge wyłączony | Włącz w ustawieniach |
+| INPUT_NOT_ENABLED | Skaner wyłączony w profilu | Włącz Barcode input |
+| PROFILE_NOT_FOUND | Profil nie istnieje | Utwórz profil |
+| SCANNER_ALREADY_DISABLED | Skaner już wyłączony | Zignoruj |
+| SCANNER_ENABLE_FAILED | Błąd włączania skanera | Restartuj DataWedge lub terminal |
+| SCANNER_IN_USE | Skaner zajęty | Zamknij konfliktującą aplikację |
+
+---
+
+## Import i eksport konfiguracji DataWedge
+
+### Eksport (backup):
+
+1. DataWedge → **⋮** → **Ustawienia**
+2. Dotknij **Eksport**
+3. Plik datawedge.db zostanie zapisany w:
+   /storage/sdcard0/Android/data/com.symbol.datawedge/files/
+
+### Import (przywracanie):
+
+1. Skopiuj plik datawedge.db na terminal
+2. DataWedge → **Ustawienia** → **Import**
+3. Wskaż plik - konfiguracja zostanie natychmiast wczytana
+
+> 💡 **Wdrażanie na flotę:** Wyeksportuj konfigurację z jednego urządzenia, a następnie zaimportuj na pozostałe przez MDM (StageNow, SOTI, Workspace ONE).
+
+---
+
+## Przydatne poradniki
+
+- [Skaner terminala nie działa - diagnostyka](/blog/skaner-terminala-zebra-nie-dziala-diagnostyka-naprawa) - problemy sprzętowe skanera
+- [Kody błędów terminala Zebra](/blog/kody-bledow-terminal-zebra-led-komunikaty) - diagnostyka LED
+- [Reset terminala Zebra](/blog/reset-fabryczny-terminal-zebra-factory-enterprise) - gdy DataWedge przestaje działać
+
+---
+
+## FAQ - Najczęściej zadawane pytania
+
+### Czy mogę używać terminala bez DataWedge?
+Tak, jeśli aplikacja ma **własny moduł skanowania** oparty na EMDK. Ale większość aplikacji biznesowych (WMS, ERP) używa DataWedge.
+
+### Dlaczego skaner działa w jednej aplikacji, a w innej nie?
+Każda aplikacja może mieć **osobny profil DataWedge**. Sprawdź czy profil jest powiązany z tą konkretną aplikacją.
+
+### Jak przywrócić DataWedge do ustawień domyślnych?
+DataWedge → **⋮** → **Ustawienia** → **Przywróć domyślne**. Uwaga: usuwa wszystkie profile!
+
+### Czy DataWedge zużywa baterię?
+Minimalnie. DataWedge działa pasywnie i aktywuje się tylko podczas skanowania.
+
+### Skaner skanuje z opóźnieniem - co robić?
+1. Zmniejsz liczbę aktywnych dekoderów
+2. Wyłącz tryb Picklist jeśli niepotrzebny
+3. Sprawdź czy aplikacja nie ma własnego przetwarzania spowalniającego
+`
   }
 ]
 
@@ -3191,6 +3431,8 @@ const WORD_STEMS: Record<string, string[]> = {
   'roaming': ['roaming', 'roamingu', 'przełącza', 'przełączanie'],
   'reset': ['reset', 'resetow', 'zresetow', 'fabryczn', 'factory', 'enterprise'],
   'recovery': ['recovery', 'odzyskiw', 'przywróc', 'przywraca'],
+  'datawedge': ['datawedge', 'data wedge', 'keystroke', 'intent', 'profil', 'profile'],
+  'symbologia': ['symbologia', 'symbologii', 'dekoder', 'dekodera', 'kod kreskowy', 'barcode'],
 }
 
 // Funkcja do normalizacji słowa (znajdź rdzeń)
