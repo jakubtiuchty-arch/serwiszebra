@@ -93,9 +93,9 @@ export const blogPosts: BlogPost[] = [
     category: 'troubleshooting',
     tags: ['drukarka zebra', 'nie drukuje', 'troubleshooting', 'naprawa'],
     seo: {
-      metaTitle: 'Drukarka Zebra nie drukuje - 7 przyczyn i rozwiązania | Serwis Zebra',
-      metaDescription: 'Drukarka Zebra nie drukuje? Poznaj 7 najczęstszych przyczyn: problemy z głowicą, ribbon, kalibracją, sterownikami. Poradnik krok po kroku od certyfikowanych techników.',
-      keywords: ['drukarka zebra nie drukuje', 'naprawa drukarki zebra', 'problemy z drukarką zebra', 'serwis zebra']
+      metaTitle: 'Drukarka Zebra nie drukuje - 7 przyczyn i rozwiązania',
+      metaDescription: 'Drukarka Zebra nie drukuje? Poznaj 7 przyczyn: głowica, ribbon, kalibracja, sterowniki. Poradnik krok po kroku.',
+      keywords: ['drukarka zebra nie drukuje', 'dlaczego drukarka zebra nie drukuje', 'jak naprawić drukarkę zebra', 'naprawa drukarki zebra', 'problemy z drukarką zebra', 'serwis drukarek zebra', 'zebra zd420 nie drukuje', 'zebra gk420 problemy']
     },
     content: `
 ## Dlaczego drukarka Zebra nie drukuje?
@@ -258,10 +258,20 @@ Jako **autoryzowany partner serwisowy Zebra** oferujemy:
 
 ---
 
+## Przydatne poradniki
+
+Sprawdź również inne artykuły, które mogą Ci pomóc:
+
+- [Jak wyczyścić głowicę drukarki Zebra](/blog/jak-wyczyscic-glowice-drukarki-zebra) - regularna konserwacja zapobiega wielu problemom
+- [Kalibracja drukarki Zebra - poradnik](/blog/kalibracja-drukarki-zebra-poradnik-krok-po-kroku) - rozwiąż problemy z wykrywaniem etykiet
+- [Blady wydruk - przyczyny i rozwiązania](/blog/blady-wydruk-drukarka-zebra-przyczyny-rozwiazania) - gdy wydruk jest zbyt jasny
+
+---
+
 ## FAQ - Najczęściej zadawane pytania
 
 ### Ile kosztuje naprawa drukarki Zebra?
-Ceny napraw zaczynają się od 150 zł za czyszczenie mechanizmu. Wymiana głowicy to koszt 450-2400 zł w zależności od modelu. Dokładną wycenę otrzymasz po bezpłatnej diagnozie.
+Ceny napraw zaczynają się od 150 zł za czyszczenie mechanizmu. Wymiana głowicy to koszt 250-2500 zł w zależności od modelu. Dokładną wycenę otrzymasz po bezpłatnej diagnozie.
 
 ### Jak długo trwa naprawa?
 Standardowa naprawa trwa 3-5 dni roboczych. Oferujemy również tryb express (1-2 dni) za dodatkową opłatą.
@@ -288,9 +298,9 @@ Skontaktuj się z nami - jako autoryzowany serwis Zebra obsługujemy również n
     category: 'poradniki',
     tags: ['głowica drukująca', 'czyszczenie', 'konserwacja', 'poradnik'],
     seo: {
-      metaTitle: 'Jak wyczyścić głowicę drukarki Zebra - poradnik | Serwis Zebra',
-      metaDescription: 'Poradnik czyszczenia głowicy drukującej Zebra krok po kroku. Dowiedz się jak prawidłowo konserwować drukarkę etykiet i wydłużyć żywotność głowicy.',
-      keywords: ['czyszczenie głowicy zebra', 'konserwacja drukarki zebra', 'jak czyścić głowicę']
+      metaTitle: 'Jak wyczyścić głowicę drukarki Zebra - poradnik',
+      metaDescription: 'Czyszczenie głowicy Zebra krok po kroku. Jak konserwować drukarkę etykiet i wydłużyć żywotność głowicy. GK420, ZD420, ZT410.',
+      keywords: ['czyszczenie głowicy zebra', 'jak wyczyścić głowicę drukarki zebra', 'konserwacja drukarki zebra', 'głowica drukująca czyszczenie', 'zebra głowica jak czyścić', 'patyczki do czyszczenia głowicy', 'ipa głowica drukująca']
     },
     content: `
 ## Dlaczego warto regularnie czyścić głowicę drukującą?
@@ -389,6 +399,14 @@ Nawet przy prawidłowej konserwacji głowica zużywa się. Oznaki konieczności 
 - Przekroczony resurs (1-3 mln cm)
 
 **Potrzebujesz wymiany głowicy? [Skontaktuj się z nami →](/#formularz)**
+
+---
+
+## Przydatne poradniki
+
+- [Wymiana głowicy - kiedy i ile kosztuje?](/blog/wymiana-glowicy-drukarki-zebra-kiedy-konieczna-ile-kosztuje) - gdy czyszczenie nie pomaga
+- [Blady wydruk - przyczyny i rozwiązania](/blog/blady-wydruk-drukarka-zebra-przyczyny-rozwiazania) - częsty objaw brudnej głowicy
+- [Drukarka Zebra nie drukuje](/blog/drukarka-zebra-nie-drukuje-przyczyny-rozwiazania) - kompleksowa diagnostyka
 `
   },
   {
@@ -406,9 +424,9 @@ Nawet przy prawidłowej konserwacji głowica zużywa się. Oznaki konieczności 
     category: 'poradniki',
     tags: ['głowica drukująca', 'wymiana głowicy', 'koszt naprawy', 'drukarka zebra'],
     seo: {
-      metaTitle: 'Wymiana głowicy drukującej Zebra - kiedy i ile kosztuje? | Serwis Zebra',
-      metaDescription: 'Kiedy wymienić głowicę w drukarce Zebra? Poznaj objawy zużycia, koszty wymiany (450-2400 zł) i dowiedz się, czy warto robić to samodzielnie. Poradnik od certyfikowanych techników.',
-      keywords: ['wymiana głowicy zebra', 'głowica drukująca zebra cena', 'koszt wymiany głowicy', 'głowica zebra zd420']
+      metaTitle: 'Wymiana głowicy drukarki Zebra - kiedy i ile kosztuje?',
+      metaDescription: 'Kiedy wymienić głowicę Zebra? Objawy zużycia, koszty wymiany (250-2500 zł). Czy warto samodzielnie? Poradnik.',
+      keywords: ['wymiana głowicy zebra', 'głowica drukująca zebra cena', 'ile kosztuje wymiana głowicy zebra', 'głowica zebra zd420 cena', 'głowica gk420 wymiana', 'kiedy wymienić głowicę drukarki', 'zużyta głowica drukująca objawy']
     },
     content: `
 ## Czym jest głowica drukująca i dlaczego jest tak ważna?
@@ -571,6 +589,14 @@ Jako **autoryzowany partner serwisowy Zebra** oferujemy:
 
 ---
 
+## Przydatne poradniki
+
+- [Jak wyczyścić głowicę drukarki Zebra](/blog/jak-wyczyscic-glowice-drukarki-zebra) - spróbuj najpierw czyszczenia
+- [Czerwona dioda w Zebra GK420](/blog/zebra-gk420-czerwona-dioda-diagnostyka) - diagnostyka błędów
+- [Kalibracja drukarki Zebra](/blog/kalibracja-drukarki-zebra-poradnik-krok-po-kroku) - po wymianie głowicy zalecana
+
+---
+
 ## FAQ - Najczęściej zadawane pytania
 
 ### Czy mogę sam wymienić głowicę w drukarce Zebra?
@@ -601,9 +627,9 @@ Standardowa wymiana trwa 1-2 dni robocze od momentu dostarczenia drukarki. W try
     category: 'troubleshooting',
     tags: ['GK420d', 'GK420t', 'czerwona dioda', 'troubleshooting', 'diagnostyka'],
     seo: {
-      metaTitle: 'Zebra GK420d czerwona dioda - co oznacza? Diagnostyka | Serwis Zebra',
-      metaDescription: 'Czerwona dioda w Zebra GK420d/GK420t? Poznaj wszystkie sekwencje mrugania: ciągła, pulsująca, migająca. Instrukcja diagnostyki krok po kroku od certyfikowanych techników.',
-      keywords: ['zebra gk420d czerwona dioda', 'gk420t lampka czerwona', 'zebra gk420 błąd', 'gk420d nie drukuje']
+      metaTitle: 'Zebra GK420d czerwona dioda - co oznacza i jak naprawić?',
+      metaDescription: 'Czerwona dioda w Zebra GK420d/GK420t? Sekwencje mrugania: ciągła, pulsująca, migająca. Diagnostyka krok po kroku.',
+      keywords: ['zebra gk420d czerwona dioda', 'co oznacza czerwona lampka gk420', 'gk420t lampka czerwona', 'zebra gk420 błąd mrugająca dioda', 'gk420d nie drukuje czerwona lampka', 'diagnostyka drukarki zebra', 'gk420 error codes']
     },
     content: `
 ## Problem: Czerwona dioda w drukarce Zebra GK420
@@ -827,6 +853,14 @@ Jako **autoryzowany partner serwisowy Zebra** oferujemy:
 
 ---
 
+## Przydatne poradniki
+
+- [Drukarka Zebra nie drukuje - 7 przyczyn](/blog/drukarka-zebra-nie-drukuje-przyczyny-rozwiazania) - kompleksowa diagnostyka
+- [Kalibracja drukarki Zebra](/blog/kalibracja-drukarki-zebra-poradnik-krok-po-kroku) - często rozwiązuje problemy z diodą
+- [Blady wydruk - przyczyny i rozwiązania](/blog/blady-wydruk-drukarka-zebra-przyczyny-rozwiazania) - inny częsty problem
+
+---
+
 ## FAQ - Najczęściej zadawane pytania
 
 ### Dlaczego drukarka GK420 świeci na czerwono mimo zamkniętej pokrywy?
@@ -860,9 +894,9 @@ Zebra oficjalnie zakończyła produkcję serii GK, ale jako autoryzowany serwis 
     category: 'troubleshooting',
     tags: ['blady wydruk', 'jakość druku', 'troubleshooting', 'GK420', 'ZD420', 'darkness'],
     seo: {
-      metaTitle: 'Blady wydruk w drukarce Zebra - 5 przyczyn i rozwiązania | Serwis Zebra',
-      metaDescription: 'Drukarka Zebra drukuje za jasno? Poznaj 5 przyczyn bladego wydruku: zasilacz, wałek, ustawienia Darkness, głowica, ribbon. Instrukcja naprawy krok po kroku.',
-      keywords: ['blady wydruk zebra', 'drukarka zebra drukuje za jasno', 'słaba jakość wydruku zebra', 'zebra darkness ustawienia']
+      metaTitle: 'Blady wydruk w drukarce Zebra - 5 przyczyn i rozwiązania',
+      metaDescription: 'Drukarka Zebra drukuje za jasno? 5 przyczyn bladego wydruku: zasilacz, wałek, Darkness, głowica, ribbon. Napraw sam!',
+      keywords: ['blady wydruk zebra', 'drukarka zebra drukuje za jasno', 'słaba jakość wydruku zebra', 'zebra darkness ustawienia', 'jak poprawić jakość wydruku zebra', 'nieczytelny wydruk zebra', 'zebra wydruk zbyt jasny']
     },
     content: `
 ## Problem: Blady wydruk w drukarce Zebra
@@ -1117,6 +1151,14 @@ Jako **autoryzowany partner serwisowy Zebra** oferujemy:
 
 ---
 
+## Przydatne poradniki
+
+- [Jak wyczyścić głowicę drukarki Zebra](/blog/jak-wyczyscic-glowice-drukarki-zebra) - często rozwiązuje problem bladego wydruku
+- [Wymiana głowicy - kiedy i ile kosztuje?](/blog/wymiana-glowicy-drukarki-zebra-kiedy-konieczna-ile-kosztuje) - gdy czyszczenie nie pomaga
+- [Kalibracja drukarki Zebra](/blog/kalibracja-drukarki-zebra-poradnik-krok-po-kroku) - optymalizacja jakości wydruku
+
+---
+
 ## FAQ - Najczęściej zadawane pytania
 
 ### Jakie ustawienie Darkness jest optymalne?
@@ -1150,9 +1192,9 @@ Zależy od przyczyny: czyszczenie mechanizmu 150-360 zł, wymiana wałka 150-290
     category: 'poradniki',
     tags: ['kalibracja', 'sensor', 'gap', 'black mark', 'etykiety', 'GK420', 'ZD420', 'ZT411'],
     seo: {
-      metaTitle: 'Kalibracja drukarki Zebra - poradnik krok po kroku | Serwis Zebra',
-      metaDescription: 'Jak skalibrować drukarkę Zebra? Kompletny poradnik kalibracji dla serii GK420, ZD420, ZD621, ZT411. Auto-kalibracja, kalibracja ręczna, rozwiązywanie problemów.',
-      keywords: ['kalibracja drukarki zebra', 'kalibracja zebra gk420', 'smart calibration zebra', 'zebra sensor gap', 'kalibracja etykiet zebra']
+      metaTitle: 'Kalibracja drukarki Zebra - poradnik krok po kroku',
+      metaDescription: 'Jak skalibrować drukarkę Zebra? Poradnik dla GK420, ZD420, ZD621, ZT411. Auto-kalibracja i ręczna. Rozwiązywanie problemów.',
+      keywords: ['kalibracja drukarki zebra', 'jak skalibrować drukarkę zebra', 'kalibracja zebra gk420', 'smart calibration zebra', 'zebra sensor gap kalibracja', 'drukarka zebra pomija etykiety', 'kalibracja sensora zebra']
     },
     content: `
 ## Czym jest kalibracja drukarki i dlaczego jest ważna?
@@ -1480,9 +1522,9 @@ Tak, ale musisz ustawić drukarkę w tryb "Continuous" i podać dokładną dług
     category: 'troubleshooting',
     tags: ['terminal zebra', 'boot loop', 'fastboot', 'TC21', 'MC33', 'MC93', 'nie włącza się', 'zawiesza się na logo'],
     seo: {
-      metaTitle: 'Terminal Zebra nie włącza się - Boot Loop i Fastboot | Serwis Zebra',
-      metaDescription: 'Terminal Zebra TC21, MC33, MC93 zawiesza się na logo lub w boot loop? Poradnik krok po kroku: wyjście z Fastboot, hard reset, Recovery Mode. Kiedy potrzebna naprawa serwisowa.',
-      keywords: ['zebra boot loop', 'zebra fastboot', 'terminal zebra nie włącza się', 'TC21 zawiesza się', 'MC33 boot loop', 'naprawa terminala zebra']
+      metaTitle: 'Terminal Zebra nie włącza się - Boot Loop i Fastboot',
+      metaDescription: 'Terminal Zebra TC21, MC33 zawiesza się na logo? Wyjście z Fastboot, hard reset, Recovery Mode. Poradnik krok po kroku.',
+      keywords: ['zebra boot loop', 'zebra fastboot', 'terminal zebra nie włącza się', 'jak wyjść z fastboot zebra', 'TC21 zawiesza się na logo', 'MC33 boot loop naprawa', 'recovery mode zebra', 'hard reset terminal zebra']
     },
     content: `
 ## Problem: Terminal Zebra nie włącza się lub zawiesza na logo
@@ -1732,6 +1774,14 @@ Jako **autoryzowany partner serwisowy Zebra** oferujemy:
 
 ---
 
+## Przydatne poradniki
+
+- [Reset terminala Zebra - Factory vs Enterprise](/blog/reset-fabryczny-terminal-zebra-factory-enterprise) - różne metody resetowania
+- [Kody błędów terminala Zebra](/blog/kody-bledow-terminal-zebra-led-komunikaty) - diagnostyka LED
+- [Skaner terminala nie działa](/blog/skaner-terminala-zebra-nie-dziala-diagnostyka-naprawa) - częsty problem po resecie
+
+---
+
 ## FAQ - Najczęściej zadawane pytania
 
 ### Czy factory reset usunie blokadę FRP?
@@ -1762,9 +1812,9 @@ Zależy od przyczyny: softwareowy (flash firmware): 150-250 zł, sprzętowy (pam
     category: 'troubleshooting',
     tags: ['skaner', 'terminal zebra', 'datawedge', 'SE4710', 'SE4750', 'kody kreskowe', 'naprawa', 'TC21', 'MC33', 'MC93'],
     seo: {
-      metaTitle: 'Skaner terminala Zebra nie działa - diagnostyka i naprawa | Serwis Zebra',
-      metaDescription: 'Skaner w terminalu Zebra nie skanuje? Brak lasera, przerywane skanowanie, nie czyta kodów 2D? Poradnik krok po kroku: czyszczenie, DataWedge, wymiana okienka. TC21, MC33, MC93.',
-      keywords: ['skaner zebra nie działa', 'terminal zebra skaner', 'datawedge konfiguracja', 'SE4710', 'SE4750', 'naprawa skanera zebra']
+      metaTitle: 'Skaner terminala Zebra nie działa - diagnostyka i naprawa',
+      metaDescription: 'Skaner Zebra nie skanuje? Brak lasera, nie czyta kodów 2D? Czyszczenie, DataWedge, wymiana okienka. TC21, MC33.',
+      keywords: ['skaner zebra nie działa', 'dlaczego skaner zebra nie skanuje', 'terminal zebra skaner problem', 'datawedge konfiguracja', 'SE4710 nie czyta kodów', 'naprawa skanera zebra', 'TC21 skaner nie działa', 'MC33 problem ze skanerem']
     },
     content: `
 ## Problem: Skaner w terminalu Zebra nie działa
@@ -2091,6 +2141,14 @@ Jako **autoryzowany partner serwisowy Zebra** oferujemy:
 
 ---
 
+## Przydatne poradniki
+
+- [Kody błędów terminala Zebra](/blog/kody-bledow-terminal-zebra-led-komunikaty) - diagnostyka LED i komunikatów
+- [Terminal nie włącza się - Boot Loop](/blog/zebra-terminal-nie-wlacza-sie-fastboot-boot-loop) - problemy z uruchamianiem
+- [Reset terminala Zebra](/blog/reset-fabryczny-terminal-zebra-factory-enterprise) - przywracanie ustawień
+
+---
+
 ## FAQ - Najczęściej zadawane pytania
 
 ### Dlaczego skaner działa w jednej aplikacji, a w innej nie?
@@ -2125,9 +2183,9 @@ Przy normalnym użytkowaniu **5-7 lat**. Żywotność zależy od liczby skanowa�
     category: 'troubleshooting',
     tags: ['wifi zebra', 'bluetooth terminal', 'problemy z wifi', 'parowanie bluetooth', 'roaming wifi', '802.11', 'TC21 wifi', 'MC33 bluetooth'],
     seo: {
-      metaTitle: 'Problemy z WiFi i Bluetooth w terminalu Zebra - rozwiązania | Serwis Zebra',
-      metaDescription: 'Terminal Zebra nie łączy się z WiFi? Bluetooth nie paruje? Poradnik: konfiguracja WiFi korporacyjnego, roaming 802.11r/k/v, parowanie drukarek i skanerów.',
-      keywords: ['wifi zebra', 'bluetooth terminal', 'problemy z wifi', 'parowanie bluetooth', 'roaming wifi', '802.11r', 'TC21', 'MC33']
+      metaTitle: 'Problemy z WiFi i Bluetooth w terminalu Zebra - rozwiązania',
+      metaDescription: 'Terminal Zebra nie łączy się z WiFi? Bluetooth nie paruje? Konfiguracja WiFi, roaming 802.11r/k/v, parowanie.',
+      keywords: ['terminal zebra wifi nie działa', 'zebra bluetooth nie paruje', 'problemy z wifi zebra', 'jak skonfigurować wifi w terminalu zebra', 'roaming wifi 802.11r', 'TC21 wifi problem', 'MC33 bluetooth nie łączy']
     },
     content: `
 ## Problem: Łączność bezprzewodowa w terminalu Zebra
@@ -2140,15 +2198,15 @@ WiFi i Bluetooth to kluczowe funkcje terminali mobilnych Zebra. Problemy z łąc
 
 | Objaw | Prawdopodobna przyczyna | Rozwiązanie |
 |-------|-------------------------|-------------|
-| WiFi nie włącza się | Tryb samolotowy, awaria | [Sekcja 1](#wifi-nie-laczy-sie) |
-| "Zapisane" ale nie łączy | Złe hasło, problem AP | [Sekcja 2](#wifi-zapisane-ale-nie-laczy) |
-| Częste rozłączenia | Słaby sygnał, roaming | [Sekcja 3](#wifi-czeste-rozlaczenia) |
-| Bluetooth nie paruje | Tryb discoverable, zasięg | [Sekcja 4](#bluetooth-nie-paruje) |
-| Bluetooth rozłącza się | Interferencje, bateria | [Sekcja 5](#bluetooth-rozlacza-sie) |
+| WiFi nie włącza się | Tryb samolotowy, awaria | [Sekcja 1](#1-wifi-nie-laczy-sie) |
+| "Zapisane" ale nie łączy | Złe hasło, problem AP | [Sekcja 2](#2-wifi-zapisane-ale-nie-laczy) |
+| Częste rozłączenia | Słaby sygnał, roaming | [Sekcja 3](#3-wifi-czesto-sie-rozlacza) |
+| Bluetooth nie paruje | Tryb discoverable, zasięg | [Sekcja 5](#5-bluetooth-nie-paruje) |
+| Bluetooth rozłącza się | Interferencje, bateria | [Sekcja 6](#6-bluetooth-rozlacza-sie) |
 
 ---
 
-## 1. WiFi nie łączy się {#wifi-nie-laczy-sie}
+## 1. WiFi nie łączy się
 
 ### Objawy
 - Ikona WiFi jest szara lub przekreślona
@@ -2192,7 +2250,7 @@ Jeśli:
 
 ---
 
-## 2. WiFi "Zapisane" ale nie łączy {#wifi-zapisane-ale-nie-laczy}
+## 2. WiFi "Zapisane" ale nie łączy
 
 ### Objawy
 - Sieć pokazuje status "Zapisane"
@@ -2240,7 +2298,7 @@ Jeśli sieć nie rozgłasza SSID:
 
 ---
 
-## 3. WiFi często się rozłącza {#wifi-czeste-rozlaczenia}
+## 3. WiFi często się rozłącza
 
 ### Objawy
 - Połączenie zrywa się co kilka minut
@@ -2297,7 +2355,7 @@ To oznacza że WiFi działa, ale nie ma dostępu do internetu:
 
 ---
 
-## 4. WiFi korporacyjne (802.1x) {#wifi-korporacyjne}
+## 4. WiFi korporacyjne (802.1x)
 
 ### Konfiguracja EAP-PEAP (najczęstsza)
 
@@ -2325,7 +2383,7 @@ Wymaga zainstalowanego certyfikatu klienta:
 
 ---
 
-## 5. Bluetooth nie paruje {#bluetooth-nie-paruje}
+## 5. Bluetooth nie paruje
 
 ### Objawy
 - Nie widać urządzenia na liście
@@ -2375,7 +2433,7 @@ Jeśli parowanie nadal nie działa:
 
 ---
 
-## 6. Bluetooth rozłącza się {#bluetooth-rozlacza-sie}
+## 6. Bluetooth rozłącza się
 
 ### Objawy
 - Połączenie zrywa się losowo
@@ -2481,6 +2539,14 @@ Jako **autoryzowany partner serwisowy Zebra** oferujemy:
 
 ---
 
+## Przydatne poradniki
+
+- [Reset terminala Zebra](/blog/reset-fabryczny-terminal-zebra-factory-enterprise) - gdy soft reset nie pomaga
+- [Kody błędów terminala Zebra](/blog/kody-bledow-terminal-zebra-led-komunikaty) - diagnostyka komunikatów błędów
+- [Terminal nie włącza się](/blog/zebra-terminal-nie-wlacza-sie-fastboot-boot-loop) - problemy z uruchamianiem
+
+---
+
 ## FAQ - Najczęściej zadawane pytania
 
 ### Czy mogę używać WiFi i Bluetooth jednocześnie?
@@ -2497,6 +2563,572 @@ Nowsze modele (TC22, TC27, MC94) wspierają **WiFi 6 (802.11ax)** i **WiFi 6E (6
 
 ### Ile urządzeń Bluetooth można sparować jednocześnie?
 Można mieć **7 aktywnych połączeń** Bluetooth jednocześnie (ograniczenie protokołu). W praktyce zwykle używa się 2-3: słuchawka + drukarka + skaner.
+`
+  },
+  // ========== ARTYKUŁ 9: Reset do ustawień fabrycznych ==========
+  {
+    slug: 'reset-fabryczny-terminal-zebra-factory-enterprise',
+    title: 'Reset do ustawień fabrycznych terminala Zebra - Factory vs Enterprise Reset',
+    excerpt: 'Jak zresetować terminal Zebra TC21, MC33 lub MC93? Poznaj różnicę między Factory Reset a Enterprise Reset i dowiedz się kiedy którego użyć.',
+    coverImage: '',
+    author: {
+      name: 'Zespół Serwis Zebra',
+      role: 'Certyfikowani technicy Zebra'
+    },
+    publishedAt: '2025-12-03',
+    readingTime: 8,
+    deviceType: 'terminale',
+    category: 'poradniki',
+    tags: ['factory reset zebra', 'enterprise reset', 'reset terminala', 'TC21 reset', 'MC33 reset', 'hard reset zebra', 'recovery mode'],
+    seo: {
+      metaTitle: 'Reset terminala Zebra - Factory vs Enterprise Reset',
+      metaDescription: 'Jak zresetować terminal Zebra? Factory vs Enterprise Reset - różnice i instrukcja. TC21, TC52, MC33, MC93.',
+      keywords: ['factory reset zebra', 'jak zresetować terminal zebra', 'enterprise reset zebra różnica', 'TC21 reset do ustawień fabrycznych', 'MC33 factory reset', 'hard reset terminal zebra', 'recovery mode reset']
+    },
+    content: `
+## Kiedy potrzebujesz resetu?
+
+Reset terminala Zebra może być konieczny gdy:
+- Urządzenie działa wolno lub zawiesza się
+- Chcesz usunąć wszystkie dane przed przekazaniem innemu użytkownikowi
+- Pojawiają się błędy systemowe, których nie da się naprawić
+- Terminal nie uruchamia się prawidłowo (boot loop)
+- Przygotowujesz urządzenie do sprzedaży
+
+> **⚠️ Uwaga:** Reset kasuje dane! Przed resetem **zrób kopię zapasową** ważnych plików i upewnij się, że znasz dane logowania do konta Google (FRP).
+
+---
+
+## Rodzaje resetów - co wybrać?
+
+| Typ resetu | Co kasuje | Co zachowuje | Kiedy użyć |
+|------------|-----------|--------------|------------|
+| **Soft Reset** | Nic | Wszystko | Drobne problemy, zawieszenie |
+| **Enterprise Reset** | Dane użytkownika (/data) | Partycja /enterprise, certyfikaty | Przekazanie innemu pracownikowi |
+| **Factory Reset** | WSZYSTKO | Nic (stan fabryczny) | Sprzedaż, poważne błędy |
+
+---
+
+## 1. Soft Reset (restart)
+
+Najprostszy reset - po prostu restart urządzenia. Nie kasuje żadnych danych.
+
+### Metoda 1: Z menu
+1. Przytrzymaj przycisk **Power**
+2. Wybierz **Restart** (lub Uruchom ponownie)
+3. Poczekaj na ponowne uruchomienie
+
+### Metoda 2: Wymuszone (gdy terminal nie reaguje)
+Przytrzymaj przycisk **Power** przez **10-15 sekund** aż urządzenie się wyłączy, potem włącz normalnie.
+
+> **💡 Pro tip:** Soft reset rozwiązuje większość problemów z zawieszaniem się aplikacji i wolnym działaniem. Zawsze zacznij od tego!
+
+---
+
+## 2. Hard Reset (kombinacje przycisków)
+
+Gdy terminal nie reaguje na standardowy restart, użyj hard reset. **Nie kasuje danych** - tylko wymusza restart.
+
+### Hard Reset - wymuszone wyłączenie
+
+Gdy terminal całkowicie się zawiesił i nie reaguje:
+
+**Przytrzymaj przycisk Power przez 10-15 sekund** - urządzenie się wyłączy. Następnie włącz normalnie.
+
+> **💡 Pro tip:** Jeśli to nie działa, **wyjmij baterię** na 10 sekund i włóż z powrotem.
+
+---
+
+## 3. Enterprise Reset
+
+**Enterprise Reset** kasuje dane użytkownika, ale **zachowuje konfigurację firmową** - certyfikaty, ustawienia WiFi korporacyjnego, profile MDM.
+
+### Kiedy użyć Enterprise Reset?
+- Przekazujesz terminal innemu pracownikowi
+- Chcesz wyczyścić dane, ale zachować konfigurację IT
+- Rozwiązujesz problemy z aplikacjami użytkownika
+
+### Metoda 1: Z ustawień (najłatwiejsza)
+
+1. Otwórz **Ustawienia**
+2. Przejdź do **System → Opcje resetowania**
+3. Wybierz **Wymaż wszystkie dane (enterprise reset)**
+4. Potwierdź dwukrotnie
+
+### Metoda 2: Z Recovery Mode
+
+1. Wyłącz terminal
+2. Włącz trzymając: **Power + Volume Up** (lub kombinacja dla modelu)
+3. W menu Recovery wybierz **Wipe data/factory reset**
+4. Wybierz **Enterprise Reset** (jeśli dostępne)
+5. Potwierdź i poczekaj
+6. Wybierz **Reboot system now**
+
+### Metoda 3: Przez pakiet OTA (zaawansowana)
+
+1. Pobierz plik Enterprise Reset ze strony zebra.com/support
+2. Skopiuj na kartę microSD
+3. Wejdź w Recovery Mode
+4. Wybierz **Apply update from SD card**
+5. Wybierz plik Enterprise Reset
+6. Poczekaj na zakończenie i restart
+
+> **💡 Pro tip:** Enterprise Reset jest idealny w środowisku korporacyjnym - nie musisz ponownie konfigurować WiFi, VPN ani certyfikatów!
+
+---
+
+## 4. Factory Reset (reset fabryczny)
+
+**Factory Reset** przywraca terminal do stanu fabrycznego - kasuje **WSZYSTKO** włącznie z partycją /enterprise.
+
+### Kiedy użyć Factory Reset?
+- Sprzedajesz lub oddajesz urządzenie
+- Enterprise Reset nie rozwiązał problemu
+- Chcesz całkowicie wyczyścić urządzenie
+- Terminal ma poważne błędy systemowe
+
+### Przed Factory Reset - WAŻNE!
+
+1. **Usuń konto Google** - zapobiegnie blokadzie FRP
+   - Ustawienia → Konta → Google → Usuń konto
+2. **Zrób kopię zapasową** ważnych danych
+3. **Zapisz** hasła WiFi, których będziesz potrzebować
+
+### Metoda 1: Z ustawień
+
+1. Otwórz **Ustawienia**
+2. Przejdź do **System → Opcje resetowania**
+3. Wybierz **Wymaż wszystkie dane (reset fabryczny)**
+4. Potwierdź dwukrotnie
+5. Terminal uruchomi się ponownie i wyczyści dane
+
+### Metoda 2: Z Recovery Mode
+
+1. Wyłącz terminal
+2. Wejdź w Recovery Mode (kombinacja przycisków - patrz tabela)
+3. Użyj **Volume Up/Down** do nawigacji
+4. Wybierz **Wipe data/factory reset**
+5. Potwierdź **Yes**
+6. Poczekaj na zakończenie
+7. Wybierz **Reboot system now**
+
+### Metoda 3: Przez ADB (dla zaawansowanych)
+
+1. Włącz **USB Debugging** na terminalu
+2. Podłącz do komputera z ADB
+3. Wykonaj komendę: \`adb reboot recovery\`
+4. W Recovery wybierz **Wipe data/factory reset**
+5. Potwierdź i poczekaj
+
+---
+
+## 5. Wejście w Recovery Mode
+
+Recovery Mode to specjalny tryb, który pozwala wykonać reset nawet gdy system nie działa.
+
+### Jak wejść w Recovery Mode?
+
+**Procedura (potwierdzona z manuali Zebra):**
+
+1. Przytrzymaj **Power** aż pojawi się menu
+2. Dotknij **Restart**
+3. Gdy urządzenie się restartuje, **przytrzymaj odpowiedni przycisk** aż zawibruje:
+
+| Model | Przycisk do przytrzymania |
+|-------|--------------------------|
+| **TC21/TC26** | PTT |
+| **TC22/TC27** | PTT |
+| **TC52/TC57** | PTT |
+| **MC33/MC34** | Right Scan (lub Trigger w wersji Gun) |
+| **MC93/MC94** | Trigger |
+
+### Menu Recovery Mode
+
+Po wejściu w Recovery zobaczysz menu tekstowe:
+
+- **Reboot system now** - restart normalny
+- **Apply update from ADB** - aktualizacja przez komputer
+- **Apply update from SD card** - aktualizacja z karty SD
+- **Wipe data/factory reset** - reset (Factory lub Enterprise)
+- **Wipe cache partition** - tylko cache (bezpieczne)
+
+**Nawigacja:**
+- **Volume Up/Down** - poruszanie się po menu
+- **Power** - wybór opcji
+
+> **💡 Pro tip:** Jeśli widzisz "No command" z leżącym Androidem, przytrzymaj **Power** i krótko naciśnij **Volume Up** - pojawi się menu.
+
+---
+
+## 6. Problem z FRP (Factory Reset Protection)
+
+### Co to jest FRP?
+
+FRP to zabezpieczenie Google - po Factory Reset urządzenie wymaga zalogowania na **konto Google, które było wcześniej dodane**. Chroni przed kradzieżą.
+
+### Jak uniknąć blokady FRP?
+
+**PRZED resetem:**
+1. Ustawienia → Konta → Google
+2. Wybierz konto
+3. Dotknij **Usuń konto**
+4. Potwierdź
+5. Dopiero teraz wykonaj Factory Reset
+
+### Jestem zablokowany przez FRP - co robić?
+
+Jeśli nie znasz danych logowania do konta Google:
+- **Nie ma oficjalnego sposobu na obejście FRP**
+- Skontaktuj się z poprzednim właścicielem urządzenia
+- Skontaktuj się z działem IT firmy
+- Zebra NIE oferuje narzędzi do obejścia FRP
+
+> **⚠️ Uwaga:** Narzędzia do "obejścia FRP" z internetu mogą zawierać malware. Nie używaj ich!
+
+---
+
+## 7. Co się zachowuje po resecie?
+
+| Element | Enterprise Reset | Factory Reset |
+|---------|-----------------|---------------|
+| Aplikacje użytkownika | ❌ Usunięte | ❌ Usunięte |
+| Dane aplikacji | ❌ Usunięte | ❌ Usunięte |
+| Zdjęcia, pliki | ❌ Usunięte | ❌ Usunięte |
+| Konta (Google, email) | ❌ Usunięte | ❌ Usunięte |
+| WiFi korporacyjne | ✅ Zachowane | ❌ Usunięte |
+| Certyfikaty | ✅ Zachowane | ❌ Usunięte |
+| Konfiguracja MDM | ✅ Zachowane | ❌ Usunięte |
+| Folder /enterprise | ✅ Zachowane | ❌ Usunięte |
+| System operacyjny | ✅ Bez zmian | ✅ Bez zmian |
+
+---
+
+## Kiedy reset NIE pomoże?
+
+Reset **nie naprawi** problemów sprzętowych:
+- Uszkodzony ekran
+- Nie działający skaner (awaria modułu)
+- Problemy z baterią
+- Uszkodzone złącze USB
+- Awaria anteny WiFi/Bluetooth
+
+Jeśli po Factory Reset problem nadal występuje - prawdopodobnie potrzebujesz **naprawy serwisowej**.
+
+---
+
+## Bezpłatna diagnostyka w Serwis Zebra
+
+Reset nie rozwiązał problemu?
+
+Jako **autoryzowany partner serwisowy Zebra** oferujemy:
+
+[CHECK] **Bezpłatna diagnostyka** terminala
+[CHECK] **Odbiór kurierem** z całej Polski  
+[CHECK] **Oryginalne części** Zebra
+[CHECK] **Gwarancja 12 miesięcy** na naprawę
+
+[**Wyślij terminal do diagnozy →**](/#formularz)
+
+---
+
+## Przydatne poradniki
+
+- [Terminal nie włącza się - Boot Loop](/blog/zebra-terminal-nie-wlacza-sie-fastboot-boot-loop) - Recovery Mode i Hard Reset
+- [Kody błędów terminala Zebra](/blog/kody-bledow-terminal-zebra-led-komunikaty) - co oznaczają diody LED
+- [Problemy z WiFi/Bluetooth](/blog/problemy-wifi-bluetooth-terminal-zebra) - rekonfiguracja po resecie
+
+---
+
+## FAQ - Najczęściej zadawane pytania
+
+### Czy Enterprise Reset usuwa aplikacje firmowe?
+Tak, usuwa aplikacje, ale **zachowuje folder /enterprise**. Jeśli aplikacje były tam zainstalowane lub masz MDM, zostaną przywrócone automatycznie.
+
+### Ile trwa Factory Reset?
+Zwykle **5-15 minut**. Jeśli trwa dłużej niż 30 minut, może być problem - nie przerywaj procesu!
+
+### Czy mogę cofnąć Factory Reset?
+**Nie.** Wszystkie dane są trwale usunięte. Jedyna opcja to przywrócenie z kopii zapasowej (jeśli ją masz).
+
+### Terminal nie wchodzi w Recovery Mode - co robić?
+Upewnij się że wykonujesz procedurę prawidłowo: najpierw **Restart** z menu Power, a dopiero **podczas restartu** przytrzymaj PTT (lub Trigger dla MC). Jeśli nadal nie działa, możliwa awaria przycisków.
+
+### Czy Factory Reset naprawi boot loop?
+**Często tak**, jeśli boot loop jest spowodowany błędem oprogramowania. Jeśli nie pomoże, może być potrzebne wgranie systemu przez ADB lub naprawa sprzętowa.
+`
+  },
+  // ========== ARTYKUŁ 10: Kody błędów ==========
+  {
+    slug: 'kody-bledow-terminal-zebra-led-komunikaty',
+    title: 'Kody błędów terminala Zebra - LED, komunikaty i rozwiązania',
+    excerpt: 'Co oznacza migająca dioda LED na terminalu Zebra? Jak interpretować komunikaty błędów? Kompletny przewodnik po kodach błędów TC21, MC33, MC93.',
+    coverImage: '',
+    author: {
+      name: 'Zespół Serwis Zebra',
+      role: 'Certyfikowani technicy Zebra'
+    },
+    publishedAt: '2025-12-03',
+    readingTime: 10,
+    deviceType: 'terminale',
+    category: 'troubleshooting',
+    tags: ['kody błędów zebra', 'LED terminal', 'error codes', 'troubleshooting zebra', 'dioda LED', 'komunikaty błędów'],
+    seo: {
+      metaTitle: 'Kody błędów terminala Zebra - LED, komunikaty i rozwiązania',
+      metaDescription: 'Co oznacza migająca dioda LED na terminalu Zebra? Błędy WiFi, baterii, skanera. Troubleshooting TC21, MC33, MC93.',
+      keywords: ['kody błędów zebra', 'co oznacza dioda LED terminal zebra', 'error codes zebra TC21', 'troubleshooting terminal zebra', 'migająca dioda zebra', 'komunikaty błędów zebra', 'diagnostyka terminala zebra']
+    },
+    content: `
+## Jak czytać sygnały terminala Zebra?
+
+Terminale Zebra komunikują swój stan przez **diody LED** i **komunikaty na ekranie**. Zrozumienie tych sygnałów pozwala szybko zdiagnozować problem bez kontaktu z serwisem.
+
+---
+
+## 1. Wskaźniki LED ładowania
+
+Dioda LED ładowania znajduje się zwykle w górnej części terminala, obok głośnika.
+
+### Znaczenie kolorów LED (potwierdzone z manuali Zebra)
+
+| Stan LED | Znaczenie | Co robić? |
+|----------|-----------|-----------|
+| **Wyłączona** | Brak zasilania | Sprawdź ładowarkę/stację |
+| **Wolne miganie bursztynowe** (1x/4 sek) | Ładowanie w toku | Normalne - czekaj |
+| **Stały zielony** | Ładowanie zakończone | Bateria pełna |
+| **Wolne miganie czerwone** (1x/4 sek) | Ładowanie, ale bateria na końcu żywotności | Wymień baterię |
+| **Stały czerwony** | Naładowana, ale bateria na końcu żywotności | Wymień baterię |
+| **Szybkie miganie bursztynowe** (2x/sek) | Błąd ładowania | Sprawdź temperaturę |
+| **Szybkie miganie czerwone** (2x/sek) | Błąd ładowania + bateria do wymiany | Wymień baterię |
+
+> **💡 Pro tip:** "Końcu żywotności" oznacza że bateria ma poniżej 80% oryginalnej pojemności. Terminal nadal działa, ale czas pracy jest znacznie krótszy.
+
+### Błędy ładowania - przyczyny
+
+**Szybkie miganie** (2x/sek) oznacza błąd:
+- **Temperatura zbyt niska** - poniżej 5°C (41°F)
+- **Temperatura zbyt wysoka** - powyżej 40°C (104°F)
+- **Ładowanie trwa zbyt długo** - ponad 8 godzin bez zakończenia
+- **Uszkodzona bateria** - spróbuj inną baterię
+
+> **⚠️ Uwaga:** Nie ładuj baterii w ekstremalnych temperaturach! Dopuszczalny zakres to **5°C - 40°C**.
+
+---
+
+## 2. Wskaźniki LED skanowania
+
+Podczas skanowania terminal sygnalizuje wynik:
+
+| Stan LED | Dźwięk | Znaczenie |
+|----------|--------|-----------|
+| **Zielony błysk** | Pojedynczy beep | Kod odczytany poprawnie |
+| **Brak** | Brak | Kod nierozpoznany |
+| **Czerwony błysk** | Podwójny beep (opcjonalnie) | Błąd dekodowania |
+
+### Skaner nie świeci - przyczyny
+
+1. **DataWedge wyłączony** - włącz w ustawieniach
+2. **Profil DataWedge nieprawidłowy** - sprawdź konfigurację
+3. **Skaner wyłączony w ustawieniach** - włącz Barcode Input
+4. **Awaria sprzętowa** - wymaga serwisu
+
+---
+
+## 3. Komunikaty błędów rozruchu
+
+### "No command" (z leżącym Androidem)
+
+**Co to znaczy:** Terminal jest w trybie Recovery, ale czeka na polecenie.
+
+**Rozwiązanie:**
+1. Przytrzymaj **Power**
+2. Krótko naciśnij **Volume Up**
+3. Pojawi się menu Recovery
+
+### "Android is starting" (zapętlone)
+
+**Co to znaczy:** System nie może się uruchomić - boot loop.
+
+**Rozwiązanie:**
+1. Poczekaj 10-15 minut (może się naprawić)
+2. Wejdź w Recovery (Restart + PTT)
+3. Wybierz **Wipe cache partition**
+4. Jeśli nie pomoże - **Factory Reset**
+
+### "Optimizing apps" (zawieszone)
+
+**Co to znaczy:** Optymalizacja DEX po aktualizacji zamrożona.
+
+**Rozwiązanie:**
+1. **Poczekaj do 30 minut** - to normalne po dużej aktualizacji
+2. Jeśli trwa dłużej - wymuś restart (Power 15 sek)
+3. Wejdź w Recovery i wyczyść cache
+
+### "System UI has stopped"
+
+**Co to znaczy:** Interfejs systemowy się zawiesił.
+
+**Rozwiązanie:**
+1. Dotknij **OK** aby zrestartować UI
+2. Jeśli powtarza się - wyczyść cache aplikacji System UI
+3. Ustawienia → Aplikacje → System UI → Wyczyść pamięć podręczną
+
+### Błąd dm-verity
+
+**Co to znaczy:** Weryfikacja systemu nie powiodła się - system mógł być zmodyfikowany.
+
+**Rozwiązanie:**
+- Wgraj oficjalny firmware ze strony zebra.com/support
+
+---
+
+## 4. Kody błędów DataWedge
+
+DataWedge to systemowa usługa skanowania Zebra. Może zwracać kody błędów:
+
+| Kod błędu | Znaczenie | Rozwiązanie |
+|-----------|-----------|-------------|
+| **PROFILE_NOT_FOUND** | Profil nie istnieje | Utwórz profil lub sprawdź nazwę |
+| **SCANNER_ALREADY_DISABLED** | Skaner już wyłączony | Sprawdź status przed poleceniem |
+| **SCANNER_ENABLE_FAILED** | Nie można włączyć skanera | Zrestartuj DataWedge, potem urządzenie |
+| **SCANNER_IN_USE** | Inna aplikacja używa skanera | Zamknij konfliktującą aplikację |
+| **PROFILE_ALREADY_EXISTS** | Profil o tej nazwie istnieje | Użyj innej nazwy lub edytuj istniejący |
+
+### Jak sprawdzić logi DataWedge?
+
+1. Otwórz **DataWedge**
+2. Menu **⋮** → **Settings**
+3. Włącz **Logging**
+4. Sprawdź logi w **Fusion Logger** lub przez ADB
+
+---
+
+## 5. Komunikaty błędów WiFi
+
+| Komunikat | Znaczenie | Rozwiązanie |
+|-----------|-----------|-------------|
+| **"Błąd uwierzytelniania"** | Złe hasło lub typ zabezpieczeń | Sprawdź hasło, wybierz prawidłowy typ sieci |
+| **"Uzyskiwanie adresu IP..."** (zawieszone) | Problem z DHCP | Sprawdź serwer DHCP, spróbuj statyczny IP |
+| **"Połączono, brak internetu"** | WiFi OK, brak dostępu WAN | Sprawdź DNS, proxy, firewall routera |
+| **"Zapisane"** (nie łączy się) | Wielokrotne nieudane próby | Zapomnij sieć i połącz ponownie |
+| **"Sieć niedostępna"** | AP wyłączony lub poza zasięgiem | Sprawdź AP, zbliż się |
+| **Błędy certyfikatów** | Nieprawidłowy certyfikat | Zainstaluj prawidłowe certyfikaty |
+
+> **💡 Pro tip:** Jeśli widzisz "Błąd uwierzytelniania" mimo prawidłowego hasła, sprawdź czy nie masz włączonego **Caps Lock** i czy hasło nie zawiera **spacji na końcu**.
+
+---
+
+## 6. Komunikaty błędów sieci komórkowej (modele WAN)
+
+Dotyczy modeli z LTE: TC26, TC27, TC57, TC78
+
+| Komunikat | Znaczenie | Rozwiązanie |
+|-----------|-----------|-------------|
+| **"Brak usługi"** | Nie wykryto sieci | Sprawdź SIM, sprawdź zasięg |
+| **"Tylko połączenia alarmowe"** | Sieć niedostępna | Sprawdź aktywację SIM |
+| **"Błąd karty SIM"** | SIM nie wykryty | Włóż SIM ponownie, wyczyść styki |
+| **"SIM nie provisionowany"** | SIM nie aktywowany | Skontaktuj się z operatorem |
+| **"Roaming"** | Poza siecią macierzystą | Włącz roaming danych jeśli potrzebne |
+
+---
+
+## 7. Problemy z baterią - komunikaty
+
+| Komunikat/Objaw | Znaczenie | Rozwiązanie |
+|-----------------|-----------|-------------|
+| **"Bateria nieobecna"** | Terminal nie wykrywa baterii | Włóż baterię ponownie, wyczyść styki |
+| **Szybkie rozładowanie** | Bateria zużyta | Sprawdź stan w Ustawienia → Bateria |
+| **Dwie diody migają przy włączaniu** | Bateria krytycznie niska | Naładuj przed użyciem |
+| **Terminal się wyłącza** | Bateria rozładowana | Naładuj lub wymień baterię |
+
+### Jak sprawdzić stan baterii?
+
+1. **Ustawienia → System → Bateria**
+2. Sprawdź **poziom naładowania** i **stan zdrowia**
+3. Lub użyj **Device Diagnostic Tool** (DDT)
+
+> **💡 Pro tip:** Bateria na "końcu żywotności" ma poniżej 80% oryginalnej pojemności. Zebra zaleca wymianę po **300-500 cyklach** ładowania lub po **12-18 miesiącach** intensywnego użytkowania.
+
+---
+
+## 8. Troubleshooting według objawów
+
+### Terminal nie włącza się
+
+| Objaw | Przyczyna | Rozwiązanie |
+|-------|-----------|-------------|
+| Brak reakcji | Bateria rozładowana | Ładuj 15 min, spróbuj ponownie |
+| Dwie diody migają | Bateria krytycznie niska | Ładuj przed włączeniem |
+| LED ładowania świeci, brak obrazu | Awaria wyświetlacza | Wymaga serwisu |
+
+### Terminal się zawiesza
+
+| Objaw | Przyczyna | Rozwiązanie |
+|-------|-----------|-------------|
+| Nie reaguje na dotyk | Zawieszona aplikacja | Hard reset (Power 15 sek) |
+| Zawiesza się przy starcie | Błąd systemu | Wejdź w Recovery, wyczyść cache |
+| Zawiesza się losowo | Problem z pamięcią | Usuń zbędne aplikacje, Factory Reset |
+
+### Skaner nie działa
+
+| Objaw | Przyczyna | Rozwiązanie |
+|-------|-----------|-------------|
+| Brak wiązki | DataWedge wyłączony | Włącz DataWedge |
+| Świeci, nie dekoduje | Brudne okienko | Wyczyść okienko skanera |
+| Działa w jednej aplikacji | Zły profil DataWedge | Przypisz profil do aplikacji |
+
+---
+
+## 9. Kiedy wysłać do serwisu?
+
+**Wyślij terminal do serwisu gdy:**
+
+- LED ładowania w ogóle nie świeci (mimo sprawdzonej ładowarki)
+- Szybkie miganie czerwone nie ustępuje mimo prawidłowej temperatury
+- Terminal nie włącza się mimo naładowanej baterii
+- Komunikaty błędów powtarzają się po Factory Reset
+- Fizyczne uszkodzenie (pęknięty ekran, zalanie)
+
+---
+
+## Bezpłatna diagnostyka w Serwis Zebra
+
+Nie możesz zidentyfikować problemu?
+
+Jako **autoryzowany partner serwisowy Zebra** oferujemy:
+
+[CHECK] **Bezpłatna diagnostyka** terminala
+[CHECK] **Odbiór kurierem** z całej Polski  
+[CHECK] **Oryginalne części** Zebra
+[CHECK] **Gwarancja 12 miesięcy** na naprawę
+
+[**Wyślij terminal do diagnozy →**](/#formularz)
+
+---
+
+## Przydatne poradniki
+
+- [Terminal nie włącza się - Boot Loop](/blog/zebra-terminal-nie-wlacza-sie-fastboot-boot-loop) - rozwiązywanie problemów z uruchamianiem
+- [Skaner terminala nie działa](/blog/skaner-terminala-zebra-nie-dziala-diagnostyka-naprawa) - diagnostyka skanera
+- [Reset terminala Zebra](/blog/reset-fabryczny-terminal-zebra-factory-enterprise) - różne metody resetowania
+
+---
+
+## FAQ - Najczęściej zadawane pytania
+
+### Co oznacza wolne miganie bursztynowe?
+To **normalne ładowanie** - bateria się ładuje. Poczekaj aż dioda zmieni się na stały zielony.
+
+### Czy mogę ignorować "koniec żywotności baterii"?
+Możesz używać terminala, ale czas pracy będzie znacznie krótszy. Zalecamy wymianę baterii.
+
+### Terminal pokazuje błąd WiFi mimo prawidłowego hasła - co robić?
+Zapomnij sieć (Ustawienia → WiFi → długie przyciśnięcie → Zapomnij), a następnie połącz ponownie. Upewnij się że wybierasz prawidłowy typ zabezpieczeń (WPA2-Personal vs Enterprise).
+
+### Gdzie znajdę Device Diagnostic Tool?
+DDT jest preinstalowany na każdym terminalu Zebra. Znajdziesz go na liście wszystkich aplikacji. Jeśli go nie ma - pobierz ze strony Zebra.
+
+### Skaner świeci na zielono zamiast czerwono - to błąd?
+Nie, to normalne. Nowsze modele (MC94) mają zielony laser - jest 7x bardziej widoczny niż czerwony.
 `
   }
 ]
@@ -2557,6 +3189,8 @@ const WORD_STEMS: Record<string, string[]> = {
   'bluetooth': ['bluetooth', 'bt', 'parow', 'paruje', 'sparow'],
   'połączenie': ['połączenie', 'połączyć', 'łączy', 'łączenie', 'rozłącz'],
   'roaming': ['roaming', 'roamingu', 'przełącza', 'przełączanie'],
+  'reset': ['reset', 'resetow', 'zresetow', 'fabryczn', 'factory', 'enterprise'],
+  'recovery': ['recovery', 'odzyskiw', 'przywróc', 'przywraca'],
 }
 
 // Funkcja do normalizacji słowa (znajdź rdzeń)

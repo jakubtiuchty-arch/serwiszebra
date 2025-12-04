@@ -135,6 +135,18 @@ export default function BlogPostPage({
     mainEntity: extractFAQFromContent(post.content)
   } : null
 
+  // HowTo Schema for step-by-step guides (poradniki category)
+  const howToSchema = post.category === 'poradniki' ? {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: post.title,
+    description: post.excerpt,
+    image: `https://serwiszebra.pl${post.coverImage}`,
+    totalTime: `PT${post.readingTime}M`,
+    tool: extractToolsFromContent(post.content),
+    step: extractStepsFromContent(post.content)
+  } : null
+
   // BreadcrumbList Schema for navigation
   const breadcrumbSchema = {
     '@context': 'https://schema.org',
@@ -181,6 +193,12 @@ export default function BlogPostPage({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
+      {howToSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
         />
       )}
       <script
@@ -695,5 +713,87 @@ function extractFAQFromContent(content: string): Array<{
   }
 
   return questions
+}
+
+// Extract tools/materials from content for HowTo schema
+function extractToolsFromContent(content: string): Array<{
+  '@type': 'HowToTool'
+  name: string
+}> {
+  const tools: Array<{ '@type': 'HowToTool'; name: string }> = []
+  
+  // Look for "Potrzebne materiały" or similar sections
+  const materialsMatch = content.match(/\*\*Potrzebne materiały:\*\*\n([\s\S]*?)(?=\n\n|\n###|\n##)/i)
+  if (materialsMatch) {
+    const items = materialsMatch[1].match(/- (.+)/g)
+    if (items) {
+      items.forEach(item => {
+        const name = item.replace(/^- /, '').replace(/\*\*/g, '').trim()
+        if (name) {
+          tools.push({ '@type': 'HowToTool', name })
+        }
+      })
+    }
+  }
+  
+  return tools
+}
+
+// Extract steps from content for HowTo schema
+function extractStepsFromContent(content: string): Array<{
+  '@type': 'HowToStep'
+  name: string
+  text: string
+  position: number
+}> {
+  const steps: Array<{
+    '@type': 'HowToStep'
+    name: string
+    text: string
+    position: number
+  }> = []
+  
+  // Look for "### Krok" sections
+  const stepRegex = /### Krok \d+[:\s]*([^\n]+)\n([\s\S]*?)(?=\n### Krok|\n## |$)/gi
+  let match
+  let position = 1
+  
+  while ((match = stepRegex.exec(content)) !== null) {
+    const name = match[1].trim()
+    const text = match[2]
+      .replace(/\n\d+\. /g, ' ') // Remove numbered lists
+      .replace(/\n- /g, ' ') // Remove bullet points
+      .replace(/\*\*/g, '') // Remove bold markers
+      .replace(/\n+/g, ' ') // Replace newlines with spaces
+      .trim()
+      .slice(0, 500) // Limit length
+    
+    if (name && text) {
+      steps.push({
+        '@type': 'HowToStep',
+        name,
+        text,
+        position: position++
+      })
+    }
+  }
+  
+  // If no "Krok" sections found, try numbered steps (1., 2., etc.)
+  if (steps.length === 0) {
+    const numberedRegex = /^(\d+)\. (.+)$/gm
+    let numberedMatch
+    while ((numberedMatch = numberedRegex.exec(content)) !== null) {
+      if (steps.length < 10) { // Limit to first 10 steps
+        steps.push({
+          '@type': 'HowToStep',
+          name: `Krok ${numberedMatch[1]}`,
+          text: numberedMatch[2].replace(/\*\*/g, '').trim(),
+          position: parseInt(numberedMatch[1])
+        })
+      }
+    }
+  }
+  
+  return steps
 }
 
