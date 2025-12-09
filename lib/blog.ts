@@ -10925,7 +10925,7 @@ Serwisujemy enkodery w: ZC100, ZC300, ZC350, ZXP Series 1, 3, 7, 8, 9.
     slug: 'zebra-cardstudio-projektowanie-kart-poradnik',
     title: 'Zebra CardStudio – jak projektować karty identyfikacyjne krok po kroku',
     excerpt: 'Darmowy poradnik CardStudio 2.0: od instalacji, przez projektowanie pierwszej karty, po połączenie z bazą danych i kodowanie. Tutorial dla początkujących użytkowników drukarek Zebra.',
-    coverImage: '/blog/placeholder.jpg',
+    coverImage: '/blog/zebra-card-studio.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
