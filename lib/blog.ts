@@ -12413,6 +12413,365 @@ Jeśli czyszczenie i kalibracja nie pomogły:
 
 Serwisujemy wszystkie modele mobilne: ZQ630, ZQ620, ZQ610, ZQ521, ZQ520, ZQ511, ZQ320, ZQ310, ZQ220, ZQ110.
 `
+  },
+  {
+    slug: 'drukarka-zebra-wifi-rozlacza-sie-offline',
+    title: 'Drukarka Zebra rozłącza się z WiFi – jak naprawić problem z siecią',
+    excerpt: 'Drukarka mobilna Zebra "wypada z sieci" po kilku minutach? Nie odpowiada na ping? Tryb Sleep wyłącza radio WiFi? Poradnik konfiguracji sieci i oszczędzania energii.',
+    coverImage: '/blog/placeholder.jpg',
+    author: {
+      name: 'Zespół Serwis Zebra',
+      role: 'Certyfikowani technicy Zebra'
+    },
+    publishedAt: '2025-12-09',
+    readingTime: 11,
+    deviceType: 'drukarki',
+    subDeviceType: 'mobilne',
+    category: 'troubleshooting',
+    tags: ['WiFi', 'WLAN', 'rozłączanie', 'Sleep Mode', 'sieć', 'ZQ630', 'ZQ520', 'ZQ320', 'offline', '802.11', 'timeout'],
+    seo: {
+      metaTitle: 'Drukarka Zebra rozłącza się z WiFi – naprawa [2025]',
+      metaDescription: 'Drukarka Zebra ZQ630/ZQ520 rozłącza się z sieci WiFi? Nie odpowiada po bezczynności? Wyłączenie Sleep Mode, konfiguracja timeout, ustawienia WLAN. Poradnik krok po kroku.',
+      keywords: [
+        'drukarka zebra wifi nie działa',
+        'zebra zq630 rozłącza wifi',
+        'drukarka zebra offline',
+        'zebra nie łączy z siecią',
+        'drukarka zebra sleep mode wifi',
+        'zq520 wifi problem',
+        'zebra wlan troubleshooting',
+        'drukarka mobilna zebra sieć',
+        'zebra power save wifi',
+        'drukarka zebra nie odpowiada ping',
+        'zebra timeout wifi',
+        'konfiguracja wifi drukarki zebra',
+        'zebra 802.11 problem',
+        'drukarka magazynowa wifi',
+        'zebra inactivity timeout',
+        'drukarka kurierska offline',
+        'zebra primary network wireless',
+        'serwis drukarek mobilnych zebra',
+        'zebra setup utilities wifi',
+        'naprawa wifi drukarki zebra'
+      ]
+    },
+    content: `
+# Drukarka Zebra rozłącza się z WiFi – kompletny poradnik
+
+> **⚠️ Drukarka "wypada z sieci" po kilku minutach bezczynności?** Nie można się połączyć, nie odpowiada na ping, wymaga restartu? To częsty problem w środowiskach magazynowych i logistycznych. Ten poradnik pomoże Ci skonfigurować drukarkę tak, aby zawsze była dostępna w sieci.
+
+---
+
+## Objawy problemu
+
+| Objaw | Opis |
+|-------|------|
+| **Drukarka offline** | Po 10-60 minutach bezczynności nie można drukować |
+| **Brak odpowiedzi na ping** | IP drukarki nie odpowiada |
+| **Wymaga restartu** | Dopiero po wyłączeniu/włączeniu działa |
+| **Ikona WiFi znika** | Na wyświetlaczu brak ikony sieci |
+| **"Connection timeout"** | Aplikacja zgłasza timeout połączenia |
+| **Sporadyczne rozłączenia** | Problem występuje losowo |
+
+---
+
+## Szybka diagnoza – co powoduje rozłączenia?
+
+| Przyczyna | Prawdopodobieństwo | Rozwiązanie |
+|-----------|-------------------|-------------|
+| Sleep Mode wyłącza radio | ⭐⭐⭐⭐⭐ | Wyłączenie Sleep Mode |
+| Timeout nieaktywności | ⭐⭐⭐⭐ | Ustawienie timeout na 0 |
+| Primary Network = wired | ⭐⭐⭐ | Zmiana na wireless |
+| Power Save Mode | ⭐⭐⭐ | Wyłączenie oszczędzania |
+| Infrastruktura sieciowa | ⭐⭐ | Konfiguracja AP/switch |
+| Brak modułu WiFi | ⭐ | Sprawdzenie konfiguracji |
+
+---
+
+## 1. Sleep Mode – główna przyczyna
+
+### Co to jest Sleep Mode?
+
+**Sleep Mode** to funkcja oszczędzania energii, która po **20 minutach bezczynności** (domyślnie) wprowadza drukarkę w stan uśpienia:
+- Wyświetlacz LCD gaśnie
+- **Radio WiFi zostaje wyłączone**
+- Dioda Power pulsuje powoli na zielono
+
+### Jak rozpoznać Sleep Mode?
+
+- Dioda Power **pulsuje** (nie świeci ciągle)
+- LCD jest wyłączony
+- Drukarka nie odpowiada w sieci
+
+### Rozwiązanie – wyłączenie Sleep Mode
+
+**Przez komendę SGD:**
+
+    ! U1 setvar "power.sleep.enable" "off"
+
+**Przez Zebra Setup Utilities:**
+
+1. Połącz drukarkę przez USB
+2. **Open Communication** → **Send Command**
+3. Wpisz komendę powyżej
+4. Kliknij **Send**
+
+**Przez menu LCD (ZQ630):**
+
+Home → **Settings** → **Power** → **Sleep Mode** → **Off**
+
+> **💡 Uwaga:** Wyłączenie Sleep Mode zwiększy zużycie baterii. W przypadku drukarek stacjonarnych podłączonych do zasilania – to nie problem.
+
+---
+
+## 2. Inactivity Timeout
+
+### Co to jest?
+
+**Inactivity Timeout** to czas, po którym drukarka automatycznie przechodzi w tryb oszczędzania lub się wyłącza. Domyślnie: **20 minut (1200 sekund)**.
+
+### Rozwiązanie – wyłączenie timeout
+
+**Przez komendę SGD:**
+
+    ! U1 setvar "power.inactivity_timeout" "0"
+
+Wartość **0** = brak automatycznego uśpienia.
+
+**Sprawdzenie aktualnej wartości:**
+
+    ! U1 getvar "power.inactivity_timeout"
+
+### Zalecane ustawienia dla drukarek sieciowych
+
+| Parametr | Wartość | Komenda SGD |
+|----------|---------|-------------|
+| Sleep Mode | Off | power.sleep.enable = "off" |
+| Inactivity Timeout | 0 | power.inactivity_timeout = "0" |
+| Low Power Timeout | 0 | power.low_power_timeout = "0" |
+
+---
+
+## 3. Primary Network
+
+### Problem
+
+Drukarka może mieć ustawioną **Primary Network = wired** (Ethernet), co powoduje, że WiFi ma niższy priorytet lub jest wyłączane.
+
+### Sprawdzenie
+
+    ! U1 getvar "ip.primary_network"
+
+Możliwe wartości:
+- **wired** – Ethernet ma priorytet
+- **wireless** – WiFi ma priorytet
+
+### Rozwiązanie
+
+    ! U1 setvar "ip.primary_network" "wireless"
+
+> **⚠️ Uwaga:** Zmiana może wymagać hasła. Domyślne hasło: **1234**
+
+---
+
+## 4. Sprawdzenie modułu WiFi
+
+### Problem
+
+Niektóre modele (np. ZQ610) są dostępne **tylko z Bluetooth** – bez WiFi!
+
+### Jak sprawdzić?
+
+**Przez komendę:**
+
+    ! U1 getvar "wlan.enable"
+
+Odpowiedź:
+- **"on"** lub **"off"** – moduł WiFi jest zainstalowany
+- Brak odpowiedzi lub błąd – **brak modułu WiFi**
+
+**W raporcie konfiguracji:**
+
+Wydrukuj raport (FEED + POWER) i szukaj sekcji **Wireless:**
+- Jeśli jest – moduł zainstalowany
+- Jeśli brak – drukarka bez WiFi
+
+### Modele z WiFi (opcjonalnie)
+
+| Model | WiFi | Bluetooth |
+|-------|------|-----------|
+| ZQ630 | ✅ Opcja | ✅ Zawsze |
+| ZQ620 | ✅ Opcja | ✅ Zawsze |
+| ZQ610 | ❌ Brak | ✅ Zawsze |
+| ZQ521 | ✅ Opcja | ✅ Zawsze |
+| ZQ520 | ✅ Opcja | ✅ Zawsze |
+| ZQ320 | ✅ Opcja | ✅ Zawsze |
+
+---
+
+## 5. Konfiguracja WLAN
+
+### Podstawowe ustawienia WiFi
+
+**Włączenie WiFi:**
+
+    ! U1 setvar "wlan.enable" "on"
+
+**Sprawdzenie statusu połączenia:**
+
+    ! U1 getvar "wlan.associated"
+
+Odpowiedź:
+- **"yes"** – połączono z AP
+- **"no"** – brak połączenia
+
+**Sprawdzenie IP:**
+
+    ! U1 getvar "wlan.ip.addr"
+
+### Wake on WiFi
+
+Drukarka może budzić się automatycznie po otrzymaniu danych przez WiFi:
+
+    ! U1 setvar "power.wake_on_wifi" "on"
+
+> **💡 Wskazówka:** Wake on WiFi pozwala zachować oszczędność energii i jednocześnie reagować na żądania druku.
+
+---
+
+## 6. Konfiguracja infrastruktury sieciowej
+
+### Zalecenia dla administratorów sieci
+
+| Ustawienie | Zalecenie | Dlaczego |
+|------------|-----------|----------|
+| **STP (Spanning Tree)** | Wyłącz na portach drukarek | Powoduje opóźnienia w połączeniu |
+| **Port Fast** | Włącz | Szybsze przyłączenie do sieci |
+| **DHCP Lease Time** | Długi (np. 7 dni) | Unikanie ciągłego odnawiania |
+| **Statyczny IP** | Rozważ | Eliminuje problemy DHCP |
+| **Dedykowany VLAN** | Tak | Izolacja ruchu drukarek |
+
+### Problemy z Access Pointami
+
+| Objaw | Możliwa przyczyna | Rozwiązanie |
+|-------|-------------------|-------------|
+| Częste rozłączenia | Roaming między AP | Ustaw "sticky" na drukarce |
+| Słaby sygnał | Odległość od AP | Dodaj AP lub zmień lokalizację |
+| Timeout DHCP | AP nie przekazuje DHCP | Sprawdź konfigurację AP |
+
+---
+
+## 7. Diagnostyka – wydruk konfiguracji
+
+### Co sprawdzić w raporcie?
+
+**Jak wydrukować:**
+
+1. Wyłącz drukarkę
+2. **Przytrzymaj FEED** + naciśnij **POWER**
+3. Gdy druk się rozpocznie, puść FEED
+
+**Kluczowe parametry WiFi:**
+
+| Parametr | Co sprawdzić |
+|----------|-------------|
+| **Radio** | 802.11 a/b/g/n/ac – typ radia |
+| **Enabled** | on/off – czy WiFi włączone |
+| **MAC Address** | Adres MAC WiFi |
+| **IP Address** | Przypisany adres IP |
+| **Associated** | yes/no – czy połączono z AP |
+| **ESSID** | Nazwa sieci WiFi |
+| **DHCP** | on/off – czy DHCP włączone |
+
+---
+
+## 8. Zaawansowana diagnostyka
+
+### Test połączenia przez ping
+
+Z komputera w tej samej sieci:
+
+    ping 192.168.1.100
+
+Jeśli brak odpowiedzi:
+1. Sprawdź czy drukarka nie jest w Sleep Mode
+2. Sprawdź czy IP jest poprawny
+3. Sprawdź czy są w tej samej sieci/VLAN
+
+### Sprawdzenie siły sygnału
+
+**Na LCD (ZQ630):**
+
+Home → **Network** → **WLAN** → **Signal Strength**
+
+**Przez SGD:**
+
+    ! U1 getvar "wlan.signal_strength"
+
+| Wartość | Jakość sygnału |
+|---------|----------------|
+| > 75% | Bardzo dobra |
+| 50-75% | Dobra |
+| 25-50% | Słaba |
+| < 25% | Bardzo słaba |
+
+---
+
+## Kompletna konfiguracja dla drukarki sieciowej
+
+### Komendy do wysłania (wszystkie naraz)
+
+    ! U1 setvar "power.sleep.enable" "off"
+    ! U1 setvar "power.inactivity_timeout" "0"
+    ! U1 setvar "wlan.enable" "on"
+    ! U1 setvar "ip.primary_network" "wireless"
+    ! U1 setvar "power.wake_on_wifi" "on"
+
+**Po wysłaniu komend – restart drukarki!**
+
+---
+
+## FAQ – Najczęstsze pytania
+
+### Czy wyłączenie Sleep Mode mocno skraca czas pracy na baterii?
+Tak, znacząco. Dla drukarek stacjonarnych (podłączonych do zasilania) to nie problem. Dla mobilnych rozważ Wake on WiFi.
+
+### Drukarka ma WiFi ale nie widzę sieci – co robić?
+Sprawdź czy wlan.enable = "on". Sprawdź czy sieć nie jest ukryta (hidden SSID). Sprawdź kompatybilność częstotliwości (2.4 GHz vs 5 GHz).
+
+### Ile kosztuje dodanie modułu WiFi do drukarki?
+Moduły WiFi są instalowane fabrycznie. Doposażenie istniejącej drukarki jest **niemożliwe** – trzeba kupić nowy model z WiFi.
+
+### Jak sprawdzić czy problem jest po stronie drukarki czy sieci?
+Połącz drukarkę przez USB i wydrukuj. Jeśli działa – problem z siecią. Jeśli nie – problem z drukarką.
+
+---
+
+## Checklista diagnostyczna
+
+| # | Krok | Sprawdzone? |
+|---|------|-------------|
+| 1 | Wyłącz Sleep Mode (power.sleep.enable = "off") | ⬜ |
+| 2 | Ustaw timeout na 0 (power.inactivity_timeout = "0") | ⬜ |
+| 3 | Sprawdź Primary Network (ip.primary_network = "wireless") | ⬜ |
+| 4 | Sprawdź czy moduł WiFi jest zainstalowany | ⬜ |
+| 5 | Sprawdź siłę sygnału WiFi | ⬜ |
+| 6 | Wydrukuj raport konfiguracji | ⬜ |
+| 7 | Zrestartuj drukarkę po zmianach | ⬜ |
+| 8 | **Problem nadal występuje → SERWIS** | ⬜ |
+
+---
+
+## Potrzebujesz pomocy?
+
+Jeśli konfiguracja nie pomogła:
+
+> 🔧 **Zgłoś drukarkę do serwisu** — [Wypełnij formularz →](/#formularz) — bezpłatna diagnostyka, profesjonalna konfiguracja sieci.
+
+> 📞 **Pilne?** Zadzwoń: **+48 601 619 898** — pomożemy skonfigurować drukarkę przez telefon.
+
+Serwisujemy wszystkie modele mobilne: ZQ630, ZQ620, ZQ610, ZQ521, ZQ520, ZQ511, ZQ320, ZQ310.
+`
   }
 ]
 
