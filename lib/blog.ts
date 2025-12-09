@@ -9546,10 +9546,10 @@ Znajdziesz tu błędy podzielone na kategorie:
 
 | Kod błędu | Problem | Przejdź do rozwiązania |
 |-----------|---------|------------------------|
-| **5001** | Brak taśmy (Out of Ribbon) | [→ Sekcja taśmy](#bledy-5xxx--problemy-z-tasma-ribbon) |
-| **4003** | Zacięcie karty (Card Jam) | [→ Sekcja kart](#bledy-4xxx--problemy-z-kartami) |
-| **7003** | Błąd kabla głowicy | [→ Sekcja sprzętu](#bledy-7xxx--bledy-sprzetowe) |
-| **9001** | Błąd odczytu mag stripe | [→ Sekcja kodowania](#bledy-9xxx--bledy-kodowania-magnetycznego) |
+| **5001** | Brak taśmy (Out of Ribbon) | [→ Sekcja taśmy](#bledy-5xxx-problemy-z-tasma-ribbon) |
+| **4003** | Zacięcie karty (Card Jam) | [→ Sekcja kart](#bledy-4xxx-problemy-z-kartami) |
+| **7003** | Błąd kabla głowicy | [→ Sekcja sprzętu](#bledy-7xxx-bledy-sprzetowe) |
+| **9001** | Błąd odczytu mag stripe | [→ Sekcja kodowania](#bledy-9xxx-bledy-kodowania-magnetycznego) |
 
 ---
 
