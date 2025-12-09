@@ -495,7 +495,7 @@ Głowica składa się z tysięcy mikroskopijnych elementów grzejnych. W drukarc
 |--------------|-------------------|---------------------|
 | Desktop (ZD420, ZD621) | 1-2 mln cm | Jakość etykiet, ribbon |
 | Przemysłowa (ZT411, ZT610) | 2-4 mln cm | Prędkość druku, temperatura |
-| Mobilna (ZQ52X) | 0.5-1 mln cm | Warunki pracy, kurz |
+| Mobilna (ZQ520) | 0.5-1 mln cm | Warunki pracy, kurz |
 
 ### Co skraca żywotność głowicy?
 
@@ -6130,7 +6130,7 @@ W trasie kurierskiej zazwyczaj korzystasz z 4G/5G. WiFi szukające sieci zużywa
 
 ### 7. Wyłącz Bluetooth gdy nie drukujesz
 
-Jeśli nie używasz drukarki mobilnej (ZQ320, ZQ52X, ZQ630), wyłącz Bluetooth.
+Jeśli nie używasz drukarki mobilnej (ZQ320, ZQ520, ZQ630), wyłącz Bluetooth.
 
 **Jak ustawić:**
 1. Przesuń w dół od góry ekranu
@@ -11702,7 +11702,7 @@ Serwisujemy wszystkie modele: ZC100, ZC300, ZC350, ZXP Series 1, 3, 7, 8, 9.
   {
     slug: 'biale-linie-etykiety-drukarka-mobilna-zebra',
     title: 'Białe linie na etykietach z drukarki mobilnej Zebra – przyczyny i rozwiązania',
-    excerpt: 'Pionowe białe pasy na etykietach z ZQ630, ZQ52X, ZQ320? Kody kreskowe nie skanują się? Poradnik czyszczenia głowicy i diagnostyki jakości druku w drukarkach mobilnych Zebra.',
+    excerpt: 'Pionowe białe pasy na etykietach z ZQ630, ZQ520, ZQ320? Kody kreskowe nie skanują się? Poradnik czyszczenia głowicy i diagnostyki jakości druku w drukarkach mobilnych Zebra.',
     coverImage: '/blog/biale-linie-mobile.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
@@ -11713,10 +11713,10 @@ Serwisujemy wszystkie modele: ZC100, ZC300, ZC350, ZXP Series 1, 3, 7, 8, 9.
     deviceType: 'drukarki',
     subDeviceType: 'mobilne',
     category: 'troubleshooting',
-    tags: ['białe linie', 'jakość druku', 'głowica drukująca', 'ZQ630', 'ZQ52X', 'ZQ320', 'etykiety', 'kody kreskowe', 'czyszczenie drukarki', 'drukarka mobilna'],
+    tags: ['białe linie', 'jakość druku', 'głowica drukująca', 'ZQ630', 'ZQ520', 'ZQ320', 'etykiety', 'kody kreskowe', 'czyszczenie drukarki', 'drukarka mobilna'],
     seo: {
-      metaTitle: 'Białe linie na etykietach Zebra ZQ630/ZQ52X – naprawa [2025]',
-      metaDescription: 'Białe pasy na wydrukach z drukarki mobilnej Zebra? Kody nie skanują się? Czyszczenie głowicy, ustawienia darkness, wymiana głowicy. Poradnik dla ZQ630, ZQ52X, ZQ320.',
+      metaTitle: 'Białe linie na etykietach Zebra ZQ630/ZQ520 – naprawa [2025]',
+      metaDescription: 'Białe pasy na wydrukach z drukarki mobilnej Zebra? Kody nie skanują się? Czyszczenie głowicy, ustawienia darkness, wymiana głowicy. Poradnik dla ZQ630, ZQ520, ZQ320.',
       keywords: [
         'białe linie drukarka zebra',
         'zebra zq630 słaba jakość druku',
@@ -11743,7 +11743,7 @@ Serwisujemy wszystkie modele: ZC100, ZC300, ZC350, ZXP Series 1, 3, 7, 8, 9.
     content: `
 # Białe linie na etykietach z drukarki mobilnej Zebra – kompletny poradnik
 
-> **⚠️ Pionowe białe linie przechodzą przez etykiety?** Kody kreskowe nie skanują się w magazynie lub u klienta? To jeden z najczęstszych problemów z drukarkami mobilnymi ZQ630, ZQ52X, ZQ320 i ZQ310. Ten poradnik pomoże Ci zdiagnozować przyczynę i naprawić problem.
+> **⚠️ Pionowe białe linie przechodzą przez etykiety?** Kody kreskowe nie skanują się w magazynie lub u klienta? To jeden z najczęstszych problemów z drukarkami mobilnymi ZQ630, ZQ520, ZQ320 i ZQ310. Ten poradnik pomoże Ci zdiagnozować przyczynę i naprawić problem.
 
 ---
 
@@ -11775,7 +11775,7 @@ Głowica termiczna drukarki mobilnej jest narażona na:
 - Linie mogą się **przesuwać** przy kolejnych wydrukach
 - Problem **narasta stopniowo** (z dnia na dzień gorszy)
 
-### Rozwiązanie – czyszczenie głowicy ZQ630/ZQ52X/ZQ320
+### Rozwiązanie – czyszczenie głowicy ZQ630/ZQ520/ZQ320
 
 **Potrzebujesz:**
 - Pisak czyszczący Zebra (p/n 105950-035) lub
@@ -11826,7 +11826,7 @@ Wymiana głowicy drukującej. Koszt zależy od modelu:
 | Model | Orientacyjny koszt głowicy |
 |-------|---------------------------|
 | ZQ630 | 400-600 zł |
-| ZQ52X/ZQ521 | 350-500 zł |
+| ZQ520/ZQ521 | 350-500 zł |
 | ZQ320/ZQ310 | 300-450 zł |
 
 > **🔧 Potrzebujesz wymiany głowicy?** [Zgłoś do serwisu →](/#formularz)
@@ -12050,13 +12050,13 @@ Jeśli czyszczenie i ustawienia nie pomogły:
 
 > 📞 **Pilne?** Zadzwoń: **+48 601 619 898** — pomożemy zdiagnozować problem przez telefon.
 
-Serwisujemy wszystkie modele mobilne: ZQ630, ZQ620, ZQ610, ZQ521, ZQ52X, ZQ511, ZQ320, ZQ310, ZQ220, ZQ110.
+Serwisujemy wszystkie modele mobilne: ZQ630, ZQ620, ZQ610, ZQ521, ZQ520, ZQ511, ZQ320, ZQ310, ZQ220, ZQ110.
 `
   },
   {
     slug: 'falszywy-blad-media-out-drukarka-zebra-mobilna',
     title: 'Błąd "Media Out" w drukarce Zebra mimo załadowanego papieru – jak naprawić',
-    excerpt: 'Drukarka Zebra ZQ630, ZQ52X lub ZQ320 zgłasza "Brak nośnika" mimo pełnej rolki? Pomija etykiety? Poradnik czyszczenia czujników i kalibracji krok po kroku.',
+    excerpt: 'Drukarka Zebra ZQ630, ZQ520 lub ZQ320 zgłasza "Brak nośnika" mimo pełnej rolki? Pomija etykiety? Poradnik czyszczenia czujników i kalibracji krok po kroku.',
     coverImage: '/blog/placeholder.jpg',
     author: {
       name: 'Zespół Serwis Zebra',
@@ -12067,9 +12067,9 @@ Serwisujemy wszystkie modele mobilne: ZQ630, ZQ620, ZQ610, ZQ521, ZQ52X, ZQ511, 
     deviceType: 'drukarki',
     subDeviceType: 'mobilne',
     category: 'troubleshooting',
-    tags: ['Media Out', 'brak nośnika', 'kalibracja', 'czujnik mediów', 'ZQ630', 'ZQ52X', 'ZQ320', 'pomijanie etykiet', 'gap sensor', 'black mark'],
+    tags: ['Media Out', 'brak nośnika', 'kalibracja', 'czujnik mediów', 'ZQ630', 'ZQ520', 'ZQ320', 'pomijanie etykiet', 'gap sensor', 'black mark'],
     seo: {
-      metaTitle: 'Błąd Media Out Zebra ZQ630/ZQ52X – naprawa [2025]',
+      metaTitle: 'Błąd Media Out Zebra ZQ630/ZQ520 – naprawa [2025]',
       metaDescription: 'Drukarka Zebra zgłasza "Media Out" mimo załadowanego papieru? Pomija etykiety? Czyszczenie czujników, kalibracja, ustawienia typu nośnika. Poradnik krok po kroku.',
       keywords: [
         'zebra media out błąd',
@@ -12097,7 +12097,7 @@ Serwisujemy wszystkie modele mobilne: ZQ630, ZQ620, ZQ610, ZQ521, ZQ52X, ZQ511, 
     content: `
 # Błąd "Media Out" w drukarce Zebra mimo załadowanego papieru
 
-> **⚠️ Drukarka zgłasza "Media Out" lub "Brak nośnika" mimo pełnej rolki etykiet?** Pomija etykiety lub drukuje na co drugiej? To jeden z najczęstszych problemów z drukarkami mobilnymi ZQ630, ZQ521, ZQ52X i ZQ320. Ten poradnik pomoże Ci zdiagnozować i naprawić problem.
+> **⚠️ Drukarka zgłasza "Media Out" lub "Brak nośnika" mimo pełnej rolki etykiet?** Pomija etykiety lub drukuje na co drugiej? To jeden z najczęstszych problemów z drukarkami mobilnymi ZQ630, ZQ521, ZQ520 i ZQ320. Ten poradnik pomoże Ci zdiagnozować i naprawić problem.
 
 ---
 
@@ -12192,7 +12192,7 @@ Po zmianie typu nośnika (np. z etykiet na paragony) czujniki muszą "nauczyć s
 3. **Przytrzymaj FEED** + naciśnij **POWER**
 4. Gdy druk się rozpocznie, puść FEED
 
-### Kalibracja ZQ521 / ZQ52X / ZQ511 / ZQ510
+### Kalibracja ZQ521 / ZQ520 / ZQ511 / ZQ510
 
 **Przez przyciski:**
 
@@ -12293,7 +12293,7 @@ Według dokumentacji Zebra:
 6. Dopasuj prowadnice do szerokości nośnika
 7. Zamknij pokrywę aż do **kliknięcia**
 
-**ZQ52X/ZQ320:**
+**ZQ520/ZQ320:**
 
 1. Przesuń zatrzask i otwórz pokrywę
 2. Włóż rolkę na trzpień (oś)
@@ -12411,7 +12411,7 @@ Jeśli czyszczenie i kalibracja nie pomogły:
 
 > 📞 **Pilne?** Zadzwoń: **+48 601 619 898** — pomożemy zdiagnozować problem przez telefon.
 
-Serwisujemy wszystkie modele mobilne: ZQ630, ZQ620, ZQ610, ZQ521, ZQ52X, ZQ511, ZQ320, ZQ310, ZQ220, ZQ110.
+Serwisujemy wszystkie modele mobilne: ZQ630, ZQ620, ZQ610, ZQ521, ZQ520, ZQ511, ZQ320, ZQ310, ZQ220, ZQ110.
 `
   }
 ]
