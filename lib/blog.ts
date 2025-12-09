@@ -11698,6 +11698,360 @@ Jeśli nadal nie wiesz, którą drukarkę wybrać:
 
 Serwisujemy wszystkie modele: ZC100, ZC300, ZC350, ZXP Series 1, 3, 7, 8, 9.
 `
+  },
+  {
+    slug: 'biale-linie-etykiety-drukarka-mobilna-zebra',
+    title: 'Białe linie na etykietach z drukarki mobilnej Zebra – przyczyny i rozwiązania',
+    excerpt: 'Pionowe białe pasy na etykietach z ZQ630, ZQ520, ZQ320? Kody kreskowe nie skanują się? Poradnik czyszczenia głowicy i diagnostyki jakości druku w drukarkach mobilnych Zebra.',
+    coverImage: '/blog/placeholder.jpg',
+    author: {
+      name: 'Zespół Serwis Zebra',
+      role: 'Certyfikowani technicy Zebra'
+    },
+    publishedAt: '2025-12-09',
+    readingTime: 12,
+    deviceType: 'drukarki',
+    subDeviceType: 'mobilne',
+    category: 'troubleshooting',
+    tags: ['białe linie', 'jakość druku', 'głowica drukująca', 'ZQ630', 'ZQ520', 'ZQ320', 'etykiety', 'kody kreskowe', 'czyszczenie drukarki', 'drukarka mobilna'],
+    seo: {
+      metaTitle: 'Białe linie na etykietach Zebra ZQ630/ZQ520 – naprawa [2025]',
+      metaDescription: 'Białe pasy na wydrukach z drukarki mobilnej Zebra? Kody nie skanują się? Czyszczenie głowicy, ustawienia darkness, wymiana głowicy. Poradnik dla ZQ630, ZQ520, ZQ320.',
+      keywords: [
+        'białe linie drukarka zebra',
+        'zebra zq630 słaba jakość druku',
+        'drukarka etykiet białe paski',
+        'kody kreskowe nie skanują zebra',
+        'czyszczenie głowicy zebra zq',
+        'zebra zq520 problemy z drukiem',
+        'drukarka mobilna zebra troubleshooting',
+        'wymiana głowicy zq630',
+        'zebra print quality problems',
+        'etykiety nieczytelne drukarka',
+        'zebra darkness ustawienia',
+        'drukarka termiczna białe linie',
+        'zq320 słaby wydruk',
+        'naprawa drukarki mobilnej zebra',
+        'głowica drukująca zebra cena',
+        'zebra zq nie drukuje prawidłowo',
+        'kurier drukarka etykiety problem',
+        'drukarka kurierska białe pasy',
+        'serwis drukarek mobilnych zebra',
+        'zebra platen cleaning'
+      ]
+    },
+    content: `
+# Białe linie na etykietach z drukarki mobilnej Zebra – kompletny poradnik
+
+> **⚠️ Pionowe białe linie przechodzą przez etykiety?** Kody kreskowe nie skanują się w magazynie lub u klienta? To jeden z najczęstszych problemów z drukarkami mobilnymi ZQ630, ZQ520, ZQ320 i ZQ310. Ten poradnik pomoże Ci zdiagnozować przyczynę i naprawić problem.
+
+---
+
+## Szybka diagnoza – co powoduje białe linie?
+
+| Objaw | Prawdopodobna przyczyna | Rozwiązanie |
+|-------|------------------------|-------------|
+| Jedna cienka linia w tym samym miejscu | Przepalony element głowicy | Wymiana głowicy |
+| Wiele linii, znikają po czyszczeniu | Zabrudzenia na głowicy | Czyszczenie |
+| Blade wydruki, słaby kontrast | Za niska ciemność (darkness) | Zwiększenie darkness |
+| Linie pojawiają się losowo | Kurz, resztki kleju | Czyszczenie całej ścieżki |
+| Kody nie skanują mimo braku linii | Zła orientacja druku | Zmiana kierunku kodu |
+
+---
+
+## 1. Zabrudzenia na głowicy drukującej
+
+### Dlaczego to się dzieje?
+
+Głowica termiczna drukarki mobilnej jest narażona na:
+- **Kurz i pył** – praca w terenie, magazynach
+- **Resztki kleju** z etykiet (szczególnie przy mediach linerless)
+- **Osady z mediów** – cząsteczki papieru i powłoki termicznej
+- **Dotykanie palcami** – tłuszcz z rąk
+
+### Jak rozpoznać?
+
+- Białe linie **znikają po czyszczeniu**
+- Linie mogą się **przesuwać** przy kolejnych wydrukach
+- Problem **narasta stopniowo** (z dnia na dzień gorszy)
+
+### Rozwiązanie – czyszczenie głowicy ZQ630/ZQ520/ZQ320
+
+**Potrzebujesz:**
+- Pisak czyszczący Zebra (p/n 105950-035) lub
+- Wacik bawełniany + alkohol izopropylowy **90% lub wyższy**
+
+**Krok po kroku:**
+
+1. **Wyłącz drukarkę** i odłącz od ładowania
+2. **Otwórz pokrywę mediów** (Media Cover)
+3. **Wyjmij rolkę** etykiet
+4. **Zlokalizuj głowicę** – cienka szara linia w górnej części komory
+5. **Przetrzyj głowicę** ruchem od środka na zewnątrz
+6. **Poczekaj 2-3 minuty** na wyschnięcie alkoholu
+7. **Załaduj media** i zamknij pokrywę
+8. **Wydrukuj etykietę testową**
+
+> **⚠️ UWAGA:** Nigdy nie używaj ostrych narzędzi! Głowica jest bardzo delikatna.
+
+### Jak często czyścić?
+
+| Typ mediów | Częstotliwość czyszczenia |
+|------------|---------------------------|
+| Standardowe (z linerem) | Co 5 rolek |
+| Linerless (bez podkładu) | Co 1 rolkę |
+| Środowisko zapylone | Co 2-3 rolki |
+
+---
+
+## 2. Uszkodzone elementy grzejne głowicy
+
+### Co to oznacza?
+
+Głowica drukująca składa się z **setek mikroskopijnych elementów grzejnych** (203 dpi = 203 elementy na cal). Gdy element się przepali:
+- Powstaje **stała biała linia** w tym samym miejscu
+- Linia **nie znika** po czyszczeniu
+- Problem **nie pogarsza się** (linia ma stałą szerokość)
+
+### Jak zweryfikować?
+
+1. **Wyczyść głowicę** dokładnie
+2. **Wydrukuj etykietę testową** z czarnym tłem
+3. Jeśli biała linia nadal jest **w tym samym miejscu** → głowica uszkodzona
+
+### Rozwiązanie
+
+Wymiana głowicy drukującej. Koszt zależy od modelu:
+
+| Model | Orientacyjny koszt głowicy |
+|-------|---------------------------|
+| ZQ630 | 400-600 zł |
+| ZQ520/ZQ521 | 350-500 zł |
+| ZQ320/ZQ310 | 300-450 zł |
+
+> **🔧 Potrzebujesz wymiany głowicy?** [Zgłoś do serwisu →](/#formularz)
+
+---
+
+## 3. Ustawienie ciemności druku (Darkness)
+
+### Problem
+
+Zbyt niskie ustawienie **Darkness** powoduje:
+- **Blade wydruki** – tekst i kody słabo widoczne
+- **Nierównomierne pokrycie** – niektóre obszary jaśniejsze
+- **Kody kreskowe nie skanują** – za mały kontrast
+
+### Jak sprawdzić i zmienić Darkness?
+
+**Na drukarce ZQ630 (przez LCD):**
+
+1. Naciśnij **Home** → **Settings** → **Darkness**
+2. Domyślna wartość: **0**
+3. Zakres: **-49 do +49**
+4. **Zwiększ o 5-10** i sprawdź wydruk
+
+**Przez komendę SGD:**
+
+\`\`\`
+! U1 setvar "print.tone_zpl" "10"
+\`\`\`
+
+**Przez Zebra Setup Utilities:**
+
+1. Połącz drukarkę przez USB
+2. **Printer Settings** → **Media** → **Darkness**
+3. Przesuń suwak w prawo
+
+### Zalecane ustawienia
+
+| Typ mediów | Sugerowane Darkness |
+|------------|---------------------|
+| Standardowe etykiety | 0 do +10 |
+| Etykiety syntetyczne | +5 do +15 |
+| Linerless | +10 do +20 |
+| Paragony termiczne | -5 do +5 |
+
+> **💡 Wskazówka:** Ustaw **najniższą wartość dającą dobrą jakość**. Zbyt wysoka ciemność skraca żywotność głowicy!
+
+---
+
+## 4. Prędkość druku
+
+### Dlaczego ma znaczenie?
+
+- **Wolniejszy druk = lepsza jakość** (głowica ma więcej czasu na nagrzanie)
+- **Szybszy druk = gorsza jakość** (możliwe blade obszary)
+
+### Jak zmienić prędkość?
+
+**Na ZQ630 (LCD):**
+
+Home → Settings → **Print Speed** → wybierz niższą wartość
+
+**Prędkości ZQ630:**
+- 2.0 ips – najlepsza jakość
+- 3.0 ips – balans
+- 4.0 ips – domyślna
+- 5.0 ips – tryb draft (tylko tekst)
+
+**Komenda SGD:**
+
+\`\`\`
+! U1 setvar "media.speed" "3"
+\`\`\`
+
+---
+
+## 5. Orientacja kodów kreskowych
+
+### Problem
+
+Kod kreskowy drukowany **prostopadle do kierunku podawania** jest bardziej podatny na błędy niż drukowany **równolegle**.
+
+### Wyjaśnienie
+
+| Orientacja | Nazwa | Odporność na uszkodzenia |
+|------------|-------|-------------------------|
+| ▮▮▮ (paski poziomo) | **Picket fence** | ✅ Wysoka |
+| ═══ (paski pionowo) | **Ladder** | ⚠️ Niska |
+
+### Rozwiązanie
+
+W oprogramowaniu do projektowania etykiet (np. ZebraDesigner):
+- Obróć kod kreskowy o 90°
+- Paski powinny być **równoległe** do kierunku ruchu etykiety
+
+---
+
+## 6. Czyszczenie całej ścieżki mediów
+
+### Co jeszcze czyścić?
+
+| Element | Metoda | Częstotliwość |
+|---------|--------|---------------|
+| **Wałek dociskowy (Platen)** | Obróć i przetrzyj alkoholem | Co 5 rolek |
+| **Czujniki mediów** | Delikatnie zdmuchnij kurz | Co 5 rolek |
+| **Obudowa wewnętrzna** | Miękka szczotka | W razie potrzeby |
+| **Listwa zrywająca (Tear Bar)** | Wacik z alkoholem | W razie potrzeby |
+
+### Czyszczenie wałka (Platen Roller)
+
+1. Otwórz pokrywę mediów
+2. Obróć wałek ręcznie
+3. Przetrzyj **alkoholem 90%** na waciku bezpyłowym
+4. Obróć i powtórz dla całej powierzchni
+5. Poczekaj na wyschnięcie
+
+> **⚠️ Dla mediów linerless:** Użyj roztworu **1 część płynu do naczyń + 25 części wody**, potem opłucz czystą wodą.
+
+---
+
+## 7. Jakość mediów
+
+### Częste problemy z mediami
+
+| Problem | Objaw | Rozwiązanie |
+|---------|-------|-------------|
+| Nieoryginalne etykiety | Nierównomierna jakość | Użyj certyfikowanych mediów Zebra |
+| Przeterminowane media | Blade wydruki | Sprawdź datę ważności |
+| Złe przechowywanie | Plamy, smugi | Przechowuj w suchym, chłodnym miejscu |
+| Zły typ mediów | Brak reakcji termicznej | Dopasuj media do drukarki |
+
+### Zalecenia Zebra
+
+> **💡** Używaj **wyłącznie certyfikowanych mediów Zebra** dla optymalnej jakości i żywotności głowicy.
+
+---
+
+## Diagnostyka – wydruk konfiguracyjny
+
+### Jak wydrukować raport?
+
+**Metoda przyciskami (ZQ630):**
+
+1. Wyłącz drukarkę
+2. Załaduj media bez przerw (journal)
+3. **Przytrzymaj FEED** + naciśnij **POWER**
+4. Gdy druk się rozpocznie, puść FEED
+
+**Z menu LCD:**
+
+Home → Info (?) → **Print Configuration**
+
+### Co sprawdzić w raporcie?
+
+- **HEAD USAGE** – liczba wydrukowanych linii (wear level)
+- **DARKNESS** – aktualne ustawienie ciemności
+- **PRINT SPEED** – aktualna prędkość
+- **MEDIA TYPE** – typ skonfigurowanych mediów
+
+---
+
+## Kiedy wymienić głowicę?
+
+### Objawy wymagające wymiany:
+
+| Objaw | Diagnoza |
+|-------|----------|
+| Stała biała linia mimo czyszczenia | Przepalony element |
+| Wiele stałych linii | Wielu przepalonych elementów |
+| Bardzo wysoki HEAD USAGE | Naturalne zużycie |
+| Widoczne uszkodzenia fizyczne | Mechaniczne uszkodzenie |
+
+### Żywotność głowicy
+
+Typowa żywotność: **30-50 milionów linii** przy prawidłowej konserwacji.
+
+Czynniki skracające żywotność:
+- Zbyt wysokie Darkness
+- Nieoryginalne media
+- Brak czyszczenia
+- Agresywne środowisko (kurz, piasek)
+
+---
+
+## FAQ – Najczęstsze pytania
+
+### Czy mogę drukować z białą linią?
+Technicznie tak, ale jeśli linia przechodzi przez kod kreskowy – **kod nie będzie się skanować**. Dla tekstów i grafik problem jest kosmetyczny.
+
+### Ile kosztuje wymiana głowicy w serwisie?
+Wymiana głowicy (części + robocizna): **450-800 zł** w zależności od modelu. Oferujemy bezpłatną wycenę.
+
+### Czy mogę wymienić głowicę samodzielnie?
+Tak, w drukarkach ZQ głowica jest wymienna. Wymaga ostrożności i antystatycznych środków ochrony.
+
+### Jak długo trwa naprawa?
+Standardowo **2-3 dni robocze** od otrzymania urządzenia.
+
+---
+
+## Checklista diagnostyczna
+
+| # | Krok | Sprawdzone? |
+|---|------|-------------|
+| 1 | Wyczyść głowicę drukującą alkoholem 90%+ | ⬜ |
+| 2 | Wyczyść wałek dociskowy (platen) | ⬜ |
+| 3 | Sprawdź ustawienie Darkness (zwiększ o 5-10) | ⬜ |
+| 4 | Zmniejsz prędkość druku | ⬜ |
+| 5 | Sprawdź jakość i typ mediów | ⬜ |
+| 6 | Wydrukuj etykietę testową z czarnym tłem | ⬜ |
+| 7 | Jeśli biała linia nadal jest w tym samym miejscu → głowica uszkodzona | ⬜ |
+| 8 | **Problem nadal występuje → SERWIS** | ⬜ |
+
+---
+
+## Potrzebujesz pomocy?
+
+Jeśli czyszczenie i ustawienia nie pomogły:
+
+> 🔧 **Zgłoś drukarkę do serwisu** — [Wypełnij formularz →](/#formularz) — bezpłatna diagnostyka, szybka wymiana głowicy.
+
+> 📞 **Pilne?** Zadzwoń: **+48 601 619 898** — pomożemy zdiagnozować problem przez telefon.
+
+Serwisujemy wszystkie modele mobilne: ZQ630, ZQ620, ZQ610, ZQ521, ZQ520, ZQ511, ZQ320, ZQ310, ZQ220, ZQ110.
+`
   }
 ]
 
