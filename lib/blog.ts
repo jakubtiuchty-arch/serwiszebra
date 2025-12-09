@@ -12418,7 +12418,7 @@ Serwisujemy wszystkie modele mobilne: ZQ630, ZQ620, ZQ610, ZQ521, ZQ520, ZQ511, 
     slug: 'drukarka-zebra-wifi-rozlacza-sie-offline',
     title: 'Drukarka Zebra rozłącza się z WiFi – jak naprawić problem z siecią',
     excerpt: 'Drukarka mobilna Zebra "wypada z sieci" po kilku minutach? Nie odpowiada na ping? Tryb Sleep wyłącza radio WiFi? Poradnik konfiguracji sieci i oszczędzania energii.',
-    coverImage: '/blog/placeholder.jpg',
+    coverImage: '/blog/Zebra "wypada z sieci".jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
