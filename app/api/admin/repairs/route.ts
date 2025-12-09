@@ -49,7 +49,7 @@ export async function GET(request: NextRequest) {
     }
 
     // Pobierz profile użytkowników dla zgłoszeń
-    const userIds = [...new Set(repairs?.map(r => r.user_id).filter(Boolean) || [])]
+    const userIds = Array.from(new Set(repairs?.map(r => r.user_id).filter(Boolean) || []))
     let profilesMap: Record<string, any> = {}
     
     if (userIds.length > 0) {
