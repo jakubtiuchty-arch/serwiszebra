@@ -12057,7 +12057,7 @@ Serwisujemy wszystkie modele mobilne: ZQ630, ZQ620, ZQ610, ZQ521, ZQ520, ZQ511, 
     slug: 'falszywy-blad-media-out-drukarka-zebra-mobilna',
     title: 'Błąd "Media Out" w drukarce Zebra mimo załadowanego papieru – jak naprawić',
     excerpt: 'Drukarka Zebra ZQ630, ZQ520 lub ZQ320 zgłasza "Brak nośnika" mimo pełnej rolki? Pomija etykiety? Poradnik czyszczenia czujników i kalibracji krok po kroku.',
-    coverImage: '/blog/placeholder.jpg',
+    coverImage: '/blog/Błąd "Media Out".jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
