@@ -12052,6 +12052,367 @@ Jeśli czyszczenie i ustawienia nie pomogły:
 
 Serwisujemy wszystkie modele mobilne: ZQ630, ZQ620, ZQ610, ZQ521, ZQ520, ZQ511, ZQ320, ZQ310, ZQ220, ZQ110.
 `
+  },
+  {
+    slug: 'falszywy-blad-media-out-drukarka-zebra-mobilna',
+    title: 'Błąd "Media Out" w drukarce Zebra mimo załadowanego papieru – jak naprawić',
+    excerpt: 'Drukarka Zebra ZQ630, ZQ520 lub ZQ320 zgłasza "Brak nośnika" mimo pełnej rolki? Pomija etykiety? Poradnik czyszczenia czujników i kalibracji krok po kroku.',
+    coverImage: '/blog/placeholder.jpg',
+    author: {
+      name: 'Zespół Serwis Zebra',
+      role: 'Certyfikowani technicy Zebra'
+    },
+    publishedAt: '2025-12-09',
+    readingTime: 10,
+    deviceType: 'drukarki',
+    subDeviceType: 'mobilne',
+    category: 'troubleshooting',
+    tags: ['Media Out', 'brak nośnika', 'kalibracja', 'czujnik mediów', 'ZQ630', 'ZQ520', 'ZQ320', 'pomijanie etykiet', 'gap sensor', 'black mark'],
+    seo: {
+      metaTitle: 'Błąd Media Out Zebra ZQ630/ZQ520 – naprawa [2025]',
+      metaDescription: 'Drukarka Zebra zgłasza "Media Out" mimo załadowanego papieru? Pomija etykiety? Czyszczenie czujników, kalibracja, ustawienia typu nośnika. Poradnik krok po kroku.',
+      keywords: [
+        'zebra media out błąd',
+        'drukarka zebra brak papieru',
+        'zebra zq630 media out',
+        'drukarka etykiet pomija etykiety',
+        'kalibracja drukarki zebra',
+        'zebra czujnik mediów',
+        'zq520 błąd nośnika',
+        'drukarka zebra 3 sygnały',
+        'gap sensor zebra',
+        'black mark czujnik zebra',
+        'zebra drukarka nie wykrywa etykiet',
+        'zq320 media out',
+        'drukarka mobilna zebra problem',
+        'czyszczenie czujnika drukarki',
+        'zebra sensor calibration',
+        'drukarka kurierska błąd papieru',
+        'zebra label gap detection',
+        'drukarka termiczna nie widzi etykiet',
+        'serwis drukarek mobilnych zebra',
+        'naprawa czujnika drukarki zebra'
+      ]
+    },
+    content: `
+# Błąd "Media Out" w drukarce Zebra mimo załadowanego papieru
+
+> **⚠️ Drukarka zgłasza "Media Out" lub "Brak nośnika" mimo pełnej rolki etykiet?** Pomija etykiety lub drukuje na co drugiej? To jeden z najczęstszych problemów z drukarkami mobilnymi ZQ630, ZQ521, ZQ520 i ZQ320. Ten poradnik pomoże Ci zdiagnozować i naprawić problem.
+
+---
+
+## Objawy problemu
+
+| Objaw | Opis |
+|-------|------|
+| **"Media Out"** | Komunikat na wyświetlaczu mimo załadowanej rolki |
+| **Migająca czerwona ikona** | Ikona nośnika miga na czerwono |
+| **3 sygnały dźwiękowe** | ZQ320/ZQ310 – sygnał błędu nośnika |
+| **Pomijanie etykiet** | Drukarka drukuje na co drugiej lub trzeciej etykiecie |
+| **Przesuwanie bez druku** | Drukarka przesuwa kilka etykiet naraz |
+| **Zatrzymanie w połowie** | Druk przerywa się z sygnałem błędu |
+
+---
+
+## Szybka diagnoza – co powoduje fałszywy błąd?
+
+| Przyczyna | Prawdopodobieństwo | Rozwiązanie |
+|-----------|-------------------|-------------|
+| Zabrudzony czujnik mediów | ⭐⭐⭐⭐⭐ | Czyszczenie |
+| Brak kalibracji | ⭐⭐⭐⭐ | Kalibracja |
+| Zły typ nośnika | ⭐⭐⭐⭐ | Zmiana ustawień |
+| Nieprawidłowe załadowanie | ⭐⭐⭐ | Ponowne załadowanie |
+| Uszkodzony czujnik | ⭐⭐ | Serwis |
+
+---
+
+## 1. Czyszczenie czujników mediów
+
+### Gdzie są czujniki?
+
+Drukarki mobilne Zebra mają **dwa czujniki**:
+
+| Czujnik | Lokalizacja | Funkcja |
+|---------|-------------|---------|
+| **Gap Sensor** (czujnik szczeliny) | Pod rolką, przy głowicy | Wykrywa przerwy między etykietami |
+| **Black Bar Sensor** (czujnik czarnego znacznika) | Pod rolką, obok gap sensor | Wykrywa czarne znaczniki na spodzie |
+
+### Jak wyczyścić czujniki?
+
+**Potrzebujesz:**
+- Wacik bawełniany bezpyłowy
+- Alkohol izopropylowy **90% lub wyższy**
+- Sprężone powietrze (opcjonalnie)
+
+**Krok po kroku:**
+
+1. **Wyłącz drukarkę** i wyjmij baterię
+2. **Otwórz pokrywę mediów** (Media Cover)
+3. **Wyjmij rolkę** etykiet
+4. **Zlokalizuj czujniki** — małe okienka po obu stronach ścieżki mediów
+5. **Zdmuchnij kurz** sprężonym powietrzem
+6. **Przetrzyj czujniki** wacikiem nasączonym alkoholem
+7. **Poczekaj 2-3 minuty** na wyschnięcie
+8. **Załaduj media** i zamknij pokrywę
+9. **Wykonaj kalibrację** (patrz sekcja poniżej)
+
+> **⚠️ UWAGA:** Czujniki to delikatne elementy optyczne. Nie dotykaj ich palcami!
+
+### Jak często czyścić?
+
+| Środowisko | Częstotliwość |
+|------------|---------------|
+| Normalne (biuro) | Co 10 rolek |
+| Zapylone (magazyn) | Co 5 rolek |
+| Bardzo brudne (produkcja) | Co 2-3 rolki |
+
+---
+
+## 2. Kalibracja czujników
+
+### Dlaczego kalibracja jest ważna?
+
+Po zmianie typu nośnika (np. z etykiet na paragony) czujniki muszą "nauczyć się" nowych parametrów:
+- Szerokości szczeliny między etykietami
+- Położenia czarnych znaczników
+- Grubości i odbicia światła nośnika
+
+### Kalibracja ZQ630 / ZQ620 / ZQ610
+
+**Metoda 1 – przez menu LCD:**
+
+1. Naciśnij **Home** → przejdź do **Sensors**
+2. Wybierz **Calibrate**
+3. Drukarka przesuwa kilka etykiet i automatycznie kalibruje
+
+**Metoda 2 – przez przyciski:**
+
+1. Wyłącz drukarkę
+2. Załaduj media (etykiety z linerami lub journal)
+3. **Przytrzymaj FEED** + naciśnij **POWER**
+4. Gdy druk się rozpocznie, puść FEED
+
+### Kalibracja ZQ521 / ZQ520 / ZQ511 / ZQ510
+
+**Przez przyciski:**
+
+1. Upewnij się, że media są załadowane
+2. **Przytrzymaj FEED** przez **5 sekund** aż dioda zacznie migać
+3. Puść przycisk – drukarka wykona kalibrację
+
+**Przez Zebra Setup Utilities:**
+
+1. Połącz drukarkę przez USB
+2. **Open Printer Tools** → **Media Calibration** → **Auto Calibrate**
+
+### Kalibracja ZQ320 / ZQ310
+
+**Przez sekwencję przycisków:**
+
+1. Załaduj media
+2. **Przytrzymaj POWER** przez **6 sekund**
+3. Drukarka wykona automatyczną kalibrację
+
+**Przez Zebra Setup Utilities:**
+
+1. Połącz przez USB lub Bluetooth
+2. **Printer Settings** → **Calibration** → **Start**
+
+---
+
+## 3. Ustawienia typu nośnika
+
+### Problem
+
+Drukarka może być skonfigurowana na **inny typ nośnika** niż załadowany:
+
+| Ustawienie | Typ nośnika |
+|------------|-------------|
+| **Gap** | Etykiety z przerwami (die-cut) |
+| **Black Mark** | Nośnik z czarnymi znacznikami na spodzie |
+| **Continuous** | Nośnik ciągły (paragony, journal) |
+
+### Jak sprawdzić i zmienić?
+
+**ZQ630 – przez LCD:**
+
+Home → **Settings** → **Media Type** → wybierz właściwy typ
+
+**Przez komendę SGD:**
+
+Sprawdzenie:
+\`\`\`
+! U1 getvar "ezpl.media_type"
+\`\`\`
+
+Zmiana typu:
+\`\`\`
+! U1 setvar "ezpl.media_type" "gap"
+\`\`\`
+
+Dostępne wartości:
+- \`gap\` – etykiety z przerwami
+- \`mark\` – czarne znaczniki
+- \`continuous\` – nośnik ciągły
+
+### Wymagania dla czarnych znaczników (Black Mark)
+
+Według dokumentacji Zebra:
+
+| Parametr | Wartość |
+|----------|---------|
+| Szerokość znacznika | **min. 15 mm** (prostopadle do krawędzi) |
+| Długość znacznika | **4.8 – 6.0 mm** (równolegle do krawędzi) |
+| Położenie | Wyśrodkowany na szerokości nośnika |
+| Strona | Spód nośnika (domyślnie) lub przód |
+
+> **💡 Ważne:** W obszarze czujnika **nie może być** ciemnego nadruku (logo, grafiki, kody kreskowe). Zachowaj wolną ścieżkę o szerokości min. 15 mm!
+
+---
+
+## 4. Prawidłowe załadowanie mediów
+
+### Najczęstsze błędy
+
+| Błąd | Skutek |
+|------|--------|
+| Media nie przechodzą przez czujnik | Brak detekcji |
+| Rolka włożona "na opak" | Druk na złej stronie |
+| Za luźne prowadnice | Media przesuwają się boczne |
+| Za ciasne prowadnice | Zacięcie papieru |
+
+### Krok po kroku – prawidłowe załadowanie
+
+**ZQ630:**
+
+1. Naciśnij **dźwignię zatrzasku** (Latch Release) i otwórz pokrywę
+2. Rozsuń **dyski podtrzymujące** (Media Support Disks)
+3. Włóż rolkę **z etykietami wychodzącymi od spodu**
+4. Przeprowadź media **pod czujnikami** i **przez głowicę**
+5. Wyciągnij początek nośnika **za listwę zrywającą**
+6. Dopasuj prowadnice do szerokości nośnika
+7. Zamknij pokrywę aż do **kliknięcia**
+
+**ZQ520/ZQ320:**
+
+1. Przesuń zatrzask i otwórz pokrywę
+2. Włóż rolkę na trzpień (oś)
+3. Przeprowadź nośnik przez ścieżkę mediów
+4. Upewnij się, że nośnik przechodzi **przez czujnik**
+5. Zamknij pokrywę szczelnie
+
+---
+
+## 5. Diagnostyka – wydruk testowy
+
+### Co sprawdzić w raporcie konfiguracji?
+
+**Jak wydrukować:**
+
+1. Wyłącz drukarkę
+2. **Przytrzymaj FEED** + naciśnij **POWER**
+3. Gdy druk się rozpocznie, puść FEED
+
+**Kluczowe parametry:**
+
+| Parametr | Co oznacza |
+|----------|-----------|
+| **MEDIA TYPE** | Skonfigurowany typ nośnika (gap/mark/continuous) |
+| **SENSOR VALUES** | Aktualne odczyty czujników |
+| **CALIBRATION** | Status kalibracji |
+
+### Odczyty czujników (Sensor Values)
+
+W raporcie znajdziesz sekcję np.:
+
+\`\`\`
+Sensors: (Adj)
+Pres[DAC:132,Thr:60,Cur:159]
+\`\`\`
+
+- **DAC** – wartość kalibracji
+- **Thr** – próg detekcji
+- **Cur** – aktualny odczyt
+
+Jeśli **Cur** jest blisko **Thr** lub poniżej – czujnik może nie wykrywać poprawnie.
+
+---
+
+## 6. Zaawansowana diagnostyka
+
+### Tryb czujnika (Sensor Mode)
+
+**ZQ630 – sprawdzenie na żywo:**
+
+Home → **Sensors** → **Gap Sensor** lub **Black Bar Sensor**
+
+Wyświetlacz pokaże aktualny odczyt. Przesuwaj nośnik ręcznie:
+- Wartość **rośnie** na etykiecie
+- Wartość **spada** na szczelinie/znaczniku
+
+### Test czujnika przez SGD
+
+\`\`\`
+! U1 getvar "device.sensor.gap"
+! U1 getvar "device.sensor.bar"
+\`\`\`
+
+---
+
+## Kiedy problem wymaga serwisu?
+
+| Objaw | Diagnoza |
+|-------|----------|
+| Czyszczenie i kalibracja nie pomagają | Możliwe uszkodzenie czujnika |
+| Czujnik pokazuje stałą wartość | Uszkodzenie optyki |
+| Błąd po wymianie głowicy | Nieprawidłowy montaż |
+| Widoczne uszkodzenia fizyczne | Wymiana czujnika |
+
+> **🔧 Potrzebujesz wymiany czujnika?** [Zgłoś do serwisu →](/#formularz)
+
+---
+
+## FAQ – Najczęstsze pytania
+
+### Dlaczego drukarka pomija co drugą etykietę?
+Najczęściej problem z kalibracją – czujnik wykrywa "podwójną" szczelinę. Wyczyść czujniki i wykonaj kalibrację.
+
+### Czy mogę użyć etykiet bez przerw?
+Tak, ale musisz zmienić typ nośnika na \`continuous\` i ustawić długość etykiety ręcznie.
+
+### Ile kosztuje wymiana czujnika?
+Wymiana czujnika w serwisie: **150-350 zł** w zależności od modelu. Oferujemy bezpłatną diagnostykę.
+
+### Jak długo trwa kalibracja?
+Automatyczna kalibracja trwa **10-30 sekund** i zużywa 2-4 etykiety.
+
+---
+
+## Checklista diagnostyczna
+
+| # | Krok | Sprawdzone? |
+|---|------|-------------|
+| 1 | Wyczyść Gap Sensor (czujnik szczeliny) | ⬜ |
+| 2 | Wyczyść Black Bar Sensor (czujnik znacznika) | ⬜ |
+| 3 | Wykonaj kalibrację automatyczną | ⬜ |
+| 4 | Sprawdź ustawienie typu nośnika (gap/mark/continuous) | ⬜ |
+| 5 | Sprawdź prawidłowe załadowanie mediów | ⬜ |
+| 6 | Wydrukuj raport konfiguracji | ⬜ |
+| 7 | Sprawdź odczyty czujników w raporcie | ⬜ |
+| 8 | **Problem nadal występuje → SERWIS** | ⬜ |
+
+---
+
+## Potrzebujesz pomocy?
+
+Jeśli czyszczenie i kalibracja nie pomogły:
+
+> 🔧 **Zgłoś drukarkę do serwisu** — [Wypełnij formularz →](/#formularz) — bezpłatna diagnostyka, profesjonalna naprawa czujników.
+
+> 📞 **Pilne?** Zadzwoń: **+48 601 619 898** — pomożemy zdiagnozować problem przez telefon.
+
+Serwisujemy wszystkie modele mobilne: ZQ630, ZQ620, ZQ610, ZQ521, ZQ520, ZQ511, ZQ320, ZQ310, ZQ220, ZQ110.
+`
   }
 ]
 
