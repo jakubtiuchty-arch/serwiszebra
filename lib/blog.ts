@@ -9950,7 +9950,7 @@ Naprawiamy: ZC100, ZC150, ZC300, ZC350, ZXP Series 1, 3, 7, 8, 9 i starsze model
     slug: 'drukarka-zebra-zacina-karty-przyczyny-rozwiazania',
     title: 'Drukarka Zebra zacina karty – przyczyny i rozwiązania krok po kroku',
     excerpt: 'Drukarka kart Zebra zgłasza Card Jam? Karty zacinają się w podajniku, flipperze lub przy wyjściu? Kompletny poradnik usuwania zacięć dla ZC100, ZC300, ZXP Series.',
-    coverImage: '/blog/karta-sie-zaciela.jpeg',
+    coverImage: '/blog/karta-sie-zaciela-2.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
