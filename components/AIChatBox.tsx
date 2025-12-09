@@ -408,9 +408,12 @@ export default function AIChatBox() {
                     </p>
                   </div>
 
-                  {/* Blog Links - tylko dla odpowiedzi AI */}
-                  {msg.role === 'assistant' && msg.blogLinks && msg.blogLinks.length > 0 && (
-                    <div className="flex flex-wrap items-center gap-2 px-3 py-2 bg-blue-50 rounded-xl border border-blue-100">
+                  {/* Blog Links - TYLKO gdy odpowiedź zawiera [SERIOUS_ISSUE] (końcowa diagnoza) */}
+                  {msg.role === 'assistant' && 
+                   msg.blogLinks && 
+                   msg.blogLinks.length > 0 && 
+                   msg.content.includes('[SERIOUS_ISSUE]') && (
+                    <div className="flex flex-wrap items-center gap-2 px-3 py-2 bg-blue-50 rounded-xl border border-blue-100 mt-2">
                       <span className="text-xs font-medium text-blue-700">📚 Przeczytaj więcej:</span>
                       {msg.blogLinks.map((link, idx) => (
                         <a
@@ -426,38 +429,7 @@ export default function AIChatBox() {
                     </div>
                   )}
 
-                  {/* Citations z manuali - tylko dla odpowiedzi AI */}
-                  {msg.role === 'assistant' && msg.citations && msg.citations.length > 0 && (() => {
-                    // Filtruj i formatuj źródła
-                    const cleanCitations = msg.citations
-                      .filter(c => 
-                        c.title && 
-                        c.title.toLowerCase() !== 'untitled' &&
-                        !c.title.endsWith('.book')
-                      )
-                      .map(c => ({
-                        ...c,
-                        // Wyczyść tytuł: usuń rozszerzenia, "- en", itp.
-                        cleanTitle: c.title
-                          .replace(/\.(pdf|book|doc|docx)$/i, '')
-                          .replace(/\s*-\s*en$/i, '')
-                          .replace(/\s*\(en\)$/i, '')
-                          .replace(/_/g, ' ')
-                          .trim()
-                      }))
-                      .slice(0, 3) // Max 3 źródła
-
-                    if (cleanCitations.length === 0) return null
-
-                    return (
-                      <div className="flex items-center gap-2 px-3 py-1.5 bg-gray-50 rounded-xl text-xs text-gray-500">
-                        <span className="font-medium">📖 Manual:</span>
-                        <span className="truncate">
-                          {cleanCitations.map(c => c.cleanTitle).join(' • ')}
-                        </span>
-                      </div>
-                    )
-                  })()}
+                  {/* Citations z manuali - UKRYTE - używane tylko wewnętrznie przez AI */}
                 </div>
 
                 {msg.role === 'user' && (
