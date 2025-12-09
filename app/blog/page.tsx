@@ -66,7 +66,7 @@ function extractModelsFromText(text: string): string[] {
     }
   }
   
-  return [...new Set(found)]
+  return Array.from(new Set(found))
 }
 
 // Funkcja scoringu wyników wyszukiwania
