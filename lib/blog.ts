@@ -11703,7 +11703,7 @@ Serwisujemy wszystkie modele: ZC100, ZC300, ZC350, ZXP Series 1, 3, 7, 8, 9.
     slug: 'biale-linie-etykiety-drukarka-mobilna-zebra',
     title: 'Białe linie na etykietach z drukarki mobilnej Zebra – przyczyny i rozwiązania',
     excerpt: 'Pionowe białe pasy na etykietach z ZQ630, ZQ520, ZQ320? Kody kreskowe nie skanują się? Poradnik czyszczenia głowicy i diagnostyki jakości druku w drukarkach mobilnych Zebra.',
-    coverImage: '/blog/placeholder.jpg',
+    coverImage: '/blog/biale-linie-mobile.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
