@@ -13524,7 +13524,9 @@ const WORD_STEMS: Record<string, string[]> = {
   'ribbon': ['ribbon', 'taśma', 'taśmy', 'taśmę'],
   'sensor': ['sensor', 'czujnik', 'czujnika'],
   'papier': ['papier', 'papieru', 'etykiet', 'etykiety'],
-  'wifi': ['wifi', 'wi-fi', 'wlan', 'bezprzewodow', 'sieć', 'sieci', 'łączność'],
+  'wifi': ['wifi', 'wi-fi', 'wlan', 'bezprzewodow'],
+  'gsm': ['gsm', 'lte', '4g', '5g', 'komórkow', 'mobiln', 'apn', 'sim', 'karty sim', 'zasięg', 'operator'],
+  'sieć': ['sieć', 'sieci', 'łączność', 'internet', 'połączenie sieciow'],
   'bluetooth': ['bluetooth', 'bt', 'parow', 'paruje', 'sparow'],
   'połączenie': ['połączenie', 'połączyć', 'łączy', 'łączenie', 'rozłącz'],
   'roaming': ['roaming', 'roamingu', 'przełącza', 'przełączanie'],
@@ -13648,9 +13650,32 @@ export function searchBlogForAI(query: string): {
       if (post.deviceType === detectedDeviceType) {
         score += 25 // Duży bonus za pasujący typ urządzenia
       } else {
-        score -= 15 // Kara za niepasujący typ urządzenia
+        score -= 20 // Większa kara za niepasujący typ urządzenia
       }
     }
+    
+    // BONUS za dopasowanie TEMATU (GSM vs WiFi vs Skaner vs itp.)
+    const queryHasGSM = queryLower.match(/gsm|lte|4g|5g|komórkow|apn|sim/)
+    const queryHasWiFi = queryLower.match(/wifi|wi-fi|wlan/)
+    const queryHasScanner = queryLower.match(/skaner|skanow|skanuj|czytnik|kod.*kresk/)
+    const queryHasPrinter = queryLower.match(/drukark|wydruk|etykiet|ribbon|głowic/)
+    
+    const articleIsAboutGSM = slugLower.includes('gsm') || slugLower.includes('4g') || slugLower.includes('5g') || slugLower.includes('lte') || slugLower.includes('apn')
+    const articleIsAboutWiFi = slugLower.includes('wifi') || titleLower.includes('wifi')
+    const articleIsAboutScanner = slugLower.includes('skaner') || titleLower.includes('skaner') || titleLower.includes('skanow')
+    const articleIsAboutPrinter = post.deviceType === 'drukarki'
+    
+    // Duży bonus za dopasowanie tematu
+    if (queryHasGSM && articleIsAboutGSM) score += 30
+    if (queryHasWiFi && articleIsAboutWiFi) score += 30
+    if (queryHasScanner && articleIsAboutScanner) score += 30
+    if (queryHasPrinter && articleIsAboutPrinter) score += 20
+    
+    // Duża kara za NIEPASUJĄCY temat
+    if (queryHasGSM && articleIsAboutScanner) score -= 40
+    if (queryHasGSM && articleIsAboutWiFi && !articleIsAboutGSM) score -= 20
+    if (queryHasWiFi && articleIsAboutScanner) score -= 40
+    if (queryHasScanner && !articleIsAboutScanner && articleIsAboutGSM) score -= 40
     
     for (const word of uniqueWords) {
       // Tytuł - najwyższy priorytet
