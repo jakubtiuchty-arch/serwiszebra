@@ -11305,7 +11305,7 @@ Serwisujemy i konfigurujemy drukarki: ZC100, ZC300, ZC350, ZXP Series 1, 3, 7, 8
     slug: 'porownanie-drukarek-kart-zebra-zc100-zc300-zxp',
     title: 'Porównanie drukarek kart Zebra – ZC100 vs ZC300 vs ZXP7 vs ZXP9',
     excerpt: 'Którą drukarkę kart Zebra wybrać? Porównanie modeli ZC100, ZC300, ZC350, ZXP7, ZXP9 – różnice, ceny, zastosowania. Pomoc w wyborze odpowiedniej drukarki dla Twojej firmy.',
-    coverImage: '/blog/placeholder.jpg',
+    coverImage: '/blog/porónanie-drukarek-kart.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
