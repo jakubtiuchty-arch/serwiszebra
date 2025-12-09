@@ -47,7 +47,7 @@ export default function AIChatBox() {
   const [placeholderIndex, setPlaceholderIndex] = useState(0)
   const [isRecording, setIsRecording] = useState(false)
   const [sessionId] = useState(() => `session_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`)
-  const [detectedDevice, setDetectedDevice] = useState<string>('urządzenie')
+  const [detectedDevice, setDetectedDevice] = useState<{ name: string; possessive: string }>({ name: 'urządzenie', possessive: 'Twoje' })
   const [attachedFiles, setAttachedFiles] = useState<File[]>([])
   const messagesContainerRef = useRef<HTMLDivElement>(null)
   const recognitionRef = useRef<any>(null)
@@ -187,8 +187,8 @@ export default function AIChatBox() {
     setAttachedFiles(prev => prev.filter((_, i) => i !== index))
   }
 
-  // Detect device type from user input
-  const detectDeviceType = (text: string): string => {
+  // Detect device type from user input - returns object with device name and correct Polish grammar
+  const detectDeviceType = (text: string): { name: string; possessive: string } => {
     const textLower = text.toLowerCase()
 
     // Printer models - if detected, it's a printer
@@ -198,31 +198,32 @@ export default function AIChatBox() {
       'zd888', 'zd500', 'zd510',
       'zt510', 'zt610',
       'gc420d', 'gc420t',
-      'tlp2844', 'lp2844'
+      'tlp2844', 'lp2844',
+      'zq630', 'zq620', 'zq610', 'zq520', 'zq521', 'zq320', 'zq310'
     ]
 
     // Check if any printer model is mentioned
     for (const model of printerModels) {
       if (textLower.includes(model)) {
-        return 'drukarkę'
+        return { name: 'drukarkę', possessive: 'Twoją' } // feminine
       }
     }
 
     // Check for generic device type keywords
     if (textLower.includes('drukark') || textLower.includes('print')) {
-      return 'drukarkę'
+      return { name: 'drukarkę', possessive: 'Twoją' } // feminine
     }
-    if (textLower.includes('terminal')) {
-      return 'terminal'
+    if (textLower.includes('terminal') || textLower.includes('tc21') || textLower.includes('tc26') || textLower.includes('tc52') || textLower.includes('tc57') || textLower.includes('tc58')) {
+      return { name: 'terminal', possessive: 'Twój' } // masculine
     }
     if (textLower.includes('skaner') || textLower.includes('scan')) {
-      return 'skaner'
+      return { name: 'skaner', possessive: 'Twój' } // masculine
     }
     if (textLower.includes('tablet')) {
-      return 'tablet'
+      return { name: 'tablet', possessive: 'Twój' } // masculine
     }
 
-    return 'urządzenie'
+    return { name: 'urządzenie', possessive: 'Twoje' } // neuter
   }
 
   // Konwersja pliku na base64
@@ -475,7 +476,7 @@ export default function AIChatBox() {
                 <div className="bg-gray-100 rounded-3xl px-5 py-3">
                   <p className="text-sm text-gray-600 flex items-center gap-2">
                     <span className="inline-block w-1.5 h-1.5 bg-blue-500 rounded-full animate-pulse"></span>
-                    Diagnozuję Twoją {detectedDevice}... zaraz wracam! ☕
+                    Diagnozuję {detectedDevice.possessive} {detectedDevice.name}... zaraz wracam! ☕
                   </p>
                 </div>
               </div>
