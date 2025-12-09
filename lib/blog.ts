@@ -11303,8 +11303,8 @@ Serwisujemy i konfigurujemy drukarki: ZC100, ZC300, ZC350, ZXP Series 1, 3, 7, 8
   },
   {
     slug: 'porownanie-drukarek-kart-zebra-zc100-zc300-zxp',
-    title: 'Porównanie drukarek kart Zebra – ZC100 vs ZC300 vs ZXP3 vs ZXP7 vs ZXP9',
-    excerpt: 'Którą drukarkę kart Zebra wybrać? Porównanie modeli ZC100, ZC300, ZC350, ZXP3, ZXP7, ZXP9 – różnice, ceny, zastosowania. Pomoc w wyborze odpowiedniej drukarki dla Twojej firmy.',
+    title: 'Porównanie drukarek kart Zebra – ZC100 vs ZC300 vs ZXP7 vs ZXP9',
+    excerpt: 'Którą drukarkę kart Zebra wybrać? Porównanie modeli ZC100, ZC300, ZC350, ZXP7, ZXP9 – różnice, ceny, zastosowania. Pomoc w wyborze odpowiedniej drukarki dla Twojej firmy.',
     coverImage: '/blog/placeholder.jpg',
     author: {
       name: 'Zespół Serwis Zebra',
@@ -11315,10 +11315,10 @@ Serwisujemy i konfigurujemy drukarki: ZC100, ZC300, ZC350, ZXP Series 1, 3, 7, 8
     deviceType: 'drukarki',
     subDeviceType: 'kart',
     category: 'porownania',
-    tags: ['porównanie drukarek', 'ZC100', 'ZC300', 'ZC350', 'ZXP3', 'ZXP7', 'ZXP9', 'jaka drukarka kart', 'wybór drukarki', 'drukarka do identyfikatorów'],
+    tags: ['porównanie drukarek', 'ZC100', 'ZC300', 'ZC350', 'ZXP7', 'ZXP9', 'jaka drukarka kart', 'wybór drukarki', 'drukarka do identyfikatorów'],
     seo: {
       metaTitle: 'Porównanie drukarek kart Zebra – ZC100 vs ZC300 vs ZXP [2025]',
-      metaDescription: 'Którą drukarkę kart Zebra kupić? Porównanie modeli ZC100, ZC300, ZC350, ZXP3, ZXP7, ZXP9. Ceny, różnice, zastosowania. Poradnik zakupowy 2025.',
+      metaDescription: 'Którą drukarkę kart Zebra kupić? Porównanie modeli ZC100, ZC300, ZC350, ZXP7, ZXP9. Ceny, różnice, zastosowania. Poradnik zakupowy 2025.',
       keywords: [
         'porównanie drukarek kart zebra',
         'zebra zc100 vs zc300',
@@ -11345,7 +11345,7 @@ Serwisujemy i konfigurujemy drukarki: ZC100, ZC300, ZC350, ZXP Series 1, 3, 7, 8
     content: `
 # Porównanie drukarek kart Zebra – który model wybrać?
 
-> **💡 Nie wiesz, którą drukarkę kart Zebra kupić?** Ten poradnik wyjaśni różnice między modelami ZC100, ZC300, ZC350, ZXP3, ZXP7 i ZXP9. Dowiesz się, który model pasuje do Twoich potrzeb i budżetu.
+> **💡 Nie wiesz, którą drukarkę kart Zebra kupić?** Ten poradnik wyjaśni różnice między modelami ZC100, ZC300, ZC350, ZXP7 i ZXP9. Dowiesz się, który model pasuje do Twoich potrzeb i budżetu.
 
 ---
 
@@ -11363,18 +11363,18 @@ Serwisujemy i konfigurujemy drukarki: ZC100, ZC300, ZC350, ZXP Series 1, 3, 7, 8
 
 ## Porównanie wszystkich modeli w tabeli
 
-| Cecha | ZC100 | ZC300 | ZC350 | ZXP3 | ZXP7 | ZXP9 |
-|-------|-------|-------|-------|------|------|------|
-| **Druk jednostronny** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| **Druk dwustronny** | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| **Prędkość (karty/godz.)** | ~700 | ~900 | ~850 | ~195 | ~1375 | ~190 |
-| **Jakość (dpi)** | 300 | 300 | 300 | 300 | 300 | 300 |
-| **Opcja laminowania** | ❌ | ❌ | ❌ | ❌ | ✅ | ✅ |
-| **Enkoder magnetyczny** | Opcja | Opcja | Opcja | Opcja | Opcja | Opcja |
-| **Smart card** | ❌ | Opcja | Opcja | Opcja | Opcja | Opcja |
-| **WiFi** | Opcja | Opcja | Opcja | ❌ | Opcja | Opcja |
-| **Cena orientacyjna** | ~3 500 zł | ~5 000 zł | ~6 000 zł | ~5 000 zł | ~8 500 zł | ~11 000 zł |
-| **Status** | Aktualny | Aktualny | Aktualny | Wycofywany | Aktualny | Aktualny |
+| Cecha | ZC100 | ZC300 | ZC350 | ZXP7 | ZXP9 |
+|-------|-------|-------|-------|------|------|
+| **Druk jednostronny** | ✅ | ✅ | ✅ | ✅ | ✅ |
+| **Druk dwustronny** | ❌ | ✅ | ✅ | ✅ | ✅ |
+| **Prędkość (karty/godz.)** | ~700 | ~900 | ~850 | ~1375 | ~190 |
+| **Jakość (dpi)** | 300 | 300 | 300 | 300 | 300 |
+| **Opcja laminowania** | ❌ | ❌ | ❌ | ✅ | ✅ |
+| **Enkoder magnetyczny** | Opcja | Opcja | Opcja | Opcja | Opcja |
+| **Smart card** | ❌ | Opcja | Opcja | Opcja | Opcja |
+| **WiFi** | Opcja | Opcja | Opcja | Opcja | Opcja |
+| **Cena orientacyjna** | ~3 500 zł | ~5 000 zł | ~6 000 zł | ~8 500 zł | ~11 000 zł |
+| **Status** | Aktualny | Aktualny | Aktualny | Aktualny | Aktualny |
 
 ---
 
@@ -11509,19 +11509,7 @@ To ile kart drukarka może wydrukować w ciągu godziny:
 
 ---
 
-## 4. Zebra ZXP Series 3 – "Starszy brat (wycofywany)"
-
-> **⚠️ Uwaga:** Ten model jest wycofywany z produkcji. Rozważ ZC300 lub ZC350 jako zamiennik.
-
-### Dla kogo?
-- Firmy mające już ZXP3 i szukające zamiennych części
-- Nie zalecamy do nowych zakupów
-
-**Cena orientacyjna:** ~5 000 zł (jeśli jeszcze dostępny)
-
----
-
-## 5. Zebra ZXP Series 7 – "Maszyna produkcyjna"
+## 4. Zebra ZXP Series 7 – "Maszyna produkcyjna"
 
 ### Dla kogo?
 - Duże firmy (500+ pracowników)
@@ -11558,7 +11546,7 @@ To ile kart drukarka może wydrukować w ciągu godziny:
 
 ---
 
-## 6. Zebra ZXP Series 9 – "Premium i bezpieczna"
+## 5. Zebra ZXP Series 9 – "Premium i bezpieczna"
 
 ### Dla kogo?
 - Karty o najwyższej jakości i trwałości
@@ -11682,7 +11670,7 @@ Technicznie tak – wyciągasz kartę, odwracasz i drukujesz drugą stronę. Ale
 ZC100/ZC300 nie mają opcji laminatora. Jeśli rozważasz laminowanie, od razu wybierz ZXP7 lub ZXP9, albo kup osobny laminator.
 
 ### Czy drukarki ZXP są lepsze od ZC?
-ZXP to starsza seria, ZC to nowsza. ZC100/ZC300 zastąpiły ZXP1/ZXP3. ZXP7 i ZXP9 to nadal flagowe modele do dużych nakładów i laminowania.
+ZXP to starsza seria, ZC to nowsza. ZC100/ZC300 zastąpiły starsze modele ZXP. ZXP7 i ZXP9 to nadal flagowe modele do dużych nakładów i laminowania.
 
 ---
 
