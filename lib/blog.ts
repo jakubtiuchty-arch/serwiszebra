@@ -10568,7 +10568,7 @@ Wymieniamy głowice w: ZC100, ZC150, ZC300, ZC350, ZXP Series 1, 3, 7, 8, 9, P33
     slug: 'bledy-kodowania-paska-magnetycznego-zebra',
     title: 'Błędy kodowania paska magnetycznego w drukarkach Zebra – jak je naprawić',
     excerpt: 'Error 9001, 9002 lub 9004 przy kodowaniu kart magnetycznych? Problemy z HiCo/LoCo? Kompletny poradnik rozwiązywania błędów enkodera magnetycznego w drukarkach ZC300, ZXP Series.',
-    coverImage: '/blog/placeholder.jpg',
+    coverImage: '/blog/błedy-kodowania-zc.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
