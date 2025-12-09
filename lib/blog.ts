@@ -13561,6 +13561,43 @@ function normalizeWord(word: string): string[] {
   return [wordLower]
 }
 
+// Funkcja do wykrywania typu urządzenia z zapytania
+function detectDeviceTypeFromQuery(query: string): 'drukarki' | 'terminale' | 'skanery' | 'tablety' | null {
+  const q = query.toLowerCase()
+  
+  // Modele terminali
+  const terminalModels = ['tc21', 'tc26', 'tc52', 'tc57', 'tc58', 'tc72', 'tc77', 'tc8300', 'mc33', 'mc93', 'mc94', 'wt6000', 'wt6300']
+  for (const model of terminalModels) {
+    if (q.includes(model)) return 'terminale'
+  }
+  
+  // Modele drukarek
+  const printerModels = ['zt411', 'zt421', 'zt410', 'zt420', 'zd421', 'zd621', 'zd420', 'zd620', 'zd888', 'zt510', 'zt610', 'zq630', 'zq620', 'zq520', 'zq320', 'zc300', 'zc350', 'zxp']
+  for (const model of printerModels) {
+    if (q.includes(model)) return 'drukarki'
+  }
+  
+  // Modele skanerów
+  const scannerModels = ['ds2208', 'ds3608', 'ds4608', 'ds8178', 'li2208', 'li4278', 'ls2208', 'cs4070']
+  for (const model of scannerModels) {
+    if (q.includes(model)) return 'skanery'
+  }
+  
+  // Modele tabletów
+  const tabletModels = ['et40', 'et45', 'et51', 'et56', 'l10', 'xslate']
+  for (const model of tabletModels) {
+    if (q.includes(model)) return 'tablety'
+  }
+  
+  // Słowa kluczowe ogólne
+  if (q.includes('terminal') || q.includes('kolektora') || q.includes('kolektor')) return 'terminale'
+  if (q.includes('drukark') || q.includes('printer') || q.includes('etykiet')) return 'drukarki'
+  if (q.includes('skaner') || q.includes('czytnik') && !q.includes('kart')) return 'skanery'
+  if (q.includes('tablet')) return 'tablety'
+  
+  return null
+}
+
 // Funkcja do wyszukiwania artykułów dla AI Chat
 export function searchBlogForAI(query: string): {
   found: boolean
@@ -13573,6 +13610,10 @@ export function searchBlogForAI(query: string): {
 } {
   const queryLower = query.toLowerCase()
   const queryWords = queryLower.split(/\s+/).filter(w => w.length > 2)
+  
+  // Wykryj typ urządzenia z zapytania
+  const detectedDeviceType = detectDeviceTypeFromQuery(query)
+  console.log('Blog search: detected device type:', detectedDeviceType)
   
   // Słowa kluczowe do ignorowania (stop words)
   const stopWords = ['jak', 'czy', 'jest', 'się', 'nie', 'ale', 'lub', 'oraz', 'dla', 'przy', 'moja', 'mój', 'moje', 'mojej', 'moją', 'mogę', 'można']
@@ -13601,6 +13642,15 @@ export function searchBlogForAI(query: string): {
     const contentLower = post.content.toLowerCase()
     const tagsLower = post.tags.map(t => t.toLowerCase())
     const slugLower = post.slug.toLowerCase()
+    
+    // BONUS/PENALTY za typ urządzenia - BARDZO WAŻNE!
+    if (detectedDeviceType) {
+      if (post.deviceType === detectedDeviceType) {
+        score += 25 // Duży bonus za pasujący typ urządzenia
+      } else {
+        score -= 15 // Kara za niepasujący typ urządzenia
+      }
+    }
     
     for (const word of uniqueWords) {
       // Tytuł - najwyższy priorytet
