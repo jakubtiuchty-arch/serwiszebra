@@ -12777,7 +12777,7 @@ Serwisujemy wszystkie modele mobilne: ZQ630, ZQ620, ZQ610, ZQ521, ZQ520, ZQ511, 
     slug: 'problemy-bateria-drukarka-zebra-mobilna',
     title: 'Problemy z baterią w drukarce Zebra – nie ładuje, szybko się rozładowuje, błędy',
     excerpt: 'Bateria Zebra ZQ630/ZQ520 nie ładuje? Szybko się rozładowuje? Komunikat "Replace Battery"? Poradnik o PowerPrecision+, cyklach ładowania i wymianie baterii.',
-    coverImage: '/blog/placeholder.jpg',
+    coverImage: '/blog/Bateria-Zebra-ZQ630-ZQ520-nie-laduje.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
