@@ -11,7 +11,10 @@ import {
   Package,
   ShoppingCart,
   BarChart3,
-  MessageSquare
+  MessageSquare,
+  Sparkles,
+  Home,
+  ExternalLink
 } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
@@ -67,6 +70,12 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     href: '/admin/chat-logs',
     icon: MessageSquare,
     current: pathname === '/admin/chat-logs',
+  },
+  {
+    name: 'Analityka AI',
+    href: '/admin/chat-analytics',
+    icon: Sparkles,
+    current: pathname === '/admin/chat-analytics',
   },
   // Analiza
   { type: 'header', name: 'Analiza' },
@@ -136,8 +145,15 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           })}
         </nav>
 
-        {/* Logout - kompaktowy */}
-        <div className="absolute bottom-0 left-0 right-0 p-2 border-t border-blue-700">
+        {/* Bottom links */}
+        <div className="absolute bottom-0 left-0 right-0 p-2 border-t border-blue-700 space-y-1">
+          <Link
+            href="/"
+            className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-blue-100 hover:bg-blue-700 hover:text-white transition-colors text-sm"
+          >
+            <Home className="w-4 h-4" />
+            <span>Strona główna</span>
+          </Link>
           <button
             onClick={handleLogout}
             className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-blue-100 hover:bg-blue-700 hover:text-white transition-colors text-sm"

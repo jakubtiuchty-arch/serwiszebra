@@ -6,9 +6,10 @@ import { Calendar, ThumbsUp, Zap } from 'lucide-react'
 
 interface HeaderProps {
   currentPage?: 'home' | 'blog' | 'panel' | 'other'
+  hidePartnerLogos?: boolean
 }
 
-export default function Header({ currentPage = 'other' }: HeaderProps) {
+export default function Header({ currentPage = 'other', hidePartnerLogos = false }: HeaderProps) {
   return (
     <div className="bg-white border-b border-gray-200 shadow-sm">
       {/* TOP BAR - UKRYTE NA MOBILE */}
@@ -46,25 +47,29 @@ export default function Header({ currentPage = 'other' }: HeaderProps) {
                 />
               </div>
 
-              {/* Premier Partner Logo */}
-              <div className="w-16 sm:w-20 h-11 sm:h-[53px] relative">
-                <Image
-                  src="/premier-partner-1.png"
-                  alt="Premier Partner"
-                  fill
-                  className="object-contain transition-transform duration-300 md:hover:scale-[2.5] relative md:hover:z-50"
-                />
-              </div>
+              {!hidePartnerLogos && (
+                <>
+                  {/* Premier Partner Logo */}
+                  <div className="w-16 sm:w-20 h-11 sm:h-[53px] relative">
+                    <Image
+                      src="/premier-partner-1.png"
+                      alt="Premier Partner"
+                      fill
+                      className="object-contain transition-transform duration-300 md:hover:scale-[2.5] relative md:hover:z-50"
+                    />
+                  </div>
 
-              {/* Repair Specialist Logo */}
-              <div className="w-[67px] sm:w-[84px] h-11 sm:h-[53px] relative">
-                <Image
-                  src="/repair_specialist.png"
-                  alt="Repair Specialist"
-                  fill
-                  className="object-contain transition-transform duration-300 md:hover:scale-[2.5] relative md:hover:z-50"
-                />
-              </div>
+                  {/* Repair Specialist Logo */}
+                  <div className="w-[67px] sm:w-[84px] h-11 sm:h-[53px] relative">
+                    <Image
+                      src="/repair_specialist.png"
+                      alt="Repair Specialist"
+                      fill
+                      className="object-contain transition-transform duration-300 md:hover:scale-[2.5] relative md:hover:z-50"
+                    />
+                  </div>
+                </>
+              )}
             </Link>
 
             <div className="ml-auto flex items-center gap-1.5 sm:gap-3 md:gap-4 mr-0">
@@ -92,6 +97,14 @@ export default function Header({ currentPage = 'other' }: HeaderProps) {
               
               <Link href="/blog" className="hidden md:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
                 Blog
+              </Link>
+              
+              <Link href="/o-nas" className="hidden md:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
+                O nas
+              </Link>
+              
+              <Link href="/kontakt" className="hidden md:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
+                Kontakt
               </Link>
 
               <Link href="/#formularz" className="hidden md:block text-sm text-gray-700 hover:text-gray-900 transition-colors">

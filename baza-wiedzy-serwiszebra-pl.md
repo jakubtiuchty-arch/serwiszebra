@@ -1,4 +1,4 @@
-# Kompletna baza wiedzy terminali mobilnych Zebra dla serwiszebra.pl
+cu# Kompletna baza wiedzy terminali mobilnych Zebra dla serwiszebra.pl
 
 ## Obsługiwane modele: TC21, TC22, MC33, MC34, MC93, MC94, MC22, TC26, TC27, TC8000
 

@@ -482,20 +482,22 @@ function parseMarkdown(markdown: string): string {
       // End of table, render it
       inTable = false
       if (tableRows.length > 0) {
-        let tableHtml = '<div class="overflow-x-auto my-4 sm:my-6 -mx-4 sm:mx-0"><table class="w-full border-collapse bg-white sm:rounded-xl overflow-hidden shadow-sm min-w-[320px]">'
+        const headers = tableRows[0] || []
+        let tableHtml = '<div class="overflow-x-auto my-4 sm:my-6 -mx-4 sm:mx-0 px-4 sm:px-0"><table class="w-full border-collapse bg-white sm:rounded-xl overflow-hidden shadow-sm mobile-card-table">'
         tableRows.forEach((row, idx) => {
           if (idx === 0) {
             // Header row
             tableHtml += '<thead class="bg-gray-100"><tr>'
             row.forEach(cell => {
-              tableHtml += `<th class="px-2 sm:px-4 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold text-gray-900 border-b border-gray-200 whitespace-nowrap">${processInline(cell)}</th>`
+              tableHtml += `<th class="px-2 sm:px-4 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold text-gray-900 border-b border-gray-200">${processInline(cell)}</th>`
             })
             tableHtml += '</tr></thead><tbody>'
           } else {
-            // Body row
+            // Body row with data-label for mobile
             tableHtml += `<tr class="${idx % 2 === 0 ? 'bg-gray-50' : 'bg-white'}">`
-            row.forEach(cell => {
-              tableHtml += `<td class="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm text-gray-700 border-b border-gray-100">${processInline(cell)}</td>`
+            row.forEach((cell, cellIdx) => {
+              const label = headers[cellIdx] || ''
+              tableHtml += `<td data-label="${label.replace(/\*\*/g, '')}" class="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm text-gray-700 border-b border-gray-100">${processInline(cell)}</td>`
             })
             tableHtml += '</tr>'
           }
@@ -613,18 +615,20 @@ function parseMarkdown(markdown: string): string {
   
   // Close any open table
   if (inTable && tableRows.length > 0) {
-    let tableHtml = '<div class="overflow-x-auto my-4 sm:my-6 -mx-4 sm:mx-0"><table class="w-full border-collapse bg-white sm:rounded-xl overflow-hidden shadow-sm min-w-[320px]">'
+    const headers = tableRows[0] || []
+    let tableHtml = '<div class="overflow-x-auto my-4 sm:my-6 -mx-4 sm:mx-0 px-4 sm:px-0"><table class="w-full border-collapse bg-white sm:rounded-xl overflow-hidden shadow-sm mobile-card-table">'
     tableRows.forEach((row, idx) => {
       if (idx === 0) {
         tableHtml += '<thead class="bg-gray-100"><tr>'
         row.forEach(cell => {
-          tableHtml += `<th class="px-2 sm:px-4 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold text-gray-900 border-b border-gray-200 whitespace-nowrap">${processInline(cell)}</th>`
+          tableHtml += `<th class="px-2 sm:px-4 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold text-gray-900 border-b border-gray-200">${processInline(cell)}</th>`
         })
         tableHtml += '</tr></thead><tbody>'
       } else {
         tableHtml += `<tr class="${idx % 2 === 0 ? 'bg-gray-50' : 'bg-white'}">`
-        row.forEach(cell => {
-          tableHtml += `<td class="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm text-gray-700 border-b border-gray-100">${processInline(cell)}</td>`
+        row.forEach((cell, cellIdx) => {
+          const label = headers[cellIdx] || ''
+          tableHtml += `<td data-label="${label.replace(/\*\*/g, '')}" class="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm text-gray-700 border-b border-gray-100">${processInline(cell)}</td>`
         })
         tableHtml += '</tr>'
       }
@@ -674,6 +678,9 @@ function processInline(text: string): string {
     // Checkmarks (emoji fallback)
     .replace(/✅/g, '<svg class="inline-block w-5 h-5 text-green-600 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>')
     .replace(/❌/g, '<svg class="inline-block w-5 h-5 text-red-600 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>')
+    // Critical warning - red pulsating (use 🔴⚠️ in content)
+    .replace(/🔴⚠️/g, '<svg class="inline-block w-6 h-6 text-red-600 mr-1 warning-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>')
+    // Regular warning - yellow
     .replace(/⚠️/g, '<svg class="inline-block w-5 h-5 text-yellow-600 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>')
     .replace(/💡/g, '<svg class="inline-block w-5 h-5 text-yellow-500 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>')
 }

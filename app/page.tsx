@@ -218,6 +218,12 @@ export default function HomePage() {
                   <a href="/blog" className="hidden md:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
                     Blog
                   </a>
+                  <a href="/o-nas" className="hidden md:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
+                    O nas
+                  </a>
+                  <a href="/kontakt" className="hidden md:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
+                    Kontakt
+                  </a>
                   <a href="#formularz" className="hidden md:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
                     Formularz
                   </a>
@@ -1087,102 +1093,173 @@ export default function HomePage() {
       </div>
 
       {/* FOOTER */}
-      <footer className="bg-gray-900 text-white py-8 px-3 sm:px-4 lg:px-6 relative overflow-hidden">
+      <footer className="relative overflow-hidden">
+        {/* Gradient background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-slate-900 to-gray-950"></div>
+        
+        {/* Floating orbs - subtle */}
+        <div className="absolute top-20 left-10 w-72 h-72 bg-white/[0.02] rounded-full blur-3xl"></div>
+        <div className="absolute bottom-40 right-20 w-96 h-96 bg-white/[0.02] rounded-full blur-3xl"></div>
+        
+        {/* Grid pattern overlay */}
+        <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")' }}></div>
+
         {/* Duży napis SERWIS ZEBRA w tle */}
-        <div className="absolute left-0 right-0 bottom-0 flex items-end justify-center pointer-events-none" style={{ transform: 'translateY(15%)' }}>
-          <h2 className="text-[4rem] sm:text-[6rem] md:text-[11.55rem] lg:text-[14.7rem] font-black tracking-tighter whitespace-nowrap leading-none bg-gradient-to-t from-white/10 via-white/3 to-transparent bg-clip-text text-transparent">
+        <div className="absolute left-0 right-0 bottom-0 flex items-end justify-center pointer-events-none" style={{ transform: 'translateY(20%)' }}>
+          <h2 className="text-[4rem] sm:text-[7rem] md:text-[12rem] lg:text-[16rem] font-black tracking-tighter whitespace-nowrap leading-none bg-gradient-to-t from-white/[0.07] via-white/[0.02] to-transparent bg-clip-text text-transparent select-none">
             SERWIS ZEBRA
           </h2>
         </div>
 
-        <div className="max-w-7xl mx-auto relative z-10">
-          <div className="grid md:grid-cols-3 gap-8 mb-6">
-            {/* Kolumna 1: Kontakt */}
-            <div>
-              <h4 className="text-sm font-semibold mb-3">Kontakt</h4>
-              <ul className="space-y-2 text-xs text-gray-400">
-                <li className="flex items-center gap-2">
-                  <Mail className="w-3.5 h-3.5" />
-                  <a href="mailto:kontakt@serwiszebra.pl" className="hover:text-white transition-colors">
-                    kontakt@serwiszebra.pl
-                  </a>
-                </li>
-                <li className="flex items-center gap-2">
-                  <Phone className="w-3.5 h-3.5" />
-                  <a href="tel:+48601619898" className="hover:text-white transition-colors">
-                    +48 601 619 898
-                  </a>
-                </li>
-                <li className="flex items-center gap-2">
-                  <Clock className="w-3.5 h-3.5" />
-                  <span>Pon-Pt: 9:00-17:00</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <Sparkles className="w-3.5 h-3.5" />
-                  <span>Chat AI: 24/7</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Kolumna 2: Informacje prawne */}
-            <div>
-              <h4 className="text-sm font-semibold mb-3">Informacje</h4>
-              <ul className="space-y-2 text-xs text-gray-400">
-                <li>
-                  <a href="#" className="hover:text-white transition-colors">Regulamin</a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white transition-colors">Polityka prywatności</a>
-                </li>
-                <li className="pt-2 border-t border-gray-800">
-                  <span>NIP: 9151004377</span>
-                </li>
-                <li>
-                  <span>REGON: 932677161</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Kolumna 3: Płatności */}
-            <div>
-              <h4 className="text-sm font-semibold mb-3">Akceptujemy płatności</h4>
-              <div className="flex flex-wrap gap-3 items-center">
-                <div className="bg-white rounded px-3 py-2 w-20 h-10 flex items-center justify-center">
-                  <Image
-                    src="https://cdn.worldvectorlogo.com/logos/stripe-4.svg"
-                    alt="Stripe"
-                    width={50}
-                    height={20}
-                    className="h-5 w-auto"
-                  />
+        {/* Main content */}
+        <div className="relative z-10 text-white">
+          {/* Top section with logo and CTA */}
+          <div className="border-b border-white/5">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+              <div className="flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-8">
+                {/* Logo + certyfikaty */}
+                <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
+                  <div className="w-32 sm:w-40 h-12 sm:h-16 relative">
+                    <Image src="/takma_logo_1.png" alt="TAKMA" fill className="object-contain brightness-0 invert" />
+                  </div>
+                  <div className="hidden sm:block h-12 w-px bg-gradient-to-b from-transparent via-white/20 to-transparent"></div>
+                  {/* Certyfikaty - na mobile pod logo, na sm+ obok */}
+                  <div className="flex items-center gap-3 sm:gap-4">
+                    <div className="w-16 sm:w-20 h-12 sm:h-16 relative opacity-80 hover:opacity-100 transition-opacity">
+                      <Image src="/premier-partner-1.png" alt="Zebra Premier Partner" fill className="object-contain" />
+                    </div>
+                    <div className="w-16 sm:w-20 h-12 sm:h-16 relative opacity-80 hover:opacity-100 transition-opacity">
+                      <Image src="/repair_specialist.png" alt="Repair Specialist" fill className="object-contain" />
+                    </div>
+                  </div>
                 </div>
-                <div className="bg-white rounded px-3 py-2 w-20 h-10 flex items-center justify-center">
-                  <Image
-                    src="/P24_logo.png"
-                    alt="Przelewy24"
-                    width={80}
-                    height={20}
-                    className="h-5 w-auto"
-                  />
-                </div>
-                <div className="bg-white rounded px-3 py-2 w-20 h-10 flex items-center justify-center">
-                  <Image
-                    src="/blik_logo.png"
-                    alt="BLIK"
-                    width={113}
-                    height={46}
-                    className="h-11 w-auto"
-                  />
+                {/* Przyciski kontaktowe */}
+                <div className="flex items-center gap-2 sm:gap-3 w-full sm:w-auto justify-center sm:justify-end">
+                  <a href="tel:+48601619898" className="group flex items-center gap-2 sm:gap-2.5 px-3 sm:px-5 py-2.5 sm:py-3 bg-white/5 hover:bg-white/10 backdrop-blur-sm border border-white/10 rounded-xl transition-all duration-300">
+                    <div className="w-7 sm:w-8 h-7 sm:h-8 bg-white/10 rounded-lg flex items-center justify-center">
+                      <Phone className="w-3.5 sm:w-4 h-3.5 sm:h-4 text-white" />
+                    </div>
+                    <span className="text-xs sm:text-sm font-medium">+48 601 619 898</span>
+                  </a>
+                  <a href="mailto:serwis@serwiszebra.pl" className="group flex items-center gap-2 sm:gap-2.5 px-3 sm:px-5 py-2.5 sm:py-3 bg-white/5 hover:bg-white/10 backdrop-blur-sm border border-white/10 rounded-xl transition-all duration-300">
+                    <div className="w-7 sm:w-8 h-7 sm:h-8 bg-white/10 rounded-lg flex items-center justify-center">
+                      <Mail className="w-3.5 sm:w-4 h-3.5 sm:h-4 text-white" />
+                    </div>
+                    <span className="text-xs sm:text-sm font-medium hidden sm:inline">serwis@serwiszebra.pl</span>
+                    <span className="text-xs sm:text-sm font-medium sm:hidden">Email</span>
+                  </a>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Stopka */}
-          <div className="pt-6 border-t border-gray-800 text-center">
-            <p className="text-xs text-gray-500">
-              © 2025 TAKMA - Wszystkie prawa zastrzeżone
-            </p>
+          {/* Links section */}
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 lg:gap-12">
+              {/* Nawigacja */}
+              <div>
+                <h4 className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-gray-500 mb-3 sm:mb-5">Nawigacja</h4>
+                <ul className="space-y-2 sm:space-y-3">
+                  {[
+                    { href: '#co-naprawiamy', label: 'Co naprawiamy' },
+                    { href: '#cennik', label: 'Cennik' },
+                    { href: '#jak-to-dziala', label: 'Jak to działa' },
+                    { href: '/sklep', label: 'Sklep' },
+                  ].map((link) => (
+                    <li key={link.href}>
+                      <a href={link.href} className="group flex items-center text-xs sm:text-sm text-gray-400 hover:text-white transition-colors duration-200">
+                        <span className="w-0 group-hover:w-2 h-px bg-white/50 mr-0 group-hover:mr-2 transition-all duration-200"></span>
+                        {link.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Informacje */}
+              <div>
+                <h4 className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-gray-500 mb-3 sm:mb-5">Informacje</h4>
+                <ul className="space-y-2 sm:space-y-3">
+                  {[
+                    { href: '/blog', label: 'Blog' },
+                    { href: '/o-nas', label: 'O nas' },
+                    { href: '/kontakt', label: 'Kontakt' },
+                    { href: '/regulamin', label: 'Regulamin' },
+                  ].map((link) => (
+                    <li key={link.href}>
+                      <a href={link.href} className="group flex items-center text-xs sm:text-sm text-gray-400 hover:text-white transition-colors duration-200">
+                        <span className="w-0 group-hover:w-2 h-px bg-white/50 mr-0 group-hover:mr-2 transition-all duration-200"></span>
+                        {link.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Godziny & AI */}
+              <div>
+                <h4 className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-gray-500 mb-3 sm:mb-5">Dostępność</h4>
+                <div className="space-y-3 sm:space-y-4">
+                  <div className="flex items-start gap-2 sm:gap-3">
+                    <div className="w-7 sm:w-8 h-7 sm:h-8 bg-white/5 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <Clock className="w-3.5 sm:w-4 h-3.5 sm:h-4 text-gray-400" />
+                    </div>
+                    <div>
+                      <p className="text-xs sm:text-sm text-white font-medium">Pon - Pt</p>
+                      <p className="text-[10px] sm:text-xs text-gray-500">7:30 - 15:30</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-2 sm:gap-3">
+                    <div className="w-7 sm:w-8 h-7 sm:h-8 bg-white/5 rounded-lg flex items-center justify-center flex-shrink-0 relative">
+                      <Sparkles className="w-3.5 sm:w-4 h-3.5 sm:h-4 text-gray-400" />
+                      <span className="absolute -top-1 -right-1 w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                    </div>
+                    <div>
+                      <p className="text-xs sm:text-sm text-white font-medium">Chat AI</p>
+                      <p className="text-[10px] sm:text-xs text-gray-400">Online 24/7</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Płatności & Firma */}
+              <div>
+                <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-gray-500 mb-4 sm:mb-5">Płatności</h4>
+                <div className="grid grid-cols-3 gap-1.5 sm:flex sm:flex-wrap sm:gap-2 mb-4 sm:mb-6">
+                  {[
+                    { src: 'https://cdn.worldvectorlogo.com/logos/stripe-4.svg', alt: 'Stripe', w: 40, h: 16, cls: 'h-3 sm:h-4' },
+                    { src: '/P24_logo.png', alt: 'Przelewy24', w: 60, h: 16, cls: 'h-3 sm:h-4' },
+                    { src: '/blik_logo.png', alt: 'BLIK', w: 70, h: 28, cls: 'h-4 sm:h-6' },
+                  ].map((pay) => (
+                    <div key={pay.alt} className="bg-white/90 backdrop-blur-sm rounded-md sm:rounded-lg px-2 sm:px-3 py-1.5 sm:py-2 hover:bg-white transition-colors flex items-center justify-center h-7 sm:h-9 sm:min-w-[60px]">
+                      <Image src={pay.src} alt={pay.alt} width={pay.w} height={pay.h} className={`${pay.cls} w-auto object-contain`} />
+                    </div>
+                  ))}
+                </div>
+                <div className="p-2.5 sm:p-3 bg-white/5 backdrop-blur-sm rounded-lg sm:rounded-xl border border-white/5">
+                  <p className="text-[10px] sm:text-xs text-gray-400 leading-relaxed">
+                    <span className="text-white font-medium">TAKMA</span><br />
+                    NIP: 915-100-43-77<br />
+                    REGON: 932677161
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom bar */}
+          <div className="border-t border-white/5">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+                <p className="text-xs text-gray-500">
+                  © 2025 <span className="text-gray-400">TAKMA</span> - Serwis Zebra. Wszystkie prawa zastrzeżone.
+                </p>
+                <div className="flex items-center gap-6 text-xs text-gray-500">
+                  <a href="/regulamin" className="hover:text-white transition-colors">Regulamin</a>
+                  <a href="/polityka-prywatnosci" className="hover:text-white transition-colors">Polityka prywatności</a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </footer>

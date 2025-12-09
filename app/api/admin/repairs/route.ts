@@ -15,12 +15,30 @@ export async function GET(request: NextRequest) {
     }
 
     const supabase = await createClient()
+    
+    // Pobierz parametry filtrowania
+    const { searchParams } = new URL(request.url)
+    const status = searchParams.get('status')
+    const search = searchParams.get('search')
 
-    // Pobieranie wszystkich zgłoszeń (tylko dla adminów)
-    const { data: repairs, error } = await supabase
+    // Buduj zapytanie - bez join (brak FK)
+    let query = supabase
       .from('repair_requests')
       .select('*')
       .order('created_at', { ascending: false })
+
+    // Filtruj po statusie
+    if (status && status !== 'all') {
+      query = query.eq('status', status)
+    }
+
+    // Wyszukiwanie
+    if (search && search.trim()) {
+      const searchTerm = `%${search.trim()}%`
+      query = query.or(`id.ilike.${searchTerm},device_model.ilike.${searchTerm},serial_number.ilike.${searchTerm}`)
+    }
+
+    const { data: repairs, error } = await query
 
     if (error) {
       console.error('Error fetching repairs:', error)
@@ -30,10 +48,65 @@ export async function GET(request: NextRequest) {
       )
     }
 
-    // Zwracanie listy zgłoszeń
+    // Pobierz profile użytkowników dla zgłoszeń
+    const userIds = [...new Set(repairs?.map(r => r.user_id).filter(Boolean) || [])]
+    let profilesMap: Record<string, any> = {}
+    
+    if (userIds.length > 0) {
+      const { data: profiles } = await supabase
+        .from('profiles')
+        .select('id, email, first_name, last_name')
+        .in('id', userIds)
+      
+      if (profiles) {
+        profilesMap = profiles.reduce((acc, p) => {
+          acc[p.id] = p
+          return acc
+        }, {} as Record<string, any>)
+      }
+    }
+
+    // Dołącz profile do zgłoszeń
+    const repairsWithProfiles = repairs?.map(r => ({
+      ...r,
+      profiles: profilesMap[r.user_id] || null
+    })) || []
+
+    // Pobierz wszystkie zgłoszenia do statystyk (bez filtrów)
+    const { data: allRepairs, error: statsError } = await supabase
+      .from('repair_requests')
+      .select('status')
+
+    if (statsError) {
+      console.error('Error fetching stats:', statsError)
+    }
+
+    // Pobierz liczbę użytkowników
+    const { count: usersCount, error: usersError } = await supabase
+      .from('profiles')
+      .select('*', { count: 'exact', head: true })
+
+    if (usersError) {
+      console.error('Error fetching users count:', usersError)
+    }
+
+    // Oblicz statystyki
+    const total = allRepairs?.length || 0
+    const activeStatuses = ['nowe', 'odebrane', 'diagnoza', 'wycena', 'w_naprawie']
+    const completedStatuses = ['zakonczone', 'wyslane']
+    
+    const active = allRepairs?.filter(r => activeStatuses.includes(r.status)).length || 0
+    const completed = allRepairs?.filter(r => completedStatuses.includes(r.status)).length || 0
+
+    // Zwracanie listy zgłoszeń ze statystykami
     return NextResponse.json({
-      repairs: repairs || [],
-      total: repairs?.length || 0
+      repairs: repairsWithProfiles,
+      stats: {
+        total,
+        active,
+        completed,
+        users: usersCount || 0
+      }
     })
 
   } catch (error) {
