@@ -13108,7 +13108,7 @@ Serwisujemy wszystkie modele mobilne: ZQ630, ZQ620, ZQ610, ZQ521, ZQ520, ZQ511, 
     slug: 'drukarka-zebra-nie-drukuje-zimno-head-cold',
     title: 'Drukarka Zebra nie drukuje w zimnych warunkach – "Head Cold" i blade wydruki',
     excerpt: 'Drukarka mobilna Zebra nie drukuje na mrozie? Komunikat "Warning Head Cold"? Blade wydruki w zimie? Poradnik dla kurierów i kierowców o pracy drukarki w niskich temperaturach.',
-    coverImage: '/blog/placeholder.jpg',
+    coverImage: '/blog/Drukarka mobilna Zebra nie drukuje na mrozie.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
