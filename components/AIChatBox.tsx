@@ -446,11 +446,9 @@ export default function AIChatBox() {
                               <a
                                 key={partIdx}
                                 href={linkUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-blue-600 hover:text-blue-800 underline underline-offset-2 hover:no-underline transition-colors"
+                                className="inline-flex items-center gap-1 px-2 py-0.5 bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 transition-colors font-medium"
                               >
-                                {linkText}
+                                📚 {linkText}
                               </a>
                             )
                           }

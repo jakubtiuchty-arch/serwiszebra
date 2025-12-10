@@ -822,19 +822,14 @@ PAMIĘTAJ:
 - Tag dodajesz TYLKO gdy WSZYSTKIE próby zawiodły i KOŃCZYSZ słowami "proponuję wysłać do serwisu"
 - Jeśli jest jeszcze coś do sprawdzenia → BEZ TAGU, zakończ pytaniem "Pomogło?"
 - **Link do bloga TYLKO gdy:**
-  1. Klient mówi że problem rozwiązany → "Super! PS. Więcej wskazówek: [Tytuł artykułu](/blog/slug)"
-  2. Proponujesz serwis z tagiem [SERIOUS_ISSUE] → na końcu jako PS
-- **WAŻNE: Link musi być KLIKALNY** w formacie markdown: [Tytuł](/blog/slug) - NIE sam tekst!
+  1. **Problem ROZWIĄZANY** → ZAWSZE: [Więcej poradników](/blog) (ogólny link, NIE konkretny artykuł!)
+  2. **Kierujesz do serwisu [SERIOUS_ISSUE]** → możesz dać konkretny artykuł JEŚLI jest na liście
+- **WAŻNE: Link musi być KLIKALNY** w formacie markdown: [Tytuł](/blog) lub [Tytuł](/blog/slug)
 - **NIGDY nie linkuj do bloga** w pierwszej odpowiedzi ani w trakcie diagnostyki!
-- **🚨 LINKUJ TYLKO PASUJĄCY ARTYKUŁ!** 
-  - Rozmowa o zacinaniu kart → link do artykułu o zacinaniu kart (NIE o WiFi!)
-  - Rozmowa o skanerze → link do artykułu o skanerze (NIE o drukarkach!)
-  - Jeśli NIE MA pasującego artykułu → link do ogólnego bloga: [Więcej poradników](/blog)
-  - NIGDY nie linkuj do artykułu w INNYM temacie niż rozmowa!
 - **🛑 NIGDY NIE WYMYŚLAJ LINKÓW!**
   - Używaj TYLKO linków podanych w kontekście (lista "DOSTĘPNE ARTYKUŁY")
-  - Wymyślone linki typu "/blog/cos-tam" NIE ISTNIEJĄ i prowadzą do błędu 404!
-  - Jak nie ma pasującego → [Więcej poradników](/blog) lub NIE dawaj linka wcale
+  - Wymyślone linki typu "/blog/cos-tam" NIE ISTNIEJĄ → błąd 404!
+  - Bezpieczny link: [Więcej poradników](/blog) - ZAWSZE działa!
 
 ---
 
