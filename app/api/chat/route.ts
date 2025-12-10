@@ -610,6 +610,11 @@ function isZebraRelated(message: string): boolean {
     // Typy urządzeń
     'drukark', 'printer', 'terminal', 'skaner', 'scanner', 'czytnik',
     'etykiet', 'label', 'kodów', 'barcode', 'qr',
+    // Kody kreskowe - różne formy
+    'kreskow', 'kod kresk', 'kodami', 'kody',
+    // Skanery - konfiguracja
+    'sufiks', 'prefix', 'enter', 'tab', 'carriage return',
+    'symbolog', 'dekoder', 'datawedge', 'skanow',
     // Modele Zebra - drukarki etykiet
     'zt4', 'zt5', 'zt6', 'zd4', 'zd5', 'zd6', 'zd2', 'zd8',
     'gc42', 'gk42', 'gx4', 'gt8', 'tlp', 'lp28',
@@ -618,7 +623,7 @@ function isZebraRelated(message: string): boolean {
     // Modele Zebra - terminale
     'tc2', 'tc5', 'tc7', 'tc8', 'mc', 'wt',
     // Modele Zebra - skanery
-    'ds22', 'ds34', 'ds36', 'ds45', 'ds82', 'li', 'ls',
+    'ds22', 'ds34', 'ds36', 'ds45', 'ds82', 'li2', 'li4', 'ls22', 'cs4',
     // Modele Zebra - drukarki mobilne
     'zq5', 'zq6', 'zq3', 'zq52', 'zq63', 'zq32',
     // Drukarki kart - słowa kluczowe
@@ -632,7 +637,7 @@ function isZebraRelated(message: string): boolean {
     'nie drukuje', 'nie skanuje', 'błąd', 'error',
     'serwis', 'naprawa', 'diagnoz', 'usterka', 'awaria',
     // Słowa ogólne ale kontekstowe
-    'urządzeni'
+    'urządzeni', 'konfigurac'
   ]
   
   // Sprawdź czy zawiera słowa kluczowe
