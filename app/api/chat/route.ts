@@ -826,6 +826,11 @@ PAMIĘTAJ:
   2. Proponujesz serwis z tagiem [SERIOUS_ISSUE] → na końcu jako PS
 - **WAŻNE: Link musi być KLIKALNY** w formacie markdown: [Tytuł](/blog/slug) - NIE sam tekst!
 - **NIGDY nie linkuj do bloga** w pierwszej odpowiedzi ani w trakcie diagnostyki!
+- **🚨 LINKUJ TYLKO PASUJĄCY ARTYKUŁ!** 
+  - Rozmowa o zacinaniu kart → link do artykułu o zacinaniu kart (NIE o WiFi!)
+  - Rozmowa o skanerze → link do artykułu o skanerze (NIE o drukarkach!)
+  - Jeśli NIE MA pasującego artykułu → link do ogólnego bloga: [Więcej poradników](/blog)
+  - NIGDY nie linkuj do artykułu w INNYM temacie niż rozmowa!
 
 ---
 
@@ -1011,7 +1016,10 @@ export async function POST(req: NextRequest) {
       
       // Dodaj linki do blogów jako "citations"
       if (blogLinks.length > 0) {
-        enhancedSystemPrompt += `\n\nDostępne artykuły (TYLKO na zakończenie, jako KLIKALNY LINK w formacie markdown!):\n${blogLinks.map(b => `- [${b.title}](/blog/${b.slug})`).join('\n')}\n\n⚠️ WAŻNE: Podaj link w formacie [Tytuł](/blog/slug) - to musi być KLIKALNY link!`
+        enhancedSystemPrompt += `\n\nDostępne artykuły (TYLKO na zakończenie, jako KLIKALNY LINK!):\n${blogLinks.map(b => `- [${b.title}](/blog/${b.slug})`).join('\n')}\n\n⚠️ KRYTYCZNE - LINKUJ TYLKO PASUJĄCY ARTYKUŁ:\n- Sprawdź czy temat artykułu PASUJE do rozmowy!\n- Rozmowa o kartach → artykuł o kartach. Rozmowa o WiFi → artykuł o WiFi.\n- Jeśli artykuł NIE PASUJE do tematu rozmowy → użyj ogólnego: [Więcej poradników](/blog)\n- NIGDY nie linkuj do artykułu w INNYM temacie!`
+      } else {
+        // Jeśli nie ma pasującego artykułu, dodaj link do ogólnego bloga
+        enhancedSystemPrompt += `\n\nNie znaleziono pasującego artykułu na blogu. Jeśli chcesz podać link do bloga na końcu, użyj ogólnego: [Więcej poradników](/blog)`
       }
     }
 
