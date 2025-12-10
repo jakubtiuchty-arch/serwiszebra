@@ -114,6 +114,100 @@ async function translateToEnglish(text: string): Promise<string> {
   }
 }
 
+// === KONFIGURACJA SKANERÓW - KODY KRESKOWE DO WYŚWIETLENIA W CZACIE ===
+interface ScannerConfigBarcode {
+  id: string
+  name: string
+  description: string
+  imageUrl: string
+}
+
+const SCANNER_CONFIG_BARCODES: ScannerConfigBarcode[] = [
+  {
+    id: 'set-defaults',
+    name: 'Set Factory Defaults',
+    description: 'Reset fabryczny - przywraca wszystkie ustawienia domyślne',
+    imageUrl: '/blog/barcode-set-defaults.png'
+  },
+  {
+    id: 'suffix-enter',
+    name: 'Add Enter Key',
+    description: 'Dodaje Enter (Carriage Return) po każdym skanowaniu',
+    imageUrl: '/blog/barcode-suffix-enter.png'
+  },
+  {
+    id: 'suffix-tab',
+    name: 'Tab Key',
+    description: 'Dodaje Tab po każdym skanowaniu',
+    imageUrl: '/blog/barcode-suffix-tab.png'
+  },
+  {
+    id: 'enable-qr',
+    name: 'Enable QR Code',
+    description: 'Włącza skanowanie kodów QR',
+    imageUrl: '/blog/barcode-enable-qr.png'
+  },
+  {
+    id: 'enable-datamatrix',
+    name: 'Enable Data Matrix',
+    description: 'Włącza skanowanie kodów DataMatrix',
+    imageUrl: '/blog/barcode-enable-datamatrix.png'
+  }
+]
+
+// Funkcja wykrywająca pytanie o konfigurację skanera
+function detectScannerConfigQuery(query: string): ScannerConfigBarcode[] {
+  const queryLower = query.toLowerCase()
+  const matchedBarcodes: ScannerConfigBarcode[] = []
+  
+  // Reset fabryczny
+  if (queryLower.includes('reset') || queryLower.includes('fabryczn') || 
+      queryLower.includes('defaults') || queryLower.includes('domyśln') ||
+      queryLower.includes('przywróc')) {
+    matchedBarcodes.push(SCANNER_CONFIG_BARCODES.find(b => b.id === 'set-defaults')!)
+  }
+  
+  // Enter/Carriage Return
+  if (queryLower.includes('enter') || queryLower.includes('carriage') ||
+      queryLower.includes('nowa linia') || queryLower.includes('zatwierdzanie') ||
+      (queryLower.includes('sufiks') && !queryLower.includes('tab'))) {
+    matchedBarcodes.push(SCANNER_CONFIG_BARCODES.find(b => b.id === 'suffix-enter')!)
+  }
+  
+  // Tab
+  if (queryLower.includes('tab') || queryLower.includes('tabulator') ||
+      queryLower.includes('przeskakiwa') || queryLower.includes('następne pole')) {
+    matchedBarcodes.push(SCANNER_CONFIG_BARCODES.find(b => b.id === 'suffix-tab')!)
+  }
+  
+  // QR Code
+  if (queryLower.includes('qr') || 
+      (queryLower.includes('nie czyta') && queryLower.includes('kwadrat'))) {
+    matchedBarcodes.push(SCANNER_CONFIG_BARCODES.find(b => b.id === 'enable-qr')!)
+  }
+  
+  // DataMatrix
+  if (queryLower.includes('datamatrix') || queryLower.includes('data matrix') ||
+      queryLower.includes('matrix')) {
+    matchedBarcodes.push(SCANNER_CONFIG_BARCODES.find(b => b.id === 'enable-datamatrix')!)
+  }
+  
+  // Ogólna konfiguracja skanera - pokaż wszystkie popularne
+  if ((queryLower.includes('skonfigurow') || queryLower.includes('konfigurac') ||
+       queryLower.includes('zaprogramow') || queryLower.includes('ustaw')) &&
+      (queryLower.includes('skaner') || queryLower.includes('czytnik'))) {
+    // Dodaj podstawowe jeśli jeszcze nie ma
+    const basicBarcodes = ['suffix-enter', 'suffix-tab', 'set-defaults']
+    for (const id of basicBarcodes) {
+      if (!matchedBarcodes.find(b => b.id === id)) {
+        matchedBarcodes.push(SCANNER_CONFIG_BARCODES.find(b => b.id === id)!)
+      }
+    }
+  }
+  
+  return matchedBarcodes.filter(b => b !== undefined)
+}
+
 // Helper function to detect printer model from query
 function detectPrinterModel(query: string): string[] {
   const models: string[] = []
@@ -728,6 +822,12 @@ export async function POST(req: NextRequest) {
       })
     }
 
+    // === KROK 0: Sprawdź czy to pytanie o konfigurację skanera - INSTANT odpowiedź z kodami! ===
+    const scannerBarcodes = detectScannerConfigQuery(lastUserMessage)
+    if (scannerBarcodes.length > 0) {
+      console.log(`📊 Wykryto pytanie o konfigurację skanera! Kody: ${scannerBarcodes.map(b => b.id).join(', ')}`)
+    }
+
     // === KROK 1: Szukaj w BLOGU (lokalnie, instant) ===
     let blogContext = ''
     let blogFound = false
@@ -779,6 +879,35 @@ export async function POST(req: NextRequest) {
 
     // === KROK 3: Zbuduj kontekst dla AI ===
     let enhancedSystemPrompt = SYSTEM_PROMPT
+
+    // === JEŚLI WYKRYTO PYTANIE O KONFIGURACJĘ SKANERA - DODAJ INSTRUKCJE Z KODAMI ===
+    if (scannerBarcodes.length > 0) {
+      const barcodeInstructions = scannerBarcodes.map(bc => 
+        `**${bc.name}** (${bc.description})\n[BARCODE:${bc.imageUrl}]`
+      ).join('\n\n')
+      
+      enhancedSystemPrompt += `\n\n=== 🎯 KONFIGURACJA SKANERA - POKAŻ KODY KLIENTOWI! ===
+      
+MASZ GOTOWE KODY DO POKAZANIA! Klient może je ZESKANOWAĆ z ekranu.
+
+Oto kody które MUSISZ wyświetlić w odpowiedzi:
+
+${barcodeInstructions}
+
+⚠️ WAŻNE INSTRUKCJE:
+1. UŻYJ składni [BARCODE:url] żeby wyświetlić kod - frontend go wyrenderuje
+2. Wyjaśnij co każdy kod robi
+3. Powiedz że klient ma zeskanować kod Z EKRANU
+4. Skaner musi być 10-20 cm od ekranu, prostopadle
+5. Jeśli nie działa - powiększyć ekran (Ctrl +)
+
+PRZYKŁADOWA ODPOWIEDŹ:
+"Żeby dodać Enter po skanowaniu, zeskanuj poniższy kod z ekranu:
+
+[BARCODE:/blog/barcode-suffix-enter.png]
+
+Trzymaj skaner 10-20 cm od ekranu, prostopadle. Skaner potwierdzi zapisanie ustawienia sygnałem dźwiękowym."`
+    }
 
     // Dodaj kontekst z bloga (jako wiedza wewnętrzna, link tylko na końcu!)
     if (blogContext) {
@@ -852,16 +981,22 @@ export async function POST(req: NextRequest) {
             }
           }
 
-          // Na końcu dodaj citations i blog links jako JSON (jeśli są)
+          // Na końcu dodaj citations, blog links i scanner barcodes jako JSON (jeśli są)
           // WAŻNE: Jeśli blog znalazł odpowiedź, NIE pokazuj citations z RAG (często nieodpowiednie)
           const finalCitations = blogLinks.length > 0 ? [] : citations
-          const hasData = finalCitations.length > 0 || blogLinks.length > 0
+          const hasData = finalCitations.length > 0 || blogLinks.length > 0 || scannerBarcodes.length > 0
           if (hasData) {
             const dataJson = JSON.stringify({ 
               citations: finalCitations,
               blogLinks: blogLinks.map(b => ({
                 title: b.title,
                 url: `/blog/${b.slug}`
+              })),
+              scannerBarcodes: scannerBarcodes.map(b => ({
+                id: b.id,
+                name: b.name,
+                description: b.description,
+                imageUrl: b.imageUrl
               }))
             })
             controller.enqueue(encoder.encode(`\n\n__CITATIONS__${dataJson}`))

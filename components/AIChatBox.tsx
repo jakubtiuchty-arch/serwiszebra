@@ -26,11 +26,19 @@ interface BlogLink {
   url: string
 }
 
+interface ScannerBarcode {
+  id: string
+  name: string
+  description: string
+  imageUrl: string
+}
+
 interface Message {
   role: 'user' | 'assistant'
   content: string
   citations?: Citation[]
   blogLinks?: BlogLink[]
+  scannerBarcodes?: ScannerBarcode[]
 }
 
 const placeholders = [
@@ -320,27 +328,29 @@ export default function AIChatBox() {
 
           assistantMessage += decoder.decode(value)
 
-          // Sprawdź czy są citations i blogLinks na końcu
+          // Sprawdź czy są citations, blogLinks i scannerBarcodes na końcu
           const citationsMatch = assistantMessage.match(/__CITATIONS__(.+)$/)
           let content = assistantMessage
           let citations: Citation[] | undefined = undefined
           let blogLinks: BlogLink[] | undefined = undefined
+          let scannerBarcodes: ScannerBarcode[] | undefined = undefined
 
           if (citationsMatch) {
-            // Oddziel treść od citations/blogLinks
+            // Oddziel treść od citations/blogLinks/scannerBarcodes
             content = assistantMessage.substring(0, citationsMatch.index)
             try {
               const data = JSON.parse(citationsMatch[1])
               citations = data.citations
               blogLinks = data.blogLinks
+              scannerBarcodes = data.scannerBarcodes
             } catch (e) {
-              console.error('Błąd parsowania citations/blogLinks:', e)
+              console.error('Błąd parsowania citations/blogLinks/scannerBarcodes:', e)
             }
           }
 
           setMessages(prev => [
             ...prev.slice(0, -1),
-            { role: 'assistant', content, citations, blogLinks }
+            { role: 'assistant', content, citations, blogLinks, scannerBarcodes }
           ])
         }
       }
@@ -402,10 +412,35 @@ export default function AIChatBox() {
                         : 'bg-gray-100 text-gray-900'
                     }`}
                   >
-                    <p className="text-sm whitespace-pre-wrap leading-relaxed">
-                      {/* Ukryj znacznik [SERIOUS_ISSUE] przed użytkownikiem */}
-                      {msg.content.replace('[SERIOUS_ISSUE]', '').trim()}
-                    </p>
+                    {/* Renderuj treść z obsługą obrazów [BARCODE:url] */}
+                    <div className="text-sm whitespace-pre-wrap leading-relaxed">
+                      {msg.content
+                        .replace('[SERIOUS_ISSUE]', '')
+                        .trim()
+                        .split(/(\[BARCODE:[^\]]+\])/)
+                        .map((part, partIdx) => {
+                          // Sprawdź czy to znacznik barcode
+                          const barcodeMatch = part.match(/\[BARCODE:([^\]]+)\]/)
+                          if (barcodeMatch) {
+                            const imageUrl = barcodeMatch[1]
+                            return (
+                              <div key={partIdx} className="my-3 flex flex-col items-center">
+                                <img 
+                                  src={imageUrl} 
+                                  alt="Kod konfiguracyjny do zeskanowania"
+                                  className="max-w-full h-auto border border-gray-300 rounded-lg shadow-sm bg-white p-2"
+                                  style={{ maxHeight: '150px' }}
+                                />
+                                <span className="text-xs text-gray-500 mt-1">
+                                  📱 Zeskanuj ten kod skanerem
+                                </span>
+                              </div>
+                            )
+                          }
+                          // Zwykły tekst
+                          return <span key={partIdx}>{part}</span>
+                        })}
+                    </div>
                   </div>
 
                   {/* Blog Links - TYLKO gdy odpowiedź zawiera [SERIOUS_ISSUE] (końcowa diagnoza) */}
