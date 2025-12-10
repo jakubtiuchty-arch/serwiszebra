@@ -4288,7 +4288,7 @@ Każdy skaner Zebra można skonfigurować **bez podłączania do komputera** —
 
 Zanim zaczniesz konfigurację, zresetuj skaner do ustawień domyślnych:
 
-![Set Defaults](/blog/barcode-set-defaults.png)
+![Set Defaults](/Set%20Defaults.png)
 
 **Zeskanuj kod powyżej** - skaner wyda sygnał dźwiękowy potwierdzający reset.
 
@@ -4300,9 +4300,9 @@ Zanim zaczniesz konfigurację, zresetuj skaner do ustawień domyślnych:
 
 **Rozwiązanie:** Zeskanuj poniższy kod — automatycznie doda Enter po każdym skanowaniu:
 
-![Add Enter Suffix](/blog/barcode-suffix-enter.png)
+![Add Enter Suffix](/Add%20Enter%20Suffix.png)
 
-✅ **Gotowe!** Teraz po każdym skanowaniu automatycznie zostanie dodany Enter.
+✅ **Gotowe!** Teraz po każdym skanowaniu automatycznie zostanie dodany Enter (Carriage Return + Line Feed).
 
 ---
 
@@ -4312,9 +4312,9 @@ Zanim zaczniesz konfigurację, zresetuj skaner do ustawień domyślnych:
 
 **Rozwiązanie:** Zeskanuj poniższy kod:
 
-![Add Tab Suffix](/blog/barcode-suffix-tab.png)
+![Add Tab Suffix](/Add%20Tab%20Suffix.png)
 
-✅ **Gotowe!** Po skanowaniu kursor przeskoczy do następnego pola.
+✅ **Gotowe!** Po skanowaniu kursor przeskoczy do następnego pola (Tab).
 
 ---
 
@@ -4334,11 +4334,11 @@ Zanim zaczniesz konfigurację, zresetuj skaner do ustawień domyślnych:
 
 Jeśli skaner nie czyta kodów QR, zeskanuj:
 
-![Enable QR Code](/blog/barcode-enable-qr.png)
+![Enable QR Code](/Enable%20QR%20Code.png)
 
 ### Włączenie kodów DataMatrix
 
-![Enable DataMatrix](/blog/barcode-enable-datamatrix.png)
+![Enable DataMatrix](/Enable%20DataMatrix.png)
 
 ### Włączenie wszystkich kodów 2D
 

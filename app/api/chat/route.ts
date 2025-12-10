@@ -127,31 +127,31 @@ const SCANNER_CONFIG_BARCODES: ScannerConfigBarcode[] = [
     id: 'set-defaults',
     name: 'Set Factory Defaults',
     description: 'Reset fabryczny - przywraca wszystkie ustawienia domyślne',
-    imageUrl: '/blog/barcode-set-defaults.png'
+    imageUrl: '/Set%20Defaults.png'
   },
   {
     id: 'suffix-enter',
     name: 'Add Enter Key',
     description: 'Dodaje Enter (Carriage Return) po każdym skanowaniu',
-    imageUrl: '/blog/barcode-suffix-enter.png'
+    imageUrl: '/Add%20Enter%20Suffix.png'
   },
   {
     id: 'suffix-tab',
     name: 'Tab Key',
     description: 'Dodaje Tab po każdym skanowaniu',
-    imageUrl: '/blog/barcode-suffix-tab.png'
+    imageUrl: '/Add%20Tab%20Suffix.png'
   },
   {
     id: 'enable-qr',
     name: 'Enable QR Code',
     description: 'Włącza skanowanie kodów QR',
-    imageUrl: '/blog/barcode-enable-qr.png'
+    imageUrl: '/Enable%20QR%20Code.png'
   },
   {
     id: 'enable-datamatrix',
     name: 'Enable Data Matrix',
     description: 'Włącza skanowanie kodów DataMatrix',
-    imageUrl: '/blog/barcode-enable-datamatrix.png'
+    imageUrl: '/Enable%20DataMatrix.png'
   }
 ]
 
@@ -904,7 +904,7 @@ ${barcodeInstructions}
 PRZYKŁADOWA ODPOWIEDŹ:
 "Żeby dodać Enter po skanowaniu, zeskanuj poniższy kod z ekranu:
 
-[BARCODE:/blog/barcode-suffix-enter.png]
+[BARCODE:/Add%20Enter%20Suffix.png]
 
 Trzymaj skaner 10-20 cm od ekranu, prostopadle. Skaner potwierdzi zapisanie ustawienia sygnałem dźwiękowym."`
     }
