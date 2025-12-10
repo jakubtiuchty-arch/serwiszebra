@@ -799,8 +799,9 @@ PAMIĘTAJ:
 - Tag dodajesz TYLKO gdy WSZYSTKIE próby zawiodły i KOŃCZYSZ słowami "proponuję wysłać do serwisu"
 - Jeśli jest jeszcze coś do sprawdzenia → BEZ TAGU, zakończ pytaniem "Pomogło?"
 - **Link do bloga TYLKO gdy:**
-  1. Klient mówi że problem rozwiązany (np. "Działa!" → "Super! PS. Więcej wskazówek: [link]")
-  2. Proponujesz serwis z tagiem [SERIOUS_ISSUE] (na końcu, jako PS)
+  1. Klient mówi że problem rozwiązany → "Super! PS. Więcej wskazówek: [Tytuł artykułu](/blog/slug)"
+  2. Proponujesz serwis z tagiem [SERIOUS_ISSUE] → na końcu jako PS
+- **WAŻNE: Link musi być KLIKALNY** w formacie markdown: [Tytuł](/blog/slug) - NIE sam tekst!
 - **NIGDY nie linkuj do bloga** w pierwszej odpowiedzi ani w trakcie diagnostyki!
 
 ---
@@ -984,7 +985,7 @@ export async function POST(req: NextRequest) {
       
       // Dodaj linki do blogów jako "citations"
       if (blogLinks.length > 0) {
-        enhancedSystemPrompt += `\n\nDostępne artykuły (TYLKO na zakończenie!):\n${blogLinks.map(b => `- "${b.title}" → /blog/${b.slug}`).join('\n')}`
+        enhancedSystemPrompt += `\n\nDostępne artykuły (TYLKO na zakończenie, jako KLIKALNY LINK w formacie markdown!):\n${blogLinks.map(b => `- [${b.title}](/blog/${b.slug})`).join('\n')}\n\n⚠️ WAŻNE: Podaj link w formacie [Tytuł](/blog/slug) - to musi być KLIKALNY link!`
       }
     }
 
