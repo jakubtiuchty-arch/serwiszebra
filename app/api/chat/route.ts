@@ -180,9 +180,13 @@ function detectScannerConfigQuery(query: string): ScannerConfigBarcode[] {
     matchedBarcodes.push(SCANNER_CONFIG_BARCODES.find(b => b.id === 'suffix-tab')!)
   }
   
-  // QR Code
+  // QR Code - różne formy pytania
   if (queryLower.includes('qr') || 
-      (queryLower.includes('nie czyta') && queryLower.includes('kwadrat'))) {
+      queryLower.includes('kwadratow') ||
+      queryLower.includes('2d') ||
+      (queryLower.includes('nie czyta') && queryLower.includes('kwadrat')) ||
+      (queryLower.includes('włącz') && queryLower.includes('kod')) ||
+      (queryLower.includes('aktyw') && queryLower.includes('kod'))) {
     matchedBarcodes.push(SCANNER_CONFIG_BARCODES.find(b => b.id === 'enable-qr')!)
   }
   
@@ -880,35 +884,6 @@ export async function POST(req: NextRequest) {
     // === KROK 3: Zbuduj kontekst dla AI ===
     let enhancedSystemPrompt = SYSTEM_PROMPT
 
-    // === JEŚLI WYKRYTO PYTANIE O KONFIGURACJĘ SKANERA - DODAJ INSTRUKCJE Z KODAMI ===
-    if (scannerBarcodes.length > 0) {
-      const barcodeInstructions = scannerBarcodes.map(bc => 
-        `**${bc.name}** (${bc.description})\n[BARCODE:${bc.imageUrl}]`
-      ).join('\n\n')
-      
-      enhancedSystemPrompt += `\n\n=== 🎯 KONFIGURACJA SKANERA - POKAŻ KODY KLIENTOWI! ===
-      
-MASZ GOTOWE KODY DO POKAZANIA! Klient może je ZESKANOWAĆ z ekranu.
-
-Oto kody które MUSISZ wyświetlić w odpowiedzi:
-
-${barcodeInstructions}
-
-⚠️ WAŻNE INSTRUKCJE:
-1. UŻYJ składni [BARCODE:url] żeby wyświetlić kod - frontend go wyrenderuje
-2. Wyjaśnij co każdy kod robi
-3. Powiedz że klient ma zeskanować kod Z EKRANU
-4. Skaner musi być 10-20 cm od ekranu, prostopadle
-5. Jeśli nie działa - powiększyć ekran (Ctrl +)
-
-PRZYKŁADOWA ODPOWIEDŹ:
-"Żeby dodać Enter po skanowaniu, zeskanuj poniższy kod z ekranu:
-
-[BARCODE:/Add%20Enter%20Suffix.png]
-
-Trzymaj skaner 10-20 cm od ekranu, prostopadle. Skaner potwierdzi zapisanie ustawienia sygnałem dźwiękowym."`
-    }
-
     // Dodaj kontekst z bloga (jako wiedza wewnętrzna, link tylko na końcu!)
     if (blogContext) {
       enhancedSystemPrompt += `\n\n=== 🔥 OBOWIĄZKOWA WIEDZA Z BLOGA - UŻYJ JEJ! ===\n${blogContext}\n\n🚨 KRYTYCZNE:\n- MUSISZ użyć tej wiedzy do odpowiedzi!\n- NIE odsyłaj klienta na zebra.com - MY mamy tę wiedzę!\n- Podaj KONKRETNE instrukcje z artykułu powyżej!\n- Link do artykułu podawaj dopiero na końcu rozmowy (gdy [SERIOUS_ISSUE] lub problem rozwiązany)`
@@ -922,6 +897,37 @@ Trzymaj skaner 10-20 cm od ekranu, prostopadle. Skaner potwierdzi zapisanie usta
     // Dodaj kontekst z RAG (techniczne szczegóły z manuali)
     if (knowledgeContext) {
       enhancedSystemPrompt += `\n\n=== KONTEKST Z MANUALI TECHNICZNYCH ===\n${knowledgeContext}\n\nUżyj informacji z manuali jako uzupełnienie. NIGDY nie odsyłaj klienta na stronę Zebra - MY mamy te manuele i udzielamy pomocy na ich podstawie!`
+    }
+
+    // === NAJWYŻSZY PRIORYTET: KODY KRESKOWE DO WYŚWIETLENIA W CZACIE ===
+    // Dodawane NA KOŃCU żeby miały priorytet nad blogiem i RAG!
+    if (scannerBarcodes.length > 0) {
+      const barcodeInstructions = scannerBarcodes.map(bc => 
+        `**${bc.name}**: ${bc.description}\nKOD DO WYŚWIETLENIA: [BARCODE:${bc.imageUrl}]`
+      ).join('\n\n')
+      
+      enhancedSystemPrompt += `
+
+=== 🚨🚨🚨 KRYTYCZNE - NAJWYŻSZY PRIORYTET! 🚨🚨🚨 ===
+
+KLIENT PYTA O KONFIGURACJĘ SKANERA! MASZ GOTOWE KODY - POKAŻ JE!
+
+${barcodeInstructions}
+
+🔴 ABSOLUTNY NAKAZ:
+1. MUSISZ użyć składni [BARCODE:url] w swojej odpowiedzi - frontend wyświetli obraz kodu kreskowego!
+2. NIE odsyłaj do instrukcji, artykułu ani strony - POKAŻ KOD TUTAJ!
+3. NIE pisz "znajdziesz kod w PRG" - KOD JEST POWYŻEJ!
+4. Napisz KRÓTKO co kod robi i WKLEJ składnię [BARCODE:...]
+
+PRZYKŁAD DOBREJ ODPOWIEDZI na "jak włączyć QR":
+"Żeby włączyć skanowanie kodów QR, zeskanuj poniższy kod z ekranu:
+
+[BARCODE:/Enable%20QR%20Code.png]
+
+Trzymaj skaner 10-20 cm od ekranu. Skaner potwierdzi zapisanie ustawienia sygnałem dźwiękowym. ✅"
+
+ZRÓB DOKŁADNIE TAK - WKLEJ [BARCODE:...] W ODPOWIEDŹ!`
     }
 
     // Konwertuj messages do formatu Gemini (nowe API)
