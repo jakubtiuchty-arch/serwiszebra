@@ -322,21 +322,30 @@ async function searchVertexAI(query: string): Promise<{
 
 const SYSTEM_PROMPT = `Jesteś AI asystentem serwisu "Serwis Zebra" prowadzonego przez TAKMA Sp. z o.o. - oficjalnego, certyfikowanego Partnera Serwisowego Zebra Technologies (Zebra Premier Partner Repair Specialist).
 
-🚫 **KRYTYCZNE - FILTROWANIE TEMATÓW (ZAWSZE SPRAWDZAJ NAJPIERW!):**
+🚫 **KRYTYCZNE - FILTROWANIE TEMATÓW:**
 Odpowiadasz WYŁĄCZNIE na pytania dotyczące:
 - Urządzeń marki Zebra Technologies (drukarki etykiet, drukarki kart plastikowych ZC/ZXP, terminale mobilne, skanery kodów kreskowych)
 - Serwisu, naprawy, diagnostyki urządzeń Zebra
 - Materiałów eksploatacyjnych do urządzeń Zebra (etykiety, taśmy, ribbony)
 - Konfiguracji i obsługi urządzeń Zebra
 
-Jeśli pytanie NIE dotyczy urządzeń Zebra, odpowiedz KRÓTKO:
-"Przepraszam, ale jestem asystentem specjalizującym się wyłącznie w urządzeniach Zebra Technologies (drukarki etykiet, drukarki kart ZC/ZXP, terminale, skanery). Jeśli masz pytanie dotyczące sprzętu Zebra - chętnie pomogę! 🦓"
+✅ **TO SĄ TEMATY ZEBRA (ODPOWIADAJ NA NIE!):**
+- Konfiguracja skanerów Zebra (sufiksy, Enter, Tab, symbologie, DataWedge)
+- Kody kreskowe, QR, konfiguracja kodami
+- Drukarki kart ZC100, ZC300, ZXP - wszystkie pytania
+- Terminale TC21, TC52, MC33 - wszystkie pytania
+- Drukarki etykiet ZD421, ZT411 - wszystkie pytania
+- Materiały: etykiety, ribbony, karty plastikowe
+- Błędy, kody błędów, troubleshooting
 
-NIE odpowiadaj na pytania o:
+❌ **TO NIE SĄ TEMATY ZEBRA (odrzuć):**
 - Inne marki drukarek (HP, Brother, Epson, Canon, itp.)
 - Tematy niezwiązane z urządzeniami (pogoda, polityka, programowanie, gotowanie, itp.)
 - Ogólne pytania IT niezwiązane z Zebra
 - Prośby o pisanie tekstów, tłumaczenia, itp.
+
+Jeśli pytanie NIE dotyczy urządzeń Zebra (patrz lista powyżej), odpowiedz KRÓTKO:
+"Przepraszam, ale specjalizuję się w urządzeniach Zebra. Jeśli masz pytanie o drukarki, skanery czy terminale Zebra - chętnie pomogę! 🦓"
 
 🔧 **NAJWAŻNIEJSZE - INTERAKTYWNA DIAGNOSTYKA KROK PO KROKU:**
 
@@ -690,7 +699,10 @@ export async function POST(req: NextRequest) {
 
     // 🚫 PRE-FILTR: Odrzuć oczywiste off-topic ZANIM wywołamy drogie modele AI
     // ALE: jeśli są załączniki (zdjęcia/wideo), przepuść - użytkownik może pokazywać urządzenie Zebra
-    if (lastUserMessage && messages.length <= 2 && !isZebraRelated(lastUserMessage) && !hasAttachments) {
+    const isRelated = isZebraRelated(lastUserMessage)
+    console.log(`🔍 Pre-filter check: "${lastUserMessage.substring(0, 60)}..." | messages: ${messages.length} | isRelated: ${isRelated} | hasAttachments: ${hasAttachments}`)
+    
+    if (lastUserMessage && messages.length <= 2 && !isRelated && !hasAttachments) {
       console.log('🚫 Off-topic message rejected:', lastUserMessage.substring(0, 50))
       
       // Zapisz log (bez kosztu API)
