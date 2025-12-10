@@ -669,9 +669,24 @@ function generateHeadingId(text: string): string {
     .replace(/^-|-$/g, '')    // Remove leading/trailing hyphens
 }
 
-// Process inline markdown (bold, italic, links, code)
+// Process inline markdown (bold, italic, links, code, images)
 function processInline(text: string): string {
   return text
+    // Images - MUST be before links! ![alt](url) renders as inline image
+    .replace(/!\[(.*?)\]\((.*?)\)/g, `
+      <figure class="my-4 sm:my-6 flex flex-col items-center">
+        <img 
+          src="$2" 
+          alt="$1" 
+          class="max-w-full sm:max-w-md h-auto rounded-lg shadow-md border border-gray-200 bg-white p-2 cursor-pointer hover:shadow-lg transition-shadow"
+          onclick="this.classList.toggle('sm:max-w-md'); this.classList.toggle('sm:max-w-2xl');"
+          loading="lazy"
+        />
+        <figcaption class="mt-2 text-xs sm:text-sm text-gray-500 text-center">
+          📱 $1 <span class="text-gray-400">• kliknij aby powiększyć</span>
+        </figcaption>
+      </figure>
+    `)
     // Custom check icon
     .replace(/\[CHECK\]/g, '<svg class="inline-block w-5 h-5 text-green-600 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>')
     .replace(/\[X\]/g, '<svg class="inline-block w-5 h-5 text-red-600 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>')
@@ -679,7 +694,7 @@ function processInline(text: string): string {
     .replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold text-gray-900">$1</strong>')
     // Italic (but not the asterisk footnote)
     .replace(/(?<!\s)\*([^*\n]+)\*(?!\*)/g, '<em>$1</em>')
-    // Links
+    // Links (after images!)
     .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" class="text-blue-600 hover:underline font-medium">$1</a>')
     // Inline code
     .replace(/`([^`]+)`/g, '<code class="bg-gray-100 px-1.5 py-0.5 rounded text-sm font-mono text-gray-800">$1</code>')
