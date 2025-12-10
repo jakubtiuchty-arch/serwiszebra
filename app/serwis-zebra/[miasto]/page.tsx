@@ -17,6 +17,7 @@ import {
 // Dane miast
 const citiesData: Record<string, {
   name: string
+  nameLocative: string // Miejscownik (w Warszawie, w Krakowie, etc.)
   region: string
   slug: string
   deliveryTime: string
@@ -27,6 +28,7 @@ const citiesData: Record<string, {
 }> = {
   'warszawa': {
     name: 'Warszawa',
+    nameLocative: 'Warszawie',
     region: 'Mazowsza',
     slug: 'warszawa',
     deliveryTime: '24h',
@@ -37,6 +39,7 @@ const citiesData: Record<string, {
   },
   'krakow': {
     name: 'Kraków',
+    nameLocative: 'Krakowie',
     region: 'Małopolski',
     slug: 'krakow',
     deliveryTime: '24h',
@@ -47,6 +50,7 @@ const citiesData: Record<string, {
   },
   'wroclaw': {
     name: 'Wrocław',
+    nameLocative: 'Wrocławiu',
     region: 'Dolnego Śląska',
     slug: 'wroclaw',
     deliveryTime: '24-48h',
@@ -57,6 +61,7 @@ const citiesData: Record<string, {
   },
   'poznan': {
     name: 'Poznań',
+    nameLocative: 'Poznaniu',
     region: 'Wielkopolski',
     slug: 'poznan',
     deliveryTime: '24-48h',
@@ -67,6 +72,7 @@ const citiesData: Record<string, {
   },
   'gdansk': {
     name: 'Gdańsk',
+    nameLocative: 'Gdańsku',
     region: 'Pomorza',
     slug: 'gdansk',
     deliveryTime: '24-48h',
@@ -77,6 +83,7 @@ const citiesData: Record<string, {
   },
   'katowice': {
     name: 'Katowice',
+    nameLocative: 'Katowicach',
     region: 'Śląska',
     slug: 'katowice',
     deliveryTime: '24h',
@@ -127,15 +134,16 @@ export async function generateMetadata({ params }: { params: { miasto: string } 
 }
 
 // FAQ dla każdego miasta
-function getFAQ(cityName: string, region: string) {
+// cityName = dopełniacz (z Warszawy), cityNameLocative = miejscownik (w Warszawie)
+function getFAQ(cityName: string, cityNameLocative: string, region: string) {
   return [
     {
-      question: `Ile kosztuje naprawa drukarki Zebra w ${cityName}?`,
+      question: `Ile kosztuje naprawa drukarki Zebra w ${cityNameLocative}?`,
       answer: `Ceny napraw zależą od typu usterki. Orientacyjnie: wymiana głowicy 250-900 zł, naprawa mechanizmu 150-400 zł. Diagnostyka jest bezpłatna przy akceptacji naprawy. Obsługujemy firmy z ${cityName} i całego ${region}.`
     },
     {
       question: `Jak długo trwa naprawa urządzenia Zebra?`,
-      answer: `Standardowy czas naprawy to 2-5 dni roboczych od momentu otrzymania urządzenia. Ekspresowe naprawy realizujemy w 24-48h (dopłata). Kurier odbierze urządzenie bezpośrednio z Twojej firmy w ${cityName}.`
+      answer: `Standardowy czas naprawy to 2-5 dni roboczych od momentu otrzymania urządzenia. Ekspresowe naprawy realizujemy w 24-48h (dopłata). Kurier odbierze urządzenie bezpośrednio z Twojej firmy w ${cityNameLocative}.`
     },
     {
       question: `Czy mogę śledzić status naprawy online?`,
@@ -168,7 +176,7 @@ export default function CityServicePage({ params }: { params: { miasto: string }
     )
   }
 
-  const faq = getFAQ(city.name, city.region)
+  const faq = getFAQ(city.name, city.nameLocative, city.region)
 
   // Schema.org LocalBusiness
   const localBusinessSchema = {
@@ -334,7 +342,7 @@ export default function CityServicePage({ params }: { params: { miasto: string }
         <section className="py-12 md:py-16 bg-white">
           <div className="max-w-6xl mx-auto px-4">
             <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">
-              Jakie urządzenia serwisujemy w {city.name}?
+              Jakie urządzenia serwisujemy w {city.nameLocative}?
             </h2>
 
             <div className="grid md:grid-cols-3 gap-6">
@@ -510,7 +518,7 @@ export default function CityServicePage({ params }: { params: { miasto: string }
                 </div>
                 <h3 className="text-lg font-bold text-gray-900 mb-2">Kurier odbierze urządzenie</h3>
                 <p className="text-gray-600">
-                  Kurier przyjedzie pod wskazany adres w {city.name} w ciągu {city.deliveryTime}. Bezpłatnie!
+                  Kurier przyjedzie pod wskazany adres w {city.nameLocative} w ciągu {city.deliveryTime}. Bezpłatnie!
                 </p>
               </div>
 
@@ -574,7 +582,7 @@ export default function CityServicePage({ params }: { params: { miasto: string }
             <p className="text-blue-100 mb-4">25 lat doświadczenia • Tysiące skutecznych napraw</p>
             
             <h2 className="text-2xl md:text-3xl font-bold mb-6">
-              Potrzebujesz naprawy urządzenia Zebra w {city.name}?
+              Potrzebujesz naprawy urządzenia Zebra w {city.nameLocative}?
             </h2>
             
             <p className="text-lg text-blue-100 mb-8">
