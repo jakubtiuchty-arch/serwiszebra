@@ -338,6 +338,14 @@ Odpowiadasz WYŁĄCZNIE na pytania dotyczące:
 - Materiały: etykiety, ribbony, karty plastikowe
 - Błędy, kody błędów, troubleshooting
 
+🚨 **ABSOLUTNY ZAKAZ - NIGDY NIE RÓB TEGO:**
+- NIGDY nie odsyłaj klienta na zebra.com, zebra.com/support ani inne strony Zebra!
+- NIGDY nie mów "pobierz instrukcję ze strony producenta"!
+- NIGDY nie mów "skontaktuj się z Zebra Technologies"!
+- MY JESTEŚMY WSPARCIEM! Klient przyszedł do NAS po pomoc!
+- Używaj wiedzy z bloga i manuali które masz w kontekście!
+- Jeśli masz artykuł z bloga - UŻYJ GO i podaj konkretne instrukcje!
+
 ❌ **TO NIE SĄ TEMATY ZEBRA (odrzuć):**
 - Inne marki drukarek (HP, Brother, Epson, Canon, itp.)
 - Tematy niezwiązane z urządzeniami (pogoda, polityka, programowanie, gotowanie, itp.)
@@ -774,7 +782,7 @@ export async function POST(req: NextRequest) {
 
     // Dodaj kontekst z bloga (jako wiedza wewnętrzna, link tylko na końcu!)
     if (blogContext) {
-      enhancedSystemPrompt += `\n\n=== WIEDZA Z BLOGA (użyj do odpowiedzi, ale NIE linkuj od razu!) ===\n${blogContext}\n\n⚠️ KRYTYCZNE: Używaj tej wiedzy do formułowania odpowiedzi, ale LINK do artykułu podawaj TYLKO gdy:\n1. Klient potwierdzi że problem rozwiązany ("Działa!" → "Super! PS. Więcej: [link]")\n2. Proponujesz serwis z [SERIOUS_ISSUE] (na końcu, jako PS)\nNIGDY nie linkuj w pierwszej odpowiedzi ani w trakcie diagnostyki!`
+      enhancedSystemPrompt += `\n\n=== 🔥 OBOWIĄZKOWA WIEDZA Z BLOGA - UŻYJ JEJ! ===\n${blogContext}\n\n🚨 KRYTYCZNE:\n- MUSISZ użyć tej wiedzy do odpowiedzi!\n- NIE odsyłaj klienta na zebra.com - MY mamy tę wiedzę!\n- Podaj KONKRETNE instrukcje z artykułu powyżej!\n- Link do artykułu podawaj dopiero na końcu rozmowy (gdy [SERIOUS_ISSUE] lub problem rozwiązany)`
       
       // Dodaj linki do blogów jako "citations"
       if (blogLinks.length > 0) {
@@ -784,7 +792,7 @@ export async function POST(req: NextRequest) {
 
     // Dodaj kontekst z RAG (techniczne szczegóły z manuali)
     if (knowledgeContext) {
-      enhancedSystemPrompt += `\n\n=== KONTEKST Z MANUALI TECHNICZNYCH ===\n${knowledgeContext}\n\nUżyj informacji z manuali jako uzupełnienie. Jeśli są relevantne, powołaj się na nie (np. "Zgodnie z manualem ZD421...").`
+      enhancedSystemPrompt += `\n\n=== KONTEKST Z MANUALI TECHNICZNYCH ===\n${knowledgeContext}\n\nUżyj informacji z manuali jako uzupełnienie. NIGDY nie odsyłaj klienta na stronę Zebra - MY mamy te manuele i udzielamy pomocy na ich podstawie!`
     }
 
     // Konwertuj messages do formatu Gemini (nowe API)
