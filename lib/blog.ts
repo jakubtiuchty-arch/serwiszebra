@@ -13694,7 +13694,7 @@ export function searchBlogForAI(query: string): {
       if (contentLower.includes(word)) score += 2
     }
     
-    // Znajdź najrelewantniejszy fragment (do 500 znaków)
+    // Znajdź najrelewantniejszy fragment (do 3000 znaków - żeby AI miał pełne instrukcje!)
     let relevantContent = ''
     if (score > 0) {
       // Szukaj fragmentu zawierającego słowa kluczowe
@@ -13703,7 +13703,7 @@ export function searchBlogForAI(query: string): {
         const sentenceLower = sentence.toLowerCase()
         if (uniqueWords.some(word => sentenceLower.includes(word))) {
           relevantContent += sentence.trim() + '. '
-          if (relevantContent.length > 500) break
+          if (relevantContent.length > 3000) break
         }
       }
       // Fallback do excerpt
@@ -13715,7 +13715,7 @@ export function searchBlogForAI(query: string): {
     return {
       post,
       score,
-      relevantContent: relevantContent.slice(0, 600)
+      relevantContent: relevantContent.slice(0, 4000) // Więcej kontekstu dla AI!
     }
   })
   
