@@ -4298,11 +4298,7 @@ Zanim zaczniesz konfigurację, zresetuj skaner do ustawień domyślnych:
 
 **Problem:** Po zeskanowaniu kodu dane pozostają w polu — trzeba ręcznie naciskać Enter.
 
-**Rozwiązanie - krok 1:** Zeskanuj kod "Scan Options" (włącza tryb konfiguracji sufiksu):
-
-![Scan Options](/blog/barcode-scan-options.png)
-
-**Krok 2:** Zeskanuj kod "Add CR Suffix" (Carriage Return = Enter):
+**Rozwiązanie:** Zeskanuj poniższy kod — automatycznie doda Enter po każdym skanowaniu:
 
 ![Add Enter Suffix](/blog/barcode-suffix-enter.png)
 
@@ -4314,11 +4310,7 @@ Zanim zaczniesz konfigurację, zresetuj skaner do ustawień domyślnych:
 
 **Problem:** Chcesz przeskakiwać między polami formularza po skanowaniu.
 
-**Krok 1:** Zeskanuj "Scan Options":
-
-![Scan Options](/blog/barcode-scan-options.png)
-
-**Krok 2:** Zeskanuj "Add Tab Suffix":
+**Rozwiązanie:** Zeskanuj poniższy kod:
 
 ![Add Tab Suffix](/blog/barcode-suffix-tab.png)
 
@@ -4330,9 +4322,7 @@ Zanim zaczniesz konfigurację, zresetuj skaner do ustawień domyślnych:
 
 **Problem:** Zamiast polskich znaków (ą, ę, ś) pojawiają się błędne znaki.
 
-**Rozwiązanie:** Zeskanuj kod "Poland" z listy kodów krajów:
-
-![Country Code Poland](/blog/barcode-country-poland.png)
+**Rozwiązanie:** Kod "Poland" znajdziesz w PRG (Product Reference Guide) dla Twojego modelu skanera, w sekcji **"Country Codes"**. Dla DS2208 to strona 307 w PRG.
 
 > ⚠️ **Uwaga:** Upewnij się, że w systemie Windows/Linux również masz ustawiony polski układ klawiatury!
 
@@ -4352,36 +4342,29 @@ Jeśli skaner nie czyta kodów QR, zeskanuj:
 
 ### Włączenie wszystkich kodów 2D
 
-![Enable All 2D](/blog/barcode-enable-all-2d.png)
+Aby włączyć wszystkie symbologie 2D (QR, DataMatrix, PDF417, Aztec), zeskanuj powyższe kody QR i DataMatrix, lub użyj programu **123Scan** do włączenia wszystkich symbologii naraz.
 
 ---
 
 ## 📊 Tabela popularnych konfiguracji
 
-| Ustawienie | Co robi | Modele |
-|------------|---------|--------|
-| Set Defaults | Reset fabryczny | Wszystkie |
-| CR Suffix | Dodaje Enter | DS2208, DS4608, LI2208, LI4278 |
-| Tab Suffix | Dodaje Tab | DS2208, DS4608, LI2208, LI4278 |
-| Poland | Polski układ klawiatury | Wszystkie |
-| Enable QR | Włącza kody QR | DS2208, DS4608, DS8178 |
-| Enable DataMatrix | Włącza DataMatrix | DS2208, DS4608, DS8178 |
+| Ustawienie | Co robi | Kod na tej stronie? |
+|------------|---------|---------------------|
+| Set Factory Defaults | Reset fabryczny | ✅ Tak |
+| Add Enter Key | Dodaje Enter po skanowaniu | ✅ Tak |
+| Tab Key | Dodaje Tab po skanowaniu | ✅ Tak |
+| Enable QR Code | Włącza kody QR | ✅ Tak |
+| Enable Data Matrix | Włącza DataMatrix | ✅ Tak |
+| Country Code Poland | Polski układ klawiatury | 📖 PRG strona 307 |
+| USB COM Mode | Wirtualny port szeregowy | 📖 PRG strona 93 |
 
 ---
 
 ## 🔌 Konfiguracja interfejsu USB
 
-### USB Keyboard HID (domyślny)
+Domyślnie skaner działa w trybie **USB Keyboard HID** — wpisuje kody jak klawiatura.
 
-Skaner działa jak klawiatura — wpisuje kody bezpośrednio:
-
-![USB HID Keyboard](/blog/barcode-usb-hid.png)
-
-### USB COM Port (wirtualny port szeregowy)
-
-Dla aplikacji wymagających portu COM:
-
-![USB COM Port](/blog/barcode-usb-com.png)
+Jeśli potrzebujesz trybu **USB COM Port** (wirtualny port szeregowy) dla specjalistycznych aplikacji, znajdziesz odpowiedni kod w PRG w sekcji **"USB Device Type"** (dla DS2208 - strona 93).
 
 ---
 
