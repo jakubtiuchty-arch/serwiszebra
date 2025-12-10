@@ -817,9 +817,13 @@ function isZebraRelated(message: string): boolean {
   const zebraKeywords = [
     // Marka
     'zebra', 'takma',
-    // Typy urządzeń
-    'drukark', 'printer', 'terminal', 'skaner', 'scanner', 'czytnik',
+    // Typy urządzeń - PEŁNE SŁOWA
+    'drukarka', 'drukarki', 'drukarkę', 'drukarką', 'drukark',
+    'printer', 'terminal', 'terminala', 'terminale',
+    'skaner', 'skanera', 'skanerze', 'scanner', 'czytnik',
     'etykiet', 'label', 'kodów', 'barcode', 'qr',
+    // KARTY - wszystkie formy (drukarki kart!)
+    'kart', 'karty', 'kartę', 'karta', 'kartach',
     // Kody kreskowe - różne formy
     'kreskow', 'kod kresk', 'kodami', 'kody',
     // Skanery - konfiguracja
@@ -837,8 +841,7 @@ function isZebraRelated(message: string): boolean {
     // Modele Zebra - drukarki mobilne
     'zq5', 'zq6', 'zq3', 'zq52', 'zq63', 'zq32',
     // Drukarki kart - słowa kluczowe
-    'kart plastik', 'kart identyfikac', 'kart zbliżeniow', 'kart dostęp',
-    'identyfikator', 'przepustk', 'legitymacj', 'karta pracown',
+    'identyfikator', 'przepustk', 'legitymacj', 'pracown',
     'kodowanie', 'magnet', 'pasek magnet', 'smart card', 'rfid', 'mifare',
     'laminat', 'laminow', 'hologram',
     // Komponenty/problemy
