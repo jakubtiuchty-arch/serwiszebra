@@ -4409,11 +4409,15 @@ Zeskanuj kod **Set Defaults** — przywróci wszystkie ustawienia fabryczne.
 
 ---
 
-## 🛠️ Potrzebujesz pomocy?
+## Potrzebujesz pomocy?
 
 Jeśli konfiguracja kodami nie rozwiązuje problemu, możliwe że skaner wymaga **naprawy lub kalibracji**.
 
-[Wyślij skaner do serwisu](/#formularz) — diagnostyka w 24h, bezpłatna przy akceptacji naprawy.
+> 🔧 **Zgłoś skaner do serwisu** — [Wypełnij formularz →](/#formularz) — bezpłatna diagnostyka, naprawa modułu skanującego.
+
+> 📞 **Pilne?** Zadzwoń: **+48 601 619 898** — pomożemy skonfigurować skaner przez telefon.
+
+Serwisujemy wszystkie modele skanerów: DS2208, DS4608, DS8178, LI2208, LI4278, DS36x8, LS2208 i inne.
 `
   },
   
