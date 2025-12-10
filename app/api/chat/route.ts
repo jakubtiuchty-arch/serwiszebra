@@ -831,6 +831,10 @@ PAMIĘTAJ:
   - Rozmowa o skanerze → link do artykułu o skanerze (NIE o drukarkach!)
   - Jeśli NIE MA pasującego artykułu → link do ogólnego bloga: [Więcej poradników](/blog)
   - NIGDY nie linkuj do artykułu w INNYM temacie niż rozmowa!
+- **🛑 NIGDY NIE WYMYŚLAJ LINKÓW!**
+  - Używaj TYLKO linków podanych w kontekście (lista "DOSTĘPNE ARTYKUŁY")
+  - Wymyślone linki typu "/blog/cos-tam" NIE ISTNIEJĄ i prowadzą do błędu 404!
+  - Jak nie ma pasującego → [Więcej poradników](/blog) lub NIE dawaj linka wcale
 
 ---
 
@@ -1016,10 +1020,10 @@ export async function POST(req: NextRequest) {
       
       // Dodaj linki do blogów jako "citations"
       if (blogLinks.length > 0) {
-        enhancedSystemPrompt += `\n\nDostępne artykuły (TYLKO na zakończenie, jako KLIKALNY LINK!):\n${blogLinks.map(b => `- [${b.title}](/blog/${b.slug})`).join('\n')}\n\n⚠️ KRYTYCZNE - LINKUJ TYLKO PASUJĄCY ARTYKUŁ:\n- Sprawdź czy temat artykułu PASUJE do rozmowy!\n- Rozmowa o kartach → artykuł o kartach. Rozmowa o WiFi → artykuł o WiFi.\n- Jeśli artykuł NIE PASUJE do tematu rozmowy → użyj ogólnego: [Więcej poradników](/blog)\n- NIGDY nie linkuj do artykułu w INNYM temacie!`
+        enhancedSystemPrompt += `\n\n📚 DOSTĘPNE ARTYKUŁY (używaj TYLKO tych linków!):\n${blogLinks.map(b => `- [${b.title}](/blog/${b.slug})`).join('\n')}\n\n🛑 ABSOLUTNY ZAKAZ:\n- NIGDY nie wymyślaj własnych linków do bloga!\n- Używaj TYLKO linków z listy powyżej!\n- Jeśli artykuł NIE PASUJE do rozmowy → [Więcej poradników](/blog)\n- Wymyślone linki typu "/blog/skaner-nie-dziala..." są ZAKAZANE jeśli nie ma ich na liście!`
       } else {
         // Jeśli nie ma pasującego artykułu, dodaj link do ogólnego bloga
-        enhancedSystemPrompt += `\n\nNie znaleziono pasującego artykułu na blogu. Jeśli chcesz podać link do bloga na końcu, użyj ogólnego: [Więcej poradników](/blog)`
+        enhancedSystemPrompt += `\n\n⚠️ Brak pasującego artykułu na blogu. Jeśli chcesz podać link, użyj TYLKO: [Więcej poradników](/blog)\n🛑 NIGDY nie wymyślaj własnych linków! Nie istnieją!`
       }
     }
 
