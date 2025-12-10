@@ -9489,7 +9489,7 @@ Zależy od stanu urządzenia. **Warto naprawić:** terminal <3 lata, tylko probl
   },
   {
     slug: 'kody-bledow-drukarki-kart-zebra-zc300-zxp',
-    title: 'Kody błędów drukarek kart Zebra – kompletna lista z rozwiązaniami [ZC300, ZXP]',
+    title: 'Kody błędów drukarek kart Zebra – kompletna lista z rozwiązaniami',
     excerpt: 'Błąd 5001, 4003 lub 7003 na drukarce kart Zebra? Kompletna baza kodów błędów ZC100, ZC300, ZC350, ZXP Series 3, 7, 8 z przyczynami i rozwiązaniami krok po kroku.',
     coverImage: '/blog/kod-bledow-karty.jpeg',
     author: {
@@ -9503,7 +9503,7 @@ Zależy od stanu urządzenia. **Warto naprawić:** terminal <3 lata, tylko probl
     category: 'troubleshooting',
     tags: ['drukarka kart', 'kody błędów', 'ZC300', 'ZC350', 'ZXP Series 7', 'ZXP Series 3', 'error code', 'troubleshooting', 'ribbon', 'card jam', 'głowica', 'encoder', 'laminator'],
     seo: {
-      metaTitle: 'Kody błędów drukarek kart Zebra ZC300/ZXP – lista i rozwiązania [2025]',
+      metaTitle: 'Kody błędów drukarek kart Zebra – kompletna lista i rozwiązania [2025]',
       metaDescription: 'Kompletna lista kodów błędów drukarek kart Zebra: Error 5001 (brak taśmy), 4003 (zacięcie karty), 7003 (kabel głowicy), 9001 (mag stripe). ZC100, ZC300, ZXP Series. Rozwiązania krok po kroku.',
       keywords: [
         'kody błędów zebra zc300',
