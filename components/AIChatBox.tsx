@@ -412,12 +412,12 @@ export default function AIChatBox() {
                         : 'bg-gray-100 text-gray-900'
                     }`}
                   >
-                    {/* Renderuj treść z obsługą obrazów [BARCODE:url] */}
+                    {/* Renderuj treść z obsługą obrazów [BARCODE:url] i linków markdown */}
                     <div className="text-sm whitespace-pre-wrap leading-relaxed">
                       {msg.content
                         .replace('[SERIOUS_ISSUE]', '')
                         .trim()
-                        .split(/(\[BARCODE:[^\]]+\])/)
+                        .split(/(\[BARCODE:[^\]]+\]|\[[^\]]+\]\([^)]+\))/)
                         .map((part, partIdx) => {
                           // Sprawdź czy to znacznik barcode
                           const barcodeMatch = part.match(/\[BARCODE:([^\]]+)\]/)
@@ -435,6 +435,23 @@ export default function AIChatBox() {
                                   📱 Zeskanuj ten kod skanerem
                                 </span>
                               </div>
+                            )
+                          }
+                          // Sprawdź czy to link markdown [text](url)
+                          const linkMatch = part.match(/\[([^\]]+)\]\(([^)]+)\)/)
+                          if (linkMatch) {
+                            const linkText = linkMatch[1]
+                            const linkUrl = linkMatch[2]
+                            return (
+                              <a
+                                key={partIdx}
+                                href={linkUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-blue-600 hover:text-blue-800 underline underline-offset-2 hover:no-underline transition-colors"
+                              >
+                                {linkText}
+                              </a>
                             )
                           }
                           // Zwykły tekst
