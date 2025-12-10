@@ -13656,9 +13656,18 @@ function detectDeviceTypeFromQuery(query: string): 'drukarki' | 'terminale' | 's
     if (q.includes(model)) return 'drukarki'
   }
   
-  // Modele skanerów
-  const scannerModels = ['ds2208', 'ds3608', 'ds4608', 'ds8178', 'li2208', 'li4278', 'ls2208', 'cs4070']
-  for (const model of scannerModels) {
+  // Modele skanerów RĘCZNYCH (NIE terminalowych!)
+  const handheldScannerModels = [
+    // Przewodowe (końcówka 08)
+    'ds2208', 'ds3608', 'ds4608', 'ds8108', 'ds9208', 'ds9308',
+    // Bezprzewodowe ze stacją (końcówka 78)
+    'ds2278', 'ds3678', 'ds4678', 'ds8178',
+    // Starsze modele
+    'li2208', 'li4278', 'ls2208', 'ls1203', 'ls2203',
+    // Kompaktowe
+    'cs4070', 'cs6080'
+  ]
+  for (const model of handheldScannerModels) {
     if (q.includes(model)) return 'skanery'
   }
   
@@ -13737,22 +13746,40 @@ export function searchBlogForAI(query: string): {
     const queryHasScanner = queryLower.match(/skaner|skanow|skanuj|czytnik|kod.*kresk/)
     const queryHasPrinter = queryLower.match(/drukark|wydruk|etykiet|ribbon|głowic/)
     
+    // Rozróżnienie: skaner RĘCZNY (DS2208, DS3678) vs skaner W TERMINALU
+    const handheldScannerModelsInQuery = queryLower.match(/ds\d{4}|li\d{4}|ls\d{4}|cs\d{4}/)
+    const terminalModelsInQuery = queryLower.match(/tc\d{2}|mc\d{2,4}|wt\d{4}/)
+    
     const articleIsAboutGSM = slugLower.includes('gsm') || slugLower.includes('4g') || slugLower.includes('5g') || slugLower.includes('lte') || slugLower.includes('apn')
     const articleIsAboutWiFi = slugLower.includes('wifi') || titleLower.includes('wifi')
-    const articleIsAboutScanner = slugLower.includes('skaner') || titleLower.includes('skaner') || titleLower.includes('skanow')
+    const articleIsAboutHandheldScanner = post.deviceType === 'skanery' // artykuły o skanerach ręcznych
+    const articleIsAboutTerminalScanner = post.deviceType === 'terminale' && (slugLower.includes('skaner') || titleLower.includes('skaner'))
     const articleIsAboutPrinter = post.deviceType === 'drukarki'
     
     // Duży bonus za dopasowanie tematu
     if (queryHasGSM && articleIsAboutGSM) score += 30
     if (queryHasWiFi && articleIsAboutWiFi) score += 30
-    if (queryHasScanner && articleIsAboutScanner) score += 30
     if (queryHasPrinter && articleIsAboutPrinter) score += 20
     
+    // WAŻNE: Rozróżnienie skanerów ręcznych od terminalowych!
+    if (queryHasScanner || handheldScannerModelsInQuery) {
+      if (handheldScannerModelsInQuery && articleIsAboutHandheldScanner) {
+        score += 40 // Duży bonus: pytanie o DS2208 → artykuł o skanerach ręcznych
+      } else if (handheldScannerModelsInQuery && articleIsAboutTerminalScanner) {
+        score -= 50 // Duża kara: pytanie o DS2208 → artykuł o skanerach w terminalach (ŹLE!)
+      } else if (terminalModelsInQuery && articleIsAboutTerminalScanner) {
+        score += 40 // Bonus: pytanie o TC52 skaner → artykuł o skanerach w terminalach
+      } else if (terminalModelsInQuery && articleIsAboutHandheldScanner) {
+        score -= 50 // Kara: pytanie o TC52 → artykuł o skanerach ręcznych (ŹLE!)
+      } else if (queryHasScanner && articleIsAboutHandheldScanner && !terminalModelsInQuery) {
+        score += 30 // Ogólne "skaner" bez modelu terminala → preferuj skanery ręczne
+      }
+    }
+    
     // Duża kara za NIEPASUJĄCY temat
-    if (queryHasGSM && articleIsAboutScanner) score -= 40
+    if (queryHasGSM && articleIsAboutHandheldScanner) score -= 40
     if (queryHasGSM && articleIsAboutWiFi && !articleIsAboutGSM) score -= 20
-    if (queryHasWiFi && articleIsAboutScanner) score -= 40
-    if (queryHasScanner && !articleIsAboutScanner && articleIsAboutGSM) score -= 40
+    if (queryHasWiFi && articleIsAboutHandheldScanner) score -= 40
     
     for (const word of uniqueWords) {
       // Tytuł - najwyższy priorytet
