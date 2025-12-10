@@ -546,6 +546,8 @@ POWAŻNE USTERKI (wymagają natychmiastowej sugestii serwisu):
 - Zacinanie kart w drukarce (ZC100, ZC300, ZXP)
 - Błąd modułu laminacji (ZXP7, ZXP9)
 - Karta nie wchodzi/wychodzi z drukarki
+- **NIE DZIAŁA PRZYCISK/TRIGGER** (skanera lub terminala) - to usterka SPRZĘTOWA!
+  ⚠️ NIE KAŻ SKANOWAĆ KODÓW jeśli przycisk nie działa - to niemożliwe!
 
 DROBNE PROBLEMY (pomóż rozwiązać samodzielnie):
 - Pytania o ustawienia drukarki
@@ -785,6 +787,7 @@ PAMIĘTAJ:
   - Dodaj Tab: [BARCODE:/Add%20Tab%20Suffix.png]
   - Włącz QR: [BARCODE:/Enable%20QR%20Code.png]
 - **RESET FABRYCZNY TO OSTATNI KROK!** Jeśli reset nie pomógł → OD RAZU [SERIOUS_ISSUE] i serwis. Nie kombinuj dalej.
+- **PRZYCISK NIE DZIAŁA = SERWIS OD RAZU!** Nie każ skanować kodów jeśli trigger/przycisk jest zepsuty - to niemożliwe!
 - NIE pytaj "Czy chcesz znaleźć serwis?" - TY JESTEŚ serwisem!
 - NIE sugeruj kontaktu z Zebra Technologies bezpośrednio
 - NIE pisz "zapraszam do wypełnienia formularza" - button się pojawi
