@@ -452,8 +452,18 @@ export default function AIChatBox() {
                               </a>
                             )
                           }
-                          // Zwykły tekst
-                          return <span key={partIdx}>{part}</span>
+                          // Zwykły tekst - parsuj pogrubienia **tekst**
+                          return (
+                            <span key={partIdx}>
+                              {part.split(/(\*\*[^*]+\*\*)/).map((textPart, textIdx) => {
+                                const boldMatch = textPart.match(/^\*\*([^*]+)\*\*$/)
+                                if (boldMatch) {
+                                  return <strong key={textIdx} className="font-semibold">{boldMatch[1]}</strong>
+                                }
+                                return <span key={textIdx}>{textPart}</span>
+                              })}
+                            </span>
+                          )
                         })}
                     </div>
                   </div>
