@@ -538,18 +538,11 @@ export default function AboutPage() {
             ))}
           </div>
 
-          {/* Bottom CTA */}
+          {/* Bottom text */}
           <div className="text-center mt-12 sm:mt-16">
-            <p className="text-slate-400 text-sm mb-6">
+            <p className="text-slate-400 text-sm">
               Jeden z niewielu serwisów w Polsce z podwójną autoryzacją Zebra
             </p>
-            <Link
-              href="/#formularz"
-              className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-full font-semibold text-lg hover:from-blue-500 hover:to-indigo-500 hover:scale-105 transition-all duration-300 shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40"
-            >
-              Zgłoś urządzenie do serwisu
-              <ArrowRight className="w-5 h-5" />
-            </Link>
           </div>
         </div>
       </section>
