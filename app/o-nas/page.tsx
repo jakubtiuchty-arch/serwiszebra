@@ -10,148 +10,108 @@ import {
   Users, 
   Truck,
   Shield,
-  MapPin,
   Wrench,
   Clock,
   CheckCircle2,
   ArrowRight,
   Building2,
   History,
-  Target,
   Heart,
   Sparkles
 } from 'lucide-react'
 
-// Timeline - wizualnie większy, scrollowalny horyzontalnie
+// Timeline - prosty, 4 elementy
 function CompactTimeline({ 
   milestones 
 }: { 
   milestones: { year: string; title: string; description: string; icon: any }[]
 }) {
-  const [activeIdx, setActiveIdx] = useState(milestones.length - 1) // Domyślnie ostatni (Autoryzacja)
+  const [activeIdx, setActiveIdx] = useState(milestones.length - 1)
 
   return (
     <div className="relative">
-      {/* Horizontal scroll container */}
-      <div className="overflow-x-auto pb-4 -mx-3 px-3 sm:mx-0 sm:px-0 sm:overflow-visible">
-        <div className="flex gap-3 sm:gap-4 min-w-max sm:min-w-0 sm:grid sm:grid-cols-7">
-          {milestones.map((milestone, idx) => {
-            const Icon = milestone.icon
-            const isLast = idx === milestones.length - 1
-            const isActive = activeIdx === idx
-            
-            return (
-              <button
-                key={idx}
-                onClick={() => setActiveIdx(idx)}
-                className={`relative flex flex-col items-center p-3 sm:p-4 rounded-xl transition-all duration-300 min-w-[100px] sm:min-w-0 ${
-                  isActive 
-                    ? isLast
-                      ? 'bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-green-300 shadow-lg scale-105'
-                      : 'bg-gradient-to-br from-blue-50 to-indigo-50 border-2 border-blue-300 shadow-lg scale-105'
-                    : 'bg-white border border-gray-200 hover:border-gray-300 hover:shadow-md hover:bg-gray-50'
-                }`}
-              >
-                {/* Icon */}
-                <div className={`w-12 h-12 sm:w-14 sm:h-14 rounded-xl flex items-center justify-center mb-2 transition-all ${
-                  isActive 
-                    ? isLast
-                      ? 'bg-gradient-to-br from-green-500 to-emerald-600 shadow-lg'
-                      : 'bg-gradient-to-br from-blue-500 to-indigo-600 shadow-lg'
-                    : 'bg-gray-100 group-hover:bg-gray-200'
-                }`}>
-                  <Icon className={`w-6 h-6 ${isActive ? 'text-white' : 'text-gray-500'}`} />
-                </div>
-                
-                {/* Year badge */}
-                <span className={`text-xs font-bold px-2 py-0.5 rounded-full mb-1 ${
-                  isActive 
-                    ? isLast 
-                      ? 'bg-green-100 text-green-700'
-                      : 'bg-blue-100 text-blue-700'
-                    : 'bg-gray-100 text-gray-600'
-                }`}>
-                  {milestone.year}
-                </span>
-                
-                {/* Title */}
-                <span className={`text-xs text-center leading-tight line-clamp-2 ${
-                  isActive ? (isLast ? 'text-green-700 font-medium' : 'text-blue-700 font-medium') : 'text-gray-500'
-                }`}>
-                  {milestone.title}
-                </span>
-                
-                {/* Active indicator for last */}
-                {isLast && (
-                  <div className={`absolute -top-1 -right-1 w-3 h-3 rounded-full ${isActive ? 'bg-green-500' : 'bg-green-400'} animate-pulse`}></div>
-                )}
-              </button>
-            )
-          })}
-        </div>
+      {/* Linia łącząca */}
+      <div className="absolute top-8 left-8 right-8 h-0.5 bg-gradient-to-r from-blue-200 via-blue-300 to-green-300 hidden sm:block"></div>
+      
+      {/* 4 etapy */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
+        {milestones.map((milestone, idx) => {
+          const Icon = milestone.icon
+          const isLast = idx === milestones.length - 1
+          const isActive = activeIdx === idx
+          
+          return (
+            <button
+              key={idx}
+              onClick={() => setActiveIdx(idx)}
+              className={`relative flex flex-col items-center p-4 rounded-xl transition-all duration-300 ${
+                isActive 
+                  ? isLast
+                    ? 'bg-green-50 border-2 border-green-400 shadow-lg'
+                    : 'bg-blue-50 border-2 border-blue-400 shadow-lg'
+                  : 'bg-white border border-gray-200 hover:border-gray-300 hover:shadow-md'
+              }`}
+            >
+              {/* Icon */}
+              <div className={`relative z-10 w-14 h-14 rounded-full flex items-center justify-center mb-3 transition-all ${
+                isActive 
+                  ? isLast
+                    ? 'bg-gradient-to-br from-green-500 to-emerald-600 shadow-lg'
+                    : 'bg-gradient-to-br from-blue-500 to-indigo-600 shadow-lg'
+                  : 'bg-gray-100'
+              }`}>
+                <Icon className={`w-6 h-6 ${isActive ? 'text-white' : 'text-gray-500'}`} />
+              </div>
+              
+              {/* Year */}
+              <span className={`text-sm font-bold mb-1 ${
+                isActive ? (isLast ? 'text-green-700' : 'text-blue-700') : 'text-gray-700'
+              }`}>
+                {milestone.year}
+              </span>
+              
+              {/* Title */}
+              <span className={`text-xs text-center leading-tight ${
+                isActive ? (isLast ? 'text-green-600' : 'text-blue-600') : 'text-gray-500'
+              }`}>
+                {milestone.title}
+              </span>
+              
+              {/* Pulse for last */}
+              {isLast && (
+                <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+              )}
+            </button>
+          )
+        })}
       </div>
       
-      {/* Detail card - always visible */}
-      <div className="mt-6">
-        <div className={`rounded-2xl p-6 sm:p-8 transition-all duration-300 ${
-          activeIdx === milestones.length - 1 
-            ? 'bg-gradient-to-br from-green-500 to-emerald-600 text-white shadow-xl shadow-green-500/20' 
-            : 'bg-gradient-to-br from-slate-800 to-slate-900 text-white shadow-xl'
-        }`}>
-          <div className="flex flex-col sm:flex-row sm:items-start gap-4 sm:gap-6">
-            {/* Icon */}
-            <div className={`w-16 h-16 rounded-2xl flex items-center justify-center flex-shrink-0 ${
-              activeIdx === milestones.length - 1 
-                ? 'bg-white/20' 
-                : 'bg-blue-500/20'
-            }`}>
-              {(() => {
-                const Icon = milestones[activeIdx].icon
-                return <Icon className="w-8 h-8 text-white" />
-              })()}
-            </div>
-            
-            {/* Content */}
-            <div className="flex-1">
-              <div className="flex flex-wrap items-center gap-2 mb-2">
-                <span className={`text-sm font-bold px-3 py-1 rounded-full ${
-                  activeIdx === milestones.length - 1 
-                    ? 'bg-white/20 text-white' 
-                    : 'bg-blue-500/30 text-blue-200'
-                }`}>
-                  {milestones[activeIdx].year}
-                </span>
-                {activeIdx === milestones.length - 1 && (
-                  <span className="flex items-center gap-1 text-sm text-green-100 font-medium">
-                    <Sparkles className="w-4 h-4" />
-                    Aktualny status
-                  </span>
-                )}
-              </div>
-              <h3 className="text-xl sm:text-2xl font-bold mb-2">
-                {milestones[activeIdx].title}
-              </h3>
-              <p className={`text-sm sm:text-base leading-relaxed ${
-                activeIdx === milestones.length - 1 ? 'text-green-100' : 'text-slate-300'
-              }`}>
-                {milestones[activeIdx].description}
-              </p>
-            </div>
+      {/* Detail card */}
+      <div className={`rounded-xl p-6 transition-all duration-300 ${
+        activeIdx === milestones.length - 1 
+          ? 'bg-gradient-to-r from-green-600 to-emerald-600 text-white' 
+          : 'bg-gradient-to-r from-slate-700 to-slate-800 text-white'
+      }`}>
+        <div className="flex items-start gap-4">
+          <div className={`w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 ${
+            activeIdx === milestones.length - 1 ? 'bg-white/20' : 'bg-white/10'
+          }`}>
+            {(() => {
+              const Icon = milestones[activeIdx].icon
+              return <Icon className="w-6 h-6 text-white" />
+            })()}
           </div>
-          
-          {/* Navigation dots */}
-          <div className="flex justify-center gap-2 mt-6">
-            {milestones.map((_, idx) => (
-              <button
-                key={idx}
-                onClick={() => setActiveIdx(idx)}
-                className={`w-2 h-2 rounded-full transition-all ${
-                  activeIdx === idx 
-                    ? 'w-6 bg-white' 
-                    : 'bg-white/30 hover:bg-white/50'
-                }`}
-              />
-            ))}
+          <div>
+            <div className="flex items-center gap-2 mb-1">
+              <span className="text-sm font-bold opacity-80">{milestones[activeIdx].year}</span>
+              {activeIdx === milestones.length - 1 && (
+                <span className="flex items-center gap-1 text-xs bg-white/20 px-2 py-0.5 rounded-full">
+                  <Sparkles className="w-3 h-3" /> Aktualnie
+                </span>
+              )}
+            </div>
+            <h3 className="text-lg font-bold mb-1">{milestones[activeIdx].title}</h3>
+            <p className="text-sm opacity-90">{milestones[activeIdx].description}</p>
           </div>
         </div>
       </div>
@@ -217,44 +177,26 @@ export default function AboutPage() {
   const milestones = [
     {
       year: '1999',
-      title: 'Początek przygody',
-      description: 'Założenie firmy TAKMA. Pierwsze dostawy terminali Psion dla polskiego handlu detalicznego.',
+      title: 'Początek z Psion',
+      description: 'Założenie firmy TAKMA. Rozpoczynamy sprzedaż i serwis terminali Psion - pionierów rynku mobilnych komputerów przemysłowych w Polsce.',
       icon: Building2
     },
     {
-      year: '2000-2005',
-      title: 'Serwis terenowy',
-      description: 'Nasi technicy przemierzają całą Polskę. Naprawy u klientów - w magazynach, na halach produkcyjnych, w sklepach wielkopowierzchniowych.',
-      icon: Truck
-    },
-    {
-      year: '2006',
-      title: 'Era Symbol Technologies',
-      description: 'Symbol przejmuje Psion. Dostosowujemy się - szkolimy zespół, zdobywamy nowe certyfikaty.',
-      icon: Award
-    },
-    {
-      year: '2007',
-      title: 'Motorola wchodzi do gry',
-      description: 'Motorola przejmuje Symbol. Kolejna transformacja, nowe możliwości, rozbudowa oferty o drukarki przemysłowe.',
-      icon: Target
-    },
-    {
-      year: '2014',
-      title: 'Narodziny Zebra Technologies',
-      description: 'Zebra przejmuje dział Enterprise od Motoroli. Stajemy się partnerem największego gracza na rynku AutoID.',
+      year: '2007-2014',
+      title: 'Rozwój i transformacje',
+      description: 'Przejścia Psion → Symbol → Motorola → Zebra. Przy każdej zmianie rozwijamy kompetencje, zdobywamy certyfikaty i budujemy zespół ekspertów.',
       icon: History
     },
     {
       year: '2018',
-      title: 'Premier Partner Zebra',
-      description: 'Uzyskujemy status Premier Partner - najwyższy poziom partnerstwa dystrybucyjnego Zebra w Polsce.',
+      title: 'Premier Partner',
+      description: 'Uzyskujemy najwyższy status partnerstwa handlowego Zebra w Polsce. Bezpośredni dostęp do pełnej oferty i wsparcia producenta.',
       icon: Shield
     },
     {
       year: '2023',
-      title: 'Autoryzowane Centrum Serwisowe',
-      description: 'Korona 25-letnich starań - oficjalny status Zebra Authorized Repair Center. Naprawy na częściach oryginalnych z pełną gwarancją.',
+      title: 'Printer Repair Specialist',
+      description: 'Oficjalny status Zebra Authorized Repair Center. Naprawy na oryginalnych częściach z gwarancją producenta.',
       icon: CheckCircle2
     }
   ]
