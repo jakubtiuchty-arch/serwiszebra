@@ -1092,7 +1092,7 @@ export default function HomePage() {
         <RepairForm />
       </div>
 
-      {/* SERWISUJEMY DLA */}
+      {/* SERWISUJEMY DLA - ZAKOMENTOWANE NA PÓŹNIEJ
       <section className="py-8 sm:py-10 px-3 sm:px-4 lg:px-6 bg-white border-y border-gray-100">
         <div className="max-w-6xl mx-auto">
           <p className="text-center text-xs sm:text-sm font-medium text-gray-400 uppercase tracking-widest mb-8 sm:mb-10">
@@ -1137,6 +1137,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+      */}
 
       {/* FOOTER */}
       <footer className="relative overflow-hidden">
