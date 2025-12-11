@@ -348,10 +348,10 @@ export default function FAQPage() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-12 px-3 sm:px-4 bg-gray-50 border-t border-gray-200">
+        <section className="py-12 px-3 sm:px-4 bg-gradient-to-b from-white to-gray-50 border-t border-gray-100">
           <div className="max-w-4xl mx-auto">
-            <div className="bg-white rounded-xl border border-gray-200 p-8 text-center">
-              <div className="w-14 h-14 bg-gray-900 rounded-xl flex items-center justify-center mx-auto mb-5">
+            <div className="bg-white rounded-2xl border border-gray-200 p-8 text-center shadow-sm hover:shadow-md transition-shadow">
+              <div className="w-14 h-14 bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl flex items-center justify-center mx-auto mb-5 shadow-lg">
                 <MessageSquare className="w-7 h-7 text-white" />
               </div>
               <h2 className="text-xl font-semibold text-gray-900 mb-2">
@@ -363,14 +363,14 @@ export default function FAQPage() {
               <div className="flex flex-wrap justify-center gap-3">
                 <Link
                   href="/"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-900 text-white font-medium rounded-lg hover:bg-gray-800 transition-colors text-sm"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-900 text-white font-medium rounded-lg hover:bg-gray-800 hover:scale-[1.02] transition-all text-sm shadow-md"
                 >
                   <MessageSquare className="w-4 h-4" />
                   Zapytaj ChatAI
                 </Link>
                 <a
                   href="tel:+48601619898"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-white text-gray-700 font-medium rounded-lg border border-gray-300 hover:bg-gray-50 transition-colors text-sm"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-white text-gray-700 font-medium rounded-lg border border-gray-200 hover:border-gray-300 hover:shadow-sm transition-all text-sm"
                 >
                   <Phone className="w-4 h-4" />
                   +48 601 619 898
@@ -381,26 +381,34 @@ export default function FAQPage() {
         </section>
 
         {/* Quick Stats */}
-        <section className="py-10 px-3 sm:px-4 bg-white border-t border-gray-100">
+        <section className="py-10 px-3 sm:px-4 bg-gray-50">
           <div className="max-w-4xl mx-auto">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <div className="bg-gray-50 rounded-lg p-4 text-center">
-                <Clock className="w-6 h-6 text-gray-500 mx-auto mb-2" />
+              <div className="bg-white rounded-xl p-5 text-center border border-gray-100 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all group">
+                <div className="w-10 h-10 bg-gray-100 group-hover:bg-gray-900 rounded-lg flex items-center justify-center mx-auto mb-3 transition-colors">
+                  <Clock className="w-5 h-5 text-gray-600 group-hover:text-white transition-colors" />
+                </div>
                 <div className="text-xl font-semibold text-gray-900">2-5 dni</div>
                 <div className="text-xs text-gray-500">Czas naprawy</div>
               </div>
-              <div className="bg-gray-50 rounded-lg p-4 text-center">
-                <Shield className="w-6 h-6 text-gray-500 mx-auto mb-2" />
+              <div className="bg-white rounded-xl p-5 text-center border border-gray-100 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all group">
+                <div className="w-10 h-10 bg-gray-100 group-hover:bg-gray-900 rounded-lg flex items-center justify-center mx-auto mb-3 transition-colors">
+                  <Shield className="w-5 h-5 text-gray-600 group-hover:text-white transition-colors" />
+                </div>
                 <div className="text-xl font-semibold text-gray-900">12 mies.</div>
                 <div className="text-xs text-gray-500">Gwarancja</div>
               </div>
-              <div className="bg-gray-50 rounded-lg p-4 text-center">
-                <Truck className="w-6 h-6 text-gray-500 mx-auto mb-2" />
+              <div className="bg-white rounded-xl p-5 text-center border border-gray-100 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all group">
+                <div className="w-10 h-10 bg-gray-100 group-hover:bg-gray-900 rounded-lg flex items-center justify-center mx-auto mb-3 transition-colors">
+                  <Truck className="w-5 h-5 text-gray-600 group-hover:text-white transition-colors" />
+                </div>
                 <div className="text-xl font-semibold text-gray-900">24h</div>
                 <div className="text-xs text-gray-500">Odbiór kurierem</div>
               </div>
-              <div className="bg-gray-50 rounded-lg p-4 text-center">
-                <Wrench className="w-6 h-6 text-gray-500 mx-auto mb-2" />
+              <div className="bg-white rounded-xl p-5 text-center border border-gray-100 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all group">
+                <div className="w-10 h-10 bg-gray-100 group-hover:bg-gray-900 rounded-lg flex items-center justify-center mx-auto mb-3 transition-colors">
+                  <Wrench className="w-5 h-5 text-gray-600 group-hover:text-white transition-colors" />
+                </div>
                 <div className="text-xl font-semibold text-gray-900">25 lat</div>
                 <div className="text-xs text-gray-500">Doświadczenia</div>
               </div>
