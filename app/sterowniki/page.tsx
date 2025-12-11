@@ -89,19 +89,25 @@ const firmware = [
   },
 ]
 
-// Programy użytkowe (placeholder - do rozbudowy)
+// Programy użytkowe
 const utilities = [
   {
     id: 'zebra-setup',
     name: 'Zebra Setup Utilities',
-    description: 'Narzędzie do konfiguracji drukarek Zebra - ustawienia sieci, kalibracja, diagnostyka.',
+    version: '1.1.9.1327',
+    description: 'Narzędzie do konfiguracji drukarek Zebra - ustawienia sieci, kalibracja, diagnostyka, wysyłanie firmware.',
+    downloadUrl: 'https://fivrcnshzylqdquuhkeu.supabase.co/storage/v1/object/public/downloads/zsu-1191327.zip',
     externalUrl: 'https://www.zebra.com/us/en/support-downloads/printer-software/zebra-setup-utility.html',
+    fileSize: '~12 MB',
   },
   {
     id: 'zebradesigner',
     name: 'ZebraDesigner',
+    version: null,
     description: 'Program do projektowania etykiet. Wersja Essentials jest bezpłatna.',
+    downloadUrl: null,
     externalUrl: 'https://www.zebra.com/us/en/support-downloads/printer-software/zebradesigner-3.html',
+    fileSize: null,
   },
 ]
 
@@ -440,20 +446,41 @@ export default function DriversPage() {
             <div className="space-y-4">
               {utilities.map((util) => (
                 <div key={util.id} className="bg-white border border-gray-200 rounded-xl p-5 sm:p-6">
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                    <div>
-                      <h3 className="font-semibold text-gray-900 mb-1">{util.name}</h3>
-                      <p className="text-gray-600 text-sm">{util.description}</p>
+                  <div className="flex flex-col sm:flex-row sm:items-start gap-4">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-1">
+                        <h3 className="font-semibold text-gray-900">{util.name}</h3>
+                        {util.version && (
+                          <span className="px-2 py-0.5 bg-gray-100 text-gray-600 text-xs rounded-full">
+                            v{util.version}
+                          </span>
+                        )}
+                      </div>
+                      <p className="text-gray-600 text-sm mb-2">{util.description}</p>
+                      {util.fileSize && (
+                        <p className="text-gray-500 text-xs">Rozmiar: {util.fileSize}</p>
+                      )}
                     </div>
-                    <a
-                      href={util.externalUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-2 px-4 py-2.5 border border-gray-300 text-gray-700 rounded-lg font-medium hover:bg-gray-50 transition-colors text-sm whitespace-nowrap"
-                    >
-                      Pobierz
-                      <ExternalLink className="w-3.5 h-3.5" />
-                    </a>
+                    <div className="flex flex-col gap-2 sm:min-w-[140px]">
+                      {util.downloadUrl && (
+                        <a
+                          href={util.downloadUrl}
+                          className="flex items-center justify-center gap-2 px-4 py-2.5 bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-800 transition-colors text-sm"
+                        >
+                          <Download className="w-4 h-4" />
+                          Pobierz
+                        </a>
+                      )}
+                      <a
+                        href={util.externalUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-center gap-2 px-4 py-2.5 border border-gray-300 text-gray-700 rounded-lg font-medium hover:bg-gray-50 transition-colors text-sm"
+                      >
+                        {util.downloadUrl ? 'Strona Zebra' : 'Pobierz'}
+                        <ExternalLink className="w-3.5 h-3.5" />
+                      </a>
+                    </div>
                   </div>
                 </div>
               ))}
