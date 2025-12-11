@@ -64,10 +64,10 @@ const drivers = [
   {
     id: 'zdesigner-v5',
     name: 'ZDesigner Driver v5 (Legacy)',
-    version: '5.x',
+    version: '5.1.17.7415',
     releaseDate: 'Wciąż wspierany',
     description: 'Sterownik dla starszych drukarek używających EPL i CPCL (LP2844, TLP2844, GK420d).',
-    downloadUrl: null,
+    downloadUrl: 'https://fivrcnshzylqdquuhkeu.supabase.co/storage/v1/object/public/downloads/zd51177415-certified.exe',
     externalUrl: 'https://www.zebra.com/us/en/support-downloads/printers/desktop/lp2844.html',
     fileSize: '~30 MB',
     supportedOS: ['Windows 7/8/10/11'],
