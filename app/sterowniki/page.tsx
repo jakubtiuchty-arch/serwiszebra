@@ -54,7 +54,7 @@ const drivers = [
     version: '10.6.26.28275',
     releaseDate: '23 października 2025',
     description: 'Główny sterownik do drukarek Zebra z językiem ZPL (Link-OS). Obsługuje ponad 120 modeli.',
-    downloadUrl: '/downloads/zdesigner-v10.exe', // Do zmiany po wrzuceniu pliku
+    downloadUrl: 'https://fivrcnshzylqdquuhkeu.supabase.co/storage/v1/object/public/downloads/zddriver-v1062628275-certified.zip',
     externalUrl: 'https://www.zebra.com/us/en/support-downloads/printers/desktop/zd420.html',
     fileSize: '~45 MB',
     supportedOS: ['Windows 10', 'Windows 11', 'Windows Server 2019/2022/2025'],
