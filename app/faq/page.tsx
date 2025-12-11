@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import Header from '@/components/Header'
 import { 
   HelpCircle, 
   ChevronDown, 
@@ -228,25 +229,7 @@ export default function FAQPage() {
       />
 
       <div className="min-h-screen bg-white font-sans antialiased">
-        {/* HEADER */}
-        <div className="bg-white border-b border-gray-200 shadow-sm">
-          <nav className="px-3 sm:px-4">
-            <div className="max-w-7xl mx-auto">
-              <div className="flex items-center h-14 sm:h-16">
-                <Link href="/" className="flex items-center gap-2">
-                  <div className="w-[90px] sm:w-[130px] h-[38px] sm:h-[50px] relative">
-                    <Image src="/takma_logo_1.png" alt="TAKMA Logo" fill className="object-contain" />
-                  </div>
-                </Link>
-                <div className="ml-auto flex items-center gap-3">
-                  <Link href="/" className="text-sm text-gray-600 hover:text-gray-900">Strona główna</Link>
-                  <Link href="/blog" className="text-sm text-gray-600 hover:text-gray-900">Blog</Link>
-                  <Link href="/#formularz" className="text-sm text-blue-600 hover:text-blue-800 font-medium">Zgłoś naprawę</Link>
-                </div>
-              </div>
-            </div>
-          </nav>
-        </div>
+        <Header currentPage="other" />
 
         {/* HERO */}
         <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
@@ -365,31 +348,31 @@ export default function FAQPage() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-12 px-3 sm:px-4 bg-gradient-to-br from-gray-50 to-gray-100">
+        <section className="py-12 px-3 sm:px-4 bg-gray-50 border-t border-gray-200">
           <div className="max-w-4xl mx-auto">
-            <div className="bg-white rounded-2xl shadow-xl p-8 text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                <MessageSquare className="w-8 h-8 text-white" />
+            <div className="bg-white rounded-xl border border-gray-200 p-8 text-center">
+              <div className="w-14 h-14 bg-gray-900 rounded-xl flex items-center justify-center mx-auto mb-5">
+                <MessageSquare className="w-7 h-7 text-white" />
               </div>
-              <h2 className="text-2xl font-semibold text-gray-900 mb-3">
+              <h2 className="text-xl font-semibold text-gray-900 mb-2">
                 Nie znalazłeś odpowiedzi?
               </h2>
-              <p className="text-gray-600 mb-6 max-w-lg mx-auto">
+              <p className="text-gray-600 mb-6 max-w-lg mx-auto text-sm">
                 Skorzystaj z naszego ChatAI na stronie głównej - pomoże zdiagnozować problem i odpowie na Twoje pytania 24/7.
               </p>
-              <div className="flex flex-wrap justify-center gap-4">
+              <div className="flex flex-wrap justify-center gap-3">
                 <Link
                   href="/"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-xl hover:from-blue-700 hover:to-indigo-700 transition-all shadow-lg"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-900 text-white font-medium rounded-lg hover:bg-gray-800 transition-colors text-sm"
                 >
-                  <MessageSquare className="w-5 h-5" />
+                  <MessageSquare className="w-4 h-4" />
                   Zapytaj ChatAI
                 </Link>
                 <a
                   href="tel:+48601619898"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-white text-gray-700 font-semibold rounded-xl border border-gray-200 hover:bg-gray-50 transition-all"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-white text-gray-700 font-medium rounded-lg border border-gray-300 hover:bg-gray-50 transition-colors text-sm"
                 >
-                  <Phone className="w-5 h-5" />
+                  <Phone className="w-4 h-4" />
                   +48 601 619 898
                 </a>
               </div>
@@ -398,28 +381,28 @@ export default function FAQPage() {
         </section>
 
         {/* Quick Stats */}
-        <section className="py-12 px-3 sm:px-4 bg-white">
-          <div className="max-w-5xl mx-auto">
+        <section className="py-10 px-3 sm:px-4 bg-white border-t border-gray-100">
+          <div className="max-w-4xl mx-auto">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-5 text-center">
-                <Clock className="w-8 h-8 text-blue-600 mx-auto mb-2" />
-                <div className="text-2xl font-bold text-gray-900">2-5 dni</div>
-                <div className="text-sm text-gray-600">Czas naprawy</div>
+              <div className="bg-gray-50 rounded-lg p-4 text-center">
+                <Clock className="w-6 h-6 text-gray-500 mx-auto mb-2" />
+                <div className="text-xl font-semibold text-gray-900">2-5 dni</div>
+                <div className="text-xs text-gray-500">Czas naprawy</div>
               </div>
-              <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-5 text-center">
-                <Shield className="w-8 h-8 text-green-600 mx-auto mb-2" />
-                <div className="text-2xl font-bold text-gray-900">12 mies.</div>
-                <div className="text-sm text-gray-600">Gwarancja</div>
+              <div className="bg-gray-50 rounded-lg p-4 text-center">
+                <Shield className="w-6 h-6 text-gray-500 mx-auto mb-2" />
+                <div className="text-xl font-semibold text-gray-900">12 mies.</div>
+                <div className="text-xs text-gray-500">Gwarancja</div>
               </div>
-              <div className="bg-gradient-to-br from-purple-50 to-violet-50 rounded-xl p-5 text-center">
-                <Truck className="w-8 h-8 text-purple-600 mx-auto mb-2" />
-                <div className="text-2xl font-bold text-gray-900">24h</div>
-                <div className="text-sm text-gray-600">Odbiór kurierem</div>
+              <div className="bg-gray-50 rounded-lg p-4 text-center">
+                <Truck className="w-6 h-6 text-gray-500 mx-auto mb-2" />
+                <div className="text-xl font-semibold text-gray-900">24h</div>
+                <div className="text-xs text-gray-500">Odbiór kurierem</div>
               </div>
-              <div className="bg-gradient-to-br from-orange-50 to-amber-50 rounded-xl p-5 text-center">
-                <Wrench className="w-8 h-8 text-orange-600 mx-auto mb-2" />
-                <div className="text-2xl font-bold text-gray-900">25 lat</div>
-                <div className="text-sm text-gray-600">Doświadczenia</div>
+              <div className="bg-gray-50 rounded-lg p-4 text-center">
+                <Wrench className="w-6 h-6 text-gray-500 mx-auto mb-2" />
+                <div className="text-xl font-semibold text-gray-900">25 lat</div>
+                <div className="text-xs text-gray-500">Doświadczenia</div>
               </div>
             </div>
           </div>
