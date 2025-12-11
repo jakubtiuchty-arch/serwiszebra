@@ -1229,6 +1229,7 @@ export default function HomePage() {
                 <ul className="space-y-2 sm:space-y-3">
                   {[
                     { href: '/blog', label: 'Blog' },
+                    { href: '/sterowniki', label: 'Sterowniki' },
                     { href: '/faq', label: 'FAQ' },
                     { href: '/o-nas', label: 'O nas' },
                     { href: '/kontakt', label: 'Kontakt' },

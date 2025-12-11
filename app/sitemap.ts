@@ -79,6 +79,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.7,
     },
+    {
+      url: `${baseUrl}/sterowniki`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
   ]
   
   // 2. Artykuły blogowe (46+)
