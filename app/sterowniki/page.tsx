@@ -76,13 +76,16 @@ const drivers = [
   },
 ]
 
-// Firmware (placeholder - do rozbudowy)
+// Firmware
 const firmware = [
   {
-    id: 'firmware-info',
-    name: 'Firmware drukarek Zebra',
-    description: 'Aktualizacje firmware pobieraj bezpośrednio ze strony Zebra dla konkretnego modelu drukarki.',
-    externalUrl: 'https://www.zebra.com/us/en/support-downloads.html',
+    id: 'linkos-74',
+    name: 'Link-OS 7.4 (V93.21.39Z)',
+    version: '93.21.39Z',
+    description: 'Najnowszy firmware dla drukarek Zebra z Link-OS. Zawiera poprawki błędów i ulepszenia wydajności.',
+    downloadUrl: 'https://fivrcnshzylqdquuhkeu.supabase.co/storage/v1/object/public/downloads/V93.21.39Z.zip',
+    fileSize: '~40 MB',
+    compatiblePrinters: ['ZD420', 'ZD421', 'ZD620', 'ZD621', 'ZT410', 'ZT411', 'ZT610', 'ZT620', 'ZQ520', 'ZQ630'],
   },
 ]
 
@@ -337,38 +340,65 @@ export default function DriversPage() {
           {/* FIRMWARE */}
           {activeCategory === 'firmware' && (
             <div className="space-y-6">
-              <div className="bg-blue-50 border border-blue-100 rounded-xl p-5 sm:p-6">
-                <div className="flex gap-3">
-                  <Info className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" />
-                  <div>
-                    <h3 className="font-semibold text-blue-900 mb-1">Firmware drukarek</h3>
-                    <p className="text-blue-700 text-sm mb-3">
-                      Aktualizacje firmware są specyficzne dla każdego modelu drukarki. 
-                      Pobierz najnowszą wersję bezpośrednio ze strony wsparcia Zebra.
-                    </p>
+              {/* Dostępne firmware */}
+              {firmware.map((fw) => (
+                <div key={fw.id} className="bg-white border border-gray-200 rounded-xl p-5 sm:p-6">
+                  <div className="flex flex-col sm:flex-row sm:items-start gap-4">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-2">
+                        <h2 className="text-lg sm:text-xl font-semibold text-gray-900">{fw.name}</h2>
+                        <span className="px-2 py-0.5 bg-green-100 text-green-700 text-xs rounded-full">
+                          v{fw.version}
+                        </span>
+                      </div>
+                      <p className="text-gray-600 text-sm mb-3">{fw.description}</p>
+                      
+                      <div className="text-sm mb-2">
+                        <span className="text-gray-500">Kompatybilne drukarki: </span>
+                        <span className="text-gray-700">{fw.compatiblePrinters.join(', ')}</span>
+                      </div>
+                      <div className="text-sm">
+                        <span className="text-gray-500">Rozmiar: </span>
+                        <span className="text-gray-700">{fw.fileSize}</span>
+                      </div>
+                    </div>
+                    
                     <a
-                      href="https://www.zebra.com/us/en/support-downloads.html"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 font-medium text-sm"
+                      href={fw.downloadUrl}
+                      className="flex items-center justify-center gap-2 px-4 py-2.5 bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-800 transition-colors text-sm sm:min-w-[140px]"
                     >
-                      Przejdź do strony Zebra
-                      <ExternalLink className="w-4 h-4" />
+                      <Download className="w-4 h-4" />
+                      Pobierz
                     </a>
+                  </div>
+                </div>
+              ))}
+
+              {/* Info box */}
+              <div className="bg-amber-50 border border-amber-100 rounded-xl p-5 sm:p-6">
+                <div className="flex gap-3">
+                  <AlertTriangle className="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <h3 className="font-semibold text-amber-900 mb-1">Ważne przed aktualizacją</h3>
+                    <p className="text-amber-700 text-sm">
+                      Sprawdź kompatybilność firmware z modelem drukarki. Nieprawidłowy firmware może uszkodzić urządzenie. 
+                      W razie wątpliwości skontaktuj się z naszym serwisem.
+                    </p>
                   </div>
                 </div>
               </div>
 
+              {/* Instrukcja */}
               <div className="bg-white border border-gray-200 rounded-xl p-5 sm:p-6">
                 <h3 className="font-semibold text-gray-900 mb-3">Jak zaktualizować firmware?</h3>
                 <ol className="space-y-2 text-sm text-gray-600">
                   <li className="flex gap-2">
                     <span className="font-medium text-gray-900">1.</span>
-                    Znajdź model drukarki na stronie Zebra Support
+                    Pobierz plik firmware (.zpl) z tej strony
                   </li>
                   <li className="flex gap-2">
                     <span className="font-medium text-gray-900">2.</span>
-                    Pobierz plik firmware (.zpl lub .bin)
+                    Rozpakuj archiwum ZIP
                   </li>
                   <li className="flex gap-2">
                     <span className="font-medium text-gray-900">3.</span>
@@ -379,6 +409,28 @@ export default function DriversPage() {
                     Poczekaj na restart drukarki (nie wyłączaj podczas aktualizacji!)
                   </li>
                 </ol>
+              </div>
+
+              {/* Link do Zebra */}
+              <div className="bg-gray-50 border border-gray-200 rounded-xl p-5 sm:p-6">
+                <div className="flex gap-3">
+                  <Info className="w-5 h-5 text-gray-500 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <h3 className="font-semibold text-gray-900 mb-1">Inne wersje firmware</h3>
+                    <p className="text-gray-600 text-sm mb-3">
+                      Szukasz firmware dla innego modelu? Sprawdź oficjalną stronę Zebra.
+                    </p>
+                    <a
+                      href="https://www.zebra.com/us/en/support-downloads.html"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-gray-700 hover:text-gray-900 font-medium text-sm"
+                    >
+                      Strona Zebra Support
+                      <ExternalLink className="w-4 h-4" />
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
           )}
