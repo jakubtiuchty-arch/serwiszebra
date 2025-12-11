@@ -318,30 +318,14 @@ export default function AboutPage() {
             to standard - a my wciąż jesteśmy tu, gdzie byliśmy od początku: przy naszych klientach.
           </p>
 
-          {/* Loga certyfikatów */}
-          <div className="flex items-center justify-center gap-8 sm:gap-12 animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
-            <div className="relative w-32 sm:w-44 h-16 sm:h-20 hover:scale-110 transition-transform duration-300">
+          {/* Logo TAKMA - wyśrodkowane i powiększone */}
+          <div className="flex items-center justify-center animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
+            <div className="relative w-48 sm:w-64 md:w-80 h-20 sm:h-24 md:h-28 hover:scale-105 transition-transform duration-300">
               <Image
                 src="/takma_logo_1.png"
                 alt="TAKMA Logo"
                 fill
                 className="object-contain brightness-0 invert"
-              />
-            </div>
-            <div className="relative w-28 sm:w-36 h-20 sm:h-28 hover:scale-110 transition-transform duration-300">
-              <Image
-                src="/premier-partner-1.png"
-                alt="Zebra Premier Partner"
-                fill
-                className="object-contain"
-              />
-            </div>
-            <div className="relative w-28 sm:w-36 h-20 sm:h-28 hover:scale-110 transition-transform duration-300">
-              <Image
-                src="/repair_specialist.png"
-                alt="Zebra Repair Specialist"
-                fill
-                className="object-contain"
               />
             </div>
           </div>
