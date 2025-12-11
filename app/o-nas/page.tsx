@@ -334,7 +334,7 @@ export default function AboutPage() {
         <div className="max-w-4xl mx-auto px-3 sm:px-6 lg:px-8">
           <div className="text-center mb-6 sm:mb-8">
             <h2 className="text-xl sm:text-2xl font-semibold text-gray-900 mb-2">
-              Nasza droga do autoryzacji
+              Nasza podróż z marką Zebra
             </h2>
             <p className="text-xs sm:text-sm text-gray-600 max-w-xl mx-auto">
               Kliknij w ikonę, aby zobaczyć szczegóły każdego etapu
