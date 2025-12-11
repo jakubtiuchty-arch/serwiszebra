@@ -1092,19 +1092,19 @@ export default function HomePage() {
         <RepairForm />
       </div>
 
-      {/* SERWISUJEMY DLA - ZAUFALI NAM */}
+      {/* SERWISUJEMY DLA */}
       <section className="py-8 sm:py-10 px-3 sm:px-4 lg:px-6 bg-white border-y border-gray-100">
-        <div className="max-w-5xl mx-auto">
-          <p className="text-center text-xs sm:text-sm font-medium text-gray-400 uppercase tracking-widest mb-6 sm:mb-8">
-            Zaufali nam
+        <div className="max-w-6xl mx-auto">
+          <p className="text-center text-xs sm:text-sm font-medium text-gray-400 uppercase tracking-widest mb-8 sm:mb-10">
+            Serwisujemy dla
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-8 sm:gap-12 md:gap-16 lg:gap-20">
+          <div className="flex flex-wrap items-center justify-center gap-12 sm:gap-16 md:gap-20 lg:gap-28">
             <Image 
               src="/logo_lasy.png" 
               alt="Lasy Państwowe" 
-              width={100} 
-              height={50} 
-              className="h-8 sm:h-10 w-auto object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300" 
+              width={140} 
+              height={70} 
+              className="h-12 sm:h-14 w-auto object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300" 
             />
             <Image 
               src="/logo_poczta.png" 
