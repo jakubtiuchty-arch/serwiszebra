@@ -298,6 +298,61 @@ export default function HomePage() {
       </section>
     </div> {/* Close gradient wrapper */}
 
+      {/* SERWISUJEMY DLA - ZAUFALI NAM */}
+      <section className="py-8 sm:py-10 px-3 sm:px-4 lg:px-6 bg-white border-b border-gray-100">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-6">
+            <p className="text-xs sm:text-sm font-medium text-gray-500 uppercase tracking-wider">
+              Zaufali nam
+            </p>
+          </div>
+          <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-10 md:gap-14">
+            {/* Lasy Państwowe */}
+            <div className="flex flex-col items-center gap-1 opacity-70 hover:opacity-100 transition-opacity">
+              <div className="w-12 h-12 sm:w-14 sm:h-14 bg-green-50 rounded-xl flex items-center justify-center">
+                <span className="text-xl sm:text-2xl">🌲</span>
+              </div>
+              <span className="text-[10px] sm:text-xs text-gray-600 font-medium">Lasy Państwowe</span>
+            </div>
+            {/* Poczta Polska */}
+            <div className="flex flex-col items-center gap-1 opacity-70 hover:opacity-100 transition-opacity">
+              <div className="w-12 h-12 sm:w-14 sm:h-14 bg-red-50 rounded-xl flex items-center justify-center">
+                <span className="text-xl sm:text-2xl">📮</span>
+              </div>
+              <span className="text-[10px] sm:text-xs text-gray-600 font-medium">Poczta Polska</span>
+            </div>
+            {/* Orlen */}
+            <div className="flex flex-col items-center gap-1 opacity-70 hover:opacity-100 transition-opacity">
+              <div className="w-12 h-12 sm:w-14 sm:h-14 bg-red-50 rounded-xl flex items-center justify-center">
+                <span className="text-xl sm:text-2xl">⛽</span>
+              </div>
+              <span className="text-[10px] sm:text-xs text-gray-600 font-medium">Orlen</span>
+            </div>
+            {/* Żabka */}
+            <div className="flex flex-col items-center gap-1 opacity-70 hover:opacity-100 transition-opacity">
+              <div className="w-12 h-12 sm:w-14 sm:h-14 bg-green-50 rounded-xl flex items-center justify-center">
+                <span className="text-xl sm:text-2xl">🐸</span>
+              </div>
+              <span className="text-[10px] sm:text-xs text-gray-600 font-medium">Żabka</span>
+            </div>
+            {/* SFD */}
+            <div className="flex flex-col items-center gap-1 opacity-70 hover:opacity-100 transition-opacity">
+              <div className="w-12 h-12 sm:w-14 sm:h-14 bg-orange-50 rounded-xl flex items-center justify-center">
+                <span className="text-xl sm:text-2xl">💪</span>
+              </div>
+              <span className="text-[10px] sm:text-xs text-gray-600 font-medium">SFD</span>
+            </div>
+            {/* InPost */}
+            <div className="flex flex-col items-center gap-1 opacity-70 hover:opacity-100 transition-opacity">
+              <div className="w-12 h-12 sm:w-14 sm:h-14 bg-yellow-50 rounded-xl flex items-center justify-center">
+                <span className="text-xl sm:text-2xl">📦</span>
+              </div>
+              <span className="text-[10px] sm:text-xs text-gray-600 font-medium">InPost</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* O NAS - CO NAPRAWIAMY */}
       <section id="co-naprawiamy" className="py-14 px-3 sm:px-4 lg:px-6 bg-white">
         <div className="max-w-7xl mx-auto">
