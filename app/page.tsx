@@ -1093,47 +1093,47 @@ export default function HomePage() {
       </div>
 
       {/* SERWISUJEMY DLA - ZAUFALI NAM */}
-      <section className="py-10 sm:py-12 px-3 sm:px-4 lg:px-6 bg-gradient-to-br from-gray-50 to-gray-100">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-8">
-            <p className="text-xs sm:text-sm font-medium text-gray-500 uppercase tracking-wider mb-2">
-              Zaufali nam
-            </p>
-            <h3 className="text-xl sm:text-2xl font-semibold text-gray-900">
-              Serwisujemy dla największych firm w Polsce
-            </h3>
-          </div>
-          <div className="flex flex-wrap items-center justify-center gap-8 sm:gap-12 md:gap-16">
-            {/* Lasy Państwowe */}
-            <div className="flex flex-col items-center gap-2 opacity-80 hover:opacity-100 transition-opacity">
-              <div className="w-20 h-16 sm:w-24 sm:h-20 bg-white rounded-2xl shadow-lg flex items-center justify-center border border-gray-100 p-2">
-                <Image src="/logo_lasy.png" alt="Lasy Państwowe" width={80} height={60} className="object-contain" />
-              </div>
-            </div>
-            {/* Poczta Polska */}
-            <div className="flex flex-col items-center gap-2 opacity-80 hover:opacity-100 transition-opacity">
-              <div className="w-20 h-16 sm:w-24 sm:h-20 bg-white rounded-2xl shadow-lg flex items-center justify-center border border-gray-100 p-2">
-                <Image src="/logo_poczta.png" alt="Poczta Polska" width={80} height={60} className="object-contain" />
-              </div>
-            </div>
-            {/* Orlen */}
-            <div className="flex flex-col items-center gap-2 opacity-80 hover:opacity-100 transition-opacity">
-              <div className="w-20 h-16 sm:w-24 sm:h-20 bg-white rounded-2xl shadow-lg flex items-center justify-center border border-gray-100 p-2">
-                <Image src="/logo_orlen.png" alt="Orlen" width={80} height={60} className="object-contain" />
-              </div>
-            </div>
-            {/* Żabka */}
-            <div className="flex flex-col items-center gap-2 opacity-80 hover:opacity-100 transition-opacity">
-              <div className="w-20 h-16 sm:w-24 sm:h-20 bg-white rounded-2xl shadow-lg flex items-center justify-center border border-gray-100 p-2">
-                <Image src="/logo_żabka.png" alt="Żabka" width={80} height={60} className="object-contain" />
-              </div>
-            </div>
-            {/* SFD */}
-            <div className="flex flex-col items-center gap-2 opacity-80 hover:opacity-100 transition-opacity">
-              <div className="w-20 h-16 sm:w-24 sm:h-20 bg-white rounded-2xl shadow-lg flex items-center justify-center border border-gray-100 p-2">
-                <Image src="/logo_sfd.png" alt="SFD" width={80} height={60} className="object-contain" />
-              </div>
-            </div>
+      <section className="py-8 sm:py-10 px-3 sm:px-4 lg:px-6 bg-white border-y border-gray-100">
+        <div className="max-w-5xl mx-auto">
+          <p className="text-center text-xs sm:text-sm font-medium text-gray-400 uppercase tracking-widest mb-6 sm:mb-8">
+            Zaufali nam
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-8 sm:gap-12 md:gap-16 lg:gap-20">
+            <Image 
+              src="/logo_lasy.png" 
+              alt="Lasy Państwowe" 
+              width={100} 
+              height={50} 
+              className="h-8 sm:h-10 w-auto object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300" 
+            />
+            <Image 
+              src="/logo_poczta.png" 
+              alt="Poczta Polska" 
+              width={100} 
+              height={50} 
+              className="h-8 sm:h-10 w-auto object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300" 
+            />
+            <Image 
+              src="/logo_orlen.png" 
+              alt="Orlen" 
+              width={100} 
+              height={50} 
+              className="h-8 sm:h-10 w-auto object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300" 
+            />
+            <Image 
+              src="/logo_żabka.png" 
+              alt="Żabka" 
+              width={100} 
+              height={50} 
+              className="h-8 sm:h-10 w-auto object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300" 
+            />
+            <Image 
+              src="/logo_sfd.png" 
+              alt="SFD" 
+              width={100} 
+              height={50} 
+              className="h-8 sm:h-10 w-auto object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300" 
+            />
           </div>
         </div>
       </section>
