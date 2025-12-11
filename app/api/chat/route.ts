@@ -212,6 +212,14 @@ function detectScannerConfigQuery(query: string): ScannerConfigBarcode[] {
   return matchedBarcodes.filter(b => b !== undefined)
 }
 
+// === Linkowanie do bloga: TYLKO na koniec rozmowy i tylko /blog ===
+function userSaysResolved(message: string): boolean {
+  const m = (message || '').toLowerCase()
+  return !!m.match(
+    /(działa|dziala|pomogło|pomoglo|zadziałało|zadzialalo|udało się|udalo sie|jest ok|ok|super|naprawione|rozwiązan[ey]|rozwiazan[ey]|już działa|juz dziala|temat zamknięty|temat zamkniety)/
+  )
+}
+
 // Helper function to detect printer model from query
 function detectPrinterModel(query: string): string[] {
   const models: string[] = []
@@ -492,7 +500,9 @@ Jeśli klient nie jest w stanie naprawić sam - wtedy dopiero kierujesz do serwi
 **KIEDY LINKOWAĆ DO BLOGA (ŚCIŚLE!):**
 - NIGDY w pierwszej odpowiedzi
 - NIGDY w trakcie diagnostyki
-- TYLKO gdy: klient mówi że problem rozwiązany LUB proponujesz wysłanie do serwisu (tag [SERIOUS_ISSUE])
+- TYLKO gdy: klient mówi że problem rozwiązany
+- Wtedy linkuj WYŁĄCZNIE do: [Więcej poradników](/blog)
+- Jeśli problem wymaga serwisu ([SERIOUS_ISSUE]) → NIE podawaj linków do bloga
 - Format: na samym końcu odpowiedzi, jako PS
 
 **NIE RÓB TAK:**
@@ -692,6 +702,11 @@ Drukarki - blady wydruk:
 → Brudna głowica, zły ribbon lub zużyty wałek
 → Czyszczenie: 150-250 zł, wymiana wałka: 150-350 zł
 
+Drukarki desktop (ZD420/ZD421) - brak reakcji na zasilanie mimo sprawnego zasilacza:
+→ Najczęściej: uszkodzenie płyty głównej / sekcji zasilania lub gniazda DC
+→ Orientacyjnie: 800-900 zł (często płyta/sekcja zasilania) — potwierdza diagnostyka
+→ Zdalnie nie do naprawienia
+
 STYL KOMUNIKACJI:
 - Profesjonalny, ale przyjazny
 - Konkretny (zadawaj celne pytania)
@@ -823,7 +838,7 @@ PAMIĘTAJ:
 - Jeśli jest jeszcze coś do sprawdzenia → BEZ TAGU, zakończ pytaniem "Pomogło?"
 - **Link do bloga TYLKO gdy:**
   1. **Problem ROZWIĄZANY** → ZAWSZE: [Więcej poradników](/blog) (ogólny link, NIE konkretny artykuł!)
-  2. **Kierujesz do serwisu [SERIOUS_ISSUE]** → możesz dać konkretny artykuł JEŚLI jest na liście
+  2. **Kierujesz do serwisu [SERIOUS_ISSUE]** → NIE podawaj linków do bloga
 - **WAŻNE: Link musi być KLIKALNY** w formacie markdown: [Tytuł](/blog) lub [Tytuł](/blog/slug)
 - **NIGDY nie linkuj do bloga** w pierwszej odpowiedzi ani w trakcie diagnostyki!
 - **🛑 NIGDY NIE WYMYŚLAJ LINKÓW!**
@@ -1009,17 +1024,9 @@ export async function POST(req: NextRequest) {
     // === KROK 3: Zbuduj kontekst dla AI ===
     let enhancedSystemPrompt = SYSTEM_PROMPT
 
-    // Dodaj kontekst z bloga (jako wiedza wewnętrzna, link tylko na końcu!)
+    // Dodaj kontekst z bloga (jako wiedza wewnętrzna, bez linków w trakcie!)
     if (blogContext) {
       enhancedSystemPrompt += `\n\n=== 🔥 OBOWIĄZKOWA WIEDZA Z BLOGA - UŻYJ JEJ! ===\n${blogContext}\n\n🚨 KRYTYCZNE:\n- MUSISZ użyć tej wiedzy do odpowiedzi!\n- NIE odsyłaj klienta na zebra.com - MY mamy tę wiedzę!\n- Podaj KONKRETNE instrukcje z artykułu powyżej!\n- Link do artykułu podawaj dopiero na końcu rozmowy (gdy [SERIOUS_ISSUE] lub problem rozwiązany)`
-      
-      // Dodaj linki do blogów jako "citations"
-      if (blogLinks.length > 0) {
-        enhancedSystemPrompt += `\n\n📚 DOSTĘPNE ARTYKUŁY (używaj TYLKO tych linków!):\n${blogLinks.map(b => `- [${b.title}](/blog/${b.slug})`).join('\n')}\n\n🛑 ABSOLUTNY ZAKAZ:\n- NIGDY nie wymyślaj własnych linków do bloga!\n- Używaj TYLKO linków z listy powyżej!\n- Jeśli artykuł NIE PASUJE do rozmowy → [Więcej poradników](/blog)\n- Wymyślone linki typu "/blog/skaner-nie-dziala..." są ZAKAZANE jeśli nie ma ich na liście!`
-      } else {
-        // Jeśli nie ma pasującego artykułu, dodaj link do ogólnego bloga
-        enhancedSystemPrompt += `\n\n⚠️ Brak pasującego artykułu na blogu. Jeśli chcesz podać link, użyj TYLKO: [Więcej poradników](/blog)\n🛑 NIGDY nie wymyślaj własnych linków! Nie istnieją!`
-      }
     }
 
     // Dodaj kontekst z RAG (techniczne szczegóły z manuali)
@@ -1115,17 +1122,20 @@ ZRÓB DOKŁADNIE TAK - WKLEJ [BARCODE:...] W ODPOWIEDŹ!`
             }
           }
 
-          // Na końcu dodaj citations, blog links i scanner barcodes jako JSON (jeśli są)
+          // Na końcu dodaj citations, (opcjonalnie) /blog i scanner barcodes jako JSON (jeśli są)
           // WAŻNE: Jeśli blog znalazł odpowiedź, NIE pokazuj citations z RAG (często nieodpowiednie)
           const finalCitations = blogLinks.length > 0 ? [] : citations
-          const hasData = finalCitations.length > 0 || blogLinks.length > 0 || scannerBarcodes.length > 0
+          
+          // Link do bloga pokazujemy TYLKO gdy klient potwierdził rozwiązanie, i tylko /blog.
+          // Jeśli odpowiedź kończy się serwisem ([SERIOUS_ISSUE]) → NIGDY nie pokazuj linków do bloga.
+          const allowUiBlogLink = userSaysResolved(lastUserMessage) && !fullAiResponse.includes('[SERIOUS_ISSUE]')
+          const uiBlogLinks = allowUiBlogLink ? [{ title: 'Więcej poradników', url: '/blog' }] : []
+
+          const hasData = finalCitations.length > 0 || uiBlogLinks.length > 0 || scannerBarcodes.length > 0
           if (hasData) {
             const dataJson = JSON.stringify({ 
               citations: finalCitations,
-              blogLinks: blogLinks.map(b => ({
-                title: b.title,
-                url: `/blog/${b.slug}`
-              })),
+              blogLinks: uiBlogLinks,
               scannerBarcodes: scannerBarcodes.map(b => ({
                 id: b.id,
                 name: b.name,
