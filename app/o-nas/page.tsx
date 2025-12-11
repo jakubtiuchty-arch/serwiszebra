@@ -432,53 +432,140 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Autoryzacja 2023 */}
-      <section className="py-16 sm:py-24 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-white rounded-3xl shadow-2xl overflow-hidden hover:shadow-3xl transition-shadow duration-500">
-            <div className="grid md:grid-cols-2">
-              <div className="p-8 sm:p-12 flex flex-col justify-center">
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-green-100 text-green-700 rounded-full text-sm font-medium mb-6 w-fit">
-                  <CheckCircle2 className="w-4 h-4" />
-                  Rok 2023
+      {/* AUTORYZACJA - WOW SECTION */}
+      <section className="relative py-20 sm:py-32 overflow-hidden">
+        {/* Animated gradient background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900"></div>
+        
+        {/* Animated orbs */}
+        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-blue-500/20 rounded-full blur-[120px] animate-pulse"></div>
+        <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-indigo-500/20 rounded-full blur-[150px] animate-pulse" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-purple-500/10 rounded-full blur-[200px] animate-pulse" style={{ animationDelay: '2s' }}></div>
+        
+        {/* Grid pattern */}
+        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")' }}></div>
+        
+        {/* Vertical lines */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-0 left-[10%] w-px h-full bg-gradient-to-b from-transparent via-white to-transparent"></div>
+          <div className="absolute top-0 left-[30%] w-px h-full bg-gradient-to-b from-white via-transparent to-white"></div>
+          <div className="absolute top-0 right-[30%] w-px h-full bg-gradient-to-b from-transparent via-white to-transparent"></div>
+          <div className="absolute top-0 right-[10%] w-px h-full bg-gradient-to-b from-white via-transparent to-white"></div>
+        </div>
+
+        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Top badge */}
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-amber-500/20 to-yellow-500/20 backdrop-blur-sm rounded-full border border-amber-500/30 mb-8">
+              <div className="w-2 h-2 bg-amber-400 rounded-full animate-pulse"></div>
+              <span className="text-sm font-semibold text-amber-300 uppercase tracking-wider">Najwyższe statusy w Polsce</span>
+              <div className="w-2 h-2 bg-amber-400 rounded-full animate-pulse"></div>
+            </div>
+            
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+              Oficjalnie<br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400">
+                autoryzowani przez Zebra
+              </span>
+            </h2>
+            
+            <p className="text-lg sm:text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
+              Posiadamy <strong className="text-white">oba najwyższe statusy</strong> przyznawane przez Zebra Technologies 
+              w Polsce – jako partner handlowy i jako centrum serwisowe.
+            </p>
+          </div>
+
+          {/* Logos showcase */}
+          <div className="grid md:grid-cols-2 gap-6 sm:gap-8 mb-16">
+            {/* Premier Partner */}
+            <div className="group relative">
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-3xl blur-xl opacity-50 group-hover:opacity-75 transition-opacity duration-500"></div>
+              <div className="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-3xl border border-white/20 p-8 sm:p-10 hover:border-white/40 transition-all duration-500 hover:-translate-y-2">
+                <div className="flex flex-col items-center text-center">
+                  <div className="relative w-36 h-36 sm:w-44 sm:h-44 mb-6 group-hover:scale-110 transition-transform duration-500">
+                    <Image
+                      src="/premier-partner-1.png"
+                      alt="Zebra Premier Partner"
+                      fill
+                      className="object-contain drop-shadow-2xl"
+                    />
+                  </div>
+                  <h3 className="text-2xl sm:text-3xl font-bold text-white mb-3">Premier Partner</h3>
+                  <p className="text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
+                    Najwyższy poziom partnerstwa handlowego Zebra w Polsce. 
+                    Bezpośredni dostęp do pełnej oferty produktowej i wsparcia technicznego.
+                  </p>
+                  <div className="flex flex-wrap justify-center gap-2">
+                    {['Pełna oferta', 'Najlepsze ceny', 'Priorytetowe dostawy'].map((tag, i) => (
+                      <span key={i} className="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-xs font-medium">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-                <h2 className="text-2xl md:text-3xl font-semibold text-gray-900 mb-3">
-                  Oficjalnie autoryzowani
-                </h2>
-                <p className="text-sm text-gray-600 mb-6 leading-relaxed">
-                  Po 24 latach partnerstwa z markami, które ostatecznie połączyły się w Zebra Technologies, 
-                  uzyskaliśmy to, do czego zmierzaliśmy od początku - status <strong>Authorized Service Center</strong>.
-                </p>
-                <ul className="space-y-3">
-                  {[
-                    'Dostęp do oryginalnych części zamiennych Zebra',
-                    'Narzędzia diagnostyczne na poziomie fabrycznym',
-                    'Szkolenia certyfikowane przez producenta',
-                    'Naprawy z pełną gwarancją producenta',
-                    'Bezpośrednia linia wsparcia technicznego Zebra'
-                  ].map((item, idx) => (
-                    <li key={idx} className="flex items-start gap-3 group">
-                      <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform" />
-                      <span className="text-gray-700 group-hover:text-gray-900 transition-colors">{item}</span>
-                    </li>
-                  ))}
-                </ul>
               </div>
-              <div className="bg-gradient-to-br from-slate-800 to-slate-900 p-8 sm:p-12 flex items-center justify-center">
-                <div className="text-center">
-                  <div className="relative w-32 h-32 sm:w-40 sm:h-40 mx-auto mb-6 hover:scale-110 transition-transform duration-300">
+            </div>
+
+            {/* Authorized Service Center */}
+            <div className="group relative">
+              <div className="absolute inset-0 bg-gradient-to-r from-green-600 to-emerald-600 rounded-3xl blur-xl opacity-50 group-hover:opacity-75 transition-opacity duration-500"></div>
+              <div className="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-3xl border border-white/20 p-8 sm:p-10 hover:border-white/40 transition-all duration-500 hover:-translate-y-2">
+                <div className="flex flex-col items-center text-center">
+                  <div className="relative w-36 h-36 sm:w-44 sm:h-44 mb-6 group-hover:scale-110 transition-transform duration-500">
                     <Image
                       src="/repair_specialist.png"
                       alt="Zebra Authorized Service Center"
                       fill
-                      className="object-contain"
+                      className="object-contain drop-shadow-2xl"
                     />
                   </div>
-                  <div className="text-white text-xl font-semibold mb-2">Zebra Authorized</div>
-                  <div className="text-slate-400 text-lg">Service Center</div>
+                  <h3 className="text-2xl sm:text-3xl font-bold text-white mb-3">Authorized Service Center</h3>
+                  <p className="text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
+                    Oficjalne centrum serwisowe z certyfikacją Zebra. 
+                    Naprawy na oryginalnych częściach z pełną gwarancją producenta.
+                  </p>
+                  <div className="flex flex-wrap justify-center gap-2">
+                    {['Oryginalne części', 'Gwarancja Zebra', 'Certyfikowani technicy'].map((tag, i) => (
+                      <span key={i} className="px-3 py-1 bg-green-500/20 text-green-300 rounded-full text-xs font-medium">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
+          </div>
+
+          {/* Benefits grid */}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+            {[
+              { icon: Shield, title: 'Oryginalne części', desc: 'Bezpośrednio od producenta' },
+              { icon: Award, title: 'Gwarancja Zebra', desc: 'Na każdą naprawę' },
+              { icon: Users, title: 'Certyfikowani technicy', desc: 'Szkoleni przez Zebra' },
+              { icon: Clock, title: 'Priorytetowe wsparcie', desc: 'Bezpośrednia linia do Zebra' }
+            ].map((item, idx) => (
+              <div key={idx} className="group bg-white/5 backdrop-blur-sm rounded-2xl p-5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300 hover:-translate-y-1">
+                <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                  <item.icon className="w-6 h-6 text-white" />
+                </div>
+                <h4 className="text-white font-semibold mb-1">{item.title}</h4>
+                <p className="text-slate-400 text-sm">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* Bottom CTA */}
+          <div className="text-center mt-12 sm:mt-16">
+            <p className="text-slate-400 text-sm mb-6">
+              Jeden z niewielu serwisów w Polsce z podwójną autoryzacją Zebra
+            </p>
+            <Link
+              href="/#formularz"
+              className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-full font-semibold text-lg hover:from-blue-500 hover:to-indigo-500 hover:scale-105 transition-all duration-300 shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40"
+            >
+              Zgłoś urządzenie do serwisu
+              <ArrowRight className="w-5 h-5" />
+            </Link>
           </div>
         </div>
       </section>
