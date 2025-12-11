@@ -210,7 +210,7 @@ export default function AboutPage() {
 
   const values = [
     {
-      title: 'Współpraca zaczyna się po fakturze',
+      title: 'Współpraca zaczyna się po wystawionej fakturze',
       description: 'Wierzymy, że sprzedaż to dopiero początek relacji. Prawdziwa wartość partnera ujawnia się, gdy coś pójdzie nie tak - i wtedy my jesteśmy przy Tobie.',
       icon: Heart
     },
