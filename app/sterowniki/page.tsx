@@ -102,12 +102,12 @@ const utilities = [
   },
   {
     id: 'zebradesigner',
-    name: 'ZebraDesigner',
-    version: null,
-    description: 'Program do projektowania etykiet. Wersja Essentials jest bezpłatna.',
-    downloadUrl: null,
+    name: 'ZebraDesigner 3',
+    version: '3.3.0.89',
+    description: 'Program do projektowania etykiet. Wersja Essentials jest bezpłatna, Professional wymaga licencji.',
+    downloadUrl: 'https://fivrcnshzylqdquuhkeu.supabase.co/storage/v1/object/public/downloads/zebradesigner3-33089.zip',
     externalUrl: 'https://www.zebra.com/us/en/support-downloads/printer-software/zebradesigner-3.html',
-    fileSize: null,
+    fileSize: '~200 MB',
   },
 ]
 
