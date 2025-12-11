@@ -250,8 +250,18 @@ export default function FAQPage() {
 
         {/* HERO */}
         <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
-          <section className="py-12 sm:py-16 px-3 sm:px-4">
-            <div className="max-w-4xl mx-auto text-center">
+          <section className="py-12 sm:py-16 px-3 sm:px-4 relative overflow-hidden">
+            {/* Pionowe paski - jak na homepage */}
+            <div className="absolute inset-0 pointer-events-none hidden sm:block">
+              <div className="absolute top-0 left-[10%] w-1 h-full bg-gradient-to-b from-gray-200/20 via-gray-300/25 to-transparent"></div>
+              <div className="absolute top-0 left-[25%] w-0.5 h-full bg-gradient-to-b from-gray-200/15 via-gray-300/20 to-transparent"></div>
+              <div className="absolute top-0 left-[40%] w-1 h-full bg-gradient-to-b from-gray-200/20 via-gray-300/25 to-transparent"></div>
+              <div className="absolute top-0 right-[35%] w-0.5 h-full bg-gradient-to-b from-gray-200/15 via-gray-300/20 to-transparent"></div>
+              <div className="absolute top-0 right-[20%] w-1 h-full bg-gradient-to-b from-gray-200/20 via-gray-300/25 to-transparent"></div>
+              <div className="absolute top-0 right-[8%] w-0.5 h-full bg-gradient-to-b from-gray-200/15 via-gray-300/20 to-transparent"></div>
+            </div>
+
+            <div className="max-w-4xl mx-auto text-center relative z-10">
               <div className="inline-block px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full border border-gray-200 mb-4 shadow-sm">
                 <p className="text-sm font-medium bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
                   Baza wiedzy
