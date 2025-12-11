@@ -1103,7 +1103,7 @@ ZRÓB DOKŁADNIE TAK - WKLEJ [BARCODE:...] W ODPOWIEDŹ!`
 
     // Wywołaj model z nowym API (streaming) - z multimodal jeśli są załączniki
     const responseStream = await genAI.models.generateContentStream({
-      model: 'gemini-2.0-flash',  // Flash obsługuje multimodal i jest szybszy
+      model: 'gemini-2.5-flash',  // Upgrade: lepsze rozumowanie, 20-30% mniej tokenów
       contents: [{ role: 'user', parts: userParts }],
     })
 
@@ -1156,7 +1156,7 @@ ZRÓB DOKŁADNIE TAK - WKLEJ [BARCODE:...] W ODPOWIEDŹ!`
             aiResponse: fullAiResponse,
             ragContextFound,
             responseTimeMs: responseTime,
-            modelUsed: `gemini-2.0-flash${hasAttachments ? ' (multimodal)' : ''} + vertex-ai-rag`,
+            modelUsed: `gemini-2.5-flash${hasAttachments ? ' (multimodal)' : ''} + vertex-ai-rag`,
           }).catch((err: any) => console.error('Błąd zapisywania logu czatu:', err))
 
         } catch (error: any) {
