@@ -13732,11 +13732,26 @@ export function searchBlogForAI(query: string): {
     const slugLower = post.slug.toLowerCase()
     
     // BONUS/PENALTY za typ urządzenia - BARDZO WAŻNE!
+    // Wykryj konkretne modele w zapytaniu
+    const hasTerminalModel = queryLower.match(/tc\d{2}|mc\d{2,4}|wt\d{4}|et\d{2}/)
+    const hasPrinterModel = queryLower.match(/zd\d{3}|zt\d{3}|gk\d{3}|zq\d{3}|zc\d{3}|zxp\d/)
+    const hasScannerModel = queryLower.match(/ds\d{4}|li\d{4}|ls\d{4}|cs\d{4}/)
+    
     if (detectedDeviceType) {
       if (post.deviceType === detectedDeviceType) {
         score += 25 // Duży bonus za pasujący typ urządzenia
       } else {
-        score -= 20 // Większa kara za niepasujący typ urządzenia
+        // KRYTYCZNE: Jeśli zapytanie zawiera konkretny MODEL urządzenia,
+        // a artykuł jest o INNYM typie urządzenia → OGROMNA kara
+        if (hasTerminalModel && post.deviceType === 'drukarki') {
+          score -= 100 // TC22 + artykuł o drukarce = ABSOLUTNIE NIE
+        } else if (hasPrinterModel && post.deviceType === 'terminale') {
+          score -= 100 // ZD420 + artykuł o terminalu = ABSOLUTNIE NIE
+        } else if (hasScannerModel && post.deviceType !== 'skanery') {
+          score -= 100 // DS2208 + artykuł o czymś innym = ABSOLUTNIE NIE
+        } else {
+          score -= 40 // Standardowa kara za niedopasowanie typu
+        }
       }
     }
     
