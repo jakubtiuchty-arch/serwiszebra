@@ -220,6 +220,14 @@ function userSaysResolved(message: string): boolean {
   )
 }
 
+// Sprawdza czy AI potwierdza rozwiązanie problemu
+function aiConfirmsResolved(aiResponse: string): boolean {
+  const r = (aiResponse || '').toLowerCase()
+  return !!r.match(
+    /(cieszę się|ciesze sie|świetnie|swietnie|super!|doskonale|problem rozwiązany|problem rozwiazany|działa poprawnie|dziala poprawnie|wszystko w porządku|wszystko w porzadku|udało się|udalo sie|naprawione|to dobra wiadomość|to dobra wiadomosc|gratulacje)/
+  )
+}
+
 // Helper function to detect printer model from query
 function detectPrinterModel(query: string): string[] {
   const models: string[] = []
@@ -1126,9 +1134,11 @@ ZRÓB DOKŁADNIE TAK - WKLEJ [BARCODE:...] W ODPOWIEDŹ!`
           // WAŻNE: Jeśli blog znalazł odpowiedź, NIE pokazuj citations z RAG (często nieodpowiednie)
           const finalCitations = blogLinks.length > 0 ? [] : citations
           
-          // Link do bloga pokazujemy TYLKO gdy klient potwierdził rozwiązanie, i tylko /blog.
-          // Jeśli odpowiedź kończy się serwisem ([SERIOUS_ISSUE]) → NIGDY nie pokazuj linków do bloga.
-          const allowUiBlogLink = userSaysResolved(lastUserMessage) && !fullAiResponse.includes('[SERIOUS_ISSUE]')
+          // Link do bloga pokazujemy gdy:
+          // 1. Użytkownik potwierdził rozwiązanie LUB AI potwierdza sukces
+          // 2. NIE ma [SERIOUS_ISSUE] (nie kierujemy do serwisu)
+          const problemResolved = userSaysResolved(lastUserMessage) || aiConfirmsResolved(fullAiResponse)
+          const allowUiBlogLink = problemResolved && !fullAiResponse.includes('[SERIOUS_ISSUE]')
           const uiBlogLinks = allowUiBlogLink ? [{ title: 'Więcej poradników', url: '/blog' }] : []
 
           const hasData = finalCitations.length > 0 || uiBlogLinks.length > 0 || scannerBarcodes.length > 0

@@ -468,19 +468,17 @@ export default function AIChatBox() {
                     </div>
                   </div>
 
-                  {/* Blog Links - TYLKO gdy odpowiedź zawiera [SERIOUS_ISSUE] (końcowa diagnoza) */}
+                  {/* Blog Links - TYLKO gdy problem rozwiązany (backend wysyła tylko wtedy) */}
                   {msg.role === 'assistant' && 
                    msg.blogLinks && 
                    msg.blogLinks.length > 0 && 
-                   msg.content.includes('[SERIOUS_ISSUE]') && (
+                   !msg.content.includes('[SERIOUS_ISSUE]') && (
                     <div className="flex flex-wrap items-center gap-2 px-3 py-2 bg-blue-50 rounded-xl border border-blue-100 mt-2">
-                      <span className="text-xs font-medium text-blue-700">📚 Przeczytaj więcej:</span>
+                      <span className="text-xs font-medium text-blue-700">📚</span>
                       {msg.blogLinks.map((link, idx) => (
                         <a
                           key={idx}
                           href={link.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
                           className="text-xs text-blue-600 hover:text-blue-800 underline underline-offset-2 hover:no-underline transition-colors"
                         >
                           {link.title}
