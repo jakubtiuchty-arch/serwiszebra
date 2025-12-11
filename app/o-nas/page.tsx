@@ -22,107 +22,111 @@ import {
   Sparkles
 } from 'lucide-react'
 
-// Komponent animowanego elementu timeline
-function TimelineItem({ 
-  milestone, 
-  idx, 
-  isLast 
+// Kompaktowy Timeline - horyzontalny z rozwijaniem
+function CompactTimeline({ 
+  milestones 
 }: { 
-  milestone: { year: string; title: string; description: string; icon: any }
-  idx: number
-  isLast: boolean 
+  milestones: { year: string; title: string; description: string; icon: any }[]
 }) {
-  const ref = useRef<HTMLDivElement>(null)
-  const [isVisible, setIsVisible] = useState(false)
-  const [hasAnimated, setHasAnimated] = useState(false)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !hasAnimated) {
-          // Delay based on index for staggered effect
-          setTimeout(() => {
-            setIsVisible(true)
-            setHasAnimated(true)
-          }, idx * 150)
-        }
-      },
-      { threshold: 0.3, rootMargin: '-50px' }
-    )
-
-    if (ref.current) {
-      observer.observe(ref.current)
-    }
-
-    return () => observer.disconnect()
-  }, [idx, hasAnimated])
-
-  const Icon = milestone.icon
+  const [expandedIdx, setExpandedIdx] = useState<number | null>(null)
 
   return (
-    <div 
-      ref={ref}
-      className={`relative flex items-start gap-4 sm:gap-8 ${
-        idx % 2 === 0 ? 'sm:flex-row' : 'sm:flex-row-reverse'
-      }`}
-    >
-      {/* Punkt na osi - animowany */}
-      <div 
-        className={`absolute left-3 sm:left-1/2 -translate-x-1/2 z-10 transition-all duration-700 ${
-          isVisible ? 'scale-100 opacity-100' : 'scale-0 opacity-0'
-        }`}
-      >
-        {/* Pulsujący ring - mniejszy na mobile */}
-        <div className={`absolute inset-0 w-7 h-7 sm:w-10 sm:h-10 -m-0.5 sm:-m-1 rounded-full bg-blue-500/30 ${isVisible ? 'animate-ping' : ''}`} 
-          style={{ animationDuration: '2s', animationIterationCount: isLast && isVisible ? 'infinite' : '3' }} 
-        />
-        {/* Główny punkt - mniejszy na mobile */}
-        <div className={`relative w-6 h-6 sm:w-8 sm:h-8 bg-white rounded-full border-[3px] sm:border-4 flex items-center justify-center shadow-lg transition-all duration-500 ${
-          isVisible ? 'border-blue-500' : 'border-gray-300'
-        } ${isLast ? 'ring-2 sm:ring-4 ring-blue-500/20' : ''}`}>
-          <Icon className={`w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 transition-colors duration-500 ${isVisible ? 'text-blue-600' : 'text-gray-400'}`} />
-        </div>
+    <div className="relative">
+      {/* Linia pozioma */}
+      <div className="absolute top-6 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-200 via-indigo-300 to-green-300 hidden sm:block"></div>
+      
+      {/* Timeline items */}
+      <div className="flex flex-wrap justify-center gap-2 sm:gap-0 sm:justify-between">
+        {milestones.map((milestone, idx) => {
+          const Icon = milestone.icon
+          const isLast = idx === milestones.length - 1
+          const isExpanded = expandedIdx === idx
+          
+          return (
+            <div key={idx} className="relative flex flex-col items-center">
+              {/* Punkt na osi */}
+              <button
+                onClick={() => setExpandedIdx(isExpanded ? null : idx)}
+                className={`relative z-10 w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 group ${
+                  isExpanded 
+                    ? isLast 
+                      ? 'bg-gradient-to-br from-green-500 to-emerald-600 scale-110 shadow-lg shadow-green-500/30' 
+                      : 'bg-gradient-to-br from-blue-500 to-indigo-600 scale-110 shadow-lg shadow-blue-500/30'
+                    : 'bg-white border-2 border-gray-200 hover:border-blue-400 hover:shadow-md'
+                }`}
+              >
+                <Icon className={`w-5 h-5 transition-colors ${isExpanded ? 'text-white' : 'text-gray-500 group-hover:text-blue-600'}`} />
+                {isLast && !isExpanded && (
+                  <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                )}
+              </button>
+              
+              {/* Rok */}
+              <div className={`mt-2 text-xs font-bold transition-colors ${isExpanded ? (isLast ? 'text-green-600' : 'text-blue-600') : 'text-gray-500'}`}>
+                {milestone.year}
+              </div>
+              
+              {/* Tytuł skrócony */}
+              <div className={`text-[10px] text-gray-400 max-w-[70px] text-center leading-tight mt-0.5 ${isExpanded ? 'hidden' : ''}`}>
+                {milestone.title.split(' ').slice(0, 2).join(' ')}
+              </div>
+            </div>
+          )
+        })}
       </div>
-
-      {/* Karta - animowana */}
-      <div 
-        className={`ml-10 sm:ml-0 sm:w-[calc(50%-2rem)] ${idx % 2 === 0 ? 'sm:pr-8 sm:text-right' : 'sm:pl-8'} 
-          transition-all duration-700 ease-out ${
-            isVisible 
-              ? 'opacity-100 translate-y-0' 
-              : `opacity-0 ${idx % 2 === 0 ? 'sm:translate-x-8' : 'sm:-translate-x-8'} translate-y-4`
-          }`}
-        style={{ transitionDelay: `${idx * 100}ms` }}
-      >
-        <div className={`bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-lg border transition-all duration-300 hover:shadow-xl hover:-translate-y-1 group ${
-          isLast ? 'border-blue-200 ring-2 ring-blue-100' : 'border-gray-100 hover:border-blue-200'
-        }`}>
-          {/* Badge roku */}
-          <div className={`inline-flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-bold text-white mb-2 sm:mb-3 transition-transform duration-300 group-hover:scale-105 ${
-            isLast 
-              ? 'bg-gradient-to-r from-green-500 to-emerald-600' 
-              : 'bg-gradient-to-r from-blue-600 to-indigo-600'
+      
+      {/* Expanded card */}
+      {expandedIdx !== null && (
+        <div className="mt-6 animate-fade-in">
+          <div className={`bg-white rounded-xl p-5 shadow-lg border-2 transition-all ${
+            expandedIdx === milestones.length - 1 
+              ? 'border-green-200 bg-gradient-to-br from-green-50 to-white' 
+              : 'border-blue-200 bg-gradient-to-br from-blue-50 to-white'
           }`}>
-            {isLast && <Sparkles className="w-2.5 h-2.5 sm:w-3 sm:h-3" />}
-            {milestone.year}
+            <div className="flex items-start gap-4">
+              <div className={`w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 ${
+                expandedIdx === milestones.length - 1 
+                  ? 'bg-gradient-to-br from-green-500 to-emerald-600' 
+                  : 'bg-gradient-to-br from-blue-500 to-indigo-600'
+              }`}>
+                {(() => {
+                  const Icon = milestones[expandedIdx].icon
+                  return <Icon className="w-5 h-5 text-white" />
+                })()}
+              </div>
+              <div className="flex-1">
+                <div className="flex items-center gap-2 mb-1">
+                  <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${
+                    expandedIdx === milestones.length - 1 
+                      ? 'bg-green-100 text-green-700' 
+                      : 'bg-blue-100 text-blue-700'
+                  }`}>
+                    {milestones[expandedIdx].year}
+                  </span>
+                  {expandedIdx === milestones.length - 1 && (
+                    <span className="flex items-center gap-1 text-xs text-green-600 font-medium">
+                      <Sparkles className="w-3 h-3" />
+                      Teraz
+                    </span>
+                  )}
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-1">
+                  {milestones[expandedIdx].title}
+                </h3>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  {milestones[expandedIdx].description}
+                </p>
+              </div>
+              <button 
+                onClick={() => setExpandedIdx(null)}
+                className="text-gray-400 hover:text-gray-600 p-1"
+              >
+                ✕
+              </button>
+            </div>
           </div>
-          
-          <h3 className="text-sm sm:text-lg font-semibold text-gray-900 mb-1 sm:mb-2 group-hover:text-blue-600 transition-colors">
-            {milestone.title}
-          </h3>
-          <p className="text-gray-600 text-xs sm:text-base leading-relaxed">
-            {milestone.description}
-          </p>
-          
-          {/* Dekoracyjna linia na hover - ukryta na mobile */}
-          <div className={`hidden sm:block h-0.5 bg-gradient-to-r from-blue-500 to-indigo-500 mt-4 transition-all duration-300 origin-left ${
-            idx % 2 === 0 ? 'sm:origin-right' : 'sm:origin-left'
-          } scale-x-0 group-hover:scale-x-100`} />
         </div>
-      </div>
-
-      {/* Pusta przestrzeń po drugiej stronie */}
-      <div className="hidden sm:block sm:w-[calc(50%-2rem)]"></div>
+      )}
     </div>
   )
 }
@@ -257,30 +261,6 @@ export default function AboutPage() {
     }
   ]
 
-  const [timelineProgress, setTimelineProgress] = useState(0)
-  const timelineRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!timelineRef.current) return
-      
-      const rect = timelineRef.current.getBoundingClientRect()
-      const windowHeight = window.innerHeight
-      const elementHeight = rect.height
-      
-      // Calculate how much of the timeline is visible
-      const start = Math.max(0, windowHeight - rect.top)
-      const end = elementHeight + windowHeight
-      const progress = Math.min(100, Math.max(0, (start / end) * 100 * 1.5))
-      
-      setTimelineProgress(progress)
-    }
-
-    window.addEventListener('scroll', handleScroll)
-    handleScroll() // Initial check
-    
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
 
   return (
     <div className="min-h-screen bg-white">
@@ -349,41 +329,19 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Historia - oś czasu z animacjami */}
-      <section className="py-10 sm:py-16 md:py-24 bg-gray-50 overflow-hidden">
-        <div className="max-w-5xl mx-auto px-3 sm:px-6 lg:px-8">
-          <div className="text-center mb-8 sm:mb-12 md:mb-16">
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-900 mb-2 sm:mb-3">
+      {/* Historia - kompaktowy timeline */}
+      <section className="py-10 sm:py-14 bg-gray-50">
+        <div className="max-w-4xl mx-auto px-3 sm:px-6 lg:px-8">
+          <div className="text-center mb-6 sm:mb-8">
+            <h2 className="text-xl sm:text-2xl font-semibold text-gray-900 mb-2">
               Nasza droga do autoryzacji
             </h2>
-            <p className="text-xs sm:text-sm text-gray-600 max-w-2xl mx-auto px-2">
-              Od małej firmy handlowej do oficjalnego centrum serwisowego Zebra. 
-              Każda zmiana na rynku była dla nas szansą na rozwój.
+            <p className="text-xs sm:text-sm text-gray-600 max-w-xl mx-auto">
+              Kliknij w ikonę, aby zobaczyć szczegóły każdego etapu
             </p>
           </div>
 
-          {/* Timeline */}
-          <div ref={timelineRef} className="relative">
-            {/* Linia pionowa - tło */}
-            <div className="absolute left-3 sm:left-1/2 sm:-translate-x-px top-0 bottom-0 w-0.5 bg-gray-200"></div>
-            
-            {/* Linia pionowa - wypełnienie animowane */}
-            <div 
-              className="absolute left-3 sm:left-1/2 sm:-translate-x-px top-0 w-0.5 bg-gradient-to-b from-blue-500 via-indigo-500 to-purple-500 transition-all duration-100"
-              style={{ height: `${timelineProgress}%` }}
-            />
-
-            <div className="space-y-4 sm:space-y-8 md:space-y-12">
-              {milestones.map((milestone, idx) => (
-                <TimelineItem 
-                  key={idx} 
-                  milestone={milestone} 
-                  idx={idx} 
-                  isLast={idx === milestones.length - 1}
-                />
-              ))}
-            </div>
-          </div>
+          <CompactTimeline milestones={milestones} />
         </div>
       </section>
 
