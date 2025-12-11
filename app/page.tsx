@@ -1103,46 +1103,42 @@ export default function HomePage() {
               Serwisujemy dla największych firm w Polsce
             </h3>
           </div>
-          <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-10 md:gap-14">
+          <div className="flex flex-wrap items-center justify-center gap-8 sm:gap-12 md:gap-16">
             {/* Lasy Państwowe */}
-            <div className="flex flex-col items-center gap-2 opacity-70 hover:opacity-100 transition-opacity">
-              <div className="w-14 h-14 sm:w-16 sm:h-16 bg-white rounded-2xl shadow-lg flex items-center justify-center border border-gray-100">
-                <span className="text-2xl sm:text-3xl">🌲</span>
+            <div className="flex flex-col items-center gap-2 opacity-80 hover:opacity-100 transition-opacity">
+              <div className="w-20 h-16 sm:w-24 sm:h-20 bg-white rounded-2xl shadow-lg flex items-center justify-center border border-gray-100 p-2">
+                <Image src="/logo_lasy.png" alt="Lasy Państwowe" width={80} height={60} className="object-contain" />
               </div>
-              <span className="text-xs sm:text-sm text-gray-700 font-medium">Lasy Państwowe</span>
             </div>
             {/* Poczta Polska */}
-            <div className="flex flex-col items-center gap-2 opacity-70 hover:opacity-100 transition-opacity">
-              <div className="w-14 h-14 sm:w-16 sm:h-16 bg-white rounded-2xl shadow-lg flex items-center justify-center border border-gray-100">
-                <span className="text-2xl sm:text-3xl">📮</span>
+            <div className="flex flex-col items-center gap-2 opacity-80 hover:opacity-100 transition-opacity">
+              <div className="w-20 h-16 sm:w-24 sm:h-20 bg-white rounded-2xl shadow-lg flex items-center justify-center border border-gray-100 p-2">
+                <Image src="/logo_poczta.png" alt="Poczta Polska" width={80} height={60} className="object-contain" />
               </div>
-              <span className="text-xs sm:text-sm text-gray-700 font-medium">Poczta Polska</span>
             </div>
             {/* Orlen */}
-            <div className="flex flex-col items-center gap-2 opacity-70 hover:opacity-100 transition-opacity">
-              <div className="w-14 h-14 sm:w-16 sm:h-16 bg-white rounded-2xl shadow-lg flex items-center justify-center border border-gray-100">
-                <span className="text-2xl sm:text-3xl">⛽</span>
+            <div className="flex flex-col items-center gap-2 opacity-80 hover:opacity-100 transition-opacity">
+              <div className="w-20 h-16 sm:w-24 sm:h-20 bg-white rounded-2xl shadow-lg flex items-center justify-center border border-gray-100 p-2">
+                <Image src="/logo_orlen.png" alt="Orlen" width={80} height={60} className="object-contain" />
               </div>
-              <span className="text-xs sm:text-sm text-gray-700 font-medium">Orlen</span>
             </div>
             {/* Żabka */}
-            <div className="flex flex-col items-center gap-2 opacity-70 hover:opacity-100 transition-opacity">
-              <div className="w-14 h-14 sm:w-16 sm:h-16 bg-white rounded-2xl shadow-lg flex items-center justify-center border border-gray-100">
-                <span className="text-2xl sm:text-3xl">🐸</span>
+            <div className="flex flex-col items-center gap-2 opacity-80 hover:opacity-100 transition-opacity">
+              <div className="w-20 h-16 sm:w-24 sm:h-20 bg-white rounded-2xl shadow-lg flex items-center justify-center border border-gray-100 p-2">
+                <span className="text-3xl sm:text-4xl">🐸</span>
               </div>
               <span className="text-xs sm:text-sm text-gray-700 font-medium">Żabka</span>
             </div>
             {/* SFD */}
-            <div className="flex flex-col items-center gap-2 opacity-70 hover:opacity-100 transition-opacity">
-              <div className="w-14 h-14 sm:w-16 sm:h-16 bg-white rounded-2xl shadow-lg flex items-center justify-center border border-gray-100">
-                <span className="text-2xl sm:text-3xl">💪</span>
+            <div className="flex flex-col items-center gap-2 opacity-80 hover:opacity-100 transition-opacity">
+              <div className="w-20 h-16 sm:w-24 sm:h-20 bg-white rounded-2xl shadow-lg flex items-center justify-center border border-gray-100 p-2">
+                <Image src="/logo_sfd.png" alt="SFD" width={80} height={60} className="object-contain" />
               </div>
-              <span className="text-xs sm:text-sm text-gray-700 font-medium">SFD</span>
             </div>
             {/* InPost */}
-            <div className="flex flex-col items-center gap-2 opacity-70 hover:opacity-100 transition-opacity">
-              <div className="w-14 h-14 sm:w-16 sm:h-16 bg-white rounded-2xl shadow-lg flex items-center justify-center border border-gray-100">
-                <span className="text-2xl sm:text-3xl">📦</span>
+            <div className="flex flex-col items-center gap-2 opacity-80 hover:opacity-100 transition-opacity">
+              <div className="w-20 h-16 sm:w-24 sm:h-20 bg-white rounded-2xl shadow-lg flex items-center justify-center border border-gray-100 p-2">
+                <span className="text-3xl sm:text-4xl">📦</span>
               </div>
               <span className="text-xs sm:text-sm text-gray-700 font-medium">InPost</span>
             </div>
