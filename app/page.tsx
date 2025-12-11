@@ -1125,22 +1125,14 @@ export default function HomePage() {
             {/* Żabka */}
             <div className="flex flex-col items-center gap-2 opacity-80 hover:opacity-100 transition-opacity">
               <div className="w-20 h-16 sm:w-24 sm:h-20 bg-white rounded-2xl shadow-lg flex items-center justify-center border border-gray-100 p-2">
-                <span className="text-3xl sm:text-4xl">🐸</span>
+                <Image src="/logo_żabka.png" alt="Żabka" width={80} height={60} className="object-contain" />
               </div>
-              <span className="text-xs sm:text-sm text-gray-700 font-medium">Żabka</span>
             </div>
             {/* SFD */}
             <div className="flex flex-col items-center gap-2 opacity-80 hover:opacity-100 transition-opacity">
               <div className="w-20 h-16 sm:w-24 sm:h-20 bg-white rounded-2xl shadow-lg flex items-center justify-center border border-gray-100 p-2">
                 <Image src="/logo_sfd.png" alt="SFD" width={80} height={60} className="object-contain" />
               </div>
-            </div>
-            {/* InPost */}
-            <div className="flex flex-col items-center gap-2 opacity-80 hover:opacity-100 transition-opacity">
-              <div className="w-20 h-16 sm:w-24 sm:h-20 bg-white rounded-2xl shadow-lg flex items-center justify-center border border-gray-100 p-2">
-                <span className="text-3xl sm:text-4xl">📦</span>
-              </div>
-              <span className="text-xs sm:text-sm text-gray-700 font-medium">InPost</span>
             </div>
           </div>
         </div>
