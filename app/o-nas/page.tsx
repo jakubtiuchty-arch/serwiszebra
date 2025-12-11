@@ -22,111 +22,139 @@ import {
   Sparkles
 } from 'lucide-react'
 
-// Kompaktowy Timeline - horyzontalny z rozwijaniem
+// Timeline - wizualnie większy, scrollowalny horyzontalnie
 function CompactTimeline({ 
   milestones 
 }: { 
   milestones: { year: string; title: string; description: string; icon: any }[]
 }) {
-  const [expandedIdx, setExpandedIdx] = useState<number | null>(null)
+  const [activeIdx, setActiveIdx] = useState(milestones.length - 1) // Domyślnie ostatni (Autoryzacja)
 
   return (
     <div className="relative">
-      {/* Linia pozioma */}
-      <div className="absolute top-6 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-200 via-indigo-300 to-green-300 hidden sm:block"></div>
-      
-      {/* Timeline items */}
-      <div className="flex flex-wrap justify-center gap-2 sm:gap-0 sm:justify-between">
-        {milestones.map((milestone, idx) => {
-          const Icon = milestone.icon
-          const isLast = idx === milestones.length - 1
-          const isExpanded = expandedIdx === idx
-          
-          return (
-            <div key={idx} className="relative flex flex-col items-center">
-              {/* Punkt na osi */}
+      {/* Horizontal scroll container */}
+      <div className="overflow-x-auto pb-4 -mx-3 px-3 sm:mx-0 sm:px-0 sm:overflow-visible">
+        <div className="flex gap-3 sm:gap-4 min-w-max sm:min-w-0 sm:grid sm:grid-cols-7">
+          {milestones.map((milestone, idx) => {
+            const Icon = milestone.icon
+            const isLast = idx === milestones.length - 1
+            const isActive = activeIdx === idx
+            
+            return (
               <button
-                onClick={() => setExpandedIdx(isExpanded ? null : idx)}
-                className={`relative z-10 w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 group ${
-                  isExpanded 
-                    ? isLast 
-                      ? 'bg-gradient-to-br from-green-500 to-emerald-600 scale-110 shadow-lg shadow-green-500/30' 
-                      : 'bg-gradient-to-br from-blue-500 to-indigo-600 scale-110 shadow-lg shadow-blue-500/30'
-                    : 'bg-white border-2 border-gray-200 hover:border-blue-400 hover:shadow-md'
+                key={idx}
+                onClick={() => setActiveIdx(idx)}
+                className={`relative flex flex-col items-center p-3 sm:p-4 rounded-xl transition-all duration-300 min-w-[100px] sm:min-w-0 ${
+                  isActive 
+                    ? isLast
+                      ? 'bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-green-300 shadow-lg scale-105'
+                      : 'bg-gradient-to-br from-blue-50 to-indigo-50 border-2 border-blue-300 shadow-lg scale-105'
+                    : 'bg-white border border-gray-200 hover:border-gray-300 hover:shadow-md hover:bg-gray-50'
                 }`}
               >
-                <Icon className={`w-5 h-5 transition-colors ${isExpanded ? 'text-white' : 'text-gray-500 group-hover:text-blue-600'}`} />
-                {isLast && !isExpanded && (
-                  <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                {/* Icon */}
+                <div className={`w-12 h-12 sm:w-14 sm:h-14 rounded-xl flex items-center justify-center mb-2 transition-all ${
+                  isActive 
+                    ? isLast
+                      ? 'bg-gradient-to-br from-green-500 to-emerald-600 shadow-lg'
+                      : 'bg-gradient-to-br from-blue-500 to-indigo-600 shadow-lg'
+                    : 'bg-gray-100 group-hover:bg-gray-200'
+                }`}>
+                  <Icon className={`w-6 h-6 ${isActive ? 'text-white' : 'text-gray-500'}`} />
+                </div>
+                
+                {/* Year badge */}
+                <span className={`text-xs font-bold px-2 py-0.5 rounded-full mb-1 ${
+                  isActive 
+                    ? isLast 
+                      ? 'bg-green-100 text-green-700'
+                      : 'bg-blue-100 text-blue-700'
+                    : 'bg-gray-100 text-gray-600'
+                }`}>
+                  {milestone.year}
+                </span>
+                
+                {/* Title */}
+                <span className={`text-xs text-center leading-tight line-clamp-2 ${
+                  isActive ? (isLast ? 'text-green-700 font-medium' : 'text-blue-700 font-medium') : 'text-gray-500'
+                }`}>
+                  {milestone.title}
+                </span>
+                
+                {/* Active indicator for last */}
+                {isLast && (
+                  <div className={`absolute -top-1 -right-1 w-3 h-3 rounded-full ${isActive ? 'bg-green-500' : 'bg-green-400'} animate-pulse`}></div>
                 )}
               </button>
-              
-              {/* Rok */}
-              <div className={`mt-2 text-xs font-bold transition-colors ${isExpanded ? (isLast ? 'text-green-600' : 'text-blue-600') : 'text-gray-500'}`}>
-                {milestone.year}
-              </div>
-              
-              {/* Tytuł skrócony */}
-              <div className={`text-[10px] text-gray-400 max-w-[70px] text-center leading-tight mt-0.5 ${isExpanded ? 'hidden' : ''}`}>
-                {milestone.title.split(' ').slice(0, 2).join(' ')}
-              </div>
-            </div>
-          )
-        })}
+            )
+          })}
+        </div>
       </div>
       
-      {/* Expanded card */}
-      {expandedIdx !== null && (
-        <div className="mt-6 animate-fade-in">
-          <div className={`bg-white rounded-xl p-5 shadow-lg border-2 transition-all ${
-            expandedIdx === milestones.length - 1 
-              ? 'border-green-200 bg-gradient-to-br from-green-50 to-white' 
-              : 'border-blue-200 bg-gradient-to-br from-blue-50 to-white'
-          }`}>
-            <div className="flex items-start gap-4">
-              <div className={`w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 ${
-                expandedIdx === milestones.length - 1 
-                  ? 'bg-gradient-to-br from-green-500 to-emerald-600' 
-                  : 'bg-gradient-to-br from-blue-500 to-indigo-600'
-              }`}>
-                {(() => {
-                  const Icon = milestones[expandedIdx].icon
-                  return <Icon className="w-5 h-5 text-white" />
-                })()}
-              </div>
-              <div className="flex-1">
-                <div className="flex items-center gap-2 mb-1">
-                  <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${
-                    expandedIdx === milestones.length - 1 
-                      ? 'bg-green-100 text-green-700' 
-                      : 'bg-blue-100 text-blue-700'
-                  }`}>
-                    {milestones[expandedIdx].year}
+      {/* Detail card - always visible */}
+      <div className="mt-6">
+        <div className={`rounded-2xl p-6 sm:p-8 transition-all duration-300 ${
+          activeIdx === milestones.length - 1 
+            ? 'bg-gradient-to-br from-green-500 to-emerald-600 text-white shadow-xl shadow-green-500/20' 
+            : 'bg-gradient-to-br from-slate-800 to-slate-900 text-white shadow-xl'
+        }`}>
+          <div className="flex flex-col sm:flex-row sm:items-start gap-4 sm:gap-6">
+            {/* Icon */}
+            <div className={`w-16 h-16 rounded-2xl flex items-center justify-center flex-shrink-0 ${
+              activeIdx === milestones.length - 1 
+                ? 'bg-white/20' 
+                : 'bg-blue-500/20'
+            }`}>
+              {(() => {
+                const Icon = milestones[activeIdx].icon
+                return <Icon className="w-8 h-8 text-white" />
+              })()}
+            </div>
+            
+            {/* Content */}
+            <div className="flex-1">
+              <div className="flex flex-wrap items-center gap-2 mb-2">
+                <span className={`text-sm font-bold px-3 py-1 rounded-full ${
+                  activeIdx === milestones.length - 1 
+                    ? 'bg-white/20 text-white' 
+                    : 'bg-blue-500/30 text-blue-200'
+                }`}>
+                  {milestones[activeIdx].year}
+                </span>
+                {activeIdx === milestones.length - 1 && (
+                  <span className="flex items-center gap-1 text-sm text-green-100 font-medium">
+                    <Sparkles className="w-4 h-4" />
+                    Aktualny status
                   </span>
-                  {expandedIdx === milestones.length - 1 && (
-                    <span className="flex items-center gap-1 text-xs text-green-600 font-medium">
-                      <Sparkles className="w-3 h-3" />
-                      Teraz
-                    </span>
-                  )}
-                </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-1">
-                  {milestones[expandedIdx].title}
-                </h3>
-                <p className="text-gray-600 text-sm leading-relaxed">
-                  {milestones[expandedIdx].description}
-                </p>
+                )}
               </div>
-              <button 
-                onClick={() => setExpandedIdx(null)}
-                className="text-gray-400 hover:text-gray-600 p-1"
-              >
-                ✕
-              </button>
+              <h3 className="text-xl sm:text-2xl font-bold mb-2">
+                {milestones[activeIdx].title}
+              </h3>
+              <p className={`text-sm sm:text-base leading-relaxed ${
+                activeIdx === milestones.length - 1 ? 'text-green-100' : 'text-slate-300'
+              }`}>
+                {milestones[activeIdx].description}
+              </p>
             </div>
           </div>
+          
+          {/* Navigation dots */}
+          <div className="flex justify-center gap-2 mt-6">
+            {milestones.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => setActiveIdx(idx)}
+                className={`w-2 h-2 rounded-full transition-all ${
+                  activeIdx === idx 
+                    ? 'w-6 bg-white' 
+                    : 'bg-white/30 hover:bg-white/50'
+                }`}
+              />
+            ))}
+          </div>
         </div>
-      )}
+      </div>
     </div>
   )
 }
@@ -329,15 +357,15 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Historia - kompaktowy timeline */}
-      <section className="py-10 sm:py-14 bg-gray-50">
-        <div className="max-w-4xl mx-auto px-3 sm:px-6 lg:px-8">
-          <div className="text-center mb-6 sm:mb-8">
-            <h2 className="text-xl sm:text-2xl font-semibold text-gray-900 mb-2">
+      {/* Historia - timeline */}
+      <section className="py-12 sm:py-16 md:py-20 bg-gradient-to-b from-gray-50 to-white">
+        <div className="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8">
+          <div className="text-center mb-8 sm:mb-10">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-900 mb-2">
               Nasza podróż z marką Zebra
             </h2>
-            <p className="text-xs sm:text-sm text-gray-600 max-w-xl mx-auto">
-              Kliknij w ikonę, aby zobaczyć szczegóły każdego etapu
+            <p className="text-sm sm:text-base text-gray-600 max-w-2xl mx-auto">
+              Od 1999 roku towarzyszymy zmianom na rynku AutoID. Kliknij w etap, aby poznać szczegóły.
             </p>
           </div>
 
