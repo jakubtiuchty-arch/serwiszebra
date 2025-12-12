@@ -20,7 +20,8 @@ import {
   AlertTriangle,
   FileCode,
   Settings,
-  Wrench
+  Wrench,
+  ScanBarcode
 } from 'lucide-react'
 import { useState } from 'react'
 
@@ -90,8 +91,8 @@ const firmware = [
   },
 ]
 
-// Programy użytkowe
-const utilities = [
+// Programy użytkowe - Drukarki
+const printerUtilities = [
   {
     id: 'zebra-setup',
     name: 'Zebra Setup Utilities',
@@ -110,6 +111,10 @@ const utilities = [
     externalUrl: 'https://www.zebra.com/us/en/support-downloads/printer-software/zebradesigner-3.html',
     fileSize: '~200 MB',
   },
+]
+
+// Programy użytkowe - Skanery
+const scannerUtilities = [
   {
     id: '123scan-32bit',
     name: '123Scan (32-bit)',
@@ -217,6 +222,7 @@ function FAQItem({ item, isOpen, onClick }: { item: typeof faqItems[0], isOpen: 
 
 export default function DriversPage() {
   const [activeCategory, setActiveCategory] = useState('drivers')
+  const [utilityType, setUtilityType] = useState<'printers' | 'scanners'>('printers')
   const [expandedPrinters, setExpandedPrinters] = useState(false)
   const [openFAQ, setOpenFAQ] = useState<number | null>(0)
 
@@ -460,47 +466,124 @@ export default function DriversPage() {
 
           {/* PROGRAMY UŻYTKOWE */}
           {activeCategory === 'utilities' && (
-            <div className="space-y-4">
-              {utilities.map((util) => (
-                <div key={util.id} className="bg-white border border-gray-200 rounded-xl p-5 sm:p-6">
-                  <div className="flex flex-col sm:flex-row sm:items-start gap-4">
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-1">
-                        <h3 className="font-semibold text-gray-900">{util.name}</h3>
-                        {util.version && (
-                          <span className="px-2 py-0.5 bg-gray-100 text-gray-600 text-xs rounded-full">
-                            v{util.version}
-                          </span>
-                        )}
+            <div className="space-y-6">
+              {/* Sub-tabs: Drukarki / Skanery */}
+              <div className="flex gap-2 p-1 bg-gray-100 rounded-lg w-fit">
+                <button
+                  onClick={() => setUtilityType('printers')}
+                  className={`flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-all ${
+                    utilityType === 'printers'
+                      ? 'bg-white text-gray-900 shadow-sm'
+                      : 'text-gray-600 hover:text-gray-900'
+                  }`}
+                >
+                  <Printer className="w-4 h-4" />
+                  Drukarki
+                </button>
+                <button
+                  onClick={() => setUtilityType('scanners')}
+                  className={`flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-all ${
+                    utilityType === 'scanners'
+                      ? 'bg-white text-gray-900 shadow-sm'
+                      : 'text-gray-600 hover:text-gray-900'
+                  }`}
+                >
+                  <ScanBarcode className="w-4 h-4" />
+                  Skanery
+                </button>
+              </div>
+
+              {/* Programy dla drukarek */}
+              {utilityType === 'printers' && (
+                <div className="space-y-4">
+                  {printerUtilities.map((util) => (
+                    <div key={util.id} className="bg-white border border-gray-200 rounded-xl p-5 sm:p-6">
+                      <div className="flex flex-col sm:flex-row sm:items-start gap-4">
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2 mb-1">
+                            <h3 className="font-semibold text-gray-900">{util.name}</h3>
+                            {util.version && (
+                              <span className="px-2 py-0.5 bg-gray-100 text-gray-600 text-xs rounded-full">
+                                v{util.version}
+                              </span>
+                            )}
+                          </div>
+                          <p className="text-gray-600 text-sm mb-2">{util.description}</p>
+                          {util.fileSize && (
+                            <p className="text-gray-500 text-xs">Rozmiar: {util.fileSize}</p>
+                          )}
+                        </div>
+                        <div className="flex flex-col gap-2 sm:min-w-[140px]">
+                          {util.downloadUrl && (
+                            <a
+                              href={util.downloadUrl}
+                              className="flex items-center justify-center gap-2 px-4 py-2.5 bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-800 transition-colors text-sm"
+                            >
+                              <Download className="w-4 h-4" />
+                              Pobierz
+                            </a>
+                          )}
+                          <a
+                            href={util.externalUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center justify-center gap-2 px-4 py-2.5 border border-gray-300 text-gray-700 rounded-lg font-medium hover:bg-gray-50 transition-colors text-sm"
+                          >
+                            Strona Zebra
+                            <ExternalLink className="w-3.5 h-3.5" />
+                          </a>
+                        </div>
                       </div>
-                      <p className="text-gray-600 text-sm mb-2">{util.description}</p>
-                      {util.fileSize && (
-                        <p className="text-gray-500 text-xs">Rozmiar: {util.fileSize}</p>
-                      )}
                     </div>
-                    <div className="flex flex-col gap-2 sm:min-w-[140px]">
-                      {util.downloadUrl && (
-                        <a
-                          href={util.downloadUrl}
-                          className="flex items-center justify-center gap-2 px-4 py-2.5 bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-800 transition-colors text-sm"
-                        >
-                          <Download className="w-4 h-4" />
-                          Pobierz
-                        </a>
-                      )}
-                      <a
-                        href={util.externalUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center justify-center gap-2 px-4 py-2.5 border border-gray-300 text-gray-700 rounded-lg font-medium hover:bg-gray-50 transition-colors text-sm"
-                      >
-                        {util.downloadUrl ? 'Strona Zebra' : 'Pobierz'}
-                        <ExternalLink className="w-3.5 h-3.5" />
-                      </a>
-                    </div>
-                  </div>
+                  ))}
                 </div>
-              ))}
+              )}
+
+              {/* Programy dla skanerów */}
+              {utilityType === 'scanners' && (
+                <div className="space-y-4">
+                  {scannerUtilities.map((util) => (
+                    <div key={util.id} className="bg-white border border-gray-200 rounded-xl p-5 sm:p-6">
+                      <div className="flex flex-col sm:flex-row sm:items-start gap-4">
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2 mb-1">
+                            <h3 className="font-semibold text-gray-900">{util.name}</h3>
+                            {util.version && (
+                              <span className="px-2 py-0.5 bg-gray-100 text-gray-600 text-xs rounded-full">
+                                v{util.version}
+                              </span>
+                            )}
+                          </div>
+                          <p className="text-gray-600 text-sm mb-2">{util.description}</p>
+                          {util.fileSize && (
+                            <p className="text-gray-500 text-xs">Rozmiar: {util.fileSize}</p>
+                          )}
+                        </div>
+                        <div className="flex flex-col gap-2 sm:min-w-[140px]">
+                          {util.downloadUrl && (
+                            <a
+                              href={util.downloadUrl}
+                              className="flex items-center justify-center gap-2 px-4 py-2.5 bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-800 transition-colors text-sm"
+                            >
+                              <Download className="w-4 h-4" />
+                              Pobierz
+                            </a>
+                          )}
+                          <a
+                            href={util.externalUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center justify-center gap-2 px-4 py-2.5 border border-gray-300 text-gray-700 rounded-lg font-medium hover:bg-gray-50 transition-colors text-sm"
+                          >
+                            Strona Zebra
+                            <ExternalLink className="w-3.5 h-3.5" />
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           )}
         </div>
