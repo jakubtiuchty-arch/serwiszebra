@@ -119,6 +119,15 @@ const utilities = [
     externalUrl: 'https://www.zebra.com/us/en/support-downloads/software/utilities/123scan-utility.html',
     fileSize: null,
   },
+  {
+    id: '123scan-64bit',
+    name: '123Scan (64-bit)',
+    version: '6.00.0036',
+    description: 'Narzędzie do konfiguracji skanerów Zebra. Tworzenie profili skanowania, aktualizacja firmware, diagnostyka.',
+    downloadUrl: 'https://fivrcnshzylqdquuhkeu.supabase.co/storage/v1/object/public/downloads/Zebra_123Scan_(64bit)_v6.00.0036.zip',
+    externalUrl: 'https://www.zebra.com/us/en/support-downloads/software/utilities/123scan-utility.html',
+    fileSize: null,
+  },
 ]
 
 // Obsługiwane drukarki - stonowane kolory
