@@ -335,9 +335,9 @@ export default function CityServicePage({ params }: { params: { miasto: string }
         {/* Intro */}
         <section className="py-8 sm:py-10 md:py-12">
           <div className="max-w-6xl mx-auto px-3 sm:px-4">
-            <div className="bg-gray-50 border border-gray-100 rounded-xl p-4 sm:p-5 md:p-6">
-              <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-                {city.introText} Specjalizujemy się w naprawie urządzeń Zebra Technologies – drukarki etykiet, terminale mobilne, skanery kodów. <strong className="text-gray-900">25 lat doświadczenia.</strong>
+            <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-sky-50 border border-blue-100 rounded-xl p-4 sm:p-5 md:p-6 shadow-sm">
+              <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
+                {city.introText} Specjalizujemy się w naprawie urządzeń Zebra Technologies – drukarki etykiet, terminale mobilne, skanery kodów. <strong className="text-blue-900">25 lat doświadczenia.</strong>
               </p>
             </div>
           </div>
