@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
+import Header from '@/components/Header'
 import { 
   MapPin, 
   Truck, 
@@ -263,75 +264,79 @@ export default function CityServicePage({ params }: { params: { miasto: string }
       />
 
       <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-        {/* Header */}
-        <header className="bg-white shadow-sm border-b">
-          <div className="max-w-6xl mx-auto px-4 py-4">
-            <nav className="flex items-center gap-2 text-sm text-gray-600">
+        {/* Header ze strony głównej */}
+        <Header currentPage="other" />
+
+        {/* Breadcrumbs */}
+        <div className="bg-white border-b">
+          <div className="max-w-6xl mx-auto px-3 sm:px-4 py-2 sm:py-3">
+            <nav className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-gray-600">
               <Link href="/" className="hover:text-blue-600">Strona główna</Link>
-              <ChevronRight className="w-4 h-4" />
+              <ChevronRight className="w-3 h-3 sm:w-4 sm:h-4" />
               <span className="text-gray-900 font-medium">Serwis Zebra {city.name}</span>
             </nav>
           </div>
-        </header>
+        </div>
 
-        {/* Hero Section */}
-        <section className="bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 text-white py-16 md:py-24">
-          <div className="max-w-6xl mx-auto px-4">
-            <div className="flex items-center gap-2 mb-4">
-              <MapPin className="w-5 h-5 text-blue-300" />
-              <span className="text-blue-200 font-medium">{city.name} i okolice</span>
+        {/* Hero Section - Mobile optimized */}
+        <section className="bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 text-white py-8 sm:py-12 md:py-20">
+          <div className="max-w-6xl mx-auto px-3 sm:px-4">
+            <div className="flex items-center gap-1.5 sm:gap-2 mb-2 sm:mb-4">
+              <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-blue-300" />
+              <span className="text-blue-200 font-medium text-sm sm:text-base">{city.name} i okolice</span>
             </div>
             
-            <h1 className="text-3xl md:text-5xl font-bold mb-6">
+            <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-3 sm:mb-6">
               Serwis Zebra {city.name}
-              <span className="block text-xl md:text-2xl font-normal text-blue-200 mt-2">
+              <span className="block text-base sm:text-xl md:text-2xl font-normal text-blue-200 mt-1 sm:mt-2">
                 Naprawa Drukarek, Terminali i Skanerów
               </span>
             </h1>
             
-            <p className="text-lg md:text-xl text-blue-100 mb-8 max-w-2xl">
+            <p className="text-sm sm:text-lg md:text-xl text-blue-100 mb-4 sm:mb-8 max-w-2xl">
               {city.heroText}
             </p>
 
-            <div className="flex flex-wrap gap-4 mb-8">
-              <div className="flex items-center gap-2 bg-white/10 backdrop-blur px-4 py-2 rounded-full">
-                <Truck className="w-5 h-5 text-green-300" />
-                <span>Odbiór kurierem w {city.deliveryTime}</span>
+            <div className="flex flex-wrap gap-2 sm:gap-4 mb-4 sm:mb-8">
+              <div className="flex items-center gap-1.5 sm:gap-2 bg-white/10 backdrop-blur px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-base">
+                <Truck className="w-3.5 h-3.5 sm:w-5 sm:h-5 text-green-300" />
+                <span>Odbiór w {city.deliveryTime}</span>
               </div>
-              <div className="flex items-center gap-2 bg-white/10 backdrop-blur px-4 py-2 rounded-full">
-                <Clock className="w-5 h-5 text-yellow-300" />
+              <div className="flex items-center gap-1.5 sm:gap-2 bg-white/10 backdrop-blur px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-base">
+                <Clock className="w-3.5 h-3.5 sm:w-5 sm:h-5 text-yellow-300" />
                 <span>Naprawa 2-5 dni</span>
               </div>
-              <div className="flex items-center gap-2 bg-white/10 backdrop-blur px-4 py-2 rounded-full">
-                <Shield className="w-5 h-5 text-blue-300" />
+              <div className="flex items-center gap-1.5 sm:gap-2 bg-white/10 backdrop-blur px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-base">
+                <Shield className="w-3.5 h-3.5 sm:w-5 sm:h-5 text-blue-300" />
                 <span>12 mies. gwarancji</span>
               </div>
             </div>
 
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-wrap gap-2 sm:gap-4">
               <Link
                 href="/#formularz"
-                className="inline-flex items-center gap-2 bg-white text-blue-700 font-semibold px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-lg"
+                className="inline-flex items-center gap-1.5 sm:gap-2 bg-white text-blue-700 font-semibold px-4 sm:px-6 py-2 sm:py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-lg text-sm sm:text-base"
               >
-                Zgłoś naprawę online
-                <ChevronRight className="w-5 h-5" />
+                Zgłoś naprawę
+                <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
               </Link>
               <a
                 href="tel:+48601619898"
-                className="inline-flex items-center gap-2 bg-blue-500/30 backdrop-blur text-white font-semibold px-6 py-3 rounded-xl hover:bg-blue-500/40 transition-colors"
+                className="inline-flex items-center gap-1.5 sm:gap-2 bg-blue-500/30 backdrop-blur text-white font-semibold px-4 sm:px-6 py-2 sm:py-3 rounded-xl hover:bg-blue-500/40 transition-colors text-sm sm:text-base"
               >
-                <Phone className="w-5 h-5" />
-                +48 601 619 898
+                <Phone className="w-4 h-4 sm:w-5 sm:h-5" />
+                <span className="hidden sm:inline">+48 601 619 898</span>
+                <span className="sm:hidden">Zadzwoń</span>
               </a>
             </div>
           </div>
         </section>
 
         {/* Intro */}
-        <section className="py-12 md:py-16">
-          <div className="max-w-6xl mx-auto px-4">
-            <div className="bg-blue-50 border border-blue-100 rounded-2xl p-6 md:p-8">
-              <p className="text-lg text-gray-700 leading-relaxed">
+        <section className="py-6 sm:py-10 md:py-16">
+          <div className="max-w-6xl mx-auto px-3 sm:px-4">
+            <div className="bg-blue-50 border border-blue-100 rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8">
+              <p className="text-sm sm:text-base md:text-lg text-gray-700 leading-relaxed">
                 {city.introText} Specjalizujemy się w naprawie wszystkich urządzeń Zebra Technologies – od drukarek etykiet, przez terminale mobilne, po skanery kodów kreskowych. <strong>25 lat doświadczenia</strong> i tysiące skutecznych napraw.
               </p>
             </div>
@@ -339,111 +344,143 @@ export default function CityServicePage({ params }: { params: { miasto: string }
         </section>
 
         {/* Serwisowane urządzenia */}
-        <section className="py-12 md:py-16 bg-white">
-          <div className="max-w-6xl mx-auto px-4">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">
+        <section className="py-6 sm:py-10 md:py-16 bg-white">
+          <div className="max-w-6xl mx-auto px-3 sm:px-4">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-4 sm:mb-8 text-center">
               Jakie urządzenia serwisujemy w {city.nameLocative}?
             </h2>
 
-            <div className="grid md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
               {/* Drukarki */}
-              <div className="bg-gray-50 rounded-2xl p-6 hover:shadow-lg transition-shadow">
-                <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-4">
-                  <Printer className="w-6 h-6 text-blue-600" />
+              <div className="bg-gray-50 rounded-xl sm:rounded-2xl p-4 sm:p-6 hover:shadow-lg transition-shadow">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 rounded-lg sm:rounded-xl flex items-center justify-center mb-3 sm:mb-4">
+                  <Printer className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">Drukarki etykiet</h3>
-                <ul className="space-y-2 text-gray-600 mb-4">
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-green-500 flex-shrink-0" />
+                <h3 className="text-base sm:text-lg md:text-xl font-bold text-gray-900 mb-2 sm:mb-3">Drukarki etykiet</h3>
+                <ul className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm md:text-base text-gray-600 mb-3 sm:mb-4">
+                  <li className="flex items-center gap-1.5 sm:gap-2">
+                    <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-green-500 flex-shrink-0" />
                     Desktop: ZD420, ZD621, GK420
                   </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-green-500 flex-shrink-0" />
-                    Przemysłowe: ZT410, ZT610, ZT510
+                  <li className="flex items-center gap-1.5 sm:gap-2">
+                    <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-green-500 flex-shrink-0" />
+                    Przemysłowe: ZT410, ZT610
                   </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-green-500 flex-shrink-0" />
+                  <li className="flex items-center gap-1.5 sm:gap-2">
+                    <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-green-500 flex-shrink-0" />
                     Mobilne: ZQ520, ZQ630
                   </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-green-500 flex-shrink-0" />
-                    Karty: ZC300, ZXP7, ZXP9
+                  <li className="flex items-center gap-1.5 sm:gap-2">
+                    <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-green-500 flex-shrink-0" />
+                    Karty: ZC300, ZXP7
                   </li>
                 </ul>
-                <Link href="/blog" className="text-blue-600 hover:text-blue-800 font-medium text-sm">
-                  Poradniki dla drukarek →
+                <Link href="/blog" className="text-blue-600 hover:text-blue-800 font-medium text-xs sm:text-sm">
+                  Poradniki →
                 </Link>
               </div>
 
               {/* Terminale */}
-              <div className="bg-gray-50 rounded-2xl p-6 hover:shadow-lg transition-shadow">
-                <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mb-4">
-                  <Smartphone className="w-6 h-6 text-green-600" />
+              <div className="bg-gray-50 rounded-xl sm:rounded-2xl p-4 sm:p-6 hover:shadow-lg transition-shadow">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-green-100 rounded-lg sm:rounded-xl flex items-center justify-center mb-3 sm:mb-4">
+                  <Smartphone className="w-5 h-5 sm:w-6 sm:h-6 text-green-600" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">Terminale mobilne</h3>
-                <ul className="space-y-2 text-gray-600 mb-4">
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-green-500 flex-shrink-0" />
-                    Seria TC: TC21, TC52, TC58, TC72
+                <h3 className="text-base sm:text-lg md:text-xl font-bold text-gray-900 mb-2 sm:mb-3">Terminale mobilne</h3>
+                <ul className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm md:text-base text-gray-600 mb-3 sm:mb-4">
+                  <li className="flex items-center gap-1.5 sm:gap-2">
+                    <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-green-500 flex-shrink-0" />
+                    Seria TC: TC21, TC52, TC72
                   </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-green-500 flex-shrink-0" />
-                    Seria MC: MC2200, MC3300, MC9300
+                  <li className="flex items-center gap-1.5 sm:gap-2">
+                    <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-green-500 flex-shrink-0" />
+                    Seria MC: MC2200, MC3300
                   </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-green-500 flex-shrink-0" />
+                  <li className="flex items-center gap-1.5 sm:gap-2">
+                    <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-green-500 flex-shrink-0" />
                     Wearable: WT6000
                   </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-green-500 flex-shrink-0" />
-                    Tablety: ET40, ET45, L10
+                  <li className="flex items-center gap-1.5 sm:gap-2">
+                    <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-green-500 flex-shrink-0" />
+                    Tablety: ET40, L10
                   </li>
                 </ul>
-                <Link href="/blog" className="text-blue-600 hover:text-blue-800 font-medium text-sm">
-                  Poradniki dla terminali →
+                <Link href="/blog" className="text-blue-600 hover:text-blue-800 font-medium text-xs sm:text-sm">
+                  Poradniki →
                 </Link>
               </div>
 
               {/* Skanery */}
-              <div className="bg-gray-50 rounded-2xl p-6 hover:shadow-lg transition-shadow">
-                <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-4">
-                  <ScanBarcode className="w-6 h-6 text-purple-600" />
+              <div className="bg-gray-50 rounded-xl sm:rounded-2xl p-4 sm:p-6 hover:shadow-lg transition-shadow sm:col-span-2 md:col-span-1">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-purple-100 rounded-lg sm:rounded-xl flex items-center justify-center mb-3 sm:mb-4">
+                  <ScanBarcode className="w-5 h-5 sm:w-6 sm:h-6 text-purple-600" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">Skanery kodów</h3>
-                <ul className="space-y-2 text-gray-600 mb-4">
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-green-500 flex-shrink-0" />
+                <h3 className="text-base sm:text-lg md:text-xl font-bold text-gray-900 mb-2 sm:mb-3">Skanery kodów</h3>
+                <ul className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm md:text-base text-gray-600 mb-3 sm:mb-4">
+                  <li className="flex items-center gap-1.5 sm:gap-2">
+                    <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-green-500 flex-shrink-0" />
                     Przewodowe: DS2208, DS4608
                   </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-green-500 flex-shrink-0" />
+                  <li className="flex items-center gap-1.5 sm:gap-2">
+                    <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-green-500 flex-shrink-0" />
                     Bezprzewodowe: DS2278, DS3678
                   </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-green-500 flex-shrink-0" />
-                    Prezentacyjne: DS9208, DS9908
+                  <li className="flex items-center gap-1.5 sm:gap-2">
+                    <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-green-500 flex-shrink-0" />
+                    Prezentacyjne: DS9208
                   </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-green-500 flex-shrink-0" />
-                    Kompaktowe: CS4070, CS6080
+                  <li className="flex items-center gap-1.5 sm:gap-2">
+                    <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-green-500 flex-shrink-0" />
+                    Kompaktowe: CS4070
                   </li>
                 </ul>
-                <Link href="/blog" className="text-blue-600 hover:text-blue-800 font-medium text-sm">
-                  Poradniki dla skanerów →
+                <Link href="/blog" className="text-blue-600 hover:text-blue-800 font-medium text-xs sm:text-sm">
+                  Poradniki →
                 </Link>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Cennik */}
-        <section className="py-12 md:py-16">
-          <div className="max-w-6xl mx-auto px-4">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">
+        {/* Cennik - mobile friendly cards + desktop table */}
+        <section className="py-6 sm:py-10 md:py-16">
+          <div className="max-w-6xl mx-auto px-3 sm:px-4">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-4 sm:mb-8 text-center">
               Orientacyjny cennik napraw
             </h2>
 
-            <div className="overflow-x-auto">
+            {/* Mobile: Cards */}
+            <div className="md:hidden space-y-3">
+              <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+                <h3 className="font-semibold text-gray-900 mb-2 text-sm">Wymiana głowicy</h3>
+                <div className="grid grid-cols-2 gap-2 text-xs">
+                  <div><span className="text-gray-500">Desktop:</span> <span className="font-medium">250-530 zł</span></div>
+                  <div><span className="text-gray-500">Przemysłowe:</span> <span className="font-medium">580-2499 zł</span></div>
+                </div>
+              </div>
+              <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+                <h3 className="font-semibold text-gray-900 mb-2 text-sm">Naprawa mechanizmu</h3>
+                <div className="grid grid-cols-2 gap-2 text-xs">
+                  <div><span className="text-gray-500">Desktop:</span> <span className="font-medium">150-300 zł</span></div>
+                  <div><span className="text-gray-500">Przemysłowe:</span> <span className="font-medium">200-450 zł</span></div>
+                </div>
+              </div>
+              <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+                <h3 className="font-semibold text-gray-900 mb-2 text-sm">Terminale mobilne</h3>
+                <div className="grid grid-cols-2 gap-2 text-xs">
+                  <div><span className="text-gray-500">Wyświetlacz:</span> <span className="font-medium">600-1200 zł</span></div>
+                  <div><span className="text-gray-500">Skaner:</span> <span className="font-medium">500-1100 zł</span></div>
+                </div>
+              </div>
+              <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+                <h3 className="font-semibold text-gray-900 mb-2 text-sm">Czyszczenie + konserwacja</h3>
+                <div className="text-xs">
+                  <span className="text-gray-500">od</span> <span className="font-medium">149 zł</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Desktop: Table */}
+            <div className="hidden md:block overflow-x-auto">
               <table className="w-full bg-white rounded-2xl overflow-hidden shadow-lg">
                 <thead className="bg-gray-50">
                   <tr>
@@ -488,81 +525,87 @@ export default function CityServicePage({ params }: { params: { miasto: string }
               </table>
             </div>
 
-            <p className="text-center text-gray-500 mt-4 text-sm">
-              * Ceny orientacyjne. Dokładna wycena po diagnostyce. Diagnostyka bezpłatna przy akceptacji naprawy.
+            <p className="text-center text-gray-500 mt-3 sm:mt-4 text-xs sm:text-sm">
+              * Ceny orientacyjne. Dokładna wycena po diagnostyce.
             </p>
           </div>
         </section>
 
         {/* Jak to działa */}
-        <section className="py-12 md:py-16 bg-white">
-          <div className="max-w-6xl mx-auto px-4">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">
+        <section className="py-6 sm:py-10 md:py-16 bg-white">
+          <div className="max-w-6xl mx-auto px-3 sm:px-4">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-4 sm:mb-8 text-center">
               Jak wygląda naprawa?
             </h2>
 
-            <div className="grid md:grid-cols-3 gap-8">
-              <div className="text-center">
-                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-2xl font-bold text-blue-600">1</span>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
+              <div className="text-center flex sm:block items-center gap-3 sm:gap-0">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-blue-100 rounded-full flex items-center justify-center sm:mx-auto mb-0 sm:mb-3 md:mb-4 flex-shrink-0">
+                  <span className="text-lg sm:text-xl md:text-2xl font-bold text-blue-600">1</span>
                 </div>
-                <h3 className="text-lg font-bold text-gray-900 mb-2">Zgłoś naprawę</h3>
-                <p className="text-gray-600">
-                  Wypełnij formularz online lub zadzwoń. Opisz problem – nasz AI pomoże wstępnie zdiagnozować usterkę.
-                </p>
+                <div className="text-left sm:text-center">
+                  <h3 className="text-sm sm:text-base md:text-lg font-bold text-gray-900 mb-0.5 sm:mb-2">Zgłoś naprawę</h3>
+                  <p className="text-xs sm:text-sm md:text-base text-gray-600">
+                    Wypełnij formularz online lub zadzwoń.
+                  </p>
+                </div>
               </div>
 
-              <div className="text-center">
-                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-2xl font-bold text-blue-600">2</span>
+              <div className="text-center flex sm:block items-center gap-3 sm:gap-0">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-blue-100 rounded-full flex items-center justify-center sm:mx-auto mb-0 sm:mb-3 md:mb-4 flex-shrink-0">
+                  <span className="text-lg sm:text-xl md:text-2xl font-bold text-blue-600">2</span>
                 </div>
-                <h3 className="text-lg font-bold text-gray-900 mb-2">Kurier odbierze urządzenie</h3>
-                <p className="text-gray-600">
-                  Kurier przyjedzie pod wskazany adres w {city.nameLocative} w ciągu {city.deliveryTime}. Bezpłatnie!
-                </p>
+                <div className="text-left sm:text-center">
+                  <h3 className="text-sm sm:text-base md:text-lg font-bold text-gray-900 mb-0.5 sm:mb-2">Odbiór kurierem</h3>
+                  <p className="text-xs sm:text-sm md:text-base text-gray-600">
+                    Kurier przyjedzie w {city.deliveryTime}. Bezpłatnie!
+                  </p>
+                </div>
               </div>
 
-              <div className="text-center">
-                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-2xl font-bold text-blue-600">3</span>
+              <div className="text-center flex sm:block items-center gap-3 sm:gap-0">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-blue-100 rounded-full flex items-center justify-center sm:mx-auto mb-0 sm:mb-3 md:mb-4 flex-shrink-0">
+                  <span className="text-lg sm:text-xl md:text-2xl font-bold text-blue-600">3</span>
                 </div>
-                <h3 className="text-lg font-bold text-gray-900 mb-2">Naprawa i zwrot</h3>
-                <p className="text-gray-600">
-                  Naprawiamy w 2-5 dni. Akceptujesz wycenę online, płacisz i odbierasz naprawione urządzenie.
-                </p>
+                <div className="text-left sm:text-center">
+                  <h3 className="text-sm sm:text-base md:text-lg font-bold text-gray-900 mb-0.5 sm:mb-2">Naprawa i zwrot</h3>
+                  <p className="text-xs sm:text-sm md:text-base text-gray-600">
+                    Naprawiamy w 2-5 dni i odsyłamy.
+                  </p>
+                </div>
               </div>
             </div>
 
-            <div className="text-center mt-10">
+            <div className="text-center mt-6 sm:mt-8 md:mt-10">
               <Link
                 href="/#formularz"
-                className="inline-flex items-center gap-2 bg-blue-600 text-white font-semibold px-8 py-4 rounded-xl hover:bg-blue-700 transition-colors shadow-lg"
+                className="inline-flex items-center gap-1.5 sm:gap-2 bg-blue-600 text-white font-semibold px-5 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 rounded-xl hover:bg-blue-700 transition-colors shadow-lg text-sm sm:text-base"
               >
-                Zgłoś naprawę z {city.name}
-                <ChevronRight className="w-5 h-5" />
+                Zgłoś naprawę
+                <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
               </Link>
             </div>
           </div>
         </section>
 
         {/* FAQ */}
-        <section className="py-12 md:py-16">
-          <div className="max-w-4xl mx-auto px-4">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">
+        <section className="py-6 sm:py-10 md:py-16">
+          <div className="max-w-4xl mx-auto px-3 sm:px-4">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-4 sm:mb-8 text-center">
               Najczęściej zadawane pytania
             </h2>
 
-            <div className="space-y-4">
+            <div className="space-y-2 sm:space-y-4">
               {faq.map((item, idx) => (
                 <details
                   key={idx}
-                  className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden group"
+                  className="bg-white rounded-lg sm:rounded-xl shadow-sm border border-gray-100 overflow-hidden group"
                 >
-                  <summary className="px-6 py-4 cursor-pointer font-medium text-gray-900 hover:bg-gray-50 transition-colors flex items-center justify-between">
-                    {item.question}
-                    <ChevronRight className="w-5 h-5 text-gray-400 group-open:rotate-90 transition-transform" />
+                  <summary className="px-3 sm:px-6 py-3 sm:py-4 cursor-pointer font-medium text-gray-900 hover:bg-gray-50 transition-colors flex items-center justify-between gap-2 text-sm sm:text-base">
+                    <span>{item.question}</span>
+                    <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 group-open:rotate-90 transition-transform flex-shrink-0" />
                   </summary>
-                  <div className="px-6 pb-4 text-gray-600">
+                  <div className="px-3 sm:px-6 pb-3 sm:pb-4 text-xs sm:text-sm md:text-base text-gray-600">
                     {item.answer}
                   </div>
                 </details>
@@ -572,50 +615,51 @@ export default function CityServicePage({ params }: { params: { miasto: string }
         </section>
 
         {/* CTA */}
-        <section className="py-12 md:py-16 bg-gradient-to-br from-blue-600 to-indigo-700 text-white">
-          <div className="max-w-4xl mx-auto px-4 text-center">
-            <div className="flex items-center justify-center gap-1 mb-4">
+        <section className="py-8 sm:py-12 md:py-16 bg-gradient-to-br from-blue-600 to-indigo-700 text-white">
+          <div className="max-w-4xl mx-auto px-3 sm:px-4 text-center">
+            <div className="flex items-center justify-center gap-0.5 sm:gap-1 mb-2 sm:mb-4">
               {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-6 h-6 fill-yellow-400 text-yellow-400" />
+                <Star key={i} className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 fill-yellow-400 text-yellow-400" />
               ))}
             </div>
-            <p className="text-blue-100 mb-4">25 lat doświadczenia • Tysiące skutecznych napraw</p>
+            <p className="text-blue-100 mb-2 sm:mb-4 text-xs sm:text-sm md:text-base">25 lat doświadczenia • Tysiące skutecznych napraw</p>
             
-            <h2 className="text-2xl md:text-3xl font-bold mb-6">
-              Potrzebujesz naprawy urządzenia Zebra w {city.nameLocative}?
+            <h2 className="text-lg sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-6">
+              Potrzebujesz naprawy w {city.nameLocative}?
             </h2>
             
-            <p className="text-lg text-blue-100 mb-8">
-              Skontaktuj się z nami lub wypełnij formularz online. Kurier odbierze urządzenie w {city.deliveryTime}!
+            <p className="text-sm sm:text-base md:text-lg text-blue-100 mb-4 sm:mb-8">
+              Kurier odbierze urządzenie w {city.deliveryTime}!
             </p>
 
-            <div className="flex flex-wrap justify-center gap-4">
+            <div className="flex flex-wrap justify-center gap-2 sm:gap-4">
               <Link
                 href="/#formularz"
-                className="inline-flex items-center gap-2 bg-white text-blue-700 font-semibold px-8 py-4 rounded-xl hover:bg-blue-50 transition-colors shadow-lg"
+                className="inline-flex items-center gap-1.5 sm:gap-2 bg-white text-blue-700 font-semibold px-4 sm:px-6 md:px-8 py-2 sm:py-3 md:py-4 rounded-xl hover:bg-blue-50 transition-colors shadow-lg text-sm sm:text-base"
               >
-                Zgłoś naprawę online
-                <ChevronRight className="w-5 h-5" />
+                Zgłoś naprawę
+                <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
               </Link>
               <a
                 href="tel:+48601619898"
-                className="inline-flex items-center gap-2 bg-blue-500/30 backdrop-blur text-white font-semibold px-8 py-4 rounded-xl hover:bg-blue-500/40 transition-colors"
+                className="inline-flex items-center gap-1.5 sm:gap-2 bg-blue-500/30 backdrop-blur text-white font-semibold px-4 sm:px-6 md:px-8 py-2 sm:py-3 md:py-4 rounded-xl hover:bg-blue-500/40 transition-colors text-sm sm:text-base"
               >
-                <Phone className="w-5 h-5" />
-                +48 601 619 898
+                <Phone className="w-4 h-4 sm:w-5 sm:h-5" />
+                <span className="hidden sm:inline">+48 601 619 898</span>
+                <span className="sm:hidden">Zadzwoń</span>
               </a>
             </div>
           </div>
         </section>
 
         {/* Footer link */}
-        <section className="py-8 bg-gray-50 border-t">
-          <div className="max-w-6xl mx-auto px-4 text-center">
-            <p className="text-gray-600">
-              <Link href="/" className="text-blue-600 hover:underline">← Wróć do strony głównej</Link>
-              {' • '}
-              <Link href="/blog" className="text-blue-600 hover:underline">Poradniki i artykuły</Link>
-              {' • '}
+        <section className="py-4 sm:py-6 md:py-8 bg-gray-50 border-t">
+          <div className="max-w-6xl mx-auto px-3 sm:px-4 text-center">
+            <p className="text-xs sm:text-sm md:text-base text-gray-600 flex flex-wrap justify-center gap-2 sm:gap-0">
+              <Link href="/" className="text-blue-600 hover:underline">← Strona główna</Link>
+              <span className="hidden sm:inline">{' • '}</span>
+              <Link href="/blog" className="text-blue-600 hover:underline">Blog</Link>
+              <span className="hidden sm:inline">{' • '}</span>
               <Link href="/kontakt" className="text-blue-600 hover:underline">Kontakt</Link>
             </p>
           </div>
