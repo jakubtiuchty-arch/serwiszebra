@@ -312,7 +312,7 @@ export default function CityServicePage({ params }: { params: { miasto: string }
               </div>
             </div>
 
-            <div className="flex flex-wrap gap-3 justify-center">
+            <div className="flex flex-wrap gap-3 justify-center mt-4 sm:mt-6">
               <Link
                 href="/#formularz"
                 className="inline-flex items-center gap-2 bg-blue-600 text-white font-medium px-5 py-2.5 rounded-lg hover:bg-blue-700 transition-colors text-sm"
