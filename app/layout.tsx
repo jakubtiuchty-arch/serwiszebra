@@ -1,6 +1,6 @@
 import { Inter } from 'next/font/google'
 import './globals.css'
-import { metadata as seoMetadata } from './metadata'
+import { metadata as seoMetadata, viewport as seoViewport } from './metadata'
 import { Analytics } from '@vercel/analytics/react'
 
 const inter = Inter({
@@ -9,6 +9,7 @@ const inter = Inter({
 })
 
 export const metadata = seoMetadata
+export const viewport = seoViewport
 
 export default function RootLayout({
   children,

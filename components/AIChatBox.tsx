@@ -519,8 +519,9 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
                 onChange={(e) => setInput(e.target.value)}
                 onKeyPress={handleKeyPress}
                 placeholder={messages.length === 0 ? currentPlaceholder : "Napisz więcej..."}
-                className="flex-1 text-sm text-gray-700 placeholder-gray-400 focus:outline-none bg-transparent"
+                className="flex-1 text-[16px] text-gray-700 placeholder-gray-400 focus:outline-none bg-transparent"
                 disabled={loading}
+                style={{ fontSize: '16px' }}
               />
 
               {/* Ikony W ŚRODKU inputa */}
