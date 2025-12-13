@@ -382,7 +382,7 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
   // INLINE variant - dla mobile hero (bez boxów, wszystko wbudowane)
   if (variant === 'inline') {
     return (
-      <div className="flex flex-col h-full px-4">
+      <div className="flex flex-col flex-1 px-4" style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}>
         {/* Scrollowalny obszar - tytuł + wiadomości */}
         <div 
           ref={messagesContainerRef}
@@ -400,7 +400,7 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
 
           {/* Wiadomości */}
           {messages.length > 0 && (
-            <div className="space-y-3 pb-2">
+            <div className="space-y-3 pb-4">
               {messages.map((msg, idx) => (
                 <div
                   key={idx}
@@ -484,7 +484,7 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
         </div>
 
         {/* Input area - ChatGPT style */}
-        <div className="pb-4 pt-2 flex-shrink-0">
+        <div className="pb-6 pt-3 flex-shrink-0 bg-gradient-to-t from-blue-50/80 via-indigo-50/40 to-transparent -mx-4 px-4">
           <input type="file" ref={fileInputRef} accept="image/*,video/*" multiple onChange={handleFileSelect} className="hidden" />
           <input type="file" ref={videoInputRef} accept="video/*" capture="environment" onChange={handleVideoCapture} className="hidden" />
 
