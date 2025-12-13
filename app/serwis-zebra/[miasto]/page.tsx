@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
 import Header from '@/components/Header'
+import HowItWorksCity from '@/components/HowItWorksCity'
 import { 
   MapPin, 
   Truck, 
@@ -12,13 +13,7 @@ import {
   Smartphone,
   ScanBarcode,
   ChevronRight,
-  Star,
-  MessageSquare,
-  Package,
-  Wrench,
-  Sparkles,
-  Eye,
-  TrendingUp
+  Star
 } from 'lucide-react'
 
 // Dane miast
@@ -273,19 +268,8 @@ export default function CityServicePage({ params }: { params: { miasto: string }
         {/* Header ze strony głównej */}
         <Header currentPage="other" />
 
-        {/* Breadcrumbs */}
-        <div className="bg-white border-b">
-          <div className="max-w-6xl mx-auto px-3 sm:px-4 py-2 sm:py-3">
-            <nav className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-gray-600">
-              <Link href="/" className="hover:text-blue-600">Strona główna</Link>
-              <ChevronRight className="w-3 h-3 sm:w-4 sm:h-4" />
-              <span className="text-gray-900 font-medium">Serwis Zebra {city.name}</span>
-            </nav>
-          </div>
-        </div>
-
         {/* Hero Section - lekki gradient jak na stronie głównej */}
-        <section className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-10 sm:py-12 md:py-16">
+        <section className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-8 sm:py-10 md:py-12">
           <div className="max-w-6xl mx-auto px-3 sm:px-4 text-center">
             <div className="flex items-center justify-center gap-1.5 sm:gap-2 mb-3">
               <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
@@ -318,7 +302,7 @@ export default function CityServicePage({ params }: { params: { miasto: string }
               </div>
             </div>
 
-            <div className="flex flex-wrap gap-3 justify-center mt-4 sm:mt-6">
+            <div className="flex flex-wrap gap-3 justify-center mt-6 sm:mt-8">
               <Link
                 href="/#formularz"
                 className="inline-flex items-center gap-2 bg-blue-600 text-white font-medium px-5 py-2.5 rounded-lg hover:bg-blue-700 transition-colors text-sm"
@@ -341,7 +325,7 @@ export default function CityServicePage({ params }: { params: { miasto: string }
         {/* Intro */}
         <section className="py-8 sm:py-10 md:py-12">
           <div className="max-w-6xl mx-auto px-3 sm:px-4">
-            <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-sky-50 border border-blue-100 rounded-xl p-4 sm:p-5 md:p-6 shadow-sm">
+            <div className="bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 border border-amber-200 rounded-xl p-4 sm:p-5 md:p-6 shadow-sm">
               <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
                 {city.introText} Specjalizujemy się w naprawie urządzeń Zebra Technologies – drukarki etykiet, terminale mobilne, skanery kodów. <strong className="text-blue-900">25 lat doświadczenia.</strong>
               </p>
@@ -469,133 +453,12 @@ export default function CityServicePage({ params }: { params: { miasto: string }
           </div>
         </section>
 
-        {/* JAK TO DZIAŁA - 4 KROKI (jak na stronie głównej) */}
-        <section className="py-12 px-3 sm:px-4 bg-white">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-8">
-              <h2 className="text-2xl md:text-3xl font-semibold text-gray-900 mb-2">
-                Jak to działa
-              </h2>
-              <p className="text-sm text-gray-600 max-w-2xl mx-auto">
-                Proces naprawy w czterech krokach - od konsultacji do naprawionego urządzenia
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-4 gap-4 relative">
-              {/* Linia łącząca */}
-              <div className="hidden md:block absolute top-12 left-0 right-0 h-0.5 bg-gradient-to-r from-indigo-200 via-blue-200 via-purple-200 to-green-200 -z-10"
-                   style={{ top: '3rem', left: '8%', right: '8%' }} />
-
-              {/* KROK 1 - Chat AI */}
-              <div className="relative">
-                <div className="bg-white rounded-xl p-4 shadow-xl border border-gray-100 hover:shadow-2xl transition-all hover:-translate-y-1 h-full flex flex-col justify-between">
-                  <div className="flex flex-col items-center text-center">
-                    <div className="w-16 h-16 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-full flex items-center justify-center mb-3 shadow-lg relative">
-                      <MessageSquare className="w-8 h-8 text-white" />
-                      <div className="absolute -top-1 -right-1 w-7 h-7 bg-white rounded-full flex items-center justify-center shadow-md border-2 border-indigo-500">
-                        <span className="text-sm font-bold text-indigo-600">1</span>
-                      </div>
-                    </div>
-
-                    <h3 className="text-base font-semibold text-gray-900 mb-2">
-                      Konsultacja AI
-                    </h3>
-
-                    <p className="text-xs text-gray-600 leading-relaxed">
-                      Opisz problem w oknie czatu AI. Nasz asystent pomoże zdiagnozować usterkę i zaproponuje rozwiązania.
-                    </p>
-                  </div>
-
-                  <div className="flex items-center justify-center gap-1.5 bg-indigo-50 text-indigo-700 px-3 rounded-full text-xs font-medium h-9 mt-4">
-                    <Sparkles className="w-3 h-3 flex-shrink-0" />
-                    <span className="whitespace-nowrap">Natychmiastowa pomoc</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* KROK 2 - Wysyłka */}
-              <div className="relative">
-                <div className="bg-white rounded-xl p-4 shadow-xl border border-gray-100 hover:shadow-2xl transition-all hover:-translate-y-1 h-full flex flex-col justify-between">
-                  <div className="flex flex-col items-center text-center">
-                    <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mb-3 shadow-lg relative">
-                      <Package className="w-8 h-8 text-white" />
-                      <div className="absolute -top-1 -right-1 w-7 h-7 bg-white rounded-full flex items-center justify-center shadow-md border-2 border-blue-500">
-                        <span className="text-sm font-bold text-blue-600">2</span>
-                      </div>
-                    </div>
-
-                    <h3 className="text-base font-semibold text-gray-900 mb-2">
-                      Wyślij sprzęt
-                    </h3>
-
-                    <p className="text-xs text-gray-600 leading-relaxed">
-                      Wypełnij formularz zgłoszenia online. Kurier odbierze urządzenie z Twojego adresu w {city.nameLocative}.
-                    </p>
-                  </div>
-
-                  <div className="flex items-center justify-center gap-1.5 bg-blue-50 text-blue-700 px-3 rounded-full text-xs font-medium h-9 mt-4">
-                    <Clock className="w-3 h-3 flex-shrink-0" />
-                    <span className="whitespace-nowrap">Odbiór w {city.deliveryTime}</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* KROK 3 - Diagnoza */}
-              <div className="relative">
-                <div className="bg-white rounded-xl p-4 shadow-xl border border-gray-100 hover:shadow-2xl transition-all hover:-translate-y-1 h-full flex flex-col justify-between">
-                  <div className="flex flex-col items-center text-center">
-                    <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center mb-3 shadow-lg relative">
-                      <Wrench className="w-8 h-8 text-white" />
-                      <div className="absolute -top-1 -right-1 w-7 h-7 bg-white rounded-full flex items-center justify-center shadow-md border-2 border-purple-500">
-                        <span className="text-sm font-bold text-purple-600">3</span>
-                      </div>
-                    </div>
-
-                    <h3 className="text-base font-semibold text-gray-900 mb-2">
-                      Diagnoza + wycena
-                    </h3>
-
-                    <p className="text-xs text-gray-600 leading-relaxed">
-                      Nasi technicy przeprowadzą dokładną diagnostykę i prześlą szczegółową wycenę. Śledzisz status w panelu klienta.
-                    </p>
-                  </div>
-
-                  <div className="flex items-center justify-center gap-1.5 bg-purple-50 text-purple-700 px-3 rounded-full text-xs font-medium h-9 mt-4">
-                    <Eye className="w-3 h-3 flex-shrink-0" />
-                    <span className="whitespace-nowrap">Panel klienta 24/7</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* KROK 4 - Naprawa */}
-              <div className="relative">
-                <div className="bg-white rounded-xl p-4 shadow-xl border border-gray-100 hover:shadow-2xl transition-all hover:-translate-y-1 h-full flex flex-col justify-between">
-                  <div className="flex flex-col items-center text-center">
-                    <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center mb-3 shadow-lg relative">
-                      <CheckCircle2 className="w-8 h-8 text-white" />
-                      <div className="absolute -top-1 -right-1 w-7 h-7 bg-white rounded-full flex items-center justify-center shadow-md border-2 border-green-500">
-                        <span className="text-sm font-bold text-green-600">4</span>
-                      </div>
-                    </div>
-
-                    <h3 className="text-base font-semibold text-gray-900 mb-2">
-                      Naprawa i wysyłka
-                    </h3>
-
-                    <p className="text-xs text-gray-600 leading-relaxed">
-                      Po akceptacji wyceny naprawiamy urządzenie i odsyłamy kurierem do {city.name}.
-                    </p>
-                  </div>
-
-                  <div className="flex items-center justify-center gap-1.5 bg-green-50 text-green-700 px-3 rounded-full text-xs font-medium h-9 mt-4">
-                    <TrendingUp className="w-3 h-3 flex-shrink-0" />
-                    <span className="whitespace-nowrap">Naprawa 2-5 dni</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* JAK TO DZIAŁA - komponent kliencki z modalem */}
+        <HowItWorksCity 
+          cityName={city.name} 
+          cityNameLocative={city.nameLocative} 
+          deliveryTime={city.deliveryTime} 
+        />
 
         {/* FAQ */}
         <section className="py-10 sm:py-12 md:py-14">

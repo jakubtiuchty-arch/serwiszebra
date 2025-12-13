@@ -76,10 +76,13 @@ import Link from 'next/link'
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 to-orange-100 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         {/* Logo/Header */}
         <div className="text-center mb-8">
+          <div className="inline-block px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full border border-gray-200 mb-4 shadow-sm">
+            <p className="text-sm font-medium bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">Panel klienta</p>
+          </div>
           <h1 className="text-3xl font-bold text-gray-900 mb-2">
             Serwis Zebra
           </h1>
@@ -89,7 +92,7 @@ import Link from 'next/link'
         </div>
 
         {/* Login Form Card */}
-        <div className="bg-white rounded-2xl shadow-xl p-8">
+        <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Error Alert */}
             {error && (
@@ -115,7 +118,7 @@ import Link from 'next/link'
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="w-full pl-11 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
+                  className="w-full pl-11 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                   placeholder="twoj@email.pl"
                   disabled={loading}
                 />
@@ -135,7 +138,7 @@ import Link from 'next/link'
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  className="w-full pl-11 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
+                  className="w-full pl-11 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                   placeholder="••••••••"
                   disabled={loading}
                 />
@@ -158,7 +161,7 @@ import Link from 'next/link'
             <div className="text-right">
               <Link 
                 href="/resetuj-haslo" 
-                className="text-sm text-orange-600 hover:text-orange-700 font-medium transition-colors"
+                className="text-sm text-blue-600 hover:text-blue-700 font-medium transition-colors"
               >
                 Zapomniałeś hasła?
               </Link>
@@ -168,7 +171,7 @@ import Link from 'next/link'
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-orange-600 hover:bg-orange-700 text-white font-semibold py-3 rounded-lg transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
               {loading ? (
                 <>
@@ -184,7 +187,7 @@ import Link from 'next/link'
           {/* Divider */}
           <div className="relative my-6">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-gray-300"></div>
+              <div className="w-full border-t border-gray-200"></div>
             </div>
             <div className="relative flex justify-center text-sm">
               <span className="px-4 bg-white text-gray-500">lub</span>
@@ -197,7 +200,7 @@ import Link from 'next/link'
               Nie masz jeszcze konta?{' '}
               <Link 
                 href="/#formularz" 
-                className="text-orange-600 hover:text-orange-700 font-semibold transition-colors"
+                className="text-blue-600 hover:text-blue-700 font-semibold transition-colors"
               >
                 Zgłoś naprawę
               </Link>
