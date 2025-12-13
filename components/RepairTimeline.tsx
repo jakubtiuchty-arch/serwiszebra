@@ -69,10 +69,13 @@ const STATUS_CONFIG = {
 }
 
 const URGENCY_CONFIG = {
-  niska: { label: 'Niska', className: 'text-gray-600' },
-  srednia: { label: 'Średnia', className: 'text-yellow-600' },
-  wysoka: { label: 'Wysoka', className: 'text-orange-600' },
-  krytyczna: { label: 'Krytyczna', className: 'text-red-600' }
+  standard: { label: 'Zwykły', className: 'text-gray-600' },
+  express: { label: 'Wysoki', className: 'text-orange-600' },
+  // Legacy support
+  niska: { label: 'Zwykły', className: 'text-gray-600' },
+  srednia: { label: 'Zwykły', className: 'text-gray-600' },
+  wysoka: { label: 'Wysoki', className: 'text-orange-600' },
+  krytyczna: { label: 'Wysoki', className: 'text-orange-600' }
 }
 
 const STATUS_ORDER = ['nowe', 'odebrane', 'diagnoza', 'wycena', 'w_naprawie', 'zakonczone', 'wyslane']

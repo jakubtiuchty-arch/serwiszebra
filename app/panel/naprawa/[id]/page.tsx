@@ -25,7 +25,8 @@ import {
   LogOut,
   ExternalLink,
   CreditCard,
-  DollarSign
+  DollarSign,
+  FileText
 } from 'lucide-react'
 import { getTrackingUrl, formatCourierName } from '@/lib/tracking-links'
 import { format } from 'date-fns'
@@ -33,6 +34,12 @@ import { pl } from 'date-fns/locale'
 import PhotoGallery from '@/components/PhotoGallery'
 import JourneyMapTimeline from '@/components/JourneyMapTimeline'
 import Link from 'next/link'
+
+// Formatowanie ceny z miejscami po przecinku (555,00 zł)
+const formatPrice = (price: number | null | undefined): string => {
+  if (price === null || price === undefined) return '0,00'
+  return price.toLocaleString('pl-PL', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+}
 
 interface Repair {
   id: string
@@ -52,6 +59,7 @@ interface Repair {
   warranty_status: string | null
   estimated_price: number | null
   final_price: number | null
+  price_notes: string | null
   price_accepted_at: string | null
   payment_status: string | null  // ← DODANE
   stripe_session_id: string | null  // ← DODANE
@@ -75,17 +83,20 @@ const STATUS_CONFIG = {
   odebrane: { label: 'Odebrane', className: 'bg-gray-100 text-gray-800' },
   diagnoza: { label: 'Diagnoza', className: 'bg-blue-100 text-blue-800' },
   wycena: { label: 'Wycena', className: 'bg-blue-100 text-blue-800' },
-  w_naprawie: { label: 'W naprawie', className: 'bg-blue-100 text-blue-800' },
+  w_naprawie: { label: 'W naprawie', className: 'bg-indigo-100 text-indigo-800' },
   zakonczone: { label: 'Zakończone', className: 'bg-gray-800 text-white' },
   wyslane: { label: 'Wysłane', className: 'bg-gray-800 text-white' },
   anulowane: { label: 'Anulowane', className: 'bg-gray-200 text-gray-700' }
 }
 
 const URGENCY_CONFIG = {
-  niska: { label: 'Niska', className: 'text-gray-600' },
-  srednia: { label: 'Średnia', className: 'text-blue-600' },
-  wysoka: { label: 'Wysoka', className: 'text-blue-700' },
-  krytyczna: { label: 'Krytyczna', className: 'text-gray-900' }
+  standard: { label: 'Zwykły', className: 'text-gray-600' },
+  express: { label: 'Wysoki', className: 'text-orange-600' },
+  // Legacy support
+  niska: { label: 'Zwykły', className: 'text-gray-600' },
+  srednia: { label: 'Zwykły', className: 'text-gray-600' },
+  wysoka: { label: 'Wysoki', className: 'text-orange-600' },
+  krytyczna: { label: 'Wysoki', className: 'text-orange-600' }
 }
 
 export default function RepairDetailPage({ params }: { params: { id: string } }) {
@@ -97,11 +108,13 @@ export default function RepairDetailPage({ params }: { params: { id: string } })
   const [actionLoading, setActionLoading] = useState(false)
   const [showCancelModal, setShowCancelModal] = useState(false)
   const [showAcceptModal, setShowAcceptModal] = useState(false)
+  const [showRejectModal, setShowRejectModal] = useState(false)
   const [idCopied, setIdCopied] = useState(false)
   const [user, setUser] = useState<UserProfile | null>(null)
   const [userMenuOpen, setUserMenuOpen] = useState(false)
-  const [showPaymentModal, setShowPaymentModal] = useState(false)  // ← DODANE
+  const [showPaymentModal, setShowPaymentModal] = useState(false)
   const [paymentLoading, setPaymentLoading] = useState(false)
+  const [paymentSuccess, setPaymentSuccess] = useState(false)
 
   const [acceptModalStep, setAcceptModalStep] = useState<'confirm' | 'payment'>('confirm')
   
@@ -111,11 +124,70 @@ useEffect(() => {
     fetchRepairDetails()
     loadUser()
     
-    // Sprawdź URL params - jeśli wrócił z płatności
+    // Sprawdź URL params - jeśli wrócił z płatności (redirect z Stripe)
     const urlParams = new URLSearchParams(window.location.search)
-    if (urlParams.get('payment') === 'success') {
-      // Usuń parametr z URL
+    const paymentParam = urlParams.get('payment')
+    const redirectStatus = urlParams.get('redirect_status')
+    const paymentIntent = urlParams.get('payment_intent')
+    
+    console.log('🔍 URL params check:', { paymentParam, redirectStatus, paymentIntent })
+    
+    if (paymentParam === 'success' || redirectStatus === 'succeeded' || paymentIntent) {
+      console.log('✅ Returned from payment redirect!')
+      
+      // Pokaż natychmiast sukces
+      setPaymentSuccess(true)
+      
+      // Wywołaj confirm-payment jeśli mamy payment_intent w URL
+      if (paymentIntent) {
+        console.log('🔄 Confirming payment with intent:', paymentIntent)
+        fetch(`/api/repairs/${params.id}/confirm-payment`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ paymentIntentId: paymentIntent }),
+        }).then(async res => {
+          const data = await res.json()
+          console.log('📦 Confirm payment response:', res.status, data)
+          // Odśwież dane po potwierdzeniu
+          await fetchRepairDetails()
+        }).catch(err => {
+          console.error('❌ Confirm payment error:', err)
+        })
+      }
+      
+      // Polling - odświeżaj co 2 sekundy przez 10 sekund (webhook może się opóźnić)
+      let attempts = 0
+      const maxAttempts = 5
+      const pollInterval = setInterval(async () => {
+        attempts++
+        console.log(`🔄 Polling attempt ${attempts}/${maxAttempts}`)
+        const response = await fetch(`/api/repairs/${params.id}`)
+        if (response.ok) {
+          const data = await response.json()
+          setRepair(data.repair)
+          setStatusHistory(data.history || [])
+          
+          // Jeśli payment_status to succeeded - zatrzymaj polling
+          if (data.repair?.payment_status === 'succeeded') {
+            console.log('✅ Payment confirmed in database!')
+            clearInterval(pollInterval)
+          }
+        }
+        
+        if (attempts >= maxAttempts) {
+          clearInterval(pollInterval)
+          console.log('✅ Polling finished (max attempts reached)')
+        }
+      }, 2000)
+      
+      // Usuń parametry z URL
       window.history.replaceState({}, '', window.location.pathname)
+      
+      // Auto-ukryj komunikat sukcesu po 5 sekundach
+      setTimeout(() => setPaymentSuccess(false), 5000)
+      
+      // Cleanup
+      return () => clearInterval(pollInterval)
     }
   }
 }, [params?.id])
@@ -225,9 +297,35 @@ const handlePayment = () => {
   setAcceptModalStep('confirm')
 }
 
-const handlePaymentSuccess = () => {
-  setShowPaymentModal(false)
-  fetchRepairDetails()
+const handlePaymentSuccess = async () => {
+  // NIE zamykaj modalu - modal sam się zamknie po pokazaniu sukcesu
+  // setShowPaymentModal(false) - USUNIĘTE!
+  
+  // Polling - odświeżaj co 2 sekundy przez 10 sekund (webhook może się opóźnić)
+  let attempts = 0
+  const maxAttempts = 5
+  const poll = setInterval(async () => {
+    attempts++
+    const response = await fetch(`/api/repairs/${params?.id}`)
+    if (response.ok) {
+      const data = await response.json()
+      setRepair(data.repair)
+      setStatusHistory(data.history || [])
+      
+      // Jeśli payment_status to succeeded - zatrzymaj polling
+      if (data.repair?.payment_status === 'succeeded') {
+        console.log('✅ Payment confirmed in database!')
+        clearInterval(poll)
+      }
+    }
+    
+    if (attempts >= maxAttempts) {
+      clearInterval(poll)
+    }
+  }, 2000)
+  
+  // Natychmiastowe pierwsze odświeżenie
+  await fetchRepairDetails()
 }
   const copyIdToClipboard = () => {
     navigator.clipboard.writeText(repair?.id || '')
@@ -274,6 +372,19 @@ const handlePaymentSuccess = () => {
 
   return (
     <div className="min-h-screen relative">
+      {/* Powiadomienie o sukcesie płatności - tylko przy powrocie z redirecta (BLIK) */}
+      {paymentSuccess && !showPaymentModal && (
+        <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50">
+          <div className="bg-green-500 text-white px-6 py-3 rounded-xl shadow-lg flex items-center gap-3 animate-bounce">
+            <CheckCircle className="w-6 h-6" />
+            <div>
+              <p className="font-bold">Płatność zakończona!</p>
+              <p className="text-sm text-green-100">Naprawa została opłacona</p>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* TŁO Z GRADIENTEM I PASKAMI - BEZ WATERMARKÓW */}
       <div className="fixed inset-0 -z-10 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
         <div className="absolute inset-0 pointer-events-none">
@@ -325,6 +436,19 @@ const handlePaymentSuccess = () => {
       </div>
       <p className="text-xs text-gray-700 leading-relaxed">{repair.issue_description}</p>
     </div>
+
+    {/* Pro Forma info - MOBILE */}
+    {repair.payment_status === 'proforma' && (
+      <div className="bg-blue-50 rounded-lg border border-blue-200 px-3 py-2">
+        <div className="flex items-center gap-2 mb-1.5">
+          <FileText className="w-4 h-4 text-blue-600" />
+          <span className="text-xs font-semibold text-blue-900">Oczekiwanie na przelew</span>
+        </div>
+        <p className="text-xs text-blue-700 leading-relaxed">
+          Pro forma została wygenerowana. Po wykonaniu przelewu wyślij potwierdzenie w czacie - przyspieszy to rozpoczęcie naprawy.
+        </p>
+      </div>
+    )}
   </div>
 
   {/* DESKTOP - Breadcrumbs + Box ze zgłoszeniem */}
@@ -383,6 +507,77 @@ const handlePaymentSuccess = () => {
     />
   </div>
 )}
+
+{/* MOBILE: Akcje pod timeline gdy wycena czeka na akceptację/płatność */}
+{(() => {
+  const needsPaymentAction = (
+    (repair.status === 'wycena' && !repair.price_accepted_at && (repair.final_price || repair.estimated_price)) ||
+    (repair.price_accepted_at && repair.payment_status !== 'succeeded' && repair.payment_status !== 'proforma' && (repair.final_price || repair.estimated_price))
+  )
+  
+  if (needsPaymentAction) {
+    return (
+      <div className="md:hidden max-w-7xl mx-auto px-2 mt-3">
+        <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl shadow-sm border-2 border-green-200 p-3">
+          <div className="flex items-center gap-2 mb-2">
+            <div className="bg-green-500 p-1.5 rounded-lg">
+              <CreditCard className="w-4 h-4 text-white" />
+            </div>
+            <h2 className="text-sm font-bold text-gray-900">Wymagana akcja</h2>
+          </div>
+
+          {/* Podsumowanie wyceny */}
+          <div className="bg-white rounded-lg p-2 mb-2 border border-green-100">
+            <div className="flex justify-between items-center">
+              <span className="text-xs text-gray-600">Do zapłaty:</span>
+              <span className="text-lg font-bold text-gray-900">{formatPrice(repair.final_price || repair.estimated_price)} zł</span>
+            </div>
+            {repair.price_notes && (
+              <p className="text-[10px] text-gray-500 mt-1 line-clamp-2">{repair.price_notes}</p>
+            )}
+          </div>
+
+          <div className="space-y-2">
+            {/* Akceptuj wycenę */}
+            {repair.status === 'wycena' && !repair.price_accepted_at && (
+              <>
+                <button
+                  onClick={() => setShowAcceptModal(true)}
+                  disabled={actionLoading}
+                  className="w-full px-3 py-2.5 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-semibold flex items-center justify-center gap-2 text-sm shadow-sm"
+                >
+                  <CheckCircle className="w-4 h-4" />
+                  <span>Akceptuj wycenę</span>
+                </button>
+                <button
+                  onClick={() => setShowRejectModal(true)}
+                  disabled={actionLoading}
+                  className="w-full px-3 py-2 bg-white text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-medium flex items-center justify-center gap-2 text-sm"
+                >
+                  <XCircle className="w-4 h-4" />
+                  <span>Odrzuć wycenę</span>
+                </button>
+              </>
+            )}
+
+            {/* Zapłać za naprawę */}
+            {repair.price_accepted_at && repair.payment_status !== 'succeeded' && repair.payment_status !== 'proforma' && (
+              <button
+                onClick={handlePayment}
+                disabled={paymentLoading}
+                className="w-full px-3 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-semibold flex items-center justify-center gap-2 text-sm shadow-sm"
+              >
+                <CreditCard className="w-4 h-4" />
+                <span>{paymentLoading ? 'Przygotowuję...' : 'Zapłać teraz'}</span>
+              </button>
+            )}
+          </div>
+        </div>
+      </div>
+    )
+  }
+  return null
+})()}
 
 {/* Content */}
 <div className="max-w-7xl mx-auto px-2 py-3 md:py-6">
@@ -447,6 +642,21 @@ const handlePaymentSuccess = () => {
         </div>
       )}
 
+      {/* Pro Forma info - TYLKO DESKTOP */}
+      {repair.payment_status === 'proforma' && (
+        <div className="hidden md:block bg-blue-50 rounded-xl shadow-sm border border-blue-200 p-4">
+          <div className="flex items-center mb-3">
+            <div className="bg-blue-100 p-1.5 rounded-lg">
+              <FileText className="w-4 h-4 text-blue-600" />
+            </div>
+            <h2 className="text-sm font-semibold text-blue-900 ml-2">Oczekiwanie na przelew</h2>
+          </div>
+          <p className="text-sm text-blue-700 leading-relaxed">
+            Pro forma została wygenerowana. Po wykonaniu przelewu wyślij potwierdzenie w czacie z serwisem - przyspieszy to rozpoczęcie naprawy.
+          </p>
+        </div>
+      )}
+
       {/* Opis problemu - TYLKO DESKTOP */}
       <div className="hidden md:block bg-amber-50 rounded-xl shadow-sm border border-amber-200 p-4">
         <div className="flex items-center mb-3">
@@ -482,14 +692,23 @@ const handlePaymentSuccess = () => {
             {repair.estimated_price && (
               <div>
                 <p className="text-[10px] md:text-xs text-gray-500">Szacowana cena</p>
-                <p className="text-lg md:text-xl font-bold text-gray-900">{repair.estimated_price} zł</p>
+                <p className="text-lg md:text-xl font-bold text-gray-900">{formatPrice(repair.estimated_price)} zł</p>
               </div>
             )}
 
             {repair.final_price && (
               <div>
                 <p className="text-[10px] md:text-xs text-gray-500">Finalna cena</p>
-                <p className="text-lg md:text-xl font-bold text-gray-900">{repair.final_price} zł</p>
+                <p className="text-lg md:text-xl font-bold text-gray-900">{formatPrice(repair.final_price)} zł</p>
+              </div>
+            )}
+
+            {repair.price_notes && (
+              <div className="pt-2 border-t border-gray-200">
+                <p className="text-[10px] md:text-xs text-gray-500 mb-1">Szczegóły wyceny</p>
+                <p className="text-xs md:text-sm text-gray-700 whitespace-pre-wrap leading-relaxed bg-gray-50 p-2 rounded-lg">
+                  {repair.price_notes}
+                </p>
               </div>
             )}
 
@@ -558,87 +777,88 @@ const handlePaymentSuccess = () => {
       {repair.photo_urls && repair.photo_urls.length > 0 && (
         <PhotoGallery photos={repair.photo_urls} />
       )}
-
-      {/* Chat Section */}
-      <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-sm border border-gray-200 p-3 md:p-4">
-        <ChatBox repairId={repair.id} currentUserType="user" />
-      </div>
     </div>
 
-    {/* PRAWA KOLUMNA - Akcje */}
-    <div>
-      <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-sm border border-gray-200 p-3 md:p-4">
-        <h2 className="text-xs md:text-sm font-semibold text-gray-900 mb-2 md:mb-3">Akcje</h2>
+    {/* PRAWA KOLUMNA - Chat + Akcje */}
+    <div className="space-y-2 md:space-y-4">
+      {/* Akcje - pokazuj TYLKO gdy jest wycena do akceptacji lub płatności */}
+      {(() => {
+        const showActionsBox = (
+          // Wycena czeka na akceptację
+          (repair.status === 'wycena' && !repair.price_accepted_at && (repair.final_price || repair.estimated_price)) ||
+          // Wycena zaakceptowana, czeka na płatność (ale nie pro forma - wtedy czekamy na przelew)
+          (repair.price_accepted_at && repair.payment_status !== 'succeeded' && repair.payment_status !== 'proforma' && (repair.final_price || repair.estimated_price))
+        )
+        
+        if (!showActionsBox) return null
+        
+        // Na mobile ukryj gdy już jest na górze
+        return (
+          <div className="hidden md:block">
+            <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-sm border border-gray-200 p-3 md:p-4">
+              <h2 className="text-xs md:text-sm font-semibold text-gray-900 mb-2 md:mb-3">Akcje</h2>
 
-        <div className="space-y-2">
-          {/* Akceptuj wycenę */}
-          {repair.status === 'wycena' && !repair.price_accepted_at && (repair.final_price || repair.estimated_price) && (
-            <button
-              onClick={() => setShowAcceptModal(true)}
-              disabled={actionLoading}
-              className="w-full px-2 md:px-3 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-medium flex items-center justify-center gap-1.5 text-xs md:text-sm"
-            >
-              <CheckCircle className="w-3.5 md:w-4 h-3.5 md:h-4" />
-              <span>Akceptuj ({repair.final_price || repair.estimated_price} zł)</span>
-            </button>
-          )}
+              <div className="space-y-2">
+                {/* Akceptuj wycenę */}
+                {repair.status === 'wycena' && !repair.price_accepted_at && (repair.final_price || repair.estimated_price) && (
+                  <>
+                    <button
+                      onClick={() => setShowAcceptModal(true)}
+                      disabled={actionLoading}
+                      className="w-full px-2 md:px-3 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-medium flex items-center justify-center gap-1.5 text-xs md:text-sm"
+                    >
+                      <CheckCircle className="w-3.5 md:w-4 h-3.5 md:h-4" />
+                      <span>Akceptuj ({formatPrice(repair.final_price || repair.estimated_price)} zł)</span>
+                    </button>
+                    <button
+                      onClick={() => setShowRejectModal(true)}
+                      disabled={actionLoading}
+                      className="w-full px-2 md:px-3 py-2 bg-white text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-medium flex items-center justify-center gap-1.5 text-xs md:text-sm"
+                    >
+                      <XCircle className="w-3.5 md:w-4 h-3.5 md:h-4" />
+                      <span>Odrzuć wycenę</span>
+                    </button>
+                  </>
+                )}
 
-          {/* Zapłać za naprawę */}
-          {repair.price_accepted_at &&
-           repair.payment_status !== 'succeeded' &&
-            (repair.final_price || repair.estimated_price) && (
-            <button
-              onClick={handlePayment}
-              disabled={paymentLoading}
-              className="w-full px-2 md:px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-medium flex items-center justify-center gap-1.5 text-xs md:text-sm"
-            >
-              <CreditCard className="w-3.5 md:w-4 h-3.5 md:h-4" />
-              <span>
-                {paymentLoading ? 'Przygotowuję...' : `Zapłać (${repair.final_price || repair.estimated_price} zł)`}
-              </span>
-            </button>
-          )}
+                {/* Zapłać za naprawę */}
+                {repair.price_accepted_at &&
+                 repair.payment_status !== 'succeeded' &&
+                 repair.payment_status !== 'proforma' &&
+                  (repair.final_price || repair.estimated_price) && (
+                  <button
+                    onClick={handlePayment}
+                    disabled={paymentLoading}
+                    className="w-full px-2 md:px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-medium flex items-center justify-center gap-1.5 text-xs md:text-sm"
+                  >
+                    <CreditCard className="w-3.5 md:w-4 h-3.5 md:h-4" />
+                    <span>
+                      {paymentLoading ? 'Przygotowuję...' : `Zapłać (${formatPrice(repair.final_price || repair.estimated_price)} zł)`}
+                    </span>
+                  </button>
+                )}
 
-          {/* Info o płatności */}
-          {repair.payment_status === 'succeeded' && (
-            <div className="w-full px-2 md:px-3 py-2 bg-green-50 border border-green-200 text-green-700 rounded-lg flex items-center justify-center gap-1.5">
-              <CheckCircle className="w-3.5 md:w-4 h-3.5 md:h-4" />
-              <span className="text-xs md:text-sm font-medium">Opłacone</span>
+                {/* Info */}
+                <div className="pt-2 border-t border-gray-200">
+                  <p className="text-[10px] md:text-xs text-gray-500 leading-relaxed">
+                    {repair.status === 'wycena' && !repair.price_accepted_at && (
+                      <>Po zaakceptowaniu wyceny rozpoczniemy naprawę urządzenia.</>
+                    )}
+                    {repair.price_accepted_at && repair.payment_status !== 'succeeded' && repair.payment_status !== 'proforma' && (
+                      <>Po opłaceniu naprawy rozpoczniemy prace nad Twoim urządzeniem.</>
+                    )}
+                  </p>
+                </div>
+              </div>
             </div>
-          )}
-
-          {/* Anuluj */}
-          {['nowe', 'odebrane', 'diagnoza', 'wycena'].includes(repair.status) && (
-            <button
-              onClick={() => setShowCancelModal(true)}
-              disabled={actionLoading}
-              className="w-full px-2 md:px-3 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-medium flex items-center justify-center gap-1.5 text-xs md:text-sm"
-            >
-              <XCircle className="w-3.5 md:w-4 h-3.5 md:h-4" />
-              <span>Anuluj</span>
-            </button>
-          )}
-
-          {/* Info */}
-          <div className="pt-2 border-t border-gray-200">
-            <p className="text-[10px] md:text-xs text-gray-500 leading-relaxed">
-              {repair.status === 'wycena' && !repair.price_accepted_at && (repair.final_price || repair.estimated_price) && (
-                <>Po zaakceptowaniu wyceny rozpoczniemy naprawę urządzenia.</>
-              )}
-              {['nowe', 'odebrane', 'diagnoza', 'wycena'].includes(repair.status) && (
-                <>Możesz anulować zgłoszenie w każdej chwili przed rozpoczęciem naprawy.</>
-              )}
-              {repair.status === 'w_naprawie' && (
-                <>Urządzenie jest obecnie naprawiane. Poinformujemy Cię o postępach.</>
-              )}
-              {repair.status === 'zakonczone' && (
-                <>Naprawa została zakończona. Urządzenie będzie wkrótce wysłane.</>
-              )}
-              {repair.status === 'wyslane' && (
-                <>Urządzenie jest w drodze do Ciebie. Sprawdź tracking przesyłki powyżej.</>
-              )}
-            </p>
           </div>
+        )
+      })()}
+
+      {/* Chat z serwisem */}
+      <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-sm border border-gray-200 p-3 md:p-4 h-[380px] md:h-[428px] flex flex-col">
+        <div className="flex-1 min-h-0">
+          <ChatBox repairId={repair.id} currentUserType="user" />
         </div>
       </div>
     </div>
@@ -674,6 +894,53 @@ const handlePaymentSuccess = () => {
   </div>
 )}
 
+{/* Modal odrzucenia wyceny */}
+{showRejectModal && (
+  <div className="fixed inset-0 bg-black bg-opacity-50 z-[9998] flex items-center justify-center p-4">
+    <div className="bg-white rounded-xl max-w-md w-full p-4 shadow-lg">
+      <div className="flex items-center gap-3 mb-3">
+        <div className="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center flex-shrink-0">
+          <XCircle className="w-5 h-5 text-red-600" />
+        </div>
+        <div>
+          <h3 className="text-sm font-semibold text-gray-900">Odrzuć wycenę</h3>
+          <p className="text-xs text-gray-500">Zgłoszenie zostanie anulowane</p>
+        </div>
+      </div>
+
+      <div className="bg-red-50 border border-red-100 rounded-lg p-3 mb-4">
+        <p className="text-sm text-red-800 leading-relaxed">
+          <strong>Uwaga:</strong> Po odrzuceniu wyceny zgłoszenie zostanie anulowane, a urządzenie zwrócone bez naprawy.
+        </p>
+        {repair && (
+          <p className="text-xs text-red-600 mt-2">
+            Wycena: <strong>{formatPrice(repair.final_price || repair.estimated_price)} zł</strong>
+          </p>
+        )}
+      </div>
+
+      <div className="flex gap-2">
+        <button
+          onClick={() => setShowRejectModal(false)}
+          className="flex-1 px-3 py-2 border border-gray-300 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-50 transition-colors"
+        >
+          Nie, wróć
+        </button>
+        <button
+          onClick={() => {
+            setShowRejectModal(false)
+            handleCancelRepair('Wycena odrzucona przez klienta')
+          }}
+          disabled={actionLoading}
+          className="flex-1 px-3 py-2 bg-red-600 text-white rounded-lg text-sm font-medium hover:bg-red-700 transition-colors disabled:opacity-50"
+        >
+          {actionLoading ? 'Anulowanie...' : 'Tak, odrzuć'}
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
 {/* Modal akceptacji wyceny - 2 KROKI */}
 {showAcceptModal && (
   <div className="fixed inset-0 bg-black bg-opacity-50 z-[9998] flex items-center justify-center p-4">
@@ -694,7 +961,7 @@ const handlePaymentSuccess = () => {
           <div className="bg-gray-50 rounded-lg p-3 mb-3">
             <p className="text-xs text-gray-500 mb-1">Koszt naprawy:</p>
             <p className="text-xl font-bold text-gray-900">
-              {repair.final_price || repair.estimated_price} zł
+              {formatPrice(repair.final_price || repair.estimated_price)} zł
             </p>
           </div>
 
@@ -752,7 +1019,7 @@ const handlePaymentSuccess = () => {
             </p>
             <p className="text-xs text-gray-500 mb-1">Koszt naprawy:</p>
             <p className="text-xl font-bold text-gray-900">
-              {repair.final_price || repair.estimated_price} zł
+              {formatPrice(repair.final_price || repair.estimated_price)} zł
             </p>
           </div>
 

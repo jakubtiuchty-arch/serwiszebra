@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import {
@@ -14,7 +15,9 @@ import {
   MessageSquare,
   Sparkles,
   Home,
-  ExternalLink
+  ExternalLink,
+  Menu,
+  X
 } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
@@ -23,10 +26,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const pathname = usePathname()
   const router = useRouter()
   const supabase = createClient()
+  const [sidebarOpen, setSidebarOpen] = useState(false)
 
   const handleLogout = async () => {
     await supabase.auth.signOut()
-    router.push('/auth/login')
+    router.push('/logowanie')
   }
 
   const navigation = [
@@ -97,21 +101,40 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Sidebar - KOMPAKTOWY */}
-      <div className="fixed inset-y-0 left-0 w-56 bg-gradient-to-b from-blue-900 to-blue-800 text-white">
-        {/* Logo/Header - kompaktowy */}
+      {/* Mobile overlay */}
+      {sidebarOpen && (
+        <div 
+          className="fixed inset-0 bg-black/50 z-40 md:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
+      {/* Sidebar */}
+      <div className={`fixed inset-y-0 left-0 w-56 bg-gradient-to-b from-blue-900 to-blue-800 text-white z-50 transform transition-transform duration-300 ease-in-out ${
+        sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+      } md:translate-x-0`}>
+        {/* Logo/Header */}
         <div className="p-3 border-b border-blue-700">
-          <div className="flex items-center gap-2">
-            <Shield className="w-6 h-6" />
-            <div>
-              <h1 className="text-sm font-bold">Serwis Zebra</h1>
-              <p className="text-blue-200 text-[10px]">Panel Administratora</p>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Shield className="w-6 h-6" />
+              <div>
+                <h1 className="text-sm font-bold">Serwis Zebra</h1>
+                <p className="text-blue-200 text-[10px]">Panel Administratora</p>
+              </div>
             </div>
+            {/* Close button - mobile only */}
+            <button 
+              onClick={() => setSidebarOpen(false)}
+              className="md:hidden p-1 hover:bg-blue-700 rounded-lg"
+            >
+              <X className="w-5 h-5" />
+            </button>
           </div>
         </div>
 
-        {/* Navigation - kompaktowa */}
-        <nav className="p-2 space-y-0.5">
+        {/* Navigation */}
+        <nav className="p-2 space-y-0.5 overflow-y-auto max-h-[calc(100vh-140px)]">
           {navigation.map((item, index) => {
             if (item.type === 'header') {
               return (
@@ -136,7 +159,13 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                       ? 'bg-blue-700 text-white font-semibold'
                       : 'text-blue-100 hover:bg-blue-700 hover:text-white'
                 }`}
-                onClick={item.disabled ? (e) => e.preventDefault() : undefined}
+                onClick={(e) => {
+                  if (item.disabled) {
+                    e.preventDefault()
+                  } else {
+                    setSidebarOpen(false)
+                  }
+                }}
               >
                 {Icon && <Icon className="w-4 h-4" />}
                 <span>{item.name}</span>
@@ -150,6 +179,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           <Link
             href="/"
             className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-blue-100 hover:bg-blue-700 hover:text-white transition-colors text-sm"
+            onClick={() => setSidebarOpen(false)}
           >
             <Home className="w-4 h-4" />
             <span>Strona główna</span>
@@ -165,19 +195,27 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       </div>
 
       {/* Main content */}
-      <div className="ml-56">
-        {/* Top bar - kompaktowy */}
-        <div className="bg-white border-b border-gray-200 px-4 py-2">
+      <div className="md:ml-56">
+        {/* Top bar */}
+        <div className="bg-white border-b border-gray-200 px-3 md:px-4 py-2 sticky top-0 z-30">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
+              {/* Hamburger - mobile only */}
+              <button
+                onClick={() => setSidebarOpen(true)}
+                className="md:hidden p-2 -ml-2 hover:bg-gray-100 rounded-lg"
+              >
+                <Menu className="w-5 h-5 text-gray-700" />
+              </button>
+              
               <div className="relative group">
                 {/* Glow effect */}
                 <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 via-purple-500 to-blue-500 rounded-full blur-sm opacity-75 group-hover:opacity-100 transition duration-300"></div>
                 
                 {/* Button */}
-                <div className="relative bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 px-3 py-1.5 rounded-full border border-gray-700 flex items-center gap-1.5">
+                <div className="relative bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 px-2 md:px-3 py-1 md:py-1.5 rounded-full border border-gray-700 flex items-center gap-1 md:gap-1.5">
                   <Shield className="w-3 h-3 text-purple-400" />
-                  <span className="text-xs font-semibold text-white">SUPERADMIN</span>
+                  <span className="text-[10px] md:text-xs font-semibold text-white">SUPERADMIN</span>
                 </div>
               </div>
             </div>

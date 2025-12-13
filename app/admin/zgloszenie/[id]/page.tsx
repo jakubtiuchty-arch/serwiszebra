@@ -36,6 +36,9 @@ interface RepairRequest {
   priority: string
   estimated_price: number | null
   final_price: number | null
+  price_accepted_at: string | null
+  payment_status: string | null
+  paid_at: string | null
   courier_tracking_number: string | null
   courier_name: string | null
   pickup_tracking_number: string | null
@@ -62,11 +65,16 @@ interface StatusHistory {
   created_at: string
 }
 
+// Formatowanie ceny z miejscami po przecinku (555,00 zł)
+const formatPrice = (price: number | null | undefined): string => {
+  if (price === null || price === undefined) return '0,00'
+  return price.toLocaleString('pl-PL', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+}
+
 const STATUS_LABELS: Record<string, string> = {
   nowe: 'Nowe',
   odebrane: 'Odebrane',
   diagnoza: 'Diagnoza',
-  oczekiwanie_na_akceptacje: 'Oczekiwanie na akceptację',
   wycena: 'Wycena',
   w_naprawie: 'W naprawie',
   zakonczone: 'Zakończone',
@@ -78,7 +86,6 @@ const STATUS_COLORS: Record<string, string> = {
   nowe: 'bg-blue-100 text-blue-800 border-blue-200',
   odebrane: 'bg-purple-100 text-purple-800 border-purple-200',
   diagnoza: 'bg-yellow-100 text-yellow-800 border-yellow-200',
-  oczekiwanie_na_akceptacje: 'bg-orange-100 text-orange-800 border-orange-200',
   wycena: 'bg-cyan-100 text-cyan-800 border-cyan-200',
   w_naprawie: 'bg-indigo-100 text-indigo-800 border-indigo-200',
   zakonczone: 'bg-green-100 text-green-800 border-green-200',
@@ -363,9 +370,36 @@ export default function AdminRepairDetailPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
       {/* Header */}
-      <div className="bg-white/80 backdrop-blur-sm border-b border-gray-200 sticky top-0 z-10 shadow-sm">
-        <div className="w-full px-4 py-4">
-          <div className="flex items-center justify-between">
+      <div className="bg-white/80 backdrop-blur-sm border-b border-gray-200 sticky top-[41px] md:top-0 z-10 shadow-sm">
+        <div className="w-full px-3 md:px-4 py-3 md:py-4">
+          {/* Mobile header */}
+          <div className="flex flex-col gap-2 md:hidden">
+            <div className="flex items-center justify-between">
+              <button
+                onClick={() => router.push('/admin')}
+                className="flex items-center text-gray-600 hover:text-gray-900 transition-colors"
+              >
+                <ChevronLeft className="w-4 h-4" />
+                <span className="text-sm font-medium">Powrót</span>
+              </button>
+              <div className="flex items-center gap-2">
+                <span className={`px-2 py-0.5 rounded-md border text-xs font-medium ${STATUS_COLORS[repair.status]}`}>
+                  {STATUS_LABELS[repair.status]}
+                </span>
+              </div>
+            </div>
+            <div>
+              <h1 className="text-base font-bold text-gray-900">
+                #{repair.repair_request_id}
+              </h1>
+              <p className="text-xs text-gray-500">
+                {format(new Date(repair.created_at), 'dd MMM yyyy, HH:mm', { locale: pl })}
+              </p>
+            </div>
+          </div>
+
+          {/* Desktop header */}
+          <div className="hidden md:flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <button
                 onClick={() => router.push('/admin')}
@@ -385,7 +419,7 @@ export default function AdminRepairDetailPage() {
               </div>
             </div>
             <div className="flex items-center space-x-3">
-              <span className={`px-4 py-2 rounded-xl border font-semibold shadow-sm ${STATUS_COLORS[repair.status]}`}>
+              <span className={`px-3 py-1 rounded-lg border text-sm font-medium ${STATUS_COLORS[repair.status]}`}>
                 {STATUS_LABELS[repair.status]}
               </span>
               <span className={`font-bold ${PRIORITY_COLORS[repair.priority]}`}>
@@ -397,8 +431,8 @@ export default function AdminRepairDetailPage() {
       </div>
 
       {/* Main Content - 2 kolumny */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      <div className="max-w-7xl mx-auto px-3 md:px-6 lg:px-8 py-4 md:py-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 md:gap-4">
           {/* LEWA KOLUMNA */}
           <div className="space-y-4">
             {/* Urządzenie */}
@@ -424,10 +458,10 @@ export default function AdminRepairDetailPage() {
             </div>
 
             {/* Opis problemu */}
-            <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow border border-gray-200 p-4">
+            <div className="bg-amber-50 rounded-xl shadow-sm border border-amber-200 p-4">
               <div className="flex items-center mb-3">
-                <div className="bg-blue-100 p-1.5 rounded-lg">
-                  <FileText className="w-4 h-4 text-blue-600" />
+                <div className="bg-amber-100 p-1.5 rounded-lg">
+                  <FileText className="w-4 h-4 text-amber-600" />
                 </div>
                 <h2 className="text-sm font-semibold text-gray-900 ml-2">Opis problemu</h2>
               </div>
@@ -478,19 +512,65 @@ export default function AdminRepairDetailPage() {
               </div>
             </div>
 
-            {/* Wycena */}
-            <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow border border-gray-200 p-4">
+            {/* Wycena / Płatność */}
+            <div className={`backdrop-blur-sm rounded-xl shadow border p-4 ${
+              repair.payment_status === 'succeeded' 
+                ? 'bg-green-50 border-green-200' 
+                : repair.payment_status === 'proforma'
+                  ? 'bg-blue-50 border-blue-200'
+                  : 'bg-white/80 border-gray-200'
+            }`}>
               <div className="flex items-center mb-3">
-                <div className="bg-green-100 p-1.5 rounded-lg">
-                  <DollarSign className="w-4 h-4 text-green-600" />
-                </div>
-                <h2 className="text-sm font-semibold text-gray-900 ml-2">Wycena</h2>
+                {repair.payment_status === 'succeeded' ? (
+                  <span className="px-3 py-1.5 bg-green-500 text-white text-xs font-bold rounded-lg flex items-center gap-1.5">
+                    <CheckCircle2 className="w-4 h-4" />
+                    ZAPŁACONO
+                  </span>
+                ) : repair.payment_status === 'proforma' ? (
+                  <span className="px-3 py-1.5 bg-blue-500 text-white text-xs font-bold rounded-lg flex items-center gap-1.5">
+                    <Clock className="w-4 h-4" />
+                    OCZEKUJE NA PRZELEW
+                  </span>
+                ) : (
+                  <>
+                    <div className="bg-green-100 p-1.5 rounded-lg">
+                      <DollarSign className="w-4 h-4 text-green-600" />
+                    </div>
+                    <h2 className="text-sm font-semibold text-gray-900 ml-2">Wycena</h2>
+                  </>
+                )}
               </div>
-              <div>
-                <p className="text-xs text-gray-500">Kwota</p>
-                <p className="text-xl font-bold text-gray-900">
-                  {repair.final_price ? `${repair.final_price} zł` : '—'}
-                </p>
+              <div className="space-y-2">
+                <div>
+                  <p className="text-xs text-gray-500">Kwota</p>
+                  <p className="text-xl font-bold text-gray-900">
+                    {repair.final_price ? `${formatPrice(repair.final_price)} zł` : '—'}
+                  </p>
+                </div>
+                {repair.payment_status === 'succeeded' && repair.paid_at && (
+                  <div>
+                    <p className="text-xs text-gray-500">Data płatności</p>
+                    <p className="text-sm font-medium text-green-700">
+                      {format(new Date(repair.paid_at), 'dd.MM.yyyy HH:mm', { locale: pl })}
+                    </p>
+                  </div>
+                )}
+                {repair.payment_status === 'proforma' && (
+                  <div className="mt-2 p-2 bg-blue-100 rounded-lg">
+                    <p className="text-xs text-blue-800">
+                      💡 Klient wybrał Pro Forma. Sprawdź chat - powinien wysłać potwierdzenie przelewu. 
+                      Po weryfikacji zmień status na <strong>"W naprawie"</strong>.
+                    </p>
+                  </div>
+                )}
+                {repair.price_accepted_at && !repair.paid_at && (
+                  <div>
+                    <p className="text-xs text-gray-500">Wycena zaakceptowana</p>
+                    <p className="text-sm font-medium text-blue-600">
+                      {format(new Date(repair.price_accepted_at), 'dd.MM.yyyy HH:mm', { locale: pl })}
+                    </p>
+                  </div>
+                )}
               </div>
             </div>
 
@@ -705,17 +785,6 @@ export default function AdminRepairDetailPage() {
                   </select>
                 </div>
 
-                <div>
-                  <label className="block text-xs font-semibold text-gray-700 mb-1">Notatka (opcjonalnie)</label>
-                  <textarea
-                    value={statusForm.notes}
-                    onChange={(e) => setStatusForm({ ...statusForm, notes: e.target.value })}
-                    rows={2}
-                    className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
-                    placeholder="Dodaj notatkę..."
-                  />
-                </div>
-
                 <button
                   type="submit"
                   disabled={submitting === 'status'}
@@ -736,62 +805,66 @@ export default function AdminRepairDetailPage() {
               </form>
             </div>
 
-            {/* Wycena */}
-            <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow border border-gray-200 p-4">
-              <h3 className="text-sm font-semibold text-gray-900 mb-3">Wycena</h3>
-              <form onSubmit={handlePriceUpdate} className="space-y-3">
-                <div>
-                  <label className="block text-xs font-semibold text-gray-700 mb-1">Kwota (zł)</label>
-                  <input
-                    type="number"
-                    step="0.01"
-                    value={priceForm.final_price}
-                    onChange={(e) => setPriceForm({ ...priceForm, final_price: e.target.value })}
-                    className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
-                    placeholder="np. 450.00"
-                  />
-                </div>
+            {/* Wycena - tylko jeśli nie opłacono i nie pro forma */}
+            {repair.payment_status !== 'succeeded' && repair.payment_status !== 'proforma' && (
+              <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow border border-gray-200 p-4">
+                <h3 className="text-sm font-semibold text-gray-900 mb-3">Wycena</h3>
+                <form onSubmit={handlePriceUpdate} className="space-y-3">
+                  <div>
+                    <label className="block text-xs font-semibold text-gray-700 mb-1">Kwota (zł)</label>
+                    <input
+                      type="number"
+                      step="0.01"
+                      value={priceForm.final_price}
+                      onChange={(e) => setPriceForm({ ...priceForm, final_price: e.target.value })}
+                      className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                      placeholder="np. 450.00"
+                    />
+                  </div>
 
-                <div>
-                  <label className="block text-xs font-semibold text-gray-700 mb-1">Notatka (opcjonalnie)</label>
-                  <textarea
-                    value={priceForm.notes}
-                    onChange={(e) => setPriceForm({ ...priceForm, notes: e.target.value })}
-                    rows={2}
-                    className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
-                    placeholder="np. Wymiana ekranu + diagnostyka"
-                  />
-                </div>
+                  <div>
+                    <label className="block text-xs font-semibold text-gray-700 mb-1">
+                      Szczegóły wyceny <span className="text-blue-600 font-normal">(widoczne dla klienta)</span>
+                    </label>
+                    <textarea
+                      value={priceForm.notes}
+                      onChange={(e) => setPriceForm({ ...priceForm, notes: e.target.value })}
+                      rows={3}
+                      className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                      placeholder="np. Wymiana głowicy drukującej + czyszczenie czujników + kalibracja"
+                    />
+                  </div>
 
-                <button
-                  type="submit"
-                  disabled={submitting === 'price'}
-                  className="w-full bg-green-600 text-white px-3 py-2 text-sm rounded-lg hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center font-semibold transition-all"
-                >
-                  {submitting === 'price' ? (
-                    <>
-                      <Loader2 className="w-3 h-3 mr-2 animate-spin" />
-                      Zapisywanie...
-                    </>
-                  ) : (
-                    <>
-                      <Save className="w-3 h-3 mr-2" />
-                      Zapisz wycenę
-                    </>
-                  )}
-                </button>
-              </form>
-            </div>
+                  <button
+                    type="submit"
+                    disabled={submitting === 'price'}
+                    className="w-full bg-green-600 text-white px-3 py-2 text-sm rounded-lg hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center font-semibold transition-all"
+                  >
+                    {submitting === 'price' ? (
+                      <>
+                        <Loader2 className="w-3 h-3 mr-2 animate-spin" />
+                        Zapisywanie...
+                      </>
+                    ) : (
+                      <>
+                        <Save className="w-3 h-3 mr-2" />
+                        Zapisz wycenę
+                      </>
+                    )}
+                  </button>
+                </form>
+              </div>
+            )}
 
             {/* Chat z klientem */}
-            <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow border border-gray-200 p-4">
+            <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow border border-gray-200 p-3 md:p-4">
               <div className="flex items-center mb-3">
                 <div className="bg-blue-100 p-1.5 rounded-lg">
                   <Mail className="w-4 h-4 text-blue-600" />
                 </div>
                 <h3 className="text-sm font-semibold text-gray-900 ml-2">Chat z klientem</h3>
               </div>
-              <div className="h-[500px]">
+              <div className="h-[350px] md:h-[500px]">
                 <ChatBox repairId={repair.id} currentUserType="admin" />
               </div>
             </div>
@@ -800,14 +873,14 @@ export default function AdminRepairDetailPage() {
 
         {/* GALERIA ZDJĘĆ (full width) */}
         {repair.photo_urls && repair.photo_urls.length > 0 && (
-          <div className="mt-4 bg-white/80 backdrop-blur-sm rounded-xl shadow border border-gray-200 p-4">
+          <div className="mt-3 md:mt-4 bg-white/80 backdrop-blur-sm rounded-xl shadow border border-gray-200 p-3 md:p-4">
             <div className="flex items-center mb-3">
               <div className="bg-blue-100 p-1.5 rounded-lg">
                 <ImageIcon className="w-4 h-4 text-blue-600" />
               </div>
               <h2 className="text-sm font-semibold text-gray-900 ml-2">Zdjęcia ({repair.photo_urls.length})</h2>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
+            <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 md:gap-3">
               {repair.photo_urls.map((url, index) => (
                 <div
                   key={index}
@@ -823,14 +896,35 @@ export default function AdminRepairDetailPage() {
 
         {/* HISTORIA ZMIAN */}
         {history && history.length > 0 && (
-          <div className="mt-4 bg-white/80 backdrop-blur-sm rounded-xl shadow border border-gray-200 p-4">
+          <div className="mt-3 md:mt-4 bg-white/80 backdrop-blur-sm rounded-xl shadow border border-gray-200 p-3 md:p-4">
             <div className="flex items-center mb-3">
               <div className="bg-blue-100 p-1.5 rounded-lg">
                 <Calendar className="w-4 h-4 text-blue-600" />
               </div>
-              <h2 className="text-sm font-semibold text-gray-900 ml-2">Historia zmian ({history.length})</h2>
+              <h2 className="text-sm font-semibold text-gray-900 ml-2">Historia ({history.length})</h2>
             </div>
-            <div className="overflow-x-auto">
+            
+            {/* Mobile: cards */}
+            <div className="md:hidden space-y-2">
+              {history.map((item) => (
+                <div key={item.id} className="p-2 bg-gray-50 rounded-lg border border-gray-100">
+                  <div className="flex items-center justify-between mb-1">
+                    <span className={`px-2 py-0.5 rounded text-[10px] font-semibold border ${STATUS_COLORS[item.status]}`}>
+                      {STATUS_LABELS[item.status]}
+                    </span>
+                    <span className="text-[10px] text-gray-500">
+                      {format(new Date(item.created_at), 'dd.MM HH:mm', { locale: pl })}
+                    </span>
+                  </div>
+                  {item.notes && (
+                    <p className="text-[10px] text-gray-600 mt-1">{item.notes}</p>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            {/* Desktop: table */}
+            <div className="hidden md:block overflow-x-auto">
               <table className="w-full">
                 <thead>
                   <tr className="bg-gray-50 border-b border-gray-200">

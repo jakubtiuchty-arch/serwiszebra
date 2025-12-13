@@ -8,6 +8,7 @@ const registerSchema = z.object({
   password: z.string().min(8, 'Hasło musi mieć minimum 8 znaków'),
   firstName: z.string().optional(),
   lastName: z.string().optional(),
+  phone: z.string().optional(),
   repairId: z.string().uuid('Nieprawidłowy ID zgłoszenia'),
   marketingConsent: z.boolean().optional().default(false),
 })
@@ -45,6 +46,7 @@ export async function POST(request: Request) {
       user_metadata: {
         first_name: validatedData.firstName || '',
         last_name: validatedData.lastName || '',
+        phone: validatedData.phone || '',
         marketing_consent: validatedData.marketingConsent,
       },
     })
@@ -82,7 +84,27 @@ export async function POST(request: Request) {
       console.log('[REGISTER] Repair request linked successfully')
     }
 
-    // 3. Create session for the user
+    // 3. Update/create profile with phone
+    console.log('[REGISTER] Updating profile with phone...')
+    const { error: profileError } = await supabaseAdmin
+      .from('profiles')
+      .upsert({
+        id: authData.user.id,
+        email: validatedData.email,
+        first_name: validatedData.firstName || null,
+        last_name: validatedData.lastName || null,
+        phone: validatedData.phone || null,
+      }, {
+        onConflict: 'id'
+      })
+
+    if (profileError) {
+      console.error('[REGISTER] Error updating profile:', profileError)
+    } else {
+      console.log('[REGISTER] Profile updated with phone')
+    }
+
+    // 4. Create session for the user
     console.log('[REGISTER] Creating session...')
     const { data: sessionData, error: sessionError } = await supabaseAdmin.auth.admin.generateLink({
       type: 'magiclink',

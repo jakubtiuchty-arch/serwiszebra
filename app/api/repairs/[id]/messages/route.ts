@@ -73,10 +73,10 @@ export async function POST(
     }
 
     const repairId = params.id
-    const { message } = await request.json()
+    const { message, attachments } = await request.json()
 
-    if (!message || message.trim() === '') {
-      return NextResponse.json({ error: 'Message is required' }, { status: 400 })
+    if ((!message || message.trim() === '') && (!attachments || attachments.length === 0)) {
+      return NextResponse.json({ error: 'Message or attachments required' }, { status: 400 })
     }
 
     // Sprawdź czy user ma dostęp do tego zgłoszenia
@@ -117,7 +117,8 @@ export async function POST(
       repair_request_id: repairId,
       sender_id: user.id,
       sender_type: senderType,
-      message: message.trim(),
+      message: message?.trim() || '',
+      attachments: attachments?.length || 0,
     })
 
     // Dodaj wiadomość
@@ -127,7 +128,8 @@ export async function POST(
         repair_request_id: repairId,
         sender_id: user.id,
         sender_type: senderType,
-        message: message.trim(),
+        message: message?.trim() || '',
+        attachments: attachments || null,
         is_read: false,
       })
       .select()

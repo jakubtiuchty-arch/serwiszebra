@@ -18,10 +18,8 @@ const DEVICE_TYPES = [
 ]
 
 const URGENCY_LEVELS = [
-  { value: 'niska', label: 'Niska - może poczekać' },
-  { value: 'srednia', label: 'Średnia - kilka dni' },
-  { value: 'wysoka', label: 'Wysoka - pilne' },
-  { value: 'krytyczna', label: 'Krytyczna - bardzo pilne!' },
+  { value: 'standard', label: 'Zwykły' },
+  { value: 'express', label: 'Wysoki (+50% wartości naprawy)' },
 ]
 
 export default function NewRepairModal({ isOpen, onClose, onSuccess }: NewRepairModalProps) {

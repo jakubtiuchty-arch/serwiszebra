@@ -163,11 +163,14 @@ export async function POST(
       ? `Zamówiono odbiór od klienta - ${courierName}. Tracking: ${trackingNumber}`
       : `Wysłano do klienta - ${courierName}. Tracking: ${trackingNumber}`
 
+    // Dodaj wpis do historii
+    // Dla delivery - status 'wyslane'
+    // Dla pickup - zachowaj obecny status (tylko notatka o zamówieniu kuriera)
     await supabase
       .from('repair_status_history')
       .insert({
         repair_request_id: repairId,
-        status: direction === 'pickup' ? 'odebrane' : 'wyslane',
+        status: direction === 'pickup' ? repair.status : 'wyslane',
         notes: historyNote,
         changed_by: adminCheck.user?.id
       })

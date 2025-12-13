@@ -13,6 +13,7 @@ interface RegistrationLightboxProps {
   userEmail: string
   userFirstName?: string
   userLastName?: string
+  userPhone?: string
 }
 
 export function RegistrationLightbox({
@@ -22,6 +23,7 @@ export function RegistrationLightbox({
   userEmail,
   userFirstName,
   userLastName,
+  userPhone,
 }: RegistrationLightboxProps) {
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
@@ -67,6 +69,7 @@ export function RegistrationLightbox({
           password,
           firstName: userFirstName,
           lastName: userLastName,
+          phone: userPhone,
           repairId,
           marketingConsent,
         }),

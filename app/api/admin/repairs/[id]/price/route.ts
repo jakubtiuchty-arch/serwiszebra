@@ -29,6 +29,15 @@ export async function PATCH(
       )
     }
 
+    // Pobierz obecny status naprawy
+    const { data: currentRepair } = await supabase
+      .from('repair_requests')
+      .select('status')
+      .eq('id', repairId)
+      .single()
+
+    const currentStatus = currentRepair?.status
+
     // Przygotowanie danych do aktualizacji
     const updateData: any = {
       updated_at: new Date().toISOString()
@@ -42,8 +51,14 @@ export async function PATCH(
       updateData.final_price = parseFloat(final_price)
     }
 
-    // Jeśli dodajemy wycenę po raz pierwszy, zmień status na "wycena"
-    if (estimated_price !== undefined) {
+    // Zapisz notatkę do wyceny (widoczna dla klienta)
+    if (notes !== undefined) {
+      updateData.price_notes = notes
+    }
+
+    // Zmień status na "wycena" TYLKO jeśli aktualny status NIE jest już "wycena"
+    const shouldChangeStatus = estimated_price !== undefined && currentStatus !== 'wycena'
+    if (shouldChangeStatus) {
       updateData.status = 'wycena'
     }
 
@@ -63,22 +78,36 @@ export async function PATCH(
       )
     }
 
-    // Dodanie wpisu do historii zmian (jeśli status się zmienił)
-    if (updateData.status) {
-      const historyNotes = notes || 
-        `Wycena: ${estimated_price ? `szacowana ${estimated_price}zł` : ''}${estimated_price && final_price ? ', ' : ''}${final_price ? `finalna ${final_price}zł` : ''}`
-
-      const { error: historyError } = await supabase
+    // Dodanie wpisu do historii zmian TYLKO jeśli status się FAKTYCZNIE zmienił
+    if (shouldChangeStatus) {
+      // Sprawdź czy identyczny wpis nie istnieje w ostatniej minucie (ochrona przed duplikatami)
+      const oneMinuteAgo = new Date(Date.now() - 60000).toISOString()
+      const { data: recentEntries } = await supabase
         .from('repair_status_history')
-        .insert({
-          repair_request_id: repairId,
-          status: 'wycena',
-          notes: historyNotes,
-          changed_by: adminCheck.user?.id
-        })
+        .select('id')
+        .eq('repair_request_id', repairId)
+        .eq('status', 'wycena')
+        .gte('created_at', oneMinuteAgo)
+        .limit(1)
 
-      if (historyError) {
-        console.error('Error adding history:', historyError)
+      if (!recentEntries || recentEntries.length === 0) {
+        const historyNotes = notes || 
+          `Wycena: ${estimated_price ? `szacowana ${estimated_price}zł` : ''}${estimated_price && final_price ? ', ' : ''}${final_price ? `finalna ${final_price}zł` : ''}`
+
+        const { error: historyError } = await supabase
+          .from('repair_status_history')
+          .insert({
+            repair_request_id: repairId,
+            status: 'wycena',
+            notes: historyNotes,
+            changed_by: adminCheck.user?.id
+          })
+
+        if (historyError) {
+          console.error('Error adding history:', historyError)
+        }
+      } else {
+        console.log('Skipping duplicate history entry for wycena')
       }
     }
 

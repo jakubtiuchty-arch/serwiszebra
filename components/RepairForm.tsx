@@ -66,6 +66,7 @@ export default function RepairForm() {
   const [submittedEmail, setSubmittedEmail] = useState<string>('')
   const [submittedFirstName, setSubmittedFirstName] = useState<string>('')
   const [submittedLastName, setSubmittedLastName] = useState<string>('')
+  const [submittedPhone, setSubmittedPhone] = useState<string>('')
 
   const {
     register,
@@ -213,6 +214,7 @@ export default function RepairForm() {
       setSubmittedEmail(data.email)
       setSubmittedFirstName(data.firstName)
       setSubmittedLastName(data.lastName)
+      setSubmittedPhone(data.phone)
       setShowRegistrationLightbox(true)
       setIsSubmitting(false)
 
@@ -532,7 +534,7 @@ export default function RepairForm() {
                       }`}
                     >
                       <div>
-                        <div className="font-semibold text-gray-900 mb-1">Standard</div>
+                        <div className="font-semibold text-gray-900 mb-1">Zwykły</div>
                         <div className="text-sm text-gray-600">3-5 dni roboczych</div>
                       </div>
                       <input
@@ -551,7 +553,7 @@ export default function RepairForm() {
                       }`}
                     >
                       <div>
-                        <div className="font-semibold text-gray-900 mb-1">Express</div>
+                        <div className="font-semibold text-gray-900 mb-1">Wysoki</div>
                         <div className="text-sm text-gray-600">1-2 dni robocze</div>
                         <div className="text-sm font-semibold text-orange-600 mt-1">+50% wartości naprawy</div>
                       </div>
@@ -718,7 +720,7 @@ export default function RepairForm() {
                     <p className="text-sm text-gray-700 whitespace-pre-wrap">{formData.issueDescription}</p>
                     <div className="mt-2 text-sm">
                       <span className="text-gray-600">Priorytet:</span> <span className="font-medium">
-                        {formData.urgency === 'express' ? 'Express (+50% wartości)' : 'Standard'}
+                        {formData.urgency === 'express' ? 'Wysoki (+50% wartości)' : 'Zwykły'}
                       </span>
                     </div>
                     {uploadedFiles.length > 0 && (
@@ -832,6 +834,7 @@ export default function RepairForm() {
           userEmail={submittedEmail}
           userFirstName={submittedFirstName}
           userLastName={submittedLastName}
+          userPhone={submittedPhone}
         />
       </div>
     </section>

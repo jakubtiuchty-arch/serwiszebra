@@ -11,7 +11,7 @@ interface RepairCardProps {
     issue_description: string
     status: 'nowe' | 'odebrane' | 'diagnoza' | 'wycena' | 'w_naprawie' | 'zakonczone' | 'wyslane' | 'anulowane'
     created_at: string
-    urgency: 'niska' | 'srednia' | 'wysoka' | 'krytyczna' | null
+    urgency: 'standard' | 'express' | 'niska' | 'srednia' | 'wysoka' | 'krytyczna' | null
   }
 }
 
@@ -64,12 +64,12 @@ const STATUS_CONFIG = {
     label: 'Naprawa', 
     sublabel: '',
     progress: 71,
-    color: 'blue',
-    bgColor: 'bg-blue-50',
-    borderColor: 'border-blue-200',
-    textColor: 'text-blue-700',
-    dotColor: 'bg-blue-500',
-    barColor: 'bg-blue-500'
+    color: 'indigo',
+    bgColor: 'bg-indigo-50',
+    borderColor: 'border-indigo-200',
+    textColor: 'text-indigo-700',
+    dotColor: 'bg-indigo-500',
+    barColor: 'bg-indigo-500'
   },
   zakonczone: { 
     label: 'Zakończone', 

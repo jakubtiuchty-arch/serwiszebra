@@ -166,7 +166,7 @@ export default function AdminDashboard() {
         </div>
       </div>
 
-      {/* Tabela zgłoszeń */}
+      {/* Lista zgłoszeń */}
       {loading ? (
         <div className="bg-white border border-gray-200 rounded-xl p-8 text-center shadow-sm">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
@@ -178,98 +178,133 @@ export default function AdminDashboard() {
           <p className="text-sm text-gray-600">Brak zgłoszeń do wyświetlenia</p>
         </div>
       ) : (
-        <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead className="bg-gray-50 border-b border-gray-200">
-                <tr>
-                  <th className="px-3 sm:px-4 py-2.5 text-left text-[10px] font-semibold text-gray-500 uppercase tracking-wider">
-                    ID / Data
-                  </th>
-                  <th className="px-3 sm:px-4 py-2.5 text-left text-[10px] font-semibold text-gray-500 uppercase tracking-wider">
-                    Urządzenie
-                  </th>
-                  <th className="px-3 sm:px-4 py-2.5 text-left text-[10px] font-semibold text-gray-500 uppercase tracking-wider hidden md:table-cell">
-                    Klient
-                  </th>
-                  <th className="px-3 sm:px-4 py-2.5 text-left text-[10px] font-semibold text-gray-500 uppercase tracking-wider">
-                    Status
-                  </th>
-                  <th className="px-3 sm:px-4 py-2.5 text-left text-[10px] font-semibold text-gray-500 uppercase tracking-wider hidden sm:table-cell">
-                    Cena
-                  </th>
-                  <th className="px-3 sm:px-4 py-2.5 text-right text-[10px] font-semibold text-gray-500 uppercase tracking-wider">
-                    Akcje
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="bg-white divide-y divide-gray-100">
-                {repairs.map((repair) => {
-                  const statusInfo = getStatusInfo(repair.status)
-                  const displayPrice = repair.final_price || repair.estimated_price
+        <>
+          {/* Mobile: karty */}
+          <div className="md:hidden space-y-2">
+            {repairs.map((repair) => {
+              const statusInfo = getStatusInfo(repair.status)
+              const displayPrice = repair.final_price || repair.estimated_price
 
-                  return (
-                    <tr key={repair.id} className="hover:bg-gray-50 transition-colors">
-                      {/* ID / Data */}
-                      <td className="px-3 sm:px-4 py-2.5 whitespace-nowrap">
-                        <div className="text-xs font-semibold text-gray-900">
-                          #{repair.id.slice(0, 8).toUpperCase()}
-                        </div>
-                        <div className="text-[10px] text-gray-500">
-                          {format(new Date(repair.created_at), 'dd MMM yyyy', { locale: pl })}
-                        </div>
-                      </td>
-
-                      {/* Urządzenie */}
-                      <td className="px-3 sm:px-4 py-2.5">
-                        <div className="text-xs font-medium text-gray-900">{repair.device_model}</div>
-                        <div className="text-[10px] text-gray-500">S/N: {repair.serial_number || 'Brak'}</div>
-                      </td>
-
-                      {/* Klient */}
-                      <td className="px-3 sm:px-4 py-2.5 whitespace-nowrap hidden md:table-cell">
-                        <div className="text-xs text-gray-900">
-                          {repair.profiles?.first_name || repair.profiles?.last_name
-                            ? `${repair.profiles.first_name || ''} ${repair.profiles.last_name || ''}`.trim()
-                            : 'Brak danych'}
-                        </div>
-                        <div className="text-[10px] text-gray-500 truncate max-w-[150px]">{repair.profiles?.email || 'Brak email'}</div>
-                      </td>
-
-                      {/* Status */}
-                      <td className="px-3 sm:px-4 py-2.5 whitespace-nowrap">
-                        <span
-                          className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium ${statusInfo.color}`}
-                        >
-                          {statusInfo.label}
-                        </span>
-                      </td>
-
-                      {/* Cena */}
-                      <td className="px-3 sm:px-4 py-2.5 whitespace-nowrap hidden sm:table-cell">
-                        {displayPrice ? (
-                          <div className="text-xs font-semibold text-gray-900">{displayPrice} zł</div>
-                        ) : (
-                          <span className="text-[10px] text-gray-400">Brak</span>
-                        )}
-                      </td>
-
-                      {/* Akcje */}
-                      <td className="px-3 sm:px-4 py-2.5 whitespace-nowrap text-right">
-                        <button
-                          onClick={() => router.push(`/admin/zgloszenie/${repair.id}`)}
-                          className="text-xs text-blue-600 hover:text-blue-900 font-medium"
-                        >
-                          Szczegóły
-                        </button>
-                      </td>
-                    </tr>
-                  )
-                })}
-              </tbody>
-            </table>
+              return (
+                <div 
+                  key={repair.id} 
+                  onClick={() => router.push(`/admin/zgloszenie/${repair.id}`)}
+                  className="bg-white border border-gray-200 rounded-xl p-3 shadow-sm active:bg-gray-50 cursor-pointer"
+                >
+                  <div className="flex items-start justify-between mb-2">
+                    <div>
+                      <div className="text-xs font-bold text-gray-900">
+                        #{repair.id.slice(0, 8).toUpperCase()}
+                      </div>
+                      <div className="text-[10px] text-gray-500">
+                        {format(new Date(repair.created_at), 'dd MMM yyyy', { locale: pl })}
+                      </div>
+                    </div>
+                    <span className={`px-2 py-0.5 rounded-full text-[10px] font-medium ${statusInfo.color}`}>
+                      {statusInfo.label}
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <div className="text-sm font-semibold text-gray-900">{repair.device_model}</div>
+                      <div className="text-[10px] text-gray-500">
+                        {repair.profiles?.first_name || repair.profiles?.last_name
+                          ? `${repair.profiles.first_name || ''} ${repair.profiles.last_name || ''}`.trim()
+                          : repair.profiles?.email || 'Brak danych'}
+                      </div>
+                    </div>
+                    {displayPrice && (
+                      <div className="text-sm font-bold text-gray-900">{displayPrice} zł</div>
+                    )}
+                  </div>
+                </div>
+              )
+            })}
           </div>
-        </div>
+
+          {/* Desktop: tabela */}
+          <div className="hidden md:block bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead className="bg-gray-50 border-b border-gray-200">
+                  <tr>
+                    <th className="px-4 py-2.5 text-left text-[10px] font-semibold text-gray-500 uppercase tracking-wider">
+                      ID / Data
+                    </th>
+                    <th className="px-4 py-2.5 text-left text-[10px] font-semibold text-gray-500 uppercase tracking-wider">
+                      Urządzenie
+                    </th>
+                    <th className="px-4 py-2.5 text-left text-[10px] font-semibold text-gray-500 uppercase tracking-wider">
+                      Klient
+                    </th>
+                    <th className="px-4 py-2.5 text-left text-[10px] font-semibold text-gray-500 uppercase tracking-wider">
+                      Status
+                    </th>
+                    <th className="px-4 py-2.5 text-left text-[10px] font-semibold text-gray-500 uppercase tracking-wider">
+                      Cena
+                    </th>
+                    <th className="px-4 py-2.5 text-right text-[10px] font-semibold text-gray-500 uppercase tracking-wider">
+                      Akcje
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="bg-white divide-y divide-gray-100">
+                  {repairs.map((repair) => {
+                    const statusInfo = getStatusInfo(repair.status)
+                    const displayPrice = repair.final_price || repair.estimated_price
+
+                    return (
+                      <tr key={repair.id} className="hover:bg-gray-50 transition-colors">
+                        <td className="px-4 py-2.5 whitespace-nowrap">
+                          <div className="text-xs font-semibold text-gray-900">
+                            #{repair.id.slice(0, 8).toUpperCase()}
+                          </div>
+                          <div className="text-[10px] text-gray-500">
+                            {format(new Date(repair.created_at), 'dd MMM yyyy', { locale: pl })}
+                          </div>
+                        </td>
+                        <td className="px-4 py-2.5">
+                          <div className="text-xs font-medium text-gray-900">{repair.device_model}</div>
+                          <div className="text-[10px] text-gray-500">S/N: {repair.serial_number || 'Brak'}</div>
+                        </td>
+                        <td className="px-4 py-2.5 whitespace-nowrap">
+                          <div className="text-xs text-gray-900">
+                            {repair.profiles?.first_name || repair.profiles?.last_name
+                              ? `${repair.profiles.first_name || ''} ${repair.profiles.last_name || ''}`.trim()
+                              : 'Brak danych'}
+                          </div>
+                          <div className="text-[10px] text-gray-500 truncate max-w-[150px]">
+                            {repair.profiles?.email || 'Brak email'}
+                          </div>
+                        </td>
+                        <td className="px-4 py-2.5 whitespace-nowrap">
+                          <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium ${statusInfo.color}`}>
+                            {statusInfo.label}
+                          </span>
+                        </td>
+                        <td className="px-4 py-2.5 whitespace-nowrap">
+                          {displayPrice ? (
+                            <div className="text-xs font-semibold text-gray-900">{displayPrice} zł</div>
+                          ) : (
+                            <span className="text-[10px] text-gray-400">Brak</span>
+                          )}
+                        </td>
+                        <td className="px-4 py-2.5 whitespace-nowrap text-right">
+                          <button
+                            onClick={() => router.push(`/admin/zgloszenie/${repair.id}`)}
+                            className="text-xs text-blue-600 hover:text-blue-900 font-medium"
+                          >
+                            Szczegóły
+                          </button>
+                        </td>
+                      </tr>
+                    )
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </>
       )}
     </div>
   )

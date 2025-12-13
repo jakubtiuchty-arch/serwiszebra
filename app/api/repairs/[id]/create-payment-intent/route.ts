@@ -67,13 +67,12 @@ export async function POST(
 
     const shortId = repair.id.split('-')[0].toUpperCase();
 
-    // Utwórz Payment Intent
+    // Utwórz Payment Intent z BLIK, P24 i kartą (bez Link)
     const paymentIntent = await stripe.paymentIntents.create({
       amount: Math.round(amountToPay * 100), // Stripe przyjmuje grosze
       currency: 'pln',
-      automatic_payment_methods: {
-        enabled: true,
-      },
+      payment_method_types: ['blik', 'p24', 'card'],
+      receipt_email: repair.email,
       description: `Naprawa ${repair.device_model} - Zgłoszenie #${shortId}`,
       metadata: {
         repair_id: repairId,
