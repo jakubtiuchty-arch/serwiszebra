@@ -298,7 +298,7 @@ export default function ZamowieniaPage() {
         <span className="sm:hidden">Sklep</span>
       </Link>
 
-      <div>
+      <div className="ml-10 lg:ml-0">
         <h1 className="text-xl sm:text-2xl font-bold text-gray-900 mb-0.5">
           Moje zamówienia
         </h1>

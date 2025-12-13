@@ -134,7 +134,7 @@ export default function ProfilPage() {
 
   return (
     <div className="space-y-3 sm:space-y-4">
-      <div>
+      <div className="ml-10 lg:ml-0">
         <h1 className="text-xl sm:text-2xl font-bold text-gray-900 mb-0.5">Mój profil</h1>
         <p className="text-xs text-gray-500">
           Zarządzaj swoimi danymi osobowymi i firmowymi

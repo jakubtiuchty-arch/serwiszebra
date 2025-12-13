@@ -44,7 +44,7 @@ export default function PanelSidebar({ userName, userEmail, onLogout }: PanelSid
       {/* MOBILE HAMBURGER BUTTON */}
       <button
         onClick={() => setMobileMenuOpen(true)}
-        className="lg:hidden fixed top-3 left-3 z-50 p-1.5 bg-white rounded-lg shadow-lg border border-gray-200"
+        className="lg:hidden absolute top-5 left-3 z-50 p-1.5 bg-white rounded-lg border border-gray-200"
       >
         <Menu className="w-5 h-5 text-gray-700" />
       </button>

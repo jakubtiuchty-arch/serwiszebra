@@ -381,7 +381,7 @@ async function saveCompanyData() {
       </Link>
 
       {/* PAGE TITLE */}
-      <div>
+      <div className="ml-10 lg:ml-0">
         <h1 className="text-xl sm:text-2xl font-bold text-gray-900 mb-0.5">
           Dane do zamówień
         </h1>

@@ -168,7 +168,7 @@ export default function DashboardPage() {
     <div className="space-y-3 sm:space-y-4">
       {/* HEADER - KOMPAKTOWY */}
       <div className="flex items-center justify-between">
-        <div>
+        <div className="ml-12 lg:ml-0">
           <h1 className="text-xl sm:text-2xl font-bold text-gray-900 mb-0.5">Panel napraw</h1>
           <p className="text-xs text-gray-500">Zarządzaj zgłoszeniami i śledź postępy</p>
         </div>

@@ -274,7 +274,7 @@ export default function UstawieniaPage() {
       </Link>
 
       {/* PAGE TITLE */}
-      <div className="mb-6 sm:mb-8">
+      <div className="mb-6 sm:mb-8 ml-10 lg:ml-0">
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-gray-900 mb-2">
           Ustawienia konta
         </h1>

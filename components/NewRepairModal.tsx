@@ -14,6 +14,7 @@ const DEVICE_TYPES = [
   { value: 'terminal', label: 'Terminal' },
   { value: 'drukarka', label: 'Drukarka' },
   { value: 'skaner', label: 'Skaner' },
+  { value: 'tablet', label: 'Tablet' },
 ]
 
 const URGENCY_LEVELS = [
@@ -316,10 +317,10 @@ export default function NewRepairModal({ isOpen, onClose, onSuccess }: NewRepair
                     />
                   </div>
 
-                  {/* Pilność */}
+                  {/* Priorytet naprawy */}
                   <div>
                     <label className="block text-xs font-semibold text-gray-900 mb-1.5">
-                      Pilność <span className="text-red-500">*</span>
+                      Priorytet naprawy <span className="text-red-500">*</span>
                     </label>
                     <select
                       name="urgency"

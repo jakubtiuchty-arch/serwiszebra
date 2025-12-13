@@ -205,8 +205,8 @@ export default function HomePage() {
 
                 <div className="ml-auto flex items-center gap-1.5 sm:gap-3 md:gap-4 mr-0">
                   {/* MOBILE - tylko najważniejsze linki */}
-                  <a href="#formularz" className="md:hidden text-xs text-gray-700 hover:text-gray-900 transition-colors">
-                    Formularz
+                  <a href="/blog" className="md:hidden text-xs text-gray-700 hover:text-gray-900 transition-colors">
+                    Blog
                   </a>
                   <a href="/panel" className="md:hidden text-xs text-gray-700 hover:text-gray-900 transition-colors">
                     Panel
@@ -1002,7 +1002,7 @@ export default function HomePage() {
                   </h3>
 
                   <p className="text-xs text-gray-600 leading-relaxed">
-                    Opisz problem w oknie czatu AI na stronie głównej. Nasz asystent pomoże zdiagnozować usterkę i zaproponuje możliwe rozwiązania problemu.
+                    Opisz problem w oknie czatu AI. Nasz asystent pomoże zdiagnozować usterkę i zaproponuje rozwiązania. Jeśli problem wymaga naprawy — przejdź do kroku 2.
                   </p>
                 </div>
 

@@ -288,40 +288,42 @@ const handlePaymentSuccess = () => {
 
 {/* Header z breadcrumbs - BEZ USER MENU */}
 <div className="relative z-40">
-  {/* MOBILE - BREADCRUMBS + BOXY */}
-  <div className="md:hidden space-y-2 max-w-7xl mx-auto px-2 pt-3">
-    {/* Breadcrumbs */}
-    <button
-      onClick={() => router.push('/panel')}
-      className="flex items-center gap-1.5 text-blue-600 hover:text-blue-700 transition-colors"
-    >
-      <ArrowLeft className="w-3 h-3" />
-      <span className="text-xs font-medium">Powrót do panelu</span>
-    </button>
-
-    {/* BOX 1: ID + Data */}
-    <div className="bg-white/80 backdrop-blur-sm border border-gray-200 rounded-lg shadow-sm px-3 py-2">
-      <h1 className="text-base font-semibold text-gray-900 mb-0.5">
-        Zgłoszenie #{shortId}
-      </h1>
-      <p className="text-xs text-gray-500">
-        Utworzono: {format(new Date(repair.created_at), "d MMMM yyyy 'o' HH:mm", { locale: pl })}
-      </p>
+  {/* MOBILE - JEDEN KOMPAKTOWY HEADER */}
+  <div className="md:hidden max-w-7xl mx-auto px-2">
+    {/* Powrót + Status w jednej linii z hamburgerem */}
+    <div className="flex items-center justify-between mb-8 ml-10 pt-4">
+      <button
+        onClick={() => router.push('/panel')}
+        className="flex items-center gap-1.5 text-blue-600"
+      >
+        <ArrowLeft className="w-4 h-4" />
+        <span className="text-sm font-medium">Powrót</span>
+      </button>
+      <span className={`px-2 py-0.5 rounded text-xs font-semibold ${statusConfig.className}`}>
+        {statusConfig.label}
+      </span>
     </div>
 
-    {/* BOX 2: Urządzenie */}
-    <div className="bg-white/80 backdrop-blur-sm border border-gray-200 rounded-lg shadow-sm px-3 py-2">
-      <p className="text-xs text-gray-500 mb-1">Urządzenie</p>
-      <p className="text-sm font-semibold text-gray-900 mb-0.5">{repair.device_model}</p>
-      
-      {repair.serial_number && (
-        <p className="text-xs text-gray-600">
-          S/N: {repair.serial_number.length > 16 
-            ? `${repair.serial_number.substring(0, 8)}...${repair.serial_number.substring(repair.serial_number.length - 4)}`
-            : repair.serial_number
-          }
+    {/* Zgłoszenie + Urządzenie w jednym boxie */}
+    <div className="bg-white border border-gray-200 rounded-lg px-3 py-2 mb-2">
+      <div className="flex items-start justify-between gap-2">
+        <div>
+          <h1 className="text-sm font-bold text-gray-900">#{shortId}</h1>
+          <p className="text-xs font-medium text-gray-700">{repair.device_model}</p>
+        </div>
+        <p className="text-[10px] text-gray-400">
+          {format(new Date(repair.created_at), "d MMM", { locale: pl })}
         </p>
-      )}
+      </div>
+    </div>
+
+    {/* Opis problemu - MOBILE */}
+    <div className="bg-amber-50 rounded-lg border border-amber-200 px-3 py-2">
+      <div className="flex items-center gap-2 mb-1.5">
+        <AlertCircle className="w-4 h-4 text-amber-600" />
+        <span className="text-xs font-semibold text-gray-900">Opis problemu</span>
+      </div>
+      <p className="text-xs text-gray-700 leading-relaxed">{repair.issue_description}</p>
     </div>
   </div>
 
@@ -383,11 +385,11 @@ const handlePaymentSuccess = () => {
 )}
 
 {/* Content */}
-<div className="max-w-7xl mx-auto px-2 py-6">
+<div className="max-w-7xl mx-auto px-2 py-3 md:py-6">
   {/* 2-KOLUMNOWY LAYOUT */}
-  <div className="grid grid-cols-1 lg:grid-cols-2 gap-2">
+  <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 md:gap-3">
     {/* LEWA KOLUMNA - Informacje */}
-    <div className="space-y-4">
+    <div className="space-y-2 md:space-y-4">
       {/* Urządzenie - TYLKO DESKTOP */}
       <div className="hidden md:block bg-white/80 backdrop-blur-sm rounded-xl shadow-sm border border-gray-200 p-4">
         <div className="flex items-center mb-3">
@@ -445,7 +447,7 @@ const handlePaymentSuccess = () => {
         </div>
       )}
 
-      {/* Opis problemu - UKRYTE NA MOBILE */}
+      {/* Opis problemu - TYLKO DESKTOP */}
       <div className="hidden md:block bg-amber-50 rounded-xl shadow-sm border border-amber-200 p-4">
         <div className="flex items-center mb-3">
           <div className="bg-amber-100 p-1.5 rounded-lg">
@@ -457,8 +459,8 @@ const handlePaymentSuccess = () => {
         <p className="text-sm text-gray-700 whitespace-pre-wrap leading-relaxed">{repair.issue_description}</p>
 
         {urgencyConfig && (
-          <div className="mt-3 pt-3 border-t border-gray-200">
-            <p className="text-xs text-gray-500">Pilność</p>
+          <div className="mt-3 pt-3 border-t border-amber-200">
+            <p className="text-xs text-gray-500">Priorytet</p>
             <p className={`text-sm font-semibold ${urgencyConfig.className}`}>
               {urgencyConfig.label}
             </p>
@@ -468,34 +470,34 @@ const handlePaymentSuccess = () => {
 
       {/* Wycena */}
       {(repair.estimated_price || repair.final_price) && (
-        <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-sm border border-gray-200 p-4">
-          <div className="flex items-center mb-3">
+        <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-sm border border-gray-200 p-3 md:p-4">
+          <div className="flex items-center mb-2 md:mb-3">
             <div className="bg-green-100 p-1.5 rounded-lg">
               <DollarSign className="w-4 h-4 text-green-600" />
             </div>
-            <h2 className="text-sm font-semibold text-gray-900 ml-2">Wycena</h2>
+            <h2 className="text-xs md:text-sm font-semibold text-gray-900 ml-2">Wycena</h2>
           </div>
 
           <div className="space-y-2">
             {repair.estimated_price && (
               <div>
-                <p className="text-xs text-gray-500">Szacowana cena</p>
-                <p className="text-xl font-bold text-gray-900">{repair.estimated_price} zł</p>
+                <p className="text-[10px] md:text-xs text-gray-500">Szacowana cena</p>
+                <p className="text-lg md:text-xl font-bold text-gray-900">{repair.estimated_price} zł</p>
               </div>
             )}
 
             {repair.final_price && (
               <div>
-                <p className="text-xs text-gray-500">Finalna cena</p>
-                <p className="text-xl font-bold text-gray-900">{repair.final_price} zł</p>
+                <p className="text-[10px] md:text-xs text-gray-500">Finalna cena</p>
+                <p className="text-lg md:text-xl font-bold text-gray-900">{repair.final_price} zł</p>
               </div>
             )}
 
             {repair.price_accepted_at && (
               <div className="pt-2 border-t border-gray-200">
-                <p className="text-xs text-blue-600 flex items-center gap-1.5 font-medium">
-                  <CheckCircle className="w-3.5 h-3.5" />
-                  Wycena zaakceptowana {format(new Date(repair.price_accepted_at), "d MMMM yyyy", { locale: pl })}
+                <p className="text-[10px] md:text-xs text-blue-600 flex items-center gap-1.5 font-medium">
+                  <CheckCircle className="w-3 md:w-3.5 h-3 md:h-3.5" />
+                  Zaakceptowano {format(new Date(repair.price_accepted_at), "d MMM yyyy", { locale: pl })}
                 </p>
               </div>
             )}
@@ -505,35 +507,35 @@ const handlePaymentSuccess = () => {
 
       {/* Tracking */}
       {repair.courier_tracking_number && (
-        <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-sm border border-gray-200 p-4">
-          <div className="flex items-center mb-3">
+        <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-sm border border-gray-200 p-3 md:p-4">
+          <div className="flex items-center mb-2 md:mb-3">
             <div className="bg-blue-100 p-1.5 rounded-lg">
               <Truck className="w-4 h-4 text-blue-600" />
             </div>
-            <h2 className="text-sm font-semibold text-gray-900 ml-2">Śledzenie przesyłki</h2>
+            <h2 className="text-xs md:text-sm font-semibold text-gray-900 ml-2">Śledzenie przesyłki</h2>
           </div>
 
           <div className="space-y-2">
             {repair.courier_name && (
               <div>
-                <p className="text-xs text-gray-500">Kurier</p>
-                <p className="text-sm font-semibold text-gray-900">
+                <p className="text-[10px] md:text-xs text-gray-500">Kurier</p>
+                <p className="text-xs md:text-sm font-semibold text-gray-900">
                   {formatCourierName(repair.courier_name)}
                 </p>
               </div>
             )}
 
             <div>
-              <p className="text-xs text-gray-500">Numer przesyłki</p>
-              <p className="text-sm font-mono font-semibold text-gray-900">
+              <p className="text-[10px] md:text-xs text-gray-500">Numer przesyłki</p>
+              <p className="text-xs md:text-sm font-mono font-semibold text-gray-900 break-all">
                 {repair.courier_tracking_number}
               </p>
             </div>
 
             {repair.courier_notes && (
               <div>
-                <p className="text-xs text-gray-500">Notatki kuriera</p>
-                <p className="text-sm text-gray-700 leading-relaxed">{repair.courier_notes}</p>
+                <p className="text-[10px] md:text-xs text-gray-500">Notatki kuriera</p>
+                <p className="text-xs md:text-sm text-gray-700 leading-relaxed">{repair.courier_notes}</p>
               </div>
             )}
 
@@ -542,9 +544,9 @@ const handlePaymentSuccess = () => {
                 href={getTrackingUrl(repair.courier_name || '', repair.courier_tracking_number) || '#'}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 w-full px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium mt-3"
+                className="flex items-center justify-center gap-2 w-full px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-xs md:text-sm font-medium mt-2 md:mt-3"
               >
-                <ExternalLink className="w-4 h-4" />
+                <ExternalLink className="w-3.5 md:w-4 h-3.5 md:h-4" />
                 Śledź u kuriera
               </a>
             )}
@@ -558,15 +560,15 @@ const handlePaymentSuccess = () => {
       )}
 
       {/* Chat Section */}
-      <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-sm border border-gray-200 p-4">
+      <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-sm border border-gray-200 p-3 md:p-4">
         <ChatBox repairId={repair.id} currentUserType="user" />
       </div>
     </div>
 
     {/* PRAWA KOLUMNA - Akcje */}
     <div>
-      <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-sm border border-gray-200 p-4">
-        <h2 className="text-sm font-semibold text-gray-900 mb-3">Akcje</h2>
+      <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-sm border border-gray-200 p-3 md:p-4">
+        <h2 className="text-xs md:text-sm font-semibold text-gray-900 mb-2 md:mb-3">Akcje</h2>
 
         <div className="space-y-2">
           {/* Akceptuj wycenę */}
@@ -574,10 +576,10 @@ const handlePaymentSuccess = () => {
             <button
               onClick={() => setShowAcceptModal(true)}
               disabled={actionLoading}
-              className="w-full px-3 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-medium flex items-center justify-center gap-1.5 text-sm"
+              className="w-full px-2 md:px-3 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-medium flex items-center justify-center gap-1.5 text-xs md:text-sm"
             >
-              <CheckCircle className="w-4 h-4" />
-              <span>Akceptuj wycenę ({repair.final_price || repair.estimated_price} zł)</span>
+              <CheckCircle className="w-3.5 md:w-4 h-3.5 md:h-4" />
+              <span>Akceptuj ({repair.final_price || repair.estimated_price} zł)</span>
             </button>
           )}
 
@@ -588,20 +590,20 @@ const handlePaymentSuccess = () => {
             <button
               onClick={handlePayment}
               disabled={paymentLoading}
-              className="w-full px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-medium flex items-center justify-center gap-1.5 text-sm"
+              className="w-full px-2 md:px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-medium flex items-center justify-center gap-1.5 text-xs md:text-sm"
             >
-              <CreditCard className="w-4 h-4" />
+              <CreditCard className="w-3.5 md:w-4 h-3.5 md:h-4" />
               <span>
-                {paymentLoading ? 'Przygotowuję...' : `Zapłać za naprawę (${repair.final_price || repair.estimated_price} zł)`}
+                {paymentLoading ? 'Przygotowuję...' : `Zapłać (${repair.final_price || repair.estimated_price} zł)`}
               </span>
             </button>
           )}
 
           {/* Info o płatności */}
           {repair.payment_status === 'succeeded' && (
-            <div className="w-full px-3 py-2 bg-green-50 border border-green-200 text-green-700 rounded-lg flex items-center justify-center gap-2">
-              <CheckCircle className="w-4 h-4" />
-              <span className="text-sm font-medium">Naprawa opłacona</span>
+            <div className="w-full px-2 md:px-3 py-2 bg-green-50 border border-green-200 text-green-700 rounded-lg flex items-center justify-center gap-1.5">
+              <CheckCircle className="w-3.5 md:w-4 h-3.5 md:h-4" />
+              <span className="text-xs md:text-sm font-medium">Opłacone</span>
             </div>
           )}
 
@@ -610,16 +612,16 @@ const handlePaymentSuccess = () => {
             <button
               onClick={() => setShowCancelModal(true)}
               disabled={actionLoading}
-              className="w-full px-3 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-medium flex items-center justify-center gap-1.5 text-sm"
+              className="w-full px-2 md:px-3 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-medium flex items-center justify-center gap-1.5 text-xs md:text-sm"
             >
-              <XCircle className="w-4 h-4" />
-              <span>Anuluj zgłoszenie</span>
+              <XCircle className="w-3.5 md:w-4 h-3.5 md:h-4" />
+              <span>Anuluj</span>
             </button>
           )}
 
           {/* Info */}
           <div className="pt-2 border-t border-gray-200">
-            <p className="text-xs text-gray-500 leading-relaxed">
+            <p className="text-[10px] md:text-xs text-gray-500 leading-relaxed">
               {repair.status === 'wycena' && !repair.price_accepted_at && (repair.final_price || repair.estimated_price) && (
                 <>Po zaakceptowaniu wyceny rozpoczniemy naprawę urządzenia.</>
               )}
