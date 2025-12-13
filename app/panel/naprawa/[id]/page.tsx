@@ -374,7 +374,7 @@ const handlePaymentSuccess = () => {
 </div>
 {/* TIMELINE - na całą szerokość */}
 {repair.status !== 'anulowane' && (
-  <div className="max-w-7xl mx-auto px-2 mb-0">
+  <div className="max-w-7xl mx-auto px-2 mt-4 mb-0">
     <JourneyMapTimeline 
       currentStatus={repair.status}
       statusHistory={statusHistory}
@@ -446,10 +446,10 @@ const handlePaymentSuccess = () => {
       )}
 
       {/* Opis problemu - UKRYTE NA MOBILE */}
-      <div className="hidden md:block bg-white/80 backdrop-blur-sm rounded-xl shadow-sm border border-gray-200 p-4">
+      <div className="hidden md:block bg-amber-50 rounded-xl shadow-sm border border-amber-200 p-4">
         <div className="flex items-center mb-3">
-          <div className="bg-blue-100 p-1.5 rounded-lg">
-            <AlertCircle className="w-4 h-4 text-blue-600" />
+          <div className="bg-amber-100 p-1.5 rounded-lg">
+            <AlertCircle className="w-4 h-4 text-amber-600" />
           </div>
           <h2 className="text-sm font-semibold text-gray-900 ml-2">Opis problemu</h2>
         </div>

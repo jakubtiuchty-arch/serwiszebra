@@ -21,13 +21,23 @@ import {
   MessageSquare,
   Calendar,
   ThumbsUp,
-  Zap
+  Zap,
+  Eye,
+  Truck,
+  FileText,
+  ArrowRight,
+  BarChart3,
+  CreditCard,
+  HelpCircle,
+  X
 } from 'lucide-react'
+import Link from 'next/link'
 
 type PricingCategory = 'drukarki' | 'terminale' | 'skanery' | 'tablety'
 
 export default function HomePage() {
   const [activeCategory, setActiveCategory] = useState<PricingCategory>('drukarki')
+  const [showPanelModal, setShowPanelModal] = useState(false)
 
   // Schema.org structured data for SEO
   const structuredData = {
@@ -1046,13 +1056,20 @@ export default function HomePage() {
                   </h3>
 
                   <p className="text-xs text-gray-600 leading-relaxed">
-                    Nasi technicy przeprowadzą dokładną diagnostykę i prześlą szczegółową wycenę naprawy. Otrzymasz dostęp do <strong>Panelu klienta</strong>, gdzie na żywo będziesz mógł podglądać postęp naprawy.
+                    Nasi technicy przeprowadzą dokładną diagnostykę i prześlą szczegółową wycenę. Otrzymasz dostęp do{' '}
+                    <button 
+                      onClick={() => setShowPanelModal(true)}
+                      className="inline-flex items-center gap-0.5 font-semibold text-purple-600 hover:text-purple-700 transition-colors"
+                    >
+                      Panelu klienta
+                      <HelpCircle className="w-3.5 h-3.5" />
+                    </button>
                   </p>
                 </div>
 
                 <div className="flex items-center justify-center gap-1.5 bg-purple-50 text-purple-700 px-3 rounded-full text-xs font-medium h-9 mt-4">
-                  <Clock className="w-3 h-3 flex-shrink-0" />
-                  <span className="whitespace-nowrap">Wycena w 24-48h</span>
+                  <Eye className="w-3 h-3 flex-shrink-0" />
+                  <span className="whitespace-nowrap">Panel klienta 24/7</span>
                 </div>
               </div>
             </div>
@@ -1211,7 +1228,6 @@ export default function HomePage() {
                     { href: '#co-naprawiamy', label: 'Co naprawiamy' },
                     { href: '#cennik', label: 'Cennik' },
                     { href: '#jak-to-dziala', label: 'Jak to działa' },
-                    { href: '/sklep', label: 'Sklep' },
                   ].map((link) => (
                     <li key={link.href}>
                       <a href={link.href} className="group flex items-center text-xs sm:text-sm text-gray-400 hover:text-white transition-colors duration-200">
@@ -1233,7 +1249,6 @@ export default function HomePage() {
                     { href: '/faq', label: 'FAQ' },
                     { href: '/o-nas', label: 'O nas' },
                     { href: '/kontakt', label: 'Kontakt' },
-                    { href: '/regulamin', label: 'Regulamin' },
                   ].map((link) => (
                     <li key={link.href}>
                       <a href={link.href} className="group flex items-center text-xs sm:text-sm text-gray-400 hover:text-white transition-colors duration-200">
@@ -1274,15 +1289,20 @@ export default function HomePage() {
               {/* Płatności & Firma */}
               <div>
                 <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-gray-500 mb-4 sm:mb-5">Płatności</h4>
-                <div className="grid grid-cols-3 gap-1.5 sm:flex sm:flex-wrap sm:gap-2 mb-4 sm:mb-6">
+                <div className="flex flex-wrap items-center gap-4 sm:gap-6 mb-4 sm:mb-6">
                   {[
-                    { src: 'https://cdn.worldvectorlogo.com/logos/stripe-4.svg', alt: 'Stripe', w: 40, h: 16, cls: 'h-3 sm:h-4' },
-                    { src: '/P24_logo.png', alt: 'Przelewy24', w: 60, h: 16, cls: 'h-3 sm:h-4' },
-                    { src: '/blik_logo.png', alt: 'BLIK', w: 70, h: 28, cls: 'h-4 sm:h-6' },
+                    { src: 'https://cdn.worldvectorlogo.com/logos/stripe-4.svg', alt: 'Stripe', w: 50, h: 20, cls: 'h-4 sm:h-5' },
+                    { src: '/P24_logo.png', alt: 'Przelewy24', w: 70, h: 20, cls: 'h-4 sm:h-5' },
+                    { src: '/blik_logo.png', alt: 'BLIK', w: 80, h: 32, cls: 'h-7 sm:h-9' },
                   ].map((pay) => (
-                    <div key={pay.alt} className="bg-white/90 backdrop-blur-sm rounded-md sm:rounded-lg px-2 sm:px-3 py-1.5 sm:py-2 hover:bg-white transition-colors flex items-center justify-center h-7 sm:h-9 sm:min-w-[60px]">
-                      <Image src={pay.src} alt={pay.alt} width={pay.w} height={pay.h} className={`${pay.cls} w-auto object-contain`} />
-                    </div>
+                    <Image 
+                      key={pay.alt} 
+                      src={pay.src} 
+                      alt={pay.alt} 
+                      width={pay.w} 
+                      height={pay.h} 
+                      className={`${pay.cls} w-auto object-contain grayscale opacity-70 hover:opacity-100 hover:grayscale-0 transition-all`}
+                    />
                   ))}
                 </div>
                 <div className="p-2.5 sm:p-3 bg-white/5 backdrop-blur-sm rounded-lg sm:rounded-xl border border-white/5">
@@ -1312,6 +1332,72 @@ export default function HomePage() {
           </div>
         </div>
       </footer>
+
+      {/* MODAL - Panel klienta */}
+      {showPanelModal && (
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4">
+          {/* Backdrop */}
+          <div 
+            className="absolute inset-0 bg-black/50"
+            onClick={() => setShowPanelModal(false)}
+          />
+          
+          {/* Modal */}
+          <div className="relative bg-white rounded-xl shadow-2xl w-full max-w-lg overflow-hidden">
+            {/* Header */}
+            <div className="bg-gray-900 px-5 py-4">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h3 className="text-base font-semibold text-white">Panel klienta</h3>
+                  <p className="text-gray-400 text-xs">Jedyny taki w Polsce</p>
+                </div>
+                <button 
+                  onClick={() => setShowPanelModal(false)}
+                  className="p-1.5 rounded-md hover:bg-white/10 transition-colors"
+                >
+                  <X className="w-4 h-4 text-gray-400" />
+                </button>
+              </div>
+            </div>
+            
+            {/* Content */}
+            <div className="p-5">
+              <p className="text-sm text-gray-600 mb-4">
+                Po zgłoszeniu naprawy otrzymasz dostęp do dedykowanego panelu:
+              </p>
+              
+              <div className="grid grid-cols-2 gap-2.5">
+                {[
+                  { icon: Eye, label: 'Status na żywo', desc: 'Śledź każdy etap naprawy' },
+                  { icon: MessageSquare, label: 'Chat z serwisem', desc: 'Bezpośredni kontakt' },
+                  { icon: Truck, label: 'Darmowa logistyka', desc: 'Odbierzemy i dostarczymy' },
+                  { icon: FileText, label: 'Historia napraw', desc: 'Dokumenty i faktury' },
+                  { icon: BarChart3, label: 'Analityka', desc: 'Raporty i statystyki' },
+                  { icon: CreditCard, label: 'Szybka płatność', desc: 'BLIK, karta, przelew' },
+                ].map((feature, idx) => (
+                  <div key={idx} className="p-3 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors">
+                    <div className="flex items-start gap-2.5">
+                      <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center flex-shrink-0 shadow-sm">
+                        <feature.icon className="w-4 h-4 text-gray-700" />
+                      </div>
+                      <div>
+                        <div className="font-medium text-gray-900 text-sm">{feature.label}</div>
+                        <div className="text-xs text-gray-500">{feature.desc}</div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              
+              <div className="mt-4 pt-4 border-t border-gray-100">
+                <p className="text-xs text-gray-400 text-center">
+                  Bez telefonów, bez czekania na maile — wszystko online
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
     </>
   )

@@ -122,132 +122,128 @@ export function RegistrationLightbox({
 
           {/* LIGHTBOX */}
           <div className="fixed inset-0 z-[9999] overflow-y-auto">
-            <div className="min-h-full flex items-center justify-center p-4">
+            <div className="min-h-full flex items-center justify-center p-2 sm:p-4">
               <motion.div
                 initial={{ opacity: 0, scale: 0.95, y: 20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: 20 }}
                 transition={{ type: 'spring', duration: 0.5 }}
-                className="bg-white rounded-xl shadow-2xl w-full max-w-3xl relative"
+                className="bg-white rounded-xl shadow-2xl w-full max-w-md relative max-h-[95vh] overflow-y-auto"
                 onClick={(e) => e.stopPropagation()}
               >
                 {/* CLOSE BUTTON */}
                 <button
                   onClick={onClose}
-                  className="absolute top-3 right-3 text-gray-400 hover:text-gray-600 transition-colors z-10"
+                  className="absolute top-2 right-2 text-gray-400 hover:text-gray-600 transition-colors z-10"
                   aria-label="Zamknij"
                 >
-                  <X className="w-5 h-5" />
+                  <X className="w-4 h-4" />
                 </button>
 
-                <div className="p-5 md:p-6">
-                  {/* HEADER */}
-                  <div className="text-center mb-5">
-                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-green-100 mb-3">
-                      <CheckCircle className="w-6 h-6 text-green-600" />
+                <div className="p-4">
+                  {/* HEADER - kompaktowy */}
+                  <div className="text-center mb-3">
+                    <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-green-100 mb-2">
+                      <CheckCircle className="w-5 h-5 text-green-600" />
                     </div>
-                    <h2 className="text-xl font-bold text-gray-900 mb-1.5">
-                      Zgłoszenie wysłane pomyślnie!
+                    <h2 className="text-lg font-bold text-gray-900 mb-1">
+                      Zgłoszenie wysłane!
                     </h2>
-                    <p className="text-sm text-gray-600">
-                      ID zgłoszenia: <span className="font-mono font-semibold text-orange-600">#{repairId.slice(0, 8).toUpperCase()}</span>
+                    <p className="text-xs text-gray-600">
+                      ID: <span className="font-mono font-semibold text-orange-600">#{repairId.slice(0, 8).toUpperCase()}</span>
                     </p>
                   </div>
 
-                  {/* COMPARISON TABLE */}
+                  {/* COMPARISON TABLE - kompaktowa */}
                   <ComparisonTable />
 
-                  {/* REGISTRATION FORM */}
-                  <form onSubmit={handleSubmit} className="space-y-4">
-                    <div className="bg-orange-50 border-2 border-orange-200 rounded-lg p-4">
-                      <h3 className="text-base font-bold text-gray-900 mb-3 text-center">
+                  {/* REGISTRATION FORM - kompaktowy */}
+                  <form onSubmit={handleSubmit} className="space-y-3 mt-3">
+                    <div className="bg-orange-50 border border-orange-200 rounded-lg p-3">
+                      <h3 className="text-sm font-bold text-gray-900 mb-2 text-center">
                         Załóż konto w 30 sekund
                       </h3>
 
                       {/* EMAIL (read-only) */}
-                      <div className="mb-3">
-                        <label className="block text-xs font-medium text-gray-700 mb-1.5">
-                          📧 Email
+                      <div className="mb-2">
+                        <label className="block text-[10px] font-medium text-gray-700 mb-1">
+                          Email
                         </label>
                         <input
                           type="email"
                           value={userEmail}
                           disabled
-                          className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg bg-gray-100 text-gray-600"
+                          className="w-full px-2.5 py-1.5 text-xs border border-gray-300 rounded-lg bg-gray-100 text-gray-600"
                         />
                       </div>
 
-                      {/* PASSWORD */}
-                      <div className="mb-3">
-                        <label className="block text-xs font-medium text-gray-700 mb-1.5">
-                          🔒 Hasło (min. 8 znaków)
-                        </label>
-                        <input
-                          type="password"
-                          value={password}
-                          onChange={(e) => setPassword(e.target.value)}
-                          required
-                          minLength={8}
-                          placeholder="Wpisz hasło"
-                          className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
-                          autoFocus
-                        />
+                      {/* PASSWORD FIELDS - w jednym rzędzie na większych ekranach */}
+                      <div className="grid grid-cols-2 gap-2 mb-2">
+                        <div>
+                          <label className="block text-[10px] font-medium text-gray-700 mb-1">
+                            Hasło (min. 8 zn.)
+                          </label>
+                          <input
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                            minLength={8}
+                            placeholder="Hasło"
+                            className="w-full px-2.5 py-1.5 text-xs border border-gray-300 rounded-lg focus:ring-1 focus:ring-orange-500 focus:border-transparent"
+                            autoFocus
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-[10px] font-medium text-gray-700 mb-1">
+                            Powtórz hasło
+                          </label>
+                          <input
+                            type="password"
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
+                            required
+                            minLength={8}
+                            placeholder="Powtórz"
+                            className="w-full px-2.5 py-1.5 text-xs border border-gray-300 rounded-lg focus:ring-1 focus:ring-orange-500 focus:border-transparent"
+                          />
+                        </div>
                       </div>
 
-                      {/* CONFIRM PASSWORD */}
-                      <div className="mb-3">
-                        <label className="block text-xs font-medium text-gray-700 mb-1.5">
-                          🔒 Powtórz hasło
-                        </label>
-                        <input
-                          type="password"
-                          value={confirmPassword}
-                          onChange={(e) => setConfirmPassword(e.target.value)}
-                          required
-                          minLength={8}
-                          placeholder="Wpisz hasło ponownie"
-                          className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
-                        />
-                      </div>
-
-                      {/* CHECKBOXES */}
-                      <div className="space-y-2 mb-4">
-                        <label className="flex items-start gap-2 cursor-pointer group">
+                      {/* CHECKBOXES - kompaktowe */}
+                      <div className="space-y-1.5 mb-3">
+                        <label className="flex items-start gap-1.5 cursor-pointer">
                           <input
                             type="checkbox"
                             checked={termsAccepted}
                             onChange={(e) => setTermsAccepted(e.target.checked)}
                             required
-                            className="mt-0.5 w-4 h-4 text-orange-600 border-gray-300 rounded focus:ring-orange-500"
+                            className="mt-0.5 w-3.5 h-3.5 text-orange-600 border-gray-300 rounded focus:ring-orange-500"
                           />
-                          <span className="text-xs text-gray-700 group-hover:text-gray-900">
-                            Zgadzam się na{' '}
-                            <a href="/regulamin" target="_blank" className="text-orange-600 hover:text-orange-700 underline">
-                              regulamin
-                            </a>{' '}
-                            i{' '}
-                            <a href="/polityka-prywatnosci" target="_blank" className="text-orange-600 hover:text-orange-700 underline">
-                              politykę prywatności
-                            </a>
+                          <span className="text-[10px] text-gray-700">
+                            Akceptuję{' '}
+                            <a href="/regulamin" target="_blank" className="text-orange-600 underline">regulamin</a>
+                            {' '}i{' '}
+                            <a href="/polityka-prywatnosci" target="_blank" className="text-orange-600 underline">politykę prywatności</a>
                           </span>
                         </label>
 
-                        <label className="flex items-start gap-2 cursor-pointer group">
+                        <label className="flex items-start gap-1.5 cursor-pointer">
                           <input
                             type="checkbox"
                             checked={marketingConsent}
                             onChange={(e) => setMarketingConsent(e.target.checked)}
-                            className="mt-0.5 w-4 h-4 text-orange-600 border-gray-300 rounded focus:ring-orange-500"
+                            className="mt-0.5 w-3.5 h-3.5 text-orange-600 border-gray-300 rounded focus:ring-orange-500"
                           />
-                          <span className="text-xs text-gray-700 group-hover:text-gray-900">
-                            Chcę otrzymywać informacje o promocjach, nowościach i rabatach (opcjonalne)
+                          <span className="text-[10px] text-gray-700">
+                            Chcę otrzymywać promocje i nowości (opcjonalne)
                           </span>
                         </label>
                       </div>
 
                       {/* ERROR MESSAGE */}
                       {error && (
-                        <div className="mb-3 p-2 bg-red-50 border border-red-200 rounded-lg text-red-700 text-xs">
+                        <div className="mb-2 p-1.5 bg-red-50 border border-red-200 rounded text-red-700 text-[10px]">
                           {error}
                         </div>
                       )}
@@ -256,17 +252,15 @@ export function RegistrationLightbox({
                       <button
                         type="submit"
                         disabled={isLoading}
-                        className="w-full bg-orange-600 hover:bg-orange-700 text-white font-semibold py-2.5 text-sm rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                        className="w-full bg-orange-600 hover:bg-orange-700 text-white font-semibold py-2 text-xs rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-1.5"
                       >
                         {isLoading ? (
                           <>
-                            <Loader2 className="w-4 h-4 animate-spin" />
-                            Tworzenie konta...
+                            <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                            Tworzenie...
                           </>
                         ) : (
-                          <>
-                            🚀 Załóż konto - 30 sekund
-                          </>
+                          'Załóż konto'
                         )}
                       </button>
                     </div>
@@ -276,28 +270,19 @@ export function RegistrationLightbox({
                       <button
                         type="button"
                         onClick={handleSkip}
-                        className="text-xs text-gray-500 hover:text-gray-700 underline transition-colors"
+                        className="text-[10px] text-gray-500 hover:text-gray-700 underline"
                       >
                         Nie teraz, śledzę przez link
                       </button>
                     </div>
                   </form>
 
-                  {/* TRUST BADGES */}
-                  <div className="mt-5 pt-4 border-t border-gray-200">
-                    <div className="flex flex-wrap items-center justify-center gap-4 text-[10px] text-gray-500">
-                      <div className="flex items-center gap-1.5">
-                        <span className="text-green-600">🔒</span>
-                        <span>Dane szyfrowane SSL</span>
-                      </div>
-                      <div className="flex items-center gap-1.5">
-                        <span className="text-blue-600">✓</span>
-                        <span>Zgodność z RODO</span>
-                      </div>
-                      <div className="flex items-center gap-1.5">
-                        <span>🇵🇱</span>
-                        <span>Polskie prawo</span>
-                      </div>
+                  {/* TRUST BADGES - kompaktowe */}
+                  <div className="mt-3 pt-2 border-t border-gray-200">
+                    <div className="flex items-center justify-center gap-3 text-[9px] text-gray-500">
+                      <span>🔒 SSL</span>
+                      <span>✓ RODO</span>
+                      <span>🇵🇱 Polskie prawo</span>
                     </div>
                   </div>
                 </div>

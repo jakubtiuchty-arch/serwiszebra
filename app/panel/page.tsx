@@ -12,7 +12,8 @@ import {
   CheckCircle2,
   XCircle,
   ArrowRight,
-  AlertCircle
+  AlertCircle,
+  Wrench
 } from 'lucide-react'
 import RepairCard from '@/components/RepairCard'
 
@@ -182,7 +183,7 @@ export default function DashboardPage() {
             onClick={() => setIsModalOpen(true)}
             className="flex items-center gap-1.5 border-2 border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white px-3 py-2 rounded-lg text-sm font-semibold transition-all"
           >
-            <Package className="w-4 h-4" />
+            <Wrench className="w-4 h-4" />
             <span className="hidden sm:inline">Nowe zgłoszenie</span>
             <span className="sm:hidden">Nowe</span>
           </button>

@@ -27,7 +27,7 @@ const repairFormSchema = z.object({
   company: z.string().optional(),
   
   // KROK 2: Szczegóły urządzenia
-  deviceModel: z.string().min(1, 'Wybierz model urządzenia'),
+  deviceModel: z.string().min(1, 'Wpisz model urządzenia'),
   serialNumber: z.string().optional(),
   purchaseDate: z.string().optional(),
   isWarranty: z.enum(['tak', 'nie', 'nie_wiem']),
@@ -51,26 +51,7 @@ const repairFormSchema = z.object({
 
 type RepairFormData = z.infer<typeof repairFormSchema>
 
-const DEVICE_MODELS = [
-  { value: '', label: 'Wybierz model...' },
-  { value: 'ZD220', label: 'Zebra ZD220' },
-  { value: 'ZD420', label: 'Zebra ZD420' },
-  { value: 'ZD620', label: 'Zebra ZD620' },
-  { value: 'ZT230', label: 'Zebra ZT230' },
-  { value: 'ZT410', label: 'Zebra ZT410' },
-  { value: 'ZT620', label: 'Zebra ZT620' },
-  { value: 'MC3300', label: 'Zebra MC3300' },
-  { value: 'MC9300', label: 'Zebra MC9300' },
-  { value: 'TC21', label: 'Zebra TC21' },
-  { value: 'TC52', label: 'Zebra TC52' },
-  { value: 'TC72', label: 'Zebra TC72' },
-  { value: 'DS2200', label: 'Zebra DS2200' },
-  { value: 'DS3600', label: 'Zebra DS3600' },
-  { value: 'DS8100', label: 'Zebra DS8100' },
-  { value: 'LI3600', label: 'Zebra LI3600' },
-  { value: 'LI4278', label: 'Zebra LI4278' },
-  { value: 'other', label: 'Inny model' },
-]
+// Lista usunięta - teraz pole tekstowe
 
 export default function RepairForm() {
   const router = useRouter()
@@ -406,16 +387,12 @@ export default function RepairForm() {
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Model urządzenia *
                   </label>
-                  <select
+                  <input
                     {...register('deviceModel')}
+                    type="text"
                     className="w-full px-3 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  >
-                    {DEVICE_MODELS.map((model) => (
-                      <option key={model.value} value={model.value}>
-                        {model.label}
-                      </option>
-                    ))}
-                  </select>
+                    placeholder="np. ZD420, TC52, DS3608..."
+                  />
                   {errors.deviceModel && (
                     <p className="mt-1 text-sm text-red-600">{errors.deviceModel.message}</p>
                   )}
@@ -544,7 +521,7 @@ export default function RepairForm() {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Pilność naprawy *
+                    Priorytet naprawy *
                   </label>
                   <div className="grid md:grid-cols-2 gap-3">
                     <label
@@ -576,7 +553,7 @@ export default function RepairForm() {
                       <div>
                         <div className="font-semibold text-gray-900 mb-1">Express</div>
                         <div className="text-sm text-gray-600">1-2 dni robocze</div>
-                        <div className="text-sm font-semibold text-orange-600 mt-1">+50 zł</div>
+                        <div className="text-sm font-semibold text-orange-600 mt-1">+50% wartości naprawy</div>
                       </div>
                       <input
                         {...register('urgency')}
@@ -600,7 +577,7 @@ export default function RepairForm() {
                 <div className="bg-blue-50 border border-blue-200 rounded-xl p-3 flex items-start gap-2">
                   <AlertCircle className="w-4 h-4 text-blue-600 flex-shrink-0 mt-0.5" />
                   <p className="text-sm text-blue-900">
-                    Kurier odbierze urządzenie z podanego adresu <strong>całkowicie za darmo</strong>. Upewnij się, że wszystkie dane są poprawne.
+                    Kurier odbierze urządzenie z podanego adresu. Upewnij się, że wszystkie dane są poprawne.
                   </p>
                 </div>
 
@@ -725,7 +702,7 @@ export default function RepairForm() {
                   <div className="bg-gray-50 rounded-xl p-5">
                     <h4 className="font-semibold text-gray-900 mb-2">Urządzenie</h4>
                     <div className="space-y-2 text-sm">
-                      <p><span className="text-gray-600">Model:</span> <span className="font-medium">{DEVICE_MODELS.find(m => m.value === formData.deviceModel)?.label}</span></p>
+                      <p><span className="text-gray-600">Model:</span> <span className="font-medium">{formData.deviceModel}</span></p>
                       {formData.serialNumber && (
                         <p><span className="text-gray-600">S/N:</span> <span className="font-medium">{formData.serialNumber}</span></p>
                       )}
@@ -740,8 +717,8 @@ export default function RepairForm() {
                     <h4 className="font-semibold text-gray-900 mb-2">Opis problemu</h4>
                     <p className="text-sm text-gray-700 whitespace-pre-wrap">{formData.issueDescription}</p>
                     <div className="mt-2 text-sm">
-                      <span className="text-gray-600">Pilność:</span> <span className="font-medium">
-                        {formData.urgency === 'express' ? 'Express (+50 zł)' : 'Standard'}
+                      <span className="text-gray-600">Priorytet:</span> <span className="font-medium">
+                        {formData.urgency === 'express' ? 'Express (+50% wartości)' : 'Standard'}
                       </span>
                     </div>
                     {uploadedFiles.length > 0 && (
@@ -775,7 +752,7 @@ export default function RepairForm() {
                       className="mt-1 w-4 h-4 text-blue-600 focus:ring-blue-500 rounded"
                     />
                     <span className="text-sm text-gray-700 group-hover:text-gray-900">
-                      Wyrażam zgodę na przetwarzanie moich danych osobowych zgodnie z <a href="#" className="text-blue-600 hover:underline">Polityką Prywatności</a> (RODO) *
+                      Wyrażam zgodę na przetwarzanie moich danych osobowych zgodnie z <a href="/polityka-prywatnosci" target="_blank" className="text-blue-600 hover:underline">Polityką Prywatności</a> (RODO) *
                     </span>
                   </label>
                   {errors.privacyConsent && (
@@ -789,7 +766,7 @@ export default function RepairForm() {
                       className="mt-1 w-4 h-4 text-blue-600 focus:ring-blue-500 rounded"
                     />
                     <span className="text-sm text-gray-700 group-hover:text-gray-900">
-                      Akceptuję <a href="#" className="text-blue-600 hover:underline">Regulamin Serwisu</a> *
+                      Akceptuję <a href="/regulamin" target="_blank" className="text-blue-600 hover:underline">Regulamin Serwisu</a> *
                     </span>
                   </label>
                   {errors.termsConsent && (

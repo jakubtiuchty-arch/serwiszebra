@@ -18,7 +18,7 @@ interface RepairCardProps {
 const STATUS_CONFIG = {
   nowe: { 
     label: 'Nowe', 
-    sublabel: 'TERAZ',
+    sublabel: '',
     progress: 14,
     color: 'blue',
     bgColor: 'bg-blue-50',
@@ -137,9 +137,6 @@ export default function RepairCard({ repair }: RepairCardProps) {
             <p className="text-[10px] text-gray-500 font-medium">
               ID: #{shortId}
             </p>
-          </div>
-          <div className={`px-1.5 py-0.5 rounded-md text-[10px] font-semibold ${statusConfig.bgColor} ${statusConfig.textColor} border ${statusConfig.borderColor}`}>
-            {statusConfig.label}
           </div>
         </div>
 
