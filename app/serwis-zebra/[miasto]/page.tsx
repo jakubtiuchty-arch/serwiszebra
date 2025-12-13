@@ -280,8 +280,8 @@ export default function CityServicePage({ params }: { params: { miasto: string }
 
         {/* Hero Section - lekki gradient jak na stronie głównej */}
         <section className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-10 sm:py-12 md:py-16">
-          <div className="max-w-6xl mx-auto px-3 sm:px-4">
-            <div className="flex items-center gap-1.5 sm:gap-2 mb-3">
+          <div className="max-w-6xl mx-auto px-3 sm:px-4 text-center">
+            <div className="flex items-center justify-center gap-1.5 sm:gap-2 mb-3">
               <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
               <span className="text-blue-600 font-medium text-sm">{city.name} i okolice</span>
             </div>
@@ -293,11 +293,11 @@ export default function CityServicePage({ params }: { params: { miasto: string }
               </span>
             </h1>
             
-            <p className="text-sm sm:text-base text-gray-600 mb-5 sm:mb-6 max-w-2xl">
+            <p className="text-sm sm:text-base text-gray-600 mb-5 sm:mb-6 max-w-2xl mx-auto">
               {city.heroText}
             </p>
 
-            <div className="flex flex-wrap gap-2 sm:gap-3 mb-5 sm:mb-6">
+            <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-5 sm:mb-6">
               <div className="flex items-center gap-1.5 bg-white/80 border border-gray-200 px-3 py-1.5 rounded-full text-xs sm:text-sm">
                 <Truck className="w-4 h-4 text-green-600" />
                 <span className="text-gray-700">Odbiór {city.deliveryTime}</span>
@@ -312,7 +312,7 @@ export default function CityServicePage({ params }: { params: { miasto: string }
               </div>
             </div>
 
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-3 justify-center">
               <Link
                 href="/#formularz"
                 className="inline-flex items-center gap-2 bg-blue-600 text-white font-medium px-5 py-2.5 rounded-lg hover:bg-blue-700 transition-colors text-sm"
@@ -476,7 +476,7 @@ export default function CityServicePage({ params }: { params: { miasto: string }
                   <span className="text-lg sm:text-xl font-semibold text-gray-700">1</span>
                 </div>
                 <p className="text-xs sm:text-sm font-medium text-gray-900">Zgłoś</p>
-                <p className="text-[10px] sm:text-xs text-gray-500 mt-0.5">Online lub tel.</p>
+                <p className="text-[10px] sm:text-xs text-gray-500 mt-0.5">Online</p>
               </div>
 
               <div className="text-center">
