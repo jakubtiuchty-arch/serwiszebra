@@ -1349,7 +1349,7 @@ export default function HomePage() {
               <div className="flex items-center justify-between">
                 <div>
                   <h3 className="text-base font-semibold text-white">Panel klienta</h3>
-                  <p className="text-gray-400 text-xs">Jedyny taki w Polsce</p>
+                  <p className="text-gray-400 text-xs">Innowacja w branży serwisowej</p>
                 </div>
                 <button 
                   onClick={() => setShowPanelModal(false)}
