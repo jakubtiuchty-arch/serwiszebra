@@ -36,9 +36,9 @@ export default function Header({ currentPage = 'other', hidePartnerLogos = false
       <nav className="pr-3 md:pr-0 pl-3 sm:pl-4">
         <div className="max-w-[1400px] mx-auto">
           <div className="flex items-center h-14 sm:h-16">
-            <Link href="/" className="flex items-center gap-2 sm:gap-3 -ml-3 md:-ml-6">
+            <Link href="/" className="flex items-center gap-1 sm:gap-3 -ml-2 sm:-ml-3 md:-ml-6">
               {/* TAKMA Logo */}
-              <div className="w-[111px] sm:w-[148px] h-[46px] sm:h-[56px] relative">
+              <div className="w-[90px] sm:w-[130px] md:w-[148px] h-[38px] sm:h-[50px] md:h-[56px] relative">
                 <Image
                   src="/takma_logo_1.png"
                   alt="TAKMA Logo"
@@ -49,8 +49,8 @@ export default function Header({ currentPage = 'other', hidePartnerLogos = false
 
               {!hidePartnerLogos && (
                 <>
-                  {/* Premier Partner Logo */}
-                  <div className="w-16 sm:w-20 h-11 sm:h-[53px] relative">
+                  {/* Premier Partner Logo - mniejsze na mobile */}
+                  <div className="w-12 sm:w-16 md:w-20 h-8 sm:h-11 md:h-[53px] relative">
                     <Image
                       src="/premier-partner-1.png"
                       alt="Premier Partner"
@@ -59,8 +59,8 @@ export default function Header({ currentPage = 'other', hidePartnerLogos = false
                     />
                   </div>
 
-                  {/* Repair Specialist Logo */}
-                  <div className="w-[67px] sm:w-[84px] h-11 sm:h-[53px] relative">
+                  {/* Repair Specialist Logo - mniejsze na mobile */}
+                  <div className="w-[52px] sm:w-[70px] md:w-[84px] h-8 sm:h-11 md:h-[53px] relative">
                     <Image
                       src="/repair_specialist.png"
                       alt="Repair Specialist"
