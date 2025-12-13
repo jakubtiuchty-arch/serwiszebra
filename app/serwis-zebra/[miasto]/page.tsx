@@ -278,53 +278,53 @@ export default function CityServicePage({ params }: { params: { miasto: string }
           </div>
         </div>
 
-        {/* Hero Section - Mobile optimized */}
-        <section className="bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 text-white py-8 sm:py-12 md:py-20">
+        {/* Hero Section - lekki gradient jak na stronie głównej */}
+        <section className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-6 sm:py-10 md:py-14">
           <div className="max-w-6xl mx-auto px-3 sm:px-4">
-            <div className="flex items-center gap-1.5 sm:gap-2 mb-2 sm:mb-4">
-              <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-blue-300" />
-              <span className="text-blue-200 font-medium text-sm sm:text-base">{city.name} i okolice</span>
+            <div className="flex items-center gap-1.5 sm:gap-2 mb-2 sm:mb-3">
+              <MapPin className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-blue-600" />
+              <span className="text-blue-600 font-medium text-xs sm:text-sm">{city.name} i okolice</span>
             </div>
             
-            <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-3 sm:mb-6">
+            <h1 className="text-xl sm:text-2xl md:text-4xl font-semibold text-gray-900 mb-2 sm:mb-4">
               Serwis Zebra {city.name}
-              <span className="block text-base sm:text-xl md:text-2xl font-normal text-blue-200 mt-1 sm:mt-2">
+              <span className="block text-sm sm:text-base md:text-xl font-normal text-gray-600 mt-1">
                 Naprawa Drukarek, Terminali i Skanerów
               </span>
             </h1>
             
-            <p className="text-sm sm:text-lg md:text-xl text-blue-100 mb-4 sm:mb-8 max-w-2xl">
+            <p className="text-xs sm:text-sm md:text-base text-gray-600 mb-4 sm:mb-6 max-w-2xl">
               {city.heroText}
             </p>
 
-            <div className="flex flex-wrap gap-2 sm:gap-4 mb-4 sm:mb-8">
-              <div className="flex items-center gap-1.5 sm:gap-2 bg-white/10 backdrop-blur px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-base">
-                <Truck className="w-3.5 h-3.5 sm:w-5 sm:h-5 text-green-300" />
-                <span>Odbiór w {city.deliveryTime}</span>
+            <div className="flex flex-wrap gap-1.5 sm:gap-3 mb-4 sm:mb-6">
+              <div className="flex items-center gap-1 sm:gap-1.5 bg-white/80 border border-gray-200 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs">
+                <Truck className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-green-600" />
+                <span className="text-gray-700">Odbiór {city.deliveryTime}</span>
               </div>
-              <div className="flex items-center gap-1.5 sm:gap-2 bg-white/10 backdrop-blur px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-base">
-                <Clock className="w-3.5 h-3.5 sm:w-5 sm:h-5 text-yellow-300" />
-                <span>Naprawa 2-5 dni</span>
+              <div className="flex items-center gap-1 sm:gap-1.5 bg-white/80 border border-gray-200 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs">
+                <Clock className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-amber-600" />
+                <span className="text-gray-700">2-5 dni</span>
               </div>
-              <div className="flex items-center gap-1.5 sm:gap-2 bg-white/10 backdrop-blur px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-base">
-                <Shield className="w-3.5 h-3.5 sm:w-5 sm:h-5 text-blue-300" />
-                <span>12 mies. gwarancji</span>
+              <div className="flex items-center gap-1 sm:gap-1.5 bg-white/80 border border-gray-200 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs">
+                <Shield className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-blue-600" />
+                <span className="text-gray-700">12 mies. gwarancji</span>
               </div>
             </div>
 
-            <div className="flex flex-wrap gap-2 sm:gap-4">
+            <div className="flex flex-wrap gap-2 sm:gap-3">
               <Link
                 href="/#formularz"
-                className="inline-flex items-center gap-1.5 sm:gap-2 bg-white text-blue-700 font-semibold px-4 sm:px-6 py-2 sm:py-3 rounded-xl hover:bg-blue-50 transition-colors shadow-lg text-sm sm:text-base"
+                className="inline-flex items-center gap-1.5 bg-blue-600 text-white font-medium px-3 sm:px-5 py-1.5 sm:py-2 rounded-lg hover:bg-blue-700 transition-colors text-xs sm:text-sm"
               >
                 Zgłoś naprawę
-                <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
+                <ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               </Link>
               <a
                 href="tel:+48601619898"
-                className="inline-flex items-center gap-1.5 sm:gap-2 bg-blue-500/30 backdrop-blur text-white font-semibold px-4 sm:px-6 py-2 sm:py-3 rounded-xl hover:bg-blue-500/40 transition-colors text-sm sm:text-base"
+                className="inline-flex items-center gap-1.5 bg-white border border-gray-300 text-gray-700 font-medium px-3 sm:px-5 py-1.5 sm:py-2 rounded-lg hover:bg-gray-50 transition-colors text-xs sm:text-sm"
               >
-                <Phone className="w-4 h-4 sm:w-5 sm:h-5" />
+                <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 <span className="hidden sm:inline">+48 601 619 898</span>
                 <span className="sm:hidden">Zadzwoń</span>
               </a>
@@ -333,279 +333,199 @@ export default function CityServicePage({ params }: { params: { miasto: string }
         </section>
 
         {/* Intro */}
-        <section className="py-6 sm:py-10 md:py-16">
+        <section className="py-4 sm:py-6 md:py-10">
           <div className="max-w-6xl mx-auto px-3 sm:px-4">
-            <div className="bg-blue-50 border border-blue-100 rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8">
-              <p className="text-sm sm:text-base md:text-lg text-gray-700 leading-relaxed">
-                {city.introText} Specjalizujemy się w naprawie wszystkich urządzeń Zebra Technologies – od drukarek etykiet, przez terminale mobilne, po skanery kodów kreskowych. <strong>25 lat doświadczenia</strong> i tysiące skutecznych napraw.
+            <div className="bg-gray-50 border border-gray-100 rounded-lg p-3 sm:p-4 md:p-5">
+              <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
+                {city.introText} Specjalizujemy się w naprawie urządzeń Zebra Technologies – drukarki etykiet, terminale mobilne, skanery kodów. <strong className="text-gray-900">25 lat doświadczenia.</strong>
               </p>
             </div>
           </div>
         </section>
 
         {/* Serwisowane urządzenia */}
-        <section className="py-6 sm:py-10 md:py-16 bg-white">
+        <section className="py-4 sm:py-6 md:py-10 bg-white">
           <div className="max-w-6xl mx-auto px-3 sm:px-4">
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-4 sm:mb-8 text-center">
-              Jakie urządzenia serwisujemy w {city.nameLocative}?
+            <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-900 mb-3 sm:mb-5 text-center">
+              Co serwisujemy w {city.nameLocative}?
             </h2>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
+            <div className="grid grid-cols-3 gap-2 sm:gap-3 md:gap-4">
               {/* Drukarki */}
-              <div className="bg-gray-50 rounded-xl sm:rounded-2xl p-4 sm:p-6 hover:shadow-lg transition-shadow">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 rounded-lg sm:rounded-xl flex items-center justify-center mb-3 sm:mb-4">
-                  <Printer className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
+              <div className="bg-white rounded-lg p-3 sm:p-4 border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gray-50 rounded-lg flex items-center justify-center mb-2 sm:mb-3 border border-gray-100">
+                  <Printer className="w-4 h-4 sm:w-5 sm:h-5 text-gray-500" strokeWidth={1.5} />
                 </div>
-                <h3 className="text-base sm:text-lg md:text-xl font-bold text-gray-900 mb-2 sm:mb-3">Drukarki etykiet</h3>
-                <ul className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm md:text-base text-gray-600 mb-3 sm:mb-4">
-                  <li className="flex items-center gap-1.5 sm:gap-2">
-                    <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-green-500 flex-shrink-0" />
-                    Desktop: ZD420, ZD621, GK420
+                <h3 className="text-xs sm:text-sm font-semibold text-gray-900 mb-1.5 sm:mb-2">Drukarki</h3>
+                <ul className="space-y-1 text-[10px] sm:text-xs text-gray-600">
+                  <li className="flex items-start gap-1">
+                    <CheckCircle2 className="w-3 h-3 text-green-600 flex-shrink-0 mt-0.5" />
+                    <span>ZD, ZT, GK</span>
                   </li>
-                  <li className="flex items-center gap-1.5 sm:gap-2">
-                    <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-green-500 flex-shrink-0" />
-                    Przemysłowe: ZT410, ZT610
+                  <li className="flex items-start gap-1">
+                    <CheckCircle2 className="w-3 h-3 text-green-600 flex-shrink-0 mt-0.5" />
+                    <span>Mobilne, RFID</span>
                   </li>
-                  <li className="flex items-center gap-1.5 sm:gap-2">
-                    <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-green-500 flex-shrink-0" />
-                    Mobilne: ZQ520, ZQ630
-                  </li>
-                  <li className="flex items-center gap-1.5 sm:gap-2">
-                    <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-green-500 flex-shrink-0" />
-                    Karty: ZC300, ZXP7
+                  <li className="flex items-start gap-1">
+                    <CheckCircle2 className="w-3 h-3 text-green-600 flex-shrink-0 mt-0.5" />
+                    <span>Karty</span>
                   </li>
                 </ul>
-                <Link href="/blog" className="text-blue-600 hover:text-blue-800 font-medium text-xs sm:text-sm">
-                  Poradniki →
-                </Link>
               </div>
 
               {/* Terminale */}
-              <div className="bg-gray-50 rounded-xl sm:rounded-2xl p-4 sm:p-6 hover:shadow-lg transition-shadow">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-green-100 rounded-lg sm:rounded-xl flex items-center justify-center mb-3 sm:mb-4">
-                  <Smartphone className="w-5 h-5 sm:w-6 sm:h-6 text-green-600" />
+              <div className="bg-white rounded-lg p-3 sm:p-4 border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gray-50 rounded-lg flex items-center justify-center mb-2 sm:mb-3 border border-gray-100">
+                  <Smartphone className="w-4 h-4 sm:w-5 sm:h-5 text-gray-500" strokeWidth={1.5} />
                 </div>
-                <h3 className="text-base sm:text-lg md:text-xl font-bold text-gray-900 mb-2 sm:mb-3">Terminale mobilne</h3>
-                <ul className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm md:text-base text-gray-600 mb-3 sm:mb-4">
-                  <li className="flex items-center gap-1.5 sm:gap-2">
-                    <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-green-500 flex-shrink-0" />
-                    Seria TC: TC21, TC52, TC72
+                <h3 className="text-xs sm:text-sm font-semibold text-gray-900 mb-1.5 sm:mb-2">Terminale</h3>
+                <ul className="space-y-1 text-[10px] sm:text-xs text-gray-600">
+                  <li className="flex items-start gap-1">
+                    <CheckCircle2 className="w-3 h-3 text-green-600 flex-shrink-0 mt-0.5" />
+                    <span>TC, MC</span>
                   </li>
-                  <li className="flex items-center gap-1.5 sm:gap-2">
-                    <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-green-500 flex-shrink-0" />
-                    Seria MC: MC2200, MC3300
+                  <li className="flex items-start gap-1">
+                    <CheckCircle2 className="w-3 h-3 text-green-600 flex-shrink-0 mt-0.5" />
+                    <span>Wearable</span>
                   </li>
-                  <li className="flex items-center gap-1.5 sm:gap-2">
-                    <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-green-500 flex-shrink-0" />
-                    Wearable: WT6000
-                  </li>
-                  <li className="flex items-center gap-1.5 sm:gap-2">
-                    <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-green-500 flex-shrink-0" />
-                    Tablety: ET40, L10
+                  <li className="flex items-start gap-1">
+                    <CheckCircle2 className="w-3 h-3 text-green-600 flex-shrink-0 mt-0.5" />
+                    <span>Tablety</span>
                   </li>
                 </ul>
-                <Link href="/blog" className="text-blue-600 hover:text-blue-800 font-medium text-xs sm:text-sm">
-                  Poradniki →
-                </Link>
               </div>
 
               {/* Skanery */}
-              <div className="bg-gray-50 rounded-xl sm:rounded-2xl p-4 sm:p-6 hover:shadow-lg transition-shadow sm:col-span-2 md:col-span-1">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-purple-100 rounded-lg sm:rounded-xl flex items-center justify-center mb-3 sm:mb-4">
-                  <ScanBarcode className="w-5 h-5 sm:w-6 sm:h-6 text-purple-600" />
+              <div className="bg-white rounded-lg p-3 sm:p-4 border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gray-50 rounded-lg flex items-center justify-center mb-2 sm:mb-3 border border-gray-100">
+                  <ScanBarcode className="w-4 h-4 sm:w-5 sm:h-5 text-gray-500" strokeWidth={1.5} />
                 </div>
-                <h3 className="text-base sm:text-lg md:text-xl font-bold text-gray-900 mb-2 sm:mb-3">Skanery kodów</h3>
-                <ul className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm md:text-base text-gray-600 mb-3 sm:mb-4">
-                  <li className="flex items-center gap-1.5 sm:gap-2">
-                    <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-green-500 flex-shrink-0" />
-                    Przewodowe: DS2208, DS4608
+                <h3 className="text-xs sm:text-sm font-semibold text-gray-900 mb-1.5 sm:mb-2">Skanery</h3>
+                <ul className="space-y-1 text-[10px] sm:text-xs text-gray-600">
+                  <li className="flex items-start gap-1">
+                    <CheckCircle2 className="w-3 h-3 text-green-600 flex-shrink-0 mt-0.5" />
+                    <span>DS, CS</span>
                   </li>
-                  <li className="flex items-center gap-1.5 sm:gap-2">
-                    <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-green-500 flex-shrink-0" />
-                    Bezprzewodowe: DS2278, DS3678
+                  <li className="flex items-start gap-1">
+                    <CheckCircle2 className="w-3 h-3 text-green-600 flex-shrink-0 mt-0.5" />
+                    <span>Bezprzewodowe</span>
                   </li>
-                  <li className="flex items-center gap-1.5 sm:gap-2">
-                    <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-green-500 flex-shrink-0" />
-                    Prezentacyjne: DS9208
-                  </li>
-                  <li className="flex items-center gap-1.5 sm:gap-2">
-                    <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-green-500 flex-shrink-0" />
-                    Kompaktowe: CS4070
+                  <li className="flex items-start gap-1">
+                    <CheckCircle2 className="w-3 h-3 text-green-600 flex-shrink-0 mt-0.5" />
+                    <span>Prezentacyjne</span>
                   </li>
                 </ul>
-                <Link href="/blog" className="text-blue-600 hover:text-blue-800 font-medium text-xs sm:text-sm">
-                  Poradniki →
-                </Link>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Cennik - mobile friendly cards + desktop table */}
-        <section className="py-6 sm:py-10 md:py-16">
+        {/* Cennik - kompaktowy */}
+        <section className="py-4 sm:py-6 md:py-10">
           <div className="max-w-6xl mx-auto px-3 sm:px-4">
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-4 sm:mb-8 text-center">
-              Orientacyjny cennik napraw
+            <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-900 mb-3 sm:mb-5 text-center">
+              Orientacyjny cennik
             </h2>
 
-            {/* Mobile: Cards */}
-            <div className="md:hidden space-y-3">
-              <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
-                <h3 className="font-semibold text-gray-900 mb-2 text-sm">Wymiana głowicy</h3>
-                <div className="grid grid-cols-2 gap-2 text-xs">
-                  <div><span className="text-gray-500">Desktop:</span> <span className="font-medium">250-530 zł</span></div>
-                  <div><span className="text-gray-500">Przemysłowe:</span> <span className="font-medium">580-2499 zł</span></div>
-                </div>
+            {/* Mobile + Desktop: kompaktowa lista */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3">
+              <div className="bg-white rounded-lg p-2.5 sm:p-3 border border-gray-100 shadow-sm text-center">
+                <p className="text-[10px] sm:text-xs text-gray-500 mb-0.5">Głowica</p>
+                <p className="text-xs sm:text-sm font-semibold text-gray-900">od 250 zł</p>
               </div>
-              <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
-                <h3 className="font-semibold text-gray-900 mb-2 text-sm">Naprawa mechanizmu</h3>
-                <div className="grid grid-cols-2 gap-2 text-xs">
-                  <div><span className="text-gray-500">Desktop:</span> <span className="font-medium">150-300 zł</span></div>
-                  <div><span className="text-gray-500">Przemysłowe:</span> <span className="font-medium">200-450 zł</span></div>
-                </div>
+              <div className="bg-white rounded-lg p-2.5 sm:p-3 border border-gray-100 shadow-sm text-center">
+                <p className="text-[10px] sm:text-xs text-gray-500 mb-0.5">Mechanizm</p>
+                <p className="text-xs sm:text-sm font-semibold text-gray-900">od 150 zł</p>
               </div>
-              <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
-                <h3 className="font-semibold text-gray-900 mb-2 text-sm">Terminale mobilne</h3>
-                <div className="grid grid-cols-2 gap-2 text-xs">
-                  <div><span className="text-gray-500">Wyświetlacz:</span> <span className="font-medium">600-1200 zł</span></div>
-                  <div><span className="text-gray-500">Skaner:</span> <span className="font-medium">500-1100 zł</span></div>
-                </div>
+              <div className="bg-white rounded-lg p-2.5 sm:p-3 border border-gray-100 shadow-sm text-center">
+                <p className="text-[10px] sm:text-xs text-gray-500 mb-0.5">Wyświetlacz</p>
+                <p className="text-xs sm:text-sm font-semibold text-gray-900">od 600 zł</p>
               </div>
-              <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
-                <h3 className="font-semibold text-gray-900 mb-2 text-sm">Czyszczenie + konserwacja</h3>
-                <div className="text-xs">
-                  <span className="text-gray-500">od</span> <span className="font-medium">149 zł</span>
-                </div>
+              <div className="bg-white rounded-lg p-2.5 sm:p-3 border border-gray-100 shadow-sm text-center">
+                <p className="text-[10px] sm:text-xs text-gray-500 mb-0.5">Konserwacja</p>
+                <p className="text-xs sm:text-sm font-semibold text-gray-900">od 149 zł</p>
               </div>
             </div>
 
-            {/* Desktop: Table */}
-            <div className="hidden md:block overflow-x-auto">
-              <table className="w-full bg-white rounded-2xl overflow-hidden shadow-lg">
-                <thead className="bg-gray-50">
-                  <tr>
-                    <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Usługa</th>
-                    <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Drukarki Desktop</th>
-                    <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Drukarki Przemysłowe</th>
-                    <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Terminale</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-gray-100">
-                  <tr>
-                    <td className="px-6 py-4 text-gray-900 font-medium">Wymiana głowicy</td>
-                    <td className="px-6 py-4 text-gray-600">250-530 zł</td>
-                    <td className="px-6 py-4 text-gray-600">580-2499 zł</td>
-                    <td className="px-6 py-4 text-gray-600">-</td>
-                  </tr>
-                  <tr className="bg-gray-50/50">
-                    <td className="px-6 py-4 text-gray-900 font-medium">Wymiana wyświetlacza</td>
-                    <td className="px-6 py-4 text-gray-600">-</td>
-                    <td className="px-6 py-4 text-gray-600">-</td>
-                    <td className="px-6 py-4 text-gray-600">600-1200 zł</td>
-                  </tr>
-                  <tr>
-                    <td className="px-6 py-4 text-gray-900 font-medium">Naprawa mechanizmu</td>
-                    <td className="px-6 py-4 text-gray-600">150-300 zł</td>
-                    <td className="px-6 py-4 text-gray-600">200-450 zł</td>
-                    <td className="px-6 py-4 text-gray-600">-</td>
-                  </tr>
-                  <tr className="bg-gray-50/50">
-                    <td className="px-6 py-4 text-gray-900 font-medium">Naprawa skanera</td>
-                    <td className="px-6 py-4 text-gray-600">-</td>
-                    <td className="px-6 py-4 text-gray-600">-</td>
-                    <td className="px-6 py-4 text-gray-600">500-1100 zł</td>
-                  </tr>
-                  <tr>
-                    <td className="px-6 py-4 text-gray-900 font-medium">Czyszczenie + konserwacja</td>
-                    <td className="px-6 py-4 text-gray-600">150-250 zł</td>
-                    <td className="px-6 py-4 text-gray-600">200-400 zł</td>
-                    <td className="px-6 py-4 text-gray-600">149-189 zł</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-
-            <p className="text-center text-gray-500 mt-3 sm:mt-4 text-xs sm:text-sm">
-              * Ceny orientacyjne. Dokładna wycena po diagnostyce.
+            <p className="text-center text-gray-400 mt-2 sm:mt-3 text-[10px] sm:text-xs">
+              Dokładna wycena po diagnostyce
             </p>
           </div>
         </section>
 
-        {/* Jak to działa */}
-        <section className="py-6 sm:py-10 md:py-16 bg-white">
+        {/* Jak to działa - kompaktowy */}
+        <section className="py-4 sm:py-6 md:py-10 bg-white">
           <div className="max-w-6xl mx-auto px-3 sm:px-4">
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-4 sm:mb-8 text-center">
-              Jak wygląda naprawa?
+            <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-900 mb-3 sm:mb-5 text-center">
+              Jak to działa?
             </h2>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
-              <div className="text-center flex sm:block items-center gap-3 sm:gap-0">
-                <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-blue-100 rounded-full flex items-center justify-center sm:mx-auto mb-0 sm:mb-3 md:mb-4 flex-shrink-0">
-                  <span className="text-lg sm:text-xl md:text-2xl font-bold text-blue-600">1</span>
+            <div className="flex items-center justify-center gap-2 sm:gap-4 md:gap-6">
+              <div className="text-center">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gray-50 border border-gray-200 rounded-full flex items-center justify-center mx-auto mb-1 sm:mb-2">
+                  <span className="text-xs sm:text-sm font-semibold text-gray-700">1</span>
                 </div>
-                <div className="text-left sm:text-center">
-                  <h3 className="text-sm sm:text-base md:text-lg font-bold text-gray-900 mb-0.5 sm:mb-2">Zgłoś naprawę</h3>
-                  <p className="text-xs sm:text-sm md:text-base text-gray-600">
-                    Wypełnij formularz online lub zadzwoń.
-                  </p>
-                </div>
+                <p className="text-[10px] sm:text-xs text-gray-600">Zgłoś</p>
               </div>
 
-              <div className="text-center flex sm:block items-center gap-3 sm:gap-0">
-                <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-blue-100 rounded-full flex items-center justify-center sm:mx-auto mb-0 sm:mb-3 md:mb-4 flex-shrink-0">
-                  <span className="text-lg sm:text-xl md:text-2xl font-bold text-blue-600">2</span>
+              <ChevronRight className="w-3 h-3 sm:w-4 sm:h-4 text-gray-300" />
+
+              <div className="text-center">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gray-50 border border-gray-200 rounded-full flex items-center justify-center mx-auto mb-1 sm:mb-2">
+                  <span className="text-xs sm:text-sm font-semibold text-gray-700">2</span>
                 </div>
-                <div className="text-left sm:text-center">
-                  <h3 className="text-sm sm:text-base md:text-lg font-bold text-gray-900 mb-0.5 sm:mb-2">Odbiór kurierem</h3>
-                  <p className="text-xs sm:text-sm md:text-base text-gray-600">
-                    Kurier przyjedzie w {city.deliveryTime}. Bezpłatnie!
-                  </p>
-                </div>
+                <p className="text-[10px] sm:text-xs text-gray-600">Kurier</p>
               </div>
 
-              <div className="text-center flex sm:block items-center gap-3 sm:gap-0">
-                <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-blue-100 rounded-full flex items-center justify-center sm:mx-auto mb-0 sm:mb-3 md:mb-4 flex-shrink-0">
-                  <span className="text-lg sm:text-xl md:text-2xl font-bold text-blue-600">3</span>
+              <ChevronRight className="w-3 h-3 sm:w-4 sm:h-4 text-gray-300" />
+
+              <div className="text-center">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gray-50 border border-gray-200 rounded-full flex items-center justify-center mx-auto mb-1 sm:mb-2">
+                  <span className="text-xs sm:text-sm font-semibold text-gray-700">3</span>
                 </div>
-                <div className="text-left sm:text-center">
-                  <h3 className="text-sm sm:text-base md:text-lg font-bold text-gray-900 mb-0.5 sm:mb-2">Naprawa i zwrot</h3>
-                  <p className="text-xs sm:text-sm md:text-base text-gray-600">
-                    Naprawiamy w 2-5 dni i odsyłamy.
-                  </p>
+                <p className="text-[10px] sm:text-xs text-gray-600">Naprawa</p>
+              </div>
+
+              <ChevronRight className="w-3 h-3 sm:w-4 sm:h-4 text-gray-300" />
+
+              <div className="text-center">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gray-50 border border-gray-200 rounded-full flex items-center justify-center mx-auto mb-1 sm:mb-2">
+                  <span className="text-xs sm:text-sm font-semibold text-gray-700">4</span>
                 </div>
+                <p className="text-[10px] sm:text-xs text-gray-600">Zwrot</p>
               </div>
             </div>
 
-            <div className="text-center mt-6 sm:mt-8 md:mt-10">
+            <div className="text-center mt-4 sm:mt-6">
               <Link
                 href="/#formularz"
-                className="inline-flex items-center gap-1.5 sm:gap-2 bg-blue-600 text-white font-semibold px-5 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 rounded-xl hover:bg-blue-700 transition-colors shadow-lg text-sm sm:text-base"
+                className="inline-flex items-center gap-1.5 bg-blue-600 text-white font-medium px-4 sm:px-5 py-1.5 sm:py-2 rounded-lg hover:bg-blue-700 transition-colors text-xs sm:text-sm"
               >
                 Zgłoś naprawę
-                <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
+                <ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               </Link>
             </div>
           </div>
         </section>
 
-        {/* FAQ */}
-        <section className="py-6 sm:py-10 md:py-16">
+        {/* FAQ - kompaktowe */}
+        <section className="py-4 sm:py-6 md:py-10">
           <div className="max-w-4xl mx-auto px-3 sm:px-4">
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-4 sm:mb-8 text-center">
-              Najczęściej zadawane pytania
+            <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-900 mb-3 sm:mb-5 text-center">
+              FAQ
             </h2>
 
-            <div className="space-y-2 sm:space-y-4">
+            <div className="space-y-1.5 sm:space-y-2">
               {faq.map((item, idx) => (
                 <details
                   key={idx}
-                  className="bg-white rounded-lg sm:rounded-xl shadow-sm border border-gray-100 overflow-hidden group"
+                  className="bg-white rounded-lg border border-gray-100 overflow-hidden group"
                 >
-                  <summary className="px-3 sm:px-6 py-3 sm:py-4 cursor-pointer font-medium text-gray-900 hover:bg-gray-50 transition-colors flex items-center justify-between gap-2 text-sm sm:text-base">
+                  <summary className="px-3 sm:px-4 py-2 sm:py-3 cursor-pointer font-medium text-gray-900 hover:bg-gray-50 transition-colors flex items-center justify-between gap-2 text-xs sm:text-sm">
                     <span>{item.question}</span>
-                    <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 group-open:rotate-90 transition-transform flex-shrink-0" />
+                    <ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-400 group-open:rotate-90 transition-transform flex-shrink-0" />
                   </summary>
-                  <div className="px-3 sm:px-6 pb-3 sm:pb-4 text-xs sm:text-sm md:text-base text-gray-600">
+                  <div className="px-3 sm:px-4 pb-2 sm:pb-3 text-[10px] sm:text-xs text-gray-600">
                     {item.answer}
                   </div>
                 </details>
@@ -614,38 +534,34 @@ export default function CityServicePage({ params }: { params: { miasto: string }
           </div>
         </section>
 
-        {/* CTA */}
-        <section className="py-8 sm:py-12 md:py-16 bg-gradient-to-br from-blue-600 to-indigo-700 text-white">
+        {/* CTA - lekki, bez ciężkiego gradientu */}
+        <section className="py-6 sm:py-8 md:py-10 bg-gray-50 border-t border-gray-100">
           <div className="max-w-4xl mx-auto px-3 sm:px-4 text-center">
-            <div className="flex items-center justify-center gap-0.5 sm:gap-1 mb-2 sm:mb-4">
+            <div className="flex items-center justify-center gap-0.5 mb-2">
               {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 fill-yellow-400 text-yellow-400" />
+                <Star key={i} className="w-3 h-3 sm:w-4 sm:h-4 fill-amber-400 text-amber-400" />
               ))}
             </div>
-            <p className="text-blue-100 mb-2 sm:mb-4 text-xs sm:text-sm md:text-base">25 lat doświadczenia • Tysiące skutecznych napraw</p>
+            <p className="text-gray-500 mb-2 text-[10px] sm:text-xs">25 lat doświadczenia</p>
             
-            <h2 className="text-lg sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-6">
-              Potrzebujesz naprawy w {city.nameLocative}?
+            <h2 className="text-base sm:text-lg md:text-xl font-semibold text-gray-900 mb-3 sm:mb-4">
+              Naprawa w {city.nameLocative}?
             </h2>
-            
-            <p className="text-sm sm:text-base md:text-lg text-blue-100 mb-4 sm:mb-8">
-              Kurier odbierze urządzenie w {city.deliveryTime}!
-            </p>
 
-            <div className="flex flex-wrap justify-center gap-2 sm:gap-4">
+            <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
               <Link
                 href="/#formularz"
-                className="inline-flex items-center gap-1.5 sm:gap-2 bg-white text-blue-700 font-semibold px-4 sm:px-6 md:px-8 py-2 sm:py-3 md:py-4 rounded-xl hover:bg-blue-50 transition-colors shadow-lg text-sm sm:text-base"
+                className="inline-flex items-center gap-1.5 bg-blue-600 text-white font-medium px-4 sm:px-5 py-1.5 sm:py-2 rounded-lg hover:bg-blue-700 transition-colors text-xs sm:text-sm"
               >
                 Zgłoś naprawę
-                <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
+                <ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               </Link>
               <a
                 href="tel:+48601619898"
-                className="inline-flex items-center gap-1.5 sm:gap-2 bg-blue-500/30 backdrop-blur text-white font-semibold px-4 sm:px-6 md:px-8 py-2 sm:py-3 md:py-4 rounded-xl hover:bg-blue-500/40 transition-colors text-sm sm:text-base"
+                className="inline-flex items-center gap-1.5 bg-white border border-gray-300 text-gray-700 font-medium px-4 sm:px-5 py-1.5 sm:py-2 rounded-lg hover:bg-gray-50 transition-colors text-xs sm:text-sm"
               >
-                <Phone className="w-4 h-4 sm:w-5 sm:h-5" />
-                <span className="hidden sm:inline">+48 601 619 898</span>
+                <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                <span className="hidden sm:inline">601 619 898</span>
                 <span className="sm:hidden">Zadzwoń</span>
               </a>
             </div>
@@ -653,14 +569,12 @@ export default function CityServicePage({ params }: { params: { miasto: string }
         </section>
 
         {/* Footer link */}
-        <section className="py-4 sm:py-6 md:py-8 bg-gray-50 border-t">
+        <section className="py-3 sm:py-4 bg-white border-t border-gray-100">
           <div className="max-w-6xl mx-auto px-3 sm:px-4 text-center">
-            <p className="text-xs sm:text-sm md:text-base text-gray-600 flex flex-wrap justify-center gap-2 sm:gap-0">
-              <Link href="/" className="text-blue-600 hover:underline">← Strona główna</Link>
-              <span className="hidden sm:inline">{' • '}</span>
-              <Link href="/blog" className="text-blue-600 hover:underline">Blog</Link>
-              <span className="hidden sm:inline">{' • '}</span>
-              <Link href="/kontakt" className="text-blue-600 hover:underline">Kontakt</Link>
+            <p className="text-[10px] sm:text-xs text-gray-500 flex flex-wrap justify-center gap-2 sm:gap-3">
+              <Link href="/" className="text-gray-600 hover:text-blue-600">← Strona główna</Link>
+              <Link href="/blog" className="text-gray-600 hover:text-blue-600">Blog</Link>
+              <Link href="/kontakt" className="text-gray-600 hover:text-blue-600">Kontakt</Link>
             </p>
           </div>
         </section>
