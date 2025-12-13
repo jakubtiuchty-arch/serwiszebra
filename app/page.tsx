@@ -1221,7 +1221,7 @@ export default function HomePage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 lg:gap-12">
               {/* Nawigacja */}
-              <div>
+              <div className="text-center">
                 <h4 className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-gray-500 mb-3 sm:mb-5">Nawigacja</h4>
                 <ul className="space-y-2 sm:space-y-3">
                   {[
@@ -1230,8 +1230,7 @@ export default function HomePage() {
                     { href: '#jak-to-dziala', label: 'Jak to działa' },
                   ].map((link) => (
                     <li key={link.href}>
-                      <a href={link.href} className="group flex items-center text-xs sm:text-sm text-gray-400 hover:text-white transition-colors duration-200">
-                        <span className="w-0 group-hover:w-2 h-px bg-white/50 mr-0 group-hover:mr-2 transition-all duration-200"></span>
+                      <a href={link.href} className="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors duration-200">
                         {link.label}
                       </a>
                     </li>
@@ -1240,7 +1239,7 @@ export default function HomePage() {
               </div>
 
               {/* Informacje */}
-              <div>
+              <div className="text-center">
                 <h4 className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-gray-500 mb-3 sm:mb-5">Informacje</h4>
                 <ul className="space-y-2 sm:space-y-3">
                   {[
@@ -1251,8 +1250,7 @@ export default function HomePage() {
                     { href: '/kontakt', label: 'Kontakt' },
                   ].map((link) => (
                     <li key={link.href}>
-                      <a href={link.href} className="group flex items-center text-xs sm:text-sm text-gray-400 hover:text-white transition-colors duration-200">
-                        <span className="w-0 group-hover:w-2 h-px bg-white/50 mr-0 group-hover:mr-2 transition-all duration-200"></span>
+                      <a href={link.href} className="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors duration-200">
                         {link.label}
                       </a>
                     </li>
@@ -1261,24 +1259,24 @@ export default function HomePage() {
               </div>
 
               {/* Godziny & AI */}
-              <div>
+              <div className="text-center flex flex-col items-center">
                 <h4 className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-gray-500 mb-3 sm:mb-5">Dostępność</h4>
                 <div className="space-y-3 sm:space-y-4">
-                  <div className="flex items-start gap-2 sm:gap-3">
+                  <div className="flex items-center gap-2 sm:gap-3">
                     <div className="w-7 sm:w-8 h-7 sm:h-8 bg-white/5 rounded-lg flex items-center justify-center flex-shrink-0">
                       <Clock className="w-3.5 sm:w-4 h-3.5 sm:h-4 text-gray-400" />
                     </div>
-                    <div>
+                    <div className="text-left">
                       <p className="text-xs sm:text-sm text-white font-medium">Pon - Pt</p>
                       <p className="text-[10px] sm:text-xs text-gray-500">7:30 - 15:30</p>
                     </div>
                   </div>
-                  <div className="flex items-start gap-2 sm:gap-3">
+                  <div className="flex items-center gap-2 sm:gap-3">
                     <div className="w-7 sm:w-8 h-7 sm:h-8 bg-white/5 rounded-lg flex items-center justify-center flex-shrink-0 relative">
                       <Sparkles className="w-3.5 sm:w-4 h-3.5 sm:h-4 text-gray-400" />
                       <span className="absolute -top-1 -right-1 w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
                     </div>
-                    <div>
+                    <div className="text-left">
                       <p className="text-xs sm:text-sm text-white font-medium">Chat AI</p>
                       <p className="text-[10px] sm:text-xs text-gray-400">Online 24/7</p>
                     </div>
@@ -1287,9 +1285,9 @@ export default function HomePage() {
               </div>
 
               {/* Płatności & Firma */}
-              <div>
+              <div className="text-center flex flex-col items-center">
                 <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-gray-500 mb-4 sm:mb-5">Płatności</h4>
-                <div className="flex flex-wrap items-center gap-4 sm:gap-6 mb-4 sm:mb-6">
+                <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 mb-4 sm:mb-6">
                   {[
                     { src: 'https://cdn.worldvectorlogo.com/logos/stripe-4.svg', alt: 'Stripe', w: 50, h: 20, cls: 'h-4 sm:h-5' },
                     { src: '/P24_logo.png', alt: 'Przelewy24', w: 70, h: 20, cls: 'h-4 sm:h-5' },
@@ -1304,13 +1302,6 @@ export default function HomePage() {
                       className={`${pay.cls} w-auto object-contain grayscale opacity-70 hover:opacity-100 hover:grayscale-0 transition-all`}
                     />
                   ))}
-                </div>
-                <div className="p-2.5 sm:p-3 bg-white/5 backdrop-blur-sm rounded-lg sm:rounded-xl border border-white/5">
-                  <p className="text-[10px] sm:text-xs text-gray-400 leading-relaxed">
-                    <span className="text-white font-medium">TAKMA</span><br />
-                    NIP: 915-100-43-77<br />
-                    REGON: 932677161
-                  </p>
                 </div>
               </div>
             </div>
@@ -1345,7 +1336,7 @@ export default function HomePage() {
           {/* Modal */}
           <div className="relative bg-white rounded-xl shadow-2xl w-full max-w-lg overflow-hidden">
             {/* Header */}
-            <div className="bg-gray-900 px-5 py-4">
+            <div className="bg-gradient-to-r from-slate-900 via-blue-900 to-slate-900 px-5 py-4">
               <div className="flex items-center justify-between">
                 <div>
                   <h3 className="text-base font-semibold text-white">Panel klienta</h3>
@@ -1366,25 +1357,18 @@ export default function HomePage() {
                 Po zgłoszeniu naprawy otrzymasz dostęp do dedykowanego panelu:
               </p>
               
-              <div className="grid grid-cols-2 gap-2.5">
+              <div className="grid grid-cols-2 gap-2">
                 {[
-                  { icon: Eye, label: 'Status na żywo', desc: 'Śledź każdy etap naprawy' },
-                  { icon: MessageSquare, label: 'Chat z serwisem', desc: 'Bezpośredni kontakt' },
-                  { icon: Truck, label: 'Darmowa logistyka', desc: 'Odbierzemy i dostarczymy' },
-                  { icon: FileText, label: 'Historia napraw', desc: 'Dokumenty i faktury' },
-                  { icon: BarChart3, label: 'Analityka', desc: 'Raporty i statystyki' },
-                  { icon: CreditCard, label: 'Szybka płatność', desc: 'BLIK, karta, przelew' },
+                  { icon: Eye, label: 'Status na żywo' },
+                  { icon: MessageSquare, label: 'Chat z serwisem' },
+                  { icon: Truck, label: 'Darmowa logistyka' },
+                  { icon: FileText, label: 'Historia napraw' },
+                  { icon: BarChart3, label: 'Analityka' },
+                  { icon: CreditCard, label: 'Szybka płatność' },
                 ].map((feature, idx) => (
-                  <div key={idx} className="p-3 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors">
-                    <div className="flex items-start gap-2.5">
-                      <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center flex-shrink-0 shadow-sm">
-                        <feature.icon className="w-4 h-4 text-gray-700" />
-                      </div>
-                      <div>
-                        <div className="font-medium text-gray-900 text-sm">{feature.label}</div>
-                        <div className="text-xs text-gray-500">{feature.desc}</div>
-                      </div>
-                    </div>
+                  <div key={idx} className="p-2.5 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors text-center">
+                    <feature.icon className="w-4 h-4 text-gray-600 mx-auto mb-1.5" />
+                    <div className="text-xs text-gray-700 font-medium leading-tight">{feature.label}</div>
                   </div>
                 ))}
               </div>

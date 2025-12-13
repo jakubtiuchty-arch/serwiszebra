@@ -10,6 +10,7 @@ import {
   HelpCircle,
   ChevronDown,
   ChevronUp,
+  ChevronRight,
   Printer,
   Cpu,
   Server,
@@ -229,6 +230,17 @@ export default function DriversPage() {
   return (
     <div className="min-h-screen bg-white">
       <Header currentPage="other" />
+
+      {/* Breadcrumb - tylko mobile */}
+      <div className="bg-white border-b md:hidden">
+        <div className="max-w-5xl mx-auto px-3 py-3">
+          <nav className="flex items-center gap-2 text-sm text-gray-600">
+            <Link href="/" className="hover:text-blue-600 transition-colors">Strona główna</Link>
+            <ChevronRight className="w-4 h-4" />
+            <span className="text-gray-900 font-medium">Sterowniki</span>
+          </nav>
+        </div>
+      </div>
 
       {/* Hero - minimalistyczny */}
       <section className="bg-gradient-to-b from-gray-900 to-gray-800 py-8 sm:py-14 md:py-16">
