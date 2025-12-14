@@ -120,10 +120,10 @@ export default function OnboardingTour({ userId, hasRepairs }: OnboardingTourPro
   useEffect(() => {
     // Sprawdź czy użytkownik już widział tour
     const checkTourStatus = async () => {
-      // Najpierw sprawdź localStorage (szybsze)
+      // Najpierw sprawdź localStorage (szybsze i niezawodne)
       const localTourSeen = localStorage.getItem(`tour_seen_${userId}`)
-      if (localTourSeen) {
-        return
+      if (localTourSeen === 'true') {
+        return // Tour już widziany - nie uruchamiaj ponownie
       }
 
       // Sprawdź w Supabase (dla synchronizacji między urządzeniami)
@@ -136,6 +136,7 @@ export default function OnboardingTour({ userId, hasRepairs }: OnboardingTourPro
           .single()
 
         if (data?.tour_completed) {
+          // Zapisz lokalnie, żeby nie sprawdzać ponownie
           localStorage.setItem(`tour_seen_${userId}`, 'true')
           return
         }
@@ -145,14 +146,14 @@ export default function OnboardingTour({ userId, hasRepairs }: OnboardingTourPro
           setRun(true)
         }, 1000)
       } catch (error) {
-        // Jeśli błąd - uruchom tour (lepsze UX)
-        setTimeout(() => {
-          setRun(true)
-        }, 1000)
+        // Przy błędzie NIE uruchamiaj touru - lepiej go nie pokazać niż pokazać wielokrotnie
+        console.warn('Could not check tour status:', error)
       }
     }
 
-    checkTourStatus()
+    if (userId) {
+      checkTourStatus()
+    }
   }, [userId])
 
   const handleJoyrideCallback = async (data: CallBackProps) => {
