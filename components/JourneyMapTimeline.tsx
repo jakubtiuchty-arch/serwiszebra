@@ -407,14 +407,15 @@ export default function JourneyMapTimeline({ currentStatus, statusHistory, repai
               onClick={() => setShowCelebration(false)}
             />
             
-            {/* Modal */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8, y: 50 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.8, y: 50 }}
-              transition={{ type: "spring", duration: 0.5 }}
-              className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[9999] w-[90%] max-w-md"
-            >
+            {/* Modal Container - flexbox centering */}
+            <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8, y: 50 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.8, y: 50 }}
+                transition={{ type: "spring", duration: 0.5 }}
+                className="w-full max-w-md"
+              >
               <div className="bg-white rounded-3xl p-8 shadow-2xl relative overflow-hidden">
                 {/* Animated background */}
                 <div className="absolute inset-0 bg-gradient-to-br from-emerald-50 via-green-50 to-teal-50 opacity-50"></div>
@@ -462,7 +463,8 @@ export default function JourneyMapTimeline({ currentStatus, statusHistory, repai
                 <div className="absolute -top-10 -right-10 w-32 h-32 bg-emerald-200 rounded-full opacity-20 blur-2xl"></div>
                 <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-green-200 rounded-full opacity-20 blur-2xl"></div>
               </div>
-            </motion.div>
+              </motion.div>
+            </div>
           </>
         )}
       </AnimatePresence>
