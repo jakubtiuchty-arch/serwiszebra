@@ -12,7 +12,8 @@ import {
   Loader2,
   CheckCircle2,
   AlertCircle,
-  ExternalLink
+  ExternalLink,
+  MessageSquare
 } from 'lucide-react'
 
 export default function ContactPage() {
@@ -65,14 +66,33 @@ export default function ContactPage() {
     <div className="min-h-screen bg-gray-50">
       <Header currentPage="other" />
 
-      {/* Hero - kompaktowy */}
-      <section className="bg-white border-b border-gray-200 py-6 sm:py-10">
-        <div className="max-w-5xl mx-auto px-4 text-center">
-          <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-2">
+      {/* Hero - jak w O nas */}
+      <section className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 py-10 sm:py-16 md:py-20 overflow-hidden">
+        {/* Tekstura tła - ukryta na mobile */}
+        <div className="absolute inset-0 opacity-10 hidden sm:block">
+          <div className="absolute top-0 left-[15%] w-px h-full bg-gradient-to-b from-white via-white to-transparent"></div>
+          <div className="absolute top-0 left-[35%] w-px h-full bg-gradient-to-b from-transparent via-white to-transparent"></div>
+          <div className="absolute top-0 right-[25%] w-px h-full bg-gradient-to-b from-white via-white to-transparent"></div>
+          <div className="absolute top-0 right-[10%] w-px h-full bg-gradient-to-b from-transparent via-white to-transparent"></div>
+        </div>
+
+        {/* Akcentujące kształty */}
+        <div className="absolute top-10 left-0 sm:left-10 w-48 sm:w-72 h-48 sm:h-72 bg-blue-500/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-5 right-0 sm:right-10 w-64 sm:w-96 h-64 sm:h-96 bg-indigo-500/10 rounded-full blur-3xl"></div>
+
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+          <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 mb-4 sm:mb-6">
+            <MessageSquare className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-blue-400" />
+            <span className="text-xs sm:text-sm font-medium text-white/90">Jesteśmy do Twojej dyspozycji</span>
+          </div>
+          
+          <h1 className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-white mb-3 sm:mb-4 leading-tight">
             Skontaktuj się z nami
           </h1>
-          <p className="text-sm sm:text-base text-gray-600">
-            Masz pytania? Napisz lub zadzwoń - chętnie pomożemy.
+          
+          <p className="text-xs sm:text-base md:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed px-2">
+            Masz pytania dotyczące serwisu, naprawy lub współpracy?<br className="hidden sm:block" />
+            Zadzwoń, napisz lub odwiedź nas osobiście.
           </p>
         </div>
       </section>
