@@ -83,6 +83,7 @@ const STATUS_CONFIG = {
   odebrane: { label: 'Odebrane', className: 'bg-gray-100 text-gray-800' },
   diagnoza: { label: 'Diagnoza', className: 'bg-blue-100 text-blue-800' },
   wycena: { label: 'Wycena', className: 'bg-blue-100 text-blue-800' },
+  proforma: { label: 'Pro Forma', className: 'bg-orange-100 text-orange-800' },
   w_naprawie: { label: 'W naprawie', className: 'bg-indigo-100 text-indigo-800' },
   zakonczone: { label: 'Zakończone', className: 'bg-gray-800 text-white' },
   wyslane: { label: 'Wysłane', className: 'bg-gray-800 text-white' },
@@ -439,7 +440,7 @@ const handlePaymentSuccess = async () => {
 
     {/* Pro Forma info - MOBILE */}
     {repair.payment_status === 'proforma' && (
-      <div className="bg-blue-50 rounded-lg border border-blue-200 px-3 py-2">
+      <div className="bg-blue-50 rounded-lg border border-blue-200 px-3 py-2 mt-3">
         <div className="flex items-center gap-2 mb-1.5">
           <FileText className="w-4 h-4 text-blue-600" />
           <span className="text-xs font-semibold text-blue-900">Oczekiwanie na przelew</span>

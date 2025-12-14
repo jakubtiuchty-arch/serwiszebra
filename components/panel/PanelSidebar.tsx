@@ -152,7 +152,7 @@ export default function PanelSidebar({ userName, userEmail, onLogout }: PanelSid
 </nav>
 
 {/* PROFIL + WYLOGUJ - nad banerkami */}
-<div className="p-2 border-t border-gray-200 space-y-0.5">
+<div className="p-2 border-t border-gray-200 space-y-0.5 pb-[calc(0.5rem+env(safe-area-inset-bottom))]">
   <Link
     href="/panel/profil"
     onClick={() => setMobileMenuOpen(false)}

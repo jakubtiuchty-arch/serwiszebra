@@ -62,6 +62,7 @@ const STATUS_CONFIG = {
   odebrane: { label: 'Odebrane', className: 'bg-purple-100 text-purple-800', icon: CheckCircle, color: 'text-purple-600', bgColor: 'bg-purple-100' },
   diagnoza: { label: 'Diagnoza', className: 'bg-yellow-100 text-yellow-800', icon: Search, color: 'text-yellow-600', bgColor: 'bg-yellow-100' },
   wycena: { label: 'Wycena', className: 'bg-orange-100 text-orange-800', icon: FileText, color: 'text-orange-600', bgColor: 'bg-orange-100' },
+  proforma: { label: 'Pro Forma', className: 'bg-orange-100 text-orange-800', icon: FileText, color: 'text-orange-600', bgColor: 'bg-orange-100' },
   w_naprawie: { label: 'W naprawie', className: 'bg-indigo-100 text-indigo-800', icon: Wrench, color: 'text-indigo-600', bgColor: 'bg-indigo-100' },
   zakonczone: { label: 'Zakończone', className: 'bg-green-100 text-green-800', icon: PartyPopper, color: 'text-green-600', bgColor: 'bg-green-100' },
   wyslane: { label: 'Wysłane', className: 'bg-teal-100 text-teal-800', icon: Truck, color: 'text-teal-600', bgColor: 'bg-teal-100' },
@@ -78,7 +79,7 @@ const URGENCY_CONFIG = {
   krytyczna: { label: 'Wysoki', className: 'text-orange-600' }
 }
 
-const STATUS_ORDER = ['nowe', 'odebrane', 'diagnoza', 'wycena', 'w_naprawie', 'zakonczone', 'wyslane']
+const STATUS_ORDER = ['nowe', 'odebrane', 'diagnoza', 'wycena', 'proforma', 'w_naprawie', 'zakonczone', 'wyslane']
 
 export default function RepairDetailPage({ params }: { params: { id: string } }) {
   const router = useRouter()

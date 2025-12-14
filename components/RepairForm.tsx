@@ -25,6 +25,7 @@ const repairFormSchema = z.object({
   email: z.string().email('Nieprawidłowy adres email'),
   phone: z.string().min(9, 'Nieprawidłowy numer telefonu'),
   company: z.string().optional(),
+  nip: z.string().optional(),
   
   // KROK 2: Szczegóły urządzenia
   deviceModel: z.string().min(1, 'Wpisz model urządzenia'),
@@ -175,6 +176,7 @@ export default function RepairForm() {
       formDataToSend.append('email', data.email)
       formDataToSend.append('phone', data.phone)
       if (data.company) formDataToSend.append('company', data.company)
+      if (data.nip) formDataToSend.append('nip', data.nip)
       
       formDataToSend.append('deviceModel', data.deviceModel)
       if (data.serialNumber) formDataToSend.append('serialNumber', data.serialNumber)
@@ -373,6 +375,18 @@ export default function RepairForm() {
                     type="text"
                     className="w-full px-3 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="Nazwa firmy"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    NIP (opcjonalnie)
+                  </label>
+                  <input
+                    {...register('nip')}
+                    type="text"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="np. 1234567890"
                   />
                 </div>
               </div>
@@ -696,6 +710,9 @@ export default function RepairForm() {
                       <p><span className="text-gray-600">Telefon:</span> <span className="font-medium">{formData.phone}</span></p>
                       {formData.company && (
                         <p><span className="text-gray-600">Firma:</span> <span className="font-medium">{formData.company}</span></p>
+                      )}
+                      {formData.nip && (
+                        <p><span className="text-gray-600">NIP:</span> <span className="font-medium">{formData.nip}</span></p>
                       )}
                     </div>
                   </div>

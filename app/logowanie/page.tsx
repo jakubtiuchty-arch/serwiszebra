@@ -76,7 +76,7 @@ import Link from 'next/link'
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center p-3 md:p-4">
+    <div className="h-[100dvh] overflow-hidden bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center p-3 md:p-4">
       <div className="w-full max-w-md">
         {/* Logo/Header */}
         <div className="text-center mb-4 md:mb-8">

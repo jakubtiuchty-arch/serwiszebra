@@ -9,7 +9,7 @@ interface RepairCardProps {
     device_model: string
     serial_number: string | null
     issue_description: string
-    status: 'nowe' | 'odebrane' | 'diagnoza' | 'wycena' | 'w_naprawie' | 'zakonczone' | 'wyslane' | 'anulowane'
+    status: 'nowe' | 'odebrane' | 'diagnoza' | 'wycena' | 'proforma' | 'w_naprawie' | 'zakonczone' | 'wyslane' | 'anulowane'
     created_at: string
     urgency: 'standard' | 'express' | 'niska' | 'srednia' | 'wysoka' | 'krytyczna' | null
   }
@@ -59,6 +59,17 @@ const STATUS_CONFIG = {
     textColor: 'text-yellow-700',
     dotColor: 'bg-yellow-500',
     barColor: 'bg-yellow-500'
+  },
+  proforma: { 
+    label: 'Pro Forma', 
+    sublabel: 'OCZEKUJE NA PRZELEW',
+    progress: 60,
+    color: 'orange',
+    bgColor: 'bg-orange-50',
+    borderColor: 'border-orange-200',
+    textColor: 'text-orange-700',
+    dotColor: 'bg-orange-500',
+    barColor: 'bg-orange-500'
   },
   w_naprawie: { 
     label: 'Naprawa', 

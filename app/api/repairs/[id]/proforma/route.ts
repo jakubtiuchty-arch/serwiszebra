@@ -54,10 +54,11 @@ export async function POST(
       )
     }
 
-    // Zaktualizuj status płatności na 'proforma'
+    // Zaktualizuj status płatności na 'proforma' i główny status
     const { error: updateError } = await supabase
       .from('repair_requests')
       .update({
+        status: 'proforma',
         payment_status: 'proforma',
         payment_method: 'proforma',
         updated_at: new Date().toISOString(),
@@ -78,7 +79,7 @@ export async function POST(
         .from('repair_status_history')
         .insert({
           repair_request_id: repairId,
-          status: repair.status, // zachowaj obecny status
+          status: 'proforma',
           notes: 'Klient wybrał płatność pro forma - oczekiwanie na przelew',
           changed_by: user.id,
         })

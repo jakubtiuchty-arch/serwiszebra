@@ -9,7 +9,7 @@ import {
   useElements 
 } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
-import { X, Loader2, CheckCircle, AlertCircle, CreditCard, FileText, Building2, Copy, Check } from 'lucide-react';
+import { X, Loader2, CheckCircle, AlertCircle, CreditCard, FileText, Building2, Copy, Check, Download } from 'lucide-react';
 
 type PaymentMethod = 'card' | 'proforma';
 
@@ -229,8 +229,8 @@ export default function RepairPaymentModal({
   // Dane do przelewu
   const bankDetails = {
     accountName: 'TAKMA TADEUSZ TIUCHTY',
-    accountNumber: 'PL 12 1234 5678 9012 3456 7890 1234', // TODO: Uzupełnić właściwy numer
-    bankName: 'mBank',
+    accountNumber: '39 1020 5297 0000 1902 0283 3069',
+    bankName: 'PKO BP',
     title: `Naprawa #${repairId.split('-')[0].toUpperCase()}`,
   };
 
@@ -240,15 +240,15 @@ export default function RepairPaymentModal({
     setTimeout(() => setCopied(null), 2000);
   };
 
-  // Auto-zamknij modal po 3 sekundach od sukcesu
+  // Auto-zamknij modal po 5 sekundach od sukcesu płatności kartą (NIE dla Pro Formy)
   useEffect(() => {
-    if (success || proformaSuccess) {
+    if (success) {
       const timer = setTimeout(() => {
         handleClose();
       }, 5000);
       return () => clearTimeout(timer);
     }
-  }, [success, proformaSuccess]);
+  }, [success]);
 
   // Reset stanu przy otwarciu modalu
   useEffect(() => {
@@ -469,12 +469,23 @@ const handleClose = () => {
                 </p>
               </div>
 
-              <button
-                onClick={handleClose}
-                className="w-full py-2.5 px-5 rounded-lg text-sm font-semibold text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 transition-colors"
-              >
-                Przejdź do czatu
-              </button>
+              <div className="flex gap-2 w-full">
+                <a
+                  href={`/api/repairs/${repairId}/proforma/pdf`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 py-2.5 px-4 rounded-lg text-sm font-semibold text-blue-700 bg-blue-100 hover:bg-blue-200 transition-colors flex items-center justify-center gap-2"
+                >
+                  <Download className="w-4 h-4" />
+                  Pobierz PDF
+                </a>
+                <button
+                  onClick={handleClose}
+                  className="flex-1 py-2.5 px-4 rounded-lg text-sm font-semibold text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 transition-colors"
+                >
+                  Przejdź do czatu
+                </button>
+              </div>
             </div>
           )}
 
