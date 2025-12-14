@@ -712,11 +712,11 @@ const handlePaymentSuccess = async () => {
               </div>
             )}
 
-            {repair.price_accepted_at && (
+            {repair.payment_status === 'succeeded' && repair.paid_at && (
               <div className="pt-2 border-t border-gray-200">
-                <p className="text-[10px] md:text-xs text-blue-600 flex items-center gap-1.5 font-medium">
+                <p className="text-[10px] md:text-xs text-green-600 flex items-center gap-1.5 font-medium">
                   <CheckCircle className="w-3 md:w-3.5 h-3 md:h-3.5" />
-                  Zaakceptowano {format(new Date(repair.price_accepted_at), "d MMM yyyy", { locale: pl })}
+                  Opłacono {format(new Date(repair.paid_at), "d MMM yyyy", { locale: pl })}
                 </p>
               </div>
             )}

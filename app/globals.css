@@ -89,6 +89,16 @@
   display: inline-block;
 }
 
+/* Slide-in animation for mobile menu */
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
 /* Mobile-first responsive tables */
 @media (max-width: 639px) {
   .mobile-card-table {

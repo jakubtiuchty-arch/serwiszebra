@@ -29,7 +29,13 @@ import {
   BarChart3,
   CreditCard,
   HelpCircle,
-  X
+  X,
+  Menu,
+  User,
+  LogIn,
+  BookOpen,
+  Download,
+  Info
 } from 'lucide-react'
 import Link from 'next/link'
 
@@ -38,6 +44,7 @@ type PricingCategory = 'drukarki' | 'terminale' | 'skanery' | 'tablety'
 export default function HomePage() {
   const [activeCategory, setActiveCategory] = useState<PricingCategory>('drukarki')
   const [showPanelModal, setShowPanelModal] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   // Schema.org structured data for SEO
   const structuredData = {
@@ -204,16 +211,14 @@ export default function HomePage() {
                 </div>
 
                 <div className="ml-auto flex items-center gap-1.5 sm:gap-3 md:gap-4 mr-0">
-                  {/* MOBILE - tylko najważniejsze linki */}
-                  <a href="/blog" className="md:hidden text-xs text-gray-700 hover:text-gray-900 transition-colors">
-                    Blog
-                  </a>
-                  <a href="/panel" className="md:hidden text-xs text-gray-700 hover:text-gray-900 transition-colors">
-                    Panel
-                  </a>
-                  <a href="/logowanie" className="md:hidden text-xs text-gray-700 hover:text-gray-900 transition-colors font-medium">
-                    Zaloguj
-                  </a>
+                  {/* MOBILE - hamburger menu */}
+                  <button
+                    onClick={() => setMobileMenuOpen(true)}
+                    className="md:hidden p-2 -mr-2 hover:bg-gray-100 rounded-lg transition-colors"
+                    aria-label="Otwórz menu"
+                  >
+                    <Menu className="w-5 h-5 text-gray-700" />
+                  </button>
 
                   {/* DESKTOP - wszystkie linki */}
                   <a href="#co-naprawiamy" className="hidden md:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
@@ -258,6 +263,120 @@ export default function HomePage() {
             </div>
           </nav>
         </div>
+
+      {/* MOBILE MENU - slide from right */}
+      {mobileMenuOpen && (
+        <div className="fixed inset-0 z-50 md:hidden">
+          {/* Overlay */}
+          <div 
+            className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+            onClick={() => setMobileMenuOpen(false)}
+          />
+          
+          {/* Menu panel */}
+          <div className="absolute right-0 top-0 bottom-0 w-72 bg-white shadow-2xl" style={{ animation: 'slideInRight 0.3s ease-out' }}>
+            {/* Header */}
+            <div className="flex items-center justify-between p-4 border-b border-gray-200">
+              <span className="font-semibold text-gray-900">Menu</span>
+              <button
+                onClick={() => setMobileMenuOpen(false)}
+                className="p-2 -mr-2 hover:bg-gray-100 rounded-lg transition-colors"
+                aria-label="Zamknij menu"
+              >
+                <X className="w-5 h-5 text-gray-700" />
+              </button>
+            </div>
+
+            {/* Links */}
+            <nav className="p-3 space-y-0.5">
+              <a
+                href="/panel"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors"
+              >
+                <User className="w-4 h-4" />
+                <span className="font-medium">Panel klienta</span>
+              </a>
+              
+              <a
+                href="/logowanie"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors"
+              >
+                <LogIn className="w-4 h-4" />
+                <span className="font-medium">Logowanie</span>
+              </a>
+
+              <div className="my-2 border-t border-gray-200" />
+
+              <a
+                href="/"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+              >
+                <Sparkles className="w-4 h-4" />
+                <span>Strona główna</span>
+              </a>
+              
+              <a
+                href="/blog"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+              >
+                <BookOpen className="w-4 h-4" />
+                <span>Blog</span>
+              </a>
+              
+              <a
+                href="/sterowniki"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+              >
+                <Download className="w-4 h-4" />
+                <span>Sterowniki</span>
+              </a>
+              
+              <a
+                href="/faq"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+              >
+                <HelpCircle className="w-4 h-4" />
+                <span>FAQ</span>
+              </a>
+              
+              <a
+                href="/o-nas"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+              >
+                <Info className="w-4 h-4" />
+                <span>O nas</span>
+              </a>
+              
+              <a
+                href="/kontakt"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+              >
+                <Phone className="w-4 h-4" />
+                <span>Kontakt</span>
+              </a>
+            </nav>
+
+            {/* Bottom CTA */}
+            <div className="absolute bottom-0 left-0 right-0 p-3 border-t border-gray-200 bg-gray-50">
+              <a
+                href="#formularz"
+                onClick={() => setMobileMenuOpen(false)}
+                className="block w-full py-2.5 px-4 bg-blue-600 text-white text-sm text-center font-semibold rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                Zgłoś naprawę
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Hero gradient wrapper */}
       <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
