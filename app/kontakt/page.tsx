@@ -1,8 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import Image from 'next/image'
-import Link from 'next/link'
 import Header from '@/components/Header'
 import { 
   Phone, 
@@ -11,11 +9,10 @@ import {
   Clock, 
   Building2,
   Send,
-  MessageSquare,
-  ExternalLink,
   Loader2,
   CheckCircle2,
-  AlertCircle
+  AlertCircle,
+  ExternalLink
 } from 'lucide-react'
 
 export default function ContactPage() {
@@ -35,11 +32,8 @@ export default function ContactPage() {
     setSubmitStatus('idle')
 
     try {
-      // Tutaj możesz dodać wysyłkę do API
-      // Na razie symulujemy wysyłkę emaila
-      await new Promise(resolve => setTimeout(resolve, 1500))
+      await new Promise(resolve => setTimeout(resolve, 1000))
       
-      // Można też użyć mailto jako fallback
       const mailtoLink = `mailto:serwis@serwiszebra.pl?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(
         `Imię i nazwisko: ${formData.name}\nEmail: ${formData.email}\nTelefon: ${formData.phone}\n\n${formData.message}`
       )}`
@@ -55,13 +49,13 @@ export default function ContactPage() {
   }
 
   const openingHours = [
-    { day: 'Poniedziałek', hours: '7:30 - 15:30' },
-    { day: 'Wtorek', hours: '7:30 - 15:30' },
-    { day: 'Środa', hours: '7:30 - 15:30' },
-    { day: 'Czwartek', hours: '7:30 - 15:30' },
-    { day: 'Piątek', hours: '7:30 - 15:30' },
-    { day: 'Sobota', hours: 'Zamknięte' },
-    { day: 'Niedziela', hours: 'Zamknięte' }
+    { day: 'Pon', hours: '7:30-15:30' },
+    { day: 'Wt', hours: '7:30-15:30' },
+    { day: 'Śr', hours: '7:30-15:30' },
+    { day: 'Czw', hours: '7:30-15:30' },
+    { day: 'Pt', hours: '7:30-15:30' },
+    { day: 'Sob', hours: '—' },
+    { day: 'Nd', hours: '—' }
   ]
 
   const today = new Date().getDay()
@@ -71,60 +65,89 @@ export default function ContactPage() {
     <div className="min-h-screen bg-gray-50">
       <Header currentPage="other" />
 
-      {/* Hero - prostszy */}
-      <section className="bg-white border-b border-gray-200 py-10 sm:py-14">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3">
+      {/* Hero - kompaktowy */}
+      <section className="bg-white border-b border-gray-200 py-6 sm:py-10">
+        <div className="max-w-5xl mx-auto px-4 text-center">
+          <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-2">
             Skontaktuj się z nami
           </h1>
-          <p className="text-gray-600 max-w-xl mx-auto">
-            Masz pytania? Napisz do nas lub zadzwoń - chętnie pomożemy.
+          <p className="text-sm sm:text-base text-gray-600">
+            Masz pytania? Napisz lub zadzwoń - chętnie pomożemy.
           </p>
         </div>
       </section>
 
       {/* Główna sekcja */}
-      <section className="py-10 sm:py-14">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-5 gap-8 lg:gap-12">
+      <section className="py-6 sm:py-10">
+        <div className="max-w-5xl mx-auto px-4">
+          
+          {/* Szybki kontakt - karty na mobile w rzędzie */}
+          <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-6">
+            <a
+              href="tel:+48601619898"
+              className="bg-white rounded-xl p-3 sm:p-4 shadow-sm border border-gray-200 hover:border-green-300 hover:shadow-md transition-all text-center group"
+            >
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-green-100 rounded-xl flex items-center justify-center mx-auto mb-2 group-hover:bg-green-200 transition-colors">
+                <Phone className="w-5 h-5 sm:w-6 sm:h-6 text-green-600" />
+              </div>
+              <div className="text-xs sm:text-sm font-semibold text-gray-900">Zadzwoń</div>
+              <div className="text-[10px] sm:text-xs text-gray-500 mt-0.5 hidden sm:block">+48 601 619 898</div>
+            </a>
+
+            <a
+              href="mailto:serwis@serwiszebra.pl"
+              className="bg-white rounded-xl p-3 sm:p-4 shadow-sm border border-gray-200 hover:border-blue-300 hover:shadow-md transition-all text-center group"
+            >
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 rounded-xl flex items-center justify-center mx-auto mb-2 group-hover:bg-blue-200 transition-colors">
+                <Mail className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
+              </div>
+              <div className="text-xs sm:text-sm font-semibold text-gray-900">Email</div>
+              <div className="text-[10px] sm:text-xs text-gray-500 mt-0.5 hidden sm:block">serwis@serwiszebra.pl</div>
+            </a>
+
+            <a
+              href="https://maps.google.com/?q=Poświęcka+1a+51-128+Wrocław"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-white rounded-xl p-3 sm:p-4 shadow-sm border border-gray-200 hover:border-orange-300 hover:shadow-md transition-all text-center group"
+            >
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-orange-100 rounded-xl flex items-center justify-center mx-auto mb-2 group-hover:bg-orange-200 transition-colors">
+                <MapPin className="w-5 h-5 sm:w-6 sm:h-6 text-orange-600" />
+              </div>
+              <div className="text-xs sm:text-sm font-semibold text-gray-900">Adres</div>
+              <div className="text-[10px] sm:text-xs text-gray-500 mt-0.5 hidden sm:block">Wrocław</div>
+            </a>
+          </div>
+
+          {/* Formularz + Sidebar */}
+          <div className="grid lg:grid-cols-3 gap-6">
             
-            {/* Lewa kolumna - Formularz (większa) */}
-            <div className="lg:col-span-3">
-              <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 sm:p-8">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center">
-                    <Mail className="w-5 h-5 text-blue-600" />
-                  </div>
-                  <div>
-                    <h2 className="text-lg font-bold text-gray-900">Napisz do nas</h2>
-                    <p className="text-sm text-gray-500">Odpowiemy najszybciej jak to możliwe</p>
-                  </div>
+            {/* Formularz - 2/3 */}
+            <div className="lg:col-span-2">
+              <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-4 sm:p-6">
+                <div className="flex items-center gap-2 mb-4 sm:mb-5">
+                  <Mail className="w-5 h-5 text-blue-600" />
+                  <h2 className="text-base sm:text-lg font-bold text-gray-900">Napisz do nas</h2>
                 </div>
 
                 {submitStatus === 'success' && (
-                  <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-xl flex items-start gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
-                    <div>
-                      <p className="text-sm font-medium text-green-800">Wiadomość przygotowana!</p>
-                      <p className="text-xs text-green-700 mt-1">Otworzy się Twój program pocztowy z gotową wiadomością.</p>
-                    </div>
+                  <div className="mb-4 p-3 bg-green-50 border border-green-200 rounded-xl flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
+                    <p className="text-xs sm:text-sm text-green-800">Otworzy się Twój program pocztowy z gotową wiadomością.</p>
                   </div>
                 )}
 
                 {submitStatus === 'error' && (
-                  <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl flex items-start gap-3">
-                    <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
-                    <div>
-                      <p className="text-sm font-medium text-red-800">Wystąpił błąd</p>
-                      <p className="text-xs text-red-700 mt-1">Spróbuj ponownie lub napisz bezpośrednio na serwis@serwiszebra.pl</p>
-                    </div>
+                  <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-xl flex items-start gap-2">
+                    <AlertCircle className="w-4 h-4 text-red-600 flex-shrink-0 mt-0.5" />
+                    <p className="text-xs sm:text-sm text-red-800">Błąd. Napisz bezpośrednio na serwis@serwiszebra.pl</p>
                   </div>
                 )}
 
-                <form onSubmit={handleSubmit} className="space-y-5">
-                  <div className="grid sm:grid-cols-2 gap-4">
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                      <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
                         Imię i nazwisko *
                       </label>
                       <input
@@ -132,12 +155,12 @@ export default function ContactPage() {
                         required
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        className="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-sm"
+                        className="w-full px-3 py-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                         placeholder="Jan Kowalski"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                      <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
                         Email *
                       </label>
                       <input
@@ -145,34 +168,34 @@ export default function ContactPage() {
                         required
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-sm"
+                        className="w-full px-3 py-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                         placeholder="jan@firma.pl"
                       />
                     </div>
                   </div>
 
-                  <div className="grid sm:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                      <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
                         Telefon
                       </label>
                       <input
                         type="tel"
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        className="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-sm"
+                        className="w-full px-3 py-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                         placeholder="+48 123 456 789"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                      <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
                         Temat *
                       </label>
                       <select
                         required
                         value={formData.subject}
                         onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                        className="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-sm"
+                        className="w-full px-3 py-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                       >
                         <option value="">Wybierz temat</option>
                         <option value="Pytanie o serwis">Pytanie o serwis</option>
@@ -186,23 +209,23 @@ export default function ContactPage() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                    <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
                       Wiadomość *
                     </label>
                     <textarea
                       required
-                      rows={5}
+                      rows={4}
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-sm resize-none"
-                      placeholder="Opisz swoje pytanie lub sprawę..."
+                      className="w-full px-3 py-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm resize-none"
+                      placeholder="Opisz swoje pytanie..."
                     />
                   </div>
 
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full sm:w-auto px-8 py-3 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2"
+                    className="w-full sm:w-auto px-6 py-2.5 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 disabled:opacity-50 transition-all flex items-center justify-center gap-2 text-sm"
                   >
                     {isSubmitting ? (
                       <>
@@ -220,134 +243,85 @@ export default function ContactPage() {
               </div>
             </div>
 
-            {/* Prawa kolumna - Dane kontaktowe */}
-            <div className="lg:col-span-2 space-y-5">
-              {/* Bezpośredni kontakt */}
-              <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-5">
-                <h3 className="text-base font-bold text-gray-900 mb-4">Bezpośredni kontakt</h3>
-                
-                <div className="space-y-4">
-                  <a
-                    href="tel:+48601619898"
-                    className="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-50 transition-colors group"
-                  >
-                    <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center group-hover:bg-green-200 transition-colors">
-                      <Phone className="w-5 h-5 text-green-600" />
-                    </div>
-                    <div>
-                      <div className="text-sm font-semibold text-gray-900 group-hover:text-green-600 transition-colors">
-                        +48 601 619 898
-                      </div>
-                      <div className="text-xs text-gray-500">Pon-Pt: 7:30 - 15:30</div>
-                    </div>
-                  </a>
-
-                  <a
-                    href="mailto:serwis@serwiszebra.pl"
-                    className="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-50 transition-colors group"
-                  >
-                    <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center group-hover:bg-blue-200 transition-colors">
-                      <Mail className="w-5 h-5 text-blue-600" />
-                    </div>
-                    <div>
-                      <div className="text-sm font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
-                        serwis@serwiszebra.pl
-                      </div>
-                      <div className="text-xs text-gray-500">Odpowiadamy w ciągu 24h</div>
-                    </div>
-                  </a>
-
-                  <a
-                    href="https://maps.google.com/?q=Poświęcka+1a+51-128+Wrocław"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-50 transition-colors group"
-                  >
-                    <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center group-hover:bg-orange-200 transition-colors">
-                      <MapPin className="w-5 h-5 text-orange-600" />
-                    </div>
-                    <div>
-                      <div className="text-sm font-semibold text-gray-900 group-hover:text-orange-600 transition-colors">
-                        ul. Poświęcka 1a
-                      </div>
-                      <div className="text-xs text-gray-500">51-128 Wrocław</div>
-                    </div>
-                  </a>
-                </div>
-              </div>
-
-              {/* Godziny otwarcia */}
-              <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-5">
-                <div className="flex items-center gap-2 mb-4">
+            {/* Sidebar - 1/3 */}
+            <div className="space-y-4">
+              {/* Godziny otwarcia - kompaktowe */}
+              <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-4">
+                <div className="flex items-center gap-2 mb-3">
                   <Clock className="w-4 h-4 text-gray-400" />
-                  <h3 className="text-base font-bold text-gray-900">Godziny otwarcia</h3>
+                  <h3 className="text-sm font-bold text-gray-900">Godziny otwarcia</h3>
                 </div>
-                <div className="space-y-1">
+                <div className="flex flex-wrap gap-1.5">
                   {openingHours.map((item, idx) => (
                     <div 
                       key={idx}
-                      className={`flex justify-between items-center py-1.5 px-2 rounded-lg text-sm ${
+                      className={`px-2 py-1 rounded-lg text-xs ${
                         idx === dayIndex 
-                          ? 'bg-blue-50 text-blue-700 font-medium' 
-                          : 'text-gray-600'
+                          ? 'bg-blue-100 text-blue-700 font-semibold' 
+                          : item.hours === '—'
+                            ? 'bg-gray-100 text-gray-400'
+                            : 'bg-gray-50 text-gray-600'
                       }`}
                     >
-                      <span>
-                        {item.day}
-                        {idx === dayIndex && (
-                          <span className="ml-2 text-[10px] bg-blue-600 text-white px-1.5 py-0.5 rounded">
-                            Dziś
-                          </span>
-                        )}
-                      </span>
-                      <span className={item.hours === 'Zamknięte' ? 'text-red-500' : ''}>
-                        {item.hours}
-                      </span>
+                      <span className="font-medium">{item.day}</span>
+                      <span className="ml-1">{item.hours}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
-              {/* Dane firmy - kompaktowe */}
-              <div className="bg-gray-900 rounded-2xl p-5 text-white">
-                <div className="flex items-center gap-2 mb-3">
+              {/* Dane firmy */}
+              <div className="bg-gray-900 rounded-2xl p-4 text-white">
+                <div className="flex items-center gap-2 mb-2">
                   <Building2 className="w-4 h-4 text-gray-400" />
-                  <h3 className="text-sm font-bold">Dane do faktury</h3>
+                  <h3 className="text-xs font-bold">Dane do faktury</h3>
                 </div>
-                <div className="space-y-2 text-sm text-gray-300">
-                  <p className="font-semibold text-white">TAKMA Tadeusz Tiuchty</p>
+                <div className="space-y-1 text-xs text-gray-300">
+                  <p className="font-semibold text-white text-sm">TAKMA Tadeusz Tiuchty</p>
                   <p>ul. Poświęcka 1a, 51-128 Wrocław</p>
-                  <div className="flex gap-4 pt-1">
-                    <span><span className="text-gray-500">NIP:</span> 915-100-43-77</span>
-                    <span><span className="text-gray-500">REGON:</span> 932677161</span>
+                  <p><span className="text-gray-500">NIP:</span> 915-100-43-77</p>
+                  <p><span className="text-gray-500">REGON:</span> 932677161</p>
                 </div>
               </div>
             </div>
+          </div>
 
-              {/* Mapa - mniejsza */}
-              <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
-                <div className="aspect-video relative bg-gray-100">
-                  <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2504.5!2d17.0547!3d51.1279!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470fc2760e5a7a5d%3A0x0!2zUG_Fm3dpxJlja2EgMWEsIDUxLTEyOCBXcm9jxYJhdw!5e0!3m2!1spl!2spl!4v1701234567890"
-                    width="100%"
-                    height="100%"
-                    style={{ border: 0 }}
-                    allowFullScreen
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                    className="absolute inset-0"
-                  />
-                </div>
+          {/* Mapa - pod formularzem, pełna szerokość */}
+          <div className="mt-6 bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
+            <div className="h-48 sm:h-64 relative bg-gray-100">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2504.5!2d17.0547!3d51.1279!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470fc2760e5a7a5d%3A0x0!2zUG_Fm3dpxJlja2EgMWEsIDUxLTEyOCBXcm9jxYJhdw!5e0!3m2!1spl!2spl!4v1701234567890"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="absolute inset-0"
+              />
+            </div>
+            <div className="p-3 flex items-center justify-between bg-gray-50">
+              <div className="text-xs sm:text-sm text-gray-600">
+                <span className="font-medium">ul. Poświęcka 1a</span>, 51-128 Wrocław
               </div>
+              <a
+                href="https://maps.google.com/?q=Poświęcka+1a+51-128+Wrocław"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 text-xs sm:text-sm font-medium text-blue-600 hover:text-blue-700"
+              >
+                Otwórz w mapach
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Footer - prosty */}
-      <footer className="bg-white border-t border-gray-200 py-6">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-gray-500 text-sm">
+      {/* Footer */}
+      <footer className="bg-white border-t border-gray-200 py-4 mt-6">
+        <div className="max-w-5xl mx-auto px-4 text-center">
+          <p className="text-gray-500 text-xs sm:text-sm">
             © 2025 TAKMA - Autoryzowany Serwis Zebra
           </p>
         </div>
