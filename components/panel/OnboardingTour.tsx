@@ -73,18 +73,21 @@ export default function OnboardingTour({ userId, hasRepairs }: OnboardingTourPro
       disableOverlayClose: true,
     },
     {
-      target: '[data-tour="sidebar-profile"]',
+      // Na mobile sidebar jest ukryty, więc pokazujemy jako centralny modal
+      target: 'body',
       content: (
-        <div>
-          <h3 className="font-bold text-gray-900 mb-2">👤 Twój profil</h3>
+        <div className="text-center">
+          <div className="w-12 h-12 bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl flex items-center justify-center mx-auto mb-3">
+            <span className="text-2xl">👤</span>
+          </div>
+          <h3 className="font-bold text-gray-900 mb-2">Twój profil</h3>
           <p className="text-gray-600 text-sm">
-            Tutaj możesz edytować swoje dane kontaktowe i zarządzać kontem.
+            W menu bocznym (lub hamburger menu na mobile) znajdziesz link do <strong>Profilu</strong>, gdzie możesz edytować swoje dane kontaktowe i zarządzać kontem.
           </p>
         </div>
       ),
-      placement: 'right-start',
+      placement: 'center',
       disableBeacon: true,
-      offset: 10,
     },
     {
       target: 'body',
@@ -191,6 +194,9 @@ export default function OnboardingTour({ userId, hasRepairs }: OnboardingTourPro
       hideCloseButton={false}
       disableOverlayClose
       spotlightClicks
+      scrollToFirstStep
+      scrollOffset={100}
+      disableScrollParentFix={false}
       callback={handleJoyrideCallback}
       locale={{
         back: 'Wstecz',
