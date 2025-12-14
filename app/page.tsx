@@ -1,9 +1,10 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import AIChatBox from '@/components/AIChatBox'
 import RepairForm from '@/components/RepairForm'
 import Image from 'next/image'
+import { createClient } from '@/lib/supabase/client'
 import {
   Clock,
   Wrench,
@@ -33,18 +34,62 @@ import {
   Menu,
   User,
   LogIn,
+  LogOut,
   BookOpen,
   Download,
   Info
 } from 'lucide-react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 type PricingCategory = 'drukarki' | 'terminale' | 'skanery' | 'tablety'
 
 export default function HomePage() {
+  const router = useRouter()
   const [activeCategory, setActiveCategory] = useState<PricingCategory>('drukarki')
   const [showPanelModal, setShowPanelModal] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
+
+  // Sprawdź czy użytkownik jest zalogowany
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const supabase = createClient()
+        const { data: { session } } = await supabase.auth.getSession()
+        setIsLoggedIn(!!session)
+      } catch (error) {
+        console.error('Auth check error:', error)
+      } finally {
+        setIsLoading(false)
+      }
+    }
+    checkAuth()
+
+    // Nasłuchuj na zmiany sesji
+    const supabase = createClient()
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      setIsLoggedIn(!!session)
+    })
+
+    return () => {
+      subscription.unsubscribe()
+    }
+  }, [])
+
+  // Funkcja wylogowania
+  const handleLogout = async () => {
+    try {
+      const supabase = createClient()
+      await supabase.auth.signOut()
+      setIsLoggedIn(false)
+      setMobileMenuOpen(false)
+      router.refresh()
+    } catch (error) {
+      console.error('Logout error:', error)
+    }
+  }
 
   // Schema.org structured data for SEO
   const structuredData = {
@@ -255,9 +300,21 @@ export default function HomePage() {
                       <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-1 border-4 border-transparent border-t-gray-900"></div>
                     </div>
                   </div>
-                  <a href="/logowanie" className="hidden md:block text-sm text-gray-700 hover:text-gray-900 transition-colors font-medium">
-                    Zaloguj
-                  </a>
+                  {!isLoading && (
+                    isLoggedIn ? (
+                      <button
+                        onClick={handleLogout}
+                        className="hidden md:flex items-center gap-1.5 text-sm text-gray-700 hover:text-gray-900 transition-colors font-medium"
+                      >
+                        <LogOut className="w-4 h-4" />
+                        Wyloguj
+                      </button>
+                    ) : (
+                      <a href="/logowanie" className="hidden md:block text-sm text-gray-700 hover:text-gray-900 transition-colors font-medium">
+                        Zaloguj
+                      </a>
+                    )
+                  )}
                 </div>
               </div>
             </div>
@@ -298,14 +355,24 @@ export default function HomePage() {
                 <span className="font-medium">Panel klienta</span>
               </a>
               
-              <a
-                href="/logowanie"
-                onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors"
-              >
-                <LogIn className="w-4 h-4" />
-                <span className="font-medium">Logowanie</span>
-              </a>
+              {isLoggedIn ? (
+                <button
+                  onClick={handleLogout}
+                  className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-red-600 hover:bg-red-50 transition-colors w-full text-left"
+                >
+                  <LogOut className="w-4 h-4" />
+                  <span className="font-medium">Wyloguj się</span>
+                </button>
+              ) : (
+                <a
+                  href="/logowanie"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors"
+                >
+                  <LogIn className="w-4 h-4" />
+                  <span className="font-medium">Logowanie</span>
+                </a>
+              )}
 
               <div className="my-2 border-t border-gray-200" />
 
