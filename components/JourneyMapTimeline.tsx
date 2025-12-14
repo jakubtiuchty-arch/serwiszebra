@@ -23,6 +23,7 @@ interface JourneyMapTimelineProps {
     new_status: string
     changed_at: string
   }>
+  repairType?: 'paid' | 'warranty' | 'warranty_rejected'
 }
 
 const STATUS_CONFIG = {
@@ -58,6 +59,14 @@ const STATUS_CONFIG = {
     bgColor: 'bg-sky-100',
     textColor: 'text-sky-600'
   },
+  proforma: { 
+    label: 'Pro Forma', 
+    shortLabel: 'Pro Forma',
+    icon: FileText, 
+    color: '#F97316',
+    bgColor: 'bg-orange-100',
+    textColor: 'text-orange-600'
+  },
   w_naprawie: { 
     label: 'Naprawa', 
     shortLabel: 'Naprawa',
@@ -81,20 +90,55 @@ const STATUS_CONFIG = {
     color: '#059669',
     bgColor: 'bg-green-100',
     textColor: 'text-green-600'
+  },
+  // Statusy gwarancyjne
+  weryfikacja_gwarancji: { 
+    label: 'Weryfikacja gwarancji', 
+    shortLabel: 'Weryfikacja',
+    icon: Search, 
+    color: '#06B6D4',
+    bgColor: 'bg-cyan-100',
+    textColor: 'text-cyan-600'
+  },
+  gwarancja_potwierdzona: { 
+    label: 'Gwarancja potwierdzona', 
+    shortLabel: 'Potwierdzona',
+    icon: CheckCircle, 
+    color: '#10B981',
+    bgColor: 'bg-emerald-100',
+    textColor: 'text-emerald-600'
+  },
+  gwarancja_odrzucona: { 
+    label: 'Gwarancja odrzucona', 
+    shortLabel: 'Odrzucona',
+    icon: X, 
+    color: '#EF4444',
+    bgColor: 'bg-red-100',
+    textColor: 'text-red-600'
   }
 }
 
-const STATUS_ORDER = ['nowe', 'odebrane', 'diagnoza', 'wycena', 'w_naprawie', 'zakonczone', 'wyslane']
+// Statusy dla napraw płatnych
+const PAID_STATUS_ORDER = ['nowe', 'odebrane', 'diagnoza', 'wycena', 'w_naprawie', 'zakonczone', 'wyslane']
 
-export default function JourneyMapTimeline({ currentStatus, statusHistory }: JourneyMapTimelineProps) {
+// Statusy dla napraw gwarancyjnych
+const WARRANTY_STATUS_ORDER = ['nowe', 'odebrane', 'weryfikacja_gwarancji', 'gwarancja_potwierdzona', 'w_naprawie', 'zakonczone', 'wyslane']
+
+// Domyślna kolejność (dla kompatybilności wstecznej)
+const STATUS_ORDER = PAID_STATUS_ORDER
+
+export default function JourneyMapTimeline({ currentStatus, statusHistory, repairType = 'paid' }: JourneyMapTimelineProps) {
   const [hoveredStep, setHoveredStep] = useState<number | null>(null)
   const [showCelebration, setShowCelebration] = useState(false)
 
-  const currentIndex = STATUS_ORDER.indexOf(currentStatus)
-  const progressPercentage = ((currentIndex + 1) / STATUS_ORDER.length) * 100
+  // Wybierz odpowiednią kolejność statusów w zależności od typu naprawy
+  const statusOrder = repairType === 'warranty' ? WARRANTY_STATUS_ORDER : PAID_STATUS_ORDER
+
+  const currentIndex = statusOrder.indexOf(currentStatus)
+  const progressPercentage = ((currentIndex + 1) / statusOrder.length) * 100
 
   // Build timeline steps
-  const timelineSteps = STATUS_ORDER.map((status, index) => {
+  const timelineSteps = statusOrder.map((status, index) => {
     const config = STATUS_CONFIG[status as keyof typeof STATUS_CONFIG]
     const historyItem = statusHistory.find(h => h.new_status === status)
     
@@ -162,14 +206,14 @@ export default function JourneyMapTimeline({ currentStatus, statusHistory }: Jou
         <div className="hidden sm:flex relative items-center justify-between py-2 px-4">
           {timelineSteps.map((step, index) => {
             const Icon = step.icon
-            const position = (index / (STATUS_ORDER.length - 1)) * 100
-            const isLastStep = index === STATUS_ORDER.length - 1
+            const position = (index / (statusOrder.length - 1)) * 100
+            const isLastStep = index === statusOrder.length - 1
 
             return (
               <motion.div
                 key={step.status}
                 className="flex flex-col items-center relative z-10"
-                style={{ width: `${100 / STATUS_ORDER.length}%` }}
+                style={{ width: `${100 / statusOrder.length}%` }}
                 onHoverStart={() => setHoveredStep(index)}
                 onHoverEnd={() => setHoveredStep(null)}
                 whileHover={{ scale: 1.1 }}

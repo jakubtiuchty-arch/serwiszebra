@@ -9,9 +9,10 @@ interface RepairCardProps {
     device_model: string
     serial_number: string | null
     issue_description: string
-    status: 'nowe' | 'odebrane' | 'diagnoza' | 'wycena' | 'proforma' | 'w_naprawie' | 'zakonczone' | 'wyslane' | 'anulowane'
+    status: 'nowe' | 'odebrane' | 'diagnoza' | 'wycena' | 'proforma' | 'w_naprawie' | 'zakonczone' | 'wyslane' | 'anulowane' | 'weryfikacja_gwarancji' | 'gwarancja_potwierdzona' | 'gwarancja_odrzucona'
     created_at: string
     urgency: 'standard' | 'express' | 'niska' | 'srednia' | 'wysoka' | 'krytyczna' | null
+    repair_type?: 'paid' | 'warranty' | 'warranty_rejected'
   }
 }
 
@@ -114,6 +115,40 @@ const STATUS_CONFIG = {
     textColor: 'text-gray-600',
     dotColor: 'bg-gray-400',
     barColor: 'bg-gray-400'
+  },
+  // Statusy gwarancyjne
+  weryfikacja_gwarancji: { 
+    label: 'Weryfikacja', 
+    sublabel: 'GWARANCJA',
+    progress: 42,
+    color: 'cyan',
+    bgColor: 'bg-cyan-50',
+    borderColor: 'border-cyan-200',
+    textColor: 'text-cyan-700',
+    dotColor: 'bg-cyan-500',
+    barColor: 'bg-cyan-500'
+  },
+  gwarancja_potwierdzona: { 
+    label: 'Gwarancja', 
+    sublabel: 'POTWIERDZONA',
+    progress: 57,
+    color: 'emerald',
+    bgColor: 'bg-emerald-50',
+    borderColor: 'border-emerald-200',
+    textColor: 'text-emerald-700',
+    dotColor: 'bg-emerald-500',
+    barColor: 'bg-emerald-500'
+  },
+  gwarancja_odrzucona: { 
+    label: 'Gwarancja', 
+    sublabel: 'ODRZUCONA',
+    progress: 42,
+    color: 'red',
+    bgColor: 'bg-red-50',
+    borderColor: 'border-red-200',
+    textColor: 'text-red-700',
+    dotColor: 'bg-red-500',
+    barColor: 'bg-red-500'
   },
 } as const
 

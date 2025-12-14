@@ -54,6 +54,9 @@ interface RepairRequest {
   zip_code: string | null
   created_at: string
   updated_at: string
+  // Nowe pola dla gwarancji
+  repair_type: 'paid' | 'warranty' | 'warranty_rejected'
+  is_warranty: boolean
 }
 
 interface StatusHistory {
@@ -80,7 +83,11 @@ const STATUS_LABELS: Record<string, string> = {
   w_naprawie: 'W naprawie',
   zakonczone: 'Zakończone',
   wyslane: 'Wysłane',
-  anulowane: 'Anulowane'
+  anulowane: 'Anulowane',
+  // Statusy gwarancyjne
+  weryfikacja_gwarancji: 'Weryfikacja gwarancji',
+  gwarancja_potwierdzona: 'Gwarancja potwierdzona',
+  gwarancja_odrzucona: 'Gwarancja odrzucona'
 }
 
 const STATUS_COLORS: Record<string, string> = {
@@ -92,7 +99,29 @@ const STATUS_COLORS: Record<string, string> = {
   w_naprawie: 'bg-indigo-100 text-indigo-800 border-indigo-200',
   zakonczone: 'bg-green-100 text-green-800 border-green-200',
   wyslane: 'bg-teal-100 text-teal-800 border-teal-200',
-  anulowane: 'bg-red-100 text-red-800 border-red-200'
+  anulowane: 'bg-red-100 text-red-800 border-red-200',
+  // Statusy gwarancyjne
+  weryfikacja_gwarancji: 'bg-cyan-100 text-cyan-800 border-cyan-200',
+  gwarancja_potwierdzona: 'bg-emerald-100 text-emerald-800 border-emerald-200',
+  gwarancja_odrzucona: 'bg-red-100 text-red-800 border-red-200'
+}
+
+// Statusy dla napraw płatnych
+const PAID_STATUSES = ['nowe', 'odebrane', 'diagnoza', 'wycena', 'proforma', 'w_naprawie', 'zakonczone', 'wyslane', 'anulowane']
+
+// Statusy dla napraw gwarancyjnych
+const WARRANTY_STATUSES = ['nowe', 'odebrane', 'weryfikacja_gwarancji', 'gwarancja_potwierdzona', 'gwarancja_odrzucona', 'w_naprawie', 'zakonczone', 'wyslane', 'anulowane']
+
+const REPAIR_TYPE_LABELS: Record<string, string> = {
+  paid: 'Płatna',
+  warranty: 'Gwarancyjna',
+  warranty_rejected: 'Gwarancja odrzucona → Płatna'
+}
+
+const REPAIR_TYPE_COLORS: Record<string, string> = {
+  paid: 'bg-blue-100 text-blue-800 border-blue-200',
+  warranty: 'bg-emerald-100 text-emerald-800 border-emerald-200',
+  warranty_rejected: 'bg-orange-100 text-orange-800 border-orange-200'
 }
 
 const PRIORITY_LABELS: Record<string, string> = {
@@ -767,6 +796,72 @@ export default function AdminRepairDetailPage() {
               </div>
             )}
 
+            {/* Typ naprawy - badge */}
+            <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow border border-gray-200 p-4">
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="text-sm font-semibold text-gray-900">Typ naprawy</h3>
+                <span className={`px-2 py-1 rounded-lg text-xs font-semibold border ${REPAIR_TYPE_COLORS[repair.repair_type] || REPAIR_TYPE_COLORS.paid}`}>
+                  {REPAIR_TYPE_LABELS[repair.repair_type] || 'Płatna'}
+                </span>
+              </div>
+              
+              {/* Przycisk zmiany typu naprawy */}
+              {repair.repair_type === 'warranty' && (
+                <button
+                  onClick={async () => {
+                    if (confirm('Czy na pewno chcesz zmienić typ naprawy na PŁATNĄ? Gwarancja zostanie odrzucona.')) {
+                      setSubmitting('repair_type')
+                      try {
+                        const response = await fetch(`/api/admin/repairs/${repairId}/repair-type`, {
+                          method: 'PATCH',
+                          headers: { 'Content-Type': 'application/json' },
+                          body: JSON.stringify({ repair_type: 'warranty_rejected' })
+                        })
+                        if (!response.ok) throw new Error('Błąd zmiany typu')
+                        await fetchRepairDetails()
+                        setModal({
+                          isOpen: true,
+                          type: 'success',
+                          title: 'Typ naprawy zmieniony',
+                          message: 'Gwarancja została odrzucona. Naprawa jest teraz płatna - możesz dodać wycenę.'
+                        })
+                      } catch (err) {
+                        setModal({
+                          isOpen: true,
+                          type: 'error',
+                          title: 'Błąd',
+                          message: 'Nie udało się zmienić typu naprawy'
+                        })
+                      } finally {
+                        setSubmitting(null)
+                      }
+                    }
+                  }}
+                  disabled={submitting === 'repair_type'}
+                  className="w-full mt-2 bg-orange-600 text-white px-3 py-2 text-sm rounded-lg hover:bg-orange-700 disabled:opacity-50 flex items-center justify-center font-semibold transition-all"
+                >
+                  {submitting === 'repair_type' ? (
+                    <Loader2 className="w-3 h-3 mr-2 animate-spin" />
+                  ) : (
+                    <XCircle className="w-3 h-3 mr-2" />
+                  )}
+                  Odrzuć gwarancję → Płatna
+                </button>
+              )}
+              
+              {repair.repair_type === 'warranty_rejected' && (
+                <p className="text-xs text-orange-700 mt-2 p-2 bg-orange-50 rounded-lg">
+                  ⚠️ Gwarancja została odrzucona. Dodaj wycenę poniżej.
+                </p>
+              )}
+              
+              {repair.repair_type === 'warranty' && (
+                <p className="text-xs text-emerald-700 mt-2 p-2 bg-emerald-50 rounded-lg">
+                  💡 Sprawdź chat - klient powinien przesłać kopię faktury zakupu.
+                </p>
+              )}
+            </div>
+
             {/* Zmiana statusu */}
             <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow border border-gray-200 p-4">
               <h3 className="text-sm font-semibold text-gray-900 mb-3">Zmień status</h3>
@@ -779,9 +874,10 @@ export default function AdminRepairDetailPage() {
                     className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
                     required
                   >
-                    {Object.entries(STATUS_LABELS).map(([value, label]) => (
-                      <option key={value} value={value}>
-                        {label}
+                    {/* Pokaż odpowiednie statusy w zależności od typu naprawy */}
+                    {(repair.repair_type === 'warranty' ? WARRANTY_STATUSES : PAID_STATUSES).map((status) => (
+                      <option key={status} value={status}>
+                        {STATUS_LABELS[status]}
                       </option>
                     ))}
                   </select>
@@ -807,8 +903,9 @@ export default function AdminRepairDetailPage() {
               </form>
             </div>
 
-            {/* Wycena - tylko jeśli nie opłacono i nie pro forma */}
-            {repair.payment_status !== 'succeeded' && repair.payment_status !== 'proforma' && (
+            {/* Wycena - tylko dla napraw płatnych lub gdy gwarancja odrzucona, i jeśli nie opłacono */}
+            {(repair.repair_type === 'paid' || repair.repair_type === 'warranty_rejected') && 
+             repair.payment_status !== 'succeeded' && repair.payment_status !== 'proforma' && (
               <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow border border-gray-200 p-4">
                 <h3 className="text-sm font-semibold text-gray-900 mb-3">Wycena</h3>
                 <form onSubmit={handlePriceUpdate} className="space-y-3">

@@ -461,6 +461,16 @@ export default function RepairForm() {
                   {errors.isWarranty && (
                     <p className="mt-1 text-sm text-red-600">{errors.isWarranty.message}</p>
                   )}
+                  
+                  {/* Info dla napraw gwarancyjnych */}
+                  {formData.isWarranty === 'tak' && (
+                    <div className="mt-3 p-3 bg-green-50 border border-green-200 rounded-lg">
+                      <p className="text-sm text-green-800">
+                        <span className="font-medium">💡 Wskazówka:</span> Jeśli posiadasz kopię faktury zakupu, 
+                        możesz ją przesłać w czacie po zgłoszeniu naprawy - przyspieszy to weryfikację gwarancji.
+                      </p>
+                    </div>
+                  )}
                 </div>
               </div>
             )}

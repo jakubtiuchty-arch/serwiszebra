@@ -54,8 +54,9 @@ export default function OnboardingTour({ userId, hasRepairs }: OnboardingTourPro
           </p>
         </div>
       ),
-      placement: 'bottom',
+      placement: 'bottom-end',
       disableBeacon: true,
+      offset: 10,
     },
     {
       target: '[data-tour="repair-card"]',
@@ -81,8 +82,9 @@ export default function OnboardingTour({ userId, hasRepairs }: OnboardingTourPro
           </p>
         </div>
       ),
-      placement: 'right',
+      placement: 'right-start',
       disableBeacon: true,
+      offset: 10,
     },
     {
       target: 'body',

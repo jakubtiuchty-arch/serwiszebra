@@ -94,7 +94,13 @@ export async function POST(request: NextRequest) {
     console.log(`🔵 Files found: ${files.length}`)
 
     // 1. Utwórz zgłoszenie
+    // Określ typ naprawy na podstawie gwarancji
+    const isWarrantyRepair = validatedData.isWarranty === 'tak'
+    const repairType = isWarrantyRepair ? 'warranty' : 'paid'
+    
     console.log('🔵 Creating repair request in database...')
+    console.log('🔵 Repair type:', repairType)
+    
     const { data: newRequest, error: insertError } = await supabase
       .from('repair_requests')
       .insert({
@@ -107,7 +113,8 @@ export async function POST(request: NextRequest) {
         device_model: validatedData.deviceModel,
         serial_number: validatedData.serialNumber || null,
         purchase_date: validatedData.purchaseDate || null,
-        is_warranty: validatedData.isWarranty === 'tak',
+        is_warranty: isWarrantyRepair,
+        repair_type: repairType,
         issue_description: validatedData.issueDescription,
         urgency: validatedData.urgency,
         photo_urls: [],

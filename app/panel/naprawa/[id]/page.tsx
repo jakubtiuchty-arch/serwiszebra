@@ -61,15 +61,18 @@ interface Repair {
   final_price: number | null
   price_notes: string | null
   price_accepted_at: string | null
-  payment_status: string | null  // ← DODANE
-  stripe_session_id: string | null  // ← DODANE
-  paid_at: string | null  // ← DODANE
+  payment_status: string | null
+  stripe_session_id: string | null
+  paid_at: string | null
   courier_tracking_number: string | null
   courier_name: string | null
   courier_notes: string | null
   photo_urls: string[]
   created_at: string
   updated_at: string
+  // Nowe pola dla gwarancji
+  repair_type: 'paid' | 'warranty' | 'warranty_rejected'
+  is_warranty: boolean
 }
 
 interface StatusHistory {
@@ -87,7 +90,17 @@ const STATUS_CONFIG = {
   w_naprawie: { label: 'W naprawie', className: 'bg-indigo-100 text-indigo-800' },
   zakonczone: { label: 'Zakończone', className: 'bg-gray-800 text-white' },
   wyslane: { label: 'Wysłane', className: 'bg-gray-800 text-white' },
-  anulowane: { label: 'Anulowane', className: 'bg-gray-200 text-gray-700' }
+  anulowane: { label: 'Anulowane', className: 'bg-gray-200 text-gray-700' },
+  // Statusy gwarancyjne
+  weryfikacja_gwarancji: { label: 'Weryfikacja gwarancji', className: 'bg-cyan-100 text-cyan-800' },
+  gwarancja_potwierdzona: { label: 'Gwarancja potwierdzona', className: 'bg-emerald-100 text-emerald-800' },
+  gwarancja_odrzucona: { label: 'Gwarancja odrzucona', className: 'bg-red-100 text-red-800' }
+}
+
+const REPAIR_TYPE_CONFIG = {
+  paid: { label: 'Naprawa płatna', className: 'bg-blue-100 text-blue-800', icon: '💳' },
+  warranty: { label: 'Naprawa gwarancyjna', className: 'bg-emerald-100 text-emerald-800', icon: '🛡️' },
+  warranty_rejected: { label: 'Gwarancja odrzucona', className: 'bg-orange-100 text-orange-800', icon: '⚠️' }
 }
 
 const URGENCY_CONFIG = {
@@ -505,12 +518,16 @@ const handlePaymentSuccess = async () => {
     <JourneyMapTimeline 
       currentStatus={repair.status}
       statusHistory={statusHistory}
+      repairType={repair.repair_type}
     />
   </div>
 )}
 
-{/* MOBILE: Akcje pod timeline gdy wycena czeka na akceptację/płatność */}
+{/* MOBILE: Akcje pod timeline gdy wycena czeka na akceptację/płatność - tylko dla napraw płatnych */}
 {(() => {
+  // Nie pokazuj akcji płatności dla napraw gwarancyjnych
+  if (repair.repair_type === 'warranty') return null
+  
   const needsPaymentAction = (
     (repair.status === 'wycena' && !repair.price_accepted_at && (repair.final_price || repair.estimated_price)) ||
     (repair.price_accepted_at && repair.payment_status !== 'succeeded' && repair.payment_status !== 'proforma' && (repair.final_price || repair.estimated_price))
@@ -679,8 +696,81 @@ const handlePaymentSuccess = async () => {
         )}
       </div>
 
-      {/* Wycena */}
-      {(repair.estimated_price || repair.final_price) && (
+      {/* Info o typie naprawy - GWARANCJA */}
+      {repair.repair_type === 'warranty' && (
+        <div className="bg-emerald-50 rounded-xl shadow-sm border border-emerald-200 p-3 md:p-4">
+          <div className="flex items-center mb-2 md:mb-3">
+            <div className="bg-emerald-100 p-1.5 rounded-lg">
+              <span className="text-sm">🛡️</span>
+            </div>
+            <h2 className="text-xs md:text-sm font-semibold text-emerald-900 ml-2">Naprawa gwarancyjna</h2>
+          </div>
+          
+          {repair.status === 'weryfikacja_gwarancji' && (
+            <div className="space-y-2">
+              <p className="text-xs md:text-sm text-emerald-700 leading-relaxed">
+                Twoja naprawa jest w trakcie weryfikacji gwarancji.
+              </p>
+              <div className="bg-white/60 rounded-lg p-2 border border-emerald-200">
+                <p className="text-xs text-emerald-800 font-medium">
+                  💡 Masz kopię faktury zakupu?
+                </p>
+                <p className="text-xs text-emerald-700 mt-1">
+                  Prześlij ją w czacie poniżej - przyspieszy to weryfikację gwarancji!
+                </p>
+              </div>
+            </div>
+          )}
+          
+          {repair.status === 'gwarancja_potwierdzona' && (
+            <p className="text-xs md:text-sm text-emerald-700 leading-relaxed">
+              ✅ Gwarancja została potwierdzona! Naprawa jest realizowana bezpłatnie.
+            </p>
+          )}
+          
+          {!['weryfikacja_gwarancji', 'gwarancja_potwierdzona', 'gwarancja_odrzucona'].includes(repair.status) && (
+            <p className="text-xs md:text-sm text-emerald-700 leading-relaxed">
+              Twoja naprawa jest realizowana w ramach gwarancji.
+            </p>
+          )}
+        </div>
+      )}
+
+      {/* Info o typie naprawy - GWARANCJA ODRZUCONA */}
+      {repair.repair_type === 'warranty_rejected' && (
+        <div className="bg-orange-50 rounded-xl shadow-sm border border-orange-200 p-3 md:p-4">
+          <div className="flex items-center mb-2 md:mb-3">
+            <div className="bg-orange-100 p-1.5 rounded-lg">
+              <span className="text-sm">⚠️</span>
+            </div>
+            <h2 className="text-xs md:text-sm font-semibold text-orange-900 ml-2">Gwarancja odrzucona</h2>
+          </div>
+          <p className="text-xs md:text-sm text-orange-700 leading-relaxed">
+            Niestety, po weryfikacji dokumentów naprawa nie kwalifikuje się do naprawy gwarancyjnej. 
+            Poniżej znajdziesz wycenę naprawy płatnej.
+          </p>
+        </div>
+      )}
+
+      {/* Status gwarancji odrzuconej */}
+      {repair.status === 'gwarancja_odrzucona' && (
+        <div className="bg-red-50 rounded-xl shadow-sm border border-red-200 p-3 md:p-4">
+          <div className="flex items-center mb-2 md:mb-3">
+            <div className="bg-red-100 p-1.5 rounded-lg">
+              <XCircle className="w-4 h-4 text-red-600" />
+            </div>
+            <h2 className="text-xs md:text-sm font-semibold text-red-900 ml-2">Gwarancja odrzucona</h2>
+          </div>
+          <p className="text-xs md:text-sm text-red-700 leading-relaxed">
+            Po weryfikacji dokumentów stwierdziliśmy, że usterka nie jest objęta gwarancją. 
+            Wkrótce otrzymasz wycenę naprawy płatnej.
+          </p>
+        </div>
+      )}
+
+      {/* Wycena - tylko dla napraw płatnych lub gdy gwarancja odrzucona */}
+      {(repair.repair_type === 'paid' || repair.repair_type === 'warranty_rejected') && 
+       (repair.estimated_price || repair.final_price) && (
         <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-sm border border-gray-200 p-3 md:p-4">
           <div className="flex items-center mb-2 md:mb-3">
             <div className="bg-green-100 p-1.5 rounded-lg">

@@ -66,7 +66,11 @@ const STATUS_CONFIG = {
   w_naprawie: { label: 'W naprawie', className: 'bg-indigo-100 text-indigo-800', icon: Wrench, color: 'text-indigo-600', bgColor: 'bg-indigo-100' },
   zakonczone: { label: 'Zakończone', className: 'bg-green-100 text-green-800', icon: PartyPopper, color: 'text-green-600', bgColor: 'bg-green-100' },
   wyslane: { label: 'Wysłane', className: 'bg-teal-100 text-teal-800', icon: Truck, color: 'text-teal-600', bgColor: 'bg-teal-100' },
-  anulowane: { label: 'Anulowane', className: 'bg-red-100 text-red-800', icon: XCircle, color: 'text-red-600', bgColor: 'bg-red-100' }
+  anulowane: { label: 'Anulowane', className: 'bg-red-100 text-red-800', icon: XCircle, color: 'text-red-600', bgColor: 'bg-red-100' },
+  // Statusy gwarancyjne
+  weryfikacja_gwarancji: { label: 'Weryfikacja gwarancji', className: 'bg-cyan-100 text-cyan-800', icon: Search, color: 'text-cyan-600', bgColor: 'bg-cyan-100' },
+  gwarancja_potwierdzona: { label: 'Gwarancja potwierdzona', className: 'bg-emerald-100 text-emerald-800', icon: CheckCircle, color: 'text-emerald-600', bgColor: 'bg-emerald-100' },
+  gwarancja_odrzucona: { label: 'Gwarancja odrzucona', className: 'bg-red-100 text-red-800', icon: XCircle, color: 'text-red-600', bgColor: 'bg-red-100' }
 }
 
 const URGENCY_CONFIG = {
