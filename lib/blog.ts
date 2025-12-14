@@ -13804,7 +13804,7 @@ Nie wiesz, który kontrakt będzie najlepszy dla Twojej firmy? Skontaktuj się z
 
 > **Zadzwoń:** +48 601 619 898 — doradzimy najlepsze rozwiązanie
 
-> **Napisz:** serwis@serwiszebra.pl — przygotujemy indywidualną ofertę
+> **Napisz do nas:** [Formularz kontaktowy](/kontakt) — przygotujemy indywidualną ofertę
 
 > **Zgłoś naprawę:** [Wypełnij formularz](/#formularz) — bezpłatna diagnostyka
 
