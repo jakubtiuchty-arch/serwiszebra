@@ -22,6 +22,12 @@ const URGENCY_LEVELS = [
   { value: 'express', label: 'Wysoki (+50% wartości naprawy)' },
 ]
 
+const WARRANTY_OPTIONS = [
+  { value: 'nie', label: 'Nie, gwarancja wygasła' },
+  { value: 'tak', label: 'Tak, mam gwarancję' },
+  { value: 'nie_wiem', label: 'Nie wiem' },
+]
+
 export default function NewRepairModal({ isOpen, onClose, onSuccess }: NewRepairModalProps) {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -33,9 +39,9 @@ export default function NewRepairModal({ isOpen, onClose, onSuccess }: NewRepair
     device_model: '',
     serial_number: '',
     purchase_date: '',
-    is_warranty: false,
+    is_warranty: 'nie' as 'tak' | 'nie' | 'nie_wiem',
     issue_description: '',
-    urgency: 'srednia',
+    urgency: 'standard',
     pickup_street: '',
     pickup_zip: '',
     pickup_city: '',
@@ -106,7 +112,7 @@ export default function NewRepairModal({ isOpen, onClose, onSuccess }: NewRepair
         console.log('✅ Zdjęcia uploadowane:', urls)
       }
 
-      // Przygotuj dane zgłoszenia - ✅ DODANY device_type!
+      // Przygotuj dane zgłoszenia
       const repairData = {
         device_type: formData.device_type,
         device_model: formData.device_model,
@@ -114,7 +120,8 @@ export default function NewRepairModal({ isOpen, onClose, onSuccess }: NewRepair
         issue_description: formData.issue_description,
         urgency: formData.urgency,
         purchase_date: formData.purchase_date || null,
-        warranty_status: formData.is_warranty ? 'active' : 'none',
+        warranty_status: formData.is_warranty === 'tak' ? 'active' : 'none',
+        repair_type: formData.is_warranty === 'tak' ? 'warranty' : 'paid',
         photo_urls: photoUrls,
         ...(differentAddress && {
           street: formData.pickup_street,
@@ -152,9 +159,9 @@ export default function NewRepairModal({ isOpen, onClose, onSuccess }: NewRepair
         device_model: '',
         serial_number: '',
         purchase_date: '',
-        is_warranty: false,
+        is_warranty: 'nie',
         issue_description: '',
-        urgency: 'srednia',
+        urgency: 'standard',
         pickup_street: '',
         pickup_zip: '',
         pickup_city: '',
@@ -285,18 +292,41 @@ export default function NewRepairModal({ isOpen, onClose, onSuccess }: NewRepair
                   </div>
 
                   {/* Gwarancja */}
-                  <div className="flex items-center gap-2 p-3 bg-gray-50 rounded-lg">
-                    <input
-                      type="checkbox"
-                      id="is_warranty"
-                      name="is_warranty"
-                      checked={formData.is_warranty}
-                      onChange={handleChange}
-                      className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                    />
-                    <label htmlFor="is_warranty" className="text-xs font-medium text-gray-900 cursor-pointer">
-                      Urządzenie jest na gwarancji
+                  <div>
+                    <label className="block text-xs font-semibold text-gray-900 mb-1.5">
+                      Czy urządzenie jest na gwarancji?
                     </label>
+                    <div className="space-y-2">
+                      {WARRANTY_OPTIONS.map(option => (
+                        <label
+                          key={option.value}
+                          className={`flex items-center gap-2 p-2.5 rounded-lg border cursor-pointer transition-colors ${
+                            formData.is_warranty === option.value
+                              ? 'border-blue-500 bg-blue-50'
+                              : 'border-gray-200 hover:border-gray-300'
+                          }`}
+                        >
+                          <input
+                            type="radio"
+                            name="is_warranty"
+                            value={option.value}
+                            checked={formData.is_warranty === option.value}
+                            onChange={(e) => setFormData(prev => ({ ...prev, is_warranty: e.target.value as 'tak' | 'nie' | 'nie_wiem' }))}
+                            className="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500"
+                          />
+                          <span className="text-xs font-medium text-gray-900">{option.label}</span>
+                        </label>
+                      ))}
+                    </div>
+                    
+                    {/* Info o fakturze dla gwarancji */}
+                    {formData.is_warranty === 'tak' && (
+                      <div className="mt-2 p-2.5 bg-blue-50 border border-blue-200 rounded-lg">
+                        <p className="text-xs text-blue-800">
+                          💡 Jeśli posiadasz kopię faktury zakupu, możesz ją przesłać w czacie po zgłoszeniu naprawy — przyspieszy to weryfikację gwarancji.
+                        </p>
+                      </div>
+                    )}
                   </div>
 
                   {/* Opis problemu */}

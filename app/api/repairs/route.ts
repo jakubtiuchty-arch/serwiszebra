@@ -71,17 +71,18 @@ export async function POST(request: NextRequest) {
       serial_number: body.serial_number || null,
       
       issue_description: body.issue_description,
-      urgency: body.urgency || 'srednia',
+      urgency: body.urgency || 'standard',
       status: 'nowe',
       
       purchase_date: body.purchase_date || null,
       is_warranty: body.warranty_status === 'active',
+      repair_type: body.repair_type || 'paid', // 'paid' | 'warranty' | 'warranty_rejected'
       
       photo_urls: body.photo_urls || [],
       
       street: body.street || null,
-zip_code: body.zip_code || null,
-city: body.city || null,
+      zip_code: body.zip_code || null,
+      city: body.city || null,
       contact_phone: body.contact_phone || profile?.phone || null,
       
       pickup_date: null,
