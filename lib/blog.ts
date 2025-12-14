@@ -13536,7 +13536,7 @@ Serwisujemy wszystkie modele mobilne: ZQ630, ZQ620, ZQ610, ZQ521, ZQ520, ZQ511, 
       metaDescription: 'Kompletny przewodnik po kontraktach serwisowych Zebra OneCare. Porównanie Essential, Select i Premier. Dowiedz się, jak obniżyć koszty i zwiększyć dostępność drukarek, terminali i skanerów Zebra.',
       keywords: ['zebra onecare', 'kontrakt serwisowy zebra', 'zebra onecare essential', 'zebra onecare select', 'zebra onecare premier', 'serwis zebra', 'gwarancja zebra', 'wsparcie techniczne zebra', 'naprawa drukarek zebra', 'TCO drukarki', 'koszty serwisu zebra', 'zebra service contract', 'zebra maintenance plan']
     },
-    content: \`
+    content: `
 ## Czym jest Zebra OneCare?
 
 **Zebra OneCare** to oficjalny program kontraktów serwisowych producenta urządzeń Zebra Technologies. Zapewnia kompleksowe wsparcie dla drukarek etykiet, terminali mobilnych, skanerów kodów kreskowych i innych urządzeń AutoID marki Zebra.
@@ -13809,7 +13809,7 @@ Nie wiesz, który kontrakt będzie najlepszy dla Twojej firmy? Skontaktuj się z
 > **Zgłoś naprawę:** [Wypełnij formularz](/#formularz) — bezpłatna diagnostyka
 
 Jako **Autoryzowany Partner Zebra** z 25-letnim doświadczeniem pomożemy Ci wybrać optymalne rozwiązanie serwisowe — czy to kontrakt OneCare, czy indywidualną umowę z naszym serwisem.
-\`
+`
   }
 ]
 
