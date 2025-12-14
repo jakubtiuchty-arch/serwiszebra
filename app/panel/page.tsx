@@ -165,7 +165,7 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="space-y-3 sm:space-y-4">
+    <div className="space-y-3 sm:space-y-4" data-tour="dashboard">
       {/* HEADER - KOMPAKTOWY */}
       <div className="flex items-center justify-between">
         <div className="ml-12 lg:ml-0">
@@ -181,6 +181,7 @@ export default function DashboardPage() {
           </div>
           <button
             onClick={() => setIsModalOpen(true)}
+            data-tour="new-repair"
             className="flex items-center gap-1.5 border-2 border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white px-3 py-2 rounded-lg text-sm font-semibold transition-all"
           >
             <Wrench className="w-4 h-4" />
@@ -366,10 +367,11 @@ export default function DashboardPage() {
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
-              {filteredRepairs.map((repair) => (
+              {filteredRepairs.map((repair, index) => (
                 <div
                   key={repair.id}
                   className="bg-white border-2 border-gray-300 rounded-xl shadow-md"
+                  {...(index === 0 ? { 'data-tour': 'repair-card' } : {})}
                 >
                   <RepairCard repair={repair} />
                 </div>

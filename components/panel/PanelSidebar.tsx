@@ -156,6 +156,7 @@ export default function PanelSidebar({ userName, userEmail, onLogout }: PanelSid
   <Link
     href="/panel/profil"
     onClick={() => setMobileMenuOpen(false)}
+    data-tour="sidebar-profile"
     className="flex items-center gap-2 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-50 transition-all text-sm"
   >
     <User className="w-4 h-4 text-gray-400" />

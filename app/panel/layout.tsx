@@ -6,6 +6,12 @@ import { getCurrentUserProfileClient } from '@/lib/auth-client'
 import { createClient } from '@/lib/supabase/client'
 import type { UserProfile } from '@/lib/auth-types'
 import PanelSidebar from '@/components/panel/PanelSidebar'
+import dynamic from 'next/dynamic'
+
+// Dynamic import dla OnboardingTour (client-only)
+const OnboardingTour = dynamic(() => import('@/components/panel/OnboardingTour'), {
+  ssr: false,
+})
 
 export default function PanelLayout({
   children,
@@ -16,6 +22,7 @@ export default function PanelLayout({
   const pathname = usePathname()
   const [user, setUser] = useState<UserProfile | null>(null)
   const [loading, setLoading] = useState(true)
+  const [repairsCount, setRepairsCount] = useState(0)
 
   useEffect(() => {
     async function loadUser() {
@@ -26,6 +33,13 @@ export default function PanelLayout({
           return
         }
         setUser(profile)
+        
+        // Pobierz liczbę napraw dla touru
+        const response = await fetch('/api/repairs')
+        if (response.ok) {
+          const data = await response.json()
+          setRepairsCount(data.repairs?.length || 0)
+        }
       } catch (error) {
         console.error('Error loading user:', error)
         router.push('/logowanie')
@@ -62,8 +76,19 @@ export default function PanelLayout({
     ? `${user.first_name} ${user.last_name}`
     : user?.email || 'Użytkownik'
 
+  // Tour tylko na głównej stronie panelu
+  const showTour = pathname === '/panel' && user?.id
+
   return (
     <div className="min-h-screen bg-gray-50">
+      {/* ONBOARDING TOUR */}
+      {showTour && user?.id && (
+        <OnboardingTour 
+          userId={user.id} 
+          hasRepairs={repairsCount > 0}
+        />
+      )}
+
       {/* SIDEBAR */}
       <PanelSidebar 
         userName={userName}
@@ -72,8 +97,8 @@ export default function PanelLayout({
       />
 
       {/* MAIN CONTENT - z marginesem dla sidebara */}
-    <main className="lg:ml-56 min-h-screen">
-  <div className="p-3 sm:p-4 lg:p-6">
+      <main className="lg:ml-56 min-h-screen">
+        <div className="p-3 sm:p-4 lg:p-6">
           {children}
         </div>
       </main>
