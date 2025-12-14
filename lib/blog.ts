@@ -13521,7 +13521,7 @@ Serwisujemy wszystkie modele mobilne: ZQ630, ZQ620, ZQ610, ZQ521, ZQ520, ZQ511, 
     slug: 'kontrakty-serwisowe-zebra-onecare-przewodnik',
     title: 'Kontrakty serwisowe Zebra OneCare - kompleksowy przewodnik 2025',
     excerpt: 'Poznaj program Zebra OneCare - kontrakty serwisowe dla drukarek, terminali i skanerów. Porównanie poziomów Essential, Select i Premier. Dowiedz się, jak obniżyć TCO i zwiększyć dostępność urządzeń.',
-    coverImage: '/blog/zebra-onecare-service.jpeg',
+    coverImage: '/blog/Kontrakty serwisowe Zebra OneCare.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Autoryzowany Partner Zebra'
