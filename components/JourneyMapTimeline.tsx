@@ -444,7 +444,7 @@ export default function JourneyMapTimeline({ currentStatus, statusHistory, repai
 
                   {/* Text */}
                   <h3 className="text-xl font-bold text-gray-900 mb-2">
-                    🎉 Naprawa zakończona!
+                    Naprawa zakończona!
                   </h3>
                   <p className="text-sm text-gray-700 mb-6 leading-relaxed">
                     Twoje urządzenie jest gotowe i zostanie wkrótce wysłane.
