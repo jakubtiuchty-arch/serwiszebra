@@ -13563,7 +13563,7 @@ Kontrakt serwisowy Zebra OneCare eliminuje te problemy:
 
 | Bez kontraktu | Z kontraktem OneCare |
 |---------------|----------------------|
-| Nieprzewidywalne koszty napraw | Stała, znana opłata roczna |
+| Nieprzewidywalne koszty napraw | Stała, znana opłata jednorazowa |
 | Długi czas oczekiwania na naprawę | Gwarantowany czas naprawy (3 dni lub szybciej) |
 | Brak wsparcia technicznego | 24/7 dostęp do ekspertów Zebra |
 | Nieoryginalne części | Tylko oryginalne części producenta |
