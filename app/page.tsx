@@ -449,8 +449,8 @@ export default function HomePage() {
       <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
 
       {/* HERO - MOBILE VERSION (inline chat) */}
-      <section className="md:hidden min-h-[50vh] flex flex-col relative">
-        {/* Chat area - cały hero jest oknem chatu */}
+      <section className="md:hidden h-[calc(100svh-60px)] flex flex-col relative overflow-hidden">
+        {/* Chat area - cały hero jest oknem chatu, stała wysokość */}
         <AIChatBox variant="inline" />
       </section>
 
