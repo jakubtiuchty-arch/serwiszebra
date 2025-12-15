@@ -39,7 +39,7 @@ const videos: Video[] = [
     title: 'Jak używać odklejaka etykiet w Zebra ZD220 / ZD230',
     description: 'Poradnik pokazujący jak prawidłowo używać odklejaka etykiet (label dispenser / peel-off) w drukarkach Zebra ZD220 i ZD230. Konfiguracja i użycie krok po kroku.',
     youtubeId: 'qrMRD7N49fY',
-    thumbnail: `https://img.youtube.com/vi/qrMRD7N49fY/maxresdefault.jpg`,
+    thumbnail: '/zd220_zd230_odklejak_yt.jpeg',
     duration: '2:30',
     category: 'drukarki',
     tags: ['ZD220', 'ZD230', 'odklejak', 'label dispenser', 'peel-off'],
