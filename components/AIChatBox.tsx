@@ -406,18 +406,18 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
   // INLINE variant - dla mobile hero (bez boxów, wszystko wbudowane)
   if (variant === 'inline') {
     return (
-      <div className="flex flex-col flex-1 min-h-0 px-4" style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}>
+      <div className="flex flex-col flex-1 min-h-0 px-4 pb-safe" style={{ paddingBottom: 'max(env(safe-area-inset-bottom, 0px), 8px)' }}>
         {/* Scrollowalny obszar - min-h-0 pozwala na kurczenie się */}
         <div 
           ref={messagesContainerRef}
           className="flex-1 min-h-0 overflow-y-auto flex flex-col"
         >
-          {/* Tytuł - na górze */}
-          <div className="text-center pt-4 pb-6">
-            <div className="inline-block px-3 py-1.5 bg-white/70 rounded-full border border-gray-200 mb-2">
-              <p className="text-xs font-semibold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">Autoryzowany</p>
+          {/* Tytuł - na górze, kompaktowy */}
+          <div className="text-center pt-3 pb-4">
+            <div className="inline-block px-2.5 py-1 bg-white/70 rounded-full border border-gray-200 mb-1.5">
+              <p className="text-[10px] font-semibold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">Autoryzowany</p>
             </div>
-            <h1 className="text-3xl font-bold text-gray-900 tracking-tight">
+            <h1 className="text-2xl font-bold text-gray-900 tracking-tight">
               Serwis Zebra
             </h1>
           </div>
@@ -507,8 +507,8 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
           )}
         </div>
 
-        {/* Input area - ChatGPT style */}
-        <div className="pb-6 pt-3 flex-shrink-0 bg-gradient-to-t from-blue-50/80 via-indigo-50/40 to-transparent -mx-4 px-4">
+        {/* Input area - ChatGPT style, sticky na dole */}
+        <div className="pb-4 pt-3 flex-shrink-0 bg-gradient-to-t from-blue-50/90 via-indigo-50/60 to-transparent -mx-4 px-4">
           <input type="file" ref={fileInputRef} accept="image/*,video/*" multiple onChange={handleFileSelect} className="hidden" />
           <input type="file" ref={videoInputRef} accept="video/*" capture="environment" onChange={handleVideoCapture} className="hidden" />
 
