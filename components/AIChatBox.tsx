@@ -108,8 +108,11 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
     !loading &&
     (isSeriousIssue || suggestsRepair || messageCount >= 6)  // ✨ Pokaż wcześniej dla poważnych usterek lub sugestii naprawy
 
-  // Scroll do dołu - płynnie
+  // Scroll do dołu - płynnie (tylko dla floating variant)
   const scrollToBottom = (smooth = true) => {
+    // Dla inline variant nie scrollujemy - flex-col-reverse sam utrzymuje pozycję
+    if (variant === 'inline') return
+    
     if (messagesContainerRef.current) {
       messagesContainerRef.current.scrollTo({
         top: messagesContainerRef.current.scrollHeight,
@@ -122,11 +125,12 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
   const prevLoadingRef = useRef(loading)
   useEffect(() => {
     // Scroll gdy: użytkownik wysłał wiadomość (loading: false→true) LUB AI skończył (loading: true→false)
-    if (prevLoadingRef.current !== loading) {
+    // Tylko dla floating variant
+    if (variant === 'floating' && prevLoadingRef.current !== loading) {
       setTimeout(() => scrollToBottom(true), 100)
     }
     prevLoadingRef.current = loading
-  }, [loading])
+  }, [loading, variant])
 
   const scrollToForm = () => {
     const formElement = document.getElementById('repair-form')
