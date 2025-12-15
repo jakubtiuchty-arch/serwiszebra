@@ -62,10 +62,26 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
   const [sessionId] = useState(() => `session_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`)
   const [detectedDevice, setDetectedDevice] = useState<{ name: string; possessive: string }>({ name: 'urządzenie', possessive: 'Twoje' })
   const [attachedFiles, setAttachedFiles] = useState<File[]>([])
+  const [showInputGlow, setShowInputGlow] = useState(true) // Glow effect for mobile input
   const messagesContainerRef = useRef<HTMLDivElement>(null)
   const recognitionRef = useRef<any>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
   const videoInputRef = useRef<HTMLInputElement>(null)
+  
+  // Wyłącz glow po 4 sekundach lub gdy użytkownik zacznie pisać
+  useEffect(() => {
+    if (variant === 'inline' && showInputGlow) {
+      const timer = setTimeout(() => setShowInputGlow(false), 4000)
+      return () => clearTimeout(timer)
+    }
+  }, [variant, showInputGlow])
+  
+  // Wyłącz glow gdy użytkownik zacznie pisać lub wyśle wiadomość
+  useEffect(() => {
+    if (input.length > 0 || messages.length > 0) {
+      setShowInputGlow(false)
+    }
+  }, [input, messages.length])
 
   // Show button logic:
   // 1. POWAŻNA USTERKA → button po pierwszej konkluzji (AI oznaczy jako "[SERIOUS_ISSUE]")
@@ -501,60 +517,61 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
             </div>
           )}
 
-          {/* ChatGPT-style Input Box - kompaktowy */}
-          <div className="flex items-center gap-2">
-            {/* Plus button - załączniki */}
+          {/* ChatGPT-style Input Box - wszystko w jednym pill */}
+          <div className={`flex items-center bg-white rounded-full px-2 py-2 border shadow-sm transition-all duration-500 ${
+            showInputGlow 
+              ? 'border-blue-400 shadow-[0_0_15px_rgba(59,130,246,0.5)] animate-pulse-glow' 
+              : 'border-gray-300'
+          }`}>
+            {/* Plus button - po lewej w środku inputa */}
             <button 
               onClick={() => fileInputRef.current?.click()} 
               disabled={loading}
-              className="flex-shrink-0 w-10 h-10 rounded-full bg-white border border-gray-300 hover:bg-gray-50 flex items-center justify-center text-gray-400 hover:text-gray-600 transition-colors disabled:opacity-50 shadow-sm"
+              className="flex-shrink-0 w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-500 hover:text-gray-700 transition-colors disabled:opacity-50"
             >
-              <Plus className="w-5 h-5" />
+              <Plus className="w-4 h-4" />
             </button>
 
-            {/* Input pill - kompaktowy */}
-            <div className="flex-1 flex items-center bg-white rounded-full px-3 py-2 border border-gray-300 shadow-sm">
-              <input
-                type="text"
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                onKeyPress={handleKeyPress}
-                placeholder={messages.length === 0 ? currentPlaceholder : "Napisz więcej..."}
-                className="flex-1 text-[16px] text-gray-700 placeholder-gray-400 focus:outline-none bg-transparent"
+            <input
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyPress={handleKeyPress}
+              placeholder={messages.length === 0 ? currentPlaceholder : "Napisz więcej..."}
+              className="flex-1 text-[16px] text-gray-700 placeholder-gray-400 focus:outline-none bg-transparent px-3"
+              disabled={loading}
+              style={{ fontSize: '16px' }}
+            />
+
+            {/* Ikony po prawej */}
+            <div className="flex items-center gap-0.5">
+              <button
+                onClick={toggleRecording}
                 disabled={loading}
-                style={{ fontSize: '16px' }}
-              />
+                className={`p-1.5 rounded-full transition-colors disabled:opacity-50 ${
+                  isRecording ? 'bg-red-500 text-white animate-pulse' : 'text-gray-400 hover:text-gray-600'
+                }`}
+              >
+                {isRecording ? <MicOff className="w-4 h-4" /> : <Mic className="w-4 h-4" />}
+              </button>
 
-              {/* Ikony W ŚRODKU inputa */}
-              <div className="flex items-center gap-0.5 ml-1">
+              {input.trim() || attachedFiles.length > 0 ? (
                 <button
-                  onClick={toggleRecording}
+                  onClick={() => handleSend()}
                   disabled={loading}
-                  className={`p-1 rounded-full transition-colors disabled:opacity-50 ${
-                    isRecording ? 'bg-red-500 text-white animate-pulse' : 'text-gray-400 hover:text-gray-600'
-                  }`}
+                  className="p-1.5 rounded-full bg-gray-800 text-white transition-colors disabled:opacity-50"
                 >
-                  {isRecording ? <MicOff className="w-4 h-4" /> : <Mic className="w-4 h-4" />}
+                  {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <ArrowRight className="w-4 h-4" />}
                 </button>
-
-                {input.trim() || attachedFiles.length > 0 ? (
-                  <button
-                    onClick={() => handleSend()}
-                    disabled={loading}
-                    className="p-1 rounded-full bg-gray-800 text-white transition-colors disabled:opacity-50"
-                  >
-                    {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <ArrowRight className="w-4 h-4" />}
-                  </button>
-                ) : (
-                  <button
-                    onClick={() => videoInputRef.current?.click()}
-                    disabled={loading}
-                    className="p-1 rounded-full text-gray-400 hover:text-gray-600 transition-colors disabled:opacity-50"
-                  >
-                    <Video className="w-4 h-4" />
-                  </button>
-                )}
-              </div>
+              ) : (
+                <button
+                  onClick={() => videoInputRef.current?.click()}
+                  disabled={loading}
+                  className="p-1.5 rounded-full text-gray-400 hover:text-gray-600 transition-colors disabled:opacity-50"
+                >
+                  <Video className="w-4 h-4" />
+                </button>
+              )}
             </div>
           </div>
 
