@@ -407,13 +407,13 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
   if (variant === 'inline') {
     return (
       <div className="flex flex-col flex-1 px-4" style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}>
-        {/* Scrollowalny obszar - flex column z justify-end żeby treść była na dole */}
+        {/* Scrollowalny obszar */}
         <div 
           ref={messagesContainerRef}
           className="flex-1 overflow-y-auto flex flex-col"
         >
           {/* Tytuł - na górze */}
-          <div className="text-center pt-4 pb-6 flex-shrink-0">
+          <div className="text-center pt-4 pb-6">
             <div className="inline-block px-3 py-1.5 bg-white/70 rounded-full border border-gray-200 mb-2">
               <p className="text-xs font-semibold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">Autoryzowany</p>
             </div>
@@ -422,12 +422,9 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
             </h1>
           </div>
 
-          {/* Spacer - wypełnia przestrzeń między tytułem a wiadomościami */}
-          <div className="flex-1 min-h-0" />
-
-          {/* Wiadomości - na dole, tuż nad inputem, rosną W GÓRĘ */}
+          {/* Wiadomości - mt-auto przesuwa je na dół kontenera */}
           {messages.length > 0 && (
-            <div className="space-y-3 pb-4 flex-shrink-0">
+            <div className="space-y-3 pb-4 mt-auto">
               {messages.map((msg, idx) => (
                 <div
                   key={idx}
