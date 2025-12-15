@@ -400,24 +400,16 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
   if (variant === 'inline') {
     return (
       <div className="flex flex-col flex-1 px-4" style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}>
-        {/* Scrollowalny obszar - tytuł + wiadomości scrollują się razem */}
+        {/* Scrollowalny obszar - używamy flex-col-reverse żeby scroll zaczynał od DOŁU */}
         <div 
           ref={messagesContainerRef}
-          className="flex-1 overflow-y-auto"
+          className="flex-1 overflow-y-auto flex flex-col-reverse"
         >
-          {/* Tytuł - na samej górze, chowa się pod header gdy scrollujesz */}
-          <div className="text-center pt-4 pb-6">
-            <div className="inline-block px-3 py-1.5 bg-white/70 rounded-full border border-gray-200 mb-2">
-              <p className="text-xs font-semibold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">Autoryzowany</p>
-            </div>
-            <h1 className="text-3xl font-bold text-gray-900 tracking-tight">
-              Serwis Zebra
-            </h1>
-          </div>
-
-          {/* Wiadomości - pod tytułem */}
-          {messages.length > 0 && (
-            <div className="space-y-3 pb-4">
+          {/* Ten div jest renderowany jako OSTATNI ale wyświetlany na DOLE (przez reverse) */}
+          <div>
+            {/* Wiadomości */}
+            {messages.length > 0 && (
+              <div className="space-y-3 pb-4">
               {messages.map((msg, idx) => (
                 <div
                   key={idx}
@@ -498,6 +490,17 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
               )}
             </div>
           )}
+          </div>
+
+          {/* Tytuł - renderowany jako DRUGI ale wyświetlany na GÓRZE (przez flex-col-reverse) */}
+          <div className="text-center pt-4 pb-6">
+            <div className="inline-block px-3 py-1.5 bg-white/70 rounded-full border border-gray-200 mb-2">
+              <p className="text-xs font-semibold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">Autoryzowany</p>
+            </div>
+            <h1 className="text-3xl font-bold text-gray-900 tracking-tight">
+              Serwis Zebra
+            </h1>
+          </div>
         </div>
 
         {/* Input area - ChatGPT style */}
