@@ -400,27 +400,26 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
   if (variant === 'inline') {
     return (
       <div className="flex flex-col flex-1 px-4" style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}>
-        {/* Scrollowalny obszar - wiadomości rozwijają się W GÓRĘ */}
+        {/* Scrollowalny obszar - flex-col-reverse sprawia że scroll zaczyna od DOŁU */}
         <div 
           ref={messagesContainerRef}
-          className="flex-1 overflow-y-auto flex flex-col"
+          className="flex-1 overflow-y-auto flex flex-col-reverse"
         >
-          {/* Tytuł - na górze, chowa się pod header gdy scrollujesz */}
-          <div className="text-center pt-4 pb-6 flex-shrink-0">
-            <div className="inline-block px-3 py-1.5 bg-white/70 rounded-full border border-gray-200 mb-2">
-              <p className="text-xs font-semibold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">Autoryzowany</p>
+          {/* Wrapper w normalnej kolejności (reverse od reverse = normalnie) */}
+          <div className="flex flex-col">
+            {/* Tytuł - na górze, chowa się pod header gdy scrollujesz w górę */}
+            <div className="text-center pt-4 pb-6 flex-shrink-0">
+              <div className="inline-block px-3 py-1.5 bg-white/70 rounded-full border border-gray-200 mb-2">
+                <p className="text-xs font-semibold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">Autoryzowany</p>
+              </div>
+              <h1 className="text-3xl font-bold text-gray-900 tracking-tight">
+                Serwis Zebra
+              </h1>
             </div>
-            <h1 className="text-3xl font-bold text-gray-900 tracking-tight">
-              Serwis Zebra
-            </h1>
-          </div>
 
-          {/* Spacer - wypycha wiadomości na dół gdy ich mało */}
-          <div className="flex-1" />
-
-          {/* Wiadomości - rosną W GÓRĘ */}
-          {messages.length > 0 && (
-            <div className="space-y-3 pb-4">
+            {/* Wiadomości */}
+            {messages.length > 0 && (
+              <div className="space-y-3 pb-4">
               {messages.map((msg, idx) => (
                 <div
                   key={idx}
@@ -501,6 +500,7 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
               )}
             </div>
           )}
+          </div>
         </div>
 
         {/* Input area - ChatGPT style */}
