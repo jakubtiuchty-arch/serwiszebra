@@ -108,11 +108,8 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
     !loading &&
     (isSeriousIssue || suggestsRepair || messageCount >= 6)  // ✨ Pokaż wcześniej dla poważnych usterek lub sugestii naprawy
 
-  // Scroll do dołu - płynnie (tylko dla floating variant)
+  // Scroll do dołu - płynnie
   const scrollToBottom = (smooth = true) => {
-    // Dla inline variant nie scrollujemy - flex-col-reverse sam utrzymuje pozycję
-    if (variant === 'inline') return
-    
     if (messagesContainerRef.current) {
       messagesContainerRef.current.scrollTo({
         top: messagesContainerRef.current.scrollHeight,
@@ -125,12 +122,11 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
   const prevLoadingRef = useRef(loading)
   useEffect(() => {
     // Scroll gdy: użytkownik wysłał wiadomość (loading: false→true) LUB AI skończył (loading: true→false)
-    // Tylko dla floating variant
-    if (variant === 'floating' && prevLoadingRef.current !== loading) {
+    if (prevLoadingRef.current !== loading) {
       setTimeout(() => scrollToBottom(true), 100)
     }
     prevLoadingRef.current = loading
-  }, [loading, variant])
+  }, [loading])
 
   const scrollToForm = () => {
     const formElement = document.getElementById('repair-form')
@@ -404,22 +400,22 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
   if (variant === 'inline') {
     return (
       <div className="flex flex-col flex-1 px-4" style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}>
-        {/* Tytuł - zawsze na górze, NIE scrolluje się */}
-        <div className="text-center pt-4 pb-4 flex-shrink-0">
-          <div className="inline-block px-3 py-1.5 bg-white/70 rounded-full border border-gray-200 mb-2">
-            <p className="text-xs font-semibold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">Autoryzowany</p>
-          </div>
-          <h1 className="text-3xl font-bold text-gray-900 tracking-tight">
-            Serwis Zebra
-          </h1>
-        </div>
-
-        {/* Scrollowalny obszar wiadomości - rośnie W GÓRĘ */}
+        {/* Scrollowalny obszar - tytuł + wiadomości scrollują się razem */}
         <div 
           ref={messagesContainerRef}
-          className="flex-1 overflow-y-auto flex flex-col justify-end"
+          className="flex-1 overflow-y-auto"
         >
-          {/* Wiadomości - na dole, rosną w górę */}
+          {/* Tytuł - na samej górze, chowa się pod header gdy scrollujesz */}
+          <div className="text-center pt-4 pb-6">
+            <div className="inline-block px-3 py-1.5 bg-white/70 rounded-full border border-gray-200 mb-2">
+              <p className="text-xs font-semibold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">Autoryzowany</p>
+            </div>
+            <h1 className="text-3xl font-bold text-gray-900 tracking-tight">
+              Serwis Zebra
+            </h1>
+          </div>
+
+          {/* Wiadomości - pod tytułem */}
           {messages.length > 0 && (
             <div className="space-y-3 pb-4">
               {messages.map((msg, idx) => (
