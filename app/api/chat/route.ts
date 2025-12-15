@@ -2,11 +2,9 @@ import { GoogleGenAI } from '@google/genai'
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 import { SearchServiceClient } from '@google-cloud/discoveryengine'
-import OpenAI from 'openai'
 import { searchBlogForAI } from '@/lib/blog'
 
 const genAI = new GoogleGenAI({ apiKey: process.env.GOOGLE_API_KEY! })
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -84,28 +82,24 @@ async function saveChatLog(data: {
   }
 }
 
-// Funkcja do tłumaczenia polskiego tekstu na angielski za pomocą OpenAI GPT-3.5-turbo
+// Funkcja do tłumaczenia polskiego tekstu na angielski za pomocą Gemini Flash
 async function translateToEnglish(text: string): Promise<string> {
   try {
     console.log('🌐 Tłumaczę na angielski:', text)
 
-    const response = await openai.chat.completions.create({
-      model: 'gpt-3.5-turbo',
-      messages: [
-        {
-          role: 'system',
-          content: 'You are a translator. Translate the following Polish text to English. Return ONLY the translation, nothing else.',
-        },
-        {
-          role: 'user',
-          content: text,
-        },
-      ],
-      temperature: 0.3,
-      max_tokens: 200,
+    const response = await genAI.models.generateContent({
+      model: 'gemini-2.0-flash',
+      contents: [{ 
+        role: 'user', 
+        parts: [{ text: `Translate the following Polish text to English. Return ONLY the translation, nothing else:\n\n${text}` }] 
+      }],
+      config: {
+        temperature: 0.3,
+        maxOutputTokens: 200,
+      }
     })
 
-    const translation = response.choices[0]?.message?.content?.trim() || text
+    const translation = response.text?.trim() || text
     console.log('✅ Przetłumaczono na:', translation)
     return translation
   } catch (error) {
