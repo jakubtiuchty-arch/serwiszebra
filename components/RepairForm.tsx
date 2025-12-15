@@ -248,11 +248,11 @@ export default function RepairForm() {
 
         {/* Progress Bar */}
         <div className="mb-10">
-          <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center mb-3">
             {steps.map((step, index) => (
               <React.Fragment key={step.number}>
                 {/* Kółko z numerem */}
-                <div className="flex flex-col items-center flex-shrink-0">
+                <div className="flex flex-col items-center">
                   <div
                     className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-semibold text-sm sm:text-base transition-all ${
                       currentStep > step.number
@@ -272,10 +272,10 @@ export default function RepairForm() {
                     {step.title}
                   </div>
                 </div>
-                {/* Linia między kółkami */}
+                {/* Linia między kółkami - min-w zapewnia minimalną szerokość */}
                 {index < steps.length - 1 && (
                   <div
-                    className={`h-1 flex-1 mx-1 sm:mx-2 transition-all ${
+                    className={`h-1 flex-1 min-w-[20px] transition-all ${
                       currentStep > step.number ? 'bg-green-500' : 'bg-gray-200'
                     }`}
                   />
