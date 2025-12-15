@@ -46,6 +46,16 @@ const videos: Video[] = [
     featured: true
   },
   {
+    id: '8',
+    title: 'Przyciski, porty i złącza w Zebra ZD220 / ZD230 - poznaj swoją drukarkę',
+    description: 'Omówienie wszystkich przycisków, portów komunikacyjnych (USB, Ethernet, Serial) oraz gniazda zasilania w drukarkach Zebra ZD220 i ZD230. Gdzie co podłączyć i jak używać.',
+    youtubeId: '6Pbi_A8fAnU',
+    duration: '3:00',
+    category: 'drukarki',
+    tags: ['ZD220', 'ZD230', 'przyciski', 'porty', 'USB', 'zasilanie', 'złącza'],
+    featured: true
+  },
+  {
     id: '2',
     title: 'Kalibracja drukarki Zebra ZD420 - krok po kroku',
     description: 'Kompletny poradnik kalibracji czujnika mediów w drukarce ZD420. Rozwiązanie problemu pustych etykiet.',
