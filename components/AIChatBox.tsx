@@ -406,11 +406,11 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
   // INLINE variant - dla mobile hero (bez boxów, wszystko wbudowane)
   if (variant === 'inline') {
     return (
-      <div className="flex flex-col flex-1 px-4" style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}>
-        {/* Scrollowalny obszar */}
+      <div className="flex flex-col flex-1 min-h-0 px-4" style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}>
+        {/* Scrollowalny obszar - min-h-0 pozwala na kurczenie się */}
         <div 
           ref={messagesContainerRef}
-          className="flex-1 overflow-y-auto flex flex-col"
+          className="flex-1 min-h-0 overflow-y-auto flex flex-col"
         >
           {/* Tytuł - na górze */}
           <div className="text-center pt-4 pb-6">
