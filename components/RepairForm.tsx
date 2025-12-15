@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -248,10 +248,11 @@ export default function RepairForm() {
 
         {/* Progress Bar */}
         <div className="mb-10">
-          <div className="flex items-center mb-3">
+          <div className="flex items-center justify-between mb-3">
             {steps.map((step, index) => (
-              <div key={step.number} className="flex items-center" style={{ flex: index === steps.length - 1 ? '0 0 auto' : '1 1 0%' }}>
-                <div className="flex flex-col items-center">
+              <React.Fragment key={step.number}>
+                {/* Kółko z numerem */}
+                <div className="flex flex-col items-center flex-shrink-0">
                   <div
                     className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-semibold text-sm sm:text-base transition-all ${
                       currentStep > step.number
@@ -271,6 +272,7 @@ export default function RepairForm() {
                     {step.title}
                   </div>
                 </div>
+                {/* Linia między kółkami */}
                 {index < steps.length - 1 && (
                   <div
                     className={`h-1 flex-1 mx-1 sm:mx-2 transition-all ${
@@ -278,7 +280,7 @@ export default function RepairForm() {
                     }`}
                   />
                 )}
-              </div>
+              </React.Fragment>
             ))}
           </div>
         </div>
