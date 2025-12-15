@@ -46,17 +46,17 @@ const videos: Video[] = [
     featured: true
   },
   {
-    id: '8',
-    title: 'Przyciski, porty i złącza w Zebra ZD220 / ZD230 - poznaj swoją drukarkę',
-    description: 'Omówienie wszystkich przycisków, portów komunikacyjnych (USB, Ethernet, Serial) oraz gniazda zasilania w drukarkach Zebra ZD220 i ZD230. Gdzie co podłączyć i jak używać.',
+    id: '2',
+    title: 'Przyciski, porty i złącza w Zebra ZD220 / ZD230',
+    description: 'Omówienie przycisków, portów komunikacyjnych (USB, Ethernet, Serial) oraz gniazda zasilania w drukarkach ZD220 i ZD230.',
     youtubeId: '6Pbi_A8fAnU',
+    thumbnail: '/Funkcje drukarki - jak rozpoznać funkcje i możliwości urządzenia Zebra ZD220_ZD230d.jpeg',
     duration: '3:00',
     category: 'drukarki',
-    tags: ['ZD220', 'ZD230', 'przyciski', 'porty', 'USB', 'zasilanie', 'złącza'],
-    featured: true
+    tags: ['ZD220', 'ZD230', 'przyciski', 'porty', 'USB', 'zasilanie'],
   },
   {
-    id: '2',
+    id: '3',
     title: 'Kalibracja drukarki Zebra ZD420 - krok po kroku',
     description: 'Kompletny poradnik kalibracji czujnika mediów w drukarce ZD420. Rozwiązanie problemu pustych etykiet.',
     youtubeId: 'dQw4w9WgXcQ', // placeholder - zamień na prawdziwe ID
@@ -66,7 +66,7 @@ const videos: Video[] = [
     tags: ['ZD420', 'kalibracja', 'czujnik mediów'],
   },
   {
-    id: '3',
+    id: '4',
     title: 'Wymiana głowicy drukującej w Zebra ZT410',
     description: 'Jak bezpiecznie wymienić głowicę drukującą w drukarce przemysłowej ZT410.',
     youtubeId: 'dQw4w9WgXcQ',
@@ -76,7 +76,7 @@ const videos: Video[] = [
     tags: ['ZT410', 'głowica', 'wymiana']
   },
   {
-    id: '4',
+    id: '5',
     title: 'Reset fabryczny terminala Zebra TC52',
     description: 'Jak przywrócić ustawienia fabryczne w terminalu TC52. Enterprise Reset vs Factory Reset.',
     youtubeId: 'dQw4w9WgXcQ',
@@ -86,7 +86,7 @@ const videos: Video[] = [
     tags: ['TC52', 'reset', 'factory reset']
   },
   {
-    id: '5',
+    id: '6',
     title: 'Konfiguracja DataWedge - podstawy',
     description: 'Wprowadzenie do DataWedge - jak skonfigurować skanowanie kodów w terminalach Zebra.',
     youtubeId: 'dQw4w9WgXcQ',
@@ -96,7 +96,7 @@ const videos: Video[] = [
     tags: ['DataWedge', 'konfiguracja', 'skanowanie'],
   },
   {
-    id: '6',
+    id: '7',
     title: 'Parowanie skanera DS2278 ze stacją',
     description: 'Jak sparować skaner bezprzewodowy DS2278 z cradle\'em. Rozwiązywanie problemów z połączeniem.',
     youtubeId: 'dQw4w9WgXcQ',
@@ -106,7 +106,7 @@ const videos: Video[] = [
     tags: ['DS2278', 'parowanie', 'Bluetooth']
   },
   {
-    id: '7',
+    id: '8',
     title: 'Czyszczenie głowicy drukującej',
     description: 'Prawidłowe czyszczenie głowicy drukującej - przedłuż żywotność drukarki Zebra.',
     youtubeId: 'dQw4w9WgXcQ',
