@@ -159,8 +159,16 @@ function VideoCard({ video, onClick, featured = false }: { video: Video; onClick
     >
       {/* Thumbnail */}
       <div className={`relative bg-gradient-to-br from-slate-800 to-slate-900 ${featured ? 'aspect-video' : 'aspect-video'}`}>
-        {/* Placeholder gradient - zamień na prawdziwe thumbnails */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 to-indigo-600/20" />
+        {/* Thumbnail image */}
+        {video.thumbnail && !video.thumbnail.includes('placeholder') ? (
+          <img 
+            src={video.thumbnail} 
+            alt={video.title}
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        ) : (
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 to-indigo-600/20" />
+        )}
         
         {/* Play button overlay */}
         <div className="absolute inset-0 flex items-center justify-center">
