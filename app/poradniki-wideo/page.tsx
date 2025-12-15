@@ -32,10 +32,21 @@ interface Video {
   featured?: boolean
 }
 
-// Placeholder videos - zamień na prawdziwe gdy będą gotowe
+// Filmy poradnikowe - prawdziwe materiały serwisowe
 const videos: Video[] = [
   {
     id: '1',
+    title: 'Jak używać odklejaka etykiet w Zebra ZD220 / ZD230',
+    description: 'Poradnik pokazujący jak prawidłowo używać odklejaka etykiet (label dispenser / peel-off) w drukarkach Zebra ZD220 i ZD230. Konfiguracja i użycie krok po kroku.',
+    youtubeId: 'qrMRD7N49fY',
+    thumbnail: `https://img.youtube.com/vi/qrMRD7N49fY/maxresdefault.jpg`,
+    duration: '2:30',
+    category: 'drukarki',
+    tags: ['ZD220', 'ZD230', 'odklejak', 'label dispenser', 'peel-off'],
+    featured: true
+  },
+  {
+    id: '2',
     title: 'Kalibracja drukarki Zebra ZD420 - krok po kroku',
     description: 'Kompletny poradnik kalibracji czujnika mediów w drukarce ZD420. Rozwiązanie problemu pustych etykiet.',
     youtubeId: 'dQw4w9WgXcQ', // placeholder - zamień na prawdziwe ID
@@ -43,10 +54,9 @@ const videos: Video[] = [
     duration: '5:32',
     category: 'drukarki',
     tags: ['ZD420', 'kalibracja', 'czujnik mediów'],
-    featured: true
   },
   {
-    id: '2',
+    id: '3',
     title: 'Wymiana głowicy drukującej w Zebra ZT410',
     description: 'Jak bezpiecznie wymienić głowicę drukującą w drukarce przemysłowej ZT410.',
     youtubeId: 'dQw4w9WgXcQ',
@@ -56,7 +66,7 @@ const videos: Video[] = [
     tags: ['ZT410', 'głowica', 'wymiana']
   },
   {
-    id: '3',
+    id: '4',
     title: 'Reset fabryczny terminala Zebra TC52',
     description: 'Jak przywrócić ustawienia fabryczne w terminalu TC52. Enterprise Reset vs Factory Reset.',
     youtubeId: 'dQw4w9WgXcQ',
@@ -66,7 +76,7 @@ const videos: Video[] = [
     tags: ['TC52', 'reset', 'factory reset']
   },
   {
-    id: '4',
+    id: '5',
     title: 'Konfiguracja DataWedge - podstawy',
     description: 'Wprowadzenie do DataWedge - jak skonfigurować skanowanie kodów w terminalach Zebra.',
     youtubeId: 'dQw4w9WgXcQ',
@@ -74,10 +84,9 @@ const videos: Video[] = [
     duration: '12:45',
     category: 'terminale',
     tags: ['DataWedge', 'konfiguracja', 'skanowanie'],
-    featured: true
   },
   {
-    id: '5',
+    id: '6',
     title: 'Parowanie skanera DS2278 ze stacją',
     description: 'Jak sparować skaner bezprzewodowy DS2278 z cradle\'em. Rozwiązywanie problemów z połączeniem.',
     youtubeId: 'dQw4w9WgXcQ',
@@ -87,7 +96,7 @@ const videos: Video[] = [
     tags: ['DS2278', 'parowanie', 'Bluetooth']
   },
   {
-    id: '6',
+    id: '7',
     title: 'Czyszczenie głowicy drukującej',
     description: 'Prawidłowe czyszczenie głowicy drukującej - przedłuż żywotność drukarki Zebra.',
     youtubeId: 'dQw4w9WgXcQ',
