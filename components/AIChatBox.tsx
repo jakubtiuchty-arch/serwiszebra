@@ -12,7 +12,8 @@ import {
   MicOff,
   Video,
   Image as ImageIcon,
-  Paperclip
+  Paperclip,
+  Plus
 } from 'lucide-react'
 
 interface Citation {
@@ -502,13 +503,13 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
 
           {/* ChatGPT-style Input Box - kompaktowy */}
           <div className="flex items-center gap-2">
-            {/* Paperclip button - załączniki */}
+            {/* Plus button - załączniki */}
             <button 
               onClick={() => fileInputRef.current?.click()} 
               disabled={loading}
               className="flex-shrink-0 w-10 h-10 rounded-full bg-white border border-gray-300 hover:bg-gray-50 flex items-center justify-center text-gray-400 hover:text-gray-600 transition-colors disabled:opacity-50 shadow-sm"
             >
-              <Paperclip className="w-4 h-4" />
+              <Plus className="w-5 h-5" />
             </button>
 
             {/* Input pill - kompaktowy */}
