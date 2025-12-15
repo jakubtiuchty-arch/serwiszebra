@@ -259,10 +259,10 @@ export default function HomePage() {
                   {/* MOBILE - hamburger menu */}
                   <button
                     onClick={() => setMobileMenuOpen(true)}
-                    className="md:hidden p-3 -mr-1 hover:bg-gray-100 rounded-lg transition-colors"
+                    className="md:hidden p-2.5 bg-white rounded-lg border border-gray-200 shadow-sm hover:bg-gray-50 transition-colors"
                     aria-label="Otwórz menu"
                   >
-                    <Menu className="w-7 h-7 text-gray-700" />
+                    <Menu className="w-6 h-6 text-gray-700" />
                   </button>
 
                   {/* DESKTOP - wszystkie linki */}
