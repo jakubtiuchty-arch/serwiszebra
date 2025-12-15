@@ -580,12 +580,7 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
             <div className="flex items-center gap-1 px-2 py-0.5 bg-white/70 rounded-full border border-gray-200">
               <span className="text-[9px] text-gray-500">Powered by</span>
               <span 
-                className="text-[11px] bg-gradient-to-r from-gray-700 via-gray-500 to-gray-700 bg-clip-text text-transparent bg-[length:200%_100%]"
-                style={{ 
-                  fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
-                  animation: 'shimmer 4s linear infinite',
-                  fontWeight: 450
-                }}
+                className="text-[11px] font-medium bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent"
               >
                 Gemini
               </span>
