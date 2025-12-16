@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { requireAdminServer } from '@/lib/auth-server'
 import { createClient } from '@/lib/supabase/server'
+import { sendRepairStatusChangedEmail } from '@/lib/email'
 
 export async function PATCH(
   request: NextRequest,
@@ -50,7 +51,7 @@ export async function PATCH(
     // Sprawdź obecny status i payment_status
     const { data: currentRepair } = await supabase
       .from('repair_requests')
-      .select('status, payment_status, payment_method')
+      .select('status, payment_status, payment_method, email, first_name, last_name, device_model')
       .eq('id', repairId)
       .single()
 
@@ -121,6 +122,25 @@ export async function PATCH(
         }
       } else {
         console.log('Skipping duplicate history entry for status:', status)
+      }
+
+      // Wyślij email o zmianie statusu (tylko dla ważnych zmian)
+      const notifyStatuses = ['odebrane', 'diagnoza', 'wycena', 'w_naprawie', 'naprawione', 'wyslane', 'zakonczone']
+      if (currentRepair && notifyStatuses.includes(status)) {
+        try {
+          await sendRepairStatusChangedEmail({
+            to: currentRepair.email,
+            customerName: `${currentRepair.first_name} ${currentRepair.last_name}`,
+            repairId: repairId,
+            deviceModel: currentRepair.device_model,
+            oldStatus: currentRepair.status,
+            newStatus: status,
+            note: notes || undefined
+          })
+          console.log('✅ Status change email sent')
+        } catch (emailError) {
+          console.error('⚠️ Status change email error:', emailError)
+        }
       }
     }
 

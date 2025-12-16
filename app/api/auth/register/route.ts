@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createServiceClient } from '@/lib/supabase/server'
 import { createClient } from '@/lib/supabase/server'
+import { sendWelcomeEmail } from '@/lib/email'
 
 export async function POST(request: NextRequest) {
   try {
@@ -106,6 +107,18 @@ export async function POST(request: NextRequest) {
     }
 
     console.log('✅ Registration completed with company data')
+
+    // 3. Wyślij email powitalny
+    try {
+      await sendWelcomeEmail({
+        to: email,
+        customerName: firstName || email.split('@')[0]
+      })
+      console.log('✅ Welcome email sent')
+    } catch (emailError) {
+      console.error('⚠️ Welcome email error:', emailError)
+      // Nie przerywamy - konto zostało utworzone
+    }
 
     return NextResponse.json({
       success: true,

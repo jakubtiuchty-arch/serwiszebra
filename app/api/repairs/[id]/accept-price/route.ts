@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
+import { sendQuoteAcceptedEmail, sendQuoteAcceptedAdminEmail } from '@/lib/email'
 
 export async function POST(
   request: NextRequest,
@@ -74,6 +75,31 @@ export async function POST(
     }
 
     console.log('✅ Price accepted successfully:', updateData)
+
+    // Wyślij emaile
+    try {
+      // Email do klienta
+      await sendQuoteAcceptedEmail({
+        to: repair.email,
+        customerName: `${repair.first_name} ${repair.last_name}`,
+        repairId: repairId,
+        deviceModel: repair.device_model,
+        amount: repair.estimated_price || 0
+      })
+      console.log('✅ Quote accepted email sent to customer')
+
+      // Email do admina
+      await sendQuoteAcceptedAdminEmail({
+        to: process.env.ADMIN_EMAIL || 'serwis@serwiszebra.pl',
+        repairId: repairId,
+        customerName: `${repair.first_name} ${repair.last_name}`,
+        deviceModel: repair.device_model,
+        amount: repair.estimated_price || 0
+      })
+      console.log('✅ Quote accepted email sent to admin')
+    } catch (emailError) {
+      console.error('⚠️ Email sending error:', emailError)
+    }
 
     return NextResponse.json({
       success: true,

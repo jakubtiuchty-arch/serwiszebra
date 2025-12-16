@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createServiceClient } from '@/lib/supabase/server'
 import { uploadRepairPhotos, validateFileSize, validateFileType } from '@/lib/supabase/storage'
+import { sendRepairSubmittedEmail, sendRepairSubmittedAdminEmail } from '@/lib/email'
 import { z } from 'zod'
 
 // Zod schema
@@ -161,7 +162,40 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // 3. Sukces
+    // 3. Wyślij emaile
+    try {
+      // Email do klienta
+      await sendRepairSubmittedEmail({
+        to: validatedData.email,
+        customerName: `${validatedData.firstName} ${validatedData.lastName}`,
+        repairId: newRequest.id,
+        deviceType: 'printer', // TODO: dodać pole device_type do formularza
+        deviceModel: validatedData.deviceModel,
+        problemDescription: validatedData.issueDescription,
+        isWarranty: isWarrantyRepair
+      })
+      console.log('✅ Customer email sent')
+
+      // Email do admina
+      await sendRepairSubmittedAdminEmail({
+        to: process.env.ADMIN_EMAIL || 'serwis@serwiszebra.pl',
+        repairId: newRequest.id,
+        customerName: `${validatedData.firstName} ${validatedData.lastName}`,
+        customerEmail: validatedData.email,
+        customerPhone: validatedData.phone,
+        deviceType: 'printer',
+        deviceModel: validatedData.deviceModel,
+        problemDescription: validatedData.issueDescription,
+        isWarranty: isWarrantyRepair,
+        priority: validatedData.urgency === 'express' ? 'high' : 'normal'
+      })
+      console.log('✅ Admin email sent')
+    } catch (emailError) {
+      console.error('⚠️ Email sending error:', emailError)
+      // Nie przerywamy - zgłoszenie zostało utworzone
+    }
+
+    // 4. Sukces
     console.log('✅ All done!')
     return NextResponse.json({
       success: true,

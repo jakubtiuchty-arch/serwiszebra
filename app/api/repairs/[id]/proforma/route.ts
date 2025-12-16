@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
+import { sendProFormaEmail } from '@/lib/email'
 
 export async function POST(
   request: NextRequest,
@@ -87,14 +88,21 @@ export async function POST(
       console.warn('⚠️ Could not add history entry:', historyErr)
     }
 
-    // TODO: Wysłij email z pro formą do klienta
-    // await sendProformaEmail({
-    //   customerEmail: repair.email,
-    //   customerName: `${repair.first_name} ${repair.last_name}`,
-    //   repairId: repair.id,
-    //   amount: repair.final_price || repair.estimated_price,
-    //   deviceModel: repair.device_model,
-    // })
+    // Wyślij email z pro formą do klienta
+    try {
+      const shortId = repairId.split('-')[0].toUpperCase()
+      await sendProFormaEmail({
+        to: repair.email,
+        customerName: `${repair.first_name} ${repair.last_name}`,
+        repairId: repairId,
+        deviceModel: repair.device_model,
+        amount: repair.final_price || repair.estimated_price || 0,
+        proformaNumber: `PF/${new Date().getFullYear()}/${shortId}`
+      })
+      console.log('✅ Pro Forma email sent')
+    } catch (emailError) {
+      console.error('⚠️ Pro Forma email error:', emailError)
+    }
 
     console.log(`✅ Pro forma generated for repair ${repairId}`)
 
