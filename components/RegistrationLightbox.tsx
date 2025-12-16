@@ -125,66 +125,66 @@ export function RegistrationLightbox({
 
           {/* LIGHTBOX */}
           <div className="fixed inset-0 z-[9999] overflow-y-auto">
-            <div className="min-h-full flex items-center justify-center p-2 sm:p-4">
+            <div className="min-h-full flex items-center justify-center p-4 sm:p-6">
               <motion.div
                 initial={{ opacity: 0, scale: 0.95, y: 20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: 20 }}
                 transition={{ type: 'spring', duration: 0.5 }}
-                className="bg-white rounded-xl shadow-2xl w-full max-w-md relative max-h-[95vh] overflow-y-auto"
+                className="bg-white rounded-2xl shadow-2xl w-full max-w-lg relative max-h-[95vh] overflow-y-auto"
                 onClick={(e) => e.stopPropagation()}
               >
                 {/* CLOSE BUTTON */}
                 <button
                   onClick={onClose}
-                  className="absolute top-2 right-2 text-gray-400 hover:text-gray-600 transition-colors z-10"
+                  className="absolute top-3 right-3 text-gray-400 hover:text-gray-600 transition-colors z-10 p-1 hover:bg-gray-100 rounded-full"
                   aria-label="Zamknij"
                 >
-                  <X className="w-4 h-4" />
+                  <X className="w-5 h-5" />
                 </button>
 
-                <div className="p-4">
-                  {/* HEADER - kompaktowy */}
-                  <div className="text-center mb-3">
-                    <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-green-100 mb-2">
-                      <CheckCircle className="w-5 h-5 text-green-600" />
+                <div className="p-5 sm:p-6">
+                  {/* HEADER */}
+                  <div className="text-center mb-5">
+                    <div className="inline-flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-green-100 mb-3">
+                      <CheckCircle className="w-7 h-7 sm:w-8 sm:h-8 text-green-600" />
                     </div>
-                    <h2 className="text-lg font-bold text-gray-900 mb-1">
+                    <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">
                       Zgłoszenie wysłane!
                     </h2>
-                    <p className="text-xs text-gray-600">
+                    <p className="text-sm sm:text-base text-gray-600">
                       ID: <span className="font-mono font-semibold text-orange-600">#{repairId.slice(0, 8).toUpperCase()}</span>
                     </p>
                   </div>
 
-                  {/* COMPARISON TABLE - kompaktowa */}
+                  {/* COMPARISON TABLE */}
                   <ComparisonTable />
 
-                  {/* REGISTRATION FORM - kompaktowy */}
-                  <form onSubmit={handleSubmit} className="space-y-3 mt-3">
-                    <div className="bg-orange-50 border border-orange-200 rounded-lg p-3">
-                      <h3 className="text-sm font-bold text-gray-900 mb-2 text-center">
+                  {/* REGISTRATION FORM */}
+                  <form onSubmit={handleSubmit} className="space-y-4 mt-4">
+                    <div className="bg-orange-50 border border-orange-200 rounded-xl p-4 sm:p-5">
+                      <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-3 text-center">
                         Załóż konto w 30 sekund
                       </h3>
 
                       {/* EMAIL (read-only) */}
-                      <div className="mb-2">
-                        <label className="block text-[10px] font-medium text-gray-700 mb-1">
+                      <div className="mb-3">
+                        <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1.5">
                           Email
                         </label>
                         <input
                           type="email"
                           value={userEmail}
                           disabled
-                          className="w-full px-2.5 py-1.5 text-xs border border-gray-300 rounded-lg bg-gray-100 text-gray-600"
+                          className="w-full px-3 py-2.5 text-sm border border-gray-300 rounded-lg bg-gray-100 text-gray-600"
                         />
                       </div>
 
-                      {/* PASSWORD FIELDS - w jednym rzędzie na większych ekranach */}
-                      <div className="grid grid-cols-2 gap-2 mb-2">
+                      {/* PASSWORD FIELDS */}
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
                         <div>
-                          <label className="block text-[10px] font-medium text-gray-700 mb-1">
-                            Hasło (min. 8 zn.)
+                          <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1.5">
+                            Hasło (min. 8 znaków)
                           </label>
                           <input
                             type="password"
@@ -192,13 +192,13 @@ export function RegistrationLightbox({
                             onChange={(e) => setPassword(e.target.value)}
                             required
                             minLength={8}
-                            placeholder="Hasło"
-                            className="w-full px-2.5 py-1.5 text-xs border border-gray-300 rounded-lg focus:ring-1 focus:ring-orange-500 focus:border-transparent"
+                            placeholder="Wpisz hasło"
+                            className="w-full px-3 py-2.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                             autoFocus
                           />
                         </div>
                         <div>
-                          <label className="block text-[10px] font-medium text-gray-700 mb-1">
+                          <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1.5">
                             Powtórz hasło
                           </label>
                           <input
@@ -207,38 +207,38 @@ export function RegistrationLightbox({
                             onChange={(e) => setConfirmPassword(e.target.value)}
                             required
                             minLength={8}
-                            placeholder="Powtórz"
-                            className="w-full px-2.5 py-1.5 text-xs border border-gray-300 rounded-lg focus:ring-1 focus:ring-orange-500 focus:border-transparent"
+                            placeholder="Powtórz hasło"
+                            className="w-full px-3 py-2.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                           />
                         </div>
                       </div>
 
-                      {/* CHECKBOXES - kompaktowe */}
-                      <div className="space-y-1.5 mb-3">
-                        <label className="flex items-start gap-1.5 cursor-pointer">
+                      {/* CHECKBOXES */}
+                      <div className="space-y-2.5 mb-4">
+                        <label className="flex items-start gap-2 cursor-pointer">
                           <input
                             type="checkbox"
                             checked={termsAccepted}
                             onChange={(e) => setTermsAccepted(e.target.checked)}
                             required
-                            className="mt-0.5 w-3.5 h-3.5 text-orange-600 border-gray-300 rounded focus:ring-orange-500"
+                            className="mt-0.5 w-4 h-4 text-orange-600 border-gray-300 rounded focus:ring-orange-500"
                           />
-                          <span className="text-[10px] text-gray-700">
+                          <span className="text-xs sm:text-sm text-gray-700">
                             Akceptuję{' '}
-                            <a href="/regulamin" target="_blank" className="text-orange-600 underline">regulamin</a>
+                            <a href="/regulamin" target="_blank" className="text-orange-600 underline hover:text-orange-700">regulamin</a>
                             {' '}i{' '}
-                            <a href="/polityka-prywatnosci" target="_blank" className="text-orange-600 underline">politykę prywatności</a>
+                            <a href="/polityka-prywatnosci" target="_blank" className="text-orange-600 underline hover:text-orange-700">politykę prywatności</a>
                           </span>
                         </label>
 
-                        <label className="flex items-start gap-1.5 cursor-pointer">
+                        <label className="flex items-start gap-2 cursor-pointer">
                           <input
                             type="checkbox"
                             checked={marketingConsent}
                             onChange={(e) => setMarketingConsent(e.target.checked)}
-                            className="mt-0.5 w-3.5 h-3.5 text-orange-600 border-gray-300 rounded focus:ring-orange-500"
+                            className="mt-0.5 w-4 h-4 text-orange-600 border-gray-300 rounded focus:ring-orange-500"
                           />
-                          <span className="text-[10px] text-gray-700">
+                          <span className="text-xs sm:text-sm text-gray-700">
                             Chcę otrzymywać promocje i nowości (opcjonalne)
                           </span>
                         </label>
@@ -246,7 +246,7 @@ export function RegistrationLightbox({
 
                       {/* ERROR MESSAGE */}
                       {error && (
-                        <div className="mb-2 p-1.5 bg-red-50 border border-red-200 rounded text-red-700 text-[10px]">
+                        <div className="mb-3 p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
                           {error}
                         </div>
                       )}
@@ -255,15 +255,15 @@ export function RegistrationLightbox({
                       <button
                         type="submit"
                         disabled={isLoading}
-                        className="w-full bg-orange-600 hover:bg-orange-700 text-white font-semibold py-2 text-xs rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-1.5"
+                        className="w-full bg-orange-600 hover:bg-orange-700 text-white font-semibold py-3 text-sm sm:text-base rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                       >
                         {isLoading ? (
                           <>
-                            <Loader2 className="w-3.5 h-3.5 animate-spin" />
-                            Tworzenie...
+                            <Loader2 className="w-4 h-4 sm:w-5 sm:h-5 animate-spin" />
+                            Tworzenie konta...
                           </>
                         ) : (
-                          'Załóż konto'
+                          'Załóż konto i śledź naprawę'
                         )}
                       </button>
                     </div>
@@ -273,16 +273,16 @@ export function RegistrationLightbox({
                       <button
                         type="button"
                         onClick={handleSkip}
-                        className="text-[10px] text-gray-500 hover:text-gray-700 underline"
+                        className="text-xs sm:text-sm text-gray-500 hover:text-gray-700 underline"
                       >
-                        Nie teraz, śledzę przez link
+                        Nie teraz, śledzę naprawę przez link w emailu
                       </button>
                     </div>
                   </form>
 
-                  {/* TRUST BADGES - kompaktowe */}
-                  <div className="mt-3 pt-2 border-t border-gray-200">
-                    <div className="flex items-center justify-center gap-3 text-[9px] text-gray-500">
+                  {/* TRUST BADGES */}
+                  <div className="mt-4 pt-3 border-t border-gray-200">
+                    <div className="flex items-center justify-center gap-4 sm:gap-6 text-xs sm:text-sm text-gray-500">
                       <span>🔒 SSL</span>
                       <span>✓ RODO</span>
                       <span>🇵🇱 Polskie prawo</span>
