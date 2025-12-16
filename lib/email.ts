@@ -983,9 +983,20 @@ function generateRepairSubmittedHTML(data: RepairSubmittedEmailData, shortId: st
 
           <!-- Track repair -->
           <div style="text-align: center; margin-bottom: 24px;">
-            <a href="https://serwiszebra.pl/panel" 
+            <a href="https://serwiszebra.pl/zgloszenie-wyslane?id=${data.repairId}" 
                style="display: inline-block; background-color: #2563eb; color: white; padding: 12px 32px; border-radius: 8px; text-decoration: none; font-weight: 600;">
               Śledź status naprawy
+            </a>
+          </div>
+
+          <!-- Register account hint -->
+          <div style="background-color: #f3f4f6; border-radius: 8px; padding: 16px; margin-bottom: 24px; text-align: center;">
+            <p style="margin: 0; color: #374151; font-size: 14px;">
+              💡 <strong>Załóż konto</strong> aby śledzić naprawę na żywo, płacić BLIK/kartą i korzystać z chatu z serwisem.
+            </p>
+            <a href="https://serwiszebra.pl/rejestracja" 
+               style="color: #2563eb; font-weight: 600; text-decoration: underline;">
+              Zarejestruj się →
             </a>
           </div>
 
@@ -993,7 +1004,7 @@ function generateRepairSubmittedHTML(data: RepairSubmittedEmailData, shortId: st
           <div style="text-align: center; color: #6b7280; font-size: 14px;">
             <p style="margin: 0 0 8px 0;">Masz pytania? Skontaktuj się z nami:</p>
             <p style="margin: 0;">
-              <strong>Tel:</strong> +48 601 619 898<br>
+              <strong>Tel:</strong> +48 607 819 688<br>
               <strong>Email:</strong> serwis@serwiszebra.pl
             </p>
           </div>
