@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createServiceClient } from '@/lib/supabase/server'
-import { createClient } from '@/lib/supabase/server'
 import { sendWelcomeEmail } from '@/lib/email'
 
 export async function POST(request: NextRequest) {
@@ -28,23 +27,21 @@ export async function POST(request: NextRequest) {
     // Używamy service client dla operacji na bazie
     const supabaseService = await createServiceClient()
 
-    // 1. Utwórz użytkownika w Supabase Auth
-    const supabase = await createClient()
-    const { data: authData, error: signUpError } = await supabase.auth.signUp({
+    // 1. Utwórz użytkownika w Supabase Auth (z auto-potwierdzeniem emaila)
+    const { data: authData, error: signUpError } = await supabaseService.auth.admin.createUser({
       email,
       password,
-      options: {
-        data: {
-          first_name: firstName || '',
-          last_name: lastName || '',
-        },
+      email_confirm: true, // Auto-potwierdź email - nie wymagamy weryfikacji
+      user_metadata: {
+        first_name: firstName || '',
+        last_name: lastName || '',
       },
     })
 
     if (signUpError) {
       console.error('❌ Sign up error:', signUpError)
 
-      if (signUpError.message.includes('already registered')) {
+      if (signUpError.message.includes('already registered') || signUpError.message.includes('already been registered')) {
         return NextResponse.json(
           { error: 'Ten email jest już zarejestrowany. Przejdź do logowania.' },
           { status: 400 }
