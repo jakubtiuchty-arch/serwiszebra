@@ -49,8 +49,11 @@ export default function AdminDashboard() {
     try {
       const response = await fetch(`/api/repairs/${repairId}/messages/unread`)
       const data = await response.json()
+      console.log(`[UNREAD] Repair ${repairId.slice(0,8)}: response=`, data)
       if (response.ok) {
         setUnreadCounts(prev => ({ ...prev, [repairId]: data.unreadCount || 0 }))
+      } else {
+        console.error(`[UNREAD] Error for ${repairId}:`, data)
       }
     } catch (error) {
       console.error('Error fetching unread count:', error)
