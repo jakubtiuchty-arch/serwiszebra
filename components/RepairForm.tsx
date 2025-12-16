@@ -25,7 +25,7 @@ const repairFormSchema = z.object({
   email: z.string().email('Nieprawidłowy adres email'),
   phone: z.string().min(9, 'Nieprawidłowy numer telefonu'),
   company: z.string().optional(),
-  nip: z.string().optional(),
+  nip: z.string().min(10, 'NIP musi mieć 10 cyfr').max(10, 'NIP musi mieć 10 cyfr'),
   
   // KROK 2: Szczegóły urządzenia
   deviceModel: z.string().min(1, 'Wpisz model urządzenia'),
@@ -176,7 +176,7 @@ export default function RepairForm() {
       formDataToSend.append('email', data.email)
       formDataToSend.append('phone', data.phone)
       if (data.company) formDataToSend.append('company', data.company)
-      if (data.nip) formDataToSend.append('nip', data.nip)
+      formDataToSend.append('nip', data.nip)
       
       formDataToSend.append('deviceModel', data.deviceModel)
       if (data.serialNumber) formDataToSend.append('serialNumber', data.serialNumber)
@@ -382,14 +382,18 @@ export default function RepairForm() {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    NIP (opcjonalnie)
+                    NIP <span className="text-red-500">*</span>
                   </label>
                   <input
                     {...register('nip')}
                     type="text"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className={`w-full px-3 py-2 border rounded-full focus:ring-2 focus:ring-blue-500 focus:border-transparent ${errors.nip ? 'border-red-500' : 'border-gray-300'}`}
                     placeholder="np. 1234567890"
+                    maxLength={10}
                   />
+                  {errors.nip && (
+                    <p className="mt-1 text-sm text-red-500">{errors.nip.message}</p>
+                  )}
                 </div>
               </div>
             )}
@@ -723,9 +727,7 @@ export default function RepairForm() {
                       {formData.company && (
                         <p><span className="text-gray-600">Firma:</span> <span className="font-medium">{formData.company}</span></p>
                       )}
-                      {formData.nip && (
-                        <p><span className="text-gray-600">NIP:</span> <span className="font-medium">{formData.nip}</span></p>
-                      )}
+                      <p><span className="text-gray-600">NIP:</span> <span className="font-medium">{formData.nip}</span></p>
                     </div>
                   </div>
 
