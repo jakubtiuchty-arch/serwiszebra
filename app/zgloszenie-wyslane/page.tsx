@@ -77,8 +77,9 @@ function ConfirmationContent() {
           </div>
 
           <div className="border-t border-gray-200 pt-3">
-            <p className="text-xs text-gray-500 text-center">
-              Zapisz ten numer - przyda się do śledzenia statusu
+            <p className="text-xs text-gray-600 text-center">
+              <strong>Będziemy informować Cię mailowo</strong> o postępach naprawy.<br/>
+              Zachowaj ten numer na wypadek kontaktu z serwisem.
             </p>
           </div>
         </div>
