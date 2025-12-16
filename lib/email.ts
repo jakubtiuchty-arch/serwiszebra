@@ -256,7 +256,7 @@ function generateOrderEmailHTML(data: OrderEmailData): string {
             TAKMA Tadeusz Tiuchty | ul. Poświęcka 1a, 51-128 Wrocław
           </p>
           <p style="margin: 0;">
-            NIP: 9151004377 | www.serwiszebra.pl
+            NIP: 9151004377 &nbsp;|&nbsp; www.serwiszebra.pl
           </p>
         </div>
 
@@ -780,7 +780,7 @@ function generateRepairSubmittedHTML(data: RepairSubmittedEmailData, shortId: st
             TAKMA Tadeusz Tiuchty | ul. Poświęcka 1a, 51-128 Wrocław
           </p>
           <p style="margin: 0;">
-            NIP: 9151004377 | www.serwiszebra.pl
+            NIP: 9151004377 &nbsp;|&nbsp; www.serwiszebra.pl
           </p>
         </div>
 
@@ -1017,7 +1017,7 @@ function generateWelcomeHTML(data: WelcomeEmailData): string {
             TAKMA Tadeusz Tiuchty | ul. Poświęcka 1a, 51-128 Wrocław
           </p>
           <p style="margin: 0;">
-            NIP: 9151004377 | www.serwiszebra.pl
+            NIP: 9151004377 &nbsp;|&nbsp; www.serwiszebra.pl
           </p>
         </div>
 
@@ -1158,7 +1158,7 @@ function generateQuoteAcceptedHTML(data: QuoteAcceptedEmailData, shortId: string
             TAKMA Tadeusz Tiuchty | ul. Poświęcka 1a, 51-128 Wrocław
           </p>
           <p style="margin: 0;">
-            NIP: 9151004377 | www.serwiszebra.pl
+            NIP: 9151004377 &nbsp;|&nbsp; www.serwiszebra.pl
           </p>
         </div>
 
@@ -1392,7 +1392,7 @@ function generateRepairStatusChangedHTML(data: RepairStatusChangedEmailData, sho
             TAKMA Tadeusz Tiuchty | ul. Poświęcka 1a, 51-128 Wrocław
           </p>
           <p style="margin: 0;">
-            NIP: 9151004377 | www.serwiszebra.pl
+            NIP: 9151004377 &nbsp;|&nbsp; www.serwiszebra.pl
           </p>
         </div>
 
@@ -1571,7 +1571,7 @@ function generateNewChatMessageHTML(data: NewChatMessageEmailData, shortId: stri
             TAKMA Tadeusz Tiuchty | ul. Poświęcka 1a, 51-128 Wrocław
           </p>
           <p style="margin: 0;">
-            NIP: 9151004377 | www.serwiszebra.pl
+            NIP: 9151004377 &nbsp;|&nbsp; www.serwiszebra.pl
           </p>
         </div>
 
@@ -1690,7 +1690,7 @@ function generateProFormaHTML(data: ProFormaEmailData, shortId: string): string 
             TAKMA Tadeusz Tiuchty | ul. Poświęcka 1a, 51-128 Wrocław
           </p>
           <p style="margin: 0;">
-            NIP: 9151004377 | www.serwiszebra.pl
+            NIP: 9151004377 &nbsp;|&nbsp; www.serwiszebra.pl
           </p>
         </div>
 
