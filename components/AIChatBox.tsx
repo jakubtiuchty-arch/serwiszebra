@@ -417,7 +417,7 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
             <div className="inline-block px-2.5 py-1 bg-white/70 rounded-full border border-gray-200 mb-1.5">
               <p className="text-[10px] font-semibold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">Autoryzowany</p>
             </div>
-            <h1 className="text-3xl font-bold text-gray-900 tracking-tight">
+            <h1 className="text-4xl font-bold text-gray-900 tracking-tight">
               Serwis Zebra
             </h1>
           </div>
