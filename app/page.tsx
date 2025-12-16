@@ -450,21 +450,8 @@ export default function HomePage() {
 
       {/* HERO - MOBILE VERSION (inline chat) */}
       <section className="md:hidden min-h-[50vh] max-h-[70vh] h-[60vh] flex flex-col relative overflow-hidden">
-        {/* Background image */}
-        <div className="absolute inset-0">
-          <Image 
-            src="/hero_ezd_1.jpeg" 
-            alt="Serwis Zebra" 
-            fill 
-            className="object-cover object-center opacity-15"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-blue-50/80 via-indigo-50/70 to-purple-50/80" />
-        </div>
         {/* Chat area - cały hero jest oknem chatu */}
-        <div className="relative z-10 flex-1 flex flex-col">
-          <AIChatBox variant="inline" />
-        </div>
+        <AIChatBox variant="inline" />
       </section>
 
       {/* HERO - DESKTOP VERSION (floating chat box) */}
