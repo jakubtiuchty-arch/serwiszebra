@@ -1468,7 +1468,10 @@ export async function sendNewChatMessageEmail(data: NewChatMessageEmailData) {
 function generateNewChatMessageHTML(data: NewChatMessageEmailData, shortId: string): string {
   const panelUrl = data.isToAdmin 
     ? `https://serwiszebra.pl/admin/zgloszenie/${data.repairId}`
-    : 'https://serwiszebra.pl/panel'
+    : `https://serwiszebra.pl/panel/naprawa/${data.repairId}`
+
+  const senderColor = data.isToAdmin ? '#10b981' : '#2563eb'
+  const senderLabel = data.isToAdmin ? 'Klient' : 'Serwis Zebra'
 
   return `
     <!DOCTYPE html>
@@ -1492,47 +1495,71 @@ function generateNewChatMessageHTML(data: NewChatMessageEmailData, shortId: stri
           
           <!-- Message icon -->
           <div style="text-align: center; margin-bottom: 32px;">
-            <div style="display: inline-block; background-color: #2563eb; width: 64px; height: 64px; border-radius: 50%; margin-bottom: 16px;">
+            <div style="display: inline-block; background-color: ${senderColor}; width: 64px; height: 64px; border-radius: 50%; margin-bottom: 16px;">
               <div style="color: white; font-size: 32px; line-height: 64px;">💬</div>
             </div>
             <h2 style="margin: 0 0 8px 0; font-size: 24px; color: #111827;">
-              Nowa wiadomość
+              Nowa wiadomość w czacie
             </h2>
             <p style="margin: 0; color: #6b7280;">
-              ${data.deviceModel} • #${shortId}
+              Masz nową wiadomość dotyczącą naprawy
             </p>
           </div>
 
-          <!-- Message preview -->
+          <!-- Repair info -->
           <div style="background-color: #f9fafb; border-radius: 8px; padding: 20px; margin-bottom: 24px;">
-            <div style="display: flex; align-items: center; margin-bottom: 12px;">
-              <div style="width: 32px; height: 32px; background-color: ${data.isToAdmin ? '#10b981' : '#2563eb'}; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 12px;">
-                <span style="color: white; font-size: 14px; font-weight: 600;">${data.senderName.charAt(0).toUpperCase()}</span>
-              </div>
-              <div>
-                <div style="font-weight: 600; color: #111827;">${data.senderName}</div>
-                <div style="font-size: 12px; color: #6b7280;">${data.isToAdmin ? 'Klient' : 'Serwis'}</div>
-              </div>
+            <table style="width: 100%;">
+              <tr>
+                <td style="color: #6b7280; font-size: 14px;">Nr zgłoszenia:</td>
+                <td style="text-align: right; font-weight: 600; color: #111827; font-family: monospace;">#${shortId}</td>
+              </tr>
+              <tr>
+                <td style="color: #6b7280; font-size: 14px; padding-top: 8px;">Urządzenie:</td>
+                <td style="text-align: right; padding-top: 8px; font-weight: 600;">${data.deviceModel}</td>
+              </tr>
+              <tr>
+                <td style="color: #6b7280; font-size: 14px; padding-top: 8px;">Od:</td>
+                <td style="text-align: right; padding-top: 8px;">
+                  <span style="background-color: ${senderColor}20; color: ${senderColor}; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 600;">
+                    ${senderLabel}
+                  </span>
+                </td>
+              </tr>
+            </table>
+          </div>
+
+          <!-- Message preview -->
+          <div style="background-color: #dbeafe; border-radius: 8px; padding: 20px; margin-bottom: 24px; border-left: 4px solid ${senderColor};">
+            <div style="margin-bottom: 8px;">
+              <span style="font-weight: 600; color: #1e40af; font-size: 14px;">${data.senderName}</span>
+              <span style="color: #6b7280; font-size: 12px; margin-left: 8px;">napisał(a):</span>
             </div>
-            <div style="background-color: white; border-radius: 8px; padding: 12px; border: 1px solid #e5e7eb;">
-              <p style="margin: 0; color: #374151; font-size: 14px; line-height: 1.5;">
-                ${data.messagePreview}
-              </p>
-            </div>
+            <p style="margin: 0; color: #1e3a8a; font-size: 15px; line-height: 1.6; font-style: italic;">
+              "${data.messagePreview}"
+            </p>
           </div>
 
           <!-- CTA -->
           <div style="text-align: center; margin-bottom: 24px;">
             <a href="${panelUrl}" 
-               style="display: inline-block; background-color: #2563eb; color: white; padding: 12px 32px; border-radius: 8px; text-decoration: none; font-weight: 600;">
+               style="display: inline-block; background-color: #2563eb; color: white; padding: 14px 36px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 16px;">
               Odpowiedz w panelu
             </a>
           </div>
 
+          <!-- Info -->
+          <div style="background-color: #fef3c7; border-radius: 8px; padding: 16px; margin-bottom: 24px; text-align: center;">
+            <p style="margin: 0; color: #92400e; font-size: 13px;">
+              ⚠️ Nie odpowiadaj na tego maila - użyj chatu w panelu serwisowym.
+            </p>
+          </div>
+
           <!-- Contact -->
           <div style="text-align: center; color: #6b7280; font-size: 14px;">
+            <p style="margin: 0 0 8px 0;">Masz pytania? Skontaktuj się z nami:</p>
             <p style="margin: 0;">
-              Nie odpowiadaj na tego maila - użyj chatu w panelu.
+              <strong>Tel:</strong> +48 607 819 688<br>
+              <strong>Email:</strong> serwis@serwiszebra.pl
             </p>
           </div>
 
