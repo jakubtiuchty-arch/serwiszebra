@@ -2,9 +2,10 @@
 
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { ClipboardList, Search, AlertCircle, Clock, CheckCircle, XCircle } from 'lucide-react'
+import { ClipboardList, Search, AlertCircle, Clock, CheckCircle, XCircle, MessageCircle } from 'lucide-react'
 import { format } from 'date-fns'
 import { pl } from 'date-fns/locale'
+import { createClient } from '@/lib/supabase/client'
 
 interface RepairRequest {
   id: string
@@ -33,13 +34,28 @@ interface Stats {
 
 export default function AdminDashboard() {
   const router = useRouter()
+  const supabase = createClient()
   const [repairs, setRepairs] = useState<RepairRequest[]>([])
   const [stats, setStats] = useState<Stats>({ total: 0, active: 0, completed: 0, users: 0 })
   const [loading, setLoading] = useState(true)
+  const [unreadCounts, setUnreadCounts] = useState<Record<string, number>>({})
   
   // Filtry
   const [statusFilter, setStatusFilter] = useState<string>('all')
   const [searchQuery, setSearchQuery] = useState('')
+
+  // Pobieranie liczby nieprzeczytanych wiadomości dla naprawy
+  const fetchUnreadCount = async (repairId: string) => {
+    try {
+      const response = await fetch(`/api/repairs/${repairId}/messages/unread`)
+      const data = await response.json()
+      if (response.ok) {
+        setUnreadCounts(prev => ({ ...prev, [repairId]: data.unreadCount || 0 }))
+      }
+    } catch (error) {
+      console.error('Error fetching unread count:', error)
+    }
+  }
 
   // Pobieranie zgłoszeń
   const fetchRepairs = async () => {
@@ -66,6 +82,37 @@ export default function AdminDashboard() {
   useEffect(() => {
     fetchRepairs()
   }, [statusFilter, searchQuery])
+
+  // Pobieranie unread counts dla wszystkich napraw
+  useEffect(() => {
+    if (repairs.length > 0) {
+      repairs.forEach(repair => {
+        fetchUnreadCount(repair.id)
+      })
+
+      // Realtime subscription dla nowych wiadomości
+      const channel = supabase
+        .channel('admin_repair_messages')
+        .on(
+          'postgres_changes',
+          {
+            event: '*',
+            schema: 'public',
+            table: 'repair_messages',
+          },
+          (payload: any) => {
+            if (payload.new?.repair_request_id) {
+              fetchUnreadCount(payload.new.repair_request_id)
+            }
+          }
+        )
+        .subscribe()
+
+      return () => {
+        supabase.removeChannel(channel)
+      }
+    }
+  }, [repairs])
 
   // Mapowanie statusów na kolory i polskie nazwy
   const getStatusInfo = (status: string) => {
@@ -193,8 +240,17 @@ export default function AdminDashboard() {
                 >
                   <div className="flex items-start justify-between mb-2">
                     <div>
-                      <div className="text-xs font-bold text-gray-900">
-                        #{repair.id.slice(0, 8).toUpperCase()}
+                      <div className="flex items-center gap-2">
+                        <div className="text-xs font-bold text-gray-900">
+                          #{repair.id.slice(0, 8).toUpperCase()}
+                        </div>
+                        {/* Badge nieprzeczytanych wiadomości */}
+                        {unreadCounts[repair.id] > 0 && (
+                          <div className="flex items-center gap-1 bg-blue-600 text-white px-1.5 py-0.5 rounded-full text-[10px] font-bold animate-pulse">
+                            <MessageCircle className="w-2.5 h-2.5" />
+                            {unreadCounts[repair.id]}
+                          </div>
+                        )}
                       </div>
                       <div className="text-[10px] text-gray-500">
                         {format(new Date(repair.created_at), 'dd MMM yyyy', { locale: pl })}
@@ -256,8 +312,17 @@ export default function AdminDashboard() {
                     return (
                       <tr key={repair.id} className="hover:bg-gray-50 transition-colors">
                         <td className="px-4 py-2.5 whitespace-nowrap">
-                          <div className="text-xs font-semibold text-gray-900">
-                            #{repair.id.slice(0, 8).toUpperCase()}
+                          <div className="flex items-center gap-2">
+                            <div className="text-xs font-semibold text-gray-900">
+                              #{repair.id.slice(0, 8).toUpperCase()}
+                            </div>
+                            {/* Badge nieprzeczytanych wiadomości */}
+                            {unreadCounts[repair.id] > 0 && (
+                              <div className="flex items-center gap-1 bg-blue-600 text-white px-1.5 py-0.5 rounded-full text-[10px] font-bold animate-pulse">
+                                <MessageCircle className="w-2.5 h-2.5" />
+                                {unreadCounts[repair.id]}
+                              </div>
+                            )}
                           </div>
                           <div className="text-[10px] text-gray-500">
                             {format(new Date(repair.created_at), 'dd MMM yyyy', { locale: pl })}
