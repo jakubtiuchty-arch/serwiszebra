@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { stripe } from '@/lib/stripe/server'
+import { sendRepairPaidAdminEmail } from '@/lib/email'
 
 export async function POST(
   request: NextRequest,
@@ -121,6 +122,20 @@ export async function POST(
       }
     } catch (historyErr) {
       console.warn('⚠️ History insert failed:', historyErr)
+    }
+
+    // Wyślij email do admina o opłaceniu
+    try {
+      await sendRepairPaidAdminEmail({
+        to: process.env.ADMIN_EMAIL || 'serwis@serwiszebra.pl',
+        repairId: repairId,
+        customerName: `${repair.first_name} ${repair.last_name}`,
+        deviceModel: repair.device_model,
+        amount: repair.final_price || repair.estimated_price || 0
+      })
+      console.log('✅ Payment notification sent to admin')
+    } catch (emailError) {
+      console.error('⚠️ Payment admin email error:', emailError)
     }
 
     return NextResponse.json({

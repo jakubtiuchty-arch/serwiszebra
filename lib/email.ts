@@ -427,6 +427,232 @@ function generateRepairShippedHTML(data: RepairShippedEmailData): string {
     </html>
   `
 }
+
+// ========== EMAIL O GOTOWEJ WYCENIE - DO KLIENTA ==========
+
+interface QuoteReadyEmailData {
+  to: string
+  customerName: string
+  repairId: string
+  deviceModel: string
+  amount: number
+  notes?: string
+}
+
+export async function sendQuoteReadyEmail(data: QuoteReadyEmailData) {
+  try {
+    const shortId = data.repairId.split('-')[0].toUpperCase()
+    
+    const email = await resend.emails.send({
+      from: 'Serwis Zebra <serwis@serwiszebra.pl>',
+      to: data.to,
+      subject: `💰 Wycena naprawy gotowa - ${data.deviceModel} #${shortId}`,
+      html: generateQuoteReadyHTML(data, shortId)
+    })
+    
+    console.log('[Email] Quote ready email sent to customer:', email)
+    return email
+    
+  } catch (error) {
+    console.error('[Email] Error sending quote ready email:', error)
+    throw error
+  }
+}
+
+function generateQuoteReadyHTML(data: QuoteReadyEmailData, shortId: string): string {
+  return `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f3f4f6;">
+      <div style="max-width: 600px; margin: 0 auto; background-color: white;">
+        
+        <!-- Header -->
+        <div style="background-color: #111827; padding: 32px 24px; text-align: center;">
+          <h1 style="color: white; margin: 0; font-size: 28px; font-weight: 700;">
+            SERWIS ZEBRA
+          </h1>
+        </div>
+
+        <!-- Content -->
+        <div style="padding: 32px 24px;">
+          
+          <!-- Icon -->
+          <div style="text-align: center; margin-bottom: 32px;">
+            <div style="display: inline-block; background-color: #f59e0b; width: 64px; height: 64px; border-radius: 50%; margin-bottom: 16px;">
+              <div style="color: white; font-size: 32px; line-height: 64px;">💰</div>
+            </div>
+            <h2 style="margin: 0 0 8px 0; font-size: 24px; color: #111827;">
+              Wycena gotowa!
+            </h2>
+            <p style="margin: 0; color: #6b7280;">
+              Zaakceptuj wycenę, aby rozpocząć naprawę
+            </p>
+          </div>
+
+          <!-- Quote info -->
+          <div style="background-color: #f9fafb; border-radius: 8px; padding: 20px; margin-bottom: 24px;">
+            <table style="width: 100%;">
+              <tr>
+                <td style="color: #6b7280; font-size: 14px;">Nr zgłoszenia:</td>
+                <td style="text-align: right; font-weight: 600; color: #111827; font-family: monospace;">#${shortId}</td>
+              </tr>
+              <tr>
+                <td style="color: #6b7280; font-size: 14px; padding-top: 8px;">Urządzenie:</td>
+                <td style="text-align: right; padding-top: 8px; font-weight: 600;">${data.deviceModel}</td>
+              </tr>
+              <tr>
+                <td style="color: #6b7280; font-size: 14px; padding-top: 12px;">Koszt naprawy:</td>
+                <td style="text-align: right; padding-top: 12px; font-weight: 700; font-size: 24px; color: #059669;">${data.amount.toFixed(2)} zł</td>
+              </tr>
+            </table>
+          </div>
+
+          ${data.notes ? `
+          <!-- Notes -->
+          <div style="background-color: #fef3c7; border-radius: 8px; padding: 16px; margin-bottom: 24px;">
+            <h4 style="margin: 0 0 8px 0; font-size: 14px; color: #92400e;">Notatka od serwisu:</h4>
+            <p style="margin: 0; color: #451a03; font-size: 14px;">${data.notes}</p>
+          </div>
+          ` : ''}
+
+          <!-- Next steps -->
+          <div style="background-color: #dbeafe; border-radius: 8px; padding: 20px; margin-bottom: 24px;">
+            <h4 style="margin: 0 0 12px 0; font-size: 16px; color: #1e40af;">
+              Co dalej?
+            </h4>
+            <ol style="margin: 0; padding-left: 20px; color: #1e3a8a; font-size: 14px; line-height: 1.8;">
+              <li>Zaloguj się do Panelu Klienta</li>
+              <li>Zaakceptuj wycenę</li>
+              <li>Wybierz metodę płatności (karta/BLIK lub przelew)</li>
+              <li>Po opłaceniu rozpoczniemy naprawę!</li>
+            </ol>
+          </div>
+
+          <!-- CTA -->
+          <div style="text-align: center; margin-bottom: 24px;">
+            <a href="https://serwiszebra.pl/panel/naprawa/${data.repairId}" 
+               style="display: inline-block; background-color: #f59e0b; color: white; padding: 14px 36px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 16px;">
+              Zaakceptuj wycenę
+            </a>
+          </div>
+
+          <!-- Contact -->
+          <div style="text-align: center; color: #6b7280; font-size: 14px;">
+            <p style="margin: 0 0 8px 0;">Masz pytania? Skontaktuj się z nami:</p>
+            <p style="margin: 0;">
+              <strong>Tel:</strong> +48 607 819 688<br>
+              <strong>Email:</strong> serwis@serwiszebra.pl
+            </p>
+          </div>
+
+        </div>
+
+        <!-- Footer -->
+        <div style="background-color: #f3f4f6; padding: 24px; text-align: center; color: #6b7280; font-size: 12px;">
+          <p style="margin: 0 0 4px 0;">
+            TAKMA Tadeusz Tiuchty | ul. Poświęcka 1a, 51-128 Wrocław
+          </p>
+          <p style="margin: 0;">
+            NIP: 9151004377 &nbsp;|&nbsp; www.serwiszebra.pl
+          </p>
+        </div>
+
+      </div>
+    </body>
+    </html>
+  `
+}
+
+// ========== EMAIL O PRO FORMIE - DO ADMINA ==========
+
+interface ProFormaAdminEmailData {
+  to: string
+  repairId: string
+  customerName: string
+  deviceModel: string
+  amount: number
+}
+
+export async function sendProFormaAdminEmail(data: ProFormaAdminEmailData) {
+  try {
+    const shortId = data.repairId.split('-')[0].toUpperCase()
+    
+    const email = await resend.emails.send({
+      from: 'System Serwisowy <system@serwiszebra.pl>',
+      to: data.to,
+      subject: `📄 Pro Forma wybrana - naprawa #${shortId}`,
+      html: generateProFormaAdminHTML(data, shortId)
+    })
+    
+    console.log('[Email] Pro Forma admin notification sent:', email)
+    return email
+    
+  } catch (error) {
+    console.error('[Email] Error sending Pro Forma admin email:', error)
+    throw error
+  }
+}
+
+function generateProFormaAdminHTML(data: ProFormaAdminEmailData, shortId: string): string {
+  return `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f3f4f6;">
+      <div style="max-width: 600px; margin: 0 auto; background-color: white; padding: 20px;">
+        
+        <div style="background-color: #f59e0b; color: white; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+          <h2 style="margin: 0;">📄 Klient wybrał Pro Forma</h2>
+        </div>
+
+        <div style="background-color: #f9fafb; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+          <h3 style="margin-top: 0;">Szczegóły naprawy:</h3>
+          <table style="width: 100%; border-collapse: collapse;">
+            <tr>
+              <td style="padding: 8px 0; border-bottom: 1px solid #e5e7eb;"><strong>Nr zgłoszenia:</strong></td>
+              <td style="padding: 8px 0; border-bottom: 1px solid #e5e7eb; font-family: monospace;">#${shortId}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0; border-bottom: 1px solid #e5e7eb;"><strong>Klient:</strong></td>
+              <td style="padding: 8px 0; border-bottom: 1px solid #e5e7eb;">${data.customerName}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0; border-bottom: 1px solid #e5e7eb;"><strong>Urządzenie:</strong></td>
+              <td style="padding: 8px 0; border-bottom: 1px solid #e5e7eb;">${data.deviceModel}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0;"><strong>Kwota:</strong></td>
+              <td style="padding: 8px 0; font-weight: bold; color: #059669;">${data.amount.toFixed(2)} zł</td>
+            </tr>
+          </table>
+        </div>
+
+        <div style="background-color: #fef3c7; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+          <p style="margin: 0; color: #92400e;">
+            ⏳ Oczekiwanie na przelew od klienta. Po zaksięgowaniu wpłaty zmień status na "W naprawie".
+          </p>
+        </div>
+
+        <div style="text-align: center;">
+          <a href="https://serwiszebra.pl/admin/zgloszenie/${data.repairId}" 
+             style="display: inline-block; background-color: #111827; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600;">
+            Przejdź do zgłoszenia
+          </a>
+        </div>
+
+      </div>
+    </body>
+    </html>
+  `
+}
+
 // ========== EMAIL O OPŁACONEJ NAPRAWIE - KLIENT ==========
 
 interface RepairPaidEmailData {

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { requireAdminServer } from '@/lib/auth-server'
 import { createClient } from '@/lib/supabase/server'
+import { sendQuoteReadyEmail } from '@/lib/email'
 
 export async function PATCH(
   request: NextRequest,
@@ -62,6 +63,13 @@ export async function PATCH(
       updateData.status = 'wycena'
     }
 
+    // Pobierz dane naprawy przed aktualizacją (do emaila)
+    const { data: repairData } = await supabase
+      .from('repair_requests')
+      .select('email, first_name, last_name, device_model')
+      .eq('id', repairId)
+      .single()
+
     // Aktualizacja wyceny w repair_requests
     const { data: updatedRepair, error: updateError } = await supabase
       .from('repair_requests')
@@ -76,6 +84,23 @@ export async function PATCH(
         { error: 'Błąd aktualizacji wyceny' },
         { status: 500 }
       )
+    }
+
+    // Wyślij email do klienta o nowej wycenie
+    if (shouldChangeStatus && repairData) {
+      try {
+        await sendQuoteReadyEmail({
+          to: repairData.email,
+          customerName: `${repairData.first_name} ${repairData.last_name}`,
+          repairId: repairId,
+          deviceModel: repairData.device_model,
+          amount: parseFloat(estimated_price),
+          notes: notes || undefined
+        })
+        console.log('✅ Quote ready email sent to customer')
+      } catch (emailError) {
+        console.error('⚠️ Quote ready email error:', emailError)
+      }
     }
 
     // Dodanie wpisu do historii zmian TYLKO jeśli status się FAKTYCZNIE zmienił
