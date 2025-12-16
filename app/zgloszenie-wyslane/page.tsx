@@ -38,99 +38,99 @@ function ConfirmationContent() {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-white py-20 px-6">
-      <div className="max-w-3xl mx-auto">
-        {/* Success Icon */}
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-24 h-24 bg-green-100 rounded-full mb-6">
-            <CheckCircle className="w-16 h-16 text-green-600" />
+    <main className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-white py-10 px-4">
+      <div className="max-w-xl mx-auto">
+        {/* Success Icon + Header */}
+        <div className="text-center mb-6">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-4">
+            <CheckCircle className="w-10 h-10 text-green-600" />
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
             Zgłoszenie wysłane!
           </h1>
-          <p className="text-xl text-gray-600">
-            Otrzymaliśmy Twoje zgłoszenie i wkrótce się z Tobą skontaktujemy
+          <p className="text-base text-gray-600">
+            Otrzymaliśmy Twoje zgłoszenie i wkrótce się skontaktujemy
           </p>
         </div>
 
         {/* Request ID Card */}
-        <div className="bg-white rounded-3xl shadow-xl border border-gray-200 p-8 mb-8">
-          <div className="text-center mb-6">
-            <p className="text-sm font-medium text-gray-600 mb-2">
-              Numer Twojego zgłoszenia
+        <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-5 mb-6">
+          <div className="text-center mb-4">
+            <p className="text-xs font-medium text-gray-500 mb-2">
+              Numer zgłoszenia
             </p>
-            <div className="flex items-center justify-center gap-3">
-              <code className="text-lg md:text-xl font-mono bg-gray-100 px-6 py-3 rounded-xl text-gray-900">
-                {requestId}
+            <div className="flex items-center justify-center gap-2">
+              <code className="text-sm md:text-base font-mono bg-gray-100 px-4 py-2 rounded-lg text-gray-900">
+                #{requestId?.slice(0, 8).toUpperCase()}
               </code>
               <button
                 onClick={handleCopy}
-                className="p-3 hover:bg-gray-100 rounded-xl transition-colors"
+                className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
                 title="Kopiuj numer"
               >
-                <Copy className={`w-5 h-5 ${copied ? 'text-green-600' : 'text-gray-600'}`} />
+                <Copy className={`w-4 h-4 ${copied ? 'text-green-600' : 'text-gray-500'}`} />
               </button>
             </div>
             {copied && (
-              <p className="text-sm text-green-600 mt-2">✓ Skopiowano do schowka</p>
+              <p className="text-xs text-green-600 mt-1">✓ Skopiowano</p>
             )}
           </div>
 
-          <div className="border-t border-gray-200 pt-6">
-            <p className="text-sm text-gray-600 text-center">
-              Zapisz ten numer - będzie potrzebny do śledzenia statusu naprawy
+          <div className="border-t border-gray-200 pt-3">
+            <p className="text-xs text-gray-500 text-center">
+              Zapisz ten numer - przyda się do śledzenia statusu
             </p>
           </div>
         </div>
 
         {/* Co dalej? */}
-        <div className="bg-white rounded-3xl shadow-xl border border-gray-200 p-8 mb-8">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-6 text-center">
+        <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-5 mb-6">
+          <h2 className="text-lg font-semibold text-gray-900 mb-4 text-center">
             Co dalej?
           </h2>
 
-          <div className="space-y-6">
+          <div className="space-y-4">
             {/* Krok 1 */}
-            <div className="flex items-start gap-4">
-              <div className="flex-shrink-0 w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-                <Mail className="w-5 h-5 text-blue-600" />
+            <div className="flex items-start gap-3">
+              <div className="flex-shrink-0 w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                <Mail className="w-4 h-4 text-blue-600" />
               </div>
               <div>
-                <h3 className="font-semibold text-gray-900 mb-1">
-                  1. Sprawdź swoją skrzynkę email
+                <h3 className="text-sm font-semibold text-gray-900">
+                  1. Sprawdź email
                 </h3>
-                <p className="text-sm text-gray-600">
-                  Wysłaliśmy Ci potwierdzenie na podany adres email z wszystkimi szczegółami zgłoszenia.
+                <p className="text-xs text-gray-600">
+                  Wysłaliśmy potwierdzenie ze szczegółami zgłoszenia.
                 </p>
               </div>
             </div>
 
             {/* Krok 2 */}
-            <div className="flex items-start gap-4">
-              <div className="flex-shrink-0 w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-                <Package className="w-5 h-5 text-blue-600" />
+            <div className="flex items-start gap-3">
+              <div className="flex-shrink-0 w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                <Package className="w-4 h-4 text-blue-600" />
               </div>
               <div>
-                <h3 className="font-semibold text-gray-900 mb-1">
-                  2. Kurier odbierze urządzenie
+                <h3 className="text-sm font-semibold text-gray-900">
+                  2. Spakuj urządzenie
                 </h3>
-                <p className="text-sm text-gray-600">
-                  W wybranym przez Ciebie terminie kurier odbierze urządzenie z podanego adresu - całkowicie za darmo.
+                <p className="text-xs text-gray-600">
+                  Kurier odbierze je w wybranym terminie.
                 </p>
               </div>
             </div>
 
             {/* Krok 3 */}
-            <div className="flex items-start gap-4">
-              <div className="flex-shrink-0 w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-                <CheckCircle className="w-5 h-5 text-blue-600" />
+            <div className="flex items-start gap-3">
+              <div className="flex-shrink-0 w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                <CheckCircle className="w-4 h-4 text-blue-600" />
               </div>
               <div>
-                <h3 className="font-semibold text-gray-900 mb-1">
-                  3. Przeprowadzimy diagnostykę
+                <h3 className="text-sm font-semibold text-gray-900">
+                  3. Diagnoza i wycena
                 </h3>
-                <p className="text-sm text-gray-600">
-                  Nasi technicy zbadają urządzenie i skontaktują się z Tobą z wyceną naprawy.
+                <p className="text-xs text-gray-600">
+                  Skontaktujemy się z wyceną naprawy.
                 </p>
               </div>
             </div>
@@ -138,30 +138,27 @@ function ConfirmationContent() {
         </div>
 
         {/* Contact Info */}
-        <div className="bg-blue-50 border border-blue-200 rounded-xl p-6 mb-8">
-          <h3 className="font-semibold text-blue-900 mb-3">
+        <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-6">
+          <h3 className="text-sm font-semibold text-blue-900 mb-2">
             Masz pytania?
           </h3>
-          <p className="text-sm text-blue-800 mb-3">
-            Skontaktuj się z nami:
-          </p>
-          <div className="space-y-2 text-sm">
-            <p className="text-blue-900">
-              📧 Email: <a href="mailto:serwis@serwiszebra.pl" className="font-medium underline">serwis@serwiszebra.pl</a>
+          <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs">
+            <p className="text-blue-800">
+              📧 <a href="mailto:serwis@serwiszebra.pl" className="font-medium underline">serwis@serwiszebra.pl</a>
             </p>
-            <p className="text-blue-900">
-              📞 Telefon: <a href="tel:+48123456789" className="font-medium underline">+48 123 456 789</a>
+            <p className="text-blue-800">
+              📞 <a href="tel:+48607819688" className="font-medium underline">+48 607 819 688</a>
             </p>
           </div>
         </div>
 
-        {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        {/* CTA Button */}
+        <div className="text-center">
           <Link
             href="/"
-            className="flex items-center justify-center gap-2 px-8 py-4 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition-colors"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition-colors text-sm"
           >
-            <Home className="w-5 h-5" />
+            <Home className="w-4 h-4" />
             Wróć na stronę główną
           </Link>
         </div>
