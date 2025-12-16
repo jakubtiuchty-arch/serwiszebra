@@ -973,7 +973,7 @@ function generateRepairSubmittedHTML(data: RepairSubmittedEmailData, shortId: st
               Co dalej?
             </h4>
             <ol style="margin: 0; padding-left: 20px; color: #1e3a8a; font-size: 14px; line-height: 1.8;">
-              <li>Zamów kuriera lub wyślij urządzenie na własną rękę</li>
+              <li>Spakuj urządzenie i czekaj na kuriera</li>
               <li>Po otrzymaniu przeprowadzimy diagnozę</li>
               <li>Otrzymasz wycenę naprawy do akceptacji</li>
               <li>Po akceptacji i płatności naprawimy urządzenie</li>
