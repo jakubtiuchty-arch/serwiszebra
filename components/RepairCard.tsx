@@ -1,7 +1,11 @@
+'use client'
+
 import Link from 'next/link'
 import { formatDistanceToNow } from 'date-fns'
 import { pl } from 'date-fns/locale'
-import { Package, Calendar } from 'lucide-react'
+import { Package, Calendar, MessageCircle } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import { createClient } from '@/lib/supabase/client'
 
 interface RepairCardProps {
   repair: {
@@ -153,6 +157,46 @@ const STATUS_CONFIG = {
 } as const
 
 export default function RepairCard({ repair }: RepairCardProps) {
+  const [unreadCount, setUnreadCount] = useState(0)
+  const supabase = createClient()
+
+  useEffect(() => {
+    const fetchUnread = async () => {
+      try {
+        const response = await fetch(`/api/repairs/${repair.id}/messages/unread`)
+        const data = await response.json()
+        if (response.ok) {
+          setUnreadCount(data.unreadCount || 0)
+        }
+      } catch (error) {
+        console.error('Error fetching unread count:', error)
+      }
+    }
+
+    fetchUnread()
+
+    // Realtime subscription dla nowych wiadomości
+    const channel = supabase
+      .channel(`repair_messages_unread:${repair.id}`)
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'repair_messages',
+          filter: `repair_request_id=eq.${repair.id}`,
+        },
+        () => {
+          fetchUnread()
+        }
+      )
+      .subscribe()
+
+    return () => {
+      supabase.removeChannel(channel)
+    }
+  }, [repair.id])
+
   const timeAgo = formatDistanceToNow(new Date(repair.created_at), {
     addSuffix: true,
     locale: pl,
@@ -171,7 +215,7 @@ export default function RepairCard({ repair }: RepairCardProps) {
   return (
     <Link href={`/panel/naprawa/${repair.id}`}>
       <div className="bg-white rounded-lg border-2 border-gray-200 p-3 hover:shadow-lg hover:border-blue-300 transition-all duration-200 cursor-pointer group">
-        {/* Header: Model + ID */}
+        {/* Header: Model + ID + Badge */}
         <div className="flex items-start justify-between gap-2 mb-2">
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-1.5 mb-0.5">
@@ -184,6 +228,13 @@ export default function RepairCard({ repair }: RepairCardProps) {
               ID: #{shortId}
             </p>
           </div>
+          {/* Badge nieprzeczytanych wiadomości */}
+          {unreadCount > 0 && (
+            <div className="flex items-center gap-1 bg-blue-600 text-white px-2 py-1 rounded-full text-[10px] font-bold animate-pulse">
+              <MessageCircle className="w-3 h-3" />
+              {unreadCount}
+            </div>
+          )}
         </div>
 
         {/* Status Progress Box */}

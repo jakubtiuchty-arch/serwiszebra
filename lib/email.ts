@@ -1433,6 +1433,127 @@ export async function sendProFormaEmail(data: ProFormaEmailData) {
   }
 }
 
+// ========== EMAIL O NOWEJ WIADOMOŚCI NA CZACIE ==========
+
+interface NewChatMessageEmailData {
+  to: string
+  customerName: string
+  repairId: string
+  deviceModel: string
+  senderName: string
+  messagePreview: string
+  isToAdmin: boolean
+}
+
+export async function sendNewChatMessageEmail(data: NewChatMessageEmailData) {
+  try {
+    const shortId = data.repairId.split('-')[0].toUpperCase()
+    
+    const email = await resend.emails.send({
+      from: 'Serwis Zebra <serwis@serwiszebra.pl>',
+      to: data.to,
+      subject: `💬 Nowa wiadomość - naprawa #${shortId}`,
+      html: generateNewChatMessageHTML(data, shortId)
+    })
+    
+    console.log('[Email] New chat message email sent:', email)
+    return email
+    
+  } catch (error) {
+    console.error('[Email] Error sending new chat message email:', error)
+    throw error
+  }
+}
+
+function generateNewChatMessageHTML(data: NewChatMessageEmailData, shortId: string): string {
+  const panelUrl = data.isToAdmin 
+    ? `https://serwiszebra.pl/admin/zgloszenie/${data.repairId}`
+    : 'https://serwiszebra.pl/panel'
+
+  return `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f3f4f6;">
+      <div style="max-width: 600px; margin: 0 auto; background-color: white;">
+        
+        <!-- Header -->
+        <div style="background-color: #111827; padding: 32px 24px; text-align: center;">
+          <h1 style="color: white; margin: 0; font-size: 28px; font-weight: 700;">
+            SERWIS ZEBRA
+          </h1>
+        </div>
+
+        <!-- Content -->
+        <div style="padding: 32px 24px;">
+          
+          <!-- Message icon -->
+          <div style="text-align: center; margin-bottom: 32px;">
+            <div style="display: inline-block; background-color: #2563eb; width: 64px; height: 64px; border-radius: 50%; margin-bottom: 16px;">
+              <div style="color: white; font-size: 32px; line-height: 64px;">💬</div>
+            </div>
+            <h2 style="margin: 0 0 8px 0; font-size: 24px; color: #111827;">
+              Nowa wiadomość
+            </h2>
+            <p style="margin: 0; color: #6b7280;">
+              ${data.deviceModel} • #${shortId}
+            </p>
+          </div>
+
+          <!-- Message preview -->
+          <div style="background-color: #f9fafb; border-radius: 8px; padding: 20px; margin-bottom: 24px;">
+            <div style="display: flex; align-items: center; margin-bottom: 12px;">
+              <div style="width: 32px; height: 32px; background-color: ${data.isToAdmin ? '#10b981' : '#2563eb'}; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 12px;">
+                <span style="color: white; font-size: 14px; font-weight: 600;">${data.senderName.charAt(0).toUpperCase()}</span>
+              </div>
+              <div>
+                <div style="font-weight: 600; color: #111827;">${data.senderName}</div>
+                <div style="font-size: 12px; color: #6b7280;">${data.isToAdmin ? 'Klient' : 'Serwis'}</div>
+              </div>
+            </div>
+            <div style="background-color: white; border-radius: 8px; padding: 12px; border: 1px solid #e5e7eb;">
+              <p style="margin: 0; color: #374151; font-size: 14px; line-height: 1.5;">
+                ${data.messagePreview}
+              </p>
+            </div>
+          </div>
+
+          <!-- CTA -->
+          <div style="text-align: center; margin-bottom: 24px;">
+            <a href="${panelUrl}" 
+               style="display: inline-block; background-color: #2563eb; color: white; padding: 12px 32px; border-radius: 8px; text-decoration: none; font-weight: 600;">
+              Odpowiedz w panelu
+            </a>
+          </div>
+
+          <!-- Contact -->
+          <div style="text-align: center; color: #6b7280; font-size: 14px;">
+            <p style="margin: 0;">
+              Nie odpowiadaj na tego maila - użyj chatu w panelu.
+            </p>
+          </div>
+
+        </div>
+
+        <!-- Footer -->
+        <div style="background-color: #f3f4f6; padding: 24px; text-align: center; color: #6b7280; font-size: 12px;">
+          <p style="margin: 0 0 4px 0;">
+            TAKMA Tadeusz Tiuchty | ul. Poświęcka 1a, 51-128 Wrocław
+          </p>
+          <p style="margin: 0;">
+            NIP: 9151004377 | www.serwiszebra.pl
+          </p>
+        </div>
+
+      </div>
+    </body>
+    </html>
+  `
+}
+
 function generateProFormaHTML(data: ProFormaEmailData, shortId: string): string {
   return `
     <!DOCTYPE html>

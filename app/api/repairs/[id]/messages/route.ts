@@ -1,5 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import { NextRequest, NextResponse } from 'next/server'
+import { sendNewChatMessageEmail } from '@/lib/email'
 
 // GET /api/repairs/[id]/messages - Pobieranie wiadomości
 export async function GET(
@@ -79,10 +80,10 @@ export async function POST(
       return NextResponse.json({ error: 'Message or attachments required' }, { status: 400 })
     }
 
-    // Sprawdź czy user ma dostęp do tego zgłoszenia
+    // Sprawdź czy user ma dostęp do tego zgłoszenia (z dodatkowymi danymi do emaila)
     const { data: repair, error: repairError } = await supabase
       .from('repair_requests')
-      .select('user_id')
+      .select('user_id, email, first_name, last_name, device_model')
       .eq('id', repairId)
       .single()
 
@@ -93,7 +94,7 @@ export async function POST(
     // Pobierz profil użytkownika
     const { data: profile } = await supabase
       .from('profiles')
-      .select('role')
+      .select('role, first_name, last_name')
       .eq('id', user.id)
       .single()
 
@@ -148,6 +149,47 @@ export async function POST(
     }
 
     console.log('✅ Message sent successfully:', newMessage)
+
+    // Wyślij email o nowej wiadomości
+    try {
+      const senderName = isAdmin 
+        ? 'Serwis Zebra' 
+        : `${repair.first_name} ${repair.last_name}`
+      
+      const messagePreview = message?.trim() 
+        ? (message.length > 200 ? message.substring(0, 200) + '...' : message)
+        : '(załącznik)'
+
+      if (isAdmin) {
+        // Admin wysłał - powiadom klienta
+        await sendNewChatMessageEmail({
+          to: repair.email,
+          customerName: `${repair.first_name} ${repair.last_name}`,
+          repairId: repairId,
+          deviceModel: repair.device_model,
+          senderName: senderName,
+          messagePreview: messagePreview,
+          isToAdmin: false
+        })
+        console.log('✅ Chat notification email sent to customer')
+      } else {
+        // Klient wysłał - powiadom admina
+        await sendNewChatMessageEmail({
+          to: process.env.ADMIN_EMAIL || 'serwis@serwiszebra.pl',
+          customerName: `${repair.first_name} ${repair.last_name}`,
+          repairId: repairId,
+          deviceModel: repair.device_model,
+          senderName: senderName,
+          messagePreview: messagePreview,
+          isToAdmin: true
+        })
+        console.log('✅ Chat notification email sent to admin')
+      }
+    } catch (emailError) {
+      console.error('⚠️ Chat notification email error:', emailError)
+      // Nie przerywamy - wiadomość została wysłana
+    }
+
     return NextResponse.json({ message: newMessage }, { status: 201 })
   } catch (error) {
     console.error('❌ Unexpected error sending message:', error)
