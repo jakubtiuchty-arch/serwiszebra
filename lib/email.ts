@@ -1699,7 +1699,7 @@ export async function sendNewChatMessageEmail(data: NewChatMessageEmailData) {
     const email = await resend.emails.send({
       from: 'Serwis Zebra <serwis@serwiszebra.pl>',
       to: data.to,
-      subject: `💬 Nowa wiadomość - naprawa #${shortId}`,
+      subject: `Nowa wiadomość - naprawa #${shortId}`,
       html: generateNewChatMessageHTML(data, shortId)
     })
     

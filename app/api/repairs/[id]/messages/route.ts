@@ -173,17 +173,21 @@ export async function POST(
 
       if (isAdmin) {
         // Admin wysłał - powiadom klienta
-        console.log('📧 Sending email to customer:', repair.email)
-        await sendNewChatMessageEmail({
-          to: repair.email,
-          customerName: `${repair.first_name} ${repair.last_name}`,
-          repairId: repairId,
-          deviceModel: repair.device_model,
-          senderName: senderName,
-          messagePreview: messagePreview,
-          isToAdmin: false
-        })
-        console.log('✅ Chat notification email sent to customer:', repair.email)
+        if (!repair.email) {
+          console.log('⚠️ No customer email found for repair - skipping notification')
+        } else {
+          console.log('📧 Sending email to customer:', repair.email)
+          const emailResult = await sendNewChatMessageEmail({
+            to: repair.email,
+            customerName: `${repair.first_name} ${repair.last_name}`,
+            repairId: repairId,
+            deviceModel: repair.device_model,
+            senderName: senderName,
+            messagePreview: messagePreview,
+            isToAdmin: false
+          })
+          console.log('✅ Chat notification email sent to customer:', repair.email, 'Result:', emailResult)
+        }
       } else {
         // Klient wysłał - powiadom admina
         console.log('📧 Sending email to admin:', adminEmail)
