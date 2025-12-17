@@ -2,21 +2,18 @@ import { Resend } from 'resend'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
-// Bazowy URL dla obrazków w mailach
-const BASE_URL = 'https://serwiszebra.pl'
-
 // Wspólny header dla wszystkich maili do klientów
 function getEmailHeader(): string {
   return `
-    <!-- Header z logami -->
-    <div style="background-color: #111827; padding: 20px 24px;">
+    <!-- Header -->
+    <div style="background-color: #111827; padding: 24px;">
       <table style="width: 100%; border-collapse: collapse;">
         <tr>
-          <!-- Lewa strona: Logo Takma + statusy -->
+          <!-- Lewa strona: TAKMA + statusy -->
           <td style="text-align: left; vertical-align: middle;">
-            <img src="${BASE_URL}/takma_logo_1.png" alt="TAKMA" style="height: 32px; margin-right: 12px; vertical-align: middle;" />
-            <img src="${BASE_URL}/premier-partner-1.png" alt="Premier Partner" style="height: 28px; margin-right: 8px; vertical-align: middle;" />
-            <img src="${BASE_URL}/repair_specialist.png" alt="Repair Specialist" style="height: 28px; vertical-align: middle;" />
+            <span style="color: white; font-size: 16px; font-weight: 700; letter-spacing: 1px;">TAKMA</span>
+            <span style="color: #9ca3af; font-size: 11px; margin-left: 12px;">Zebra Premier Partner</span>
+            <span style="color: #9ca3af; font-size: 11px; margin-left: 8px;">• Repair Specialist</span>
           </td>
           <!-- Prawa strona: Serwis Zebra -->
           <td style="text-align: right; vertical-align: middle;">
