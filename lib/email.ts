@@ -1,19 +1,20 @@
 import { Resend } from 'resend'
+import { TAKMA_LOGO_BASE64, PREMIER_PARTNER_BASE64, REPAIR_SPECIALIST_BASE64 } from './email-images'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
-// Wspólny header dla wszystkich maili do klientów
+// Wspólny header dla wszystkich maili do klientów - z logotypami jako base64
 function getEmailHeader(): string {
   return `
     <!-- Header -->
-    <div style="background-color: #111827; padding: 24px;">
+    <div style="background-color: #111827; padding: 20px 24px;">
       <table style="width: 100%; border-collapse: collapse;">
         <tr>
-          <!-- Lewa strona: TAKMA + statusy -->
+          <!-- Lewa strona: Logo TAKMA + odznaki partnerskie -->
           <td style="text-align: left; vertical-align: middle;">
-            <span style="color: white; font-size: 16px; font-weight: 700; letter-spacing: 1px;">TAKMA</span>
-            <span style="color: #9ca3af; font-size: 11px; margin-left: 12px;">Zebra Premier Partner</span>
-            <span style="color: #9ca3af; font-size: 11px; margin-left: 8px;">• Repair Specialist</span>
+            <img src="${TAKMA_LOGO_BASE64}" alt="TAKMA" style="height: 28px; width: auto; display: inline-block; vertical-align: middle;">
+            <img src="${PREMIER_PARTNER_BASE64}" alt="Zebra Premier Partner" style="height: 24px; width: auto; display: inline-block; vertical-align: middle; margin-left: 12px;">
+            <img src="${REPAIR_SPECIALIST_BASE64}" alt="Repair Specialist" style="height: 24px; width: auto; display: inline-block; vertical-align: middle; margin-left: 8px;">
           </td>
           <!-- Prawa strona: Serwis Zebra -->
           <td style="text-align: right; vertical-align: middle;">
