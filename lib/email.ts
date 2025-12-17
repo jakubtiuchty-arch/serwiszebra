@@ -2,6 +2,34 @@ import { Resend } from 'resend'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
+// Bazowy URL dla obrazków w mailach
+const BASE_URL = 'https://serwiszebra.pl'
+
+// Wspólny header dla wszystkich maili do klientów
+function getEmailHeader(): string {
+  return `
+    <!-- Header z logami -->
+    <div style="background-color: #111827; padding: 20px 24px;">
+      <table style="width: 100%; border-collapse: collapse;">
+        <tr>
+          <!-- Lewa strona: Logo Takma + statusy -->
+          <td style="text-align: left; vertical-align: middle;">
+            <img src="${BASE_URL}/takma_logo_1.png" alt="TAKMA" style="height: 32px; margin-right: 12px; vertical-align: middle;" />
+            <img src="${BASE_URL}/premier-partner-1.png" alt="Premier Partner" style="height: 28px; margin-right: 8px; vertical-align: middle;" />
+            <img src="${BASE_URL}/repair_specialist.png" alt="Repair Specialist" style="height: 28px; vertical-align: middle;" />
+          </td>
+          <!-- Prawa strona: Serwis Zebra -->
+          <td style="text-align: right; vertical-align: middle;">
+            <span style="color: white; font-size: 20px; font-weight: 700; letter-spacing: 1px;">
+              SERWIS ZEBRA
+            </span>
+          </td>
+        </tr>
+      </table>
+    </div>
+  `
+}
+
 interface OrderEmailData {
   orderNumber: string
   customerEmail: string
@@ -340,12 +368,7 @@ function generateRepairShippedHTML(data: RepairShippedEmailData): string {
     <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f3f4f6;">
       <div style="max-width: 600px; margin: 0 auto; background-color: white;">
         
-        <!-- Header -->
-        <div style="background-color: #111827; padding: 32px 24px; text-align: center;">
-          <h1 style="color: white; margin: 0; font-size: 28px; font-weight: 700;">
-            SERWIS ZEBRA
-          </h1>
-        </div>
+${getEmailHeader()}
 
         <!-- Content -->
         <div style="padding: 32px 24px;">
@@ -470,12 +493,7 @@ function generateQuoteReadyHTML(data: QuoteReadyEmailData, shortId: string): str
     <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f3f4f6;">
       <div style="max-width: 600px; margin: 0 auto; background-color: white;">
         
-        <!-- Header -->
-        <div style="background-color: #111827; padding: 32px 24px; text-align: center;">
-          <h1 style="color: white; margin: 0; font-size: 28px; font-weight: 700;">
-            SERWIS ZEBRA
-          </h1>
-        </div>
+${getEmailHeader()}
 
         <!-- Content -->
         <div style="padding: 32px 24px;">
@@ -694,12 +712,7 @@ function generateRepairPaidClientHTML(data: RepairPaidEmailData, shortId: string
     <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f3f4f6;">
       <div style="max-width: 600px; margin: 0 auto; background-color: white;">
         
-        <!-- Header -->
-        <div style="background-color: #111827; padding: 32px 24px; text-align: center;">
-          <h1 style="color: white; margin: 0; font-size: 28px; font-weight: 700;">
-            SERWIS ZEBRA
-          </h1>
-        </div>
+${getEmailHeader()}
 
         <!-- Content -->
         <div style="padding: 32px 24px;">
@@ -920,12 +933,7 @@ function generateRepairSubmittedHTML(data: RepairSubmittedEmailData, shortId: st
     <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f3f4f6;">
       <div style="max-width: 600px; margin: 0 auto; background-color: white;">
         
-        <!-- Header -->
-        <div style="background-color: #111827; padding: 32px 24px; text-align: center;">
-          <h1 style="color: white; margin: 0; font-size: 28px; font-weight: 700;">
-            SERWIS ZEBRA
-          </h1>
-        </div>
+        ${getEmailHeader()}
 
         <!-- Content -->
         <div style="padding: 32px 24px;">
@@ -1200,12 +1208,7 @@ function generateWelcomeHTML(data: WelcomeEmailData): string {
     <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f3f4f6;">
       <div style="max-width: 600px; margin: 0 auto; background-color: white;">
         
-        <!-- Header -->
-        <div style="background-color: #111827; padding: 32px 24px; text-align: center;">
-          <h1 style="color: white; margin: 0; font-size: 28px; font-weight: 700;">
-            SERWIS ZEBRA
-          </h1>
-        </div>
+${getEmailHeader()}
 
         <!-- Content -->
         <div style="padding: 32px 24px;">
@@ -1323,12 +1326,7 @@ function generateQuoteAcceptedHTML(data: QuoteAcceptedEmailData, shortId: string
     <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f3f4f6;">
       <div style="max-width: 600px; margin: 0 auto; background-color: white;">
         
-        <!-- Header -->
-        <div style="background-color: #111827; padding: 32px 24px; text-align: center;">
-          <h1 style="color: white; margin: 0; font-size: 28px; font-weight: 700;">
-            SERWIS ZEBRA
-          </h1>
-        </div>
+${getEmailHeader()}
 
         <!-- Content -->
         <div style="padding: 32px 24px;">
@@ -1576,12 +1574,7 @@ function generateRepairStatusChangedHTML(data: RepairStatusChangedEmailData, sho
     <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f3f4f6;">
       <div style="max-width: 600px; margin: 0 auto; background-color: white;">
         
-        <!-- Header -->
-        <div style="background-color: #111827; padding: 32px 24px; text-align: center;">
-          <h1 style="color: white; margin: 0; font-size: 28px; font-weight: 700;">
-            SERWIS ZEBRA
-          </h1>
-        </div>
+${getEmailHeader()}
 
         <!-- Content -->
         <div style="padding: 32px 24px;">
@@ -1738,12 +1731,7 @@ function generateNewChatMessageHTML(data: NewChatMessageEmailData, shortId: stri
     <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f3f4f6;">
       <div style="max-width: 600px; margin: 0 auto; background-color: white;">
         
-        <!-- Header -->
-        <div style="background-color: #111827; padding: 32px 24px; text-align: center;">
-          <h1 style="color: white; margin: 0; font-size: 28px; font-weight: 700;">
-            SERWIS ZEBRA
-          </h1>
-        </div>
+${getEmailHeader()}
 
         <!-- Content -->
         <div style="padding: 32px 24px;">
@@ -1847,12 +1835,7 @@ function generateProFormaHTML(data: ProFormaEmailData, shortId: string): string 
     <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f3f4f6;">
       <div style="max-width: 600px; margin: 0 auto; background-color: white;">
         
-        <!-- Header -->
-        <div style="background-color: #111827; padding: 32px 24px; text-align: center;">
-          <h1 style="color: white; margin: 0; font-size: 28px; font-weight: 700;">
-            SERWIS ZEBRA
-          </h1>
-        </div>
+${getEmailHeader()}
 
         <!-- Content -->
         <div style="padding: 32px 24px;">
@@ -1997,12 +1980,7 @@ function generatePackageReceivedHTML(data: PackageReceivedEmailData, shortId: st
     <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f3f4f6;">
       <div style="max-width: 600px; margin: 0 auto; background-color: white;">
         
-        <!-- Header -->
-        <div style="background-color: #111827; padding: 32px 24px; text-align: center;">
-          <h1 style="color: white; margin: 0; font-size: 28px; font-weight: 700;">
-            SERWIS ZEBRA
-          </h1>
-        </div>
+${getEmailHeader()}
 
         <!-- Content -->
         <div style="padding: 32px 24px;">
