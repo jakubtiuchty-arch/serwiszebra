@@ -982,14 +982,14 @@ function generateRepairSubmittedHTML(data: RepairSubmittedEmailData, shortId: st
           <!-- Next steps -->
           <div style="background-color: #dbeafe; border-radius: 8px; padding: 20px; margin-bottom: 24px;">
             <h4 style="margin: 0 0 12px 0; font-size: 16px; color: #1e40af;">
-              Co dalej?
+              Jak przebiega naprawa?
             </h4>
             <ol style="margin: 0; padding-left: 20px; color: #1e3a8a; font-size: 14px; line-height: 1.8;">
-              <li>Spakuj urządzenie i czekaj na kuriera</li>
-              <li>Po otrzymaniu przeprowadzimy diagnozę</li>
-              <li>Otrzymasz wycenę naprawy do akceptacji</li>
-              <li>Po akceptacji i płatności naprawimy urządzenie</li>
-              <li>Odeślemy naprawione urządzenie kurierem</li>
+              <li>Spakuj urządzenie — kurier odbierze je pod wskazanym adresem</li>
+              <li>Przeprowadzimy szczegółową diagnostykę</li>
+              <li>Wyślemy Ci wycenę do akceptacji</li>
+              <li>Po Twojej zgodzie i płatności zajmiemy się naprawą</li>
+              <li>Gotowe urządzenie wróci do Ciebie kurierem</li>
             </ol>
           </div>
 
