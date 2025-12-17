@@ -60,7 +60,7 @@ export default function PanelSidebar({ userName, userEmail, onLogout }: PanelSid
       {/* SIDEBAR */}
       <aside
         className={`
-          fixed top-0 left-0 h-screen w-56 bg-white border-r border-gray-200 z-[80]
+          fixed top-0 left-0 h-[100dvh] w-56 bg-white border-r border-gray-200 z-[80]
           flex flex-col
           transition-transform duration-300 ease-in-out
           ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
@@ -88,7 +88,7 @@ export default function PanelSidebar({ userName, userEmail, onLogout }: PanelSid
 </div>
 
 {/* NAVIGATION - kompaktowy */}
-<nav className="flex-1 overflow-y-auto p-2">
+<nav className="flex-1 overflow-y-auto p-2 min-h-0">
   {/* Dashboard */}
   <Link
     href="/panel"
@@ -151,8 +151,8 @@ export default function PanelSidebar({ userName, userEmail, onLogout }: PanelSid
   </Link>
 </nav>
 
-{/* PROFIL + WYLOGUJ - nad banerkami */}
-<div className="p-2 border-t border-gray-200 space-y-0.5 pb-[calc(0.5rem+env(safe-area-inset-bottom))]">
+{/* PROFIL + WYLOGUJ - zawsze widoczne na dole */}
+<div className="flex-shrink-0 p-2 border-t border-gray-200 space-y-0.5 pb-[calc(0.5rem+env(safe-area-inset-bottom))]">
   <Link
     href="/panel/profil"
     onClick={() => setMobileMenuOpen(false)}
