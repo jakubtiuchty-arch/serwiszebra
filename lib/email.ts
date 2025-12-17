@@ -17,17 +17,17 @@ function getRepairNumber(repairId: string, repairNumber?: string): string {
 // Wspólny header dla wszystkich maili do klientów - z logotypami hostowanymi na serwerze
 function getEmailHeader(): string {
   return `
-    <!-- Header -->
-    <div style="background-color: #111827; padding: 20px 24px;">
+    <!-- Header z gradientem: jasny (lewo) -> ciemny (prawo) -->
+    <div style="background: linear-gradient(to right, #f3f4f6, #374151, #111827); padding: 20px 24px;">
       <table style="width: 100%; border-collapse: collapse;">
         <tr>
-          <!-- Lewa strona: Logo TAKMA + odznaki partnerskie -->
+          <!-- Lewa strona: Logo TAKMA + odznaki partnerskie (na jasnym tle) -->
           <td style="text-align: left; vertical-align: middle;">
-            <img src="${EMAIL_ASSETS_URL}/takma_logo_white.png" alt="TAKMA" style="height: 50px; width: auto; display: inline-block; vertical-align: middle;">
+            <img src="${EMAIL_ASSETS_URL}/takma_logo_1.png" alt="TAKMA" style="height: 50px; width: auto; display: inline-block; vertical-align: middle;">
             <img src="${EMAIL_ASSETS_URL}/premier-partner-1.png" alt="Zebra Premier Partner" style="height: 36px; width: auto; display: inline-block; vertical-align: middle; margin-left: 16px;">
             <img src="${EMAIL_ASSETS_URL}/repair_specialist.png" alt="Repair Specialist" style="height: 36px; width: auto; display: inline-block; vertical-align: middle; margin-left: 12px;">
           </td>
-          <!-- Prawa strona: Serwis Zebra -->
+          <!-- Prawa strona: Serwis Zebra (na ciemnym tle) -->
           <td style="text-align: right; vertical-align: middle;">
             <span style="color: white; font-size: 20px; font-weight: 700; letter-spacing: 1px;">
               SERWIS ZEBRA
