@@ -32,7 +32,7 @@ import { getTrackingUrl, formatCourierName } from '@/lib/tracking-links'
 import { format } from 'date-fns'
 import { pl } from 'date-fns/locale'
 import PhotoGallery from '@/components/PhotoGallery'
-import JourneyMapTimeline from '@/components/JourneyMapTimeline'
+import MiniTimeline from '@/components/MiniTimeline'
 import Link from 'next/link'
 
 // Formatowanie ceny z miejscami po przecinku (555,00 zł)
@@ -520,10 +520,9 @@ const handlePaymentSuccess = async () => {
 </div>
 {/* TIMELINE - na całą szerokość */}
 {repair.status !== 'anulowane' && (
-  <div className="max-w-[1800px] 2xl:max-w-[2200px] mx-auto px-2 mt-4 mb-0">
-    <JourneyMapTimeline 
+  <div className="max-w-[1800px] 2xl:max-w-[2200px] mx-auto px-2 mt-3 mb-0">
+    <MiniTimeline 
       currentStatus={repair.status}
-      statusHistory={statusHistory}
       repairType={repair.repair_type}
     />
   </div>
