@@ -780,8 +780,11 @@ const handlePaymentSuccess = async () => {
       )}
 
       {/* Wycena - tylko dla napraw płatnych lub gdy gwarancja odrzucona */}
+      {/* NIE pokazuj gdy wycena czeka na akceptację (wtedy jest w box Akcje) */}
       {(repair.repair_type === 'paid' || repair.repair_type === 'warranty_rejected') && 
-       (repair.estimated_price || repair.final_price) && (
+       (repair.estimated_price || repair.final_price) &&
+       // Ukryj gdy wycena czeka na akceptację
+       !(repair.status === 'wycena' && !repair.price_accepted_at) && (
         <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-sm border border-gray-200 p-3 md:p-4">
           <div className="flex items-center mb-2 md:mb-3">
             <div className="bg-green-100 p-1.5 rounded-lg">
@@ -791,34 +794,46 @@ const handlePaymentSuccess = async () => {
           </div>
 
           <div className="space-y-2">
-            {repair.estimated_price && (
-              <div>
-                <p className="text-[10px] md:text-xs text-gray-500">Szacowana cena</p>
-                <p className="text-lg md:text-xl font-bold text-gray-900">{formatPrice(repair.estimated_price)} zł</p>
+            {/* Kwota */}
+            <div>
+              <p className="text-[10px] md:text-xs text-gray-500">Kwota</p>
+              <p className="text-lg md:text-xl font-bold text-gray-900">
+                {formatPrice(repair.final_price || repair.estimated_price)} zł
+              </p>
+            </div>
+
+            {/* Status akceptacji */}
+            {repair.price_accepted_at && (
+              <div className="flex items-center gap-1.5 text-green-600">
+                <CheckCircle className="w-4 h-4" />
+                <span className="text-xs md:text-sm font-medium">
+                  Zaakceptowano {format(new Date(repair.price_accepted_at), "d MMM yyyy", { locale: pl })}
+                </span>
               </div>
             )}
 
-            {repair.final_price && (
-              <div>
-                <p className="text-[10px] md:text-xs text-gray-500">Finalna cena</p>
-                <p className="text-lg md:text-xl font-bold text-gray-900">{formatPrice(repair.final_price)} zł</p>
+            {/* Status płatności */}
+            {repair.payment_status === 'succeeded' && repair.paid_at && (
+              <div className="flex items-center gap-1.5 text-green-600">
+                <CreditCard className="w-4 h-4" />
+                <span className="text-xs md:text-sm font-medium">
+                  Opłacono {format(new Date(repair.paid_at), "d MMM yyyy", { locale: pl })}
+                </span>
+              </div>
+            )}
+
+            {repair.payment_status === 'proforma' && (
+              <div className="flex items-center gap-1.5 text-blue-600">
+                <FileText className="w-4 h-4" />
+                <span className="text-xs md:text-sm font-medium">Oczekiwanie na przelew</span>
               </div>
             )}
 
             {repair.price_notes && (
               <div className="pt-2 border-t border-gray-200">
-                <p className="text-[10px] md:text-xs text-gray-500 mb-1">Szczegóły wyceny</p>
+                <p className="text-[10px] md:text-xs text-gray-500 mb-1">Szczegóły</p>
                 <p className="text-xs md:text-sm text-gray-700 whitespace-pre-wrap leading-relaxed bg-gray-50 p-2 rounded-lg">
                   {repair.price_notes}
-                </p>
-              </div>
-            )}
-
-            {repair.payment_status === 'succeeded' && repair.paid_at && (
-              <div className="pt-2 border-t border-gray-200">
-                <p className="text-[10px] md:text-xs text-green-600 flex items-center gap-1.5 font-medium">
-                  <CheckCircle className="w-3 md:w-3.5 h-3 md:h-3.5" />
-                  Opłacono {format(new Date(repair.paid_at), "d MMM yyyy", { locale: pl })}
                 </p>
               </div>
             )}
