@@ -993,14 +993,22 @@ function generateRepairSubmittedHTML(data: RepairSubmittedEmailData, shortId: st
             </ol>
           </div>
 
-          <!-- Info about contact -->
-          <div style="background-color: #f3f4f6; border-radius: 8px; padding: 20px; margin-bottom: 24px; text-align: center;">
-            <p style="margin: 0 0 8px 0; color: #374151; font-size: 14px;">
-              <strong>Będziemy informować Cię mailowo</strong> o postępach naprawy.
+          <!-- Info about panel -->
+          <div style="background-color: #dbeafe; border-radius: 8px; padding: 20px; margin-bottom: 24px; text-align: center;">
+            <p style="margin: 0 0 8px 0; color: #1e40af; font-size: 14px;">
+              <strong>Śledź postępy naprawy w swoim panelu klienta</strong>
             </p>
-            <p style="margin: 0; color: #6b7280; font-size: 13px;">
-              Zachowaj numer zgłoszenia <strong>#${shortId}</strong> na wypadek kontaktu z serwisem.
+            <p style="margin: 0; color: #3b82f6; font-size: 13px;">
+              Tam znajdziesz aktualny status, chat z serwisem i wszystkie szczegóły zgłoszenia.
             </p>
+          </div>
+
+          <!-- CTA button -->
+          <div style="text-align: center; margin-bottom: 24px;">
+            <a href="https://serwiszebra.pl/panel" 
+               style="display: inline-block; background-color: #2563eb; color: white; padding: 12px 32px; border-radius: 8px; text-decoration: none; font-weight: 600;">
+              Przejdź do panelu
+            </a>
           </div>
 
           <!-- Contact -->
