@@ -1052,7 +1052,7 @@ export async function sendRepairSubmittedAdminEmail(data: RepairSubmittedAdminEm
     const email = await resend.emails.send({
       from: 'System Serwisowy <system@serwiszebra.pl>',
       to: data.to,
-      subject: `🔧 Nowe zgłoszenie naprawy #${shortId} - ${data.deviceModel}`,
+      subject: `Nowe zgłoszenie naprawy #${shortId} - ${data.deviceModel}`,
       html: generateRepairSubmittedAdminHTML(data, shortId)
     })
     
@@ -1089,7 +1089,7 @@ function generateRepairSubmittedAdminHTML(data: RepairSubmittedAdminEmailData, s
       <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
         
         <div style="background-color: #2563eb; color: white; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
-          <h2 style="margin: 0;">🔧 Nowe zgłoszenie naprawy</h2>
+          <h2 style="margin: 0;">Nowe zgłoszenie naprawy</h2>
         </div>
 
         <div style="background-color: #f9fafb; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
@@ -1161,7 +1161,7 @@ export async function sendWelcomeEmail(data: WelcomeEmailData) {
     const email = await resend.emails.send({
       from: 'Serwis Zebra <serwis@serwiszebra.pl>',
       to: data.to,
-      subject: `Witamy w Serwis Zebra! 🎉`,
+      subject: `Witamy w Serwis Zebra!`,
       html: generateWelcomeHTML(data)
     })
     
@@ -1198,7 +1198,7 @@ function generateWelcomeHTML(data: WelcomeEmailData): string {
           <!-- Welcome message -->
           <div style="text-align: center; margin-bottom: 32px;">
             <div style="display: inline-block; background-color: #10b981; width: 64px; height: 64px; border-radius: 50%; margin-bottom: 16px;">
-              <div style="color: white; font-size: 32px; line-height: 64px;">🎉</div>
+              <div style="color: white; font-size: 32px; line-height: 64px;">✓</div>
             </div>
             <h2 style="margin: 0 0 8px 0; font-size: 24px; color: #111827;">
               Witamy, ${data.customerName}!
@@ -1217,7 +1217,7 @@ function generateWelcomeHTML(data: WelcomeEmailData): string {
               <li>📋 Śledzić status wszystkich napraw w czasie rzeczywistym</li>
               <li>💬 Komunikować się z serwisem przez chat</li>
               <li>📄 Akceptować wyceny i opłacać naprawy online</li>
-              <li>📦 Zamawiać kuriera po odbiór urządzenia</li>
+              <li>Zamawiać kuriera po odbiór urządzenia</li>
               <li>📊 Przeglądać historię napraw</li>
             </ul>
           </div>
