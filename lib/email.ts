@@ -2,8 +2,8 @@ import { Resend } from 'resend'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
-// URL bazowy dla obrazków w emailach (hostowane na serwiszebra.pl)
-const EMAIL_ASSETS_URL = 'https://serwiszebra.pl'
+// URL bazowy dla obrazków w emailach (hostowane na Vercel)
+const EMAIL_ASSETS_URL = 'https://serwiszebraprod.vercel.app'
 
 // Wspólny header dla wszystkich maili do klientów - z logotypami hostowanymi na serwerze
 function getEmailHeader(): string {
