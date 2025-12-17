@@ -109,13 +109,17 @@ export async function POST(request: NextRequest) {
 
     // Wysyłka maili
     try {
+      const customerName = `${profile?.first_name || ''} ${profile?.last_name || ''}`.trim() || 'Kliencie'
+      
       // Email do klienta
       await sendRepairSubmittedEmail({
         to: session.user.email!,
-        customerName: `${profile?.first_name || ''} ${profile?.last_name || ''}`.trim() || 'Kliencie',
+        customerName,
         repairId: data.id,
+        deviceType: data.device_type || 'terminal',
         deviceModel: data.device_model,
-        issueDescription: data.issue_description
+        problemDescription: data.issue_description,
+        isWarranty: data.is_warranty || false
       })
       console.log('📧 Email do klienta wysłany')
 
@@ -123,14 +127,14 @@ export async function POST(request: NextRequest) {
       const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'jakub.tiuchty@gmail.com'
       await sendRepairSubmittedAdminEmail({
         to: ADMIN_EMAIL,
-        customerName: `${profile?.first_name || ''} ${profile?.last_name || ''}`.trim(),
+        customerName,
         customerEmail: session.user.email!,
         customerPhone: profile?.phone || '',
         repairId: data.id,
         deviceModel: data.device_model,
         serialNumber: data.serial_number || undefined,
-        issueDescription: data.issue_description,
-        isWarranty: data.is_warranty
+        problemDescription: data.issue_description,
+        isWarranty: data.is_warranty || false
       })
       console.log('📧 Email do admina wysłany')
     } catch (emailError) {
