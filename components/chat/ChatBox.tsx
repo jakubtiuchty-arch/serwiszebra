@@ -377,8 +377,9 @@ export default function ChatBox({ repairId, currentUserType }: ChatBoxProps) {
           </div>
         )}
         
-        <div className="flex items-center gap-2">
-          {/* Przycisk załącznika - LEWA strona */}
+        {/* Input z przyciskami wewnątrz */}
+        <div className="flex items-center border border-gray-300 rounded-full bg-white focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-blue-500">
+          {/* Przycisk załącznika - WEWNĄTRZ po lewej */}
           <input
             ref={fileInputRef}
             type="file"
@@ -391,31 +392,31 @@ export default function ChatBox({ repairId, currentUserType }: ChatBoxProps) {
             type="button"
             onClick={() => fileInputRef.current?.click()}
             disabled={sending || selectedFiles.length >= 5}
-            className="flex-shrink-0 p-2 text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded-full disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            className="flex-shrink-0 p-2 ml-1 text-gray-400 hover:text-blue-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             title="Dodaj załącznik (max 5 plików)"
           >
             <Paperclip className="w-5 h-5" />
           </button>
           
-          {/* Input - ŚRODEK, pełna szerokość */}
+          {/* Input - ŚRODEK */}
           <input
             type="text"
             value={newMessage}
             onChange={(e) => setNewMessage(e.target.value)}
             placeholder="Wpisz wiadomość..."
             disabled={sending}
-            className="flex-1 min-w-0 px-4 py-2 text-sm border border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100"
+            className="flex-1 min-w-0 px-2 py-2 text-sm bg-transparent border-none focus:outline-none focus:ring-0 disabled:bg-transparent"
           />
           
-          {/* Przycisk wyślij - PRAWA strona */}
+          {/* Przycisk wyślij - WEWNĄTRZ po prawej */}
           <button
             type="submit"
             disabled={(!newMessage.trim() && selectedFiles.length === 0) || sending}
-            className="flex-shrink-0 p-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            className="flex-shrink-0 p-2 mr-1 text-blue-600 hover:text-blue-700 disabled:text-gray-300 disabled:cursor-not-allowed transition-colors"
             title="Wyślij wiadomość"
           >
             {sending ? (
-              <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+              <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-blue-600"></div>
             ) : (
               <Send className="w-5 h-5" />
             )}
