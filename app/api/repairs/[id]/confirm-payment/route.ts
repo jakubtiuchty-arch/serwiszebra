@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { stripe } from '@/lib/stripe/server'
-import { sendRepairPaidAdminEmail } from '@/lib/email'
+import { sendRepairPaidEmail, sendRepairPaidAdminEmail } from '@/lib/email'
 
 export async function POST(
   request: NextRequest,
@@ -122,6 +122,20 @@ export async function POST(
       }
     } catch (historyErr) {
       console.warn('⚠️ History insert failed:', historyErr)
+    }
+
+    // Wyślij email do klienta o potwierdzeniu płatności
+    try {
+      await sendRepairPaidEmail({
+        to: repair.email,
+        customerName: `${repair.first_name} ${repair.last_name}`,
+        repairId: repairId,
+        deviceModel: repair.device_model,
+        amount: repair.final_price || repair.estimated_price || 0
+      })
+      console.log('✅ Payment confirmation sent to customer')
+    } catch (emailError) {
+      console.error('⚠️ Payment customer email error:', emailError)
     }
 
     // Wyślij email do admina o opłaceniu
