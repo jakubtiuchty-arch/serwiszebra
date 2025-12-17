@@ -124,8 +124,8 @@ export default function MiniTimeline({ currentStatus, repairType = 'paid' }: Min
                     }`}
                     style={{ 
                       backgroundColor: isActive ? config.color : '#E5E7EB',
-                      ringColor: isCurrent ? config.color : undefined
-                    }}
+                      '--tw-ring-color': isCurrent ? config.color : undefined
+                    } as React.CSSProperties}
                     initial={false}
                     animate={isCurrent ? { scale: [1, 1.3, 1] } : { scale: 1 }}
                     transition={{ duration: 1.5, repeat: isCurrent ? Infinity : 0 }}
