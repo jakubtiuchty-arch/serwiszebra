@@ -1,9 +1,11 @@
 import { Resend } from 'resend'
-import { TAKMA_LOGO_BASE64, PREMIER_PARTNER_BASE64, REPAIR_SPECIALIST_BASE64 } from './email-images'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
-// Wspólny header dla wszystkich maili do klientów - z logotypami jako base64
+// URL bazowy dla obrazków w emailach (hostowane na serwiszebra.pl)
+const EMAIL_ASSETS_URL = 'https://serwiszebra.pl'
+
+// Wspólny header dla wszystkich maili do klientów - z logotypami hostowanymi na serwerze
 function getEmailHeader(): string {
   return `
     <!-- Header -->
@@ -12,9 +14,9 @@ function getEmailHeader(): string {
         <tr>
           <!-- Lewa strona: Logo TAKMA + odznaki partnerskie -->
           <td style="text-align: left; vertical-align: middle;">
-            <img src="${TAKMA_LOGO_BASE64}" alt="TAKMA" style="height: 28px; width: auto; display: inline-block; vertical-align: middle;">
-            <img src="${PREMIER_PARTNER_BASE64}" alt="Zebra Premier Partner" style="height: 24px; width: auto; display: inline-block; vertical-align: middle; margin-left: 12px;">
-            <img src="${REPAIR_SPECIALIST_BASE64}" alt="Repair Specialist" style="height: 24px; width: auto; display: inline-block; vertical-align: middle; margin-left: 8px;">
+            <img src="${EMAIL_ASSETS_URL}/takma_logo_1.png" alt="TAKMA" style="height: 28px; width: auto; display: inline-block; vertical-align: middle;">
+            <img src="${EMAIL_ASSETS_URL}/premier-partner-1.png" alt="Zebra Premier Partner" style="height: 24px; width: auto; display: inline-block; vertical-align: middle; margin-left: 12px;">
+            <img src="${EMAIL_ASSETS_URL}/repair_specialist.png" alt="Repair Specialist" style="height: 24px; width: auto; display: inline-block; vertical-align: middle; margin-left: 8px;">
           </td>
           <!-- Prawa strona: Serwis Zebra -->
           <td style="text-align: right; vertical-align: middle;">
