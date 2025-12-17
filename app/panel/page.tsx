@@ -4,7 +4,6 @@ import NewRepairModal from '@/components/NewRepairModal'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { 
-  SortAsc, 
   Package, 
   Loader2,
   TrendingUp,
@@ -28,7 +27,6 @@ interface Repair {
 }
 
 type FilterType = 'wszystkie' | 'aktywne' | 'zakonczone'
-type SortType = 'data-desc' | 'data-asc' | 'status'
 
 export default function DashboardPage() {
   const [repairs, setRepairs] = useState<Repair[]>([])
@@ -36,7 +34,6 @@ export default function DashboardPage() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [filter, setFilter] = useState<FilterType>('wszystkie')
-  const [sort, setSort] = useState<SortType>('data-desc')
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   useEffect(() => {
@@ -45,7 +42,7 @@ export default function DashboardPage() {
 
   useEffect(() => {
     applyFiltersAndSort()
-  }, [repairs, filter, sort])
+  }, [repairs, filter])
 
   async function loadRepairs() {
     try {
@@ -79,20 +76,10 @@ export default function DashboardPage() {
       )
     }
 
-    if (sort === 'data-desc') {
-      filtered.sort((a, b) => 
-        new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-      )
-    } else if (sort === 'data-asc') {
-      filtered.sort((a, b) => 
-        new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
-      )
-    } else if (sort === 'status') {
-      const statusOrder = ['nowe', 'odebrane', 'diagnoza', 'wycena', 'w_naprawie', 'zakonczone', 'wyslane', 'anulowane']
-      filtered.sort((a, b) => 
-        statusOrder.indexOf(a.status) - statusOrder.indexOf(b.status)
-      )
-    }
+    // Domyślne sortowanie - najnowsze najpierw
+    filtered.sort((a, b) => 
+      new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+    )
 
     setFilteredRepairs(filtered)
   }
@@ -319,32 +306,22 @@ export default function DashboardPage() {
       {/* TABS + LISTA ZGŁOSZEŃ - KOMPAKTOWE */}
       <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
         <div className="border-b border-gray-200">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between px-3 sm:px-4 py-2 sm:py-3 gap-2">
-            {/* Tabs - na mobile mniejsze */}
-            <div className="flex gap-0.5 bg-gray-100 rounded-lg p-0.5 w-full sm:w-auto">
-              <button onClick={() => setFilter('wszystkie')} className={`flex-1 sm:flex-none px-2 sm:px-3 py-1.5 rounded-md text-[11px] sm:text-xs font-medium transition-all ${filter === 'wszystkie' ? 'bg-gray-900 text-white shadow-sm' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50'}`}>
+          <div className="px-3 sm:px-4 py-2 sm:py-3">
+            {/* Tabs */}
+            <div className="flex gap-0.5 bg-gray-100 rounded-lg p-0.5">
+              <button onClick={() => setFilter('wszystkie')} className={`flex-1 px-2 sm:px-3 py-1.5 rounded-md text-[11px] sm:text-xs font-medium transition-all ${filter === 'wszystkie' ? 'bg-gray-900 text-white shadow-sm' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50'}`}>
                 Wszystkie
                 <span className={`ml-1 sm:ml-1.5 px-1 sm:px-1.5 py-0.5 rounded-full text-[9px] sm:text-[10px] font-semibold ${filter === 'wszystkie' ? 'bg-white/20 text-white' : 'bg-gray-200 text-gray-700'}`}>{stats.total}</span>
               </button>
-              <button onClick={() => setFilter('aktywne')} className={`flex-1 sm:flex-none px-2 sm:px-3 py-1.5 rounded-md text-[11px] sm:text-xs font-medium transition-all ${filter === 'aktywne' ? 'bg-blue-600 text-white shadow-sm' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50'}`}>
+              <button onClick={() => setFilter('aktywne')} className={`flex-1 px-2 sm:px-3 py-1.5 rounded-md text-[11px] sm:text-xs font-medium transition-all ${filter === 'aktywne' ? 'bg-blue-600 text-white shadow-sm' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50'}`}>
                 Aktywne
                 <span className={`ml-1 sm:ml-1.5 px-1 sm:px-1.5 py-0.5 rounded-full text-[9px] sm:text-[10px] font-semibold ${filter === 'aktywne' ? 'bg-white/20 text-white' : 'bg-gray-200 text-gray-700'}`}>{stats.active}</span>
               </button>
-              <button onClick={() => setFilter('zakonczone')} className={`flex-1 sm:flex-none px-2 sm:px-3 py-1.5 rounded-md text-[11px] sm:text-xs font-medium transition-all ${filter === 'zakonczone' ? 'bg-gray-900 text-white shadow-sm' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50'}`}>
+              <button onClick={() => setFilter('zakonczone')} className={`flex-1 px-2 sm:px-3 py-1.5 rounded-md text-[11px] sm:text-xs font-medium transition-all ${filter === 'zakonczone' ? 'bg-gray-900 text-white shadow-sm' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50'}`}>
                 <span className="hidden sm:inline">Zakończone</span>
                 <span className="sm:hidden">Zakończ.</span>
                 <span className={`ml-1 sm:ml-1.5 px-1 sm:px-1.5 py-0.5 rounded-full text-[9px] sm:text-[10px] font-semibold ${filter === 'zakonczone' ? 'bg-white/20 text-white' : 'bg-gray-200 text-gray-700'}`}>{stats.completed}</span>
               </button>
-            </div>
-
-            {/* Sort - na mobile po prawej */}
-            <div className="flex items-center gap-1.5 self-end sm:self-auto">
-              <SortAsc className="w-3.5 h-3.5 text-gray-400" />
-              <select value={sort} onChange={(e) => setSort(e.target.value as SortType)} className="text-[11px] sm:text-xs border-0 bg-transparent text-gray-700 font-medium focus:ring-0 cursor-pointer pr-5 sm:pr-6">
-                <option value="data-desc">Najnowsze</option>
-                <option value="data-asc">Najstarsze</option>
-                <option value="status">Status</option>
-              </select>
             </div>
           </div>
         </div>
