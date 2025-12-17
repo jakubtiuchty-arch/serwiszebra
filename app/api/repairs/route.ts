@@ -14,41 +14,30 @@ function generateRepairNumber(): string {
 }
 
 export async function GET() {
-  console.log('[GET /api/repairs] Start', new Date().toISOString())
   try {
-    const supabase = await createClient()
-    console.log('[GET /api/repairs] Supabase client created')
+    const supabase = await createClient()  // ✅ DODANY AWAIT
     
-    // Pobierz sesję - szybsze niż getUser()
     const { data: { session }, error: sessionError } = await supabase.auth.getSession()
-    console.log('[GET /api/repairs] Session:', session?.user?.id, 'Error:', sessionError?.message)
 
-    if (sessionError || !session?.user) {
-      console.log('[GET /api/repairs] Unauthorized - no session')
+    if (sessionError || !session) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    console.log('[GET /api/repairs] Querying repairs for user:', session.user.id)
     const { data: repairs, error: repairsError } = await supabase
       .from('repair_requests')
       .select('*')
       .eq('user_id', session.user.id)
       .order('created_at', { ascending: false })
 
-    console.log('[GET /api/repairs] Query result:', repairs?.length, 'repairs, error:', repairsError?.message)
-
     if (repairsError) {
-      console.error('[GET /api/repairs] Database error:', repairsError)
       return NextResponse.json(
         { error: 'Błąd pobierania zgłoszeń', details: repairsError.message },
         { status: 500 }
       )
     }
 
-    console.log('[GET /api/repairs] Success, returning', repairs?.length || 0, 'repairs')
     return NextResponse.json({ repairs: repairs || [] })
   } catch (error: any) {
-    console.error('[GET /api/repairs] Exception:', error.message, error.stack)
     return NextResponse.json(
       { error: 'Internal server error', details: error.message },
       { status: 500 }
@@ -60,18 +49,16 @@ export async function POST(request: NextRequest) {
   console.log('\n🚀 === START POST /api/repairs ===')
   
   try {
-    const supabase = await createClient()
+    const supabase = await createClient()  // ✅ DODANY AWAIT
     
-    // Pobierz sesję
     const { data: { session }, error: sessionError } = await supabase.auth.getSession()
     
-    if (sessionError || !session?.user) {
-      console.error('❌ Błąd autoryzacji:', sessionError)
+    if (sessionError || !session) {
+      console.error('❌ Błąd sesji:', sessionError)
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
     
-    const user = session.user
-    console.log('✅ User ID:', user.id)
+    console.log('✅ User ID:', session.user.id)
 
     const body = await request.json()
     console.log('📦 Body:', JSON.stringify(body, null, 2))
@@ -79,7 +66,7 @@ export async function POST(request: NextRequest) {
     const { data: profile } = await supabase
       .from('profiles')
       .select('first_name, last_name, phone')
-      .eq('id', user.id)
+      .eq('id', session.user.id)
       .single()
     
     console.log('✅ Profil:', profile)
@@ -90,10 +77,10 @@ export async function POST(request: NextRequest) {
 
     const repairData = {
       repair_number: repairNumber,
-      user_id: user.id,
+      user_id: session.user.id,
       first_name: profile?.first_name || '',
       last_name: profile?.last_name || '',
-      email: user.email || '',
+      email: session.user.email || '',
       phone: profile?.phone || body.contact_phone || '',
       
       device_type: body.device_type || 'terminal',
@@ -142,7 +129,7 @@ export async function POST(request: NextRequest) {
       
       // Email do klienta
       await sendRepairSubmittedEmail({
-        to: user.email!,
+        to: session.user.email!,
         customerName,
         repairId: data.id,
         repairNumber: data.repair_number, // Nowy format numeru
@@ -158,7 +145,7 @@ export async function POST(request: NextRequest) {
       await sendRepairSubmittedAdminEmail({
         to: ADMIN_EMAIL,
         customerName,
-        customerEmail: user.email!,
+        customerEmail: session.user.email!,
         customerPhone: profile?.phone || '',
         repairId: data.id,
         repairNumber: data.repair_number, // Nowy format numeru
