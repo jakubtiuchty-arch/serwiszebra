@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
+import { sendRepairSubmittedEmail, sendRepairSubmittedAdminEmail } from '@/lib/email'
 
 export async function GET() {
   try {
@@ -105,6 +106,38 @@ export async function POST(request: NextRequest) {
     }
 
     console.log('✅ SUKCES! ID:', data.id)
+
+    // Wysyłka maili
+    try {
+      // Email do klienta
+      await sendRepairSubmittedEmail({
+        to: session.user.email!,
+        customerName: `${profile?.first_name || ''} ${profile?.last_name || ''}`.trim() || 'Kliencie',
+        repairId: data.id,
+        deviceModel: data.device_model,
+        issueDescription: data.issue_description
+      })
+      console.log('📧 Email do klienta wysłany')
+
+      // Email do admina
+      const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'jakub.tiuchty@gmail.com'
+      await sendRepairSubmittedAdminEmail({
+        to: ADMIN_EMAIL,
+        customerName: `${profile?.first_name || ''} ${profile?.last_name || ''}`.trim(),
+        customerEmail: session.user.email!,
+        customerPhone: profile?.phone || '',
+        repairId: data.id,
+        deviceModel: data.device_model,
+        serialNumber: data.serial_number || undefined,
+        issueDescription: data.issue_description,
+        isWarranty: data.is_warranty
+      })
+      console.log('📧 Email do admina wysłany')
+    } catch (emailError) {
+      console.error('❌ Błąd wysyłki maila:', emailError)
+      // Nie przerywamy - zgłoszenie zostało utworzone
+    }
+
     console.log('🚀 === KONIEC ===\n')
 
     return NextResponse.json({ repair: data }, { status: 201 })
