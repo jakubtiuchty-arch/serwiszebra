@@ -536,16 +536,16 @@ const handlePaymentSuccess = async () => {
   if (needsPaymentAction) {
     return (
       <div className="md:hidden max-w-7xl mx-auto px-2 mt-3">
-        <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl shadow-sm border-2 border-green-200 p-3">
+        <div className="bg-gradient-to-r from-amber-50 to-yellow-50 rounded-xl shadow-md border-2 border-amber-300 p-3">
           <div className="flex items-center gap-2 mb-2">
-            <div className="bg-green-500 p-1.5 rounded-lg">
+            <div className="bg-amber-500 p-1.5 rounded-lg animate-pulse">
               <CreditCard className="w-4 h-4 text-white" />
             </div>
-            <h2 className="text-sm font-bold text-gray-900">Wymagana akcja</h2>
+            <h2 className="text-sm font-bold text-amber-900">⚡ Wymagana akcja</h2>
           </div>
 
           {/* Podsumowanie wyceny */}
-          <div className="bg-white rounded-lg p-2 mb-2 border border-green-100">
+          <div className="bg-white rounded-lg p-2 mb-2 border border-amber-200">
             <div className="flex justify-between items-center">
               <span className="text-xs text-gray-600">Do zapłaty:</span>
               <span className="text-lg font-bold text-gray-900">{formatPrice(repair.final_price || repair.estimated_price)} zł</span>
@@ -886,8 +886,13 @@ const handlePaymentSuccess = async () => {
         // Na mobile ukryj gdy już jest na górze
         return (
           <div className="hidden md:block">
-            <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-sm border border-gray-200 p-3 md:p-4">
-              <h2 className="text-xs md:text-sm font-semibold text-gray-900 mb-2 md:mb-3">Akcje</h2>
+            <div className="bg-gradient-to-r from-amber-50 to-yellow-50 rounded-xl shadow-md border-2 border-amber-300 p-3 md:p-4">
+              <div className="flex items-center gap-2 mb-2 md:mb-3">
+                <div className="bg-amber-500 p-1.5 rounded-lg animate-pulse">
+                  <CreditCard className="w-4 h-4 text-white" />
+                </div>
+                <h2 className="text-xs md:text-sm font-bold text-amber-900">⚡ Wymagana akcja</h2>
+              </div>
 
               <div className="space-y-2">
                 {/* Akceptuj wycenę */}
