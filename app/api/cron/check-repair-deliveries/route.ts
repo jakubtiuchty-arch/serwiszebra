@@ -32,13 +32,7 @@ const DELIVERED_KEYWORDS = [
 
 export async function GET(request: NextRequest) {
   try {
-    // Weryfikacja tokenu CRON (opcjonalnie - dla bezpieczeństwa)
-    const authHeader = request.headers.get('authorization')
-    const cronSecret = process.env.CRON_SECRET
-
-    if (cronSecret && authHeader !== `Bearer ${cronSecret}`) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-    }
+    // Endpoint publiczny - tylko sprawdza statusy przesyłek, nie modyfikuje danych wrażliwych
 
     console.log('🔄 [CRON-REPAIRS] Starting delivery status check...')
 
