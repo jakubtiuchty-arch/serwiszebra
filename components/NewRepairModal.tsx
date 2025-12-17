@@ -178,47 +178,48 @@ export default function NewRepairModal({ isOpen, onClose, onSuccess }: NewRepair
     }
   }
 
+  if (!isOpen) return null
+
   return (
-    <AnimatePresence>
-      {isOpen && (
-        <>
-          {/* Backdrop */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={onClose}
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[9998]"
-          />
+    <>
+      {/* Backdrop */}
+      <div
+        onClick={onClose}
+        className="fixed inset-0 bg-black/50 z-[9998]"
+        style={{ touchAction: 'none' }}
+      />
 
-          {/* Modal */}
-          <div className="fixed inset-0 flex items-end sm:items-center justify-center z-[9999] sm:p-4">
-            <motion.div
-              initial={{ opacity: 0, y: 100 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 100 }}
-              transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="bg-white rounded-t-2xl sm:rounded-xl shadow-2xl w-full sm:max-w-2xl max-h-[95vh] sm:max-h-[90vh] overflow-hidden"
-            >
-              {/* Header - KOMPAKTOWY */}
-              <div className="bg-gradient-to-r from-gray-900 to-gray-800 px-3 sm:px-4 py-2.5 sm:py-3 flex items-center justify-between sticky top-0 z-10">
-                <div className="flex items-center gap-2">
-                  <div className="w-7 h-7 sm:w-8 sm:h-8 bg-white/10 rounded-lg flex items-center justify-center">
-                    <Package className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white" />
-                  </div>
-                  <h2 className="text-sm sm:text-base font-bold text-white">Nowe zgłoszenie</h2>
-                </div>
-                <button
-                  onClick={onClose}
-                  className="w-7 h-7 flex items-center justify-center rounded-lg hover:bg-white/10 text-white transition-colors"
-                >
-                  <X className="w-4 h-4" />
-                </button>
+      {/* Modal */}
+      <div 
+        className="fixed inset-x-0 bottom-0 sm:inset-0 sm:flex sm:items-center sm:justify-center z-[9999] sm:p-4"
+        style={{ touchAction: 'none' }}
+      >
+        <div
+          className="bg-white rounded-t-2xl sm:rounded-xl shadow-2xl w-full sm:max-w-2xl max-h-[85vh] sm:max-h-[90vh] flex flex-col"
+        >
+          {/* Header */}
+          <div className="bg-gradient-to-r from-gray-900 to-gray-800 px-3 sm:px-4 py-2.5 sm:py-3 flex items-center justify-between flex-shrink-0 rounded-t-2xl sm:rounded-t-xl">
+            {/* Drag handle - mobile only */}
+            <div className="absolute top-2 left-1/2 -translate-x-1/2 w-10 h-1 bg-white/30 rounded-full sm:hidden" />
+            
+            <div className="flex items-center gap-2">
+              <div className="w-7 h-7 sm:w-8 sm:h-8 bg-white/10 rounded-lg flex items-center justify-center">
+                <Package className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white" />
               </div>
+              <h2 className="text-sm sm:text-base font-bold text-white">Nowe zgłoszenie</h2>
+            </div>
+            <button
+              onClick={onClose}
+              type="button"
+              className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-white/10 text-white transition-colors"
+            >
+              <X className="w-5 h-5" />
+            </button>
+          </div>
 
-              {/* Content */}
-              <form onSubmit={handleSubmit} className="overflow-y-auto max-h-[calc(95vh-100px)] sm:max-h-[calc(90vh-60px)]">
-                <div className="p-3 sm:p-4 space-y-3">
+          {/* Content */}
+          <form onSubmit={handleSubmit} className="flex flex-col flex-1 overflow-hidden">
+            <div className="flex-1 overflow-y-auto overscroll-contain p-3 sm:p-4 space-y-3">
                   {/* Error */}
                   {error && (
                     <div className="bg-red-50 border border-red-200 rounded-lg p-3 flex items-start gap-2">
@@ -277,20 +278,18 @@ export default function NewRepairModal({ isOpen, onClose, onSuccess }: NewRepair
                       />
                     </div>
 
-                    <div>
+                    <div className="min-w-0">
                       <label className="block text-xs font-semibold text-gray-900 mb-1">
                         Data zakupu
                       </label>
-                      <div className="relative">
-                        <input
-                          type="date"
-                          name="purchase_date"
-                          value={formData.purchase_date}
-                          onChange={handleChange}
-                          className="w-full px-2.5 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        />
-                        <Calendar className="absolute right-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
-                      </div>
+                      <input
+                        type="date"
+                        name="purchase_date"
+                        value={formData.purchase_date}
+                        onChange={handleChange}
+                        className="w-full min-w-0 px-2.5 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none"
+                        style={{ maxWidth: '100%' }}
+                      />
                     </div>
                   </div>
 
@@ -472,40 +471,34 @@ export default function NewRepairModal({ isOpen, onClose, onSuccess }: NewRepair
                   </div>
                 </div>
 
-                {/* Footer - KOMPAKTOWY */}
-                <div className="border-t border-gray-200 px-3 sm:px-4 py-3 flex items-center gap-2 bg-white sticky bottom-0">
-                  <button
-                    type="button"
-                    onClick={onClose}
-                    disabled={loading}
-                    className="flex-1 sm:flex-none px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 rounded-lg font-medium transition-colors disabled:opacity-50 border border-gray-300"
-                  >
-                    Anuluj
-                  </button>
-                  <button
-                    type="submit"
-                    disabled={loading}
-                    className="flex-1 sm:flex-none px-4 py-2.5 text-sm bg-gray-900 hover:bg-gray-800 text-white rounded-lg font-semibold transition-colors disabled:opacity-50 flex items-center justify-center gap-1.5"
-                  >
-                    {loading ? (
-                      <>
-                        <Loader2 className="w-4 h-4 animate-spin" />
-                        <span className="hidden sm:inline">Wysyłanie...</span>
-                        <span className="sm:hidden">...</span>
-                      </>
-                    ) : (
-                      <>
-                        <span className="hidden sm:inline">Wyślij zgłoszenie</span>
-                        <span className="sm:hidden">Wyślij</span>
-                      </>
-                    )}
-                  </button>
-                </div>
-              </form>
-            </motion.div>
+              {/* Footer */}
+              <div className="border-t border-gray-200 px-3 sm:px-4 py-3 flex items-center gap-2 bg-white flex-shrink-0">
+                <button
+                  type="button"
+                  onClick={onClose}
+                  disabled={loading}
+                  className="flex-1 sm:flex-none px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 rounded-lg font-medium transition-colors disabled:opacity-50 border border-gray-300"
+                >
+                  Anuluj
+                </button>
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="flex-1 sm:flex-none px-4 py-2.5 text-sm bg-gray-900 hover:bg-gray-800 text-white rounded-lg font-semibold transition-colors disabled:opacity-50 flex items-center justify-center gap-1.5"
+                >
+                  {loading ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      <span>Wysyłanie...</span>
+                    </>
+                  ) : (
+                    <span>Wyślij</span>
+                  )}
+                </button>
+              </div>
+            </form>
           </div>
-        </>
-      )}
-    </AnimatePresence>
+        </div>
+      </>
   )
 }
