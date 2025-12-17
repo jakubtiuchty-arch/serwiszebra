@@ -131,10 +131,11 @@ export async function POST(request: NextRequest) {
         customerEmail: session.user.email!,
         customerPhone: profile?.phone || '',
         repairId: data.id,
+        deviceType: data.device_type || 'terminal',
         deviceModel: data.device_model,
-        serialNumber: data.serial_number || undefined,
         problemDescription: data.issue_description,
-        isWarranty: data.is_warranty || false
+        isWarranty: data.is_warranty || false,
+        priority: data.urgency || 'standard'
       })
       console.log('📧 Email do admina wysłany')
     } catch (emailError) {
