@@ -192,20 +192,21 @@ export default function NewRepairModal({ isOpen, onClose, onSuccess }: NewRepair
           />
 
           {/* Modal */}
-          <div className="fixed inset-0 flex items-center justify-center z-[9999] p-3">
+          <div className="fixed inset-0 flex items-end sm:items-center justify-center z-[9999] sm:p-4">
             <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="bg-white rounded-xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-hidden"
+              initial={{ opacity: 0, y: 100 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 100 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              className="bg-white rounded-t-2xl sm:rounded-xl shadow-2xl w-full sm:max-w-2xl max-h-[95vh] sm:max-h-[90vh] overflow-hidden"
             >
               {/* Header - KOMPAKTOWY */}
-              <div className="bg-gradient-to-r from-gray-900 to-gray-800 px-4 py-3 flex items-center justify-between">
+              <div className="bg-gradient-to-r from-gray-900 to-gray-800 px-3 sm:px-4 py-2.5 sm:py-3 flex items-center justify-between sticky top-0 z-10">
                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center">
-                    <Package className="w-4 h-4 text-white" />
+                  <div className="w-7 h-7 sm:w-8 sm:h-8 bg-white/10 rounded-lg flex items-center justify-center">
+                    <Package className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white" />
                   </div>
-                  <h2 className="text-base font-bold text-white">Nowe zgłoszenie naprawy</h2>
+                  <h2 className="text-sm sm:text-base font-bold text-white">Nowe zgłoszenie</h2>
                 </div>
                 <button
                   onClick={onClose}
@@ -216,8 +217,8 @@ export default function NewRepairModal({ isOpen, onClose, onSuccess }: NewRepair
               </div>
 
               {/* Content */}
-              <form onSubmit={handleSubmit} className="overflow-y-auto max-h-[calc(90vh-60px)]">
-                <div className="p-4 space-y-3">
+              <form onSubmit={handleSubmit} className="overflow-y-auto max-h-[calc(95vh-100px)] sm:max-h-[calc(90vh-60px)]">
+                <div className="p-3 sm:p-4 space-y-3">
                   {/* Error */}
                   {error && (
                     <div className="bg-red-50 border border-red-200 rounded-lg p-3 flex items-start gap-2">
@@ -226,84 +227,86 @@ export default function NewRepairModal({ isOpen, onClose, onSuccess }: NewRepair
                     </div>
                   )}
 
-                  {/* Typ urządzenia */}
-                  <div>
-                    <label className="block text-xs font-semibold text-gray-900 mb-1.5">
-                      Typ urządzenia <span className="text-red-500">*</span>
-                    </label>
-                    <select
-                      name="device_type"
-                      value={formData.device_type}
-                      onChange={handleChange}
-                      className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    >
-                      {DEVICE_TYPES.map(type => (
-                        <option key={type.value} value={type.value}>{type.label}</option>
-                      ))}
-                    </select>
-                  </div>
-
-                  {/* Model */}
-                  <div>
-                    <label className="block text-xs font-semibold text-gray-900 mb-1.5">
-                      Model urządzenia <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      name="device_model"
-                      value={formData.device_model}
-                      onChange={handleChange}
-                      placeholder="np. ZD420, ZT230"
-                      className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      required
-                    />
-                  </div>
-
-                  {/* Serial Number */}
-                  <div>
-                    <label className="block text-xs font-semibold text-gray-900 mb-1.5">
-                      Numer seryjny
-                    </label>
-                    <input
-                      type="text"
-                      name="serial_number"
-                      value={formData.serial_number}
-                      onChange={handleChange}
-                      placeholder="np. 23028928982"
-                      className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    />
-                  </div>
-
-                  {/* Data zakupu */}
-                  <div>
-                    <label className="block text-xs font-semibold text-gray-900 mb-1.5">
-                      Data zakupu
-                    </label>
-                    <div className="relative">
-                      <input
-                        type="date"
-                        name="purchase_date"
-                        value={formData.purchase_date}
+                  {/* Typ i Model - w jednej linii na desktop */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-900 mb-1">
+                        Typ urządzenia <span className="text-red-500">*</span>
+                      </label>
+                      <select
+                        name="device_type"
+                        value={formData.device_type}
                         onChange={handleChange}
-                        className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-2.5 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      >
+                        {DEVICE_TYPES.map(type => (
+                          <option key={type.value} value={type.value}>{type.label}</option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-900 mb-1">
+                        Model <span className="text-red-500">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        name="device_model"
+                        value={formData.device_model}
+                        onChange={handleChange}
+                        placeholder="np. ZD420"
+                        className="w-full px-2.5 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        required
                       />
-                      <Calendar className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+                    </div>
+                  </div>
+
+                  {/* Serial i Data - w jednej linii na desktop */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-900 mb-1">
+                        Numer seryjny
+                      </label>
+                      <input
+                        type="text"
+                        name="serial_number"
+                        value={formData.serial_number}
+                        onChange={handleChange}
+                        placeholder="np. 23028928982"
+                        className="w-full px-2.5 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-900 mb-1">
+                        Data zakupu
+                      </label>
+                      <div className="relative">
+                        <input
+                          type="date"
+                          name="purchase_date"
+                          value={formData.purchase_date}
+                          onChange={handleChange}
+                          className="w-full px-2.5 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        />
+                        <Calendar className="absolute right-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+                      </div>
                     </div>
                   </div>
 
                   {/* Gwarancja */}
                   <div>
-                    <label className="block text-xs font-semibold text-gray-900 mb-1.5">
-                      Czy urządzenie jest na gwarancji?
+                    <label className="block text-xs font-semibold text-gray-900 mb-1">
+                      Gwarancja
                     </label>
-                    <div className="space-y-2">
+                    <div className="flex flex-wrap gap-1.5">
                       {WARRANTY_OPTIONS.map(option => (
                         <label
                           key={option.value}
-                          className={`flex items-center gap-2 p-2.5 rounded-lg border cursor-pointer transition-colors ${
+                          className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border cursor-pointer transition-colors text-xs ${
                             formData.is_warranty === option.value
-                              ? 'border-blue-500 bg-blue-50'
-                              : 'border-gray-200 hover:border-gray-300'
+                              ? 'border-blue-500 bg-blue-50 text-blue-700 font-medium'
+                              : 'border-gray-200 hover:border-gray-300 text-gray-700'
                           }`}
                         >
                           <input
@@ -312,18 +315,18 @@ export default function NewRepairModal({ isOpen, onClose, onSuccess }: NewRepair
                             value={option.value}
                             checked={formData.is_warranty === option.value}
                             onChange={(e) => setFormData(prev => ({ ...prev, is_warranty: e.target.value as 'tak' | 'nie' | 'nie_wiem' }))}
-                            className="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500"
+                            className="sr-only"
                           />
-                          <span className="text-xs font-medium text-gray-900">{option.label}</span>
+                          <span>{option.label}</span>
                         </label>
                       ))}
                     </div>
                     
                     {/* Info o fakturze dla gwarancji */}
                     {formData.is_warranty === 'tak' && (
-                      <div className="mt-2 p-2.5 bg-blue-50 border border-blue-200 rounded-lg">
-                        <p className="text-xs text-blue-800">
-                          💡 Jeśli posiadasz kopię faktury zakupu, możesz ją przesłać w czacie po zgłoszeniu naprawy — przyspieszy to weryfikację gwarancji.
+                      <div className="mt-2 p-2 bg-blue-50 border border-blue-200 rounded-lg">
+                        <p className="text-[11px] text-blue-800">
+                          💡 Fakturę zakupu możesz przesłać w czacie po zgłoszeniu
                         </p>
                       </div>
                     )}
@@ -331,46 +334,47 @@ export default function NewRepairModal({ isOpen, onClose, onSuccess }: NewRepair
 
                   {/* Opis problemu */}
                   <div>
-                    <label className="block text-xs font-semibold text-gray-900 mb-1.5">
+                    <label className="block text-xs font-semibold text-gray-900 mb-1">
                       Opis problemu <span className="text-red-500">*</span>
                     </label>
                     <textarea
                       name="issue_description"
                       value={formData.issue_description}
                       onChange={handleChange}
-                      rows={3}
-                      placeholder="Opisz dokładnie problem z urządzeniem..."
-                      className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+                      rows={2}
+                      placeholder="Opisz problem z urządzeniem..."
+                      className="w-full px-2.5 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
                       required
                     />
                   </div>
 
-                  {/* Priorytet naprawy */}
-                  <div>
-                    <label className="block text-xs font-semibold text-gray-900 mb-1.5">
-                      Priorytet naprawy <span className="text-red-500">*</span>
-                    </label>
-                    <select
-                      name="urgency"
-                      value={formData.urgency}
-                      onChange={handleChange}
-                      className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    >
-                      {URGENCY_LEVELS.map(level => (
-                        <option key={level.value} value={level.value}>{level.label}</option>
-                      ))}
-                    </select>
-                  </div>
+                  {/* Priorytet i Zdjęcia - w jednej linii */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-900 mb-1">
+                        Priorytet
+                      </label>
+                      <select
+                        name="urgency"
+                        value={formData.urgency}
+                        onChange={handleChange}
+                        className="w-full px-2.5 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      >
+                        {URGENCY_LEVELS.map(level => (
+                          <option key={level.value} value={level.value}>{level.label}</option>
+                        ))}
+                      </select>
+                    </div>
 
-                  {/* Zdjęcia */}
-                  <div>
-                    <label className="block text-xs font-semibold text-gray-900 mb-1.5">
-                      Zdjęcia problemu (max 5)
-                    </label>
-                    <div className="space-y-2">
-                      <label className="flex items-center justify-center gap-1.5 w-full px-3 py-2 border-2 border-dashed border-gray-300 rounded-lg hover:border-blue-500 hover:bg-blue-50 transition-colors cursor-pointer">
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-900 mb-1">
+                        Zdjęcia (max 5)
+                      </label>
+                      <label className="flex items-center justify-center gap-1.5 w-full px-2.5 py-2 border-2 border-dashed border-gray-300 rounded-lg hover:border-blue-500 hover:bg-blue-50 transition-colors cursor-pointer">
                         <Upload className="w-4 h-4 text-gray-400" />
-                        <span className="text-xs text-gray-600">Dodaj zdjęcia</span>
+                        <span className="text-xs text-gray-600">
+                          {photos.length > 0 ? `${photos.length} zdjęć` : 'Dodaj'}
+                        </span>
                         <input
                           type="file"
                           accept="image/*"
@@ -380,33 +384,34 @@ export default function NewRepairModal({ isOpen, onClose, onSuccess }: NewRepair
                           disabled={photos.length >= 5}
                         />
                       </label>
-
-                      {photos.length > 0 && (
-                        <div className="grid grid-cols-3 gap-2">
-                          {photos.map((photo, index) => (
-                            <div key={index} className="relative group">
-                              <img
-                                src={URL.createObjectURL(photo)}
-                                alt={`Preview ${index + 1}`}
-                                className="w-full h-20 object-cover rounded-lg"
-                              />
-                              <button
-                                type="button"
-                                onClick={() => removePhoto(index)}
-                                className="absolute top-1 right-1 w-5 h-5 bg-red-500 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
-                              >
-                                <X className="w-3 h-3" />
-                              </button>
-                            </div>
-                          ))}
-                        </div>
-                      )}
                     </div>
                   </div>
 
+                  {/* Podgląd zdjęć */}
+                  {photos.length > 0 && (
+                    <div className="grid grid-cols-5 gap-1.5">
+                      {photos.map((photo, index) => (
+                        <div key={index} className="relative group">
+                          <img
+                            src={URL.createObjectURL(photo)}
+                            alt={`Preview ${index + 1}`}
+                            className="w-full h-12 sm:h-16 object-cover rounded-lg"
+                          />
+                          <button
+                            type="button"
+                            onClick={() => removePhoto(index)}
+                            className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white rounded-full flex items-center justify-center text-[10px] shadow"
+                          >
+                            ×
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
                   {/* Inny adres odbioru */}
                   <div className="space-y-2">
-                    <div className="flex items-center gap-2 p-3 bg-gray-50 rounded-lg">
+                    <label className="flex items-center gap-2 p-2 bg-gray-50 rounded-lg cursor-pointer">
                       <input
                         type="checkbox"
                         id="different_address"
@@ -414,103 +419,84 @@ export default function NewRepairModal({ isOpen, onClose, onSuccess }: NewRepair
                         onChange={(e) => setDifferentAddress(e.target.checked)}
                         className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                       />
-                      <label htmlFor="different_address" className="text-xs font-medium text-gray-900 cursor-pointer">
-                        Odbiór z innego adresu niż podany przy rejestracji
-                      </label>
-                    </div>
+                      <span className="text-xs font-medium text-gray-700">
+                        Inny adres odbioru
+                      </span>
+                    </label>
 
                     {differentAddress && (
                       <motion.div
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
-                        className="space-y-2 p-3 border-2 border-blue-200 bg-blue-50/50 rounded-lg"
+                        className="space-y-2 p-2 border border-blue-200 bg-blue-50/50 rounded-lg"
                       >
-                        <div>
-                          <label className="block text-xs font-semibold text-gray-900 mb-1.5">
-                            Ulica i numer <span className="text-red-500">*</span>
-                          </label>
-                          <input
-                            type="text"
-                            name="pickup_street"
-                            value={formData.pickup_street}
-                            onChange={handleChange}
-                            placeholder="np. Krakowska 123"
-                            className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                          />
-                        </div>
+                        <input
+                          type="text"
+                          name="pickup_street"
+                          value={formData.pickup_street}
+                          onChange={handleChange}
+                          placeholder="Ulica i numer *"
+                          className="w-full px-2.5 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        />
 
                         <div className="grid grid-cols-2 gap-2">
-                          <div>
-                            <label className="block text-xs font-semibold text-gray-900 mb-1.5">
-                              Kod pocztowy <span className="text-red-500">*</span>
-                            </label>
-                            <input
-                              type="text"
-                              name="pickup_zip"
-                              value={formData.pickup_zip}
-                              onChange={handleChange}
-                              placeholder="00-000"
-                              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                            />
-                          </div>
-
-                          <div>
-                            <label className="block text-xs font-semibold text-gray-900 mb-1.5">
-                              Miasto <span className="text-red-500">*</span>
-                            </label>
-                            <input
-                              type="text"
-                              name="pickup_city"
-                              value={formData.pickup_city}
-                              onChange={handleChange}
-                              placeholder="np. Warszawa"
-                              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                            />
-                          </div>
-                        </div>
-
-                        <div>
-                          <label className="block text-xs font-semibold text-gray-900 mb-1.5">
-                            Telefon kontaktowy
-                          </label>
                           <input
-                            type="tel"
-                            name="pickup_phone"
-                            value={formData.pickup_phone}
+                            type="text"
+                            name="pickup_zip"
+                            value={formData.pickup_zip}
                             onChange={handleChange}
-                            placeholder="+48 123 456 789"
-                            className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            placeholder="Kod *"
+                            className="w-full px-2.5 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                          />
+                          <input
+                            type="text"
+                            name="pickup_city"
+                            value={formData.pickup_city}
+                            onChange={handleChange}
+                            placeholder="Miasto *"
+                            className="w-full px-2.5 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                           />
                         </div>
+
+                        <input
+                          type="tel"
+                          name="pickup_phone"
+                          value={formData.pickup_phone}
+                          onChange={handleChange}
+                          placeholder="Telefon (opcjonalnie)"
+                          className="w-full px-2.5 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        />
                       </motion.div>
                     )}
                   </div>
                 </div>
 
                 {/* Footer - KOMPAKTOWY */}
-                <div className="border-t border-gray-200 px-4 py-3 flex items-center justify-end gap-2">
+                <div className="border-t border-gray-200 px-3 sm:px-4 py-3 flex items-center gap-2 bg-white sticky bottom-0">
                   <button
                     type="button"
                     onClick={onClose}
                     disabled={loading}
-                    className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-lg font-medium transition-colors disabled:opacity-50"
+                    className="flex-1 sm:flex-none px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 rounded-lg font-medium transition-colors disabled:opacity-50 border border-gray-300"
                   >
                     Anuluj
                   </button>
                   <button
                     type="submit"
                     disabled={loading}
-                    className="px-4 py-2 text-sm bg-gray-900 hover:bg-gray-800 text-white rounded-lg font-semibold transition-colors disabled:opacity-50 flex items-center gap-1.5"
+                    className="flex-1 sm:flex-none px-4 py-2.5 text-sm bg-gray-900 hover:bg-gray-800 text-white rounded-lg font-semibold transition-colors disabled:opacity-50 flex items-center justify-center gap-1.5"
                   >
                     {loading ? (
                       <>
                         <Loader2 className="w-4 h-4 animate-spin" />
-                        Wysyłanie...
+                        <span className="hidden sm:inline">Wysyłanie...</span>
+                        <span className="sm:hidden">...</span>
                       </>
                     ) : (
                       <>
-                        Wyślij zgłoszenie
+                        <span className="hidden sm:inline">Wyślij zgłoszenie</span>
+                        <span className="sm:hidden">Wyślij</span>
                       </>
                     )}
                   </button>
