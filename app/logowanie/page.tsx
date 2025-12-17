@@ -22,7 +22,9 @@ import Link from 'next/link'
       try {
         const profile = await getCurrentUserProfileClient()
         if (profile) {
-          const redirect = searchParams.get('redirect') || '/panel'
+          // Jeśli jest admin i nie ma explicit redirect, przekieruj do /admin
+          const explicitRedirect = searchParams.get('redirect')
+          const redirect = explicitRedirect || (profile.role === 'admin' ? '/admin' : '/panel')
           router.push(redirect)
         }
       } catch (error) {
@@ -57,7 +59,20 @@ import Link from 'next/link'
       // Poczekaj chwilę żeby sesja się zapisała
       await new Promise(resolve => setTimeout(resolve, 500))
       
-      const redirect = searchParams.get('redirect') || '/panel'
+      // Sprawdź rolę użytkownika i przekieruj odpowiednio
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('role')
+        .eq('id', data.user.id)
+        .single()
+      
+      // Jeśli jest explicit redirect (np. z middleware), użyj go
+      // W przeciwnym razie: admin -> /admin, user -> /panel
+      const explicitRedirect = searchParams.get('redirect')
+      const redirect = explicitRedirect || (profile?.role === 'admin' ? '/admin' : '/panel')
+      
+      console.log(`🔀 Przekierowanie do: ${redirect} (rola: ${profile?.role})`)
+      
       // Użyj window.location dla pewności
       window.location.href = redirect
     } catch (err: any) {
