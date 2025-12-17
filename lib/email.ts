@@ -1137,7 +1137,7 @@ function generateRepairSubmittedAdminHTML(data: RepairSubmittedAdminEmailData, s
         </div>
 
         <!-- WYMAGANA AKCJA - BARDZO WIDOCZNE -->
-        <div style="background-color: #dc2626; padding: 24px; border-radius: 8px; margin-bottom: 20px; text-align: center; border: 3px solid #991b1b;">
+        <div style="background-color: #dc2626; padding: 24px; border-radius: 8px; text-align: center; border: 3px solid #991b1b;">
           <h3 style="margin: 0 0 12px 0; color: white; font-size: 20px; text-transform: uppercase; letter-spacing: 1px;">
             WYMAGANA AKCJA
           </h3>
@@ -1147,13 +1147,6 @@ function generateRepairSubmittedAdminHTML(data: RepairSubmittedAdminEmailData, s
           <a href="https://serwiszebra.pl/admin/zgloszenie/${data.repairId}" 
              style="display: inline-block; background-color: white; color: #dc2626; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 16px; text-transform: uppercase;">
             ZAMÓW KURIERA TERAZ
-          </a>
-        </div>
-
-        <div style="text-align: center;">
-          <a href="https://serwiszebra.pl/admin/zgloszenie/${data.repairId}" 
-             style="display: inline-block; background-color: #111827; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600;">
-            Zobacz zgłoszenie
           </a>
         </div>
 
