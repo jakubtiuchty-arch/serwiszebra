@@ -160,8 +160,20 @@ export async function POST(
         ? (message.length > 200 ? message.substring(0, 200) + '...' : message)
         : '(załącznik)'
 
+      const adminEmail = process.env.ADMIN_EMAIL || 'serwis@serwiszebra.pl'
+
+      console.log('📧 Preparing chat notification email:', {
+        isAdmin,
+        senderName,
+        adminEmail,
+        customerEmail: repair.email,
+        repairId,
+        messagePreview: messagePreview.substring(0, 50)
+      })
+
       if (isAdmin) {
         // Admin wysłał - powiadom klienta
+        console.log('📧 Sending email to customer:', repair.email)
         await sendNewChatMessageEmail({
           to: repair.email,
           customerName: `${repair.first_name} ${repair.last_name}`,
@@ -171,11 +183,12 @@ export async function POST(
           messagePreview: messagePreview,
           isToAdmin: false
         })
-        console.log('✅ Chat notification email sent to customer')
+        console.log('✅ Chat notification email sent to customer:', repair.email)
       } else {
         // Klient wysłał - powiadom admina
+        console.log('📧 Sending email to admin:', adminEmail)
         await sendNewChatMessageEmail({
-          to: process.env.ADMIN_EMAIL || 'serwis@serwiszebra.pl',
+          to: adminEmail,
           customerName: `${repair.first_name} ${repair.last_name}`,
           repairId: repairId,
           deviceModel: repair.device_model,
@@ -183,10 +196,11 @@ export async function POST(
           messagePreview: messagePreview,
           isToAdmin: true
         })
-        console.log('✅ Chat notification email sent to admin')
+        console.log('✅ Chat notification email sent to admin:', adminEmail)
       }
-    } catch (emailError) {
+    } catch (emailError: any) {
       console.error('⚠️ Chat notification email error:', emailError)
+      console.error('⚠️ Email error details:', emailError?.message, emailError?.stack)
       // Nie przerywamy - wiadomość została wysłana
     }
 
