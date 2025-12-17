@@ -44,8 +44,47 @@ export default function MiniTimeline({ currentStatus, repairType = 'paid' }: Min
   const CurrentIcon = currentConfig.icon
 
   return (
-    <div className="bg-white/80 backdrop-blur-sm rounded-xl border border-gray-200 px-3 py-2 shadow-sm">
-      <div className="flex items-center gap-3">
+    <div className="bg-white/80 backdrop-blur-sm rounded-xl border border-gray-200 p-2 sm:px-3 sm:py-2 shadow-sm">
+      {/* MOBILE - Kompaktowy layout */}
+      <div className="sm:hidden">
+        <div className="flex items-center gap-2">
+          {/* Icon + Status */}
+          <div 
+            className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0"
+            style={{ backgroundColor: `${currentConfig.color}15` }}
+          >
+            <CurrentIcon 
+              className="w-3.5 h-3.5" 
+              style={{ color: currentConfig.color }}
+            />
+          </div>
+          
+          {/* Progress bar */}
+          <div className="flex-1">
+            <div className="flex items-center justify-between mb-0.5">
+              <span 
+                className="text-xs font-semibold"
+                style={{ color: currentConfig.color }}
+              >
+                {currentConfig.label}
+              </span>
+              <span className="text-xs font-bold text-gray-700">{Math.round(progressPercentage)}%</span>
+            </div>
+            <div className="h-1.5 bg-gray-200 rounded-full overflow-hidden">
+              <motion.div
+                className="h-full rounded-full"
+                style={{ backgroundColor: currentConfig.color }}
+                initial={{ width: 0 }}
+                animate={{ width: `${progressPercentage}%` }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* DESKTOP - Pełny layout z kropkami */}
+      <div className="hidden sm:flex items-center gap-3">
         {/* Current status icon & label */}
         <div className="flex items-center gap-2 flex-shrink-0">
           <div 
@@ -57,7 +96,7 @@ export default function MiniTimeline({ currentStatus, repairType = 'paid' }: Min
               style={{ color: currentConfig.color }}
             />
           </div>
-          <div className="hidden sm:block">
+          <div>
             <p className="text-xs text-gray-500">Status</p>
             <p 
               className="text-sm font-semibold"
