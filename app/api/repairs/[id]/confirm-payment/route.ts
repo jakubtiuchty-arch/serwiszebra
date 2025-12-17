@@ -145,7 +145,7 @@ export async function POST(
         repairId: repairId,
         customerName: `${repair.first_name} ${repair.last_name}`,
         customerEmail: repair.email,
-        customerPhone: repair.phone,
+        customerPhone: repair.phone || repair.contact_phone || 'brak',
         deviceModel: repair.device_model,
         amount: repair.final_price || repair.estimated_price || 0
       })
