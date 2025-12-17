@@ -23,9 +23,9 @@ function getEmailHeader(): string {
         <tr>
           <!-- Lewa strona: Logo TAKMA + odznaki partnerskie -->
           <td style="text-align: left; vertical-align: middle;">
-            <img src="${EMAIL_ASSETS_URL}/takma_logo_1.png" alt="TAKMA" style="height: 28px; width: auto; display: inline-block; vertical-align: middle;">
-            <img src="${EMAIL_ASSETS_URL}/premier-partner-1.png" alt="Zebra Premier Partner" style="height: 24px; width: auto; display: inline-block; vertical-align: middle; margin-left: 12px;">
-            <img src="${EMAIL_ASSETS_URL}/repair_specialist.png" alt="Repair Specialist" style="height: 24px; width: auto; display: inline-block; vertical-align: middle; margin-left: 8px;">
+            <img src="${EMAIL_ASSETS_URL}/takma_logo_1.png" alt="TAKMA" style="height: 40px; width: auto; display: inline-block; vertical-align: middle;">
+            <img src="${EMAIL_ASSETS_URL}/premier-partner-1.png" alt="Zebra Premier Partner" style="height: 36px; width: auto; display: inline-block; vertical-align: middle; margin-left: 16px;">
+            <img src="${EMAIL_ASSETS_URL}/repair_specialist.png" alt="Repair Specialist" style="height: 36px; width: auto; display: inline-block; vertical-align: middle; margin-left: 12px;">
           </td>
           <!-- Prawa strona: Serwis Zebra -->
           <td style="text-align: right; vertical-align: middle;">
