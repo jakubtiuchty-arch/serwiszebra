@@ -14,23 +14,25 @@ function generateRepairNumber(): string {
 }
 
 export async function GET() {
-  console.log('[GET /api/repairs] Start')
+  console.log('[GET /api/repairs] Start', new Date().toISOString())
   try {
     const supabase = await createClient()
+    console.log('[GET /api/repairs] Supabase client created')
     
-    // Użyj getUser() zamiast getSession() dla bezpieczeństwa
-    const { data: { user }, error: userError } = await supabase.auth.getUser()
-    console.log('[GET /api/repairs] User:', user?.id, 'Error:', userError?.message)
+    // Pobierz sesję - szybsze niż getUser()
+    const { data: { session }, error: sessionError } = await supabase.auth.getSession()
+    console.log('[GET /api/repairs] Session:', session?.user?.id, 'Error:', sessionError?.message)
 
-    if (userError || !user) {
-      console.log('[GET /api/repairs] Unauthorized - no user')
+    if (sessionError || !session?.user) {
+      console.log('[GET /api/repairs] Unauthorized - no session')
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
+    console.log('[GET /api/repairs] Querying repairs for user:', session.user.id)
     const { data: repairs, error: repairsError } = await supabase
       .from('repair_requests')
       .select('*')
-      .eq('user_id', user.id)
+      .eq('user_id', session.user.id)
       .order('created_at', { ascending: false })
 
     console.log('[GET /api/repairs] Query result:', repairs?.length, 'repairs, error:', repairsError?.message)
@@ -43,9 +45,10 @@ export async function GET() {
       )
     }
 
+    console.log('[GET /api/repairs] Success, returning', repairs?.length || 0, 'repairs')
     return NextResponse.json({ repairs: repairs || [] })
   } catch (error: any) {
-    console.error('[GET /api/repairs] Exception:', error)
+    console.error('[GET /api/repairs] Exception:', error.message, error.stack)
     return NextResponse.json(
       { error: 'Internal server error', details: error.message },
       { status: 500 }
@@ -59,14 +62,15 @@ export async function POST(request: NextRequest) {
   try {
     const supabase = await createClient()
     
-    // Użyj getUser() zamiast getSession() dla bezpieczeństwa
-    const { data: { user }, error: userError } = await supabase.auth.getUser()
+    // Pobierz sesję
+    const { data: { session }, error: sessionError } = await supabase.auth.getSession()
     
-    if (userError || !user) {
-      console.error('❌ Błąd autoryzacji:', userError)
+    if (sessionError || !session?.user) {
+      console.error('❌ Błąd autoryzacji:', sessionError)
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
     
+    const user = session.user
     console.log('✅ User ID:', user.id)
 
     const body = await request.json()
