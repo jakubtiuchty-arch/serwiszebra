@@ -1,8 +1,7 @@
 'use client'
 
-import { useState } from 'react'
-import { X, Upload, Calendar, Package, AlertCircle, Loader2 } from 'lucide-react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { useState, useRef } from 'react'
+import { X, Upload, Package, AlertCircle, Loader2 } from 'lucide-react'
 
 interface NewRepairModalProps {
   isOpen: boolean
@@ -33,6 +32,7 @@ export default function NewRepairModal({ isOpen, onClose, onSuccess }: NewRepair
   const [error, setError] = useState<string | null>(null)
   const [photos, setPhotos] = useState<File[]>([])
   const [differentAddress, setDifferentAddress] = useState(false)
+  const formRef = useRef<HTMLDivElement>(null)
 
   const [formData, setFormData] = useState({
     device_type: 'terminal',
@@ -47,6 +47,14 @@ export default function NewRepairModal({ isOpen, onClose, onSuccess }: NewRepair
     pickup_city: '',
     pickup_phone: '',
   })
+
+  // Scroll do aktywnego pola gdy klawiatura się otworzy
+  const handleFocus = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    // Małe opóźnienie żeby klawiatura zdążyła się otworzyć
+    setTimeout(() => {
+      e.target.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    }, 300)
+  }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target
@@ -255,6 +263,7 @@ export default function NewRepairModal({ isOpen, onClose, onSuccess }: NewRepair
                         name="device_model"
                         value={formData.device_model}
                         onChange={handleChange}
+                        onFocus={handleFocus}
                         placeholder="np. ZD420"
                         className="w-full px-2.5 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                         required
@@ -273,6 +282,7 @@ export default function NewRepairModal({ isOpen, onClose, onSuccess }: NewRepair
                         name="serial_number"
                         value={formData.serial_number}
                         onChange={handleChange}
+                        onFocus={handleFocus}
                         placeholder="np. 23028928982"
                         className="w-full px-2.5 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       />
@@ -287,6 +297,7 @@ export default function NewRepairModal({ isOpen, onClose, onSuccess }: NewRepair
                         name="purchase_date"
                         value={formData.purchase_date}
                         onChange={handleChange}
+                        onFocus={handleFocus}
                         className="w-full min-w-0 px-2.5 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none"
                         style={{ maxWidth: '100%' }}
                       />
@@ -340,6 +351,7 @@ export default function NewRepairModal({ isOpen, onClose, onSuccess }: NewRepair
                       name="issue_description"
                       value={formData.issue_description}
                       onChange={handleChange}
+                      onFocus={handleFocus}
                       rows={2}
                       placeholder="Opisz problem z urządzeniem..."
                       className="w-full px-2.5 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
@@ -424,17 +436,13 @@ export default function NewRepairModal({ isOpen, onClose, onSuccess }: NewRepair
                     </label>
 
                     {differentAddress && (
-                      <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        exit={{ opacity: 0, height: 0 }}
-                        className="space-y-2 p-2 border border-blue-200 bg-blue-50/50 rounded-lg"
-                      >
+                      <div className="space-y-2 p-2 border border-blue-200 bg-blue-50/50 rounded-lg">
                         <input
                           type="text"
                           name="pickup_street"
                           value={formData.pickup_street}
                           onChange={handleChange}
+                          onFocus={handleFocus}
                           placeholder="Ulica i numer *"
                           className="w-full px-2.5 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                         />
@@ -445,6 +453,7 @@ export default function NewRepairModal({ isOpen, onClose, onSuccess }: NewRepair
                             name="pickup_zip"
                             value={formData.pickup_zip}
                             onChange={handleChange}
+                            onFocus={handleFocus}
                             placeholder="Kod *"
                             className="w-full px-2.5 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                           />
@@ -453,6 +462,7 @@ export default function NewRepairModal({ isOpen, onClose, onSuccess }: NewRepair
                             name="pickup_city"
                             value={formData.pickup_city}
                             onChange={handleChange}
+                            onFocus={handleFocus}
                             placeholder="Miasto *"
                             className="w-full px-2.5 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                           />
@@ -463,10 +473,11 @@ export default function NewRepairModal({ isOpen, onClose, onSuccess }: NewRepair
                           name="pickup_phone"
                           value={formData.pickup_phone}
                           onChange={handleChange}
+                          onFocus={handleFocus}
                           placeholder="Telefon (opcjonalnie)"
                           className="w-full px-2.5 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                         />
-                      </motion.div>
+                      </div>
                     )}
                   </div>
                 </div>
