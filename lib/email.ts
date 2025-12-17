@@ -776,6 +776,8 @@ interface RepairPaidAdminEmailData {
   to: string
   repairId: string
   customerName: string
+  customerEmail: string
+  customerPhone: string
   deviceModel: string
   amount: number
 }
@@ -787,7 +789,7 @@ export async function sendRepairPaidAdminEmail(data: RepairPaidAdminEmailData) {
     const email = await resend.emails.send({
       from: 'System Serwisowy <system@serwiszebra.pl>',
       to: data.to,
-      subject: `💳 Płatność otrzymana - naprawa #${shortId}`,
+      subject: `Płatność otrzymana - naprawa #${shortId}`,
       html: generateRepairPaidAdminHTML(data, shortId)
     })
     
@@ -811,7 +813,7 @@ function generateRepairPaidAdminHTML(data: RepairPaidAdminEmailData, shortId: st
       <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
         
         <div style="background-color: #10b981; color: white; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
-          <h2 style="margin: 0;">💳 Płatność otrzymana</h2>
+          <h2 style="margin: 0;">Płatność otrzymana</h2>
         </div>
 
         <div style="background-color: #f9fafb; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
@@ -822,10 +824,6 @@ function generateRepairPaidAdminHTML(data: RepairPaidAdminEmailData, shortId: st
               <td style="padding: 8px 0; font-family: monospace;">#${shortId}</td>
             </tr>
             <tr>
-              <td style="padding: 8px 0;"><strong>Klient:</strong></td>
-              <td style="padding: 8px 0;">${data.customerName}</td>
-            </tr>
-            <tr>
               <td style="padding: 8px 0;"><strong>Urządzenie:</strong></td>
               <td style="padding: 8px 0;">${data.deviceModel}</td>
             </tr>
@@ -833,16 +831,30 @@ function generateRepairPaidAdminHTML(data: RepairPaidAdminEmailData, shortId: st
               <td style="padding: 8px 0;"><strong>Kwota:</strong></td>
               <td style="padding: 8px 0; font-size: 18px; font-weight: bold; color: #059669;">${data.amount.toFixed(2)} zł</td>
             </tr>
+          </table>
+        </div>
+
+        <div style="background-color: #f9fafb; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+          <h3 style="margin-top: 0;">Dane klienta:</h3>
+          <table style="width: 100%; border-collapse: collapse;">
             <tr>
-              <td style="padding: 8px 0;"><strong>Status:</strong></td>
-              <td style="padding: 8px 0; color: #2563eb; font-weight: 600;">W naprawie</td>
+              <td style="padding: 8px 0;"><strong>Imię i nazwisko:</strong></td>
+              <td style="padding: 8px 0;">${data.customerName}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0;"><strong>Email:</strong></td>
+              <td style="padding: 8px 0;"><a href="mailto:${data.customerEmail}" style="color: #2563eb;">${data.customerEmail}</a></td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0;"><strong>Telefon:</strong></td>
+              <td style="padding: 8px 0;"><a href="tel:${data.customerPhone}" style="color: #2563eb;">${data.customerPhone}</a></td>
             </tr>
           </table>
         </div>
 
         <div style="background-color: #dbeafe; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
           <p style="margin: 0; color: #1e40af;">
-            ℹ️ Status zgłoszenia został automatycznie zmieniony na "W naprawie". Sprawdź szczegóły w panelu administracyjnym.
+            Status zgłoszenia został automatycznie zmieniony na "W naprawie". Sprawdź szczegóły w panelu administracyjnym.
           </p>
         </div>
 
