@@ -1066,46 +1066,44 @@ const handlePaymentSuccess = async () => {
 {/* Modal akceptacji wyceny - 2 KROKI */}
 {showAcceptModal && (
   <div className="fixed inset-0 bg-black bg-opacity-50 z-[9998] flex items-center justify-center p-4">
-    <div className="bg-white rounded-2xl max-w-lg w-full p-6 md:p-8 shadow-2xl">
+    <div className="bg-white rounded-xl max-w-sm w-full p-5 shadow-xl">
 
       {/* KROK 1: Potwierdzenie akceptacji */}
       {acceptModalStep === 'confirm' && (
         <>
-          <div className="flex items-center gap-4 mb-5">
-            <div className="w-14 h-14 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
-              <CheckCircle className="w-7 h-7 text-blue-600" />
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
+              <CheckCircle className="w-5 h-5 text-blue-600" />
             </div>
-            <div>
-              <h3 className="text-lg md:text-xl font-bold text-gray-900">Potwierdź akceptację wyceny</h3>
-            </div>
+            <h3 className="text-base font-semibold text-gray-900">Potwierdź akceptację wyceny</h3>
           </div>
 
-          <div className="bg-gray-50 rounded-xl p-5 mb-5">
-            <p className="text-sm text-gray-500 mb-2">Koszt naprawy:</p>
-            <p className="text-3xl md:text-4xl font-bold text-gray-900">
+          <div className="bg-gray-50 rounded-lg p-4 mb-4">
+            <p className="text-xs text-gray-500 mb-1">Koszt naprawy:</p>
+            <p className="text-2xl font-bold text-gray-900">
               {formatPrice(repair.final_price || repair.estimated_price)} zł
             </p>
           </div>
 
-          <p className="text-base text-gray-600 mb-6 leading-relaxed">
+          <p className="text-sm text-gray-600 mb-4">
             Po zaakceptowaniu wyceny przejdziesz do płatności.
           </p>
 
-          <div className="flex gap-3">
+          <div className="flex gap-2">
             <button
               onClick={() => {
                 setShowAcceptModal(false)
                 setAcceptModalStep('confirm')
               }}
               disabled={actionLoading}
-              className="flex-1 px-5 py-3 border border-gray-300 text-gray-700 rounded-xl text-base font-semibold hover:bg-gray-50 transition-colors disabled:opacity-50"
+              className="flex-1 px-4 py-2.5 border border-gray-300 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-50 transition-colors disabled:opacity-50"
             >
               Anuluj
             </button>
             <button
               onClick={handleAcceptPrice}
               disabled={actionLoading}
-              className="flex-1 px-5 py-3 bg-blue-600 text-white rounded-xl text-base font-semibold hover:bg-blue-700 transition-colors disabled:opacity-50"
+              className="flex-1 px-4 py-2.5 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors disabled:opacity-50"
             >
               {actionLoading ? 'Akceptuję...' : 'Tak, akceptuję'}
             </button>
@@ -1116,28 +1114,28 @@ const handlePaymentSuccess = async () => {
       {/* KROK 2: Wycena zaakceptowana - przejdź do płatności */}
       {acceptModalStep === 'payment' && (
         <>
-          <div className="flex flex-col items-center text-center mb-6">
-            <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mb-4">
-              <CheckCircle className="w-8 h-8 text-green-600" />
+          <div className="flex flex-col items-center text-center mb-5">
+            <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center mb-3">
+              <CheckCircle className="w-6 h-6 text-green-600" />
             </div>
-            <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-2">Dziękujemy za akceptację!</h3>
-            <p className="text-base text-gray-500">Teraz przejdź do bezpiecznej płatności</p>
+            <h3 className="text-lg font-semibold text-gray-900 mb-1">Dziękujemy za akceptację!</h3>
+            <p className="text-sm text-gray-500">Teraz przejdź do bezpiecznej płatności</p>
           </div>
 
-          <div className="flex gap-3">
+          <div className="flex gap-2">
             <button
               onClick={() => {
                 setShowAcceptModal(false)
                 setAcceptModalStep('confirm')
               }}
               disabled={paymentLoading}
-              className="flex-1 px-5 py-3 border border-gray-300 text-gray-700 rounded-xl text-base font-semibold hover:bg-gray-50 transition-colors disabled:opacity-50"
+              className="flex-1 px-4 py-2.5 border border-gray-300 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-50 transition-colors disabled:opacity-50"
             >
               Zamknij
             </button>
             <button
               onClick={handlePayment}
-              className="flex-1 px-5 py-3 bg-blue-600 text-white rounded-xl text-base font-semibold hover:bg-blue-700 transition-colors"
+              className="flex-1 px-4 py-2.5 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
             >
               Przejdź do płatności
             </button>
