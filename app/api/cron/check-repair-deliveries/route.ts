@@ -4,6 +4,7 @@
 
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
+import { sendPackageReceivedEmail } from '@/lib/email'
 
 // Supabase admin client (bez RLS)
 const supabaseAdmin = createClient(
@@ -133,13 +134,32 @@ export async function GET(request: NextRequest) {
               changed_by: null
             })
 
+          // Wyślij email do klienta
+          if (repair.email) {
+            try {
+              await sendPackageReceivedEmail({
+                to: repair.email,
+                customerName: `${repair.first_name} ${repair.last_name}`,
+                repairId: repair.id,
+                deviceModel: repair.device_model || 'Urządzenie Zebra',
+                trackingNumber: repair.pickup_tracking_number,
+                courierStatus: trackingStatus.status
+              })
+              console.log(`📧 [CRON-REPAIRS] Email sent to ${repair.email}`)
+            } catch (emailError) {
+              console.error(`❌ [CRON-REPAIRS] Failed to send email to ${repair.email}:`, emailError)
+              // Nie przerywamy - email nie jest krytyczny
+            }
+          }
+
           updatedCount++
           results.push({
             repairId: repair.id,
             trackingNumber: repair.pickup_tracking_number,
             status: 'updated',
             courierStatus: trackingStatus.status,
-            message: 'Status changed to "odebrane"'
+            message: 'Status changed to "odebrane"',
+            emailSent: !!repair.email
           })
 
           console.log(`✅ [CRON-REPAIRS] Repair ${repair.id} updated to "odebrane"`)

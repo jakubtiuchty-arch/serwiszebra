@@ -1939,3 +1939,127 @@ function generateProFormaHTML(data: ProFormaEmailData, shortId: string): string 
     </html>
   `
 }
+
+// ========== EMAIL O DOSTARCZENIU PACZKI DO SERWISU ==========
+
+interface PackageReceivedEmailData {
+  to: string
+  customerName: string
+  repairId: string
+  deviceModel: string
+  trackingNumber?: string
+  courierStatus?: string
+}
+
+export async function sendPackageReceivedEmail(data: PackageReceivedEmailData) {
+  try {
+    const shortId = data.repairId.split('-')[0].toUpperCase()
+    
+    const email = await resend.emails.send({
+      from: 'Serwis Zebra <serwis@serwiszebra.pl>',
+      to: data.to,
+      subject: `Paczka dostarczona do serwisu - ${data.deviceModel} #${shortId}`,
+      html: generatePackageReceivedHTML(data, shortId)
+    })
+    
+    console.log('[Email] Package received email sent:', email)
+    return email
+    
+  } catch (error) {
+    console.error('[Email] Error sending package received email:', error)
+    throw error
+  }
+}
+
+function generatePackageReceivedHTML(data: PackageReceivedEmailData, shortId: string): string {
+  return `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f3f4f6;">
+      <div style="max-width: 600px; margin: 0 auto; background-color: white;">
+        
+        <!-- Header -->
+        <div style="background-color: #111827; padding: 32px 24px; text-align: center;">
+          <h1 style="color: white; margin: 0; font-size: 28px; font-weight: 700;">
+            SERWIS ZEBRA
+          </h1>
+        </div>
+
+        <!-- Content -->
+        <div style="padding: 32px 24px;">
+          
+          <!-- Success icon -->
+          <div style="text-align: center; margin-bottom: 32px;">
+            <div style="display: inline-block; background-color: #10b981; width: 64px; height: 64px; border-radius: 50%; margin-bottom: 16px;">
+              <div style="color: white; font-size: 32px; line-height: 64px;">&#10003;</div>
+            </div>
+            <h2 style="margin: 0 0 8px 0; font-size: 24px; color: #111827;">
+              Paczka dotarła do serwisu
+            </h2>
+            <p style="margin: 0; color: #6b7280;">
+              ${data.deviceModel} • #${shortId}
+            </p>
+          </div>
+
+          <!-- Info box -->
+          <div style="background-color: #ecfdf5; border-radius: 8px; padding: 20px; margin-bottom: 24px; border: 1px solid #a7f3d0;">
+            <h4 style="margin: 0 0 12px 0; font-size: 16px; color: #047857;">
+              Twoje urządzenie jest już u nas
+            </h4>
+            <p style="margin: 0; color: #065f46; font-size: 14px; line-height: 1.6;">
+              Przesyłka z Twoim urządzeniem <strong>${data.deviceModel}</strong> została dostarczona do naszego serwisu. 
+              Rozpoczynamy proces diagnozy.
+            </p>
+          </div>
+
+          <!-- What's next -->
+          <div style="background-color: #f9fafb; border-radius: 8px; padding: 20px; margin-bottom: 24px;">
+            <h4 style="margin: 0 0 12px 0; font-size: 14px; color: #374151; text-transform: uppercase;">
+              Co dalej?
+            </h4>
+            <ol style="margin: 0; padding-left: 20px; color: #4b5563; font-size: 14px; line-height: 1.8;">
+              <li>Przeprowadzimy szczegółową diagnozę urządzenia</li>
+              <li>Otrzymasz wycenę naprawy do akceptacji</li>
+              <li>Po akceptacji i płatności naprawimy urządzenie</li>
+              <li>Odeślemy naprawione urządzenie kurierem</li>
+            </ol>
+          </div>
+
+          ${data.trackingNumber ? `
+          <!-- Tracking info -->
+          <div style="background-color: #f3f4f6; border-radius: 8px; padding: 16px; margin-bottom: 24px; text-align: center;">
+            <p style="margin: 0 0 4px 0; color: #6b7280; font-size: 12px;">Numer przesyłki</p>
+            <p style="margin: 0; font-family: monospace; font-size: 14px; color: #374151;">${data.trackingNumber}</p>
+          </div>
+          ` : ''}
+
+          <!-- Contact -->
+          <div style="text-align: center; color: #6b7280; font-size: 14px;">
+            <p style="margin: 0 0 8px 0;">Masz pytania? Skontaktuj się z nami:</p>
+            <p style="margin: 0;">
+              <strong>Tel:</strong> +48 601 619 898<br>
+              <strong>Email:</strong> serwis@serwiszebra.pl
+            </p>
+          </div>
+
+        </div>
+
+        <!-- Footer -->
+        <div style="background-color: #f3f4f6; padding: 24px; text-align: center; color: #6b7280; font-size: 12px;">
+          <p style="margin: 0 0 4px 0;">
+            TAKMA Tadeusz Tiuchty | ul. Poświęcka 1a, 51-128 Wrocław
+          </p>
+          <p style="margin: 0;">
+            NIP: 9151004377 &nbsp;|&nbsp; www.serwiszebra.pl
+          </p>
+        </div>
+
+      </div>
+    </body>
+    </html>
+  `
+}
