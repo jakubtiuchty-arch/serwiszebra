@@ -414,7 +414,7 @@ const handlePaymentSuccess = async () => {
 {/* Header z breadcrumbs - BEZ USER MENU */}
 <div className="relative z-40">
   {/* MOBILE - JEDEN KOMPAKTOWY HEADER */}
-  <div className="md:hidden max-w-7xl mx-auto px-2">
+  <div className="md:hidden max-w-[1800px] 2xl:max-w-[2200px] mx-auto px-2">
     {/* Powrót + Status w jednej linii z hamburgerem */}
     <div className="flex items-center justify-between mb-8 ml-10 pt-4">
       <button
@@ -472,7 +472,7 @@ const handlePaymentSuccess = async () => {
   </div>
 
   {/* DESKTOP - Breadcrumbs + Box ze zgłoszeniem */}
-  <div className="hidden md:block max-w-7xl mx-auto px-2 pt-3">
+  <div className="hidden md:block max-w-[1800px] 2xl:max-w-[2200px] mx-auto px-2 pt-3">
     {/* Breadcrumbs */}
     <button
       onClick={() => router.push('/panel')}
@@ -520,7 +520,7 @@ const handlePaymentSuccess = async () => {
 </div>
 {/* TIMELINE - na całą szerokość */}
 {repair.status !== 'anulowane' && (
-  <div className="max-w-7xl mx-auto px-2 mt-4 mb-0">
+  <div className="max-w-[1800px] 2xl:max-w-[2200px] mx-auto px-2 mt-4 mb-0">
     <JourneyMapTimeline 
       currentStatus={repair.status}
       statusHistory={statusHistory}
@@ -541,7 +541,7 @@ const handlePaymentSuccess = async () => {
   
   if (needsPaymentAction) {
     return (
-      <div className="md:hidden max-w-7xl mx-auto px-2 mt-3">
+      <div className="md:hidden max-w-[1800px] 2xl:max-w-[2200px] mx-auto px-2 mt-3">
         <div className="bg-gradient-to-r from-amber-50 to-yellow-50 rounded-xl shadow-md border-2 border-amber-300 p-3">
           <div className="flex items-center gap-2 mb-2">
             <div className="bg-amber-500 p-1.5 rounded-lg animate-pulse">
@@ -604,7 +604,7 @@ const handlePaymentSuccess = async () => {
 })()}
 
 {/* Content */}
-<div className="max-w-7xl mx-auto px-2 py-3 md:py-6">
+<div className="max-w-[1800px] 2xl:max-w-[2200px] mx-auto px-2 py-3 md:py-6">
   {/* 2-KOLUMNOWY LAYOUT */}
   <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 md:gap-3">
     {/* LEWA KOLUMNA - Informacje */}

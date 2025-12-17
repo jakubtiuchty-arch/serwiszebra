@@ -462,7 +462,7 @@ export default function AdminRepairDetailPage() {
       </div>
 
       {/* Main Content - 2 kolumny */}
-      <div className="max-w-7xl mx-auto px-3 md:px-6 lg:px-8 py-4 md:py-6">
+      <div className="max-w-[1800px] 2xl:max-w-[2200px] mx-auto px-3 md:px-6 lg:px-8 py-4 md:py-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 md:gap-4">
           {/* LEWA KOLUMNA */}
           <div className="space-y-4">

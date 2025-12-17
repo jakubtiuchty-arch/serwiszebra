@@ -273,7 +273,7 @@ export default function OrderDetailPage() {
 
   if (loading) {
     return (
-      <div className="p-8 max-w-7xl mx-auto">
+      <div className="p-8 max-w-[1800px] 2xl:max-w-[2200px] mx-auto">
         <div className="flex items-center justify-center py-20">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
         </div>
@@ -283,7 +283,7 @@ export default function OrderDetailPage() {
 
   if (error || !order) {
     return (
-      <div className="p-8 max-w-7xl mx-auto">
+      <div className="p-8 max-w-[1800px] 2xl:max-w-[2200px] mx-auto">
         <div className="bg-red-50 border border-red-200 rounded-xl p-6 text-center">
           <XCircle className="w-12 h-12 text-red-500 mx-auto mb-4" />
           <h2 className="text-lg font-semibold text-red-900 mb-2">Błąd</h2>
@@ -304,7 +304,7 @@ export default function OrderDetailPage() {
   const StatusIcon = statusConfig.icon
 
   return (
-    <div className="p-8 max-w-7xl mx-auto">
+    <div className="p-8 max-w-[1800px] 2xl:max-w-[2200px] mx-auto">
       <Link
         href="/admin/zamowienia"
         className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors mb-6"

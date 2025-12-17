@@ -143,7 +143,7 @@ export default function ChatAnalyticsPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 p-3 sm:p-4 lg:p-6">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-[1800px] 2xl:max-w-[2200px] mx-auto">
         {/* Header */}
         <div className="mb-4 sm:mb-6">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">

@@ -66,7 +66,7 @@ export default function ChatLogsPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 p-3 sm:p-4 lg:p-6">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-[1800px] 2xl:max-w-[2200px] mx-auto">
         {/* Header */}
         <div className="mb-3 sm:mb-4">
           <div className="flex items-center justify-between mb-3">
