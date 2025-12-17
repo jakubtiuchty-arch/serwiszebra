@@ -5,6 +5,15 @@ const resend = new Resend(process.env.RESEND_API_KEY)
 // URL bazowy dla obrazków w emailach (hostowane na Vercel)
 const EMAIL_ASSETS_URL = 'https://serwiszebraprod.vercel.app'
 
+// Helper: pobierz numer zgłoszenia (repair_number lub skrócone UUID jako fallback)
+function getRepairNumber(repairId: string, repairNumber?: string): string {
+  if (repairNumber) {
+    return repairNumber
+  }
+  // Fallback: pierwsze 8 znaków UUID
+  return repairId.split('-')[0].toUpperCase()
+}
+
 // Wspólny header dla wszystkich maili do klientów - z logotypami hostowanymi na serwerze
 function getEmailHeader(): string {
   return `
@@ -890,6 +899,7 @@ interface RepairSubmittedEmailData {
   to: string
   customerName: string
   repairId: string
+  repairNumber?: string // Nowy format: YYYYMMDDHHmm
   deviceType: string
   deviceModel: string
   problemDescription: string
@@ -898,13 +908,13 @@ interface RepairSubmittedEmailData {
 
 export async function sendRepairSubmittedEmail(data: RepairSubmittedEmailData) {
   try {
-    const shortId = data.repairId.split('-')[0].toUpperCase()
+    const displayNumber = getRepairNumber(data.repairId, data.repairNumber)
     
     const email = await resend.emails.send({
       from: 'Serwis Zebra <serwis@serwiszebra.pl>',
       to: data.to,
-      subject: `Zgłoszenie naprawy przyjęte - ${data.deviceModel} #${shortId}`,
-      html: generateRepairSubmittedHTML(data, shortId)
+      subject: `Zgłoszenie naprawy przyjęte - ${data.deviceModel} #${displayNumber}`,
+      html: generateRepairSubmittedHTML(data, displayNumber)
     })
     
     console.log('[Email] Repair submitted confirmation sent:', email)
@@ -1051,6 +1061,7 @@ function generateRepairSubmittedHTML(data: RepairSubmittedEmailData, shortId: st
 interface RepairSubmittedAdminEmailData {
   to: string
   repairId: string
+  repairNumber?: string // Nowy format: YYYYMMDDHHmm
   customerName: string
   customerEmail: string
   customerPhone: string
@@ -1063,13 +1074,13 @@ interface RepairSubmittedAdminEmailData {
 
 export async function sendRepairSubmittedAdminEmail(data: RepairSubmittedAdminEmailData) {
   try {
-    const shortId = data.repairId.split('-')[0].toUpperCase()
+    const displayNumber = getRepairNumber(data.repairId, data.repairNumber)
     
     const email = await resend.emails.send({
       from: 'System Serwisowy <system@serwiszebra.pl>',
       to: data.to,
-      subject: `Nowe zgłoszenie naprawy #${shortId} - ${data.deviceModel}`,
-      html: generateRepairSubmittedAdminHTML(data, shortId)
+      subject: `Nowe zgłoszenie naprawy #${displayNumber} - ${data.deviceModel}`,
+      html: generateRepairSubmittedAdminHTML(data, displayNumber)
     })
     
     console.log('[Email] Repair submitted notification sent to admin:', email)

@@ -4,6 +4,17 @@ import { uploadRepairPhotos, validateFileSize, validateFileType } from '@/lib/su
 import { sendRepairSubmittedEmail, sendRepairSubmittedAdminEmail } from '@/lib/email'
 import { z } from 'zod'
 
+// Generuj numer zgłoszenia w formacie YYYYMMDDHHmm
+function generateRepairNumber(): string {
+  const now = new Date()
+  const year = now.getFullYear()
+  const month = String(now.getMonth() + 1).padStart(2, '0')
+  const day = String(now.getDate()).padStart(2, '0')
+  const hours = String(now.getHours()).padStart(2, '0')
+  const minutes = String(now.getMinutes()).padStart(2, '0')
+  return `${year}${month}${day}${hours}${minutes}`
+}
+
 // Zod schema
 const repairRequestSchema = z.object({
   firstName: z.string().min(2),
@@ -102,9 +113,14 @@ export async function POST(request: NextRequest) {
     console.log('🔵 Creating repair request in database...')
     console.log('🔵 Repair type:', repairType)
     
+    // Generuj numer zgłoszenia
+    const repairNumber = generateRepairNumber()
+    console.log('🔵 Generated repair number:', repairNumber)
+    
     const { data: newRequest, error: insertError } = await supabase
       .from('repair_requests')
       .insert({
+        repair_number: repairNumber,
         first_name: validatedData.firstName,
         last_name: validatedData.lastName,
         email: validatedData.email,
@@ -169,6 +185,7 @@ export async function POST(request: NextRequest) {
         to: validatedData.email,
         customerName: `${validatedData.firstName} ${validatedData.lastName}`,
         repairId: newRequest.id,
+        repairNumber: newRequest.repair_number, // Nowy format numeru
         deviceType: 'printer', // TODO: dodać pole device_type do formularza
         deviceModel: validatedData.deviceModel,
         problemDescription: validatedData.issueDescription,
@@ -180,6 +197,7 @@ export async function POST(request: NextRequest) {
       await sendRepairSubmittedAdminEmail({
         to: process.env.ADMIN_EMAIL || 'jakub.tiuchty@gmail.com',
         repairId: newRequest.id,
+        repairNumber: newRequest.repair_number, // Nowy format numeru
         customerName: `${validatedData.firstName} ${validatedData.lastName}`,
         customerEmail: validatedData.email,
         customerPhone: validatedData.phone,

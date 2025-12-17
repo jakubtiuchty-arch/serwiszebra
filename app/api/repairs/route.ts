@@ -2,6 +2,17 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { sendRepairSubmittedEmail, sendRepairSubmittedAdminEmail } from '@/lib/email'
 
+// Generuj numer zgłoszenia w formacie YYYYMMDDHHmm
+function generateRepairNumber(): string {
+  const now = new Date()
+  const year = now.getFullYear()
+  const month = String(now.getMonth() + 1).padStart(2, '0')
+  const day = String(now.getDate()).padStart(2, '0')
+  const hours = String(now.getHours()).padStart(2, '0')
+  const minutes = String(now.getMinutes()).padStart(2, '0')
+  return `${year}${month}${day}${hours}${minutes}`
+}
+
 export async function GET() {
   try {
     const supabase = await createClient()  // ✅ DODANY AWAIT
@@ -60,7 +71,12 @@ export async function POST(request: NextRequest) {
     
     console.log('✅ Profil:', profile)
 
+    // Generuj numer zgłoszenia
+    const repairNumber = generateRepairNumber()
+    console.log('🔵 Generated repair number:', repairNumber)
+
     const repairData = {
+      repair_number: repairNumber,
       user_id: session.user.id,
       first_name: profile?.first_name || '',
       last_name: profile?.last_name || '',
@@ -116,6 +132,7 @@ export async function POST(request: NextRequest) {
         to: session.user.email!,
         customerName,
         repairId: data.id,
+        repairNumber: data.repair_number, // Nowy format numeru
         deviceType: data.device_type || 'terminal',
         deviceModel: data.device_model,
         problemDescription: data.issue_description,
@@ -131,6 +148,7 @@ export async function POST(request: NextRequest) {
         customerEmail: session.user.email!,
         customerPhone: profile?.phone || '',
         repairId: data.id,
+        repairNumber: data.repair_number, // Nowy format numeru
         deviceType: data.device_type || 'terminal',
         deviceModel: data.device_model,
         problemDescription: data.issue_description,
