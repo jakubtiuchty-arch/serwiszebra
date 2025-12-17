@@ -443,13 +443,19 @@ const handlePaymentSuccess = async () => {
     </div>
 
     {/* Opis problemu - MOBILE */}
-    <div className="bg-amber-50 rounded-lg border border-amber-200 px-3 py-2">
-      <div className="flex items-center gap-2 mb-1.5">
-        <AlertCircle className="w-4 h-4 text-amber-600" />
-        <span className="text-xs font-semibold text-gray-900">Opis problemu</span>
-      </div>
-      <p className="text-xs text-gray-700 leading-relaxed">{repair.issue_description}</p>
-    </div>
+    {(() => {
+      // Biały gdy wycena czeka na akceptację, amber w pozostałych przypadkach
+      const showWhite = repair.status === 'wycena' && !repair.price_accepted_at && (repair.final_price || repair.estimated_price)
+      return (
+        <div className={`rounded-lg border px-3 py-2 ${showWhite ? 'bg-white border-gray-200' : 'bg-amber-50 border-amber-200'}`}>
+          <div className="flex items-center gap-2 mb-1.5">
+            <AlertCircle className={`w-4 h-4 ${showWhite ? 'text-gray-500' : 'text-amber-600'}`} />
+            <span className="text-xs font-semibold text-gray-900">Opis problemu</span>
+          </div>
+          <p className="text-xs text-gray-700 leading-relaxed">{repair.issue_description}</p>
+        </div>
+      )
+    })()}
 
     {/* Pro Forma info - MOBILE */}
     {repair.payment_status === 'proforma' && (
@@ -541,7 +547,7 @@ const handlePaymentSuccess = async () => {
             <div className="bg-amber-500 p-1.5 rounded-lg animate-pulse">
               <CreditCard className="w-4 h-4 text-white" />
             </div>
-            <h2 className="text-sm font-bold text-amber-900">⚡ Wymagana akcja</h2>
+            <h2 className="text-sm font-bold text-amber-900">Wymagana akcja</h2>
           </div>
 
           {/* Podsumowanie wyceny */}
@@ -676,25 +682,31 @@ const handlePaymentSuccess = async () => {
       )}
 
       {/* Opis problemu - TYLKO DESKTOP */}
-      <div className="hidden md:block bg-amber-50 rounded-xl shadow-sm border border-amber-200 p-4">
-        <div className="flex items-center mb-3">
-          <div className="bg-amber-100 p-1.5 rounded-lg">
-            <AlertCircle className="w-4 h-4 text-amber-600" />
-          </div>
-          <h2 className="text-sm font-semibold text-gray-900 ml-2">Opis problemu</h2>
-        </div>
+      {(() => {
+        // Biały gdy wycena czeka na akceptację, amber w pozostałych przypadkach
+        const showWhite = repair.status === 'wycena' && !repair.price_accepted_at && (repair.final_price || repair.estimated_price)
+        return (
+          <div className={`hidden md:block rounded-xl shadow-sm border p-4 ${showWhite ? 'bg-white border-gray-200' : 'bg-amber-50 border-amber-200'}`}>
+            <div className="flex items-center mb-3">
+              <div className={`p-1.5 rounded-lg ${showWhite ? 'bg-gray-100' : 'bg-amber-100'}`}>
+                <AlertCircle className={`w-4 h-4 ${showWhite ? 'text-gray-500' : 'text-amber-600'}`} />
+              </div>
+              <h2 className="text-sm font-semibold text-gray-900 ml-2">Opis problemu</h2>
+            </div>
 
-        <p className="text-sm text-gray-700 whitespace-pre-wrap leading-relaxed">{repair.issue_description}</p>
+            <p className="text-sm text-gray-700 whitespace-pre-wrap leading-relaxed">{repair.issue_description}</p>
 
-        {urgencyConfig && (
-          <div className="mt-3 pt-3 border-t border-amber-200">
-            <p className="text-xs text-gray-500">Priorytet</p>
-            <p className={`text-sm font-semibold ${urgencyConfig.className}`}>
-              {urgencyConfig.label}
-            </p>
+            {urgencyConfig && (
+              <div className={`mt-3 pt-3 border-t ${showWhite ? 'border-gray-200' : 'border-amber-200'}`}>
+                <p className="text-xs text-gray-500">Priorytet</p>
+                <p className={`text-sm font-semibold ${urgencyConfig.className}`}>
+                  {urgencyConfig.label}
+                </p>
+              </div>
+            )}
           </div>
-        )}
-      </div>
+        )
+      })()}
 
       {/* Info o typie naprawy - GWARANCJA */}
       {repair.repair_type === 'warranty' && (
@@ -891,7 +903,7 @@ const handlePaymentSuccess = async () => {
                 <div className="bg-amber-500 p-1.5 rounded-lg animate-pulse">
                   <CreditCard className="w-4 h-4 text-white" />
                 </div>
-                <h2 className="text-xs md:text-sm font-bold text-amber-900">⚡ Wymagana akcja</h2>
+                <h2 className="text-xs md:text-sm font-bold text-amber-900">Wymagana akcja</h2>
               </div>
 
               <div className="space-y-2">
