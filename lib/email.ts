@@ -446,7 +446,7 @@ export async function sendQuoteReadyEmail(data: QuoteReadyEmailData) {
     const email = await resend.emails.send({
       from: 'Serwis Zebra <serwis@serwiszebra.pl>',
       to: data.to,
-      subject: `💰 Wycena naprawy gotowa - ${data.deviceModel} #${shortId}`,
+      subject: `Wycena naprawy gotowa - ${data.deviceModel} #${shortId}`,
       html: generateQuoteReadyHTML(data, shortId)
     })
     
@@ -483,7 +483,7 @@ function generateQuoteReadyHTML(data: QuoteReadyEmailData, shortId: string): str
           <!-- Icon -->
           <div style="text-align: center; margin-bottom: 32px;">
             <div style="display: inline-block; background-color: #f59e0b; width: 64px; height: 64px; border-radius: 50%; margin-bottom: 16px;">
-              <div style="color: white; font-size: 32px; line-height: 64px;">💰</div>
+              <div style="color: white; font-size: 32px; line-height: 64px;">$</div>
             </div>
             <h2 style="margin: 0 0 8px 0; font-size: 24px; color: #111827;">
               Wycena gotowa!
@@ -506,7 +506,7 @@ function generateQuoteReadyHTML(data: QuoteReadyEmailData, shortId: string): str
               </tr>
               <tr>
                 <td style="color: #6b7280; font-size: 14px; padding-top: 12px;">Koszt naprawy:</td>
-                <td style="text-align: right; padding-top: 12px; font-weight: 700; font-size: 24px; color: #059669;">${data.amount.toFixed(2)} zł</td>
+                <td style="text-align: right; padding-top: 12px; font-weight: 700; font-size: 24px; color: #059669;">${(data.amount || 0).toFixed(2)} zł</td>
               </tr>
             </table>
           </div>

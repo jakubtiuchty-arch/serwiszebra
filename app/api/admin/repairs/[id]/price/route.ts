@@ -89,15 +89,25 @@ export async function PATCH(
     // Wyślij email do klienta o nowej wycenie
     if (shouldChangeStatus && repairData) {
       try {
-        await sendQuoteReadyEmail({
-          to: repairData.email,
-          customerName: `${repairData.first_name} ${repairData.last_name}`,
-          repairId: repairId,
-          deviceModel: repairData.device_model,
-          amount: parseFloat(estimated_price),
-          notes: notes || undefined
-        })
-        console.log('✅ Quote ready email sent to customer')
+        const priceAmount = typeof estimated_price === 'number' 
+          ? estimated_price 
+          : parseFloat(String(estimated_price))
+        
+        console.log('📧 Sending quote email with amount:', priceAmount, 'original:', estimated_price)
+        
+        if (!isNaN(priceAmount)) {
+          await sendQuoteReadyEmail({
+            to: repairData.email,
+            customerName: `${repairData.first_name} ${repairData.last_name}`,
+            repairId: repairId,
+            deviceModel: repairData.device_model,
+            amount: priceAmount,
+            notes: notes || undefined
+          })
+          console.log('✅ Quote ready email sent to customer')
+        } else {
+          console.error('⚠️ Invalid price amount, skipping email:', estimated_price)
+        }
       } catch (emailError) {
         console.error('⚠️ Quote ready email error:', emailError)
       }
