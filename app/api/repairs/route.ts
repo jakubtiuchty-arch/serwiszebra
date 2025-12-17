@@ -14,12 +14,15 @@ function generateRepairNumber(): string {
 }
 
 export async function GET() {
+  console.log('[GET /api/repairs] Start')
   try {
-    const supabase = await createClient()  // ✅ DODANY AWAIT
+    const supabase = await createClient()
     
     const { data: { session }, error: sessionError } = await supabase.auth.getSession()
+    console.log('[GET /api/repairs] Session:', session?.user?.id, 'Error:', sessionError?.message)
 
     if (sessionError || !session) {
+      console.log('[GET /api/repairs] Unauthorized - no session')
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
@@ -29,7 +32,10 @@ export async function GET() {
       .eq('user_id', session.user.id)
       .order('created_at', { ascending: false })
 
+    console.log('[GET /api/repairs] Query result:', repairs?.length, 'repairs, error:', repairsError?.message)
+
     if (repairsError) {
+      console.error('[GET /api/repairs] Database error:', repairsError)
       return NextResponse.json(
         { error: 'Błąd pobierania zgłoszeń', details: repairsError.message },
         { status: 500 }
@@ -38,6 +44,7 @@ export async function GET() {
 
     return NextResponse.json({ repairs: repairs || [] })
   } catch (error: any) {
+    console.error('[GET /api/repairs] Exception:', error)
     return NextResponse.json(
       { error: 'Internal server error', details: error.message },
       { status: 500 }
