@@ -86,16 +86,16 @@ export async function PATCH(
       )
     }
 
-    // Wyślij email do klienta o nowej wycenie
-    if (shouldChangeStatus && repairData) {
+    // Wyślij email do klienta o nowej wycenie (zawsze gdy jest estimated_price)
+    if (estimated_price !== undefined && repairData) {
       try {
         const priceAmount = typeof estimated_price === 'number' 
           ? estimated_price 
           : parseFloat(String(estimated_price))
         
-        console.log('📧 Sending quote email with amount:', priceAmount, 'original:', estimated_price)
+        console.log('📧 Sending quote email with amount:', priceAmount, 'original:', estimated_price, 'to:', repairData.email)
         
-        if (!isNaN(priceAmount)) {
+        if (!isNaN(priceAmount) && repairData.email) {
           await sendQuoteReadyEmail({
             to: repairData.email,
             customerName: `${repairData.first_name} ${repairData.last_name}`,
@@ -104,9 +104,9 @@ export async function PATCH(
             amount: priceAmount,
             notes: notes || undefined
           })
-          console.log('✅ Quote ready email sent to customer')
+          console.log('✅ Quote ready email sent to customer:', repairData.email)
         } else {
-          console.error('⚠️ Invalid price amount, skipping email:', estimated_price)
+          console.error('⚠️ Invalid price amount or missing email, skipping:', { priceAmount, email: repairData.email })
         }
       } catch (emailError) {
         console.error('⚠️ Quote ready email error:', emailError)
