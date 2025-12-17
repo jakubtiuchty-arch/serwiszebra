@@ -83,7 +83,7 @@ async function handleRepairPayment(repairId: string, supabase: any) {
 
       // Email do serwisanta
       await sendRepairPaidAdminEmail({
-        to: process.env.ADMIN_EMAIL || 'serwis@serwiszebra.pl',
+        to: process.env.ADMIN_EMAIL || 'jakub.tiuchty@gmail.com',
         repairId: repairId,
         customerName: `${repair.first_name} ${repair.last_name}`,
         deviceModel: repair.device_model,

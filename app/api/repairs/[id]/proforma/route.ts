@@ -103,7 +103,7 @@ export async function POST(
 
       // Wyślij email do admina o wyborze pro formy
       await sendProFormaAdminEmail({
-        to: process.env.ADMIN_EMAIL || 'serwis@serwiszebra.pl',
+        to: process.env.ADMIN_EMAIL || 'jakub.tiuchty@gmail.com',
         repairId: repairId,
         customerName: `${repair.first_name} ${repair.last_name}`,
         deviceModel: repair.device_model,

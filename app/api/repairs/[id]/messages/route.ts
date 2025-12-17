@@ -160,7 +160,7 @@ export async function POST(
         ? (message.length > 200 ? message.substring(0, 200) + '...' : message)
         : '(załącznik)'
 
-      const adminEmail = process.env.ADMIN_EMAIL || 'serwis@serwiszebra.pl'
+      const adminEmail = process.env.ADMIN_EMAIL || 'jakub.tiuchty@gmail.com'
 
       console.log('📧 Preparing chat notification email:', {
         isAdmin,

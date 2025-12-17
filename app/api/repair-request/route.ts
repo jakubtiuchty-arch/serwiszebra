@@ -178,7 +178,7 @@ export async function POST(request: NextRequest) {
 
       // Email do admina
       await sendRepairSubmittedAdminEmail({
-        to: process.env.ADMIN_EMAIL || 'serwis@serwiszebra.pl',
+        to: process.env.ADMIN_EMAIL || 'jakub.tiuchty@gmail.com',
         repairId: newRequest.id,
         customerName: `${validatedData.firstName} ${validatedData.lastName}`,
         customerEmail: validatedData.email,
