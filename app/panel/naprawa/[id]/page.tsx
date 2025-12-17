@@ -1122,16 +1122,8 @@ const handlePaymentSuccess = async () => {
             </div>
             <div>
               <h3 className="text-sm font-semibold text-gray-900">Wycena zaakceptowana!</h3>
+              <p className="text-xs text-gray-500">Teraz przejdź do bezpiecznej płatności</p>
             </div>
-          </div>
-
-          <div className="bg-blue-50 rounded-lg p-3 mb-3">
-            <p className="text-sm font-medium text-blue-900 mb-0.5">
-              ✓ Wycena została zaakceptowana
-            </p>
-            <p className="text-sm text-blue-700">
-              Teraz przejdź do bezpiecznej płatności, aby rozpocząć naprawę.
-            </p>
           </div>
 
           <div className="bg-gray-50 rounded-lg p-3 mb-4">
