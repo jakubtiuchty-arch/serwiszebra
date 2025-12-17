@@ -18,18 +18,19 @@ export async function GET() {
   try {
     const supabase = await createClient()
     
-    const { data: { session }, error: sessionError } = await supabase.auth.getSession()
-    console.log('[GET /api/repairs] Session:', session?.user?.id, 'Error:', sessionError?.message)
+    // Użyj getUser() zamiast getSession() dla bezpieczeństwa
+    const { data: { user }, error: userError } = await supabase.auth.getUser()
+    console.log('[GET /api/repairs] User:', user?.id, 'Error:', userError?.message)
 
-    if (sessionError || !session) {
-      console.log('[GET /api/repairs] Unauthorized - no session')
+    if (userError || !user) {
+      console.log('[GET /api/repairs] Unauthorized - no user')
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
     const { data: repairs, error: repairsError } = await supabase
       .from('repair_requests')
       .select('*')
-      .eq('user_id', session.user.id)
+      .eq('user_id', user.id)
       .order('created_at', { ascending: false })
 
     console.log('[GET /api/repairs] Query result:', repairs?.length, 'repairs, error:', repairsError?.message)
@@ -56,16 +57,17 @@ export async function POST(request: NextRequest) {
   console.log('\n🚀 === START POST /api/repairs ===')
   
   try {
-    const supabase = await createClient()  // ✅ DODANY AWAIT
+    const supabase = await createClient()
     
-    const { data: { session }, error: sessionError } = await supabase.auth.getSession()
+    // Użyj getUser() zamiast getSession() dla bezpieczeństwa
+    const { data: { user }, error: userError } = await supabase.auth.getUser()
     
-    if (sessionError || !session) {
-      console.error('❌ Błąd sesji:', sessionError)
+    if (userError || !user) {
+      console.error('❌ Błąd autoryzacji:', userError)
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
     
-    console.log('✅ User ID:', session.user.id)
+    console.log('✅ User ID:', user.id)
 
     const body = await request.json()
     console.log('📦 Body:', JSON.stringify(body, null, 2))
@@ -73,7 +75,7 @@ export async function POST(request: NextRequest) {
     const { data: profile } = await supabase
       .from('profiles')
       .select('first_name, last_name, phone')
-      .eq('id', session.user.id)
+      .eq('id', user.id)
       .single()
     
     console.log('✅ Profil:', profile)
@@ -84,10 +86,10 @@ export async function POST(request: NextRequest) {
 
     const repairData = {
       repair_number: repairNumber,
-      user_id: session.user.id,
+      user_id: user.id,
       first_name: profile?.first_name || '',
       last_name: profile?.last_name || '',
-      email: session.user.email || '',
+      email: user.email || '',
       phone: profile?.phone || body.contact_phone || '',
       
       device_type: body.device_type || 'terminal',
@@ -136,7 +138,7 @@ export async function POST(request: NextRequest) {
       
       // Email do klienta
       await sendRepairSubmittedEmail({
-        to: session.user.email!,
+        to: user.email!,
         customerName,
         repairId: data.id,
         repairNumber: data.repair_number, // Nowy format numeru
@@ -152,7 +154,7 @@ export async function POST(request: NextRequest) {
       await sendRepairSubmittedAdminEmail({
         to: ADMIN_EMAIL,
         customerName,
-        customerEmail: session.user.email!,
+        customerEmail: user.email!,
         customerPhone: profile?.phone || '',
         repairId: data.id,
         repairNumber: data.repair_number, // Nowy format numeru
