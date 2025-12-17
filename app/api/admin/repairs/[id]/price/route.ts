@@ -58,7 +58,8 @@ export async function PATCH(
     }
 
     // Zmień status na "wycena" TYLKO jeśli aktualny status NIE jest już "wycena"
-    const shouldChangeStatus = estimated_price !== undefined && currentStatus !== 'wycena'
+    const hasNewPrice = estimated_price !== undefined || final_price !== undefined
+    const shouldChangeStatus = hasNewPrice && currentStatus !== 'wycena'
     if (shouldChangeStatus) {
       updateData.status = 'wycena'
     }
@@ -86,18 +87,22 @@ export async function PATCH(
       )
     }
 
-    // Wyślij email do klienta o nowej wycenie (zawsze gdy jest estimated_price)
+    // Wyślij email do klienta o nowej wycenie (gdy jest final_price lub estimated_price)
+    const priceToSend = final_price || estimated_price
+    
     console.log('📧 [Quote] Checking if should send email:', {
       estimated_price,
+      final_price,
+      priceToSend,
       hasRepairData: !!repairData,
       repairDataEmail: repairData?.email
     })
     
-    if (estimated_price !== undefined && repairData) {
+    if (priceToSend !== undefined && repairData) {
       try {
-        const priceAmount = typeof estimated_price === 'number' 
-          ? estimated_price 
-          : parseFloat(String(estimated_price))
+        const priceAmount = typeof priceToSend === 'number' 
+          ? priceToSend 
+          : parseFloat(String(priceToSend))
         
         console.log('📧 [Quote] Preparing email:', {
           priceAmount,
@@ -107,7 +112,7 @@ export async function PATCH(
           deviceModel: repairData.device_model
         })
         
-        if (!isNaN(priceAmount) && repairData.email) {
+        if (!isNaN(priceAmount) && priceAmount > 0 && repairData.email) {
           const emailResult = await sendQuoteReadyEmail({
             to: repairData.email,
             customerName: `${repairData.first_name} ${repairData.last_name}`,
@@ -125,7 +130,7 @@ export async function PATCH(
         console.error('❌ [Quote] Error details:', emailError)
       }
     } else {
-      console.log('⚠️ [Quote] Skipping email - no estimated_price or no repairData')
+      console.log('⚠️ [Quote] Skipping email - no price or no repairData')
     }
 
     // Dodanie wpisu do historii zmian TYLKO jeśli status się FAKTYCZNIE zmienił
