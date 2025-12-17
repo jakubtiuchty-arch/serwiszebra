@@ -131,8 +131,8 @@ function generateOrderEmailHTML(data: OrderEmailData): string {
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
-    <body style="margin: 0; padding: 0; font-family: Arial, sans-serif; background-color: #f3f4f6;">
-      <div style="max-width: 600px; margin: 0 auto; background-color: white;">
+    <body style="margin: 0; padding: 0; font-family: Arial, sans-serif; background-color: #ffffff;">
+      <div style="max-width: 600px; margin: 0 auto; background-color: white; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); border-radius: 8px; overflow: hidden;">
         
        <!-- Header -->
 <div style="background-color: #111827; padding: 32px 24px; text-align: center;">
@@ -177,7 +177,7 @@ function generateOrderEmailHTML(data: OrderEmailData): string {
           </h3>
           <table style="width: 100%; border-collapse: collapse; margin-bottom: 24px;">
             <thead>
-              <tr style="background-color: #f3f4f6;">
+              <tr style="background-color: #ffffff;">
                 <th style="padding: 12px; text-align: left; font-size: 12px; font-weight: 600; color: #374151; text-transform: uppercase;">
                   Produkt
                 </th>
@@ -288,7 +288,7 @@ function generateOrderEmailHTML(data: OrderEmailData): string {
         </div>
 
         <!-- Footer -->
-        <div style="background-color: #f3f4f6; padding: 24px; text-align: center; color: #6b7280; font-size: 12px;">
+        <div style="background-color: #ffffff; padding: 24px; text-align: center; color: #6b7280; font-size: 12px;">
           <p style="margin: 0 0 4px 0;">
             TAKMA Tadeusz Tiuchty | ul. Poświęcka 1a, 51-128 Wrocław
           </p>
@@ -374,8 +374,8 @@ function generateRepairShippedHTML(data: RepairShippedEmailData): string {
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
-    <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f3f4f6;">
-      <div style="max-width: 600px; margin: 0 auto; background-color: white;">
+    <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #ffffff;">
+      <div style="max-width: 600px; margin: 0 auto; background-color: white; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); border-radius: 8px; overflow: hidden;">
         
 ${getEmailHeader()}
 
@@ -499,8 +499,8 @@ function generateQuoteReadyHTML(data: QuoteReadyEmailData, shortId: string): str
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
-    <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f3f4f6;">
-      <div style="max-width: 600px; margin: 0 auto; background-color: white;">
+    <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #ffffff;">
+      <div style="max-width: 600px; margin: 0 auto; background-color: white; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); border-radius: 8px; overflow: hidden;">
         
 ${getEmailHeader()}
 
@@ -579,7 +579,7 @@ ${getEmailHeader()}
         </div>
 
         <!-- Footer -->
-        <div style="background-color: #f3f4f6; padding: 24px; text-align: center; color: #6b7280; font-size: 12px;">
+        <div style="background-color: #ffffff; padding: 24px; text-align: center; color: #6b7280; font-size: 12px;">
           <p style="margin: 0 0 4px 0;">
             TAKMA Tadeusz Tiuchty | ul. Poświęcka 1a, 51-128 Wrocław
           </p>
@@ -632,8 +632,8 @@ function generateProFormaAdminHTML(data: ProFormaAdminEmailData, shortId: string
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
-    <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f3f4f6;">
-      <div style="max-width: 600px; margin: 0 auto; background-color: white; padding: 20px;">
+    <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #ffffff;">
+      <div style="max-width: 600px; margin: 0 auto; background-color: white; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); border-radius: 8px; overflow: hidden; padding: 20px;">
         
         <div style="background-color: #f59e0b; color: white; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
           <h2 style="margin: 0;">📄 Klient wybrał Pro Forma</h2>
@@ -718,8 +718,8 @@ function generateRepairPaidClientHTML(data: RepairPaidEmailData, shortId: string
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
-    <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f3f4f6;">
-      <div style="max-width: 600px; margin: 0 auto; background-color: white;">
+    <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #ffffff;">
+      <div style="max-width: 600px; margin: 0 auto; background-color: white; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); border-radius: 8px; overflow: hidden;">
         
 ${getEmailHeader()}
 
@@ -940,8 +940,8 @@ function generateRepairSubmittedHTML(data: RepairSubmittedEmailData, shortId: st
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
-    <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f3f4f6;">
-      <div style="max-width: 600px; margin: 0 auto; background-color: white;">
+    <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #ffffff;">
+      <div style="max-width: 600px; margin: 0 auto; background-color: white; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); border-radius: 8px; overflow: hidden;">
         
         ${getEmailHeader()}
 
@@ -1041,7 +1041,7 @@ function generateRepairSubmittedHTML(data: RepairSubmittedEmailData, shortId: st
         </div>
 
         <!-- Footer -->
-        <div style="background-color: #f3f4f6; padding: 24px; text-align: center; color: #6b7280; font-size: 12px;">
+        <div style="background-color: #ffffff; padding: 24px; text-align: center; color: #6b7280; font-size: 12px;">
           <p style="margin: 0 0 4px 0;">
             TAKMA Tadeusz Tiuchty | ul. Poświęcka 1a, 51-128 Wrocław
           </p>
@@ -1216,8 +1216,8 @@ function generateWelcomeHTML(data: WelcomeEmailData): string {
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
-    <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f3f4f6;">
-      <div style="max-width: 600px; margin: 0 auto; background-color: white;">
+    <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #ffffff;">
+      <div style="max-width: 600px; margin: 0 auto; background-color: white; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); border-radius: 8px; overflow: hidden;">
         
 ${getEmailHeader()}
 
@@ -1281,7 +1281,7 @@ ${getEmailHeader()}
         </div>
 
         <!-- Footer -->
-        <div style="background-color: #f3f4f6; padding: 24px; text-align: center; color: #6b7280; font-size: 12px;">
+        <div style="background-color: #ffffff; padding: 24px; text-align: center; color: #6b7280; font-size: 12px;">
           <p style="margin: 0 0 4px 0;">
             TAKMA Tadeusz Tiuchty | ul. Poświęcka 1a, 51-128 Wrocław
           </p>
@@ -1334,8 +1334,8 @@ function generateQuoteAcceptedHTML(data: QuoteAcceptedEmailData, shortId: string
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
-    <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f3f4f6;">
-      <div style="max-width: 600px; margin: 0 auto; background-color: white;">
+    <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #ffffff;">
+      <div style="max-width: 600px; margin: 0 auto; background-color: white; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); border-radius: 8px; overflow: hidden;">
         
 ${getEmailHeader()}
 
@@ -1417,7 +1417,7 @@ ${getEmailHeader()}
         </div>
 
         <!-- Footer -->
-        <div style="background-color: #f3f4f6; padding: 24px; text-align: center; color: #6b7280; font-size: 12px;">
+        <div style="background-color: #ffffff; padding: 24px; text-align: center; color: #6b7280; font-size: 12px;">
           <p style="margin: 0 0 4px 0;">
             TAKMA Tadeusz Tiuchty | ul. Poświęcka 1a, 51-128 Wrocław
           </p>
@@ -1582,8 +1582,8 @@ function generateRepairStatusChangedHTML(data: RepairStatusChangedEmailData, sho
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
-    <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f3f4f6;">
-      <div style="max-width: 600px; margin: 0 auto; background-color: white;">
+    <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #ffffff;">
+      <div style="max-width: 600px; margin: 0 auto; background-color: white; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); border-radius: 8px; overflow: hidden;">
         
 ${getEmailHeader()}
 
@@ -1646,7 +1646,7 @@ ${getEmailHeader()}
         </div>
 
         <!-- Footer -->
-        <div style="background-color: #f3f4f6; padding: 24px; text-align: center; color: #6b7280; font-size: 12px;">
+        <div style="background-color: #ffffff; padding: 24px; text-align: center; color: #6b7280; font-size: 12px;">
           <p style="margin: 0 0 4px 0;">
             TAKMA Tadeusz Tiuchty | ul. Poświęcka 1a, 51-128 Wrocław
           </p>
@@ -1739,8 +1739,8 @@ function generateNewChatMessageHTML(data: NewChatMessageEmailData, shortId: stri
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
-    <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f3f4f6;">
-      <div style="max-width: 600px; margin: 0 auto; background-color: white;">
+    <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #ffffff;">
+      <div style="max-width: 600px; margin: 0 auto; background-color: white; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); border-radius: 8px; overflow: hidden;">
         
 ${getEmailHeader()}
 
@@ -1820,7 +1820,7 @@ ${getEmailHeader()}
         </div>
 
         <!-- Footer -->
-        <div style="background-color: #f3f4f6; padding: 24px; text-align: center; color: #6b7280; font-size: 12px;">
+        <div style="background-color: #ffffff; padding: 24px; text-align: center; color: #6b7280; font-size: 12px;">
           <p style="margin: 0 0 4px 0;">
             TAKMA Tadeusz Tiuchty | ul. Poświęcka 1a, 51-128 Wrocław
           </p>
@@ -1843,8 +1843,8 @@ function generateProFormaHTML(data: ProFormaEmailData, shortId: string): string 
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
-    <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f3f4f6;">
-      <div style="max-width: 600px; margin: 0 auto; background-color: white;">
+    <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #ffffff;">
+      <div style="max-width: 600px; margin: 0 auto; background-color: white; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); border-radius: 8px; overflow: hidden;">
         
 ${getEmailHeader()}
 
@@ -1934,7 +1934,7 @@ ${getEmailHeader()}
         </div>
 
         <!-- Footer -->
-        <div style="background-color: #f3f4f6; padding: 24px; text-align: center; color: #6b7280; font-size: 12px;">
+        <div style="background-color: #ffffff; padding: 24px; text-align: center; color: #6b7280; font-size: 12px;">
           <p style="margin: 0 0 4px 0;">
             TAKMA Tadeusz Tiuchty | ul. Poświęcka 1a, 51-128 Wrocław
           </p>
@@ -1988,8 +1988,8 @@ function generatePackageReceivedHTML(data: PackageReceivedEmailData, shortId: st
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
-    <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f3f4f6;">
-      <div style="max-width: 600px; margin: 0 auto; background-color: white;">
+    <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #ffffff;">
+      <div style="max-width: 600px; margin: 0 auto; background-color: white; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); border-radius: 8px; overflow: hidden;">
         
 ${getEmailHeader()}
 
@@ -2035,7 +2035,7 @@ ${getEmailHeader()}
 
           ${data.trackingNumber ? `
           <!-- Tracking info -->
-          <div style="background-color: #f3f4f6; border-radius: 8px; padding: 16px; margin-bottom: 24px; text-align: center;">
+          <div style="background-color: #ffffff; border-radius: 8px; padding: 16px; margin-bottom: 24px; text-align: center;">
             <p style="margin: 0 0 4px 0; color: #6b7280; font-size: 12px;">Numer przesyłki</p>
             <p style="margin: 0; font-family: monospace; font-size: 14px; color: #374151;">${data.trackingNumber}</p>
           </div>
@@ -2053,7 +2053,7 @@ ${getEmailHeader()}
         </div>
 
         <!-- Footer -->
-        <div style="background-color: #f3f4f6; padding: 24px; text-align: center; color: #6b7280; font-size: 12px;">
+        <div style="background-color: #ffffff; padding: 24px; text-align: center; color: #6b7280; font-size: 12px;">
           <p style="margin: 0 0 4px 0;">
             TAKMA Tadeusz Tiuchty | ul. Poświęcka 1a, 51-128 Wrocław
           </p>
