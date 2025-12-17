@@ -1116,25 +1116,14 @@ const handlePaymentSuccess = async () => {
       {/* KROK 2: Wycena zaakceptowana - przejdź do płatności */}
       {acceptModalStep === 'payment' && (
         <>
-          <div className="flex items-center gap-3 mb-3">
+          <div className="flex items-center gap-3 mb-4">
             <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
               <CheckCircle className="w-5 h-5 text-green-600" />
             </div>
             <div>
-              <h3 className="text-sm font-semibold text-gray-900">Wycena zaakceptowana!</h3>
+              <h3 className="text-sm font-semibold text-gray-900">Dziękujemy za akceptację!</h3>
               <p className="text-xs text-gray-500">Teraz przejdź do bezpiecznej płatności</p>
             </div>
-          </div>
-
-          <div className="bg-gray-50 rounded-lg p-3 mb-4">
-            <p className="text-xs text-gray-500 mb-0.5">Urządzenie:</p>
-            <p className="text-sm font-semibold text-gray-900 mb-2">
-              {repair.device_model}
-            </p>
-            <p className="text-xs text-gray-500 mb-1">Koszt naprawy:</p>
-            <p className="text-xl font-bold text-gray-900">
-              {formatPrice(repair.final_price || repair.estimated_price)} zł
-            </p>
           </div>
 
           <div className="flex gap-2">
