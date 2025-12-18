@@ -132,7 +132,7 @@ function generateOrderEmailHTML(data: OrderEmailData): string {
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body style="margin: 0; padding: 0; font-family: Arial, sans-serif; background-color: #ffffff;">
-      <div style="max-width: 600px; margin: 0 auto; background-color: white; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); border-radius: 8px; overflow: hidden;">
+      <div style="max-width: 600px; margin: 0 auto; background-color: white; box-shadow: 0 0 40px rgba(0, 0, 0, 0.08); border-radius: 8px; overflow: hidden;">
         
        <!-- Header -->
 <div style="background-color: #111827; padding: 32px 24px; text-align: center;">
@@ -375,7 +375,7 @@ function generateRepairShippedHTML(data: RepairShippedEmailData): string {
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #ffffff;">
-      <div style="max-width: 600px; margin: 0 auto; background-color: white; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); border-radius: 8px; overflow: hidden;">
+      <div style="max-width: 600px; margin: 0 auto; background-color: white; box-shadow: 0 0 40px rgba(0, 0, 0, 0.08); border-radius: 8px; overflow: hidden;">
         
 ${getEmailHeader()}
 
@@ -500,7 +500,7 @@ function generateQuoteReadyHTML(data: QuoteReadyEmailData, shortId: string): str
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #ffffff;">
-      <div style="max-width: 600px; margin: 0 auto; background-color: white; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); border-radius: 8px; overflow: hidden;">
+      <div style="max-width: 600px; margin: 0 auto; background-color: white; box-shadow: 0 0 40px rgba(0, 0, 0, 0.08); border-radius: 8px; overflow: hidden;">
         
 ${getEmailHeader()}
 
@@ -633,7 +633,7 @@ function generateProFormaAdminHTML(data: ProFormaAdminEmailData, shortId: string
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #ffffff;">
-      <div style="max-width: 600px; margin: 0 auto; background-color: white; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); border-radius: 8px; overflow: hidden; padding: 20px;">
+      <div style="max-width: 600px; margin: 0 auto; background-color: white; box-shadow: 0 0 40px rgba(0, 0, 0, 0.08); border-radius: 8px; overflow: hidden; padding: 20px;">
         
         <div style="background-color: #f59e0b; color: white; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
           <h2 style="margin: 0;">📄 Klient wybrał Pro Forma</h2>
@@ -719,7 +719,7 @@ function generateRepairPaidClientHTML(data: RepairPaidEmailData, shortId: string
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #ffffff;">
-      <div style="max-width: 600px; margin: 0 auto; background-color: white; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); border-radius: 8px; overflow: hidden;">
+      <div style="max-width: 600px; margin: 0 auto; background-color: white; box-shadow: 0 0 40px rgba(0, 0, 0, 0.08); border-radius: 8px; overflow: hidden;">
         
 ${getEmailHeader()}
 
@@ -941,7 +941,7 @@ function generateRepairSubmittedHTML(data: RepairSubmittedEmailData, shortId: st
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #ffffff;">
-      <div style="max-width: 600px; margin: 0 auto; background-color: white; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); border-radius: 8px; overflow: hidden;">
+      <div style="max-width: 600px; margin: 0 auto; background-color: white; box-shadow: 0 0 40px rgba(0, 0, 0, 0.08); border-radius: 8px; overflow: hidden;">
         
         ${getEmailHeader()}
 
@@ -1217,7 +1217,7 @@ function generateWelcomeHTML(data: WelcomeEmailData): string {
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #ffffff;">
-      <div style="max-width: 600px; margin: 0 auto; background-color: white; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); border-radius: 8px; overflow: hidden;">
+      <div style="max-width: 600px; margin: 0 auto; background-color: white; box-shadow: 0 0 40px rgba(0, 0, 0, 0.08); border-radius: 8px; overflow: hidden;">
         
 ${getEmailHeader()}
 
@@ -1335,7 +1335,7 @@ function generateQuoteAcceptedHTML(data: QuoteAcceptedEmailData, shortId: string
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #ffffff;">
-      <div style="max-width: 600px; margin: 0 auto; background-color: white; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); border-radius: 8px; overflow: hidden;">
+      <div style="max-width: 600px; margin: 0 auto; background-color: white; box-shadow: 0 0 40px rgba(0, 0, 0, 0.08); border-radius: 8px; overflow: hidden;">
         
 ${getEmailHeader()}
 
@@ -1583,7 +1583,7 @@ function generateRepairStatusChangedHTML(data: RepairStatusChangedEmailData, sho
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #ffffff;">
-      <div style="max-width: 600px; margin: 0 auto; background-color: white; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); border-radius: 8px; overflow: hidden;">
+      <div style="max-width: 600px; margin: 0 auto; background-color: white; box-shadow: 0 0 40px rgba(0, 0, 0, 0.08); border-radius: 8px; overflow: hidden;">
         
 ${getEmailHeader()}
 
@@ -1740,7 +1740,7 @@ function generateNewChatMessageHTML(data: NewChatMessageEmailData, shortId: stri
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #ffffff;">
-      <div style="max-width: 600px; margin: 0 auto; background-color: white; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); border-radius: 8px; overflow: hidden;">
+      <div style="max-width: 600px; margin: 0 auto; background-color: white; box-shadow: 0 0 40px rgba(0, 0, 0, 0.08); border-radius: 8px; overflow: hidden;">
         
 ${getEmailHeader()}
 
@@ -1844,7 +1844,7 @@ function generateProFormaHTML(data: ProFormaEmailData, shortId: string): string 
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #ffffff;">
-      <div style="max-width: 600px; margin: 0 auto; background-color: white; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); border-radius: 8px; overflow: hidden;">
+      <div style="max-width: 600px; margin: 0 auto; background-color: white; box-shadow: 0 0 40px rgba(0, 0, 0, 0.08); border-radius: 8px; overflow: hidden;">
         
 ${getEmailHeader()}
 
@@ -1989,7 +1989,7 @@ function generatePackageReceivedHTML(data: PackageReceivedEmailData, shortId: st
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #ffffff;">
-      <div style="max-width: 600px; margin: 0 auto; background-color: white; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); border-radius: 8px; overflow: hidden;">
+      <div style="max-width: 600px; margin: 0 auto; background-color: white; box-shadow: 0 0 40px rgba(0, 0, 0, 0.08); border-radius: 8px; overflow: hidden;">
         
 ${getEmailHeader()}
 
