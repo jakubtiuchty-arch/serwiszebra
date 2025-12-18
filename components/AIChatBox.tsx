@@ -95,6 +95,7 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
   const isLastMessageAI = lastMessage?.role === 'assistant'
   const lastMessageIsQuestion = lastMessage?.content?.includes('?') || false
   const isSeriousIssue = lastMessage?.content?.includes('[SERIOUS_ISSUE]') || false
+  const isInfoOnly = lastMessage?.content?.includes('[INFO_ONLY]') || false  // Pytanie o specyfikację/informacje - NIE pokazuj CTA
   const suggestsRepair =
     lastMessage?.content?.toLowerCase().includes('wysłać do serwisu') ||
     lastMessage?.content?.toLowerCase().includes('wysłanie do serwisu') ||
@@ -106,6 +107,7 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
     isLastMessageAI &&
     !lastMessageIsQuestion &&
     !loading &&
+    !isInfoOnly &&  // ❌ NIE pokazuj CTA dla pytań informacyjnych (specyfikacja, waga, wymiary itp.)
     (isSeriousIssue || suggestsRepair || messageCount >= 6)  // ✨ Pokaż wcześniej dla poważnych usterek lub sugestii naprawy
 
   // Scroll do dołu - płynnie
@@ -447,6 +449,7 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
                       <div className="text-sm whitespace-pre-wrap leading-relaxed">
                         {msg.content
                           .replace('[SERIOUS_ISSUE]', '')
+                          .replace('[INFO_ONLY]', '')
                           .trim()
                           .split(/(\[BARCODE:[^\]]+\]|\[[^\]]+\]\([^)]+\))/)
                           .map((part, partIdx) => {
