@@ -14,8 +14,8 @@ function getRepairNumber(repairId: string, repairNumber?: string): string {
   return repairId.split('-')[0].toUpperCase()
 }
 
-// Wspólny header dla wszystkich maili do klientów - responsive (desktop inline, mobile stacked)
-function getEmailHeader(): string {
+// Style CSS dla emaili - muszą być w <head>
+function getEmailStyles(): string {
   return `
     <style>
       @media only screen and (max-width: 600px) {
@@ -24,8 +24,16 @@ function getEmailHeader(): string {
         .email-header-right { display: block !important; width: 100% !important; text-align: center !important; }
         .email-logo { height: 36px !important; }
         .email-badge { height: 28px !important; margin: 0 4px !important; }
+        .email-content { padding: 24px 16px !important; }
+        .email-box { padding: 16px !important; }
       }
     </style>
+  `
+}
+
+// Wspólny header dla wszystkich maili do klientów - responsive (desktop inline, mobile stacked)
+function getEmailHeader(): string {
+  return `
     <!-- Header z ciemnym tłem - responsive -->
     <div style="background-color: #1f2937; padding: 20px 24px;">
       <table class="email-header-table" style="width: 100%; border-collapse: collapse;">
@@ -139,6 +147,7 @@ function generateOrderEmailHTML(data: OrderEmailData): string {
     <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      ${getEmailStyles()}
     </head>
     <body style="margin: 0; padding: 0; font-family: Arial, sans-serif; background-color: #ffffff;">
       <div style="max-width: 600px; margin: 0 auto; background-color: white;  border-radius: 8px; overflow: hidden;">
@@ -382,6 +391,7 @@ function generateRepairShippedHTML(data: RepairShippedEmailData): string {
     <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      ${getEmailStyles()}
     </head>
     <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #ffffff;">
       <div style="max-width: 600px; margin: 0 auto; background-color: white;  border-radius: 8px; overflow: hidden;">
@@ -507,6 +517,7 @@ function generateQuoteReadyHTML(data: QuoteReadyEmailData, shortId: string): str
     <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      ${getEmailStyles()}
     </head>
     <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #ffffff;">
       <div style="max-width: 600px; margin: 0 auto; background-color: white;  border-radius: 8px; overflow: hidden;">
@@ -640,6 +651,7 @@ function generateProFormaAdminHTML(data: ProFormaAdminEmailData, shortId: string
     <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      ${getEmailStyles()}
     </head>
     <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #ffffff;">
       <div style="max-width: 600px; margin: 0 auto; background-color: white;  border-radius: 8px; overflow: hidden; padding: 20px;">
@@ -726,6 +738,7 @@ function generateRepairPaidClientHTML(data: RepairPaidEmailData, shortId: string
     <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      ${getEmailStyles()}
     </head>
     <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #ffffff;">
       <div style="max-width: 600px; margin: 0 auto; background-color: white;  border-radius: 8px; overflow: hidden;">
@@ -948,6 +961,7 @@ function generateRepairSubmittedHTML(data: RepairSubmittedEmailData, shortId: st
     <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      ${getEmailStyles()}
     </head>
     <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #ffffff;">
       <div style="max-width: 600px; margin: 0 auto; background-color: white;  border-radius: 8px; overflow: hidden;">
@@ -1224,6 +1238,7 @@ function generateWelcomeHTML(data: WelcomeEmailData): string {
     <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      ${getEmailStyles()}
     </head>
     <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #ffffff;">
       <div style="max-width: 600px; margin: 0 auto; background-color: white;  border-radius: 8px; overflow: hidden;">
@@ -1342,6 +1357,7 @@ function generateQuoteAcceptedHTML(data: QuoteAcceptedEmailData, shortId: string
     <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      ${getEmailStyles()}
     </head>
     <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #ffffff;">
       <div style="max-width: 600px; margin: 0 auto; background-color: white;  border-radius: 8px; overflow: hidden;">
@@ -1590,6 +1606,7 @@ function generateRepairStatusChangedHTML(data: RepairStatusChangedEmailData, sho
     <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      ${getEmailStyles()}
     </head>
     <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #ffffff;">
       <div style="max-width: 600px; margin: 0 auto; background-color: white;  border-radius: 8px; overflow: hidden;">
@@ -1747,6 +1764,7 @@ function generateNewChatMessageHTML(data: NewChatMessageEmailData, shortId: stri
     <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      ${getEmailStyles()}
     </head>
     <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #ffffff;">
       <div style="max-width: 600px; margin: 0 auto; background-color: white;  border-radius: 8px; overflow: hidden;">
@@ -1851,6 +1869,7 @@ function generateProFormaHTML(data: ProFormaEmailData, shortId: string): string 
     <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      ${getEmailStyles()}
     </head>
     <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #ffffff;">
       <div style="max-width: 600px; margin: 0 auto; background-color: white;  border-radius: 8px; overflow: hidden;">
@@ -1996,6 +2015,7 @@ function generatePackageReceivedHTML(data: PackageReceivedEmailData, shortId: st
     <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      ${getEmailStyles()}
     </head>
     <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #ffffff;">
       <div style="max-width: 600px; margin: 0 auto; background-color: white;  border-radius: 8px; overflow: hidden;">
