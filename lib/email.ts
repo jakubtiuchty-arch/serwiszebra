@@ -14,27 +14,26 @@ function getRepairNumber(repairId: string, repairNumber?: string): string {
   return repairId.split('-')[0].toUpperCase()
 }
 
-// Wspólny header dla wszystkich maili do klientów - z logotypami hostowanymi na serwerze
+// Wspólny header dla wszystkich maili do klientów - mobile-friendly stacked layout
 function getEmailHeader(): string {
   return `
-    <!-- Header z ciemnym tłem (gradient jako enhancement dla klientów które go obsługują) -->
-    <div style="background-color: #1f2937; background-image: linear-gradient(to right, #6b7280, #374151, #111827); padding: 20px 24px;">
-      <table style="width: 100%; border-collapse: collapse;">
-        <tr>
-          <!-- Lewa strona: Logo TAKMA + odznaki partnerskie -->
-          <td style="text-align: left; vertical-align: middle;">
-            <img src="${EMAIL_ASSETS_URL}/takma_logo_white.png" alt="TAKMA" style="height: 50px; width: auto; display: inline-block; vertical-align: middle;">
-            <img src="${EMAIL_ASSETS_URL}/premier-partner-1.png" alt="Zebra Premier Partner" style="height: 36px; width: auto; display: inline-block; vertical-align: middle; margin-left: 16px;">
-            <img src="${EMAIL_ASSETS_URL}/repair_specialist.png" alt="Repair Specialist" style="height: 36px; width: auto; display: inline-block; vertical-align: middle; margin-left: 12px;">
-          </td>
-          <!-- Prawa strona: Serwis Zebra (zawsze na ciemnym tle) -->
-          <td style="text-align: right; vertical-align: middle;">
-            <span style="color: #ffffff; font-size: 20px; font-weight: 700; letter-spacing: 1px;">
-              SERWIS ZEBRA
-            </span>
-          </td>
-        </tr>
-      </table>
+    <!-- Header z ciemnym tłem - mobile friendly -->
+    <div style="background-color: #1f2937; padding: 20px 16px; text-align: center;">
+      <!-- Logo TAKMA -->
+      <div style="margin-bottom: 12px;">
+        <img src="${EMAIL_ASSETS_URL}/takma_logo_white.png" alt="TAKMA" style="height: 40px; max-width: 160px; width: auto;">
+      </div>
+      <!-- Odznaki partnerskie -->
+      <div style="margin-bottom: 12px;">
+        <img src="${EMAIL_ASSETS_URL}/premier-partner-1.png" alt="Zebra Premier Partner" style="height: 32px; width: auto; margin: 0 6px;">
+        <img src="${EMAIL_ASSETS_URL}/repair_specialist.png" alt="Repair Specialist" style="height: 32px; width: auto; margin: 0 6px;">
+      </div>
+      <!-- Serwis Zebra -->
+      <div>
+        <span style="color: #ffffff; font-size: 18px; font-weight: 700; letter-spacing: 1px;">
+          SERWIS ZEBRA
+        </span>
+      </div>
     </div>
   `
 }
