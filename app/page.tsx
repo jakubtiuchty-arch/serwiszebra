@@ -1539,9 +1539,38 @@ export default function HomePage() {
           <div className="border-t border-white/5">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
               <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+                {/* Lewa strona: copyright */}
                 <p className="text-xs text-gray-500">
                   © 2025 <span className="text-gray-400">TAKMA</span> - Serwis Zebra. Wszystkie prawa zastrzeżone.
                 </p>
+                
+                {/* Środek: Made by qba.dev */}
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-white/[0.02] to-white/[0.05] border border-white/10 backdrop-blur-sm">
+                  <span className="text-[11px] text-gray-500 font-medium tracking-wide">
+                    Crafted with
+                  </span>
+                  <span className="text-red-400 animate-pulse">♥</span>
+                  <span className="text-[11px] text-gray-500 font-medium tracking-wide">
+                    by
+                  </span>
+                  <a 
+                    href="https://qba.dev" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="group relative inline-flex items-center"
+                  >
+                    <span className="absolute inset-0 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-pink-500/20 rounded-md blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                    <span className="relative flex items-center gap-0.5 px-2 py-0.5 bg-gradient-to-r from-slate-800 to-slate-900 rounded-md border border-white/10 group-hover:border-blue-500/50 transition-all duration-300">
+                      <span className="text-blue-400 font-mono text-xs">&lt;</span>
+                      <span className="text-[12px] font-semibold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+                        qba.dev
+                      </span>
+                      <span className="text-blue-400 font-mono text-xs">/&gt;</span>
+                    </span>
+                  </a>
+                </div>
+                
+                {/* Prawa strona: linki */}
                 <div className="flex items-center gap-6 text-xs text-gray-500">
                   <a href="/regulamin" className="hover:text-white transition-colors">Regulamin</a>
                   <a href="/polityka-prywatnosci" className="hover:text-white transition-colors">Polityka prywatności</a>
