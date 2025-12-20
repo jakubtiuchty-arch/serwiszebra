@@ -17,19 +17,19 @@ function getRepairNumber(repairId: string, repairNumber?: string): string {
 // Wspólny header dla wszystkich maili do klientów - z logotypami hostowanymi na serwerze
 function getEmailHeader(): string {
   return `
-    <!-- Header z gradientem: jasny (lewo) -> ciemny (prawo) -->
-    <div style="background: linear-gradient(to right, #f3f4f6, #374151, #111827); padding: 20px 24px;">
+    <!-- Header z ciemnym tłem (gradient jako enhancement dla klientów które go obsługują) -->
+    <div style="background-color: #1f2937; background-image: linear-gradient(to right, #6b7280, #374151, #111827); padding: 20px 24px;">
       <table style="width: 100%; border-collapse: collapse;">
         <tr>
-          <!-- Lewa strona: Logo TAKMA + odznaki partnerskie (na jasnym tle) -->
+          <!-- Lewa strona: Logo TAKMA + odznaki partnerskie -->
           <td style="text-align: left; vertical-align: middle;">
             <img src="${EMAIL_ASSETS_URL}/takma_logo_1.png" alt="TAKMA" style="height: 50px; width: auto; display: inline-block; vertical-align: middle;">
             <img src="${EMAIL_ASSETS_URL}/premier-partner-1.png" alt="Zebra Premier Partner" style="height: 36px; width: auto; display: inline-block; vertical-align: middle; margin-left: 16px;">
             <img src="${EMAIL_ASSETS_URL}/repair_specialist.png" alt="Repair Specialist" style="height: 36px; width: auto; display: inline-block; vertical-align: middle; margin-left: 12px;">
           </td>
-          <!-- Prawa strona: Serwis Zebra (na ciemnym tle) -->
+          <!-- Prawa strona: Serwis Zebra (zawsze na ciemnym tle) -->
           <td style="text-align: right; vertical-align: middle;">
-            <span style="color: white; font-size: 20px; font-weight: 700; letter-spacing: 1px;">
+            <span style="color: #ffffff; font-size: 20px; font-weight: 700; letter-spacing: 1px;">
               SERWIS ZEBRA
             </span>
           </td>
@@ -979,7 +979,7 @@ function generateRepairSubmittedHTML(data: RepairSubmittedEmailData, shortId: st
               <tr>
                 <td style="color: #6b7280; font-size: 14px; padding-top: 8px;">Typ naprawy:</td>
                 <td style="text-align: right; padding-top: 8px;">
-                  <span style="background-color: ${data.isWarranty ? '#dbeafe' : '#f3f4f6'}; color: ${data.isWarranty ? '#1e40af' : '#374151'}; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 600;">
+                  <span style="background-color: ${data.isWarranty ? '#dbeafe' : '#fed7aa'}; color: ${data.isWarranty ? '#1e40af' : '#c2410c'}; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 600;">
                     ${data.isWarranty ? 'Gwarancyjna' : 'Płatna'}
                   </span>
                 </td>
@@ -1133,7 +1133,7 @@ function generateRepairSubmittedAdminHTML(data: RepairSubmittedAdminEmailData, s
             <tr>
               <td style="padding: 8px 0;"><strong>Typ naprawy:</strong></td>
               <td style="padding: 8px 0;">
-                <span style="background-color: ${data.isWarranty ? '#dbeafe' : '#f3f4f6'}; color: ${data.isWarranty ? '#1e40af' : '#374151'}; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 600;">
+                <span style="background-color: ${data.isWarranty ? '#dbeafe' : '#fed7aa'}; color: ${data.isWarranty ? '#1e40af' : '#c2410c'}; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 600;">
                   ${data.isWarranty ? 'GWARANCJA' : 'PŁATNA'}
                 </span>
               </td>
