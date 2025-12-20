@@ -41,7 +41,7 @@ export default function Header({ currentPage = 'other', hidePartnerLogos = false
           <div className="flex items-center h-14 sm:h-16">
             <Link href="/" className="flex items-center gap-1 sm:gap-3 -ml-2 sm:-ml-3 md:-ml-6">
               {/* TAKMA Logo */}
-              <div className="w-[90px] sm:w-[130px] md:w-[148px] h-[38px] sm:h-[50px] md:h-[56px] relative">
+              <div className="w-[110px] sm:w-[160px] md:w-[180px] h-[46px] sm:h-[62px] md:h-[68px] relative">
                 <Image
                   src="/takma_logo_1.png"
                   alt="TAKMA Logo"

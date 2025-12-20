@@ -262,7 +262,7 @@ export default function HomePage() {
               <div className="flex items-center h-14 sm:h-16">
                 <div className="flex items-center gap-1 sm:gap-3 -ml-2 sm:-ml-3 md:-ml-6">
                   {/* TAKMA Logo */}
-                  <div className="w-[90px] sm:w-[130px] md:w-[148px] h-[38px] sm:h-[50px] md:h-[56px] relative">
+                  <div className="w-[110px] sm:w-[160px] md:w-[180px] h-[46px] sm:h-[62px] md:h-[68px] relative">
                     <Image
                       src="/takma_logo_1.png"
                       alt="TAKMA Logo"
@@ -1537,43 +1537,44 @@ export default function HomePage() {
 
           {/* Bottom bar */}
           <div className="border-t border-white/5">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
-              <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-                {/* Lewa strona: copyright */}
-                <p className="text-xs text-gray-500">
-                  © 2025 <span className="text-gray-400">TAKMA</span> - Serwis Zebra. Wszystkie prawa zastrzeżone.
-                </p>
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-6">
+              <div className="relative flex flex-col md:flex-row items-center justify-between gap-8 md:gap-6">
                 
-                {/* Środek: Made by qba.dev */}
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-white/[0.02] to-white/[0.05] border border-white/10 backdrop-blur-sm">
-                  <span className="text-[11px] text-gray-500 font-medium tracking-wide">
-                    Crafted with
-                  </span>
-                  <span className="text-red-400 animate-pulse">♥</span>
-                  <span className="text-[11px] text-gray-500 font-medium tracking-wide">
-                    by
-                  </span>
-                  <a 
-                    href="https://qba.dev" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="group relative inline-flex items-center"
-                  >
-                    <span className="absolute inset-0 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-pink-500/20 rounded-md blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-                    <span className="relative flex items-center gap-0.5 px-2 py-0.5 bg-gradient-to-r from-slate-800 to-slate-900 rounded-md border border-white/10 group-hover:border-blue-500/50 transition-all duration-300">
-                      <span className="text-blue-400 font-mono text-xs">&lt;</span>
-                      <span className="text-[12px] font-semibold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-                        qba.dev
-                      </span>
-                      <span className="text-blue-400 font-mono text-xs">/&gt;</span>
-                    </span>
-                  </a>
+                {/* Lewa: Copyright */}
+                <div className="md:flex-1 text-center md:text-left order-2 md:order-none">
+                  <p className="text-xs text-gray-500">
+                    © 2025 <span className="text-gray-400">TAKMA</span> - Serwis Zebra.<br className="block sm:hidden" /> Wszystkie prawa zastrzeżone.
+                  </p>
                 </div>
-                
-                {/* Prawa strona: linki */}
-                <div className="flex items-center gap-6 text-xs text-gray-500">
+
+                {/* Środek: Linki (absolutnie wyśrodkowane na desktopie) */}
+                <div className="flex items-center justify-center gap-6 sm:gap-8 text-xs text-gray-500 md:absolute md:left-1/2 md:-translate-x-1/2 order-3 md:order-none border-t md:border-t-0 border-white/5 pt-6 md:pt-0 w-full md:w-auto">
                   <a href="/regulamin" className="hover:text-white transition-colors">Regulamin</a>
                   <a href="/polityka-prywatnosci" className="hover:text-white transition-colors">Polityka prywatności</a>
+                </div>
+
+                {/* Prawa: Made by qba.dev */}
+                <div className="md:flex-1 flex justify-center md:justify-end order-1 md:order-none">
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/[0.03] border border-white/10 backdrop-blur-sm hover:border-white/20 transition-colors">
+                    <span className="text-[10px] text-gray-600 font-medium tracking-tight">Crafted with</span>
+                    <span className="text-red-400/80 animate-pulse text-[10px]">♥</span>
+                    <span className="text-[10px] text-gray-600 font-medium tracking-tight">by</span>
+                    <a 
+                      href="https://qba.dev" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="group relative inline-flex items-center ml-0.5"
+                    >
+                      <span className="absolute inset-0 bg-blue-500/20 rounded-md blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                      <span className="relative flex items-center gap-0.5 px-1.5 py-0.5 bg-slate-900 rounded border border-white/10 group-hover:border-blue-400/50 transition-all duration-300">
+                        <span className="text-blue-400/80 font-mono text-[9px]">&lt;</span>
+                        <span className="text-[10px] font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+                          qba.dev
+                        </span>
+                        <span className="text-blue-400/80 font-mono text-[9px]">/&gt;</span>
+                      </span>
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
