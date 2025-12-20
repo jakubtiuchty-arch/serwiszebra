@@ -58,7 +58,7 @@ export async function generateMetadata({
       locale: 'pl_PL',
       images: [
         {
-          url: `https://serwiszebra.pl${post.coverImage}`,
+          url: `https://www.serwis-zebry.pl${post.coverImage}`,
           width: 1200,
           height: 630,
           alt: post.title
@@ -69,10 +69,10 @@ export async function generateMetadata({
       card: 'summary_large_image',
       title: post.seo.metaTitle,
       description: post.seo.metaDescription,
-      images: [`https://serwiszebra.pl${post.coverImage}`],
+      images: [`https://www.serwis-zebry.pl${post.coverImage}`],
     },
     alternates: {
-      canonical: `https://serwiszebra.pl/blog/${post.slug}`
+      canonical: `https://www.serwis-zebry.pl/blog/${post.slug}`
     }
   }
 }
@@ -97,25 +97,25 @@ export default function BlogPostPage({
     '@type': 'TechArticle', // Bardziej precyzyjny typ dla artykułów technicznych
     headline: post.title,
     description: post.excerpt,
-    image: `https://serwiszebra.pl${post.coverImage}`,
+    image: `https://www.serwis-zebry.pl${post.coverImage}`,
     author: {
       '@type': 'Organization',
       name: post.author.name,
-      url: 'https://serwiszebra.pl'
+      url: 'https://www.serwis-zebry.pl'
     },
     publisher: {
       '@type': 'Organization',
       name: 'Serwis Zebra - TAKMA',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://serwiszebra.pl/takma_logo_1.png'
+        url: 'https://www.serwis-zebry.pl/takma_logo_1.png'
       }
     },
     datePublished: post.publishedAt,
     dateModified: post.updatedAt || post.publishedAt,
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `https://serwiszebra.pl/blog/${post.slug}`
+      '@id': `https://www.serwis-zebry.pl/blog/${post.slug}`
     },
     keywords: post.tags.join(', '),
     wordCount: wordCount,
@@ -141,7 +141,7 @@ export default function BlogPostPage({
     '@type': 'HowTo',
     name: post.title,
     description: post.excerpt,
-    image: `https://serwiszebra.pl${post.coverImage}`,
+    image: `https://www.serwis-zebry.pl${post.coverImage}`,
     totalTime: `PT${post.readingTime}M`,
     tool: extractToolsFromContent(post.content),
     step: extractStepsFromContent(post.content)
@@ -156,19 +156,19 @@ export default function BlogPostPage({
         '@type': 'ListItem',
         position: 1,
         name: 'Strona główna',
-        item: 'https://serwiszebra.pl'
+        item: 'https://www.serwis-zebry.pl'
       },
       {
         '@type': 'ListItem',
         position: 2,
         name: 'Blog',
-        item: 'https://serwiszebra.pl/blog'
+        item: 'https://www.serwis-zebry.pl/blog'
       },
       {
         '@type': 'ListItem',
         position: 3,
         name: post.title,
-        item: `https://serwiszebra.pl/blog/${post.slug}`
+        item: `https://www.serwis-zebry.pl/blog/${post.slug}`
       }
     ]
   }
@@ -341,7 +341,7 @@ export default function BlogPostPage({
               <h3 className="text-sm font-semibold text-gray-500 uppercase mb-4">Udostępnij</h3>
               <div className="flex flex-wrap gap-2 sm:gap-3">
                 <a
-                  href={`https://www.facebook.com/sharer/sharer.php?u=https://serwiszebra.pl/blog/${post.slug}`}
+                  href={`https://www.facebook.com/sharer/sharer.php?u=https://www.serwis-zebry.pl/blog/${post.slug}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-3 sm:px-4 py-2 bg-blue-600 text-white rounded-lg text-xs sm:text-sm font-medium hover:bg-blue-700 transition-colors"
@@ -349,7 +349,7 @@ export default function BlogPostPage({
                   Facebook
                 </a>
                 <a
-                  href={`https://www.linkedin.com/shareArticle?mini=true&url=https://serwiszebra.pl/blog/${post.slug}&title=${encodeURIComponent(post.title)}`}
+                  href={`https://www.linkedin.com/shareArticle?mini=true&url=https://www.serwis-zebry.pl/blog/${post.slug}&title=${encodeURIComponent(post.title)}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-3 sm:px-4 py-2 bg-blue-700 text-white rounded-lg text-xs sm:text-sm font-medium hover:bg-blue-800 transition-colors"
@@ -357,7 +357,7 @@ export default function BlogPostPage({
                   LinkedIn
                 </a>
                 <a
-                  href={`https://twitter.com/intent/tweet?url=https://serwiszebra.pl/blog/${post.slug}&text=${encodeURIComponent(post.title)}`}
+                  href={`https://twitter.com/intent/tweet?url=https://www.serwis-zebry.pl/blog/${post.slug}&text=${encodeURIComponent(post.title)}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-3 sm:px-4 py-2 bg-gray-900 text-white rounded-lg text-xs sm:text-sm font-medium hover:bg-gray-800 transition-colors"

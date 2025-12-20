@@ -145,7 +145,7 @@ function ConfirmationContent() {
           </h3>
           <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs">
             <p className="text-blue-800">
-              📧 <a href="mailto:serwis@serwiszebra.pl" className="font-medium underline">serwis@serwiszebra.pl</a>
+              📧 <a href="mailto:serwis@serwis-zebry.pl" className="font-medium underline">serwis@serwis-zebry.pl</a>
             </p>
             <p className="text-blue-800">
               📞 <a href="tel:+48607819688" className="font-medium underline">+48 607 819 688</a>

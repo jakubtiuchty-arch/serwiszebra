@@ -15,10 +15,10 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'FAQ – Często Zadawane Pytania | Serwis Zebra',
     description: 'Odpowiedzi na najczęstsze pytania dotyczące serwisu urządzeń Zebra.',
-    url: 'https://serwiszebra.pl/faq',
+    url: 'https://www.serwis-zebry.pl/faq',
   },
   alternates: {
-    canonical: 'https://serwiszebra.pl/faq',
+    canonical: 'https://www.serwis-zebry.pl/faq',
   },
 }
 

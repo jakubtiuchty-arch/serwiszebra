@@ -320,7 +320,7 @@ export async function GET(
     </div>
 
     <div class="footer">
-      <p>Dokument wygenerowany automatycznie przez system serwiszebra.pl</p>
+      <p>Dokument wygenerowany automatycznie przez system serwis-zebry.pl</p>
       <p>Pro forma nie jest dokumentem księgowym. Faktura VAT zostanie wystawiona po zaksięgowaniu płatności.</p>
     </div>
   </div>

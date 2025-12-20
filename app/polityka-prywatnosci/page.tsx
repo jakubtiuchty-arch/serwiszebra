@@ -52,7 +52,7 @@ export default function PolitykaPrywatnosciPage() {
           <div className="bg-gray-50 border border-gray-200 rounded-xl p-5 mb-10">
             <p className="text-sm text-gray-600 m-0">
               Niniejsza Polityka Prywatności określa zasady przetwarzania i ochrony danych osobowych 
-              przekazanych przez Użytkowników w związku z korzystaniem z usług serwisu <strong>serwiszebra.pl</strong>, 
+              przekazanych przez Użytkowników w związku z korzystaniem z usług serwisu <strong>serwis-zebry.pl</strong>, 
               prowadzonego przez firmę TAKMA. Dbamy o Twoją prywatność i bezpieczeństwo danych zgodnie 
               z Rozporządzeniem RODO.
             </p>
@@ -77,7 +77,7 @@ export default function PolitykaPrywatnosciPage() {
               </div>
               <p>1.2. Kontakt w sprawach dotyczących danych osobowych:</p>
               <ul className="list-disc list-inside ml-4 space-y-1">
-                <li>Email: <a href="mailto:serwis@serwiszebra.pl" className="text-blue-600 hover:underline">serwis@serwiszebra.pl</a></li>
+                <li>Email: <a href="mailto:serwis@serwis-zebry.pl" className="text-blue-600 hover:underline">serwis@serwis-zebry.pl</a></li>
                 <li>Telefon: <a href="tel:+48601619898" className="text-blue-600 hover:underline">+48 601 619 898</a></li>
                 <li>Adres korespondencyjny: ul. Poświęcka 1a, 51-128 Wrocław</li>
               </ul>
@@ -259,7 +259,7 @@ export default function PolitykaPrywatnosciPage() {
                 </div>
               </div>
 
-              <p className="mt-4">7.2. Aby skorzystać z praw, skontaktuj się z nami: <a href="mailto:serwis@serwiszebra.pl" className="text-blue-600 hover:underline">serwis@serwiszebra.pl</a></p>
+              <p className="mt-4">7.2. Aby skorzystać z praw, skontaktuj się z nami: <a href="mailto:serwis@serwis-zebry.pl" className="text-blue-600 hover:underline">serwis@serwis-zebry.pl</a></p>
               <p>7.3. Masz prawo wnieść skargę do Prezesa Urzędu Ochrony Danych Osobowych (UODO).</p>
             </div>
           </section>
@@ -327,7 +327,7 @@ export default function PolitykaPrywatnosciPage() {
                 <li>Powiadomienie na stronie głównej serwisu</li>
                 <li>Email do zarejestrowanych użytkowników</li>
               </ul>
-              <p>10.3. Aktualna wersja Polityki jest zawsze dostępna pod adresem: <a href="https://serwiszebra.pl/polityka-prywatnosci" className="text-blue-600 hover:underline">serwiszebra.pl/polityka-prywatnosci</a></p>
+              <p>10.3. Aktualna wersja Polityki jest zawsze dostępna pod adresem: <a href="https://www.serwis-zebry.pl/polityka-prywatnosci" className="text-blue-600 hover:underline">serwis-zebry.pl/polityka-prywatnosci</a></p>
               <p>10.4. Data ostatniej aktualizacji: <strong>5 grudnia 2025</strong></p>
             </div>
           </section>
@@ -347,10 +347,10 @@ export default function PolitykaPrywatnosciPage() {
                 </p>
                 <div className="flex flex-wrap gap-3">
                   <a 
-                    href="mailto:serwis@serwiszebra.pl" 
+                    href="mailto:serwis@serwis-zebry.pl" 
                     className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
                   >
-                    serwis@serwiszebra.pl
+                    serwis@serwis-zebry.pl
                   </a>
                   <a 
                     href="tel:+48601619898" 

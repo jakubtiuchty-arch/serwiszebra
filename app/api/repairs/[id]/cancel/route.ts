@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 
 export async function POST(
-  _request: Request,
+  request: Request,
   { params }: { params: { id: string } }
 ) {
   try {
@@ -17,7 +17,10 @@ export async function POST(
     }
 
     const { id } = params
-    // Note: body może zawierać 'reason' ale nie jest zapisywany (brak kolumny w bazie)
+    
+    // Pobierz body z reason i flagą diagnosticFeePaid
+    const body = await request.json().catch(() => ({}))
+    const diagnosticFeePaid = body.diagnosticFeePaid === true
 
     // Pobierz zgłoszenie
     const { data: repair, error: fetchError } = await supabase
@@ -31,9 +34,19 @@ export async function POST(
       return NextResponse.json({ error: 'Zgłoszenie nie znalezione' }, { status: 404 })
     }
 
-    // Sprawdź czy można anulować (tylko statusy: nowe, odebrane, diagnoza, wycena)
-    const cancellableStatuses = ['nowe', 'odebrane', 'diagnoza', 'wycena']
-    if (!cancellableStatuses.includes(repair.status)) {
+    // Sprawdź czy można anulować
+    // Jeśli opłacono diagnostykę, można anulować z każdego statusu poza zakończonymi
+    const cancellableStatuses = ['nowe', 'odebrane', 'diagnoza', 'wycena', 'proforma']
+    const finalStatuses = ['zakonczone', 'wyslane', 'anulowane']
+    
+    if (finalStatuses.includes(repair.status)) {
+      return NextResponse.json(
+        { error: 'Nie można anulować zakończonego zgłoszenia' },
+        { status: 400 }
+      )
+    }
+    
+    if (!diagnosticFeePaid && !cancellableStatuses.includes(repair.status)) {
       return NextResponse.json(
         { error: 'Nie można anulować zgłoszenia w tym statusie' },
         { status: 400 }

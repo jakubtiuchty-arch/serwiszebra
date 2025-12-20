@@ -8,7 +8,7 @@ const supabase = createClient(
 )
 
 // Adres email do raportów
-const REPORT_EMAIL = 'superadmin@serwiszebra.pl'
+const REPORT_EMAIL = 'superadmin@serwis-zebry.pl'
 
 // Kategorie
 const CATEGORIES: Record<string, { name: string; icon: string }> = {
@@ -32,9 +32,9 @@ export async function GET(req: NextRequest) {
     
     // Opcjonalne: weryfikacja CRON secret
     if (cronSecret && authHeader !== `Bearer ${cronSecret}`) {
-      // Pozwól na dostęp z panelu admina (localhost lub serwiszebra.pl)
+      // Pozwól na dostęp z panelu admina (localhost lub serwis-zebry.pl)
       const origin = req.headers.get('origin') || ''
-      if (!origin.includes('serwiszebra.pl') && !origin.includes('localhost')) {
+      if (!origin.includes('serwis-zebry.pl') && !origin.includes('localhost')) {
         return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
       }
     }
@@ -309,7 +309,7 @@ function generateReportHtml(data: {
   ` : ''}
 
   <div class="cta">
-    <a href="https://serwiszebra.pl/admin/chat-analytics">Zobacz pełną analitykę →</a>
+    <a href="https://www.serwis-zebry.pl/admin/chat-analytics">Zobacz pełną analitykę →</a>
   </div>
 
   <div class="footer">
@@ -334,6 +334,7 @@ function truncate(text: string, maxLength: number): string {
   if (text.length <= maxLength) return text
   return text.substring(0, maxLength) + '...'
 }
+
 
 
 

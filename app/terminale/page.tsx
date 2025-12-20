@@ -29,10 +29,10 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Serwis Terminali Zebra – Naprawa TC, MC, Wymiana Ekranów',
     description: 'Profesjonalny serwis terminali mobilnych Zebra. Wymiana wyświetlaczy, naprawa skanerów, wymiana baterii.',
-    url: 'https://serwiszebra.pl/terminale',
+    url: 'https://www.serwis-zebry.pl/terminale',
   },
   alternates: {
-    canonical: 'https://serwiszebra.pl/terminale',
+    canonical: 'https://www.serwis-zebry.pl/terminale',
   },
 }
 

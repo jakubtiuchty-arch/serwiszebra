@@ -30,10 +30,10 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Serwis Drukarek Zebra – Naprawa Etykiet, Kart, Mobilnych',
     description: 'Profesjonalny serwis wszystkich drukarek Zebra. Wymiana głowic, naprawa mechanizmu, kalibracja. Odbiór kurierem w 24h.',
-    url: 'https://serwiszebra.pl/drukarki',
+    url: 'https://www.serwis-zebry.pl/drukarki',
   },
   alternates: {
-    canonical: 'https://serwiszebra.pl/drukarki',
+    canonical: 'https://www.serwis-zebry.pl/drukarki',
   },
 }
 
@@ -75,7 +75,7 @@ const serviceSchema = {
     '@type': 'LocalBusiness',
     name: 'TAKMA - Serwis Zebra',
     telephone: '+48601619898',
-    url: 'https://serwiszebra.pl'
+    url: 'https://www.serwis-zebry.pl'
   },
   areaServed: 'Polska',
   serviceType: ['Naprawa drukarek', 'Wymiana głowic', 'Serwis drukarek przemysłowych']

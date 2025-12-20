@@ -123,6 +123,7 @@ export default function RepairDetailPage({ params }: { params: { id: string } })
   const [showCancelModal, setShowCancelModal] = useState(false)
   const [showAcceptModal, setShowAcceptModal] = useState(false)
   const [showRejectModal, setShowRejectModal] = useState(false)
+  const [showDiagnosticPaymentModal, setShowDiagnosticPaymentModal] = useState(false)
   const [idCopied, setIdCopied] = useState(false)
   const [user, setUser] = useState<UserProfile | null>(null)
   const [userMenuOpen, setUserMenuOpen] = useState(false)
@@ -275,7 +276,7 @@ const handleAcceptPrice = async () => {
   }
 }
 
-  const handleCancelRepair = async (reason: string) => {
+  const handleCancelRepair = async (reason: string, diagnosticFeePaid: boolean = false, silent: boolean = false) => {
     if (!repair || !params?.id) return
 
     setActionLoading(true)
@@ -283,7 +284,7 @@ const handleAcceptPrice = async () => {
       const response = await fetch(`/api/repairs/${params.id}/cancel`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ reason })
+        body: JSON.stringify({ reason, diagnosticFeePaid })
       })
 
       if (!response.ok) {
@@ -294,13 +295,19 @@ const handleAcceptPrice = async () => {
 
       const data = await response.json()
       console.log('✅ Zgłoszenie anulowane:', data)
-      alert(data.message)
+      
+      // Dla płatności za diagnostykę nie pokazuj alertu (modal sam pokazuje sukces)
+      if (!silent) {
+        alert(data.message)
+      }
       setShowCancelModal(false)
 
       fetchRepairDetails()
     } catch (err: any) {
       console.error('❌ Error in handleCancelRepair:', err)
-      alert(err.message || 'Wystąpił błąd')
+      if (!silent) {
+        alert(err.message || 'Wystąpił błąd')
+      }
     } finally {
       setActionLoading(false)
     }
@@ -1019,44 +1026,51 @@ const handlePaymentSuccess = async () => {
 {/* Modal odrzucenia wyceny */}
 {showRejectModal && (
   <div className="fixed inset-0 bg-black bg-opacity-50 z-[9998] flex items-center justify-center p-4">
-    <div className="bg-white rounded-xl max-w-md w-full p-4 shadow-lg">
-      <div className="flex items-center gap-3 mb-3">
-        <div className="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center flex-shrink-0">
-          <XCircle className="w-5 h-5 text-red-600" />
+    <div className="bg-white rounded-xl max-w-md w-full p-5 shadow-lg">
+      <div className="flex items-center gap-3 mb-4">
+        <div className="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center flex-shrink-0">
+          <XCircle className="w-6 h-6 text-red-600" />
         </div>
         <div>
-          <h3 className="text-sm font-semibold text-gray-900">Odrzuć wycenę</h3>
-          <p className="text-xs text-gray-500">Zgłoszenie zostanie anulowane</p>
+          <h3 className="text-base font-semibold text-gray-900">Rezygnujesz z naprawy?</h3>
+          <p className="text-xs text-gray-500">Wymagana opłata za diagnostykę</p>
         </div>
       </div>
 
-      <div className="bg-red-50 border border-red-100 rounded-lg p-3 mb-4">
-        <p className="text-sm text-red-800 leading-relaxed">
-          <strong>Uwaga:</strong> Po odrzuceniu wyceny zgłoszenie zostanie anulowane, a urządzenie zwrócone bez naprawy.
+      <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-4">
+        <p className="text-sm text-amber-900 leading-relaxed mb-2">
+          <strong>Opłata za diagnostykę:</strong>
         </p>
-        {repair && (
-          <p className="text-xs text-red-600 mt-2">
-            Wycena: <strong>{formatPrice(repair.final_price || repair.estimated_price)} zł</strong>
-          </p>
-        )}
+        <p className="text-2xl font-bold text-amber-700 mb-2">121,77 zł <span className="text-sm font-normal">(brutto)</span></p>
+        <p className="text-xs text-amber-700">
+          Diagnostyka jest bezpłatna przy akceptacji naprawy. W przypadku rezygnacji pobieramy opłatę 99 zł netto (121,77 zł brutto).
+        </p>
       </div>
 
-      <div className="flex gap-2">
-        <button
-          onClick={() => setShowRejectModal(false)}
-          className="flex-1 px-3 py-2 border border-gray-300 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-50 transition-colors"
-        >
-          Nie, wróć
-        </button>
+      {repair && (
+        <div className="bg-gray-50 border border-gray-200 rounded-lg p-3 mb-4">
+          <p className="text-xs text-gray-600">
+            Odrzucona wycena naprawy: <strong className="text-gray-900">{formatPrice(repair.final_price || repair.estimated_price)} zł</strong>
+          </p>
+        </div>
+      )}
+
+      <div className="space-y-2">
         <button
           onClick={() => {
             setShowRejectModal(false)
-            handleCancelRepair('Wycena odrzucona przez klienta')
+            setShowDiagnosticPaymentModal(true)
           }}
-          disabled={actionLoading}
-          className="flex-1 px-3 py-2 bg-red-600 text-white rounded-lg text-sm font-medium hover:bg-red-700 transition-colors disabled:opacity-50"
+          className="w-full px-4 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg text-sm font-semibold hover:from-blue-700 hover:to-indigo-700 transition-colors flex items-center justify-center gap-2"
         >
-          {actionLoading ? 'Anulowanie...' : 'Tak, odrzuć'}
+          <CreditCard className="w-4 h-4" />
+          Opłać diagnostykę (121,77 zł) i odbierz urządzenie
+        </button>
+        <button
+          onClick={() => setShowRejectModal(false)}
+          className="w-full px-4 py-2.5 border border-gray-300 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-50 transition-colors"
+        >
+          Wróć do wyceny
         </button>
       </div>
     </div>
@@ -1155,6 +1169,23 @@ const handlePaymentSuccess = async () => {
     deviceModel={repair.device_model}
     totalAmount={repair.final_price || repair.estimated_price || 0}
     onPaymentSuccess={handlePaymentSuccess}
+  />
+)}
+
+{/* Modal płatności za diagnostykę (rezygnacja z naprawy) */}
+{showDiagnosticPaymentModal && repair && (
+  <RepairPaymentModal
+    isOpen={showDiagnosticPaymentModal}
+    onClose={() => setShowDiagnosticPaymentModal(false)}
+    repairId={repair.id}
+    deviceModel={repair.device_model}
+    totalAmount={121.77}
+    isDiagnosticFee={true}
+    onPaymentSuccess={async () => {
+      // Anuluj w tle (silent=true) - modal sam pokazuje sukces
+      await handleCancelRepair('Wycena odrzucona - opłacono diagnostykę 121,77 zł', true, true)
+      // Modal sam się zamknie po pokazaniu sukcesu (auto-close po 5s)
+    }}
   />
 )}
     </div>

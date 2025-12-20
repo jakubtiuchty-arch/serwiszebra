@@ -1,5 +1,5 @@
-# Robots.txt dla Serwis Zebra
-# https://serwiszebra.pl
+# Robots.txt dla Serwis Zebry
+# https://www.serwis-zebry.pl
 
 # Pozwól wszystkim botom na indeksowanie
 User-agent: *
@@ -22,7 +22,7 @@ Allow: /blog
 Allow: /blog/*
 
 # Sitemap
-Sitemap: https://serwiszebra.pl/sitemap.xml
+Sitemap: https://www.serwis-zebry.pl/sitemap.xml
 
 # Crawl-delay dla botów
 User-agent: *

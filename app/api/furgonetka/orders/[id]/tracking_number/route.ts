@@ -97,7 +97,7 @@ export async function POST(
     
     /*
     await resend.emails.send({
-      from: 'Serwis Zebra <zamowienia@serwiszebra.pl>',
+      from: 'Serwis Zebra <zamowienia@serwis-zebry.pl>',
       to: order.customer_email,
       subject: `Przesyłka została nadana - ${order.order_number}`,
       html: `

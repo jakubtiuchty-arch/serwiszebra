@@ -667,7 +667,7 @@ export default function DodajProduktPage() {
                   <p className="text-sm font-medium text-gray-700">Podgląd w Google</p>
                 </div>
                 <div className="space-y-1">
-                  <p className="text-xs text-gray-500">serwiszebra.pl › sklep › {slug || '...'}</p>
+                  <p className="text-xs text-gray-500">serwis-zebry.pl › sklep › {slug || '...'}</p>
                   <p className="text-blue-800 text-lg font-medium hover:underline cursor-pointer">
                     {metaTitle || 'Tytuł produktu...'}
                   </p>

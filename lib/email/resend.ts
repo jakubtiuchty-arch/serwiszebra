@@ -17,7 +17,7 @@ export const sendEmail = async ({
 }) => {
   try {
     const { data, error } = await resend.emails.send({
-      from: 'Sklep serwiszebra.pl <sklep@serwiszebra.pl>',
+      from: 'Sklep serwis-zebry.pl <sklep@serwis-zebry.pl>',
       to: [to],
       subject: subject,
       html: html

@@ -44,6 +44,43 @@ import { useRouter } from 'next/navigation'
 
 type PricingCategory = 'drukarki' | 'terminale' | 'skanery' | 'tablety'
 
+// Tooltip z informacją o cenie zależnej od modelu
+function PriceTooltip() {
+  const [isVisible, setIsVisible] = useState(false)
+  
+  return (
+    <div 
+      className="relative inline-block"
+      onMouseEnter={() => setIsVisible(true)}
+      onMouseLeave={() => setIsVisible(false)}
+    >
+      <button
+        onClick={() => setIsVisible(!isVisible)}
+        className="ml-1.5 text-amber-500 hover:text-amber-600 transition-colors"
+        aria-label="Informacja o cenie"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-4h2v2h-2v-2zm1.61-9.96c-2.06-.3-3.88.97-4.43 2.79-.18.58.26 1.17.87 1.17h.2c.41 0 .74-.29.88-.67.32-.89 1.27-1.5 2.3-1.28.95.2 1.65 1.13 1.57 2.1-.1 1.34-1.62 1.63-2.45 2.88 0 .01-.01.01-.01.02-.01.02-.02.03-.03.05-.09.15-.18.32-.25.5-.01.03-.03.05-.04.08-.01.02-.01.04-.02.07-.12.34-.2.75-.2 1.25h2c0-.42.11-.77.28-1.07.02-.03.03-.06.05-.09.08-.14.18-.27.28-.39.01-.01.02-.03.03-.04.1-.12.21-.23.33-.34.96-.91 2.26-1.65 1.99-3.56-.24-1.74-1.61-3.21-3.35-3.47z"/>
+        </svg>
+      </button>
+      {isVisible && (
+        <div className="absolute z-[100] left-0 top-full mt-2 w-64 p-3 bg-gray-900 text-white text-xs rounded-lg shadow-xl">
+          <p className="mb-2">Cena uzależniona od modelu urządzenia.</p>
+          <Link 
+            href="/kontakt" 
+            className="inline-flex items-center gap-1 text-amber-400 hover:text-amber-300 font-medium"
+          >
+            Skontaktuj się po dokładną wycenę →
+          </Link>
+          <div className="absolute bottom-full left-4 mb-[-1px]">
+            <div className="border-8 border-transparent border-b-gray-900"></div>
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
+
 export default function HomePage() {
   const router = useRouter()
   const [activeCategory, setActiveCategory] = useState<PricingCategory>('drukarki')
@@ -97,12 +134,12 @@ export default function HomePage() {
     '@graph': [
       {
         '@type': 'LocalBusiness',
-        '@id': 'https://serwiszebra.pl/#business',
+        '@id': 'https://www.serwis-zebry.pl/#business',
         name: 'TAKMA - Serwis Zebra',
-        image: 'https://serwiszebra.pl/takma_logo_1.png',
-        url: 'https://serwiszebra.pl',
+        image: 'https://www.serwis-zebry.pl/takma_logo_1.png',
+        url: 'https://www.serwis-zebry.pl',
         telephone: '+48601619898',
-        email: 'kontakt@serwiszebra.pl',
+        email: 'kontakt@serwis-zebry.pl',
         address: {
           '@type': 'PostalAddress',
           addressCountry: 'PL',
@@ -123,10 +160,10 @@ export default function HomePage() {
       },
       {
         '@type': 'Service',
-        '@id': 'https://serwiszebra.pl/#service',
+        '@id': 'https://www.serwis-zebry.pl/#service',
         serviceType: 'Serwis i naprawa urządzeń Zebra',
         provider: {
-          '@id': 'https://serwiszebra.pl/#business'
+          '@id': 'https://www.serwis-zebry.pl/#business'
         },
         areaServed: {
           '@type': 'Country',
@@ -173,14 +210,14 @@ export default function HomePage() {
       },
       {
         '@type': 'Organization',
-        '@id': 'https://serwiszebra.pl/#organization',
+        '@id': 'https://www.serwis-zebry.pl/#organization',
         name: 'TAKMA',
-        url: 'https://serwiszebra.pl',
-        logo: 'https://serwiszebra.pl/takma_logo_1.png',
+        url: 'https://www.serwis-zebry.pl',
+        logo: 'https://www.serwis-zebry.pl/takma_logo_1.png',
         contactPoint: {
           '@type': 'ContactPoint',
           telephone: '+48601619898',
-          email: 'kontakt@serwiszebra.pl',
+          email: 'kontakt@serwis-zebry.pl',
           contactType: 'customer service',
           areaServed: 'PL',
           availableLanguage: 'Polish'
@@ -691,8 +728,9 @@ export default function HomePage() {
                 <div className="p-4 hover:bg-gray-50 transition-colors">
                   <div className="flex items-center justify-between">
                     <div className="flex-1">
-                      <h3 className="text-sm font-semibold text-gray-900 mb-1">
+                      <h3 className="text-sm font-semibold text-gray-900 mb-1 flex items-center">
                         Wymiana głowicy drukującej
+                        <PriceTooltip />
                       </h3>
                       <p className="text-xs text-gray-600">
                         Oryginalna głowica Zebra + montaż + czyszczenie
@@ -712,8 +750,9 @@ export default function HomePage() {
                 <div className="p-4 hover:bg-gray-50 transition-colors">
                   <div className="flex items-center justify-between">
                     <div className="flex-1">
-                      <h3 className="text-sm font-semibold text-gray-900 mb-1">
+                      <h3 className="text-sm font-semibold text-gray-900 mb-1 flex items-center">
                         Wymiana wałka dociskowego
+                        <PriceTooltip />
                       </h3>
                       <p className="text-xs text-gray-600">
                         Oryginalny roller + regulacja + czyszczenie
@@ -733,8 +772,9 @@ export default function HomePage() {
                 <div className="p-4 hover:bg-gray-50 transition-colors">
                   <div className="flex items-center justify-between">
                     <div className="flex-1">
-                      <h3 className="text-sm font-semibold text-gray-900 mb-1">
+                      <h3 className="text-sm font-semibold text-gray-900 mb-1 flex items-center">
                         Czyszczenie mechanizmu
+                        <PriceTooltip />
                       </h3>
                       <p className="text-xs text-gray-600">
                         Profesjonalne czyszczenie + konserwacja + test
@@ -754,8 +794,9 @@ export default function HomePage() {
                 <div className="p-4 hover:bg-gray-50 transition-colors">
                   <div className="flex items-center justify-between">
                     <div className="flex-1">
-                      <h3 className="text-sm font-semibold text-gray-900 mb-1">
+                      <h3 className="text-sm font-semibold text-gray-900 mb-1 flex items-center">
                         Naprawa/wymiana sensora
+                        <PriceTooltip />
                       </h3>
                       <p className="text-xs text-gray-600">
                         Czujniki gap, black mark, ribbon + kalibracja
@@ -802,8 +843,9 @@ export default function HomePage() {
                 <div className="p-4 hover:bg-gray-50 transition-colors">
                   <div className="flex items-center justify-between">
                     <div className="flex-1">
-                      <h3 className="text-sm font-semibold text-gray-900 mb-1">
+                      <h3 className="text-sm font-semibold text-gray-900 mb-1 flex items-center">
                         Wymiana wyświetlacza
+                        <PriceTooltip />
                       </h3>
                       <p className="text-xs text-gray-600">
                         Oryginalny ekran dotykowy + montaż + kalibracja
@@ -823,8 +865,9 @@ export default function HomePage() {
                 <div className="p-4 hover:bg-gray-50 transition-colors">
                   <div className="flex items-center justify-between">
                     <div className="flex-1">
-                      <h3 className="text-sm font-semibold text-gray-900 mb-1">
+                      <h3 className="text-sm font-semibold text-gray-900 mb-1 flex items-center">
                         Naprawa modułu skanującego
+                        <PriceTooltip />
                       </h3>
                       <p className="text-xs text-gray-600">
                         Wymiana/naprawa skanera 1D/2D + test + kalibracja
@@ -844,8 +887,9 @@ export default function HomePage() {
                 <div className="p-4 hover:bg-gray-50 transition-colors">
                   <div className="flex items-center justify-between">
                     <div className="flex-1">
-                      <h3 className="text-sm font-semibold text-gray-900 mb-1">
+                      <h3 className="text-sm font-semibold text-gray-900 mb-1 flex items-center">
                         Wymiana baterii
+                        <PriceTooltip />
                       </h3>
                       <p className="text-xs text-gray-600">
                         Oryginalna bateria Zebra + montaż + test pojemności
@@ -865,8 +909,9 @@ export default function HomePage() {
                 <div className="p-4 hover:bg-gray-50 transition-colors">
                   <div className="flex items-center justify-between">
                     <div className="flex-1">
-                      <h3 className="text-sm font-semibold text-gray-900 mb-1">
+                      <h3 className="text-sm font-semibold text-gray-900 mb-1 flex items-center">
                         Czyszczenie + konserwacja
+                        <PriceTooltip />
                       </h3>
                       <p className="text-xs text-gray-600">
                         Profesjonalne czyszczenie + konserwacja + aktualizacja
@@ -913,8 +958,9 @@ export default function HomePage() {
                 <div className="p-4 hover:bg-gray-50 transition-colors">
                   <div className="flex items-center justify-between">
                     <div className="flex-1">
-                      <h3 className="text-sm font-semibold text-gray-900 mb-1">
+                      <h3 className="text-sm font-semibold text-gray-900 mb-1 flex items-center">
                         Naprawa modułu skanującego
+                        <PriceTooltip />
                       </h3>
                       <p className="text-xs text-gray-600">
                         Wymiana lasera/kamery 2D + optyka + kalibracja
@@ -934,8 +980,9 @@ export default function HomePage() {
                 <div className="p-4 hover:bg-gray-50 transition-colors">
                   <div className="flex items-center justify-between">
                     <div className="flex-1">
-                      <h3 className="text-sm font-semibold text-gray-900 mb-1">
+                      <h3 className="text-sm font-semibold text-gray-900 mb-1 flex items-center">
                         Wymiana okna skanera
+                        <PriceTooltip />
                       </h3>
                       <p className="text-xs text-gray-600">
                         Oryginalne szkło ochronne + uszczelnienie + montaż
@@ -955,8 +1002,9 @@ export default function HomePage() {
                 <div className="p-4 hover:bg-gray-50 transition-colors">
                   <div className="flex items-center justify-between">
                     <div className="flex-1">
-                      <h3 className="text-sm font-semibold text-gray-900 mb-1">
+                      <h3 className="text-sm font-semibold text-gray-900 mb-1 flex items-center">
                         Naprawa przycisku/spustu
+                        <PriceTooltip />
                       </h3>
                       <p className="text-xs text-gray-600">
                         Wymiana przełącznika + czyszczenie + test działania
@@ -976,8 +1024,9 @@ export default function HomePage() {
                 <div className="p-4 hover:bg-gray-50 transition-colors">
                   <div className="flex items-center justify-between">
                     <div className="flex-1">
-                      <h3 className="text-sm font-semibold text-gray-900 mb-1">
+                      <h3 className="text-sm font-semibold text-gray-900 mb-1 flex items-center">
                         Czyszczenie optyki
+                        <PriceTooltip />
                       </h3>
                       <p className="text-xs text-gray-600">
                         Profesjonalne czyszczenie + konserwacja + test
@@ -1024,8 +1073,9 @@ export default function HomePage() {
                 <div className="p-4 hover:bg-gray-50 transition-colors">
                   <div className="flex items-center justify-between">
                     <div className="flex-1">
-                      <h3 className="text-sm font-semibold text-gray-900 mb-1">
+                      <h3 className="text-sm font-semibold text-gray-900 mb-1 flex items-center">
                         Wymiana wyświetlacza
+                        <PriceTooltip />
                       </h3>
                       <p className="text-xs text-gray-600">
                         Oryginalny LCD/dotyk + kalibracja + test działania
@@ -1045,8 +1095,9 @@ export default function HomePage() {
                 <div className="p-4 hover:bg-gray-50 transition-colors">
                   <div className="flex items-center justify-between">
                     <div className="flex-1">
-                      <h3 className="text-sm font-semibold text-gray-900 mb-1">
+                      <h3 className="text-sm font-semibold text-gray-900 mb-1 flex items-center">
                         Wymiana baterii
+                        <PriceTooltip />
                       </h3>
                       <p className="text-xs text-gray-600">
                         Oryginalna bateria Zebra + kalibracja + test wydajności
@@ -1066,8 +1117,9 @@ export default function HomePage() {
                 <div className="p-4 hover:bg-gray-50 transition-colors">
                   <div className="flex items-center justify-between">
                     <div className="flex-1">
-                      <h3 className="text-sm font-semibold text-gray-900 mb-1">
+                      <h3 className="text-sm font-semibold text-gray-900 mb-1 flex items-center">
                         Naprawa portów/złączy
+                        <PriceTooltip />
                       </h3>
                       <p className="text-xs text-gray-600">
                         USB/ładowania + wymiana gniazda + test połączeń
@@ -1087,8 +1139,9 @@ export default function HomePage() {
                 <div className="p-4 hover:bg-gray-50 transition-colors">
                   <div className="flex items-center justify-between">
                     <div className="flex-1">
-                      <h3 className="text-sm font-semibold text-gray-900 mb-1">
+                      <h3 className="text-sm font-semibold text-gray-900 mb-1 flex items-center">
                         Czyszczenie + konserwacja
+                        <PriceTooltip />
                       </h3>
                       <p className="text-xs text-gray-600">
                         Profesjonalne czyszczenie + aktualizacja oprogramowania
@@ -1380,11 +1433,11 @@ export default function HomePage() {
                     </div>
                     <span className="text-xs sm:text-sm font-medium">+48 601 619 898</span>
                   </a>
-                  <a href="mailto:serwis@serwiszebra.pl" className="group flex items-center gap-2 sm:gap-2.5 px-3 sm:px-5 py-2.5 sm:py-3 bg-white/5 hover:bg-white/10 backdrop-blur-sm border border-white/10 rounded-xl transition-all duration-300">
+                  <a href="mailto:serwis@serwis-zebry.pl" className="group flex items-center gap-2 sm:gap-2.5 px-3 sm:px-5 py-2.5 sm:py-3 bg-white/5 hover:bg-white/10 backdrop-blur-sm border border-white/10 rounded-xl transition-all duration-300">
                     <div className="w-7 sm:w-8 h-7 sm:h-8 bg-white/10 rounded-lg flex items-center justify-center">
                       <Mail className="w-3.5 sm:w-4 h-3.5 sm:h-4 text-white" />
                     </div>
-                    <span className="text-xs sm:text-sm font-medium hidden sm:inline">serwis@serwiszebra.pl</span>
+                    <span className="text-xs sm:text-sm font-medium hidden sm:inline">serwis@serwis-zebry.pl</span>
                     <span className="text-xs sm:text-sm font-medium sm:hidden">Email</span>
                   </a>
                 </div>

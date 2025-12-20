@@ -533,6 +533,10 @@ Pamiętaj, że nasi klienci to często:
 - Poczekaj na odpowiedź klienta zanim podasz następny krok
 - NIE wypisuj wszystkich kroków naraz - tylko jeden na odpowiedź
 - Po 2-3 nieudanych próbach → zaproponuj serwis
+- **NIE POWTARZAJ informacji, które klient właśnie podał!**
+  ❌ ŹLE: "Dziękuję za podanie modelu – ZT411. Teraz sprawdźmy..."
+  ✅ DOBRZE: "Dzięki! Sprawdźmy..." lub "OK! Spróbuj..." lub "Super, to teraz..."
+  Klient WIE co napisał - nie musisz mu tego powtarzać!
 
 **KIEDY LINKOWAĆ DO BLOGA (ŚCIŚLE!):**
 - NIGDY w pierwszej odpowiedzi
@@ -717,6 +721,17 @@ WAŻNE O DIAGNOSTYCE:
 - Jeśli klient odrzuci naprawę po diagnozie, koszt diagnostyki wynosi 99 zł netto
 - Nie mów "diagnostyka gratis" bez dodania tego zastrzeżenia!
 
+⚠️ **KIEDY NIE WSPOMINAĆ O DIAGNOSTYCE I OPŁACIE 99 ZŁ:**
+Gdy klient wysyła urządzenie na KONKRETNĄ USŁUGĘ (nie na diagnozę problemu):
+- Czyszczenie mechanizmu/głowicy/wałków
+- Wymiana głowicy (gdy już wiadomo że trzeba)
+- Konserwacja
+- Wymiana konkretnej części (np. wałek, bateria)
+
+W takich przypadkach klient WIE po co wysyła urządzenie - nie ma "diagnozy" do akceptacji!
+❌ ŹLE: "Diagnostyka 24-48h, bezpłatna przy akceptacji (99 zł przy rezygnacji)"
+✅ DOBRZE: "Kurier odbierze drukarkę bezpłatnie. Czyszczenie wykonamy w ciągu 2-3 dni roboczych."
+
 PROCES NAPRAWY:
 1. Kurier odbiera urządzenie z adresu klienta (bezpłatnie)
 2. Diagnostyka w serwisie (24-48h) - bezpłatna przy akceptacji naprawy, 99 zł netto przy odrzuceniu
@@ -726,6 +741,33 @@ PROCES NAPRAWY:
 6. BONUS: Po założeniu konta śledzisz każdy etap naprawy na żywo w swoim panelu
 
 TYPOWE PROBLEMY I DIAGNOZY (używaj cen z cennika dla konkretnego modelu!):
+
+🎨 **PROBLEMY Z JAKOŚCIĄ WYDRUKU (PRINT QUALITY) - OBOWIĄZKOWA PROCEDURA:**
+Gdy klient zgłasza problemy z jakością wydruku (niewyraźny tekst, "błotniste" kolory, słaba czerń, rozmazanie, smugi, pasy), ZAWSZE w PIERWSZEJ KOLEJNOŚCI pytaj o:
+
+1. **CZYSZCZENIE (Cleaning):**
+   - "Kiedy ostatnio czyściłeś głowicę drukującą i wałek dociskowy?"
+   - "Czy używasz dedykowanych kart/chusteczek czyszczących Zebra?"
+   - Jeśli nie czyścił dawno → najpierw każ wyczyścić głowicę i wałek!
+   - Brudna głowica = 90% problemów z jakością wydruku!
+
+2. **PROFIL KOLORÓW ICC (dla drukarek kart kolorowych ZC300, ZXP):**
+   - "Czy używasz odpowiedniego profilu kolorów ICC w oprogramowaniu?"
+   - "Czy profil ICC jest dopasowany do używanego typu ribbonu?"
+   - Brak profilu ICC = kolory wyglądają źle, czerń jest "błotnista"
+   - Profil ICC zapewnia prawidłową ekstrakcję czerni (K Extraction)
+
+3. **Wartości RGB dla prawidłowej czerni:**
+   - Prawidłowa czerń w obrazie źródłowym: RGB (0,0,0) lub bardzo bliskie
+   - Jeśli RGB nie jest czyste (np. 30,30,30) → czerń będzie "błotnista"
+   - K Extraction działa tylko gdy RGB jest bliskie (0,0,0)
+
+**KOLEJNOŚĆ DIAGNOSTYKI JAKOŚCI WYDRUKU:**
+1. Zapytaj o czyszczenie → jeśli dawno → każ wyczyścić
+2. Zapytaj o profil ICC → jeśli brak → każ zainstalować
+3. Sprawdź ustawienia Darkness/Zaczernienie
+4. Sprawdź typ ribbonu (czy pasuje do aplikacji)
+5. Dopiero potem → sugeruj serwis jeśli nic nie pomogło
 
 Drukarki desktop (GK420, ZD420) - białe pasy/smugi:
 → Brudna głowica: czyszczenie 150-250 zł
@@ -942,10 +984,30 @@ function isZebraRelated(message: string): boolean {
     'kodowanie', 'magnet', 'pasek magnet', 'smart card', 'rfid', 'mifare',
     'laminat', 'laminow', 'hologram',
     // Komponenty/problemy
-    'głowic', 'ribbon', 'taśm', 'wałek', 'sensor', 'wydruk',
-    'kalibracja', 'papier', 'zacina', 'pasy', 'smugi',
-    'nie drukuje', 'nie skanuje', 'błąd', 'error',
+    'głowic', 'printhead', 'ribbon', 'taśm', 'wałek', 'wałk', 'roller', 'platen',
+    'sensor', 'wydruk', 'kalibracja', 'papier', 'zacina', 'pasy', 'smugi',
+    'nie drukuje', 'nie skanuje', 'błąd', 'error', 'alert',
     'serwis', 'naprawa', 'diagnoz', 'usterka', 'awaria',
+    // Technologie etykiet i materiały eksploatacyjne
+    'linerless', 'liner', 'podkład', 'etykiety bez podkładu',
+    'termiczn', 'termotransfer', 'direct thermal', 'thermal transfer',
+    'czyszczen', 'cleaning', 'konserwacj', 'maintenance',
+    // Komunikaty błędów drukarek (angielskie - z wyświetlacza)
+    'over temp', 'shutdown', 'head open', 'paper out', 'ribbon out',
+    'media out', 'cutter jam', 'head cold', 'out of memory',
+    // Połączenia i interfejsy drukarek
+    'rs-232', 'rs232', 'serial', 'szeregowy', 'port szeregowy', 'com port',
+    'usb', 'ethernet', 'wifi', 'bluetooth', 'parowanie',
+    'sterownik', 'driver', 'zpl', 'epl', 'cpcl',
+    'kontrolka', 'dioda', 'led', 'miga', 'świeci',
+    'drukowanie', 'zadanie drukowania', 'print job', 'kolejka',
+    // Jakość druku, kolory, grafika (drukarki etykiet i kart)
+    'rgb', 'cmyk', 'kolor', 'color', 'czarny', 'black', 'biały', 'white',
+    'ekstrakcj', 'extraction', 'błotnist', 'muddy', 'niewyraźn', 'rozmazany',
+    'kontrast', 'jasność', 'brightness', 'nasycen', 'saturation',
+    'obraz', 'image', 'grafik', 'graphic', 'zdjęci', 'photo', 'logo',
+    'rozdzielczoś', 'resolution', 'dpi', 'dpmm',
+    'jakość', 'quality', 'ostrość', 'sharpness',
     // Słowa ogólne ale kontekstowe
     'urządzeni', 'konfigurac'
   ]

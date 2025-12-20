@@ -49,3 +49,4 @@ COMMENT ON COLUMN chat_logs.ai_quality_issues IS 'Lista problemów wykrytych w o
 
 
 
+

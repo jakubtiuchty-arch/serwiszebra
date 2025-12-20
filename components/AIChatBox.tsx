@@ -145,6 +145,12 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
   }
 
   useEffect(() => {
+    // Animacja typewriter tylko gdy nie ma jeszcze wiadomości
+    if (messages.length > 0) {
+      setCurrentPlaceholder('') // Wyczyść placeholder gdy rozmowa trwa
+      return
+    }
+    
     let charIndex = 0
     const currentText = placeholders[placeholderIndex]
     
@@ -161,7 +167,7 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
     }, 100)
 
     return () => clearInterval(typingInterval)
-  }, [placeholderIndex])
+  }, [placeholderIndex, messages.length])
 
   // Speech recognition setup
   useEffect(() => {
@@ -448,8 +454,8 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
                     >
                       <div className="text-sm whitespace-pre-wrap leading-relaxed">
                         {msg.content
-                          .replace('[SERIOUS_ISSUE]', '')
-                          .replace('[INFO_ONLY]', '')
+                          .replace(/\[SERIOUS_ISSUE\]/g, '')
+                          .replace(/\[INFO_ONLY\]/g, '')
                           .trim()
                           .split(/(\[BARCODE:[^\]]+\]|\[[^\]]+\]\([^)]+\))/)
                           .map((part, partIdx) => {
@@ -547,9 +553,10 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyPress={handleKeyPress}
-              placeholder={messages.length === 0 ? currentPlaceholder : "Napisz więcej..."}
-              className="flex-1 text-[16px] text-gray-700 placeholder-gray-400 focus:outline-none bg-transparent px-3"
+              placeholder={messages.length === 0 ? currentPlaceholder : ""}
+              className="flex-1 text-[16px] text-gray-700 placeholder-gray-400 focus:outline-none bg-transparent px-3 caret-blue-500"
               disabled={loading}
+              autoFocus
               style={{ fontSize: '16px' }}
             />
 
@@ -648,7 +655,8 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
                     {/* Renderuj treść z obsługą obrazów [BARCODE:url] i linków markdown */}
                     <div className="text-sm whitespace-pre-wrap leading-relaxed">
                       {msg.content
-                        .replace('[SERIOUS_ISSUE]', '')
+                        .replace(/\[SERIOUS_ISSUE\]/g, '')
+                        .replace(/\[INFO_ONLY\]/g, '')
                         .trim()
                         .split(/(\[BARCODE:[^\]]+\]|\[[^\]]+\]\([^)]+\))/)
                         .map((part, partIdx) => {
@@ -813,9 +821,10 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyPress={handleKeyPress}
-              placeholder={currentPlaceholder}
-              className="flex-1 text-base text-gray-700 placeholder-gray-400 focus:outline-none bg-transparent py-3"
+              placeholder={messages.length === 0 ? currentPlaceholder : ""}
+              className="flex-1 text-base text-gray-700 placeholder-gray-400 focus:outline-none bg-transparent py-3 caret-blue-500"
               disabled={loading}
+              autoFocus
             />
 
             {/* Mic button - DESKTOP ONLY (mobile has it in bottom bar) */}

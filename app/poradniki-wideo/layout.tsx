@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     locale: 'pl_PL',
   },
   alternates: {
-    canonical: 'https://serwiszebra.pl/poradniki-wideo'
+    canonical: 'https://www.serwis-zebry.pl/poradniki-wideo'
   }
 }
 

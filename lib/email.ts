@@ -3,7 +3,7 @@ import { Resend } from 'resend'
 const resend = new Resend(process.env.RESEND_API_KEY)
 
 // URL bazowy dla obrazków w emailach (hostowane na Vercel)
-const EMAIL_ASSETS_URL = 'https://serwiszebraprod.vercel.app'
+const EMAIL_ASSETS_URL = 'https://www.serwis-zebry.pl'
 
 // Helper: pobierz numer zgłoszenia (repair_number lub skrócone UUID jako fallback)
 function getRepairNumber(repairId: string, repairNumber?: string): string {
@@ -69,7 +69,7 @@ export async function sendOrderConfirmation(data: OrderEmailData) {
   try {
     // Email do klienta
     const customerEmail = await resend.emails.send({
-      from: 'SERWIS ZEBRA <zamowienia@serwiszebra.pl>',
+      from: 'SERWIS ZEBRA <zamowienia@serwis-zebry.pl>',
       to: data.customerEmail,
       subject: `Potwierdzenie zamówienia ${data.orderNumber}`,
       html: generateOrderEmailHTML(data),
@@ -81,8 +81,8 @@ export async function sendOrderConfirmation(data: OrderEmailData) {
     
     // Email powiadomienia dla firmy
     const notificationEmail = await resend.emails.send({
-      from: 'System Zamówień <system@serwiszebra.pl>',
-      to: 'zamowienia@serwiszebra.pl', // Twój email
+      from: 'System Zamówień <system@serwis-zebry.pl>',
+      to: 'zamowienia@serwis-zebry.pl', // Twój email
       subject: `Nowe zamówienie ${data.orderNumber} - ${data.companyName}`,
       html: generateNotificationEmailHTML(data)
     })
@@ -132,7 +132,7 @@ function generateOrderEmailHTML(data: OrderEmailData): string {
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body style="margin: 0; padding: 0; font-family: Arial, sans-serif; background-color: #ffffff;">
-      <div style="max-width: 600px; margin: 0 auto; background-color: white; box-shadow: 0 0 40px rgba(0, 0, 0, 0.08); border-radius: 8px; overflow: hidden;">
+      <div style="max-width: 600px; margin: 0 auto; background-color: white;  border-radius: 8px; overflow: hidden;">
         
        <!-- Header -->
 <div style="background-color: #111827; padding: 32px 24px; text-align: center;">
@@ -281,7 +281,7 @@ function generateOrderEmailHTML(data: OrderEmailData): string {
             <p style="margin: 0 0 8px 0;">Masz pytania? Skontaktuj się z nami:</p>
             <p style="margin: 0;">
               <strong>Tel:</strong> +48 607 819 688<br>
-              <strong>Email:</strong> zamowienia@serwiszebra.pl
+              <strong>Email:</strong> zamowienia@serwis-zebry.pl
             </p>
           </div>
 
@@ -293,7 +293,7 @@ function generateOrderEmailHTML(data: OrderEmailData): string {
             TAKMA Tadeusz Tiuchty | ul. Poświęcka 1a, 51-128 Wrocław
           </p>
           <p style="margin: 0;">
-            NIP: 9151004377 &nbsp;|&nbsp; www.serwiszebra.pl
+            NIP: 9151004377 &nbsp;|&nbsp; www.serwis-zebry.pl
           </p>
         </div>
 
@@ -351,7 +351,7 @@ interface RepairShippedEmailData {
 export async function sendRepairShippedEmail(data: RepairShippedEmailData) {
   try {
     const email = await resend.emails.send({
-      from: 'Serwis Zebra <serwis@serwiszebra.pl>',
+      from: 'Serwis Zebra <serwis@serwis-zebry.pl>',
       to: data.customerEmail,
       subject: `Twoje urządzenie zostało wysłane! - ${data.deviceModel}`,
       html: generateRepairShippedHTML(data)
@@ -375,7 +375,7 @@ function generateRepairShippedHTML(data: RepairShippedEmailData): string {
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #ffffff;">
-      <div style="max-width: 600px; margin: 0 auto; background-color: white; box-shadow: 0 0 40px rgba(0, 0, 0, 0.08); border-radius: 8px; overflow: hidden;">
+      <div style="max-width: 600px; margin: 0 auto; background-color: white;  border-radius: 8px; overflow: hidden;">
         
 ${getEmailHeader()}
 
@@ -448,7 +448,7 @@ ${getEmailHeader()}
             <p style="margin: 0 0 8px 0;">Masz pytania? Skontaktuj się z nami:</p>
             <p style="margin: 0;">
               <strong>Tel:</strong> +48 607 819 688<br>
-              <strong>Email:</strong> serwis@serwiszebra.pl
+              <strong>Email:</strong> serwis@serwis-zebry.pl
             </p>
           </div>
 
@@ -476,7 +476,7 @@ export async function sendQuoteReadyEmail(data: QuoteReadyEmailData) {
     const shortId = data.repairId.split('-')[0].toUpperCase()
     
     const email = await resend.emails.send({
-      from: 'Serwis Zebra <serwis@serwiszebra.pl>',
+      from: 'Serwis Zebra <serwis@serwis-zebry.pl>',
       to: data.to,
       subject: `Wycena naprawy gotowa - ${data.deviceModel} #${shortId}`,
       html: generateQuoteReadyHTML(data, shortId)
@@ -500,7 +500,7 @@ function generateQuoteReadyHTML(data: QuoteReadyEmailData, shortId: string): str
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #ffffff;">
-      <div style="max-width: 600px; margin: 0 auto; background-color: white; box-shadow: 0 0 40px rgba(0, 0, 0, 0.08); border-radius: 8px; overflow: hidden;">
+      <div style="max-width: 600px; margin: 0 auto; background-color: white;  border-radius: 8px; overflow: hidden;">
         
 ${getEmailHeader()}
 
@@ -561,7 +561,7 @@ ${getEmailHeader()}
 
           <!-- CTA -->
           <div style="text-align: center; margin-bottom: 24px;">
-            <a href="https://serwiszebra.pl/panel/naprawa/${data.repairId}" 
+            <a href="https://www.serwis-zebry.pl/panel/naprawa/${data.repairId}" 
                style="display: inline-block; background-color: #f59e0b; color: white; padding: 14px 36px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 16px;">
               Zaakceptuj wycenę
             </a>
@@ -572,7 +572,7 @@ ${getEmailHeader()}
             <p style="margin: 0 0 8px 0;">Masz pytania? Skontaktuj się z nami:</p>
             <p style="margin: 0;">
               <strong>Tel:</strong> +48 607 819 688<br>
-              <strong>Email:</strong> serwis@serwiszebra.pl
+              <strong>Email:</strong> serwis@serwis-zebry.pl
             </p>
           </div>
 
@@ -584,7 +584,7 @@ ${getEmailHeader()}
             TAKMA Tadeusz Tiuchty | ul. Poświęcka 1a, 51-128 Wrocław
           </p>
           <p style="margin: 0;">
-            NIP: 9151004377 &nbsp;|&nbsp; www.serwiszebra.pl
+            NIP: 9151004377 &nbsp;|&nbsp; www.serwis-zebry.pl
           </p>
         </div>
 
@@ -609,7 +609,7 @@ export async function sendProFormaAdminEmail(data: ProFormaAdminEmailData) {
     const shortId = data.repairId.split('-')[0].toUpperCase()
     
     const email = await resend.emails.send({
-      from: 'System Serwisowy <system@serwiszebra.pl>',
+      from: 'System Serwisowy <system@serwis-zebry.pl>',
       to: data.to,
       subject: `📄 Pro Forma wybrana - naprawa #${shortId}`,
       html: generateProFormaAdminHTML(data, shortId)
@@ -633,7 +633,7 @@ function generateProFormaAdminHTML(data: ProFormaAdminEmailData, shortId: string
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #ffffff;">
-      <div style="max-width: 600px; margin: 0 auto; background-color: white; box-shadow: 0 0 40px rgba(0, 0, 0, 0.08); border-radius: 8px; overflow: hidden; padding: 20px;">
+      <div style="max-width: 600px; margin: 0 auto; background-color: white;  border-radius: 8px; overflow: hidden; padding: 20px;">
         
         <div style="background-color: #f59e0b; color: white; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
           <h2 style="margin: 0;">📄 Klient wybrał Pro Forma</h2>
@@ -668,7 +668,7 @@ function generateProFormaAdminHTML(data: ProFormaAdminEmailData, shortId: string
         </div>
 
         <div style="text-align: center;">
-          <a href="https://serwiszebra.pl/admin/zgloszenie/${data.repairId}" 
+          <a href="https://www.serwis-zebry.pl/admin/zgloszenie/${data.repairId}" 
              style="display: inline-block; background-color: #111827; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600;">
             Przejdź do zgłoszenia
           </a>
@@ -695,7 +695,7 @@ export async function sendRepairPaidEmail(data: RepairPaidEmailData) {
     const shortId = data.repairId.split('-')[0].toUpperCase()
     
     const email = await resend.emails.send({
-      from: 'Serwis Zebra <serwis@serwiszebra.pl>',
+      from: 'Serwis Zebra <serwis@serwis-zebry.pl>',
       to: data.to,
       subject: `Płatność potwierdzona - naprawa ${data.deviceModel}`,
       html: generateRepairPaidClientHTML(data, shortId)
@@ -719,7 +719,7 @@ function generateRepairPaidClientHTML(data: RepairPaidEmailData, shortId: string
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #ffffff;">
-      <div style="max-width: 600px; margin: 0 auto; background-color: white; box-shadow: 0 0 40px rgba(0, 0, 0, 0.08); border-radius: 8px; overflow: hidden;">
+      <div style="max-width: 600px; margin: 0 auto; background-color: white;  border-radius: 8px; overflow: hidden;">
         
 ${getEmailHeader()}
 
@@ -769,7 +769,7 @@ ${getEmailHeader()}
 
           <!-- Track repair -->
           <div style="text-align: center; margin-bottom: 24px;">
-            <a href="https://serwiszebra.pl/panel" 
+            <a href="https://www.serwis-zebry.pl/panel" 
                style="display: inline-block; background-color: #2563eb; color: white; padding: 12px 32px; border-radius: 8px; text-decoration: none; font-weight: 600;">
               Sprawdź status w panelu
             </a>
@@ -780,7 +780,7 @@ ${getEmailHeader()}
             <p style="margin: 0 0 8px 0;">Masz pytania? Skontaktuj się z nami:</p>
             <p style="margin: 0;">
               <strong>Tel:</strong> +48 607 819 688<br>
-              <strong>Email:</strong> serwis@serwiszebra.pl
+              <strong>Email:</strong> serwis@serwis-zebry.pl
             </p>
           </div>
 
@@ -809,7 +809,7 @@ export async function sendRepairPaidAdminEmail(data: RepairPaidAdminEmailData) {
     const shortId = data.repairId.split('-')[0].toUpperCase()
     
     const email = await resend.emails.send({
-      from: 'System Serwisowy <system@serwiszebra.pl>',
+      from: 'System Serwisowy <system@serwis-zebry.pl>',
       to: data.to,
       subject: `Płatność otrzymana - naprawa #${shortId}`,
       html: generateRepairPaidAdminHTML(data, shortId)
@@ -881,7 +881,7 @@ function generateRepairPaidAdminHTML(data: RepairPaidAdminEmailData, shortId: st
         </div>
 
         <div style="text-align: center;">
-          <a href="https://serwiszebra.pl/admin" 
+          <a href="https://www.serwis-zebry.pl/admin" 
              style="display: inline-block; background-color: #111827; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600;">
             Przejdź do panelu admina
           </a>
@@ -911,7 +911,7 @@ export async function sendRepairSubmittedEmail(data: RepairSubmittedEmailData) {
     const displayNumber = getRepairNumber(data.repairId, data.repairNumber)
     
     const email = await resend.emails.send({
-      from: 'Serwis Zebra <serwis@serwiszebra.pl>',
+      from: 'Serwis Zebra <serwis@serwis-zebry.pl>',
       to: data.to,
       subject: `Zgłoszenie naprawy przyjęte - ${data.deviceModel} #${displayNumber}`,
       html: generateRepairSubmittedHTML(data, displayNumber)
@@ -941,7 +941,7 @@ function generateRepairSubmittedHTML(data: RepairSubmittedEmailData, shortId: st
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #ffffff;">
-      <div style="max-width: 600px; margin: 0 auto; background-color: white; box-shadow: 0 0 40px rgba(0, 0, 0, 0.08); border-radius: 8px; overflow: hidden;">
+      <div style="max-width: 600px; margin: 0 auto; background-color: white;  border-radius: 8px; overflow: hidden;">
         
         ${getEmailHeader()}
 
@@ -1023,7 +1023,7 @@ function generateRepairSubmittedHTML(data: RepairSubmittedEmailData, shortId: st
 
           <!-- CTA button -->
           <div style="text-align: center; margin-bottom: 24px;">
-            <a href="https://serwiszebra.pl/panel" 
+            <a href="https://www.serwis-zebry.pl/panel" 
                style="display: inline-block; background-color: #2563eb; color: white; padding: 12px 32px; border-radius: 8px; text-decoration: none; font-weight: 600;">
               Przejdź do panelu
             </a>
@@ -1034,7 +1034,7 @@ function generateRepairSubmittedHTML(data: RepairSubmittedEmailData, shortId: st
             <p style="margin: 0 0 8px 0;">Masz pytania? Skontaktuj się z nami:</p>
             <p style="margin: 0;">
               <strong>Tel:</strong> +48 607 819 688<br>
-              <strong>Email:</strong> serwis@serwiszebra.pl
+              <strong>Email:</strong> serwis@serwis-zebry.pl
             </p>
           </div>
 
@@ -1046,7 +1046,7 @@ function generateRepairSubmittedHTML(data: RepairSubmittedEmailData, shortId: st
             TAKMA Tadeusz Tiuchty | ul. Poświęcka 1a, 51-128 Wrocław
           </p>
           <p style="margin: 0;">
-            NIP: 9151004377 &nbsp;|&nbsp; www.serwiszebra.pl
+            NIP: 9151004377 &nbsp;|&nbsp; www.serwis-zebry.pl
           </p>
         </div>
 
@@ -1077,7 +1077,7 @@ export async function sendRepairSubmittedAdminEmail(data: RepairSubmittedAdminEm
     const displayNumber = getRepairNumber(data.repairId, data.repairNumber)
     
     const email = await resend.emails.send({
-      from: 'System Serwisowy <system@serwiszebra.pl>',
+      from: 'System Serwisowy <system@serwis-zebry.pl>',
       to: data.to,
       subject: `Nowe zgłoszenie naprawy #${displayNumber} - ${data.deviceModel}`,
       html: generateRepairSubmittedAdminHTML(data, displayNumber)
@@ -1171,7 +1171,7 @@ function generateRepairSubmittedAdminHTML(data: RepairSubmittedAdminEmailData, s
           <p style="margin: 0 0 16px 0; color: white; font-size: 16px; font-weight: 500;">
             Zaloguj się do panelu admina i <strong style="text-decoration: underline;">ZAMÓW KURIERA</strong> po odbiór urządzenia!
           </p>
-          <a href="https://serwiszebra.pl/admin/zgloszenie/${data.repairId}" 
+          <a href="https://www.serwis-zebry.pl/admin/zgloszenie/${data.repairId}" 
              style="display: inline-block; background-color: white; color: #dc2626; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 16px; text-transform: uppercase;">
             ZAMÓW KURIERA TERAZ
           </a>
@@ -1193,7 +1193,7 @@ interface WelcomeEmailData {
 export async function sendWelcomeEmail(data: WelcomeEmailData) {
   try {
     const email = await resend.emails.send({
-      from: 'Serwis Zebra <serwis@serwiszebra.pl>',
+      from: 'Serwis Zebra <serwis@serwis-zebry.pl>',
       to: data.to,
       subject: `Witamy w Serwis Zebra!`,
       html: generateWelcomeHTML(data)
@@ -1217,7 +1217,7 @@ function generateWelcomeHTML(data: WelcomeEmailData): string {
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #ffffff;">
-      <div style="max-width: 600px; margin: 0 auto; background-color: white; box-shadow: 0 0 40px rgba(0, 0, 0, 0.08); border-radius: 8px; overflow: hidden;">
+      <div style="max-width: 600px; margin: 0 auto; background-color: white;  border-radius: 8px; overflow: hidden;">
         
 ${getEmailHeader()}
 
@@ -1253,7 +1253,7 @@ ${getEmailHeader()}
 
           <!-- CTA -->
           <div style="text-align: center; margin-bottom: 24px;">
-            <a href="https://serwiszebra.pl/panel" 
+            <a href="https://www.serwis-zebry.pl/panel" 
                style="display: inline-block; background-color: #2563eb; color: white; padding: 12px 32px; border-radius: 8px; text-decoration: none; font-weight: 600;">
               Przejdź do Panelu Klienta
             </a>
@@ -1274,7 +1274,7 @@ ${getEmailHeader()}
             <p style="margin: 0 0 8px 0;">Potrzebujesz pomocy?</p>
             <p style="margin: 0;">
               <strong>Tel:</strong> +48 601 619 898<br>
-              <strong>Email:</strong> serwis@serwiszebra.pl
+              <strong>Email:</strong> serwis@serwis-zebry.pl
             </p>
           </div>
 
@@ -1286,7 +1286,7 @@ ${getEmailHeader()}
             TAKMA Tadeusz Tiuchty | ul. Poświęcka 1a, 51-128 Wrocław
           </p>
           <p style="margin: 0;">
-            NIP: 9151004377 &nbsp;|&nbsp; www.serwiszebra.pl
+            NIP: 9151004377 &nbsp;|&nbsp; www.serwis-zebry.pl
           </p>
         </div>
 
@@ -1311,7 +1311,7 @@ export async function sendQuoteAcceptedEmail(data: QuoteAcceptedEmailData) {
     const shortId = data.repairId.split('-')[0].toUpperCase()
     
     const email = await resend.emails.send({
-      from: 'Serwis Zebra <serwis@serwiszebra.pl>',
+      from: 'Serwis Zebra <serwis@serwis-zebry.pl>',
       to: data.to,
       subject: `Wycena zaakceptowana - ${data.deviceModel} #${shortId}`,
       html: generateQuoteAcceptedHTML(data, shortId)
@@ -1335,7 +1335,7 @@ function generateQuoteAcceptedHTML(data: QuoteAcceptedEmailData, shortId: string
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #ffffff;">
-      <div style="max-width: 600px; margin: 0 auto; background-color: white; box-shadow: 0 0 40px rgba(0, 0, 0, 0.08); border-radius: 8px; overflow: hidden;">
+      <div style="max-width: 600px; margin: 0 auto; background-color: white;  border-radius: 8px; overflow: hidden;">
         
 ${getEmailHeader()}
 
@@ -1399,7 +1399,7 @@ ${getEmailHeader()}
 
           <!-- CTA -->
           <div style="text-align: center; margin-bottom: 24px;">
-            <a href="https://serwiszebra.pl/panel" 
+            <a href="https://www.serwis-zebry.pl/panel" 
                style="display: inline-block; background-color: #2563eb; color: white; padding: 12px 32px; border-radius: 8px; text-decoration: none; font-weight: 600;">
               Opłać w Panelu Klienta
             </a>
@@ -1410,7 +1410,7 @@ ${getEmailHeader()}
             <p style="margin: 0 0 8px 0;">Masz pytania?</p>
             <p style="margin: 0;">
               <strong>Tel:</strong> +48 601 619 898<br>
-              <strong>Email:</strong> serwis@serwiszebra.pl
+              <strong>Email:</strong> serwis@serwis-zebry.pl
             </p>
           </div>
 
@@ -1422,7 +1422,7 @@ ${getEmailHeader()}
             TAKMA Tadeusz Tiuchty | ul. Poświęcka 1a, 51-128 Wrocław
           </p>
           <p style="margin: 0;">
-            NIP: 9151004377 &nbsp;|&nbsp; www.serwiszebra.pl
+            NIP: 9151004377 &nbsp;|&nbsp; www.serwis-zebry.pl
           </p>
         </div>
 
@@ -1447,7 +1447,7 @@ export async function sendQuoteAcceptedAdminEmail(data: QuoteAcceptedAdminEmailD
     const shortId = data.repairId.split('-')[0].toUpperCase()
     
     const email = await resend.emails.send({
-      from: 'System Serwisowy <system@serwiszebra.pl>',
+      from: 'System Serwisowy <system@serwis-zebry.pl>',
       to: data.to,
       subject: `✅ Wycena zaakceptowana - #${shortId}`,
       html: generateQuoteAcceptedAdminHTML(data, shortId)
@@ -1504,7 +1504,7 @@ function generateQuoteAcceptedAdminHTML(data: QuoteAcceptedAdminEmailData, short
         </div>
 
         <div style="text-align: center;">
-          <a href="https://serwiszebra.pl/admin/zgloszenie/${data.repairId}" 
+          <a href="https://www.serwis-zebry.pl/admin/zgloszenie/${data.repairId}" 
              style="display: inline-block; background-color: #111827; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600;">
             Zobacz zgłoszenie
           </a>
@@ -1533,7 +1533,7 @@ export async function sendRepairStatusChangedEmail(data: RepairStatusChangedEmai
     const shortId = data.repairId.split('-')[0].toUpperCase()
     
     const email = await resend.emails.send({
-      from: 'Serwis Zebra <serwis@serwiszebra.pl>',
+      from: 'Serwis Zebra <serwis@serwis-zebry.pl>',
       to: data.to,
       subject: `Status naprawy zmieniony - ${data.deviceModel} #${shortId}`,
       html: generateRepairStatusChangedHTML(data, shortId)
@@ -1583,7 +1583,7 @@ function generateRepairStatusChangedHTML(data: RepairStatusChangedEmailData, sho
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #ffffff;">
-      <div style="max-width: 600px; margin: 0 auto; background-color: white; box-shadow: 0 0 40px rgba(0, 0, 0, 0.08); border-radius: 8px; overflow: hidden;">
+      <div style="max-width: 600px; margin: 0 auto; background-color: white;  border-radius: 8px; overflow: hidden;">
         
 ${getEmailHeader()}
 
@@ -1628,7 +1628,7 @@ ${getEmailHeader()}
 
           <!-- CTA -->
           <div style="text-align: center; margin-bottom: 24px;">
-            <a href="https://serwiszebra.pl/panel" 
+            <a href="https://www.serwis-zebry.pl/panel" 
                style="display: inline-block; background-color: #2563eb; color: white; padding: 12px 32px; border-radius: 8px; text-decoration: none; font-weight: 600;">
               Sprawdź szczegóły
             </a>
@@ -1639,7 +1639,7 @@ ${getEmailHeader()}
             <p style="margin: 0 0 8px 0;">Masz pytania?</p>
             <p style="margin: 0;">
               <strong>Tel:</strong> +48 601 619 898<br>
-              <strong>Email:</strong> serwis@serwiszebra.pl
+              <strong>Email:</strong> serwis@serwis-zebry.pl
             </p>
           </div>
 
@@ -1651,7 +1651,7 @@ ${getEmailHeader()}
             TAKMA Tadeusz Tiuchty | ul. Poświęcka 1a, 51-128 Wrocław
           </p>
           <p style="margin: 0;">
-            NIP: 9151004377 &nbsp;|&nbsp; www.serwiszebra.pl
+            NIP: 9151004377 &nbsp;|&nbsp; www.serwis-zebry.pl
           </p>
         </div>
 
@@ -1677,7 +1677,7 @@ export async function sendProFormaEmail(data: ProFormaEmailData) {
     const shortId = data.repairId.split('-')[0].toUpperCase()
     
     const email = await resend.emails.send({
-      from: 'Serwis Zebra <serwis@serwiszebra.pl>',
+      from: 'Serwis Zebra <serwis@serwis-zebry.pl>',
       to: data.to,
       subject: `Faktura Pro Forma - naprawa #${shortId}`,
       html: generateProFormaHTML(data, shortId)
@@ -1709,7 +1709,7 @@ export async function sendNewChatMessageEmail(data: NewChatMessageEmailData) {
     const shortId = data.repairId.split('-')[0].toUpperCase()
     
     const email = await resend.emails.send({
-      from: 'Serwis Zebra <serwis@serwiszebra.pl>',
+      from: 'Serwis Zebra <serwis@serwis-zebry.pl>',
       to: data.to,
       subject: `Nowa wiadomość - naprawa #${shortId}`,
       html: generateNewChatMessageHTML(data, shortId)
@@ -1726,8 +1726,8 @@ export async function sendNewChatMessageEmail(data: NewChatMessageEmailData) {
 
 function generateNewChatMessageHTML(data: NewChatMessageEmailData, shortId: string): string {
   const panelUrl = data.isToAdmin 
-    ? `https://serwiszebra.pl/admin/zgloszenie/${data.repairId}`
-    : `https://serwiszebra.pl/panel/naprawa/${data.repairId}`
+    ? `https://www.serwis-zebry.pl/admin/zgloszenie/${data.repairId}`
+    : `https://www.serwis-zebry.pl/panel/naprawa/${data.repairId}`
 
   const senderColor = data.isToAdmin ? '#10b981' : '#2563eb'
   const senderLabel = data.isToAdmin ? 'Klient' : 'Serwis Zebra'
@@ -1740,7 +1740,7 @@ function generateNewChatMessageHTML(data: NewChatMessageEmailData, shortId: stri
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #ffffff;">
-      <div style="max-width: 600px; margin: 0 auto; background-color: white; box-shadow: 0 0 40px rgba(0, 0, 0, 0.08); border-radius: 8px; overflow: hidden;">
+      <div style="max-width: 600px; margin: 0 auto; background-color: white;  border-radius: 8px; overflow: hidden;">
         
 ${getEmailHeader()}
 
@@ -1813,7 +1813,7 @@ ${getEmailHeader()}
             <p style="margin: 0 0 8px 0;">Masz pytania? Skontaktuj się z nami:</p>
             <p style="margin: 0;">
               <strong>Tel:</strong> +48 607 819 688<br>
-              <strong>Email:</strong> serwis@serwiszebra.pl
+              <strong>Email:</strong> serwis@serwis-zebry.pl
             </p>
           </div>
 
@@ -1825,7 +1825,7 @@ ${getEmailHeader()}
             TAKMA Tadeusz Tiuchty | ul. Poświęcka 1a, 51-128 Wrocław
           </p>
           <p style="margin: 0;">
-            NIP: 9151004377 &nbsp;|&nbsp; www.serwiszebra.pl
+            NIP: 9151004377 &nbsp;|&nbsp; www.serwis-zebry.pl
           </p>
         </div>
 
@@ -1844,7 +1844,7 @@ function generateProFormaHTML(data: ProFormaEmailData, shortId: string): string 
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #ffffff;">
-      <div style="max-width: 600px; margin: 0 auto; background-color: white; box-shadow: 0 0 40px rgba(0, 0, 0, 0.08); border-radius: 8px; overflow: hidden;">
+      <div style="max-width: 600px; margin: 0 auto; background-color: white;  border-radius: 8px; overflow: hidden;">
         
 ${getEmailHeader()}
 
@@ -1916,7 +1916,7 @@ ${getEmailHeader()}
 
           <!-- CTA -->
           <div style="text-align: center; margin-bottom: 24px;">
-            <a href="https://serwiszebra.pl/panel" 
+            <a href="https://www.serwis-zebry.pl/panel" 
                style="display: inline-block; background-color: #2563eb; color: white; padding: 12px 32px; border-radius: 8px; text-decoration: none; font-weight: 600;">
               Przejdź do Panelu
             </a>
@@ -1927,7 +1927,7 @@ ${getEmailHeader()}
             <p style="margin: 0 0 8px 0;">Masz pytania?</p>
             <p style="margin: 0;">
               <strong>Tel:</strong> +48 601 619 898<br>
-              <strong>Email:</strong> serwis@serwiszebra.pl
+              <strong>Email:</strong> serwis@serwis-zebry.pl
             </p>
           </div>
 
@@ -1939,7 +1939,7 @@ ${getEmailHeader()}
             TAKMA Tadeusz Tiuchty | ul. Poświęcka 1a, 51-128 Wrocław
           </p>
           <p style="margin: 0;">
-            NIP: 9151004377 &nbsp;|&nbsp; www.serwiszebra.pl
+            NIP: 9151004377 &nbsp;|&nbsp; www.serwis-zebry.pl
           </p>
         </div>
 
@@ -1965,7 +1965,7 @@ export async function sendPackageReceivedEmail(data: PackageReceivedEmailData) {
     const shortId = data.repairId.split('-')[0].toUpperCase()
     
     const email = await resend.emails.send({
-      from: 'Serwis Zebra <serwis@serwiszebra.pl>',
+      from: 'Serwis Zebra <serwis@serwis-zebry.pl>',
       to: data.to,
       subject: `Paczka dostarczona do serwisu - ${data.deviceModel} #${shortId}`,
       html: generatePackageReceivedHTML(data, shortId)
@@ -1989,7 +1989,7 @@ function generatePackageReceivedHTML(data: PackageReceivedEmailData, shortId: st
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #ffffff;">
-      <div style="max-width: 600px; margin: 0 auto; background-color: white; box-shadow: 0 0 40px rgba(0, 0, 0, 0.08); border-radius: 8px; overflow: hidden;">
+      <div style="max-width: 600px; margin: 0 auto; background-color: white;  border-radius: 8px; overflow: hidden;">
         
 ${getEmailHeader()}
 
@@ -2046,7 +2046,7 @@ ${getEmailHeader()}
             <p style="margin: 0 0 8px 0;">Masz pytania? Skontaktuj się z nami:</p>
             <p style="margin: 0;">
               <strong>Tel:</strong> +48 601 619 898<br>
-              <strong>Email:</strong> serwis@serwiszebra.pl
+              <strong>Email:</strong> serwis@serwis-zebry.pl
             </p>
           </div>
 
@@ -2058,7 +2058,7 @@ ${getEmailHeader()}
             TAKMA Tadeusz Tiuchty | ul. Poświęcka 1a, 51-128 Wrocław
           </p>
           <p style="margin: 0;">
-            NIP: 9151004377 &nbsp;|&nbsp; www.serwiszebra.pl
+            NIP: 9151004377 &nbsp;|&nbsp; www.serwis-zebry.pl
           </p>
         </div>
 

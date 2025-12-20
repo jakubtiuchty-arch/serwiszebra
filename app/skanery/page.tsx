@@ -29,10 +29,10 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Serwis Skanerów Zebra – Naprawa DS, LI, Parowanie',
     description: 'Profesjonalny serwis skanerów kodów kreskowych Zebra. Naprawa modułów, wymiana okienek, problemy z parowaniem.',
-    url: 'https://serwiszebra.pl/skanery',
+    url: 'https://www.serwis-zebry.pl/skanery',
   },
   alternates: {
-    canonical: 'https://serwiszebra.pl/skanery',
+    canonical: 'https://www.serwis-zebry.pl/skanery',
   },
 }
 

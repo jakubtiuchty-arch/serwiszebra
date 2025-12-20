@@ -61,7 +61,7 @@ export default function RegulaminPage() {
               <p>1.1. Niniejszy Regulamin określa zasady świadczenia usług serwisowych przez firmę <strong>TAKMA</strong> z siedzibą we Wrocławiu (51-128), ul. Poświęcka 1a, NIP: 915-100-43-77, REGON: 932677161, zwaną dalej „Serwisem".</p>
               <p>1.2. Serwis jest autoryzowanym partnerem serwisowym Zebra Technologies (Zebra Premier Partner Repair Specialist) i specjalizuje się w naprawie urządzeń marki Zebra: drukarek etykiet, terminali mobilnych oraz skanerów kodów kreskowych.</p>
               <p>1.3. Korzystanie z usług Serwisu oznacza akceptację niniejszego Regulaminu.</p>
-              <p>1.4. Regulamin jest dostępny na stronie internetowej <a href="https://serwiszebra.pl/regulamin" className="text-blue-600 hover:underline">serwiszebra.pl/regulamin</a> i może być w każdej chwili pobrany oraz wydrukowany.</p>
+              <p>1.4. Regulamin jest dostępny na stronie internetowej <a href="https://www.serwis-zebry.pl/regulamin" className="text-blue-600 hover:underline">serwis-zebry.pl/regulamin</a> i może być w każdej chwili pobrany oraz wydrukowany.</p>
             </div>
           </section>
 
@@ -110,8 +110,8 @@ export default function RegulaminPage() {
             <div className="space-y-3 text-gray-600 text-sm leading-relaxed">
               <p>4.1. Zlecenie naprawy można złożyć poprzez:</p>
               <ul className="list-disc list-inside ml-4 space-y-1">
-                <li>Formularz na stronie serwiszebra.pl</li>
-                <li>Email: serwis@serwiszebra.pl</li>
+                <li>Formularz na stronie serwis-zebry.pl</li>
+                <li>Email: serwis@serwis-zebry.pl</li>
                 <li>Telefon: +48 601 619 898</li>
               </ul>
               <p>4.2. Po złożeniu zlecenia Klient otrzymuje potwierdzenie wraz z numerem zgłoszenia.</p>
@@ -190,9 +190,9 @@ export default function RegulaminPage() {
             <div className="space-y-3 text-gray-600 text-sm leading-relaxed">
               <p>8.1. Reklamacje można składać:</p>
               <ul className="list-disc list-inside ml-4 space-y-1">
-                <li>Emailem na adres: serwis@serwiszebra.pl</li>
+                <li>Emailem na adres: serwis@serwis-zebry.pl</li>
                 <li>Telefonicznie: +48 601 619 898</li>
-                <li>Poprzez panel klienta na stronie serwiszebra.pl</li>
+                <li>Poprzez panel klienta na stronie serwis-zebry.pl</li>
               </ul>
               <p>8.2. Reklamacja powinna zawierać: numer zlecenia, opis problemu, dane kontaktowe.</p>
               <p>8.3. Serwis rozpatruje reklamacje w terminie 14 dni roboczych od daty otrzymania.</p>
@@ -257,10 +257,10 @@ export default function RegulaminPage() {
             </p>
             <div className="flex flex-wrap justify-center gap-3">
               <a 
-                href="mailto:serwis@serwiszebra.pl" 
+                href="mailto:serwis@serwis-zebry.pl" 
                 className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
               >
-                serwis@serwiszebra.pl
+                serwis@serwis-zebry.pl
               </a>
               <a 
                 href="tel:+48601619898" 
@@ -275,6 +275,7 @@ export default function RegulaminPage() {
     </div>
   )
 }
+
 
 
 

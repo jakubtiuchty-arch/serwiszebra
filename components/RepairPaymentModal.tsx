@@ -22,13 +22,15 @@ function CheckoutForm({
   deviceModel,
   totalAmount,
   onSuccess,
-  onError 
+  onError,
+  isDiagnosticFee = false
 }: { 
   repairId: string;
   deviceModel: string;
   totalAmount: number;
   onSuccess: () => void;
   onError: (error: string) => void;
+  isDiagnosticFee?: boolean;
 }) {
   const stripe = useStripe();
   const elements = useElements();
@@ -85,12 +87,20 @@ function CheckoutForm({
         
         // Obsłuż różne statusy płatności
         if (paymentIntent.status === 'succeeded') {
-          console.log('🎉 Payment succeeded! Updating repair status...');
-          await confirmPaymentInBackend(paymentIntent.id);
+          console.log('🎉 Payment succeeded!');
+          // Dla płatności za diagnostykę NIE wywołuj confirm-payment (nie zmieniamy statusu naprawy)
+          if (!isDiagnosticFee) {
+            console.log('📝 Updating repair status...');
+            await confirmPaymentInBackend(paymentIntent.id);
+          } else {
+            console.log('💰 Diagnostic fee paid - skipping repair status update');
+          }
           onSuccess();
         } else if (paymentIntent.status === 'processing') {
           console.log('⏳ Payment processing, treating as success...');
-          await confirmPaymentInBackend(paymentIntent.id);
+          if (!isDiagnosticFee) {
+            await confirmPaymentInBackend(paymentIntent.id);
+          }
           onSuccess();
         } else if (paymentIntent.status === 'requires_action' || paymentIntent.status === 'requires_confirmation') {
           console.log('⏳ Payment requires additional action, waiting...');
@@ -208,6 +218,7 @@ export default function RepairPaymentModal({
   deviceModel,
   totalAmount,
   onPaymentSuccess,
+  isDiagnosticFee = false,
 }: {
   isOpen: boolean;
   onClose: () => void;
@@ -215,6 +226,7 @@ export default function RepairPaymentModal({
   deviceModel: string;
   totalAmount: number;
   onPaymentSuccess?: () => void;
+  isDiagnosticFee?: boolean;
 }) {
   const [clientSecret, setClientSecret] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
@@ -270,6 +282,7 @@ export default function RepairPaymentModal({
         const response = await fetch(`/api/repairs/${repairId}/create-payment-intent`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ isDiagnosticFee }),
         });
 
         if (!response.ok) {
@@ -287,7 +300,7 @@ export default function RepairPaymentModal({
     };
 
     createPaymentIntent();
-  }, [isOpen, repairId]);
+  }, [isOpen, repairId, isDiagnosticFee]);
 
 const handleSuccess = () => {
   setSuccess(true);
@@ -328,13 +341,14 @@ const handleSuccess = () => {
   };
 
 const handleClose = () => {
-  if (success) {
-    // Odśwież stronę i zamknij modal
+  if (success && !isDiagnosticFee) {
+    // Odśwież stronę i zamknij modal (tylko dla płatności za naprawę)
+    // Dla diagnostyki onPaymentSuccess jest już wywołane w handleSuccess
     if (onPaymentSuccess) {
       onPaymentSuccess();
     }
-    router.refresh();
   }
+  router.refresh();
   onClose();
 };
 
@@ -385,11 +399,23 @@ const handleClose = () => {
               </div>
 
               <h2 className="text-xl font-bold text-gray-900 mb-2">
-                Płatność zakończona!
+                {isDiagnosticFee ? 'Diagnostyka opłacona!' : 'Płatność zakończona!'}
               </h2>
               <p className="text-sm text-gray-600 text-center mb-4">
-                Naprawa <span className="font-bold text-gray-900">#{shortId}</span> została opłacona
+                {isDiagnosticFee ? (
+                  <>Opłata za diagnostykę <span className="font-bold text-gray-900">{totalAmount.toFixed(2)} zł</span> została zaksięgowana</>
+                ) : (
+                  <>Naprawa <span className="font-bold text-gray-900">#{shortId}</span> została opłacona</>
+                )}
               </p>
+
+              {isDiagnosticFee && (
+                <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 mb-4 w-full">
+                  <p className="text-xs text-amber-800 text-center">
+                    📦 Urządzenie zostanie odesłane bez naprawy. Skontaktujemy się w sprawie zwrotu.
+                  </p>
+                </div>
+              )}
 
               <div className="bg-green-50 border border-green-200 rounded-lg p-3 mb-6 w-full">
                 <p className="text-xs text-green-800 text-center">
@@ -507,10 +533,17 @@ const handleClose = () => {
             <>
               {/* Header z kwotą */}
               <div className="text-center mb-4">
-                <h2 className="text-lg font-bold text-gray-900">Opłać naprawę</h2>
+                <h2 className="text-lg font-bold text-gray-900">
+                  {isDiagnosticFee ? 'Opłata za diagnostykę' : 'Opłać naprawę'}
+                </h2>
                 <p className="text-sm text-gray-600">
                   Zgłoszenie <span className="font-semibold">#{shortId}</span> • {deviceModel}
                 </p>
+                {isDiagnosticFee && (
+                  <p className="text-xs text-amber-600 mt-1">
+                    Rezygnacja z naprawy - opłata diagnostyczna
+                  </p>
+                )}
                 <p className="text-2xl font-black text-gray-900 mt-2">
                   {totalAmount.toFixed(2)} zł
                 </p>
@@ -564,6 +597,7 @@ const handleClose = () => {
                     totalAmount={totalAmount}
                     onSuccess={handleSuccess}
                     onError={handleError}
+                    isDiagnosticFee={isDiagnosticFee}
                   />
                 </Elements>
               )}

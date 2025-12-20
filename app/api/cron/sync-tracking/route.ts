@@ -117,7 +117,7 @@ export async function GET(request: NextRequest) {
         })
 
         await resend.emails.send({
-          from: 'Sklep serwiszebra.pl <sklep@serwiszebra.pl>',
+          from: 'Sklep serwis-zebry.pl <sklep@serwis-zebry.pl>',
           to: [blOrder.email],
           subject: `📦 Przesyłka wysłana - zamówienie #${blOrder.order_id}`,
           html: emailHtml

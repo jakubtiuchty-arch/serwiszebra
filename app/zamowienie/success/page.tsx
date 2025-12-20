@@ -143,7 +143,7 @@ function OrderSuccessPageContent() {
               Płatność zakończona sukcesem!
             </h1>
             <p className="text-lg text-gray-600 mb-6">
-              Dziękujemy za zakupy w serwiszebra.pl
+              Dziękujemy za zakupy w serwis-zebry.pl
             </p>
 
             {orderData && (
@@ -284,8 +284,8 @@ function OrderSuccessPageContent() {
           <div className="mt-8 text-center">
             <p className="text-sm text-gray-600">
               Masz pytania? Skontaktuj się z nami:{' '}
-              <a href="mailto:kontakt@serwiszebra.pl" className="text-blue-600 hover:text-blue-700 font-semibold">
-                kontakt@serwiszebra.pl
+              <a href="mailto:kontakt@serwis-zebry.pl" className="text-blue-600 hover:text-blue-700 font-semibold">
+                kontakt@serwis-zebry.pl
               </a>
               {' '}lub{' '}
               <a href="tel:+48607778977" className="text-blue-600 hover:text-blue-700 font-semibold">

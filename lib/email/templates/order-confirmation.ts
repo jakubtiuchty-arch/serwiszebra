@@ -257,7 +257,7 @@ export const generateOrderConfirmationEmail = (params: OrderConfirmationEmailPar
           <!-- CTA -->
           <tr>
             <td style="padding: 0 40px 40px; text-align: center;">
-              <a href="https://serwiszebra.pl/panel/zamowienia" 
+              <a href="https://www.serwis-zebry.pl/panel/zamowienia" 
                  style="display: inline-block; background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: #ffffff; text-decoration: none; padding: 14px 32px; border-radius: 8px; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.3px; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);">
                 Sprawdź status zamówienia
               </a>
@@ -271,13 +271,13 @@ export const generateOrderConfirmationEmail = (params: OrderConfirmationEmailPar
                 Pytania? Skontaktuj się z nami
               </p>
               <p style="margin: 0 0 4px;">
-                <a href="mailto:zamowienia@serwiszebra.pl" style="color: #10b981; text-decoration: none; font-weight: 600; font-size: 14px;">sklep@serwiszebra.pl</a>
+                <a href="mailto:zamowienia@serwis-zebry.pl" style="color: #10b981; text-decoration: none; font-weight: 600; font-size: 14px;">sklep@serwis-zebry.pl</a>
               </p>
               <p style="margin: 0;">
                 <a href="tel:+48 607 819 688" style="color: #10b981; text-decoration: none; font-weight: 600; font-size: 14px;">+48 123 456 789</a>
               </p>
               <p style="margin: 16px 0 0; color: #9ca3af; font-size: 12px;">
-                © 2025 serwiszebra.pl · Autoryzowany Serwis Zebra
+                © 2025 serwis-zebry.pl · Autoryzowany Serwis Zebra
               </p>
             </td>
           </tr>

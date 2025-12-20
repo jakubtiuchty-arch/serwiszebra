@@ -9,6 +9,10 @@ export async function POST(
   try {
     const supabase = await createClient();
     const repairId = params.id;
+    
+    // Sprawdź czy to opłata za diagnostykę
+    const body = await request.json().catch(() => ({}));
+    const isDiagnosticFee = body.isDiagnosticFee === true;
 
     if (!repairId) {
       return NextResponse.json(
@@ -31,32 +35,46 @@ export async function POST(
       );
     }
 
-    // Sprawdź czy wycena została zaakceptowana
-    if (!repair.price_accepted_at) {
-      return NextResponse.json(
-        { error: 'Wycena nie została jeszcze zaakceptowana' },
-        { status: 400 }
-      );
-    }
+    // Dla opłaty za diagnostykę - inne warunki
+    if (isDiagnosticFee) {
+      // Sprawdź czy naprawa nie jest już zakończona/wysłana
+      if (['zakonczone', 'wyslane'].includes(repair.status)) {
+        return NextResponse.json(
+          { error: 'Nie można opłacić diagnostyki dla zakończonej naprawy' },
+          { status: 400 }
+        );
+      }
+    } else {
+      // Standardowa płatność za naprawę
+      // Sprawdź czy wycena została zaakceptowana
+      if (!repair.price_accepted_at) {
+        return NextResponse.json(
+          { error: 'Wycena nie została jeszcze zaakceptowana' },
+          { status: 400 }
+        );
+      }
 
-    // Sprawdź czy naprawa nie jest już w zbyt zaawansowanym statusie
-    if (['zakonczone', 'wyslane', 'anulowane'].includes(repair.status)) {
-      return NextResponse.json(
-        { error: 'Nie można już opłacić tej naprawy' },
-        { status: 400 }
-      );
-    }
+      // Sprawdź czy naprawa nie jest już w zbyt zaawansowanym statusie
+      if (['zakonczone', 'wyslane', 'anulowane'].includes(repair.status)) {
+        return NextResponse.json(
+          { error: 'Nie można już opłacić tej naprawy' },
+          { status: 400 }
+        );
+      }
 
-    // Sprawdź czy płatność już nie została dokonana
-    if (repair.payment_status === 'succeeded') {
-      return NextResponse.json(
-        { error: 'Naprawa została już opłacona' },
-        { status: 400 }
-      );
+      // Sprawdź czy płatność już nie została dokonana
+      if (repair.payment_status === 'succeeded') {
+        return NextResponse.json(
+          { error: 'Naprawa została już opłacona' },
+          { status: 400 }
+        );
+      }
     }
 
     // Określ kwotę do zapłaty
-    const amountToPay = repair.final_price || repair.estimated_price;
+    const amountToPay = isDiagnosticFee 
+      ? 121.77 // Stała opłata za diagnostykę (99 zł netto + VAT 23% = 121,77 zł brutto)
+      : (repair.final_price || repair.estimated_price);
 
     if (!amountToPay || amountToPay <= 0) {
       return NextResponse.json(
@@ -73,25 +91,30 @@ export async function POST(
       currency: 'pln',
       payment_method_types: ['blik', 'p24', 'card'],
       receipt_email: repair.email,
-      description: `Naprawa ${repair.device_model} - Zgłoszenie #${shortId}`,
+      description: isDiagnosticFee 
+        ? `Opłata za diagnostykę - Zgłoszenie #${shortId}`
+        : `Naprawa ${repair.device_model} - Zgłoszenie #${shortId}`,
       metadata: {
         repair_id: repairId,
         repair_short_id: shortId,
         device_model: repair.device_model,
         customer_email: repair.email,
         customer_name: `${repair.first_name} ${repair.last_name}`,
+        is_diagnostic_fee: isDiagnosticFee ? 'true' : 'false',
       },
     });
 
-    // Zapisz payment intent ID w bazie
-    await supabase
-      .from('repair_requests')
-      .update({
-        stripe_payment_id: paymentIntent.id,
-        payment_status: 'processing',
-        updated_at: new Date().toISOString(),
-      })
-      .eq('id', repairId);
+    // Zapisz payment intent ID w bazie (tylko dla płatności za naprawę)
+    if (!isDiagnosticFee) {
+      await supabase
+        .from('repair_requests')
+        .update({
+          stripe_payment_id: paymentIntent.id,
+          payment_status: 'processing',
+          updated_at: new Date().toISOString(),
+        })
+        .eq('id', repairId);
+    }
 
     return NextResponse.json({
       clientSecret: paymentIntent.client_secret,

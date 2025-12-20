@@ -18,7 +18,7 @@ export function generateShippingNotificationEmail(data: ShippingNotificationData
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Przesyłka wysłana - serwiszebra.pl</title>
+  <title>Przesyłka wysłana - serwis-zebry.pl</title>
 </head>
 <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f3f4f6;">
   
@@ -124,7 +124,7 @@ export function generateShippingNotificationEmail(data: ShippingNotificationData
                   </td>
                   ` : ''}
                   <td style="padding-left: ${trackingUrl ? '8px' : '0'};">
-                    <a href="https://serwiszebra.vercel.app/klient/zamowienia" style="display: block; background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; text-decoration: none; padding: 16px 24px; border-radius: 12px; font-weight: 600; font-size: 16px; text-align: center; box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.3);">
+                    <a href="https://www.serwis-zebry.pl/klient/zamowienia" style="display: block; background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; text-decoration: none; padding: 16px 24px; border-radius: 12px; font-weight: 600; font-size: 16px; text-align: center; box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.3);">
                       📦 Moje zamówienia →
                     </a>
                   </td>
@@ -139,7 +139,7 @@ export function generateShippingNotificationEmail(data: ShippingNotificationData
                 Masz pytania? Skontaktuj się z nami:
               </p>
               <p style="margin: 0 0 4px; color: #374151; font-size: 14px;">
-                <strong>📧 Email:</strong> <a href="mailto:zamowienia@serwiszebra.pl" style="color: #10b981; text-decoration: none;">zamowienia@serwiszebra.pl</a>
+                <strong>📧 Email:</strong> <a href="mailto:zamowienia@serwis-zebry.pl" style="color: #10b981; text-decoration: none;">zamowienia@serwis-zebry.pl</a>
               </p>
               <p style="margin: 0; color: #374151; font-size: 14px;">
                 <strong>📞 Telefon:</strong> <a href="tel:+48607819688" style="color: #10b981; text-decoration: none;">+48 607 819 688</a>
@@ -152,7 +152,7 @@ export function generateShippingNotificationEmail(data: ShippingNotificationData
           <tr>
             <td style="background: linear-gradient(135deg, #059669 0%, #047857 100%); padding: 24px 40px; text-align: center;">
               <p style="margin: 0 0 8px; color: rgba(255,255,255,0.9); font-size: 14px;">
-                <strong>serwiszebra.pl</strong>
+                <strong>serwis-zebry.pl</strong>
               </p>
               <p style="margin: 0; color: rgba(255,255,255,0.7); font-size: 12px;">
                 Profesjonalny serwis urządzeń Zebra

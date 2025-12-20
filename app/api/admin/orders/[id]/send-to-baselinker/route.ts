@@ -105,7 +105,7 @@ export async function POST(
       
       // Uwagi
       user_comments: order.customer_notes || '',
-      admin_comments: `Zamówienie z serwiszebra.pl - ${order.order_number}`,
+      admin_comments: `Zamówienie z serwis-zebry.pl - ${order.order_number}`,
       
       // Wartości
       currency: 'PLN',

@@ -211,7 +211,7 @@ const { data: order, error: orderError } = await supabase
             
             <p style="color: #6b7280; font-size: 14px; margin-top: 30px;">
               Dziękujemy za zakupy!<br>
-              serwiszebra.pl
+              serwis-zebry.pl
             </p>
           </div>
         `,

@@ -126,11 +126,11 @@ export async function generateMetadata({ params }: { params: { miasto: string } 
     openGraph: {
       title: city.metaTitle,
       description: city.metaDescription,
-      url: `https://serwiszebra.pl/serwis-zebra/${city.slug}`,
+      url: `https://www.serwis-zebry.pl/serwis-zebra/${city.slug}`,
       type: 'website',
     },
     alternates: {
-      canonical: `https://serwiszebra.pl/serwis-zebra/${city.slug}`,
+      canonical: `https://www.serwis-zebry.pl/serwis-zebra/${city.slug}`,
     },
   }
 }
@@ -184,12 +184,12 @@ export default function CityServicePage({ params }: { params: { miasto: string }
   const localBusinessSchema = {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
-    '@id': `https://serwiszebra.pl/serwis-zebra/${city.slug}#business`,
+    '@id': `https://www.serwis-zebry.pl/serwis-zebra/${city.slug}#business`,
     name: `TAKMA - Serwis Zebra ${city.name}`,
     description: city.metaDescription,
-    url: `https://serwiszebra.pl/serwis-zebra/${city.slug}`,
+    url: `https://www.serwis-zebry.pl/serwis-zebra/${city.slug}`,
     telephone: '+48601619898',
-    email: 'kontakt@serwiszebra.pl',
+    email: 'kontakt@serwis-zebry.pl',
     areaServed: {
       '@type': 'City',
       name: city.name,
@@ -238,13 +238,13 @@ export default function CityServicePage({ params }: { params: { miasto: string }
         '@type': 'ListItem',
         position: 1,
         name: 'Strona główna',
-        item: 'https://serwiszebra.pl'
+        item: 'https://www.serwis-zebry.pl'
       },
       {
         '@type': 'ListItem',
         position: 2,
         name: `Serwis Zebra ${city.name}`,
-        item: `https://serwiszebra.pl/serwis-zebra/${city.slug}`
+        item: `https://www.serwis-zebry.pl/serwis-zebra/${city.slug}`
       }
     ]
   }

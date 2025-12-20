@@ -273,7 +273,7 @@ export default function VideoTutorialsPage() {
                 name: 'TAKMA - Serwis Zebra',
                 logo: {
                   '@type': 'ImageObject',
-                  url: 'https://serwiszebra.pl/takma_logo_1.png'
+                  url: 'https://www.serwis-zebry.pl/takma_logo_1.png'
                 }
               }
             }))

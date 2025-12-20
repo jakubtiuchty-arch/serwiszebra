@@ -409,8 +409,8 @@ useEffect(() => {
                 +48 607 819 688
               </a>
               {' • '}
-              <a href="mailto:zamowienia@serwiszebra.pl" className="hover:text-gray-700 transition-colors">
-                zamowienia@serwiszebra.pl
+              <a href="mailto:zamowienia@serwis-zebry.pl" className="hover:text-gray-700 transition-colors">
+                zamowienia@serwis-zebry.pl
               </a>
             </p>
           </div>

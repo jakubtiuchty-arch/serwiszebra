@@ -5,7 +5,7 @@ import { blogPosts } from '@/lib/blog'
 const cities = ['warszawa', 'krakow', 'wroclaw', 'poznan', 'gdansk', 'katowice']
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://serwiszebra.pl'
+  const baseUrl = 'https://www.serwis-zebry.pl'
   
   // Data ostatniej aktualizacji
   const now = new Date()

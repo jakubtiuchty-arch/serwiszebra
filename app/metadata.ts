@@ -8,7 +8,7 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://serwiszebra.pl'),
+  metadataBase: new URL('https://www.serwis-zebry.pl'),
   title: {
     default: 'Serwis Zebra - Autoryzowany Serwis Drukarek, Terminali i Skanerów Zebra | 25 lat doświadczenia',
     template: '%s | Serwis Zebra'
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'pl_PL',
-    url: 'https://serwiszebra.pl',
+    url: 'https://www.serwis-zebry.pl',
     siteName: 'Serwis Zebra',
     title: 'Serwis Zebra - Autoryzowany Serwis Drukarek, Terminali i Skanerów Zebra',
     description: 'Profesjonalny serwis urządzeń Zebra: drukarek etykiet, terminali mobilnych, skanerów. Ekspresowa naprawa 2-5 dni, odbiór kurierem w 24h. Diagnostyka AI 24/7. 25 lat doświadczenia, tysiące skutecznych napraw.',
@@ -73,7 +73,7 @@ export const metadata: Metadata = {
     images: ['/og-image.jpg'],
   },
   alternates: {
-    canonical: 'https://serwiszebra.pl',
+    canonical: 'https://www.serwis-zebry.pl',
   },
   verification: {
     google: 'your-google-verification-code',
