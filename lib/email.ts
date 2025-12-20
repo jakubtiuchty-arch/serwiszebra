@@ -14,26 +14,36 @@ function getRepairNumber(repairId: string, repairNumber?: string): string {
   return repairId.split('-')[0].toUpperCase()
 }
 
-// Wspólny header dla wszystkich maili do klientów - mobile-friendly stacked layout
+// Wspólny header dla wszystkich maili do klientów - responsive (desktop inline, mobile stacked)
 function getEmailHeader(): string {
   return `
-    <!-- Header z ciemnym tłem - mobile friendly -->
-    <div style="background-color: #1f2937; padding: 20px 16px; text-align: center;">
-      <!-- Logo TAKMA -->
-      <div style="margin-bottom: 12px;">
-        <img src="${EMAIL_ASSETS_URL}/takma_logo_white.png" alt="TAKMA" style="height: 40px; max-width: 160px; width: auto;">
-      </div>
-      <!-- Odznaki partnerskie -->
-      <div style="margin-bottom: 12px;">
-        <img src="${EMAIL_ASSETS_URL}/premier-partner-1.png" alt="Zebra Premier Partner" style="height: 32px; width: auto; margin: 0 6px;">
-        <img src="${EMAIL_ASSETS_URL}/repair_specialist.png" alt="Repair Specialist" style="height: 32px; width: auto; margin: 0 6px;">
-      </div>
-      <!-- Serwis Zebra -->
-      <div>
-        <span style="color: #ffffff; font-size: 18px; font-weight: 700; letter-spacing: 1px;">
-          SERWIS ZEBRA
-        </span>
-      </div>
+    <style>
+      @media only screen and (max-width: 600px) {
+        .email-header-table { width: 100% !important; }
+        .email-header-left { display: block !important; width: 100% !important; text-align: center !important; padding-bottom: 12px !important; }
+        .email-header-right { display: block !important; width: 100% !important; text-align: center !important; }
+        .email-logo { height: 36px !important; }
+        .email-badge { height: 28px !important; margin: 0 4px !important; }
+      }
+    </style>
+    <!-- Header z ciemnym tłem - responsive -->
+    <div style="background-color: #1f2937; padding: 20px 24px;">
+      <table class="email-header-table" style="width: 100%; border-collapse: collapse;">
+        <tr>
+          <!-- Lewa strona: Logo TAKMA + odznaki partnerskie -->
+          <td class="email-header-left" style="text-align: left; vertical-align: middle;">
+            <img class="email-logo" src="${EMAIL_ASSETS_URL}/takma_logo_white.png" alt="TAKMA" style="height: 50px; width: auto; display: inline-block; vertical-align: middle;">
+            <img class="email-badge" src="${EMAIL_ASSETS_URL}/premier-partner-1.png" alt="Zebra Premier Partner" style="height: 36px; width: auto; display: inline-block; vertical-align: middle; margin-left: 16px;">
+            <img class="email-badge" src="${EMAIL_ASSETS_URL}/repair_specialist.png" alt="Repair Specialist" style="height: 36px; width: auto; display: inline-block; vertical-align: middle; margin-left: 12px;">
+          </td>
+          <!-- Prawa strona: Serwis Zebra -->
+          <td class="email-header-right" style="text-align: right; vertical-align: middle;">
+            <span style="color: #ffffff; font-size: 20px; font-weight: 700; letter-spacing: 1px;">
+              SERWIS ZEBRA
+            </span>
+          </td>
+        </tr>
+      </table>
     </div>
   `
 }
