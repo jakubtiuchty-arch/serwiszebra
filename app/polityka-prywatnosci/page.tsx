@@ -1,11 +1,22 @@
 'use client'
 
 import Link from 'next/link'
-import { ArrowLeft, Shield, Eye, Lock, Database, Cookie, Mail, UserCheck } from 'lucide-react'
+import { ArrowLeft, Shield, Eye, Lock, Database, Cookie, Mail, UserCheck, ChevronRight } from 'lucide-react'
 
 export default function PolitykaPrywatnosciPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+      {/* Breadcrumb */}
+      <div className="bg-white border-b border-gray-200">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 py-3">
+          <nav className="flex items-center gap-2 text-sm text-gray-600">
+            <Link href="/" className="hover:text-blue-600">Strona główna</Link>
+            <ChevronRight className="w-4 h-4 text-gray-400" />
+            <span className="text-gray-900 font-medium">Polityka prywatności</span>
+          </nav>
+        </div>
+      </div>
+
       {/* Header */}
       <div className="bg-gray-900 text-white py-12 sm:py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">

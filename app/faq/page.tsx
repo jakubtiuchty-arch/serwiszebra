@@ -6,7 +6,8 @@ import Image from 'next/image'
 import Header from '@/components/Header'
 import { 
   HelpCircle, 
-  ChevronDown, 
+  ChevronDown,
+  ChevronRight,
   Phone, 
   Mail,
   Printer,
@@ -230,6 +231,17 @@ export default function FAQPage() {
 
       <div className="min-h-screen bg-white font-sans antialiased">
         <Header currentPage="other" />
+
+        {/* Breadcrumb */}
+        <div className="bg-white border-b border-gray-200">
+          <div className="max-w-6xl mx-auto px-4 py-3">
+            <nav className="flex items-center gap-2 text-sm text-gray-600">
+              <Link href="/" className="hover:text-blue-600">Strona główna</Link>
+              <ChevronRight className="w-4 h-4 text-gray-400" />
+              <span className="text-gray-900 font-medium">FAQ</span>
+            </nav>
+          </div>
+        </div>
 
         {/* HERO */}
         <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">

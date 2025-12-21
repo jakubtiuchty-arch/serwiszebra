@@ -6,7 +6,8 @@ import { getAllPosts, BLOG_CATEGORIES, DEVICE_TYPES, DEVICE_SUBCATEGORIES, BlogP
 import { 
   Clock, 
   Calendar, 
-  ArrowRight, 
+  ArrowRight,
+  ChevronRight,
   Tag,
   BookOpen,
   Search,
@@ -311,6 +312,17 @@ export default function BlogPage() {
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <Header currentPage="blog" />
+
+      {/* Breadcrumb */}
+      <div className="bg-white border-b border-gray-200">
+        <div className="max-w-6xl mx-auto px-4 py-3">
+          <nav className="flex items-center gap-2 text-sm text-gray-600">
+            <Link href="/" className="hover:text-blue-600">Strona główna</Link>
+            <ChevronRight className="w-4 h-4 text-gray-400" />
+            <span className="text-gray-900 font-medium">Blog</span>
+          </nav>
+        </div>
+      </div>
 
       {/* Hero */}
       <section className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-12 sm:py-16 relative z-20">

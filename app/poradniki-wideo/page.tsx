@@ -284,6 +284,17 @@ export default function VideoTutorialsPage() {
       <div className="min-h-screen bg-white">
         <Header currentPage="other" />
 
+        {/* Breadcrumb */}
+        <div className="bg-white border-b border-gray-200">
+          <div className="max-w-6xl mx-auto px-4 py-3">
+            <nav className="flex items-center gap-2 text-sm text-gray-600">
+              <Link href="/" className="hover:text-blue-600">Strona główna</Link>
+              <ChevronRight className="w-4 h-4 text-gray-400" />
+              <span className="text-gray-900 font-medium">Poradniki wideo</span>
+            </nav>
+          </div>
+        </div>
+
         {/* Hero - WOW effect */}
         <section className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 py-16 sm:py-20 md:py-28 overflow-hidden">
           {/* Animated background elements */}

@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import Header from '@/components/Header'
 import { 
   Phone, 
@@ -13,7 +14,8 @@ import {
   CheckCircle2,
   AlertCircle,
   ExternalLink,
-  MessageSquare
+  MessageSquare,
+  ChevronRight
 } from 'lucide-react'
 
 export default function ContactPage() {
@@ -65,6 +67,17 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       <Header currentPage="other" />
+
+      {/* Breadcrumb */}
+      <div className="bg-white border-b border-gray-200">
+        <div className="max-w-5xl mx-auto px-4 py-3">
+          <nav className="flex items-center gap-2 text-sm text-gray-600">
+            <Link href="/" className="hover:text-blue-600">Strona główna</Link>
+            <ChevronRight className="w-4 h-4 text-gray-400" />
+            <span className="text-gray-900 font-medium">Kontakt</span>
+          </nav>
+        </div>
+      </div>
 
       {/* Hero - jak w O nas */}
       <section className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 py-10 sm:py-16 md:py-20 overflow-hidden">
