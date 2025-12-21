@@ -86,6 +86,16 @@ const videos: Video[] = [
     tags: ['ZD220', 'ZD230', 'kalibracja', 'czujnik mediów', 'etykiety'],
   },
   {
+    id: '12',
+    title: 'Konfiguracja sieci LAN w drukarkach Zebra',
+    description: 'Jak skonfigurować połączenie sieciowe Ethernet (LAN) w drukarkach Zebra. Ustawienia IP, DHCP, maska podsieci i brama domyślna.',
+    youtubeId: 'PwC9AJpV-l0',
+    thumbnail: '/lan_all.jpeg',
+    duration: '5:00',
+    category: 'drukarki',
+    tags: ['LAN', 'Ethernet', 'sieć', 'IP', 'DHCP', 'konfiguracja'],
+  },
+  {
     id: '3',
     title: 'Kalibracja drukarki Zebra ZD420 - krok po kroku',
     description: 'Kompletny poradnik kalibracji czujnika mediów w drukarce ZD420. Rozwiązanie problemu pustych etykiet.',
