@@ -12,6 +12,8 @@ import {
   AlertTriangle
 } from 'lucide-react'
 import { blogPosts } from '@/lib/blog'
+import Header from '@/components/Header'
+import Footer from '@/components/Footer'
 
 export const metadata: Metadata = {
   title: 'Serwis Skanerów Zebra – Naprawa DS, LI, Parowanie | Odbiór 24h',
@@ -93,6 +95,8 @@ export default function SkaneryPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
+      <Header currentPage="other" />
+      
       <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
         {/* Breadcrumb */}
         <div className="bg-white border-b">
@@ -106,43 +110,43 @@ export default function SkaneryPage() {
         </div>
 
         {/* Hero */}
-        <section className="bg-gradient-to-br from-purple-600 via-purple-700 to-indigo-800 text-white py-16 md:py-20">
+        <section className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-16 md:py-20">
           <div className="max-w-6xl mx-auto px-4">
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
-                <ScanBarcode className="w-6 h-6" />
+              <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center border border-purple-200">
+                <ScanBarcode className="w-6 h-6 text-purple-600" />
               </div>
-              <span className="text-purple-200 font-medium">Serwis Skanerów</span>
+              <span className="text-purple-600 font-medium">Serwis Skanerów</span>
             </div>
             
-            <h1 className="text-3xl md:text-5xl font-bold mb-4">
+            <h1 className="text-3xl md:text-5xl font-semibold text-gray-900 mb-4">
               Serwis Skanerów Zebra
             </h1>
-            <p className="text-xl md:text-2xl text-purple-100 mb-6 max-w-3xl">
+            <p className="text-xl md:text-2xl text-gray-600 mb-6 max-w-3xl">
               Naprawa skanerów kodów kreskowych DS, LI. Parowanie Bluetooth, wymiana modułów, naprawa przycisków.
             </p>
 
-            <div className="flex flex-wrap gap-4 mb-8">
-              <div className="flex items-center gap-2 bg-white/10 backdrop-blur px-4 py-2 rounded-full">
-                <Truck className="w-5 h-5 text-green-300" />
-                <span>Odbiór kurierem 24h</span>
+            <div className="flex flex-wrap gap-3 mb-8">
+              <div className="flex items-center gap-2 bg-white/80 border border-gray-200 px-4 py-2 rounded-full text-sm">
+                <Truck className="w-4 h-4 text-green-600" />
+                <span className="text-gray-700">Odbiór kurierem 24h</span>
               </div>
-              <div className="flex items-center gap-2 bg-white/10 backdrop-blur px-4 py-2 rounded-full">
-                <Clock className="w-5 h-5 text-yellow-300" />
-                <span>Naprawa 2-5 dni</span>
+              <div className="flex items-center gap-2 bg-white/80 border border-gray-200 px-4 py-2 rounded-full text-sm">
+                <Clock className="w-4 h-4 text-amber-600" />
+                <span className="text-gray-700">Naprawa 2-5 dni</span>
               </div>
-              <div className="flex items-center gap-2 bg-white/10 backdrop-blur px-4 py-2 rounded-full">
-                <Shield className="w-5 h-5 text-purple-300" />
-                <span>12 mies. gwarancji</span>
+              <div className="flex items-center gap-2 bg-white/80 border border-gray-200 px-4 py-2 rounded-full text-sm">
+                <Shield className="w-4 h-4 text-blue-600" />
+                <span className="text-gray-700">12 mies. gwarancji</span>
               </div>
             </div>
 
             <div className="flex flex-wrap gap-4">
-              <Link href="/#formularz" className="inline-flex items-center gap-2 bg-white text-purple-700 font-semibold px-6 py-3 rounded-xl hover:bg-purple-50 transition-colors shadow-lg">
+              <Link href="/#formularz" className="inline-flex items-center gap-2 bg-blue-600 text-white font-medium px-6 py-3 rounded-xl hover:bg-blue-700 transition-colors shadow-lg">
                 Zgłoś naprawę skanera
                 <ChevronRight className="w-5 h-5" />
               </Link>
-              <a href="tel:+48601619898" className="inline-flex items-center gap-2 bg-purple-500/30 backdrop-blur text-white font-semibold px-6 py-3 rounded-xl hover:bg-purple-500/40 transition-colors">
+              <a href="tel:+48601619898" className="inline-flex items-center gap-2 bg-white border border-gray-300 text-gray-700 font-medium px-6 py-3 rounded-xl hover:bg-gray-50 transition-colors">
                 <Phone className="w-5 h-5" />
                 +48 601 619 898
               </a>
@@ -356,36 +360,23 @@ export default function SkaneryPage() {
         </section>
 
         {/* CTA */}
-        <section className="py-12 md:py-16 bg-gradient-to-br from-purple-600 to-indigo-700 text-white">
+        <section className="py-12 md:py-16 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
           <div className="max-w-4xl mx-auto px-4 text-center">
-            <h2 className="text-2xl md:text-3xl font-bold mb-4">Twój skaner Zebra wymaga naprawy?</h2>
-            <p className="text-lg text-purple-100 mb-8">Wypełnij formularz online lub zadzwoń. Kurier odbierze skaner bezpłatnie w 24h!</p>
+            <h2 className="text-2xl md:text-3xl font-semibold text-gray-900 mb-4">Twój skaner Zebra wymaga naprawy?</h2>
+            <p className="text-lg text-gray-600 mb-8">Wypełnij formularz online lub zadzwoń. Kurier odbierze skaner bezpłatnie w 24h!</p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Link href="/#formularz" className="inline-flex items-center gap-2 bg-white text-purple-700 font-semibold px-8 py-4 rounded-xl hover:bg-purple-50 transition-colors shadow-lg">
+              <Link href="/#formularz" className="inline-flex items-center gap-2 bg-blue-600 text-white font-medium px-8 py-4 rounded-xl hover:bg-blue-700 transition-colors shadow-lg">
                 Zgłoś naprawę online <ChevronRight className="w-5 h-5" />
               </Link>
-              <a href="tel:+48601619898" className="inline-flex items-center gap-2 bg-purple-500/30 backdrop-blur text-white font-semibold px-8 py-4 rounded-xl hover:bg-purple-500/40 transition-colors">
+              <a href="tel:+48601619898" className="inline-flex items-center gap-2 bg-white border border-gray-300 text-gray-700 font-medium px-8 py-4 rounded-xl hover:bg-gray-50 transition-colors">
                 <Phone className="w-5 h-5" /> +48 601 619 898
               </a>
             </div>
           </div>
         </section>
-
-        {/* Footer links */}
-        <section className="py-8 bg-gray-50 border-t">
-          <div className="max-w-6xl mx-auto px-4 text-center">
-            <p className="text-gray-600">
-              <Link href="/" className="text-blue-600 hover:underline">← Strona główna</Link>
-              {' • '}
-              <Link href="/drukarki" className="text-blue-600 hover:underline">Serwis Drukarek</Link>
-              {' • '}
-              <Link href="/terminale" className="text-blue-600 hover:underline">Serwis Terminali</Link>
-              {' • '}
-              <Link href="/blog" className="text-blue-600 hover:underline">Poradniki</Link>
-            </p>
-          </div>
-        </section>
       </div>
+      
+      <Footer />
     </>
   )
 }
