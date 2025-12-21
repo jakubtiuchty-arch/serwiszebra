@@ -116,6 +116,16 @@ const videos: Video[] = [
     tags: ['Ethernet', 'montaż', 'moduł sieciowy', 'LAN', 'instalacja'],
   },
   {
+    id: '15',
+    title: 'Konfiguracja WiFi w Zebra ZD421',
+    description: 'Jak skonfigurować połączenie bezprzewodowe WiFi w drukarce Zebra ZD421. Połączenie z siecią WLAN, ustawienia SSID i hasła.',
+    youtubeId: 'lF-pJbhYeVM',
+    thumbnail: '/wifi_zd421.jpeg',
+    duration: '5:30',
+    category: 'drukarki',
+    tags: ['ZD421', 'WiFi', 'WLAN', 'bezprzewodowe', 'konfiguracja sieci'],
+  },
+  {
     id: '3',
     title: 'Kalibracja drukarki Zebra ZD420 - krok po kroku',
     description: 'Kompletny poradnik kalibracji czujnika mediów w drukarce ZD420. Rozwiązanie problemu pustych etykiet.',
