@@ -106,6 +106,16 @@ const videos: Video[] = [
     tags: ['ZD421t', 'blady wydruk', 'jakość druku', 'ciemność', 'darkness'],
   },
   {
+    id: '14',
+    title: 'Montaż modułu Ethernet w drukarkach Zebra',
+    description: 'Jak zamontować moduł sieciowy Ethernet w drukarkach Zebra. Instalacja krok po kroku, podłączenie i konfiguracja połączenia LAN.',
+    youtubeId: 'd-CNBSrBzGQ',
+    thumbnail: '/motaż_eth.jpeg',
+    duration: '6:00',
+    category: 'drukarki',
+    tags: ['Ethernet', 'montaż', 'moduł sieciowy', 'LAN', 'instalacja'],
+  },
+  {
     id: '3',
     title: 'Kalibracja drukarki Zebra ZD420 - krok po kroku',
     description: 'Kompletny poradnik kalibracji czujnika mediów w drukarce ZD420. Rozwiązanie problemu pustych etykiet.',
