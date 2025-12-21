@@ -72,7 +72,11 @@ export async function generateMetadata({
       images: [`https://www.serwis-zebry.pl${post.coverImage}`],
     },
     alternates: {
-      canonical: `https://www.serwis-zebry.pl/blog/${post.slug}`
+      canonical: `https://www.serwis-zebry.pl/blog/${post.slug}`,
+      languages: {
+        'pl': `https://www.serwis-zebry.pl/blog/${post.slug}`,
+        'x-default': `https://www.serwis-zebry.pl/blog/${post.slug}`,
+      },
     }
   }
 }

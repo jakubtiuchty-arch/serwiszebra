@@ -7,6 +7,7 @@ export const metadata: Metadata = {
     canonical: 'https://www.serwis-zebry.pl/skanery',
     languages: {
       'pl': 'https://www.serwis-zebry.pl/skanery',
+      'x-default': 'https://www.serwis-zebry.pl/skanery',
     },
   },
   openGraph: {

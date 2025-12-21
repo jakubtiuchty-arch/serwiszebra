@@ -1416,16 +1416,34 @@ export default function HomePage() {
                 {/* Logo + certyfikaty */}
                 <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
                   <div className="w-32 sm:w-40 h-12 sm:h-16 relative">
-                    <Image src="/takma_logo_1.png" alt="TAKMA" fill className="object-contain brightness-0 invert" />
+                    <Image 
+                      src="/takma_logo_1.png" 
+                      alt="TAKMA - Autoryzowany serwis Zebra" 
+                      width={160}
+                      height={64}
+                      className="object-contain w-full h-full brightness-0 invert" 
+                    />
                   </div>
                   <div className="hidden sm:block h-12 w-px bg-gradient-to-b from-transparent via-white/20 to-transparent"></div>
                   {/* Certyfikaty - na mobile pod logo, na sm+ obok */}
                   <div className="flex items-center gap-3 sm:gap-4">
                     <div className="w-16 sm:w-20 h-12 sm:h-16 relative opacity-80 hover:opacity-100 transition-opacity">
-                      <Image src="/premier-partner-1.png" alt="Zebra Premier Partner" fill className="object-contain" />
+                      <Image 
+                        src="/premier-partner-1.png" 
+                        alt="Zebra Premier Partner - Certyfikowany partner Zebra Technologies" 
+                        width={80}
+                        height={64}
+                        className="object-contain w-full h-full" 
+                      />
                     </div>
                     <div className="w-16 sm:w-20 h-12 sm:h-16 relative opacity-80 hover:opacity-100 transition-opacity">
-                      <Image src="/repair_specialist.png" alt="Repair Specialist" fill className="object-contain" />
+                      <Image 
+                        src="/repair_specialist.png" 
+                        alt="Zebra Repair Specialist - Certyfikowany serwis napraw" 
+                        width={80}
+                        height={64}
+                        className="object-contain w-full h-full" 
+                      />
                     </div>
                   </div>
                 </div>

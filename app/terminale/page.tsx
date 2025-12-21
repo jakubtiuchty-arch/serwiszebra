@@ -150,6 +150,33 @@ export default function TerminalePage() {
           </div>
         </section>
 
+        {/* SEO Introduction */}
+        <section className="py-10 md:py-12 bg-white border-b border-gray-100">
+          <div className="max-w-4xl mx-auto px-4">
+            <div className="prose prose-lg max-w-none text-gray-600">
+              <p>
+                Jako <strong>autoryzowany serwis Zebra Technologies</strong> specjalizujemy się w kompleksowej naprawie 
+                terminali mobilnych wszystkich serii – od kompaktowych urządzeń TC21 i TC26, przez popularne modele 
+                TC52 i TC57, po zaawansowane terminale magazynowe MC3300 i MC9300. Posiadamy pełny dostęp do 
+                oryginalnych części zamiennych, aktualnej dokumentacji technicznej oraz specjalistycznych narzędzi 
+                diagnostycznych od producenta.
+              </p>
+              <p className="mt-4">
+                Najczęściej wykonywane naprawy terminali Zebra to <strong>wymiana wyświetlaczy dotykowych</strong> 
+                (LCD + digitizer), naprawa lub wymiana <strong>modułów skanujących SE4710 i SE4750</strong>, 
+                wymiana baterii oraz naprawa portów ładowania i złączy USB. Regularnie serwisujemy również 
+                problemy z klawiaturami, przyciskami PTT oraz modułami łączności Bluetooth i WiFi.
+              </p>
+              <p className="mt-4">
+                Oferujemy <strong>ekspresowe naprawy terminali</strong> w czasie 2-5 dni roboczych, z możliwością 
+                przyspieszonej realizacji w 24-48h. Kurier odbierze uszkodzone urządzenie bezpośrednio z Twojej 
+                firmy w całej Polsce. Na wszystkie wykonane naprawy udzielamy <strong>12 miesięcy gwarancji</strong>, 
+                a diagnostyka jest bezpłatna przy akceptacji wyceny.
+              </p>
+            </div>
+          </div>
+        </section>
+
         {/* Kategorie terminali */}
         <section className="py-12 md:py-16">
           <div className="max-w-6xl mx-auto px-4">

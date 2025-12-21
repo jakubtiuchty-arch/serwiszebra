@@ -150,6 +150,33 @@ export default function SkaneryPage() {
           </div>
         </section>
 
+        {/* SEO Introduction */}
+        <section className="py-10 md:py-12 bg-white border-b border-gray-100">
+          <div className="max-w-4xl mx-auto px-4">
+            <div className="prose prose-lg max-w-none text-gray-600">
+              <p>
+                Specjalizujemy się w <strong>profesjonalnym serwisie skanerów kodów kreskowych Zebra</strong> – 
+                zarówno modeli przewodowych (DS2208, DS3608, DS4608, DS8108), jak i bezprzewodowych z Bluetooth 
+                (DS2278, DS3678, DS4678, DS8178). Jako <strong>autoryzowany partner Zebra Technologies</strong> 
+                mamy dostęp do oryginalnych części zamiennych, schematów serwisowych oraz specjalistycznego 
+                oprogramowania diagnostycznego.
+              </p>
+              <p className="mt-4">
+                Najczęściej naprawiane usterki skanerów Zebra to <strong>uszkodzenia modułu skanującego</strong> 
+                (wymiana lasera, imager 2D), zarysowane lub pęknięte okienka skanera, problemy z przyciskiem 
+                spustowym oraz usterki <strong>parowania Bluetooth</strong> ze stacją dokującą. Serwisujemy 
+                również skanery prezentacyjne DS9208, DS9908 oraz kompaktowe modele CS4070 i CS6080.
+              </p>
+              <p className="mt-4">
+                Proces naprawy jest prosty: wypełniasz formularz online, kurier odbiera skaner z Twojego adresu, 
+                przeprowadzamy bezpłatną diagnostykę i przedstawiamy wycenę. Po akceptacji naprawiamy urządzenie 
+                w ciągu <strong>2-5 dni roboczych</strong> i odsyłamy kurierem. Na wszystkie naprawy udzielamy 
+                <strong> 12 miesięcy gwarancji</strong>.
+              </p>
+            </div>
+          </div>
+        </section>
+
         {/* Kategorie skanerów */}
         <section className="py-12 md:py-16">
           <div className="max-w-6xl mx-auto px-4">

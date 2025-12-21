@@ -7,6 +7,7 @@ export const metadata: Metadata = {
     canonical: 'https://www.serwis-zebry.pl/terminale',
     languages: {
       'pl': 'https://www.serwis-zebry.pl/terminale',
+      'x-default': 'https://www.serwis-zebry.pl/terminale',
     },
   },
   openGraph: {
