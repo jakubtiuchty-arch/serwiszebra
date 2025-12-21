@@ -51,7 +51,7 @@ export async function PATCH(
     // Sprawdź obecny status i payment_status
     const { data: currentRepair } = await supabase
       .from('repair_requests')
-      .select('status, payment_status, payment_method, email, first_name, last_name, device_model')
+      .select('status, payment_status, payment_method, email, first_name, last_name, device_model, repair_number')
       .eq('id', repairId)
       .single()
 
@@ -132,6 +132,7 @@ export async function PATCH(
             to: currentRepair.email,
             customerName: `${currentRepair.first_name} ${currentRepair.last_name}`,
             repairId: repairId,
+            repairNumber: currentRepair.repair_number,
             deviceModel: currentRepair.device_model,
             oldStatus: currentRepair.status,
             newStatus: status,

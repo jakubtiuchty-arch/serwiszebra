@@ -83,7 +83,7 @@ export async function POST(
     // Sprawdź czy user ma dostęp do tego zgłoszenia (z dodatkowymi danymi do emaila)
     const { data: repair, error: repairError } = await supabase
       .from('repair_requests')
-      .select('user_id, email, first_name, last_name, device_model')
+      .select('user_id, email, first_name, last_name, device_model, repair_number')
       .eq('id', repairId)
       .single()
 
@@ -181,6 +181,7 @@ export async function POST(
             to: repair.email,
             customerName: `${repair.first_name} ${repair.last_name}`,
             repairId: repairId,
+            repairNumber: repair.repair_number,
             deviceModel: repair.device_model,
             senderName: senderName,
             messagePreview: messagePreview,
@@ -195,6 +196,7 @@ export async function POST(
           to: adminEmail,
           customerName: `${repair.first_name} ${repair.last_name}`,
           repairId: repairId,
+          repairNumber: repair.repair_number,
           deviceModel: repair.device_model,
           senderName: senderName,
           messagePreview: messagePreview,

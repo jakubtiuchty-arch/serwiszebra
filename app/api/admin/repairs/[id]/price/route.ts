@@ -67,7 +67,7 @@ export async function PATCH(
     // Pobierz dane naprawy przed aktualizacją (do emaila)
     const { data: repairData } = await supabase
       .from('repair_requests')
-      .select('email, first_name, last_name, device_model')
+      .select('email, first_name, last_name, device_model, repair_number')
       .eq('id', repairId)
       .single()
 
@@ -117,6 +117,7 @@ export async function PATCH(
             to: repairData.email,
             customerName: `${repairData.first_name} ${repairData.last_name}`,
             repairId: repairId,
+            repairNumber: repairData.repair_number,
             deviceModel: repairData.device_model,
             amount: priceAmount,
             notes: notes || undefined

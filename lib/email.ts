@@ -485,6 +485,7 @@ interface QuoteReadyEmailData {
   to: string
   customerName: string
   repairId: string
+  repairNumber?: string
   deviceModel: string
   amount: number
   notes?: string
@@ -492,7 +493,7 @@ interface QuoteReadyEmailData {
 
 export async function sendQuoteReadyEmail(data: QuoteReadyEmailData) {
   try {
-    const shortId = data.repairId.split('-')[0].toUpperCase()
+    const shortId = getRepairNumber(data.repairId, data.repairNumber)
     
     const email = await resend.emails.send({
       from: 'Serwis Zebra <serwis@serwis-zebry.pl>',
@@ -619,6 +620,7 @@ ${getEmailHeader()}
 interface ProFormaAdminEmailData {
   to: string
   repairId: string
+  repairNumber?: string
   customerName: string
   deviceModel: string
   amount: number
@@ -626,7 +628,7 @@ interface ProFormaAdminEmailData {
 
 export async function sendProFormaAdminEmail(data: ProFormaAdminEmailData) {
   try {
-    const shortId = data.repairId.split('-')[0].toUpperCase()
+    const shortId = getRepairNumber(data.repairId, data.repairNumber)
     
     const email = await resend.emails.send({
       from: 'System Serwisowy <system@serwis-zebry.pl>',
@@ -707,13 +709,14 @@ interface RepairPaidEmailData {
   to: string
   customerName: string
   repairId: string
+  repairNumber?: string
   deviceModel: string
   amount: number
 }
 
 export async function sendRepairPaidEmail(data: RepairPaidEmailData) {
   try {
-    const shortId = data.repairId.split('-')[0].toUpperCase()
+    const shortId = getRepairNumber(data.repairId, data.repairNumber)
     
     const email = await resend.emails.send({
       from: 'Serwis Zebra <serwis@serwis-zebry.pl>',
@@ -819,6 +822,7 @@ ${getEmailHeader()}
 interface RepairPaidAdminEmailData {
   to: string
   repairId: string
+  repairNumber?: string
   customerName: string
   customerEmail: string
   customerPhone: string
@@ -828,7 +832,7 @@ interface RepairPaidAdminEmailData {
 
 export async function sendRepairPaidAdminEmail(data: RepairPaidAdminEmailData) {
   try {
-    const shortId = data.repairId.split('-')[0].toUpperCase()
+    const shortId = getRepairNumber(data.repairId, data.repairNumber)
     
     const email = await resend.emails.send({
       from: 'System Serwisowy <system@serwis-zebry.pl>',
@@ -1326,13 +1330,14 @@ interface QuoteAcceptedEmailData {
   to: string
   customerName: string
   repairId: string
+  repairNumber?: string
   deviceModel: string
   amount: number
 }
 
 export async function sendQuoteAcceptedEmail(data: QuoteAcceptedEmailData) {
   try {
-    const shortId = data.repairId.split('-')[0].toUpperCase()
+    const shortId = getRepairNumber(data.repairId, data.repairNumber)
     
     const email = await resend.emails.send({
       from: 'Serwis Zebra <serwis@serwis-zebry.pl>',
@@ -1462,6 +1467,7 @@ ${getEmailHeader()}
 interface QuoteAcceptedAdminEmailData {
   to: string
   repairId: string
+  repairNumber?: string
   customerName: string
   deviceModel: string
   amount: number
@@ -1469,7 +1475,7 @@ interface QuoteAcceptedAdminEmailData {
 
 export async function sendQuoteAcceptedAdminEmail(data: QuoteAcceptedAdminEmailData) {
   try {
-    const shortId = data.repairId.split('-')[0].toUpperCase()
+    const shortId = getRepairNumber(data.repairId, data.repairNumber)
     
     const email = await resend.emails.send({
       from: 'System Serwisowy <system@serwis-zebry.pl>',
@@ -1547,6 +1553,7 @@ interface RepairStatusChangedEmailData {
   to: string
   customerName: string
   repairId: string
+  repairNumber?: string
   deviceModel: string
   oldStatus: string
   newStatus: string
@@ -1555,7 +1562,7 @@ interface RepairStatusChangedEmailData {
 
 export async function sendRepairStatusChangedEmail(data: RepairStatusChangedEmailData) {
   try {
-    const shortId = data.repairId.split('-')[0].toUpperCase()
+    const shortId = getRepairNumber(data.repairId, data.repairNumber)
     
     const email = await resend.emails.send({
       from: 'Serwis Zebra <serwis@serwis-zebry.pl>',
@@ -1693,6 +1700,7 @@ interface ProFormaEmailData {
   to: string
   customerName: string
   repairId: string
+  repairNumber?: string
   deviceModel: string
   amount: number
   proformaNumber: string
@@ -1700,7 +1708,7 @@ interface ProFormaEmailData {
 
 export async function sendProFormaEmail(data: ProFormaEmailData) {
   try {
-    const shortId = data.repairId.split('-')[0].toUpperCase()
+    const shortId = getRepairNumber(data.repairId, data.repairNumber)
     
     const email = await resend.emails.send({
       from: 'Serwis Zebra <serwis@serwis-zebry.pl>',
@@ -1724,6 +1732,7 @@ interface NewChatMessageEmailData {
   to: string
   customerName: string
   repairId: string
+  repairNumber?: string
   deviceModel: string
   senderName: string
   messagePreview: string
@@ -1732,7 +1741,7 @@ interface NewChatMessageEmailData {
 
 export async function sendNewChatMessageEmail(data: NewChatMessageEmailData) {
   try {
-    const shortId = data.repairId.split('-')[0].toUpperCase()
+    const shortId = getRepairNumber(data.repairId, data.repairNumber)
     
     const email = await resend.emails.send({
       from: 'Serwis Zebra <serwis@serwis-zebry.pl>',
@@ -1983,6 +1992,7 @@ interface PackageReceivedEmailData {
   to: string
   customerName: string
   repairId: string
+  repairNumber?: string
   deviceModel: string
   trackingNumber?: string
   courierStatus?: string
@@ -1990,7 +2000,7 @@ interface PackageReceivedEmailData {
 
 export async function sendPackageReceivedEmail(data: PackageReceivedEmailData) {
   try {
-    const shortId = data.repairId.split('-')[0].toUpperCase()
+    const shortId = getRepairNumber(data.repairId, data.repairNumber)
     
     const email = await resend.emails.send({
       from: 'Serwis Zebra <serwis@serwis-zebry.pl>',

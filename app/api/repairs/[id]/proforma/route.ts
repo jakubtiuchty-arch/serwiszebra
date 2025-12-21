@@ -90,14 +90,15 @@ export async function POST(
 
     // Wyślij email z pro formą do klienta
     try {
-      const shortId = repairId.split('-')[0].toUpperCase()
+      const displayNumber = repair.repair_number || repairId.split('-')[0].toUpperCase()
       await sendProFormaEmail({
         to: repair.email,
         customerName: `${repair.first_name} ${repair.last_name}`,
         repairId: repairId,
+        repairNumber: repair.repair_number,
         deviceModel: repair.device_model,
         amount: repair.final_price || repair.estimated_price || 0,
-        proformaNumber: `PF/${new Date().getFullYear()}/${shortId}`
+        proformaNumber: `PF/${new Date().getFullYear()}/${displayNumber}`
       })
       console.log('✅ Pro Forma email sent to customer')
 
@@ -105,6 +106,7 @@ export async function POST(
       await sendProFormaAdminEmail({
         to: process.env.ADMIN_EMAIL || 'jakub.tiuchty@gmail.com',
         repairId: repairId,
+        repairNumber: repair.repair_number,
         customerName: `${repair.first_name} ${repair.last_name}`,
         deviceModel: repair.device_model,
         amount: repair.final_price || repair.estimated_price || 0

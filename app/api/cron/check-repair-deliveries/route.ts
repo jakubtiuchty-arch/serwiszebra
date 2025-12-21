@@ -47,7 +47,7 @@ export async function GET(request: NextRequest) {
     // Pobierz naprawy z pickup_tracking_number, które są w statusie "nowe", "oczekiwanie" lub "w_transporcie"
     const { data: repairs, error: fetchError } = await supabaseAdmin
       .from('repair_requests')
-      .select('id, status, pickup_tracking_number, pickup_courier_name, first_name, last_name, device_model, email')
+      .select('id, status, pickup_tracking_number, pickup_courier_name, first_name, last_name, device_model, email, repair_number')
       .in('status', ['nowe', 'oczekiwanie', 'w_transporcie'])
       .not('pickup_tracking_number', 'is', null)
       .neq('pickup_tracking_number', '')
@@ -135,6 +135,7 @@ export async function GET(request: NextRequest) {
                 to: repair.email,
                 customerName: `${repair.first_name} ${repair.last_name}`,
                 repairId: repair.id,
+                repairNumber: repair.repair_number,
                 deviceModel: repair.device_model || 'Urządzenie Zebra',
                 trackingNumber: repair.pickup_tracking_number,
                 courierStatus: trackingStatus.status

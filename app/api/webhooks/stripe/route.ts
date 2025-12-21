@@ -77,6 +77,7 @@ async function handleRepairPayment(repairId: string, supabase: any) {
         to: repair.email,
         customerName: `${repair.first_name} ${repair.last_name}`,
         repairId: repairId,
+        repairNumber: repair.repair_number,
         deviceModel: repair.device_model,
         amount: repair.final_price || repair.estimated_price,
       });
@@ -85,6 +86,7 @@ async function handleRepairPayment(repairId: string, supabase: any) {
       await sendRepairPaidAdminEmail({
         to: process.env.ADMIN_EMAIL || 'jakub.tiuchty@gmail.com',
         repairId: repairId,
+        repairNumber: repair.repair_number,
         customerName: `${repair.first_name} ${repair.last_name}`,
         customerEmail: repair.email,
         customerPhone: repair.phone || repair.contact_phone || 'brak',
