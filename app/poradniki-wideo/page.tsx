@@ -96,6 +96,16 @@ const videos: Video[] = [
     tags: ['LAN', 'Ethernet', 'sieć', 'IP', 'DHCP', 'konfiguracja'],
   },
   {
+    id: '13',
+    title: 'Blady wydruk w Zebra ZD421t - jak rozwiązać problem',
+    description: 'Rozwiązanie problemu zbyt jasnego, bladego wydruku w drukarce termotransferowej ZD421t. Ustawienia ciemności, prędkości i czyszczenie głowicy.',
+    youtubeId: 'mtawoQxhYmU',
+    thumbnail: '/blady_wydruk_zd421t.jpeg',
+    duration: '4:00',
+    category: 'drukarki',
+    tags: ['ZD421t', 'blady wydruk', 'jakość druku', 'ciemność', 'darkness'],
+  },
+  {
     id: '3',
     title: 'Kalibracja drukarki Zebra ZD420 - krok po kroku',
     description: 'Kompletny poradnik kalibracji czujnika mediów w drukarce ZD420. Rozwiązanie problemu pustych etykiet.',
