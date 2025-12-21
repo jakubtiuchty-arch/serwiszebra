@@ -274,6 +274,29 @@ export default function FAQPage() {
           </section>
         </div>
 
+        {/* SEO Introduction */}
+        <section className="py-8 px-3 sm:px-4 bg-white border-b border-gray-100">
+          <div className="max-w-4xl mx-auto">
+            <div className="prose prose-sm max-w-none text-gray-600">
+              <p className="text-base leading-relaxed">
+                Poniżej znajdziesz odpowiedzi na <strong>najczęściej zadawane pytania</strong> dotyczące 
+                <strong> serwisu urządzeń Zebra</strong>. Nasza baza wiedzy obejmuje informacje o naprawach 
+                <strong> drukarek etykiet Zebra</strong> (ZD420, ZT410, GK420), <strong>terminali mobilnych</strong> (TC52, MC3300), 
+                <strong> skanerów kodów kreskowych</strong> (DS2208, DS4608) oraz <strong>drukarek kart plastikowych</strong> (ZC300, ZXP).
+              </p>
+              <p className="text-base leading-relaxed mt-3">
+                Dowiesz się ile trwa naprawa, jakie są koszty wymiany głowicy drukującej, jak wysłać urządzenie do serwisu 
+                i jaką gwarancję otrzymasz na wykonane prace. Jako <strong>autoryzowany serwis Zebra Technologies</strong> z 25-letnim 
+                doświadczeniem, używamy oryginalnych części i zapewniamy <strong>12 miesięcy gwarancji</strong> na wszystkie naprawy.
+              </p>
+              <p className="text-base leading-relaxed mt-3">
+                Jeśli nie znajdziesz odpowiedzi na swoje pytanie, skorzystaj z <strong>asystenta AI</strong> na stronie głównej 
+                lub skontaktuj się z nami telefonicznie. Nasi technicy pomogą zdiagnozować problem z Twoim urządzeniem Zebra.
+              </p>
+            </div>
+          </div>
+        </section>
+
         {/* MAIN CONTENT */}
         <section className="py-12 px-3 sm:px-4">
           <div className="max-w-6xl mx-auto">

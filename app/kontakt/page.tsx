@@ -311,6 +311,37 @@ export default function ContactPage() {
             </div>
           </div>
 
+          {/* Sekcja informacyjna - SEO content */}
+          <div className="mt-6 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 sm:p-8 border border-blue-100">
+            <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-4">
+              Autoryzowany serwis urządzeń Zebra – dlaczego warto się z nami skontaktować?
+            </h2>
+            <div className="prose prose-sm max-w-none text-gray-700 space-y-4">
+              <p>
+                <strong>TAKMA</strong> to <strong>autoryzowany serwis Zebra Technologies</strong> z ponad 25-letnim doświadczeniem 
+                w naprawie drukarek etykiet, terminali mobilnych, skanerów kodów kreskowych i tabletów przemysłowych. 
+                Jako <strong>Premier Partner Zebra</strong> posiadamy bezpośredni dostęp do oryginalnych części zamiennych, 
+                dokumentacji technicznej i szkoleń producenta.
+              </p>
+              <p>
+                Nasz <strong>profesjonalny serwis drukarek Zebra</strong> obejmuje wszystkie modele: od popularnych 
+                drukarek desktop ZD420 i GK420, przez przemysłowe ZT410 i ZT610, po mobilne ZQ520. 
+                Naprawiamy również <strong>terminale mobilne Zebra</strong> serii TC (TC21, TC52, TC72), MC (MC3300, MC9300) 
+                oraz <strong>skanery kodów kreskowych</strong> DS2208, DS4608, DS8178 i wiele innych.
+              </p>
+              <p>
+                Oferujemy <strong>bezpłatny odbiór kurierem w ciągu 24 godzin</strong> z dowolnego miejsca w Polsce. 
+                Standardowy czas naprawy to 2-5 dni roboczych, a na wszystkie wykonane prace udzielamy 
+                <strong> 12 miesięcy gwarancji</strong>. Diagnostyka jest bezpłatna przy akceptacji naprawy.
+              </p>
+              <p>
+                Skontaktuj się z nami telefonicznie, mailowo lub przez formularz. Nasi specjaliści pomogą 
+                zdiagnozować problem i zaproponują optymalne rozwiązanie. Obsługujemy zarówno klientów 
+                indywidualnych, jak i firmy – wystawiamy faktury VAT z możliwością odroczonego terminu płatności.
+              </p>
+            </div>
+          </div>
+
           {/* Mapa - pod formularzem, pełna szerokość */}
           <div className="mt-6 bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
             <div className="h-48 sm:h-64 relative bg-gray-100">

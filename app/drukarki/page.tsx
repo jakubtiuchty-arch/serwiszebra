@@ -169,6 +169,31 @@ export default function DrukarkiPage() {
           </div>
         </section>
 
+        {/* SEO Introduction */}
+        <section className="py-10 md:py-12 bg-white border-b border-gray-100">
+          <div className="max-w-4xl mx-auto px-4">
+            <div className="prose prose-lg max-w-none text-gray-600">
+              <p>
+                Specjalizujemy się w <strong>profesjonalnym serwisie drukarek Zebra</strong> wszystkich typów – od kompaktowych 
+                drukarek biurkowych, przez wydajne modele przemysłowe, po mobilne drukarki paragonów i etykiet. 
+                Jako <strong>autoryzowany serwis Zebra Technologies</strong> posiadamy pełną dokumentację techniczną, 
+                dostęp do oryginalnych części zamiennych i wieloletnie doświadczenie w naprawach.
+              </p>
+              <p className="mt-4">
+                Najczęstsze naprawy drukarek Zebra to <strong>wymiana głowicy drukującej</strong>, naprawa mechanizmu podawania etykiet, 
+                czyszczenie i kalibracja sensorów oraz wymiana wałków transportowych. Regularnie serwisujemy popularne modele 
+                jak <strong>ZD420</strong>, <strong>ZD620</strong>, <strong>GK420d</strong>, <strong>ZT410</strong>, <strong>ZT610</strong> 
+                oraz drukarki mobilne <strong>ZQ520</strong> i <strong>ZQ630</strong>.
+              </p>
+              <p className="mt-4">
+                Oferujemy również kompleksowy <strong>serwis drukarek kart plastikowych Zebra</strong> – modele ZC100, ZC300, ZC350 
+                oraz seria ZXP. Naprawiamy moduły kodowania magnetycznego i chipowego, wymieniamy głowice termiczne, 
+                rolki laminujące oraz usuwamy zacięcia kart. Na wszystkie naprawy udzielamy <strong>12 miesięcy gwarancji</strong>.
+              </p>
+            </div>
+          </div>
+        </section>
+
         {/* Kategorie drukarek */}
         <section className="py-12 md:py-16">
           <div className="max-w-6xl mx-auto px-4">
