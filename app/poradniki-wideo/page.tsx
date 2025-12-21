@@ -126,6 +126,16 @@ const videos: Video[] = [
     tags: ['ZD421', 'WiFi', 'WLAN', 'bezprzewodowe', 'konfiguracja sieci'],
   },
   {
+    id: '16',
+    title: 'Montaż odklejaka etykiet w Zebra ZD421',
+    description: 'Jak zamontować moduł odklejaka etykiet (label dispenser / peel-off) w drukarce Zebra ZD421. Instalacja i konfiguracja krok po kroku.',
+    youtubeId: 'hzBiOxz-QbI',
+    thumbnail: '/montaż_odklejak_zd421.jpeg',
+    duration: '4:30',
+    category: 'drukarki',
+    tags: ['ZD421', 'odklejak', 'label dispenser', 'peel-off', 'montaż'],
+  },
+  {
     id: '3',
     title: 'Kalibracja drukarki Zebra ZD420 - krok po kroku',
     description: 'Kompletny poradnik kalibracji czujnika mediów w drukarce ZD420. Rozwiązanie problemu pustych etykiet.',
