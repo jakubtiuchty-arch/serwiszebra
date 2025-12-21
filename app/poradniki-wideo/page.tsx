@@ -56,6 +56,16 @@ const videos: Video[] = [
     tags: ['ZD220', 'ZD230', 'przyciski', 'porty', 'USB', 'zasilanie'],
   },
   {
+    id: '9',
+    title: 'Porty i złącza w Zebra ZD421t',
+    description: 'Omówienie portów komunikacyjnych w drukarce termotransferowej Zebra ZD421t: USB Host, USB Device, Ethernet, Serial. Podłączenie i konfiguracja.',
+    youtubeId: 'LCzG5DxX9Nk',
+    thumbnail: '/zd421t_porty.jpeg',
+    duration: '4:15',
+    category: 'drukarki',
+    tags: ['ZD421t', 'porty', 'USB', 'Ethernet', 'Serial', 'złącza'],
+  },
+  {
     id: '3',
     title: 'Kalibracja drukarki Zebra ZD420 - krok po kroku',
     description: 'Kompletny poradnik kalibracji czujnika mediów w drukarce ZD420. Rozwiązanie problemu pustych etykiet.',
