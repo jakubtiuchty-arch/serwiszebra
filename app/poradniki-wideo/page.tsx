@@ -66,6 +66,16 @@ const videos: Video[] = [
     tags: ['ZD421t', 'porty', 'USB', 'Ethernet', 'Serial', 'złącza'],
   },
   {
+    id: '10',
+    title: 'Self-test w Zebra ZD421d / ZD421t - wydruk konfiguracji',
+    description: 'Jak wykonać self-test (wydruk testowy) w drukarkach Zebra ZD421d i ZD421t. Sprawdź konfigurację, ustawienia i stan drukarki jednym przyciskiem.',
+    youtubeId: '5NEmpFMtZx8',
+    thumbnail: '/seltest_zd421d_t.jpeg',
+    duration: '2:45',
+    category: 'drukarki',
+    tags: ['ZD421d', 'ZD421t', 'self-test', 'konfiguracja', 'wydruk testowy'],
+  },
+  {
     id: '3',
     title: 'Kalibracja drukarki Zebra ZD420 - krok po kroku',
     description: 'Kompletny poradnik kalibracji czujnika mediów w drukarce ZD420. Rozwiązanie problemu pustych etykiet.',
