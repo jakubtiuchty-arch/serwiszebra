@@ -76,6 +76,16 @@ const videos: Video[] = [
     tags: ['ZD421d', 'ZD421t', 'self-test', 'konfiguracja', 'wydruk testowy'],
   },
   {
+    id: '11',
+    title: 'Kalibracja czujnika mediów w Zebra ZD220 / ZD230',
+    description: 'Jak przeprowadzić kalibrację czujnika etykiet w drukarkach Zebra ZD220 i ZD230. Rozwiązanie problemów z wykrywaniem etykiet i pustymi wydrukami.',
+    youtubeId: 'l03OFhvhWxY',
+    thumbnail: '/kalibracja_zd220_zd230.jpeg',
+    duration: '3:30',
+    category: 'drukarki',
+    tags: ['ZD220', 'ZD230', 'kalibracja', 'czujnik mediów', 'etykiety'],
+  },
+  {
     id: '3',
     title: 'Kalibracja drukarki Zebra ZD420 - krok po kroku',
     description: 'Kompletny poradnik kalibracji czujnika mediów w drukarce ZD420. Rozwiązanie problemu pustych etykiet.',
