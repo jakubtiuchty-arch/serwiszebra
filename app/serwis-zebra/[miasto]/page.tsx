@@ -131,6 +131,10 @@ export async function generateMetadata({ params }: { params: { miasto: string } 
     },
     alternates: {
       canonical: `https://www.serwis-zebry.pl/serwis-zebra/${city.slug}`,
+      languages: {
+        'pl': `https://www.serwis-zebry.pl/serwis-zebra/${city.slug}`,
+        'x-default': `https://www.serwis-zebry.pl/serwis-zebra/${city.slug}`,
+      },
     },
   }
 }
@@ -325,9 +329,39 @@ export default function CityServicePage({ params }: { params: { miasto: string }
         {/* Intro */}
         <section className="py-8 sm:py-10 md:py-12">
           <div className="max-w-6xl mx-auto px-3 sm:px-4">
-            <div className="bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 border border-amber-200 rounded-xl p-4 sm:p-5 md:p-6 shadow-sm">
+            <div className="bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 border border-amber-200 rounded-xl p-4 sm:p-5 md:p-6 shadow-sm mb-6">
               <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
                 {city.introText} Specjalizujemy się w naprawie urządzeń Zebra Technologies – drukarki etykiet, terminale mobilne, skanery kodów. <strong className="text-blue-900">25 lat doświadczenia.</strong>
+              </p>
+            </div>
+            
+            {/* Rozbudowana sekcja tekstowa dla SEO */}
+            <div className="prose prose-sm sm:prose max-w-none text-gray-600">
+              <h2 className="text-xl sm:text-2xl font-semibold text-gray-900 mb-4">
+                Profesjonalny serwis Zebra w {city.nameLocative}
+              </h2>
+              <p>
+                Jako <strong>autoryzowany serwis Zebra Technologies</strong> świadczymy kompleksowe usługi naprawcze dla firm 
+                z {city.name} i całego {city.region}. Nasza wieloletnia współpraca z producentem gwarantuje dostęp do 
+                oryginalnych części zamiennych, aktualnej dokumentacji technicznej oraz specjalistycznych narzędzi diagnostycznych.
+              </p>
+              <p className="mt-3">
+                Oferujemy <strong>naprawę drukarek etykiet Zebra</strong> wszystkich serii – od popularnych modeli desktop 
+                (ZD420, ZD620, GK420) przez wydajne drukarki przemysłowe (ZT410, ZT610), po mobilne (ZQ520, ZQ630). 
+                Najczęściej wykonywane usługi to wymiana głowic drukujących, naprawa mechanizmów podawania etykiet, 
+                czyszczenie sensorów i kalibracja parametrów wydruku.
+              </p>
+              <p className="mt-3">
+                Specjalizujemy się również w <strong>serwisie terminali mobilnych Zebra</strong> – TC21, TC52, MC3300, MC9300 
+                i wielu innych. Wymieniamy uszkodzone wyświetlacze dotykowe, naprawiamy moduły skanujące, 
+                baterie oraz porty ładowania. Dla <strong>skanerów kodów kreskowych</strong> oferujemy naprawę 
+                modułów optycznych, wymianę okienek skanera oraz rozwiązywanie problemów z parowaniem Bluetooth.
+              </p>
+              <p className="mt-3">
+                Cały proces serwisowy jest maksymalnie uproszczony: wypełniasz formularz online, kurier odbiera urządzenie 
+                z Twojego adresu w {city.nameLocative} w ciągu {city.deliveryTime}, przeprowadzamy bezpłatną diagnostykę, 
+                a po Twojej akceptacji wyceny – naprawiamy i odsyłamy sprzęt. Na wszystkie naprawy udzielamy 
+                <strong> 12 miesięcy gwarancji</strong>.
               </p>
             </div>
           </div>

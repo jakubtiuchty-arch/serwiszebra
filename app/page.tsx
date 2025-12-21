@@ -266,8 +266,10 @@ export default function HomePage() {
                     <Image
                       src="/takma_logo_1.png"
                       alt="TAKMA Logo"
-                      fill
-                      className="object-contain"
+                      width={180}
+                      height={68}
+                      className="object-contain w-full h-full"
+                      priority
                     />
                   </div>
 
@@ -275,9 +277,10 @@ export default function HomePage() {
                   <div className="w-12 sm:w-16 md:w-20 h-8 sm:h-11 md:h-[53px] relative">
                     <Image
                       src="/premier-partner-1.png"
-                      alt="Premier Partner"
-                      fill
-                      className="object-contain transition-transform duration-300 md:hover:scale-[2.5] relative md:hover:z-50"
+                      alt="Zebra Premier Partner - Autoryzowany partner Zebra Technologies"
+                      width={80}
+                      height={53}
+                      className="object-contain w-full h-full transition-transform duration-300 md:hover:scale-[2.5] relative md:hover:z-50"
                     />
                   </div>
 
@@ -285,9 +288,10 @@ export default function HomePage() {
                   <div className="w-[52px] sm:w-[70px] md:w-[84px] h-8 sm:h-11 md:h-[53px] relative">
                     <Image
                       src="/repair_specialist.png"
-                      alt="Repair Specialist"
-                      fill
-                      className="object-contain transition-transform duration-300 md:hover:scale-[2.5] relative md:hover:z-50"
+                      alt="Zebra Repair Specialist - Certyfikowany serwis napraw Zebra"
+                      width={84}
+                      height={53}
+                      className="object-contain w-full h-full transition-transform duration-300 md:hover:scale-[2.5] relative md:hover:z-50"
                     />
                   </div>
                 </div>

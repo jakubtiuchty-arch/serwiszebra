@@ -7,6 +7,7 @@ export const metadata: Metadata = {
     canonical: 'https://www.serwis-zebry.pl/drukarki',
     languages: {
       'pl': 'https://www.serwis-zebry.pl/drukarki',
+      'x-default': 'https://www.serwis-zebry.pl/drukarki',
     },
   },
   openGraph: {

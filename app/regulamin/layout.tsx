@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Regulamin - Serwis Zebra',
+  title: 'Regulamin świadczenia usług serwisowych',
   description: 'Regulamin świadczenia usług serwisowych przez TAKMA - autoryzowany serwis urządzeń Zebra. Zasady napraw, gwarancje, reklamacje.',
   alternates: {
     canonical: 'https://www.serwis-zebry.pl/regulamin',

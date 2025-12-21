@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Polityka prywatności - Serwis Zebra',
+  title: 'Polityka prywatności i cookies',
   description: 'Polityka prywatności serwisu TAKMA. Informacje o przetwarzaniu danych osobowych, cookies i prawach użytkowników.',
   alternates: {
     canonical: 'https://www.serwis-zebry.pl/polityka-prywatnosci',

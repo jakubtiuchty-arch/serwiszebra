@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Kontakt - Serwis Zebra',
+  title: 'Kontakt – Zadzwoń, napisz lub odwiedź nas',
   description: 'Skontaktuj się z autoryzowanym serwisem Zebra. Telefon: +48 690 034 733, email: serwis@serwis-zebry.pl. Szybka odpowiedź i profesjonalna obsługa.',
   alternates: {
     canonical: 'https://www.serwis-zebry.pl/kontakt',
