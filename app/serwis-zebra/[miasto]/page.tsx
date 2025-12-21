@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import Header from '@/components/Header'
 import HowItWorksCity from '@/components/HowItWorksCity'
 import { 
@@ -273,9 +274,25 @@ export default function CityServicePage({ params }: { params: { miasto: string }
         <Header currentPage="other" />
 
         {/* Hero Section - lekki gradient jak na stronie głównej */}
-        <section className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-8 sm:py-10 md:py-12">
-          <div className="max-w-6xl mx-auto px-3 sm:px-4 text-center">
-            <div className="flex items-center justify-center gap-1.5 sm:gap-2 mb-3">
+        <section className="relative bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-8 sm:py-10 md:py-12 overflow-hidden">
+          {/* Zdjęcie w tle - tylko dla Warszawy */}
+          {params.miasto === 'warszawa' && (
+            <>
+              <div className="absolute inset-0 hidden md:block">
+                <Image
+                  src="/serwis_warszawa.jpeg"
+                  alt="Serwis Zebra Warszawa"
+                  fill
+                  className="object-cover object-center"
+                  priority
+                />
+                {/* Gradient overlay - od lewej przezroczysty do prawej widoczny */}
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-50 via-blue-50/95 via-60% to-transparent" />
+              </div>
+            </>
+          )}
+          <div className="relative max-w-6xl mx-auto px-3 sm:px-4 text-center md:text-left">
+            <div className="flex items-center justify-center md:justify-start gap-1.5 sm:gap-2 mb-3">
               <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
               <span className="text-blue-600 font-medium text-sm">{city.name} i okolice</span>
             </div>
@@ -287,26 +304,26 @@ export default function CityServicePage({ params }: { params: { miasto: string }
               </span>
             </h1>
             
-            <p className="text-sm sm:text-base text-gray-600 mb-5 sm:mb-6 max-w-2xl mx-auto">
+            <p className="text-sm sm:text-base text-gray-600 mb-5 sm:mb-6 max-w-2xl md:mx-0">
               {city.heroText}
             </p>
 
-            <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-5 sm:mb-6">
-              <div className="flex items-center gap-1.5 bg-white/80 border border-gray-200 px-3 py-1.5 rounded-full text-xs sm:text-sm">
+            <div className="flex flex-wrap justify-center md:justify-start gap-2 sm:gap-3 mb-5 sm:mb-6">
+              <div className="flex items-center gap-1.5 bg-white/80 backdrop-blur-sm border border-gray-200 px-3 py-1.5 rounded-full text-xs sm:text-sm shadow-sm">
                 <Truck className="w-4 h-4 text-green-600" />
                 <span className="text-gray-700">Odbiór {city.deliveryTime}</span>
               </div>
-              <div className="flex items-center gap-1.5 bg-white/80 border border-gray-200 px-3 py-1.5 rounded-full text-xs sm:text-sm">
+              <div className="flex items-center gap-1.5 bg-white/80 backdrop-blur-sm border border-gray-200 px-3 py-1.5 rounded-full text-xs sm:text-sm shadow-sm">
                 <Clock className="w-4 h-4 text-amber-600" />
                 <span className="text-gray-700">2-5 dni</span>
               </div>
-              <div className="flex items-center gap-1.5 bg-white/80 border border-gray-200 px-3 py-1.5 rounded-full text-xs sm:text-sm">
+              <div className="flex items-center gap-1.5 bg-white/80 backdrop-blur-sm border border-gray-200 px-3 py-1.5 rounded-full text-xs sm:text-sm shadow-sm">
                 <Shield className="w-4 h-4 text-blue-600" />
                 <span className="text-gray-700">12 mies. gwarancji</span>
               </div>
             </div>
 
-            <div className="flex flex-wrap gap-3 justify-center mt-6 sm:mt-8">
+            <div className="flex flex-wrap gap-3 justify-center md:justify-start mt-6 sm:mt-8">
               <Link
                 href="/#formularz"
                 className="inline-flex items-center gap-2 bg-blue-600 text-white font-medium px-5 py-2.5 rounded-lg hover:bg-blue-700 transition-colors text-sm"
