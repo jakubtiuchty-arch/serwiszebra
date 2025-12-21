@@ -88,7 +88,7 @@ export default function BlogPostPage({
     notFound()
   }
 
-  const relatedPosts = getRelatedPosts(params.slug, 3)
+  const relatedPosts = getRelatedPosts(params.slug, 6)
 
   // Schema.org structured data for Article
   const wordCount = post.content.split(/\s+/).length
@@ -167,6 +167,12 @@ export default function BlogPostPage({
       {
         '@type': 'ListItem',
         position: 3,
+        name: post.deviceType.charAt(0).toUpperCase() + post.deviceType.slice(1),
+        item: `https://www.serwis-zebry.pl/blog?device=${post.deviceType}`
+      },
+      {
+        '@type': 'ListItem',
+        position: 4,
         name: post.title,
         item: `https://www.serwis-zebry.pl/blog/${post.slug}`
       }
@@ -213,13 +219,20 @@ export default function BlogPostPage({
         {/* Breadcrumb */}
         <div className="bg-gray-50 border-b border-gray-200">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
-            <nav className="flex items-center gap-2 text-sm">
+            <nav className="flex items-center gap-2 text-sm flex-wrap">
               <Link href="/" className="text-gray-500 hover:text-gray-700">
                 Strona główna
               </Link>
               <span className="text-gray-400">/</span>
               <Link href="/blog" className="text-gray-500 hover:text-gray-700">
                 Blog
+              </Link>
+              <span className="text-gray-400">/</span>
+              <Link 
+                href={`/blog?device=${post.deviceType}`} 
+                className="text-gray-500 hover:text-gray-700 capitalize"
+              >
+                {post.deviceType}
               </Link>
               <span className="text-gray-400">/</span>
               <span className="text-gray-900 font-medium truncate max-w-[200px] sm:max-w-none">
@@ -369,14 +382,81 @@ export default function BlogPostPage({
           </div>
         </article>
 
+        {/* Internal Links Section - Device Category */}
+        <section className="py-10 bg-white border-t border-gray-100">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="text-lg font-semibold text-gray-900 mb-4">
+              Więcej o {post.deviceType === 'drukarki' ? 'drukarkach' : 
+                        post.deviceType === 'terminale' ? 'terminalach' : 
+                        post.deviceType === 'skanery' ? 'skanerach' : 
+                        post.deviceType === 'tablety' ? 'tabletach' : 'urządzeniach'} Zebra
+            </h2>
+            <div className="flex flex-wrap gap-3">
+              {post.deviceType === 'drukarki' && (
+                <>
+                  <Link href="/drukarki" className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 text-blue-700 rounded-lg hover:bg-blue-100 transition-colors text-sm font-medium">
+                    <Printer className="w-4 h-4" />
+                    Serwis drukarek Zebra
+                  </Link>
+                  <Link href="/blog?device=drukarki" className="inline-flex items-center gap-2 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors text-sm font-medium">
+                    <BookOpen className="w-4 h-4" />
+                    Wszystkie artykuły o drukarkach
+                  </Link>
+                </>
+              )}
+              {post.deviceType === 'terminale' && (
+                <>
+                  <Link href="/terminale" className="inline-flex items-center gap-2 px-4 py-2 bg-green-50 text-green-700 rounded-lg hover:bg-green-100 transition-colors text-sm font-medium">
+                    <Smartphone className="w-4 h-4" />
+                    Serwis terminali Zebra
+                  </Link>
+                  <Link href="/blog?device=terminale" className="inline-flex items-center gap-2 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors text-sm font-medium">
+                    <BookOpen className="w-4 h-4" />
+                    Wszystkie artykuły o terminalach
+                  </Link>
+                </>
+              )}
+              {post.deviceType === 'skanery' && (
+                <>
+                  <Link href="/skanery" className="inline-flex items-center gap-2 px-4 py-2 bg-orange-50 text-orange-700 rounded-lg hover:bg-orange-100 transition-colors text-sm font-medium">
+                    <ScanLine className="w-4 h-4" />
+                    Serwis skanerów Zebra
+                  </Link>
+                  <Link href="/blog?device=skanery" className="inline-flex items-center gap-2 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors text-sm font-medium">
+                    <BookOpen className="w-4 h-4" />
+                    Wszystkie artykuły o skanerach
+                  </Link>
+                </>
+              )}
+              {post.deviceType === 'tablety' && (
+                <>
+                  <Link href="/blog?device=tablety" className="inline-flex items-center gap-2 px-4 py-2 bg-purple-50 text-purple-700 rounded-lg hover:bg-purple-100 transition-colors text-sm font-medium">
+                    <Tablet className="w-4 h-4" />
+                    Wszystkie artykuły o tabletach
+                  </Link>
+                </>
+              )}
+              <Link href="/faq" className="inline-flex items-center gap-2 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors text-sm font-medium">
+                FAQ - Często zadawane pytania
+              </Link>
+              <Link href="/#formularz" className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors text-sm font-medium">
+                Zgłoś naprawę →
+              </Link>
+            </div>
+          </div>
+        </section>
+
         {/* Related Posts */}
         {relatedPosts.length > 0 && (
           <section className="py-12 bg-gray-50">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <h2 className="text-2xl font-bold text-gray-900 mb-8">
+              <h2 className="text-2xl font-bold text-gray-900 mb-2">
                 Powiązane artykuły
               </h2>
-              <div className="grid md:grid-cols-3 gap-6">
+              <p className="text-gray-600 mb-8">
+                Przeczytaj także inne poradniki dotyczące urządzeń Zebra
+              </p>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {relatedPosts.map((relatedPost) => (
                   <Link 
                     key={relatedPost.slug}
@@ -389,7 +469,7 @@ export default function BlogPostPage({
                           src={relatedPost.coverImage}
                           alt={relatedPost.title}
                           fill
-                          sizes="(max-width: 768px) 100vw, 33vw"
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                           quality={70}
                           className="object-cover group-hover:scale-105 transition-transform duration-300"
                           placeholder="blur"
@@ -400,6 +480,17 @@ export default function BlogPostPage({
                           <BookOpen className="w-12 h-12 text-blue-300" />
                         </div>
                       )}
+                      {/* Device type badge */}
+                      <div className="absolute top-2 left-2">
+                        <span className={`px-2 py-1 text-xs font-medium rounded-full ${
+                          relatedPost.deviceType === 'drukarki' ? 'bg-blue-100 text-blue-700' :
+                          relatedPost.deviceType === 'terminale' ? 'bg-green-100 text-green-700' :
+                          relatedPost.deviceType === 'skanery' ? 'bg-orange-100 text-orange-700' :
+                          'bg-purple-100 text-purple-700'
+                        }`}>
+                          {relatedPost.deviceType}
+                        </span>
+                      </div>
                     </div>
                     <div className="p-4">
                       <h3 className="font-semibold text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-2">
@@ -411,6 +502,18 @@ export default function BlogPostPage({
                     </div>
                   </Link>
                 ))}
+              </div>
+              
+              {/* Link do wszystkich artykułów */}
+              <div className="text-center mt-8">
+                <Link 
+                  href="/blog"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-white border border-gray-200 rounded-xl text-gray-700 font-medium hover:bg-gray-50 hover:border-gray-300 transition-colors"
+                >
+                  <BookOpen className="w-5 h-5" />
+                  Zobacz wszystkie artykuły
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
               </div>
             </div>
           </section>
