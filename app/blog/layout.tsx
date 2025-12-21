@@ -1,47 +1,21 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Blog - Poradniki i aktualności | Serwis Zebra',
-  description: 'Praktyczne poradniki o drukarkach etykiet, terminalach i skanerach Zebra. Troubleshooting, konserwacja, porównania modeli. Wiedza od certyfikowanych techników.',
-  keywords: [
-    'blog zebra',
-    'poradniki zebra',
-    'drukarka zebra poradnik',
-    'naprawa drukarki zebra',
-    'troubleshooting zebra',
-    'serwis zebra blog'
-  ],
-  openGraph: {
-    title: 'Blog - Poradniki i aktualności | Serwis Zebra',
-    description: 'Praktyczne poradniki o drukarkach etykiet, terminalach i skanerach Zebra. Wiedza od certyfikowanych techników.',
-    type: 'website',
-    url: 'https://www.serwis-zebry.pl/blog',
-    siteName: 'Serwis Zebra',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Blog - Poradniki i aktualności | Serwis Zebra',
-    description: 'Praktyczne poradniki o drukarkach etykiet, terminalach i skanerach Zebra.',
-  },
+  title: 'Blog - Poradniki i aktualności',
+  description: 'Blog Serwis Zebra - poradniki napraw, konfiguracji i konserwacji drukarek etykiet, terminali mobilnych i skanerów Zebra. Porady ekspertów.',
   alternates: {
-    canonical: 'https://www.serwis-zebry.pl/blog'
-  }
+    canonical: 'https://www.serwis-zebry.pl/blog',
+    languages: {
+      'pl': 'https://www.serwis-zebry.pl/blog',
+    },
+  },
+  openGraph: {
+    title: 'Blog - Serwis Zebra',
+    description: 'Poradniki napraw, konfiguracji i konserwacji urządzeń Zebra. Porady ekspertów z 25-letnim doświadczeniem.',
+    url: 'https://www.serwis-zebry.pl/blog',
+  },
 }
 
-export default function BlogLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function Layout({ children }: { children: React.ReactNode }) {
   return children
 }
-
-
-
-
-
-
-
-
-
-

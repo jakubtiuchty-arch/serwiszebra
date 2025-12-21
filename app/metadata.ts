@@ -3,8 +3,6 @@ import { Metadata, Viewport } from 'next'
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
 }
 
 export const metadata: Metadata = {
@@ -74,6 +72,10 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: 'https://www.serwis-zebry.pl',
+    languages: {
+      'pl': 'https://www.serwis-zebry.pl',
+      'x-default': 'https://www.serwis-zebry.pl',
+    },
   },
   verification: {
     google: 'your-google-verification-code',

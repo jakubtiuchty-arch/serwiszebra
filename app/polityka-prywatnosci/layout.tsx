@@ -1,27 +1,25 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Polityka Prywatności | Serwis Zebra - TAKMA',
-  description: 'Polityka prywatności serwisu serwis-zebry.pl. Informacje o przetwarzaniu danych osobowych, RODO, cookies i prawach użytkownika.',
+  title: 'Polityka prywatności - Serwis Zebra',
+  description: 'Polityka prywatności serwisu TAKMA. Informacje o przetwarzaniu danych osobowych, cookies i prawach użytkowników.',
+  alternates: {
+    canonical: 'https://www.serwis-zebry.pl/polityka-prywatnosci',
+    languages: {
+      'pl': 'https://www.serwis-zebry.pl/polityka-prywatnosci',
+    },
+  },
   openGraph: {
-    title: 'Polityka Prywatności | Serwis Zebra',
-    description: 'Polityka prywatności serwisu serwis-zebry.pl. Przetwarzanie danych zgodne z RODO.',
+    title: 'Polityka prywatności - Serwis Zebra',
+    description: 'Polityka prywatności serwisu TAKMA - informacje o przetwarzaniu danych.',
+    url: 'https://www.serwis-zebry.pl/polityka-prywatnosci',
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 }
 
-export default function PolitykaPrywatnosciLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function Layout({ children }: { children: React.ReactNode }) {
   return children
 }
-
-
-
-
-
-
-
-
-

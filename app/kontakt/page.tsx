@@ -167,10 +167,11 @@ export default function ContactPage() {
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                     <div>
-                      <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
+                      <label htmlFor="contact-name" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
                         Imię i nazwisko *
                       </label>
                       <input
+                        id="contact-name"
                         type="text"
                         required
                         value={formData.name}
@@ -180,10 +181,11 @@ export default function ContactPage() {
                       />
                     </div>
                     <div>
-                      <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
+                      <label htmlFor="contact-email" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
                         Email *
                       </label>
                       <input
+                        id="contact-email"
                         type="email"
                         required
                         value={formData.email}
@@ -196,10 +198,11 @@ export default function ContactPage() {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                     <div>
-                      <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
+                      <label htmlFor="contact-phone" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
                         Telefon
                       </label>
                       <input
+                        id="contact-phone"
                         type="tel"
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
@@ -208,10 +211,11 @@ export default function ContactPage() {
                       />
                     </div>
                     <div>
-                      <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
+                      <label htmlFor="contact-subject" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
                         Temat *
                       </label>
                       <select
+                        id="contact-subject"
                         required
                         value={formData.subject}
                         onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
@@ -229,10 +233,11 @@ export default function ContactPage() {
                   </div>
 
                   <div>
-                    <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
+                    <label htmlFor="contact-message" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
                       Wiadomość *
                     </label>
                     <textarea
+                      id="contact-message"
                       required
                       rows={4}
                       value={formData.message}

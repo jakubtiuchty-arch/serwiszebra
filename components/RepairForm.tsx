@@ -308,11 +308,12 @@ export default function RepairForm() {
 
                 <div className="grid md:grid-cols-2 gap-5">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-2">
                       Imię *
                     </label>
                     <input
                       {...register('firstName')}
+                      id="firstName"
                       type="text"
                       className="w-full px-3 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       placeholder="Jan"
@@ -323,11 +324,12 @@ export default function RepairForm() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-2">
                       Nazwisko *
                     </label>
                     <input
                       {...register('lastName')}
+                      id="lastName"
                       type="text"
                       className="w-full px-3 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       placeholder="Kowalski"
@@ -339,11 +341,12 @@ export default function RepairForm() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
                     Email *
                   </label>
                   <input
                     {...register('email')}
+                    id="email"
                     type="email"
                     className="w-full px-3 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="jan.kowalski@example.com"
@@ -354,11 +357,12 @@ export default function RepairForm() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
                     Telefon *
                   </label>
                   <input
                     {...register('phone')}
+                    id="phone"
                     type="tel"
                     className="w-full px-3 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="123456789"
@@ -369,11 +373,12 @@ export default function RepairForm() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-2">
                     Firma (opcjonalnie)
                   </label>
                   <input
                     {...register('company')}
+                    id="company"
                     type="text"
                     className="w-full px-3 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="Nazwa firmy"
@@ -381,11 +386,12 @@ export default function RepairForm() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="nip" className="block text-sm font-medium text-gray-700 mb-2">
                     NIP <span className="text-red-500">*</span>
                   </label>
                   <input
                     {...register('nip')}
+                    id="nip"
                     type="text"
                     className={`w-full px-3 py-2 border rounded-full focus:ring-2 focus:ring-blue-500 focus:border-transparent ${errors.nip ? 'border-red-500' : 'border-gray-300'}`}
                     placeholder="np. 1234567890"
@@ -406,11 +412,12 @@ export default function RepairForm() {
                 </h3>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="deviceModel" className="block text-sm font-medium text-gray-700 mb-2">
                     Model urządzenia *
                   </label>
                   <input
                     {...register('deviceModel')}
+                    id="deviceModel"
                     type="text"
                     className="w-full px-3 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="np. ZD420, TC52, DS3608..."
@@ -421,11 +428,12 @@ export default function RepairForm() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="serialNumber" className="block text-sm font-medium text-gray-700 mb-2">
                     Numer seryjny (opcjonalnie)
                   </label>
                   <input
                     {...register('serialNumber')}
+                    id="serialNumber"
                     type="text"
                     className="w-full px-3 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="S/N: XXXXXXXXXXXX"
@@ -433,11 +441,12 @@ export default function RepairForm() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="purchaseDate" className="block text-sm font-medium text-gray-700 mb-2">
                     Data zakupu (opcjonalnie)
                   </label>
                   <input
                     {...register('purchaseDate')}
+                    id="purchaseDate"
                     type="date"
                     className="w-full px-3 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
@@ -489,11 +498,12 @@ export default function RepairForm() {
                 </h3>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="issueDescription" className="block text-sm font-medium text-gray-700 mb-2">
                     Opisz problem z urządzeniem *
                   </label>
                   <textarea
                     {...register('issueDescription')}
+                    id="issueDescription"
                     rows={5}
                     className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
                     placeholder="Opisz szczegółowo problem, który występuje w urządzeniu..."
@@ -614,11 +624,12 @@ export default function RepairForm() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="street" className="block text-sm font-medium text-gray-700 mb-2">
                     Ulica i numer *
                   </label>
                   <input
                     {...register('street')}
+                    id="street"
                     type="text"
                     className="w-full px-3 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="ul. Przykładowa 123/45"
@@ -630,11 +641,12 @@ export default function RepairForm() {
 
                 <div className="grid md:grid-cols-2 gap-5">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label htmlFor="zipCode" className="block text-sm font-medium text-gray-700 mb-2">
                       Kod pocztowy *
                     </label>
                     <input
                       {...register('zipCode')}
+                      id="zipCode"
                       type="text"
                       className="w-full px-3 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       placeholder="00-000"
@@ -645,11 +657,12 @@ export default function RepairForm() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label htmlFor="city" className="block text-sm font-medium text-gray-700 mb-2">
                       Miasto *
                     </label>
                     <input
                       {...register('city')}
+                      id="city"
                       type="text"
                       className="w-full px-3 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       placeholder="Warszawa"
@@ -661,11 +674,12 @@ export default function RepairForm() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="contactPhone" className="block text-sm font-medium text-gray-700 mb-2">
                     Telefon kontaktowy (dla kuriera) *
                   </label>
                   <input
                     {...register('contactPhone')}
+                    id="contactPhone"
                     type="tel"
                     className="w-full px-3 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="123456789"
@@ -676,12 +690,13 @@ export default function RepairForm() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center gap-2">
+                  <label htmlFor="pickupDate" className="block text-sm font-medium text-gray-700 mb-2 flex items-center gap-2">
                     <Calendar className="w-4 h-4" />
                     Preferowana data odbioru *
                   </label>
                   <input
                     {...register('pickupDate')}
+                    id="pickupDate"
                     type="date"
                     min={getMinDate()}
                     className="w-full px-3 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -695,11 +710,12 @@ export default function RepairForm() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="courierNotes" className="block text-sm font-medium text-gray-700 mb-2">
                     Uwagi dla kuriera (opcjonalnie)
                   </label>
                   <textarea
                     {...register('courierNotes')}
+                    id="courierNotes"
                     rows={3}
                     className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
                     placeholder="np. kod do bramy, piętro, preferowane godziny odbioru..."

@@ -483,7 +483,7 @@ export default function HomePage() {
       )}
 
       {/* Hero gradient wrapper */}
-      <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+      <main id="main-content" className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
 
       {/* HERO - MOBILE VERSION (inline chat) */}
       <section className="md:hidden min-h-[50vh] max-h-[70vh] h-[60vh] flex flex-col relative overflow-hidden">
@@ -518,7 +518,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-    </div> {/* Close gradient wrapper */}
+    </main> {/* Close gradient wrapper / main content */}
 
       {/* O NAS - CO NAPRAWIAMY */}
       <section id="co-naprawiamy" className="py-14 px-3 sm:px-4 lg:px-6 bg-white">

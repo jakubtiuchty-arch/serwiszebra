@@ -1,29 +1,21 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Kontakt | TAKMA - Serwis Zebra',
-  description: 'Skontaktuj się z nami. TAKMA - autoryzowany serwis Zebra. Adres, telefon, email, godziny otwarcia. Serwis drukarek etykiet i terminali Zebra.',
-  keywords: ['kontakt', 'TAKMA', 'serwis Zebra', 'adres', 'telefon', 'email', 'godziny otwarcia'],
+  title: 'Kontakt - Serwis Zebra',
+  description: 'Skontaktuj się z autoryzowanym serwisem Zebra. Telefon: +48 690 034 733, email: serwis@serwis-zebry.pl. Szybka odpowiedź i profesjonalna obsługa.',
+  alternates: {
+    canonical: 'https://www.serwis-zebry.pl/kontakt',
+    languages: {
+      'pl': 'https://www.serwis-zebry.pl/kontakt',
+    },
+  },
   openGraph: {
-    title: 'Kontakt | TAKMA - Serwis Zebra',
-    description: 'Skontaktuj się z autoryzowanym serwisem Zebra. Telefon, email, adres siedziby.',
-    type: 'website',
-  }
+    title: 'Kontakt - Serwis Zebra',
+    description: 'Skontaktuj się z autoryzowanym serwisem Zebra. Szybka odpowiedź i profesjonalna obsługa.',
+    url: 'https://www.serwis-zebry.pl/kontakt',
+  },
 }
 
-export default function ContactLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function Layout({ children }: { children: React.ReactNode }) {
   return children
 }
-
-
-
-
-
-
-
-
-
