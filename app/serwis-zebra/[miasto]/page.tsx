@@ -114,6 +114,12 @@ export async function generateMetadata({ params }: { params: { miasto: string } 
     }
   }
 
+  // Dodatkowe keywords dla miast z aglomeracjami
+  const extraKeywords: Record<string, string[]> = {
+    'gdansk': ['serwis zebra gdynia', 'serwis zebra sopot', 'serwis zebra trójmiasto', 'naprawa drukarek zebra trójmiasto'],
+    'katowice': ['serwis zebra śląsk', 'serwis zebra gliwice', 'serwis zebra zabrze', 'naprawa drukarek zebra górny śląsk'],
+  }
+
   return {
     title: city.metaTitle,
     description: city.metaDescription,
@@ -123,6 +129,7 @@ export async function generateMetadata({ params }: { params: { miasto: string } 
       `naprawa terminali zebra ${city.name.toLowerCase()}`,
       `serwis drukarek etykiet ${city.name.toLowerCase()}`,
       `autoryzowany serwis zebra ${city.name.toLowerCase()}`,
+      ...(extraKeywords[params.miasto] || []),
     ],
     openGraph: {
       title: city.metaTitle,
@@ -210,7 +217,7 @@ export default function CityServicePage({ params }: { params: { miasto: string }
     description: city.metaDescription,
     url: `https://www.serwis-zebry.pl/serwis-zebra/${city.slug}`,
     telephone: '+48601619898',
-    email: 'kontakt@serwis-zebry.pl',
+    email: 'serwis@serwis-zebry.pl',
     areaServed: {
       '@type': 'City',
       name: city.name,
