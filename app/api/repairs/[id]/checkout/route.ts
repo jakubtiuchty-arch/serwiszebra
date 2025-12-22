@@ -69,8 +69,8 @@ if (['zakonczone', 'wyslane', 'anulowane'].includes(repair.status)) {
     const shortId = repair.id.split('-')[0].toUpperCase();
 
     // Utwórz Stripe Checkout Session
+    // Uwaga: payment_method_types usunięte - Stripe automatycznie wybierze dostępne metody
     const session = await stripe.checkout.sessions.create({
-      payment_method_types: ['card', 'blik', 'p24'],
       line_items: [
         {
           price_data: {
@@ -114,10 +114,19 @@ if (['zakonczone', 'wyslane', 'anulowane'].includes(repair.status)) {
     }
 
     return NextResponse.json({ url: session.url });
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error creating checkout session:', error);
+    console.error('Stripe error details:', {
+      type: error?.type,
+      code: error?.code,
+      message: error?.message,
+      param: error?.param
+    });
+    
+    // Zwróć bardziej szczegółowy błąd
+    const errorMessage = error?.message || 'Nie udało się utworzyć sesji płatności';
     return NextResponse.json(
-      { error: 'Nie udało się utworzyć sesji płatności' },
+      { error: errorMessage, details: error?.code },
       { status: 500 }
     );
   }
