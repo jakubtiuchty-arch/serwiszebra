@@ -205,6 +205,16 @@ const videos: Video[] = [
     category: 'drukarki',
     tags: ['ZD421', 'głowica', 'wymiana głowicy', 'printhead', 'naprawa'],
   },
+  {
+    id: '18',
+    title: 'Używanie noża (cuttera) w drukarkach Zebra',
+    description: 'Jak prawidłowo używać wbudowanego noża do cięcia etykiet w drukarkach Zebra. Konfiguracja trybu cięcia, konserwacja i rozwiązywanie problemów.',
+    youtubeId: 'tSKUHfDkaZU',
+    thumbnail: '/używanie_noża.jpeg',
+    duration: '4:30',
+    category: 'drukarki',
+    tags: ['cutter', 'nóż', 'cięcie etykiet', 'konfiguracja', 'konserwacja'],
+  },
 ]
 
 const categories = [
