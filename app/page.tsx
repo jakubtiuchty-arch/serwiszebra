@@ -152,7 +152,7 @@ export default function HomePage() {
           closes: '17:00'
         },
         priceRange: '$$',
-        paymentAccepted: ['Stripe', 'Apple Pay', 'BLIK', 'Karty płatnicze'],
+        paymentAccepted: ['Stripe', 'BLIK', 'Karty płatnicze'],
         areaServed: {
           '@type': 'Country',
           name: 'Polska'
@@ -1537,10 +1537,9 @@ export default function HomePage() {
               {/* Płatności & Firma */}
               <div className="text-center flex flex-col items-center">
                 <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-gray-500 mb-4 sm:mb-5">Płatności</h4>
-                <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 mb-4 sm:mb-6">
+                <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 mb-4 sm:mb-6">
                   {[
                     { src: 'https://cdn.worldvectorlogo.com/logos/stripe-4.svg', alt: 'Stripe', w: 50, h: 20, cls: 'h-4 sm:h-5' },
-                    { src: '/apple_pay_logo.jpg', alt: 'Apple Pay', w: 60, h: 24, cls: 'h-6 sm:h-7' },
                     { src: '/blik_logo.png', alt: 'BLIK', w: 80, h: 32, cls: 'h-7 sm:h-9' },
                   ].map((pay) => (
                     <Image 
