@@ -36,11 +36,11 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Utwórz Payment Intent
+    // Utwórz Payment Intent (automatyczne metody płatności)
 const paymentIntent = await stripe.paymentIntents.create({
   amount: Math.round(order.total_brutto * 100),
   currency: 'pln',
-  payment_method_types: ['card','blik', 'p24'], // ✅ Tylko te metody
+  automatic_payment_methods: { enabled: true },
   metadata: {
     order_id: orderId,
     order_number: order.order_number,

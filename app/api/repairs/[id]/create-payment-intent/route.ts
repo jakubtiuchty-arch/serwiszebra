@@ -85,11 +85,11 @@ export async function POST(
 
     const shortId = repair.id.split('-')[0].toUpperCase();
 
-    // Utwórz Payment Intent z BLIK, P24 i kartą (bez Link)
+    // Utwórz Payment Intent z automatycznymi metodami płatności
     const paymentIntent = await stripe.paymentIntents.create({
       amount: Math.round(amountToPay * 100), // Stripe przyjmuje grosze
       currency: 'pln',
-      payment_method_types: ['blik', 'p24', 'card'],
+      automatic_payment_methods: { enabled: true },
       receipt_email: repair.email,
       description: isDiagnosticFee 
         ? `Opłata za diagnostykę - Zgłoszenie #${shortId}`

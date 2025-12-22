@@ -64,9 +64,8 @@ const lineItems = order.order_items.map((item: any) => ({
       });
     }
 
-    // Utwórz Stripe Checkout Session
+    // Utwórz Stripe Checkout Session (automatyczne metody płatności)
     const session = await stripe.checkout.sessions.create({
-      payment_method_types: ['card', 'blik', 'p24'],
       line_items: lineItems,
       mode: 'payment',
       success_url: `${request.nextUrl.origin}/zamowienie/success?session_id={CHECKOUT_SESSION_ID}`,
