@@ -20,10 +20,10 @@ export const metadata: Metadata = {
     shortcut: '/favicon.ico',
   },
   title: {
-    default: 'Serwis Zebra - Autoryzowany Serwis Drukarek, Terminali i Skanerów Zebra | 25 lat doświadczenia',
+    default: 'Serwis Zebra – Jedyny z Diagnostyką AI 24/7 | Kurier pod Drzwi | Panel Klienta',
     template: '%s | Serwis Zebra'
   },
-  description: 'Profesjonalny, autoryzowany serwis urządzeń Zebra: drukarek etykiet (ZD, ZT, GK), terminali mobilnych (MC, TC), skanerów i tabletów. ✓ Ekspresowa naprawa 2-5 dni ✓ Diagnostyka AI 24/7 ✓ Odbiór kurierem w 24h ✓ 25 lat na rynku ✓ Tysiące skutecznych napraw. Skorzystaj z bezpłatnej wyceny online!',
+  description: 'Jedyny serwis Zebra w Polsce z diagnostyką AI 24/7 🤖 Opisz problem – wycenę masz w 2 minuty! ✓ Panel klienta ze śledzeniem naprawy na żywo ✓ Kurier pod drzwi w 24h ✓ Wideoporadniki krok po kroku ✓ 25 lat doświadczenia. Drukarki, terminale, skanery – naprawiamy wszystko od Zebra.',
   keywords: [
     'serwis zebra',
     'naprawa drukarek zebra',
@@ -65,8 +65,8 @@ export const metadata: Metadata = {
     locale: 'pl_PL',
     url: 'https://www.serwis-zebry.pl',
     siteName: 'Serwis Zebra',
-    title: 'Serwis Zebra - Autoryzowany Serwis Drukarek, Terminali i Skanerów Zebra',
-    description: 'Profesjonalny serwis urządzeń Zebra: drukarek etykiet, terminali mobilnych, skanerów. Ekspresowa naprawa 2-5 dni, odbiór kurierem w 24h. Diagnostyka AI 24/7. 25 lat doświadczenia, tysiące skutecznych napraw.',
+    title: 'Serwis Zebra - Jedyny z AI, Panelem Klienta i Kurierem pod Drzwi',
+    description: 'Jedyny serwis Zebra w Polsce z diagnostyką AI 24/7. Opisz problem – wycenę masz w 2 minuty! Panel klienta ze śledzeniem naprawy. Kurier pod drzwi w 24h. Wideoporadniki. 25 lat doświadczenia.',
     images: [
       {
         url: '/og-image.jpg',
@@ -78,8 +78,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Serwis Zebra - Autoryzowany Serwis Drukarek, Terminali i Skanerów Zebra',
-    description: 'Profesjonalny serwis urządzeń Zebra. Ekspresowa naprawa 2-5 dni, odbiór kurierem w 24h. Diagnostyka AI 24/7.',
+    title: 'Serwis Zebra - Jedyny z AI, Panelem Klienta i Kurierem pod Drzwi',
+    description: 'Jedyny serwis Zebra w Polsce z diagnostyką AI 24/7. Wycena w 2 minuty! Panel klienta, kurier pod drzwi, wideoporadniki. 25 lat doświadczenia.',
     images: ['/og-image.jpg'],
   },
   alternates: {
