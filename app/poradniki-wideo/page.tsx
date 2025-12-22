@@ -195,6 +195,16 @@ const videos: Video[] = [
     category: 'drukarki',
     tags: ['czyszczenie', 'konserwacja', 'głowica']
   },
+  {
+    id: '17',
+    title: 'Wymiana głowicy drukującej w Zebra ZD421',
+    description: 'Jak wymienić głowicę drukującą w drukarce Zebra ZD421. Instrukcja krok po kroku demontażu starej i montażu nowej głowicy termicznej.',
+    youtubeId: 'Q3Mt2LUwm6g',
+    thumbnail: '/wymiana_głowicy_zd421.jpeg',
+    duration: '5:00',
+    category: 'drukarki',
+    tags: ['ZD421', 'głowica', 'wymiana głowicy', 'printhead', 'naprawa'],
+  },
 ]
 
 const categories = [
