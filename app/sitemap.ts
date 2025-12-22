@@ -2,7 +2,11 @@ import { MetadataRoute } from 'next'
 import { blogPosts } from '@/lib/blog'
 
 // Lista miast dla Local SEO
-const cities = ['warszawa', 'krakow', 'wroclaw', 'poznan', 'gdansk', 'katowice']
+const cities = [
+  'warszawa', 'krakow', 'wroclaw', 'poznan', 'gdansk', 'katowice',
+  'lodz', 'szczecin', 'bydgoszcz', 'lublin', 'bialystok',
+  'rzeszow', 'torun', 'kielce', 'olsztyn', 'opole'
+]
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://www.serwis-zebry.pl'

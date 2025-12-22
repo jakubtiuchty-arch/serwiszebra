@@ -94,6 +94,116 @@ const citiesData: Record<string, {
     metaDescription: 'Profesjonalny serwis urządzeń Zebra na Śląsku. ✓ Odbiór kurierem w 24h ✓ Naprawa 2-5 dni ✓ 12 mies. gwarancji. Drukarki etykiet, terminale, skanery.',
     heroText: 'Profesjonalny serwis urządzeń Zebra dla firm ze Śląska',
     introText: 'Obsługujemy firmy z Katowic i całego Śląska. Kurier odbierze Twoje urządzenie w ciągu 24 godzin – bez wychodzenia z biura.'
+  },
+  'lodz': {
+    name: 'Łódź',
+    nameLocative: 'Łodzi',
+    region: 'Łódzkiego',
+    slug: 'lodz',
+    deliveryTime: '24h',
+    metaTitle: 'Serwis Zebra Łódź – Naprawa Drukarek i Terminali | Odbiór 24h',
+    metaDescription: 'Profesjonalny serwis urządzeń Zebra w Łodzi. ✓ Odbiór kurierem w 24h ✓ Naprawa 2-5 dni ✓ 12 mies. gwarancji ✓ Bezpłatna wycena. Drukarki etykiet, terminale, skanery.',
+    heroText: 'Profesjonalny serwis urządzeń Zebra dla firm z Łodzi i okolic',
+    introText: 'Obsługujemy firmy z Łodzi i całego województwa łódzkiego. Kurier odbierze Twoje urządzenie w ciągu 24 godzin – bez wychodzenia z biura.'
+  },
+  'szczecin': {
+    name: 'Szczecin',
+    nameLocative: 'Szczecinie',
+    region: 'Zachodniopomorskiego',
+    slug: 'szczecin',
+    deliveryTime: '24-48h',
+    metaTitle: 'Serwis Zebra Szczecin – Naprawa Drukarek i Terminali | Odbiór 24-48h',
+    metaDescription: 'Profesjonalny serwis urządzeń Zebra w Szczecinie. ✓ Odbiór kurierem w 24-48h ✓ Naprawa 2-5 dni ✓ 12 mies. gwarancji ✓ Bezpłatna wycena. Drukarki etykiet, terminale, skanery.',
+    heroText: 'Profesjonalny serwis urządzeń Zebra dla firm ze Szczecina i okolic',
+    introText: 'Obsługujemy firmy ze Szczecina i całego Pomorza Zachodniego. Kurier odbierze Twoje urządzenie w ciągu 24-48 godzin – bez wychodzenia z biura.'
+  },
+  'bydgoszcz': {
+    name: 'Bydgoszcz',
+    nameLocative: 'Bydgoszczy',
+    region: 'Kujawsko-Pomorskiego',
+    slug: 'bydgoszcz',
+    deliveryTime: '24-48h',
+    metaTitle: 'Serwis Zebra Bydgoszcz – Naprawa Drukarek i Terminali | Odbiór 24-48h',
+    metaDescription: 'Profesjonalny serwis urządzeń Zebra w Bydgoszczy. ✓ Odbiór kurierem w 24-48h ✓ Naprawa 2-5 dni ✓ 12 mies. gwarancji ✓ Bezpłatna wycena. Drukarki etykiet, terminale, skanery.',
+    heroText: 'Profesjonalny serwis urządzeń Zebra dla firm z Bydgoszczy i okolic',
+    introText: 'Obsługujemy firmy z Bydgoszczy, Torunia i całego Kujawsko-Pomorskiego. Kurier odbierze Twoje urządzenie w ciągu 24-48 godzin.'
+  },
+  'lublin': {
+    name: 'Lublin',
+    nameLocative: 'Lublinie',
+    region: 'Lubelskiego',
+    slug: 'lublin',
+    deliveryTime: '24-48h',
+    metaTitle: 'Serwis Zebra Lublin – Naprawa Drukarek i Terminali | Odbiór 24-48h',
+    metaDescription: 'Profesjonalny serwis urządzeń Zebra w Lublinie. ✓ Odbiór kurierem w 24-48h ✓ Naprawa 2-5 dni ✓ 12 mies. gwarancji ✓ Bezpłatna wycena. Drukarki etykiet, terminale, skanery.',
+    heroText: 'Profesjonalny serwis urządzeń Zebra dla firm z Lublina i okolic',
+    introText: 'Obsługujemy firmy z Lublina i całego województwa lubelskiego. Kurier odbierze Twoje urządzenie w ciągu 24-48 godzin – bez wychodzenia z biura.'
+  },
+  'bialystok': {
+    name: 'Białystok',
+    nameLocative: 'Białymstoku',
+    region: 'Podlaskiego',
+    slug: 'bialystok',
+    deliveryTime: '24-48h',
+    metaTitle: 'Serwis Zebra Białystok – Naprawa Drukarek i Terminali | Odbiór 24-48h',
+    metaDescription: 'Profesjonalny serwis urządzeń Zebra w Białymstoku. ✓ Odbiór kurierem w 24-48h ✓ Naprawa 2-5 dni ✓ 12 mies. gwarancji ✓ Bezpłatna wycena. Drukarki etykiet, terminale, skanery.',
+    heroText: 'Profesjonalny serwis urządzeń Zebra dla firm z Białegostoku i okolic',
+    introText: 'Obsługujemy firmy z Białegostoku i całego Podlasia. Kurier odbierze Twoje urządzenie w ciągu 24-48 godzin – bez wychodzenia z biura.'
+  },
+  'rzeszow': {
+    name: 'Rzeszów',
+    nameLocative: 'Rzeszowie',
+    region: 'Podkarpackiego',
+    slug: 'rzeszow',
+    deliveryTime: '24-48h',
+    metaTitle: 'Serwis Zebra Rzeszów – Naprawa Drukarek i Terminali | Odbiór 24-48h',
+    metaDescription: 'Profesjonalny serwis urządzeń Zebra w Rzeszowie. ✓ Odbiór kurierem w 24-48h ✓ Naprawa 2-5 dni ✓ 12 mies. gwarancji ✓ Bezpłatna wycena. Drukarki etykiet, terminale, skanery.',
+    heroText: 'Profesjonalny serwis urządzeń Zebra dla firm z Rzeszowa i Doliny Lotniczej',
+    introText: 'Obsługujemy firmy z Rzeszowa, Doliny Lotniczej i całego Podkarpacia. Kurier odbierze Twoje urządzenie w ciągu 24-48 godzin.'
+  },
+  'torun': {
+    name: 'Toruń',
+    nameLocative: 'Toruniu',
+    region: 'Kujawsko-Pomorskiego',
+    slug: 'torun',
+    deliveryTime: '24-48h',
+    metaTitle: 'Serwis Zebra Toruń – Naprawa Drukarek i Terminali | Odbiór 24-48h',
+    metaDescription: 'Profesjonalny serwis urządzeń Zebra w Toruniu. ✓ Odbiór kurierem w 24-48h ✓ Naprawa 2-5 dni ✓ 12 mies. gwarancji ✓ Bezpłatna wycena. Drukarki etykiet, terminale, skanery.',
+    heroText: 'Profesjonalny serwis urządzeń Zebra dla firm z Torunia i okolic',
+    introText: 'Obsługujemy firmy z Torunia, Bydgoszczy i całego Kujawsko-Pomorskiego. Kurier odbierze Twoje urządzenie w ciągu 24-48 godzin.'
+  },
+  'kielce': {
+    name: 'Kielce',
+    nameLocative: 'Kielcach',
+    region: 'Świętokrzyskiego',
+    slug: 'kielce',
+    deliveryTime: '24-48h',
+    metaTitle: 'Serwis Zebra Kielce – Naprawa Drukarek i Terminali | Odbiór 24-48h',
+    metaDescription: 'Profesjonalny serwis urządzeń Zebra w Kielcach. ✓ Odbiór kurierem w 24-48h ✓ Naprawa 2-5 dni ✓ 12 mies. gwarancji ✓ Bezpłatna wycena. Drukarki etykiet, terminale, skanery.',
+    heroText: 'Profesjonalny serwis urządzeń Zebra dla firm z Kielc i okolic',
+    introText: 'Obsługujemy firmy z Kielc i całego województwa świętokrzyskiego. Kurier odbierze Twoje urządzenie w ciągu 24-48 godzin – bez wychodzenia z biura.'
+  },
+  'olsztyn': {
+    name: 'Olsztyn',
+    nameLocative: 'Olsztynie',
+    region: 'Warmińsko-Mazurskiego',
+    slug: 'olsztyn',
+    deliveryTime: '24-48h',
+    metaTitle: 'Serwis Zebra Olsztyn – Naprawa Drukarek i Terminali | Odbiór 24-48h',
+    metaDescription: 'Profesjonalny serwis urządzeń Zebra w Olsztynie. ✓ Odbiór kurierem w 24-48h ✓ Naprawa 2-5 dni ✓ 12 mies. gwarancji ✓ Bezpłatna wycena. Drukarki etykiet, terminale, skanery.',
+    heroText: 'Profesjonalny serwis urządzeń Zebra dla firm z Olsztyna i okolic',
+    introText: 'Obsługujemy firmy z Olsztyna i całego Warmii i Mazur. Kurier odbierze Twoje urządzenie w ciągu 24-48 godzin – bez wychodzenia z biura.'
+  },
+  'opole': {
+    name: 'Opole',
+    nameLocative: 'Opolu',
+    region: 'Opolskiego',
+    slug: 'opole',
+    deliveryTime: '24-48h',
+    metaTitle: 'Serwis Zebra Opole – Naprawa Drukarek i Terminali | Odbiór 24-48h',
+    metaDescription: 'Profesjonalny serwis urządzeń Zebra w Opolu. ✓ Odbiór kurierem w 24-48h ✓ Naprawa 2-5 dni ✓ 12 mies. gwarancji ✓ Bezpłatna wycena. Drukarki etykiet, terminale, skanery.',
+    heroText: 'Profesjonalny serwis urządzeń Zebra dla firm z Opola i okolic',
+    introText: 'Obsługujemy firmy z Opola i całego Opolskiego. Kurier odbierze Twoje urządzenie w ciągu 24-48 godzin – bez wychodzenia z biura.'
   }
 }
 
@@ -118,6 +228,11 @@ export async function generateMetadata({ params }: { params: { miasto: string } 
   const extraKeywords: Record<string, string[]> = {
     'gdansk': ['serwis zebra gdynia', 'serwis zebra sopot', 'serwis zebra trójmiasto', 'naprawa drukarek zebra trójmiasto'],
     'katowice': ['serwis zebra śląsk', 'serwis zebra gliwice', 'serwis zebra zabrze', 'naprawa drukarek zebra górny śląsk'],
+    'lodz': ['serwis zebra pabianice', 'serwis zebra zgierz', 'naprawa drukarek zebra łódzkie'],
+    'bydgoszcz': ['serwis zebra toruń', 'serwis zebra inowrocław', 'naprawa drukarek zebra kujawsko-pomorskie'],
+    'torun': ['serwis zebra bydgoszcz', 'serwis zebra włocławek', 'naprawa drukarek zebra kujawsko-pomorskie'],
+    'rzeszow': ['serwis zebra dolina lotnicza', 'serwis zebra przemyśl', 'naprawa drukarek zebra podkarpacie'],
+    'szczecin': ['serwis zebra świnoujście', 'serwis zebra stargard', 'naprawa drukarek zebra pomorze zachodnie'],
   }
 
   return {
