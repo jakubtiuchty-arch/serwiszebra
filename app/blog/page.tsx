@@ -196,6 +196,8 @@ function generateSuggestions(query: string, posts: BlogPost[]): string[] {
   return Array.from(suggestions).slice(0, 8)
 }
 
+const POSTS_PER_PAGE = 12
+
 export default function BlogPage() {
   const allPosts = getAllPosts()
   const [selectedDeviceType, setSelectedDeviceType] = useState<string | null>(null)
@@ -204,6 +206,7 @@ export default function BlogPage() {
   const [searchQuery, setSearchQuery] = useState('')
   const [showSuggestions, setShowSuggestions] = useState(false)
   const [searchResults, setSearchResults] = useState<Map<string, { score: number; matchedIn: string[]; matchedModels: string[] }>>(new Map())
+  const [currentPage, setCurrentPage] = useState(1)
   const searchInputRef = useRef<HTMLInputElement>(null)
   const suggestionsRef = useRef<HTMLDivElement>(null)
   
@@ -250,6 +253,18 @@ export default function BlogPage() {
     
     return posts
   }, [allPosts, selectedDeviceType, selectedSubDeviceType, selectedCategory, searchQuery])
+
+  // Paginacja
+  const totalPages = Math.ceil(filteredPosts.length / POSTS_PER_PAGE)
+  const paginatedPosts = useMemo(() => {
+    const start = (currentPage - 1) * POSTS_PER_PAGE
+    return filteredPosts.slice(start, start + POSTS_PER_PAGE)
+  }, [filteredPosts, currentPage])
+
+  // Reset strony przy zmianie filtrów
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [selectedDeviceType, selectedSubDeviceType, selectedCategory, searchQuery])
   
   // Zamknij sugestie przy kliknięciu poza
   useEffect(() => {
@@ -342,7 +357,7 @@ export default function BlogPage() {
             <span className="text-sm font-medium text-gray-700">Blog Serwis Zebra</span>
           </div>
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Poradniki i aktualności
+            Blog o naprawach urządzeń Zebra
           </h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
             Praktyczna wiedza o drukarkach etykiet, terminalach i skanerach Zebra. 
@@ -585,115 +600,175 @@ export default function BlogPage() {
               )}
             </div>
           ) : (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
-              {filteredPosts.map((post) => (
-                <article 
-                  key={post.slug}
-                  className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow group"
-                >
-                  {/* Cover Image */}
-                  <Link href={`/blog/${post.slug}`}>
-                    <div className="relative h-40 sm:h-48 bg-gradient-to-br from-blue-100 to-indigo-100 overflow-hidden">
-                      {post.coverImage && post.coverImage !== '/blog/placeholder.jpg' ? (
-                        <Image
-                          src={post.coverImage}
-                          alt={post.title}
-                          fill
-                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                          quality={75}
-                          className="object-cover group-hover:scale-105 transition-transform duration-300"
-                          placeholder="blur"
-                          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAUH/8QAIhAAAgEDAwUBAAAAAAAAAAAAAQIDAAQRBQYhEhMiMWH/xAAVAQEBAAAAAAAAAAAAAAAAAAADBP/EABoRAAICAwAAAAAAAAAAAAAAAAECABEDITH/2gAMAwEAAhEDEQA/ANL1HeLWt2tvb2cLJFGqLI0hJbA+AAD+5qf/AJ7qn1fyn2lKVJk7nAmK3TP/2Q=="
-                        />
-                      ) : (
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <BookOpen className="w-16 h-16 text-blue-300" />
+            <>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
+                {paginatedPosts.map((post) => (
+                  <Link 
+                    key={post.slug}
+                    href={`/blog/${post.slug}`}
+                    className="block"
+                    aria-label={`Czytaj artykuł: ${post.title}`}
+                  >
+                    <article className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow group h-full">
+                      {/* Cover Image */}
+                      <div className="relative h-40 sm:h-48 bg-gradient-to-br from-blue-100 to-indigo-100 overflow-hidden">
+                        {post.coverImage && post.coverImage !== '/blog/placeholder.jpg' ? (
+                          <Image
+                            src={post.coverImage}
+                            alt={post.title}
+                            fill
+                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                            quality={75}
+                            className="object-cover group-hover:scale-105 transition-transform duration-300"
+                            placeholder="blur"
+                            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAUH/8QAIhAAAgEDAwUBAAAAAAAAAAAAAQIDAAQRBQYhEhMiMWH/xAAVAQEBAAAAAAAAAAAAAAAAAAADBP/EABoRAAICAwAAAAAAAAAAAAAAAAECABEDITH/2gAMAwEAAhEDEQA/ANL1HeLWt2tvb2cLJFGqLI0hJbA+AAD+5qf/AJ7qn1fyn2lKVJk7nAmK3TP/2Q=="
+                          />
+                        ) : (
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <BookOpen className="w-16 h-16 text-blue-300" />
+                          </div>
+                        )}
+                        <div className="absolute top-4 left-4 flex gap-2">
+                          <span className="px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1.5 bg-white/95 backdrop-blur-sm text-gray-700 shadow-sm">
+                            {getDeviceIcon(post.deviceType)}
+                            {DEVICE_TYPES[post.deviceType].name}
+                          </span>
+                          <span className={`px-3 py-1 rounded-full text-xs font-semibold ${getCategoryColor(post.category)}`}>
+                            {BLOG_CATEGORIES[post.category].name}
+                          </span>
                         </div>
-                      )}
-                      <div className="absolute top-4 left-4 flex gap-2">
-                        <span className="px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1.5 bg-white/95 backdrop-blur-sm text-gray-700 shadow-sm">
-                          {getDeviceIcon(post.deviceType)}
-                          {DEVICE_TYPES[post.deviceType].name}
-                        </span>
-                        <span className={`px-3 py-1 rounded-full text-xs font-semibold ${getCategoryColor(post.category)}`}>
-                          {BLOG_CATEGORIES[post.category].name}
-                        </span>
                       </div>
-                    </div>
+
+                      {/* Content */}
+                      <div className="p-4 sm:p-6">
+                        {/* Search Match Info */}
+                        {searchQuery.length >= 2 && searchResults.get(post.slug) && (
+                          <div className="mb-3 flex flex-wrap gap-1">
+                            {searchResults.get(post.slug)?.matchedModels.slice(0, 3).map((model, idx) => (
+                              <span key={idx} className="text-[10px] px-2 py-0.5 rounded-full bg-blue-500 text-white font-medium">
+                                {model}
+                              </span>
+                            ))}
+                            {searchResults.get(post.slug)?.matchedIn.slice(0, 2).map((where, idx) => (
+                              <span key={idx} className="text-[10px] px-2 py-0.5 rounded-full bg-green-100 text-green-700">
+                                {where}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+                        
+                        <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors line-clamp-2">
+                          {post.title}
+                        </h2>
+                        <p className="text-gray-600 text-xs sm:text-sm mb-4 line-clamp-3">
+                          {post.excerpt}
+                        </p>
+
+                        {/* Tags */}
+                        <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-4">
+                          {post.tags.slice(0, 2).map((tag) => (
+                            <span 
+                              key={tag}
+                              className="inline-flex items-center gap-1 px-1.5 sm:px-2 py-0.5 sm:py-1 bg-gray-100 rounded text-[10px] sm:text-xs text-gray-600"
+                            >
+                              <Tag className="w-2.5 h-2.5 sm:w-3 sm:h-3 hidden sm:block" />
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+
+                        {/* Meta */}
+                        <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+                          <div className="flex items-center gap-2 sm:gap-4 text-xs sm:text-sm text-gray-500">
+                            <span className="flex items-center gap-1">
+                              <Calendar className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                              <span className="hidden sm:inline">{new Date(post.publishedAt).toLocaleDateString('pl-PL', {
+                                day: 'numeric',
+                                month: 'short',
+                                year: 'numeric'
+                              })}</span>
+                              <span className="sm:hidden">{new Date(post.publishedAt).toLocaleDateString('pl-PL', {
+                                day: 'numeric',
+                                month: 'short'
+                              })}</span>
+                            </span>
+                            <span className="flex items-center gap-1">
+                              <Clock className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                              {post.readingTime} min
+                            </span>
+                          </div>
+                          <span className="text-blue-600 font-medium text-xs sm:text-sm flex items-center gap-1">
+                            Czytaj
+                            <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                          </span>
+                        </div>
+                      </div>
+                    </article>
                   </Link>
+                ))}
+              </div>
 
-                  {/* Content */}
-                  <div className="p-4 sm:p-6">
-                    {/* Search Match Info */}
-                    {searchQuery.length >= 2 && searchResults.get(post.slug) && (
-                      <div className="mb-3 flex flex-wrap gap-1">
-                        {searchResults.get(post.slug)?.matchedModels.slice(0, 3).map((model, idx) => (
-                          <span key={idx} className="text-[10px] px-2 py-0.5 rounded-full bg-blue-500 text-white font-medium">
-                            {model}
-                          </span>
-                        ))}
-                        {searchResults.get(post.slug)?.matchedIn.slice(0, 2).map((where, idx) => (
-                          <span key={idx} className="text-[10px] px-2 py-0.5 rounded-full bg-green-100 text-green-700">
-                            {where}
-                          </span>
-                        ))}
-                      </div>
-                    )}
-                    
-                    <Link href={`/blog/${post.slug}`}>
-                      <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors line-clamp-2">
-                        {post.title}
-                      </h2>
-                    </Link>
-                    <p className="text-gray-600 text-xs sm:text-sm mb-4 line-clamp-3">
-                      {post.excerpt}
-                    </p>
-
-                    {/* Tags */}
-                    <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-4">
-                      {post.tags.slice(0, 2).map((tag) => (
-                        <span 
-                          key={tag}
-                          className="inline-flex items-center gap-1 px-1.5 sm:px-2 py-0.5 sm:py-1 bg-gray-100 rounded text-[10px] sm:text-xs text-gray-600"
+              {/* Paginacja */}
+              {totalPages > 1 && (
+                <nav className="mt-12 flex items-center justify-center gap-2" aria-label="Paginacja bloga">
+                  <button
+                    onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                    disabled={currentPage === 1}
+                    className="px-4 py-2 rounded-lg bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed text-sm font-medium"
+                    aria-label="Poprzednia strona"
+                  >
+                    ← Poprzednia
+                  </button>
+                  
+                  <div className="flex items-center gap-1">
+                    {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
+                      let pageNum: number
+                      if (totalPages <= 5) {
+                        pageNum = i + 1
+                      } else if (currentPage <= 3) {
+                        pageNum = i + 1
+                      } else if (currentPage >= totalPages - 2) {
+                        pageNum = totalPages - 4 + i
+                      } else {
+                        pageNum = currentPage - 2 + i
+                      }
+                      
+                      return (
+                        <button
+                          key={pageNum}
+                          onClick={() => setCurrentPage(pageNum)}
+                          className={`w-10 h-10 rounded-lg text-sm font-medium transition-colors ${
+                            currentPage === pageNum
+                              ? 'bg-blue-600 text-white'
+                              : 'bg-white border border-gray-200 text-gray-700 hover:bg-gray-50'
+                          }`}
+                          aria-label={`Strona ${pageNum}`}
+                          aria-current={currentPage === pageNum ? 'page' : undefined}
                         >
-                          <Tag className="w-2.5 h-2.5 sm:w-3 sm:h-3 hidden sm:block" />
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-
-                    {/* Meta */}
-                    <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-                      <div className="flex items-center gap-2 sm:gap-4 text-xs sm:text-sm text-gray-500">
-                        <span className="flex items-center gap-1">
-                          <Calendar className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                          <span className="hidden sm:inline">{new Date(post.publishedAt).toLocaleDateString('pl-PL', {
-                            day: 'numeric',
-                            month: 'short',
-                            year: 'numeric'
-                          })}</span>
-                          <span className="sm:hidden">{new Date(post.publishedAt).toLocaleDateString('pl-PL', {
-                            day: 'numeric',
-                            month: 'short'
-                          })}</span>
-                        </span>
-                        <span className="flex items-center gap-1">
-                          <Clock className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                          {post.readingTime} min
-                        </span>
-                      </div>
-                      <Link 
-                        href={`/blog/${post.slug}`}
-                        className="text-blue-600 hover:text-blue-700 font-medium text-xs sm:text-sm flex items-center gap-1"
-                      >
-                        Czytaj
-                        <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                      </Link>
-                    </div>
+                          {pageNum}
+                        </button>
+                      )
+                    })}
                   </div>
-                </article>
-              ))}
-            </div>
+                  
+                  <button
+                    onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                    disabled={currentPage === totalPages}
+                    className="px-4 py-2 rounded-lg bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed text-sm font-medium"
+                    aria-label="Następna strona"
+                  >
+                    Następna →
+                  </button>
+                </nav>
+              )}
+
+              {/* Info o paginacji */}
+              {totalPages > 1 && (
+                <p className="text-center text-sm text-gray-500 mt-4">
+                  Strona {currentPage} z {totalPages} • Pokazano {paginatedPosts.length} z {filteredPosts.length} artykułów
+                </p>
+              )}
+            </>
           )}
         </div>
       </section>
@@ -727,10 +802,29 @@ export default function BlogPage() {
 
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-gray-400 text-sm">
-            © 2025 TAKMA - Serwis Zebra. Wszystkie prawa zastrzeżone.
-          </p>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p className="text-gray-400 text-sm">
+              © 2025 TAKMA - Serwis Zebra. Wszystkie prawa zastrzeżone.
+            </p>
+            <div className="flex items-center gap-4 text-sm">
+              <Link href="/feed.xml" className="text-gray-400 hover:text-white flex items-center gap-1.5" aria-label="Subskrybuj RSS">
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1Z"/>
+                </svg>
+                RSS
+              </Link>
+              <Link href="/sitemap.xml" className="text-gray-400 hover:text-white" aria-label="Mapa strony">
+                Sitemap
+              </Link>
+              <Link href="/regulamin" className="text-gray-400 hover:text-white">
+                Regulamin
+              </Link>
+              <Link href="/polityka-prywatnosci" className="text-gray-400 hover:text-white">
+                Prywatność
+              </Link>
+            </div>
+          </div>
         </div>
       </footer>
     </div>
