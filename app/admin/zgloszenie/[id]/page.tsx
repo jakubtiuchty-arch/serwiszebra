@@ -199,6 +199,15 @@ export default function AdminRepairDetailPage() {
       courierName?: string
       waybillLink?: string
     }
+    labelData?: {
+      recipientName: string
+      recipientStreet: string
+      recipientCity: string
+      recipientPostal: string
+      recipientPhone: string
+      packageContent?: string
+      repairNumber?: string
+    }
   }>({
     isOpen: false,
     type: 'success',
@@ -345,6 +354,15 @@ export default function AdminRepairDetailPage() {
           trackingNumber: data.tracking_number,
           courierName: data.courier_name,
           waybillLink: data.waybill_link
+        },
+        labelData: {
+          recipientName: `${repair!.first_name} ${repair!.last_name}`,
+          recipientStreet: repair!.street || '',
+          recipientCity: repair!.city || '',
+          recipientPostal: repair!.zip_code || '',
+          recipientPhone: repair!.phone,
+          packageContent: `Naprawa: ${repair!.device_model}`,
+          repairNumber: repair!.repair_number
         }
       })
 
@@ -1061,6 +1079,7 @@ export default function AdminRepairDetailPage() {
         title={modal.title}
         message={modal.message}
         details={modal.details}
+        labelData={modal.labelData}
       />
 
       {/* Lightbox dla zdjęć */}
