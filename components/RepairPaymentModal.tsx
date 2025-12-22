@@ -178,7 +178,7 @@ function CheckoutForm({
               type: 'tabs',
               defaultCollapsed: false,
             },
-            paymentMethodOrder: ['blik', 'p24', 'card', 'klarna'],
+            paymentMethodOrder: ['blik', 'card', 'apple_pay', 'google_pay'],
             wallets: {
               applePay: 'never',
               googlePay: 'never',

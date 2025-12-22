@@ -152,7 +152,7 @@ export default function HomePage() {
           closes: '17:00'
         },
         priceRange: '$$',
-        paymentAccepted: ['Stripe', 'Przelewy24', 'BLIK'],
+        paymentAccepted: ['Stripe', 'Apple Pay', 'BLIK', 'Karty płatnicze'],
         areaServed: {
           '@type': 'Country',
           name: 'Polska'
@@ -1540,7 +1540,7 @@ export default function HomePage() {
                 <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 mb-4 sm:mb-6">
                   {[
                     { src: 'https://cdn.worldvectorlogo.com/logos/stripe-4.svg', alt: 'Stripe', w: 50, h: 20, cls: 'h-4 sm:h-5' },
-                    { src: '/P24_logo.png', alt: 'Przelewy24', w: 70, h: 20, cls: 'h-4 sm:h-5' },
+                    { src: 'https://cdn.worldvectorlogo.com/logos/apple-pay.svg', alt: 'Apple Pay', w: 50, h: 20, cls: 'h-5 sm:h-6' },
                     { src: '/blik_logo.png', alt: 'BLIK', w: 80, h: 32, cls: 'h-7 sm:h-9' },
                   ].map((pay) => (
                     <Image 
