@@ -1,7 +1,10 @@
 import { Inter } from 'next/font/google'
+import Script from 'next/script'
 import './globals.css'
 import { metadata as seoMetadata, viewport as seoViewport } from './metadata'
 import { Analytics } from '@vercel/analytics/next'
+
+const GA_MEASUREMENT_ID = 'G-JVWERC1N4J'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -28,6 +31,20 @@ export default function RootLayout({
         />
       </head>
       <body className="antialiased">
+        {/* Google Analytics */}
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_MEASUREMENT_ID}');
+          `}
+        </Script>
+        
         {/* Skip link for accessibility */}
         <a
           href="#main-content"
