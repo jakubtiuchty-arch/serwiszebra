@@ -20,10 +20,10 @@ export const metadata: Metadata = {
     shortcut: '/favicon.ico',
   },
   title: {
-    default: 'Serwis Zebra – Jedyny z Diagnostyką AI 24/7 | Kurier pod Drzwi | Panel Klienta',
+    default: 'Serwis Zebra – Autoryzowany Serwis z AI 24/7 | Kurier pod Drzwi | Panel Klienta',
     template: '%s | Serwis Zebra'
   },
-  description: 'Jedyny serwis Zebra w Polsce z diagnostyką AI 24/7 🤖 Opisz problem – wycenę masz w 2 minuty! ✓ Panel klienta ze śledzeniem naprawy na żywo ✓ Kurier pod drzwi w 24h ✓ Wideoporadniki krok po kroku ✓ 25 lat doświadczenia. Drukarki, terminale, skanery – naprawiamy wszystko od Zebra.',
+  description: 'Autoryzowany serwis Zebra z diagnostyką AI 24/7 🤖 Jedyny taki w Polsce! Opisz problem – wycenę masz w 2 minuty. ✓ Panel klienta ze śledzeniem naprawy ✓ Kurier pod drzwi w 24h ✓ Wideoporadniki ✓ 25 lat doświadczenia. Drukarki, terminale, skanery.',
   keywords: [
     'serwis zebra',
     'naprawa drukarek zebra',
@@ -65,8 +65,8 @@ export const metadata: Metadata = {
     locale: 'pl_PL',
     url: 'https://www.serwis-zebry.pl',
     siteName: 'Serwis Zebra',
-    title: 'Serwis Zebra - Jedyny z AI, Panelem Klienta i Kurierem pod Drzwi',
-    description: 'Jedyny serwis Zebra w Polsce z diagnostyką AI 24/7. Opisz problem – wycenę masz w 2 minuty! Panel klienta ze śledzeniem naprawy. Kurier pod drzwi w 24h. Wideoporadniki. 25 lat doświadczenia.',
+    title: 'Autoryzowany Serwis Zebra – AI 24/7, Panel Klienta, Kurier pod Drzwi',
+    description: 'Autoryzowany serwis Zebra z diagnostyką AI 24/7 – jedyny taki w Polsce! Wycena w 2 minuty, panel klienta, kurier pod drzwi, wideoporadniki. 25 lat doświadczenia.',
     images: [
       {
         url: '/og-image.jpg',
@@ -78,8 +78,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Serwis Zebra - Jedyny z AI, Panelem Klienta i Kurierem pod Drzwi',
-    description: 'Jedyny serwis Zebra w Polsce z diagnostyką AI 24/7. Wycena w 2 minuty! Panel klienta, kurier pod drzwi, wideoporadniki. 25 lat doświadczenia.',
+    title: 'Autoryzowany Serwis Zebra – AI 24/7, Panel Klienta, Kurier pod Drzwi',
+    description: 'Autoryzowany serwis Zebra z diagnostyką AI 24/7 – jedyny taki w Polsce! Wycena w 2 minuty, panel klienta, kurier pod drzwi. 25 lat doświadczenia.',
     images: ['/og-image.jpg'],
   },
   alternates: {
