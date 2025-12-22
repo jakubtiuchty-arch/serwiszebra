@@ -19,6 +19,7 @@ const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
 // Inner component z Payment Element
 function CheckoutForm({ 
   repairId,
+  repairNumber,
   deviceModel,
   totalAmount,
   onSuccess,
@@ -26,6 +27,7 @@ function CheckoutForm({
   isDiagnosticFee = false
 }: { 
   repairId: string;
+  repairNumber?: string;
   deviceModel: string;
   totalAmount: number;
   onSuccess: () => void;
@@ -146,7 +148,7 @@ function CheckoutForm({
     }
   };
 
-  const shortId = repairId.split('-')[0].toUpperCase();
+  const displayNumber = repairNumber || repairId.split('-')[0].toUpperCase();
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
@@ -154,7 +156,7 @@ function CheckoutForm({
       <div className="bg-gray-50 rounded-xl p-4 border border-gray-200">
         <div className="flex items-center justify-between text-sm mb-2">
           <span className="text-gray-600">Zgłoszenie:</span>
-          <span className="font-bold text-gray-900">#{shortId}</span>
+          <span className="font-bold text-gray-900">#{displayNumber}</span>
         </div>
         <div className="flex items-center justify-between text-sm mb-2">
           <span className="text-gray-600">Urządzenie:</span>
@@ -215,6 +217,7 @@ export default function RepairPaymentModal({
   isOpen,
   onClose,
   repairId,
+  repairNumber,
   deviceModel,
   totalAmount,
   onPaymentSuccess,
@@ -223,6 +226,7 @@ export default function RepairPaymentModal({
   isOpen: boolean;
   onClose: () => void;
   repairId: string;
+  repairNumber?: string;
   deviceModel: string;
   totalAmount: number;
   onPaymentSuccess?: () => void;
@@ -238,12 +242,15 @@ export default function RepairPaymentModal({
   const [copied, setCopied] = useState<string | null>(null);
   const router = useRouter();
 
+  // Numer zgłoszenia do wyświetlenia
+  const displayNumber = repairNumber || repairId.split('-')[0].toUpperCase();
+
   // Dane do przelewu
   const bankDetails = {
     accountName: 'TAKMA TADEUSZ TIUCHTY',
     accountNumber: '39 1020 5297 0000 1902 0283 3069',
     bankName: 'PKO BP',
-    title: `Naprawa #${repairId.split('-')[0].toUpperCase()}`,
+    title: `Naprawa #${displayNumber}`,
   };
 
   const copyToClipboard = (text: string, field: string) => {
@@ -354,7 +361,7 @@ const handleClose = () => {
 
   if (!isOpen) return null;
 
-  const shortId = repairId.split('-')[0].toUpperCase();
+  const displayNumber = repairNumber || repairId.split('-')[0].toUpperCase();
 
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto">
@@ -405,7 +412,7 @@ const handleClose = () => {
                 {isDiagnosticFee ? (
                   <>Opłata za diagnostykę <span className="font-bold text-gray-900">{totalAmount.toFixed(2)} zł</span> została zaksięgowana</>
                 ) : (
-                  <>Naprawa <span className="font-bold text-gray-900">#{shortId}</span> została opłacona</>
+                  <>Naprawa <span className="font-bold text-gray-900">#{displayNumber}</span> została opłacona</>
                 )}
               </p>
 
@@ -537,7 +544,7 @@ const handleClose = () => {
                   {isDiagnosticFee ? 'Opłata za diagnostykę' : 'Opłać naprawę'}
                 </h2>
                 <p className="text-sm text-gray-600">
-                  Zgłoszenie <span className="font-semibold">#{shortId}</span> • {deviceModel}
+                  Zgłoszenie <span className="font-semibold">#{displayNumber}</span> • {deviceModel}
                 </p>
                 {isDiagnosticFee && (
                   <p className="text-xs text-amber-600 mt-1">
@@ -593,6 +600,7 @@ const handleClose = () => {
                 >
                   <CheckoutForm
                     repairId={repairId}
+                    repairNumber={repairNumber}
                     deviceModel={deviceModel}
                     totalAmount={totalAmount}
                     onSuccess={handleSuccess}

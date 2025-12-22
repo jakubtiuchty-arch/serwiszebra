@@ -43,6 +43,7 @@ const formatPrice = (price: number | null | undefined): string => {
 
 interface Repair {
   id: string
+  repair_number: string
   device_model: string
   serial_number: string | null
   issue_description: string
@@ -385,7 +386,7 @@ const handlePaymentSuccess = async () => {
 
   const statusConfig = STATUS_CONFIG[repair.status as keyof typeof STATUS_CONFIG]
   const urgencyConfig = repair.urgency ? URGENCY_CONFIG[repair.urgency as keyof typeof URGENCY_CONFIG] : null
-  const shortId = repair.id.split('-')[0].toUpperCase()
+  const displayNumber = repair.repair_number || repair.id.split('-')[0].toUpperCase()
 
   const userName = user?.first_name && user?.last_name
     ? `${user.first_name} ${user.last_name}`
@@ -440,7 +441,7 @@ const handlePaymentSuccess = async () => {
     <div className="bg-white border border-gray-200 rounded-lg px-3 py-2 mb-2">
       <div className="flex items-start justify-between gap-2">
         <div>
-          <h1 className="text-sm font-bold text-gray-900">#{shortId}</h1>
+          <h1 className="text-sm font-bold text-gray-900">#{displayNumber}</h1>
           <p className="text-xs font-medium text-gray-700">{repair.device_model}</p>
         </div>
         <p className="text-[10px] text-gray-400">
@@ -494,7 +495,7 @@ const handlePaymentSuccess = async () => {
       <div className="flex flex-row items-center justify-between gap-3">
         <div className="flex items-center gap-3 flex-wrap">
           <h1 className="text-xl font-semibold text-gray-900">
-            Zgłoszenie #{shortId}
+            Zgłoszenie #{displayNumber}
           </h1>
           <span className={`px-2.5 py-1 rounded-lg text-xs font-medium ${statusConfig.className}`}>
             {statusConfig.label}
@@ -1166,6 +1167,7 @@ const handlePaymentSuccess = async () => {
     isOpen={showPaymentModal}
     onClose={() => setShowPaymentModal(false)}
     repairId={repair.id}
+    repairNumber={repair.repair_number}
     deviceModel={repair.device_model}
     totalAmount={repair.final_price || repair.estimated_price || 0}
     onPaymentSuccess={handlePaymentSuccess}
@@ -1178,6 +1180,7 @@ const handlePaymentSuccess = async () => {
     isOpen={showDiagnosticPaymentModal}
     onClose={() => setShowDiagnosticPaymentModal(false)}
     repairId={repair.id}
+    repairNumber={repair.repair_number}
     deviceModel={repair.device_model}
     totalAmount={121.77}
     isDiagnosticFee={true}
