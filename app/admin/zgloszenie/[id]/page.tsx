@@ -27,7 +27,7 @@ import {
 
 interface RepairRequest {
   id: string
-  repair_request_id: string
+  repair_number: string
   user_id: string
   device_model: string
   device_serial_number: string | null
@@ -421,7 +421,7 @@ export default function AdminRepairDetailPage() {
             </div>
             <div>
               <h1 className="text-base font-bold text-gray-900">
-                #{repair.repair_request_id}
+                #{repair.repair_number}
               </h1>
               <p className="text-xs text-gray-500">
                 {format(new Date(repair.created_at), 'dd MMM yyyy, HH:mm', { locale: pl })}
@@ -442,7 +442,7 @@ export default function AdminRepairDetailPage() {
               <div className="h-6 w-px bg-gray-300" />
               <div>
                 <h1 className="text-xl font-bold text-gray-900">
-                  Zgłoszenie #{repair.repair_request_id}
+                  Zgłoszenie #{repair.repair_number}
                 </h1>
                 <p className="text-sm text-gray-500">
                   Utworzone {format(new Date(repair.created_at), 'dd MMMM yyyy, HH:mm', { locale: pl })}
