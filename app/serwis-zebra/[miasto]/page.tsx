@@ -299,7 +299,7 @@ export default function CityServicePage({ params }: { params: { miasto: string }
                   src={`/serwis_${params.miasto}.jpeg`}
                   alt={`Serwis Zebra ${city.name}`}
                   fill
-                  className="object-cover object-center"
+                  className={`object-cover ${params.miasto === 'gdansk' ? 'object-bottom' : 'object-center'}`}
                   priority
                 />
                 {/* Gradient overlay - od lewej przezroczysty do prawej widoczny */}
