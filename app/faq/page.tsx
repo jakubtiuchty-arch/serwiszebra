@@ -175,18 +175,49 @@ const faqItems: FAQItem[] = [
   },
 ]
 
-// Schema.org FAQPage
+// Schema.org FAQPage z pogrupowanymi pytaniami
 const faqSchema = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
+  name: 'FAQ - Serwis urządzeń Zebra',
+  description: 'Odpowiedzi na najczęstsze pytania dotyczące serwisu drukarek, terminali i skanerów Zebra',
   mainEntity: faqItems.map(item => ({
     '@type': 'Question',
     name: item.question,
     acceptedAnswer: {
       '@type': 'Answer',
       text: item.answer
+    },
+    about: {
+      '@type': 'Thing',
+      name: item.category === 'ogolne' ? 'Informacje ogólne o serwisie' :
+            item.category === 'drukarki' ? 'Serwis drukarek Zebra' :
+            item.category === 'terminale' ? 'Serwis terminali Zebra' :
+            item.category === 'skanery' ? 'Serwis skanerów Zebra' :
+            item.category === 'wysylka' ? 'Wysyłka i logistyka' :
+            item.category === 'platnosci' ? 'Płatności i faktury' : 'Serwis Zebra'
     }
   }))
+}
+
+// Schema.org BreadcrumbList
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Strona główna',
+      item: 'https://www.serwis-zebry.pl'
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'FAQ',
+      item: 'https://www.serwis-zebry.pl/faq'
+    }
+  ]
 }
 
 export default function FAQPage() {
@@ -228,6 +259,10 @@ export default function FAQPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
 
       <div className="min-h-screen bg-white font-sans antialiased">
         <Header currentPage="other" />
@@ -263,7 +298,7 @@ export default function FAQPage() {
                 </p>
               </div>
               <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-gray-900 mb-4">
-                Często zadawane pytania
+                FAQ – Serwis urządzeń Zebra
               </h1>
               <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
                 Znajdź odpowiedzi na najczęstsze pytania dotyczące serwisu urządzeń Zebra, wysyłki, płatności i gwarancji.
@@ -338,45 +373,122 @@ export default function FAQPage() {
               })}
             </div>
 
-            {/* FAQ Items */}
-            <div className="max-w-3xl mx-auto space-y-3">
+            {/* FAQ Items - pogrupowane w sekcje z H2 */}
+            <div className="max-w-3xl mx-auto">
               {filteredFAQ.length === 0 ? (
                 <div className="text-center py-12">
                   <HelpCircle className="w-12 h-12 text-gray-300 mx-auto mb-4" />
                   <p className="text-gray-500">Nie znaleziono pytań pasujących do wyszukiwania.</p>
                 </div>
-              ) : (
-                filteredFAQ.map((item, index) => {
-                  const originalIndex = faqItems.indexOf(item)
-                  const isOpen = openItems.has(originalIndex)
-                  return (
-                    <div
-                      key={originalIndex}
-                      className={`bg-white rounded-xl border transition-all ${
-                        isOpen ? 'border-indigo-200 shadow-lg' : 'border-gray-200 hover:border-gray-300'
-                      }`}
-                    >
-                      <button
-                        onClick={() => toggleItem(originalIndex)}
-                        className="w-full px-5 py-4 flex items-center justify-between text-left"
-                      >
-                        <span className="font-medium text-gray-900 pr-4">{item.question}</span>
-                        <ChevronDown
-                          className={`w-5 h-5 text-gray-400 flex-shrink-0 transition-transform ${
-                            isOpen ? 'rotate-180' : ''
-                          }`}
-                        />
-                      </button>
-                      {isOpen && (
-                        <div className="px-5 pb-4">
-                          <div className="pt-2 border-t border-gray-100">
-                            <p className="text-gray-600 leading-relaxed">{item.answer}</p>
-                          </div>
+              ) : activeCategory === 'wszystkie' && searchQuery === '' ? (
+                // Wyświetl pogrupowane według kategorii
+                <>
+                  {categories.filter(cat => cat.id !== 'wszystkie').map((cat) => {
+                    const categoryItems = filteredFAQ.filter(item => item.category === cat.id)
+                    if (categoryItems.length === 0) return null
+                    const Icon = cat.icon
+                    return (
+                      <section key={cat.id} className="mb-10" aria-labelledby={`faq-${cat.id}`}>
+                        <h2 
+                          id={`faq-${cat.id}`}
+                          className="text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2"
+                        >
+                          <Icon className="w-5 h-5 text-indigo-600" />
+                          {cat.label}
+                        </h2>
+                        <div className="space-y-3">
+                          {categoryItems.map((item) => {
+                            const originalIndex = faqItems.indexOf(item)
+                            const isOpen = openItems.has(originalIndex)
+                            return (
+                              <div
+                                key={originalIndex}
+                                className={`bg-white rounded-xl border transition-all ${
+                                  isOpen ? 'border-indigo-200 shadow-lg' : 'border-gray-200 hover:border-gray-300'
+                                }`}
+                              >
+                                <button
+                                  onClick={() => toggleItem(originalIndex)}
+                                  className="w-full px-5 py-4 flex items-center justify-between text-left"
+                                  aria-expanded={isOpen}
+                                  aria-controls={`faq-answer-${originalIndex}`}
+                                >
+                                  <span className="font-medium text-gray-900 pr-4">{item.question}</span>
+                                  <ChevronDown
+                                    className={`w-5 h-5 text-gray-400 flex-shrink-0 transition-transform ${
+                                      isOpen ? 'rotate-180' : ''
+                                    }`}
+                                    aria-hidden="true"
+                                  />
+                                </button>
+                                {isOpen && (
+                                  <div id={`faq-answer-${originalIndex}`} className="px-5 pb-4">
+                                    <div className="pt-2 border-t border-gray-100">
+                                      <p className="text-gray-600 leading-relaxed">{item.answer}</p>
+                                    </div>
+                                  </div>
+                                )}
+                              </div>
+                            )
+                          })}
                         </div>
+                      </section>
+                    )
+                  })}
+                </>
+              ) : (
+                // Wyświetl jako płaską listę (filtrowane lub wyszukiwane)
+                <>
+                  {activeCategory !== 'wszystkie' && (
+                    <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                      {categories.find(c => c.id === activeCategory)?.icon && (
+                        <span className="text-indigo-600">
+                          {(() => {
+                            const Icon = categories.find(c => c.id === activeCategory)?.icon
+                            return Icon ? <Icon className="w-5 h-5" /> : null
+                          })()}
+                        </span>
                       )}
-                    </div>
-                  )
-                })
+                      {categories.find(c => c.id === activeCategory)?.label}
+                    </h2>
+                  )}
+                  <div className="space-y-3">
+                    {filteredFAQ.map((item) => {
+                      const originalIndex = faqItems.indexOf(item)
+                      const isOpen = openItems.has(originalIndex)
+                      return (
+                        <div
+                          key={originalIndex}
+                          className={`bg-white rounded-xl border transition-all ${
+                            isOpen ? 'border-indigo-200 shadow-lg' : 'border-gray-200 hover:border-gray-300'
+                          }`}
+                        >
+                          <button
+                            onClick={() => toggleItem(originalIndex)}
+                            className="w-full px-5 py-4 flex items-center justify-between text-left"
+                            aria-expanded={isOpen}
+                            aria-controls={`faq-answer-${originalIndex}`}
+                          >
+                            <span className="font-medium text-gray-900 pr-4">{item.question}</span>
+                            <ChevronDown
+                              className={`w-5 h-5 text-gray-400 flex-shrink-0 transition-transform ${
+                                isOpen ? 'rotate-180' : ''
+                              }`}
+                              aria-hidden="true"
+                            />
+                          </button>
+                          {isOpen && (
+                            <div id={`faq-answer-${originalIndex}`} className="px-5 pb-4">
+                              <div className="pt-2 border-t border-gray-100">
+                                <p className="text-gray-600 leading-relaxed">{item.answer}</p>
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      )
+                    })}
+                  </div>
+                </>
               )}
             </div>
           </div>
