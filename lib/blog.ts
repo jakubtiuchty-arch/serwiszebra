@@ -13810,7 +13810,341 @@ Nie wiesz, który kontrakt będzie najlepszy dla Twojej firmy? Skontaktuj się z
 
 Jako **Autoryzowany Partner Zebra** z 25-letnim doświadczeniem pomożemy Ci wybrać optymalne rozwiązanie serwisowe — czy to kontrakt OneCare, czy indywidualną umowę z naszym serwisem.
 `
+  },
+  {
+    slug: 'zebra-designer-3-poradnik-projektowanie-etykiet',
+    title: 'Zebra Designer 3 - kompletny poradnik projektowania etykiet',
+    excerpt: 'Poznaj Zebra Designer 3 - profesjonalne oprogramowanie do projektowania etykiet. Dowiedz się jak zacząć, jakie są wersje i jak tworzyć etykiety krok po kroku.',
+    coverImage: '/blog/zebra-designer-3.jpg',
+    author: {
+      name: 'Zespół Serwis Zebra',
+      role: 'Certyfikowani technicy Zebra'
+    },
+    publishedAt: '2025-12-22',
+    readingTime: 12,
+    deviceType: 'drukarki',
+    subDeviceType: 'etykiet',
+    category: 'poradniki',
+    tags: ['zebra designer', 'zebra designer 3', 'projektowanie etykiet', 'oprogramowanie zebra', 'etykiety', 'kody kreskowe', 'ZPL', 'drukarka zebra'],
+    seo: {
+      metaTitle: 'Zebra Designer 3 - Poradnik projektowania etykiet [2025]',
+      metaDescription: 'Kompletny poradnik Zebra Designer 3. Jak pobrać, zainstalować i projektować etykiety. Porównanie wersji Essentials vs Professional. Funkcje, szablony, kody kreskowe.',
+      keywords: ['zebra designer 3', 'zebra designer download', 'zebra designer poradnik', 'projektowanie etykiet zebra', 'oprogramowanie do etykiet', 'zebra designer essentials', 'zebra designer professional', 'jak projektować etykiety', 'program do etykiet zebra', 'zebra zdesigner', 'etykiety kody kreskowe', 'zebra label designer']
+    },
+    content: `
+## Czym jest Zebra Designer 3?
+
+**Zebra Designer 3** to profesjonalne oprogramowanie do projektowania i drukowania etykiet, opracowane przez firmę Zebra Technologies. Program pozwala tworzyć etykiety z kodami kreskowymi, kodami QR, tekstem, grafiką i wieloma innymi elementami — bez znajomości programowania ZPL.
+
+Jest to następca Zebra Designer 2 i obecnie **najbardziej aktualny** program do projektowania etykiet dla drukarek Zebra.
+
+---
+
+## Wersje Zebra Designer 3
+
+Zebra Designer 3 dostępny jest w **dwóch wersjach**, które różnią się funkcjonalnością i ceną:
+
+### Zebra Designer 3 Essentials (darmowa)
+
+Podstawowa wersja, idealna do prostych projektów etykiet.
+
+**Funkcje:**
+- Projektowanie etykiet WYSIWYG (co widzisz, to drukujesz)
+- Podstawowe kody kreskowe (1D i 2D)
+- Tekst i grafika
+- Obsługa wszystkich drukarek Zebra
+- Import danych z plików CSV/Excel
+- Szablony podstawowe
+
+**Ograniczenia:**
+- Brak połączenia z bazami danych (ODBC)
+- Brak zaawansowanych kodów kreskowych (GS1, RFID)
+- Brak funkcji automatyzacji
+
+> **💡 Dla kogo?** Małe firmy, proste etykiety adresowe, magazynowe, produktowe.
+
+---
+
+### Zebra Designer 3 Professional (płatna)
+
+Zaawansowana wersja dla wymagających użytkowników.
+
+**Dodatkowe funkcje:**
+- **Połączenie z bazami danych** (ODBC, SQL, Oracle, Excel)
+- **Wszystkie kody kreskowe** (GS1-128, DataMatrix, RFID)
+- **Automatyzacja** — drukowanie serii z bazy danych
+- **Zmienne i formuły** — dynamiczne pola
+- **Zaawansowane szablony** branżowe
+- **Wsparcie dla RFID** — kodowanie tagów
+- **Serializacja** — automatyczna numeracja
+
+**Cena:** ok. 1 500 - 2 000 zł (jednorazowo, licencja dożywotnia)
+
+> **💡 Dla kogo?** Firmy logistyczne, produkcyjne, wymagające integracji z systemami ERP/WMS.
+
+---
+
+## Porównanie wersji
+
+| Funkcja | Essentials (darmowa) | Professional (płatna) |
+|---------|---------------------|----------------------|
+| Projektowanie WYSIWYG | ✅ | ✅ |
+| Kody kreskowe 1D (Code 128, EAN, UPC) | ✅ | ✅ |
+| Kody kreskowe 2D (QR Code) | ✅ | ✅ |
+| Import CSV/Excel | ✅ | ✅ |
+| Połączenie z bazą danych (ODBC) | ❌ | ✅ |
+| Kody GS1-128, GS1 DataMatrix | ❌ | ✅ |
+| Kodowanie RFID | ❌ | ✅ |
+| Serializacja (numerowanie) | Podstawowa | Zaawansowana |
+| Formuły i zmienne | ❌ | ✅ |
+| Automatyzacja druku | ❌ | ✅ |
+| Wsparcie techniczne | Community | Priorytetowe |
+
+---
+
+## Jak pobrać Zebra Designer 3?
+
+### Krok 1: Wejdź na stronę Zebra
+
+Oficjalna strona pobierania: [zebra.com/zebradesigner](https://www.zebra.com/us/en/support-downloads/printer-software/zebra-designer-3-downloads.html)
+
+### Krok 2: Wybierz wersję
+
+- **Zebra Designer 3 Essentials** — pobierz bezpłatnie
+- **Zebra Designer 3 Professional** — wymaga zakupu licencji
+
+### Krok 3: Zainstaluj program
+
+1. Uruchom pobrany plik instalacyjny
+2. Zaakceptuj warunki licencji
+3. Wybierz folder instalacji
+4. Kliknij "Zainstaluj"
+5. Uruchom program po instalacji
+
+> **⚠️ Wymagania systemowe:**
+> - Windows 10/11 (64-bit)
+> - 4 GB RAM (zalecane 8 GB)
+> - 500 MB miejsca na dysku
+> - Rozdzielczość 1280x800 lub wyższa
+
+---
+
+## Pierwsze uruchomienie — jak zacząć?
+
+### Krok 1: Dodaj drukarkę
+
+Przed rozpoczęciem projektowania upewnij się, że:
+1. Drukarka Zebra jest podłączona (USB/sieć)
+2. Zainstalowany jest sterownik drukarki
+3. Drukarka jest widoczna w systemie Windows
+
+### Krok 2: Utwórz nowy projekt
+
+1. Uruchom **Zebra Designer 3**
+2. Kliknij **"Nowy dokument"** lub **File → New**
+3. Wybierz drukarkę z listy
+4. Ustaw rozmiar etykiety:
+   - **Szerokość** i **wysokość** w mm
+   - **Orientacja** (pionowa/pozioma)
+   - **Marginesy**
+
+### Krok 3: Projektuj etykietę
+
+Dostępne narzędzia w panelu bocznym:
+- **Tekst** — dodawanie napisów
+- **Kod kreskowy** — wszystkie standardy (EAN, Code 128, QR, itp.)
+- **Obraz** — wstawianie logo, grafik
+- **Linie i kształty** — ramki, separatory
+- **Data/czas** — automatyczna data
+- **Licznik** — numeracja seryjna
+
+---
+
+## Tworzenie pierwszej etykiety — krok po kroku
+
+### Przykład: Etykieta produktowa z kodem kreskowym
+
+**Krok 1: Dodaj tekst z nazwą produktu**
+1. Kliknij narzędzie **"Tekst"** w panelu
+2. Kliknij na obszarze etykiety
+3. Wpisz nazwę produktu, np. "Widget PRO 2000"
+4. Ustaw czcionkę, rozmiar i położenie
+
+**Krok 2: Dodaj kod kreskowy EAN-13**
+1. Kliknij narzędzie **"Kod kreskowy"**
+2. Wybierz typ: **EAN-13**
+3. Kliknij na etykiecie
+4. Wprowadź dane kodu (12 cyfr, 13-ta wyliczona automatycznie)
+
+**Krok 3: Dodaj kod QR z linkiem**
+1. Kliknij **"Kod kreskowy"** → wybierz **QR Code**
+2. W danych wpisz URL, np. https://twojafirma.pl/produkt/123
+
+**Krok 4: Dodaj logo firmy**
+1. Kliknij narzędzie **"Obraz"**
+2. Wybierz plik z logo (PNG, JPG, BMP)
+3. Ustaw rozmiar i położenie
+
+**Krok 5: Zapisz i drukuj**
+1. **File → Save As** — zapisz projekt (.nlbl)
+2. **File → Print** — wydrukuj etykietę
+
+---
+
+## Import danych z Excel/CSV
+
+Zebra Designer pozwala drukować serie etykiet z danymi z pliku.
+
+### Krok 1: Przygotuj plik Excel
+
+| Nazwa | Kod EAN | Cena |
+|-------|---------|------|
+| Produkt A | 5901234123457 | 29.99 |
+| Produkt B | 5901234123464 | 49.99 |
+| Produkt C | 5901234123471 | 19.99 |
+
+### Krok 2: Połącz z projektem
+
+1. W Zebra Designer: **Data → Database Wizard**
+2. Wybierz **Excel** jako źródło
+3. Wskaż plik .xlsx
+4. Wybierz arkusz i kolumny
+
+### Krok 3: Przypisz pola
+
+1. Zaznacz element tekstowy na etykiecie
+2. Kliknij prawym → **Data Source**
+3. Wybierz kolumnę z bazy (np. "Nazwa")
+
+### Krok 4: Drukuj serię
+
+1. **File → Print**
+2. Wybierz **"Wszystkie rekordy"**
+3. Program wydrukuje etykietę dla każdego wiersza
+
+---
+
+## Kody kreskowe w Zebra Designer 3
+
+### Popularne formaty 1D (liniowe):
+
+| Format | Zastosowanie | Przykład |
+|--------|--------------|----------|
+| **EAN-13** | Produkty detaliczne (Europa) | 5901234123457 |
+| **UPC-A** | Produkty detaliczne (USA) | 012345678905 |
+| **Code 128** | Logistyka, magazyn | ABC-123-XYZ |
+| **Code 39** | Przemysł, motoryzacja | DATA123 |
+| **ITF-14** | Kartony zbiorcze | 15901234123454 |
+
+### Popularne formaty 2D:
+
+| Format | Zastosowanie | Pojemność |
+|--------|--------------|-----------|
+| **QR Code** | Linki, kontakt, WiFi | Do 4296 znaków |
+| **Data Matrix** | Elektronika, farmacja | Do 2335 znaków |
+| **PDF417** | Dokumenty, bilety | Do 1850 znaków |
+| **GS1-128** | Logistyka, daty ważności | Zmienne |
+| **GS1 DataMatrix** | Farmacja, śledzenie | AI + dane |
+
+---
+
+## Najczęstsze problemy i rozwiązania
+
+### Problem 1: Kod kreskowy nie skanuje się
+
+**Przyczyny:**
+- Za mała wielkość kodu
+- Za niski kontrast (ciemność druku)
+- Uszkodzona głowica drukarki
+
+**Rozwiązanie:**
+1. Zwiększ rozmiar kodu kreskowego (min. 20mm szerokości dla EAN-13)
+2. Zwiększ "Darkness" w ustawieniach drukarki
+3. Wyczyść głowicę drukującą
+
+### Problem 2: Etykieta jest przesunięta
+
+**Rozwiązanie:**
+1. Skalibruj drukarkę (Feed + Power)
+2. Sprawdź ustawienia rozmiaru etykiety w projekcie
+3. Dostosuj marginesy
+
+### Problem 3: Tekst jest nieostry
+
+**Rozwiązanie:**
+1. Użyj czcionki wektorowej (TrueType) zamiast bitmapowej
+2. Zwiększ rozdzielczość wydruku (DPI)
+3. Sprawdź ustawienie "Print Quality" w sterowniku
+
+---
+
+## Wskazówki dla profesjonalistów
+
+### 1. Używaj zmiennych
+
+Zamiast wpisywać datę ręcznie, użyj **pola daty**:
+- Kliknij **Insert → Date/Time**
+- Wybierz format (DD/MM/YYYY)
+- Data będzie aktualizowana automatycznie
+
+### 2. Twórz szablony
+
+Zapisuj często używane projekty jako szablony:
+- **File → Save As Template**
+- Użyj przy nowych projektach
+
+### 3. Testuj przed drukiem
+
+Zawsze drukuj **jedną etykietę testową** przed serią:
+- Sprawdź skanowalność kodu
+- Zweryfikuj dane
+- Oceń jakość wydruku
+
+### 4. Eksportuj do ZPL
+
+Jeśli potrzebujesz kod ZPL (np. do integracji z systemem):
+- **File → Export → ZPL**
+- Skopiuj wygenerowany kod
+
+---
+
+## Alternatywy dla Zebra Designer
+
+Jeśli Zebra Designer nie spełnia Twoich wymagań, rozważ:
+
+| Program | Cena | Dla kogo |
+|---------|------|----------|
+| **NiceLabel** | od 2000 zł | Enterprise, zaawansowane |
+| **BarTender** | od 3000 zł | Korporacje, automatyzacja |
+| **ZebraDesigner for XML** | Darmowy | Programiści, integracje |
+| **Labelary** | Darmowy (online) | Testy ZPL, proste etykiety |
+
+---
+
+## Podsumowanie
+
+**Zebra Designer 3** to potężne narzędzie do projektowania etykiet, które sprawdzi się zarówno w małej firmie (wersja Essentials), jak i w dużym przedsiębiorstwie (wersja Professional).
+
+**Kluczowe zalety:**
+- Intuicyjny interfejs WYSIWYG
+- Obsługa wszystkich kodów kreskowych
+- Import danych z Excel/baz danych
+- Natywna kompatybilność z drukarkami Zebra
+
+---
+
+## Potrzebujesz pomocy?
+
+Masz problem z konfiguracją Zebra Designer lub drukarką? Skontaktuj się z nami:
+
+> **Zadzwoń:** +48 601 619 898
+
+> **Napisz:** [Formularz kontaktowy](/kontakt)
+
+Jako **autoryzowany serwis Zebra** pomagamy w konfiguracji oprogramowania i rozwiązywaniu problemów z drukarkami.
+`
   }
+
 ]
 
 // Funkcja do pobierania artykułu po slug
