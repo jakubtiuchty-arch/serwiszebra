@@ -361,8 +361,6 @@ const handleClose = () => {
 
   if (!isOpen) return null;
 
-  const displayNumber = repairNumber || repairId.split('-')[0].toUpperCase();
-
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto">
       {/* Backdrop */}
