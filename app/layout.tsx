@@ -22,6 +22,12 @@ export default function RootLayout({
   return (
     <html lang="pl" className={inter.className}>
       <head>
+        {/* Preconnect to external domains for performance */}
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://www.google-analytics.com" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+        
         {/* Preload critical fonts and images */}
         <link
           rel="preload"

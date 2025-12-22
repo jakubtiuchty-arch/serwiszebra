@@ -129,6 +129,22 @@ export async function generateMetadata({ params }: { params: { miasto: string } 
       description: city.metaDescription,
       url: `https://www.serwis-zebry.pl/serwis-zebra/${city.slug}`,
       type: 'website',
+      images: [
+        {
+          url: 'https://www.serwis-zebry.pl/og-image-city.jpg',
+          width: 1200,
+          height: 630,
+          alt: `Serwis Zebra ${city.name} - Naprawa drukarek i terminali`,
+        },
+      ],
+      locale: 'pl_PL',
+      siteName: 'Serwis Zebra',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: city.metaTitle,
+      description: city.metaDescription,
+      images: ['https://www.serwis-zebry.pl/og-image-city.jpg'],
     },
     alternates: {
       canonical: `https://www.serwis-zebry.pl/serwis-zebra/${city.slug}`,
@@ -300,7 +316,7 @@ export default function CityServicePage({ params }: { params: { miasto: string }
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-gray-900 mb-3 sm:mb-4">
               Serwis Zebra {city.name}
               <span className="block text-base sm:text-lg md:text-xl font-normal text-gray-600 mt-1 sm:mt-2">
-                Naprawa Drukarek, Terminali i Skanerów
+                – Naprawa Drukarek, Terminali i Skanerów
               </span>
             </h1>
             
@@ -327,17 +343,29 @@ export default function CityServicePage({ params }: { params: { miasto: string }
               <Link
                 href="/#formularz"
                 className="inline-flex items-center gap-2 bg-blue-600 text-white font-medium px-5 py-2.5 rounded-lg hover:bg-blue-700 transition-colors text-sm"
+                aria-label="Zgłoś naprawę urządzenia Zebra - wypełnij formularz"
               >
                 Zgłoś naprawę
-                <ChevronRight className="w-4 h-4" />
+                <ChevronRight className="w-4 h-4" aria-hidden="true" />
               </Link>
               <a
                 href="tel:+48601619898"
                 className="inline-flex items-center gap-2 bg-white border border-gray-300 text-gray-700 font-medium px-5 py-2.5 rounded-lg hover:bg-gray-50 transition-colors text-sm"
+                aria-label="Zadzwoń do serwisu Zebra: +48 601 619 898"
               >
-                <Phone className="w-4 h-4" />
+                <Phone className="w-4 h-4" aria-hidden="true" />
                 <span className="hidden sm:inline">+48 601 619 898</span>
                 <span className="sm:hidden">Zadzwoń</span>
+              </a>
+              <a
+                href="mailto:serwis@serwis-zebry.pl"
+                className="inline-flex items-center gap-2 bg-white border border-gray-300 text-gray-700 font-medium px-5 py-2.5 rounded-lg hover:bg-gray-50 transition-colors text-sm"
+                aria-label="Napisz email do serwisu: serwis@serwis-zebry.pl"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                <span className="hidden sm:inline">Email</span>
               </a>
             </div>
           </div>
@@ -361,25 +389,94 @@ export default function CityServicePage({ params }: { params: { miasto: string }
                 Jako <strong>autoryzowany serwis Zebra Technologies</strong> świadczymy kompleksowe usługi naprawcze dla firm 
                 z {city.name} i całego {city.region}. Nasza wieloletnia współpraca z producentem gwarantuje dostęp do 
                 oryginalnych części zamiennych, aktualnej dokumentacji technicznej oraz specjalistycznych narzędzi diagnostycznych.
+                Posiadamy status <strong>Zebra Premier Partner</strong> oraz <strong>Authorized Repair Center</strong>, co potwierdza najwyższy 
+                poziom kompetencji w naprawach urządzeń tej marki.
               </p>
-              <p className="mt-3">
+              
+              <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">Naprawa drukarek etykiet Zebra</h3>
+              <p>
                 Oferujemy <strong>naprawę drukarek etykiet Zebra</strong> wszystkich serii – od popularnych modeli desktop 
                 (ZD420, ZD620, GK420) przez wydajne drukarki przemysłowe (ZT410, ZT610), po mobilne (ZQ520, ZQ630). 
                 Najczęściej wykonywane usługi to wymiana głowic drukujących, naprawa mechanizmów podawania etykiet, 
-                czyszczenie sensorów i kalibracja parametrów wydruku.
+                czyszczenie sensorów i kalibracja parametrów wydruku. Więcej informacji o <Link href="/drukarki" className="text-blue-600 hover:underline">serwisie drukarek Zebra</Link>.
               </p>
               <p className="mt-3">
-                Specjalizujemy się również w <strong>serwisie terminali mobilnych Zebra</strong> – TC21, TC52, MC3300, MC9300 
+                Typowe usterki drukarek, które naprawiamy w {city.nameLocative}: blady wydruk (wymiana głowicy lub kalibracja), 
+                błąd "Head Open" (naprawa czujnika zamknięcia), problemy z przesuwaniem etykiet (wymiana wałka dociskowego), 
+                drukarka nie włącza się (naprawa płyty głównej lub zasilacza). Jeśli Twoja <Link href="/blog/drukarka-zebra-nie-drukuje-przyczyny-rozwiazania" className="text-blue-600 hover:underline">drukarka Zebra nie drukuje</Link>, 
+                skontaktuj się z nami – pomożemy zdiagnozować problem.
+              </p>
+
+              <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">Serwis terminali mobilnych Zebra</h3>
+              <p>
+                Specjalizujemy się w <strong>serwisie terminali mobilnych Zebra</strong> – TC21, TC52, MC3300, MC9300 
                 i wielu innych. Wymieniamy uszkodzone wyświetlacze dotykowe, naprawiamy moduły skanujące, 
-                baterie oraz porty ładowania. Dla <strong>skanerów kodów kreskowych</strong> oferujemy naprawę 
-                modułów optycznych, wymianę okienek skanera oraz rozwiązywanie problemów z parowaniem Bluetooth.
+                baterie oraz porty ładowania. Szczegóły na stronie <Link href="/terminale" className="text-blue-600 hover:underline">serwis terminali Zebra</Link>.
               </p>
               <p className="mt-3">
-                Cały proces serwisowy jest maksymalnie uproszczony: wypełniasz formularz online, kurier odbiera urządzenie 
-                z Twojego adresu w {city.nameLocative} w ciągu {city.deliveryTime}, przeprowadzamy bezpłatną diagnostykę, 
-                a po Twojej akceptacji wyceny – naprawiamy i odsyłamy sprzęt. Na wszystkie naprawy udzielamy 
-                <strong> 12 miesięcy gwarancji</strong>.
+                Terminale mobilne Zebra są intensywnie eksploatowane w magazynach, na produkcji i w logistyce. 
+                Najczęstsze usterki to: pęknięty wyświetlacz (upadek), niedziałający skaner (zużycie modułu optycznego), 
+                szybko rozładowująca się bateria, niedziałające przyciski boczne. Wszystkie te naprawy wykonujemy 
+                z użyciem oryginalnych części Zebra.
               </p>
+
+              <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">Naprawa skanerów kodów kreskowych</h3>
+              <p>
+                Dla <strong>skanerów kodów kreskowych</strong> oferujemy naprawę modułów optycznych, wymianę okienek skanera 
+                oraz rozwiązywanie problemów z parowaniem Bluetooth. Serwisujemy popularne modele: DS2208, DS3678, DS8178, 
+                LI3678 i wiele innych. Więcej na stronie <Link href="/skanery" className="text-blue-600 hover:underline">serwis skanerów Zebra</Link>.
+              </p>
+
+              <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">Jak wygląda proces naprawy?</h3>
+              <p>
+                Cały proces serwisowy jest maksymalnie uproszczony: wypełniasz <Link href="/#formularz" className="text-blue-600 hover:underline">formularz zgłoszeniowy online</Link>, 
+                kurier odbiera urządzenie z Twojego adresu w {city.nameLocative} w ciągu {city.deliveryTime}, 
+                przeprowadzamy bezpłatną diagnostykę, a po Twojej akceptacji wyceny – naprawiamy i odsyłamy sprzęt. 
+                Na wszystkie naprawy udzielamy <strong>12 miesięcy gwarancji</strong>.
+              </p>
+              <p className="mt-3">
+                Przez cały czas masz dostęp do <strong>panelu klienta</strong>, gdzie możesz śledzić status naprawy, 
+                akceptować wycenę i komunikować się z serwisem. Transparentność procesu to nasz priorytet – 
+                nie ma ukrytych kosztów ani niespodzianek.
+              </p>
+
+              <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">Dlaczego warto wybrać nasz serwis?</h3>
+              <ul className="mt-3 space-y-2">
+                <li><strong>25 lat doświadczenia</strong> – działamy na rynku od 1999 roku</li>
+                <li><strong>Autoryzowany serwis</strong> – oficjalny partner Zebra Technologies</li>
+                <li><strong>Oryginalne części</strong> – gwarancja jakości i trwałości</li>
+                <li><strong>Szybka realizacja</strong> – standardowo 2-5 dni roboczych</li>
+                <li><strong>Bezpłatna diagnostyka</strong> – płacisz tylko za naprawę</li>
+                <li><strong>Darmowa wysyłka</strong> – kurier odbiera i dostarcza</li>
+              </ul>
+
+              <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">Kontakt z serwisem</h3>
+              <p>
+                Masz pytania? Zadzwoń pod numer <a href="tel:+48601619898" className="text-blue-600 hover:underline font-medium" aria-label="Zadzwoń do serwisu">+48 601 619 898</a> lub 
+                napisz na <a href="mailto:serwis@serwis-zebry.pl" className="text-blue-600 hover:underline font-medium" aria-label="Wyślij email do serwisu">serwis@serwis-zebry.pl</a>. 
+                Odpowiadamy w ciągu 24 godzin. Możesz też odwiedzić naszą stronę <Link href="/kontakt" className="text-blue-600 hover:underline">kontaktową</Link> 
+                lub zapoznać się z <Link href="/faq" className="text-blue-600 hover:underline">FAQ</Link>.
+              </p>
+            </div>
+
+            {/* Linki do innych miast */}
+            <div className="mt-8 pt-6 border-t border-gray-200">
+              <h3 className="text-sm font-medium text-gray-900 mb-3">Serwis Zebra w innych miastach:</h3>
+              <div className="flex flex-wrap gap-2">
+                {Object.entries(citiesData)
+                  .filter(([slug]) => slug !== params.miasto)
+                  .map(([slug, data]) => (
+                    <Link 
+                      key={slug}
+                      href={`/serwis-zebra/${slug}`}
+                      className="text-sm text-blue-600 hover:text-blue-800 hover:underline"
+                      aria-label={`Serwis Zebra w ${data.nameLocative}`}
+                    >
+                      {data.name}
+                    </Link>
+                  ))
+                }
+              </div>
             </div>
           </div>
         </section>
@@ -555,16 +652,28 @@ export default function CityServicePage({ params }: { params: { miasto: string }
               <Link
                 href="/#formularz"
                 className="inline-flex items-center gap-2 bg-blue-600 text-white font-medium px-6 py-2.5 rounded-lg hover:bg-blue-700 transition-colors text-sm"
+                aria-label="Zgłoś naprawę urządzenia Zebra online"
               >
                 Zgłoś naprawę online
-                <ChevronRight className="w-4 h-4" />
+                <ChevronRight className="w-4 h-4" aria-hidden="true" />
               </Link>
               <a
                 href="tel:+48601619898"
                 className="inline-flex items-center gap-2 bg-white border border-gray-300 text-gray-700 font-medium px-6 py-2.5 rounded-lg hover:bg-gray-50 transition-colors text-sm"
+                aria-label="Zadzwoń do serwisu: +48 601 619 898"
               >
-                <Phone className="w-4 h-4" />
+                <Phone className="w-4 h-4" aria-hidden="true" />
                 +48 601 619 898
+              </a>
+              <a
+                href="mailto:serwis@serwis-zebry.pl"
+                className="inline-flex items-center gap-2 bg-white border border-gray-300 text-gray-700 font-medium px-6 py-2.5 rounded-lg hover:bg-gray-50 transition-colors text-sm"
+                aria-label="Wyślij email: serwis@serwis-zebry.pl"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                serwis@serwis-zebry.pl
               </a>
             </div>
           </div>
