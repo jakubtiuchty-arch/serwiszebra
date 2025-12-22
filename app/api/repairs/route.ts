@@ -4,13 +4,22 @@ import { sendRepairSubmittedEmail, sendRepairSubmittedAdminEmail } from '@/lib/e
 
 // Generuj numer zgłoszenia w formacie YYYYMMDDHHmm
 function generateRepairNumber(): string {
+  // Użyj polskiej strefy czasowej (Europe/Warsaw)
   const now = new Date()
-  const year = now.getFullYear()
-  const month = String(now.getMonth() + 1).padStart(2, '0')
-  const day = String(now.getDate()).padStart(2, '0')
-  const hours = String(now.getHours()).padStart(2, '0')
-  const minutes = String(now.getMinutes()).padStart(2, '0')
-  return `${year}${month}${day}${hours}${minutes}`
+  const formatter = new Intl.DateTimeFormat('pl-PL', {
+    timeZone: 'Europe/Warsaw',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false
+  })
+  
+  const parts = formatter.formatToParts(now)
+  const get = (type: string) => parts.find(p => p.type === type)?.value || ''
+  
+  return `${get('year')}${get('month')}${get('day')}${get('hour')}${get('minute')}`
 }
 
 export async function GET() {
