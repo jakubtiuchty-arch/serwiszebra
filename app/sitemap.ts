@@ -5,7 +5,7 @@ import { blogPosts } from '@/lib/blog'
 const cities = [
   'warszawa', 'krakow', 'wroclaw', 'poznan', 'gdansk', 'katowice',
   'lodz', 'szczecin', 'bydgoszcz', 'lublin', 'bialystok',
-  'rzeszow', 'torun', 'kielce', 'olsztyn', 'opole'
+  'rzeszow', 'torun', 'kielce', 'olsztyn', 'opole', 'zielona-gora'
 ]
 
 export default function sitemap(): MetadataRoute.Sitemap {

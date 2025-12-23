@@ -37,7 +37,8 @@ import {
   LogOut,
   BookOpen,
   Download,
-  Info
+  Info,
+  Shield
 } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
@@ -249,8 +250,8 @@ export default function HomePage() {
                   <span className="whitespace-nowrap">Tysiące skutecznych napraw</span>
                 </span>
                 <span className="flex items-center gap-1.5">
-                  <Zap className="w-3 h-3 text-orange-500 flex-shrink-0" />
-                  <span className="whitespace-nowrap">Maksymalnie skrócony proces napraw</span>
+                  <Shield className="w-3 h-3 text-purple-600 flex-shrink-0" />
+                  <span className="whitespace-nowrap">Serwis gwarancyjny i pogwarancyjny</span>
                 </span>
               </div>
             </div>

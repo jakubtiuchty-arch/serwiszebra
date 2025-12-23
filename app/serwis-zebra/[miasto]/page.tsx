@@ -204,6 +204,17 @@ const citiesData: Record<string, {
     metaDescription: 'Profesjonalny serwis urządzeń Zebra w Opolu. ✓ Odbiór kurierem w 24-48h ✓ Naprawa 2-5 dni ✓ 12 mies. gwarancji ✓ Bezpłatna wycena. Drukarki etykiet, terminale, skanery.',
     heroText: 'Profesjonalny serwis urządzeń Zebra dla firm z Opola i okolic',
     introText: 'Obsługujemy firmy z Opola i całego Opolskiego. Kurier odbierze Twoje urządzenie w ciągu 24-48 godzin – bez wychodzenia z biura.'
+  },
+  'zielona-gora': {
+    name: 'Zielona Góra',
+    nameLocative: 'Zielonej Górze',
+    region: 'Lubuskiego',
+    slug: 'zielona-gora',
+    deliveryTime: '24-48h',
+    metaTitle: 'Serwis Drukarek Zebra Zielona Góra – Naprawa Terminali i Skanerów',
+    metaDescription: 'Profesjonalny serwis drukarek Zebra w Zielonej Górze. ✓ Odbiór kurierem w 24-48h ✓ Naprawa 2-5 dni ✓ 12 mies. gwarancji ✓ Bezpłatna wycena. Drukarki etykiet, terminale, skanery.',
+    heroText: 'Profesjonalny serwis drukarek Zebra dla firm z Zielonej Góry i okolic',
+    introText: 'Obsługujemy firmy z Zielonej Góry, Gorzowa Wielkopolskiego i całego Lubuskiego. Kurier odbierze Twoje urządzenie w ciągu 24-48 godzin.'
   }
 }
 
@@ -233,6 +244,7 @@ export async function generateMetadata({ params }: { params: { miasto: string } 
     'torun': ['serwis zebra bydgoszcz', 'serwis zebra włocławek', 'naprawa drukarek zebra kujawsko-pomorskie'],
     'rzeszow': ['serwis zebra dolina lotnicza', 'serwis zebra przemyśl', 'naprawa drukarek zebra podkarpacie'],
     'szczecin': ['serwis zebra świnoujście', 'serwis zebra stargard', 'naprawa drukarek zebra pomorze zachodnie'],
+    'zielona-gora': ['serwis drukarek zebra zielona góra', 'serwis zebra gorzów wielkopolski', 'naprawa drukarek zebra lubuskie', 'serwis zebra lubuskie'],
   }
 
   return {
