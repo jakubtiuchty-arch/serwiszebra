@@ -126,7 +126,29 @@ export const blogPosts: BlogPost[] = [
     seo: {
       metaTitle: 'Drukarka Zebra nie drukuje - 7 przyczyn i rozwiązania [2025]',
       metaDescription: 'Drukarka Zebra nie drukuje? 7 najczęstszych przyczyn: głowica, ribbon, kalibracja, sterowniki, ZPL. Poradnik krok po kroku dla GK420, ZD420, ZT410. Kiedy do serwisu? Autoryzowany partner Zebra.',
-      keywords: ['drukarka zebra nie drukuje', 'dlaczego drukarka zebra nie drukuje', 'jak naprawić drukarkę zebra', 'naprawa drukarki zebra', 'problemy z drukarką zebra', 'serwis drukarek zebra', 'zebra zd420 nie drukuje', 'zebra gk420 problemy', 'drukarka zebra nie reaguje', 'zebra drukuje puste etykiety', 'drukarka etykiet nie drukuje', 'zebra zt410 nie drukuje', 'drukarka zebra miga czerwono', 'drukarka zebra błąd ribbon', 'jak skalibrować drukarkę zebra', 'drukarka zebra sterowniki windows 10', 'zebra nie widzi etykiet', 'drukarka zebra offline', 'drukarka termiczna zebra problemy', 'zebra drukarka serwis wrocław']
+      keywords: [
+        // Główne frazy
+        'drukarka zebra nie drukuje', 'zebra printer not printing', 'naprawa drukarki zebra',
+        'problemy z drukarką zebra', 'dlaczego drukarka zebra nie drukuje', 'zebra printer troubleshooting',
+        // Modele
+        'zebra zd420 nie drukuje', 'zebra gk420 problemy', 'zebra zt410 nie drukuje',
+        'zebra zd621 nie drukuje', 'zebra zd220 problem', 'zebra gc420 nie działa',
+        // Objawy
+        'drukarka zebra nie reaguje', 'zebra drukuje puste etykiety', 'drukarka zebra miga czerwono',
+        'drukarka zebra błąd ribbon', 'zebra nie widzi etykiet', 'drukarka zebra offline',
+        // Long tail - pytania
+        'jak naprawić drukarkę zebra', 'co zrobić gdy drukarka zebra nie drukuje',
+        'jak skalibrować drukarkę zebra', 'ile kosztuje naprawa drukarki zebra',
+        // Long tail - rozwiązania
+        'drukarka zebra sterowniki windows 10', 'drukarka zebra sterowniki windows 11',
+        'reset drukarki zebra', 'kalibracja drukarki zebra', 'drukarka zebra factory reset',
+        // Frazy branżowe
+        'drukarka etykiet nie drukuje', 'drukarka termiczna zebra problemy',
+        'drukarka magazynowa zebra awaria', 'drukarka logistyczna zebra problem',
+        // Frazy angielskie
+        'zebra printer not working', 'zebra label printer fix', 'zebra printer repair guide',
+        'zebra printer blank labels', 'zebra printer error fix'
+      ]
     },
     content: `
 ## Dlaczego drukarka Zebra nie drukuje?
@@ -332,7 +354,28 @@ Skontaktuj się z nami - jako autoryzowany serwis Zebra obsługujemy również n
     seo: {
       metaTitle: 'Jak wyczyścić głowicę drukarki Zebra - poradnik [2025]',
       metaDescription: 'Czyszczenie głowicy drukarki Zebra krok po kroku. Alkohol IPA 99%, patyczki, karty czyszczące. Jak często? Co ile etykiet? GK420, ZD420, ZT410. Wydłuż żywotność głowicy 2-3x!',
-      keywords: ['czyszczenie głowicy zebra', 'jak wyczyścić głowicę drukarki zebra', 'konserwacja drukarki zebra', 'głowica drukująca czyszczenie', 'zebra głowica jak czyścić', 'patyczki do czyszczenia głowicy', 'ipa głowica drukująca', 'alkohol izopropylowy do drukarki', 'jak często czyścić głowicę zebra', 'czyszczenie wałka drukarki zebra', 'karty czyszczące zebra', 'zebra gk420 czyszczenie', 'czym czyścić głowicę termiczną', 'konserwacja drukarki etykiet', 'zebra zd420 głowica czyszczenie', 'jak przedłużyć żywotność głowicy', 'platen roller czyszczenie', 'drukarka zebra smugi na wydruku', 'głowica zebra białe linie', 'zebra zt410 konserwacja']
+      keywords: [
+        // Główne frazy
+        'czyszczenie głowicy zebra', 'jak wyczyścić głowicę drukarki zebra', 'zebra printhead cleaning',
+        'konserwacja drukarki zebra', 'głowica drukująca czyszczenie', 'zebra head cleaning',
+        // Materiały czyszczące
+        'patyczki do czyszczenia głowicy', 'ipa głowica drukująca', 'alkohol izopropylowy do drukarki',
+        'karty czyszczące zebra', 'zebra cleaning cards', 'cleaning pen zebra',
+        // Modele
+        'zebra gk420 czyszczenie', 'zebra zd420 głowica czyszczenie', 'zebra zt410 konserwacja',
+        'zebra zd621 cleaning', 'zebra zd220 czyszczenie', 'zebra gc420 konserwacja',
+        // Long tail - pytania
+        'jak często czyścić głowicę zebra', 'czym czyścić głowicę termiczną',
+        'jak przedłużyć żywotność głowicy', 'co ile etykiet czyścić głowicę',
+        // Long tail - rozwiązania
+        'czyszczenie wałka drukarki zebra', 'platen roller czyszczenie', 'czyszczenie sensora zebra',
+        'czyszczenie drukarki zebra krok po kroku', 'konserwacja drukarki etykiet',
+        // Problemy rozwiązane czyszczeniem
+        'drukarka zebra smugi na wydruku', 'głowica zebra białe linie', 'blady wydruk zebra czyszczenie',
+        // Frazy angielskie
+        'zebra printer cleaning guide', 'how to clean zebra printhead', 'zebra printer maintenance',
+        'zebra cleaning kit', 'zebra printer head cleaning'
+      ]
     },
     content: `
 ## Dlaczego warto regularnie czyścić głowicę drukującą?
@@ -459,7 +502,29 @@ Nawet przy prawidłowej konserwacji głowica zużywa się. Oznaki konieczności 
     seo: {
       metaTitle: 'Wymiana głowicy drukarki Zebra - kiedy i ile kosztuje? [2025]',
       metaDescription: 'Kiedy wymienić głowicę drukarki Zebra? Objawy zużycia: białe linie, blady wydruk. Ceny 250-2500 zł. Czy samemu? Part numbers dla GK420, ZD420, ZT410. Żywotność głowicy w km wydruku.',
-      keywords: ['wymiana głowicy zebra', 'głowica drukująca zebra cena', 'ile kosztuje wymiana głowicy zebra', 'głowica zebra zd420 cena', 'głowica gk420 wymiana', 'kiedy wymienić głowicę drukarki', 'zużyta głowica drukująca objawy', 'głowica zebra zt410 cena', 'białe linie na wydruku zebra', 'głowica termiczna cena', 'part number głowica zebra', 'głowica zebra 203 dpi cena', 'jak długo wytrzymuje głowica zebra', 'żywotność głowicy drukarki etykiet', 'głowica zebra 300 dpi', 'samodzielna wymiana głowicy zebra', 'gdzie kupić głowicę do zebry', 'głowica drukująca allegro', 'oryginalna głowica zebra', 'zamiennik głowicy zebra']
+      keywords: [
+        // Główne frazy
+        'wymiana głowicy zebra', 'głowica drukująca zebra cena', 'zebra printhead replacement',
+        'ile kosztuje wymiana głowicy zebra', 'głowica zebra cena', 'zebra head price',
+        // Modele
+        'głowica zebra zd420 cena', 'głowica gk420 wymiana', 'głowica zebra zt410 cena',
+        'głowica zebra zd621', 'głowica zebra zd220', 'głowica zebra gc420',
+        // Specyfikacje
+        'głowica zebra 203 dpi cena', 'głowica zebra 300 dpi', 'głowica termiczna cena',
+        'part number głowica zebra', 'głowica zebra part number',
+        // Long tail - pytania
+        'kiedy wymienić głowicę drukarki', 'jak długo wytrzymuje głowica zebra',
+        'żywotność głowicy drukarki etykiet', 'objawy zużytej głowicy zebra',
+        // Long tail - rozwiązania
+        'samodzielna wymiana głowicy zebra', 'jak wymienić głowicę zebra', 'wymiana głowicy zebra krok po kroku',
+        // Objawy wymiany
+        'zużyta głowica drukująca objawy', 'białe linie na wydruku zebra', 'blady wydruk głowica',
+        // Zakupy
+        'gdzie kupić głowicę do zebry', 'głowica drukująca allegro', 'oryginalna głowica zebra', 'zamiennik głowicy zebra',
+        // Frazy angielskie
+        'zebra printhead price', 'zebra printhead replacement guide', 'zebra head cost',
+        'zebra printhead lifespan', 'when to replace zebra printhead'
+      ]
     },
     content: `
 ## Czym jest głowica drukująca i dlaczego jest tak ważna?
@@ -663,7 +728,26 @@ Standardowa wymiana trwa 1-2 dni robocze od momentu dostarczenia drukarki. W try
     seo: {
       metaTitle: 'Zebra GK420d czerwona dioda - co oznacza i jak naprawić? [2025]',
       metaDescription: 'Czerwona dioda w Zebra GK420d/GK420t? Co oznacza mruganie: 1x, 2x, 3x, ciągłe? Diagnostyka krok po kroku. Problemy: ribbon, etykiety, głowica, przegrzanie. Kiedy serwis?',
-      keywords: ['zebra gk420d czerwona dioda', 'co oznacza czerwona lampka gk420', 'gk420t lampka czerwona', 'zebra gk420 błąd mrugająca dioda', 'gk420d nie drukuje czerwona lampka', 'diagnostyka drukarki zebra', 'gk420 error codes', 'zebra gk420 miga na czerwono', 'gk420d dioda pulsuje', 'drukarka zebra świeci na czerwono', 'zebra gk420 ribbon out', 'gk420 paper out error', 'zebra gk420d troubleshooting', 'co oznacza mrugająca dioda zebra', 'gk420 błąd głowicy', 'zebra gk420 przegrzanie', 'reset drukarki gk420', 'zebra gk420 kalibracja', 'gk420d nie reaguje czerwona dioda', 'zebra drukarka kody błędów led']
+      keywords: [
+        // Główne frazy
+        'zebra gk420d czerwona dioda', 'gk420 czerwona lampka', 'zebra gk420 red light',
+        'co oznacza czerwona lampka gk420', 'gk420t lampka czerwona', 'zebra gk420 error led',
+        // Sekwencje mrugania
+        'zebra gk420 błąd mrugająca dioda', 'gk420d dioda pulsuje', 'zebra gk420 miga na czerwono',
+        'gk420 mruga 1x', 'gk420 mruga 2x', 'gk420 mruga 3x',
+        // Problemy
+        'gk420d nie drukuje czerwona lampka', 'zebra gk420 ribbon out', 'gk420 paper out error',
+        'gk420 błąd głowicy', 'zebra gk420 przegrzanie', 'drukarka zebra świeci na czerwono',
+        // Long tail - pytania
+        'co oznacza mrugająca dioda zebra', 'dlaczego gk420 świeci na czerwono',
+        'jak naprawić czerwoną diodę gk420', 'gk420d nie reaguje czerwona dioda',
+        // Long tail - rozwiązania
+        'diagnostyka drukarki zebra', 'gk420 error codes', 'zebra gk420d troubleshooting',
+        'reset drukarki gk420', 'zebra gk420 kalibracja', 'zebra drukarka kody błędów led',
+        // Frazy angielskie
+        'zebra gk420 red light meaning', 'gk420 led error codes', 'zebra gk420 troubleshooting guide',
+        'gk420d red light fix', 'zebra printer blinking red'
+      ]
     },
     content: `
 ## Problem: Czerwona dioda w drukarce Zebra GK420
@@ -931,7 +1015,28 @@ Zebra oficjalnie zakończyła produkcję serii GK, ale jako autoryzowany serwis 
     seo: {
       metaTitle: 'Blady wydruk w drukarce Zebra - 5 przyczyn i rozwiązania [2025]',
       metaDescription: 'Drukarka Zebra drukuje za jasno? 5 przyczyn bladego wydruku: zasilacz, wałek, Darkness, głowica, ribbon. Jak ustawić Darkness i Print Speed? GK420, ZD420, ZT410. Napraw sam lub serwis.',
-      keywords: ['blady wydruk zebra', 'drukarka zebra drukuje za jasno', 'słaba jakość wydruku zebra', 'zebra darkness ustawienia', 'jak poprawić jakość wydruku zebra', 'nieczytelny wydruk zebra', 'zebra wydruk zbyt jasny', 'zebra gk420 blady wydruk', 'zd420 słaba jakość druku', 'jak zwiększyć darkness zebra', 'drukarka termiczna słaby wydruk', 'zebra print speed ustawienia', 'wałek dociskowy zebra zużyty', 'ribbon zebra blady wydruk', 'kod kreskowy nieczytelny zebra', 'drukarka etykiet jasny wydruk', 'zebra zt410 blady druk', 'zasilacz zebra za słaby', 'kontrast wydruku zebra', 'dlaczego drukarka zebra drukuje blado']
+      keywords: [
+        // Główne frazy
+        'blady wydruk zebra', 'drukarka zebra drukuje za jasno', 'zebra faint print',
+        'słaba jakość wydruku zebra', 'nieczytelny wydruk zebra', 'zebra print quality poor',
+        // Modele
+        'zebra gk420 blady wydruk', 'zd420 słaba jakość druku', 'zebra zt410 blady druk',
+        'zd621 blady wydruk', 'zd220 jasny wydruk', 'gc420 słaby druk',
+        // Ustawienia
+        'zebra darkness ustawienia', 'jak zwiększyć darkness zebra', 'zebra print speed ustawienia',
+        'kontrast wydruku zebra', 'zebra darkness level', 'zebra heat settings',
+        // Long tail - pytania
+        'jak poprawić jakość wydruku zebra', 'dlaczego drukarka zebra drukuje blado',
+        'co zrobić gdy zebra drukuje za jasno', 'zebra wydruk zbyt jasny',
+        // Przyczyny
+        'wałek dociskowy zebra zużyty', 'ribbon zebra blady wydruk', 'zasilacz zebra za słaby',
+        'głowica zebra zużyta blady wydruk', 'etykiety zebra złe blady wydruk',
+        // Problemy
+        'kod kreskowy nieczytelny zebra', 'drukarka etykiet jasny wydruk', 'drukarka termiczna słaby wydruk',
+        // Frazy angielskie
+        'zebra printer faint print fix', 'zebra printer light printing', 'zebra print too light',
+        'zebra darkness adjustment', 'zebra print quality troubleshooting'
+      ]
     },
     content: `
 ## Problem: Blady wydruk w drukarce Zebra
@@ -1621,7 +1726,29 @@ Tak, ale musisz ustawić drukarkę w tryb "Continuous" i podać dokładną dług
     seo: {
       metaTitle: 'Terminal Zebra nie włącza się - Boot Loop, Fastboot [2025]',
       metaDescription: 'Terminal Zebra TC21, TC52, MC33, MC93 zawiesza się na logo lub wpadł w boot loop? Fastboot mode wyjście krok po kroku. Hard reset, Recovery Mode. Kiedy do serwisu? Kompletny poradnik.',
-      keywords: ['zebra boot loop', 'zebra fastboot', 'terminal zebra nie włącza się', 'jak wyjść z fastboot zebra', 'TC21 zawiesza się na logo', 'MC33 boot loop naprawa', 'recovery mode zebra', 'hard reset terminal zebra', 'terminal zebra czarny ekran', 'zebra tc21 nie startuje', 'zebra mc33 zawiesza się', 'terminal zebra restartuje się w kółko', 'fastboot mode zebra co to', 'jak zresetować terminal zebra', 'zebra tc52 boot loop', 'terminal zebra mruga logo', 'zebra nie ładuje systemu', 'terminal zebra utknął na logo', 'jak naprawić boot loop zebra', 'zebra mc93 nie włącza się']
+      keywords: [
+        // Główne frazy
+        'terminal zebra nie włącza się', 'zebra boot loop', 'zebra fastboot mode', 'terminal zebra zawiesza się na logo',
+        'zebra terminal wont turn on', 'zebra stuck on boot logo', 'zebra terminal black screen',
+        // Modele
+        'zebra tc21 nie włącza się', 'zebra tc26 boot loop', 'zebra tc52 zawiesza się', 'zebra tc57 fastboot',
+        'zebra mc33 nie startuje', 'zebra mc93 czarny ekran', 'zebra mc3300 boot loop', 'zebra ec50 nie włącza się',
+        // Objawy
+        'terminal zebra restartuje się w kółko', 'terminal zebra mruga logo', 'zebra terminal stuck fastboot',
+        'terminal zebra wibruje ale się nie włącza', 'terminal zebra utknął na logo zebra',
+        // Long tail - pytania
+        'jak wyjść z fastboot zebra', 'co zrobić gdy terminal zebra nie włącza się', 'jak naprawić boot loop zebra',
+        'dlaczego terminal zebra zawiesza się na logo', 'ile kosztuje naprawa terminala zebra boot loop',
+        // Long tail - rozwiązania
+        'recovery mode zebra krok po kroku', 'hard reset terminal zebra', 'factory reset zebra terminal',
+        'jak zresetować terminal zebra który nie startuje', 'flash firmware zebra terminal',
+        // Frazy branżowe
+        'terminal magazynowy zebra nie włącza się', 'terminal kurierski boot loop', 'terminal logistyczny awaria',
+        'terminal zebra wms nie startuje', 'terminal zebra dhl nie włącza się',
+        // Frazy angielskie
+        'zebra terminal boot loop fix', 'zebra tc21 wont boot', 'zebra mc33 stuck on logo',
+        'zebra fastboot exit', 'zebra terminal recovery mode', 'zebra android boot loop'
+      ]
     },
     content: `
 ## Problem: Terminal Zebra nie włącza się lub zawiesza na logo
@@ -1913,7 +2040,31 @@ Zależy od przyczyny: softwareowy (flash firmware): 150-250 zł, sprzętowy (pam
     seo: {
       metaTitle: 'Skaner terminala Zebra nie działa - diagnostyka i naprawa [2025]',
       metaDescription: 'Skaner w terminalu Zebra TC21, TC52, MC33, MC93 nie skanuje? Brak wiązki, nie czyta kodów 2D/QR? Diagnostyka krok po kroku: DataWedge, czyszczenie okienka, SE4710/SE4750. Kiedy do serwisu?',
-      keywords: ['skaner zebra nie działa', 'dlaczego skaner zebra nie skanuje', 'terminal zebra skaner problem', 'datawedge konfiguracja', 'SE4710 nie czyta kodów', 'naprawa skanera zebra', 'TC21 skaner nie działa', 'MC33 problem ze skanerem', 'terminal zebra nie czyta kodów kreskowych', 'zebra tc52 skaner nie działa', 'brak wiązki lasera zebra', 'skaner zebra nie świeci', 'terminal zebra nie skanuje qr', 'jak włączyć skaner w terminalu zebra', 'datawedge skaner nie działa', 'zebra mc93 skaner problem', 'okienko skanera zebra wymiana', 'kalibracja skanera terminal zebra', 'skaner zebra miga ale nie skanuje', 'terminal zebra skaner włączanie']
+      keywords: [
+        // Główne frazy
+        'skaner zebra nie działa', 'terminal zebra skaner nie skanuje', 'skaner terminala zebra problem',
+        'zebra scanner not working', 'zebra terminal scanner problem', 'zebra barcode scanner not reading',
+        // Modele
+        'zebra tc21 skaner nie działa', 'zebra tc52 skaner problem', 'zebra mc33 skaner nie skanuje',
+        'zebra mc93 skaner nie czyta', 'zebra tc57 skaner awaria', 'zebra ec50 skaner nie działa',
+        // Moduły skanera
+        'se4710 nie czyta kodów', 'se4750 problem', 'se4720 nie działa', 'se55 skaner awaria',
+        // Objawy
+        'skaner zebra nie świeci', 'brak wiązki lasera zebra', 'skaner zebra miga ale nie skanuje',
+        'terminal zebra nie czyta kodów kreskowych', 'terminal zebra nie skanuje qr',
+        // Long tail - pytania
+        'dlaczego skaner zebra nie skanuje', 'jak włączyć skaner w terminalu zebra', 'jak naprawić skaner zebra',
+        'ile kosztuje naprawa skanera zebra', 'gdzie naprawić skaner terminala zebra',
+        // Long tail - rozwiązania
+        'datawedge konfiguracja skanera', 'datawedge skaner nie działa', 'czyszczenie okienka skanera zebra',
+        'kalibracja skanera terminal zebra', 'wymiana okienka skanera zebra', 'test skanera zebra',
+        // Frazy branżowe
+        'skaner magazynowy zebra awaria', 'terminal wms skaner nie działa', 'skaner kurierski zebra problem',
+        'terminal logistyczny skaner nie czyta', 'skaner zebra inwentaryzacja problem',
+        // Frazy angielskie
+        'zebra scanner repair', 'zebra terminal scanner not scanning', 'zebra barcode reader fix',
+        'zebra datawedge scanner configuration', 'zebra se4710 replacement'
+      ]
     },
     content: `
 ## Problem: Skaner w terminalu Zebra nie działa
@@ -2286,7 +2437,32 @@ Przy normalnym użytkowaniu **5-7 lat**. Żywotność zależy od liczby skanowa�
     seo: {
       metaTitle: 'Problemy z WiFi i Bluetooth w terminalu Zebra [2025]',
       metaDescription: 'Terminal Zebra TC21, TC52, MC33 nie łączy się z WiFi? Bluetooth nie paruje z drukarką? Konfiguracja WiFi krok po kroku, roaming 802.11r/k/v, parowanie urządzeń. Rozwiązania problemów z łącznością.',
-      keywords: ['terminal zebra wifi nie działa', 'zebra bluetooth nie paruje', 'problemy z wifi zebra', 'jak skonfigurować wifi w terminalu zebra', 'roaming wifi 802.11r', 'TC21 wifi problem', 'MC33 bluetooth nie łączy', 'terminal zebra nie widzi sieci wifi', 'zebra tc52 wifi nie działa', 'zebra bluetooth drukarka parowanie', 'terminal zebra rozłącza się z wifi', 'jak połączyć terminal zebra z wifi', 'zebra mc93 bluetooth problem', 'terminal zebra wifi słaby sygnał', 'konfiguracja wifi terminala zebra', 'zebra wifi roaming problem', 'terminal zebra nie łączy z drukarką bluetooth', 'jak sparować terminal zebra', 'zebra tc21 bluetooth nie działa', 'problemy z łącznością terminal zebra']
+      keywords: [
+        // Główne frazy WiFi
+        'terminal zebra wifi nie działa', 'zebra terminal no wifi', 'terminal zebra nie łączy się z wifi',
+        'terminal zebra wifi problem', 'zebra wifi not connecting', 'zebra terminal wireless issues',
+        // Główne frazy Bluetooth
+        'zebra bluetooth nie paruje', 'terminal zebra bluetooth problem', 'zebra terminal bluetooth not pairing',
+        'zebra bluetooth drukarka parowanie', 'terminal zebra bluetooth nie łączy',
+        // Modele
+        'zebra tc21 wifi nie działa', 'zebra tc52 wifi problem', 'zebra mc33 bluetooth nie łączy',
+        'zebra mc93 wifi rozłącza się', 'zebra tc57 bluetooth problem', 'zebra ec50 wifi nie działa',
+        // Objawy
+        'terminal zebra rozłącza się z wifi', 'terminal zebra wifi słaby sygnał', 'zebra wifi roaming problem',
+        'terminal zebra nie widzi sieci wifi', 'zebra bluetooth ciągle się rozłącza',
+        // Long tail - pytania
+        'jak skonfigurować wifi w terminalu zebra', 'jak połączyć terminal zebra z wifi',
+        'jak sparować terminal zebra z drukarką', 'dlaczego terminal zebra traci wifi',
+        // Long tail - rozwiązania
+        'roaming wifi 802.11r zebra', '802.11k konfiguracja zebra', 'zebra wifi enterprise konfiguracja',
+        'konfiguracja wifi terminala zebra', 'parowanie bluetooth zebra krok po kroku',
+        // Frazy branżowe
+        'terminal magazynowy zebra wifi problem', 'terminal wms wifi rozłącza się',
+        'terminal kurierski bluetooth drukarka', 'terminal logistyczny wifi nie działa',
+        // Frazy angielskie
+        'zebra terminal wifi configuration', 'zebra bluetooth pairing guide', 'zebra wifi roaming setup',
+        'zebra terminal wireless troubleshooting', 'zebra wifi enterprise setup'
+      ]
     },
     content: `
 ## Problem: Łączność bezprzewodowa w terminalu Zebra
@@ -2686,7 +2862,29 @@ Można mieć **7 aktywnych połączeń** Bluetooth jednocześnie (ograniczenie p
     seo: {
       metaTitle: 'Reset terminala Zebra - Factory vs Enterprise Reset [2025]',
       metaDescription: 'Jak zresetować terminal Zebra TC21, TC52, MC33, MC93? Factory Reset vs Enterprise Reset - która opcja kiedy? Instrukcja krok po kroku. Hard reset, Recovery Mode. Co się usuwa, a co zostaje?',
-      keywords: ['factory reset zebra', 'jak zresetować terminal zebra', 'enterprise reset zebra różnica', 'TC21 reset do ustawień fabrycznych', 'MC33 factory reset', 'hard reset terminal zebra', 'recovery mode reset', 'terminal zebra przywracanie ustawień fabrycznych', 'zebra tc52 factory reset', 'jak wymazać dane z terminala zebra', 'reset terminala zebra krok po kroku', 'zebra mc93 hard reset', 'enterprise reset co to jest', 'terminal zebra reset przez przyciski', 'jak wejść w recovery mode zebra', 'zebra tc21 nie resetuje się', 'różnica factory enterprise reset zebra', 'wyczyścić terminal zebra', 'reset zebra bez hasła', 'terminal zebra reset kombinacja klawiszy']
+      keywords: [
+        // Główne frazy
+        'factory reset zebra', 'enterprise reset zebra', 'reset terminala zebra', 'hard reset terminal zebra',
+        'zebra factory reset', 'zebra terminal reset', 'zebra hard reset',
+        // Modele
+        'zebra tc21 factory reset', 'zebra tc26 reset', 'zebra tc52 hard reset', 'zebra tc57 reset',
+        'zebra mc33 factory reset', 'zebra mc93 hard reset', 'zebra mc3300 reset', 'zebra ec50 reset',
+        // Long tail - pytania
+        'jak zresetować terminal zebra', 'jak wejść w recovery mode zebra', 'jak wymazać dane z terminala zebra',
+        'różnica factory enterprise reset zebra', 'który reset wybrać zebra', 'reset zebra bez hasła',
+        // Long tail - rozwiązania
+        'terminal zebra reset przez przyciski', 'terminal zebra reset kombinacja klawiszy', 'recovery mode reset zebra',
+        'reset terminala zebra krok po kroku', 'enterprise reset co zostaje', 'factory reset co usuwa zebra',
+        // Frazy branżowe
+        'reset terminala magazynowego zebra', 'reset terminala kurierskiego', 'terminal wms reset',
+        'terminal zebra sprzedaż reset', 'przygotowanie terminala zebra do oddania',
+        // Frazy angielskie
+        'zebra terminal factory reset guide', 'zebra enterprise reset vs factory reset',
+        'how to reset zebra terminal', 'zebra tc21 recovery mode', 'zebra hard reset buttons',
+        // Problemy
+        'terminal zebra nie resetuje się', 'zebra reset nie działa', 'terminal zebra zawiesza się podczas resetu',
+        'reset zebra trwa długo', 'terminal zebra po resecie nie startuje'
+      ]
     },
     content: `
 ## Kiedy potrzebujesz resetu?
@@ -2980,7 +3178,31 @@ Upewnij się że wykonujesz procedurę prawidłowo: najpierw **Restart** z menu 
     seo: {
       metaTitle: 'Kody błędów terminala Zebra - LED, komunikaty [2025]',
       metaDescription: 'Co oznacza migająca dioda LED na terminalu Zebra TC21, TC52, MC33, MC93? Czerwona, pomarańczowa, zielona - znaczenie. Komunikaty błędów i rozwiązania. Kompletny przewodnik diagnostyczny.',
-      keywords: ['kody błędów zebra', 'co oznacza dioda LED terminal zebra', 'error codes zebra TC21', 'troubleshooting terminal zebra', 'migająca dioda zebra', 'komunikaty błędów zebra', 'diagnostyka terminala zebra', 'czerwona dioda terminal zebra', 'terminal zebra miga na czerwono', 'zebra tc21 czerwona dioda', 'co oznacza pomarańczowa dioda zebra', 'terminal zebra błąd baterii', 'zebra mc33 kody błędów', 'dioda ładowania terminal zebra', 'terminal zebra error message', 'jak zdiagnozować terminal zebra', 'zebra tc52 troubleshooting', 'terminal zebra nie ładuje dioda', 'znaczenie diod LED zebra', 'zebra mc93 diagnostyka błędów']
+      keywords: [
+        // Główne frazy
+        'kody błędów zebra', 'terminal zebra dioda LED', 'zebra error codes', 'komunikaty błędów terminal zebra',
+        'zebra terminal LED meaning', 'zebra diagnostic codes', 'zebra terminal troubleshooting',
+        // Modele
+        'zebra tc21 kody błędów', 'zebra tc52 dioda miga', 'zebra mc33 error codes',
+        'zebra mc93 diagnostyka', 'zebra tc57 led meaning', 'zebra ec50 kody błędów',
+        // Kolory diod
+        'terminal zebra czerwona dioda', 'zebra pomarańczowa dioda znaczenie', 'zebra zielona dioda miga',
+        'terminal zebra miga na czerwono', 'zebra amber led', 'zebra red led blinking',
+        // Long tail - pytania
+        'co oznacza dioda LED terminal zebra', 'dlaczego terminal zebra miga na czerwono',
+        'co oznacza pomarańczowa dioda zebra', 'jak zdiagnozować terminal zebra',
+        // Long tail - rozwiązania
+        'diagnostyka terminala zebra krok po kroku', 'jak odczytać kody błędów zebra',
+        'device diagnostic tool zebra', 'zebra terminal test mode', 'zebra self test',
+        // Konkretne błędy
+        'terminal zebra błąd baterii', 'terminal zebra nie ładuje dioda', 'zebra overheat error',
+        'zebra battery low warning', 'zebra system error message', 'zebra android crash',
+        // Frazy branżowe
+        'terminal magazynowy zebra diagnostyka', 'terminal wms kody błędów', 'terminal kurierski zebra error',
+        // Frazy angielskie
+        'zebra terminal error troubleshooting', 'zebra LED indicator guide', 'zebra terminal diagnostic mode',
+        'zebra tc21 led codes', 'zebra mc33 error meaning'
+      ]
     },
     content: `
 ## Jak czytać sygnały terminala Zebra?
@@ -3255,7 +3477,31 @@ Nie, to normalne. Nowsze modele (MC94) mają zielony laser - jest 7x bardziej wi
     seo: {
       metaTitle: 'DataWedge - konfiguracja skanera Zebra krok po kroku [2025]',
       metaDescription: 'Skaner Zebra skanuje ale dane nie trafiają do aplikacji? Kompletny poradnik DataWedge: tworzenie profili, Keystroke Output, Intent, symbologie. Enter/Tab po skanie. TC21, TC52, MC33, MC93.',
-      keywords: ['datawedge konfiguracja', 'datawedge zebra', 'skaner zebra nie wysyła danych', 'keystroke output zebra', 'datawedge profile', 'TC21 datawedge', 'MC33 konfiguracja skanera', 'datawedge intent', 'jak skonfigurować datawedge', 'datawedge enter po skanie', 'terminal zebra skaner nie wysyła do aplikacji', 'datawedge symbologie włączanie', 'zebra tc52 datawedge', 'datawedge tworzenie profilu', 'skaner zebra dane nie trafiają', 'datawedge tab po skanie', 'konfiguracja skanera terminal zebra', 'datawedge scanner input', 'zebra mc93 datawedge konfiguracja', 'jak włączyć skaner w datawedge', 'datawedge basic data formatting', 'terminal zebra skaner do excela']
+      keywords: [
+        // Główne frazy
+        'datawedge konfiguracja', 'datawedge zebra', 'datawedge setup', 'konfiguracja skanera zebra',
+        'zebra datawedge tutorial', 'datawedge configuration guide', 'zebra scanner setup',
+        // Modele
+        'datawedge tc21', 'datawedge tc52', 'datawedge mc33', 'datawedge mc93',
+        'datawedge tc57', 'datawedge ec50', 'datawedge tc58',
+        // Funkcje DataWedge
+        'datawedge profile', 'datawedge keystroke output', 'datawedge intent', 'datawedge symbologie',
+        'datawedge enter po skanie', 'datawedge tab po skanie', 'datawedge basic data formatting',
+        // Long tail - problemy
+        'skaner zebra nie wysyła danych', 'terminal zebra skaner nie wysyła do aplikacji',
+        'datawedge skaner nie działa', 'skaner zebra dane nie trafiają', 'datawedge nie widzi aplikacji',
+        // Long tail - rozwiązania
+        'jak skonfigurować datawedge', 'datawedge tworzenie profilu', 'jak włączyć skaner w datawedge',
+        'datawedge scanner input konfiguracja', 'datawedge symbologie włączanie',
+        // Zastosowania
+        'terminal zebra skaner do excela', 'datawedge wms', 'datawedge sap', 'datawedge erp',
+        'datawedge konfiguracja dla magazynu', 'datawedge aplikacja kurierska',
+        // Frazy angielskie
+        'datawedge configuration zebra', 'datawedge profile setup', 'datawedge keystroke output setup',
+        'zebra datawedge intent output', 'datawedge barcode scanner configuration',
+        // Zaawansowane
+        'datawedge api', 'datawedge adb konfiguracja', 'datawedge import export profilu'
+      ]
     },
     content: `
 ## Czym jest DataWedge?
@@ -3497,7 +3743,28 @@ Minimalnie. DataWedge działa pasywnie i aktywuje się tylko podczas skanowania.
     seo: {
       metaTitle: 'Skaner Zebra nie skanuje - diagnostyka i rozwiązania [2025]',
       metaDescription: 'Skaner Zebra nie czyta kodów? Kompletny poradnik: sprawdź zasilanie, kabel, okienko, konfigurację. Serie LS, DS, LI. Krok po kroku.',
-      keywords: ["skaner zebra nie skanuje","skaner zebra nie działa","zebra ds2208 nie czyta","zebra ls2208 problemy","naprawa skanera zebra","skaner kodów kreskowych nie działa"]
+      keywords: [
+        // Główne frazy
+        'skaner zebra nie skanuje', 'skaner zebra nie działa', 'zebra scanner not working',
+        'skaner kodów kreskowych nie działa', 'zebra barcode scanner problem', 'naprawa skanera zebra',
+        // Modele
+        'zebra ds2208 nie czyta', 'zebra ds4608 nie skanuje', 'zebra ls2208 problemy',
+        'zebra li4278 nie działa', 'zebra ds8178 problem', 'zebra ds3678 nie skanuje',
+        // Objawy
+        'skaner zebra nie świeci', 'skaner zebra miga ale nie skanuje', 'skaner zebra brak wiązki',
+        'skaner zebra nie czyta kodów', 'skaner zebra piszczy ale nie skanuje',
+        // Long tail - pytania
+        'dlaczego skaner zebra nie skanuje', 'jak naprawić skaner zebra', 'co zrobić gdy skaner zebra nie działa',
+        'ile kosztuje naprawa skanera zebra', 'gdzie naprawić skaner zebra',
+        // Long tail - rozwiązania
+        'reset skanera zebra', 'konfiguracja skanera zebra', 'czyszczenie okienka skanera zebra',
+        'skaner zebra factory reset', 'skaner zebra test mode',
+        // Frazy branżowe
+        'skaner magazynowy zebra problem', 'skaner kasy nie skanuje', 'skaner apteka zebra nie działa',
+        // Frazy angielskie
+        'zebra scanner not reading barcodes', 'zebra scanner troubleshooting', 'zebra scanner repair',
+        'zebra ds2208 fix', 'zebra scanner diagnostic'
+      ]
     },
     content: `
 ## Dlaczego skaner Zebra przestał skanować?
@@ -3889,7 +4156,28 @@ Zależy od usterki:
     seo: {
       metaTitle: 'Parowanie skanera Bluetooth Zebra - kompletny poradnik [2025]',
       metaDescription: 'Jak sparować skaner Zebra Bluetooth? Instrukcja: podstawka CR0078, komputer, iOS, Android. LI4278, DS8178, DS3678. Tryby HID, SPP.',
-      keywords: ["parowanie skanera zebra","zebra bluetooth łączenie","sparować skaner","li4278 parowanie","ds8178 bluetooth","ds3678 cradle","cr0078"]
+      keywords: [
+        // Główne frazy
+        'parowanie skanera zebra', 'sparowanie skanera bluetooth', 'zebra bluetooth pairing',
+        'jak sparować skaner zebra', 'zebra scanner bluetooth setup', 'skaner bezprzewodowy zebra parowanie',
+        // Modele
+        'li4278 parowanie', 'ds8178 bluetooth', 'ds3678 parowanie', 'ds2278 bluetooth',
+        'ds6878 parowanie', 'li2278 bluetooth setup', 'cs4070 parowanie',
+        // Podstawki/Cradle
+        'cr0078 parowanie', 'stb3678 konfiguracja', 'podstawka zebra parowanie',
+        'cradle zebra bluetooth', 'zebra charging cradle setup',
+        // Tryby
+        'zebra hid mode', 'zebra spp mode', 'zebra ssi mode', 'zebra keyboard wedge',
+        // Long tail - problemy
+        'skaner zebra nie paruje', 'skaner zebra bluetooth nie łączy', 'jak zresetować parowanie zebra',
+        'skaner zebra nie widzi podstawki', 'zebra bluetooth connection lost',
+        // Long tail - rozwiązania
+        'zebra bluetooth łączenie krok po kroku', 'parowanie skanera z komputerem', 'parowanie skanera z tabletem',
+        'zebra scanner pair with android', 'zebra scanner pair with iphone',
+        // Frazy angielskie
+        'zebra scanner bluetooth pairing guide', 'how to pair zebra scanner', 'zebra cradle pairing',
+        'zebra li4278 pair with cradle', 'zebra ds8178 bluetooth setup'
+      ]
     },
     content: `
 ## Jak sparować skaner Bluetooth Zebra?
@@ -4334,7 +4622,29 @@ Domyślnie po ~30 minutach nieaktywności skaner przechodzi w tryb uśpienia. Mo
     seo: {
       metaTitle: 'Konfiguracja skanera Zebra kodami kreskowymi - Enter, Tab, QR [2025]',
       metaDescription: 'Gotowe kody konfiguracyjne do zeskanowania! Dodaj Enter/Tab po skanowaniu, włącz QR/DataMatrix, zmień klawiaturę na polską. DS2208, DS4608, LI2208, LI4278.',
-      keywords: ["konfiguracja skanera zebra", "enter po skanowaniu zebra", "skaner zebra sufiks tab", "kody programujące zebra ds2208", "jak dodać enter do skanera", "skaner zebra polska klawiatura", "włączyć qr code zebra", "123scan konfiguracja", "ds4608 konfiguracja", "li2208 programowanie", "kody kreskowe konfiguracyjne zebra"]
+      keywords: [
+        // Główne frazy
+        'konfiguracja skanera zebra', 'programowanie skanera zebra', 'zebra scanner configuration',
+        'kody programujące zebra', 'zebra barcode programming', 'ustawienia skanera zebra',
+        // Enter/Tab/Sufiksy
+        'enter po skanowaniu zebra', 'skaner zebra sufiks tab', 'jak dodać enter do skanera',
+        'skaner zebra tab po skanie', 'zebra scanner add enter', 'zebra scanner suffix settings',
+        // Klawiatura
+        'skaner zebra polska klawiatura', 'zebra keyboard country poland', 'skaner zebra polskie znaki',
+        // Symbologie
+        'włączyć qr code zebra', 'zebra scanner enable datamatrix', 'symbologie skanera zebra',
+        // Modele
+        'kody programujące zebra ds2208', 'ds4608 konfiguracja', 'li2208 programowanie',
+        'ds2278 ustawienia', 'ls2208 konfiguracja', 'ds8178 programming',
+        // Narzędzia
+        '123scan konfiguracja', '123scan download', 'zebra 123scan poradnik',
+        // Long tail
+        'kody kreskowe konfiguracyjne zebra', 'jak zaprogramować skaner zebra', 'skaner zebra reset do ustawień fabrycznych',
+        'skaner zebra gotowe kody do zeskanowania', 'jak zmienić ustawienia skanera zebra',
+        // Frazy angielskie
+        'zebra scanner programming barcodes', 'zebra scanner enter suffix', 'zebra 123scan tutorial',
+        'zebra scanner factory reset barcode', 'zebra scanner configuration guide'
+      ]
     },
     content: `
 ## Programowanie skanera Zebra kodami kreskowymi
@@ -4499,7 +4809,25 @@ Serwisujemy wszystkie modele skanerów: DS2208, DS4608, DS8178, LI2208, LI4278, 
     seo: {
       metaTitle: 'Oznaczenia skanerów Zebra - HD, SR, XR, ER, KD [2025]',
       metaDescription: 'Co oznacza HD, SR, XR, ER, KD w skanerach Zebra? Przewodnik po typach optyki.',
-      keywords: ["zebra hd sr xr","oznaczenia skanerów zebra","co oznacza sr skaner","optyka skanera zebra"]
+      keywords: [
+        // Główne frazy
+        'oznaczenia skanerów zebra', 'zebra hd sr xr er', 'zebra scanner model codes',
+        'co oznacza sr skaner', 'optyka skanera zebra', 'zebra scanner naming convention',
+        // Konkretne oznaczenia
+        'zebra hd high density', 'zebra sr standard range', 'zebra xr extended range',
+        'zebra er extended range', 'zebra kd kiosk', 'zebra hc healthcare',
+        'zebra dp digimarc', 'zebra wb white body',
+        // Porównania
+        'zebra sr vs hd', 'ds2208 sr vs hd', 'ds4608 sr czy hd', 'jaka optyka skanera zebra',
+        'który skaner do małych kodów', 'który skaner do dużych odległości',
+        // Long tail
+        'co oznaczają litery w skanerach zebra', 'jak wybrać optykę skanera zebra',
+        'zebra ds2208-sr co to znaczy', 'zebra ds4608-hd do czego',
+        'skaner zebra do małych etykiet', 'skaner zebra daleki zasięg',
+        // Frazy angielskie
+        'zebra scanner hd vs sr', 'zebra scanner optics guide', 'zebra scanner model comparison',
+        'zebra high density scanner', 'zebra extended range scanner'
+      ]
     },
     content: `
 ## Co oznaczają litery w modelach skanerów Zebra?
@@ -4692,7 +5020,29 @@ Dane z oficjalnych PRG (Product Reference Guide) Zebra:
     seo: {
       metaTitle: 'Skaner Zebra nie czyta QR i DataMatrix - włączanie symbologii [2025]',
       metaDescription: 'Skaner Zebra nie odczytuje QR, DataMatrix, PDF417? Sprawdź czy to laser (LS) czy imager (DS). Tabela domyślnych ustawień symbologii. Konfiguracja dla PLMVS, kodów z telefonu. Krok po kroku.',
-      keywords: ["skaner nie czyta qr","zebra datamatrix","włączyć qr zebra","skaner plmvs apteka","skaner zebra nie czyta kodów z telefonu","jak włączyć datamatrix w skanerze zebra","skaner nie odczytuje qr","zebra ds2208 qr code","symbologie 2d skaner zebra","skaner apteka datamatrix","gs1 datamatrix włączyć","skaner zebra kody 2d nie działają","czy laser czyta qr","ls2208 vs ds2208 kody 2d","skaner zebra pdf417","jak skanować qr z telefonu zebra","skaner nie czyta kodów z ekranu","aztec code zebra","maxicode skaner zebra","włączyć symbologie w 123scan","skaner zebra kody qr ustawienia","datamatrix leki plmvs skaner"]
+      keywords: [
+        // Główne frazy
+        'skaner zebra nie czyta qr', 'skaner zebra datamatrix', 'zebra scanner qr code',
+        'symbologie 2d skaner zebra', 'zebra 2d barcode scanner', 'skaner zebra kody 2d',
+        // Konkretne symbologie
+        'skaner zebra pdf417', 'aztec code zebra', 'maxicode skaner zebra', 'gs1 datamatrix włączyć',
+        'qr code zebra enable', 'zebra datamatrix gs1',
+        // Modele
+        'zebra ds2208 qr code', 'ds4608 datamatrix', 'ds2278 qr nie działa',
+        'ds8178 symbologie 2d', 'ls2208 vs ds2208 kody 2d', 'czy laser czyta qr',
+        // Long tail - problemy
+        'skaner zebra nie czyta kodów z telefonu', 'skaner nie czyta kodów z ekranu',
+        'skaner zebra kody 2d nie działają', 'skaner nie odczytuje qr', 'dlaczego skaner nie czyta qr',
+        // Long tail - rozwiązania
+        'jak włączyć datamatrix w skanerze zebra', 'włączyć qr zebra', 'włączyć symbologie w 123scan',
+        'skaner zebra kody qr ustawienia', 'jak skanować qr z telefonu zebra',
+        // Zastosowania branżowe
+        'skaner plmvs apteka', 'datamatrix leki plmvs skaner', 'skaner apteka datamatrix',
+        'skaner magazyn qr code', 'skaner produkcja datamatrix',
+        // Frazy angielskie
+        'zebra scanner enable qr', 'zebra scanner datamatrix setup', 'zebra 2d symbology configuration',
+        'zebra scanner not reading qr code', 'zebra scanner 2d barcode enable'
+      ]
     },
     content: `
 ## Skaner Zebra nie czyta kodów 2D — kompletny poradnik
@@ -4963,7 +5313,27 @@ W 123Scan: podłącz skaner → zakładka "Symbologies" → widoczny status każ
     seo: {
       metaTitle: 'Porównanie skanerów Zebra - który wybrać? DS2208 vs DS4608 [2025]',
       metaDescription: 'DS2208 vs DS4608 vs DS8178 vs DS3678? Kompletne porównanie skanerów Zebra 2025: specyfikacje, zasięgi, IP rating, ceny. Który model do magazynu, apteki, produkcji? Oficjalne dane z manuali.',
-      keywords: ["porównanie skanerów zebra","ds2208 vs ds4608","najlepszy skaner zebra","jaki skaner do magazynu","skaner zebra do apteki","ds2208 czy ds4608","skaner bezprzewodowy zebra","skaner kodów kreskowych ranking","zebra ds8178 opinie","skaner 2d czy laserowy","skaner zebra cena","który skaner zebra wybrać","skaner do produkcji przemysłowej","skaner kodów qr zebra","ds3678 vs ds8178","skaner z bluetooth zebra","najlepszy skaner do kasy","skaner kodów kreskowych do sklepu","skaner zebra ip67","skaner przewodowy czy bezprzewodowy","ds2208-sr vs ds2208-hd","skaner do logistyki zebra","skaner zebra seria ds","porównanie cen skanerów zebra","ds2278 vs ds3678","ds2278 czy ds3678 do magazynu","skaner bezprzewodowy do magazynu zebra","ds2278 vs ds3678 porównanie","jaki skaner bezprzewodowy do magazynu"]
+      keywords: [
+        // Główne frazy
+        'porównanie skanerów zebra', 'który skaner zebra wybrać', 'zebra scanner comparison',
+        'najlepszy skaner zebra', 'skaner kodów kreskowych ranking', 'zebra scanner best model',
+        // Porównania modeli
+        'ds2208 vs ds4608', 'ds2208 czy ds4608', 'ds3678 vs ds8178', 'ds2278 vs ds3678',
+        'ds2278 vs ds3678 porównanie', 'ds2278 czy ds3678 do magazynu', 'ds2208-sr vs ds2208-hd',
+        // Zastosowania
+        'jaki skaner do magazynu', 'skaner zebra do apteki', 'najlepszy skaner do kasy',
+        'skaner kodów kreskowych do sklepu', 'skaner do produkcji przemysłowej', 'skaner do logistyki zebra',
+        'skaner bezprzewodowy do magazynu zebra', 'jaki skaner bezprzewodowy do magazynu',
+        // Cechy
+        'skaner bezprzewodowy zebra', 'skaner z bluetooth zebra', 'skaner zebra ip67',
+        'skaner przewodowy czy bezprzewodowy', 'skaner 2d czy laserowy', 'skaner kodów qr zebra',
+        // Ceny i opinie
+        'skaner zebra cena', 'porównanie cen skanerów zebra', 'zebra ds8178 opinie',
+        'skaner zebra seria ds', 'skaner zebra 2024 2025',
+        // Frazy angielskie
+        'zebra ds2208 vs ds4608 comparison', 'best zebra scanner for warehouse',
+        'zebra scanner buying guide', 'zebra wireless scanner comparison', 'zebra scanner review'
+      ]
     },
     content: `
 ## Jak wybrać skaner Zebra? Kompletny przewodnik
@@ -5464,7 +5834,30 @@ Do **110 000 skanów** przy 60 skanach/minutę (oficjalne dane Zebra).
     seo: {
       metaTitle: 'Bateria skanera Zebra - ładowanie, problemy, wymiana [2025]',
       metaDescription: 'Skaner Zebra nie ładuje się? Kompletny poradnik: specyfikacje baterii NiMH/Li-Ion, temperatura ładowania, rekondycjonowanie, wymiana. LI4278, DS2278, DS8178, DS3678. Oficjalne dane z manuali Zebra.',
-      keywords: ["bateria skanera zebra","skaner nie ładuje","li4278 bateria","wymiana baterii skanera","ds2278 bateria","ds8178 bateria","ds3678 bateria","rekondycjonowanie baterii zebra","stacja dokująca zebra","powerprecision bateria","nimh vs li-ion skaner","skaner zebra nie ładuje się w stacji","jak wymienić baterię w skanerze zebra","ile trzyma bateria skanera zebra","skaner zebra szybko się rozładowuje","btry-ls42raa0e-00 bateria","btry-ds81eab0e-00 cena","temperatura ładowania baterii skanera","czy można zostawić skaner w stacji na noc","bateria skanera bluetooth zebra","jak długo ładuje się skaner zebra","puchnąca bateria skanera co robić","part number bateria zebra li4278","skaner zebra miga na czerwono bateria"]
+      keywords: [
+        // Główne frazy
+        'bateria skanera zebra', 'skaner zebra nie ładuje', 'wymiana baterii skanera zebra',
+        'zebra scanner battery', 'zebra battery replacement', 'skaner zebra bateria problem',
+        // Modele
+        'li4278 bateria', 'ds2278 bateria', 'ds8178 bateria', 'ds3678 bateria',
+        'ls2208 bateria', 'cs4070 bateria', 'li2208 bateria wymiana',
+        // Part numbers
+        'btry-ls42raa0e-00 bateria', 'btry-ds81eab0e-00 cena', 'part number bateria zebra li4278',
+        'zebra battery part number', 'oryginalna bateria zebra',
+        // Long tail - problemy
+        'skaner zebra nie ładuje się w stacji', 'skaner zebra szybko się rozładowuje',
+        'skaner zebra miga na czerwono bateria', 'puchnąca bateria skanera co robić',
+        'bateria skanera bluetooth zebra', 'skaner zebra nie trzyma baterii',
+        // Long tail - rozwiązania
+        'jak wymienić baterię w skanerze zebra', 'ile trzyma bateria skanera zebra',
+        'jak długo ładuje się skaner zebra', 'rekondycjonowanie baterii zebra',
+        'temperatura ładowania baterii skanera', 'czy można zostawić skaner w stacji na noc',
+        // Techniczne
+        'nimh vs li-ion skaner', 'powerprecision bateria', 'stacja dokująca zebra',
+        // Frazy angielskie
+        'zebra scanner battery not charging', 'zebra scanner battery replacement guide',
+        'zebra li4278 battery life', 'zebra scanner charging problems'
+      ]
     },
     content: `
 ## Bateria skanera Zebra — kompletny poradnik techniczny
@@ -5859,7 +6252,28 @@ W 123Scan: Scanner → Battery → Battery Statistics
     seo: {
       metaTitle: 'Naprawa skanera Zebra - kiedy warto naprawiać, kiedy wymienić? [2025]',
       metaDescription: 'Czy opłaca się naprawiać skaner Zebra? Kompletna analiza kosztów: okienko, kabel, trigger, moduł, płyta. Macierz decyzyjna dla DS2208, DS4608, DS8178, DS3678, LI4278. Gwarancje i modele EOL.',
-      keywords: ["naprawa skanera zebra","czy warto naprawiać skaner","koszty naprawy skanera","ds2208 naprawa koszt","ds4608 serwis","ds8178 wymiana modułu","ds3678 naprawa","li4278 bateria wymiana","skaner zebra gwarancja","skaner zebra eol","wymiana okienka skaner zebra","trigger skaner zebra","moduł skanujący zebra cena","płyta główna skaner zebra","serwis skanerów zebra wrocław","ile kosztuje naprawa skanera","skaner zebra zepsuty co robić","opłaca się naprawiać skaner kodów kreskowych","cena naprawy skanera zebra 2025","skaner zebra nie działa naprawa","wymiana okienka ds2208 cena","skaner ds4608 nie skanuje naprawa","ls2208 wymiana kabla","ds8178 serwis koszt","skaner zebra po upadku nie działa","gdzie naprawić skaner zebra","autoryzowany serwis zebra polska","naprawa skanera kodów kreskowych cena","skaner zebra części zamienne","tumble test skaner zebra"]
+      keywords: [
+        // Główne frazy
+        'naprawa skanera zebra', 'serwis skanera zebra', 'zebra scanner repair',
+        'ile kosztuje naprawa skanera', 'cena naprawy skanera zebra', 'gdzie naprawić skaner zebra',
+        // Decyzja naprawa vs wymiana
+        'czy warto naprawiać skaner', 'opłaca się naprawiać skaner kodów kreskowych',
+        'skaner zebra zepsuty co robić', 'naprawa czy wymiana skanera',
+        // Modele
+        'ds2208 naprawa koszt', 'ds4608 serwis', 'ds8178 wymiana modułu', 'ds3678 naprawa',
+        'li4278 bateria wymiana', 'ls2208 wymiana kabla', 'ds8178 serwis koszt',
+        // Konkretne naprawy
+        'wymiana okienka skaner zebra', 'wymiana okienka ds2208 cena', 'trigger skaner zebra',
+        'moduł skanujący zebra cena', 'płyta główna skaner zebra', 'skaner zebra po upadku nie działa',
+        // Gwarancja i EOL
+        'skaner zebra gwarancja', 'skaner zebra eol', 'skaner zebra części zamienne',
+        'autoryzowany serwis zebra polska', 'tumble test skaner zebra',
+        // Lokalizacje
+        'serwis skanerów zebra polska', 'naprawa skanera kodów kreskowych',
+        // Frazy angielskie
+        'zebra scanner repair cost', 'zebra scanner service center', 'zebra scanner warranty',
+        'zebra scanner repair vs replace', 'zebra scanner parts replacement'
+      ]
     },
     content: `
 ## Skaner Zebra się zepsuł — naprawiać czy wymienić?
@@ -6175,7 +6589,29 @@ Tak, przy naprawie flotowej (5+ skanerów) oferujemy rabaty 10-20%.
     seo: {
       metaTitle: 'Bateria Zebra TC58 nie wytrzymuje trasy kurierskiej – rozwiązania [2025]',
       metaDescription: 'Bateria TC58 szybko się rozładowuje? Poradnik dla kurierów DHL, InPost, DPD. Optymalizacja ustawień, bateria rozszerzona 7000mAh, Hot Swap w terenie. Sprawdzone rozwiązania od serwisu Zebra.',
-      keywords: ['bateria tc58 nie wytrzymuje całego dnia', 'terminal kurierski rozładowuje się w połowie trasy', 'jak przedłużyć czas pracy baterii tc58', 'zebra tc58 bateria szybko pada', 'ile godzin trzyma bateria tc58', 'wymiana baterii tc58 bez wyłączania hot swap', 'bateria rozszerzona 7000mah tc58 opinie', 'dlaczego terminal dhl się rozładowuje', 'tc58 bateria nie ładuje do 100 procent', 'jak sprawdzić zdrowie baterii tc58', 'bateria tc58 powerprecision cena', 'terminal inpost bateria nie trzyma', 'tc58 wyłącza się przy 20 procentach', 'optymalizacja baterii terminal kurierski', 'gdzie kupić baterię do tc58']
+      keywords: [
+        // Główne frazy
+        'bateria tc58 nie wytrzymuje', 'zebra tc58 bateria problem', 'tc58 battery life',
+        'terminal kurierski bateria', 'zebra tc58 battery drain', 'tc58 bateria szybko się rozładowuje',
+        // Long tail - problemy
+        'bateria tc58 nie wytrzymuje całego dnia', 'terminal kurierski rozładowuje się w połowie trasy',
+        'tc58 bateria nie ładuje do 100 procent', 'tc58 wyłącza się przy 20 procentach',
+        'dlaczego terminal dhl się rozładowuje', 'terminal inpost bateria nie trzyma',
+        // Long tail - rozwiązania
+        'jak przedłużyć czas pracy baterii tc58', 'optymalizacja baterii terminal kurierski',
+        'wymiana baterii tc58 bez wyłączania hot swap', 'jak sprawdzić zdrowie baterii tc58',
+        // Produkty
+        'bateria tc58 powerprecision cena', 'bateria rozszerzona 7000mah tc58 opinie',
+        'gdzie kupić baterię do tc58', 'bateria tc58 oryginalna', 'bateria tc58 zamiennik',
+        // Firmy kurierskie
+        'terminal dhl bateria', 'terminal inpost bateria problem', 'terminal dpd bateria nie trzyma',
+        'terminal ups bateria', 'terminal gls bateria rozładowuje się',
+        // Specyfikacje
+        'ile godzin trzyma bateria tc58', 'pojemność baterii tc58', 'tc58 4400mah vs 7000mah',
+        // Frazy angielskie
+        'zebra tc58 battery replacement', 'tc58 extended battery', 'zebra tc58 hot swap battery',
+        'tc58 battery optimization', 'zebra powerprecision battery'
+      ]
     },
     content: `
 ## Dlaczego bateria TC58 nie wytrzymuje całej trasy?
@@ -6498,7 +6934,29 @@ Tak, ale różnica jest minimalna:
     seo: {
       metaTitle: 'Skaner Zebra TC58 nie działa w trasie – szybka naprawa [2025]',
       metaDescription: 'Skaner TC58 przestał skanować w trakcie dostawy? Szybkie rozwiązania dla kurierów: reset, DataWedge, czyszczenie. Poradnik DHL, InPost, DPD. Napraw w 2 minuty!',
-      keywords: ['skaner tc58 przestał działać w trakcie trasy', 'terminal kurierski nie skanuje kodów kreskowych', 'jak zresetować skaner w tc58', 'tc58 skaner świeci ale nie czyta', 'dlaczego tc58 skanuje zły kod obok', 'datawedge tc58 nie wysyła danych do aplikacji', 'terminal dhl skaner nie reaguje na przycisk', 'tc58 wolno skanuje paczki', 'jak naprawić skaner tc58 w terenie', 'se4720 tc58 nie działa po upadku', 'terminal inpost skaner przestał działać', 'tc58 skaner wymaga częstych restartów', 'ile kosztuje naprawa skanera tc58', 'tc58 device diagnostic tool test skanera', 'recovery mode tc58 problem ze skanerem']
+      keywords: [
+        // Główne frazy
+        'skaner tc58 nie działa', 'tc58 skaner problem', 'tc58 scanner not working',
+        'terminal kurierski skaner awaria', 'zebra tc58 barcode scanner', 'tc58 nie skanuje',
+        // Long tail - problemy
+        'skaner tc58 przestał działać w trakcie trasy', 'terminal kurierski nie skanuje kodów kreskowych',
+        'tc58 skaner świeci ale nie czyta', 'dlaczego tc58 skanuje zły kod obok',
+        'tc58 wolno skanuje paczki', 'tc58 skaner wymaga częstych restartów',
+        // Long tail - rozwiązania
+        'jak zresetować skaner w tc58', 'jak naprawić skaner tc58 w terenie',
+        'datawedge tc58 nie wysyła danych do aplikacji', 'tc58 device diagnostic tool test skanera',
+        // Firmy kurierskie
+        'terminal dhl skaner nie reaguje na przycisk', 'terminal inpost skaner przestał działać',
+        'terminal dpd skaner nie działa', 'terminal ups skaner problem', 'terminal gls skaner awaria',
+        // Moduły skanera
+        'se4720 tc58 nie działa po upadku', 'se55 tc58 problem', 'tc58 imager not working',
+        // Naprawa
+        'ile kosztuje naprawa skanera tc58', 'recovery mode tc58 problem ze skanerem',
+        'czyszczenie okienka skanera tc58', 'wymiana skanera tc58',
+        // Frazy angielskie
+        'zebra tc58 scanner troubleshooting', 'tc58 barcode reader not working',
+        'tc58 scan button not responding', 'zebra tc58 scanner repair'
+      ]
     },
     content: `
 ## Skaner TC58 nie działa – co robić w trakcie trasy?
@@ -6868,7 +7326,30 @@ Problem z **DataWedge** lub konfiguracją aplikacji. Zgłoś do IT – to nie je
     seo: {
       metaTitle: 'Zebra TC58 w upale i mrozie – ochrona terminala kurierskiego [2025]',
       metaDescription: 'TC58 wyłącza się w upale? Nie ładuje w mrozie? Limity temperatur (-20°C do +50°C), ochrona przed przegrzaniem, tryb rękawiczek. Poradnik dla kurierów DHL, InPost, DPD.',
-      keywords: ['tc58 wyłącza się w gorącym samochodzie', 'terminal kurierski nie ładuje na mrozie', 'zebra tc58 przegrzewa się w aucie', 'jak chronić terminal zebra przed upałem', 'tc58 nie włącza się po zostawieniu na słońcu', 'dlaczego tc58 nie ładuje w zimie', 'terminal dhl nie działa na mrozie', 'tc58 bateria rozładowuje się na zimnie', 'jak włączyć tryb rękawiczek tc58', 'zebra tc58 glove mode ustawienia', 'terminal inpost wyłącza się latem', 'tc58 temperatura pracy specyfikacja', 'czy tc58 działa w deszczu', 'terminal kurierski ip68 wodoodporność', 'tc58 kondensacja po wniesieniu do ciepła']
+      keywords: [
+        // Główne frazy
+        'tc58 temperatura pracy', 'zebra tc58 upał mróz', 'terminal kurierski temperatury ekstremalne',
+        'tc58 overheating', 'zebra tc58 cold weather', 'terminal zebra zimno gorąco',
+        // Problemy z upałem
+        'tc58 wyłącza się w gorącym samochodzie', 'zebra tc58 przegrzewa się w aucie',
+        'tc58 nie włącza się po zostawieniu na słońcu', 'terminal inpost wyłącza się latem',
+        'tc58 za gorący nie działa', 'terminal zebra overheating warning',
+        // Problemy z mrozem
+        'terminal kurierski nie ładuje na mrozie', 'dlaczego tc58 nie ładuje w zimie',
+        'terminal dhl nie działa na mrozie', 'tc58 bateria rozładowuje się na zimnie',
+        'tc58 ekran nie reaguje na mrozie', 'terminal zebra nie włącza się zimą',
+        // Long tail - rozwiązania
+        'jak chronić terminal zebra przed upałem', 'jak włączyć tryb rękawiczek tc58',
+        'zebra tc58 glove mode ustawienia', 'ochrona terminala przed przegrzaniem',
+        // Specyfikacje
+        'tc58 temperatura pracy specyfikacja', 'czy tc58 działa w deszczu',
+        'terminal kurierski ip68 wodoodporność', 'tc58 kondensacja po wniesieniu do ciepła',
+        // Firmy kurierskie
+        'terminal dhl upał mróz', 'terminal inpost temperatura', 'terminal dpd zimno',
+        // Frazy angielskie
+        'zebra tc58 operating temperature', 'tc58 cold weather issues', 'zebra terminal heat protection',
+        'tc58 glove mode enable', 'zebra tc58 ip68 waterproof'
+      ]
     },
     content: `
 ## TC58 a ekstremalne temperatury – co musisz wiedzieć
@@ -7124,7 +7605,28 @@ TC58 ma certyfikat **IP68** (zanurzenie 1.5m/30 min) i **IP65** (strumienie wody
     seo: {
       metaTitle: 'GPS Zebra TC58 pokazuje złą lokalizację – naprawa nawigacji [2025]',
       metaDescription: 'GPS w TC58 pokazuje złą pozycję? Nawigacja kurierska nie działa? Rozwiązania: konfiguracja GNSS, a-GPS, cold start. Poradnik dla kurierów DHL, InPost, DPD.',
-      keywords: ['gps tc58 pokazuje złą lokalizację podczas dostawy', 'nawigacja kurierska tc58 nie działa prawidłowo', 'terminal dhl gps skacze po mapie', 'jak naprawić gps w terminalu zebra tc58', 'tc58 lokalizacja niedokładna o 200 metrów', 'dlaczego gps w tc58 nie znajduje satelitów', 'zebra tc58 gnss konfiguracja ustawienia', 'tc58 cold start gps ile trwa', 'terminal inpost nawigacja prowadzi w złe miejsce', 'a-gps tc58 jak włączyć', 'tc58 gps drift w mieście budynki', 'czy tc58 ma galileo i glonass', 'gps tc58 nie aktualizuje pozycji podczas jazdy', 'terminal kurierski pokazuje starą lokalizację', 'tc58 dual band gnss l1 l5 dokładność']
+      keywords: [
+        // Główne frazy
+        'gps tc58 nie działa', 'tc58 lokalizacja nieprawidłowa', 'zebra tc58 gps problem',
+        'terminal kurierski gps', 'tc58 gps inaccurate', 'zebra terminal gps fix',
+        // Long tail - problemy
+        'gps tc58 pokazuje złą lokalizację podczas dostawy', 'nawigacja kurierska tc58 nie działa prawidłowo',
+        'terminal dhl gps skacze po mapie', 'tc58 lokalizacja niedokładna o 200 metrów',
+        'dlaczego gps w tc58 nie znajduje satelitów', 'terminal inpost nawigacja prowadzi w złe miejsce',
+        'gps tc58 nie aktualizuje pozycji podczas jazdy', 'terminal kurierski pokazuje starą lokalizację',
+        // Long tail - rozwiązania
+        'jak naprawić gps w terminalu zebra tc58', 'zebra tc58 gnss konfiguracja ustawienia',
+        'tc58 cold start gps ile trwa', 'a-gps tc58 jak włączyć', 'kalibracja gps tc58',
+        // Techniczne
+        'tc58 gps drift w mieście budynki', 'czy tc58 ma galileo i glonass',
+        'tc58 dual band gnss l1 l5 dokładność', 'tc58 assisted gps', 'tc58 location services',
+        // Firmy kurierskie
+        'terminal dhl gps problem', 'terminal inpost nawigacja', 'terminal dpd lokalizacja',
+        'terminal ups gps nie działa', 'terminal gls nawigacja problem',
+        // Frazy angielskie
+        'zebra tc58 gps configuration', 'tc58 location accuracy', 'zebra terminal gnss setup',
+        'tc58 gps cold start', 'zebra tc58 navigation fix'
+      ]
     },
     content: `
 ## GPS w TC58 pokazuje złą lokalizację – dlaczego?
@@ -7390,7 +7892,28 @@ GPS włączony ciągle: ~5-10% baterii dziennie. To niewiele, **nie wyłączaj G
     seo: {
       metaTitle: 'TC58 ustawienia APN – Orange, Play, T-Mobile, Plus [2025]',
       metaDescription: 'TC58 nie łączy z internetem? Gotowe ustawienia APN dla Orange, Play, T-Mobile, Plus. Konfiguracja sieci 4G/5G krok po kroku. Poradnik dla kurierów.',
-      keywords: ['tc58 nie łączy się z internetem w trasie', 'ustawienia apn tc58 orange play tmobile plus', 'terminal kurierski brak sieci 4g', 'jak skonfigurować apn w zebra tc58', 'tc58 karta sim nie wykryta co robić', 'zebra tc58 brak zasięgu lte w terenie', 'terminal dhl nie ma internetu', 'tc58 5g ustawienia polska', 'apn internet orange tc58 konfiguracja', 'terminal inpost nie synchronizuje brak sieci', 'tc58 dane mobilne nie działają', 'jak włączyć roaming w tc58', 'tc58 mcc mnc polska operatorzy', 'zebra tc58 słaby sygnał 4g rozwiązanie', 'terminal kurierski utrata połączenia z serwerem']
+      keywords: [
+        // Główne frazy
+        'tc58 internet nie działa', 'tc58 lte problem', 'zebra tc58 4g ustawienia',
+        'terminal kurierski brak sieci', 'tc58 mobile data', 'zebra tc58 cellular setup',
+        // Operatorzy
+        'apn tc58 orange', 'apn tc58 play', 'apn tc58 tmobile', 'apn tc58 plus',
+        'ustawienia apn tc58 orange play tmobile plus', 'apn internet orange tc58 konfiguracja',
+        // Long tail - problemy
+        'tc58 nie łączy się z internetem w trasie', 'terminal kurierski brak sieci 4g',
+        'tc58 karta sim nie wykryta co robić', 'zebra tc58 brak zasięgu lte w terenie',
+        'terminal dhl nie ma internetu', 'terminal inpost nie synchronizuje brak sieci',
+        'tc58 dane mobilne nie działają', 'terminal kurierski utrata połączenia z serwerem',
+        // Long tail - rozwiązania
+        'jak skonfigurować apn w zebra tc58', 'tc58 5g ustawienia polska',
+        'jak włączyć roaming w tc58', 'tc58 mcc mnc polska operatorzy',
+        'zebra tc58 słaby sygnał 4g rozwiązanie', 'tc58 reset ustawień sieci',
+        // Firmy kurierskie
+        'terminal dhl internet', 'terminal inpost sieć problem', 'terminal dpd brak internetu',
+        // Frazy angielskie
+        'zebra tc58 apn settings', 'tc58 cellular configuration', 'zebra tc58 lte setup',
+        'tc58 mobile network settings', 'zebra tc58 sim card not detected'
+      ]
     },
     content: `
 ## TC58 nie ma internetu – co sprawdzić najpierw?
@@ -9499,26 +10022,32 @@ Tablety L10 z opcjonalnym **aktywnym digitizerem Wacom** wymagają:
       metaTitle: 'Przycisk Power/Scan w TC21/TC26 nie działa [Naprawa 2025]',
       metaDescription: 'Przycisk zasilania lub skanowania TC21/TC26 nie reaguje? Sprawdź przyczyny i rozwiązania. Hard reset, czyszczenie, przemapowanie przycisków. Kiedy naprawa serwisowa?',
       keywords: [
-        'tc21 przycisk zasilania nie działa',
-        'tc26 przycisk skanowania nie reaguje',
-        'zebra tc21 nie włącza się przyciskiem power',
-        'boczne przyciski tc26 przestały działać',
-        'tc21 hard reset kombinacja klawiszy',
-        'tc26 przycisk zablokowany co robić',
-        'terminal zebra nie reaguje na przyciski',
-        'tc21 tc26 recovery mode jak wejść',
-        'naprawa przycisku terminal zebra cena',
-        'tc21 przycisk scan nie skanuje',
-        'terminal magazynowy przycisk nie działa',
-        'zebra tc26 trigger button problem',
-        'tc21 wymiana przycisku koszt serwis',
-        'terminal logistyczny awaria przycisków',
-        'tc26 nie odpowiada na żaden przycisk',
-        'tc21 spust nie działa trigger',
-        'tc26 przycisk boczny zablokowany',
-        'serwis terminali zebra polska',
-        'tc21 nie reaguje na dotyk przycisku',
-        'ile kosztuje naprawa tc26 przycisk'
+        // Główne frazy
+        'tc21 przycisk nie działa', 'tc26 przycisk problem', 'zebra tc21 power button',
+        'zebra tc26 scan button', 'terminal zebra przycisk awaria', 'zebra button not working',
+        // Przycisk zasilania
+        'tc21 przycisk zasilania nie działa', 'zebra tc21 nie włącza się przyciskiem power',
+        'tc26 power button nie reaguje', 'terminal zebra nie włącza się przyciskiem',
+        // Przycisk skanowania
+        'tc26 przycisk skanowania nie reaguje', 'tc21 przycisk scan nie skanuje',
+        'boczne przyciski tc26 przestały działać', 'tc21 spust nie działa trigger',
+        'tc26 trigger button problem', 'tc21 scan button not working',
+        // Long tail - problemy
+        'tc26 przycisk zablokowany co robić', 'terminal zebra nie reaguje na przyciski',
+        'tc26 nie odpowiada na żaden przycisk', 'tc26 przycisk boczny zablokowany',
+        'tc21 nie reaguje na dotyk przycisku', 'terminal magazynowy przycisk nie działa',
+        // Long tail - rozwiązania
+        'tc21 hard reset kombinacja klawiszy', 'tc21 tc26 recovery mode jak wejść',
+        'jak naprawić przycisk tc21', 'przemapowanie przycisków zebra tc26',
+        // Naprawa
+        'naprawa przycisku terminal zebra cena', 'tc21 wymiana przycisku koszt serwis',
+        'ile kosztuje naprawa tc26 przycisk', 'serwis terminali zebra polska',
+        // Frazy branżowe
+        'terminal logistyczny awaria przycisków', 'terminal magazynowy zebra przycisk',
+        'terminal wms tc21 przycisk', 'terminal kurierski tc26 przycisk',
+        // Frazy angielskie
+        'zebra tc21 power button repair', 'zebra tc26 trigger replacement', 'tc21 button fix',
+        'zebra terminal button not responding', 'tc26 scan button replacement cost'
       ]
     },
     content: `# Przycisk zasilania lub skanowania w Zebra TC21/TC26 nie działa – pełna diagnostyka
