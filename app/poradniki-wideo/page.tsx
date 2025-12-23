@@ -215,6 +215,16 @@ const videos: Video[] = [
     category: 'drukarki',
     tags: ['cutter', 'nóż', 'cięcie etykiet', 'konfiguracja', 'konserwacja'],
   },
+  {
+    id: '19',
+    title: 'Wymiana wałka dociskowego w drukarkach Zebra ZD',
+    description: 'Instrukcja wymiany wałka dociskowego (platen roller) w drukarkach Zebra serii ZD. Krok po kroku jak bezpiecznie wymienić wałek i przywrócić jakość wydruku.',
+    youtubeId: 'jphduV-XSOg',
+    thumbnail: '/wymiana_wałka_zd.jpeg',
+    duration: '5:00',
+    category: 'drukarki',
+    tags: ['ZD', 'wałek dociskowy', 'platen roller', 'wymiana', 'jakość wydruku', 'naprawa'],
+  },
 ]
 
 const categories = [

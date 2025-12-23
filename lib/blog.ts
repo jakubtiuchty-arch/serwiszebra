@@ -1230,7 +1230,68 @@ Zależy od przyczyny: czyszczenie mechanizmu 150-360 zł, wymiana wałka 150-290
     seo: {
       metaTitle: 'Kalibracja drukarki Zebra - poradnik krok po kroku [2025]',
       metaDescription: 'Jak skalibrować drukarkę Zebra? Poradnik dla GK420, ZD420, ZD621, ZT411. Auto-kalibracja przyciskiem, Smart Calibration, Zebra Setup Utilities. Drukuje puste etykiety? Pomija? Napraw!',
-      keywords: ['kalibracja drukarki zebra', 'jak skalibrować drukarkę zebra', 'kalibracja zebra gk420', 'smart calibration zebra', 'zebra sensor gap kalibracja', 'drukarka zebra pomija etykiety', 'kalibracja sensora zebra', 'zebra zd420 kalibracja', 'drukarka zebra drukuje puste etykiety', 'jak skalibrować sensor zebra', 'zebra kalibracja przyciskiem feed', 'zebra setup utilities kalibracja', 'black mark zebra kalibracja', 'drukarka etykiet nie widzi przerwy', 'zebra zt411 kalibracja', 'zebra zd621 auto calibration', 'drukarka zebra szuka etykiety', 'gap sensor zebra ustawienia', 'kalibracja manualna drukarki zebra', 'zebra drukarka przesuwa etykiety']
+      keywords: [
+        // Główne frazy
+        'kalibracja drukarki zebra', 
+        'jak skalibrować drukarkę zebra', 
+        'zebra kalibracja',
+        'calibration zebra printer',
+        // ZD421 - HOT keywords
+        'zebra zd421 kalibracja',
+        'zd421 kalibracja',
+        'zd421 calibration',
+        'zebra zd421 calibration',
+        'jak skalibrować zd421',
+        'zd421 kalibracja sensora',
+        'zebra zd421 drukuje puste etykiety',
+        'zd421 nie widzi etykiet',
+        // ZD420 - HOT keywords
+        'zebra zd420 kalibracja',
+        'zd420 kalibracja',
+        'zd420 calibration',
+        'zebra zd420 calibration',
+        'jak skalibrować zd420',
+        'zd420 kalibracja sensora',
+        'zebra zd420 drukuje puste etykiety',
+        'zd420 pomija etykiety',
+        // Inne modele
+        'kalibracja zebra gk420', 
+        'zebra zt411 kalibracja', 
+        'zebra zd621 auto calibration',
+        'kalibracja zebra zd220',
+        'kalibracja zebra zd230',
+        // Techniczne
+        'smart calibration zebra', 
+        'zebra sensor gap kalibracja', 
+        'kalibracja sensora zebra',
+        'zebra kalibracja przyciskiem feed', 
+        'zebra setup utilities kalibracja', 
+        'black mark zebra kalibracja',
+        'gap sensor zebra ustawienia',
+        // Long tail - problemy
+        'drukarka zebra pomija etykiety', 
+        'drukarka zebra drukuje puste etykiety',
+        'drukarka etykiet nie widzi przerwy',
+        'drukarka zebra szuka etykiety',
+        'zebra drukarka przesuwa etykiety',
+        'drukarka zebra drukuje w złym miejscu',
+        'zebra przesuwa etykiety o pół',
+        'drukarka zebra nie wykrywa etykiet',
+        // Long tail - jak zrobić
+        'jak skalibrować sensor zebra',
+        'kalibracja manualna drukarki zebra',
+        'jak zresetować kalibrację zebra',
+        'kalibracja zebra po wymianie etykiet',
+        'jak ustawić sensor w drukarce zebra',
+        'zebra kalibracja krok po kroku',
+        'kalibracja zebra przyciskami',
+        // Long tail - konkretne sytuacje
+        'zebra zd421 drukuje za wysoko',
+        'zebra zd420 przesuwa etykiety',
+        'po zmianie etykiet zebra źle drukuje',
+        'zebra nie rozpoznaje nowych etykiet',
+        'kalibracja zebra po wymianie rolki'
+      ]
     },
     content: `
 ## Czym jest kalibracja drukarki i dlaczego jest ważna?
@@ -7669,7 +7730,33 @@ Możliwe przyczyny:
     seo: {
       metaTitle: 'Spuchnięta bateria Zebra L10 – objawy i wymiana [2025]',
       metaDescription: 'Bateria w tablecie Zebra L10 się spuchła? Ekran odchodzi od obudowy? Objawy, przyczyny (ładowanie 24/7), bezpieczna wymiana. Poradnik dla służb ratownictwa i flot tabletów.',
-      keywords: ['spuchnięta bateria tablet zebra l10 co robić', 'ekran tabletu l10 odchodzi od obudowy przyczyna', 'zebra xslate l10 bateria wybrzuszona wymiana', 'tablet ambulans bateria puchnie po 3 latach', 'l10 bateria nie trzyma wyłącza się przy 30 procentach', 'wymiana baterii zebra l10 ile kosztuje', 'czy spuchnięta bateria l10 jest niebezpieczna', 'tablet ratownictwo medyczne bateria awaria', 'zebra l10 ładowanie 24 7 degradacja baterii', 'bateria mostkowa l10 hot swap nie działa', 'tablet przemysłowy spuchnięta bateria naprawa', 'et40 et45 bateria puchnie', 'l10 bateria 3 lata żywotność flota', 'bezpieczna utylizacja baterii tablet zebra', 'serwis baterii zebra l10 polska']
+      keywords: [
+        // Główne frazy
+        'spuchnięta bateria tablet zebra', 'bateria zebra l10 wybrzuszona', 'tablet zebra bateria puchnie',
+        'zebra l10 spuchnięta bateria', 'zebra swollen battery', 'zebra l10 battery swelling',
+        // Modele
+        'zebra et40 bateria puchnie', 'zebra et45 spuchnięta bateria', 'zebra et60 bateria wybrzusza się',
+        'zebra et80 bateria się spuchła', 'zebra xslate l10 bateria', 'xslate l10 swollen battery',
+        // Objawy
+        'ekran tabletu zebra odchodzi od obudowy', 'tablet zebra ekran odstaje', 'zebra l10 ekran się unosi',
+        'tablet zebra nie leży płasko', 'bateria tablet zebra się nagrzewa', 'tablet zebra trzeszczy obudowa',
+        // Long tail - pytania
+        'co robić gdy bateria tabletu zebra puchnie', 'czy spuchnięta bateria zebra jest niebezpieczna',
+        'jak rozpoznać spuchniętą baterię w tablecie', 'dlaczego bateria w tablecie zebra puchnie',
+        'ile kosztuje wymiana baterii zebra l10', 'gdzie wymienić baterię zebra l10',
+        // Long tail - rozwiązania
+        'wymiana baterii tablet zebra l10', 'wymiana baterii zebra et40', 'wymiana baterii zebra et45',
+        'naprawa baterii tablet zebra', 'serwis baterii zebra polska', 'regeneracja baterii zebra',
+        // Frazy branżowe
+        'tablet ambulans bateria awaria', 'tablet ratownictwo bateria puchnie', 'zebra l10 ambulans bateria',
+        'tablet służby medyczne bateria', 'flota tabletów zebra baterie wymiana',
+        // Frazy angielskie
+        'zebra tablet swollen battery', 'zebra l10 battery replacement', 'zebra tablet battery bloated',
+        'zebra et40 battery replacement cost', 'zebra et45 battery swelling fix',
+        // Przyczyny
+        'ładowanie tabletu zebra 24/7 bateria', 'zebra tablet bateria degradacja', 'tablet zebra bateria 3 lata',
+        'bateria litowa tablet zebra puchnie', 'tablet zebra gorąca bateria'
+      ]
     },
     content: `
 ## Spuchnięta bateria w L10 – dlaczego to krytyczny problem?
@@ -7946,9 +8033,9 @@ Sprawdź warunki umowy OneCare jeśli masz.
 
 ## Zobacz też
 
-- [Tablet Zebra nie włącza się – diagnostyka](/blog/tablet-zebra-nie-wlacza-sie-diagnostyka)
-- [Tablet Zebra nie ładuje się w stacji dokującej](/blog/tablet-zebra-nie-laduje-stacja-dokujaca)
-- [Wymiana ekranu w tablecie Zebra](/blog/wymiana-ekranu-tablet-zebra)
+- [Tablet Zebra nie włącza się – diagnostyka](/blog/tablet-zebra-nie-wlacza-sie-diagnostyka-naprawa)
+- [Tablet Zebra nie ładuje się w stacji dokującej](/blog/tablet-zebra-nie-laduje-stacja-dokujaca-naprawa)
+- [Wymiana ekranu w tablecie Zebra](/blog/wymiana-ekranu-tablet-zebra-naprawa-dotyku)
 
 ---
 
@@ -7974,7 +8061,33 @@ Sprawdź warunki umowy OneCare jeśli masz.
     seo: {
       metaTitle: 'Tablet Zebra nie włącza się – diagnostyka i naprawa [2025]',
       metaDescription: 'Tablet Zebra L10, ET40, ET60 nie włącza się? Czarny ekran? Diagnostyka krok po kroku: bateria, ładowanie, reset, recovery mode. Kiedy naprawa, a kiedy wymiana.',
-      keywords: ['tablet zebra nie włącza się co robić', 'zebra l10 czarny ekran nie reaguje', 'et40 tablet nie uruchamia się po upadku', 'zebra xslate l10 nie startuje zawiesza się na logo', 'tablet przemysłowy nie włącza się mimo ładowania', 'et45 brak reakcji na przycisk power', 'jak zresetować tablet zebra który się nie włącza', 'l10 recovery mode wejście krok po kroku', 'tablet zebra ambulans nie działa co robić', 'et60 nie ładuje się i nie włącza przyczyny', 'zebra tablet factory reset bez włączania', 'l10 pętla rozruchowa logo zebra', 'ile kosztuje naprawa tabletu zebra nie włącza się', 'tablet zebra mruga dioda ale nie startuje', 'et80 nie reaguje na ładowarkę']
+      keywords: [
+        // Główne frazy
+        'tablet zebra nie włącza się', 'zebra tablet nie uruchamia się', 'tablet zebra czarny ekran',
+        'zebra l10 nie włącza się', 'zebra tablet wont turn on', 'zebra tablet not starting',
+        // Modele
+        'zebra et40 nie włącza się', 'zebra et45 nie uruchamia się', 'zebra et60 czarny ekran',
+        'zebra et80 nie startuje', 'zebra l10 nie reaguje', 'xslate l10 not turning on',
+        // Objawy
+        'tablet zebra mruga dioda', 'tablet zebra wibruje ale się nie włącza', 'zebra tablet boot loop',
+        'tablet zebra zawiesza się na logo', 'zebra tablet black screen', 'tablet zebra nie reaguje na przycisk',
+        // Long tail - pytania
+        'co robić gdy tablet zebra nie włącza się', 'jak naprawić tablet zebra który nie startuje',
+        'dlaczego tablet zebra się nie włącza', 'tablet zebra nie włącza się mimo ładowania',
+        'ile kosztuje naprawa tabletu zebra nie włącza', 'gdzie naprawić tablet zebra',
+        // Long tail - rozwiązania
+        'reset tabletu zebra', 'hard reset zebra l10', 'factory reset zebra et40',
+        'recovery mode tablet zebra', 'jak wejść w recovery zebra l10', 'zebra tablet reset button',
+        // Frazy branżowe
+        'tablet ambulans nie działa', 'tablet ratownictwo nie włącza się', 'tablet służby terenowe awaria',
+        'tablet firmowy zebra nie startuje', 'flota tabletów zebra awaria',
+        // Frazy angielskie
+        'zebra tablet dead', 'zebra l10 wont boot', 'zebra tablet stuck on logo',
+        'zebra et45 not responding', 'zebra tablet power button not working',
+        // Przyczyny
+        'tablet zebra rozładowana bateria', 'tablet zebra po upadku nie włącza się',
+        'tablet zebra uszkodzony zasilacz', 'tablet zebra pętla rozruchowa', 'tablet zebra zawiesił się'
+      ]
     },
     content: `
 ## Tablet Zebra nie włącza się – pierwsza pomoc
@@ -8251,8 +8364,8 @@ Uszkodzony firmware lub SSD. Wymaga:
 ## Zobacz też
 
 - [Spuchnięta bateria w tablecie Zebra L10](/blog/spuchnieta-bateria-tablet-zebra-l10-objawy-naprawa)
-- [Tablet Zebra nie ładuje się w stacji dokującej](/blog/tablet-zebra-nie-laduje-stacja-dokujaca)
-- [Wymiana ekranu w tablecie Zebra](/blog/wymiana-ekranu-tablet-zebra)
+- [Tablet Zebra nie ładuje się w stacji dokującej](/blog/tablet-zebra-nie-laduje-stacja-dokujaca-naprawa)
+- [Wymiana ekranu w tablecie Zebra](/blog/wymiana-ekranu-tablet-zebra-naprawa-dotyku)
 
 ---
 
@@ -8278,7 +8391,33 @@ Uszkodzony firmware lub SSD. Wymaga:
     seo: {
       metaTitle: 'Tablet Zebra nie ładuje w docku – naprawa stacji dokującej [2025]',
       metaDescription: 'Tablet Zebra L10 nie ładuje w stacji dokującej pojazdu? Przerywane ładowanie? Diagnoza: piny pogo, złącze, zasilacz. Naprawa doków dla ambulansów i flot.',
-      keywords: ['tablet zebra nie ładuje w docku pojazdu', 'stacja dokująca zebra l10 nie działa', 'vehicle dock zebra naprawa', 'tablet ambulans przerywane ładowanie', 'piny pogo dock zebra zużyte', 'złącze dokujące tablet l10 naprawa', 'dock zebra et60 nie ładuje', 'naprawa stacji dokującej tablet przemysłowy', 'tablet karetka nie ładuje w uchwycie', 'zebra l10 luźno siedzi w docku', 'regeneracja złączy pogo tablet', 'vehicle dock 300142 naprawa', 'tablet ratownictwo dock awaria', 'czyszczenie złączy stacji dokującej zebra', 'wymiana docku zebra l10 koszt']
+      keywords: [
+        // Główne frazy
+        'tablet zebra nie ładuje', 'zebra tablet nie ładuje się', 'stacja dokująca zebra nie działa',
+        'zebra l10 nie ładuje w docku', 'zebra tablet not charging', 'zebra dock not working',
+        // Modele
+        'zebra et40 nie ładuje', 'zebra et45 dock problem', 'zebra et60 stacja dokująca',
+        'zebra et80 nie ładuje w uchwycie', 'zebra l10 vehicle dock', 'xslate l10 charging dock',
+        // Objawy
+        'tablet zebra przerywane ładowanie', 'tablet zebra nie trzyma w docku', 'zebra dock loose connection',
+        'tablet zebra luźno siedzi w docku', 'tablet zebra ładowanie miga', 'zebra tablet charging intermittent',
+        // Long tail - pytania
+        'co robić gdy tablet zebra nie ładuje w docku', 'jak naprawić stację dokującą zebra',
+        'dlaczego tablet zebra nie ładuje w samochodzie', 'tablet zebra nie ładuje przez usb',
+        'ile kosztuje naprawa docku zebra', 'gdzie naprawić stację dokującą zebra l10',
+        // Long tail - rozwiązania
+        'czyszczenie złączy pogo tablet zebra', 'naprawa pinów pogo dock zebra', 'regeneracja docku zebra',
+        'wymiana stacji dokującej zebra l10', 'serwis doków zebra polska', 'naprawa vehicle dock zebra',
+        // Frazy branżowe
+        'tablet ambulans nie ładuje w karetce', 'dock pojazd służbowy tablet', 'tablet ratownictwo dock awaria',
+        'stacja ładowania flota tabletów', 'tablet służby terenowe ładowanie',
+        // Frazy angielskie
+        'zebra l10 dock repair', 'zebra vehicle dock not charging', 'zebra tablet pogo pin repair',
+        'zebra cradle not working', 'zebra charging station repair',
+        // Przyczyny
+        'zużyte piny pogo tablet zebra', 'korozja złączy dock zebra', 'uszkodzony zasilacz dock zebra',
+        'tablet zebra złącze uszkodzone', 'stacja dokująca zebra 12v problem'
+      ]
     },
     content: `
 ## Tablet nie ładuje w stacji dokującej – dlaczego to krytyczny problem?
@@ -8583,7 +8722,7 @@ Docki pojazdowe L10 i ET60/ET80 mają **porty przekazywania sygnału antenowego*
 
 - [Spuchnięta bateria w tablecie Zebra L10](/blog/spuchnieta-bateria-tablet-zebra-l10-objawy-naprawa)
 - [Tablet Zebra nie włącza się](/blog/tablet-zebra-nie-wlacza-sie-diagnostyka-naprawa)
-- [Naprawa gniazda ładowania USB](/blog/naprawa-gniazda-ladowania-tablet-zebra)
+- [Problemy z WiFi i GSM w tabletach Zebra](/blog/tablet-zebra-wifi-gsm-problemy-lacznosc-naprawa)
 
 ---
 
@@ -8609,7 +8748,59 @@ Docki pojazdowe L10 i ET60/ET80 mają **porty przekazywania sygnału antenowego*
     seo: {
       metaTitle: 'Tablet Zebra WiFi/GSM nie działa – diagnostyka i naprawa [2025]',
       metaDescription: 'Tablet Zebra L10 traci WiFi? ET45 bez sieci LTE? Rozwiązania problemów z łącznością dla ambulansów i służb. Konfiguracja APN, anteny, naprawa modułów radiowych.',
-      keywords: ['tablet zebra wifi nie działa rozłącza się', 'zebra l10 traci połączenie wifi często', 'et45 tablet brak sieci lte 4g', 'tablet ambulans nie łączy się z swd prm', 'zebra tablet sim nie wykrywa karty', 'problemy z anteną tablet zebra w docku', 'konfiguracja apn tablet zebra l10', 'tablet ratownictwo medyczne brak internetu', 'zebra l10 słaby sygnał wifi naprawa', 'et65 tablet 5g nie działa polska', 'tablet zebra bluetooth rozłącza się', 'naprawa modułu wifi tablet przemysłowy', 'zebra xslate l10 sierra wireless em7565', 'tablet służby terenowe łączność awaria', 'antenna pass-through dock zebra']
+      keywords: [
+        // Główne frazy - WiFi
+        'tablet zebra wifi nie działa',
+        'zebra tablet wifi problem',
+        'zebra l10 wifi nie działa',
+        'zebra et40 wifi problem',
+        'zebra et45 wifi nie łączy',
+        'tablet zebra wifi rozłącza się',
+        'zebra wifi not working',
+        'zebra tablet no wifi',
+        // Główne frazy - GSM/LTE
+        'tablet zebra lte nie działa',
+        'zebra tablet brak sieci',
+        'zebra l10 gsm problem',
+        'zebra et45 lte nie łączy',
+        'tablet zebra 4g nie działa',
+        'zebra tablet no signal',
+        'zebra tablet sim not detected',
+        // Konkretne modele
+        'zebra l10 wifi problem',
+        'zebra l10 lte nie działa',
+        'zebra et40 brak sieci',
+        'zebra et45 wifi rozłącza się',
+        'zebra et60 lte problem',
+        'zebra et80 wifi nie działa',
+        'xslate l10 wifi problem',
+        // Long tail - problemy
+        'tablet zebra traci połączenie wifi',
+        'zebra l10 słaby sygnał wifi',
+        'tablet zebra wifi rozłącza się często',
+        'zebra tablet wifi disconnects',
+        'tablet zebra nie widzi sieci wifi',
+        'zebra tablet lte weak signal',
+        'tablet zebra sim nie wykrywa',
+        'zebra l10 brak internetu',
+        // Long tail - rozwiązania
+        'jak naprawić wifi w tablecie zebra',
+        'konfiguracja wifi tablet zebra',
+        'konfiguracja apn zebra l10',
+        'ustawienia sieci tablet zebra',
+        'zebra tablet apn settings',
+        'jak skonfigurować lte zebra et45',
+        // Long tail - specyficzne
+        'tablet zebra wifi w docku nie działa',
+        'zebra l10 antenna pass-through',
+        'problemy z anteną tablet zebra',
+        'naprawa modułu wifi zebra',
+        'zebra tablet bluetooth rozłącza się',
+        // Służby (dodatkowe)
+        'tablet ambulans wifi problem',
+        'zebra ratownictwo brak sieci',
+        'tablet zebra swd prm nie łączy'
+      ]
     },
     content: `
 ## Problemy z łącznością – dlaczego to krytyczne dla służb?
@@ -8964,7 +9155,34 @@ Rozwiązania:
     seo: {
       metaTitle: 'Wymiana ekranu tablet Zebra – naprawa LCD i dotyku [2025]',
       metaDescription: 'Pęknięty ekran Zebra L10, ET40, ET60? Dotyk nie działa? Wymiana LCD, digitizera, szybki. Koszt naprawy, zachowanie IP65. Profesjonalny serwis tabletów przemysłowych.',
-      keywords: ['wymiana ekranu tablet zebra l10 cena', 'pęknięty ekran zebra xslate naprawa', 'tablet zebra dotyk nie działa naprawa', 'zebra et40 wymiana szybki', 'digitizer tablet przemysłowy wymiana', 'ekran zebra l10 martwe strefy', 'tablet ambulans pęknięty ekran', 'gorilla glass zebra l10 wymiana', 'naprawa lcd tablet zebra koszt', 'zebra et60 ekran nie reaguje', 'tablet zebra ekran czarny po upadku', 'wymiana wyświetlacza tablet przemysłowy', 'zebra l10 tryb rękawiczek nie działa', 'naprawa dotyku tablet zebra ip65', 'tablet zebra ekran migocze naprawa']
+      keywords: [
+        // Główne frazy
+        'wymiana ekranu tablet zebra', 'naprawa ekranu zebra', 'tablet zebra pęknięty ekran',
+        'zebra l10 wymiana ekranu', 'zebra tablet screen replacement', 'zebra tablet broken screen',
+        // Modele
+        'zebra et40 wymiana ekranu', 'zebra et45 naprawa ekranu', 'zebra et60 pęknięta szybka',
+        'zebra et80 wymiana lcd', 'zebra xslate l10 screen', 'zebra l10 lcd replacement',
+        // Objawy
+        'tablet zebra dotyk nie działa', 'tablet zebra ekran nie reaguje', 'zebra tablet ghost touch',
+        'tablet zebra martwe strefy dotyku', 'tablet zebra ekran migocze', 'zebra tablet screen flickering',
+        'tablet zebra pasy na ekranie', 'tablet zebra ekran czarny', 'zebra tablet display issues',
+        // Long tail - pytania
+        'ile kosztuje wymiana ekranu zebra l10', 'gdzie wymienić ekran tablet zebra',
+        'jak wymienić szybkę w tablecie zebra', 'czy opłaca się naprawiać ekran zebra',
+        'tablet zebra ekran pęknięty po upadku', 'ile trwa wymiana ekranu tablet zebra',
+        // Long tail - rozwiązania
+        'naprawa digitizera tablet zebra', 'wymiana lcd zebra et40', 'wymiana szybki zebra et45',
+        'serwis ekranów zebra polska', 'naprawa touch panel zebra', 'regeneracja ekranu tablet zebra',
+        // Frazy branżowe
+        'tablet ambulans pęknięty ekran', 'tablet ratownictwo wymiana ekranu', 'tablet służby ekran uszkodzony',
+        'tablet przemysłowy naprawa ekranu', 'flota tabletów zebra wymiana ekranów',
+        // Frazy angielskie
+        'zebra l10 screen repair', 'zebra tablet touch not working', 'zebra et40 digitizer replacement',
+        'zebra tablet lcd repair cost', 'zebra xslate screen replacement',
+        // Cechy techniczne
+        'gorilla glass zebra wymiana', 'tablet zebra ip65 po naprawie ekranu', 'tryb rękawiczek zebra naprawa',
+        'tablet zebra rain mode nie działa', 'wet finger mode zebra l10'
+      ]
     },
     content: `
 ## Pęknięty ekran lub niedziałający dotyk – kiedy wymiana?
@@ -13815,7 +14033,7 @@ Jako **Autoryzowany Partner Zebra** z 25-letnim doświadczeniem pomożemy Ci wyb
     slug: 'zebra-designer-3-poradnik-projektowanie-etykiet',
     title: 'Zebra Designer 3 - kompletny poradnik projektowania etykiet',
     excerpt: 'Poznaj Zebra Designer 3 - profesjonalne oprogramowanie do projektowania etykiet. Dowiedz się jak zacząć, jakie są wersje i jak tworzyć etykiety krok po kroku.',
-    coverImage: '/blog/zebra-designer-3.jpg',
+    coverImage: '/blog/zebra_designer_3.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'

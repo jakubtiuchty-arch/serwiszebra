@@ -92,7 +92,7 @@ export default function Header({ currentPage = 'other', hidePartnerLogos = false
               <Link href="/#cennik" className="hidden md:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
                 Cennik
               </Link>
-              <Link href="/#jak-to-dziala" className="hidden md:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
+              <Link href="/jak-to-dziala" className="hidden md:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
                 Jak to działa
               </Link>
               

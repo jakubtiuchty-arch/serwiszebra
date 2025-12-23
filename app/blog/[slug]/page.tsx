@@ -4,10 +4,10 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getPostBySlug, getAllPosts, getRelatedPosts, BLOG_CATEGORIES, DEVICE_TYPES } from '@/lib/blog'
 import Header from '@/components/Header'
+import BackButton from '@/components/BackButton'
 import { 
   Clock, 
   Calendar, 
-  ArrowLeft, 
   Tag,
   Share2,
   BookOpen,
@@ -250,13 +250,11 @@ export default function BlogPostPage({
         <article className="py-8 sm:py-12">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             {/* Back link */}
-            <Link 
-              href="/blog"
+            <BackButton 
+              fallbackUrl="/blog"
+              label="Wróć do bloga"
               className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-6"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              Wróć do bloga
-            </Link>
+            />
 
             {/* Header */}
             <header className="mb-8">
