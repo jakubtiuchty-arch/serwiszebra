@@ -232,7 +232,7 @@ export default function JakToDzialaPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <Header currentPage="jak-to-dziala" />
+      <Header currentPage="other" />
 
       {/* HERO SECTION */}
       <section className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white overflow-hidden">
