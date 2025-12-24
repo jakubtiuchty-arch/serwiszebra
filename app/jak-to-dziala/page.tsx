@@ -356,14 +356,30 @@ export default function JakToDzialaPage() {
                     </div>
                   </div>
 
-                  {/* Image placeholder */}
+                  {/* Image */}
                   <div className="flex-1 hidden lg:block">
                     <div className="relative h-full min-h-[200px] bg-gray-200 rounded-xl overflow-hidden">
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className={`w-12 h-12 ${colors.bg} rounded-full flex items-center justify-center opacity-30`}>
-                          <Icon className="w-6 h-6 text-white" />
+                      {step.number === 1 ? (
+                        <Image
+                          src="/diagnoza_ai.png"
+                          alt="Diagnoza AI - inteligentny asystent serwisowy Zebra"
+                          fill
+                          className="object-cover"
+                        />
+                      ) : step.number === 2 ? (
+                        <Image
+                          src="/formularz_zgłoszenia_naprawy.png"
+                          alt="Formularz zgłoszenia naprawy urządzenia Zebra online"
+                          fill
+                          className="object-cover"
+                        />
+                      ) : (
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <div className={`w-12 h-12 ${colors.bg} rounded-full flex items-center justify-center opacity-30`}>
+                            <Icon className="w-6 h-6 text-white" />
+                          </div>
                         </div>
-                      </div>
+                      )}
                     </div>
                   </div>
                 </div>
