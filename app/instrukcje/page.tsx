@@ -235,10 +235,10 @@ export default function InstrukcjePage() {
         </section>
 
         {/* Filtry kategorii */}
-        <section className="sticky top-0 z-30 bg-white border-b border-gray-200">
-          <div className="max-w-6xl mx-auto px-3 sm:px-4">
-            {/* Główne kategorie */}
-            <div className="flex justify-center gap-1 sm:gap-2 py-2 sm:py-3">
+        <section className="sticky top-0 z-30 bg-white border-b border-gray-200 shadow-sm">
+          <div className="max-w-6xl mx-auto">
+            {/* Główne kategorie - scroll horyzontalny na mobile */}
+            <div className="flex gap-1.5 py-2 px-3 sm:px-4 sm:justify-center overflow-x-auto scrollbar-hide">
               {mainCategories.map(category => {
                 const Icon = category.icon
                 const isActive = category.id === 'drukarki' 
@@ -256,25 +256,25 @@ export default function InstrukcjePage() {
                         setShowPrinterSubmenu(false)
                       }
                     }}
-                    className={`inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg text-xs sm:text-sm font-medium transition-all border whitespace-nowrap ${
+                    className={`inline-flex items-center gap-1 sm:gap-2 px-2.5 sm:px-4 py-1.5 sm:py-2.5 rounded-lg text-[11px] sm:text-sm font-medium transition-all border whitespace-nowrap flex-shrink-0 active:scale-[0.97] ${
                       isActive 
                         ? 'bg-blue-600 text-white border-blue-600 shadow-md shadow-blue-500/20' 
                         : 'bg-white text-gray-700 border-gray-200 hover:border-blue-300 hover:text-blue-600'
                     }`}
                   >
-                    <Icon className="w-4 h-4" />
+                    <Icon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                     <span>{category.name}</span>
                     {category.id === 'drukarki' && (
-                      <ChevronDown className={`w-3.5 h-3.5 transition-transform ${showPrinterSubmenu || isPrinterCategory ? 'rotate-180' : ''}`} />
+                      <ChevronDown className={`w-3 h-3 sm:w-3.5 sm:h-3.5 transition-transform ${showPrinterSubmenu || isPrinterCategory ? 'rotate-180' : ''}`} />
                     )}
                   </button>
                 )
               })}
             </div>
             
-            {/* Podmenu drukarek */}
+            {/* Podmenu drukarek - scroll horyzontalny na mobile */}
             {(showPrinterSubmenu || isPrinterCategory) && (
-              <div className="flex justify-center gap-1 sm:gap-2 py-2 border-t border-gray-100 bg-gray-50">
+              <div className="flex gap-1 py-1.5 sm:py-2 px-3 sm:px-4 sm:justify-center border-t border-gray-100 bg-gray-50 overflow-x-auto scrollbar-hide">
                 {printerSubcategories.map(subcat => {
                   const Icon = subcat.icon
                   const isActive = selectedCategory === subcat.id
@@ -286,13 +286,13 @@ export default function InstrukcjePage() {
                         setSelectedCategory(subcat.id)
                         setShowPrinterSubmenu(false)
                       }}
-                      className={`inline-flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg text-[11px] sm:text-xs font-medium transition-all border whitespace-nowrap ${
+                      className={`inline-flex items-center gap-1 px-2 sm:px-3 py-1 sm:py-1.5 rounded-md text-[10px] sm:text-xs font-medium transition-all border whitespace-nowrap flex-shrink-0 active:scale-[0.97] ${
                         isActive 
                           ? 'bg-blue-600 text-white border-blue-600 shadow-sm' 
                           : 'bg-white text-gray-600 border-gray-200 hover:border-blue-300 hover:text-blue-600'
                       }`}
                     >
-                      <Icon className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+                      <Icon className="w-3 h-3" />
                       <span>{subcat.name}</span>
                     </button>
                   )
@@ -306,16 +306,16 @@ export default function InstrukcjePage() {
         <main id="main-content" className="max-w-6xl mx-auto px-3 sm:px-4 py-5 sm:py-10">
           {/* Loading state */}
           {isLoading ? (
-            <div className="flex flex-col items-center justify-center py-16">
-              <Loader2 className="w-8 h-8 text-blue-500 animate-spin mb-4" />
-              <p className="text-gray-600">Ładowanie instrukcji...</p>
+            <div className="flex flex-col items-center justify-center py-10 sm:py-16">
+              <Loader2 className="w-6 h-6 sm:w-8 sm:h-8 text-blue-500 animate-spin mb-3" />
+              <p className="text-gray-600 text-sm">Ładowanie...</p>
             </div>
           ) : error ? (
-            <div className="text-center py-16">
-              <p className="text-red-600 mb-4">{error}</p>
+            <div className="text-center py-10 sm:py-16">
+              <p className="text-red-600 text-sm mb-3">{error}</p>
               <button
                 onClick={() => window.location.reload()}
-                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                className="px-3 py-1.5 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700 active:scale-[0.98]"
               >
                 Spróbuj ponownie
               </button>
@@ -336,9 +336,9 @@ export default function InstrukcjePage() {
                 </p>
               </div>
 
-              {/* Grid instrukcji - 1 kolumna mobile, 2 tablet, 3 desktop */}
+              {/* Grid instrukcji - 2 kolumny mobile, 2 tablet, 3 desktop */}
               {filteredManuals.length > 0 ? (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5">
+                <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4">
                   {filteredManuals.map(manual => {
                     const CategoryIcon = getCategoryIcon(manual.category)
                     const docs = manual.documents || {}
@@ -355,11 +355,12 @@ export default function InstrukcjePage() {
                       <Link 
                         key={manual.id}
                         href={`/instrukcje/zebra-${manual.model.toLowerCase()}`}
-                        className="bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg hover:border-blue-300 transition-all duration-200 group block"
+                        className="bg-white rounded-lg sm:rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg hover:border-blue-300 transition-all duration-200 group block active:scale-[0.98]"
                       >
                         {/* Header karty */}
-                        <div className="p-4 sm:p-5">
-                          <div className="flex items-start justify-between mb-2 sm:mb-3">
+                        <div className="p-3 sm:p-5">
+                          {/* Kategoria - ukryta na małych mobile */}
+                          <div className="hidden sm:flex items-start justify-between mb-2 sm:mb-3">
                             <div className="inline-flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 py-0.5 sm:py-1 bg-gray-100 text-gray-600 rounded text-[10px] sm:text-xs font-medium group-hover:bg-blue-50 group-hover:text-blue-600 transition-colors">
                               <CategoryIcon className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
                               <span>{allCategories.find(c => c.id === manual.category)?.name}</span>
@@ -368,25 +369,27 @@ export default function InstrukcjePage() {
                           </div>
 
                           {/* Model i nazwa */}
-                          <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-0.5 sm:mb-1 group-hover:text-blue-600 transition-colors">
+                          <h2 className="text-base sm:text-xl font-bold text-gray-900 mb-0.5 group-hover:text-blue-600 transition-colors">
                             {manual.model}
                           </h2>
-                          <p className="text-xs sm:text-sm text-gray-500 mb-2 sm:mb-3 line-clamp-1">{manual.name}</p>
+                          <p className="text-[11px] sm:text-sm text-gray-500 mb-1.5 sm:mb-3 line-clamp-1">{manual.name}</p>
                           
-                          {/* Opis */}
-                          <p className="text-gray-600 text-sm line-clamp-2 mb-4">
+                          {/* Opis - ukryty na mobile */}
+                          <p className="hidden sm:block text-gray-600 text-sm line-clamp-2 mb-4">
                             {manual.description}
                           </p>
 
+                          {/* Tagi dokumentów - mniejsze na mobile */}
+                          <div className="flex flex-wrap items-center gap-1 mb-2 sm:mb-3">
+                            {hasQuickStart && <span className="px-1 sm:px-1.5 py-0.5 bg-green-100 text-green-700 rounded text-[9px] sm:text-xs">Start</span>}
+                            {hasUserGuide && <span className="px-1 sm:px-1.5 py-0.5 bg-blue-100 text-blue-700 rounded text-[9px] sm:text-xs">Manual</span>}
+                            {hasProgramming && <span className="hidden sm:inline-block px-1.5 py-0.5 bg-purple-100 text-purple-700 rounded text-xs">ZPL</span>}
+                          </div>
+                          
                           {/* Przycisk */}
-                          <div className="flex items-center justify-between">
-                            <div className="flex items-center gap-1.5 text-xs text-gray-500">
-                              {hasQuickStart && <span className="px-1.5 py-0.5 bg-green-100 text-green-700 rounded">Szybki start</span>}
-                              {hasUserGuide && <span className="px-1.5 py-0.5 bg-blue-100 text-blue-700 rounded">Instrukcja</span>}
-                              {hasProgramming && <span className="px-1.5 py-0.5 bg-purple-100 text-purple-700 rounded">ZPL</span>}
-                            </div>
-                            <span className="text-blue-600 text-sm font-medium group-hover:text-blue-700 flex items-center gap-1">
-                              Zobacz
+                          <div className="flex items-center justify-end">
+                            <span className="text-blue-600 text-xs sm:text-sm font-medium group-hover:text-blue-700 flex items-center gap-0.5">
+                              <span className="hidden sm:inline">Zobacz</span>
                               <ChevronRight className="w-4 h-4" />
                             </span>
                           </div>
@@ -417,8 +420,8 @@ export default function InstrukcjePage() {
           )}
         </main>
 
-        {/* SEO Content Section */}
-        <section className="bg-white border-t border-gray-200 py-8 sm:py-12">
+        {/* SEO Content Section - ukryta na mobile */}
+        <section className="hidden sm:block bg-white border-t border-gray-200 py-8 sm:py-12">
           <div className="max-w-6xl mx-auto px-4">
             <div className="prose prose-gray max-w-none">
               <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4">
@@ -487,29 +490,39 @@ export default function InstrukcjePage() {
             </div>
           </div>
         </section>
+        
+        {/* SEO mini-sekcja na mobile */}
+        <section className="sm:hidden bg-gray-50 border-t border-gray-200 py-5 px-4">
+          <h2 className="text-sm font-semibold text-gray-800 mb-2">
+            Instrukcje urządzeń Zebra
+          </h2>
+          <p className="text-xs text-gray-600">
+            Pobierz instrukcje obsługi drukarek ZD420, ZD621, terminali TC52, MC3300 i skanerów DS2208.
+          </p>
+        </section>
 
         {/* CTA Section */}
-        <section className="bg-gradient-to-br from-gray-100 to-gray-50 border-t border-gray-200 py-6 sm:py-10">
-          <div className="max-w-4xl mx-auto px-4 text-center">
-            <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-2 sm:mb-3">
+        <section className="bg-gradient-to-br from-gray-100 to-gray-50 border-t border-gray-200 py-5 sm:py-10">
+          <div className="max-w-4xl mx-auto px-3 sm:px-4 text-center">
+            <h2 className="text-base sm:text-xl md:text-2xl font-bold text-gray-900 mb-1.5 sm:mb-3">
               Nie znalazłeś instrukcji?
             </h2>
-            <p className="text-gray-600 text-sm sm:text-base mb-4 sm:mb-6 max-w-2xl mx-auto">
-              Skontaktuj się z nami. Pomożemy znaleźć dokumentację do Twojego urządzenia Zebra.
+            <p className="text-gray-600 text-xs sm:text-base mb-3 sm:mb-6 max-w-2xl mx-auto">
+              Skontaktuj się z nami – pomożemy!
             </p>
-            <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 justify-center">
+            <div className="flex gap-2 sm:gap-3 justify-center">
               <Link 
                 href="/kontakt"
-                className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium text-sm sm:text-base rounded-lg transition-colors shadow-md shadow-blue-500/20 active:scale-[0.98]"
+                className="inline-flex items-center justify-center gap-1.5 px-4 sm:px-5 py-2 sm:py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs sm:text-base rounded-lg transition-colors shadow-md shadow-blue-500/20 active:scale-[0.98]"
               >
-                Skontaktuj się z nami
-                <ChevronRight className="w-4 h-4" />
+                Kontakt
+                <ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               </Link>
               <Link 
                 href="/#formularz"
-                className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-white hover:bg-gray-50 text-gray-900 font-medium text-sm sm:text-base rounded-lg transition-colors border border-gray-300 active:scale-[0.98]"
+                className="inline-flex items-center justify-center gap-1.5 px-4 sm:px-5 py-2 sm:py-2.5 bg-white hover:bg-gray-50 text-gray-900 font-medium text-xs sm:text-base rounded-lg transition-colors border border-gray-300 active:scale-[0.98]"
               >
-                Zgłoś naprawę urządzenia
+                Zgłoś naprawę
               </Link>
             </div>
           </div>
