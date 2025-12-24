@@ -39,7 +39,7 @@ interface StorageFile {
   name: string
   created_at: string
   updated_at: string
-  metadata: { size: number }
+  metadata: Record<string, any> | null
 }
 
 const categoryIcons: Record<string, React.ElementType> = {

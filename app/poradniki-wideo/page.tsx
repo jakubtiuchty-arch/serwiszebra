@@ -175,6 +175,16 @@ const videos: Video[] = [
     category: 'drukarki',
     tags: ['ZD220d', 'ZD230d', 'zakładanie etykiet', 'media loading', 'rolka etykiet'],
   },
+  {
+    id: '21',
+    title: 'Zakładanie taśmy transferowej w Zebra ZD421t',
+    description: 'Jak prawidłowo założyć taśmę transferową (ribbon) w drukarce termotransferowej Zebra ZD421t. Instrukcja krok po kroku - prowadzenie taśmy, nawijanie i konfiguracja.',
+    youtubeId: '0cU4YJuI00c',
+    thumbnail: '/zakładanie_taśmy_zd421t.jpeg',
+    duration: '4:00',
+    category: 'drukarki',
+    tags: ['ZD421t', 'taśma transferowa', 'ribbon', 'termotransfer', 'zakładanie taśmy'],
+  },
 ]
 
 const categories = [
