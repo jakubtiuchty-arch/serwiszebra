@@ -9,7 +9,10 @@ import {
   CheckCircle2,
   ChevronRight,
   AlertTriangle,
-  Star
+  Star,
+  ShieldCheck,
+  Laptop,
+  Plug
 } from 'lucide-react'
 import { blogPosts } from '@/lib/blog'
 import Header from '@/components/Header'
@@ -199,7 +202,7 @@ export default function TabletyPage() {
               {/* ET51/ET56 */}
               <div className="bg-white rounded-xl p-5 shadow-xl border border-gray-100 hover:shadow-2xl transition-shadow">
                 <div className="w-14 h-14 bg-gray-50 rounded-xl flex items-center justify-center mb-3 border border-gray-100">
-                  <Tablet className="w-7 h-7 text-gray-500" strokeWidth={1.5} />
+                  <ShieldCheck className="w-7 h-7 text-gray-500" strokeWidth={1.5} />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">ET51 / ET56</h3>
                 <ul className="space-y-1.5 text-gray-600 text-xs">
@@ -221,7 +224,7 @@ export default function TabletyPage() {
               {/* L10 */}
               <div className="bg-white rounded-xl p-5 shadow-xl border border-gray-100 hover:shadow-2xl transition-shadow">
                 <div className="w-14 h-14 bg-gray-50 rounded-xl flex items-center justify-center mb-3 border border-gray-100">
-                  <Tablet className="w-7 h-7 text-gray-500" strokeWidth={1.5} />
+                  <Laptop className="w-7 h-7 text-gray-500" strokeWidth={1.5} />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">Seria L10</h3>
                 <ul className="space-y-1.5 text-gray-600 text-xs">
@@ -243,7 +246,7 @@ export default function TabletyPage() {
               {/* Akcesoria */}
               <div className="bg-white rounded-xl p-5 shadow-xl border border-gray-100 hover:shadow-2xl transition-shadow">
                 <div className="w-14 h-14 bg-gray-50 rounded-xl flex items-center justify-center mb-3 border border-gray-100">
-                  <Tablet className="w-7 h-7 text-gray-500" strokeWidth={1.5} />
+                  <Plug className="w-7 h-7 text-gray-500" strokeWidth={1.5} />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">Akcesoria</h3>
                 <ul className="space-y-1.5 text-gray-600 text-xs">

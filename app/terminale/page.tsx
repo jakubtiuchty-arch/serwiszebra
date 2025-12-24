@@ -9,7 +9,10 @@ import {
   CheckCircle2,
   ChevronRight,
   AlertTriangle,
-  Star
+  Star,
+  Cpu,
+  Watch,
+  Tablet
 } from 'lucide-react'
 import { blogPosts } from '@/lib/blog'
 import Header from '@/components/Header'
@@ -197,7 +200,7 @@ export default function TerminalePage() {
               {/* Seria MC */}
               <div className="bg-white rounded-xl p-5 shadow-xl border border-gray-100 hover:shadow-2xl transition-shadow">
                 <div className="w-14 h-14 bg-gray-50 rounded-xl flex items-center justify-center mb-3 border border-gray-100">
-                  <Smartphone className="w-7 h-7 text-gray-500" strokeWidth={1.5} />
+                  <Cpu className="w-7 h-7 text-gray-500" strokeWidth={1.5} />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">Seria MC</h3>
                 <ul className="space-y-1.5 text-gray-600 text-xs">
@@ -219,7 +222,7 @@ export default function TerminalePage() {
               {/* Wearable */}
               <div className="bg-white rounded-xl p-5 shadow-xl border border-gray-100 hover:shadow-2xl transition-shadow">
                 <div className="w-14 h-14 bg-gray-50 rounded-xl flex items-center justify-center mb-3 border border-gray-100">
-                  <Smartphone className="w-7 h-7 text-gray-500" strokeWidth={1.5} />
+                  <Watch className="w-7 h-7 text-gray-500" strokeWidth={1.5} />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">Wearable</h3>
                 <ul className="space-y-1.5 text-gray-600 text-xs">
@@ -241,7 +244,7 @@ export default function TerminalePage() {
               {/* Tablety */}
               <div className="bg-white rounded-xl p-5 shadow-xl border border-gray-100 hover:shadow-2xl transition-shadow">
                 <div className="w-14 h-14 bg-gray-50 rounded-xl flex items-center justify-center mb-3 border border-gray-100">
-                  <Smartphone className="w-7 h-7 text-gray-500" strokeWidth={1.5} />
+                  <Tablet className="w-7 h-7 text-gray-500" strokeWidth={1.5} />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">Tablety</h3>
                 <ul className="space-y-1.5 text-gray-600 text-xs">

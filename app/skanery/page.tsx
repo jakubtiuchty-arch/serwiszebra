@@ -9,7 +9,11 @@ import {
   CheckCircle2,
   ChevronRight,
   AlertTriangle,
-  Star
+  Star,
+  Cable,
+  Wifi,
+  Store,
+  Pocket
 } from 'lucide-react'
 import { blogPosts } from '@/lib/blog'
 import Header from '@/components/Header'
@@ -176,7 +180,7 @@ export default function SkaneryPage() {
               {/* Przewodowe */}
               <div className="bg-white rounded-xl p-5 shadow-xl border border-gray-100 hover:shadow-2xl transition-shadow">
                 <div className="w-14 h-14 bg-gray-50 rounded-xl flex items-center justify-center mb-3 border border-gray-100">
-                  <ScanBarcode className="w-7 h-7 text-gray-500" strokeWidth={1.5} />
+                  <Cable className="w-7 h-7 text-gray-500" strokeWidth={1.5} />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">Przewodowe</h3>
                 <ul className="space-y-1.5 text-gray-600 text-xs">
@@ -198,7 +202,7 @@ export default function SkaneryPage() {
               {/* Bezprzewodowe */}
               <div className="bg-white rounded-xl p-5 shadow-xl border border-gray-100 hover:shadow-2xl transition-shadow">
                 <div className="w-14 h-14 bg-gray-50 rounded-xl flex items-center justify-center mb-3 border border-gray-100">
-                  <ScanBarcode className="w-7 h-7 text-gray-500" strokeWidth={1.5} />
+                  <Wifi className="w-7 h-7 text-gray-500" strokeWidth={1.5} />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">Bezprzewodowe</h3>
                 <ul className="space-y-1.5 text-gray-600 text-xs">
@@ -220,7 +224,7 @@ export default function SkaneryPage() {
               {/* Prezentacyjne */}
               <div className="bg-white rounded-xl p-5 shadow-xl border border-gray-100 hover:shadow-2xl transition-shadow">
                 <div className="w-14 h-14 bg-gray-50 rounded-xl flex items-center justify-center mb-3 border border-gray-100">
-                  <ScanBarcode className="w-7 h-7 text-gray-500" strokeWidth={1.5} />
+                  <Store className="w-7 h-7 text-gray-500" strokeWidth={1.5} />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">Prezentacyjne</h3>
                 <ul className="space-y-1.5 text-gray-600 text-xs">
@@ -242,7 +246,7 @@ export default function SkaneryPage() {
               {/* Kompaktowe */}
               <div className="bg-white rounded-xl p-5 shadow-xl border border-gray-100 hover:shadow-2xl transition-shadow">
                 <div className="w-14 h-14 bg-gray-50 rounded-xl flex items-center justify-center mb-3 border border-gray-100">
-                  <ScanBarcode className="w-7 h-7 text-gray-500" strokeWidth={1.5} />
+                  <Pocket className="w-7 h-7 text-gray-500" strokeWidth={1.5} />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">Kompaktowe</h3>
                 <ul className="space-y-1.5 text-gray-600 text-xs">
