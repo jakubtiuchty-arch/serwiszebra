@@ -6,10 +6,10 @@ import {
   Clock, 
   Shield, 
   Phone, 
+  CheckCircle2,
   ChevronRight,
-  Wifi,
-  Cable,
-  AlertTriangle
+  AlertTriangle,
+  Star
 } from 'lucide-react'
 import { blogPosts } from '@/lib/blog'
 import Header from '@/components/Header'
@@ -98,247 +98,266 @@ export default function SkaneryPage() {
       <Header currentPage="other" />
       
       <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-        {/* Breadcrumb */}
-        <div className="bg-white border-b">
-          <div className="max-w-6xl mx-auto px-3 sm:px-4 py-2 sm:py-3">
-            <nav className="flex items-center gap-2 text-xs sm:text-sm text-gray-600">
-              <Link href="/" className="hover:text-blue-600">Strona główna</Link>
-              <ChevronRight className="w-3 h-3 sm:w-4 sm:h-4" />
-              <span className="text-gray-900 font-medium">Serwis Skanerów</span>
-            </nav>
-          </div>
-        </div>
-
-        {/* Hero */}
-        <section className="bg-gradient-to-br from-purple-50 via-indigo-50 to-violet-50 py-8 sm:py-12 md:py-16">
-          <div className="max-w-6xl mx-auto px-3 sm:px-4">
-            <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-purple-100 rounded-xl flex items-center justify-center border border-purple-200">
-                <ScanBarcode className="w-5 h-5 sm:w-6 sm:h-6 text-purple-600" />
-              </div>
-              <span className="text-purple-600 font-medium text-sm sm:text-base">Serwis Skanerów</span>
+        {/* Hero - spójne z miastami */}
+        <section className="relative bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-8 sm:py-10 md:py-12 overflow-hidden">
+          <div className="relative max-w-6xl mx-auto px-3 sm:px-4 text-center md:text-left">
+            <div className="flex items-center justify-center md:justify-start gap-1.5 sm:gap-2 mb-3">
+              <ScanBarcode className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
+              <span className="text-blue-600 font-medium text-sm">Serwis Skanerów</span>
             </div>
             
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-gray-900 mb-3 sm:mb-4">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-gray-900 mb-3 sm:mb-4">
               Serwis Skanerów Zebra
+              <span className="block text-base sm:text-lg md:text-xl font-normal text-gray-600 mt-1 sm:mt-2">
+                – DS, LI, Parowanie Bluetooth
+              </span>
             </h1>
-            <p className="text-base sm:text-lg md:text-xl text-gray-600 mb-4 sm:mb-6 max-w-3xl">
-              Naprawa skanerów kodów kreskowych DS, LI. Parowanie Bluetooth, wymiana modułów, naprawa przycisków.
+            
+            <p className="text-sm sm:text-base text-gray-600 mb-5 sm:mb-6 max-w-2xl md:mx-0">
+              Profesjonalny serwis skanerów kodów kreskowych Zebra z 25-letnim doświadczeniem. Naprawa modułów, wymiana okienek, parowanie.
             </p>
 
-            <div className="flex flex-wrap gap-2 sm:gap-3 mb-5 sm:mb-8">
-              <div className="flex items-center gap-1.5 sm:gap-2 bg-white/80 border border-gray-200 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm">
-                <Truck className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-green-600" />
+            <div className="flex flex-wrap justify-center md:justify-start gap-2 sm:gap-3 mb-5 sm:mb-6">
+              <div className="flex items-center gap-1.5 bg-white/80 backdrop-blur-sm border border-gray-200 px-3 py-1.5 rounded-full text-xs sm:text-sm shadow-sm">
+                <Truck className="w-4 h-4 text-green-600" />
                 <span className="text-gray-700">Odbiór 24h</span>
               </div>
-              <div className="flex items-center gap-1.5 sm:gap-2 bg-white/80 border border-gray-200 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm">
-                <Clock className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-600" />
+              <div className="flex items-center gap-1.5 bg-white/80 backdrop-blur-sm border border-gray-200 px-3 py-1.5 rounded-full text-xs sm:text-sm shadow-sm">
+                <Clock className="w-4 h-4 text-amber-600" />
                 <span className="text-gray-700">2-5 dni</span>
               </div>
-              <div className="flex items-center gap-1.5 sm:gap-2 bg-white/80 border border-gray-200 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm">
-                <Shield className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-blue-600" />
+              <div className="flex items-center gap-1.5 bg-white/80 backdrop-blur-sm border border-gray-200 px-3 py-1.5 rounded-full text-xs sm:text-sm shadow-sm">
+                <Shield className="w-4 h-4 text-blue-600" />
                 <span className="text-gray-700">12 mies. gwarancji</span>
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-2 sm:gap-4">
-              <Link href="/#formularz" className="inline-flex items-center justify-center gap-2 bg-blue-600 text-white font-medium px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl hover:bg-blue-700 transition-colors shadow-lg text-sm sm:text-base">
-                Zgłoś naprawę skanera
-                <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
+            <div className="flex flex-wrap gap-3 justify-center md:justify-start">
+              <Link
+                href="/#formularz"
+                className="inline-flex items-center gap-2 bg-blue-600 text-white font-medium px-5 py-2.5 rounded-lg hover:bg-blue-700 transition-colors text-sm"
+              >
+                Zgłoś naprawę
+                <ChevronRight className="w-4 h-4" />
               </Link>
-              <a href="tel:+48601619898" className="inline-flex items-center justify-center gap-2 bg-white border border-gray-300 text-gray-700 font-medium px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl hover:bg-gray-50 transition-colors text-sm sm:text-base">
-                <Phone className="w-4 h-4 sm:w-5 sm:h-5" />
+              <a
+                href="tel:+48601619898"
+                className="inline-flex items-center gap-2 bg-white border border-gray-300 text-gray-700 font-medium px-5 py-2.5 rounded-lg hover:bg-gray-50 transition-colors text-sm"
+              >
+                <Phone className="w-4 h-4" />
                 +48 601 619 898
               </a>
             </div>
           </div>
         </section>
 
-        {/* SEO Introduction */}
-        <section className="py-6 sm:py-8 md:py-10 bg-white border-b border-gray-100">
-          <div className="max-w-4xl mx-auto px-3 sm:px-4">
-            <div className="prose prose-sm sm:prose max-w-none text-gray-600">
-              <p>
+        {/* Intro */}
+        <section className="py-8 sm:py-10 md:py-12">
+          <div className="max-w-6xl mx-auto px-3 sm:px-4">
+            <div className="bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 border border-amber-200 rounded-xl p-4 sm:p-5 md:p-6 shadow-sm mb-6">
+              <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
                 Specjalizujemy się w <strong>profesjonalnym serwisie skanerów kodów kreskowych Zebra</strong> – 
                 zarówno modeli przewodowych (DS2208, DS3608, DS4608), jak i bezprzewodowych z Bluetooth 
                 (DS2278, DS3678, DS4678). Jako <strong>autoryzowany partner Zebra Technologies</strong> 
-                mamy dostęp do oryginalnych części zamiennych.
-              </p>
-              <p className="mt-3 sm:mt-4">
-                Najczęstsze naprawy skanerów Zebra to <strong>uszkodzenia modułu skanującego</strong>, 
-                zarysowane okienka skanera, problemy z przyciskiem oraz usterki <strong>parowania Bluetooth</strong>. 
-                Na wszystkie naprawy udzielamy <strong>12 miesięcy gwarancji</strong>.
+                mamy dostęp do oryginalnych części zamiennych. <strong className="text-blue-900">25 lat doświadczenia.</strong>
               </p>
             </div>
           </div>
         </section>
 
-        {/* Kategorie skanerów */}
-        <section className="py-8 sm:py-10 md:py-12">
+        {/* Kategorie skanerów - spójne z miastami */}
+        <section className="py-10 sm:py-12 md:py-14 bg-white">
           <div className="max-w-6xl mx-auto px-3 sm:px-4">
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-6 sm:mb-8 text-center">
-              Jakie skanery Zebra serwisujemy?
+            <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-6 sm:mb-8 text-center">
+              Jakie skanery serwisujemy?
             </h2>
 
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
               {/* Przewodowe */}
-              <div className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 rounded-lg sm:rounded-xl flex items-center justify-center mb-3 sm:mb-4">
-                  <Cable className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
+              <div className="bg-white rounded-xl p-5 shadow-xl border border-gray-100 hover:shadow-2xl transition-shadow">
+                <div className="w-14 h-14 bg-gray-50 rounded-xl flex items-center justify-center mb-3 border border-gray-100">
+                  <ScanBarcode className="w-7 h-7 text-gray-500" strokeWidth={1.5} />
                 </div>
-                <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-1 sm:mb-2">Przewodowe</h3>
-                <p className="text-gray-600 text-xs sm:text-sm mb-2 sm:mb-3">USB / RS232</p>
-                <ul className="space-y-1 text-xs sm:text-sm text-gray-700">
-                  <li>• DS2208</li>
-                  <li>• DS3608</li>
-                  <li>• DS4608</li>
-                  <li>• DS8108</li>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Przewodowe</h3>
+                <ul className="space-y-1.5 text-gray-600 text-xs">
+                  <li className="flex items-start gap-1.5">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-green-600 flex-shrink-0 mt-0.5" />
+                    <span>DS2208 / DS3608</span>
+                  </li>
+                  <li className="flex items-start gap-1.5">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-green-600 flex-shrink-0 mt-0.5" />
+                    <span>DS4608 / DS8108</span>
+                  </li>
+                  <li className="flex items-start gap-1.5">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-green-600 flex-shrink-0 mt-0.5" />
+                    <span>LI2208 / LS2208</span>
+                  </li>
                 </ul>
               </div>
 
               {/* Bezprzewodowe */}
-              <div className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-purple-100 rounded-lg sm:rounded-xl flex items-center justify-center mb-3 sm:mb-4">
-                  <Wifi className="w-5 h-5 sm:w-6 sm:h-6 text-purple-600" />
+              <div className="bg-white rounded-xl p-5 shadow-xl border border-gray-100 hover:shadow-2xl transition-shadow">
+                <div className="w-14 h-14 bg-gray-50 rounded-xl flex items-center justify-center mb-3 border border-gray-100">
+                  <ScanBarcode className="w-7 h-7 text-gray-500" strokeWidth={1.5} />
                 </div>
-                <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-1 sm:mb-2">Bezprzewodowe</h3>
-                <p className="text-gray-600 text-xs sm:text-sm mb-2 sm:mb-3">Bluetooth</p>
-                <ul className="space-y-1 text-xs sm:text-sm text-gray-700">
-                  <li>• DS2278</li>
-                  <li>• DS3678</li>
-                  <li>• DS4678</li>
-                  <li>• DS8178</li>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Bezprzewodowe</h3>
+                <ul className="space-y-1.5 text-gray-600 text-xs">
+                  <li className="flex items-start gap-1.5">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-green-600 flex-shrink-0 mt-0.5" />
+                    <span>DS2278 / DS3678</span>
+                  </li>
+                  <li className="flex items-start gap-1.5">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-green-600 flex-shrink-0 mt-0.5" />
+                    <span>DS4678 / DS8178</span>
+                  </li>
+                  <li className="flex items-start gap-1.5">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-green-600 flex-shrink-0 mt-0.5" />
+                    <span>LI4278</span>
+                  </li>
                 </ul>
               </div>
 
               {/* Prezentacyjne */}
-              <div className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-green-100 rounded-lg sm:rounded-xl flex items-center justify-center mb-3 sm:mb-4">
-                  <ScanBarcode className="w-5 h-5 sm:w-6 sm:h-6 text-green-600" />
+              <div className="bg-white rounded-xl p-5 shadow-xl border border-gray-100 hover:shadow-2xl transition-shadow">
+                <div className="w-14 h-14 bg-gray-50 rounded-xl flex items-center justify-center mb-3 border border-gray-100">
+                  <ScanBarcode className="w-7 h-7 text-gray-500" strokeWidth={1.5} />
                 </div>
-                <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-1 sm:mb-2">Prezentacyjne</h3>
-                <p className="text-gray-600 text-xs sm:text-sm mb-2 sm:mb-3">Hands-free</p>
-                <ul className="space-y-1 text-xs sm:text-sm text-gray-700">
-                  <li>• DS9208</li>
-                  <li>• DS9308</li>
-                  <li>• DS9908</li>
-                  <li>• MP7000</li>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Prezentacyjne</h3>
+                <ul className="space-y-1.5 text-gray-600 text-xs">
+                  <li className="flex items-start gap-1.5">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-green-600 flex-shrink-0 mt-0.5" />
+                    <span>DS9208 / DS9308</span>
+                  </li>
+                  <li className="flex items-start gap-1.5">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-green-600 flex-shrink-0 mt-0.5" />
+                    <span>DS9908</span>
+                  </li>
+                  <li className="flex items-start gap-1.5">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-green-600 flex-shrink-0 mt-0.5" />
+                    <span>MP7000</span>
+                  </li>
                 </ul>
               </div>
 
               {/* Kompaktowe */}
-              <div className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-orange-100 rounded-lg sm:rounded-xl flex items-center justify-center mb-3 sm:mb-4">
-                  <ScanBarcode className="w-5 h-5 sm:w-6 sm:h-6 text-orange-600" />
+              <div className="bg-white rounded-xl p-5 shadow-xl border border-gray-100 hover:shadow-2xl transition-shadow">
+                <div className="w-14 h-14 bg-gray-50 rounded-xl flex items-center justify-center mb-3 border border-gray-100">
+                  <ScanBarcode className="w-7 h-7 text-gray-500" strokeWidth={1.5} />
                 </div>
-                <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-1 sm:mb-2">Kompaktowe</h3>
-                <p className="text-gray-600 text-xs sm:text-sm mb-2 sm:mb-3">Kieszonkowe</p>
-                <ul className="space-y-1 text-xs sm:text-sm text-gray-700">
-                  <li>• CS4070</li>
-                  <li>• CS6080</li>
-                  <li>• LI2208</li>
-                  <li>• LI4278</li>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Kompaktowe</h3>
+                <ul className="space-y-1.5 text-gray-600 text-xs">
+                  <li className="flex items-start gap-1.5">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-green-600 flex-shrink-0 mt-0.5" />
+                    <span>CS4070 / CS6080</span>
+                  </li>
+                  <li className="flex items-start gap-1.5">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-green-600 flex-shrink-0 mt-0.5" />
+                    <span>RS5100 / RS6100</span>
+                  </li>
+                  <li className="flex items-start gap-1.5">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-green-600 flex-shrink-0 mt-0.5" />
+                    <span>Ring skanery</span>
+                  </li>
                 </ul>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Cennik */}
-        <section className="py-8 sm:py-10 md:py-12 bg-white">
-          <div className="max-w-6xl mx-auto px-3 sm:px-4">
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-6 sm:mb-8 text-center">
-              Cennik napraw skanerów Zebra
+        {/* Cennik - spójny z miastami */}
+        <section className="py-10 sm:py-12 bg-gradient-to-br from-gray-50 to-gray-100">
+          <div className="max-w-5xl mx-auto px-3 sm:px-4">
+            <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-2 text-center">
+              Cennik orientacyjny
             </h2>
-
-            <div className="overflow-x-auto -mx-3 sm:mx-0">
-              <table className="w-full bg-gray-50 rounded-xl sm:rounded-2xl overflow-hidden min-w-[500px]">
-                <thead className="bg-purple-600 text-white">
-                  <tr>
-                    <th className="px-3 sm:px-6 py-3 sm:py-4 text-left font-semibold text-xs sm:text-sm">Usługa</th>
-                    <th className="px-3 sm:px-6 py-3 sm:py-4 text-left font-semibold text-xs sm:text-sm">Przewodowe</th>
-                    <th className="px-3 sm:px-6 py-3 sm:py-4 text-left font-semibold text-xs sm:text-sm">Bezprzewodowe</th>
-                    <th className="px-3 sm:px-6 py-3 sm:py-4 text-left font-semibold text-xs sm:text-sm">Prezentacyjne</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-gray-200 text-xs sm:text-sm">
-                  <tr className="bg-white">
-                    <td className="px-3 sm:px-6 py-3 sm:py-4 font-medium text-gray-900">Naprawa modułu</td>
-                    <td className="px-3 sm:px-6 py-3 sm:py-4 text-gray-700">300-600 zł</td>
-                    <td className="px-3 sm:px-6 py-3 sm:py-4 text-gray-700">400-700 zł</td>
-                    <td className="px-3 sm:px-6 py-3 sm:py-4 text-gray-700">500-800 zł</td>
-                  </tr>
-                  <tr className="bg-gray-50">
-                    <td className="px-3 sm:px-6 py-3 sm:py-4 font-medium text-gray-900">Wymiana okna</td>
-                    <td className="px-3 sm:px-6 py-3 sm:py-4 text-gray-700">100-200 zł</td>
-                    <td className="px-3 sm:px-6 py-3 sm:py-4 text-gray-700">150-250 zł</td>
-                    <td className="px-3 sm:px-6 py-3 sm:py-4 text-gray-700">200-300 zł</td>
-                  </tr>
-                  <tr className="bg-white">
-                    <td className="px-3 sm:px-6 py-3 sm:py-4 font-medium text-gray-900">Naprawa przycisku</td>
-                    <td className="px-3 sm:px-6 py-3 sm:py-4 text-gray-700">200-350 zł</td>
-                    <td className="px-3 sm:px-6 py-3 sm:py-4 text-gray-700">250-400 zł</td>
-                    <td className="px-3 sm:px-6 py-3 sm:py-4 text-gray-700">-</td>
-                  </tr>
-                  <tr className="bg-gray-50">
-                    <td className="px-3 sm:px-6 py-3 sm:py-4 font-medium text-gray-900">Konserwacja</td>
-                    <td className="px-3 sm:px-6 py-3 sm:py-4 text-gray-700">89-120 zł</td>
-                    <td className="px-3 sm:px-6 py-3 sm:py-4 text-gray-700">89-150 zł</td>
-                    <td className="px-3 sm:px-6 py-3 sm:py-4 text-gray-700">120-180 zł</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-
-            <p className="text-center text-gray-500 mt-3 sm:mt-4 text-xs sm:text-sm px-2">
-              * Ceny orientacyjne. Dokładna wycena po diagnostyce. Diagnostyka bezpłatna przy akceptacji naprawy.
+            <p className="text-sm text-gray-600 text-center mb-6">
+              Dokładna wycena po bezpłatnej diagnostyce
             </p>
+
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
+              <div className="bg-white rounded-xl p-4 border border-gray-100 shadow-lg text-center">
+                <p className="text-xs text-gray-500 mb-1">Moduł skanujący</p>
+                <p className="text-lg font-semibold text-gray-900">od 300 zł</p>
+              </div>
+              <div className="bg-white rounded-xl p-4 border border-gray-100 shadow-lg text-center">
+                <p className="text-xs text-gray-500 mb-1">Okno skanera</p>
+                <p className="text-lg font-semibold text-gray-900">od 100 zł</p>
+              </div>
+              <div className="bg-white rounded-xl p-4 border border-gray-100 shadow-lg text-center">
+                <p className="text-xs text-gray-500 mb-1">Przycisk/spust</p>
+                <p className="text-lg font-semibold text-gray-900">od 200 zł</p>
+              </div>
+              <div className="bg-white rounded-xl p-4 border border-gray-100 shadow-lg text-center">
+                <p className="text-xs text-gray-500 mb-1">Czyszczenie</p>
+                <p className="text-lg font-semibold text-gray-900">od 89 zł</p>
+              </div>
+            </div>
           </div>
         </section>
 
-        {/* Artykuły */}
-        <section className="py-8 sm:py-10 md:py-12">
-          <div className="max-w-6xl mx-auto px-3 sm:px-4">
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-6 sm:mb-8 text-center">
-              Najczęstsze problemy ze skanerami Zebra
-            </h2>
+        {/* Najczęstsze problemy */}
+        {scannerArticles.length > 0 && (
+          <section className="py-10 sm:py-12 md:py-14">
+            <div className="max-w-6xl mx-auto px-3 sm:px-4">
+              <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-6 sm:mb-8 text-center">
+                Najczęstsze problemy ze skanerami Zebra
+              </h2>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
-              {scannerArticles.map((article) => (
-                <Link key={article.slug} href={`/blog/${article.slug}`} className="bg-white rounded-xl p-4 sm:p-5 shadow-sm border border-gray-100 hover:shadow-lg hover:border-purple-200 transition-all group">
-                  <div className="flex items-start gap-3">
-                    <div className="w-9 h-9 sm:w-10 sm:h-10 bg-orange-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <AlertTriangle className="w-4 h-4 sm:w-5 sm:h-5 text-orange-600" />
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {scannerArticles.map((article) => (
+                  <Link
+                    key={article.slug}
+                    href={`/blog/${article.slug}`}
+                    className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:shadow-lg hover:border-blue-200 transition-all group"
+                  >
+                    <div className="flex items-start gap-3">
+                      <div className="w-10 h-10 bg-gray-50 rounded-lg flex items-center justify-center flex-shrink-0 border border-gray-100">
+                        <AlertTriangle className="w-5 h-5 text-gray-500" strokeWidth={1.5} />
+                      </div>
+                      <div>
+                        <h3 className="font-medium text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-2 text-sm">
+                          {article.title}
+                        </h3>
+                        <p className="text-xs text-gray-500 mt-1">{article.readingTime} min</p>
+                      </div>
                     </div>
-                    <div>
-                      <h3 className="font-semibold text-gray-900 group-hover:text-purple-600 transition-colors line-clamp-2 text-sm sm:text-base">{article.title}</h3>
-                      <p className="text-xs sm:text-sm text-gray-500 mt-1">{article.readingTime} min</p>
-                    </div>
-                  </div>
+                  </Link>
+                ))}
+              </div>
+
+              <div className="text-center mt-6">
+                <Link
+                  href="/blog"
+                  className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 font-medium text-sm"
+                >
+                  Zobacz wszystkie poradniki
+                  <ChevronRight className="w-4 h-4" />
                 </Link>
-              ))}
+              </div>
             </div>
-
-            <div className="text-center mt-6 sm:mt-8">
-              <Link href="/blog" className="inline-flex items-center gap-2 text-purple-600 hover:text-purple-800 font-medium text-sm sm:text-base">
-                Zobacz wszystkie poradniki <ChevronRight className="w-4 h-4" />
-              </Link>
-            </div>
-          </div>
-        </section>
+          </section>
+        )}
 
         {/* FAQ */}
-        <section className="py-8 sm:py-10 md:py-12 bg-white">
+        <section className="py-10 sm:py-12 md:py-14 bg-white">
           <div className="max-w-4xl mx-auto px-3 sm:px-4">
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-6 sm:mb-8 text-center">Często zadawane pytania</h2>
-            <div className="space-y-3 sm:space-y-4">
+            <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-6 sm:mb-8 text-center">
+              Najczęściej zadawane pytania
+            </h2>
+
+            <div className="space-y-3">
               {faq.map((item, idx) => (
-                <details key={idx} className="bg-gray-50 rounded-xl overflow-hidden group">
-                  <summary className="px-4 sm:px-6 py-3 sm:py-4 cursor-pointer font-medium text-gray-900 hover:bg-gray-100 transition-colors flex items-center justify-between text-sm sm:text-base">
-                    {item.question}
-                    <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 group-open:rotate-90 transition-transform flex-shrink-0 ml-2" />
+                <details
+                  key={idx}
+                  className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden group"
+                >
+                  <summary className="px-5 py-4 cursor-pointer font-medium text-gray-900 hover:bg-gray-50 transition-colors flex items-center justify-between gap-3 text-sm sm:text-base">
+                    <span>{item.question}</span>
+                    <ChevronRight className="w-5 h-5 text-gray-400 group-open:rotate-90 transition-transform flex-shrink-0" />
                   </summary>
-                  <div className="px-4 sm:px-6 pb-3 sm:pb-4 text-gray-600 text-sm">{item.answer}</div>
+                  <div className="px-5 pb-4 text-sm text-gray-600">
+                    {item.answer}
+                  </div>
                 </details>
               ))}
             </div>
@@ -346,16 +365,33 @@ export default function SkaneryPage() {
         </section>
 
         {/* CTA */}
-        <section className="py-8 sm:py-10 md:py-12 bg-gradient-to-br from-purple-50 via-indigo-50 to-violet-50">
+        <section className="py-10 sm:py-12 bg-gray-50 border-t border-gray-100">
           <div className="max-w-4xl mx-auto px-3 sm:px-4 text-center">
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-900 mb-3 sm:mb-4">Twój skaner Zebra wymaga naprawy?</h2>
-            <p className="text-sm sm:text-base md:text-lg text-gray-600 mb-5 sm:mb-8">Wypełnij formularz online lub zadzwoń. Kurier odbierze skaner bezpłatnie w 24h!</p>
-            <div className="flex flex-col sm:flex-row justify-center gap-2 sm:gap-4">
-              <Link href="/#formularz" className="inline-flex items-center justify-center gap-2 bg-blue-600 text-white font-medium px-6 sm:px-8 py-3 sm:py-4 rounded-xl hover:bg-blue-700 transition-colors shadow-lg text-sm sm:text-base">
-                Zgłoś naprawę online <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
+            <div className="flex items-center justify-center gap-1 mb-3">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} className="w-5 h-5 fill-amber-400 text-amber-400" />
+              ))}
+            </div>
+            <p className="text-gray-500 mb-3 text-sm">25 lat doświadczenia • Tysiące napraw</p>
+            
+            <h2 className="text-xl sm:text-2xl font-semibold text-gray-900 mb-5">
+              Twój skaner Zebra wymaga naprawy?
+            </h2>
+
+            <div className="flex flex-wrap justify-center gap-3">
+              <Link
+                href="/#formularz"
+                className="inline-flex items-center gap-2 bg-blue-600 text-white font-medium px-6 py-2.5 rounded-lg hover:bg-blue-700 transition-colors text-sm"
+              >
+                Zgłoś naprawę online
+                <ChevronRight className="w-4 h-4" />
               </Link>
-              <a href="tel:+48601619898" className="inline-flex items-center justify-center gap-2 bg-white border border-gray-300 text-gray-700 font-medium px-6 sm:px-8 py-3 sm:py-4 rounded-xl hover:bg-gray-50 transition-colors text-sm sm:text-base">
-                <Phone className="w-4 h-4 sm:w-5 sm:h-5" /> +48 601 619 898
+              <a
+                href="tel:+48601619898"
+                className="inline-flex items-center gap-2 bg-white border border-gray-300 text-gray-700 font-medium px-6 py-2.5 rounded-lg hover:bg-gray-50 transition-colors text-sm"
+              >
+                <Phone className="w-4 h-4" />
+                +48 601 619 898
               </a>
             </div>
           </div>
@@ -366,4 +402,3 @@ export default function SkaneryPage() {
     </>
   )
 }
-
