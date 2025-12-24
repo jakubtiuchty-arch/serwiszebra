@@ -301,7 +301,7 @@ export default function JakToDzialaPage() {
         </div>
       </section>
 
-      {/* STEPS SECTION - Compact */}
+      {/* STEPS SECTION */}
       <section className="py-8 sm:py-12 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8">
@@ -337,15 +337,15 @@ export default function JakToDzialaPage() {
                     </div>
                   </div>
 
-                  <p className="text-xs text-gray-600 mb-3 line-clamp-2">
+                  <p className="text-xs text-gray-600 mb-3">
                     {step.description}
                   </p>
 
                   <ul className="space-y-1.5">
-                    {step.details.slice(0, 3).map((detail, i) => (
+                    {step.details.map((detail, i) => (
                       <li key={i} className="flex items-start gap-2">
                         <CheckCircle2 className={`w-3.5 h-3.5 ${colors.text} flex-shrink-0 mt-0.5`} />
-                        <span className="text-gray-600 text-xs line-clamp-1">{detail}</span>
+                        <span className="text-gray-600 text-xs">{detail}</span>
                       </li>
                     ))}
                   </ul>
@@ -356,7 +356,7 @@ export default function JakToDzialaPage() {
         </div>
       </section>
 
-      {/* ADDITIONAL FEATURES - Compact */}
+      {/* ADDITIONAL FEATURES */}
       <section className="py-8 sm:py-10 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-6">
@@ -365,21 +365,21 @@ export default function JakToDzialaPage() {
             </h2>
           </div>
 
-          <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {additionalFeatures.map((feature, index) => {
               const Icon = feature.icon
               return (
                 <div 
                   key={index}
-                  className="p-3 sm:p-4 bg-white rounded-lg border border-gray-200 hover:shadow-md transition-shadow"
+                  className="p-4 bg-white rounded-lg border border-gray-200 hover:shadow-md transition-shadow"
                 >
-                  <div className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center mb-2">
-                    <Icon className="w-4 h-4 text-gray-600" />
+                  <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center mb-3">
+                    <Icon className="w-5 h-5 text-gray-600" />
                   </div>
-                  <h3 className="text-xs sm:text-sm font-bold text-gray-900 mb-1">
+                  <h3 className="text-sm font-bold text-gray-900 mb-2">
                     {feature.title}
                   </h3>
-                  <p className="text-gray-600 text-xs line-clamp-2 hidden sm:block">
+                  <p className="text-gray-600 text-xs">
                     {feature.description}
                   </p>
                 </div>
@@ -389,72 +389,104 @@ export default function JakToDzialaPage() {
         </div>
       </section>
 
-      {/* WHY US SECTION - Compact */}
+      {/* WHY US SECTION */}
       <section className="py-8 sm:py-10 bg-gray-900 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-lg sm:text-xl font-bold mb-6 text-center">
+          <h2 className="text-xl sm:text-2xl font-bold mb-6 text-center">
             Dlaczego Serwis Zebra jest inny?
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="bg-white/5 rounded-lg p-4 border border-white/10">
+            <div className="bg-white/5 rounded-lg p-5 border border-white/10">
               <h3 className="text-sm font-bold mb-3 text-red-400">❌ Tradycyjny serwis</h3>
-              <ul className="space-y-1.5 text-gray-400 text-xs">
-                <li>• Dzwonisz, czekasz, tłumaczysz problem</li>
-                <li>• Sam musisz zawieźć urządzenie</li>
-                <li>• Nie wiesz, co się dzieje z naprawą</li>
-                <li>• Wycena przez telefon</li>
+              <ul className="space-y-2 text-gray-400 text-sm">
+                <li className="flex items-start gap-2">
+                  <span className="text-red-400">✗</span>
+                  <span>Dzwonisz, czekasz na połączenie, tłumaczysz problem</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-red-400">✗</span>
+                  <span>Sam musisz zawieźć urządzenie do serwisu</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-red-400">✗</span>
+                  <span>Nie wiesz, co się dzieje z naprawą</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-red-400">✗</span>
+                  <span>Wycena przez telefon, bez możliwości porównania</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-red-400">✗</span>
+                  <span>Papierowe faktury, brak archiwum napraw</span>
+                </li>
               </ul>
             </div>
 
-            <div className="bg-green-900/20 rounded-lg p-4 border border-green-500/30">
+            <div className="bg-green-900/20 rounded-lg p-5 border border-green-500/30">
               <h3 className="text-sm font-bold mb-3 text-green-400">✅ Serwis Zebra</h3>
-              <ul className="space-y-1.5 text-gray-300 text-xs">
-                <li>• Diagnoza AI 24/7</li>
-                <li>• Kurier pod drzwi</li>
-                <li>• Panel Klienta – śledzisz na żywo</li>
-                <li>• Płatność kartą/BLIK/Apple Pay</li>
+              <ul className="space-y-2 text-gray-300 text-sm">
+                <li className="flex items-start gap-2">
+                  <span className="text-green-400">✓</span>
+                  <span>Diagnoza AI 24/7 – natychmiastowa pomoc o każdej porze</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-green-400">✓</span>
+                  <span>Kurier pod drzwi – nie ruszasz się z biura</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-green-400">✓</span>
+                  <span>Panel Klienta – śledzisz naprawę na żywo</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-green-400">✓</span>
+                  <span>Wycena online, płatność kartą/BLIK/Apple Pay</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-green-400">✓</span>
+                  <span>Archiwum napraw, analityka, prognozy awarii</span>
+                </li>
               </ul>
             </div>
           </div>
         </div>
       </section>
 
-      {/* CONTENT & RESOURCES - Compact */}
+      {/* CONTENT & RESOURCES */}
       <section className="py-8 sm:py-10 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-4 text-center">
-            Zasoby i wiedza
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6 text-center">
+            Zasoby i wiedza o urządzeniach Zebra
           </h2>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <Link 
               href="/blog"
-              className="group bg-gray-50 rounded-lg p-4 border border-gray-200 hover:border-blue-300 hover:shadow-md transition-all"
+              className="group bg-gray-50 rounded-lg p-5 border border-gray-200 hover:border-blue-300 hover:shadow-md transition-all"
             >
-              <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center mb-2">
-                <BookOpen className="w-4 h-4 text-blue-600" />
+              <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mb-3">
+                <BookOpen className="w-5 h-5 text-blue-600" />
               </div>
-              <h3 className="text-sm font-bold text-gray-900 mb-1 group-hover:text-blue-600">
-                Blog
+              <h3 className="text-base font-bold text-gray-900 mb-2 group-hover:text-blue-600">
+                Blog – Poradniki napraw
               </h3>
-              <p className="text-gray-600 text-xs line-clamp-2 hidden sm:block">
-                Poradniki napraw i diagnostyki urządzeń Zebra.
+              <p className="text-gray-600 text-sm">
+                Dziesiątki artykułów opisujących najczęstsze problemy z drukarkami etykiet, terminalami mobilnymi i skanerami Zebra. Krok po kroku pokazujemy jak diagnozować i rozwiązywać usterki.
               </p>
             </Link>
 
             <Link 
               href="/poradniki-wideo"
-              className="group bg-gray-50 rounded-lg p-4 border border-gray-200 hover:border-red-300 hover:shadow-md transition-all"
+              className="group bg-gray-50 rounded-lg p-5 border border-gray-200 hover:border-red-300 hover:shadow-md transition-all"
             >
-              <div className="w-8 h-8 bg-red-100 rounded-lg flex items-center justify-center mb-2">
-                <Video className="w-4 h-4 text-red-600" />
+              <div className="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center mb-3">
+                <Video className="w-5 h-5 text-red-600" />
               </div>
-              <h3 className="text-sm font-bold text-gray-900 mb-1 group-hover:text-red-600">
+              <h3 className="text-base font-bold text-gray-900 mb-2 group-hover:text-red-600">
                 Poradniki wideo
               </h3>
-              <p className="text-gray-600 text-xs line-clamp-2 hidden sm:block">
-                Instrukcje wideo krok po kroku.
+              <p className="text-gray-600 text-sm">
+                Instrukcje wideo przedstawiające najczęstsze problemy i ich rozwiązania. Kalibracja drukarek, wymiana głowic, konfiguracja sieci – wszystko pokazane krok po kroku.
               </p>
             </Link>
           </div>
