@@ -1494,20 +1494,43 @@ export default function HomePage() {
 
           {/* Links section */}
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 lg:gap-12">
-              {/* Nawigacja */}
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-6 sm:gap-8 lg:gap-10">
+              {/* Serwis */}
               <div className="text-center">
-                <h4 className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-gray-500 mb-3 sm:mb-5">Nawigacja</h4>
+                <h4 className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-gray-500 mb-3 sm:mb-5">Serwis</h4>
                 <ul className="space-y-2 sm:space-y-3">
                   {[
-                    { href: '#co-naprawiamy', label: 'Co naprawiamy' },
-                    { href: '#cennik', label: 'Cennik' },
-                    { href: '#jak-to-dziala', label: 'Jak to działa' },
+                    { href: '/drukarki', label: 'Serwis drukarek' },
+                    { href: '/terminale', label: 'Serwis terminali' },
+                    { href: '/skanery', label: 'Serwis skanerów' },
+                    { href: '/instrukcje', label: 'Instrukcje' },
+                    { href: '/poradniki-wideo', label: 'Poradniki wideo' },
                   ].map((link) => (
                     <li key={link.href}>
-                      <a href={link.href} className="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors duration-200">
+                      <Link href={link.href} className="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors duration-200">
                         {link.label}
-                      </a>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Miasta */}
+              <div className="text-center">
+                <h4 className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-gray-500 mb-3 sm:mb-5">Miasta</h4>
+                <ul className="space-y-2 sm:space-y-3">
+                  {[
+                    { href: '/serwis-zebra/warszawa', label: 'Warszawa' },
+                    { href: '/serwis-zebra/krakow', label: 'Kraków' },
+                    { href: '/serwis-zebra/wroclaw', label: 'Wrocław' },
+                    { href: '/serwis-zebra/poznan', label: 'Poznań' },
+                    { href: '/serwis-zebra/gdansk', label: 'Gdańsk' },
+                    { href: '/serwis-zebra/katowice', label: 'Katowice' },
+                  ].map((link) => (
+                    <li key={link.href}>
+                      <Link href={link.href} className="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors duration-200">
+                        {link.label}
+                      </Link>
                     </li>
                   ))}
                 </ul>
@@ -1525,9 +1548,9 @@ export default function HomePage() {
                     { href: '/kontakt', label: 'Kontakt' },
                   ].map((link) => (
                     <li key={link.href}>
-                      <a href={link.href} className="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors duration-200">
+                      <Link href={link.href} className="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors duration-200">
                         {link.label}
-                      </a>
+                      </Link>
                     </li>
                   ))}
                 </ul>

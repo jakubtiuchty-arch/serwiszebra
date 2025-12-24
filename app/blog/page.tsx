@@ -801,10 +801,94 @@ export default function BlogPage() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-8">
+      <footer className="bg-gray-900 text-white py-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Links Grid */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8 pb-8 border-b border-gray-800">
+            {/* Serwis */}
+            <div>
+              <h4 className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-4">Serwis</h4>
+              <ul className="space-y-2">
+                {[
+                  { href: '/drukarki', label: 'Serwis drukarek' },
+                  { href: '/terminale', label: 'Serwis terminali' },
+                  { href: '/skanery', label: 'Serwis skanerów' },
+                  { href: '/instrukcje', label: 'Instrukcje' },
+                  { href: '/poradniki-wideo', label: 'Poradniki wideo' },
+                ].map((link) => (
+                  <li key={link.href}>
+                    <Link href={link.href} className="text-sm text-gray-400 hover:text-white transition-colors">
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Miasta */}
+            <div>
+              <h4 className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-4">Miasta</h4>
+              <ul className="space-y-2">
+                {[
+                  { href: '/serwis-zebra/warszawa', label: 'Warszawa' },
+                  { href: '/serwis-zebra/krakow', label: 'Kraków' },
+                  { href: '/serwis-zebra/wroclaw', label: 'Wrocław' },
+                  { href: '/serwis-zebra/poznan', label: 'Poznań' },
+                  { href: '/serwis-zebra/gdansk', label: 'Gdańsk' },
+                  { href: '/serwis-zebra/katowice', label: 'Katowice' },
+                ].map((link) => (
+                  <li key={link.href}>
+                    <Link href={link.href} className="text-sm text-gray-400 hover:text-white transition-colors">
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Informacje */}
+            <div>
+              <h4 className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-4">Informacje</h4>
+              <ul className="space-y-2">
+                {[
+                  { href: '/blog', label: 'Blog' },
+                  { href: '/sterowniki', label: 'Sterowniki' },
+                  { href: '/faq', label: 'FAQ' },
+                  { href: '/o-nas', label: 'O nas' },
+                  { href: '/kontakt', label: 'Kontakt' },
+                ].map((link) => (
+                  <li key={link.href}>
+                    <Link href={link.href} className="text-sm text-gray-400 hover:text-white transition-colors">
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Prawne */}
+            <div>
+              <h4 className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-4">Prawne</h4>
+              <ul className="space-y-2">
+                {[
+                  { href: '/regulamin', label: 'Regulamin' },
+                  { href: '/polityka-prywatnosci', label: 'Polityka prywatności' },
+                  { href: '/sitemap.xml', label: 'Mapa strony' },
+                  { href: '/feed.xml', label: 'RSS Feed' },
+                ].map((link) => (
+                  <li key={link.href}>
+                    <Link href={link.href} className="text-sm text-gray-400 hover:text-white transition-colors">
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {/* Copyright */}
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="text-gray-400 text-sm">
+            <p className="text-gray-500 text-sm">
               © 2025 TAKMA - Serwis Zebra. Wszystkie prawa zastrzeżone.
             </p>
             <div className="flex items-center gap-4 text-sm">
@@ -813,15 +897,6 @@ export default function BlogPage() {
                   <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1Z"/>
                 </svg>
                 RSS
-              </Link>
-              <Link href="/sitemap.xml" className="text-gray-400 hover:text-white" aria-label="Mapa strony">
-                Sitemap
-              </Link>
-              <Link href="/regulamin" className="text-gray-400 hover:text-white">
-                Regulamin
-              </Link>
-              <Link href="/polityka-prywatnosci" className="text-gray-400 hover:text-white">
-                Prywatność
               </Link>
             </div>
           </div>
