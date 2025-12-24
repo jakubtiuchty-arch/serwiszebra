@@ -48,7 +48,9 @@ interface Manual {
   description: string
   documents: {
     quickStart?: Document
+    quickstart?: Document
     userGuide?: Document
+    userguide?: Document
     programming?: Document
     service?: Document
     videos?: VideoDoc[]
