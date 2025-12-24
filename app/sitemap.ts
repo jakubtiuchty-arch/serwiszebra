@@ -142,7 +142,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     
     if (manuals) {
       manualPages = manuals.map((manual) => ({
-        url: `${baseUrl}/instrukcje/${manual.model.toLowerCase()}`,
+        url: `${baseUrl}/instrukcje/zebra-${manual.model.toLowerCase()}`,
         lastModified: manual.updated_at ? new Date(manual.updated_at) : now,
         changeFrequency: 'monthly' as const,
         priority: 0.8,
