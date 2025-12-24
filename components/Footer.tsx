@@ -96,8 +96,8 @@ export default function Footer() {
                   { href: '/drukarki', label: 'Serwis drukarek' },
                   { href: '/terminale', label: 'Serwis terminali' },
                   { href: '/skanery', label: 'Serwis skanerów' },
+                  { href: '/tablety', label: 'Serwis tabletów' },
                   { href: '/instrukcje', label: 'Instrukcje' },
-                  { href: '/poradniki-wideo', label: 'Poradniki wideo' },
                 ].map((link) => (
                   <li key={link.href}>
                     <Link href={link.href} className="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors duration-200">
