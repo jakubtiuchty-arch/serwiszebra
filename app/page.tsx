@@ -320,6 +320,12 @@ export default function HomePage() {
                   <a href="/blog" className="hidden md:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
                     Blog
                   </a>
+                  <a href="/instrukcje" className="hidden md:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
+                    Instrukcje
+                  </a>
+                  <a href="/poradniki-wideo" className="hidden md:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
+                    Poradniki wideo
+                  </a>
                   <a href="/o-nas" className="hidden md:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
                     O nas
                   </a>
@@ -434,6 +440,24 @@ export default function HomePage() {
               >
                 <BookOpen className="w-4 h-4" />
                 <span>Blog</span>
+              </a>
+              
+              <a
+                href="/instrukcje"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+              >
+                <FileText className="w-4 h-4" />
+                <span>Instrukcje</span>
+              </a>
+              
+              <a
+                href="/poradniki-wideo"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+              >
+                <Eye className="w-4 h-4" />
+                <span>Poradniki wideo</span>
               </a>
               
               <a
