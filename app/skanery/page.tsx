@@ -20,7 +20,7 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 
 export const metadata: Metadata = {
-  title: 'Serwis Skanerów Zebra – Naprawa DS, LI, Parowanie | Odbiór 24h',
+  title: 'Serwis Skanerów Zebra – Naprawa DS, LI, RS | Odbiór 24h',
   description: 'Profesjonalny serwis skanerów kodów kreskowych Zebra: DS2208, DS3678, DS4608, LI2208. ✓ Naprawa modułów ✓ Wymiana okienek ✓ Problemy z parowaniem ✓ 12 mies. gwarancji ✓ Odbiór kurierem 24h.',
   keywords: [
     'serwis skanerów zebra',
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     'serwis skanerów przemysłowych',
   ],
   openGraph: {
-    title: 'Serwis Skanerów Zebra – Naprawa DS, LI, Parowanie',
+    title: 'Serwis Skanerów Zebra – Naprawa DS, LI, RS',
     description: 'Profesjonalny serwis skanerów kodów kreskowych Zebra. Naprawa modułów, wymiana okienek, problemy z parowaniem.',
     url: 'https://www.serwis-zebry.pl/skanery',
   },
@@ -80,7 +80,7 @@ const serviceSchema = {
     telephone: '+48601619898'
   },
   areaServed: 'Polska',
-  serviceType: ['Naprawa skanerów', 'Parowanie Bluetooth', 'Wymiana modułów']
+  serviceType: ['Naprawa skanerów', 'Serwis RS', 'Wymiana modułów']
 }
 
 const faqSchema = {
@@ -113,7 +113,7 @@ export default function SkaneryPage() {
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-gray-900 mb-3 sm:mb-4">
               Serwis Skanerów Zebra
               <span className="block text-base sm:text-lg md:text-xl font-normal text-gray-600 mt-1 sm:mt-2">
-                – DS, LI, Parowanie Bluetooth
+                – DS, LI, RS
               </span>
             </h1>
             
