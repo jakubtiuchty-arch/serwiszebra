@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Calendar, ThumbsUp, Zap, Menu, X, User, LogIn, BookOpen, Download, HelpCircle, Info, Phone, Home } from 'lucide-react'
+import { Calendar, ThumbsUp, Zap, Menu, X, User, LogIn, BookOpen, Download, HelpCircle, Info, Phone, Home, Video } from 'lucide-react'
 
 interface HeaderProps {
   currentPage?: 'home' | 'blog' | 'panel' | 'other'
@@ -102,6 +102,10 @@ export default function Header({ currentPage = 'other', hidePartnerLogos = false
               
               <Link href="/instrukcje" className="hidden md:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
                 Instrukcje
+              </Link>
+              
+              <Link href="/poradniki-wideo" className="hidden md:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
+                Poradniki wideo
               </Link>
               
               <Link href="/o-nas" className="hidden md:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
@@ -208,6 +212,15 @@ export default function Header({ currentPage = 'other', hidePartnerLogos = false
               >
                 <Download className="w-4 h-4" />
                 <span>Instrukcje</span>
+              </Link>
+              
+              <Link
+                href="/poradniki-wideo"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+              >
+                <Video className="w-4 h-4" />
+                <span>Poradniki wideo</span>
               </Link>
               
               <Link
