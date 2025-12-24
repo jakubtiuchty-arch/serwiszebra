@@ -302,8 +302,8 @@ export default function JakToDzialaPage() {
       </section>
 
       {/* STEPS SECTION */}
-      <section className="py-8 sm:py-12 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-8 sm:py-12 bg-gray-50">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8">
             <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">
               Proces naprawy krok po kroku
@@ -313,42 +313,59 @@ export default function JakToDzialaPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {steps.map((step) => {
+          <div className="space-y-6">
+            {steps.map((step, index) => {
               const Icon = step.icon
               const colors = getColorClasses(step.color)
+              const isEven = index % 2 === 0
 
               return (
                 <div 
                   key={step.number}
-                  className="bg-white rounded-xl p-4 border border-gray-200 hover:shadow-lg transition-shadow"
+                  className={`flex flex-col ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-4 lg:gap-6 items-stretch`}
                 >
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className={`w-10 h-10 ${colors.bg} rounded-lg flex items-center justify-center text-white`}>
-                      <Icon className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <div className={`text-xs font-semibold ${colors.text}`}>
-                        Krok {step.number}
+                  {/* Content */}
+                  <div className="flex-1">
+                    <div className={`${colors.light} rounded-xl p-4 border ${colors.border} h-full`}>
+                      <div className="flex items-center gap-3 mb-3">
+                        <div className={`w-10 h-10 ${colors.bg} rounded-lg flex items-center justify-center text-white`}>
+                          <Icon className="w-5 h-5" />
+                        </div>
+                        <div>
+                          <div className={`text-xs font-semibold ${colors.text}`}>
+                            Krok {step.number}
+                          </div>
+                          <h3 className="text-sm font-bold text-gray-900">
+                            {step.title}
+                          </h3>
+                        </div>
                       </div>
-                      <h3 className="text-sm font-bold text-gray-900">
-                        {step.title}
-                      </h3>
+
+                      <p className="text-xs text-gray-600 mb-3">
+                        {step.description}
+                      </p>
+
+                      <ul className="space-y-1.5">
+                        {step.details.map((detail, i) => (
+                          <li key={i} className="flex items-start gap-2">
+                            <CheckCircle2 className={`w-3.5 h-3.5 ${colors.text} flex-shrink-0 mt-0.5`} />
+                            <span className="text-gray-600 text-xs">{detail}</span>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
                   </div>
 
-                  <p className="text-xs text-gray-600 mb-3">
-                    {step.description}
-                  </p>
-
-                  <ul className="space-y-1.5">
-                    {step.details.map((detail, i) => (
-                      <li key={i} className="flex items-start gap-2">
-                        <CheckCircle2 className={`w-3.5 h-3.5 ${colors.text} flex-shrink-0 mt-0.5`} />
-                        <span className="text-gray-600 text-xs">{detail}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  {/* Image placeholder */}
+                  <div className="flex-1 hidden lg:block">
+                    <div className="relative h-full min-h-[200px] bg-gray-200 rounded-xl overflow-hidden">
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className={`w-12 h-12 ${colors.bg} rounded-full flex items-center justify-center opacity-30`}>
+                          <Icon className="w-6 h-6 text-white" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               )
             })}
