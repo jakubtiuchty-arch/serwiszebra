@@ -1,8 +1,21 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Serwis drukarek Zebra - Naprawa i konserwacja',
-  description: 'Profesjonalny serwis drukarek etykiet Zebra: ZD420, ZT410, GK420, ZD620 i innych. Wymiana głowic, naprawa mechanizmów, kalibracja. Ekspresowa naprawa 2-5 dni.',
+  title: 'Serwis drukarek Zebra - Naprawa gwarancyjna i pogwarancyjna',
+  description: 'Autoryzowany serwis gwarancyjny i pogwarancyjny drukarek Zebra: ZD420, ZT410, GK420, ZD620. Wymiana głowic, naprawa mechanizmów, kalibracja. Ekspresowa naprawa 2-5 dni.',
+  keywords: [
+    'serwis drukarek zebra',
+    'naprawa drukarek zebra',
+    'serwis gwarancyjny drukarek zebra',
+    'naprawa gwarancyjna drukarki zebra',
+    'serwis pogwarancyjny drukarek zebra',
+    'serwis drukarek etykiet',
+    'wymiana głowicy zebra',
+    'naprawa ZD420',
+    'naprawa ZT410',
+    'serwis GK420',
+    'naprawa ZD620'
+  ],
   alternates: {
     canonical: 'https://www.serwis-zebry.pl/drukarki',
     languages: {

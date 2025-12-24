@@ -1,8 +1,21 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Serwis terminali Zebra - Naprawa TC, MC, WT',
-  description: 'Profesjonalny serwis terminali mobilnych Zebra: TC52, MC3300, MC9300, WT6000 i innych. Wymiana ekranów, baterii, naprawa skanerów. Ekspresowa naprawa.',
+  title: 'Serwis terminali Zebra - Naprawa gwarancyjna i pogwarancyjna TC, MC, WT',
+  description: 'Autoryzowany serwis gwarancyjny i pogwarancyjny terminali Zebra: TC52, MC3300, MC9300, WT6000. Wymiana ekranów, baterii, naprawa skanerów. Ekspresowa naprawa.',
+  keywords: [
+    'serwis terminali zebra',
+    'naprawa terminali zebra',
+    'serwis gwarancyjny terminali zebra',
+    'naprawa gwarancyjna terminal zebra',
+    'serwis pogwarancyjny terminali zebra',
+    'naprawa TC52',
+    'serwis MC3300',
+    'naprawa MC9300',
+    'serwis WT6000',
+    'wymiana ekranu terminal zebra',
+    'wymiana baterii terminal zebra'
+  ],
   alternates: {
     canonical: 'https://www.serwis-zebry.pl/terminale',
     languages: {

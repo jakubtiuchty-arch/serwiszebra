@@ -20,10 +20,10 @@ export const metadata: Metadata = {
     shortcut: '/favicon.ico',
   },
   title: {
-    default: 'Serwis Zebra – Autoryzowany Serwis z AI 24/7 | Kurier pod Drzwi | Panel Klienta',
+    default: 'Serwis Zebra – Autoryzowany Serwis Gwarancyjny i Pogwarancyjny | AI 24/7',
     template: '%s | Serwis Zebra'
   },
-  description: 'Autoryzowany serwis Zebra z diagnostyką AI 24/7 🤖 Jedyny taki w Polsce! Opisz problem – wycenę masz w 2 minuty. ✓ Panel klienta ze śledzeniem naprawy ✓ Kurier pod drzwi w 24h ✓ Wideoporadniki ✓ 25 lat doświadczenia. Drukarki, terminale, skanery.',
+  description: 'Autoryzowany serwis gwarancyjny i pogwarancyjny Zebra z diagnostyką AI 24/7 🤖 Jedyny taki w Polsce! Opisz problem – wycenę masz w 2 minuty. ✓ Panel klienta ✓ Kurier pod drzwi w 24h ✓ Wideoporadniki ✓ 25 lat doświadczenia. Drukarki, terminale, skanery.',
   keywords: [
     'serwis zebra',
     'serwis drukarek zebra',
@@ -33,7 +33,13 @@ export const metadata: Metadata = {
     'serwis terminali mobilnych',
     'naprawa skanerów zebra',
     'autoryzowany serwis zebra',
+    'serwis gwarancyjny zebra',
     'zebra serwis gwarancyjny',
+    'serwis gwarancyjny drukarek zebra',
+    'serwis gwarancyjny terminali zebra',
+    'serwis gwarancyjny skanerów zebra',
+    'naprawa gwarancyjna zebra',
+    'serwis pogwarancyjny zebra',
     'zebra serwis kontakt',
     'serwis drukarek zebra warszawa',
     'serwis drukarek zebra kraków',

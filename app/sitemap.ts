@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next'
 import { blogPosts } from '@/lib/blog'
+import { createClient } from '@supabase/supabase-js'
 
 // Lista miast dla Local SEO
 const cities = [
@@ -8,7 +9,13 @@ const cities = [
   'rzeszow', 'torun', 'kielce', 'olsztyn', 'opole', 'zielona-gora'
 ]
 
-export default function sitemap(): MetadataRoute.Sitemap {
+// Supabase client
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.SUPABASE_SERVICE_ROLE_KEY!
+)
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://www.serwis-zebry.pl'
   
   // Data ostatniej aktualizacji
@@ -101,6 +108,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'weekly',
       priority: 0.9,
     },
+    {
+      url: `${baseUrl}/instrukcje`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
   ]
   
   // 2. Artykuły blogowe (46+)
@@ -118,8 +131,28 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: 'monthly' as const,
     priority: 0.8,
   }))
+
+  // 4. Strony instrukcji (dynamiczne z Supabase)
+  let manualPages: MetadataRoute.Sitemap = []
+  try {
+    const { data: manuals } = await supabase
+      .from('manuals')
+      .select('model, updated_at')
+      .eq('is_active', true)
+    
+    if (manuals) {
+      manualPages = manuals.map((manual) => ({
+        url: `${baseUrl}/instrukcje/${manual.model.toLowerCase()}`,
+        lastModified: manual.updated_at ? new Date(manual.updated_at) : now,
+        changeFrequency: 'monthly' as const,
+        priority: 0.8,
+      }))
+    }
+  } catch (error) {
+    console.error('Error fetching manuals for sitemap:', error)
+  }
   
   // Połącz wszystkie strony
-  return [...staticPages, ...blogPages, ...cityPages]
+  return [...staticPages, ...blogPages, ...cityPages, ...manualPages]
 }
 

@@ -17,7 +17,8 @@ import {
   Home,
   ExternalLink,
   Menu,
-  X
+  X,
+  BookOpen
 } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
@@ -67,6 +68,15 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     current: pathname === '/admin/uzytkownicy',
   },
   
+  // Baza wiedzy
+  { type: 'header', name: 'Baza wiedzy' },
+  {
+    name: 'Instrukcje PDF',
+    href: '/admin/instrukcje',
+    icon: BookOpen,
+    current: pathname === '/admin/instrukcje',
+  },
+
   // AI & RAG
   { type: 'header', name: 'AI & RAG' },
   {

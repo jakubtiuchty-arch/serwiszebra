@@ -100,6 +100,10 @@ export default function Header({ currentPage = 'other', hidePartnerLogos = false
                 Blog
               </Link>
               
+              <Link href="/instrukcje" className="hidden md:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
+                Instrukcje
+              </Link>
+              
               <Link href="/o-nas" className="hidden md:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
                 O nas
               </Link>
@@ -195,6 +199,15 @@ export default function Header({ currentPage = 'other', hidePartnerLogos = false
               >
                 <BookOpen className="w-4 h-4" />
                 <span>Blog</span>
+              </Link>
+              
+              <Link
+                href="/instrukcje"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+              >
+                <Download className="w-4 h-4" />
+                <span>Instrukcje</span>
               </Link>
               
               <Link
