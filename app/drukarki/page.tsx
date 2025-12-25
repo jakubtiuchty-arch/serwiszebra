@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import { 
   Printer, 
   Truck, 
@@ -115,6 +116,18 @@ export default function DrukarkiPage() {
       <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
         {/* Hero - spójne z miastami */}
         <section className="relative bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-8 sm:py-10 md:py-12 overflow-hidden">
+          {/* Zdjęcie w tle - tylko na desktop */}
+          <div className="absolute inset-0 hidden md:block">
+            <Image
+              src="/serwis_drukarki.jpeg"
+              alt="Serwis drukarek Zebra"
+              fill
+              className="object-cover object-center"
+              priority
+            />
+            {/* Gradient overlay - od lewej przezroczysty do prawej widoczny */}
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-50 via-blue-50/95 via-60% to-transparent" />
+          </div>
           <div className="relative max-w-6xl mx-auto px-3 sm:px-4 text-center md:text-left">
             <div className="flex items-center justify-center md:justify-start gap-1.5 sm:gap-2 mb-3">
               <Printer className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
