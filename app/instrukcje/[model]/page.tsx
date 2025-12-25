@@ -462,27 +462,108 @@ export default async function ModelPage({ params }: { params: { model: string } 
             </div>
           </div>
 
-          {/* SEO Content */}
+          {/* SEO Content - dopasowane do typu urządzenia */}
           <div className="bg-gray-50 rounded-2xl p-6 mb-8">
             <h2 className="text-lg font-bold text-gray-900 mb-4">
               Instrukcja obsługi Zebra {manual.model}
             </h2>
             <div className="prose prose-sm prose-gray max-w-none">
               <p>
-                Na tej stronie znajdziesz kompletną dokumentację do urządzenia <strong>Zebra {manual.model}</strong>. 
-                Dostępne są oficjalne instrukcje producenta w formacie PDF, które możesz pobrać bezpłatnie.
+                Na tej stronie znajdziesz kompletną <strong>dokumentację Zebra {manual.model}</strong> w formacie PDF. 
+                Pobierz oficjalne <strong>instrukcje obsługi {manual.model}</strong> od producenta – szybki start, 
+                user guide, manual serwisowy i przewodnik programowania.
               </p>
-              <h3>Co znajdziesz w dokumentacji {manual.model}?</h3>
+              
+              <h3>Dokumentacja {manual.model} – co zawiera?</h3>
               <ul>
-                <li><strong>Szybki start</strong> – podstawowa konfiguracja, podłączenie i pierwsze uruchomienie</li>
-                <li><strong>Instrukcja obsługi</strong> – pełny opis wszystkich funkcji i ustawień</li>
-                <li><strong>Programowanie ZPL</strong> – komendy do tworzenia etykiet w języku ZPL</li>
+                <li><strong>Quick Start {manual.model}</strong> – szybki start, pierwsze uruchomienie, podstawowa konfiguracja</li>
+                <li><strong>User Guide {manual.model}</strong> – pełna instrukcja obsługi ze wszystkimi funkcjami i ustawieniami</li>
+                {manual.category.startsWith('drukarki') && (
+                  <>
+                    <li><strong>Programowanie ZPL {manual.model}</strong> – komendy ZPL, tworzenie etykiet, przykłady kodu</li>
+                    <li><strong>Kalibracja {manual.model}</strong> – jak skalibrować drukarkę, ustawienia czujników</li>
+                  </>
+                )}
+                <li><strong>Troubleshooting {manual.model}</strong> – rozwiązywanie problemów, kody błędów, diagnostyka</li>
               </ul>
-              <h3>Potrzebujesz pomocy z {manual.model}?</h3>
+
+              {/* Treść SEO specyficzna dla drukarek */}
+              {manual.category.startsWith('drukarki') && (
+                <>
+                  <h3>Kalibracja i konfiguracja drukarki {manual.model}</h3>
+                  <p>
+                    <strong>Drukarka Zebra {manual.model}</strong> wymaga prawidłowej kalibracji przed pierwszym użyciem. 
+                    W instrukcji znajdziesz informacje o <strong>kalibracji etykiet {manual.model}</strong>, 
+                    <strong>ustawieniach głowicy drukującej</strong>, parametrach wydruku i <strong>programowaniu w języku ZPL</strong>.
+                  </p>
+                  <h3>Najczęstsze problemy z {manual.model}</h3>
+                  <p>
+                    Instrukcja serwisowa {manual.model} zawiera rozwiązania typowych problemów: 
+                    <strong>blady wydruk {manual.model}</strong>, <strong>zacięcie etykiety</strong>, 
+                    <strong>błąd kalibracji</strong>, <strong>wymiana głowicy {manual.model}</strong>, 
+                    <strong>czyszczenie drukarki</strong> i <strong>reset fabryczny {manual.model}</strong>.
+                  </p>
+                </>
+              )}
+
+              {/* Treść SEO specyficzna dla terminali */}
+              {manual.category === 'terminale' && (
+                <>
+                  <h3>Konfiguracja terminala {manual.model}</h3>
+                  <p>
+                    <strong>Terminal mobilny Zebra {manual.model}</strong> to zaawansowany kolektor danych z systemem Android. 
+                    W dokumentacji znajdziesz informacje o <strong>konfiguracji WiFi {manual.model}</strong>, 
+                    <strong>ustawieniach DataWedge</strong>, <strong>skanowaniu kodów kreskowych</strong> i integracji z systemami WMS.
+                  </p>
+                  <h3>Serwis i naprawa {manual.model}</h3>
+                  <p>
+                    Oferujemy profesjonalny serwis terminali Zebra: <strong>wymiana ekranu {manual.model}</strong>, 
+                    <strong>wymiana baterii {manual.model}</strong>, naprawa modułu skanującego, 
+                    <strong>aktualizacja systemu Android</strong> i przywracanie ustawień fabrycznych.
+                  </p>
+                </>
+              )}
+
+              {/* Treść SEO specyficzna dla skanerów */}
+              {manual.category === 'skanery' && (
+                <>
+                  <h3>Konfiguracja skanera {manual.model}</h3>
+                  <p>
+                    <strong>Skaner kodów kreskowych Zebra {manual.model}</strong> obsługuje kody 1D i 2D, w tym QR. 
+                    W instrukcji znajdziesz informacje o <strong>parowaniu Bluetooth {manual.model}</strong>, 
+                    <strong>konfiguracji USB</strong>, trybie prezentacji i programowaniu za pomocą kodów konfiguracyjnych.
+                  </p>
+                  <h3>Problemy ze skanerem {manual.model}</h3>
+                  <p>
+                    Najczęstsze problemy: <strong>skaner nie czyta kodów</strong>, problemy z <strong>parowaniem Bluetooth</strong>, 
+                    <strong>wymiana okienka skanera {manual.model}</strong>, konfiguracja z komputerem i bazą stacji.
+                  </p>
+                </>
+              )}
+
+              {/* Treść SEO specyficzna dla tabletów */}
+              {manual.category === 'tablety' && (
+                <>
+                  <h3>Konfiguracja tabletu {manual.model}</h3>
+                  <p>
+                    <strong>Tablet przemysłowy Zebra {manual.model}</strong> to wytrzymałe urządzenie rugged 
+                    z systemem Android lub Windows. W dokumentacji znajdziesz informacje o <strong>konfiguracji WiFi</strong>, 
+                    <strong>stacji dokującej {manual.model}</strong>, uchwytach samochodowych i akcesoriach.
+                  </p>
+                  <h3>Serwis tabletu {manual.model}</h3>
+                  <p>
+                    Oferujemy profesjonalny serwis tabletów Zebra: <strong>wymiana ekranu {manual.model}</strong>, 
+                    <strong>wymiana baterii {manual.model}</strong>, naprawa portów ładowania, 
+                    aktualizacja systemu i konfiguracja MDM.
+                  </p>
+                </>
+              )}
+
+              <h3>Potrzebujesz pomocy z Zebra {manual.model}?</h3>
               <p>
-                Jeśli Twoje urządzenie {manual.model} wymaga naprawy lub konfiguracji, 
-                skontaktuj się z naszym serwisem. Jako autoryzowany partner Zebra oferujemy 
-                profesjonalną pomoc i szybkie naprawy.
+                Jeśli Twoje urządzenie <strong>Zebra {manual.model}</strong> wymaga <strong>naprawy</strong>, 
+                <strong>kalibracji</strong> lub <strong>konfiguracji</strong>, skontaktuj się z naszym autoryzowanym serwisem. 
+                Oferujemy <strong>bezpłatną diagnostykę</strong>, oryginalne części zamienne i <strong>12 miesięcy gwarancji</strong> na naprawy.
               </p>
             </div>
           </div>
