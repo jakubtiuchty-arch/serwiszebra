@@ -197,15 +197,15 @@ export default function TerminalePage() {
                 <ul className="space-y-1.5 text-gray-600 text-xs">
                   <li className="flex items-start gap-1.5">
                     <CheckCircle2 className="w-3.5 h-3.5 text-green-600 flex-shrink-0 mt-0.5" />
-                    <span>TC21 / TC26</span>
+                    <span>TC22 / TC27</span>
                   </li>
                   <li className="flex items-start gap-1.5">
                     <CheckCircle2 className="w-3.5 h-3.5 text-green-600 flex-shrink-0 mt-0.5" />
-                    <span>TC52 / TC57 / TC58</span>
+                    <span>TC53 / TC58</span>
                   </li>
                   <li className="flex items-start gap-1.5">
                     <CheckCircle2 className="w-3.5 h-3.5 text-green-600 flex-shrink-0 mt-0.5" />
-                    <span>TC72 / TC77</span>
+                    <span>TC73 / TC78</span>
                   </li>
                 </ul>
               </div>
@@ -219,15 +219,15 @@ export default function TerminalePage() {
                 <ul className="space-y-1.5 text-gray-600 text-xs">
                   <li className="flex items-start gap-1.5">
                     <CheckCircle2 className="w-3.5 h-3.5 text-green-600 flex-shrink-0 mt-0.5" />
-                    <span>MC2200 / MC2700</span>
+                    <span>MC3300 / MC330x</span>
                   </li>
                   <li className="flex items-start gap-1.5">
                     <CheckCircle2 className="w-3.5 h-3.5 text-green-600 flex-shrink-0 mt-0.5" />
-                    <span>MC3300 / MC3390</span>
+                    <span>MC3400 / MC3450</span>
                   </li>
                   <li className="flex items-start gap-1.5">
                     <CheckCircle2 className="w-3.5 h-3.5 text-green-600 flex-shrink-0 mt-0.5" />
-                    <span>MC9300</span>
+                    <span>MC9400 / MC9450</span>
                   </li>
                 </ul>
               </div>
@@ -254,12 +254,12 @@ export default function TerminalePage() {
                 </ul>
               </div>
 
-              {/* Tablety */}
+              {/* Seria ET */}
               <div className="bg-white rounded-xl p-5 shadow-xl border border-gray-100 hover:shadow-2xl transition-shadow">
                 <div className="w-14 h-14 bg-gray-50 rounded-xl flex items-center justify-center mb-3 border border-gray-100">
                   <Tablet className="w-7 h-7 text-gray-500" strokeWidth={1.5} />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Tablety</h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Seria ET</h3>
                 <ul className="space-y-1.5 text-gray-600 text-xs">
                   <li className="flex items-start gap-1.5">
                     <CheckCircle2 className="w-3.5 h-3.5 text-green-600 flex-shrink-0 mt-0.5" />
@@ -271,7 +271,7 @@ export default function TerminalePage() {
                   </li>
                   <li className="flex items-start gap-1.5">
                     <CheckCircle2 className="w-3.5 h-3.5 text-green-600 flex-shrink-0 mt-0.5" />
-                    <span>L10</span>
+                    <span>ET60 / ET65</span>
                   </li>
                 </ul>
               </div>
