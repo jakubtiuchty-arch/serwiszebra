@@ -9,10 +9,14 @@ import {
   Battery,
   Cable,
   Check,
-  Zap
+  Zap,
+  Truck,
+  Shield,
+  Phone
 } from 'lucide-react'
 import AddToCartButton from '@/components/AddToCartButton'
 import Header from '@/components/Header'
+import Footer from '@/components/Footer'
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
@@ -74,13 +78,13 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   }
 
   return {
-    title: `${product.name} | TAKMA Serwis Zebra`,
+    title: `${product.name} | Sklep TAKMA`,
     description: product.description,
     openGraph: {
       title: product.name,
       description: product.description,
       type: 'website',
-      images: ['/placeholder-product.jpg']
+      images: product.image_url ? [product.image_url] : ['/placeholder-product.jpg']
     }
   }
 }
@@ -95,156 +99,191 @@ export default async function ProductPage({ params }: { params: { slug: string }
   const Icon = PRODUCT_TYPE_ICONS[product.product_type] || Package
 
   return (
-    <div className="min-h-screen relative flex flex-col">
-      {/* BACKGROUND WITH LINES */}
-      <div className="fixed inset-0 -z-10 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-0 left-[10%] w-1 h-full bg-gradient-to-b from-gray-200/20 via-gray-300/25 to-transparent" />
-          <div className="absolute top-0 left-[25%] w-0.5 h-full bg-gradient-to-b from-gray-200/15 via-gray-300/20 to-transparent" />
-          <div className="absolute top-0 left-[40%] w-1 h-full bg-gradient-to-b from-gray-200/20 via-gray-300/25 to-transparent" />
-          <div className="absolute top-0 right-[35%] w-0.5 h-full bg-gradient-to-b from-gray-200/15 via-gray-300/20 to-transparent" />
-          <div className="absolute top-0 right-[20%] w-1 h-full bg-gradient-to-b from-gray-200/20 via-gray-300/25 to-transparent" />
-          <div className="absolute top-0 right-[8%] w-0.5 h-full bg-gradient-to-b from-gray-200/15 via-gray-300/20 to-transparent" />
-        </div>
-      </div>
-
-      {/* HEADER */}
-      <Header />
-
-      {/* CONTENT - KOMPAKTOWY */}
-      <div className="flex-1 pt-32 pb-12 px-3 sm:px-4 lg:px-6 relative z-10">
-        <div className="max-w-[1400px] mx-auto">
-
-          {/* BREADCRUMBS - KOMPAKTOWY */}
-          <div className="flex items-center gap-1.5 text-xs text-gray-600 mb-3">
-            <Link href="/" className="hover:text-gray-900 transition-colors">
-              Start
-            </Link>
-            <ChevronRight className="w-3.5 h-3.5" />
-            <Link href="/sklep" className="hover:text-gray-900 transition-colors">
-              Sklep
-            </Link>
-            <ChevronRight className="w-3.5 h-3.5" />
-            <span className="text-gray-900 font-medium">{product.name}</span>
+    <>
+      <Header currentPage="other" />
+      
+      <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+        {/* Hero - mini wersja */}
+        <section className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-4 sm:py-5">
+          <div className="max-w-6xl mx-auto px-3 sm:px-4">
+            {/* Breadcrumbs */}
+            <div className="flex items-center gap-1.5 text-sm text-gray-600">
+              <Link href="/" className="hover:text-gray-900 transition-colors">
+                Start
+              </Link>
+              <ChevronRight className="w-4 h-4" />
+              <Link href="/sklep" className="hover:text-gray-900 transition-colors">
+                Sklep
+              </Link>
+              <ChevronRight className="w-4 h-4" />
+              <span className="text-gray-900 font-medium truncate max-w-[200px] sm:max-w-none">{product.name}</span>
+            </div>
           </div>
+        </section>
 
-          {/* MAIN PRODUCT SECTION - KOMPAKTOWY */}
-          <div className="grid lg:grid-cols-2 gap-4 mb-4">
-            
-           {/* LEFT: GALLERY - KOMPAKTOWY */}
-<div>
-  <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-sm border border-gray-200 overflow-hidden relative group">
-    <div className="relative aspect-video bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center">
-      {product.image_url ? (
-        <Image
-          src={product.image_url}
-          alt={product.name}
-          fill
-          className="object-contain p-4"
-          priority
-        />
-      ) : (
-        <Icon className="w-16 h-16 text-gray-400 group-hover:text-gray-600 transition-all duration-500 group-hover:scale-110" />
-      )}
+        {/* Main Content */}
+        <section className="py-8 sm:py-10 md:py-12">
+          <div className="max-w-6xl mx-auto px-3 sm:px-4">
+            <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 mb-8">
+              
+              {/* LEFT: Gallery */}
+              <div>
+                <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden relative group">
+                  <div className="relative aspect-square bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center">
+                    {product.image_url ? (
+                      <Image
+                        src={product.image_url}
+                        alt={product.name}
+                        fill
+                        className="object-contain p-6"
+                        priority
+                      />
+                    ) : (
+                      <Icon className="w-24 h-24 text-gray-400 group-hover:text-gray-500 transition-all duration-500 group-hover:scale-110" />
+                    )}
 
-      {product.stock <= 3 && product.stock > 0 && (
-        <div className="absolute top-3 right-3 bg-gradient-to-r from-orange-500 to-red-500 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg animate-pulse">
-          <Zap className="w-3 h-3 inline mr-1" />
-          Ostatnie {product.stock} szt.
-        </div>
-      )}
-      {product.stock === 0 && (
-        <div className="absolute top-3 right-3 bg-gray-800 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">
-          Brak w magazynie
-        </div>
-      )}
-    </div>
-  </div>
-</div>
-
-            {/* RIGHT: DETAILS - KOMPAKTOWY */}
-            <div className="space-y-3">
-              {/* MAIN CARD - KOMPAKTOWY */}
-              <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-sm border border-gray-200 p-3">
-                <h1 className="text-lg md:text-xl font-bold text-gray-900 mb-1 leading-tight">
-                  {product.name}
-                </h1>
-
-                <div className="flex items-center gap-2 mb-2 pb-2 border-b border-gray-200">
-                  <span className="text-[10px] text-gray-600">
-                    PN:{' '}
-                    <span className="font-mono text-gray-900 bg-gray-100 px-1.5 py-0.5 rounded text-[10px]">
-                      {product.sku}
-                    </span>
-                  </span>
-                </div>
-
-                <p className="text-gray-700 text-xs mb-3 leading-relaxed">
-                  {product.description}
-                </p>
-
-                {/* STOCK INFO - KOMPAKTOWY */}
-                {product.stock > 0 && (
-                  <div className="flex items-center gap-1.5 bg-green-50 px-3 py-2 rounded-lg border border-green-200 mb-3">
-                    <Check className="w-3.5 h-3.5 text-green-600" />
-                    <span className="text-xs font-semibold text-green-900">
-                      W magazynie ({product.stock} szt.)
-                    </span>
-                  </div>
-                )}
-
-                {/* PRICE - MINIMALISTYCZNA */}
-                <div className="mb-3">
-                  <div className="flex items-baseline gap-2 mb-1">
-                    <span className="text-2xl font-bold text-gray-900">{product.price.toFixed(2)} zł</span>
-                    <span className="text-xs text-gray-500">(netto)</span>
-                  </div>
-                  <div className="text-xs text-gray-600">
-                    Cena brutto: {product.price_brutto.toFixed(2)} zł (VAT 23%)
+                    {product.stock <= 3 && product.stock > 0 && (
+                      <div className="absolute top-4 right-4 bg-gradient-to-r from-orange-500 to-red-500 text-white text-sm font-bold px-4 py-2 rounded-full shadow-lg animate-pulse">
+                        <Zap className="w-4 h-4 inline mr-1" />
+                        Ostatnie {product.stock} szt.
+                      </div>
+                    )}
+                    {product.stock === 0 && (
+                      <div className="absolute top-4 right-4 bg-gray-800 text-white text-sm font-bold px-4 py-2 rounded-full shadow-lg">
+                        Brak w magazynie
+                      </div>
+                    )}
                   </div>
                 </div>
+              </div>
 
-                {/* ADD TO CART BUTTON */}
-                <AddToCartButton
-                  product={{
-                    id: product.id,
-                    name: product.name,
-                    slug: product.slug,
-                    sku: product.sku,
-                    price: product.price,
-                    price_brutto: product.price_brutto,
-                    product_type: product.product_type,
-                    stock: product.stock,
-                  }}
-                />
+              {/* RIGHT: Details */}
+              <div className="space-y-4">
+                {/* Main Card */}
+                <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-5 sm:p-6">
+                  <h1 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">
+                    {product.name}
+                  </h1>
+
+                  <div className="flex items-center gap-3 mb-4 pb-4 border-b border-gray-200">
+                    <span className="text-sm text-gray-600">
+                      PN:{' '}
+                      <span className="font-mono text-gray-900 bg-gray-100 px-2 py-1 rounded text-sm">
+                        {product.sku}
+                      </span>
+                    </span>
+                  </div>
+
+                  <p className="text-gray-700 text-sm sm:text-base mb-4 leading-relaxed">
+                    {product.description}
+                  </p>
+
+                  {/* Metadata */}
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {product.device_model && (
+                      <span className="text-xs bg-gray-100 text-gray-700 px-3 py-1 rounded-full">
+                        Model: {product.device_model}
+                      </span>
+                    )}
+                    {product.resolution_dpi && (
+                      <span className="text-xs bg-blue-50 text-blue-700 px-3 py-1 rounded-full">
+                        {product.resolution_dpi} DPI
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Stock Info */}
+                  {product.stock > 0 && (
+                    <div className="flex items-center gap-2 bg-green-50 px-4 py-3 rounded-lg border border-green-200 mb-4">
+                      <Check className="w-5 h-5 text-green-600" />
+                      <span className="text-sm font-semibold text-green-900">
+                        W magazynie ({product.stock} szt.)
+                      </span>
+                    </div>
+                  )}
+
+                  {/* Price */}
+                  <div className="mb-5">
+                    <div className="flex items-baseline gap-2 mb-1">
+                      <span className="text-3xl font-bold text-gray-900">{product.price.toFixed(2)} zł</span>
+                      <span className="text-sm text-gray-500">(netto)</span>
+                    </div>
+                    <div className="text-sm text-gray-600">
+                      Cena brutto: <strong>{product.price_brutto.toFixed(2)} zł</strong> (VAT 23%)
+                    </div>
+                  </div>
+
+                  {/* Add to Cart Button */}
+                  <AddToCartButton
+                    product={{
+                      id: product.id,
+                      name: product.name,
+                      slug: product.slug,
+                      sku: product.sku,
+                      price: product.price,
+                      price_brutto: product.price_brutto,
+                      product_type: product.product_type,
+                      stock: product.stock,
+                    }}
+                  />
+                </div>
+
+                {/* Benefits */}
+                <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-5">
+                  <div className="grid grid-cols-3 gap-4 text-center">
+                    <div>
+                      <Check className="w-6 h-6 text-green-600 mx-auto mb-1" />
+                      <p className="text-xs text-gray-600">Oryginalna część</p>
+                    </div>
+                    <div>
+                      <Truck className="w-6 h-6 text-amber-600 mx-auto mb-1" />
+                      <p className="text-xs text-gray-600">Wysyłka 24h</p>
+                    </div>
+                    <div>
+                      <Shield className="w-6 h-6 text-blue-600 mx-auto mb-1" />
+                      <p className="text-xs text-gray-600">Gwarancja</p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
 
-          {/* DESCRIPTION - KOMPAKTOWY */}
-          <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-sm border border-gray-200 p-3 mb-4">
-            <h2 className="text-sm font-semibold text-gray-900 mb-2 flex items-center gap-2">
-              <div className="w-1 h-6 bg-gray-900 rounded-full" />
-              Szczegółowy opis
-            </h2>
-            <div className="prose prose-gray max-w-none">
-              <p className="text-xs text-gray-700 leading-relaxed whitespace-pre-line">
-                {product.description_long}
+            {/* Description */}
+            {product.description_long && (
+              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-5 sm:p-6 mb-8">
+                <h2 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                  <div className="w-1 h-6 bg-blue-600 rounded-full" />
+                  Szczegółowy opis
+                </h2>
+                <div className="prose prose-gray max-w-none">
+                  <p className="text-sm text-gray-700 leading-relaxed whitespace-pre-line">
+                    {product.description_long}
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {/* Contact CTA */}
+            <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 rounded-xl p-6 sm:p-8 text-center">
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                Potrzebujesz pomocy?
+              </h3>
+              <p className="text-sm text-gray-600 mb-4">
+                Zadzwoń do nas – pomożemy dobrać odpowiednią część
               </p>
+              <a
+                href="tel:+48601619898"
+                className="inline-flex items-center gap-2 bg-white border border-gray-300 text-gray-700 font-medium px-5 py-2.5 rounded-lg hover:bg-gray-50 transition-colors text-sm"
+              >
+                <Phone className="w-4 h-4" />
+                +48 601 619 898
+              </a>
             </div>
           </div>
-
-        </div>
+        </section>
       </div>
 
-      {/* FOOTER */}
-      <footer className="bg-gray-900 text-white py-8 px-6 mt-auto">
-        <div className="max-w-7xl mx-auto text-center">
-          <p className="text-gray-400">
-            © 2025 TAKMA - Autoryzowany Serwis Zebra
-          </p>
-        </div>
-      </footer>
+      <Footer />
 
       {/* JSON-LD */}
       <script
@@ -258,7 +297,7 @@ export default async function ProductPage({ params }: { params: { slug: string }
             "sku": product.sku,
             "brand": {
               "@type": "Brand",
-              "name": product.manufacturer
+              "name": product.manufacturer || "Zebra"
             },
             "offers": {
               "@type": "Offer",
@@ -271,6 +310,6 @@ export default async function ProductPage({ params }: { params: { slug: string }
           })
         }}
       />
-    </div>
+    </>
   )
 }
