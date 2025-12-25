@@ -358,7 +358,7 @@ export default function JakToDzialaPage() {
 
                   {/* Image */}
                   <div className="flex-1 hidden lg:block">
-                    <div className="relative h-full min-h-[200px] bg-gray-200 rounded-xl overflow-hidden">
+                    <div className="relative h-full min-h-[280px] rounded-xl overflow-hidden">
                       {step.number === 1 ? (
                         <Image
                           src="/diagnoza_ai.png"
@@ -374,7 +374,7 @@ export default function JakToDzialaPage() {
                           className="object-cover"
                         />
                       ) : (
-                        <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="absolute inset-0 bg-gray-200 flex items-center justify-center">
                           <div className={`w-12 h-12 ${colors.bg} rounded-full flex items-center justify-center opacity-30`}>
                             <Icon className="w-6 h-6 text-white" />
                           </div>
