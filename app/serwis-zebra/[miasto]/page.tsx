@@ -426,7 +426,7 @@ export default function CityServicePage({ params }: { params: { miasto: string }
         {/* Hero Section - lekki gradient jak na stronie głównej */}
         <section className="relative bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-8 sm:py-10 md:py-12 overflow-hidden">
           {/* Zdjęcie w tle - dla miast z dedykowanymi zdjęciami */}
-          {(params.miasto === 'warszawa' || params.miasto === 'krakow' || params.miasto === 'poznan' || params.miasto === 'gdansk' || params.miasto === 'katowice') && (
+          {(params.miasto === 'warszawa' || params.miasto === 'krakow' || params.miasto === 'poznan' || params.miasto === 'gdansk' || params.miasto === 'katowice' || params.miasto === 'wroclaw') && (
             <>
               <div className="absolute inset-0 hidden md:block">
                 <Image
