@@ -17,6 +17,7 @@ import {
 import AddToCartButton from '@/components/AddToCartButton'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import ShopSubheader from '@/components/shop/ShopSubheader'
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
@@ -101,25 +102,9 @@ export default async function ProductPage({ params }: { params: { slug: string }
   return (
     <>
       <Header currentPage="other" />
+      <ShopSubheader />
       
       <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-        {/* Hero - mini wersja */}
-        <section className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-4 sm:py-5">
-          <div className="max-w-6xl mx-auto px-3 sm:px-4">
-            {/* Breadcrumbs */}
-            <div className="flex items-center gap-1.5 text-sm text-gray-600">
-              <Link href="/" className="hover:text-gray-900 transition-colors">
-                Start
-              </Link>
-              <ChevronRight className="w-4 h-4" />
-              <Link href="/sklep" className="hover:text-gray-900 transition-colors">
-                Sklep
-              </Link>
-              <ChevronRight className="w-4 h-4" />
-              <span className="text-gray-900 font-medium truncate max-w-[200px] sm:max-w-none">{product.name}</span>
-            </div>
-          </div>
-        </section>
 
         {/* Main Content */}
         <section className="py-8 sm:py-10 md:py-12">

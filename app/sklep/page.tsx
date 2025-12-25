@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import ShopSubheader from '@/components/shop/ShopSubheader'
 import { useCartStore } from '@/lib/cart-store'
 import { 
   Printer, 
@@ -200,6 +201,7 @@ export default function SklepPage() {
   return (
     <>
       <Header currentPage="other" />
+      <ShopSubheader />
       
       <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
         {/* Hero - spójne z resztą portalu */}
