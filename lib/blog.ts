@@ -14927,7 +14927,7 @@ Jako **autoryzowany serwis Zebra** pomagamy w konfiguracji oprogramowania i rozw
         'zebra android 14 kompatybilność', 'zebra android 14 lista urządzeń'
       ]
     },
-    content: \`
+    content: `
 ## Aktualizacja terminali Zebra do Android 14 – Co musisz wiedzieć?
 
 Czy Twoja firma korzysta z **terminali mobilnych Zebra** opartych na platformie **SDM660**? Jeśli tak, czas przygotować się na **aktualizację do Android 14**. Nowy system to nie tylko poprawki bezpieczeństwa, ale także zmieniony mechanizm aktualizacji **A/B (Seamless Update)**, który minimalizuje przestoje w pracy.
@@ -15113,7 +15113,7 @@ Aktualizacja setek terminali może być wyzwaniem. Skontaktuj się z nami!
 > **Napisz:** [Formularz kontaktowy](/kontakt)
 
 Jako **autoryzowany serwis Zebra** pomożemy Ci przejść przez migrację do Android 14 bezboleśnie.
-\`
+`
   }
 
 ]
