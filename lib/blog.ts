@@ -14890,6 +14890,230 @@ Masz problem z konfiguracją Zebra Designer lub drukarką? Skontaktuj się z nam
 
 Jako **autoryzowany serwis Zebra** pomagamy w konfiguracji oprogramowania i rozwiązywaniu problemów z drukarkami.
 `
+  },
+
+  // NOWY WPIS: Aktualizacja do Android 14
+  {
+    slug: 'aktualizacja-terminali-zebra-android-14-poradnik',
+    title: 'Aktualizacja terminali Zebra do Android 14 – Kompletny Poradnik 2025',
+    excerpt: 'Jak zaktualizować terminale Zebra TC52, TC72, MC3300, MC9300 do Android 14? Poznaj mechanizm A/B Seamless Update, wspierane modele i metody aktualizacji OTA oraz Recovery.',
+    coverImage: '/blog/zebra-android-14-update.jpeg',
+    author: {
+      name: 'Zespół Serwis Zebra',
+      role: 'Certyfikowani technicy Zebra'
+    },
+    publishedAt: '2025-12-25',
+    readingTime: 12,
+    deviceType: 'terminale',
+    subDeviceType: undefined,
+    category: 'poradniki',
+    tags: ['android 14', 'aktualizacja', 'terminale zebra', 'TC52', 'TC72', 'MC3300', 'MC9300', 'LifeGuard', 'OTA', 'firmware', 'SDM660'],
+    seo: {
+      metaTitle: 'Aktualizacja terminali Zebra do Android 14 – Poradnik krok po kroku [2025]',
+      metaDescription: 'Jak zaktualizować terminal Zebra do Android 14? Kompletny poradnik: TC52, TC72, MC3300, MC9300, EC50. Mechanizm A/B, LifeGuard OTA, Recovery Mode. Wspierane modele SDM660.',
+      keywords: [
+        'aktualizacja zebra android 14', 'zebra android 14 update', 'terminal zebra aktualizacja',
+        'jak zaktualizować terminal zebra', 'zebra firmware update', 'zebra os update android 14',
+        'tc52 android 14', 'tc52 aktualizacja', 'tc52 update', 'tc52 firmware',
+        'tc57 android 14', 'tc72 android 14', 'tc72 aktualizacja', 'tc77 android 14',
+        'tc21 android 14', 'tc26 android 14', 'tc52x android 14', 'tc8300 android 14',
+        'mc3300 android 14', 'mc3300 aktualizacja', 'mc3300 update', 'mc3300 firmware',
+        'mc9300 android 14', 'mc9300 aktualizacja', 'mc2200 android 14', 'mc2700 android 14',
+        'ec50 android 14', 'ec55 android 14', 'ec30 android 14',
+        'wt6300 android 14', 'et51 android 14', 'et56 android 14', 'l10 android 14',
+        'zebra lifeguard ota', 'zebra seamless update', 'zebra a/b update',
+        'zebra recovery mode update', 'zebra adb sideload', 'zebra delta update',
+        'jak zaktualizować tc52 do android 14', 'jak zaktualizować mc3300',
+        'zebra android 14 kompatybilność', 'zebra android 14 lista urządzeń'
+      ]
+    },
+    content: \`
+## Aktualizacja terminali Zebra do Android 14 – Co musisz wiedzieć?
+
+Czy Twoja firma korzysta z **terminali mobilnych Zebra** opartych na platformie **SDM660**? Jeśli tak, czas przygotować się na **aktualizację do Android 14**. Nowy system to nie tylko poprawki bezpieczeństwa, ale także zmieniony mechanizm aktualizacji **A/B (Seamless Update)**, który minimalizuje przestoje w pracy.
+
+W tym kompletnym poradniku wyjaśniamy:
+- Które modele są wspierane
+- Jak działa nowy mechanizm aktualizacji A/B
+- Jak bezpiecznie przeprowadzić update
+- Na co uważać, aby nie stracić danych
+
+---
+
+## Lista wspieranych urządzeń (Platforma SDM660)
+
+Zanim zaczniesz aktualizację, upewnij się, że Twój terminal znajduje się na liście urządzeń kompatybilnych z **Android 14**.
+
+### Seria TC (Touch Computer)
+
+| Model | Android 14 | Uwagi |
+|-------|------------|-------|
+| **TC52** | ✅ Tak | Najpopularniejszy model |
+| **TC57** | ✅ Tak | Wersja z WWAN |
+| **TC72** | ✅ Tak | Większy ekran |
+| **TC77** | ✅ Tak | Wersja z WWAN |
+| **TC52X** | ✅ Tak | Wersja rozszerzona |
+| **TC57X** | ✅ Tak | Wersja rozszerzona z WWAN |
+| **TC52AX** | ✅ Tak | WiFi 6 |
+| **TC21** | ✅ Tak | Model ekonomiczny |
+| **TC26** | ✅ Tak | TC21 z WWAN |
+| **TC8300** | ✅ Tak | Terminal przemysłowy |
+
+### Seria MC (Mobile Computer)
+
+| Model | Android 14 | Uwagi |
+|-------|------------|-------|
+| **MC9300** | ✅ Tak | Flagowy model przemysłowy |
+| **MC3300** | ✅ Tak | Popularny w magazynach |
+| **MC2200** | ✅ Tak | Model kompaktowy |
+| **MC2700** | ✅ Tak | MC2200 z WWAN |
+| **MC20/RZ-H271** | ✅ Tak | Wersja healthcare |
+
+### Seria EC (Enterprise Companion)
+
+| Model | Android 14 |
+|-------|------------|
+| **EC50** | ✅ Tak |
+| **EC55** | ✅ Tak |
+| **EC30** | ✅ Tak |
+
+### Inne urządzenia
+
+| Model | Android 14 | Typ |
+|-------|------------|-----|
+| **WT6300** | ✅ Tak | Terminal naręczny |
+| **VC8300** | ✅ Tak | Terminal wózkowy |
+| **CC600** | ✅ Tak | Kiosk |
+| **CC6000** | ✅ Tak | Kiosk |
+| **ET51** | ✅ Tak | Tablet |
+| **ET56** | ✅ Tak | Tablet |
+| **L10AW** | ✅ Tak | Tablet rugged |
+
+---
+
+## Co nowego? Mechanizm A/B Seamless Update
+
+Zebra w **Android 14** wykorzystuje mechanizm **A/B OS Update**. Co to oznacza?
+
+### 1. Brak przestojów w pracy
+
+Aktualizacja instaluje się **w tle**, gdy urządzenie jest uruchomione. Pracownik może nadal korzystać z terminala.
+
+### 2. Szybki restart
+
+Po zakończeniu instalacji urządzenie wymaga jedynie **ponownego uruchomienia** (około 2-3 minuty).
+
+### 3. Bezpieczeństwo – mechanizm Fallback
+
+System posiada **partycję zapasową**. Jeśli aktualizacja się nie powiedzie, urządzenie automatycznie wróci do poprzedniej wersji.
+
+---
+
+## ⚠️ WAŻNE: Szyfrowanie danych a aktualizacja
+
+Przejście na Android 14 wiąże się ze zmianą metody szyfrowania z **FDE** na **FBE**.
+
+| Scenariusz | Dane użytkownika |
+|------------|------------------|
+| Standardowa aktualizacja OTA | ❌ **Wykasowane** |
+| OS Upgrade with data persistence | ✅ Zachowane |
+| Downgrade | ❌ **ZAWSZE wykasowane** |
+
+> **⚠️ Uwaga:** Zawsze wykonaj **backup danych** przed aktualizacją!
+
+---
+
+## Metoda 1: Aktualizacja automatyczna (LifeGuard OTA)
+
+Dla firm zarządzających flotą urządzeń, najlepszą opcją jest **Zebra LifeGuard OTA** lub system EMM.
+
+### Zalety:
+- **Streaming** – pakiety strumieniowane bezpośrednio
+- **True Delta** – małe pakiety (50MB zamiast 2GB)
+- **Harmonogram** – aktualizacje w nocy
+- **Monitoring** – status całej floty
+
+---
+
+## Metoda 2: Aktualizacja ręczna (Recovery Mode)
+
+### Wymagania:
+- ✅ Bateria minimum **30%**
+- ✅ Pobrany plik ze strony Zebra Support
+
+### Opcja A: Z karty SD
+
+1. Skopiuj plik na kartę SD
+2. Uruchom **Recovery** (Power + Volume Up)
+3. Wybierz \`Apply upgrade from SD card\`
+4. Wybierz plik i poczekaj
+5. \`Reboot system now\`
+
+### Opcja B: ADB Sideload
+
+1. Włącz **Debugowanie USB**
+2. Podłącz do komputera
+3. \`adb reboot recovery\`
+4. Wybierz \`Apply upgrade from ADB\`
+5. \`adb sideload plik.zip\`
+6. Poczekaj i zrestartuj
+
+---
+
+## FAQ – Najczęstsze pytania
+
+**Czy mogę pominąć aktualizacje pośrednie?**
+Tak, ale tylko z pakietem **Full OTA**. Delta wymaga sekwencyjnej instalacji.
+
+**Co jeśli bateria padnie w trakcie?**
+Mechanizm A/B jest bezpieczny – aktualizacja zostanie anulowana, urządzenie będzie działać na starym systemie.
+
+**Ile trwa aktualizacja?**
+Około **30-50 minut** (pobieranie + instalacja + restart).
+
+**Czy mogę wrócić do Android 13?**
+Tak, ale **downgrade zawsze** powoduje Factory Reset.
+
+---
+
+## Rozwiązywanie problemów
+
+| Problem | Rozwiązanie |
+|---------|-------------|
+| Aktualizacja nie startuje | Sprawdź baterię (min. 30%), pobierz plik ponownie |
+| Zatrzymuje się na X% | Poczekaj do 30 minut, nie przerywaj |
+| "Verification failed" | Pobierz plik ponownie, sprawdź sumę SHA256 |
+| Nie bootuje po update | Poczekaj 5-10 min, lub Factory Reset w Recovery |
+
+---
+
+## Podsumowanie
+
+**Aktualizacja do Android 14** to ważny krok w utrzymaniu bezpieczeństwa floty Zebra.
+
+### Kluczowe zalety:
+- ✅ Najnowsze poprawki bezpieczeństwa
+- ✅ Aktualizacje w tle (brak przestojów)
+- ✅ Mechanizm Fallback
+- ✅ Lepsza wydajność
+
+### Pamiętaj:
+- ⚠️ Backup danych przed aktualizacją
+- ⚠️ Sprawdź kompatybilność modelu
+- ⚠️ Bateria minimum 30%
+
+---
+
+## Potrzebujesz pomocy?
+
+Aktualizacja setek terminali może być wyzwaniem. Skontaktuj się z nami!
+
+> **Zadzwoń:** +48 601 619 898
+
+> **Napisz:** [Formularz kontaktowy](/kontakt)
+
+Jako **autoryzowany serwis Zebra** pomożemy Ci przejść przez migrację do Android 14 bezboleśnie.
+\`
   }
 
 ]
