@@ -84,21 +84,67 @@ export async function generateMetadata({ params }: { params: { model: string } }
     title: `Instrukcja obsługi ${manual.model} – Pobierz PDF | Serwis Zebra`,
     description: `Darmowa instrukcja obsługi Zebra ${manual.model}. ${manual.description}. Pobierz PDF: Quick Start Guide, User Manual, programowanie ZPL. Dokumentacja po polsku i angielsku.`,
     keywords: [
+      // Podstawowe frazy
       `instrukcja ${manual.model}`,
       `instrukcja obsługi ${manual.model}`,
       `manual ${manual.model}`,
+      `Zebra ${manual.model} instrukcja obsługi`,
+      `Zebra ${manual.model} manual PDF`,
+      
+      // User Guide / Quick Start
       `${manual.model} user guide`,
       `${manual.model} quick start`,
-      `zebra ${manual.model} instrukcja`,
-      `zebra ${manual.model} manual pdf`,
-      `${manual.model} po polsku`,
+      `${manual.model} quick start guide`,
+      `szybki start ${manual.model}`,
+      
+      // Pobieranie
+      `pobierz instrukcję ${manual.model}`,
+      `${manual.model} download PDF`,
+      `${manual.model} instrukcja PDF pobierz`,
+      `dokumentacja ${manual.model}`,
+      
+      // Konfiguracja i ustawienia
       `jak skonfigurować ${manual.model}`,
+      `${manual.model} konfiguracja`,
+      `${manual.model} ustawienia`,
+      `${manual.model} setup`,
+      `${manual.model} instalacja`,
+      
+      // Kalibracja i reset
       `${manual.model} kalibracja`,
       `${manual.model} reset`,
-      `dokumentacja ${manual.model}`,
-      categoryName.toLowerCase(),
+      `${manual.model} reset fabryczny`,
+      `${manual.model} przywracanie ustawień`,
+      
+      // Troubleshooting i naprawa
+      `${manual.model} troubleshooting`,
+      `${manual.model} rozwiązywanie problemów`,
+      `${manual.model} błędy`,
+      `${manual.model} naprawa`,
+      `${manual.model} serwis`,
+      
+      // Programowanie
+      `${manual.model} programowanie ZPL`,
+      `${manual.model} ZPL`,
+      `${manual.model} komendy`,
+      
+      // Specyfikacja
+      `${manual.model} specyfikacja`,
+      `${manual.model} dane techniczne`,
+      `${manual.model} parametry`,
+      
+      // Sterowniki
+      `${manual.model} sterowniki`,
+      `${manual.model} driver`,
+      
+      // Kategoria i marka
+      `drukarka ${manual.model}`,
+      `${categoryName.toLowerCase()} ${manual.model}`,
+      `Zebra ${manual.model}`,
       'zebra',
-      'instrukcja pdf'
+      'instrukcja pdf',
+      'manual zebra',
+      'dokumentacja zebra'
     ],
     openGraph: {
       title: `Instrukcja obsługi Zebra ${manual.model} – Pobierz PDF`,
