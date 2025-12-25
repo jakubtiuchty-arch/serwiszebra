@@ -15156,7 +15156,7 @@ Jako **autoryzowany serwis Zebra** pomożemy Ci przejść przez migrację do And
         'zebra android 14 kompatybilność', 'zebra android 14 lista urządzeń 4490'
       ]
     },
-    content: \`
+    content: `
 ## Aktualizacja terminali Zebra (QCS4490) do Android 14 – Co musisz wiedzieć?
 
 Czy Twoja firma korzysta z **terminali mobilnych Zebra nowej generacji** opartych na platformie **QCS4490**? Jeśli tak, czas przygotować się na **aktualizację do Android 14**. Ta platforma obejmuje najnowsze modele Zebra, w tym MC3400, MC9400, TC53e i WT5400.
@@ -15269,17 +15269,17 @@ Dla firm zarządzających flotą urządzeń, najlepszą opcją jest **Zebra Life
 
 1. Skopiuj plik na kartę SD lub pendrive
 2. Uruchom **Recovery** (Power + Volume Up)
-3. Wybierz \\\`Apply upgrade from SD card\\\` lub \\\`Apply upgrade from USB drive\\\`
+3. Wybierz "Apply upgrade from SD card" lub "Apply upgrade from USB drive"
 4. Wybierz plik i poczekaj na zakończenie
-5. Wybierz \\\`Reboot system now\\\`
+5. Wybierz "Reboot system now"
 
 ### Opcja B: ADB Sideload
 
 1. Włącz **Debugowanie USB** w opcjach programisty
 2. Podłącz terminal do komputera
-3. W terminalu PC wpisz: \\\`adb reboot recovery\\\`
-4. Na urządzeniu wybierz \\\`Apply upgrade from ADB\\\`
-5. Wpisz: \\\`adb sideload nazwa_pliku.zip\\\`
+3. W terminalu PC wpisz: "adb reboot recovery"
+4. Na urządzeniu wybierz "Apply upgrade from ADB"
+5. Wpisz: "adb sideload nazwa_pliku.zip"
 6. Poczekaj i zrestartuj urządzenie
 
 ---
@@ -15383,7 +15383,7 @@ Jako **autoryzowany serwis Zebra** pomożemy Ci:
 - Wykonać backup danych
 - Przeprowadzić aktualizację
 - Przetestować urządzenia po update
-\`
+`
   }
 
 ]
