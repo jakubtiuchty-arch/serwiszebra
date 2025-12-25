@@ -14892,39 +14892,57 @@ Jako **autoryzowany serwis Zebra** pomagamy w konfiguracji oprogramowania i rozw
 `
   },
 
-  // NOWY WPIS: Aktualizacja do Android 14
+  // NOWY WPIS: Aktualizacja do Android 14 - Platforma SDM660
   {
-    slug: 'aktualizacja-terminali-zebra-android-14-poradnik',
-    title: 'Aktualizacja terminali Zebra do Android 14 – Kompletny Poradnik 2025',
-    excerpt: 'Jak zaktualizować terminale Zebra TC52, TC72, MC3300, MC9300 do Android 14? Poznaj mechanizm A/B Seamless Update, wspierane modele i metody aktualizacji OTA oraz Recovery.',
+    slug: 'aktualizacja-zebra-android-14-tc52-tc72-mc3300-mc9300',
+    title: 'Android 14 dla Zebra TC52, TC72, MC3300, MC9300 – Poradnik aktualizacji',
+    excerpt: 'Masz Zebra TC52, TC57, TC72, TC77, MC3300, MC9300, EC50 lub WT6300? Ten poradnik jest dla Ciebie! Dowiedz się jak zaktualizować terminal do Android 14 krok po kroku.',
     coverImage: '/blog/zebra-android-14-update.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
     },
     publishedAt: '2025-12-25',
-    readingTime: 12,
+    readingTime: 15,
     deviceType: 'terminale',
-    subDeviceType: undefined,
+    subDeviceType: 'sdm660-series',
     category: 'poradniki',
-    tags: ['android 14', 'aktualizacja', 'terminale zebra', 'TC52', 'TC72', 'MC3300', 'MC9300', 'LifeGuard', 'OTA', 'firmware', 'SDM660'],
+    tags: ['android 14', 'aktualizacja', 'TC52', 'TC57', 'TC72', 'TC77', 'MC3300', 'MC9300', 'EC50', 'WT6300', 'SDM660', 'LifeGuard', 'OTA'],
     seo: {
-      metaTitle: 'Aktualizacja terminali Zebra do Android 14 – Poradnik krok po kroku [2025]',
-      metaDescription: 'Jak zaktualizować terminal Zebra do Android 14? Kompletny poradnik: TC52, TC72, MC3300, MC9300, EC50. Mechanizm A/B, LifeGuard OTA, Recovery Mode. Wspierane modele SDM660.',
+      metaTitle: 'Android 14 dla TC52, TC72, MC3300, MC9300 – Jak zaktualizować? [2025]',
+      metaDescription: 'Poradnik aktualizacji Android 14 dla Zebra TC52, TC57, TC72, TC77, MC3300, MC9300, EC50, EC55, WT6300, ET51, ET56. Platforma SDM660. LifeGuard OTA, Recovery Mode.',
       keywords: [
+        // Główne frazy
         'aktualizacja zebra android 14', 'zebra android 14 update', 'terminal zebra aktualizacja',
         'jak zaktualizować terminal zebra', 'zebra firmware update', 'zebra os update android 14',
-        'tc52 android 14', 'tc52 aktualizacja', 'tc52 update', 'tc52 firmware',
-        'tc57 android 14', 'tc72 android 14', 'tc72 aktualizacja', 'tc77 android 14',
+        // Modele TC
+        'tc52 android 14', 'tc52 aktualizacja', 'tc52 update', 'tc52 firmware', 'tc52 jak zaktualizować',
+        'tc57 android 14', 'tc57 aktualizacja', 'tc72 android 14', 'tc72 aktualizacja', 'tc77 android 14',
         'tc21 android 14', 'tc26 android 14', 'tc52x android 14', 'tc8300 android 14',
-        'mc3300 android 14', 'mc3300 aktualizacja', 'mc3300 update', 'mc3300 firmware',
+        // Modele MC
+        'mc3300 android 14', 'mc3300 aktualizacja', 'mc3300 update', 'mc3300 firmware', 'mc3300 jak zaktualizować',
         'mc9300 android 14', 'mc9300 aktualizacja', 'mc2200 android 14', 'mc2700 android 14',
+        // Inne modele
         'ec50 android 14', 'ec55 android 14', 'ec30 android 14',
         'wt6300 android 14', 'et51 android 14', 'et56 android 14', 'l10 android 14',
-        'zebra lifeguard ota', 'zebra seamless update', 'zebra a/b update',
-        'zebra recovery mode update', 'zebra adb sideload', 'zebra delta update',
-        'jak zaktualizować tc52 do android 14', 'jak zaktualizować mc3300',
-        'zebra android 14 kompatybilność', 'zebra android 14 lista urządzeń'
+        // Techniczne
+        'zebra lifeguard ota', 'zebra seamless update', 'zebra a/b update', 'zebra ab update',
+        'zebra recovery mode update', 'zebra adb sideload', 'zebra delta update', 'zebra full ota',
+        // Long-tail PL
+        'jak zaktualizować tc52 do android 14', 'jak zaktualizować mc3300 do android 14',
+        'jak zaktualizować terminal zebra krok po kroku', 'aktualizacja terminala zebra instrukcja',
+        'czy mogę zaktualizować zebra do android 14', 'które terminale zebra wspierają android 14',
+        // Problemy
+        'problem z aktualizacją zebra', 'błąd aktualizacji android 14 zebra', 'zebra nie aktualizuje się',
+        'zebra verification failed', 'zebra aktualizacja się nie powodzi', 'zebra bootloop po aktualizacji',
+        // Serwis
+        'serwis zebra aktualizacja android', 'pomoc aktualizacja terminala zebra', 'aktualizacja zebra polska',
+        'serwis terminali zebra warszawa', 'profesjonalna aktualizacja zebra', 'zlecenie aktualizacji zebra',
+        // Bezpieczeństwo
+        'zebra android 14 bezpieczeństwo', 'zebra security patch', 'zebra aktualizacja bezpieczeństwa',
+        // Kompatybilność
+        'zebra android 14 kompatybilność', 'zebra android 14 lista urządzeń', 'zebra sdm660 android 14',
+        'zebra wspierane modele android 14', 'zebra end of life android'
       ]
     },
     content: `
@@ -14937,6 +14955,7 @@ W tym kompletnym poradniku wyjaśniamy:
 - Jak działa nowy mechanizm aktualizacji A/B
 - Jak bezpiecznie przeprowadzić update
 - Na co uważać, aby nie stracić danych
+- Jak rozwiązać najczęstsze problemy
 
 ---
 
@@ -14950,8 +14969,8 @@ Zanim zaczniesz aktualizację, upewnij się, że Twój terminal znajduje się na
 |-------|------------|-------|
 | **TC52** | ✅ Tak | Najpopularniejszy model |
 | **TC57** | ✅ Tak | Wersja z WWAN |
-| **TC72** | ✅ Tak | Większy ekran |
-| **TC77** | ✅ Tak | Wersja z WWAN |
+| **TC72** | ✅ Tak | Większy ekran 6" |
+| **TC77** | ✅ Tak | TC72 z WWAN |
 | **TC52X** | ✅ Tak | Wersja rozszerzona |
 | **TC57X** | ✅ Tak | Wersja rozszerzona z WWAN |
 | **TC52AX** | ✅ Tak | WiFi 6 |
@@ -14971,136 +14990,433 @@ Zanim zaczniesz aktualizację, upewnij się, że Twój terminal znajduje się na
 
 ### Seria EC (Enterprise Companion)
 
-| Model | Android 14 |
-|-------|------------|
-| **EC50** | ✅ Tak |
-| **EC55** | ✅ Tak |
-| **EC30** | ✅ Tak |
+| Model | Android 14 | Uwagi |
+|-------|------------|-------|
+| **EC50** | ✅ Tak | Kompaktowy |
+| **EC55** | ✅ Tak | Z WWAN |
+| **EC30** | ✅ Tak | Ultra-kompaktowy |
 
 ### Inne urządzenia
 
 | Model | Android 14 | Typ |
 |-------|------------|-----|
-| **WT6300** | ✅ Tak | Terminal naręczny |
-| **VC8300** | ✅ Tak | Terminal wózkowy |
-| **CC600** | ✅ Tak | Kiosk |
-| **CC6000** | ✅ Tak | Kiosk |
-| **ET51** | ✅ Tak | Tablet |
-| **ET56** | ✅ Tak | Tablet |
-| **L10AW** | ✅ Tak | Tablet rugged |
+| **WT6300** | ✅ Tak | Terminal naręczny (wearable) |
+| **VC8300** | ✅ Tak | Terminal wózkowy (vehicle-mounted) |
+| **CC600** | ✅ Tak | Kiosk 10" |
+| **CC6000** | ✅ Tak | Kiosk 10" z WWAN |
+| **ET51** | ✅ Tak | Tablet 8.4"/10.1" |
+| **ET56** | ✅ Tak | Tablet rugged |
+| **L10AW** | ✅ Tak | Tablet XPAD rugged |
 
 ---
 
 ## Co nowego? Mechanizm A/B Seamless Update
 
-Zebra w **Android 14** wykorzystuje mechanizm **A/B OS Update**. Co to oznacza?
+Zebra na platformie **SDM660** od Android O wykorzystuje mechanizm **A/B OS Update**. Co to oznacza?
 
 ### 1. Brak przestojów w pracy
 
-Aktualizacja instaluje się **w tle**, gdy urządzenie jest uruchomione. Pracownik może nadal korzystać z terminala.
+Aktualizacja instaluje się **w tle**, gdy urządzenie jest uruchomione. Pracownik może nadal korzystać z terminala bez żadnych ograniczeń.
 
 ### 2. Szybki restart
 
-Po zakończeniu instalacji urządzenie wymaga jedynie **ponownego uruchomienia** (około 2-3 minuty).
+Po zakończeniu instalacji urządzenie wymaga jedynie **ponownego uruchomienia** (około 2-3 minuty). To jedyny moment, gdy urządzenie nie jest dostępne.
 
 ### 3. Bezpieczeństwo – mechanizm Fallback
 
-System posiada **partycję zapasową**. Jeśli aktualizacja się nie powiedzie, urządzenie automatycznie wróci do poprzedniej wersji.
+System posiada **partycję zapasową**. Jeśli aktualizacja się nie powiedzie lub nowy system nie uruchomi się poprawnie, urządzenie **automatycznie wróci** do poprzedniej, działającej wersji.
+
+### 4. Cichy update
+
+Aktualizacja jest **cicha** (silent update) – użytkownik nie musi podejmować żadnych akcji. Jedyna widoczna informacja to powiadomienie o zakończeniu instalacji.
+
+### Porównanie A/B z tradycyjnym systemem
+
+| Cecha | Stary system (Non-A/B) | A/B Seamless Update |
+|-------|------------------------|---------------------|
+| **Przestój** | Długi (Recovery Mode) | Brak (tylko restart) |
+| **Fallback** | ❌ Brak (urządzenie może być "bricked") | ✅ Automatyczny powrót |
+| **Pakiety Delta** | Duże | Małe (True Delta z LifeGuard) |
+| **Cichy update** | ❌ Nie | ✅ Tak |
 
 ---
 
-## ⚠️ WAŻNE: Szyfrowanie danych a aktualizacja
+## ⚠️ KRYTYCZNE: Szyfrowanie danych FDE → FBE
 
-Przejście na Android 14 wiąże się ze zmianą metody szyfrowania z **FDE** na **FBE**.
+Przejście na **Android 13 i wyżej** (w tym Android 14) wiąże się ze zmianą metody szyfrowania:
 
-| Scenariusz | Dane użytkownika |
-|------------|------------------|
-| Standardowa aktualizacja OTA | ❌ **Wykasowane** |
-| OS Upgrade with data persistence | ✅ Zachowane |
-| Downgrade | ❌ **ZAWSZE wykasowane** |
+- **FDE** (Full Disk Encryption) – starsze wersje Android
+- **FBE** (File-Based Encryption) – Android 13+
 
-> **⚠️ Uwaga:** Zawsze wykonaj **backup danych** przed aktualizacją!
+### Co to oznacza dla Twoich danych?
+
+| Scenariusz | Dane użytkownika | Uwagi |
+|------------|------------------|-------|
+| Standardowa aktualizacja OTA | ❌ **WYKASOWANE** | Domyślne zachowanie |
+| OS Upgrade with data persistence | ✅ Zachowane | Wymaga specjalnej procedury |
+| Downgrade do starszej wersji | ❌ **ZAWSZE wykasowane** | Bez wyjątków |
+
+### Jak zachować dane? (Data Persistence)
+
+Zebra udostępnia specjalną procedurę **OS Upgrade with data persistence**, która pozwala zachować dane użytkownika:
+
+1. Wymagane jest użycie specjalnego pakietu z flagą data persistence
+2. Proces jest udokumentowany na Zebra TechDocs
+3. Zalecane dla dużych wdrożeń z krytycznymi danymi
+
+> **⚠️ ZAWSZE wykonaj backup danych przed aktualizacją!** Nawet przy data persistence, backup jest zalecany jako zabezpieczenie.
+
+---
+
+## Kombinacje klawiszy do Recovery Mode
+
+Każdy model ma specyficzną kombinację klawiszy:
+
+| Model | Urządzenie się restartuje | Urządzenie wyłączone |
+|-------|---------------------------|----------------------|
+| **TC5x, TC7x** | PTT Key | PTT Key + Power |
+| **MC3300, MC9300** | PTT lub Gun Trigger | PTT/Gun Trigger + Power |
+| **EC50, EC55** | PTT Key | PTT Key + Power |
+| **TC21, TC26** | PTT Key | PTT Key + Power |
+| **TC8300** | PTT Key | PTT Key + Power |
+
+> **Tip:** Przytrzymaj wskazane przyciski aż pojawi się logo Zebra.
+
+Alternatywnie (wymaga włączonego USB Debugging): **adb reboot recovery**
 
 ---
 
 ## Metoda 1: Aktualizacja automatyczna (LifeGuard OTA)
 
-Dla firm zarządzających flotą urządzeń, najlepszą opcją jest **Zebra LifeGuard OTA** lub system EMM.
+Dla firm zarządzających flotą urządzeń, najlepszą opcją jest **Zebra LifeGuard OTA 3.0** lub system EMM.
 
-### Zalety:
-- **Streaming** – pakiety strumieniowane bezpośrednio
-- **True Delta** – małe pakiety (50MB zamiast 2GB)
-- **Harmonogram** – aktualizacje w nocy
-- **Monitoring** – status całej floty
+### Zalety LifeGuard OTA:
+
+| Funkcja | Opis |
+|---------|------|
+| **Streaming** | Pakiety strumieniowane bezpośrednio na urządzenie |
+| **True Delta** | Mały pakiet z dokładnie tym, co potrzebne (50MB vs 2GB) |
+| **Harmonogram** | Aktualizacje można zaplanować na noc |
+| **Monitoring** | Status całej floty w jednym miejscu |
+| **Automatyzacja** | Brak ręcznej interwencji |
+
+### Metody uwierzytelniania AB Streaming:
+
+- **Token Auth** – zalecany dla większych wdrożeń
+- **Basic Auth** – nazwa użytkownika + hasło
+- **Brak uwierzytelniania** – tylko dla testów
+
+### Protokoły:
+
+- **HTTPS** – zalecany dla bezpieczeństwa
+- **HTTP** – działa, ale niezalecany
 
 ---
 
 ## Metoda 2: Aktualizacja ręczna (Recovery Mode)
 
 ### Wymagania:
-- ✅ Bateria minimum **30%**
+- ✅ Bateria minimum **30%** (zalecane 50%+)
 - ✅ Pobrany plik ze strony Zebra Support
+- ✅ Karta SD lub kabel USB
 
-### Opcja A: Z karty SD
+### Opcja A: Z karty SD lub USB
 
-1. Skopiuj plik na kartę SD
-2. Uruchom **Recovery** (Power + Volume Up)
-3. Wybierz \`Apply upgrade from SD card\`
-4. Wybierz plik i poczekaj
-5. \`Reboot system now\`
+1. Pobierz odpowiedni pakiet OTA ze strony Zebra Support
+2. Skopiuj plik na kartę SD lub pendrive (główny folder)
+3. Włóż nośnik do urządzenia
+4. Uruchom **Recovery Mode** (kombinacja klawiszy powyżej)
+5. Wybierz **"Apply upgrade from SD card"** lub **"Apply upgrade from USB drive"**
+6. Wybierz plik i poczekaj na zakończenie
+7. Wybierz **"Reboot system now"**
 
 ### Opcja B: ADB Sideload
 
-1. Włącz **Debugowanie USB**
-2. Podłącz do komputera
-3. \`adb reboot recovery\`
-4. Wybierz \`Apply upgrade from ADB\`
-5. \`adb sideload plik.zip\`
-6. Poczekaj i zrestartuj
+1. Włącz **Debugowanie USB** w opcjach programisty
+2. Podłącz terminal do komputera kablem USB
+3. W terminalu PC: **adb devices** (sprawdź czy widoczne)
+4. W terminalu PC: **adb reboot recovery**
+5. Na urządzeniu wybierz **"Apply upgrade from ADB"**
+6. W terminalu PC: **adb sideload nazwa_pliku.zip**
+7. Poczekaj na zakończenie (% widoczny w konsoli)
+8. Wybierz **"Reboot system now"**
+
+---
+
+## UPL – Instalacja wielu pakietów jednocześnie
+
+**UPL (Update Package List)** pozwala zainstalować kilka pakietów w jednej operacji:
+
+- OS + firmware
+- OS + pakiety konfiguracyjne
+- OS + reset po instalacji
+
+### Przykładowy plik UPL:
+
+**package:Full_OTA_Package.zip**
+**command:FactoryReset**
+
+### Obsługiwane kombinacje (Android 11+):
+
+| Kombinacja | Obsługiwana |
+|------------|-------------|
+| Full OTA + Reset package | ✅ Tak |
+| Full OTA + Reset command | ✅ Tak |
+| OS Patch + Reset package | ✅ Tak |
+| Full OTA + Delta OTA | ❌ NIE (od A11) |
+
+### Ważne zasady UPL:
+
+- ❌ **Nie mieszaj** Full OTA z Delta OTA w jednym UPL
+- ❌ **Nie zostawiaj** pustych linii na końcu pliku
+- ❌ **Nie używaj** starych pakietów reset z Oreo/Pie/A10/A11 na A14
+- ✅ UPL i pakiety muszą być w **tym samym folderze**
+- ✅ Po użyciu **usuń** pliki UPL z pamięci urządzenia
+
+---
+
+## Możliwe przerwy podczas aktualizacji
+
+Podczas instalacji OTA w tle (Android AB Mode) mogą wystąpić przerwania:
+
+| Zdarzenie | Co się stanie? |
+|-----------|----------------|
+| **Bateria < 30%** | Aktualizacja wstrzymana, wznowiona po podładowaniu |
+| **Krytyczny stan baterii** | Aktualizacja anulowana |
+| **Wyjęcie karty SD** | Aktualizacja anulowana (jeśli pakiet był na SD) |
+| **Brak miejsca** | Aktualizacja anulowana (wymaga ~200MB wolnego) |
+| **Restart urządzenia** | Seamless: wznowiona / Streaming: anulowana |
+| **Wyłączenie urządzenia** | Aktualizacja anulowana |
+
+### Jak uniknąć problemów?
+
+1. **Naładuj baterię** do minimum 50%
+2. **Upewnij się** że masz stabilne połączenie (WiFi lub Ethernet)
+3. **Zwolnij miejsce** na dysku (min. 200MB)
+4. **Nie restartuj** urządzenia ręcznie
+5. **Poczekaj** na powiadomienie o zakończeniu
+
+---
+
+## Rescue Party Mode – Ochrona przed bootloopami
+
+Android 14 na SDM660 zawiera funkcję **Rescue Party**, która automatycznie wykrywa problemy z uruchamianiem systemu.
+
+### Jak to działa?
+
+1. System wykrywa **wielokrotne crashe** kluczowych komponentów
+2. Rescue Party **eskaluje** działania naprawcze
+3. Jako ostateczność – urządzenie uruchamia się w **Recovery** z propozycją Factory Reset
+
+### Zbieranie logów:
+
+1. Włącz **RxLogger** z pluginem dla Recovery Mode
+2. Wykonaj restart urządzenia
+3. Pobierz logi z RxLogger
+
+---
+
+## Notyfikacje podczas aktualizacji
+
+Od wersji **01-18-02.00** Zebra wyświetla powiadomienia podczas aktualizacji:
+
+### Na pasku stanu:
+- Ikona systemu Android informująca o aktualizacji
+
+### W panelu powiadomień:
+- "OS Update is in progress, device will reboot automatically"
+- Pasek postępu
+
+### Po zakończeniu:
+- "Installation completed, device will reboot in 15 seconds"
+
+### Ograniczenia:
+- ❌ Użytkownik NIE może wstrzymać aktualizacji
+- ❌ Użytkownik NIE może anulować aktualizacji
+- ❌ Użytkownik NIE może zapobiec restartowi
+- ✅ Użytkownik MOŻE zamknąć powiadomienie (update trwa dalej)
+
+---
+
+## Weryfikacja aktualizacji
+
+Po zakończeniu aktualizacji sprawdź, czy została poprawnie zainstalowana:
+
+1. Przejdź do **Ustawienia** > **Informacje o telefonie**
+2. Znajdź **Numer kompilacji** (Build number)
+3. Porównaj z numerem wersji pobranego pakietu
+
+### Przykład numeru wersji:
+
+**14-16-17.00-TG-U01-STD-XXX-04**
+
+Gdzie:
+- **14** = Android 14
+- **U01** = numer patcha (Patch 1)
+- **STD** = wersja standardowa
+- **04** = Security Patch Level (April)
+
+---
+
+## Status aktualizacji dla EMM
+
+Administratorzy mogą monitorować status aktualizacji przez **OEMInfo content provider**.
+
+### Typowe statusy:
+
+| Status | Znaczenie |
+|--------|-----------|
+| **In Progress** | Instalacja w toku |
+| **Completed** | Instalacja zakończona, oczekiwanie na restart |
+| **Failed** | Błąd instalacji |
+| **Cancelled** | Anulowano (np. niski poziom baterii) |
 
 ---
 
 ## FAQ – Najczęstsze pytania
 
-**Czy mogę pominąć aktualizacje pośrednie?**
-Tak, ale tylko z pakietem **Full OTA**. Delta wymaga sekwencyjnej instalacji.
+**Czy mogę pominąć aktualizacje pośrednie (np. z U01 na U05)?**
+Tak, ale tylko z pakietem **Full OTA**. Pakiety Delta wymagają sekwencyjnej instalacji (U01 → U02 → U03 → U04 → U05).
 
-**Co jeśli bateria padnie w trakcie?**
-Mechanizm A/B jest bezpieczny – aktualizacja zostanie anulowana, urządzenie będzie działać na starym systemie.
+**Co jeśli bateria padnie w trakcie aktualizacji?**
+Mechanizm A/B jest bezpieczny – aktualizacja zostanie wstrzymana i wznowiona po podładowaniu. Urządzenie będzie działać na starym systemie.
 
-**Ile trwa aktualizacja?**
-Około **30-50 minut** (pobieranie + instalacja + restart).
+**Ile trwa aktualizacja OTA?**
+Około **30-50 minut** (pobieranie + instalacja + restart). Sam restart to tylko 2-3 minuty.
 
 **Czy mogę wrócić do Android 13?**
-Tak, ale **downgrade zawsze** powoduje Factory Reset.
+Tak, ale **downgrade zawsze** powoduje automatyczny Enterprise Reset i utratę danych użytkownika. Użyj opcji "Apply downgrade from..." w Recovery.
+
+**Czy aktualizacja wpływa na certyfikaty i licencje?**
+Przy upgrade – certyfikaty są zachowane. Przy downgrade – dane są kasowane, więc wymagana jest rekonfiguracja.
+
+**Czy mogę użyć pakietów Delta w Recovery Mode?**
+Tak, w przeciwieństwie do platformy QCS4490, SDM660 **obsługuje** pakiety Delta w Recovery Mode.
+
+**Co to jest "Suppress Reboot" i kiedy go używać?**
+To opcja dla EMM, która zapobiega automatycznemu restartowi po instalacji. Przydatna gdy chcesz skoordynować restart wielu urządzeń naraz.
+
+**Czy mogę używać starych pakietów reset?**
+**NIE.** Nie używaj pakietów reset z Oreo/Pie/A10/A11 na Android 14. Pobierz nowe pakiety ze strony Zebra.
+
+**Jak działa True Delta w LifeGuard OTA?**
+True Delta to specjalny pakiet generowany przez serwer Zebra, który zawiera **tylko różnice** między Twoją wersją a docelową. Jest znacznie mniejszy niż zwykły pakiet Delta.
+
+**Co jeśli mam "Verification failed"?**
+Pobierz pakiet ponownie – plik mógł być uszkodzony podczas transferu. Sprawdź sumę SHA256.
 
 ---
 
 ## Rozwiązywanie problemów
 
+### Podstawowe problemy:
+
+| Problem | Możliwa przyczyna | Rozwiązanie |
+|---------|-------------------|-------------|
+| Aktualizacja nie startuje | Bateria < 30% | Naładuj baterię do min. 50% |
+| Aktualizacja nie startuje | Uszkodzony plik | Pobierz pakiet ponownie, sprawdź SHA256 |
+| Aktualizacja nie startuje | Brak miejsca | Zwolnij min. 200MB w pamięci wewnętrznej |
+| Zatrzymuje się na X% | Normalny proces | Poczekaj do 30 minut, NIE przerywaj |
+| Zatrzymuje się na X% | Słabe WiFi | Przełącz na stabilniejszą sieć |
+| "Verification failed" | Uszkodzony plik | Pobierz ponownie, użyj innego źródła |
+| "Verification failed" | Zły pakiet | Upewnij się, że pakiet jest dla Twojego modelu |
+
+### Problemy po aktualizacji:
+
 | Problem | Rozwiązanie |
 |---------|-------------|
-| Aktualizacja nie startuje | Sprawdź baterię (min. 30%), pobierz plik ponownie |
-| Zatrzymuje się na X% | Poczekaj do 30 minut, nie przerywaj |
-| "Verification failed" | Pobierz plik ponownie, sprawdź sumę SHA256 |
-| Nie bootuje po update | Poczekaj 5-10 min, lub Factory Reset w Recovery |
+| Urządzenie nie bootuje | Poczekaj 5-10 min – może trwać optymalizacja aplikacji |
+| Urządzenie w bootloopie | Rescue Party wykona auto-recovery lub Factory Reset |
+| Aplikacje crashują | Wyczyść dane aplikacji w Ustawienia > Aplikacje |
+| WiFi nie działa | Zapomnij sieć i połącz ponownie |
+| Bluetooth nie paruje | Usuń sparowane urządzenia, sparuj ponownie |
+| DataWedge nie działa | Zresetuj konfigurację DataWedge |
+
+### Problemy z Recovery Mode:
+
+| Problem | Rozwiązanie |
+|---------|-------------|
+| Nie mogę wejść w Recovery | Sprawdź kombinację klawiszy dla modelu (PTT + Power) |
+| ADB sideload nie działa | Sprawdź sterowniki ADB na komputerze |
+| Nie widzę pakietu na SD | Upewnij się, że plik jest w głównym folderze |
+
+---
+
+## Specyficzne uwagi dla modeli SDM660
+
+### TC52 / TC57 / TC72 / TC77
+
+| Cecha | Uwagi |
+|-------|-------|
+| **Recovery Mode** | PTT + Power |
+| **Popularność** | Najczęściej aktualizowane modele |
+| **WiFi** | Sprawdź konfigurację po update |
+| **WWAN** | TC57/TC77 – zweryfikuj APN po aktualizacji |
+
+### MC3300 / MC9300
+
+| Cecha | Uwagi |
+|-------|-------|
+| **Recovery Mode** | Gun Trigger + Power |
+| **Skaner** | Sprawdź konfigurację po update |
+| **Akcesoria** | Zweryfikuj kompatybilność uchwytów |
+
+### TC21 / TC26
+
+| Cecha | Uwagi |
+|-------|-------|
+| **Recovery Mode** | PTT + Power |
+| **Ekonomiczność** | Mniej pamięci – upewnij się że jest 200MB wolne |
+| **WWAN** | TC26 – zweryfikuj APN |
+
+### EC50 / EC55 / EC30
+
+| Cecha | Uwagi |
+|-------|-------|
+| **Recovery Mode** | PTT + Power |
+| **Kompaktowość** | Mniejsza bateria – naładuj do 80% przed update |
+
+### WT6300
+
+| Cecha | Uwagi |
+|-------|-------|
+| **Recovery Mode** | Sprawdź dokumentację produktu |
+| **Wearable** | Upewnij się że pasek jest bezpiecznie zapięty |
+| **Ringscanner** | Sprawdź kompatybilność RS5100/RS6100 |
+
+### VC8300
+
+| Cecha | Uwagi |
+|-------|-------|
+| **Vehicle-mounted** | Aktualizuj gdy pojazd jest zaparkowany |
+| **Zasilanie** | Upewnij się że terminal jest podłączony do zasilania |
+
+### ET51 / ET56 / L10AW
+
+| Cecha | Uwagi |
+|-------|-------|
+| **Tablet** | Większy ekran – więcej miejsca potrzebne |
+| **Stacja dokująca** | Zalecana podczas aktualizacji |
 
 ---
 
 ## Podsumowanie
 
-**Aktualizacja do Android 14** to ważny krok w utrzymaniu bezpieczeństwa floty Zebra.
+**Aktualizacja do Android 14** na platformie SDM660 to ważny krok w utrzymaniu bezpieczeństwa i wydajności floty Zebra.
 
 ### Kluczowe zalety:
 - ✅ Najnowsze poprawki bezpieczeństwa
 - ✅ Aktualizacje w tle (brak przestojów)
 - ✅ Mechanizm Fallback
 - ✅ Lepsza wydajność
+- ✅ Dłuższe wsparcie producenta
 
 ### Pamiętaj:
-- ⚠️ Backup danych przed aktualizacją
-- ⚠️ Sprawdź kompatybilność modelu
-- ⚠️ Bateria minimum 30%
+- ⚠️ **Backup danych** przed aktualizacją (zmiana FDE→FBE!)
+- ⚠️ Sprawdź **kompatybilność modelu**
+- ⚠️ Bateria minimum **30%** (zalecane 50%)
+- ⚠️ **Nie używaj** starych pakietów reset
+- ⚠️ Przetestuj aplikacje po aktualizacji
 
 ---
 
@@ -15112,48 +15428,79 @@ Aktualizacja setek terminali może być wyzwaniem. Skontaktuj się z nami!
 
 > **Napisz:** [Formularz kontaktowy](/kontakt)
 
-Jako **autoryzowany serwis Zebra** pomożemy Ci przejść przez migrację do Android 14 bezboleśnie.
+Jako **autoryzowany serwis Zebra** pomożemy Ci:
+- Przygotować plan migracji
+- Wykonać backup danych
+- Przeprowadzić aktualizację całej floty
+- Przetestować urządzenia po update
+- Rozwiązać problemy kompatybilności
 `
   },
 
-  // NOWY WPIS: Aktualizacja do Android 14 - Platforma 4490
+  // NOWY WPIS: Aktualizacja do Android 14 - Platforma QCS4490 (nowa generacja)
   {
-    slug: 'aktualizacja-terminali-zebra-android-14-qcs4490-poradnik',
-    title: 'Aktualizacja terminali Zebra do Android 14 (QCS4490) – MC3400, MC9400, TC53e, WT5400',
-    excerpt: 'Jak zaktualizować terminale Zebra nowej generacji (MC3400, MC9400, TC53e, WT5400, FR55) do Android 14? Poznaj mechanizm A/B Seamless Update, wspierane modele i metody aktualizacji.',
+    slug: 'aktualizacja-zebra-android-14-mc3400-mc9400-tc53e-wt5400',
+    title: 'Android 14 dla Zebra MC3400, MC9400, TC53e, WT5400, FR55 – Poradnik aktualizacji',
+    excerpt: 'Masz Zebra MC3400, MC9400, TC53e, TC58e, WT5400, WT6400 lub FR55? Ten poradnik jest dla Ciebie! Dowiedz się jak zaktualizować terminal nowej generacji do Android 14.',
     coverImage: '/blog/zebra-android-14-4490.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
     },
     publishedAt: '2025-12-25',
-    readingTime: 14,
+    readingTime: 18,
     deviceType: 'terminale',
-    subDeviceType: undefined,
+    subDeviceType: 'qcs4490-series',
     category: 'poradniki',
-    tags: ['android 14', 'aktualizacja', 'terminale zebra', 'MC3400', 'MC9400', 'TC53e', 'WT5400', 'FR55', 'QCS4490', 'LifeGuard', 'OTA', 'firmware', '4490'],
+    tags: ['android 14', 'aktualizacja', 'MC3400', 'MC3450', 'MC9400', 'MC9450', 'TC53e', 'TC58e', 'WT5400', 'WT6400', 'FR55', 'PS30', 'QCS4490', 'LifeGuard', 'OTA'],
     seo: {
-      metaTitle: 'Aktualizacja terminali Zebra do Android 14 (QCS4490) – MC3400, MC9400, TC53e [2025]',
-      metaDescription: 'Jak zaktualizować terminal Zebra nowej generacji do Android 14? Kompletny poradnik: MC3400, MC9400, TC53e, TC58e, WT5400, WT6400, FR55. Platforma QCS4490, LifeGuard OTA, Recovery Mode.',
+      metaTitle: 'Android 14 dla MC3400, MC9400, TC53e, WT5400, FR55 – Jak zaktualizować? [2025]',
+      metaDescription: 'Poradnik aktualizacji Android 14 dla Zebra MC3400, MC3450, MC9400, MC9450, TC53e, TC58e, WT5400, WT6400, FR55, PS30. Platforma QCS4490 (nowa generacja). Virtual A/B, LifeGuard OTA.',
       keywords: [
+        // Główne frazy
         'aktualizacja zebra android 14', 'zebra android 14 update', 'terminal zebra aktualizacja',
         'jak zaktualizować terminal zebra', 'zebra firmware update', 'zebra os update android 14',
-        'mc3400 android 14', 'mc3400 aktualizacja', 'mc3400 update', 'mc3400 firmware',
-        'mc3450 android 14', 'mc3450 aktualizacja', 'mc3450 update',
-        'mc9400 android 14', 'mc9400 aktualizacja', 'mc9400 update', 'mc9400 firmware',
-        'mc9450 android 14', 'mc9450 aktualizacja', 'mc9450 update',
-        'tc53e android 14', 'tc53e aktualizacja', 'tc53e update', 'tc53e firmware',
-        'tc58e android 14', 'tc58e aktualizacja', 'tc58e update',
-        'tc53es android 14', 'tc58es android 14',
-        'ps30 android 14', 'ps30 aktualizacja', 'ps30 update',
-        'wt5400 android 14', 'wt5400 aktualizacja', 'wt5400 update',
-        'wt6400 android 14', 'wt6400 aktualizacja', 'wt6400 update',
-        'fr55 android 14', 'fr55 aktualizacja', 'fr55 update', 'fr55 fixed rfid reader',
-        'zebra qcs4490', 'zebra 4490 platform', 'zebra new generation terminals',
-        'zebra lifeguard ota', 'zebra seamless update', 'zebra a/b update',
-        'zebra recovery mode update', 'zebra adb sideload', 'zebra delta update',
-        'jak zaktualizować mc3400 do android 14', 'jak zaktualizować mc9400',
-        'zebra android 14 kompatybilność', 'zebra android 14 lista urządzeń 4490'
+        // Modele MC
+        'mc3400 android 14', 'mc3400 aktualizacja', 'mc3400 update', 'mc3400 firmware', 'mc3400 jak zaktualizować',
+        'mc3450 android 14', 'mc3450 aktualizacja', 'mc3450 update', 'mc3450 jak zaktualizować',
+        'mc9400 android 14', 'mc9400 aktualizacja', 'mc9400 update', 'mc9400 firmware', 'mc9400 jak zaktualizować',
+        'mc9450 android 14', 'mc9450 aktualizacja', 'mc9450 update', 'mc9450 jak zaktualizować',
+        // Modele TC
+        'tc53e android 14', 'tc53e aktualizacja', 'tc53e update', 'tc53e firmware', 'tc53e jak zaktualizować',
+        'tc58e android 14', 'tc58e aktualizacja', 'tc58e update', 'tc58e jak zaktualizować',
+        'tc53es android 14', 'tc53es aktualizacja', 'tc58es android 14', 'tc58es aktualizacja',
+        // Wearable
+        'wt5400 android 14', 'wt5400 aktualizacja', 'wt5400 update', 'wt5400 jak zaktualizować',
+        'wt6400 android 14', 'wt6400 aktualizacja', 'wt6400 update', 'wt6400 jak zaktualizować',
+        // Inne modele
+        'ps30 android 14', 'ps30 aktualizacja', 'ps30 update', 'ps30 personal shopper',
+        'fr55 android 14', 'fr55 aktualizacja', 'fr55 update', 'fr55 fixed rfid reader', 'fr55 jak zaktualizować',
+        // Platforma
+        'zebra qcs4490', 'zebra 4490 platform', 'zebra new generation terminals', 'zebra nowa generacja',
+        'zebra virtual ab', 'zebra virtual a/b update', 'zebra virtual ab seamless',
+        // Techniczne
+        'zebra lifeguard ota', 'zebra seamless update', 'zebra a/b update', 'zebra ab update',
+        'zebra recovery mode update', 'zebra adb sideload', 'zebra delta update', 'zebra full ota',
+        'zebra upl update package list', 'zebra streaming update', 'zebra true delta',
+        // Long-tail PL
+        'jak zaktualizować mc3400 do android 14', 'jak zaktualizować mc9400 do android 14',
+        'jak zaktualizować tc53e do android 14', 'jak zaktualizować wt5400 do android 14',
+        'aktualizacja terminala zebra nowej generacji', 'aktualizacja terminala zebra instrukcja krok po kroku',
+        'czy mogę zaktualizować zebra qcs4490', 'które terminale zebra 4490 wspierają android 14',
+        // Problemy
+        'problem z aktualizacją zebra qcs4490', 'błąd aktualizacji android 14 zebra mc3400',
+        'zebra mc9400 nie aktualizuje się', 'zebra verification failed qcs4490',
+        'zebra aktualizacja się nie powodzi mc3400', 'zebra bootloop po aktualizacji mc9400',
+        'zebra rescue party mode', 'zebra fallback mechanism',
+        // Serwis
+        'serwis zebra aktualizacja android', 'pomoc aktualizacja terminala zebra nowa generacja',
+        'aktualizacja zebra polska qcs4490', 'serwis terminali zebra mc3400 mc9400',
+        'profesjonalna aktualizacja zebra tc53e', 'zlecenie aktualizacji zebra wt5400',
+        // Bezpieczeństwo
+        'zebra android 14 bezpieczeństwo', 'zebra security patch qcs4490', 'zebra aktualizacja bezpieczeństwa',
+        // Kompatybilność
+        'zebra android 14 kompatybilność qcs4490', 'zebra android 14 lista urządzeń 4490',
+        'zebra qcs4490 wspierane modele', 'zebra 4490 end of life android'
       ]
     },
     content: `
@@ -15284,70 +15631,378 @@ Dla firm zarządzających flotą urządzeń, najlepszą opcją jest **Zebra Life
 
 ---
 
+## Virtual A/B – Co to oznacza dla Twojego urządzenia?
+
+Platforma QCS4490 wykorzystuje mechanizm **Virtual A/B** – zaawansowaną wersję standardowego A/B update. Oto kluczowe różnice:
+
+### Zalety Virtual A/B:
+
+| Cecha | Standardowy A/B | Virtual A/B (QCS4490) |
+|-------|-----------------|----------------------|
+| **Zajętość pamięci** | Podwójna partycja | Mniejsze zużycie flash |
+| **Elastyczność** | Stały układ partycji | Dynamiczny rozmiar partycji |
+| **Streaming** | Częściowo | Pełne wsparcie |
+| **Rollback** | Tak | Tak (nawet bez fizycznej partycji zapasowej) |
+
+### Jak działa Virtual A/B?
+
+1. **Aktualizacja w tle** – system pobiera i instaluje nowy OS podczas normalnej pracy
+2. **Snapshoty** – zmiany zapisywane są jako "snapshoty" zamiast pełnej kopii
+3. **Merge po restarcie** – po restarcie snapshoty są scalane z systemem
+4. **Automatyczny rollback** – jeśli scalanie się nie powiedzie, urządzenie wraca do poprzedniego OS
+
+> **⚠️ Uwaga:** Po aktualizacji urządzenie może potrzebować **do 1 minuty** na scalenie zmian. Nie wykonuj Factory Reset zaraz po pierwszym uruchomieniu!
+
+---
+
+## Kombinacje klawiszy do Recovery Mode
+
+Każdy model ma inną kombinację klawiszy do wejścia w tryb Recovery:
+
+| Model | Kombinacja klawiszy |
+|-------|---------------------|
+| **TC53e / TC58e** | PTT + Power |
+| **MC9400 / MC9450** | Spust (Gun Trigger) + Power |
+| **MC3400 / MC3450** | Spust (Gun Trigger) + Power |
+| **PS30** | Scan + Reboot Tool |
+| **WT5400 / WT6400** | P1 + Power |
+
+### Krok po kroku:
+
+1. **Wyłącz urządzenie** całkowicie
+2. **Przytrzymaj wskazane przyciski** aż pojawi się logo Zebra
+3. **Puść przyciski** gdy zobaczysz ekran Recovery
+
+Alternatywnie, jeśli masz włączone USB Debugging, użyj komendy: **adb reboot recovery**
+
+---
+
+## UPL – Instalacja wielu pakietów jednocześnie
+
+**UPL (Update Package List)** pozwala zainstalować kilka pakietów w jednej operacji. Jest to przydatne gdy:
+
+- Chcesz zainstalować OS + pakiety firmware
+- Potrzebujesz wykonać reset po aktualizacji
+- Instalujesz pakiety konfiguracyjne razem z OS
+
+### Przykładowy plik UPL:
+
+**package:Full_OTA_Package.zip**
+**command:FactoryReset**
+
+### Obsługiwane polecenia UPL:
+
+| Polecenie | Działanie |
+|-----------|-----------|
+| package:nazwa.zip | Instaluje pakiet |
+| command:EnterpriseReset | Enterprise Reset po instalacji |
+| command:FactoryReset | Factory Reset po instalacji |
+
+### Ważne zasady:
+
+- ❌ **Nie mieszaj** Full OTA z Delta OTA w jednym UPL
+- ❌ **Nie zostawiaj** pustych linii na końcu pliku
+- ✅ UPL i pakiety muszą być w **tym samym folderze**
+- ✅ Po użyciu **usuń** pliki UPL z pamięci urządzenia
+
+---
+
+## Możliwe przerwy podczas aktualizacji
+
+Podczas instalacji OTA w tle (Android AB Mode) mogą wystąpić przerwania:
+
+| Zdarzenie | Co się stanie? |
+|-----------|----------------|
+| **Bateria < 30%** | Aktualizacja wstrzymana, wznowiona po podłączeniu ładowarki |
+| **Warm Swap baterii** | Aktualizacja **anulowana** |
+| **Hot Swap baterii** | Aktualizacja **anulowana** |
+| **Wyjęcie karty SD** | Aktualizacja anulowana (jeśli pakiet był na SD) |
+| **Brak miejsca na dysku** | Aktualizacja anulowana (wymaga ~100MB wolnego miejsca) |
+| **Restart urządzenia** | Seamless update: wznowiona / Streaming: anulowana |
+| **Wyłączenie urządzenia** | Aktualizacja anulowana |
+
+### Jak uniknąć problemów?
+
+1. **Naładuj baterię** do minimum 50% (zalecane 80%)
+2. **Nie wymieniaj baterii** podczas aktualizacji
+3. **Upewnij się** że masz stabilne połączenie WiFi
+4. **Zwolnij miejsce** na dysku (min. 100MB)
+5. **Nie restartuj** urządzenia ręcznie
+
+---
+
+## Rescue Party Mode – Ochrona przed bootloopami
+
+Android 14 zawiera funkcję **Rescue Party**, która automatycznie wykrywa problemy z uruchamianiem systemu.
+
+### Jak to działa?
+
+1. System wykrywa **wielokrotne crashe** podczas bootowania
+2. Rescue Party **eskaluje** działania naprawcze
+3. Jako ostateczność – urządzenie uruchamia się w **Recovery** z propozycją Factory Reset
+
+### Zbieranie logów Rescue Party:
+
+Logi można zebrać za pomocą **RxLogger**:
+1. Włącz plugin RxLogger dla Recovery Mode
+2. Wykonaj restart urządzenia
+3. Pobierz logi z RxLogger
+
+> **Tip:** Ostatnie 10 logów Recovery jest przechowywanych w **/data/tmp/public/recovery** (niedostępne bez roota)
+
+---
+
+## Notyfikacje podczas aktualizacji
+
+Podczas instalacji pakietu OTA w trybie AB, użytkownik zobaczy następujące powiadomienia:
+
+### Na pasku stanu:
+- Ikona systemu Android informująca o aktualizacji
+
+### W panelu powiadomień:
+- "OS Update is in progress, device will reboot automatically"
+- Pasek postępu pokazujący stan instalacji
+
+### Po zakończeniu:
+- "Installation completed, device will reboot in 15 seconds"
+- Automatyczny restart (chyba że EMM włączył "Suppress Reboot")
+
+### Ograniczenia:
+- ❌ Użytkownik NIE może wstrzymać aktualizacji
+- ❌ Użytkownik NIE może anulować aktualizacji
+- ❌ Użytkownik NIE może zapobiec restartowi
+- ✅ Użytkownik MOŻE zamknąć powiadomienie (ale update trwa dalej)
+
+---
+
 ## Różnice między platformami SDM660 a QCS4490
 
 | Cecha | SDM660 | QCS4490 |
 |-------|--------|---------|
 | **Generacja** | Starsza | Nowa |
 | **Modele** | TC52, MC3300, MC9300 | MC3400, MC9400, TC53e |
+| **Mechanizm update** | A/B | Virtual A/B |
 | **Wydajność** | Standardowa | Zwiększona |
-| **A/B Update** | Tak | Tak |
 | **WiFi 6E** | Częściowo | Tak |
+| **Streaming OTA** | Częściowo | Pełne wsparcie |
+| **Zużycie flash** | Większe | Zoptymalizowane |
+
+---
+
+## Weryfikacja aktualizacji
+
+Po zakończeniu aktualizacji sprawdź, czy została poprawnie zainstalowana:
+
+1. Przejdź do **Ustawienia** > **Informacje o telefonie**
+2. Znajdź **Numer kompilacji** (Build number)
+3. Porównaj z numerem wersji pobranego pakietu
+
+### Przykład numeru wersji:
+
+**14-16-17.00-TG-U01-STD-XXX-04**
+
+Gdzie:
+- **14** = Android 14
+- **U01** = numer patcha (Patch 1)
+- **STD** = wersja standardowa
+
+---
+
+## AB Streaming Update – szczegóły techniczne
+
+Dla administratorów IT korzystających z LifeGuard OTA:
+
+### Tryby uwierzytelniania:
+- **Token Auth** – zalecany dla większych wdrożeń
+- **Basic Auth** – nazwa użytkownika + hasło
+- **Brak uwierzytelniania** – tylko dla testów
+
+### Protokoły:
+- **HTTP** – działa, ale niezalecany
+- **HTTPS** – zalecany dla bezpieczeństwa
+
+### Ograniczenia AB Streaming:
+- ❌ Nie obsługuje UPL (wielu pakietów naraz)
+- ❌ Nie obsługuje pakietów Reset
+- ✅ Obsługuje Full OTA i Delta OTA
+
+---
+
+## Status aktualizacji dla EMM
+
+Administratorzy mogą monitorować status aktualizacji przez **OEMInfo content provider**.
+
+### Jak odczytać status?
+Status jest wysyłany jako Android Intent i zapisywany w OEMInfo. EMM może odczytać ten status programowo.
+
+### Typowe statusy:
+- **In Progress** – instalacja w toku
+- **Completed** – instalacja zakończona, oczekiwanie na restart
+- **Failed** – błąd instalacji
+- **Cancelled** – anulowano (np. przez niski poziom baterii)
 
 ---
 
 ## FAQ – Najczęstsze pytania
 
-**Czy mogę pominąć aktualizacje pośrednie?**
-Tak, ale tylko z pakietem **Full OTA**. Delta wymaga sekwencyjnej instalacji (U01 → U02 → U03).
+**Czy mogę pominąć aktualizacje pośrednie (np. z U01 na U05)?**
+Tak, ale tylko z pakietem **Full OTA**. Pakiety Delta wymagają sekwencyjnej instalacji (U01 → U02 → U03 → U04 → U05).
 
-**Co jeśli bateria padnie w trakcie?**
-Mechanizm A/B jest bezpieczny – aktualizacja zostanie anulowana, urządzenie będzie działać na starym systemie.
+**Co jeśli bateria padnie w trakcie aktualizacji?**
+Mechanizm Virtual A/B jest bezpieczny – aktualizacja zostanie wstrzymana i wznowiona po podłączeniu ładowarki. Urządzenie będzie działać na starym systemie do czasu zakończenia instalacji.
 
-**Ile trwa aktualizacja?**
-Około **30-50 minut** (pobieranie + instalacja + restart).
+**Ile trwa aktualizacja OTA?**
+Około **30-50 minut** (pobieranie + instalacja + restart). Sam restart to tylko **2-3 minuty**.
 
 **Czy mogę wrócić do Android 13?**
-Tak, ale **downgrade zawsze** powoduje Factory Reset i utratę danych.
+Tak, ale **downgrade zawsze** powoduje automatyczny Enterprise Reset i utratę danych użytkownika. Użyj opcji "Apply downgrade from..." w Recovery.
 
-**Czy aktualizacja wpływa na certyfikaty?**
-Certyfikaty i klucze licencyjne są zachowane, ale warto zrobić backup.
+**Czy aktualizacja wpływa na certyfikaty i licencje?**
+Przy upgrade – certyfikaty i klucze są zachowane. Przy downgrade – dane są kasowane, więc wymagana jest rekonfiguracja.
+
+**Czy mogę użyć pakietów Delta w Recovery Mode?**
+**Nie.** Recovery Mode obsługuje tylko pakiety Full OTA i Reset. Pakiety Delta muszą być instalowane przez EMM/StageNow lub LifeGuard OTA.
+
+**Co to jest "Suppress Reboot" i kiedy go używać?**
+To opcja dla EMM, która zapobiega automatycznemu restartowi po instalacji. Przydatna gdy chcesz skoordynować restart wielu urządzeń naraz.
+
+**Czy mogę instalować aktualizację przez USB?**
+Tak. Skopiuj pakiet na pendrive, włóż do urządzenia i użyj opcji "Apply upgrade from USB drive" w Recovery.
+
+**Co jeśli urządzenie nie bootuje po aktualizacji?**
+System automatycznie wykryje problem i wróci do poprzedniej wersji (fallback). Jeśli to nie pomoże, wykonaj Factory Reset w Recovery.
+
+**Jak działa True Delta w LifeGuard OTA?**
+True Delta to specjalny pakiet generowany przez serwer Zebra, który zawiera **tylko różnice** między Twoją wersją a docelową. Jest znacznie mniejszy niż Delta z zebra.com.
+
+**Czy Warm Swap baterii przerwie aktualizację?**
+**Tak.** Warm Swap i Hot Swap baterii powodują anulowanie trwającej aktualizacji. Poczekaj na zakończenie instalacji.
+
+**Jak sprawdzić czy aktualizacja się powiodła?**
+Przejdź do Ustawienia > Informacje o telefonie > Numer kompilacji. Porównaj z numerem wersji pakietu, który instalowałeś.
+
+**Czy mogę instalować wiele pakietów naraz?**
+Tak, użyj mechanizmu UPL (Update Package List). Pozwala zainstalować OS + firmware + wykonać reset w jednej operacji.
+
+**Co jeśli mam "Verification failed" podczas instalacji?**
+Pobierz pakiet ponownie – plik mógł być uszkodzony podczas transferu. Sprawdź sumę SHA256 na stronie Zebra.
 
 ---
 
 ## Rozwiązywanie problemów
 
+### Podstawowe problemy:
+
+| Problem | Możliwa przyczyna | Rozwiązanie |
+|---------|-------------------|-------------|
+| Aktualizacja nie startuje | Bateria < 30% | Naładuj baterię do min. 50% |
+| Aktualizacja nie startuje | Uszkodzony plik | Pobierz pakiet ponownie, sprawdź SHA256 |
+| Aktualizacja nie startuje | Brak miejsca | Zwolnij min. 100MB w pamięci wewnętrznej |
+| Zatrzymuje się na X% | Normalny proces | Poczekaj do 30 minut, NIE przerywaj |
+| Zatrzymuje się na X% | Słabe WiFi | Przełącz na stabilniejszą sieć |
+| "Verification failed" | Uszkodzony plik | Pobierz ponownie, użyj innego źródła |
+| "Verification failed" | Zły pakiet | Upewnij się, że pakiet jest dla Twojego modelu |
+
+### Problemy po aktualizacji:
+
 | Problem | Rozwiązanie |
 |---------|-------------|
-| Aktualizacja nie startuje | Sprawdź baterię (min. 30%), pobierz plik ponownie |
-| Zatrzymuje się na X% | Poczekaj do 30 minut, nie przerywaj procesu |
-| "Verification failed" | Pobierz plik ponownie, sprawdź sumę SHA256 |
-| Nie bootuje po update | Poczekaj 5-10 min, lub wykonaj Factory Reset w Recovery |
-| Aplikacje nie działają | Wyczyść dane aplikacji lub zainstaluj ponownie |
+| Urządzenie nie bootuje | Poczekaj 5-10 min – scalanie zmian (merge) |
+| Urządzenie w bootloopie | Rescue Party wykona auto-recovery lub Factory Reset |
+| Aplikacje crashują | Wyczyść dane aplikacji w Ustawienia > Aplikacje |
+| WiFi nie działa | Zapomnij sieć i połącz ponownie |
+| Bluetooth nie paruje | Usuń sparowane urządzenia, sparuj ponownie |
+| DataWedge nie działa | Zresetuj konfigurację DataWedge |
+
+### Problemy z Recovery Mode:
+
+| Problem | Rozwiązanie |
+|---------|-------------|
+| Nie mogę wejść w Recovery | Sprawdź kombinację klawiszy dla modelu |
+| ADB sideload nie działa | Sprawdź sterowniki ADB na komputerze |
+| Nie widzę pakietu na SD | Upewnij się, że plik jest w głównym folderze |
+| "OTA update already applied" | Zrestartuj urządzenie i sprawdź wersję |
+
+### Jak zebrać logi Recovery?
+
+1. Włącz **RxLogger** z pluginem dla Recovery Mode
+2. Wykonaj operację, która powoduje problem
+3. Pobierz logi z RxLogger
+4. Logi są w **/tmp/recovery.log** (tylko w Recovery Mode)
 
 ---
 
 ## Specyficzne uwagi dla modeli QCS4490
 
-### MC3400 / MC3450
-- Zalecane wykonanie pełnego backupu przed aktualizacją
-- Sprawdź kompatybilność skanerów i akcesoriów
+### MC3400 / MC3450 (Gun Handle)
 
-### MC9400 / MC9450
-- Aktualizacja może wymagać rekonfiguracji modułu RFID
-- Zalecane połączenie WiFi podczas aktualizacji OTA
+| Cecha | Uwagi |
+|-------|-------|
+| **Recovery Mode** | Spust (Gun Trigger) + Power |
+| **Backup** | Zalecane – szczególnie profile StageNow |
+| **Skaner** | Sprawdź firmware SE4770 po aktualizacji |
+| **Akcesoria** | Zweryfikuj kompatybilność uchwytów i stacji |
+| **RFID** | Może wymagać rekonfiguracji po update |
 
-### TC53e / TC58e
-- Sprawdź wersję firmware modemu przed aktualizacją
-- Wersje ES mają dodatkowe wymagania bezpieczeństwa
+**Tip:** MC3450 (z RFID) może wymagać dodatkowej kalibracji po aktualizacji.
 
-### WT5400 / WT6400
-- Upewnij się że terminal jest w stacji dokującej podczas aktualizacji
-- Sprawdź kompatybilność ringscannera
+### MC9400 / MC9450 (Premium Rugged)
 
-### FR55
-- Aktualizacja może wymagać rekonfiguracji anteny RFID
-- Zalecane testowanie po aktualizacji
+| Cecha | Uwagi |
+|-------|-------|
+| **Recovery Mode** | Spust (Gun Trigger) + Power |
+| **RFID** | Rekonfiguracja anteny może być konieczna |
+| **Modem 5G** | Sprawdź firmware modemu po update |
+| **Bateria** | Używaj oryginalnych baterii Zebra |
+| **Akcesoria** | Zweryfikuj kompatybilność handstrapów |
+
+**Tip:** MC9450 obsługuje 5G – upewnij się, że konfiguracja APN jest poprawna.
+
+### TC53e / TC58e / TC53ES / TC58ES (Enterprise Touch)
+
+| Cecha | Uwagi |
+|-------|-------|
+| **Recovery Mode** | PTT + Power |
+| **Wersja ES** | Dodatkowe wymagania bezpieczeństwa (szyfrowanie) |
+| **Modem** | Sprawdź firmware modemu LTE/5G |
+| **Kamera** | Przetestuj skanowanie po aktualizacji |
+| **Bluetooth** | Może wymagać ponownego parowania |
+
+**Tip:** Wersje ES (Enhanced Security) mają zmodyfikowany kernel – używaj tylko oficjalnych pakietów.
+
+### WT5400 / WT6400 (Wearable)
+
+| Cecha | Uwagi |
+|-------|-------|
+| **Recovery Mode** | P1 + Power |
+| **Stacja dokująca** | Zalecana podczas aktualizacji |
+| **Ringscanner** | Sprawdź kompatybilność RS5100/RS6100 |
+| **Pasek** | Nie odpinaj podczas aktualizacji |
+| **Bateria** | Użyj świeżo naładowanej baterii |
+
+**Tip:** WT6400 ma lepszy wyświetlacz – przetestuj czytelność w słońcu po update.
+
+### PS30 (Personal Shopper)
+
+| Cecha | Uwagi |
+|-------|-------|
+| **Recovery Mode** | Scan + Reboot Tool |
+| **Specyficzne** | Wymaga Reboot Tool do Recovery! |
+| **Skaner** | Sprawdź konfigurację skanera 2D |
+| **Koszyk** | Zweryfikuj integrację z wózkiem |
+
+**Tip:** PS30 jest specyficzny – używaj dedykowanych pakietów dla tego modelu.
+
+### FR55 (Fixed RFID Reader)
+
+| Cecha | Uwagi |
+|-------|-------|
+| **Recovery Mode** | Standardowy (Power cycle + tryb recovery) |
+| **Antena** | Może wymagać rekonfiguracji po update |
+| **Ethernet** | Sprawdź konfigurację IP po restarcie |
+| **Integracje** | Przetestuj połączenie z systemem WMS |
+
+**Tip:** FR55 to czytnik stacjonarny – upewnij się, że aktualizacja nie przerwie pracy linii produkcyjnej.
 
 ---
 
