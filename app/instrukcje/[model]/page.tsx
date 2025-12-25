@@ -79,6 +79,72 @@ export async function generateMetadata({ params }: { params: { model: string } }
   }
 
   const categoryName = categoryConfig[manual.category]?.name || 'Urządzenie'
+  
+  // Określ typ urządzenia dla słów kluczowych
+  const getDeviceType = (category: string) => {
+    if (category.startsWith('drukarki')) return { singular: 'drukarka', plural: 'drukarki', type: 'printer' }
+    if (category === 'terminale') return { singular: 'terminal', plural: 'terminale', type: 'terminal' }
+    if (category === 'skanery') return { singular: 'skaner', plural: 'skanery', type: 'scanner' }
+    if (category === 'tablety') return { singular: 'tablet', plural: 'tablety', type: 'tablet' }
+    return { singular: 'urządzenie', plural: 'urządzenia', type: 'device' }
+  }
+  
+  const device = getDeviceType(manual.category)
+  
+  // Dodatkowe słowa kluczowe specyficzne dla typu urządzenia
+  const deviceSpecificKeywords = () => {
+    switch (device.type) {
+      case 'printer':
+        return [
+          `${manual.model} kalibracja etykiet`,
+          `${manual.model} wymiana głowicy`,
+          `${manual.model} czyszczenie głowicy`,
+          `${manual.model} problemy z wydrukiem`,
+          `${manual.model} blady wydruk`,
+          `${manual.model} zacięcie etykiety`,
+          `${manual.model} programowanie ZPL`,
+          `${manual.model} ZPL komendy`,
+          `drukarka etykiet ${manual.model}`,
+          `drukarka termiczna ${manual.model}`,
+        ]
+      case 'terminal':
+        return [
+          `${manual.model} wymiana ekranu`,
+          `${manual.model} wymiana baterii`,
+          `${manual.model} aktualizacja systemu`,
+          `${manual.model} DataWedge`,
+          `${manual.model} skanowanie kodów`,
+          `${manual.model} konfiguracja WiFi`,
+          `${manual.model} Android`,
+          `terminal mobilny ${manual.model}`,
+          `kolektorr danych ${manual.model}`,
+        ]
+      case 'scanner':
+        return [
+          `${manual.model} parowanie Bluetooth`,
+          `${manual.model} konfiguracja USB`,
+          `${manual.model} tryb prezentacji`,
+          `${manual.model} odczyt kodów 2D`,
+          `${manual.model} odczyt kodów QR`,
+          `${manual.model} baza stacji`,
+          `skaner kodów kreskowych ${manual.model}`,
+          `czytnik kodów ${manual.model}`,
+        ]
+      case 'tablet':
+        return [
+          `${manual.model} wymiana ekranu`,
+          `${manual.model} wymiana baterii`,
+          `${manual.model} stacja dokująca`,
+          `${manual.model} uchwyt samochodowy`,
+          `${manual.model} Android`,
+          `${manual.model} Windows`,
+          `tablet przemysłowy ${manual.model}`,
+          `tablet rugged ${manual.model}`,
+        ]
+      default:
+        return []
+    }
+  }
 
   return {
     title: `Instrukcja obsługi ${manual.model} – Pobierz PDF | Serwis Zebra`,
@@ -123,11 +189,6 @@ export async function generateMetadata({ params }: { params: { model: string } }
       `${manual.model} naprawa`,
       `${manual.model} serwis`,
       
-      // Programowanie
-      `${manual.model} programowanie ZPL`,
-      `${manual.model} ZPL`,
-      `${manual.model} komendy`,
-      
       // Specyfikacja
       `${manual.model} specyfikacja`,
       `${manual.model} dane techniczne`,
@@ -137,10 +198,16 @@ export async function generateMetadata({ params }: { params: { model: string } }
       `${manual.model} sterowniki`,
       `${manual.model} driver`,
       
-      // Kategoria i marka
-      `drukarka ${manual.model}`,
+      // Typ urządzenia
+      `${device.singular} ${manual.model}`,
+      `${device.singular} Zebra ${manual.model}`,
       `${categoryName.toLowerCase()} ${manual.model}`,
       `Zebra ${manual.model}`,
+      
+      // Słowa kluczowe specyficzne dla typu urządzenia
+      ...deviceSpecificKeywords(),
+      
+      // Ogólne
       'zebra',
       'instrukcja pdf',
       'manual zebra',
