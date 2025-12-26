@@ -344,7 +344,7 @@ export default function CityServicePage({ params }: { params: { miasto: string }
     description: city.metaDescription,
     url: `https://www.serwis-zebry.pl/serwis-zebra/${city.slug}`,
     telephone: '+48601619898',
-    email: 'serwis@serwis-zebry.pl',
+    email: 'serwis@takma.com.pl',
     areaServed: {
       '@type': 'City',
       name: city.name,
@@ -492,9 +492,9 @@ export default function CityServicePage({ params }: { params: { miasto: string }
                 <span className="sm:hidden">Zadzwoń</span>
               </a>
               <a
-                href="mailto:serwis@serwis-zebry.pl"
+                href="mailto:serwis@takma.com.pl"
                 className="inline-flex items-center gap-2 bg-white border border-gray-300 text-gray-700 font-medium px-5 py-2.5 rounded-lg hover:bg-gray-50 transition-colors text-sm"
-                aria-label="Napisz email do serwisu: serwis@serwis-zebry.pl"
+                aria-label="Napisz email do serwisu: serwis@takma.com.pl"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -587,7 +587,7 @@ export default function CityServicePage({ params }: { params: { miasto: string }
               <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">Kontakt z serwisem</h3>
               <p>
                 Masz pytania? Zadzwoń pod numer <a href="tel:+48601619898" className="text-blue-600 hover:underline font-medium" aria-label="Zadzwoń do serwisu">+48 601 619 898</a> lub 
-                napisz na <a href="mailto:serwis@serwis-zebry.pl" className="text-blue-600 hover:underline font-medium" aria-label="Wyślij email do serwisu">serwis@serwis-zebry.pl</a>. 
+                napisz na <a href="mailto:serwis@takma.com.pl" className="text-blue-600 hover:underline font-medium" aria-label="Wyślij email do serwisu">serwis@takma.com.pl</a>. 
                 Odpowiadamy w ciągu 24 godzin. Możesz też odwiedzić naszą stronę <Link href="/kontakt" className="text-blue-600 hover:underline">kontaktową</Link> 
                 lub zapoznać się z <Link href="/faq" className="text-blue-600 hover:underline">FAQ</Link>.
               </p>
@@ -800,14 +800,14 @@ export default function CityServicePage({ params }: { params: { miasto: string }
                 +48 601 619 898
               </a>
               <a
-                href="mailto:serwis@serwis-zebry.pl"
+                href="mailto:serwis@takma.com.pl"
                 className="inline-flex items-center gap-2 bg-white border border-gray-300 text-gray-700 font-medium px-6 py-2.5 rounded-lg hover:bg-gray-50 transition-colors text-sm"
-                aria-label="Wyślij email: serwis@serwis-zebry.pl"
+                aria-label="Wyślij email: serwis@takma.com.pl"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
-                serwis@serwis-zebry.pl
+                serwis@takma.com.pl
               </a>
             </div>
           </div>

@@ -369,7 +369,7 @@ interface RepairShippedEmailData {
 export async function sendRepairShippedEmail(data: RepairShippedEmailData) {
   try {
     const email = await resend.emails.send({
-      from: 'Serwis Zebra <serwis@serwis-zebry.pl>',
+      from: 'Serwis Zebra <serwis@takma.com.pl>',
       to: data.customerEmail,
       subject: `Twoje urządzenie zostało wysłane! - ${data.deviceModel}`,
       html: generateRepairShippedHTML(data)
@@ -467,7 +467,7 @@ ${getEmailHeader()}
             <p style="margin: 0 0 8px 0;">Masz pytania? Skontaktuj się z nami:</p>
             <p style="margin: 0;">
               <strong>Tel:</strong> +48 607 819 688<br>
-              <strong>Email:</strong> serwis@serwis-zebry.pl
+              <strong>Email:</strong> serwis@takma.com.pl
             </p>
           </div>
 
@@ -496,7 +496,7 @@ export async function sendQuoteReadyEmail(data: QuoteReadyEmailData) {
     const shortId = getRepairNumber(data.repairId, data.repairNumber)
     
     const email = await resend.emails.send({
-      from: 'Serwis Zebra <serwis@serwis-zebry.pl>',
+      from: 'Serwis Zebra <serwis@takma.com.pl>',
       to: data.to,
       subject: `Wycena naprawy gotowa - ${data.deviceModel} #${shortId}`,
       html: generateQuoteReadyHTML(data, shortId)
@@ -593,7 +593,7 @@ ${getEmailHeader()}
             <p style="margin: 0 0 8px 0;">Masz pytania? Skontaktuj się z nami:</p>
             <p style="margin: 0;">
               <strong>Tel:</strong> +48 607 819 688<br>
-              <strong>Email:</strong> serwis@serwis-zebry.pl
+              <strong>Email:</strong> serwis@takma.com.pl
             </p>
           </div>
 
@@ -719,7 +719,7 @@ export async function sendRepairPaidEmail(data: RepairPaidEmailData) {
     const shortId = getRepairNumber(data.repairId, data.repairNumber)
     
     const email = await resend.emails.send({
-      from: 'Serwis Zebra <serwis@serwis-zebry.pl>',
+      from: 'Serwis Zebra <serwis@takma.com.pl>',
       to: data.to,
       subject: `Płatność potwierdzona - naprawa ${data.deviceModel}`,
       html: generateRepairPaidClientHTML(data, shortId)
@@ -805,7 +805,7 @@ ${getEmailHeader()}
             <p style="margin: 0 0 8px 0;">Masz pytania? Skontaktuj się z nami:</p>
             <p style="margin: 0;">
               <strong>Tel:</strong> +48 607 819 688<br>
-              <strong>Email:</strong> serwis@serwis-zebry.pl
+              <strong>Email:</strong> serwis@takma.com.pl
             </p>
           </div>
 
@@ -937,7 +937,7 @@ export async function sendRepairSubmittedEmail(data: RepairSubmittedEmailData) {
     const displayNumber = getRepairNumber(data.repairId, data.repairNumber)
     
     const email = await resend.emails.send({
-      from: 'Serwis Zebra <serwis@serwis-zebry.pl>',
+      from: 'Serwis Zebra <serwis@takma.com.pl>',
       to: data.to,
       subject: `Zgłoszenie naprawy przyjęte - ${data.deviceModel} #${displayNumber}`,
       html: generateRepairSubmittedHTML(data, displayNumber)
@@ -1061,7 +1061,7 @@ function generateRepairSubmittedHTML(data: RepairSubmittedEmailData, shortId: st
             <p style="margin: 0 0 8px 0;">Masz pytania? Skontaktuj się z nami:</p>
             <p style="margin: 0;">
               <strong>Tel:</strong> +48 607 819 688<br>
-              <strong>Email:</strong> serwis@serwis-zebry.pl
+              <strong>Email:</strong> serwis@takma.com.pl
             </p>
           </div>
 
@@ -1220,7 +1220,7 @@ interface WelcomeEmailData {
 export async function sendWelcomeEmail(data: WelcomeEmailData) {
   try {
     const email = await resend.emails.send({
-      from: 'Serwis Zebra <serwis@serwis-zebry.pl>',
+      from: 'Serwis Zebra <serwis@takma.com.pl>',
       to: data.to,
       subject: `Witamy w Serwis Zebra!`,
       html: generateWelcomeHTML(data)
@@ -1302,7 +1302,7 @@ ${getEmailHeader()}
             <p style="margin: 0 0 8px 0;">Potrzebujesz pomocy?</p>
             <p style="margin: 0;">
               <strong>Tel:</strong> +48 601 619 898<br>
-              <strong>Email:</strong> serwis@serwis-zebry.pl
+              <strong>Email:</strong> serwis@takma.com.pl
             </p>
           </div>
 
@@ -1340,7 +1340,7 @@ export async function sendQuoteAcceptedEmail(data: QuoteAcceptedEmailData) {
     const shortId = getRepairNumber(data.repairId, data.repairNumber)
     
     const email = await resend.emails.send({
-      from: 'Serwis Zebra <serwis@serwis-zebry.pl>',
+      from: 'Serwis Zebra <serwis@takma.com.pl>',
       to: data.to,
       subject: `Wycena zaakceptowana - ${data.deviceModel} #${shortId}`,
       html: generateQuoteAcceptedHTML(data, shortId)
@@ -1440,7 +1440,7 @@ ${getEmailHeader()}
             <p style="margin: 0 0 8px 0;">Masz pytania?</p>
             <p style="margin: 0;">
               <strong>Tel:</strong> +48 601 619 898<br>
-              <strong>Email:</strong> serwis@serwis-zebry.pl
+              <strong>Email:</strong> serwis@takma.com.pl
             </p>
           </div>
 
@@ -1565,7 +1565,7 @@ export async function sendRepairStatusChangedEmail(data: RepairStatusChangedEmai
     const shortId = getRepairNumber(data.repairId, data.repairNumber)
     
     const email = await resend.emails.send({
-      from: 'Serwis Zebra <serwis@serwis-zebry.pl>',
+      from: 'Serwis Zebra <serwis@takma.com.pl>',
       to: data.to,
       subject: `Status naprawy zmieniony - ${data.deviceModel} #${shortId}`,
       html: generateRepairStatusChangedHTML(data, shortId)
@@ -1672,7 +1672,7 @@ ${getEmailHeader()}
             <p style="margin: 0 0 8px 0;">Masz pytania?</p>
             <p style="margin: 0;">
               <strong>Tel:</strong> +48 601 619 898<br>
-              <strong>Email:</strong> serwis@serwis-zebry.pl
+              <strong>Email:</strong> serwis@takma.com.pl
             </p>
           </div>
 
@@ -1711,7 +1711,7 @@ export async function sendProFormaEmail(data: ProFormaEmailData) {
     const shortId = getRepairNumber(data.repairId, data.repairNumber)
     
     const email = await resend.emails.send({
-      from: 'Serwis Zebra <serwis@serwis-zebry.pl>',
+      from: 'Serwis Zebra <serwis@takma.com.pl>',
       to: data.to,
       subject: `Faktura Pro Forma - naprawa #${shortId}`,
       html: generateProFormaHTML(data, shortId)
@@ -1744,7 +1744,7 @@ export async function sendNewChatMessageEmail(data: NewChatMessageEmailData) {
     const shortId = getRepairNumber(data.repairId, data.repairNumber)
     
     const email = await resend.emails.send({
-      from: 'Serwis Zebra <serwis@serwis-zebry.pl>',
+      from: 'Serwis Zebra <serwis@takma.com.pl>',
       to: data.to,
       subject: `Nowa wiadomość - naprawa #${shortId}`,
       html: generateNewChatMessageHTML(data, shortId)
@@ -1849,7 +1849,7 @@ ${getEmailHeader()}
             <p style="margin: 0 0 8px 0;">Masz pytania? Skontaktuj się z nami:</p>
             <p style="margin: 0;">
               <strong>Tel:</strong> +48 607 819 688<br>
-              <strong>Email:</strong> serwis@serwis-zebry.pl
+              <strong>Email:</strong> serwis@takma.com.pl
             </p>
           </div>
 
@@ -1964,7 +1964,7 @@ ${getEmailHeader()}
             <p style="margin: 0 0 8px 0;">Masz pytania?</p>
             <p style="margin: 0;">
               <strong>Tel:</strong> +48 601 619 898<br>
-              <strong>Email:</strong> serwis@serwis-zebry.pl
+              <strong>Email:</strong> serwis@takma.com.pl
             </p>
           </div>
 
@@ -2003,7 +2003,7 @@ export async function sendPackageReceivedEmail(data: PackageReceivedEmailData) {
     const shortId = getRepairNumber(data.repairId, data.repairNumber)
     
     const email = await resend.emails.send({
-      from: 'Serwis Zebra <serwis@serwis-zebry.pl>',
+      from: 'Serwis Zebra <serwis@takma.com.pl>',
       to: data.to,
       subject: `Paczka dostarczona do serwisu - ${data.deviceModel} #${shortId}`,
       html: generatePackageReceivedHTML(data, shortId)
@@ -2085,7 +2085,7 @@ ${getEmailHeader()}
             <p style="margin: 0 0 8px 0;">Masz pytania? Skontaktuj się z nami:</p>
             <p style="margin: 0;">
               <strong>Tel:</strong> +48 601 619 898<br>
-              <strong>Email:</strong> serwis@serwis-zebry.pl
+              <strong>Email:</strong> serwis@takma.com.pl
             </p>
           </div>
 

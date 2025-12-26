@@ -37,7 +37,7 @@ export default function ContactPage() {
     try {
       await new Promise(resolve => setTimeout(resolve, 1000))
       
-      const mailtoLink = `mailto:serwis@serwis-zebry.pl?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(
+      const mailtoLink = `mailto:serwis@takma.com.pl?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(
         `Imię i nazwisko: ${formData.name}\nEmail: ${formData.email}\nTelefon: ${formData.phone}\n\n${formData.message}`
       )}`
       window.location.href = mailtoLink
@@ -128,14 +128,14 @@ export default function ContactPage() {
             </a>
 
             <a
-              href="mailto:serwis@serwis-zebry.pl"
+              href="mailto:serwis@takma.com.pl"
               className="bg-white rounded-xl p-3 sm:p-4 shadow-sm border border-gray-200 hover:border-blue-300 hover:shadow-md transition-all text-center group"
             >
               <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 rounded-xl flex items-center justify-center mx-auto mb-2 group-hover:bg-blue-200 transition-colors">
                 <Mail className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
               </div>
               <div className="text-xs sm:text-sm font-semibold text-gray-900">Email</div>
-              <div className="text-[10px] sm:text-xs text-gray-500 mt-0.5 hidden sm:block">serwis@serwis-zebry.pl</div>
+              <div className="text-[10px] sm:text-xs text-gray-500 mt-0.5 hidden sm:block">serwis@takma.com.pl</div>
             </a>
 
             <a
@@ -173,7 +173,7 @@ export default function ContactPage() {
                 {submitStatus === 'error' && (
                   <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-xl flex items-start gap-2">
                     <AlertCircle className="w-4 h-4 text-red-600 flex-shrink-0 mt-0.5" />
-                    <p className="text-xs sm:text-sm text-red-800">Błąd. Napisz bezpośrednio na serwis@serwis-zebry.pl</p>
+                    <p className="text-xs sm:text-sm text-red-800">Błąd. Napisz bezpośrednio na serwis@takma.com.pl</p>
                   </div>
                 )}
 

@@ -184,20 +184,6 @@ export default function Header({ currentPage = 'other', hidePartnerLogos = false
                 <LogIn className="w-4 h-4" />
                 <span className="font-medium">Logowanie</span>
               </Link>
-              
-              <Link
-                href="/sklep"
-                onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors"
-              >
-                <ShoppingCart className="w-4 h-4" />
-                <span className="font-medium">Sklep</span>
-                {cartCount > 0 && (
-                  <span className="ml-auto w-5 h-5 bg-blue-600 text-white text-[10px] font-bold rounded-full flex items-center justify-center">
-                    {cartCount}
-                  </span>
-                )}
-              </Link>
 
               <div className="my-2 border-t border-gray-200" />
 

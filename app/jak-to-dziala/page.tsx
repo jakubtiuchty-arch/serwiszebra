@@ -557,7 +557,7 @@ export default function JakToDzialaPage() {
             </div>
             <div className="flex items-center gap-1.5">
               <Mail className="w-3.5 h-3.5" />
-              <span>serwis@serwis-zebry.pl</span>
+              <span>serwis@takma.com.pl</span>
             </div>
           </div>
         </div>

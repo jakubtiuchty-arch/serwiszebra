@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import ShopSubheader from '@/components/shop/ShopSubheader'
@@ -16,12 +15,9 @@ import {
   Loader2,
   ArrowUpDown,
   ShoppingCart,
-  Eye,
   Truck,
-  Clock,
   Shield,
   Phone,
-  ChevronRight,
   Search,
   ChevronDown,
   X,
@@ -121,7 +117,6 @@ export default function SklepPage() {
   const [expandedCategories, setExpandedCategories] = useState<string[]>(['desktop'])
   const [searchInput, setSearchInput] = useState('')
   
-  const router = useRouter()
   const addToCart = useCartStore((state) => state.addItem)
 
   useEffect(() => {
@@ -429,104 +424,83 @@ export default function SklepPage() {
                     </p>
                   </div>
                 ) : (
-                  <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-4">
+                  <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-3">
                     {products.map((product) => {
                       const Icon = PRODUCT_TYPE_ICONS[product.product_type] || Package
 
                       return (
-                        <div
+                        <Link
                           key={product.id}
-                          className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-lg hover:border-gray-300 transition-all"
+                          href={`/sklep/${product.slug}`}
+                          className="bg-white rounded-lg border border-gray-200 overflow-hidden hover:border-blue-300 transition-colors group"
                         >
                           {/* Image */}
-                          <Link
-                            href={`/sklep/${product.slug}`}
-                            className="relative h-44 bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center border-b border-gray-200 block"
-                          >
+                          <div className="relative h-36 bg-gray-50 flex items-center justify-center">
                             {product.image_url ? (
                               <Image
                                 src={product.image_url}
                                 alt={product.name}
                                 fill
-                                className="object-contain p-4"
+                                className="object-cover group-hover:scale-105 transition-transform duration-300"
                               />
                             ) : (
-                              <Icon className="w-14 h-14 text-gray-400" />
+                              <Icon className="w-12 h-12 text-gray-300" />
                             )}
                             {product.stock <= 3 && product.stock > 0 && (
-                              <div className="absolute top-2 right-2 bg-orange-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
-                                Ostatnie {product.stock} szt.
+                              <div className="absolute top-2 right-2 bg-orange-500 text-white text-[9px] font-bold px-1.5 py-0.5 rounded">
+                                Ostatnie {product.stock}
                               </div>
                             )}
                             {product.stock === 0 && (
-                              <div className="absolute top-2 right-2 bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
+                              <div className="absolute top-2 right-2 bg-red-500 text-white text-[9px] font-bold px-1.5 py-0.5 rounded">
                                 Brak
                               </div>
                             )}
-                          </Link>
+                          </div>
 
                           {/* Content */}
-                          <div className="p-4">
-                            <Link href={`/sklep/${product.slug}`}>
-                              <h3 className="text-sm font-semibold text-gray-900 mb-1.5 line-clamp-2 hover:text-blue-600 transition-colors">
-                                {product.name}
-                              </h3>
-                            </Link>
+                          <div className="p-3">
+                            <h3 className="text-sm font-medium text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">
+                              {product.name}
+                            </h3>
 
-                            <p className="text-gray-600 text-xs mb-3 line-clamp-2">
-                              {product.description}
-                            </p>
-
-                            {/* Metadata */}
-                            <div className="flex flex-wrap gap-1.5 mb-3">
+                            {/* Tags */}
+                            <div className="flex flex-wrap gap-1 mb-2">
                               {product.device_model && (
-                                <span className="text-[10px] bg-gray-100 text-gray-700 px-2 py-0.5 rounded">
+                                <span className="text-[10px] bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded">
                                   {product.device_model}
                                 </span>
                               )}
                               {product.resolution_dpi && (
-                                <span className="text-[10px] bg-blue-50 text-blue-700 px-2 py-0.5 rounded">
+                                <span className="text-[10px] bg-blue-50 text-blue-600 px-1.5 py-0.5 rounded">
                                   {product.resolution_dpi} DPI
                                 </span>
                               )}
                             </div>
 
-                            <div className="flex items-end justify-between mb-4">
+                            {/* Price & Button */}
+                            <div className="flex items-center justify-between">
                               <div>
-                                <div className="text-xl font-bold text-gray-900">
+                                <div className="text-base font-bold text-gray-900">
                                   {product.price_brutto.toFixed(2)} zł
                                 </div>
-                                <div className="text-[10px] text-gray-500">
-                                  brutto (VAT 23%)
-                                </div>
+                                <div className="text-[10px] text-gray-400">brutto</div>
                               </div>
-                            </div>
-
-                            {/* Buttons */}
-                            {product.stock === 0 ? (
-                              <div className="w-full py-2.5 px-3 rounded-lg font-medium text-sm bg-gray-100 text-gray-400 text-center">
-                                Brak w magazynie
-                              </div>
-                            ) : (
-                              <div className="flex gap-2">
+                              
+                              {product.stock > 0 && (
                                 <button
-                                  onClick={() => router.push(`/sklep/${product.slug}`)}
-                                  className="flex-1 py-2.5 px-3 rounded-lg font-medium text-sm bg-gray-100 text-gray-900 hover:bg-gray-200 transition-all flex items-center justify-center gap-1.5"
-                                >
-                                  <Eye className="w-4 h-4" />
-                                  Szczegóły
-                                </button>
-                                <button
-                                  onClick={(e) => handleAddToCart(e, product)}
-                                  className="flex-1 py-2.5 px-3 rounded-lg font-medium text-sm bg-blue-600 hover:bg-blue-700 text-white transition-all flex items-center justify-center gap-1.5 shadow-sm"
+                                  onClick={(e) => {
+                                    e.preventDefault()
+                                    handleAddToCart(e, product)
+                                  }}
+                                  className="p-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white transition-colors"
                                 >
                                   <ShoppingCart className="w-4 h-4" />
-                                  Koszyk
                                 </button>
-                              </div>
-                            )}
+                              )}
+                            </div>
                           </div>
-                        </div>
+                        </Link>
                       )
                     })}
                   </div>

@@ -88,7 +88,7 @@ export default function PolitykaPrywatnosciPage() {
               </div>
               <p>1.2. Kontakt w sprawach dotyczących danych osobowych:</p>
               <ul className="list-disc list-inside ml-4 space-y-1">
-                <li>Email: <a href="mailto:serwis@serwis-zebry.pl" className="text-blue-600 hover:underline">serwis@serwis-zebry.pl</a></li>
+                <li>Email: <a href="mailto:serwis@takma.com.pl" className="text-blue-600 hover:underline">serwis@takma.com.pl</a></li>
                 <li>Telefon: <a href="tel:+48601619898" className="text-blue-600 hover:underline">+48 601 619 898</a></li>
                 <li>Adres korespondencyjny: ul. Poświęcka 1a, 51-128 Wrocław</li>
               </ul>
@@ -270,7 +270,7 @@ export default function PolitykaPrywatnosciPage() {
                 </div>
               </div>
 
-              <p className="mt-4">7.2. Aby skorzystać z praw, skontaktuj się z nami: <a href="mailto:serwis@serwis-zebry.pl" className="text-blue-600 hover:underline">serwis@serwis-zebry.pl</a></p>
+              <p className="mt-4">7.2. Aby skorzystać z praw, skontaktuj się z nami: <a href="mailto:serwis@takma.com.pl" className="text-blue-600 hover:underline">serwis@takma.com.pl</a></p>
               <p>7.3. Masz prawo wnieść skargę do Prezesa Urzędu Ochrony Danych Osobowych (UODO).</p>
             </div>
           </section>
@@ -358,10 +358,10 @@ export default function PolitykaPrywatnosciPage() {
                 </p>
                 <div className="flex flex-wrap gap-3">
                   <a 
-                    href="mailto:serwis@serwis-zebry.pl" 
+                    href="mailto:serwis@takma.com.pl" 
                     className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
                   >
-                    serwis@serwis-zebry.pl
+                    serwis@takma.com.pl
                   </a>
                   <a 
                     href="tel:+48601619898" 

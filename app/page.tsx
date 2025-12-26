@@ -38,7 +38,8 @@ import {
   BookOpen,
   Download,
   Info,
-  Shield
+  Shield,
+  Check
 } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
@@ -1361,6 +1362,109 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* DLACZEGO MY - PORÓWNANIE */}
+      <section className="py-12 sm:py-16 px-3 sm:px-4 lg:px-6 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden">
+        {/* Subtle pattern */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute inset-0" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 0)', backgroundSize: '40px 40px' }}></div>
+        </div>
+        
+        <div className="max-w-5xl mx-auto relative">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl sm:text-3xl font-semibold text-white mb-3">
+              Serwis, jakiego jeszcze nie było
+            </h2>
+            <p className="text-sm sm:text-base text-slate-400 max-w-xl mx-auto">
+              Zobacz, czym różnimy się od tradycyjnych serwisów
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            {/* Zwykły serwis */}
+            <div>
+              <div className="mb-3">
+                <span className="inline-block px-3 py-1 bg-slate-700 rounded-full text-xs font-medium text-slate-300">Zwykły serwis</span>
+              </div>
+              <div className="bg-slate-800/50 backdrop-blur rounded-2xl p-6 border border-slate-700/50 h-full">
+                <ul className="space-y-4">
+                  <li className="flex items-start gap-3">
+                    <div className="w-6 h-6 rounded-full bg-red-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <X className="w-3.5 h-3.5 text-red-400" />
+                    </div>
+                    <span className="text-sm text-slate-400">Dzwonisz, czekasz na linii, tłumaczysz problem od początku</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-6 h-6 rounded-full bg-red-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <X className="w-3.5 h-3.5 text-red-400" />
+                    </div>
+                    <span className="text-sm text-slate-400">Sam dostarczasz urządzenie do serwisu</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-6 h-6 rounded-full bg-red-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <X className="w-3.5 h-3.5 text-red-400" />
+                    </div>
+                    <span className="text-sm text-slate-400">Nie wiesz, co się dzieje z naprawą – musisz dzwonić</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-6 h-6 rounded-full bg-red-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <X className="w-3.5 h-3.5 text-red-400" />
+                    </div>
+                    <span className="text-sm text-slate-400">Wycena przez telefon, mail</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-6 h-6 rounded-full bg-red-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <X className="w-3.5 h-3.5 text-red-400" />
+                    </div>
+                    <span className="text-sm text-slate-400">Płatność gotówką lub przelewem tradycyjnym</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            {/* My */}
+            <div>
+              <div className="mb-3">
+                <span className="inline-block px-3 py-1 bg-gradient-to-r from-blue-600 to-blue-500 rounded-full text-xs font-semibold text-white shadow-lg shadow-blue-500/20">Nasz serwis</span>
+              </div>
+              <div className="bg-gradient-to-br from-blue-600/10 to-purple-600/10 backdrop-blur rounded-2xl p-6 border border-blue-500/20 h-full">
+                <ul className="space-y-4">
+                  <li className="flex items-start gap-3">
+                    <div className="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <Check className="w-3.5 h-3.5 text-green-400" />
+                    </div>
+                    <span className="text-sm text-slate-200"><strong className="text-white">Diagnoza AI 24/7</strong> – natychmiastowa pomoc o każdej porze</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <Check className="w-3.5 h-3.5 text-green-400" />
+                    </div>
+                    <span className="text-sm text-slate-200"><strong className="text-white">Kurier spod drzwi i pod drzwi</strong> – nie ruszasz się z biura</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <Check className="w-3.5 h-3.5 text-green-400" />
+                    </div>
+                    <span className="text-sm text-slate-200"><strong className="text-white">Panel Klienta</strong> – śledzisz status naprawy na żywo</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <Check className="w-3.5 h-3.5 text-green-400" />
+                    </div>
+                    <span className="text-sm text-slate-200"><strong className="text-white">Czat z serwisantem</strong> – piszesz do technika na karcie naprawy</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <Check className="w-3.5 h-3.5 text-green-400" />
+                    </div>
+                    <span className="text-sm text-slate-200"><strong className="text-white">Wycena online</strong> – płatność kartą, BLIK, Apple Pay</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* FORMULARZ ZGŁOSZENIA */}
       <div id="formularz">
         <RepairForm />
@@ -1480,11 +1584,11 @@ export default function HomePage() {
                     </div>
                     <span className="text-xs sm:text-sm font-medium">+48 601 619 898</span>
                   </a>
-                  <a href="mailto:serwis@serwis-zebry.pl" className="group flex items-center gap-2 sm:gap-2.5 px-3 sm:px-5 py-2.5 sm:py-3 bg-white/5 hover:bg-white/10 backdrop-blur-sm border border-white/10 rounded-xl transition-all duration-300">
+                  <a href="mailto:serwis@takma.com.pl" className="group flex items-center gap-2 sm:gap-2.5 px-3 sm:px-5 py-2.5 sm:py-3 bg-white/5 hover:bg-white/10 backdrop-blur-sm border border-white/10 rounded-xl transition-all duration-300">
                     <div className="w-7 sm:w-8 h-7 sm:h-8 bg-white/10 rounded-lg flex items-center justify-center">
                       <Mail className="w-3.5 sm:w-4 h-3.5 sm:h-4 text-white" />
                     </div>
-                    <span className="text-xs sm:text-sm font-medium hidden sm:inline">serwis@serwis-zebry.pl</span>
+                    <span className="text-xs sm:text-sm font-medium hidden sm:inline">serwis@takma.com.pl</span>
                     <span className="text-xs sm:text-sm font-medium sm:hidden">Email</span>
                   </a>
                 </div>

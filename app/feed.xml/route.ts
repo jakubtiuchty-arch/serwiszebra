@@ -37,7 +37,7 @@ export async function GET() {
       <category>${escapeXml(post.category)}</category>
       <category>${escapeXml(post.deviceType)}</category>
       ${imageUrl ? `<enclosure url="${escapeXml(imageUrl)}" type="image/jpeg" length="0" />` : ''}
-      <author>serwis@serwis-zebry.pl (${escapeXml(post.author.name)})</author>
+      <author>serwis@takma.com.pl (${escapeXml(post.author.name)})</author>
     </item>
   `
   }).join('')
@@ -57,8 +57,8 @@ export async function GET() {
       <link>${siteUrl}/blog</link>
     </image>
     <copyright>© 2025 TAKMA - Serwis Zebra</copyright>
-    <managingEditor>serwis@serwis-zebry.pl (Zespół Serwis Zebra)</managingEditor>
-    <webMaster>serwis@serwis-zebry.pl (Zespół Serwis Zebra)</webMaster>
+    <managingEditor>serwis@takma.com.pl (Zespół Serwis Zebra)</managingEditor>
+    <webMaster>serwis@takma.com.pl (Zespół Serwis Zebra)</webMaster>
     <ttl>60</ttl>
     ${rssItems}
   </channel>

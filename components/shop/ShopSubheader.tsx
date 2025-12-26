@@ -11,7 +11,7 @@ export default function ShopSubheader() {
 
   return (
     <div className="bg-white border-b border-gray-200 shadow-sm">
-      <div className="max-w-6xl mx-auto px-3 sm:px-4">
+      <div className="px-3 sm:px-4 lg:px-6">
         <div className="flex items-center justify-between h-12">
           {/* Breadcrumb */}
           <div className="flex items-center gap-1.5 text-sm text-gray-600">

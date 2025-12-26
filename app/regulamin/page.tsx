@@ -122,7 +122,7 @@ export default function RegulaminPage() {
               <p>4.1. Zlecenie naprawy można złożyć poprzez:</p>
               <ul className="list-disc list-inside ml-4 space-y-1">
                 <li>Formularz na stronie serwis-zebry.pl</li>
-                <li>Email: serwis@serwis-zebry.pl</li>
+                <li>Email: serwis@takma.com.pl</li>
                 <li>Telefon: +48 601 619 898</li>
               </ul>
               <p>4.2. Po złożeniu zlecenia Klient otrzymuje potwierdzenie wraz z numerem zgłoszenia.</p>
@@ -201,7 +201,7 @@ export default function RegulaminPage() {
             <div className="space-y-3 text-gray-600 text-sm leading-relaxed">
               <p>8.1. Reklamacje można składać:</p>
               <ul className="list-disc list-inside ml-4 space-y-1">
-                <li>Emailem na adres: serwis@serwis-zebry.pl</li>
+                <li>Emailem na adres: serwis@takma.com.pl</li>
                 <li>Telefonicznie: +48 601 619 898</li>
                 <li>Poprzez panel klienta na stronie serwis-zebry.pl</li>
               </ul>
@@ -268,10 +268,10 @@ export default function RegulaminPage() {
             </p>
             <div className="flex flex-wrap justify-center gap-3">
               <a 
-                href="mailto:serwis@serwis-zebry.pl" 
+                href="mailto:serwis@takma.com.pl" 
                 className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
               >
-                serwis@serwis-zebry.pl
+                serwis@takma.com.pl
               </a>
               <a 
                 href="tel:+48601619898" 

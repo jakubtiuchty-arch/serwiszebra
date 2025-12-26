@@ -72,11 +72,11 @@ export default function Footer() {
                   </div>
                   <span className="text-xs sm:text-sm font-medium">+48 601 619 898</span>
                 </a>
-                <a href="mailto:serwis@serwis-zebry.pl" className="group flex items-center gap-2 sm:gap-2.5 px-3 sm:px-5 py-2.5 sm:py-3 bg-white/5 hover:bg-white/10 backdrop-blur-sm border border-white/10 rounded-xl transition-all duration-300">
+                <a href="mailto:serwis@takma.com.pl" className="group flex items-center gap-2 sm:gap-2.5 px-3 sm:px-5 py-2.5 sm:py-3 bg-white/5 hover:bg-white/10 backdrop-blur-sm border border-white/10 rounded-xl transition-all duration-300">
                   <div className="w-7 sm:w-8 h-7 sm:h-8 bg-white/10 rounded-lg flex items-center justify-center">
                     <Mail className="w-3.5 sm:w-4 h-3.5 sm:h-4 text-white" />
                   </div>
-                  <span className="text-xs sm:text-sm font-medium hidden sm:inline">serwis@serwis-zebry.pl</span>
+                  <span className="text-xs sm:text-sm font-medium hidden sm:inline">serwis@takma.com.pl</span>
                   <span className="text-xs sm:text-sm font-medium sm:hidden">Email</span>
                 </a>
               </div>
