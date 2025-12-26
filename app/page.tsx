@@ -1363,9 +1363,9 @@ export default function HomePage() {
       </section>
 
       {/* DLACZEGO MY - PORÓWNANIE */}
-      <section className="py-12 sm:py-16 px-3 sm:px-4 lg:px-6 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden">
+      <section className="py-12 sm:py-16 px-3 sm:px-4 lg:px-6 bg-gradient-to-br from-slate-800 via-slate-700 to-slate-800 relative overflow-hidden">
         {/* Subtle pattern */}
-        <div className="absolute inset-0 opacity-5">
+        <div className="absolute inset-0 opacity-10">
           <div className="absolute inset-0" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 0)', backgroundSize: '40px 40px' }}></div>
         </div>
         
@@ -1374,7 +1374,7 @@ export default function HomePage() {
             <h2 className="text-2xl sm:text-3xl font-semibold text-white mb-3">
               Serwis, jakiego jeszcze nie było
             </h2>
-            <p className="text-sm sm:text-base text-slate-400 max-w-xl mx-auto">
+            <p className="text-sm sm:text-base text-slate-300 max-w-xl mx-auto">
               Zobacz, czym różnimy się od tradycyjnych serwisów
             </p>
           </div>
@@ -1383,39 +1383,39 @@ export default function HomePage() {
             {/* Zwykły serwis */}
             <div>
               <div className="mb-3">
-                <span className="inline-block px-3 py-1 bg-slate-700 rounded-full text-xs font-medium text-slate-300">Zwykły serwis</span>
+                <span className="inline-block px-3 py-1 bg-slate-600 rounded-full text-xs font-medium text-slate-200">Zwykły serwis</span>
               </div>
-              <div className="bg-slate-800/50 backdrop-blur rounded-2xl p-6 border border-slate-700/50 h-full">
+              <div className="bg-slate-700/80 backdrop-blur rounded-2xl p-6 border border-slate-600 h-full">
                 <ul className="space-y-4">
                   <li className="flex items-start gap-3">
-                    <div className="w-6 h-6 rounded-full bg-red-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <div className="w-6 h-6 rounded-full bg-red-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
                       <X className="w-3.5 h-3.5 text-red-400" />
                     </div>
-                    <span className="text-sm text-slate-400">Dzwonisz, czekasz na linii, tłumaczysz problem od początku</span>
+                    <span className="text-sm text-slate-300">Dzwonisz, czekasz na linii, tłumaczysz problem od początku</span>
                   </li>
                   <li className="flex items-start gap-3">
-                    <div className="w-6 h-6 rounded-full bg-red-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <div className="w-6 h-6 rounded-full bg-red-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
                       <X className="w-3.5 h-3.5 text-red-400" />
                     </div>
-                    <span className="text-sm text-slate-400">Sam dostarczasz urządzenie do serwisu</span>
+                    <span className="text-sm text-slate-300">Sam dostarczasz urządzenie do serwisu</span>
                   </li>
                   <li className="flex items-start gap-3">
-                    <div className="w-6 h-6 rounded-full bg-red-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <div className="w-6 h-6 rounded-full bg-red-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
                       <X className="w-3.5 h-3.5 text-red-400" />
                     </div>
-                    <span className="text-sm text-slate-400">Nie wiesz, co się dzieje z naprawą – musisz dzwonić</span>
+                    <span className="text-sm text-slate-300">Nie wiesz, co się dzieje z naprawą – musisz dzwonić</span>
                   </li>
                   <li className="flex items-start gap-3">
-                    <div className="w-6 h-6 rounded-full bg-red-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <div className="w-6 h-6 rounded-full bg-red-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
                       <X className="w-3.5 h-3.5 text-red-400" />
                     </div>
-                    <span className="text-sm text-slate-400">Wycena przez telefon, mail</span>
+                    <span className="text-sm text-slate-300">Wycena przez telefon, mail</span>
                   </li>
                   <li className="flex items-start gap-3">
-                    <div className="w-6 h-6 rounded-full bg-red-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <div className="w-6 h-6 rounded-full bg-red-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
                       <X className="w-3.5 h-3.5 text-red-400" />
                     </div>
-                    <span className="text-sm text-slate-400">Płatność gotówką lub przelewem tradycyjnym</span>
+                    <span className="text-sm text-slate-300">Płatność gotówką lub przelewem tradycyjnym</span>
                   </li>
                 </ul>
               </div>
