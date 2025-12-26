@@ -106,7 +106,7 @@ export default function KoszykPage() {
                               {item.device_model}
                             </span>
                           )}
-                          {item.resolution_dpi > 0 && (
+                          {item.resolution_dpi && item.resolution_dpi > 0 && (
                             <span className="text-xs bg-blue-50 text-blue-700 px-2 py-0.5 rounded">
                               {item.resolution_dpi} DPI
                             </span>
