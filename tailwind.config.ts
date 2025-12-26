@@ -62,6 +62,17 @@ const config: Config = {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
+  		},
+  		keyframes: {
+  			float: {
+  				'0%, 100%': { transform: 'translateY(0) translateX(0)' },
+  				'25%': { transform: 'translateY(-20px) translateX(10px)' },
+  				'50%': { transform: 'translateY(-10px) translateX(-10px)' },
+  				'75%': { transform: 'translateY(-25px) translateX(5px)' }
+  			}
+  		},
+  		animation: {
+  			float: 'float 20s ease-in-out infinite'
   		}
   	}
   },

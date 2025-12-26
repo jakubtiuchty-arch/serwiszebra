@@ -474,17 +474,17 @@ export default async function ModelPage({ params }: { params: { model: string } 
                 user guide, manual serwisowy i przewodnik programowania.
               </p>
               
-              <h3>Dokumentacja {manual.model} – co zawiera?</h3>
+              <h3>Dokumentacja Zebra {manual.model} – co zawiera?</h3>
               <ul>
-                <li><strong>Quick Start {manual.model}</strong> – szybki start, pierwsze uruchomienie, podstawowa konfiguracja</li>
-                <li><strong>User Guide {manual.model}</strong> – pełna instrukcja obsługi ze wszystkimi funkcjami i ustawieniami</li>
+                <li><strong>Quick Start Zebra {manual.model}</strong> – szybki start, pierwsze uruchomienie, podstawowa konfiguracja</li>
+                <li><strong>User Guide Zebra {manual.model}</strong> – pełna instrukcja obsługi ze wszystkimi funkcjami i ustawieniami</li>
                 {manual.category.startsWith('drukarki') && (
                   <>
-                    <li><strong>Programowanie ZPL {manual.model}</strong> – komendy ZPL, tworzenie etykiet, przykłady kodu</li>
-                    <li><strong>Kalibracja {manual.model}</strong> – jak skalibrować drukarkę, ustawienia czujników</li>
+                    <li><strong>Programowanie ZPL Zebra {manual.model}</strong> – komendy ZPL, tworzenie etykiet, przykłady kodu</li>
+                    <li><strong>Kalibracja Zebra {manual.model}</strong> – jak skalibrować drukarkę, ustawienia czujników</li>
                   </>
                 )}
-                <li><strong>Troubleshooting {manual.model}</strong> – rozwiązywanie problemów, kody błędów, diagnostyka</li>
+                <li><strong>Troubleshooting Zebra {manual.model}</strong> – rozwiązywanie problemów, kody błędów, diagnostyka</li>
               </ul>
 
               {/* Treść SEO specyficzna dla drukarek */}
@@ -496,12 +496,12 @@ export default async function ModelPage({ params }: { params: { model: string } 
                     W instrukcji znajdziesz informacje o <strong>kalibracji etykiet {manual.model}</strong>, 
                     <strong>ustawieniach głowicy drukującej</strong>, parametrach wydruku i <strong>programowaniu w języku ZPL</strong>.
                   </p>
-                  <h3>Najczęstsze problemy z {manual.model}</h3>
+                  <h3>Najczęstsze problemy z Zebra {manual.model}</h3>
                   <p>
-                    Instrukcja serwisowa {manual.model} zawiera rozwiązania typowych problemów: 
-                    <strong>blady wydruk {manual.model}</strong>, <strong>zacięcie etykiety</strong>, 
-                    <strong>błąd kalibracji</strong>, <strong>wymiana głowicy {manual.model}</strong>, 
-                    <strong>czyszczenie drukarki</strong> i <strong>reset fabryczny {manual.model}</strong>.
+                    Instrukcja serwisowa Zebra {manual.model} zawiera rozwiązania typowych problemów: 
+                    <strong>blady wydruk Zebra {manual.model}</strong>, <strong>zacięcie etykiety</strong>, 
+                    <strong>błąd kalibracji</strong>, <strong>wymiana głowicy Zebra {manual.model}</strong>, 
+                    <strong>czyszczenie drukarki Zebra</strong> i <strong>reset fabryczny Zebra {manual.model}</strong>.
                   </p>
                 </>
               )}
@@ -509,16 +509,16 @@ export default async function ModelPage({ params }: { params: { model: string } 
               {/* Treść SEO specyficzna dla terminali */}
               {manual.category === 'terminale' && (
                 <>
-                  <h3>Konfiguracja terminala {manual.model}</h3>
+                  <h3>Konfiguracja terminala Zebra {manual.model}</h3>
                   <p>
                     <strong>Terminal mobilny Zebra {manual.model}</strong> to zaawansowany kolektor danych z systemem Android. 
-                    W dokumentacji znajdziesz informacje o <strong>konfiguracji WiFi {manual.model}</strong>, 
+                    W dokumentacji znajdziesz informacje o <strong>konfiguracji WiFi Zebra {manual.model}</strong>, 
                     <strong>ustawieniach DataWedge</strong>, <strong>skanowaniu kodów kreskowych</strong> i integracji z systemami WMS.
                   </p>
-                  <h3>Serwis i naprawa {manual.model}</h3>
+                  <h3>Serwis i naprawa Zebra {manual.model}</h3>
                   <p>
-                    Oferujemy profesjonalny serwis terminali Zebra: <strong>wymiana ekranu {manual.model}</strong>, 
-                    <strong>wymiana baterii {manual.model}</strong>, naprawa modułu skanującego, 
+                    Oferujemy profesjonalny serwis terminali Zebra: <strong>wymiana ekranu Zebra {manual.model}</strong>, 
+                    <strong>wymiana baterii Zebra {manual.model}</strong>, naprawa modułu skanującego, 
                     <strong>aktualizacja systemu Android</strong> i przywracanie ustawień fabrycznych.
                   </p>
                 </>
@@ -527,16 +527,16 @@ export default async function ModelPage({ params }: { params: { model: string } 
               {/* Treść SEO specyficzna dla skanerów */}
               {manual.category === 'skanery' && (
                 <>
-                  <h3>Konfiguracja skanera {manual.model}</h3>
+                  <h3>Konfiguracja skanera Zebra {manual.model}</h3>
                   <p>
                     <strong>Skaner kodów kreskowych Zebra {manual.model}</strong> obsługuje kody 1D i 2D, w tym QR. 
-                    W instrukcji znajdziesz informacje o <strong>parowaniu Bluetooth {manual.model}</strong>, 
+                    W instrukcji znajdziesz informacje o <strong>parowaniu Bluetooth Zebra {manual.model}</strong>, 
                     <strong>konfiguracji USB</strong>, trybie prezentacji i programowaniu za pomocą kodów konfiguracyjnych.
                   </p>
-                  <h3>Problemy ze skanerem {manual.model}</h3>
+                  <h3>Problemy ze skanerem Zebra {manual.model}</h3>
                   <p>
-                    Najczęstsze problemy: <strong>skaner nie czyta kodów</strong>, problemy z <strong>parowaniem Bluetooth</strong>, 
-                    <strong>wymiana okienka skanera {manual.model}</strong>, konfiguracja z komputerem i bazą stacji.
+                    Najczęstsze problemy ze skanerem Zebra: <strong>skaner nie czyta kodów</strong>, problemy z <strong>parowaniem Bluetooth</strong>, 
+                    <strong>wymiana okienka skanera Zebra {manual.model}</strong>, konfiguracja z komputerem i bazą stacji.
                   </p>
                 </>
               )}
@@ -544,16 +544,16 @@ export default async function ModelPage({ params }: { params: { model: string } 
               {/* Treść SEO specyficzna dla tabletów */}
               {manual.category === 'tablety' && (
                 <>
-                  <h3>Konfiguracja tabletu {manual.model}</h3>
+                  <h3>Konfiguracja tabletu Zebra {manual.model}</h3>
                   <p>
                     <strong>Tablet przemysłowy Zebra {manual.model}</strong> to wytrzymałe urządzenie rugged 
-                    z systemem Android lub Windows. W dokumentacji znajdziesz informacje o <strong>konfiguracji WiFi</strong>, 
-                    <strong>stacji dokującej {manual.model}</strong>, uchwytach samochodowych i akcesoriach.
+                    z systemem Android lub Windows. W dokumentacji znajdziesz informacje o <strong>konfiguracji WiFi Zebra {manual.model}</strong>, 
+                    <strong>stacji dokującej Zebra {manual.model}</strong>, uchwytach samochodowych i akcesoriach.
                   </p>
-                  <h3>Serwis tabletu {manual.model}</h3>
+                  <h3>Serwis tabletu Zebra {manual.model}</h3>
                   <p>
-                    Oferujemy profesjonalny serwis tabletów Zebra: <strong>wymiana ekranu {manual.model}</strong>, 
-                    <strong>wymiana baterii {manual.model}</strong>, naprawa portów ładowania, 
+                    Oferujemy profesjonalny serwis tabletów Zebra: <strong>wymiana ekranu Zebra {manual.model}</strong>, 
+                    <strong>wymiana baterii Zebra {manual.model}</strong>, naprawa portów ładowania, 
                     aktualizacja systemu i konfiguracja MDM.
                   </p>
                 </>
@@ -570,9 +570,9 @@ export default async function ModelPage({ params }: { params: { model: string } 
 
           {/* CTA */}
           <div className="bg-gradient-to-br from-blue-600 to-blue-700 rounded-2xl p-6 text-white text-center">
-            <h3 className="text-xl font-bold mb-2">Problemy z {manual.model}?</h3>
+            <h3 className="text-xl font-bold mb-2">Problemy z Zebra {manual.model}?</h3>
             <p className="text-blue-100 mb-4">
-              Skontaktuj się z nami – naprawimy Twoje urządzenie Zebra
+              Skontaktuj się z nami – naprawimy Twoje urządzenie Zebra {manual.model}
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link
