@@ -16046,7 +16046,7 @@ Jako **autoryzowany serwis Zebra** pomożemy Ci:
     slug: 'jezyk-zpl-poradnik-komendy-przyklady',
     title: 'Język ZPL – kompletny poradnik dla początkujących [Komendy + Przykłady 2025]',
     excerpt: 'Naucz się programować etykiety w języku ZPL! Kompletny poradnik po polsku: podstawowe komendy, kody kreskowe, czcionki, ramki i praktyczne przykłady gotowe do użycia.',
-    coverImage: '',
+    coverImage: '/blog/jezyk_zpl.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
@@ -16376,6 +16376,419 @@ Jako **autoryzowany serwis Zebra** pomożemy Ci:
 - Zdiagnozować problemy z drukiem
 - Zintegrować drukarkę z systemem ERP/WMS
 - Przeszkolić zespół z obsługi ZPL
+`
+  },
+
+  // NOWY WPIS: Sterowniki Zebra Windows 11
+  {
+    slug: 'sterowniki-zebra-windows-11-instalacja-problemy',
+    title: 'Jak zainstalować sterowniki Zebra w Windows 11? Rozwiązywanie problemów [2025]',
+    excerpt: 'Drukarka Zebra nie działa w Windows 11? Instrukcja instalacji sterowników ZDesigner krok po kroku. Rozwiązania dla problemów z aktualizacją KB5055528, offline, brak sterownika.',
+    coverImage: '',
+    author: {
+      name: 'Zespół Serwis Zebra',
+      role: 'Certyfikowani technicy Zebra'
+    },
+    publishedAt: '2025-12-27',
+    readingTime: 12,
+    deviceType: 'drukarki',
+    subDeviceType: 'etykiet',
+    category: 'troubleshooting',
+    tags: ['sterowniki', 'Windows 11', 'ZDesigner', 'instalacja', 'driver', 'USB', 'sieć', 'troubleshooting', 'KB5055528', 'drukarka nie drukuje'],
+    seo: {
+      metaTitle: 'Jak zainstalować sterowniki Zebra w Windows 11? [Instrukcja 2025]',
+      metaDescription: 'Drukarka Zebra nie działa w Windows 11? Instrukcja instalacji sterowników ZDesigner krok po kroku. Rozwiązania błędów KB5055528, offline, driver unavailable.',
+      keywords: [
+        'sterowniki zebra windows 11',
+        'zdesigner driver windows 11',
+        'drukarka zebra nie działa windows 11',
+        'zebra driver download',
+        'sterowniki drukarki zebra',
+        'instalacja sterowników zebra',
+        'zebra zd420 sterowniki',
+        'zebra zt410 driver windows 11',
+        'zebra gk420 sterowniki',
+        'zebra windows 11 problem',
+        'aktualizacja windows 11 drukarka zebra',
+        'kb5055528 zebra',
+        'zebra usb driver',
+        'zebra ethernet driver',
+        'zebra bluetooth driver windows 11',
+        'drukarka etykiet sterowniki',
+        'zdesigner v10',
+        'zebra printer driver',
+        'zebra setup utilities windows 11',
+        'drukarka zebra offline windows 11'
+      ]
+    },
+    content: `
+# Jak zainstalować sterowniki Zebra w Windows 11? Kompletna instrukcja
+
+> **⚠️ Drukarka Zebra nie działa po aktualizacji Windows 11?** To częsty problem! Aktualizacje systemu (szczególnie KB5055528) usuwają lub uszkadzają sterowniki drukarek. Ten poradnik pokaże Ci jak zainstalować sterowniki ZDesigner krok po kroku i rozwiązać najczęstsze błędy.
+
+---
+
+## Typowe objawy problemów ze sterownikami
+
+| Objaw | Możliwa przyczyna |
+|-------|-------------------|
+| Drukarka widoczna jako "Offline" | Uszkodzony/niekompatybilny sterownik |
+| Drukarka w ogóle niewidoczna | Brak sterownika USB |
+| Drukuje puste etykiety | Zły typ sterownika (Generic zamiast ZDesigner) |
+| Błąd "Driver unavailable" | Sterownik usunięty przez aktualizację Windows |
+| Drukarka znika po restarcie | Konflikt z aktualizacją KB5055528 |
+
+---
+
+## 1. Który sterownik wybrać?
+
+Zebra oferuje **dwa główne typy sterowników**:
+
+| Sterownik | Wersja | Zastosowanie | Zalecany? |
+|-----------|--------|--------------|-----------|
+| **ZDesigner v10** | 10.x | Nowe instalacje, Windows 10/11 | ✅ TAK |
+| **ZDesigner v5** | 5.x | Starsze systemy, legacy | Tylko jeśli v10 nie działa |
+
+### ZDesigner v10 – zalecany
+
+- Pełna kompatybilność z Windows 11 (w tym 24H2)
+- Obsługa USB, Ethernet, Bluetooth, WiFi
+- Certyfikowany przez Microsoft (WHQL)
+- Automatyczne wykrywanie drukarek
+
+### ZDesigner v5 – legacy
+
+- Dla starszych aplikacji wymagających v5
+- Może być potrzebny dla niektórych programów ERP
+- Mniej funkcji konfiguracyjnych
+
+> **💡 Wskazówka:** Zacznij ZAWSZE od ZDesigner v10. Do v5 wracaj tylko jeśli Twoja aplikacja tego wymaga.
+
+---
+
+## 2. Pobieranie sterowników Zebra
+
+### Oficjalne źródło – Zebra.com
+
+**Nie pobieraj sterowników z nieoficjalnych źródeł!** Mogą zawierać malware lub być nieaktualne.
+
+### Bezpośrednie linki:
+
+| Sterownik | Link |
+|-----------|------|
+| **ZDesigner v10 (Windows 11)** | [Pobierz z serwis-zebry.pl](/api/downloads/zdesigner-v10) |
+| **ZDesigner v5 (Legacy)** | [Pobierz z serwis-zebry.pl](/api/downloads/zdesigner-v5) |
+| **Zebra Setup Utilities** | [Pobierz z serwis-zebry.pl](/api/downloads/zebra-setup-utilities) |
+
+### Kompatybilność z modelami:
+
+**ZDesigner v10 obsługuje:**
+
+| Seria | Modele |
+|-------|--------|
+| **Desktop** | ZD220, ZD230, ZD420, ZD421, ZD620, ZD621 |
+| **Industrial** | ZT230, ZT410, ZT411, ZT420, ZT421, ZT510, ZT610, ZT620 |
+| **Mobile** | ZQ310, ZQ320, ZQ510, ZQ520, ZQ610, ZQ620, ZQ630 |
+| **Legacy** | GK420d, GK420t, GC420d, GC420t, GT800, LP2844 |
+
+---
+
+## 3. Instalacja krok po kroku
+
+### Przed instalacją:
+
+1. **Odłącz drukarkę** od komputera (USB)
+2. **Odinstaluj stare sterowniki** (jeśli są)
+3. **Wyłącz antywirusa** tymczasowo (niektóre blokują instalację)
+
+### Krok 1: Uruchom instalator
+
+1. Pobierz plik **zddriver-v10xxxxx-certified.zip**
+2. Wypakuj archiwum
+3. Kliknij prawym na **Setup.exe** → **Uruchom jako administrator**
+
+### Krok 2: Wybierz typ instalacji
+
+| Opcja | Kiedy wybrać? |
+|-------|---------------|
+| **Install Printer** | Masz drukarkę podłączoną USB/siecią |
+| **Install Driver Only** | Chcesz tylko zainstalować sterownik |
+| **Repair** | Naprawiasz istniejącą instalację |
+
+Wybierz **"Install Printer"** dla standardowej instalacji.
+
+### Krok 3: Wybierz port
+
+| Typ połączenia | Port do wyboru |
+|----------------|----------------|
+| **USB** | USBxxx (pojawi się po podłączeniu drukarki) |
+| **Ethernet** | Standard TCP/IP Port → Podaj IP drukarki |
+| **Bluetooth** | COMx (port Bluetooth) |
+| **WiFi** | Standard TCP/IP Port → Podaj IP drukarki |
+
+### Krok 4: Wybierz model drukarki
+
+Znajdź **dokładny model** drukarki na liście. Np.:
+- ZD420-203dpi ZPL (dla ZD420d 203dpi)
+- ZD421-300dpi ZPL (dla ZD421t 300dpi)
+- ZT410-203dpi ZPL (dla ZT410)
+
+> **⚠️ WAŻNE:** Wybór złego modelu = problemy z kalibracją i jakością druku!
+
+### Krok 5: Zakończ instalację
+
+1. Kliknij **Next** → **Finish**
+2. Podłącz drukarkę (jeśli USB)
+3. Poczekaj na rozpoznanie przez Windows
+4. **Wydrukuj stronę testową** (prawy klik na drukarkę → Właściwości drukarki → Wydrukuj stronę testową)
+
+---
+
+## 4. Instalacja dla połączenia sieciowego (Ethernet/WiFi)
+
+### Krok 1: Sprawdź IP drukarki
+
+Na drukarce wydrukuj **etykietę konfiguracyjną**:
+- ZD420/ZD620: Przytrzymaj przycisk CANCEL przez 3 sekundy
+- ZT410/ZT610: Menu → Sieć → Info
+
+### Krok 2: Pinguj drukarkę
+
+    ping 192.168.1.xxx
+
+Jeśli odpowiada – możesz kontynuować.
+
+### Krok 3: Dodaj port TCP/IP
+
+W instalatorze wybierz:
+1. **Standard TCP/IP Port**
+2. Wpisz adres IP drukarki
+3. Odznacz **"Query the printer..."** (szybsza instalacja)
+
+### Krok 4: Ustaw stały IP (zalecane)
+
+Drukarki DHCP mogą zmieniać IP po restarcie. Ustaw **IP statyczne**:
+
+W Zebra Setup Utilities:
+1. Połącz z drukarką
+2. **Configure Printer** → **Network**
+3. Ustaw:
+   - IP Address: np. 192.168.1.100
+   - Subnet Mask: 255.255.255.0
+   - Gateway: 192.168.1.1
+4. **Apply**
+
+---
+
+## 5. Problem: Drukarka "Offline" w Windows 11
+
+### Najczęstsze przyczyny:
+
+| Przyczyna | Rozwiązanie |
+|-----------|-------------|
+| Sterownik niekompatybilny | Przeinstaluj ZDesigner v10 |
+| Port USB zmieniony | Usuń i dodaj drukarkę ponownie |
+| Spooler uszkodzony | Restart usługi Print Spooler |
+| Aktualizacja KB5055528 | Zobacz sekcja poniżej |
+
+### Rozwiązanie 1: Restart Print Spooler
+
+1. Otwórz **Usługi** (services.msc)
+2. Znajdź **Print Spooler**
+3. Kliknij **Uruchom ponownie**
+
+Lub w PowerShell (jako administrator):
+
+    Restart-Service Spooler
+
+### Rozwiązanie 2: Usuń i dodaj drukarkę
+
+1. **Ustawienia → Bluetooth i urządzenia → Drukarki**
+2. Znajdź drukarkę Zebra → **Usuń**
+3. Odłącz i podłącz USB
+4. Drukarka powinna się zainstalować automatycznie
+
+### Rozwiązanie 3: Przełącz port USB
+
+1. **Prawy klik na drukarkę → Właściwości drukarki**
+2. Zakładka **Porty**
+3. Sprawdź czy wybrany jest właściwy **USBxxx**
+4. Jeśli nie – zaznacz prawidłowy port
+
+---
+
+## 6. Problem: Aktualizacja KB5055528 (i podobne)
+
+### Objaw:
+
+Po aktualizacji Windows 11 drukarka Zebra:
+- Znika z listy drukarek
+- Pokazuje "Driver unavailable"
+- Drukuje zniekształcone etykiety
+
+### Przyczyna:
+
+Microsoft czasem zastępuje sterowniki producentów "generycznymi" sterownikami Windows, które nie obsługują wszystkich funkcji drukarek etykiet.
+
+### Rozwiązanie:
+
+**Krok 1: Całkowite usunięcie sterownika**
+
+1. Odłącz drukarkę
+2. Otwórz **Menedżer urządzeń**
+3. **Widok → Pokaż ukryte urządzenia**
+4. Rozwiń **Drukarki** i **Kolejki wydruku**
+5. Usuń wszystkie wpisy Zebra (prawy klik → Odinstaluj)
+6. Rozwiń **Kontrolery USB** → usuń "USB Printing Support" dla Zebra
+
+**Krok 2: Wyczyść folder sterowników**
+
+W PowerShell (jako administrator):
+
+    pnputil /enum-drivers | findstr "Zebra"
+
+Zanotuj nazwy oem (np. oem45.inf), potem:
+
+    pnputil /delete-driver oemXX.inf /force
+
+**Krok 3: Przeinstaluj ZDesigner v10**
+
+1. Pobierz najnowszą wersję ZDesigner v10
+2. Zainstaluj jako administrator
+3. Podłącz drukarkę
+
+> **💡 Wskazówka:** Po problemach z aktualizacjami Windows warto **wstrzymać aktualizacje** na 7 dni (Ustawienia → Windows Update → Wstrzymaj aktualizacje).
+
+---
+
+## 7. Problem: Drukarka drukuje "krzaki" lub puste etykiety
+
+### Przyczyna 1: Zły język drukarki
+
+Drukarki Zebra obsługują różne języki:
+- **ZPL** (Zebra Programming Language) – standard
+- **EPL** (Eltron Programming Language) – legacy
+- **CPCL** – drukarki mobilne
+
+### Rozwiązanie:
+
+Sprawdź język w sterowniku:
+1. **Właściwości drukarki → Preferencje**
+2. Zakładka **Opcje** lub **Advanced Setup**
+3. Upewnij się, że język to **ZPL**
+
+### Przyczyna 2: Zła rozdzielczość
+
+| Model | Rozdzielczość |
+|-------|---------------|
+| ZD420d-**203**dpi | 203 dpi (8 dots/mm) |
+| ZD420d-**300**dpi | 300 dpi (12 dots/mm) |
+| ZT410 | 203 lub 300 dpi |
+| ZT610 | 203, 300 lub 600 dpi |
+
+Sterownik musi odpowiadać rozdzielczości drukarki!
+
+### Przyczyna 3: Zainstalowany Generic / Text Only
+
+Windows czasem instaluje "Generic / Text Only" zamiast ZDesigner.
+
+**Sprawdź:**
+1. Prawy klik na drukarkę → **Właściwości drukarki**
+2. Zakładka **Zaawansowane**
+3. **Sterownik** powinien być "ZDesigner ZDxxx..."
+
+Jeśli jest "Generic" – przeinstaluj prawidłowy sterownik.
+
+---
+
+## 8. Instalacja przez Zebra Setup Utilities
+
+Alternatywna metoda instalacji dla zaawansowanych:
+
+### Krok 1: Pobierz i zainstaluj ZSU
+
+Pobierz [Zebra Setup Utilities](/api/downloads/zebra-setup-utilities)
+
+### Krok 2: Wykryj drukarkę
+
+1. Uruchom **Zebra Setup Utilities**
+2. Kliknij **Install New Printer**
+3. Wybierz port (USB/Network)
+4. Program automatycznie wykryje model
+
+### Krok 3: Skonfiguruj drukarkę
+
+W ZSU możesz również:
+- Ustawić parametry druku (ciemność, prędkość)
+- Skonfigurować sieć (IP statyczne)
+- Zaktualizować firmware
+- Wysłać komendy ZPL
+
+---
+
+## 9. Sterowniki dla Bluetooth i WiFi
+
+### Bluetooth:
+
+1. **Sparuj drukarkę** z Windows 11 (Ustawienia → Bluetooth)
+2. Windows utworzy port **COMx**
+3. W instalatorze ZDesigner wybierz ten port COM
+4. Zainstaluj sterownik
+
+### WiFi:
+
+Dla drukarek WiFi (np. ZD621 z WiFi):
+1. Skonfiguruj drukarkę do sieci WiFi (przez wyświetlacz lub ZSU)
+2. Sprawdź przydzielony IP
+3. Zainstaluj jak dla Ethernet (TCP/IP Port)
+
+---
+
+## 10. Tabela rozwiązywania problemów
+
+| Problem | Rozwiązanie |
+|---------|-------------|
+| "Driver unavailable" | Przeinstaluj ZDesigner v10 jako admin |
+| Drukarka offline | Restart Print Spooler + sprawdź port |
+| Drukuje krzaki | Sprawdź język (ZPL) i rozdzielczość |
+| Znika po restarcie | Ustaw IP statyczne / sprawdź USB |
+| Wolne drukowanie | Wyłącz "Enable bidirectional support" |
+| Błąd przy instalacji | Wyłącz antywirusa, uruchom jako admin |
+| Tylko 1 kopia się drukuje | W sterowniku: Copies = 1, w aplikacji ustaw ilość |
+
+---
+
+## 11. FAQ – Często zadawane pytania
+
+### Czy mogę mieć zainstalowane ZDesigner v5 i v10 jednocześnie?
+Tak, ale zalecamy używanie tylko v10 dla nowych instalacji. V5 tylko jeśli aplikacja tego wymaga.
+
+### Sterownik się instaluje, ale drukarka nie działa – co robić?
+1. Sprawdź port (USB/sieć)
+2. Wydrukuj etykietę konfiguracyjną z drukarki
+3. Sprawdź czy model w sterowniku zgadza się z drukarką
+
+### Czy sterowniki Zebra działają z Windows 11 ARM (Surface)?
+ZDesigner v10 obsługuje Windows 11 ARM, ale niektóre starsze modele mogą mieć ograniczoną kompatybilność.
+
+### Gdzie znajdę numer seryjny drukarki do rejestracji sterownika?
+Numer seryjny jest na etykiecie z tyłu/spodu drukarki oraz na etykiecie konfiguracyjnej.
+
+---
+
+## Potrzebujesz pomocy?
+
+Sterowniki dalej nie działają? Masz nietypowy problem?
+
+> **📞 Zadzwoń:** +48 601 619 898
+
+> **🔧 Zgłoś naprawę:** [Formularz serwisowy →](/#formularz)
+
+Jako **autoryzowany serwis Zebra** pomożemy Ci:
+- Zdalnie skonfigurować drukarkę
+- Rozwiązać problemy ze sterownikami
+- Zaktualizować firmware
+- Naprawić drukarkę jeśli problem jest sprzętowy
 `
   }
 
