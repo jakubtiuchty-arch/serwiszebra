@@ -1,9 +1,9 @@
 'use client'
 
+import { useEffect, useRef, useState } from 'react'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import Link from 'next/link'
-import Image from 'next/image'
 import { 
   Bot, 
   MessageSquare, 
@@ -17,171 +17,249 @@ import {
   Shield,
   CheckCircle2,
   ArrowRight,
-  Clock,
   Mail,
   Phone,
-  FileText,
   Video,
   BookOpen,
   Award,
-  Zap,
-  Lock,
   Users,
-  TrendingUp,
   Archive,
   Bell,
   ChevronRight,
-  Sparkles
+  ChevronDown
 } from 'lucide-react'
 
-export default function JakToDzialaPage() {
-  const steps = [
-    {
-      number: 1,
-      icon: Bot,
-      title: 'Diagnoza AI 24/7',
-      subtitle: 'Inteligentny asystent serwisowy',
-      description: 'Rozpocznij od rozmowy z naszym Agentem AI, który jest dostępny 24 godziny na dobę, 7 dni w tygodniu. To nie jest zwykły chatbot – to zaawansowany system diagnostyczny.',
-      details: [
-        'Wytrenowany na oryginalnych manualach serwisowych Zebra Technologies',
-        'Bazuje na case studies tysięcy napraw z naszego serwisu',
-        'Zna dokładnie wszystkie modele urządzeń, specyfikacje i akcesoria',
-        'Nie "halucynuje" – opiera się wyłącznie na RAG (Retrieval-Augmented Generation) z oficjalną dokumentacją Zebra',
-        'Klasyfikuje usterki: te do rozwiązania zdalnie oraz wymagające profesjonalnej naprawy',
-        'Czasem prosi o rzeczy trywialne (wyłącz/włącz) – bo z doświadczenia wie, że najprostsze rozwiązania są często najskuteczniejsze',
-        'Nigdy nie podaje wskazówek, które mogłyby uszkodzić urządzenie',
-        'W wersji mobilnej możesz nagrać film z usterką – AI przeanalizuje go i zaproponuje rozwiązanie'
-      ],
-      imagePlaceholder: 'ai-diagnoza.jpg',
-      imageAlt: 'Diagnoza AI - inteligentny asystent serwisowy Zebra',
-      color: 'purple'
-    },
-    {
-      number: 2,
-      icon: ClipboardList,
-      title: 'Formularz zgłoszenia naprawy',
-      subtitle: 'Szybkie i wygodne zgłoszenie online',
-      description: 'Jeśli diagnoza AI wskaże, że usterka wymaga profesjonalnej naprawy w serwisie, wypełniasz prosty formularz zgłoszeniowy.',
-      details: [
-        'Podajesz dane kontaktowe firmy lub osoby prywatnej',
-        'Wybierasz typ urządzenia i model (drukarki etykiet, terminale mobilne, skanery)',
-        'Opisujesz szczegółowo problem z urządzeniem Zebra',
-        'Podajesz adres odbioru przesyłki przez kuriera',
-        'Wybierasz preferowaną datę odbioru',
-        'System automatycznie tworzy Twoje konto w Panelu Klienta'
-      ],
-      imagePlaceholder: 'formularz-zgloszenia.jpg',
-      imageAlt: 'Formularz zgłoszenia naprawy urządzenia Zebra online',
-      color: 'blue'
-    },
-    {
-      number: 3,
-      icon: Truck,
-      title: 'Kurier pod drzwi',
-      subtitle: 'Odbiór w 24-48h bez wychodzenia z biura',
-      description: 'Nie musisz nigdzie jechać ani szukać punktu nadania. Kurier przyjedzie pod wskazany adres w wybranym terminie.',
-      details: [
-        'Odbiór kurierem w całej Polsce w ciągu 24-48 godzin',
-        'Wybierasz datę i przedział godzinowy odbioru',
-        'Kurier odbiera paczkę bezpośrednio z Twojego biura lub magazynu',
-        'Otrzymujesz powiadomienie email i SMS o odbiorze',
-        'Śledzenie przesyłki w czasie rzeczywistym w Panelu Klienta'
-      ],
-      imagePlaceholder: 'kurier-odbiór.jpg',
-      imageAlt: 'Kurier odbiera urządzenie Zebra do naprawy',
-      color: 'green'
-    },
-    {
-      number: 4,
-      icon: Search,
-      title: 'Profesjonalna diagnoza serwisowa',
-      subtitle: 'Szczegółowa analiza w max. 48h',
-      description: 'Po dostarczeniu urządzenia do naszego autoryzowanego serwisu Zebra, nasi certyfikowani technicy przeprowadzają dokładną diagnostykę.',
-      details: [
-        'Diagnostyka realizowana w ciągu maksymalnie 48 godzin',
-        'Wykorzystujemy oryginalne narzędzia diagnostyczne Zebra',
-        'Sprawdzamy wszystkie podzespoły: głowice drukujące, płyty główne, wyświetlacze, skanery',
-        'Identyfikujemy przyczynę usterki i określamy zakres naprawy',
-        'Status "W diagnozie" widoczny na żywo w Panelu Klienta',
-        'Powiadomienie email o każdej zmianie statusu naprawy'
-      ],
-      imagePlaceholder: 'diagnoza-serwisowa.jpg',
-      imageAlt: 'Profesjonalna diagnoza urządzenia Zebra w autoryzowanym serwisie',
-      color: 'orange'
-    },
-    {
-      number: 5,
-      icon: CreditCard,
-      title: 'Wycena i płatność online',
-      subtitle: 'Przejrzyste ceny, wygodne metody płatności',
-      description: 'Po diagnozie otrzymujesz szczegółową wycenę naprawy bezpośrednio w Panelu Klienta. Decyzja należy do Ciebie.',
-      details: [
-        'Szczegółowa wycena z podziałem na części i robociznę',
-        'Przyciski: Akceptuj lub Odrzuć wycenę',
-        'Płatność kartą (Visa, Mastercard), BLIK, Apple Pay',
-        'Możliwość wystawienia faktury pro-forma dla firm',
-        'Faktura VAT wysyłana automatycznie po płatności',
-        'Bezpieczne płatności przez Stripe'
-      ],
-      imagePlaceholder: 'platnosc-online.jpg',
-      imageAlt: 'Płatność online za naprawę urządzenia Zebra - karta, BLIK, Apple Pay',
-      color: 'emerald'
-    },
-    {
-      number: 6,
-      icon: MessageSquare,
-      title: 'Dedykowany czat z serwisantem',
-      subtitle: 'Bezpośredni kontakt przy każdej naprawie',
-      description: 'W każdym momencie możesz skontaktować się bezpośrednio z technikiem pracującym nad Twoim urządzeniem.',
-      details: [
-        'Czat dedykowany dla każdej naprawy osobno (nie ogólny)',
-        'Bezpośrednia komunikacja z serwisantem',
-        'Możliwość zadawania pytań o postęp naprawy',
-        'Przesyłanie dodatkowych informacji i zdjęć',
-        'Powiadomienia email o nowych wiadomościach',
-        'Historia konwersacji zapisana w archiwum naprawy'
-      ],
-      imagePlaceholder: 'czat-serwisant.jpg',
-      imageAlt: 'Czat z serwisantem Zebra w panelu klienta',
-      color: 'indigo'
-    },
-    {
-      number: 7,
-      icon: Wrench,
-      title: 'Profesjonalna naprawa',
-      subtitle: 'Autoryzowany serwis z 25-letnim doświadczeniem',
-      description: 'Po akceptacji wyceny i płatności, nasi certyfikowani technicy przystępują do naprawy Twojego urządzenia Zebra.',
-      details: [
-        'Naprawa realizowana w ciągu maksymalnie 7 dni roboczych',
-        'Używamy wyłącznie oryginalnych części zamiennych Zebra',
-        'Certyfikowani technicy z wieloletnim doświadczeniem',
-        'Naprawy gwarancyjne i pogwarancyjne',
-        '12 miesięcy gwarancji na wykonaną naprawę',
-        'Status naprawy aktualizowany na bieżąco w Panelu Klienta'
-      ],
-      imagePlaceholder: 'naprawa-zebra.jpg',
-      imageAlt: 'Naprawa drukarki Zebra przez certyfikowanego technika',
-      color: 'red'
-    },
-    {
-      number: 8,
-      icon: Package,
-      title: 'Wysyłka i protokół naprawy',
-      subtitle: 'Bezpieczna dostawa z pełną dokumentacją',
-      description: 'Po zakończeniu naprawy, serwisant generuje protokół naprawy, pakuje urządzenie i wysyła do Ciebie.',
-      details: [
-        'Protokół naprawy z opisem wykonanych prac',
-        'Bezpieczne zapakowanie urządzenia',
-        'Wysyłka kurierem na adres z formularza',
-        'Numer śledzenia przesyłki w Panelu Klienta',
-        'Powiadomienie email o wysyłce',
-        'Faktura VAT dołączona do przesyłki lub wysłana elektronicznie'
-      ],
-      imagePlaceholder: 'wysylka-protokol.jpg',
-      imageAlt: 'Wysyłka naprawionego urządzenia Zebra z protokołem naprawy',
-      color: 'cyan'
+// Hook do wykrywania widoczności elementu
+function useInView(threshold = 0.3) {
+  const ref = useRef<HTMLDivElement>(null)
+  const [isInView, setIsInView] = useState(false)
+  const [hasAnimated, setHasAnimated] = useState(false)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !hasAnimated) {
+          setIsInView(true)
+          setHasAnimated(true)
+        }
+      },
+      { threshold, rootMargin: '-50px 0px -50px 0px' }
+    )
+
+    if (ref.current) {
+      observer.observe(ref.current)
     }
-  ]
+
+    return () => observer.disconnect()
+  }, [threshold, hasAnimated])
+
+  return { ref, isInView }
+}
+
+// Komponent pojedynczego elementu timeline - stonowana wersja
+function TimelineItem({ 
+  step, 
+  index 
+}: { 
+  step: typeof steps[0]
+  index: number
+}) {
+  const { ref, isInView } = useInView(0.2)
+  const Icon = step.icon
+  const isEven = index % 2 === 0
+  const [isExpanded, setIsExpanded] = useState(false)
+
+  return (
+    <div 
+      ref={ref}
+      className={`relative flex items-start gap-4 sm:gap-0 ${isEven ? 'sm:flex-row' : 'sm:flex-row-reverse'}`}
+    >
+      {/* Connector dot on timeline */}
+      <div 
+        className={`absolute left-5 sm:left-1/2 w-3 h-3 rounded-full border-2 border-white sm:-translate-x-1/2 z-10 transition-all duration-500 ${
+          isInView ? 'bg-blue-600 scale-100' : 'bg-gray-300 scale-75'
+        }`}
+      />
+
+      {/* Spacer for mobile */}
+      <div className="w-10 sm:hidden" />
+
+      {/* Content card */}
+      <div 
+        className={`flex-1 sm:w-[calc(50%-1.5rem)] transition-all duration-500 ${
+          isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+        } ${isEven ? 'sm:pr-8' : 'sm:pl-8'}`}
+      >
+        <div 
+          className="relative cursor-pointer"
+          onClick={() => setIsExpanded(!isExpanded)}
+        >
+          {/* Card */}
+          <div className={`bg-white rounded-xl p-4 border transition-all duration-300 ${
+            isExpanded ? 'border-blue-300 shadow-md' : 'border-gray-200 hover:border-gray-300 hover:shadow-sm'
+          }`}>
+            
+            {/* Header */}
+            <div className="flex items-start gap-3 mb-2">
+              {/* Icon */}
+              <div className={`w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors duration-300 ${
+                isInView ? 'bg-blue-100' : 'bg-gray-100'
+              }`}>
+                <Icon className={`w-5 h-5 transition-colors duration-300 ${isInView ? 'text-blue-600' : 'text-gray-400'}`} />
+              </div>
+              
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2 mb-0.5">
+                  <span className={`text-[10px] font-semibold px-1.5 py-0.5 rounded transition-colors duration-300 ${
+                    isInView ? 'bg-blue-100 text-blue-700' : 'bg-gray-100 text-gray-500'
+                  }`}>
+                    Krok {step.number}
+                  </span>
+                </div>
+                <h3 className="text-sm font-bold text-gray-900">
+                  {step.title}
+                </h3>
+              </div>
+              
+              {/* Expand icon */}
+              <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform duration-300 flex-shrink-0 ${isExpanded ? 'rotate-180' : ''}`} />
+            </div>
+
+            {/* Description */}
+            <p className="text-xs text-gray-600 leading-relaxed pl-13">
+              {step.description}
+            </p>
+
+            {/* Expandable details */}
+            <div className={`grid transition-all duration-300 ease-in-out ${
+              isExpanded ? 'grid-rows-[1fr] opacity-100 mt-3' : 'grid-rows-[0fr] opacity-0'
+            }`}>
+              <div className="overflow-hidden">
+                <div className="pt-3 border-t border-gray-100">
+                  <ul className="space-y-2">
+                    {step.details.map((detail, i) => (
+                      <li 
+                        key={i} 
+                        className="flex items-start gap-2"
+                        style={{ 
+                          opacity: isExpanded ? 1 : 0,
+                          transform: isExpanded ? 'translateX(0)' : 'translateX(-5px)',
+                          transition: `all 200ms ease-out ${i * 30}ms`
+                        }}
+                      >
+                        <CheckCircle2 className="w-3.5 h-3.5 text-green-600 flex-shrink-0 mt-0.5" />
+                        <span className="text-xs text-gray-600">{detail}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Spacer for desktop */}
+      <div className="hidden sm:block sm:w-[calc(50%-1.5rem)]" />
+    </div>
+  )
+}
+
+// Dane kroków
+const steps = [
+  {
+    number: 1,
+    icon: Bot,
+    title: 'Diagnoza AI 24/7',
+    description: 'Rozpocznij od rozmowy z naszym Agentem AI, który jest dostępny 24/7. To zaawansowany system diagnostyczny wytrenowany na oficjalnej dokumentacji Zebra.',
+    details: [
+      'Wytrenowany na oryginalnych manualach serwisowych Zebra',
+      'Bazuje na case studies tysięcy napraw',
+      'Klasyfikuje usterki: do rozwiązania zdalnie vs wymagające naprawy',
+      'W wersji mobilnej możesz nagrać film z usterką'
+    ]
+  },
+  {
+    number: 2,
+    icon: ClipboardList,
+    title: 'Formularz zgłoszenia',
+    description: 'Jeśli diagnoza AI wskaże, że usterka wymaga naprawy w serwisie, wypełniasz prosty formularz zgłoszeniowy.',
+    details: [
+      'Podajesz dane kontaktowe i adres odbioru',
+      'Wybierasz typ urządzenia i model',
+      'Opisujesz problem z urządzeniem',
+      'System tworzy Twoje konto w Panelu Klienta'
+    ]
+  },
+  {
+    number: 3,
+    icon: Truck,
+    title: 'Kurier pod drzwi',
+    description: 'Nie musisz nigdzie jechać. Kurier przyjedzie pod wskazany adres w ciągu 24-48h.',
+    details: [
+      'Odbiór kurierem w całej Polsce',
+      'Wybierasz datę i przedział godzinowy',
+      'Śledzenie przesyłki w Panelu Klienta'
+    ]
+  },
+  {
+    number: 4,
+    icon: Search,
+    title: 'Profesjonalna diagnoza',
+    description: 'Nasi certyfikowani technicy przeprowadzają dokładną diagnostykę w ciągu max. 48h.',
+    details: [
+      'Oryginalne narzędzia diagnostyczne Zebra',
+      'Identyfikacja przyczyny i zakres naprawy',
+      'Status widoczny na żywo w Panelu Klienta'
+    ]
+  },
+  {
+    number: 5,
+    icon: CreditCard,
+    title: 'Wycena i płatność online',
+    description: 'Otrzymujesz szczegółową wycenę w Panelu Klienta. Płacisz kartą, BLIK lub Apple Pay.',
+    details: [
+      'Szczegółowa wycena z podziałem na części i robociznę',
+      'Przyciski: Akceptuj lub Odrzuć',
+      'Bezpieczne płatności przez Stripe'
+    ]
+  },
+  {
+    number: 6,
+    icon: MessageSquare,
+    title: 'Czat z serwisantem',
+    description: 'W każdym momencie możesz skontaktować się z technikiem pracującym nad Twoim urządzeniem.',
+    details: [
+      'Czat dedykowany dla każdej naprawy',
+      'Bezpośrednia komunikacja z technikiem',
+      'Historia zapisana w archiwum'
+    ]
+  },
+  {
+    number: 7,
+    icon: Wrench,
+    title: 'Profesjonalna naprawa',
+    description: 'Certyfikowani technicy naprawiają Twoje urządzenie w ciągu max. 7 dni roboczych.',
+    details: [
+      'Oryginalne części zamienne Zebra',
+      '25 lat doświadczenia',
+      '12 miesięcy gwarancji na naprawę'
+    ]
+  },
+  {
+    number: 8,
+    icon: Package,
+    title: 'Wysyłka i protokół',
+    description: 'Po naprawie otrzymujesz urządzenie kurierem wraz z protokołem naprawy i fakturą.',
+    details: [
+      'Protokół z opisem wykonanych prac',
+      'Bezpieczne zapakowanie',
+      'Numer śledzenia w Panelu Klienta'
+    ]
+  }
+]
+
+export default function JakToDzialaPage() {
 
   const additionalFeatures = [
     {
@@ -215,20 +293,6 @@ export default function JakToDzialaPage() {
       description: 'Otrzymujesz email przy każdej zmianie statusu naprawy. Timeline w panelu pokazuje historię wszystkich zdarzeń.'
     }
   ]
-
-  const getColorClasses = (color: string) => {
-    const colors: Record<string, { bg: string; text: string; border: string; light: string }> = {
-      purple: { bg: 'bg-purple-600', text: 'text-purple-600', border: 'border-purple-200', light: 'bg-purple-50' },
-      blue: { bg: 'bg-blue-600', text: 'text-blue-600', border: 'border-blue-200', light: 'bg-blue-50' },
-      green: { bg: 'bg-green-600', text: 'text-green-600', border: 'border-green-200', light: 'bg-green-50' },
-      orange: { bg: 'bg-orange-600', text: 'text-orange-600', border: 'border-orange-200', light: 'bg-orange-50' },
-      emerald: { bg: 'bg-emerald-600', text: 'text-emerald-600', border: 'border-emerald-200', light: 'bg-emerald-50' },
-      indigo: { bg: 'bg-indigo-600', text: 'text-indigo-600', border: 'border-indigo-200', light: 'bg-indigo-50' },
-      red: { bg: 'bg-red-600', text: 'text-red-600', border: 'border-red-200', light: 'bg-red-50' },
-      cyan: { bg: 'bg-cyan-600', text: 'text-cyan-600', border: 'border-cyan-200', light: 'bg-cyan-50' },
-    }
-    return colors[color] || colors.blue
-  }
 
   return (
     <div className="min-h-screen bg-white">
@@ -301,91 +365,32 @@ export default function JakToDzialaPage() {
         </div>
       </section>
 
-      {/* STEPS SECTION */}
-      <section className="py-8 sm:py-12 bg-gray-50">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* INTERACTIVE TIMELINE - stonowana wersja */}
+      <section className="py-8 sm:py-12 bg-gray-50 relative overflow-hidden">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+          {/* Header */}
           <div className="text-center mb-8">
             <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">
               Proces naprawy krok po kroku
             </h2>
-            <p className="text-sm text-gray-600 max-w-2xl mx-auto">
-              Od zgłoszenia do odbioru – każdy etap jest przejrzysty i śledzony online.
+            <p className="text-sm text-gray-600 max-w-xl mx-auto">
+              Kliknij w krok, aby zobaczyć szczegóły
             </p>
           </div>
 
-          <div className="space-y-6">
-            {steps.map((step, index) => {
-              const Icon = step.icon
-              const colors = getColorClasses(step.color)
-              const isEven = index % 2 === 0
-
-              return (
-                <div 
-                  key={step.number}
-                  className={`flex flex-col ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-4 lg:gap-6 items-stretch`}
-                >
-                  {/* Content */}
-                  <div className="flex-1">
-                    <div className={`${colors.light} rounded-xl p-4 border ${colors.border} h-full`}>
-                      <div className="flex items-center gap-3 mb-3">
-                        <div className={`w-10 h-10 ${colors.bg} rounded-lg flex items-center justify-center text-white`}>
-                          <Icon className="w-5 h-5" />
-                        </div>
-                        <div>
-                          <div className={`text-xs font-semibold ${colors.text}`}>
-                            Krok {step.number}
-                          </div>
-                          <h3 className="text-sm font-bold text-gray-900">
-                            {step.title}
-                          </h3>
-                        </div>
-                      </div>
-
-                      <p className="text-xs text-gray-600 mb-3">
-                        {step.description}
-                      </p>
-
-                      <ul className="space-y-1.5">
-                        {step.details.map((detail, i) => (
-                          <li key={i} className="flex items-start gap-2">
-                            <CheckCircle2 className={`w-3.5 h-3.5 ${colors.text} flex-shrink-0 mt-0.5`} />
-                            <span className="text-gray-600 text-xs">{detail}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-
-                  {/* Image */}
-                  <div className="flex-1 hidden lg:block">
-                    <div className="relative h-full min-h-[280px] rounded-xl overflow-hidden">
-                      {step.number === 1 ? (
-                        <Image
-                          src="/diagnoza_ai.png"
-                          alt="Diagnoza AI - inteligentny asystent serwisowy Zebra"
-                          fill
-                          className="object-cover"
-                        />
-                      ) : step.number === 2 ? (
-                        <Image
-                          src="/formularz_zgłoszenia_naprawy.png"
-                          alt="Formularz zgłoszenia naprawy urządzenia Zebra online"
-                          fill
-                          className="object-cover"
-                        />
-                      ) : (
-                        <div className="absolute inset-0 bg-gray-200 flex items-center justify-center">
-                          <div className={`w-12 h-12 ${colors.bg} rounded-full flex items-center justify-center opacity-30`}>
-                            <Icon className="w-6 h-6 text-white" />
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              )
-            })}
+          {/* Timeline */}
+          <div className="relative">
+            {/* Central line */}
+            <div className="absolute left-[1.15rem] sm:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-200 via-blue-300 to-blue-200 sm:-translate-x-1/2" />
+            
+            {/* Timeline items */}
+            <div className="space-y-4 sm:space-y-6">
+              {steps.map((step, index) => (
+                <TimelineItem key={step.number} step={step} index={index} />
+              ))}
+            </div>
           </div>
+
         </div>
       </section>
 
@@ -426,20 +431,20 @@ export default function JakToDzialaPage() {
       <section className="py-8 sm:py-10 bg-gray-900 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-xl sm:text-2xl font-bold mb-6 text-center">
-            Dlaczego Serwis Zebra jest inny?
+            Dlaczego nasz serwis jest inny niż wszystkie?
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="bg-white/5 rounded-lg p-5 border border-white/10">
-              <h3 className="text-sm font-bold mb-3 text-red-400">❌ Tradycyjny serwis</h3>
+              <h3 className="text-sm font-bold mb-3 text-red-400">❌ Zwykły serwis</h3>
               <ul className="space-y-2 text-gray-400 text-sm">
                 <li className="flex items-start gap-2">
                   <span className="text-red-400">✗</span>
-                  <span>Dzwonisz, czekasz na połączenie, tłumaczysz problem</span>
+                  <span>Dzwonisz, czekasz na linii, tłumaczysz problem</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-red-400">✗</span>
-                  <span>Sam musisz zawieźć urządzenie do serwisu</span>
+                  <span>Sam dostarczasz urządzenie do serwisu</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-red-400">✗</span>
@@ -447,11 +452,11 @@ export default function JakToDzialaPage() {
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-red-400">✗</span>
-                  <span>Wycena przez telefon, bez możliwości porównania</span>
+                  <span>Wycena przez telefon, mail</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-red-400">✗</span>
-                  <span>Papierowe faktury, brak archiwum napraw</span>
+                  <span>Płatność gotówką lub przelewem</span>
                 </li>
               </ul>
             </div>
@@ -545,7 +550,7 @@ export default function JakToDzialaPage() {
               href="/#chat"
               className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-white/10 hover:bg-white/20 text-white text-sm font-bold rounded-lg transition-colors border border-white/30"
             >
-              <Sparkles className="w-4 h-4" />
+              <Bot className="w-4 h-4" />
               Diagnoza AI 24/7
             </Link>
           </div>

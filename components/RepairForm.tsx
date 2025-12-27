@@ -234,14 +234,14 @@ export default function RepairForm() {
   }
 
   return (
-    <section id="repair-form" className="py-16 px-5 bg-white scroll-mt-24">
+    <section id="repair-form" className="py-12 px-3 sm:px-4 lg:px-6 bg-gradient-to-br from-gray-50 to-gray-100 scroll-mt-24">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-10">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-gray-900 mb-3">
+        <div className="text-center mb-8">
+          <h2 className="text-2xl md:text-3xl font-semibold text-gray-900 mb-2">
             Formularz zgłoszenia
           </h2>
-          <p className="text-lg text-gray-600">
+          <p className="text-sm text-gray-600 max-w-2xl mx-auto">
             Wypełnij formularz, a kurier odbierze urządzenie z Twojego adresu - za darmo!
           </p>
         </div>

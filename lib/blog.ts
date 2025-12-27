@@ -14895,9 +14895,9 @@ Jako **autoryzowany serwis Zebra** pomagamy w konfiguracji oprogramowania i rozw
   // NOWY WPIS: Aktualizacja do Android 14 - Platforma SDM660
   {
     slug: 'aktualizacja-zebra-android-14-tc52-tc72-mc3300-mc9300',
-    title: 'Android 14 dla Zebra TC52, TC72, MC3300, MC9300 – Poradnik aktualizacji',
-    excerpt: 'Masz Zebra TC52, TC57, TC72, TC77, MC3300, MC9300, EC50 lub WT6300? Ten poradnik jest dla Ciebie! Dowiedz się jak zaktualizować terminal do Android 14 krok po kroku.',
-    coverImage: '/blog/zebra-android-14-update.jpeg',
+    title: 'Jak zaktualizować Zebra TC52, TC72, MC3300, MC9300 do Android 14? Instrukcja krok po kroku',
+    excerpt: 'Kompletna instrukcja aktualizacji terminali Zebra (TC52, TC57, TC72, TC77, MC3300, MC9300, EC50, WT6300) do Android 14. Krok po kroku: LifeGuard OTA, Recovery Mode, A/B Seamless Update.',
+    coverImage: '/blog/aktualizacja_a14_1.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
@@ -14909,8 +14909,8 @@ Jako **autoryzowany serwis Zebra** pomagamy w konfiguracji oprogramowania i rozw
     category: 'poradniki',
     tags: ['android 14', 'aktualizacja', 'TC52', 'TC57', 'TC72', 'TC77', 'MC3300', 'MC9300', 'EC50', 'WT6300', 'SDM660', 'LifeGuard', 'OTA'],
     seo: {
-      metaTitle: 'Android 14 dla TC52, TC72, MC3300, MC9300 – Jak zaktualizować? [2025]',
-      metaDescription: 'Poradnik aktualizacji Android 14 dla Zebra TC52, TC57, TC72, TC77, MC3300, MC9300, EC50, EC55, WT6300, ET51, ET56. Platforma SDM660. LifeGuard OTA, Recovery Mode.',
+      metaTitle: 'Jak zaktualizować Zebra TC52, TC72, MC3300, MC9300 do Android 14? [Instrukcja 2025]',
+      metaDescription: 'Kompletna instrukcja aktualizacji Zebra TC52, TC72, MC3300, MC9300 do Android 14. Krok po kroku: LifeGuard OTA, Recovery Mode, A/B Seamless Update. Platforma SDM660.',
       keywords: [
         // Główne frazy
         'aktualizacja zebra android 14', 'zebra android 14 update', 'terminal zebra aktualizacja',
@@ -15440,9 +15440,9 @@ Jako **autoryzowany serwis Zebra** pomożemy Ci:
   // NOWY WPIS: Aktualizacja do Android 14 - Platforma QCS4490 (nowa generacja)
   {
     slug: 'aktualizacja-zebra-android-14-mc3400-mc9400-tc53e-wt5400',
-    title: 'Android 14 dla Zebra MC3400, MC9400, TC53e, WT5400, FR55 – Poradnik aktualizacji',
-    excerpt: 'Masz Zebra MC3400, MC9400, TC53e, TC58e, WT5400, WT6400 lub FR55? Ten poradnik jest dla Ciebie! Dowiedz się jak zaktualizować terminal nowej generacji do Android 14.',
-    coverImage: '/blog/zebra-android-14-4490.jpeg',
+    title: 'Jak zaktualizować Zebra MC3400, MC9400, TC53e do Android 14? Instrukcja krok po kroku',
+    excerpt: 'Kompletna instrukcja aktualizacji terminali Zebra nowej generacji (MC3400, MC9400, TC53e, WT5400, FR55) do Android 14. Krok po kroku: LifeGuard OTA, Recovery Mode, rozwiązywanie problemów.',
+    coverImage: '/blog/aktualizacja_a14_2.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
@@ -15454,8 +15454,8 @@ Jako **autoryzowany serwis Zebra** pomożemy Ci:
     category: 'poradniki',
     tags: ['android 14', 'aktualizacja', 'MC3400', 'MC3450', 'MC9400', 'MC9450', 'TC53e', 'TC58e', 'WT5400', 'WT6400', 'FR55', 'PS30', 'QCS4490', 'LifeGuard', 'OTA'],
     seo: {
-      metaTitle: 'Android 14 dla MC3400, MC9400, TC53e, WT5400, FR55 – Jak zaktualizować? [2025]',
-      metaDescription: 'Poradnik aktualizacji Android 14 dla Zebra MC3400, MC3450, MC9400, MC9450, TC53e, TC58e, WT5400, WT6400, FR55, PS30. Platforma QCS4490 (nowa generacja). Virtual A/B, LifeGuard OTA.',
+      metaTitle: 'Jak zaktualizować Zebra MC3400, MC9400, TC53e do Android 14? [Instrukcja 2025]',
+      metaDescription: 'Kompletna instrukcja aktualizacji Zebra MC3400, MC9400, TC53e, WT5400, FR55 do Android 14. Krok po kroku: LifeGuard OTA, Recovery Mode, Virtual A/B. Platforma QCS4490.',
       keywords: [
         // Główne frazy
         'aktualizacja zebra android 14', 'zebra android 14 update', 'terminal zebra aktualizacja',
@@ -16038,6 +16038,344 @@ Jako **autoryzowany serwis Zebra** pomożemy Ci:
 - Wykonać backup danych
 - Przeprowadzić aktualizację
 - Przetestować urządzenia po update
+`
+  },
+
+  // NOWY WPIS: Język ZPL - kompletny poradnik
+  {
+    slug: 'jezyk-zpl-poradnik-komendy-przyklady',
+    title: 'Język ZPL – kompletny poradnik dla początkujących [Komendy + Przykłady 2025]',
+    excerpt: 'Naucz się programować etykiety w języku ZPL! Kompletny poradnik po polsku: podstawowe komendy, kody kreskowe, czcionki, ramki i praktyczne przykłady gotowe do użycia.',
+    coverImage: '',
+    author: {
+      name: 'Zespół Serwis Zebra',
+      role: 'Certyfikowani technicy Zebra'
+    },
+    publishedAt: '2025-12-26',
+    readingTime: 20,
+    deviceType: 'drukarki',
+    subDeviceType: 'etykiet',
+    category: 'poradniki',
+    tags: ['ZPL', 'programowanie', 'etykiety', 'komendy ZPL', 'kody kreskowe', 'drukarki Zebra', 'ZPL II', 'tutorial'],
+    seo: {
+      metaTitle: 'Język ZPL – kompletny poradnik [Komendy + Przykłady 2025] | Serwis Zebra',
+      metaDescription: 'Naucz się programować etykiety w języku ZPL! Kompletny poradnik po polsku: podstawowe komendy ^XA, ^FO, ^FD, ^B3, czcionki, ramki i praktyczne przykłady.',
+      keywords: [
+        'zpl poradnik', 'zpl komendy', 'programowanie etykiet zebra', 'zpl tutorial polski',
+        'zpl przykłady', 'zpl kod kreskowy', 'zpl czcionki', 'zpl ramki',
+        'język zpl', 'zpl ii', 'zpl programming', 'zebra zpl',
+        'zpl commands', 'zpl barcode', 'zpl label', 'zpl format',
+        'jak programować etykiety zebra', 'komendy zpl po polsku', 'zpl instrukcja',
+        'zpl ^xa ^xz', 'zpl ^fo', 'zpl ^fd', 'zpl ^b3', 'zpl ^gb',
+        'drukarka zebra zpl', 'etykiety zpl', 'zpl generator', 'zpl editor'
+      ]
+    },
+    content: `
+# Język ZPL – kompletny poradnik programowania etykiet Zebra
+
+> **📋 Chcesz programować etykiety na drukarkach Zebra?** ZPL (Zebra Programming Language) pozwala tworzyć etykiety z tekstem, kodami kreskowymi i grafiką bezpośrednio z kodu. Ten poradnik nauczy Cię podstaw – od pierwszej etykiety po zaawansowane szablony.
+
+---
+
+## Co znajdziesz w tym poradniku?
+
+| Temat | Opis |
+|-------|------|
+| **Podstawy ZPL** | Struktura formatu, pierwsze komendy |
+| **Komendy tekstowe** | Czcionki, pozycjonowanie, orientacja |
+| **Kody kreskowe** | Code 39, Code 128, QR, DataMatrix |
+| **Grafika** | Ramki, linie, prostokąty |
+| **Szablony** | Zapisywanie i wywoływanie formatów |
+| **Troubleshooting** | Najczęstsze błędy i rozwiązania |
+
+---
+
+## 1. Czym jest język ZPL?
+
+**ZPL (Zebra Programming Language)** to język programowania stworzony przez Zebra Technologies do projektowania etykiet na drukarkach termicznych.
+
+### Dlaczego warto poznać ZPL?
+
+| Zaleta | Opis |
+|--------|------|
+| **Automatyzacja** | Generuj etykiety z ERP, WMS lub własnej aplikacji |
+| **Precyzja** | Pełna kontrola nad każdym elementem etykiety |
+| **Szybkość** | ZPL przetwarzany bezpośrednio przez drukarkę |
+| **Uniwersalność** | Działa na wszystkich drukarkach Zebra |
+
+> **💡 Wskazówka:** ZPL działa na drukarkach ZD420, ZD620, ZT410, ZT610, GK420, GC420 i wielu innych modelach Zebra.
+
+---
+
+## 2. Podstawowa struktura formatu ZPL
+
+Każda etykieta w ZPL ma prostą strukturę:
+
+    ^XA           ← początek formatu
+    ... komendy ...
+    ^XZ           ← koniec formatu
+
+### Twoja pierwsza etykieta
+
+    ^XA
+    ^FO50,50
+    ^ADN,36,20
+    ^FDHello World^FS
+    ^XZ
+
+### Co oznaczają te komendy?
+
+| Komenda | Znaczenie |
+|---------|-----------|
+| **^XA** | Start formatu etykiety |
+| **^FO50,50** | Pozycja pola (50 punktów od lewej, 50 od góry) |
+| **^ADN,36,20** | Czcionka D, normalna orientacja, wysokość 36, szerokość 20 |
+| **^FDHello World^FS** | Dane do wydruku + koniec pola |
+| **^XZ** | Koniec formatu etykiety |
+
+> **⚠️ WAŻNE:** Każdy format MUSI zaczynać się od ^XA i kończyć ^XZ!
+
+---
+
+## 3. Najważniejsze komendy ZPL
+
+### Komendy strukturalne
+
+| Komenda | Opis | Przykład |
+|---------|------|----------|
+| **^XA** | Początek formatu | ^XA |
+| **^XZ** | Koniec formatu | ^XZ |
+| **^FO** | Pozycja pola (x,y) | ^FO100,200 |
+| **^FD** | Dane do wydruku | ^FDTekst^FS |
+| **^FS** | Koniec pola | ^FS |
+
+### Komendy czcionek
+
+| Komenda | Opis | Przykład |
+|---------|------|----------|
+| **^A** | Wybór czcionki | ^ADN,36,20 |
+| **^A0** | Czcionka skalowalna | ^A0N,50,50 |
+| **^CF** | Domyślna czcionka | ^CFD,30,20 |
+
+**Dostępne czcionki:** A, B, C, D, E, F, G, H, 0 (skalowalna)
+
+**Orientacje:** N (0°), R (90°), I (180°), B (270°)
+
+### Komendy kodów kreskowych
+
+| Komenda | Typ kodu | Przykład |
+|---------|----------|----------|
+| **^B3** | Code 39 | ^B3N,N,100,Y,N |
+| **^BC** | Code 128 | ^BCN,100,Y,N,N |
+| **^BQ** | QR Code | ^BQN,2,5 |
+| **^BX** | Data Matrix | ^BXN,5,200 |
+| **^BE** | EAN-13 | ^BEN,100,Y,N |
+| **^B8** | EAN-8 | ^B8N,100,Y,N |
+
+### Komendy graficzne
+
+| Komenda | Opis | Przykład |
+|---------|------|----------|
+| **^GB** | Prostokąt/linia | ^GB200,100,3^FS |
+| **^GD** | Linia ukośna | ^GD100,100,3,B^FS |
+| **^GC** | Okrąg | ^GC100,3^FS |
+
+---
+
+## 4. Praktyczne przykłady ZPL
+
+### Przykład 1: Etykieta adresowa
+
+    ^XA
+    ^FO50,50^ADN,36,20^FDJan Kowalski^FS
+    ^FO50,100^ADN,36,20^FDul. Przykładowa 123^FS
+    ^FO50,150^ADN,36,20^FD00-001 Warszawa^FS
+    ^XZ
+
+### Przykład 2: Etykieta z kodem kreskowym Code 39
+
+    ^XA
+    ^FO50,50^ADN,36,20^FDProdukt ABC^FS
+    ^FO50,100^B3N,N,100,Y,N^FD123456789^FS
+    ^XZ
+
+**Parametry ^B3:**
+
+| Parametr | Wartość | Znaczenie |
+|----------|---------|-----------|
+| 1 | N | Orientacja normalna |
+| 2 | N | Bez check digit |
+| 3 | 100 | Wysokość kodu (punkty) |
+| 4 | Y | Pokaż interpretację |
+| 5 | N | Bez tekstu nad kodem |
+
+### Przykład 3: Etykieta z kodem QR
+
+    ^XA
+    ^FO50,50^ADN,36,20^FDSkanuj kod QR:^FS
+    ^FO50,100^BQN,2,5^FDQA,https://serwis-zebry.pl^FS
+    ^XZ
+
+> **💡 Wskazówka:** Prefix "QA," przed danymi w ^BQ oznacza tryb alfanumeryczny.
+
+### Przykład 4: Ramka wokół tekstu
+
+    ^XA
+    ^FO50,50^GB300,150,3^FS
+    ^FO70,80^ADN,36,20^FDZAWARTOŚĆ^FS
+    ^FO70,120^ADN,36,20^FDETYKIETY^FS
+    ^XZ
+
+**Parametry ^GB:** szerokość, wysokość, grubość linii
+
+### Przykład 5: Etykieta magazynowa
+
+    ^XA
+    ^FO30,30^GB360,200,2^FS
+    ^FO30,30^GB360,50,2^FS
+    ^FO50,40^A0N,30,30^FDLOKALIZACJA:^FS
+    ^FO200,40^A0N,30,30^FDA-15-3^FS
+    ^FO50,100^BCN,80,Y,N,N^FD123456789012^FS
+    ^XZ
+
+---
+
+## 5. Komendy kontrolne
+
+### Prędkość druku
+
+    ^PR4
+
+Ustawia prędkość 4 cale/sekundę (zakres: 2-12 zależnie od drukarki)
+
+### Ilość kopii
+
+    ^PQ3
+
+Drukuje 3 kopie etykiety
+
+### Numeracja seryjna
+
+    ^XA
+    ^FO50,50^ADN,36,20^FDNumer:^FS
+    ^FO150,50^ADN,36,20^SN001,1,Y^FS
+    ^PQ5
+    ^XZ
+
+**Wynik:** 001, 002, 003, 004, 005
+
+> **💡 Wskazówka:** ^SN001,1,Y – start od 001, inkrement 1, z zerami wiodącymi (Y)
+
+---
+
+## 6. Zapisywanie i wywoływanie szablonów
+
+### Zapisanie szablonu
+
+    ^XA
+    ^DFR:SZABLON.ZPL^FS
+    ^FO50,50^GB300,200,2^FS
+    ^FO70,70^A0N,40,40^FN1^FS
+    ^FO70,130^BCN,80,Y,N,N^FN2^FS
+    ^XZ
+
+| Komenda | Znaczenie |
+|---------|-----------|
+| **^DF** | Download Format – zapisuje szablon |
+| **^FN1, ^FN2** | Pola zmienne (Field Number) |
+
+### Wywołanie szablonu
+
+    ^XA
+    ^XFR:SZABLON.ZPL^FS
+    ^FN1^FDProdukt XYZ^FS
+    ^FN2^FD5901234123457^FS
+    ^XZ
+
+> **⚠️ WAŻNE:** Szablon wysyłasz raz, potem tylko dane – oszczędność czasu!
+
+---
+
+## 7. Rozdzielczość i jednostki
+
+| Rozdzielczość | Punktów/mm | Punktów/cal |
+|---------------|------------|-------------|
+| **200 dpi** | 8 | 200 |
+| **300 dpi** | 12 | 300 |
+| **600 dpi** | 24 | 600 |
+
+**Przelicznik dla 200 dpi:**
+- 1 cal = 200 punktów
+- 1 mm ≈ 8 punktów
+- 1 cm ≈ 80 punktów
+
+---
+
+## 8. Częste błędy i rozwiązania
+
+### Problem: Etykieta się nie drukuje
+
+| Sprawdź | Rozwiązanie |
+|---------|-------------|
+| Brak ^XA/^XZ | Dodaj ^XA na początku i ^XZ na końcu |
+| Brak ^FS | Każde pole musi kończyć się ^FS |
+| Pozycja poza etykietą | Sprawdź wartości ^FO |
+
+### Problem: Tekst za mały/duży
+
+    ^ADN,36,20   ← standardowy rozmiar
+    ^ADN,72,40   ← podwójna wielkość
+    ^ADN,18,10   ← najmniejszy
+
+### Problem: Kod kreskowy się nie skanuje
+
+| Przyczyna | Rozwiązanie |
+|-----------|-------------|
+| Za mała wysokość | Zwiększ do min. 100 punktów |
+| Brak marginesu | Dodaj 10+ punktów odstępu |
+| Złe dane | Sprawdź format dla typu kodu |
+
+---
+
+## 9. Narzędzia do pracy z ZPL
+
+| Narzędzie | Opis |
+|-----------|------|
+| **Zebra Setup Utilities** | Wysyłanie plików ZPL na drukarkę |
+| **ZebraDesigner** | Projektowanie etykiet z eksportem do ZPL |
+| **Labelary.com** | Podgląd etykiet ZPL online (bez drukarki!) |
+| **VS Code / Notatnik** | Edycja kodu ZPL |
+
+> **💡 Wskazówka:** Na **labelary.com/viewer.html** możesz testować kod ZPL bez drukarki!
+
+---
+
+## 10. Podsumowanie – ściągawka ZPL
+
+| Kategoria | Komendy |
+|-----------|---------|
+| **Struktura** | ^XA, ^XZ, ^FO, ^FD, ^FS |
+| **Czcionki** | ^A, ^A0, ^CF |
+| **Kody kreskowe** | ^B3, ^BC, ^BQ, ^BX, ^BE |
+| **Grafika** | ^GB, ^GD, ^GC |
+| **Kontrola** | ^PQ, ^PR, ^SN |
+| **Szablony** | ^DF, ^XF, ^FN |
+
+---
+
+## Potrzebujesz pomocy z ZPL?
+
+Masz problem z zaprogramowaniem etykiety? Kod nie działa jak powinien?
+
+> **📞 Zadzwoń:** +48 601 619 898
+
+> **✉️ Napisz:** Formularz kontaktowy
+
+Jako **autoryzowany serwis Zebra** pomożemy Ci:
+- Zaprojektować szablon etykiety w ZPL
+- Zdiagnozować problemy z drukiem
+- Zintegrować drukarkę z systemem ERP/WMS
+- Przeszkolić zespół z obsługi ZPL
 `
   }
 

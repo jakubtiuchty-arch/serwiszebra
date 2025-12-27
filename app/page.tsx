@@ -38,8 +38,7 @@ import {
   BookOpen,
   Download,
   Info,
-  Shield,
-  Check
+  Shield
 } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
@@ -1363,109 +1362,105 @@ export default function HomePage() {
       </section>
 
       {/* DLACZEGO MY - PORÓWNANIE */}
-      <section className="py-8 sm:py-12 md:py-16 px-3 sm:px-4 lg:px-6 bg-gradient-to-br from-gray-100 via-slate-100 to-gray-100 relative overflow-hidden">
-        {/* Subtelne animowane elementy w tle - ukryte na mobile */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none hidden sm:block">
-          <div className="absolute top-20 left-10 w-64 h-64 bg-blue-200/20 rounded-full blur-3xl animate-float" style={{ animationDuration: '20s' }} />
-          <div className="absolute bottom-20 right-10 w-80 h-80 bg-indigo-200/15 rounded-full blur-3xl animate-float" style={{ animationDuration: '25s', animationDirection: 'reverse' }} />
-          <div className="absolute top-1/2 left-1/3 w-48 h-48 bg-green-200/10 rounded-full blur-2xl animate-float" style={{ animationDuration: '18s', animationDelay: '2s' }} />
-          <div 
-            className="absolute inset-0 opacity-[0.03]"
-            style={{
-              backgroundImage: `radial-gradient(circle, #3b82f6 1px, transparent 1px)`,
-              backgroundSize: '40px 40px'
-            }}
-          />
-        </div>
-
-        <div className="max-w-5xl mx-auto relative">
-          <div className="text-center mb-6 sm:mb-10">
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-900 mb-2 sm:mb-3">
-              Serwis, jakiego jeszcze nie było
+      <section className="py-14 px-3 sm:px-4 lg:px-6 bg-gradient-to-br from-blue-50 via-indigo-50/50 to-purple-50">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl md:text-3xl font-semibold text-gray-900 mb-2">
+              Dlaczego my?
             </h2>
-            <p className="text-xs sm:text-sm md:text-base text-gray-600 max-w-xl mx-auto">
+            <p className="text-sm text-gray-600 max-w-xl mx-auto">
               Zobacz, czym różnimy się od tradycyjnych serwisów
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8 sm:gap-6">
+          <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
             {/* Zwykły serwis */}
-            <div>
-              <div className="mb-2 sm:mb-3">
-                <span className="inline-block px-2.5 sm:px-3 py-0.5 sm:py-1 bg-gray-300 rounded-full text-[10px] sm:text-xs font-medium text-gray-600">Zwykły serwis</span>
+            <div className="relative">
+              <div className="absolute -top-3 left-6 z-10">
+                <span className="inline-block px-4 py-1.5 bg-gray-200 rounded-full text-xs font-semibold text-gray-600 shadow-sm">
+                  Zwykły serwis
+                </span>
               </div>
-              <div className="bg-gray-200/80 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-gray-300 shadow-sm">
-                <ul className="space-y-2.5 sm:space-y-4">
-                  <li className="flex items-start gap-2 sm:gap-3">
-                    <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-red-100 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <X className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-red-500" />
+              <div className="bg-white rounded-2xl p-6 pt-8 border border-gray-100 shadow-xl h-full">
+                <ul className="space-y-4">
+                  <li className="flex items-start gap-3">
+                    <div className="w-6 h-6 rounded-full bg-red-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <X className="w-3.5 h-3.5 text-red-500" />
                     </div>
-                    <span className="text-xs sm:text-sm text-gray-600">Dzwonisz, czekasz na linii, tłumaczysz problem</span>
+                    <span className="text-sm text-gray-600">Dzwonisz, czekasz na linii, tłumaczysz problem</span>
                   </li>
-                  <li className="flex items-start gap-2 sm:gap-3">
-                    <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-red-100 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <X className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-red-500" />
+                  <li className="flex items-start gap-3">
+                    <div className="w-6 h-6 rounded-full bg-red-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <X className="w-3.5 h-3.5 text-red-500" />
                     </div>
-                    <span className="text-xs sm:text-sm text-gray-600">Sam dostarczasz urządzenie do serwisu</span>
+                    <span className="text-sm text-gray-600">Sam organizujesz wysyłkę do serwisu</span>
                   </li>
-                  <li className="flex items-start gap-2 sm:gap-3">
-                    <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-red-100 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <X className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-red-500" />
+                  <li className="flex items-start gap-3">
+                    <div className="w-6 h-6 rounded-full bg-red-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <X className="w-3.5 h-3.5 text-red-500" />
                     </div>
-                    <span className="text-xs sm:text-sm text-gray-600">Nie wiesz, co się dzieje z naprawą</span>
+                    <span className="text-sm text-gray-600">Nie wiesz, co się dzieje z naprawą</span>
                   </li>
-                  <li className="flex items-start gap-2 sm:gap-3">
-                    <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-red-100 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <X className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-red-500" />
+                  <li className="flex items-start gap-3">
+                    <div className="w-6 h-6 rounded-full bg-red-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <X className="w-3.5 h-3.5 text-red-500" />
                     </div>
-                    <span className="text-xs sm:text-sm text-gray-600">Wycena przez telefon, mail</span>
+                    <span className="text-sm text-gray-600">Wycena przez telefon lub mail</span>
                   </li>
-                  <li className="flex items-start gap-2 sm:gap-3">
-                    <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-red-100 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <X className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-red-500" />
+                  <li className="flex items-start gap-3">
+                    <div className="w-6 h-6 rounded-full bg-red-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <X className="w-3.5 h-3.5 text-red-500" />
                     </div>
-                    <span className="text-xs sm:text-sm text-gray-600">Płatność gotówką lub przelewem</span>
+                    <span className="text-sm text-gray-600">Płatność gotówką lub przelewem tradycyjnym</span>
                   </li>
                 </ul>
               </div>
             </div>
 
-            {/* My */}
-            <div>
-              <div className="mb-2 sm:mb-3">
-                <span className="inline-block px-2.5 sm:px-3 py-0.5 sm:py-1 bg-blue-600 rounded-full text-[10px] sm:text-xs font-semibold text-white">Nasz serwis</span>
+            {/* Nasz serwis */}
+            <div className="relative">
+              <div className="absolute -top-3 left-6 z-10">
+                <span className="inline-block px-4 py-1.5 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full text-xs font-semibold text-white shadow-lg shadow-blue-500/25">
+                  Nasz serwis
+                </span>
               </div>
-              <div className="bg-gradient-to-br from-blue-50/90 to-indigo-50/90 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-blue-200 shadow-sm">
-                <ul className="space-y-2.5 sm:space-y-4">
-                  <li className="flex items-start gap-2 sm:gap-3">
-                    <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <Check className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-green-600" />
+              <div className="relative bg-white rounded-2xl p-6 pt-8 border border-blue-200 shadow-xl h-full overflow-hidden">
+                {/* Subtle pattern */}
+                <div className="absolute inset-0 opacity-[0.03]" style={{
+                  backgroundImage: `radial-gradient(circle, #3b82f6 1px, transparent 1px)`,
+                  backgroundSize: '20px 20px'
+                }} />
+                
+                <ul className="space-y-4 relative">
+                  <li className="flex items-start gap-3">
+                    <div className="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm">
+                      <CheckCircle2 className="w-4 h-4 text-green-600" />
                     </div>
-                    <span className="text-xs sm:text-sm text-gray-700"><strong className="text-gray-900">Diagnoza AI 24/7</strong> – pomoc o każdej porze</span>
+                    <span className="text-sm text-gray-700"><strong className="text-gray-900">Diagnoza AI 24/7</strong> — pomoc o każdej porze</span>
                   </li>
-                  <li className="flex items-start gap-2 sm:gap-3">
-                    <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <Check className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-green-600" />
+                  <li className="flex items-start gap-3">
+                    <div className="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm">
+                      <CheckCircle2 className="w-4 h-4 text-green-600" />
                     </div>
-                    <span className="text-xs sm:text-sm text-gray-700"><strong className="text-gray-900">Kurier door-to-door</strong> – nie ruszasz się z biura</span>
+                    <span className="text-sm text-gray-700"><strong className="text-gray-900">Kurier door-to-door</strong> — nie ruszasz się z biura</span>
                   </li>
-                  <li className="flex items-start gap-2 sm:gap-3">
-                    <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <Check className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-green-600" />
+                  <li className="flex items-start gap-3">
+                    <div className="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm">
+                      <CheckCircle2 className="w-4 h-4 text-green-600" />
                     </div>
-                    <span className="text-xs sm:text-sm text-gray-700"><strong className="text-gray-900">Panel Klienta</strong> – status naprawy na żywo</span>
+                    <span className="text-sm text-gray-700"><strong className="text-gray-900">Panel Klienta</strong> — status naprawy na żywo</span>
                   </li>
-                  <li className="flex items-start gap-2 sm:gap-3">
-                    <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <Check className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-green-600" />
+                  <li className="flex items-start gap-3">
+                    <div className="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm">
+                      <CheckCircle2 className="w-4 h-4 text-green-600" />
                     </div>
-                    <span className="text-xs sm:text-sm text-gray-700"><strong className="text-gray-900">Czat z serwisantem</strong> – na karcie naprawy</span>
+                    <span className="text-sm text-gray-700"><strong className="text-gray-900">Czat z serwisantem</strong> — na karcie naprawy</span>
                   </li>
-                  <li className="flex items-start gap-2 sm:gap-3">
-                    <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <Check className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-green-600" />
+                  <li className="flex items-start gap-3">
+                    <div className="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm">
+                      <CheckCircle2 className="w-4 h-4 text-green-600" />
                     </div>
-                    <span className="text-xs sm:text-sm text-gray-700"><strong className="text-gray-900">Wycena online</strong> – BLIK, karta, Apple Pay</span>
+                    <span className="text-sm text-gray-700"><strong className="text-gray-900">Płatność online</strong> — BLIK, karta, Apple Pay</span>
                   </li>
                 </ul>
               </div>
