@@ -16476,9 +16476,9 @@ Zebra oferuje **dwa główne typy sterowników**:
 
 | Sterownik | Link |
 |-----------|------|
-| **ZDesigner v10 (Windows 11)** | [Pobierz z serwis-zebry.pl](/api/downloads/zdesigner-v10) |
-| **ZDesigner v5 (Legacy)** | [Pobierz z serwis-zebry.pl](/api/downloads/zdesigner-v5) |
-| **Zebra Setup Utilities** | [Pobierz z serwis-zebry.pl](/api/downloads/zebra-setup-utilities) |
+| **ZDesigner v10 (Windows 11)** | [Pobierz](/api/downloads/zdesigner-v10) |
+| **ZDesigner v5 (Legacy)** | [Pobierz](/api/downloads/zdesigner-v5) |
+| **Zebra Setup Utilities** | [Pobierz](/api/downloads/zebra-setup-utilities) |
 
 ### Kompatybilność z modelami:
 
@@ -16789,6 +16789,422 @@ Jako **autoryzowany serwis Zebra** pomożemy Ci:
 - Rozwiązać problemy ze sterownikami
 - Zaktualizować firmware
 - Naprawić drukarkę jeśli problem jest sprzętowy
+`
+  },
+
+  // NOWY WPIS: Aktualizacja firmware drukarki Zebra
+  {
+    slug: 'jak-zaktualizowac-firmware-drukarki-zebra',
+    title: 'Jak zaktualizować firmware drukarki Zebra? Instrukcja krok po kroku [2025]',
+    excerpt: 'Aktualizacja firmware drukarki Zebra: przez USB, sieć, Zebra Setup Utilities i ZDownloader. Poradnik dla ZD420, ZD620, ZT410, GK420 i innych modeli.',
+    coverImage: '',
+    author: {
+      name: 'Zespół Serwis Zebra',
+      role: 'Certyfikowani technicy Zebra'
+    },
+    publishedAt: '2025-12-27',
+    readingTime: 15,
+    deviceType: 'drukarki',
+    subDeviceType: 'etykiet',
+    category: 'poradniki',
+    tags: ['firmware', 'aktualizacja', 'update', 'Zebra Setup Utilities', 'ZDownloader', 'USB', 'sieć', 'ZD420', 'ZT410', 'oprogramowanie'],
+    seo: {
+      metaTitle: 'Jak zaktualizować firmware drukarki Zebra? [Instrukcja 2025]',
+      metaDescription: 'Aktualizacja firmware drukarki Zebra krok po kroku: USB, sieć, Zebra Setup Utilities, ZDownloader. Poradnik dla ZD420, ZD620, ZT410, GK420. Gdzie pobrać firmware?',
+      keywords: [
+        'aktualizacja firmware zebra',
+        'firmware zebra download',
+        'jak zaktualizować drukarkę zebra',
+        'zebra firmware update',
+        'zebra zd420 firmware',
+        'zebra zt410 firmware update',
+        'zebra setup utilities firmware',
+        'zdownloader zebra',
+        'aktualizacja oprogramowania zebra',
+        'zebra firmware usb',
+        'zebra firmware przez sieć',
+        'update drukarki zebra',
+        'zebra gk420 firmware',
+        'zebra zd620 firmware',
+        'jak sprawdzić wersję firmware zebra',
+        'zebra printer firmware',
+        'linkos firmware zebra',
+        'zebra firmware ftp',
+        'aktualizacja drukarki etykiet',
+        'zebra firmware downgrade'
+      ]
+    },
+    content: `
+# Jak zaktualizować firmware drukarki Zebra? Kompletna instrukcja
+
+> **📥 Chcesz zaktualizować firmware drukarki Zebra?** Aktualizacja firmware może naprawić błędy, dodać nowe funkcje i poprawić kompatybilność. Ten poradnik pokaże Ci wszystkie metody aktualizacji – od najprostszej (USB) po zaawansowane (sieć, FTP).
+
+---
+
+## Dlaczego warto aktualizować firmware?
+
+| Korzyść | Opis |
+|---------|------|
+| **Naprawa błędów** | Nowe wersje naprawiają znane problemy |
+| **Nowe funkcje** | Obsługa nowych protokołów, czcionek, kodów |
+| **Bezpieczeństwo** | Łatki zabezpieczeń sieciowych |
+| **Kompatybilność** | Lepsza współpraca z Windows 11, nowymi aplikacjami |
+| **Wydajność** | Szybszy druk, lepsza obsługa dużych zadań |
+
+> **⚠️ UWAGA:** Aktualizacja firmware **kasuje ustawienia drukarki**! Zapisz konfigurację przed aktualizacją.
+
+---
+
+## 1. Jak sprawdzić aktualną wersję firmware?
+
+### Metoda 1: Etykieta konfiguracyjna
+
+Wydrukuj etykietę konfiguracyjną z drukarki:
+
+| Model | Jak wydrukować? |
+|-------|-----------------|
+| **ZD421/ZD621** | Menu → Ustawienia → Drukuj info |
+| **ZD420/ZD620** | Przytrzymaj CANCEL przez 3 sekundy |
+| **ZD220/ZD230** | Przytrzymaj FEED przez 5 sekund po włączeniu |
+| **ZT411/ZT421** | Menu → Ustawienia → Drukuj info |
+| **ZT410/ZT420** | Menu → Ustawienia → Drukuj info |
+| **ZT610/ZT620** | Menu → Ustawienia → Drukuj info |
+| **ZT510** | Menu → Ustawienia → Drukuj info |
+| **ZD611/ZD621R** | Menu → Ustawienia → Drukuj info |
+| **GK420/GC420** | Przytrzymaj FEED podczas włączania |
+| **GT800** | Przytrzymaj FEED podczas włączania |
+| **ZQ630/ZQ520** | Menu → Printer Info |
+| **ZQ320/ZQ310** | Przytrzymaj FEED przez 3 sekundy |
+
+Na etykiecie znajdziesz:
+- **Firmware:** np. V84.20.15Z
+- **Model:** np. ZD420-203dpi ZPL
+
+### Metoda 2: Zebra Setup Utilities
+
+1. Podłącz drukarkę USB
+2. Otwórz **Zebra Setup Utilities**
+3. Wybierz drukarkę → **Open Communication With Printer**
+4. Wpisz: \`! U1 getvar "appl.name"\`
+5. Wyślij → otrzymasz wersję firmware
+
+### Metoda 3: Strona www drukarki (Ethernet)
+
+1. Wpisz IP drukarki w przeglądarce
+2. Przejdź do **Printer Home** lub **About**
+3. Znajdziesz wersję firmware
+
+---
+
+## 2. Gdzie pobrać firmware Zebra?
+
+### Oficjalne źródło: Zebra.com
+
+1. Wejdź na **zebra.com/support**
+2. Wpisz model drukarki (np. ZD420)
+3. Przejdź do **Downloads** → **Firmware**
+4. Pobierz najnowszą wersję (.zpl lub .zip)
+
+### Bezpośrednie linki:
+
+| Narzędzie | Link |
+|-----------|------|
+| **ZDownloader** | [Pobierz](/api/downloads/zdownloader) |
+| **Zebra Setup Utilities** | [Pobierz](/api/downloads/zebra-setup-utilities) |
+| **Link-OS (firmware)** | [Pobierz](/api/downloads/linkos-74) |
+
+### Jak rozpoznać plik firmware?
+
+| Rozszerzenie | Typ | Użycie |
+|--------------|-----|--------|
+| **.zpl** | Plik firmware ZPL | Można wysłać bezpośrednio na drukarkę |
+| **.nrd** | Plik binarny | Dla ZDownloader |
+| **.zip** | Archiwum | Rozpakuj przed użyciem |
+
+---
+
+## 3. Metoda 1: Aktualizacja przez USB (najprostsza)
+
+### Co potrzebujesz:
+- Pendrive USB (FAT32, max 32GB)
+- Plik firmware (.zpl)
+
+### Krok po kroku:
+
+**1. Przygotuj pendrive:**
+- Sformatuj jako **FAT32**
+- Skopiuj plik firmware do **głównego katalogu** (nie w folderze!)
+
+**2. Włóż pendrive do drukarki:**
+- Wyłącz drukarkę
+- Włóż pendrive do portu USB Host (nie USB do komputera!)
+- Włącz drukarkę
+
+**3. Aktualizacja automatyczna:**
+
+Dla **ZD420/ZD620** z wyświetlaczem:
+- Menu pojawi się automatycznie
+- Wybierz plik firmware → **Aktualizuj**
+
+Dla **ZD220/ZD230** (bez wyświetlacza):
+- Przytrzymaj FEED + CANCEL podczas włączania
+- Drukarka automatycznie wykryje i zainstaluje firmware
+
+**4. Poczekaj na restart:**
+- Diody będą migać podczas aktualizacji
+- **NIE WYŁĄCZAJ DRUKARKI!**
+- Po zakończeniu drukarka zrestartuje się automatycznie
+
+> **💡 Wskazówka:** Jeśli drukarka nie wykrywa pendrive – spróbuj innego (niektóre USB 3.0 nie działają).
+
+---
+
+## 4. Metoda 2: Zebra Setup Utilities (Windows)
+
+### Instalacja ZSU:
+
+1. Pobierz [Zebra Setup Utilities](/api/downloads/zebra-setup-utilities)
+2. Zainstaluj program
+3. Podłącz drukarkę USB lub przez sieć
+
+### Aktualizacja firmware:
+
+**Krok 1:** Uruchom Zebra Setup Utilities
+
+**Krok 2:** Wybierz drukarkę z listy
+
+**Krok 3:** Kliknij **Open Printer Tools**
+
+**Krok 4:** Przejdź do zakładki **Action**
+
+**Krok 5:** Kliknij **Send File to Printer**
+
+**Krok 6:** Wybierz plik firmware (.zpl)
+
+**Krok 7:** Kliknij **Send** i poczekaj
+
+**Krok 8:** Drukarka zrestartuje się automatycznie
+
+> **⚠️ WAŻNE:** Nie zamykaj ZSU i nie odłączaj drukarki podczas aktualizacji!
+
+---
+
+## 5. Metoda 3: ZDownloader (zaawansowana)
+
+ZDownloader to oficjalne narzędzie Zebra do aktualizacji firmware.
+
+### Instalacja:
+
+1. Pobierz [ZDownloader](/api/downloads/zdownloader)
+2. Zainstaluj program
+
+### Aktualizacja:
+
+**Krok 1:** Uruchom ZDownloader
+
+**Krok 2:** Kliknij **Auto-Detect** lub wybierz port ręcznie
+
+**Krok 3:** Po wykryciu drukarki kliknij **Configure**
+
+**Krok 4:** Przejdź do **Firmware** → **Download Firmware**
+
+**Krok 5:** Wybierz plik firmware (.nrd lub .zpl)
+
+**Krok 6:** Kliknij **Download** i poczekaj
+
+### Zalety ZDownloader:
+- Pokazuje postęp aktualizacji
+- Obsługuje wiele drukarek jednocześnie
+- Może pobrać firmware bezpośrednio z Zebra
+
+---
+
+## 6. Metoda 4: Przez sieć (Ethernet/WiFi)
+
+### Metoda 4a: FTP
+
+Drukarki Zebra mają wbudowany serwer FTP.
+
+**Krok 1:** Sprawdź IP drukarki
+
+**Krok 2:** Otwórz klienta FTP (np. FileZilla) lub Eksplorator Windows
+
+**Krok 3:** Połącz się z drukarką:
+- Host: IP drukarki (np. 192.168.1.100)
+- Użytkownik: (puste lub "anonymous")
+- Hasło: (puste)
+- Port: 21
+
+**Krok 4:** Skopiuj plik firmware do drukarki
+
+**Krok 5:** Drukarka automatycznie zainstaluje firmware i zrestartuje się
+
+### Metoda 4b: Strona www drukarki
+
+Nowsze drukarki (ZD420, ZD620, ZT410, ZT610) mają interfejs www:
+
+**Krok 1:** Wpisz IP drukarki w przeglądarce
+
+**Krok 2:** Przejdź do **Printer Settings** → **Firmware**
+
+**Krok 3:** Kliknij **Choose File** → wybierz firmware
+
+**Krok 4:** Kliknij **Upload** → poczekaj na instalację
+
+---
+
+## 7. Metoda 5: Komendy ZPL (zaawansowana)
+
+Możesz wysłać firmware bezpośrednio komendą ZPL:
+
+### Przez port szeregowy/USB:
+
+Otwórz plik firmware (.zpl) w notatniku i wyślij całą zawartość na drukarkę przez:
+- Zebra Setup Utilities → Send File
+- Polecenie COPY w CMD: \`copy /b firmware.zpl LPT1\`
+
+### Przez sieć (raw TCP):
+
+    echo -e "$(cat firmware.zpl)" | nc 192.168.1.100 9100
+
+---
+
+## 8. Co zrobić po aktualizacji?
+
+### Checklista po aktualizacji:
+
+| # | Krok | Opis |
+|---|------|------|
+| 1 | **Sprawdź wersję** | Wydrukuj etykietę konfiguracyjną |
+| 2 | **Skalibruj drukarkę** | Media → Kalibracja |
+| 3 | **Przywróć ustawienia** | Jeśli zapisałeś przed aktualizacją |
+| 4 | **Testowy wydruk** | Sprawdź jakość druku |
+| 5 | **Sprawdź sieć** | Jeśli używasz Ethernet/WiFi |
+
+### Kalibracja po aktualizacji:
+
+| Model | Jak skalibrować? |
+|-------|------------------|
+| **ZD421/ZD621** | Menu → Media → Calibrate |
+| **ZD420/ZD620** | Menu → Media → Calibrate |
+| **ZD220/ZD230** | Przytrzymaj FEED przez 2 sekundy |
+| **ZT411/ZT421** | Menu → Kalibracja → Kalibruj |
+| **ZT410/ZT420** | Menu → Kalibracja → Kalibruj |
+| **ZT610/ZT620** | Menu → Kalibracja → Kalibruj |
+| **GK420/GC420** | Przytrzymaj FEED + CANCEL przez 2 sek |
+| **ZQ630/ZQ520** | Menu → Media → Calibrate |
+
+---
+
+## 9. Rozwiązywanie problemów
+
+### Problem: Drukarka nie wykrywa pendrive
+
+| Przyczyna | Rozwiązanie |
+|-----------|-------------|
+| Zły format | Sformatuj jako FAT32 |
+| Za duży pendrive | Użyj max 32GB |
+| USB 3.0 | Spróbuj USB 2.0 |
+| Plik w folderze | Skopiuj do głównego katalogu |
+| Zły port USB | Użyj portu USB Host (nie Device) |
+
+### Problem: Aktualizacja się zawiesza
+
+| Przyczyna | Rozwiązanie |
+|-----------|-------------|
+| Uszkodzony plik | Pobierz firmware ponownie |
+| Za mało pamięci | Usuń czcionki/grafiki z drukarki |
+| Zły typ pliku | Użyj .zpl dla ZPL, .nrd dla ZDownloader |
+
+### Problem: Drukarka nie włącza się po aktualizacji
+
+**WAŻNE:** NIE PANIKUJ! Poczekaj 5-10 minut.
+
+Jeśli nadal nie działa:
+1. Odłącz zasilanie na 30 sekund
+2. Przytrzymaj FEED + CANCEL podczas włączania
+3. Drukarka wejdzie w tryb recovery
+
+> **🔧 Jeśli recovery nie pomoże:** [Zgłoś do serwisu →](/#formularz)
+
+### Problem: Utracone ustawienia
+
+To normalne! Aktualizacja firmware **resetuje ustawienia do fabrycznych**.
+
+**Rozwiązanie:**
+- Przed aktualizacją: zapisz konfigurację przez ZSU
+- Po aktualizacji: wgraj zapisaną konfigurację
+
+---
+
+## 10. FAQ – Często zadawane pytania
+
+### Czy mogę cofnąć aktualizację firmware (downgrade)?
+
+Tak, ale **nie jest to zalecane**. Proces jest taki sam – wyślij starszą wersję firmware. Uwaga: niektóre funkcje mogą przestać działać.
+
+### Jak często aktualizować firmware?
+
+Aktualizuj gdy:
+- Masz konkretny problem, który naprawia nowa wersja
+- Potrzebujesz nowej funkcji
+- Zebra wydaje aktualizację bezpieczeństwa
+
+**Nie aktualizuj** jeśli drukarka działa prawidłowo – "jeśli działa, nie ruszaj".
+
+### Czy aktualizacja kasuje zapisane etykiety?
+
+Tak! Aktualizacja kasuje:
+- Zapisane formaty (.ZPL)
+- Załadowane czcionki
+- Grafiki
+- Ustawienia sieciowe
+
+**Zawsze rób backup przed aktualizacją!**
+
+### Czy mogę aktualizować przez Bluetooth?
+
+Tak, ale jest to wolne i niezalecane. Lepiej użyj USB lub sieci.
+
+### Jaki firmware dla mojej drukarki?
+
+| Seria | Typ firmware |
+|-------|--------------|
+| ZD220, ZD230 | Link-OS Lite |
+| ZD420, ZD421, ZD620, ZD621 | Link-OS |
+| ZT410, ZT420, ZT610, ZT620 | Link-OS |
+| GK420, GC420, GT800 | Legacy (EPL/ZPL) |
+| ZQ310, ZQ520, ZQ630 | Link-OS (mobile) |
+
+---
+
+## Tabela kompatybilności firmware
+
+| Model | Aktualna seria firmware | Metody aktualizacji |
+|-------|------------------------|---------------------|
+| **ZD420/ZD421** | V84.xx.xxZ | USB, ZSU, FTP, WWW |
+| **ZD620/ZD621** | V84.xx.xxZ | USB, ZSU, FTP, WWW |
+| **ZD220/ZD230** | V84.xx.xxZ | USB, ZSU |
+| **ZT410/ZT420** | V84.xx.xxZ | USB, ZSU, FTP, WWW |
+| **ZT610/ZT620** | V84.xx.xxZ | USB, ZSU, FTP, WWW |
+| **GK420d/GK420t** | V68.xx.xxZ | ZSU, COPY |
+| **GC420d/GC420t** | V68.xx.xxZ | ZSU, COPY |
+
+---
+
+## Potrzebujesz pomocy z aktualizacją?
+
+Nie wiesz którą wersję firmware wybrać? Aktualizacja się nie udała?
+
+> **📞 Zadzwoń:** +48 601 619 898
+
+> **🔧 Zgłoś naprawę:** [Formularz serwisowy →](/#formularz)
+
+Jako **autoryzowany serwis Zebra** pomożemy Ci:
+- Dobrać odpowiednią wersję firmware
+- Wykonać aktualizację zdalnie
+- Przywrócić drukarkę po nieudanej aktualizacji
+- Skonfigurować drukarkę po update
 `
   }
 
