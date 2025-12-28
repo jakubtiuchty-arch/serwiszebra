@@ -17636,7 +17636,7 @@ Jako **autoryzowany serwis Zebra** pomożemy Ci:
     slug: 'blad-ribbon-out-drukarka-zebra-rozwiazanie',
     title: 'Błąd "Ribbon Out" w drukarce Zebra mimo załadowanej taśmy – jak naprawić? [2025]',
     excerpt: 'Drukarka Zebra pokazuje "Ribbon Out" mimo włożonej taśmy? Poradnik: czujnik ribbona, ustawienia trybu druku, czyszczenie, kalibracja. Rozwiązania dla ZD421, ZD621, ZD220, ZD230, ZT411, ZT421.',
-    coverImage: '/blog/błąd-ribbon-out-w-drukarce-zebra.jpeg',
+    coverImage: '/blog/blad-ribbon-out-drukarka-zebra.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
