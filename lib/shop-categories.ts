@@ -36,15 +36,15 @@ export const SHOP_CATEGORIES: ProductTypeCategory[] = [
         name: 'Drukarki biurkowe',
         slug: 'drukarki-biurkowe',
         models: [
-          { id: 'zd220', name: 'ZD220', slug: 'zd220', resolutions: [203] },
-          { id: 'zd230', name: 'ZD230', slug: 'zd230', resolutions: [203] },
-          { id: 'zd421', name: 'ZD421', slug: 'zd421', resolutions: [203, 300] },
-          { id: 'zd621', name: 'ZD621', slug: 'zd621', resolutions: [203, 300] },
-          { id: 'gk420d', name: 'GK420d', slug: 'gk420d', resolutions: [203] },
-          { id: 'gk420t', name: 'GK420t', slug: 'gk420t', resolutions: [203] },
-          { id: 'gx420d', name: 'GX420d', slug: 'gx420d', resolutions: [203] },
-          { id: 'gx420t', name: 'GX420t', slug: 'gx420t', resolutions: [203] },
-          { id: 'gx430t', name: 'GX430t', slug: 'gx430t', resolutions: [300] },
+          { id: 'zd220', name: 'Zebra ZD220', slug: 'zebra-zd220', resolutions: [203] },
+          { id: 'zd230', name: 'Zebra ZD230', slug: 'zebra-zd230', resolutions: [203] },
+          { id: 'zd421', name: 'Zebra ZD421', slug: 'zebra-zd421', resolutions: [203, 300] },
+          { id: 'zd621', name: 'Zebra ZD621', slug: 'zebra-zd621', resolutions: [203, 300] },
+          { id: 'gk420d', name: 'Zebra GK420d', slug: 'zebra-gk420d', resolutions: [203] },
+          { id: 'gk420t', name: 'Zebra GK420t', slug: 'zebra-gk420t', resolutions: [203] },
+          { id: 'gx420d', name: 'Zebra GX420d', slug: 'zebra-gx420d', resolutions: [203] },
+          { id: 'gx420t', name: 'Zebra GX420t', slug: 'zebra-gx420t', resolutions: [203] },
+          { id: 'gx430t', name: 'Zebra GX430t', slug: 'zebra-gx430t', resolutions: [300] },
         ]
       },
       {
@@ -52,16 +52,16 @@ export const SHOP_CATEGORIES: ProductTypeCategory[] = [
         name: 'Drukarki przemysłowe',
         slug: 'drukarki-przemyslowe',
         models: [
-          { id: 'zt230', name: 'ZT230', slug: 'zt230', resolutions: [203, 300] },
-          { id: 'zt411', name: 'ZT411', slug: 'zt411', resolutions: [203, 300, 600] },
-          { id: 'zt421', name: 'ZT421', slug: 'zt421', resolutions: [203, 300] },
-          { id: 'zt510', name: 'ZT510', slug: 'zt510', resolutions: [203, 300] },
-          { id: 'zt610', name: 'ZT610', slug: 'zt610', resolutions: [203, 300, 600] },
-          { id: 'zt620', name: 'ZT620', slug: 'zt620', resolutions: [203, 300] },
-          { id: 'zm400', name: 'ZM400', slug: 'zm400', resolutions: [203, 300, 600] },
-          { id: 'zm600', name: 'ZM600', slug: 'zm600', resolutions: [203, 300] },
-          { id: '105sl', name: '105SL Plus', slug: '105sl', resolutions: [203, 300] },
-          { id: '110xi4', name: '110Xi4', slug: '110xi4', resolutions: [203, 300, 600] },
+          { id: 'zt230', name: 'Zebra ZT230', slug: 'zebra-zt230', resolutions: [203, 300] },
+          { id: 'zt411', name: 'Zebra ZT411', slug: 'zebra-zt411', resolutions: [203, 300, 600] },
+          { id: 'zt421', name: 'Zebra ZT421', slug: 'zebra-zt421', resolutions: [203, 300] },
+          { id: 'zt510', name: 'Zebra ZT510', slug: 'zebra-zt510', resolutions: [203, 300] },
+          { id: 'zt610', name: 'Zebra ZT610', slug: 'zebra-zt610', resolutions: [203, 300, 600] },
+          { id: 'zt620', name: 'Zebra ZT620', slug: 'zebra-zt620', resolutions: [203, 300] },
+          { id: 'zm400', name: 'Zebra ZM400', slug: 'zebra-zm400', resolutions: [203, 300, 600] },
+          { id: 'zm600', name: 'Zebra ZM600', slug: 'zebra-zm600', resolutions: [203, 300] },
+          { id: '105sl', name: 'Zebra 105SL Plus', slug: 'zebra-105sl-plus', resolutions: [203, 300] },
+          { id: '110xi4', name: 'Zebra 110Xi4', slug: 'zebra-110xi4', resolutions: [203, 300, 600] },
         ]
       },
       {
@@ -69,9 +69,9 @@ export const SHOP_CATEGORIES: ProductTypeCategory[] = [
         name: 'Drukarki mobilne',
         slug: 'drukarki-mobilne',
         models: [
-          { id: 'zq520', name: 'ZQ520', slug: 'zq520', resolutions: [203] },
-          { id: 'zq630', name: 'ZQ630', slug: 'zq630', resolutions: [203] },
-          { id: 'zq320', name: 'ZQ320', slug: 'zq320', resolutions: [203] },
+          { id: 'zq520', name: 'Zebra ZQ520', slug: 'zebra-zq520', resolutions: [203] },
+          { id: 'zq630', name: 'Zebra ZQ630', slug: 'zebra-zq630', resolutions: [203] },
+          { id: 'zq320', name: 'Zebra ZQ320', slug: 'zebra-zq320', resolutions: [203] },
         ]
       }
     ]
@@ -87,9 +87,9 @@ export const SHOP_CATEGORIES: ProductTypeCategory[] = [
         name: 'Drukarki biurkowe',
         slug: 'drukarki-biurkowe',
         models: [
-          { id: 'zd421', name: 'ZD421', slug: 'zd421', resolutions: [] },
-          { id: 'zd621', name: 'ZD621', slug: 'zd621', resolutions: [] },
-          { id: 'gk420', name: 'GK420', slug: 'gk420', resolutions: [] },
+          { id: 'zd421', name: 'Zebra ZD421', slug: 'zebra-zd421', resolutions: [] },
+          { id: 'zd621', name: 'Zebra ZD621', slug: 'zebra-zd621', resolutions: [] },
+          { id: 'gk420', name: 'Zebra GK420', slug: 'zebra-gk420', resolutions: [] },
         ]
       },
       {
@@ -97,8 +97,8 @@ export const SHOP_CATEGORIES: ProductTypeCategory[] = [
         name: 'Drukarki przemysłowe',
         slug: 'drukarki-przemyslowe',
         models: [
-          { id: 'zt230', name: 'ZT230', slug: 'zt230', resolutions: [] },
-          { id: 'zt411', name: 'ZT411', slug: 'zt411', resolutions: [] },
+          { id: 'zt230', name: 'Zebra ZT230', slug: 'zebra-zt230', resolutions: [] },
+          { id: 'zt411', name: 'Zebra ZT411', slug: 'zebra-zt411', resolutions: [] },
         ]
       }
     ]
@@ -114,8 +114,8 @@ export const SHOP_CATEGORIES: ProductTypeCategory[] = [
         name: 'Drukarki mobilne',
         slug: 'drukarki-mobilne',
         models: [
-          { id: 'zq520', name: 'ZQ520', slug: 'zq520', resolutions: [] },
-          { id: 'zq630', name: 'ZQ630', slug: 'zq630', resolutions: [] },
+          { id: 'zq520', name: 'Zebra ZQ520', slug: 'zebra-zq520', resolutions: [] },
+          { id: 'zq630', name: 'Zebra ZQ630', slug: 'zebra-zq630', resolutions: [] },
         ]
       },
       {
@@ -123,9 +123,9 @@ export const SHOP_CATEGORIES: ProductTypeCategory[] = [
         name: 'Terminale',
         slug: 'terminale',
         models: [
-          { id: 'tc21', name: 'TC21/TC26', slug: 'tc21', resolutions: [] },
-          { id: 'tc52', name: 'TC52/TC57', slug: 'tc52', resolutions: [] },
-          { id: 'mc3300', name: 'MC3300', slug: 'mc3300', resolutions: [] },
+          { id: 'tc21', name: 'Zebra TC21/TC26', slug: 'zebra-tc21-tc26', resolutions: [] },
+          { id: 'tc52', name: 'Zebra TC52/TC57', slug: 'zebra-tc52-tc57', resolutions: [] },
+          { id: 'mc3300', name: 'Zebra MC3300', slug: 'zebra-mc3300', resolutions: [] },
         ]
       }
     ]

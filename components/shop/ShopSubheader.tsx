@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { ShoppingCart, ChevronRight } from 'lucide-react'
+import { ShoppingCart } from 'lucide-react'
 import { useCartStore } from '@/lib/cart-store'
 
 export default function ShopSubheader() {
@@ -12,16 +12,7 @@ export default function ShopSubheader() {
   return (
     <div className="bg-white border-b border-gray-200 shadow-sm">
       <div className="px-3 sm:px-4 lg:px-6">
-        <div className="flex items-center justify-between h-12">
-          {/* Breadcrumb */}
-          <div className="flex items-center gap-1.5 text-sm text-gray-600">
-            <Link href="/" className="hover:text-gray-900 transition-colors">
-              Start
-            </Link>
-            <ChevronRight className="w-4 h-4" />
-            <span className="text-gray-900 font-medium">Sklep</span>
-          </div>
-
+        <div className="flex items-center justify-end h-12">
           {/* Koszyk */}
           <Link 
             href="/sklep/koszyk" 
