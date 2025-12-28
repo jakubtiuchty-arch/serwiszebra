@@ -25,10 +25,12 @@ interface Product {
   price: number
   price_brutto: number
   description: string
+  description_long?: string
   stock: number
   sku: string
   compatible_models: string[]
-  image_url?: string
+  manufacturer?: string
+  image_url: string | null
 }
 
 interface ShopCategoryClientProps {

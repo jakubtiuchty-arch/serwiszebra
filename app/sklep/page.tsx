@@ -203,6 +203,7 @@ export default function SklepPage() {
       printerCategory: '',
       printerModel: '',
       resolution: '',
+      capacity: '',
       search: ''
     })
   }
