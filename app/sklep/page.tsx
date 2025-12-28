@@ -6,6 +6,7 @@ import Link from 'next/link'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import ShopSubheader from '@/components/shop/ShopSubheader'
+import ShopSidebar from '@/components/shop/ShopSidebar'
 import { useCartStore } from '@/lib/cart-store'
 import { 
   Printer, 
@@ -20,9 +21,11 @@ import {
   Phone,
   Search,
   ChevronDown,
+  ChevronRight,
   X,
   Check
 } from 'lucide-react'
+import { SHOP_CATEGORIES, getProductUrl } from '@/lib/shop-categories'
 
 interface Product {
   id: string
@@ -46,6 +49,7 @@ interface FilterState {
   printerCategory: string
   printerModel: string
   resolution: string
+  capacity: string
   search: string
 }
 
@@ -103,6 +107,13 @@ const RESOLUTIONS = [
   { value: '600', label: '600 DPI' }
 ]
 
+const CAPACITIES = [
+  { value: '2000', label: '2000 mAh' },
+  { value: '3000', label: '3000 mAh' },
+  { value: '4000', label: '4000 mAh' },
+  { value: '5000', label: '5000+ mAh' }
+]
+
 export default function SklepPage() {
   const [products, setProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(true)
@@ -112,9 +123,11 @@ export default function SklepPage() {
     printerCategory: '',
     printerModel: '',
     resolution: '',
+    capacity: '',
     search: ''
   })
   const [expandedCategories, setExpandedCategories] = useState<string[]>(['desktop'])
+  const [expandedProductTypes, setExpandedProductTypes] = useState<string[]>(['glowica'])
   const [searchInput, setSearchInput] = useState('')
   
   const addToCart = useCartStore((state) => state.addItem)
@@ -167,6 +180,14 @@ export default function SklepPage() {
       prev.includes(categoryId)
         ? prev.filter(id => id !== categoryId)
         : [...prev, categoryId]
+    )
+  }
+
+  const toggleProductType = (productTypeId: string) => {
+    setExpandedProductTypes(prev =>
+      prev.includes(productTypeId)
+        ? [] // Zamknij wszystko
+        : [productTypeId] // Otwórz tylko tę kategorię (zamyka inne)
     )
   }
 
@@ -256,7 +277,7 @@ export default function SklepPage() {
               <aside className="w-full lg:w-72 flex-shrink-0">
                 {/* Wyszukiwarka */}
                 <div className="mb-4">
-                  <label className="block text-xs font-semibold text-gray-900 mb-2">
+                  <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">
                     Szukaj produktów
                   </label>
                   <form onSubmit={handleSearchSubmit}>
@@ -267,116 +288,134 @@ export default function SklepPage() {
                         value={searchInput}
                         onChange={(e) => setSearchInput(e.target.value)}
                         placeholder="Nazwa, model, SKU..."
-                        className="w-full pl-9 pr-3 py-2.5 text-sm bg-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent shadow-sm"
+                        className="w-full pl-9 pr-3 py-2.5 text-sm bg-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       />
                     </div>
                   </form>
                 </div>
 
-                {/* Clear filters */}
-                {activeFiltersCount > 0 && (
-                  <button
-                    onClick={clearFilters}
-                    className="w-full mb-4 py-2.5 px-3 bg-white border border-gray-200 hover:bg-gray-50 text-gray-700 text-xs font-medium rounded-lg transition-colors shadow-sm flex items-center justify-center gap-1.5"
-                  >
-                    <X className="w-3.5 h-3.5" />
-                    Wyczyść filtry ({activeFiltersCount})
-                  </button>
-                )}
+                {/* Kategorie */}
+                <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">Kategorie</h3>
+                <div className="space-y-1 mb-6">
+                  {SHOP_CATEGORIES.map((productType) => {
+                    const isProductTypeExpanded = expandedProductTypes.includes(productType.id)
+                    
+                    return (
+                      <div key={productType.id}>
+                        <button
+                          onClick={() => toggleProductType(productType.id)}
+                          className="w-full text-sm font-medium text-gray-800 flex items-center justify-between gap-2 hover:text-blue-600 transition-colors py-2 px-2 rounded-lg hover:bg-gray-50"
+                        >
+                          <Link 
+                            href={`/sklep/${productType.slug}`}
+                            onClick={(e) => e.stopPropagation()}
+                            className="hover:text-blue-600"
+                          >
+                            {productType.namePlural}
+                          </Link>
+                          <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform ${isProductTypeExpanded ? 'rotate-180' : ''}`} />
+                        </button>
+                        
+                        {isProductTypeExpanded && productType.printerCategories.length > 0 && (
+                          <div className="space-y-1 ml-4 mt-1">
+                            {productType.printerCategories.map((printerCat) => {
+                              const isExpanded = expandedCategories.includes(`${productType.id}-${printerCat.id}`)
+                              
+                              return (
+                                <div key={printerCat.id}>
+                                  <button
+                                    onClick={() => toggleCategory(`${productType.id}-${printerCat.id}`)}
+                                    className="w-full flex items-center justify-between px-2 py-1.5 text-sm rounded-lg transition-colors text-gray-600 hover:text-blue-600 hover:bg-gray-50"
+                                  >
+                                    <Link 
+                                      href={`/sklep/${productType.slug}/${printerCat.slug}`}
+                                      className="hover:text-blue-600"
+                                      onClick={(e) => e.stopPropagation()}
+                                    >
+                                      {printerCat.name}
+                                    </Link>
+                                    <ChevronDown className={`w-3.5 h-3.5 text-gray-400 transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
+                                  </button>
+                                  
+                                  {isExpanded && (
+                                    <div className="ml-4 mt-1 space-y-0.5">
+                                      {printerCat.models.map((model) => (
+                                        <Link
+                                          key={model.id}
+                                          href={`/sklep/${productType.slug}/${printerCat.slug}/${model.slug}`}
+                                          className="block px-2 py-1 text-xs rounded transition-colors text-gray-500 hover:text-blue-600 hover:bg-gray-50"
+                                        >
+                                          {model.name}
+                                        </Link>
+                                      ))}
+                                    </div>
+                                  )}
+                                </div>
+                              )
+                            })}
+                          </div>
+                        )}
+                      </div>
+                    )
+                  })}
+                </div>
 
-                {/* Kategorie: Głowice → Typ drukarki → Model */}
-                <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-4 mb-4">
-                  <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                    <Printer className="w-4 h-4 text-blue-600" />
-                    Głowice drukujące
-                  </h3>
-                  
-                  <div className="space-y-2">
-                    {Object.entries(PRINTER_CATEGORIES).map(([categoryId, category]) => {
-                      const isExpanded = expandedCategories.includes(categoryId)
-                      const isActive = filters.printerCategory === categoryId
-                      
-                      return (
-                        <div key={categoryId}>
-                          <button
-                            onClick={() => {
-                              toggleCategory(categoryId)
-                              setFilters(prev => ({ 
-                                ...prev, 
-                                printerCategory: isActive ? '' : categoryId,
-                                printerModel: ''
+                {/* Filtr - zmienia się w zależności od kategorii */}
+                {(expandedProductTypes.includes('glowica') || expandedProductTypes.includes('walek')) && (
+                  <>
+                    <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">
+                      {expandedProductTypes.includes('walek') ? 'Rozdzielczość głowicy' : 'Rozdzielczość'}
+                    </h3>
+                    <div className="space-y-2 mb-6">
+                      {RESOLUTIONS.map((res) => (
+                        <label
+                          key={res.value}
+                          className="flex items-center gap-2 cursor-pointer px-2 py-1 rounded hover:bg-gray-50"
+                        >
+                          <input
+                            type="checkbox"
+                            checked={filters.resolution === res.value}
+                            onChange={(e) => {
+                              setFilters(prev => ({
+                                ...prev,
+                                resolution: e.target.checked ? res.value : ''
                               }))
                             }}
-                            className={`w-full flex items-center justify-between px-3 py-2 text-sm rounded-lg transition-colors ${
-                              isActive
-                                ? 'bg-blue-50 text-blue-700 border border-blue-200'
-                                : 'bg-gray-50 text-gray-700 hover:bg-gray-100 border border-transparent'
-                            }`}
-                          >
-                            <span className="font-medium">{category.name}</span>
-                            <ChevronDown className={`w-4 h-4 transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
-                          </button>
-                          
-                          {isExpanded && (
-                            <div className="mt-1 ml-3 space-y-1">
-                              {category.models.map((model) => {
-                                const isModelActive = filters.printerModel === model.id
-                                return (
-                                  <button
-                                    key={model.id}
-                                    onClick={() => {
-                                      setFilters(prev => ({
-                                        ...prev,
-                                        printerCategory: categoryId,
-                                        printerModel: isModelActive ? '' : model.id
-                                      }))
-                                    }}
-                                    className={`w-full flex items-center justify-between px-3 py-1.5 text-xs rounded-md transition-colors ${
-                                      isModelActive
-                                        ? 'bg-blue-600 text-white'
-                                        : 'bg-white text-gray-600 hover:bg-gray-50 border border-gray-200'
-                                    }`}
-                                  >
-                                    <span>{model.name}</span>
-                                    <span className={`text-[10px] ${isModelActive ? 'text-blue-200' : 'text-gray-400'}`}>
-                                      {model.resolutions.join('/')} DPI
-                                    </span>
-                                  </button>
-                                )
-                              })}
-                            </div>
-                          )}
-                        </div>
-                      )
-                    })}
-                  </div>
-                </div>
+                            className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                          />
+                          <span className="text-sm text-gray-700">{res.label}</span>
+                        </label>
+                      ))}
+                    </div>
+                  </>
+                )}
 
-                {/* Rozdzielczość */}
-                <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-4">
-                  <h3 className="text-sm font-semibold text-gray-900 mb-3">Rozdzielczość</h3>
-                  <div className="space-y-2">
-                    {RESOLUTIONS.map((res) => (
-                      <label
-                        key={res.value}
-                        className="flex items-center gap-2 cursor-pointer"
-                      >
-                        <input
-                          type="checkbox"
-                          checked={filters.resolution === res.value}
-                          onChange={(e) => {
-                            setFilters(prev => ({
-                              ...prev,
-                              resolution: e.target.checked ? res.value : ''
-                            }))
-                          }}
-                          className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                        />
-                        <span className="text-sm text-gray-700">{res.label}</span>
-                      </label>
-                    ))}
-                  </div>
-                </div>
+                {expandedProductTypes.includes('akumulator') && (
+                  <>
+                    <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">Pojemność</h3>
+                    <div className="space-y-2 mb-6">
+                      {CAPACITIES.map((cap) => (
+                        <label
+                          key={cap.value}
+                          className="flex items-center gap-2 cursor-pointer px-2 py-1 rounded hover:bg-gray-50"
+                        >
+                          <input
+                            type="checkbox"
+                            checked={filters.capacity === cap.value}
+                            onChange={(e) => {
+                              setFilters(prev => ({
+                                ...prev,
+                                capacity: e.target.checked ? cap.value : ''
+                              }))
+                            }}
+                            className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                          />
+                          <span className="text-sm text-gray-700">{cap.label}</span>
+                        </label>
+                      ))}
+                    </div>
+                  </>
+                )}
               </aside>
 
               {/* PRODUCTS */}
@@ -431,7 +470,7 @@ export default function SklepPage() {
                       return (
                         <Link
                           key={product.id}
-                          href={`/sklep/${product.slug}`}
+                          href={getProductUrl(product)}
                           className="bg-white rounded-lg border border-gray-200 overflow-hidden hover:border-blue-300 transition-colors group"
                         >
                           {/* Image */}
