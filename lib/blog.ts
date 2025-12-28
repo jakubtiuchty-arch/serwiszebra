@@ -112,7 +112,7 @@ export const blogPosts: BlogPost[] = [
     slug: 'drukarka-zebra-nie-drukuje-przyczyny-rozwiazania',
     title: 'Drukarka Zebra nie drukuje - 7 najczęstszych przyczyn i jak je naprawić',
     excerpt: 'Twoja drukarka Zebra przestała drukować? Poznaj 7 najczęstszych przyczyn tego problemu i dowiedz się, jak je samodzielnie zdiagnozować i naprawić.',
-    coverImage: '/blog/zebra-nie-drukuje.jpeg',
+    coverImage: '/blog/drukarka-zebra-nie-drukuje-rozwiazania.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
@@ -340,7 +340,7 @@ Skontaktuj się z nami - jako autoryzowany serwis Zebra obsługujemy również n
     slug: 'jak-wyczyscic-glowice-drukarki-zebra',
     title: 'Jak wyczyścić głowicę drukującą w drukarkach Zebra - poradnik krok po kroku',
     excerpt: 'Regularne czyszczenie głowicy drukującej wydłuża jej żywotność i poprawia jakość wydruku. Zobacz jak prawidłowo czyścić głowicę w drukarkach Zebra.',
-    coverImage: '/blog/czyszczenie-glowicy.jpeg',
+    coverImage: '/blog/czyszczenie-glowicy-drukarki-zebra.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
@@ -488,7 +488,7 @@ Nawet przy prawidłowej konserwacji głowica zużywa się. Oznaki konieczności 
     slug: 'wymiana-glowicy-drukarki-zebra-kiedy-konieczna-ile-kosztuje',
     title: 'Wymiana głowicy drukującej Zebra - kiedy jest konieczna i ile kosztuje?',
     excerpt: 'Głowica drukująca to serce każdej drukarki etykiet. Dowiedz się, kiedy wymiana jest nieunikniona, jakie są koszty i czy warto to robić samodzielnie.',
-    coverImage: '/blog/wymiana-glowicy.jpeg',
+    coverImage: '/blog/wymiana-glowicy-drukarki-zebra-koszt.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
@@ -714,7 +714,7 @@ Standardowa wymiana trwa 1-2 dni robocze od momentu dostarczenia drukarki. W try
     slug: 'zebra-gk420-czerwona-dioda-diagnostyka',
     title: 'Czerwona dioda w Zebra GK420d/GK420t - co oznacza i jak naprawić?',
     excerpt: 'Czerwona lampka w drukarce Zebra serii GK420 może oznaczać różne problemy. Poznaj wszystkie sekwencje mrugania i dowiedz się, jak je naprawić samodzielnie.',
-    coverImage: '/blog/czerwona-dioda-gk.jpeg',
+    coverImage: '/blog/czerwona-dioda-zebra-gk420-blad.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
@@ -1001,7 +1001,7 @@ Zebra oficjalnie zakończyła produkcję serii GK, ale jako autoryzowany serwis 
     slug: 'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',
     title: 'Blady wydruk w drukarce Zebra - 5 przyczyn i jak je naprawić',
     excerpt: 'Drukarka Zebra drukuje za jasno? Poznaj 5 najczęstszych przyczyn bladego wydruku i dowiedz się, jak je naprawić samodzielnie lub kiedy oddać do serwisu.',
-    coverImage: '/blog/blady-wydruk.jpeg',
+    coverImage: '/blog/blady-wydruk-drukarka-zebra-rozwiazanie.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
@@ -1321,7 +1321,7 @@ Zależy od przyczyny: czyszczenie mechanizmu 150-360 zł, wymiana wałka 150-290
     slug: 'kalibracja-drukarki-zebra-poradnik-krok-po-kroku',
     title: 'Kalibracja drukarki Zebra - kompletny poradnik krok po kroku',
     excerpt: 'Drukarka Zebra drukuje na niewłaściwym miejscu lub wypluwa puste etykiety? Prawdopodobnie potrzebuje kalibracji. Poznaj wszystkie metody kalibracji dla różnych modeli Zebra.',
-    coverImage: '/blog/kalibracja.jpeg',
+    coverImage: '/blog/kalibracja-drukarki-zebra-krok-po-kroku.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
@@ -1713,7 +1713,7 @@ Tak, ale musisz ustawić drukarkę w tryb "Continuous" i podać dokładną dług
     slug: 'zebra-terminal-nie-wlacza-sie-fastboot-boot-loop',
     title: 'Terminal Zebra nie włącza się lub zawiesza na logo - poradnik Fastboot i Boot Loop',
     excerpt: 'Twój terminal Zebra TC21, TC52, MC33 lub MC93 zawiesił się na logo, wpadł w boot loop lub utknął w trybie Fastboot? Poznaj sprawdzone metody naprawy i dowiedz się, kiedy problem wymaga serwisu.',
-    coverImage: '/blog/fastboot.jpeg',
+    coverImage: '/blog/zebra-fastboot-mode-recovery.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
@@ -2027,7 +2027,7 @@ Zależy od przyczyny: softwareowy (flash firmware): 150-250 zł, sprzętowy (pam
     slug: 'skaner-terminala-zebra-nie-dziala-diagnostyka-naprawa',
     title: 'Skaner w terminalu Zebra nie działa - diagnostyka i naprawa krok po kroku',
     excerpt: 'Skaner w Twoim terminalu Zebra TC21, MC33 lub MC93 przestał działać? Brak wiązki laserowej, przerywane skanowanie lub nie odczytuje kodów 2D? Sprawdź jak zdiagnozować i naprawić problem.',
-    coverImage: '/blog/skaner-nie-dziala.jpeg',
+    coverImage: '/blog/skaner-zebra-nie-dziala-naprawa.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
@@ -2424,7 +2424,7 @@ Przy normalnym użytkowaniu **5-7 lat**. Żywotność zależy od liczby skanowa�
     slug: 'problemy-wifi-bluetooth-terminal-zebra',
     title: 'Problemy z WiFi i Bluetooth w terminalu Zebra - rozwiązania',
     excerpt: 'Terminal Zebra nie łączy się z WiFi? Bluetooth nie paruje z drukarką lub skanerem? Poznaj sprawdzone rozwiązania problemów z łącznością bezprzewodową.',
-    coverImage: '/blog/problem-wifi.jpeg',
+    coverImage: '/blog/drukarka-zebra-problem-wifi-rozlacza.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
@@ -2849,7 +2849,7 @@ Można mieć **7 aktywnych połączeń** Bluetooth jednocześnie (ograniczenie p
     slug: 'reset-fabryczny-terminal-zebra-factory-enterprise',
     title: 'Reset do ustawień fabrycznych terminala Zebra - Factory vs Enterprise Reset',
     excerpt: 'Jak zresetować terminal Zebra TC21, MC33 lub MC93? Poznaj różnicę między Factory Reset a Enterprise Reset i dowiedz się kiedy którego użyć.',
-    coverImage: '/blog/Reset.jpeg',
+    coverImage: '/blog/reset-fabryczny-terminal-zebra.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
@@ -3165,7 +3165,7 @@ Upewnij się że wykonujesz procedurę prawidłowo: najpierw **Restart** z menu 
     slug: 'kody-bledow-terminal-zebra-led-komunikaty',
     title: 'Kody błędów terminala Zebra - LED, komunikaty i rozwiązania',
     excerpt: 'Co oznacza migająca dioda LED na terminalu Zebra? Jak interpretować komunikaty błędów? Kompletny przewodnik po kodach błędów TC21, MC33, MC93.',
-    coverImage: '/blog/kody-bledow.jpeg',
+    coverImage: '/blog/kody-bledow-drukarki-zebra-lista.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
@@ -3464,7 +3464,7 @@ Nie, to normalne. Nowsze modele (MC94) mają zielony laser - jest 7x bardziej wi
     slug: 'datawedge-konfiguracja-terminal-zebra',
     title: 'DataWedge - konfiguracja skanera w terminalach Zebra krok po kroku',
     excerpt: 'Skaner skanuje ale dane nie trafiają do aplikacji? Kompletny poradnik konfiguracji DataWedge: profile, Keystroke Output, Intent, rozwiązywanie problemów.',
-    coverImage: '/blog/datawedge.jpeg',
+    coverImage: '/blog/datawedge-zebra-konfiguracja-skanera.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
@@ -3730,7 +3730,7 @@ Minimalnie. DataWedge działa pasywnie i aktywuje się tylko podczas skanowania.
     slug: 'skaner-zebra-nie-skanuje-diagnostyka-rozwiazania',
     title: 'Skaner Zebra nie skanuje – kompletna diagnostyka i rozwiązania krok po kroku',
     excerpt: 'Twój skaner Zebra przestał odczytywać kody? Przewodnik diagnostyczny od sprawdzenia zasilania, przez czyszczenie okienka, po konfigurację symbologii. Wszystkie serie: LS, DS, LI.',
-    coverImage: '/blog/skaner-nie-skanuje.jpeg',
+    coverImage: '/blog/skaner-zebra-nie-skanuje-kodow.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
@@ -4143,7 +4143,7 @@ Zależy od usterki:
     slug: 'parowanie-skanera-bluetooth-zebra-poradnik',
     title: 'Parowanie skanera Bluetooth Zebra – kompletny poradnik krok po kroku',
     excerpt: 'Jak sparować skaner Zebra z podstawką, komputerem, tabletem lub telefonem? Szczegółowa instrukcja dla modeli LI4278, DS8178, DS6878, DS2278, DS3678. Tryby HID, SPP, SSI. Rozwiązywanie problemów.',
-    coverImage: '/blog/parowanie_bt.jpeg',
+    coverImage: '/blog/parowanie-bluetooth-skaner-zebra.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
@@ -4608,7 +4608,7 @@ Domyślnie po ~30 minutach nieaktywności skaner przechodzi w tryb uśpienia. Mo
     slug: 'konfiguracja-skanera-zebra-kodami-kreskowymi-enter-tab',
     title: 'Jak skonfigurować skaner Zebra kodami kreskowymi – Enter, Tab, sufiksy',
     excerpt: 'Gotowe kody do zeskanowania! Dodaj Enter lub Tab po skanowaniu, zmień klawiaturę na polską, włącz QR i DataMatrix. Kody działają na DS2208, DS4608, LI2208, LI4278.',
-    coverImage: '/blog/konfiguracja-kodami.jpeg',
+    coverImage: '/blog/konfiguracja-skanera-zebra-kodami.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
@@ -4796,7 +4796,7 @@ Serwisujemy wszystkie modele skanerów: DS2208, DS4608, DS8178, LI2208, LI4278, 
     slug: 'oznaczenia-skanerow-zebra-hd-sr-xr-er-kd',
     title: 'Co oznaczają HD, SR, XR, ER, KD w skanerach Zebra? Przewodnik po oznaczeniach',
     excerpt: 'Dekodujemy oznaczenia modeli skanerów Zebra. HD, SR, XR, ER, KD, HC, DP — co oznaczają te litery? Który typ optyki wybrać?',
-    coverImage: '/blog/Oznaczenia-skanerow.jpeg',
+    coverImage: '/blog/oznaczenia-skanerow-zebra-modele.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
@@ -5007,7 +5007,7 @@ Dane z oficjalnych PRG (Product Reference Guide) Zebra:
     slug: 'skaner-zebra-kody-2d-qr-datamatrix-wlaczanie-symbologii',
     title: 'Skaner Zebra nie czyta kodów QR i DataMatrix? Jak włączyć symbologie 2D',
     excerpt: 'Dlaczego skaner Zebra nie odczytuje kodów QR z telefonu, DataMatrix na lekach PLMVS? Sprawdź czy masz właściwy model (laser vs imager) i jak włączyć symbologie 2D. Kompletna tabela ustawień domyślnych.',
-    coverImage: '/blog/nie-czyta-datamatrix.jpeg',
+    coverImage: '/blog/skaner-zebra-nie-czyta-datamatrix.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
@@ -5300,7 +5300,7 @@ W 123Scan: podłącz skaner → zakładka "Symbologies" → widoczny status każ
     slug: 'porownanie-skanerow-zebra-ktory-wybrac',
     title: 'Porównanie skanerów Zebra – który model wybrać? Przewodnik 2025',
     excerpt: 'DS2208 vs DS4608 vs DS8178 vs DS3678? Kompletne porównanie skanerów Zebra: specyfikacje techniczne, zasięgi skanowania, odporność IP, ceny i zastosowania. Który skaner do magazynu, apteki, kasy, produkcji?',
-    coverImage: '/blog/jaki-skaner.jpeg',
+    coverImage: '/blog/jaki-skaner-zebra-wybrac-porownanie.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
@@ -5821,7 +5821,7 @@ Do **110 000 skanów** przy 60 skanach/minutę (oficjalne dane Zebra).
     slug: 'bateria-skanera-zebra-ladowanie-zywotnosc-problemy',
     title: 'Bateria skanera Zebra – problemy z ładowaniem, żywotność i wymiana',
     excerpt: 'Skaner Zebra nie ładuje się? Bateria szybko się rozładowuje? Kompletny poradnik: specyfikacje NiMH i Li-Ion, diagnostyka, rekondycjonowanie, wymiana krok po kroku. LI4278, DS2278, DS8178, DS3678.',
-    coverImage: '/blog/bateria-problemy.jpeg',
+    coverImage: '/blog/bateria-terminal-zebra-problemy-rozwiazania.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
@@ -6239,7 +6239,7 @@ W 123Scan: Scanner → Battery → Battery Statistics
     slug: 'naprawa-skanera-zebra-kiedy-warto-kiedy-wymienic',
     title: 'Naprawa skanera Zebra – kiedy warto naprawiać, a kiedy wymienić?',
     excerpt: 'Skaner Zebra się zepsuł? Kompletny przewodnik: koszty naprawy vs cena nowego, macierz decyzyjna dla każdego modelu (DS2208, DS4608, DS8178, DS3678, LI4278), gwarancje, modele EOL. Oficjalne dane z manuali Zebra.',
-    coverImage: '/blog/naprawa-czy-wymiana.jpeg',
+    coverImage: '/blog/naprawa-czy-wymiana-terminal-zebra.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
@@ -6576,7 +6576,7 @@ Tak, przy naprawie flotowej (5+ skanerów) oferujemy rabaty 10-20%.
     slug: 'zebra-tc58-bateria-nie-wytrzymuje-trasy-kurierskiej',
     title: 'Bateria Zebra TC58 nie wytrzymuje całej trasy kurierskiej – jak przedłużyć czas pracy',
     excerpt: 'Bateria TC58 rozładowuje się przed końcem trasy? Poznaj sprawdzone sposoby na przedłużenie czasu pracy terminala kurierskiego Zebra. Optymalizacja ustawień, wybór baterii i Hot Swap dla kurierów DHL, InPost, DPD.',
-    coverImage: '/blog/bateria-tc58.jpeg',
+    coverImage: '/blog/bateria-zebra-tc58-wymiana-zywotnosc.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
@@ -6921,7 +6921,7 @@ Tak, ale różnica jest minimalna:
     slug: 'zebra-tc58-skaner-nie-dziala-naprawa-w-trasie',
     title: 'Skaner Zebra TC58 przestał działać w trasie – szybka naprawa dla kurierów',
     excerpt: 'Skaner TC58 nie skanuje kodów w trakcie dostawy? Poznaj szybkie rozwiązania, które możesz wykonać w terenie. Reset, DataWedge, czyszczenie okienka – poradnik dla kurierów DHL, InPost, DPD.',
-    coverImage: '/blog/tc58-nie-działa.jpeg',
+    coverImage: '/blog/terminal-zebra-tc58-nie-dziala-naprawa.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
@@ -7313,7 +7313,7 @@ Problem z **DataWedge** lub konfiguracją aplikacji. Zgłoś do IT – to nie je
     slug: 'zebra-tc58-upal-mroz-praca-w-ekstremalnych-temperaturach',
     title: 'Zebra TC58 w upale i mrozie – jak chronić terminal w ekstremalnych temperaturach',
     excerpt: 'TC58 wyłącza się w gorącym samochodzie? Nie ładuje na mrozie? Praktyczny poradnik dla kurierów: limity temperatur, ochrona przed przegrzaniem i zamarzaniem, tryb rękawiczek. DHL, InPost, DPD.',
-    coverImage: '/blog/tc58-w-upale-mrozie.jpeg',
+    coverImage: '/blog/terminal-zebra-tc58-temperatura-mróz-upal.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
@@ -7592,7 +7592,7 @@ TC58 ma certyfikat **IP68** (zanurzenie 1.5m/30 min) i **IP65** (strumienie wody
     slug: 'zebra-tc58-gps-pokazuje-zla-lokalizacje-naprawa',
     title: 'GPS w Zebra TC58 pokazuje złą lokalizację – jak naprawić nawigację kurierską',
     excerpt: 'GPS w TC58 pokazuje że jesteś 200m dalej? Nawigacja prowadzi w złe miejsce? Poznaj przyczyny GPS drift i sprawdzone rozwiązania dla kurierów DHL, InPost, DPD. Konfiguracja GNSS krok po kroku.',
-    coverImage: '/blog/gps-problem.jpeg',
+    coverImage: '/blog/terminal-zebra-gps-nie-dziala-problem.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
@@ -7879,7 +7879,7 @@ GPS włączony ciągle: ~5-10% baterii dziennie. To niewiele, **nie wyłączaj G
     slug: 'zebra-tc58-siec-4g-5g-ustawienia-apn-polscy-operatorzy',
     title: 'TC58 nie łączy się z siecią 4G/5G – ustawienia APN dla Orange, Play, T-Mobile, Plus',
     excerpt: 'Terminal TC58 nie ma internetu? Brak zasięgu LTE? Gotowe ustawienia APN dla wszystkich polskich operatorów: Orange, Play, T-Mobile, Plus. Krok po kroku dla kurierów DHL, InPost, DPD.',
-    coverImage: '/blog/TC58-nie-laczy-GSM.jpeg',
+    coverImage: '/blog/terminal-zebra-tc58-gsm-lte-problem.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
@@ -8240,7 +8240,7 @@ Możliwe przyczyny:
     slug: 'spuchnieta-bateria-tablet-zebra-l10-objawy-naprawa',
     title: 'Spuchnięta bateria w tablecie Zebra L10 – objawy, przyczyny i bezpieczna wymiana',
     excerpt: 'Ekran tabletu L10 odchodzi od obudowy? Bateria się wybrzusza? To spuchnięta bateria – poważny problem w tabletach z ambulansów i służb terenowych. Poznaj objawy, przyczyny i bezpieczną procedurę wymiany.',
-    coverImage: '/blog/l10-spuchnieta-bateria.jpeg',
+    coverImage: '/blog/tablet-zebra-l10-spuchnieta-bateria.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
@@ -8571,7 +8571,7 @@ Sprawdź warunki umowy OneCare jeśli masz.
     slug: 'tablet-zebra-nie-wlacza-sie-diagnostyka-naprawa',
     title: 'Tablet Zebra nie włącza się – diagnostyka krok po kroku i naprawa',
     excerpt: 'Tablet Zebra L10, ET40, ET45 lub ET60 nie reaguje na przycisk zasilania? Czarny ekran mimo ładowania? Kompletna diagnostyka: rozładowana bateria, pętle rozruchowe, awarie sprzętowe. Co możesz zrobić sam, a kiedy do serwisu.',
-    coverImage: '/blog/tablet-nie-wlacza-sie.jpeg',
+    coverImage: '/blog/tablet-zebra-nie-wlacza-sie-naprawa.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
@@ -8901,7 +8901,7 @@ Uszkodzony firmware lub SSD. Wymaga:
     slug: 'tablet-zebra-nie-laduje-stacja-dokujaca-naprawa',
     title: 'Tablet Zebra nie ładuje się w stacji dokującej – naprawa złącza i docku',
     excerpt: 'Tablet L10 nie ładuje w docku pojazdu? Przerywane ładowanie w ambulansie? Diagnoza problemu: zużyte piny pogo, uszkodzone złącze, awaria zasilacza. Naprawa stacji dokujących dla flot ratownictwa medycznego.',
-    coverImage: '/blog/tablet-dock-naprawa.jpeg',
+    coverImage: '/blog/stacja-dokujaca-tablet-zebra-naprawa.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
@@ -9258,7 +9258,7 @@ Docki pojazdowe L10 i ET60/ET80 mają **porty przekazywania sygnału antenowego*
     slug: 'tablet-zebra-wifi-gsm-problemy-lacznosc-naprawa',
     title: 'Problemy z łącznością WiFi i GSM w tabletach Zebra – diagnostyka i naprawa',
     excerpt: 'Tablet Zebra L10 traci połączenie WiFi? ET45 nie łączy się z siecią 4G/LTE? Rozwiązania problemów z łącznością bezprzewodową dla służb ratownictwa, ambulansów i flot terenowych. Konfiguracja APN, anteny, troubleshooting.',
-    coverImage: '/blog/brak-polaczenia.jpeg',
+    coverImage: '/blog/tablet-zebra-brak-polaczenia-wifi-lte.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
@@ -9665,7 +9665,7 @@ Rozwiązania:
     slug: 'wymiana-ekranu-tablet-zebra-naprawa-dotyku',
     title: 'Wymiana ekranu w tablecie Zebra – naprawa pękniętej szybki i dotyku',
     excerpt: 'Pęknięty ekran w tablecie Zebra L10, ET40 lub ET60? Dotyk nie działa lub ma martwe strefy? Poznaj objawy wymagające wymiany LCD, koszt naprawy i dlaczego profesjonalny serwis jest niezbędny dla zachowania IP65.',
-    coverImage: '/blog/wymiana-ekranu-tablet.jpeg',
+    coverImage: '/blog/wymiana-ekranu-tablet-zebra-koszt.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
@@ -10008,7 +10008,7 @@ Tablety L10 z opcjonalnym **aktywnym digitizerem Wacom** wymagają:
     slug: 'zebra-tc21-tc26-przycisk-zasilania-skanowania-nie-dziala',
     title: 'Przycisk zasilania lub skanowania w Zebra TC21/TC26 nie działa – diagnostyka i naprawa',
     excerpt: 'TC21/TC26 nie reaguje na przycisk Power? Boczne przyciski skanowania (spust/trigger) przestały działać? Poradnik dla logistyki i magazynów – od hard reset po serwis.',
-    coverImage: '/blog/Przycisk-zasilania-tc21.jpeg',
+    coverImage: '/blog/przycisk-zasilania-zebra-tc21-naprawa.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
@@ -10315,7 +10315,7 @@ Zależy od stanu urządzenia. **Warto naprawić:** terminal <3 lata, tylko probl
     slug: 'kody-bledow-drukarki-kart-zebra-zc300-zxp',
     title: 'Kody błędów drukarek kart Zebra – kompletna lista z rozwiązaniami',
     excerpt: 'Błąd 5001, 4003 lub 7003 na drukarce kart Zebra? Kompletna baza kodów błędów ZC100, ZC300, ZC350, ZXP Series 3, 7, 8 z przyczynami i rozwiązaniami krok po kroku.',
-    coverImage: '/blog/kod-bledow-karty.jpeg',
+    coverImage: '/blog/kody-bledow-drukarka-kart-zebra.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
@@ -10774,7 +10774,7 @@ Naprawiamy: ZC100, ZC150, ZC300, ZC350, ZXP Series 1, 3, 7, 8, 9 i starsze model
     slug: 'drukarka-zebra-zacina-karty-przyczyny-rozwiazania',
     title: 'Drukarka Zebra zacina karty – przyczyny i rozwiązania krok po kroku',
     excerpt: 'Drukarka kart Zebra zgłasza Card Jam? Karty zacinają się w podajniku, flipperze lub przy wyjściu? Kompletny poradnik usuwania zacięć dla ZC100, ZC300, ZXP Series.',
-    coverImage: '/blog/karta-sie-zaciela-2.jpeg',
+    coverImage: '/blog/karta-zacina-sie-drukarka-zebra-zc.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
@@ -11093,7 +11093,7 @@ Naprawiamy wszystkie modele: ZC100, ZC150, ZC300, ZC350, ZXP Series 1, 3, 7, 8, 
     slug: 'biala-linia-na-karcie-wymiana-glowicy-zebra',
     title: 'Białe linie na karcie – czy potrzebujesz nowej głowicy drukarki Zebra?',
     excerpt: 'Pionowa biała linia na wydrukowanej karcie? To może być brud na głowicy lub uszkodzony element grzejny. Dowiedz się, kiedy wystarczy czyszczenie, a kiedy konieczna jest wymiana głowicy.',
-    coverImage: '/blog/biale-pasy-karta.jpeg',
+    coverImage: '/blog/biale-pasy-na-karcie-drukarka-zebra.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
@@ -11392,7 +11392,7 @@ Wymieniamy głowice w: ZC100, ZC150, ZC300, ZC350, ZXP Series 1, 3, 7, 8, 9, P33
     slug: 'bledy-kodowania-paska-magnetycznego-zebra',
     title: 'Błędy kodowania paska magnetycznego w drukarkach Zebra – jak je naprawić',
     excerpt: 'Error 9001, 9002 lub 9004 przy kodowaniu kart magnetycznych? Problemy z HiCo/LoCo? Kompletny poradnik rozwiązywania błędów enkodera magnetycznego w drukarkach ZC300, ZXP Series.',
-    coverImage: '/blog/błedy-kodowania-zc.jpeg',
+    coverImage: '/blog/bledy-kodowania-magnetycznego-zebra-zc.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
@@ -11749,7 +11749,7 @@ Serwisujemy enkodery w: ZC100, ZC300, ZC350, ZXP Series 1, 3, 7, 8, 9.
     slug: 'zebra-cardstudio-projektowanie-kart-poradnik',
     title: 'Zebra CardStudio – jak projektować karty identyfikacyjne krok po kroku',
     excerpt: 'Darmowy poradnik CardStudio 2.0: od instalacji, przez projektowanie pierwszej karty, po połączenie z bazą danych i kodowanie. Tutorial dla początkujących użytkowników drukarek Zebra.',
-    coverImage: '/blog/zebra-card-studio.jpeg',
+    coverImage: '/blog/zebra-cardstudio-projektowanie-kart.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
@@ -12129,7 +12129,7 @@ Serwisujemy i konfigurujemy drukarki: ZC100, ZC300, ZC350, ZXP Series 1, 3, 7, 8
     slug: 'porownanie-drukarek-kart-zebra-zc100-zc300-zxp',
     title: 'Porównanie drukarek kart Zebra – ZC100 vs ZC300 vs ZXP7 vs ZXP9',
     excerpt: 'Którą drukarkę kart Zebra wybrać? Porównanie modeli ZC100, ZC300, ZC350, ZXP7, ZXP9 – różnice, ceny, zastosowania. Pomoc w wyborze odpowiedniej drukarki dla Twojej firmy.',
-    coverImage: '/blog/porónanie-drukarek-kart.jpeg',
+    coverImage: '/blog/porownanie-drukarek-kart-zebra-zc.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
@@ -12527,7 +12527,7 @@ Serwisujemy wszystkie modele: ZC100, ZC300, ZC350, ZXP Series 1, 3, 7, 8, 9.
     slug: 'biale-linie-etykiety-drukarka-mobilna-zebra',
     title: 'Białe linie na etykietach z drukarki mobilnej Zebra – przyczyny i rozwiązania',
     excerpt: 'Pionowe białe pasy na etykietach z ZQ630, ZQ520, ZQ320? Kody kreskowe nie skanują się? Poradnik czyszczenia głowicy i diagnostyki jakości druku w drukarkach mobilnych Zebra.',
-    coverImage: '/blog/biale-linie-mobile.jpeg',
+    coverImage: '/blog/biale-linie-drukarka-mobilna-zebra.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
@@ -12881,7 +12881,7 @@ Serwisujemy wszystkie modele mobilne: ZQ630, ZQ620, ZQ610, ZQ521, ZQ520, ZQ511, 
     slug: 'falszywy-blad-media-out-drukarka-zebra-mobilna',
     title: 'Błąd "Media Out" w drukarce Zebra mimo załadowanego papieru – jak naprawić',
     excerpt: 'Drukarka Zebra ZQ630, ZQ520 lub ZQ320 zgłasza "Brak nośnika" mimo pełnej rolki? Pomija etykiety? Poradnik czyszczenia czujników i kalibracji krok po kroku.',
-    coverImage: '/blog/Błąd "Media Out".jpeg',
+    coverImage: '/blog/blad-media-out-drukarka-zebra.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
@@ -13242,7 +13242,7 @@ Serwisujemy wszystkie modele mobilne: ZQ630, ZQ620, ZQ610, ZQ521, ZQ520, ZQ511, 
     slug: 'drukarka-zebra-wifi-rozlacza-sie-offline',
     title: 'Drukarka Zebra rozłącza się z WiFi – jak naprawić problem z siecią',
     excerpt: 'Drukarka mobilna Zebra "wypada z sieci" po kilku minutach? Nie odpowiada na ping? Tryb Sleep wyłącza radio WiFi? Poradnik konfiguracji sieci i oszczędzania energii.',
-    coverImage: '/blog/Zebra "wypada z sieci".jpeg',
+    coverImage: '/blog/drukarka-zebra-rozlacza-sie-wifi.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
@@ -13601,7 +13601,7 @@ Serwisujemy wszystkie modele mobilne: ZQ630, ZQ620, ZQ610, ZQ521, ZQ520, ZQ511, 
     slug: 'problemy-bateria-drukarka-zebra-mobilna',
     title: 'Problemy z baterią w drukarce Zebra – nie ładuje, szybko się rozładowuje, błędy',
     excerpt: 'Bateria Zebra ZQ630/ZQ520 nie ładuje? Szybko się rozładowuje? Komunikat "Replace Battery"? Poradnik o PowerPrecision+, cyklach ładowania i wymianie baterii.',
-    coverImage: '/blog/Bateria-Zebra-ZQ630-ZQ520-nie-laduje.jpeg',
+    coverImage: '/blog/bateria-zebra-zq630-zq520-nie-laduje.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
@@ -13932,7 +13932,7 @@ Serwisujemy wszystkie modele mobilne: ZQ630, ZQ620, ZQ610, ZQ521, ZQ520, ZQ511, 
     slug: 'drukarka-zebra-nie-drukuje-zimno-head-cold',
     title: 'Drukarka Zebra nie drukuje w zimnych warunkach – "Head Cold" i blade wydruki',
     excerpt: 'Drukarka mobilna Zebra nie drukuje na mrozie? Komunikat "Warning Head Cold"? Blade wydruki w zimie? Poradnik dla kurierów i kierowców o pracy drukarki w niskich temperaturach.',
-    coverImage: '/blog/Drukarka mobilna Zebra nie drukuje na mrozie.jpeg',
+    coverImage: '/blog/drukarka-mobilna-zebra-nie-drukuje-mroz.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
@@ -14268,7 +14268,7 @@ Serwisujemy wszystkie modele mobilne: ZQ630, ZQ620, ZQ610, ZQ521, ZQ520, ZQ511, 
     slug: 'kontrakty-serwisowe-zebra-onecare-przewodnik',
     title: 'Kontrakty serwisowe Zebra OneCare - kompleksowy przewodnik 2025',
     excerpt: 'Poznaj program Zebra OneCare - kontrakty serwisowe dla drukarek, terminali i skanerów. Porównanie poziomów Essential, Select i Premier. Dowiedz się, jak obniżyć TCO i zwiększyć dostępność urządzeń.',
-    coverImage: '/blog/Kontrakty serwisowe Zebra OneCare.jpeg',
+    coverImage: '/blog/kontrakty-serwisowe-zebra-onecare.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Autoryzowany Partner Zebra'
@@ -14562,7 +14562,7 @@ Jako **Autoryzowany Partner Zebra** z 25-letnim doświadczeniem pomożemy Ci wyb
     slug: 'zebra-designer-3-poradnik-projektowanie-etykiet',
     title: 'Zebra Designer 3 - kompletny poradnik projektowania etykiet',
     excerpt: 'Poznaj Zebra Designer 3 - profesjonalne oprogramowanie do projektowania etykiet. Dowiedz się jak zacząć, jakie są wersje i jak tworzyć etykiety krok po kroku.',
-    coverImage: '/blog/zebra_designer_3.jpeg',
+    coverImage: '/blog/zebra-designer-3-projektowanie-etykiet.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
@@ -14897,7 +14897,7 @@ Jako **autoryzowany serwis Zebra** pomagamy w konfiguracji oprogramowania i rozw
     slug: 'aktualizacja-zebra-android-14-tc52-tc72-mc3300-mc9300',
     title: 'Jak zaktualizować Zebra TC52, TC72, MC3300, MC9300 do Android 14? Instrukcja krok po kroku',
     excerpt: 'Kompletna instrukcja aktualizacji terminali Zebra (TC52, TC57, TC72, TC77, MC3300, MC9300, EC50, WT6300) do Android 14. Krok po kroku: LifeGuard OTA, Recovery Mode, A/B Seamless Update.',
-    coverImage: '/blog/aktualizacja_a14_1.jpeg',
+    coverImage: '/blog/aktualizacja-android-14-zebra-tc52-tc72-mc3300.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
@@ -15442,7 +15442,7 @@ Jako **autoryzowany serwis Zebra** pomożemy Ci:
     slug: 'aktualizacja-zebra-android-14-mc3400-mc9400-tc53e-wt5400',
     title: 'Jak zaktualizować Zebra MC3400, MC9400, TC53e do Android 14? Instrukcja krok po kroku',
     excerpt: 'Kompletna instrukcja aktualizacji terminali Zebra nowej generacji (MC3400, MC9400, TC53e, WT5400, FR55) do Android 14. Krok po kroku: LifeGuard OTA, Recovery Mode, rozwiązywanie problemów.',
-    coverImage: '/blog/aktualizacja_a14_2.jpeg',
+    coverImage: '/blog/aktualizacja-android-14-zebra-mc3400-mc9400-tc53e.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
@@ -16046,7 +16046,7 @@ Jako **autoryzowany serwis Zebra** pomożemy Ci:
     slug: 'jezyk-zpl-poradnik-komendy-przyklady',
     title: 'Język ZPL – kompletny poradnik dla początkujących [Komendy + Przykłady 2025]',
     excerpt: 'Naucz się programować etykiety w języku ZPL! Kompletny poradnik po polsku: podstawowe komendy, kody kreskowe, czcionki, ramki i praktyczne przykłady gotowe do użycia.',
-    coverImage: '/blog/jezyk_zpl.jpeg',
+    coverImage: '/blog/jezyk-zpl-programowanie-etykiet-zebra.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
@@ -16384,7 +16384,7 @@ Jako **autoryzowany serwis Zebra** pomożemy Ci:
     slug: 'sterowniki-zebra-windows-11-instalacja-problemy',
     title: 'Jak zainstalować sterowniki Zebra w Windows 11? Rozwiązywanie problemów [2025]',
     excerpt: 'Drukarka Zebra nie działa w Windows 11? Instrukcja instalacji sterowników ZDesigner krok po kroku. Rozwiązania dla problemów z aktualizacją KB5055528, offline, brak sterownika.',
-    coverImage: '',
+    coverImage: '/blog/sterowniki-zebra-windows-11-zdesigner.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
@@ -16797,7 +16797,7 @@ Jako **autoryzowany serwis Zebra** pomożemy Ci:
     slug: 'jak-zaktualizowac-firmware-drukarki-zebra',
     title: 'Jak zaktualizować firmware drukarki Zebra? Instrukcja krok po kroku [2025]',
     excerpt: 'Aktualizacja firmware drukarki Zebra: przez USB, sieć, Zebra Setup Utilities i ZDownloader. Poradnik dla ZD420, ZD620, ZT410, GK420 i innych modeli.',
-    coverImage: '',
+    coverImage: '/blog/jak-zaktualizowac-firmware-drukarki-zebra.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
@@ -17206,6 +17206,1661 @@ Jako **autoryzowany serwis Zebra** pomożemy Ci:
 - Przywrócić drukarkę po nieudanej aktualizacji
 - Skonfigurować drukarkę po update
 `
+  },
+
+  // NOWY WPIS: Zebra Setup Utilities - kompletny poradnik
+  {
+    slug: 'zebra-setup-utilities-poradnik-konfiguracja',
+    title: 'Zebra Setup Utilities – jak skonfigurować drukarkę? Kompletny poradnik [2025]',
+    excerpt: 'Zebra Setup Utilities to kluczowe narzędzie do konfiguracji drukarek Zebra. Poradnik: instalacja, konfiguracja sieci, wysyłanie firmware, kalibracja, diagnostyka. Krok po kroku ze zdjęciami.',
+    coverImage: '/blog/zebra-setup-utilities-jak-skonfigurowac-drukarke.jpeg',
+    author: {
+      name: 'Zespół Serwis Zebra',
+      role: 'Certyfikowani technicy Zebra'
+    },
+    publishedAt: '2025-12-27',
+    readingTime: 18,
+    deviceType: 'drukarki',
+    subDeviceType: 'etykiet',
+    category: 'poradniki',
+    tags: ['Zebra Setup Utilities', 'konfiguracja', 'narzędzie', 'sieć', 'firmware', 'kalibracja', 'diagnostyka', 'ZSU', 'USB', 'Ethernet'],
+    seo: {
+      metaTitle: 'Zebra Setup Utilities – jak używać? Kompletny poradnik [2025]',
+      metaDescription: 'Zebra Setup Utilities: instalacja, konfiguracja sieci, wysyłanie firmware, kalibracja drukarki. Poradnik krok po kroku ze zdjęciami dla ZD420, ZT410, GK420.',
+      keywords: [
+        'zebra setup utilities',
+        'zebra setup utilities download',
+        'jak skonfigurować drukarkę zebra',
+        'zebra setup utilities poradnik',
+        'konfiguracja drukarki zebra',
+        'zebra setup utilities windows 11',
+        'zebra narzędzie konfiguracyjne',
+        'zebra printer setup',
+        'zebra setup utilities instalacja',
+        'zebra konfiguracja sieci',
+        'zebra ip statyczne',
+        'zebra firmware update',
+        'zebra kalibracja',
+        'zebra diagnostyka',
+        'zsu zebra',
+        'zebra printer tools',
+        'zebra setup utilities tutorial',
+        'zebra setup utilities po polsku',
+        'konfiguracja zebra zd420',
+        'konfiguracja zebra zt410'
+      ]
+    },
+    content: `
+# Zebra Setup Utilities – kompletny poradnik konfiguracji drukarki
+
+> **🔧 Zebra Setup Utilities (ZSU)** to oficjalne narzędzie Zebra do konfiguracji, diagnostyki i zarządzania drukarkami etykiet. Pozwala skonfigurować sieć, zaktualizować firmware, skalibrować drukarkę i wysyłać komendy ZPL – wszystko z jednego miejsca.
+
+---
+
+## Co możesz zrobić w Zebra Setup Utilities?
+
+| Funkcja | Opis |
+|---------|------|
+| **Konfiguracja sieci** | Ustaw IP statyczne, DHCP, WiFi |
+| **Aktualizacja firmware** | Wyślij nową wersję oprogramowania |
+| **Kalibracja** | Skalibruj czujniki mediów |
+| **Wysyłanie plików** | Wyślij etykiety ZPL, czcionki, grafiki |
+| **Diagnostyka** | Sprawdź stan drukarki, błędy |
+| **Komendy ZPL** | Wyślij komendy bezpośrednio do drukarki |
+| **Backup ustawień** | Zapisz i przywróć konfigurację |
+
+---
+
+## 1. Pobieranie i instalacja
+
+### Pobierz Zebra Setup Utilities:
+
+| Wersja | Link |
+|--------|------|
+| **Najnowsza (Windows)** | [Pobierz](/api/downloads/zebra-setup-utilities) |
+
+### Wymagania systemowe:
+
+- Windows 10 / 11 (32-bit lub 64-bit)
+- .NET Framework 4.5 lub nowszy
+- Port USB lub połączenie sieciowe
+
+### Instalacja krok po kroku:
+
+**Krok 1:** Pobierz plik instalacyjny (.zip)
+
+**Krok 2:** Wypakuj archiwum
+
+**Krok 3:** Uruchom **Setup.exe** jako administrator
+
+![Instalacja ZSU - uruchom jako administrator](/blog/zsu/zsu-install-1.png)
+
+**Krok 4:** Zaakceptuj licencję → **Next**
+
+**Krok 5:** Wybierz folder instalacji → **Install**
+
+**Krok 6:** Po zakończeniu → **Finish**
+
+> **💡 Wskazówka:** Podczas instalacji ZSU automatycznie zainstaluje sterowniki ZDesigner.
+
+---
+
+## 2. Interfejs programu – przegląd
+
+Po uruchomieniu Zebra Setup Utilities zobaczysz główne okno:
+
+![Główne okno Zebra Setup Utilities](/blog/zsu/zsu-main-window.png)
+
+### Elementy interfejsu:
+
+| Element | Opis |
+|---------|------|
+| **Lista drukarek** | Wykryte drukarki USB i sieciowe |
+| **Install New Printer** | Dodaj nową drukarkę |
+| **Configure Printer** | Konfiguruj wybraną drukarkę |
+| **Open Printer Tools** | Zaawansowane narzędzia |
+| **Refresh** | Odśwież listę drukarek |
+
+---
+
+## 3. Dodawanie nowej drukarki
+
+### Metoda 1: Automatyczne wykrywanie (USB)
+
+1. Podłącz drukarkę kablem USB
+2. Kliknij **Refresh** w ZSU
+3. Drukarka pojawi się na liście
+
+![Drukarka wykryta przez USB](/blog/zsu/zsu-usb-detect.png)
+
+### Metoda 2: Dodawanie ręczne (sieć)
+
+1. Kliknij **Install New Printer**
+2. Wybierz **Install Printer**
+3. Wybierz port:
+   - **USB** – dla połączenia USB
+   - **TCP/IP** – dla połączenia sieciowego
+4. Dla TCP/IP wpisz **adres IP drukarki**
+5. Wybierz model drukarki z listy
+6. Kliknij **Next** → **Finish**
+
+![Dodawanie drukarki sieciowej](/blog/zsu/zsu-add-network.png)
+
+---
+
+## 4. Konfiguracja sieci (IP statyczne)
+
+### Dlaczego IP statyczne?
+
+Drukarki z DHCP mogą zmieniać IP po restarcie, co powoduje problemy z drukowaniem. **IP statyczne = stabilne połączenie.**
+
+### Krok po kroku:
+
+**Krok 1:** Wybierz drukarkę z listy
+
+**Krok 2:** Kliknij **Configure Printer Settings**
+
+**Krok 3:** Przejdź do zakładki **Network** (lub **Connectivity**)
+
+![Zakładka Network w ZSU](/blog/zsu/zsu-network-tab.png)
+
+**Krok 4:** Ustaw parametry:
+
+| Parametr | Przykład | Opis |
+|----------|----------|------|
+| **IP Address** | 192.168.1.100 | Adres IP drukarki |
+| **Subnet Mask** | 255.255.255.0 | Maska podsieci |
+| **Default Gateway** | 192.168.1.1 | Brama domyślna (router) |
+| **DHCP** | OFF | Wyłącz DHCP dla IP statycznego |
+
+**Krok 5:** Kliknij **Apply** lub **Send to Printer**
+
+**Krok 6:** Drukarka zrestartuje się z nowym IP
+
+> **⚠️ WAŻNE:** Po zmianie IP musisz ponownie dodać drukarkę w ZSU z nowym adresem!
+
+---
+
+## 5. Wysyłanie plików na drukarkę
+
+### Wysyłanie etykiety ZPL:
+
+**Krok 1:** Wybierz drukarkę → **Open Printer Tools**
+
+**Krok 2:** Przejdź do zakładki **Action**
+
+**Krok 3:** Kliknij **Send File to Printer**
+
+![Wysyłanie pliku w ZSU](/blog/zsu/zsu-send-file.png)
+
+**Krok 4:** Wybierz plik (.zpl, .txt, .prn)
+
+**Krok 5:** Kliknij **Send**
+
+### Co można wysyłać?
+
+| Typ pliku | Rozszerzenie | Zastosowanie |
+|-----------|--------------|--------------|
+| **Etykieta ZPL** | .zpl, .txt | Drukowanie etykiet |
+| **Firmware** | .zpl, .nrd | Aktualizacja oprogramowania |
+| **Czcionki** | .ttf, .fnt | Dodawanie czcionek |
+| **Grafiki** | .grf, .pcx | Loga, obrazki |
+| **Konfiguracja** | .zpl | Przywracanie ustawień |
+
+---
+
+## 6. Kalibracja drukarki
+
+### Kiedy kalibrować?
+
+- Po zmianie rozmiaru etykiet
+- Po zmianie typu mediów (ciągłe/z przerwami/czarne znaczniki)
+- Gdy drukarka nie wykrywa etykiet
+- Po aktualizacji firmware
+
+### Kalibracja przez ZSU:
+
+**Krok 1:** Wybierz drukarkę → **Open Printer Tools**
+
+**Krok 2:** Przejdź do zakładki **Action**
+
+**Krok 3:** Kliknij **Calibrate Media**
+
+![Kalibracja w ZSU](/blog/zsu/zsu-calibrate.png)
+
+**Krok 4:** Wybierz typ kalibracji:
+
+| Opcja | Kiedy używać? |
+|-------|---------------|
+| **Auto Calibrate** | Standardowa kalibracja |
+| **Calibrate for Label Length** | Gdy znasz długość etykiety |
+| **Calibrate for Gap/Notch** | Etykiety z przerwami |
+| **Calibrate for Black Mark** | Etykiety z czarnym znacznikiem |
+
+**Krok 5:** Kliknij **Send** → drukarka przepuści kilka etykiet
+
+---
+
+## 7. Diagnostyka i status drukarki
+
+### Sprawdzanie statusu:
+
+**Krok 1:** Wybierz drukarkę → **Open Printer Tools**
+
+**Krok 2:** Przejdź do zakładki **Status**
+
+![Status drukarki w ZSU](/blog/zsu/zsu-status.png)
+
+### Informacje o statusie:
+
+| Parametr | Opis |
+|----------|------|
+| **Printer Status** | Ready, Paused, Error |
+| **Labels Remaining** | Liczba etykiet (jeśli zliczanie włączone) |
+| **Print Head Open** | Czy głowica jest zamknięta |
+| **Ribbon Out** | Czy jest taśma (dla termotransferowych) |
+| **Paper Out** | Czy są etykiety |
+
+### Odczyt konfiguracji:
+
+**Krok 1:** Zakładka **Action** → **Get Printer Configuration**
+
+Otrzymasz pełną konfigurację drukarki w formacie tekstowym.
+
+---
+
+## 8. Wysyłanie komend ZPL
+
+### Direct Communication:
+
+**Krok 1:** Wybierz drukarkę → **Open Printer Tools**
+
+**Krok 2:** Przejdź do zakładki **Direct Communication**
+
+![Direct Communication w ZSU](/blog/zsu/zsu-direct-comm.png)
+
+**Krok 3:** Wpisz komendę ZPL w polu tekstowym
+
+**Krok 4:** Kliknij **Send to Printer**
+
+### Przydatne komendy ZPL:
+
+| Komenda | Działanie |
+|---------|-----------|
+| \`~WC\` | Wydrukuj etykietę konfiguracyjną |
+| \`^XA^JUS^XZ\` | Zapisz ustawienia do pamięci |
+| \`^XA^JUN^XZ\` | Przywróć ustawienia fabryczne |
+| \`~HD\` | Wyświetl diagnostic info |
+| \`! U1 getvar "appl.name"\` | Sprawdź wersję firmware |
+| \`! U1 getvar "ip.addr"\` | Sprawdź IP drukarki |
+
+### Odbieranie odpowiedzi:
+
+1. Zaznacz **Enable Bi-directional Communication**
+2. Wyślij komendę
+3. Odpowiedź pojawi się w polu poniżej
+
+---
+
+## 9. Backup i przywracanie konfiguracji
+
+### Zapisanie konfiguracji:
+
+**Krok 1:** Zakładka **Action** → **Store/Restore**
+
+**Krok 2:** Wybierz **Store to File**
+
+**Krok 3:** Zapisz plik .zpl na dysku
+
+![Backup konfiguracji](/blog/zsu/zsu-backup.png)
+
+### Przywracanie konfiguracji:
+
+**Krok 1:** Zakładka **Action** → **Send File to Printer**
+
+**Krok 2:** Wybierz zapisany plik konfiguracji
+
+**Krok 3:** Kliknij **Send**
+
+> **💡 Wskazówka:** Rób backup przed każdą aktualizacją firmware!
+
+---
+
+## 10. Aktualizacja firmware przez ZSU
+
+### Krok po kroku:
+
+**Krok 1:** Pobierz firmware z Zebra.com
+
+**Krok 2:** Wybierz drukarkę → **Open Printer Tools**
+
+**Krok 3:** Zakładka **Action** → **Send File to Printer**
+
+**Krok 4:** Wybierz plik firmware (.zpl)
+
+**Krok 5:** Kliknij **Send**
+
+**Krok 6:** **NIE WYŁĄCZAJ DRUKARKI!** Poczekaj na restart.
+
+![Aktualizacja firmware przez ZSU](/blog/zsu/zsu-firmware.png)
+
+> **⚠️ UWAGA:** Aktualizacja firmware kasuje ustawienia! Zrób backup przed aktualizacją.
+
+---
+
+## 11. Rozwiązywanie problemów
+
+### Problem: ZSU nie widzi drukarki USB
+
+| Przyczyna | Rozwiązanie |
+|-----------|-------------|
+| Brak sterownika | Zainstaluj ZDesigner v10 |
+| Zły kabel USB | Spróbuj innego kabla |
+| Port USB | Spróbuj innego portu (USB 2.0) |
+| Drukarka wyłączona | Włącz drukarkę |
+
+### Problem: Nie można połączyć się przez sieć
+
+| Przyczyna | Rozwiązanie |
+|-----------|-------------|
+| Zły IP | Sprawdź IP na etykiecie konfiguracyjnej |
+| Firewall | Odblokuj port 9100 |
+| Inna podsieć | Komputer i drukarka muszą być w tej samej sieci |
+| Drukarka offline | Sprawdź kabel sieciowy |
+
+### Problem: Wysyłanie pliku się nie udaje
+
+| Przyczyna | Rozwiązanie |
+|-----------|-------------|
+| Plik uszkodzony | Pobierz ponownie |
+| Za duży plik | Podziel na mniejsze części |
+| Drukarka zajęta | Anuluj bieżące zadanie |
+| Brak pamięci | Usuń stare pliki z drukarki |
+
+---
+
+## 12. Skróty i triki
+
+### Szybkie komendy:
+
+| Akcja | Jak zrobić? |
+|-------|-------------|
+| **Szybki test druku** | Direct Comm → \`~WC\` → Send |
+| **Reset do fabrycznych** | Direct Comm → \`^XA^JUN^XZ\` → Send |
+| **Sprawdź IP** | Direct Comm → \`! U1 getvar "ip.addr"\` |
+| **Sprawdź firmware** | Direct Comm → \`! U1 getvar "appl.name"\` |
+
+### Przydatne skróty klawiszowe:
+
+| Skrót | Akcja |
+|-------|-------|
+| **F5** | Odśwież listę drukarek |
+| **Ctrl+O** | Otwórz Printer Tools |
+| **Ctrl+S** | Wyślij plik |
+
+---
+
+## Tabela kompatybilności
+
+| Model drukarki | USB | Ethernet | WiFi | Bluetooth |
+|----------------|-----|----------|------|-----------|
+| **ZD421/ZD621** | ✅ | ✅ | ✅ (opcja) | ✅ (opcja) |
+| **ZD420/ZD620** | ✅ | ✅ | ✅ (opcja) | ✅ (opcja) |
+| **ZD220/ZD230** | ✅ | ❌ | ❌ | ❌ |
+| **ZT411/ZT421** | ✅ | ✅ | ✅ (opcja) | ✅ (opcja) |
+| **ZT410/ZT420** | ✅ | ✅ | ✅ (opcja) | ✅ (opcja) |
+| **ZT610/ZT620** | ✅ | ✅ | ✅ (opcja) | ❌ |
+| **GK420d/GK420t** | ✅ | ✅ (opcja) | ❌ | ❌ |
+| **GC420d/GC420t** | ✅ | ❌ | ❌ | ❌ |
+
+---
+
+## Potrzebujesz pomocy?
+
+Nie możesz skonfigurować drukarki? ZSU nie łączy się?
+
+> **📞 Zadzwoń:** +48 601 619 898
+
+> **🔧 Zgłoś naprawę:** [Formularz serwisowy →](/#formularz)
+
+Jako **autoryzowany serwis Zebra** pomożemy Ci:
+- Skonfigurować drukarkę zdalnie
+- Rozwiązać problemy z połączeniem
+- Zaktualizować firmware
+- Przeszkolić z obsługi ZSU
+`
+  },
+
+  // NOWY WPIS: Błąd Ribbon Out mimo załadowanej taśmy
+  {
+    slug: 'blad-ribbon-out-drukarka-zebra-rozwiazanie',
+    title: 'Błąd "Ribbon Out" w drukarce Zebra mimo załadowanej taśmy – jak naprawić? [2025]',
+    excerpt: 'Drukarka Zebra pokazuje "Ribbon Out" mimo włożonej taśmy? Poradnik: czujnik ribbona, ustawienia trybu druku, czyszczenie, kalibracja. Rozwiązania dla ZD421, ZD621, ZD220, ZD230, ZT411, ZT421.',
+    coverImage: '/blog/błąd-ribbon-out-w-drukarce-zebra.jpeg',
+    author: {
+      name: 'Zespół Serwis Zebra',
+      role: 'Certyfikowani technicy Zebra'
+    },
+    publishedAt: '2025-12-27',
+    readingTime: 10,
+    deviceType: 'drukarki',
+    subDeviceType: 'etykiet',
+    category: 'troubleshooting',
+    tags: ['Ribbon Out', 'taśma', 'ribbon', 'błąd', 'czujnik', 'termotransfer', 'ZD421', 'ZD621', 'ZD220', 'ZD230', 'ZT411', 'ZT421', 'troubleshooting'],
+    seo: {
+      metaTitle: 'Błąd "Ribbon Out" w drukarce Zebra mimo taśmy – jak naprawić? [2025]',
+      metaDescription: 'Drukarka Zebra pokazuje Ribbon Out mimo włożonej taśmy? Sprawdź czujnik ribbona, tryb druku, kierunek nawoju. Poradnik dla ZD421, ZD621, ZD220, ZD230, ZT411.',
+      keywords: [
+        'ribbon out zebra',
+        'drukarka zebra ribbon out',
+        'zebra ribbon out error',
+        'błąd ribbon out',
+        'zebra nie wykrywa taśmy',
+        'czujnik ribbona zebra',
+        'zebra taśma termotransferowa',
+        'zd421 ribbon out',
+        'zd621 ribbon out',
+        'zd220 ribbon out',
+        'zd230 ribbon out',
+        'zt411 ribbon out',
+        'zt421 ribbon out',
+        'zt610 ribbon out',
+        'zebra ribbon sensor',
+        'drukarka zebra błąd taśmy',
+        'ribbon out mimo taśmy',
+        'zebra thermal transfer ribbon',
+        'naprawa czujnika ribbona',
+        'zebra ribbon low',
+        'ribbon installed incorrectly',
+        'zebra wax ribbon',
+        'zebra resin ribbon'
+      ]
+    },
+    content: `
+**Błąd "Ribbon Out" w drukarce Zebra mimo załadowanej taśmy – kompletny poradnik**
+
+> **⚠️ Drukarka Zebra pokazuje "Ribbon Out" mimo włożonej taśmy?** To jeden z najczęstszych problemów w drukarkach termotransferowych Zebra ZD421, ZD621, ZD220, ZD230, ZT411, ZT421, ZT610. Przyczyn może być kilka – od złego trybu druku, przez brudny czujnik, po uszkodzony ribbon. Ten poradnik pomoże Ci zdiagnozować i naprawić problem.
+
+---
+
+**Możliwe przyczyny błędu "Ribbon Out"**
+
+| Przyczyna | Prawdopodobieństwo | Łatwość naprawy |
+|-----------|-------------------|-----------------|
+| **Zły tryb druku (Direct Thermal)** | ⭐⭐⭐⭐⭐ | Łatwa |
+| **Taśma założona odwrotnie** | ⭐⭐⭐⭐ | Łatwa |
+| **Brudny czujnik ribbona** | ⭐⭐⭐⭐ | Łatwa |
+| **Taśma nie na rolce odbiorczej** | ⭐⭐⭐ | Łatwa |
+| **Zły typ taśmy** | ⭐⭐ | Średnia |
+| **Uszkodzony czujnik** | ⭐ | Wymaga serwisu |
+
+---
+
+**1. Sprawdź tryb druku (najczęstsza przyczyna!)**
+
+*Problem:*
+
+Drukarka jest ustawiona na **Direct Thermal** (druk termiczny bezpośredni), a powinna być na **Thermal Transfer** (termotransfer).
+
+W trybie Direct Thermal drukarka **nie szuka taśmy** – drukuje bezpośrednio na etykietach termicznych. Jeśli włożysz taśmę do drukarki w tym trybie, może pokazać "Ribbon Out" lub po prostu ją ignorować.
+
+*Jak sprawdzić tryb druku?*
+
+**Metoda 1: Etykieta konfiguracyjna**
+
+Wydrukuj etykietę konfiguracyjną i znajdź linię:
+- **PRINT METHOD: THERMAL-TRANS** ✅ (termotransfer)
+- **PRINT METHOD: DIRECT-THERMAL** ❌ (druk bezpośredni)
+
+**Metoda 2: Wyświetlacz (ZD621/ZT411/ZT421/ZT610)**
+
+Menu → Print → Print Method
+
+*Jak zmienić na Thermal Transfer?*
+
+**ZD621 (z wyświetlaczem):**
+1. Menu → **Print** → **Print Method**
+2. Wybierz **Thermal Transfer**
+3. Zapisz
+
+**ZT411/ZT421/ZT610/ZT620:**
+1. Menu → **Print** → **Print Method**
+2. Wybierz **Thermal Trans**
+
+**ZD220/ZD230/ZD421 (bez wyświetlacza - przez ZPL):**
+
+Wyślij komendę ZPL:
+
+    ^XA^MTT^JUS^XZ
+
+Gdzie:
+- **^MTT** = Media Type Thermal Transfer
+- **^JUS** = Zapisz ustawienia
+
+**Przez Zebra Setup Utilities:**
+1. Otwórz ZSU → wybierz drukarkę
+2. **Configure Printer Settings** → **Media**
+3. **Print Method** → **Thermal Transfer**
+4. **Apply**
+
+> **💡 Wskazówka:** Po zmianie trybu zrób **kalibrację** drukarki!
+
+---
+
+**2. Sprawdź kierunek założenia taśmy**
+
+*Problem:*
+
+Taśma (ribbon) jest założona **odwrotnie** – stroną barwiącą do góry zamiast do dołu.
+
+*Jak sprawdzić?*
+
+**Test naklejki:**
+1. Odwiń kawałek taśmy
+2. Przyklej kawałek taśmy klejącej (np. scotch) do **zewnętrznej strony**
+3. Odklej
+4. Jeśli na taśmie klejącej **jest barwnik** – ta strona powinna być **skierowana do etykiety**
+
+*Prawidłowe założenie:*
+
+| Model | Strona barwiąca |
+|-------|-----------------|
+| **ZD421t/ZD621t** | W DÓŁ (do etykiety) |
+| **ZD220/ZD230** | W DÓŁ (do etykiety) |
+| **ZT411/ZT421/ZT610/ZT620** | W DÓŁ (do etykiety) |
+| **ZT230/ZT510** | W DÓŁ (do etykiety) |
+
+*Typy nawoju taśmy:*
+
+| Typ | Opis | Zastosowanie |
+|-----|------|--------------|
+| **CSI (Coated Side In)** | Barwnik wewnątrz rolki | Większość drukarek Zebra |
+| **CSO (Coated Side Out)** | Barwnik na zewnątrz | Niektóre starsze modele |
+
+> **⚠️ WAŻNE:** Sprawdź specyfikację swojej drukarki – większość Zebra wymaga **CSI** (barwnik wewnątrz).
+
+---
+
+**3. Wyczyść czujnik ribbona**
+
+*Gdzie jest czujnik?*
+
+Czujnik ribbona znajduje się zazwyczaj:
+- **ZD421t/ZD621t/ZD220/ZD230:** Pod mechanizmem głowicy, z przodu
+- **ZT411/ZT421/ZT610/ZT620:** Przy wałku napędowym taśmy
+- **ZT230/ZT510:** Pod pokrywą, obok głowicy
+
+*Jak wyczyścić?*
+
+**Krok 1:** Wyłącz drukarkę i odłącz zasilanie
+
+**Krok 2:** Otwórz pokrywę i wyjmij taśmę
+
+**Krok 3:** Zlokalizuj czujnik (mały element optyczny)
+
+**Krok 4:** Przetrzyj czujnik:
+- **Suchą** ściereczką bezpyłową
+- Lub **alkoholem izopropylowym (IPA 99%)** na patyczku
+
+**Krok 5:** Poczekaj 2 minuty na wyschnięcie
+
+**Krok 6:** Załóż taśmę i włącz drukarkę
+
+> **💡 Wskazówka:** Czyść czujnik ribbona przy każdej wymianie taśmy – kurz i resztki barwnika mogą zakłócać odczyt.
+
+---
+
+**4. Sprawdź czy taśma jest na rolce odbiorczej**
+
+*Problem:*
+
+Taśma jest włożona, ale **nie jest nawinięta na rolkę odbiorczą** (take-up spindle).
+
+*Rozwiązanie:*
+
+1. Odwiń ~20 cm taśmy z rolki
+2. Przełóż przez głowicę drukującą
+3. **Nawiń na rolkę odbiorczą** (2-3 obroty)
+4. Upewnij się, że taśma jest naprężona
+5. Zamknij pokrywę
+
+### Schemat prowadzenia taśmy:
+
+    Rolka z taśmą (Supply)
+           ↓
+    [Przez głowicę drukującą]
+           ↓
+    Rolka odbiorcza (Take-up)
+
+---
+
+**5. Sprawdź typ i szerokość taśmy**
+
+*Problem:*
+
+Taśma jest **za wąska** lub **niekompatybilna** z drukarką.
+
+*Minimalna szerokość taśmy:*
+
+| Model | Min. szerokość taśmy |
+|-------|---------------------|
+| **ZD421t/ZD621t** | Min. 33 mm |
+| **ZD220/ZD230** | Min. 33 mm |
+| **ZT411/ZT421** | Min. 25 mm (zależnie od czujnika) |
+| **ZT610/ZT620** | Min. 25 mm |
+| **ZT230/ZT510** | Min. 25 mm |
+
+*Typy taśmy:*
+
+| Typ | Zastosowanie | Trwałość |
+|-----|--------------|----------|
+| **Wax** | Papier matowy, zwykłe etykiety | Niska |
+| **Wax/Resin** | Papier powlekany, syntetyczne | Średnia |
+| **Resin** | Folia, plastik, wysoka odporność | Wysoka |
+
+> **⚠️ UWAGA:** Użycie zbyt wąskiej taśmy może powodować błąd "Ribbon Out" – czujnik nie wykrywa taśmy.
+
+---
+
+**6. Kalibracja czujnika ribbona**
+
+*Kiedy kalibrować?*
+
+- Po zmianie typu taśmy
+- Po czyszczeniu czujnika
+- Gdy błąd "Ribbon Out" pojawia się sporadycznie
+
+*Jak skalibrować?*
+
+**ZD621 (z wyświetlaczem):**
+1. Menu → **Media** → **Calibrate**
+2. Drukarka przepuści kilka etykiet i skalibruje czujniki
+
+**ZD220/ZD230/ZD421 (bez wyświetlacza):**
+Przytrzymaj przycisk FEED przez 2 sekundy po włączeniu lub wyślij komendę: ~JC
+
+**ZT411/ZT421/ZT610/ZT620:**
+1. Menu → **Calibrate** → **Start**
+
+**Komenda ZPL (uniwersalna):**
+
+    ~JC
+
+Ta komenda uruchamia pełną kalibrację czujników.
+
+---
+
+**7. Reset do ustawień fabrycznych**
+
+*Kiedy resetować?*
+
+Gdy inne metody nie pomagają – reset przywraca domyślne ustawienia czujników.
+
+*Jak zresetować?*
+
+**ZD621 (z wyświetlaczem):**
+1. Menu → **System** → **Factory Defaults**
+2. Potwierdź
+
+**ZD220/ZD230/ZD421 (bez wyświetlacza):**
+Wyłącz drukarkę, przytrzymaj PAUSE + FEED i włącz zasilanie
+
+**Komenda ZPL:**
+
+    ^XA^JUN^XZ
+
+> **⚠️ UWAGA:** Reset kasuje WSZYSTKIE ustawienia! Po resecie musisz ponownie skonfigurować drukarkę.
+
+---
+
+**8. Diagnostyka zaawansowana**
+
+*Sprawdź status czujnika ribbona:*
+
+Wyślij komendę ZPL:
+
+    ! U1 getvar "device.sensor.ribbon"
+
+Odpowiedź:
+- **"ok"** – czujnik widzi taśmę
+- **"out"** – czujnik nie widzi taśmy
+
+*Sprawdź tryb druku:*
+
+    ! U1 getvar "media.type"
+
+Odpowiedź:
+- **"thermal-transfer"** – tryb termotransferowy ✅
+- **"direct-thermal"** – tryb bezpośredni (zmień!)
+
+---
+
+**9. Kiedy czujnik wymaga naprawy?**
+
+*Objawy uszkodzonego czujnika:*
+
+| Objaw | Opis |
+|-------|------|
+| **Błąd przy każdej taśmie** | Niezależnie od typu i producenta |
+| **Błąd po czyszczeniu** | Czujnik wyczyszczony, ale błąd pozostaje |
+| **Sporadyczne błędy** | Czasem działa, czasem nie (luźne połączenie) |
+| **Brak reakcji na kalibrację** | Kalibracja nie pomaga |
+
+*Rozwiązanie:*
+
+Czujnik ribbona można wymienić – to stosunkowo tania naprawa.
+
+> **🔧 Zgłoś do serwisu:** [Formularz naprawy →](/#formularz)
+
+---
+
+**Tabela rozwiązywania problemów**
+
+| Problem | Sprawdź | Rozwiązanie |
+|---------|---------|-------------|
+| Ribbon Out zaraz po włożeniu taśmy | Tryb druku | Zmień na Thermal Transfer |
+| Ribbon Out po kilku etykietach | Naprężenie taśmy | Sprawdź rolkę odbiorczą |
+| Ribbon Out sporadycznie | Czujnik | Wyczyść czujnik |
+| Ribbon Out z każdą taśmą | Czujnik/tryb | Reset + kalibracja |
+| Ribbon Out tylko z wąską taśmą | Szerokość | Użyj szerszej taśmy |
+
+---
+
+**FAQ – Często zadawane pytania**
+
+**Czy mogę drukować bez taśmy?**
+
+Tak, ale tylko na **etykietach termicznych** (z powłoką termoczułą) w trybie **Direct Thermal**. Etykiety termotransferowe wymagają taśmy.
+
+**Jak rozpoznać etykiety termiczne od termotransferowych?**
+
+Test paznokciem: Przejedź paznokciem po etykiecie. Jeśli zostaje **czarny ślad** – to etykieta termiczna (Direct Thermal).
+
+**Czy mogę użyć taśmy innego producenta?**
+
+Tak, ale upewnij się że:
+- Szerokość jest odpowiednia
+- Typ nawoju (CSI/CSO) pasuje do drukarki
+- Jakość jest wystarczająca
+
+**Ile kosztuje wymiana czujnika ribbona?**
+
+Orientacyjnie 200-400 zł za część + robociznę.
+
+---
+
+**Checklista – błąd "Ribbon Out"**
+
+| # | Krok | Sprawdzone? |
+|---|------|-------------|
+| 1 | Sprawdź tryb druku (Thermal Transfer) | ⬜ |
+| 2 | Sprawdź kierunek taśmy (barwnik w dół) | ⬜ |
+| 3 | Sprawdź czy taśma jest na rolce odbiorczej | ⬜ |
+| 4 | Wyczyść czujnik ribbona | ⬜ |
+| 5 | Sprawdź szerokość taśmy | ⬜ |
+| 6 | Skalibruj drukarkę (~JC) | ⬜ |
+| 7 | Reset do fabrycznych (^JUN) | ⬜ |
+| 8 | **Jeśli błąd pozostaje → SERWIS** | ⬜ |
+
+---
+
+**Potrzebujesz pomocy?**
+
+Błąd "Ribbon Out" nie ustępuje mimo wszystkich prób w Twojej drukarce Zebra ZD421, ZD621, ZD220, ZD230, ZT411 lub ZT421?
+
+> **📞 Zadzwoń:** +48 601 619 898
+
+> **🔧 Zgłoś naprawę:** [Formularz serwisowy →](/#formularz)
+
+Jako **autoryzowany serwis Zebra** pomożemy Ci:
+- Zdiagnozować problem zdalnie
+- Wymienić czujnik ribbona
+- Skonfigurować drukarkę
+- Dobrać odpowiednią taśmę
+`
+  },
+
+  // NOWY WPIS: Konfiguracja drukarki Zebra przez Ethernet
+  {
+    slug: 'konfiguracja-drukarki-zebra-ethernet-siec',
+    title: 'Jak skonfigurować drukarkę Zebra przez Ethernet? Kompletny przewodnik sieciowy [2025]',
+    excerpt: 'Konfiguracja drukarki Zebra przez Ethernet krok po kroku. IP statyczne, DHCP, ustawienia sieciowe dla ZD621, ZT411, ZT610, ZD421. Troubleshooting problemów z połączeniem.',
+    coverImage: '/blog/jak-skonfigurowac-drukarke-zebra-przez-ethernet.jpeg',
+    author: {
+      name: 'Zespół Serwis Zebra',
+      role: 'Certyfikowani technicy Zebra'
+    },
+    publishedAt: '2025-12-27',
+    readingTime: 12,
+    deviceType: 'drukarki',
+    subDeviceType: 'etykiet',
+    category: 'poradniki',
+    tags: ['Ethernet', 'sieć', 'IP', 'DHCP', 'konfiguracja', 'ZD621', 'ZT411', 'ZT610', 'sieciowa', 'LAN'],
+    seo: {
+      metaTitle: 'Konfiguracja drukarki Zebra przez Ethernet – IP, DHCP, sieć [Poradnik 2025]',
+      metaDescription: 'Jak podłączyć drukarkę Zebra do sieci Ethernet? Konfiguracja IP statycznego i DHCP, ustawienia sieciowe ZD621, ZT411, ZT610. Rozwiązywanie problemów z połączeniem.',
+      keywords: [
+        'drukarka zebra ethernet',
+        'zebra konfiguracja sieciowa',
+        'zebra ip statyczne',
+        'zebra dhcp',
+        'zebra sieć lan',
+        'drukarka etykiet sieciowa',
+        'zebra print server',
+        'zd621 ethernet',
+        'zt411 sieć',
+        'zt610 konfiguracja ip',
+        'zebra network configuration',
+        'jak podłączyć drukarkę zebra do sieci',
+        'drukarka zebra nie łączy się z siecią',
+        'zebra ethernet port',
+        'zebra wired connection',
+        'konfiguracja drukarki sieciowej',
+        'zebra ip address setup',
+        'drukarka zebra po kablu',
+        'zebra internal print server',
+        'zebra zpl network'
+      ]
+    },
+    content: `
+**Jak skonfigurować drukarkę Zebra przez Ethernet? Kompletny przewodnik sieciowy**
+
+> **🌐 Chcesz podłączyć drukarkę Zebra do sieci firmowej?** Konfiguracja przez Ethernet to najstabilniejsze rozwiązanie dla środowisk produkcyjnych i magazynowych. Ten poradnik przeprowadzi Cię przez cały proces – od podłączenia kabla po zaawansowane ustawienia sieciowe.
+
+---
+
+**Dlaczego Ethernet zamiast USB?**
+
+| Cecha | USB | Ethernet |
+|-------|-----|----------|
+| **Odległość** | Max 5m | Bez limitu (przez switch) |
+| **Wielu użytkowników** | 1 komputer | Cała sieć |
+| **Stabilność** | Zależna od portu | Bardzo wysoka |
+| **Zarządzanie** | Lokalne | Zdalne (przez sieć) |
+| **Koszt** | Tańsze | Droższe (opcja sieciowa) |
+
+> **💡 Wskazówka:** Ethernet to standard w logistyce, magazynach i produkcji – jedna drukarka może obsługiwać wiele stanowisk.
+
+---
+
+**Wymagania sprzętowe**
+
+| Element | Opis |
+|---------|------|
+| **Drukarka** | Model z portem Ethernet (wbudowanym lub opcjonalnym) |
+| **Kabel** | RJ-45, Cat5e lub Cat6 |
+| **Sieć** | Switch lub router z wolnym portem |
+| **Komputer** | W tej samej sieci co drukarka |
+
+**Dostępność portu Ethernet według modelu**
+
+| Kategoria | Modele | Ethernet |
+|-----------|--------|----------|
+| **Przemysłowe** | ZT411, ZT421, ZT610, ZT620, ZT510, ZT230 | ✅ Wbudowany |
+| **Mobilne** | ZQ630 | ⚙️ Opcja |
+| **Biurkowe** | ZD621, ZD421 | ⚙️ Moduł dokupowany |
+| **Biurkowe** | ZD220, ZD230 | ❌ Brak (tylko USB) |
+
+---
+
+**1. Podłączenie fizyczne**
+
+| Krok | Czynność |
+|------|----------|
+| 1 | Wyłącz drukarkę |
+| 2 | Podłącz kabel Ethernet do portu RJ-45 z tyłu drukarki |
+| 3 | Drugi koniec kabla podłącz do switcha/routera |
+| 4 | Włącz drukarkę |
+| 5 | Sprawdź diody na porcie Ethernet (tabela poniżej) |
+
+**Znaczenie diod na porcie Ethernet:**
+
+| Dioda | Kolor | Znaczenie |
+|-------|-------|-----------|
+| **Link** | Zielona | Połączenie aktywne ✅ |
+| **Activity** | Pomarańczowa | Transmisja danych |
+| **Brak świecenia** | - | Sprawdź kabel i port switcha ❌ |
+
+---
+
+**2. Sprawdzenie aktualnego adresu IP**
+
+Zanim zaczniesz konfigurację, sprawdź jaki adres IP ma drukarka.
+
+**Jak wydrukować konfigurację sieciową:**
+
+| Model | Metoda |
+|-------|--------|
+| **ZD621/ZT411/ZT610** (z wyświetlaczem) | Menu → Network → Network Info |
+| **ZD421** (bez wyświetlacza) | Przytrzymaj CANCEL przez 2 sekundy |
+| **Wszystkie modele** (ZPL) | Wyślij komendę: ~WL |
+
+**Informacje na etykiecie sieciowej:**
+
+| Parametr | Przykład |
+|----------|----------|
+| **IP ADDRESS** | 192.168.1.100 |
+| **SUBNET MASK** | 255.255.255.0 |
+| **DEFAULT GATEWAY** | 192.168.1.1 |
+| **MAC ADDRESS** | 00:07:4D:XX:XX:XX |
+
+---
+
+**3. Konfiguracja DHCP (automatyczne IP)**
+
+DHCP to najprostsze rozwiązanie – drukarka automatycznie otrzyma adres IP od serwera DHCP (routera).
+
+**Włączenie DHCP według modelu:**
+
+| Model | Kroki konfiguracji |
+|-------|-------------------|
+| **ZD621** | Menu → Network → IP Protocol → DHCP → Reset Network |
+| **ZT411/ZT421/ZT610/ZT620** | Menu → Network → Wired → IP Protocol → DHCP & Permanent → Save |
+| **Wszystkie (ZPL)** | Wyślij: ^XA^NC1^JUS^XZ |
+
+**Komendy ZPL dla DHCP:**
+
+| Komenda | Znaczenie |
+|---------|-----------|
+| **^NC1** | Włącza DHCP |
+| **^JUS** | Zapisuje ustawienia |
+
+> **⚠️ WAŻNE:** Po włączeniu DHCP zrestartuj drukarkę, aby pobrała nowy adres IP.
+
+---
+
+**4. Konfiguracja IP statycznego**
+
+Statyczne IP jest zalecane w środowiskach produkcyjnych – adres nie zmienia się po restarcie.
+
+**Informacje potrzebne od administratora sieci:**
+
+| Parametr | Przykład | Opis |
+|----------|----------|------|
+| **Adres IP** | 192.168.1.150 | Unikalny adres dla drukarki |
+| **Maska podsieci** | 255.255.255.0 | Określa zakres sieci |
+| **Brama domyślna** | 192.168.1.1 | Adres routera |
+
+**Ustawienie IP statycznego według modelu:**
+
+| Model | Ścieżka w menu |
+|-------|----------------|
+| **ZD621** | Menu → Network → IP Protocol → Permanent → IP Address/Subnet/Gateway → Reset Network |
+| **ZT411/ZT421/ZT610** | Menu → Network → Wired → IP Protocol → Permanent → ustaw parametry → Save → Reset Network |
+
+**Komendy ZPL dla IP statycznego:**
+
+| Komenda | Znaczenie | Przykład |
+|---------|-----------|----------|
+| **^NC0** | Wyłącza DHCP (IP statyczne) | ^NC0 |
+| **^NA** | Adres IP | ^NA192.168.1.150 |
+| **^NB** | Maska podsieci | ^NB255.255.255.0 |
+| **^NG** | Brama domyślna | ^NG192.168.1.1 |
+| **^JUS** | Zapisz ustawienia | ^JUS |
+
+**Kompletna komenda ZPL:**
+
+    ^XA^NC0^NA192.168.1.150^NB255.255.255.0^NG192.168.1.1^JUS^XZ
+
+---
+
+**5. Konfiguracja przez Zebra Setup Utilities**
+
+Zebra Setup Utilities (ZSU) to najwygodniejsze narzędzie do konfiguracji sieciowej.
+
+| Krok | Czynność | Szczegóły |
+|------|----------|-----------|
+| 1 | Podłącz drukarkę przez USB | Tymczasowo, do konfiguracji |
+| 2 | Otwórz ZSU | Wybierz drukarkę z listy |
+| 3 | Configure Printer Connectivity | Przejdź do ustawień sieciowych |
+| 4 | Zakładka Wired | Lub "Internal Wired" |
+| 5 | Ustaw parametry | IP Protocol, IP Address, Subnet, Gateway |
+| 6 | Kliknij Apply | Drukarka zrestartuje kartę sieciową |
+| 7 | Odłącz USB | Drukarka dostępna przez sieć |
+
+**Parametry do ustawienia w ZSU:**
+
+| Parametr | Opcje |
+|----------|-------|
+| **IP Protocol** | DHCP lub Static |
+| **IP Address** | Tylko dla Static |
+| **Subnet Mask** | Tylko dla Static |
+| **Default Gateway** | Tylko dla Static |
+
+---
+
+**6. Drukowanie przez sieć z Windows**
+
+Po skonfigurowaniu IP, dodaj drukarkę w systemie Windows.
+
+**Porównanie metod instalacji:**
+
+| Metoda | Zastosowanie | Trudność |
+|--------|--------------|----------|
+| **Automatyczne wykrywanie** | Szybka instalacja | ⭐ Łatwa |
+| **Ręczne (TCP/IP)** | Gdy auto nie działa | ⭐⭐ Średnia |
+| **Raw TCP (9100)** | Aplikacje wysyłające ZPL | ⭐⭐ Średnia |
+
+**Metoda 1: Automatyczne wykrywanie**
+
+| Krok | Czynność |
+|------|----------|
+| 1 | Ustawienia → Drukarki i skanery → Dodaj drukarkę |
+| 2 | Windows wykryje drukarkę Zebra w sieci |
+| 3 | Wybierz i zainstaluj |
+
+**Metoda 2: Ręczne dodawanie (port TCP/IP)**
+
+| Krok | Czynność |
+|------|----------|
+| 1 | Panel sterowania → Urządzenia i drukarki → Dodaj drukarkę |
+| 2 | "Drukarka, której szukam, nie znajduje się na liście" |
+| 3 | "Dodaj drukarkę przy użyciu adresu TCP/IP" |
+| 4 | Wpisz adres IP drukarki (np. 192.168.1.150) |
+| 5 | Wybierz sterownik ZDesigner dla swojego modelu |
+| 6 | Zakończ instalację |
+
+**Metoda 3: Raw TCP (port 9100)**
+
+| Parametr | Wartość |
+|----------|---------|
+| **Port Name** | IP drukarki |
+| **Protocol** | Raw |
+| **Port Number** | 9100 (domyślny dla Zebra) |
+
+---
+
+**7. Testowanie połączenia**
+
+**Ping z komputera:**
+
+Otwórz wiersz poleceń (cmd) i wpisz:
+
+    ping 192.168.1.150
+
+Poprawna odpowiedź:
+
+    Odpowiedź z 192.168.1.150: bajtów=32 czas<1ms TTL=64
+
+**Telnet na port 9100:**
+
+    telnet 192.168.1.150 9100
+
+Jeśli połączenie się nawiąże – drukarka jest gotowa do pracy.
+
+**Drukowanie testowe przez sieć:**
+
+Wyślij prostą etykietę ZPL:
+
+    ^XA
+    ^FO50,50^A0N,50,50^FDTest sieci OK^FS
+    ^XZ
+
+---
+
+**8. Zaawansowane ustawienia sieciowe**
+
+**Port drukowania (domyślnie 9100):**
+
+    ^XA
+    ^NP9100
+    ^JUS
+    ^XZ
+
+**Nazwa drukarki w sieci (hostname):**
+
+    ^XA
+    ^NH"DRUKARKA-MAG1"
+    ^JUS
+    ^XZ
+
+**Włączenie/wyłączenie protokołów:**
+
+| Protokół | Komenda ON | Komenda OFF |
+|----------|------------|-------------|
+| **LPD** | ^NL1 | ^NL0 |
+| **FTP** | ^NF1 | ^NF0 |
+| **HTTP** | ^NE1 | ^NE0 |
+| **SNMP** | ^NS1 | ^NS0 |
+
+**Przykład – włącz tylko Raw TCP i HTTP:**
+
+    ^XA
+    ^NL0
+    ^NF0
+    ^NE1
+    ^NS0
+    ^JUS
+    ^XZ
+
+---
+
+**9. Interfejs webowy drukarki**
+
+Drukarki Zebra z Ethernet mają wbudowany serwer WWW.
+
+**Dostęp do interfejsu webowego:**
+
+| Krok | Czynność |
+|------|----------|
+| 1 | Otwórz przeglądarkę |
+| 2 | Wpisz: http://192.168.1.150 (IP drukarki) |
+| 3 | Zaloguj się (domyślne hasło: 1234 lub brak) |
+
+**Możliwości interfejsu webowego:**
+
+| Funkcja | Opis |
+|---------|------|
+| **Status** | Podgląd stanu drukarki |
+| **Network** | Konfiguracja ustawień sieciowych |
+| **Directory** | Wysyłanie plików (formaty, firmware) |
+| **Print** | Drukowanie testowe |
+| **Preview** | Podgląd etykiety przed wydrukiem |
+
+> **💡 Wskazówka:** Zmień domyślne hasło dla bezpieczeństwa!
+
+---
+
+**10. Troubleshooting – problemy z połączeniem**
+
+**Problem: Brak połączenia (dioda Link nie świeci)**
+
+| Przyczyna | Rozwiązanie |
+|-----------|-------------|
+| Uszkodzony kabel | Wymień kabel na sprawdzony |
+| Zły port switcha | Spróbuj inny port |
+| Wyłączony port | Sprawdź konfigurację switcha |
+| Uszkodzony port drukarki | Wymiana karty sieciowej (serwis) |
+
+**Problem: Dioda Link świeci, ale brak komunikacji**
+
+| Przyczyna | Rozwiązanie |
+|-----------|-------------|
+| Zły adres IP | Sprawdź etykietę konfiguracyjną |
+| Inna podsieć | Upewnij się, że komputer i drukarka są w tej samej podsieci |
+| Firewall | Odblokuj port 9100 i ping ICMP |
+| VLAN | Sprawdź konfigurację VLAN ze swoim IT |
+
+**Problem: Drukarka ma IP 0.0.0.0 lub 169.254.x.x**
+
+To oznacza, że DHCP nie przydzielił adresu:
+- Sprawdź czy serwer DHCP działa
+- Sprawdź czy drukarka jest w tej samej sieci co DHCP
+- Ustaw IP statyczne
+
+**Problem: Drukarka traci IP po restarcie**
+
+- Używasz DHCP – IP może się zmieniać
+- Rozwiązanie: ustaw **IP statyczne** lub **DHCP Reservation** na routerze
+
+**Problem: Windows nie widzi drukarki**
+
+1. Sprawdź ping do IP drukarki
+2. Sprawdź firewall Windows
+3. Dodaj drukarkę ręcznie przez port TCP/IP
+4. Zainstaluj najnowszy sterownik ZDesigner
+
+---
+
+**11. Konfiguracja dla wielu drukarek**
+
+W środowisku z wieloma drukarkami Zebra zalecamy systematyczne podejście.
+
+**Zalecane nazewnictwo:**
+
+| Hostname | Lokalizacja | Opis |
+|----------|-------------|------|
+| ZEBRA-MAG-01 | Magazyn | Drukarka 1 |
+| ZEBRA-MAG-02 | Magazyn | Drukarka 2 |
+| ZEBRA-PROD-01 | Produkcja | Drukarka 1 |
+| ZEBRA-WYS-01 | Wysyłka | Drukarka 1 |
+
+**Zalecane zakresy IP:**
+
+| Dział | Zakres IP | Ilość adresów |
+|-------|-----------|---------------|
+| **Magazyn** | 192.168.1.100-109 | 10 |
+| **Produkcja** | 192.168.1.110-119 | 10 |
+| **Wysyłka** | 192.168.1.120-129 | 10 |
+| **Rezerwowe** | 192.168.1.130-139 | 10 |
+
+**Dokumentacja floty drukarek:**
+
+| Hostname | IP | MAC | Lokalizacja | Model |
+|----------|----|----|-------------|-------|
+| ZEBRA-MAG-01 | 192.168.1.100 | 00:07:4D:XX:XX:01 | Magazyn, hala A | ZT411 |
+| ZEBRA-PROD-01 | 192.168.1.110 | 00:07:4D:XX:XX:02 | Produkcja, linia 1 | ZT610 |
+
+---
+
+**12. Bezpieczeństwo sieci**
+
+**Zalecenia bezpieczeństwa:**
+
+| Działanie | Jak wykonać | Priorytet |
+|-----------|-------------|-----------|
+| **Zmień hasło webowe** | http://IP-DRUKARKI → Security → Change Password | ⭐⭐⭐ Wysoki |
+| **Wyłącz FTP/LPD** | ZPL: ^XA^NL0^NF0^JUS^XZ | ⭐⭐ Średni |
+| **Dedykowany VLAN** | Konfiguracja na switchu | ⭐⭐⭐ Wysoki |
+| **Ograniczenie IP** | Firewall/ACL na switchu | ⭐⭐ Średni |
+
+**Wyłączenie niepotrzebnych protokołów (ZPL):**
+
+| Protokół | Komenda wyłączenia |
+|----------|-------------------|
+| **LPD** | ^NL0 |
+| **FTP** | ^NF0 |
+| **SNMP** | ^NS0 |
+
+Kompletna komenda: ^XA^NL0^NF0^NS0^JUS^XZ
+
+---
+
+**Tabela komend sieciowych ZPL**
+
+| Komenda | Opis |
+|---------|------|
+| **^NC0** | IP statyczne |
+| **^NC1** | DHCP |
+| **^NA** | Adres IP |
+| **^NB** | Maska podsieci |
+| **^NG** | Brama domyślna |
+| **^NH** | Hostname |
+| **^NP** | Port drukowania |
+| **^NR** | Reset karty sieciowej |
+| **~WL** | Wydruk konfiguracji sieciowej |
+
+---
+
+**FAQ – Często zadawane pytania**
+
+**Czy mogę używać jednocześnie USB i Ethernet?**
+
+Tak, drukarka może być podłączona przez oba interfejsy. Jednak dla stabilności zalecamy używanie jednego interfejsu.
+
+**Jaki jest domyślny port drukowania?**
+
+Port **9100** (Raw TCP). Można zmienić komendą ^NP.
+
+**Czy drukarka Zebra obsługuje WiFi i Ethernet jednocześnie?**
+
+Tak, ale zazwyczaj aktywny jest tylko jeden interfejs. Sprawdź ustawienia w menu drukarki.
+
+**Jak zresetować ustawienia sieciowe do fabrycznych?**
+
+Komenda ZPL:
+
+    ^XA^JUN^XZ
+
+Lub przez menu: Network → Reset Network Defaults
+
+**Czy mogę drukować z wielu komputerów na jedną drukarkę?**
+
+Tak, to główna zaleta Ethernet. Każdy komputer w sieci może drukować na drukarce.
+
+---
+
+**Checklista konfiguracji Ethernet**
+
+| Krok | Zadanie | Wykonane? |
+|------|---------|-----------|
+| 1 | Podłącz kabel Ethernet | ⬜ |
+| 2 | Sprawdź diodę Link (zielona) | ⬜ |
+| 3 | Wydrukuj konfigurację (~WL) | ⬜ |
+| 4 | Ustaw IP (DHCP lub statyczne) | ⬜ |
+| 5 | Zrestartuj kartę sieciową | ⬜ |
+| 6 | Sprawdź ping z komputera | ⬜ |
+| 7 | Dodaj drukarkę w Windows | ⬜ |
+| 8 | Wydrukuj stronę testową | ⬜ |
+| 9 | Zmień hasło webowe | ⬜ |
+| 10 | Udokumentuj IP i lokalizację | ⬜ |
+
+---
+
+**Potrzebujesz pomocy?**
+
+Problemy z konfiguracją sieciową drukarki Zebra ZD621, ZT411, ZT610?
+
+> **📞 Zadzwoń:** +48 601 619 898
+
+> **🔧 Zgłoś naprawę:** [Formularz serwisowy →](/#formularz)
+
+Jako **autoryzowany serwis Zebra** pomożemy Ci:
+- Skonfigurować drukarkę w sieci firmowej
+- Rozwiązać problemy z połączeniem
+- Zintegrować drukarkę z systemem ERP/WMS
+- Przeszkolić zespół IT
+`
+  },
+
+  // NOWY WPIS: Kody błędów ZD420/ZD421 - diody LED
+  {
+    slug: 'kody-bledow-zebra-zd420-zd421-diody-led',
+    title: 'Kody błędów Zebra ZD420/ZD421 – co oznaczają diody LED? Kompletny poradnik [2025]',
+    excerpt: 'Drukarka Zebra ZD420 lub ZD421 miga na czerwono? Sprawdź znaczenie diod LED: status, pauza, dane, materiały. Tabela kodów błędów i rozwiązania problemów.',
+    coverImage: '/blog/diody-led-zebra-zd420-zd421-co-oznaczaja.jpeg',
+    author: {
+      name: 'Zespół Serwis Zebra',
+      role: 'Certyfikowani technicy Zebra'
+    },
+    publishedAt: '2025-12-27',
+    readingTime: 10,
+    deviceType: 'drukarki',
+    subDeviceType: 'etykiet',
+    category: 'troubleshooting',
+    tags: ['ZD420', 'ZD421', 'diody LED', 'kody błędów', 'czerwona dioda', 'troubleshooting', 'error codes'],
+    seo: {
+      metaTitle: 'Kody błędów Zebra ZD420/ZD421 – diody LED i rozwiązania [2025]',
+      metaDescription: 'Drukarka Zebra ZD420/ZD421 miga na czerwono? Sprawdź co oznaczają diody LED. Tabela kodów błędów, przyczyny i rozwiązania. Poradnik krok po kroku.',
+      keywords: [
+        'zebra zd420 czerwona dioda',
+        'zebra zd421 error codes',
+        'zd420 miga na czerwono',
+        'zd421 diody led',
+        'zebra zd420 kody błędów',
+        'zd420 status light',
+        'zebra zd421 troubleshooting',
+        'drukarka zebra miga',
+        'zd420 pause light',
+        'zd421 czerwone światło',
+        'zebra zd420 nie drukuje',
+        'zd420 error ribbon out',
+        'zd421 paper out',
+        'zebra desktop printer error',
+        'zd420 led meaning',
+        'zd421 diagnostyka',
+        'zebra zd420 naprawa',
+        'zd420 media out',
+        'zd421 head open'
+      ]
+    },
+    content: `
+**Kody błędów Zebra ZD420/ZD421 – co oznaczają diody LED?**
+
+> **🔴 Drukarka Zebra ZD420 lub ZD421 miga na czerwono?** Seria ZD420/ZD421 nie ma wyświetlacza LCD – komunikuje się z użytkownikiem przez diody LED. Ten poradnik wyjaśni znaczenie każdej kombinacji świateł i pomoże rozwiązać problem.
+
+---
+
+**Przegląd panelu sterowania ZD420/ZD421**
+
+Drukarki ZD420 i ZD421 mają **panel 3-przyciskowy** (FEED, PAUSE, CANCEL) z diodami LED:
+
+| Element | Funkcja | Kolory |
+|---------|---------|--------|
+| **STATUS** | Główny wskaźnik stanu drukarki | Zielona / Pomarańczowa / Czerwona |
+| **DATA** | Wskaźnik transferu danych | Zielona (miga podczas odbierania) |
+| **Przycisk FEED** | Wysunięcie etykiety / kalibracja | - |
+| **Przycisk PAUSE** | Wstrzymanie drukowania | - |
+| **Przycisk CANCEL** | Anulowanie / wydruk konfiguracji | - |
+
+---
+
+**Stan normalny – drukarka gotowa do pracy**
+
+| Wskaźnik | Stan | Znaczenie |
+|----------|------|-----------|
+| **STATUS** | Zielona – świeci ciągle (solid green) | Drukarka gotowa do pracy ✅ |
+| **DATA** | Wyłączona | Brak transferu danych |
+| **DATA** | Miga zielono | Odbieranie/przetwarzanie danych |
+
+> **✅ Jeśli STATUS świeci ciągłym zielonym światłem** – drukarka jest gotowa do drukowania.
+
+---
+
+**Tabela alertów i błędów (z Service Manual Zebra)**
+
+**ALERTY KRYTYCZNE**
+
+| Alert | Opis | Rozwiązanie |
+|-------|------|-------------|
+| **PRINTHEAD OPEN** | Pokrywa drukarki otwarta lub niezamknięta prawidłowo | Zamknij pokrywę – powinieneś usłyszeć kliknięcie zatrzasku |
+| **PRINTHEAD OVER TEMP** | Przegrzanie głowicy drukującej | Poczekaj 5-10 minut na ostygnięcie |
+| **PRINTHEAD SHUTDOWN** | Krytyczny błąd zasilania głowicy | Wyłącz/włącz drukarkę, wymień głowicę jeśli problem się powtarza |
+| **PRINTHEAD UNDER TEMP** | Głowica poniżej temperatury roboczej | Wyłącz/włącz drukarkę, wymień głowicę |
+| **OUT OF MEMORY** | Brak pamięci na operację | Usuń nieużywane grafiki/fonty, zmniejsz obszar druku |
+
+**ALERTY MATERIAŁÓW**
+
+| Alert | Opis | Rozwiązanie |
+|-------|------|-------------|
+| **MEDIA OUT** | Brak etykiet lub czujnik nie wykrywa mediów | Włóż nową rolkę, sprawdź pozycję czujnika, skalibruj |
+| **RIBBON OUT** | Brak taśmy lub koniec taśmy (termotransfer) | Włóż nową taśmę lub zmień tryb na Direct Thermal |
+| **RIBBON IN** (tylko ZD421 Cartridge) | Taśma w drukarce ustawionej na Direct Thermal | Wyjmij taśmę lub zmień tryb na Thermal Transfer |
+| **RIBBON LOW** (tylko ZD421 Cartridge) | Niski poziom taśmy w cartridge | Przygotuj nowy cartridge |
+| **CUT ERROR** | Nóż obcinacza zablokowany | Wyłącz/włącz drukarkę, wezwij serwis jeśli problem się powtarza |
+
+**STANY DIODY DATA**
+
+| Stan DATA | Znaczenie |
+|-----------|-----------|
+| **Wyłączona** | Brak transferu danych |
+| **Miga zielono** | Odbieranie danych z komputera |
+| **Nie miga mimo wysłania zadania** | Problem z komunikacją – sprawdź kabel/ustawienia |
+
+---
+
+**Szczegółowe rozwiązania problemów**
+
+**1. Czerwona dioda STATUS – błąd krytyczny**
+
+| Krok | Czynność |
+|------|----------|
+| 1 | Wyłącz drukarkę przyciskiem zasilania |
+| 2 | Odczekaj 30 sekund |
+| 3 | Otwórz pokrywę, sprawdź czy nic nie blokuje głowicy |
+| 4 | Sprawdź czy głowica jest prawidłowo osadzona |
+| 5 | Zamknij pokrywę i włącz drukarkę |
+| 6 | Jeśli problem się powtarza – reset fabryczny |
+
+**Reset do ustawień fabrycznych (ZD420/ZD421):**
+
+| Krok | Czynność |
+|------|----------|
+| 1 | Wyłącz drukarkę przyciskiem POWER (przytrzymaj 5 sek.) |
+| 2 | Przytrzymaj jednocześnie PAUSE + FEED |
+| 3 | Włącz drukarkę trzymając oba przyciski |
+| 4 | Puść przyciski gdy dioda STATUS zacznie migać |
+| 5 | Drukarka zresetuje wszystkie ustawienia do fabrycznych |
+
+> **⚠️ UWAGA:** Reset kasuje WSZYSTKIE ustawienia! Po resecie musisz ponownie skonfigurować drukarkę i wykonać kalibrację.
+
+---
+
+**2. SUPPLIES miga pomarańczowo – brak etykiet**
+
+| Krok | Czynność |
+|------|----------|
+| 1 | Otwórz pokrywę drukarki |
+| 2 | Sprawdź czy etykiety się nie skończyły |
+| 3 | Włóż nową rolkę etykiet |
+| 4 | Przeprowadź etykiety przez prowadnice |
+| 5 | Zamknij pokrywę |
+| 6 | Naciśnij FEED aby wysunąć jedną etykietę |
+| 7 | Jeśli problem się powtarza – kalibracja |
+
+**SmartCal – automatyczna kalibracja (ZD420/ZD421):**
+
+| Metoda | Instrukcja |
+|--------|------------|
+| **Przyciskami** | Gdy STATUS świeci zielono: przytrzymaj PAUSE + CANCEL przez 2 sek. |
+| **Przez ZPL** | Wyślij komendę: ~JC |
+| **Przez ZSU** | Open Printer Tools → Calibrate |
+
+> **💡 Wskazówka:** Po kalibracji STATUS powróci do zielonego światła ciągłego. Drukarka automatycznie wykryje typ mediów (gap, black mark, continuous).
+
+---
+
+**3. SUPPLIES miga czerwono – Ribbon Out**
+
+Ten błąd pojawia się gdy:
+- Brak taśmy (ribbon) w drukarce termotransferowej
+- Taśma założona nieprawidłowo
+- Drukarka w trybie Thermal Transfer, a powinna być w Direct Thermal
+
+| Przyczyna | Rozwiązanie |
+|-----------|-------------|
+| **Brak taśmy** | Włóż nową taśmę termotransferową |
+| **Zły kierunek taśmy** | Sprawdź czy barwnik jest skierowany w dół |
+| **Zły tryb druku** | Zmień na Direct Thermal (jeśli używasz etykiet termicznych) |
+| **Brudny czujnik** | Wyczyść czujnik ribbona alkoholem IPA |
+
+**Zmiana trybu druku na Direct Thermal:**
+
+    ^XA^MTD^JUS^XZ
+
+Gdzie:
+- **^MTD** – Media Type Direct (druk bezpośredni)
+- **^JUS** – Zapisz ustawienia
+
+---
+
+**4. Głowica otwarta – STATUS czerwona + PAUSE pomarańczowa**
+
+| Krok | Czynność |
+|------|----------|
+| 1 | Sprawdź czy pokrywa jest zamknięta |
+| 2 | Upewnij się, że pokrywa "klikła" na miejsce |
+| 3 | Sprawdź czy nic nie blokuje zamknięcia |
+| 4 | Sprawdź czujnik zamknięcia pokrywy |
+| 5 | Jeśli czujnik uszkodzony – zgłoś do serwisu |
+
+---
+
+**5. Przegrzanie głowicy – STATUS miga czerwono**
+
+Głowica drukująca może się przegrzać przy:
+- Intensywnym drukowaniu bez przerw
+- Zbyt ciemnym ustawieniu (darkness)
+- Wysokiej temperaturze otoczenia
+
+| Rozwiązanie | Opis |
+|-------------|------|
+| **Poczekaj** | 5-10 minut na ostygnięcie |
+| **Zmniejsz darkness** | Ustaw niższą wartość zaciemnienia |
+| **Popraw wentylację** | Zapewnij przepływ powietrza wokół drukarki |
+| **Sprawdź głowicę** | Uszkodzona głowica może się przegrzewać |
+
+---
+
+**Kombinacje przycisków diagnostycznych (potwierdzone z Service Manual)**
+
+| Kombinacja | Funkcja | Kiedy używać |
+|------------|---------|--------------|
+| **FEED (krótkie)** | Wysunięcie jednej etykiety | Testowanie, synchronizacja po wymianie rolki |
+| **PAUSE + CANCEL (2 sek.)** | SmartCal – automatyczna kalibracja | Po wymianie etykiet/taśmy |
+| **FEED + CANCEL (2 sek.)** | Wydruk raportu konfiguracji | Diagnostyka, sprawdzenie ustawień |
+| **PAUSE + FEED przy włączaniu** | Reset do ustawień fabrycznych | Poważne problemy z konfiguracją |
+
+---
+
+**Wydruk konfiguracji – jak sprawdzić ustawienia (z Service Manual)**
+
+Aby wydrukować etykietę konfiguracyjną:
+
+| Krok | Czynność |
+|------|----------|
+| 1 | Upewnij się, że drukarka jest włączona i gotowa (STATUS świeci zielono) |
+| 2 | Przytrzymaj jednocześnie **FEED + CANCEL** przez 2 sekundy |
+| 3 | Drukarka wydrukuje raport konfiguracji drukarki i sieci |
+| 4 | Po wydrukowaniu STATUS powróci do zielonego światła ciągłego |
+
+**Co sprawdzić na etykiecie konfiguracyjnej:**
+
+| Parametr | Co oznacza | Prawidłowa wartość |
+|----------|------------|-------------------|
+| **PRINT METHOD** | Tryb druku | THERMAL-TRANS lub DIRECT-THERMAL |
+| **PRINT WIDTH** | Szerokość druku | Zależna od etykiet |
+| **LABEL LENGTH** | Długość etykiety | Zależna od etykiet |
+| **MEDIA TYPE** | Typ etykiet | GAP, BLACK MARK lub CONTINUOUS |
+| **FIRMWARE** | Wersja oprogramowania | Najnowsza zalecana |
+
+---
+
+**Różnice między ZD420 a ZD421**
+
+| Cecha | ZD420 | ZD421 |
+|-------|-------|-------|
+| **Rok wprowadzenia** | 2018 | 2020 |
+| **Rozdzielczość** | 203/300 dpi | 203/300 dpi |
+| **Prędkość** | Do 152 mm/s | Do 152 mm/s |
+| **Modułowość** | Tak | Tak (ulepszona) |
+| **Wyświetlacz** | Brak | Brak |
+| **Diody LED** | 4 diody | 4 diody (takie same) |
+| **Dostępność** | Wycofywana | Aktualna seria |
+
+> **💡 Wskazówka:** Kody błędów LED są **identyczne** w ZD420 i ZD421.
+
+---
+
+**Kiedy zgłosić do serwisu?**
+
+| Objaw | Prawdopodobna przyczyna | Działanie |
+|-------|------------------------|-----------|
+| Czerwona dioda po resecie | Uszkodzona płyta główna | Serwis |
+| Ciągłe przegrzewanie | Uszkodzona głowica | Serwis |
+| Błąd głowicy otwartej mimo zamkniętej | Uszkodzony czujnik | Serwis |
+| Nie reaguje na przyciski | Awaria elektroniki | Serwis |
+| Słaba jakość druku mimo kalibracji | Zużyta głowica | Wymiana głowicy |
+
+---
+
+**FAQ – Często zadawane pytania**
+
+**Dlaczego moja ZD420 ciągle miga na czerwono?**
+
+Najczęstsze przyczyny:
+1. Otwarta pokrywa – zamknij dokładnie
+2. Brak etykiet/taśmy – uzupełnij materiały
+3. Przegrzanie – poczekaj 5-10 minut
+4. Błąd pamięci – zresetuj do ustawień fabrycznych
+
+**Jak sprawdzić co dokładnie jest nie tak bez wyświetlacza?**
+
+1. Wydrukuj etykietę konfiguracyjną (CANCEL 2 sek.)
+2. Podłącz do komputera i użyj Zebra Setup Utilities
+3. Sprawdź status w ZSU → Open Printer Tools → View Printer Status
+
+**Czy mogę używać ZD420/ZD421 bez taśmy?**
+
+Tak, ale tylko z **etykietami termicznymi** (Direct Thermal). Musisz:
+1. Zmienić tryb na Direct Thermal: ^XA^MTD^JUS^XZ
+2. Używać etykiet z powłoką termiczną (ciemnieją od ciepła)
+
+**Ile kosztuje wymiana głowicy w ZD420/ZD421?**
+
+Orientacyjnie 400-600 zł za część. Wymiana trwa około 15 minut.
+
+---
+
+**Checklista diagnostyczna ZD420/ZD421**
+
+| # | Sprawdź | OK? |
+|---|---------|-----|
+| 1 | Czy pokrywa jest zamknięta? | ⬜ |
+| 2 | Czy są etykiety? | ⬜ |
+| 3 | Czy jest taśma (jeśli Thermal Transfer)? | ⬜ |
+| 4 | Czy taśma jest prawidłowo założona? | ⬜ |
+| 5 | Czy tryb druku jest prawidłowy? | ⬜ |
+| 6 | Czy przeprowadzono kalibrację? | ⬜ |
+| 7 | Czy drukarka nie jest przegrzana? | ⬜ |
+| 8 | Czy sterowniki są zainstalowane? | ⬜ |
+
+---
+
+**Potrzebujesz pomocy?**
+
+Drukarka Zebra ZD420 lub ZD421 nadal wyświetla błąd?
+
+> **📞 Zadzwoń:** +48 601 619 898
+
+> **🔧 Zgłoś naprawę:** [Formularz serwisowy →](/#formularz)
+
+Jako **autoryzowany serwis Zebra** pomożemy Ci:
+- Zdiagnozować problem zdalnie
+- Wymienić głowicę drukującą
+- Naprawić uszkodzoną elektronikę
+- Skonfigurować drukarkę
+`
   }
 
 ]
@@ -17552,4 +19207,3 @@ export function searchBlogForAI(query: string): {
     }))
   }
 }
-
