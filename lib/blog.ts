@@ -16468,11 +16468,11 @@ Zebra oferuje **dwa główne typy sterowników**:
 
 ## 2. Pobieranie sterowników Zebra
 
-### Oficjalne źródło – Zebra.com
+### Pobierz od autoryzowanego serwisu Zebra
 
-**Nie pobieraj sterowników z nieoficjalnych źródeł!** Mogą zawierać malware lub być nieaktualne.
+**Nie pobieraj sterowników z nieoficjalnych źródeł!** Mogą zawierać malware lub być nieaktualne. Jako **autoryzowany serwis Zebra** udostępniamy najnowsze, sprawdzone wersje sterowników bezpośrednio na naszej stronie.
 
-### Bezpośrednie linki:
+### Bezpośrednie linki (serwis-zebry.pl):
 
 | Sterownik | Link |
 |-----------|------|
@@ -16898,14 +16898,11 @@ Na etykiecie znajdziesz:
 
 ## 2. Gdzie pobrać firmware Zebra?
 
-### Oficjalne źródło: Zebra.com
+### Pobierz od autoryzowanego serwisu Zebra
 
-1. Wejdź na **zebra.com/support**
-2. Wpisz model drukarki (np. ZD420)
-3. Przejdź do **Downloads** → **Firmware**
-4. Pobierz najnowszą wersję (.zpl lub .zip)
+Jako **autoryzowany serwis Zebra** udostępniamy sprawdzone wersje firmware i narzędzia do aktualizacji bezpośrednio na naszej stronie. Pobieranie z zaufanych źródeł eliminuje ryzyko uszkodzenia drukarki przez niezgodne pliki.
 
-### Bezpośrednie linki:
+### Bezpośrednie linki (serwis-zebry.pl):
 
 | Narzędzie | Link |
 |-----------|------|
