@@ -218,7 +218,7 @@ export default function SklepPage() {
   return (
     <>
       <Header currentPage="other" />
-      <ShopSubheader />
+      <ShopSubheader breadcrumbs={[{ label: 'Sklep', href: '/sklep' }]} />
       
       <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
         {/* Hero - spójne z resztą portalu */}
@@ -268,7 +268,7 @@ export default function SklepPage() {
         </section>
 
         {/* Main Content */}
-        <section className="py-8 sm:py-10 md:py-12">
+        <section className="pt-4 pb-8 sm:pt-5 sm:pb-10 md:pt-6 md:pb-12">
           <div className="max-w-6xl mx-auto px-3 sm:px-4">
             
             {/* Layout: Sidebar + Products */}
@@ -276,11 +276,8 @@ export default function SklepPage() {
               
               {/* SIDEBAR */}
               <aside className="w-full lg:w-72 flex-shrink-0">
-                {/* Wyszukiwarka */}
-                <div className="mb-4">
-                  <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">
-                    Szukaj produktów
-                  </label>
+                {/* Wyszukiwarka - wyrównana z toolbarem */}
+                <div className="bg-white rounded-xl shadow-sm border border-gray-200 px-4 py-3 mb-4">
                   <form onSubmit={handleSearchSubmit}>
                     <div className="relative">
                       <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
@@ -288,34 +285,41 @@ export default function SklepPage() {
                         type="text"
                         value={searchInput}
                         onChange={(e) => setSearchInput(e.target.value)}
-                        placeholder="Nazwa, model, SKU..."
-                        className="w-full pl-9 pr-3 py-2.5 text-sm bg-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        placeholder="Szukaj produktów..."
+                        className="w-full pl-9 pr-3 py-1.5 text-sm bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:bg-white"
                       />
                     </div>
                   </form>
                 </div>
 
                 {/* Kategorie */}
-                <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">Kategorie</h3>
+                <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3 mt-6">Kategorie</h3>
                 <div className="space-y-1 mb-6">
                   {SHOP_CATEGORIES.map((productType) => {
                     const isProductTypeExpanded = expandedProductTypes.includes(productType.id)
                     
                     return (
                       <div key={productType.id}>
-                        <button
-                          onClick={() => toggleProductType(productType.id)}
-                          className="w-full text-sm font-medium text-gray-800 flex items-center justify-between gap-2 hover:text-blue-600 transition-colors py-2 px-2 rounded-lg hover:bg-gray-50"
-                        >
+                        <div className="w-full text-sm font-medium text-gray-800 flex items-center justify-between gap-2 transition-colors py-2 px-2 rounded-lg hover:bg-gray-50">
                           <Link 
                             href={`/sklep/${productType.slug}`}
-                            onClick={(e) => e.stopPropagation()}
-                            className="hover:text-blue-600"
+                            scroll={false}
+                            className="hover:text-blue-600 flex-1"
                           >
                             {productType.namePlural}
                           </Link>
-                          <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform ${isProductTypeExpanded ? 'rotate-180' : ''}`} />
-                        </button>
+                          <button
+                            onClick={(e) => {
+                              e.preventDefault()
+                              e.stopPropagation()
+                              toggleProductType(productType.id)
+                            }}
+                            className="p-2 -m-1 hover:bg-gray-200 rounded transition-colors"
+                            aria-label={isProductTypeExpanded ? 'Zwiń' : 'Rozwiń'}
+                          >
+                            <ChevronDown className={`w-5 h-5 text-gray-500 transition-transform ${isProductTypeExpanded ? 'rotate-180' : ''}`} />
+                          </button>
+                        </div>
                         
                         {isProductTypeExpanded && productType.printerCategories.length > 0 && (
                           <div className="space-y-1 ml-4 mt-1">
@@ -324,19 +328,26 @@ export default function SklepPage() {
                               
                               return (
                                 <div key={printerCat.id}>
-                                  <button
-                                    onClick={() => toggleCategory(`${productType.id}-${printerCat.id}`)}
-                                    className="w-full flex items-center justify-between px-2 py-1.5 text-sm rounded-lg transition-colors text-gray-600 hover:text-blue-600 hover:bg-gray-50"
-                                  >
+                                  <div className="w-full flex items-center justify-between px-2 py-1.5 text-sm rounded-lg transition-colors text-gray-600 hover:bg-gray-50">
                                     <Link 
                                       href={`/sklep/${productType.slug}/${printerCat.slug}`}
-                                      className="hover:text-blue-600"
-                                      onClick={(e) => e.stopPropagation()}
+                                      scroll={false}
+                                      className="hover:text-blue-600 flex-1"
                                     >
                                       {printerCat.name}
                                     </Link>
-                                    <ChevronDown className={`w-3.5 h-3.5 text-gray-400 transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
-                                  </button>
+                                    <button
+                                      onClick={(e) => {
+                                        e.preventDefault()
+                                        e.stopPropagation()
+                                        toggleCategory(`${productType.id}-${printerCat.id}`)
+                                      }}
+                                      className="p-2 -m-1 hover:bg-gray-200 rounded transition-colors"
+                                      aria-label={isExpanded ? 'Zwiń' : 'Rozwiń'}
+                                    >
+                                      <ChevronDown className={`w-4 h-4 text-gray-500 transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
+                                    </button>
+                                  </div>
                                   
                                   {isExpanded && (
                                     <div className="ml-4 mt-1 space-y-0.5">
@@ -344,6 +355,7 @@ export default function SklepPage() {
                                         <Link
                                           key={model.id}
                                           href={`/sklep/${productType.slug}/${printerCat.slug}/${model.slug}`}
+                                          scroll={false}
                                           className="block px-2 py-1 text-xs rounded transition-colors text-gray-500 hover:text-blue-600 hover:bg-gray-50"
                                         >
                                           {model.name}

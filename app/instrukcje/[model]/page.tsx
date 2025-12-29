@@ -268,27 +268,40 @@ export default async function ModelPage({ params }: { params: { model: string } 
     } : undefined,
   }
 
-  // Schema.org
+  // Schema.org - TechArticle (bez zagnieżdżonego Product, który wymaga offers)
   const schemaData = {
     '@context': 'https://schema.org',
     '@type': 'TechArticle',
-    name: `Instrukcja obsługi ${manual.model}`,
+    name: `Instrukcja obsługi Zebra ${manual.model}`,
+    headline: `Instrukcja obsługi Zebra ${manual.model} – Pobierz PDF`,
     description: manual.description,
     url: `https://www.serwis-zebry.pl/instrukcje/zebra-${manual.model.toLowerCase()}`,
-    about: {
-      '@type': 'Product',
-      name: `Zebra ${manual.model}`,
-      brand: {
-        '@type': 'Brand',
-        name: 'Zebra Technologies'
-      },
-      category: category.name
+    inLanguage: 'pl',
+    isAccessibleForFree: true,
+    author: {
+      '@type': 'Organization',
+      name: 'Zebra Technologies',
+      url: 'https://www.zebra.com'
     },
     publisher: {
       '@type': 'Organization',
       name: 'TAKMA - Serwis Zebra',
-      url: 'https://www.serwis-zebry.pl'
-    }
+      url: 'https://www.serwis-zebry.pl',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://www.serwis-zebry.pl/takma_logo_1.png'
+      }
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `https://www.serwis-zebry.pl/instrukcje/zebra-${manual.model.toLowerCase()}`
+    },
+    about: {
+      '@type': 'Thing',
+      name: `Zebra ${manual.model}`,
+      description: `${category.name} Zebra ${manual.model}`
+    },
+    keywords: `instrukcja ${manual.model}, manual ${manual.model}, Zebra ${manual.model}, ${category.name}`
   }
 
   return (

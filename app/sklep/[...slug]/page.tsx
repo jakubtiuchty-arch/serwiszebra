@@ -166,8 +166,8 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
     const model = getModelBySlug(slugPath[0], slugPath[1], slugPath[2])
     if (model) {
       return {
-        title: `${productType.namePlural} do Zebra ${model.name} | Sklep TAKMA`,
-        description: `${productType.namePlural} do drukarki Zebra ${model.name}. Oryginalne części z gwarancją. Wysyłka 24h.`
+        title: `${productType.namePlural} do ${model.name} | Sklep TAKMA`,
+        description: `${productType.namePlural} do drukarki ${model.name}. Oryginalne części z gwarancją. Wysyłka 24h.`
       }
     }
   }
@@ -199,26 +199,10 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
     return (
       <>
         <Header currentPage="other" />
-        <ShopSubheader />
+        <ShopSubheader breadcrumbs={productBreadcrumbs} />
         
         <div className="min-h-screen bg-gray-50">
           <div className="max-w-5xl mx-auto px-4 py-6">
-            {/* Breadcrumbs */}
-            <nav className="flex items-center gap-1.5 text-sm mb-6 flex-wrap">
-              {productBreadcrumbs.map((crumb, idx) => (
-                <span key={idx} className="flex items-center gap-1.5">
-                  {idx > 0 && <ChevronRight className="w-3.5 h-3.5 text-gray-400" />}
-                  {crumb.href ? (
-                    <Link href={crumb.href} className="text-gray-500 hover:text-blue-600 transition-colors">
-                      {crumb.label}
-                    </Link>
-                  ) : (
-                    <span className="text-gray-900 font-medium">{crumb.label}</span>
-                  )}
-                </span>
-              ))}
-            </nav>
-
             {/* Main content - 2 kolumny */}
             <div className="flex flex-col md:flex-row gap-6 mb-6 md:items-start">
               {/* Image */}
@@ -413,8 +397,8 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
     if (!model) {
       notFound()
     }
-    pageTitle = `${productType.namePlural} do Zebra ${model.name}`
-    pageSubtitle = `Oryginalne ${productType.namePlural.toLowerCase()} do drukarki Zebra ${model.name}`
+    pageTitle = `${productType.namePlural} do ${model.name}`
+    pageSubtitle = `Oryginalne ${productType.namePlural.toLowerCase()} do drukarki ${model.name}`
     filters.model = model.id
   }
 
@@ -430,28 +414,12 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
   return (
     <>
       <Header currentPage="other" />
-      <ShopSubheader />
+      <ShopSubheader breadcrumbs={breadcrumbs} />
       
       <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
         {/* Hero - spójne z /sklep */}
         <section className="relative bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-8 sm:py-10 md:py-12 overflow-hidden">
           <div className="relative max-w-6xl mx-auto px-3 sm:px-4">
-            {/* Breadcrumbs */}
-            <nav className="flex items-center gap-1.5 text-sm mb-4 flex-wrap">
-              {breadcrumbs.map((crumb, idx) => (
-                <span key={idx} className="flex items-center gap-1.5">
-                  {idx > 0 && <ChevronRight className="w-3.5 h-3.5 text-gray-400" />}
-                  {idx === breadcrumbs.length - 1 ? (
-                    <span className="text-gray-700 font-medium">{crumb.label}</span>
-                  ) : (
-                    <Link href={crumb.href} className="text-gray-500 hover:text-blue-600 transition-colors">
-                      {crumb.label}
-                    </Link>
-                  )}
-                </span>
-              ))}
-            </nav>
-
             <div className="flex items-center justify-center md:justify-start gap-1.5 sm:gap-2 mb-3">
               <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
               <span className="text-blue-600 font-medium text-sm">Sklep z częściami</span>
@@ -483,7 +451,7 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
         </section>
 
         {/* Main Content */}
-        <section className="py-8 sm:py-10 md:py-12">
+        <section className="pt-4 pb-8 sm:pt-5 sm:pb-10 md:pt-6 md:pb-12">
           <div className="max-w-6xl mx-auto px-3 sm:px-4">
             <div className="flex flex-col lg:flex-row gap-6">
               {/* SIDEBAR */}

@@ -55,11 +55,8 @@ export default function ShopSidebar({
 
   return (
     <aside className="w-full lg:w-72 flex-shrink-0">
-      {/* Wyszukiwarka */}
-      <div className="mb-4">
-        <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">
-          Szukaj produktów
-        </label>
+      {/* Wyszukiwarka - wyrównana z toolbarem */}
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 px-4 py-3 mb-4">
         <form onSubmit={handleSearchSubmit}>
           <div className="relative">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
@@ -67,15 +64,15 @@ export default function ShopSidebar({
               type="text"
               value={searchInput}
               onChange={(e) => setSearchInput(e.target.value)}
-              placeholder="Nazwa, model, SKU..."
-              className="w-full pl-9 pr-3 py-2.5 text-sm bg-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              placeholder="Szukaj produktów..."
+              className="w-full pl-9 pr-3 py-1.5 text-sm bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:bg-white"
             />
           </div>
         </form>
       </div>
 
       {/* Kategorie */}
-      <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">Kategorie</h3>
+      <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3 mt-6">Kategorie</h3>
       <div className="space-y-1 mb-6">
         {SHOP_CATEGORIES.map((productType) => {
           const isExpanded = expandedProductTypes.includes(productType.id)
@@ -83,21 +80,29 @@ export default function ShopSidebar({
 
             return (
             <div key={productType.id}>
-                <button
-                onClick={() => toggleProductType(productType.id)}
-                className={`w-full text-sm font-medium flex items-center justify-between gap-2 transition-colors py-2 px-2 rounded-lg hover:bg-gray-50 ${
-                  isCurrent ? 'text-blue-600 bg-blue-50/50' : 'text-gray-800 hover:text-blue-600'
+              <div className={`w-full text-sm font-medium flex items-center justify-between gap-2 transition-colors py-2 px-2 rounded-lg hover:bg-gray-50 ${
+                  isCurrent ? 'text-blue-600 bg-blue-50/50' : 'text-gray-800'
                 }`}
               >
                 <Link 
                   href={`/sklep/${productType.slug}`}
-                  onClick={(e) => e.stopPropagation()}
-                  className="hover:text-blue-600"
+                  scroll={false}
+                  className="hover:text-blue-600 flex-1"
                 >
                   {productType.namePlural}
                 </Link>
-                <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
+                <button
+                  onClick={(e) => {
+                    e.preventDefault()
+                    e.stopPropagation()
+                    toggleProductType(productType.id)
+                  }}
+                  className="p-2 -m-1 hover:bg-gray-200 rounded transition-colors"
+                  aria-label={isExpanded ? 'Zwiń' : 'Rozwiń'}
+                >
+                  <ChevronDown className={`w-5 h-5 text-gray-500 transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
                 </button>
+              </div>
 
               {isExpanded && productType.printerCategories.length > 0 && (
                 <div className="space-y-1 ml-4 mt-1">
@@ -108,23 +113,31 @@ export default function ShopSidebar({
 
                       return (
                       <div key={printerCat.id}>
-                        <button
-                          onClick={() => toggleCategory(categoryKey)}
-                          className={`w-full flex items-center justify-between px-2 py-1.5 text-sm rounded-lg transition-colors ${
+                        <div className={`w-full flex items-center justify-between px-2 py-1.5 text-sm rounded-lg transition-colors ${
                             isCurrentCat
                               ? 'text-blue-600 font-medium'
-                              : 'text-gray-600 hover:text-blue-600 hover:bg-gray-50'
+                              : 'text-gray-600 hover:bg-gray-50'
                           }`}
                         >
                           <Link 
                             href={`/sklep/${productType.slug}/${printerCat.slug}`}
-                            className="hover:text-blue-600"
-                            onClick={(e) => e.stopPropagation()}
+                            scroll={false}
+                            className="hover:text-blue-600 flex-1"
                           >
                             {printerCat.name}
                           </Link>
-                          <ChevronDown className={`w-3.5 h-3.5 text-gray-400 transition-transform ${isCatExpanded ? 'rotate-180' : ''}`} />
+                          <button
+                            onClick={(e) => {
+                              e.preventDefault()
+                              e.stopPropagation()
+                              toggleCategory(categoryKey)
+                            }}
+                            className="p-2 -m-1 hover:bg-gray-200 rounded transition-colors"
+                            aria-label={isCatExpanded ? 'Zwiń' : 'Rozwiń'}
+                          >
+                            <ChevronDown className={`w-4 h-4 text-gray-500 transition-transform ${isCatExpanded ? 'rotate-180' : ''}`} />
                           </button>
+                        </div>
 
                         {isCatExpanded && (
                           <div className="ml-4 mt-1 space-y-0.5">
@@ -133,8 +146,9 @@ export default function ShopSidebar({
 
                                 return (
                                 <Link
-                                    key={model.id}
+                                  key={model.id}
                                   href={`/sklep/${productType.slug}/${printerCat.slug}/${model.slug}`}
+                                  scroll={false}
                                   className={`block px-2 py-1 text-xs rounded transition-colors ${
                                     isCurrentModel
                                       ? 'bg-blue-600 text-white'
@@ -157,43 +171,6 @@ export default function ShopSidebar({
           })}
         </div>
 
-      {/* Filtr rozdzielczości */}
-      {(expandedProductTypes.includes('glowica') || expandedProductTypes.includes('walek')) && (
-        <>
-          <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">
-            {expandedProductTypes.includes('walek') ? 'Rozdzielczość głowicy' : 'Rozdzielczość'}
-          </h3>
-          <div className="space-y-2 mb-6">
-            {[203, 300, 600].map((res) => (
-              <label key={res} className="flex items-center gap-2 cursor-pointer px-2 py-1 rounded hover:bg-gray-50">
-                <input
-                  type="checkbox"
-                  className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                />
-                <span className="text-sm text-gray-700">{res} DPI</span>
-              </label>
-            ))}
-          </div>
-        </>
-      )}
-
-      {/* Filtr pojemności */}
-      {expandedProductTypes.includes('akumulator') && (
-        <>
-          <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">Pojemność</h3>
-          <div className="space-y-2 mb-6">
-            {['2000 mAh', '3000 mAh', '4000 mAh', '5000+ mAh'].map((cap) => (
-              <label key={cap} className="flex items-center gap-2 cursor-pointer px-2 py-1 rounded hover:bg-gray-50">
-                <input
-                  type="checkbox"
-                  className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                />
-                <span className="text-sm text-gray-700">{cap}</span>
-              </label>
-            ))}
-      </div>
-        </>
-      )}
     </aside>
   )
 }
