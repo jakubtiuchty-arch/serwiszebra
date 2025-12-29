@@ -7313,7 +7313,7 @@ Problem z **DataWedge** lub konfiguracją aplikacji. Zgłoś do IT – to nie je
     slug: 'zebra-tc58-upal-mroz-praca-w-ekstremalnych-temperaturach',
     title: 'Zebra TC58 w upale i mrozie – jak chronić terminal w ekstremalnych temperaturach',
     excerpt: 'TC58 wyłącza się w gorącym samochodzie? Nie ładuje na mrozie? Praktyczny poradnik dla kurierów: limity temperatur, ochrona przed przegrzaniem i zamarzaniem, tryb rękawiczek. DHL, InPost, DPD.',
-    coverImage: '/blog/terminal-zebra-tc58-temperatura-mróz-upal.jpeg',
+    coverImage: '/blog/terminal-zebra-tc58-temperatura-mroz-upal.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Certyfikowani technicy Zebra'
