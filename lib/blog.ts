@@ -2864,7 +2864,7 @@ Można mieć **7 aktywnych połączeń** Bluetooth jednocześnie (ograniczenie p
     readingTime: 8,
     deviceType: 'terminale',
     category: 'poradniki',
-    tags: ['factory reset zebra', 'enterprise reset', 'reset terminala', 'TC21 reset', 'TC52 reset', 'MC33 reset', 'MC93 reset', 'hard reset zebra', 'recovery mode', 'ustawienia fabryczne', 'wymazanie danych'],
+    tags: ['factory reset zebra', 'enterprise reset', 'reset terminala', 'TC21 reset', 'TC52 reset', 'MC33 reset', 'MC93 reset', 'hard reset zebra', 'recovery mode', 'ustawienia fabryczne', 'wymazanie danych', 'przywracanie ustawień fabrycznych'],
     seo: {
       metaTitle: 'Reset terminala Zebra - Factory vs Enterprise Reset [2025]',
       metaDescription: 'Jak zresetować terminal Zebra TC21, TC52, MC33, MC93? Factory Reset vs Enterprise Reset - która opcja kiedy? Instrukcja krok po kroku. Hard reset, Recovery Mode. Co się usuwa, a co zostaje?',
@@ -2872,24 +2872,70 @@ Można mieć **7 aktywnych połączeń** Bluetooth jednocześnie (ograniczenie p
         // Główne frazy
         'factory reset zebra', 'enterprise reset zebra', 'reset terminala zebra', 'hard reset terminal zebra',
         'zebra factory reset', 'zebra terminal reset', 'zebra hard reset',
-        // Modele
-        'zebra tc21 factory reset', 'zebra tc26 reset', 'zebra tc52 hard reset', 'zebra tc57 reset',
-        'zebra mc33 factory reset', 'zebra mc93 hard reset', 'zebra mc3300 reset', 'zebra ec50 reset',
+        'przywracanie ustawień fabrycznych zebra', 'reset do ustawień fabrycznych zebra',
+        'zebra przywracanie ustawień fabrycznych', 'zebra ustawienia fabryczne',
+        
+        // Seria TC - factory reset
+        'zebra tc20 factory reset', 'zebra tc21 factory reset', 'zebra tc22 factory reset',
+        'zebra tc25 factory reset', 'zebra tc26 factory reset', 'zebra tc27 factory reset',
+        'zebra tc51 factory reset', 'zebra tc52 factory reset', 'zebra tc52x factory reset', 'zebra tc53 factory reset',
+        'zebra tc56 factory reset', 'zebra tc57 factory reset', 'zebra tc58 factory reset',
+        'zebra tc72 factory reset', 'zebra tc73 factory reset',
+        'zebra tc77 factory reset', 'zebra tc78 factory reset',
+        'zebra tc8300 factory reset',
+        
+        // Seria TC - przywracanie ustawień fabrycznych
+        'zebra tc21 przywracanie ustawień fabrycznych', 'zebra tc52 przywracanie ustawień fabrycznych',
+        'zebra tc72 przywracanie ustawień fabrycznych', 'zebra tc57 przywracanie ustawień fabrycznych',
+        
+        // Seria TC - hard reset
+        'zebra tc21 hard reset', 'zebra tc52 hard reset', 'zebra tc72 hard reset', 'zebra tc57 hard reset',
+        
+        // Seria MC - factory reset
+        'zebra mc18 factory reset',
+        'zebra mc2200 factory reset', 'zebra mc2700 factory reset',
+        'zebra mc33 factory reset', 'zebra mc3300 factory reset', 'zebra mc3300x factory reset', 'zebra mc3400 factory reset',
+        'zebra mc93 factory reset', 'zebra mc9300 factory reset', 'zebra mc9400 factory reset',
+        
+        // Seria MC - przywracanie ustawień fabrycznych
+        'zebra mc3300 przywracanie ustawień fabrycznych', 'zebra mc9300 przywracanie ustawień fabrycznych',
+        'zebra mc33 przywracanie ustawień fabrycznych', 'zebra mc93 przywracanie ustawień fabrycznych',
+        
+        // Seria MC - hard reset
+        'zebra mc33 hard reset', 'zebra mc3300 hard reset', 'zebra mc93 hard reset', 'zebra mc9300 hard reset',
+        
+        // Seria WT/ET/EC - factory reset
+        'zebra wt6000 factory reset', 'zebra wt6300 factory reset',
+        'zebra et40 factory reset', 'zebra et45 factory reset', 'zebra et51 factory reset', 'zebra et56 factory reset',
+        'zebra ec50 factory reset', 'zebra ec55 factory reset', 'zebra ec30 factory reset',
+        
+        // Recovery mode - modele
+        'zebra tc21 recovery mode', 'zebra tc52 recovery mode', 'zebra tc72 recovery mode',
+        'zebra mc33 recovery mode', 'zebra mc3300 recovery mode', 'zebra mc93 recovery mode',
+        
         // Long tail - pytania
         'jak zresetować terminal zebra', 'jak wejść w recovery mode zebra', 'jak wymazać dane z terminala zebra',
         'różnica factory enterprise reset zebra', 'który reset wybrać zebra', 'reset zebra bez hasła',
+        'jak zresetować zebra tc21', 'jak zresetować zebra tc52', 'jak zresetować zebra mc3300',
+        
         // Long tail - rozwiązania
         'terminal zebra reset przez przyciski', 'terminal zebra reset kombinacja klawiszy', 'recovery mode reset zebra',
         'reset terminala zebra krok po kroku', 'enterprise reset co zostaje', 'factory reset co usuwa zebra',
+        
         // Frazy branżowe
         'reset terminala magazynowego zebra', 'reset terminala kurierskiego', 'terminal wms reset',
         'terminal zebra sprzedaż reset', 'przygotowanie terminala zebra do oddania',
+        'reset kolektora danych zebra', 'kolektor danych zebra factory reset',
+        
         // Frazy angielskie
         'zebra terminal factory reset guide', 'zebra enterprise reset vs factory reset',
-        'how to reset zebra terminal', 'zebra tc21 recovery mode', 'zebra hard reset buttons',
+        'how to reset zebra terminal', 'zebra hard reset buttons',
+        'zebra tc21 wipe data', 'zebra mc3300 wipe data', 'zebra tc52 wipe data',
+        
         // Problemy
         'terminal zebra nie resetuje się', 'zebra reset nie działa', 'terminal zebra zawiesza się podczas resetu',
-        'reset zebra trwa długo', 'terminal zebra po resecie nie startuje'
+        'reset zebra trwa długo', 'terminal zebra po resecie nie startuje',
+        'zebra frp bypass', 'zebra factory reset protection', 'zebra blokada google po resecie'
       ]
     },
     content: `
