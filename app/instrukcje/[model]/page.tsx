@@ -157,6 +157,15 @@ export async function generateMetadata({ params }: { params: { model: string } }
       `Zebra ${manual.model} instrukcja obsługi`,
       `Zebra ${manual.model} manual PDF`,
       
+      // Manual - popularne wyszukiwania
+      `${manual.model} manual`,
+      `${manual.model} manual PDF`,
+      `${manual.model} service manual`,
+      `Zebra ${manual.model} manual`,
+      `${manual.model} user manual`,
+      `${manual.model} manual download`,
+      `${manual.model} manual po polsku`,
+      
       // User Guide / Quick Start
       `${manual.model} user guide`,
       `${manual.model} quick start`,
@@ -207,11 +216,16 @@ export async function generateMetadata({ params }: { params: { model: string } }
       // Słowa kluczowe specyficzne dla typu urządzenia
       ...deviceSpecificKeywords(),
       
-      // Ogólne
+      // Ogólne - manual variations
       'zebra',
       'instrukcja pdf',
       'manual zebra',
-      'dokumentacja zebra'
+      'zebra manual pdf',
+      'zebra printer manual',
+      'zebra scanner manual',
+      'zebra terminal manual',
+      'dokumentacja zebra',
+      'zebra documentation'
     ],
     openGraph: {
       title: `Instrukcja obsługi Zebra ${manual.model} – Pobierz PDF`,
