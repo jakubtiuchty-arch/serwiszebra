@@ -70,6 +70,57 @@ export const metadata: Metadata = {
     'oficjalne sterowniki zebra download',
     'najnowsze sterowniki zebra 2024',
     'zebra zdesigner driver download free',
+    // Zebra Designer - oprogramowanie
+    'zebra designer 3 pobierz',
+    'zebra designer 3 pro',
+    'zebradesigner download',
+    'zebra designer darmowy program',
+    'zebradesigner essentials 3 download',
+    'zebra designer professional',
+    'zebra designer driver',
+    'zebra designer 3 software free download',
+    'zebra designer 3 download',
+    'zebra designer pro download',
+    'zebradesigner 3 free',
+    'zebra designer essentials',
+    'zebra designer pobierz za darmo',
+    'program do projektowania etykiet zebra',
+    
+    // Ogólne frazy - sterowniki drukarek
+    'sterowniki do drukarki zebra',
+    'drukarka zebra sterowniki',
+    'sterownik drukarki zebra',
+    'sterowniki drukarka zebra',
+    'driver do drukarki zebra',
+    
+    // zebra {model} sterowniki - Desktop
+    'zebra zd220 sterowniki', 'zebra zd230 sterowniki', 'zebra zd420 sterowniki', 'zebra zd421 sterowniki',
+    'zebra zd620 sterowniki', 'zebra zd621 sterowniki',
+    'zebra gk420d sterowniki', 'zebra gk420t sterowniki', 'zebra gx420d sterowniki', 'zebra gx420t sterowniki',
+    'zebra gc420d sterowniki', 'zebra gc420t sterowniki', 'zebra gt800 sterowniki',
+    'zebra lp2844 sterowniki', 'zebra tlp2844 sterowniki',
+    // zebra {model} sterowniki - Industrial
+    'zebra zt220 sterowniki', 'zebra zt230 sterowniki', 'zebra zt410 sterowniki', 'zebra zt411 sterowniki',
+    'zebra zt420 sterowniki', 'zebra zt421 sterowniki', 'zebra zt510 sterowniki',
+    'zebra zt610 sterowniki', 'zebra zt620 sterowniki',
+    'zebra 105sl sterowniki', 'zebra 110xi4 sterowniki',
+    // zebra {model} sterowniki - Mobile
+    'zebra zq310 sterowniki', 'zebra zq320 sterowniki', 'zebra zq510 sterowniki', 'zebra zq520 sterowniki',
+    'zebra zq610 sterowniki', 'zebra zq620 sterowniki', 'zebra zq630 sterowniki',
+    
+    // drukarka zebra {model} sterowniki - Desktop
+    'drukarka zebra zd220 sterowniki', 'drukarka zebra zd230 sterowniki',
+    'drukarka zebra zd420 sterowniki', 'drukarka zebra zd421 sterowniki',
+    'drukarka zebra zd620 sterowniki', 'drukarka zebra zd621 sterowniki',
+    'drukarka zebra gk420d sterowniki', 'drukarka zebra gk420t sterowniki',
+    'drukarka zebra gc420 sterowniki', 'drukarka zebra gt800 sterowniki',
+    // drukarka zebra {model} sterowniki - Industrial
+    'drukarka zebra zt410 sterowniki', 'drukarka zebra zt411 sterowniki',
+    'drukarka zebra zt420 sterowniki', 'drukarka zebra zt421 sterowniki',
+    'drukarka zebra zt610 sterowniki', 'drukarka zebra zt620 sterowniki',
+    // drukarka zebra {model} sterowniki - Mobile
+    'drukarka zebra zq520 sterowniki', 'drukarka zebra zq630 sterowniki',
+    
     // Long tail - konfiguracja
     'konfiguracja drukarki zebra windows',
     'ustawienia sterownika zebra',
