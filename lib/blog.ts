@@ -110,8 +110,8 @@ export const BLOG_CATEGORIES = {
 export const blogPosts: BlogPost[] = [
   {
     slug: 'drukarka-zebra-nie-drukuje-przyczyny-rozwiazania',
-    title: 'Drukarka Zebra nie drukuje - 7 najczęstszych przyczyn i jak je naprawić',
-    excerpt: 'Twoja drukarka Zebra przestała drukować? Poznaj 7 najczęstszych przyczyn tego problemu i dowiedz się, jak je samodzielnie zdiagnozować i naprawić.',
+    title: 'Drukarka Zebra nie drukuje etykiet - 7 najczęstszych przyczyn i jak je naprawić',
+    excerpt: 'Twoja drukarka Zebra nie drukuje etykiet? Poznaj 7 najczęstszych przyczyn tego problemu: głowica, ribbon, kalibracja, sterowniki. Dowiedz się, jak je samodzielnie zdiagnozować i naprawić.',
     coverImage: '/blog/drukarka-zebra-nie-drukuje-rozwiazania.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
@@ -122,23 +122,29 @@ export const blogPosts: BlogPost[] = [
     deviceType: 'drukarki',
     subDeviceType: 'etykiet',
     category: 'troubleshooting',
-    tags: ['drukarka zebra', 'nie drukuje', 'troubleshooting', 'naprawa', 'GK420', 'ZD420', 'ZT410', 'głowica', 'ribbon', 'kalibracja', 'sterowniki'],
+    tags: ['drukarka zebra', 'nie drukuje', 'nie drukuje etykiet', 'troubleshooting', 'naprawa', 'GK420', 'ZD420', 'ZT410', 'głowica', 'ribbon', 'kalibracja', 'sterowniki'],
     seo: {
-      metaTitle: 'Drukarka Zebra nie drukuje - 7 przyczyn i rozwiązania [2025]',
-      metaDescription: 'Drukarka Zebra nie drukuje? 7 najczęstszych przyczyn: głowica, ribbon, kalibracja, sterowniki, ZPL. Poradnik krok po kroku dla GK420, ZD420, ZT410. Kiedy do serwisu? Autoryzowany partner Zebra.',
+      metaTitle: 'Drukarka Zebra nie drukuje etykiet - 7 przyczyn i rozwiązania [2025]',
+      metaDescription: 'Drukarka Zebra nie drukuje etykiet? 7 najczęstszych przyczyn: głowica, ribbon, kalibracja, sterowniki, ZPL. Poradnik krok po kroku dla GK420, ZD420, ZT410. Kiedy do serwisu?',
       keywords: [
-        // Główne frazy
-        'drukarka zebra nie drukuje', 'zebra printer not printing', 'naprawa drukarki zebra',
+        // Główne frazy - z "etykiet"
+        'drukarka zebra nie drukuje etykiet', 'drukarka zebra nie drukuje', 'zebra nie drukuje etykiet',
+        'drukarka etykiet zebra nie drukuje', 'zebra printer not printing labels',
+        'zebra printer not printing', 'naprawa drukarki zebra',
         'problemy z drukarką zebra', 'dlaczego drukarka zebra nie drukuje', 'zebra printer troubleshooting',
-        // Modele
+        // Modele - z "etykiet"
+        'zebra zd420 nie drukuje etykiet', 'zebra zd421 nie drukuje etykiet',
+        'zebra zd220 nie drukuje etykiet', 'zebra zd230 nie drukuje etykiet',
         'zebra zd420 nie drukuje', 'zebra gk420 problemy', 'zebra zt410 nie drukuje',
         'zebra zd621 nie drukuje', 'zebra zd220 problem', 'zebra gc420 nie działa',
         // Objawy
         'drukarka zebra nie reaguje', 'zebra drukuje puste etykiety', 'drukarka zebra miga czerwono',
         'drukarka zebra błąd ribbon', 'zebra nie widzi etykiet', 'drukarka zebra offline',
+        'drukarka etykiet nie drukuje', 'etykieciarka zebra nie drukuje',
         // Long tail - pytania
-        'jak naprawić drukarkę zebra', 'co zrobić gdy drukarka zebra nie drukuje',
+        'jak naprawić drukarkę zebra', 'co zrobić gdy drukarka zebra nie drukuje etykiet',
         'jak skalibrować drukarkę zebra', 'ile kosztuje naprawa drukarki zebra',
+        'dlaczego drukarka etykiet nie drukuje',
         // Long tail - rozwiązania
         'drukarka zebra sterowniki windows 10', 'drukarka zebra sterowniki windows 11',
         'reset drukarki zebra', 'kalibracja drukarki zebra', 'drukarka zebra factory reset',
@@ -16056,11 +16062,12 @@ Jako **autoryzowany serwis Zebra** pomożemy Ci:
     deviceType: 'drukarki',
     subDeviceType: 'etykiet',
     category: 'poradniki',
-    tags: ['ZPL', 'programowanie', 'etykiety', 'komendy ZPL', 'kody kreskowe', 'drukarki Zebra', 'ZPL II', 'tutorial'],
+    tags: ['ZPL', 'programowanie', 'etykiety', 'komendy ZPL', 'kody kreskowe', 'drukarki Zebra', 'ZPL II', 'tutorial', 'zpl co to'],
     seo: {
       metaTitle: 'Język ZPL – kompletny poradnik [Komendy + Przykłady 2025] | Serwis Zebra',
       metaDescription: 'Naucz się programować etykiety w języku ZPL! Kompletny poradnik po polsku: podstawowe komendy ^XA, ^FO, ^FD, ^B3, czcionki, ramki i praktyczne przykłady.',
       keywords: [
+        'zpl co to', 'co to jest zpl', 'zpl co to jest', 'zpl znaczenie',
         'zpl poradnik', 'zpl komendy', 'programowanie etykiet zebra', 'zpl tutorial polski',
         'zpl przykłady', 'zpl kod kreskowy', 'zpl czcionki', 'zpl ramki',
         'język zpl', 'zpl ii', 'zpl programming', 'zebra zpl',
