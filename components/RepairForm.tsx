@@ -24,7 +24,7 @@ const repairFormSchema = z.object({
   lastName: z.string().min(2, 'Nazwisko musi mieć min. 2 znaki'),
   email: z.string().email('Nieprawidłowy adres email'),
   phone: z.string().min(9, 'Nieprawidłowy numer telefonu'),
-  company: z.string().optional(),
+  company: z.string().min(1, 'Nazwa firmy jest wymagana'),
   nip: z.string().min(10, 'NIP musi mieć 10 cyfr').max(10, 'NIP musi mieć 10 cyfr'),
   
   // KROK 2: Szczegóły urządzenia
@@ -175,7 +175,7 @@ export default function RepairForm() {
       formDataToSend.append('lastName', data.lastName)
       formDataToSend.append('email', data.email)
       formDataToSend.append('phone', data.phone)
-      if (data.company) formDataToSend.append('company', data.company)
+      formDataToSend.append('company', data.company)
       formDataToSend.append('nip', data.nip)
       
       formDataToSend.append('deviceModel', data.deviceModel)
@@ -374,15 +374,18 @@ export default function RepairForm() {
 
                 <div>
                   <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-2">
-                    Firma (opcjonalnie)
+                    Firma <span className="text-red-500">*</span>
                   </label>
                   <input
                     {...register('company')}
                     id="company"
                     type="text"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className={`w-full px-3 py-2 border rounded-full focus:ring-2 focus:ring-blue-500 focus:border-transparent ${errors.company ? 'border-red-500' : 'border-gray-300'}`}
                     placeholder="Nazwa firmy"
                   />
+                  {errors.company && (
+                    <p className="text-red-500 text-xs mt-1">{errors.company.message}</p>
+                  )}
                 </div>
 
                 <div>
@@ -740,9 +743,7 @@ export default function RepairForm() {
                       <p><span className="text-gray-600">Imię i nazwisko:</span> <span className="font-medium">{formData.firstName} {formData.lastName}</span></p>
                       <p><span className="text-gray-600">Email:</span> <span className="font-medium">{formData.email}</span></p>
                       <p><span className="text-gray-600">Telefon:</span> <span className="font-medium">{formData.phone}</span></p>
-                      {formData.company && (
-                        <p><span className="text-gray-600">Firma:</span> <span className="font-medium">{formData.company}</span></p>
-                      )}
+                      <p><span className="text-gray-600">Firma:</span> <span className="font-medium">{formData.company}</span></p>
                       <p><span className="text-gray-600">NIP:</span> <span className="font-medium">{formData.nip}</span></p>
                     </div>
                   </div>

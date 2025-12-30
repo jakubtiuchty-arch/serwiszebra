@@ -212,7 +212,13 @@ export default function PolitykaPrywatnosciPage() {
                 <li><strong>Dostawcy usług AI</strong> - Google, OpenAI - w zakresie czatu AI</li>
                 <li><strong>Biuro rachunkowe</strong> - w celu prowadzenia księgowości</li>
               </ul>
-              <p>5.2. Dane nie są przekazywane do państw trzecich poza EOG, z wyjątkiem usług chmurowych posiadających odpowiednie zabezpieczenia (SCC, Privacy Shield).</p>
+              <p>5.2. Niektóre z wymienionych podmiotów (Vercel, Stripe, Google, OpenAI) mogą przetwarzać dane w USA. Transfer odbywa się na podstawie:</p>
+              <ul className="list-disc list-inside ml-4 space-y-1 mt-2">
+                <li><strong>EU-U.S. Data Privacy Framework (DPF)</strong> – dla podmiotów certyfikowanych (Google, Stripe)</li>
+                <li><strong>Standardowe Klauzule Umowne (SCC)</strong> – zatwierdzone przez Komisję Europejską</li>
+                <li><strong>Wiążące Reguły Korporacyjne (BCR)</strong> – dla niektórych dostawców</li>
+              </ul>
+              <p className="mt-2">5.3. Przed przekazaniem danych weryfikujemy, czy podmiot zapewnia odpowiedni poziom ochrony zgodny z RODO.</p>
             </div>
           </section>
 
@@ -270,8 +276,12 @@ export default function PolitykaPrywatnosciPage() {
                 </div>
               </div>
 
-              <p className="mt-4">7.2. Aby skorzystać z praw, skontaktuj się z nami: <a href="mailto:serwis@takma.com.pl" className="text-blue-600 hover:underline">serwis@takma.com.pl</a></p>
-              <p>7.3. Masz prawo wnieść skargę do Prezesa Urzędu Ochrony Danych Osobowych (UODO).</p>
+              <p className="mt-4">7.2. <strong>Prawo cofnięcia zgody:</strong> Jeśli przetwarzamy Twoje dane na podstawie zgody (np. marketing), możesz ją cofnąć w każdej chwili. Cofnięcie zgody nie wpływa na zgodność z prawem przetwarzania dokonanego przed jej cofnięciem.</p>
+              
+              <p className="mt-4">7.3. <strong>Profilowanie i automatyczne podejmowanie decyzji:</strong> Nie podejmujemy decyzji opartych wyłącznie na zautomatyzowanym przetwarzaniu, które wywołałyby skutki prawne lub w podobny sposób istotnie na Ciebie wpływały. Chat AI służy wyłącznie do wstępnej diagnostyki i pomocy - wszystkie decyzje dotyczące naprawy podejmowane są przez pracowników serwisu.</p>
+              
+              <p className="mt-4">7.4. Aby skorzystać z praw, skontaktuj się z nami: <a href="mailto:serwis@takma.com.pl" className="text-blue-600 hover:underline">serwis@takma.com.pl</a></p>
+              <p>7.5. Masz prawo wnieść skargę do Prezesa Urzędu Ochrony Danych Osobowych (UODO), ul. Stawki 2, 00-193 Warszawa.</p>
             </div>
           </section>
 
@@ -301,8 +311,30 @@ export default function PolitykaPrywatnosciPage() {
                 </div>
               </div>
 
-              <p>8.2. Możesz zarządzać cookies w ustawieniach przeglądarki. Wyłączenie cookies może ograniczyć funkcjonalność serwisu.</p>
-              <p>8.3. Szczegółowa lista cookies dostępna jest w ustawieniach prywatności przeglądarki.</p>
+              <p className="font-medium text-gray-900 mt-4">Szczegółowa lista plików cookies:</p>
+              <div className="overflow-x-auto mt-3">
+                <table className="min-w-full text-xs border border-gray-200 rounded-lg overflow-hidden">
+                  <thead className="bg-gray-100">
+                    <tr>
+                      <th className="px-3 py-2 text-left font-medium text-gray-700">Nazwa</th>
+                      <th className="px-3 py-2 text-left font-medium text-gray-700">Typ</th>
+                      <th className="px-3 py-2 text-left font-medium text-gray-700">Cel</th>
+                      <th className="px-3 py-2 text-left font-medium text-gray-700">Czas życia</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-200">
+                    <tr><td className="px-3 py-2">cookie-consent</td><td className="px-3 py-2">Niezbędne</td><td className="px-3 py-2">Zapamiętanie wyboru cookies</td><td className="px-3 py-2">365 dni</td></tr>
+                    <tr><td className="px-3 py-2">sb-*</td><td className="px-3 py-2">Niezbędne</td><td className="px-3 py-2">Sesja użytkownika (Supabase)</td><td className="px-3 py-2">7 dni</td></tr>
+                    <tr><td className="px-3 py-2">_ga, _ga_*</td><td className="px-3 py-2">Analityczne</td><td className="px-3 py-2">Google Analytics - statystyki</td><td className="px-3 py-2">2 lata</td></tr>
+                    <tr><td className="px-3 py-2">_gid</td><td className="px-3 py-2">Analityczne</td><td className="px-3 py-2">Google Analytics - sesja</td><td className="px-3 py-2">24 godziny</td></tr>
+                    <tr><td className="px-3 py-2">_gcl_*</td><td className="px-3 py-2">Marketingowe</td><td className="px-3 py-2">Google Ads - konwersje</td><td className="px-3 py-2">90 dni</td></tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <p className="mt-4">8.2. <strong>Zarządzanie zgodami:</strong> Przy pierwszej wizycie wyświetlamy baner cookies, gdzie możesz wybrać kategorie plików, na które wyrażasz zgodę. Możesz zmienić swoje preferencje w każdej chwili, klikając link "Ustawienia cookies" w stopce strony.</p>
+              <p>8.3. Możesz również zarządzać cookies w ustawieniach przeglądarki. Wyłączenie cookies niezbędnych może ograniczyć funkcjonalność serwisu.</p>
+              <p>8.4. <strong>Wycofanie zgody:</strong> Aby wycofać zgodę na cookies analityczne lub marketingowe, użyj banera cookies lub wyczyść pliki cookies w przeglądarce.</p>
             </div>
           </section>
 

@@ -3,6 +3,7 @@ import Script from 'next/script'
 import './globals.css'
 import { metadata as seoMetadata, viewport as seoViewport } from './metadata'
 import { Analytics } from '@vercel/analytics/next'
+import CookieBanner from '@/components/CookieBanner'
 
 const GA_MEASUREMENT_ID = 'G-JVWERC1N4J'
 const GTM_ID = 'GTM-55KB354V'
@@ -23,6 +24,26 @@ export default function RootLayout({
   return (
     <html lang="pl" className={inter.className}>
       <head>
+        {/* Google Consent Mode - domyślnie denied przed zgodą użytkownika */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('consent', 'default', {
+                'analytics_storage': 'denied',
+                'ad_storage': 'denied',
+                'ad_user_data': 'denied',
+                'ad_personalization': 'denied',
+                'functionality_storage': 'granted',
+                'personalization_storage': 'denied',
+                'security_storage': 'granted',
+                'wait_for_update': 500
+              });
+            `
+          }}
+        />
+        
         {/* Google Tag Manager - must load early */}
         <script
           dangerouslySetInnerHTML={{
@@ -80,6 +101,7 @@ export default function RootLayout({
           Przejdź do treści
         </a>
         {children}
+        <CookieBanner />
         <Analytics />
       </body>
     </html>

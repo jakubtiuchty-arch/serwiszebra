@@ -55,7 +55,8 @@ export default function RegulaminPage() {
             <li><a href="#reklamacje" className="hover:underline">8. Reklamacje</a></li>
             <li><a href="#odpowiedzialnosc" className="hover:underline">9. Odpowiedzialność</a></li>
             <li><a href="#dane" className="hover:underline">10. Ochrona danych osobowych</a></li>
-            <li><a href="#postanowienia-koncowe" className="hover:underline">11. Postanowienia końcowe</a></li>
+            <li><a href="#uslugi-elektroniczne" className="hover:underline">11. Usługi elektroniczne</a></li>
+            <li><a href="#postanowienia-koncowe" className="hover:underline">12. Postanowienia końcowe</a></li>
           </ol>
         </div>
 
@@ -243,19 +244,64 @@ export default function RegulaminPage() {
             </div>
           </section>
 
-          {/* §11 */}
+          {/* §11 - Usługi elektroniczne */}
+          <section id="uslugi-elektroniczne" className="mb-10">
+            <h2 className="text-xl font-bold text-gray-900 mb-4">§11. Usługi elektroniczne</h2>
+            <div className="space-y-3 text-gray-600 text-sm leading-relaxed">
+              <p>11.1. W ramach serwisu świadczymy następujące usługi drogą elektroniczną:</p>
+              
+              <p className="font-medium text-gray-900 mt-4">Konto użytkownika (Panel klienta)</p>
+              <ul className="list-disc list-inside ml-4 space-y-1">
+                <li>Umowa o świadczenie usługi konta zawierana jest na czas nieokreślony z chwilą rejestracji</li>
+                <li>Konto umożliwia: śledzenie statusu napraw, przeglądanie historii zleceń, komunikację z serwisem, akceptację wycen</li>
+                <li>Klient może w każdej chwili usunąć konto poprzez kontakt z serwisem lub opcję w panelu</li>
+                <li>Usunięcie konta nie wpływa na wcześniej zawarte umowy naprawy</li>
+              </ul>
+
+              <p className="font-medium text-gray-900 mt-4">Asystent AI (Chat)</p>
+              <ul className="list-disc list-inside ml-4 space-y-1">
+                <li>Chat AI służy do wstępnej diagnostyki i udzielania informacji o usługach</li>
+                <li>Odpowiedzi generowane przez AI mają charakter informacyjny i nie stanowią wiążącej oferty</li>
+                <li>Ostateczna wycena i warunki naprawy ustalane są przez pracowników serwisu</li>
+                <li>Rozmowy z AI mogą być przechowywane w celu poprawy jakości usługi (szczegóły w Polityce Prywatności)</li>
+              </ul>
+
+              <p className="font-medium text-gray-900 mt-4">Wymagania techniczne</p>
+              <ul className="list-disc list-inside ml-4 space-y-1">
+                <li>Przeglądarka internetowa z obsługą JavaScript (Chrome, Firefox, Safari, Edge)</li>
+                <li>Połączenie z Internetem</li>
+                <li>Aktywny adres email</li>
+              </ul>
+
+              <p className="font-medium text-gray-900 mt-4">Reklamacje usług elektronicznych</p>
+              <ul className="list-disc list-inside ml-4 space-y-1">
+                <li>Reklamacje dotyczące działania serwisu można zgłaszać na: serwis@takma.com.pl</li>
+                <li>Reklamacja powinna zawierać opis problemu i dane kontaktowe</li>
+                <li>Odpowiedź na reklamację udzielana jest w terminie 14 dni</li>
+              </ul>
+
+              <p className="mt-4">11.2. Zakazane jest dostarczanie przez Klienta treści o charakterze bezprawnym, w szczególności:</p>
+              <ul className="list-disc list-inside ml-4 space-y-1">
+                <li>Treści naruszających prawa osób trzecich</li>
+                <li>Treści obraźliwych lub wulgarnych</li>
+                <li>Prób zakłócenia działania serwisu</li>
+              </ul>
+            </div>
+          </section>
+
+          {/* §12 */}
           <section id="postanowienia-koncowe" className="mb-10">
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center">
                 <Scale className="w-5 h-5 text-gray-600" />
               </div>
-              <h2 className="text-xl font-bold text-gray-900 m-0">§11. Postanowienia końcowe</h2>
+              <h2 className="text-xl font-bold text-gray-900 m-0">§12. Postanowienia końcowe</h2>
             </div>
             <div className="space-y-3 text-gray-600 text-sm leading-relaxed">
-              <p>11.1. W sprawach nieuregulowanych niniejszym Regulaminem stosuje się przepisy Kodeksu Cywilnego.</p>
-              <p>11.2. Serwis zastrzega sobie prawo do zmiany Regulaminu. O zmianach Klienci zostaną poinformowani poprzez publikację nowej wersji na stronie.</p>
-              <p>11.3. Wszelkie spory wynikające z realizacji usług rozstrzygane będą przez sąd właściwy dla siedziby Serwisu.</p>
-              <p>11.4. Regulamin wchodzi w życie z dniem 5 grudnia 2025 roku.</p>
+              <p>12.1. W sprawach nieuregulowanych niniejszym Regulaminem stosuje się przepisy Kodeksu Cywilnego.</p>
+              <p>12.2. Serwis zastrzega sobie prawo do zmiany Regulaminu. O zmianach Klienci zostaną poinformowani poprzez publikację nowej wersji na stronie oraz email do zarejestrowanych użytkowników.</p>
+              <p>12.3. Wszelkie spory wynikające z realizacji usług rozstrzygane będą przez sąd właściwy dla siedziby Serwisu.</p>
+              <p>12.4. Regulamin wchodzi w życie z dniem 5 grudnia 2025 roku.</p>
             </div>
           </section>
         </div>

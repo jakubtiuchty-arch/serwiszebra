@@ -17227,31 +17227,86 @@ Jako **autoryzowany serwis Zebra** pomożemy Ci:
     deviceType: 'drukarki',
     subDeviceType: 'etykiet',
     category: 'poradniki',
-    tags: ['Zebra Setup Utilities', 'konfiguracja', 'narzędzie', 'sieć', 'firmware', 'kalibracja', 'diagnostyka', 'ZSU', 'USB', 'Ethernet'],
+    tags: ['Zebra Setup Utilities', 'konfiguracja', 'narzędzie', 'sieć', 'firmware', 'kalibracja', 'diagnostyka', 'ZSU', 'USB', 'Ethernet', 'pobierz', 'download', 'instalacja'],
     seo: {
-      metaTitle: 'Zebra Setup Utilities – jak używać? Kompletny poradnik [2025]',
-      metaDescription: 'Zebra Setup Utilities: instalacja, konfiguracja sieci, wysyłanie firmware, kalibracja drukarki. Poradnik krok po kroku ze zdjęciami dla ZD420, ZT410, GK420.',
+      metaTitle: 'Zebra Setup Utilities – pobierz i skonfiguruj drukarkę [Poradnik 2025]',
+      metaDescription: 'Zebra Setup Utilities: pobierz za darmo, instalacja, konfiguracja sieci, wysyłanie firmware, kalibracja drukarki. Poradnik krok po kroku ze zdjęciami dla ZD420, ZT410, GK420.',
       keywords: [
+        // Główne frazy - pobieranie
         'zebra setup utilities',
+        'zebra setup utilities pobierz',
         'zebra setup utilities download',
+        'zebra setup utilities free download',
+        'zebra setup utilities pobierz za darmo',
+        'zebra setup utilities download free',
+        
+        // Warianty bez "s"
+        'zebra setup utility',
+        'zebra setup utility download',
+        'zebra setup utility pobierz',
+        
+        // Skróty
+        'zsu zebra',
+        'zsu zebra download',
+        'zsu zebra pobierz',
+        'zsu download',
+        'zebra zsu',
+        
+        // Windows
+        'zebra setup utilities windows 10',
+        'zebra setup utilities windows 11',
+        'zebra setup utilities windows 7',
+        
+        // Instalacja
+        'zebra setup utilities instalacja',
+        'jak zainstalować zebra setup utilities',
+        'instalacja zebra setup utilities',
+        'zebra setup utilities install',
+        
+        // Konfiguracja
         'jak skonfigurować drukarkę zebra',
         'zebra setup utilities poradnik',
         'konfiguracja drukarki zebra',
-        'zebra setup utilities windows 11',
         'zebra narzędzie konfiguracyjne',
         'zebra printer setup',
-        'zebra setup utilities instalacja',
         'zebra konfiguracja sieci',
         'zebra ip statyczne',
+        'konfiguracja ip drukarki zebra',
+        
+        // Funkcje
         'zebra firmware update',
         'zebra kalibracja',
         'zebra diagnostyka',
-        'zsu zebra',
         'zebra printer tools',
         'zebra setup utilities tutorial',
+        
+        // Po polsku
         'zebra setup utilities po polsku',
+        'narzędzie konfiguracyjne zebra',
+        'program do konfiguracji drukarki zebra',
+        
+        // Modele
         'konfiguracja zebra zd420',
-        'konfiguracja zebra zt410'
+        'konfiguracja zebra zt410',
+        'konfiguracja zebra gk420',
+        'konfiguracja zebra zd421',
+        'konfiguracja zebra zd621',
+        
+        // Problemy
+        'zebra setup utilities nie działa',
+        'zebra setup utilities nie widzi drukarki',
+        'zebra setup utilities błąd',
+        'zebra setup utilities nie łączy',
+        
+        // Printer Setup Utility
+        'zebra printer setup utility',
+        'zebra printer setup utility download',
+        'printer setup utility zebra',
+        
+        // Utilities ogólnie
+        'zebra utilities',
+        'zebra utilities download',
+        'zebra utilities pobierz'
       ]
     },
     content: `
