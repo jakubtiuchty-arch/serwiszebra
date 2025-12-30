@@ -209,6 +209,20 @@ export const metadata: Metadata = {
     'wymiana lcd terminal zebra', 'naprawa ekranu zebra', 'wymiana wyświetlacza zebra',
     'zebra terminal zbity ekran', 'zebra terminal pęknięty ekran',
     
+    // Kolektory danych (synonim terminali)
+    'kolektor danych zebra',
+    'kolektory danych zebra',
+    'naprawa kolektorów danych',
+    'serwis kolektorów danych zebra',
+    'kolektor danych zebra serwis',
+    'kolektor zebra naprawa',
+    'kolektor danych zebra tc52', 'kolektor danych zebra tc21', 'kolektor danych zebra mc3300',
+    'kolektor danych zebra mc9300', 'kolektor danych zebra tc72',
+    'zebra kolektor', 'zebra kolektory',
+    'naprawa kolektora zebra', 'serwis kolektora zebra',
+    'kolektor mobilny zebra', 'mobilny kolektor danych zebra',
+    'instrukcja kolektor zebra', 'manual kolektor danych zebra',
+    
     // Skanery
     'zebra ds2208 serwis', 'zebra ds3678 serwis', 'zebra ls2208 serwis',
     
