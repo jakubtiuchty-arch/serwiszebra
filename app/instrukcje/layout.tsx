@@ -128,6 +128,20 @@ export const metadata: Metadata = {
     'kody konfiguracyjne zebra',
     'kody programowe skaner zebra',
     
+    // Skanery - Enter / suffix / suffix code
+    'zebra enter', 'zebra skaner enter', 'skaner zebra enter',
+    'zebra ds22 enter', 'zebra ds2208 enter', 'zebra ds2278 enter',
+    'zebra ds36 enter', 'zebra ds3608 enter', 'zebra ds3678 enter',
+    'zebra ds43 enter', 'zebra ds4308 enter', 'zebra ds4608 enter',
+    'zebra ds81 enter', 'zebra ds8108 enter', 'zebra ds8178 enter',
+    'zebra ls2208 enter', 'zebra li4278 enter',
+    'skaner zebra jak dodać enter', 'skaner zebra suffix enter',
+    'zebra scanner enter after scan', 'zebra add enter suffix',
+    'zebra carriage return', 'zebra cr lf', 'zebra suffix configuration',
+    'jak zaprogramować enter w skanerze zebra',
+    'skaner zebra automatyczny enter',
+    'zebra ds2208 dodanie enter',
+    
     // Skanery - serwis
     'skaner zebra serwis', 'naprawa skanera zebra', 'serwis skanerów zebra',
     'zebra ds2208 serwis', 'zebra ds3678 serwis', 'zebra ls2208 serwis',
