@@ -74,21 +74,64 @@ export const metadata: Metadata = {
     'konfiguracja terminala zebra',
     'jak skonfigurować terminal zebra',
     
-    // Skanery
+    // Skanery - główne frazy
+    'skaner zebra instrukcja',
+    'skaner zebra instrukcja obsługi',
     'instrukcja skanera zebra',
-    'instrukcja ds2208',
-    'ds2208 manual',
-    'ds2208 manual pdf',
-    'instrukcja ds3678',
-    'ds3678 manual',
-    'instrukcja ls2208',
-    'ls2208 manual',
-    'instrukcja li4278',
-    'li4278 manual',
+    'instrukcja obsługi skanera zebra',
+    'zebra skaner instrukcja',
+    'zebra scanner manual',
+    'zebra barcode scanner manual',
+    'skaner kodów kreskowych zebra instrukcja',
+    'skaner zebra manual',
+    'skaner zebra manual pdf',
+    
+    // Skanery - modele DS (Digital Scanner)
+    'instrukcja ds2208', 'ds2208 manual', 'ds2208 manual pdf', 'skaner zebra ds2208 instrukcja',
+    'instrukcja ds2278', 'ds2278 manual', 'ds2278 manual pdf', 'skaner zebra ds2278 instrukcja',
+    'instrukcja ds3608', 'ds3608 manual', 'ds3608 manual pdf', 'skaner zebra ds3608 instrukcja',
+    'instrukcja ds3678', 'ds3678 manual', 'ds3678 manual pdf', 'skaner zebra ds3678 instrukcja',
+    'instrukcja ds4308', 'ds4308 manual', 'ds4308 manual pdf', 'skaner zebra ds4308 instrukcja',
+    'instrukcja ds4608', 'ds4608 manual', 'ds4608 manual pdf', 'skaner zebra ds4608 instrukcja',
+    'instrukcja ds8108', 'ds8108 manual', 'ds8108 manual pdf', 'skaner zebra ds8108 instrukcja',
+    'instrukcja ds8178', 'ds8178 manual', 'ds8178 manual pdf', 'skaner zebra ds8178 instrukcja',
+    'instrukcja ds9208', 'ds9208 manual', 'ds9208 manual pdf', 'skaner zebra ds9208 instrukcja',
+    'instrukcja ds9308', 'ds9308 manual', 'ds9308 manual pdf', 'skaner zebra ds9308 instrukcja',
+    
+    // Skanery - modele LS/LI (Legacy)
+    'instrukcja ls2208', 'ls2208 manual', 'ls2208 manual pdf', 'skaner zebra ls2208 instrukcja',
+    'instrukcja ls4208', 'ls4208 manual', 'skaner zebra ls4208 instrukcja',
+    'instrukcja li2208', 'li2208 manual', 'skaner zebra li2208 instrukcja',
+    'instrukcja li4278', 'li4278 manual', 'li4278 manual pdf', 'skaner zebra li4278 instrukcja',
+    
+    // Skanery - modele CS (Companion Scanner)
+    'instrukcja cs4070', 'cs4070 manual', 'skaner zebra cs4070 instrukcja',
+    'instrukcja cs6080', 'cs6080 manual', 'skaner zebra cs6080 instrukcja',
+    
+    // Skanery - modele MT (Mini Terminal)
+    'instrukcja mt2070', 'mt2070 manual', 'skaner zebra mt2070 instrukcja',
+    'instrukcja mt2090', 'mt2090 manual', 'skaner zebra mt2090 instrukcja',
+    
+    // Skanery - modele SP (Stationary/Presentation)
+    'instrukcja sp72', 'sp72 manual', 'skaner zebra sp72 instrukcja',
+    'instrukcja mp7000', 'mp7000 manual', 'skaner zebra mp7000 instrukcja',
+    
+    // Skanery - konfiguracja i programowanie
     'zebra ds2208 manual po polsku',
     'konfiguracja skanera zebra',
     'programowanie skanera zebra',
     'kody kreskowe skanera zebra',
+    'skaner zebra konfiguracja',
+    'skaner zebra programowanie',
+    'skaner zebra ustawienia',
+    '123scan zebra',
+    'kody konfiguracyjne zebra',
+    'kody programowe skaner zebra',
+    
+    // Skanery - serwis
+    'skaner zebra serwis', 'naprawa skanera zebra', 'serwis skanerów zebra',
+    'zebra ds2208 serwis', 'zebra ds3678 serwis', 'zebra ls2208 serwis',
+    'zebra ds4308 serwis', 'zebra ds8108 serwis', 'zebra li4278 serwis',
     
     // Tablety
     'instrukcja tabletu zebra',
@@ -223,8 +266,8 @@ export const metadata: Metadata = {
     'kolektor mobilny zebra', 'mobilny kolektor danych zebra',
     'instrukcja kolektor zebra', 'manual kolektor danych zebra',
     
-    // Skanery
-    'zebra ds2208 serwis', 'zebra ds3678 serwis', 'zebra ls2208 serwis',
+    // Skanery - dodatkowe modele serwis
+    'zebra ds4308 serwis', 'zebra ds8178 serwis', 'zebra cs4070 serwis',
     
     // Pobieranie
     'pobierz instrukcję zebra',
