@@ -4678,21 +4678,44 @@ Domyślnie po ~30 minutach nieaktywności skaner przechodzi w tryb uśpienia. Mo
         // Główne frazy
         'konfiguracja skanera zebra', 'programowanie skanera zebra', 'zebra scanner configuration',
         'kody programujące zebra', 'zebra barcode programming', 'ustawienia skanera zebra',
-        // Enter/Tab/Sufiksy
+        
+        // Enter/Tab/Sufiksy - główne
         'enter po skanowaniu zebra', 'skaner zebra sufiks tab', 'jak dodać enter do skanera',
         'skaner zebra tab po skanie', 'zebra scanner add enter', 'zebra scanner suffix settings',
+        'zebra enter', 'zebra skaner enter', 'skaner zebra enter',
+        
+        // Enter - modele (popularne wyszukiwania!)
+        'zebra ds22 enter', 'zebra ds2208 enter', 'zebra ds2278 enter',
+        'zebra ds36 enter', 'zebra ds3608 enter', 'zebra ds3678 enter',
+        'zebra ds43 enter', 'zebra ds4308 enter', 'zebra ds4608 enter',
+        'zebra ds81 enter', 'zebra ds8108 enter', 'zebra ds8178 enter',
+        'zebra ls2208 enter', 'zebra li4278 enter', 'zebra li2208 enter',
+        'zebra cs4070 enter',
+        
+        // Enter - warianty fraz
+        'skaner zebra jak dodać enter', 'zebra suffix enter', 'zebra carriage return',
+        'zebra cr lf', 'zebra suffix configuration', 'jak zaprogramować enter w skanerze zebra',
+        'skaner zebra automatyczny enter', 'zebra ds2208 dodanie enter',
+        'zebra scanner enter after scan', 'zebra add enter suffix',
+        'zebra ds2208 carriage return', 'zebra scanner cr suffix',
+        
         // Klawiatura
         'skaner zebra polska klawiatura', 'zebra keyboard country poland', 'skaner zebra polskie znaki',
+        
         // Symbologie
         'włączyć qr code zebra', 'zebra scanner enable datamatrix', 'symbologie skanera zebra',
-        // Modele
+        
+        // Modele - konfiguracja
         'kody programujące zebra ds2208', 'ds4608 konfiguracja', 'li2208 programowanie',
         'ds2278 ustawienia', 'ls2208 konfiguracja', 'ds8178 programming',
+        
         // Narzędzia
         '123scan konfiguracja', '123scan download', 'zebra 123scan poradnik',
+        
         // Long tail
         'kody kreskowe konfiguracyjne zebra', 'jak zaprogramować skaner zebra', 'skaner zebra reset do ustawień fabrycznych',
         'skaner zebra gotowe kody do zeskanowania', 'jak zmienić ustawienia skanera zebra',
+        
         // Frazy angielskie
         'zebra scanner programming barcodes', 'zebra scanner enter suffix', 'zebra 123scan tutorial',
         'zebra scanner factory reset barcode', 'zebra scanner configuration guide'
