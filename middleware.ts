@@ -10,6 +10,7 @@ import { NextResponse, type NextRequest } from 'next/server'
 // Lista superadminów (muszą być lowercase)
 const SUPERADMIN_EMAILS = [
   'jakub.tiuchty@gmail.com',
+  'jakub.tiuchty@takma.com.pl',
 ]
 
 // Sekcje dozwolone dla zwykłych adminów

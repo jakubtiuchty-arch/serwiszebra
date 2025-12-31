@@ -7,7 +7,7 @@
  */
 export const SUPERADMIN_EMAILS = [
   'jakub.tiuchty@gmail.com',
-  // Dodaj tutaj więcej superadminów jeśli potrzeba
+  'jakub.tiuchty@takma.com.pl',
 ]
 
 /**
