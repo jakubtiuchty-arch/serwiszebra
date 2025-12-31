@@ -1,8 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { requireAdminServer } from '@/lib/auth-server'
+import { isSuperAdmin } from '@/lib/admin-config'
 
 // PATCH /api/admin/users/[id]/role - Zmiana roli użytkownika (admin → user lub user → admin)
+// TYLKO DLA SUPERADMINÓW
 export async function PATCH(
   request: NextRequest,
   { params }: { params: { id: string } }
@@ -13,6 +15,15 @@ export async function PATCH(
     if (!adminCheck.isAdmin) {
       return NextResponse.json(
         { error: 'Brak uprawnień administratora' },
+        { status: 403 }
+      )
+    }
+
+    // 1.5 Sprawdzenie czy user jest SUPERADMINEM - tylko superadmini mogą zmieniać role
+    const userEmail = adminCheck.user?.email
+    if (!isSuperAdmin(userEmail)) {
+      return NextResponse.json(
+        { error: 'Tylko superadministratorzy mogą zmieniać role użytkowników' },
         { status: 403 }
       )
     }

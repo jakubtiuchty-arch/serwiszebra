@@ -19,6 +19,8 @@ import {
 } from 'lucide-react'
 import { format } from 'date-fns'
 import { pl } from 'date-fns/locale'
+import { createClient } from '@/lib/supabase/client'
+import { isSuperAdmin } from '@/lib/admin-config'
 
 interface UserProfile {
   id: string
@@ -43,9 +45,11 @@ interface Stats {
 
 export default function AdminUsersPage() {
   const router = useRouter()
+  const supabase = createClient()
   const [users, setUsers] = useState<UserProfile[]>([])
   const [stats, setStats] = useState<Stats>({ total: 0, admins: 0, active: 0, blocked: 0 })
   const [loading, setLoading] = useState(true)
+  const [isSuperAdminUser, setIsSuperAdminUser] = useState(false)
 
   // Filtry
   const [roleFilter, setRoleFilter] = useState<'all' | 'admin' | 'user'>('all')
@@ -56,6 +60,17 @@ export default function AdminUsersPage() {
   const [editingUser, setEditingUser] = useState<UserProfile | null>(null)
   const [changingRoleUser, setChangingRoleUser] = useState<UserProfile | null>(null)
   const [blockingUser, setBlockingUser] = useState<UserProfile | null>(null)
+
+  // Sprawdź czy aktualny użytkownik jest superadminem
+  useEffect(() => {
+    const checkSuperAdmin = async () => {
+      const { data: { session } } = await supabase.auth.getSession()
+      if (session?.user?.email) {
+        setIsSuperAdminUser(isSuperAdmin(session.user.email))
+      }
+    }
+    checkSuperAdmin()
+  }, [supabase])
 
   // Pobieranie użytkowników
   const fetchUsers = async () => {
@@ -377,14 +392,16 @@ export default function AdminUsersPage() {
                     {/* Akcje */}
                     <td className="px-3 sm:px-4 py-2.5 text-right">
                       <div className="flex items-center justify-end gap-1">
-                        {/* Zmiana roli */}
-                        <button
-                          onClick={() => setChangingRoleUser(user)}
-                          className="p-1.5 text-gray-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors"
-                          title="Zmień rolę"
-                        >
-                          <Shield className="w-3.5 h-3.5" />
-                        </button>
+                        {/* Zmiana roli - tylko dla superadminów */}
+                        {isSuperAdminUser && (
+                          <button
+                            onClick={() => setChangingRoleUser(user)}
+                            className="p-1.5 text-gray-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors"
+                            title="Zmień rolę"
+                          >
+                            <Shield className="w-3.5 h-3.5" />
+                          </button>
+                        )}
 
                         {/* Blokowanie/odblokowywanie */}
                         <button
