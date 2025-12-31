@@ -9,7 +9,6 @@ import {
   UserCog,
   LogOut,
   Shield,
-  ShieldCheck,
   Package,
   ShoppingCart,
   BarChart3,
@@ -258,18 +257,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 }`}></div>
                 
                 {/* Button */}
-                <div className="relative bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 px-2 md:px-3 py-1 md:py-1.5 rounded-full border border-gray-700 flex items-center gap-1 md:gap-1.5">
-                  {isSuperAdminUser ? (
-                    <>
-                      <ShieldCheck className="w-3 h-3 text-purple-400" />
-                      <span className="text-[10px] md:text-xs font-semibold text-white">SUPERADMIN</span>
-                    </>
-                  ) : (
-                    <>
-                      <Shield className="w-3 h-3 text-blue-400" />
-                      <span className="text-[10px] md:text-xs font-semibold text-white">ADMIN</span>
-                    </>
-                  )}
+                <div className="relative bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 px-3 md:px-4 py-1 md:py-1.5 rounded-full border border-gray-700">
+                  <span className="text-[10px] md:text-xs font-semibold text-white">
+                    {isSuperAdminUser ? 'SUPERADMIN' : 'ADMIN'}
+                  </span>
                 </div>
               </div>
             </div>
