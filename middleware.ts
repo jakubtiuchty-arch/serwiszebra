@@ -7,6 +7,34 @@
 import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 
+// Lista superadminów (muszą być lowercase)
+const SUPERADMIN_EMAILS = [
+  'jakub.tiuchty@gmail.com',
+]
+
+// Sekcje dozwolone dla zwykłych adminów
+const REGULAR_ADMIN_ALLOWED_PATHS = [
+  '/admin',           // Dashboard (exact match)
+  '/admin/zgloszenie', // Szczegóły zgłoszeń
+  '/admin/uzytkownicy', // Użytkownicy
+  '/admin/instrukcje',  // Instrukcje PDF
+]
+
+function isSuperAdminEmail(email: string | undefined): boolean {
+  if (!email) return false
+  return SUPERADMIN_EMAILS.includes(email.toLowerCase())
+}
+
+function isPathAllowedForRegularAdmin(pathname: string): boolean {
+  // Exact match dla /admin
+  if (pathname === '/admin') return true
+  
+  // Prefix match dla pozostałych
+  return REGULAR_ADMIN_ALLOWED_PATHS.some(path => 
+    path !== '/admin' && pathname.startsWith(path)
+  )
+}
+
 // Uproszczona mapa kategorii dla middleware (Edge runtime)
 const PRODUCT_TYPE_SLUGS: Record<string, string> = {
   glowica: 'glowice',
@@ -125,7 +153,19 @@ export async function middleware(request: NextRequest) {
       return NextResponse.redirect(url)
     }
 
-    // User jest adminem - kontynuuj
+    // User jest adminem - sprawdź czy jest superadminem
+    const userEmail = session.user.email
+    const isSuperAdmin = isSuperAdminEmail(userEmail)
+
+    // Jeśli NIE jest superadminem, sprawdź czy ma dostęp do tej ścieżki
+    if (!isSuperAdmin && !isPathAllowedForRegularAdmin(pathname)) {
+      // Zwykły admin próbuje wejść na stronę tylko dla superadminów
+      url.pathname = '/admin'
+      url.searchParams.set('error', 'superadmin_access_required')
+      return NextResponse.redirect(url)
+    }
+
+    // User ma odpowiednie uprawnienia - kontynuuj
     return supabaseResponse
   }
 

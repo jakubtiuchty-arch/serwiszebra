@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import {
@@ -9,6 +9,7 @@ import {
   UserCog,
   LogOut,
   Shield,
+  ShieldCheck,
   Package,
   ShoppingCart,
   BarChart3,
@@ -22,92 +23,122 @@ import {
 } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
+import { isSuperAdmin } from '@/lib/admin-config'
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
   const router = useRouter()
   const supabase = createClient()
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [userEmail, setUserEmail] = useState<string | null>(null)
+  const [isSuperAdminUser, setIsSuperAdminUser] = useState(false)
+
+  // Pobierz email użytkownika i sprawdź czy jest superadminem
+  useEffect(() => {
+    const checkUser = async () => {
+      const { data: { session } } = await supabase.auth.getSession()
+      if (session?.user?.email) {
+        setUserEmail(session.user.email)
+        setIsSuperAdminUser(isSuperAdmin(session.user.email))
+      }
+    }
+    checkUser()
+  }, [supabase])
 
   const handleLogout = async () => {
     await supabase.auth.signOut()
     router.push('/logowanie')
   }
 
-  const navigation = [
-  // Serwis
-  { type: 'header', name: 'Serwis' },
-  {
-    name: 'Dashboard',
-    href: '/admin',
-    icon: LayoutDashboard,
-    current: pathname === '/admin' || pathname.startsWith('/admin/zgloszenie'),
-  },
-  
-  // Sklep
-  { type: 'header', name: 'Sklep' },
-  {
-    name: 'Produkty',
-    href: '/admin/produkty',
-    icon: Package,
-    current: pathname.startsWith('/admin/produkty'),
-  },
-  {
-    name: 'Zamówienia',
-    href: '/admin/zamowienia',
-    icon: ShoppingCart,
-    current: pathname.startsWith('/admin/zamowienia'),
-  },
-  
-  // Ustawienia
-  { type: 'header', name: 'Ustawienia' },
-  {
-    name: 'Użytkownicy',
-    href: '/admin/uzytkownicy',
-    icon: UserCog,
-    current: pathname === '/admin/uzytkownicy',
-  },
-  
-  // Baza wiedzy
-  { type: 'header', name: 'Baza wiedzy' },
-  {
-    name: 'Instrukcje PDF',
-    href: '/admin/instrukcje',
-    icon: BookOpen,
-    current: pathname === '/admin/instrukcje',
-  },
+  // Pełna nawigacja - niektóre elementy są tylko dla superadminów
+  const fullNavigation = [
+    // Serwis
+    { type: 'header', name: 'Serwis' },
+    {
+      name: 'Dashboard',
+      href: '/admin',
+      icon: LayoutDashboard,
+      current: pathname === '/admin' || pathname.startsWith('/admin/zgloszenie'),
+    },
+    
+    // Sklep - tylko dla superadminów
+    { type: 'header', name: 'Sklep', superAdminOnly: true },
+    {
+      name: 'Produkty',
+      href: '/admin/produkty',
+      icon: Package,
+      current: pathname.startsWith('/admin/produkty'),
+      superAdminOnly: true,
+    },
+    {
+      name: 'Zamówienia',
+      href: '/admin/zamowienia',
+      icon: ShoppingCart,
+      current: pathname.startsWith('/admin/zamowienia'),
+      superAdminOnly: true,
+    },
+    
+    // Ustawienia
+    { type: 'header', name: 'Ustawienia' },
+    {
+      name: 'Użytkownicy',
+      href: '/admin/uzytkownicy',
+      icon: UserCog,
+      current: pathname === '/admin/uzytkownicy',
+    },
+    
+    // Baza wiedzy
+    { type: 'header', name: 'Baza wiedzy' },
+    {
+      name: 'Instrukcje PDF',
+      href: '/admin/instrukcje',
+      icon: BookOpen,
+      current: pathname === '/admin/instrukcje',
+    },
 
-  // AI & RAG
-  { type: 'header', name: 'AI & RAG' },
-  {
-    name: 'Chat Logs',
-    href: '/admin/chat-logs',
-    icon: MessageSquare,
-    current: pathname === '/admin/chat-logs',
-  },
-  {
-    name: 'Analityka AI',
-    href: '/admin/chat-analytics',
-    icon: Sparkles,
-    current: pathname === '/admin/chat-analytics',
-  },
-  // Analiza
-  { type: 'header', name: 'Analiza' },
-  {
-    name: 'Analityka - serwis',
-    href: '/admin/analityka-serwis',
-    icon: BarChart3,
-    current: pathname === '/admin/analityka-serwis',
-    disabled: true,
-  },
-  {
-    name: 'Analityka - sklep',
-    href: '/admin/analityka-sklep',
-    icon: BarChart3,
-    current: pathname === '/admin/analityka-sklep',
-    disabled: true,
-  },
-]
+    // AI & RAG - tylko dla superadminów
+    { type: 'header', name: 'AI & RAG', superAdminOnly: true },
+    {
+      name: 'Chat Logs',
+      href: '/admin/chat-logs',
+      icon: MessageSquare,
+      current: pathname === '/admin/chat-logs',
+      superAdminOnly: true,
+    },
+    {
+      name: 'Analityka AI',
+      href: '/admin/chat-analytics',
+      icon: Sparkles,
+      current: pathname === '/admin/chat-analytics',
+      superAdminOnly: true,
+    },
+    // Analiza - tylko dla superadminów
+    { type: 'header', name: 'Analiza', superAdminOnly: true },
+    {
+      name: 'Analityka - serwis',
+      href: '/admin/analityka-serwis',
+      icon: BarChart3,
+      current: pathname === '/admin/analityka-serwis',
+      disabled: true,
+      superAdminOnly: true,
+    },
+    {
+      name: 'Analityka - sklep',
+      href: '/admin/analityka-sklep',
+      icon: BarChart3,
+      current: pathname === '/admin/analityka-sklep',
+      disabled: true,
+      superAdminOnly: true,
+    },
+  ]
+
+  // Filtruj nawigację - ukryj elementy superAdminOnly dla zwykłych adminów
+  const navigation = fullNavigation.filter(item => {
+    if (item.superAdminOnly && !isSuperAdminUser) {
+      return false
+    }
+    return true
+  })
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -220,12 +251,25 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               
               <div className="relative group">
                 {/* Glow effect */}
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 via-purple-500 to-blue-500 rounded-full blur-sm opacity-75 group-hover:opacity-100 transition duration-300"></div>
+                <div className={`absolute -inset-0.5 rounded-full blur-sm opacity-75 group-hover:opacity-100 transition duration-300 ${
+                  isSuperAdminUser 
+                    ? 'bg-gradient-to-r from-orange-500 via-purple-500 to-blue-500' 
+                    : 'bg-gradient-to-r from-blue-500 via-blue-400 to-cyan-500'
+                }`}></div>
                 
                 {/* Button */}
                 <div className="relative bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 px-2 md:px-3 py-1 md:py-1.5 rounded-full border border-gray-700 flex items-center gap-1 md:gap-1.5">
-                  <Shield className="w-3 h-3 text-purple-400" />
-                  <span className="text-[10px] md:text-xs font-semibold text-white">SUPERADMIN</span>
+                  {isSuperAdminUser ? (
+                    <>
+                      <ShieldCheck className="w-3 h-3 text-purple-400" />
+                      <span className="text-[10px] md:text-xs font-semibold text-white">SUPERADMIN</span>
+                    </>
+                  ) : (
+                    <>
+                      <Shield className="w-3 h-3 text-blue-400" />
+                      <span className="text-[10px] md:text-xs font-semibold text-white">ADMIN</span>
+                    </>
+                  )}
                 </div>
               </div>
             </div>
