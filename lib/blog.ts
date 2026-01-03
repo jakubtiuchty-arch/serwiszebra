@@ -6981,9 +6981,9 @@ Tak, ale różnica jest minimalna:
 
 ## Zobacz też
 
-- [Jak wymienić baterię TC58 bez restartu (Hot Swap)](/blog/hot-swap-bateria-tc58)
-- [TC58 nie ładuje się w uchwycie samochodowym](/blog/tc58-nie-laduje-uchwyt-samochodowy)
-- [Porównanie terminali Zebra dla kurierów](/blog/porownanie-terminali-zebra-kurierzy)
+- [Skaner TC58 przestał działać w trasie – szybka naprawa](/blog/zebra-tc58-skaner-nie-dziala-naprawa-w-trasie)
+- [TC58 w upale i mrozie – ochrona terminala](/blog/zebra-tc58-upal-mroz-praca-w-ekstremalnych-temperaturach)
+- [TC58 nie łączy się z siecią – ustawienia APN](/blog/zebra-tc58-siec-4g-5g-ustawienia-apn-polscy-operatorzy)
 
 ---
 
