@@ -10375,9 +10375,9 @@ Zależy od stanu urządzenia. **Warto naprawić:** terminal <3 lata, tylko probl
 
 ## Zobacz też
 
-- [Naprawa skanera Zebra – kiedy warto naprawiać, a kiedy wymienić?](/blog/naprawa-skanera-zebra-kiedy-naprawiac-kiedy-wymienic)
+- [Naprawa skanera Zebra – kiedy warto naprawiać, a kiedy wymienić?](/blog/naprawa-skanera-zebra-kiedy-warto-kiedy-wymienic)
 - [Skaner Zebra TC58 przestał działać w trasie – szybka naprawa](/blog/zebra-tc58-skaner-nie-dziala-naprawa-w-trasie)
-- [Reset fabryczny terminali Zebra – wszystkie metody](/blog/reset-fabryczny-terminal-zebra-metody)
+- [Reset fabryczny terminali Zebra – wszystkie metody](/blog/reset-fabryczny-terminal-zebra-factory-enterprise)
 
 ---
 
