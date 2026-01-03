@@ -7375,7 +7375,7 @@ Problem z **DataWedge** lub konfiguracją aplikacji. Zgłoś do IT – to nie je
 
 - [Bateria TC58 nie wytrzymuje trasy kurierskiej](/blog/zebra-tc58-bateria-nie-wytrzymuje-trasy-kurierskiej)
 - [DataWedge – kompletna konfiguracja dla kurierów](/blog/datawedge-konfiguracja-kurierzy)
-- [TC58 nie łączy się z siecią – ustawienia APN](/blog/tc58-siec-apn-kurierzy)
+- [TC58 nie łączy się z siecią – ustawienia APN](/blog/zebra-tc58-siec-4g-5g-ustawienia-apn-polscy-operatorzy)
 
 ---
 
@@ -7654,7 +7654,7 @@ TC58 ma certyfikat **IP68** (zanurzenie 1.5m/30 min) i **IP65** (strumienie wody
 
 - [Bateria TC58 nie wytrzymuje trasy kurierskiej](/blog/zebra-tc58-bateria-nie-wytrzymuje-trasy-kurierskiej)
 - [Skaner TC58 przestał działać w trasie](/blog/zebra-tc58-skaner-nie-dziala-naprawa-w-trasie)
-- [TC58 nie łączy się z siecią – ustawienia APN](/blog/tc58-siec-apn-kurierzy)
+- [TC58 nie łączy się z siecią – ustawienia APN](/blog/zebra-tc58-siec-4g-5g-ustawienia-apn-polscy-operatorzy)
 
 ---
 
