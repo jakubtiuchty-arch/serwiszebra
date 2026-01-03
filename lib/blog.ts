@@ -17421,8 +17421,6 @@ Jako **autoryzowany serwis Zebra** pomożemy Ci:
 
 **Krok 3:** Uruchom **Setup.exe** jako administrator
 
-![Instalacja ZSU - uruchom jako administrator](/blog/zsu/zsu-install-1.png)
-
 **Krok 4:** Zaakceptuj licencję → **Next**
 
 **Krok 5:** Wybierz folder instalacji → **Install**
@@ -17435,9 +17433,7 @@ Jako **autoryzowany serwis Zebra** pomożemy Ci:
 
 ## 2. Interfejs programu – przegląd
 
-Po uruchomieniu Zebra Setup Utilities zobaczysz główne okno:
-
-![Główne okno Zebra Setup Utilities](/blog/zsu/zsu-main-window.png)
+Po uruchomieniu Zebra Setup Utilities zobaczysz główne okno programu.
 
 ### Elementy interfejsu:
 
@@ -17459,8 +17455,6 @@ Po uruchomieniu Zebra Setup Utilities zobaczysz główne okno:
 2. Kliknij **Refresh** w ZSU
 3. Drukarka pojawi się na liście
 
-![Drukarka wykryta przez USB](/blog/zsu/zsu-usb-detect.png)
-
 ### Metoda 2: Dodawanie ręczne (sieć)
 
 1. Kliknij **Install New Printer**
@@ -17471,8 +17465,6 @@ Po uruchomieniu Zebra Setup Utilities zobaczysz główne okno:
 4. Dla TCP/IP wpisz **adres IP drukarki**
 5. Wybierz model drukarki z listy
 6. Kliknij **Next** → **Finish**
-
-![Dodawanie drukarki sieciowej](/blog/zsu/zsu-add-network.png)
 
 ---
 
@@ -17489,8 +17481,6 @@ Drukarki z DHCP mogą zmieniać IP po restarcie, co powoduje problemy z drukowan
 **Krok 2:** Kliknij **Configure Printer Settings**
 
 **Krok 3:** Przejdź do zakładki **Network** (lub **Connectivity**)
-
-![Zakładka Network w ZSU](/blog/zsu/zsu-network-tab.png)
 
 **Krok 4:** Ustaw parametry:
 
@@ -17518,8 +17508,6 @@ Drukarki z DHCP mogą zmieniać IP po restarcie, co powoduje problemy z drukowan
 **Krok 2:** Przejdź do zakładki **Action**
 
 **Krok 3:** Kliknij **Send File to Printer**
-
-![Wysyłanie pliku w ZSU](/blog/zsu/zsu-send-file.png)
 
 **Krok 4:** Wybierz plik (.zpl, .txt, .prn)
 
@@ -17554,8 +17542,6 @@ Drukarki z DHCP mogą zmieniać IP po restarcie, co powoduje problemy z drukowan
 
 **Krok 3:** Kliknij **Calibrate Media**
 
-![Kalibracja w ZSU](/blog/zsu/zsu-calibrate.png)
-
 **Krok 4:** Wybierz typ kalibracji:
 
 | Opcja | Kiedy używać? |
@@ -17576,8 +17562,6 @@ Drukarki z DHCP mogą zmieniać IP po restarcie, co powoduje problemy z drukowan
 **Krok 1:** Wybierz drukarkę → **Open Printer Tools**
 
 **Krok 2:** Przejdź do zakładki **Status**
-
-![Status drukarki w ZSU](/blog/zsu/zsu-status.png)
 
 ### Informacje o statusie:
 
@@ -17604,8 +17588,6 @@ Otrzymasz pełną konfigurację drukarki w formacie tekstowym.
 **Krok 1:** Wybierz drukarkę → **Open Printer Tools**
 
 **Krok 2:** Przejdź do zakładki **Direct Communication**
-
-![Direct Communication w ZSU](/blog/zsu/zsu-direct-comm.png)
 
 **Krok 3:** Wpisz komendę ZPL w polu tekstowym
 
@@ -17640,8 +17622,6 @@ Otrzymasz pełną konfigurację drukarki w formacie tekstowym.
 
 **Krok 3:** Zapisz plik .zpl na dysku
 
-![Backup konfiguracji](/blog/zsu/zsu-backup.png)
-
 ### Przywracanie konfiguracji:
 
 **Krok 1:** Zakładka **Action** → **Send File to Printer**
@@ -17669,8 +17649,6 @@ Otrzymasz pełną konfigurację drukarki w formacie tekstowym.
 **Krok 5:** Kliknij **Send**
 
 **Krok 6:** **NIE WYŁĄCZAJ DRUKARKI!** Poczekaj na restart.
-
-![Aktualizacja firmware przez ZSU](/blog/zsu/zsu-firmware.png)
 
 > **⚠️ UWAGA:** Aktualizacja firmware kasuje ustawienia! Zrób backup przed aktualizacją.
 
