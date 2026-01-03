@@ -124,7 +124,7 @@ export const blogPosts: BlogPost[] = [
     category: 'troubleshooting',
     tags: ['drukarka zebra', 'nie drukuje', 'nie drukuje etykiet', 'troubleshooting', 'naprawa', 'GK420', 'ZD420', 'ZT410', 'głowica', 'ribbon', 'kalibracja', 'sterowniki'],
     seo: {
-      metaTitle: 'Drukarka Zebra nie drukuje etykiet - 7 przyczyn i rozwiązania [2025]',
+      metaTitle: 'Drukarka Zebra nie drukuje etykiet - 7 przyczyn i rozwiązania [2026]',
       metaDescription: 'Drukarka Zebra nie drukuje etykiet? 7 najczęstszych przyczyn: głowica, ribbon, kalibracja, sterowniki, ZPL. Poradnik krok po kroku dla GK420, ZD420, ZT410. Kiedy do serwisu?',
       keywords: [
         // Główne frazy - z "etykiet"
@@ -358,7 +358,7 @@ Skontaktuj się z nami - jako autoryzowany serwis Zebra obsługujemy również n
     category: 'poradniki',
     tags: ['głowica drukująca', 'czyszczenie', 'konserwacja', 'poradnik', 'IPA', 'alkohol izopropylowy', 'GK420', 'ZD420', 'ZT410', 'wałek dociskowy', 'karty czyszczące'],
     seo: {
-      metaTitle: 'Jak wyczyścić głowicę drukarki Zebra - poradnik [2025]',
+      metaTitle: 'Jak wyczyścić głowicę drukarki Zebra - poradnik [2026]',
       metaDescription: 'Czyszczenie głowicy drukarki Zebra krok po kroku. Alkohol IPA 99%, patyczki, karty czyszczące. Jak często? Co ile etykiet? GK420, ZD420, ZT410. Wydłuż żywotność głowicy 2-3x!',
       keywords: [
         // Główne frazy
@@ -506,7 +506,7 @@ Nawet przy prawidłowej konserwacji głowica zużywa się. Oznaki konieczności 
     category: 'poradniki',
     tags: ['głowica drukująca', 'wymiana głowicy', 'koszt naprawy', 'drukarka zebra', 'GK420', 'ZD420', 'ZT410', 'cena głowicy', 'part number', 'żywotność głowicy'],
     seo: {
-      metaTitle: 'Wymiana głowicy drukarki Zebra - kiedy i ile kosztuje? [2025]',
+      metaTitle: 'Wymiana głowicy drukarki Zebra - kiedy i ile kosztuje? [2026]',
       metaDescription: 'Kiedy wymienić głowicę drukarki Zebra? Objawy zużycia: białe linie, blady wydruk. Ceny 250-2500 zł. Czy samemu? Part numbers dla GK420, ZD420, ZT410. Żywotność głowicy w km wydruku.',
       keywords: [
         // Główne frazy
@@ -732,7 +732,7 @@ Standardowa wymiana trwa 1-2 dni robocze od momentu dostarczenia drukarki. W try
     category: 'troubleshooting',
     tags: ['GK420d', 'GK420t', 'czerwona dioda', 'troubleshooting', 'diagnostyka', 'LED', 'kody błędów', 'mruganie', 'pulsowanie', 'ribbon', 'etykiety'],
     seo: {
-      metaTitle: 'Zebra GK420d czerwona dioda - co oznacza i jak naprawić? [2025]',
+      metaTitle: 'Zebra GK420d czerwona dioda - co oznacza i jak naprawić? [2026]',
       metaDescription: 'Czerwona dioda w Zebra GK420d/GK420t? Co oznacza mruganie: 1x, 2x, 3x, ciągłe? Diagnostyka krok po kroku. Problemy: ribbon, etykiety, głowica, przegrzanie. Kiedy serwis?',
       keywords: [
         // Główne frazy
@@ -1019,7 +1019,7 @@ Zebra oficjalnie zakończyła produkcję serii GK, ale jako autoryzowany serwis 
     category: 'troubleshooting',
     tags: ['blady wydruk', 'jakość druku', 'troubleshooting', 'GK420', 'ZD420', 'ZT410', 'darkness', 'print speed', 'ribbon', 'wałek dociskowy', 'zasilacz'],
     seo: {
-      metaTitle: 'Blady wydruk w drukarce Zebra - 5 przyczyn i rozwiązania [2025]',
+      metaTitle: 'Blady wydruk w drukarce Zebra - 5 przyczyn i rozwiązania [2026]',
       metaDescription: 'Drukarka Zebra drukuje za jasno? 5 przyczyn bladego wydruku: zasilacz, wałek, Darkness, głowica, ribbon. Jak ustawić Darkness i Print Speed? GK420, ZD420, ZT410. Napraw sam lub serwis.',
       keywords: [
         // Główne frazy
@@ -1339,7 +1339,7 @@ Zależy od przyczyny: czyszczenie mechanizmu 150-360 zł, wymiana wałka 150-290
     category: 'poradniki',
     tags: ['kalibracja', 'sensor', 'gap', 'black mark', 'etykiety', 'GK420', 'ZD420', 'ZD621', 'ZT411', 'auto-kalibracja', 'Smart Calibration', 'Zebra Setup Utilities'],
     seo: {
-      metaTitle: 'Kalibracja drukarki Zebra - poradnik krok po kroku [2025]',
+      metaTitle: 'Kalibracja drukarki Zebra - poradnik krok po kroku [2026]',
       metaDescription: 'Jak skalibrować drukarkę Zebra? Poradnik dla GK420, ZD420, ZD621, ZT411. Auto-kalibracja przyciskiem, Smart Calibration, Zebra Setup Utilities. Drukuje puste etykiety? Pomija? Napraw!',
       keywords: [
         // Główne frazy
@@ -1730,7 +1730,7 @@ Tak, ale musisz ustawić drukarkę w tryb "Continuous" i podać dokładną dług
     category: 'troubleshooting',
     tags: ['terminal zebra', 'boot loop', 'fastboot', 'TC21', 'TC52', 'MC33', 'MC93', 'nie włącza się', 'zawiesza się na logo', 'recovery mode', 'hard reset', 'czarny ekran'],
     seo: {
-      metaTitle: 'Terminal Zebra nie włącza się - Boot Loop, Fastboot [2025]',
+      metaTitle: 'Terminal Zebra nie włącza się - Boot Loop, Fastboot [2026]',
       metaDescription: 'Terminal Zebra TC21, TC52, MC33, MC93 zawiesza się na logo lub wpadł w boot loop? Fastboot mode wyjście krok po kroku. Hard reset, Recovery Mode. Kiedy do serwisu? Kompletny poradnik.',
       keywords: [
         // Główne frazy
@@ -2044,7 +2044,7 @@ Zależy od przyczyny: softwareowy (flash firmware): 150-250 zł, sprzętowy (pam
     category: 'troubleshooting',
     tags: ['skaner', 'terminal zebra', 'datawedge', 'SE4710', 'SE4750', 'kody kreskowe', 'naprawa', 'TC21', 'TC52', 'MC33', 'MC93', 'okienko skanera', 'kalibracja'],
     seo: {
-      metaTitle: 'Skaner terminala Zebra nie działa - diagnostyka i naprawa [2025]',
+      metaTitle: 'Skaner terminala Zebra nie działa - diagnostyka i naprawa [2026]',
       metaDescription: 'Skaner w terminalu Zebra TC21, TC52, MC33, MC93 nie skanuje? Brak wiązki, nie czyta kodów 2D/QR? Diagnostyka krok po kroku: DataWedge, czyszczenie okienka, SE4710/SE4750. Kiedy do serwisu?',
       keywords: [
         // Główne frazy
@@ -2441,7 +2441,7 @@ Przy normalnym użytkowaniu **5-7 lat**. Żywotność zależy od liczby skanowa�
     category: 'troubleshooting',
     tags: ['wifi zebra', 'bluetooth terminal', 'problemy z wifi', 'parowanie bluetooth', 'roaming wifi', '802.11', 'TC21 wifi', 'TC52 wifi', 'MC33 bluetooth', 'MC93 bluetooth', '802.11r', '802.11k', 'drukarka bluetooth'],
     seo: {
-      metaTitle: 'Problemy z WiFi i Bluetooth w terminalu Zebra [2025]',
+      metaTitle: 'Problemy z WiFi i Bluetooth w terminalu Zebra [2026]',
       metaDescription: 'Terminal Zebra TC21, TC52, MC33 nie łączy się z WiFi? Bluetooth nie paruje z drukarką? Konfiguracja WiFi krok po kroku, roaming 802.11r/k/v, parowanie urządzeń. Rozwiązania problemów z łącznością.',
       keywords: [
         // Główne frazy WiFi
@@ -2866,7 +2866,7 @@ Można mieć **7 aktywnych połączeń** Bluetooth jednocześnie (ograniczenie p
     category: 'poradniki',
     tags: ['factory reset zebra', 'enterprise reset', 'reset terminala', 'TC21 reset', 'TC52 reset', 'MC33 reset', 'MC93 reset', 'hard reset zebra', 'recovery mode', 'ustawienia fabryczne', 'wymazanie danych', 'przywracanie ustawień fabrycznych'],
     seo: {
-      metaTitle: 'Reset terminala Zebra - Factory vs Enterprise Reset [2025]',
+      metaTitle: 'Reset terminala Zebra - Factory vs Enterprise Reset [2026]',
       metaDescription: 'Jak zresetować terminal Zebra TC21, TC52, MC33, MC93? Factory Reset vs Enterprise Reset - która opcja kiedy? Instrukcja krok po kroku. Hard reset, Recovery Mode. Co się usuwa, a co zostaje?',
       keywords: [
         // Główne frazy
@@ -3228,7 +3228,7 @@ Upewnij się że wykonujesz procedurę prawidłowo: najpierw **Restart** z menu 
     category: 'troubleshooting',
     tags: ['kody błędów zebra', 'LED terminal', 'error codes', 'troubleshooting zebra', 'dioda LED', 'komunikaty błędów', 'TC21', 'TC52', 'MC33', 'MC93', 'czerwona dioda', 'pomarańczowa dioda', 'zielona dioda'],
     seo: {
-      metaTitle: 'Kody błędów terminala Zebra - LED, komunikaty [2025]',
+      metaTitle: 'Kody błędów terminala Zebra - LED, komunikaty [2026]',
       metaDescription: 'Co oznacza migająca dioda LED na terminalu Zebra TC21, TC52, MC33, MC93? Czerwona, pomarańczowa, zielona - znaczenie. Komunikaty błędów i rozwiązania. Kompletny przewodnik diagnostyczny.',
       keywords: [
         // Główne frazy
@@ -3527,7 +3527,7 @@ Nie, to normalne. Nowsze modele (MC94) mają zielony laser - jest 7x bardziej wi
     category: 'poradniki',
     tags: ['DataWedge', 'konfiguracja skanera', 'profile', 'Keystroke Output', 'Intent', 'TC21', 'TC52', 'MC33', 'MC93', 'symbologie', 'enter po skanie', 'tab po skanie'],
     seo: {
-      metaTitle: 'DataWedge - konfiguracja skanera Zebra krok po kroku [2025]',
+      metaTitle: 'DataWedge - konfiguracja skanera Zebra krok po kroku [2026]',
       metaDescription: 'Skaner Zebra skanuje ale dane nie trafiają do aplikacji? Kompletny poradnik DataWedge: tworzenie profili, Keystroke Output, Intent, symbologie. Enter/Tab po skanie. TC21, TC52, MC33, MC93.',
       keywords: [
         // Główne frazy
@@ -3793,7 +3793,7 @@ Minimalnie. DataWedge działa pasywnie i aktywuje się tylko podczas skanowania.
     category: 'troubleshooting',
     tags: ["skaner zebra","nie skanuje","troubleshooting","diagnostyka","DS2208","LS2208","LI4278"],
     seo: {
-      metaTitle: 'Skaner Zebra nie skanuje - diagnostyka i rozwiązania [2025]',
+      metaTitle: 'Skaner Zebra nie skanuje - diagnostyka i rozwiązania [2026]',
       metaDescription: 'Skaner Zebra nie czyta kodów? Kompletny poradnik: sprawdź zasilanie, kabel, okienko, konfigurację. Serie LS, DS, LI. Krok po kroku.',
       keywords: [
         // Główne frazy
@@ -4206,7 +4206,7 @@ Zależy od usterki:
     category: 'poradniki',
     tags: ["skaner bluetooth","parowanie","zebra bezprzewodowy","LI4278","DS8178","DS3678","podstawka","cradle"],
     seo: {
-      metaTitle: 'Parowanie skanera Bluetooth Zebra - kompletny poradnik [2025]',
+      metaTitle: 'Parowanie skanera Bluetooth Zebra - kompletny poradnik [2026]',
       metaDescription: 'Jak sparować skaner Zebra Bluetooth? Instrukcja: podstawka CR0078, komputer, iOS, Android. LI4278, DS8178, DS3678. Tryby HID, SPP.',
       keywords: [
         // Główne frazy
@@ -4672,7 +4672,7 @@ Domyślnie po ~30 minutach nieaktywności skaner przechodzi w tryb uśpienia. Mo
     category: 'poradniki',
     tags: ["konfiguracja skanera", "kody programujące", "enter po skanowaniu", "sufiks", "PRG", "DS2208", "DS4608", "LI2208", "tab po skanowaniu", "polska klawiatura", "QR code", "DataMatrix", "123Scan"],
     seo: {
-      metaTitle: 'Konfiguracja skanera Zebra kodami kreskowymi - Enter, Tab, QR [2025]',
+      metaTitle: 'Konfiguracja skanera Zebra kodami kreskowymi - Enter, Tab, QR [2026]',
       metaDescription: 'Gotowe kody konfiguracyjne do zeskanowania! Dodaj Enter/Tab po skanowaniu, włącz QR/DataMatrix, zmień klawiaturę na polską. DS2208, DS4608, LI2208, LI4278.',
       keywords: [
         // Główne frazy
@@ -4882,7 +4882,7 @@ Serwisujemy wszystkie modele skanerów: DS2208, DS4608, DS8178, LI2208, LI4278, 
     category: 'porownania',
     tags: ["oznaczenia skanerów","HD","SR","XR","ER","optyka skanera"],
     seo: {
-      metaTitle: 'Oznaczenia skanerów Zebra - HD, SR, XR, ER, KD [2025]',
+      metaTitle: 'Oznaczenia skanerów Zebra - HD, SR, XR, ER, KD [2026]',
       metaDescription: 'Co oznacza HD, SR, XR, ER, KD w skanerach Zebra? Przewodnik po typach optyki.',
       keywords: [
         // Główne frazy
@@ -5093,7 +5093,7 @@ Dane z oficjalnych PRG (Product Reference Guide) Zebra:
     category: 'troubleshooting',
     tags: ["skaner QR","DataMatrix","symbologie","kody 2D","PLMVS","apteka","GS1 DataMatrix","PDF417","Aztec","kody z ekranu","telefon","DS2208","DS4608","123Scan"],
     seo: {
-      metaTitle: 'Skaner Zebra nie czyta QR i DataMatrix - włączanie symbologii [2025]',
+      metaTitle: 'Skaner Zebra nie czyta QR i DataMatrix - włączanie symbologii [2026]',
       metaDescription: 'Skaner Zebra nie odczytuje QR, DataMatrix, PDF417? Sprawdź czy to laser (LS) czy imager (DS). Tabela domyślnych ustawień symbologii. Konfiguracja dla PLMVS, kodów z telefonu. Krok po kroku.',
       keywords: [
         // Główne frazy
@@ -5386,7 +5386,7 @@ W 123Scan: podłącz skaner → zakładka "Symbologies" → widoczny status każ
     category: 'porownania',
     tags: ["porównanie skanerów","DS2208","DS4608","DS8178","DS3678","LI4278","LS2208","skaner do magazynu","skaner do apteki","skaner bezprzewodowy","skaner 2D","skaner laserowy","IP52","IP67"],
     seo: {
-      metaTitle: 'Porównanie skanerów Zebra - który wybrać? DS2208 vs DS4608 [2025]',
+      metaTitle: 'Porównanie skanerów Zebra - który wybrać? DS2208 vs DS4608 [2026]',
       metaDescription: 'DS2208 vs DS4608 vs DS8178 vs DS3678? Kompletne porównanie skanerów Zebra 2025: specyfikacje, zasięgi, IP rating, ceny. Który model do magazynu, apteki, produkcji? Oficjalne dane z manuali.',
       keywords: [
         // Główne frazy
@@ -5907,7 +5907,7 @@ Do **110 000 skanów** przy 60 skanach/minutę (oficjalne dane Zebra).
     category: 'troubleshooting',
     tags: ["bateria skanera","ładowanie","wymiana baterii","LI4278","DS8178","DS2278","DS3678","NiMH","Li-Ion","PowerPrecision","rekondycjonowanie baterii","stacja dokująca"],
     seo: {
-      metaTitle: 'Bateria skanera Zebra - ładowanie, problemy, wymiana [2025]',
+      metaTitle: 'Bateria skanera Zebra - ładowanie, problemy, wymiana [2026]',
       metaDescription: 'Skaner Zebra nie ładuje się? Kompletny poradnik: specyfikacje baterii NiMH/Li-Ion, temperatura ładowania, rekondycjonowanie, wymiana. LI4278, DS2278, DS8178, DS3678. Oficjalne dane z manuali Zebra.',
       keywords: [
         // Główne frazy
@@ -6325,7 +6325,7 @@ W 123Scan: Scanner → Battery → Battery Statistics
     category: 'poradniki',
     tags: ["naprawa skanera","serwis zebra","wymiana skanera","koszty naprawy","DS2208","DS4608","DS8178","DS3678","LI4278","LS2208","gwarancja zebra","EOL","części zamienne"],
     seo: {
-      metaTitle: 'Naprawa skanera Zebra - kiedy warto naprawiać, kiedy wymienić? [2025]',
+      metaTitle: 'Naprawa skanera Zebra - kiedy warto naprawiać, kiedy wymienić? [2026]',
       metaDescription: 'Czy opłaca się naprawiać skaner Zebra? Kompletna analiza kosztów: okienko, kabel, trigger, moduł, płyta. Macierz decyzyjna dla DS2208, DS4608, DS8178, DS3678, LI4278. Gwarancje i modele EOL.',
       keywords: [
         // Główne frazy
@@ -6662,7 +6662,7 @@ Tak, przy naprawie flotowej (5+ skanerów) oferujemy rabaty 10-20%.
     category: 'troubleshooting',
     tags: ['TC58', 'bateria', 'kurier', 'DHL', 'InPost', 'DPD', 'terminal mobilny', 'PowerPrecision', 'Hot Swap', 'czas pracy baterii', 'optymalizacja'],
     seo: {
-      metaTitle: 'Bateria Zebra TC58 nie wytrzymuje trasy kurierskiej – rozwiązania [2025]',
+      metaTitle: 'Bateria Zebra TC58 nie wytrzymuje trasy kurierskiej – rozwiązania [2026]',
       metaDescription: 'Bateria TC58 szybko się rozładowuje? Poradnik dla kurierów DHL, InPost, DPD. Optymalizacja ustawień, bateria rozszerzona 7000mAh, Hot Swap w terenie. Sprawdzone rozwiązania od serwisu Zebra.',
       keywords: [
         // Główne frazy
@@ -7007,7 +7007,7 @@ Tak, ale różnica jest minimalna:
     category: 'troubleshooting',
     tags: ['TC58', 'skaner', 'kurier', 'DHL', 'InPost', 'DPD', 'nie skanuje', 'DataWedge', 'reset', 'SE4720', 'SE55', 'troubleshooting'],
     seo: {
-      metaTitle: 'Skaner Zebra TC58 nie działa w trasie – szybka naprawa [2025]',
+      metaTitle: 'Skaner Zebra TC58 nie działa w trasie – szybka naprawa [2026]',
       metaDescription: 'Skaner TC58 przestał skanować w trakcie dostawy? Szybkie rozwiązania dla kurierów: reset, DataWedge, czyszczenie. Poradnik DHL, InPost, DPD. Napraw w 2 minuty!',
       keywords: [
         // Główne frazy
@@ -7399,7 +7399,7 @@ Problem z **DataWedge** lub konfiguracją aplikacji. Zgłoś do IT – to nie je
     category: 'poradniki',
     tags: ['TC58', 'temperatura', 'upał', 'mróz', 'kurier', 'DHL', 'InPost', 'DPD', 'przegrzanie', 'ładowanie', 'IP68', 'tryb rękawiczek'],
     seo: {
-      metaTitle: 'Zebra TC58 w upale i mrozie – ochrona terminala kurierskiego [2025]',
+      metaTitle: 'Zebra TC58 w upale i mrozie – ochrona terminala kurierskiego [2026]',
       metaDescription: 'TC58 wyłącza się w upale? Nie ładuje w mrozie? Limity temperatur (-20°C do +50°C), ochrona przed przegrzaniem, tryb rękawiczek. Poradnik dla kurierów DHL, InPost, DPD.',
       keywords: [
         // Główne frazy
@@ -7678,7 +7678,7 @@ TC58 ma certyfikat **IP68** (zanurzenie 1.5m/30 min) i **IP65** (strumienie wody
     category: 'troubleshooting',
     tags: ['TC58', 'GPS', 'nawigacja', 'kurier', 'DHL', 'InPost', 'DPD', 'lokalizacja', 'GNSS', 'a-GPS', 'drift'],
     seo: {
-      metaTitle: 'GPS Zebra TC58 pokazuje złą lokalizację – naprawa nawigacji [2025]',
+      metaTitle: 'GPS Zebra TC58 pokazuje złą lokalizację – naprawa nawigacji [2026]',
       metaDescription: 'GPS w TC58 pokazuje złą pozycję? Nawigacja kurierska nie działa? Rozwiązania: konfiguracja GNSS, a-GPS, cold start. Poradnik dla kurierów DHL, InPost, DPD.',
       keywords: [
         // Główne frazy
@@ -7965,7 +7965,7 @@ GPS włączony ciągle: ~5-10% baterii dziennie. To niewiele, **nie wyłączaj G
     category: 'poradniki',
     tags: ['TC58', 'sieć', '4G', '5G', 'LTE', 'APN', 'Orange', 'Play', 'T-Mobile', 'Plus', 'kurier', 'DHL', 'InPost', 'DPD', 'SIM'],
     seo: {
-      metaTitle: 'TC58 ustawienia APN – Orange, Play, T-Mobile, Plus [2025]',
+      metaTitle: 'TC58 ustawienia APN – Orange, Play, T-Mobile, Plus [2026]',
       metaDescription: 'TC58 nie łączy z internetem? Gotowe ustawienia APN dla Orange, Play, T-Mobile, Plus. Konfiguracja sieci 4G/5G krok po kroku. Poradnik dla kurierów.',
       keywords: [
         // Główne frazy
@@ -8326,7 +8326,7 @@ Możliwe przyczyny:
     category: 'troubleshooting',
     tags: ['L10', 'XSlate', 'bateria', 'spuchnięta', 'ambulans', 'ratownictwo', 'ET40', 'ET45', 'ET60', 'wymiana baterii', 'tablet przemysłowy', 'bezpieczeństwo'],
     seo: {
-      metaTitle: 'Spuchnięta bateria Zebra L10 – objawy i wymiana [2025]',
+      metaTitle: 'Spuchnięta bateria Zebra L10 – objawy i wymiana [2026]',
       metaDescription: 'Bateria w tablecie Zebra L10 się spuchła? Ekran odchodzi od obudowy? Objawy, przyczyny (ładowanie 24/7), bezpieczna wymiana. Poradnik dla służb ratownictwa i flot tabletów.',
       keywords: [
         // Główne frazy
@@ -8657,7 +8657,7 @@ Sprawdź warunki umowy OneCare jeśli masz.
     category: 'troubleshooting',
     tags: ['L10', 'ET40', 'ET45', 'ET60', 'ET80', 'nie włącza się', 'czarny ekran', 'diagnostyka', 'reset', 'recovery mode', 'tablet przemysłowy', 'naprawa'],
     seo: {
-      metaTitle: 'Tablet Zebra nie włącza się – diagnostyka i naprawa [2025]',
+      metaTitle: 'Tablet Zebra nie włącza się – diagnostyka i naprawa [2026]',
       metaDescription: 'Tablet Zebra L10, ET40, ET60 nie włącza się? Czarny ekran? Diagnostyka krok po kroku: bateria, ładowanie, reset, recovery mode. Kiedy naprawa, a kiedy wymiana.',
       keywords: [
         // Główne frazy
@@ -8987,7 +8987,7 @@ Uszkodzony firmware lub SSD. Wymaga:
     category: 'troubleshooting',
     tags: ['L10', 'XSlate', 'stacja dokująca', 'dock', 'vehicle dock', 'pogo pin', 'ambulans', 'ratownictwo', 'ET60', 'ET80', 'ładowanie', 'naprawa'],
     seo: {
-      metaTitle: 'Tablet Zebra nie ładuje w docku – naprawa stacji dokującej [2025]',
+      metaTitle: 'Tablet Zebra nie ładuje w docku – naprawa stacji dokującej [2026]',
       metaDescription: 'Tablet Zebra L10 nie ładuje w stacji dokującej pojazdu? Przerywane ładowanie? Diagnoza: piny pogo, złącze, zasilacz. Naprawa doków dla ambulansów i flot.',
       keywords: [
         // Główne frazy
@@ -9344,7 +9344,7 @@ Docki pojazdowe L10 i ET60/ET80 mają **porty przekazywania sygnału antenowego*
     category: 'troubleshooting',
     tags: ['L10', 'XSlate', 'ET45', 'ET65', 'ET85', 'WiFi', 'LTE', '4G', '5G', 'GSM', 'SIM', 'APN', 'antena', 'ratownictwo', 'SWD PRM'],
     seo: {
-      metaTitle: 'Tablet Zebra WiFi/GSM nie działa – diagnostyka i naprawa [2025]',
+      metaTitle: 'Tablet Zebra WiFi/GSM nie działa – diagnostyka i naprawa [2026]',
       metaDescription: 'Tablet Zebra L10 traci WiFi? ET45 bez sieci LTE? Rozwiązania problemów z łącznością dla ambulansów i służb. Konfiguracja APN, anteny, naprawa modułów radiowych.',
       keywords: [
         // Główne frazy - WiFi
@@ -9751,7 +9751,7 @@ Rozwiązania:
     category: 'troubleshooting',
     tags: ['L10', 'XSlate', 'ET40', 'ET45', 'ET60', 'ET80', 'ekran', 'LCD', 'digitizer', 'dotyk', 'Gorilla Glass', 'naprawa', 'wymiana'],
     seo: {
-      metaTitle: 'Wymiana ekranu tablet Zebra – naprawa LCD i dotyku [2025]',
+      metaTitle: 'Wymiana ekranu tablet Zebra – naprawa LCD i dotyku [2026]',
       metaDescription: 'Pęknięty ekran Zebra L10, ET40, ET60? Dotyk nie działa? Wymiana LCD, digitizera, szybki. Koszt naprawy, zachowanie IP65. Profesjonalny serwis tabletów przemysłowych.',
       keywords: [
         // Główne frazy
@@ -10402,7 +10402,7 @@ Zależy od stanu urządzenia. **Warto naprawić:** terminal <3 lata, tylko probl
     category: 'troubleshooting',
     tags: ['drukarka kart', 'kody błędów', 'ZC300', 'ZC350', 'ZXP Series 7', 'ZXP Series 3', 'error code', 'troubleshooting', 'ribbon', 'card jam', 'głowica', 'encoder', 'laminator'],
     seo: {
-      metaTitle: 'Kody błędów drukarek kart Zebra – kompletna lista i rozwiązania [2025]',
+      metaTitle: 'Kody błędów drukarek kart Zebra – kompletna lista i rozwiązania [2026]',
       metaDescription: 'Kompletna lista kodów błędów drukarek kart Zebra: Error 5001 (brak taśmy), 4003 (zacięcie karty), 7003 (kabel głowicy), 9001 (mag stripe). ZC100, ZC300, ZXP Series. Rozwiązania krok po kroku.',
       keywords: [
         'kody błędów zebra zc300',
@@ -11180,7 +11180,7 @@ Naprawiamy wszystkie modele: ZC100, ZC150, ZC300, ZC350, ZXP Series 1, 3, 7, 8, 
     category: 'troubleshooting',
     tags: ['głowica drukująca', 'biała linia', 'wymiana głowicy', 'ZC300', 'ZXP Series 7', 'jakość druku', 'printhead', 'czyszczenie głowicy', 'troubleshooting'],
     seo: {
-      metaTitle: 'Białe linie na karcie Zebra – wymiana głowicy czy czyszczenie? [2025]',
+      metaTitle: 'Białe linie na karcie Zebra – wymiana głowicy czy czyszczenie? [2026]',
       metaDescription: 'Biała linia na wydrukowanej karcie Zebra ZC300/ZXP? Dowiedz się czy to brud (usuwalny) czy uszkodzona głowica (wymiana 400-1500 zł). Diagnostyka krok po kroku.',
       keywords: [
         'biała linia na karcie zebra',
@@ -12216,7 +12216,7 @@ Serwisujemy i konfigurujemy drukarki: ZC100, ZC300, ZC350, ZXP Series 1, 3, 7, 8
     category: 'porownania',
     tags: ['porównanie drukarek', 'ZC100', 'ZC300', 'ZC350', 'ZXP7', 'ZXP9', 'jaka drukarka kart', 'wybór drukarki', 'drukarka do identyfikatorów'],
     seo: {
-      metaTitle: 'Porównanie drukarek kart Zebra – ZC100 vs ZC300 vs ZXP [2025]',
+      metaTitle: 'Porównanie drukarek kart Zebra – ZC100 vs ZC300 vs ZXP [2026]',
       metaDescription: 'Którą drukarkę kart Zebra kupić? Porównanie modeli ZC100, ZC300, ZC350, ZXP7, ZXP9. Ceny, różnice, zastosowania. Poradnik zakupowy 2025.',
       keywords: [
         'porównanie drukarek kart zebra',
@@ -12614,7 +12614,7 @@ Serwisujemy wszystkie modele: ZC100, ZC300, ZC350, ZXP Series 1, 3, 7, 8, 9.
     category: 'troubleshooting',
     tags: ['białe linie', 'jakość druku', 'głowica drukująca', 'ZQ630', 'ZQ520', 'ZQ320', 'etykiety', 'kody kreskowe', 'czyszczenie drukarki', 'drukarka mobilna'],
     seo: {
-      metaTitle: 'Białe linie na etykietach Zebra ZQ630/ZQ520 – naprawa [2025]',
+      metaTitle: 'Białe linie na etykietach Zebra ZQ630/ZQ520 – naprawa [2026]',
       metaDescription: 'Białe pasy na wydrukach z drukarki mobilnej Zebra? Kody nie skanują się? Czyszczenie głowicy, ustawienia darkness, wymiana głowicy. Poradnik dla ZQ630, ZQ520, ZQ320.',
       keywords: [
         'białe linie drukarka zebra',
@@ -12968,7 +12968,7 @@ Serwisujemy wszystkie modele mobilne: ZQ630, ZQ620, ZQ610, ZQ521, ZQ520, ZQ511, 
     category: 'troubleshooting',
     tags: ['Media Out', 'brak nośnika', 'kalibracja', 'czujnik mediów', 'ZQ630', 'ZQ520', 'ZQ320', 'pomijanie etykiet', 'gap sensor', 'black mark'],
     seo: {
-      metaTitle: 'Błąd Media Out Zebra ZQ630/ZQ520 – naprawa [2025]',
+      metaTitle: 'Błąd Media Out Zebra ZQ630/ZQ520 – naprawa [2026]',
       metaDescription: 'Drukarka Zebra zgłasza "Media Out" mimo załadowanego papieru? Pomija etykiety? Czyszczenie czujników, kalibracja, ustawienia typu nośnika. Poradnik krok po kroku.',
       keywords: [
         'zebra media out błąd',
@@ -13329,7 +13329,7 @@ Serwisujemy wszystkie modele mobilne: ZQ630, ZQ620, ZQ610, ZQ521, ZQ520, ZQ511, 
     category: 'troubleshooting',
     tags: ['WiFi', 'WLAN', 'rozłączanie', 'Sleep Mode', 'sieć', 'ZQ630', 'ZQ520', 'ZQ320', 'offline', '802.11', 'timeout'],
     seo: {
-      metaTitle: 'Drukarka Zebra rozłącza się z WiFi – naprawa [2025]',
+      metaTitle: 'Drukarka Zebra rozłącza się z WiFi – naprawa [2026]',
       metaDescription: 'Drukarka Zebra ZQ630/ZQ520 rozłącza się z sieci WiFi? Nie odpowiada po bezczynności? Wyłączenie Sleep Mode, konfiguracja timeout, ustawienia WLAN. Poradnik krok po kroku.',
       keywords: [
         'drukarka zebra wifi nie działa',
@@ -13688,7 +13688,7 @@ Serwisujemy wszystkie modele mobilne: ZQ630, ZQ620, ZQ610, ZQ521, ZQ520, ZQ511, 
     category: 'troubleshooting',
     tags: ['bateria', 'PowerPrecision+', 'ładowanie', 'Replace Battery', 'ZQ630', 'ZQ520', 'ZQ320', 'charge fault', 'cykle ładowania', 'wymiana baterii'],
     seo: {
-      metaTitle: 'Problemy z baterią Zebra ZQ630/ZQ520 – naprawa [2025]',
+      metaTitle: 'Problemy z baterią Zebra ZQ630/ZQ520 – naprawa [2026]',
       metaDescription: 'Bateria drukarki Zebra nie ładuje? Szybko się rozładowuje? Błąd "Replace Battery"? PowerPrecision+, cykle ładowania, wymiana baterii. Poradnik krok po kroku.',
       keywords: [
         'bateria zebra nie ładuje',
@@ -14019,7 +14019,7 @@ Serwisujemy wszystkie modele mobilne: ZQ630, ZQ620, ZQ610, ZQ521, ZQ520, ZQ511, 
     category: 'troubleshooting',
     tags: ['zimno', 'Head Cold', 'temperatura', 'kurier', 'ZQ630', 'ZQ520', 'ZQ320', 'blade wydruki', 'kondensacja', 'zima'],
     seo: {
-      metaTitle: 'Drukarka Zebra nie drukuje na zimno – Head Cold [2025]',
+      metaTitle: 'Drukarka Zebra nie drukuje na zimno – Head Cold [2026]',
       metaDescription: 'Drukarka Zebra ZQ630/ZQ520 nie drukuje w zimie? Komunikat "Head Cold"? Blade wydruki na mrozie? Temperatury pracy, aklimatyzacja, etui ogrzewane. Poradnik dla kurierów.',
       keywords: [
         'drukarka zebra zimno nie drukuje',
@@ -14354,7 +14354,7 @@ Serwisujemy wszystkie modele mobilne: ZQ630, ZQ620, ZQ610, ZQ521, ZQ520, ZQ511, 
     category: 'poradniki',
     tags: ['zebra onecare', 'kontrakt serwisowy', 'serwis zebra', 'essential', 'select', 'premier', 'TCO', 'drukarki zebra', 'terminale zebra', 'skanery zebra', 'wsparcie techniczne', 'gwarancja', 'naprawa'],
     seo: {
-      metaTitle: 'Kontrakty serwisowe Zebra OneCare - Essential, Select, Premier [2025]',
+      metaTitle: 'Kontrakty serwisowe Zebra OneCare - Essential, Select, Premier [2026]',
       metaDescription: 'Kompletny przewodnik po kontraktach serwisowych Zebra OneCare. Porównanie Essential, Select i Premier. Dowiedz się, jak obniżyć koszty i zwiększyć dostępność drukarek, terminali i skanerów Zebra.',
       keywords: ['zebra onecare', 'kontrakt serwisowy zebra', 'zebra onecare essential', 'zebra onecare select', 'zebra onecare premier', 'serwis zebra', 'gwarancja zebra', 'wsparcie techniczne zebra', 'naprawa drukarek zebra', 'TCO drukarki', 'koszty serwisu zebra', 'zebra service contract', 'zebra maintenance plan']
     },
@@ -14649,7 +14649,7 @@ Jako **Autoryzowany Partner Zebra** z 25-letnim doświadczeniem pomożemy Ci wyb
     category: 'poradniki',
     tags: ['zebra designer', 'zebra designer 3', 'projektowanie etykiet', 'oprogramowanie zebra', 'etykiety', 'kody kreskowe', 'ZPL', 'drukarka zebra'],
     seo: {
-      metaTitle: 'Zebra Designer 3 - Poradnik projektowania etykiet [2025]',
+      metaTitle: 'Zebra Designer 3 - Poradnik projektowania etykiet [2026]',
       metaDescription: 'Kompletny poradnik Zebra Designer 3. Jak pobrać, zainstalować i projektować etykiety. Porównanie wersji Essentials vs Professional. Funkcje, szablony, kody kreskowe.',
       keywords: ['zebra designer 3', 'zebra designer download', 'zebra designer poradnik', 'projektowanie etykiet zebra', 'oprogramowanie do etykiet', 'zebra designer essentials', 'zebra designer professional', 'jak projektować etykiety', 'program do etykiet zebra', 'zebra zdesigner', 'etykiety kody kreskowe', 'zebra label designer']
     },
@@ -16458,7 +16458,7 @@ Jako **autoryzowany serwis Zebra** pomożemy Ci:
   // NOWY WPIS: Sterowniki Zebra Windows 11
   {
     slug: 'sterowniki-zebra-windows-11-instalacja-problemy',
-    title: 'Jak zainstalować sterowniki Zebra w Windows 11? Rozwiązywanie problemów [2025]',
+    title: 'Jak zainstalować sterowniki Zebra w Windows 11? Rozwiązywanie problemów [2026]',
     excerpt: 'Drukarka Zebra nie działa w Windows 11? Instrukcja instalacji sterowników ZDesigner krok po kroku. Rozwiązania dla problemów z aktualizacją KB5055528, offline, brak sterownika.',
     coverImage: '/blog/sterowniki-zebra-windows-11-zdesigner.jpeg',
     author: {
@@ -16871,7 +16871,7 @@ Jako **autoryzowany serwis Zebra** pomożemy Ci:
   // NOWY WPIS: Aktualizacja firmware drukarki Zebra
   {
     slug: 'jak-zaktualizowac-firmware-drukarki-zebra',
-    title: 'Jak zaktualizować firmware drukarki Zebra? Instrukcja krok po kroku [2025]',
+    title: 'Jak zaktualizować firmware drukarki Zebra? Instrukcja krok po kroku [2026]',
     excerpt: 'Aktualizacja firmware drukarki Zebra: przez USB, sieć, Zebra Setup Utilities i ZDownloader. Poradnik dla ZD420, ZD620, ZT410, GK420 i innych modeli.',
     coverImage: '/blog/jak-zaktualizowac-firmware-drukarki-zebra.jpeg',
     author: {
@@ -17284,7 +17284,7 @@ Jako **autoryzowany serwis Zebra** pomożemy Ci:
   // NOWY WPIS: Zebra Setup Utilities - kompletny poradnik
   {
     slug: 'zebra-setup-utilities-poradnik-konfiguracja',
-    title: 'Zebra Setup Utilities – jak skonfigurować drukarkę? Kompletny poradnik [2025]',
+    title: 'Zebra Setup Utilities – jak skonfigurować drukarkę? Kompletny poradnik [2026]',
     excerpt: 'Zebra Setup Utilities to kluczowe narzędzie do konfiguracji drukarek Zebra. Poradnik: instalacja, konfiguracja sieci, wysyłanie firmware, kalibracja, diagnostyka. Krok po kroku ze zdjęciami.',
     coverImage: '/blog/zebra-setup-utilities-jak-skonfigurowac-drukarke.jpeg',
     author: {
@@ -17740,7 +17740,7 @@ Jako **autoryzowany serwis Zebra** pomożemy Ci:
   // NOWY WPIS: Błąd Ribbon Out mimo załadowanej taśmy
   {
     slug: 'blad-ribbon-out-drukarka-zebra-rozwiazanie',
-    title: 'Błąd "Ribbon Out" w drukarce Zebra mimo załadowanej taśmy – jak naprawić? [2025]',
+    title: 'Błąd "Ribbon Out" w drukarce Zebra mimo załadowanej taśmy – jak naprawić? [2026]',
     excerpt: 'Drukarka Zebra pokazuje "Ribbon Out" mimo włożonej taśmy? Poradnik: czujnik ribbona, ustawienia trybu druku, czyszczenie, kalibracja. Rozwiązania dla ZD421, ZD621, ZD220, ZD230, ZT411, ZT421.',
     coverImage: '/blog/blad-ribbon-out-drukarka-zebra.jpeg',
     author: {
@@ -17754,7 +17754,7 @@ Jako **autoryzowany serwis Zebra** pomożemy Ci:
     category: 'troubleshooting',
     tags: ['Ribbon Out', 'taśma', 'ribbon', 'błąd', 'czujnik', 'termotransfer', 'ZD421', 'ZD621', 'ZD220', 'ZD230', 'ZT411', 'ZT421', 'troubleshooting'],
     seo: {
-      metaTitle: 'Błąd "Ribbon Out" w drukarce Zebra mimo taśmy – jak naprawić? [2025]',
+      metaTitle: 'Błąd "Ribbon Out" w drukarce Zebra mimo taśmy – jak naprawić? [2026]',
       metaDescription: 'Drukarka Zebra pokazuje Ribbon Out mimo włożonej taśmy? Sprawdź czujnik ribbona, tryb druku, kierunek nawoju. Poradnik dla ZD421, ZD621, ZD220, ZD230, ZT411.',
       keywords: [
         'ribbon out zebra',
@@ -18129,7 +18129,7 @@ Jako **autoryzowany serwis Zebra** pomożemy Ci:
   // NOWY WPIS: Konfiguracja drukarki Zebra przez Ethernet
   {
     slug: 'konfiguracja-drukarki-zebra-ethernet-siec',
-    title: 'Jak skonfigurować drukarkę Zebra przez Ethernet? Kompletny przewodnik sieciowy [2025]',
+    title: 'Jak skonfigurować drukarkę Zebra przez Ethernet? Kompletny przewodnik sieciowy [2026]',
     excerpt: 'Konfiguracja drukarki Zebra przez Ethernet krok po kroku. IP statyczne, DHCP, ustawienia sieciowe dla ZD621, ZT411, ZT610, ZD421. Troubleshooting problemów z połączeniem.',
     coverImage: '/blog/jak-skonfigurowac-drukarke-zebra-przez-ethernet.jpeg',
     author: {
@@ -18642,7 +18642,7 @@ Jako **autoryzowany serwis Zebra** pomożemy Ci:
   // NOWY WPIS: Kody błędów ZD420/ZD421 - diody LED
   {
     slug: 'kody-bledow-zebra-zd420-zd421-diody-led',
-    title: 'Kody błędów Zebra ZD420/ZD421 – co oznaczają diody LED? Kompletny poradnik [2025]',
+    title: 'Kody błędów Zebra ZD420/ZD421 – co oznaczają diody LED? Kompletny poradnik [2026]',
     excerpt: 'Drukarka Zebra ZD420 lub ZD421 miga na czerwono? Sprawdź znaczenie diod LED: status, pauza, dane, materiały. Tabela kodów błędów i rozwiązania problemów.',
     coverImage: '/blog/diody-led-zebra-zd420-zd421-co-oznaczaja.jpeg',
     author: {
@@ -18656,7 +18656,7 @@ Jako **autoryzowany serwis Zebra** pomożemy Ci:
     category: 'troubleshooting',
     tags: ['ZD420', 'ZD421', 'diody LED', 'kody błędów', 'czerwona dioda', 'troubleshooting', 'error codes'],
     seo: {
-      metaTitle: 'Kody błędów Zebra ZD420/ZD421 – diody LED i rozwiązania [2025]',
+      metaTitle: 'Kody błędów Zebra ZD420/ZD421 – diody LED i rozwiązania [2026]',
       metaDescription: 'Drukarka Zebra ZD420/ZD421 miga na czerwono? Sprawdź co oznaczają diody LED. Tabela kodów błędów, przyczyny i rozwiązania. Poradnik krok po kroku.',
       keywords: [
         'zebra zd420 czerwona dioda',
