@@ -8,7 +8,7 @@ const supabase = createClient(
 )
 
 // Adres email do raportów
-const REPORT_EMAIL = 'superadmin@serwis-zebry.pl'
+const REPORT_EMAIL = 'jakub.tiuchty@takma.com.pl'
 
 // Kategorie
 const CATEGORIES: Record<string, { name: string; icon: string }> = {
