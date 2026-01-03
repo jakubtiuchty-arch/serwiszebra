@@ -7374,7 +7374,7 @@ Problem z **DataWedge** lub konfiguracją aplikacji. Zgłoś do IT – to nie je
 ## Zobacz też
 
 - [Bateria TC58 nie wytrzymuje trasy kurierskiej](/blog/zebra-tc58-bateria-nie-wytrzymuje-trasy-kurierskiej)
-- [DataWedge – kompletna konfiguracja dla kurierów](/blog/datawedge-konfiguracja-kurierzy)
+- [DataWedge – konfiguracja skanera w terminalach Zebra](/blog/datawedge-konfiguracja-terminal-zebra)
 - [TC58 nie łączy się z siecią – ustawienia APN](/blog/zebra-tc58-siec-4g-5g-ustawienia-apn-polscy-operatorzy)
 
 ---
