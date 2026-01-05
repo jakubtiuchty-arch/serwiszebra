@@ -149,10 +149,10 @@ export async function POST(request: NextRequest) {
       })
       console.log('📧 Email do klienta wysłany')
 
-      // Email do admina
-      const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'jakub.tiuchty@gmail.com'
+      // Email do adminów
+      const ADMIN_EMAILS = ['jakub.tiuchty@takma.com.pl', 'serwis@takma.com.pl']
       await sendRepairSubmittedAdminEmail({
-        to: ADMIN_EMAIL,
+        to: ADMIN_EMAILS,
         customerName,
         customerEmail: session.user.email!,
         customerPhone: profile?.phone || '',

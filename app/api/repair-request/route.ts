@@ -202,9 +202,10 @@ export async function POST(request: NextRequest) {
       })
       console.log('✅ Customer email sent')
 
-      // Email do admina
+      // Email do adminów
+      const ADMIN_EMAILS = ['jakub.tiuchty@takma.com.pl', 'serwis@takma.com.pl']
       await sendRepairSubmittedAdminEmail({
-        to: process.env.ADMIN_EMAIL || 'jakub.tiuchty@gmail.com',
+        to: ADMIN_EMAILS,
         repairId: newRequest.id,
         repairNumber: newRequest.repair_number, // Nowy format numeru
         customerName: `${validatedData.firstName} ${validatedData.lastName}`,

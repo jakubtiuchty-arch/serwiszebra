@@ -1086,7 +1086,7 @@ function generateRepairSubmittedHTML(data: RepairSubmittedEmailData, shortId: st
 // ========== EMAIL PO ZGŁOSZENIU NAPRAWY - ADMIN ==========
 
 interface RepairSubmittedAdminEmailData {
-  to: string
+  to: string | string[]
   repairId: string
   repairNumber?: string // Nowy format: YYYYMMDDHHmm
   customerName: string
