@@ -50,15 +50,48 @@ export const metadata: Metadata = {
     'etykieciarka zebra naprawa',
     'etykieciarka serwis',
     
-    // Miasta
-    'serwis drukarek zebra warszawa',
-    'serwis drukarek zebra kraków',
-    'serwis drukarek zebra wrocław',
-    'serwis drukarek zebra poznań',
-    'serwis drukarek zebra łódź',
-    'serwis drukarek zebra gdańsk',
-    'serwis drukarek zebra katowice',
-    'serwis drukarek zebra zielona góra',
+    // Miasta - Wrocław
+    'serwis zebra wrocław', 'naprawa zebra wrocław',
+    'drukarki zebra wrocław', 'skanery zebra wrocław', 'terminale zebra wrocław', 'tablety zebra wrocław',
+    'serwis drukarek zebra wrocław', 'serwis terminali zebra wrocław', 'serwis skanerów zebra wrocław',
+    'naprawa drukarek zebra wrocław', 'naprawa terminali zebra wrocław', 'naprawa skanerów zebra wrocław',
+    
+    // Miasta - Warszawa
+    'serwis zebra warszawa', 'naprawa zebra warszawa',
+    'drukarki zebra warszawa', 'skanery zebra warszawa', 'terminale zebra warszawa', 'tablety zebra warszawa',
+    'serwis drukarek zebra warszawa', 'serwis terminali zebra warszawa', 'serwis skanerów zebra warszawa',
+    'naprawa drukarek zebra warszawa', 'naprawa terminali zebra warszawa', 'naprawa skanerów zebra warszawa',
+    
+    // Miasta - Kraków
+    'serwis zebra kraków', 'naprawa zebra kraków',
+    'drukarki zebra kraków', 'skanery zebra kraków', 'terminale zebra kraków', 'tablety zebra kraków',
+    'serwis drukarek zebra kraków', 'serwis terminali zebra kraków', 'serwis skanerów zebra kraków',
+    'naprawa drukarek zebra kraków', 'naprawa terminali zebra kraków', 'naprawa skanerów zebra kraków',
+    
+    // Miasta - Poznań
+    'serwis zebra poznań', 'naprawa zebra poznań',
+    'drukarki zebra poznań', 'skanery zebra poznań', 'terminale zebra poznań', 'tablety zebra poznań',
+    'serwis drukarek zebra poznań', 'serwis terminali zebra poznań', 'serwis skanerów zebra poznań',
+    
+    // Miasta - Łódź
+    'serwis zebra łódź', 'naprawa zebra łódź',
+    'drukarki zebra łódź', 'skanery zebra łódź', 'terminale zebra łódź', 'tablety zebra łódź',
+    'serwis drukarek zebra łódź', 'serwis terminali zebra łódź', 'serwis skanerów zebra łódź',
+    
+    // Miasta - Gdańsk
+    'serwis zebra gdańsk', 'naprawa zebra gdańsk',
+    'drukarki zebra gdańsk', 'skanery zebra gdańsk', 'terminale zebra gdańsk', 'tablety zebra gdańsk',
+    'serwis drukarek zebra gdańsk', 'serwis terminali zebra gdańsk', 'serwis skanerów zebra gdańsk',
+    
+    // Miasta - Katowice
+    'serwis zebra katowice', 'naprawa zebra katowice',
+    'drukarki zebra katowice', 'skanery zebra katowice', 'terminale zebra katowice', 'tablety zebra katowice',
+    'serwis drukarek zebra katowice', 'serwis terminali zebra katowice', 'serwis skanerów zebra katowice',
+    
+    // Miasta - Zielona Góra
+    'serwis zebra zielona góra', 'naprawa zebra zielona góra',
+    'drukarki zebra zielona góra', 'skanery zebra zielona góra', 'terminale zebra zielona góra',
+    'serwis drukarek zebra zielona góra', 'serwis terminali zebra zielona góra',
     
     // Modele
     'naprawa ZD420',

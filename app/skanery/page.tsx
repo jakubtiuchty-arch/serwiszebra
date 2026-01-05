@@ -31,6 +31,15 @@ export const metadata: Metadata = {
     'parowanie skanera zebra',
     'naprawa li2208',
     'serwis skanerów przemysłowych',
+    // Miasta
+    'skanery zebra wrocław', 'serwis skanerów zebra wrocław', 'naprawa skanerów zebra wrocław',
+    'skanery zebra warszawa', 'serwis skanerów zebra warszawa', 'naprawa skanerów zebra warszawa',
+    'skanery zebra kraków', 'serwis skanerów zebra kraków', 'naprawa skanerów zebra kraków',
+    'skanery zebra poznań', 'serwis skanerów zebra poznań',
+    'skanery zebra gdańsk', 'serwis skanerów zebra gdańsk',
+    'skanery zebra katowice', 'serwis skanerów zebra katowice',
+    'skanery zebra łódź', 'serwis skanerów zebra łódź',
+    'skanery zebra zielona góra', 'serwis skanerów zebra zielona góra',
   ],
   openGraph: {
     title: 'Serwis Skanerów Zebra – Naprawa DS, LI, RS',

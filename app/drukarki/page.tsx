@@ -74,9 +74,16 @@ export const metadata: Metadata = {
     'gdzie naprawić drukarkę zebra',
     'ile kosztuje naprawa drukarki zebra',
     'serwis drukarek zebra cena',
-    'naprawa drukarek zebra warszawa',
-    'serwis drukarek zebra kraków',
-    'serwis drukarek zebra wrocław',
+    
+    // Miasta
+    'drukarki zebra wrocław', 'serwis drukarek zebra wrocław', 'naprawa drukarek zebra wrocław',
+    'drukarki zebra warszawa', 'serwis drukarek zebra warszawa', 'naprawa drukarek zebra warszawa',
+    'drukarki zebra kraków', 'serwis drukarek zebra kraków', 'naprawa drukarek zebra kraków',
+    'drukarki zebra poznań', 'serwis drukarek zebra poznań', 'naprawa drukarek zebra poznań',
+    'drukarki zebra gdańsk', 'serwis drukarek zebra gdańsk',
+    'drukarki zebra katowice', 'serwis drukarek zebra katowice',
+    'drukarki zebra łódź', 'serwis drukarek zebra łódź',
+    'drukarki zebra zielona góra', 'serwis drukarek zebra zielona góra',
   ],
   openGraph: {
     title: 'Serwis Drukarek Zebra – Profesjonalna Naprawa Wszystkich Modeli',

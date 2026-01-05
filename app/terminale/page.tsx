@@ -30,6 +30,15 @@ export const metadata: Metadata = {
     'naprawa mc3300',
     'serwis mc93',
     'naprawa skanera w terminalu',
+    // Miasta
+    'terminale zebra wrocław', 'serwis terminali zebra wrocław', 'naprawa terminali zebra wrocław',
+    'terminale zebra warszawa', 'serwis terminali zebra warszawa', 'naprawa terminali zebra warszawa',
+    'terminale zebra kraków', 'serwis terminali zebra kraków', 'naprawa terminali zebra kraków',
+    'terminale zebra poznań', 'serwis terminali zebra poznań',
+    'terminale zebra gdańsk', 'serwis terminali zebra gdańsk',
+    'terminale zebra katowice', 'serwis terminali zebra katowice',
+    'terminale zebra łódź', 'serwis terminali zebra łódź',
+    'terminale zebra zielona góra', 'serwis terminali zebra zielona góra',
   ],
   openGraph: {
     title: 'Serwis Terminali Zebra – Naprawa TC, MC, Wymiana Ekranów',

@@ -30,6 +30,15 @@ export const metadata: Metadata = {
     'naprawa l10 zebra',
     'serwis tabletów et56',
     'naprawa tabletu przemysłowego',
+    // Miasta
+    'tablety zebra wrocław', 'serwis tabletów zebra wrocław', 'naprawa tabletów zebra wrocław',
+    'tablety zebra warszawa', 'serwis tabletów zebra warszawa', 'naprawa tabletów zebra warszawa',
+    'tablety zebra kraków', 'serwis tabletów zebra kraków', 'naprawa tabletów zebra kraków',
+    'tablety zebra poznań', 'serwis tabletów zebra poznań',
+    'tablety zebra gdańsk', 'serwis tabletów zebra gdańsk',
+    'tablety zebra katowice', 'serwis tabletów zebra katowice',
+    'tablety zebra łódź', 'serwis tabletów zebra łódź',
+    'tablety zebra zielona góra', 'serwis tabletów zebra zielona góra',
   ],
   openGraph: {
     title: 'Serwis Tabletów Zebra – Naprawa ET40, ET45, L10',
