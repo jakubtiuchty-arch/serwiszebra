@@ -16,6 +16,7 @@ import {
   AlertCircle,
   Loader2
 } from 'lucide-react'
+import { trackRepairFormSubmit, trackRepairFormStart } from '@/lib/gtm'
 
 // Zod Schema
 const repairFormSchema = z.object({
@@ -110,6 +111,10 @@ export default function RepairForm() {
 
     const isValid = await trigger(fieldsToValidate as any)
     if (isValid && currentStep < 5) {
+      // Śledzenie GTM - rozpoczęcie formularza (przy przejściu z kroku 1 do 2)
+      if (currentStep === 1) {
+        trackRepairFormStart()
+      }
       setCurrentStep(currentStep + 1)
     }
   }
@@ -165,6 +170,14 @@ export default function RepairForm() {
   const onSubmit = async (data: RepairFormData) => {
     setIsSubmitting(true)
     setSubmitError(null)
+
+    // Śledzenie GTM - wysłanie formularza
+    trackRepairFormSubmit({
+      deviceType: 'drukarka', // Formularz główny to drukarki
+      deviceModel: data.deviceModel,
+      isWarranty: data.isWarranty === 'tak',
+      urgency: data.urgency,
+    })
 
     try {
       // Utwórz FormData (bo mamy pliki)

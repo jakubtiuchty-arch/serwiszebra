@@ -15,6 +15,7 @@ import {
   Paperclip,
   Plus
 } from 'lucide-react'
+import { trackChatOpen, trackChatMessage } from '@/lib/gtm'
 
 interface Citation {
   title: string
@@ -295,6 +296,9 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
   const handleSend = async (text?: string) => {
     const messageText = text || input
     if ((!messageText.trim() && attachedFiles.length === 0) || loading) return
+
+    // Śledzenie GTM - wysłanie wiadomości czatu
+    trackChatMessage(messageText.length)
 
     setInput('')
     
