@@ -167,3 +167,69 @@
     text-align: right;
   }
 }
+
+/* Kompaktowe style dla generowania PDF */
+.pdf-generating {
+  font-size: 12px !important;
+}
+
+.pdf-generating * {
+  line-height: 1.35 !important;
+}
+
+.pdf-generating p {
+  margin-bottom: 6px !important;
+}
+
+.pdf-generating h2,
+.pdf-generating h3 {
+  margin-top: 10px !important;
+  margin-bottom: 6px !important;
+}
+
+.pdf-generating ul,
+.pdf-generating ol {
+  margin: 6px 0 !important;
+}
+
+.pdf-generating li {
+  margin-bottom: 3px !important;
+}
+
+.pdf-generating table {
+  margin: 8px 0 !important;
+  font-size: 11px !important;
+}
+
+.pdf-generating th,
+.pdf-generating td {
+  padding: 4px 6px !important;
+}
+
+.pdf-generating article {
+  margin-bottom: 12px !important;
+}
+
+.pdf-generating blockquote {
+  margin: 8px 0 !important;
+  padding: 8px 12px !important;
+  font-size: 11px !important;
+}
+
+.pdf-generating .space-y-8 > * + * {
+  margin-top: 12px !important;
+}
+
+.pdf-generating .p-6 {
+  padding: 10px !important;
+}
+
+.pdf-generating .px-6 {
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+}
+
+.pdf-generating .py-4 {
+  padding-top: 8px !important;
+  padding-bottom: 8px !important;
+}

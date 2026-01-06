@@ -20,8 +20,10 @@ import {
   Monitor,
   ExternalLink,
   ArrowLeft,
-  CheckCircle2
+  CheckCircle2,
+  Languages
 } from 'lucide-react'
+import { hasPolishManual } from '@/lib/polish-manuals'
 
 // Supabase client (server-side)
 const supabase = createClient(
@@ -263,7 +265,14 @@ export default async function ModelPage({ params }: { params: { model: string } 
   const programmingDoc = getDoc('programming', 'programming')
   const serviceDoc = getDoc('service', 'service')
   
+  // Sprawdź czy jest polska instrukcja
+  const hasPolish = hasPolishManual(manual.model)
+  
   const documents = {
+    polishGuide: hasPolish ? {
+      url: `/instrukcje/${modelSlug}/instrukcja-po-polsku`,
+      lang: 'pl'
+    } : undefined,
     quickStart: quickStartDoc ? {
       ...quickStartDoc,
       url: `/instrukcje/${modelSlug}/szybki-start`
@@ -381,6 +390,31 @@ export default async function ModelPage({ params }: { params: { model: string } 
             </div>
 
             <div className="p-6 space-y-3">
+              {/* POLSKA INSTRUKCJA - wyróżniona na pierwszym miejscu */}
+              {documents.polishGuide && (
+                <Link
+                  href={documents.polishGuide.url}
+                  className="flex items-center justify-between p-4 bg-gradient-to-r from-red-50 to-white rounded-xl border-2 border-red-300 hover:border-red-500 hover:shadow-lg transition-all group relative overflow-hidden"
+                >
+                  {/* Flaga polska w tle */}
+                  <div className="flex items-center gap-4 relative">
+                    <div className="p-2 bg-red-100 rounded-lg">
+                      <Languages className="w-6 h-6 text-red-600" />
+                    </div>
+                    <div>
+                      <p className="font-bold text-gray-900 group-hover:text-red-700">Skrócona instrukcja PL</p>
+                      <p className="text-sm text-gray-600">Najważniejsze informacje po polsku – kalibracja, błędy, konserwacja</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2 relative">
+                    <span className="px-2 py-1 bg-red-100 text-red-700 rounded text-xs font-medium">
+                      PL
+                    </span>
+                    <ChevronRight className="w-5 h-5 text-red-600 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </Link>
+              )}
+
               {documents.quickStart && (
                 <a
                   href={documents.quickStart.url}
