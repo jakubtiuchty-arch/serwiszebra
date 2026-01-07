@@ -5,6 +5,7 @@ import Link from 'next/link'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import { createClient } from '@/lib/supabase/client'
+import { hasPolishManual } from '@/lib/polish-manuals'
 import { 
   Search, 
   Printer, 
@@ -384,6 +385,7 @@ export default function InstrukcjePage() {
                             {hasQuickStart && <span className="px-1 sm:px-1.5 py-0.5 bg-green-100 text-green-700 rounded text-[9px] sm:text-xs">Start</span>}
                             {hasUserGuide && <span className="px-1 sm:px-1.5 py-0.5 bg-blue-100 text-blue-700 rounded text-[9px] sm:text-xs">Manual</span>}
                             {hasProgramming && <span className="hidden sm:inline-block px-1.5 py-0.5 bg-purple-100 text-purple-700 rounded text-xs">ZPL</span>}
+                            {hasPolishManual(manual.model) && <span className="px-1 sm:px-1.5 py-0.5 bg-red-100 text-red-700 rounded text-[9px] sm:text-xs font-medium">PL</span>}
                           </div>
                           
                           {/* Przycisk */}
