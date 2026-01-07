@@ -134,6 +134,17 @@ export default function HomePage() {
     '@context': 'https://schema.org',
     '@graph': [
       {
+        '@type': 'WebSite',
+        '@id': 'https://www.serwis-zebry.pl/#website',
+        url: 'https://www.serwis-zebry.pl',
+        name: 'TAKMA - Autoryzowany Serwis Zebra',
+        description: 'Autoryzowany serwis gwarancyjny i pogwarancyjny Zebra w Polsce',
+        publisher: {
+          '@id': 'https://www.serwis-zebry.pl/#organization'
+        },
+        inLanguage: 'pl-PL'
+      },
+      {
         '@type': 'LocalBusiness',
         '@id': 'https://www.serwis-zebry.pl/#business',
         name: 'TAKMA - Serwis Zebra',

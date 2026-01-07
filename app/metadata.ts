@@ -226,7 +226,7 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'pl_PL',
     url: 'https://www.serwis-zebry.pl',
-    siteName: 'Serwis Zebra',
+    siteName: 'TAKMA - Autoryzowany Serwis Zebra',
     title: 'Autoryzowany Serwis Zebra – AI 24/7, Panel Klienta, Kurier pod Drzwi',
     description: 'Autoryzowany serwis Zebra z diagnostyką AI 24/7 – jedyny taki w Polsce! Wycena w 2 minuty, panel klienta, kurier pod drzwi, wideoporadniki. 25 lat doświadczenia.',
     images: [
