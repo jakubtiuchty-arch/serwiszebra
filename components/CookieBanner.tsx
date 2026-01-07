@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { X, Settings, Shield } from 'lucide-react'
+import { trackCookieConsent } from '@/lib/analytics'
 
 type CookieConsent = {
   necessary: boolean
@@ -57,6 +58,7 @@ export default function CookieBanner() {
   }
 
   const acceptAll = () => {
+    trackCookieConsent(true)
     saveConsent({
       necessary: true,
       analytics: true,
@@ -66,6 +68,7 @@ export default function CookieBanner() {
   }
 
   const acceptNecessary = () => {
+    trackCookieConsent(false)
     saveConsent({
       necessary: true,
       analytics: false,

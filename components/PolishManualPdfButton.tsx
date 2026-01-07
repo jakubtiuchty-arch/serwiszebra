@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { Download, Loader2 } from 'lucide-react'
 import type { PolishManual } from '@/lib/polish-manuals'
+import { trackManualPDFDownload } from '@/lib/analytics'
 
 interface PolishManualPdfButtonProps {
   manual: PolishManual
@@ -13,6 +14,7 @@ export default function PolishManualPdfButton({ manual }: PolishManualPdfButtonP
 
   const handleDownload = async () => {
     setIsGenerating(true)
+    trackManualPDFDownload(manual.model, 'pl')
     
     try {
       // Otwórz nowe okno z wersją do druku

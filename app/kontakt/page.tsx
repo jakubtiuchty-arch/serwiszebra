@@ -17,6 +17,7 @@ import {
   MessageSquare,
   ChevronRight
 } from 'lucide-react'
+import { trackPhoneClick, trackEmailClick, trackFormSubmit } from '@/lib/analytics'
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -35,6 +36,7 @@ export default function ContactPage() {
     setSubmitStatus('idle')
 
     try {
+      trackFormSubmit('contact_form', { subject: formData.subject })
       await new Promise(resolve => setTimeout(resolve, 1000))
       
       const mailtoLink = `mailto:serwis@takma.com.pl?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(
@@ -118,6 +120,7 @@ export default function ContactPage() {
           <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-6">
             <a
               href="tel:+48601619898"
+              onClick={() => trackPhoneClick('kontakt_page')}
               className="bg-white rounded-xl p-3 sm:p-4 shadow-sm border border-gray-200 hover:border-green-300 hover:shadow-md transition-all text-center group"
             >
               <div className="w-10 h-10 sm:w-12 sm:h-12 bg-green-100 rounded-xl flex items-center justify-center mx-auto mb-2 group-hover:bg-green-200 transition-colors">
@@ -129,6 +132,7 @@ export default function ContactPage() {
 
             <a
               href="mailto:serwis@takma.com.pl"
+              onClick={() => trackEmailClick('kontakt_page')}
               className="bg-white rounded-xl p-3 sm:p-4 shadow-sm border border-gray-200 hover:border-blue-300 hover:shadow-md transition-all text-center group"
             >
               <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 rounded-xl flex items-center justify-center mx-auto mb-2 group-hover:bg-blue-200 transition-colors">

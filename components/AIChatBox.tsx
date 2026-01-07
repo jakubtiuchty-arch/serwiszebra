@@ -16,6 +16,7 @@ import {
   Plus
 } from 'lucide-react'
 import { trackChatOpen, trackChatMessage } from '@/lib/gtm'
+import { trackAIChatOpen, trackAIChatMessage } from '@/lib/analytics'
 
 interface Citation {
   title: string
@@ -297,8 +298,9 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
     const messageText = text || input
     if ((!messageText.trim() && attachedFiles.length === 0) || loading) return
 
-    // Śledzenie GTM - wysłanie wiadomości czatu
+    // Śledzenie GTM + Vercel Analytics - wysłanie wiadomości czatu
     trackChatMessage(messageText.length)
+    trackAIChatMessage('user')
 
     setInput('')
     

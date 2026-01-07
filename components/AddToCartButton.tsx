@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { ShoppingCart, Check } from 'lucide-react'
 import { useCartStore } from '@/lib/cart-store'
+import { trackAddToCart } from '@/lib/analytics'
 
 interface AddToCartButtonProps {
   product: {
@@ -22,6 +23,7 @@ export default function AddToCartButton({ product }: AddToCartButtonProps) {
   const addItem = useCartStore((state) => state.addItem)
 
   const handleAddToCart = () => {
+    trackAddToCart(product.name, product.id, 1, product.price_brutto)
     addItem({
       id: product.id,
       name: product.name,

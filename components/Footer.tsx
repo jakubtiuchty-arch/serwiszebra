@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { Phone, Mail, Clock, Sparkles } from 'lucide-react'
+import { trackPhoneClick, trackEmailClick, trackExternalLink } from '@/lib/analytics'
 
 export default function Footer() {
   return (
@@ -66,13 +67,13 @@ export default function Footer() {
               </div>
               {/* Przyciski kontaktowe */}
               <div className="flex items-center gap-2 sm:gap-3 w-full sm:w-auto justify-center sm:justify-end">
-                <a href="tel:+48601619898" className="group flex items-center gap-2 sm:gap-2.5 px-3 sm:px-5 py-2.5 sm:py-3 bg-white/5 hover:bg-white/10 backdrop-blur-sm border border-white/10 rounded-xl transition-all duration-300">
+                <a href="tel:+48601619898" onClick={() => trackPhoneClick('footer')} className="group flex items-center gap-2 sm:gap-2.5 px-3 sm:px-5 py-2.5 sm:py-3 bg-white/5 hover:bg-white/10 backdrop-blur-sm border border-white/10 rounded-xl transition-all duration-300">
                   <div className="w-7 sm:w-8 h-7 sm:h-8 bg-white/10 rounded-lg flex items-center justify-center">
                     <Phone className="w-3.5 sm:w-4 h-3.5 sm:h-4 text-white" />
                   </div>
                   <span className="text-xs sm:text-sm font-medium">+48 601 619 898</span>
                 </a>
-                <a href="mailto:serwis@takma.com.pl" className="group flex items-center gap-2 sm:gap-2.5 px-3 sm:px-5 py-2.5 sm:py-3 bg-white/5 hover:bg-white/10 backdrop-blur-sm border border-white/10 rounded-xl transition-all duration-300">
+                <a href="mailto:serwis@takma.com.pl" onClick={() => trackEmailClick('footer')} className="group flex items-center gap-2 sm:gap-2.5 px-3 sm:px-5 py-2.5 sm:py-3 bg-white/5 hover:bg-white/10 backdrop-blur-sm border border-white/10 rounded-xl transition-all duration-300">
                   <div className="w-7 sm:w-8 h-7 sm:h-8 bg-white/10 rounded-lg flex items-center justify-center">
                     <Mail className="w-3.5 sm:w-4 h-3.5 sm:h-4 text-white" />
                   </div>
@@ -226,6 +227,7 @@ export default function Footer() {
                     href="https://qba.dev" 
                     target="_blank" 
                     rel="noopener noreferrer"
+                    onClick={() => trackExternalLink('https://qba.dev', 'qba.dev')}
                     className="group relative inline-flex items-center ml-0.5"
                   >
                     <span className="absolute inset-0 bg-blue-500/20 rounded-md blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>

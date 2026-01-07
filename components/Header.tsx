@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Calendar, ThumbsUp, Zap, Menu, X, User, LogIn, BookOpen, Download, HelpCircle, Info, Phone, Home, Video } from 'lucide-react'
+import { trackCTAClick, trackInternalLink } from '@/lib/analytics'
 
 interface HeaderProps {
   currentPage?: 'home' | 'blog' | 'panel' | 'other'
@@ -264,7 +265,10 @@ export default function Header({ currentPage = 'other', hidePartnerLogos = false
             <div className="absolute bottom-0 left-0 right-0 p-3 border-t border-gray-200 bg-gray-50">
               <Link
                 href="/#formularz"
-                onClick={() => setMobileMenuOpen(false)}
+                onClick={() => {
+                  trackCTAClick('Zgłoś naprawę', 'header_mobile_menu')
+                  setMobileMenuOpen(false)
+                }}
                 className="block w-full py-2.5 px-4 bg-blue-600 text-white text-sm text-center font-semibold rounded-lg hover:bg-blue-700 transition-colors"
               >
                 Zgłoś naprawę
