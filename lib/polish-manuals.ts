@@ -423,6 +423,42 @@ Wymaga fabrycznie zainstalowanego modułu bezprzewodowego:
 
 > **Źródło:** Service Manual ZD621/ZD421 (P213529-02EN)
 `
+      },
+      {
+        title: 'FAQ – Najczęściej zadawane pytania',
+        content: `
+### Jak skalibrować drukarkę Zebra ZD421t?
+
+**Odpowiedź:** Naciśnij i przytrzymaj jednocześnie **PAUSE + CANCEL** przez 2 sekundy. Drukarka automatycznie wykona kalibrację SmartCal, wysuwając kilka etykiet. Po zakończeniu wskaźnik STATUS zaświeci na zielono. Kalibrację należy wykonać po każdej wymianie materiału.
+
+### Jak załadować ribbon do drukarki Zebra ZD421t?
+
+**Odpowiedź:** Załóż pustą gilzę na górny trzpień (odbiorczy), rolkę ribbonu na dolny trzpień (podający) – ribbon odwija się od spodu. Przeprowadź ribbon pod głowicą i przymocuj do gilzy odbiorczej. Obróć górną gilzę, aby napiąć ribbon, następnie zamknij pokrywę.
+
+### Co oznacza mrugająca dioda SUPPLIES na drukarce Zebra ZD421t?
+
+**Odpowiedź:** Mrugająca na czerwono dioda SUPPLIES oznacza **brak ribbonu (RIBBON OUT)**. Sprawdź czy ribbon jest prawidłowo załadowany i napięty. Jeśli widzisz srebrną folię odbijającą na rolce – ribbon jest zużyty i wymaga wymiany.
+
+### Jak wyczyścić głowicę drukarki Zebra ZD421t?
+
+**Odpowiedź:** Wyłącz drukarkę i poczekaj aż głowica ostygnie. Otwórz pokrywę, wyjmij ribbon. Przetrzyj ciemny pasek głowicy pisakiem czyszczącym Zebra lub wacikiem nasączonym alkoholem izopropylowym (99,7%). Czyść od środka ku krawędziom. Poczekaj 1 minutę przed zamknięciem.
+
+### Jaka jest maksymalna prędkość druku drukarki Zebra ZD421t?
+
+**Odpowiedź:** Maksymalna prędkość druku Zebra ZD421t wynosi **152 mm/s (6 cali/s)** dla wersji 203 dpi oraz **102 mm/s (4 cale/s)** dla wersji 300 dpi.
+
+### Jakie etykiety pasują do drukarki Zebra ZD421t?
+
+**Odpowiedź:** Zebra ZD421t obsługuje etykiety o szerokości od 15 mm do 118 mm, maksymalnej długości 990 mm i średnicy rolki do 127 mm (5 cali). Obsługuje etykiety z przerwą (gap), z czarnym znacznikiem (black mark) oraz materiał ciągły. Jako drukarka termotransferowa **wymaga ribbonu**.
+
+### Dlaczego drukarka Zebra ZD421t nie drukuje?
+
+**Odpowiedź:** Najczęstsze przyczyny: 1) Brak lub źle załadowany ribbon – sprawdź czy jest napięty i prawidłowo przeprowadzony. 2) Tryb druku ustawiony na Direct Thermal zamiast Thermal Transfer – wydrukuj raport konfiguracji. 3) Zbyt niska ciemność druku – zwiększ parametr DARKNESS. 4) Brudna głowica – wyczyść alkoholem.
+
+### Jak wykonać reset fabryczny drukarki Zebra ZD421t?
+
+**Odpowiedź:** Przytrzymaj jednocześnie **FEED + CANCEL** podczas włączania drukarki. Trzymaj przyciski aż wskaźnik STATUS zacznie mrugać. Drukarka przywróci ustawienia fabryczne i wydrukuje raport konfiguracji.
+`
       }
     ]
   },
@@ -776,6 +812,42 @@ Wymaga fabrycznie zainstalowanego modułu bezprzewodowego:
 > 🔧 **Potrzebujesz pomocy?** [Skontaktuj się z naszym serwisem](/kontakt) | [Więcej o drukarkach Zebra](/drukarki)
 
 > **Źródło:** Service Manual ZD621/ZD421 (P213529-02EN)
+`
+      },
+      {
+        title: 'FAQ – Najczęściej zadawane pytania',
+        content: `
+### Jak skalibrować drukarkę Zebra ZD421d?
+
+**Odpowiedź:** Naciśnij i przytrzymaj jednocześnie **PAUSE + CANCEL** przez 2 sekundy. Drukarka automatycznie wykona kalibrację SmartCal, wysuwając kilka etykiet. Po zakończeniu wskaźnik STATUS zaświeci na zielono.
+
+### Czy drukarka Zebra ZD421d wymaga ribbonu?
+
+**Odpowiedź:** **Nie.** Zebra ZD421d to drukarka **Direct Thermal (termiczna bezpośrednia)** – nie wymaga ribbonu. Używa etykiet termoczułych, które ciemnieją pod wpływem ciepła z głowicy. Jest to tańsze rozwiązanie, ale wydruki są mniej trwałe.
+
+### Jak wyczyścić głowicę drukarki Zebra ZD421d?
+
+**Odpowiedź:** Wyłącz drukarkę i poczekaj aż głowica ostygnie. Otwórz pokrywę. Przetrzyj ciemny pasek głowicy pisakiem czyszczącym Zebra lub wacikiem nasączonym alkoholem izopropylowym (99,7%). Czyść od środka ku krawędziom. Poczekaj 1 minutę przed zamknięciem. Czyszczenie zalecane **co 5 rolek etykiet**.
+
+### Jaka jest maksymalna prędkość druku drukarki Zebra ZD421d?
+
+**Odpowiedź:** Maksymalna prędkość druku Zebra ZD421d wynosi **152 mm/s (6 cali/s)** dla wersji 203 dpi oraz **102 mm/s (4 cale/s)** dla wersji 300 dpi.
+
+### Jakie etykiety pasują do drukarki Zebra ZD421d?
+
+**Odpowiedź:** Zebra ZD421d obsługuje etykiety termiczne o szerokości od 15 mm do 118 mm, maksymalnej długości 990 mm i średnicy rolki do 127 mm (5 cali). **Wymagane są etykiety termoczułe (Direct Thermal)** – papierowe lub syntetyczne pokryte warstwą termoczułą.
+
+### Dlaczego drukarka Zebra ZD421d drukuje blado?
+
+**Odpowiedź:** Najczęstsze przyczyny: 1) Zbyt niska ciemność druku – zwiększ parametr DARKNESS. 2) Zbyt wysoka prędkość druku – zmniejsz SPEED. 3) Brudna głowica – wyczyść alkoholem izopropylowym. 4) Zły typ etykiet – używaj tylko etykiet termoczułych (Direct Thermal).
+
+### Jak wykonać reset fabryczny drukarki Zebra ZD421d?
+
+**Odpowiedź:** Przytrzymaj jednocześnie **FEED + CANCEL** podczas włączania drukarki. Trzymaj przyciski aż wskaźnik STATUS zacznie mrugać. Drukarka przywróci ustawienia fabryczne i wydrukuje raport konfiguracji.
+
+### Jaka jest różnica między ZD421d a ZD421t?
+
+**Odpowiedź:** **ZD421d** to drukarka Direct Thermal (termiczna bezpośrednia) – **nie wymaga ribbonu**, używa etykiet termoczułych. **ZD421t** to drukarka Thermal Transfer (termotransferowa) – **wymaga ribbonu**, zapewnia trwalsze wydruki odporne na ścieranie i chemikalia.
 `
       }
     ]
@@ -1253,6 +1325,42 @@ Wymaga fabrycznie zainstalowanego modułu bezprzewodowego:
 
 > **Źródło:** Service Manual ZD621/ZD421 (P213529-02EN)
 `
+      },
+      {
+        title: 'FAQ – Najczęściej zadawane pytania',
+        content: `
+### Jak skalibrować drukarkę Zebra ZD621t?
+
+**Odpowiedź:** Naciśnij i przytrzymaj jednocześnie **PAUSE + CANCEL** przez 2 sekundy. Drukarka automatycznie wykona kalibrację SmartCal. Alternatywnie użyj wyświetlacza LCD: **MENU > Ustawienia > Kalibracja > SmartCal**.
+
+### Jak załadować ribbon do drukarki Zebra ZD621t?
+
+**Odpowiedź:** Otwórz pokrywę, załóż pustą gilzę na górny trzpień (odbiorczy), rolkę ribbonu na dolny trzpień (podający). Przeprowadź ribbon pod głowicą i przymocuj do gilzy odbiorczej. Ribbon musi być **szerszy niż etykiety** aby chronić głowicę.
+
+### Co wyświetla się na ekranie LCD drukarki Zebra ZD621t?
+
+**Odpowiedź:** Wyświetlacz LCD pokazuje: status drukarki, komunikaty o błędach, poziom materiałów, ustawienia druku. Umożliwia pełną konfigurację drukarki bez komputera oraz diagnostykę problemów.
+
+### Jaka jest maksymalna prędkość druku drukarki Zebra ZD621t?
+
+**Odpowiedź:** Maksymalna prędkość druku Zebra ZD621t wynosi **203 mm/s (8 cali/s)** dla wersji 203 dpi oraz **152 mm/s (6 cali/s)** dla wersji 300 dpi. Jest to **szybsza drukarka niż ZD421t**.
+
+### Jakie etykiety pasują do drukarki Zebra ZD621t?
+
+**Odpowiedź:** Zebra ZD621t obsługuje etykiety o szerokości od 19 mm do 118 mm, maksymalnej długości 990 mm i średnicy rolki do **203 mm (8 cali)** – większa rolka niż w ZD421. Jako drukarka termotransferowa **wymaga ribbonu**.
+
+### Jaka jest różnica między ZD621t a ZD421t?
+
+**Odpowiedź:** **ZD621t** ma większą rolkę (do 203 mm vs 127 mm), szybszy druk (203 mm/s vs 152 mm/s), wyświetlacz LCD i zaawansowane opcje łączności. **ZD421t** jest bardziej kompaktowa i tańsza. Obie są termotransferowe (wymagają ribbonu).
+
+### Jak wykonać reset fabryczny drukarki Zebra ZD621t?
+
+**Odpowiedź:** Przez LCD: **MENU > System > Reset fabryczny > Tak**. Lub przytrzymaj **FEED + CANCEL** podczas włączania drukarki.
+
+### Dlaczego drukarka Zebra ZD621t nie drukuje?
+
+**Odpowiedź:** Najczęstsze przyczyny: 1) Sprawdź komunikat na wyświetlaczu LCD. 2) Brak lub źle załadowany ribbon. 3) Tryb druku Direct Thermal zamiast Thermal Transfer. 4) Brudna głowica – wyczyść alkoholem.
+`
       }
     ]
   },
@@ -1666,6 +1774,42 @@ Wymaga fabrycznie zainstalowanego modułu bezprzewodowego:
 > 🔧 **Potrzebujesz pomocy?** [Skontaktuj się z naszym serwisem](/kontakt) | [Więcej o drukarkach Zebra](/drukarki)
 
 > **Źródło:** Service Manual ZD621/ZD421 (P213529-02EN)
+`
+      },
+      {
+        title: 'FAQ – Najczęściej zadawane pytania',
+        content: `
+### Czy drukarka Zebra ZD621d wymaga ribbonu?
+
+**Odpowiedź:** **Nie.** Zebra ZD621d to drukarka **Direct Thermal (termiczna bezpośrednia)** – nie wymaga ribbonu. Używa etykiet termoczułych, które ciemnieją pod wpływem ciepła z głowicy.
+
+### Jak skalibrować drukarkę Zebra ZD621d?
+
+**Odpowiedź:** Przez wyświetlacz LCD: **MENU > Ustawienia > Kalibracja > SmartCal**. Lub naciśnij i przytrzymaj **PAUSE + CANCEL** przez 2 sekundy.
+
+### Jaka jest maksymalna prędkość druku drukarki Zebra ZD621d?
+
+**Odpowiedź:** Maksymalna prędkość druku Zebra ZD621d wynosi **203 mm/s (8 cali/s)** dla wersji 203 dpi oraz **152 mm/s (6 cali/s)** dla wersji 300 dpi.
+
+### Jakie etykiety pasują do drukarki Zebra ZD621d?
+
+**Odpowiedź:** Zebra ZD621d obsługuje etykiety termiczne o szerokości od 19 mm do 118 mm i średnicy rolki do **203 mm (8 cali)**. **Wymagane są etykiety termoczułe (Direct Thermal)**.
+
+### Co to jest Media Dancer w drukarce Zebra ZD621d?
+
+**Odpowiedź:** **Media Dancer** to system kontroli naprężenia materiału, który eliminuje problemy z nieprawidłowym podawaniem etykiet. Kompensuje różnice w naprężeniu przy różnych prędkościach druku.
+
+### Jaka jest różnica między ZD621d a ZD421d?
+
+**Odpowiedź:** **ZD621d** ma większą rolkę (do 203 mm vs 127 mm), szybszy druk (203 mm/s vs 152 mm/s), wyświetlacz LCD, Media Dancer i standardowy Ethernet. **ZD421d** jest bardziej kompaktowa i tańsza.
+
+### Jak wykonać reset fabryczny drukarki Zebra ZD621d?
+
+**Odpowiedź:** Przez LCD: **MENU > System > Reset fabryczny > Tak**. Lub przytrzymaj **FEED + CANCEL** podczas włączania drukarki.
+
+### Dlaczego drukarka Zebra ZD621d drukuje blado?
+
+**Odpowiedź:** Najczęstsze przyczyny: 1) Zbyt niska ciemność druku – zwiększ DARKNESS przez LCD. 2) Zbyt wysoka prędkość – zmniejsz SPEED. 3) Brudna głowica – wyczyść alkoholem. 4) Zły typ etykiet – używaj tylko etykiet termoczułych.
 `
       }
     ]
@@ -2153,6 +2297,42 @@ Jeśli wiele etykiet jest unieważnianych:
 > 🔧 **Potrzebujesz pomocy?** [Skontaktuj się z naszym serwisem](/kontakt) | [Więcej o drukarkach Zebra](/drukarki)
 
 > **Źródło:** Service Manual ZD621/ZD421 (P213529-02EN)
+`
+      },
+      {
+        title: 'FAQ – Najczęściej zadawane pytania',
+        content: `
+### Co to jest drukarka RFID Zebra ZD621R?
+
+**Odpowiedź:** Zebra ZD621R to drukarka termotransferowa z wbudowanym enkoderem RFID UHF. Jednocześnie **drukuje etykiety i programuje chipy RFID** (inlay). Obsługuje standardy EPC Gen 2 i ISO 18000-6C.
+
+### Jak skalibrować drukarkę RFID Zebra ZD621R?
+
+**Odpowiedź:** Wykonaj standardową kalibrację SmartCal (PAUSE + CANCEL przez 2 sek.) dla druku. Dla RFID: **MENU > RFID > CALIBRATE**. Drukarka automatycznie wykryje pozycję transpondera.
+
+### Jakie etykiety RFID pasują do drukarki Zebra ZD621R?
+
+**Odpowiedź:** Zebra ZD621R obsługuje etykiety RFID UHF o szerokości 19-118 mm z transponderami (inlay) w standardzie EPC Gen 2. Zalecane są etykiety Zebra Certified RFID. Pozycja transpondera jest wykrywana automatycznie podczas kalibracji.
+
+### Co oznacza błąd RFID ERROR na drukarce Zebra ZD621R?
+
+**Odpowiedź:** Błąd RFID ERROR oznacza problem z enkodowaniem chipa. Najczęstsze przyczyny: 1) Uszkodzony transponder – drukarka automatycznie oznaczy "Bad" etykietę. 2) Nieprawidłowa pozycja chipa – wykonaj kalibrację RFID. 3) Zbyt słaby sygnał – sprawdź moc anteny w ustawieniach.
+
+### Ile etykiet RFID może zakodować drukarka Zebra ZD621R przed oznaczeniem jako wadliwe?
+
+**Odpowiedź:** Domyślnie drukarka próbuje zakodować transponder **3 razy** zanim oznaczy etykietę jako wadliwą (VOID). Liczbę prób można zmienić w ustawieniach RFID (parametr RFID RETRIES).
+
+### Jaka jest maksymalna prędkość druku drukarki Zebra ZD621R?
+
+**Odpowiedź:** Maksymalna prędkość druku Zebra ZD621R wynosi **203 mm/s (8 cali/s)** dla wersji 203 dpi. Prędkość może być ograniczona przy enkodowaniu RFID w zależności od złożoności danych.
+
+### Jak zaprogramować etykietę RFID na drukarce Zebra ZD621R?
+
+**Odpowiedź:** Użyj komend ZPL: **^RF** do zapisu danych, **^RS** do konfiguracji RFID. Przykład: RFW,H zapisuje dane HEX do pamięci EPC. Można też użyć oprogramowania ZebraDesigner.
+
+### Czy Zebra ZD621R może drukować bez RFID?
+
+**Odpowiedź:** **Tak.** Drukarka może pracować jako standardowa drukarka termotransferowa bez enkodowania RFID. Wystarczy użyć zwykłych etykiet bez transpondera.
 `
       }
     ]
@@ -2651,6 +2831,42 @@ Drukarka automatycznie wstrzymuje druk do ostygnięcia. Upewnij się, że wokó�
 
 > **Źródło:** Zebra ZD411 Series User Guide
 `
+      },
+      {
+        title: 'FAQ – Najczęściej zadawane pytania',
+        content: `
+### Jak skalibrować drukarkę Zebra ZD411t?
+
+**Odpowiedź:** Naciśnij i przytrzymaj jednocześnie **PAUSE + CANCEL** przez 2 sekundy. Drukarka wykona kalibrację SmartCal, wysuwając kilka etykiet. Kalibrację wykonaj po każdej wymianie materiału.
+
+### Jak załadować ribbon do drukarki Zebra ZD411t?
+
+**Odpowiedź:** ZD411t to drukarka **2-calowa**. Załóż pustą gilzę na górny trzpień, rolkę ribbonu na dolny (odwijanie od spodu). Przeprowadź ribbon pod głowicą, przymocuj do gilzy i naciągnij. Ribbon musi być szerszy niż etykiety.
+
+### Jaka jest maksymalna szerokość etykiet w drukarce Zebra ZD411t?
+
+**Odpowiedź:** Maksymalna szerokość druku Zebra ZD411t wynosi **56 mm (2,2 cala)**. To drukarka z serii 2-calowej, idealna do mniejszych etykiet, kodów kreskowych i bransoletek.
+
+### Jaka jest maksymalna prędkość druku drukarki Zebra ZD411t?
+
+**Odpowiedź:** Maksymalna prędkość druku Zebra ZD411t wynosi **152 mm/s (6 cali/s)** dla wersji 203 dpi oraz **102 mm/s (4 cale/s)** dla wersji 300 dpi.
+
+### Czy drukarka Zebra ZD411t wymaga ribbonu?
+
+**Odpowiedź:** **Tak.** ZD411t to drukarka **Thermal Transfer (termotransferowa)** – wymaga ribbonu. Zapewnia trwałe wydruki odporne na ścieranie. Dla etykiet bez ribbonu wybierz model ZD411d.
+
+### Jak wyczyścić głowicę drukarki Zebra ZD411t?
+
+**Odpowiedź:** Wyłącz drukarkę, poczekaj aż ostygnie. Przetrzyj brązowy pasek głowicy wacikiem z alkoholem izopropylowym (99,7%). Czyść od środka ku krawędziom. Czyszczenie zalecane **co 1 rolkę ribbonu**.
+
+### Jak wykonać reset fabryczny drukarki Zebra ZD411t?
+
+**Odpowiedź:** Przytrzymaj **FEED + CANCEL** podczas włączania drukarki. Trzymaj aż wskaźnik STATUS zacznie mrugać. Drukarka przywróci ustawienia fabryczne.
+
+### Jakie są różnice między ZD411t a ZD421t?
+
+**Odpowiedź:** **ZD411t** to drukarka **2-calowa** (max 56 mm), **ZD421t** to drukarka **4-calowa** (max 104 mm). Obie są termotransferowe (wymagają ribbonu). ZD411t jest bardziej kompaktowa, idealna do mniejszych etykiet.
+`
       }
     ]
   },
@@ -3132,6 +3348,42 @@ Jeśli materiał skończy się podczas drukowania:
 > 🔧 **Potrzebujesz pomocy?** [Skontaktuj się z naszym serwisem](/kontakt) | [Więcej o drukarkach Zebra](/drukarki)
 
 > **Źródło:** Zebra ZD411 Series User Guide
+`
+      },
+      {
+        title: 'FAQ – Najczęściej zadawane pytania',
+        content: `
+### Czy drukarka Zebra ZD411d wymaga ribbonu?
+
+**Odpowiedź:** **Nie.** Zebra ZD411d to drukarka **Direct Thermal (termiczna bezpośrednia)** – nie wymaga ribbonu. Używa etykiet termoczułych, które ciemnieją pod wpływem ciepła.
+
+### Jak skalibrować drukarkę Zebra ZD411d?
+
+**Odpowiedź:** Naciśnij i przytrzymaj **PAUSE + CANCEL** przez 2 sekundy. Drukarka wykona kalibrację SmartCal automatycznie.
+
+### Jaka jest maksymalna szerokość etykiet w drukarce Zebra ZD411d?
+
+**Odpowiedź:** Maksymalna szerokość druku Zebra ZD411d wynosi **56 mm (2,2 cala)**. To kompaktowa drukarka 2-calowa.
+
+### Jaka jest maksymalna prędkość druku drukarki Zebra ZD411d?
+
+**Odpowiedź:** Maksymalna prędkość druku Zebra ZD411d wynosi **152 mm/s (6 cali/s)** dla wersji 203 dpi oraz **102 mm/s (4 cale/s)** dla wersji 300 dpi.
+
+### Jakie etykiety pasują do drukarki Zebra ZD411d?
+
+**Odpowiedź:** ZD411d wymaga **etykiet termoczułych (Direct Thermal)** o szerokości do 56 mm. Nie używaj zwykłych etykiet papierowych – nie będą się drukować.
+
+### Dlaczego drukarka Zebra ZD411d drukuje blado?
+
+**Odpowiedź:** Najczęstsze przyczyny: 1) Zbyt niska ciemność druku – zwiększ DARKNESS. 2) Zbyt wysoka prędkość – zmniejsz SPEED. 3) Brudna głowica – wyczyść alkoholem. 4) Zły typ etykiet – używaj etykiet termoczułych.
+
+### Jak wyczyścić głowicę drukarki Zebra ZD411d?
+
+**Odpowiedź:** Wyłącz drukarkę i otwórz pokrywę. Przetrzyj brązowy pasek głowicy wacikiem z alkoholem izopropylowym (99,7%). Czyszczenie zalecane **co 5 rolek etykiet** lub przy problemach z jakością.
+
+### Jaka jest różnica między ZD411d a ZD411t?
+
+**Odpowiedź:** **ZD411d** = Direct Thermal (bez ribbonu, tańsze etykiety, mniej trwałe wydruki). **ZD411t** = Thermal Transfer (wymaga ribbonu, trwalsze wydruki). Obie są 2-calowe.
 `
       }
     ]
@@ -3638,6 +3890,42 @@ Jeśli materiał skończy się podczas drukowania:
 
 > **Źródło:** Zebra ZD611 Series User Guide
 `
+      },
+      {
+        title: 'FAQ – Najczęściej zadawane pytania',
+        content: `
+### Czy drukarka Zebra ZD611d wymaga ribbonu?
+
+**Odpowiedź:** **Nie.** Zebra ZD611d to drukarka **Direct Thermal (termiczna bezpośrednia)** – nie wymaga ribbonu. Używa etykiet termoczułych. Dla wydruków z ribbonem wybierz model ZD611t.
+
+### Jak skalibrować drukarkę Zebra ZD611d?
+
+**Odpowiedź:** Przez wyświetlacz LCD: **MENU > Ustawienia > Kalibracja > SmartCal**. Lub naciśnij **PAUSE + CANCEL** przez 2 sekundy.
+
+### Co to jest wyświetlacz LCD w drukarce Zebra ZD611d?
+
+**Odpowiedź:** ZD611d ma kolorowy wyświetlacz LCD umożliwiający: pełną konfigurację bez komputera, podgląd komunikatów błędów, monitorowanie stanu materiałów, zmianę ustawień druku.
+
+### Jaka jest maksymalna szerokość etykiet w drukarce Zebra ZD611d?
+
+**Odpowiedź:** Maksymalna szerokość druku Zebra ZD611d wynosi **56 mm (2,2 cala)**. To zaawansowana drukarka 2-calowa z wyświetlaczem LCD.
+
+### Jaka jest maksymalna prędkość druku drukarki Zebra ZD611d?
+
+**Odpowiedź:** Maksymalna prędkość druku Zebra ZD611d wynosi **203 mm/s (8 cali/s)** dla wersji 203 dpi oraz **152 mm/s (6 cali/s)** dla wersji 300 dpi. Jest **szybsza niż ZD411d**.
+
+### Jaka jest różnica między ZD611d a ZD411d?
+
+**Odpowiedź:** **ZD611d** ma: wyświetlacz LCD, szybszy druk (203 mm/s vs 152 mm/s), standardowy Ethernet. **ZD411d** jest prostsza i tańsza. Obie są 2-calowe Direct Thermal.
+
+### Jak wykonać reset fabryczny drukarki Zebra ZD611d?
+
+**Odpowiedź:** Przez LCD: **MENU > System > Reset fabryczny > Tak**. Lub przytrzymaj **FEED + CANCEL** podczas włączania.
+
+### Dlaczego drukarka Zebra ZD611d drukuje blado?
+
+**Odpowiedź:** Sprawdź ustawienia przez LCD: 1) Zwiększ DARKNESS. 2) Zmniejsz SPEED. 3) Wyczyść głowicę alkoholem. 4) Upewnij się, że używasz etykiet termoczułych (Direct Thermal).
+`
       }
     ]
   },
@@ -4126,6 +4414,42 @@ Wersja Healthcare oferuje:
 > 🔧 **Potrzebujesz pomocy?** [Skontaktuj się z naszym serwisem](/kontakt) | [Więcej o drukarkach Zebra](/drukarki)
 
 > **Źródło:** Zebra ZD611 Series User Guide
+`
+      },
+      {
+        title: 'FAQ – Najczęściej zadawane pytania',
+        content: `
+### Jak skalibrować drukarkę Zebra ZD611t?
+
+**Odpowiedź:** Przez wyświetlacz LCD: **MENU > Ustawienia > Kalibracja > SmartCal**. Lub naciśnij **PAUSE + CANCEL** przez 2 sekundy.
+
+### Jak załadować ribbon do drukarki Zebra ZD611t?
+
+**Odpowiedź:** ZD611t to drukarka **2-calowa termotransferowa**. Załóż pustą gilzę na górny trzpień, rolkę ribbonu na dolny. Przeprowadź ribbon pod głowicą i naciągnij. Ribbon musi być szerszy niż etykiety.
+
+### Co to jest wyświetlacz LCD w drukarce Zebra ZD611t?
+
+**Odpowiedź:** ZD611t ma kolorowy wyświetlacz LCD umożliwiający: konfigurację bez komputera, podgląd błędów, monitorowanie materiałów i ribbonu, zmianę ustawień druku.
+
+### Jaka jest maksymalna szerokość etykiet w drukarce Zebra ZD611t?
+
+**Odpowiedź:** Maksymalna szerokość druku Zebra ZD611t wynosi **56 mm (2,2 cala)**. To zaawansowana drukarka 2-calowa termotransferowa.
+
+### Jaka jest maksymalna prędkość druku drukarki Zebra ZD611t?
+
+**Odpowiedź:** Maksymalna prędkość druku Zebra ZD611t wynosi **203 mm/s (8 cali/s)** dla wersji 203 dpi oraz **152 mm/s (6 cali/s)** dla wersji 300 dpi.
+
+### Czy drukarka Zebra ZD611t wymaga ribbonu?
+
+**Odpowiedź:** **Tak.** ZD611t to drukarka **Thermal Transfer (termotransferowa)** – wymaga ribbonu. Zapewnia trwałe wydruki odporne na ścieranie i chemikalia.
+
+### Jaka jest różnica między ZD611t a ZD411t?
+
+**Odpowiedź:** **ZD611t** ma: wyświetlacz LCD, szybszy druk (203 mm/s vs 152 mm/s), standardowy Ethernet. **ZD411t** jest prostsza i tańsza. Obie są 2-calowe termotransferowe.
+
+### Jak wykonać reset fabryczny drukarki Zebra ZD611t?
+
+**Odpowiedź:** Przez LCD: **MENU > System > Reset fabryczny > Tak**. Lub przytrzymaj **FEED + CANCEL** podczas włączania drukarki.
 `
       }
     ]
@@ -4636,6 +4960,42 @@ Przed podłączeniem drukarki zainstaluj sterowniki ze strony [serwis-zebry.pl/s
 
 > **Źródło:** Zebra ZD611 Series User Guide
 `
+      },
+      {
+        title: 'FAQ – Najczęściej zadawane pytania',
+        content: `
+### Co to jest drukarka RFID Zebra ZD611R?
+
+**Odpowiedź:** Zebra ZD611R to kompaktowa **2-calowa** drukarka termotransferowa z wbudowanym enkoderem RFID UHF. Jednocześnie drukuje etykiety i programuje chipy RFID. Obsługuje standardy EPC Gen 2.
+
+### Jak skalibrować drukarkę RFID Zebra ZD611R?
+
+**Odpowiedź:** Przez LCD: **MENU > Ustawienia > Kalibracja > SmartCal** dla druku. Dla RFID: **MENU > RFID > CALIBRATE**. Drukarka wykryje pozycję transpondera automatycznie.
+
+### Jakie etykiety RFID pasują do drukarki Zebra ZD611R?
+
+**Odpowiedź:** ZD611R obsługuje etykiety RFID UHF o szerokości do **56 mm (2,2 cala)** z transponderami EPC Gen 2. Idealne do bransoletek RFID, małych etykiet i oznaczeń.
+
+### Co oznacza błąd RFID ERROR na drukarce Zebra ZD611R?
+
+**Odpowiedź:** Problem z enkodowaniem chipa. Przyczyny: 1) Uszkodzony transponder. 2) Nieprawidłowa pozycja chipa – wykonaj kalibrację RFID. 3) Zbyt słaby sygnał – sprawdź moc anteny.
+
+### Jaka jest maksymalna prędkość druku drukarki Zebra ZD611R?
+
+**Odpowiedź:** Maksymalna prędkość druku ZD611R wynosi **203 mm/s (8 cali/s)** dla wersji 203 dpi. Prędkość może być ograniczona przy enkodowaniu RFID.
+
+### Jaka jest różnica między ZD611R a ZD621R?
+
+**Odpowiedź:** **ZD611R** to drukarka **2-calowa** (max 56 mm), **ZD621R** to drukarka **4-calowa** (max 118 mm). Obie mają enkoder RFID UHF i wyświetlacz LCD.
+
+### Czy Zebra ZD611R może drukować bez RFID?
+
+**Odpowiedź:** **Tak.** Drukarka może pracować jako standardowa drukarka termotransferowa. Wystarczy użyć zwykłych etykiet bez transpondera RFID.
+
+### Jak zaprogramować etykietę RFID na drukarce Zebra ZD611R?
+
+**Odpowiedź:** Użyj komend ZPL: **^RF** do zapisu danych, **^RS** do konfiguracji RFID. Lub użyj oprogramowania ZebraDesigner z obsługą RFID.
+`
       }
     ]
   },
@@ -4988,6 +5348,42 @@ Drukarka jest przegrzana – poczekaj aż ostygnie. Upewnij się, że wokół dr
 > 🔧 **Potrzebujesz pomocy?** [Skontaktuj się z naszym serwisem](/kontakt) | [Więcej o drukarkach Zebra](/drukarki)
 
 > **Źródło:** Zebra ZD200 Series User Guide
+`
+      },
+      {
+        title: 'FAQ – Najczęściej zadawane pytania',
+        content: `
+### Czy drukarka Zebra ZD220d wymaga ribbonu?
+
+**Odpowiedź:** **Nie.** Zebra ZD220d to drukarka **Direct Thermal (termiczna bezpośrednia)** – nie wymaga ribbonu. Używa etykiet termoczułych. To ekonomiczne rozwiązanie dla podstawowych zastosowań.
+
+### Jak skalibrować drukarkę Zebra ZD220d?
+
+**Odpowiedź:** Naciśnij i przytrzymaj przycisk **FEED** przez około 3 sekundy (aż dioda STATUS zamruga). Drukarka wykona auto-kalibrację.
+
+### Jaka jest maksymalna prędkość druku drukarki Zebra ZD220d?
+
+**Odpowiedź:** Maksymalna prędkość druku Zebra ZD220d wynosi **102 mm/s (4 cale/s)**. To podstawowa drukarka z serii ZD200.
+
+### Jakie etykiety pasują do drukarki Zebra ZD220d?
+
+**Odpowiedź:** ZD220d obsługuje etykiety termiczne o szerokości do **104 mm (4 cale)** i średnicy rolki do **127 mm (5 cali)**. Wymagane są **etykiety termoczułe (Direct Thermal)**.
+
+### Dlaczego drukarka Zebra ZD220d drukuje blado?
+
+**Odpowiedź:** Najczęstsze przyczyny: 1) Zbyt niska ciemność – zwiększ DARKNESS przez Zebra Setup Utilities. 2) Zbyt wysoka prędkość. 3) Brudna głowica – wyczyść alkoholem. 4) Zły typ etykiet.
+
+### Jak wyczyścić głowicę drukarki Zebra ZD220d?
+
+**Odpowiedź:** Wyłącz drukarkę, otwórz pokrywę. Przetrzyj brązowy pasek głowicy wacikiem z alkoholem izopropylowym (99,7%). Czyszczenie zalecane **co 5 rolek etykiet**.
+
+### Jak wykonać reset fabryczny drukarki Zebra ZD220d?
+
+**Odpowiedź:** Przytrzymaj przycisk **FEED** podczas włączania drukarki. Trzymaj aż dioda STATUS zamruga dwa razy. Drukarka przywróci ustawienia fabryczne.
+
+### Jaka jest różnica między ZD220d a ZD230d?
+
+**Odpowiedź:** **ZD230d** ma wyższą prędkość druku (152 mm/s vs 102 mm/s) i więcej opcji łączności. **ZD220d** to podstawowy model ekonomiczny. Obie są Direct Thermal 4-calowe.
 `
       }
     ]
@@ -5379,6 +5775,42 @@ Drukarka automatycznie wykrywa srebrną folię odbijającą na końcu ribbonu Ze
 
 > **Źródło:** Zebra ZD200 Series User Guide
 `
+      },
+      {
+        title: 'FAQ – Najczęściej zadawane pytania',
+        content: `
+### Jak skalibrować drukarkę Zebra ZD220t?
+
+**Odpowiedź:** Naciśnij i przytrzymaj przycisk **FEED** przez około 3 sekundy (aż dioda STATUS zamruga). Drukarka wykona auto-kalibrację.
+
+### Jak załadować ribbon do drukarki Zebra ZD220t?
+
+**Odpowiedź:** Otwórz pokrywę, załóż pustą gilzę na górny trzpień, rolkę ribbonu na dolny (odwijanie od spodu). Przeprowadź ribbon pod głowicą i przymocuj do gilzy. Naciągnij ribbon.
+
+### Czy drukarka Zebra ZD220t wymaga ribbonu?
+
+**Odpowiedź:** **Tak.** ZD220t to drukarka **Thermal Transfer (termotransferowa)** – wymaga ribbonu. Zapewnia trwalsze wydruki niż model ZD220d.
+
+### Jaka jest maksymalna prędkość druku drukarki Zebra ZD220t?
+
+**Odpowiedź:** Maksymalna prędkość druku Zebra ZD220t wynosi **102 mm/s (4 cale/s)**. To podstawowa drukarka termotransferowa z serii ZD200.
+
+### Jakie etykiety pasują do drukarki Zebra ZD220t?
+
+**Odpowiedź:** ZD220t obsługuje etykiety o szerokości do **104 mm (4 cale)** i średnicy rolki do **127 mm (5 cali)**. Można używać etykiet papierowych, foliowych i syntetycznych z ribbonem.
+
+### Dlaczego drukarka Zebra ZD220t nie drukuje?
+
+**Odpowiedź:** Najczęstsze przyczyny: 1) Brak lub źle załadowany ribbon. 2) Tryb druku ustawiony na Direct Thermal. 3) Zbyt niska ciemność druku. 4) Brudna głowica.
+
+### Jak wyczyścić głowicę drukarki Zebra ZD220t?
+
+**Odpowiedź:** Wyłącz drukarkę, otwórz pokrywę, wyjmij ribbon. Przetrzyj brązowy pasek głowicy wacikiem z alkoholem izopropylowym (99,7%). Czyszczenie zalecane **co 1 rolkę ribbonu**.
+
+### Jaka jest różnica między ZD220t a ZD230t?
+
+**Odpowiedź:** **ZD230t** ma wyższą prędkość druku (152 mm/s vs 102 mm/s) i więcej opcji łączności. **ZD220t** to podstawowy model ekonomiczny. Obie są Thermal Transfer 4-calowe.
+`
       }
     ]
   },
@@ -5757,6 +6189,42 @@ Jeśli drukarka ma fabrycznie zainstalowany moduł Wi-Fi:
 > 🔧 **Potrzebujesz pomocy?** [Skontaktuj się z naszym serwisem](/kontakt) | [Więcej o drukarkach Zebra](/drukarki)
 
 > **Źródło:** Zebra ZD200 Series User Guide
+`
+      },
+      {
+        title: 'FAQ – Najczęściej zadawane pytania',
+        content: `
+### Czy drukarka Zebra ZD230d wymaga ribbonu?
+
+**Odpowiedź:** **Nie.** Zebra ZD230d to drukarka **Direct Thermal (termiczna bezpośrednia)** – nie wymaga ribbonu. Używa etykiet termoczułych.
+
+### Jak skalibrować drukarkę Zebra ZD230d?
+
+**Odpowiedź:** Naciśnij i przytrzymaj przycisk **FEED** przez około 3 sekundy (aż dioda STATUS zamruga). Drukarka wykona auto-kalibrację.
+
+### Jaka jest maksymalna prędkość druku drukarki Zebra ZD230d?
+
+**Odpowiedź:** Maksymalna prędkość druku Zebra ZD230d wynosi **152 mm/s (6 cali/s)**. Jest **szybsza niż ZD220d** (102 mm/s).
+
+### Jakie etykiety pasują do drukarki Zebra ZD230d?
+
+**Odpowiedź:** ZD230d obsługuje etykiety termiczne o szerokości do **104 mm (4 cale)** i średnicy rolki do **127 mm (5 cali)**. Wymagane są **etykiety termoczułe**.
+
+### Dlaczego drukarka Zebra ZD230d drukuje blado?
+
+**Odpowiedź:** Najczęstsze przyczyny: 1) Zbyt niska ciemność – zwiększ DARKNESS. 2) Zbyt wysoka prędkość. 3) Brudna głowica – wyczyść alkoholem. 4) Zły typ etykiet – używaj tylko termoczułych.
+
+### Jak wyczyścić głowicę drukarki Zebra ZD230d?
+
+**Odpowiedź:** Wyłącz drukarkę, otwórz pokrywę. Przetrzyj brązowy pasek głowicy wacikiem z alkoholem izopropylowym (99,7%). Czyszczenie zalecane **co 5 rolek etykiet**.
+
+### Jaka jest różnica między ZD230d a ZD220d?
+
+**Odpowiedź:** **ZD230d** ma wyższą prędkość druku (152 mm/s vs 102 mm/s) i więcej opcji łączności. **ZD220d** to podstawowy model ekonomiczny.
+
+### Jak wykonać reset fabryczny drukarki Zebra ZD230d?
+
+**Odpowiedź:** Przytrzymaj przycisk **FEED** podczas włączania drukarki. Trzymaj aż dioda STATUS zamruga dwa razy. Drukarka przywróci ustawienia fabryczne.
 `
       }
     ]
@@ -6206,6 +6674,42 @@ Drukarka automatycznie wykrywa srebrną folię odbijającą na końcu ribbonu Ze
 > 🔧 **Potrzebujesz pomocy?** [Skontaktuj się z naszym serwisem](/kontakt) | [Więcej o drukarkach Zebra](/drukarki)
 
 > **Źródło:** Zebra ZD200 Series User Guide
+`
+      },
+      {
+        title: 'FAQ – Najczęściej zadawane pytania',
+        content: `
+### Jak skalibrować drukarkę Zebra ZD230t?
+
+**Odpowiedź:** Naciśnij i przytrzymaj przycisk **FEED** przez około 3 sekundy (aż dioda STATUS zamruga). Drukarka wykona auto-kalibrację.
+
+### Jak załadować ribbon do drukarki Zebra ZD230t?
+
+**Odpowiedź:** Otwórz pokrywę, załóż pustą gilzę na górny trzpień, rolkę ribbonu na dolny (odwijanie od spodu). Przeprowadź ribbon pod głowicą i przymocuj do gilzy. Naciągnij ribbon.
+
+### Czy drukarka Zebra ZD230t wymaga ribbonu?
+
+**Odpowiedź:** **Tak.** ZD230t to drukarka **Thermal Transfer (termotransferowa)** – wymaga ribbonu. Zapewnia trwałe wydruki odporne na ścieranie.
+
+### Jaka jest maksymalna prędkość druku drukarki Zebra ZD230t?
+
+**Odpowiedź:** Maksymalna prędkość druku Zebra ZD230t wynosi **152 mm/s (6 cali/s)**. Jest **szybsza niż ZD220t** (102 mm/s).
+
+### Jakie etykiety pasują do drukarki Zebra ZD230t?
+
+**Odpowiedź:** ZD230t obsługuje etykiety o szerokości do **104 mm (4 cale)** i średnicy rolki do **127 mm (5 cali)**. Można używać etykiet papierowych, foliowych i syntetycznych z ribbonem.
+
+### Dlaczego drukarka Zebra ZD230t nie drukuje?
+
+**Odpowiedź:** Najczęstsze przyczyny: 1) Brak lub źle załadowany ribbon. 2) Tryb druku ustawiony na Direct Thermal. 3) Zbyt niska ciemność druku. 4) Brudna głowica.
+
+### Jak wyczyścić głowicę drukarki Zebra ZD230t?
+
+**Odpowiedź:** Wyłącz drukarkę, otwórz pokrywę, wyjmij ribbon. Przetrzyj brązowy pasek głowicy wacikiem z alkoholem izopropylowym (99,7%). Czyszczenie zalecane **co 1 rolkę ribbonu**.
+
+### Jaka jest różnica między ZD230t a ZD220t?
+
+**Odpowiedź:** **ZD230t** ma wyższą prędkość druku (152 mm/s vs 102 mm/s) i więcej opcji łączności. **ZD220t** to podstawowy model ekonomiczny. Obie są Thermal Transfer 4-calowe.
 `
       }
     ]
@@ -6711,6 +7215,42 @@ Drukarka może wydrukować serie etykiet testowych z różnymi ustawieniami ciem
 
 > **Źródło:** Zebra ZT111 User Guide
 `
+      },
+      {
+        title: 'FAQ – Najczęściej zadawane pytania',
+        content: `
+### Co to jest drukarka przemysłowa Zebra ZT111?
+
+**Odpowiedź:** Zebra ZT111 to **drukarka przemysłowa** z metalową obudową, przeznaczona do intensywnej pracy w trudnych warunkach. Oferuje wysoką wydajność i niezawodność. Dostępna w wersjach 203 dpi i 300 dpi.
+
+### Jak skalibrować drukarkę Zebra ZT111?
+
+**Odpowiedź:** Naciśnij i przytrzymaj **PAUSE + FEED** przez 2 sekundy. Drukarka wykona automatyczną kalibrację czujników. Kalibrację wykonaj po każdej wymianie materiału.
+
+### Jak załadować ribbon do drukarki Zebra ZT111?
+
+**Odpowiedź:** Otwórz drzwi boczne, zwolnij głowicę. Załóż rolkę ribbonu na dolną gilzę, pustą gilzę na górną. Przeprowadź ribbon pod głowicą zgodnie ze ścieżką. Zamknij głowicę i drzwi.
+
+### Jaka jest maksymalna prędkość druku drukarki Zebra ZT111?
+
+**Odpowiedź:** Maksymalna prędkość druku Zebra ZT111 wynosi **254 mm/s (10 cali/s)** dla wersji 203 dpi oraz **203 mm/s (8 cali/s)** dla wersji 300 dpi.
+
+### Jakie etykiety pasują do drukarki Zebra ZT111?
+
+**Odpowiedź:** ZT111 obsługuje etykiety o szerokości do **104 mm (4 cale)** i średnicy rolki do **203 mm (8 cali)**. Obsługuje materiały rolkowe i składane (fanfold).
+
+### Czy drukarka Zebra ZT111 może pracować jako Direct Thermal?
+
+**Odpowiedź:** **Tak.** ZT111 obsługuje oba tryby: Thermal Transfer (z ribbonem) i Direct Thermal (bez ribbonu). Tryb można zmienić przez menu lub komendą ZPL.
+
+### Jak wyczyścić głowicę drukarki Zebra ZT111?
+
+**Odpowiedź:** Wyłącz drukarkę, otwórz drzwi, zwolnij głowicę. Przetrzyj brązowy pasek wacikiem z alkoholem izopropylowym (99,7%). Czyszczenie zalecane **co 1 rolkę ribbonu/materiału DT**.
+
+### Jaka jest różnica między ZT111 a ZD621t?
+
+**Odpowiedź:** **ZT111** to drukarka **przemysłowa** z metalową obudową, szybsza (254 mm/s vs 203 mm/s), do intensywnej pracy. **ZD621t** to drukarka **biurkowa** (desktop), bardziej kompaktowa.
+`
       }
     ]
   },
@@ -7151,6 +7691,42 @@ Dla trudnych materiałów:
 
 > **Źródło:** Zebra ZT220/ZT230 User Guide
 `
+      },
+      {
+        title: 'FAQ – Najczęściej zadawane pytania',
+        content: `
+### Co to jest drukarka Zebra ZT230?
+
+**Odpowiedź:** Zebra ZT230 to **drukarka przemysłowa** z **wyświetlaczem LCD** i menu nawigacyjnym. Metalowa obudowa zapewnia trwałość w wymagających środowiskach produkcyjnych i magazynowych.
+
+### Jak skalibrować drukarkę Zebra ZT230?
+
+**Odpowiedź:** Przez menu LCD: **TOOLS > CALIBRATE > OK**. Lub naciśnij **PAUSE + FEED** przez 2 sekundy.
+
+### Co wyświetla się na ekranie LCD drukarki Zebra ZT230?
+
+**Odpowiedź:** Wyświetlacz LCD pokazuje: status drukarki, komunikaty błędów, menu konfiguracji. Umożliwia pełną konfigurację bez komputera przez intuicyjne menu.
+
+### Jak załadować ribbon do drukarki Zebra ZT230?
+
+**Odpowiedź:** Otwórz drzwi, zwolnij głowicę (dźwignia w górę). Załóż rolkę ribbonu na dolną gilzę, pustą na górną. Przeprowadź ribbon pod głowicą, nawiń na górną gilzę. Zamknij głowicę.
+
+### Jaka jest maksymalna prędkość druku drukarki Zebra ZT230?
+
+**Odpowiedź:** Maksymalna prędkość druku Zebra ZT230 wynosi **152 mm/s (6 cali/s)** dla wersji 203 dpi i 300 dpi.
+
+### Jakie etykiety pasują do drukarki Zebra ZT230?
+
+**Odpowiedź:** ZT230 obsługuje etykiety o szerokości do **104 mm (4 cale)** i średnicy rolki do **203 mm (8 cali)**. Obsługuje materiały rolkowe i składane (fanfold).
+
+### Co oznacza komunikat PAPER OUT na drukarce Zebra ZT230?
+
+**Odpowiedź:** Brak materiału (etykiet). Załaduj nową rolkę etykiet i wykonaj kalibrację.
+
+### Jaka jest różnica między ZT230 a ZT220?
+
+**Odpowiedź:** **ZT230** ma **wyświetlacz LCD** z pełnym menu konfiguracji. **ZT220** ma tylko **wskaźniki LED** – konfiguracja przez oprogramowanie/ZPL.
+`
       }
     ]
   },
@@ -7549,6 +8125,42 @@ Automatyczna kalibracja przez przyciski:
 > Potrzebujesz pomocy? [Skontaktuj się z naszym serwisem](/kontakt)
 
 > **Źródło:** Zebra ZT220/ZT230 User Guide
+`
+      },
+      {
+        title: 'FAQ – Najczęściej zadawane pytania',
+        content: `
+### Co to jest drukarka Zebra ZT220?
+
+**Odpowiedź:** Zebra ZT220 to **drukarka przemysłowa** z prostym panelem **wskaźników LED** (bez wyświetlacza LCD). Metalowa obudowa zapewnia trwałość w wymagających środowiskach. Konfiguracja odbywa się przez oprogramowanie lub komendy ZPL.
+
+### Jak skalibrować drukarkę Zebra ZT220?
+
+**Odpowiedź:** Naciśnij i przytrzymaj **PAUSE + FEED** przez 2 sekundy. Drukarka wykona automatyczną kalibrację czujników.
+
+### Jak załadować ribbon do drukarki Zebra ZT220?
+
+**Odpowiedź:** Otwórz drzwi, zwolnij głowicę (dźwignia w górę). Załóż rolkę ribbonu na dolną gilzę, pustą gilzę na górną. Przeprowadź ribbon pod głowicą, nawiń na górną gilzę. Zamknij głowicę.
+
+### Jaka jest maksymalna prędkość druku drukarki Zebra ZT220?
+
+**Odpowiedź:** Maksymalna prędkość druku Zebra ZT220 wynosi **152 mm/s (6 cali/s)** dla wersji 203 dpi i 300 dpi.
+
+### Jakie etykiety pasują do drukarki Zebra ZT220?
+
+**Odpowiedź:** ZT220 obsługuje etykiety o szerokości do **104 mm (4 cale)** i średnicy rolki do **203 mm (8 cali)**. Obsługuje materiały rolkowe i składane (fanfold).
+
+### Co oznaczają diody LED na drukarce Zebra ZT220?
+
+**Odpowiedź:** **STATUS** zielony = gotowa, czerwony = błąd. **PAUSE** żółty = wstrzymana. **SUPPLIES** czerwony = brak materiału/ribbonu. **DATA** mruga = transmisja danych. **NETWORK** = stan sieci.
+
+### Jak wydrukować raport konfiguracji na drukarce Zebra ZT220?
+
+**Odpowiedź:** Wyłącz drukarkę. Naciśnij i przytrzymaj **CANCEL**, włącz drukarkę. Zwolnij gdy STATUS zamiga pierwszy raz. Drukarka wydrukuje raport.
+
+### Jaka jest różnica między ZT220 a ZT230?
+
+**Odpowiedź:** **ZT220** ma **wskaźniki LED** – konfiguracja przez oprogramowanie/ZPL. **ZT230** ma **wyświetlacz LCD** z pełnym menu konfiguracji. Specyfikacje druku są identyczne.
 `
       }
     ]
