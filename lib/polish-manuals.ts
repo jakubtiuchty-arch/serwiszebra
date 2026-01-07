@@ -6713,6 +6713,845 @@ Drukarka może wydrukować serie etykiet testowych z różnymi ustawieniami ciem
 `
       }
     ]
+  },
+  'zt230': {
+    model: 'ZT230',
+    title: 'Zebra ZT230 – Instrukcja obsługi po Polsku',
+    lastUpdated: '2026-01-07',
+    sourceDocument: 'Zebra ZT220/ZT230 User Guide',
+    keywords: [
+      'zebra zt230 instrukcja',
+      'zt230 instrukcja po polsku',
+      'zebra zt230 manual',
+      'drukarka zebra zt230',
+      'zebra zt230 kalibracja',
+      'zt230 kalibracja czujników',
+      'zebra zt230 reset',
+      'zt230 reset fabryczny',
+      'zebra zt230 ribbon',
+      'zt230 zakładanie taśmy',
+      'zebra zt230 etykiety',
+      'zt230 ładowanie etykiet',
+      'zebra zt230 sterowniki',
+      'zt230 instalacja',
+      'zebra zt230 specyfikacja',
+      'zt230 parametry techniczne',
+      'zebra zt230 błędy',
+      'zt230 paper out',
+      'zt230 ribbon out',
+      'zebra zt230 czyszczenie',
+      'zt230 czyszczenie głowicy',
+      'zebra zt230 ethernet',
+      'zt230 wifi',
+      'zebra zt230 lcd',
+      'zt230 wyświetlacz',
+      'zebra zt230 menu',
+      'zt230 konfiguracja menu',
+      'zebra zt230 thermal transfer',
+      'zt230 termotransferowa',
+      'drukarka przemysłowa zebra zt230',
+      'zebra zt230 203 dpi',
+      'zebra zt230 300 dpi',
+      'zt230 prędkość druku',
+      'zebra zt230 serwis',
+      'zt230 naprawa',
+      'instrukcja obsługi zebra zt230',
+      'zebra zt230 po polsku',
+      'zt230 user guide polski',
+      'zt230 dispenser',
+      'zt230 cutter',
+      'zt230 obcinacz'
+    ],
+    sections: [
+      {
+        title: '1. Podstawowe informacje',
+        content: `
+### O drukarce Zebra ZT230
+
+Zebra ZT230 to drukarka przemysłowa zaprojektowana do pracy w wymagających środowiskach produkcyjnych i magazynowych. Model ZT230 wyposażony jest w **wyświetlacz LCD z systemem menu**, umożliwiający pełną konfigurację drukarki bez konieczności użycia komputera.
+
+### Parametry techniczne
+
+| Parametr | Wartość |
+|----------|---------|
+| Technologia druku | Termotransferowy / termiczny bezpośredni |
+| Rozdzielczość | 203 dpi lub 300 dpi |
+| Prędkość druku | do 152 mm/s (6 cali/s) |
+| Szerokość druku | do 104 mm (4,09 cala) |
+| Maks. średnica rolki | 203 mm (8 cali) |
+| Średnica gilzy | 25 mm – 76 mm (1" – 3") |
+| Długość ribbonu | do 450 m |
+
+### Złącza (w zależności od konfiguracji)
+
+- USB 2.0 (standard)
+- RS-232 Serial (standard)
+- Ethernet 10/100 (RJ-45) – opcja
+- Wi-Fi 802.11a/b/g/n + Bluetooth – opcja
+- Równoległe (Parallel) – opcja
+
+### Cechy charakterystyczne
+
+- Metalowa konstrukcja przemysłowa
+- **Wyświetlacz LCD** z intuicyjnym systemem menu
+- 5 wskaźników LED + 8 przycisków nawigacyjnych
+- Kolorowe punkty dotykowe (złote) ułatwiające obsługę
+- Obsługa języków ZPL i ZPL II
+- Opcjonalny obcinacz, dispenser lub nawijak podkładu
+- Obsługa materiałów rolkowych i składanych (fanfold)
+- Czujnik transmisyjny i refleksyjny
+
+> 📘 **Więcej o drukarkach Zebra:** [Drukarki etykiet](/drukarki)
+`
+      },
+      {
+        title: '2. Rozpakowanie i instalacja',
+        content: `
+### Zawartość opakowania
+
+- Drukarka ZT230
+- Kabel zasilający
+- Kabel USB
+- Pusta gilza do odbierania ribbonu (wersja TT)
+- Skrócona instrukcja obsługi
+
+### Wybór lokalizacji
+
+- **Powierzchnia:** płaska, stabilna, zdolna utrzymać ciężar drukarki
+- **Przestrzeń:** zapewnij wentylację ze wszystkich stron
+- **Zasilanie:** w pobliżu łatwo dostępnego gniazdka
+- **Komunikacja:** w zasięgu sieci lub kabli komunikacyjnych
+
+> **Uwaga:** Nie umieszczaj materiałów tłumiących pod drukarką – ogranicza to przepływ powietrza.
+
+### Warunki pracy
+
+| Tryb | Temperatura | Wilgotność |
+|------|-------------|------------|
+| Thermal Transfer | 5°C – 40°C | 20-85% bez kondensacji |
+| Direct Thermal | 0°C – 40°C | 20-85% bez kondensacji |
+
+### Warunki przechowywania
+
+- Temperatura: -40°C do 60°C
+- Wilgotność: 5-85% bez kondensacji
+`
+      },
+      {
+        title: '3. Ładowanie materiałów eksploatacyjnych',
+        content: `
+### Obsługiwane typy materiałów
+
+- **Etykiety z przerwą (gap/notch)** – rozdzielone przerwami, otworami lub nacięciami
+- **Etykiety z czarnym znacznikiem (mark)** – czarny znacznik z tyłu
+- **Materiał ciągły (continuous)** – bez znaczników separacji
+- **Materiał składany (fanfold)** – stos składanych etykiet
+- **Przywieszki (tag stock)** – grubszy materiał bez kleju
+
+### Tryby obsługi materiału
+
+| Tryb | Wymagana opcja | Opis |
+|------|----------------|------|
+| **Tear-Off** | Brak | Ręczne odrywanie (domyślny) |
+| **Peel-Off** | Dispenser | Automatyczne odklejanie od podkładu |
+| **Liner Take-Up** | Nawijak | Nawijanie podkładu na rolkę |
+| **Cutter** | Obcinacz | Automatyczne cięcie |
+
+### Ładowanie ribbonu
+
+> **Dotyczy tylko trybu Thermal Transfer.** Sprawdź czy materiał wymaga ribbonu – przesuń paznokciem po powierzchni. Czarny ślad = Direct Thermal (bez ribbonu).
+
+#### Strona powlekana ribbonu
+
+Drukarka ZT230 wymaga ribbonu powlekanego na zewnątrz. Test: przyklej kawałek etykiety do zewnętrznej strony rolki. Jeśli farba przylgnie do etykiety – ribbon jest powlekany na zewnątrz.
+
+#### Procedura ładowania:
+
+1. Otwórz drzwi komory mediów
+2. Obróć dźwignię głowicy w górę, aby ją zwolnić
+3. **Załaduj rolkę ribbonu na dolną gilzę (podającą):**
+   - Ribbon odwija się zgodnie ze strzałką
+   - Dociśnij rolkę do tyłu
+4. **Sprawdź pustą gilzę na górnej gilzie (odbiorczej)**
+5. **Przeprowadź ribbon pod głowicą** – zgodnie ze ścieżką pokazaną w drukarce
+6. **Nawiń ribbon na gilzę odbiorczą:**
+   - Owiń kilka zwojów
+   - Obróć gilzę w kierunku nawijania
+7. Zamknij głowicę (po załadowaniu materiału)
+
+### Ładowanie materiału (tryb Tear-Off)
+
+1. Otwórz drzwi komory mediów
+2. Zwolnij głowicę (dźwignia w górę)
+3. **Odsuń prowadnicę materiału** – wysuń na zewnątrz
+4. **Włóż rolkę:**
+   - Rolka: umieść na wieszaku, dociśnij do tyłu
+   - Fanfold: wprowadź przez tylny otwór
+5. **Przeprowadź materiał:**
+   - Przez czujnik transmisyjny (szczelina)
+   - Pod wewnętrzną prowadnicą
+   - Materiał powinien dotykać tylnej krawędzi czujnika
+6. **Dosuń prowadnicę** do krawędzi materiału
+7. **Zamknij głowicę** (dźwignia w dół)
+8. Zamknij drzwi
+9. Naciśnij **PAUSE** aby umożliwić drukowanie
+
+> 📘 **Szczegółowy poradnik:** [Jak załadować etykiety do drukarki Zebra](/blog/jak-zaladowac-etykiety-do-drukarki-zebra)
+`
+      },
+      {
+        title: '4. Panel sterowania z wyświetlaczem LCD',
+        content: `
+### Elementy panelu
+
+Drukarka ZT230 posiada rozbudowany panel sterowania:
+
+#### Wskaźniki LED:
+
+| Wskaźnik | Znaczenie |
+|----------|-----------|
+| **STATUS** | Ogólny stan drukarki |
+| **PAUSE** | Drukarka wstrzymana |
+| **DATA** | Odbieranie/przetwarzanie danych |
+| **SUPPLIES** | Stan materiałów |
+| **NETWORK** | Stan połączenia sieciowego |
+
+#### Przyciski:
+
+| Przycisk | Funkcja |
+|----------|---------|
+| **LEFT SELECT** | Wykonuje polecenie nad przyciskiem (lewe) |
+| **RIGHT SELECT** | Wykonuje polecenie nad przyciskiem (prawe) |
+| **STRZAŁKA W GÓRĘ** | Zwiększa wartość / przewija listę |
+| **STRZAŁKA W DÓŁ** | Zmniejsza wartość / przewija listę |
+| **STRZAŁKA W LEWO** | Nawigacja w lewo |
+| **STRZAŁKA W PRAWO** | Nawigacja w prawo |
+| **OK** | Potwierdza wybór |
+| **PAUSE** | Wstrzymanie/wznowienie druku |
+| **FEED** | Wysuw jednej etykiety |
+| **CANCEL** | Anulowanie zadań |
+
+### Nawigacja w menu
+
+#### Ekran bezczynności (Idle Display)
+
+Na ekranie bezczynności wyświetla się status drukarki. Naciśnij **LEFT SELECT** aby wejść do menu głównego.
+
+#### Menu główne (Home Menu)
+
+Nawiguj strzałkami między ikonami. Wybrana ikona jest podświetlona (kolory odwrócone). Naciśnij **OK** aby wejść do wybranego menu.
+
+| Ikona | Menu |
+|-------|------|
+| 🔧 | **SETTINGS** – Ustawienia druku |
+| 📡 | **NETWORK** – Ustawienia sieciowe |
+| 🌐 | **LANGUAGE** – Wybór języka |
+| 📊 | **SENSORS** – Ustawienia czujników |
+| 🔌 | **PORTS** – Ustawienia portów |
+| ⚙️ | **TOOLS** – Narzędzia diagnostyczne |
+
+#### Menu użytkownika
+
+- **LEFT SELECT** – powrót do menu głównego
+- **STRZAŁKI GÓRA/DÓŁ** – zmiana wartości parametru
+- Zmiany są zapisywane natychmiast
+- Po 15 sekundach nieaktywności – automatyczny powrót
+`
+      },
+      {
+        title: '5. Konfiguracja przez menu',
+        content: `
+### Menu SETTINGS (Ustawienia)
+
+| Parametr | Opis | Wartości |
+|----------|------|----------|
+| **DARKNESS** | Ciemność druku | 0.0 – 30.0 |
+| **SPEED** | Prędkość druku | 2, 3, 4, 5, 6 ips |
+| **MEDIA TYPE** | Typ materiału | CONTINUOUS, GAP/NOTCH, MARK |
+| **PRINT METHOD** | Tryb druku | THERMAL TRANS, DIRECT THERMAL |
+| **PRINT MODE** | Tryb obsługi | TEAR OFF, PEEL OFF, CUTTER |
+| **TEAR OFF** | Pozycja odrywania | -120 do +120 |
+| **PRINT WIDTH** | Szerokość druku | w kropkach |
+| **LABEL TOP** | Pozycja pionowa obrazu | -120 do +120 |
+| **LEFT POSITION** | Pozycja pozioma obrazu | 0 do 9999 |
+
+### Menu NETWORK (Sieć)
+
+| Parametr | Opis |
+|----------|------|
+| **IP PROTOCOL** | ALL, DHCP, DHCP&BOOTP, PERMANENT |
+| **IP ADDRESS** | Adres IP drukarki |
+| **SUBNET MASK** | Maska podsieci |
+| **DEFAULT GATEWAY** | Brama domyślna |
+| **WLAN IP ADDRESS** | Adres IP Wi-Fi |
+| **ESSID** | Nazwa sieci Wi-Fi |
+| **RESET NETWORK** | Reset ustawień sieciowych |
+
+### Menu LANGUAGE (Język)
+
+| Parametr | Opis |
+|----------|------|
+| **LANGUAGE** | Język menu (w tym polski) |
+| **ZPL MODE** | ZPL lub ZPL II |
+
+### Menu SENSORS (Czujniki)
+
+| Parametr | Opis |
+|----------|------|
+| **SENSOR TYPE** | TRANSMISSIVE lub REFLECTIVE |
+| **LABEL SENSOR** | Czułość czujnika etykiet (0-255) |
+| **TAKE LABEL** | Intensywność LED dispensera (0-255) |
+
+### Menu PORTS (Porty)
+
+| Parametr | Wartości |
+|----------|----------|
+| **BAUD RATE** | 4800 – 115200 |
+| **DATA BITS** | 7 lub 8 |
+| **PARITY** | NONE, EVEN, ODD |
+| **HOST HANDSHAKE** | XON/XOFF, RTS/CTS, DSR/DTR |
+
+### Menu TOOLS (Narzędzia)
+
+| Narzędzie | Funkcja |
+|-----------|---------|
+| **PRINT INFO** | Druk etykiet konfiguracji |
+| **CALIBRATE** | Kalibracja czujników |
+| **PRINT QUALITY** | Test jakości druku |
+| **SENSOR PROFILE** | Profil czujników |
+| **FACTORY DEFAULTS** | Przywrócenie ustawień fabrycznych |
+`
+      },
+      {
+        title: '6. Podłączenie do komputera',
+        content: `
+### Instalacja sterowników
+
+> **Ważne:** Zainstaluj sterowniki PRZED podłączeniem drukarki!
+
+1. Pobierz sterowniki: [serwis-zebry.pl/sterowniki](/sterowniki)
+2. Uruchom instalator
+3. Podłącz drukarkę gdy kreator o to poprosi
+
+### Połączenie USB
+
+1. Zainstaluj sterowniki
+2. Podłącz kabel USB
+3. Włącz drukarkę
+4. Windows wykryje drukarkę automatycznie
+
+### Konfiguracja Ethernet przez menu
+
+1. Podłącz kabel RJ-45
+2. Wejdź do **NETWORK** > **IP PROTOCOL**
+3. Wybierz **DHCP** (automatyczny) lub **PERMANENT** (statyczny)
+4. Dla statycznego IP: ustaw **IP ADDRESS**, **SUBNET MASK**, **DEFAULT GATEWAY**
+5. Wybierz **RESET NETWORK** aby zastosować zmiany
+
+### Konfiguracja Wi-Fi przez menu
+
+1. Wejdź do **NETWORK** > **WLAN**
+2. Ustaw **ESSID** (nazwa sieci)
+3. Skonfiguruj zabezpieczenia (WPA, WPA2)
+4. Ustaw **WLAN IP PROTOCOL**
+5. Wybierz **RESET NETWORK**
+`
+      },
+      {
+        title: '7. Kalibracja',
+        content: `
+### Kalibracja automatyczna przez menu
+
+1. Wejdź do **TOOLS** > **CALIBRATE**
+2. Potwierdź **OK**
+3. Drukarka przeprowadzi kalibrację czujników
+
+### Kalibracja przez przyciski
+
+1. Zamknij głowicę z załadowanym materiałem
+2. Naciśnij i przytrzymaj **PAUSE + FEED** przez 2 sekundy
+3. Drukarka przeprowadzi kalibrację
+
+### Kalibracja ręczna
+
+Dla trudnych materiałów:
+
+1. Wejdź do **TOOLS** > **MANUAL CALIBRATE**
+2. Postępuj zgodnie z instrukcjami na wyświetlaczu
+3. Drukarka prowadzi przez proces krok po kroku
+
+> 📘 **Szczegółowy poradnik:** [Kalibracja drukarki Zebra](/blog/kalibracja-drukarki-zebra-poradnik-krok-po-kroku)
+`
+      },
+      {
+        title: '8. Konserwacja',
+        content: `
+### Harmonogram czyszczenia
+
+| Element | Częstotliwość |
+|---------|---------------|
+| Głowica drukująca | Co 1 rolkę ribbonu / materiału DT |
+| Wałek dociskowy | Co 1 rolkę ribbonu / materiału DT |
+| Czujniki | Co 1 rolkę |
+| Ścieżka materiału/ribbonu | Co 1 rolkę |
+| Dispenser | W razie problemów |
+| Obcinacz | W razie problemów |
+
+### Czyszczenie głowicy i wałka
+
+> **Ostrzeżenie:** Głowica może być gorąca! Uwaga na ESD.
+
+1. Otwórz drzwi i zwolnij głowicę
+2. Wyjmij ribbon i materiał
+3. Przetrzyj brązowy pasek głowicy wacikiem z alkoholem (99,7%)
+4. Przetrzyj wałek dociskowy obracając go ręcznie
+5. Poczekaj aż wyschnie
+6. Załaduj materiał i ribbon
+
+> 📘 **Szczegółowy poradnik:** [Jak wyczyścić głowicę drukarki Zebra](/blog/jak-wyczyscic-glowice-drukarki-zebra)
+`
+      },
+      {
+        title: '9. Rozwiązywanie problemów',
+        content: `
+### Komunikaty na wyświetlaczu
+
+| Komunikat | Rozwiązanie |
+|-----------|-------------|
+| **PAPER OUT** | Załaduj materiał |
+| **RIBBON OUT** | Załaduj ribbon |
+| **HEAD OPEN** | Zamknij głowicę |
+| **THERMISTOR FAULT** | Błąd głowicy – skontaktuj się z [serwisem](/kontakt) |
+| **HEAD OVER TEMP** | Poczekaj na ostygnięcie |
+| **HEAD UNDER TEMP** | Przenieś w cieplejsze miejsce |
+
+### Problemy z jakością druku
+
+| Problem | Rozwiązanie |
+|---------|-------------|
+| Blade wydruki | Zwiększ DARKNESS, wyczyść głowicę |
+| Przepalone wydruki | Zmniejsz DARKNESS, zwiększ SPEED |
+| Puste obszary | Wyczyść lub wymień głowicę |
+| Marszczenie ribbonu | Sprawdź wyrównanie, wyczyść ścieżkę |
+
+### Problemy z materiałem
+
+| Problem | Rozwiązanie |
+|---------|-------------|
+| Nieprawidłowa detekcja | Wykonaj kalibrację, sprawdź SENSOR TYPE |
+| Złe pozycjonowanie | Ustaw TEAR OFF, LABEL TOP |
+
+### Testy diagnostyczne (menu TOOLS)
+
+- **PRINT INFO** – drukuje etykiety konfiguracji
+- **PRINT QUALITY** – test jakości przy różnych ustawieniach
+- **SENSOR PROFILE** – profil czujników dla diagnostyki
+
+> Potrzebujesz pomocy? [Skontaktuj się z naszym serwisem](/kontakt)
+
+> **Źródło:** Zebra ZT220/ZT230 User Guide
+`
+      }
+    ]
+  },
+  'zt220': {
+    model: 'ZT220',
+    title: 'Zebra ZT220 – Instrukcja obsługi po Polsku',
+    lastUpdated: '2026-01-07',
+    sourceDocument: 'Zebra ZT220/ZT230 User Guide',
+    keywords: [
+      'zebra zt220 instrukcja',
+      'zt220 instrukcja po polsku',
+      'zebra zt220 manual',
+      'drukarka zebra zt220',
+      'zebra zt220 kalibracja',
+      'zt220 kalibracja czujników',
+      'zebra zt220 reset',
+      'zt220 reset fabryczny',
+      'zebra zt220 ribbon',
+      'zt220 zakładanie taśmy',
+      'zebra zt220 etykiety',
+      'zt220 ładowanie etykiet',
+      'zebra zt220 sterowniki',
+      'zt220 instalacja',
+      'zebra zt220 specyfikacja',
+      'zt220 parametry techniczne',
+      'zebra zt220 błędy',
+      'zt220 paper out',
+      'zt220 ribbon out',
+      'zebra zt220 czyszczenie',
+      'zt220 czyszczenie głowicy',
+      'zebra zt220 ethernet',
+      'zt220 wifi',
+      'zebra zt220 led',
+      'zt220 wskaźniki led',
+      'zebra zt220 thermal transfer',
+      'zt220 termotransferowa',
+      'drukarka przemysłowa zebra zt220',
+      'zebra zt220 203 dpi',
+      'zebra zt220 300 dpi',
+      'zt220 prędkość druku',
+      'zebra zt220 serwis',
+      'zt220 naprawa',
+      'instrukcja obsługi zebra zt220',
+      'zebra zt220 po polsku',
+      'zt220 user guide polski',
+      'zt220 dispenser',
+      'zt220 cutter',
+      'zt220 obcinacz'
+    ],
+    sections: [
+      {
+        title: '1. Podstawowe informacje',
+        content: `
+### O drukarce Zebra ZT220
+
+Zebra ZT220 to drukarka przemysłowa zaprojektowana do pracy w wymagających środowiskach produkcyjnych i magazynowych. Model ZT220 wyposażony jest w prosty panel sterowania z wskaźnikami LED, co czyni go idealnym rozwiązaniem dla środowisk, gdzie konfiguracja odbywa się centralnie przez oprogramowanie.
+
+### Parametry techniczne
+
+| Parametr | Wartość |
+|----------|---------|
+| Technologia druku | Termotransferowy / termiczny bezpośredni |
+| Rozdzielczość | 203 dpi lub 300 dpi |
+| Prędkość druku | do 152 mm/s (6 cali/s) |
+| Szerokość druku | do 104 mm (4,09 cala) |
+| Maks. średnica rolki | 203 mm (8 cali) |
+| Średnica gilzy | 25 mm – 76 mm (1" – 3") |
+| Długość ribbonu | do 450 m |
+
+### Złącza (w zależności od konfiguracji)
+
+- USB 2.0 (standard)
+- RS-232 Serial (standard)
+- Ethernet 10/100 (RJ-45) – opcja
+- Wi-Fi 802.11a/b/g/n + Bluetooth – opcja
+- Równoległe (Parallel) – opcja
+
+### Cechy charakterystyczne
+
+- Metalowa konstrukcja przemysłowa
+- Prosty panel sterowania z 5 wskaźnikami LED
+- Kolorowe punkty dotykowe (złote) ułatwiające obsługę
+- Obsługa języków ZPL i ZPL II
+- Opcjonalny obcinacz, dispenser lub nawijak podkładu
+- Obsługa materiałów rolkowych i składanych (fanfold)
+- Czujnik transmisyjny i refleksyjny
+
+> 📘 **Więcej o drukarkach Zebra:** [Drukarki etykiet](/drukarki)
+`
+      },
+      {
+        title: '2. Rozpakowanie i instalacja',
+        content: `
+### Zawartość opakowania
+
+- Drukarka ZT220
+- Kabel zasilający
+- Kabel USB
+- Pusta gilza do odbierania ribbonu (wersja TT)
+- Skrócona instrukcja obsługi
+
+### Wybór lokalizacji
+
+- **Powierzchnia:** płaska, stabilna, zdolna utrzymać ciężar drukarki
+- **Przestrzeń:** zapewnij wentylację ze wszystkich stron
+- **Zasilanie:** w pobliżu łatwo dostępnego gniazdka
+- **Komunikacja:** w zasięgu sieci lub kabli komunikacyjnych
+
+> **Uwaga:** Nie umieszczaj materiałów tłumiących pod drukarką – ogranicza to przepływ powietrza.
+
+### Warunki pracy
+
+| Tryb | Temperatura | Wilgotność |
+|------|-------------|------------|
+| Thermal Transfer | 5°C – 40°C | 20-85% bez kondensacji |
+| Direct Thermal | 0°C – 40°C | 20-85% bez kondensacji |
+
+### Warunki przechowywania
+
+- Temperatura: -40°C do 60°C
+- Wilgotność: 5-85% bez kondensacji
+`
+      },
+      {
+        title: '3. Ładowanie materiałów eksploatacyjnych',
+        content: `
+### Obsługiwane typy materiałów
+
+- **Etykiety z przerwą (gap/notch)** – rozdzielone przerwami, otworami lub nacięciami
+- **Etykiety z czarnym znacznikiem (mark)** – czarny znacznik z tyłu
+- **Materiał ciągły (continuous)** – bez znaczników separacji
+- **Materiał składany (fanfold)** – stos składanych etykiet
+- **Przywieszki (tag stock)** – grubszy materiał bez kleju
+
+### Tryby obsługi materiału
+
+| Tryb | Wymagana opcja | Opis |
+|------|----------------|------|
+| **Tear-Off** | Brak | Ręczne odrywanie (domyślny) |
+| **Peel-Off** | Dispenser | Automatyczne odklejanie od podkładu |
+| **Liner Take-Up** | Nawijak | Nawijanie podkładu na rolkę |
+| **Cutter** | Obcinacz | Automatyczne cięcie |
+
+### Ładowanie ribbonu
+
+> **Dotyczy tylko trybu Thermal Transfer.** Sprawdź czy materiał wymaga ribbonu – przesuń paznokciem po powierzchni. Czarny ślad = Direct Thermal (bez ribbonu).
+
+#### Strona powlekana ribbonu
+
+Drukarka ZT220 wymaga ribbonu powlekanego na zewnątrz. Test: przyklej kawałek etykiety do zewnętrznej strony rolki. Jeśli farba przylgnie do etykiety – ribbon jest powlekany na zewnątrz.
+
+#### Procedura ładowania:
+
+1. Otwórz drzwi komory mediów
+2. Obróć dźwignię głowicy w górę, aby ją zwolnić
+3. **Załaduj rolkę ribbonu na dolną gilzę (podającą):**
+   - Ribbon odwija się zgodnie ze strzałką
+   - Dociśnij rolkę do tyłu
+4. **Sprawdź pustą gilzę na górnej gilzie (odbiorczej)**
+5. **Przeprowadź ribbon pod głowicą** – zgodnie ze ścieżką pokazaną w drukarce
+6. **Nawiń ribbon na gilzę odbiorczą:**
+   - Owiń kilka zwojów
+   - Obróć gilzę w kierunku nawijania
+7. Zamknij głowicę (po załadowaniu materiału)
+
+### Ładowanie materiału (tryb Tear-Off)
+
+1. Otwórz drzwi komory mediów
+2. Zwolnij głowicę (dźwignia w górę)
+3. **Odsuń prowadnicę materiału** – wysuń na zewnątrz
+4. **Włóż rolkę:**
+   - Rolka: umieść na wieszaku, dociśnij do tyłu
+   - Fanfold: wprowadź przez tylny otwór
+5. **Przeprowadź materiał:**
+   - Przez czujnik transmisyjny (szczelina)
+   - Pod wewnętrzną prowadnicą
+   - Materiał powinien dotykać tylnej krawędzi czujnika
+6. **Dosuń prowadnicę** do krawędzi materiału
+7. **Zamknij głowicę** (dźwignia w dół)
+8. Zamknij drzwi
+9. Naciśnij **PAUSE** aby umożliwić drukowanie
+
+### Ładowanie w trybie Peel-Off
+
+Po standardowym ładowaniu materiału:
+
+1. Odklej ok. 15 cm etykiet od podkładu
+2. Otwórz mechanizm dispensera (dźwignia zwalniająca)
+3. Przeprowadź podkład przez dispenser
+4. Zamknij dispenser
+5. Zamknij głowicę i drzwi
+
+### Ładowanie w trybie Cutter
+
+Po standardowym ładowaniu:
+
+1. Przeprowadź materiał przez otwór obcinacza
+2. Zamknij głowicę i drzwi
+
+> 📘 **Szczegółowy poradnik:** [Jak załadować etykiety do drukarki Zebra](/blog/jak-zaladowac-etykiety-do-drukarki-zebra)
+`
+      },
+      {
+        title: '4. Panel sterowania',
+        content: `
+### Wskaźniki LED
+
+| Wskaźnik | Znaczenie |
+|----------|-----------|
+| **STATUS** | Ogólny stan drukarki |
+| **PAUSE** | Drukarka wstrzymana |
+| **DATA** | Odbieranie/przetwarzanie danych |
+| **SUPPLIES** | Stan materiałów (etykiety, ribbon) |
+| **NETWORK** | Stan połączenia sieciowego |
+
+### Przyciski
+
+| Przycisk | Funkcja |
+|----------|---------|
+| **PAUSE** | Wstrzymanie/wznowienie druku |
+| **FEED** | Wysuw jednej etykiety |
+| **CANCEL** | Anulowanie (1x = następna, 2 sek. = wszystkie) |
+
+### Znaczenie wzorców LED
+
+| STATUS | PAUSE | SUPPLIES | Znaczenie |
+|--------|-------|----------|-----------|
+| Zielony | Wył. | Wył. | Drukarka gotowa |
+| Zielony | Żółty | Wył. | Wstrzymana (pauza) |
+| Żółty | Wył. | Wył. | Nagrzewanie |
+| Czerwony | Wył. | Czerwony | Brak materiału/ribbonu |
+| Czerwony | Wył. | Wył. | Otwarta głowica |
+| Mruga czerwony | Mruga | Mruga | Błąd – wymagany serwis |
+`
+      },
+      {
+        title: '5. Podłączenie do komputera',
+        content: `
+### Instalacja sterowników
+
+> **Ważne:** Zainstaluj sterowniki PRZED podłączeniem drukarki!
+
+1. Pobierz sterowniki: [serwis-zebry.pl/sterowniki](/sterowniki)
+2. Uruchom instalator
+3. Podłącz drukarkę gdy kreator o to poprosi
+
+### Połączenie USB
+
+1. Zainstaluj sterowniki
+2. Podłącz kabel USB
+3. Włącz drukarkę
+4. Windows wykryje drukarkę automatycznie
+
+### Połączenie Ethernet
+
+1. Podłącz kabel RJ-45
+2. Włącz drukarkę
+3. Wydrukuj etykietę konfiguracji (CANCEL podczas włączania)
+4. Znajdź adres IP na etykiecie
+5. Dodaj drukarkę w systemie używając adresu IP
+
+### Połączenie RS-232 (Serial)
+
+Domyślne ustawienia:
+- Baud rate: 9600
+- Data bits: 8
+- Parity: None
+- Handshake: XON/XOFF
+`
+      },
+      {
+        title: '6. Konfiguracja',
+        content: `
+### Zmiana ustawień
+
+Model ZT220 nie posiada wyświetlacza, dlatego konfiguracja odbywa się przez:
+- **Sterownik Windows** (Printing Preferences)
+- **Zebra Setup Utilities**
+- **Komendy ZPL/SGD**
+- **Strona WWW drukarki** (przy połączeniu sieciowym)
+
+### Podstawowe parametry
+
+| Parametr | Opis | Zakres |
+|----------|------|--------|
+| **Print Darkness** | Ciemność druku | 0.0 – 30.0 |
+| **Print Speed** | Prędkość druku | 2, 3, 4, 5, 6 ips |
+| **Media Type** | Typ materiału | CONTINUOUS, GAP/NOTCH, MARK |
+| **Print Method** | Tryb druku | THERMAL TRANS, DIRECT THERMAL |
+| **Print Mode** | Tryb obsługi | TEAR OFF, PEEL OFF, CUTTER |
+| **Tear-Off Position** | Pozycja odrywania | -120 do +120 |
+
+### Kalibracja czujników
+
+Automatyczna kalibracja przez przyciski:
+
+1. Upewnij się, że materiał i ribbon są załadowane
+2. Zamknij głowicę
+3. Naciśnij i przytrzymaj **PAUSE + FEED** przez 2 sekundy
+4. Drukarka przeprowadzi kalibrację
+
+> 📘 **Szczegółowy poradnik:** [Kalibracja drukarki Zebra](/blog/kalibracja-drukarki-zebra-poradnik-krok-po-kroku)
+
+### Druk etykiety konfiguracji
+
+1. Wyłącz drukarkę
+2. Naciśnij i przytrzymaj **CANCEL**
+3. Włącz drukarkę trzymając CANCEL
+4. Zwolnij gdy STATUS zamiga pierwszy raz
+`
+      },
+      {
+        title: '7. Konserwacja',
+        content: `
+### Harmonogram czyszczenia
+
+| Element | Częstotliwość |
+|---------|---------------|
+| Głowica drukująca | Co 1 rolkę ribbonu / materiału DT |
+| Wałek dociskowy (platen) | Co 1 rolkę ribbonu / materiału DT |
+| Czujniki | Co 1 rolkę |
+| Ścieżka materiału/ribbonu | Co 1 rolkę |
+| Dispenser (jeśli zainstalowany) | W razie problemów z odklejaniem |
+| Obcinacz (jeśli zainstalowany) | W razie problemów z cięciem |
+
+### Czyszczenie głowicy i wałka
+
+> **Ostrzeżenie:** Głowica może być gorąca! Uwaga na ESD – dotknij metalowej ramy przed czyszczeniem.
+
+1. Otwórz drzwi i zwolnij głowicę
+2. Wyjmij ribbon i materiał
+3. Przetrzyj brązowy pasek głowicy wacikiem z alkoholem (99,7%)
+4. Przetrzyj wałek dociskowy obracając go ręcznie
+5. Poczekaj aż wyschnie
+6. Załaduj materiał i ribbon
+
+### Czyszczenie dispensera
+
+1. Zwolnij głowicę i otwórz dispenser
+2. Usuń podkład
+3. Przetrzyj wałek dociskowy dispensera
+4. Przetrzyj listwę odrywającą (ostrożnie, bez nadmiernej siły)
+5. Załaduj ponownie
+
+### Czyszczenie obcinacza
+
+> **Ostrzeżenie:** Wyłącz drukarkę i odłącz zasilanie przed czyszczeniem obcinacza!
+
+1. Zdejmij osłonę obcinacza
+2. Wyczyść widoczne powierzchnie ostrza
+3. Nasmaruj osłonę smarem Zebra
+4. Załóż osłonę
+
+> 📘 **Szczegółowy poradnik:** [Jak wyczyścić głowicę drukarki Zebra](/blog/jak-wyczyscic-glowice-drukarki-zebra)
+`
+      },
+      {
+        title: '8. Rozwiązywanie problemów',
+        content: `
+### Problemy z jakością druku
+
+| Problem | Rozwiązanie |
+|---------|-------------|
+| Blade wydruki | Zwiększ ciemność, wyczyść głowicę |
+| Przepalone wydruki | Zmniejsz ciemność, zwiększ prędkość |
+| Puste obszary | Wyczyść lub wymień głowicę |
+| Marszczenie ribbonu | Sprawdź wyrównanie, wyczyść ścieżkę |
+
+### Problemy z materiałem
+
+| Problem | Rozwiązanie |
+|---------|-------------|
+| Nieprawidłowa detekcja | Wykonaj kalibrację, sprawdź typ czujnika |
+| Materiał się zacina | Sprawdź prowadnice, wyczyść ścieżkę |
+| Złe pozycjonowanie | Ustaw Tear-Off Position |
+
+### Problemy z siecią
+
+| Problem | Rozwiązanie |
+|---------|-------------|
+| Brak połączenia | Sprawdź kabel, wydrukuj etykietę konfiguracji |
+| Nieprawidłowy IP | Sprawdź DHCP lub ustaw statyczny IP |
+
+### Testy diagnostyczne
+
+**Test FEED (jakość kodów kreskowych):**
+1. Wyłącz drukarkę
+2. Przytrzymaj FEED i włącz drukarkę
+3. Zwolnij gdy STATUS zamiga
+
+**Test PAUSE (konfiguracja):**
+1. Wyłącz drukarkę  
+2. Przytrzymaj PAUSE i włącz drukarkę
+3. Zwolnij gdy STATUS zamiga
+
+> Potrzebujesz pomocy? [Skontaktuj się z naszym serwisem](/kontakt)
+
+> **Źródło:** Zebra ZT220/ZT230 User Guide
+`
+      }
+    ]
   }
 }
 
