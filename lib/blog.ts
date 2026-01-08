@@ -159,7 +159,22 @@ export const blogPosts: BlogPost[] = [
       ]
     },
     content: `
-> **Premiera 2026:** Zebra wprowadza przełomowe terminale mobilne **TC501** i **TC701** – pierwsze urządzenia zaprojektowane od podstaw z myślą o aplikacjach AI. Poznaj specyfikację, możliwości i zastosowania najnowszych komputerów mobilnych dla logistyki, magazynów i handlu.
+> **Szybka odpowiedź:** Zebra TC501 i Zebra TC701 to najnowsze terminale mobilne z procesorem **Qualcomm Dragonwing** (300% więcej mocy), **Wi-Fi 7**, **5G**, **wbudowanym RFID UHF** i wyświetlaczem **AMOLED 1500 nit**. TC501 (273 g, upadki 2,44 m) jest przeznaczony dla handlu detalicznego, TC701 (284 g, upadki 3,66 m) dla logistyki i chłodni. Premiera: styczeń 2026.
+
+---
+
+## Kluczowe liczby i statystyki
+
+- **+300%** wydajności procesora vs poprzednia generacja TC52/TC72
+- **12 GB RAM** – 3x więcej niż poprzednie modele
+- **256 GB** pamięci wewnętrznej – 8x więcej
+- **1500 nitów** jasności wyświetlacza AMOLED
+- **30 metrów** zasięg skanera AC670
+- **200+ tagów/s** odczyt RFID UHF
+- **5764 Mbps** prędkość Wi-Fi 7
+- **3,66 m** odporność na upadki (TC701)
+- **273 g** waga (TC501) – najlżejszy w klasie
+- **Hot Swap** – wymiana baterii bez wyłączania
 
 ---
 
@@ -337,49 +352,40 @@ Zebra TC501 i Zebra TC701 to **pierwsze urządzenia Zebra zaprojektowane specjal
 
 ---
 
-## Specyfikacja Zebra TC501
+## Porównanie specyfikacji: Zebra TC501 vs Zebra TC701
 
-**Wymiary:** 163,15 x 77,9 x 15,5 mm  
-**Waga:** 273 g (std.) / 303 g (rozsz.)
+| Parametr | Zebra TC501 | Zebra TC701 |
+|----------|-------------|-------------|
+| **Przeznaczenie** | Handel detaliczny, lekka logistyka | Centra dystrybucyjne, chłodnie, praca na zewnątrz |
+| **Wymiary** | 163,15 x 77,9 x 15,5 mm | 165 x 77,9 x 15,5 mm |
+| **Waga (std./rozsz.)** | 273 g / 303 g | 284 g / 314 g |
+| **Wyświetlacz** | 6" AMOLED, 2160x1080, 1500 nit | 6" AMOLED, 2160x1080, 1500 nit |
+| **Szkło** | Gorilla Glass Victus | Gorilla Glass Victus |
+| **Procesor** | Qualcomm Dragonwing Q-6690, 8 rdzeni, 2,9 GHz | Qualcomm Dragonwing Q-6690, 8 rdzeni, 2,9 GHz |
+| **RAM / Flash** | 8/128 GB lub 12/256 GB | 8/128 GB lub 12/256 GB |
+| **microSD** | do 2 TB | do 2 TB |
+| **System** | Android 15 + 4 kolejne wersje | Android 15 + 4 kolejne wersje |
+| **Wi-Fi** | Wi-Fi 7 (do 5764 Mbps) | Wi-Fi 7 (do 5764 Mbps) |
+| **Sieć komórkowa** | 5G Dual SIM + eSIM | 5G Dual SIM + eSIM |
+| **Bluetooth** | 6.0 | 6.0 |
+| **NFC** | Tak | Tak |
+| **GPS** | GPS, GLONASS, Galileo, BeiDou | GPS, GLONASS, Galileo, BeiDou |
+| **Upadki na beton** | 2,44 m (8 ft) | **3,66 m (12 ft)** |
+| **Upadki (zimno)** | 1,83 m | 2,44 m |
+| **Tumble test** | 2000 cykli | **3500 cykli** |
+| **Klasa szczelności** | IP68 + IP65 | IP68 + IP65 |
+| **Temperatura pracy** | -20°C do +50°C | -20°C do +50°C |
+| **Skanery** | SR500, SR560, AC670 (30 m) | SR500, SR560, AC670 (30 m) |
+| **RFID UHF** | Wbudowany, 2 m, >200 tagów/s | Wbudowany, 2 m, >200 tagów/s |
+| **Aparat tylny** | 50 MP, PDAF, LED, HDR | 50 MP, PDAF, LED, HDR |
+| **Aparat przedni** | 8 MP | 8 MP |
+| **Aparat ultraszeroki** | 13 MP (opcja) | 13 MP (opcja) |
+| **Bateria std.** | 5000 mAh | 5000 mAh |
+| **Bateria rozsz.** | 7240 mAh | 7240 mAh |
+| **Hot Swap** | Tak | Tak |
+| **Certyfikaty** | FIPS 140-2, Common Criteria | FIPS 140-2, Common Criteria |
 
-**Wyświetlacz:** 6" AMOLED, 2160x1080, 1500 nit, Gorilla Glass Victus
-
-**Procesor:** Qualcomm Dragonwing Q-6690, 8 rdzeni, 2,9 GHz  
-**Pamięć:** 8/128 GB lub 12/256 GB + microSD 2 TB  
-**System:** Android z gwarancją aktualizacji
-
-**Łączność:** Wi-Fi 7, 5G (Dual SIM+eSIM), Bluetooth 6.0, NFC, GPS
-
-**Wytrzymałość:** upadki 2,44 m, IP68+IP65, -20°C do +50°C
-
-**Skanery:** SR500, SR560, AC670 (30 m)  
-**RFID:** wbudowany UHF, 2 m, >200 tagów/s  
-**Aparaty:** tylny 50 MP, przedni 8 MP, ultraszeroki 13 MP (opcja)
-
-**Certyfikaty:** FIPS 140-2, Common Criteria
-
----
-
-## Specyfikacja Zebra TC701
-
-**Wymiary:** 165 x 77,9 x 15,5 mm  
-**Waga:** 284 g (std.) / 314 g (rozsz.)
-
-**Wyświetlacz:** 6" AMOLED, 2160x1080, 1500 nit, Gorilla Glass Victus
-
-**Procesor:** Qualcomm Dragonwing Q-6690, 8 rdzeni, 2,9 GHz  
-**Pamięć:** 8/128 GB lub 12/256 GB + microSD 2 TB  
-**System:** Android 15 + 4 kolejne wersje
-
-**Łączność:** Wi-Fi 7, 5G (Dual SIM+eSIM), Bluetooth 6.0, NFC, GPS
-
-**Wytrzymałość:** upadki **3,66 m**, IP68+IP65, -20°C do +50°C
-
-**Skanery:** SR500, SR560, AC670 (30 m)  
-**RFID:** wbudowany UHF, 2 m, >200 tagów/s  
-**Aparaty:** tylny 50 MP, przedni 8 MP, ultraszeroki 13 MP (opcja)
-
-**Certyfikaty:** FIPS 140-2, Common Criteria
+> **Główna różnica:** TC701 oferuje znacznie wyższą wytrzymałość (3,66 m vs 2,44 m upadków) i jest przeznaczony do najbardziej wymagających środowisk. TC501 jest lżejszy i bardziej ekonomiczny dla handlu detalicznego
 
 ---
 
@@ -405,20 +411,34 @@ Pełny pakiet oprogramowania:
 Urządzenia zostały oficjalnie zaprezentowane w **styczniu 2026**. Dostępność w Polsce – I/II kwartał 2026.
 
 ### Ile kosztuje Zebra TC501 / Zebra TC701?
-Ceny zależą od konfiguracji (RAM, pamięć, skaner, 5G). Skontaktuj się z nami po indywidualną wycenę.
+Ceny zależą od konfiguracji (RAM, pamięć, skaner, 5G). Skontaktuj się z nami po indywidualną wycenę – jako autoryzowany partner Zebra oferujemy konkurencyjne ceny.
+
+### Jaka jest różnica między Zebra TC501 a Zebra TC701?
+**TC501** jest lżejszy (273 g) i przeznaczony dla handlu detalicznego. **TC701** jest wytrzymalszy (upadki 3,66 m vs 2,44 m) i dedykowany do pracy w chłodniach, centrach dystrybucyjnych i na zewnątrz.
 
 ### Czy TC501/TC701 są kompatybilne z dotychczasowymi akcesoriami?
-Tak, stacje ShareCradle z poprzednich generacji działają z adapterami.
+Tak, stacje ShareCradle z poprzednich generacji działają z adapterami. Nowe stacje dokujące oferują dodatkowe funkcje.
 
 ### Jaki system operacyjny mają Zebra TC501 i Zebra TC701?
-Android 15 z gwarancją aktualizacji do **4 kolejnych wersji** systemu.
+Android 15 z gwarancją aktualizacji do **4 kolejnych wersji** systemu, co oznacza wsparcie do co najmniej 2030 roku.
 
 ### Czy potrzebuję licencji na funkcje AI?
-Podstawowe funkcje AI są dostępne bez dodatkowych licencji. Zaawansowane narzędzia (Identity Guardian, Device Guardian) wymagają subskrypcji.
+Podstawowe funkcje AI są dostępne bez dodatkowych licencji. Zaawansowane narzędzia (Identity Guardian, Device Guardian) wymagają subskrypcji Zebra DNA.
 
-### Która wersja jest lepsza – TC501 czy TC701?
-- **TC501** – dla handlu detalicznego i lekkich zastosowań magazynowych
-- **TC701** – dla centrum dystrybucyjnego, kurierów, pracy w chłodniach i na zewnątrz
+### Jaki zasięg ma wbudowany czytnik RFID w TC501/TC701?
+Wbudowany czytnik RFID UHF ma zasięg do **2 metrów** i odczytuje ponad **200 tagów na sekundę**. Obsługuje standardy EPC Class 1 Gen2 i EPC Gen 2 V2.
+
+### Jak działa funkcja Hot Swap w Zebra TC501/TC701?
+**Hot Swap** pozwala wymienić baterię bez wyłączania urządzenia. Wewnętrzna bateria podtrzymuje pracę przez około 2 minuty, co wystarcza na szybką wymianę.
+
+### Jaki zasięg ma skaner AC670?
+Skaner **AC670** odczytuje kody kreskowe z odległości do **30 metrów** i jednocześnie robi kolorowe zdjęcia. Idealny dla magazynów z wysokimi regałami.
+
+### Czy Zebra TC501/TC701 działają w niskich temperaturach?
+Tak, oba modele działają w zakresie od **-20°C do +50°C**. TC701 jest dodatkowo testowany na szok termiczny przy przechodzeniu między chłodnią a halą magazynową.
+
+### Ile waży Zebra TC501 z baterią rozszerzoną?
+Zebra TC501 z baterią standardową (5000 mAh) waży **273 g**, z baterią rozszerzoną (7240 mAh) – **303 g**. TC701 odpowiednio **284 g** i **314 g**
 
 ---
 
