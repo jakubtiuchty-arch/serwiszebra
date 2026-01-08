@@ -9790,6 +9790,647 @@ Lub: przytrzymaj **FEED + CANCEL** przez 2 sekundy
 `
       }
     ]
+  },
+
+  // ========== Zebra ZT610 ==========
+  'zt610': {
+    model: 'ZT610',
+    title: 'Zebra ZT610 – Instrukcja obsługi po Polsku',
+    lastUpdated: '2026-01-09',
+    sourceDocument: 'Zebra ZT610 User Guide',
+    keywords: [
+      'ZT610', 'zebra zt610', 'drukarka przemysłowa', 'drukarka etykiet', 
+      'instrukcja ZT610', 'ZT610 po polsku', 'Xi4 następca',
+      'drukarka 4 cale', 'kalibracja ZT610', 'ribbon ZT610',
+      'oświetlenie ścieżki mediów', 'metal construction', 'premium industrial',
+      'ZT610R', 'RFID ZT610', '203 dpi', '300 dpi', '600 dpi'
+    ],
+    sections: [
+      {
+        title: '1. Podstawowe informacje',
+        content: `
+### O drukarce Zebra ZT610
+
+Zebra ZT610 to **przemysłowa drukarka etykiet klasy premium**, następca legendarnej serii Xi4. Zaprojektowana do najbardziej wymagających środowisk produkcyjnych, magazynowych i logistycznych, gdzie wymagana jest najwyższa niezawodność i wydajność.
+
+**Wyróżniki ZT610:**
+- **Metalowa konstrukcja klasy premium** – najwyższa trwałość
+- **Oświetlenie ścieżki mediów** – automatyczne podświetlenie przy braku materiału
+- **Oświetlenie ścieżki ribbonu** – automatyczne podświetlenie przy braku ribbonu
+- **Oświetlenie przy otwartych drzwiach** – ułatwia ładowanie
+- Wyświetlacz LCD z nawigacją przyciskami
+- 5 wskaźników LED statusu
+- Złote punkty dotykowe oznaczające elementy obsługi
+
+### Parametry techniczne
+
+**Szerokość druku:** do 104 mm (4,09")
+
+**Technologia druku:** Termotransferowy / termiczny bezpośredni
+
+**Rozdzielczość:** 203 dpi, 300 dpi lub 600 dpi
+
+**Prędkość druku:**
+- Do 356 mm/s (14"/s) dla 203 dpi
+- Do 305 mm/s (12"/s) dla 300 dpi
+- Do 152 mm/s (6"/s) dla 600 dpi
+
+**Maks. średnica rolki:** 203 mm (8")
+
+**Średnica gilzy:** 76 mm (3")
+
+**Długość ribbonu:** do 450 m
+
+**Maks. szerokość materiału:** 114 mm (4,5")
+
+### Rozdzielczości i szerokości druku
+
+- **203 dpi:** 832 dots (104 mm)
+- **300 dpi:** 1248 dots (106 mm)
+- **600 dpi:** 2496 dots (106 mm)
+
+### Złącza (w zależności od konfiguracji)
+
+- USB 2.0 (standard)
+- RS-232 Serial (standard)
+- Ethernet 10/100 (opcja)
+- Parallel (LPT) – opcja
+- Wi-Fi 802.11a/b/g/n/ac + Bluetooth 4.1 – opcja
+- USB Host (2x) – do podłączenia klawiatury, skanera, pendrive
+- Port aplikatora (opcja)
+`
+      },
+      {
+        title: '2. Zastosowania ZT610',
+        content: `
+### Gdzie sprawdza się ZT610?
+
+**Produkcja:**
+- Etykiety produktowe i identyfikacyjne
+- Znakowanie komponentów
+- Śledzenie partii produkcyjnych
+- Etykiety z kodami 2D wysokiej rozdzielczości (600 dpi)
+
+**Logistyka i magazyn:**
+- Etykiety wysyłkowe
+- Oznaczenia lokalizacji magazynowych
+- Etykiety na palety
+- Dokumenty transportowe
+
+**Dystrybucja:**
+- Etykiety cenowe
+- Oznaczenia produktów
+- Etykiety promocyjne
+
+**Ochrona zdrowia:**
+- Etykiety laboratoryjne (600 dpi dla małych próbek)
+- Oznaczenia próbek
+- Bransoletki identyfikacyjne
+
+### ZT610 vs konkurencja
+
+**Zalety ZT610:**
+- Metalowa konstrukcja premium (trwalsza niż plastikowa)
+- Oświetlenie ścieżki mediów i ribbonu (unikalna funkcja)
+- Wysoka rozdzielczość do 600 dpi
+- Szeroki wybór opcji (obcinacz, nawijak, RFID, aplikator)
+- Obsługa ribbonów do 450 m (mniej wymian)
+`
+      },
+      {
+        title: '3. Rozpakowanie i instalacja',
+        content: `
+### Zawartość opakowania
+
+- Drukarka ZT610
+- Kabel zasilający
+- Kabel USB
+- Pusta gilza do odbierania ribbonu (wersja TT)
+- Skrócona instrukcja obsługi
+
+### Wybór lokalizacji
+
+- **Powierzchnia:** płaska, stabilna, zdolna utrzymać ciężar drukarki (22,7-29,4 kg)
+- **Przestrzeń:** zapewnij wentylację ze wszystkich stron
+- **Zasilanie:** w pobliżu łatwo dostępnego gniazdka
+- **Komunikacja:** w zasięgu sieci lub kabli komunikacyjnych
+
+> **Uwaga:** Nie umieszczaj materiałów tłumiących pod drukarką – ogranicza to przepływ powietrza i może prowadzić do przegrzania.
+
+### Warunki pracy
+
+**Thermal Transfer:** 5°C – 40°C, 20-85% wilgotności bez kondensacji
+
+**Direct Thermal:** 0°C – 40°C, 20-85% wilgotności bez kondensacji
+
+### Warunki przechowywania
+
+- Temperatura: -40°C do +60°C
+- Wilgotność: 5-85% bez kondensacji
+`
+      },
+      {
+        title: '4. Panel sterowania',
+        content: `
+### Wyświetlacz LCD
+
+Wyświetlacz pokazuje aktualny status drukarki i umożliwia nawigację po menu. W stanie bezczynności (Idle Display) pokazuje wersję firmware i adres IP.
+
+### Wskaźniki LED
+
+- **STATUS** – Ogólny stan drukarki (zielony=OK, żółty=ostrzeżenie, czerwony=błąd)
+- **PAUSE** – Drukarka wstrzymana
+- **DATA** – Odbieranie/przetwarzanie danych
+- **SUPPLIES** – Stan materiałów eksploatacyjnych
+- **NETWORK** – Stan połączenia sieciowego
+
+### Przyciski sterujące
+
+- **LEFT SELECT** – Wykonuje akcję pokazaną po lewej stronie wyświetlacza
+- **RIGHT SELECT** – Wykonuje akcję pokazaną po prawej stronie wyświetlacza
+- **UP/DOWN ARROW** – Zwiększa/zmniejsza wartość, przewija
+- **LEFT/RIGHT ARROW** – Nawigacja w menu
+- **OK** – Potwierdza wybór
+- **PAUSE** – Wstrzymuje/wznawia drukowanie
+- **FEED** – Wysuwa jedną etykietę
+- **CANCEL** – Anuluje (1x = następna etykieta, 2 sek. = wszystkie)
+
+### Menu główne (Home Menu)
+
+Z ekranu bezczynności naciśnij **LEFT SELECT** aby wejść do menu głównego z 8 ikonami:
+
+- **SETTINGS** – Ciemność, prędkość, typ mediów, tryb druku
+- **TOOLS** – Kalibracja, diagnostyka, USB, ZBI
+- **NETWORK** – Ustawienia sieciowe, IP, Wi-Fi
+- **RFID** – Ustawienia RFID (tylko ZT610R)
+- **LANGUAGE** – Język, komendy ZPL
+- **SENSORS** – Kalibracja czujników
+- **PORTS** – Ustawienia portów szeregowych
+- **BLUETOOTH** – Ustawienia Bluetooth
+`
+      },
+      {
+        title: '5. Ładowanie materiałów',
+        content: `
+### Obsługiwane typy materiałów
+
+- **Etykiety z przerwą (gap/notch)** – rozdzielone przerwami lub nacięciami
+- **Etykiety z czarnym znacznikiem (mark)** – czarny znacznik z tyłu
+- **Materiał ciągły (continuous)** – bez znaczników separacji
+- **Materiał składany (fanfold)** – stos składanych etykiet
+
+### Tryby druku (Print Mode)
+
+- **TEAR OFF** – Ręczne odrywanie (domyślny)
+- **PEEL-OFF** – Automatyczne odklejanie od podkładu (wymaga nawijaka)
+- **REWIND** – Nawijanie całych etykiet na rolkę (wymaga nawijaka)
+- **CUTTER** – Automatyczne cięcie (wymaga obcinacza)
+- **DELAYED CUT** – Cięcie po komendzie ZPL (~JK)
+- **APPLICATOR** – Współpraca z aplikatorem etykiet
+
+### Ładowanie materiału (tryb Tear-Off)
+
+> **Ostrzeżenie:** Głowica może być gorąca! Zdejmij biżuterię i metalowe przedmioty przed pracą przy otwartej głowicy.
+
+1. **Podnieś drzwi komory mediów** – włączy się oświetlenie
+2. **Otwórz głowicę** – obróć dźwignię w górę
+3. **Odsuń prowadnicę materiału** – pokrętłem regulacyjnym na zewnątrz
+4. **Włóż rolkę** na wrzeciono, dociśnij do tyłu
+5. **Przeprowadź materiał:**
+   - Od wrzeciona pod zespołem tancerza
+   - Przez czujnik mediów
+   - Pod głowicą drukującą
+   - Materiał powinien dotykać tylnej ścianki czujnika
+6. **Dosuń prowadnicę** pokrętłem do krawędzi materiału
+7. **Zamknij głowicę** (dźwignia w dół)
+8. Zamknij drzwi
+9. Naciśnij **PAUSE** aby umożliwić drukowanie
+
+### Ładowanie w trybie Peel-Off
+
+1. Zainstaluj płytę nawijaka w pozycji peel-off
+2. Otwórz głowicę i przeprowadź materiał standardowo
+3. Odklej ok. 50 cm etykiet od podkładu
+4. Przeprowadź pusty podkład za płytę nawijaka
+5. Nawiń podkład na wrzeciono nawijaka
+6. Dosuń prowadnicę, zamknij głowicę i drzwi
+
+### Ładowanie w trybie Cutter
+
+1. Przeprowadź materiał standardowo przez czujnik i pod głowicę
+2. Przeprowadź materiał przez obcinacz
+3. Zamknij głowicę i drzwi
+
+> **Ostrzeżenie:** Ostrze obcinacza jest ostre! Nie dotykaj ostrza palcami.
+`
+      },
+      {
+        title: '6. Ładowanie ribbonu',
+        content: `
+### Czy potrzebuję ribbonu?
+
+Przesuń paznokciem po powierzchni materiału:
+- **Czarny ślad** = Direct Thermal (bez ribbonu)
+- **Brak śladu** = Thermal Transfer (wymaga ribbonu)
+
+### Strona powlekana ribbonu
+
+ZT610 standardowo obsługuje ribbon powlekany na zewnątrz.
+
+**Test klejenia:** Przyklej kawałek etykiety do zewnętrznej strony rolki. Jeśli farba przylgnie do etykiety – ribbon jest powlekany na zewnątrz.
+
+**Test rysowania:** Połóż rozwinięty ribbon na kartce zewnętrzną stroną do papieru. Podrap wewnętrzną stronę paznokciem. Jeśli ślad pojawi się na kartce – ribbon jest powlekany na zewnątrz.
+
+### Procedura ładowania ribbonu
+
+1. Podnieś drzwi komory mediów
+2. Otwórz głowicę (dźwignia w górę)
+3. **Załaduj rolkę ribbonu na dolne wrzeciono (podające):**
+   - Ribbon odwija się do przodu, od dołu
+   - Dociśnij rolkę do tyłu
+4. **Przeprowadź ribbon pod głowicą i wokół jej lewej strony**
+5. **Nawiń ribbon na górne wrzeciono (odbiorcze):**
+   - Ribbon musi być jak najbardziej z tyłu pod głowicą
+   - Owiń kilka zwojów
+   - Obróć wrzeciono w kierunku nawijania aby naprężyć
+6. Załaduj materiał (jeśli jeszcze nie załadowany)
+7. Zamknij głowicę (dźwignia w dół)
+8. Zamknij drzwi
+
+> **Ważne:** Ribbon musi być szerszy niż materiał, aby chronić głowicę przed zużyciem.
+`
+      },
+      {
+        title: '7. Menu użytkownika',
+        content: `
+### SETTINGS Menu
+
+- **DARKNESS** – Ciemność druku (0.0 – 30.0)
+- **PRINT SPEED** – Prędkość druku (2-14 ips dla 203dpi)
+- **MEDIA TYPE** – Typ materiału (CONTINUOUS, GAP/NOTCH, MARK)
+- **PRINT METHOD** – Metoda druku (THERMAL TRANS, DIRECT THERMAL)
+- **TEAR OFF** – Pozycja odrywania (-120 do +120 dots)
+- **PRINT WIDTH** – Szerokość druku
+- **PRINT MODE** – Tryb druku
+- **LABEL TOP** – Offset pionowy
+- **LEFT POSITION** – Offset poziomy
+- **REPRINT MODE** – Tryb ponownego druku
+- **COVER OPEN LIGHT** – Oświetlenie przy otwarciu (HIGH/MEDIUM/LOW/OFF)
+- **MEDIA PATH LIGHTS** – Oświetlenie ścieżki mediów
+- **RIBBON PATH LIGHTS** – Oświetlenie ścieżki ribbonu
+
+### TOOLS Menu
+
+- **PRINT INFORMATION** – Drukuje etykiety konfiguracji
+- **POWER UP ACTION** – Akcja przy włączeniu (CALIBRATE, FEED, LENGTH, NO MOTION, SHORT CAL)
+- **HEAD CLOSE ACTION** – Akcja przy zamknięciu głowicy
+- **LOAD DEFAULTS** – Przywracanie ustawień (FACTORY, NETWORK, LAST SAVED)
+- **MEDIA/RIBBON CAL** – Kalibracja czujników
+- **DIAGNOSTIC MODE** – Tryb diagnostyczny (hex dump)
+- **CONFIG INFO TO USB** – Kopiowanie konfiguracji na USB
+- **PRINT USB FILE** – Drukowanie z pendrive
+- **PASSWORD PROTECT** – Ochrona hasłem
+
+### NETWORK Menu
+
+- **PRIMARY NETWORK** – Sieć podstawowa (WIRED/WLAN)
+- **WIRED IP ADDRESS** – Adres IP (kablowy)
+- **WIRED SUBNET MASK** – Maska podsieci
+- **WIRED GATEWAY** – Brama domyślna
+- **WIRED IP PROTOCOL** – Protokół IP (ALL, DHCP, PERMANENT...)
+- **WLAN IP ADDRESS** – Adres IP (Wi-Fi)
+- **ESSID** – Nazwa sieci Wi-Fi
+- **IP PORT** – Port TCP (domyślnie 9100)
+- **RESET NETWORK** – Reset ustawień sieciowych
+`
+      },
+      {
+        title: '8. Kalibracja',
+        content: `
+### Kiedy kalibrować?
+
+- Po zmianie typu lub rozmiaru materiału/ribbonu
+- Gdy drukarka pomija etykiety
+- Gdy obraz dryfuje w pionie lub poziomie
+- Gdy ribbon nie jest wykrywany
+- Gdy etykiety nieciągłe są traktowane jako ciągłe
+
+### Kalibracja automatyczna
+
+Ustaw akcję przy włączeniu lub zamknięciu głowicy:
+- **CALIBRATE** – pełna kalibracja
+- **SHORT CAL** – szybka kalibracja (bez zmiany wzmocnienia)
+- **FEED** – tylko wysuw
+- **LENGTH** – określenie długości
+- **NO MOTION** – brak ruchu
+
+### Kalibracja ręczna
+
+**Metoda 1 – Z menu:**
+TOOLS > MEDIA/RIBBON CAL → postępuj zgodnie z instrukcjami na ekranie
+
+**Metoda 2 – Skrót klawiszowy:**
+Przytrzymaj **PAUSE + CANCEL** przez 2 sekundy
+
+### Regulacja docisku głowicy
+
+ZT610 posiada dwa elementy regulacji:
+
+**Toggle Position** – pozycja punktu docisku (przód/tył):
+1. Odkręć nakrętkę blokującą
+2. Przesuń toggle do przodu lub do tyłu
+3. Dokręć nakrętkę
+
+**Printhead Pressure** – siła docisku (pokrętła wewnętrzne/zewnętrzne):
+- Rozpocznij od ustawień zależnych od szerokości materiału
+- Zwiększ docisk zewnętrzny jeśli materiał przesuwa się w lewo
+- Zwiększ docisk wewnętrzny jeśli materiał przesuwa się w prawo
+
+### Regulacja pozycji czujnika
+
+Przesuń czujnik transmisyjny w poziomie za pomocą kółka regulacyjnego aby dopasować do pozycji przerw/nacięć na materiale.
+`
+      },
+      {
+        title: '9. Podłączenie do komputera',
+        content: `
+### Instalacja sterowników
+
+> **Ważne:** Zainstaluj Zebra Setup Utilities PRZED podłączeniem drukarki!
+
+1. Pobierz Zebra Setup Utilities ze strony: **serwis-zebry.pl/sterowniki**
+2. Uruchom instalator i postępuj zgodnie z instrukcjami
+3. Po instalacji uruchom System Prepare Wizard
+4. Podłącz drukarkę gdy kreator o to poprosi
+
+### Identyfikacja modelu i rozdzielczości
+
+Na naklejce z numerem części: **ZT610xY-xxxxxxxx**
+- ZT610 = model
+- Y = rozdzielczość (2=203dpi, 3=300dpi, 6=600dpi)
+
+### Połączenie USB
+
+1. Zainstaluj sterowniki
+2. Podłącz kabel USB
+3. Włącz drukarkę
+4. Windows wykryje drukarkę automatycznie
+
+### Połączenie Ethernet
+
+1. Podłącz kabel sieciowy RJ-45
+2. Włącz drukarkę
+3. Drukarka pobierze IP z DHCP automatycznie
+4. Sprawdź IP w NETWORK > WIRED IP ADDRESS
+5. Dodaj drukarkę w Zebra Setup Utilities przez port TCP/IP
+
+### Połączenie szeregowe (Serial)
+
+1. Podłącz kabel RS-232
+2. Skonfiguruj parametry portu (BAUD RATE, DATA BITS, PARITY, HANDSHAKE) aby pasowały do komputera
+3. Dodaj drukarkę przez port COM
+`
+      },
+      {
+        title: '10. Konserwacja',
+        content: `
+### Harmonogram czyszczenia
+
+- **Głowica drukująca** – Co 1 rolkę ribbonu
+- **Wałek dociskowy (platen)** – Co 1 rolkę ribbonu
+- **Czujniki** – Co 1 rolkę
+- **Ścieżka mediów/ribbonu** – Co 1 rolkę
+- **Obcinacz** – W razie potrzeby
+- **Obudowa zewnętrzna** – W razie potrzeby
+
+### Czyszczenie głowicy i wałka
+
+> **Ostrzeżenie:** Głowica może być gorąca! Uwaga na ESD.
+
+1. Wyłącz drukarkę
+2. Otwórz drzwi i wyjmij ribbon oraz materiał
+3. **Głowica:** Przetrzyj brązowy pasek wacikiem nasączonym alkoholem izopropylowym (99,7%)
+4. **Wałek:** Przetrzyj wacikiem obracając go ręcznie
+5. Poczekaj aż wyschnie (2 minuty)
+6. Załaduj materiał i ribbon
+
+### Czyszczenie i smarowanie obcinacza
+
+> **Ostrzeżenie:** Wyłącz drukarkę i odłącz zasilanie! Ostrze jest ostre!
+
+1. Zdejmij osłonę obcinacza (2 śruby)
+2. Wyczyść ostrze V wacikiem z alkoholem
+3. Po wyschnięciu nasmaruj ostrze olejem silikonowym lub PTFE
+4. Usuń nadmiar oleju
+5. Załóż osłonę
+
+### Usuwanie zużytego ribbonu
+
+1. Otwórz głowicę
+2. Odetnij ribbon między rolką podającą a głowicą
+3. Zdejmij zużyty ribbon z górnego wrzeciona
+4. Załóż nową pustą gilzę
+5. Załaduj nowy ribbon
+`
+      },
+      {
+        title: '11. Rozwiązywanie problemów',
+        content: `
+### Etykieta konfiguracji
+
+**Drukowanie:**
+- TOOLS > PRINT INFORMATION > SETTINGS
+- Lub: przytrzymaj **FEED + CANCEL** przez 2 sekundy
+
+### Profil czujników
+
+**Drukowanie:**
+- TOOLS > PRINT INFORMATION > SENSOR PROFILE
+- Lub: przytrzymaj **FEED + CANCEL** podczas włączania drukarki
+
+### Tryb diagnostyczny (Hex Dump)
+
+**Włączenie:**
+- TOOLS > DIAGNOSTIC MODE > ENABLED
+- Lub: przytrzymaj **PAUSE + FEED** przez 2 sekundy
+
+### Komunikaty błędów
+
+- **PAPER OUT** – Załaduj materiał, sprawdź czujniki
+- **RIBBON OUT** – Załaduj ribbon, sprawdź ustawienie PRINT METHOD
+- **HEAD OPEN** – Zamknij głowicę
+- **HEAD OVER TEMP** – Poczekaj na ostygnięcie
+- **HEAD UNDER TEMP** – Przenieś w cieplejsze miejsce
+- **CUTTER JAM** – Usuń zacięcie w obcinaczu
+- **OUT OF MEMORY** – Zmniejsz rozmiar formatu lub dodaj pamięć
+
+### Problemy z jakością druku
+
+- **Blade wydruki** – Zwiększ DARKNESS, wyczyść głowicę
+- **Przepalone wydruki** – Zmniejsz DARKNESS, zwiększ PRINT SPEED
+- **Puste pionowe linie** – Wyczyść lub wymień głowicę
+- **Marszczenie ribbonu** – Sprawdź naprężenie, wyrównaj ribbon
+- **Przesuwanie materiału** – Dostosuj docisk głowicy
+- **Pomijanie etykiet** – Skalibruj czujniki, sprawdź MEDIA TYPE
+
+### Przywracanie ustawień fabrycznych
+
+**Ustawienia drukarki:**
+- TOOLS > LOAD DEFAULTS > FACTORY
+- Lub: przytrzymaj **FEED + PAUSE** podczas włączania
+
+**Ustawienia sieciowe:**
+- TOOLS > LOAD DEFAULTS > NETWORK
+- Lub: przytrzymaj **CANCEL + PAUSE** podczas włączania
+`
+      },
+      {
+        title: '12. RFID (ZT610R)',
+        content: `
+### Funkcje RFID (tylko ZT610R)
+
+Model **ZT610R** posiada wbudowany enkoder RFID UHF do programowania tagów podczas drukowania.
+
+### RFID Menu
+
+- **RFID STATUS** – Status enkodera RFID
+- **RFID CALIBRATE** – Kalibracja RFID
+- **READ RFID DATA** – Odczyt danych z tagu
+- **RFID TEST** – Test RFID
+- **RFID PROGRAM POS.** – Pozycja programowania
+- **RFID ANTENNA** – Wybór anteny
+- **RFID READ POWER** – Moc odczytu (0-30)
+- **RFID WRITE POWER** – Moc zapisu (0-30)
+- **RFID VALID COUNT** – Licznik prawidłowych tagów
+- **RFID VOID COUNT** – Licznik błędnych tagów
+
+### Problemy z RFID
+
+- **Brak programowania** – Wykonaj RFID CALIBRATE
+- **Częste VOID** – Zwiększ RFID WRITE POWER
+- **Nieczytelne tagi** – Zwiększ RFID READ POWER
+- **Programowanie sąsiedniego tagu** – Zmniejsz moc, zmień antenę
+`
+      },
+      {
+        title: '13. Funkcje USB Host i NFC',
+        content: `
+### Drukowanie z pendrive
+
+1. Włóż pendrive do portu USB Host
+2. TOOLS > PRINT USB FILE
+3. Wybierz plik do drukowania
+
+### Kopiowanie plików
+
+**Z USB do drukarki:** TOOLS > COPY USB FILE TO E:
+
+**Z drukarki na USB:** TOOLS > STORE E: FILE TO USB
+
+### Print Station (klawiatura USB)
+
+1. Podłącz klawiaturę USB
+2. TOOLS > PRINT STATION
+3. Wybierz format z pamięci E:
+4. Wprowadź dane do pól zmiennych (^FN)
+5. Określ liczbę kopii
+
+### Near Field Communication (NFC)
+
+Zbliż telefon z aplikacją Zebra Printer Setup Utility do logo NFC na drukarce aby:
+- Szybko sparować urządzenie
+- Pobrać informacje o drukarce
+`
+      },
+      {
+        title: '14. Protected Mode / EU RED',
+        content: `
+### Dyrektywa EU RED 2025
+
+Od **1 sierpnia 2025** nowe drukarki Zebra są dostarczane z włączonym **Protected Mode**. Przy pierwszym uruchomieniu musisz ustawić hasło administratora.
+
+### Pierwsze uruchomienie
+
+1. Włącz drukarkę
+2. Pojawi się kreator konfiguracji (Setup Wizard)
+3. Ustaw hasło administratora (min. 8 znaków)
+4. Zapisz hasło w bezpiecznym miejscu!
+5. Zakończ konfigurację
+
+### Problemy z Protected Mode
+
+Jeśli drukarka jest zablokowana i nie znasz hasła:
+- Sprawdź dokumentację od dostawcy
+- Poszukaj domyślnego hasła na ulotce
+- Skontaktuj się z serwisem: **serwis-zebry.pl**
+
+### Więcej informacji
+
+Szczegółowy przewodnik po dyrektywie EU RED i PrintSecure znajdziesz na:
+**serwis-zebry.pl/blog/zebra-wymaga-hasla-dyrektywa-red-konfiguracja**
+`
+      },
+      {
+        title: '15. Specyfikacje techniczne',
+        content: `
+### Wymiary i waga
+
+**ZT610:** 264 x 495 x 394 mm, 22,7-29,4 kg
+
+### Zasilanie
+
+- Napięcie: 100-240 VAC
+- Częstotliwość: 50-60 Hz
+
+### Porównanie ZT610 vs ZT620
+
+- **ZT610:** szerokość druku 104 mm (4 cale) – standardowe etykiety
+- **ZT620:** szerokość druku 168 mm (6 cali) – większe etykiety, palety, wysyłka
+
+### Dane kontaktowe serwisu
+
+**Autoryzowany serwis Zebra w Polsce**
+
+serwis-zebry.pl
+`
+      },
+      {
+        title: 'FAQ – Najczęściej zadawane pytania',
+        content: `
+### Jak załadować ribbon do Zebra ZT610?
+
+**Odpowiedź:** Podnieś drzwi komory mediów, otwórz głowicę (dźwignia w górę). Załaduj rolkę ribbonu na dolne wrzeciono (podające) – ribbon odwija się do przodu. Przeprowadź ribbon pod głowicą i nawiń na górne wrzeciono (odbiorcze). Naprężyć obracając wrzeciono, zamknij głowicę i drzwi.
+
+### Co oznacza oświetlenie ścieżki mediów w ZT610?
+
+**Odpowiedź:** **Oświetlenie ścieżki mediów** to unikalna funkcja ZT610 – automatyczne podświetlenie włącza się gdy skończy się materiał lub ribbon, ułatwiając lokalizację problemu. Można regulować intensywność (HIGH/MEDIUM/LOW) lub wyłączyć (OFF) w menu SETTINGS.
+
+### Jaka jest różnica między ZT610 a ZT620?
+
+**Odpowiedź:** **ZT610** drukuje etykiety o szerokości do **104 mm (4 cale)**, **ZT620** do **168 mm (6 cali)**. ZT620 ma większą wagę i wymiary. Wybierz ZT610 dla standardowych etykiet, ZT620 dla etykiet paletowych i wysyłkowych.
+
+### Jak wykonać kalibrację ZT610?
+
+**Odpowiedź:** **Metoda 1:** TOOLS > MEDIA/RIBBON CAL i postępuj zgodnie z instrukcjami. **Metoda 2:** Przytrzymaj **PAUSE + CANCEL** przez 2 sekundy. Kalibruj po każdej zmianie typu lub rozmiaru materiału.
+
+### Jak wydrukować etykietę konfiguracji ZT610?
+
+**Odpowiedź:** **Metoda 1:** TOOLS > PRINT INFORMATION > SETTINGS. **Metoda 2:** Przytrzymaj **FEED + CANCEL** przez 2 sekundy. Etykieta pokazuje wszystkie ustawienia drukarki, adres IP i wersję firmware.
+
+### Jak przywrócić ustawienia fabryczne ZT610?
+
+**Odpowiedź:** **Metoda 1:** TOOLS > LOAD DEFAULTS > FACTORY. **Metoda 2:** Przytrzymaj **FEED + PAUSE** podczas włączania drukarki. Reset sieciowy: TOOLS > LOAD DEFAULTS > NETWORK lub **CANCEL + PAUSE** podczas włączania.
+
+### Jak często czyścić głowicę drukującą ZT610?
+
+**Odpowiedź:** Głowicę i wałek należy czyścić **po każdej rolce ribbonu** wacikiem nasączonym alkoholem izopropylowym (99,7%). Regularne czyszczenie przedłuża żywotność głowicy i zapewnia wysoką jakość druku.
+
+### Co oznacza komunikat "RIBBON OUT" mimo załadowanego ribbonu?
+
+**Odpowiedź:** Sprawdź ustawienie **PRINT METHOD** w menu SETTINGS – powinno być **THERMAL TRANS** dla druku z ribbonem. Jeśli jest ustawione na **DIRECT THERMAL**, drukarka nie szuka ribbonu. Sprawdź też czy ribbon jest prawidłowo załadowany i naprężony.
+`
+      }
+    ]
   }
 }
 
