@@ -35,6 +35,17 @@ interface Video {
 // Filmy poradnikowe - prawdziwe materiały serwisowe
 const videos: Video[] = [
   {
+    id: '23',
+    title: 'Dyrektywa RED - co oznacza dla drukarek Zebra?',
+    description: 'Wyjaśnienie europejskiej dyrektywy radiowej RED (Radio Equipment Directive) i jej wpływu na drukarki etykiet Zebra z modułami WiFi i Bluetooth. Certyfikacja CE, zgodność i wymogi prawne.',
+    youtubeId: 'j0PRe-dGXBM',
+    thumbnail: '/drukarki-zebra-dyrektywa-red.jpeg',
+    duration: '5:00',
+    category: 'drukarki',
+    tags: ['RED', 'dyrektywa', 'certyfikacja', 'CE', 'WiFi', 'Bluetooth', 'regulacje'],
+    featured: true
+  },
+  {
     id: '1',
     title: 'Jak używać odklejaka etykiet w Zebra ZD220 / ZD230',
     description: 'Poradnik pokazujący jak prawidłowo używać odklejaka etykiet (label dispenser / peel-off) w drukarkach Zebra ZD220 i ZD230. Konfiguracja i użycie krok po kroku.',
@@ -43,7 +54,6 @@ const videos: Video[] = [
     duration: '2:30',
     category: 'drukarki',
     tags: ['ZD220', 'ZD230', 'odklejak', 'label dispenser', 'peel-off'],
-    featured: true
   },
   {
     id: '2',
@@ -194,16 +204,6 @@ const videos: Video[] = [
     duration: '3:30',
     category: 'drukarki',
     tags: ['ZD421t', 'zakładanie etykiet', 'media loading', 'rolka etykiet', 'termotransfer'],
-  },
-  {
-    id: '23',
-    title: 'Dyrektywa RED - co oznacza dla drukarek Zebra?',
-    description: 'Wyjaśnienie europejskiej dyrektywy radiowej RED (Radio Equipment Directive) i jej wpływu na drukarki etykiet Zebra z modułami WiFi i Bluetooth. Certyfikacja CE, zgodność i wymogi prawne.',
-    youtubeId: 'j0PRe-dGXBM',
-    thumbnail: '/drukarki-zebra-dyrektywa-red.jpeg',
-    duration: '5:00',
-    category: 'drukarki',
-    tags: ['RED', 'dyrektywa', 'certyfikacja', 'CE', 'WiFi', 'Bluetooth', 'regulacje'],
   },
 ]
 
