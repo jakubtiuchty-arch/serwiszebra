@@ -167,10 +167,9 @@ export const blogPosts: BlogPost[] = [
 
 **Zebra TC501** i **Zebra TC701** to najnowsze modele mobilnych komputerów przemysłowych z legendarnej serii TC5/TC7, zaprojektowane od podstaw z myślą o aplikacjach wykorzystujących **sztuczną inteligencję (AI)**.
 
-| Model | Przeznaczenie | Klasa wytrzymałości |
-|-------|---------------|---------------------|
-| **TC501** | Handel detaliczny, lekka logistyka | Wzmocniony (rugged) |
-| **TC701** | Centra dystrybucyjne, praca na zewnątrz, chłodnie | Ultra-wzmocniony (ultra-rugged) |
+**TC501** – handel detaliczny, lekka logistyka (rugged)
+
+**TC701** – centra dystrybucyjne, chłodnie, praca na zewnątrz (ultra-rugged)
 
 ---
 
@@ -180,13 +179,11 @@ export const blogPosts: BlogPost[] = [
 
 Oba modele wyposażono w najnowszy procesor **Qualcomm Dragonwing™ Q-6690**:
 
-| Parametr | Wartość | Poprawa |
-|----------|---------|---------|
-| Rdzenie | 8 rdzeni, do 2,9 GHz | — |
-| Wydajność | — | **+300%** vs poprzednia generacja |
-| RAM | Do **12 GB** LPDDR5 | **3x więcej** |
-| Flash | Do **256 GB** UFS 3.1 | **8x więcej** |
-| MicroSD | Do **2 TB** | — |
+- **8 rdzeni**, do 2,9 GHz
+- **+300%** wydajności vs poprzednia generacja
+- Do **12 GB** RAM (3x więcej)
+- Do **256 GB** Flash (8x więcej)
+- MicroSD do **2 TB**
 
 > **Kluczowe:** Dragonwing Q-6690 posiada **dedykowany silnik AI** umożliwiający uruchamianie zaawansowanych aplikacji sztucznej inteligencji **bezpośrednio na urządzeniu**, bez konieczności połączenia z chmurą.
 
@@ -194,30 +191,25 @@ Oba modele wyposażono w najnowszy procesor **Qualcomm Dragonwing™ Q-6690**:
 
 ### Wyświetlacz AMOLED klasy premium
 
-TC701 wyposażono w **6-calowy wyświetlacz AMOLED** o parametrach:
+Oba modele mają **6-calowy wyświetlacz AMOLED**:
 
-| Parametr | Wartość |
-|----------|---------|
-| Rozdzielczość | **2160 x 1080** (Full HD+) |
-| Jasność | **1500 nitów** |
-| Szkło | Corning **Gorilla Glass Victus** |
-| Powierzchnia | +20% większa niż poprzednie modele |
-| Zużycie energii | -40% dzięki AMOLED |
-
-Ekran jest czytelny **nawet w pełnym słońcu** i obsługuje pracę w rękawicach oraz z rysikiem.
+- Rozdzielczość **2160 x 1080** (Full HD+)
+- Jasność **1500 nitów** – czytelny w pełnym słońcu
+- Szkło **Gorilla Glass Victus**
+- +20% większa powierzchnia
+- -40% zużycia energii (AMOLED)
+- Praca w rękawicach i z rysikiem
 
 ---
 
 ### Wbudowany czytnik RFID UHF – po raz pierwszy!
 
-**Po raz pierwszy w historii serii TC5/TC7** oba modele posiadają **zintegrowany czytnik UHF RFID**:
+**Po raz pierwszy w serii TC5/TC7** – wbudowany czytnik UHF RFID:
 
-| Parametr | Wartość |
-|----------|---------|
-| Zasięg odczytu | Do **2 metrów** |
-| Szybkość | Ponad **200 tagów/sekundę** |
-| Standardy | EPC Class 1 Gen2, EPC Gen 2 V2 |
-| Pasma | EU 865-868 MHz, US 902-928 MHz |
+- Zasięg do **2 metrów**
+- Ponad **200 tagów/sekundę**
+- EPC Class 1 Gen2, EPC Gen 2 V2
+- EU 865-868 MHz, US 902-928 MHz
 
 > **Oszczędność:** Wbudowany RFID eliminuje potrzebę zakupu dodatkowych czytników lub nakładek, znacząco obniżając TCO.
 
@@ -227,11 +219,9 @@ Ekran jest czytelny **nawet w pełnym słońcu** i obsługuje pracę w rękawica
 
 Zebra oferuje trzy nowe opcje skanerów:
 
-| Skaner | Zasięg | Zastosowanie |
-|--------|--------|--------------|
-| **AC670** | Do **30 m** (100 ft) | Premium – skanowanie + zdjęcia kolorowe |
-| **SR560** | Standardowy | Intensywne skanowanie kodów 2D |
-| **SR500** | Standardowy | Uniwersalny, każde oświetlenie |
+- **AC670** – do **30 m**, skanowanie + zdjęcia kolorowe
+- **SR560** – intensywne skanowanie kodów 2D
+- **SR500** – uniwersalny, każde oświetlenie
 
 > **AC670 to przełom:** Jednocześnie odczytuje kod kreskowy **i robi kolorowe zdjęcie** z odległości ponad 30 metrów. Idealne dla kurierów (dowód dostawy) i magazynierów (wysokie regały).
 
@@ -239,26 +229,27 @@ Zebra oferuje trzy nowe opcje skanerów:
 
 ### Najszybsza łączność bezprzewodowa
 
-| Technologia | Specyfikacja | Zalety |
-|-------------|--------------|--------|
-| **Wi-Fi 7** (802.11be) | Do 5764 Mbps, tri-band | 2x szybsza transmisja niż Wi-Fi 6 |
-| **5G Release 17** | Sub-6, NSA/SA, Dual SIM | Prywatne sieci 5G, VoNR |
-| **Bluetooth 6.0** | Class 1/2, BLE Audio 5.3 | Większy zasięg, lepsza ochrona |
-| **NFC** | ISO 14443, Mifare, FeliCa | Płatności, weryfikacja |
-| **GPS** | Triple-band GNSS | GPS, GLONASS, Galileo, BeiDou |
+- **Wi-Fi 7** – do 5764 Mbps, tri-band, 2x szybciej niż Wi-Fi 6
+- **5G Release 17** – Dual SIM, prywatne sieci 5G, VoNR
+- **Bluetooth 6.0** – większy zasięg, lepsza ochrona
+- **NFC** – płatności, weryfikacja
+- **GPS** – triple-band (GPS, GLONASS, Galileo, BeiDou)
 
 ---
 
-### Porównanie wytrzymałości Zebra TC501 vs Zebra TC701
+### Wytrzymałość TC501 vs TC701
 
-| Parametr | TC501 | TC701 |
-|----------|-------|-------|
-| Upadki (temp. pokojowa) | 2,44 m (8 ft) | **3,66 m (12 ft)** |
-| Upadki (pełny zakres temp.) | 1,83 m (6 ft) | 2,44 m (8 ft) |
-| Test tumble | 2000 cykli z 0,5 m | **3500 cykli z 1 m** |
-| Uszczelnienie | IP68 + IP65 | IP68 + IP65 |
-| Waga (bateria std.) | **273 g** | 284 g |
-| Temperatura pracy | -20°C do +50°C | -20°C do +50°C |
+**TC501:**
+- Upadki: 2,44 m (8 ft) / 1,83 m
+- Tumble: 2000 cykli
+- Waga: **273 g**
+
+**TC701:**
+- Upadki: **3,66 m (12 ft)** / 2,44 m
+- Tumble: **3500 cykli**
+- Waga: 284 g
+
+**Oba:** IP68+IP65, -20°C do +50°C
 
 > **Nowość:** Testy **szoku termicznego** gwarantują niezawodną pracę przy przemieszczaniu się między strefami o skrajnie różnych temperaturach (np. chłodnie i hala magazynowa).
 
@@ -266,11 +257,9 @@ Zebra oferuje trzy nowe opcje skanerów:
 
 ## Aparat 50 MP i możliwości fotograficzne
 
-| Aparat | Rozdzielczość | Funkcje |
-|--------|---------------|---------|
-| **Tylny** | **50 MP**, PDAF | LED, HDR, latarka |
-| **Przedni** | 8 MP | Stała ostrość |
-| **Ultraszeroki** (opcja) | 13 MP, PDAF | Całe regały jednym zdjęciem |
+- **Tylny:** 50 MP, PDAF, LED, HDR
+- **Przedni:** 8 MP
+- **Ultraszeroki (opcja):** 13 MP – całe regały jednym zdjęciem
 
 **Enterprise AI Camera** dodaje:
 - Automatyczne wykrywanie brudnej soczewki
@@ -282,11 +271,9 @@ Zebra oferuje trzy nowe opcje skanerów:
 
 ## Baterie i ładowanie
 
-| Typ baterii | Pojemność | Waga całkowita |
-|-------------|-----------|----------------|
-| Standardowa | 5000 mAh | 284 g |
-| Rozszerzona | **7240 mAh** | 314 g |
-| Bezprzewodowa (Qi) | 5000 mAh | — |
+- **Standardowa:** 5000 mAh (284 g)
+- **Rozszerzona:** 7240 mAh (314 g)
+- **Bezprzewodowa (Qi):** 5000 mAh
 
 **Kluczowe funkcje:**
 - **Hot Swap** – wymiana baterii bez wyłączania urządzenia
@@ -299,12 +286,10 @@ Zebra oferuje trzy nowe opcje skanerów:
 
 Zebra TC501 i Zebra TC701 to **pierwsze urządzenia Zebra zaprojektowane specjalnie pod kątem AI**:
 
-| Funkcja AI | Opis |
-|------------|------|
-| **Silnik AI w procesorze** | Przetwarzanie na urządzeniu bez opóźnień |
-| **12 GB RAM** | Dla wymagających modeli AI |
-| **Zebra AI Frontline Suite** | Narzędzia do szybkiego wdrażania AI |
-| **Aparat 50 MP** | Wysokiej jakości dane dla algorytmów wizyjnych |
+- **Silnik AI w procesorze** – przetwarzanie bez opóźnień
+- **12 GB RAM** – dla wymagających modeli AI
+- **Zebra AI Frontline Suite** – szybkie wdrażanie AI
+- **Aparat 50 MP** – wysokiej jakości dane dla algorytmów
 
 **Przykładowe zastosowania AI:**
 - Automatyczne rozpoznawanie produktów na półkach
@@ -352,119 +337,49 @@ Zebra TC501 i Zebra TC701 to **pierwsze urządzenia Zebra zaprojektowane specjal
 
 ---
 
-## Pełna specyfikacja techniczna Zebra TC501
+## Specyfikacja Zebra TC501
 
-### Wymiary i waga
-| Parametr | Wartość |
-|----------|---------|
-| Wymiary (D x S x G) | 163,15 x 77,9 x 15,5 mm |
-| Waga z baterią std. | 273 g |
-| Waga z baterią rozsz. | 303 g |
+**Wymiary:** 163,15 x 77,9 x 15,5 mm  
+**Waga:** 273 g (std.) / 303 g (rozsz.)
 
-### Wyświetlacz
-| Parametr | Wartość |
-|----------|---------|
-| Typ | 6" AMOLED, 2160x1080, 1500 nit |
-| Szkło | Corning Gorilla Glass Victus |
+**Wyświetlacz:** 6" AMOLED, 2160x1080, 1500 nit, Gorilla Glass Victus
 
-### Procesor i pamięć
-| Parametr | Wartość |
-|----------|---------|
-| CPU | Qualcomm Dragonwing Q-6690, 8 rdzeni, do 2,9 GHz |
-| RAM / Flash | 8 GB / 128 GB lub 12 GB / 256 GB |
-| MicroSD | Do 2 TB |
-| System | Android (wsparcie dla kolejnych wersji) |
+**Procesor:** Qualcomm Dragonwing Q-6690, 8 rdzeni, 2,9 GHz  
+**Pamięć:** 8/128 GB lub 12/256 GB + microSD 2 TB  
+**System:** Android z gwarancją aktualizacji
 
-### Łączność
-| Parametr | Wartość |
-|----------|---------|
-| Wi-Fi | Wi-Fi 7 (802.11be), tri-band (2,4/5/6 GHz) |
-| Komórkowa | 5G Release 17, Dual SIM + eSIM |
-| Bluetooth | 6.0, Class 1/2, BLE Audio 5.3 |
-| NFC | ISO 14443 A/B, Mifare, FeliCa, EMVCO |
-| GPS | Triple-band GNSS (GPS, GLONASS, Galileo, BeiDou, QZSS) |
+**Łączność:** Wi-Fi 7, 5G (Dual SIM+eSIM), Bluetooth 6.0, NFC, GPS
 
-### Wytrzymałość
-| Parametr | Wartość |
-|----------|---------|
-| Upadki (temp. pok.) | 2,44 m (8 ft) na beton |
-| Upadki (pełny zakres) | 1,83 m (6 ft) na beton |
-| Test tumble | 2000 cykli z 0,5 m |
-| IP | IP68 + IP65 |
-| Temperatura pracy | -20°C do +50°C |
-| ESD | ±20 kV (wyładowanie powietrzne) |
+**Wytrzymałość:** upadki 2,44 m, IP68+IP65, -20°C do +50°C
 
-### Zbieranie danych
-| Parametr | Wartość |
-|----------|---------|
-| Skaner | SR500, SR560, AC670 (do 30 m) |
-| RFID | Wbudowany UHF, do 2 m, >200 tagów/s |
-| Aparat tylny | 50 MP, PDAF, LED, HDR |
-| Aparat przedni | 8 MP, stała ostrość |
-| Aparat ultraszeroki | 13 MP, PDAF (opcja) |
+**Skanery:** SR500, SR560, AC670 (30 m)  
+**RFID:** wbudowany UHF, 2 m, >200 tagów/s  
+**Aparaty:** tylny 50 MP, przedni 8 MP, ultraszeroki 13 MP (opcja)
 
-### Bezpieczeństwo
-| Parametr | Wartość |
-|----------|---------|
-| Certyfikaty | FIPS 140-2, Common Criteria |
+**Certyfikaty:** FIPS 140-2, Common Criteria
 
 ---
 
-## Pełna specyfikacja techniczna Zebra TC701
+## Specyfikacja Zebra TC701
 
-### Wymiary i waga
-| Parametr | Wartość |
-|----------|---------|
-| Wymiary (D x S x G) | 165 x 77,9 x 15,5 mm |
-| Waga z baterią std. | 284 g |
-| Waga z baterią rozsz. | 314 g |
+**Wymiary:** 165 x 77,9 x 15,5 mm  
+**Waga:** 284 g (std.) / 314 g (rozsz.)
 
-### Wyświetlacz
-| Parametr | Wartość |
-|----------|---------|
-| Typ | 6" AMOLED, 2160x1080, 1500 nit |
-| Szkło | Corning Gorilla Glass Victus |
+**Wyświetlacz:** 6" AMOLED, 2160x1080, 1500 nit, Gorilla Glass Victus
 
-### Procesor i pamięć
-| Parametr | Wartość |
-|----------|---------|
-| CPU | Qualcomm Dragonwing Q-6690, 8 rdzeni, do 2,9 GHz |
-| RAM / Flash | 8 GB / 128 GB lub 12 GB / 256 GB |
-| MicroSD | Do 2 TB |
-| System | Android 15 + 4 kolejne wersje |
+**Procesor:** Qualcomm Dragonwing Q-6690, 8 rdzeni, 2,9 GHz  
+**Pamięć:** 8/128 GB lub 12/256 GB + microSD 2 TB  
+**System:** Android 15 + 4 kolejne wersje
 
-### Łączność
-| Parametr | Wartość |
-|----------|---------|
-| Wi-Fi | Wi-Fi 7 (802.11be), tri-band (2,4/5/6 GHz) |
-| Komórkowa | 5G Release 17, Dual SIM + eSIM |
-| Bluetooth | 6.0, Class 1/2, BLE Audio 5.3 |
-| NFC | ISO 14443 A/B, Mifare, FeliCa, EMVCO |
-| GPS | Triple-band GNSS (GPS, GLONASS, Galileo, BeiDou, QZSS) |
+**Łączność:** Wi-Fi 7, 5G (Dual SIM+eSIM), Bluetooth 6.0, NFC, GPS
 
-### Wytrzymałość
-| Parametr | Wartość |
-|----------|---------|
-| Upadki (temp. pok.) | 3,66 m (12 ft) na beton |
-| Upadki (pełny zakres) | 2,44 m (8 ft) na beton |
-| Test tumble | 3500 cykli z 1 m |
-| IP | IP68 + IP65 |
-| Temperatura pracy | -20°C do +50°C |
-| ESD | ±20 kV (wyładowanie powietrzne) |
+**Wytrzymałość:** upadki **3,66 m**, IP68+IP65, -20°C do +50°C
 
-### Zbieranie danych
-| Parametr | Wartość |
-|----------|---------|
-| Skaner | SR500, SR560, AC670 (do 30 m) |
-| RFID | Wbudowany UHF, do 2 m, >200 tagów/s |
-| Aparat tylny | 50 MP, PDAF, LED, HDR |
-| Aparat przedni | 8 MP, stała ostrość |
-| Aparat ultraszeroki | 13 MP, PDAF (opcja) |
+**Skanery:** SR500, SR560, AC670 (30 m)  
+**RFID:** wbudowany UHF, 2 m, >200 tagów/s  
+**Aparaty:** tylny 50 MP, przedni 8 MP, ultraszeroki 13 MP (opcja)
 
-### Bezpieczeństwo
-| Parametr | Wartość |
-|----------|---------|
-| Certyfikaty | FIPS 140-2, Common Criteria |
+**Certyfikaty:** FIPS 140-2, Common Criteria
 
 ---
 
@@ -19540,12 +19455,10 @@ Nowe drukarki Zebra objęte dyrektywą RED zawierają **specjalną ulotkę** z:
 
 To **najważniejszy krok**. Wymagania dla hasła:
 
-| Wymóg | Szczegóły |
-|-------|-----------|
-| **Minimalna długość** | 14 znaków |
-| **Dozwolone znaki** | Litery, cyfry, znaki specjalne |
-| **Unikalność** | Może być wspólne dla wielu drukarek |
-| **Przechowywanie** | Zebra NIE zapisuje hasła w chmurze |
+- **Minimalna długość:** 14 znaków
+- **Dozwolone znaki:** litery, cyfry, znaki specjalne
+- **Unikalność:** może być wspólne dla wielu drukarek
+- **Przechowywanie:** Zebra NIE zapisuje hasła w chmurze
 
 > **🔒 Bezpieczeństwo:** Hasło jest osadzane w skrypcie konfiguracyjnym. Firma Zebra **nie ma dostępu** do Twojego hasła – jeśli je zapomnisz, konieczny będzie reset fabryczny.
 
@@ -19653,15 +19566,13 @@ Przy pojedynczej drukarce cały proces zajmuje **5-10 minut**. Przy większej li
 
 ## Podsumowanie – co musisz wiedzieć
 
-| Punkt | Szczegóły |
-|-------|-----------|
-| **Co** | Obowiązkowa konfiguracja zabezpieczeń |
-| **Kiedy** | Od 1 sierpnia 2025 |
-| **Które drukarki** | Wszystkie z WiFi/Bluetooth (EMEA) |
-| **Hasło** | Minimum 14 znaków |
-| **Narzędzie** | Printer Setup Utilities + Security Setup Wizard |
-| **Połączenie** | Wymagane USB (nie WiFi) |
-| **Czas** | 5-10 minut |
+- **Co:** obowiązkowa konfiguracja zabezpieczeń
+- **Kiedy:** od 1 sierpnia 2025
+- **Które drukarki:** wszystkie z WiFi/Bluetooth (EMEA)
+- **Hasło:** minimum 14 znaków
+- **Narzędzie:** Printer Setup Utilities + Security Setup Wizard
+- **Połączenie:** wymagane USB (nie WiFi)
+- **Czas:** 5-10 minut
 
 ---
 
@@ -19793,13 +19704,11 @@ Drukarka odpowie wartością "on" lub "off".
 
 ### Lista chronionych ustawień
 
-| Kategoria | Przykładowe ustawienia |
-|-----------|------------------------|
-| **Usługi sieciowe** | FTP, HTTP, HTTPS, LPD, SNMP, Telnet, TCP, UDP |
-| **Komunikacja bezprzewodowa** | Wi-Fi, Bluetooth, wykrywalność BT |
-| **Bezpieczeństwo** | Hasła, certyfikaty, poziomy bezpieczeństwa |
-| **Firmware** | Kontrola aktualizacji oprogramowania |
-| **Interfejs użytkownika** | Hasło do panelu, blokady menu |
+- **Usługi sieciowe:** FTP, HTTP, HTTPS, LPD, SNMP, Telnet, TCP, UDP
+- **Komunikacja bezprzewodowa:** Wi-Fi, Bluetooth, wykrywalność BT
+- **Bezpieczeństwo:** hasła, certyfikaty, poziomy
+- **Firmware:** kontrola aktualizacji
+- **Interfejs:** hasło do panelu, blokady menu
 
 ---
 
@@ -19807,26 +19716,18 @@ Drukarka odpowie wartością "on" lub "off".
 
 Od wersji **Link-OS 7.4.2** drukarki w regionie EMEA są fabrycznie konfigurowane w trybie **Advanced Security Mode** – zgodnie z wymogami **dyrektywy EU RED**.
 
-### Domyślnie wyłączone usługi w ASM
+### Domyślnie wyłączone w ASM
 
-| Ustawienie SGD | Wartość | Opis |
-|----------------|---------|------|
-| device.allow_firmware_downloads | no | Blokada aktualizacji |
-| ip.ftp.enable | off | Wyłączony FTP |
-| ip.http.enable | off | Wyłączony HTTP |
-| ip.https.enable | off | Wyłączony HTTPS |
-| ip.snmp.enable | off | Wyłączony SNMP |
-| ip.telnet.enable | off | Wyłączony Telnet |
-| wlan.enable | off | Wyłączone Wi-Fi |
+- firmware downloads (no)
+- FTP, HTTP, HTTPS, SNMP, Telnet (off)
+- Wi-Fi (off)
 
-### Usługi włączone w ASM
+### Włączone w ASM
 
-| Ustawienie SGD | Wartość | Opis |
-|----------------|---------|------|
-| bluetooth.enable | on | Bluetooth do konfiguracji |
-| internal_wired.enable | on | Ethernet |
-| ip.ipp.enable | on | Szyfrowany protokół druku (IPPS) |
-| ip.tls.enable | on | Szyfrowana komunikacja TLS |
+- Bluetooth (on) – do konfiguracji
+- Ethernet (on)
+- IPPS (on) – szyfrowany druk
+- TLS (on) – szyfrowana komunikacja
 
 ---
 
@@ -19882,14 +19783,23 @@ Od wdrożenia, przez eksploatację, aż po wycofanie – uwzględniaj poufność
 
 ### Wyłączanie usług – komendy SGD
 
-| Usługa | Komenda wyłączenia |
-|--------|-------------------|
-| **FTP** | ! U1 setvar "ip.ftp.enable" "off" |
-| **HTTP** | ! U1 setvar "ip.http.enable" "off" |
-| **Telnet** | ! U1 setvar "ip.telnet.enable" "off" |
-| **SNMP** | ! U1 setvar "ip.snmp.enable" "off" |
-| **LPD** | ! U1 setvar "ip.lpd.enable" "off" |
-| **TCP Raw** | ! U1 setvar "ip.tcp.enable" "off" |
+**FTP:**
+    ! U1 setvar "ip.ftp.enable" "off"
+
+**HTTP:**
+    ! U1 setvar "ip.http.enable" "off"
+
+**Telnet:**
+    ! U1 setvar "ip.telnet.enable" "off"
+
+**SNMP:**
+    ! U1 setvar "ip.snmp.enable" "off"
+
+**LPD:**
+    ! U1 setvar "ip.lpd.enable" "off"
+
+**TCP Raw:**
+    ! U1 setvar "ip.tcp.enable" "off"
 
 > **💡 Wskazówka:** Telnet przesyła dane w postaci niezaszyfrowanej – **zawsze wyłączaj** w środowisku produkcyjnym.
 
@@ -19897,20 +19807,16 @@ Od wdrożenia, przez eksploatację, aż po wycofanie – uwzględniaj poufność
 
 ## Szyfrowanie TLS i certyfikaty
 
-### Porty TLS drukarki Zebra
+### Porty TLS
 
-| Port | Przeznaczenie |
-|------|---------------|
-| **9143** | TLS Raw (parser języka drukarki) |
-| **9243** | TLS JSON (konfiguracja JSON) |
+- **9143** – TLS Raw (parser języka drukarki)
+- **9243** – TLS JSON (konfiguracja JSON)
 
-### Pliki certyfikatów TLS
+### Pliki certyfikatów
 
-| Nazwa pliku | Zawartość |
-|-------------|-----------|
-| TLSRAW_CERT.NRD | Certyfikat drukarki |
-| TLSRAW_KEY.NRD | Klucz prywatny (nieszyfrowany) |
-| TLSRAW_CA.NRD | Łańcuch certyfikatów CA |
+- **TLSRAW_CERT.NRD** – certyfikat drukarki
+- **TLSRAW_KEY.NRD** – klucz prywatny
+- **TLSRAW_CA.NRD** – łańcuch certyfikatów CA
 
 ### Test połączenia TLS
 
@@ -19936,12 +19842,10 @@ Od Link-OS 6 wykrywalność BT jest **domyślnie wyłączona**. Aby sparować ur
 
 ### Poziomy bezpieczeństwa Bluetooth
 
-| Poziom | Opis |
-|--------|------|
-| 1 | Brak zabezpieczeń (niezalecany) |
-| 2 | Zabezpieczenie na poziomie usługi |
-| **3** | Zabezpieczenie na poziomie łącza (zalecany) |
-| 4 | Secure Simple Pairing |
+- **1** – brak zabezpieczeń (niezalecany)
+- **2** – na poziomie usługi
+- **3** – na poziomie łącza (**zalecany**)
+- **4** – Secure Simple Pairing
 
 Komenda ustawienia:
 
@@ -20022,11 +19926,9 @@ W trybie chronionym, aby autoryzować pojedynczą aktualizację:
 
 ## Narzędzia do zarządzania
 
-| Narzędzie | Przeznaczenie |
-|-----------|---------------|
-| **Printer Profile Manager Enterprise** | Masowe zarządzanie flotą |
-| **Zebra Setup Utilities** | Konfiguracja pojedynczych drukarek |
-| **Link-OS SDK** | Integracja z systemami korporacyjnymi |
+- **Printer Profile Manager Enterprise** – masowe zarządzanie flotą
+- **Zebra Setup Utilities** – konfiguracja pojedynczych drukarek
+- **Link-OS SDK** – integracja z systemami korporacyjnymi
 
 > **💡 Pobierz narzędzia:** [Strona ze sterownikami i oprogramowaniem](/sterowniki)
 
