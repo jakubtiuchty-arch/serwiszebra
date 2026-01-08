@@ -1009,7 +1009,15 @@ function isZebraRelated(message: string): boolean {
     'rozdzielczoś', 'resolution', 'dpi', 'dpmm',
     'jakość', 'quality', 'ostrość', 'sharpness',
     // Słowa ogólne ale kontekstowe
-    'urządzeni', 'konfigurac'
+    'urządzeni', 'konfigurac',
+    // HASŁO / DYREKTYWA RED / ZABEZPIECZENIA (nowe od 08.2025)
+    'hasło', 'hasła', 'hasłem', 'password', 'logowa', 'zalogowa', 'login',
+    'dyrektywa', 'red', 'eu red', 'printsecure', 'print secure',
+    'protected mode', 'tryb chroniony', 'chronion',
+    'security', 'zabezpieczen', 'szyfrowa', 'tls', 'certyfikat',
+    'setup wizard', 'pierwsze uruchomienie', 'nowa drukarka',
+    'wymaga hasła', 'prosi o hasło', 'pyta o hasło',
+    'link-os', 'linkos', 'zsu', 'printer setup utilities'
   ]
   
   // Sprawdź czy zawiera słowa kluczowe

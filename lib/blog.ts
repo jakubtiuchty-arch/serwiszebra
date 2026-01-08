@@ -19942,6 +19942,36 @@ export function searchBlogForAI(query: string): {
     if (queryHasGSM && articleIsAboutWiFi && !articleIsAboutGSM) score -= 20
     if (queryHasWiFi && articleIsAboutHandheldScanner) score -= 40
     
+    // BONUS za pytania o HASŁO / DYREKTYWĘ RED / PRINTSECURE / ZABEZPIECZENIA
+    const queryHasPassword = queryLower.match(/hasło|hasła|hasłem|haseł|password|haslem|logowa|zalogowa|login/)
+    const queryHasRED = queryLower.match(/red|dyrektywa|eu.*red|unijna|unii|regulac/)
+    const queryHasPrintSecure = queryLower.match(/printsecure|print.*secure|protected.*mode|tryb.*chron|chronion/)
+    const queryHasSecurity = queryLower.match(/zabezpiecz|bezpiecz|security|szyfrowa|certyfikat|tls|https/)
+    const queryHasSetup = queryLower.match(/pierwsz.*uruchom|pierwszy.*raz|nowa.*drukarka|nową.*drukark|konfigura.*zabezp|setup.*wizard|ustaw.*hasł/)
+    
+    // Artykuły o hasłach/RED/bezpieczeństwie
+    const articleIsAboutPassword = slugLower.includes('hasla') || slugLower.includes('haslo') || 
+      titleLower.includes('hasł') || tagsLower.some(t => t.includes('hasł') || t.includes('password'))
+    const articleIsAboutRED = slugLower.includes('red') || slugLower.includes('dyrektywa') ||
+      titleLower.includes('red') || tagsLower.some(t => t.includes('red') || t.includes('dyrektywa'))
+    const articleIsAboutPrintSecure = slugLower.includes('printsecure') || slugLower.includes('protected') ||
+      titleLower.includes('printsecure') || tagsLower.some(t => t.includes('printsecure') || t.includes('protected'))
+    const articleIsAboutSecurity = slugLower.includes('security') || slugLower.includes('zabezpiecz') ||
+      tagsLower.some(t => t.includes('security') || t.includes('szyfrowa') || t.includes('tls'))
+    
+    // DUŻY bonus za dopasowanie hasło/RED/security
+    if (queryHasPassword && articleIsAboutPassword) score += 50 // Pytanie o hasło → artykuł o hasłach
+    if (queryHasRED && articleIsAboutRED) score += 50 // Pytanie o RED → artykuł o RED
+    if (queryHasPrintSecure && articleIsAboutPrintSecure) score += 40 // PrintSecure → artykuł o PrintSecure
+    if (queryHasSecurity && articleIsAboutSecurity) score += 35 // Zabezpieczenia → artykuł o security
+    if (queryHasSetup && (articleIsAboutPassword || articleIsAboutRED)) score += 40 // Pierwsze uruchomienie/setup → artykuły o hasłach/RED
+    
+    // Jeśli pytanie o hasło/RED, ale artykuł nie jest o tym → mniejsza kara (bo może być pomocny)
+    if ((queryHasPassword || queryHasRED || queryHasSetup) && 
+        !articleIsAboutPassword && !articleIsAboutRED && !articleIsAboutPrintSecure) {
+      score -= 20 // Mniejsza kara niż przy GSM/WiFi bo to nowy temat
+    }
+    
     for (const word of uniqueWords) {
       // Tytuł - najwyższy priorytet
       if (titleLower.includes(word)) score += 10
