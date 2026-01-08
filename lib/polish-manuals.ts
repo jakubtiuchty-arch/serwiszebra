@@ -8192,6 +8192,415 @@ Automatyczna kalibracja przez przyciski:
 `
       }
     ]
+  },
+
+  'zt231r': {
+    model: 'ZT231R',
+    title: 'Zebra ZT231R – Instrukcja obsługi po Polsku',
+    lastUpdated: '2026-01-09',
+    sourceDocument: 'Zebra ZT231R User Guide',
+    keywords: [
+      'zebra zt231r instrukcja',
+      'zt231r instrukcja po polsku',
+      'zebra zt231r manual',
+      'drukarka zebra zt231r',
+      'zebra zt231r rfid',
+      'zt231r rfid kalibracja',
+      'zebra zt231r enkoder rfid',
+      'zt231r programowanie tagów',
+      'zebra zt231r smart labels',
+      'zt231r konfiguracja rfid',
+      'zebra zt231r uhf',
+      'zt231r epc gen2',
+      'zebra zt231 rfid instrukcja',
+      'drukarka rfid zebra',
+      'zt231r wyświetlacz dotykowy',
+      'zebra zt231r specyfikacja'
+    ],
+    sections: [
+      {
+        title: '1. Podstawowe informacje',
+        content: `
+### O drukarce Zebra ZT231R
+
+Zebra ZT231R to przemysłowa drukarka etykiet z **wbudowanym enkoderem RFID UHF**. Model ten łączy wszystkie funkcje standardowej drukarki ZT231 (kolorowy wyświetlacz dotykowy, kreatory konfiguracji) z możliwością **programowania tagów RFID** podczas drukowania etykiet.
+
+**Idealna do zastosowań:**
+- Logistyka i zarządzanie magazynem
+- Śledzenie aktywów (asset tracking)
+- Identyfikacja produktów
+- Systemy inwentaryzacyjne
+
+### Parametry techniczne
+
+- **Technologia druku:** Termotransferowy / termiczny bezpośredni
+- **Rozdzielczość:** 203 dpi lub 300 dpi
+- **Prędkość druku:** do 356 mm/s (14 cali/s)
+- **Szerokość druku:** do 104 mm (4,09 cala)
+- **Maks. średnica rolki:** 203 mm (8 cali)
+- **Długość ribbonu:** do 450 m
+- **RFID:** Wbudowany enkoder UHF EPC Gen2 V2
+- **Pasma RFID:** EU 865-868 MHz, US 902-928 MHz
+
+### Złącza
+
+- USB 2.0 (standard)
+- RS-232 Serial (opcja)
+- Ethernet 10/100 RJ-45 (opcja)
+- Wi-Fi 802.11a/b/g/n/ac + Bluetooth (opcja)
+- USB Host (pendrive, skaner, klawiatura)
+
+### Cechy charakterystyczne
+
+- **Wbudowany enkoder RFID UHF** – programowanie tagów podczas druku
+- **Kolorowy wyświetlacz dotykowy** z intuicyjnym interfejsem
+- **RFID Wizard** – kreator konfiguracji RFID
+- Antena RFID z wieloma elementami (A1-A4, B1-B4)
+- Regulowana moc odczytu i zapisu RFID
+- Automatyczna kalibracja pozycji tagu RFID
+- Metalowa konstrukcja przemysłowa
+`
+      },
+      {
+        title: '2. Specyfikacja RFID',
+        content: `
+### Obsługiwane standardy
+
+- **EPC Class 1 Gen2** – podstawowy standard UHF RFID
+- **EPC Gen 2 V2** – rozszerzony standard z dodatkowymi funkcjami
+- **ISO 18000-6C** – międzynarodowy standard UHF
+
+### Parametry techniczne RFID
+
+- **Pasmo EU:** 865-868 MHz
+- **Pasmo US:** 902-928 MHz
+- **Moc odczytu:** 0-30 (regulowana)
+- **Moc zapisu:** 0-30 (regulowana)
+- **Elementy anteny:** A1, A2, A3, A4, B1, B2, B3, B4
+- **Pozycja programowania:** Regulowana (F0-Fxxx lub B0-B30)
+
+### Typy obsługiwanych tagów
+
+- Tagi z chipami zgodnymi z EPC Gen2
+- **Smart labels** (etykiety z wbudowanym chipem RFID)
+- Tagi na różnych materiałach (papier, folia, PET)
+- Tagi o różnych rozmiarach i pozycjach inlay
+`
+      },
+      {
+        title: '3. Wyświetlacz dotykowy',
+        content: `
+### Ekran główny (Home Screen)
+
+Ekran główny wyświetla aktualny status drukarki i umożliwia dostęp do wszystkich funkcji, w tym statusu RFID.
+
+**Kolory tła ekranu:**
+- **Zielony** – drukarka gotowa
+- **Żółty** – ostrzeżenie (alert)
+- **Czerwony** – błąd wymagający interwencji
+
+### Elementy ekranu głównego
+
+- **Menu** – dostęp do wszystkich ustawień (w tym RFID)
+- **Wizards** – kreatory konfiguracji (w tym RFID Wizard)
+- **Shortcuts** – skróty do ulubionych pozycji
+- **Printer Info** – informacje o drukarce i statusie RFID
+
+### Wskaźniki LED
+
+- **STATUS** – ogólny stan drukarki
+- **PAUSE** – drukarka wstrzymana
+- **DATA** – odbieranie/przetwarzanie danych
+- **SUPPLIES** – stan materiałów (etykiety, ribbon)
+- **NETWORK** – stan połączenia sieciowego
+
+### Przyciski fizyczne
+
+- **PAUSE** – wstrzymanie/wznowienie druku
+- **FEED** – wysuw jednej etykiety
+- **CANCEL** – anulowanie zadań druku
+`
+      },
+      {
+        title: '4. Ładowanie materiałów RFID',
+        content: `
+### Materiały RFID (Smart Labels)
+
+Smart labels to etykiety z wbudowanym chipem RFID (inlay). Przy ładowaniu należy zwrócić uwagę na:
+
+- **Pozycję inlay** – chip musi znajdować się w odpowiednim miejscu względem anteny
+- **Kierunek podawania** – zgodnie ze specyfikacją materiału
+- **Odstępy między tagami** – zapewniające indywidualne programowanie
+
+### Procedura ładowania materiału RFID
+
+1. Otwórz drzwi komory mediów
+2. Obróć dźwignię głowicy w górę (zwolnij głowicę)
+3. Odsuń prowadnicę materiału
+4. Włóż rolkę smart labels:
+   - Umieść na wieszaku, dociśnij do tyłu
+   - Upewnij się, że materiał jest prawidłowo zorientowany
+5. Podnieś prowadnicę i dosuń do krawędzi rolki
+6. Przeprowadź materiał:
+   - Przez szczelinę czujnika transmisyjnego
+   - Pod wewnętrzną prowadnicą
+   - Materiał powinien przechodzić nad anteną RFID
+7. Dosuń zewnętrzną prowadnicę do krawędzi materiału
+8. Zamknij głowicę
+9. Zamknij drzwi
+10. **Przeprowadź kalibrację RFID**
+
+> **Uwaga:** Użycie ribbonu nie wpływa na działanie RFID. Wybierz ribbon odpowiedni dla drukowanego materiału.
+`
+      },
+      {
+        title: '5. Menu RFID',
+        content: `
+### Dostęp do menu RFID
+
+**Menu > RFID**
+
+### RFID Status
+
+Wyświetla aktualny stan podsystemu RFID:
+- Stan połączenia z enkoderem
+- Ostatni błąd RFID
+- Liczniki tagów
+
+**SGD:** rfid.error.response
+
+### RFID Test
+
+Testuje odczyt i zapis do tagu RFID bez przesuwania materiału:
+
+1. Umieść etykietę z tagiem nad anteną RFID
+2. Dotknij **Start**
+3. Wynik testu pojawi się na ekranie
+
+### RFID Calibrate
+
+**Kalibracja pozycji tagu** – kluczowa procedura dla nowego materiału RFID:
+
+1. Załaduj materiał RFID
+2. Wykonaj standardową kalibrację mediów
+3. Zamknij głowicę i wysuń jedną etykietę
+4. Dotknij **Menu > RFID > RFID Calibrate**
+5. Drukarka automatycznie:
+   - Przesunie materiał
+   - Określi optymalną pozycję programowania
+   - Dobierze element anteny
+   - Ustali moc odczytu/zapisu
+
+### Read Power / Write Power
+
+Ręczne ustawienie mocy odczytu/zapisu RFID:
+- **Zakres:** 0-30
+
+### RFID Antenna
+
+Wybór elementu anteny do programowania:
+- **Dostępne elementy:** A1, A2, A3, A4, B1, B2, B3, B4
+
+### RFID Program Position
+
+Ręczne ustawienie pozycji programowania tagu:
+- **F0-Fxxx** – przesunięcie do przodu (mm)
+- **B0-B30** – przesunięcie do tyłu (backfeed)
+`
+      },
+      {
+        title: '6. Kalibracja RFID',
+        content: `
+### Kiedy przeprowadzić kalibrację RFID?
+
+- Przy pierwszym użyciu nowego typu materiału RFID
+- Po zmianie materiału na inny typ smart labels
+- Gdy występują problemy z programowaniem tagów
+- Po wymianie głowicy drukującej
+
+### Procedura kalibracji RFID
+
+1. **Załaduj materiał RFID** do drukarki
+2. **Wykonaj standardową kalibrację mediów:**
+   - Menu > Print > Sensors > Manual Calibration
+3. **Zamknij głowicę** i wysuń co najmniej jedną etykietę (FEED)
+4. **Uruchom kalibrację RFID:**
+   - Menu > RFID > RFID Calibrate
+5. **Poczekaj** – drukarka automatycznie:
+   - Przesunie materiał w obu kierunkach
+   - Przetestuje różne pozycje programowania
+   - Dobierze optymalny element anteny
+   - Ustali moc odczytu i zapisu
+6. **Sprawdź wyniki** na ekranie
+7. **Wykonaj test** (RFID Test) dla potwierdzenia
+
+### Wskazówki dla kalibracji RFID
+
+- Pozostaw puste podkłady etykiet wystawające z przodu drukarki
+- Nie przerywaj procesu kalibracji
+- Jeśli kalibracja automatyczna zawiedzie, spróbuj ustawień ręcznych
+- Zanotuj optymalne ustawienia dla danego materiału
+`
+      },
+      {
+        title: '7. Kreatory konfiguracji',
+        content: `
+### RFID Wizard
+
+Dedykowany kreator dla konfiguracji RFID:
+
+1. Dotknij **Wizards > RFID**
+2. Postępuj zgodnie z instrukcjami na ekranie:
+   - Załaduj materiał RFID
+   - Wykonaj kalibrację mediów
+   - Wykonaj kalibrację RFID
+   - Przetestuj programowanie tagu
+
+### Pozostałe kreatory
+
+- **Set All Wizard** – uruchamia wszystkie kreatory (w tym RFID)
+- **System Wizard** – ustawienia systemowe
+- **Connection Wizard** – konfiguracja połączeń sieciowych
+- **Print Wizard** – konfiguracja parametrów druku
+`
+      },
+      {
+        title: '8. Programowanie RFID (ZPL)',
+        content: `
+### Podstawowe komendy RFID
+
+- **^RF** – odczyt danych z tagu
+- **^RM** – włączenie trybu RFID Mirror
+- **^RN** – włączenie trybu RFID bez VOID
+- **^RR** – odczyt tagu i zwrot do hosta
+- **^RT** – tryb testowy RFID
+- **^RW** – ustawienie parametrów RFID (moc, antena)
+- **^RS** – konfiguracja RFID (pozycja, próby)
+- **^HR** – kalibracja tagu RFID
+- **^HL** – status RFID
+
+### Przykładowy format etykiety z RFID
+
+    ^XA
+    ^RS8,0,0,1,N,10,3,5000,5000
+    ^RFW,H^FD1234567890ABCDEF^FS
+    ^FO50,50^A0N,30,30^FDProdukt ABC^FS
+    ^FO50,100^BY2^BCN,100,Y,N,N^FD123456789^FS
+    ^XZ
+
+**Objaśnienie:**
+- ^RS – konfiguracja RFID (antena, moc, próby)
+- ^RFW,H – zapis danych hex do tagu
+- ^FD – dane do zapisania
+
+### Obsługa błędów RFID
+
+- **RFID ERROR** – błąd komunikacji z tagiem → sprawdź pozycję, wykonaj kalibrację
+- **VOID TAG** – tag uszkodzony lub brak tagu → wymień etykietę
+- **WRITE FAILED** – błąd zapisu → zwiększ moc zapisu, sprawdź tag
+`
+      },
+      {
+        title: '9. Rozwiązywanie problemów RFID',
+        content: `
+### Typowe problemy i rozwiązania
+
+- **Brak programowania tagów** → Wykonaj kalibrację RFID
+- **Częste VOID** → Zwiększ RFID Write Power
+- **Nieczytelne tagi** → Zwiększ RFID Read Power
+- **Programowanie sąsiedniego tagu** → Zmniejsz moc, zmień antenę
+- **Sporadyczne błędy** → Sprawdź otoczenie, oddal inne urządzenia RFID
+- **Wszystkie tagi VOID** → Sprawdź inną partię etykiet
+
+### Sprawdzanie statusu RFID
+
+1. **Menu > RFID > RFID Status** – wyświetla aktualny stan
+2. **Menu > RFID > RFID Test** – test pojedynczego tagu
+3. **Menu > RFID > Read RFID Data** – odczyt danych z tagu
+
+### Diagnostyka ZPL
+
+Wyślij do drukarki komendę: ~HL
+
+Drukarka zwróci status podsystemu RFID.
+
+### Druk etykiety konfiguracji RFID
+
+**Menu > System > Settings > Print: System Settings**
+
+Etykieta konfiguracji zawiera aktualne ustawienia RFID:
+- Moc odczytu/zapisu
+- Wybrany element anteny
+- Pozycja programowania
+- Liczniki tagów
+`
+      },
+      {
+        title: '10. Konserwacja',
+        content: `
+### Harmonogram czyszczenia
+
+- **Głowica drukująca** – co 1 rolkę ribbonu / materiału DT
+- **Wałek dociskowy** – co 1 rolkę ribbonu / materiału DT
+- **Czujniki** – co 1 rolkę
+- **Antena RFID** – w razie problemów z programowaniem
+
+### Czyszczenie głowicy i wałka
+
+> **Ostrzeżenie:** Głowica może być gorąca! Uwaga na ESD.
+
+1. Otwórz drzwi i wyjmij ribbon oraz materiał
+2. Przetrzyj brązowy pasek głowicy wacikiem z alkoholem (99,7%)
+3. Przetrzyj wałek dociskowy obracając go ręcznie
+4. Poczekaj aż wyschnie
+5. Załaduj materiał i ribbon
+
+### Czyszczenie obszaru RFID
+
+- Użyj sprężonego powietrza do usunięcia pyłu z obszaru anteny
+- Nie używaj płynów bezpośrednio na antenie RFID
+- Regularnie sprawdzaj czy nie ma zanieczyszczeń w ścieżce materiału
+
+> 📘 **Szczegółowy poradnik:** [Jak wyczyścić głowicę drukarki Zebra](/blog/jak-wyczyscic-glowice-drukarki-zebra)
+`
+      },
+      {
+        title: 'FAQ – Najczęściej zadawane pytania',
+        content: `
+### Co to jest drukarka Zebra ZT231R?
+
+**Odpowiedź:** Zebra ZT231R to **przemysłowa drukarka etykiet** z wbudowanym **enkoderem RFID UHF**. Łączy funkcje drukarki ZT231 (kolorowy wyświetlacz dotykowy) z możliwością programowania tagów RFID podczas drukowania etykiet.
+
+### Jakie standardy RFID obsługuje ZT231R?
+
+**Odpowiedź:** ZT231R obsługuje **EPC Class 1 Gen2**, **EPC Gen 2 V2** oraz **ISO 18000-6C**. Pasmo dla EU: 865-868 MHz.
+
+### Jak skalibrować RFID w drukarce ZT231R?
+
+**Odpowiedź:** Menu > RFID > RFID Calibrate. Drukarka automatycznie dobierze pozycję programowania, element anteny i moc odczytu/zapisu.
+
+### Co to są smart labels?
+
+**Odpowiedź:** Smart labels to etykiety z wbudowanym chipem RFID (inlay). Drukarka ZT231R może jednocześnie drukować na etykiecie i programować chip RFID.
+
+### Jak zwiększyć skuteczność programowania tagów?
+
+**Odpowiedź:** Wykonaj kalibrację RFID, zwiększ moc zapisu (Write Power), sprawdź czy tag jest prawidłowo pozycjonowany względem anteny.
+
+### Dlaczego tagi są oznaczane jako VOID?
+
+**Odpowiedź:** Tag może być uszkodzony, źle pozycjonowany lub moc zapisu jest zbyt niska. Spróbuj zwiększyć RFID Write Power lub wykonaj ponownie kalibrację RFID.
+
+### Jaka jest różnica między ZT231 a ZT231R?
+
+**Odpowiedź:** **ZT231R** posiada wbudowany **enkoder RFID UHF** do programowania tagów. Standardowy **ZT231** nie ma funkcji RFID.
+
+### Czy mogę używać zwykłych etykiet w ZT231R?
+
+**Odpowiedź:** Tak, ZT231R działa jak normalna drukarka etykiet. Funkcja RFID jest używana tylko gdy drukujesz na smart labels i wysyłasz komendy programowania RFID.
+`
+      }
+    ]
   }
 }
 
