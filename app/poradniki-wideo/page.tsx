@@ -195,6 +195,16 @@ const videos: Video[] = [
     category: 'drukarki',
     tags: ['ZD421t', 'zakładanie etykiet', 'media loading', 'rolka etykiet', 'termotransfer'],
   },
+  {
+    id: '23',
+    title: 'Dyrektywa RED - co oznacza dla drukarek Zebra?',
+    description: 'Wyjaśnienie europejskiej dyrektywy radiowej RED (Radio Equipment Directive) i jej wpływu na drukarki etykiet Zebra z modułami WiFi i Bluetooth. Certyfikacja CE, zgodność i wymogi prawne.',
+    youtubeId: 'j0PRe-dGXBM',
+    thumbnail: '/drukarki-zebra-dyrektywa-red.jpeg',
+    duration: '5:00',
+    category: 'drukarki',
+    tags: ['RED', 'dyrektywa', 'certyfikacja', 'CE', 'WiFi', 'Bluetooth', 'regulacje'],
+  },
 ]
 
 const categories = [
