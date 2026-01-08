@@ -108,39 +108,40 @@ export default async function PolishManualPage({ params }: { params: { model: st
           </div>
         </div>
 
-        <div className="max-w-5xl mx-auto px-4 py-8">
+        <div className="max-w-5xl mx-auto px-3 sm:px-4 py-4 sm:py-8">
           {/* Back link */}
           <Link 
             href={`/instrukcje/${modelSlug}`}
-            className="inline-flex items-center gap-2 text-gray-600 hover:text-blue-600 mb-6 group"
+            className="inline-flex items-center gap-1.5 sm:gap-2 text-gray-600 hover:text-blue-600 mb-4 sm:mb-6 group text-sm sm:text-base"
           >
-            <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-            Powrót do dokumentacji {manual.model}
+            <ArrowLeft className="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:-translate-x-1 transition-transform" />
+            <span className="hidden sm:inline">Powrót do dokumentacji {manual.model}</span>
+            <span className="sm:hidden">Wróć do {manual.model}</span>
           </Link>
 
           {/* Header */}
-          <div className="rounded-2xl p-8 mb-8 relative overflow-hidden border border-gray-200 shadow-lg bg-white">
+          <div className="rounded-xl sm:rounded-2xl p-4 sm:p-8 mb-6 sm:mb-8 relative overflow-hidden border border-gray-200 shadow-lg bg-white">
             {/* Czerwona dolna połowa z gradientem opacity od prawej do lewej */}
             <div className="absolute inset-0 top-1/2 bg-gradient-to-l from-red-500 via-red-500 via-5% to-transparent"></div>
             <div className="relative z-10">
-              <div className="flex items-center gap-2 text-red-700 mb-2">
-                <span className="text-sm font-bold drop-shadow-sm">INSTRUKCJA PO POLSKU</span>
+              <div className="flex items-center gap-2 text-red-700 mb-1.5 sm:mb-2">
+                <span className="text-xs sm:text-sm font-bold drop-shadow-sm">INSTRUKCJA PO POLSKU</span>
               </div>
-              <h1 className="text-3xl md:text-4xl font-bold mb-3 text-gray-900 drop-shadow-sm">
+              <h1 className="text-xl sm:text-3xl md:text-4xl font-bold mb-2 sm:mb-3 text-gray-900 drop-shadow-sm leading-tight">
                 {polishManual.title}
               </h1>
-              <p className="text-gray-800 max-w-2xl font-medium drop-shadow-sm">
+              <p className="text-gray-800 max-w-2xl font-medium drop-shadow-sm text-sm sm:text-base">
                 Skrócona instrukcja z najważniejszymi informacjami po polsku. 
                 Kalibracja, zakładanie mediów, rozwiązywanie problemów i konserwacja.
               </p>
-              <div className="flex items-center gap-4 mt-4 text-gray-800 text-sm font-medium drop-shadow-sm">
+              <div className="flex flex-wrap items-center gap-2 sm:gap-4 mt-3 sm:mt-4 text-gray-800 text-xs sm:text-sm font-medium drop-shadow-sm">
                 <span className="flex items-center gap-1">
-                  <Clock className="w-4 h-4" />
-                  Aktualizacja: {polishManual.lastUpdated}
+                  <Clock className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                  <span className="hidden sm:inline">Aktualizacja:</span> {polishManual.lastUpdated}
                 </span>
                 <span className="flex items-center gap-1">
-                  <BookOpen className="w-4 h-4" />
-                  {polishManual.sections.length} rozdziałów
+                  <BookOpen className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                  {polishManual.sections.length} <span className="hidden sm:inline">rozdziałów</span><span className="sm:hidden">rozdz.</span>
                 </span>
               </div>
             </div>
