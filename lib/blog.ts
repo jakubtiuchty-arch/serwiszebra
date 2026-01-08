@@ -139,25 +139,6 @@ export const blogPosts: BlogPost[] = [
       'AMOLED 1500 nit',
       'hot swap bateria'
     ],
-    seoMeta: {
-      title: 'Zebra TC501 i TC701 – Nowe terminale mobilne z AI | Premiera 2025',
-      description: 'Zebra TC501/TC701: procesor Qualcomm Dragonwing z AI, Wi-Fi 7, 5G, wbudowany RFID, aparat 50 MP, skaner 30m. Specyfikacja, zastosowania i porównanie nowych terminali mobilnych.',
-      keywords: [
-        'Zebra TC701 specyfikacja',
-        'Zebra TC501 cena',
-        'terminal mobilny z RFID',
-        'komputer mobilny Android przemysłowy',
-        'skaner dalekiego zasięgu AC670',
-        'urządzenie mobilne Wi-Fi 7',
-        '5G mobile computer logistyka',
-        'wytrzymały smartfon IP68',
-        'komputer mobilny z procesorem AI',
-        'Zebra TC7 series 2025',
-        'Dragonwing Q-6690',
-        'terminal dla magazynu',
-        'komputer mobilny dla kuriera'
-      ]
-    },
     content: `
 > **🚀 Premiera 2025:** Zebra wprowadza przełomowe terminale mobilne **TC501** i **TC701** – pierwsze urządzenia zaprojektowane od podstaw z myślą o aplikacjach AI. Poznaj specyfikację, możliwości i zastosowania najnowszych komputerów mobilnych dla logistyki, magazynów i handlu.
 
