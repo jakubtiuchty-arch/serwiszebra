@@ -32,6 +32,7 @@ const repairRequestSchema = z.object({
   phone: z.string().min(9),
   company: z.string().optional(),
   nip: z.string().optional(),
+  deviceType: z.enum(['drukarka', 'terminal', 'skaner', 'tablet', 'akcesoria', 'inne']),
   deviceModel: z.string().min(1),
   serialNumber: z.string().optional(),
   purchaseDate: z.string().optional(),
@@ -72,6 +73,7 @@ export async function POST(request: NextRequest) {
       phone: formData.get('phone') as string,
       company: (formData.get('company') as string) || undefined,
       nip: (formData.get('nip') as string) || undefined,
+      deviceType: formData.get('deviceType') as 'drukarka' | 'terminal' | 'skaner' | 'tablet' | 'akcesoria' | 'inne',
       deviceModel: formData.get('deviceModel') as string,
       serialNumber: (formData.get('serialNumber') as string) || undefined,
       purchaseDate: (formData.get('purchaseDate') as string) || undefined,
@@ -136,6 +138,7 @@ export async function POST(request: NextRequest) {
         phone: validatedData.phone,
         company: validatedData.company || null,
         nip: validatedData.nip || null,
+        device_type: validatedData.deviceType,
         device_model: validatedData.deviceModel,
         serial_number: validatedData.serialNumber || null,
         purchase_date: validatedData.purchaseDate || null,
@@ -194,8 +197,8 @@ export async function POST(request: NextRequest) {
         to: validatedData.email,
         customerName: `${validatedData.firstName} ${validatedData.lastName}`,
         repairId: newRequest.id,
-        repairNumber: newRequest.repair_number, // Nowy format numeru
-        deviceType: 'printer', // TODO: dodać pole device_type do formularza
+        repairNumber: newRequest.repair_number,
+        deviceType: validatedData.deviceType,
         deviceModel: validatedData.deviceModel,
         problemDescription: validatedData.issueDescription,
         isWarranty: isWarrantyRepair
@@ -211,7 +214,7 @@ export async function POST(request: NextRequest) {
         customerName: `${validatedData.firstName} ${validatedData.lastName}`,
         customerEmail: validatedData.email,
         customerPhone: validatedData.phone,
-        deviceType: 'printer',
+        deviceType: validatedData.deviceType,
         deviceModel: validatedData.deviceModel,
         problemDescription: validatedData.issueDescription,
         isWarranty: isWarrantyRepair,

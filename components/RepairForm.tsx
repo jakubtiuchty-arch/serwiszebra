@@ -29,6 +29,9 @@ const repairFormSchema = z.object({
   nip: z.string().min(10, 'NIP musi mieć 10 cyfr').max(10, 'NIP musi mieć 10 cyfr'),
   
   // KROK 2: Szczegóły urządzenia
+  deviceType: z.enum(['drukarka', 'terminal', 'skaner', 'tablet', 'akcesoria', 'inne'], {
+    message: 'Wybierz typ urządzenia',
+  }),
   deviceModel: z.string().min(1, 'Wpisz model urządzenia'),
   serialNumber: z.string().optional(),
   purchaseDate: z.string().optional(),
@@ -102,7 +105,7 @@ export default function RepairForm() {
     if (currentStep === 1) {
       fieldsToValidate = ['firstName', 'lastName', 'email', 'phone']
     } else if (currentStep === 2) {
-      fieldsToValidate = ['deviceModel', 'isWarranty']
+      fieldsToValidate = ['deviceType', 'deviceModel', 'isWarranty']
     } else if (currentStep === 3) {
       fieldsToValidate = ['issueDescription', 'urgency']
     } else if (currentStep === 4) {
@@ -173,7 +176,7 @@ export default function RepairForm() {
 
     // Śledzenie GTM - wysłanie formularza
     trackRepairFormSubmit({
-      deviceType: 'drukarka', // Formularz główny to drukarki
+      deviceType: data.deviceType,
       deviceModel: data.deviceModel,
       isWarranty: data.isWarranty === 'tak',
       urgency: data.urgency,
@@ -191,6 +194,7 @@ export default function RepairForm() {
       formDataToSend.append('company', data.company)
       formDataToSend.append('nip', data.nip)
       
+      formDataToSend.append('deviceType', data.deviceType)
       formDataToSend.append('deviceModel', data.deviceModel)
       if (data.serialNumber) formDataToSend.append('serialNumber', data.serialNumber)
       if (data.purchaseDate) formDataToSend.append('purchaseDate', data.purchaseDate)
@@ -428,6 +432,28 @@ export default function RepairForm() {
                 </h3>
 
                 <div>
+                  <label htmlFor="deviceType" className="block text-sm font-medium text-gray-700 mb-2">
+                    Typ urządzenia *
+                  </label>
+                  <select
+                    {...register('deviceType')}
+                    id="deviceType"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
+                  >
+                    <option value="">Wybierz typ urządzenia</option>
+                    <option value="drukarka">Drukarka etykiet</option>
+                    <option value="terminal">Terminal mobilny</option>
+                    <option value="skaner">Skaner kodów</option>
+                    <option value="tablet">Tablet przemysłowy</option>
+                    <option value="akcesoria">Akcesoria (głowica, wałek, zasilacz...)</option>
+                    <option value="inne">Inne</option>
+                  </select>
+                  {errors.deviceType && (
+                    <p className="mt-1 text-sm text-red-600">{errors.deviceType.message}</p>
+                  )}
+                </div>
+
+                <div>
                   <label htmlFor="deviceModel" className="block text-sm font-medium text-gray-700 mb-2">
                     Model urządzenia *
                   </label>
@@ -436,7 +462,7 @@ export default function RepairForm() {
                     id="deviceModel"
                     type="text"
                     className="w-full px-3 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    placeholder="np. ZD420, TC52, DS3608..."
+                    placeholder={formData.deviceType === 'akcesoria' ? 'np. głowica do ZD421, wałek ZT410...' : 'np. ZD420, TC52, DS3608...'}
                   />
                   {errors.deviceModel && (
                     <p className="mt-1 text-sm text-red-600">{errors.deviceModel.message}</p>
@@ -765,6 +791,14 @@ export default function RepairForm() {
                   <div className="bg-gray-50 rounded-xl p-5">
                     <h4 className="font-semibold text-gray-900 mb-2">Urządzenie</h4>
                     <div className="space-y-2 text-sm">
+                      <p><span className="text-gray-600">Typ:</span> <span className="font-medium">
+                        {formData.deviceType === 'drukarka' && 'Drukarka etykiet'}
+                        {formData.deviceType === 'terminal' && 'Terminal mobilny'}
+                        {formData.deviceType === 'skaner' && 'Skaner kodów'}
+                        {formData.deviceType === 'tablet' && 'Tablet przemysłowy'}
+                        {formData.deviceType === 'akcesoria' && 'Akcesoria'}
+                        {formData.deviceType === 'inne' && 'Inne'}
+                      </span></p>
                       <p><span className="text-gray-600">Model:</span> <span className="font-medium">{formData.deviceModel}</span></p>
                       {formData.serialNumber && (
                         <p><span className="text-gray-600">S/N:</span> <span className="font-medium">{formData.serialNumber}</span></p>
