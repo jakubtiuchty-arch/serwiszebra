@@ -109,15 +109,15 @@ export const BLOG_CATEGORIES = {
 // Wszystkie artykuły bloga
 export const blogPosts: BlogPost[] = [
   {
-    slug: 'zebra-tc501-tc701-terminal-mobilny-ai-premiera-2025',
-    title: 'Zebra TC501 i TC701 – Terminale mobilne gotowe na erę AI (Premiera 2025)',
+    slug: 'zebra-tc501-tc701-terminal-mobilny-ai-premiera-2026',
+    title: 'Zebra TC501 i TC701 – Terminale mobilne gotowe na erę AI (Premiera 2026)',
     excerpt: 'Poznaj nowe komputery mobilne Zebra TC501 i TC701 z procesorem Qualcomm Dragonwing, Wi-Fi 7, 5G i wbudowanym czytnikiem RFID. Do 300% więcej mocy, 12 GB RAM i gotowość na aplikacje AI.',
     coverImage: '/blog/terminal-zebra-tc58-nie-dziala-naprawa.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Autoryzowany serwis Zebra'
     },
-    publishedAt: '2025-01-09',
+    publishedAt: '2026-01-09',
     readingTime: 12,
     deviceType: 'terminale',
     category: 'aktualnosci',
@@ -132,7 +132,7 @@ export const blogPosts: BlogPost[] = [
       'czytnik RFID UHF',
       'skaner AC670',
       'Android 15 enterprise',
-      'premiera Zebra 2025',
+      'premiera Zebra 2026',
       'terminal dla logistyki',
       'komputer magazynowy',
       'urządzenie mobilne IP68',
@@ -140,7 +140,7 @@ export const blogPosts: BlogPost[] = [
       'hot swap bateria'
     ],
     seo: {
-      metaTitle: 'Zebra TC501 i TC701 – Nowe terminale mobilne z AI | Premiera 2025',
+      metaTitle: 'Zebra TC501 i TC701 – Nowe terminale mobilne z AI | Premiera 2026',
       metaDescription: 'Zebra TC501/TC701: procesor Qualcomm Dragonwing z AI, Wi-Fi 7, 5G, wbudowany RFID, aparat 50 MP, skaner 30m. Specyfikacja, zastosowania i porównanie nowych terminali mobilnych.',
       keywords: [
         'Zebra TC701 specyfikacja',
@@ -152,14 +152,14 @@ export const blogPosts: BlogPost[] = [
         '5G mobile computer logistyka',
         'wytrzymały smartfon IP68',
         'komputer mobilny z procesorem AI',
-        'Zebra TC7 series 2025',
+        'Zebra TC7 series 2026',
         'Dragonwing Q-6690',
         'terminal dla magazynu',
         'komputer mobilny dla kuriera'
       ]
     },
     content: `
-> **🚀 Premiera 2025:** Zebra wprowadza przełomowe terminale mobilne **TC501** i **TC701** – pierwsze urządzenia zaprojektowane od podstaw z myślą o aplikacjach AI. Poznaj specyfikację, możliwości i zastosowania najnowszych komputerów mobilnych dla logistyki, magazynów i handlu.
+> **🚀 Premiera 2026:** Zebra wprowadza przełomowe terminale mobilne **TC501** i **TC701** – pierwsze urządzenia zaprojektowane od podstaw z myślą o aplikacjach AI. Poznaj specyfikację, możliwości i zastosowania najnowszych komputerów mobilnych dla logistyki, magazynów i handlu.
 
 ---
 
@@ -395,7 +395,7 @@ Pełny pakiet oprogramowania:
 ## FAQ – Najczęściej zadawane pytania
 
 ### Kiedy premiera TC501 i TC701?
-Urządzenia zostały oficjalnie zaprezentowane w **styczniu 2025**. Dostępność w Polsce – I/II kwartał 2025.
+Urządzenia zostały oficjalnie zaprezentowane w **styczniu 2026**. Dostępność w Polsce – I/II kwartał 2026.
 
 ### Ile kosztuje Zebra TC701?
 Ceny zależą od konfiguracji (RAM, pamięć, skaner, 5G). Skontaktuj się z nami po indywidualną wycenę.
