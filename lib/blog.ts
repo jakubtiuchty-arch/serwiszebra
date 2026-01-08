@@ -109,6 +109,350 @@ export const BLOG_CATEGORIES = {
 // Wszystkie artykuły bloga
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'zebra-tc501-tc701-terminal-mobilny-ai-premiera-2025',
+    title: 'Zebra TC501 i TC701 – Terminale mobilne gotowe na erę AI (Premiera 2025)',
+    excerpt: 'Poznaj nowe komputery mobilne Zebra TC501 i TC701 z procesorem Qualcomm Dragonwing, Wi-Fi 7, 5G i wbudowanym czytnikiem RFID. Do 300% więcej mocy, 12 GB RAM i gotowość na aplikacje AI.',
+    coverImage: '/blog/terminal-zebra-tc58-nie-dziala-naprawa.jpeg',
+    author: {
+      name: 'Zespół Serwis Zebra',
+      role: 'Autoryzowany serwis Zebra'
+    },
+    publishedAt: '2025-01-09',
+    readingTime: 12,
+    deviceType: 'terminale',
+    category: 'aktualnosci',
+    tags: [
+      'Zebra TC501',
+      'Zebra TC701',
+      'terminal mobilny AI',
+      'komputer mobilny przemysłowy',
+      'Qualcomm Dragonwing',
+      'Wi-Fi 7 enterprise',
+      '5G mobile computer',
+      'czytnik RFID UHF',
+      'skaner AC670',
+      'Android 15 enterprise',
+      'premiera Zebra 2025',
+      'terminal dla logistyki',
+      'komputer magazynowy',
+      'urządzenie mobilne IP68',
+      'AMOLED 1500 nit',
+      'hot swap bateria'
+    ],
+    seoMeta: {
+      title: 'Zebra TC501 i TC701 – Nowe terminale mobilne z AI | Premiera 2025',
+      description: 'Zebra TC501/TC701: procesor Qualcomm Dragonwing z AI, Wi-Fi 7, 5G, wbudowany RFID, aparat 50 MP, skaner 30m. Specyfikacja, zastosowania i porównanie nowych terminali mobilnych.',
+      keywords: [
+        'Zebra TC701 specyfikacja',
+        'Zebra TC501 cena',
+        'terminal mobilny z RFID',
+        'komputer mobilny Android przemysłowy',
+        'skaner dalekiego zasięgu AC670',
+        'urządzenie mobilne Wi-Fi 7',
+        '5G mobile computer logistyka',
+        'wytrzymały smartfon IP68',
+        'komputer mobilny z procesorem AI',
+        'Zebra TC7 series 2025',
+        'Dragonwing Q-6690',
+        'terminal dla magazynu',
+        'komputer mobilny dla kuriera'
+      ]
+    },
+    content: `
+> **🚀 Premiera 2025:** Zebra wprowadza przełomowe terminale mobilne **TC501** i **TC701** – pierwsze urządzenia zaprojektowane od podstaw z myślą o aplikacjach AI. Poznaj specyfikację, możliwości i zastosowania najnowszych komputerów mobilnych dla logistyki, magazynów i handlu.
+
+---
+
+## Co to jest Zebra TC501 i TC701?
+
+**Zebra TC501** i **Zebra TC701** to najnowsze modele mobilnych komputerów przemysłowych z legendarnej serii TC5/TC7, zaprojektowane od podstaw z myślą o aplikacjach wykorzystujących **sztuczną inteligencję (AI)**.
+
+| Model | Przeznaczenie | Klasa wytrzymałości |
+|-------|---------------|---------------------|
+| **TC501** | Handel detaliczny, lekka logistyka | Wzmocniony (rugged) |
+| **TC701** | Centra dystrybucyjne, praca na zewnątrz, chłodnie | Ultra-wzmocniony (ultra-rugged) |
+
+---
+
+## Najważniejsze nowości – co wyróżnia TC501/TC701?
+
+### 🧠 Procesor z dedykowanym silnikiem AI
+
+Oba modele wyposażono w najnowszy procesor **Qualcomm Dragonwing™ Q-6690**:
+
+| Parametr | Wartość | Poprawa |
+|----------|---------|---------|
+| Rdzenie | 8 rdzeni, do 2,9 GHz | — |
+| Wydajność | — | **+300%** vs poprzednia generacja |
+| RAM | Do **12 GB** LPDDR5 | **3x więcej** |
+| Flash | Do **256 GB** UFS 3.1 | **8x więcej** |
+| MicroSD | Do **2 TB** | — |
+
+> **💡 Kluczowe:** Dragonwing Q-6690 posiada **dedykowany silnik AI** umożliwiający uruchamianie zaawansowanych aplikacji sztucznej inteligencji **bezpośrednio na urządzeniu**, bez konieczności połączenia z chmurą.
+
+---
+
+### 📱 Wyświetlacz AMOLED klasy premium
+
+TC701 wyposażono w **6-calowy wyświetlacz AMOLED** o parametrach:
+
+| Parametr | Wartość |
+|----------|---------|
+| Rozdzielczość | **2160 x 1080** (Full HD+) |
+| Jasność | **1500 nitów** |
+| Szkło | Corning **Gorilla Glass Victus** |
+| Powierzchnia | +20% większa niż poprzednie modele |
+| Zużycie energii | -40% dzięki AMOLED |
+
+Ekran jest czytelny **nawet w pełnym słońcu** i obsługuje pracę w rękawicach oraz z rysikiem.
+
+---
+
+### 📡 Wbudowany czytnik RFID UHF – po raz pierwszy!
+
+**Po raz pierwszy w historii serii TC5/TC7** oba modele posiadają **zintegrowany czytnik UHF RFID**:
+
+| Parametr | Wartość |
+|----------|---------|
+| Zasięg odczytu | Do **2 metrów** |
+| Szybkość | Ponad **200 tagów/sekundę** |
+| Standardy | EPC Class 1 Gen2, EPC Gen 2 V2 |
+| Pasma | EU 865-868 MHz, US 902-928 MHz |
+
+> **💰 Oszczędność:** Wbudowany RFID eliminuje potrzebę zakupu dodatkowych czytników lub nakładek, znacząco obniżając TCO.
+
+---
+
+### 🔭 Skanery kodów kreskowych nowej generacji
+
+Zebra oferuje trzy nowe opcje skanerów:
+
+| Skaner | Zasięg | Zastosowanie |
+|--------|--------|--------------|
+| **AC670** | Do **30 m** (100 ft) | Premium – skanowanie + zdjęcia kolorowe |
+| **SR560** | Standardowy | Intensywne skanowanie kodów 2D |
+| **SR500** | Standardowy | Uniwersalny, każde oświetlenie |
+
+> **🌟 AC670 to przełom:** Jednocześnie odczytuje kod kreskowy **i robi kolorowe zdjęcie** z odległości ponad 30 metrów. Idealne dla kurierów (dowód dostawy) i magazynierów (wysokie regały).
+
+---
+
+### 📶 Najszybsza łączność bezprzewodowa
+
+| Technologia | Specyfikacja | Zalety |
+|-------------|--------------|--------|
+| **Wi-Fi 7** (802.11be) | Do 5764 Mbps, tri-band | 2x szybsza transmisja niż Wi-Fi 6 |
+| **5G Release 17** | Sub-6, NSA/SA, Dual SIM | Prywatne sieci 5G, VoNR |
+| **Bluetooth 6.0** | Class 1/2, BLE Audio 5.3 | Większy zasięg, lepsza ochrona |
+| **NFC** | ISO 14443, Mifare, FeliCa | Płatności, weryfikacja |
+| **GPS** | Triple-band GNSS | GPS, GLONASS, Galileo, BeiDou |
+
+---
+
+### 💪 Wytrzymałość bez kompromisów
+
+TC701 ustanawia **nowy standard wytrzymałości**:
+
+| Parametr | TC701 | Poprawa |
+|----------|-------|---------|
+| Upadki na beton | **3,66 m** (12 ft) | +50% |
+| Test tumble (1 m) | **3500 cykli** | +75% |
+| Uszczelnienie | **IP68 + IP65** | Podwójna ochrona |
+| Waga | **284 g** | -25% lżejszy |
+| Temperatura pracy | -20°C do +50°C | — |
+
+> **❄️ Nowość:** Testy **szoku termicznego** gwarantują niezawodną pracę przy przemieszczaniu się między strefami o skrajnie różnych temperaturach (np. chłodnie ↔ hala).
+
+---
+
+## 📸 Aparat 50 MP i możliwości fotograficzne
+
+| Aparat | Rozdzielczość | Funkcje |
+|--------|---------------|---------|
+| **Tylny** | **50 MP**, PDAF | LED, HDR, latarka |
+| **Przedni** | 8 MP | Stała ostrość |
+| **Ultraszeroki** (opcja) | 13 MP, PDAF | Całe regały jednym zdjęciem |
+
+**Enterprise AI Camera** dodaje:
+- ✅ Automatyczne wykrywanie brudnej soczewki
+- ✅ Powiadomienie o rozmazanym zdjęciu
+- ✅ Automatyczne rozmywanie twarzy (RODO)
+- ✅ Znak wodny z datą i godziną
+
+---
+
+## 🔋 Baterie i ładowanie
+
+| Typ baterii | Pojemność | Waga całkowita |
+|-------------|-----------|----------------|
+| Standardowa | 5000 mAh | 284 g |
+| Rozszerzona | **7240 mAh** | 314 g |
+| Bezprzewodowa (Qi) | 5000 mAh | — |
+
+**Kluczowe funkcje:**
+- **Hot Swap** – wymiana baterii bez wyłączania urządzenia
+- **Szybkie ładowanie** – 0 do 70% w 45 minut
+- **PowerPrecision+** – metryki stanu baterii w czasie rzeczywistym
+
+---
+
+## 🤖 Gotowość na aplikacje AI
+
+TC501 i TC701 to **pierwsze urządzenia Zebra zaprojektowane specjalnie pod kątem AI**:
+
+| Funkcja AI | Opis |
+|------------|------|
+| **Silnik AI w procesorze** | Przetwarzanie na urządzeniu bez opóźnień |
+| **12 GB RAM** | Dla wymagających modeli AI |
+| **Zebra AI Frontline Suite** | Narzędzia do szybkiego wdrażania AI |
+| **Aparat 50 MP** | Wysokiej jakości dane dla algorytmów wizyjnych |
+
+**Przykładowe zastosowania AI:**
+- 🛒 Automatyczne rozpoznawanie produktów na półkach
+- 🔍 Wykrywanie oszustw przy zwrotach
+- ✅ Inteligentna weryfikacja dostaw
+- 📦 Automatyczne zliczanie zapasów
+- ⚠️ Rozpoznawanie uszkodzeń opakowań
+
+---
+
+## 🏭 Zastosowania branżowe
+
+### Logistyka, transport i poczta
+- Dowody dostawy z dokumentacją fotograficzną
+- Śledzenie przesyłek i palet (RFID)
+- Wymiarowanie paczek (czujnik ToF)
+- Elektroniczne dzienniki kierowców
+- Fakturowanie i płatności mobilne
+
+### Handel detaliczny
+- Sprawdzanie cen i stanów magazynowych
+- Lokalizacja produktów (RFID)
+- Realizacja zamówień BOPIS/BOPAC
+- Inwentaryzacja z RFID
+- Zarządzanie półkami z AI
+
+### Magazyny i produkcja
+- Kompletacja zamówień (picking)
+- Przyjęcia i wydania towarów
+- Kontrola zapasów z RFID
+- Śledzenie WIP (Work in Progress)
+
+---
+
+## 🔧 Ekosystem akcesoriów
+
+### Stacje dokujące ShareCradle
+- **Nowa generacja** – większa konfigurowalność
+- **Kompatybilność wsteczna** – istniejące stacje działają z adapterami
+
+### Stacja robocza mobilna
+- **ZEC500 Enterprise Computer** z **Wireless Workstation Connect**
+- Bezprzewodowe połączenie z dużym monitorem
+- Natychmiastowe przełączanie trybu mobilny ↔ stacjonarny
+
+---
+
+## 📋 Pełna specyfikacja techniczna TC701
+
+| Kategoria | Parametr | Wartość |
+|-----------|----------|---------|
+| **Wymiary** | D x S x G | 165 x 77,9 x 15,5 mm |
+| **Waga** | Z baterią std. | 284 g |
+| **Wyświetlacz** | Typ | 6" AMOLED, 2160x1080, 1500 nit |
+| **Procesor** | CPU | Qualcomm Dragonwing Q-6690, 8 rdzeni |
+| **Pamięć** | RAM / Flash | 8-12 GB / 128-256 GB |
+| **System** | OS | Android 15 + 4 kolejne wersje |
+| **Łączność** | Wi-Fi | Wi-Fi 7 (802.11be), tri-band |
+| **Łączność** | Komórkowa | 5G Release 17, Dual SIM |
+| **Łączność** | BT / NFC | Bluetooth 6.0 / ISO 14443 |
+| **Wytrzymałość** | Upadki | 3,66 m na beton |
+| **Wytrzymałość** | IP | IP68 + IP65 |
+| **Wytrzymałość** | Temperatura | -20°C do +50°C |
+| **Zbieranie danych** | Skaner | SR500, SR560, AC670 (do 30 m) |
+| **Zbieranie danych** | RFID | Wbudowany UHF, do 2 m |
+| **Zbieranie danych** | Aparat | 50 MP tylny, 8 MP przedni |
+| **Bezpieczeństwo** | Certyfikaty | FIPS 140-2, Common Criteria |
+
+---
+
+## 🛡️ Wsparcie i usługi
+
+### Zebra OneCare™
+- Eliminacja nieoczekiwanych kosztów napraw
+- **LifeGuard for Android** – regularne aktualizacje OS i bezpieczeństwa
+- Elastyczne opcje: baterie, uruchomienie, logistyka
+
+### Zebra DNA
+Pełny pakiet oprogramowania:
+- **StageNow** – masowe wdrażanie konfiguracji
+- **Identity Guardian** – logowanie przez rozpoznawanie twarzy
+- **Device Guardian** – lokalizacja zagubionych urządzeń
+- **Enterprise Home Screen** – kontrolowany interfejs
+
+---
+
+## FAQ – Najczęściej zadawane pytania
+
+### Kiedy premiera TC501 i TC701?
+Urządzenia zostały oficjalnie zaprezentowane w **styczniu 2025**. Dostępność w Polsce – I/II kwartał 2025.
+
+### Ile kosztuje Zebra TC701?
+Ceny zależą od konfiguracji (RAM, pamięć, skaner, 5G). Skontaktuj się z nami po indywidualną wycenę.
+
+### Czy TC501/TC701 są kompatybilne z dotychczasowymi akcesoriami?
+Tak, stacje ShareCradle z poprzednich generacji działają z adapterami.
+
+### Jaki system operacyjny ma TC701?
+Android 15 z gwarancją aktualizacji do **4 kolejnych wersji** systemu.
+
+### Czy potrzebuję licencji na funkcje AI?
+Podstawowe funkcje AI są dostępne bez dodatkowych licencji. Zaawansowane narzędzia (Identity Guardian, Device Guardian) wymagają subskrypcji.
+
+### Która wersja jest lepsza – TC501 czy TC701?
+- **TC501** – dla handlu detalicznego i lekkich zastosowań magazynowych
+- **TC701** – dla centrum dystrybucyjnego, kurierów, pracy w chłodniach i na zewnątrz
+
+---
+
+## Podsumowanie
+
+**Zebra TC501 i TC701** to urządzenia zaprojektowane na następną dekadę:
+
+| Cecha | Wartość |
+|-------|---------|
+| 🧠 **Moc AI** | Procesor Dragonwing z dedykowanym silnikiem AI |
+| 📶 **Łączność** | Wi-Fi 7 + 5G + Bluetooth 6.0 |
+| 📡 **RFID** | Wbudowany czytnik UHF – bez dodatkowych nakładek |
+| 📸 **Aparat** | 50 MP z AI Camera |
+| 🔭 **Skaner** | AC670 z zasięgiem 30 m |
+| 💪 **Wytrzymałość** | 3,66 m upadki, IP68+IP65 |
+| ⚖️ **Waga** | Tylko 284 g |
+
+---
+
+## Zainteresowany TC501/TC701?
+
+> 📞 **Zadzwoń:** [+48 601 619 898](tel:+48601619898) — doradzimy w wyborze konfiguracji
+
+> 🔧 **Zapytaj o wycenę:** [Formularz kontaktowy →](/#formularz)
+
+Jako **autoryzowany partner Zebra** oferujemy:
+- Doradztwo w wyborze konfiguracji
+- Wdrożenia i konfigurację floty
+- Szkolenia dla użytkowników
+- Serwis gwarancyjny i pogwarancyjny
+
+---
+
+## Powiązane materiały
+
+- 📰 [Kontrakty serwisowe Zebra OneCare – przewodnik](/blog/kontrakty-serwisowe-zebra-onecare-przewodnik)
+- 📱 [Instrukcje obsługi terminali Zebra](/instrukcje)
+- 🎬 [Poradniki wideo](/poradniki-wideo)
+`
+  },
+  {
     slug: 'drukarka-zebra-nie-drukuje-przyczyny-rozwiazania',
     title: 'Drukarka Zebra nie drukuje etykiet - 7 najczęstszych przyczyn i jak je naprawić',
     excerpt: 'Twoja drukarka Zebra nie drukuje etykiet? Poznaj 7 najczęstszych przyczyn tego problemu: głowica, ribbon, kalibracja, sterowniki. Dowiedz się, jak je samodzielnie zdiagnozować i naprawić.',
