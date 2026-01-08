@@ -19255,6 +19255,413 @@ Jako **autoryzowany serwis Zebra** pomagamy w konfiguracji drukarek zgodnie z dy
 - Szkolenia z zakresu cyberbezpieczeństwa
 `
   }
+,
+  {
+    slug: 'zebra-printsecure-przewodnik-administratora-it',
+    title: 'Zebra PrintSecure – Kompletny przewodnik po zabezpieczeniach drukarek dla administratorów IT',
+    excerpt: 'Jak zabezpieczyć drukarki Zebra w środowisku korporacyjnym? Kompleksowy poradnik dla administratorów IT: Protected Mode, szyfrowanie TLS, zarządzanie usługami sieciowymi i zgodność z EU RED.',
+    coverImage: '/drukarki-zebra-dyrektywa-red.jpeg',
+    author: {
+      name: 'Zespół Serwis Zebra',
+      role: 'Autoryzowany serwis Zebra'
+    },
+    publishedAt: '2026-01-08',
+    readingTime: 15,
+    deviceType: 'drukarki',
+    subDeviceType: 'etykiet',
+    category: 'poradniki',
+    tags: ['PrintSecure', 'cyberbezpieczeństwo', 'Protected Mode', 'TLS', 'Link-OS', 'EU RED', 'administrator IT', 'szyfrowanie', 'certyfikaty', 'zarządzanie flotą', 'HTTPS', 'Bluetooth security'],
+    seo: {
+      metaTitle: 'Zebra PrintSecure – Przewodnik zabezpieczeń drukarek dla IT [2026]',
+      metaDescription: 'Kompletny przewodnik PrintSecure dla administratorów IT. Protected Mode, szyfrowanie TLS, wyłączanie usług, certyfikaty, zgodność EU RED. Konfiguracja krok po kroku.',
+      keywords: [
+        'zebra printsecure',
+        'zabezpieczenia drukarek zebra',
+        'protected mode zebra',
+        'szyfrowanie tls drukarka',
+        'link-os security',
+        'cyberbezpieczeństwo drukarek',
+        'eu red compliance drukarka',
+        'hasło administratora zebra',
+        'certyfikaty tls zebra',
+        'wyłączanie usług drukarka',
+        'https drukarka zebra',
+        'bluetooth security zebra',
+        'zarządzanie flotą drukarek',
+        'printer profile manager',
+        'konfiguracja bezpieczeństwa zebra',
+        'sgd commands zebra',
+        'firmware protection zebra',
+        'advanced security mode',
+        'audit log drukarka',
+        'syslog zebra'
+      ]
+    },
+    content: `
+# Zebra PrintSecure – Kompletny przewodnik po zabezpieczeniach drukarek dla administratorów IT
+
+> **🔒 Zabezpieczasz infrastrukturę druku w firmie?** Drukarki etykiet często pomijane w strategiach cyberbezpieczeństwa, stanowią potencjalny wektor ataku. Ten przewodnik pomoże Ci wdrożyć pełne zabezpieczenia PrintSecure na drukarkach Zebra Link-OS.
+
+---
+
+## Czym jest Zebra PrintSecure?
+
+**PrintSecure** to kompleksowe rozwiązanie zabezpieczające drukarki Zebra z platformą **Link-OS**. Umożliwia administratorom IT pełną kontrolę nad:
+
+- **Usługami sieciowymi** – FTP, HTTP, HTTPS, Telnet, SNMP
+- **Szyfrowaniem komunikacji** – TLS, certyfikaty SSL
+- **Uwierzytelnianiem użytkowników** – hasła, PIN-y, dostęp WWW
+- **Ochroną firmware'u** – blokada nieautoryzowanych aktualizacji
+- **Komunikacją bezprzewodową** – WiFi, Bluetooth
+
+---
+
+## Model CIA – fundament bezpieczeństwa
+
+Administrowanie drukarkami Zebra opiera się na modelu **CIA (Confidentiality, Integrity, Availability)**:
+
+| Aspekt | Realizacja w PrintSecure |
+|--------|--------------------------|
+| **Poufność** | Szyfrowanie TLS/SSL, HTTPS, uwierzytelnianie |
+| **Integralność** | Podpisy firmware'u, Protected Mode, kontrola dostępu |
+| **Dostępność** | Zdalne zarządzanie, monitoring, redundancja |
+
+---
+
+## Tryb chroniony (Protected Mode) – klucz do bezpieczeństwa
+
+**Protected Mode** to fundamentalna funkcja blokująca nieautoryzowane zmiany krytycznych ustawień.
+
+### Włączanie trybu chronionego
+
+Aby włączyć Protected Mode, wyślij do drukarki komendę JSON:
+
+    {}{
+      "protect":{   
+        "authentication":{
+          "username":"admin",
+          "password":"",
+          "type":"basic"
+        },
+        "operation":"setup",
+        "setup":{
+          "username":"admin",
+          "password":"TwojeHaslo14Znakow!"
+        }
+      }
+    }
+
+> **⚠️ WAŻNE:** Hasło musi mieć **od 14 do 128 znaków** i zawierać tylko drukowalne znaki ASCII.
+
+### Sprawdzenie stanu Protected Mode
+
+    ! U1 getvar "device.protected_mode"
+
+Drukarka odpowie wartością "on" lub "off".
+
+### Lista chronionych ustawień
+
+| Kategoria | Przykładowe ustawienia |
+|-----------|------------------------|
+| **Usługi sieciowe** | FTP, HTTP, HTTPS, LPD, SNMP, Telnet, TCP, UDP |
+| **Komunikacja bezprzewodowa** | Wi-Fi, Bluetooth, wykrywalność BT |
+| **Bezpieczeństwo** | Hasła, certyfikaty, poziomy bezpieczeństwa |
+| **Firmware** | Kontrola aktualizacji oprogramowania |
+| **Interfejs użytkownika** | Hasło do panelu, blokady menu |
+
+---
+
+## Advanced Security Mode (ASM) i EU RED
+
+Od wersji **Link-OS 7.4.2** drukarki w regionie EMEA są fabrycznie konfigurowane w trybie **Advanced Security Mode** – zgodnie z wymogami **dyrektywy EU RED**.
+
+### Domyślnie wyłączone usługi w ASM
+
+| Ustawienie SGD | Wartość | Opis |
+|----------------|---------|------|
+| device.allow_firmware_downloads | no | Blokada aktualizacji |
+| ip.ftp.enable | off | Wyłączony FTP |
+| ip.http.enable | off | Wyłączony HTTP |
+| ip.https.enable | off | Wyłączony HTTPS |
+| ip.snmp.enable | off | Wyłączony SNMP |
+| ip.telnet.enable | off | Wyłączony Telnet |
+| wlan.enable | off | Wyłączone Wi-Fi |
+
+### Usługi włączone w ASM
+
+| Ustawienie SGD | Wartość | Opis |
+|----------------|---------|------|
+| bluetooth.enable | on | Bluetooth do konfiguracji |
+| internal_wired.enable | on | Ethernet |
+| ip.ipp.enable | on | Szyfrowany protokół druku (IPPS) |
+| ip.tls.enable | on | Szyfrowana komunikacja TLS |
+
+---
+
+## 10 najlepszych praktyk bezpieczeństwa
+
+### 1. Planuj bezpieczeństwo od początku
+
+Przygotuj **politykę bezpieczeństwa** przed wdrożeniem drukarek – określ hasła, certyfikaty i wymagane ustawienia.
+
+### 2. Używaj szyfrowanych połączeń
+
+Zawsze preferuj **HTTPS zamiast HTTP**, **IPPS zamiast IPP**, **TLS zamiast TCP**. Unikaj podłączania drukarek bezpośrednio do internetu.
+
+### 3. Rotuj hasła i poświadczenia
+
+Planuj **regularną rotację haseł** (co 90 dni). Im dłużej hasło pozostaje niezmienione, tym większe ryzyko kompromitacji.
+
+### 4. Wyłącz nieużywane usługi
+
+Każda włączona usługa zwiększa powierzchnię ataku:
+
+    ! U1 setvar "ip.ftp.enable" "off"
+    ! U1 setvar "ip.telnet.enable" "off"
+    ! U1 setvar "ip.http.enable" "off"
+
+### 5. Wykorzystaj zdalne zarządzanie
+
+**Zebra Printer Profile Manager Enterprise** umożliwia masowe wdrażanie ustawień bezpieczeństwa na całej flocie.
+
+### 6. Ogranicz ujawnianie informacji
+
+Nie informuj niepotrzebnie o infrastrukturze drukarek. Ogranicz dostęp do dokumentacji konfiguracji.
+
+### 7. Monitoruj zaginione urządzenia
+
+Jeśli drukarka została skradziona – **natychmiast cofnij poświadczenia** (hasła, certyfikaty, dostępy).
+
+### 8. Wybieraj urządzenia z długim wsparciem
+
+Drukarki Zebra Link-OS otrzymują aktualizacje bezpieczeństwa przez wiele lat.
+
+### 9. Planuj wycofanie urządzeń
+
+Przed utylizacją wykonaj **decommissioning** – usuń dane, certyfikaty i hasła z pamięci.
+
+### 10. Stosuj model CIA na każdym etapie
+
+Od wdrożenia, przez eksploatację, aż po wycofanie – uwzględniaj poufność, integralność i dostępność.
+
+---
+
+## Zarządzanie usługami sieciowymi
+
+### Wyłączanie usług – komendy SGD
+
+| Usługa | Komenda wyłączenia |
+|--------|-------------------|
+| **FTP** | ! U1 setvar "ip.ftp.enable" "off" |
+| **HTTP** | ! U1 setvar "ip.http.enable" "off" |
+| **Telnet** | ! U1 setvar "ip.telnet.enable" "off" |
+| **SNMP** | ! U1 setvar "ip.snmp.enable" "off" |
+| **LPD** | ! U1 setvar "ip.lpd.enable" "off" |
+| **TCP Raw** | ! U1 setvar "ip.tcp.enable" "off" |
+
+> **💡 Wskazówka:** Telnet przesyła dane w postaci niezaszyfrowanej – **zawsze wyłączaj** w środowisku produkcyjnym.
+
+---
+
+## Szyfrowanie TLS i certyfikaty
+
+### Porty TLS drukarki Zebra
+
+| Port | Przeznaczenie |
+|------|---------------|
+| **9143** | TLS Raw (parser języka drukarki) |
+| **9243** | TLS JSON (konfiguracja JSON) |
+
+### Pliki certyfikatów TLS
+
+| Nazwa pliku | Zawartość |
+|-------------|-----------|
+| TLSRAW_CERT.NRD | Certyfikat drukarki |
+| TLSRAW_KEY.NRD | Klucz prywatny (nieszyfrowany) |
+| TLSRAW_CA.NRD | Łańcuch certyfikatów CA |
+
+### Test połączenia TLS
+
+    echo "~WC" | openssl s_client -connect 192.168.1.100:9143 -quiet
+
+### Obsługiwane szyfry TLS (Link-OS 7.4.2)
+
+- ECDHE-ECDSA-AES256-GCM-SHA384
+- ECDHE-RSA-AES256-GCM-SHA384
+- ECDHE-RSA-AES128-GCM-SHA256
+- AES256-GCM-SHA384
+- AES128-GCM-SHA256
+
+---
+
+## Zabezpieczenia Bluetooth
+
+### Wykrywalność Bluetooth
+
+Od Link-OS 6 wykrywalność BT jest **domyślnie wyłączona**. Aby sparować urządzenie:
+- Przytrzymaj przycisk FEED przez 5 sekund, lub
+- Włącz programowo: ! U1 setvar "bluetooth.discoverable" "on"
+
+### Poziomy bezpieczeństwa Bluetooth
+
+| Poziom | Opis |
+|--------|------|
+| 1 | Brak zabezpieczeń (niezalecany) |
+| 2 | Zabezpieczenie na poziomie usługi |
+| **3** | Zabezpieczenie na poziomie łącza (zalecany) |
+| 4 | Secure Simple Pairing |
+
+Komenda ustawienia:
+
+    ! U1 setvar "bluetooth.minimum_security_mode" "3"
+
+---
+
+## Ochrona firmware'u
+
+### Blokada aktualizacji
+
+    ! U1 setvar "device.allow_firmware_downloads" "no"
+
+### Jednorazowa autoryzacja aktualizacji
+
+W trybie chronionym, aby autoryzować pojedynczą aktualizację:
+
+    {}{
+      "protect":{
+        "authentication":{
+          "username":"admin",
+          "password":"TwojeHaslo",
+          "type":"basic"
+        },
+        "operation":"allow-next-firmware-download"
+      }
+    }
+
+---
+
+## Logowanie i audyt
+
+### Włączenie syslog
+
+    ! U1 setvar "device.syslog.enable" "on"
+    ! U1 setvar "device.syslog.log_max_file_size" "1000000"
+
+### Eksport logów do pliku
+
+    ! U1 setvar "device.syslog.save_local_file" "E:syslog.txt"
+
+### Zdalne logowanie (serwer syslog)
+
+    ! U1 setvar "device.syslog.server" "192.168.1.50"
+    ! U1 setvar "device.syslog.port" "514"
+
+---
+
+## Wdrożenie krok po kroku
+
+### Krok 1: Inwentaryzacja
+
+- Zidentyfikuj wszystkie drukarki w organizacji
+- Sprawdź model, wersję firmware, opcje komunikacyjne
+- Oceń aktualne ustawienia zabezpieczeń
+
+### Krok 2: Analiza wymagań
+
+- Jakie protokoły drukowania są używane?
+- Czy potrzebny jest dostęp WWW?
+- Jakie są wymagania regulacyjne (EU RED, RODO)?
+
+### Krok 3: Konfiguracja
+
+- Ustaw hasła administratora (min. 14 znaków)
+- Wyłącz nieużywane usługi
+- Skonfiguruj szyfrowanie TLS
+- Włącz Protected Mode
+
+### Krok 4: Weryfikacja
+
+- Wydrukuj raport konfiguracji
+- Sprawdź stan trybu chronionego
+- Przetestuj połączenia szyfrowane
+- Zweryfikuj blokadę nieautoryzowanych zmian
+
+---
+
+## Narzędzia do zarządzania
+
+| Narzędzie | Przeznaczenie |
+|-----------|---------------|
+| **Printer Profile Manager Enterprise** | Masowe zarządzanie flotą |
+| **Zebra Setup Utilities** | Konfiguracja pojedynczych drukarek |
+| **Link-OS SDK** | Integracja z systemami korporacyjnymi |
+
+> **💡 Pobierz narzędzia:** [Strona ze sterownikami i oprogramowaniem](/sterowniki)
+
+---
+
+## FAQ – Najczęściej zadawane pytania
+
+### Czy muszę włączyć Protected Mode na każdej drukarce osobno?
+
+Nie. Możesz użyć **Printer Profile Manager Enterprise** do masowego wdrożenia ustawień na całej flocie.
+
+### Jak odzyskać dostęp po zapomnieniu hasła Protected Mode?
+
+Konieczny jest **reset fabryczny** drukarki, który usunie wszystkie ustawienia. Zebra nie przechowuje haseł.
+
+### Czy wyłączenie HTTP uniemożliwi drukowanie?
+
+Nie. Drukowanie odbywa się przez inne protokoły (IPP, TCP 9100, TLS). HTTP służy tylko do konfiguracji przez przeglądarkę.
+
+### Jakie drukarki obsługują PrintSecure?
+
+Wszystkie drukarki Zebra z platformą **Link-OS** – serie ZD, ZT, ZQ i inne.
+
+### Czy TLS spowalnia drukowanie?
+
+Minimalnie. Szyfrowanie dodaje niewielki narzut, ale korzyści bezpieczeństwa znacznie przewyższają koszty wydajnościowe.
+
+---
+
+## Słownik terminów
+
+| Termin | Definicja |
+|--------|-----------|
+| **ASM** | Advanced Security Mode – tryb bezpieczny domyślnie |
+| **CIA** | Model bezpieczeństwa: Confidentiality, Integrity, Availability |
+| **EU RED** | European Union Radio Equipment Directive |
+| **IPPS** | Internet Printing Protocol Secure (szyfrowany IPP) |
+| **Link-OS** | Platforma oprogramowania drukarek Zebra |
+| **Protected Mode** | Tryb chroniony blokujący nieautoryzowane zmiany |
+| **SGD** | Set-Get-Do – format komend konfiguracyjnych Zebra |
+| **TLS** | Transport Layer Security – protokół szyfrowania |
+
+---
+
+## Powiązane materiały
+
+- 📰 [Twoja Zebra wymaga hasła? Konfiguracja trybu chronionego i dyrektywy EU RED](/blog/zebra-wymaga-hasla-dyrektywa-red-konfiguracja) – podstawowy przewodnik dla użytkowników
+- 🎬 [Dyrektywa RED – co oznacza dla drukarek Zebra?](/poradniki-wideo) – film instruktażowy
+- 📥 [Sterowniki i oprogramowanie Zebra](/sterowniki) – pobierz Printer Setup Utilities
+
+---
+
+## Potrzebujesz pomocy z wdrożeniem?
+
+Jeśli potrzebujesz wsparcia przy zabezpieczaniu floty drukarek:
+
+> 📞 **Zadzwoń:** +48 601 619 898 — konsultacje dla działów IT
+
+> 🔧 **Zgłoś zapytanie:** [Formularz kontaktowy →](/#formularz)
+
+Jako **autoryzowany serwis Zebra** oferujemy:
+- Audyty bezpieczeństwa floty drukarek
+- Wdrożenia PrintSecure i Protected Mode
+- Szkolenia dla administratorów IT
+- Wsparcie przy zgodności z EU RED
+`
+  }
 
 ]
 
