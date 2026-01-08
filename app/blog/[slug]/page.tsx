@@ -621,16 +621,29 @@ function parseMarkdown(markdown: string): string {
       }
     }
 
-    // Code blocks
+    // Code blocks with ```
     if (line.startsWith('```')) {
       if (!inCodeBlock) {
         inCodeBlock = true
-        codeBlockLang = line.slice(3).trim()
+        codeBlockLang = line.slice(3).trim() || 'text'
         codeBlockContent = []
         continue
       } else {
         inCodeBlock = false
-        result.push(`<pre class="bg-gray-900 text-gray-100 rounded-lg sm:rounded-xl p-3 sm:p-4 overflow-x-auto my-3 sm:my-4 text-xs sm:text-sm -mx-4 sm:mx-0"><code class="language-${codeBlockLang}">${codeBlockContent.join('\n')}</code></pre>`)
+        const codeId = `code-${Math.random().toString(36).substr(2, 9)}`
+        const codeContent = codeBlockContent.join('\n')
+        result.push(`
+          <div class="relative group my-3 sm:my-4 -mx-4 sm:mx-0">
+            <div class="absolute right-2 top-2 flex items-center gap-2 z-10">
+              <span class="text-xs text-gray-500 bg-gray-800 px-2 py-1 rounded hidden sm:inline">${codeBlockLang.toUpperCase()}</span>
+              <button 
+                onclick="navigator.clipboard.writeText(document.getElementById('${codeId}').textContent).then(() => { this.innerHTML = '✓ Skopiowano'; setTimeout(() => this.innerHTML = 'Kopiuj', 2000) })"
+                class="text-xs bg-gray-700 hover:bg-gray-600 text-gray-300 px-2 py-1 rounded transition-colors"
+              >Kopiuj</button>
+            </div>
+            <pre class="bg-gray-900 text-gray-100 rounded-lg sm:rounded-xl p-3 sm:p-4 pt-10 sm:pt-10 overflow-x-auto text-xs sm:text-sm"><code id="${codeId}" class="language-${codeBlockLang}">${codeContent}</code></pre>
+          </div>
+        `)
         continue
       }
     }
@@ -638,6 +651,46 @@ function parseMarkdown(markdown: string): string {
     if (inCodeBlock) {
       codeBlockContent.push(line.replace(/</g, '&lt;').replace(/>/g, '&gt;'))
       continue
+    }
+    
+    // Indented code blocks (4 spaces) - collect consecutive lines
+    if (line.startsWith('    ') && !inList && !inOrderedList) {
+      // Start collecting indented code
+      const indentedLines: string[] = [line.slice(4)]
+      let j = i + 1
+      while (j < lines.length && (lines[j].startsWith('    ') || lines[j].trim() === '')) {
+        if (lines[j].trim() === '') {
+          indentedLines.push('')
+        } else {
+          indentedLines.push(lines[j].slice(4))
+        }
+        j++
+      }
+      // Remove trailing empty lines
+      while (indentedLines.length > 0 && indentedLines[indentedLines.length - 1].trim() === '') {
+        indentedLines.pop()
+      }
+      if (indentedLines.length > 0) {
+        const codeId = `code-${Math.random().toString(36).substr(2, 9)}`
+        const codeContent = indentedLines.map(l => l.replace(/</g, '&lt;').replace(/>/g, '&gt;')).join('\n')
+        // Detect if it's JSON
+        const isJson = codeContent.trim().startsWith('{') || codeContent.trim().startsWith('[')
+        const lang = isJson ? 'JSON' : 'CODE'
+        result.push(`
+          <div class="relative group my-3 sm:my-4 -mx-4 sm:mx-0">
+            <div class="absolute right-2 top-2 flex items-center gap-2 z-10">
+              <span class="text-xs text-gray-500 bg-gray-800 px-2 py-1 rounded hidden sm:inline">${lang}</span>
+              <button 
+                onclick="navigator.clipboard.writeText(document.getElementById('${codeId}').textContent).then(() => { this.innerHTML = '✓ Skopiowano'; setTimeout(() => this.innerHTML = 'Kopiuj', 2000) })"
+                class="text-xs bg-gray-700 hover:bg-gray-600 text-gray-300 px-2 py-1 rounded transition-colors"
+              >Kopiuj</button>
+            </div>
+            <pre class="bg-gray-900 text-gray-100 rounded-lg sm:rounded-xl p-3 sm:p-4 pt-10 sm:pt-10 overflow-x-auto text-xs sm:text-sm"><code id="${codeId}">${codeContent}</code></pre>
+          </div>
+        `)
+        i = j - 1 // Skip processed lines
+        continue
+      }
     }
 
     // Horizontal rule
