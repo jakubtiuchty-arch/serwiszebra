@@ -8987,6 +8987,429 @@ Lub: przytrzymaj **FEED + CANCEL** podczas włączania drukarki
 `
       }
     ]
+  },
+
+  'zt411': {
+    model: 'ZT411',
+    title: 'Zebra ZT411 – Instrukcja obsługi po Polsku',
+    lastUpdated: '2026-01-09',
+    sourceDocument: 'Zebra ZT411 User Guide',
+    keywords: [
+      'zebra zt411 instrukcja',
+      'zt411 instrukcja po polsku',
+      'zebra zt411 manual',
+      'drukarka zebra zt411',
+      'zebra zt411 kalibracja',
+      'zt411 kalibracja czujników',
+      'zebra zt411 ribbon',
+      'zt411 zakładanie taśmy',
+      'zebra zt411 etykiety',
+      'zt411 ładowanie etykiet',
+      'zebra zt411 wyświetlacz dotykowy',
+      'zt411 touchscreen',
+      'zebra zt411 specyfikacja',
+      'zt411 parametry techniczne',
+      'zebra zt411 sterowniki',
+      'zt411 wifi ethernet',
+      'zebra zt411 linerless',
+      'zt411 obcinacz'
+    ],
+    sections: [
+      {
+        title: '1. Podstawowe informacje',
+        content: `
+### O drukarce Zebra ZT411
+
+Zebra ZT411 to przemysłowa drukarka etykiet nowej generacji, następca popularnego modelu ZT410. Wyposażona w **kolorowy wyświetlacz dotykowy 4,3"** oferuje intuicyjny interfejs z systemem menu, kreatorami konfiguracji i skrótami do ulubionych funkcji.
+
+### Parametry techniczne
+
+- **Szerokość druku:** do 104 mm (4,09")
+- **Technologia druku:** Termotransferowy / termiczny bezpośredni
+- **Rozdzielczość:** 203 dpi, 300 dpi lub 600 dpi
+- **Prędkość druku:** do 356 mm/s (14"/s) dla 203/300 dpi
+- **Maks. średnica rolki:** 203 mm (8")
+- **Średnica gilzy:** 25 mm – 76 mm (1" – 3")
+- **Długość ribbonu:** do 450 m
+
+### Rozdzielczości i szerokości druku
+
+- **203 dpi:** 832 dots (104 mm)
+- **300 dpi:** 1248 dots (106 mm)
+- **600 dpi:** 2496 dots (106 mm)
+
+### Złącza
+
+- USB 2.0 (standard)
+- RS-232 Serial (opcja)
+- Ethernet 10/100 RJ-45 (opcja)
+- Wi-Fi 802.11a/b/g/n/ac + Bluetooth 4.1 (opcja)
+- Parallel LPT (opcja)
+- USB Host (2x) – pendrive, skaner, klawiatura
+
+### Cechy charakterystyczne
+
+- **Kolorowy wyświetlacz dotykowy 4,3"** z wizualizacją 3D
+- Kreatory konfiguracji (Print Wizard, System Wizard)
+- Opcjonalny obcinacz standardowy lub linerless
+- Opcjonalny dispenser z nawijakiem podkładu
+- Opcjonalny nawijak mediów (Rewind)
+- Ruchomy czujnik mediów
+- Print Touch (NFC) do szybkiego parowania
+- Zgodność z dyrektywą EU RED (od 08/2025)
+`
+      },
+      {
+        title: '2. Wyświetlacz dotykowy',
+        content: `
+### Ekran główny (Home Screen)
+
+Ekran główny wyświetla aktualny status drukarki z **wizualizacją 3D** którą można obracać o 360°.
+
+**Kolory tła ekranu:**
+- **Zielony** – drukarka gotowa
+- **Żółty** – ostrzeżenie (alert)
+- **Czerwony** – błąd wymagający interwencji
+
+### Elementy ekranu głównego
+
+- **Menu** – dostęp do wszystkich ustawień drukarki
+- **Wizards** – kreatory konfiguracji krok po kroku
+- **Shortcuts** – skróty do ostatnio używanych i ulubionych
+- **Printer Info** – informacje o drukarce (IP, status, liczniki)
+
+### Zapisywanie ulubionych
+
+Dotknij ikony serca obok pozycji menu, aby dodać ją do ulubionych.
+
+### Wskaźniki LED
+
+- **STATUS** – ogólny stan drukarki
+- **PAUSE** – drukarka wstrzymana
+- **DATA** – odbieranie/przetwarzanie danych
+- **SUPPLIES** – stan materiałów (etykiety, ribbon)
+- **NETWORK** – stan połączenia sieciowego
+
+### Przyciski fizyczne
+
+- **PAUSE** – wstrzymanie/wznowienie druku
+- **FEED** – wysuw jednej etykiety
+- **CANCEL** – anulowanie (1x = następna, 2 sek. = wszystkie)
+`
+      },
+      {
+        title: '3. Ładowanie materiałów',
+        content: `
+### Obsługiwane typy materiałów
+
+- **Etykiety z przerwą (gap/notch)** – rozdzielone przerwami lub nacięciami
+- **Etykiety z czarnym znacznikiem (mark)** – czarny znacznik z tyłu
+- **Materiał ciągły (continuous)** – bez znaczników separacji
+- **Materiał składany (fanfold)** – stos składanych etykiet
+- **Materiał linerless** – etykiety bez podkładu
+
+### Tryby obsługi materiału
+
+- **Tear Off** – ręczne odrywanie (domyślny)
+- **Peel Off** – automatyczne odklejanie (wymaga dispensera)
+- **Liner Take-Up** – nawijanie podkładu
+- **Rewind** – nawijanie całych etykiet na rolkę
+- **Cutter** – automatyczne cięcie
+- **Linerless Cut** – cięcie etykiet bez podkładu
+
+### Ładowanie materiału (tryb Tear-Off)
+
+1. Podnieś drzwi komory mediów
+2. Otwórz głowicę – obróć dźwignię w górę
+3. Odsuń prowadnicę materiału na zewnątrz
+4. Włóż rolkę na wieszak, dociśnij do tyłu
+5. Przeprowadź materiał:
+   - Od wieszaka pod zespołem tancerza
+   - Przez czujnik mediów
+   - Pod głowicą drukującą
+6. Dosuń prowadnicę do krawędzi materiału
+7. Zamknij głowicę (dźwignia w dół)
+8. Zamknij drzwi
+9. Naciśnij **PAUSE** aby umożliwić drukowanie
+
+### Ładowanie ribbonu (Thermal Transfer)
+
+> **Uwaga:** Sprawdź czy materiał wymaga ribbonu – przesuń paznokciem po powierzchni. Czarny ślad = Direct Thermal (bez ribbonu).
+
+1. Podnieś drzwi komory mediów
+2. Otwórz głowicę (dźwignia w górę)
+3. Załaduj rolkę ribbonu na dolną gilzę (podającą)
+4. Przeprowadź ribbon pod głowicą i wokół jej lewej strony
+5. Nawiń ribbon na górną gilzę (odbiorczą) – kilka zwojów
+6. Zamknij głowicę
+
+> **Ważne:** Ribbon musi być szerszy niż materiał!
+`
+      },
+      {
+        title: '4. Kreatory konfiguracji',
+        content: `
+### Dostępne kreatory (Wizards)
+
+Dotknij **Wizards** na ekranie głównym:
+
+- **Set All Wizard** – uruchamia wszystkie kreatory po kolei
+- **System Wizard** – ustawienia systemowe (język, hasło)
+- **Connection Wizard** – konfiguracja połączeń sieciowych
+- **Print Wizard** – konfiguracja parametrów druku
+- **RFID Wizard** – konfiguracja RFID (tylko ZT411R)
+
+### Print Wizard – krok po kroku
+
+1. Dotknij **Wizards > Print > Start Print**
+2. Wybierz typ druku: **Thermal Transfer** lub **Direct Thermal**
+3. Wybierz typ etykiety: **Continuous**, **Gap/Notch** lub **Mark**
+4. Podaj szerokość etykiety
+5. Wybierz tryb obsługi (Tear Off, Peel Off, Rewind, Cutter...)
+6. Załaduj materiał zgodnie z instrukcjami na ekranie
+7. Ustaw etykietę nad czujnikiem (zielone światło)
+8. Zamknij głowicę
+9. Drukarka wykona kalibrację
+10. Wydrukuj etykietę testową
+
+### Print Quality Assistance
+
+Kreator jakości druku pomaga dobrać optymalne ustawienia:
+
+1. Wybierz liczbę etykiet testowych
+2. Drukarka wydrukuje serie z różnymi ustawieniami
+3. Wybierz numer etykiety z najlepszą jakością
+4. Drukarka automatycznie zastosuje te ustawienia
+`
+      },
+      {
+        title: '5. Menu użytkownika',
+        content: `
+### System Menu
+
+- **Language** – wybór języka (w tym polski)
+- **Program Language** – tryb diagnostyczny, Virtual Device, ZBI
+- **Settings** – format czasu, hasło, akcje przy włączeniu
+- **Energy Saving** – tryb oszczędzania energii
+
+### Connection Menu
+
+- **Networks** – reset sieci, sieć podstawowa, porty IP
+- **Wired** – ustawienia Ethernet (IP, maska, brama)
+- **WLAN** – ustawienia Wi-Fi (ESSID, bezpieczeństwo)
+- **Bluetooth** – włączanie BT, wykrywalność, parowanie
+
+### Print Menu
+
+- **Print Quality** – ciemność (0-30), prędkość, typ druku
+- **Image Adjust** – tryb obsługi, pozycja odrywania, backfeed
+- **Sensors** – kalibracja ręczna, czułość czujnika
+
+### Storage Menu
+
+- **USB** – kopiowanie plików z/na USB
+- **Print Asset Lists** – drukowanie list formatów, obrazów
+- **Print from E:** – drukowanie plików z pamięci drukarki
+`
+      },
+      {
+        title: '6. Kalibracja',
+        content: `
+### Kalibracja automatyczna
+
+Drukarka może automatycznie kalibrować czujniki przy:
+- **Włączeniu** (Power Up Action = CALIBRATE)
+- **Zamknięciu głowicy** (Head Close Action = CALIBRATE)
+
+Ustaw w: **Menu > System > Settings > Power Up Action / Head Close Action**
+
+Opcje:
+- **CALIBRATE** – pełna kalibracja
+- **SHORT CAL** – szybka kalibracja (tylko progi)
+- **FEED** – tylko wysuw do pierwszego punktu rejestracji
+- **NO MOTION** – brak ruchu
+
+### Kalibracja ręczna
+
+1. Dotknij **Menu > Print > Sensors > Manual Calibration**
+2. Dotknij **Start Calibration**
+3. Postępuj zgodnie z instrukcjami na ekranie:
+   - Załaduj ribbon (jeśli używany)
+   - Załaduj materiał
+   - Otwórz głowicę
+   - Ustaw etykietę nad czujnikiem
+   - Zamknij głowicę
+4. Drukarka przeprowadzi kalibrację
+5. Naciśnij **PAUSE** aby wyjść z trybu pauzy
+
+### Regulacja docisku głowicy
+
+Pokrętła regulacji docisku mają oznaczenia 1-4:
+
+- Szerokość 25 mm → wewnętrzne: 4, zewnętrzne: 1
+- Szerokość 51 mm → wewnętrzne: 3, zewnętrzne: 1
+- Szerokość 76 mm → wewnętrzne: 2.5, zewnętrzne: 1.5
+- Szerokość ≥ 89 mm → wewnętrzne: 2, zewnętrzne: 2
+
+### Ruchomy czujnik mediów
+
+ZT411 posiada **ruchomy czujnik mediów**. Przesuń czujnik w poziomie aby dopasować do pozycji przerw/nacięć na materiale.
+`
+      },
+      {
+        title: '7. Podłączenie do komputera',
+        content: `
+### Instalacja sterowników
+
+> **Ważne:** Zainstaluj sterowniki PRZED podłączeniem drukarki!
+
+1. Pobierz sterowniki z [naszej strony](/sterowniki)
+2. Uruchom instalator
+3. Wybierz model ZT411
+4. Podłącz drukarkę gdy kreator o to poprosi
+
+### Identyfikacja rozdzielczości
+
+Na naklejce z numerem części: **ZT411xY-xxxxxxxx**
+- Y = 2 → 203 dpi
+- Y = 3 → 300 dpi
+- Y = 6 → 600 dpi
+
+### Połączenie USB
+
+1. Zainstaluj sterowniki
+2. Podłącz kabel USB do drukarki i komputera
+3. Włącz drukarkę
+4. Windows wykryje drukarkę automatycznie
+
+### Połączenie Ethernet
+
+1. Zainstaluj sterowniki
+2. Podłącz kabel sieciowy RJ-45
+3. Włącz drukarkę
+4. Drukarka automatycznie pobierze IP z DHCP
+5. Sprawdź IP: **Printer Info** na ekranie głównym
+
+### Połączenie Wi-Fi
+
+1. Połącz się najpierw przez USB lub Ethernet
+2. Skonfiguruj ESSID: **Menu > Connection > WLAN > ESSID**
+3. Ustaw zabezpieczenia
+4. Wykonaj reset sieci
+
+### Print Touch (NFC)
+
+Zbliż telefon z aplikacją Zebra Printer Setup Utility do logo Print Touch na drukarce aby szybko sparować urządzenie.
+`
+      },
+      {
+        title: '8. Konserwacja',
+        content: `
+### Harmonogram czyszczenia
+
+- **Głowica drukująca** – co 1 rolkę ribbonu / materiału DT
+- **Wałek dociskowy (platen)** – co 1 rolkę ribbonu / materiału DT
+- **Czujniki** – co 1 rolkę
+- **Obcinacz standardowy** – co 1-3 rolki
+- **Obcinacz linerless** – co 1-3 rolki
+- **Dispenser** – w razie problemów z odklejaniem
+
+### Czyszczenie głowicy i wałka
+
+> **Ostrzeżenie:** Głowica może być gorąca! Uwaga na ESD.
+
+1. Otwórz drzwi i wyjmij ribbon oraz materiał
+2. **Głowica:** Przetrzyj brązowy pasek wacikiem z alkoholem (99,7%)
+3. **Wałek:** Przetrzyj wacikiem obracając go ręcznie
+4. Poczekaj aż wyschnie
+5. Załaduj materiał i ribbon
+
+### Czyszczenie obcinacza standardowego
+
+> **Ostrzeżenie:** Wyłącz drukarkę i odłącz zasilanie!
+
+1. Usuń materiał z obcinacza
+2. Zdejmij osłonę obcinacza (śruba motylkowa)
+3. Obróć pokrętło silnika aby odsłonić ostrze V
+4. Wyczyść ostrze wacikiem z alkoholem
+5. Po wyschnięciu nasmaruj ostrze olejem silikonowym
+6. Załóż osłonę
+
+> 📘 **Szczegółowy poradnik:** [Jak wyczyścić głowicę drukarki Zebra](/blog/jak-wyczyscic-glowice-drukarki-zebra)
+`
+      },
+      {
+        title: '9. Rozwiązywanie problemów',
+        content: `
+### Komunikaty na wyświetlaczu
+
+- **PAPER OUT** → Załaduj materiał
+- **RIBBON OUT** → Załaduj ribbon
+- **HEAD OPEN** → Zamknij głowicę
+- **HEAD OVER TEMP** → Poczekaj na ostygnięcie
+- **HEAD UNDER TEMP** → Przenieś w cieplejsze miejsce
+- **CUTTER JAM** → Usuń zacięcie w obcinaczu
+
+### Problemy z jakością druku
+
+- **Blade wydruki** → Zwiększ Darkness, wyczyść głowicę
+- **Przepalone wydruki** → Zmniejsz Darkness, zwiększ Speed
+- **Puste obszary (pionowe linie)** → Wyczyść lub wymień głowicę
+- **Marszczenie ribbonu** → Sprawdź naprężenie, wyrównaj ribbon
+- **Przesuwanie się materiału** → Dostosuj docisk głowicy
+
+### Problemy z materiałem linerless
+
+- **Zacięcie w obcinaczu** → Wyczyść klej z ostrza
+- **Materiał przykleja się** → Sprawdź kompatybilność materiału
+- **Nieprawidłowe cięcie** → Nasmaruj ostrze
+
+### Druk etykiety konfiguracji
+
+**Menu > System > Settings > Print: System Settings**
+
+Lub: przytrzymaj **FEED + CANCEL** przez 2 sekundy
+
+> Potrzebujesz pomocy? [Skontaktuj się z naszym serwisem](/kontakt)
+`
+      },
+      {
+        title: 'FAQ – Najczęściej zadawane pytania',
+        content: `
+### Co to jest drukarka Zebra ZT411?
+
+**Odpowiedź:** Zebra ZT411 to **przemysłowa drukarka etykiet** nowej generacji z **kolorowym wyświetlaczem dotykowym 4,3"**. Jest następcą popularnego modelu ZT410, oferując intuicyjny interfejs z wizualizacją 3D.
+
+### Jaka jest różnica między ZT410 a ZT411?
+
+**Odpowiedź:** **ZT411** ma **kolorowy wyświetlacz dotykowy 4,3"** z wizualizacją 3D i kreatorami. **ZT410** ma tradycyjny wyświetlacz LCD z przyciskami. Specyfikacje druku są zbliżone.
+
+### Jakie rozdzielczości obsługuje ZT411?
+
+**Odpowiedź:** ZT411 jest dostępna w trzech rozdzielczościach: **203 dpi**, **300 dpi** i **600 dpi**. Sprawdź numer części drukarki (ZT411x**2** = 203 dpi, **3** = 300 dpi, **6** = 600 dpi).
+
+### Jak skalibrować drukarkę Zebra ZT411?
+
+**Odpowiedź:** Menu > Print > Sensors > Manual Calibration > Start Calibration. Postępuj zgodnie z instrukcjami na ekranie dotykowym.
+
+### Jaka jest maksymalna prędkość druku drukarki Zebra ZT411?
+
+**Odpowiedź:** Maksymalna prędkość druku Zebra ZT411 wynosi **356 mm/s (14 cali/s)** dla wersji 203 dpi i 300 dpi.
+
+### Czy ZT411 obsługuje etykiety linerless (bez podkładu)?
+
+**Odpowiedź:** Tak, ZT411 obsługuje etykiety linerless, ale wymaga **opcjonalnego obcinacza linerless**. Zebra zaleca materiały Zebra ZeroLiner.
+
+### Co to jest Print Touch (NFC) w ZT411?
+
+**Odpowiedź:** Print Touch to technologia **NFC** umożliwiająca szybkie parowanie telefonu/tabletu z drukarką. Zbliż urządzenie z aplikacją Zebra do logo Print Touch na drukarce.
+
+### Jaka jest różnica między ZT411 a ZT411R?
+
+**Odpowiedź:** **ZT411R** posiada wbudowany **enkoder RFID UHF** do programowania tagów. Standardowy **ZT411** nie ma funkcji RFID.
+`
+      }
+    ]
   }
 }
 
