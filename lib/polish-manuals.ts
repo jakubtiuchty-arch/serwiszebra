@@ -9410,6 +9410,386 @@ Lub: przytrzymaj **FEED + CANCEL** przez 2 sekundy
 `
       }
     ]
+  },
+
+  'zt421': {
+    model: 'ZT421',
+    title: 'Zebra ZT421 – Instrukcja obsługi po Polsku',
+    lastUpdated: '2026-01-09',
+    sourceDocument: 'Zebra ZT421 User Guide',
+    keywords: [
+      'zebra zt421 instrukcja',
+      'zt421 instrukcja po polsku',
+      'zebra zt421 manual',
+      'drukarka zebra zt421',
+      'zebra zt421 kalibracja',
+      'zt421 6 cali',
+      'zebra zt421 ribbon',
+      'zt421 zakładanie taśmy',
+      'zebra zt421 etykiety',
+      'zt421 ładowanie etykiet',
+      'zebra zt421 wyświetlacz dotykowy',
+      'zt421 touchscreen',
+      'zebra zt421 specyfikacja',
+      'zt421 parametry techniczne',
+      'zebra zt421 sterowniki',
+      'zt421 wifi ethernet',
+      'zebra drukarka 6 cali',
+      'drukarka etykiet paletowych'
+    ],
+    sections: [
+      {
+        title: '1. Podstawowe informacje',
+        content: `
+### O drukarce Zebra ZT421
+
+Zebra ZT421 to przemysłowa drukarka etykiet nowej generacji o **szerokości druku 6 cali (168 mm)**, następca popularnego modelu ZT420. Wyposażona w **kolorowy wyświetlacz dotykowy 4,3"** oferuje intuicyjny interfejs. Przeznaczona do drukowania **dużych etykiet wysyłkowych, palet i oznaczeń przemysłowych**.
+
+### Parametry techniczne
+
+- **Szerokość druku:** do 168 mm (6,6") – **szersza niż ZT411**
+- **Technologia druku:** Termotransferowy / termiczny bezpośredni
+- **Rozdzielczość:** 203 dpi lub 300 dpi
+- **Prędkość druku:** do 305 mm/s (12"/s)
+- **Maks. średnica rolki:** 203 mm (8")
+- **Średnica gilzy:** 25 mm – 76 mm (1" – 3")
+- **Długość ribbonu:** do 450 m
+- **Maks. szerokość etykiety:** 178 mm (7")
+
+### Porównanie ZT411 vs ZT421
+
+- **ZT411:** szerokość druku 104 mm (4"), do 356 mm/s
+- **ZT421:** szerokość druku **168 mm (6")**, do 305 mm/s
+
+### Złącza
+
+- USB 2.0 (standard)
+- RS-232 Serial (opcja)
+- Ethernet 10/100 RJ-45 (opcja)
+- Wi-Fi 802.11a/b/g/n/ac + Bluetooth 4.1 (opcja)
+- Parallel LPT (opcja)
+- USB Host (2x)
+
+### Cechy charakterystyczne
+
+- **Szerokość druku 6 cali (168 mm)** – idealna do dużych etykiet
+- **Kolorowy wyświetlacz dotykowy 4,3"** z wizualizacją 3D
+- Kreatory konfiguracji (Print Wizard, System Wizard)
+- Opcjonalny obcinacz standardowy lub linerless
+- Opcjonalny dispenser z nawijakiem podkładu
+- Ruchomy czujnik mediów
+- Print Touch (NFC)
+`
+      },
+      {
+        title: '2. Zastosowania ZT421',
+        content: `
+### Typowe zastosowania szerokiej drukarki 6"
+
+Drukarka ZT421 jest idealna do:
+
+- **Logistyka i wysyłka:** duże etykiety wysyłkowe, etykiety na palety
+- **Magazynowanie:** oznaczenia regałów, lokalizacji, stref
+- **Produkcja:** etykiety produktowe, WIP labels, oznaczenia partii
+- **Transport:** etykiety przewozowe, dokumenty CMR
+- **Retail:** etykiety cenowe wielkoformatowe, oznaczenia promocji
+- **Healthcare:** etykiety na pojemniki, oznaczenia próbek
+
+### Specyfikacja materiałów dla ZT421
+
+- **Maks. szerokość materiału:** 178 mm (7")
+- **Min. szerokość materiału:** 25 mm (1")
+- **Maks. szerokość druku:** 168 mm (6,6")
+- **Maks. średnica rolki:** 203 mm (8")
+`
+      },
+      {
+        title: '3. Wyświetlacz dotykowy',
+        content: `
+### Ekran główny (Home Screen)
+
+Ekran główny wyświetla aktualny status drukarki z **wizualizacją 3D** którą można obracać o 360°.
+
+**Kolory tła ekranu:**
+- **Zielony** – drukarka gotowa
+- **Żółty** – ostrzeżenie (alert)
+- **Czerwony** – błąd wymagający interwencji
+
+### Elementy ekranu głównego
+
+- **Menu** – dostęp do wszystkich ustawień drukarki
+- **Wizards** – kreatory konfiguracji krok po kroku
+- **Shortcuts** – skróty do ulubionych pozycji
+- **Printer Info** – informacje o drukarce (IP, status, liczniki)
+
+### Wskaźniki LED
+
+- **STATUS** – ogólny stan drukarki
+- **PAUSE** – drukarka wstrzymana
+- **DATA** – odbieranie/przetwarzanie danych
+- **SUPPLIES** – stan materiałów (etykiety, ribbon)
+- **NETWORK** – stan połączenia sieciowego
+
+### Przyciski fizyczne
+
+- **PAUSE** – wstrzymanie/wznowienie druku
+- **FEED** – wysuw jednej etykiety
+- **CANCEL** – anulowanie (1x = następna, 2 sek. = wszystkie)
+`
+      },
+      {
+        title: '4. Ładowanie materiałów',
+        content: `
+### Obsługiwane typy materiałów
+
+- **Etykiety z przerwą (gap/notch)** – rozdzielone przerwami lub nacięciami
+- **Etykiety z czarnym znacznikiem (mark)** – czarny znacznik z tyłu
+- **Materiał ciągły (continuous)** – bez znaczników separacji
+- **Materiał składany (fanfold)** – stos składanych etykiet
+- **Materiał linerless** – etykiety bez podkładu
+
+### Tryby obsługi materiału
+
+- **Tear Off** – ręczne odrywanie (domyślny)
+- **Peel Off** – automatyczne odklejanie (wymaga dispensera)
+- **Liner Take-Up** – nawijanie podkładu
+- **Rewind** – nawijanie całych etykiet na rolkę
+- **Cutter** – automatyczne cięcie
+- **Linerless Cut** – cięcie etykiet bez podkładu
+
+### Ładowanie materiału (tryb Tear-Off)
+
+1. Podnieś drzwi komory mediów
+2. Otwórz głowicę – obróć dźwignię w górę
+3. Odsuń prowadnicę materiału na zewnątrz
+4. Włóż rolkę na wieszak, dociśnij do tyłu
+5. Przeprowadź materiał:
+   - Od wieszaka pod zespołem tancerza
+   - Przez czujnik mediów
+   - Pod głowicą drukującą
+6. Dosuń prowadnicę do krawędzi materiału
+7. Zamknij głowicę (dźwignia w dół)
+8. Zamknij drzwi
+9. Naciśnij **PAUSE** aby umożliwić drukowanie
+
+### Ładowanie ribbonu (Thermal Transfer)
+
+> **Uwaga:** Dla ZT421 używaj ribbonu o szerokości do 178 mm (7"). Ribbon musi być szerszy niż materiał!
+
+1. Podnieś drzwi komory mediów
+2. Otwórz głowicę (dźwignia w górę)
+3. Załaduj rolkę ribbonu na dolną gilzę (podającą)
+4. Przeprowadź ribbon pod głowicą i wokół jej lewej strony
+5. Nawiń ribbon na górną gilzę (odbiorczą) – kilka zwojów
+6. Zamknij głowicę
+`
+      },
+      {
+        title: '5. Kreatory konfiguracji',
+        content: `
+### Dostępne kreatory (Wizards)
+
+Dotknij **Wizards** na ekranie głównym:
+
+- **Set All Wizard** – uruchamia wszystkie kreatory po kolei
+- **System Wizard** – ustawienia systemowe (język, hasło)
+- **Connection Wizard** – konfiguracja połączeń sieciowych
+- **Print Wizard** – konfiguracja parametrów druku
+- **RFID Wizard** – konfiguracja RFID (tylko ZT421R)
+
+### Print Wizard – krok po kroku
+
+1. Dotknij **Wizards > Print > Start Print**
+2. Wybierz typ druku: **Thermal Transfer** lub **Direct Thermal**
+3. Wybierz typ etykiety: **Continuous**, **Gap/Notch** lub **Mark**
+4. Podaj szerokość etykiety (do **168 mm** dla ZT421)
+5. Wybierz tryb obsługi (Tear Off, Peel Off, Rewind, Cutter...)
+6. Załaduj materiał zgodnie z instrukcjami na ekranie
+7. Ustaw etykietę nad czujnikiem (zielone światło)
+8. Zamknij głowicę
+9. Drukarka wykona kalibrację
+10. Wydrukuj etykietę testową
+`
+      },
+      {
+        title: '6. Kalibracja',
+        content: `
+### Kalibracja automatyczna
+
+Drukarka może automatycznie kalibrować czujniki przy:
+- **Włączeniu** (Power Up Action = CALIBRATE)
+- **Zamknięciu głowicy** (Head Close Action = CALIBRATE)
+
+### Kalibracja ręczna
+
+1. Dotknij **Menu > Print > Sensors > Manual Calibration**
+2. Dotknij **Start Calibration**
+3. Postępuj zgodnie z instrukcjami na ekranie
+4. Po zakończeniu naciśnij **PAUSE**
+
+### Regulacja docisku głowicy dla ZT421
+
+Ze względu na **szerszą głowicę 6"**, prawidłowa regulacja docisku jest szczególnie ważna.
+
+Pokrętła regulacji (wewnętrzne i zewnętrzne) mają oznaczenia 1-4:
+
+- Szerokość 25-50 mm → wewnętrzne: 4, zewnętrzne: 1
+- Szerokość 51-76 mm → wewnętrzne: 3, zewnętrzne: 1.5
+- Szerokość 77-102 mm → wewnętrzne: 2.5, zewnętrzne: 2
+- Szerokość 103-127 mm → wewnętrzne: 2, zewnętrzne: 2.5
+- Szerokość 128-168 mm → wewnętrzne: 2, zewnętrzne: 3
+
+### Ruchomy czujnik mediów
+
+ZT421 posiada **ruchomy czujnik mediów**. Przesuń czujnik w poziomie aby dopasować do pozycji przerw/nacięć na materiale.
+`
+      },
+      {
+        title: '7. Podłączenie do komputera',
+        content: `
+### Instalacja sterowników
+
+> **Ważne:** Zainstaluj sterowniki PRZED podłączeniem drukarki!
+
+1. Pobierz sterowniki z [naszej strony](/sterowniki)
+2. Uruchom instalator
+3. Wybierz model **ZT421**
+4. Podłącz drukarkę gdy kreator o to poprosi
+
+### Identyfikacja rozdzielczości
+
+Na naklejce z numerem części: **ZT421xY-xxxxxxxx**
+- Y = 2 → 203 dpi
+- Y = 3 → 300 dpi
+
+### Połączenie USB
+
+1. Zainstaluj sterowniki
+2. Podłącz kabel USB do drukarki i komputera
+3. Włącz drukarkę
+4. Windows wykryje drukarkę automatycznie
+
+### Połączenie Ethernet
+
+1. Zainstaluj sterowniki
+2. Podłącz kabel sieciowy RJ-45
+3. Włącz drukarkę
+4. Sprawdź IP: **Printer Info** na ekranie głównym
+
+### Połączenie Wi-Fi
+
+1. Połącz się najpierw przez USB lub Ethernet
+2. Skonfiguruj ESSID: **Menu > Connection > WLAN > ESSID**
+3. Ustaw zabezpieczenia
+4. Wykonaj reset sieci
+
+### Print Touch (NFC)
+
+Zbliż telefon z aplikacją Zebra do logo Print Touch na drukarce aby szybko sparować urządzenie.
+`
+      },
+      {
+        title: '8. Konserwacja',
+        content: `
+### Harmonogram czyszczenia
+
+- **Głowica drukująca** – co 1 rolkę ribbonu / materiału DT
+- **Wałek dociskowy (platen)** – co 1 rolkę ribbonu / materiału DT
+- **Czujniki** – co 1 rolkę
+- **Obcinacz** – co 1-3 rolki
+
+### Czyszczenie głowicy i wałka
+
+> **Ostrzeżenie:** Głowica może być gorąca! Uwaga na ESD.
+
+> **Uwaga:** Ze względu na **szerszą głowicę 6"** w ZT421, czyszczenie wymaga więcej uwagi aby objąć całą powierzchnię drukującą.
+
+1. Otwórz drzwi i wyjmij ribbon oraz materiał
+2. **Głowica:** Przetrzyj brązowy pasek wacikiem z alkoholem (99,7%)
+3. **Wałek:** Przetrzyj wacikiem obracając go ręcznie
+4. Poczekaj aż wyschnie
+5. Załaduj materiał i ribbon
+
+### Czyszczenie obcinacza
+
+1. Wyłącz drukarkę i odłącz zasilanie
+2. Zdejmij osłonę obcinacza
+3. Wyczyść ostrze wacikiem z alkoholem
+4. Nasmaruj olejem silikonowym
+5. Załóż osłonę
+
+> 📘 **Szczegółowy poradnik:** [Jak wyczyścić głowicę drukarki Zebra](/blog/jak-wyczyscic-glowice-drukarki-zebra)
+`
+      },
+      {
+        title: '9. Rozwiązywanie problemów',
+        content: `
+### Komunikaty na wyświetlaczu
+
+- **PAPER OUT** → Załaduj materiał
+- **RIBBON OUT** → Załaduj ribbon
+- **HEAD OPEN** → Zamknij głowicę
+- **HEAD OVER TEMP** → Poczekaj na ostygnięcie
+- **CUTTER JAM** → Usuń zacięcie w obcinaczu
+
+### Problemy specyficzne dla ZT421
+
+- **Nierównomierny druk na szerokości** → Dostosuj oba pokrętła docisku
+- **Marszczenie ribbonu przy szerszym materiale** → Sprawdź naprężenie i wyrównanie ribbonu
+- **Przesuwanie się szerokiego materiału** → Wyrównaj prowadnice, sprawdź docisk
+
+### Problemy z jakością druku
+
+- **Blade wydruki** → Zwiększ Darkness, wyczyść głowicę
+- **Przepalone wydruki** → Zmniejsz Darkness, zwiększ Speed
+- **Puste obszary (pionowe linie)** → Wyczyść lub wymień głowicę
+
+### Druk etykiety konfiguracji
+
+**Menu > System > Settings > Print: System Settings**
+
+Lub: przytrzymaj **FEED + CANCEL** przez 2 sekundy
+
+> Potrzebujesz pomocy? [Skontaktuj się z naszym serwisem](/kontakt)
+`
+      },
+      {
+        title: 'FAQ – Najczęściej zadawane pytania',
+        content: `
+### Co to jest drukarka Zebra ZT421?
+
+**Odpowiedź:** Zebra ZT421 to **przemysłowa drukarka etykiet** o szerokości druku **6 cali (168 mm)** z kolorowym wyświetlaczem dotykowym 4,3". Jest przeznaczona do drukowania dużych etykiet wysyłkowych, paletowych i przemysłowych.
+
+### Jaka jest różnica między ZT411 a ZT421?
+
+**Odpowiedź:** **ZT421** ma szerokość druku **168 mm (6 cali)** – idealna do dużych etykiet i palet. **ZT411** ma szerokość druku **104 mm (4 cale)** – do standardowych etykiet. ZT421 jest wolniejsza (305 mm/s vs 356 mm/s).
+
+### Do czego służy drukarka 6-calowa ZT421?
+
+**Odpowiedź:** ZT421 jest idealna do: dużych etykiet wysyłkowych, etykiet na palety, oznaczeń regałów magazynowych, etykiet przewozowych (CMR), wielkoformatowych etykiet cenowych.
+
+### Jakie rozdzielczości obsługuje ZT421?
+
+**Odpowiedź:** ZT421 jest dostępna w dwóch rozdzielczościach: **203 dpi** i **300 dpi**. W przeciwieństwie do ZT411, nie ma wersji 600 dpi.
+
+### Jak skalibrować drukarkę Zebra ZT421?
+
+**Odpowiedź:** Menu > Print > Sensors > Manual Calibration > Start Calibration. Postępuj zgodnie z instrukcjami na ekranie dotykowym.
+
+### Jaka jest maksymalna szerokość etykiety w ZT421?
+
+**Odpowiedź:** Maksymalna szerokość materiału to **178 mm (7")**, a maksymalna szerokość druku to **168 mm (6,6")**.
+
+### Dlaczego druk jest nierównomierny na szerokości w ZT421?
+
+**Odpowiedź:** Ze względu na szerszą głowicę 6", kluczowa jest prawidłowa regulacja docisku. Dostosuj oba pokrętła (wewnętrzne i zewnętrzne) zgodnie z szerokością materiału.
+
+### Jaka jest różnica między ZT421 a ZT421R?
+
+**Odpowiedź:** **ZT421R** posiada wbudowany **enkoder RFID UHF** do programowania tagów. Standardowy **ZT421** nie ma funkcji RFID.
+`
+      }
+    ]
   }
 }
 
