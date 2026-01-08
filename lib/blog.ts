@@ -3290,6 +3290,20 @@ Można mieć **7 aktywnych połączeń** Bluetooth jednocześnie (ograniczenie p
       ]
     },
     content: `
+> **Szybka odpowiedź:** Aby zresetować terminal Zebra, przejdź do **Ustawienia → System → Opcje resetowania**. Wybierz **Enterprise Reset** (zachowuje konfigurację firmową) lub **Factory Reset** (kasuje wszystko). Dla terminali TC21/TC52/MC33 możesz też użyć kombinacji **Power + Volume Up** w trybie Recovery. Enterprise Reset kasuje dane użytkownika, ale zachowuje certyfikaty i WiFi korporacyjne. Factory Reset przywraca stan fabryczny – użyj przed sprzedażą urządzenia.
+
+---
+
+## Statystyki i kluczowe informacje
+
+- **90% problemów** z zawieszaniem się terminala rozwiązuje prosty Soft Reset (restart)
+- **Enterprise Reset trwa 5-10 minut**, Factory Reset do **15 minut**
+- Po Factory Reset **100% danych użytkownika jest usuwane** – bez możliwości odzyskania
+- Enterprise Reset **zachowuje folder /enterprise**, certyfikaty SSL i konfigurację MDM
+- Blokada FRP (Factory Reset Protection) aktywuje się gdy konto Google nie zostało usunięte przed resetem
+
+---
+
 ## Kiedy potrzebujesz resetu?
 
 Reset terminala Zebra może być konieczny gdy:
@@ -3299,17 +3313,17 @@ Reset terminala Zebra może być konieczny gdy:
 - Terminal nie uruchamia się prawidłowo (boot loop)
 - Przygotowujesz urządzenie do sprzedaży
 
-> **⚠️ Uwaga:** Reset kasuje dane! Przed resetem **zrób kopię zapasową** ważnych plików i upewnij się, że znasz dane logowania do konta Google (FRP).
+> **Uwaga:** Reset kasuje dane! Przed resetem **zrób kopię zapasową** ważnych plików i upewnij się, że znasz dane logowania do konta Google (FRP).
 
 ---
 
 ## Rodzaje resetów - co wybrać?
 
-| Typ resetu | Co kasuje | Co zachowuje | Kiedy użyć |
-|------------|-----------|--------------|------------|
-| **Soft Reset** | Nic | Wszystko | Drobne problemy, zawieszenie |
-| **Enterprise Reset** | Dane użytkownika (/data) | Partycja /enterprise, certyfikaty | Przekazanie innemu pracownikowi |
-| **Factory Reset** | WSZYSTKO | Nic (stan fabryczny) | Sprzedaż, poważne błędy |
+**Soft Reset** – nie kasuje niczego, zachowuje wszystko. Użyj przy drobnych problemach i zawieszeniu.
+
+**Enterprise Reset** – kasuje dane użytkownika (/data), zachowuje partycję /enterprise i certyfikaty. Idealny przy przekazywaniu terminala innemu pracownikowi.
+
+**Factory Reset** – kasuje WSZYSTKO, nic nie zachowuje (stan fabryczny). Użyj przed sprzedażą lub przy poważnych błędach.
 
 ---
 
@@ -3493,17 +3507,35 @@ Jeśli nie znasz danych logowania do konta Google:
 
 ## 7. Co się zachowuje po resecie?
 
-| Element | Enterprise Reset | Factory Reset |
-|---------|-----------------|---------------|
-| Aplikacje użytkownika | ❌ Usunięte | ❌ Usunięte |
-| Dane aplikacji | ❌ Usunięte | ❌ Usunięte |
-| Zdjęcia, pliki | ❌ Usunięte | ❌ Usunięte |
-| Konta (Google, email) | ❌ Usunięte | ❌ Usunięte |
-| WiFi korporacyjne | ✅ Zachowane | ❌ Usunięte |
-| Certyfikaty | ✅ Zachowane | ❌ Usunięte |
-| Konfiguracja MDM | ✅ Zachowane | ❌ Usunięte |
-| Folder /enterprise | ✅ Zachowane | ❌ Usunięte |
-| System operacyjny | ✅ Bez zmian | ✅ Bez zmian |
+### Enterprise Reset:
+
+**Usunięte:**
+- Aplikacje użytkownika
+- Dane aplikacji
+- Zdjęcia i pliki
+- Konta (Google, email)
+
+**Zachowane:**
+- WiFi korporacyjne
+- Certyfikaty SSL
+- Konfiguracja MDM
+- Folder /enterprise
+- System operacyjny
+
+### Factory Reset:
+
+**Usunięte:**
+- Aplikacje użytkownika
+- Dane aplikacji
+- Zdjęcia i pliki
+- Konta (Google, email)
+- WiFi korporacyjne
+- Certyfikaty SSL
+- Konfiguracja MDM
+- Folder /enterprise
+
+**Zachowane:**
+- System operacyjny (bez zmian)
 
 ---
 
@@ -3547,20 +3579,38 @@ Jako **autoryzowany partner serwisowy Zebra** oferujemy:
 
 ## FAQ - Najczęściej zadawane pytania
 
-### Czy Enterprise Reset usuwa aplikacje firmowe?
-Tak, usuwa aplikacje, ale **zachowuje folder /enterprise**. Jeśli aplikacje były tam zainstalowane lub masz MDM, zostaną przywrócone automatycznie.
+### Jak zresetować terminal Zebra do ustawień fabrycznych?
+Przejdź do **Ustawienia → System → Opcje resetowania** i wybierz **Factory Reset** lub **Enterprise Reset**. Alternatywnie, wyłącz terminal i włącz trzymając **Power + Volume Up**, aby wejść w Recovery Mode.
 
-### Ile trwa Factory Reset?
-Zwykle **5-15 minut**. Jeśli trwa dłużej niż 30 minut, może być problem - nie przerywaj procesu!
+### Jaka jest różnica między Factory Reset a Enterprise Reset?
+**Enterprise Reset** kasuje dane użytkownika, ale zachowuje konfigurację firmową (WiFi korporacyjne, certyfikaty, folder /enterprise). **Factory Reset** kasuje wszystko i przywraca stan fabryczny.
+
+### Czy Enterprise Reset usuwa aplikacje firmowe?
+Tak, usuwa aplikacje, ale **zachowuje folder /enterprise**. Jeśli aplikacje były tam zainstalowane lub masz MDM, zostaną przywrócone automatycznie po resecie.
+
+### Ile trwa Factory Reset terminala Zebra?
+Zwykle **5-15 minut**. Jeśli trwa dłużej niż 30 minut, może być problem - nie przerywaj procesu, nawet jeśli ekran wydaje się zamrożony.
 
 ### Czy mogę cofnąć Factory Reset?
-**Nie.** Wszystkie dane są trwale usunięte. Jedyna opcja to przywrócenie z kopii zapasowej (jeśli ją masz).
+**Nie.** Wszystkie dane są trwale usunięte bez możliwości odzyskania. Jedyna opcja to przywrócenie z kopii zapasowej, jeśli ją wcześniej wykonałeś.
 
 ### Terminal nie wchodzi w Recovery Mode - co robić?
-Upewnij się że wykonujesz procedurę prawidłowo: najpierw **Restart** z menu Power, a dopiero **podczas restartu** przytrzymaj PTT (lub Trigger dla MC). Jeśli nadal nie działa, możliwa awaria przycisków.
+Upewnij się że wykonujesz procedurę prawidłowo: najpierw wybierz **Restart** z menu Power, a dopiero **podczas restartu** przytrzymaj przycisk PTT (lub Trigger dla serii MC). Jeśli nadal nie działa, możliwa awaria przycisków - skontaktuj się z serwisem.
 
 ### Czy Factory Reset naprawi boot loop?
-**Często tak**, jeśli boot loop jest spowodowany błędem oprogramowania. Jeśli nie pomoże, może być potrzebne wgranie systemu przez ADB lub naprawa sprzętowa.
+**Często tak**, jeśli boot loop jest spowodowany błędem oprogramowania. Jeśli Factory Reset nie pomoże, może być potrzebne wgranie systemu przez ADB lub naprawa sprzętowa.
+
+### Co to jest blokada FRP i jak jej uniknąć?
+**FRP (Factory Reset Protection)** to zabezpieczenie Google - po Factory Reset terminal wymaga logowania na poprzednie konto Google. Aby uniknąć blokady, **usuń konto Google** przed resetem (Ustawienia → Konta → Google → Usuń konto).
+
+### Jak wejść w Recovery Mode na terminalu Zebra TC21/TC52?
+Wybierz **Restart** z menu Power, a podczas restartu (gdy pojawi się logo Zebra) przytrzymaj przycisk **PTT** aż pojawi się menu Recovery. Następnie użyj przycisków głośności do nawigacji i Power do potwierdzenia.
+
+### Jak wejść w Recovery Mode na terminalu Zebra MC33/MC93?
+Wybierz **Restart** z menu Power, a podczas restartu przytrzymaj **przycisk skanera (Trigger)**. W menu Recovery nawiguj przyciskami głośności, potwierdzaj przyciskiem Power.
+
+### Czy reset terminala usunie hasło ekranu blokady?
+**Tak.** Zarówno Enterprise Reset jak i Factory Reset usuwają hasło/PIN/wzór blokady ekranu. Jednak FRP (konto Google) pozostaje aktywne po Factory Reset, jeśli nie zostało wcześniej usunięte.
 `
   },
   // ========== ARTYKUŁ 10: Kody błędów ==========
