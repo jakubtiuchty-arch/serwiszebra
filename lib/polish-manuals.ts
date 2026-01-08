@@ -8601,6 +8601,392 @@ Etykieta konfiguracji zawiera aktualne ustawienia RFID:
 `
       }
     ]
+  },
+
+  'zt231': {
+    model: 'ZT231',
+    title: 'Zebra ZT231 – Instrukcja obsługi po Polsku',
+    lastUpdated: '2026-01-09',
+    sourceDocument: 'Zebra ZT231 User Guide',
+    keywords: [
+      'zebra zt231 instrukcja',
+      'zt231 instrukcja po polsku',
+      'zebra zt231 manual',
+      'drukarka zebra zt231',
+      'zebra zt231 kalibracja',
+      'zt231 kalibracja czujników',
+      'zebra zt231 ribbon',
+      'zt231 zakładanie taśmy',
+      'zebra zt231 etykiety',
+      'zt231 ładowanie etykiet',
+      'zebra zt231 wyświetlacz dotykowy',
+      'zt231 touchscreen',
+      'zebra zt231 specyfikacja',
+      'zt231 parametry techniczne',
+      'zebra zt231 sterowniki',
+      'zt231 wifi ethernet'
+    ],
+    sections: [
+      {
+        title: '1. Podstawowe informacje',
+        content: `
+### O drukarce Zebra ZT231
+
+Zebra ZT231 to drukarka przemysłowa nowej generacji, następca popularnego modelu ZT230. Wyposażona w **kolorowy wyświetlacz dotykowy** oferuje intuicyjny interfejs z systemem menu, kreatorami konfiguracji i skrótami do ulubionych funkcji.
+
+### Parametry techniczne
+
+- **Technologia druku:** Termotransferowy / termiczny bezpośredni
+- **Rozdzielczość:** 203 dpi lub 300 dpi
+- **Prędkość druku:** do 356 mm/s (14 cali/s)
+- **Szerokość druku:** do 104 mm (4,09 cala)
+- **Maks. średnica rolki:** 203 mm (8 cali)
+- **Średnica gilzy:** 25 mm – 76 mm (1" – 3")
+- **Długość ribbonu:** do 450 m
+
+### Złącza
+
+- USB 2.0 (standard)
+- RS-232 Serial (opcja)
+- Ethernet 10/100 RJ-45 (opcja)
+- Wi-Fi 802.11a/b/g/n/ac + Bluetooth (opcja)
+- USB Host (pendrive, skaner, klawiatura)
+
+### Cechy charakterystyczne
+
+- **Kolorowy wyświetlacz dotykowy** z intuicyjnym interfejsem
+- Kreatory konfiguracji (Print Wizard, System Wizard, Connection Wizard)
+- System skrótów i ulubionych
+- Metalowa konstrukcja przemysłowa
+- 5 wskaźników LED statusu
+- Opcjonalny obcinacz, dispenser lub nawijak podkładu
+- Zgodność z dyrektywą EU RED (od 08/2025)
+`
+      },
+      {
+        title: '2. Wyświetlacz dotykowy',
+        content: `
+### Ekran główny (Home Screen)
+
+Ekran główny wyświetla aktualny status drukarki i umożliwia dostęp do wszystkich funkcji. Możesz obracać widok drukarki o 360° dotykając i przeciągając.
+
+**Kolory tła ekranu:**
+- **Zielony** – drukarka gotowa
+- **Żółty** – ostrzeżenie (alert)
+- **Czerwony** – błąd wymagający interwencji
+
+### Elementy ekranu głównego
+
+- **Menu** – dostęp do wszystkich ustawień drukarki
+- **Wizards** – kreatory konfiguracji krok po kroku
+- **Shortcuts** – skróty do ostatnio używanych i ulubionych pozycji
+- **Printer Info** – informacje o drukarce (IP, status, liczniki)
+
+### Zapisywanie ulubionych
+
+Dotknij ikony serca obok pozycji menu, aby dodać ją do ulubionych.
+
+### Wskaźniki LED
+
+- **STATUS** – ogólny stan drukarki
+- **PAUSE** – drukarka wstrzymana
+- **DATA** – odbieranie/przetwarzanie danych
+- **SUPPLIES** – stan materiałów (etykiety, ribbon)
+- **NETWORK** – stan połączenia sieciowego
+
+### Przyciski fizyczne
+
+- **PAUSE** – wstrzymanie/wznowienie druku
+- **FEED** – wysuw jednej etykiety
+- **CANCEL** – anulowanie (1x = następna, 2 sek. = wszystkie)
+`
+      },
+      {
+        title: '3. Ładowanie materiałów',
+        content: `
+### Obsługiwane typy materiałów
+
+- **Etykiety z przerwą (gap/notch)** – rozdzielone przerwami lub nacięciami
+- **Etykiety z czarnym znacznikiem (mark)** – czarny znacznik z tyłu
+- **Materiał ciągły (continuous)** – bez znaczników separacji
+- **Materiał składany (fanfold)** – stos składanych etykiet
+
+### Tryby obsługi materiału
+
+- **Tear Off** – ręczne odrywanie (domyślny)
+- **Peel Off** – automatyczne odklejanie (wymaga dispensera)
+- **Liner Take-Up** – nawijanie podkładu (wymaga nawijaka)
+- **Cutter** – automatyczne cięcie (wymaga obcinacza)
+
+### Ładowanie ribbonu (Thermal Transfer)
+
+> **Uwaga:** Sprawdź czy materiał wymaga ribbonu – przesuń paznokciem po powierzchni. Czarny ślad = Direct Thermal (bez ribbonu).
+
+1. Otwórz drzwi komory mediów
+2. Załaduj rolkę ribbonu na dolną gilzę (podającą)
+3. Sprawdź pustą gilzę na górnej gilzie (odbiorczej)
+4. Przeprowadź ribbon pod głowicą drukującą
+5. Nawiń ribbon na gilzę odbiorczą (kilka zwojów)
+6. Zamknij głowicę (po załadowaniu materiału)
+
+> **Ważne:** Ribbon musi być szerszy niż materiał!
+
+### Ładowanie materiału (tryb Tear-Off)
+
+1. Otwórz drzwi komory mediów
+2. Obróć dźwignię głowicy w górę (zwolnij głowicę)
+3. Odsuń prowadnicę materiału
+4. Włóż rolkę na wieszak, dociśnij do tyłu
+5. Podnieś prowadnicę i dosuń do krawędzi rolki
+6. Przeprowadź materiał przez szczelinę czujnika
+7. Dosuń zewnętrzną prowadnicę do krawędzi materiału
+8. Zamknij głowicę (dźwignia w dół)
+9. Zamknij drzwi
+10. Naciśnij **PAUSE** aby umożliwić drukowanie
+`
+      },
+      {
+        title: '4. Kreatory konfiguracji',
+        content: `
+### Dostępne kreatory (Wizards)
+
+Dotknij **Wizards** na ekranie głównym:
+
+- **Set All Wizard** – uruchamia wszystkie kreatory po kolei
+- **System Wizard** – ustawienia systemowe (język, hasło)
+- **Connection Wizard** – konfiguracja połączeń sieciowych
+- **Print Wizard** – konfiguracja parametrów druku
+
+### Print Wizard – krok po kroku
+
+1. Dotknij **Wizards > Print > Start Print**
+2. Wybierz typ druku: **Thermal Transfer** lub **Direct Thermal**
+3. Wybierz typ etykiety: **Continuous**, **Gap/Notch** lub **Mark**
+4. Podaj szerokość etykiety
+5. Wybierz tryb obsługi (Tear Off, Peel Off, Cutter...)
+6. Załaduj materiał zgodnie z instrukcjami na ekranie
+7. Ustaw etykietę nad czujnikiem (zielone światło)
+8. Zamknij głowicę
+9. Drukarka wykona kalibrację
+10. Wydrukuj etykietę testową
+
+### Print Quality Assistance
+
+Kreator jakości druku pomaga dobrać optymalne ustawienia:
+
+1. Wybierz liczbę etykiet testowych
+2. Drukarka wydrukuje serie etykiet z różnymi ustawieniami
+3. Wybierz numer etykiety z najlepszą jakością
+4. Drukarka automatycznie zastosuje te ustawienia
+`
+      },
+      {
+        title: '5. Menu użytkownika',
+        content: `
+### System Menu
+
+- **Language** – wybór języka (w tym polski)
+- **Program Language** – tryb diagnostyczny, język poleceń
+- **Settings** – format czasu, hasło, akcje przy włączeniu
+- **Energy Saving** – tryb oszczędzania energii
+
+### Connection Menu
+
+- **Networks** – reset sieci, sieć podstawowa, porty IP
+- **Wired** – ustawienia Ethernet (IP, maska, brama)
+- **Wi-Fi** – ustawienia bezprzewodowe (ESSID, bezpieczeństwo)
+- **Bluetooth** – włączanie BT, wykrywalność, parowanie
+
+### Print Menu
+
+- **Print Quality** – ciemność, prędkość, typ druku
+- **Image Adjust** – tryb obsługi, pozycja odrywania
+- **Sensors** – kalibracja ręczna, typ czujnika
+
+### Storage Menu
+
+- **USB** – kopiowanie plików z/na USB
+- **Print Asset Lists** – drukowanie list formatów, obrazów
+- **Print from E:** – drukowanie plików z pamięci drukarki
+`
+      },
+      {
+        title: '6. Kalibracja',
+        content: `
+### Kalibracja automatyczna
+
+Drukarka może automatycznie kalibrować czujniki przy:
+- **Włączeniu** (Power Up Action = CALIBRATE)
+- **Zamknięciu głowicy** (Head Close Action = CALIBRATE)
+
+Ustaw w: **Menu > System > Settings > Power Up Action / Head Close Action**
+
+### Kalibracja ręczna
+
+1. Dotknij **Menu > Print > Sensors > Manual Calibration**
+2. Dotknij **Start Calibration**
+3. Postępuj zgodnie z instrukcjami na ekranie:
+   - Załaduj ribbon (jeśli używany)
+   - Załaduj materiał
+   - Otwórz głowicę
+   - Wysuń materiał
+   - Ustaw etykietę nad czujnikiem
+   - Zamknij głowicę
+4. Drukarka przeprowadzi kalibrację
+5. Naciśnij **PAUSE** aby wyjść z trybu pauzy
+
+### Regulacja docisku głowicy
+
+Pokrętła regulacji docisku mają oznaczenia 1-4:
+
+- Szerokość ≥ 89 mm → wewnętrzne: 2, zewnętrzne: 2
+- Szerokość 76 mm → wewnętrzne: 2.5, zewnętrzne: 1.5
+- Szerokość 51 mm → wewnętrzne: 3, zewnętrzne: 1
+- Szerokość 25 mm → wewnętrzne: 4, zewnętrzne: 1
+`
+      },
+      {
+        title: '7. Podłączenie do komputera',
+        content: `
+### Instalacja sterowników
+
+> **Ważne:** Zainstaluj sterowniki PRZED podłączeniem drukarki!
+
+1. Pobierz sterowniki z [naszej strony](/sterowniki)
+2. Uruchom instalator
+3. Wybierz model ZT231
+4. Podłącz drukarkę gdy kreator o to poprosi
+
+### Połączenie USB
+
+1. Zainstaluj sterowniki
+2. Podłącz kabel USB do drukarki
+3. Podłącz kabel USB do komputera
+4. Włącz drukarkę
+5. Windows wykryje drukarkę automatycznie
+
+### Połączenie Ethernet
+
+1. Zainstaluj sterowniki
+2. Podłącz kabel sieciowy RJ-45
+3. Włącz drukarkę
+4. Drukarka automatycznie pobierze IP z DHCP
+5. Sprawdź IP: **Printer Info** na ekranie głównym
+6. Dodaj drukarkę w systemie Windows
+
+### Połączenie Wi-Fi
+
+1. Połącz się najpierw przez USB lub Ethernet
+2. Skonfiguruj ESSID: **Menu > Connection > Wi-Fi > ESSID**
+3. Ustaw zabezpieczenia
+4. Wykonaj reset sieci: **Menu > Connection > Networks > Reset Network**
+`
+      },
+      {
+        title: '8. Konserwacja',
+        content: `
+### Harmonogram czyszczenia
+
+- **Głowica drukująca** – co 1 rolkę ribbonu / materiału DT
+- **Wałek dociskowy** – co 1 rolkę ribbonu / materiału DT
+- **Czujniki** – co 1 rolkę
+- **Ścieżka materiału/ribbonu** – co 1 rolkę
+- **Dispenser** – w razie problemów z odklejaniem
+- **Obcinacz** – w razie problemów z cięciem
+
+### Czyszczenie głowicy i wałka
+
+> **Ostrzeżenie:** Głowica może być gorąca! Uwaga na ESD.
+
+1. Otwórz drzwi i wyjmij ribbon oraz materiał
+2. Przetrzyj brązowy pasek głowicy wacikiem z alkoholem (99,7%)
+3. Przetrzyj wałek dociskowy obracając go ręcznie
+4. Poczekaj aż wyschnie
+5. Załaduj materiał i ribbon
+
+### Czyszczenie obcinacza
+
+> **Ostrzeżenie:** Wyłącz drukarkę i odłącz zasilanie!
+
+1. Zdejmij osłonę obcinacza (śruba motylkowa)
+2. Obróć pokrętło aby odsłonić ostrze V
+3. Wyczyść ostrze wacikiem z alkoholem
+4. Po wyschnięciu nasmaruj ostrze olejem silikonowym
+5. Załóż osłonę
+
+> 📘 **Szczegółowy poradnik:** [Jak wyczyścić głowicę drukarki Zebra](/blog/jak-wyczyscic-glowice-drukarki-zebra)
+`
+      },
+      {
+        title: '9. Rozwiązywanie problemów',
+        content: `
+### Komunikaty na wyświetlaczu
+
+- **PAPER OUT** → Załaduj materiał
+- **RIBBON OUT** → Załaduj ribbon
+- **HEAD OPEN** → Zamknij głowicę
+- **HEAD OVER TEMP** → Poczekaj na ostygnięcie
+- **HEAD UNDER TEMP** → Przenieś w cieplejsze miejsce
+
+### Problemy z jakością druku
+
+- **Blade wydruki** → Zwiększ Darkness, wyczyść głowicę
+- **Przepalone wydruki** → Zmniejsz Darkness, zwiększ Speed
+- **Puste obszary** → Wyczyść lub wymień głowicę
+- **Marszczenie ribbonu** → Sprawdź naprężenie, wyczyść ścieżkę
+
+### Druk etykiety konfiguracji
+
+**Menu > System > Settings > Print: System Settings**
+
+Lub: przytrzymaj **FEED + CANCEL** przez 2 sekundy
+
+### Druk profilu czujników
+
+**Menu > Print > Sensors > Print: Sensor Profile**
+
+Lub: przytrzymaj **FEED + CANCEL** podczas włączania drukarki
+
+> Potrzebujesz pomocy? [Skontaktuj się z naszym serwisem](/kontakt)
+`
+      },
+      {
+        title: 'FAQ – Najczęściej zadawane pytania',
+        content: `
+### Co to jest drukarka Zebra ZT231?
+
+**Odpowiedź:** Zebra ZT231 to **drukarka przemysłowa** nowej generacji z **kolorowym wyświetlaczem dotykowym**. Jest następcą popularnego modelu ZT230, oferując intuicyjny interfejs z kreatorami konfiguracji.
+
+### Jaka jest różnica między ZT230 a ZT231?
+
+**Odpowiedź:** **ZT231** ma **kolorowy wyświetlacz dotykowy** z kreatorami konfiguracji. **ZT230** ma tradycyjny **wyświetlacz LCD** z przyciskami. Specyfikacje druku są zbliżone.
+
+### Jak skalibrować drukarkę Zebra ZT231?
+
+**Odpowiedź:** Menu > Print > Sensors > Manual Calibration > Start Calibration. Postępuj zgodnie z instrukcjami na ekranie dotykowym.
+
+### Jak zmienić język na polski w ZT231?
+
+**Odpowiedź:** Menu > System > Language > Polski. Drukarka automatycznie zmieni język interfejsu.
+
+### Jaka jest maksymalna prędkość druku drukarki Zebra ZT231?
+
+**Odpowiedź:** Maksymalna prędkość druku Zebra ZT231 wynosi **356 mm/s (14 cali/s)**.
+
+### Jak wydrukować raport konfiguracji na ZT231?
+
+**Odpowiedź:** Menu > System > Settings > Print: System Settings. Lub przytrzymaj **FEED + CANCEL** przez 2 sekundy.
+
+### Czy ZT231 obsługuje WiFi i Bluetooth?
+
+**Odpowiedź:** Tak, WiFi 802.11a/b/g/n/ac i Bluetooth są dostępne jako **opcja**. Sprawdź konfigurację swojej drukarki.
+
+### Jaka jest różnica między ZT231 a ZT231R?
+
+**Odpowiedź:** **ZT231R** posiada wbudowany **enkoder RFID UHF** do programowania tagów. Standardowy **ZT231** nie ma funkcji RFID.
+`
+      }
+    ]
   }
 }
 
