@@ -19082,7 +19082,7 @@ Nowe drukarki Zebra objęte dyrektywą RED zawierają **specjalną ulotkę** z:
 
 ### Krok 1: Pobierz Printer Setup Utilities
 
-1. Wejdź na stronę wskazaną na ulotce lub [zebra.com/setup](https://www.zebra.com/setup)
+1. Wejdź na [naszą stronę ze sterownikami](/sterowniki) lub stronę wskazaną na ulotce
 2. Pobierz program **Printer Setup Utilities** (Windows)
 3. Zainstaluj program na komputerze
 
@@ -19183,7 +19183,7 @@ Nie. Pierwsza konfiguracja zabezpieczeń wymaga **połączenia USB**. Po skonfig
 
 ### Gdzie znajdę kod QR do konfiguracji?
 
-Kod QR znajduje się na **ulotce w pudełku** drukarki. Jeśli go zgubiłeś, wejdź bezpośrednio na [zebra.com/setup](https://www.zebra.com/setup).
+Kod QR znajduje się na **ulotce w pudełku** drukarki. Jeśli go zgubiłeś, pobierz oprogramowanie z [naszej strony ze sterownikami](/sterowniki).
 
 ### Ile trwa konfiguracja?
 
