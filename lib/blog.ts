@@ -19010,8 +19010,6 @@ Jako **autoryzowany serwis Zebra** pomożemy Ci:
       ]
     },
     content: `
-# Twoja Zebra wymaga hasła? Kompletny przewodnik po dyrektywie EU RED
-
 > **⚠️ Nowa drukarka Zebra wymaga hasła i nie chce drukować?** Od **1 sierpnia 2025 roku** wszystkie drukarki Zebra z modułami radiowymi (WiFi, Bluetooth) wprowadzane na rynek EMEA wymagają obowiązkowej konfiguracji zabezpieczeń. Dowiedz się, jak szybko skonfigurować hasło i uruchomić drukarkę.
 
 ---
@@ -19298,8 +19296,6 @@ Jako **autoryzowany serwis Zebra** pomagamy w konfiguracji drukarek zgodnie z dy
       ]
     },
     content: `
-# Zebra PrintSecure – Kompletny przewodnik po zabezpieczeniach drukarek dla administratorów IT
-
 > **🔒 Zabezpieczasz infrastrukturę druku w firmie?** Drukarki etykiet często pomijane w strategiach cyberbezpieczeństwa, stanowią potencjalny wektor ataku. Ten przewodnik pomoże Ci wdrożyć pełne zabezpieczenia PrintSecure na drukarkach Zebra Link-OS.
 
 ---
