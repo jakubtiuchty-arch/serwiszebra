@@ -112,7 +112,7 @@ export const blogPosts: BlogPost[] = [
     slug: 'zebra-tc501-tc701-terminal-mobilny-ai-premiera-2026',
     title: 'Zebra TC501 i TC701 – Terminale mobilne gotowe na erę AI (Premiera 2026)',
     excerpt: 'Poznaj nowe komputery mobilne Zebra TC501 i TC701 z procesorem Qualcomm Dragonwing, Wi-Fi 7, 5G i wbudowanym czytnikiem RFID. Do 300% więcej mocy, 12 GB RAM i gotowość na aplikacje AI.',
-    coverImage: '/blog/terminal-zebra-tc58-nie-dziala-naprawa.jpeg',
+    coverImage: '/blog/zebra-tc501-zebra-tc701.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Autoryzowany serwis Zebra'
