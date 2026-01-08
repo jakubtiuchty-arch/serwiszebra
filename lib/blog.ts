@@ -19082,7 +19082,7 @@ Nowe drukarki Zebra objęte dyrektywą RED zawierają **specjalną ulotkę** z:
 
 ### Krok 1: Pobierz Printer Setup Utilities
 
-1. Wejdź na [naszą stronę ze sterownikami](/sterowniki) lub stronę wskazaną na ulotce
+1. Wejdź na [naszą stronę ze sterownikami i oprogramowaniem](/sterowniki)
 2. Pobierz program **Printer Setup Utilities** (Windows)
 3. Zainstaluj program na komputerze
 
