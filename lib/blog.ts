@@ -159,7 +159,7 @@ export const blogPosts: BlogPost[] = [
       ]
     },
     content: `
-> **🚀 Premiera 2026:** Zebra wprowadza przełomowe terminale mobilne **TC501** i **TC701** – pierwsze urządzenia zaprojektowane od podstaw z myślą o aplikacjach AI. Poznaj specyfikację, możliwości i zastosowania najnowszych komputerów mobilnych dla logistyki, magazynów i handlu.
+> **Premiera 2026:** Zebra wprowadza przełomowe terminale mobilne **TC501** i **TC701** – pierwsze urządzenia zaprojektowane od podstaw z myślą o aplikacjach AI. Poznaj specyfikację, możliwości i zastosowania najnowszych komputerów mobilnych dla logistyki, magazynów i handlu.
 
 ---
 
@@ -176,7 +176,7 @@ export const blogPosts: BlogPost[] = [
 
 ## Najważniejsze nowości – co wyróżnia TC501/TC701?
 
-### 🧠 Procesor z dedykowanym silnikiem AI
+### Procesor z dedykowanym silnikiem AI
 
 Oba modele wyposażono w najnowszy procesor **Qualcomm Dragonwing™ Q-6690**:
 
@@ -188,11 +188,11 @@ Oba modele wyposażono w najnowszy procesor **Qualcomm Dragonwing™ Q-6690**:
 | Flash | Do **256 GB** UFS 3.1 | **8x więcej** |
 | MicroSD | Do **2 TB** | — |
 
-> **💡 Kluczowe:** Dragonwing Q-6690 posiada **dedykowany silnik AI** umożliwiający uruchamianie zaawansowanych aplikacji sztucznej inteligencji **bezpośrednio na urządzeniu**, bez konieczności połączenia z chmurą.
+> **Kluczowe:** Dragonwing Q-6690 posiada **dedykowany silnik AI** umożliwiający uruchamianie zaawansowanych aplikacji sztucznej inteligencji **bezpośrednio na urządzeniu**, bez konieczności połączenia z chmurą.
 
 ---
 
-### 📱 Wyświetlacz AMOLED klasy premium
+### Wyświetlacz AMOLED klasy premium
 
 TC701 wyposażono w **6-calowy wyświetlacz AMOLED** o parametrach:
 
@@ -208,7 +208,7 @@ Ekran jest czytelny **nawet w pełnym słońcu** i obsługuje pracę w rękawica
 
 ---
 
-### 📡 Wbudowany czytnik RFID UHF – po raz pierwszy!
+### Wbudowany czytnik RFID UHF – po raz pierwszy!
 
 **Po raz pierwszy w historii serii TC5/TC7** oba modele posiadają **zintegrowany czytnik UHF RFID**:
 
@@ -219,11 +219,11 @@ Ekran jest czytelny **nawet w pełnym słońcu** i obsługuje pracę w rękawica
 | Standardy | EPC Class 1 Gen2, EPC Gen 2 V2 |
 | Pasma | EU 865-868 MHz, US 902-928 MHz |
 
-> **💰 Oszczędność:** Wbudowany RFID eliminuje potrzebę zakupu dodatkowych czytników lub nakładek, znacząco obniżając TCO.
+> **Oszczędność:** Wbudowany RFID eliminuje potrzebę zakupu dodatkowych czytników lub nakładek, znacząco obniżając TCO.
 
 ---
 
-### 🔭 Skanery kodów kreskowych nowej generacji
+### Skanery kodów kreskowych nowej generacji
 
 Zebra oferuje trzy nowe opcje skanerów:
 
@@ -233,11 +233,11 @@ Zebra oferuje trzy nowe opcje skanerów:
 | **SR560** | Standardowy | Intensywne skanowanie kodów 2D |
 | **SR500** | Standardowy | Uniwersalny, każde oświetlenie |
 
-> **🌟 AC670 to przełom:** Jednocześnie odczytuje kod kreskowy **i robi kolorowe zdjęcie** z odległości ponad 30 metrów. Idealne dla kurierów (dowód dostawy) i magazynierów (wysokie regały).
+> **AC670 to przełom:** Jednocześnie odczytuje kod kreskowy **i robi kolorowe zdjęcie** z odległości ponad 30 metrów. Idealne dla kurierów (dowód dostawy) i magazynierów (wysokie regały).
 
 ---
 
-### 📶 Najszybsza łączność bezprzewodowa
+### Najszybsza łączność bezprzewodowa
 
 | Technologia | Specyfikacja | Zalety |
 |-------------|--------------|--------|
@@ -249,23 +249,22 @@ Zebra oferuje trzy nowe opcje skanerów:
 
 ---
 
-### 💪 Wytrzymałość bez kompromisów
+### Porównanie wytrzymałości TC501 vs TC701
 
-TC701 ustanawia **nowy standard wytrzymałości**:
+| Parametr | TC501 | TC701 |
+|----------|-------|-------|
+| Upadki (temp. pokojowa) | 2,44 m (8 ft) | **3,66 m (12 ft)** |
+| Upadki (pełny zakres temp.) | 1,83 m (6 ft) | 2,44 m (8 ft) |
+| Test tumble | 2000 cykli z 0,5 m | **3500 cykli z 1 m** |
+| Uszczelnienie | IP68 + IP65 | IP68 + IP65 |
+| Waga (bateria std.) | **273 g** | 284 g |
+| Temperatura pracy | -20°C do +50°C | -20°C do +50°C |
 
-| Parametr | TC701 | Poprawa |
-|----------|-------|---------|
-| Upadki na beton | **3,66 m** (12 ft) | +50% |
-| Test tumble (1 m) | **3500 cykli** | +75% |
-| Uszczelnienie | **IP68 + IP65** | Podwójna ochrona |
-| Waga | **284 g** | -25% lżejszy |
-| Temperatura pracy | -20°C do +50°C | — |
-
-> **❄️ Nowość:** Testy **szoku termicznego** gwarantują niezawodną pracę przy przemieszczaniu się między strefami o skrajnie różnych temperaturach (np. chłodnie ↔ hala).
+> **Nowość:** Testy **szoku termicznego** gwarantują niezawodną pracę przy przemieszczaniu się między strefami o skrajnie różnych temperaturach (np. chłodnie i hala magazynowa).
 
 ---
 
-## 📸 Aparat 50 MP i możliwości fotograficzne
+## Aparat 50 MP i możliwości fotograficzne
 
 | Aparat | Rozdzielczość | Funkcje |
 |--------|---------------|---------|
@@ -274,14 +273,14 @@ TC701 ustanawia **nowy standard wytrzymałości**:
 | **Ultraszeroki** (opcja) | 13 MP, PDAF | Całe regały jednym zdjęciem |
 
 **Enterprise AI Camera** dodaje:
-- ✅ Automatyczne wykrywanie brudnej soczewki
-- ✅ Powiadomienie o rozmazanym zdjęciu
-- ✅ Automatyczne rozmywanie twarzy (RODO)
-- ✅ Znak wodny z datą i godziną
+- Automatyczne wykrywanie brudnej soczewki
+- Powiadomienie o rozmazanym zdjęciu
+- Automatyczne rozmywanie twarzy (RODO)
+- Znak wodny z datą i godziną
 
 ---
 
-## 🔋 Baterie i ładowanie
+## Baterie i ładowanie
 
 | Typ baterii | Pojemność | Waga całkowita |
 |-------------|-----------|----------------|
@@ -296,7 +295,7 @@ TC701 ustanawia **nowy standard wytrzymałości**:
 
 ---
 
-## 🤖 Gotowość na aplikacje AI
+## Gotowość na aplikacje AI
 
 TC501 i TC701 to **pierwsze urządzenia Zebra zaprojektowane specjalnie pod kątem AI**:
 
@@ -308,15 +307,15 @@ TC501 i TC701 to **pierwsze urządzenia Zebra zaprojektowane specjalnie pod kąt
 | **Aparat 50 MP** | Wysokiej jakości dane dla algorytmów wizyjnych |
 
 **Przykładowe zastosowania AI:**
-- 🛒 Automatyczne rozpoznawanie produktów na półkach
-- 🔍 Wykrywanie oszustw przy zwrotach
-- ✅ Inteligentna weryfikacja dostaw
-- 📦 Automatyczne zliczanie zapasów
-- ⚠️ Rozpoznawanie uszkodzeń opakowań
+- Automatyczne rozpoznawanie produktów na półkach
+- Wykrywanie oszustw przy zwrotach
+- Inteligentna weryfikacja dostaw
+- Automatyczne zliczanie zapasów
+- Rozpoznawanie uszkodzeń opakowań
 
 ---
 
-## 🏭 Zastosowania branżowe
+## Zastosowania branżowe
 
 ### Logistyka, transport i poczta
 - Dowody dostawy z dokumentacją fotograficzną
@@ -340,7 +339,7 @@ TC501 i TC701 to **pierwsze urządzenia Zebra zaprojektowane specjalnie pod kąt
 
 ---
 
-## 🔧 Ekosystem akcesoriów
+## Ekosystem akcesoriów
 
 ### Stacje dokujące ShareCradle
 - **Nowa generacja** – większa konfigurowalność
@@ -353,30 +352,73 @@ TC501 i TC701 to **pierwsze urządzenia Zebra zaprojektowane specjalnie pod kąt
 
 ---
 
-## 📋 Pełna specyfikacja techniczna TC701
+## Pełna specyfikacja techniczna TC501
+
+| Kategoria | Parametr | Wartość |
+|-----------|----------|---------|
+| **Wymiary** | D x S x G | 163,15 x 77,9 x 15,5 mm |
+| **Waga** | Z baterią std. | 273 g |
+| **Waga** | Z baterią rozsz. | 303 g |
+| **Wyświetlacz** | Typ | 6" AMOLED, 2160x1080, 1500 nit |
+| **Wyświetlacz** | Szkło | Corning Gorilla Glass Victus |
+| **Procesor** | CPU | Qualcomm Dragonwing Q-6690, 8 rdzeni, do 2,9 GHz |
+| **Pamięć** | RAM / Flash | 8 GB / 128 GB lub 12 GB / 256 GB |
+| **Pamięć** | MicroSD | Do 2 TB |
+| **System** | OS | Android (wsparcie dla kolejnych wersji) |
+| **Łączność** | Wi-Fi | Wi-Fi 7 (802.11be), tri-band (2,4/5/6 GHz) |
+| **Łączność** | Komórkowa | 5G Release 17, Dual SIM + eSIM |
+| **Łączność** | Bluetooth | 6.0, Class 1/2, BLE Audio 5.3 |
+| **Łączność** | NFC | ISO 14443 A/B, Mifare, FeliCa, EMVCO |
+| **Łączność** | GPS | Triple-band GNSS (GPS, GLONASS, Galileo, BeiDou, QZSS) |
+| **Wytrzymałość** | Upadki (temp. pok.) | 2,44 m (8 ft) na beton |
+| **Wytrzymałość** | Upadki (pełny zakres) | 1,83 m (6 ft) na beton |
+| **Wytrzymałość** | Test tumble | 2000 cykli z 0,5 m |
+| **Wytrzymałość** | IP | IP68 + IP65 |
+| **Wytrzymałość** | Temperatura pracy | -20°C do +50°C |
+| **Wytrzymałość** | ESD | ±20 kV (wyładowanie powietrzne) |
+| **Zbieranie danych** | Skaner | SR500, SR560, AC670 (do 30 m) |
+| **Zbieranie danych** | RFID | Wbudowany UHF, do 2 m, >200 tagów/s |
+| **Zbieranie danych** | Aparat tylny | 50 MP, PDAF, LED, HDR |
+| **Zbieranie danych** | Aparat przedni | 8 MP, stała ostrość |
+| **Zbieranie danych** | Aparat ultraszeroki | 13 MP, PDAF (opcja) |
+| **Bezpieczeństwo** | Certyfikaty | FIPS 140-2, Common Criteria |
+
+---
+
+## Pełna specyfikacja techniczna TC701
 
 | Kategoria | Parametr | Wartość |
 |-----------|----------|---------|
 | **Wymiary** | D x S x G | 165 x 77,9 x 15,5 mm |
 | **Waga** | Z baterią std. | 284 g |
+| **Waga** | Z baterią rozsz. | 314 g |
 | **Wyświetlacz** | Typ | 6" AMOLED, 2160x1080, 1500 nit |
-| **Procesor** | CPU | Qualcomm Dragonwing Q-6690, 8 rdzeni |
-| **Pamięć** | RAM / Flash | 8-12 GB / 128-256 GB |
+| **Wyświetlacz** | Szkło | Corning Gorilla Glass Victus |
+| **Procesor** | CPU | Qualcomm Dragonwing Q-6690, 8 rdzeni, do 2,9 GHz |
+| **Pamięć** | RAM / Flash | 8 GB / 128 GB lub 12 GB / 256 GB |
+| **Pamięć** | MicroSD | Do 2 TB |
 | **System** | OS | Android 15 + 4 kolejne wersje |
-| **Łączność** | Wi-Fi | Wi-Fi 7 (802.11be), tri-band |
-| **Łączność** | Komórkowa | 5G Release 17, Dual SIM |
-| **Łączność** | BT / NFC | Bluetooth 6.0 / ISO 14443 |
-| **Wytrzymałość** | Upadki | 3,66 m na beton |
+| **Łączność** | Wi-Fi | Wi-Fi 7 (802.11be), tri-band (2,4/5/6 GHz) |
+| **Łączność** | Komórkowa | 5G Release 17, Dual SIM + eSIM |
+| **Łączność** | Bluetooth | 6.0, Class 1/2, BLE Audio 5.3 |
+| **Łączność** | NFC | ISO 14443 A/B, Mifare, FeliCa, EMVCO |
+| **Łączność** | GPS | Triple-band GNSS (GPS, GLONASS, Galileo, BeiDou, QZSS) |
+| **Wytrzymałość** | Upadki (temp. pok.) | 3,66 m (12 ft) na beton |
+| **Wytrzymałość** | Upadki (pełny zakres) | 2,44 m (8 ft) na beton |
+| **Wytrzymałość** | Test tumble | 3500 cykli z 1 m |
 | **Wytrzymałość** | IP | IP68 + IP65 |
-| **Wytrzymałość** | Temperatura | -20°C do +50°C |
+| **Wytrzymałość** | Temperatura pracy | -20°C do +50°C |
+| **Wytrzymałość** | ESD | ±20 kV (wyładowanie powietrzne) |
 | **Zbieranie danych** | Skaner | SR500, SR560, AC670 (do 30 m) |
-| **Zbieranie danych** | RFID | Wbudowany UHF, do 2 m |
-| **Zbieranie danych** | Aparat | 50 MP tylny, 8 MP przedni |
+| **Zbieranie danych** | RFID | Wbudowany UHF, do 2 m, >200 tagów/s |
+| **Zbieranie danych** | Aparat tylny | 50 MP, PDAF, LED, HDR |
+| **Zbieranie danych** | Aparat przedni | 8 MP, stała ostrość |
+| **Zbieranie danych** | Aparat ultraszeroki | 13 MP, PDAF (opcja) |
 | **Bezpieczeństwo** | Certyfikaty | FIPS 140-2, Common Criteria |
 
 ---
 
-## 🛡️ Wsparcie i usługi
+## Wsparcie i usługi
 
 ### Zebra OneCare™
 - Eliminacja nieoczekiwanych kosztów napraw
@@ -421,21 +463,21 @@ Podstawowe funkcje AI są dostępne bez dodatkowych licencji. Zaawansowane narz�
 
 | Cecha | Wartość |
 |-------|---------|
-| 🧠 **Moc AI** | Procesor Dragonwing z dedykowanym silnikiem AI |
-| 📶 **Łączność** | Wi-Fi 7 + 5G + Bluetooth 6.0 |
-| 📡 **RFID** | Wbudowany czytnik UHF – bez dodatkowych nakładek |
-| 📸 **Aparat** | 50 MP z AI Camera |
-| 🔭 **Skaner** | AC670 z zasięgiem 30 m |
-| 💪 **Wytrzymałość** | 3,66 m upadki, IP68+IP65 |
-| ⚖️ **Waga** | Tylko 284 g |
+| **Moc AI** | Procesor Dragonwing z dedykowanym silnikiem AI |
+| **Łączność** | Wi-Fi 7 + 5G + Bluetooth 6.0 |
+| **RFID** | Wbudowany czytnik UHF – bez dodatkowych nakładek |
+| **Aparat** | 50 MP z AI Camera |
+| **Skaner** | AC670 z zasięgiem 30 m |
+| **Wytrzymałość** | 3,66 m upadki, IP68+IP65 |
+| **Waga** | Tylko 284 g |
 
 ---
 
 ## Zainteresowany TC501/TC701?
 
-> 📞 **Zadzwoń:** [+48 601 619 898](tel:+48601619898) — doradzimy w wyborze konfiguracji
+> **Zadzwoń:** [+48 601 619 898](tel:+48601619898) — doradzimy w wyborze konfiguracji
 
-> 🔧 **Zapytaj o wycenę:** [Formularz kontaktowy →](/#formularz)
+> **Zapytaj o wycenę:** [Formularz kontaktowy](/#formularz)
 
 Jako **autoryzowany partner Zebra** oferujemy:
 - Doradztwo w wyborze konfiguracji
@@ -447,9 +489,9 @@ Jako **autoryzowany partner Zebra** oferujemy:
 
 ## Powiązane materiały
 
-- 📰 [Kontrakty serwisowe Zebra OneCare – przewodnik](/blog/kontrakty-serwisowe-zebra-onecare-przewodnik)
-- 📱 [Instrukcje obsługi terminali Zebra](/instrukcje)
-- 🎬 [Poradniki wideo](/poradniki-wideo)
+- [Kontrakty serwisowe Zebra OneCare – przewodnik](/blog/kontrakty-serwisowe-zebra-onecare-przewodnik)
+- [Instrukcje obsługi terminali Zebra](/instrukcje)
+- [Poradniki wideo](/poradniki-wideo)
 `
   },
   {
