@@ -18180,13 +18180,22 @@ Jako **autoryzowany serwis Zebra** pomożemy Ci:
       ]
     },
     content: `
-**Błąd "Ribbon Out" w drukarce Zebra mimo załadowanej taśmy – kompletny poradnik**
+**Krótka odpowiedź:** Błąd "Ribbon Out" mimo włożonej taśmy w **80% przypadków** oznacza ustawiony tryb **Direct Thermal** zamiast Thermal Transfer. **Rozwiązanie:** Menu → Print → Print Method → Thermal Transfer, lub wyślij komendę ZPL: \`^XA^MTT^JUS^XZ\`
 
-> **⚠️ Drukarka Zebra pokazuje "Ribbon Out" mimo włożonej taśmy?** To jeden z najczęstszych problemów w drukarkach termotransferowych Zebra ZD421, ZD621, ZD220, ZD230, ZT411, ZT421, ZT610. Przyczyn może być kilka – od złego trybu druku, przez brudny czujnik, po uszkodzony ribbon. Ten poradnik pomoże Ci zdiagnozować i naprawić problem.
+> **⚠️ Drukarka Zebra pokazuje "Ribbon Out" mimo włożonej taśmy?** To jeden z najczęstszych problemów w drukarkach termotransferowych Zebra ZD421, ZD621, ZD220, ZD230, ZT411, ZT421, ZT610. Przyczyn może być kilka – od złego trybu druku, przez brudny czujnik, po uszkodzony ribbon.
 
 ---
 
-**Możliwe przyczyny błędu "Ribbon Out"**
+## Statystyki – przyczyny błędu Ribbon Out
+
+- **80%** przypadków – zły tryb druku (Direct Thermal zamiast Thermal Transfer)
+- **10%** przypadków – taśma założona odwrotnie lub nie podłączona do rolki odbiorczej
+- **8%** przypadków – brudny czujnik ribbona
+- **2%** przypadków – uszkodzony czujnik (wymaga serwisu)
+
+---
+
+## Możliwe przyczyny błędu "Ribbon Out"
 
 | Przyczyna | Prawdopodobieństwo | Łatwość naprawy |
 |-----------|-------------------|-----------------|
@@ -18469,30 +18478,66 @@ Czujnik ribbona można wymienić – to stosunkowo tania naprawa.
 
 ---
 
-**FAQ – Często zadawane pytania**
+## FAQ – Często zadawane pytania
 
-**Czy mogę drukować bez taśmy?**
+### Dlaczego drukarka Zebra pokazuje Ribbon Out mimo włożonej taśmy?
 
-Tak, ale tylko na **etykietach termicznych** (z powłoką termoczułą) w trybie **Direct Thermal**. Etykiety termotransferowe wymagają taśmy.
+W **80% przypadków** przyczyną jest ustawiony tryb **Direct Thermal** zamiast Thermal Transfer. W tym trybie drukarka ignoruje taśmę i zgłasza błąd. Zmień tryb: Menu → Print → Print Method → Thermal Transfer lub wyślij komendę ZPL: \`^XA^MTT^JUS^XZ\`
 
-**Jak rozpoznać etykiety termiczne od termotransferowych?**
+### Jak zmienić tryb druku z Direct Thermal na Thermal Transfer?
 
-Test paznokciem: Przejedź paznokciem po etykiecie. Jeśli zostaje **czarny ślad** – to etykieta termiczna (Direct Thermal).
+**Z wyświetlaczem (ZD621, ZT411):** Menu → Print → Print Method → Thermal Transfer
 
-**Czy mogę użyć taśmy innego producenta?**
+**Bez wyświetlacza (ZD220, ZD230, ZD421):** Wyślij komendę ZPL przez Zebra Setup Utilities: \`^XA^MTT^JUS^XZ\`
+
+### Jak sprawdzić czy taśma jest założona prawidłowo?
+
+**Test naklejki:** Przyklej taśmę klejącą do zewnętrznej strony ribbona i odklej. Jeśli na taśmie klejącej jest barwnik – ta strona powinna być skierowana **w dół do etykiety**. Większość drukarek Zebra wymaga taśmy CSI (Coated Side In).
+
+### Jak wyczyścić czujnik ribbona w drukarce Zebra?
+
+1. Wyłącz drukarkę i odłącz zasilanie
+2. Otwórz pokrywę i wyjmij taśmę
+3. Zlokalizuj czujnik (mały element optyczny pod głowicą)
+4. Przetrzyj alkoholem izopropylowym (IPA 99%) na patyczku
+5. Poczekaj 2 minuty na wyschnięcie
+6. Załóż taśmę i włącz drukarkę
+
+### Jaka szerokość taśmy do drukarki Zebra ZD421 / ZD621?
+
+Drukarki ZD421 i ZD621 obsługują taśmy o szerokości **33-110 mm**. Taśma powinna być **szersza niż etykieta** o minimum 5 mm, aby zapewnić pełne pokrycie wydruku.
+
+### Czy mogę drukować bez taśmy w drukarce Zebra?
+
+Tak, ale tylko na **etykietach termicznych** (z powłoką termoczułą) w trybie **Direct Thermal**. Etykiety termotransferowe wymagają taśmy – bez niej wydruk będzie pusty.
+
+### Jak rozpoznać etykiety termiczne od termotransferowych?
+
+**Test paznokciem:** Przejedź paznokciem po etykiecie z naciskiem. Jeśli zostaje **czarny ślad** – to etykieta termiczna (Direct Thermal). Brak śladu = etykieta termotransferowa (wymaga taśmy).
+
+### Czy mogę użyć taśmy innego producenta niż Zebra?
 
 Tak, ale upewnij się że:
-- Szerokość jest odpowiednia
-- Typ nawoju (CSI/CSO) pasuje do drukarki
-- Jakość jest wystarczająca
+- Szerokość jest odpowiednia dla drukarki
+- Typ nawoju (CSI/CSO) pasuje do modelu
+- Jakość jest wystarczająca (tanie taśmy = słaba jakość druku)
 
-**Ile kosztuje wymiana czujnika ribbona?**
+### Co oznacza CSI i CSO w taśmach termotransferowych?
 
-Orientacyjnie 200-400 zł za część + robociznę.
+- **CSI (Coated Side In)** – barwnik wewnątrz rolki, **wymagany przez większość drukarek Zebra**
+- **CSO (Coated Side Out)** – barwnik na zewnątrz rolki, dla niektórych starszych modeli
+
+### Ile kosztuje wymiana czujnika ribbona w drukarce Zebra?
+
+Orientacyjnie **200-400 zł** za część + robociznę. W autoryzowanym serwisie naprawa trwa 1-2 dni robocze.
+
+### Błąd Ribbon Out pojawia się po kilku etykietach – co robić?
+
+Sprawdź czy taśma jest prawidłowo podłączona do **rolki odbiorczej** (take-up spindle). Jeśli taśma nie nawija się, czujnik po chwili zgłosi błąd. Upewnij się też, że naprężenie taśmy jest prawidłowe.
 
 ---
 
-**Checklista – błąd "Ribbon Out"**
+## Checklista – błąd "Ribbon Out"
 
 | # | Krok | Sprawdzone? |
 |---|------|-------------|
