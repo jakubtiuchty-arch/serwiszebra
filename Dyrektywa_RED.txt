@@ -1,0 +1,50 @@
+Nowe standardy bezpieczeństwa drukarek Zebra: Kompletny przewodnik po konfiguracji zgodnie z dyrektywą RED
+Świat urządzeń bezprzewodowych zmienia się dynamicznie, a wraz z nim przepisy dotyczące cyberbezpieczeństwa. Jeśli Twoja firma korzysta z drukarek Zebra wyposażonych w moduły radiowe (takie jak Wi-Fi czy Bluetooth), musisz przygotować się na istotne zmiany.
+Unia Europejska wprowadza zaostrzone wymogi w ramach dyrektywy RED (Radio Equipment Directive). Nowe regulacje kładą ogromny nacisk na cyberbezpieczeństwo, ochronę danych oraz prywatność użytkowników. Dotyczą one wszystkich produktów tego typu wprowadzanych na rynek UE od 1 sierpnia 2025 roku.
+W tym artykule szczegółowo omówimy, jak wygląda nowy proces rozpakowywania i wstępnej konfiguracji drukarek Zebra w regionie EMEA (Europa, Bliski Wschód, Afryka), aby zapewnić pełną zgodność z nowymi przepisami.
+
+--------------------------------------------------------------------------------
+Co zmienia się w pudełku? Pierwsze kroki z nowym sprzętem
+Rozpakowując nową drukarkę Zebra, zauważysz istotny dodatek. Wewnątrz opakowania znajduje się teraz specjalna ulotka zawierająca kod QR oraz adres URL.
+Dokument ten pełni dwie kluczowe funkcje:
+1. Stanowi potwierdzenie, że urządzenie jest zgodne z najnowszymi przepisami UE dotyczącymi cyberbezpieczeństwa.
+2. Jest „bramą” do procesu konfiguracji – kieruje bezpośrednio na dedykowaną stronę internetową (Zebra UR), gdzie rozpoczyna się proces zabezpieczania urządzenia.
+Na wspomnianej stronie głównej znajdziesz nie tylko narzędzia konfiguracyjne, ale także bazę wiedzy: sprawdzisz, których konkretnie produktów dotyczą nowe przepisy, oraz uzyskasz informacje o ulepszeniach zabezpieczeń.
+
+--------------------------------------------------------------------------------
+Narzędzie: Kreator konfiguracji zabezpieczeń
+Sercem nowego procesu jest Kreator konfiguracji zabezpieczeń (Security Setup Wizard). To intuicyjne narzędzie online, które krok po kroku przeprowadzi Cię przez proces tworzenia haseł, konfiguracji sieciowej oraz aktualizacji oprogramowania.
+Kreator oferuje trzy ścieżki konfiguracji:
+• Za pomocą komputera z systemem Windows (metoda najprostsza i zalecana).
+• Za pomocą urządzenia z systemem Android.
+• Za pomocą urządzenia z systemem iOS.
+W dalszej części poradnika skupimy się na metodzie z wykorzystaniem systemu Windows, ponieważ jest ona najczęściej wybierana w środowiskach biurowych i magazynowych.
+
+--------------------------------------------------------------------------------
+Instrukcja konfiguracji: Krok po kroku
+Poniższa procedura pozwoli Ci przejść przez cały proces bezbłędnie, generując odpowiedni plik konfiguracyjny i wysyłając go do urządzenia.
+Krok 1: Przygotowanie środowiska pracy
+Zanim uruchomisz kreatora, musisz wyposażyć swój komputer w narzędzie do komunikacji z drukarką. Pobierz i zainstaluj program Printer Setup Utilities (link do pobrania znajdziesz bezpośrednio na ekranie kreatora na stronie Zebra).
+Następnie podłącz drukarkę do komputera za pomocą kabla USB i włącz zasilanie.
+Krok 2: Tworzenie silnego hasła administratora
+Jest to jeden z najważniejszych punktów nowej dyrektywy. W kreatorze zostaniesz poproszony o utworzenie hasła administratora dla drukarki. Należy pamiętać o kilku kluczowych zasadach:
+• Długość: Hasło musi składać się z co najmniej 14 znaków.
+• Prywatność: Firma Zebra nie przechowuje Twojego hasła w chmurze ani w swoich bazach danych. Zostaje ono jedynie „zaszyte” (osadzone) w kodzie skryptu konfiguracyjnego, który generujesz.
+• Skalowalność: Hasło nie musi być unikalne dla każdego urządzenia. Jeśli zarządzasz dużą flotą drukarek, możesz bezpiecznie użyć tego samego hasła dla wszystkich jednostek.
+Uwaga: Musisz wpisać i potwierdzić prawidłowe hasło w kreatorze, aby móc przejść do kolejnych etapów.
+Krok 3: Dodatkowe ustawienia bezpieczeństwa
+Kreator umożliwia dostosowanie poziomu zabezpieczeń do Twoich potrzeb za pomocą prostych przełączników (włącz/wyłącz).
+Jeśli Twoja drukarka posiada fizyczny panel przedni (wyświetlacz i przyciski), system wymusi również ustawienie czterocyfrowego kodu PIN. Jest to dodatkowa warstwa ochrony przed nieautoryzowanym dostępem fizycznym do menu urządzenia.
+Krok 4: Generowanie i wysyłanie skryptu
+Po skonfigurowaniu wszystkich opcji, kreator wygeneruje skrypt konfiguracji zabezpieczeń. Oto jak go wgrać:
+1. Kliknij przycisk „Kopiuj skrypt” (Copy Script) widoczny pod wygenerowanym kodem w kreatorze.
+2. Uruchom zainstalowany wcześniej program Printer Setup Utilities na swoim komputerze.
+3. Otwórz okno bezpośredniej komunikacji z drukarką (często oznaczane jako "Open Communication With Printer").
+4. Wklej skopiowany skrypt do okna edytora i wyślij go do drukarki.
+
+--------------------------------------------------------------------------------
+Finalizacja i co dalej?
+Po otrzymaniu skryptu, drukarka automatycznie zresetuje ustawienia sieciowe, aby zastosować nowe konfiguracje bezpieczeństwa. W tym momencie Twoje urządzenie jest zgodne z dyrektywą RED i zabezpieczone przed podstawowymi zagrożeniami.
+Co z pozostałymi drukarkami? Jeśli posiadasz w firmie więcej drukarek tego samego typu, nie musisz przechodzić przez kreatora internetowego dla każdej z nich osobno. Możesz użyć programu Printer Setup Utilities, aby wysłać ten sam, wygenerowany wcześniej skrypt do kolejnych urządzeń. Pozwoli to na błyskawiczne zastosowanie identycznych ustawień i haseł w całej flocie.
+Po zakończeniu wstępnej konfiguracji bezpieczeństwa (RED), możesz kontynuować personalizację ustawień druku, korzystając ze standardowych narzędzi, takich jak Zebra Setup Utilities czy PPM (Printer Profile Manager).
+Pamiętaj, że dbałość o cyberbezpieczeństwo to proces ciągły. Nowa procedura wdrożeniowa Zebry ma na celu zapewnienie, że już od momentu wyjęcia z pudełka Twój sprzęt spełnia najwyższe standardy ochrony danych wymagane w Unii Europejskiej.
