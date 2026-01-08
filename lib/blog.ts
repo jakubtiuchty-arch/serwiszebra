@@ -19258,7 +19258,7 @@ Jako **autoryzowany serwis Zebra** pomagamy w konfiguracji drukarek zgodnie z dy
     slug: 'zebra-printsecure-przewodnik-administratora-it',
     title: 'Zebra PrintSecure – Kompletny przewodnik po zabezpieczeniach drukarek dla administratorów IT',
     excerpt: 'Jak zabezpieczyć drukarki Zebra w środowisku korporacyjnym? Kompleksowy poradnik dla administratorów IT: Protected Mode, szyfrowanie TLS, zarządzanie usługami sieciowymi i zgodność z EU RED.',
-    coverImage: '/drukarki-zebra-dyrektywa-red.jpeg',
+    coverImage: '/blog/zebra-printsecure-przewodnik.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Autoryzowany serwis Zebra'
