@@ -110,8 +110,8 @@ export const BLOG_CATEGORIES = {
 export const blogPosts: BlogPost[] = [
   {
     slug: 'zebra-tc501-tc701-terminal-mobilny-ai-premiera-2026',
-    title: 'Zebra TC501 i TC701 – Terminale mobilne gotowe na erę AI (Premiera 2026)',
-    excerpt: 'Poznaj nowe komputery mobilne Zebra TC501 i TC701 z procesorem Qualcomm Dragonwing, Wi-Fi 7, 5G i wbudowanym czytnikiem RFID. Do 300% więcej mocy, 12 GB RAM i gotowość na aplikacje AI.',
+    title: 'Zebra TC501 i Zebra TC701 – Terminale mobilne gotowe na erę AI (Premiera 2026)',
+    excerpt: 'Poznaj nowe komputery mobilne Zebra TC501 i Zebra TC701 z procesorem Qualcomm Dragonwing, Wi-Fi 7, 5G i wbudowanym czytnikiem RFID. Do 300% więcej mocy, 12 GB RAM i gotowość na aplikacje AI.',
     coverImage: '/blog/zebra-tc501-zebra-tc701.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
@@ -140,7 +140,7 @@ export const blogPosts: BlogPost[] = [
       'hot swap bateria'
     ],
     seo: {
-      metaTitle: 'Zebra TC501 i TC701 – Nowe terminale mobilne z AI | Premiera 2026',
+      metaTitle: 'Zebra TC501 i Zebra TC701 – Nowe terminale mobilne z AI | Premiera 2026',
       metaDescription: 'Zebra TC501/TC701: procesor Qualcomm Dragonwing z AI, Wi-Fi 7, 5G, wbudowany RFID, aparat 50 MP, skaner 30m. Specyfikacja, zastosowania i porównanie nowych terminali mobilnych.',
       keywords: [
         'Zebra TC701 specyfikacja',
@@ -163,7 +163,7 @@ export const blogPosts: BlogPost[] = [
 
 ---
 
-## Co to jest Zebra TC501 i TC701?
+## Co to jest Zebra TC501 i Zebra TC701?
 
 **Zebra TC501** i **Zebra TC701** to najnowsze modele mobilnych komputerów przemysłowych z legendarnej serii TC5/TC7, zaprojektowane od podstaw z myślą o aplikacjach wykorzystujących **sztuczną inteligencję (AI)**.
 
@@ -249,7 +249,7 @@ Zebra oferuje trzy nowe opcje skanerów:
 
 ---
 
-### Porównanie wytrzymałości TC501 vs TC701
+### Porównanie wytrzymałości Zebra TC501 vs Zebra TC701
 
 | Parametr | TC501 | TC701 |
 |----------|-------|-------|
@@ -297,7 +297,7 @@ Zebra oferuje trzy nowe opcje skanerów:
 
 ## Gotowość na aplikacje AI
 
-TC501 i TC701 to **pierwsze urządzenia Zebra zaprojektowane specjalnie pod kątem AI**:
+Zebra TC501 i Zebra TC701 to **pierwsze urządzenia Zebra zaprojektowane specjalnie pod kątem AI**:
 
 | Funkcja AI | Opis |
 |------------|------|
@@ -352,69 +352,119 @@ TC501 i TC701 to **pierwsze urządzenia Zebra zaprojektowane specjalnie pod kąt
 
 ---
 
-## Pełna specyfikacja techniczna TC501
+## Pełna specyfikacja techniczna Zebra TC501
 
-| Kategoria | Parametr | Wartość |
-|-----------|----------|---------|
-| **Wymiary** | D x S x G | 163,15 x 77,9 x 15,5 mm |
-| **Waga** | Z baterią std. | 273 g |
-| **Waga** | Z baterią rozsz. | 303 g |
-| **Wyświetlacz** | Typ | 6" AMOLED, 2160x1080, 1500 nit |
-| **Wyświetlacz** | Szkło | Corning Gorilla Glass Victus |
-| **Procesor** | CPU | Qualcomm Dragonwing Q-6690, 8 rdzeni, do 2,9 GHz |
-| **Pamięć** | RAM / Flash | 8 GB / 128 GB lub 12 GB / 256 GB |
-| **Pamięć** | MicroSD | Do 2 TB |
-| **System** | OS | Android (wsparcie dla kolejnych wersji) |
-| **Łączność** | Wi-Fi | Wi-Fi 7 (802.11be), tri-band (2,4/5/6 GHz) |
-| **Łączność** | Komórkowa | 5G Release 17, Dual SIM + eSIM |
-| **Łączność** | Bluetooth | 6.0, Class 1/2, BLE Audio 5.3 |
-| **Łączność** | NFC | ISO 14443 A/B, Mifare, FeliCa, EMVCO |
-| **Łączność** | GPS | Triple-band GNSS (GPS, GLONASS, Galileo, BeiDou, QZSS) |
-| **Wytrzymałość** | Upadki (temp. pok.) | 2,44 m (8 ft) na beton |
-| **Wytrzymałość** | Upadki (pełny zakres) | 1,83 m (6 ft) na beton |
-| **Wytrzymałość** | Test tumble | 2000 cykli z 0,5 m |
-| **Wytrzymałość** | IP | IP68 + IP65 |
-| **Wytrzymałość** | Temperatura pracy | -20°C do +50°C |
-| **Wytrzymałość** | ESD | ±20 kV (wyładowanie powietrzne) |
-| **Zbieranie danych** | Skaner | SR500, SR560, AC670 (do 30 m) |
-| **Zbieranie danych** | RFID | Wbudowany UHF, do 2 m, >200 tagów/s |
-| **Zbieranie danych** | Aparat tylny | 50 MP, PDAF, LED, HDR |
-| **Zbieranie danych** | Aparat przedni | 8 MP, stała ostrość |
-| **Zbieranie danych** | Aparat ultraszeroki | 13 MP, PDAF (opcja) |
-| **Bezpieczeństwo** | Certyfikaty | FIPS 140-2, Common Criteria |
+### Wymiary i waga
+| Parametr | Wartość |
+|----------|---------|
+| Wymiary (D x S x G) | 163,15 x 77,9 x 15,5 mm |
+| Waga z baterią std. | 273 g |
+| Waga z baterią rozsz. | 303 g |
+
+### Wyświetlacz
+| Parametr | Wartość |
+|----------|---------|
+| Typ | 6" AMOLED, 2160x1080, 1500 nit |
+| Szkło | Corning Gorilla Glass Victus |
+
+### Procesor i pamięć
+| Parametr | Wartość |
+|----------|---------|
+| CPU | Qualcomm Dragonwing Q-6690, 8 rdzeni, do 2,9 GHz |
+| RAM / Flash | 8 GB / 128 GB lub 12 GB / 256 GB |
+| MicroSD | Do 2 TB |
+| System | Android (wsparcie dla kolejnych wersji) |
+
+### Łączność
+| Parametr | Wartość |
+|----------|---------|
+| Wi-Fi | Wi-Fi 7 (802.11be), tri-band (2,4/5/6 GHz) |
+| Komórkowa | 5G Release 17, Dual SIM + eSIM |
+| Bluetooth | 6.0, Class 1/2, BLE Audio 5.3 |
+| NFC | ISO 14443 A/B, Mifare, FeliCa, EMVCO |
+| GPS | Triple-band GNSS (GPS, GLONASS, Galileo, BeiDou, QZSS) |
+
+### Wytrzymałość
+| Parametr | Wartość |
+|----------|---------|
+| Upadki (temp. pok.) | 2,44 m (8 ft) na beton |
+| Upadki (pełny zakres) | 1,83 m (6 ft) na beton |
+| Test tumble | 2000 cykli z 0,5 m |
+| IP | IP68 + IP65 |
+| Temperatura pracy | -20°C do +50°C |
+| ESD | ±20 kV (wyładowanie powietrzne) |
+
+### Zbieranie danych
+| Parametr | Wartość |
+|----------|---------|
+| Skaner | SR500, SR560, AC670 (do 30 m) |
+| RFID | Wbudowany UHF, do 2 m, >200 tagów/s |
+| Aparat tylny | 50 MP, PDAF, LED, HDR |
+| Aparat przedni | 8 MP, stała ostrość |
+| Aparat ultraszeroki | 13 MP, PDAF (opcja) |
+
+### Bezpieczeństwo
+| Parametr | Wartość |
+|----------|---------|
+| Certyfikaty | FIPS 140-2, Common Criteria |
 
 ---
 
-## Pełna specyfikacja techniczna TC701
+## Pełna specyfikacja techniczna Zebra TC701
 
-| Kategoria | Parametr | Wartość |
-|-----------|----------|---------|
-| **Wymiary** | D x S x G | 165 x 77,9 x 15,5 mm |
-| **Waga** | Z baterią std. | 284 g |
-| **Waga** | Z baterią rozsz. | 314 g |
-| **Wyświetlacz** | Typ | 6" AMOLED, 2160x1080, 1500 nit |
-| **Wyświetlacz** | Szkło | Corning Gorilla Glass Victus |
-| **Procesor** | CPU | Qualcomm Dragonwing Q-6690, 8 rdzeni, do 2,9 GHz |
-| **Pamięć** | RAM / Flash | 8 GB / 128 GB lub 12 GB / 256 GB |
-| **Pamięć** | MicroSD | Do 2 TB |
-| **System** | OS | Android 15 + 4 kolejne wersje |
-| **Łączność** | Wi-Fi | Wi-Fi 7 (802.11be), tri-band (2,4/5/6 GHz) |
-| **Łączność** | Komórkowa | 5G Release 17, Dual SIM + eSIM |
-| **Łączność** | Bluetooth | 6.0, Class 1/2, BLE Audio 5.3 |
-| **Łączność** | NFC | ISO 14443 A/B, Mifare, FeliCa, EMVCO |
-| **Łączność** | GPS | Triple-band GNSS (GPS, GLONASS, Galileo, BeiDou, QZSS) |
-| **Wytrzymałość** | Upadki (temp. pok.) | 3,66 m (12 ft) na beton |
-| **Wytrzymałość** | Upadki (pełny zakres) | 2,44 m (8 ft) na beton |
-| **Wytrzymałość** | Test tumble | 3500 cykli z 1 m |
-| **Wytrzymałość** | IP | IP68 + IP65 |
-| **Wytrzymałość** | Temperatura pracy | -20°C do +50°C |
-| **Wytrzymałość** | ESD | ±20 kV (wyładowanie powietrzne) |
-| **Zbieranie danych** | Skaner | SR500, SR560, AC670 (do 30 m) |
-| **Zbieranie danych** | RFID | Wbudowany UHF, do 2 m, >200 tagów/s |
-| **Zbieranie danych** | Aparat tylny | 50 MP, PDAF, LED, HDR |
-| **Zbieranie danych** | Aparat przedni | 8 MP, stała ostrość |
-| **Zbieranie danych** | Aparat ultraszeroki | 13 MP, PDAF (opcja) |
-| **Bezpieczeństwo** | Certyfikaty | FIPS 140-2, Common Criteria |
+### Wymiary i waga
+| Parametr | Wartość |
+|----------|---------|
+| Wymiary (D x S x G) | 165 x 77,9 x 15,5 mm |
+| Waga z baterią std. | 284 g |
+| Waga z baterią rozsz. | 314 g |
+
+### Wyświetlacz
+| Parametr | Wartość |
+|----------|---------|
+| Typ | 6" AMOLED, 2160x1080, 1500 nit |
+| Szkło | Corning Gorilla Glass Victus |
+
+### Procesor i pamięć
+| Parametr | Wartość |
+|----------|---------|
+| CPU | Qualcomm Dragonwing Q-6690, 8 rdzeni, do 2,9 GHz |
+| RAM / Flash | 8 GB / 128 GB lub 12 GB / 256 GB |
+| MicroSD | Do 2 TB |
+| System | Android 15 + 4 kolejne wersje |
+
+### Łączność
+| Parametr | Wartość |
+|----------|---------|
+| Wi-Fi | Wi-Fi 7 (802.11be), tri-band (2,4/5/6 GHz) |
+| Komórkowa | 5G Release 17, Dual SIM + eSIM |
+| Bluetooth | 6.0, Class 1/2, BLE Audio 5.3 |
+| NFC | ISO 14443 A/B, Mifare, FeliCa, EMVCO |
+| GPS | Triple-band GNSS (GPS, GLONASS, Galileo, BeiDou, QZSS) |
+
+### Wytrzymałość
+| Parametr | Wartość |
+|----------|---------|
+| Upadki (temp. pok.) | 3,66 m (12 ft) na beton |
+| Upadki (pełny zakres) | 2,44 m (8 ft) na beton |
+| Test tumble | 3500 cykli z 1 m |
+| IP | IP68 + IP65 |
+| Temperatura pracy | -20°C do +50°C |
+| ESD | ±20 kV (wyładowanie powietrzne) |
+
+### Zbieranie danych
+| Parametr | Wartość |
+|----------|---------|
+| Skaner | SR500, SR560, AC670 (do 30 m) |
+| RFID | Wbudowany UHF, do 2 m, >200 tagów/s |
+| Aparat tylny | 50 MP, PDAF, LED, HDR |
+| Aparat przedni | 8 MP, stała ostrość |
+| Aparat ultraszeroki | 13 MP, PDAF (opcja) |
+
+### Bezpieczeństwo
+| Parametr | Wartość |
+|----------|---------|
+| Certyfikaty | FIPS 140-2, Common Criteria |
 
 ---
 
@@ -436,16 +486,16 @@ Pełny pakiet oprogramowania:
 
 ## FAQ – Najczęściej zadawane pytania
 
-### Kiedy premiera TC501 i TC701?
+### Kiedy premiera Zebra TC501 i Zebra TC701?
 Urządzenia zostały oficjalnie zaprezentowane w **styczniu 2026**. Dostępność w Polsce – I/II kwartał 2026.
 
-### Ile kosztuje Zebra TC701?
+### Ile kosztuje Zebra TC501 / Zebra TC701?
 Ceny zależą od konfiguracji (RAM, pamięć, skaner, 5G). Skontaktuj się z nami po indywidualną wycenę.
 
 ### Czy TC501/TC701 są kompatybilne z dotychczasowymi akcesoriami?
 Tak, stacje ShareCradle z poprzednich generacji działają z adapterami.
 
-### Jaki system operacyjny ma TC701?
+### Jaki system operacyjny mają Zebra TC501 i Zebra TC701?
 Android 15 z gwarancją aktualizacji do **4 kolejnych wersji** systemu.
 
 ### Czy potrzebuję licencji na funkcje AI?
@@ -459,7 +509,7 @@ Podstawowe funkcje AI są dostępne bez dodatkowych licencji. Zaawansowane narz�
 
 ## Podsumowanie
 
-**Zebra TC501 i TC701** to urządzenia zaprojektowane na następną dekadę:
+**Zebra TC501 i Zebra TC701** to urządzenia zaprojektowane na następną dekadę:
 
 | Cecha | Wartość |
 |-------|---------|
@@ -473,7 +523,7 @@ Podstawowe funkcje AI są dostępne bez dodatkowych licencji. Zaawansowane narz�
 
 ---
 
-## Zainteresowany TC501/TC701?
+## Zainteresowany Zebra TC501 / Zebra TC701?
 
 > **Zadzwoń:** [+48 601 619 898](tel:+48601619898) — doradzimy w wyborze konfiguracji
 
