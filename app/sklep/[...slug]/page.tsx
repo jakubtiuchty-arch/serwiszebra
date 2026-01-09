@@ -49,9 +49,15 @@ const PRODUCT_TYPE_ICONS: Record<string, any> = {
   kabel: Cable
 }
 
-// Mapowanie slug produktu na zdjęcie lokalne (fallback)
-const LOCAL_PRODUCT_IMAGES: Record<string, string> = {
-  'glowica-203-dpi-zebra-zd421t': '/sklep_photo/głowica-203dpi-do-drukarki-zebra-zd421t-P1112640-218.png',
+// Domyślne zdjęcie dla głowic (używane gdy brak image_url w bazie)
+const DEFAULT_PRINTHEAD_IMAGE = '/sklep_photo/głowica-203dpi-do-drukarki-zebra-zd421t-P1112640-218.png'
+
+// Helper: Pobierz URL zdjęcia dla produktu
+function getLocalProductImage(productType: string): string | null {
+  if (productType === 'glowica') {
+    return DEFAULT_PRINTHEAD_IMAGE
+  }
+  return null
 }
 
 // FAQ dla typów produktów
@@ -172,7 +178,7 @@ async function getProductsForCategory(filters: {
 // Helper: Pobierz URL zdjęcia (z bazy lub lokalny fallback)
 function getProductImageUrl(product: Product): string | null {
   if (product.image_url) return product.image_url
-  return LOCAL_PRODUCT_IMAGES[product.slug] || null
+  return getLocalProductImage(product.product_type)
 }
 
 // Helper: Generuj opis SEO
