@@ -701,20 +701,14 @@ Obie opcje można **wymieniać bez narzędzi**.
 
 ## Porównanie: Zebra DS8208 vs DS8288
 
-### Zebra DS8208 (przewodowy)
-
-- **Wymiary:** 16,5 × 6,9 × 10,5 cm
-- **Waga:** 176,5 g
-- **Zasilanie:** Z hosta USB (4,8-5,5V)
-- **Gwarancja:** 5 lat
-
-### Zebra DS8288 (bezprzewodowy)
-
-- **Wymiary:** 17,6 × 6,9 × 11,1 cm
-- **Waga:** 260,6 g
-- **Zasilanie:** Bateria/PowerCap + ładowanie indukcyjne
-- **Zasięg Bluetooth:** Do 100 m (Klasa 1)
-- **Gwarancja:** 3 lata
+| Parametr | DS8208 (przewodowy) | DS8288 (bezprzewodowy) |
+|----------|---------------------|------------------------|
+| Wymiary | 16,5 × 6,9 × 10,5 cm | 17,6 × 6,9 × 11,1 cm |
+| Waga | 176,5 g | 260,6 g |
+| Zasilanie | Z hosta USB (4,8-5,5V) | Bateria/PowerCap + ładowanie indukcyjne |
+| Zasięg Bluetooth | – | Do 100 m (Klasa 1) |
+| Ładowanie | – | Bezstykowe (indukcyjne) |
+| Gwarancja | 5 lat | 3 lata |
 
 ---
 
@@ -722,31 +716,35 @@ Obie opcje można **wymieniać bez narzędzi**.
 
 ### Parametry skanowania
 
-- **Czujnik:** 1600 × 1200 pikseli (2 MP)
-- **Pole widzenia:** 48° × 36°
-- **Zasięg – kod UPC 13 mil:** 0,5 – 71 cm
-- **Zasięg – QR Code 20 mil:** 0 – 48,3 cm
-- **Zasięg – Code 39 (5 mil):** 1,5 – 32 cm
-- **Zasięg – DataMatrix (10 mil):** 1,8 – 30 cm
-- **Tolerancja na ruch:** Do 406 cm/s
-- **Minimalny kontrast:** 16%
+| Parametr | Wartość |
+|----------|---------|
+| Czujnik | 1600 × 1200 pikseli (2 MP) |
+| Pole widzenia | 48° × 36° |
+| Zasięg – kod UPC 13 mil | 0,5 – 71 cm |
+| Zasięg – QR Code 20 mil | 0 – 48,3 cm |
+| Zasięg – Code 39 (5 mil) | 1,5 – 32 cm |
+| Zasięg – DataMatrix (10 mil) | 1,8 – 30 cm |
+| Tolerancja na ruch | Do 406 cm/s |
+| Minimalny kontrast | 16% |
 
 ### Obsługiwane kody
 
-**Kody 1D:** Code 39, Code 128, Code 93, Codabar, UPC/EAN, GS1 DataBar, I 2 z 5 i inne
-
-**Kody 2D:** PDF417, DataMatrix, QR Code, Aztec, MaxiCode, Han Xin, Micro QR
-
-**Dodatkowe:** OCR-A/B, MICR, Digimarc, GS1 Digital Link
+| Typ | Formaty |
+|-----|---------|
+| Kody 1D | Code 39, Code 128, Code 93, Codabar, UPC/EAN, GS1 DataBar, I 2 z 5 |
+| Kody 2D | PDF417, DataMatrix, QR Code, Aztec, MaxiCode, Han Xin, Micro QR |
+| Dodatkowe | OCR-A/B, MICR, Digimarc, GS1 Digital Link |
 
 ### Wytrzymałość
 
-- **Temperatura pracy:** 0°C do 50°C
-- **Temperatura przechowywania:** -40°C do 70°C
-- **Klasa szczelności:** IP52
-- **Odporność na upadki:** 1,8 m na beton (54 upadki)
-- **Odporność MIL-STD:** 3 m
-- **Odporność na wstrząsy:** 2000 cykli z 0,5 m
+| Parametr | Wartość |
+|----------|---------|
+| Temperatura pracy | 0°C do 50°C |
+| Temperatura przechowywania | -40°C do 70°C |
+| Klasa szczelności | IP52 |
+| Odporność na upadki | 1,8 m na beton (54 upadki) |
+| Odporność MIL-STD | 3 m |
+| Odporność na wstrząsy | 2000 cykli z 0,5 m |
 
 ---
 
