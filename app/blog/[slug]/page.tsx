@@ -20,13 +20,11 @@ import {
   Package
 } from 'lucide-react'
 
-// Generate static params for all blog posts
-export async function generateStaticParams() {
-  const posts = getAllPosts()
-  return posts.map((post) => ({
-    slug: post.slug,
-  }))
-}
+// Dynamiczne renderowanie zamiast SSG (unika timeout'ów dla dużych wpisów)
+export const dynamic = 'force-dynamic'
+
+// Revalidacja co 1 godzinę dla cache
+export const revalidate = 3600
 
 // Generate metadata for SEO
 export async function generateMetadata({ 
