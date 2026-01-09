@@ -533,8 +533,8 @@ Jako **autoryzowany partner Zebra** oferujemy:
 `
   },
   {
-    slug: 'zebra-ds8208-ds8288-skaner-rfid-specyfikacja',
-    title: 'Zebra DS8208 i DS8288 – Skanery ręczne nowej generacji z RFID (Premiera 2025)',
+    slug: 'zebra-ds8208-ds8288-skaner-specyfikacja-cena',
+    title: 'Zebra DS8208 i DS8288 – Skanery ręczne nowej generacji (Premiera 2025)',
     excerpt: 'Poznaj nowe skanery Zebra DS8208 (przewodowy) i DS8288 (bezprzewodowy) z czujnikiem 2 MP, technologią PRZM, wbudowanym RFID i ładowaniem bezstykowym. Specyfikacja, porównanie i zalety dla handlu i logistyki.',
     coverImage: '/blog/zebra-ds8208-ds8288.jpeg',
     author: {
@@ -561,7 +561,7 @@ Jako **autoryzowany partner Zebra** oferujemy:
       'premiera Zebra 2025'
     ],
     seo: {
-      metaTitle: 'Zebra DS8208 i DS8288 – Skanery z RFID i czujnikiem 2 MP | Premiera 2025',
+      metaTitle: 'Zebra DS8208 i DS8288 – Skanery z czujnikiem 2 MP | Specyfikacja i cena',
       metaDescription: 'Skanery Zebra DS8208/DS8288: czujnik 2 MP, zasięg 71 cm, RFID, ładowanie bezstykowe, superkondensator 6000 skanów. Specyfikacja i porównanie z Honeywell.',
       keywords: [
         'Zebra DS8208 specyfikacja',
