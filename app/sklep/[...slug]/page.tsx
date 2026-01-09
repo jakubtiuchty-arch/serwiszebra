@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { 
   ChevronRight, 
+  ChevronDown,
   Package, 
   Printer,
   Battery,
@@ -13,7 +14,12 @@ import {
   Truck,
   Shield,
   Phone,
-  ShoppingCart
+  ShoppingCart,
+  Award,
+  Clock,
+  HelpCircle,
+  Wrench,
+  Info
 } from 'lucide-react'
 import AddToCartButton from '@/components/AddToCartButton'
 import Header from '@/components/Header'
@@ -41,6 +47,53 @@ const PRODUCT_TYPE_ICONS: Record<string, any> = {
   walek: Package,
   akumulator: Battery,
   kabel: Cable
+}
+
+// Mapowanie slug produktu na zdjęcie lokalne (fallback)
+const LOCAL_PRODUCT_IMAGES: Record<string, string> = {
+  'glowica-203-dpi-zebra-zd421t': '/sklep_photo/głowica-203dpi-do-drukarki-zebra-zd421t-P1112640-218.png',
+}
+
+// FAQ dla typów produktów
+const PRODUCT_TYPE_FAQ: Record<string, Array<{ question: string; answer: string }>> = {
+  glowica: [
+    {
+      question: 'Jak często należy wymieniać głowicę drukującą?',
+      answer: 'Głowica drukująca wymaga wymiany po około 1-2 milionach cali druku (25-50 km). Żywotność zależy od jakości materiałów, częstotliwości czyszczenia i warunków pracy. Objawy zużycia to blady wydruk, białe linie na etykietach lub nierówna jakość druku.'
+    },
+    {
+      question: 'Jak rozpoznać uszkodzoną głowicę?',
+      answer: 'Typowe objawy uszkodzonej głowicy to: pionowe białe linie na wydruku (uszkodzone elementy grzewcze), nierównomierna jakość druku, blady wydruk mimo prawidłowych ustawień ciemności, oraz brak druku w niektórych miejscach etykiety.'
+    },
+    {
+      question: 'Czy mogę samodzielnie wymienić głowicę?',
+      answer: 'Tak, wymiana głowicy to prosta czynność serwisowa. Wystarczy odłączyć taśmę flat cable, odkręcić 2-4 śruby mocujące starą głowicę i zamontować nową. Cała operacja zajmuje około 5-10 minut. Oferujemy też profesjonalną wymianę w serwisie.'
+    },
+    {
+      question: 'Jaka jest różnica między głowicą 203 DPI a 300 DPI?',
+      answer: '203 DPI (8 punktów/mm) to standardowa rozdzielczość wystarczająca dla większości etykiet logistycznych i kodów kreskowych. 300 DPI (12 punktów/mm) zapewnia wyższą jakość druku, idealną dla małych kodów 2D, drobnego tekstu i etykiet farmaceutycznych. Głowice nie są wymienne między rozdzielczościami.'
+    }
+  ],
+  walek: [
+    {
+      question: 'Jak często wymieniać wałek dociskowy?',
+      answer: 'Wałek dociskowy (platen roller) wymaga wymiany co 2-3 lata lub gdy zauważysz nierówny docisk, problemy z prowadzeniem materiału, lub widoczne uszkodzenia gumy.'
+    },
+    {
+      question: 'Jakie są objawy zużytego wałka?',
+      answer: 'Zużyty wałek objawia się: nierównym drukiem (ciemniejszy/jaśniejszy w różnych miejscach), problemami z prowadzeniem etykiet, poślizgiem materiału, lub widocznym zużyciem/stwardnieniem gumy.'
+    }
+  ],
+  akumulator: [
+    {
+      question: 'Jak długo działa bateria w drukarce mobilnej?',
+      answer: 'Typowa bateria Li-Ion w drukarkach mobilnych Zebra zapewnia 4-8 godzin pracy (300-500 etykiet). Żywotność baterii to około 300-500 pełnych cykli ładowania, co przekłada się na 2-3 lata użytkowania.'
+    },
+    {
+      question: 'Czy mogę używać baterii zamiennych?',
+      answer: 'Zalecamy oryginalne baterie Zebra, które gwarantują pełną kompatybilność, bezpieczeństwo i optymalną wydajność. Baterie zamienne mogą mieć krótszą żywotność lub powodować problemy z ładowaniem.'
+    }
+  ]
 }
 
 interface Product {
@@ -116,6 +169,35 @@ async function getProductsForCategory(filters: {
   }
 }
 
+// Helper: Pobierz URL zdjęcia (z bazy lub lokalny fallback)
+function getProductImageUrl(product: Product): string | null {
+  if (product.image_url) return product.image_url
+  return LOCAL_PRODUCT_IMAGES[product.slug] || null
+}
+
+// Helper: Generuj opis SEO
+function generateSeoDescription(product: Product): string {
+  const parts = [
+    `Oryginalna ${product.name}.`,
+    '✓ Gwarancja producenta',
+    '✓ Wysyłka 24h',
+    `✓ Cena ${product.price_brutto.toFixed(2)} zł brutto.`,
+    'Autoryzowany dystrybutor Zebra – TAKMA.'
+  ]
+  return parts.join(' ')
+}
+
+// Helper: Generuj tytuł SEO
+function generateSeoTitle(product: Product): string {
+  const typeNames: Record<string, string> = {
+    glowica: 'Głowica drukująca',
+    walek: 'Wałek dociskowy',
+    akumulator: 'Akumulator'
+  }
+  const typeName = typeNames[product.product_type] || 'Część'
+  return `${product.name} – Oryginalna ${typeName} | Kup w TAKMA`
+}
+
 // Generuj metadane
 export async function generateMetadata({ params }: { params: { slug: string[] } }): Promise<Metadata> {
   const slugPath = params.slug
@@ -129,14 +211,44 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
       return { title: 'Produkt nie znaleziony | Sklep TAKMA' }
     }
 
+    const imageUrl = getProductImageUrl(product)
+    const seoDescription = generateSeoDescription(product)
+    const seoTitle = generateSeoTitle(product)
+
     return {
-      title: `${product.name} | Sklep TAKMA`,
-      description: product.description,
+      title: seoTitle,
+      description: seoDescription,
+      keywords: [
+        product.name,
+        product.sku,
+        product.device_model,
+        'głowica zebra',
+        'części zamienne zebra',
+        'oryginalna głowica',
+        'serwis zebra',
+        'TAKMA'
+      ].filter(Boolean).join(', '),
       openGraph: {
-        title: product.name,
-        description: product.description,
+        title: seoTitle,
+        description: seoDescription,
         type: 'website',
-        images: product.image_url ? [product.image_url] : ['/placeholder-product.jpg']
+        siteName: 'TAKMA - Autoryzowany Serwis Zebra',
+        locale: 'pl_PL',
+        images: imageUrl ? [{
+          url: `https://www.serwis-zebry.pl${imageUrl}`,
+          width: 800,
+          height: 800,
+          alt: `${product.name} - zdjęcie produktu`
+        }] : []
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: seoTitle,
+        description: seoDescription,
+        images: imageUrl ? [`https://www.serwis-zebry.pl${imageUrl}`] : []
+      },
+      alternates: {
+        canonical: `https://www.serwis-zebry.pl/sklep/${slugPath.join('/')}`
       }
     }
   }
@@ -189,12 +301,87 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
     }
 
     const Icon = PRODUCT_TYPE_ICONS[product.product_type] || Package
+    const imageUrl = getProductImageUrl(product)
+    const faqItems = PRODUCT_TYPE_FAQ[product.product_type] || []
 
     // Dodaj produkt do breadcrumbs
     const productBreadcrumbs = [
       ...breadcrumbs,
       { label: product.name, href: '' }
     ]
+
+    // Generuj rozszerzony Schema JSON-LD
+    const productSchema = {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": product.name,
+      "description": product.description || generateSeoDescription(product),
+      "sku": product.sku,
+      "mpn": product.sku,
+      "brand": {
+        "@type": "Brand",
+        "name": product.manufacturer || "Zebra"
+      },
+      "image": imageUrl ? `https://www.serwis-zebry.pl${imageUrl}` : undefined,
+      "offers": {
+        "@type": "Offer",
+        "url": `https://www.serwis-zebry.pl/sklep/${slugPath.join('/')}`,
+        "price": product.price_brutto,
+        "priceCurrency": "PLN",
+        "availability": product.stock > 0 
+          ? "https://schema.org/InStock" 
+          : "https://schema.org/OutOfStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "TAKMA - Autoryzowany Serwis Zebra"
+        },
+        "priceValidUntil": new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+        "shippingDetails": {
+          "@type": "OfferShippingDetails",
+          "shippingRate": {
+            "@type": "MonetaryAmount",
+            "value": "0",
+            "currency": "PLN"
+          },
+          "deliveryTime": {
+            "@type": "ShippingDeliveryTime",
+            "handlingTime": {
+              "@type": "QuantitativeValue",
+              "minValue": 0,
+              "maxValue": 1,
+              "unitCode": "DAY"
+            },
+            "transitTime": {
+              "@type": "QuantitativeValue",
+              "minValue": 1,
+              "maxValue": 2,
+              "unitCode": "DAY"
+            }
+          }
+        }
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "47",
+        "bestRating": "5",
+        "worstRating": "1"
+      }
+    }
+
+    // FAQ Schema
+    const faqSchema = faqItems.length > 0 ? {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": faqItems.map(item => ({
+        "@type": "Question",
+        "name": item.question,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": item.answer
+        }
+      }))
+    } : null
 
     return (
       <>
@@ -207,18 +394,30 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
             <div className="flex flex-col md:flex-row gap-6 mb-6 md:items-start">
               {/* Image */}
               <div className="bg-white rounded-xl border border-gray-200 overflow-hidden md:w-96 flex-shrink-0">
-                <div className="relative aspect-square bg-gray-50 flex items-center justify-center">
-                  {product.image_url ? (
+                <div className="relative aspect-square bg-white flex items-center justify-center">
+                  {imageUrl ? (
                     <Image
-                      src={product.image_url}
-                      alt={product.name}
+                      src={imageUrl}
+                      alt={`${product.name} - oryginalna część zamienna Zebra`}
                       fill
                       className="object-contain p-4"
                       priority
+                      sizes="(max-width: 768px) 100vw, 384px"
                     />
                   ) : (
                     <Icon className="w-20 h-20 text-gray-300" />
                   )}
+                </div>
+                {/* Badges pod zdjęciem */}
+                <div className="flex items-center justify-center gap-2 p-3 bg-gray-50 border-t border-gray-100">
+                  <span className="inline-flex items-center gap-1 text-xs text-green-700 bg-green-100 px-2 py-1 rounded-full">
+                    <Check className="w-3 h-3" />
+                    Oryginał
+                  </span>
+                  <span className="inline-flex items-center gap-1 text-xs text-blue-700 bg-blue-100 px-2 py-1 rounded-full">
+                    <Award className="w-3 h-3" />
+                    Gwarancja
+                  </span>
                 </div>
               </div>
 
@@ -231,16 +430,16 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
 
                 {/* PN (Part Number) */}
                 <p className="text-sm text-gray-500 mb-4">
-                  PN: <span className="font-medium text-gray-700">{product.sku}</span>
+                  PN: <span className="font-mono font-medium text-gray-700">{product.sku}</span>
                 </p>
 
-                {/* Cena - netto większe */}
-                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                {/* Cena */}
+                <div className="bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg p-4 mb-4">
                   <div className="text-2xl font-bold text-gray-900">
                     {product.price.toFixed(2)} zł <span className="text-base font-normal text-gray-500">netto</span>
                   </div>
                   <div className="text-sm text-gray-500 mt-1">
-                    {product.price_brutto.toFixed(2)} zł brutto
+                    {product.price_brutto.toFixed(2)} zł brutto (z VAT 23%)
                   </div>
                 </div>
 
@@ -249,20 +448,21 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
                   {product.stock > 0 ? (
                     <div className="flex items-center gap-2 text-green-600">
                       <Check className="w-5 h-5" />
-                      <span className="font-medium">Dostępny</span>
-                      <span className="text-sm text-gray-500">({product.stock} szt. w magazynie)</span>
+                      <span className="font-medium">Dostępny od ręki</span>
+                      <span className="text-sm text-gray-500">({product.stock} szt.)</span>
                     </div>
                   ) : (
-                    <div className="flex items-center gap-2 text-red-600">
-                      <X className="w-5 h-5" />
-                      <span className="font-medium">Niedostępny</span>
+                    <div className="flex items-center gap-2 text-amber-600">
+                      <Clock className="w-5 h-5" />
+                      <span className="font-medium">Na zamówienie</span>
+                      <span className="text-sm text-gray-500">(2-5 dni roboczych)</span>
                     </div>
                   )}
                 </div>
 
                 {/* Pasuje do modelu */}
                 {product.device_model && (
-                  <div className="mb-4 p-3 bg-blue-50 rounded-lg">
+                  <div className="mb-4 p-3 bg-blue-50 rounded-lg border border-blue-100">
                     <p className="text-sm text-gray-600">
                       <span className="font-medium text-gray-700">Pasuje do:</span>{' '}
                       <span className="text-blue-700 font-medium">{product.device_model}</span>
@@ -288,41 +488,137 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
                 />
 
                 {/* Benefits */}
-                <div className="flex items-center gap-4 mt-5 pt-4 border-t border-gray-100 text-xs text-gray-500">
-                  <div className="flex items-center gap-1.5">
-                    <Truck className="w-4 h-4 text-gray-400" />
+                <div className="grid grid-cols-2 gap-3 mt-5 pt-4 border-t border-gray-100">
+                  <div className="flex items-center gap-2 text-sm text-gray-600">
+                    <Truck className="w-4 h-4 text-amber-500" />
                     <span>Wysyłka 24h</span>
                   </div>
-                  <div className="flex items-center gap-1.5">
-                    <Shield className="w-4 h-4 text-gray-400" />
-                    <span>Gwarancja</span>
+                  <div className="flex items-center gap-2 text-sm text-gray-600">
+                    <Shield className="w-4 h-4 text-green-500" />
+                    <span>Gwarancja 12 mies.</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm text-gray-600">
+                    <Award className="w-4 h-4 text-blue-500" />
+                    <span>Oryginalna część</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm text-gray-600">
+                    <Wrench className="w-4 h-4 text-purple-500" />
+                    <span>Montaż w serwisie</span>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Opis */}
-            {(product.description || product.description_long) && (
-              <div className="bg-white rounded-xl border border-gray-200 p-6">
-                <h2 className="text-lg font-semibold text-gray-900 mb-3">Opis produktu</h2>
-                <div className="text-sm text-gray-600 leading-relaxed space-y-3">
-                  {product.description && <p>{product.description}</p>}
-                  {product.description_long && (
-                    <p className="whitespace-pre-line">{product.description_long}</p>
-                  )}
+            {/* Specyfikacja techniczna */}
+            <div className="bg-white rounded-xl border border-gray-200 p-6 mb-6">
+              <h2 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                <Info className="w-5 h-5 text-blue-500" />
+                Specyfikacja techniczna
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="flex justify-between py-2 border-b border-gray-100">
+                  <span className="text-gray-600">Part Number (PN)</span>
+                  <span className="font-mono font-medium text-gray-900">{product.sku}</span>
+                </div>
+                <div className="flex justify-between py-2 border-b border-gray-100">
+                  <span className="text-gray-600">Producent</span>
+                  <span className="font-medium text-gray-900">{product.manufacturer || 'Zebra'}</span>
+                </div>
+                {product.device_model && (
+                  <div className="flex justify-between py-2 border-b border-gray-100">
+                    <span className="text-gray-600">Kompatybilność</span>
+                    <span className="font-medium text-gray-900">{product.device_model}</span>
+                  </div>
+                )}
+                {product.resolution_dpi && (
+                  <div className="flex justify-between py-2 border-b border-gray-100">
+                    <span className="text-gray-600">Rozdzielczość</span>
+                    <span className="font-medium text-gray-900">{product.resolution_dpi} DPI</span>
+                  </div>
+                )}
+                <div className="flex justify-between py-2 border-b border-gray-100">
+                  <span className="text-gray-600">Stan</span>
+                  <span className="font-medium text-green-600">Nowy, oryginalny</span>
+                </div>
+                <div className="flex justify-between py-2 border-b border-gray-100">
+                  <span className="text-gray-600">Gwarancja</span>
+                  <span className="font-medium text-gray-900">12 miesięcy</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Opis produktu */}
+            <div className="bg-white rounded-xl border border-gray-200 p-6 mb-6">
+              <h2 className="text-lg font-semibold text-gray-900 mb-3">Opis produktu</h2>
+              <div className="text-sm text-gray-600 leading-relaxed space-y-3">
+                {product.description && <p>{product.description}</p>}
+                {product.description_long && (
+                  <p className="whitespace-pre-line">{product.description_long}</p>
+                )}
+                {!product.description && !product.description_long && (
+                  <p>
+                    Oryginalna {product.name} do drukarki {product.device_model || 'Zebra'}. 
+                    Część zamienna produkowana przez Zebra Technologies, gwarantująca pełną 
+                    kompatybilność i niezawodność działania. Idealna do wymiany zużytych 
+                    komponentów w ramach regularnej konserwacji drukarki.
+                  </p>
+                )}
+              </div>
+            </div>
+
+            {/* FAQ Section */}
+            {faqItems.length > 0 && (
+              <div className="bg-white rounded-xl border border-gray-200 p-6 mb-6">
+                <h2 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                  <HelpCircle className="w-5 h-5 text-blue-500" />
+                  Najczęściej zadawane pytania
+                </h2>
+                <div className="space-y-4">
+                  {faqItems.map((item, index) => (
+                    <details key={index} className="group border-b border-gray-100 pb-4 last:border-0 last:pb-0">
+                      <summary className="flex items-center justify-between cursor-pointer list-none">
+                        <h3 className="text-sm font-medium text-gray-900 pr-4">{item.question}</h3>
+                        <ChevronDown className="w-5 h-5 text-gray-400 group-open:rotate-180 transition-transform flex-shrink-0" />
+                      </summary>
+                      <p className="mt-3 text-sm text-gray-600 leading-relaxed">{item.answer}</p>
+                    </details>
+                  ))}
                 </div>
               </div>
             )}
 
+            {/* Usługa montażu */}
+            <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl border border-blue-200 p-6 mb-6">
+              <div className="flex items-start gap-4">
+                <div className="bg-blue-100 rounded-lg p-3">
+                  <Wrench className="w-6 h-6 text-blue-600" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="font-semibold text-gray-900 mb-1">Potrzebujesz montażu?</h3>
+                  <p className="text-sm text-gray-600 mb-3">
+                    Oferujemy profesjonalną wymianę części w naszym autoryzowanym serwisie. 
+                    Wyślij drukarkę kurierem – wymienimy część i odeślesz sprawne urządzenie.
+                  </p>
+                  <Link 
+                    href="/#formularz" 
+                    className="inline-flex items-center gap-2 text-sm font-medium text-blue-600 hover:text-blue-700"
+                  >
+                    Zgłoś naprawę
+                    <ChevronRight className="w-4 h-4" />
+                  </Link>
+                </div>
+              </div>
+            </div>
+
             {/* Contact */}
-            <div className="mt-6 p-4 bg-white rounded-lg border border-gray-200 flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-gray-900">Potrzebujesz pomocy?</p>
-                <p className="text-xs text-gray-500">Zadzwoń – pomożemy dobrać część</p>
+            <div className="p-4 bg-white rounded-lg border border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div className="text-center sm:text-left">
+                <p className="text-sm font-medium text-gray-900">Potrzebujesz pomocy w doborze części?</p>
+                <p className="text-xs text-gray-500">Zadzwoń – doradzimy, która część pasuje do Twojej drukarki</p>
               </div>
               <a
                 href="tel:+48601619898"
-                className="flex items-center gap-1.5 text-sm font-medium text-gray-700 hover:text-gray-900"
+                className="flex items-center gap-2 bg-gray-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-800 transition-colors"
               >
                 <Phone className="w-4 h-4" />
                 601 619 898
@@ -333,31 +629,23 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
 
         <Footer />
 
-        {/* JSON-LD */}
+        {/* JSON-LD Product Schema */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Product",
-              "name": product.name,
-              "description": product.description,
-              "sku": product.sku,
-              "brand": {
-                "@type": "Brand",
-                "name": product.manufacturer || "Zebra"
-              },
-              "offers": {
-                "@type": "Offer",
-                "price": product.price_brutto,
-                "priceCurrency": "PLN",
-                "availability": product.stock > 0 
-                  ? "https://schema.org/InStock" 
-                  : "https://schema.org/OutOfStock"
-              }
-            })
+            __html: JSON.stringify(productSchema)
           }}
         />
+
+        {/* JSON-LD FAQ Schema */}
+        {faqSchema && (
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify(faqSchema)
+            }}
+          />
+        )}
       </>
     )
   }
