@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Zwiększony timeout dla dużych stron (default: 60s)
+  staticPageGenerationTimeout: 180,
   images: {
     // Formaty z lepszą kompresją
     formats: ['image/avif', 'image/webp'],
