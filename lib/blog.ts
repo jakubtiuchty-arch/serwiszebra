@@ -442,6 +442,44 @@ Zebra TC501 z baterią standardową (5000 mAh) waży **273 g**, z baterią rozsz
 
 ---
 
+## Dostępne konfiguracje (Part Numbers)
+
+### Zebra TC501 – Part Numbers
+
+| Part Number | Procesor | RAM/ROM | Skaner | Dodatkowe funkcje |
+|-------------|----------|---------|--------|-------------------|
+| **TC5010-021A1A0001-A6** | 6690 2.0 GHz | 8 GB / 128 GB | SR500 | Standard |
+| **TC5010-021B1A0001-A6** | 6690 2.0 GHz | 8 GB / 128 GB | SR560 | Standard |
+| **TC5010-021E1A0001-A6** | 6690 2.0 GHz | 8 GB / 128 GB | AC670 (30m) | Standard |
+| **TC5010-041A2B0001-A6** | 6690 2.9 GHz | 12 GB / 256 GB | SR500 | Ultrawide Camera |
+| **TC5010-041B2B0001-A6** | 6690 2.9 GHz | 12 GB / 256 GB | SR560 | Ultrawide Camera |
+| **TC5010-041E2B0001-A6** | 6690 2.9 GHz | 12 GB / 256 GB | AC670 (30m) | Ultrawide Camera |
+| **TC5010-041B2C00A1-A6** | 6690 2.9 GHz | 12 GB / 256 GB | SR560 | Time of Flight (ToF) |
+
+### Zebra TC701 – Part Numbers
+
+| Part Number | Procesor | RAM/ROM | Skaner | Dodatkowe funkcje |
+|-------------|----------|---------|--------|-------------------|
+| **TC7010-021B1A0001-A6** | 6690 2.0 GHz | 8 GB / 128 GB | SR560 | Standard |
+| **TC7010-021E1A0001-A6** | 6690 2.0 GHz | 8 GB / 128 GB | AC670 (30m) | Standard |
+| **TC7010-041B2B0001-A6** | 6690 2.9 GHz | 12 GB / 256 GB | SR560 | Ultrawide Camera |
+| **TC7010-041E2B0001-A6** | 6690 2.9 GHz | 12 GB / 256 GB | AC670 (30m) | Ultrawide Camera |
+| **TC7010-041B2C00A1-A6** | 6690 2.9 GHz | 12 GB / 256 GB | SR560 | Time of Flight (ToF) |
+
+### Jak czytać Part Number?
+
+Przykład: **TC5010-041E2B0001-A6**
+
+- **TC5010** – model TC501
+- **04** – procesor 2.9 GHz (02 = 2.0 GHz)
+- **1E** – skaner AC670 (1A = SR500, 1B = SR560)
+- **2B** – Ultrawide Camera (2C = ToF sensor, 1A = standard)
+- **A6** – wersja ROW (Rest of World)
+
+> **Wszystkie konfiguracje zawierają:** Wi-Fi 7, Hot Swap, Secure Element, aparat 50 MP tylny + 8 MP przedni, bateria standardowa.
+
+---
+
 ## Podsumowanie
 
 **Zebra TC501 i Zebra TC701** to urządzenia zaprojektowane na następną dekadę:
