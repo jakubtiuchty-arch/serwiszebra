@@ -11444,10 +11444,10 @@ Zebra ZQ210 to kompaktowa **mobilna drukarka paragonów i etykiet** o szerokośc
 
 | Szerokość materiału | Uwagi |
 |--------------------|-------|
-| 58 mm (standard) | Bez spacerów |
-| 49,5 mm | Z opcjonalnymi spacerami |
-| 40 mm | Z opcjonalnymi spacerami |
-| 30 mm | Z opcjonalnymi spacerami |
+| 58 mm (standard) | Standardowa szerokość |
+| 49,5 mm | Z wkładkami redukcyjnymi (opcja) |
+| 40 mm | Z wkładkami redukcyjnymi (opcja) |
+| 30 mm | Z wkładkami redukcyjnymi (opcja) |
 
 ### Złącza i komunikacja
 
@@ -11647,7 +11647,7 @@ Opcjonalna stacja dokująca (5-Bay Docking Cradle) umożliwia:
 | Grubość materiału | 0,058 – 0,1575 mm |
 | Szerokość czarnego znacznika | min. 12,7 mm |
 
-> **Uwaga:** Opcjonalne spacery umożliwiają użycie materiałów o szerokości 49,5 mm, 40 mm i 30 mm.
+> **Uwaga:** Opcjonalne **wkładki redukcyjne** (adaptery do węższych rolek) umożliwiają użycie materiałów o szerokości 49,5 mm, 40 mm i 30 mm.
 `
       },
       {
@@ -11830,7 +11830,7 @@ Etui (SG-MPV-SC21-01) zapewnia:
 
 ### Czy można używać węższych materiałów w ZQ210?
 
-**Odpowiedź:** Tak, z opcjonalnymi **spacerami** (KIT-MPV-MD2SPR1-05) można używać materiałów o szerokości 49,5 mm, 40 mm i 30 mm zamiast standardowych 58 mm.
+**Odpowiedź:** Tak, z opcjonalnymi **wkładkami redukcyjnymi** (adaptery do węższych rolek, nr kat. KIT-MPV-MD2SPR1-05) można używać materiałów o szerokości 49,5 mm, 40 mm i 30 mm zamiast standardowych 58 mm.
 
 ### Ile waży drukarka ZQ210?
 
