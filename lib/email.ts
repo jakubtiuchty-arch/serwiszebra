@@ -479,6 +479,141 @@ ${getEmailHeader()}
   `
 }
 
+// ========== EMAIL O ZAMÓWIENIU KURIERA DO ODBIORU ==========
+
+interface RepairPickupScheduledEmailData {
+  customerEmail: string
+  customerName: string
+  repairId: string
+  repairNumber?: string
+  deviceModel: string
+  courierName: string
+  trackingNumber: string
+  pickupDate: string
+}
+
+export async function sendRepairPickupScheduledEmail(data: RepairPickupScheduledEmailData) {
+  try {
+    const shortId = getRepairNumber(data.repairId, data.repairNumber)
+    
+    const email = await resend.emails.send({
+      from: 'Serwis Zebra <serwis@takma.com.pl>',
+      to: data.customerEmail,
+      subject: `Kurier przyjedzie po Twoje urządzenie - ${data.deviceModel} #${shortId}`,
+      html: generateRepairPickupScheduledHTML(data, shortId)
+    })
+    
+    console.log('[Email] Repair pickup scheduled email sent:', email)
+    return email
+    
+  } catch (error) {
+    console.error('[Email] Error sending repair pickup scheduled email:', error)
+    throw error
+  }
+}
+
+function generateRepairPickupScheduledHTML(data: RepairPickupScheduledEmailData, shortId: string): string {
+  // Format daty
+  const pickupDateFormatted = new Date(data.pickupDate).toLocaleDateString('pl-PL', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  })
+
+  return `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      ${getEmailStyles()}
+    </head>
+    <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #ffffff;">
+      <div style="max-width: 600px; margin: 0 auto; background-color: white; border-radius: 8px; overflow: hidden;">
+        
+${getEmailHeader()}
+
+        <!-- Content -->
+        <div style="padding: 32px 24px;">
+          
+          <!-- Success message -->
+          <div style="text-align: center; margin-bottom: 32px;">
+            <div style="display: inline-block; background-color: #f59e0b; width: 64px; height: 64px; border-radius: 50%; margin-bottom: 16px;">
+              <div style="color: white; font-size: 32px; line-height: 64px;">📦</div>
+            </div>
+            <h2 style="margin: 0 0 8px 0; font-size: 24px; color: #111827;">
+              Kurier przyjedzie po Twoje urządzenie!
+            </h2>
+            <p style="margin: 0; color: #6b7280;">
+              Zamówiliśmy kuriera do odbioru paczki
+            </p>
+          </div>
+
+          <!-- Device info -->
+          <div style="background-color: #f9fafb; border-radius: 8px; padding: 20px; margin-bottom: 24px;">
+            <table style="width: 100%;">
+              <tr>
+                <td style="color: #6b7280; font-size: 14px;">Nr zgłoszenia:</td>
+                <td style="text-align: right; font-weight: 600; color: #111827; font-family: monospace;">#${shortId}</td>
+              </tr>
+              <tr>
+                <td style="color: #6b7280; font-size: 14px; padding-top: 8px;">Urządzenie:</td>
+                <td style="text-align: right; font-weight: 600; color: #111827;">${data.deviceModel}</td>
+              </tr>
+            </table>
+          </div>
+
+          <!-- Pickup info -->
+          <div style="background-color: #fef3c7; border-radius: 8px; padding: 20px; margin-bottom: 24px;">
+            <h4 style="margin: 0 0 12px 0; font-size: 16px; color: #92400e;">
+              📅 Data odbioru
+            </h4>
+            <p style="margin: 0 0 8px 0; color: #451a03; font-weight: 700; font-size: 18px;">
+              ${pickupDateFormatted}
+            </p>
+            <table style="width: 100%;">
+              <tr>
+                <td style="color: #92400e; font-size: 14px; padding: 4px 0;">Kurier:</td>
+                <td style="text-align: right; font-weight: 600; color: #451a03;">${data.courierName}</td>
+              </tr>
+              <tr>
+                <td style="color: #92400e; font-size: 14px; padding: 4px 0;">Numer przesyłki:</td>
+                <td style="text-align: right; font-weight: 600; color: #451a03; font-family: monospace;">${data.trackingNumber}</td>
+              </tr>
+            </table>
+          </div>
+
+          <!-- Packing instructions -->
+          <div style="background-color: #dbeafe; border-radius: 8px; padding: 20px; margin-bottom: 24px;">
+            <h4 style="margin: 0 0 12px 0; font-size: 16px; color: #1e40af;">
+              📋 Jak przygotować paczkę?
+            </h4>
+            <ol style="margin: 0; padding-left: 20px; color: #1e3a8a; font-size: 14px; line-height: 1.8;">
+              <li><strong>Spakuj urządzenie</strong> w karton z zabezpieczeniami (folia bąbelkowa, styropian)</li>
+              <li><strong>Dołącz akcesoria</strong> (kabel zasilający, bateria, kabel USB) - jeśli wymagane</li>
+              <li><strong>Przygotuj list przewozowy</strong> - kurier może go wydrukować lub przynieść ze sobą</li>
+              <li><strong>Bądź dostępny</strong> pod wskazanym adresem w dniu odbioru</li>
+            </ol>
+          </div>
+
+          <!-- Contact -->
+          <div style="text-align: center; color: #6b7280; font-size: 14px;">
+            <p style="margin: 0 0 8px 0;">Masz pytania? Skontaktuj się z nami:</p>
+            <p style="margin: 0;">
+              <strong>Tel:</strong> +48 607 819 688<br>
+              <strong>Email:</strong> serwis@takma.com.pl
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </body>
+    </html>
+  `
+}
+
 // ========== EMAIL O GOTOWEJ WYCENIE - DO KLIENTA ==========
 
 interface QuoteReadyEmailData {

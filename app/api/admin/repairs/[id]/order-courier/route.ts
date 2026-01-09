@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { requireAdminServer } from '@/lib/auth-server'
 import { createClient } from '@/lib/supabase/server'
-import { sendRepairShippedEmail } from '@/lib/email'
+import { sendRepairShippedEmail, sendRepairPickupScheduledEmail } from '@/lib/email'
 
 export async function POST(
   request: NextRequest,
@@ -175,9 +175,10 @@ export async function POST(
         changed_by: adminCheck.user?.id
       })
 
-    // Wyślij email do klienta (tylko dla wysyłki)
-    if (direction === 'delivery') {
-      try {
+    // Wyślij email do klienta
+    try {
+      if (direction === 'delivery') {
+        // Wysyłka DO klienta - urządzenie naprawione
         const trackingUrl = getTrackingUrl(courierName, trackingNumber)
         await sendRepairShippedEmail({
           customerEmail: repair.email,
@@ -189,9 +190,22 @@ export async function POST(
           trackingUrl: trackingUrl
         })
         console.log('[Email] Shipped email sent to:', repair.email)
-      } catch (emailError) {
-        console.error('[Email] Failed to send shipped email:', emailError)
+      } else if (direction === 'pickup') {
+        // Odbiór OD klienta - kurier przyjedzie po urządzenie
+        await sendRepairPickupScheduledEmail({
+          customerEmail: repair.email,
+          customerName: `${repair.first_name} ${repair.last_name}`,
+          repairId: repair.id,
+          repairNumber: repair.repair_number,
+          deviceModel: repair.device_model,
+          courierName: courierName,
+          trackingNumber: trackingNumber,
+          pickupDate: pickup_date
+        })
+        console.log('[Email] Pickup scheduled email sent to:', repair.email)
       }
+    } catch (emailError) {
+      console.error('[Email] Failed to send courier email:', emailError)
     }
 
     return NextResponse.json({
