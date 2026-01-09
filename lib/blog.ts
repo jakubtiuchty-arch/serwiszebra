@@ -188,6 +188,12 @@ export const blogPosts: BlogPost[] = [
 
 ---
 
+## Galeria: Zebra TC501
+
+[GALLERY:TC501:5]
+
+---
+
 ## Najważniejsze nowości – co wyróżnia TC501/TC701?
 
 ### Procesor z dedykowanym silnikiem AI

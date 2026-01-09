@@ -556,6 +556,61 @@ export default function BlogPostPage({
             </p>
           </div>
         </footer>
+
+        {/* Lightbox */}
+        <div 
+          id="lightbox" 
+          className="fixed inset-0 bg-black/90 z-50 hidden items-center justify-center p-4"
+          onClick={() => {
+            const el = document.getElementById('lightbox')
+            if (el) el.classList.add('hidden')
+            el?.classList.remove('flex')
+          }}
+        >
+          <button 
+            className="absolute top-4 right-4 text-white text-4xl font-light hover:text-gray-300 z-10"
+            aria-label="Zamknij"
+          >
+            ×
+          </button>
+          <img 
+            id="lightbox-img" 
+            src="" 
+            alt="" 
+            className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          />
+          <p id="lightbox-caption" className="absolute bottom-4 left-0 right-0 text-center text-white text-sm"></p>
+        </div>
+
+        {/* Lightbox Script */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.openLightbox = function(src, alt) {
+                const lightbox = document.getElementById('lightbox');
+                const img = document.getElementById('lightbox-img');
+                const caption = document.getElementById('lightbox-caption');
+                if (lightbox && img && caption) {
+                  img.src = src;
+                  img.alt = alt;
+                  caption.textContent = alt;
+                  lightbox.classList.remove('hidden');
+                  lightbox.classList.add('flex');
+                }
+              };
+              document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                  const lightbox = document.getElementById('lightbox');
+                  if (lightbox) {
+                    lightbox.classList.add('hidden');
+                    lightbox.classList.remove('flex');
+                  }
+                }
+              });
+            `
+          }}
+        />
       </div>
     </>
   )
@@ -763,6 +818,41 @@ function parseMarkdown(markdown: string): string {
     if (inOrderedList && !orderedMatch) {
       result.push('</ol>')
       inOrderedList = false
+    }
+
+    // Gallery syntax: [GALLERY:folder:count]
+    const galleryMatch = line.match(/^\[GALLERY:([^\]:]+):?(\d+)?\]$/)
+    if (galleryMatch) {
+      const folder = galleryMatch[1]
+      const count = parseInt(galleryMatch[2] || '5')
+      const galleryId = `gallery-${Math.random().toString(36).substr(2, 9)}`
+      
+      let galleryHtml = `
+        <div class="my-6 sm:my-8">
+          <div class="grid grid-cols-3 sm:grid-cols-5 gap-2 sm:gap-3" id="${galleryId}">
+      `
+      
+      for (let j = 1; j <= count; j++) {
+        const imgPath = `/${folder}/Zebra ${folder}_${j}.jpeg`
+        galleryHtml += `
+          <div class="aspect-square cursor-pointer group" onclick="openLightbox('${imgPath}', '${folder} - Zdjęcie ${j}')">
+            <img 
+              src="${imgPath}" 
+              alt="${folder} - Zdjęcie ${j}"
+              class="w-full h-full object-cover rounded-lg border border-gray-200 shadow-sm group-hover:shadow-md group-hover:border-blue-300 transition-all duration-200"
+              loading="lazy"
+            />
+          </div>
+        `
+      }
+      
+      galleryHtml += `
+          </div>
+          <p class="text-center text-xs text-gray-500 mt-2">Kliknij zdjęcie aby powiększyć</p>
+        </div>
+      `
+      result.push(galleryHtml)
+      continue
     }
 
     // Empty line
