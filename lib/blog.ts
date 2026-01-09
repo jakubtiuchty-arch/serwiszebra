@@ -536,7 +536,7 @@ Jako **autoryzowany partner Zebra** oferujemy:
     slug: 'zebra-ds8208-ds8288-skaner-rfid-specyfikacja',
     title: 'Zebra DS8208 i DS8288 – Skanery ręczne nowej generacji z RFID (Premiera 2025)',
     excerpt: 'Poznaj nowe skanery Zebra DS8208 (przewodowy) i DS8288 (bezprzewodowy) z czujnikiem 2 MP, technologią PRZM, wbudowanym RFID i ładowaniem bezstykowym. Specyfikacja, porównanie i zalety dla handlu i logistyki.',
-    coverImage: '/blog/zebra-ds8208-ds8288-skaner.jpeg',
+    coverImage: '/blog/zebra-ds8208-ds8288.jpeg',
     author: {
       name: 'Zespół Serwis Zebra',
       role: 'Autoryzowany serwis Zebra'
