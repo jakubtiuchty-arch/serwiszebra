@@ -192,6 +192,10 @@ export const blogPosts: BlogPost[] = [
 
 [GALLERY:TC501:5]
 
+## Galeria: Zebra TC701
+
+[GALLERY:TC701:5]
+
 ---
 
 ## Najważniejsze nowości – co wyróżnia TC501/TC701?
