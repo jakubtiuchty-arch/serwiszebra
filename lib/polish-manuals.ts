@@ -10385,7 +10385,7 @@ Jeśli drukarka jest zablokowana i nie znasz hasła:
 ### Więcej informacji
 
 Szczegółowy przewodnik po dyrektywie EU RED i PrintSecure znajdziesz na:
-**serwis-zebry.pl/blog/zebra-wymaga-hasla-dyrektywa-red-konfiguracja**
+[Dyrektywa EU RED – konfiguracja](/blog/zebra-wymaga-hasla-dyrektywa-red-konfiguracja)
 `
       },
       {
@@ -11254,7 +11254,7 @@ Drukarki sprzedawane w regionie EMEA od 1 sierpnia 2025 wymagają:
 - Skonfigurowania PIN panelu przedniego
 - Przed konfiguracją sieciową należy wykonać powyższe kroki
 
-Więcej informacji na stronie /blog/zebra-wymaga-hasla-dyrektywa-red-konfiguracja
+Więcej informacji: [Dyrektywa EU RED – konfiguracja](/blog/zebra-wymaga-hasla-dyrektywa-red-konfiguracja)
 
 ### Instalacja sterowników
 
