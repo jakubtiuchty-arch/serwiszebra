@@ -511,37 +511,37 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
 
             {/* Specyfikacja techniczna */}
             <div className="bg-white rounded-xl border border-gray-200 p-6 mb-6">
-              <h2 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+              <h2 className="text-base font-semibold text-gray-900 mb-4 flex items-center gap-2">
                 <Info className="w-5 h-5 text-blue-500" />
                 Specyfikacja techniczna
               </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="flex justify-between py-2 border-b border-gray-100">
-                  <span className="text-gray-600">Part Number (PN)</span>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-0">
+                <div className="flex justify-between py-2 border-b border-gray-100 text-sm">
+                  <span className="text-gray-500">Part Number (PN)</span>
                   <span className="font-mono font-medium text-gray-900">{product.sku}</span>
                 </div>
-                <div className="flex justify-between py-2 border-b border-gray-100">
-                  <span className="text-gray-600">Producent</span>
+                <div className="flex justify-between py-2 border-b border-gray-100 text-sm">
+                  <span className="text-gray-500">Producent</span>
                   <span className="font-medium text-gray-900">{product.manufacturer || 'Zebra'}</span>
                 </div>
                 {product.device_model && (
-                  <div className="flex justify-between py-2 border-b border-gray-100">
-                    <span className="text-gray-600">Kompatybilność</span>
+                  <div className="flex justify-between py-2 border-b border-gray-100 text-sm">
+                    <span className="text-gray-500">Kompatybilność</span>
                     <span className="font-medium text-gray-900">{product.device_model}</span>
                   </div>
                 )}
                 {product.resolution_dpi && (
-                  <div className="flex justify-between py-2 border-b border-gray-100">
-                    <span className="text-gray-600">Rozdzielczość</span>
+                  <div className="flex justify-between py-2 border-b border-gray-100 text-sm">
+                    <span className="text-gray-500">Rozdzielczość</span>
                     <span className="font-medium text-gray-900">{product.resolution_dpi} DPI</span>
                   </div>
                 )}
-                <div className="flex justify-between py-2 border-b border-gray-100">
-                  <span className="text-gray-600">Stan</span>
+                <div className="flex justify-between py-2 border-b border-gray-100 text-sm">
+                  <span className="text-gray-500">Stan</span>
                   <span className="font-medium text-green-600">Nowy, oryginalny</span>
                 </div>
-                <div className="flex justify-between py-2 border-b border-gray-100">
-                  <span className="text-gray-600">Gwarancja</span>
+                <div className="flex justify-between py-2 border-b border-gray-100 text-sm">
+                  <span className="text-gray-500">Gwarancja</span>
                   <span className="font-medium text-gray-900">12 miesięcy</span>
                 </div>
               </div>
@@ -549,7 +549,7 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
 
             {/* Opis produktu */}
             <div className="bg-white rounded-xl border border-gray-200 p-6 mb-6">
-              <h2 className="text-lg font-semibold text-gray-900 mb-3">Opis produktu</h2>
+              <h2 className="text-base font-semibold text-gray-900 mb-3">Opis produktu</h2>
               <div className="text-sm text-gray-600 leading-relaxed space-y-3">
                 {product.description && <p>{product.description}</p>}
                 {product.description_long && (
@@ -569,7 +569,7 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
             {/* FAQ Section */}
             {faqItems.length > 0 && (
               <div className="bg-white rounded-xl border border-gray-200 p-6 mb-6">
-                <h2 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                <h2 className="text-base font-semibold text-gray-900 mb-4 flex items-center gap-2">
                   <HelpCircle className="w-5 h-5 text-blue-500" />
                   Najczęściej zadawane pytania
                 </h2>
@@ -594,7 +594,7 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
                   <Wrench className="w-6 h-6 text-blue-600" />
                 </div>
                 <div className="flex-1">
-                  <h3 className="font-semibold text-gray-900 mb-1">Potrzebujesz montażu?</h3>
+                  <h3 className="text-sm font-semibold text-gray-900 mb-1">Potrzebujesz montażu?</h3>
                   <p className="text-sm text-gray-600 mb-3">
                     Oferujemy profesjonalną wymianę części w naszym autoryzowanym serwisie. 
                     Wyślij drukarkę kurierem – wymienimy część i odeślesz sprawne urządzenie.
