@@ -188,6 +188,14 @@ export const blogPosts: BlogPost[] = [
 
 ---
 
+## Galeria: Zebra TC501
+
+[GALLERY:TC501:5:Zebra TC501 terminal mobilny AI]
+
+## Galeria: Zebra TC701
+
+[GALLERY:TC701:5:Zebra TC701 terminal mobilny ultra-rugged]
+
 ---
 
 ## Najważniejsze nowości – co wyróżnia TC501/TC701?
