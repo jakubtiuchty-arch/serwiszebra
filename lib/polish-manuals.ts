@@ -10431,6 +10431,485 @@ serwis-zebry.pl
 `
       }
     ]
+  },
+  'zt620': {
+    model: 'ZT620',
+    title: 'Zebra ZT620 – Instrukcja obsługi po Polsku',
+    lastUpdated: '2026-01-09',
+    sourceDocument: 'Zebra ZT620 User Guide',
+    keywords: [
+      'ZT620', 'zebra zt620', 'drukarka przemysłowa', 'drukarka etykiet', 
+      'instrukcja ZT620', 'ZT620 po polsku', 'drukarka 6 cali',
+      'drukarka paletowa', 'etykiety wysyłkowe', 'duże etykiety',
+      'kalibracja ZT620', 'ribbon ZT620', 'oświetlenie ścieżki mediów',
+      'ZT620R', 'RFID ZT620', '203 dpi', '300 dpi', '168 mm'
+    ],
+    sections: [
+      {
+        title: '1. Podstawowe informacje',
+        content: `
+### O drukarce Zebra ZT620
+
+Zebra ZT620 to przemysłowa drukarka etykiet klasy premium o **szerokości druku 6 cali (168 mm)**, następca legendarnej serii Xi4. Zaprojektowana do najbardziej wymagających środowisk produkcyjnych, magazynowych i logistycznych, gdzie wymagane są duże etykiety wysyłkowe, etykiety na palety i oznaczenia przemysłowe.
+
+### Parametry techniczne
+
+| Parametr | ZT620 |
+|----------|-------|
+| **Szerokość druku** | **do 168 mm (6,6")** |
+| Technologia druku | Termotransferowy / termiczny bezpośredni |
+| Rozdzielczość | 203 dpi lub 300 dpi |
+| Prędkość druku (203 dpi) | do 305 mm/s (12"/s) |
+| Prędkość druku (300 dpi) | do 203 mm/s (8"/s) |
+| Maks. średnica rolki | 203 mm (8") |
+| Średnica gilzy | 76 mm (3") |
+| Długość ribbonu | do 450 m |
+| Maks. szerokość materiału | 178 mm (7") |
+
+### Porównanie ZT610 vs ZT620
+
+| Parametr | ZT610 | ZT620 |
+|----------|-------|-------|
+| Szerokość druku | 104 mm (4") | **168 mm (6")** |
+| Rozdzielczości | 203, 300, 600 dpi | 203, 300 dpi |
+| Maks. prędkość (203 dpi) | 356 mm/s | 305 mm/s |
+| Zastosowanie | Etykiety standardowe | **Duże etykiety, palety** |
+
+### Zastosowania ZT620
+
+- **Logistyka i wysyłka:** duże etykiety wysyłkowe, etykiety na palety
+- **Magazynowanie:** oznaczenia regałów, lokalizacji, stref
+- **Produkcja:** etykiety produktowe, WIP labels, oznaczenia partii
+- **Transport:** etykiety przewozowe, dokumenty CMR
+- **Retail:** etykiety cenowe wielkoformatowe
+- **Healthcare:** etykiety na pojemniki, oznaczenia próbek
+
+### Złącza
+
+- USB 2.0 (standard)
+- RS-232 Serial (standard)
+- Ethernet 10/100 (opcja)
+- Wi-Fi 802.11a/b/g/n/ac + Bluetooth 4.1 (opcja)
+- USB Host (2x) – do klawiatury, skanera, pendrive
+- Parallel (LPT) – opcja
+- Port aplikatora – opcja
+
+### Cechy charakterystyczne
+
+- **Szerokość druku 6 cali (168 mm)** – idealna do dużych etykiet
+- **Metalowa konstrukcja klasy premium** – najwyższa trwałość
+- Wyświetlacz LCD z nawigacją przyciskami
+- **Oświetlenie ścieżki mediów** – automatyczne podświetlenie przy braku materiału
+- **Oświetlenie ścieżki ribbonu** – automatyczne podświetlenie przy braku ribbonu
+- **Oświetlenie przy otwartych drzwiach** – ułatwia ładowanie
+- 5 wskaźników LED statusu
+- Złote punkty dotykowe oznaczające elementy obsługi
+- Near Field Communication (NFC) / Print Touch
+- Opcjonalny obcinacz, nawijak, enkoder RFID (ZT620R)
+`
+      },
+      {
+        title: '2. Rozpakowanie i instalacja',
+        content: `
+### Zawartość opakowania
+
+- Drukarka ZT620
+- Kabel zasilający
+- Kabel USB
+- Pusta gilza do odbierania ribbonu (wersja TT)
+- Skrócona instrukcja obsługi
+
+### Wybór lokalizacji
+
+- **Powierzchnia:** płaska, stabilna, zdolna utrzymać ciężar drukarki (22,7-29,4 kg)
+- **Przestrzeń:** zapewnij wentylację ze wszystkich stron
+- **Zasilanie:** w pobliżu łatwo dostępnego gniazdka
+- **Komunikacja:** w zasięgu sieci lub kabli komunikacyjnych
+
+> **Uwaga:** Nie umieszczaj materiałów tłumiących pod drukarką – ogranicza to przepływ powietrza.
+
+### Warunki pracy
+
+| Tryb | Temperatura | Wilgotność |
+|------|-------------|------------|
+| Thermal Transfer | 5°C – 40°C | 20-85% bez kondensacji |
+| Direct Thermal | 0°C – 40°C | 20-85% bez kondensacji |
+
+### Warunki przechowywania
+
+- Temperatura: -40°C do +60°C
+- Wilgotność: 5-85% bez kondensacji
+`
+      },
+      {
+        title: '3. Panel sterowania',
+        content: `
+### Wyświetlacz LCD
+
+Wyświetlacz pokazuje aktualny status drukarki i umożliwia nawigację po menu. W stanie bezczynności pokazuje wersję firmware i adres IP.
+
+### Wskaźniki LED
+
+| Wskaźnik | Znaczenie |
+|----------|-----------|
+| **STATUS** | Ogólny stan drukarki (zielony=OK, żółty=ostrzeżenie, czerwony=błąd) |
+| **PAUSE** | Drukarka wstrzymana |
+| **DATA** | Odbieranie/przetwarzanie danych |
+| **SUPPLIES** | Stan materiałów eksploatacyjnych |
+| **NETWORK** | Stan połączenia sieciowego |
+
+### Przyciski sterujące
+
+| Przycisk | Funkcja |
+|----------|---------|
+| **LEFT SELECT** | Wykonuje akcję pokazaną po lewej stronie wyświetlacza |
+| **RIGHT SELECT** | Wykonuje akcję pokazaną po prawej stronie wyświetlacza |
+| **UP ARROW** | Zwiększa wartość / przewija w górę |
+| **DOWN ARROW** | Zmniejsza wartość / przewija w dół |
+| **OK** | Potwierdza wybór |
+| **PAUSE** | Wstrzymuje/wznawia drukowanie |
+| **FEED** | Wysuwa jedną etykietę |
+| **CANCEL** | Anuluje (1x = następna etykieta, 2 sek. = wszystkie) |
+
+### Menu główne (Home Menu)
+
+Z ekranu bezczynności naciśnij **LEFT SELECT** aby wejść do menu głównego:
+
+| Ikona | Menu | Zawartość |
+|-------|------|-----------|
+| ⚙️ | **SETTINGS** | Ciemność, prędkość, typ mediów, tryb druku |
+| 🔧 | **TOOLS** | Kalibracja, diagnostyka, USB, ZBI |
+| 📡 | **NETWORK** | Ustawienia sieciowe, IP, Wi-Fi |
+| 📻 | **RFID** | Ustawienia RFID (tylko ZT620R) |
+| 🔤 | **LANGUAGE** | Język, komendy ZPL |
+| 📊 | **SENSORS** | Kalibracja czujników |
+| 🔌 | **PORTS** | Ustawienia portów szeregowych |
+| 📶 | **BLUETOOTH** | Ustawienia Bluetooth |
+`
+      },
+      {
+        title: '4. Ładowanie materiałów eksploatacyjnych',
+        content: `
+### Specyfikacja materiałów dla ZT620
+
+| Parametr | Wartość |
+|----------|---------|
+| Maks. szerokość materiału | 178 mm (7") |
+| Min. szerokość materiału | 25 mm (1") |
+| Maks. szerokość druku | 168 mm (6,6") |
+| Maks. średnica rolki | 203 mm (8") |
+| Średnica gilzy | 76 mm (3") |
+
+### Obsługiwane typy materiałów
+
+- **Etykiety z przerwą (gap/notch)** – rozdzielone przerwami lub nacięciami
+- **Etykiety z czarnym znacznikiem (mark)** – czarny znacznik z tyłu
+- **Materiał ciągły (continuous)** – bez znaczników separacji
+- **Materiał składany (fanfold)** – stos składanych etykiet
+
+### Tryby druku (Print Mode)
+
+| Tryb | Wymagana opcja | Opis |
+|------|----------------|------|
+| **TEAR OFF** | Brak | Ręczne odrywanie (domyślny) |
+| **PEEL-OFF** | Nawijak | Automatyczne odklejanie |
+| **REWIND** | Nawijak | Nawijanie całych etykiet |
+| **CUTTER** | Obcinacz | Automatyczne cięcie |
+| **APPLICATOR** | Port aplikatora | Współpraca z aplikatorem |
+
+### Ładowanie materiału (tryb Tear-Off)
+
+> **Ostrzeżenie:** Głowica może być gorąca! Zdejmij biżuterię przed pracą.
+
+1. **Podnieś drzwi komory mediów** – włączy się oświetlenie
+2. **Otwórz głowicę** – obróć dźwignię w górę
+3. **Odsuń prowadnicę materiału** – pokrętłem regulacyjnym
+4. **Włóż rolkę** na wrzeciono, dociśnij do tyłu
+5. **Przeprowadź materiał** pod zespołem tancerza, przez czujnik, pod głowicą
+6. **Dosuń prowadnicę** do krawędzi materiału
+7. **Zamknij głowicę** (dźwignia w dół)
+8. Zamknij drzwi
+9. Naciśnij **PAUSE** aby umożliwić drukowanie
+`
+      },
+      {
+        title: '5. Ładowanie ribbonu',
+        content: `
+> **Dotyczy tylko trybu Thermal Transfer.**
+
+### Ribbon dla ZT620
+
+Dla drukarki ZT620 należy stosować ribbon o szerokości odpowiedniej do szerokiego materiału 6":
+- **Maks. szerokość ribbonu:** 178 mm (7")
+- Ribbon musi być szerszy niż drukowany materiał aby chronić głowicę
+
+### Czy potrzebuję ribbonu?
+
+Przesuń paznokciem po powierzchni materiału:
+- **Czarny ślad** = Direct Thermal (bez ribbonu)
+- **Brak śladu** = Thermal Transfer (wymaga ribbonu)
+
+### Strona powlekana ribbonu
+
+ZT620 standardowo obsługuje ribbon powlekany na zewnątrz.
+
+**Test klejenia:** Przyklej kawałek etykiety do zewnętrznej strony rolki. Jeśli farba przylgnie do etykiety – ribbon jest powlekany na zewnątrz.
+
+### Procedura ładowania ribbonu
+
+1. Podnieś drzwi komory mediów
+2. Otwórz głowicę (dźwignia w górę)
+3. **Załaduj rolkę ribbonu na dolne wrzeciono (podające):**
+   - Ribbon odwija się do przodu, od dołu
+   - Dociśnij rolkę do tyłu
+4. **Przeprowadź ribbon pod głowicą i wokół jej lewej strony**
+5. **Nawiń ribbon na górne wrzeciono (odbiorcze):**
+   - Ribbon musi być jak najbardziej z tyłu pod głowicą
+   - Owiń kilka zwojów
+   - Obróć wrzeciono w kierunku nawijania aby naprężyć
+6. Załaduj materiał (jeśli jeszcze nie załadowany)
+7. Zamknij głowicę (dźwignia w dół)
+8. Zamknij drzwi
+`
+      },
+      {
+        title: '6. Menu użytkownika',
+        content: `
+### SETTINGS Menu
+
+| Pozycja | Opis | Wartości ZT620 |
+|---------|------|----------------|
+| **DARKNESS** | Ciemność druku | 0.0 – 30.0 |
+| **PRINT SPEED** | Prędkość druku | 2-12 ips (203dpi), 2-8 ips (300dpi) |
+| **MEDIA TYPE** | Typ materiału | CONTINUOUS, GAP/NOTCH, MARK |
+| **PRINT METHOD** | Metoda druku | THERMAL TRANS, DIRECT THERMAL |
+| **TEAR OFF** | Pozycja odrywania | -120 do +120 dots |
+| **PRINT WIDTH** | Szerokość druku | Do 1344 (203dpi), 1984 (300dpi) |
+| **PRINT MODE** | Tryb druku | TEAR OFF, PEEL-OFF, REWIND, CUTTER |
+| **COVER OPEN LIGHT** | Oświetlenie przy otwarciu | HIGH, MEDIUM, LOW, OFF |
+| **MEDIA PATH LIGHTS** | Oświetlenie ścieżki mediów | HIGH, MEDIUM, LOW, OFF |
+| **RIBBON PATH LIGHTS** | Oświetlenie ścieżki ribbonu | HIGH, MEDIUM, LOW, OFF |
+
+### TOOLS Menu
+
+| Pozycja | Opis |
+|---------|------|
+| **PRINT INFORMATION** | Drukuje etykiety konfiguracji |
+| **POWER UP ACTION** | Akcja przy włączeniu |
+| **HEAD CLOSE ACTION** | Akcja przy zamknięciu głowicy |
+| **LOAD DEFAULTS** | Przywracanie ustawień |
+| **MEDIA/RIBBON CAL** | Kalibracja czujników |
+| **DIAGNOSTIC MODE** | Tryb diagnostyczny |
+| **PRINT USB FILE** | Drukowanie z pendrive |
+| **PRINT STATION** | Drukowanie z klawiatury USB |
+
+### NETWORK Menu
+
+| Pozycja | Opis |
+|---------|------|
+| **ACTIVE PRINT SERVER** | Aktywny serwer druku |
+| **PRIMARY NETWORK** | Sieć podstawowa (WIRED/WLAN) |
+| **WIRED IP ADDRESS** | Adres IP (kablowy) |
+| **WLAN IP ADDRESS** | Adres IP (Wi-Fi) |
+| **ESSID** | Nazwa sieci Wi-Fi |
+| **RESET NETWORK** | Reset ustawień sieciowych |
+`
+      },
+      {
+        title: '7. Kalibracja',
+        content: `
+### Kiedy kalibrować?
+
+- Po zmianie typu lub rozmiaru materiału/ribbonu
+- Gdy drukarka pomija etykiety
+- Gdy obraz dryfuje w pionie lub poziomie
+- Gdy ribbon nie jest wykrywany
+
+### Kalibracja automatyczna
+
+Ustaw akcję przy włączeniu lub zamknięciu głowicy:
+- **CALIBRATE** – pełna kalibracja
+- **SHORT CAL** – szybka kalibracja
+- **FEED** – tylko wysuw
+- **LENGTH** – określenie długości
+- **NO MOTION** – brak ruchu
+
+### Kalibracja ręczna
+
+**Metoda 1 – Z menu:**
+TOOLS > MEDIA/RIBBON CAL
+
+**Metoda 2 – Skrót klawiszowy:**
+Przytrzymaj **PAUSE + CANCEL** przez 2 sekundy
+
+### Regulacja docisku głowicy dla ZT620
+
+Ze względu na szerszą głowicę 6", prawidłowa regulacja docisku jest szczególnie ważna.
+
+ZT620 posiada dwa elementy regulacji:
+1. **Toggle Position** – pozycja punktu docisku (przód/tył)
+2. **Printhead Pressure** – siła docisku (pokrętła wewnętrzne/zewnętrzne)
+
+**Wskazówki dla szerokiego materiału:**
+- Dla materiału >100 mm: zrównoważ docisk wewnętrzny i zewnętrzny
+- Materiał przesuwa się w lewo → zwiększ zewnętrzne
+- Materiał przesuwa się w prawo → zwiększ wewnętrzne
+- Zbyt jasny druk z lewej → zwiększ wewnętrzne
+- Zbyt jasny druk z prawej → zwiększ zewnętrzne
+`
+      },
+      {
+        title: '8. Podłączenie do komputera',
+        content: `
+### Instalacja sterowników
+
+> **Ważne:** Zainstaluj Zebra Setup Utilities PRZED podłączeniem drukarki!
+
+1. Pobierz Zebra Setup Utilities ze strony /sterowniki
+2. Uruchom instalator
+3. Podłącz drukarkę gdy kreator o to poprosi
+
+### Identyfikacja modelu i rozdzielczości
+
+Na naklejce z numerem części: **ZT620xY-xxxxxxxx**
+- ZT620 = model
+- Y = rozdzielczość (2=203dpi, 3=300dpi)
+
+### Połączenie USB
+
+1. Zainstaluj sterowniki
+2. Podłącz kabel USB
+3. Włącz drukarkę
+4. Windows wykryje drukarkę automatycznie
+
+### Połączenie Ethernet
+
+1. Podłącz kabel sieciowy RJ-45
+2. Włącz drukarkę
+3. Sprawdź IP w NETWORK > WIRED IP ADDRESS
+4. Dodaj drukarkę przez port TCP/IP
+`
+      },
+      {
+        title: '9. Konserwacja',
+        content: `
+### Harmonogram czyszczenia
+
+| Element | Częstotliwość |
+|---------|---------------|
+| Głowica drukująca | Co 1 rolkę ribbonu |
+| Wałek dociskowy (platen) | Co 1 rolkę ribbonu |
+| Czujniki | Co 1 rolkę |
+| Obcinacz | W razie potrzeby |
+
+### Czyszczenie głowicy i wałka
+
+> **Ostrzeżenie:** Głowica może być gorąca! Uwaga na ESD.
+
+1. Wyłącz drukarkę
+2. Otwórz drzwi i wyjmij ribbon oraz materiał
+3. **Głowica:** Przetrzyj brązowy pasek wacikiem z alkoholem (99,7%)
+4. **Wałek:** Przetrzyj wacikiem obracając go ręcznie
+5. Poczekaj aż wyschnie
+
+> **Uwaga:** Ze względu na szerszą głowicę 6" w ZT620, czyszczenie wymaga więcej uwagi aby objąć całą powierzchnię drukującą.
+
+### Czyszczenie obcinacza
+
+1. Wyłącz drukarkę i odłącz zasilanie
+2. Zdejmij osłonę obcinacza
+3. Wyczyść ostrze wacikiem z alkoholem
+4. Nasmaruj olejem silikonowym
+5. Załóż osłonę
+`
+      },
+      {
+        title: '10. Rozwiązywanie problemów',
+        content: `
+### Etykieta konfiguracji
+
+**Drukowanie:**
+- TOOLS > PRINT INFORMATION > SETTINGS
+- Lub: przytrzymaj **FEED + CANCEL** przez 2 sekundy
+
+### Komunikaty błędów
+
+| Komunikat | Rozwiązanie |
+|-----------|-------------|
+| **PAPER OUT** | Załaduj materiał |
+| **RIBBON OUT** | Załaduj ribbon |
+| **HEAD OPEN** | Zamknij głowicę |
+| **HEAD OVER TEMP** | Poczekaj na ostygnięcie |
+| **CUTTER JAM** | Usuń zacięcie w obcinaczu |
+
+### Problemy specyficzne dla ZT620
+
+| Problem | Rozwiązanie |
+|---------|-------------|
+| Nierównomierny druk na szerokości | Dostosuj oba pokrętła docisku |
+| Marszczenie ribbonu przy szerszym materiale | Sprawdź naprężenie i wyrównanie |
+| Przesuwanie się szerokiego materiału | Wyrównaj prowadnice, sprawdź docisk |
+
+### Przywracanie ustawień fabrycznych
+
+**Ustawienia drukarki:**
+- TOOLS > LOAD DEFAULTS > FACTORY
+- Lub: przytrzymaj **FEED + PAUSE** podczas włączania
+
+**Ustawienia sieciowe:**
+- TOOLS > LOAD DEFAULTS > NETWORK
+- Lub: przytrzymaj **CANCEL + PAUSE** podczas włączania
+`
+      },
+      {
+        title: 'FAQ – Najczęściej zadawane pytania',
+        content: `
+### Jaka jest różnica między Zebra ZT610 a ZT620?
+
+**Odpowiedź:** **ZT610** drukuje etykiety o szerokości do **104 mm (4 cale)**, **ZT620** do **168 mm (6 cali)**. ZT620 jest przeznaczony do dużych etykiet wysyłkowych i paletowych. ZT610 oferuje dodatkowo rozdzielczość 600 dpi (ZT620 tylko 203/300 dpi).
+
+### Do jakich zastosowań najlepiej nadaje się ZT620?
+
+**Odpowiedź:** ZT620 jest idealny do: **dużych etykiet wysyłkowych**, **etykiet paletowych**, **oznaczeń regałów magazynowych**, **etykiet przewozowych CMR** i wszystkich aplikacji wymagających szerokości druku powyżej 4 cali (104 mm).
+
+### Jaki ribbon wybrać do ZT620?
+
+**Odpowiedź:** Dla ZT620 wybierz ribbon o szerokości **większej niż szerokość materiału** (maks. 178 mm / 7"). Ribbon musi być szerszy aby chronić głowicę przed kontaktem z materiałem. Sprawdź czy ribbon jest powlekany na zewnątrz (standard ZT620).
+
+### Jak załadować ribbon do Zebra ZT620?
+
+**Odpowiedź:** Podnieś drzwi komory mediów, otwórz głowicę. Załaduj rolkę ribbonu na dolne wrzeciono – ribbon odwija się do przodu. Przeprowadź ribbon pod głowicą i nawiń na górne wrzeciono. Naprężyć obracając wrzeciono, zamknij głowicę i drzwi.
+
+### Co oznacza oświetlenie ścieżki mediów w ZT620?
+
+**Odpowiedź:** **Oświetlenie ścieżki mediów** to unikalna funkcja ZT620 – automatyczne podświetlenie włącza się gdy skończy się materiał lub ribbon, ułatwiając lokalizację problemu. Można regulować intensywność w menu SETTINGS.
+
+### Jak wyregulować docisk głowicy dla szerokiego materiału?
+
+**Odpowiedź:** ZT620 ma dwa pokrętła docisku (wewnętrzne i zewnętrzne). Dla materiału szerszego niż 100 mm: zrównoważ oba. Gdy druk jest jaśniejszy z lewej – zwiększ wewnętrzne, gdy z prawej – zwiększ zewnętrzne.
+
+### Jak wykonać kalibrację ZT620?
+
+**Odpowiedź:** **Metoda 1:** TOOLS > MEDIA/RIBBON CAL. **Metoda 2:** Przytrzymaj **PAUSE + CANCEL** przez 2 sekundy. Kalibruj po każdej zmianie typu lub rozmiaru materiału.
+
+### Jak wydrukować etykietę konfiguracji ZT620?
+
+**Odpowiedź:** **Metoda 1:** TOOLS > PRINT INFORMATION > SETTINGS. **Metoda 2:** Przytrzymaj **FEED + CANCEL** przez 2 sekundy. Etykieta pokazuje wszystkie ustawienia drukarki.
+
+### Jak przywrócić ustawienia fabryczne ZT620?
+
+**Odpowiedź:** **Metoda 1:** TOOLS > LOAD DEFAULTS > FACTORY. **Metoda 2:** Przytrzymaj **FEED + PAUSE** podczas włączania drukarki. Reset sieciowy: **CANCEL + PAUSE** podczas włączania.
+
+### Jak często czyścić głowicę drukującą ZT620?
+
+**Odpowiedź:** Głowicę i wałek należy czyścić **po każdej rolce ribbonu** wacikiem z alkoholem izopropylowym (99,7%). Ze względu na szerszą głowicę 6", czyszczenie wymaga więcej uwagi aby objąć całą powierzchnię.
+
+### Co oznacza komunikat "RIBBON OUT" mimo załadowanego ribbonu?
+
+**Odpowiedź:** Sprawdź ustawienie **PRINT METHOD** w menu SETTINGS – powinno być **THERMAL TRANS** dla druku z ribbonem. Jeśli jest ustawione na **DIRECT THERMAL**, drukarka nie szuka ribbonu.
+`
+      }
+    ]
   }
 }
 
