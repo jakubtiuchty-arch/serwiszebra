@@ -820,27 +820,42 @@ function parseMarkdown(markdown: string): string {
       inOrderedList = false
     }
 
-    // Gallery syntax: [GALLERY:folder:count]
-    const galleryMatch = line.match(/^\[GALLERY:([^\]:]+):?(\d+)?\]$/)
+    // Gallery syntax: [GALLERY:folder:count:productName]
+    const galleryMatch = line.match(/^\[GALLERY:([^\]:]+):?(\d+)?:?([^\]]+)?\]$/)
     if (galleryMatch) {
       const folder = galleryMatch[1]
       const count = parseInt(galleryMatch[2] || '5')
-      const galleryId = `gallery-${Math.random().toString(36).substr(2, 9)}`
+      const productName = galleryMatch[3] || `Zebra ${folder}`
+      const galleryId = `gallery-${folder.toLowerCase()}`
+      
+      // SEO-friendly alt texts
+      const altTexts = [
+        `${productName} - widok z przodu, terminal mobilny przemysłowy`,
+        `${productName} - widok z tyłu z aparatem 50MP`,
+        `${productName} - wyświetlacz AMOLED 6 cali`,
+        `${productName} - skaner kodów kreskowych`,
+        `${productName} - wbudowany czytnik RFID UHF`
+      ]
       
       let galleryHtml = `
-        <div class="my-6 sm:my-8">
+        <figure class="my-6 sm:my-8" role="group" aria-label="Galeria zdjęć ${productName}">
           <div class="grid grid-cols-3 sm:grid-cols-5 gap-2 sm:gap-3" id="${galleryId}">
       `
       
       for (let j = 1; j <= count; j++) {
         const imgPath = `/${folder}/Zebra ${folder}_${j}.jpeg`
+        const altText = altTexts[j - 1] || `${productName} - zdjęcie ${j}`
         galleryHtml += `
-          <div class="aspect-square cursor-pointer group" onclick="openLightbox('${imgPath}', '${folder} - Zdjęcie ${j}')">
+          <div class="aspect-square cursor-pointer group" onclick="openLightbox('${imgPath}', '${altText}')">
             <img 
               src="${imgPath}" 
-              alt="${folder} - Zdjęcie ${j}"
+              alt="${altText}"
+              title="${altText}"
               class="w-full h-full object-cover rounded-lg border border-gray-200 shadow-sm group-hover:shadow-md group-hover:border-blue-300 transition-all duration-200"
               loading="lazy"
+              decoding="async"
+              width="200"
+              height="200"
             />
           </div>
         `
@@ -848,8 +863,10 @@ function parseMarkdown(markdown: string): string {
       
       galleryHtml += `
           </div>
-          <p class="text-center text-xs text-gray-500 mt-2">Kliknij zdjęcie aby powiększyć</p>
-        </div>
+          <figcaption class="text-center text-xs text-gray-500 mt-2">
+            Galeria zdjęć ${productName} – kliknij aby powiększyć
+          </figcaption>
+        </figure>
       `
       result.push(galleryHtml)
       continue
