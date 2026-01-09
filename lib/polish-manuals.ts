@@ -11842,6 +11842,462 @@ Etui (SG-MPV-SC21-01) zapewnia:
 `
       }
     ]
+  },
+  'zq220': {
+    model: 'ZQ220',
+    title: 'Zebra ZQ220 – Instrukcja obsługi po Polsku',
+    lastUpdated: '2026-01-09',
+    sourceDocument: 'Zebra ZQ220 User Guide',
+    keywords: [
+      'ZQ220', 'zebra zq220', 'drukarka mobilna', 'drukarka paragonów', 
+      'instrukcja ZQ220', 'ZQ220 po polsku', 'drukarka 3 cale',
+      'drukarka kurierska', 'drukarka przenośna', 'Bluetooth MFi',
+      'USB Type-C', 'NFC Print Touch', 'linerless', 'IP43', '80 mm'
+    ],
+    sections: [
+      {
+        title: '1. Podstawowe informacje',
+        content: `
+### O drukarce Zebra ZQ220
+
+Zebra ZQ220 to kompaktowa **mobilna drukarka paragonów i etykiet** o szerokości druku **3 cale (72 mm)**, zaprojektowana dla pracowników mobilnych w branży dostawczej, kurierskiej, logistycznej i detalicznej. Wykorzystuje najnowsze technologie: ładowanie przez USB Type-C, Bluetooth 4.1 z obsługą iOS (MFi), Near Field Communication (NFC) oraz wytrzymałą konstrukcję o klasie ochrony IP43.
+
+### Parametry techniczne
+
+| Parametr | ZQ220 |
+|----------|-------|
+| **Szerokość druku** | do 72 mm (2,91") |
+| Technologia druku | Termiczny bezpośredni (Direct Thermal) |
+| Rozdzielczość | 203 dpi × 200 dpi |
+| Prędkość druku | 63,5 mm/s (2,5"/s) |
+| Maks. średnica rolki | 50 mm |
+| Pojemność baterii | 2550 mAh Li-Ion (2-celowa) |
+| Czas ładowania | poniżej 4 godzin |
+
+### Porównanie ZQ210 vs ZQ220
+
+| Parametr | ZQ210 | ZQ220 |
+|----------|-------|-------|
+| Szerokość druku | 48 mm (2") | **72 mm (3")** |
+| Szerokość materiału | 58 mm | **80 mm** |
+| Bateria | 1500 mAh | **2550 mAh** |
+| Waga | 265 g | **450 g** |
+| Średnica rolki | 40 mm | **50 mm** |
+
+### Szerokości materiałów
+
+| Szerokość materiału | Uwagi |
+|--------------------|-------|
+| 80 mm (standard) | Standardowa szerokość |
+| 76,2 mm (3") | Z wkładkami redukcyjnymi (opcja) |
+| 58 mm (2,3") | Z wkładkami redukcyjnymi (opcja) |
+| 50,8 mm (2") | Z wkładkami redukcyjnymi (opcja) |
+
+### Złącza i komunikacja
+
+- USB 2.0 Type-C (ładowanie i komunikacja)
+- Bluetooth 2.1 + EDR / 4.1 Low Energy (Dual Mode)
+- **Made for iPhone (MFi)** – obsługa iOS 10+
+- **Near Field Communication (NFC)** – parowanie przez Print Touch
+
+### Cechy charakterystyczne
+
+- **Kompaktowa konstrukcja** – waga 450 g z baterią
+- Wyświetlacz OLED z 3-przyciskowym panelem sterowania
+- Klasa ochrony **IP43**
+- Obsługa materiałów z podkładem i **bezpodkładowych (linerless)**
+- Język programowania CPCL
+- Obrotowy klips do paska (w zestawie)
+- Opcjonalne etui ochronne z paskiem na ramię
+- Ładowarka 3-stanowiskowa (opcja)
+- Kompatybilność z iOS, Android, Windows
+`
+      },
+      {
+        title: '2. Rozpakowanie i instalacja',
+        content: `
+### Zawartość opakowania
+
+- Drukarka ZQ220
+- Bateria Li-Ion 2550 mAh
+- Zasilacz AC-to-USB z wtyczką regionalną*
+- Kabel USB Type-A do Type-C
+- Obrotowy klips do paska
+- Przewodnik regulacyjny
+
+> *Zasilacz i wtyczki nie są dołączane do drukarek EMEA i LATAM
+
+### Sprawdzenie przesyłki
+
+1. Sprawdź wszystkie zewnętrzne powierzchnie pod kątem uszkodzeń
+2. Otwórz pokrywę mediów i sprawdź komorę na materiały
+3. Zachowaj opakowanie na wypadek konieczności transportu
+
+### Warunki pracy
+
+| Tryb | Temperatura | Wilgotność |
+|------|-------------|------------|
+| Praca | -10°C do +50°C | 10-90% bez kondensacji |
+| Ładowanie | 0°C do +40°C | 10-90% bez kondensacji |
+| Przechowywanie | -20°C do +60°C | 10-90% bez kondensacji |
+`
+      },
+      {
+        title: '3. Panel sterowania',
+        content: `
+### Wyświetlacz OLED
+
+Drukarka wyposażona jest w wyświetlacz OLED, który pokazuje status urządzenia w trzech trybach:
+- **Ekran operacyjny** – domyślny widok podczas normalnej pracy
+- **Ekran informacyjny** – komunikaty tekstowe dla użytkownika
+- **Ekran konfiguracyjny** – zmiana parametrów drukarki
+
+### Ikony statusu
+
+| Ikona | Znaczenie |
+|-------|-----------|
+| ✓ (zielona) | Drukarka gotowa do pracy |
+| ⚠ (żółta) | Ostrzeżenie – drukarka nadal funkcjonalna |
+| ✗ (czerwona) | Błąd – wymaga interwencji |
+
+### Ikony baterii
+
+| Ikona | Znaczenie |
+|-------|-----------|
+| 🔋 (0-4 kreski) | Poziom naładowania baterii |
+| 🔋⚡ | Ładowanie w toku |
+| 🔋USB | Zasilanie z USB |
+| 🔋⚠ | Niski poziom baterii |
+
+### Przyciski sterujące
+
+| Przycisk | Funkcja |
+|----------|---------|
+| **POWER** | Naciśnij aby włączyć; przytrzymaj 5 sek. aby wyłączyć |
+| **FEED** | Przesuwa materiał o jedną etykietę |
+| **CONFIG** | Nawigacja po menu konfiguracyjnym |
+
+### Menu konfiguracyjne
+
+Naciśnij przycisk CONFIG aby przejść do trybu konfiguracji:
+
+| Opcja | Opis |
+|-------|------|
+| **DARKNESS** | Regulacja ciemności druku |
+| **POWER UP** | Podawanie po włączeniu (Feed On/Off) |
+| **HEAD CLOSE** | Podawanie po zamknięciu głowicy |
+| **PRINT** | Drukowanie raportu konfiguracyjnego |
+| **MAC ADDRESS** | Wyświetlanie adresu MAC |
+| **EXIT** | Wyjście z menu konfiguracji |
+`
+      },
+      {
+        title: '4. Bateria',
+        content: `
+### Informacje o baterii
+
+Drukarka ZQ220 wykorzystuje **2-celową baterię Li-Ion** (p/n BTRY-MPV-24MA1-01) o pojemności **2550 mAh**. Bateria zapewnia do **3 dni pracy** przy: 25 przystankach dziennie, do 500 paragonów 3×8,5 cala na zmianę przy 13% pokryciu.
+
+> **Ważne:** Baterie są dostarczane w trybie uśpienia. Przed pierwszym użyciem podłącz zasilacz USB, aby wybudzić baterię.
+
+### Wyjmowanie baterii
+
+1. Obróć klips do paska aby uzyskać dostęp do komory baterii
+2. Naciśnij zatrzask na pakiecie baterii
+3. Odchyl baterię od wnęki i wyjmij ją z drukarki
+
+### Instalacja baterii
+
+1. Zlokalizuj komorę baterii na spodzie drukarki
+2. Obróć klips do paska aby uzyskać dostęp
+3. Włóż baterię zgodnie z orientacją (nie da się włożyć nieprawidłowo)
+4. Dociśnij baterię aż zatrzaśnie się na miejscu
+
+### Bezpieczeństwo baterii
+
+> **Ostrzeżenie:** Bateria może eksplodować, wyciec lub zapalić się w przypadku niewłaściwego ładowania!
+
+- Nie rozbieraj, nie zgniataj, nie przekłuwaj baterii
+- Nie zwieraj styków zewnętrznych
+- Nie wrzucaj do ognia ani wody
+- Nie narażaj na temperatury powyżej 60°C
+- Ładuj tylko w ładowarkach zatwierdzonych przez Zebra
+`
+      },
+      {
+        title: '5. Ładowanie baterii',
+        content: `
+### Ładowanie przez USB
+
+> **Ważne:** Przed pierwszym użyciem drukarki należy w pełni naładować baterię.
+
+**Procedura ładowania:**
+1. Podłącz zasilacz AC-to-USB do gniazdka sieciowego
+2. Podłącz kabel USB do zasilacza
+3. Obróć gumową osłonę portu USB na boku drukarki
+4. Podłącz kabel USB Type-C do drukarki
+5. Drukarka włączy się i rozpocznie ładowanie
+
+### Czas ładowania
+
+- **Pełne ładowanie:** poniżej 4 godzin (przy użyciu ładowarki USB 10W)
+- **Ładowarka:** zasilacz USB 10W lub adapter samochodowy USB
+
+### Ładowarka 3-stanowiskowa (opcja)
+
+Opcjonalna ładowarka 3-slot umożliwia jednoczesne ładowanie baterii z kilku drukarek.
+
+> **Uwaga:** Baterie częściowo naładowane mogą być używane, jednak zaleca się pełne naładowanie dla maksymalnej żywotności.
+`
+      },
+      {
+        title: '6. Ładowanie materiałów',
+        content: `
+### Obsługiwane typy materiałów
+
+- **Materiał ciągły (journal)** – bez znaczników
+- **Materiał z czarnym znacznikiem (black mark)** – znacznik z tyłu
+- **Etykiety z przerwą (gap)** – rozdzielone przerwami
+- **Materiał bezpodkładowy (linerless)** – opcja z dedykowanym wałkiem
+
+### Procedura ładowania
+
+1. **Otwórz pokrywę mediów:**
+   - Naciśnij dźwignię zwalniającą po stronie drukarki
+   - Pokrywa otworzy się automatycznie
+   
+2. **Odchyl pokrywę całkowicie do tyłu**
+
+3. **Włóż rolkę materiału:**
+   - Umieść rolkę w komorze mediów
+   - Materiał powinien odwijać się od góry (strona druku na zewnątrz)
+   - Rolka musi swobodnie się obracać
+
+4. **Zamknij pokrywę mediów:**
+   - Materiał automatycznie przesunie się przez ścieżkę papieru
+   - Wyciągnij nadmiar materiału z drukarki
+
+### Specyfikacja materiałów
+
+| Parametr | Wartość |
+|----------|---------|
+| Szerokość standardowa | 80 mm ±0,75 mm |
+| Opcjonalne szerokości | 76,2 mm, 58 mm, 50,8 mm |
+| Minimalna długość etykiety | 12,5 mm |
+| Grubość materiału | 0,053 – 0,1575 mm |
+| Maksymalna średnica rolki | 50 mm |
+
+> **Uwaga:** Opcjonalne **wkładki redukcyjne** (adaptery do węższych rolek, nr kat. KIT-MPV-MD3SPR1-5) umożliwiają użycie materiałów o szerokości 76,2 mm, 58 mm i 50,8 mm.
+`
+      },
+      {
+        title: '7. Podłączenie do urządzeń',
+        content: `
+### Komunikacja USB
+
+1. Podłącz mniejszy wtyk USB Type-C do drukarki
+2. Podłącz większy wtyk USB Type-A do komputera
+3. Zainstaluj sterowniki ze strony [/sterowniki](/sterowniki)
+
+> **Uwaga:** Wtyk Type-C można podłączyć w dowolnej orientacji.
+
+### Komunikacja Bluetooth
+
+ZQ220 obsługuje:
+- Bluetooth 2.1 + EDR (klasyczny)
+- Bluetooth 4.1 Low Energy (BLE)
+- **Made for iPhone (MFi)** – iOS 10 i nowsze
+
+**Parowanie:**
+1. Włącz Bluetooth na urządzeniu mobilnym
+2. Wyszukaj drukarkę (nazwa = numer seryjny)
+3. Wprowadź PIN jeśli wymagany
+4. Potwierdź parowanie
+
+**Bonding:** Drukarka zapamiętuje informacje o parowaniu, dzięki czemu urządzenia pozostają sparowane przez cykle zasilania i rozłączenia.
+
+### Parowanie przez NFC (Print Touch)
+
+1. Włącz NFC na smartfonie
+2. Zbliż telefon do ikony Print Touch na boku drukarki (max 7,62 cm)
+3. Parowanie nastąpi automatycznie
+
+### Obsługiwane platformy
+
+- Apple iOS 10+ (przez MFi Bluetooth)
+- Android (standardowy Bluetooth)
+- Windows Mobile
+`
+      },
+      {
+        title: '8. Noszenie drukarki',
+        content: `
+### Klips do paska
+
+Drukarka jest wyposażona w plastikowy obrotowy klips do paska jako standardowe wyposażenie.
+
+**Montaż/demontaż:**
+1. Wyjmij baterię
+2. Wsuń klips w szczelinę na spodzie drukarki
+3. Zainstaluj baterię ponownie
+
+**Użycie:**
+- Zahacz klips na pasku
+- Klips obraca się, zapewniając swobodę ruchów
+
+### Pasek na ramię (opcja)
+
+Opcjonalny pasek na ramię (SG-MPV-SDSTP1-01):
+1. Zaczep jeden koniec paska do słupka z przodu drukarki
+2. Zaczep drugi koniec do drugiego słupka
+3. Reguluj długość paska według potrzeb
+
+### Etui ochronne (opcja)
+
+Etui (SG-MPV-SC31-01) umożliwia noszenie drukarki z paskiem na ramię:
+
+**Montaż:**
+1. Odchyl górną klapę etui (zapinana na rzep)
+2. Włóż drukarkę do etui spodem do przodu
+3. Wyświetlacz i przyciski widoczne przez plastikowe okienko
+`
+      },
+      {
+        title: '9. Konserwacja',
+        content: `
+### Przedłużanie żywotności baterii
+
+- Nie wystawiaj baterii na bezpośrednie światło słoneczne
+- Unikaj temperatur powyżej 40°C podczas ładowania
+- Używaj tylko ładowarek zatwierdzonych przez Zebra
+- Wyjmij baterię jeśli drukarka nie będzie używana przez dzień lub dłużej
+- Baterie tracą pojemność z czasem – wymieniaj w razie potrzeby
+
+### Harmonogram czyszczenia
+
+| Element | Częstotliwość |
+|---------|---------------|
+| Głowica drukująca | Co 5 rolek (co 1 rolkę dla linerless) |
+| Wałek dociskowy (z podkładem) | Co 5 rolek |
+| Wałek dociskowy (linerless) | Tylko w razie problemów |
+| Zgarniacz (tylko linerless) | Co 5 rolek |
+
+### Czyszczenie głowicy drukującej
+
+> **Ostrzeżenie:** Głowica może być gorąca! Poczekaj aż ostygnie.
+
+1. Użyj pisaka czyszczącego Zebra lub wacika z alkoholem izopropylowym 90%
+2. Przetrzyj szary pasek głowicy od środka na zewnątrz
+3. Poczekaj aż wyschnie przed zamknięciem
+
+### Czyszczenie wałka dociskowego
+
+**Materiał z podkładem:**
+- Obracaj wałek i przecieraj wacikiem z alkoholem 90%
+
+**Materiał bezpodkładowy:**
+- Użyj roztworu mydła (1 część mydła : 25 części wody)
+- Spłucz czystą wodą
+
+> **Uwaga:** Częste czyszczenie wałka linerless skraca jego żywotność!
+`
+      },
+      {
+        title: '10. Rozwiązywanie problemów',
+        content: `
+### Drukowanie raportu konfiguracyjnego
+
+**Metoda 1 – Sekwencja przycisków:**
+1. Wyłącz drukarkę, załaduj materiał ciągły
+2. Przytrzymaj przycisk FEED
+3. Naciśnij i puść przycisk POWER (trzymając FEED)
+4. Puść FEED gdy rozpocznie się drukowanie
+
+**Metoda 2 – Z menu:**
+1. Włącz drukarkę
+2. Naciskaj CONFIG aż pojawi się SETTINGS-PRINT
+3. Naciśnij FEED aby wydrukować
+
+### Tryb diagnostyczny (DUMP mode)
+
+1. Wydrukuj raport konfiguracyjny
+2. Po zakończeniu pojawi się "Press FEED key to enter DUMP mode"
+3. Naciśnij FEED w ciągu 3 sekund
+4. Drukarka drukuje wszystkie odbierane dane jako kody HEX
+
+### Typowe problemy
+
+| Problem | Rozwiązanie |
+|---------|-------------|
+| **Brak zasilania** | Sprawdź baterię, naładuj lub wymień |
+| **Materiał się nie przesuwa** | Zamknij pokrywę, sprawdź zacięcia |
+| **Słaby/blady wydruk** | Wyczyść głowicę, sprawdź jakość materiału |
+| **Krótka żywotność baterii** | Sprawdź wiek baterii, wymień jeśli starsza niż rok |
+| **Pomijanie etykiet** | Sprawdź znaczniki/przerwy, skalibruj czujniki |
+| **Brak NFC** | Zbliż telefon na odległość mniej niż 7,62 cm |
+
+### Komunikaty alertów
+
+| Komunikat | Znaczenie |
+|-----------|-----------|
+| **PRINTER READY** | Drukarka gotowa do pracy |
+| **MEDIA OUT** | Brak materiału |
+| **HEAD OPEN** | Otwarta pokrywa |
+| **BATTERY LOW** | Niski poziom baterii |
+| **CHARGE ERROR** | Błąd ładowania |
+| **HEAD OVERTEMP** | Przegrzana głowica |
+| **PAIRING SUCCESS** | Parowanie Bluetooth udane |
+`
+      },
+      {
+        title: 'FAQ – Najczęściej zadawane pytania',
+        content: `
+### Jaka jest różnica między ZQ210 a ZQ220?
+
+**Odpowiedź:** **ZQ210** drukuje materiał o szerokości **48 mm (2 cale)**, **ZQ220** drukuje **72 mm (3 cale)**. ZQ220 ma większą baterię (2550 mAh vs 1500 mAh), większą średnicę rolki (50 mm vs 40 mm) i większą wagę (450 g vs 265 g). Wybierz ZQ220 dla większych etykiet wysyłkowych.
+
+### Do czego służy drukarka Zebra ZQ220?
+
+**Odpowiedź:** ZQ220 to **mobilna drukarka paragonów i etykiet** przeznaczona dla kurierów, dostawców, pracowników magazynów i sklepów. Drukuje etykiety wysyłkowe, paragony, pokwitowania dostaw o szerokości do 72 mm (3 cale).
+
+### Jak sparować ZQ220 z iPhonem?
+
+**Odpowiedź:** ZQ220 ma certyfikat **Made for iPhone (MFi)**. Włącz Bluetooth na iPhonie, wyszukaj drukarkę (nazwa = numer seryjny), wybierz ją i potwierdź parowanie. Obsługuje iOS 10 i nowsze.
+
+### Jak działa parowanie przez NFC (Print Touch)?
+
+**Odpowiedź:** Włącz NFC na smartfonie i zbliż go do ikony **Print Touch** na boku drukarki (max 7,62 cm). Parowanie nastąpi automatycznie – bez wpisywania kodów PIN.
+
+### Jak długo ładuje się bateria ZQ220?
+
+**Odpowiedź:** Pełne ładowanie baterii 2550 mAh trwa **poniżej 4 godzin** przy użyciu ładowarki USB 10W. Można też używać adaptera samochodowego USB.
+
+### Czy ZQ220 obsługuje materiały bezpodkładowe (linerless)?
+
+**Odpowiedź:** Tak, ZQ220 obsługuje materiały **linerless** – etykiety bez podkładu. Wymaga dedykowanego wałka do linerless i częstszego czyszczenia głowicy (co 1 rolkę).
+
+### Jaka jest klasa ochrony ZQ220?
+
+**Odpowiedź:** ZQ220 ma klasę ochrony **IP43** – odporność na kurz i zachlapania wodą. Dla lepszej ochrony można użyć opcjonalnego etui ochronnego.
+
+### Jak wydrukować raport konfiguracyjny ZQ220?
+
+**Odpowiedź:** **Metoda 1:** Wyłącz drukarkę, przytrzymaj FEED, naciśnij POWER, puść FEED gdy zacznie drukować. **Metoda 2:** Naciskaj CONFIG aż pojawi się SETTINGS-PRINT, naciśnij FEED.
+
+### Jak często czyścić głowicę drukującą ZQ220?
+
+**Odpowiedź:** Dla materiałów z podkładem – **co 5 rolek**. Dla materiałów bezpodkładowych (linerless) – **co 1 rolkę**. Używaj wacika z alkoholem izopropylowym 90%.
+
+### Czy można używać węższych materiałów w ZQ220?
+
+**Odpowiedź:** Tak, z opcjonalnymi **wkładkami redukcyjnymi** (adaptery do węższych rolek, nr kat. KIT-MPV-MD3SPR1-5) można używać materiałów o szerokości 76,2 mm, 58 mm i 50,8 mm zamiast standardowych 80 mm.
+
+### Czy ZQ220 wymaga ribbonu?
+
+**Odpowiedź:** **Nie**, ZQ220 to drukarka **termiczna bezpośrednia (Direct Thermal)** – nie wymaga ribbonu. Używa materiałów termoczułych, które czernieją pod wpływem ciepła głowicy.
+`
+      }
+    ]
   }
 }
 
