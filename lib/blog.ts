@@ -119,7 +119,7 @@ export const blogPosts: BlogPost[] = [
     excerpt: 'Poznaj nowe komputery mobilne Zebra TC501 i Zebra TC701 z procesorem Qualcomm Dragonwing, Wi-Fi 7, 5G i wbudowanym czytnikiem RFID. Do 300% więcej mocy, 12 GB RAM i gotowość na aplikacje AI.',
     coverImage: '/blog/zebra-tc501-zebra-tc701.jpeg',
     author: {
-      name: 'Zespół Serwis Zebra',
+      name: 'Zespół TAKMA',
       role: 'Autoryzowany serwis Zebra'
     },
     publishedAt: '2026-01-09',
@@ -538,7 +538,7 @@ Jako **autoryzowany partner Zebra** oferujemy:
     excerpt: 'Poznaj nowe skanery Zebra DS8208 (przewodowy) i DS8288 (bezprzewodowy) z czujnikiem 2 MP, technologią PRZM, wbudowanym RFID i ładowaniem bezstykowym. Specyfikacja, porównanie i zalety dla handlu i logistyki.',
     coverImage: '/blog/zebra-ds8208-ds8288.jpeg',
     author: {
-      name: 'Zespół Serwis Zebra',
+      name: 'Zespół TAKMA',
       role: 'Autoryzowany serwis Zebra'
     },
     publishedAt: '2026-01-09',
@@ -868,7 +868,7 @@ Jako autoryzowany partner Zebra oferujemy pełne wsparcie w doborze konfiguracji
     excerpt: 'Twoja drukarka Zebra nie drukuje etykiet? Poznaj 7 najczęstszych przyczyn tego problemu: głowica, ribbon, kalibracja, sterowniki. Dowiedz się, jak je samodzielnie zdiagnozować i naprawić.',
     coverImage: '/blog/drukarka-zebra-nie-drukuje-rozwiazania.jpeg',
     author: {
-      name: 'Zespół Serwis Zebra',
+      name: 'Zespół TAKMA',
       role: 'Certyfikowani technicy Zebra'
     },
     publishedAt: '2025-11-30',
@@ -1102,7 +1102,7 @@ Skontaktuj się z nami - jako autoryzowany serwis Zebra obsługujemy również n
     excerpt: 'Regularne czyszczenie głowicy drukującej wydłuża jej żywotność i poprawia jakość wydruku. Zobacz jak prawidłowo czyścić głowicę w drukarkach Zebra.',
     coverImage: '/blog/czyszczenie-glowicy-drukarki-zebra.jpeg',
     author: {
-      name: 'Zespół Serwis Zebra',
+      name: 'Zespół TAKMA',
       role: 'Certyfikowani technicy Zebra'
     },
     publishedAt: '2025-11-30',
@@ -1250,7 +1250,7 @@ Nawet przy prawidłowej konserwacji głowica zużywa się. Oznaki konieczności 
     excerpt: 'Głowica drukująca to serce każdej drukarki etykiet. Dowiedz się, kiedy wymiana jest nieunikniona, jakie są koszty i czy warto to robić samodzielnie.',
     coverImage: '/blog/wymiana-glowicy-drukarki-zebra-koszt.jpeg',
     author: {
-      name: 'Zespół Serwis Zebra',
+      name: 'Zespół TAKMA',
       role: 'Certyfikowani technicy Zebra'
     },
     publishedAt: '2025-12-01',
@@ -1476,7 +1476,7 @@ Standardowa wymiana trwa 1-2 dni robocze od momentu dostarczenia drukarki. W try
     excerpt: 'Czerwona lampka w drukarce Zebra serii GK420 może oznaczać różne problemy. Poznaj wszystkie sekwencje mrugania i dowiedz się, jak je naprawić samodzielnie.',
     coverImage: '/blog/czerwona-dioda-zebra-gk420-blad.jpeg',
     author: {
-      name: 'Zespół Serwis Zebra',
+      name: 'Zespół TAKMA',
       role: 'Certyfikowani technicy Zebra'
     },
     publishedAt: '2025-12-01',
@@ -1763,7 +1763,7 @@ Zebra oficjalnie zakończyła produkcję serii GK, ale jako autoryzowany serwis 
     excerpt: 'Drukarka Zebra drukuje za jasno? Poznaj 5 najczęstszych przyczyn bladego wydruku i dowiedz się, jak je naprawić samodzielnie lub kiedy oddać do serwisu.',
     coverImage: '/blog/blady-wydruk-drukarka-zebra-rozwiazanie.jpeg',
     author: {
-      name: 'Zespół Serwis Zebra',
+      name: 'Zespół TAKMA',
       role: 'Certyfikowani technicy Zebra'
     },
     publishedAt: '2025-12-01',
@@ -2083,7 +2083,7 @@ Zależy od przyczyny: czyszczenie mechanizmu 150-360 zł, wymiana wałka 150-290
     excerpt: 'Drukarka Zebra drukuje na niewłaściwym miejscu lub wypluwa puste etykiety? Prawdopodobnie potrzebuje kalibracji. Poznaj wszystkie metody kalibracji dla różnych modeli Zebra.',
     coverImage: '/blog/kalibracja-drukarki-zebra-krok-po-kroku.jpeg',
     author: {
-      name: 'Zespół Serwis Zebra',
+      name: 'Zespół TAKMA',
       role: 'Certyfikowani technicy Zebra'
     },
     publishedAt: '2025-12-01',
@@ -2475,7 +2475,7 @@ Tak, ale musisz ustawić drukarkę w tryb "Continuous" i podać dokładną dług
     excerpt: 'Twój terminal Zebra TC21, TC52, MC33 lub MC93 zawiesił się na logo, wpadł w boot loop lub utknął w trybie Fastboot? Poznaj sprawdzone metody naprawy i dowiedz się, kiedy problem wymaga serwisu.',
     coverImage: '/blog/zebra-fastboot-mode-recovery.jpeg',
     author: {
-      name: 'Zespół Serwis Zebra',
+      name: 'Zespół TAKMA',
       role: 'Certyfikowani technicy Zebra'
     },
     publishedAt: '2025-12-02',
@@ -2789,7 +2789,7 @@ Zależy od przyczyny: softwareowy (flash firmware): 150-250 zł, sprzętowy (pam
     excerpt: 'Skaner w Twoim terminalu Zebra TC21, MC33 lub MC93 przestał działać? Brak wiązki laserowej, przerywane skanowanie lub nie odczytuje kodów 2D? Sprawdź jak zdiagnozować i naprawić problem.',
     coverImage: '/blog/skaner-zebra-nie-dziala-naprawa.jpeg',
     author: {
-      name: 'Zespół Serwis Zebra',
+      name: 'Zespół TAKMA',
       role: 'Certyfikowani technicy Zebra'
     },
     publishedAt: '2025-12-02',
@@ -3186,7 +3186,7 @@ Przy normalnym użytkowaniu **5-7 lat**. Żywotność zależy od liczby skanowa�
     excerpt: 'Terminal Zebra nie łączy się z WiFi? Bluetooth nie paruje z drukarką lub skanerem? Poznaj sprawdzone rozwiązania problemów z łącznością bezprzewodową.',
     coverImage: '/blog/drukarka-zebra-problem-wifi-rozlacza.jpeg',
     author: {
-      name: 'Zespół Serwis Zebra',
+      name: 'Zespół TAKMA',
       role: 'Certyfikowani technicy Zebra'
     },
     publishedAt: '2025-12-03',
@@ -3611,7 +3611,7 @@ Można mieć **7 aktywnych połączeń** Bluetooth jednocześnie (ograniczenie p
     excerpt: 'Jak zresetować terminal Zebra TC21, MC33 lub MC93? Poznaj różnicę między Factory Reset a Enterprise Reset i dowiedz się kiedy którego użyć.',
     coverImage: '/blog/reset-fabryczny-terminal-zebra.jpeg',
     author: {
-      name: 'Zespół Serwis Zebra',
+      name: 'Zespół TAKMA',
       role: 'Certyfikowani technicy Zebra'
     },
     publishedAt: '2025-12-03',
@@ -4023,7 +4023,7 @@ Wybierz **Restart** z menu Power, a podczas restartu przytrzymaj **przycisk skan
     excerpt: 'Co oznacza migająca dioda LED na terminalu Zebra? Jak interpretować komunikaty błędów? Kompletny przewodnik po kodach błędów TC21, MC33, MC93.',
     coverImage: '/blog/kody-bledow-drukarki-zebra-lista.jpeg',
     author: {
-      name: 'Zespół Serwis Zebra',
+      name: 'Zespół TAKMA',
       role: 'Certyfikowani technicy Zebra'
     },
     publishedAt: '2025-12-03',
@@ -4322,7 +4322,7 @@ Nie, to normalne. Nowsze modele (MC94) mają zielony laser - jest 7x bardziej wi
     excerpt: 'Skaner skanuje ale dane nie trafiają do aplikacji? Kompletny poradnik konfiguracji DataWedge: profile, Keystroke Output, Intent, rozwiązywanie problemów.',
     coverImage: '/blog/datawedge-zebra-konfiguracja-skanera.jpeg',
     author: {
-      name: 'Zespół Serwis Zebra',
+      name: 'Zespół TAKMA',
       role: 'Certyfikowani technicy Zebra'
     },
     publishedAt: '2025-12-04',
@@ -4588,7 +4588,7 @@ Minimalnie. DataWedge działa pasywnie i aktywuje się tylko podczas skanowania.
     excerpt: 'Twój skaner Zebra przestał odczytywać kody? Przewodnik diagnostyczny od sprawdzenia zasilania, przez czyszczenie okienka, po konfigurację symbologii. Wszystkie serie: LS, DS, LI.',
     coverImage: '/blog/skaner-zebra-nie-skanuje-kodow.jpeg',
     author: {
-      name: 'Zespół Serwis Zebra',
+      name: 'Zespół TAKMA',
       role: 'Certyfikowani technicy Zebra'
     },
     publishedAt: '2025-12-06',
@@ -5001,7 +5001,7 @@ Zależy od usterki:
     excerpt: 'Jak sparować skaner Zebra z podstawką, komputerem, tabletem lub telefonem? Szczegółowa instrukcja dla modeli LI4278, DS8178, DS6878, DS2278, DS3678. Tryby HID, SPP, SSI. Rozwiązywanie problemów.',
     coverImage: '/blog/parowanie-bluetooth-skaner-zebra.jpeg',
     author: {
-      name: 'Zespół Serwis Zebra',
+      name: 'Zespół TAKMA',
       role: 'Certyfikowani technicy Zebra'
     },
     publishedAt: '2025-12-06',
@@ -5466,7 +5466,7 @@ Domyślnie po ~30 minutach nieaktywności skaner przechodzi w tryb uśpienia. Mo
     excerpt: 'Gotowe kody do zeskanowania! Dodaj Enter lub Tab po skanowaniu, zmień klawiaturę na polską, włącz QR i DataMatrix. Kody działają na DS2208, DS4608, LI2208, LI4278.',
     coverImage: '/blog/konfiguracja-skanera-zebra-kodami.jpeg',
     author: {
-      name: 'Zespół Serwis Zebra',
+      name: 'Zespół TAKMA',
       role: 'Certyfikowani technicy Zebra'
     },
     publishedAt: '2025-12-06',
@@ -5677,7 +5677,7 @@ Serwisujemy wszystkie modele skanerów: DS2208, DS4608, DS8178, LI2208, LI4278, 
     excerpt: 'Dekodujemy oznaczenia modeli skanerów Zebra. HD, SR, XR, ER, KD, HC, DP — co oznaczają te litery? Który typ optyki wybrać?',
     coverImage: '/blog/oznaczenia-skanerow-zebra-modele.jpeg',
     author: {
-      name: 'Zespół Serwis Zebra',
+      name: 'Zespół TAKMA',
       role: 'Certyfikowani technicy Zebra'
     },
     publishedAt: '2025-12-06',
@@ -5888,7 +5888,7 @@ Dane z oficjalnych PRG (Product Reference Guide) Zebra:
     excerpt: 'Dlaczego skaner Zebra nie odczytuje kodów QR z telefonu, DataMatrix na lekach PLMVS? Sprawdź czy masz właściwy model (laser vs imager) i jak włączyć symbologie 2D. Kompletna tabela ustawień domyślnych.',
     coverImage: '/blog/skaner-zebra-nie-czyta-datamatrix.jpeg',
     author: {
-      name: 'Zespół Serwis Zebra',
+      name: 'Zespół TAKMA',
       role: 'Certyfikowani technicy Zebra'
     },
     publishedAt: '2025-12-06',
@@ -6181,7 +6181,7 @@ W 123Scan: podłącz skaner → zakładka "Symbologies" → widoczny status każ
     excerpt: 'DS2208 vs DS4608 vs DS8178 vs DS3678? Kompletne porównanie skanerów Zebra: specyfikacje techniczne, zasięgi skanowania, odporność IP, ceny i zastosowania. Który skaner do magazynu, apteki, kasy, produkcji?',
     coverImage: '/blog/jaki-skaner-zebra-wybrac-porownanie.jpeg',
     author: {
-      name: 'Zespół Serwis Zebra',
+      name: 'Zespół TAKMA',
       role: 'Certyfikowani technicy Zebra'
     },
     publishedAt: '2025-12-06',
@@ -6702,7 +6702,7 @@ Do **110 000 skanów** przy 60 skanach/minutę (oficjalne dane Zebra).
     excerpt: 'Skaner Zebra nie ładuje się? Bateria szybko się rozładowuje? Kompletny poradnik: specyfikacje NiMH i Li-Ion, diagnostyka, rekondycjonowanie, wymiana krok po kroku. LI4278, DS2278, DS8178, DS3678.',
     coverImage: '/blog/bateria-terminal-zebra-problemy-rozwiazania.jpeg',
     author: {
-      name: 'Zespół Serwis Zebra',
+      name: 'Zespół TAKMA',
       role: 'Certyfikowani technicy Zebra'
     },
     publishedAt: '2025-12-06',
@@ -7120,7 +7120,7 @@ W 123Scan: Scanner → Battery → Battery Statistics
     excerpt: 'Skaner Zebra się zepsuł? Kompletny przewodnik: koszty naprawy vs cena nowego, macierz decyzyjna dla każdego modelu (DS2208, DS4608, DS8178, DS3678, LI4278), gwarancje, modele EOL. Oficjalne dane z manuali Zebra.',
     coverImage: '/blog/naprawa-czy-wymiana-terminal-zebra.jpeg',
     author: {
-      name: 'Zespół Serwis Zebra',
+      name: 'Zespół TAKMA',
       role: 'Certyfikowani technicy Zebra'
     },
     publishedAt: '2025-12-06',
@@ -7457,7 +7457,7 @@ Tak, przy naprawie flotowej (5+ skanerów) oferujemy rabaty 10-20%.
     excerpt: 'Bateria TC58 rozładowuje się przed końcem trasy? Poznaj sprawdzone sposoby na przedłużenie czasu pracy terminala kurierskiego Zebra. Optymalizacja ustawień, wybór baterii i Hot Swap dla kurierów DHL, InPost, DPD.',
     coverImage: '/blog/bateria-zebra-tc58-wymiana-zywotnosc.jpeg',
     author: {
-      name: 'Zespół Serwis Zebra',
+      name: 'Zespół TAKMA',
       role: 'Certyfikowani technicy Zebra'
     },
     publishedAt: '2025-01-07',
@@ -7802,7 +7802,7 @@ Tak, ale różnica jest minimalna:
     excerpt: 'Skaner TC58 nie skanuje kodów w trakcie dostawy? Poznaj szybkie rozwiązania, które możesz wykonać w terenie. Reset, DataWedge, czyszczenie okienka – poradnik dla kurierów DHL, InPost, DPD.',
     coverImage: '/blog/terminal-zebra-tc58-nie-dziala-naprawa.jpeg',
     author: {
-      name: 'Zespół Serwis Zebra',
+      name: 'Zespół TAKMA',
       role: 'Certyfikowani technicy Zebra'
     },
     publishedAt: '2025-01-07',
@@ -8194,7 +8194,7 @@ Problem z **DataWedge** lub konfiguracją aplikacji. Zgłoś do IT – to nie je
     excerpt: 'TC58 wyłącza się w gorącym samochodzie? Nie ładuje na mrozie? Praktyczny poradnik dla kurierów: limity temperatur, ochrona przed przegrzaniem i zamarzaniem, tryb rękawiczek. DHL, InPost, DPD.',
     coverImage: '/blog/terminal-zebra-tc58-temperatura-mroz-upal.jpeg',
     author: {
-      name: 'Zespół Serwis Zebra',
+      name: 'Zespół TAKMA',
       role: 'Certyfikowani technicy Zebra'
     },
     publishedAt: '2025-01-07',
@@ -8473,7 +8473,7 @@ TC58 ma certyfikat **IP68** (zanurzenie 1.5m/30 min) i **IP65** (strumienie wody
     excerpt: 'GPS w TC58 pokazuje że jesteś 200m dalej? Nawigacja prowadzi w złe miejsce? Poznaj przyczyny GPS drift i sprawdzone rozwiązania dla kurierów DHL, InPost, DPD. Konfiguracja GNSS krok po kroku.',
     coverImage: '/blog/terminal-zebra-gps-nie-dziala-problem.jpeg',
     author: {
-      name: 'Zespół Serwis Zebra',
+      name: 'Zespół TAKMA',
       role: 'Certyfikowani technicy Zebra'
     },
     publishedAt: '2025-01-07',
@@ -8760,7 +8760,7 @@ GPS włączony ciągle: ~5-10% baterii dziennie. To niewiele, **nie wyłączaj G
     excerpt: 'Terminal TC58 nie ma internetu? Brak zasięgu LTE? Gotowe ustawienia APN dla wszystkich polskich operatorów: Orange, Play, T-Mobile, Plus. Krok po kroku dla kurierów DHL, InPost, DPD.',
     coverImage: '/blog/terminal-zebra-tc58-gsm-lte-problem.jpeg',
     author: {
-      name: 'Zespół Serwis Zebra',
+      name: 'Zespół TAKMA',
       role: 'Certyfikowani technicy Zebra'
     },
     publishedAt: '2025-01-07',
@@ -9121,7 +9121,7 @@ Możliwe przyczyny:
     excerpt: 'Ekran tabletu L10 odchodzi od obudowy? Bateria się wybrzusza? To spuchnięta bateria – poważny problem w tabletach z ambulansów i służb terenowych. Poznaj objawy, przyczyny i bezpieczną procedurę wymiany.',
     coverImage: '/blog/tablet-zebra-l10-spuchnieta-bateria.jpeg',
     author: {
-      name: 'Zespół Serwis Zebra',
+      name: 'Zespół TAKMA',
       role: 'Certyfikowani technicy Zebra'
     },
     publishedAt: '2025-01-07',
@@ -9452,7 +9452,7 @@ Sprawdź warunki umowy OneCare jeśli masz.
     excerpt: 'Tablet Zebra L10, ET40, ET45 lub ET60 nie reaguje na przycisk zasilania? Czarny ekran mimo ładowania? Kompletna diagnostyka: rozładowana bateria, pętle rozruchowe, awarie sprzętowe. Co możesz zrobić sam, a kiedy do serwisu.',
     coverImage: '/blog/tablet-zebra-nie-wlacza-sie-naprawa.jpeg',
     author: {
-      name: 'Zespół Serwis Zebra',
+      name: 'Zespół TAKMA',
       role: 'Certyfikowani technicy Zebra'
     },
     publishedAt: '2025-01-07',
@@ -9782,7 +9782,7 @@ Uszkodzony firmware lub SSD. Wymaga:
     excerpt: 'Tablet L10 nie ładuje w docku pojazdu? Przerywane ładowanie w ambulansie? Diagnoza problemu: zużyte piny pogo, uszkodzone złącze, awaria zasilacza. Naprawa stacji dokujących dla flot ratownictwa medycznego.',
     coverImage: '/blog/stacja-dokujaca-tablet-zebra-naprawa.jpeg',
     author: {
-      name: 'Zespół Serwis Zebra',
+      name: 'Zespół TAKMA',
       role: 'Certyfikowani technicy Zebra'
     },
     publishedAt: '2025-01-08',
@@ -10139,7 +10139,7 @@ Docki pojazdowe L10 i ET60/ET80 mają **porty przekazywania sygnału antenowego*
     excerpt: 'Tablet Zebra L10 traci połączenie WiFi? ET45 nie łączy się z siecią 4G/LTE? Rozwiązania problemów z łącznością bezprzewodową dla służb ratownictwa, ambulansów i flot terenowych. Konfiguracja APN, anteny, troubleshooting.',
     coverImage: '/blog/tablet-zebra-brak-polaczenia-wifi-lte.jpeg',
     author: {
-      name: 'Zespół Serwis Zebra',
+      name: 'Zespół TAKMA',
       role: 'Certyfikowani technicy Zebra'
     },
     publishedAt: '2025-01-08',
@@ -10546,7 +10546,7 @@ Rozwiązania:
     excerpt: 'Pęknięty ekran w tablecie Zebra L10, ET40 lub ET60? Dotyk nie działa lub ma martwe strefy? Poznaj objawy wymagające wymiany LCD, koszt naprawy i dlaczego profesjonalny serwis jest niezbędny dla zachowania IP65.',
     coverImage: '/blog/wymiana-ekranu-tablet-zebra-koszt.jpeg',
     author: {
-      name: 'Zespół Serwis Zebra',
+      name: 'Zespół TAKMA',
       role: 'Certyfikowani technicy Zebra'
     },
     publishedAt: '2025-01-08',
@@ -10889,7 +10889,7 @@ Tablety L10 z opcjonalnym **aktywnym digitizerem Wacom** wymagają:
     excerpt: 'TC21/TC26 nie reaguje na przycisk Power? Boczne przyciski skanowania (spust/trigger) przestały działać? Poradnik dla logistyki i magazynów – od hard reset po serwis.',
     coverImage: '/blog/przycisk-zasilania-zebra-tc21-naprawa.jpeg',
     author: {
-      name: 'Zespół Serwis Zebra',
+      name: 'Zespół TAKMA',
       role: 'Certyfikowani technicy Zebra'
     },
     publishedAt: '2025-01-08',
@@ -11196,7 +11196,7 @@ Zależy od stanu urządzenia. **Warto naprawić:** terminal <3 lata, tylko probl
     excerpt: 'Błąd 5001, 4003 lub 7003 na drukarce kart Zebra? Kompletna baza kodów błędów ZC100, ZC300, ZC350, ZXP Series 3, 7, 8 z przyczynami i rozwiązaniami krok po kroku.',
     coverImage: '/blog/kody-bledow-drukarka-kart-zebra.jpeg',
     author: {
-      name: 'Zespół Serwis Zebra',
+      name: 'Zespół TAKMA',
       role: 'Certyfikowani technicy Zebra'
     },
     publishedAt: '2025-12-08',
@@ -11655,7 +11655,7 @@ Naprawiamy: ZC100, ZC150, ZC300, ZC350, ZXP Series 1, 3, 7, 8, 9 i starsze model
     excerpt: 'Drukarka kart Zebra zgłasza Card Jam? Karty zacinają się w podajniku, flipperze lub przy wyjściu? Kompletny poradnik usuwania zacięć dla ZC100, ZC300, ZXP Series.',
     coverImage: '/blog/karta-zacina-sie-drukarka-zebra-zc.jpeg',
     author: {
-      name: 'Zespół Serwis Zebra',
+      name: 'Zespół TAKMA',
       role: 'Certyfikowani technicy Zebra'
     },
     publishedAt: '2025-12-08',
@@ -11974,7 +11974,7 @@ Naprawiamy wszystkie modele: ZC100, ZC150, ZC300, ZC350, ZXP Series 1, 3, 7, 8, 
     excerpt: 'Pionowa biała linia na wydrukowanej karcie? To może być brud na głowicy lub uszkodzony element grzejny. Dowiedz się, kiedy wystarczy czyszczenie, a kiedy konieczna jest wymiana głowicy.',
     coverImage: '/blog/biale-pasy-na-karcie-drukarka-zebra.jpeg',
     author: {
-      name: 'Zespół Serwis Zebra',
+      name: 'Zespół TAKMA',
       role: 'Certyfikowani technicy Zebra'
     },
     publishedAt: '2025-12-08',
@@ -12273,7 +12273,7 @@ Wymieniamy głowice w: ZC100, ZC150, ZC300, ZC350, ZXP Series 1, 3, 7, 8, 9, P33
     excerpt: 'Error 9001, 9002 lub 9004 przy kodowaniu kart magnetycznych? Problemy z HiCo/LoCo? Kompletny poradnik rozwiązywania błędów enkodera magnetycznego w drukarkach ZC300, ZXP Series.',
     coverImage: '/blog/bledy-kodowania-magnetycznego-zebra-zc.jpeg',
     author: {
-      name: 'Zespół Serwis Zebra',
+      name: 'Zespół TAKMA',
       role: 'Certyfikowani technicy Zebra'
     },
     publishedAt: '2025-12-08',
@@ -12630,7 +12630,7 @@ Serwisujemy enkodery w: ZC100, ZC300, ZC350, ZXP Series 1, 3, 7, 8, 9.
     excerpt: 'Darmowy poradnik CardStudio 2.0: od instalacji, przez projektowanie pierwszej karty, po połączenie z bazą danych i kodowanie. Tutorial dla początkujących użytkowników drukarek Zebra.',
     coverImage: '/blog/zebra-cardstudio-projektowanie-kart.jpeg',
     author: {
-      name: 'Zespół Serwis Zebra',
+      name: 'Zespół TAKMA',
       role: 'Certyfikowani technicy Zebra'
     },
     publishedAt: '2025-12-08',
@@ -13010,7 +13010,7 @@ Serwisujemy i konfigurujemy drukarki: ZC100, ZC300, ZC350, ZXP Series 1, 3, 7, 8
     excerpt: 'Którą drukarkę kart Zebra wybrać? Porównanie modeli ZC100, ZC300, ZC350, ZXP7, ZXP9 – różnice, ceny, zastosowania. Pomoc w wyborze odpowiedniej drukarki dla Twojej firmy.',
     coverImage: '/blog/porownanie-drukarek-kart-zebra-zc.jpeg',
     author: {
-      name: 'Zespół Serwis Zebra',
+      name: 'Zespół TAKMA',
       role: 'Certyfikowani technicy Zebra'
     },
     publishedAt: '2025-12-08',
@@ -13408,7 +13408,7 @@ Serwisujemy wszystkie modele: ZC100, ZC300, ZC350, ZXP Series 1, 3, 7, 8, 9.
     excerpt: 'Pionowe białe pasy na etykietach z ZQ630, ZQ520, ZQ320? Kody kreskowe nie skanują się? Poradnik czyszczenia głowicy i diagnostyki jakości druku w drukarkach mobilnych Zebra.',
     coverImage: '/blog/biale-linie-drukarka-mobilna-zebra.jpeg',
     author: {
-      name: 'Zespół Serwis Zebra',
+      name: 'Zespół TAKMA',
       role: 'Certyfikowani technicy Zebra'
     },
     publishedAt: '2025-12-09',
@@ -13762,7 +13762,7 @@ Serwisujemy wszystkie modele mobilne: ZQ630, ZQ620, ZQ610, ZQ521, ZQ520, ZQ511, 
     excerpt: 'Drukarka Zebra ZQ630, ZQ520 lub ZQ320 zgłasza "Brak nośnika" mimo pełnej rolki? Pomija etykiety? Poradnik czyszczenia czujników i kalibracji krok po kroku.',
     coverImage: '/blog/blad-media-out-drukarka-zebra.jpeg',
     author: {
-      name: 'Zespół Serwis Zebra',
+      name: 'Zespół TAKMA',
       role: 'Certyfikowani technicy Zebra'
     },
     publishedAt: '2025-12-09',
@@ -14123,7 +14123,7 @@ Serwisujemy wszystkie modele mobilne: ZQ630, ZQ620, ZQ610, ZQ521, ZQ520, ZQ511, 
     excerpt: 'Drukarka mobilna Zebra "wypada z sieci" po kilku minutach? Nie odpowiada na ping? Tryb Sleep wyłącza radio WiFi? Poradnik konfiguracji sieci i oszczędzania energii.',
     coverImage: '/blog/drukarka-zebra-rozlacza-sie-wifi.jpeg',
     author: {
-      name: 'Zespół Serwis Zebra',
+      name: 'Zespół TAKMA',
       role: 'Certyfikowani technicy Zebra'
     },
     publishedAt: '2025-12-09',
@@ -14482,7 +14482,7 @@ Serwisujemy wszystkie modele mobilne: ZQ630, ZQ620, ZQ610, ZQ521, ZQ520, ZQ511, 
     excerpt: 'Bateria Zebra ZQ630/ZQ520 nie ładuje? Szybko się rozładowuje? Komunikat "Replace Battery"? Poradnik o PowerPrecision+, cyklach ładowania i wymianie baterii.',
     coverImage: '/blog/bateria-zebra-zq630-zq520-nie-laduje.jpeg',
     author: {
-      name: 'Zespół Serwis Zebra',
+      name: 'Zespół TAKMA',
       role: 'Certyfikowani technicy Zebra'
     },
     publishedAt: '2025-12-09',
@@ -14813,7 +14813,7 @@ Serwisujemy wszystkie modele mobilne: ZQ630, ZQ620, ZQ610, ZQ521, ZQ520, ZQ511, 
     excerpt: 'Drukarka mobilna Zebra nie drukuje na mrozie? Komunikat "Warning Head Cold"? Blade wydruki w zimie? Poradnik dla kurierów i kierowców o pracy drukarki w niskich temperaturach.',
     coverImage: '/blog/drukarka-mobilna-zebra-nie-drukuje-mroz.jpeg',
     author: {
-      name: 'Zespół Serwis Zebra',
+      name: 'Zespół TAKMA',
       role: 'Certyfikowani technicy Zebra'
     },
     publishedAt: '2025-12-09',
@@ -15149,7 +15149,7 @@ Serwisujemy wszystkie modele mobilne: ZQ630, ZQ620, ZQ610, ZQ521, ZQ520, ZQ511, 
     excerpt: 'Poznaj program Zebra OneCare - kontrakty serwisowe dla drukarek, terminali i skanerów. Porównanie poziomów Essential, Select i Premier. Dowiedz się, jak obniżyć TCO i zwiększyć dostępność urządzeń.',
     coverImage: '/blog/kontrakty-serwisowe-zebra-onecare.jpeg',
     author: {
-      name: 'Zespół Serwis Zebra',
+      name: 'Zespół TAKMA',
       role: 'Autoryzowany Partner Zebra'
     },
     publishedAt: '2025-01-14',
@@ -15443,7 +15443,7 @@ Jako **Autoryzowany Partner Zebra** z 25-letnim doświadczeniem pomożemy Ci wyb
     excerpt: 'Poznaj Zebra Designer 3 - profesjonalne oprogramowanie do projektowania etykiet. Dowiedz się jak zacząć, jakie są wersje i jak tworzyć etykiety krok po kroku.',
     coverImage: '/blog/zebra-designer-3-projektowanie-etykiet.jpeg',
     author: {
-      name: 'Zespół Serwis Zebra',
+      name: 'Zespół TAKMA',
       role: 'Certyfikowani technicy Zebra'
     },
     publishedAt: '2025-12-22',
@@ -15778,7 +15778,7 @@ Jako **autoryzowany serwis Zebra** pomagamy w konfiguracji oprogramowania i rozw
     excerpt: 'Kompletna instrukcja aktualizacji terminali Zebra (TC52, TC57, TC72, TC77, MC3300, MC9300, EC50, WT6300) do Android 14. Krok po kroku: LifeGuard OTA, Recovery Mode, A/B Seamless Update.',
     coverImage: '/blog/aktualizacja-android-14-zebra-tc52-tc72-mc3300.jpeg',
     author: {
-      name: 'Zespół Serwis Zebra',
+      name: 'Zespół TAKMA',
       role: 'Certyfikowani technicy Zebra'
     },
     publishedAt: '2025-12-25',
@@ -16323,7 +16323,7 @@ Jako **autoryzowany serwis Zebra** pomożemy Ci:
     excerpt: 'Kompletna instrukcja aktualizacji terminali Zebra nowej generacji (MC3400, MC9400, TC53e, WT5400, FR55) do Android 14. Krok po kroku: LifeGuard OTA, Recovery Mode, rozwiązywanie problemów.',
     coverImage: '/blog/aktualizacja-android-14-zebra-mc3400-mc9400-tc53e.jpeg',
     author: {
-      name: 'Zespół Serwis Zebra',
+      name: 'Zespół TAKMA',
       role: 'Certyfikowani technicy Zebra'
     },
     publishedAt: '2025-12-25',
@@ -16927,7 +16927,7 @@ Jako **autoryzowany serwis Zebra** pomożemy Ci:
     excerpt: 'Naucz się programować etykiety w języku ZPL! Kompletny poradnik po polsku: podstawowe komendy, kody kreskowe, czcionki, ramki i praktyczne przykłady gotowe do użycia.',
     coverImage: '/blog/jezyk-zpl-programowanie-etykiet-zebra.jpeg',
     author: {
-      name: 'Zespół Serwis Zebra',
+      name: 'Zespół TAKMA',
       role: 'Certyfikowani technicy Zebra'
     },
     publishedAt: '2025-12-26',
@@ -17266,7 +17266,7 @@ Jako **autoryzowany serwis Zebra** pomożemy Ci:
     excerpt: 'Drukarka Zebra nie działa w Windows 11? Instrukcja instalacji sterowników ZDesigner krok po kroku. Rozwiązania dla problemów z aktualizacją KB5055528, offline, brak sterownika.',
     coverImage: '/blog/sterowniki-zebra-windows-11-zdesigner.jpeg',
     author: {
-      name: 'Zespół Serwis Zebra',
+      name: 'Zespół TAKMA',
       role: 'Certyfikowani technicy Zebra'
     },
     publishedAt: '2025-12-27',
@@ -17725,7 +17725,7 @@ Jako **autoryzowany serwis Zebra** pomożemy Ci:
     excerpt: 'Aktualizacja firmware drukarki Zebra: przez USB, sieć, Zebra Setup Utilities i ZDownloader. Poradnik dla ZD420, ZD620, ZT410, GK420 i innych modeli.',
     coverImage: '/blog/jak-zaktualizowac-firmware-drukarki-zebra.jpeg',
     author: {
-      name: 'Zespół Serwis Zebra',
+      name: 'Zespół TAKMA',
       role: 'Certyfikowani technicy Zebra'
     },
     publishedAt: '2025-12-27',
@@ -18138,7 +18138,7 @@ Jako **autoryzowany serwis Zebra** pomożemy Ci:
     excerpt: 'Zebra Setup Utilities to kluczowe narzędzie do konfiguracji drukarek Zebra. Poradnik: instalacja, konfiguracja sieci, wysyłanie firmware, kalibracja, diagnostyka. Krok po kroku ze zdjęciami.',
     coverImage: '/blog/zebra-setup-utilities-jak-skonfigurowac-drukarke.jpeg',
     author: {
-      name: 'Zespół Serwis Zebra',
+      name: 'Zespół TAKMA',
       role: 'Certyfikowani technicy Zebra'
     },
     publishedAt: '2025-12-27',
@@ -18594,7 +18594,7 @@ Jako **autoryzowany serwis Zebra** pomożemy Ci:
     excerpt: 'Drukarka Zebra pokazuje "Ribbon Out" mimo włożonej taśmy? Poradnik: czujnik ribbona, ustawienia trybu druku, czyszczenie, kalibracja. Rozwiązania dla ZD421, ZD621, ZD220, ZD230, ZT411, ZT421.',
     coverImage: '/blog/blad-ribbon-out-drukarka-zebra.jpeg',
     author: {
-      name: 'Zespół Serwis Zebra',
+      name: 'Zespół TAKMA',
       role: 'Certyfikowani technicy Zebra'
     },
     publishedAt: '2025-12-27',
@@ -19028,7 +19028,7 @@ Jako **autoryzowany serwis Zebra** pomożemy Ci:
     excerpt: 'Konfiguracja drukarki Zebra przez Ethernet krok po kroku. IP statyczne, DHCP, ustawienia sieciowe dla ZD621, ZT411, ZT610, ZD421. Troubleshooting problemów z połączeniem.',
     coverImage: '/blog/jak-skonfigurowac-drukarke-zebra-przez-ethernet.jpeg',
     author: {
-      name: 'Zespół Serwis Zebra',
+      name: 'Zespół TAKMA',
       role: 'Certyfikowani technicy Zebra'
     },
     publishedAt: '2025-12-27',
@@ -19541,7 +19541,7 @@ Jako **autoryzowany serwis Zebra** pomożemy Ci:
     excerpt: 'Drukarka Zebra ZD420 lub ZD421 miga na czerwono? Sprawdź znaczenie diod LED: status, pauza, dane, materiały. Tabela kodów błędów i rozwiązania problemów.',
     coverImage: '/blog/diody-led-zebra-zd420-zd421-co-oznaczaja.jpeg',
     author: {
-      name: 'Zespół Serwis Zebra',
+      name: 'Zespół TAKMA',
       role: 'Certyfikowani technicy Zebra'
     },
     publishedAt: '2025-12-27',
@@ -19869,7 +19869,7 @@ Jako **autoryzowany serwis Zebra** pomożemy Ci:
     excerpt: 'Nowa drukarka Zebra wymaga hasła przy pierwszym uruchomieniu? Od 1 sierpnia 2025 wszystkie drukarki Zebra z WiFi/Bluetooth w regionie EMEA wymagają konfiguracji zabezpieczeń zgodnie z dyrektywą EU RED. Dowiedz się, jak skonfigurować hasło i dlaczego jest to wymagane.',
     coverImage: '/drukarki-zebra-dyrektywa-red.jpeg',
     author: {
-      name: 'Zespół Serwis Zebra',
+      name: 'Zespół TAKMA',
       role: 'Autoryzowany serwis Zebra'
     },
     publishedAt: '2026-01-08',
@@ -20151,7 +20151,7 @@ Jako **autoryzowany serwis Zebra** pomagamy w konfiguracji drukarek zgodnie z dy
     excerpt: 'Jak zabezpieczyć drukarki Zebra w środowisku korporacyjnym? Kompleksowy poradnik dla administratorów IT: Protected Mode, szyfrowanie TLS, zarządzanie usługami sieciowymi i zgodność z EU RED.',
     coverImage: '/blog/zebra-printsecure-przewodnik.jpeg',
     author: {
-      name: 'Zespół Serwis Zebra',
+      name: 'Zespół TAKMA',
       role: 'Autoryzowany serwis Zebra'
     },
     publishedAt: '2026-01-08',
