@@ -9259,6 +9259,15 @@ ZT411 posiada **ruchomy czujnik mediów**. Przesuń czujnik w poziomie aby dopas
       {
         title: '7. Podłączenie do komputera',
         content: `
+### EU RED – Protected Mode (EMEA od 1.08.2025)
+
+Drukarki Zebra ZT411 sprzedawane w regionie EMEA od **1 sierpnia 2025** z Wi-Fi lub Bluetooth wymagają:
+- Ustawienia hasła Protected Mode
+- Skonfigurowania PIN panelu przedniego
+- Wykonania powyższych kroków **przed** konfiguracją sieciową
+
+Więcej informacji: [Dyrektywa EU RED – konfiguracja](/blog/zebra-wymaga-hasla-dyrektywa-red-konfiguracja)
+
 ### Instalacja sterowników
 
 > **Ważne:** Zainstaluj sterowniki PRZED podłączeniem drukarki!
@@ -9647,6 +9656,15 @@ ZT421 posiada **ruchomy czujnik mediów**. Przesuń czujnik w poziomie aby dopas
       {
         title: '7. Podłączenie do komputera',
         content: `
+### EU RED – Protected Mode (EMEA od 1.08.2025)
+
+Drukarki Zebra ZT421 sprzedawane w regionie EMEA od **1 sierpnia 2025** z Wi-Fi lub Bluetooth wymagają:
+- Ustawienia hasła Protected Mode
+- Skonfigurowania PIN panelu przedniego
+- Wykonania powyższych kroków **przed** konfiguracją sieciową
+
+Więcej informacji: [Dyrektywa EU RED – konfiguracja](/blog/zebra-wymaga-hasla-dyrektywa-red-konfiguracja)
+
 ### Instalacja sterowników
 
 > **Ważne:** Zainstaluj sterowniki PRZED podłączeniem drukarki!
@@ -10761,6 +10779,15 @@ ZT620 posiada dwa elementy regulacji:
       {
         title: '8. Podłączenie do komputera',
         content: `
+### EU RED – Protected Mode (EMEA od 1.08.2025)
+
+Drukarki Zebra ZT620 sprzedawane w regionie EMEA od **1 sierpnia 2025** z Wi-Fi lub Bluetooth wymagają:
+- Ustawienia hasła Protected Mode
+- Skonfigurowania PIN panelu przedniego
+- Wykonania powyższych kroków **przed** konfiguracją sieciową
+
+Więcej informacji: [Dyrektywa EU RED – konfiguracja](/blog/zebra-wymaga-hasla-dyrektywa-red-konfiguracja)
+
 ### Instalacja sterowników
 
 > **Ważne:** Zainstaluj Zebra Setup Utilities PRZED podłączeniem drukarki!
