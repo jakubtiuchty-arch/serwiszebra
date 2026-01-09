@@ -50,7 +50,7 @@ export async function generateMetadata({
       modifiedTime: post.updatedAt || post.publishedAt,
       authors: [post.author.name],
       tags: post.tags,
-      siteName: 'Serwis Zebra',
+      siteName: 'TAKMA - Autoryzowany Serwis Zebra',
       locale: 'pl_PL',
       images: [
         {
@@ -105,7 +105,7 @@ export default function BlogPostPage({
     },
     publisher: {
       '@type': 'Organization',
-      name: 'Serwis Zebra - TAKMA',
+      name: 'TAKMA - Autoryzowany Serwis Zebra',
       logo: {
         '@type': 'ImageObject',
         url: 'https://www.serwis-zebry.pl/takma_logo_1.png'
