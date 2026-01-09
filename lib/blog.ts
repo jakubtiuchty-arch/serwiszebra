@@ -748,32 +748,6 @@ Obie opcje można **wymieniać bez narzędzi**.
 
 ---
 
-## Przewaga nad konkurencją
-
-### vs Honeywell Ultra 1960/1962
-
-- **Czujnik 2 MP** vs 1 MP u konkurencji
-- **7% dłuższy zasięg** na kodach UPC
-- **8× więcej skanów** z superkondensatora
-- Wbudowane RFID (Honeywell wymaga osobnego urządzenia)
-- Ładowanie bezstykowe dla baterii i superkondensatora
-
-### vs Honeywell Xenon XP 1950/1952
-
-- **42% dłuższy zasięg** na kodach UPC
-- **54% więcej skanów** na baterii
-- Obsługa superkondensatora (brak u Xenon)
-- Dedykowany miernik mocy
-
-### vs Datalogic Gryphon 4500/4520
-
-- Podwójna rozdzielczość czujnika
-- Większe pole widzenia
-- Superkondensator jako opcja
-- Funkcja Virtual Tether zapobiegająca zgubieniu
-
----
-
 ## Oprogramowanie Zebra DNA
 
 Skanery DS82 są wspierane przez pakiet **Zebra DNA**:
