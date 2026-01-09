@@ -10910,6 +10910,476 @@ Na naklejce z numerem części: **ZT620xY-xxxxxxxx**
 `
       }
     ]
+  },
+  'zt510': {
+    model: 'ZT510',
+    title: 'Zebra ZT510 – Instrukcja obsługi po Polsku',
+    lastUpdated: '2026-01-09',
+    sourceDocument: 'Zebra ZT510 User Guide',
+    keywords: [
+      'ZT510', 'zebra zt510', 'drukarka przemysłowa', 'drukarka etykiet', 
+      'instrukcja ZT510', 'ZT510 po polsku', 'drukarka 4 cale',
+      'kalibracja ZT510', 'ribbon ZT510', 'metalowa konstrukcja',
+      '203 dpi', '300 dpi', 'NFC', 'Print Touch', 'EU RED', 'Protected Mode'
+    ],
+    sections: [
+      {
+        title: '1. Podstawowe informacje',
+        content: `
+### O drukarce Zebra ZT510
+
+Zebra ZT510 to przemysłowa drukarka etykiet o szerokości druku **4 cale (104 mm)**, zaprojektowana dla środowisk produkcyjnych, magazynowych i logistycznych wymagających niezawodności w atrakcyjnej cenie. Wyposażona w wytrzymałą metalową konstrukcję, intuicyjny panel sterowania z wyświetlaczem LCD oraz szeroki zakres opcji łączności.
+
+### Parametry techniczne
+
+| Parametr | ZT510 |
+|----------|-------|
+| **Szerokość druku** | do 104 mm (4,09") |
+| Technologia druku | Termotransferowy / termiczny bezpośredni |
+| Rozdzielczość | 203 dpi lub 300 dpi |
+| Prędkość druku (203 dpi) | do 305 mm/s (12"/s) |
+| Prędkość druku (300 dpi) | do 254 mm/s (10"/s) |
+| Maks. średnica rolki | 203 mm (8") |
+| Średnica gilzy | 76 mm (3") |
+| Długość ribbonu | do 450 m |
+| Maks. szerokość materiału | 114 mm (4,5") |
+
+### Rozdzielczości i szerokości druku
+
+| Rozdzielczość | Maks. szerokość druku (dots) | Maks. szerokość (mm) |
+|---------------|------------------------------|----------------------|
+| 203 dpi | 832 dots | 104 mm |
+| 300 dpi | 1248 dots | 106 mm |
+
+### Złącza
+
+- USB 2.0 (standard)
+- RS-232 Serial (standard)
+- Ethernet 10/100 (opcja)
+- Wi-Fi 802.11a/b/g/n/ac + Bluetooth 4.1 (opcja)
+- USB Host (1x) – do klawiatury, skanera, pendrive
+- Port aplikatora (opcja)
+
+### Cechy charakterystyczne
+
+- **Metalowa konstrukcja przemysłowa** – wysoka trwałość
+- Wyświetlacz LCD z nawigacją przyciskami
+- 5 wskaźników LED statusu
+- Ruchomy czujnik mediów
+- Regulacja docisku i pozycji głowicy
+- Obsługa języków ZPL i ZPL II
+- Opcjonalny obcinacz i nawijak
+- Near Field Communication (NFC) / Print Touch
+- Zebra Basic Interpreter (ZBI 2.0)
+- **Zgodność z EU RED (Protected Mode)**
+`
+      },
+      {
+        title: '2. Rozpakowanie i instalacja',
+        content: `
+### Zawartość opakowania
+
+- Drukarka ZT510
+- Kabel zasilający
+- Kabel USB
+- Pusta gilza do odbierania ribbonu (wersja TT)
+- Skrócona instrukcja obsługi
+
+### Wybór lokalizacji
+
+- **Powierzchnia:** płaska, stabilna, zdolna utrzymać ciężar drukarki
+- **Przestrzeń:** zapewnij wentylację ze wszystkich stron
+- **Zasilanie:** w pobliżu łatwo dostępnego gniazdka
+- **Komunikacja:** w zasięgu sieci lub kabli komunikacyjnych
+
+> **Uwaga:** Nie umieszczaj materiałów tłumiących pod drukarką – ogranicza to przepływ powietrza.
+
+### Warunki pracy
+
+| Tryb | Temperatura | Wilgotność |
+|------|-------------|------------|
+| Thermal Transfer | 5°C – 40°C | 20-85% bez kondensacji |
+| Direct Thermal | 0°C – 40°C | 20-85% bez kondensacji |
+
+### Warunki przechowywania
+
+- Temperatura: -40°C do +60°C
+- Wilgotność: 5-85% bez kondensacji
+`
+      },
+      {
+        title: '3. Panel sterowania',
+        content: `
+### Wyświetlacz LCD
+
+Wyświetlacz pokazuje aktualny status drukarki i umożliwia nawigację po menu. W stanie bezczynności pokazuje wersję firmware i adres IP.
+
+### Wskaźniki LED
+
+| Wskaźnik | Znaczenie |
+|----------|-----------|
+| **STATUS** | Ogólny stan drukarki (zielony=OK, żółty=ostrzeżenie, czerwony=błąd) |
+| **PAUSE** | Drukarka wstrzymana |
+| **DATA** | Odbieranie/przetwarzanie danych |
+| **SUPPLIES** | Stan materiałów eksploatacyjnych |
+| **NETWORK** | Stan połączenia sieciowego |
+
+### Przyciski sterujące
+
+| Przycisk | Funkcja |
+|----------|---------|
+| **LEFT SELECT** | Wykonuje akcję po lewej stronie wyświetlacza |
+| **RIGHT SELECT** | Wykonuje akcję po prawej stronie wyświetlacza |
+| **UP/DOWN ARROW** | Zmiana wartości / przewijanie |
+| **LEFT/RIGHT ARROW** | Nawigacja w menu |
+| **OK** | Potwierdza wybór |
+| **PAUSE** | Wstrzymuje/wznawia drukowanie |
+| **FEED** | Wysuwa jedną etykietę |
+| **CANCEL** | Anuluje (1x = następna, 2 sek. = wszystkie) |
+
+### Menu główne (Home Menu)
+
+| Ikona | Menu | Zawartość |
+|-------|------|-----------|
+| ⚙️ | **SETTINGS** | Ciemność, prędkość, typ mediów, tryb druku |
+| 🔧 | **TOOLS** | Kalibracja, diagnostyka, USB, ZBI |
+| 📡 | **NETWORK** | Ustawienia sieciowe, IP, Wi-Fi |
+| 🔤 | **LANGUAGE** | Język, komendy ZPL |
+| 📊 | **SENSORS** | Kalibracja czujników |
+| 🔌 | **PORTS** | Ustawienia portów szeregowych |
+| 📶 | **BLUETOOTH** | Ustawienia Bluetooth |
+`
+      },
+      {
+        title: '4. Ładowanie materiałów eksploatacyjnych',
+        content: `
+### Obsługiwane typy materiałów
+
+- **Etykiety z przerwą (gap/notch)** – rozdzielone przerwami lub nacięciami
+- **Etykiety z czarnym znacznikiem (mark)** – czarny znacznik z tyłu
+- **Materiał ciągły (continuous)** – bez znaczników separacji
+- **Materiał składany (fanfold)** – stos składanych etykiet
+
+### Tryby druku (Print Mode)
+
+| Tryb | Wymagana opcja | Opis |
+|------|----------------|------|
+| **TEAR OFF** | Brak | Ręczne odrywanie (domyślny) |
+| **PEEL-OFF** | Nawijak | Automatyczne odklejanie |
+| **REWIND** | Nawijak | Nawijanie całych etykiet |
+| **CUTTER** | Obcinacz | Automatyczne cięcie |
+| **APPLICATOR** | Port aplikatora | Współpraca z aplikatorem |
+
+### Ładowanie materiału (tryb Tear-Off)
+
+> **Ostrzeżenie:** Głowica może być gorąca! Zdejmij biżuterię przed pracą.
+
+1. **Podnieś drzwi komory mediów**
+2. **Otwórz głowicę** – obróć dźwignię w górę
+3. **Odsuń zewnętrzną prowadnicę:**
+   - Poluzuj śrubę motylkową
+   - Odsuń prowadnicę na zewnątrz
+4. **Włóż rolkę** na wrzeciono, dociśnij do tyłu
+5. **Przeprowadź materiał:**
+   - Pod rolką tancerza
+   - Pod rolką prowadzącą
+   - Pod górnym czujnikiem mediów
+   - Pod głowicą drukującą
+   - Nad wałkiem dociskowym
+6. **Dosuń prowadnicę** do krawędzi materiału
+7. **Dokręć śrubę motylkową**
+8. **Zamknij głowicę** (dźwignia w dół)
+9. Zamknij drzwi
+10. Naciśnij **PAUSE** aby umożliwić drukowanie
+
+> **Ważne:** Materiał musi przejść POD rolkami, nie nad nimi – inaczej pojawi się fałszywy błąd RIBBON OUT.
+`
+      },
+      {
+        title: '5. Ładowanie ribbonu',
+        content: `
+> **Dotyczy tylko trybu Thermal Transfer.**
+
+### Czy potrzebuję ribbonu?
+
+Przesuń paznokciem po powierzchni materiału:
+- **Czarny ślad** = Direct Thermal (bez ribbonu)
+- **Brak śladu** = Thermal Transfer (wymaga ribbonu)
+
+### Strona powlekana ribbonu
+
+ZT510 standardowo obsługuje ribbon powlekany na zewnątrz.
+
+**Test klejenia:** Przyklej kawałek etykiety do zewnętrznej strony rolki. Jeśli farba przylgnie do etykiety – ribbon jest powlekany na zewnątrz.
+
+### Procedura ładowania ribbonu
+
+1. Podnieś drzwi komory mediów
+2. Otwórz głowicę (dźwignia w górę)
+3. **Wyrównaj segmenty wrzeciona ribbonu**
+4. **Załaduj rolkę ribbonu na dolne wrzeciono (podające):**
+   - Ribbon odwija się do przodu
+   - Dociśnij rolkę do tyłu
+5. **Przeprowadź ribbon:**
+   - Pod rolką prowadzącą
+   - Pod głowicą drukującą
+6. **Nawiń ribbon na górne wrzeciono (odbiorcze):**
+   - Przeprowadź nad górną rolką
+   - Owiń kilka zwojów
+   - Obróć wrzeciono aby naprężyć
+7. Załaduj materiał (jeśli jeszcze nie załadowany)
+8. Zamknij głowicę (dźwignia w dół)
+9. Zamknij drzwi
+
+> **Ważne:** Ribbon musi być szerszy niż materiał, aby chronić głowicę.
+`
+      },
+      {
+        title: '6. Menu użytkownika',
+        content: `
+### SETTINGS Menu
+
+| Pozycja | Opis | Wartości |
+|---------|------|----------|
+| **DARKNESS** | Ciemność druku | 0.0 – 30.0 |
+| **PRINT SPEED** | Prędkość druku | 2-12 ips (203dpi), 2-10 ips (300dpi) |
+| **MEDIA TYPE** | Typ materiału | CONTINUOUS, GAP/NOTCH, MARK |
+| **PRINT METHOD** | Metoda druku | THERMAL TRANS, DIRECT THERMAL |
+| **TEAR OFF** | Pozycja odrywania | -120 do +120 dots |
+| **PRINT WIDTH** | Szerokość druku | 2-832 (203dpi), 2-1248 (300dpi) |
+| **PRINT MODE** | Tryb druku | TEAR OFF, PEEL-OFF, REWIND, CUTTER |
+
+### TOOLS Menu
+
+| Pozycja | Opis |
+|---------|------|
+| **PRINT INFORMATION** | Drukuje etykiety konfiguracji |
+| **POWER UP ACTION** | Akcja przy włączeniu |
+| **HEAD CLOSE ACTION** | Akcja przy zamknięciu głowicy |
+| **LOAD DEFAULTS** | Przywracanie ustawień |
+| **MEDIA/RIBBON CAL** | Kalibracja czujników |
+| **DIAGNOSTIC MODE** | Tryb diagnostyczny |
+| **PRINT USB FILE** | Drukowanie z pendrive |
+| **PRINT STATION** | Drukowanie z klawiatury USB |
+| **PASSWORD PROTECT** | Ochrona hasłem |
+
+### NETWORK Menu
+
+| Pozycja | Opis |
+|---------|------|
+| **ACTIVE PRINT SERVER** | Aktywny serwer druku |
+| **PRIMARY NETWORK** | Sieć podstawowa (WIRED/WLAN) |
+| **WIRED IP ADDRESS** | Adres IP (kablowy) |
+| **WLAN IP ADDRESS** | Adres IP (Wi-Fi) |
+| **ESSID** | Nazwa sieci Wi-Fi |
+| **RESET NETWORK** | Reset ustawień sieciowych |
+`
+      },
+      {
+        title: '7. Kalibracja',
+        content: `
+### Kiedy kalibrować?
+
+- Po zmianie typu lub rozmiaru materiału/ribbonu
+- Gdy drukarka pomija etykiety
+- Gdy obraz dryfuje w pionie lub poziomie
+- Gdy ribbon nie jest wykrywany
+
+### Kalibracja automatyczna
+
+Ustaw akcję przy włączeniu lub zamknięciu głowicy:
+- **CALIBRATE** – pełna kalibracja
+- **SHORT CAL** – szybka kalibracja
+- **FEED** – tylko wysuw
+- **LENGTH** – określenie długości
+- **NO MOTION** – brak ruchu
+
+### Kalibracja ręczna
+
+**Metoda 1 – Z menu:**
+TOOLS > MEDIA/RIBBON CAL
+
+**Metoda 2 – Skrót klawiszowy:**
+Przytrzymaj **PAUSE + CANCEL** przez 2 sekundy
+
+### Regulacja docisku głowicy
+
+ZT510 posiada dwa elementy regulacji:
+1. **Toggle Position** – pozycja punktu docisku (przód/tył)
+2. **Printhead Pressure** – siła docisku
+
+**Wskazówki:**
+- Zwiększ docisk zewnętrzny jeśli materiał przesuwa się w lewo
+- Zwiększ docisk wewnętrzny jeśli materiał przesuwa się w prawo
+
+### Regulacja pozycji czujnika
+
+Czujnik mediów można przesuwać w poziomie aby dopasować do pozycji przerw/nacięć na materiale.
+`
+      },
+      {
+        title: '8. Podłączenie do komputera',
+        content: `
+### EU RED – Protected Mode (EMEA od 1.08.2025)
+
+Drukarki sprzedawane w regionie EMEA od 1 sierpnia 2025 wymagają:
+- Ustawienia hasła Protected Mode
+- Skonfigurowania PIN panelu przedniego
+- Przed konfiguracją sieciową należy wykonać powyższe kroki
+
+Więcej informacji na stronie /blog/zebra-wymaga-hasla-dyrektywa-red-konfiguracja
+
+### Instalacja sterowników
+
+> **Ważne:** Zainstaluj sterowniki PRZED podłączeniem drukarki!
+
+1. Pobierz sterowniki ze strony /sterowniki
+2. Uruchom plik instalacyjny
+3. Postępuj zgodnie z instrukcjami
+
+### Identyfikacja modelu i rozdzielczości
+
+Na naklejce z numerem części: **ZT510xY-xxxxxxxx**
+- ZT510 = model
+- Y = rozdzielczość (2=203dpi, 3=300dpi)
+
+### Połączenie USB
+
+1. Zainstaluj sterowniki
+2. Podłącz kabel USB
+3. Włącz drukarkę
+4. Windows wykryje drukarkę automatycznie
+
+### Połączenie Ethernet
+
+1. Podłącz kabel sieciowy RJ-45
+2. Włącz drukarkę
+3. Sprawdź IP w NETWORK > WIRED IP ADDRESS
+4. Dodaj drukarkę przez port TCP/IP
+`
+      },
+      {
+        title: '9. Konserwacja',
+        content: `
+### Harmonogram czyszczenia
+
+| Element | Częstotliwość |
+|---------|---------------|
+| Głowica drukująca | Co 1 rolkę ribbonu |
+| Wałek dociskowy (platen) | Co 1 rolkę ribbonu |
+| Czujniki | Co 1 rolkę |
+| Ścieżka mediów | Co 1 rolkę |
+| Obcinacz | W razie potrzeby |
+
+### Czyszczenie głowicy i wałka
+
+> **Ostrzeżenie:** Głowica może być gorąca! Uwaga na ESD.
+
+1. Wyłącz drukarkę
+2. Otwórz drzwi i wyjmij ribbon oraz materiał
+3. **Głowica:** Przetrzyj brązowy pasek wacikiem z alkoholem (99,7%)
+4. **Wałek:** Przetrzyj wacikiem obracając go ręcznie
+5. Poczekaj aż wyschnie (2 minuty)
+6. Załaduj materiał i ribbon
+
+### Usuwanie zużytego ribbonu
+
+1. Otwórz głowicę
+2. Odetnij ribbon między rolką podającą a głowicą
+3. Zdejmij zużyty ribbon z górnego wrzeciona
+4. Załóż nową pustą gilzę
+5. Załaduj nowy ribbon
+`
+      },
+      {
+        title: '10. Rozwiązywanie problemów',
+        content: `
+### Etykieta konfiguracji
+
+**Drukowanie:**
+- TOOLS > PRINT INFORMATION > SETTINGS
+- Lub: przytrzymaj **FEED + CANCEL** przez 2 sekundy
+
+### Komunikaty błędów
+
+| Komunikat | Rozwiązanie |
+|-----------|-------------|
+| **PAPER OUT** | Załaduj materiał, sprawdź czujniki |
+| **RIBBON OUT** | Załaduj ribbon, sprawdź PRINT METHOD |
+| **HEAD OPEN** | Zamknij głowicę |
+| **HEAD OVER TEMP** | Poczekaj na ostygnięcie |
+| **CUTTER JAM** | Usuń zacięcie w obcinaczu |
+
+### Problemy z jakością druku
+
+| Problem | Rozwiązanie |
+|---------|-------------|
+| Blade wydruki | Zwiększ DARKNESS, wyczyść głowicę |
+| Przepalone wydruki | Zmniejsz DARKNESS, zwiększ PRINT SPEED |
+| Puste pionowe linie | Wyczyść lub wymień głowicę |
+| Marszczenie ribbonu | Sprawdź naprężenie, wyrównaj ribbon |
+| Przesuwanie materiału | Dostosuj docisk głowicy |
+
+### Przywracanie ustawień fabrycznych
+
+**Ustawienia drukarki:**
+- TOOLS > LOAD DEFAULTS > FACTORY
+- Lub: przytrzymaj **FEED + PAUSE** podczas włączania
+
+**Ustawienia sieciowe:**
+- TOOLS > LOAD DEFAULTS > NETWORK
+- Lub: przytrzymaj **CANCEL + PAUSE** podczas włączania
+`
+      },
+      {
+        title: 'FAQ – Najczęściej zadawane pytania',
+        content: `
+### Czym różni się ZT510 od ZT410/ZT610?
+
+**Odpowiedź:** **ZT510** to ekonomiczny model przemysłowy z szerokością druku 4 cale, oferujący doskonały stosunek ceny do możliwości. **ZT410** to model premium z oświetleniem ścieżki mediów. **ZT610** to również model premium, ale z rozdzielczością do 600 dpi.
+
+### Do jakich zastosowań najlepiej nadaje się ZT510?
+
+**Odpowiedź:** ZT510 jest idealny do: **produkcji**, **magazynów**, **logistyki** i **dystrybucji**, gdzie wymagana jest niezawodna drukarka przemysłowa w przystępnej cenie. Obsługuje etykiety do 104 mm szerokości.
+
+### Co to jest EU RED Protected Mode?
+
+**Odpowiedź:** Od 1 sierpnia 2025 drukarki Zebra sprzedawane w regionie EMEA z Wi-Fi/Bluetooth wymagają skonfigurowania hasła (Protected Mode) przed pierwszym użyciem. Jest to wymóg dyrektywy EU RED dotyczącej cyberbezpieczeństwa urządzeń radiowych.
+
+### Jak załadować ribbon do Zebra ZT510?
+
+**Odpowiedź:** Podnieś drzwi komory mediów, otwórz głowicę. Załaduj rolkę ribbonu na dolne wrzeciono – ribbon odwija się do przodu. Przeprowadź ribbon pod głowicą i nawiń na górne wrzeciono. Naprężyć obracając wrzeciono, zamknij głowicę i drzwi.
+
+### Dlaczego pojawia się błąd RIBBON OUT mimo załadowanego ribbonu?
+
+**Odpowiedź:** Sprawdź czy materiał przechodzi POD rolkami (nie nad nimi) – nieprawidłowe prowadzenie zasłania czujnik ribbonu. Sprawdź też ustawienie **PRINT METHOD** – powinno być **THERMAL TRANS** dla druku z ribbonem.
+
+### Jak wykonać kalibrację ZT510?
+
+**Odpowiedź:** **Metoda 1:** TOOLS > MEDIA/RIBBON CAL. **Metoda 2:** Przytrzymaj **PAUSE + CANCEL** przez 2 sekundy. Kalibruj po każdej zmianie typu lub rozmiaru materiału.
+
+### Jak wydrukować etykietę konfiguracji ZT510?
+
+**Odpowiedź:** **Metoda 1:** TOOLS > PRINT INFORMATION > SETTINGS. **Metoda 2:** Przytrzymaj **FEED + CANCEL** przez 2 sekundy. Etykieta pokazuje wszystkie ustawienia drukarki.
+
+### Jak przywrócić ustawienia fabryczne ZT510?
+
+**Odpowiedź:** **Metoda 1:** TOOLS > LOAD DEFAULTS > FACTORY. **Metoda 2:** Przytrzymaj **FEED + PAUSE** podczas włączania drukarki. Reset sieciowy: **CANCEL + PAUSE** podczas włączania.
+
+### Jak często czyścić głowicę drukującą ZT510?
+
+**Odpowiedź:** Głowicę i wałek należy czyścić **po każdej rolce ribbonu** wacikiem z alkoholem izopropylowym (99,7%). Regularne czyszczenie przedłuża żywotność głowicy.
+
+### Jak korzystać z funkcji NFC / Print Touch?
+
+**Odpowiedź:** Zbliż telefon z aplikacją **Zebra Printer Setup Utility** do logo NFC na drukarce. Umożliwia to szybkie sparowanie, pobranie informacji o drukarce i konfigurację ustawień bez kabli.
+
+### Jakie są dostępne rozdzielczości ZT510?
+
+**Odpowiedź:** ZT510 jest dostępny w rozdzielczości **203 dpi** (do 305 mm/s) i **300 dpi** (do 254 mm/s). Rozdzielczość można sprawdzić na naklejce z Part Number: ZT510x**2** = 203 dpi, ZT510x**3** = 300 dpi.
+`
+      }
+    ]
   }
 }
 
