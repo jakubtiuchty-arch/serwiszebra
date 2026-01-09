@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     description: 'Odpowiedzi na najczęstsze pytania o serwis Zebra: koszty, czas naprawy, gwarancja, wysyłka.',
     url: 'https://www.serwis-zebry.pl/faq',
     type: 'website',
-    siteName: 'Serwis Zebra',
+    siteName: 'TAKMA - Autoryzowany Serwis Zebra',
     locale: 'pl_PL',
     images: [
       {

@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     description: 'Praktyczne poradniki napraw drukarek etykiet, terminali mobilnych i skanerów Zebra. Porady certyfikowanych techników.',
     url: 'https://www.serwis-zebry.pl/blog',
     type: 'website',
-    siteName: 'Serwis Zebra',
+    siteName: 'TAKMA - Autoryzowany Serwis Zebra',
     locale: 'pl_PL',
     images: [
       {

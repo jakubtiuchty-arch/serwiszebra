@@ -272,7 +272,7 @@ export async function generateMetadata({ params }: { params: { miasto: string } 
         },
       ],
       locale: 'pl_PL',
-      siteName: 'Serwis Zebra',
+      siteName: 'TAKMA - Autoryzowany Serwis Zebra',
     },
     twitter: {
       card: 'summary_large_image',
