@@ -15,7 +15,7 @@ export interface BlogPost {
   readingTime: number // w minutach
   deviceType: 'drukarki' | 'terminale' | 'skanery' | 'tablety' | 'inne'
   subDeviceType?: string // Podkategoria urządzenia (np. 'etykiet', 'kart', 'opasek', 'mobilne')
-  category: 'poradniki' | 'troubleshooting' | 'porownania' | 'aktualnosci'
+  category: 'poradniki' | 'troubleshooting' | 'porownania' | 'aktualnosci' | 'nowosci-produktowe'
   tags: string[]
   seo: {
     metaTitle: string
@@ -103,13 +103,18 @@ export const BLOG_CATEGORIES = {
     name: 'Aktualności',
     description: 'Nowości ze świata Zebra',
     color: 'green'
+  },
+  'nowosci-produktowe': {
+    name: 'Nowości produktowe',
+    description: 'Premiery i nowe produkty Zebra',
+    color: 'orange'
   }
 }
 
 // Wszystkie artykuły bloga
 export const blogPosts: BlogPost[] = [
   {
-    slug: 'zebra-tc501-tc701-terminal-mobilny-ai-premiera-2026',
+    slug: 'zebra-tc501-tc701-specyfikacja-cena-premiera',
     title: 'Zebra TC501 i Zebra TC701 – Terminale mobilne gotowe na erę AI (Premiera 2026)',
     excerpt: 'Poznaj nowe komputery mobilne Zebra TC501 i Zebra TC701 z procesorem Qualcomm Dragonwing, Wi-Fi 7, 5G i wbudowanym czytnikiem RFID. Do 300% więcej mocy, 12 GB RAM i gotowość na aplikacje AI.',
     coverImage: '/blog/zebra-tc501-zebra-tc701.jpeg',
@@ -120,7 +125,7 @@ export const blogPosts: BlogPost[] = [
     publishedAt: '2026-01-09',
     readingTime: 12,
     deviceType: 'terminale',
-    category: 'aktualnosci',
+    category: 'nowosci-produktowe',
     tags: [
       'Zebra TC501',
       'Zebra TC701',

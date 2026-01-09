@@ -184,7 +184,8 @@ export default function BlogPostPage({
       poradniki: 'bg-blue-100 text-blue-700',
       troubleshooting: 'bg-red-100 text-red-700',
       porownania: 'bg-purple-100 text-purple-700',
-      aktualnosci: 'bg-green-100 text-green-700'
+      aktualnosci: 'bg-green-100 text-green-700',
+      'nowosci-produktowe': 'bg-orange-100 text-orange-700'
     }
     return colors[category] || 'bg-gray-100 text-gray-700'
   }
