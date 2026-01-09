@@ -12298,6 +12298,441 @@ Etui (SG-MPV-SC31-01) umożliwia noszenie drukarki z paskiem na ramię:
 `
       }
     ]
+  },
+  'zq220plus': {
+    model: 'ZQ220 Plus',
+    title: 'Zebra ZQ220 Plus – Instrukcja obsługi po Polsku',
+    lastUpdated: '2026-01-09',
+    sourceDocument: 'Zebra ZQ220 Plus User Guide',
+    keywords: [
+      'ZQ220 Plus', 'zebra zq220 plus', 'drukarka mobilna', 'drukarka paragonów', 
+      'instrukcja ZQ220 Plus', 'ZQ220 Plus po polsku', 'drukarka 3 cale',
+      'drukarka kurierska', 'drukarka przenośna', 'Bluetooth 5.0',
+      'USB Type-C', 'NFC Print Touch', 'linerless', 'IP54', '80 mm',
+      'CPCL', 'ESC/POS', 'BLE iOS'
+    ],
+    sections: [
+      {
+        title: '1. Podstawowe informacje',
+        content: `
+### O drukarce Zebra ZQ220 Plus
+
+Zebra ZQ220 Plus to kompaktowa **mobilna drukarka paragonów i etykiet** o szerokości druku do **72 mm (2,83")**, zaprojektowana dla pracowników mobilnych w branży dostawczej, kurierskiej, logistycznej i detalicznej. Wykorzystuje najnowsze technologie: ładowanie przez USB Type-C, **Bluetooth 5.0** z obsługą BLE iOS, Near Field Communication (NFC) oraz wytrzymałą konstrukcję o klasie ochrony **IP54**.
+
+### Parametry techniczne
+
+| Parametr | ZQ220 Plus |
+|----------|------------|
+| **Szerokość druku** | do 72 mm (2,83") |
+| Technologia druku | Termiczny bezpośredni (Direct Thermal) |
+| Rozdzielczość | 203 dpi × 200 dpi |
+| Prędkość druku | 45,72 – 50,8 mm/s (1,8 – 2,0"/s) |
+| Maks. średnica rolki | 50 mm |
+| Pojemność baterii | 2500 mAh Li-Ion (nominalna 2600 mAh) |
+| Czas ładowania | poniżej 3,5 godziny |
+| **Waga z baterią** | poniżej 390 g |
+
+### Porównanie ZQ220 vs ZQ220 Plus
+
+| Parametr | ZQ220 | ZQ220 Plus |
+|----------|-------|------------|
+| Bluetooth | 4.1 (MFi) | **5.0 (BLE iOS)** |
+| Klasa ochrony | IP43 | **IP54** |
+| Języki programowania | CPCL | **CPCL + ESC/POS** |
+| Waga | 450 g | **<390 g** |
+| Bateria | 2550 mAh | 2500 mAh (2600 nom.) |
+
+### Szerokości materiałów
+
+| Szerokość materiału | Uwagi |
+|--------------------|-------|
+| 80 mm (standard) | ±0,75 mm |
+| 76,2 mm (3") | Z wkładkami redukcyjnymi (opcja) |
+| 58 mm (2,28") | Z wkładkami redukcyjnymi (opcja) |
+| 50,8 mm (2") | Z wkładkami redukcyjnymi (opcja) |
+
+### Złącza i komunikacja
+
+- USB 2.0 Type-C (ładowanie i komunikacja)
+- **Bluetooth 5.0**
+- **BLE iOS** – obsługa iPhone 7s+, iPad Air, iPod touch
+- **Near Field Communication (NFC)** – parowanie przez Print Touch
+
+### Cechy charakterystyczne
+
+- **Kompaktowa i lekka** – poniżej 390 g z baterią
+- Wyświetlacz OLED z 3-przyciskowym panelem sterowania
+- Klasa ochrony **IP54** (lepsza niż ZQ220)
+- Obsługa materiałów z podkładem i **bezpodkładowych (linerless)**
+- Języki programowania **CPCL i ESC/POS**
+- Obrotowy klips do paska (w zestawie)
+- Ładowarka 1-stanowiskowa baterii (opcja)
+- Kompatybilność z iOS, Android
+`
+      },
+      {
+        title: '2. Rozpakowanie i instalacja',
+        content: `
+### Zawartość opakowania
+
+- Drukarka ZQ220 Plus
+- Bateria Li-Ion 2500 mAh
+- Przewodnik szybkiego startu
+- Kabel USB Type-A do Type-C
+- Przewodnik regulacyjny
+- Wtyczki i adaptery (tylko APAC)
+- Klips do paska (tylko EMEA/LATAM)
+
+### Sprawdzenie przesyłki
+
+1. Usuń materiały ochronne i zachowaj opakowanie
+2. Sprawdź czy otrzymałeś wszystkie elementy
+3. Sprawdź zewnętrzne powierzchnie pod kątem uszkodzeń
+4. Otwórz pokrywę mediów i sprawdź komorę
+5. Usuń folię ochronną z wyświetlacza LCD
+
+### Warunki pracy
+
+| Tryb | Temperatura | Wilgotność |
+|------|-------------|------------|
+| Praca | -10°C do +50°C | 10-90% bez kondensacji |
+| Ładowanie | 0°C do +40°C | 10-90% bez kondensacji |
+| Przechowywanie | -20°C do +60°C | 10-90% bez kondensacji |
+`
+      },
+      {
+        title: '3. Panel sterowania',
+        content: `
+### Wyświetlacz OLED
+
+Drukarka wyposażona jest w wyświetlacz OLED z czterema trybami:
+- **Ekran operacyjny** – domyślny widok podczas pracy
+- **Ekran informacyjny** – komunikaty tekstowe
+- **Ekran konfiguracyjny** – zmiana parametrów
+- **Ekran uśpienia** – po 10 sekundach bezczynności
+
+### Ikony statusu
+
+| Ikona | Znaczenie |
+|-------|-----------|
+| ✓ (zielona) | Drukarka gotowa do pracy |
+| ⚠ (żółta) | Ostrzeżenie – wymaga uwagi |
+| ✗ (czerwona) | Błąd – wymaga interwencji |
+
+### Ikony baterii
+
+| Ikona | Znaczenie |
+|-------|-----------|
+| 🔋 (0-4 kreski) | Poziom naładowania |
+| 🔋⚡ | Ładowanie w toku |
+| 🔋USB | Zasilanie z USB |
+| 🔋⚠ | Błąd ładowania |
+
+### Przyciski sterujące
+
+| Przycisk | Funkcja |
+|----------|---------|
+| **POWER** | Włączanie/wyłączanie drukarki |
+| **FEED** | Przesuwa materiał o jedną etykietę |
+| **CONFIG** | Nawigacja po menu konfiguracyjnym |
+
+### Menu konfiguracyjne
+
+Naciśnij CONFIG aby przejść do trybu konfiguracji:
+
+| Opcja | Opis |
+|-------|------|
+| **DARKNESS** | Regulacja ciemności druku |
+| **POWER UP** | Podawanie po włączeniu |
+| **HEAD CLOSE** | Podawanie po zamknięciu głowicy |
+| **POWER SLEEP MODE** | Tryb uśpienia |
+| **PRINT** | Drukowanie raportu konfiguracyjnego |
+| **MAC ADDRESS** | Wyświetlanie adresu MAC |
+| **MEDIA TYPE** | Typ materiału (Journal/Black Mark/Label) |
+| **EXIT** | Wyjście z menu |
+`
+      },
+      {
+        title: '4. Bateria',
+        content: `
+### Informacje o baterii
+
+Drukarka ZQ220 Plus wykorzystuje **2-celową baterię Li-Ion**:
+- Napięcie nominalne: 7,2 VDC
+- Pojemność znamionowa: 2500 mAh
+- Pojemność nominalna: 2600 mAh
+- Czas ładowania: poniżej 3,5 godziny
+
+Bateria zapewnia do **3 dni pracy** przy: 25 przystankach dziennie, do 500 paragonów 3×8,5 cala na zmianę przy 13% pokryciu.
+
+> **Ważne:** Baterie są dostarczane w trybie uśpienia. Przed pierwszym użyciem naładuj baterię, aby ją wybudzić.
+
+### Wyjmowanie baterii
+
+1. Naciśnij zatrzask zwalniający na pakiecie baterii
+2. Obróć baterię na zewnątrz z komory
+3. Unieś i wyjmij pakiet baterii
+
+### Instalacja baterii
+
+1. Zlokalizuj komorę baterii na spodzie drukarki
+2. Przechyl pakiet baterii i włóż do komory
+3. Obróć baterię aż zatrzaśnie się na miejscu
+
+### Bezpieczeństwo baterii
+
+> **Ostrzeżenie:** Bateria może eksplodować, wyciec lub zapalić się!
+
+- Nie rozbieraj, nie zgniataj, nie przekłuwaj baterii
+- Nie zwieraj styków zewnętrznych
+- Nie wrzucaj do ognia ani wody
+- Nie narażaj na temperatury powyżej 65°C
+- Ładuj tylko w ładowarkach zatwierdzonych przez Zebra
+`
+      },
+      {
+        title: '5. Ładowanie baterii',
+        content: `
+### Ładowanie przez USB
+
+> **Ważne:** Przed pierwszym użyciem drukarki naładuj baterię, aby ją wybudzić.
+
+**Procedura ładowania:**
+1. Podłącz zasilacz AC-to-USB do gniazdka
+2. Podłącz kabel USB do zasilacza
+3. Obróć gumową osłonę portu USB na boku drukarki
+4. Podłącz kabel USB Type-C do drukarki
+
+### Czas ładowania
+
+- **Pełne ładowanie:** poniżej 3,5 godziny (ładowarka USB 7,5W)
+
+### Ładowarka 1-stanowiskowa (opcja)
+
+Diody LED wskaźnika:
+- **Czerwona świeci** – ładowanie w toku
+- **Zielona świeci** – bateria w pełni naładowana
+
+**Procedura:**
+1. Podłącz zasilacz do gniazdka
+2. Podłącz kabel USB do portu z tyłu ładowarki
+3. Przechyl baterię i włóż do komory ładowarki
+4. Obróć aż zatrzaśnie się na miejscu
+`
+      },
+      {
+        title: '6. Ładowanie materiałów',
+        content: `
+### Obsługiwane typy materiałów
+
+- **Materiał ciągły (journal)** – paragony bez znaczników
+- **Materiał z czarnym znacznikiem (black mark)** – znacznik z przodu lub z tyłu
+- **Etykiety z przerwą (gap/label)** – rozdzielone przerwami
+- **Materiał bezpodkładowy (linerless)** – etykiety bez podkładu
+
+### Procedura ładowania
+
+1. Przesuń dźwignię zwalniającą do przodu aby odblokować pokrywę
+2. Unieś i obróć pokrywę mediów
+3. Włóż rolkę materiału do komory (materiał odwija się od góry)
+4. Rolka powinna swobodnie się obracać
+5. Zamknij pokrywę aż zatrzaśnie się na miejscu
+6. Materiał zostanie automatycznie wysunięty
+
+### Specyfikacja materiałów
+
+| Parametr | Wartość |
+|----------|---------|
+| Szerokość standardowa | 80 mm ±0,75 mm |
+| Opcjonalne szerokości | 76,2 mm, 58 mm, 50,8 mm |
+| Długość etykiety | 12,7 – 203,2 mm |
+| Grubość materiału | 0,058 – 0,1575 mm |
+| Maksymalna średnica rolki | 50 mm |
+
+> **Uwaga:** Opcjonalne **wkładki redukcyjne** (adaptery do węższych rolek) umożliwiają użycie materiałów o szerokości 76,2 mm, 58 mm i 50,8 mm.
+`
+      },
+      {
+        title: '7. Podłączenie do urządzeń',
+        content: `
+### Komunikacja USB
+
+1. Podłącz mniejszy wtyk USB Type-C do drukarki
+2. Podłącz większy wtyk USB Type-A do komputera
+3. Zainstaluj sterowniki ze strony [/sterowniki](/sterowniki)
+
+> **Uwaga:** Wtyk Type-C można podłączyć w dowolnej orientacji.
+
+### Komunikacja Bluetooth 5.0
+
+ZQ220 Plus obsługuje:
+- **Bluetooth 5.0** (nowsza wersja niż ZQ220)
+- **BLE iOS** – iPhone 7s+, iPad Air, iPod touch
+
+**Parowanie:**
+1. Włącz Bluetooth na urządzeniu mobilnym
+2. Wyszukaj drukarkę (nazwa = numer seryjny)
+3. Wprowadź PIN (domyślny: 0000)
+4. Potwierdź parowanie
+
+**Bonding:** Drukarka zapamiętuje informacje o parowaniu – urządzenia pozostają sparowane po cyklach zasilania.
+
+### Parowanie przez NFC (Print Touch)
+
+1. Włącz NFC na smartfonie
+2. Zbliż telefon do ikony Print Touch na górze drukarki (max 7,62 cm)
+3. Parowanie nastąpi automatycznie
+
+### Obsługiwane platformy
+
+- Apple iOS (przez BLE)
+- Android (Bluetooth)
+`
+      },
+      {
+        title: '8. Noszenie drukarki',
+        content: `
+### Klips do paska
+
+**Instalacja:**
+1. Wyjmij pakiet baterii
+2. Włóż kulkę z tyłu klipsa do gniazda na spodzie drukarki
+3. Obróć klips poziomo dla dostępu do komory baterii
+4. Zainstaluj baterię
+5. Obróć klips pionowo
+
+### Pasek na ramię (opcja)
+
+Regulowany do 142,2 cm (56 cali):
+1. Zapnij haczyki zatrzaskowe do zaczepów z przodu drukarki
+2. Zawieś pasek na ramieniu
+
+### Etui ochronne (opcja)
+
+**Instalacja:**
+1. Unieś górną klapkę etui (zabezpieczona rzepem)
+2. Włóż drukarkę spodem do przodu
+3. Wyświetlacz i przyciski widoczne przez plastikowe okienko
+4. Dolna część okienka – dostęp do ścieżki papieru
+`
+      },
+      {
+        title: '9. Konserwacja',
+        content: `
+### Przedłużanie żywotności baterii
+
+- Unikaj temperatur powyżej 40°C podczas ładowania
+- Używaj tylko ładowarek Zebra dla baterii Li-Ion
+- Rozważ użycie wstępnie zadrukowanych etykiet
+- Wyjmij baterię jeśli drukarka nie będzie używana przez dzień lub dłużej
+
+### Harmonogram czyszczenia
+
+| Obszar | Częstotliwość |
+|--------|---------------|
+| Głowica drukująca | Co 5 rolek (co 1 rolkę dla linerless) |
+| Wałek dociskowy | Co 5 rolek |
+| Listwa odrywająca | W razie potrzeby |
+
+### Czyszczenie głowicy drukującej
+
+> **Ostrzeżenie:** Głowica może być gorąca! Poczekaj aż ostygnie.
+
+1. Użyj pisaka czyszczącego Zebra (p/n 105950-035) lub wacika z 99,7% alkoholem izopropylowym
+2. Przetrzyj szary pasek głowicy
+3. Poczekaj aż wyschnie przed zamknięciem
+`
+      },
+      {
+        title: '10. Rozwiązywanie problemów',
+        content: `
+### Drukowanie raportu konfiguracyjnego
+
+**Metoda 1 – Sekwencja przycisków:**
+1. Wyłącz drukarkę, załaduj materiał ciągły
+2. Przytrzymaj przycisk FEED
+3. Naciśnij i puść przycisk POWER (trzymając FEED)
+4. Puść FEED gdy rozpocznie się drukowanie
+
+**Metoda 2 – Z menu:**
+1. Włącz drukarkę
+2. Naciskaj CONFIG aż pojawi się SETTINGS-PRINT
+3. Naciśnij FEED
+
+### Typowe problemy
+
+| Problem | Rozwiązanie |
+|---------|-------------|
+| **Brak zasilania** | Sprawdź baterię, naładuj lub wymień |
+| **Materiał się nie podaje** | Zamknij pokrywę, sprawdź blokady |
+| **Słaby/blady wydruk** | Wyczyść głowicę, sprawdź jakość materiału |
+| **Zniekształcony wydruk** | Wymień baterię, sprawdź kabel |
+| **Krótka żywotność baterii** | Wymień baterię jeśli starsza niż rok |
+| **Brak łączności NFC** | Zbliż telefon na mniej niż 7,62 cm od Print Touch |
+
+### Komunikaty alertów
+
+| Komunikat | Znaczenie |
+|-----------|-----------|
+| **PRINTER READY** | Drukarka gotowa |
+| **MEDIA OUT** | Brak materiału |
+| **HEAD OPEN** | Głowica otwarta |
+| **BATTERY LOW** | Niski poziom baterii |
+| **BATTERY TOO LOW** | Bateria zbyt słaba |
+| **CHARGE ERROR** | Błąd ładowania |
+| **HEAD OVERTEMP** | Głowica przegrzana |
+| **DOWNLOAD FW** | Pobieranie firmware |
+`
+      },
+      {
+        title: 'FAQ – Najczęściej zadawane pytania',
+        content: `
+### Jaka jest różnica między ZQ220 a ZQ220 Plus?
+
+**Odpowiedź:** **ZQ220 Plus** ma nowszy **Bluetooth 5.0** (vs 4.1), wyższą klasę ochrony **IP54** (vs IP43), obsługuje **dwa języki programowania CPCL i ESC/POS** (vs tylko CPCL), i jest lżejsza (**<390 g** vs 450 g). ZQ220 Plus to nowsza, ulepszona wersja.
+
+### Do czego służy drukarka Zebra ZQ220 Plus?
+
+**Odpowiedź:** ZQ220 Plus to **mobilna drukarka paragonów i etykiet** dla kurierów, dostawców, pracowników magazynów i sklepów. Drukuje etykiety wysyłkowe, paragony, pokwitowania dostaw o szerokości do 72 mm.
+
+### Jak sparować ZQ220 Plus z iPhonem?
+
+**Odpowiedź:** ZQ220 Plus obsługuje **BLE iOS** (iPhone 7s+, iPad Air). Włącz Bluetooth, wyszukaj drukarkę (nazwa = numer seryjny), wprowadź PIN (domyślny: 0000) i potwierdź parowanie.
+
+### Jak działa parowanie przez NFC (Print Touch)?
+
+**Odpowiedź:** Włącz NFC na smartfonie i zbliż go do ikony **Print Touch** na górze drukarki (max 7,62 cm). Parowanie nastąpi automatycznie – bez wpisywania kodów PIN.
+
+### Jak długo ładuje się bateria ZQ220 Plus?
+
+**Odpowiedź:** Pełne ładowanie baterii 2500 mAh trwa **poniżej 3,5 godziny** przy użyciu ładowarki USB 7,5W. Można też używać opcjonalnej ładowarki 1-stanowiskowej.
+
+### Czy ZQ220 Plus obsługuje materiały bezpodkładowe (linerless)?
+
+**Odpowiedź:** Tak, ZQ220 Plus obsługuje materiały **linerless** – etykiety bez podkładu. Wymaga częstszego czyszczenia głowicy (po każdej rolce).
+
+### Jaka jest klasa ochrony ZQ220 Plus?
+
+**Odpowiedź:** ZQ220 Plus ma klasę ochrony **IP54** (wyższa niż ZQ220 z IP43) – lepsza odporność na kurz i zachlapania wodą.
+
+### Jak wydrukować raport konfiguracyjny ZQ220 Plus?
+
+**Odpowiedź:** **Metoda 1:** Wyłącz drukarkę, przytrzymaj FEED, naciśnij POWER, puść FEED gdy zacznie drukować. **Metoda 2:** Naciskaj CONFIG aż pojawi się SETTINGS-PRINT, naciśnij FEED.
+
+### Jakie języki programowania obsługuje ZQ220 Plus?
+
+**Odpowiedź:** ZQ220 Plus obsługuje **CPCL i ESC/POS** – dwa języki programowania. To przewaga nad ZQ220, który obsługuje tylko CPCL.
+
+### Czy można używać węższych materiałów w ZQ220 Plus?
+
+**Odpowiedź:** Tak, z opcjonalnymi **wkładkami redukcyjnymi** (adaptery do węższych rolek) można używać materiałów o szerokości 76,2 mm, 58 mm i 50,8 mm zamiast standardowych 80 mm.
+
+### Czy ZQ220 Plus wymaga ribbonu?
+
+**Odpowiedź:** **Nie**, ZQ220 Plus to drukarka **termiczna bezpośrednia (Direct Thermal)** – nie wymaga ribbonu. Używa materiałów termoczułych.
+`
+      }
+    ]
   }
 }
 
