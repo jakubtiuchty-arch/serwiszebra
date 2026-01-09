@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import Header from '@/components/Header'
@@ -58,6 +58,16 @@ const PRODUCT_TYPE_ICONS: Record<string, any> = {
   walek: Package,
   akumulator: Battery,
   kabel: Cable
+}
+
+// Domyślne zdjęcia dla typów produktów
+const DEFAULT_PRODUCT_IMAGES: Record<string, string> = {
+  glowica: '/sklep_photo/głowica-203dpi-do-drukarki-zebra-zd421t-P1112640-218.png'
+}
+
+function getProductImage(product: Product): string | null {
+  if (product.image_url) return product.image_url
+  return DEFAULT_PRODUCT_IMAGES[product.product_type] || null
 }
 
 // Nowa struktura: Głowice → Typ drukarki → Model → DPI
@@ -129,8 +139,20 @@ export default function SklepPage() {
   const [expandedCategories, setExpandedCategories] = useState<string[]>(['desktop'])
   const [expandedProductTypes, setExpandedProductTypes] = useState<string[]>(['glowica'])
   const [searchInput, setSearchInput] = useState('')
+  const [isSearching, setIsSearching] = useState(false)
   
   const addToCart = useCartStore((state) => state.addItem)
+
+  // Debounced search - czeka 300ms po ostatnim wpisaniu
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (searchInput !== filters.search) {
+        setFilters(prev => ({ ...prev, search: searchInput }))
+      }
+    }, 300)
+
+    return () => clearTimeout(timer)
+  }, [searchInput])
 
   useEffect(() => {
     fetchProducts()
@@ -189,11 +211,6 @@ export default function SklepPage() {
         ? [] // Zamknij wszystko
         : [productTypeId] // Otwórz tylko tę kategorię (zamyka inne)
     )
-  }
-
-  const handleSearchSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    setFilters(prev => ({ ...prev, search: searchInput }))
   }
 
   const clearFilters = () => {
@@ -276,20 +293,39 @@ export default function SklepPage() {
               
               {/* SIDEBAR */}
               <aside className="w-full lg:w-72 flex-shrink-0">
-                {/* Wyszukiwarka - wyrównana z toolbarem */}
+                {/* Wyszukiwarka - instant search */}
                 <div className="bg-white rounded-xl shadow-sm border border-gray-200 px-4 py-3 mb-4">
-                  <form onSubmit={handleSearchSubmit}>
-                    <div className="relative">
-                      <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-                      <input
-                        type="text"
-                        value={searchInput}
-                        onChange={(e) => setSearchInput(e.target.value)}
-                        placeholder="Szukaj produktów..."
-                        className="w-full pl-9 pr-3 py-1.5 text-sm bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:bg-white"
-                      />
-                    </div>
-                  </form>
+                  <div className="relative">
+                    <Search className={`absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 transition-colors ${searchInput ? 'text-blue-500' : 'text-gray-400'}`} />
+                    <input
+                      type="text"
+                      value={searchInput}
+                      onChange={(e) => setSearchInput(e.target.value)}
+                      placeholder="Szukaj: model, PN, DPI..."
+                      className="w-full pl-9 pr-9 py-2 text-sm bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:bg-white transition-all"
+                    />
+                    {searchInput && (
+                      <button
+                        onClick={() => {
+                          setSearchInput('')
+                          setFilters(prev => ({ ...prev, search: '' }))
+                        }}
+                        className="absolute right-3 top-1/2 -translate-y-1/2 p-0.5 rounded-full hover:bg-gray-200 transition-colors"
+                      >
+                        <X className="w-4 h-4 text-gray-400" />
+                      </button>
+                    )}
+                  </div>
+                  {searchInput && searchInput.length >= 2 && (
+                    <p className="text-xs text-gray-500 mt-2">
+                      Szukam: <span className="font-medium text-blue-600">{searchInput}</span>
+                    </p>
+                  )}
+                  {searchInput && searchInput.length === 1 && (
+                    <p className="text-xs text-gray-400 mt-2">
+                      Wpisz min. 2 znaki...
+                    </p>
+                  )}
                 </div>
 
                 {/* Kategorie */}
@@ -487,17 +523,20 @@ export default function SklepPage() {
                           className="bg-white rounded-lg border border-gray-200 overflow-hidden hover:border-blue-300 transition-colors group"
                         >
                           {/* Image */}
-                          <div className="relative h-36 bg-gray-50 flex items-center justify-center">
-                            {product.image_url ? (
-                              <Image
-                                src={product.image_url}
-                                alt={product.name}
-                                fill
-                                className="object-cover group-hover:scale-105 transition-transform duration-300"
-                              />
-                            ) : (
-                              <Icon className="w-12 h-12 text-gray-300" />
-                            )}
+                          <div className="relative h-36 bg-white flex items-center justify-center">
+                            {(() => {
+                              const imageUrl = getProductImage(product)
+                              return imageUrl ? (
+                                <Image
+                                  src={imageUrl}
+                                  alt={`${product.name} - oryginalna część Zebra`}
+                                  fill
+                                  className="object-contain p-2 group-hover:scale-105 transition-transform duration-300"
+                                />
+                              ) : (
+                                <Icon className="w-12 h-12 text-gray-300" />
+                              )
+                            })()}
                             {product.stock <= 3 && product.stock > 0 && (
                               <div className="absolute top-2 right-2 bg-orange-500 text-white text-[9px] font-bold px-1.5 py-0.5 rounded">
                                 Ostatnie {product.stock}
