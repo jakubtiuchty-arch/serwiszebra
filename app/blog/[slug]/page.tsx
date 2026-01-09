@@ -20,11 +20,9 @@ import {
   Package
 } from 'lucide-react'
 
-// Dynamiczne renderowanie zamiast SSG (unika timeout'ów dla dużych wpisów)
-export const dynamic = 'force-dynamic'
-
-// Revalidacja co 1 godzinę dla cache
+// ISR - strony generowane przy pierwszym żądaniu, cache 1h
 export const revalidate = 3600
+export const dynamicParams = true
 
 // Generate metadata for SEO
 export async function generateMetadata({ 
@@ -555,17 +553,13 @@ export default function BlogPostPage({
           </div>
         </footer>
 
-        {/* Lightbox */}
+        {/* Lightbox - rendered via script to avoid Server Component onClick issues */}
         <div 
           id="lightbox" 
           className="fixed inset-0 bg-black/90 z-50 hidden items-center justify-center p-4"
-          onClick={() => {
-            const el = document.getElementById('lightbox')
-            if (el) el.classList.add('hidden')
-            el?.classList.remove('flex')
-          }}
         >
           <button 
+            id="lightbox-close"
             className="absolute top-4 right-4 text-white text-4xl font-light hover:text-gray-300 z-10"
             aria-label="Zamknij"
           >
@@ -576,7 +570,6 @@ export default function BlogPostPage({
             src="" 
             alt="" 
             className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
           />
           <p id="lightbox-caption" className="absolute bottom-4 left-0 right-0 text-center text-white text-sm"></p>
         </div>
@@ -585,27 +578,41 @@ export default function BlogPostPage({
         <script
           dangerouslySetInnerHTML={{
             __html: `
-              window.openLightbox = function(src, alt) {
-                const lightbox = document.getElementById('lightbox');
-                const img = document.getElementById('lightbox-img');
-                const caption = document.getElementById('lightbox-caption');
-                if (lightbox && img && caption) {
-                  img.src = src;
-                  img.alt = alt;
-                  caption.textContent = alt;
-                  lightbox.classList.remove('hidden');
-                  lightbox.classList.add('flex');
-                }
-              };
-              document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape') {
+              (function() {
+                function closeLightbox() {
                   const lightbox = document.getElementById('lightbox');
                   if (lightbox) {
                     lightbox.classList.add('hidden');
                     lightbox.classList.remove('flex');
                   }
                 }
-              });
+                
+                window.openLightbox = function(src, alt) {
+                  const lightbox = document.getElementById('lightbox');
+                  const img = document.getElementById('lightbox-img');
+                  const caption = document.getElementById('lightbox-caption');
+                  if (lightbox && img && caption) {
+                    img.src = src;
+                    img.alt = alt;
+                    caption.textContent = alt;
+                    lightbox.classList.remove('hidden');
+                    lightbox.classList.add('flex');
+                  }
+                };
+                
+                // Close on background click
+                document.getElementById('lightbox')?.addEventListener('click', function(e) {
+                  if (e.target === this) closeLightbox();
+                });
+                
+                // Close on X button
+                document.getElementById('lightbox-close')?.addEventListener('click', closeLightbox);
+                
+                // Close on Escape key
+                document.addEventListener('keydown', function(e) {
+                  if (e.key === 'Escape') closeLightbox();
+                });
+              })();
             `
           }}
         />
