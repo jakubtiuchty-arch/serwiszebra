@@ -12733,6 +12733,703 @@ Regulowany do 142,2 cm (56 cali):
 `
       }
     ]
+  },
+  'zq310plus': {
+    model: 'ZQ310 Plus',
+    title: 'Zebra ZQ310 Plus – Instrukcja obsługi po Polsku',
+    lastUpdated: '2026-01-09',
+    sourceDocument: 'Zebra ZQ310 Plus User Guide',
+    keywords: [
+      'ZQ310 Plus', 'zebra zq310 plus', 'drukarka mobilna', 'drukarka paragonów', 
+      'instrukcja ZQ310 Plus', 'ZQ310 Plus po polsku', 'drukarka 2 cale',
+      'drukarka kurierska', 'drukarka przenośna', 'Bluetooth 4.0',
+      'USB Type-C', 'NFC Print Touch', 'linerless', 'IP54', '58 mm',
+      'CPCL', 'ZPL', 'PowerPrecision+', 'WiFi 802.11ac'
+    ],
+    sections: [
+      {
+        title: '1. Podstawowe informacje',
+        content: `
+### O drukarce Zebra ZQ310 Plus
+
+Zebra ZQ310 Plus to kompaktowa **mobilna drukarka paragonów i etykiet** o szerokości druku do **48 mm (1,89")**, zaprojektowana dla pracowników mobilnych w branży transportowej, logistycznej, produkcyjnej i rządowej. Wykorzystuje najnowsze technologie: ładowanie przez USB Type-C, **Bluetooth 4.0** (BR/EDR, LE), opcjonalnie WLAN 802.11ac, Near Field Communication (NFC) oraz wytrzymałą konstrukcję o klasie ochrony **IP54**.
+
+### Parametry techniczne
+
+| Parametr | ZQ310 Plus |
+|----------|------------|
+| **Szerokość druku** | do 48 mm (1,89") |
+| Technologia druku | Termiczny bezpośredni (Direct Thermal) |
+| Rozdzielczość | 203 dpi |
+| Prędkość druku (linered) | do 101,6 mm/s (4,0"/s) |
+| Prędkość druku (linerless) | do 50,8 mm/s (2,0"/s) |
+| Maks. średnica rolki | 40 mm |
+| Pojemność baterii | **2280 mAh PowerPrecision+** |
+| **Waga z baterią** | 0,37 kg |
+
+### Porównanie ZQ310 Plus vs ZQ320 Plus
+
+| Parametr | ZQ310 Plus | ZQ320 Plus |
+|----------|------------|------------|
+| Szerokość druku | **48 mm (2")** | 72 mm (3") |
+| Szerokość materiału | 58 mm | 80 mm |
+| Waga | **0,37 kg** | 0,43 kg |
+| Prędkość linerless | 50,8 mm/s | 76,2 mm/s |
+
+### Szerokości materiałów
+
+| Szerokość materiału | Uwagi |
+|--------------------|-------|
+| 58 mm (standard) | ±0,75 mm |
+| 50,8 mm (2") | Z wkładkami redukcyjnymi (opcja) |
+
+### Złącza i komunikacja
+
+- USB 2.0 Type-C (ładowanie i komunikacja)
+- **Bluetooth 4.0** (BR/EDR, LE) – standard
+- Opcjonalnie: **Dual Radio** (802.11 a/b/g/n/ac + Bluetooth 5.2)
+- **Near Field Communication (NFC)** – parowanie przez Print Touch
+
+### Cechy charakterystyczne
+
+- **Najlżejsza w serii** – tylko 0,37 kg z baterią
+- Panel LED z ikonami statusu (Power, Feed, Fault, Battery, WiFi, Bluetooth)
+- Klasa ochrony **IP54**
+- Obsługa materiałów **linered i linerless**
+- Języki programowania **CPCL i ZPL**
+- Bateria **PowerPrecision+** z inteligentnym monitorowaniem
+- Kompatybilność z iOS (MFi), Android, Windows
+`
+      },
+      {
+        title: '2. Rozpakowanie i instalacja',
+        content: `
+### Zawartość opakowania
+
+- Drukarka ZQ310 Plus
+- Bateria Li-Ion PowerPrecision+ 2280 mAh
+- Przewodnik szybkiego startu
+- Kabel USB Type-A do Type-C
+- Przewodnik regulacyjny
+- Klips do paska
+
+### Warunki pracy
+
+| Tryb | Temperatura | Wilgotność |
+|------|-------------|------------|
+| Praca | **-15°C do +50°C** | 10-90% bez kondensacji |
+| Ładowanie | 0°C do +40°C | 10-90% bez kondensacji |
+| Przechowywanie (bez baterii) | -20°C do +60°C | 10-90% bez kondensacji |
+| Przechowywanie (z baterią) | -25°C do +45°C | 10-90% bez kondensacji |
+`
+      },
+      {
+        title: '3. Panel sterowania LED',
+        content: `
+### Diody LED statusu
+
+- **Power LED Ring** – pierścień wokół przycisku zasilania
+- **Feed** – przycisk podawania materiału
+- **Fault** – ikona błędu (bursztynowa LED)
+- **Battery** – wskaźnik poziomu baterii (3 paski)
+- **WiFi** – status połączenia WiFi
+- **Bluetooth** – status połączenia Bluetooth (niebieska LED)
+
+### Ikony statusu Power Ring
+
+| Kolor | Znaczenie |
+|-------|-----------|
+| Zielony ciągły | Drukarka włączona, bateria naładowana |
+| Zielony pulsujący | Tryb uśpienia |
+| Bursztynowy ciągły | Ładowanie baterii |
+| Czerwony ciągły | Bateria niezdrowa |
+| Czerwony migający | Błąd ładowania |
+
+### Ikony baterii
+
+| Wskaźnik | Znaczenie |
+|----------|-----------|
+| 3 paski | ≥66% naładowania |
+| 2 paski | ≥33% naładowania |
+| 1 pasek | ≥15% naładowania |
+| 1 pasek migający | <15% naładowania |
+
+### Przyciski sterujące
+
+| Przycisk | Funkcja |
+|----------|---------|
+| **POWER** | <3s = tryb uśpienia, >3s = wyłączenie |
+| **FEED** | Przesuwa materiał o jedną etykietę |
+
+### Kombinacje przycisków
+
+| Funkcja | Sposób wykonania |
+|---------|------------------|
+| Raport konfiguracyjny | FEED + POWER do migania, puść POWER, trzymaj FEED do bursztynowej WiFi LED |
+| Tryb wymuszony | FEED + POWER, puść POWER, trzymaj FEED do zielonej WiFi LED |
+`
+      },
+      {
+        title: '4. Bateria PowerPrecision+',
+        content: `
+### Informacje o baterii
+
+Drukarka wykorzystuje inteligentną baterię **Li-Ion PowerPrecision+**:
+- Napięcie nominalne: 7,2 VDC
+- Pojemność: **2280 mAh**
+- Inteligentne monitorowanie stanu w czasie rzeczywistym
+- Śledzenie cykli ładowania i stanu zdrowia
+
+> **Ważne:** Baterie są dostarczane w trybie uśpienia. Przed pierwszym użyciem naładuj baterię.
+
+### Wyjmowanie baterii
+
+1. Obróć klips do paska aby uzyskać dostęp
+2. Naciśnij zatrzask zwalniający
+3. Obróć baterię na zewnątrz i wyjmij
+
+### Instalacja baterii
+
+1. Ustaw baterię pod kątem (zatrzask do tyłu)
+2. Wsuń przód baterii do wnęki
+3. Dociśnij tył aż zatrzaśnie się na miejscu
+
+### Metody ładowania
+
+| Metoda | Czas ładowania |
+|--------|----------------|
+| Stacja dokująca 1-slot | <3,5 godziny |
+| Ładowarka baterii 1-slot | <4 godziny |
+| Ładowarka baterii 3-slot | <4 godziny |
+| Adapter AC-to-USB | Zależny od źródła |
+
+### Wskaźniki ładowania
+
+| Kolor | Znaczenie |
+|-------|-----------|
+| Bursztynowy ciągły | Ładowanie |
+| Zielony ciągły | Naładowana |
+| Czerwony ciągły | Bateria niezdrowa |
+| Czerwony migający | Błąd ładowania |
+`
+      },
+      {
+        title: '5. Ładowanie materiałów',
+        content: `
+### Obsługiwane materiały
+
+| Parametr | Wartość |
+|----------|---------|
+| Szerokość standardowa | 58 mm ±0,75 mm |
+| Szerokość z wkładkami | 50,8 mm ±0,75 mm |
+| Minimalna długość etykiety | 12,5 mm |
+| Grubość materiału | 0,053–0,1614 mm |
+| Maks. średnica rolki | 40 mm |
+
+### Procedura ładowania
+
+1. Naciśnij przycisk zwalniający aby otworzyć pokrywę
+2. Włóż rolkę (strona termiczna na zewnątrz)
+3. Zamknij pokrywę, wyprowadzając koniec materiału
+4. Pokrywa zatrzaśnie się, materiał przesunie automatycznie
+
+### Wkładki redukcyjne (opcja)
+
+Zestaw wkładek (p/n KIT-MPM-MD2SPR5-01) umożliwia obsługę materiałów **50,8 mm (2")**:
+1. Wsuń wkładki w rowki po bokach komory
+2. Aby usunąć, użyj płaskiego narzędzia
+`
+      },
+      {
+        title: '6. Komunikacja',
+        content: `
+### USB
+
+- Standard USB 2.0 Type-C
+- Ładowanie i komunikacja jednocześnie
+- Sterowniki: [/sterowniki](/sterowniki)
+
+### Bluetooth 4.0
+
+- BR/EDR i LE
+- Kompatybilność z **iOS (MFi)**, Android, Windows
+- Zasięg do 10 m
+- Parowanie przez NFC
+
+### WiFi (opcja Dual Radio)
+
+- 802.11 a/b/g/n/ac
+- Bluetooth 5.2 w opcji dual radio
+- Tryby: Infrastructure, Ad-hoc
+
+### NFC (Print Touch)
+
+Dotknięcie ikony Print Touch umożliwia:
+- Automatyczne parowanie Bluetooth
+- Uruchomienie aplikacji
+- Dostęp do strony wsparcia
+`
+      },
+      {
+        title: '7. Konserwacja',
+        content: `
+### Harmonogram czyszczenia
+
+| Element | Częstotliwość |
+|---------|---------------|
+| Głowica drukująca | Co 5 rolek (co 1 rolkę dla linerless) |
+| Wałek dociskowy (linered) | Co 5 rolek |
+| Wałek dociskowy (linerless) | Tylko przy problemach |
+| Listwa odrywająca | W razie potrzeby |
+
+### Czyszczenie głowicy
+
+> **Ostrzeżenie:** Głowica może być gorąca! Poczekaj aż ostygnie.
+
+1. Użyj pisaka czyszczącego Zebra lub wacika z 90% alkoholem
+2. Przetrzyj szarą linię od środka na zewnątrz
+3. Poczekaj aż wyschnie
+
+### Przedłużanie żywotności baterii
+
+- Unikaj temperatur powyżej 40°C podczas ładowania
+- Wyjmuj baterię gdy drukarka nieużywana przez dzień+
+- Baterie tracą pojemność z czasem – wymieniaj gdy potrzeba
+`
+      },
+      {
+        title: '8. Rozwiązywanie problemów',
+        content: `
+### Drukowanie raportu konfiguracyjnego
+
+1. Wyłącz drukarkę, załaduj materiał ciągły
+2. Przytrzymaj FEED
+3. Naciśnij POWER do migania LED Power Ring
+4. Puść POWER (LED Fault zacznie pulsować)
+5. Trzymaj FEED do bursztynowej diody WiFi
+6. Puść FEED – raport wydrukuje się
+
+### Typowe problemy
+
+| Problem | Rozwiązanie |
+|---------|-------------|
+| **Brak zasilania** | Naładuj lub zainstaluj ponownie baterię |
+| **Materiał się nie podaje** | Zamknij pokrywę, sprawdź komorę |
+| **Słaby/wyblakły druk** | Wyczyść głowicę, naładuj baterię |
+| **Krótka żywotność baterii** | Wymień baterię (>1 rok) |
+| **Brak łączności NFC** | Zbliż urządzenie do 7,62 cm |
+
+### Ikony błędów (Fault LED)
+
+| Stan | Znaczenie |
+|------|-----------|
+| Wyłączona | Brak błędu |
+| Ciągła bursztynowa | Brak materiału |
+| Miga 1 raz/s | Pokrywa otwarta |
+| Miga co 2 s | Błąd głowicy |
+`
+      },
+      {
+        title: 'FAQ – Najczęściej zadawane pytania',
+        content: `
+### Jaka jest różnica między ZQ310 Plus a ZQ320 Plus?
+
+**Odpowiedź:** **ZQ310 Plus** drukuje materiał o szerokości **48 mm (2 cale)**, **ZQ320 Plus** drukuje **72 mm (3 cale)**. ZQ310 Plus jest lżejsza (0,37 kg vs 0,43 kg) i kompaktniejsza. Wybierz ZQ310 Plus dla mniejszych paragonów i etykiet.
+
+### Do czego służy Zebra ZQ310 Plus?
+
+**Odpowiedź:** ZQ310 Plus to **mobilna drukarka paragonów i etykiet** dla kurierów, dostawców, pracowników magazynów. Drukuje paragony, pokwitowania dostaw, etykiety wysyłkowe o szerokości do 48 mm.
+
+### Co to jest bateria PowerPrecision+?
+
+**Odpowiedź:** **PowerPrecision+** to inteligentna bateria Li-Ion Zebra z **monitorowaniem stanu w czasie rzeczywistym**. Śledzi cykle ładowania, stan zdrowia i pozostałą pojemność – informacje dostępne w oprogramowaniu Zebra.
+
+### Jak sparować ZQ310 Plus z iPhone?
+
+**Odpowiedź:** ZQ310 Plus ma certyfikat **MFi** dla iOS. Włącz Bluetooth na iPhonie, wyszukaj drukarkę, wybierz ją i potwierdź parowanie. Można też użyć **NFC Print Touch** do automatycznego parowania.
+
+### Jak długo ładuje się bateria ZQ310 Plus?
+
+**Odpowiedź:** W stacji dokującej 1-slot: **poniżej 3,5 godziny**. W ładowarce baterii: **poniżej 4 godzin**. Temperatura ładowania: 0–37°C.
+
+### Czy ZQ310 Plus obsługuje WiFi?
+
+**Odpowiedź:** Standardowo ZQ310 Plus ma tylko **Bluetooth 4.0**. Opcjonalnie dostępna jest wersja **Dual Radio** z WiFi 802.11ac + Bluetooth 5.2.
+
+### Jaka jest klasa ochrony ZQ310 Plus?
+
+**Odpowiedź:** ZQ310 Plus ma klasę ochrony **IP54** – odporność na kurz i zachlapania wodą. Idealna do pracy w terenie.
+
+### Jakie języki programowania obsługuje ZQ310 Plus?
+
+**Odpowiedź:** ZQ310 Plus obsługuje **CPCL i ZPL** – dwa języki programowania drukarek Zebra. Zapewnia to kompatybilność z szeroką gamą aplikacji.
+
+### Czy można używać węższych materiałów w ZQ310 Plus?
+
+**Odpowiedź:** Tak, z opcjonalnymi **wkładkami redukcyjnymi** (nr kat. KIT-MPM-MD2SPR5-01) można używać materiałów **50,8 mm (2")** zamiast standardowych 58 mm.
+
+### Ile waży drukarka ZQ310 Plus?
+
+**Odpowiedź:** ZQ310 Plus waży tylko **0,37 kg** z baterią. Jest to najlżejsza drukarka w serii ZQ3 Plus.
+
+### Czy ZQ310 Plus wymaga ribbonu?
+
+**Odpowiedź:** **Nie**, ZQ310 Plus to drukarka **termiczna bezpośrednia (Direct Thermal)** – nie wymaga ribbonu.
+`
+      }
+    ]
+  },
+  'zq320plus': {
+    model: 'ZQ320 Plus',
+    title: 'Zebra ZQ320 Plus – Instrukcja obsługi po Polsku',
+    lastUpdated: '2026-01-09',
+    sourceDocument: 'Zebra ZQ320 Plus User Guide',
+    keywords: [
+      'ZQ320 Plus', 'zebra zq320 plus', 'drukarka mobilna', 'drukarka paragonów', 
+      'instrukcja ZQ320 Plus', 'ZQ320 Plus po polsku', 'drukarka 3 cale',
+      'drukarka kurierska', 'drukarka przenośna', 'Bluetooth 4.0',
+      'USB Type-C', 'NFC Print Touch', 'linerless', 'IP54', '80 mm',
+      'CPCL', 'ZPL', 'PowerPrecision+', 'WiFi 802.11ac', 'Indoor', 'Outdoor'
+    ],
+    sections: [
+      {
+        title: '1. Podstawowe informacje',
+        content: `
+### O drukarce Zebra ZQ320 Plus
+
+Zebra ZQ320 Plus to kompaktowa **mobilna drukarka paragonów i etykiet** o szerokości druku do **72 mm (2,83")**, zaprojektowana dla pracowników mobilnych w branży transportowej, logistycznej, produkcyjnej, rządowej i detalicznej. Wykorzystuje najnowsze technologie: ładowanie przez USB Type-C, **Bluetooth 4.0** (BR/EDR, LE), opcjonalnie WLAN 802.11ac, Near Field Communication (NFC) oraz wytrzymałą konstrukcję o klasie ochrony **IP54**.
+
+### Parametry techniczne
+
+| Parametr | ZQ320 Plus |
+|----------|------------|
+| **Szerokość druku** | do 72 mm (2,83") |
+| Technologia druku | Termiczny bezpośredni (Direct Thermal) |
+| Rozdzielczość | 203 dpi |
+| Prędkość druku (linered) | do 101,6 mm/s (4,0"/s) |
+| Prędkość druku (linerless) | do 76,2 mm/s (3,0"/s) |
+| Maks. średnica rolki | 40 mm |
+| Pojemność baterii | **2280 mAh PowerPrecision+** |
+| **Waga z baterią** | 0,43 kg |
+
+### Wersje drukarki
+
+| Model | Kolor | Łączność | Czujniki |
+|-------|-------|----------|----------|
+| **ZQ320 Plus Outdoor** | Czarny | Bluetooth 4.0 | Media Out, Black Bar |
+| **ZQ320 Plus Indoor** | Srebrno-czarny | **Dual Radio** (WiFi + BT 5.2) | **Gap**, Black Bar, Media Out |
+
+### Porównanie ZQ310 Plus vs ZQ320 Plus
+
+| Parametr | ZQ310 Plus | ZQ320 Plus |
+|----------|------------|------------|
+| Szerokość druku | 48 mm (2") | **72 mm (3")** |
+| Szerokość materiału | 58 mm | **80 mm** |
+| Waga | 0,37 kg | **0,43 kg** |
+| Prędkość linerless | 50,8 mm/s | **76,2 mm/s** |
+
+### Szerokości materiałów
+
+| Szerokość materiału | Uwagi |
+|--------------------|-------|
+| 80 mm (standard) | ±0,75 mm |
+| 76,2 mm (3") | Z wkładkami redukcyjnymi (opcja) |
+
+### Złącza i komunikacja
+
+- USB 2.0 Type-C (ładowanie i komunikacja)
+- **Bluetooth 4.0** (BR/EDR, LE) – standard
+- Opcjonalnie: **Dual Radio** (802.11 a/b/g/n/ac + Bluetooth 5.2)
+- **Near Field Communication (NFC)** – parowanie przez Print Touch
+
+### Cechy charakterystyczne
+
+- **Kompaktowa konstrukcja** – waga 0,43 kg z baterią
+- Panel LED z ikonami statusu
+- Klasa ochrony **IP54**
+- Obsługa materiałów **linered i linerless**
+- Języki programowania **CPCL i ZPL**
+- Bateria **PowerPrecision+** z inteligentnym monitorowaniem
+- Wersje **Indoor** (WiFi) i **Outdoor** (tylko Bluetooth)
+`
+      },
+      {
+        title: '2. Rozpakowanie i instalacja',
+        content: `
+### Zawartość opakowania
+
+- Drukarka ZQ320 Plus
+- Bateria Li-Ion PowerPrecision+ 2280 mAh
+- Przewodnik szybkiego startu
+- Kabel USB Type-A do Type-C
+- Przewodnik regulacyjny
+- Klips do paska
+
+### Warunki pracy
+
+| Tryb | Temperatura | Wilgotność |
+|------|-------------|------------|
+| Praca | **-15°C do +50°C** | 10-90% bez kondensacji |
+| Ładowanie | 0°C do +40°C | 10-90% bez kondensacji |
+| Przechowywanie (bez baterii) | -20°C do +60°C | 10-90% bez kondensacji |
+| Przechowywanie (z baterią) | -25°C do +45°C | 10-90% bez kondensacji |
+`
+      },
+      {
+        title: '3. Panel sterowania LED',
+        content: `
+### Diody LED statusu
+
+- **Power LED Ring** – pierścień wokół przycisku zasilania
+- **Feed** – przycisk podawania materiału
+- **Fault** – ikona błędu (bursztynowa LED)
+- **Battery** – wskaźnik poziomu baterii (3 paski)
+- **WiFi** – status połączenia WiFi
+- **Bluetooth** – status połączenia Bluetooth (niebieska LED)
+
+### Ikony statusu Power Ring
+
+| Kolor | Znaczenie |
+|-------|-----------|
+| Zielony ciągły | Drukarka włączona, bateria naładowana |
+| Zielony pulsujący | Tryb uśpienia |
+| Bursztynowy ciągły | Ładowanie baterii |
+| Czerwony ciągły | Bateria niezdrowa |
+| Czerwony migający | Błąd ładowania |
+
+### Ikony baterii
+
+| Wskaźnik | Znaczenie |
+|----------|-----------|
+| 3 paski | ≥66% naładowania |
+| 2 paski | ≥33% naładowania |
+| 1 pasek | ≥15% naładowania |
+| 1 pasek migający | <15% naładowania |
+
+### Przyciski sterujące
+
+| Przycisk | Funkcja |
+|----------|---------|
+| **POWER** | <3s = tryb uśpienia, >3s = wyłączenie |
+| **FEED** | Przesuwa materiał o jedną etykietę |
+
+### Tryb uśpienia
+
+Po **20 minutach** bezczynności drukarka automatycznie przechodzi w tryb uśpienia:
+- Power LED Ring pulsuje
+- Naciśnij POWER <3s aby wybudzić
+`
+      },
+      {
+        title: '4. Bateria PowerPrecision+',
+        content: `
+### Informacje o baterii
+
+Drukarka wykorzystuje inteligentną baterię **Li-Ion PowerPrecision+**:
+- Napięcie nominalne: 7,2 VDC
+- Pojemność: **2280 mAh**
+- Inteligentne monitorowanie stanu w czasie rzeczywistym
+- Śledzenie cykli ładowania i stanu zdrowia
+
+> **Ważne:** Baterie są dostarczane w trybie uśpienia. Przed pierwszym użyciem naładuj baterię.
+
+### Wyjmowanie baterii
+
+1. Obróć klips do paska aby uzyskać dostęp
+2. Naciśnij zatrzask zwalniający
+3. Obróć baterię na zewnątrz i wyjmij
+
+### Instalacja baterii
+
+1. Ustaw baterię pod kątem (zatrzask do tyłu)
+2. Wsuń przód baterii do wnęki
+3. Dociśnij tył aż zatrzaśnie się na miejscu
+
+### Metody ładowania
+
+| Metoda | Czas ładowania |
+|--------|----------------|
+| Stacja dokująca 1-slot | <3,5 godziny |
+| Stacja dokująca 5-slot | <4 godziny |
+| Ładowarka baterii 1-slot | <4 godziny |
+| Ładowarka baterii 3-slot | <4 godziny |
+
+### Wskaźniki ładowania
+
+| Kolor | Znaczenie |
+|-------|-----------|
+| Bursztynowy ciągły | Ładowanie |
+| Zielony ciągły | Naładowana |
+| Czerwony ciągły | Bateria niezdrowa |
+| Czerwony migający | Błąd ładowania |
+`
+      },
+      {
+        title: '5. Ładowanie materiałów',
+        content: `
+### Obsługiwane materiały
+
+| Parametr | Wartość |
+|----------|---------|
+| Szerokość standardowa | 80 mm ±0,75 mm |
+| Szerokość z wkładkami | 76,2 mm ±0,75 mm |
+| Minimalna długość etykiety | 12,5 mm |
+| Grubość materiału | 0,053–0,1614 mm |
+| Maks. średnica rolki | 40 mm |
+| Typy materiałów | Papier termiczny, etykiety, **linerless** |
+
+### Procedura ładowania
+
+1. Naciśnij przycisk zwalniający aby otworzyć pokrywę
+2. Włóż rolkę (strona termiczna na zewnątrz)
+3. Zamknij pokrywę, wyprowadzając koniec materiału
+4. Pokrywa zatrzaśnie się, materiał przesunie automatycznie
+
+### Wkładki redukcyjne (opcja)
+
+Zestaw wkładek (p/n KIT-MPM-MDSPR5-01) umożliwia obsługę materiałów **76,2 mm (3")**:
+1. Wsuń wkładki w rowki po bokach komory
+2. Aby usunąć, użyj płaskiego narzędzia
+`
+      },
+      {
+        title: '6. Komunikacja',
+        content: `
+### USB
+
+- Standard USB 2.0 Type-C
+- Ładowanie i komunikacja jednocześnie
+- Sterowniki: [/sterowniki](/sterowniki)
+
+### Bluetooth 4.0
+
+- BR/EDR i LE
+- Kompatybilność z **iOS (MFi)**, Android, Windows
+- Zasięg do 10 m
+- Parowanie przez NFC
+
+### WiFi (opcja Dual Radio – wersja Indoor)
+
+- 802.11 a/b/g/n/ac
+- Bluetooth 5.2 w opcji dual radio
+- Tryby: Infrastructure, Ad-hoc
+
+### NFC (Print Touch)
+
+Dotknięcie ikony Print Touch umożliwia:
+- Automatyczne parowanie Bluetooth
+- Uruchomienie aplikacji
+- Dostęp do strony wsparcia
+`
+      },
+      {
+        title: '7. Konserwacja',
+        content: `
+### Harmonogram czyszczenia
+
+| Element | Częstotliwość |
+|---------|---------------|
+| Głowica drukująca | Co 5 rolek (co 1 rolkę dla linerless) |
+| Wałek dociskowy (linered) | Co 5 rolek |
+| Wałek dociskowy (linerless) | Tylko przy problemach |
+| Listwa odrywająca | W razie potrzeby |
+
+### Czyszczenie głowicy
+
+> **Ostrzeżenie:** Głowica może być gorąca! Poczekaj aż ostygnie.
+
+1. Użyj pisaka czyszczącego Zebra lub wacika z 90% alkoholem
+2. Przetrzyj szarą linię od środka na zewnątrz
+3. Poczekaj aż wyschnie
+
+### Przedłużanie żywotności baterii
+
+- Unikaj temperatur powyżej 40°C podczas ładowania
+- Wyjmuj baterię gdy drukarka nieużywana przez dzień+
+- Baterie tracą pojemność z czasem – wymieniaj gdy potrzeba
+`
+      },
+      {
+        title: '8. Rozwiązywanie problemów',
+        content: `
+### Drukowanie raportu konfiguracyjnego
+
+1. Wyłącz drukarkę, załaduj materiał ciągły
+2. Przytrzymaj FEED
+3. Naciśnij POWER do migania LED Power Ring
+4. Puść POWER (LED Fault zacznie pulsować)
+5. Trzymaj FEED do bursztynowej diody WiFi
+6. Puść FEED – raport wydrukuje się
+
+### Typowe problemy
+
+| Problem | Rozwiązanie |
+|---------|-------------|
+| **Brak zasilania** | Naładuj lub zainstaluj ponownie baterię |
+| **Materiał się nie podaje** | Zamknij pokrywę, sprawdź komorę |
+| **Słaby/wyblakły druk** | Wyczyść głowicę, naładuj baterię |
+| **Krótka żywotność baterii** | Wymień baterię (>1 rok) |
+| **Brak łączności NFC** | Zbliż urządzenie do 7,62 cm |
+
+### Ikony błędów (Fault LED)
+
+| Stan | Znaczenie |
+|------|-----------|
+| Wyłączona | Brak błędu |
+| Ciągła bursztynowa | Brak materiału |
+| Miga 1 raz/s | Pokrywa otwarta |
+| Miga co 2 s | Błąd głowicy |
+`
+      },
+      {
+        title: 'FAQ – Najczęściej zadawane pytania',
+        content: `
+### Jaka jest różnica między ZQ320 Plus Indoor a Outdoor?
+
+**Odpowiedź:** **Indoor** (srebrno-czarny) ma **Dual Radio** (WiFi 802.11ac + Bluetooth 5.2) i czujnik **Gap** do etykiet. **Outdoor** (czarny) ma tylko Bluetooth 4.0 i jest przeznaczony do pracy w terenie bez WiFi.
+
+### Jaka jest różnica między ZQ310 Plus a ZQ320 Plus?
+
+**Odpowiedź:** **ZQ310 Plus** drukuje materiał o szerokości **48 mm (2 cale)**, **ZQ320 Plus** drukuje **72 mm (3 cale)**. ZQ320 Plus jest nieco cięższa (0,43 kg vs 0,37 kg) ale obsługuje większe etykiety wysyłkowe.
+
+### Do czego służy Zebra ZQ320 Plus?
+
+**Odpowiedź:** ZQ320 Plus to **mobilna drukarka paragonów i etykiet** dla kurierów, dostawców, pracowników magazynów. Drukuje paragony, pokwitowania dostaw, etykiety wysyłkowe o szerokości do 72 mm.
+
+### Co to jest bateria PowerPrecision+?
+
+**Odpowiedź:** **PowerPrecision+** to inteligentna bateria Li-Ion Zebra z **monitorowaniem stanu w czasie rzeczywistym**. Śledzi cykle ładowania, stan zdrowia i pozostałą pojemność.
+
+### Jak sparować ZQ320 Plus z iPhone?
+
+**Odpowiedź:** ZQ320 Plus ma certyfikat **MFi** dla iOS. Włącz Bluetooth na iPhonie, wyszukaj drukarkę, wybierz ją i potwierdź parowanie. Można też użyć **NFC Print Touch**.
+
+### Jak długo ładuje się bateria ZQ320 Plus?
+
+**Odpowiedź:** W stacji dokującej 1-slot: **poniżej 3,5 godziny**. W stacji 5-slot lub ładowarce baterii: **poniżej 4 godzin**.
+
+### Jaka jest klasa ochrony ZQ320 Plus?
+
+**Odpowiedź:** ZQ320 Plus ma klasę ochrony **IP54** – odporność na kurz i zachlapania wodą.
+
+### Jakie języki programowania obsługuje ZQ320 Plus?
+
+**Odpowiedź:** ZQ320 Plus obsługuje **CPCL i ZPL** – dwa języki programowania drukarek Zebra.
+
+### Czy można używać węższych materiałów w ZQ320 Plus?
+
+**Odpowiedź:** Tak, z opcjonalnymi **wkładkami redukcyjnymi** (nr kat. KIT-MPM-MDSPR5-01) można używać materiałów **76,2 mm (3")** zamiast standardowych 80 mm.
+
+### Ile waży drukarka ZQ320 Plus?
+
+**Odpowiedź:** ZQ320 Plus waży **0,43 kg** z baterią.
+
+### Czy ZQ320 Plus wymaga ribbonu?
+
+**Odpowiedź:** **Nie**, ZQ320 Plus to drukarka **termiczna bezpośrednia (Direct Thermal)** – nie wymaga ribbonu.
+`
+      }
+    ]
   }
 }
 
