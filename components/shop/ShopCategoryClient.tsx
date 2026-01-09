@@ -14,6 +14,17 @@ const PRODUCT_TYPE_ICONS: Record<string, any> = {
   kabel: Cable
 }
 
+// Domyślne zdjęcia dla typów produktów (gdy brak image_url)
+const DEFAULT_PRODUCT_IMAGES: Record<string, string> = {
+  glowica: '/sklep_photo/głowica-203dpi-do-drukarki-zebra-zd421t-P1112640-218.png'
+}
+
+// Helper: Pobierz URL zdjęcia dla produktu
+function getProductImage(product: Product): string | null {
+  if (product.image_url) return product.image_url
+  return DEFAULT_PRODUCT_IMAGES[product.product_type] || null
+}
+
 interface Product {
   id: string
   name: string
@@ -180,17 +191,20 @@ export default function ShopCategoryClient({
                 className="bg-white rounded-lg border border-gray-200 overflow-hidden hover:border-blue-300 transition-colors group"
               >
                 {/* Image */}
-                <div className="relative h-36 bg-gray-50 flex items-center justify-center">
-                  {product.image_url ? (
-                    <Image
-                      src={product.image_url}
-                      alt={product.name}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                  ) : (
-                    <Icon className="w-10 h-10 text-gray-300" />
-                  )}
+                <div className="relative h-36 bg-white flex items-center justify-center">
+                  {(() => {
+                    const imageUrl = getProductImage(product)
+                    return imageUrl ? (
+                      <Image
+                        src={imageUrl}
+                        alt={`${product.name} - oryginalna część Zebra`}
+                        fill
+                        className="object-contain p-2 group-hover:scale-105 transition-transform duration-300"
+                      />
+                    ) : (
+                      <Icon className="w-10 h-10 text-gray-300" />
+                    )
+                  })()}
                   {product.stock === 0 && (
                     <div className="absolute top-2 right-2 bg-gray-800 text-white text-[10px] font-medium px-2 py-0.5 rounded">
                       Brak
