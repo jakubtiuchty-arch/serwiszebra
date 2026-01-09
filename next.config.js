@@ -2,6 +2,18 @@
 const nextConfig = {
   // Zwiększony timeout dla dużych stron (default: 60s)
   staticPageGenerationTimeout: 180,
+  
+  // Redirecty 301 dla zmienionych URL-i
+  async redirects() {
+    return [
+      {
+        source: '/blog/zebra-tc501-tc701-terminal-mobilny-ai-premiera-2026',
+        destination: '/blog/zebra-tc501-tc701-specyfikacja-cena-premiera',
+        permanent: true, // 301 redirect
+      },
+    ]
+  },
+  
   images: {
     // Formaty z lepszą kompresją
     formats: ['image/avif', 'image/webp'],
