@@ -1,20 +1,26 @@
 /**
- * Ingram Micro 24 API Integration
- * Dokumentacja: https://www.ingrammicro24.com/en/imapi/
+ * Ingram Micro 24 IMCEE-XML 2.0 API Integration
+ * Dokumentacja: API_INGRAM.pdf
  */
 
-const INGRAM_API_BASE = 'https://www.ingrammicro24.com/en/imapi'
+const INGRAM_API_URL = 'https://www.ingrammicro24.com/en/imapi/request'
 const INGRAM_API_KEY = process.env.INGRAM_API_KEY
 
+// ============================================
+// TYPES
+// ============================================
+
 interface IngramProduct {
-  sku: string
-  name: string
-  manufacturer: string
-  price: number
-  currency: string
-  stock: number
-  availability: string
-  deliveryDays: number
+  itemId: string           // Ingram SKU (np. ZBP1058930009)
+  vpn: string              // Vendor Part Number (np. P1058930-009)
+  ean: string              // EAN code
+  name: string             // Product name
+  manufacturer: string     // Manufacturer
+  price: number            // Net price
+  currency: string         // Currency (PLN, EUR)
+  stock: number            // Available quantity
+  eta: string              // Estimated arrival date
+  warehouse: string        // Warehouse location
 }
 
 interface IngramResponse {
@@ -24,362 +30,447 @@ interface IngramResponse {
   rawResponse?: string
 }
 
-/**
- * Wysyła żądanie do Ingram Micro API - próbuje różne metody
- */
-async function sendRequest(action: string, params: Record<string, string>): Promise<IngramResponse> {
-  if (!INGRAM_API_KEY) {
-    return { success: false, error: 'Brak klucza API Ingram Micro' }
-  }
+interface PnAItem {
+  itemId: string
+  vpn: string
+  ean: string
+  name: string
+  manufacturer: string
+  price: number
+  currency: string
+  qty: number
+  warehouse: string
+  eta: string
+}
 
-  // Próba 1: REST z query params
-  try {
-    const queryParams = new URLSearchParams({
-      apikey: INGRAM_API_KEY,
-      action: action,
-      ...params
-    })
-    
-    const url = `${INGRAM_API_BASE}/request?${queryParams.toString()}`
-    console.log('[Ingram] GET:', url)
-    
-    const response = await fetch(url, {
-      method: 'GET',
-      headers: {
-        'Accept': 'application/json, application/xml, text/xml, */*',
-      },
-    })
+// ============================================
+// XML HELPERS
+// ============================================
 
-    const responseText = await response.text()
-    console.log('[Ingram] Response:', responseText.substring(0, 500))
-    
-    // Spróbuj sparsować jako JSON
-    try {
-      const jsonData = JSON.parse(responseText)
-      return { success: true, data: jsonData, rawResponse: responseText }
-    } catch {
-      // Nie jest JSON, spróbuj XML
-      const parsed = parseXmlResponse(responseText)
-      if (parsed.error) {
-        return { success: false, error: parsed.error, rawResponse: responseText }
-      }
-      return { success: true, data: parsed.data, rawResponse: responseText }
-    }
-  } catch (error) {
-    console.error('Ingram Micro API error:', error)
-    return { success: false, error: 'Błąd połączenia z API Ingram Micro' }
-  }
+function escapeXml(str: string): string {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&apos;')
 }
 
 /**
- * Alternatywna metoda - POST z form data
+ * Wysyła XML request do Ingram Micro API
  */
-async function sendRequestPost(action: string, params: Record<string, string>): Promise<IngramResponse> {
+async function sendXmlRequest(xmlBody: string): Promise<IngramResponse> {
   if (!INGRAM_API_KEY) {
-    return { success: false, error: 'Brak klucza API Ingram Micro' }
+    return { success: false, error: 'Brak klucza API Ingram Micro (INGRAM_API_KEY)' }
   }
 
+  console.log('[Ingram] Request:', xmlBody)
+
   try {
-    const formData = new URLSearchParams({
-      apikey: INGRAM_API_KEY,
-      action: action,
-      ...params
-    })
-    
-    const url = `${INGRAM_API_BASE}/request`
-    console.log('[Ingram] POST:', url, formData.toString())
-    
-    const response = await fetch(url, {
+    const response = await fetch(INGRAM_API_URL, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Accept': 'application/json, application/xml, */*',
+        'Content-Type': 'application/xml',
+        'Accept': 'application/xml',
       },
-      body: formData.toString(),
+      body: xmlBody,
     })
 
-    const responseText = await response.text()
-    console.log('[Ingram] Response:', responseText.substring(0, 500))
-    
-    try {
-      const jsonData = JSON.parse(responseText)
-      return { success: true, data: jsonData, rawResponse: responseText }
-    } catch {
-      const parsed = parseXmlResponse(responseText)
-      if (parsed.error) {
-        return { success: false, error: parsed.error, rawResponse: responseText }
+    const xmlText = await response.text()
+    console.log('[Ingram] Response:', xmlText.substring(0, 1000))
+
+    // Sprawdź błędy HTTP
+    if (!response.ok) {
+      return { 
+        success: false, 
+        error: `HTTP ${response.status}: ${response.statusText}`,
+        rawResponse: xmlText 
       }
-      return { success: true, data: parsed.data, rawResponse: responseText }
     }
+
+    // Sprawdź błędy w XML
+    const errorMatch = xmlText.match(/<Error[^>]*Code="([^"]+)"[^>]*>([^<]*)<\/Error>/)
+    if (errorMatch) {
+      return { 
+        success: false, 
+        error: `${errorMatch[1]}: ${errorMatch[2]}`,
+        rawResponse: xmlText 
+      }
+    }
+
+    // Sprawdź też prostsze błędy
+    const simpleErrorMatch = xmlText.match(/<Error>([^<]+)<\/Error>/)
+    if (simpleErrorMatch) {
+      return { 
+        success: false, 
+        error: simpleErrorMatch[1],
+        rawResponse: xmlText 
+      }
+    }
+
+    return { success: true, data: xmlText, rawResponse: xmlText }
+
   } catch (error) {
-    console.error('Ingram Micro API error:', error)
-    return { success: false, error: 'Błąd połączenia z API Ingram Micro' }
+    console.error('[Ingram] Error:', error)
+    return { 
+      success: false, 
+      error: error instanceof Error ? error.message : 'Błąd połączenia z API Ingram Micro' 
+    }
   }
 }
 
+// ============================================
+// PnA (Price and Availability) - do 50 SKU
+// ============================================
+
 /**
- * Parsuje XML response
+ * Sprawdza cenę i dostępność produktów (do 50 SKU na raz)
+ * @param skus - Array of Ingram SKU codes (np. ['ZBP1058930009']) lub Vendor Part Numbers (np. ['P1058930-009'])
  */
-function parseXmlResponse(xml: string): { data?: any; error?: string } {
-  // Sprawdź czy jest błąd HTML
-  if (xml.includes('Internal Server Error') || xml.includes('<h1')) {
-    return { error: 'Internal Server Error - nieprawidłowy format requestu' }
+export async function checkPriceAndAvailability(skus: string[]): Promise<IngramResponse> {
+  if (skus.length === 0) {
+    return { success: false, error: 'Brak SKU do sprawdzenia' }
   }
+
+  if (skus.length > 50) {
+    return { success: false, error: 'Maksymalnie 50 SKU na jedno zapytanie' }
+  }
+
+  const itemsXml = skus.map(sku => `
+    <Item>
+      <ItemID>${escapeXml(sku)}</ItemID>
+    </Item>`).join('')
+
+  const xmlRequest = `<?xml version="1.0" encoding="UTF-8"?>
+<PNARequest>
+  <TransactionHeader>
+    <APIKey>${INGRAM_API_KEY}</APIKey>
+  </TransactionHeader>
+  <Items>${itemsXml}
+  </Items>
+</PNARequest>`
+
+  const response = await sendXmlRequest(xmlRequest)
   
-  // Sprawdź czy jest błąd XML
-  const errorMatch = xml.match(/<Error[^>]*>([^<]+)<\/Error>/)
-  if (errorMatch) {
-    return { error: errorMatch[1] }
+  if (!response.success) {
+    return response
   }
 
-  // Prosty parser - wyciąga dane z tagów
-  const data: Record<string, string> = {}
-  const regex = /<(\w+)>([^<]*)<\/\1>/g
+  // Parsuj odpowiedź PnA
+  const items = parsePnAResponse(response.data)
+  return { success: true, data: items, rawResponse: response.rawResponse }
+}
+
+/**
+ * Parsuje XML response PnA
+ */
+function parsePnAResponse(xml: string): PnAItem[] {
+  const items: PnAItem[] = []
+  
+  // Regex do wyciągania <Item>...</Item>
+  const itemRegex = /<Item>([\s\S]*?)<\/Item>/g
   let match
-  while ((match = regex.exec(xml)) !== null) {
-    data[match[1]] = match[2]
+
+  while ((match = itemRegex.exec(xml)) !== null) {
+    const itemXml = match[1]
+    
+    const item: PnAItem = {
+      itemId: extractXmlValue(itemXml, 'ItemID') || '',
+      vpn: extractXmlValue(itemXml, 'VPN') || '',
+      ean: extractXmlValue(itemXml, 'EAN_UPC_Code') || '',
+      name: extractXmlValue(itemXml, 'ProductName') || '',
+      manufacturer: extractXmlValue(itemXml, 'Manufacturer') || '',
+      price: parseFloat(extractXmlValue(itemXml, 'Price') || '0'),
+      currency: extractXmlValue(itemXml, 'Currency') || 'PLN',
+      qty: parseInt(extractXmlValue(itemXml, 'Qty') || '0'),
+      warehouse: extractXmlValue(itemXml, 'Warehouse') || '',
+      eta: extractXmlValue(itemXml, 'ETA') || '',
+    }
+    
+    items.push(item)
   }
 
-  return { data }
+  return items
+}
+
+/**
+ * Helper do wyciągania wartości z XML
+ */
+function extractXmlValue(xml: string, tag: string): string | null {
+  const regex = new RegExp(`<${tag}>([^<]*)</${tag}>`)
+  const match = xml.match(regex)
+  return match ? match[1] : null
 }
 
 // ============================================
-// PUBLIC API FUNCTIONS
+// Product Details
 // ============================================
 
 /**
- * TEST - próbuje różnych endpointów i metod
+ * Pobiera szczegóły produktu
+ * @param sku - Ingram SKU lub Vendor Part Number
+ */
+export async function getProductDetails(sku: string): Promise<IngramResponse> {
+  const xmlRequest = `<?xml version="1.0" encoding="UTF-8"?>
+<ProductDetailsRequest>
+  <TransactionHeader>
+    <APIKey>${INGRAM_API_KEY}</APIKey>
+  </TransactionHeader>
+  <Items>
+    <Item>
+      <ItemID>${escapeXml(sku)}</ItemID>
+    </Item>
+  </Items>
+</ProductDetailsRequest>`
+
+  const response = await sendXmlRequest(xmlRequest)
+  
+  if (!response.success) {
+    return response
+  }
+
+  // Parsuj odpowiedź ProductDetails
+  const product = parseProductDetailsResponse(response.data)
+  return { success: true, data: product, rawResponse: response.rawResponse }
+}
+
+/**
+ * Parsuje XML response ProductDetails
+ */
+function parseProductDetailsResponse(xml: string): any {
+  return {
+    itemId: extractXmlValue(xml, 'ItemID'),
+    vpn: extractXmlValue(xml, 'VPN'),
+    ean: extractXmlValue(xml, 'EAN_UPC_Code'),
+    name: extractXmlValue(xml, 'ProductName'),
+    manufacturer: extractXmlValue(xml, 'Manufacturer'),
+    description: extractXmlValue(xml, 'Description'),
+    shortDescription: extractXmlValue(xml, 'ShortDescription'),
+    warranty: extractXmlValue(xml, 'Warranty'),
+    weight: extractXmlValue(xml, 'Weight'),
+    category: extractXmlValue(xml, 'Category'),
+    imageUrl: extractXmlValue(xml, 'ImageURL'),
+  }
+}
+
+// ============================================
+// Delivery Addresses List
+// ============================================
+
+/**
+ * Pobiera listę adresów dostawy
+ */
+export async function getDeliveryAddresses(): Promise<IngramResponse> {
+  const xmlRequest = `<?xml version="1.0" encoding="UTF-8"?>
+<DeliveryAddressesListRequest>
+  <TransactionHeader>
+    <APIKey>${INGRAM_API_KEY}</APIKey>
+  </TransactionHeader>
+</DeliveryAddressesListRequest>`
+
+  return sendXmlRequest(xmlRequest)
+}
+
+// ============================================
+// Orders List
+// ============================================
+
+/**
+ * Pobiera listę zamówień
+ * @param dateFrom - Data od (YYYY-MM-DD)
+ * @param dateTo - Data do (YYYY-MM-DD)
+ */
+export async function getOrdersList(dateFrom?: string, dateTo?: string): Promise<IngramResponse> {
+  let filterXml = ''
+  
+  if (dateFrom) {
+    filterXml += `<DateFrom>${escapeXml(dateFrom)}</DateFrom>`
+  }
+  if (dateTo) {
+    filterXml += `<DateTo>${escapeXml(dateTo)}</DateTo>`
+  }
+
+  const xmlRequest = `<?xml version="1.0" encoding="UTF-8"?>
+<OrdersListRequest>
+  <TransactionHeader>
+    <APIKey>${INGRAM_API_KEY}</APIKey>
+  </TransactionHeader>
+  ${filterXml ? `<Filter>${filterXml}</Filter>` : ''}
+</OrdersListRequest>`
+
+  return sendXmlRequest(xmlRequest)
+}
+
+// ============================================
+// Order Details
+// ============================================
+
+/**
+ * Pobiera szczegóły zamówienia
+ * @param orderNumber - Numer zamówienia Ingram Micro
+ */
+export async function getOrderDetails(orderNumber: string): Promise<IngramResponse> {
+  const xmlRequest = `<?xml version="1.0" encoding="UTF-8"?>
+<OrderDetailsRequest>
+  <TransactionHeader>
+    <APIKey>${INGRAM_API_KEY}</APIKey>
+  </TransactionHeader>
+  <IMOrderNumber>${escapeXml(orderNumber)}</IMOrderNumber>
+</OrderDetailsRequest>`
+
+  return sendXmlRequest(xmlRequest)
+}
+
+// ============================================
+// Invoices List
+// ============================================
+
+/**
+ * Pobiera listę faktur
+ * @param dateFrom - Data od (YYYY-MM-DD)
+ * @param dateTo - Data do (YYYY-MM-DD)
+ */
+export async function getInvoicesList(dateFrom?: string, dateTo?: string): Promise<IngramResponse> {
+  let filterXml = ''
+  
+  if (dateFrom) {
+    filterXml += `<DateFrom>${escapeXml(dateFrom)}</DateFrom>`
+  }
+  if (dateTo) {
+    filterXml += `<DateTo>${escapeXml(dateTo)}</DateTo>`
+  }
+
+  const xmlRequest = `<?xml version="1.0" encoding="UTF-8"?>
+<InvoicesListRequest>
+  <TransactionHeader>
+    <APIKey>${INGRAM_API_KEY}</APIKey>
+  </TransactionHeader>
+  ${filterXml ? `<Filter>${filterXml}</Filter>` : ''}
+</InvoicesListRequest>`
+
+  return sendXmlRequest(xmlRequest)
+}
+
+// ============================================
+// TEST CONNECTION
+// ============================================
+
+/**
+ * Testuje połączenie z API - próbuje pobrać listę adresów dostawy
  */
 export async function testIngramConnection(): Promise<IngramResponse> {
-  if (!INGRAM_API_KEY) {
-    return { success: false, error: 'Brak klucza API Ingram Micro' }
-  }
-
-  const results: Record<string, any> = {}
-  
-  // Test 1: Podstawowy GET z API key w query
-  try {
-    const url1 = `${INGRAM_API_BASE}?apikey=${INGRAM_API_KEY}`
-    const r1 = await fetch(url1)
-    results.test1_base = { status: r1.status, body: (await r1.text()).substring(0, 300) }
-  } catch (e: any) {
-    results.test1_base = { error: e.message }
-  }
-
-  // Test 2: /request endpoint
-  try {
-    const url2 = `${INGRAM_API_BASE}/request?apikey=${INGRAM_API_KEY}`
-    const r2 = await fetch(url2)
-    results.test2_request = { status: r2.status, body: (await r2.text()).substring(0, 300) }
-  } catch (e: any) {
-    results.test2_request = { error: e.message }
-  }
-
-  // Test 3: POST form data
-  try {
-    const formData = new URLSearchParams({ apikey: INGRAM_API_KEY })
-    const r3 = await fetch(`${INGRAM_API_BASE}/request`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: formData.toString()
-    })
-    results.test3_post_form = { status: r3.status, body: (await r3.text()).substring(0, 300) }
-  } catch (e: any) {
-    results.test3_post_form = { error: e.message }
-  }
-
-  // Test 4: JSON body
-  try {
-    const r4 = await fetch(`${INGRAM_API_BASE}/request`, {
-      method: 'POST',
-      headers: { 
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${INGRAM_API_KEY}`
-      },
-      body: JSON.stringify({ action: 'test' })
-    })
-    results.test4_json = { status: r4.status, body: (await r4.text()).substring(0, 300) }
-  } catch (e: any) {
-    results.test4_json = { error: e.message }
-  }
-
-  // Test 5: Może klucz ma format key:secret?
-  try {
-    const r5 = await fetch(`${INGRAM_API_BASE}/request`, {
-      method: 'GET',
-      headers: { 
-        'X-API-Key': INGRAM_API_KEY,
-        'Accept': 'application/json'
-      }
-    })
-    results.test5_header = { status: r5.status, body: (await r5.text()).substring(0, 300) }
-  } catch (e: any) {
-    results.test5_header = { error: e.message }
-  }
-
-  return { success: true, data: results }
-}
-
-/**
- * Sprawdza dostępność produktu po SKU
- */
-export async function checkProductAvailability(sku: string): Promise<IngramResponse> {
-  return sendRequest('GetAvailability', { ProductCode: sku })
-}
-
-/**
- * Pobiera cenę produktu
- */
-export async function getProductPrice(sku: string): Promise<IngramResponse> {
-  return sendRequest('GetPricing', { ProductCode: sku })
-}
-
-/**
- * Pobiera pełne info o produkcie
- */
-export async function getProductInfo(sku: string): Promise<IngramResponse> {
-  return sendRequest('GetProductInfo', { ProductCode: sku })
-}
-
-/**
- * Wyszukuje produkty
- */
-export async function searchProducts(query: string): Promise<IngramResponse> {
-  return sendRequest('SearchProducts', { Query: query })
-}
-
-/**
- * Pobiera listę produktów Zebra
- */
-export async function getZebraProducts(): Promise<IngramResponse> {
-  return sendRequest('SearchProducts', { 
-    Manufacturer: 'Zebra',
-    Category: 'Spare Parts'
-  })
-}
-
-/**
- * Sprawdza wiele produktów na raz
- */
-export async function checkMultipleProducts(skus: string[]): Promise<Map<string, IngramProduct | null>> {
-  const results = new Map<string, IngramProduct | null>()
-  
-  // Równoległe zapytania (max 5 na raz)
-  const chunks = chunkArray(skus, 5)
-  
-  for (const chunk of chunks) {
-    const promises = chunk.map(async (sku) => {
-      const response = await getProductInfo(sku)
-      if (response.success && response.data) {
-        return { sku, product: mapToIngramProduct(response.data) }
-      }
-      return { sku, product: null }
-    })
-    
-    const chunkResults = await Promise.all(promises)
-    chunkResults.forEach(({ sku, product }) => {
-      results.set(sku, product)
-    })
-  }
-  
-  return results
-}
-
-/**
- * Mapuje dane z API na nasz format
- */
-function mapToIngramProduct(data: Record<string, string>): IngramProduct {
-  return {
-    sku: data.ProductCode || data.SKU || '',
-    name: data.ProductName || data.Description || '',
-    manufacturer: data.Manufacturer || 'Zebra',
-    price: parseFloat(data.Price || data.NetPrice || '0'),
-    currency: data.Currency || 'PLN',
-    stock: parseInt(data.Stock || data.Quantity || '0', 10),
-    availability: data.Availability || 'unknown',
-    deliveryDays: parseInt(data.DeliveryDays || data.LeadTime || '0', 10),
-  }
-}
-
-/**
- * Dzieli tablicę na chunki
- */
-function chunkArray<T>(array: T[], size: number): T[][] {
-  const chunks: T[][] = []
-  for (let i = 0; i < array.length; i += size) {
-    chunks.push(array.slice(i, i + size))
-  }
-  return chunks
+  // Najprostszy request - lista adresów dostawy
+  return getDeliveryAddresses()
 }
 
 // ============================================
-// SYNC FUNCTIONS
+// SYNC WITH SUPABASE
 // ============================================
 
+import { SupabaseClient } from '@supabase/supabase-js'
+
 /**
- * Synchronizuje ceny i stany z Ingram Micro do Supabase
+ * Synchronizuje ceny i dostępność produktów z Ingram Micro
  */
-export async function syncProductsWithIngram(supabase: any): Promise<{
-  updated: number
-  errors: string[]
-}> {
+export async function syncProductsWithIngram(supabase: SupabaseClient): Promise<{ updated: number; errors: string[] }> {
   const errors: string[] = []
   let updated = 0
 
-  // Pobierz produkty z bazy
-  const { data: products, error } = await supabase
-    .from('products')
-    .select('id, sku, price')
-    .eq('product_type', 'glowica')
-    .eq('is_active', true)
+  try {
+    // Pobierz produkty z bazy
+    const { data: products, error: fetchError } = await supabase
+      .from('products')
+      .select('id, sku, name, price')
+      .eq('is_active', true)
 
-  if (error || !products) {
-    return { updated: 0, errors: ['Błąd pobierania produktów z bazy'] }
-  }
+    if (fetchError) {
+      return { updated: 0, errors: [`Błąd pobierania produktów: ${fetchError.message}`] }
+    }
 
-  // Sprawdź każdy produkt w Ingram
-  for (const product of products) {
-    const response = await getProductInfo(product.sku)
-    
-    if (response.success && response.data) {
-      const ingramProduct = mapToIngramProduct(response.data)
+    if (!products || products.length === 0) {
+      return { updated: 0, errors: ['Brak produktów do synchronizacji'] }
+    }
+
+    // Podziel na batche po 50 (limit API)
+    const batches: string[][] = []
+    for (let i = 0; i < products.length; i += 50) {
+      batches.push(products.slice(i, i + 50).map(p => p.sku))
+    }
+
+    // Sprawdź każdy batch
+    for (const batch of batches) {
+      const result = await checkPriceAndAvailability(batch)
       
-      // Aktualizuj w bazie jeśli cena się zmieniła
-      if (ingramProduct.price > 0) {
-        const newPrice = calculateSellingPrice(ingramProduct.price)
+      if (!result.success) {
+        errors.push(`Błąd batch: ${result.error}`)
+        continue
+      }
+
+      const items = result.data as PnAItem[]
+      
+      // Aktualizuj produkty w bazie
+      for (const item of items) {
+        const product = products.find(p => 
+          p.sku === item.itemId || 
+          p.sku === item.vpn ||
+          p.sku.replace(/-/g, '') === item.itemId.replace(/^ZB/, '')
+        )
         
-        const { error: updateError } = await supabase
-          .from('products')
-          .update({
-            ingram_price: ingramProduct.price,
-            ingram_stock: ingramProduct.stock,
-            ingram_last_sync: new Date().toISOString(),
-          })
-          .eq('id', product.id)
-        
-        if (updateError) {
-          errors.push(`Błąd aktualizacji ${product.sku}: ${updateError.message}`)
-        } else {
-          updated++
+        if (product && item.price > 0) {
+          // Przelicz cenę: (cena_EUR × 0.75 × 4.3) jeśli EUR, lub bezpośrednio jeśli PLN
+          let priceNetto = item.price
+          if (item.currency === 'EUR') {
+            priceNetto = item.price * 0.75 * 4.3
+          }
+          
+          const priceBrutto = priceNetto * 1.23
+
+          const { error: updateError } = await supabase
+            .from('products')
+            .update({
+              price: Math.round(priceNetto * 100) / 100,
+              price_brutto: Math.round(priceBrutto * 100) / 100,
+              stock: item.qty,
+              updated_at: new Date().toISOString(),
+            })
+            .eq('id', product.id)
+
+          if (updateError) {
+            errors.push(`Błąd aktualizacji ${product.sku}: ${updateError.message}`)
+          } else {
+            updated++
+          }
         }
       }
-    } else {
-      errors.push(`Nie znaleziono ${product.sku} w Ingram Micro`)
     }
-    
-    // Pauza między requestami (rate limiting)
-    await new Promise(resolve => setTimeout(resolve, 200))
+
+    return { updated, errors }
+
+  } catch (error) {
+    return { 
+      updated, 
+      errors: [...errors, error instanceof Error ? error.message : 'Nieznany błąd'] 
+    }
   }
-
-  return { updated, errors }
 }
 
-/**
- * Oblicza cenę sprzedaży na podstawie ceny zakupu
- * Formuła: cena_ingram * marża
- */
-function calculateSellingPrice(ingramPrice: number): number {
-  const MARGIN = 1.25 // 25% marży
-  return Math.round(ingramPrice * MARGIN * 100) / 100
+// ============================================
+// LEGACY EXPORTS (dla kompatybilności)
+// ============================================
+
+export async function checkProductAvailability(sku: string): Promise<IngramResponse> {
+  return checkPriceAndAvailability([sku])
 }
 
+export async function getProductPrice(sku: string): Promise<IngramResponse> {
+  return checkPriceAndAvailability([sku])
+}
+
+export async function getProductInfo(sku: string): Promise<IngramResponse> {
+  return getProductDetails(sku)
+}
+
+export async function searchProducts(query: string): Promise<IngramResponse> {
+  // Ingram Micro nie ma search - używamy PnA z query jako SKU
+  return checkPriceAndAvailability([query])
+}
