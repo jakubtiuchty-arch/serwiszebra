@@ -28,6 +28,8 @@ interface IngramResponse {
   data?: any
   error?: string
   rawResponse?: string
+  triedFormats?: string[]
+  workingFormat?: string
 }
 
 interface PnAItem {
@@ -124,10 +126,47 @@ async function sendXmlRequest(xmlBody: string): Promise<IngramResponse> {
 // ============================================
 
 /**
+ * Konwertuje SKU na różne formaty używane przez Ingram Micro
+ * Zebra PN: P1112640-218
+ * Ingram SKU: ZBP1112640218 (bez myślników, z prefiksem ZB)
+ */
+function normalizeSkuFormats(sku: string): string[] {
+  const formats: string[] = [sku] // oryginalny format
+  
+  // Usuń ewentualny prefiks ZB
+  const withoutZB = sku.replace(/^ZB/i, '')
+  
+  // Dodaj wersję bez ZB
+  if (withoutZB !== sku) {
+    formats.push(withoutZB)
+  }
+  
+  // Wersja z prefiksem ZB
+  if (!sku.toUpperCase().startsWith('ZB')) {
+    formats.push('ZB' + sku)
+  }
+  
+  // Wersje bez myślników
+  const noHyphens = sku.replace(/-/g, '')
+  if (noHyphens !== sku) {
+    formats.push(noHyphens)
+  }
+  
+  // Wersja ZB + bez myślników
+  const zbNoHyphens = 'ZB' + sku.replace(/^ZB/i, '').replace(/-/g, '')
+  if (!formats.includes(zbNoHyphens)) {
+    formats.push(zbNoHyphens)
+  }
+  
+  return [...new Set(formats)] // usuń duplikaty
+}
+
+/**
  * Sprawdza cenę i dostępność produktów (do 50 SKU na raz)
  * @param skus - Array of Ingram SKU codes (np. ['ZBP1058930009']) lub Vendor Part Numbers (np. ['P1058930-009'])
+ * @param tryAllFormats - Czy próbować wszystkich formatów SKU (domyślnie false)
  */
-export async function checkPriceAndAvailability(skus: string[]): Promise<IngramResponse> {
+export async function checkPriceAndAvailability(skus: string[], tryAllFormats: boolean = false): Promise<IngramResponse> {
   if (skus.length === 0) {
     return { success: false, error: 'Brak SKU do sprawdzenia' }
   }
@@ -136,7 +175,14 @@ export async function checkPriceAndAvailability(skus: string[]): Promise<IngramR
     return { success: false, error: 'Maksymalnie 50 SKU na jedno zapytanie' }
   }
 
-  const itemsXml = skus.map(sku => `
+  // Jeśli tryAllFormats, próbuj różnych formatów dla każdego SKU
+  let skusToCheck = skus
+  if (tryAllFormats && skus.length === 1) {
+    skusToCheck = normalizeSkuFormats(skus[0])
+    console.log('[Ingram] Próbuję formatów SKU:', skusToCheck)
+  }
+
+  const itemsXml = skusToCheck.map(sku => `
     <Item>
       <ItemID>${escapeXml(sku)}</ItemID>
     </Item>`).join('')
@@ -158,7 +204,52 @@ export async function checkPriceAndAvailability(skus: string[]): Promise<IngramR
 
   // Parsuj odpowiedź PnA
   const items = parsePnAResponse(response.data)
-  return { success: true, data: items, rawResponse: response.rawResponse }
+  return { 
+    success: true, 
+    data: items, 
+    rawResponse: response.rawResponse,
+    triedFormats: tryAllFormats ? skusToCheck : undefined
+  }
+}
+
+/**
+ * Testuje różne formaty SKU i zwraca wyniki dla każdego
+ * Pomocne do debugowania, który format działa
+ */
+export async function testSkuFormats(sku: string): Promise<IngramResponse> {
+  const formats = normalizeSkuFormats(sku)
+  const results: { format: string; found: boolean; data?: any }[] = []
+  
+  console.log(`[Ingram] Testuję ${formats.length} formatów dla SKU: ${sku}`)
+  
+  for (const format of formats) {
+    const response = await checkPriceAndAvailability([format], false)
+    const found = response.success && Array.isArray(response.data) && response.data.length > 0
+    
+    results.push({
+      format,
+      found,
+      data: found ? response.data[0] : undefined
+    })
+    
+    console.log(`[Ingram] Format "${format}": ${found ? 'ZNALEZIONO' : 'nie znaleziono'}`)
+    
+    // Jeśli znaleziono, przerwij pętlę
+    if (found) {
+      return { 
+        success: true, 
+        data: response.data, 
+        rawResponse: response.rawResponse,
+        workingFormat: format
+      }
+    }
+  }
+  
+  return { 
+    success: false, 
+    error: `Nie znaleziono produktu. Przetestowano formaty: ${formats.join(', ')}`,
+    data: results
+  }
 }
 
 /**

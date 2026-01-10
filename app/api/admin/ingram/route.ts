@@ -8,7 +8,8 @@ import {
   getOrderDetails,
   getInvoicesList,
   testIngramConnection,
-  syncProductsWithIngram 
+  syncProductsWithIngram,
+  testSkuFormats
 } from '@/lib/ingram-micro'
 
 /**
@@ -73,8 +74,18 @@ export async function GET(request: Request) {
           return NextResponse.json({ error: 'Brak parametru sku lub skus' }, { status: 400 })
         }
         
-        const pnaResult = await checkPriceAndAvailability(skuList)
+        // Dla pojedynczego SKU próbuj różnych formatów
+        const tryAllFormats = skuList.length === 1
+        const pnaResult = await checkPriceAndAvailability(skuList, tryAllFormats)
         return NextResponse.json(pnaResult)
+
+      // Test różnych formatów SKU (debugowanie)
+      case 'testsku':
+        if (!sku) {
+          return NextResponse.json({ error: 'Brak parametru sku' }, { status: 400 })
+        }
+        const testSkuResult = await testSkuFormats(sku)
+        return NextResponse.json(testSkuResult)
 
       // Product Details
       case 'details':
@@ -127,9 +138,13 @@ export async function GET(request: Request) {
               example: '/api/admin/ingram?action=test'
             },
             pna: {
-              description: 'Price and Availability (do 50 SKU)',
+              description: 'Price and Availability (do 50 SKU) - automatycznie próbuje różne formaty SKU',
               example: '/api/admin/ingram?action=pna&sku=P1058930-009',
               example_multi: '/api/admin/ingram?action=pna&skus=P1058930-009,P1058930-010'
+            },
+            testsku: {
+              description: 'Testuje różne formaty SKU i zwraca który działa (debugowanie)',
+              example: '/api/admin/ingram?action=testsku&sku=P1112640-218'
             },
             details: {
               description: 'Szczegóły produktu',
