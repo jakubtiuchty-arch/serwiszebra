@@ -158,7 +158,7 @@ function normalizeSkuFormats(sku: string): string[] {
     formats.push(zbNoHyphens)
   }
   
-  return [...new Set(formats)] // usuń duplikaty
+  return Array.from(new Set(formats)) // usuń duplikaty
 }
 
 /**
