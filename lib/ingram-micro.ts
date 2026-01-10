@@ -21,6 +21,7 @@ interface IngramResponse {
   success: boolean
   data?: any
   error?: string
+  rawResponse?: string
 }
 
 /**
@@ -34,6 +35,8 @@ async function sendRequest(action: string, params: Record<string, string>): Prom
   try {
     const xmlRequest = buildXmlRequest(action, params)
     
+    console.log('[Ingram] Request:', xmlRequest)
+    
     const response = await fetch(INGRAM_API_URL, {
       method: 'POST',
       headers: {
@@ -44,13 +47,16 @@ async function sendRequest(action: string, params: Record<string, string>): Prom
     })
 
     const xmlText = await response.text()
+    
+    console.log('[Ingram] Response:', xmlText)
+    
     const parsed = parseXmlResponse(xmlText)
     
     if (parsed.error) {
-      return { success: false, error: parsed.error }
+      return { success: false, error: parsed.error, rawResponse: xmlText }
     }
     
-    return { success: true, data: parsed.data }
+    return { success: true, data: parsed.data, rawResponse: xmlText }
   } catch (error) {
     console.error('Ingram Micro API error:', error)
     return { success: false, error: 'Błąd połączenia z API Ingram Micro' }
