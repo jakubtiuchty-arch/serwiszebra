@@ -3,7 +3,7 @@
  * Dokumentacja: https://www.ingrammicro24.com/en/imapi/
  */
 
-const INGRAM_API_URL = 'https://www.ingrammicro24.com/en/imapi/request'
+const INGRAM_API_BASE = 'https://www.ingrammicro24.com/en/imapi'
 const INGRAM_API_KEY = process.env.INGRAM_API_KEY
 
 interface IngramProduct {
@@ -25,38 +25,46 @@ interface IngramResponse {
 }
 
 /**
- * Wysyła żądanie do Ingram Micro API
+ * Wysyła żądanie do Ingram Micro API - próbuje różne metody
  */
 async function sendRequest(action: string, params: Record<string, string>): Promise<IngramResponse> {
   if (!INGRAM_API_KEY) {
     return { success: false, error: 'Brak klucza API Ingram Micro' }
   }
 
+  // Próba 1: REST z query params
   try {
-    const xmlRequest = buildXmlRequest(action, params)
+    const queryParams = new URLSearchParams({
+      apikey: INGRAM_API_KEY,
+      action: action,
+      ...params
+    })
     
-    console.log('[Ingram] Request:', xmlRequest)
+    const url = `${INGRAM_API_BASE}/request?${queryParams.toString()}`
+    console.log('[Ingram] GET:', url)
     
-    const response = await fetch(INGRAM_API_URL, {
-      method: 'POST',
+    const response = await fetch(url, {
+      method: 'GET',
       headers: {
-        'Content-Type': 'application/xml',
-        'Authorization': `Bearer ${INGRAM_API_KEY}`,
+        'Accept': 'application/json, application/xml, text/xml, */*',
       },
-      body: xmlRequest,
     })
 
-    const xmlText = await response.text()
+    const responseText = await response.text()
+    console.log('[Ingram] Response:', responseText.substring(0, 500))
     
-    console.log('[Ingram] Response:', xmlText)
-    
-    const parsed = parseXmlResponse(xmlText)
-    
-    if (parsed.error) {
-      return { success: false, error: parsed.error, rawResponse: xmlText }
+    // Spróbuj sparsować jako JSON
+    try {
+      const jsonData = JSON.parse(responseText)
+      return { success: true, data: jsonData, rawResponse: responseText }
+    } catch {
+      // Nie jest JSON, spróbuj XML
+      const parsed = parseXmlResponse(responseText)
+      if (parsed.error) {
+        return { success: false, error: parsed.error, rawResponse: responseText }
+      }
+      return { success: true, data: parsed.data, rawResponse: responseText }
     }
-    
-    return { success: true, data: parsed.data, rawResponse: xmlText }
   } catch (error) {
     console.error('Ingram Micro API error:', error)
     return { success: false, error: 'Błąd połączenia z API Ingram Micro' }
@@ -64,30 +72,61 @@ async function sendRequest(action: string, params: Record<string, string>): Prom
 }
 
 /**
- * Buduje XML request
+ * Alternatywna metoda - POST z form data
  */
-function buildXmlRequest(action: string, params: Record<string, string>): string {
-  const paramsXml = Object.entries(params)
-    .map(([key, value]) => `<${key}>${escapeXml(value)}</${key}>`)
-    .join('')
+async function sendRequestPost(action: string, params: Record<string, string>): Promise<IngramResponse> {
+  if (!INGRAM_API_KEY) {
+    return { success: false, error: 'Brak klucza API Ingram Micro' }
+  }
 
-  return `<?xml version="1.0" encoding="UTF-8"?>
-<Request>
-  <TransactionHeader>
-    <ApiKey>${INGRAM_API_KEY}</ApiKey>
-    <Action>${action}</Action>
-  </TransactionHeader>
-  <TransactionBody>
-    ${paramsXml}
-  </TransactionBody>
-</Request>`
+  try {
+    const formData = new URLSearchParams({
+      apikey: INGRAM_API_KEY,
+      action: action,
+      ...params
+    })
+    
+    const url = `${INGRAM_API_BASE}/request`
+    console.log('[Ingram] POST:', url, formData.toString())
+    
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Accept': 'application/json, application/xml, */*',
+      },
+      body: formData.toString(),
+    })
+
+    const responseText = await response.text()
+    console.log('[Ingram] Response:', responseText.substring(0, 500))
+    
+    try {
+      const jsonData = JSON.parse(responseText)
+      return { success: true, data: jsonData, rawResponse: responseText }
+    } catch {
+      const parsed = parseXmlResponse(responseText)
+      if (parsed.error) {
+        return { success: false, error: parsed.error, rawResponse: responseText }
+      }
+      return { success: true, data: parsed.data, rawResponse: responseText }
+    }
+  } catch (error) {
+    console.error('Ingram Micro API error:', error)
+    return { success: false, error: 'Błąd połączenia z API Ingram Micro' }
+  }
 }
 
 /**
  * Parsuje XML response
  */
 function parseXmlResponse(xml: string): { data?: any; error?: string } {
-  // Sprawdź czy jest błąd
+  // Sprawdź czy jest błąd HTML
+  if (xml.includes('Internal Server Error') || xml.includes('<h1')) {
+    return { error: 'Internal Server Error - nieprawidłowy format requestu' }
+  }
+  
+  // Sprawdź czy jest błąd XML
   const errorMatch = xml.match(/<Error[^>]*>([^<]+)<\/Error>/)
   if (errorMatch) {
     return { error: errorMatch[1] }
@@ -104,21 +143,82 @@ function parseXmlResponse(xml: string): { data?: any; error?: string } {
   return { data }
 }
 
-/**
- * Escape XML special characters
- */
-function escapeXml(str: string): string {
-  return str
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&apos;')
-}
-
 // ============================================
 // PUBLIC API FUNCTIONS
 // ============================================
+
+/**
+ * TEST - próbuje różnych endpointów i metod
+ */
+export async function testIngramConnection(): Promise<IngramResponse> {
+  if (!INGRAM_API_KEY) {
+    return { success: false, error: 'Brak klucza API Ingram Micro' }
+  }
+
+  const results: Record<string, any> = {}
+  
+  // Test 1: Podstawowy GET z API key w query
+  try {
+    const url1 = `${INGRAM_API_BASE}?apikey=${INGRAM_API_KEY}`
+    const r1 = await fetch(url1)
+    results.test1_base = { status: r1.status, body: (await r1.text()).substring(0, 300) }
+  } catch (e: any) {
+    results.test1_base = { error: e.message }
+  }
+
+  // Test 2: /request endpoint
+  try {
+    const url2 = `${INGRAM_API_BASE}/request?apikey=${INGRAM_API_KEY}`
+    const r2 = await fetch(url2)
+    results.test2_request = { status: r2.status, body: (await r2.text()).substring(0, 300) }
+  } catch (e: any) {
+    results.test2_request = { error: e.message }
+  }
+
+  // Test 3: POST form data
+  try {
+    const formData = new URLSearchParams({ apikey: INGRAM_API_KEY })
+    const r3 = await fetch(`${INGRAM_API_BASE}/request`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: formData.toString()
+    })
+    results.test3_post_form = { status: r3.status, body: (await r3.text()).substring(0, 300) }
+  } catch (e: any) {
+    results.test3_post_form = { error: e.message }
+  }
+
+  // Test 4: JSON body
+  try {
+    const r4 = await fetch(`${INGRAM_API_BASE}/request`, {
+      method: 'POST',
+      headers: { 
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${INGRAM_API_KEY}`
+      },
+      body: JSON.stringify({ action: 'test' })
+    })
+    results.test4_json = { status: r4.status, body: (await r4.text()).substring(0, 300) }
+  } catch (e: any) {
+    results.test4_json = { error: e.message }
+  }
+
+  // Test 5: Może klucz ma format key:secret?
+  try {
+    const r5 = await fetch(`${INGRAM_API_BASE}/request`, {
+      method: 'GET',
+      headers: { 
+        'X-API-Key': INGRAM_API_KEY,
+        'Accept': 'application/json'
+      }
+    })
+    results.test5_header = { status: r5.status, body: (await r5.text()).substring(0, 300) }
+  } catch (e: any) {
+    results.test5_header = { error: e.message }
+  }
+
+  return { success: true, data: results }
+}
 
 /**
  * Sprawdza dostępność produktu po SKU

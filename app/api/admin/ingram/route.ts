@@ -5,7 +5,8 @@ import {
   getProductPrice, 
   getProductInfo,
   searchProducts,
-  syncProductsWithIngram 
+  syncProductsWithIngram,
+  testIngramConnection
 } from '@/lib/ingram-micro'
 
 /**
@@ -41,6 +42,10 @@ export async function GET(request: Request) {
 
     // Wykonaj akcję
     switch (action) {
+      case 'test':
+        const testResult = await testIngramConnection()
+        return NextResponse.json(testResult)
+
       case 'check':
         if (!sku) {
           return NextResponse.json({ error: 'Brak parametru SKU' }, { status: 400 })
@@ -79,8 +84,9 @@ export async function GET(request: Request) {
 
       default:
         return NextResponse.json({ 
-          error: 'Nieznana akcja. Dostępne: check, price, info, search, sync',
+          error: 'Nieznana akcja. Dostępne: test, check, price, info, search, sync',
           usage: {
+            test: '/api/admin/ingram?action=test',
             check: '/api/admin/ingram?action=check&sku=P1058930-009',
             price: '/api/admin/ingram?action=price&sku=P1058930-009',
             info: '/api/admin/ingram?action=info&sku=P1058930-009',
