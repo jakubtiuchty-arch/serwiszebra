@@ -418,51 +418,52 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
 
               {/* Details */}
               <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6 flex-1">
-                {/* Kompatybilność - GŁÓWNA INFORMACJA */}
-                {product.device_model && (
-                  <div className="mb-3 sm:mb-4 -mt-1">
-                    <div className="inline-flex items-center gap-2 bg-blue-600 text-white px-3 py-1.5 rounded-lg text-sm sm:text-base font-semibold">
-                      <Printer className="w-4 h-4" />
-                      Do drukarki {product.device_model}
-                      {product.resolution_dpi && (
-                        <span className="bg-blue-500 px-2 py-0.5 rounded text-xs font-medium">{product.resolution_dpi} DPI</span>
-                      )}
-                    </div>
-                  </div>
-                )}
-
                 {/* Nazwa */}
-                <h1 className="text-lg sm:text-xl font-semibold text-gray-900 mb-1.5 sm:mb-2">
+                <h1 className="text-lg sm:text-xl font-semibold text-gray-900 mb-1 sm:mb-1.5">
                   {product.name}
                 </h1>
 
                 {/* PN (Part Number) */}
-                <p className="text-xs sm:text-sm text-gray-500 mb-3 sm:mb-4">
-                  PN: <span className="font-mono font-medium text-gray-700">{product.sku}</span>
+                <p className="text-xs text-gray-500 mb-3">
+                  PN: <span className="font-mono font-medium text-gray-600">{product.sku}</span>
                 </p>
 
-                {/* Cena */}
-                <div className="bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg p-3 sm:p-4 mb-3 sm:mb-4">
-                  <div className="text-xl sm:text-2xl font-bold text-gray-900">
-                    {product.price.toFixed(0)} zł <span className="text-sm sm:text-base font-normal text-gray-500">netto</span>
-                  </div>
-                  <div className="text-xs sm:text-sm text-gray-500 mt-0.5 sm:mt-1">
-                    {product.price_brutto.toFixed(2)} zł brutto
-                  </div>
+                {/* Cena - kompaktowa */}
+                <div className="flex items-baseline gap-2 mb-2">
+                  <span className="text-2xl sm:text-3xl font-bold text-gray-900">
+                    {product.price.toFixed(0)} zł
+                  </span>
+                  <span className="text-sm text-gray-500">netto</span>
+                  <span className="text-xs text-gray-400">({product.price_brutto.toFixed(0)} zł brutto)</span>
                 </div>
 
+                {/* Kompatybilność - ładny badge */}
+                {product.device_model && (
+                  <div className="flex items-center gap-2 mb-4">
+                    <span className="inline-flex items-center gap-1.5 bg-gradient-to-r from-blue-500 to-blue-600 text-white px-3 py-1.5 rounded-full text-xs sm:text-sm font-medium shadow-sm">
+                      <Printer className="w-3.5 h-3.5" />
+                      {product.device_model}
+                    </span>
+                    {product.resolution_dpi && (
+                      <span className="inline-flex items-center bg-gray-100 text-gray-700 px-2.5 py-1.5 rounded-full text-xs font-medium">
+                        {product.resolution_dpi} DPI
+                      </span>
+                    )}
+                  </div>
+                )}
+
                 {/* Dostępność */}
-                <div className="mb-3 sm:mb-4">
+                <div className="mb-4">
                   {product.stock > 0 ? (
                     <div className="flex items-center gap-2 text-green-600">
-                      <Check className="w-4 h-4 sm:w-5 sm:h-5" />
-                      <span className="text-sm sm:text-base font-medium">Dostępny</span>
-                      <span className="text-xs sm:text-sm text-gray-500">({product.stock} szt.)</span>
+                      <Check className="w-4 h-4" />
+                      <span className="text-sm font-medium">Dostępny</span>
+                      <span className="text-xs text-gray-500">({product.stock} szt.)</span>
                     </div>
                   ) : (
                     <div className="flex items-center gap-2 text-amber-600">
-                      <Clock className="w-4 h-4 sm:w-5 sm:h-5" />
-                      <span className="text-sm sm:text-base font-medium">Na zamówienie</span>
+                      <Clock className="w-4 h-4" />
+                      <span className="text-sm font-medium">Na zamówienie</span>
                     </div>
                   )}
                 </div>
@@ -481,23 +482,15 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
                   }}
                 />
 
-                {/* Benefits - 2x2 grid on mobile */}
-                <div className="grid grid-cols-2 gap-2 sm:gap-3 mt-4 sm:mt-5 pt-3 sm:pt-4 border-t border-gray-100">
-                  <div className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-gray-600">
-                    <Truck className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-500 flex-shrink-0" />
-                    <span>Wysyłka 24h</span>
+                {/* Benefits - tylko 2 */}
+                <div className="flex items-center gap-4 mt-4 pt-4 border-t border-gray-100">
+                  <div className="flex items-center gap-1.5 text-xs sm:text-sm text-gray-600">
+                    <Shield className="w-4 h-4 text-green-500" />
+                    <span>Gwarancja 12 mies.</span>
                   </div>
-                  <div className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-gray-600">
-                    <Shield className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-green-500 flex-shrink-0" />
-                    <span>Gwarancja 12m</span>
-                  </div>
-                  <div className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-gray-600">
-                    <Award className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-blue-500 flex-shrink-0" />
-                    <span>Oryginał</span>
-                  </div>
-                  <div className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-gray-600">
-                    <Wrench className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-purple-500 flex-shrink-0" />
-                    <span>Montaż</span>
+                  <div className="flex items-center gap-1.5 text-xs sm:text-sm text-gray-600">
+                    <Award className="w-4 h-4 text-blue-500" />
+                    <span>Oryginalna część</span>
                   </div>
                 </div>
               </div>
@@ -570,27 +563,30 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
               </div>
             )}
 
-            {/* Usługa montażu - WYRÓŻNIONY BOX */}
-            <div className="bg-gradient-to-r from-amber-50 via-orange-50 to-amber-50 rounded-xl border-2 border-amber-300 p-4 sm:p-6 mb-4 sm:mb-6 shadow-sm">
-              <div className="flex items-start gap-3 sm:gap-4">
-                <div className="bg-amber-400 rounded-xl p-2.5 sm:p-3 flex-shrink-0 shadow-md">
-                  <Wrench className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+            {/* Usługa montażu */}
+            <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-indigo-600 via-purple-600 to-indigo-700 p-5 sm:p-6 mb-4 sm:mb-6 shadow-lg">
+              {/* Dekoracyjne koła */}
+              <div className="absolute -top-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-2xl" />
+              <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-purple-400/20 rounded-full blur-xl" />
+              
+              <div className="relative flex items-start gap-4">
+                <div className="bg-white/20 backdrop-blur-sm rounded-xl p-3 flex-shrink-0">
+                  <Wrench className="w-6 h-6 text-white" />
                 </div>
-                <div className="flex-1 min-w-0">
-                  <h3 className="text-sm sm:text-base font-bold text-gray-900 mb-1">
-                    Potrzebujesz wymiany głowicy?
+                <div className="flex-1">
+                  <h3 className="text-base sm:text-lg font-bold text-white mb-2">
+                    Potrzebujesz wymiany części?
                   </h3>
-                  <p className="text-xs sm:text-sm text-gray-700 mb-3">
-                    <strong>Odbierzemy drukarkę kurierem</strong>, wymienimy część i odeślesz sprawne urządzenie. 
-                    Szybko, wygodnie i z gwarancją.
+                  <p className="text-sm text-indigo-100 mb-4 leading-relaxed">
+                    Odbierzemy drukarkę kurierem, wymienimy część w naszym serwisie 
+                    i odeślemy sprawne urządzenie. Szybko i z gwarancją.
                   </p>
                   <Link 
                     href="/#formularz" 
-                    className="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-600 text-white px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-colors shadow-sm"
+                    className="inline-flex items-center gap-2 bg-white text-indigo-700 px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-indigo-50 transition-colors shadow-md"
                   >
                     <Truck className="w-4 h-4" />
                     Zamów odbiór kurierem
-                    <ChevronRight className="w-4 h-4" />
                   </Link>
                 </div>
               </div>
