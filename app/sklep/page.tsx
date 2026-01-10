@@ -6,7 +6,6 @@ import Link from 'next/link'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import ShopSubheader from '@/components/shop/ShopSubheader'
-import ShopSidebar from '@/components/shop/ShopSidebar'
 import { useCartStore } from '@/lib/cart-store'
 import { 
   Printer, 
@@ -21,9 +20,10 @@ import {
   Phone,
   Search,
   ChevronDown,
-  ChevronRight,
   X,
-  Check
+  Check,
+  Filter,
+  SlidersHorizontal
 } from 'lucide-react'
 import { SHOP_CATEGORIES, getProductUrl } from '@/lib/shop-categories'
 
@@ -70,58 +70,10 @@ function getProductImage(product: Product): string | null {
   return DEFAULT_PRODUCT_IMAGES[product.product_type] || null
 }
 
-// Nowa struktura: Głowice → Typ drukarki → Model → DPI
-const PRINTER_CATEGORIES = {
-  desktop: {
-    name: 'Drukarki biurkowe',
-    models: [
-      { id: 'zd220', name: 'ZD220', resolutions: [203] },
-      { id: 'zd230', name: 'ZD230', resolutions: [203] },
-      { id: 'zd421', name: 'ZD421', resolutions: [203, 300] },
-      { id: 'zd621', name: 'ZD621', resolutions: [203, 300] },
-      { id: 'gk420d', name: 'GK420d', resolutions: [203] },
-      { id: 'gk420t', name: 'GK420t', resolutions: [203] },
-      { id: 'gx420d', name: 'GX420d', resolutions: [203] },
-      { id: 'gx420t', name: 'GX420t', resolutions: [203] },
-      { id: 'gx430t', name: 'GX430t', resolutions: [300] },
-    ]
-  },
-  industrial: {
-    name: 'Drukarki przemysłowe',
-    models: [
-      { id: 'zt230', name: 'ZT230', resolutions: [203, 300] },
-      { id: 'zt411', name: 'ZT411', resolutions: [203, 300, 600] },
-      { id: 'zt421', name: 'ZT421', resolutions: [203, 300] },
-      { id: 'zt510', name: 'ZT510', resolutions: [203, 300] },
-      { id: 'zt610', name: 'ZT610', resolutions: [203, 300, 600] },
-      { id: 'zt620', name: 'ZT620', resolutions: [203, 300] },
-      { id: 'zm400', name: 'ZM400', resolutions: [203, 300, 600] },
-      { id: 'zm600', name: 'ZM600', resolutions: [203, 300] },
-      { id: '105sl', name: '105SL Plus', resolutions: [203, 300] },
-      { id: '110xi4', name: '110Xi4', resolutions: [203, 300, 600] },
-    ]
-  },
-  mobile: {
-    name: 'Drukarki mobilne',
-    models: [
-      { id: 'zq520', name: 'ZQ520', resolutions: [203] },
-      { id: 'zq630', name: 'ZQ630', resolutions: [203] },
-      { id: 'zq320', name: 'ZQ320', resolutions: [203] },
-    ]
-  }
-}
-
 const RESOLUTIONS = [
   { value: '203', label: '203 DPI' },
   { value: '300', label: '300 DPI' },
   { value: '600', label: '600 DPI' }
-]
-
-const CAPACITIES = [
-  { value: '2000', label: '2000 mAh' },
-  { value: '3000', label: '3000 mAh' },
-  { value: '4000', label: '4000 mAh' },
-  { value: '5000', label: '5000+ mAh' }
 ]
 
 export default function SklepPage() {
@@ -129,7 +81,7 @@ export default function SklepPage() {
   const [loading, setLoading] = useState(true)
   const [sortBy, setSortBy] = useState('name')
   const [filters, setFilters] = useState<FilterState>({
-    productType: 'glowica', // Domyślnie głowice
+    productType: 'glowica',
     printerCategory: '',
     printerModel: '',
     resolution: '',
@@ -139,18 +91,17 @@ export default function SklepPage() {
   const [expandedCategories, setExpandedCategories] = useState<string[]>(['desktop'])
   const [expandedProductTypes, setExpandedProductTypes] = useState<string[]>(['glowica'])
   const [searchInput, setSearchInput] = useState('')
-  const [isSearching, setIsSearching] = useState(false)
+  const [showMobileFilters, setShowMobileFilters] = useState(false)
   
   const addToCart = useCartStore((state) => state.addItem)
 
-  // Debounced search - czeka 300ms po ostatnim wpisaniu
+  // Debounced search
   useEffect(() => {
     const timer = setTimeout(() => {
       if (searchInput !== filters.search) {
         setFilters(prev => ({ ...prev, search: searchInput }))
       }
     }, 300)
-
     return () => clearTimeout(timer)
   }, [searchInput])
 
@@ -162,7 +113,6 @@ export default function SklepPage() {
     setLoading(true)
     try {
       const params = new URLSearchParams()
-
       if (filters.search) params.append('search', filters.search)
       if (filters.productType) params.append('productType', filters.productType)
       if (filters.printerModel) params.append('deviceModel', filters.printerModel)
@@ -181,7 +131,6 @@ export default function SklepPage() {
 
   const handleAddToCart = (e: React.MouseEvent, product: Product) => {
     e.preventDefault()
-    
     addToCart({
       id: product.id,
       name: product.name,
@@ -207,22 +156,8 @@ export default function SklepPage() {
 
   const toggleProductType = (productTypeId: string) => {
     setExpandedProductTypes(prev =>
-      prev.includes(productTypeId)
-        ? [] // Zamknij wszystko
-        : [productTypeId] // Otwórz tylko tę kategorię (zamyka inne)
+      prev.includes(productTypeId) ? [] : [productTypeId]
     )
-  }
-
-  const clearFilters = () => {
-    setSearchInput('')
-    setFilters({
-      productType: 'glowica',
-      printerCategory: '',
-      printerModel: '',
-      resolution: '',
-      capacity: '',
-      search: ''
-    })
   }
 
   const activeFiltersCount = [
@@ -232,77 +167,215 @@ export default function SklepPage() {
     filters.search
   ].filter(Boolean).length
 
+  // Sidebar Content - używany w obu wersjach (mobile modal i desktop)
+  const SidebarContent = () => (
+    <>
+      {/* Kategorie */}
+      <div className="space-y-1">
+        {SHOP_CATEGORIES.map((productType) => {
+          const isProductTypeExpanded = expandedProductTypes.includes(productType.id)
+          
+          return (
+            <div key={productType.id}>
+              <div className="w-full text-sm font-medium text-gray-800 flex items-center justify-between gap-2 py-2 px-2 rounded-lg hover:bg-gray-50 active:bg-gray-100">
+                <Link 
+                  href={`/sklep/${productType.slug}`}
+                  scroll={false}
+                  className="hover:text-blue-600 flex-1"
+                  onClick={() => setShowMobileFilters(false)}
+                >
+                  {productType.namePlural}
+                </Link>
+                <button
+                  onClick={(e) => {
+                    e.preventDefault()
+                    toggleProductType(productType.id)
+                  }}
+                  className="p-2 -m-1 hover:bg-gray-200 rounded"
+                >
+                  <ChevronDown className={`w-5 h-5 text-gray-500 transition-transform ${isProductTypeExpanded ? 'rotate-180' : ''}`} />
+                </button>
+              </div>
+              
+              {isProductTypeExpanded && productType.printerCategories.length > 0 && (
+                <div className="space-y-1 ml-3 mt-1 border-l-2 border-gray-100 pl-3">
+                  {productType.printerCategories.map((printerCat) => {
+                    const isExpanded = expandedCategories.includes(`${productType.id}-${printerCat.id}`)
+                    
+                    return (
+                      <div key={printerCat.id}>
+                        <div className="w-full flex items-center justify-between px-2 py-1.5 text-sm rounded-lg text-gray-600 hover:bg-gray-50">
+                          <Link 
+                            href={`/sklep/${productType.slug}/${printerCat.slug}`}
+                            scroll={false}
+                            className="hover:text-blue-600 flex-1"
+                            onClick={() => setShowMobileFilters(false)}
+                          >
+                            {printerCat.name}
+                          </Link>
+                          <button
+                            onClick={(e) => {
+                              e.preventDefault()
+                              toggleCategory(`${productType.id}-${printerCat.id}`)
+                            }}
+                            className="p-2 -m-1 hover:bg-gray-200 rounded"
+                          >
+                            <ChevronDown className={`w-4 h-4 text-gray-500 transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
+                          </button>
+                        </div>
+                        
+                        {isExpanded && (
+                          <div className="ml-3 mt-1 space-y-0.5 border-l-2 border-gray-100 pl-3">
+                            {printerCat.models.map((model) => (
+                              <Link
+                                key={model.id}
+                                href={`/sklep/${productType.slug}/${printerCat.slug}/${model.slug}`}
+                                scroll={false}
+                                onClick={() => setShowMobileFilters(false)}
+                                className="block px-2 py-1.5 text-xs rounded text-gray-500 hover:text-blue-600 hover:bg-gray-50 active:bg-gray-100"
+                              >
+                                {model.name}
+                              </Link>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    )
+                  })}
+                </div>
+              )}
+            </div>
+          )
+        })}
+      </div>
+
+      {/* Filtr DPI */}
+      {expandedProductTypes.includes('glowica') && (
+        <div className="mt-6 pt-4 border-t border-gray-200">
+          <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">Rozdzielczość</h3>
+          <div className="flex flex-wrap gap-2">
+            {RESOLUTIONS.map((res) => (
+              <button
+                key={res.value}
+                onClick={() => setFilters(prev => ({
+                  ...prev,
+                  resolution: prev.resolution === res.value ? '' : res.value
+                }))}
+                className={`px-3 py-1.5 text-xs rounded-full transition-colors ${
+                  filters.resolution === res.value
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                }`}
+              >
+                {res.label}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+    </>
+  )
+
   return (
     <>
       <Header currentPage="other" />
       <ShopSubheader breadcrumbs={[{ label: 'Sklep', href: '/sklep' }]} />
       
-      <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-        {/* Hero - spójne z resztą portalu */}
-        <section className="relative bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-8 sm:py-10 md:py-12 overflow-hidden">
-          <div className="relative max-w-6xl mx-auto px-3 sm:px-4 text-center md:text-left">
-            <div className="flex items-center justify-center md:justify-start gap-1.5 sm:gap-2 mb-3">
-              <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
-              <span className="text-blue-600 font-medium text-sm">Sklep z częściami</span>
+      <div className="min-h-screen bg-gray-50">
+        {/* Hero - Mobile First */}
+        <section className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-6 sm:py-8 md:py-10">
+          <div className="max-w-6xl mx-auto px-4">
+            <div className="flex items-center gap-2 mb-2">
+              <ShoppingCart className="w-4 h-4 text-blue-600" />
+              <span className="text-blue-600 font-medium text-xs sm:text-sm">Sklep z częściami</span>
             </div>
             
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-gray-900 mb-3 sm:mb-4">
+            <h1 className="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-900 mb-2">
               Części Zamienne Zebra
-              <span className="block text-base sm:text-lg md:text-xl font-normal text-gray-600 mt-1 sm:mt-2">
-                – Głowice, Wałki, Akumulatory
-              </span>
             </h1>
             
-            <p className="text-sm sm:text-base text-gray-600 mb-5 sm:mb-6 max-w-2xl md:mx-0">
-              Oryginalne części zamienne do drukarek Zebra. Głowice drukujące, wałki dociskowe, akumulatory i kable.
+            <p className="text-sm text-gray-600 mb-4 max-w-xl">
+              Oryginalne głowice, wałki i akumulatory. Wysyłka 24h, gwarancja producenta.
             </p>
 
-            <div className="flex flex-wrap justify-center md:justify-start gap-2 sm:gap-3 mb-5 sm:mb-6">
-              <div className="flex items-center gap-1.5 bg-white/80 backdrop-blur-sm border border-gray-200 px-3 py-1.5 rounded-full text-xs sm:text-sm shadow-sm">
-                <Check className="w-4 h-4 text-green-600" />
-                <span className="text-gray-700">Oryginalne części</span>
+            {/* Badges - scroll horizontal na mobile */}
+            <div className="flex gap-2 overflow-x-auto pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 sm:overflow-visible">
+              <div className="flex items-center gap-1.5 bg-white/80 border border-gray-200 px-2.5 py-1 rounded-full text-xs whitespace-nowrap">
+                <Check className="w-3.5 h-3.5 text-green-600" />
+                <span className="text-gray-700">Oryginalne</span>
               </div>
-              <div className="flex items-center gap-1.5 bg-white/80 backdrop-blur-sm border border-gray-200 px-3 py-1.5 rounded-full text-xs sm:text-sm shadow-sm">
-                <Truck className="w-4 h-4 text-amber-600" />
-                <span className="text-gray-700">Wysyłka 24h</span>
+              <div className="flex items-center gap-1.5 bg-white/80 border border-gray-200 px-2.5 py-1 rounded-full text-xs whitespace-nowrap">
+                <Truck className="w-3.5 h-3.5 text-amber-600" />
+                <span className="text-gray-700">24h</span>
               </div>
-              <div className="flex items-center gap-1.5 bg-white/80 backdrop-blur-sm border border-gray-200 px-3 py-1.5 rounded-full text-xs sm:text-sm shadow-sm">
-                <Shield className="w-4 h-4 text-blue-600" />
+              <div className="flex items-center gap-1.5 bg-white/80 border border-gray-200 px-2.5 py-1 rounded-full text-xs whitespace-nowrap">
+                <Shield className="w-3.5 h-3.5 text-blue-600" />
                 <span className="text-gray-700">Gwarancja</span>
               </div>
-            </div>
-
-            <div className="flex flex-wrap gap-3 justify-center md:justify-start">
-              <a
-                href="tel:+48601619898"
-                className="inline-flex items-center gap-2 bg-white border border-gray-300 text-gray-700 font-medium px-5 py-2.5 rounded-lg hover:bg-gray-50 transition-colors text-sm"
-              >
-                <Phone className="w-4 h-4" />
-                +48 601 619 898
-              </a>
             </div>
           </div>
         </section>
 
         {/* Main Content */}
-        <section className="pt-4 pb-8 sm:pt-5 sm:pb-10 md:pt-6 md:pb-12">
-          <div className="max-w-6xl mx-auto px-3 sm:px-4">
+        <section className="py-4 sm:py-6">
+          <div className="max-w-6xl mx-auto px-4">
             
-            {/* Layout: Sidebar + Products */}
+            {/* Mobile: Search + Filter Button */}
+            <div className="lg:hidden mb-4">
+              <div className="flex gap-2">
+                {/* Search */}
+                <div className="flex-1 relative">
+                  <Search className={`absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 ${searchInput ? 'text-blue-500' : 'text-gray-400'}`} />
+                  <input
+                    type="text"
+                    value={searchInput}
+                    onChange={(e) => setSearchInput(e.target.value)}
+                    placeholder="Szukaj..."
+                    className="w-full pl-9 pr-9 py-2.5 text-sm bg-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                  {searchInput && (
+                    <button
+                      onClick={() => {
+                        setSearchInput('')
+                        setFilters(prev => ({ ...prev, search: '' }))
+                      }}
+                      className="absolute right-3 top-1/2 -translate-y-1/2"
+                    >
+                      <X className="w-4 h-4 text-gray-400" />
+                    </button>
+                  )}
+                </div>
+                {/* Filter Button */}
+                <button
+                  onClick={() => setShowMobileFilters(true)}
+                  className="flex items-center gap-2 px-4 py-2.5 bg-white border border-gray-200 rounded-lg text-sm font-medium text-gray-700"
+                >
+                  <SlidersHorizontal className="w-4 h-4" />
+                  <span className="hidden sm:inline">Filtry</span>
+                  {activeFiltersCount > 0 && (
+                    <span className="bg-blue-600 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+                      {activeFiltersCount}
+                    </span>
+                  )}
+                </button>
+              </div>
+            </div>
+            
+            {/* Layout */}
             <div className="flex flex-col lg:flex-row gap-6">
               
-              {/* SIDEBAR */}
-              <aside className="w-full lg:w-72 flex-shrink-0">
-                {/* Wyszukiwarka - instant search */}
-                <div className="bg-white rounded-xl shadow-sm border border-gray-200 px-4 py-3 mb-4">
+              {/* Desktop Sidebar */}
+              <aside className="hidden lg:block w-64 flex-shrink-0">
+                {/* Search */}
+                <div className="bg-white rounded-xl border border-gray-200 p-3 mb-4">
                   <div className="relative">
-                    <Search className={`absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 transition-colors ${searchInput ? 'text-blue-500' : 'text-gray-400'}`} />
+                    <Search className={`absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 ${searchInput ? 'text-blue-500' : 'text-gray-400'}`} />
                     <input
                       type="text"
                       value={searchInput}
                       onChange={(e) => setSearchInput(e.target.value)}
-                      placeholder="Szukaj: model, PN, DPI..."
-                      className="w-full pl-9 pr-9 py-2 text-sm bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:bg-white transition-all"
+                      placeholder="Szukaj: model, PN..."
+                      className="w-full pl-9 pr-9 py-2 text-sm bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white"
                     />
                     {searchInput && (
                       <button
@@ -310,188 +383,49 @@ export default function SklepPage() {
                           setSearchInput('')
                           setFilters(prev => ({ ...prev, search: '' }))
                         }}
-                        className="absolute right-3 top-1/2 -translate-y-1/2 p-0.5 rounded-full hover:bg-gray-200 transition-colors"
+                        className="absolute right-3 top-1/2 -translate-y-1/2"
                       >
                         <X className="w-4 h-4 text-gray-400" />
                       </button>
                     )}
                   </div>
-                  {searchInput && searchInput.length >= 2 && (
-                    <p className="text-xs text-gray-500 mt-2">
-                      Szukam: <span className="font-medium text-blue-600">{searchInput}</span>
-                    </p>
-                  )}
-                  {searchInput && searchInput.length === 1 && (
-                    <p className="text-xs text-gray-400 mt-2">
-                      Wpisz min. 2 znaki...
-                    </p>
-                  )}
                 </div>
 
-                {/* Kategorie */}
-                <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3 mt-6">Kategorie</h3>
-                <div className="space-y-1 mb-6">
-                  {SHOP_CATEGORIES.map((productType) => {
-                    const isProductTypeExpanded = expandedProductTypes.includes(productType.id)
-                    
-                    return (
-                      <div key={productType.id}>
-                        <div className="w-full text-sm font-medium text-gray-800 flex items-center justify-between gap-2 transition-colors py-2 px-2 rounded-lg hover:bg-gray-50">
-                          <Link 
-                            href={`/sklep/${productType.slug}`}
-                            scroll={false}
-                            className="hover:text-blue-600 flex-1"
-                          >
-                            {productType.namePlural}
-                          </Link>
-                          <button
-                            onClick={(e) => {
-                              e.preventDefault()
-                              e.stopPropagation()
-                              toggleProductType(productType.id)
-                            }}
-                            className="p-2 -m-1 hover:bg-gray-200 rounded transition-colors"
-                            aria-label={isProductTypeExpanded ? 'Zwiń' : 'Rozwiń'}
-                          >
-                            <ChevronDown className={`w-5 h-5 text-gray-500 transition-transform ${isProductTypeExpanded ? 'rotate-180' : ''}`} />
-                          </button>
-                        </div>
-                        
-                        {isProductTypeExpanded && productType.printerCategories.length > 0 && (
-                          <div className="space-y-1 ml-4 mt-1">
-                            {productType.printerCategories.map((printerCat) => {
-                              const isExpanded = expandedCategories.includes(`${productType.id}-${printerCat.id}`)
-                              
-                              return (
-                                <div key={printerCat.id}>
-                                  <div className="w-full flex items-center justify-between px-2 py-1.5 text-sm rounded-lg transition-colors text-gray-600 hover:bg-gray-50">
-                                    <Link 
-                                      href={`/sklep/${productType.slug}/${printerCat.slug}`}
-                                      scroll={false}
-                                      className="hover:text-blue-600 flex-1"
-                                    >
-                                      {printerCat.name}
-                                    </Link>
-                                    <button
-                                      onClick={(e) => {
-                                        e.preventDefault()
-                                        e.stopPropagation()
-                                        toggleCategory(`${productType.id}-${printerCat.id}`)
-                                      }}
-                                      className="p-2 -m-1 hover:bg-gray-200 rounded transition-colors"
-                                      aria-label={isExpanded ? 'Zwiń' : 'Rozwiń'}
-                                    >
-                                      <ChevronDown className={`w-4 h-4 text-gray-500 transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
-                                    </button>
-                                  </div>
-                                  
-                                  {isExpanded && (
-                                    <div className="ml-4 mt-1 space-y-0.5">
-                                      {printerCat.models.map((model) => (
-                                        <Link
-                                          key={model.id}
-                                          href={`/sklep/${productType.slug}/${printerCat.slug}/${model.slug}`}
-                                          scroll={false}
-                                          className="block px-2 py-1 text-xs rounded transition-colors text-gray-500 hover:text-blue-600 hover:bg-gray-50"
-                                        >
-                                          {model.name}
-                                        </Link>
-                                      ))}
-                                    </div>
-                                  )}
-                                </div>
-                              )
-                            })}
-                          </div>
-                        )}
-                      </div>
-                    )
-                  })}
+                {/* Categories */}
+                <div className="bg-white rounded-xl border border-gray-200 p-4">
+                  <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">Kategorie</h3>
+                  <SidebarContent />
                 </div>
-
-                {/* Filtr - zmienia się w zależności od kategorii */}
-                {(expandedProductTypes.includes('glowica') || expandedProductTypes.includes('walek')) && (
-                  <>
-                    <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">
-                      {expandedProductTypes.includes('walek') ? 'Rozdzielczość głowicy' : 'Rozdzielczość'}
-                    </h3>
-                    <div className="space-y-2 mb-6">
-                      {RESOLUTIONS.map((res) => (
-                        <label
-                          key={res.value}
-                          className="flex items-center gap-2 cursor-pointer px-2 py-1 rounded hover:bg-gray-50"
-                        >
-                          <input
-                            type="checkbox"
-                            checked={filters.resolution === res.value}
-                            onChange={(e) => {
-                              setFilters(prev => ({
-                                ...prev,
-                                resolution: e.target.checked ? res.value : ''
-                              }))
-                            }}
-                            className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                          />
-                          <span className="text-sm text-gray-700">{res.label}</span>
-                        </label>
-                      ))}
-                    </div>
-                  </>
-                )}
-
-                {expandedProductTypes.includes('akumulator') && (
-                  <>
-                    <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">Pojemność</h3>
-                    <div className="space-y-2 mb-6">
-                      {CAPACITIES.map((cap) => (
-                        <label
-                          key={cap.value}
-                          className="flex items-center gap-2 cursor-pointer px-2 py-1 rounded hover:bg-gray-50"
-                        >
-                          <input
-                            type="checkbox"
-                            checked={filters.capacity === cap.value}
-                            onChange={(e) => {
-                              setFilters(prev => ({
-                                ...prev,
-                                capacity: e.target.checked ? cap.value : ''
-                              }))
-                            }}
-                            className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                          />
-                          <span className="text-sm text-gray-700">{cap.label}</span>
-                        </label>
-                      ))}
-                    </div>
-                  </>
-                )}
               </aside>
 
-              {/* PRODUCTS */}
+              {/* Products */}
               <div className="flex-1">
                 {/* Toolbar */}
-                <div className="bg-white rounded-xl shadow-sm border border-gray-200 px-4 py-3 mb-4 flex items-center justify-between">
-                  <div className="text-sm text-gray-600">
+                <div className="bg-white rounded-xl border border-gray-200 px-3 sm:px-4 py-2.5 mb-4 flex items-center justify-between">
+                  <div className="text-xs sm:text-sm text-gray-600">
                     {loading ? (
                       <span>Ładowanie...</span>
                     ) : (
                       <span>
-                        Znaleziono <strong className="text-gray-900">{products.length}</strong>{' '}
-                        {products.length === 1 ? 'produkt' : products.length < 5 ? 'produkty' : 'produktów'}
+                        <strong className="text-gray-900">{products.length}</strong>{' '}
+                        <span className="hidden sm:inline">
+                          {products.length === 1 ? 'produkt' : products.length < 5 ? 'produkty' : 'produktów'}
+                        </span>
+                        <span className="sm:hidden">szt.</span>
                       </span>
                     )}
                   </div>
 
-                  <div className="flex items-center gap-2">
-                    <ArrowUpDown className="w-4 h-4 text-gray-400" />
+                  <div className="flex items-center gap-1.5">
+                    <ArrowUpDown className="w-3.5 h-3.5 text-gray-400" />
                     <select
                       value={sortBy}
                       onChange={(e) => setSortBy(e.target.value)}
-                      className="text-sm bg-transparent border-none focus:outline-none focus:ring-0 text-gray-700 cursor-pointer"
+                      className="text-xs sm:text-sm bg-transparent border-none focus:outline-none focus:ring-0 text-gray-700 cursor-pointer pr-6"
                     >
-                      <option value="name">Nazwa A-Z</option>
-                      <option value="price_asc">Cena rosnąco</option>
-                      <option value="price_desc">Cena malejąco</option>
+                      <option value="name">Nazwa</option>
+                      <option value="price_asc">Cena ↑</option>
+                      <option value="price_desc">Cena ↓</option>
                     </select>
                   </div>
                 </div>
@@ -502,91 +436,89 @@ export default function SklepPage() {
                     <Loader2 className="w-8 h-8 text-gray-400 animate-spin" />
                   </div>
                 ) : products.length === 0 ? (
-                  <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-12 text-center">
-                    <Package className="w-12 h-12 text-gray-300 mx-auto mb-4" />
-                    <p className="text-base font-semibold text-gray-900 mb-2">
+                  <div className="bg-white rounded-xl border border-gray-200 p-8 sm:p-12 text-center">
+                    <Package className="w-10 h-10 text-gray-300 mx-auto mb-3" />
+                    <p className="text-sm font-semibold text-gray-900 mb-1">
                       Nie znaleziono produktów
                     </p>
-                    <p className="text-sm text-gray-600">
-                      Spróbuj zmienić filtry lub wyszukiwanie
+                    <p className="text-xs text-gray-500 mb-4">
+                      Zmień filtry lub wyszukiwanie
                     </p>
+                    <a
+                      href="tel:+48601619898"
+                      className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg text-sm"
+                    >
+                      <Phone className="w-4 h-4" />
+                      Zadzwoń
+                    </a>
                   </div>
                 ) : (
-                  <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-3">
+                  <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3">
                     {products.map((product) => {
                       const Icon = PRODUCT_TYPE_ICONS[product.product_type] || Package
+                      const imageUrl = getProductImage(product)
 
                       return (
                         <Link
                           key={product.id}
                           href={getProductUrl(product)}
-                          className="bg-white rounded-lg border border-gray-200 overflow-hidden hover:border-blue-300 transition-colors group"
+                          className="bg-white rounded-lg border border-gray-200 overflow-hidden hover:border-blue-300 active:bg-gray-50 transition-colors group"
                         >
                           {/* Image */}
-                          <div className="relative h-36 bg-white flex items-center justify-center">
-                            {(() => {
-                              const imageUrl = getProductImage(product)
-                              return imageUrl ? (
-                                <Image
-                                  src={imageUrl}
-                                  alt={`${product.name} - oryginalna część Zebra`}
-                                  fill
-                                  className="object-contain p-2 group-hover:scale-105 transition-transform duration-300"
-                                />
-                              ) : (
-                                <Icon className="w-12 h-12 text-gray-300" />
-                              )
-                            })()}
-                            {product.stock <= 3 && product.stock > 0 && (
-                              <div className="absolute top-2 right-2 bg-orange-500 text-white text-[9px] font-bold px-1.5 py-0.5 rounded">
-                                Ostatnie {product.stock}
-                              </div>
+                          <div className="relative aspect-square sm:h-32 bg-white flex items-center justify-center">
+                            {imageUrl ? (
+                              <Image
+                                src={imageUrl}
+                                alt={product.name}
+                                fill
+                                className="object-contain p-2"
+                                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                              />
+                            ) : (
+                              <Icon className="w-8 h-8 text-gray-300" />
                             )}
                             {product.stock === 0 && (
-                              <div className="absolute top-2 right-2 bg-red-500 text-white text-[9px] font-bold px-1.5 py-0.5 rounded">
+                              <div className="absolute top-1 right-1 bg-gray-800 text-white text-[8px] sm:text-[9px] font-bold px-1.5 py-0.5 rounded">
                                 Brak
                               </div>
                             )}
                           </div>
 
                           {/* Content */}
-                          <div className="p-3">
-                            <h3 className="text-sm font-medium text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">
+                          <div className="p-2 sm:p-3">
+                            <h3 className="text-xs sm:text-sm font-medium text-gray-900 mb-1 line-clamp-2 leading-tight">
                               {product.name}
                             </h3>
 
-                            {/* Tags */}
-                            <div className="flex flex-wrap gap-1 mb-2">
+                            {/* Tags - hidden on very small screens */}
+                            <div className="hidden sm:flex flex-wrap gap-1 mb-2">
                               {product.device_model && (
-                                <span className="text-[10px] bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded">
+                                <span className="text-[9px] bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded">
                                   {product.device_model}
                                 </span>
                               )}
                               {product.resolution_dpi && (
-                                <span className="text-[10px] bg-blue-50 text-blue-600 px-1.5 py-0.5 rounded">
+                                <span className="text-[9px] bg-blue-50 text-blue-600 px-1.5 py-0.5 rounded">
                                   {product.resolution_dpi} DPI
                                 </span>
                               )}
                             </div>
 
-                            {/* Price & Button */}
+                            {/* Price */}
                             <div className="flex items-center justify-between">
                               <div>
-                                <div className="text-base font-bold text-gray-900">
-                                  {product.price_brutto.toFixed(2)} zł
+                                <div className="text-sm sm:text-base font-bold text-gray-900">
+                                  {product.price_brutto.toFixed(0)} zł
                                 </div>
-                                <div className="text-[10px] text-gray-400">brutto</div>
+                                <div className="text-[9px] sm:text-[10px] text-gray-400">brutto</div>
                               </div>
                               
                               {product.stock > 0 && (
                                 <button
-                                  onClick={(e) => {
-                                    e.preventDefault()
-                                    handleAddToCart(e, product)
-                                  }}
-                                  className="p-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white transition-colors"
+                                  onClick={(e) => handleAddToCart(e, product)}
+                                  className="p-1.5 sm:p-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white"
                                 >
-                                  <ShoppingCart className="w-4 h-4" />
+                                  <ShoppingCart className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                                 </button>
                               )}
                             </div>
@@ -601,6 +533,38 @@ export default function SklepPage() {
           </div>
         </section>
       </div>
+
+      {/* Mobile Filters Modal */}
+      {showMobileFilters && (
+        <div className="fixed inset-0 z-50 lg:hidden">
+          <div 
+            className="absolute inset-0 bg-black/50"
+            onClick={() => setShowMobileFilters(false)}
+          />
+          <div className="absolute bottom-0 left-0 right-0 bg-white rounded-t-2xl max-h-[80vh] overflow-y-auto">
+            <div className="sticky top-0 bg-white border-b border-gray-200 px-4 py-3 flex items-center justify-between">
+              <h2 className="font-semibold text-gray-900">Kategorie i filtry</h2>
+              <button
+                onClick={() => setShowMobileFilters(false)}
+                className="p-2 -m-2 hover:bg-gray-100 rounded-full"
+              >
+                <X className="w-5 h-5 text-gray-500" />
+              </button>
+            </div>
+            <div className="p-4">
+              <SidebarContent />
+            </div>
+            <div className="sticky bottom-0 bg-white border-t border-gray-200 p-4">
+              <button
+                onClick={() => setShowMobileFilters(false)}
+                className="w-full py-3 bg-blue-600 text-white font-medium rounded-xl"
+              >
+                Pokaż wyniki ({products.length})
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <Footer />
     </>

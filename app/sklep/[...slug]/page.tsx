@@ -395,32 +395,32 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
         <ShopSubheader breadcrumbs={productBreadcrumbs} />
         
         <div className="min-h-screen bg-gray-50">
-          <div className="max-w-5xl mx-auto px-4 py-6">
-            {/* Main content - 2 kolumny */}
-            <div className="flex flex-col md:flex-row gap-6 mb-6 md:items-start">
+          <div className="max-w-5xl mx-auto px-4 py-4 sm:py-6">
+            {/* Main content - Mobile First */}
+            <div className="flex flex-col md:flex-row gap-4 sm:gap-6 mb-4 sm:mb-6 md:items-start">
               {/* Image */}
-              <div className="bg-white rounded-xl border border-gray-200 overflow-hidden md:w-96 flex-shrink-0">
+              <div className="bg-white rounded-xl border border-gray-200 overflow-hidden md:w-80 lg:w-96 flex-shrink-0">
                 <div className="relative aspect-square bg-white flex items-center justify-center">
                   {imageUrl ? (
                     <Image
                       src={imageUrl}
                       alt={`${product.name} - oryginalna część zamienna Zebra`}
                       fill
-                      className="object-contain p-4"
+                      className="object-contain p-3 sm:p-4"
                       priority
-                      sizes="(max-width: 768px) 100vw, 384px"
+                      sizes="(max-width: 768px) 100vw, 320px"
                     />
                   ) : (
-                    <Icon className="w-20 h-20 text-gray-300" />
+                    <Icon className="w-16 h-16 sm:w-20 sm:h-20 text-gray-300" />
                   )}
                 </div>
                 {/* Badges pod zdjęciem */}
-                <div className="flex items-center justify-center gap-2 p-3 bg-gray-50 border-t border-gray-100">
-                  <span className="inline-flex items-center gap-1 text-xs text-green-700 bg-green-100 px-2 py-1 rounded-full">
+                <div className="flex items-center justify-center gap-2 p-2.5 sm:p-3 bg-gray-50 border-t border-gray-100">
+                  <span className="inline-flex items-center gap-1 text-[10px] sm:text-xs text-green-700 bg-green-100 px-2 py-0.5 sm:py-1 rounded-full">
                     <Check className="w-3 h-3" />
                     Oryginał
                   </span>
-                  <span className="inline-flex items-center gap-1 text-xs text-blue-700 bg-blue-100 px-2 py-1 rounded-full">
+                  <span className="inline-flex items-center gap-1 text-[10px] sm:text-xs text-blue-700 bg-blue-100 px-2 py-0.5 sm:py-1 rounded-full">
                     <Award className="w-3 h-3" />
                     Gwarancja
                   </span>
@@ -428,48 +428,47 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
               </div>
 
               {/* Details */}
-              <div className="bg-white rounded-xl border border-gray-200 p-6 flex-1">
+              <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6 flex-1">
                 {/* Nazwa */}
-                <h1 className="text-xl font-semibold text-gray-900 mb-2">
+                <h1 className="text-lg sm:text-xl font-semibold text-gray-900 mb-1.5 sm:mb-2">
                   {product.name}
                 </h1>
 
                 {/* PN (Part Number) */}
-                <p className="text-sm text-gray-500 mb-4">
+                <p className="text-xs sm:text-sm text-gray-500 mb-3 sm:mb-4">
                   PN: <span className="font-mono font-medium text-gray-700">{product.sku}</span>
                 </p>
 
                 {/* Cena */}
-                <div className="bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg p-4 mb-4">
-                  <div className="text-2xl font-bold text-gray-900">
-                    {product.price.toFixed(2)} zł <span className="text-base font-normal text-gray-500">netto</span>
+                <div className="bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg p-3 sm:p-4 mb-3 sm:mb-4">
+                  <div className="text-xl sm:text-2xl font-bold text-gray-900">
+                    {product.price.toFixed(0)} zł <span className="text-sm sm:text-base font-normal text-gray-500">netto</span>
                   </div>
-                  <div className="text-sm text-gray-500 mt-1">
-                    {product.price_brutto.toFixed(2)} zł brutto (z VAT 23%)
+                  <div className="text-xs sm:text-sm text-gray-500 mt-0.5 sm:mt-1">
+                    {product.price_brutto.toFixed(2)} zł brutto
                   </div>
                 </div>
 
                 {/* Dostępność */}
-                <div className="mb-4">
+                <div className="mb-3 sm:mb-4">
                   {product.stock > 0 ? (
                     <div className="flex items-center gap-2 text-green-600">
-                      <Check className="w-5 h-5" />
-                      <span className="font-medium">Dostępny od ręki</span>
-                      <span className="text-sm text-gray-500">({product.stock} szt.)</span>
+                      <Check className="w-4 h-4 sm:w-5 sm:h-5" />
+                      <span className="text-sm sm:text-base font-medium">Dostępny</span>
+                      <span className="text-xs sm:text-sm text-gray-500">({product.stock} szt.)</span>
                     </div>
                   ) : (
                     <div className="flex items-center gap-2 text-amber-600">
-                      <Clock className="w-5 h-5" />
-                      <span className="font-medium">Na zamówienie</span>
-                      <span className="text-sm text-gray-500">(2-5 dni roboczych)</span>
+                      <Clock className="w-4 h-4 sm:w-5 sm:h-5" />
+                      <span className="text-sm sm:text-base font-medium">Na zamówienie</span>
                     </div>
                   )}
                 </div>
 
                 {/* Pasuje do modelu */}
                 {product.device_model && (
-                  <div className="mb-4 p-3 bg-blue-50 rounded-lg border border-blue-100">
-                    <p className="text-sm text-gray-600">
+                  <div className="mb-3 sm:mb-4 p-2.5 sm:p-3 bg-blue-50 rounded-lg border border-blue-100">
+                    <p className="text-xs sm:text-sm text-gray-600">
                       <span className="font-medium text-gray-700">Pasuje do:</span>{' '}
                       <span className="text-blue-700 font-medium">{product.device_model}</span>
                       {product.resolution_dpi && (
@@ -493,60 +492,60 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
                   }}
                 />
 
-                {/* Benefits */}
-                <div className="grid grid-cols-2 gap-3 mt-5 pt-4 border-t border-gray-100">
-                  <div className="flex items-center gap-2 text-sm text-gray-600">
-                    <Truck className="w-4 h-4 text-amber-500" />
+                {/* Benefits - 2x2 grid on mobile */}
+                <div className="grid grid-cols-2 gap-2 sm:gap-3 mt-4 sm:mt-5 pt-3 sm:pt-4 border-t border-gray-100">
+                  <div className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-gray-600">
+                    <Truck className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-500 flex-shrink-0" />
                     <span>Wysyłka 24h</span>
                   </div>
-                  <div className="flex items-center gap-2 text-sm text-gray-600">
-                    <Shield className="w-4 h-4 text-green-500" />
-                    <span>Gwarancja 12 mies.</span>
+                  <div className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-gray-600">
+                    <Shield className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-green-500 flex-shrink-0" />
+                    <span>Gwarancja 12m</span>
                   </div>
-                  <div className="flex items-center gap-2 text-sm text-gray-600">
-                    <Award className="w-4 h-4 text-blue-500" />
-                    <span>Oryginalna część</span>
+                  <div className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-gray-600">
+                    <Award className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-blue-500 flex-shrink-0" />
+                    <span>Oryginał</span>
                   </div>
-                  <div className="flex items-center gap-2 text-sm text-gray-600">
-                    <Wrench className="w-4 h-4 text-purple-500" />
-                    <span>Montaż w serwisie</span>
+                  <div className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-gray-600">
+                    <Wrench className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-purple-500 flex-shrink-0" />
+                    <span>Montaż</span>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* Specyfikacja techniczna */}
-            <div className="bg-white rounded-xl border border-gray-200 p-6 mb-6">
-              <h2 className="text-base font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                <Info className="w-5 h-5 text-blue-500" />
-                Specyfikacja techniczna
+            <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6 mb-4 sm:mb-6">
+              <h2 className="text-sm sm:text-base font-semibold text-gray-900 mb-3 sm:mb-4 flex items-center gap-2">
+                <Info className="w-4 h-4 sm:w-5 sm:h-5 text-blue-500" />
+                Specyfikacja
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-0">
-                <div className="flex justify-between py-2 border-b border-gray-100 text-sm">
-                  <span className="text-gray-500">Part Number (PN)</span>
+                <div className="flex justify-between py-2 border-b border-gray-100 text-xs sm:text-sm">
+                  <span className="text-gray-500">Part Number</span>
                   <span className="font-mono font-medium text-gray-900">{product.sku}</span>
                 </div>
-                <div className="flex justify-between py-2 border-b border-gray-100 text-sm">
+                <div className="flex justify-between py-2 border-b border-gray-100 text-xs sm:text-sm">
                   <span className="text-gray-500">Producent</span>
                   <span className="font-medium text-gray-900">{product.manufacturer || 'Zebra'}</span>
                 </div>
                 {product.device_model && (
-                  <div className="flex justify-between py-2 border-b border-gray-100 text-sm">
+                  <div className="flex justify-between py-2 border-b border-gray-100 text-xs sm:text-sm">
                     <span className="text-gray-500">Kompatybilność</span>
                     <span className="font-medium text-gray-900">{product.device_model}</span>
                   </div>
                 )}
                 {product.resolution_dpi && (
-                  <div className="flex justify-between py-2 border-b border-gray-100 text-sm">
+                  <div className="flex justify-between py-2 border-b border-gray-100 text-xs sm:text-sm">
                     <span className="text-gray-500">Rozdzielczość</span>
                     <span className="font-medium text-gray-900">{product.resolution_dpi} DPI</span>
                   </div>
                 )}
-                <div className="flex justify-between py-2 border-b border-gray-100 text-sm">
+                <div className="flex justify-between py-2 border-b border-gray-100 text-xs sm:text-sm">
                   <span className="text-gray-500">Stan</span>
                   <span className="font-medium text-green-600">Nowy, oryginalny</span>
                 </div>
-                <div className="flex justify-between py-2 border-b border-gray-100 text-sm">
+                <div className="flex justify-between py-2 border-b border-gray-100 text-xs sm:text-sm">
                   <span className="text-gray-500">Gwarancja</span>
                   <span className="font-medium text-gray-900">12 miesięcy</span>
                 </div>
@@ -554,9 +553,9 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
             </div>
 
             {/* Opis produktu */}
-            <div className="bg-white rounded-xl border border-gray-200 p-6 mb-6">
-              <h2 className="text-base font-semibold text-gray-900 mb-3">Opis produktu</h2>
-              <div className="text-sm text-gray-600 leading-relaxed space-y-3">
+            <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6 mb-4 sm:mb-6">
+              <h2 className="text-sm sm:text-base font-semibold text-gray-900 mb-2 sm:mb-3">Opis produktu</h2>
+              <div className="text-xs sm:text-sm text-gray-600 leading-relaxed space-y-2 sm:space-y-3">
                 {product.description && <p>{product.description}</p>}
                 {product.description_long && (
                   <p className="whitespace-pre-line">{product.description_long}</p>
@@ -565,8 +564,7 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
                   <p>
                     Oryginalna {product.name} do drukarki {product.device_model || 'Zebra'}. 
                     Część zamienna produkowana przez Zebra Technologies, gwarantująca pełną 
-                    kompatybilność i niezawodność działania. Idealna do wymiany zużytych 
-                    komponentów w ramach regularnej konserwacji drukarki.
+                    kompatybilność i niezawodność działania.
                   </p>
                 )}
               </div>
@@ -574,59 +572,58 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
 
             {/* FAQ Section */}
             {faqItems.length > 0 && (
-              <div className="bg-white rounded-xl border border-gray-200 p-6 mb-6">
-                <h2 className="text-base font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                  <HelpCircle className="w-5 h-5 text-blue-500" />
-                  Najczęściej zadawane pytania
+              <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6 mb-4 sm:mb-6">
+                <h2 className="text-sm sm:text-base font-semibold text-gray-900 mb-3 sm:mb-4 flex items-center gap-2">
+                  <HelpCircle className="w-4 h-4 sm:w-5 sm:h-5 text-blue-500" />
+                  FAQ
                 </h2>
-                <div className="space-y-4">
+                <div className="space-y-3 sm:space-y-4">
                   {faqItems.map((item, index) => (
-                    <details key={index} className="group border-b border-gray-100 pb-4 last:border-0 last:pb-0">
+                    <details key={index} className="group border-b border-gray-100 pb-3 sm:pb-4 last:border-0 last:pb-0">
                       <summary className="flex items-center justify-between cursor-pointer list-none">
-                        <h3 className="text-sm font-medium text-gray-900 pr-4">{item.question}</h3>
-                        <ChevronDown className="w-5 h-5 text-gray-400 group-open:rotate-180 transition-transform flex-shrink-0" />
+                        <h3 className="text-xs sm:text-sm font-medium text-gray-900 pr-3 sm:pr-4">{item.question}</h3>
+                        <ChevronDown className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 group-open:rotate-180 transition-transform flex-shrink-0" />
                       </summary>
-                      <p className="mt-3 text-sm text-gray-600 leading-relaxed">{item.answer}</p>
+                      <p className="mt-2 sm:mt-3 text-xs sm:text-sm text-gray-600 leading-relaxed">{item.answer}</p>
                     </details>
                   ))}
                 </div>
               </div>
             )}
 
-            {/* Usługa montażu */}
-            <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl border border-blue-200 p-6 mb-6">
-              <div className="flex items-start gap-4">
-                <div className="bg-blue-100 rounded-lg p-3">
-                  <Wrench className="w-6 h-6 text-blue-600" />
+            {/* Usługa montażu - Mobile Friendly */}
+            <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl border border-blue-200 p-4 sm:p-6 mb-4 sm:mb-6">
+              <div className="flex items-start gap-3 sm:gap-4">
+                <div className="bg-blue-100 rounded-lg p-2 sm:p-3 flex-shrink-0">
+                  <Wrench className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
                 </div>
-                <div className="flex-1">
-                  <h3 className="text-sm font-semibold text-gray-900 mb-1">Potrzebujesz montażu?</h3>
-                  <p className="text-sm text-gray-600 mb-3">
-                    Oferujemy profesjonalną wymianę części w naszym autoryzowanym serwisie. 
-                    Wyślij drukarkę kurierem – wymienimy część i odeślesz sprawne urządzenie.
+                <div className="flex-1 min-w-0">
+                  <h3 className="text-xs sm:text-sm font-semibold text-gray-900 mb-1">Potrzebujesz montażu?</h3>
+                  <p className="text-xs sm:text-sm text-gray-600 mb-2 sm:mb-3">
+                    Wymienimy część w naszym serwisie. Wyślij drukarkę kurierem.
                   </p>
                   <Link 
                     href="/#formularz" 
-                    className="inline-flex items-center gap-2 text-sm font-medium text-blue-600 hover:text-blue-700"
+                    className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium text-blue-600 hover:text-blue-700"
                   >
                     Zgłoś naprawę
-                    <ChevronRight className="w-4 h-4" />
+                    <ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                   </Link>
                 </div>
               </div>
             </div>
 
-            {/* Contact */}
-            <div className="p-4 bg-white rounded-lg border border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+            {/* Contact - Mobile First */}
+            <div className="p-3 sm:p-4 bg-white rounded-lg border border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4">
               <div className="text-center sm:text-left">
-                <p className="text-sm font-medium text-gray-900">Potrzebujesz pomocy w doborze części?</p>
-                <p className="text-xs text-gray-500">Zadzwoń – doradzimy, która część pasuje do Twojej drukarki</p>
+                <p className="text-xs sm:text-sm font-medium text-gray-900">Pomoc w doborze części?</p>
+                <p className="text-[10px] sm:text-xs text-gray-500">Zadzwoń – doradzimy</p>
               </div>
               <a
                 href="tel:+48601619898"
-                className="flex items-center gap-2 bg-gray-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-800 transition-colors"
+                className="flex items-center gap-2 bg-gray-900 text-white px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium hover:bg-gray-800 transition-colors"
               >
-                <Phone className="w-4 h-4" />
+                <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 601 619 898
               </a>
             </div>

@@ -3,7 +3,7 @@
 import { useState, useMemo } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Package, Printer, Battery, Cable, Check, Phone, ArrowUpDown } from 'lucide-react'
+import { Package, Printer, Battery, Cable, Check, Phone, ArrowUpDown, ShoppingCart } from 'lucide-react'
 import { useCartStore } from '@/lib/cart-store'
 import { getProductUrl } from '@/lib/shop-categories'
 
@@ -116,23 +116,26 @@ export default function ShopCategoryClient({
 
   return (
     <div>
-      {/* Toolbar */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 px-4 py-3 mb-4 flex flex-wrap items-center justify-between gap-3">
-        <div className="text-sm text-gray-600">
-          Znaleziono <strong className="text-gray-900">{filteredProducts.length}</strong>{' '}
-          {filteredProducts.length === 1 ? 'produkt' : filteredProducts.length < 5 ? 'produkty' : 'produktów'}
+      {/* Toolbar - Mobile First */}
+      <div className="bg-white rounded-xl border border-gray-200 px-3 sm:px-4 py-2.5 mb-4 flex flex-wrap items-center justify-between gap-2">
+        <div className="text-xs sm:text-sm text-gray-600">
+          <strong className="text-gray-900">{filteredProducts.length}</strong>{' '}
+          <span className="hidden sm:inline">
+            {filteredProducts.length === 1 ? 'produkt' : filteredProducts.length < 5 ? 'produkty' : 'produktów'}
+          </span>
+          <span className="sm:hidden">szt.</span>
         </div>
 
-        <div className="flex items-center gap-4">
-          {/* Filtr rozdzielczości - inline */}
+        <div className="flex items-center gap-2 sm:gap-4">
+          {/* Filtr rozdzielczości - inline pills */}
           {availableResolutions.length > 1 && (
-            <div className="flex items-center gap-2">
-              <span className="text-xs text-gray-500">DPI:</span>
+            <div className="flex items-center gap-1.5">
+              <span className="text-[10px] sm:text-xs text-gray-500 hidden sm:inline">DPI:</span>
               {availableResolutions.map((res) => (
                 <button
                   key={res}
                   onClick={() => toggleResolution(res)}
-                  className={`px-2 py-1 text-xs rounded-md transition-colors ${
+                  className={`px-2 py-1 text-[10px] sm:text-xs rounded-md transition-colors ${
                     selectedResolutions.includes(res)
                       ? 'bg-blue-600 text-white'
                       : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
@@ -145,88 +148,87 @@ export default function ShopCategoryClient({
           )}
 
           {/* Sortowanie */}
-          <div className="flex items-center gap-2">
-            <ArrowUpDown className="w-4 h-4 text-gray-400" />
+          <div className="flex items-center gap-1">
+            <ArrowUpDown className="w-3.5 h-3.5 text-gray-400" />
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
-              className="text-sm bg-transparent border-none focus:outline-none focus:ring-0 text-gray-700 cursor-pointer"
+              className="text-xs sm:text-sm bg-transparent border-none focus:outline-none focus:ring-0 text-gray-700 cursor-pointer pr-4"
             >
-              <option value="name">Nazwa A-Z</option>
-              <option value="price_asc">Cena rosnąco</option>
-              <option value="price_desc">Cena malejąco</option>
+              <option value="name">Nazwa</option>
+              <option value="price_asc">Cena ↑</option>
+              <option value="price_desc">Cena ↓</option>
             </select>
           </div>
         </div>
       </div>
 
-      {/* Products Grid */}
+      {/* Products Grid - Mobile First */}
       {filteredProducts.length === 0 ? (
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-12 text-center">
-          <Package className="w-12 h-12 text-gray-300 mx-auto mb-4" />
-          <p className="text-base font-semibold text-gray-900 mb-2">
+        <div className="bg-white rounded-xl border border-gray-200 p-8 sm:p-12 text-center">
+          <Package className="w-10 h-10 text-gray-300 mx-auto mb-3" />
+          <p className="text-sm font-semibold text-gray-900 mb-1">
             Nie znaleziono produktów
           </p>
-          <p className="text-sm text-gray-600 mb-4">
-            Spróbuj zmienić filtry lub skontaktuj się z nami
+          <p className="text-xs text-gray-500 mb-4">
+            Zmień filtry lub skontaktuj się z nami
           </p>
           <a
             href="tel:+48601619898"
-            className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg text-sm"
           >
             <Phone className="w-4 h-4" />
-            601 619 898
+            Zadzwoń
           </a>
         </div>
       ) : (
-        <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-3">
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3">
           {filteredProducts.map((product) => {
             const Icon = PRODUCT_TYPE_ICONS[product.product_type] || Package
             const productUrl = getProductUrl(product)
+            const imageUrl = getProductImage(product)
 
             return (
               <Link
                 key={product.id}
                 href={productUrl}
-                className="bg-white rounded-lg border border-gray-200 overflow-hidden hover:border-blue-300 transition-colors group"
+                className="bg-white rounded-lg border border-gray-200 overflow-hidden hover:border-blue-300 active:bg-gray-50 transition-colors group"
               >
                 {/* Image */}
-                <div className="relative h-36 bg-white flex items-center justify-center">
-                  {(() => {
-                    const imageUrl = getProductImage(product)
-                    return imageUrl ? (
-                      <Image
-                        src={imageUrl}
-                        alt={`${product.name} - oryginalna część Zebra`}
-                        fill
-                        className="object-contain p-2 group-hover:scale-105 transition-transform duration-300"
-                      />
-                    ) : (
-                      <Icon className="w-10 h-10 text-gray-300" />
-                    )
-                  })()}
+                <div className="relative aspect-square sm:h-32 bg-white flex items-center justify-center">
+                  {imageUrl ? (
+                    <Image
+                      src={imageUrl}
+                      alt={`${product.name} - oryginalna część Zebra`}
+                      fill
+                      className="object-contain p-2"
+                      sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                    />
+                  ) : (
+                    <Icon className="w-8 h-8 text-gray-300" />
+                  )}
                   {product.stock === 0 && (
-                    <div className="absolute top-2 right-2 bg-gray-800 text-white text-[10px] font-medium px-2 py-0.5 rounded">
+                    <div className="absolute top-1 right-1 bg-gray-800 text-white text-[8px] sm:text-[9px] font-bold px-1.5 py-0.5 rounded">
                       Brak
                     </div>
                   )}
                 </div>
 
                 {/* Content */}
-                <div className="p-3">
-                  <h3 className="text-sm font-medium text-gray-900 group-hover:text-blue-600 transition-colors mb-1 line-clamp-2">
+                <div className="p-2 sm:p-3">
+                  <h3 className="text-xs sm:text-sm font-medium text-gray-900 group-hover:text-blue-600 mb-1 line-clamp-2 leading-tight">
                     {product.name}
                   </h3>
 
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-1 mb-2">
+                  {/* Tags - hidden on mobile */}
+                  <div className="hidden sm:flex flex-wrap gap-1 mb-2">
                     {product.device_model && (
-                      <span className="text-[10px] bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded">
+                      <span className="text-[9px] bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded">
                         {product.device_model}
                       </span>
                     )}
                     {product.resolution_dpi && (
-                      <span className="text-[10px] bg-blue-50 text-blue-600 px-1.5 py-0.5 rounded">
+                      <span className="text-[9px] bg-blue-50 text-blue-600 px-1.5 py-0.5 rounded">
                         {product.resolution_dpi} DPI
                       </span>
                     )}
@@ -235,18 +237,22 @@ export default function ShopCategoryClient({
                   {/* Price & Stock */}
                   <div className="flex items-center justify-between">
                     <div>
-                      <div className="text-base font-bold text-gray-900">
-                        {product.price_brutto.toFixed(2)} zł
+                      <div className="text-sm sm:text-base font-bold text-gray-900">
+                        {product.price_brutto.toFixed(0)} zł
                       </div>
-                      <div className="text-[10px] text-gray-400">
-                        {product.price.toFixed(2)} zł netto
+                      <div className="text-[9px] sm:text-[10px] text-gray-400">
+                        {product.price.toFixed(0)} zł netto
                       </div>
                     </div>
-                    {product.stock > 0 && (
-                      <div className="flex items-center gap-1 text-[10px] text-green-600">
-                        <Check className="w-3 h-3" />
-                        <span>W magazynie</span>
-                      </div>
+                    {product.stock > 0 ? (
+                      <button
+                        onClick={(e) => handleAddToCart(e, product)}
+                        className="p-1.5 sm:p-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white"
+                      >
+                        <ShoppingCart className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                      </button>
+                    ) : (
+                      <span className="text-[9px] text-gray-400">Niedostępny</span>
                     )}
                   </div>
                 </div>
