@@ -414,21 +414,23 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
                     <Icon className="w-16 h-16 sm:w-20 sm:h-20 text-gray-300" />
                   )}
                 </div>
-                {/* Badges pod zdjęciem */}
-                <div className="flex items-center justify-center gap-2 p-2.5 sm:p-3 bg-gray-50 border-t border-gray-100">
-                  <span className="inline-flex items-center gap-1 text-[10px] sm:text-xs text-green-700 bg-green-100 px-2 py-0.5 sm:py-1 rounded-full">
-                    <Check className="w-3 h-3" />
-                    Oryginał
-                  </span>
-                  <span className="inline-flex items-center gap-1 text-[10px] sm:text-xs text-blue-700 bg-blue-100 px-2 py-0.5 sm:py-1 rounded-full">
-                    <Award className="w-3 h-3" />
-                    Gwarancja
-                  </span>
-                </div>
               </div>
 
               {/* Details */}
               <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6 flex-1">
+                {/* Kompatybilność - GŁÓWNA INFORMACJA */}
+                {product.device_model && (
+                  <div className="mb-3 sm:mb-4 -mt-1">
+                    <div className="inline-flex items-center gap-2 bg-blue-600 text-white px-3 py-1.5 rounded-lg text-sm sm:text-base font-semibold">
+                      <Printer className="w-4 h-4" />
+                      Do drukarki {product.device_model}
+                      {product.resolution_dpi && (
+                        <span className="bg-blue-500 px-2 py-0.5 rounded text-xs font-medium">{product.resolution_dpi} DPI</span>
+                      )}
+                    </div>
+                  </div>
+                )}
+
                 {/* Nazwa */}
                 <h1 className="text-lg sm:text-xl font-semibold text-gray-900 mb-1.5 sm:mb-2">
                   {product.name}
@@ -464,19 +466,6 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
                     </div>
                   )}
                 </div>
-
-                {/* Pasuje do modelu */}
-                {product.device_model && (
-                  <div className="mb-3 sm:mb-4 p-2.5 sm:p-3 bg-blue-50 rounded-lg border border-blue-100">
-                    <p className="text-xs sm:text-sm text-gray-600">
-                      <span className="font-medium text-gray-700">Pasuje do:</span>{' '}
-                      <span className="text-blue-700 font-medium">{product.device_model}</span>
-                      {product.resolution_dpi && (
-                        <span className="text-gray-500"> ({product.resolution_dpi} DPI)</span>
-                      )}
-                    </p>
-                  </div>
-                )}
 
                 {/* Add to Cart */}
                 <AddToCartButton
@@ -522,19 +511,9 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-0">
                 <div className="flex justify-between py-2 border-b border-gray-100 text-xs sm:text-sm">
-                  <span className="text-gray-500">Part Number</span>
-                  <span className="font-mono font-medium text-gray-900">{product.sku}</span>
-                </div>
-                <div className="flex justify-between py-2 border-b border-gray-100 text-xs sm:text-sm">
                   <span className="text-gray-500">Producent</span>
                   <span className="font-medium text-gray-900">{product.manufacturer || 'Zebra'}</span>
                 </div>
-                {product.device_model && (
-                  <div className="flex justify-between py-2 border-b border-gray-100 text-xs sm:text-sm">
-                    <span className="text-gray-500">Kompatybilność</span>
-                    <span className="font-medium text-gray-900">{product.device_model}</span>
-                  </div>
-                )}
                 {product.resolution_dpi && (
                   <div className="flex justify-between py-2 border-b border-gray-100 text-xs sm:text-sm">
                     <span className="text-gray-500">Rozdzielczość</span>
@@ -591,23 +570,27 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
               </div>
             )}
 
-            {/* Usługa montażu - Mobile Friendly */}
-            <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl border border-blue-200 p-4 sm:p-6 mb-4 sm:mb-6">
+            {/* Usługa montażu - WYRÓŻNIONY BOX */}
+            <div className="bg-gradient-to-r from-amber-50 via-orange-50 to-amber-50 rounded-xl border-2 border-amber-300 p-4 sm:p-6 mb-4 sm:mb-6 shadow-sm">
               <div className="flex items-start gap-3 sm:gap-4">
-                <div className="bg-blue-100 rounded-lg p-2 sm:p-3 flex-shrink-0">
-                  <Wrench className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
+                <div className="bg-amber-400 rounded-xl p-2.5 sm:p-3 flex-shrink-0 shadow-md">
+                  <Wrench className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <h3 className="text-xs sm:text-sm font-semibold text-gray-900 mb-1">Potrzebujesz montażu?</h3>
-                  <p className="text-xs sm:text-sm text-gray-600 mb-2 sm:mb-3">
-                    Wymienimy część w naszym serwisie. Wyślij drukarkę kurierem.
+                  <h3 className="text-sm sm:text-base font-bold text-gray-900 mb-1">
+                    Potrzebujesz wymiany głowicy?
+                  </h3>
+                  <p className="text-xs sm:text-sm text-gray-700 mb-3">
+                    <strong>Odbierzemy drukarkę kurierem</strong>, wymienimy część i odeślesz sprawne urządzenie. 
+                    Szybko, wygodnie i z gwarancją.
                   </p>
                   <Link 
                     href="/#formularz" 
-                    className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium text-blue-600 hover:text-blue-700"
+                    className="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-600 text-white px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-colors shadow-sm"
                   >
-                    Zgłoś naprawę
-                    <ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                    <Truck className="w-4 h-4" />
+                    Zamów odbiór kurierem
+                    <ChevronRight className="w-4 h-4" />
                   </Link>
                 </div>
               </div>
