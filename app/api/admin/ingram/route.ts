@@ -9,7 +9,8 @@ import {
   getInvoicesList,
   testIngramConnection,
   syncProductsWithIngram,
-  testSkuFormats
+  testSkuFormats,
+  testRawXml
 } from '@/lib/ingram-micro'
 
 /**
@@ -86,6 +87,14 @@ export async function GET(request: Request) {
         }
         const testSkuResult = await testSkuFormats(sku)
         return NextResponse.json(testSkuResult)
+
+      // Test surowego XML (dla zaawansowanego debugowania)
+      case 'rawxml':
+        // Ten endpoint wymaga POST z body zawierającym XML
+        return NextResponse.json({ 
+          error: 'Użyj POST z body zawierającym XML',
+          example: 'POST /api/admin/ingram?action=rawxml z body: <PNARequest>...</PNARequest>'
+        }, { status: 400 })
 
       // Product Details
       case 'details':

@@ -182,74 +182,143 @@ export async function checkPriceAndAvailability(skus: string[], tryAllFormats: b
     console.log('[Ingram] Próbuję formatów SKU:', skusToCheck)
   }
 
-  const itemsXml = skusToCheck.map(sku => `
-    <Item>
-      <ItemID>${escapeXml(sku)}</ItemID>
-    </Item>`).join('')
+  // Próbuj różnych struktur XML
+  const xmlVariants = [
+    // Wariant 1: ItemID
+    skusToCheck.map(sku => `<Item><ItemID>${escapeXml(sku)}</ItemID></Item>`).join(''),
+    // Wariant 2: IngramSKU
+    skusToCheck.map(sku => `<Item><IngramSKU>${escapeXml(sku)}</IngramSKU></Item>`).join(''),
+    // Wariant 3: VPN (Vendor Part Number)
+    skusToCheck.map(sku => `<Item><VPN>${escapeXml(sku)}</VPN></Item>`).join(''),
+    // Wariant 4: ManufacturerPartNumber
+    skusToCheck.map(sku => `<Item><ManufacturerPartNumber>${escapeXml(sku)}</ManufacturerPartNumber></Item>`).join(''),
+  ]
 
-  const xmlRequest = `<?xml version="1.0" encoding="UTF-8"?>
+  for (let i = 0; i < xmlVariants.length; i++) {
+    const itemsXml = xmlVariants[i]
+    const variantName = ['ItemID', 'IngramSKU', 'VPN', 'ManufacturerPartNumber'][i]
+    
+    const xmlRequest = `<?xml version="1.0" encoding="UTF-8"?>
 <PNARequest>
   <TransactionHeader>
     <APIKey>${INGRAM_API_KEY}</APIKey>
   </TransactionHeader>
-  <Items>${itemsXml}
-  </Items>
+  <Items>${itemsXml}</Items>
 </PNARequest>`
 
-  const response = await sendXmlRequest(xmlRequest)
-  
-  if (!response.success) {
-    return response
+    console.log(`[Ingram] Próbuję wariant ${variantName}...`)
+    const response = await sendXmlRequest(xmlRequest)
+    
+    if (!response.success) {
+      continue // Próbuj następny wariant
+    }
+
+    // Parsuj odpowiedź PnA
+    const items = parsePnAResponse(response.data)
+    
+    // Jeśli znaleziono produkty, zwróć wynik
+    if (items.length > 0) {
+      console.log(`[Ingram] Sukces z wariantem ${variantName}!`)
+      return { 
+        success: true, 
+        data: items, 
+        rawResponse: response.rawResponse,
+        triedFormats: tryAllFormats ? skusToCheck : undefined,
+        workingFormat: variantName
+      }
+    }
   }
 
-  // Parsuj odpowiedź PnA
-  const items = parsePnAResponse(response.data)
+  // Żaden wariant nie zadziałał - zwróć ostatnią odpowiedź
+  const lastXmlRequest = `<?xml version="1.0" encoding="UTF-8"?>
+<PNARequest>
+  <TransactionHeader>
+    <APIKey>${INGRAM_API_KEY}</APIKey>
+  </TransactionHeader>
+  <Items>${xmlVariants[0]}</Items>
+</PNARequest>`
+
+  const lastResponse = await sendXmlRequest(lastXmlRequest)
+  
   return { 
     success: true, 
-    data: items, 
-    rawResponse: response.rawResponse,
-    triedFormats: tryAllFormats ? skusToCheck : undefined
+    data: [], 
+    rawResponse: lastResponse.rawResponse,
+    triedFormats: tryAllFormats ? skusToCheck : undefined,
+    error: 'Nie znaleziono produktu (przetestowano wszystkie warianty XML: ItemID, IngramSKU, VPN, ManufacturerPartNumber)'
   }
 }
 
 /**
- * Testuje różne formaty SKU i zwraca wyniki dla każdego
+ * Testuje różne formaty SKU i struktury XML
  * Pomocne do debugowania, który format działa
  */
 export async function testSkuFormats(sku: string): Promise<IngramResponse> {
   const formats = normalizeSkuFormats(sku)
-  const results: { format: string; found: boolean; data?: any }[] = []
+  const xmlTags = ['ItemID', 'IngramSKU', 'VPN', 'ManufacturerPartNumber', 'PartNumber', 'SKU']
+  const results: { format: string; xmlTag: string; found: boolean; rawResponse?: string }[] = []
   
-  console.log(`[Ingram] Testuję ${formats.length} formatów dla SKU: ${sku}`)
+  console.log(`[Ingram] Testuję ${formats.length} formatów x ${xmlTags.length} tagów XML dla SKU: ${sku}`)
   
   for (const format of formats) {
-    const response = await checkPriceAndAvailability([format], false)
-    const found = response.success && Array.isArray(response.data) && response.data.length > 0
-    
-    results.push({
-      format,
-      found,
-      data: found ? response.data[0] : undefined
-    })
-    
-    console.log(`[Ingram] Format "${format}": ${found ? 'ZNALEZIONO' : 'nie znaleziono'}`)
-    
-    // Jeśli znaleziono, przerwij pętlę
-    if (found) {
-      return { 
-        success: true, 
-        data: response.data, 
-        rawResponse: response.rawResponse,
-        workingFormat: format
+    for (const xmlTag of xmlTags) {
+      const xmlRequest = `<?xml version="1.0" encoding="UTF-8"?>
+<PNARequest>
+  <TransactionHeader>
+    <APIKey>${INGRAM_API_KEY}</APIKey>
+  </TransactionHeader>
+  <Items>
+    <Item>
+      <${xmlTag}>${escapeXml(format)}</${xmlTag}>
+    </Item>
+  </Items>
+</PNARequest>`
+
+      const response = await sendXmlRequest(xmlRequest)
+      const items = response.success ? parsePnAResponse(response.data) : []
+      const found = items.length > 0
+      
+      results.push({
+        format,
+        xmlTag,
+        found,
+        rawResponse: response.rawResponse?.substring(0, 200)
+      })
+      
+      console.log(`[Ingram] ${format} + <${xmlTag}>: ${found ? 'ZNALEZIONO!' : 'nie znaleziono'}`)
+      
+      // Jeśli znaleziono, zwróć natychmiast
+      if (found) {
+        return { 
+          success: true, 
+          data: items, 
+          rawResponse: response.rawResponse,
+          workingFormat: `${format} with <${xmlTag}>`
+        }
       }
     }
   }
   
   return { 
     success: false, 
-    error: `Nie znaleziono produktu. Przetestowano formaty: ${formats.join(', ')}`,
-    data: results
+    error: `Nie znaleziono produktu. Przetestowano ${formats.length * xmlTags.length} kombinacji.`,
+    data: { 
+      testedFormats: formats, 
+      testedXmlTags: xmlTags,
+      results: results.slice(0, 10) // Pokaż pierwsze 10 wyników
+    }
   }
+}
+
+/**
+ * Testuje surowe zapytanie XML - do debugowania
+ */
+export async function testRawXml(xmlBody: string): Promise<IngramResponse> {
+  // Dodaj API key jeśli brak
+  if (!xmlBody.includes('<APIKey>')) {
+    xmlBody = xmlBody.replace('<TransactionHeader>', `<TransactionHeader><APIKey>${INGRAM_API_KEY}</APIKey>`)
+  }
+  return sendXmlRequest(xmlBody)
 }
 
 /**
