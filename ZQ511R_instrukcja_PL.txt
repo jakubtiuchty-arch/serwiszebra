@@ -1,40 +1,87 @@
-# Instrukcja obsługi drukarki Zebra ZQ521
+# Instrukcja obsługi drukarki Zebra ZQ511R
 
-**Mobilna drukarka paragonów i etykiet 4-calowa**
+**Mobilna drukarka paragonów i etykiet 3-calowa z funkcją RFID**
 
 ---
 
 ## 1. Podstawowe informacje
 
-### O drukarce ZQ521
+### O drukarce ZQ511R
 
-Zebra ZQ521 to wytrzymała mobilna drukarka paragonów i etykiet o szerokości druku do 104 mm (4,09"), zaprojektowana dla pracowników mobilnych w branży transportowej, logistycznej (T&L), produkcyjnej i rządowej. Wykorzystuje najnowsze technologie: dual radio 802.11ac/Bluetooth 5.2 ready*, inteligentną baterię PowerPrecision+, Near Field Communication (NFC), kolorowy wyświetlacz LCD oraz certyfikat Made for iPhone® (MFi).
+Zebra ZQ511R to wytrzymała mobilna drukarka paragonów i etykiet o szerokości druku do 72 mm (2,83") z wbudowanym koderem/czytnikiem RFID, zaprojektowana dla pracowników mobilnych w branży transportowej, logistycznej (T&L), produkcyjnej i rządowej. Wykorzystuje najnowsze technologie: dual radio 802.11ac/Bluetooth 5.2 ready*, inteligentną baterię PowerPrecision+, Near Field Communication (NFC), kolorowy wyświetlacz LCD, certyfikat Made for iPhone® (MFi) oraz możliwość kodowania tagów RFID UHF.
 
 > **Uwaga:** *Obsługuje poprawki errata dla wersji 5.2. Przyszłe aktualizacje nie będą wspierać dodatkowej funkcjonalności.
 
 ### Parametry techniczne
 
-| Parametr | ZQ521 |
-|----------|-------|
-| Szerokość druku | do 104 mm (4,09") |
+| Parametr | ZQ511R |
+|----------|--------|
+| Szerokość druku | do 72 mm (2,83") |
 | Technologia druku | Termiczny bezpośredni (Direct Thermal) |
 | Rozdzielczość | 203 dpi (poziomo) × 200 dpi (pionowo) |
 | Prędkość druku (linered) | do 127 mm/s (5"/s) przy 12% gęstości |
 | Prędkość druku (linerless) | do 76,2 mm/s (3"/s) przy 16% gęstości |
-| Maks. średnica rolki | 57 mm (2,24") |
-| Maks. szerokość materiału | 113 mm (4,45") +1 mm |
-| Min. szerokość materiału | 51 mm (2,0") |
+| Maks. średnica rolki | 51 mm (2,0") |
+| Maks. szerokość materiału | 80 mm (3,15") +1 mm |
+| Min. szerokość materiału | 35 mm (1,37") |
 | Pamięć Flash | 512 MB |
 | Pamięć RAM | 256 MB |
 | Języki programowania | CPCL, ZPL II |
+| RFID | EPC Gen 2 Class 1 UHF |
 | Klasa ochrony | IP54 (bez etui), IP65 (z twardym etui) |
 | Certyfikat wojskowy | MIL-STD 810 |
-| Waga z baterią | 0,75 kg (1,6 lbs) |
-| Wymiary (S×W×D) | 155 × 67 × 150 mm |
+| Waga z baterią | 0,61 kg (1,35 lbs) |
+| Wymiary (S×W×D) | 120 × 61 × 150 mm |
 
 ---
 
-## 2. Panel sterowania i wyświetlacz LCD
+## 2. Funkcja RFID
+
+### O technologii RFID w ZQ511R
+
+Drukarka ZQ511R jest wyposażona w koder/czytnik RFID zintegrowany z zespołem głowicy drukującej. Drukarka koduje (zapisuje) informacje na ultracienkich transponderach RFID UHF osadzonych w "inteligentnych" etykietach, biletach i tagach.
+
+### Proces druku RFID
+
+Drukarka:
+1. Koduje informacje na transponderze RFID
+2. Weryfikuje poprawność kodowania
+3. Drukuje kody kreskowe, grafikę i/lub tekst na powierzchni etykiety
+
+### Obsługiwane standardy RFID
+
+| Parametr | Wartość |
+|----------|---------|
+| Standard | EPC (Electronic Product Code) Generation 2 Class 1 |
+| Typ tagów | Pasywne tagi UHF |
+| Pamięć TID | Zawiera informacje o producencie i modelu chipa |
+| Identyfikator EPC | Zazwyczaj 96-bitowy (możliwe większe struktury danych) |
+
+### Struktura transpondera RFID
+
+Transponder RFID (zwany też tagiem lub inlay) składa się z:
+- **Anteny** – widoczna, gdy etykieta zostanie podniesiona pod światło
+- **Układu scalonego (IC)** – wyczuwalny jako wybrzuszenie na etykiecie, zawiera obwód RF, kodery, dekodery i pamięć
+
+### Obsługa błędów kodowania RFID
+
+- Kodowanie i drukowanie etykiety RFID zazwyczaj kończy się powodzeniem przy pierwszej próbie
+- W przypadku niepowodzenia kodowania, na etykiecie zostanie wydrukowany napis "VOID"
+- Drukarka próbuje odczytać/zakodować "n" etykiet przed przejściem do następnego formatu
+- Akceptowalne wartości "n": 1-10, domyślnie: 3
+- Po wydrukowaniu określonej liczby etykiet VOID, domyślna akcja to brak działania (format etykiety powodujący błąd jest porzucany)
+
+> **Uwaga:** Użytkownik nie ma kontroli nad miejscem wydruku VOID na etykiecie, ale może kontrolować długość obrazu.
+
+### Konfiguracja RFID
+
+Szczegółowe informacje o komendzie "^RS" i innych poleceniach RFID znajdują się w RFID Programming Guide 3 dostępnym na zebra.com/manuals.
+
+> **Ważne:** RFID jest opcjonalną funkcją instalowaną fabrycznie.
+
+---
+
+## 3. Panel sterowania i wyświetlacz LCD
 
 ### Przyciski sterujące
 
@@ -72,7 +119,7 @@ Zebra ZQ521 to wytrzymała mobilna drukarka paragonów i etykiet o szerokości d
 
 ---
 
-## 3. Bateria PowerPrecision+ (PP+)
+## 4. Bateria PowerPrecision+ (PP+)
 
 ### Specyfikacja baterii
 
@@ -85,7 +132,7 @@ Zebra ZQ521 to wytrzymała mobilna drukarka paragonów i etykiet o szerokości d
 | Temperatura ładowania | 0°C do +40°C |
 | Temperatura przechowywania | -25°C do +60°C |
 
-> **Ważne:** Drukarki ZQ521 działają prawidłowo wyłącznie z oryginalnymi bateriami Zebra PP+.
+> **Ważne:** Drukarki ZQ511R działają prawidłowo wyłącznie z oryginalnymi bateriami Zebra PP+.
 
 ### Instalacja baterii
 
@@ -127,7 +174,7 @@ Nowe baterie są wysyłane z taśmą izolacyjną chroniącą styki. Przed pierws
 
 ---
 
-## 4. Ładowanie baterii
+## 5. Ładowanie baterii
 
 ### Optymalne warunki ładowania
 
@@ -150,7 +197,7 @@ Uchwyt samochodowy umożliwia montaż drukarki w pojeździe z jednoczesnym łado
 
 ### Battery Eliminator / Battery Eliminator Vehicle Cradle
 
-Eliminator baterii umożliwia montaż drukarki ZQ521 w pojeździe bez użycia baterii.
+Eliminator baterii umożliwia montaż drukarki ZQ511R w pojeździe bez użycia baterii.
 
 ### 4-Bay Power Station
 
@@ -183,7 +230,7 @@ Zasilacz samochodowy do ładowania drukarki i komputerów mobilnych Zebra TC51/T
 
 ---
 
-## 5. Ładowanie materiału
+## 6. Ładowanie materiału
 
 ### Procedura ładowania
 
@@ -202,19 +249,24 @@ Zasilacz samochodowy do ładowania drukarki i komputerów mobilnych Zebra TC51/T
    - Zamknij pokrywę mediów, aż zatrzaśnie się na miejscu.
    - Materiał zostanie automatycznie wysunięty.
 
-### Specyfikacja materiałów dla ZQ521
+### Specyfikacja materiałów dla ZQ511R
 
 | Parametr | Wartość |
 |----------|---------|
-| Szerokość materiału | 51 mm (2,0") do 113 mm (4,45") +1 mm |
+| Szerokość materiału | 35 mm (1,37") do 80 mm (3,15") +1 mm |
 | Min. długość etykiety | 12,5 mm (0,5") |
 | Odległość czujnika od linii wypału | 15,87 mm ± 0,635 mm |
-| Grubość materiału | 0,053 - 0,165 mm (2,1 - 6,5 mil) |
+| Grubość materiału (linerless) | 0,053 - 0,165 mm (2,1 - 6,5 mil) |
+| Grubość materiału (linered) | 0,058 - 0,165 mm (2,3 - 6,5 mil) |
 | Maks. grubość tagów | 0,058 - 0,140 mm (2,3 - 5,5 mil) |
-| Maks. średnica rolki | 57 mm (2,24") |
+| Maks. średnica rolki | 51 mm (2,0") |
 | Średnica rdzenia | 19 mm (0,75") standard, 12,5 mm (0,5") opcja |
 
 > **Uwaga:** Do użycia rdzenia 12,5 mm wymagana jest wymiana dysków podpory mediów.
+
+### Materiały RFID
+
+Do druku i kodowania RFID należy używać certyfikowanych materiałów Zebra RFID z wbudowanymi transponderami. Pozycja transpondera musi być odpowiednio ustawiona względem głowicy drukującej/kodera.
 
 ### Wymiary czarnych znaczników (Black Mark)
 
@@ -223,7 +275,7 @@ Zasilacz samochodowy do ładowania drukarki i komputerów mobilnych Zebra TC51/T
 
 ---
 
-## 6. Komunikacja
+## 7. Komunikacja
 
 ### USB
 
@@ -280,7 +332,7 @@ Zasięg NFC: do 7,62 cm (3 cale).
 
 ---
 
-## 7. Funkcje oszczędzania energii
+## 8. Funkcje oszczędzania energii
 
 ### Tryb uśpienia (Sleep Mode)
 
@@ -311,13 +363,13 @@ Optymalizuje drukarkę do druku tekstu:
 
 ---
 
-## 8. Wyłączenie termiczne
+## 9. Wyłączenie termiczne
 
 Drukarka automatycznie zatrzymuje drukowanie, gdy temperatura głowicy osiągnie 65°C. Drukowanie wznawia się po schłodzeniu do 60°C bez utraty danych ani degradacji jakości wydruku.
 
 ---
 
-## 9. Noszenie drukarki
+## 10. Noszenie drukarki
 
 ### Klips do paska (Swivel Belt Clip)
 
@@ -343,7 +395,7 @@ Obudowa typu "muszla" zapewniająca ekstremalną wytrzymałość. Umożliwia uż
 
 ---
 
-## 10. Konserwacja
+## 11. Konserwacja
 
 ### Wydłużanie żywotności baterii
 
@@ -385,23 +437,7 @@ Delikatnie usuń kurz szczotką. Upewnij się, że okienka czujników (Black Bar
 
 ---
 
-## 11. Rozwiązywanie problemów
-
-### Wskaźniki statusu drukarki
-
-| Ikona | Status | Znaczenie |
-|-------|--------|-----------|
-| Bluetooth | Włączony | Połączenie Bluetooth aktywne |
-| | Wyszarzony | Nieaktywne |
-| | Migający | Odbieranie danych |
-| WiFi | Antena migająca | Szukanie punktu dostępowego |
-| | Antena + 1 nawias | WLAN powiązany / próba uwierzytelnienia |
-| | Antena + 2 nawiasy | WLAN powiązany i uwierzytelniony |
-| Dane | Migający | Przetwarzanie danych |
-| | Ciągły | Brak odbieranych danych |
-| Materiał | Migający | Brak materiału |
-| | Ciągły | Materiał obecny |
-| Pokrywa | Migający | Pokrywa otwarta |
+## 12. Rozwiązywanie problemów
 
 ### Typowe problemy i rozwiązania
 
@@ -424,18 +460,22 @@ Delikatnie usuń kurz szczotką. Upewnij się, że okienka czujników (Black Bar
 | Brak wydruku | Nieprawidłowy format etykiety | Użyj trybu HEX Dump do diagnozy |
 | Skrócona żywotność baterii | Bateria starsza niż 1 rok | Normalne starzenie |
 | | Zły stan zdrowia baterii | Sprawdź stan zdrowia, wymień baterię |
-| Ikona danych miga | Normalne działanie | Dane są odbierane |
-| Ikona materiału/pokrywy miga | Brak materiału lub otwarta pokrywa | Załaduj materiał, zamknij pokrywę |
-| Błąd komunikacji | Problem z kablem | Sprawdź/wymień kabel |
-| Zacięcie etykiet | Nieprawidłowe ładowanie | Otwórz pokrywę i załaduj ponownie |
-| Pusty ekran LCD | Drukarka wyłączona | Włącz drukarkę |
-| | Uszkodzona aplikacja | Przeładuj program |
-| | Tryb uśpienia | Naciśnij Power lub Select |
-| Brak połączenia NFC | Zbyt duża odległość | Zbliż smartfon do 3 cali od ikony Print Touch |
+| Błąd kodowania RFID | Uszkodzony tag RFID | Użyj nowego materiału RFID |
+| | Nieprawidłowy format etykiety | Sprawdź komendy RFID |
+| | Nieprawidłowe pozycjonowanie tagu | Sprawdź pozycję transpondera |
+| VOID na etykiecie RFID | Błąd kodowania | Sprawdź materiał RFID i format |
+
+### Rozwiązywanie problemów RFID
+
+Jeśli na etykietach RFID pojawia się napis "VOID":
+1. Sprawdź, czy materiał RFID jest certyfikowany przez Zebra
+2. Upewnij się, że transpondery są prawidłowo ustawione
+3. Sprawdź format etykiety pod kątem błędów w komendach RFID
+4. Zweryfikuj ustawienia komendy ^RS
 
 ---
 
-## 12. Drukowanie etykiety konfiguracyjnej
+## 13. Drukowanie etykiety konfiguracyjnej
 
 ### Metoda 1: Przycisk Feed przy włączaniu
 
@@ -459,7 +499,7 @@ Drukarka wydrukuje linię znaków "x" (test wszystkich elementów głowicy), wer
 
 ---
 
-## 13. Tryb diagnostyczny HEX Dump
+## 14. Tryb diagnostyczny HEX Dump
 
 ### Wejście w tryb DUMP
 
@@ -484,19 +524,28 @@ W trybie DUMP drukarka drukuje kody ASCII HEX wszystkich odbieranych danych oraz
 
 ---
 
-## 14. Specyfikacje techniczne
+## 15. Specyfikacje techniczne
 
 ### Specyfikacje druku
 
 | Parametr | Wartość |
 |----------|---------|
-| Szerokość druku | do 104 mm (4,09") |
+| Szerokość druku | do 72 mm (2,83") |
 | Prędkość druku (linered) | do 127 mm/s (5"/s) przy 12% gęstości |
 | Prędkość druku (linerless) | do 76,2 mm/s (3"/s) przy 16% gęstości |
 | Rozdzielczość | 203 dpi (8 punktów/mm) |
 | Odległość linii wypału od krawędzi odrywania (przód) | 4,8 mm ± 0,5 mm |
 | Odległość linii wypału od krawędzi odrywania (tył, linered) | 6,2 mm ± 0,5 mm |
 | Żywotność głowicy | 600 000 cali przy 18% gęstości, 20°C, materiały virgin |
+
+### Specyfikacje RFID
+
+| Parametr | Wartość |
+|----------|---------|
+| Obsługiwany standard | EPC Generation 2 Class 1 UHF |
+| Typ tagów | Pasywne |
+| Identyfikator EPC | 96-bitowy (domyślnie), większe struktury obsługiwane |
+| Pamięć TID | Informacje o producencie i modelu chipa |
 
 ### Specyfikacje pamięci i komunikacji
 
@@ -513,24 +562,25 @@ W trybie DUMP drukarka drukuje kody ASCII HEX wszystkich odbieranych danych oraz
 1. Samodzielne radio Bluetooth Classic i BLE
 2. Radio combo 802.11AC/BT/BLE
 
-### Specyfikacje materiałów dla ZQ521
+### Specyfikacje materiałów dla ZQ511R
 
 | Parametr | Wartość |
 |----------|---------|
-| Szerokość materiału | 51 mm do 113 mm +1 mm |
+| Szerokość materiału | 35 mm do 80 mm +1 mm |
 | Min. długość etykiety | 12,5 mm |
 | Odległość czujnika od linii wypału | 15,87 mm ± 0,635 mm |
-| Grubość materiału | 0,053 - 0,165 mm |
+| Grubość materiału (linerless) | 0,053 - 0,165 mm |
+| Grubość materiału (linered) | 0,058 - 0,165 mm |
 | Maks. grubość tagów | 0,058 - 0,140 mm |
-| Maks. średnica rolki | 57 mm |
+| Maks. średnica rolki | 51 mm |
 | Średnica rdzenia | 19 mm standard, 12,5 mm opcja |
 
 ### Specyfikacje fizyczne i środowiskowe
 
 | Parametr | Wartość |
 |----------|---------|
-| Waga z baterią | 0,75 kg (1,6 lbs) |
-| Wymiary (S×W×D) | 155 × 67 × 150 mm |
+| Waga z baterią | 0,61 kg (1,35 lbs) |
+| Wymiary (S×W×D) | 120 × 61 × 150 mm |
 | Otwory montażowe | 2× M4 × 8,0 mm, rozstaw 54,0 mm |
 | Temperatura pracy | -20°C do +50°C |
 | Temperatura przechowywania | -30°C do +66°C |
@@ -549,7 +599,7 @@ W trybie DUMP drukarka drukuje kody ASCII HEX wszystkich odbieranych danych oraz
 
 ---
 
-## 15. Obsługiwane kody kreskowe
+## 16. Obsługiwane kody kreskowe
 
 ### Kody liniowe (CPCL)
 
@@ -570,29 +620,6 @@ Maxi Code (^BD), QR Code (^BQ)
 ### Kąty obrotu
 
 0°, 90°, 180°, 270°
-
----
-
-## 16. Czcionki
-
-### Czcionki standardowe (CPCL)
-
-- 25 czcionek bitmapowych
-- 1 czcionka skalowalna (CG Trimvirate Bold Condensed)
-- Możliwość pobierania dodatkowych czcionek bitmapowych i skalowalnych przez Net Bridge
-
-### Czcionki standardowe (ZPL)
-
-- 15 czcionek bitmapowych
-- 1 czcionka skalowalna (CG Trimvirate Bold Condensed)
-
-### Międzynarodowe zestawy znaków
-
-- Chiński 16×16 (tradycyjny)
-- Chiński 16×16 (uproszczony)
-- Chiński 24×24 (uproszczony)
-- Japoński 16×16
-- Japoński 24×24
 
 ---
 
@@ -619,7 +646,7 @@ Maxi Code (^BD), QR Code (^BQ)
 
 ## 18. Kod QR informacji o produkcie
 
-Kod QR na drukarce zawiera URL (zebra.com/ZQ521-info), który kieruje do:
+Kod QR na drukarce zawiera URL (zebra.com/ZQ511-info), który kieruje do:
 - Zakupu materiałów eksploatacyjnych
 - Przeglądu funkcji
 - Instrukcji ładowania materiału
@@ -649,15 +676,15 @@ Adresy MAC i Bluetooth ID znajdują się na etykietach na spodzie drukarki.
 
 ## 20. Materiały eksploatacyjne
 
-### Materiały do druku
+### Materiały do druku RFID
 
-Aby zapewnić maksymalną żywotność drukarki oraz stałą jakość i wydajność druku, zaleca się używanie wyłącznie materiałów produkowanych przez Zebra.
+Do druku i kodowania RFID należy używać wyłącznie certyfikowanych materiałów Zebra RFID.
 
 Zalety materiałów Zebra:
 - Stała jakość i niezawodność
 - Szeroki zakres standardowych formatów
 - Wewnętrzna usługa projektowania formatów niestandardowych
-- Duże moce produkcyjne obsługujące wielkich i małych konsumentów
+- Certyfikowane transpondery RFID
 - Produkty spełniające lub przekraczające standardy branżowe
 
 Więcej informacji: **zebra.com/supplies**
@@ -702,7 +729,7 @@ zebra.com/contact
 
 Przy kontakcie z pomocą techniczną Zebra przygotuj następujące informacje:
 
-- **Model drukarki** (np. ZQ521)
+- **Model drukarki** (np. ZQ511R)
 - **Numer seryjny** (znajduje się na dużej etykiecie na spodzie drukarki, również na wydruku konfiguracyjnym)
 - **Kod konfiguracji produktu (PCC)** – 15-cyfrowy numer na etykiecie na spodzie urządzenia
 - **Wersja oprogramowania/firmware**
@@ -736,6 +763,10 @@ Obsługiwane typy połączeń:
 - Przewodowe/Ethernet
 - Bezprzewodowe
 - USB On-The-Go
+
+### Dokumentacja RFID
+
+- **RFID Programming Guide 3** – szczegółowe informacje o komendach RFID (dostępny na zebra.com/manuals)
 
 ---
 
