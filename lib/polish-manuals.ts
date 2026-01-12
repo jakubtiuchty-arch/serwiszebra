@@ -13430,6 +13430,878 @@ Dotknięcie ikony Print Touch umożliwia:
 `
       }
     ]
+  },
+  'zq510': {
+    model: 'ZQ510',
+    title: 'Zebra ZQ510 – Instrukcja obsługi po Polsku',
+    lastUpdated: '2026-01-12',
+    sourceDocument: 'Zebra ZQ510/ZQ520 User Guide (P1064404-004)',
+    keywords: [
+      'zebra zq510 instrukcja',
+      'zq510 instrukcja po polsku',
+      'zebra zq510 manual',
+      'drukarka mobilna zebra zq510',
+      'zebra zq510 bateria',
+      'zq510 ładowanie',
+      'zebra zq510 bluetooth',
+      'zq510 wifi',
+      'zebra zq510 nfc',
+      'zq510 parowanie',
+      'zebra zq510 materiały',
+      'zq510 rolki etykiet',
+      'zebra zq510 czyszczenie',
+      'zq510 głowica',
+      'zebra zq510 powerprecision',
+      'zq510 specyfikacja',
+      'zebra zq510 ip54',
+      'zq510 wytrzymała',
+      'zebra zq510 mfi',
+      'zq510 iphone',
+      'drukarka przenośna zebra zq510',
+      'zebra zq510 2 calowa',
+      'zq510 paragony',
+      'zebra zq510 etykiety',
+      'zq510 logistyka',
+      'zebra zq510 transport',
+      'zq510 serwis',
+      'instrukcja obsługi zebra zq510'
+    ],
+    sections: [
+      {
+        title: '1. Podstawowe informacje',
+        content: `
+### O drukarce Zebra ZQ510
+
+Zebra ZQ510 to wytrzymała mobilna drukarka paragonów i etykiet o szerokości druku do **72 mm (2,83")**, zaprojektowana dla pracowników mobilnych w branży transportowej, logistycznej, produkcyjnej i rządowej.
+
+### Parametry techniczne
+
+| Parametr | Wartość |
+|----------|---------|
+| Szerokość druku | do **72 mm** (2,83") |
+| Technologia druku | **Termiczny bezpośredni** (Direct Thermal) |
+| Rozdzielczość | **203 dpi** (poziomo) × 200 dpi (pionowo) |
+| Prędkość druku (linered) | do **127 mm/s** (5"/s) |
+| Prędkość druku (linerless) | do **76,2 mm/s** (3"/s) |
+| Maks. średnica rolki | **51 mm** (2,0") |
+| Pamięć Flash | **512 MB** |
+| Pamięć RAM | **256 MB** |
+| Języki programowania | **CPCL, ZPL II** |
+| Klasa ochrony | **IP54** |
+| Certyfikat wojskowy | **MIL-STD 810G** |
+| Waga z baterią | **0,61 kg** |
+| Wymiary (S×W×D) | 120 × 61 × 150 mm |
+
+### Kluczowe funkcje
+
+- **Dual radio** 802.11ac/Bluetooth 4.1
+- Inteligentna bateria **PowerPrecision+**
+- **Near Field Communication (NFC)** do szybkiego parowania
+- Kolorowy wyświetlacz **LCD**
+- Certyfikat **Made for iPhone® (MFi)**
+`
+      },
+      {
+        title: '2. Panel sterowania i wyświetlacz',
+        content: `
+### Przyciski sterujące
+
+| Przycisk | Funkcja |
+|----------|---------|
+| **Power** | Włączanie/wyłączanie drukarki, wybudzanie z trybu uśpienia |
+| **Feed** | Wysuw materiału o jedną etykietę lub określoną długość |
+| **Select** | Wybór opcji menu na wyświetlaczu LCD |
+
+### Ikony statusu na wyświetlaczu
+
+| Ikona | Znaczenie |
+|-------|-----------|
+| Bluetooth | Połączenie Bluetooth aktywne |
+| WiFi | Połączenie WiFi aktywne |
+| Siła sygnału | Wskaźnik siły sygnału bezprzewodowego |
+| Błąd | Wystąpił błąd wymagający uwagi |
+| Dane | Drukarka odbiera dane |
+| Materiał | Status materiału do druku |
+| Otwarta pokrywa | Pokrywa komory mediów otwarta |
+| Bateria | Stan naładowania baterii |
+| Power Save | Tryb oszczędzania energii |
+| Draft Mode | Tryb szkicowy (obniżona jakość druku) |
+
+### Wskaźnik LED (pierścień wokół przycisku Power)
+
+| Kolor LED | Status |
+|-----------|--------|
+| Zielony ciągły | Drukarka włączona, bateria naładowana |
+| Zielony migający | Tryb uśpienia |
+| Bursztynowy ciągły | Bateria się ładuje |
+| Bursztynowy migający | Tryb uśpienia + ładowanie |
+| Czerwony ciągły | Błąd baterii |
+`
+      },
+      {
+        title: '3. Bateria PowerPrecision+',
+        content: `
+### Specyfikacja baterii
+
+| Parametr | Wartość |
+|----------|---------|
+| Typ | Li-Ion 2-komórkowa lub 4-komórkowa |
+| Napięcie nominalne | **7,4 V DC** |
+| Pojemność minimalna | **2,45 Ah** |
+| Temperatura pracy | -20°C do +55°C |
+| Temperatura ładowania | 0°C do +40°C |
+| Temperatura przechowywania | -30°C do +66°C |
+
+### Instalacja baterii
+
+1. Jeśli jest zamontowany klips do paska, obróć go, aby uzyskać dostęp do komory baterii.
+2. Włóż baterię do drukarki w pokazanej orientacji (nie można włożyć baterii nieprawidłowo).
+3. Dociśnij baterię, aż zatrzaśnie się na miejscu i będzie równo osadzona.
+
+### Wyjmowanie baterii
+
+1. Obróć klips do paska (jeśli jest obecny).
+2. Naciśnij zatrzask na baterii.
+3. Obróć baterię od drukarki i wyjmij ją.
+
+> **Ważne:** Wyłącz drukarkę przed wyjęciem baterii, aby zminimalizować ryzyko uszkodzenia danych.
+
+### Stan zdrowia baterii PowerPrecision+
+
+| Liczba cykli ładowania | Stan zdrowia | Komunikat |
+|------------------------|--------------|-----------|
+| < 300 | GOOD (Dobry) | Brak |
+| ≥ 300, < 550 | REPLACE (Wymień) | "Battery Diminished Consider Replacing" |
+| ≥ 550, < 600 | REPLACE (Wymień) | "Warning-Battery Is Past Useful Life" |
+| ≥ 600 | POOR (Zły) | "Replace Battery Shutting Down" |
+`
+      },
+      {
+        title: '4. Ładowanie baterii',
+        content: `
+### Smart Charger-2 (SC2)
+**p/n P1031365-063**
+
+Czas ładowania: **2 godziny** dla wszystkich baterii.
+
+| Zasilanie DC | Wskaźnik LED | Status baterii |
+|--------------|--------------|----------------|
+| Obecne | Zielony | Bateria nieobecna lub w pełni naładowana |
+| Obecne | Żółty | Ładowanie w toku |
+| Obecne | Bursztynowy | Błąd |
+| Obecne | Wyłączony | Bateria obecna, stan zdrowia = POOR |
+
+### Ładowarka 1-Slot Battery Charger
+**p/n SAC-MPP-1BCHGUS1-01**
+
+Czas ładowania: **< 4 godziny** (bateria 2-komórkowa), **< 6 godzin** (bateria 4-komórkowa).
+
+### Ładowarka 3-Slot Battery Charger
+**p/n SAC-MPP-3BCHGUS1-01**
+
+Ładuje do 3 baterii jednocześnie.
+
+### Zasilacz AC (ładowanie przez drukarkę)
+**p/n P1031365-024**
+
+1. Otwórz osłonę gniazda DC na drukarce.
+2. Podłącz przewód AC do zasilacza, a następnie do gniazdka.
+3. Podłącz wtyczkę DC do gniazda ładowania na drukarce.
+4. Drukarka włączy się i rozpocznie ładowanie.
+
+> **Ważne:** Ładowanie podczas używania drukarki wydłuża czas ładowania.
+`
+      },
+      {
+        title: '5. Ładowanie materiału',
+        content: `
+### Procedura ładowania
+
+1. **Otwarcie drukarki:**
+   - Naciśnij przycisk Media Cover Button na boku drukarki.
+   - Pokrywa otworzy się automatycznie.
+   - Odchyl pokrywę do tyłu, odsłaniając komorę mediów.
+
+2. **Ładowanie rolki:**
+   - Rozsuń dyski podpory mediów.
+   - Włóż rolkę materiału między podpory (etykietami na zewnątrz).
+   - Dyski automatycznie dopasują się do szerokości rolki.
+   - Rolka powinna swobodnie się obracać.
+
+3. **Zamknięcie drukarki:**
+   - Zamknij pokrywę mediów, aż zatrzaśnie się na miejscu.
+   - Materiał zostanie automatycznie wysunięty.
+
+### Specyfikacja materiałów
+
+| Parametr | Wartość |
+|----------|---------|
+| Maks. szerokość materiału | **80 mm** (3,15") +1 mm |
+| Min. długość etykiety | **12,5 mm** (0,5") |
+| Grubość materiału | 0,058 - 0,165 mm |
+| Maks. grubość tagów | 0,058 - 0,140 mm |
+| Maks. średnica rolki | **51 mm** (2,0") |
+| Średnica wewnętrzna rdzenia | 19 mm standard, 12,5 mm opcja |
+`
+      },
+      {
+        title: '6. Komunikacja',
+        content: `
+### USB
+
+Drukarka wyposażona jest w port **USB Micro AB (On-The-Go)** umożliwiający:
+- Komunikację z komputerem lub urządzeniem mobilnym
+- Ładowanie drukarki (przez zasilacz AC)
+
+### Bluetooth 4.1
+
+| Parametr | Wartość |
+|----------|---------|
+| Wersja | Bluetooth 4.1 (BR/EDR + LE) |
+| Zasięg | Do **100 m** w otwartej przestrzeni |
+| Certyfikat MFi | **Tak** (Made for iPhone/iPad) |
+| Obsługiwane systemy | iOS 10+, Android, Windows |
+
+### WLAN 802.11ac (opcja)
+
+| Parametr | Wartość |
+|----------|---------|
+| Standard | 802.11 a/b/g/n/ac |
+| Częstotliwości | **2,4 GHz i 5 GHz** (dual band) |
+| Zabezpieczenia | WEP, WPA, WPA2, 802.1x |
+| Konfiguracja | Dual Radio (WiFi + Bluetooth) |
+
+### Near Field Communication (NFC)
+
+Drukarka ZQ510 obsługuje pasywny tag NFC zgodny z formatem Android Standard Tag. Funkcje NFC:
+- **Parowanie Bluetooth** - automatyczne parowanie przez zbliżenie urządzenia NFC
+- **Uruchamianie aplikacji** - automatyczne uruchomienie aplikacji Zebra na smartfonie
+- **Dostęp do strony wsparcia** - szybki dostęp do informacji o drukarce
+
+> **Uwaga:** Dotknij ikony **Zebra Print Touch™** smartfonem z NFC, aby uzyskać dostęp do informacji o drukarce.
+`
+      },
+      {
+        title: '7. Parowanie z urządzeniami',
+        content: `
+### Parowanie przez NFC (Android)
+
+1. Włącz NFC na urządzeniu mobilnym.
+2. Zbliż urządzenie do ikony Print Touch na drukarce.
+3. Urządzenie automatycznie sparuje się z drukarką.
+
+### Parowanie Bluetooth (iOS - MFi)
+
+1. Włącz Bluetooth na urządzeniu iOS.
+2. W ustawieniach Bluetooth znajdź drukarkę ZQ510.
+3. Wybierz drukarkę, aby nawiązać połączenie.
+4. Drukarka obsługuje iOS 10 i nowsze.
+
+### Parowanie Bluetooth (Android)
+
+1. Włącz Bluetooth na urządzeniu Android.
+2. Wyszukaj dostępne urządzenia Bluetooth.
+3. Wybierz drukarkę ZQ510 z listy.
+4. Potwierdź parowanie (jeśli wymagane).
+
+### Parowanie Bluetooth (Windows)
+
+1. Otwórz Ustawienia > Urządzenia > Bluetooth.
+2. Włącz Bluetooth i wyszukaj urządzenia.
+3. Wybierz drukarkę ZQ510.
+4. Zainstaluj sterownik Zebra Designer Driver (jeśli wymagany).
+
+### Narzędzia konfiguracyjne Zebra
+
+- **Zebra Setup Utilities** - konfiguracja pojedynczej drukarki
+- **ZebraNet Bridge Enterprise** - zarządzanie flotą drukarek
+- **Zebra Mobile Setup Utility** - konfiguracja przez urządzenie Android
+`
+      },
+      {
+        title: '8. Konserwacja i czyszczenie',
+        content: `
+### Harmonogram czyszczenia
+
+| Element | Częstotliwość | Metoda |
+|---------|---------------|--------|
+| Głowica drukująca | Co wymianę rolki lub przy problemach z jakością | Pisak czyszczący |
+| Wałek dociskowy | Co wymianę rolki | Pisak czyszczący |
+| Czujnik czarnych znaczników | W razie potrzeby | Sprężone powietrze, pisak |
+| Obudowa zewnętrzna | W razie potrzeby | Miękka ściereczka |
+
+### Czyszczenie głowicy drukującej
+
+1. Wyłącz drukarkę i otwórz pokrywę mediów.
+2. Wyjmij rolkę materiału.
+3. Przetrzyj głowicę pisakiem czyszczącym (p/n 105950-035).
+4. Poczekaj, aż głowica wyschnie przed zamknięciem pokrywy.
+
+### Przedłużanie żywotności baterii
+
+- Unikaj całkowitego rozładowania baterii
+- Przechowuj baterie w temperaturze pokojowej
+- Ładuj baterie przed długim przechowywaniem
+- Wymieniaj baterie o stanie zdrowia REPLACE lub POOR
+`
+      },
+      {
+        title: '9. Rozwiązywanie problemów',
+        content: `
+### Typowe problemy i rozwiązania
+
+| Problem | Możliwa przyczyna | Rozwiązanie |
+|---------|-------------------|-------------|
+| Drukarka nie włącza się | Rozładowana bateria | Naładuj lub wymień baterię |
+| | Uszkodzona bateria | Sprawdź stan zdrowia baterii |
+| Słaba jakość druku | Zabrudzona głowica | Wyczyść głowicę pisakiem |
+| | Nieodpowiedni materiał | Użyj materiałów Zebra |
+| | Zbyt niska temperatura | Ogrzej drukarkę |
+| Zacięcie materiału | Nieprawidłowe załadowanie | Załaduj materiał ponownie |
+| | Uszkodzony materiał | Użyj nowej rolki |
+| Brak połączenia Bluetooth | Bluetooth wyłączony | Włącz Bluetooth na obu urządzeniach |
+| | Zbyt duża odległość | Zbliż urządzenia |
+| | Nieprawidłowe parowanie | Usuń parowanie i sparuj ponownie |
+| Brak połączenia WiFi | Nieprawidłowe ustawienia | Sprawdź SSID i hasło |
+| | Słaby sygnał | Zbliż się do punktu dostępowego |
+
+### Wyłączenie termiczne
+
+Drukarka automatycznie zatrzymuje drukowanie, gdy temperatura głowicy osiągnie **65°C**. Drukowanie wznawia się po schłodzeniu do **60°C** bez utraty danych.
+`
+      },
+      {
+        title: '10. Drukowanie etykiety konfiguracyjnej',
+        content: `
+### Metoda 1: Kombinacja przycisków przy włączaniu
+
+1. Wyłącz drukarkę.
+2. Przytrzymaj przycisk **Feed** i naciśnij **Power**.
+3. Drukarka wydrukuje etykietę "Two Key Report".
+
+### Metoda 2: Kombinacja przycisków przy włączaniu (rozszerzona)
+
+1. Wyłącz drukarkę.
+2. Przytrzymaj przycisk **Select** i naciśnij **Power**.
+3. Drukarka wydrukuje etykietę konfiguracyjną, a następnie etykietę sieci.
+
+### Metoda 3: Kombinacja przycisków w trakcie pracy
+
+1. Przytrzymaj jednocześnie **Feed** i **Select** przez 3 sekundy.
+2. Drukarka wydrukuje etykietę konfiguracyjną Two-key i ZPL.
+
+### Wymuszony tryb pobierania (Forced Download)
+
+1. Wyłącz drukarkę.
+2. Przytrzymaj jednocześnie **Select** i **Feed**, a następnie naciśnij **Power**.
+3. Drukarka uruchomi się w trybie umożliwiającym aktualizację firmware.
+`
+      },
+      {
+        title: '11. Akcesoria',
+        content: `
+### Lista akcesoriów ZQ510
+
+| Akcesorium | Numer katalogowy |
+|------------|------------------|
+| Smart Charger-2 (SC2) | P1031365-063 |
+| Zasilacz AC | P1031365-024 |
+| Zasilacz AC Healthcare | P1065668-008 |
+| Ładowarka 1-Slot | SAC-MPP-1BCHGUS1-01 |
+| Ładowarka 3-Slot | SAC-MPP-3BCHGUS1-01 |
+| Ładowarka Dual 3-Slot | SAC-MPP-6BCHUS1-01 |
+| Quad Charger | AC18177-5 |
+| Bateria rozszerzona 4-cell | P1058672 |
+| Dyski podpory mediów 12,5mm | P1063406-025 |
+| Pasek na ramię | P1031365-034 |
+| Etui miękkie | P1031365-029 |
+| Pisak czyszczący (12 szt.) | 105950-035 |
+
+### Akcesoria do noszenia
+
+- **Obrotowy klips do paska** - standardowe wyposażenie
+- **Pasek na rękę** - pewny chwyt podczas przenoszenia
+- **Pasek na ramię** - do noszenia podczas dłuższej pracy w terenie
+- **Etui miękkie** - chroni przed uszkodzeniami mechanicznymi
+- **Egzoszkielet** - dodatkowa ochrona zewnętrzna
+- **Czytnik kart magnetycznych** - opcjonalne akcesorium
+`
+      },
+      {
+        title: '12. FAQ – Często zadawane pytania',
+        content: `
+### Jaka jest szerokość druku ZQ510?
+
+**Odpowiedź:** ZQ510 drukuje do **72 mm (2,83")** szerokości – jest to drukarka **2-calowa**.
+
+### Czy ZQ510 wymaga ribbonu?
+
+**Odpowiedź:** **Nie**, ZQ510 to drukarka **termiczna bezpośrednia (Direct Thermal)** – nie wymaga ribbonu.
+
+### Jak długo ładuje się bateria ZQ510?
+
+**Odpowiedź:** W ładowarce Smart Charger-2: **2 godziny**. W ładowarce 1-Slot: **< 4 godziny** (bateria 2-cell), **< 6 godzin** (bateria 4-cell).
+
+### Co to jest PowerPrecision+?
+
+**Odpowiedź:** **PowerPrecision+** to inteligentna bateria Li-Ion Zebra z monitorowaniem stanu w czasie rzeczywistym. Śledzi cykle ładowania, stan zdrowia i pozostałą pojemność.
+
+### Jak sparować ZQ510 z iPhone?
+
+**Odpowiedź:** ZQ510 ma certyfikat **MFi** dla iOS. Włącz Bluetooth na iPhonie, wyszukaj drukarkę, wybierz ją i potwierdź parowanie. Można też użyć **NFC Print Touch**.
+
+### Jaka jest klasa ochrony ZQ510?
+
+**Odpowiedź:** ZQ510 ma klasę ochrony **IP54** – odporność na kurz i zachlapania wodą. Ma też certyfikat **MIL-STD 810G**.
+
+### Jakie języki programowania obsługuje ZQ510?
+
+**Odpowiedź:** ZQ510 obsługuje **CPCL i ZPL II** – dwa języki programowania drukarek Zebra.
+
+### Ile waży drukarka ZQ510?
+
+**Odpowiedź:** ZQ510 waży **0,61 kg** z baterią.
+
+### Jak szybko drukuje ZQ510?
+
+**Odpowiedź:** Prędkość druku: do **127 mm/s** (5"/s) dla materiałów linered, do **76,2 mm/s** (3"/s) dla materiałów linerless.
+`
+      }
+    ]
+  },
+  'zq520': {
+    model: 'ZQ520',
+    title: 'Zebra ZQ520 – Instrukcja obsługi po Polsku',
+    lastUpdated: '2026-01-12',
+    sourceDocument: 'Zebra ZQ510/ZQ520 User Guide (P1064404-004)',
+    keywords: [
+      'zebra zq520 instrukcja',
+      'zq520 instrukcja po polsku',
+      'zebra zq520 manual',
+      'drukarka mobilna zebra zq520',
+      'zebra zq520 bateria',
+      'zq520 ładowanie',
+      'zebra zq520 bluetooth',
+      'zq520 wifi',
+      'zebra zq520 nfc',
+      'zq520 parowanie',
+      'zebra zq520 materiały',
+      'zq520 rolki etykiet',
+      'zebra zq520 czyszczenie',
+      'zq520 głowica',
+      'zebra zq520 powerprecision',
+      'zq520 specyfikacja',
+      'zebra zq520 ip54',
+      'zq520 wytrzymała',
+      'zebra zq520 mfi',
+      'zq520 iphone',
+      'drukarka przenośna zebra zq520',
+      'zebra zq520 4 calowa',
+      'zq520 paragony',
+      'zebra zq520 etykiety',
+      'zq520 logistyka',
+      'zebra zq520 transport',
+      'zq520 serwis',
+      'instrukcja obsługi zebra zq520'
+    ],
+    sections: [
+      {
+        title: '1. Podstawowe informacje',
+        content: `
+### O drukarce Zebra ZQ520
+
+Zebra ZQ520 to wytrzymała mobilna drukarka paragonów i etykiet o szerokości druku do **104 mm (4,09")**, zaprojektowana dla pracowników mobilnych w branży transportowej, logistycznej, produkcyjnej i rządowej.
+
+### Parametry techniczne
+
+| Parametr | Wartość |
+|----------|---------|
+| Szerokość druku | do **104 mm** (4,09") |
+| Technologia druku | **Termiczny bezpośredni** (Direct Thermal) |
+| Rozdzielczość | **203 dpi** (poziomo) × 200 dpi (pionowo) |
+| Prędkość druku (linered) | do **127 mm/s** (5"/s) |
+| Prędkość druku (linerless) | do **76,2 mm/s** (3"/s) |
+| Maks. średnica rolki | **57 mm** (2,24") |
+| Pamięć Flash | **512 MB** |
+| Pamięć RAM | **256 MB** |
+| Języki programowania | **CPCL, ZPL II** |
+| Klasa ochrony | **IP54** |
+| Certyfikat wojskowy | **MIL-STD 810G** |
+| Waga z baterią | **0,75 kg** |
+| Wymiary (S×W×D) | 155 × 67 × 150 mm |
+
+### Kluczowe funkcje
+
+- **Dual radio** 802.11ac/Bluetooth 4.1
+- Inteligentna bateria **PowerPrecision+**
+- **Near Field Communication (NFC)** do szybkiego parowania
+- Kolorowy wyświetlacz **LCD**
+- Certyfikat **Made for iPhone® (MFi)**
+`
+      },
+      {
+        title: '2. Panel sterowania i wyświetlacz',
+        content: `
+### Przyciski sterujące
+
+| Przycisk | Funkcja |
+|----------|---------|
+| **Power** | Włączanie/wyłączanie drukarki, wybudzanie z trybu uśpienia |
+| **Feed** | Wysuw materiału o jedną etykietę lub określoną długość |
+| **Select** | Wybór opcji menu na wyświetlaczu LCD |
+
+### Ikony statusu na wyświetlaczu
+
+| Ikona | Znaczenie |
+|-------|-----------|
+| Bluetooth | Połączenie Bluetooth aktywne |
+| WiFi | Połączenie WiFi aktywne |
+| Siła sygnału | Wskaźnik siły sygnału bezprzewodowego |
+| Błąd | Wystąpił błąd wymagający uwagi |
+| Dane | Drukarka odbiera dane |
+| Materiał | Status materiału do druku |
+| Otwarta pokrywa | Pokrywa komory mediów otwarta |
+| Bateria | Stan naładowania baterii |
+| Power Save | Tryb oszczędzania energii |
+| Draft Mode | Tryb szkicowy (obniżona jakość druku) |
+
+### Wskaźnik LED (pierścień wokół przycisku Power)
+
+| Kolor LED | Status |
+|-----------|--------|
+| Zielony ciągły | Drukarka włączona, bateria naładowana |
+| Zielony migający | Tryb uśpienia |
+| Bursztynowy ciągły | Bateria się ładuje |
+| Bursztynowy migający | Tryb uśpienia + ładowanie |
+| Czerwony ciągły | Błąd baterii |
+`
+      },
+      {
+        title: '3. Bateria PowerPrecision+',
+        content: `
+### Specyfikacja baterii
+
+| Parametr | Wartość |
+|----------|---------|
+| Typ | Li-Ion 2-komórkowa lub 4-komórkowa |
+| Napięcie nominalne | **7,4 V DC** |
+| Pojemność minimalna | **2,45 Ah** |
+| Temperatura pracy | -20°C do +55°C |
+| Temperatura ładowania | 0°C do +40°C |
+| Temperatura przechowywania | -30°C do +66°C |
+
+### Instalacja baterii
+
+1. Jeśli jest zamontowany klips do paska, obróć go, aby uzyskać dostęp do komory baterii.
+2. Włóż baterię do drukarki w pokazanej orientacji (nie można włożyć baterii nieprawidłowo).
+3. Dociśnij baterię, aż zatrzaśnie się na miejscu i będzie równo osadzona.
+
+### Stan zdrowia baterii PowerPrecision+
+
+| Liczba cykli ładowania | Stan zdrowia | Komunikat |
+|------------------------|--------------|-----------|
+| < 300 | GOOD (Dobry) | Brak |
+| ≥ 300, < 550 | REPLACE (Wymień) | "Battery Diminished Consider Replacing" |
+| ≥ 550, < 600 | REPLACE (Wymień) | "Warning-Battery Is Past Useful Life" |
+| ≥ 600 | POOR (Zły) | "Replace Battery Shutting Down" |
+
+> **Ważne:** Wyłącz drukarkę przed wyjęciem baterii, aby zminimalizować ryzyko uszkodzenia danych.
+`
+      },
+      {
+        title: '4. Ładowanie baterii',
+        content: `
+### Smart Charger-2 (SC2)
+**p/n P1031365-063**
+
+Czas ładowania: **2 godziny** dla wszystkich baterii.
+
+| Zasilanie DC | Wskaźnik LED | Status baterii |
+|--------------|--------------|----------------|
+| Obecne | Zielony | Bateria nieobecna lub w pełni naładowana |
+| Obecne | Żółty | Ładowanie w toku |
+| Obecne | Bursztynowy | Błąd |
+| Obecne | Wyłączony | Bateria obecna, stan zdrowia = POOR |
+
+### Ładowarka 1-Slot Battery Charger
+**p/n SAC-MPP-1BCHGUS1-01**
+
+Czas ładowania: **< 4 godziny** (bateria 2-komórkowa), **< 6 godzin** (bateria 4-komórkowa).
+
+### Ładowarka 3-Slot Battery Charger
+**p/n SAC-MPP-3BCHGUS1-01**
+
+Ładuje do 3 baterii jednocześnie.
+
+### Zasilacz AC (ładowanie przez drukarkę)
+**p/n P1031365-024**
+
+1. Otwórz osłonę gniazda DC na drukarce.
+2. Podłącz przewód AC do zasilacza, a następnie do gniazdka.
+3. Podłącz wtyczkę DC do gniazda ładowania na drukarce.
+4. Drukarka włączy się i rozpocznie ładowanie.
+`
+      },
+      {
+        title: '5. Ładowanie materiału',
+        content: `
+### Procedura ładowania
+
+1. **Otwarcie drukarki:**
+   - Naciśnij przycisk Media Cover Button na boku drukarki.
+   - Pokrywa otworzy się automatycznie.
+   - Odchyl pokrywę do tyłu, odsłaniając komorę mediów.
+
+2. **Ładowanie rolki:**
+   - Rozsuń dyski podpory mediów.
+   - Włóż rolkę materiału między podpory (etykietami na zewnątrz).
+   - Dyski automatycznie dopasują się do szerokości rolki.
+   - Rolka powinna swobodnie się obracać.
+
+3. **Zamknięcie drukarki:**
+   - Zamknij pokrywę mediów, aż zatrzaśnie się na miejscu.
+   - Materiał zostanie automatycznie wysunięty.
+
+### Specyfikacja materiałów
+
+| Parametr | Wartość |
+|----------|---------|
+| Maks. szerokość materiału | **113 mm** (4,45") +1 mm |
+| Min. długość etykiety | **12,5 mm** (0,5") |
+| Grubość materiału | 0,058 - 0,165 mm |
+| Maks. grubość tagów | 0,058 - 0,140 mm |
+| Maks. średnica rolki | **57 mm** (2,24") |
+| Średnica wewnętrzna rdzenia | 19 mm standard, 12,5 mm opcja |
+`
+      },
+      {
+        title: '6. Komunikacja',
+        content: `
+### USB
+
+Drukarka wyposażona jest w port **USB Micro AB (On-The-Go)** umożliwiający:
+- Komunikację z komputerem lub urządzeniem mobilnym
+- Ładowanie drukarki (przez zasilacz AC)
+
+### Bluetooth 4.1
+
+| Parametr | Wartość |
+|----------|---------|
+| Wersja | Bluetooth 4.1 (BR/EDR + LE) |
+| Zasięg | Do **100 m** w otwartej przestrzeni |
+| Certyfikat MFi | **Tak** (Made for iPhone/iPad) |
+| Obsługiwane systemy | iOS 10+, Android, Windows |
+
+### WLAN 802.11ac (opcja)
+
+| Parametr | Wartość |
+|----------|---------|
+| Standard | 802.11 a/b/g/n/ac |
+| Częstotliwości | **2,4 GHz i 5 GHz** (dual band) |
+| Zabezpieczenia | WEP, WPA, WPA2, 802.1x |
+| Konfiguracja | Dual Radio (WiFi + Bluetooth) |
+
+### Near Field Communication (NFC)
+
+Drukarka ZQ520 obsługuje pasywny tag NFC. Funkcje NFC:
+- **Parowanie Bluetooth** - automatyczne parowanie przez zbliżenie urządzenia NFC
+- **Uruchamianie aplikacji** - automatyczne uruchomienie aplikacji Zebra na smartfonie
+- **Dostęp do strony wsparcia** - szybki dostęp do informacji o drukarce
+
+> **Uwaga:** Dotknij ikony **Zebra Print Touch™** smartfonem z NFC, aby uzyskać dostęp do informacji o drukarce.
+`
+      },
+      {
+        title: '7. Parowanie z urządzeniami',
+        content: `
+### Parowanie przez NFC (Android)
+
+1. Włącz NFC na urządzeniu mobilnym.
+2. Zbliż urządzenie do ikony Print Touch na drukarce.
+3. Urządzenie automatycznie sparuje się z drukarką.
+
+### Parowanie Bluetooth (iOS - MFi)
+
+1. Włącz Bluetooth na urządzeniu iOS.
+2. W ustawieniach Bluetooth znajdź drukarkę ZQ520.
+3. Wybierz drukarkę, aby nawiązać połączenie.
+4. Drukarka obsługuje iOS 10 i nowsze.
+
+### Parowanie Bluetooth (Android)
+
+1. Włącz Bluetooth na urządzeniu Android.
+2. Wyszukaj dostępne urządzenia Bluetooth.
+3. Wybierz drukarkę ZQ520 z listy.
+4. Potwierdź parowanie (jeśli wymagane).
+
+### Parowanie Bluetooth (Windows)
+
+1. Otwórz Ustawienia > Urządzenia > Bluetooth.
+2. Włącz Bluetooth i wyszukaj urządzenia.
+3. Wybierz drukarkę ZQ520.
+4. Zainstaluj sterownik Zebra Designer Driver (jeśli wymagany).
+
+### Narzędzia konfiguracyjne Zebra
+
+- **Zebra Setup Utilities** - konfiguracja pojedynczej drukarki
+- **ZebraNet Bridge Enterprise** - zarządzanie flotą drukarek
+- **Zebra Mobile Setup Utility** - konfiguracja przez urządzenie Android
+`
+      },
+      {
+        title: '8. Konserwacja i czyszczenie',
+        content: `
+### Harmonogram czyszczenia
+
+| Element | Częstotliwość | Metoda |
+|---------|---------------|--------|
+| Głowica drukująca | Co wymianę rolki lub przy problemach z jakością | Pisak czyszczący |
+| Wałek dociskowy | Co wymianę rolki | Pisak czyszczący |
+| Czujnik czarnych znaczników | W razie potrzeby | Sprężone powietrze, pisak |
+| Obudowa zewnętrzna | W razie potrzeby | Miękka ściereczka |
+
+### Czyszczenie głowicy drukującej
+
+1. Wyłącz drukarkę i otwórz pokrywę mediów.
+2. Wyjmij rolkę materiału.
+3. Przetrzyj głowicę pisakiem czyszczącym (p/n 105950-035).
+4. Poczekaj, aż głowica wyschnie przed zamknięciem pokrywy.
+
+### Przedłużanie żywotności baterii
+
+- Unikaj całkowitego rozładowania baterii
+- Przechowuj baterie w temperaturze pokojowej
+- Ładuj baterie przed długim przechowywaniem
+- Wymieniaj baterie o stanie zdrowia REPLACE lub POOR
+`
+      },
+      {
+        title: '9. Rozwiązywanie problemów',
+        content: `
+### Typowe problemy i rozwiązania
+
+| Problem | Możliwa przyczyna | Rozwiązanie |
+|---------|-------------------|-------------|
+| Drukarka nie włącza się | Rozładowana bateria | Naładuj lub wymień baterię |
+| | Uszkodzona bateria | Sprawdź stan zdrowia baterii |
+| Słaba jakość druku | Zabrudzona głowica | Wyczyść głowicę pisakiem |
+| | Nieodpowiedni materiał | Użyj materiałów Zebra |
+| | Zbyt niska temperatura | Ogrzej drukarkę |
+| Zacięcie materiału | Nieprawidłowe załadowanie | Załaduj materiał ponownie |
+| | Uszkodzony materiał | Użyj nowej rolki |
+| Brak połączenia Bluetooth | Bluetooth wyłączony | Włącz Bluetooth na obu urządzeniach |
+| | Zbyt duża odległość | Zbliż urządzenia |
+| | Nieprawidłowe parowanie | Usuń parowanie i sparuj ponownie |
+| Brak połączenia WiFi | Nieprawidłowe ustawienia | Sprawdź SSID i hasło |
+| | Słaby sygnał | Zbliż się do punktu dostępowego |
+
+### Wyłączenie termiczne
+
+Drukarka automatycznie zatrzymuje drukowanie, gdy temperatura głowicy osiągnie **65°C**. Drukowanie wznawia się po schłodzeniu do **60°C** bez utraty danych.
+`
+      },
+      {
+        title: '10. Drukowanie etykiety konfiguracyjnej',
+        content: `
+### Metoda 1: Kombinacja przycisków przy włączaniu
+
+1. Wyłącz drukarkę.
+2. Przytrzymaj przycisk **Feed** i naciśnij **Power**.
+3. Drukarka wydrukuje etykietę "Two Key Report".
+
+### Metoda 2: Kombinacja przycisków przy włączaniu (rozszerzona)
+
+1. Wyłącz drukarkę.
+2. Przytrzymaj przycisk **Select** i naciśnij **Power**.
+3. Drukarka wydrukuje etykietę konfiguracyjną, a następnie etykietę sieci.
+
+### Metoda 3: Kombinacja przycisków w trakcie pracy
+
+1. Przytrzymaj jednocześnie **Feed** i **Select** przez 3 sekundy.
+2. Drukarka wydrukuje etykietę konfiguracyjną Two-key i ZPL.
+
+### Wymuszony tryb pobierania (Forced Download)
+
+1. Wyłącz drukarkę.
+2. Przytrzymaj jednocześnie **Select** i **Feed**, a następnie naciśnij **Power**.
+3. Drukarka uruchomi się w trybie umożliwiającym aktualizację firmware.
+`
+      },
+      {
+        title: '11. Akcesoria',
+        content: `
+### Lista akcesoriów ZQ520
+
+| Akcesorium | Numer katalogowy |
+|------------|------------------|
+| Smart Charger-2 (SC2) | P1031365-063 |
+| Zasilacz AC | P1031365-024 |
+| Zasilacz AC Healthcare | P1065668-008 |
+| Ładowarka 1-Slot | SAC-MPP-1BCHGUS1-01 |
+| Ładowarka 3-Slot | SAC-MPP-3BCHGUS1-01 |
+| Ładowarka Dual 3-Slot | SAC-MPP-6BCHUS1-01 |
+| Quad Charger | AC18177-5 |
+| Bateria rozszerzona 4-cell | P1058672 |
+| Dyski podpory mediów 12,5mm | P1063406-025 |
+| Pasek na ramię | P1031365-034 |
+| Etui miękkie | P1031365-029 |
+| Pisak czyszczący (12 szt.) | 105950-035 |
+
+### Akcesoria do noszenia
+
+- **Obrotowy klips do paska** - standardowe wyposażenie
+- **Pasek na rękę** - pewny chwyt podczas przenoszenia
+- **Pasek na ramię** - do noszenia podczas dłuższej pracy w terenie
+- **Etui miękkie** - chroni przed uszkodzeniami mechanicznymi
+- **Egzoszkielet** - dodatkowa ochrona zewnętrzna
+- **Czytnik kart magnetycznych** - opcjonalne akcesorium
+`
+      },
+      {
+        title: '12. FAQ – Często zadawane pytania',
+        content: `
+### Jaka jest szerokość druku ZQ520?
+
+**Odpowiedź:** ZQ520 drukuje do **104 mm (4,09")** szerokości – jest to drukarka **4-calowa**.
+
+### Czy ZQ520 wymaga ribbonu?
+
+**Odpowiedź:** **Nie**, ZQ520 to drukarka **termiczna bezpośrednia (Direct Thermal)** – nie wymaga ribbonu.
+
+### Jak długo ładuje się bateria ZQ520?
+
+**Odpowiedź:** W ładowarce Smart Charger-2: **2 godziny**. W ładowarce 1-Slot: **< 4 godziny** (bateria 2-cell), **< 6 godzin** (bateria 4-cell).
+
+### Co to jest PowerPrecision+?
+
+**Odpowiedź:** **PowerPrecision+** to inteligentna bateria Li-Ion Zebra z monitorowaniem stanu w czasie rzeczywistym. Śledzi cykle ładowania, stan zdrowia i pozostałą pojemność.
+
+### Jak sparować ZQ520 z iPhone?
+
+**Odpowiedź:** ZQ520 ma certyfikat **MFi** dla iOS. Włącz Bluetooth na iPhonie, wyszukaj drukarkę, wybierz ją i potwierdź parowanie. Można też użyć **NFC Print Touch**.
+
+### Jaka jest klasa ochrony ZQ520?
+
+**Odpowiedź:** ZQ520 ma klasę ochrony **IP54** – odporność na kurz i zachlapania wodą. Ma też certyfikat **MIL-STD 810G**.
+
+### Jakie języki programowania obsługuje ZQ520?
+
+**Odpowiedź:** ZQ520 obsługuje **CPCL i ZPL II** – dwa języki programowania drukarek Zebra.
+
+### Ile waży drukarka ZQ520?
+
+**Odpowiedź:** ZQ520 waży **0,75 kg** z baterią.
+
+### Jak szybko drukuje ZQ520?
+
+**Odpowiedź:** Prędkość druku: do **127 mm/s** (5"/s) dla materiałów linered, do **76,2 mm/s** (3"/s) dla materiałów linerless.
+
+### Jaka jest różnica między ZQ510 a ZQ520?
+
+**Odpowiedź:** Główna różnica to szerokość druku: **ZQ510** drukuje do **72 mm** (2,83"), natomiast **ZQ520** drukuje do **104 mm** (4,09"). ZQ520 jest też nieco większy i cięższy.
+`
+      }
+    ]
   }
 }
 
