@@ -1,45 +1,45 @@
-# Instrukcja obsługi drukarki Zebra ZQ511R
+# Instrukcja obsługi drukarki Zebra ZQ521R
 
-**Mobilna drukarka paragonów i etykiet 3-calowa z funkcją RFID**
+**Mobilna drukarka paragonów i etykiet 4-calowa z funkcją RFID**
 
 ---
 
 ## 1. Podstawowe informacje
 
-### O drukarce ZQ511R
+### O drukarce ZQ521R
 
-Zebra ZQ511R to wytrzymała mobilna drukarka paragonów i etykiet o szerokości druku do 72 mm (2,83") z wbudowanym koderem/czytnikiem RFID, zaprojektowana dla pracowników mobilnych w branży transportowej, logistycznej (T&L), produkcyjnej i rządowej. Wykorzystuje najnowsze technologie: dual radio 802.11ac/Bluetooth 5.2 ready*, inteligentną baterię PowerPrecision+, Near Field Communication (NFC), kolorowy wyświetlacz LCD, certyfikat Made for iPhone® (MFi) oraz możliwość kodowania tagów RFID UHF.
+Zebra ZQ521R to wytrzymała mobilna drukarka paragonów i etykiet o szerokości druku do 104 mm (4,09") z wbudowanym koderem/czytnikiem RFID, zaprojektowana dla pracowników mobilnych w branży transportowej, logistycznej (T&L), produkcyjnej i rządowej. Wykorzystuje najnowsze technologie: dual radio 802.11ac/Bluetooth 5.2 ready*, inteligentną baterię PowerPrecision+, Near Field Communication (NFC), kolorowy wyświetlacz LCD, certyfikat Made for iPhone® (MFi) oraz możliwość kodowania tagów RFID UHF.
 
 > **Uwaga:** *Obsługuje poprawki errata dla wersji 5.2. Przyszłe aktualizacje nie będą wspierać dodatkowej funkcjonalności.
 
 ### Parametry techniczne
 
-| Parametr | ZQ511R |
+| Parametr | ZQ521R |
 |----------|--------|
-| Szerokość druku | do 72 mm (2,83") |
+| Szerokość druku | do 104 mm (4,09") |
 | Technologia druku | Termiczny bezpośredni (Direct Thermal) |
 | Rozdzielczość | 203 dpi (poziomo) × 200 dpi (pionowo) |
 | Prędkość druku (linered) | do 127 mm/s (5"/s) przy 12% gęstości |
 | Prędkość druku (linerless) | do 76,2 mm/s (3"/s) przy 16% gęstości |
-| Maks. średnica rolki | 51 mm (2,0") |
-| Maks. szerokość materiału | 80 mm (3,15") +1 mm |
-| Min. szerokość materiału | 35 mm (1,37") |
+| Maks. średnica rolki | 57 mm (2,24") |
+| Maks. szerokość materiału | 113 mm (4,45") +1 mm |
+| Min. szerokość materiału | 51 mm (2,0") |
 | Pamięć Flash | 512 MB |
 | Pamięć RAM | 256 MB |
 | Języki programowania | CPCL, ZPL II |
 | RFID | EPC Gen 2 Class 1 UHF |
 | Klasa ochrony | IP54 (bez etui), IP65 (z twardym etui) |
 | Certyfikat wojskowy | MIL-STD 810 |
-| Waga z baterią | 0,61 kg (1,35 lbs) |
-| Wymiary (S×W×D) | 120 × 61 × 150 mm |
+| Waga z baterią | 0,75 kg (1,6 lbs) |
+| Wymiary (S×W×D) | 155 × 67 × 150 mm |
 
 ---
 
 ## 2. Funkcja RFID
 
-### O technologii RFID w ZQ511R
+### O technologii RFID w ZQ521R
 
-Drukarka ZQ511R jest wyposażona w koder/czytnik RFID zintegrowany z zespołem głowicy drukującej. Drukarka koduje (zapisuje) informacje na ultracienkich transponderach RFID UHF osadzonych w "inteligentnych" etykietach, biletach i tagach.
+Drukarka ZQ521R jest wyposażona w koder/czytnik RFID zintegrowany z zespołem głowicy drukującej. Drukarka koduje (zapisuje) informacje na ultracienkich transponderach RFID UHF osadzonych w "inteligentnych" etykietach, biletach i tagach.
 
 ### Proces druku RFID
 
@@ -132,7 +132,7 @@ Szczegółowe informacje o komendzie "^RS" i innych poleceniach RFID znajdują s
 | Temperatura ładowania | 0°C do +40°C |
 | Temperatura przechowywania | -25°C do +60°C |
 
-> **Ważne:** Drukarki ZQ511R działają prawidłowo wyłącznie z oryginalnymi bateriami Zebra PP+.
+> **Ważne:** Drukarki ZQ521R działają prawidłowo wyłącznie z oryginalnymi bateriami Zebra PP+.
 
 ### Instalacja baterii
 
@@ -197,7 +197,7 @@ Uchwyt samochodowy umożliwia montaż drukarki w pojeździe z jednoczesnym łado
 
 ### Battery Eliminator / Battery Eliminator Vehicle Cradle
 
-Eliminator baterii umożliwia montaż drukarki ZQ511R w pojeździe bez użycia baterii.
+Eliminator baterii umożliwia montaż drukarki ZQ521R w pojeździe bez użycia baterii.
 
 ### 4-Bay Power Station
 
@@ -249,17 +249,16 @@ Zasilacz samochodowy do ładowania drukarki i komputerów mobilnych Zebra TC51/T
    - Zamknij pokrywę mediów, aż zatrzaśnie się na miejscu.
    - Materiał zostanie automatycznie wysunięty.
 
-### Specyfikacja materiałów dla ZQ511R
+### Specyfikacja materiałów dla ZQ521R
 
 | Parametr | Wartość |
 |----------|---------|
-| Szerokość materiału | 35 mm (1,37") do 80 mm (3,15") +1 mm |
+| Szerokość materiału | 51 mm (2,0") do 113 mm (4,45") +1 mm |
 | Min. długość etykiety | 12,5 mm (0,5") |
 | Odległość czujnika od linii wypału | 15,87 mm ± 0,635 mm |
-| Grubość materiału (linerless) | 0,053 - 0,165 mm (2,1 - 6,5 mil) |
-| Grubość materiału (linered) | 0,058 - 0,165 mm (2,3 - 6,5 mil) |
+| Grubość materiału | 0,053 - 0,165 mm (2,1 - 6,5 mil) |
 | Maks. grubość tagów | 0,058 - 0,140 mm (2,3 - 5,5 mil) |
-| Maks. średnica rolki | 51 mm (2,0") |
+| Maks. średnica rolki | 57 mm (2,24") |
 | Średnica rdzenia | 19 mm (0,75") standard, 12,5 mm (0,5") opcja |
 
 > **Uwaga:** Do użycia rdzenia 12,5 mm wymagana jest wymiana dysków podpory mediów.
@@ -530,7 +529,7 @@ W trybie DUMP drukarka drukuje kody ASCII HEX wszystkich odbieranych danych oraz
 
 | Parametr | Wartość |
 |----------|---------|
-| Szerokość druku | do 72 mm (2,83") |
+| Szerokość druku | do 104 mm (4,09") |
 | Prędkość druku (linered) | do 127 mm/s (5"/s) przy 12% gęstości |
 | Prędkość druku (linerless) | do 76,2 mm/s (3"/s) przy 16% gęstości |
 | Rozdzielczość | 203 dpi (8 punktów/mm) |
@@ -562,25 +561,24 @@ W trybie DUMP drukarka drukuje kody ASCII HEX wszystkich odbieranych danych oraz
 1. Samodzielne radio Bluetooth Classic i BLE
 2. Radio combo 802.11AC/BT/BLE
 
-### Specyfikacje materiałów dla ZQ511R
+### Specyfikacje materiałów dla ZQ521R
 
 | Parametr | Wartość |
 |----------|---------|
-| Szerokość materiału | 35 mm do 80 mm +1 mm |
+| Szerokość materiału | 51 mm do 113 mm +1 mm |
 | Min. długość etykiety | 12,5 mm |
 | Odległość czujnika od linii wypału | 15,87 mm ± 0,635 mm |
-| Grubość materiału (linerless) | 0,053 - 0,165 mm |
-| Grubość materiału (linered) | 0,058 - 0,165 mm |
+| Grubość materiału | 0,053 - 0,165 mm |
 | Maks. grubość tagów | 0,058 - 0,140 mm |
-| Maks. średnica rolki | 51 mm |
+| Maks. średnica rolki | 57 mm |
 | Średnica rdzenia | 19 mm standard, 12,5 mm opcja |
 
 ### Specyfikacje fizyczne i środowiskowe
 
 | Parametr | Wartość |
 |----------|---------|
-| Waga z baterią | 0,61 kg (1,35 lbs) |
-| Wymiary (S×W×D) | 120 × 61 × 150 mm |
+| Waga z baterią | 0,75 kg (1,6 lbs) |
+| Wymiary (S×W×D) | 155 × 67 × 150 mm |
 | Otwory montażowe | 2× M4 × 8,0 mm, rozstaw 54,0 mm |
 | Temperatura pracy | -20°C do +50°C |
 | Temperatura przechowywania | -30°C do +66°C |
@@ -646,7 +644,7 @@ Maxi Code (^BD), QR Code (^BQ)
 
 ## 18. Kod QR informacji o produkcie
 
-Kod QR na drukarce zawiera URL (zebra.com/ZQ511-info), który kieruje do:
+Kod QR na drukarce zawiera URL (zebra.com/ZQ521-info), który kieruje do:
 - Zakupu materiałów eksploatacyjnych
 - Przeglądu funkcji
 - Instrukcji ładowania materiału
@@ -729,7 +727,7 @@ zebra.com/contact
 
 Przy kontakcie z pomocą techniczną Zebra przygotuj następujące informacje:
 
-- **Model drukarki** (np. ZQ511R)
+- **Model drukarki** (np. ZQ521R)
 - **Numer seryjny** (znajduje się na dużej etykiecie na spodzie drukarki, również na wydruku konfiguracyjnym)
 - **Kod konfiguracji produktu (PCC)** – 15-cyfrowy numer na etykiecie na spodzie urządzenia
 - **Wersja oprogramowania/firmware**
