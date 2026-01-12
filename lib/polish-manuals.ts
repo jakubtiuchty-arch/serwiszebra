@@ -14302,6 +14302,541 @@ Drukarka automatycznie zatrzymuje drukowanie, gdy temperatura głowicy osiągnie
 `
       }
     ]
+  },
+  'zq511': {
+    model: 'ZQ511',
+    title: 'Zebra ZQ511 – Instrukcja obsługi po Polsku',
+    lastUpdated: '2026-01-12',
+    sourceDocument: 'Zebra ZQ511/ZQ521 User Guide (P1106523-07EN)',
+    keywords: [
+      'zebra zq511 instrukcja',
+      'zq511 instrukcja po polsku',
+      'zebra zq511 manual',
+      'drukarka mobilna zebra zq511',
+      'zebra zq511 bateria',
+      'zq511 ładowanie',
+      'zebra zq511 bluetooth 5.2',
+      'zq511 wifi',
+      'zebra zq511 nfc',
+      'zq511 parowanie',
+      'zebra zq511 materiały',
+      'zq511 rolki etykiet',
+      'zebra zq511 czyszczenie',
+      'zq511 głowica',
+      'zebra zq511 powerprecision',
+      'zq511 specyfikacja',
+      'zebra zq511 ip54',
+      'zebra zq511 ip65',
+      'zq511 wytrzymała',
+      'zebra zq511 mfi',
+      'zq511 iphone',
+      'drukarka przenośna zebra zq511',
+      'zebra zq511 3 calowa',
+      'zq511 paragony',
+      'zebra zq511 etykiety',
+      'zq511 logistyka',
+      'zebra zq511 transport',
+      'zq511 linerless',
+      'zq511 serwis',
+      'instrukcja obsługi zebra zq511'
+    ],
+    sections: [
+      {
+        title: '1. Podstawowe informacje',
+        content: `
+### O drukarce Zebra ZQ511
+
+Zebra ZQ511 to wytrzymała mobilna drukarka paragonów i etykiet o szerokości druku do **72 mm (2,83")**, zaprojektowana dla pracowników mobilnych w branży transportowej, logistycznej, produkcyjnej i rządowej.
+
+### Parametry techniczne
+
+| Parametr | Wartość |
+|----------|---------|
+| Szerokość druku | do **72 mm** (2,83") |
+| Technologia druku | **Termiczny bezpośredni** (Direct Thermal) |
+| Rozdzielczość | **203 dpi** (poziomo) × 200 dpi (pionowo) |
+| Prędkość druku (linered) | do **127 mm/s** (5"/s) |
+| Prędkość druku (linerless) | do **76,2 mm/s** (3"/s) |
+| Maks. średnica rolki | **51 mm** (2,0") |
+| Maks. szerokość materiału | **80 mm** (3,15") +1 mm |
+| Min. szerokość materiału | **35 mm** (1,37") |
+| Pamięć Flash | **512 MB** |
+| Pamięć RAM | **256 MB** |
+| Języki programowania | **CPCL, ZPL II** |
+| Klasa ochrony | **IP54** (bez etui), **IP65** (z twardym etui) |
+| Certyfikat wojskowy | **MIL-STD 810** |
+| Waga z baterią | **0,61 kg** |
+| Wymiary (S×W×D) | 120 × 61 × 150 mm |
+
+### Kluczowe funkcje (nowości vs ZQ510)
+
+- **Bluetooth 5.2 ready** (BR/EDR + LE)
+- **Dual radio** 802.11ac/Bluetooth 5.2
+- Inteligentna bateria **PowerPrecision+**
+- **Near Field Communication (NFC)** do szybkiego parowania
+- Kolorowy wyświetlacz **LCD**
+- Certyfikat **Made for iPhone® (MFi)**
+- **Exoskeleton** z ochroną **IP65**
+`
+      },
+      {
+        title: '2. Panel sterowania i wyświetlacz',
+        content: `
+### Przyciski sterujące
+
+| Przycisk | Funkcja |
+|----------|---------|
+| **Power** | Włączanie/wyłączanie drukarki, wybudzanie z trybu uśpienia |
+| **Feed** | Wysuw materiału o jedną etykietę lub określoną długość |
+| **Select** | Wybór opcji menu na wyświetlaczu LCD |
+
+### Ikony statusu na wyświetlaczu
+
+| Ikona | Znaczenie |
+|-------|-----------|
+| Bluetooth | Połączenie Bluetooth aktywne |
+| WiFi | Połączenie WiFi aktywne |
+| Siła sygnału WiFi | 4 paski = >75%, 3 paski = ≤75%, 2 paski = ≤50% >25%, 1 pasek = ≤25%, 0 pasków = brak sieci |
+| Błąd | Wystąpił błąd wymagający uwagi |
+| Dane | Drukarka odbiera dane (migający = przetwarzanie) |
+| Materiał | Status materiału do druku (migający = brak materiału) |
+| Otwarta pokrywa | Pokrywa komory mediów otwarta (migający) |
+| Bateria | 4 paski = >80%, 3 paski = 60-80%, 2 paski = 40-60%, 1 pasek = 20-40%, 0 pasków = niski poziom |
+| Battery Eliminator (DC) | Zasilanie zewnętrzne (bez baterii) |
+| Power Save | Tryb oszczędzania energii |
+| Draft Mode | Tryb szkicowy (obniżona jakość, zwiększona prędkość do 5 ips) |
+
+### Wskaźnik LED (pierścień wokół przycisku Power)
+
+| Kolor LED | Status |
+|-----------|--------|
+| Zielony ciągły | Drukarka włączona, bateria naładowana |
+| Zielony migający | Tryb uśpienia |
+| Bursztynowy ciągły | Bateria się ładuje |
+| Bursztynowy migający | Tryb uśpienia + ładowanie |
+| Czerwony ciągły | Błąd baterii |
+`
+      },
+      {
+        title: '3. Bateria PowerPrecision+',
+        content: `
+### Specyfikacja baterii
+
+| Parametr | Wartość |
+|----------|---------|
+| Typ | Li-Ion 2-komórkowa lub 4-komórkowa (rozszerzona) |
+| Napięcie nominalne | **7,4 V DC** |
+| Pojemność minimalna | **2,45 Ah** |
+| Temperatura pracy | -20°C do +50°C |
+| Temperatura ładowania | 0°C do +40°C |
+| Temperatura przechowywania | -25°C do +60°C |
+
+> **Ważne:** Drukarki ZQ511 działają prawidłowo wyłącznie z oryginalnymi bateriami Zebra PP+.
+
+### Instalacja baterii
+
+1. Jeśli jest zamontowany klips do paska, obróć go, aby uzyskać dostęp do komory baterii.
+2. Włóż baterię do drukarki w pokazanej orientacji (nie można włożyć baterii nieprawidłowo).
+3. Dociśnij baterię, aż zatrzaśnie się na miejscu i będzie równo osadzona.
+
+### Usuwanie taśmy izolacyjnej baterii
+
+Nowe baterie są wysyłane z taśmą izolacyjną chroniącą styki. Przed pierwszym użyciem:
+
+1. Pociągnij za zakładkę taśmy izolacyjnej na spodzie baterii.
+2. Odklej taśmę i usuń ją z górnej części baterii.
+3. Wyrzuć taśmę po usunięciu.
+
+### Stan zdrowia baterii PowerPrecision+
+
+| Liczba cykli ładowania | Stan zdrowia | Komunikat |
+|------------------------|--------------|-----------|
+| < 300 | GOOD (Dobry) | Brak |
+| ≥ 300, < 550 | REPLACE (Wymień) | "Battery Diminished Consider Replacing" |
+| ≥ 550, < 600 | REPLACE (Wymień) | "Warning-Battery Is Past Useful Life" |
+| ≥ 600 | POOR (Zły) | "Replace Battery Shutting Down" |
+
+> **Ważne:** Wyłącz drukarkę przed wyjęciem baterii, aby zminimalizować ryzyko uszkodzenia danych.
+`
+      },
+      {
+        title: '4. Ładowanie baterii',
+        content: `
+### Optymalne warunki ładowania
+
+Aby uzyskać najlepsze wyniki szybkiego ładowania:
+- Ładuj baterie w temperaturze pokojowej z wyłączonym urządzeniem
+- Idealna temperatura ładowania: **5°C do 40°C**
+
+### Zasilacz AC (ładowanie przez drukarkę)
+
+1. Otwórz osłonę gniazda DC na drukarce.
+2. Podłącz odpowiedni przewód AC do zasilacza, a następnie do gniazdka.
+3. Podłącz wtyczkę DC do gniazda ładowania na drukarce.
+4. Drukarka włączy się i rozpocznie ładowanie.
+
+### Vehicle Cradle (uchwyt samochodowy)
+
+Uchwyt samochodowy umożliwia montaż drukarki w pojeździe z jednoczesnym ładowaniem baterii. Posiada złącze USB do podłączenia laptopa lub tabletu.
+
+### Battery Eliminator
+
+Eliminator baterii umożliwia montaż drukarki ZQ511 w pojeździe bez użycia baterii.
+
+### 4-Bay Power Station
+
+Stacja ładująca umożliwia dokowanie i ładowanie do **4 drukarek** jednocześnie, zachowując pełną funkcjonalność drukarki.
+
+### 1-Slot Battery Charger
+
+Czas ładowania: **< 4 godziny** (bateria 2-komórkowa), **< 6 godzin** (bateria 4-komórkowa).
+
+| Tryb | Wskaźnik | Opis |
+|------|----------|------|
+| Błąd ładowania | Szybko migający czerwony | Błąd baterii |
+| Ładowanie (zdrowa) | Ciągły bursztynowy | Bateria się ładuje |
+| Ładowanie zakończone | Ciągły zielony | W pełni naładowana |
+| Ładowanie (niezdrowa) | Ciągły czerwony | Bateria wymaga wymiany |
+
+### 3-Slot / Dual 3-Slot Battery Charger
+
+Ładowarka do 3 (lub 6 w wersji Dual) baterii jednocześnie.
+`
+      },
+      {
+        title: '5. Ładowanie materiału',
+        content: `
+### Procedura ładowania
+
+1. **Otwarcie drukarki:**
+   - Naciśnij przycisk Media Cover Button na boku drukarki.
+   - Pokrywa otworzy się automatycznie.
+   - Odchyl pokrywę do tyłu, odsłaniając komorę mediów i regulowane podpory.
+
+2. **Ładowanie rolki:**
+   - Rozsuń dyski podpory mediów (obie podpory poruszają się jednocześnie).
+   - Włóż rolkę materiału między podpory w pokazanej orientacji.
+   - Dyski automatycznie dopasują się i zabezpieczą materiał.
+   - Rolka powinna swobodnie się obracać na podporach.
+
+3. **Zamknięcie drukarki:**
+   - Zamknij pokrywę mediów, aż zatrzaśnie się na miejscu.
+   - Materiał zostanie automatycznie wysunięty.
+
+### Specyfikacja materiałów dla ZQ511
+
+| Parametr | Wartość |
+|----------|---------|
+| Szerokość materiału | **35 mm do 80 mm** +1 mm |
+| Min. długość etykiety | **12,5 mm** (0,5") |
+| Grubość materiału (linerless) | 0,053 - 0,165 mm |
+| Grubość materiału (linered) | 0,058 - 0,165 mm |
+| Maks. grubość tagów | 0,058 - 0,140 mm |
+| Maks. średnica rolki | **51 mm** (2,0") |
+| Średnica rdzenia | 19 mm standard, 12,5 mm opcja |
+
+> **Uwaga:** Do użycia rdzenia 12,5 mm wymagana jest wymiana dysków podpory mediów.
+`
+      },
+      {
+        title: '6. Komunikacja',
+        content: `
+### USB
+
+Drukarka wyposażona jest w port **USB Micro AB (On-The-Go)** umożliwiający:
+- Komunikację z komputerem (USB 2.0 Full Speed)
+- Podłączenie urządzeń zewnętrznych w trybie hosta (500mA)
+
+### Bluetooth 5.2 ready
+
+| Parametr | Wartość |
+|----------|---------|
+| Wersja | **Bluetooth 5.2 ready** (BR/EDR + LE) |
+| Tryb pracy | Slave (peryferyjne) |
+| Certyfikat MFi | **Tak** (Made for iPhone/iPad) |
+| Obsługiwane systemy | iOS 10+, Android, Windows |
+| Domyślna klasa | Class 2 (możliwość zmiany na Class 1) |
+
+**Ograniczone parowanie (Limited Pairing Mode):** Przytrzymanie przycisku Feed przez 5 sekund włącza tryb ograniczonego wykrywania i parowania na **2 minuty**.
+
+### WLAN 802.11ac (opcja)
+
+| Parametr | Wartość |
+|----------|---------|
+| Standard | 802.11 a/b/g/n/ac |
+| Bluetooth w dual radio | **5.2 ready** |
+| Bezpieczeństwo | WEP, WPA/WPA2/WPA3, Enterprise |
+
+> **Uwaga:** Dla drukarek zakupionych w regionie EMEA po 1 sierpnia 2025 r., WLAN jest domyślnie wyłączony. Należy skonfigurować hasło Protected Mode przed włączeniem. Więcej informacji: [/blog/zebra-wymaga-hasla-dyrektywa-red-konfiguracja](/blog/zebra-wymaga-hasla-dyrektywa-red-konfiguracja)
+
+### Near Field Communication (NFC)
+
+Drukarka obsługuje pasywny tag NFC. Funkcje:
+- **Parowanie Bluetooth** przez zbliżenie smartfona do ikony Print Touch™
+- **Uruchamianie aplikacji** Zebra lub firm trzecich
+- **Otwieranie strony wsparcia** produktu
+
+Zasięg NFC: do **7,62 cm** (3 cale).
+`
+      },
+      {
+        title: '7. Funkcje oszczędzania energii',
+        content: `
+### Tryb uśpienia (Sleep Mode)
+
+Drukarka automatycznie przechodzi w tryb uśpienia po **2 minutach** nieaktywności:
+- Wyświetlacz LCD wyłączony, brak podświetlenia
+- Wskaźnik: wolno migający zielony pierścień LED
+
+**Wybudzanie:**
+- Naciśnij Power lub Select (krótko, < 3 sekundy)
+- Rozpocznij komunikację przez Bluetooth lub WLAN
+
+**Wyłączenie:** Przytrzymaj Power > 3 sekundy.
+
+**Konfiguracja:** Użyj komendy SGD:
+- **power.sleep.enable** (on/off)
+- **power.sleep.timeout** (sekundy)
+
+### Adaptive Print Performance (PSPT PrintSmart Gen 2)
+
+Drukarka automatycznie dostosowuje wydajność druku do warunków środowiskowych (stan naładowania, zdrowie baterii, ekstremalne temperatury, wysoka gęstość druku) bez utraty jakości wydruku.
+
+### Tryb szkicowy (Draft Mode)
+
+Optymalizuje drukarkę do druku tekstu:
+- Zwiększona prędkość: do **5 ips** (z 4 ips)
+- Obniżona gęstość optyczna: **-22%**
+- Przeznaczony do paragonów tekstowych bez kodów kreskowych i grafiki
+
+**Włączenie:** Komenda SGD **media.draft_mode** (on/off).
+`
+      },
+      {
+        title: '8. Akcesoria do noszenia',
+        content: `
+### Klips do paska (Swivel Belt Clip)
+
+Standardowe wyposażenie (z wyjątkiem drukarek z baterią rozszerzoną). Klips obraca się, umożliwiając swobodne poruszanie.
+
+### Pasek na rękę (Hand Strap)
+
+Mocowany do dwóch słupków z przodu drukarki za pomocą karabińczyków.
+
+### Pasek na ramię (Shoulder Strap)
+
+Regulowany pasek do **56 cali**, mocowany do słupków z przodu drukarki.
+
+### Etui miękkie (Soft Case)
+
+Ochronne etui z otwartą ścieżką papieru, widocznymi przyciskami sterowania i złączami D-Ring do paska na ramię.
+
+### Exoskeleton (twarde etui)
+
+Obudowa typu "muszla" zapewniająca ekstremalną wytrzymałość. Podnosi klasę ochrony do **IP65**. Umożliwia używanie przycisków sterowania oraz ładowanie na Vehicle Cradle i 4-Bay Power Station.
+
+> **Uwaga:** Drukarki linerless nie powinny być używane z Exoskeleton ze względu na brak odwrotnego odrywania i lepkość materiału.
+`
+      },
+      {
+        title: '9. Konserwacja i czyszczenie',
+        content: `
+### Wydłużanie żywotności baterii
+
+- Nie narażaj baterii na bezpośrednie światło słoneczne ani temperatury powyżej 40°C podczas ładowania
+- Używaj wyłącznie ładowarek Zebra do akumulatorów Li-Ion
+- Używaj odpowiednich materiałów do wymagań druku
+- Wybierz odpowiednią ciemność i prędkość druku dla materiału
+- Wyjmuj baterię, gdy drukarka nie będzie używana przez dzień lub dłużej
+- Rozważ zakup zapasowej baterii
+
+### Czyszczenie głowicy drukującej
+
+**Częstotliwość:** Po każdych **5 rolkach** materiału (po każdej rolce dla materiału linerless).
+
+**Metoda:** Użyj pisaka czyszczącego Zebra (p/n 105950-035) lub wacika nasączonego 90% alkoholem medycznym. Przetrzyj szarą linię na głowicy od środka do zewnętrznych krawędzi.
+
+> **Ostrzeżenie:** Głowica może być bardzo gorąca po długim drukowaniu. Poczekaj na jej ostygnięcie przed czyszczeniem.
+
+### Czyszczenie wałka dociskowego (platen)
+
+**Linered:** Obróć wałek i wyczyść go wacikiem lub szmatką zwilżoną 90% alkoholem medycznym.
+
+**Linerless:** Użyj wacika z roztworem 1 część mydła płynnego i 25 części wody. Następnie oczyść czystą wodą.
+
+### Czyszczenie zgarniacza (Scraper) - tylko linerless
+
+Użyj lepkiej strony materiału do oczyszczenia zgarniacza. Częstotliwość: po każdych 5 rolkach.
+`
+      },
+      {
+        title: '10. Rozwiązywanie problemów',
+        content: `
+### Typowe problemy i rozwiązania
+
+| Problem | Możliwa przyczyna | Rozwiązanie |
+|---------|-------------------|-------------|
+| Brak zasilania | Rozładowana bateria | Naładuj lub wymień baterię |
+| | Bateria nieprawidłowo zainstalowana | Sprawdź instalację baterii |
+| | Uszkodzona bateria | Sprawdź stan zdrowia baterii |
+| Materiał nie wysuwa się | Pokrywa nie zamknięta | Zamknij i zatrzaśnij pokrywę |
+| | Zablokowany trzpień rolki | Sprawdź swobodne obracanie |
+| | Zablokowany czujnik etykiet | Oczyść czujnik |
+| Słaba/wyblakła jakość druku | Zabrudzona głowica | Wyczyść głowicę pisakiem |
+| | Nieodpowiedni materiał | Użyj materiałów Zebra |
+| Częściowy lub brak wydruku | Nieprawidłowe wyrównanie materiału | Wyrównaj materiał |
+| | Zabrudzona głowica | Wyczyść głowicę |
+| Zniekształcony wydruk | Wyczerpana bateria | Wymień baterię |
+| | Problem z kablem | Sprawdź kabel do terminala |
+| Skrócona żywotność baterii | Bateria starsza niż 1 rok | Normalne starzenie |
+| | Zły stan zdrowia baterii | Sprawdź stan zdrowia, wymień baterię |
+| Zacięcie etykiet | Nieprawidłowe ładowanie | Otwórz pokrywę i załaduj ponownie |
+| Pusty ekran LCD | Drukarka wyłączona | Włącz drukarkę |
+| | Tryb uśpienia | Naciśnij Power lub Select |
+| Brak połączenia NFC | Zbyt duża odległość | Zbliż smartfon do 3 cali od ikony Print Touch |
+
+### Wyłączenie termiczne
+
+Drukarka automatycznie zatrzymuje drukowanie, gdy temperatura głowicy osiągnie **65°C**. Drukowanie wznawia się po schłodzeniu do **60°C** bez utraty danych.
+`
+      },
+      {
+        title: '11. Drukowanie etykiety konfiguracyjnej',
+        content: `
+### Metoda 1: Przycisk Feed przy włączaniu
+
+1. Wyłącz drukarkę.
+2. Załaduj materiał ciągły (bez czarnych znaczników ani przerw).
+3. Przytrzymaj przycisk **Feed** i naciśnij **Power**.
+4. Gdy rozpocznie się drukowanie, zwolnij **Feed**.
+
+Drukarka wydrukuje linię znaków "x" (test wszystkich elementów głowicy), wersję oprogramowania i raport konfiguracyjny.
+
+### Metoda 2: Przycisk Select przy włączaniu
+
+1. Wyłącz drukarkę.
+2. Przytrzymaj przycisk **Select** i naciśnij **Power**.
+3. Drukarka wydrukuje raport konfiguracyjny, a następnie raport sieci.
+
+### Metoda 3: Kombinacja przycisków w trakcie pracy
+
+1. Przytrzymaj jednocześnie **Feed** i **Select** przez 3 sekundy.
+2. Drukarka wydrukuje raport Two-key i konfigurację ZPL.
+
+### Wymuszony tryb pobierania (Forced Download)
+
+1. Wyłącz drukarkę.
+2. Przytrzymaj jednocześnie **Select** i **Feed**, a następnie naciśnij **Power**.
+3. Drukarka uruchomi się w trybie umożliwiającym aktualizację firmware.
+
+### Tryb diagnostyczny HEX Dump
+
+1. Wydrukuj raport konfiguracyjny (metoda 1 powyżej).
+2. Na końcu raportu pojawi się: "Press FEED key to enter DUMP mode".
+3. Naciśnij **Feed** w ciągu 3 sekund.
+4. Drukarka wydrukuje: "Entering DUMP mode".
+`
+      },
+      {
+        title: '12. Komunikaty alertów',
+        content: `
+### Główne komunikaty
+
+| Komunikat | Opis |
+|-----------|------|
+| PRINT HEAD OVERTEMP / PRINTING HALTED | Przegrzanie głowicy |
+| HEAD MAINTEN. NEEDED / PRINTING HALTED | Wymagana konserwacja głowicy |
+| BATTERY DIMINISHED / CONSIDER REPLACING | Bateria zużyta, rozważ wymianę |
+| WARNING - BATTERY IS / PAST USEFUL LIFE | Bateria przekroczyła okres użytkowania |
+| BATTERY DIMINISHED / SHUTTING DOWN | Bateria wyczerpana, wyłączanie |
+| BATTERY FAILED / REPLACE BATTERY | Błąd uwierzytelnienia baterii |
+| CHARGING TEMP FAULT / MUST BE 0-40°C | Temperatura poza zakresem ładowania |
+| CHARGING FAULT / REPLACE BATTERY | Błąd ładowania |
+| DOWNLOADING FIRMWARE | Pobieranie firmware |
+| DOWNLOAD FAILED / PLEASE REBOOT | Pobieranie nieudane |
+| FIRMWARE WRITING TO FLASH | Zapisywanie firmware do Flash |
+| PRINTER PAUSED | Drukarka wstrzymana |
+| ALL JOBS CLEARED | Wszystkie zadania usunięte |
+| OUT OF MEMORY STORING... | Brak pamięci podczas zapisywania |
+`
+      },
+      {
+        title: '13. Oprogramowanie i narzędzia',
+        content: `
+### Narzędzia konfiguracyjne
+
+- **ZebraNet Bridge Enterprise™** – konfiguracja drukarki, zarządzanie flotą
+- **Zebra Setup Utilities (ZSU)** – konfiguracja pojedynczej drukarki, szybka konfiguracja
+- **Zebra Mobile Setup Utility** – narzędzie konfiguracyjne dla Android
+- **ZebraDesigner Pro v2** – projektowanie etykiet
+- **Zebra Designer Drivers** – sterownik Windows
+- **Zebra Downloader** – pobieranie firmware
+- **Printer Profile Manager Enterprise (PPME)** – zarządzanie profilami drukarek
+
+Wszystkie narzędzia dostępne na: **zebra.com/support-downloads** lub [/sterowniki](/sterowniki)
+
+### Aplikacje mobilne
+
+- **Zebra Printer Setup Utility** dla Android (Google Play)
+- **Zebra Printer Setup Utility** dla iOS (App Store)
+
+Obsługiwane typy połączeń:
+- Bluetooth Classic
+- Bluetooth Low Energy (BLE)
+- Przewodowe/Ethernet
+- Bezprzewodowe
+- USB On-The-Go
+`
+      },
+      {
+        title: '14. FAQ – Często zadawane pytania',
+        content: `
+### Jaka jest szerokość druku ZQ511?
+
+**Odpowiedź:** ZQ511 drukuje do **72 mm (2,83")** szerokości – jest to drukarka **3-calowa** (do szerokości materiału 80 mm).
+
+### Czy ZQ511 wymaga ribbonu?
+
+**Odpowiedź:** **Nie**, ZQ511 to drukarka **termiczna bezpośrednia (Direct Thermal)** – nie wymaga ribbonu.
+
+### Czym ZQ511 różni się od ZQ510?
+
+**Odpowiedź:** ZQ511 to nowsza wersja z: **Bluetooth 5.2** (vs 4.1), obsługą **WPA3**, nowszym firmware i wsparciem dla **Exoskeleton z IP65**. Wymiary i podstawowe parametry druku są identyczne.
+
+### Jak długo ładuje się bateria ZQ511?
+
+**Odpowiedź:** W ładowarce 1-Slot: **< 4 godziny** (bateria 2-cell), **< 6 godzin** (bateria 4-cell).
+
+### Co to jest PowerPrecision+?
+
+**Odpowiedź:** **PowerPrecision+** to inteligentna bateria Li-Ion Zebra z monitorowaniem stanu w czasie rzeczywistym. Śledzi cykle ładowania, stan zdrowia i pozostałą pojemność.
+
+### Jak sparować ZQ511 z iPhone?
+
+**Odpowiedź:** ZQ511 ma certyfikat **MFi** dla iOS. Włącz Bluetooth na iPhonie, wyszukaj drukarkę, wybierz ją i potwierdź parowanie. Można też użyć **NFC Print Touch**.
+
+### Jaka jest klasa ochrony ZQ511?
+
+**Odpowiedź:** ZQ511 ma klasę ochrony **IP54** standardowo, ale z **Exoskeleton** (twarde etui) klasa rośnie do **IP65**. Ma też certyfikat **MIL-STD 810**.
+
+### Jakie języki programowania obsługuje ZQ511?
+
+**Odpowiedź:** ZQ511 obsługuje **CPCL i ZPL II** – dwa języki programowania drukarek Zebra.
+
+### Ile waży drukarka ZQ511?
+
+**Odpowiedź:** ZQ511 waży **0,61 kg** z baterią.
+
+### Jak szybko drukuje ZQ511?
+
+**Odpowiedź:** Prędkość druku: do **127 mm/s** (5"/s) dla materiałów linered, do **76,2 mm/s** (3"/s) dla materiałów linerless.
+
+### Co oznacza informacja o WLAN wyłączonym dla drukarek EMEA po sierpniu 2025?
+
+**Odpowiedź:** Zgodnie z **dyrektywą EU RED**, drukarki sprzedawane w Europie po 1 sierpnia 2025 mają domyślnie wyłączone WiFi. Przed włączeniem musisz ustawić hasło Protected Mode. Więcej informacji: [/blog/zebra-wymaga-hasla-dyrektywa-red-konfiguracja](/blog/zebra-wymaga-hasla-dyrektywa-red-konfiguracja)
+`
+      }
+    ]
   }
 }
 
