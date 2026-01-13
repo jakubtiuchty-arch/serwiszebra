@@ -21,6 +21,10 @@ export interface BlogPost {
     metaTitle: string
     metaDescription: string
     keywords: string[]
+    faqSchema?: Array<{
+      question: string
+      answer: string
+    }>
   }
 }
 
