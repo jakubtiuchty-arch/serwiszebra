@@ -16380,12 +16380,63 @@ Jako **autoryzowany serwis Zebra** pomożemy Ci:
         // Kompatybilność
         'zebra android 14 kompatybilność qcs4490', 'zebra android 14 lista urządzeń 4490',
         'zebra qcs4490 wspierane modele', 'zebra 4490 end of life android'
+      ],
+      faqSchema: [
+        {
+          question: "Ile trwa aktualizacja Zebra do Android 14?",
+          answer: "Około 30-50 minut (pobieranie + instalacja + restart). Sam restart po aktualizacji Virtual A/B trwa tylko 2-3 minuty."
+        },
+        {
+          question: "Jak wejść w Recovery Mode na Zebra MC3400, MC9400, TC53e?",
+          answer: "Kombinacje klawiszy: TC53e/TC58e - PTT + Power, MC3400/MC9400 - Spust (Gun Trigger) + Power, WT5400/WT6400 - P1 + Power, PS30 - Scan + Reboot Tool."
+        },
+        {
+          question: "Czy mogę pominąć aktualizacje pośrednie (np. z U01 na U05)?",
+          answer: "Tak, ale tylko z pakietem Full OTA. Pakiety Delta wymagają sekwencyjnej instalacji."
+        },
+        {
+          question: "Co jeśli bateria padnie w trakcie aktualizacji?",
+          answer: "Mechanizm Virtual A/B jest bezpieczny – aktualizacja zostanie wstrzymana i wznowiona po podłączeniu ładowarki."
+        },
+        {
+          question: "Czy mogę wrócić do Android 13?",
+          answer: "Tak, ale downgrade zawsze powoduje automatyczny Enterprise Reset i utratę danych użytkownika."
+        },
+        {
+          question: "Czy Warm Swap baterii przerwie aktualizację?",
+          answer: "Tak. Warm Swap i Hot Swap baterii powodują anulowanie trwającej aktualizacji. Poczekaj na zakończenie instalacji."
+        },
+        {
+          question: "Jak sprawdzić czy aktualizacja się powiodła?",
+          answer: "Przejdź do Ustawienia > Informacje o telefonie > Numer kompilacji. Porównaj z numerem wersji pakietu (np. 14-16-17.00-TG-U01-STD)."
+        },
+        {
+          question: "Co jeśli urządzenie nie bootuje po aktualizacji?",
+          answer: "System automatycznie wykryje problem i wróci do poprzedniej wersji (fallback). Jeśli to nie pomoże, wykonaj Factory Reset w Recovery."
+        }
       ]
     },
     content: `
 ## Aktualizacja terminali Zebra (QCS4490) do Android 14 – Co musisz wiedzieć?
 
 Czy Twoja firma korzysta z **terminali mobilnych Zebra nowej generacji** opartych na platformie **QCS4490**? Jeśli tak, czas przygotować się na **aktualizację do Android 14**. Ta platforma obejmuje najnowsze modele Zebra, w tym MC3400, MC9400, TC53e i WT5400.
+
+> **Krótka odpowiedź:** Aby zaktualizować Zebra MC3400, MC9400, TC53e lub WT5400 do Android 14, użyj **LifeGuard OTA** (automatycznie) lub pobierz pakiet Full OTA ze strony [Zebra Support](https://www.zebra.com/support) i zainstaluj przez **Recovery Mode**. Kombinacje klawiszy: **PTT + Power** (TC53e), **Gun Trigger + Power** (MC3400/MC9400), **P1 + Power** (WT5400). Czas aktualizacji: **30-50 minut**. Wymagana bateria: **min. 30%**.
+
+---
+
+## Kluczowe statystyki aktualizacji
+
+| Parametr | Wartość |
+|----------|---------|
+| **Minimalny poziom baterii** | 30% (zalecane 50%) |
+| **Czas restartu** | 2-3 minuty (Virtual A/B) |
+| **Rozmiar True Delta** | ~50 MB (vs 2 GB Full OTA) |
+| **Wolne miejsce wymagane** | min. 100 MB |
+| **Odliczanie przed restartem** | 15 sekund |
+| **Czas całkowity aktualizacji** | 30-50 minut |
+
+---
 
 W tym kompletnym poradniku wyjaśniamy:
 - Które modele są wspierane
@@ -16724,47 +16775,69 @@ Status jest wysyłany jako Android Intent i zapisywany w OEMInfo. EMM może odcz
 
 ## FAQ – Najczęstsze pytania
 
-**Czy mogę pominąć aktualizacje pośrednie (np. z U01 na U05)?**
-Tak, ale tylko z pakietem **Full OTA**. Pakiety Delta wymagają sekwencyjnej instalacji (U01 → U02 → U03 → U04 → U05).
+### Ile trwa aktualizacja Zebra do Android 14?
 
-**Co jeśli bateria padnie w trakcie aktualizacji?**
-Mechanizm Virtual A/B jest bezpieczny – aktualizacja zostanie wstrzymana i wznowiona po podłączeniu ładowarki. Urządzenie będzie działać na starym systemie do czasu zakończenia instalacji.
+**Odpowiedź:** Około **30-50 minut** (pobieranie + instalacja + restart). Sam restart po aktualizacji Virtual A/B trwa tylko **2-3 minuty**, ponieważ system jest już zainstalowany w tle.
 
-**Ile trwa aktualizacja OTA?**
-Około **30-50 minut** (pobieranie + instalacja + restart). Sam restart to tylko **2-3 minuty**.
+### Jak wejść w Recovery Mode na Zebra MC3400, MC9400, TC53e?
 
-**Czy mogę wrócić do Android 13?**
-Tak, ale **downgrade zawsze** powoduje automatyczny Enterprise Reset i utratę danych użytkownika. Użyj opcji "Apply downgrade from..." w Recovery.
+**Odpowiedź:** Kombinacje klawiszy zależą od modelu:
+- **TC53e / TC58e:** PTT + Power
+- **MC3400 / MC9400:** Spust (Gun Trigger) + Power
+- **WT5400 / WT6400:** P1 + Power
+- **PS30:** Scan + Reboot Tool
 
-**Czy aktualizacja wpływa na certyfikaty i licencje?**
-Przy upgrade – certyfikaty i klucze są zachowane. Przy downgrade – dane są kasowane, więc wymagana jest rekonfiguracja.
+### Czy mogę pominąć aktualizacje pośrednie (np. z U01 na U05)?
 
-**Czy mogę użyć pakietów Delta w Recovery Mode?**
-**Nie.** Recovery Mode obsługuje tylko pakiety Full OTA i Reset. Pakiety Delta muszą być instalowane przez EMM/StageNow lub LifeGuard OTA.
+**Odpowiedź:** Tak, ale tylko z pakietem **Full OTA**. Pakiety Delta wymagają sekwencyjnej instalacji (U01 → U02 → U03 → U04 → U05).
 
-**Co to jest "Suppress Reboot" i kiedy go używać?**
-To opcja dla EMM, która zapobiega automatycznemu restartowi po instalacji. Przydatna gdy chcesz skoordynować restart wielu urządzeń naraz.
+### Co jeśli bateria padnie w trakcie aktualizacji?
 
-**Czy mogę instalować aktualizację przez USB?**
-Tak. Skopiuj pakiet na pendrive, włóż do urządzenia i użyj opcji "Apply upgrade from USB drive" w Recovery.
+**Odpowiedź:** Mechanizm Virtual A/B jest bezpieczny – aktualizacja zostanie wstrzymana i wznowiona po podłączeniu ładowarki. Urządzenie będzie działać na starym systemie do czasu zakończenia instalacji.
 
-**Co jeśli urządzenie nie bootuje po aktualizacji?**
-System automatycznie wykryje problem i wróci do poprzedniej wersji (fallback). Jeśli to nie pomoże, wykonaj Factory Reset w Recovery.
+### Czy mogę wrócić do Android 13?
 
-**Jak działa True Delta w LifeGuard OTA?**
-True Delta to specjalny pakiet generowany przez serwer Zebra, który zawiera **tylko różnice** między Twoją wersją a docelową. Jest znacznie mniejszy niż Delta z zebra.com.
+**Odpowiedź:** Tak, ale **downgrade zawsze** powoduje automatyczny Enterprise Reset i utratę danych użytkownika. Użyj opcji "Apply downgrade from..." w Recovery.
 
-**Czy Warm Swap baterii przerwie aktualizację?**
-**Tak.** Warm Swap i Hot Swap baterii powodują anulowanie trwającej aktualizacji. Poczekaj na zakończenie instalacji.
+### Czy aktualizacja wpływa na certyfikaty i licencje?
 
-**Jak sprawdzić czy aktualizacja się powiodła?**
-Przejdź do Ustawienia > Informacje o telefonie > Numer kompilacji. Porównaj z numerem wersji pakietu, który instalowałeś.
+**Odpowiedź:** Przy upgrade – certyfikaty i klucze są zachowane. Przy downgrade – dane są kasowane, więc wymagana jest rekonfiguracja.
 
-**Czy mogę instalować wiele pakietów naraz?**
-Tak, użyj mechanizmu UPL (Update Package List). Pozwala zainstalować OS + firmware + wykonać reset w jednej operacji.
+### Czy mogę użyć pakietów Delta w Recovery Mode?
 
-**Co jeśli mam "Verification failed" podczas instalacji?**
-Pobierz pakiet ponownie – plik mógł być uszkodzony podczas transferu. Sprawdź sumę SHA256 na stronie Zebra.
+**Odpowiedź:** **Nie.** Recovery Mode obsługuje tylko pakiety Full OTA i Reset. Pakiety Delta muszą być instalowane przez EMM/StageNow lub LifeGuard OTA.
+
+### Co to jest "Suppress Reboot" i kiedy go używać?
+
+**Odpowiedź:** To opcja dla EMM, która zapobiega automatycznemu restartowi po instalacji. Przydatna gdy chcesz skoordynować restart wielu urządzeń naraz.
+
+### Czy mogę instalować aktualizację przez USB?
+
+**Odpowiedź:** Tak. Skopiuj pakiet na pendrive, włóż do urządzenia i użyj opcji "Apply upgrade from USB drive" w Recovery.
+
+### Co jeśli urządzenie nie bootuje po aktualizacji?
+
+**Odpowiedź:** System automatycznie wykryje problem i wróci do poprzedniej wersji (fallback). Jeśli to nie pomoże, wykonaj Factory Reset w Recovery.
+
+### Jak działa True Delta w LifeGuard OTA?
+
+**Odpowiedź:** True Delta to specjalny pakiet generowany przez serwer Zebra, który zawiera **tylko różnice** między Twoją wersją a docelową. Rozmiar to tylko ~50 MB zamiast 2 GB standardowego Full OTA.
+
+### Czy Warm Swap baterii przerwie aktualizację?
+
+**Odpowiedź:** **Tak.** Warm Swap i Hot Swap baterii powodują anulowanie trwającej aktualizacji. Poczekaj na zakończenie instalacji przed wymianą baterii.
+
+### Jak sprawdzić czy aktualizacja się powiodła?
+
+**Odpowiedź:** Przejdź do **Ustawienia > Informacje o telefonie > Numer kompilacji**. Porównaj z numerem wersji pakietu, który instalowałeś (np. 14-16-17.00-TG-U01-STD).
+
+### Czy mogę instalować wiele pakietów naraz?
+
+**Odpowiedź:** Tak, użyj mechanizmu UPL (Update Package List). Pozwala zainstalować OS + firmware + wykonać reset w jednej operacji.
+
+### Co jeśli mam "Verification failed" podczas instalacji?
+
+**Odpowiedź:** Pobierz pakiet ponownie – plik mógł być uszkodzony podczas transferu. Sprawdź sumę SHA256 na stronie Zebra Support.
 
 ---
 
@@ -16885,6 +16958,16 @@ Pobierz pakiet ponownie – plik mógł być uszkodzony podczas transferu. Spraw
 
 ---
 
+## TL;DR – Aktualizacja w 5 krokach
+
+1. **Sprawdź model** – MC3400, MC9400, TC53e, WT5400 wspierają Android 14 (platforma QCS4490)
+2. **Wykonaj backup** – aktualizacja może skasować dane (zmiana szyfrowania FDE → FBE)
+3. **Naładuj baterię** – minimum 30%, zalecane 50%
+4. **Wybierz metodę** – LifeGuard OTA (automatycznie) lub Recovery Mode (ręcznie)
+5. **Zweryfikuj** – po restarcie sprawdź wersję w Ustawienia > Informacje o telefonie
+
+---
+
 ## Podsumowanie
 
 **Aktualizacja do Android 14** na platformie QCS4490 to ważny krok w utrzymaniu bezpieczeństwa i wydajności floty Zebra.
@@ -16892,9 +16975,9 @@ Pobierz pakiet ponownie – plik mógł być uszkodzony podczas transferu. Spraw
 ### Kluczowe zalety:
 - ✅ Najnowsze poprawki bezpieczeństwa
 - ✅ Aktualizacje w tle (brak przestojów)
-- ✅ Mechanizm Fallback
+- ✅ Mechanizm Fallback – automatyczny powrót przy błędzie
 - ✅ Lepsza wydajność i WiFi 6E
-- ✅ Dłuższe wsparcie producenta
+- ✅ Dłuższe wsparcie producenta (do 2029+)
 
 ### Pamiętaj:
 - ⚠️ Backup danych przed aktualizacją
@@ -16915,7 +16998,7 @@ Aktualizacja floty terminali może być wyzwaniem. Skontaktuj się z nami!
 Jako **autoryzowany serwis Zebra** pomożemy Ci:
 - Przygotować plan migracji
 - Wykonać backup danych
-- Przeprowadzić aktualizację
+- Przeprowadzić aktualizację całej floty
 - Przetestować urządzenia po update
 `
   },

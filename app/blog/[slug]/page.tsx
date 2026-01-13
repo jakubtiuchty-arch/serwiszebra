@@ -128,8 +128,19 @@ export default function BlogPostPage({
     }
   }
 
-  // FAQ Schema if content has FAQ section
-  const faqSchema = post.content.includes('## FAQ') ? {
+  // FAQ Schema - prefer explicit faqSchema from SEO, fallback to content extraction
+  const faqSchema = post.seo?.faqSchema ? {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: post.seo.faqSchema.map((faq: { question: string; answer: string }) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer
+      }
+    }))
+  } : post.content.includes('## FAQ') ? {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
     mainEntity: extractFAQFromContent(post.content)
