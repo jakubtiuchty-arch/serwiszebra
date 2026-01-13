@@ -189,11 +189,17 @@ export async function checkPriceAndAvailability(skus: string[], tryAllFormats: b
   // Jeśli tryAllFormats, próbuj różnych formatów dla każdego SKU
   let skusToCheck = skus
   if (tryAllFormats && skus.length === 1) {
-    // Tylko 2 najważniejsze formaty
+    const sku = skus[0]
+    const withoutZB = sku.replace(/^ZB/i, '')
+    
+    // Formaty do przetestowania
     skusToCheck = [
-      skus[0],
-      'ZB' + skus[0].replace(/^ZB/i, '').replace(/-/g, ''),
-    ]
+      sku,                                        // oryginalny: P1112640-218
+      'ZB' + withoutZB,                           // ZB + oryginalny: ZBP1112640-218
+      'ZB' + withoutZB.replace(/-/g, ''),         // ZB + bez myślników: ZBP1112640218
+      withoutZB.replace(/-/g, ''),                // bez myślników: P1112640218
+    ].filter((v, i, a) => a.indexOf(v) === i)     // usuń duplikaty
+    
     console.log('[Ingram] Próbuję formatów SKU:', skusToCheck)
   }
 
@@ -254,11 +260,15 @@ export async function checkPriceAndAvailability(skus: string[], tryAllFormats: b
  * Ograniczona wersja - tylko najważniejsze kombinacje (max 6 requestów)
  */
 export async function testSkuFormats(sku: string): Promise<IngramResponse> {
-  // Tylko 2 najważniejsze formaty
+  const withoutZB = sku.replace(/^ZB/i, '')
+  
+  // Więcej formatów do przetestowania
   const formats = [
-    sku,  // oryginalny
-    'ZB' + sku.replace(/^ZB/i, '').replace(/-/g, ''),  // ZB + bez myślników
-  ]
+    sku,                                        // oryginalny: P1112640-218
+    'ZB' + withoutZB,                           // ZB + oryginalny: ZBP1112640-218
+    'ZB' + withoutZB.replace(/-/g, ''),         // ZB + bez myślników: ZBP1112640218
+    withoutZB.replace(/-/g, ''),                // bez myślników: P1112640218
+  ].filter((v, i, a) => a.indexOf(v) === i)     // usuń duplikaty
   
   // Tylko 3 najważniejsze tagi XML
   const xmlTags = ['ItemID', 'VPN', 'IngramSKU']
