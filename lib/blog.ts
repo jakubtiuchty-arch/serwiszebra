@@ -16319,8 +16319,8 @@ Jako **autoryzowany serwis Zebra** pomożemy Ci:
   // NOWY WPIS: Aktualizacja do Android 14 - Platforma QCS4490 (nowa generacja)
   {
     slug: 'aktualizacja-zebra-android-14-mc3400-mc9400-tc53e-wt5400',
-    title: 'Jak zaktualizować Zebra MC3400, MC9400, TC53e do Android 14? Instrukcja krok po kroku',
-    excerpt: 'Kompletna instrukcja aktualizacji terminali Zebra nowej generacji (MC3400, MC9400, TC53e, WT5400, FR55) do Android 14. Krok po kroku: LifeGuard OTA, Recovery Mode, rozwiązywanie problemów.',
+    title: 'Jak zaktualizować Zebra TC22, TC27, MC3400, MC9400, TC53e do Android 14? Instrukcja krok po kroku',
+    excerpt: 'Kompletna instrukcja aktualizacji terminali Zebra nowej generacji (TC22, TC27, MC3400, MC9400, TC53e, WT5400) do Android 14. Krok po kroku: LifeGuard OTA, Recovery Mode, rozwiązywanie problemów.',
     coverImage: '/blog/aktualizacja-android-14-zebra-mc3400-mc9400-tc53e.jpeg',
     author: {
       name: 'Zespół TAKMA',
@@ -16331,10 +16331,10 @@ Jako **autoryzowany serwis Zebra** pomożemy Ci:
     deviceType: 'terminale',
     subDeviceType: 'qcs4490-series',
     category: 'poradniki',
-    tags: ['android 14', 'aktualizacja', 'MC3400', 'MC3450', 'MC9400', 'MC9450', 'TC53e', 'TC58e', 'WT5400', 'WT6400', 'FR55', 'PS30', 'QCS4490', 'LifeGuard', 'OTA'],
+    tags: ['android 14', 'aktualizacja', 'TC22', 'TC27', 'MC3400', 'MC3450', 'MC9400', 'MC9450', 'TC53e', 'TC58e', 'WT5400', 'WT6400', 'FR55', 'PS30', 'QCS4490', 'LifeGuard', 'OTA'],
     seo: {
-      metaTitle: 'Jak zaktualizować Zebra MC3400, MC9400, TC53e do Android 14? [Instrukcja 2025]',
-      metaDescription: 'Kompletna instrukcja aktualizacji Zebra MC3400, MC9400, TC53e, WT5400, FR55 do Android 14. Krok po kroku: LifeGuard OTA, Recovery Mode, Virtual A/B. Platforma QCS4490.',
+      metaTitle: 'Jak zaktualizować Zebra TC22, TC27, MC3400 do Android 14? [Instrukcja 2026]',
+      metaDescription: 'Kompletna instrukcja aktualizacji Zebra TC22, TC27, MC3400, MC9400, TC53e do Android 14. Krok po kroku: LifeGuard OTA, Recovery Mode, Virtual A/B. Platforma QCS4490.',
       keywords: [
         // Główne frazy
         'aktualizacja zebra android 14', 'zebra android 14 update', 'terminal zebra aktualizacja',
@@ -16345,6 +16345,9 @@ Jako **autoryzowany serwis Zebra** pomożemy Ci:
         'mc9400 android 14', 'mc9400 aktualizacja', 'mc9400 update', 'mc9400 firmware', 'mc9400 jak zaktualizować',
         'mc9450 android 14', 'mc9450 aktualizacja', 'mc9450 update', 'mc9450 jak zaktualizować',
         // Modele TC
+        'tc22 android 14', 'tc22 aktualizacja', 'tc22 update', 'tc22 firmware', 'tc22 jak zaktualizować',
+        'tc27 android 14', 'tc27 aktualizacja', 'tc27 update', 'tc27 firmware', 'tc27 jak zaktualizować',
+        'zebra tc22 android 14', 'zebra tc27 android 14', 'tc22 tc27 aktualizacja',
         'tc53e android 14', 'tc53e aktualizacja', 'tc53e update', 'tc53e firmware', 'tc53e jak zaktualizować',
         'tc58e android 14', 'tc58e aktualizacja', 'tc58e update', 'tc58e jak zaktualizować',
         'tc53es android 14', 'tc53es aktualizacja', 'tc58es android 14', 'tc58es aktualizacja',
@@ -16362,6 +16365,7 @@ Jako **autoryzowany serwis Zebra** pomożemy Ci:
         'zebra recovery mode update', 'zebra adb sideload', 'zebra delta update', 'zebra full ota',
         'zebra upl update package list', 'zebra streaming update', 'zebra true delta',
         // Long-tail PL
+        'jak zaktualizować tc22 do android 14', 'jak zaktualizować tc27 do android 14',
         'jak zaktualizować mc3400 do android 14', 'jak zaktualizować mc9400 do android 14',
         'jak zaktualizować tc53e do android 14', 'jak zaktualizować wt5400 do android 14',
         'aktualizacja terminala zebra nowej generacji', 'aktualizacja terminala zebra instrukcja krok po kroku',
@@ -16387,8 +16391,8 @@ Jako **autoryzowany serwis Zebra** pomożemy Ci:
           answer: "Około 30-50 minut (pobieranie + instalacja + restart). Sam restart po aktualizacji Virtual A/B trwa tylko 2-3 minuty."
         },
         {
-          question: "Jak wejść w Recovery Mode na Zebra MC3400, MC9400, TC53e?",
-          answer: "Kombinacje klawiszy: TC53e/TC58e - PTT + Power, MC3400/MC9400 - Spust (Gun Trigger) + Power, WT5400/WT6400 - P1 + Power, PS30 - Scan + Reboot Tool."
+          question: "Jak wejść w Recovery Mode na Zebra TC22, TC27, MC3400, MC9400, TC53e?",
+          answer: "Kombinacje klawiszy: TC22/TC27/TC53e/TC58e - PTT + Power, MC3400/MC9400 - Spust (Gun Trigger) + Power, WT5400/WT6400 - P1 + Power, PS30 - Scan + Reboot Tool."
         },
         {
           question: "Czy mogę pominąć aktualizacje pośrednie (np. z U01 na U05)?",
@@ -16419,9 +16423,9 @@ Jako **autoryzowany serwis Zebra** pomożemy Ci:
     content: `
 ## Aktualizacja terminali Zebra (QCS4490) do Android 14 – Co musisz wiedzieć?
 
-Czy Twoja firma korzysta z **terminali mobilnych Zebra nowej generacji** opartych na platformie **QCS4490**? Jeśli tak, czas przygotować się na **aktualizację do Android 14**. Ta platforma obejmuje najnowsze modele Zebra, w tym MC3400, MC9400, TC53e i WT5400.
+Czy Twoja firma korzysta z **terminali mobilnych Zebra nowej generacji** opartych na platformie **QCS4490**? Jeśli tak, czas przygotować się na **aktualizację do Android 14**. Ta platforma obejmuje najnowsze modele Zebra, w tym **TC22, TC27**, MC3400, MC9400, TC53e i WT5400.
 
-> **Krótka odpowiedź:** Aby zaktualizować Zebra MC3400, MC9400, TC53e lub WT5400 do Android 14, użyj **LifeGuard OTA** (automatycznie) lub pobierz pakiet Full OTA ze strony [Zebra Support](https://www.zebra.com/support) i zainstaluj przez **Recovery Mode**. Kombinacje klawiszy: **PTT + Power** (TC53e), **Gun Trigger + Power** (MC3400/MC9400), **P1 + Power** (WT5400). Czas aktualizacji: **30-50 minut**. Wymagana bateria: **min. 30%**.
+> **Krótka odpowiedź:** Aby zaktualizować Zebra TC22, TC27, MC3400, MC9400 lub TC53e do Android 14, użyj **LifeGuard OTA** (automatycznie) lub pobierz pakiet Full OTA ze strony [Zebra Support](https://www.zebra.com/support) i zainstaluj przez **Recovery Mode**. Kombinacje klawiszy: **PTT + Power** (TC22/TC27/TC53e), **Gun Trigger + Power** (MC3400/MC9400), **P1 + Power** (WT5400). Czas aktualizacji: **30-50 minut**. Wymagana bateria: **min. 30%**.
 
 ---
 
@@ -16463,7 +16467,9 @@ Zanim zaczniesz aktualizację, upewnij się, że Twój terminal znajduje się na
 
 | Model | Android 14 | Uwagi |
 |-------|------------|-------|
-| **TC53e** | ✅ Tak | Następca TC52/TC53 |
+| **TC22** | ✅ Tak | Następca TC21 – najpopularniejszy model entry-level |
+| **TC27** | ✅ Tak | Następca TC26 – wersja z WWAN (LTE) |
+| **TC53e** | ✅ Tak | Następca TC52/TC53 – model mid-range |
 | **TC58e** | ✅ Tak | Wersja z WWAN |
 | **TC53ES** | ✅ Tak | Wersja Special Edition |
 | **TC58ES** | ✅ Tak | Special Edition z WWAN |
@@ -16591,6 +16597,7 @@ Każdy model ma inną kombinację klawiszy do wejścia w tryb Recovery:
 
 | Model | Kombinacja klawiszy |
 |-------|---------------------|
+| **TC22 / TC27** | PTT + Power |
 | **TC53e / TC58e** | PTT + Power |
 | **MC9400 / MC9450** | Spust (Gun Trigger) + Power |
 | **MC3400 / MC3450** | Spust (Gun Trigger) + Power |
@@ -16885,6 +16892,19 @@ Status jest wysyłany jako Android Intent i zapisywany w OEMInfo. EMM może odcz
 ---
 
 ## Specyficzne uwagi dla modeli QCS4490
+
+### TC22 / TC27 (Entry-Level Touch Computer)
+
+| Cecha | Uwagi |
+|-------|-------|
+| **Recovery Mode** | PTT + Power |
+| **Popularność** | Najczęściej wybierany model w Polsce |
+| **Skaner** | SE4710 – sprawdź firmware po aktualizacji |
+| **Bateria** | Standardowa PowerPrecision – min. 30% |
+| **WWAN** | TC27 – sprawdź konfigurację APN po update |
+| **Akcesoria** | Zweryfikuj kompatybilność etui i uchwytów |
+
+**Tip:** TC22/TC27 to następcy popularnych TC21/TC26. Jeśli masz aplikacje z TC21, powinny działać bez zmian na TC22 po aktualizacji.
 
 ### MC3400 / MC3450 (Gun Handle)
 
