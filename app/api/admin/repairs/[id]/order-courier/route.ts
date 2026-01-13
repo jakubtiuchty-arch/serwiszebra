@@ -54,6 +54,35 @@ export async function POST(
       )
     }
 
+    // Dane nadawcy i odbiorcy zależą od kierunku
+    // PICKUP: Klient (nadawca) -> TAKMA (odbiorca)
+    // DELIVERY: TAKMA (nadawca) -> Klient (odbiorca)
+    
+    const takmaData = {
+      name: 'TAKMA TADEUSZ TIUCHTY',
+      street: 'ul. Poświęcka',
+      house_no: '1a',
+      postal: '51-128',
+      city: 'Wrocław',
+      phone: '726151515',
+      email: 'jakub.tiuchty@takma.com.pl'
+    }
+    
+    const customerData = {
+      name: `${repair.first_name} ${repair.last_name}`,
+      street: repair.street || '',
+      house_no: extractHouseNumber(repair.street || ''),
+      postal: repair.zip_code || '',
+      city: repair.city || '',
+      phone: repair.phone,
+      email: repair.email
+    }
+    
+    // Dla PICKUP: nadawca = klient, odbiorca = TAKMA
+    // Dla DELIVERY: nadawca = TAKMA, odbiorca = klient
+    const sender = direction === 'pickup' ? customerData : takmaData
+    const recipient = direction === 'pickup' ? takmaData : customerData
+    
     // Przygotuj request do BL Paczka API
     const blpaczkaRequest = {
       auth: {
@@ -67,8 +96,8 @@ export async function POST(
         side_x: parseInt(side_x),
         side_y: parseInt(side_y),
         side_z: parseInt(side_z),
-        postal_sender: '51-128',
-        postal_delivery: repair.zip_code || ''
+        postal_sender: sender.postal,
+        postal_delivery: recipient.postal
       },
       CartOrder: {
         payment: 'bank'
@@ -76,21 +105,23 @@ export async function POST(
       Cart: [
         {
           Order: {
-            name: `${repair.first_name} ${repair.last_name}`,
-            email: repair.email,
-            street: repair.street || '',
-            house_no: extractHouseNumber(repair.street || ''),
-            postal: repair.zip_code || '',
-            city: repair.city || '',
-            phone: repair.phone,
+            // NADAWCA (sender)
+            name: sender.name,
+            email: sender.email,
+            street: sender.street,
+            house_no: sender.house_no,
+            postal: sender.postal,
+            city: sender.city,
+            phone: sender.phone,
 
-            taker_name: 'TAKMA TADEUSZ TIUCHTY',
-            taker_street: 'ul. Poświęcka',
-            taker_house_no: '1a',
-            taker_postal: '51-128',
-            taker_city: 'Wrocław',
-            taker_phone: '726151515',
-            taker_email: 'jakub.tiuchty@takma.com.pl',
+            // ODBIORCA (recipient) - pola taker_*
+            taker_name: recipient.name,
+            taker_street: recipient.street,
+            taker_house_no: recipient.house_no,
+            taker_postal: recipient.postal,
+            taker_city: recipient.city,
+            taker_phone: recipient.phone,
+            taker_email: recipient.email,
 
             pickup_date: pickup_date,
             pickup_ready_time: pickup_time_from,
