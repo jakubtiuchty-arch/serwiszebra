@@ -8,10 +8,7 @@ import Footer from '@/components/Footer'
 import ShopSubheader from '@/components/shop/ShopSubheader'
 import { useCartStore } from '@/lib/cart-store'
 import { 
-  Printer, 
-  Package, 
-  Battery, 
-  Cable,
+  Package,
   Loader2,
   ArrowUpDown,
   ShoppingCart,
@@ -22,7 +19,6 @@ import {
   ChevronDown,
   X,
   Check,
-  Filter,
   SlidersHorizontal
 } from 'lucide-react'
 import { SHOP_CATEGORIES, getProductUrl } from '@/lib/shop-categories'
@@ -42,6 +38,11 @@ interface Product {
   sku: string
   compatible_models: string[]
   image_url?: string
+  attributes?: {
+    stock_pl?: number
+    stock_de?: number
+    in_delivery?: number
+  } | null
 }
 
 interface FilterState {
@@ -51,13 +52,6 @@ interface FilterState {
   resolution: string
   capacity: string
   search: string
-}
-
-const PRODUCT_TYPE_ICONS: Record<string, any> = {
-  glowica: Printer,
-  walek: Package,
-  akumulator: Battery,
-  kabel: Cable
 }
 
 // Domyślne zdjęcia dla typów produktów
@@ -455,72 +449,77 @@ export default function SklepPage() {
                 ) : (
                   <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3">
                     {products.map((product) => {
-                      const Icon = PRODUCT_TYPE_ICONS[product.product_type] || Package
                       const imageUrl = getProductImage(product)
 
                       return (
                         <Link
                           key={product.id}
                           href={getProductUrl(product)}
-                          className="bg-white rounded-lg border border-gray-200 overflow-hidden hover:border-blue-300 active:bg-gray-50 transition-colors group"
+                          className="bg-white rounded-xl border border-gray-200 overflow-hidden hover:border-blue-300 hover:shadow-md active:bg-gray-50 transition-all group"
                         >
                           {/* Image */}
-                          <div className="relative aspect-square sm:h-32 bg-white flex items-center justify-center">
+                          <div className="relative h-36 sm:h-44 bg-gradient-to-b from-gray-50 to-white flex items-center justify-center p-4">
                             {imageUrl ? (
                               <Image
                                 src={imageUrl}
                                 alt={product.name}
-                                fill
-                                className="object-contain p-2"
-                                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                                width={140}
+                                height={140}
+                                className="object-contain max-h-full"
                               />
                             ) : (
-                              <Icon className="w-8 h-8 text-gray-300" />
-                            )}
-                            {product.stock === 0 && (
-                              <div className="absolute top-1 right-1 bg-gray-800 text-white text-[8px] sm:text-[9px] font-bold px-1.5 py-0.5 rounded">
-                                Brak
-                              </div>
+                              <Image
+                                src={DEFAULT_PRODUCT_IMAGES.glowica}
+                                alt={product.name}
+                                width={140}
+                                height={140}
+                                className="object-contain max-h-full opacity-60"
+                              />
                             )}
                           </div>
 
                           {/* Content */}
-                          <div className="p-2 sm:p-3">
-                            <h3 className="text-xs sm:text-sm font-medium text-gray-900 mb-1 line-clamp-2 leading-tight">
+                          <div className="p-3 sm:p-4 border-t border-gray-100">
+                            <h3 className="text-xs sm:text-sm font-semibold text-gray-900 mb-2 line-clamp-2 leading-tight">
                               {product.name}
                             </h3>
 
-                            {/* Tags - hidden on very small screens */}
-                            <div className="hidden sm:flex flex-wrap gap-1 mb-2">
-                              {product.device_model && (
-                                <span className="text-[9px] bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded">
-                                  {product.device_model}
+                            {/* Dostępność */}
+                            <div className="mb-2">
+                              {product.stock > 0 ? (
+                                <span className="text-[10px] sm:text-xs text-green-600 font-medium">
+                                  ✓ Wysyłka 24-72h
                                 </span>
-                              )}
-                              {product.resolution_dpi && (
-                                <span className="text-[9px] bg-blue-50 text-blue-600 px-1.5 py-0.5 rounded">
-                                  {product.resolution_dpi} DPI
+                              ) : (product.attributes?.in_delivery ?? 0) > 0 ? (
+                                <span className="text-[10px] sm:text-xs text-amber-600 font-medium">
+                                  Wysyłka 3-5 dni
+                                </span>
+                              ) : (
+                                <span className="text-[10px] sm:text-xs text-amber-600 font-medium">
+                                  Wysyłka 5-7 dni
                                 </span>
                               )}
                             </div>
 
                             {/* Price */}
-                            <div className="flex items-center justify-between">
+                            <div className="flex items-end justify-between">
                               <div>
-                                <div className="text-sm sm:text-base font-bold text-gray-900">
-                                  {product.price_brutto.toFixed(0)} zł
+                                <div className="text-base sm:text-lg font-bold text-gray-900">
+                                  {product.price.toFixed(2).replace('.', ',')} zł
                                 </div>
-                                <div className="text-[9px] sm:text-[10px] text-gray-400">brutto</div>
+                                <div className="text-[10px] sm:text-xs text-gray-500">netto</div>
                               </div>
                               
-                              {product.stock > 0 && (
-                                <button
-                                  onClick={(e) => handleAddToCart(e, product)}
-                                  className="p-1.5 sm:p-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white"
-                                >
-                                  <ShoppingCart className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                                </button>
-                              )}
+                              <button
+                                onClick={(e) => handleAddToCart(e, product)}
+                                className={`p-2 sm:p-2.5 rounded-lg text-white transition-colors ${
+                                  product.stock > 0 
+                                    ? 'bg-green-600 hover:bg-green-700' 
+                                    : 'bg-amber-500 hover:bg-amber-600'
+                                }`}
+                              >
+                                <ShoppingCart className="w-4 h-4" />
+                              </button>
                             </div>
                           </div>
                         </Link>

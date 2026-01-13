@@ -1,96 +1,139 @@
 import { NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
-import { getTrackingUrl } from '@/lib/tracking-links'  // ⬅️ DODANE
+import { sendOrderConfirmationEmail, sendNewOrderNotificationEmail } from '@/lib/email'
 
-export async function GET(request: Request) {
-  const supabase = await createClient()
-  
-  // Sprawdź autoryzację
-  const { data: { user }, error: authError } = await supabase.auth.getUser()
-  
-  if (authError || !user) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-  }
-
-  // Pobierz parametry filtrowania
-  const { searchParams } = new URL(request.url)
-  const status = searchParams.get('status') // all, active, completed
-
-  // Buduj zapytanie
-  let query = supabase
-    .from('orders')
-    .select(`
-      *,
-      order_items (*)
-    `)
-    .eq('user_id', user.id)
-    .order('created_at', { ascending: false })
-
-  // Filtrowanie po statusie
-  if (status === 'active') {
-    query = query.in('order_status', ['pending', 'confirmed', 'in_progress', 'shipped'])
-  } else if (status === 'completed') {
-    query = query.in('order_status', ['completed', 'cancelled'])
-  }
-
-  const { data: orders, error } = await query
-
-  if (error) {
-    console.error('Error fetching orders:', error)
-    return NextResponse.json({ error: error.message }, { status: 400 })
-  }
-
-  // Mapuj dane dla frontend
-  const formattedOrders = orders?.map(order => ({
-    id: order.id,
-    orderNumber: order.order_number,
-    invoiceNumber: order.invoice_number,
-    date: order.created_at,
-    total: order.total_brutto,
-    status: order.order_status,
-    paymentStatus: order.payment_status,
-    paymentMethod: order.payment_method,
-    deliveryMethod: order.delivery_method,
-    tracking_number: order.tracking_number,
-    courier_name: order.courier_name,
-    tracking_url: getTrackingUrl(order.courier_name, order.tracking_number),  // ⬅️ ZMIENIONE - generowane dynamicznie
+export async function POST(request: Request) {
+  try {
+    const body = await request.json()
     
-    // Dane klienta
-    customer: {
-      company: order.customer_company_name,
-      nip: order.customer_nip,
-      email: order.customer_email,
-      phone: order.customer_phone
-    },
-    
-    // Adres dostawy
-    shippingAddress: {
-      street: order.delivery_street,
-      city: order.delivery_city,
-      postalCode: order.delivery_postal_code,
-      country: order.delivery_country
-    },
-    
-    // Produkty
-    items: order.order_items?.map((item: any) => ({
-      id: item.id,
-      name: item.product_name,
-      sku: item.product_sku,
-      quantity: item.quantity,
-      price: item.unit_price_brutto,
-      total: item.total_brutto,
-      configuration: item.configuration
-    })) || [],
-    
-    // Daty dla timeline
-    timeline: {
-      created: order.created_at,
-      paid: order.paid_at,
-      shipped: order.shipped_at,
-      delivered: order.delivered_at,
-      cancelled: order.cancelled_at
+    const {
+      companyName,
+      nip,
+      contactName,
+      email,
+      phone,
+      street,
+      houseNumber,
+      apartmentNumber,
+      postalCode,
+      city,
+      notes,
+      items,
+      totalNetto,
+      totalBrutto
+    } = body
+
+    // Walidacja
+    if (!companyName || !nip || !contactName || !email || !phone) {
+      return NextResponse.json(
+        { error: 'Brak wymaganych danych kontaktowych' },
+        { status: 400 }
+      )
     }
-  }))
 
-  return NextResponse.json({ orders: formattedOrders || [] })
+    if (!street || !houseNumber || !postalCode || !city) {
+      return NextResponse.json(
+        { error: 'Brak wymaganych danych adresowych' },
+        { status: 400 }
+      )
+    }
+
+    if (!items || items.length === 0) {
+      return NextResponse.json(
+        { error: 'Koszyk jest pusty' },
+        { status: 400 }
+      )
+    }
+
+    const supabase = await createClient()
+
+    // Generuj numer zamówienia
+    const orderNumber = `ZAM-${Date.now().toString(36).toUpperCase()}`
+
+    // Utwórz zamówienie w bazie
+    const { data: order, error: orderError } = await supabase
+      .from('shop_orders')
+      .insert({
+        order_number: orderNumber,
+        status: 'new',
+        // Dane klienta
+        company_name: companyName,
+        nip: nip,
+        contact_name: contactName,
+        email: email,
+        phone: phone,
+        // Adres
+        street: street,
+        house_number: houseNumber,
+        apartment_number: apartmentNumber || null,
+        postal_code: postalCode,
+        city: city,
+        // Kwoty
+        total_netto: totalNetto,
+        total_brutto: totalBrutto,
+        // Dodatkowe
+        notes: notes || null,
+        items: items
+      })
+      .select()
+      .single()
+
+    if (orderError) {
+      console.error('Error creating order:', orderError)
+      return NextResponse.json(
+        { error: 'Błąd tworzenia zamówienia' },
+        { status: 500 }
+      )
+    }
+
+    // Wyślij e-mail do klienta
+    try {
+      await sendOrderConfirmationEmail({
+        to: email,
+        orderNumber: orderNumber,
+        contactName: contactName,
+        items: items,
+        totalNetto: totalNetto,
+        totalBrutto: totalBrutto,
+        shippingAddress: {
+          street,
+          houseNumber,
+          apartmentNumber,
+          postalCode,
+          city
+        }
+      })
+    } catch (emailError) {
+      console.error('Error sending confirmation email:', emailError)
+      // Nie przerywamy - zamówienie zostało utworzone
+    }
+
+    // Wyślij powiadomienie do serwisu
+    try {
+      await sendNewOrderNotificationEmail({
+        orderNumber: orderNumber,
+        companyName: companyName,
+        contactName: contactName,
+        email: email,
+        phone: phone,
+        items: items,
+        totalBrutto: totalBrutto
+      })
+    } catch (emailError) {
+      console.error('Error sending notification email:', emailError)
+    }
+
+    return NextResponse.json({
+      success: true,
+      orderNumber: orderNumber,
+      orderId: order.id
+    })
+
+  } catch (error) {
+    console.error('Unexpected error:', error)
+    return NextResponse.json(
+      { error: 'Nieoczekiwany błąd serwera' },
+      { status: 500 }
+    )
+  }
 }

@@ -73,16 +73,6 @@ export const SHOP_CATEGORIES: ProductTypeCategory[] = [
           { id: '110xi4', name: 'Zebra 110Xi4', slug: 'zebra-110xi4', resolutions: [203, 300, 600] },
         ]
       },
-      {
-        id: 'mobile',
-        name: 'Drukarki mobilne',
-        slug: 'drukarki-mobilne',
-        models: [
-          { id: 'zq520', name: 'Zebra ZQ520', slug: 'zebra-zq520', resolutions: [203] },
-          { id: 'zq630', name: 'Zebra ZQ630', slug: 'zebra-zq630', resolutions: [203] },
-          { id: 'zq320', name: 'Zebra ZQ320', slug: 'zebra-zq320', resolutions: [203] },
-        ]
-      }
     ]
   },
   {

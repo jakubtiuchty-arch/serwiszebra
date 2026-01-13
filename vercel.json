@@ -11,6 +11,10 @@
     {
       "path": "/api/cron/check-repair-deliveries",
       "schedule": "*/30 * * * *"
+    },
+    {
+      "path": "/api/cron/sync-ingram",
+      "schedule": "0 */6 * * *"
     }
   ]
 }

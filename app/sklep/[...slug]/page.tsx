@@ -15,7 +15,6 @@ import {
   Shield,
   Phone,
   ShoppingCart,
-  Award,
   Clock,
   HelpCircle,
   Wrench,
@@ -119,6 +118,14 @@ interface Product {
   compatible_models: string[]
   manufacturer: string
   image_url: string | null
+  lead_time_days: string | null
+  attributes: {
+    stock_pl?: number
+    stock_de?: number
+    in_delivery?: number
+    ingram_price?: number
+    last_sync?: string
+  } | null
 }
 
 // Pobierz produkt po slug
@@ -428,42 +435,55 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
                   PN: <span className="font-mono font-medium text-gray-600">{product.sku}</span>
                 </p>
 
-                {/* Cena - kompaktowa */}
-                <div className="flex items-baseline gap-2 mb-2">
+                {/* Cena */}
+                <div className="flex items-baseline gap-2 mb-1">
                   <span className="text-2xl sm:text-3xl font-bold text-gray-900">
-                    {product.price.toFixed(0)} zł
+                    {product.price.toFixed(2).replace('.', ',')} zł
                   </span>
                   <span className="text-sm text-gray-500">netto</span>
-                  <span className="text-xs text-gray-400">({product.price_brutto.toFixed(0)} zł brutto)</span>
+                </div>
+                <div className="text-base text-gray-500 mb-4">
+                  {product.price_brutto.toFixed(2).replace('.', ',')} zł brutto
                 </div>
 
-                {/* Kompatybilność - ładny badge */}
-                {product.device_model && (
-                  <div className="flex items-center gap-2 mb-4">
-                    <span className="inline-flex items-center gap-1.5 bg-gradient-to-r from-blue-500 to-blue-600 text-white px-3 py-1.5 rounded-full text-xs sm:text-sm font-medium shadow-sm">
-                      <Printer className="w-3.5 h-3.5" />
-                      {product.device_model}
-                    </span>
-                    {product.resolution_dpi && (
-                      <span className="inline-flex items-center bg-gray-100 text-gray-700 px-2.5 py-1.5 rounded-full text-xs font-medium">
-                        {product.resolution_dpi} DPI
-                      </span>
-                    )}
-                  </div>
-                )}
-
-                {/* Dostępność */}
-                <div className="mb-4">
+                {/* Dostępność z informacją o czasie dostawy */}
+                <div className="mb-4 space-y-1">
                   {product.stock > 0 ? (
-                    <div className="flex items-center gap-2 text-green-600">
-                      <Check className="w-4 h-4" />
-                      <span className="text-sm font-medium">Dostępny</span>
-                      <span className="text-xs text-gray-500">({product.stock} szt.)</span>
+                    <>
+                      {(product.attributes?.stock_pl ?? 0) > 0 && (
+                        <div className="flex items-center gap-2 text-green-600">
+                          <Truck className="w-4 h-4" />
+                          <span className="text-sm font-medium">Dostawa 24h:</span>
+                          <span className="text-sm">{product.attributes?.stock_pl} szt.</span>
+                        </div>
+                      )}
+                      {(product.attributes?.stock_de ?? 0) > 0 && (
+                        <div className="flex items-center gap-2 text-blue-600">
+                          <Truck className="w-4 h-4" />
+                          <span className="text-sm font-medium">Dostawa 72h:</span>
+                          <span className="text-sm">{product.attributes?.stock_de} szt.</span>
+                        </div>
+                      )}
+                      {(product.attributes?.stock_pl ?? 0) === 0 && 
+                       (product.attributes?.stock_de ?? 0) === 0 && (
+                        <div className="flex items-center gap-2 text-green-600">
+                          <Check className="w-4 h-4" />
+                          <span className="text-sm font-medium">Dostępny</span>
+                          <span className="text-xs text-gray-500">({product.stock} szt.)</span>
+                        </div>
+                      )}
+                    </>
+                  ) : (product.attributes?.in_delivery ?? 0) > 0 ? (
+                    <div className="flex items-center gap-2 text-amber-600">
+                      <Truck className="w-4 h-4" />
+                      <span className="text-sm font-medium">Wysyłka 3-5 dni</span>
+                      <span className="text-xs text-amber-500">({product.attributes?.in_delivery} szt. w drodze)</span>
                     </div>
                   ) : (
                     <div className="flex items-center gap-2 text-amber-600">
                       <Clock className="w-4 h-4" />
-                      <span className="text-sm font-medium">Na zamówienie</span>
+                      <span className="text-sm font-medium">Wysyłka 5-7 dni</span>
+                      <span className="text-xs text-amber-500">(na zamówienie)</span>
                     </div>
                   )}
                 </div>
@@ -481,18 +501,6 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
                     stock: product.stock,
                   }}
                 />
-
-                {/* Benefits - tylko 2 */}
-                <div className="flex items-center gap-4 mt-4 pt-4 border-t border-gray-100">
-                  <div className="flex items-center gap-1.5 text-xs sm:text-sm text-gray-600">
-                    <Shield className="w-4 h-4 text-green-500" />
-                    <span>Gwarancja 12 mies.</span>
-                  </div>
-                  <div className="flex items-center gap-1.5 text-xs sm:text-sm text-gray-600">
-                    <Award className="w-4 h-4 text-blue-500" />
-                    <span>Oryginalna część</span>
-                  </div>
-                </div>
               </div>
             </div>
 
@@ -744,6 +752,210 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
             </div>
           </div>
         </section>
+
+        {/* SEO Content Section - Głowice */}
+        {productType.id === 'glowica' && slugPath.length === 1 && (
+          <section className="py-8 sm:py-12 bg-white border-t border-gray-100">
+            <div className="max-w-4xl mx-auto px-4">
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">
+                Głowice drukujące do drukarek Zebra — wszystko co musisz wiedzieć
+              </h2>
+              
+              <div className="prose prose-sm sm:prose-base prose-gray max-w-none">
+                <p className="text-gray-600 leading-relaxed mb-4">
+                  <strong>Głowica drukująca (printhead)</strong> to najważniejszy komponent każdej drukarki etykiet. 
+                  Odpowiada za przenoszenie obrazu na materiał — w przypadku drukarek termicznych poprzez kontrolowane 
+                  nagrzewanie mikro-elementów grzejnych, które aktywują papier termiczny lub topią taśmę barwiącą (ribbon).
+                </p>
+
+                <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
+                  Kiedy wymienić głowicę w drukarce Zebra?
+                </h3>
+                <p className="text-gray-600 leading-relaxed mb-4">
+                  Typowe objawy zużytej głowicy to: <strong>pionowe białe linie</strong> na wydruku (uszkodzone elementy grzewcze), 
+                  <strong>blady lub nierównomierny wydruk</strong>, oraz <strong>nieczytelne kody kreskowe</strong> mimo prawidłowych 
+                  ustawień ciemności. Żywotność głowicy zależy od jakości materiałów — średnio wynosi 1-2 miliony cali druku 
+                  (25-50 km etykiet).
+                </p>
+
+                <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
+                  Rozdzielczość głowicy: 203 DPI vs 300 DPI vs 600 DPI
+                </h3>
+                <ul className="text-gray-600 space-y-2 mb-4">
+                  <li><strong>203 DPI (8 punktów/mm)</strong> — standard dla etykiet logistycznych, kodów kreskowych 1D, 
+                  etykiet wysyłkowych. Najczęściej wybierana rozdzielczość.</li>
+                  <li><strong>300 DPI (12 punktów/mm)</strong> — idealna dla małych kodów 2D (QR, DataMatrix), drobnego tekstu, 
+                  etykiet farmaceutycznych i elektronicznych.</li>
+                  <li><strong>600 DPI (24 punkty/mm)</strong> — najwyższa jakość do etykiet jubilerskich, elektroniki, 
+                  mikro-kodów i aplikacji wymagających precyzji.</li>
+                </ul>
+
+                <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
+                  Dlaczego warto kupić oryginalną głowicę Zebra?
+                </h3>
+                <p className="text-gray-600 leading-relaxed mb-4">
+                  Oryginalne głowice Zebra gwarantują <strong>pełną kompatybilność</strong> z drukarką, 
+                  <strong>optymalną jakość wydruku</strong> i <strong>maksymalną żywotność</strong>. 
+                  Zamienniki często mają niższą gęstość elementów grzewczych, co skutkuje gorszą jakością i krótszą żywotnością. 
+                  Dodatkowo, użycie nieoryginalnych części może unieważnić gwarancję drukarki.
+                </p>
+
+                <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
+                  Jak samodzielnie wymienić głowicę?
+                </h3>
+                <p className="text-gray-600 leading-relaxed mb-4">
+                  Wymiana głowicy to prosta czynność serwisowa zajmująca 5-10 minut. Wystarczy: odłączyć drukarkę od zasilania, 
+                  otworzyć obudowę, odłączyć taśmę flat cable ze starej głowicy, odkręcić śruby mocujące (2-4 szt.), 
+                  zamontować nową głowicę i podłączyć kabel. Po wymianie zalecamy <strong>kalibrację czujników</strong> 
+                  i wydruk raportu konfiguracji.
+                </p>
+
+                <div className="bg-blue-50 border border-blue-100 rounded-lg p-4 mt-6">
+                  <p className="text-blue-800 text-sm">
+                    <strong>Potrzebujesz pomocy?</strong> Oferujemy profesjonalną wymianę głowicy w serwisie — 
+                    odbieramy drukarkę kurierem, wymieniamy głowicę, kalibrujemy i odsyłamy. 
+                    <a href="/#formularz" className="underline ml-1">Zgłoś naprawę →</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* SEO Content Section - Wałki dociskowe */}
+        {productType.id === 'walek' && slugPath.length === 1 && (
+          <section className="py-8 sm:py-12 bg-white border-t border-gray-100">
+            <div className="max-w-4xl mx-auto px-4">
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">
+                Wałki dociskowe do drukarek Zebra — kompletny przewodnik
+              </h2>
+              
+              <div className="prose prose-sm sm:prose-base prose-gray max-w-none">
+                <p className="text-gray-600 leading-relaxed mb-4">
+                  <strong>Wałek dociskowy (platen roller)</strong> to gumowy cylinder odpowiedzialny za równomierny 
+                  transport materiału pod głowicą drukującą. Współpracuje z głowicą, zapewniając stały docisk etykiety 
+                  podczas druku — od jego stanu zależy jakość wydruku i prawidłowe prowadzenie materiału.
+                </p>
+
+                <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
+                  Kiedy wymienić wałek dociskowy?
+                </h3>
+                <p className="text-gray-600 leading-relaxed mb-4">
+                  Wałek wymaga wymiany gdy zauważysz: <strong>nierównomierny wydruk</strong> (jaśniejszy/ciemniejszy w różnych 
+                  miejscach), <strong>problemy z prowadzeniem etykiet</strong> (zacięcia, krzywy podawanie), 
+                  <strong>poślizg materiału</strong>, lub <strong>widoczne zużycie gumy</strong> (stwardnienie, pęknięcia, 
+                  wgłębienia). Typowa żywotność to 2-3 lata przy normalnym użytkowaniu.
+                </p>
+
+                <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
+                  Objawy zużytego wałka dociskowego
+                </h3>
+                <ul className="text-gray-600 space-y-2 mb-4">
+                  <li><strong>Nierówny docisk</strong> — wydruk ciemniejszy z jednej strony, jaśniejszy z drugiej</li>
+                  <li><strong>Poślizg etykiet</strong> — materiał nie jest podawany równomiernie</li>
+                  <li><strong>Zacięcia papieru</strong> — etykiety zawijają się lub blokują</li>
+                  <li><strong>Hałas podczas druku</strong> — skrzypienie lub stukanie</li>
+                  <li><strong>Błędy czujników</strong> — drukarka nie wykrywa etykiet prawidłowo</li>
+                </ul>
+
+                <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
+                  Jak dbać o wałek dociskowy?
+                </h3>
+                <p className="text-gray-600 leading-relaxed mb-4">
+                  Regularne czyszczenie wałka <strong>alkoholem izopropylowym (IPA)</strong> wydłuża jego żywotność. 
+                  Czyść wałek co najmniej raz w miesiącu lub przy każdej wymianie rolki etykiet. Unikaj używania 
+                  rozpuszczalników i ostrych narzędzi. Przechowuj zapasowe wałki w chłodnym, suchym miejscu.
+                </p>
+
+                <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
+                  Wymiana wałka — krok po kroku
+                </h3>
+                <p className="text-gray-600 leading-relaxed mb-4">
+                  Wymiana wałka dociskowego to prosta czynność: wyłącz drukarkę, otwórz pokrywę, zwolnij mechanizm 
+                  blokujący wałek (zazwyczaj dźwignia lub zatrzask), wyjmij stary wałek, włóż nowy i zablokuj. 
+                  Po wymianie wykonaj <strong>kalibrację czujników</strong> dla optymalnego działania.
+                </p>
+
+                <div className="bg-blue-50 border border-blue-100 rounded-lg p-4 mt-6">
+                  <p className="text-blue-800 text-sm">
+                    <strong>Potrzebujesz pomocy?</strong> Wymieniamy wałki dociskowe w ramach serwisu — 
+                    odbieramy drukarkę kurierem, wymieniamy części, kalibrujemy i odsyłamy. 
+                    <a href="/#formularz" className="underline ml-1">Zgłoś naprawę →</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* SEO Content Section - Akumulatory */}
+        {productType.id === 'akumulator' && slugPath.length === 1 && (
+          <section className="py-8 sm:py-12 bg-white border-t border-gray-100">
+            <div className="max-w-4xl mx-auto px-4">
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">
+                Akumulatory do urządzeń Zebra — przewodnik kupującego
+              </h2>
+              
+              <div className="prose prose-sm sm:prose-base prose-gray max-w-none">
+                <p className="text-gray-600 leading-relaxed mb-4">
+                  <strong>Akumulatory litowo-jonowe (Li-Ion)</strong> to serce urządzeń mobilnych Zebra — drukarek 
+                  przenośnych, terminali i skanerów. Od ich pojemności i stanu zależy czas pracy bez ładowania. 
+                  Oryginalne baterie Zebra zapewniają optymalną wydajność i bezpieczeństwo użytkowania.
+                </p>
+
+                <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
+                  Jak długo działa bateria w urządzeniach Zebra?
+                </h3>
+                <p className="text-gray-600 leading-relaxed mb-4">
+                  Czas pracy zależy od modelu i intensywności użytkowania. Typowe wartości:
+                </p>
+                <ul className="text-gray-600 space-y-2 mb-4">
+                  <li><strong>Drukarki mobilne (ZQ520, ZQ630)</strong> — 4-8 godzin pracy, 300-500 etykiet na ładowanie</li>
+                  <li><strong>Terminale (TC21, TC52)</strong> — 8-14 godzin przy typowym użyciu</li>
+                  <li><strong>Skanery (DS8178)</strong> — 50 000+ skanów na ładowanie</li>
+                </ul>
+
+                <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
+                  Kiedy wymienić akumulator?
+                </h3>
+                <p className="text-gray-600 leading-relaxed mb-4">
+                  Baterie Li-Ion tracą pojemność z czasem — po <strong>300-500 pełnych cyklach</strong> ładowania 
+                  pojemność spada do ok. 80% początkowej. Wymień akumulator gdy: czas pracy znacząco się skrócił, 
+                  bateria szybko się rozładowuje, urządzenie niespodziewanie się wyłącza, lub bateria jest <strong>spuchnięta</strong> (natychmiast wycofaj z użytku!).
+                </p>
+
+                <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
+                  Dlaczego oryginalne akumulatory Zebra?
+                </h3>
+                <ul className="text-gray-600 space-y-2 mb-4">
+                  <li><strong>Bezpieczeństwo</strong> — certyfikowane ogniwa z zabezpieczeniami przed przegrzaniem, 
+                  przeładowaniem i zwarciem</li>
+                  <li><strong>Kompatybilność</strong> — pełna współpraca z elektroniką urządzenia i ładowarkami</li>
+                  <li><strong>Żywotność</strong> — wyższa liczba cykli ładowania niż zamienniki</li>
+                  <li><strong>Gwarancja</strong> — objęte gwarancją producenta, zamienniki mogą ją unieważnić</li>
+                </ul>
+
+                <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
+                  Jak przedłużyć żywotność baterii?
+                </h3>
+                <p className="text-gray-600 leading-relaxed mb-4">
+                  Unikaj <strong>głębokiego rozładowania</strong> (poniżej 20%) i <strong>przegrzewania</strong>. 
+                  Przechowuj zapasowe baterie naładowane w 40-60% w temperaturze pokojowej. Używaj tylko 
+                  oryginalnych ładowarek Zebra. Regularnie aktualizuj firmware urządzenia — często zawiera 
+                  optymalizacje zarządzania energią.
+                </p>
+
+                <div className="bg-blue-50 border border-blue-100 rounded-lg p-4 mt-6">
+                  <p className="text-blue-800 text-sm">
+                    <strong>Potrzebujesz pomocy?</strong> Diagnozujemy problemy z baterią i zasilaniem. 
+                    Jeśli urządzenie nie ładuje się prawidłowo, może to być usterka ładowarki lub elektroniki. 
+                    <a href="/#formularz" className="underline ml-1">Zgłoś do serwisu →</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
       </div>
 
       <Footer />

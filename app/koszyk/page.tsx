@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useCartStore } from '@/lib/cart-store'
 import Header from '@/components/Header'
 import { 
@@ -23,6 +24,9 @@ const PRODUCT_TYPE_ICONS: Record<string, any> = {
   akumulator: Battery,
   kabel: Cable
 }
+
+// Domyślne zdjęcie dla głowic
+const DEFAULT_PRINTHEAD_IMAGE = '/sklep_photo/głowica-203dpi-do-drukarki-zebra-zd421t-P1112640-218.png'
 
 export default function KoszykPage() {
   const [mounted, setMounted] = useState(false)
@@ -146,18 +150,28 @@ export default function KoszykPage() {
                         <div className="hidden md:grid md:grid-cols-12 gap-3 items-center">
 
                           {/* PRODUCT INFO - KOMPAKTOWY */}
-                          <div className="col-span-5 flex items-center gap-2">
-                            <div className="w-12 h-12 bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                              <Icon className="w-5 h-5 text-gray-400" />
+                          <div className="col-span-5 flex items-center gap-3">
+                            <div className="w-14 h-14 bg-white rounded-lg flex items-center justify-center flex-shrink-0 border border-gray-100 overflow-hidden">
+                              {item.product_type === 'glowica' ? (
+                                <Image
+                                  src={DEFAULT_PRINTHEAD_IMAGE}
+                                  alt={item.name}
+                                  width={48}
+                                  height={48}
+                                  className="object-contain"
+                                />
+                              ) : (
+                                <Icon className="w-6 h-6 text-gray-400" />
+                              )}
                             </div>
                             <div className="flex-1 min-w-0">
                               <Link
                                 href={`/sklep/${item.slug}`}
-                                className="text-xs font-semibold text-gray-900 hover:text-gray-700 transition-colors line-clamp-2"
+                                className="text-sm font-semibold text-gray-900 hover:text-gray-700 transition-colors line-clamp-2"
                               >
                                 {item.name}
                               </Link>
-                              <div className="text-[10px] text-gray-600 mt-0.5">
+                              <div className="text-[10px] text-gray-500 mt-0.5">
                                 PN: <span className="font-mono">{item.sku}</span>
                               </div>
                             </div>
@@ -168,19 +182,19 @@ export default function KoszykPage() {
                             <button
                               onClick={() => updateQuantity(item.id, item.quantity - 1)}
                               disabled={item.quantity <= 1}
-                              className="w-6 h-6 rounded-lg bg-gray-100 hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center transition-colors"
+                              className="w-7 h-7 rounded-lg bg-gray-100 hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center transition-colors"
                             >
-                              <Minus className="w-3 h-3" />
+                              <Minus className="w-3.5 h-3.5" />
                             </button>
-                            <span className="w-10 text-center text-sm font-semibold text-gray-900">
+                            <span className="w-10 text-center text-sm font-bold text-gray-900">
                               {item.quantity}
                             </span>
                             <button
                               onClick={() => updateQuantity(item.id, item.quantity + 1)}
                               disabled={item.quantity >= item.stock}
-                              className="w-6 h-6 rounded-lg bg-gray-100 hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center transition-colors"
+                              className="w-7 h-7 rounded-lg bg-gray-100 hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center transition-colors"
                             >
-                              <Plus className="w-3 h-3" />
+                              <Plus className="w-3.5 h-3.5" />
                             </button>
                           </div>
 
@@ -190,7 +204,7 @@ export default function KoszykPage() {
                               {item.price.toFixed(2)} zł
                             </div>
                             <div className="text-[10px] text-gray-500">
-                              {item.price_brutto.toFixed(2)} zł brutto
+                              netto/szt
                             </div>
                           </div>
 
@@ -200,7 +214,7 @@ export default function KoszykPage() {
                               {(item.price * item.quantity).toFixed(2)} zł
                             </div>
                             <div className="text-[10px] text-gray-500">
-                              {(item.price_brutto * item.quantity).toFixed(2)} zł brutto
+                              netto
                             </div>
                           </div>
 
@@ -218,18 +232,28 @@ export default function KoszykPage() {
 
                         {/* MOBILE LAYOUT - KOMPAKTOWY */}
                         <div className="md:hidden space-y-2">
-                          <div className="flex gap-2">
-                            <div className="w-12 h-12 bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                              <Icon className="w-5 h-5 text-gray-400" />
+                          <div className="flex gap-3">
+                            <div className="w-14 h-14 bg-white rounded-lg flex items-center justify-center flex-shrink-0 border border-gray-100 overflow-hidden">
+                              {item.product_type === 'glowica' ? (
+                                <Image
+                                  src={DEFAULT_PRINTHEAD_IMAGE}
+                                  alt={item.name}
+                                  width={48}
+                                  height={48}
+                                  className="object-contain"
+                                />
+                              ) : (
+                                <Icon className="w-6 h-6 text-gray-400" />
+                              )}
                             </div>
                             <div className="flex-1 min-w-0">
                               <Link
                                 href={`/sklep/${item.slug}`}
-                                className="text-xs font-semibold text-gray-900 hover:text-gray-700 transition-colors line-clamp-2"
+                                className="text-sm font-semibold text-gray-900 hover:text-gray-700 transition-colors line-clamp-2"
                               >
                                 {item.name}
                               </Link>
-                              <div className="text-[10px] text-gray-600 mt-0.5">
+                              <div className="text-[10px] text-gray-500 mt-0.5">
                                 PN: <span className="font-mono">{item.sku}</span>
                               </div>
                             </div>
@@ -240,24 +264,24 @@ export default function KoszykPage() {
                               <button
                                 onClick={() => updateQuantity(item.id, item.quantity - 1)}
                                 disabled={item.quantity <= 1}
-                                className="w-6 h-6 rounded-lg bg-gray-100 hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center transition-colors"
+                                className="w-7 h-7 rounded-lg bg-gray-100 hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center transition-colors"
                               >
-                                <Minus className="w-3 h-3" />
+                                <Minus className="w-3.5 h-3.5" />
                               </button>
-                              <span className="w-10 text-center text-sm font-semibold text-gray-900">
+                              <span className="w-10 text-center text-sm font-bold text-gray-900">
                                 {item.quantity}
                               </span>
                               <button
                                 onClick={() => updateQuantity(item.id, item.quantity + 1)}
                                 disabled={item.quantity >= item.stock}
-                                className="w-6 h-6 rounded-lg bg-gray-100 hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center transition-colors"
+                                className="w-7 h-7 rounded-lg bg-gray-100 hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center transition-colors"
                               >
-                                <Plus className="w-3 h-3" />
+                                <Plus className="w-3.5 h-3.5" />
                               </button>
                             </div>
 
                             <div className="text-right">
-                              <div className="text-sm font-bold text-gray-900">
+                              <div className="text-base font-bold text-gray-900">
                                 {(item.price * item.quantity).toFixed(2)} zł
                               </div>
                               <div className="text-[10px] text-gray-500">netto</div>
@@ -265,8 +289,8 @@ export default function KoszykPage() {
                           </div>
 
                           <div className="flex items-center justify-between pt-2 border-t border-gray-200">
-                            <div className="text-[10px] text-gray-600">
-                              Cena jedn.: <span className="font-semibold text-gray-900">{item.price.toFixed(2)} zł</span>
+                            <div className="text-xs text-gray-600">
+                              {item.price.toFixed(2)} zł <span className="text-gray-400">netto/szt</span>
                             </div>
                             <button
                               onClick={() => removeItem(item.id)}

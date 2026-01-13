@@ -11,7 +11,9 @@ import {
   syncProductsWithIngram,
   testSkuFormats,
   testRawXml,
-  testSingleSku
+  testSingleSku,
+  fetchProductCatalog,
+  findProductInCatalog
 } from '@/lib/ingram-micro'
 
 /**
@@ -105,6 +107,21 @@ export async function GET(request: Request) {
           example: 'POST /api/admin/ingram?action=rawxml z body: <PNARequest>...</PNARequest>'
         }, { status: 400 })
 
+      // ========== CSV API (Bulk Catalog) ==========
+      
+      // Pobierz cały katalog produktów (CSV)
+      case 'catalog':
+        const catalogResult = await fetchProductCatalog()
+        return NextResponse.json(catalogResult)
+
+      // Znajdź produkt w katalogu CSV
+      case 'find':
+        if (!sku) {
+          return NextResponse.json({ error: 'Brak parametru sku' }, { status: 400 })
+        }
+        const findResult = await findProductInCatalog(sku)
+        return NextResponse.json(findResult)
+
       // Product Details
       case 'details':
       case 'info':
@@ -141,32 +158,31 @@ export async function GET(request: Request) {
       case 'sync':
         const syncResult = await syncProductsWithIngram(supabase)
         return NextResponse.json({
-          success: true,
-          message: `Zsynchronizowano ${syncResult.updated} produktów`,
+          success: syncResult.errors.length === 0,
+          message: `Zsynchronizowano ${syncResult.updated} produktów (${syncResult.notFound} nie znaleziono w Ingram)`,
           updated: syncResult.updated,
-          errors: syncResult.errors
+          notFound: syncResult.notFound,
+          errors: syncResult.errors,
+          details: syncResult.details
         })
 
       default:
         return NextResponse.json({ 
           error: 'Nieznana akcja',
           available_actions: {
+            // === CSV API (ZALECANE dla cen i dostępności) ===
+            catalog: {
+              description: '📦 Pobiera cały katalog produktów z cenami (CSV) - ZALECANE',
+              example: '/api/admin/ingram?action=catalog'
+            },
+            find: {
+              description: '🔍 Znajduje produkt w katalogu CSV po SKU',
+              example: '/api/admin/ingram?action=find&sku=P1112640-218'
+            },
+            // === XML API ===
             test: {
-              description: 'Testuje połączenie z API',
+              description: 'Testuje połączenie z XML API (pobiera adresy dostawy)',
               example: '/api/admin/ingram?action=test'
-            },
-            pna: {
-              description: 'Price and Availability (do 50 SKU) - automatycznie próbuje różne formaty SKU',
-              example: '/api/admin/ingram?action=pna&sku=P1058930-009',
-              example_multi: '/api/admin/ingram?action=pna&skus=P1058930-009,P1058930-010'
-            },
-            testsku: {
-              description: 'Testuje różne formaty SKU i zwraca który działa (debugowanie)',
-              example: '/api/admin/ingram?action=testsku&sku=P1112640-218'
-            },
-            details: {
-              description: 'Szczegóły produktu',
-              example: '/api/admin/ingram?action=details&sku=P1058930-009'
             },
             addresses: {
               description: 'Lista adresów dostawy',
@@ -187,6 +203,15 @@ export async function GET(request: Request) {
             sync: {
               description: 'Synchronizuje ceny produktów z Ingram Micro',
               example: '/api/admin/ingram?action=sync'
+            },
+            // === Debugowanie ===
+            pna: {
+              description: '⚠️ XML PnA (wolne/timeouty) - użyj "catalog" zamiast tego',
+              example: '/api/admin/ingram?action=pna&sku=P1058930-009'
+            },
+            testsku: {
+              description: 'Testuje różne formaty SKU (debugowanie)',
+              example: '/api/admin/ingram?action=testsku&sku=P1112640-218'
             }
           }
         }, { status: 400 })

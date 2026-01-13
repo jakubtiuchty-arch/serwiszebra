@@ -2241,3 +2241,204 @@ ${getEmailHeader()}
     </html>
   `
 }
+
+// ============================================================
+// SHOP ORDER EMAILS
+// ============================================================
+
+interface ShopOrderItem {
+  name: string
+  sku: string
+  quantity: number
+  priceNetto: number
+  priceBrutto: number
+}
+
+interface OrderConfirmationEmailData {
+  to: string
+  orderNumber: string
+  contactName: string
+  items: ShopOrderItem[]
+  totalNetto: number
+  totalBrutto: number
+  shippingAddress: {
+    street: string
+    houseNumber: string
+    apartmentNumber?: string
+    postalCode: string
+    city: string
+  }
+}
+
+export async function sendOrderConfirmationEmail(data: OrderConfirmationEmailData) {
+  const itemsHtml = data.items.map(item => `
+    <tr>
+      <td style="padding: 12px 0; border-bottom: 1px solid #e5e7eb;">
+        <strong style="color: #111827;">${item.name}</strong><br>
+        <span style="color: #6b7280; font-size: 12px;">PN: ${item.sku}</span>
+      </td>
+      <td style="padding: 12px 0; border-bottom: 1px solid #e5e7eb; text-align: center; color: #6b7280;">
+        ${item.quantity} szt.
+      </td>
+      <td style="padding: 12px 0; border-bottom: 1px solid #e5e7eb; text-align: right; color: #111827; font-weight: 500;">
+        ${(item.priceNetto * item.quantity).toFixed(2).replace('.', ',')} zł
+      </td>
+    </tr>
+  `).join('')
+
+  const addressParts = [
+    `ul. ${data.shippingAddress.street} ${data.shippingAddress.houseNumber}`,
+    data.shippingAddress.apartmentNumber ? `lok. ${data.shippingAddress.apartmentNumber}` : '',
+    `${data.shippingAddress.postalCode} ${data.shippingAddress.city}`
+  ].filter(Boolean)
+
+  await resend.emails.send({
+    from: 'Sklep TAKMA <sklep@serwis-zebry.pl>',
+    to: data.to,
+    subject: `Potwierdzenie zamówienia ${data.orderNumber}`,
+    html: `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #f3f4f6;">
+      <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff;">
+        
+        <!-- Header -->
+        <div style="background: linear-gradient(135deg, #16a34a 0%, #15803d 100%); padding: 32px; text-align: center;">
+          <h1 style="margin: 0; color: #ffffff; font-size: 24px;">Zamówienie przyjęte</h1>
+          <p style="margin: 8px 0 0 0; color: rgba(255,255,255,0.9); font-size: 14px;">
+            Nr ${data.orderNumber}
+          </p>
+        </div>
+
+        <!-- Content -->
+        <div style="padding: 32px;">
+          <p style="margin: 0 0 24px 0; color: #374151; font-size: 16px;">
+            Cześć <strong>${data.contactName}</strong>,
+          </p>
+          <p style="margin: 0 0 24px 0; color: #4b5563; font-size: 14px; line-height: 1.6;">
+            Dziękujemy za złożenie zamówienia w sklepie TAKMA. Poniżej znajdziesz szczegóły zamówienia.
+          </p>
+
+          <!-- Products -->
+          <table style="width: 100%; border-collapse: collapse; margin-bottom: 24px;">
+            <thead>
+              <tr style="border-bottom: 2px solid #e5e7eb;">
+                <th style="padding: 12px 0; text-align: left; color: #6b7280; font-size: 12px; text-transform: uppercase;">Produkt</th>
+                <th style="padding: 12px 0; text-align: center; color: #6b7280; font-size: 12px; text-transform: uppercase;">Ilość</th>
+                <th style="padding: 12px 0; text-align: right; color: #6b7280; font-size: 12px; text-transform: uppercase;">Cena netto</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${itemsHtml}
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="2" style="padding: 12px 0; text-align: right; color: #6b7280;">Suma netto:</td>
+                <td style="padding: 12px 0; text-align: right; color: #111827; font-weight: 500;">${data.totalNetto.toFixed(2).replace('.', ',')} zł</td>
+              </tr>
+              <tr>
+                <td colspan="2" style="padding: 8px 0; text-align: right; color: #6b7280;">VAT 23%:</td>
+                <td style="padding: 8px 0; text-align: right; color: #6b7280;">${(data.totalBrutto - data.totalNetto).toFixed(2).replace('.', ',')} zł</td>
+              </tr>
+              <tr>
+                <td colspan="2" style="padding: 12px 0; text-align: right; font-size: 18px; font-weight: bold; color: #111827;">Razem brutto:</td>
+                <td style="padding: 12px 0; text-align: right; font-size: 18px; font-weight: bold; color: #16a34a;">${data.totalBrutto.toFixed(2).replace('.', ',')} zł</td>
+              </tr>
+            </tfoot>
+          </table>
+
+          <!-- Shipping address -->
+          <div style="background-color: #f9fafb; border-radius: 8px; padding: 20px; margin-bottom: 24px;">
+            <h3 style="margin: 0 0 12px 0; color: #374151; font-size: 14px; text-transform: uppercase;">Adres dostawy</h3>
+            <p style="margin: 0; color: #4b5563; font-size: 14px; line-height: 1.6;">
+              ${addressParts.join('<br>')}
+            </p>
+          </div>
+
+          <!-- Next steps -->
+          <div style="background-color: #fef3c7; border-radius: 8px; padding: 20px; margin-bottom: 24px; border: 1px solid #fcd34d;">
+            <h3 style="margin: 0 0 12px 0; color: #92400e; font-size: 14px;">Co dalej?</h3>
+            <p style="margin: 0; color: #78350f; font-size: 14px; line-height: 1.6;">
+              Skontaktujemy się z Tobą telefonicznie lub mailowo w celu potwierdzenia zamówienia i ustalenia płatności. 
+              Zamówienie zostanie wysłane po zaksięgowaniu wpłaty.
+            </p>
+          </div>
+
+          <!-- Contact -->
+          <div style="text-align: center; color: #6b7280; font-size: 14px;">
+            <p style="margin: 0 0 8px 0;">Masz pytania? Skontaktuj się z nami:</p>
+            <p style="margin: 0;">
+              <strong>Tel:</strong> +48 601 619 898<br>
+              <strong>Email:</strong> serwis@takma.com.pl
+            </p>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <div style="background-color: #f9fafb; padding: 24px; text-align: center; color: #6b7280; font-size: 12px;">
+          <p style="margin: 0 0 4px 0;">TAKMA Tadeusz Tiuchty | ul. Poświęcka 1a, 51-128 Wrocław</p>
+          <p style="margin: 0;">NIP: 9151004377 | www.serwis-zebry.pl</p>
+        </div>
+
+      </div>
+    </body>
+    </html>
+    `
+  })
+}
+
+interface NewOrderNotificationEmailData {
+  orderNumber: string
+  companyName: string
+  contactName: string
+  email: string
+  phone: string
+  items: ShopOrderItem[]
+  totalBrutto: number
+}
+
+export async function sendNewOrderNotificationEmail(data: NewOrderNotificationEmailData) {
+  const itemsList = data.items.map(item => 
+    `• ${item.name} (${item.sku}) x${item.quantity} - ${(item.priceNetto * item.quantity).toFixed(2)} zł netto`
+  ).join('\n')
+
+  await resend.emails.send({
+    from: 'Sklep TAKMA <sklep@serwis-zebry.pl>',
+    to: 'serwis@takma.com.pl',
+    subject: `🛒 Nowe zamówienie ${data.orderNumber} - ${data.companyName}`,
+    html: `
+    <!DOCTYPE html>
+    <html>
+    <head><meta charset="utf-8"></head>
+    <body style="font-family: sans-serif; padding: 20px;">
+      <h2 style="color: #16a34a;">Nowe zamówienie ze sklepu</h2>
+      
+      <p><strong>Nr zamówienia:</strong> ${data.orderNumber}</p>
+      
+      <h3>Dane klienta:</h3>
+      <p>
+        <strong>Firma:</strong> ${data.companyName}<br>
+        <strong>Osoba:</strong> ${data.contactName}<br>
+        <strong>Email:</strong> ${data.email}<br>
+        <strong>Tel:</strong> ${data.phone}
+      </p>
+      
+      <h3>Produkty:</h3>
+      <pre style="background: #f5f5f5; padding: 15px; border-radius: 8px;">${itemsList}</pre>
+      
+      <h3>Suma: ${data.totalBrutto.toFixed(2)} zł brutto</h3>
+      
+      <p style="margin-top: 30px;">
+        <a href="https://www.serwis-zebry.pl/admin/zamowienia" style="background: #16a34a; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px;">
+          Zobacz w panelu admina
+        </a>
+      </p>
+    </body>
+    </html>
+    `
+  })
+}
