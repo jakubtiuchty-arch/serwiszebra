@@ -59,16 +59,20 @@ function escapeXml(str: string): string {
 }
 
 /**
- * Wysyła XML request do Ingram Micro API
+ * Wysyła XML request do Ingram Micro API z timeout
  */
-async function sendXmlRequest(xmlBody: string): Promise<IngramResponse> {
+async function sendXmlRequest(xmlBody: string, timeoutMs: number = 5000): Promise<IngramResponse> {
   if (!INGRAM_API_KEY) {
     return { success: false, error: 'Brak klucza API Ingram Micro (INGRAM_API_KEY)' }
   }
 
-  console.log('[Ingram] Request:', xmlBody)
+  console.log('[Ingram] Request (timeout: ' + timeoutMs + 'ms):', xmlBody.substring(0, 300))
 
   try {
+    // AbortController dla timeout
+    const controller = new AbortController()
+    const timeoutId = setTimeout(() => controller.abort(), timeoutMs)
+
     const response = await fetch(INGRAM_API_URL, {
       method: 'POST',
       headers: {
@@ -76,10 +80,13 @@ async function sendXmlRequest(xmlBody: string): Promise<IngramResponse> {
         'Accept': 'application/xml',
       },
       body: xmlBody,
+      signal: controller.signal,
     })
 
+    clearTimeout(timeoutId)
+
     const xmlText = await response.text()
-    console.log('[Ingram] Response:', xmlText.substring(0, 1000))
+    console.log('[Ingram] Response:', xmlText.substring(0, 500))
 
     // Sprawdź błędy HTTP
     if (!response.ok) {
@@ -113,6 +120,10 @@ async function sendXmlRequest(xmlBody: string): Promise<IngramResponse> {
     return { success: true, data: xmlText, rawResponse: xmlText }
 
   } catch (error) {
+    if (error instanceof Error && error.name === 'AbortError') {
+      console.error('[Ingram] Timeout after', timeoutMs, 'ms')
+      return { success: false, error: `Timeout po ${timeoutMs}ms` }
+    }
     console.error('[Ingram] Error:', error)
     return { 
       success: false, 
@@ -178,25 +189,25 @@ export async function checkPriceAndAvailability(skus: string[], tryAllFormats: b
   // Jeśli tryAllFormats, próbuj różnych formatów dla każdego SKU
   let skusToCheck = skus
   if (tryAllFormats && skus.length === 1) {
-    skusToCheck = normalizeSkuFormats(skus[0])
+    // Tylko 2 najważniejsze formaty
+    skusToCheck = [
+      skus[0],
+      'ZB' + skus[0].replace(/^ZB/i, '').replace(/-/g, ''),
+    ]
     console.log('[Ingram] Próbuję formatów SKU:', skusToCheck)
   }
 
-  // Próbuj różnych struktur XML
+  // Tylko 2 najważniejsze warianty XML (szybsze)
   const xmlVariants = [
     // Wariant 1: ItemID
     skusToCheck.map(sku => `<Item><ItemID>${escapeXml(sku)}</ItemID></Item>`).join(''),
-    // Wariant 2: IngramSKU
-    skusToCheck.map(sku => `<Item><IngramSKU>${escapeXml(sku)}</IngramSKU></Item>`).join(''),
-    // Wariant 3: VPN (Vendor Part Number)
+    // Wariant 2: VPN (Vendor Part Number)
     skusToCheck.map(sku => `<Item><VPN>${escapeXml(sku)}</VPN></Item>`).join(''),
-    // Wariant 4: ManufacturerPartNumber
-    skusToCheck.map(sku => `<Item><ManufacturerPartNumber>${escapeXml(sku)}</ManufacturerPartNumber></Item>`).join(''),
   ]
 
   for (let i = 0; i < xmlVariants.length; i++) {
     const itemsXml = xmlVariants[i]
-    const variantName = ['ItemID', 'IngramSKU', 'VPN', 'ManufacturerPartNumber'][i]
+    const variantName = ['ItemID', 'VPN'][i]
     
     const xmlRequest = `<?xml version="1.0" encoding="UTF-8"?>
 <PNARequest>
@@ -207,7 +218,7 @@ export async function checkPriceAndAvailability(skus: string[], tryAllFormats: b
 </PNARequest>`
 
     console.log(`[Ingram] Próbuję wariant ${variantName}...`)
-    const response = await sendXmlRequest(xmlRequest)
+    const response = await sendXmlRequest(xmlRequest, 4000) // 4s timeout
     
     if (!response.success) {
       continue // Próbuj następny wariant
@@ -229,34 +240,29 @@ export async function checkPriceAndAvailability(skus: string[], tryAllFormats: b
     }
   }
 
-  // Żaden wariant nie zadziałał - zwróć ostatnią odpowiedź
-  const lastXmlRequest = `<?xml version="1.0" encoding="UTF-8"?>
-<PNARequest>
-  <TransactionHeader>
-    <APIKey>${INGRAM_API_KEY}</APIKey>
-  </TransactionHeader>
-  <Items>${xmlVariants[0]}</Items>
-</PNARequest>`
-
-  const lastResponse = await sendXmlRequest(lastXmlRequest)
-  
+  // Żaden wariant nie zadziałał - zwróć ostatnią odpowiedź bez dodatkowego requestu
   return { 
     success: true, 
     data: [], 
-    rawResponse: lastResponse.rawResponse,
     triedFormats: tryAllFormats ? skusToCheck : undefined,
-    error: 'Nie znaleziono produktu (przetestowano wszystkie warianty XML: ItemID, IngramSKU, VPN, ManufacturerPartNumber)'
+    error: 'Nie znaleziono produktu w Ingram Micro'
   }
 }
 
 /**
  * Testuje różne formaty SKU i struktury XML
- * Pomocne do debugowania, który format działa
+ * Ograniczona wersja - tylko najważniejsze kombinacje (max 6 requestów)
  */
 export async function testSkuFormats(sku: string): Promise<IngramResponse> {
-  const formats = normalizeSkuFormats(sku)
-  const xmlTags = ['ItemID', 'IngramSKU', 'VPN', 'ManufacturerPartNumber', 'PartNumber', 'SKU']
-  const results: { format: string; xmlTag: string; found: boolean; rawResponse?: string }[] = []
+  // Tylko 2 najważniejsze formaty
+  const formats = [
+    sku,  // oryginalny
+    'ZB' + sku.replace(/^ZB/i, '').replace(/-/g, ''),  // ZB + bez myślników
+  ]
+  
+  // Tylko 3 najważniejsze tagi XML
+  const xmlTags = ['ItemID', 'VPN', 'IngramSKU']
+  const results: { format: string; xmlTag: string; found: boolean }[] = []
   
   console.log(`[Ingram] Testuję ${formats.length} formatów x ${xmlTags.length} tagów XML dla SKU: ${sku}`)
   
@@ -274,16 +280,11 @@ export async function testSkuFormats(sku: string): Promise<IngramResponse> {
   </Items>
 </PNARequest>`
 
-      const response = await sendXmlRequest(xmlRequest)
+      const response = await sendXmlRequest(xmlRequest, 4000) // 4s timeout per request
       const items = response.success ? parsePnAResponse(response.data) : []
       const found = items.length > 0
       
-      results.push({
-        format,
-        xmlTag,
-        found,
-        rawResponse: response.rawResponse?.substring(0, 200)
-      })
+      results.push({ format, xmlTag, found })
       
       console.log(`[Ingram] ${format} + <${xmlTag}>: ${found ? 'ZNALEZIONO!' : 'nie znaleziono'}`)
       
@@ -301,11 +302,11 @@ export async function testSkuFormats(sku: string): Promise<IngramResponse> {
   
   return { 
     success: false, 
-    error: `Nie znaleziono produktu. Przetestowano ${formats.length * xmlTags.length} kombinacji.`,
+    error: `Nie znaleziono produktu "${sku}". Sprawdź czy SKU jest poprawne.`,
     data: { 
       testedFormats: formats, 
       testedXmlTags: xmlTags,
-      results: results.slice(0, 10) // Pokaż pierwsze 10 wyników
+      results
     }
   }
 }
@@ -318,7 +319,7 @@ export async function testRawXml(xmlBody: string): Promise<IngramResponse> {
   if (!xmlBody.includes('<APIKey>')) {
     xmlBody = xmlBody.replace('<TransactionHeader>', `<TransactionHeader><APIKey>${INGRAM_API_KEY}</APIKey>`)
   }
-  return sendXmlRequest(xmlBody)
+  return sendXmlRequest(xmlBody, 5000) // 5s timeout
 }
 
 /**
@@ -383,7 +384,7 @@ export async function getProductDetails(sku: string): Promise<IngramResponse> {
   </Items>
 </ProductDetailsRequest>`
 
-  const response = await sendXmlRequest(xmlRequest)
+  const response = await sendXmlRequest(xmlRequest, 5000) // 5s timeout
   
   if (!response.success) {
     return response
@@ -428,7 +429,7 @@ export async function getDeliveryAddresses(): Promise<IngramResponse> {
   </TransactionHeader>
 </DeliveryAddressesListRequest>`
 
-  return sendXmlRequest(xmlRequest)
+  return sendXmlRequest(xmlRequest, 8000) // 8s timeout - może być duża lista
 }
 
 // ============================================
@@ -458,7 +459,7 @@ export async function getOrdersList(dateFrom?: string, dateTo?: string): Promise
   ${filterXml ? `<Filter>${filterXml}</Filter>` : ''}
 </OrdersListRequest>`
 
-  return sendXmlRequest(xmlRequest)
+  return sendXmlRequest(xmlRequest, 8000) // 8s timeout
 }
 
 // ============================================
@@ -478,7 +479,7 @@ export async function getOrderDetails(orderNumber: string): Promise<IngramRespon
   <IMOrderNumber>${escapeXml(orderNumber)}</IMOrderNumber>
 </OrderDetailsRequest>`
 
-  return sendXmlRequest(xmlRequest)
+  return sendXmlRequest(xmlRequest, 5000) // 5s timeout
 }
 
 // ============================================
@@ -508,7 +509,7 @@ export async function getInvoicesList(dateFrom?: string, dateTo?: string): Promi
   ${filterXml ? `<Filter>${filterXml}</Filter>` : ''}
 </InvoicesListRequest>`
 
-  return sendXmlRequest(xmlRequest)
+  return sendXmlRequest(xmlRequest, 8000) // 8s timeout
 }
 
 // ============================================
