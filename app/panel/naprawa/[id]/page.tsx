@@ -74,6 +74,8 @@ interface Repair {
   // Nowe pola dla gwarancji
   repair_type: 'paid' | 'warranty' | 'warranty_rejected'
   is_warranty: boolean
+  // Notatki serwisowe
+  service_notes: string | null
 }
 
 interface StatusHistory {
@@ -895,6 +897,21 @@ const handlePaymentSuccess = async () => {
               </a>
             )}
           </div>
+        </div>
+      )}
+
+      {/* Wykonane prace serwisowe - widoczne gdy status zakończony lub wysłane */}
+      {repair.service_notes && ['zakonczone', 'wyslane'].includes(repair.status) && (
+        <div className="bg-emerald-50 rounded-xl shadow-sm border border-emerald-200 p-3 md:p-4">
+          <div className="flex items-center mb-2 md:mb-3">
+            <div className="bg-emerald-100 p-1.5 rounded-lg">
+              <CheckCircle className="w-4 h-4 text-emerald-600" />
+            </div>
+            <h2 className="text-xs md:text-sm font-semibold text-emerald-900 ml-2">Wykonane prace serwisowe</h2>
+          </div>
+          <p className="text-xs md:text-sm text-emerald-800 whitespace-pre-wrap leading-relaxed bg-white/60 p-3 rounded-lg border border-emerald-200">
+            {repair.service_notes}
+          </p>
         </div>
       )}
 

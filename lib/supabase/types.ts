@@ -42,6 +42,7 @@ export interface Database {
           paid_at: string | null
           user_id: string | null
           courier_tracking_number: string | null
+          service_notes: string | null // Diagnoza i wykonane prace serwisowe
         }
         Insert: {
           id?: string
@@ -108,6 +109,7 @@ export interface Database {
           paid_at?: string | null
           user_id?: string | null
           courier_tracking_number?: string | null
+          service_notes?: string | null // Diagnoza i wykonane prace serwisowe
         }
       }
       repair_status_history: {

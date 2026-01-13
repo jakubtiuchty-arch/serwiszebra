@@ -57,6 +57,8 @@ interface RepairRequest {
   // Nowe pola dla gwarancji
   repair_type: 'paid' | 'warranty' | 'warranty_rejected'
   is_warranty: boolean
+  // Notatki serwisowe (diagnoza i wykonane prace)
+  service_notes: string | null
 }
 
 interface StatusHistory {
@@ -185,6 +187,9 @@ export default function AdminRepairDetailPage() {
     pickup_time_from: '09',
     pickup_time_to: '17'
   })
+  const [serviceNotesForm, setServiceNotesForm] = useState({
+    service_notes: ''
+  })
 
   const [submitting, setSubmitting] = useState<string | null>(null)
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
@@ -238,6 +243,9 @@ export default function AdminRepairDetailPage() {
           estimated_price: data.repair.estimated_price || '',
           final_price: data.repair.final_price || '',
           notes: ''
+        })
+        setServiceNotesForm({
+          service_notes: data.repair.service_notes || ''
         })
       }
     } catch (err) {
@@ -311,6 +319,67 @@ export default function AdminRepairDetailPage() {
         type: 'error',
         title: 'Błąd',
         message: err instanceof Error ? err.message : 'Nie udało się zaktualizować wyceny'
+      })
+    } finally {
+      setSubmitting(null)
+    }
+  }
+
+  const handleServiceNotesUpdate = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setSubmitting('service_notes')
+
+    try {
+      const response = await fetch(`/api/admin/repairs/${repairId}/service-notes`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(serviceNotesForm)
+      })
+
+      if (!response.ok) {
+        throw new Error('Nie udało się zapisać notatek serwisowych')
+      }
+
+      await fetchRepairDetails()
+      setModal({
+        isOpen: true,
+        type: 'success',
+        title: 'Notatki zapisane',
+        message: 'Notatki serwisowe zostały pomyślnie zapisane.'
+      })
+    } catch (err) {
+      setModal({
+        isOpen: true,
+        type: 'error',
+        title: 'Błąd',
+        message: err instanceof Error ? err.message : 'Nie udało się zapisać notatek'
+      })
+    } finally {
+      setSubmitting(null)
+    }
+  }
+
+  const handleGenerateServicePdf = async () => {
+    setSubmitting('pdf')
+    try {
+      const response = await fetch(`/api/admin/repairs/${repairId}/service-report-pdf`)
+      if (!response.ok) throw new Error('Nie udało się wygenerować PDF')
+      
+      const blob = await response.blob()
+      const url = window.URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = url
+      a.download = `raport-serwisowy-${repair?.repair_number || repairId}.pdf`
+      document.body.appendChild(a)
+      a.click()
+      window.URL.revokeObjectURL(url)
+      a.remove()
+    } catch (err) {
+      setModal({
+        isOpen: true,
+        type: 'error',
+        title: 'Błąd',
+        message: err instanceof Error ? err.message : 'Nie udało się wygenerować PDF'
       })
     } finally {
       setSubmitting(null)
@@ -972,6 +1041,68 @@ export default function AdminRepairDetailPage() {
                 </form>
               </div>
             )}
+
+            {/* Notatki serwisowe - Diagnoza i wykonane prace */}
+            <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow border border-gray-200 p-4">
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="text-sm font-semibold text-gray-900">Diagnoza i wykonane prace</h3>
+                {repair.service_notes && (
+                  <button
+                    onClick={handleGenerateServicePdf}
+                    disabled={submitting === 'pdf'}
+                    className="flex items-center gap-1 text-xs text-blue-600 hover:text-blue-700 font-medium"
+                  >
+                    {submitting === 'pdf' ? (
+                      <Loader2 className="w-3 h-3 animate-spin" />
+                    ) : (
+                      <FileText className="w-3 h-3" />
+                    )}
+                    Generuj PDF
+                  </button>
+                )}
+              </div>
+              <form onSubmit={handleServiceNotesUpdate} className="space-y-3">
+                <div>
+                  <label className="block text-xs font-semibold text-gray-700 mb-1">
+                    Co zostało naprawione / wykonane? <span className="text-blue-600 font-normal">(widoczne dla klienta)</span>
+                  </label>
+                  <textarea
+                    value={serviceNotesForm.service_notes}
+                    onChange={(e) => setServiceNotesForm({ ...serviceNotesForm, service_notes: e.target.value })}
+                    rows={4}
+                    className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                    placeholder="np. Wymieniono głowicę drukującą (PN: P1058930-010). Przeprowadzono czyszczenie mechanizmu transportu. Wykonano kalibrację czujników. Urządzenie przetestowano - działa prawidłowo."
+                  />
+                </div>
+
+                <div className="flex gap-2">
+                  <button
+                    type="submit"
+                    disabled={submitting === 'service_notes'}
+                    className="flex-1 bg-indigo-600 text-white px-3 py-2 text-sm rounded-lg hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center font-semibold transition-all"
+                  >
+                    {submitting === 'service_notes' ? (
+                      <>
+                        <Loader2 className="w-3 h-3 mr-2 animate-spin" />
+                        Zapisywanie...
+                      </>
+                    ) : (
+                      <>
+                        <Save className="w-3 h-3 mr-2" />
+                        Zapisz notatki
+                      </>
+                    )}
+                  </button>
+                </div>
+              </form>
+
+              {repair.service_notes && (
+                <div className="mt-3 pt-3 border-t border-gray-200">
+                  <p className="text-xs text-gray-500 mb-1">Zapisane notatki:</p>
+                  <p className="text-xs text-gray-700 bg-gray-50 p-2 rounded-lg whitespace-pre-wrap">{repair.service_notes}</p>
+                </div>
+              )}
+            </div>
 
             {/* Chat z klientem */}
             <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow border border-gray-200 p-3 md:p-4">
