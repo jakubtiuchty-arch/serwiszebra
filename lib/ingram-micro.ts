@@ -257,6 +257,7 @@ export async function checkPriceAndAvailability(skus: string[], tryAllFormats: b
 
 /**
  * Prosty test pojedynczego SKU - zwraca surową odpowiedź
+ * Długi timeout (15s) bo Ingram odpowiada wolno
  */
 export async function testSingleSku(sku: string): Promise<IngramResponse> {
   const xmlRequest = `<?xml version="1.0" encoding="UTF-8"?>
@@ -271,7 +272,8 @@ export async function testSingleSku(sku: string): Promise<IngramResponse> {
   </Items>
 </PNARequest>`
 
-  const response = await sendXmlRequest(xmlRequest, 5000)
+  // 15s timeout - Ingram odpowiada wolno
+  const response = await sendXmlRequest(xmlRequest, 15000)
   return {
     success: response.success,
     data: {
