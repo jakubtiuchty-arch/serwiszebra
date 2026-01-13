@@ -10,7 +10,8 @@ import {
   testIngramConnection,
   syncProductsWithIngram,
   testSkuFormats,
-  testRawXml
+  testRawXml,
+  testSingleSku
 } from '@/lib/ingram-micro'
 
 /**
@@ -87,6 +88,14 @@ export async function GET(request: Request) {
         }
         const testSkuResult = await testSkuFormats(sku)
         return NextResponse.json(testSkuResult)
+
+      // Test pojedynczego SKU z surową odpowiedzią
+      case 'raw':
+        if (!sku) {
+          return NextResponse.json({ error: 'Brak parametru sku' }, { status: 400 })
+        }
+        const rawResult = await testSingleSku(sku)
+        return NextResponse.json(rawResult)
 
       // Test surowego XML (dla zaawansowanego debugowania)
       case 'rawxml':

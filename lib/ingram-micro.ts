@@ -256,6 +256,34 @@ export async function checkPriceAndAvailability(skus: string[], tryAllFormats: b
 }
 
 /**
+ * Prosty test pojedynczego SKU - zwraca surową odpowiedź
+ */
+export async function testSingleSku(sku: string): Promise<IngramResponse> {
+  const xmlRequest = `<?xml version="1.0" encoding="UTF-8"?>
+<PNARequest>
+  <TransactionHeader>
+    <APIKey>${INGRAM_API_KEY}</APIKey>
+  </TransactionHeader>
+  <Items>
+    <Item>
+      <ItemID>${escapeXml(sku)}</ItemID>
+    </Item>
+  </Items>
+</PNARequest>`
+
+  const response = await sendXmlRequest(xmlRequest, 5000)
+  return {
+    success: response.success,
+    data: {
+      sku: sku,
+      parsedItems: response.success ? parsePnAResponse(response.data) : [],
+    },
+    rawResponse: response.rawResponse,
+    error: response.error
+  }
+}
+
+/**
  * Testuje różne formaty SKU i struktury XML
  * Ograniczona wersja - tylko najważniejsze kombinacje (max 6 requestów)
  */
