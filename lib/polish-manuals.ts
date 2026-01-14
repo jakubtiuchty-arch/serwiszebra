@@ -16631,7 +16631,7 @@ Obsługiwane typy połączeń:
     sections: [
       {
         title: '1. Podstawowe informacje',
-        content: \`
+        content: `
 ### O drukarce ZQ610
 
 Zebra ZQ610 to kompaktowa mobilna drukarka etykiet o **szerokości druku 2 cale (48 mm)**, zaprojektowana do pracy w terenie i wymagających środowiskach przemysłowych. Wyposażona w wytrzymałą konstrukcję z certyfikatem IP43 (IP54 z opcjonalną obudową ochronną), inteligentną baterię PowerPrecision+, kolorowy wyświetlacz LCD oraz technologie NFC i Bluetooth 4.1. Idealna dla pracowników mobilnych w logistyce, handlu detalicznym, służbie zdrowia i usługach terenowych.
@@ -16692,11 +16692,11 @@ Zebra ZQ610 to kompaktowa mobilna drukarka etykiet o **szerokości druku 2 cale 
 - Tryb Peel-Off (automatyczne odklejanie)
 - Czujnik przerwy (gap) i czarnego znacznika (black mark)
 - Wersja Healthcare w kolorze białym
-\`
+`
       },
       {
         title: '2. Rozpakowanie i instalacja',
-        content: \`
+        content: `
 ### Zawartość opakowania
 
 - Drukarka ZQ610
@@ -16731,11 +16731,11 @@ Zebra ZQ610 to kompaktowa mobilna drukarka etykiet o **szerokości druku 2 cale 
 | Praca (Healthcare) | 0°C do +50°C | 10-90% bez kondensacji |
 | Ładowanie | 0°C do +40°C | – |
 | Przechowywanie | -25°C do +65°C | 10-90% bez kondensacji |
-\`
+`
       },
       {
         title: '3. Panel sterowania',
-        content: \`
+        content: `
 ### Wyświetlacz LCD
 
 Kolorowy wyświetlacz LCD (288x240 pikseli) pokazuje status drukarki, ikony stanu i menu konfiguracyjne. Automatycznie przyciemnia się po okresie bezczynności.
@@ -16787,11 +16787,11 @@ Z ekranu głównego naciśnij lewy klawisz funkcyjny aby wejść do menu z ikona
 | 📊 | **Sensors** | Status czujników |
 | 🔌 | **Ports** | Ustawienia portów komunikacyjnych |
 | 📻 | **Bluetooth** | Ustawienia Bluetooth |
-\`
+`
       },
       {
         title: '4. Ładowanie materiałów eksploatacyjnych',
-        content: \`
+        content: `
 ### Specyfikacja materiałów dla ZQ610
 
 | Parametr | Wartość |
@@ -16833,11 +16833,11 @@ Z ekranu głównego naciśnij lewy klawisz funkcyjny aby wejść do menu z ikona
 8. Włącz drukarkę lub naciśnij FEED
 
 > **Uwaga:** Aby wyłączyć tryb Peel-Off, otwórz pokrywę i naciśnij ramię peelera w dół aż zatrzaśnie się w pozycji wyjściowej.
-\`
+`
       },
       {
         title: '5. Ładowanie i zarządzanie baterią',
-        content: \`
+        content: `
 ### Bateria PowerPrecision+
 
 Drukarka ZQ610 wykorzystuje inteligentną baterię litowo-jonową 2-ogniwową (7,4V, 2,45 Ah) z technologią PowerPrecision+, która zapewnia:
@@ -16884,11 +16884,11 @@ Drukarka ZQ610 wykorzystuje inteligentną baterię litowo-jonową 2-ogniwową (7
 > - Nie rozbieraj, nie zgniataj ani nie przebijaj baterii
 > - Nie wrzucaj baterii do ognia ani wody
 > - Unikaj zwarcia styków baterii
-\`
+`
       },
       {
         title: '6. Konfiguracja i ustawienia',
-        content: \`
+        content: `
 ### SETTINGS Menu
 
 | Pozycja | Opis | Opcje |
@@ -16927,11 +16927,11 @@ Drukarka ZQ610 wykorzystuje inteligentną baterię litowo-jonową 2-ogniwową (7
 | **FRIENDLY NAME** | Nazwa wyświetlana drukarki |
 | **SECURITY MODE** | Tryb zabezpieczeń (1-4) |
 | **BONDING** | Zapamiętywanie sparowanych urządzeń |
-\`
+`
       },
       {
         title: '7. Podłączenie do komputera',
-        content: \`
+        content: `
 ### Instalacja sterowników
 
 1. Pobierz **Zebra Setup Utilities** ze strony zebra.com
@@ -16965,11 +16965,11 @@ Drukarka ZQ610 wykorzystuje inteligentną baterię litowo-jonową 2-ogniwową (7
 2. Wprowadź ESSID (nazwę sieci)
 3. Skonfiguruj zabezpieczenia (WPA2, itp.)
 4. Drukarka połączy się automatycznie
-\`
+`
       },
       {
         title: '8. Weryfikacja działania',
-        content: \`
+        content: `
 ### Drukowanie etykiety konfiguracji (Two Key Report)
 
 1. Wyłącz drukarkę
@@ -16991,11 +16991,11 @@ Etykieta konfiguracji zawiera:
 2. Na końcu wydruku pojawi się: "Press FEED key to enter DUMP mode"
 3. Naciśnij FEED w ciągu 3 sekund
 4. Drukarka będzie drukować odebrane dane w formacie HEX
-\`
+`
       },
       {
         title: '9. Konserwacja',
-        content: \`
+        content: `
 ### Harmonogram czyszczenia
 
 | Element | Częstotliwość |
@@ -17023,11 +17023,11 @@ Etykieta konfiguracji zawiera:
 - Waciki bezpyłowe
 - Alkohol izopropylowy (90%+)
 - Ściereczka bezpyłowa
-\`
+`
       },
       {
         title: '10. Rozwiązywanie problemów',
-        content: \`
+        content: `
 ### Komunikaty alertów
 
 | Alert | Kolor | Znaczenie | Rozwiązanie |
@@ -17060,11 +17060,11 @@ TOOLS > FACTORY DEFAULTS
 
 **Kombinacja klawiszy:**
 Przytrzymaj **strzałki GÓRA + DÓŁ** podczas włączania drukarki
-\`
+`
       },
       {
         title: '11. Akcesoria i opcje',
-        content: \`
+        content: `
 ### Opcje noszenia
 
 | Akcesorium | Nr części |
@@ -17085,11 +17085,11 @@ Przytrzymaj **strzałki GÓRA + DÓŁ** podczas włączania drukarki
 | 3-Slot Battery Charger | SAC-MPP-3BCHGUS1-01 |
 | Single Ethernet Cradle | – |
 | 4-Bay Ethernet Cradle | – |
-\`
+`
       },
       {
         title: '12. Specyfikacje',
-        content: \`
+        content: `
 ### Wymiary i waga
 
 | Parametr | Wartość |
@@ -17113,11 +17113,11 @@ Przytrzymaj **strzałki GÓRA + DÓŁ** podczas włączania drukarki
 |----------|---------|
 | Stopień ochrony IP | IP43 (IP54 z obudową) |
 | Certyfikaty | FCC, CE, IC, MFi |
-\`
+`
       },
       {
         title: 'FAQ – Często zadawane pytania',
-        content: \`
+        content: `
 ### Jaka jest maksymalna szerokość etykiety dla ZQ610?
 
 **Odpowiedź:** Maksymalna szerokość materiału dla ZQ610 to **55,37 mm (2,18")**, a szerokość druku to **48 mm (1,89")**.
@@ -17169,7 +17169,7 @@ Przytrzymaj **strzałki GÓRA + DÓŁ** podczas włączania drukarki
 ### Jak wydrukować etykietę konfiguracji ZQ610?
 
 **Odpowiedź:** Wyłącz drukarkę, przytrzymaj **FEED**, naciśnij i zwolnij **POWER** (trzymając FEED), zwolnij FEED gdy rozpocznie się drukowanie.
-\`
+`
       }
     ]
   }
