@@ -223,7 +223,7 @@ export default function HomePage() {
       {
         '@type': 'Organization',
         '@id': 'https://www.serwis-zebry.pl/#organization',
-        name: 'TAKMA',
+        name: 'TAKMA - Autoryzowany Serwis Zebra',
         url: 'https://www.serwis-zebry.pl',
         logo: 'https://www.serwis-zebry.pl/takma_logo_1.png',
         contactPoint: {
