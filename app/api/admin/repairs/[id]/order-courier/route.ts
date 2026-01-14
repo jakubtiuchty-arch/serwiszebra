@@ -58,6 +58,16 @@ export async function POST(
     // PICKUP: Klient (nadawca) -> TAKMA (odbiorca)
     // DELIVERY: TAKMA (nadawca) -> Klient (odbiorca)
     
+    console.log('[BLPaczka] Direction received:', direction)
+    console.log('[BLPaczka] Repair status:', repair.status)
+    console.log('[BLPaczka] Customer data:', {
+      name: repair.company ? `${repair.company} - ${repair.first_name} ${repair.last_name}` : `${repair.first_name} ${repair.last_name}`,
+      street: repair.street,
+      city: repair.city,
+      postal: repair.zip_code,
+      phone: repair.phone
+    })
+    
     const takmaData = {
       name: 'TAKMA TADEUSZ TIUCHTY',
       street: 'ul. Poświęcka',
@@ -68,10 +78,18 @@ export async function POST(
       email: 'jakub.tiuchty@takma.com.pl'
     }
     
+    // Buduj nazwę klienta: FIRMA + Imię Nazwisko (jeśli firma jest podana)
+    const customerFullName = repair.company 
+      ? `${repair.company} - ${repair.first_name} ${repair.last_name}`
+      : `${repair.first_name} ${repair.last_name}`
+    
+    // Wyciągnij ulicę i numer domu osobno
+    const streetParts = parseStreetAddress(repair.street || '')
+    
     const customerData = {
-      name: `${repair.first_name} ${repair.last_name}`,
-      street: repair.street || '',
-      house_no: extractHouseNumber(repair.street || ''),
+      name: customerFullName,
+      street: streetParts.street,
+      house_no: streetParts.houseNo,
       postal: repair.zip_code || '',
       city: repair.city || '',
       phone: repair.phone,
@@ -82,6 +100,16 @@ export async function POST(
     // Dla DELIVERY: nadawca = TAKMA, odbiorca = klient
     const sender = direction === 'pickup' ? customerData : takmaData
     const recipient = direction === 'pickup' ? takmaData : customerData
+    
+    console.log('[BLPaczka] === SENDER (NADAWCA) ===')
+    console.log('[BLPaczka] Name:', sender.name)
+    console.log('[BLPaczka] Street:', sender.street, sender.house_no)
+    console.log('[BLPaczka] City:', sender.postal, sender.city)
+    console.log('[BLPaczka] Phone:', sender.phone)
+    console.log('[BLPaczka] === RECIPIENT (ODBIORCA) ===')
+    console.log('[BLPaczka] Name:', recipient.name)
+    console.log('[BLPaczka] Street:', recipient.street, recipient.house_no)
+    console.log('[BLPaczka] City:', recipient.postal, recipient.city)
     
     // Przygotuj request do BL Paczka API
     const blpaczkaRequest = {
@@ -260,10 +288,25 @@ export async function POST(
   }
 }
 
-// Helper: wyciągnij numer domu z adresu
-function extractHouseNumber(street: string): string {
-  const match = street.match(/\d+[a-zA-Z]?/)
-  return match ? match[0] : '1'
+// Helper: parsuj adres na ulicę i numer domu
+function parseStreetAddress(fullAddress: string): { street: string; houseNo: string } {
+  if (!fullAddress) {
+    return { street: '', houseNo: '1' }
+  }
+  
+  // Wzorce: "ul. Rabowicka 2", "Rabowicka 2 2", "ul. Poświęcka 1a"
+  // Szukaj numeru na końcu adresu
+  const match = fullAddress.match(/^(.+?)\s+(\d+[a-zA-Z]?(?:\s*\/?\s*\d+[a-zA-Z]?)?)$/)
+  
+  if (match) {
+    return {
+      street: match[1].trim(),
+      houseNo: match[2].trim().replace(/\s+/g, '')
+    }
+  }
+  
+  // Fallback: jeśli nie znajdzie wzorca, zwróć cały adres jako ulicę
+  return { street: fullAddress, houseNo: '1' }
 }
 
 // Helper: zamień kod kuriera na pełną nazwę
