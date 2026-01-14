@@ -5,6 +5,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 import { sendPackageReceivedEmail } from '@/lib/email'
+import { generateReceiptPDF } from '@/lib/receipt-pdf-generator'
 
 // Supabase admin client (bez RLS)
 const supabaseAdmin = createClient(
@@ -47,7 +48,7 @@ export async function GET(request: NextRequest) {
     // Pobierz naprawy z pickup_tracking_number, które są w statusie "nowe", "oczekiwanie" lub "w_transporcie"
     const { data: repairs, error: fetchError } = await supabaseAdmin
       .from('repair_requests')
-      .select('id, status, pickup_tracking_number, pickup_courier_name, first_name, last_name, device_model, email, repair_number')
+      .select('id, status, pickup_tracking_number, pickup_courier_name, first_name, last_name, device_model, device_serial_number, device_type, email, phone, company, street, city, zip_code, repair_number, issue_description, repair_type, created_at')
       .in('status', ['nowe', 'oczekiwanie', 'w_transporcie'])
       .not('pickup_tracking_number', 'is', null)
       .neq('pickup_tracking_number', '')
@@ -128,9 +129,28 @@ export async function GET(request: NextRequest) {
               changed_by: null
             })
 
-          // Wyślij email do klienta
+          // Wyślij email do klienta z załączonym PDF "Potwierdzenie przyjęcia"
           if (repair.email) {
             try {
+              // Generuj PDF potwierdzenia przyjęcia
+              const receiptPdf = generateReceiptPDF({
+                repairNumber: repair.repair_number || repair.id.split('-')[0].toUpperCase(),
+                repairId: repair.id,
+                customerName: `${repair.first_name} ${repair.last_name}`,
+                customerEmail: repair.email,
+                customerPhone: repair.phone || '',
+                customerCompany: repair.company,
+                customerStreet: repair.street,
+                customerCity: repair.city,
+                customerZipCode: repair.zip_code,
+                deviceModel: repair.device_model || 'Urządzenie Zebra',
+                deviceSerialNumber: repair.device_serial_number,
+                deviceType: repair.device_type,
+                issueDescription: repair.issue_description || '',
+                repairType: repair.repair_type || 'paid',
+                createdAt: repair.created_at
+              })
+
               await sendPackageReceivedEmail({
                 to: repair.email,
                 customerName: `${repair.first_name} ${repair.last_name}`,
@@ -138,9 +158,10 @@ export async function GET(request: NextRequest) {
                 repairNumber: repair.repair_number,
                 deviceModel: repair.device_model || 'Urządzenie Zebra',
                 trackingNumber: repair.pickup_tracking_number,
-                courierStatus: trackingStatus.status
+                courierStatus: trackingStatus.status,
+                receiptPdf: receiptPdf
               })
-              console.log(`📧 [CRON-REPAIRS] Email sent to ${repair.email}`)
+              console.log(`📧 [CRON-REPAIRS] Email with PDF sent to ${repair.email}`)
             } catch (emailError) {
               console.error(`❌ [CRON-REPAIRS] Failed to send email to ${repair.email}:`, emailError)
               // Nie przerywamy - email nie jest krytyczny

@@ -2131,6 +2131,8 @@ interface PackageReceivedEmailData {
   deviceModel: string
   trackingNumber?: string
   courierStatus?: string
+  // Opcjonalny załącznik PDF
+  receiptPdf?: Buffer
 }
 
 export async function sendPackageReceivedEmail(data: PackageReceivedEmailData) {
@@ -2140,11 +2142,15 @@ export async function sendPackageReceivedEmail(data: PackageReceivedEmailData) {
     const email = await resend.emails.send({
       from: 'Serwis Zebra <serwis@serwis-zebry.pl>',
       to: data.to,
-      subject: `Paczka dostarczona do serwisu - ${data.deviceModel} #${shortId}`,
-      html: generatePackageReceivedHTML(data, shortId)
+      subject: `Potwierdzenie przyjęcia urządzenia do serwisu - ${data.deviceModel} #${shortId}`,
+      html: generatePackageReceivedHTML(data, shortId),
+      attachments: data.receiptPdf ? [{
+        filename: `potwierdzenie-przyjecia-${shortId}.pdf`,
+        content: data.receiptPdf
+      }] : []
     })
     
-    console.log('[Email] Package received email sent:', email)
+    console.log('[Email] Package received email sent with PDF attachment:', email)
     return email
     
   } catch (error) {

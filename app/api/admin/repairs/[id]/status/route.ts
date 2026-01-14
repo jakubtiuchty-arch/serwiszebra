@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { requireAdminServer } from '@/lib/auth-server'
 import { createClient } from '@/lib/supabase/server'
 import { sendRepairStatusChangedEmail, sendPackageReceivedEmail } from '@/lib/email'
+import { generateReceiptPDF } from '@/lib/receipt-pdf-generator'
 
 export async function PATCH(
   request: NextRequest,
@@ -48,10 +49,10 @@ export async function PATCH(
       )
     }
 
-    // Sprawdź obecny status i payment_status
+    // Sprawdź obecny status i payment_status - pobierz wszystkie dane do PDF
     const { data: currentRepair } = await supabase
       .from('repair_requests')
-      .select('status, payment_status, payment_method, email, first_name, last_name, device_model, repair_number')
+      .select('status, payment_status, payment_method, email, first_name, last_name, device_model, device_serial_number, device_type, phone, company, street, city, zip_code, repair_number, issue_description, repair_type, created_at')
       .eq('id', repairId)
       .single()
 
@@ -127,16 +128,36 @@ export async function PATCH(
       // Wyślij email o zmianie statusu
       if (currentRepair) {
         try {
-          // Specjalny email dla statusu "odebrane" - Potwierdzenie przyjęcia urządzenia
+          // Specjalny email dla statusu "odebrane" - Potwierdzenie przyjęcia urządzenia z PDF
           if (status === 'odebrane') {
+            // Generuj PDF potwierdzenia przyjęcia
+            const receiptPdf = generateReceiptPDF({
+              repairNumber: currentRepair.repair_number || repairId.split('-')[0].toUpperCase(),
+              repairId: repairId,
+              customerName: `${currentRepair.first_name} ${currentRepair.last_name}`,
+              customerEmail: currentRepair.email,
+              customerPhone: currentRepair.phone || '',
+              customerCompany: currentRepair.company,
+              customerStreet: currentRepair.street,
+              customerCity: currentRepair.city,
+              customerZipCode: currentRepair.zip_code,
+              deviceModel: currentRepair.device_model || 'Urządzenie Zebra',
+              deviceSerialNumber: currentRepair.device_serial_number,
+              deviceType: currentRepair.device_type,
+              issueDescription: currentRepair.issue_description || '',
+              repairType: currentRepair.repair_type || 'paid',
+              createdAt: currentRepair.created_at
+            })
+
             await sendPackageReceivedEmail({
               to: currentRepair.email,
               customerName: `${currentRepair.first_name} ${currentRepair.last_name}`,
               repairId: repairId,
               repairNumber: currentRepair.repair_number,
-              deviceModel: currentRepair.device_model
+              deviceModel: currentRepair.device_model,
+              receiptPdf: receiptPdf
             })
-            console.log('✅ Package received confirmation email sent')
+            console.log('✅ Package received confirmation email with PDF sent')
           } else {
             // Standardowy email o zmianie statusu dla pozostałych statusów
             const notifyStatuses = ['diagnoza', 'wycena', 'w_naprawie', 'naprawione', 'wyslane', 'zakonczone']
