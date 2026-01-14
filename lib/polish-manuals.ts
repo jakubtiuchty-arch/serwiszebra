@@ -20129,6 +20129,600 @@ Wykonaj ponowną kalibrację
 `
       }
     ]
+  },
+
+  'zd510': {
+    model: 'ZD510',
+    title: 'Zebra ZD510 – Instrukcja obsługi po Polsku',
+    lastUpdated: '2025-01-20',
+    sourceDocument: 'Zebra ZD510 Wristband Printing Solution User Guide',
+    keywords: [
+      'zebra zd510 instrukcja', 'zd510 instrukcja po polsku', 'zebra zd510 manual',
+      'drukarka opasek zebra', 'zd510 opaski na nadgarstek', 'zd510 healthcare',
+      'zd510 kartridż', 'zd510 szpital', 'zd510 identyfikacja pacjentów',
+      'drukarka opasek identyfikacyjnych', 'zd510 wristband', 'zd510 specyfikacja',
+      'zd510 konfiguracja', 'zd510 czyszczenie', 'zd510 błędy', 'zd510 wifi',
+      'zd510 bluetooth', 'zd510 nfc', 'zd510 link-os', 'opaski szpitalne zebra',
+      'identyfikacja pacjentów', 'opaski noworodkowe', 'centra krwiodawstwa'
+    ],
+    sections: [
+      {
+        title: '1. Podstawowe informacje',
+        content: `
+### O drukarce ZD510
+
+Zebra ZD510 to specjalistyczna drukarka opasek identyfikacyjnych na nadgarstek, zaprojektowana z myślą o placówkach ochrony zdrowia. Wykorzystuje innowacyjny **system kartridżów**, który umożliwia szybką i łatwą wymianę materiałów bez bezpośredniego kontaktu z opaskami. Drukarka automatycznie ładuje materiał, kalibruje się i przygotowuje do druku po włożeniu kartridża. Obudowa drukarki jest odporna na działanie środków czyszczących stosowanych w szpitalach, a zasilacz posiada certyfikację medyczną.
+
+### Parametry techniczne
+
+| Parametr | ZD510 |
+|----------|-------|
+| **Technologia druku** | Termiczny bezpośredni (Direct Thermal) |
+| **Rozdzielczość** | 300 dpi (12 punktów/mm) |
+| Szerokość druku | Określona przez kartridż |
+| Prędkość druku | Określona przez kartridż |
+| Pamięć Flash | 512 MB |
+| Pamięć RAM | 256 MB |
+| Szerokość opaski | 25,4 mm (1") |
+| System zasilania materiałem | Kartridż z opaskami |
+
+### Cechy charakterystyczne
+
+- **System kartridży** – automatyczne ładowanie i kalibracja
+- **Obudowa odporna na środki dezynfekujące** – przystosowana do środowiska medycznego
+- **Zasilacz z certyfikatem medycznym** – zgodność z normami dla urządzeń medycznych
+- **Link-OS** – platforma do zarządzania i integracji
+- **Bluetooth Low Energy (BTLE)** – konfiguracja przez urządzenia mobilne
+- **Zebra Print Touch (NFC)** – szybkie parowanie przez zbliżenie (opcja)
+- **USB Host** – łatwa aktualizacja firmware przez pendrive
+- **Ethernet 10/100** – wbudowany serwer wydruku
+- **Opcjonalne Wi-Fi i Bluetooth Classic** – bezprzewodowa łączność
+
+### Zastosowania ZD510
+
+- **Szpitale:** identyfikacja pacjentów, opaski identyfikacyjne
+- **Laboratoria:** oznaczanie próbek krwi i materiału biologicznego
+- **Centra krwiodawstwa:** identyfikacja dawców
+- **Izby przyjęć:** szybka rejestracja pacjentów
+- **Oddziały noworodkowe:** opaski identyfikacyjne dla niemowląt i matek
+- **Domy opieki:** identyfikacja pensjonariuszy
+
+### Złącza i łączność
+
+- USB 2.0 (standard)
+- Ethernet 10/100 RJ-45 (standard)
+- USB Host (standard)
+- Wi-Fi 802.11ac + Bluetooth Classic 4.1 (opcja fabryczna)
+- Bluetooth Low Energy (BTLE) – do konfiguracji mobilnej (opcja)
+- NFC (Zebra Print Touch) – do szybkiego parowania (opcja)
+`
+      },
+      {
+        title: '2. Rozpakowanie i instalacja',
+        content: `
+### Zawartość opakowania
+
+- Drukarka ZD510
+- Zasilacz z certyfikatem medycznym
+- Przewód zasilający (zależny od regionu)
+- Dokumentacja drukarki
+- Skrócona instrukcja obsługi
+
+### Wybór lokalizacji
+
+- **Powierzchnia:** solidna, pozioma, wystarczająca do utrzymania drukarki
+- **Przestrzeń:** pozostaw wolną przestrzeń wokół drukarki dla wentylacji i dostępu do złączy
+- **Zasilanie:** łatwy dostęp do gniazdka elektrycznego
+- **Środowisko:** unikaj bezpośredniego światła słonecznego i źródeł ciepła
+
+> **Ważne:** Nie umieszczaj materiałów ani podkładek pod drukarką – ogranicza to przepływ powietrza i może prowadzić do przegrzania.
+
+### Podłączanie zasilania
+
+1. Podłącz zasilacz do gniazda DC drukarki
+2. Włóż przewód zasilający do zasilacza
+3. Podłącz przewód zasilający do gniazdka sieciowego
+4. Zielona dioda na zasilaczu wskazuje prawidłowe podłączenie
+
+### Warunki pracy
+
+| Tryb | Temperatura | Wilgotność |
+|------|-------------|------------|
+| Praca | 0°C do +40°C | 20-85% bez kondensacji |
+| Przechowywanie | -40°C do +60°C | 5-85% bez kondensacji |
+`
+      },
+      {
+        title: '3. Panel sterowania',
+        content: `
+### Elementy panelu sterowania
+
+Panel sterowania znajduje się na górnej przedniej części drukarki i zawiera trzy grupy wskaźników świetlnych oraz dwa przyciski.
+
+### Wskaźniki świetlne
+
+| Wskaźnik | Opis |
+|----------|------|
+| **Status mediów** | Informuje o stanie materiału w kartridżu |
+| **Status drukarki** | Zewnętrzny pierścień – główny wskaźnik stanu |
+| **Status Wi-Fi** | Informuje o połączeniu bezprzewodowym (jeśli zainstalowane) |
+
+### Przyciski sterujące
+
+| Przycisk | Funkcja |
+|----------|---------|
+| **EJECT** | Wysuwa kartridż (krótkie naciśnięcie) / wymuszony wysuw (przytrzymanie 6 sek.) |
+| **PAUSE/FEED** | Pauza drukowania / wysuw materiału / tryb konfiguracji użytkownika |
+
+### Znaczenie wzorów świetlnych
+
+| Wzór | Znaczenie |
+|------|-----------|
+| Pierścień zielony (stały) | Drukarka gotowa do pracy |
+| Pierścień zielony (2 mignięcia) | Drukarka wstrzymana (pauza) |
+| Pierścień zielony + Media pomarańczowy | Niski poziom materiału (~20 opasek) |
+| Oba wskaźniki migają pomarańczowo | Brak materiału lub błąd kartridża |
+| Obracające się zielone światło | Transfer danych |
+| Pierścień pomarańczowy (stały) | Alert temperatury |
+| Obracające się żółte światła | Wyłączenie termiczne głowicy |
+
+### Tryb konfiguracji użytkownika
+
+Przytrzymaj przycisk PAUSE/FEED – wskaźnik będzie migać pomarańczowo co 2 sekundy:
+
+| Liczba mignięć | Akcja po zwolnieniu przycisku |
+|----------------|-------------------------------|
+| 1 | Drukuje raport konfiguracji |
+| 2 | Drukuje profil czujnika mediów |
+| 3 | Resetuje parametry sieciowe do domyślnych |
+| 4 | Resetuje wszystkie parametry drukarki do domyślnych |
+`
+      },
+      {
+        title: '4. Ładowanie kartridża z opaskami',
+        content: `
+### O kartridżach Zebra
+
+Kartridże Zebra są zaprojektowane tak, aby maksymalnie uprościć obsługę drukarki:
+
+- **Automatyczna autentykacja** – drukarka weryfikuje oryginalność kartridża
+- **Automatyczne ustawienia** – parametry druku są odczytywane z chipa Smart Card
+- **Brak kontaktu z materiałem** – operator nie dotyka opasek podczas wymiany
+- **Automatyczne ładowanie** – drukarka sama przygotowuje materiał do druku
+
+### Ładowanie kartridża
+
+1. **Włącz drukarkę** – naciśnij przycisk zasilania z tyłu urządzenia
+2. **Poczekaj na inicjalizację** – wskaźniki będą migać, a następnie pokażą pomarańczowy (brak materiału)
+3. **Zorientuj kartridż** – chip Smart Card powinien być skierowany w dół, w stronę drukarki
+4. **Włóż kartridż** – naciśnij w środkowej części aż usłyszysz kliknięcie
+5. **Poczekaj na załadowanie** – drukarka automatycznie załaduje opaskę do pozycji druku
+6. **Gotowe** – pierścień statusu świeci na zielono
+
+> **Uwaga:** Używaj wyłącznie oryginalnych kartridży Zebra. Kartridże nie mogą być napełniane ani przerabiane.
+
+### Wskazówki dotyczące kartridży
+
+- **Nie ciągnij materiału** z kartridża – może to uszkodzić mechanizm
+- **Przechowuj w opakowaniu** aż do użycia
+- **Jeśli materiał wystaje** z kartridża, odetnij go nożyczkami przed włożeniem
+- **Sprawdzaj datę ważności** – materiały termiczne mają określony okres przydatności
+
+### Wyjmowanie kartridża
+
+1. Naciśnij przycisk **EJECT**
+2. Drukarka automatycznie wcofa materiał i wysunie kartridż
+3. Wyjmij kartridż z drukarki
+`
+      },
+      {
+        title: '5. Otwieranie górnej pokrywy',
+        content: `
+### Kiedy otwierać pokrywę
+
+Górna pokrywa nie wymaga otwierania podczas normalnej pracy. Otwórz ją w przypadku:
+
+- **Konserwacji** – czyszczenie ścieżki mediów, głowicy i wałka
+- **Rozwiązywania problemów** – kartridż nie może prawidłowo wycofać materiału
+- **Wymuszonego wysunięcia** – po przytrzymaniu EJECT przez 6 sekund
+
+### Otwieranie pokrywy
+
+1. Naciśnij jednocześnie oba przyciski zwalniające pokrywę (po bokach drukarki)
+2. Pokrywa odskoczy częściowo
+3. Podnieś pokrywę do góry i odchyl do tyłu
+4. Uzyskujesz dostęp do głowicy drukującej, wałka i czujników
+
+### Ręczne wyjmowanie kartridża (bez zasilania)
+
+1. Wyłącz drukarkę i odłącz zasilanie
+2. Obróć drukarkę spodem do góry
+3. Włóż płaski śrubokręt w środkowy otwór na spodzie drukarki
+4. Pchnij języczek zwalniający w kierunku tyłu drukarki
+5. Obróć drukarkę i wyjmij kartridż
+6. Jeśli materiał wystaje, otwórz pokrywę aby go uwolnić
+`
+      },
+      {
+        title: '6. Strefa druku na opasce',
+        content: `
+### Zalecana strefa druku
+
+Nie wszystkie obszary opaski nadają się do druku. Aby uzyskać optymalne wyniki:
+
+| Parametr | Wartość |
+|----------|---------|
+| Początek strefy druku | 25 mm (1") od krawędzi wiodącej |
+| Odległość od krawędzi bocznych | Min. 1,2 mm (0,05") |
+| Strefa nadruku | Zależna od typu i długości opaski |
+
+### Zalecana pozycja startowa druku
+
+| Typ opaski | Długość | Pozycja startowa od krawędzi wiodącej |
+|------------|---------|---------------------------------------|
+| Zamknięcie klejone | 279 mm (11") | 114 mm (4,5") |
+| Zamknięcie klejone | 178 mm (7") | 64 mm (2,5") |
+| Zamknięcie klejone | 152 mm (6") | 51 mm (2") |
+| Zamknięcie klipsem | 279 mm (11") | 159 mm (6,25") |
+| Zamknięcie klipsem | 178 mm (7") | 83 mm (3,25") |
+
+> **Uwaga:** Unikaj drukowania na obszarach z otworami, nacięciami lub niepowlekanymi fragmentami opaski.
+`
+      },
+      {
+        title: '7. Zebra Print Touch (NFC)',
+        content: `
+### O funkcji Print Touch
+
+Zebra Print Touch umożliwia sparowanie drukarki z urządzeniem mobilnym wyposażonym w NFC (Android) przez zbliżenie telefonu do logo Print Touch na obudowie drukarki.
+
+### Dane zakodowane w tagu NFC
+
+- URL do strony wsparcia Zebra QuickHelp
+- Adres MAC Bluetooth Low Energy (jeśli zainstalowany)
+- Adres MAC Bluetooth Classic (jeśli zainstalowany)
+- Adres MAC Wi-Fi (jeśli zainstalowany)
+- Adres MAC Ethernet
+- SKU drukarki (np. ZD42022-D01W01EZ)
+- Numer seryjny drukarki
+
+### Zastosowania NFC
+
+- Ułatwienie parowania Bluetooth z urządzeniem mobilnym
+- Uruchomienie aplikacji
+- Otwarcie strony internetowej w przeglądarce mobilnej
+`
+      },
+      {
+        title: '8. Konfiguracja i ustawienia',
+        content: `
+### Metody dostępu do ustawień
+
+- **Strony WWW serwera wydruku** – przez przeglądarkę internetową
+- **Zebra Setup Utility** – aplikacja Windows
+- **Sterownik Zebra Windows**
+- **ZebraNet Bridge** – narzędzie do zarządzania drukarkami
+- **Aplikacje mobilne Link-OS**
+
+### Dostęp przez stronę WWW
+
+1. Upewnij się, że drukarka jest podłączona do sieci Ethernet
+2. Wydrukuj raport konfiguracji, aby uzyskać adres IP
+3. Wpisz adres IP drukarki w przeglądarce
+4. Domyślne dane logowania:
+   - **User ID:** admin
+   - **Password:** 1234
+
+### Najczęściej używane ustawienia
+
+| Parametr | Opis | Domyślna wartość |
+|----------|------|------------------|
+| DARKNESS | Ciemność druku | 21 (zakres 0-30) |
+| DARKNESS MODE | Tryb ciemności | CARTRIDGE |
+| TEAR OFF | Pozycja odrywania | +000 |
+| LABEL TOP | Pozycja pionowa obrazu | +000 |
+| LEFT POSITION | Pozycja pozioma obrazu | +0000 |
+
+### Tryby ciemności druku
+
+| Tryb | Opis |
+|------|------|
+| CARTRIDGE | Ciemność ustawiana przez kartridż (domyślne) |
+| USER | Ciemność ustawiana przez użytkownika |
+| RELATIVE | Różnica względem domyślnej wartości kartridża |
+`
+      },
+      {
+        title: '9. Podłączenie do komputera',
+        content: `
+### Instalacja sterowników (Windows)
+
+1. Pobierz **Zebra Setup Utilities** ze strony zebra.com
+2. Zainstaluj oprogramowanie **PRZED** podłączeniem drukarki
+3. Podłącz drukarkę kablem USB lub przez sieć
+4. Postępuj zgodnie z kreatorem konfiguracji
+
+### Połączenie USB
+
+1. Podłącz kabel USB do drukarki
+2. Podłącz drugi koniec do komputera
+3. Windows automatycznie rozpozna drukarkę (jeśli sterowniki są zainstalowane)
+
+### Połączenie Ethernet (przewodowe)
+
+1. Podłącz kabel Ethernet (RJ-45) do drukarki
+2. Drukarka automatycznie uzyska adres IP przez DHCP
+3. Wydrukuj raport konfiguracji, aby poznać adres IP
+
+### Wskaźniki Ethernet
+
+| Diody LED | Znaczenie |
+|-----------|-----------|
+| Obie wyłączone | Brak połączenia Ethernet |
+| Zielona | Połączenie 100 Mbps |
+| Zielona + migająca bursztynowa | Połączenie 100 Mbps z aktywnością |
+| Bursztynowa | Połączenie 10 Mbps |
+| Bursztynowa + migająca zielona | Połączenie 10 Mbps z aktywnością |
+
+### Konfiguracja Wi-Fi (opcja)
+
+1. Użyj **Zebra Setup Utilities** > Connectivity Wizard
+2. Wybierz **Wireless** jako typ połączenia
+3. Wprowadź ESSID (nazwę sieci)
+4. Skonfiguruj zabezpieczenia (WPA2, itp.)
+5. Wyślij konfigurację do drukarki
+6. Zrestartuj drukarkę
+`
+      },
+      {
+        title: '10. Weryfikacja działania',
+        content: `
+### Drukowanie raportu konfiguracji
+
+1. Upewnij się, że drukarka jest gotowa (zielony wskaźnik)
+2. Przytrzymaj przycisk **PAUSE/FEED**
+3. Zwolnij po pierwszym pomarańczowym mignięciu
+4. Drukarka wydrukuje raport konfiguracji
+
+### Zawartość raportu konfiguracji
+
+- TEAR OFF ADJUST – pozycja odrywania
+- USB COMM – status połączenia USB
+- BLUETOOTH ADDRESS – adres Bluetooth (jeśli zainstalowany)
+- FIRMWARE – wersja oprogramowania
+- IP ADDRESS – adres IP (dla połączeń sieciowych)
+- MAC ADDRESS – adres fizyczny interfejsu sieciowego
+
+### Test druku z Windows
+
+1. Otwórz **Drukarki i urządzenia** w Panelu sterowania
+2. Kliknij prawym przyciskiem na drukarkę Zebra
+3. Wybierz **Właściwości** > **Drukuj stronę testową**
+`
+      },
+      {
+        title: '11. Konserwacja',
+        content: `
+### Harmonogram czyszczenia
+
+| Element | Częstotliwość |
+|---------|---------------|
+| Ścieżka mediów | Co wymianę kartridża lub w razie problemów z jakością |
+| Głowica drukująca | Co wymianę kartridża |
+| Wałek dociskowy (platen) | Co wymianę kartridża |
+| Czujnik mediów | W razie problemów z wykrywaniem materiału |
+| Styki Smart Card | W razie problemów z rozpoznawaniem kartridża |
+| Obudowa zewnętrzna | W razie potrzeby |
+
+### Materiały do czyszczenia
+
+- Karty czyszczące Zebra
+- Waciki bezpyłowe
+- Alkohol izopropylowy (90%+)
+- Ściereczka bezpyłowa
+
+### Czyszczenie ścieżki mediów (kartą czyszczącą)
+
+1. Wyjmij kartridż z drukarki
+2. Włóż kartę czyszczącą do szczeliny kartridża
+3. Naciśnij przycisk PAUSE/FEED aby przeprowadzić kartę
+4. Powtórz 2-3 razy
+5. Poczekaj na wyschnięcie przed włożeniem kartridża
+
+### Czyszczenie głowicy drukującej
+
+> **Ostrzeżenie:** Głowica może być gorąca! Poczekaj na ostygnięcie.
+
+1. Wyłącz drukarkę
+2. Otwórz górną pokrywę
+3. Przetrzyj brązowy pasek elementów grzejnych wacikiem nasączonym alkoholem
+4. Poczekaj aż wyschnie przed zamknięciem pokrywy
+
+### Czyszczenie styków Smart Card
+
+1. Użyj wacika zwilżonego alkoholem
+2. Przetrzyj złote styki czytnika w szczelinie kartridża
+3. Poczekaj aż wyschnie przed włożeniem kartridża
+`
+      },
+      {
+        title: '12. Rozwiązywanie problemów',
+        content: `
+### Alerty i rozwiązania
+
+| Alert | Wskaźniki | Przyczyna | Rozwiązanie |
+|-------|-----------|-----------|-------------|
+| Pokrywa otwarta | Czerwone miganie | Pokrywa nie jest zamknięta | Zamknij pokrywę i naciśnij PAUSE/FEED |
+| Brak materiału | Pomarańczowe miganie | Kartridż pusty lub błąd | Wymień kartridż |
+| Alert temperatury | Pomarańczowy stały | Temp. poza zakresem | Poczekaj na normalizację temperatury |
+| Wyłączenie termiczne | Żółte obracające się | Przegrzanie głowicy | Poczekaj na ostygnięcie |
+| Błąd pamięci | Pomarańczowe 2 mignięcia | Błąd danych lub brak pamięci | Sprawdź format lub zwolnij pamięć |
+
+### Problemy z jakością druku
+
+| Problem | Przyczyna | Rozwiązanie |
+|---------|-----------|-------------|
+| Słaby/wyblakły druk | Brudna głowica | Wyczyść głowicę |
+| | Zbyt niska ciemność | Zwiększ ciemność (tryb USER) |
+| Brakujące fragmenty | Uszkodzona głowica | Wymień głowicę |
+| | Zanieczyszczenia | Wyczyść ścieżkę mediów |
+| Zniekształcony wydruk | Błąd komunikacji | Sprawdź kable i ustawienia |
+| Ciemny wydruk | Wysoka temp./wilgotność | Zmniejsz ciemność |
+
+### Problemy z kartridżem
+
+| Problem | Rozwiązanie |
+|---------|-------------|
+| Kartridż nie jest rozpoznawany | Wyczyść styki Smart Card |
+| | Sprawdź czy kartridż jest oryginalny Zebra |
+| Materiał wciąga się do kartridża | Otwórz kartridż i wyciągnij materiał |
+| Chip odłączył się od kartridża | Wciśnij chip z powrotem i zamknij zatrzaski |
+| Kartridż nie wysuwa się | Użyj ręcznego wysuwu (śrubokręt) |
+
+### Przywracanie ustawień fabrycznych
+
+**Ustawienia sieciowe:**
+Przytrzymaj PAUSE/FEED - zwolnij po 3 pomarańczowych mignięciach
+
+**Wszystkie ustawienia:**
+Przytrzymaj PAUSE/FEED - zwolnij po 4 pomarańczowych mignięciach
+`
+      },
+      {
+        title: '13. USB Host',
+        content: `
+### Zastosowania portu USB Host
+
+- **Aktualizacja firmware** – z pendrive'a
+- **Transfer plików** – kopiowanie formatów, czcionek, grafik
+- **Urządzenia wejściowe** – podłączenie klawiatury lub skanera
+
+### Aktualizacja firmware przez USB
+
+1. Na pendrive'ie utwórz folder **Zebra** z podfolderami:
+   - /appl (firmware)
+   - /commands (polecenia)
+   - /files (pliki)
+2. Umieść plik firmware w folderze /appl
+3. Włóż pendrive do portu USB Host
+4. Drukarka automatycznie zaktualizuje firmware
+5. Po restarcie wydrukuj raport konfiguracji
+
+> **Uwaga:** Pendrive musi być sformatowany w systemie FAT. Maksymalna pojemność: 1 TB.
+`
+      },
+      {
+        title: '14. Specyfikacje',
+        content: `
+### Wymiary i waga
+
+| Parametr | Wartość |
+|----------|---------|
+| Szerokość | 121 mm (4,8") |
+| Głębokość | 238 mm (9,4") |
+| Wysokość | 170 mm (6,7") |
+| Waga | ~1,6 kg (bez kartridża) |
+
+### Druk
+
+| Parametr | Wartość |
+|----------|---------|
+| Technologia druku | Termiczny bezpośredni |
+| Rozdzielczość | 300 dpi (12 punktów/mm) |
+| Szerokość druku | Określona przez kartridż |
+| Prędkość druku | Określona przez kartridż |
+
+### Pamięć
+
+| Parametr | Wartość |
+|----------|---------|
+| RAM | 256 MB |
+| Flash | 512 MB |
+
+### Łączność (standard)
+
+| Parametr | Wartość |
+|----------|---------|
+| USB 2.0 | Tak |
+| Ethernet | 10/100 Base-T (RJ-45) |
+| USB Host | Tak |
+
+### Łączność (opcja fabryczna)
+
+| Parametr | Wartość |
+|----------|---------|
+| Wi-Fi | 802.11ac |
+| Bluetooth Classic | 4.1 (kompatybilny z 3.0) |
+| Bluetooth Low Energy | BTLE (do konfiguracji) |
+| NFC | Zebra Print Touch |
+
+### Środowisko
+
+| Tryb | Temperatura | Wilgotność |
+|------|-------------|------------|
+| Praca | 0°C do +40°C | 20-85% bez kondensacji |
+| Przechowywanie | -40°C do +60°C | 5-85% bez kondensacji |
+
+### Certyfikaty
+
+- FCC Class B
+- CE
+- Zasilacz z certyfikatem medycznym
+`
+      },
+      {
+        title: 'FAQ – Najczęściej zadawane pytania',
+        content: `
+### Czym jest drukarka ZD510?
+
+**Odpowiedź:** Zebra ZD510 to specjalistyczna **drukarka opasek identyfikacyjnych na nadgarstek** dla służby zdrowia. Wykorzystuje system kartridżów z automatycznym ładowaniem i kalibracją.
+
+### Do czego służy drukarka ZD510?
+
+**Odpowiedź:** ZD510 służy do drukowania **opasek identyfikacyjnych** dla pacjentów w szpitalach, laboratoriach, centrach krwiodawstwa, na izbach przyjęć i oddziałach noworodkowych.
+
+### Jak załadować kartridż do ZD510?
+
+**Odpowiedź:** Włącz drukarkę, zorientuj kartridż (chip Smart Card w dół), włóż kartridż i naciśnij aż kliknie. Drukarka **automatycznie załaduje** materiał. Zielony wskaźnik = gotowość.
+
+### Czy mogę używać kartridży innych producentów?
+
+**Odpowiedź:** **Nie.** ZD510 wymaga oryginalnych kartridży Zebra. Drukarka automatycznie weryfikuje oryginalność kartridża przez chip Smart Card.
+
+### Jak wydrukować raport konfiguracji?
+
+**Odpowiedź:** Przytrzymaj **PAUSE/FEED** i zwolnij po **pierwszym pomarańczowym mignięciu**. Raport zawiera adres IP, MAC, wersję firmware.
+
+### Co oznacza pomarańczowe miganie?
+
+**Odpowiedź:** Pomarańczowe miganie oznacza **brak materiału** lub **błąd kartridża**. Wymień lub ponownie włóż kartridż.
+
+### Jak wyczyścić drukarkę ZD510?
+
+**Odpowiedź:** Używaj **kart czyszczących Zebra** – włóż kartę w szczelinę kartridża i naciśnij PAUSE/FEED. Do głowicy używaj wacików z alkoholem izopropylowym (90%+).
+
+### Jak zresetować drukarkę do ustawień fabrycznych?
+
+**Odpowiedź:** Przytrzymaj **PAUSE/FEED** i zwolnij po **4 pomarańczowych mignięciach** (reset wszystkich ustawień) lub po 3 mignięciach (reset sieci).
+
+### Czy ZD510 ma certyfikat medyczny?
+
+**Odpowiedź:** Tak, **zasilacz ZD510 ma certyfikat medyczny**. Obudowa jest odporna na środki dezynfekujące stosowane w placówkach medycznych.
+
+### Jak wyjąć zacięty kartridż?
+
+**Odpowiedź:** Przytrzymaj **EJECT przez 6 sekund** (wymuszony wysuw). Jeśli nie pomoże – obróć drukarkę spodem do góry i użyj śrubokręta w środkowym otworze.
+
+### Jak skonfigurować Wi-Fi w ZD510?
+
+**Odpowiedź:** Użyj **Zebra Setup Utilities** > Connectivity Wizard > Wireless. Wprowadź ESSID i ustawienia zabezpieczeń, wyślij konfigurację i zrestartuj drukarkę.
+
+### Gdzie na opasce drukować?
+
+**Odpowiedź:** Zacznij druk **min. 25 mm od krawędzi wiodącej**. Unikaj obszarów z otworami, nacięciami i niepowlekanymi fragmentami. Zachowaj min. 1,2 mm od krawędzi bocznych.
+`
+      }
+    ]
   }
 }
 
