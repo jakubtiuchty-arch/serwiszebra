@@ -64,12 +64,6 @@ function getProductImage(product: Product): string | null {
   return DEFAULT_PRODUCT_IMAGES[product.product_type] || null
 }
 
-const RESOLUTIONS = [
-  { value: '203', label: '203 DPI' },
-  { value: '300', label: '300 DPI' },
-  { value: '600', label: '600 DPI' }
-]
-
 export default function SklepPage() {
   const [products, setProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(true)
@@ -243,30 +237,6 @@ export default function SklepPage() {
         })}
       </div>
 
-      {/* Filtr DPI */}
-      {expandedProductTypes.includes('glowica') && (
-        <div className="mt-6 pt-4 border-t border-gray-200">
-          <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">Rozdzielczość</h3>
-          <div className="flex flex-wrap gap-2">
-            {RESOLUTIONS.map((res) => (
-              <button
-                key={res.value}
-                onClick={() => setFilters(prev => ({
-                  ...prev,
-                  resolution: prev.resolution === res.value ? '' : res.value
-                }))}
-                className={`px-3 py-1.5 text-xs rounded-full transition-colors ${
-                  filters.resolution === res.value
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-                }`}
-              >
-                {res.label}
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
     </>
   )
 

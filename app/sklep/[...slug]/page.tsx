@@ -722,8 +722,11 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
     deviceModel: filters.model || undefined
   })
 
-  // Dostępne rozdzielczości
-  const availableResolutions = model?.resolutions || []
+  // Dostępne rozdzielczości - agreguj z produktów w tej kategorii
+  // (pokazuj filtr DPI gdy są produkty z różnymi rozdzielczościami)
+  const availableResolutions = productType.id === 'glowica' 
+    ? [...new Set(products.map(p => p.resolution_dpi).filter((r): r is number => r !== null))].sort((a, b) => a - b)
+    : []
 
   // FAQ Schema dla kategorii głowic przemysłowych
   const industrialFaqSchema = productType.id === 'glowica' && printerCategory?.id === 'industrial' ? {
