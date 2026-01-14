@@ -22560,6 +22560,540 @@ Niektóre karty mogą wymagać ponownego wydrukowania.
 `
       }
     ]
+  },
+
+  'zxp7': {
+    model: 'ZXP Series 7',
+    title: 'Zebra ZXP Series 7 – Instrukcja obsługi po Polsku',
+    lastUpdated: '2025-01-20',
+    sourceDocument: 'Zebra ZXP Series 7 Card Printer User Guide (P1036101-002)',
+    keywords: [
+      'zebra zxp7 instrukcja', 'zxp7 instrukcja po polsku', 'zebra zxp series 7 manual',
+      'drukarka kart zebra', 'zxp7 drukarka kart id', 'zxp7 konfiguracja',
+      'zxp7 taśma', 'zxp7 laminator', 'zxp7 laminacja', 'zxp7 enkoder magnetyczny',
+      'drukarka kart identyfikacyjnych', 'zxp7 specyfikacja', 'zxp7 lcd',
+      'zxp7 czyszczenie', 'zxp7 błędy', 'zxp7 ethernet', 'zxp7 wifi',
+      'druk kart pvc', 'sublimacja barwników', 'ymcko', 'cr80',
+      'karty id', 'identyfikatory', 'przepustki', 'karty dostępu',
+      'zxp7 dwustronny', 'zxp7 smart card', 'zxp7 rfid', 'zxp7 mifare',
+      'wysokowydajna drukarka kart', 'laminator kart', 'ix series'
+    ],
+    sections: [
+      {
+        title: '1. Podstawowe informacje',
+        content: `
+### O drukarce ZXP Series 7
+
+Zebra ZXP Series 7 to profesjonalna, wysokowydajna drukarka kart identyfikacyjnych zaprojektowana dla średnich i dużych wolumenów produkcji. Oferuje wybór między drukiem jednostronnym lub dwustronnym metodą sublimacji barwników (dye sublimation) lub termotransferową (monochrom). Drukarka wyposażona jest w **kolorowy wyświetlacz LCD 21 znaków x 6 linii** oraz trzy konfigurowalne przyciski funkcyjne (soft keys), podajnik na **200 kart**, koszyk odrzutów na 20 kart oraz kosz wyjściowy na 90 kart.
+
+Model ZXP7 dostępny jest w wersji z opcjonalnym **laminatorem jednostronnym lub dwustronnym**, który nakłada i zgrzewa folię laminującą na powierzchnię karty, znacząco zwiększając jej trwałość i bezpieczeństwo. Drukarka wykorzystuje inteligentną technologię nośników **ix Series** z tagami RFID do automatycznego rozpoznawania taśm i laminatów.
+
+### Parametry techniczne
+
+| Parametr | ZXP Series 7 |
+|----------|--------------|
+| **Druk** | **Jednostronny / Dwustronny** |
+| Technologia druku | Sublimacja barwników / Termotransfer |
+| Rozdzielczość | 300 dpi (11,8 punktów/mm) |
+| Prędkość druku (YMCKO) | do **290 kart/godz.** (kolor jednostronny) |
+| Prędkość druku (YMCKOK) | do 225 kart/godz. (kolor dwustronny) |
+| Prędkość druku (K) | do **1375 kart/godz.** (mono jednostronny) |
+| Prędkość druku (K/K) | do 555 kart/godz. (mono dwustronny) |
+| Pojemność podajnika | **200 kart** (30 mil) |
+| Pojemność kosza wyjściowego | 90 kart (30 mil) |
+| Pojemność kosza odrzutów | 20 kart (30 mil) |
+| Podawanie ręczne | Tak |
+| Waga | 12,2 kg (bez laminatora) / 17,9 kg (z laminatorem) |
+
+### Prędkość druku z laminacją
+
+| Taśma | Przód | Tył | Przepustowość |
+|-------|-------|-----|---------------|
+| YMCKO | YMCK | – | 270 kart/godz. |
+| YMCKOK | YMCK | K | 200 kart/godz. |
+| Monochrom | K | – | 265 kart/godz. |
+| Monochrom | K | K | 260 kart/godz. |
+
+### Złącza i komunikacja
+
+| Interfejs | Opis |
+|-----------|------|
+| USB 2.0 | Połączenie bezpośrednie z PC, Plug-and-Play |
+| Ethernet 10/100 | Połączenie sieciowe (standardowe!) |
+| Wi-Fi 802.11b/g | Opcjonalny moduł bezprzewodowy |
+
+### Porównanie ZXP7 vs inne modele
+
+| Parametr | ZXP7 | ZC100 | ZC300 |
+|----------|------|-------|-------|
+| Interfejs | **LCD 21x6 + 3 przyciski** | Diody LED | LCD 2" + 3 przyciski |
+| Podajnik | **200 kart** | 100 kart | 100 kart |
+| Prędkość (YMCKO) | **290 kart/h** | 180 kart/h | 200 kart/h |
+| Prędkość (mono) | **1375 kart/h** | 700 kart/h | 900 kart/h |
+| Laminator | **Opcja jedno/dwustronna** | Brak | Brak |
+| Ethernet | **Standardowy** | Opcjonalny | Opcjonalny |
+`
+      },
+      {
+        title: '2. Elementy drukarki',
+        content: `
+### Widok z przodu – drukarka bez laminatora
+
+| Nr | Element | Opis |
+|----|---------|------|
+| 1 | Przycisk zwalniający pokrywę druku | Otwiera pokrywę komory drukującej |
+| 2 | Pokrywa opcji | Dostęp do modułów opcjonalnych (enkoder, smart card) |
+| 3 | Podajnik kart (Feeder Cartridge) | Wyjmowany pojemnik na karty do druku |
+| 4 | Panel operatora (OCP) | Wyświetlacz LCD i przyciski funkcyjne |
+| 5 | Szczelina podawania ręcznego | Do podawania pojedynczych kart |
+| 6 | Kosz odrzutów (Reject Bin) | Karty odrzucone podczas produkcji |
+| 7 | Szuflada na taśmę (Ribbon Drawer) | Komora taśmy drukującej |
+| 8 | Kosz wyjściowy (Output Hopper) | Odbiera wydrukowane karty |
+
+### Widok z przodu – drukarka z laminatorem
+
+| Nr | Element | Opis |
+|----|---------|------|
+| 1 | Przycisk zwalniający pokrywę laminatora | Otwiera górną pokrywę laminatora |
+| 2 | Przycisk zwalniający pokrywę druku | Otwiera pokrywę komory drukującej |
+| 3-8 | (jak wyżej) | |
+| 9 | Dolna pokrywa laminatora | Dostęp do mechanizmu laminatora |
+| 10 | Kosz wyjściowy (Output Hopper) | Odbiera gotowe karty |
+
+### Widok z tyłu
+
+| Nr | Element | Opis |
+|----|---------|------|
+| 1 | Złącze zasilania | Gniazdo kabla zasilającego |
+| 2 | Wyłącznik zasilania | Włącza (I) i wyłącza (O) drukarkę |
+| 3 | Złącze USB | Port USB 2.0 |
+| 4 | Złącze Ethernet | Port RJ-45 10/100 BaseT |
+| 5 | Gniazdo blokady Kensington | Fizyczne zabezpieczenie drukarki |
+`
+      },
+      {
+        title: '3. Panel operatora (OCP)',
+        content: `
+Model ZXP Series 7 wyposażony jest w **wyświetlacz LCD 21 znaków x 6 linii** oraz trzy konfigurowalne przyciski funkcyjne.
+
+### Przyciski funkcyjne
+
+| Przycisk | Funkcja |
+|----------|---------|
+| **MENU** | Dostęp do menu głównego |
+| **INFO** | Wyświetla informacje o drukarce i ustawieniach |
+| **SELECT** | Wybór opcji / potwierdzenie |
+
+### Komunikaty operacyjne
+
+| Komunikat | Znaczenie |
+|-----------|-----------|
+| READY | Drukarka gotowa do pracy |
+| PRINTING | Trwa drukowanie |
+| LAMINATING | Trwa laminacja |
+| WARMING PRINTHEAD TEMPERATURE | Nagrzewanie głowicy drukującej |
+| COOLING PRINTHEAD TEMPERATURE | Chłodzenie głowicy drukującej |
+| WARMING WAITING TO LAMINATE | Nagrzewanie laminatora |
+| MAG OPERATION | Kodowanie paska magnetycznego |
+| CONTACT OPERATION | Kodowanie karty stykowej Smart Card |
+| CONTACTLESS OPERATION | Kodowanie karty zbliżeniowej |
+| MANUALLY INSERT CARD | Oczekiwanie na kartę w szczelinie ręcznej |
+| STANDBY | Tryb oszczędzania energii (sleep) |
+| OFFLINE | Drukarka w trybie offline |
+
+### Komunikaty ostrzegawcze
+
+| Komunikat | Znaczenie |
+|-----------|-----------|
+| RIBBON LOW | Kończy się taśma drukująca |
+| TOP LAMINATE LOW | Kończy się laminat górny |
+| BOTTOM LAMINATE LOW | Kończy się laminat dolny |
+| BOTH LAMINATES LOW | Kończą się oba laminaty |
+| ALARM | Błąd wymaga uwagi operatora |
+`
+      },
+      {
+        title: '4. Rozpakowanie i instalacja',
+        content: `
+### Zawartość opakowania
+
+- Drukarka ZXP Series 7
+- Podajnik kart (Feeder Cartridge)
+- Kosz wyjściowy (Output Hopper)
+- Podwójny wkład czyszczący (Dual Cleaning Cartridge)
+- Kaseta czyszcząca do podawania ręcznego
+- Kabel USB
+- Kabel zasilający
+- Skrócona instrukcja obsługi
+- Płyta CD-ROM z oprogramowaniem InstallWizard
+
+**Ważne:** Zachowaj oryginalne opakowanie do ewentualnego transportu serwisowego.
+
+### Rozpakowanie drukarki
+
+**Uwaga:** Drukarka waży około **12,2 kg** (26,9 lbs). Zaleca się wyjmowanie z kartonu przez **dwie osoby**!
+
+1. Sprawdź opakowanie pod kątem uszkodzeń transportowych
+2. Wyjmij materiały opakowaniowe i akcesoria
+3. Umieść drukarkę na płaskiej powierzchni (min. 762 x 305 mm)
+4. Zachowaj min. 10 cm wolnej przestrzeni ze wszystkich stron
+
+**Ważne:** Jeśli drukarka była przechowywana w niskiej temperaturze (-5°C do 70°C), poczekaj aż osiągnie temperaturę pokojową (15°C – 35°C) przed uruchomieniem.
+
+### Podłączenie zasilania
+
+**Ostrzeżenie:** Zasilanie AC musi być w zakresie **90V-264V, 47-63Hz**.
+
+1. Włóż kabel zasilający do gniazda z tyłu drukarki
+2. Podłącz drugi koniec do gniazdka elektrycznego
+
+### Podłączenie USB
+
+**Ważne:** Przed włączeniem drukarki zainstaluj sterownik!
+
+1. Podłącz wtyk USB do gniazda z tyłu drukarki
+2. Podłącz drugi koniec do portu USB komputera
+
+### Podłączenie Ethernet
+
+1. Podłącz kabel Ethernet (RJ-45) do gniazda z tyłu drukarki
+2. Podłącz drugi koniec do routera/switcha
+3. Skonfiguruj adres IP przez panel OCP lub sterownik
+`
+      },
+      {
+        title: '5. Ładowanie materiałów eksploatacyjnych',
+        content: `
+### Ładowanie kart
+
+**Uwaga:** NIE zginaj kart i nie dotykaj powierzchni druku – może to pogorszyć jakość wydruku.
+
+1. Zdejmij folię z pakietu kart
+2. Trzymając karty za boki, oprzyj stos pionowo o blat
+3. Przesuń stos w przód i w tył pod kątem ok. 45° aby rozdzielić karty
+4. Przywróć stos do prostokątnego ułożenia
+5. Naciśnij przycisk zwalniający, aby wyjąć podajnik kart
+6. Otwórz pokrywę podajnika
+7. Włóż karty do podajnika (max. **200 kart** o grubości 30 mil)
+8. Zamknij pokrywę podajnika
+9. Wsuń podajnik z powrotem do drukarki (klik)
+
+### Instalacja podwójnego wkładu czyszczącego
+
+1. Otwórz pokrywę druku
+2. Wyjmij podajnik kart
+3. Włóż podwójny wkład czyszczący do gniazda
+4. Wciśnij aż usłyszysz kliknięcie
+5. Włóż z powrotem podajnik kart
+
+### Instalacja taśmy drukującej
+
+1. Otwórz szufladę na taśmę, pociągając za uchwyt
+2. Wyjmij pustą szpulę odbiorczą (jeśli jest)
+3. Włóż nową rolkę taśmy – szpula z taśmą w tylnych prowadnicach
+4. Zainstaluj szpulę odbiorczą w przednich prowadnicach
+5. Przeciągnij taśmę przez głowicę zgodnie z oznaczeniami
+6. Obróć szpulę odbiorczą, aby usunąć luz taśmy
+7. Zamknij szufladę
+
+### Instalacja laminatu (wersja z laminatorem)
+
+#### Laminator jednostronny (Top)
+
+1. Naciśnij przycisk zwalniający pokrywę laminatora
+2. Podnieś pokrywę laminatora
+3. Zainstaluj kasetę z laminatem w górnym gnieździe
+4. Przeciągnij laminat zgodnie z oznaczeniami
+5. Zamknij pokrywę laminatora
+
+#### Laminator dwustronny (Top + Bottom)
+
+1. Wykonaj kroki dla laminatora jednostronnego
+2. Otwórz dolną pokrywę laminatora
+3. Zainstaluj drugą kasetę z laminatem w dolnym gnieździe
+4. Zamknij dolną pokrywę
+`
+      },
+      {
+        title: '6. Instalacja sterownika Windows',
+        content: `
+Sterownik obsługuje: Windows XP, Vista, 7, 8, Server 2003/2008/2012 (32/64-bit).
+
+### Procedura instalacji (USB)
+
+1. Włóż płytę CD-ROM z InstallWizard lub pobierz sterownik ze strony zebra.com
+2. Uruchom instalator sterownika
+3. Zaznacz **I Accept** i kliknij **Next**
+4. Zamknij inne aplikacje i kliknij **Next**
+5. Wybierz typ połączenia **USB** i kliknij **Next**
+6. Wybierz **Zebra ZXP Series 7 Card Printer** i kliknij **Next**
+7. Kliknij **Install**
+8. Jeśli pojawi się ostrzeżenie Windows Security, kliknij **Install this driver software anyway**
+9. Włącz drukarkę i podłącz kabel USB
+10. Kliknij **Finish**
+
+### Procedura instalacji (Ethernet)
+
+1. Uruchom instalator
+2. Wybierz typ połączenia **Ethernet**
+3. Wprowadź adres IP lub użyj automatycznego wykrywania
+4. Dokończ instalację
+`
+      },
+      {
+        title: '7. Podawanie ręczne kart',
+        content: `
+Szczelina podawania ręcznego, znajdująca się z prawej strony drukarki, służy do podawania pojedynczych kart.
+
+### Konfiguracja podawania ręcznego
+
+1. Otwórz **Urządzenia i drukarki** w Panelu sterowania
+2. Kliknij prawym przyciskiem drukarkę ZXP Series 7 > **Preferencje drukowania**
+3. Przejdź do zakładki **Card Setup**
+4. W polu **Card Source** wybierz **Manual feed slot**
+5. Kliknij **Zastosuj** i **OK**
+
+### Podawanie karty
+
+1. Trzymaj kartę za krawędzie – nie dotykaj powierzchni druku
+2. Włóż kartę do szczeliny w prawidłowej orientacji:
+   - **Karty standardowe:** dowolna orientacja
+   - **Karty magnetyczne:** pasek DO DOŁU i DO TYŁU
+   - **Karty Smart Card stykowe:** chip DO GÓRY i W LEWO
+3. Wsuwaj kartę, aż poczujesz lekki opór
+4. Karta zostanie automatycznie wciągnięta po wysłaniu zadania druku
+`
+      },
+      {
+        title: '8. Drukowanie karty testowej',
+        content: `
+### Z poziomu Windows
+
+1. Otwórz **Urządzenia i drukarki** w Panelu sterowania
+2. Kliknij prawym przyciskiem drukarkę ZXP Series 7
+3. Wybierz **Preferencje drukowania** > zakładka **Card Setup**
+4. Upewnij się, że karty są załadowane w podajniku
+5. Kliknij przycisk **Test Print**
+6. Karta wyjdzie do kosza wyjściowego
+
+### Z poziomu OCP
+
+1. Na panelu OCP naciśnij **MENU**
+2. Przejdź do menu **Test Card**
+3. Wybierz typ karty testowej
+4. Naciśnij **SELECT** aby wydrukować
+`
+      },
+      {
+        title: '9. Konserwacja i czyszczenie',
+        content: `
+Regularna konserwacja zapewnia optymalną jakość druku i długą żywotność drukarki. Zaleca się czyszczenie **co 5000 wydrukowanych kart** lub przy wymianie taśmy.
+
+### Czyszczenie drukarki (Cleaning Run)
+
+1. Na panelu OCP przejdź do **MENU > Cleaning**
+2. Wybierz **Printer Cleaning**
+3. Wyjmij taśmę drukującą z szuflady
+4. Włóż kartę czyszczącą do szczeliny ręcznej
+5. Postępuj zgodnie z instrukcjami na wyświetlaczu
+6. Po zakończeniu zainstaluj ponownie taśmę
+
+### Czyszczenie głowicy drukującej
+
+**Uwaga:** Głowica jest bardzo gorąca tuż po drukowaniu – poczekaj aż ostygnie!
+
+**Uwaga:** Zdejmij pierścionki, zegarki i inne metalowe przedmioty przed pracą przy głowicy.
+
+1. Wyłącz drukarkę i poczekaj aż głowica ostygnie
+2. Otwórz pokrywę druku
+3. Wyjmij taśmę drukującą
+4. Użyj niestrzępiącej się szmatki nasączonej alkoholem izopropylowym (99%)
+5. Delikatnie przetrzyj element grzejny głowicy
+6. Poczekaj na wyschnięcie przed ponownym uruchomieniem
+
+### Wymiana wałków czyszczących
+
+Dwa nowe wałki czyszczące są dołączone do każdego opakowania taśm.
+
+1. Otwórz pokrywę druku
+2. Wyjmij podwójny wkład czyszczący
+3. Zdejmij stary wałek i załóż nowy
+4. Zainstaluj wkład z powrotem
+
+### Czyszczenie laminatora
+
+1. Na panelu OCP przejdź do **MENU > Cleaning > Laminator Cleaning**
+2. Postępuj zgodnie z instrukcjami
+3. Użyj dedykowanych kart czyszczących do laminatora
+`
+      },
+      {
+        title: '10. Rozwiązywanie problemów',
+        content: `
+### Objawy awarii
+
+| Objaw | Działanie |
+|-------|-----------|
+| Brak zasilania | Sprawdź kabel zasilający i wyłącznik |
+| Komputer nie rozpoznaje drukarki | Sprawdź kabel USB/Ethernet i sterownik |
+| Drukarka nie osiąga stanu READY | Sprawdź czy podajnik i pokrywy są zamknięte |
+| Białe linie na karcie | Wyczyść głowicę drukującą |
+| Niewydrukowane plamy | Wymień wałek czyszczący, sprawdź czystość kart |
+| Słaba jakość druku | Sprawdź ustawienia, wyczyść głowicę |
+| Problemy z laminacją | Sprawdź temperaturę laminatora i instalację laminatu |
+
+### Kody błędów OCP
+
+| Kod | Komunikat | Rozwiązanie |
+|-----|-----------|-------------|
+| 4003 | CARD JAM | Wyczyść ścieżkę karty |
+| 4014 | CARD FEED ERROR | Sprawdź karty, rozdziel sklejone |
+| 4015 | CARD NOT INSERTED | Włóż kartę w ciągu 30 sek. |
+| 5001 | OUT OF RIBBON | Załaduj nową taśmę |
+| 5002 | INVALID RIBBON | Użyj oryginalnej taśmy Zebra |
+| 5003 | RIBBON JAM | Sprawdź i zainstaluj ponownie taśmę |
+| 3001 | PRINTER OFFLINE | Zmień status na online w menu OCP |
+
+### Usuwanie zacięcia karty
+
+1. Wyłącz drukarkę
+2. Otwórz pokrywę druku
+3. Wyjmij taśmę drukującą
+4. Ostrożnie wyjmij zaciętą kartę
+5. Sprawdź ścieżkę karty
+6. Zainstaluj taśmę i zamknij pokrywę
+7. Włącz drukarkę
+`
+      },
+      {
+        title: '11. Opcje i rozszerzenia',
+        content: `
+### Enkoder paska magnetycznego
+
+- Zgodność z AAMVA i ISO 7811
+- Obsługa ścieżek 1, 2 i 3
+- High i Low Coercivity
+- Kodowanie nowych i wstępnie zakodowanych kart
+
+### Enkoder Smart Card
+
+- Stacja kontaktowa ISO 7816 dla zewnętrznych enkoderów
+- Enkoder MIFARE ISO 14443 A & B (13.56 MHz)
+- Certyfikacja EMV Level 1
+- Zgodność PC/SC
+
+### Enkoder UHF RFID
+
+- Enkoder UHF Gen 2 RFID
+- Do kart zbliżeniowych dalekiego zasięgu
+
+### Czytnik kodów kreskowych
+
+- Liniowy skaner kodów kreskowych
+- Do weryfikacji i sortowania kart
+
+### Zamykane obudowy
+
+- Zamykana pokrywa drukarki
+- Zamykany podajnik kart
+- Do środowisk wymagających bezpieczeństwa fizycznego
+`
+      },
+      {
+        title: '12. Dane techniczne',
+        content: `
+### Wymiary i waga
+
+| Parametr | Drukarka | Drukarka z laminatorem |
+|----------|----------|------------------------|
+| Wysokość | 306 mm | 306 mm |
+| Szerokość | 699 mm | 964 mm |
+| Głębokość | 277 mm | 277 mm |
+| Waga | 12,2 kg | 17,9 kg |
+
+### Parametry elektryczne
+
+| Parametr | Wartość |
+|----------|---------|
+| Napięcie zasilania | 90V – 264V AC |
+| Częstotliwość | 47 – 63 Hz |
+| Pobór mocy (spoczynek) | 100 W |
+| Pobór mocy (druk bez laminatora) | 120 W |
+| Pobór mocy (druk z laminacją) | 250 W |
+| Pobór mocy (rozgrzewanie z laminatorem) | 450 W |
+| Pobór mocy (sleep) | 20 W |
+
+### Warunki pracy
+
+| Parametr | Wartość |
+|----------|---------|
+| Temperatura pracy | 15°C – 35°C |
+| Temperatura przechowywania | -5°C – 70°C |
+| Wilgotność względna | 20% – 80% bez kondensacji |
+
+### Specyfikacja kart
+
+| Parametr | Wartość |
+|----------|---------|
+| Grubość kart | 10 – 50 mil (0,25 – 1,27 mm) |
+| Grubość dla laminacji | 30 mil (0,76 mm) |
+| Format kart | CR-80, ISO 7810 Type ID-1 |
+| Materiał | PVC, PVC-composite, PET, PET-G, PET-F, Teslin |
+`
+      },
+      {
+        title: 'FAQ – Najczęściej zadawane pytania',
+        content: `
+### Czym jest drukarka ZXP Series 7?
+
+**Odpowiedź:** Zebra ZXP Series 7 to **wysokowydajna drukarka kart identyfikacyjnych** z wyświetlaczem LCD, podajnikiem na **200 kart** i opcjonalnym **laminatorem**.
+
+### Jaka jest prędkość druku ZXP7?
+
+**Odpowiedź:** ZXP7 drukuje do **290 kart/godz.** (kolor jednostronny), do **225 kart/godz.** (kolor dwustronny) i do **1375 kart/godz.** (mono jednostronny).
+
+### Co to jest laminator w ZXP7?
+
+**Odpowiedź:** Laminator to opcjonalny moduł nakładający **folię ochronną** na kartę, zwiększający jej trwałość i bezpieczeństwo. Dostępny w wersji **jednostronnej i dwustronnej**.
+
+### Ile kart mieści podajnik ZXP7?
+
+**Odpowiedź:** Podajnik ZXP7 mieści **200 kart** o grubości 30 mil – dwukrotnie więcej niż modele ZC100/ZC300.
+
+### Co to jest technologia ix Series?
+
+**Odpowiedź:** **ix Series** to inteligentna technologia nośników z tagami RFID do **automatycznego rozpoznawania** taśm i laminatów przez drukarkę.
+
+### Czy ZXP7 ma Ethernet standardowo?
+
+**Odpowiedź:** Tak, **Ethernet 10/100** jest standardowym wyposażeniem ZXP7, w przeciwieństwie do modeli ZC100/ZC300 gdzie jest opcjonalny.
+
+### Jakie enkodery obsługuje ZXP7?
+
+**Odpowiedź:** ZXP7 obsługuje: enkoder **paska magnetycznego** (ISO 7811), **Smart Card stykowy** (ISO 7816), **zbliżeniowy MIFARE** (13.56 MHz) i **UHF RFID**.
+
+### Jak często czyścić ZXP7?
+
+**Odpowiedź:** Zaleca się czyszczenie **co 5000 wydrukowanych kart** lub przy każdej wymianie taśmy. Używaj kart czyszczących Zebra.
+
+### Co oznacza komunikat RIBBON LOW?
+
+**Odpowiedź:** **RIBBON LOW** oznacza, że kończy się taśma drukująca – przygotuj nową rolkę do wymiany.
+
+### Jak usunąć zacięcie karty?
+
+**Odpowiedź:** Wyłącz drukarkę, otwórz pokrywę druku, wyjmij taśmę, ostrożnie usuń zaciętą kartę, zainstaluj taśmę i zamknij pokrywę.
+
+### Czy ZXP7 obsługuje karty specjalne?
+
+**Odpowiedź:** Tak, ZXP7 obsługuje karty: PVC, PVC-composite, PET, PET-G, PET-F, Teslin, **transparentne**, **samoprzylepne** i **z panelem do podpisu**.
+
+### Jaka jest waga ZXP7?
+
+**Odpowiedź:** ZXP7 waży **12,2 kg** bez laminatora lub **17,9 kg** z laminatorem – zaleca się wyjmowanie z kartonu przez dwie osoby.
+`
+      }
+    ]
   }
 }
 
