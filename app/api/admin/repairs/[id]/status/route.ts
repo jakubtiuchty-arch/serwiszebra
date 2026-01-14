@@ -131,6 +131,7 @@ export async function PATCH(
           if (status === 'odebrane') {
             await sendPackageReceivedEmail({
               to: currentRepair.email,
+              customerName: `${currentRepair.first_name} ${currentRepair.last_name}`,
               repairId: repairId,
               repairNumber: currentRepair.repair_number,
               deviceModel: currentRepair.device_model
