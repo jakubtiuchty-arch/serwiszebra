@@ -17785,6 +17785,583 @@ Przytrzymaj **strzałki GÓRA + DÓŁ** podczas włączania drukarki
 `
       }
     ]
+  },
+
+  'zq610plus': {
+    model: 'ZQ610 Plus',
+    title: 'Zebra ZQ610 Plus – Instrukcja obsługi po Polsku',
+    lastUpdated: '2025-01-20',
+    sourceDocument: 'Zebra ZQ600 Plus Series User Guide',
+    keywords: [
+      'zebra zq610 plus instrukcja', 'zq610 plus instrukcja po polsku', 'zebra zq610 plus manual',
+      'drukarka zebra zq610 plus', 'zq610 plus kalibracja', 'zq610 plus reset', 'zq610 plus bateria',
+      'zq610 plus ładowanie etykiet', 'zq610 plus sterowniki', 'zq610 plus specyfikacja',
+      'zq610 plus błędy', 'zq610 plus czyszczenie', 'zq610 plus bluetooth 5.3', 'zq610 plus wifi 6',
+      'zq610 plus nfc', 'zq610 plus peel off', 'zq610 plus ip54', 'zq610 plus healthcare',
+      'zq610 plus powerprecision+', 'zq610 plus 2 cale', 'mobilna drukarka etykiet',
+      'zq610 plus vs zq610', 'zq600 plus series', 'wifi 6 drukarka'
+    ],
+    sections: [
+      {
+        title: '1. Podstawowe informacje',
+        content: `
+### O drukarce ZQ610 Plus
+
+Zebra ZQ610 Plus to zaawansowana mobilna drukarka etykiet o **szerokości druku 2 cale (48 mm)**, będąca następcą popularnego modelu ZQ610. Zaprojektowana do pracy w terenie i wymagających środowiskach przemysłowych, oferuje ulepszoną łączność z Wi-Fi 6 (802.11ax) i Bluetooth 5.3, podwyższoną odporność IP54, kolorowy wyświetlacz LCD oraz technologię NFC. Jest to najbardziej kompaktowy model z serii ZQ600 Plus, idealny do drukowania małych etykiet, paragonów i potwierdzeń.
+
+### Parametry techniczne
+
+| Parametr | ZQ610 Plus |
+|----------|------------|
+| **Szerokość druku** | **do 48 mm (1,89")** |
+| Technologia druku | Termiczny bezpośredni (Direct Thermal) |
+| Rozdzielczość | 203 dpi |
+| Prędkość druku | 102 mm/s (4"/s) standardowo |
+| | 127 mm/s (5"/s) w trybie Draft |
+| Maks. średnica rolki | 55,8 mm (2,2") |
+| Średnica gilzy | 19 mm lub 35 mm |
+| Maks. szerokość materiału | 55,37 mm (2,18") |
+| Pamięć Flash | 512 MB |
+| Pamięć RAM | 256 MB |
+
+### Porównanie ZQ610 Plus vs ZQ610
+
+| Parametr | ZQ610 Plus | ZQ610 |
+|----------|------------|-------|
+| Wi-Fi | **Wi-Fi 6 (802.11ax)** | Wi-Fi 5 (802.11ac) |
+| Bluetooth | **Bluetooth 5.3** | Bluetooth 4.1 |
+| Stopień ochrony IP | **IP54** | IP43/IP54 |
+| Procesor | **Ulepszona wydajność** | Standardowy |
+| Adaptive Print | **PSPT PrintSmart Gen 2** | PSPT Gen 1 |
+| Made for iPhone | Tak | Tak |
+
+### Porównanie serii ZQ600 Plus
+
+| Parametr | ZQ610 Plus | ZQ620 Plus | ZQ630 Plus |
+|----------|------------|------------|------------|
+| Szerokość druku | **48 mm (2")** | 72 mm (3") | 104 mm (4") |
+| Maks. szerokość materiału | 55,37 mm | 79,4 mm | 111 mm |
+| Waga z baterią | **0,6 kg** | 0,73 kg | 1,113 kg |
+| Opcja RFID | Nie | Nie | **Tak** |
+
+### Zastosowania ZQ610 Plus
+
+- **Handel detaliczny:** etykiety cenowe, oznaczenia produktów
+- **Logistyka:** małe etykiety identyfikacyjne, potwierdzenia
+- **Służba zdrowia:** opaski pacjentów, etykiety próbek
+- **Transport:** paragony, potwierdzenia dostaw
+- **Magazynowanie:** etykiety lokalizacji, oznaczenia półek
+- **Usługi terenowe:** kwity serwisowe, rachunki
+
+### Złącza i łączność
+
+- USB 2.0 Full Speed (standard)
+- RS-232 Serial 14-pin (standard)
+- Wi-Fi 6 dual radio (802.11ax + Bluetooth 5.3)
+- Wi-Fi 5 dual radio (802.11ac + Bluetooth 4.2) - opcja
+- Ethernet 10/100 (przez stację dokującą)
+- NFC (Near Field Communication)
+
+### Cechy charakterystyczne
+
+- **Wi-Fi 6 i Bluetooth 5.3** – najnowsze standardy łączności
+- **Certyfikat IP54** – zwiększona odporność na kurz i wodę
+- **Bateria PowerPrecision+** – inteligentne zarządzanie energią
+- **Kolorowy wyświetlacz LCD** – intuicyjny interfejs 288x240 pikseli
+- **NFC Print Touch** – szybkie parowanie przez zbliżenie
+- **Made for iPhone (MFi)** – certyfikowana zgodność z iOS 10+
+- **PSPT PrintSmart Gen 2** – adaptacyjna jakość druku
+- Obsługa języków CPCL, ZPL i EPL
+- Tryb Peel-Off (automatyczne odklejanie)
+- Wersja Healthcare w kolorze białym (ZQ610 Plus-HC)
+`
+      },
+      {
+        title: '2. Rozpakowanie i instalacja',
+        content: `
+### Zawartość opakowania
+
+- Drukarka ZQ610 Plus
+- Bateria litowo-jonowa PowerPrecision+ (2-ogniwowa)
+- Klips do paska
+- Karta rejestracyjna
+- Skrócona instrukcja obsługi
+- Przewodnik bezpieczeństwa
+
+### Instalacja baterii
+
+1. **Usuń taśmę izolacyjną** z nowej baterii (pociągnij za zakładkę)
+2. **Obróć klips do paska** (jeśli zamontowany) aby uzyskać dostęp do komory baterii
+3. **Włóż baterię** do komory pod kątem zgodnie z oznaczeniami
+4. **Obróć baterię** aż zatrzaśnie się na miejscu
+
+> **Uwaga:** Baterie są dostarczane w trybie uśpienia. Przed pierwszym użyciem naładuj baterię w ładowarce lub podłącz drukarkę do zasilacza AC.
+
+### Wyjmowanie baterii
+
+1. Naciśnij zatrzask na baterii
+2. Odchyl baterię od komory
+3. Wyjmij baterię z drukarki
+
+> **Ważne:** Zawsze wyłącz drukarkę przed wyjęciem baterii aby uniknąć uszkodzenia danych.
+
+### Warunki pracy
+
+| Tryb | Temperatura | Wilgotność |
+|------|-------------|------------|
+| Praca | -20°C do +50°C | 10-90% bez kondensacji |
+| Praca (Healthcare) | 0°C do +50°C | 10-90% bez kondensacji |
+| Ładowanie | 0°C do +40°C | – |
+| Przechowywanie | -25°C do +65°C | 10-90% bez kondensacji |
+`
+      },
+      {
+        title: '3. Panel sterowania',
+        content: `
+### Wyświetlacz LCD
+
+Kolorowy wyświetlacz LCD (288x240 pikseli) pokazuje status drukarki, ikony stanu i menu konfiguracyjne. Automatycznie przyciemnia się po okresie bezczynności (domyślnie 20 min).
+
+### Przyciski sterujące
+
+| Przycisk | Funkcja |
+|----------|---------|
+| **POWER** | Włącza/wyłącza drukarkę (przytrzymaj 3 sek. aby wyłączyć) |
+| **FEED** | Wysuwa materiał / budzenie z trybu uśpienia |
+| **Strzałki nawigacyjne** | Nawigacja po menu LCD (GÓRA, DÓŁ, LEWO, PRAWO) |
+| **OK** | Potwierdza wybór w menu |
+| **LEFT/RIGHT SELECT** | Wykonują akcje pokazane na pasku nawigacji |
+
+### Wskaźnik LED (pierścień wokół przycisku Power)
+
+| Kolor | Zachowanie | Znaczenie |
+|-------|------------|-----------|
+| Zielony | Stały | Bateria naładowana, drukarka włączona |
+| Zielony | Pulsujący | Tryb uśpienia, bateria naładowana |
+| Bursztynowy | Stały | Ładowanie w toku |
+| Bursztynowy | Pulsujący | Ładowanie w trybie uśpienia |
+| Czerwony | Stały | Niezdrowa bateria – wymień |
+| Czerwony | Migający | Błąd ładowania |
+
+### Menu główne (Home Menu)
+
+Z ekranu głównego naciśnij LEFT SELECT aby wejść do menu z ikonami:
+
+| Menu | Zawartość |
+|------|-----------|
+| **Settings** | Ciemność druku, typ mediów, tryb druku, szerokość |
+| **Tools** | Informacje, diagnostyka, reset fabryczny |
+| **Network** | Ustawienia Wi-Fi, IP, DHCP, Ethernet |
+| **Language** | Język wyświetlacza, język poleceń |
+| **Sensors** | Status czujników, kalibracja |
+| **Communications** | Ustawienia portów szeregowych |
+| **Bluetooth** | Ustawienia Bluetooth, parowanie |
+| **Battery** | Status baterii, zdrowie, cykle |
+`
+      },
+      {
+        title: '4. Ładowanie materiałów eksploatacyjnych',
+        content: `
+### Specyfikacja materiałów dla ZQ610 Plus
+
+| Parametr | Wartość |
+|----------|---------|
+| Maks. szerokość materiału | 55,37 mm (2,18") |
+| Min. szerokość materiału | 25,4 mm (1") |
+| Maks. długość etykiety | 812,8 mm (32") |
+| Min. długość etykiety | 12,7 mm (0,5") |
+| Maks. średnica rolki | 55,8 mm (2,2") |
+| Średnica gilzy | 19 mm lub 35 mm |
+| Grubość materiału | 0,058-0,165 mm |
+
+### Obsługiwane typy materiałów
+
+- **Etykiety z przerwą (gap)** – rozdzielone przerwami lub nacięciami
+- **Etykiety z czarnym znacznikiem (black mark)** – znacznik z tyłu materiału
+- **Materiał ciągły (continuous)** – paragony, kwity
+- **Materiał bezpodkładowy (linerless)** – wymaga specjalnego wałka
+
+### Ładowanie materiału (tryb Tear-Off)
+
+1. **Naciśnij przycisk zwalniający** z boku drukarki
+2. **Odchyl pokrywę mediów** do tyłu, odsłaniając komorę
+3. **Rozsuń dyski podtrzymujące** – odsuń je od siebie
+4. **Włóż rolkę materiału** między dyski (strona do druku na zewnątrz)
+5. **Przeprowadź materiał** pod wałkiem dociskowym
+6. **Zamknij pokrywę** – zatrzaśnij na miejscu
+7. Naciśnij **FEED** aby wysunąć i wyrównać materiał
+
+### Ładowanie w trybie Peel-Off
+
+1. **Odklej kilka etykiet** od podkładu
+2. Otwórz pokrywę mediów
+3. Załaduj rolkę materiału standardowo
+4. **Pociągnij dźwignię peelera** do góry
+5. Przeprowadź pusty **podkład** za ramię peelera
+6. Zamknij pokrywę – ramię peelera zablokuje się automatycznie
+7. Włącz drukarkę lub naciśnij FEED
+`
+      },
+      {
+        title: '5. Ładowanie i zarządzanie baterią',
+        content: `
+### Bateria PowerPrecision+
+
+Drukarka ZQ610 Plus wykorzystuje inteligentną baterię litowo-jonową 2-ogniwową (7,4V, 3250 mAh) z technologią PowerPrecision+, która zapewnia:
+
+- Monitorowanie stanu zdrowia baterii w czasie rzeczywistym
+- Licznik cykli ładowania
+- Prognozowanie czasu pracy
+- Optymalne zarządzanie ładowaniem
+
+Opcjonalnie dostępna jest bateria rozszerzona 4-ogniwowa dla dłuższego czasu pracy.
+
+### Stan zdrowia baterii
+
+| Liczba cykli | Stan | Komunikat |
+|--------------|------|-----------|
+| < 300 | GOOD | Brak |
+| 300-549 | REPLACE | "Battery Diminished Consider Replacing" |
+| 550-599 | REPLACE | "Warning-Battery Is Past Useful Life" |
+| >= 600 | POOR | "Replace Battery Shutting Down" |
+
+### Opcje ładowania
+
+| Ładowarka | Opis | Czas ładowania |
+|-----------|------|----------------|
+| **Zasilacz AC** | Ładowanie przez gniazdo DC | Podczas pracy |
+| **Smart Charger-2 (SC2)** | Ładowarka pojedyncza | ~2 godziny |
+| **Quad Charger (UCLI72-4)** | 4 baterie jednocześnie | ~2 godziny |
+| **1-Slot Battery Charger** | Ładowarka pojedyncza | ~4 godziny |
+| **3-Slot Battery Charger** | 3 baterie jednocześnie | ~4 godziny |
+| **Stacja dokująca Ethernet** | Z jednoczesną komunikacją | Podczas pracy |
+
+### Wskazówki dotyczące żywotności baterii
+
+- Nie wystawiaj baterii na temperaturę powyżej 40°C podczas ładowania
+- Używaj tylko ładowarek Zebra przeznaczonych do baterii Li-Ion
+- Używaj odpowiednich materiałów eksploatacyjnych Zebra
+- Wybierz optymalną ciemność i prędkość druku
+- Wyjmuj baterię jeśli drukarka nie jest używana przez dłuższy czas
+`
+      },
+      {
+        title: '6. Łączność bezprzewodowa',
+        content: `
+### Wi-Fi 6 (802.11ax)
+
+ZQ610 Plus oferuje opcję Wi-Fi 6 dual radio z najnowszą technologią bezprzewodową:
+
+- **802.11ax** – szybsza transmisja i lepsza wydajność w zatłoczonych sieciach
+- **Bluetooth 5.3** – zwiększony zasięg i prędkość parowania
+- Wsteczna kompatybilność z 802.11 a/b/g/n/ac
+
+### Bluetooth 5.3
+
+ZQ610 Plus obsługuje Bluetooth 5.3 Classic + BLE z trybami bezpieczeństwa:
+
+- **Secure Simple Pairing (SSP)** – automatyczne parowanie bez PIN
+- **Numeric Comparison** – weryfikacja 6-cyfrowym kodem
+- **Just Works** – najprostszy tryb dla urządzeń bez wyświetlacza
+- Bonding – zapamiętywanie sparowanych urządzeń
+
+### Parowanie przez NFC (Print Touch)
+
+1. Włącz NFC na smartfonie
+2. **Zbliż telefon** do ikony Print Touch na boku drukarki (max 7,5 cm)
+3. Parowanie nastąpi automatycznie
+4. Opcjonalnie: uruchomi się aplikacja Zebra
+
+### Połączenie Wi-Fi
+
+1. Skonfiguruj ustawienia sieci przez Zebra Setup Utilities
+2. Wprowadź ESSID (nazwę sieci)
+3. Skonfiguruj zabezpieczenia (WPA2, WPA3)
+4. Drukarka połączy się automatycznie
+`
+      },
+      {
+        title: '7. Podłączenie do komputera',
+        content: `
+### Instalacja sterowników
+
+1. Pobierz **Zebra Setup Utilities** ze strony zebra.com/drivers
+2. Zainstaluj oprogramowanie PRZED podłączeniem drukarki
+3. Podłącz drukarkę kablem USB lub RS-232
+4. Postępuj zgodnie z kreatorem konfiguracji
+
+### Połączenie USB
+
+1. Podłącz kabel USB (mały 5-pin) do drukarki
+2. Podłącz drugi koniec do komputera
+3. Windows automatycznie rozpozna drukarkę
+
+### Stacja dokująca Ethernet
+
+1. Podłącz stację dokującą do sieci kablem Ethernet
+2. Podłącz zasilacz do stacji dokującej
+3. **Umieść drukarkę** w stacji dokującej
+4. Drukarka automatycznie przełączy się na Ethernet i rozpocznie ładowanie
+
+> **Uwaga:** Drukarka z baterią rozszerzoną 4-ogniwową może nie być kompatybilna ze wszystkimi stacjami dokującymi.
+`
+      },
+      {
+        title: '8. Weryfikacja działania',
+        content: `
+### Drukowanie etykiety konfiguracji (Two Key Report)
+
+1. Wyłącz drukarkę
+2. Załaduj materiał ciągły (bez znaczników)
+3. **Przytrzymaj przycisk FEED**
+4. **Naciśnij i zwolnij przycisk POWER** (trzymając FEED)
+5. Zwolnij FEED gdy rozpocznie się drukowanie
+
+Etykieta konfiguracji zawiera:
+- Numer seryjny i model (ZQ610 Plus)
+- Wersję firmware
+- Ustawienia komunikacji
+- Status sieci Wi-Fi i Bluetooth
+- Adresy MAC
+- Zainstalowane czcionki i kody kreskowe
+
+### Wejście w tryb diagnostyczny (DUMP Mode)
+
+1. Wydrukuj etykietę konfiguracji
+2. Na końcu wydruku pojawi się: "Press FEED key to enter DUMP mode"
+3. Naciśnij FEED w ciągu 3 sekund
+4. Drukarka będzie drukować odebrane dane w formacie HEX
+`
+      },
+      {
+        title: '9. Konserwacja',
+        content: `
+### Harmonogram czyszczenia
+
+| Element | Częstotliwość |
+|---------|---------------|
+| Głowica drukująca | Co 5 rolek materiału |
+| Wałek dociskowy (platen) | Co 5 rolek materiału |
+| Czujniki (gap, black bar) | Co 5 rolek |
+| Listwa odrywająca (tear bar) | W razie potrzeby |
+| Obudowa zewnętrzna | W razie potrzeby |
+
+### Czyszczenie głowicy i wałka
+
+> **Ostrzeżenie:** Głowica może być gorąca! Poczekaj na ostygnięcie.
+
+1. Wyłącz drukarkę
+2. Otwórz pokrywę i wyjmij materiał
+3. **Głowica:** Przetrzyj brązowy pasek elementów grzejnych wacikiem nasączonym alkoholem izopropylowym (90%+)
+4. **Wałek:** Przetrzyj wacikiem z alkoholem, obracając ręcznie
+5. **Czujniki:** Wydmuchaj kurz, przetrzyj suchym wacikiem
+6. Poczekaj aż wyschnie przed załadowaniem materiału
+
+### Czyszczenie drukarek Healthcare (ZQ610 Plus-HC)
+
+Drukarki w wersji Healthcare zostały zaprojektowane do regularnej dezynfekcji. Używaj zatwierdzonych środków czyszczących stosowanych w placówkach medycznych.
+
+### Materiały do czyszczenia
+
+- Pisak czyszczący Zebra
+- Waciki bezpyłowe
+- Alkohol izopropylowy (90%+)
+- Ściereczka bezpyłowa
+`
+      },
+      {
+        title: '10. Rozwiązywanie problemów',
+        content: `
+### Komunikaty alertów
+
+| Alert | Kolor | Znaczenie | Rozwiązanie |
+|-------|-------|-----------|-------------|
+| Media Out | Czerwony (miga) | Brak materiału | Załaduj materiał |
+| Media Cover Open | Czerwony (miga) | Pokrywa otwarta | Zamknij pokrywę |
+| Battery Low | Żółty | Niski poziom baterii | Naładuj/wymień baterię |
+| Battery Diminished | Żółty | Bateria zużyta | Rozważ wymianę |
+| Head Over Temp | Żółty | Przegrzanie głowicy | Poczekaj na ochłodzenie |
+| Error | Czerwony (miga) | Błąd ogólny | Sprawdź wyświetlacz |
+
+### Problemy i rozwiązania
+
+| Problem | Rozwiązanie |
+|---------|-------------|
+| Brak zasilania | Sprawdź instalację baterii, naładuj baterię |
+| Materiał nie wysuwa się | Sprawdź czy pokrywa jest zamknięta, sprawdź rolkę |
+| Słaby/wyblakły druk | Wyczyść głowicę, zwiększ ciemność, sprawdź materiał |
+| Brakujący druk | Sprawdź wyrównanie materiału, wyczyść głowicę |
+| Zniekształcony druk | Sprawdź baud rate, kabel komunikacyjny |
+| Brak druku | Sprawdź komunikację, wymień baterię |
+| Pomijanie etykiet | Skalibruj czujniki, sprawdź znaczniki/przerwy |
+| Zacięcie materiału | Otwórz pokrywę, usuń zacięty materiał |
+| Pusty ekran LCD | Włącz drukarkę, przeładuj firmware |
+| Brak NFC | Zbliż telefon do 7,5 cm od ikony Print Touch |
+
+### Przywracanie ustawień fabrycznych
+
+**Z menu:**
+TOOLS > LOAD DEFAULTS > FACTORY
+
+**Kombinacja klawiszy:**
+Przytrzymaj **strzałki GÓRA + DÓŁ** podczas włączania drukarki
+`
+      },
+      {
+        title: '11. Akcesoria i opcje',
+        content: `
+### Opcje noszenia
+
+| Akcesorium | Opis |
+|------------|------|
+| Klips do paska | W zestawie – obrotowy |
+| Pasek na ramię | Regulowany, mocowany do uchwytów |
+| Pasek na rękę | Wygodne noszenie jedną ręką |
+| Miękka obudowa (soft case) | Ochrona z oknem na LCD |
+
+### Ładowarki i stacje dokujące
+
+| Akcesorium | Nr części |
+|------------|-----------|
+| Zasilacz AC (US) | P1031365-024 |
+| Zasilacz AC Healthcare | P1065668-008 |
+| Smart Charger-2 (SC2) | P1031365-063 |
+| Quad Charger UCLI72-4 | AC18177-5 |
+| 1-Slot Battery Charger | SAC-MPP-1BCHGUS1-01 |
+| 3-Slot Battery Charger | SAC-MPP-3BCHGUS1-01 |
+| Single Ethernet Cradle | P1031365-038 |
+| 4-Bay Ethernet Cradle | P1031365-045 |
+| Bateria zapasowa 2-cell | P1031365-059 |
+| Bateria rozszerzona 4-cell | P1031365-069 |
+`
+      },
+      {
+        title: '12. Specyfikacje',
+        content: `
+### Wymiary i waga
+
+| Parametr | Wartość |
+|----------|---------|
+| Szerokość | 91,4 mm (3,6") |
+| Długość | 170,9 mm (6,73") |
+| Wysokość | 72,4 mm (2,85") |
+| Waga z baterią | 0,6 kg (1,33 lbs) |
+
+### Specyfikacje druku
+
+| Parametr | Wartość |
+|----------|---------|
+| Szerokość druku | do 48 mm (1,89") |
+| Rozdzielczość | 203 dpi |
+| Prędkość druku | 102 mm/s (127 mm/s Draft) |
+
+### Specyfikacje materiałów
+
+| Parametr | Wartość |
+|----------|---------|
+| Maks. szerokość materiału | 55,37 mm (2,18") |
+| Min. szerokość materiału | 25,4 mm (1") |
+| Długość etykiety | 12,7-812,8 mm |
+| Maks. średnica rolki | 55,8 mm (2,2") |
+
+### Zasilanie
+
+| Parametr | Wartość |
+|----------|---------|
+| Bateria standardowa | Li-Ion 7,4V, 3250 mAh (2-cell) |
+| Bateria rozszerzona | Li-Ion 7,4V (4-cell) - opcja |
+| Zasilacz AC | 100-240 VAC, 50-60 Hz |
+
+### Łączność
+
+| Parametr | Wartość |
+|----------|---------|
+| USB | 2.0 Full Speed |
+| Serial | RS-232C (14-pin), 9600-115200 bps |
+| Wi-Fi (opcja) | 802.11ax (Wi-Fi 6) lub 802.11ac (Wi-Fi 5) |
+| Bluetooth (opcja) | 5.3 lub 4.2 Classic + BLE |
+| NFC | Print Touch |
+| Ethernet | 10/100 Mb/s (przez stację dokującą) |
+
+### Certyfikaty i ochrona
+
+| Parametr | Wartość |
+|----------|---------|
+| Stopień ochrony IP | IP54 |
+| Certyfikaty | FCC, CE, IC, MFi |
+
+### Obsługiwane kody kreskowe
+
+**Kody liniowe:**
+- Code 39, Code 93, Code 128
+- Codabar, Interleaved 2 of 5
+- UPC-A, UPC-E, EAN-8, EAN-13
+- MSI, Plessey, POSTNET
+
+**Kody 2D:**
+- QR Code, Data Matrix
+- PDF417, Micro PDF417
+- Aztec, MaxiCode
+- GS1 DataBar (RSS)
+`
+      },
+      {
+        title: 'FAQ – Najczęściej zadawane pytania',
+        content: `
+### Czym różni się ZQ610 Plus od ZQ610?
+
+**Odpowiedź:** ZQ610 Plus to ulepszona wersja z **Wi-Fi 6 (802.11ax)** zamiast Wi-Fi 5, **Bluetooth 5.3** zamiast 4.1, wyższą odpornością **IP54** (vs IP43), i **PSPT PrintSmart Gen 2** dla lepszej jakości druku. Wymiary pozostają identyczne.
+
+### Jaka jest szerokość druku drukarki ZQ610 Plus?
+
+**Odpowiedź:** Zebra ZQ610 Plus drukuje etykiety o szerokości **do 48 mm (1,89 cala / 2 cale)**. To najmniejszy model z serii ZQ600 Plus.
+
+### Czy ZQ610 Plus obsługuje Wi-Fi 6?
+
+**Odpowiedź:** Tak, ZQ610 Plus oferuje opcję **Wi-Fi 6 (802.11ax)** dual radio z Bluetooth 5.3. Jest to najnowszy standard zapewniający szybszą transmisję i lepszą wydajność w zatłoczonych sieciach.
+
+### Jaki jest stopień ochrony IP drukarki ZQ610 Plus?
+
+**Odpowiedź:** ZQ610 Plus ma certyfikat **IP54** standardowo – to wyższy poziom ochrony niż poprzednik ZQ610 (IP43). IP54 oznacza ochronę przed kurzem i bryzgami wody z każdego kierunku.
+
+### Ile waży drukarka ZQ610 Plus?
+
+**Odpowiedź:** Zebra ZQ610 Plus waży **0,6 kg** z zainstalowaną baterią standardową – jest to najlżejszy model z serii ZQ600 Plus.
+
+### Jak długo wytrzymuje bateria w ZQ610 Plus?
+
+**Odpowiedź:** Bateria PowerPrecision+ (3250 mAh) jest zoptymalizowana do całodziennej pracy. Dostępna jest też **bateria rozszerzona 4-ogniwowa** dla większej pojemności.
+
+### Jak załadować materiał do ZQ610 Plus?
+
+**Odpowiedź:** Naciśnij przycisk zwalniający z boku, odchyl pokrywę, rozsuń dyski podtrzymujące, włóż rolkę (strona do druku na zewnątrz), przeprowadź materiał pod wałkiem, zamknij pokrywę i naciśnij FEED.
+
+### Jak sparować ZQ610 Plus przez NFC?
+
+**Odpowiedź:** Włącz NFC na smartfonie i **zbliż telefon** do ikony Print Touch na drukarce (max 7,5 cm). Parowanie z Bluetooth 5.3 nastąpi automatycznie.
+
+### Czy ZQ610 Plus ma certyfikat MFi dla iPhone?
+
+**Odpowiedź:** Tak, ZQ610 Plus ma certyfikat **Made for iPhone (MFi)**, co zapewnia pełną kompatybilność z urządzeniami iOS 10 i nowszymi.
+
+### Jak wyczyścić głowicę drukującą ZQ610 Plus?
+
+**Odpowiedź:** Wyłącz drukarkę, poczekaj na ostygnięcie. Przetrzyj **brązowy pasek elementów grzejnych** wacikiem nasączonym alkoholem izopropylowym (90%+).
+
+### Jakie materiały obsługuje ZQ610 Plus?
+
+**Odpowiedź:** ZQ610 Plus obsługuje: etykiety z przerwą (gap), z czarnym znacznikiem (black mark), materiał ciągły (continuous) i bezpodkładowy (linerless) o szerokości **25,4-55,37 mm**.
+
+### Jak przywrócić ustawienia fabryczne ZQ610 Plus?
+
+**Odpowiedź:** Z menu: **TOOLS > LOAD DEFAULTS > FACTORY**. Lub przytrzymaj **strzałki GÓRA + DÓŁ** podczas włączania drukarki.
+
+### Czy dostępna jest wersja Healthcare drukarki ZQ610 Plus?
+
+**Odpowiedź:** Tak, dostępna jest wersja **ZQ610 Plus-HC** w kolorze białym, zaprojektowana do regularnej dezynfekcji w placówkach medycznych.
+`
+      }
+    ]
   }
 }
 
