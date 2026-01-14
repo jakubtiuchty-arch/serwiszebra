@@ -276,25 +276,6 @@ function generateReceiptHtml(repair: any): string {
       margin-bottom: 4mm;
     }
     
-    .signature-area {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 10mm;
-    }
-    
-    .signature-box {
-      width: 45%;
-      text-align: center;
-    }
-    
-    .signature-line {
-      border-top: 1px solid #9ca3af;
-      margin-top: 15mm;
-      padding-top: 2mm;
-      font-size: 8pt;
-      color: #6b7280;
-    }
-    
     /* Barcode SVG */
     .barcode-svg {
       max-width: 60mm;
@@ -443,16 +424,6 @@ function generateReceiptHtml(repair: any): string {
         <li>Status naprawy możesz śledzić w panelu klienta: <strong>serwis-zebry.pl/panel-klienta</strong></li>
         <li>W razie pytań zadzwoń: <strong>601 619 898</strong></li>
       </ul>
-    </div>
-    
-    <!-- Podpisy -->
-    <div class="signature-area">
-      <div class="signature-box">
-        <div class="signature-line">Podpis przyjmującego (serwis)</div>
-      </div>
-      <div class="signature-box">
-        <div class="signature-line">Podpis zdającego (klient)</div>
-      </div>
     </div>
     
     <!-- Footer -->

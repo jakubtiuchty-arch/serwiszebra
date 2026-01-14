@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { requireAdminServer } from '@/lib/auth-server'
 import { createClient } from '@/lib/supabase/server'
-import { sendRepairStatusChangedEmail } from '@/lib/email'
+import { sendRepairStatusChangedEmail, sendPackageReceivedEmail } from '@/lib/email'
 
 export async function PATCH(
   request: NextRequest,
@@ -124,23 +124,37 @@ export async function PATCH(
         console.log('Skipping duplicate history entry for status:', status)
       }
 
-      // Wyślij email o zmianie statusu (tylko dla ważnych zmian)
-      const notifyStatuses = ['odebrane', 'diagnoza', 'wycena', 'w_naprawie', 'naprawione', 'wyslane', 'zakonczone']
-      if (currentRepair && notifyStatuses.includes(status)) {
+      // Wyślij email o zmianie statusu
+      if (currentRepair) {
         try {
-          await sendRepairStatusChangedEmail({
-            to: currentRepair.email,
-            customerName: `${currentRepair.first_name} ${currentRepair.last_name}`,
-            repairId: repairId,
-            repairNumber: currentRepair.repair_number,
-            deviceModel: currentRepair.device_model,
-            oldStatus: currentRepair.status,
-            newStatus: status,
-            note: notes || undefined
-          })
-          console.log('✅ Status change email sent')
+          // Specjalny email dla statusu "odebrane" - Potwierdzenie przyjęcia urządzenia
+          if (status === 'odebrane') {
+            await sendPackageReceivedEmail({
+              to: currentRepair.email,
+              repairId: repairId,
+              repairNumber: currentRepair.repair_number,
+              deviceModel: currentRepair.device_model
+            })
+            console.log('✅ Package received confirmation email sent')
+          } else {
+            // Standardowy email o zmianie statusu dla pozostałych statusów
+            const notifyStatuses = ['diagnoza', 'wycena', 'w_naprawie', 'naprawione', 'wyslane', 'zakonczone']
+            if (notifyStatuses.includes(status)) {
+              await sendRepairStatusChangedEmail({
+                to: currentRepair.email,
+                customerName: `${currentRepair.first_name} ${currentRepair.last_name}`,
+                repairId: repairId,
+                repairNumber: currentRepair.repair_number,
+                deviceModel: currentRepair.device_model,
+                oldStatus: currentRepair.status,
+                newStatus: status,
+                note: notes || undefined
+              })
+              console.log('✅ Status change email sent')
+            }
+          }
         } catch (emailError) {
-          console.error('⚠️ Status change email error:', emailError)
+          console.error('⚠️ Email error:', emailError)
         }
       }
     }
