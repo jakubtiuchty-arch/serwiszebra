@@ -735,7 +735,7 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
         "name": "Czy głowica ZT410 pasuje do ZT411?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Nie. ZT411 to następca ZT410, ale głowice NIE są wymienne. ZT411 używa innych złączy i mocowań. Zawsze sprawdź Part Number (PN) przed zakupem."
+          "text": "Tak! Głowice do ZT410 są w pełni kompatybilne z ZT411. Zebra zachowała tę samą konstrukcję głowicy w obu modelach. Part Number dla 203 DPI: P1058930-009, dla 300 DPI: P1058930-010, dla 600 DPI: P1058930-011."
         }
       },
       {
@@ -1151,10 +1151,11 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
                   FAQ — Głowice przemysłowe
                 </h3>
                 <div className="space-y-4 mb-6">
-                  <div className="border-l-4 border-blue-500 pl-4">
+                  <div className="border-l-4 border-green-500 pl-4">
                     <p className="font-semibold text-gray-900">Czy głowica ZT410 pasuje do ZT411?</p>
-                    <p className="text-gray-600 text-sm mt-1">Nie. ZT411 to następca ZT410, ale głowice NIE są wymienne. 
-                    ZT411 używa innych złączy i mocowań. Zawsze sprawdź Part Number (PN) przed zakupem.</p>
+                    <p className="text-gray-600 text-sm mt-1"><strong>Tak!</strong> Głowice do ZT410 są w pełni kompatybilne z ZT411. 
+                    Zebra zachowała tę samą konstrukcję głowicy w obu modelach. 
+                    Part Number dla 203 DPI: <strong>P1058930-009</strong>, dla 300 DPI: <strong>P1058930-010</strong>, dla 600 DPI: <strong>P1058930-011</strong>.</p>
                   </div>
                   <div className="border-l-4 border-blue-500 pl-4">
                     <p className="font-semibold text-gray-900">Jak sprawdzić aktualną rozdzielczość drukarki?</p>
