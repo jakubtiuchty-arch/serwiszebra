@@ -154,9 +154,9 @@ export default function HomePage() {
         email: 'serwis@takma.com.pl',
         address: {
           '@type': 'PostalAddress',
-          streetAddress: 'Usługa zdalna - serwis z odbiorem kurierem',
+          streetAddress: 'Poświęcka 1a',
           addressLocality: 'Wrocław',
-          postalCode: '50-000',
+          postalCode: '51-128',
           addressRegion: 'dolnośląskie',
           addressCountry: 'PL'
         },
