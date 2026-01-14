@@ -359,31 +359,9 @@ export default function AdminRepairDetailPage() {
     }
   }
 
-  const handleGenerateServicePdf = async () => {
-    setSubmitting('pdf')
-    try {
-      const response = await fetch(`/api/admin/repairs/${repairId}/service-report-pdf`)
-      if (!response.ok) throw new Error('Nie udało się wygenerować PDF')
-      
-      const blob = await response.blob()
-      const url = window.URL.createObjectURL(blob)
-      const a = document.createElement('a')
-      a.href = url
-      a.download = `raport-serwisowy-${repair?.repair_number || repairId}.pdf`
-      document.body.appendChild(a)
-      a.click()
-      window.URL.revokeObjectURL(url)
-      a.remove()
-    } catch (err) {
-      setModal({
-        isOpen: true,
-        type: 'error',
-        title: 'Błąd',
-        message: err instanceof Error ? err.message : 'Nie udało się wygenerować PDF'
-      })
-    } finally {
-      setSubmitting(null)
-    }
+  // Generuj raport serwisowy (otwiera w nowej karcie - drukuj jako PDF)
+  const handleGenerateServicePdf = () => {
+    window.open(`/api/admin/repairs/${repairId}/service-report-pdf`, '_blank')
   }
 
   // Generuj PDF przyjęcia do serwisu (z kodem kreskowym)
@@ -765,14 +743,9 @@ export default function AdminRepairDetailPage() {
                 {repair.service_notes && (
                   <button
                     onClick={handleGenerateServicePdf}
-                    disabled={submitting === 'pdf'}
-                    className="w-full flex items-center justify-center gap-2 bg-indigo-600 text-white px-3 py-2 text-sm rounded-lg hover:bg-indigo-700 disabled:opacity-50 font-medium transition-all"
+                    className="w-full flex items-center justify-center gap-2 bg-indigo-600 text-white px-3 py-2 text-sm rounded-lg hover:bg-indigo-700 font-medium transition-all"
                   >
-                    {submitting === 'pdf' ? (
-                      <Loader2 className="w-4 h-4 animate-spin" />
-                    ) : (
-                      <FileText className="w-4 h-4" />
-                    )}
+                    <FileText className="w-4 h-4" />
                     Raport serwisowy
                   </button>
                 )}
