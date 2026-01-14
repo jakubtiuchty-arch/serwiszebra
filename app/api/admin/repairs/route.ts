@@ -32,32 +32,38 @@ export async function GET(request: NextRequest) {
       query = query.eq('status', status)
     }
 
-    // Wyszukiwanie - szukaj w wielu polach
-    if (search && search.trim()) {
-      const searchLower = search.trim().toLowerCase()
-      // Supabase wymaga poprawnego formatu dla .or() z ilike
-      // Używamy textSearch lub filtrujemy po stronie serwera
-      query = query.or(
-        `id.ilike.%${searchLower}%,` +
-        `device_model.ilike.%${searchLower}%,` +
-        `device_serial_number.ilike.%${searchLower}%,` +
-        `email.ilike.%${searchLower}%,` +
-        `first_name.ilike.%${searchLower}%,` +
-        `last_name.ilike.%${searchLower}%,` +
-        `company.ilike.%${searchLower}%,` +
-        `phone.ilike.%${searchLower}%,` +
-        `repair_number.ilike.%${searchLower}%`
-      )
-    }
-
-    const { data: repairs, error } = await query
+    const { data: allRepairsData, error } = await query
 
     if (error) {
       console.error('Error fetching repairs:', error)
       return NextResponse.json(
-        { error: 'Błąd pobierania zgłoszeń' },
+        { error: 'Błąd pobierania zgłoszeń', details: error.message },
         { status: 500 }
       )
+    }
+
+    // Wyszukiwanie - filtruj po stronie serwera (bardziej niezawodne)
+    let repairs = allRepairsData || []
+    
+    if (search && search.trim()) {
+      const searchLower = search.trim().toLowerCase()
+      repairs = repairs.filter(r => {
+        const searchFields = [
+          r.id,
+          r.device_model,
+          r.device_serial_number,
+          r.email,
+          r.first_name,
+          r.last_name,
+          r.company,
+          r.phone,
+          r.repair_number,
+          r.issue_description
+        ]
+        return searchFields.some(field => 
+          field && String(field).toLowerCase().includes(searchLower)
+        )
+      })
     }
 
     // Pobierz profile użytkowników dla zgłoszeń
