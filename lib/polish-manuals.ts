@@ -23655,6 +23655,911 @@ Opatentowana przez Zebra technologia **CPT** stale monitoruje proces druku i aut
 `
       }
     ]
+  },
+
+  'tc21': {
+    model: 'TC21',
+    title: 'Zebra TC21 – Instrukcja obsługi po Polsku',
+    lastUpdated: '2026-01-14',
+    sourceDocument: 'Zebra TC21 User Guide',
+    keywords: [
+      'zebra tc21 instrukcja', 'zebra tc21 instrukcja po polsku', 'zebra tc21 manual',
+      'terminal mobilny zebra tc21', 'zebra tc21 skanowanie', 'zebra tc21 reset', 'zebra tc21 bateria',
+      'zebra tc21 wifi', 'zebra tc21 bluetooth', 'zebra tc21 nfc', 'zebra tc21 android', 'zebra tc21 kamera',
+      'zebra tc21 specyfikacja', 'zebra tc21 akcesoria', 'zebra tc21 stacja dokująca', 'zebra tc21 ładowanie',
+      'zebra tc21 ip67', 'zebra tc21 enterprise', 'komputer dotykowy zebra tc21', 'zebra tc21 skanowanie kodów'
+    ],
+    sections: [
+      {
+        title: '1. Podstawowe informacje',
+        content: `
+### O urządzeniu TC21
+
+Zebra TC21 to kompaktowy i wytrzymały komputer dotykowy klasy enterprise, zaprojektowany dla pracowników działających wewnątrz obiektów. Urządzenie łączy w sobie zaawansowane możliwości skanowania kodów kreskowych, komunikacji bezprzewodowej Wi-Fi, Bluetooth i NFC, a także funkcjonalność smartfona w obudowie przystosowanej do wymagających warunków pracy.
+
+TC21 jest wyposażony w **5-calowy wyświetlacz HD** (1280 x 720) z wytrzymałym szkłem Corning Gorilla Glass, który zapewnia doskonałą czytelność zarówno w pomieszczeniach, jak i na zewnątrz. Urządzenie działa pod kontrolą systemu **Android 10** z możliwością aktualizacji do nowszych wersji, co gwarantuje długoterminowe wsparcie i bezpieczeństwo.
+
+Model TC21 dostępny jest z **procesorem Qualcomm Snapdragon octa-core 1,8 GHz lub 2,2 GHz**, pamięcią RAM 3 GB lub 4 GB oraz pamięcią wewnętrzną 32 GB lub 64 GB. Urządzenie obsługuje karty microSD do 256 GB.
+
+### Parametry techniczne
+
+| Parametr | TC21 |
+|----------|------|
+| **Wyświetlacz** | 5,0" HD (1280 x 720), Corning Gorilla Glass |
+| **Procesor** | Qualcomm Snapdragon 660, 1,8 GHz lub 2,2 GHz octa-core |
+| **System operacyjny** | Android 10 (z możliwością aktualizacji) |
+| **Pamięć RAM** | 3 GB lub 4 GB |
+| **Pamięć Flash** | 32 GB lub 64 GB |
+| **Karta pamięci** | microSD do 256 GB |
+| **Bateria standardowa** | 3400 mAh |
+| **Bateria rozszerzona** | 5260 mAh |
+| **Kamera tylna** | 13 MP z autofokusem i lampą błyskową |
+| **Kamera przednia** | 5 MP (opcjonalnie) |
+| **Skaner** | Imager 2D SE4710 lub SE4100 z NFC |
+| **Łączność** | Wi-Fi 802.11 a/b/g/n/ac, Bluetooth 5.0 LE, NFC |
+
+### Wymiary i waga
+
+| Parametr | Bateria standardowa | Bateria rozszerzona |
+|----------|---------------------|---------------------|
+| Długość | 158 mm | 158 mm |
+| Szerokość | 79 mm | 79 mm |
+| Grubość | 13,7 mm | 17,3 mm |
+| Waga | ok. 236 g | ok. 258 g |
+
+### Warunki pracy
+
+| Parametr | Wartość |
+|----------|---------|
+| Temperatura pracy | -10°C do +50°C |
+| Temperatura przechowywania | -40°C do +70°C |
+| Temperatura ładowania | 0°C do +40°C |
+| Wilgotność względna | 5% – 95% bez kondensacji |
+| Odporność na upadki | 1,2 m na beton (1,5 m z osłoną) |
+| Test obracania (tumble) | 500 upadków z 0,5 m |
+| Klasa szczelności | **IP67** (pyłoszczelność i wodoszczelność) |
+`
+      },
+      {
+        title: '2. Elementy urządzenia',
+        content: `
+### Widok z przodu
+
+| Element | Opis |
+|---------|------|
+| Kamera przednia | Aparat 5 MP do zdjęć i wideo (opcjonalnie) |
+| Głośnik słuchawkowy | Odtwarzanie audio w trybie słuchawki |
+| Czujnik zbliżenia/światła | Wykrywa zbliżenie obiektu i natężenie światła |
+| Dioda LED skanowania | Wskazuje status skanowania kodów kreskowych |
+| Dioda LED ładowania | Wskazuje status ładowania i powiadomienia |
+| Ekran dotykowy | Wyświetlacz 5" HD z obsługą dotyku |
+| Głośnik | Odtwarzanie multimediów i tryb głośnomówiący |
+| Złącze USB-C | Komunikacja USB i ładowanie urządzenia |
+| Mikrofon | Komunikacja głosowa |
+| Przycisk PTT | Przycisk Push-to-Talk (programowalny) |
+| Przycisk skanowania boczny | Inicjuje skanowanie kodów kreskowych |
+
+### Widok z tyłu
+
+| Element | Opis |
+|---------|------|
+| Antena NFC | Komunikacja z urządzeniami NFC |
+| Mocowanie paska na rękę | Punkt mocowania opcjonalnego paska |
+| Zatrzaski baterii | Przytrzymaj, aby wyjąć baterię |
+| Bateria | PowerPrecision Li-Ion, wymienna |
+| Przyciski głośności | Regulacja głośności (programowalne) |
+| Przycisk skanowania tylny | Inicjuje skanowanie kodów kreskowych |
+| Lampa błyskowa | Doświetlenie dla kamery |
+| Kamera tylna | Aparat 13 MP z autofokusem |
+| Przycisk zasilania | Włączanie/wyłączanie ekranu i urządzenia |
+| Okno skanera | Wyjście promienia skanującego |
+| Mikrofon tylny | Do trybu głośnomówiącego |
+
+Na dolnej krawędzi urządzenia znajdują się **styki ładowania** umożliwiające ładowanie przez stacje dokujące i akcesoria.
+`
+      },
+      {
+        title: '3. Rozpakowanie i instalacja',
+        content: `
+### Zawartość opakowania
+
+Przed rozpoczęciem pracy sprawdź, czy opakowanie zawiera:
+
+- Komputer dotykowy TC21
+- Bateria PowerPrecision Li-Ion
+- Przewodnik regulacyjny (Regulatory Guide)
+
+**Uwaga:** Zachowaj oryginalne opakowanie do ewentualnego transportu serwisowego.
+
+### Instalacja karty microSD
+
+Slot karty microSD znajduje się pod baterią i umożliwia rozszerzenie pamięci urządzenia.
+
+1. Zdejmij pokrywę dostępową
+2. Przesuń uchwyt karty microSD do pozycji odblokowanej
+3. Podnieś uchwyt karty
+4. Włóż kartę microSD do uchwytu, upewniając się, że wsunęła się w prowadnice
+5. Zamknij uchwyt i przesuń do pozycji zablokowanej
+6. **Ważne:** Załóż pokrywę dostępową, aby zapewnić szczelność urządzenia
+
+### Instalacja baterii
+
+1. Włóż baterię dolną krawędzią do komory baterii
+2. Dociśnij baterię, aż zatrzaski zablokują się z charakterystycznym kliknięciem
+
+### Wymiana baterii
+
+1. Naciśnij przycisk zasilania, aż pojawi się menu
+2. Wybierz **Wyłącz** (Power Off)
+3. Poczekaj na całkowite wyłączenie urządzenia
+4. Jeśli zamocowany jest pasek na rękę, odsuń go od urządzenia
+5. Wciśnij oba zatrzaski baterii
+6. Wyjmij baterię z urządzenia
+7. Włóż nową baterię
+8. Załóż ponownie pasek na rękę (jeśli dotyczy)
+9. Naciśnij przycisk zasilania, aby uruchomić urządzenie
+`
+      },
+      {
+        title: '4. Ładowanie baterii',
+        content: `
+### Informacje ogólne
+
+Przed pierwszym użyciem naładuj baterię do pełna (dioda LED zmieni kolor na zielony). Do ładowania używaj wyłącznie oryginalnych akcesoriów Zebra.
+
+- **Bateria standardowa:** ładowanie do 90% w około 3 godziny
+- **Bateria rozszerzona:** ładowanie do 90% w około 4 godziny
+
+Ładuj baterie w temperaturze od 0°C do 40°C. Przy wyższych temperaturach urządzenie może tymczasowo wstrzymywać ładowanie w celu ochrony baterii.
+
+### Wskaźniki ładowania
+
+| Stan diody LED | Znaczenie |
+|----------------|-----------|
+| Wyłączona | Urządzenie nie ładuje się, brak zasilania |
+| Miga wolno na bursztynowo | Trwa ładowanie |
+| Miga wolno na czerwono | Ładowanie, ale bateria wymaga wymiany |
+| Świeci ciągle na zielono | Ładowanie zakończone |
+| Świeci ciągle na czerwono | Ładowanie zakończone, bateria do wymiany |
+| Miga szybko na bursztynowo | Błąd ładowania (temperatura za niska/wysoka) |
+| Miga szybko na czerwono | Błąd ładowania, bateria do wymiany |
+
+### Powiadomienia o niskim stanie baterii
+
+| Poziom naładowania | Działanie |
+|--------------------|-----------|
+| Poniżej 18% | Wyświetlany komunikat o konieczności naładowania |
+| Poniżej 10% | Wyświetlany komunikat ostrzegawczy |
+| Poniżej 4% | Urządzenie wyłącza się automatycznie |
+`
+      },
+      {
+        title: '5. Skanowanie kodów kreskowych',
+        content: `
+### Obsługiwane symbologie
+
+**Kody 1D:** Chinese 2 of 5, Codabar, Code 11, Code 128, Code 39, Code 93, Discrete 2 of 5, EAN-13, EAN-8, Interleaved 2 of 5, MSI, UPC-A, UPC-E, UPC-E1, ISBN/Bookland, ISSN, Matrix 2 of 5
+
+**Kody 2D:** Australian Post, Aztec Code, Canada Postal, Composite AB/C, DataMatrix, Dutch Postal, GS1 DataBar, Han Xin, Japan Postal, Maxicode, Micro PDF, Micro QR Code, PDF-417, QR Code, TLC-39, UK Postal, US Planet, US Postnet
+
+### Tryby skanowania
+
+- **Tryb dekodowania:** Urządzenie próbuje odczytać wszystkie włączone kody w polu widzenia
+- **Tryb Picklist:** Pozwala wybrać konkretny kod, gdy w polu widzenia znajduje się wiele kodów
+- **Tryb MultiBarcode:** Jednoczesne skanowanie do 100 unikalnych kodów kreskowych
+
+### Procedura skanowania
+
+1. Upewnij się, że aplikacja z polem tekstowym jest aktywna
+2. Skieruj okno skanera w górnej części urządzenia na kod kreskowy
+3. Naciśnij i przytrzymaj przycisk skanowania
+4. Czerwony wzór celownika laserowego pomoże w wycelowaniu
+5. Upewnij się, że kod znajduje się w obszarze wyznaczonym przez celownik
+6. Dioda LED zaświeci na zielono i zabrzmi sygnał dźwiękowy po pomyślnym odczycie
+7. Zwolnij przycisk skanowania
+8. Zeskanowane dane pojawią się w polu tekstowym
+
+### Wskazówki dotyczące skanowania
+
+- **Odległość:** Każdy skaner ma optymalny zakres pracy
+- **Kąt:** Unikaj skanowania pod kątem prostym – odbicie światła może oślepić skaner
+- **Większe symbole:** Trzymaj urządzenie dalej
+- **Gęste kody:** Przybliż urządzenie do kodu
+
+### Zasięg skanowania (SE4710)
+
+| Typ kodu | Odległość min. | Odległość maks. |
+|----------|----------------|-----------------|
+| 5 mil Code 39 | 5,1 cm | 34,3 cm |
+| 5 mil PDF417 | 7,9 cm | 21,3 cm |
+| 10 mil Data Matrix | 7,4 cm | 25,7 cm |
+| 100% UPC-A | 4,6 cm | 66,0 cm |
+| 20 mil Code 39 | 5,1 cm | 76,2 cm |
+| 20 mil QR Code | 8,1 cm | 40,1 cm |
+`
+      },
+      {
+        title: '6. Łączność bezprzewodowa',
+        content: `
+### Wi-Fi
+
+TC21 obsługuje sieci Wi-Fi 802.11 a/b/g/n/ac z zaawansowanymi funkcjami roamingu i zarządzania.
+
+**Łączenie z siecią Wi-Fi:**
+
+1. Przejdź do **Ustawienia** > **Sieć i internet** > **Wi-Fi**
+2. Włącz Wi-Fi, jeśli jest wyłączone
+3. Wybierz sieć z listy
+4. Wprowadź hasło, jeśli wymagane
+5. Dotknij **Połącz**
+
+**Usuwanie sieci:**
+
+1. Przejdź do **Ustawienia** > **Sieć i internet** > **Wi-Fi**
+2. Dotknij zapisanej sieci
+3. Wybierz **Zapomnij**
+
+### Bluetooth
+
+TC21 obsługuje Bluetooth 5.0 Low Energy z szerokim zakresem profili.
+
+**Obsługiwane profile:** Serial Port Profile (SPP), Human Interface Device (HID), Object Push Profile (OPP), AVRCP, Personal Area Network (PAN), Hands-Free Profile (HFP), Headset Profile (HSP), A2DP
+
+**Parowanie urządzenia Bluetooth:**
+
+1. Przejdź do **Ustawienia** > **Połączone urządzenia** > **Paruj nowe urządzenie**
+2. Urządzenie wyszuka dostępne urządzenia Bluetooth
+3. Wybierz urządzenie z listy
+4. Potwierdź kod parowania, jeśli wymagany
+5. Urządzenia zostaną sparowane
+
+### NFC
+
+TC21 posiada zintegrowany moduł NFC obsługujący standardy MIFARE, ISO 14443 A/B, FeliCa, ISO 15693 oraz karty NFC Forum. Zasięg odczytu wynosi do 50 mm.
+
+**Odczyt tagów NFC:**
+
+1. Uruchom aplikację obsługującą NFC
+2. Zbliż tylną część urządzenia (obszar anteny NFC) do tagu
+3. Urządzenie automatycznie odczyta tag i wyświetli dane
+`
+      },
+      {
+        title: '7. Kamera',
+        content: `
+### Robienie zdjęć
+
+1. Przesuń w górę i dotknij **Aparat**
+2. Aby przełączyć między kamerą tylną a przednią, dotknij ikony przełączania
+3. Wykadruj obiekt na ekranie
+4. Aby powiększyć lub pomniejszyć, rozsuń lub zsuń dwa palce
+5. Dotknij obszaru na ekranie, aby ustawić ostrość
+6. Dotknij przycisku migawki
+7. Zdjęcie zostanie zapisane
+
+### Nagrywanie wideo
+
+1. Otwórz aplikację **Aparat**
+2. Przełącz na tryb wideo
+3. Dotknij przycisku nagrywania, aby rozpocząć
+4. Dotknij przycisku zatrzymania, aby zakończyć
+
+### Ustawienia kamery
+
+| Parametr | Opcje |
+|----------|-------|
+| Rozmiar zdjęcia | 13 MP, 8 MP, 5 MP, 3 MP, HD1080, 2 MP, HD720, 1 MP, WVGA |
+| Jakość zdjęcia | Niska, Standardowa, Wysoka |
+| Jakość wideo | 4K UHD, HD 1080p, HD 720p, SD 480p, VGA, CIF, QVGA |
+| Lokalizacja GPS | Włączona/Wyłączona |
+| Wykrywanie twarzy | Włączone/Wyłączone |
+`
+      },
+      {
+        title: '8. Ustawienia urządzenia',
+        content: `
+### Wyświetlacz
+
+- **Jasność:** Ręczna lub automatyczna (Adaptive brightness)
+- **Tryb nocny:** Przyciemnia ekran bursztynowym odcieniem
+- **Limit czasu ekranu:** 15 s, 30 s, 1 min, 2 min, 5 min, 10 min, 30 min
+- **Rozmiar czcionki:** Mały, Domyślny, Duży, Największy
+- **Tryb panelu dotykowego:** Palec lub Palec i rękawiczka
+
+### Data i czas
+
+Urządzenie automatycznie synchronizuje czas przez sieć. Ręczna konfiguracja:
+
+1. Przejdź do **Ustawienia** > **System** > **Data i czas**
+2. Wyłącz automatyczną synchronizację
+3. Ustaw datę, czas i strefę czasową
+
+### Dźwięk
+
+- Głośność dzwonka, multimediów, alarmu, powiadomień
+- Wibracja przy połączeniach
+- Tryb Nie przeszkadzać
+- Dźwięki systemowe
+
+### Źródła wybudzania
+
+Domyślnie urządzenie budzi się przyciskiem zasilania. Można skonfigurować dodatkowe przyciski:
+
+1. Przejdź do **Ustawienia** > **Wake-Up Sources**
+2. Zaznacz żądane przyciski (PTT, Scan, Volume itp.)
+`
+      },
+      {
+        title: '9. Czyszczenie i konserwacja',
+        content: `
+### Zalecane środki czyszczące
+
+**Dozwolone składniki aktywne:**
+- Izopropanol (max. 70%)
+- Chlorek benzalkoniowy (max. 0,3%)
+- Mieszanki czwartorzędowych związków amoniowych
+- Alkohol etylowy (max. 80%)
+- Bleach/Podchloryn sodu (max. 10%)
+- Nadtlenek wodoru (max. 3%)
+
+**Substancje szkodliwe:** Aceton, toluen, fenol, chlor, benzen, formaldehyd, amoniak w stężeniu >0,5%
+
+### Procedura czyszczenia
+
+1. Wyłącz urządzenie i odłącz od zasilania
+2. Zwilż miękką ściereczkę dozwolonym środkiem (nie spryskuj bezpośrednio urządzenia)
+3. Przetrzyj obudowę i ekran
+4. Wysusz miękką, niepozostawiającą włókien ściereczką
+5. Oczyść styki baterii i stacji dokującej suchą ściereczką
+
+### Częstotliwość czyszczenia
+
+| Środowisko | Zalecana częstotliwość |
+|------------|------------------------|
+| Biurowe | Co tydzień |
+| Magazynowe | Codziennie |
+| Przemysłowe | Po każdej zmianie |
+`
+      },
+      {
+        title: '10. Rozwiązywanie problemów',
+        content: `
+### Reset urządzenia
+
+**Soft Reset (miękki reset):**
+1. Naciśnij i przytrzymaj przycisk zasilania
+2. Dotknij **Uruchom ponownie** (Restart)
+
+**Hard Reset (twardy reset):**
+1. Naciśnij jednocześnie przycisk zasilania i głośności w górę
+2. Przytrzymaj przez 10-12 sekund
+3. Urządzenie uruchomi się ponownie
+
+### Typowe problemy
+
+| Problem | Przyczyna | Rozwiązanie |
+|---------|-----------|-------------|
+| Urządzenie nie włącza się | Rozładowana bateria | Naładuj baterię przez co najmniej 15 minut |
+| Urządzenie nie ładuje się | Brudne styki | Oczyść styki baterii i stacji dokującej |
+| Słaba jakość skanowania | Brudne okno skanera | Oczyść okno wyjściowe skanera |
+| Brak połączenia Wi-Fi | Nieprawidłowe ustawienia | Sprawdź hasło i konfigurację sieci |
+| Ekran nie reaguje | Zawieszenie systemu | Wykonaj twardy reset |
+| Bateria szybko się rozładowuje | Intensywne użytkowanie | Zmniejsz jasność, wyłącz nieużywane funkcje |
+| Skanowanie bez dźwięku | Wyciszony dźwięk | Sprawdź ustawienia głośności skanera |
+
+### Informacje dla serwisu
+
+W przypadku kontaktu z serwisem przygotuj:
+- Numer seryjny urządzenia (Ustawienia > Informacje o telefonie)
+- Numer modelu
+- Wersję oprogramowania
+- Opis problemu
+`
+      },
+      {
+        title: '11. Akcesoria',
+        content: `
+### Stacje dokujące
+
+| Akcesorium | Opis |
+|------------|------|
+| 1-Slot Charge Only Cradle | Stacja ładująca na 1 urządzenie |
+| 1-Slot USB/Ethernet Cradle | Stacja z obsługą USB i Ethernet |
+| 4-Slot Charge Only Cradle | Stacja ładująca na 4 urządzenia z ładowarką baterii |
+| 5-Slot Charge Only Cradle | Stacja ładująca na 5 urządzeń |
+| 5-Slot Ethernet Cradle | Stacja Ethernet na 5 urządzeń |
+
+### Ładowarki i zasilacze
+
+| Akcesorium | Opis |
+|------------|------|
+| 4-Slot Battery Charger | Ładowarka na 4 baterie zapasowe |
+| USB Cable | Kabel USB-C do ładowania i komunikacji |
+| Vehicle Cradle | Uchwyt samochodowy z ładowaniem |
+
+### Akcesoria dodatkowe
+
+| Akcesorium | Opis |
+|------------|------|
+| Hand Strap | Pasek na rękę |
+| Trigger Handle | Rękojeść ze spustem do intensywnego skanowania |
+| Soft Holster | Miękka kabura |
+| 3.5mm Audio Adapter | Adapter USB-C na jack 3,5 mm |
+| Protective Boot | Osłona ochronna (upadki z 1,5 m) |
+`
+      },
+      {
+        title: 'FAQ – Najczęściej zadawane pytania',
+        content: `
+### Czym jest Zebra TC21?
+
+**Odpowiedź:** Zebra TC21 to **kompaktowy komputer dotykowy klasy enterprise** z systemem Android, wyposażony w skaner kodów 2D, Wi-Fi, Bluetooth i NFC. Jest przeznaczony do pracy wewnątrz budynków (tylko Wi-Fi, bez LTE).
+
+### Jaka jest różnica między Zebra TC21 a Zebra TC26?
+
+**Odpowiedź:** Zebra TC21 to wersja **tylko Wi-Fi**, a Zebra TC26 to wersja **z modułem LTE** (sieć komórkowa). Pod względem pozostałych parametrów są identyczne.
+
+### Jaki wyświetlacz ma Zebra TC21?
+
+**Odpowiedź:** Zebra TC21 ma **5-calowy wyświetlacz HD (1280 x 720)** z ochroną Corning Gorilla Glass. Obsługuje tryb pracy w rękawiczkach.
+
+### Jaka jest pojemność baterii Zebra TC21?
+
+**Odpowiedź:** Zebra TC21 ma baterię standardową **3400 mAh** lub rozszerzoną **5260 mAh**. Bateria jest wymienna (PowerPrecision Li-Ion).
+
+### Jak długo ładuje się bateria Zebra TC21?
+
+**Odpowiedź:** Ładowanie do **90%** zajmuje około **3 godziny** (bateria standardowa) lub **4 godziny** (bateria rozszerzona).
+
+### Jaką klasę szczelności ma Zebra TC21?
+
+**Odpowiedź:** Zebra TC21 ma klasę szczelności **IP67** (pyłoszczelność i wodoszczelność do 1m przez 30 minut) oraz wytrzymuje upadki z **1,2 m** na beton.
+
+### Jaki skaner ma Zebra TC21?
+
+**Odpowiedź:** Zebra TC21 jest wyposażony w **imager 2D SE4710 lub SE4100**, który obsługuje wszystkie popularne kody 1D i 2D (EAN, UPC, Code 128, QR Code, DataMatrix, PDF417 i wiele innych).
+
+### Jak wykonać twardy reset Zebra TC21?
+
+**Odpowiedź:** Naciśnij jednocześnie **przycisk zasilania i głośności w górę** i przytrzymaj przez **10-12 sekund**. Urządzenie automatycznie się zrestartuje.
+
+### Czy Zebra TC21 obsługuje NFC?
+
+**Odpowiedź:** Tak, Zebra TC21 ma zintegrowany moduł NFC obsługujący standardy MIFARE, ISO 14443 A/B, FeliCa i ISO 15693. Zasięg odczytu do **50 mm**.
+
+### Jaki system operacyjny ma Zebra TC21?
+
+**Odpowiedź:** Zebra TC21 działa na systemie **Android 10** z możliwością aktualizacji do nowszych wersji. Zebra zapewnia długoterminowe wsparcie bezpieczeństwa.
+
+### Jak wyczyścić Zebra TC21?
+
+**Odpowiedź:** Użyj miękkiej ściereczki zwilżonej **izopropanolem (max. 70%)** lub chlorkiem benzalkoniowym. Nie spryskuj urządzenia bezpośrednio. Unikaj acetonu i toluenu.
+
+### Jakie akcesoria są dostępne do Zebra TC21?
+
+**Odpowiedź:** Dostępne są: stacje dokujące (1-slot, 5-slot), ładowarki baterii, paski na rękę, rękojeści ze spustem, kabury, osłony ochronne i adaptery audio USB-C na jack 3,5 mm.
+`
+      }
+    ]
+  },
+
+  'tc26': {
+    model: 'TC26',
+    title: 'Zebra TC26 – Instrukcja obsługi po Polsku',
+    lastUpdated: '2026-01-14',
+    sourceDocument: 'Zebra TC26 User Guide',
+    keywords: [
+      'zebra tc26 instrukcja', 'zebra tc26 instrukcja po polsku', 'zebra tc26 manual',
+      'terminal mobilny zebra tc26', 'zebra tc26 lte', 'zebra tc26 4g', 'zebra tc26 skanowanie',
+      'zebra tc26 reset', 'zebra tc26 bateria', 'zebra tc26 wifi', 'zebra tc26 bluetooth', 'zebra tc26 nfc',
+      'zebra tc26 android', 'zebra tc26 karta sim', 'zebra tc26 dual sim', 'zebra tc26 gps', 'zebra tc26 volte',
+      'zebra tc26 specyfikacja', 'zebra tc26 akcesoria', 'zebra tc26 hotspot', 'zebra tc26 tethering',
+      'zebra tc26 ip67', 'zebra tc26 enterprise', 'komputer dotykowy zebra tc26 lte'
+    ],
+    sections: [
+      {
+        title: '1. Podstawowe informacje',
+        content: `
+### O urządzeniu TC26
+
+Zebra TC26 to kompaktowy i wytrzymały komputer dotykowy klasy enterprise, zaprojektowany dla pracowników działających zarówno wewnątrz obiektów, jak i w terenie. Urządzenie łączy w sobie zaawansowane możliwości skanowania kodów kreskowych, komunikacji bezprzewodowej Wi-Fi, **LTE/4G**, Bluetooth i NFC, a także pełną funkcjonalność telefonu komórkowego w obudowie przystosowanej do wymagających warunków pracy.
+
+TC26 jest wyposażony w **5-calowy wyświetlacz HD** (1280 x 720) z wytrzymałym szkłem Corning Gorilla Glass, który zapewnia doskonałą czytelność zarówno w pomieszczeniach, jak i na zewnątrz. Urządzenie działa pod kontrolą systemu **Android 10** z możliwością aktualizacji do nowszych wersji.
+
+W odróżnieniu od modelu TC21, **TC26 posiada moduł sieci komórkowej** obsługujący LTE, HSPA+ i CDMA, co umożliwia pracę w terenie bez dostępu do sieci Wi-Fi. Urządzenie obsługuje technologię **VoLTE** zapewniającą wysoką jakość połączeń głosowych oraz funkcję **Dual SIM Dual Standby**.
+
+### Parametry techniczne
+
+| Parametr | TC26 |
+|----------|------|
+| **Wyświetlacz** | 5,0" HD (1280 x 720), Corning Gorilla Glass |
+| **Procesor** | Qualcomm Snapdragon 660, 1,8 GHz lub 2,2 GHz octa-core |
+| **System operacyjny** | Android 10 (z możliwością aktualizacji) |
+| **Pamięć RAM** | 3 GB lub 4 GB |
+| **Pamięć Flash** | 32 GB lub 64 GB |
+| **Karta pamięci** | microSD do 256 GB |
+| **Bateria standardowa** | 3400 mAh |
+| **Bateria rozszerzona** | 5260 mAh |
+| **Kamera tylna** | 13 MP z autofokusem |
+| **Skaner** | Imager 2D SE4710 lub SE4100 |
+| **WLAN** | Wi-Fi 802.11 a/b/g/n/ac |
+| **WWAN** | **LTE, HSPA+, CDMA** |
+| **WPAN** | Bluetooth 5.0 LE |
+| **NFC** | MIFARE, ISO 14443 A/B, FeliCa, ISO 15693 |
+| **GPS** | GPS/GLONASS |
+| **SIM** | Nano SIM (Dual SIM Dual Standby) |
+
+### Obsługiwane pasma LTE
+
+| Region | Pasma |
+|--------|-------|
+| Europa | B1, B3, B5, B7, B8, B20, B28, B38, B40, B41 |
+| Ameryka Północna | B2, B4, B5, B7, B12, B13, B14, B17, B25, B26, B41, B66, B71 |
+| Azja/Pacyfik | B1, B3, B5, B7, B8, B28, B38, B39, B40, B41 |
+
+### Wymiary i waga
+
+| Parametr | Bateria standardowa | Bateria rozszerzona |
+|----------|---------------------|---------------------|
+| Długość | 158 mm | 158 mm |
+| Szerokość | 79 mm | 79 mm |
+| Grubość | 13,7 mm | 17,3 mm |
+| Waga | ok. 246 g | ok. 268 g |
+
+### Warunki pracy
+
+| Parametr | Wartość |
+|----------|---------|
+| Temperatura pracy | -10°C do +50°C |
+| Temperatura przechowywania | -40°C do +70°C |
+| Temperatura ładowania | 0°C do +40°C |
+| Wilgotność względna | 5% – 95% bez kondensacji |
+| Odporność na upadki | 1,2 m na beton (1,5 m z osłoną) |
+| Klasa szczelności | **IP67** |
+`
+      },
+      {
+        title: '2. Elementy urządzenia',
+        content: `
+### Widok z przodu
+
+| Element | Opis |
+|---------|------|
+| Kamera przednia | Aparat 5 MP (opcjonalnie) |
+| Głośnik słuchawkowy | Odtwarzanie audio w trybie słuchawki |
+| Czujnik zbliżenia/światła | Wykrywa zbliżenie i natężenie światła |
+| Dioda LED skanowania | Status skanowania kodów |
+| Dioda LED ładowania | Status ładowania i powiadomienia |
+| Ekran dotykowy | Wyświetlacz 5" HD |
+| Głośnik | Odtwarzanie multimediów i głośnomówiący |
+| Złącze USB-C | Ładowanie i komunikacja |
+| Mikrofon | Komunikacja głosowa |
+| Przycisk PTT | Push-to-Talk (programowalny) |
+| Przycisk skanowania boczny | Inicjuje skanowanie |
+
+### Widok z tyłu
+
+| Element | Opis |
+|---------|------|
+| Antena NFC | Komunikacja NFC |
+| Mocowanie paska | Punkt mocowania paska na rękę |
+| Zatrzaski baterii | Zwalnianie baterii |
+| Bateria | PowerPrecision Li-Ion, wymienna |
+| Przyciski głośności | Regulacja głośności |
+| Przycisk skanowania tylny | Inicjuje skanowanie |
+| Lampa błyskowa | Doświetlenie kamery |
+| Kamera tylna | Aparat 13 MP z autofokusem |
+| Przycisk zasilania | Włączanie/wyłączanie |
+| Okno skanera | Wyjście promienia skanującego |
+`
+      },
+      {
+        title: '3. Rozpakowanie i instalacja',
+        content: `
+### Zawartość opakowania
+
+- Komputer dotykowy TC26
+- Bateria PowerPrecision Li-Ion
+- Przewodnik regulacyjny (Regulatory Guide)
+
+**Uwaga:** Zachowaj oryginalne opakowanie do ewentualnego transportu serwisowego.
+
+### Instalacja karty SIM
+
+**Uwaga:** TC26 obsługuje wyłącznie karty **nano SIM**.
+
+1. Zdejmij pokrywę dostępową
+2. Przesuń uchwyt karty SIM do pozycji odblokowanej
+3. Podnieś uchwyt karty SIM
+4. Umieść kartę nano SIM w uchwycie stykami skierowanymi w dół
+5. Zamknij uchwyt i przesuń do pozycji zablokowanej
+6. **Ważne:** Załóż pokrywę dostępową, aby zapewnić szczelność urządzenia
+
+### Instalacja karty microSD
+
+1. Zdejmij pokrywę dostępową
+2. Przesuń uchwyt karty microSD do pozycji odblokowanej
+3. Podnieś uchwyt karty
+4. Włóż kartę microSD do uchwytu
+5. Zamknij uchwyt i przesuń do pozycji zablokowanej
+6. Załóż pokrywę dostępową
+
+### Instalacja baterii
+
+1. Włóż baterię dolną krawędzią do komory baterii
+2. Dociśnij baterię, aż zatrzaski zablokują się z charakterystycznym kliknięciem
+`
+      },
+      {
+        title: '4. Ładowanie baterii',
+        content: `
+### Informacje ogólne
+
+Przed pierwszym użyciem naładuj baterię do pełna. Do ładowania używaj wyłącznie oryginalnych akcesoriów Zebra.
+
+- **Bateria standardowa:** ładowanie do 90% w około 3 godziny
+- **Bateria rozszerzona:** ładowanie do 90% w około 4 godziny
+
+### Wskaźniki ładowania
+
+| Stan diody LED | Znaczenie |
+|----------------|-----------|
+| Wyłączona | Urządzenie nie ładuje się |
+| Miga wolno na bursztynowo | Trwa ładowanie |
+| Miga wolno na czerwono | Ładowanie, bateria wymaga wymiany |
+| Świeci ciągle na zielono | Ładowanie zakończone |
+| Świeci ciągle na czerwono | Ładowanie zakończone, bateria do wymiany |
+| Miga szybko na bursztynowo | Błąd ładowania |
+`
+      },
+      {
+        title: '5. Skanowanie kodów kreskowych',
+        content: `
+### Obsługiwane symbologie
+
+**Kody 1D:** Chinese 2 of 5, Codabar, Code 11, Code 128, Code 39, Code 93, Discrete 2 of 5, EAN-13, EAN-8, Interleaved 2 of 5, MSI, UPC-A, UPC-E, UPC-E1, ISBN/Bookland, ISSN, Matrix 2 of 5
+
+**Kody 2D:** Australian Post, Aztec Code, Composite AB/C, DataMatrix, GS1 DataBar, Han Xin, Maxicode, Micro PDF, Micro QR Code, PDF-417, QR Code, TLC-39
+
+### Procedura skanowania
+
+1. Upewnij się, że aplikacja z polem tekstowym jest aktywna
+2. Skieruj okno skanera na kod kreskowy
+3. Naciśnij i przytrzymaj przycisk skanowania
+4. Celownik laserowy pomoże w wycelowaniu
+5. Dioda LED zaświeci na zielono po pomyślnym odczycie
+6. Zeskanowane dane pojawią się w polu tekstowym
+
+### Zasięg skanowania (SE4710)
+
+| Typ kodu | Min | Max |
+|----------|-----|-----|
+| 5 mil Code 39 | 5,1 cm | 34,3 cm |
+| 100% UPC-A | 4,6 cm | 66,0 cm |
+| 20 mil QR Code | 8,1 cm | 40,1 cm |
+`
+      },
+      {
+        title: '6. Sieć komórkowa (WWAN)',
+        content: `
+### Aktywacja sieci komórkowej
+
+TC26 obsługuje sieci LTE, HSPA+ i CDMA, umożliwiając pracę w terenie.
+
+1. Upewnij się, że karta SIM jest zainstalowana
+2. Przejdź do **Ustawienia** > **Sieć i internet** > **Sieć komórkowa**
+3. Włącz **Dane mobilne**
+4. Urządzenie automatycznie połączy się z siecią
+
+### Konfiguracja APN
+
+1. Przejdź do **Ustawienia** > **Sieć i internet** > **Sieć komórkowa** > **Zaawansowane** > **Nazwy punktów dostępu**
+2. Dotknij **+**, aby dodać nowy APN
+3. Wprowadź ustawienia otrzymane od operatora
+4. Zapisz i wybierz jako domyślny
+
+### Dual SIM Dual Standby
+
+TC26 obsługuje dwie karty SIM jednocześnie:
+
+1. Przejdź do **Ustawienia** > **Sieć i internet** > **Karty SIM**
+2. Wybierz domyślną kartę dla połączeń, SMS i danych
+
+### Roaming
+
+1. Przejdź do **Ustawienia** > **Sieć i internet** > **Sieć komórkowa**
+2. Włącz **Roaming** w razie potrzeby
+
+**Uwaga:** Roaming może generować dodatkowe koszty. Skonsultuj się z operatorem.
+
+### Udostępnianie połączenia internetowego
+
+**Tethering USB:**
+1. Podłącz urządzenie do komputera kablem USB
+2. Przejdź do **Ustawienia** > **Sieć i internet** > **Hotspot i tethering**
+3. Włącz **Tethering USB**
+
+**Hotspot Wi-Fi:**
+1. Przejdź do **Ustawienia** > **Sieć i internet** > **Hotspot i tethering**
+2. Dotknij **Hotspot Wi-Fi**
+3. Skonfiguruj nazwę sieci i hasło
+4. Włącz hotspot
+`
+      },
+      {
+        title: '7. Łączność bezprzewodowa',
+        content: `
+### Wi-Fi
+
+**Łączenie z siecią Wi-Fi:**
+
+1. Przejdź do **Ustawienia** > **Sieć i internet** > **Wi-Fi**
+2. Włącz Wi-Fi
+3. Wybierz sieć z listy
+4. Wprowadź hasło, jeśli wymagane
+5. Dotknij **Połącz**
+
+### Bluetooth
+
+TC26 obsługuje Bluetooth 5.0 Low Energy.
+
+**Parowanie urządzenia:**
+
+1. Przejdź do **Ustawienia** > **Połączone urządzenia** > **Paruj nowe urządzenie**
+2. Wybierz urządzenie z listy
+3. Potwierdź kod parowania
+
+### NFC
+
+Zintegrowany moduł NFC z zasięgiem do 50 mm.
+
+**Odczyt tagów NFC:**
+
+1. Uruchom aplikację obsługującą NFC
+2. Zbliż tylną część urządzenia do tagu
+3. Dane zostaną automatycznie odczytane
+
+### GPS
+
+TC26 posiada zintegrowany odbiornik **GPS/GLONASS** do lokalizacji w terenie.
+`
+      },
+      {
+        title: '8. Połączenia głosowe',
+        content: `
+### Tryby audio
+
+- **Tryb słuchawkowy:** Trzymaj urządzenie przy uchu
+- **Tryb głośnomówiący:** Używaj głośnika urządzenia
+- **Zestaw Bluetooth:** Połącz słuchawkę Bluetooth
+- **Słuchawki przewodowe:** Użyj adaptera USB-C na 3,5 mm
+
+### Wykonywanie połączeń
+
+**Za pomocą dialera:**
+1. Otwórz aplikację **Telefon**
+2. Wprowadź numer
+3. Dotknij ikony połączenia
+
+**Z listy kontaktów:**
+1. Otwórz aplikację **Kontakty**
+2. Wybierz kontakt
+3. Dotknij ikony połączenia
+
+### Odbieranie połączeń
+
+- **Aby odebrać:** Przesuń ikonę połączenia w górę
+- **Aby odrzucić:** Przesuń ikonę w dół
+
+### Połączenia konferencyjne
+
+1. Wykonaj pierwsze połączenie
+2. Dotknij **Dodaj połączenie**
+3. Wybierz kolejnego uczestnika
+4. Dotknij **Połącz** po nawiązaniu połączenia
+`
+      },
+      {
+        title: '9. Rozwiązywanie problemów',
+        content: `
+### Reset urządzenia
+
+**Soft Reset:**
+1. Przytrzymaj przycisk zasilania
+2. Dotknij **Uruchom ponownie**
+
+**Hard Reset:**
+1. Przytrzymaj przycisk zasilania i głośności w górę przez 10-12 sekund
+
+### Typowe problemy
+
+| Problem | Rozwiązanie |
+|---------|-------------|
+| Brak sygnału komórkowego | Sprawdź kartę SIM i ustawienia APN |
+| Słaba jakość połączeń | Włącz VoLTE w ustawieniach |
+| Brak danych mobilnych | Sprawdź ustawienia APN i limit danych |
+| Urządzenie nie ładuje się | Oczyść styki ładowania |
+| Słabe skanowanie | Oczyść okno skanera |
+| Brak GPS | Sprawdź uprawnienia lokalizacji |
+| Dual SIM nie działa | Sprawdź prawidłowe włożenie obu kart |
+`
+      },
+      {
+        title: '10. Akcesoria',
+        content: `
+### Stacje dokujące
+
+| Akcesorium | Opis |
+|------------|------|
+| 1-Slot Charge Only Cradle | Stacja ładująca |
+| 1-Slot USB/Ethernet Cradle | Stacja z Ethernet |
+| 4-Slot Charge Only Cradle | Stacja na 4 urządzenia |
+| 5-Slot Ethernet Cradle | Stacja Ethernet na 5 urządzeń |
+
+### Ładowarki i akcesoria
+
+| Akcesorium | Opis |
+|------------|------|
+| 4-Slot Battery Charger | Ładowarka baterii |
+| Trigger Handle | Rękojeść ze spustem |
+| Vehicle Cradle | Uchwyt samochodowy |
+| 3.5mm Audio Adapter | Adapter audio USB-C |
+| Protective Boot | Osłona ochronna |
+`
+      },
+      {
+        title: 'FAQ – Najczęściej zadawane pytania',
+        content: `
+### Czym jest Zebra TC26?
+
+**Odpowiedź:** Zebra TC26 to **kompaktowy komputer dotykowy klasy enterprise** z systemem Android, wyposażony w skaner kodów 2D, **moduł LTE/4G**, Wi-Fi, Bluetooth, NFC i GPS. Umożliwia pracę w terenie bez dostępu do Wi-Fi.
+
+### Jaka jest różnica między Zebra TC26 a Zebra TC21?
+
+**Odpowiedź:** Zebra TC26 ma **moduł sieci komórkowej LTE/4G**, a Zebra TC21 obsługuje tylko Wi-Fi. Zebra TC26 ma też slot na kartę SIM, GPS i funkcję telefonu (połączenia głosowe przez VoLTE).
+
+### Jakie karty SIM obsługuje Zebra TC26?
+
+**Odpowiedź:** Zebra TC26 obsługuje wyłącznie karty **nano SIM**. Możliwa jest konfiguracja **Dual SIM Dual Standby** (dwie karty jednocześnie).
+
+### Czy Zebra TC26 obsługuje VoLTE?
+
+**Odpowiedź:** Tak, Zebra TC26 obsługuje technologię **VoLTE** (Voice over LTE), która zapewnia wysoką jakość połączeń głosowych przez sieć LTE.
+
+### Jakie pasma LTE obsługuje Zebra TC26 w Europie?
+
+**Odpowiedź:** Zebra TC26 obsługuje pasma europejskie: **B1, B3, B5, B7, B8, B20, B28, B38, B40, B41**, co zapewnia kompatybilność z większością operatorów w Polsce.
+
+### Czy mogę używać Zebra TC26 jako hotspot Wi-Fi?
+
+**Odpowiedź:** Tak, Zebra TC26 może udostępniać połączenie internetowe przez **hotspot Wi-Fi** lub **tethering USB**. Konfiguracja w: Ustawienia > Sieć i internet > Hotspot i tethering.
+
+### Jaka jest pojemność baterii Zebra TC26?
+
+**Odpowiedź:** Zebra TC26 ma baterię standardową **3400 mAh** lub rozszerzoną **5260 mAh**. Bateria jest wymienna (PowerPrecision Li-Ion).
+
+### Jaką klasę szczelności ma Zebra TC26?
+
+**Odpowiedź:** Zebra TC26 ma klasę szczelności **IP67** (pyłoszczelność i wodoszczelność do 1m przez 30 minut) oraz wytrzymuje upadki z **1,2 m** na beton.
+
+### Czy Zebra TC26 ma GPS?
+
+**Odpowiedź:** Tak, Zebra TC26 ma zintegrowany odbiornik **GPS/GLONASS** umożliwiający lokalizację w terenie. Zebra TC21 (wersja bez LTE) nie ma GPS.
+
+### Jak skonfigurować APN na Zebra TC26?
+
+**Odpowiedź:** Przejdź do **Ustawienia > Sieć i internet > Sieć komórkowa > Zaawansowane > Nazwy punktów dostępu**, dotknij **+** i wprowadź ustawienia APN od operatora.
+
+### Jak wykonać twardy reset Zebra TC26?
+
+**Odpowiedź:** Naciśnij jednocześnie **przycisk zasilania i głośności w górę** i przytrzymaj przez **10-12 sekund**. Urządzenie automatycznie się zrestartuje.
+
+### Co zrobić, gdy Zebra TC26 nie łączy się z siecią komórkową?
+
+**Odpowiedź:** Sprawdź: 1) Prawidłowe włożenie karty SIM, 2) Ustawienia APN, 3) Czy dane mobilne są włączone, 4) Czy nie przekroczono limitu danych, 5) Spróbuj włączyć/wyłączyć tryb samolotowy.
+`
+      }
+    ]
   }
 }
 

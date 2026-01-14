@@ -132,7 +132,13 @@ export default async function PolishManualPage({ params }: { params: { model: st
               </h1>
               <p className="text-gray-800 max-w-2xl font-medium drop-shadow-sm text-sm sm:text-base">
                 Skrócona instrukcja z najważniejszymi informacjami po polsku. 
-                Kalibracja, zakładanie mediów, rozwiązywanie problemów i konserwacja.
+                {manual.model.match(/^(tc|mc|wt|et)/i) 
+                  ? 'Skanowanie kodów, łączność bezprzewodowa, rozwiązywanie problemów i konserwacja.'
+                  : manual.model.match(/^(ds)/i)
+                    ? 'Skanowanie kodów, konfiguracja, rozwiązywanie problemów i konserwacja.'
+                    : manual.model.match(/^(zc|zxp)/i)
+                      ? 'Personalizacja kart, zakładanie taśm, rozwiązywanie problemów i konserwacja.'
+                      : 'Kalibracja, zakładanie mediów, rozwiązywanie problemów i konserwacja.'}
               </p>
               <div className="flex flex-wrap items-center gap-2 sm:gap-4 mt-3 sm:mt-4 text-gray-800 text-xs sm:text-sm font-medium drop-shadow-sm">
                 <span className="flex items-center gap-1">
