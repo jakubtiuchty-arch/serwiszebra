@@ -22215,6 +22215,351 @@ Aby skorzystać: zbliż telefon z NFC do oznaczenia Print Touch na drukarce.
 `
       }
     ]
+  },
+
+  'zc10l': {
+    model: 'ZC10L',
+    title: 'Zebra ZC10L – Instrukcja obsługi po Polsku',
+    lastUpdated: '2025-01-20',
+    sourceDocument: 'Zebra ZC10L Card Printer User Guide (P1091978-001)',
+    keywords: [
+      'zebra zc10l instrukcja', 'zc10l instrukcja po polsku', 'zebra zc10l manual',
+      'drukarka kart zebra', 'zc10l drukarka kart', 'zc10l konfiguracja',
+      'zc10l taśma', 'drukarka hotelowa', 'karty hotelowe', 'hospitality',
+      'zc10l specyfikacja', 'zc10l czyszczenie', 'zc10l błędy', 'zc10l usb',
+      'wielkoformatowa drukarka kart', 'karty z zakładką', 'tabbed cards',
+      'direct-to-card', 'edge-to-edge', 'zc10l zacięcie', 'zc10l sterownik',
+      'zc10l wałek czyszczący', 'tab waste bin', 'card catcher'
+    ],
+    sections: [
+      {
+        title: '1. Podstawowe informacje',
+        content: `
+### O drukarce ZC10L
+
+Zebra ZC10L to wielkoformatowa drukarka kart zaprojektowana specjalnie z myślą o **branży hotelarskiej (Hospitality)**. Jest to jedyna na rynku wielkoformatowa drukarka direct-to-card, która może drukować pełnokolorowe karty **edge-to-edge w jednym procesie drukowania**. Drukarka wykorzystuje technologię termotransferową i wyposażona jest w szufladę na karty, wałek czyszczący oraz pojemnik na odpady (Tab Waste Bin). Model ZC10L posiada panel z trzema diodami LED wskazującymi status drukarki.
+
+### Parametry techniczne
+
+| Parametr | ZC10L |
+|----------|-------|
+| **Druk** | **Jednostronny, wielkoformatowy** |
+| Technologia druku | Termotransfer (Direct-to-Card) |
+| Rozdzielczość | 300 dpi |
+| Format kart | Karty wielkoformatowe z zakładką (tabbed cards) |
+| Pojemność szuflady | Standardowy stos kart |
+| Zasilanie | Wewnętrzny zasilacz 90V-264V, 48-62Hz |
+| Pobór prądu | Maks. 16A |
+| Waga | ok. 19 kg (41,9 lbs) |
+
+### Złącza i komunikacja
+
+| Interfejs | Opis |
+|-----------|------|
+| USB 2.0 | Połączenie bezpośrednie z PC |
+
+### Porównanie ZC10L vs ZC100
+
+| Parametr | ZC10L | ZC100 |
+|----------|-------|-------|
+| Przeznaczenie | **Branża hotelarska** | Karty ID |
+| Format kart | **Wielkoformatowe z zakładką** | CR80/CR70 |
+| Druk edge-to-edge | **Tak** | Nie |
+| Waga | 19 kg | 2,9 kg |
+| Interfejs | Diody LED | Diody LED |
+| Zasilanie | Wewnętrzny | Zewnętrzny 100W |
+`
+      },
+      {
+        title: '2. Elementy drukarki',
+        content: `
+### Widok z przodu i z tyłu
+
+| Nr | Element | Opis |
+|----|---------|------|
+| 1 | Wskaźniki statusu (LED) | Panel z diodami LED wskazującymi stan drukarki |
+| 2 | Górna pokrywa | Otwierana przy wymianie taśmy, kart lub podczas konserwacji |
+| 3 | Szuflada na karty | Otwierana przy wkładaniu kart lub podczas konserwacji |
+| 4 | Przycisk zwalniający szufladę | Naciśnij, aby otworzyć szufladę na karty |
+| 5 | Wyłącznik zasilania | Włącza (|) i wyłącza (O) zasilanie drukarki |
+| 6 | Złącze zasilania | Gniazdo kabla zasilającego |
+| 7 | Złącze USB | Port USB do połączenia z komputerem |
+| 8 | Zwolnienie górnej pokrywy | Ściśnij i pociągnij, aby otworzyć górną pokrywę |
+`
+      },
+      {
+        title: '3. Wskaźniki LED',
+        content: `
+Model ZC10L wyposażony jest w trzy diody LED wskazujące status drukarki: **POWER, MEDIA, ERROR**.
+
+### Znaczenie kombinacji diod
+
+| Power | Media | Error | Znaczenie |
+|-------|-------|-------|-----------|
+| Off | Off | Off | Drukarka wyłączona |
+| Miga | Off | Off | Inicjalizacja; głowica nagrzewa się lub chłodzi |
+| On | Off | Off | Drukarka gotowa do pracy |
+| On | Off | Miga | Górna pokrywa lub szuflada otwarta |
+| On | Off | On | Zacięcie karty; błąd mechaniczny; błąd płyty głównej |
+| On | Miga | On | Taśma drukująca nieobsługiwana |
+| On | On | On | Błąd podawania kart; brak taśmy; pełny pojemnik odpadów |
+| On | Miga | Miga | Synchronizacja taśmy drukującej |
+`
+      },
+      {
+        title: '4. Rozpakowanie i instalacja',
+        content: `
+### Zawartość opakowania
+
+- Drukarka ZC10L
+- Card Catcher (łapacz kart)
+- Wałek czyszczący
+- Kabel USB
+- Kabel zasilający
+
+**Ważne:** Zachowaj oryginalne opakowanie do ewentualnego transportu serwisowego.
+
+### Rozpakowanie drukarki
+
+**Uwaga:** Drukarka waży około **19 kg (41,9 lbs)**. Do wyjęcia z kartonu potrzebne są **dwie osoby**!
+
+1. Sprawdź opakowanie pod kątem uszkodzeń transportowych
+2. Otwórz karton i wyjmij materiały opakowaniowe
+3. Chwyć drukarkę obiema rękami i wyjmij z kartonu
+4. Umieść drukarkę na płaskiej powierzchni z minimum 10 cm wolnej przestrzeni ze wszystkich stron
+
+### Podłączenie zasilania
+
+**Ostrzeżenie:** Zasilanie AC musi być w zakresie **90V-264V, 48-62Hz**. Pobór prądu nie może przekraczać 16A.
+
+1. Włóż kabel zasilający do gniazda z tyłu drukarki
+
+### Podłączenie USB
+
+**Ważne:** Przed włączeniem drukarki zainstaluj sterownik USB!
+
+1. Podłącz wtyk USB do gniazda z tyłu drukarki
+2. Podłącz drugi koniec do portu USB komputera
+`
+      },
+      {
+        title: '5. Ładowanie materiałów eksploatacyjnych',
+        content: `
+### Ładowanie kart
+
+**Uwaga:** NIE zginaj kart i nie dotykaj powierzchni druku – może to pogorszyć jakość wydruku.
+
+1. Zdejmij folię z pakietu kart
+2. Trzymając karty za boki, oprzyj stos pionowo o blat biurka
+3. Przesuń stos w przód i w tył pod kątem ok. 45° aby rozdzielić karty
+4. Przywróć stos do prostokątnego ułożenia
+5. Otwórz szufladę na karty
+6. Włóż karty do szuflady **zakładką do dołu**
+7. Upewnij się, że karty leżą płasko
+8. Zamknij szufladę
+
+### Instalacja Card Catcher (łapacza kart)
+
+1. Otwórz szufladę na karty
+2. Zamontuj łapacz kart na przedniej krawędzi szuflady
+3. Zamknij szufladę
+
+### Instalacja wałka czyszczącego
+
+**Ważne:** Wałek pasuje tylko w jednym kierunku: dłuższy trzpień idzie w lewo, krótszy w prawo.
+
+1. Otwórz górną pokrywę
+2. Włóż wałek czyszczący do drukarki
+3. Wciśnij aż usłyszysz kliknięcie
+
+### Instalacja taśmy drukującej
+
+1. Wsuń szpulę z taśmą w prowadnice (w stronę tyłu drukarki)
+2. Wsuń szpulę odbiorczą w prowadnice (w stronę przodu drukarki)
+3. Obróć lekko szpulę podającą, aby usunąć luz taśmy
+4. Zamknij górną pokrywę
+
+**Uwaga:** Jeśli taśma się zerwie, połącz końce taśmą klejącą i przewiń poza miejsce zerwania.
+`
+      },
+      {
+        title: '6. Instalacja sterownika Windows',
+        content: `
+Sterownik obsługuje: Windows 7, 8, 10, Server 2008, Server 2012.
+
+### Procedura instalacji
+
+1. Uruchom instalator sterownika drukarki
+2. Zaznacz **Agree** w oknie umowy licencyjnej i kliknij **Next**
+3. Zamknij inne uruchomione aplikacje i kliknij **Next**
+4. Wybierz model **Zebra ZC10L USB Card Printer** i kliknij **Next**
+5. Wybierz metodę instalacji **Plug and Play** i kliknij **Next**
+6. Sprawdź informacje i kliknij **Finish**
+7. Jeśli pojawi się ostrzeżenie Windows Security, kliknij **Install this driver software anyway**
+8. Włącz drukarkę i podłącz kabel USB
+9. Kliknij **Finish**
+
+**Ważne:** Po instalacji może być konieczne ponowne uruchomienie komputera.
+`
+      },
+      {
+        title: '7. Pojemnik na odpady (Tab Waste Bin)',
+        content: `
+Podczas druku kart z zakładkami, obcięte zakładki gromadzą się w pojemniku na odpady. Należy go **regularnie opróżniać**.
+
+### Opróżnianie pojemnika
+
+1. Otwórz szufladę na karty
+2. Wyjmij pojemnik na odpady i opróżnij zawartość do kosza
+3. Włóż pojemnik z powrotem na miejsce
+4. Zamknij szufladę
+
+**Uwaga:** Gdy diody pokazują błąd (wszystkie świecą), jedną z przyczyn może być pełny pojemnik odpadów.
+`
+      },
+      {
+        title: '8. Konserwacja i czyszczenie',
+        content: `
+Dzięki technologii termotransferowej codzienna konserwacja nie jest konieczna. Jednak dla utrzymania najwyższej jakości druku, zaleca się czyszczenie głowicy, wałka dociskowego i wałka czyszczącego **raz w miesiącu**.
+
+### Czyszczenie głowicy drukującej
+
+**Uwaga:** Głowica jest bardzo gorąca tuż po drukowaniu – nie dotykaj jej! Poczekaj aż ostygnie.
+
+**Uwaga:** Zdejmij pierścionki, zegarki i inne metalowe przedmioty przed pracą przy głowicy.
+
+1. Otwórz górną pokrywę
+2. Użyj niestrzępiącej się szmatki nasączonej alkoholem izopropylowym do wyczyszczenia elementu grzejnego głowicy i listew napinających taśmę
+
+### Czyszczenie wałka dociskowego (Platen)
+
+1. Otwórz górną pokrywę
+2. Wyjmij taśmę drukującą
+3. Użyj szmatki z alkoholem do wyczyszczenia wałka dociskowego
+
+### Czyszczenie wałka czyszczącego
+
+1. Wyjmij wałek czyszczący z drukarki
+2. Wyczyść szmatką z alkoholem
+3. Zamontuj wałek z powrotem
+
+### Czyszczenie obudowy zewnętrznej
+
+Przetrzyj zewnętrzną powierzchnię miękką szmatką. W przypadku uporczywych zabrudzeń użyj rozcieńczonego neutralnego detergentu.
+
+### Czyszczenie filtrów
+
+Jeśli kurz gromadzi się na otworach wentylacyjnych, oczyść je odkurzaczem.
+`
+      },
+      {
+        title: '9. Rozwiązywanie problemów',
+        content: `
+### Objawy awarii
+
+| Objaw | Działanie |
+|-------|-----------|
+| Brak zasilania | Sprawdź kabel zasilający |
+| Komputer nie rozpoznaje drukarki | Sprawdź kabel USB |
+| Drukarka nie osiąga stanu gotowości | Upewnij się, że szuflada i pokrywa są zamknięte; sprawdź czy nie ma zacięcia |
+| Szuflada nie otwiera się | Upewnij się, że drukarka stoi na płaskiej powierzchni |
+| Białe linie na karcie | Głowica może być brudna – wyczyść ją |
+| Niewydrukowane "plamy" | Wałek czyszczący lub głowica brudne – wyczyść |
+
+### Zacięcie karty
+
+1. Otwórz górną pokrywę i wyjmij taśmę drukującą
+2. Znajdź zielone kółko ręcznego posuwu (z tyłu po lewej)
+3. Obracaj kółko zgodnie z ruchem wskazówek zegara, aż karta się zatrzyma
+4. Ostrożnie wyjmij kartę
+
+### Przerwa w zasilaniu podczas drukowania
+
+1. Wyłącz drukarkę
+2. Poczekaj na przywrócenie zasilania
+3. Włącz drukarkę po kilku sekundach
+
+Niektóre karty mogą wymagać ponownego wydrukowania.
+`
+      },
+      {
+        title: '10. Dane techniczne',
+        content: `
+### Wymiary i waga
+
+| Parametr | Wartość |
+|----------|---------|
+| Waga | ok. 19 kg (41,9 lbs) |
+
+### Warunki pracy
+
+| Parametr | Wartość |
+|----------|---------|
+| Napięcie zasilania | 90V – 264V AC |
+| Częstotliwość | 48 – 62 Hz |
+| Maksymalny pobór prądu | 16A |
+
+### Wymagania środowiskowe
+
+- Środowisko w miarę wolne od kurzu i brudu
+- Płaska, stabilna powierzchnia
+- Minimum 10 cm wolnej przestrzeni ze wszystkich stron
+- Dostęp do zasilania AC
+`
+      },
+      {
+        title: 'FAQ – Najczęściej zadawane pytania',
+        content: `
+### Czym jest drukarka ZC10L?
+
+**Odpowiedź:** Zebra ZC10L to **wielkoformatowa drukarka kart** zaprojektowana dla **branży hotelarskiej**, drukująca karty z zakładkami (tabbed cards) edge-to-edge w jednym procesie.
+
+### Do czego służy ZC10L?
+
+**Odpowiedź:** ZC10L służy do drukowania **kart hotelowych** (key cards) z zakładkami – wielkoformatowych kart identyfikacyjnych i dostępowych dla gości hotelowych.
+
+### Czym różni się ZC10L od ZC100?
+
+**Odpowiedź:** ZC10L drukuje **wielkoformatowe karty z zakładkami** (dla hoteli), waży **19 kg** i ma wbudowany zasilacz. ZC100 drukuje standardowe karty CR80/CR70 i waży tylko 2,9 kg.
+
+### Co to jest druk edge-to-edge?
+
+**Odpowiedź:** Druk **edge-to-edge** oznacza drukowanie na całej powierzchni karty, od krawędzi do krawędzi, bez białych marginesów – ZC10L jako jedyna wielkoformatowa drukarka oferuje to w jednym procesie.
+
+### Ile osób potrzeba do przenoszenia ZC10L?
+
+**Odpowiedź:** Ze względu na wagę **19 kg (41,9 lbs)**, do wyjęcia drukarki z kartonu i przenoszenia potrzebne są **dwie osoby**.
+
+### Co to jest Tab Waste Bin?
+
+**Odpowiedź:** **Tab Waste Bin** to pojemnik na odpady, w którym gromadzą się obcięte zakładki kart. Należy go **regularnie opróżniać**.
+
+### Co to jest Card Catcher?
+
+**Odpowiedź:** **Card Catcher** (łapacz kart) to akcesorium montowane na przedniej krawędzi szuflady, które zbiera wydrukowane karty.
+
+### Co oznacza gdy wszystkie diody świecą?
+
+**Odpowiedź:** Wszystkie trzy diody świecące (POWER, MEDIA, ERROR) oznaczają: **błąd podawania kart**, **brak taśmy** lub **pełny pojemnik odpadów**.
+
+### Jak usunąć zacięcie karty?
+
+**Odpowiedź:** Otwórz górną pokrywę, wyjmij taśmę, znajdź **zielone kółko ręcznego posuwu** (z tyłu po lewej) i obracaj zgodnie z ruchem wskazówek zegara aż karta się wysunie.
+
+### Jak często czyścić ZC10L?
+
+**Odpowiedź:** Zaleca się czyszczenie głowicy drukującej, wałka dociskowego i wałka czyszczącego **raz w miesiącu** dla utrzymania najwyższej jakości druku.
+
+### Jak zainstalować wałek czyszczący?
+
+**Odpowiedź:** Wałek pasuje tylko w jednym kierunku: **dłuższy trzpień w lewo, krótszy w prawo**. Włóż i wciśnij aż usłyszysz kliknięcie.
+
+### Jakie systemy obsługuje sterownik ZC10L?
+
+**Odpowiedź:** Sterownik obsługuje **Windows 7, 8, 10, Server 2008 i Server 2012**.
+`
+      }
+    ]
   }
 }
 
