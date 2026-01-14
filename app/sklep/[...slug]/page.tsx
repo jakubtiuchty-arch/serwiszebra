@@ -281,6 +281,42 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
 
   const printerCategory = getPrinterCategoryBySlug(slugPath[0], slugPath[1])
   if (slugPath.length === 2 && printerCategory) {
+    // SEO dla głowic do drukarek przemysłowych
+    if (productType.id === 'glowica' && printerCategory.id === 'industrial') {
+      return {
+        title: 'Głowice do drukarek przemysłowych Zebra ZT411, ZT421, ZT610 | TAKMA',
+        description: 'Oryginalne głowice drukujące do drukarek przemysłowych Zebra: ZT411, ZT421, ZT510, ZT610, ZT620, 105SL Plus, ZM400. Rozdzielczości 203/300/600 DPI. Wysyłka 24-72h. Gwarancja producenta.',
+        keywords: 'głowica zt411, głowica zt421, głowica zt610, głowica zebra przemysłowa, głowica 300 dpi, głowica 600 dpi, printhead zebra industrial',
+        openGraph: {
+          title: 'Głowice do drukarek przemysłowych Zebra | TAKMA',
+          description: 'Oryginalne głowice 203/300/600 DPI do ZT411, ZT421, ZT610, ZT620. Szybka wysyłka, gwarancja producenta.',
+          type: 'website',
+          siteName: 'TAKMA - Autoryzowany Serwis Zebra',
+          locale: 'pl_PL'
+        },
+        alternates: {
+          canonical: 'https://www.serwis-zebry.pl/sklep/glowice/drukarki-przemyslowe'
+        }
+      }
+    }
+    // SEO dla głowic do drukarek biurkowych
+    if (productType.id === 'glowica' && printerCategory.id === 'desktop') {
+      return {
+        title: 'Głowice do drukarek biurkowych Zebra ZD421, ZD621, GK420 | TAKMA',
+        description: 'Oryginalne głowice drukujące do drukarek biurkowych Zebra: ZD220, ZD421, ZD611, ZD621, GK420, GX420. Rozdzielczości 203/300 DPI. Wysyłka 24-72h.',
+        keywords: 'głowica zd421, głowica zd621, głowica gk420, głowica zebra biurkowa, głowica 203 dpi, printhead zebra desktop',
+        openGraph: {
+          title: 'Głowice do drukarek biurkowych Zebra | TAKMA',
+          description: 'Oryginalne głowice 203/300 DPI do ZD421, ZD621, GK420. Szybka wysyłka, gwarancja.',
+          type: 'website',
+          siteName: 'TAKMA - Autoryzowany Serwis Zebra',
+          locale: 'pl_PL'
+        },
+        alternates: {
+          canonical: 'https://www.serwis-zebry.pl/sklep/glowice/drukarki-biurkowe'
+        }
+      }
+    }
     return {
       title: `${productType.namePlural} - ${printerCategory.name} | Sklep TAKMA`,
       description: `${productType.namePlural} do ${printerCategory.name.toLowerCase()} Zebra. Oryginalne części z gwarancją.`
@@ -689,8 +725,100 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
   // Dostępne rozdzielczości
   const availableResolutions = model?.resolutions || []
 
+  // FAQ Schema dla kategorii głowic przemysłowych
+  const industrialFaqSchema = productType.id === 'glowica' && printerCategory?.id === 'industrial' ? {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Czy głowica ZT410 pasuje do ZT411?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Nie. ZT411 to następca ZT410, ale głowice NIE są wymienne. ZT411 używa innych złączy i mocowań. Zawsze sprawdź Part Number (PN) przed zakupem."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Jak sprawdzić aktualną rozdzielczość drukarki Zebra?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Wydrukuj raport konfiguracji (Configuration Report) — znajdziesz tam RESOLUTION lub DPI. Alternatywnie, sprawdź etykietę na głowicy."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Ile kosztuje głowica do drukarki przemysłowej Zebra?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Ceny oryginalnych głowic Zebra do drukarek przemysłowych to ok. 1000-3500 zł netto w zależności od modelu i rozdzielczości. Głowice 600 DPI są najdroższe."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Jaką rozdzielczość głowicy wybrać: 203 DPI, 300 DPI czy 600 DPI?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "203 DPI to standard dla etykiet logistycznych i kodów 1D. 300 DPI jest idealna dla kodów 2D (QR, DataMatrix) i etykiet farmaceutycznych. 600 DPI to najwyższa jakość do mikro-kodów i etykiet jubilerskich."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Jaka jest żywotność głowicy w drukarce przemysłowej Zebra?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Głowice przemysłowe Zebra mają żywotność 1-3 miliony cali druku (25-75 km etykiet) w zależności od rozdzielczości i materiałów. Regularne czyszczenie alkoholem IPA wydłuża żywotność nawet o 50%."
+        }
+      }
+    ]
+  } : null
+
+  // FAQ Schema dla kategorii głowic biurkowych
+  const desktopFaqSchema = productType.id === 'glowica' && printerCategory?.id === 'desktop' ? {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Czy głowica GK420 pasuje do ZD421?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Nie. ZD421 to nowsza generacja z inną konstrukcją. Głowice GK420 pasują tylko do GK420d/t i GX420d/t."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Jaka jest cena głowicy do drukarki biurkowej Zebra?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Oryginalne głowice Zebra do drukarek biurkowych kosztują ok. 400-1200 zł netto. Głowice 300 DPI są droższe od 203 DPI."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Jaka jest różnica między drukiem termicznym a termotransferowym?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Druk termiczny (Direct Thermal) drukuje bezpośrednio na papierze termicznym bez taśmy, ale wydruk blaknie w czasie. Druk termotransferowy (Thermal Transfer) używa taśmy barwiącej (ribbon) i daje trwały wydruk odporny na ścieranie i UV."
+        }
+      }
+    ]
+  } : null
+
   return (
     <>
+      {industrialFaqSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(industrialFaqSchema) }}
+        />
+      )}
+      {desktopFaqSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(desktopFaqSchema) }}
+        />
+      )}
       <Header currentPage="other" />
       <ShopSubheader breadcrumbs={breadcrumbs} />
       
@@ -950,6 +1078,183 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
                     <strong>Potrzebujesz pomocy?</strong> Diagnozujemy problemy z baterią i zasilaniem. 
                     Jeśli urządzenie nie ładuje się prawidłowo, może to być usterka ładowarki lub elektroniki. 
                     <a href="/#formularz" className="underline ml-1">Zgłoś do serwisu →</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* SEO Content Section - Głowice do drukarek PRZEMYSŁOWYCH */}
+        {productType.id === 'glowica' && slugPath.length === 2 && printerCategory?.id === 'industrial' && (
+          <section className="py-8 sm:py-12 bg-white border-t border-gray-100">
+            <div className="max-w-4xl mx-auto px-4">
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">
+                Głowice do drukarek przemysłowych Zebra — kompletny przewodnik
+              </h2>
+              
+              <div className="prose prose-sm sm:prose-base prose-gray max-w-none">
+                <p className="text-gray-600 leading-relaxed mb-4">
+                  <strong>Drukarki przemysłowe Zebra</strong> (seria ZT, Xi, ZM) to urządzenia zaprojektowane do 
+                  intensywnej pracy w środowiskach produkcyjnych i logistycznych. Głowice w tych drukarkach 
+                  muszą sprostać wysokim wymaganiom — prędkościom do <strong>356 mm/s</strong>, pracy 24/7, 
+                  i drukowaniu milionów etykiet rocznie.
+                </p>
+
+                <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
+                  Popularne modele głowic przemysłowych
+                </h3>
+                <div className="overflow-x-auto mb-6">
+                  <table className="w-full text-sm">
+                    <thead className="bg-gray-50">
+                      <tr>
+                        <th className="px-3 py-2 text-left font-semibold">Model drukarki</th>
+                        <th className="px-3 py-2 text-left font-semibold">Rozdzielczości</th>
+                        <th className="px-3 py-2 text-left font-semibold">Szerokość druku</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-gray-100">
+                      <tr><td className="px-3 py-2">ZT411</td><td className="px-3 py-2">203, 300, 600 DPI</td><td className="px-3 py-2">104 mm</td></tr>
+                      <tr><td className="px-3 py-2">ZT421</td><td className="px-3 py-2">203, 300 DPI</td><td className="px-3 py-2">168 mm (6.6")</td></tr>
+                      <tr><td className="px-3 py-2">ZT510</td><td className="px-3 py-2">203, 300 DPI</td><td className="px-3 py-2">104 mm</td></tr>
+                      <tr><td className="px-3 py-2">ZT610</td><td className="px-3 py-2">203, 300, 600 DPI</td><td className="px-3 py-2">104 mm</td></tr>
+                      <tr><td className="px-3 py-2">ZT620</td><td className="px-3 py-2">203, 300 DPI</td><td className="px-3 py-2">168 mm (6.6")</td></tr>
+                      <tr><td className="px-3 py-2">105SL Plus</td><td className="px-3 py-2">203, 300 DPI</td><td className="px-3 py-2">104 mm</td></tr>
+                      <tr><td className="px-3 py-2">ZM400</td><td className="px-3 py-2">203, 300, 600 DPI</td><td className="px-3 py-2">104 mm</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
+                  Którą rozdzielczość wybrać?
+                </h3>
+                <ul className="text-gray-600 space-y-2 mb-4">
+                  <li><strong>203 DPI</strong> — standard dla etykiet logistycznych, kodów kreskowych 1D, etykiet wysyłkowych GS1. 
+                  Najniższy koszt głowicy, najdłuższa żywotność.</li>
+                  <li><strong>300 DPI</strong> — idealna dla kodów 2D (DataMatrix, QR), etykiet farmaceutycznych, 
+                  elektronicznych i produktowych. Dobry kompromis cena/jakość.</li>
+                  <li><strong>600 DPI</strong> — najwyższa jakość do mikro-kodów, etykiet jubilerskich, 
+                  elektroniki. Wyższa cena, krótsza żywotność.</li>
+                </ul>
+
+                <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
+                  Żywotność głowic przemysłowych
+                </h3>
+                <p className="text-gray-600 leading-relaxed mb-4">
+                  Głowice przemysłowe Zebra mają żywotność <strong>1-3 miliony cali druku</strong> (25-75 km etykiet) 
+                  w zależności od rozdzielczości i materiałów. Głowica 600 DPI ma gęstsze elementy grzewcze, 
+                  więc zużywa się szybciej niż 203 DPI. Regularne czyszczenie alkoholem IPA 
+                  wydłuża żywotność nawet o 50%.
+                </p>
+
+                <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
+                  FAQ — Głowice przemysłowe
+                </h3>
+                <div className="space-y-4 mb-6">
+                  <div className="border-l-4 border-blue-500 pl-4">
+                    <p className="font-semibold text-gray-900">Czy głowica ZT410 pasuje do ZT411?</p>
+                    <p className="text-gray-600 text-sm mt-1">Nie. ZT411 to następca ZT410, ale głowice NIE są wymienne. 
+                    ZT411 używa innych złączy i mocowań. Zawsze sprawdź Part Number (PN) przed zakupem.</p>
+                  </div>
+                  <div className="border-l-4 border-blue-500 pl-4">
+                    <p className="font-semibold text-gray-900">Jak sprawdzić aktualną rozdzielczość drukarki?</p>
+                    <p className="text-gray-600 text-sm mt-1">Wydrukuj raport konfiguracji (Configuration Report) — 
+                    znajdziesz tam "RESOLUTION" lub "DPI". Alternatywnie, sprawdź etykietę na głowicy.</p>
+                  </div>
+                  <div className="border-l-4 border-blue-500 pl-4">
+                    <p className="font-semibold text-gray-900">Ile kosztuje głowica do drukarki przemysłowej?</p>
+                    <p className="text-gray-600 text-sm mt-1">Ceny oryginalnych głowic Zebra to ok. 1000-3500 zł netto 
+                    w zależności od modelu i rozdzielczości. Głowice 600 DPI są najdroższe.</p>
+                  </div>
+                </div>
+
+                <div className="bg-blue-50 border border-blue-100 rounded-lg p-4 mt-6">
+                  <p className="text-blue-800 text-sm">
+                    <strong>Nie wiesz którą głowicę wybrać?</strong> Podaj model drukarki i rozdzielczość — 
+                    pomożemy dobrać właściwą część. 
+                    <a href="/kontakt" className="underline ml-1">Skontaktuj się →</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* SEO Content Section - Głowice do drukarek BIURKOWYCH */}
+        {productType.id === 'glowica' && slugPath.length === 2 && printerCategory?.id === 'desktop' && (
+          <section className="py-8 sm:py-12 bg-white border-t border-gray-100">
+            <div className="max-w-4xl mx-auto px-4">
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">
+                Głowice do drukarek biurkowych Zebra — poradnik wyboru
+              </h2>
+              
+              <div className="prose prose-sm sm:prose-base prose-gray max-w-none">
+                <p className="text-gray-600 leading-relaxed mb-4">
+                  <strong>Drukarki biurkowe Zebra</strong> (seria ZD, GK, GX) to kompaktowe urządzenia idealne do 
+                  małych i średnich wolumenów druku — biur, sklepów, aptek i niewielkich magazynów. 
+                  Głowice w tych drukarkach są mniejsze i tańsze niż w modelach przemysłowych, ale wymagają 
+                  równie starannego doboru.
+                </p>
+
+                <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
+                  Popularne modele głowic biurkowych
+                </h3>
+                <div className="overflow-x-auto mb-6">
+                  <table className="w-full text-sm">
+                    <thead className="bg-gray-50">
+                      <tr>
+                        <th className="px-3 py-2 text-left font-semibold">Model drukarki</th>
+                        <th className="px-3 py-2 text-left font-semibold">Rozdzielczości</th>
+                        <th className="px-3 py-2 text-left font-semibold">Typ</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-gray-100">
+                      <tr><td className="px-3 py-2">ZD220t / ZD230t</td><td className="px-3 py-2">203 DPI</td><td className="px-3 py-2">Termotransfer</td></tr>
+                      <tr><td className="px-3 py-2">ZD411t</td><td className="px-3 py-2">203, 300 DPI</td><td className="px-3 py-2">Termotransfer</td></tr>
+                      <tr><td className="px-3 py-2">ZD421t</td><td className="px-3 py-2">203, 300 DPI</td><td className="px-3 py-2">Termotransfer</td></tr>
+                      <tr><td className="px-3 py-2">ZD611t / ZD621t</td><td className="px-3 py-2">203, 300 DPI</td><td className="px-3 py-2">Termotransfer</td></tr>
+                      <tr><td className="px-3 py-2">GK420d / GX420d</td><td className="px-3 py-2">203 DPI</td><td className="px-3 py-2">Termiczny</td></tr>
+                      <tr><td className="px-3 py-2">GK420t / GX420t</td><td className="px-3 py-2">203 DPI</td><td className="px-3 py-2">Termotransfer</td></tr>
+                      <tr><td className="px-3 py-2">GX430t</td><td className="px-3 py-2">300 DPI</td><td className="px-3 py-2">Termotransfer</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
+                  Druk termiczny vs termotransferowy
+                </h3>
+                <ul className="text-gray-600 space-y-2 mb-4">
+                  <li><strong>Druk termiczny (Direct Thermal)</strong> — druk bezpośrednio na papierze termicznym. 
+                  Tańsze materiały, ale wydruk blaknie w czasie. Idealny do etykiet wysyłkowych, paragonów.</li>
+                  <li><strong>Druk termotransferowy (Thermal Transfer)</strong> — druk z użyciem taśmy barwiącej (ribbon). 
+                  Trwały wydruk odporny na ścieranie i UV. Do etykiet produktowych, oznaczeń trwałych.</li>
+                </ul>
+                <p className="text-gray-600 text-sm mb-4">
+                  <strong>Uwaga:</strong> Głowice do drukarek termicznych i termotransferowych są takie same — 
+                  różnica polega na sposobie instalacji materiału (z taśmą lub bez).
+                </p>
+
+                <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
+                  FAQ — Głowice biurkowe
+                </h3>
+                <div className="space-y-4 mb-6">
+                  <div className="border-l-4 border-blue-500 pl-4">
+                    <p className="font-semibold text-gray-900">Czy głowica GK420 pasuje do ZD421?</p>
+                    <p className="text-gray-600 text-sm mt-1">Nie. ZD421 to nowsza generacja z inną konstrukcją. 
+                    Głowice GK420 pasują tylko do GK420d/t i GX420d/t.</p>
+                  </div>
+                  <div className="border-l-4 border-blue-500 pl-4">
+                    <p className="font-semibold text-gray-900">Jaka jest cena głowicy do drukarki biurkowej?</p>
+                    <p className="text-gray-600 text-sm mt-1">Oryginalne głowice Zebra do drukarek biurkowych kosztują 
+                    ok. 400-1200 zł netto. Głowice 300 DPI są droższe od 203 DPI.</p>
+                  </div>
+                </div>
+
+                <div className="bg-blue-50 border border-blue-100 rounded-lg p-4 mt-6">
+                  <p className="text-blue-800 text-sm">
+                    <strong>Nie masz pewności jaki model głowicy?</strong> Sprawdź etykietę na drukarce lub 
+                    prześlij zdjęcie — pomożemy dobrać właściwą część. 
+                    <a href="/kontakt" className="underline ml-1">Napisz do nas →</a>
                   </p>
                 </div>
               </div>
