@@ -10,7 +10,7 @@ import { createClient } from '@/lib/supabase/client'
 interface RepairRequest {
   id: string
   device_model: string
-  serial_number: string
+  device_serial_number: string | null
   issue_description: string
   status: string
   priority: string
@@ -333,7 +333,7 @@ export default function AdminDashboard() {
                         </td>
                         <td className="px-4 py-2.5">
                           <div className="text-xs font-medium text-gray-900">{repair.device_model}</div>
-                          <div className="text-[10px] text-gray-500">S/N: {repair.serial_number || 'Brak'}</div>
+                          <div className="text-[10px] text-gray-500">S/N: {repair.device_serial_number || 'Brak'}</div>
                         </td>
                         <td className="px-4 py-2.5 whitespace-nowrap">
                           <div className="text-xs text-gray-900">

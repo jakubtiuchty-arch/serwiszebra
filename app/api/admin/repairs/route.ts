@@ -32,10 +32,22 @@ export async function GET(request: NextRequest) {
       query = query.eq('status', status)
     }
 
-    // Wyszukiwanie
+    // Wyszukiwanie - szukaj w wielu polach
     if (search && search.trim()) {
-      const searchTerm = `%${search.trim()}%`
-      query = query.or(`id.ilike.${searchTerm},device_model.ilike.${searchTerm},serial_number.ilike.${searchTerm}`)
+      const searchLower = search.trim().toLowerCase()
+      // Supabase wymaga poprawnego formatu dla .or() z ilike
+      // Używamy textSearch lub filtrujemy po stronie serwera
+      query = query.or(
+        `id.ilike.%${searchLower}%,` +
+        `device_model.ilike.%${searchLower}%,` +
+        `device_serial_number.ilike.%${searchLower}%,` +
+        `email.ilike.%${searchLower}%,` +
+        `first_name.ilike.%${searchLower}%,` +
+        `last_name.ilike.%${searchLower}%,` +
+        `company.ilike.%${searchLower}%,` +
+        `phone.ilike.%${searchLower}%,` +
+        `repair_number.ilike.%${searchLower}%`
+      )
     }
 
     const { data: repairs, error } = await query
