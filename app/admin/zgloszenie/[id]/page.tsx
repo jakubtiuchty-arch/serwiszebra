@@ -386,6 +386,11 @@ export default function AdminRepairDetailPage() {
     }
   }
 
+  // Generuj PDF przyjęcia do serwisu (z kodem kreskowym)
+  const handleGenerateReceiptPdf = () => {
+    window.open(`/api/admin/repairs/${repairId}/receipt-pdf`, '_blank')
+  }
+
   const handleOrderCourier = async (e: React.FormEvent) => {
     e.preventDefault()
     setSubmitting('courier')
@@ -746,6 +751,34 @@ export default function AdminRepairDetailPage() {
 
           {/* PRAWA KOLUMNA - Akcje */}
           <div className="space-y-4">
+            {/* Dokumenty PDF */}
+            <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow border border-gray-200 p-4">
+              <h3 className="text-sm font-semibold text-gray-900 mb-3">Dokumenty</h3>
+              <div className="space-y-2">
+                <button
+                  onClick={handleGenerateReceiptPdf}
+                  className="w-full flex items-center justify-center gap-2 bg-blue-600 text-white px-3 py-2.5 text-sm rounded-lg hover:bg-blue-700 font-semibold transition-all"
+                >
+                  <FileText className="w-4 h-4" />
+                  Potwierdzenie przyjęcia (z kodem kreskowym)
+                </button>
+                {repair.service_notes && (
+                  <button
+                    onClick={handleGenerateServicePdf}
+                    disabled={submitting === 'pdf'}
+                    className="w-full flex items-center justify-center gap-2 bg-indigo-600 text-white px-3 py-2 text-sm rounded-lg hover:bg-indigo-700 disabled:opacity-50 font-medium transition-all"
+                  >
+                    {submitting === 'pdf' ? (
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                    ) : (
+                      <FileText className="w-4 h-4" />
+                    )}
+                    Raport serwisowy
+                  </button>
+                )}
+              </div>
+            </div>
+
             {/* Zamów kuriera - PRIORYTET #1 */}
             {((repair.status === 'nowe' && !repair.pickup_tracking_number) ||
               (repair.status === 'zakonczone' && !repair.courier_tracking_number)) && (
@@ -1044,23 +1077,7 @@ export default function AdminRepairDetailPage() {
 
             {/* Notatki serwisowe - Diagnoza i wykonane prace */}
             <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow border border-gray-200 p-4">
-              <div className="flex items-center justify-between mb-3">
-                <h3 className="text-sm font-semibold text-gray-900">Diagnoza i wykonane prace</h3>
-                {repair.service_notes && (
-                  <button
-                    onClick={handleGenerateServicePdf}
-                    disabled={submitting === 'pdf'}
-                    className="flex items-center gap-1 text-xs text-blue-600 hover:text-blue-700 font-medium"
-                  >
-                    {submitting === 'pdf' ? (
-                      <Loader2 className="w-3 h-3 animate-spin" />
-                    ) : (
-                      <FileText className="w-3 h-3" />
-                    )}
-                    Generuj PDF
-                  </button>
-                )}
-              </div>
+              <h3 className="text-sm font-semibold text-gray-900 mb-3">Diagnoza i wykonane prace</h3>
               <form onSubmit={handleServiceNotesUpdate} className="space-y-3">
                 <div>
                   <label className="block text-xs font-semibold text-gray-700 mb-1">
