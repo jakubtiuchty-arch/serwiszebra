@@ -147,15 +147,18 @@ export default function HomePage() {
       {
         '@type': 'LocalBusiness',
         '@id': 'https://www.serwis-zebry.pl/#business',
-        name: 'TAKMA - Serwis Zebra',
+        name: 'TAKMA - Autoryzowany Serwis Zebra',
         image: 'https://www.serwis-zebry.pl/takma_logo_1.png',
         url: 'https://www.serwis-zebry.pl',
         telephone: '+48601619898',
-        email: 'kontakt@serwis-zebry.pl',
+        email: 'serwis@takma.com.pl',
         address: {
           '@type': 'PostalAddress',
-          addressCountry: 'PL',
-          addressLocality: 'Polska'
+          streetAddress: 'Usługa zdalna - serwis z odbiorem kurierem',
+          addressLocality: 'Wrocław',
+          postalCode: '50-000',
+          addressRegion: 'dolnośląskie',
+          addressCountry: 'PL'
         },
         openingHoursSpecification: {
           '@type': 'OpeningHoursSpecification',
@@ -229,7 +232,7 @@ export default function HomePage() {
         contactPoint: {
           '@type': 'ContactPoint',
           telephone: '+48601619898',
-          email: 'kontakt@serwis-zebry.pl',
+          email: 'serwis@takma.com.pl',
           contactType: 'customer service',
           areaServed: 'PL',
           availableLanguage: 'Polish'
