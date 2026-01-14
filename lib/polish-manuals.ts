@@ -23094,6 +23094,567 @@ Dwa nowe wałki czyszczące są dołączone do każdego opakowania taśm.
 `
       }
     ]
+  },
+
+  'zxp9': {
+    model: 'ZXP Series 9',
+    title: 'Zebra ZXP Series 9 – Instrukcja obsługi po Polsku',
+    lastUpdated: '2025-01-20',
+    sourceDocument: 'Zebra ZXP Series 9 Card Printer User Guide (P1086707-003)',
+    keywords: [
+      'zebra zxp9 instrukcja', 'zxp9 instrukcja po polsku', 'zebra zxp series 9 manual',
+      'drukarka kart zebra', 'zxp9 drukarka kart id', 'zxp9 konfiguracja',
+      'zxp9 taśma', 'zxp9 laminator', 'zxp9 laminacja', 'zxp9 enkoder magnetyczny',
+      'drukarka kart identyfikacyjnych', 'zxp9 specyfikacja', 'zxp9 lcd',
+      'zxp9 czyszczenie', 'zxp9 błędy', 'zxp9 ethernet', 'zxp9 wifi',
+      'drukarka retransferowa', 'retransfer', 'reverse transfer', 'over-the-edge',
+      'karty id', 'identyfikatory', 'przepustki', 'karty dostępu',
+      'zxp9 dwustronny', 'zxp9 smart card', 'zxp9 rfid', 'zxp9 mifare',
+      'wysokie bezpieczeństwo', 'folia transferowa', 'ix series', 'cpt'
+    ],
+    sections: [
+      {
+        title: '1. Podstawowe informacje',
+        content: `
+### O drukarce ZXP Series 9
+
+Zebra ZXP Series 9 to profesjonalna drukarka kart **retransferowa** zaprojektowana specjalnie do zastosowań wysokiego bezpieczeństwa. Wykorzystuje technologię **druku retransferowego** (reverse transfer), która polega na drukowaniu obrazu na elastycznej, przezroczystej folii transferowej, a następnie termicznym łączeniu jej z kartą. Dzięki temu ZXP9 tworzy bardziej trwałe, odporne na zarysowania karty z jakością zbliżoną do fotografii i możliwością druku na krawędzi (**over-the-edge**).
+
+Drukarka wyposażona jest w **kolorowy wyświetlacz LCD 21 znaków x 6 linii**, podajnik na **150 kart**, koszyk odrzutów na 15 kart oraz kosz wyjściowy na 100 kart. Opatentowana przez Zebra technologia dwustronnego, jednoczesnego druku retransferowego eliminuje konieczność mechanicznego obracania kart podczas produkcji.
+
+Model ZXP9 dostępny jest w wersji z opcjonalnym **laminatorem jednostronnym lub dwustronnym**, który nakłada bezodpadową folię laminującą na powierzchnię karty, znacząco zwiększając jej trwałość (nawet do **5-10 lat**) i bezpieczeństwo.
+
+### Parametry techniczne
+
+| Parametr | ZXP Series 9 |
+|----------|--------------|
+| **Druk** | **Jednostronny / Dwustronny** |
+| Technologia druku | **Retransfer** (dye diffusion retransfer) |
+| Rozdzielczość | **304 dpi** (12,0 punktów/mm) |
+| Tryby druku | Standardowy i Fine |
+| Prędkość druku jednostronnego | do **190 kart/godz.** (kolor) |
+| Prędkość druku dwustronnego | do **180 kart/godz.** (kolor) |
+| Pojemność podajnika | **150 kart** (30 mil) |
+| Pojemność kosza wyjściowego | 100 kart (30 mil) |
+| Pojemność kosza odrzutów | 15 kart |
+| Podawanie ręczne | Tak |
+| Waga | 12,5 kg (bez laminatora) / 20 kg (z laminatorem) |
+
+### Prędkość druku z laminacją
+
+| Konfiguracja | Druk | Laminacja | Przepustowość |
+|--------------|------|-----------|---------------|
+| Dwustronna z dwustronną laminacją | YMCK/YMCK | Góra+Dół | 180 kart/godz. |
+| Dwustronna z jednostronną laminacją | YMCK/YMCK | Góra | ok. 185 kart/godz. |
+| Jednostronna z jednostronną laminacją | YMCK | Góra | ok. 190 kart/godz. |
+
+### Złącza i komunikacja
+
+| Interfejs | Opis |
+|-----------|------|
+| USB 2.0 | Połączenie bezpośrednie z PC, Plug-and-Play |
+| Ethernet 10/100 | Połączenie sieciowe (standardowe) |
+| Wi-Fi 802.11b/g | Opcjonalny moduł bezprzewodowy (tylko USA i EU) |
+
+### Porównanie ZXP9 vs inne modele
+
+| Parametr | ZXP9 | ZXP7 | ZC300 |
+|----------|------|------|-------|
+| Technologia druku | **Retransfer** | Sublimacja | Sublimacja |
+| Rozdzielczość | **304 dpi** | 300 dpi | 300 dpi |
+| Druk na krawędzi | **Over-the-edge** | Nie | Nie |
+| Podajnik | **150 kart** | 200 kart | 100 kart |
+| Prędkość (kolor) | **190 kart/h** | 290 kart/h | 200 kart/h |
+| Laminator | **Opcja** | Opcja | Brak |
+| Trwałość kart | **5-10 lat** | Standardowa | Standardowa |
+`
+      },
+      {
+        title: '2. Elementy drukarki',
+        content: `
+### Widok z przodu – drukarka bez laminatora
+
+| Nr | Element | Opis |
+|----|---------|------|
+| 1 | Szpule folii transferowej | Podajnik i odbiór folii transferowej |
+| 2 | Szczelina stacji transferowej | Miejsce przenoszenia obrazu na kartę |
+| 3 | Ręczna rolka przesuwu | Do ręcznego przesuwu folii transferowej |
+| 4 | Szpule taśmy drukującej | Podajnik i odbiór taśmy barwnej |
+| 5 | Głowica drukująca | Element drukujący obraz |
+| 6 | Podajnik kart (Input Hopper) | Wyjmowany pojemnik na karty |
+| 7 | Wkład czyszczący karty (X-Roller) | Oczyszcza karty wchodzące z podajnika |
+| 8 | Wałek czyszczący (Y-Roller) | Dodatkowy element czyszczący |
+| 9 | Panel operatora (OCP) | Wyświetlacz LCD i przyciski |
+| 10 | Szczelina podawania ręcznego | Do podawania pojedynczych kart |
+| 11 | Kosz wyjściowy (Output Hopper) | Odbiera wydrukowane karty |
+
+### Widok z przodu – drukarka z laminatorem
+
+| Nr | Element | Opis |
+|----|---------|------|
+| 1 | Górna kaseta laminatu | Kaseta z laminatem na górną stronę (niebieska) |
+| 2 | Zwalniacz górnej kasety | Odblokowuje górną kasetę |
+| 3 | Dolna kaseta laminatu | Kaseta z laminatem na dolną stronę (żółta) |
+| 4 | Zwalniacz dolnej kasety | Odblokowuje dolną kasetę |
+| 5 | Narzędzie ręcznego przesuwu | Do ręcznego przesuwu laminatu |
+| 6 | Kosz wyjściowy laminatora | Odbiera gotowe karty |
+
+### Widok z tyłu
+
+| Nr | Element | Opis |
+|----|---------|------|
+| 1 | Wyłącznik zasilania | Włącza (I) / wyłącza (O) |
+| 2 | Złącze zasilania | Gniazdo kabla zasilającego |
+| 3 | Złącze USB | Port USB 2.0 |
+| 4 | Złącze Ethernet | Port RJ-45 10/100 BaseT |
+| 5 | Antena Wi-Fi (opcja) | Opcjonalna antena bezprzewodowa |
+`
+      },
+      {
+        title: '3. Panel operatora (OCP)',
+        content: `
+Model ZXP Series 9 wyposażony jest w **wyświetlacz LCD 21 znaków x 6 linii**.
+
+### Komunikaty operacyjne
+
+| Komunikat | Znaczenie |
+|-----------|-----------|
+| READY | Drukarka gotowa do pracy |
+| PRINTING | Trwa drukowanie |
+| LAMINATING | Trwa laminacja |
+| WARMING | Nagrzewanie rolek transferowych |
+| WARMING PRINT JOB WAITING | Zadanie odebrane, nagrzewanie rolek |
+| COOLING | Chłodzenie rolek |
+| MAG OPERATION | Kodowanie paska magnetycznego |
+| CONTACT OPERATION | Kodowanie karty stykowej |
+| CONTACTLESS OPERATION | Kodowanie karty zbliżeniowej |
+| MANUALLY INSERT CARD FROM FRONT | Oczekiwanie na kartę ręczną |
+| STANDBY | Tryb oszczędzania energii |
+| OFFLINE | Drukarka w trybie offline |
+
+### Komunikaty ostrzegawcze
+
+| Komunikat | Znaczenie |
+|-----------|-----------|
+| PRINT RIBBON LOW | Kończy się taśma drukująca |
+| TRANSFER FILM LOW | Kończy się folia transferowa |
+| TOP LAMINATE LOW | Kończy się laminat górny |
+| BOTTOM LAMINATE LOW | Kończy się laminat dolny |
+| CLEAN FEEDER | Podajnik wymaga czyszczenia |
+| CLEAN FRONT CARD PATH | Przednia ścieżka (Y-Roller) wymaga czyszczenia |
+| CLEAN SIDE CARD PATH | Boczna ścieżka (X-Roller) wymaga czyszczenia |
+| CLEAN TRANSFER PATH | Ścieżka transferowa wymaga czyszczenia |
+`
+      },
+      {
+        title: '4. Rozpakowanie i instalacja',
+        content: `
+### Zawartość opakowania
+
+- Drukarka ZXP Series 9
+- Podajnik kart (Input Hopper) z zestawem 100 kart
+- Kosz wyjściowy (Output Hopper)
+- Wkład czyszczący karty (Cleaning Cartridge)
+- Wałek czyszczący (Cleaning Roller)
+- Kabel USB
+- Kabel zasilający
+- Skrócona instrukcja obsługi
+- Karty testowe
+
+**Dla wersji z laminatorem:**
+- Górna kaseta laminatu (niebieska)
+- Dolna kaseta laminatu (żółta – tylko dwustronny)
+
+**Ważne:** Zachowaj oryginalne opakowanie do transportu serwisowego.
+
+### Rozpakowanie drukarki
+
+**Uwaga:** Drukarka waży około **12,5 kg** (27,5 lbs). Zaleca się wyjmowanie przez **dwie osoby**!
+
+1. Sprawdź opakowanie pod kątem uszkodzeń
+2. Wyjmij materiały opakowaniowe
+3. Zdejmij torbę ochronną
+4. Usuń wszystkie taśmy z przodu, tyłu i wnętrza
+5. Naciśnij żółty przycisk zwalniający i otwórz pokrywę
+
+### Wymagania miejsca instalacji
+
+| Parametr | Drukarka | Z laminatorem |
+|----------|----------|---------------|
+| Powierzchnia | 686 x 711 mm | 965 x 711 mm |
+| Wolna przestrzeń | min. 10 cm z każdej strony | min. 10 cm z każdej strony |
+| Temperatura | 15°C – 35°C | 15°C – 35°C |
+| Wilgotność | 20% – 80% bez kondensacji | 20% – 80% bez kondensacji |
+
+### Podłączenie zasilania
+
+**Ostrzeżenie:** Zasilanie AC musi być w zakresie **100V-240V, 50-60Hz**.
+
+1. Włóż kabel zasilający do gniazda z tyłu drukarki
+2. Podłącz drugi koniec do gniazdka
+
+### Podłączenie USB/Ethernet
+
+**Ważne:** Przed włączeniem drukarki zainstaluj sterownik!
+`
+      },
+      {
+        title: '5. Ładowanie materiałów eksploatacyjnych',
+        content: `
+### Ładowanie kart
+
+1. Zdejmij opakowanie z talii kart
+2. Trzymając talię za boki, postaw ją pionowo na płaskiej powierzchni
+3. Pochyl stos pod kątem 45° aby rozdzielić karty
+4. Wyprostuj stos
+5. Otwórz drzwiczki podajnika
+6. Włóż karty (max. **150 szt.**) w odpowiedniej orientacji:
+   - Smart card: chip do góry i w stronę drukarki
+   - Pasek magnetyczny: do dołu i do tyłu
+7. Zamknij drzwiczki
+
+### Instalacja wkładów czyszczących
+
+**Wkład X-Roller:**
+1. Zdejmij folię ochronną z wałka (nie dotykaj powierzchni!)
+2. Wsuń w prowadnice
+3. Dociśnij aż zatrzaśnie się
+
+**Wałek Y-Roller:**
+1. Zdejmij folię ochronną
+2. Umieść w nacięciach drukarki
+3. Dociśnij na miejsce
+
+### Ładowanie folii transferowej
+
+ZXP9 współpracuje wyłącznie z folią **Zebra True Colours ix Series Transfer Film**.
+
+1. Odwiń ok. 30 cm folii z pełnej rolki
+2. Nawiń 2 zwoje na pustą rolkę odbierającą
+3. Załaduj rolkę podającą (zielony kołnierz po lewej)
+4. Załaduj rolkę odbierającą (biały kołnierz po prawej)
+5. Przeprowadź folię pod zatrzymujący uchwyt
+
+### Ładowanie taśmy drukującej
+
+Taśmy **Zebra True Colours ix Series** zawierają zestaw wymiennych wałków czyszczących.
+
+1. Załaduj rolkę z taśmą (fioletowy kołnierz po lewej)
+2. Załaduj pustą rolkę odbierającą (niebieski kołnierz po prawej)
+3. Upewnij się, że taśma schodzi ze spodu obu rolek
+
+### Ładowanie laminatu
+
+**Uwaga:** Rolki laminatu są specyficzne – górna kaseta (niebieska), dolna kaseta (żółta).
+
+1. Umieść rolkę laminatu w kasecie (zwróć uwagę na orientację)
+2. Wyciągnij 2-3 cm laminatu poza krawędź kasety
+3. Zamknij kasetę (klik)
+4. Przytnij laminat prostopadle nożyczkami
+5. Obróć rdzeń – laminat ma wystawać 0-0,5 mm
+6. Wsuń kasetę na trzpień laminatora
+7. Obróć kasetę do pozycji zablokowanej (zielony)
+`
+      },
+      {
+        title: '6. Instalacja sterownika Windows',
+        content: `
+### Obsługiwane systemy
+
+- Windows 7, 8, 10
+- Windows Server 2008, 2012
+
+### Instalacja sterownika
+
+1. Pobierz sterownik ze strony: www.zebra.com/zxpseries9
+2. Uruchom instalator
+3. Postępuj zgodnie z instrukcjami
+4. Po instalacji podłącz drukarkę kablem USB
+5. System automatycznie wykryje i skonfiguruje drukarkę
+
+### Konfiguracja preferencji druku
+
+1. Przejdź do **Urządzenia i drukarki**
+2. Kliknij prawym przyciskiem ZXP Series 9
+3. Wybierz **Preferencje drukowania**
+4. Skonfiguruj:
+   - **Card type in use** – typ karty
+   - **Print on both sides** – druk dwustronny
+   - **Ribbon combination** – kombinacja taśmy (np. YMCK Front / K Back)
+`
+      },
+      {
+        title: '7. Drukowanie',
+        content: `
+### Pierwsze ustawienia przed drukiem
+
+1. Wybierz właściwy typ karty w **Card type in use**
+2. Ustaw druk jednostronny lub dwustronny
+3. Wybierz odpowiednią kombinację taśmy
+4. Wydrukuj kartę testową
+
+### Ręczne podawanie kart
+
+1. Włóż pojedynczą kartę do szczeliny z przodu drukarki
+2. Drukarka automatycznie pobierze kartę po otrzymaniu zadania
+
+### Drukowanie karty testowej
+
+1. W oknie **Preferencje drukowania** kliknij **Test Print**
+2. Drukarka wydrukuje wzór testowy
+3. Karta wyjdzie do kosza wyjściowego
+`
+      },
+      {
+        title: '8. Konserwacja i czyszczenie',
+        content: `
+Regularna konserwacja zapewnia optymalną jakość druku. Zaleca się czyszczenie **co 5000 kart** lub przy wymianie taśmy.
+
+### Kiedy czyścić
+
+- Co 5000 kart
+- Przy każdej wymianie taśmy
+- Gdy pojawią się komunikaty ostrzegawcze
+- Gdy zauważysz pogorszenie jakości
+
+### Wymiana wałków czyszczących
+
+Nowe wałki X i Y dołączane są do każdego opakowania taśm.
+
+**Wkład X-Roller:**
+1. Otwórz pokrywę
+2. Wyjmij stary wkład
+3. Zdejmij folię z nowego
+4. Zainstaluj nowy wkład
+
+**Wałek Y-Roller:**
+1. Otwórz pokrywę
+2. Wyjmij stary wałek
+3. Zdejmij folię z nowego
+4. Zainstaluj nowy wałek
+
+### Czyszczenie głowicy drukującej
+
+**Uwaga:** Głowica jest bardzo gorąca po drukowaniu – poczekaj aż ostygnie!
+
+**Uwaga:** Zdejmij pierścionki, zegarki i metalowe przedmioty przed pracą przy głowicy!
+
+1. Wyłącz drukarkę i poczekaj na ostygięcie
+2. Otwórz pokrywę
+3. Użyj szmatki nasączonej alkoholem izopropylowym (99%)
+4. Delikatnie przetrzyj element grzejny
+5. Poczekaj na wyschnięcie
+
+### Czyszczenie laminatora
+
+1. Na OCP wybierz opcję czyszczenia laminatora
+2. Postępuj zgodnie z instrukcjami
+3. Użyj dedykowanych kart czyszczących
+`
+      },
+      {
+        title: '9. Rozwiązywanie problemów',
+        content: `
+### Objawy awarii
+
+| Objaw | Działanie |
+|-------|-----------|
+| Brak zasilania | Sprawdź kabel i wyłącznik |
+| Komputer nie widzi drukarki | Sprawdź kabel USB/Ethernet i sterownik |
+| Drukarka nie osiąga READY | Sprawdź pokrywy i podajnik |
+| Słaba jakość transferu | Zwiększ temperaturę lub zmniejsz prędkość transferu |
+| Karty się wyginają | Zmniejsz temperaturę lub zwiększ prędkość wyjściową |
+| Plamy na karcie | Wymień wałek czyszczący |
+
+### Kody błędów OCP
+
+| Kod | Komunikat | Rozwiązanie |
+|-----|-----------|-------------|
+| 1 | SYSTEM NOT READY | Zrestartuj drukarkę |
+| 3001 | PRINTER OFFLINE | Zmień status na online |
+| 4003 | CARD JAM | Wyczyść ścieżkę karty |
+| 4010 | OUT OF FILM | Załaduj nową folię |
+| 4012 | FILM JAM | Sprawdź i zainstaluj ponownie folię |
+| 4014 | CARD FEED ERROR | Rozdziel sklejone karty |
+| 4016 | OUT OF CARDS | Załaduj karty |
+| 5001 | OUT OF RIBBON | Załaduj nową taśmę |
+| 5002 | INVALID RIBBON | Użyj oryginalnej taśmy Zebra |
+| 5003 | RIBBON JAM | Sprawdź taśmę |
+
+### Usuwanie zacięcia karty – drukarka
+
+1. Wyłącz drukarkę
+2. Otwórz pokrywę
+3. Wyjmij taśmę i folię transferową
+4. Ostrożnie wyjmij zaciętą kartę
+5. Sprawdź ścieżkę karty
+6. Zainstaluj materiały
+7. Zamknij pokrywę
+8. Włącz drukarkę
+
+### Usuwanie zacięcia karty – laminator
+
+1. Wyłącz drukarkę
+2. Otwórz pokrywę laminatora
+3. Wyjmij kasety laminatu
+4. Ostrożnie wyjmij kartę
+5. Zainstaluj kasety
+6. Zamknij pokrywę
+7. Włącz drukarkę
+`
+      },
+      {
+        title: '10. Opcje i rozszerzenia',
+        content: `
+### Enkoder paska magnetycznego
+
+- Zgodność z AAMVA i ISO 7811
+- Obsługa ścieżek 1, 2 i 3
+- High i Low Coercivity
+- Kodowanie nowych i wstępnie zakodowanych kart
+
+### Enkoder Smart Card
+
+- Stacja kontaktowa ISO 7816
+- Enkoder MIFARE ISO 14443 A & B (13.56 MHz)
+- Zgodność PC/SC
+- Kodowanie przez USB i Ethernet
+
+### Wi-Fi 802.11b/g
+
+- Opcjonalny moduł bezprzewodowy
+- Dostępny tylko w USA i EU
+- Prędkość do 54 Mbps (802.11g) / 11 Mbps (802.11b)
+
+### Zamykane obudowy
+
+- Zamykana pokrywa drukarki
+- Zamykany podajnik kart
+- Do środowisk wysokiego bezpieczeństwa
+`
+      },
+      {
+        title: '11. Dane techniczne',
+        content: `
+### Wymiary i waga
+
+| Parametr | Drukarka | Z laminatorem |
+|----------|----------|---------------|
+| Wysokość | 334 mm | 334 mm |
+| Szerokość | 476 mm | 781 mm |
+| Głębokość | 519 mm | 519 mm |
+| Waga | **12,5 kg** | **20 kg** |
+
+### Parametry elektryczne
+
+| Parametr | Wartość |
+|----------|---------|
+| Napięcie zasilania | 100V – 240V AC |
+| Częstotliwość | 50 – 60 Hz |
+| Automatyczne przełączanie | Tak |
+
+### Warunki pracy
+
+| Parametr | Wartość |
+|----------|---------|
+| Temperatura pracy | 15°C – 35°C |
+| Temperatura przechowywania | -5°C – 55°C |
+| Wilgotność względna | 20% – 80% bez kondensacji |
+
+### Specyfikacja kart
+
+| Parametr | Wartość |
+|----------|---------|
+| Grubość kart | 30 – 40 mil (0,76 – 1,02 mm) |
+| Format kart | CR-80, ISO 7810 Type ID-1 |
+| Materiał | PVC, PVC-composite, ABS, PET, PET-G, Teslin composite |
+| Karty specjalne | Transparentne, translucent |
+| Karty technologiczne | Kontaktowe i zbliżeniowe smart cards, UHF |
+
+### Materiały eksploatacyjne
+
+| Typ | Wydajność |
+|-----|-----------|
+| Taśma YMCK (4 panele) | 625 obrazów/rolka |
+| Taśma YMCKK (5 paneli) | 500 obrazów/rolka |
+| Taśma YMC (3 panele) | 800 obrazów/rolka |
+| Taśma monochromatyczna | 2500 obrazów/rolka |
+| Folia transferowa (Clear) | 1250 jednostronnych / 625 dwustronnych |
+| Laminat bezodpadowy (1.0 mil) | 625 obrazów/rolka |
+`
+      },
+      {
+        title: '12. Technologia retransfer – zalety',
+        content: `
+### Korzyści z druku retransferowego
+
+| Cecha | Korzyść |
+|-------|---------|
+| Wyższa jakość obrazu | Żywe, nasycone kolory zbliżone do fotografii |
+| Druk na nierównych powierzchniach | Możliwość druku na kartach smart card |
+| Druk over-the-edge | Prawdziwy druk od krawędzi do krawędzi (bez białego obrzeża) |
+| Druk na kartach nie-PVC | Możliwość druku na materiałach bez warstwy przyjmującej barwnik |
+| Większa trwałość | Karty bardziej odporne na ścieranie |
+| Wbudowana ochrona | Folia transferowa zapewnia ochronę przed manipulacją |
+
+### Exclusive Color Predictive Technology (CPT)
+
+Opatentowana przez Zebra technologia **CPT** stale monitoruje proces druku i automatycznie dostosowuje ustawienia drukarki, aby zapewnić najwyższą jakość druku – karta po karcie.
+`
+      },
+      {
+        title: 'FAQ – Najczęściej zadawane pytania',
+        content: `
+### Czym jest drukarka ZXP Series 9?
+
+**Odpowiedź:** Zebra ZXP Series 9 to profesjonalna drukarka kart **retransferowa** do zastosowań wysokiego bezpieczeństwa, z możliwością druku **over-the-edge** i opcjonalnym **laminatorem**.
+
+### Co to jest technologia retransfer?
+
+**Odpowiedź:** **Retransfer** (reverse transfer) to drukowanie obrazu na przezroczystej folii transferowej, a następnie termiczne łączenie jej z kartą. Daje to wyższą jakość, trwałość i możliwość druku na krawędzi.
+
+### Jaka jest prędkość druku ZXP9?
+
+**Odpowiedź:** ZXP9 drukuje do **190 kart/godz.** (kolor jednostronny) i do **180 kart/godz.** (kolor dwustronny).
+
+### Czym różni się ZXP9 od ZXP7?
+
+**Odpowiedź:** ZXP9 używa technologii **retransfer** (ZXP7 sublimacja), ma rozdzielczość **304 dpi** (ZXP7: 300 dpi), drukuje **over-the-edge** i tworzy karty o trwałości **5-10 lat**.
+
+### Co to jest druk over-the-edge?
+
+**Odpowiedź:** Druk **over-the-edge** oznacza drukowanie na całej powierzchni karty, łącznie z krawędziami – bez białego obrzeża. Możliwy tylko w technologii retransfer.
+
+### Ile kart mieści podajnik ZXP9?
+
+**Odpowiedź:** Podajnik ZXP9 mieści **150 kart** o grubości 30 mil.
+
+### Co to jest folia transferowa?
+
+**Odpowiedź:** **Folia transferowa** to przezroczysta folia, na której drukowany jest obraz przed przeniesieniem na kartę. Zapewnia dodatkową ochronę i umożliwia druk over-the-edge.
+
+### Co to jest technologia CPT?
+
+**Odpowiedź:** **Color Predictive Technology (CPT)** to opatentowana technologia Zebra, która stale monitoruje i automatycznie dostosowuje ustawienia druku dla najwyższej jakości.
+
+### Jak często wymieniać wałki czyszczące?
+
+**Odpowiedź:** Zaleca się wymianę wałków X-Roller i Y-Roller **przy każdej nowej taśmie** lub **co 5000 kart**. Nowe wałki są dołączane do każdego opakowania taśm.
+
+### Jakie karty obsługuje ZXP9?
+
+**Odpowiedź:** ZXP9 obsługuje karty: PVC, PVC-composite, ABS, PET, PET-G, Teslin composite, **transparentne**, **translucent**, **smart cards** (kontaktowe i zbliżeniowe).
+
+### Jaka jest wydajność taśmy YMCK?
+
+**Odpowiedź:** Taśma YMCK (4 panele) ma wydajność **625 obrazów/rolka**. Folia transferowa wystarcza na **1250 jednostronnych** lub **625 dwustronnych** kart.
+
+### Jaka jest waga ZXP9?
+
+**Odpowiedź:** ZXP9 waży **12,5 kg** bez laminatora lub **20 kg** z laminatorem – zaleca się wyjmowanie z kartonu przez dwie osoby.
+`
+      }
+    ]
   }
 }
 
