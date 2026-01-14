@@ -18,11 +18,17 @@ interface RepairRequest {
   final_price: number | null
   created_at: string
   user_id: string
+  // Dane bezpośrednio w zgłoszeniu (dla gości)
+  first_name: string | null
+  last_name: string | null
+  email: string | null
+  company: string | null
+  // Dane z profilu (dla zalogowanych)
   profiles: {
     email: string
     first_name: string | null
     last_name: string | null
-  }
+  } | null
 }
 
 interface Stats {
@@ -337,12 +343,15 @@ export default function AdminDashboard() {
                         </td>
                         <td className="px-4 py-2.5 whitespace-nowrap">
                           <div className="text-xs text-gray-900">
-                            {repair.profiles?.first_name || repair.profiles?.last_name
-                              ? `${repair.profiles.first_name || ''} ${repair.profiles.last_name || ''}`.trim()
-                              : 'Brak danych'}
+                            {/* Sprawdź dane bezpośrednio w zgłoszeniu (goście) lub z profilu (zalogowani) */}
+                            {repair.first_name || repair.last_name
+                              ? `${repair.first_name || ''} ${repair.last_name || ''}`.trim()
+                              : repair.profiles?.first_name || repair.profiles?.last_name
+                                ? `${repair.profiles.first_name || ''} ${repair.profiles.last_name || ''}`.trim()
+                                : 'Brak danych'}
                           </div>
                           <div className="text-[10px] text-gray-500 truncate max-w-[150px]">
-                            {repair.profiles?.email || 'Brak email'}
+                            {repair.email || repair.profiles?.email || 'Brak email'}
                           </div>
                         </td>
                         <td className="px-4 py-2.5 whitespace-nowrap">
