@@ -25369,11 +25369,9 @@ Zebra TC27 jest idealnym narzędziem dla kurierów, techników serwisowych, prze
 | **Łączność komórkowa** | **5G / LTE / CBRS** | **Brak** |
 | Wi-Fi | 6E (802.11ax) | 6E (802.11ax) |
 | Karta SIM | Nano SIM + eSIM | Nie dotyczy |
-| GPS | Tak (A-GPS, GLONASS) | Nie* |
+| GPS | Tak (A-GPS, GLONASS) | Brak (opcjonalnie przez akcesoria) |
 | Zastosowanie | Praca mobilna w terenie | Praca w zasięgu Wi-Fi |
 | Połączenia głosowe | VoLTE (5G) + VoIP | Tylko VoIP |
-
-*Zebra TC22 może korzystać z GPS przez akcesoria
 
 ### Zastosowania Zebra TC27
 
