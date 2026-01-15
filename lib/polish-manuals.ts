@@ -24560,6 +24560,1703 @@ TC26 posiada zintegrowany odbiornik **GPS/GLONASS** do lokalizacji w terenie.
 `
       }
     ]
+  },
+
+  'tc22': {
+    model: 'TC22',
+    title: 'Zebra TC22 – Instrukcja obsługi po Polsku',
+    lastUpdated: '2026-01-15',
+    sourceDocument: 'Zebra TC22 User Guide',
+    keywords: [
+      'zebra tc22 instrukcja', 'zebra tc22 instrukcja po polsku', 'zebra tc22 manual',
+      'terminal mobilny zebra tc22', 'zebra tc22 skanowanie', 'zebra tc22 reset', 'zebra tc22 bateria',
+      'zebra tc22 wifi', 'zebra tc22 wifi 6e', 'zebra tc22 bluetooth', 'zebra tc22 nfc', 'zebra tc22 android',
+      'zebra tc22 kamera', 'zebra tc22 specyfikacja', 'zebra tc22 akcesoria', 'zebra tc22 stacja dokująca',
+      'zebra tc22 ładowanie', 'zebra tc22 ip65', 'zebra tc22 ip68', 'zebra tc22 enterprise',
+      'komputer dotykowy zebra tc22', 'zebra tc22 skanowanie kodów', 'zebra tc22 qualcomm 5430',
+      'zebra tc22 6 cali', 'zebra tc22 fhd+', 'zebra tc22 gorilla glass', 'zebra tc22 se4710',
+      'zebra tc22 se55', 'zebra tc22 mobility dna', 'zebra tc22 datawedge', 'zebra tc22 powerprecision'
+    ],
+    sections: [
+      {
+        title: '1. Podstawowe informacje',
+        content: `
+### O urządzeniu Zebra TC22
+
+Zebra TC22 to nowoczesny komputer mobilny z **6-calowym ekranem dotykowym Full HD+**, łączący elegancję smartfona z funkcjonalnością przemysłową. Urządzenie wyposażone jest w procesor Qualcomm 5430 (2,1 GHz), zaawansowany skaner kodów kreskowych, podwójne kamery oraz łączność Wi-Fi 6E i Bluetooth 5.2. Konstrukcja spełnia normy IP65/IP68 oraz MIL-STD-810H, zapewniając odporność na upadki, wodę i kurz.
+
+Zebra TC22 jest idealnym narzędziem dla handlu detalicznego, logistyki, magazynów i usług terenowych. Model TC22 to wersja Wi-Fi – dla pracy wymagającej sieci komórkowej dostępny jest model Zebra TC27.
+
+### Parametry techniczne Zebra TC22
+
+| Parametr | Zebra TC22 |
+|----------|------------|
+| **Wyświetlacz** | 6,0" FHD+ (1080 x 2160) |
+| Jasność | 450 nitów |
+| Ochrona ekranu | Corning Gorilla Glass |
+| Procesor | Qualcomm 5430 2,1 GHz (6-rdzeniowy) |
+| System operacyjny | Android 14 (aktualizacje do Android 16) |
+| Pamięć RAM | 6 GB / 8 GB |
+| Pamięć Flash | 64 GB / 128 GB |
+| Karta microSD | Do 2 TB (opcja) |
+| Łączność | Wi-Fi 6E, Bluetooth 5.2, NFC |
+
+### Porównanie Zebra TC22 vs Zebra TC27
+
+| Parametr | Zebra TC22 | Zebra TC27 |
+|----------|------------|------------|
+| **Łączność komórkowa** | **Brak** | **5G / LTE / CBRS** |
+| Wi-Fi | 6E (802.11ax) | 6E (802.11ax) |
+| Karta SIM | Nie dotyczy | Nano SIM + eSIM |
+| Zastosowanie | Praca w zasięgu Wi-Fi | Praca mobilna w terenie |
+| Połączenia głosowe | VoIP przez Wi-Fi | VoIP + VoLTE (5G) |
+
+### Zastosowania Zebra TC22
+
+- **Handel detaliczny:** sprawdzanie cen, realizacja zamówień online, inwentaryzacja
+- **Magazyny:** kompletacja zamówień, przyjęcia/wydania towarów, skanowanie
+- **Logistyka wewnętrzna:** śledzenie przesyłek, kontrola stanów
+- **Gastronomia i hotelarstwo:** obsługa zamówień, weryfikacja biletów
+- **Produkcja:** kontrola jakości, śledzenie komponentów
+- **Służba zdrowia:** identyfikacja pacjentów, zarządzanie lekami
+
+### Cechy charakterystyczne Zebra TC22
+
+- **Wyświetlacz 6" FHD+** – 32% większy niż poprzednik Zebra TC21
+- **Konstrukcja o grubości 12,5 mm** – 10% cieńsza od poprzednika
+- **Certyfikat IP65/IP68** – pełna odporność na kurz i wodę
+- **Upadek z 1,3 m** – zgodność z MIL-STD-810H
+- **Gorilla Glass** – ochrona ekranu i okna skanera
+- **Bateria wymienna na ciepło** – ciągłość pracy bez wyłączania
+- **NFC z Apple VAS i Google SmartTap** – obsługa płatności i biletów
+- **Mobility DNA** – pakiet narzędzi Zebra do zarządzania i konfiguracji
+`
+      },
+      {
+        title: '2. Rozpakowanie i instalacja',
+        content: `
+### Zawartość opakowania Zebra TC22
+
+- Komputer mobilny Zebra TC22
+- Bateria PowerPrecision Li-Ion 3800 mAh
+- Skrócona instrukcja obsługi
+- Przewodnik bezpieczeństwa
+- Karta rejestracyjna produktu
+
+> **Uwaga:** Zasilacz, kable i stacje dokujące są sprzedawane oddzielnie.
+
+### Instalacja karty microSD (opcjonalnie)
+
+1. Wyjmij tackę na karty z boku urządzenia Zebra TC22
+2. Umieść kartę microSD kontaktami do góry
+3. Wsuń tackę z powrotem do urządzenia
+4. Upewnij się, że tacka jest prawidłowo osadzona
+
+> **Uwaga:** Zachowaj środki ostrożności ESD podczas instalacji kart.
+
+### Instalacja baterii Zebra TC22
+
+1. Umieść baterię w komorze, wyrównując styki
+2. Dociśnij baterię do dołu, aż zatrzaski zablokują się na miejscu
+3. Zatrzaski po bokach powinny zaskoczyć automatycznie
+
+### Wyjmowanie baterii
+
+1. Naciśnij jednocześnie oba zatrzaski zwalniające z tyłu urządzenia
+2. Unieś baterię i wyjmij z komory
+
+> **Funkcja Warm Swap:** Zebra TC22 pozwala na wymianę baterii bez wyłączania urządzenia – bateria zapasowa podtrzymuje pracę przez krótki czas.
+
+### Warunki pracy Zebra TC22
+
+| Tryb | Temperatura | Wilgotność |
+|------|-------------|------------|
+| Praca | -10°C do +50°C | 5-95% bez kondensacji |
+| Ładowanie | +5°C do +40°C | – |
+| Przechowywanie | -40°C do +70°C | 5-95% bez kondensacji |
+`
+      },
+      {
+        title: '3. Elementy urządzenia',
+        content: `
+### Widok z przodu Zebra TC22
+
+| Nr | Element | Opis |
+|----|---------|------|
+| 1 | Kamera przednia | 8 MP (5 MP w niektórych wersjach) – wideorozmowy |
+| 2 | LED ładowania/powiadomień | Status baterii i powiadomienia aplikacji |
+| 3 | Głośnik/Słuchawka | Audio w trybie słuchawki i głośnomówiącym |
+| 4 | LED skanowania | Status operacji skanowania |
+| 5 | Czujnik światła/zbliżenia | Automatyczna regulacja jasności ekranu |
+| 6 | Ekran dotykowy | 6" FHD+ z obsługą rękawiczek |
+| 7 | Głośnik | Odtwarzanie multimediów i tryb głośnomówiący |
+| 8 | Styki ładowania | Ładowanie przez stacje dokujące |
+| 9 | Złącze USB-C | Ładowanie, transfer danych, akcesoria |
+| 10 | Mikrofon | Komunikacja w trybie słuchawki |
+| 11 | Przycisk skanowania | Uruchamia skanowanie (programowalny) |
+| 12 | Przycisk programowalny | PTT (Push-to-Talk) lub inna funkcja |
+
+### Widok z tyłu Zebra TC22
+
+| Nr | Element | Opis |
+|----|---------|------|
+| 13 | Antena NFC | Komunikacja NFC, płatności zbliżeniowe |
+| 14 | Złącze 8-pin I/O | Komunikacja z akcesoriami, audio |
+| 15 | Mocowanie paska | Punkt montażowy dla paska na rękę |
+| 16 | Zatrzaski baterii | Naciśnij aby zwolnić baterię |
+| 17 | Bateria PowerPrecision | Wymienna bateria Li-Ion |
+| 18 | Przyciski głośności | Regulacja głośności (programowalne) |
+| 19 | Boczny przycisk skanowania | Alternatywny trigger skanera |
+| 20 | Lampa błyskowa | Doświetlenie kamery, latarka |
+| 21 | Kamera tylna | 13 MP (16 MP w niektórych wersjach) |
+| 22 | Tacka na karty | Slot na microSD |
+| 23 | Przycisk zasilania | Włączanie/wyłączanie, blokada ekranu |
+| 24 | Okno skanera | Wyjście promienia skanera |
+| 25 | Mikrofon | Tryb głośnomówiący |
+`
+      },
+      {
+        title: '4. Przyciski i nawigacja',
+        content: `
+### Przyciski fizyczne Zebra TC22
+
+| Przycisk | Krótkie naciśnięcie | Przytrzymanie |
+|----------|---------------------|---------------|
+| **Power** | Włącz/wyłącz ekran | Menu zasilania (wyłącz/restart) |
+| **Głośność +/-** | Regulacja głośności | Programowalna funkcja |
+| **Skanowanie** | Aktywacja skanera | Ciągłe skanowanie |
+| **PTT** | Push-to-Talk | Zależne od aplikacji |
+
+### Przyciski nawigacyjne (na ekranie)
+
+| Przycisk | Funkcja |
+|----------|---------|
+| ◀ **Wstecz** | Powrót do poprzedniego ekranu |
+| ● **Home** | Ekran główny |
+| ▣ **Ostatnie** | Lista ostatnio używanych aplikacji |
+
+### Gesty nawigacyjne Zebra TC22
+
+- **Przeciągnij w dół od góry** – Panel szybkich ustawień i powiadomienia
+- **Przeciągnij w górę od dołu** – Szuflada aplikacji
+- **Przeciągnij od lewej/prawej krawędzi** – Wstecz (w trybie gestów)
+
+### Ikony paska stanu
+
+| Ikona | Znaczenie |
+|-------|-----------|
+| 📶 | Siła sygnału Wi-Fi |
+| 🔋 | Poziom naładowania baterii |
+| ⚡ | Ładowanie w toku |
+| 🔵 | Bluetooth aktywny |
+| 📍 | Lokalizacja GPS aktywna |
+| ✈️ | Tryb samolotowy |
+| 🔇 | Tryb cichy |
+| 📳 | Tryb wibracji |
+| 🔔 | Powiadomienia aktywne |
+| 🔒 | Blokada ekranu |
+
+### Panel szybkich ustawień
+
+Przeciągnij w dół od górnej krawędzi ekranu Zebra TC22, aby uzyskać dostęp do:
+
+- Wi-Fi – włącz/wyłącz
+- Bluetooth – włącz/wyłącz
+- Latarka – włącz/wyłącz
+- Tryb samolotowy
+- Obracanie ekranu
+- Jasność ekranu (suwak)
+- Oszczędzanie baterii
+- Tryb nocny
+- NFC – włącz/wyłącz
+`
+      },
+      {
+        title: '5. Bateria i ładowanie',
+        content: `
+### Bateria PowerPrecision Zebra TC22
+
+Zebra TC22 wykorzystuje inteligentne baterie litowo-jonowe PowerPrecision z funkcją monitorowania stanu w czasie rzeczywistym:
+
+| Typ baterii | Pojemność | Nr części |
+|-------------|-----------|-----------|
+| **Standard** | **3800 mAh / 14,63 Wh** | **BTRY-TC2L-2XMAXX-01** |
+| Standard z BLE | 3800 mAh / 14,63 Wh | BTRY-TC2L-2XMAXB-01 |
+| Rozszerzona | 5200 mAh / 20,02 Wh | BTRY-TC2L-3XMAXX-01 |
+
+### Wskaźnik LED ładowania Zebra TC22
+
+| LED | Status |
+|-----|--------|
+| Bursztynowy (stały) | Ładowanie w toku |
+| Zielony (stały) | Naładowana w pełni |
+| Czerwony (stały) | Bateria zużyta – wymień |
+| Bursztynowy (miga 2x/s) | Błąd ładowania (temperatura, timeout) |
+| Czerwony (miga 2x/s) | Błąd + bateria zużyta |
+
+### Opcje ładowania Zebra TC22
+
+| Ładowarka | Opis | Nr części |
+|-----------|------|-----------|
+| Zasilacz USB 5V/12W | Ładowanie przez USB-C | PWR-WUA5V12W0xx |
+| 1-Slot Charge Only | Stacja dokująca pojedyncza | CRD-TC2L-BS1CO-01 |
+| 1-Slot USB Cradle | Stacja z Ethernet | CRD-TC2L-BS1CO-ETH |
+| 5-Slot Charge Only | Stacja 5-stanowiskowa | CRD-TC2L-5SCHG-01 |
+| 5-Slot Ethernet | Stacja 5-stanowiskowa z siecią | CRD-TC2L-5SETH-01 |
+| 4-Slot Battery Charger | Ładowarka 4 baterii | SAC-TC2L-4SCHG-01 |
+
+### Powiadomienia o niskim stanie baterii
+
+| Stan | Komunikat | Działanie |
+|------|-----------|-----------|
+| 18% | "Battery Low" | Podłącz ładowarkę |
+| 10% | "Battery Very Low" | Natychmiast podłącz |
+| < 5% | "Battery Critically Low" | Urządzenie wyłączy się |
+
+### Bezpieczeństwo baterii Zebra TC22
+
+- Używaj wyłącznie oryginalnych baterii Zebra PowerPrecision
+- Nie narażaj baterii na temperatury powyżej 70°C
+- Nie rozbieraj, nie zgniataj ani nie przebijaj baterii
+- Ładuj tylko w temperaturze +5°C do +40°C
+- Przechowuj w suchym miejscu, z dala od źródeł ciepła
+`
+      },
+      {
+        title: '6. Skanowanie kodów kreskowych',
+        content: `
+### Dostępne skanery Zebra TC22
+
+| Model | Typ | Zasięg | Zastosowanie |
+|-------|-----|--------|--------------|
+| **SE4710** | Standard | 5-66 cm | Skanowanie w zasięgu ręki |
+| **SE55** | Advanced Range | 6-744 cm | Skanowanie z dystansu (do 7 m) |
+
+### Obsługiwane kody przez Zebra TC22
+
+**Kody 1D:**
+- Code 39, Code 128, Code 93
+- UPC-A/E, EAN-8/EAN-13
+- Interleaved 2 of 5, Codabar
+- GS1 DataBar (RSS)
+
+**Kody 2D:**
+- QR Code, Data Matrix
+- PDF417, MicroPDF417
+- Aztec, MaxiCode
+- GS1 QR Code
+
+### Zasięg skanowania (SE4710)
+
+| Kod | Blisko | Daleko |
+|-----|--------|--------|
+| 5 mil Code 39 | 6,1 cm | 24,1 cm |
+| 100% UPC-A | 5,1 cm | 26,2 cm |
+| 15 mil QR Code | 4,6 cm | 30,5 cm |
+| 20 mil Code 39 | 5,1 cm | 66,0 cm |
+
+### Zasięg skanowania (SE55 Advanced Range)
+
+| Kod | Blisko | Daleko |
+|-----|--------|--------|
+| 5 mil Code 39 | 6,4 cm | 67,6 cm |
+| 100% UPC | 6,4 cm | 180,3 cm |
+| 20 mil Code 39 | – | 276,9 cm |
+| 100 mil Code 39 | – | 554,0 cm |
+
+### Technika skanowania Zebra TC22
+
+1. Uruchom aplikację do skanowania (np. DataWedge Demo)
+2. Skieruj skaner na kod kreskowy
+3. Naciśnij przycisk skanowania
+4. Utrzymuj stabilnie do momentu odczytu
+5. LED świeci zielono + sygnał dźwiękowy = sukces
+6. LED świeci czerwono = błąd odczytu
+
+### Wskazówki dla optymalnego skanowania
+
+- Trzymaj urządzenie Zebra TC22 pod kątem 15-30° do kodu (unikaj odbić)
+- Dla małych kodów – zbliż urządzenie
+- Dla dużych kodów – oddal urządzenie
+- Upewnij się, że kod jest nieuszkodzony i czytelny
+- W słabym oświetleniu skaner automatycznie doświetla
+`
+      },
+      {
+        title: '7. Łączność bezprzewodowa',
+        content: `
+### Wi-Fi 6E Zebra TC22
+
+Zebra TC22 obsługuje najnowszy standard Wi-Fi 6E (802.11ax) zapewniający:
+
+- Prędkości zbliżone do sieci przewodowej
+- Niskie opóźnienia dla aplikacji głosowych
+- Lepszą wydajność w zatłoczonych sieciach
+- Pasmo 6 GHz (wymaga licencji Mobility DNA Enterprise)
+
+**Łączenie z siecią Wi-Fi:**
+
+1. Ustawienia → Sieć i internet → Wi-Fi
+2. Włącz Wi-Fi
+3. Wybierz sieć z listy
+4. Wprowadź hasło (jeśli wymagane)
+5. Dotknij "Połącz"
+
+### Bluetooth 5.2 Zebra TC22
+
+- Lepsza jakość audio przy niższym zużyciu energii
+- Obsługa słuchawek, skanerów pierścieniowych, drukarek
+- Parowanie przez NFC (Print Touch)
+
+**Parowanie urządzenia Bluetooth:**
+
+1. Ustawienia → Połączone urządzenia → Sparuj nowe urządzenie
+2. Włącz tryb parowania na akcesoriach
+3. Wybierz urządzenie z listy
+4. Potwierdź kod PIN (jeśli wymagany)
+
+### NFC Zebra TC22
+
+Zebra TC22 wyposażony jest w NFC z obsługą:
+
+- **Apple VAS** – bilety, karty lojalnościowe z Apple Wallet
+- **Google SmartTap** – bilety, karty z Google Wallet
+- **Płatności zbliżeniowe** – integracja z systemami POS
+- **Parowanie Print Touch** – szybkie łączenie z drukarkami Zebra
+
+**Odczyt karty NFC:**
+
+1. Włącz NFC w ustawieniach
+2. Zbliż kartę/telefon do tylnej części urządzenia (obszar anteny NFC)
+3. Przytrzymaj przez 1-2 sekundy
+4. Dane zostaną automatycznie odczytane
+`
+      },
+      {
+        title: '8. Kamery',
+        content: `
+### Specyfikacja kamer Zebra TC22
+
+| Kamera | Rozdzielczość | Funkcje |
+|--------|---------------|---------|
+| **Tylna** | 13 MP (16 MP*) | Autofokus, lampa błyskowa, skanowanie |
+| **Przednia** | 8 MP (5 MP*) | Wideorozmowy, selfie |
+
+*Zależnie od konfiguracji
+
+### Fotografowanie
+
+1. Otwórz aplikację Aparat
+2. Wyceluj obiektyw w obiekt
+3. Dotknij ekranu aby ustawić ostrość (opcjonalnie)
+4. Naciśnij przycisk migawki lub klawisz głośności
+
+### Nagrywanie wideo
+
+1. Przełącz na tryb wideo w aplikacji Aparat
+2. Naciśnij przycisk nagrywania
+3. Naciśnij ponownie aby zatrzymać
+4. Wideo zapisze się automatycznie w Galerii
+
+### Skanowanie kamerą Zebra TC22
+
+Kamera tylna może być używana jako alternatywny skaner kodów (przez DataWedge):
+
+- Wolniejsze niż dedykowany skaner
+- Przydatne jako backup
+- Obsługuje większość kodów 1D i 2D
+`
+      },
+      {
+        title: '9. Aplikacje systemowe Zebra',
+        content: `
+### Preinstalowane aplikacje Zebra TC22
+
+| Aplikacja | Funkcja |
+|-----------|---------|
+| **DataWedge** | Konfiguracja skanera, profile skanowania |
+| **Battery Manager** | Szczegółowe informacje o baterii |
+| **RxLogger** | Logowanie diagnostyczne |
+| **StageNow** | Masowa konfiguracja urządzeń |
+| **WorryFree WiFi** | Zarządzanie sieciami Wi-Fi |
+| **Device Central** | Centralny panel informacji |
+| **Enterprise Keyboard** | Klawiatura biznesowa (wymaga licencji) |
+
+### DataWedge Zebra TC22
+
+DataWedge to główne narzędzie do konfiguracji skanera:
+
+- Tworzenie profili skanowania dla różnych aplikacji
+- Wybór aktywnych symboli (kodów kreskowych)
+- Konfiguracja formatowania danych
+- Ustawienia dźwięków i wibracji
+- Integracja z aplikacjami przez Intent
+
+**Tworzenie profilu:**
+
+1. Otwórz DataWedge
+2. Menu → Nowy profil
+3. Nazwij profil
+4. Powiąż z aplikacją
+5. Skonfiguruj symbole i opcje wyjścia
+
+### Battery Manager Zebra TC22
+
+Szczegółowe informacje o baterii PowerPrecision:
+
+- Aktualny poziom naładowania
+- Stan zdrowia baterii
+- Liczba cykli ładowania
+- Temperatura baterii
+- Prognozowany czas pracy
+`
+      },
+      {
+        title: '10. Ustawienia systemowe',
+        content: `
+### Wyświetlacz Zebra TC22
+
+| Ustawienie | Opis |
+|------------|------|
+| Jasność | Ręczna lub automatyczna (czujnik światła) |
+| Adaptacyjna jasność | Automatyczne dostosowanie do otoczenia |
+| Tryb nocny | Redukcja niebieskiego światła |
+| Rozmiar czcionki | Mały / Domyślny / Duży / Największy |
+| Wygaszenie ekranu | 15s / 30s / 1min / 2min / 5min / 10min |
+| Tryb dotyku | Palec / Rękawiczka / Mokry palec |
+
+### Dźwięk Zebra TC22
+
+| Ustawienie | Opis |
+|------------|------|
+| Głośność multimediów | Muzyka, wideo, gry |
+| Głośność połączeń | Rozmowy telefoniczne |
+| Głośność dzwonka | Powiadomienia, alarmy |
+| Głośność powiadomień | Wiadomości, e-mail |
+| Wibracje | Włącz/wyłącz dla różnych zdarzeń |
+
+### Bezpieczeństwo Zebra TC22
+
+- Blokada ekranu (PIN / Wzór / Hasło)
+- Szyfrowanie urządzenia
+- Zarządzanie certyfikatami
+- Uprawnienia aplikacji
+- Resetowanie do ustawień fabrycznych
+`
+      },
+      {
+        title: '11. Konserwacja',
+        content: `
+### Harmonogram czyszczenia Zebra TC22
+
+| Element | Częstotliwość |
+|---------|---------------|
+| Ekran dotykowy | Codziennie |
+| Okno skanera | Codziennie |
+| Styki ładowania | Co tydzień |
+| Obudowa | W razie potrzeby |
+| Styki baterii | Przy wymianie baterii |
+
+### Czyszczenie ekranu i obudowy
+
+1. Wyłącz urządzenie Zebra TC22 lub zablokuj ekran
+2. Użyj miękkiej, bezpyłowej ściereczki
+3. Zwilż alkoholem izopropylowym (70%)
+4. Delikatnie przetrzyj powierzchnię
+5. Osusz przed użyciem
+
+### Czyszczenie okna skanera
+
+1. Użyj suchej, miękkiej ściereczki
+2. Przy uporczywych zabrudzeniach – alkohol izopropylowy
+3. Nie używaj materiałów ściernych
+4. Regularnie sprawdzaj czy okno nie jest zarysowane
+
+### Czyszczenie styków
+
+1. Użyj wacika z alkoholem izopropylowym
+2. Delikatnie przetrzyj styki ładowania
+3. Odczekaj do wyschnięcia
+4. Sprawdź czy styki nie są uszkodzone
+
+### Dozwolone środki czyszczące
+
+- Alkohol izopropylowy (70%)
+- Chusteczki dezynfekujące (bez wybielacza)
+- Roztwór mydła (łagodny)
+
+### Zabronione środki
+
+- Wybielacze, amoniak
+- Rozpuszczalniki, aceton
+- Materiały ścierne
+- Sprężone powietrze (bezpośrednio na styki)
+`
+      },
+      {
+        title: '12. Rozwiązywanie problemów',
+        content: `
+### Problemy z uruchomieniem Zebra TC22
+
+| Problem | Rozwiązanie |
+|---------|-------------|
+| Urządzenie nie włącza się | Naładuj baterię przez 15 minut, sprawdź poprawność instalacji baterii |
+| Urządzenie zawiesza się | Przytrzymaj Power przez 10 sekund (twardy reset) |
+| Pętla restartu | Wykonaj Enterprise Reset |
+
+### Problemy z baterią Zebra TC22
+
+| Problem | Rozwiązanie |
+|---------|-------------|
+| Szybkie rozładowanie | Zamknij nieużywane aplikacje, zmniejsz jasność, wyłącz zbędne radio |
+| Nie ładuje się | Sprawdź styki, użyj innej ładowarki, sprawdź temperaturę |
+| LED miga na czerwono | Błąd ładowania – temperatura poza zakresem lub uszkodzona bateria |
+
+### Problemy ze skanowaniem Zebra TC22
+
+| Problem | Rozwiązanie |
+|---------|-------------|
+| Skaner nie działa | Sprawdź czy DataWedge jest włączony, zrestartuj urządzenie |
+| Nie odczytuje kodu | Oczyść okno skanera, zmień kąt/odległość, sprawdź stan kodu |
+| Wolne skanowanie | Sprawdź aktywne symbole w DataWedge (wyłącz niepotrzebne) |
+
+### Problemy z Wi-Fi Zebra TC22
+
+| Problem | Rozwiązanie |
+|---------|-------------|
+| Brak połączenia | Sprawdź hasło, odległość od AP, zrestartuj Wi-Fi |
+| Słaby sygnał | Zbliż się do punktu dostępu |
+| Częste rozłączenia | Wyłącz oszczędzanie baterii dla Wi-Fi, sprawdź zakłócenia |
+
+### Problemy z ekranem Zebra TC22
+
+| Problem | Rozwiązanie |
+|---------|-------------|
+| Brak reakcji na dotyk | Wyczyść ekran, zdejmij osłonę, zmień tryb dotyku |
+| Ekran ciemny | Zwiększ jasność, wyłącz automatyczną jasność |
+| Ekran się nie obraca | Włącz automatyczne obracanie w ustawieniach |
+
+### Resetowanie urządzenia Zebra TC22
+
+**Miękki reset (restart):**
+1. Przytrzymaj przycisk Power
+2. Wybierz "Uruchom ponownie"
+
+**Twardy reset:**
+1. Przytrzymaj Power przez 10 sekund
+2. Urządzenie wyłączy się i włączy ponownie
+
+**Enterprise Reset (zachowuje dane firmowe):**
+1. Ustawienia → System → Opcje resetowania
+2. Wybierz "Enterprise Reset"
+3. Potwierdź operację
+
+**Factory Reset (usuwa wszystkie dane):**
+1. Ustawienia → System → Opcje resetowania
+2. Wybierz "Przywrócenie danych fabrycznych"
+3. Potwierdź operację
+
+> **Ostrzeżenie:** Factory Reset usuwa wszystkie dane użytkownika!
+`
+      },
+      {
+        title: '13. Akcesoria Zebra TC22',
+        content: `
+### Futerały i obudowy ochronne Zebra TC22
+
+| Akcesorium | Nr części |
+|------------|-----------|
+| Obudowa ochronna (Rugged Boot) | SG-TC2L-BOOT-01 |
+| Kabura | SG-TC2L-HLSTR1-01 |
+
+### Paski i uchwyty Zebra TC22
+
+| Akcesorium | Nr części |
+|------------|-----------|
+| Pasek na rękę (Hand Strap) | SG-TC2L-HSTRP-01 |
+| Uchwyt spustowy (Trigger Handle) | TRG-TC2L-SNP1-01 |
+
+### Stacje dokujące Zebra TC22
+
+| Akcesorium | Nr części |
+|------------|-----------|
+| 1-Slot Charge Only | CRD-TC2L-BS1CO-01 |
+| 1-Slot USB Cradle | CRD-TC2L-BS1USB-01 |
+| 1-Slot z baterią | CRD-TC2L-BS1BT-01 |
+| 5-Slot Charge Only | CRD-TC2L-5SCHG-01 |
+| 5-Slot Ethernet | CRD-TC2L-5SETH-01 |
+| Workstation Connect | – |
+
+### Zasilacze i ładowarki Zebra TC22
+
+| Akcesorium | Nr części |
+|------------|-----------|
+| Zasilacz USB 5V/12W | PWR-WUA5V12W0US |
+| Kabel USB-C | CBL-TC5X-USBC2A-01 |
+| 4-Slot Battery Charger | SAC-TC2L-4SCHG-01 |
+
+### Skanery pierścieniowe Zebra (Bluetooth)
+
+| Akcesorium | Opis |
+|------------|------|
+| RS5100 | Skaner pierścieniowy single-finger |
+| RS6000/RS6100 | Skaner pierścieniowy 2-finger |
+| DS3678 | Skaner ręczny Bluetooth |
+`
+      },
+      {
+        title: '14. Specyfikacje techniczne',
+        content: `
+### Wymiary i waga Zebra TC22
+
+| Parametr | Wartość |
+|----------|---------|
+| Wysokość | 158 mm |
+| Szerokość | 76 mm |
+| Grubość | 12,5 mm |
+| Waga (bateria standard) | 236 g |
+| Waga (bateria rozszerzona) | 262 g |
+
+### Wyświetlacz Zebra TC22
+
+| Parametr | Wartość |
+|----------|---------|
+| Przekątna | 6,0" |
+| Rozdzielczość | 1080 x 2160 (FHD+) |
+| Typ | IPS LCD |
+| Jasność | 450 nitów |
+| Ochrona | Corning Gorilla Glass |
+| Dotyk | Pojemnościowy, obsługa rękawiczek |
+
+### Wydajność Zebra TC22
+
+| Parametr | Wartość |
+|----------|---------|
+| Procesor | Qualcomm 5430, 2,1 GHz, 6-rdzeniowy |
+| RAM | 6 GB / 8 GB |
+| Flash | 64 GB / 128 GB |
+| microSD | Do 2 TB (opcja) |
+
+### Łączność Zebra TC22
+
+| Parametr | Wartość |
+|----------|---------|
+| Wi-Fi | 802.11 a/b/g/n/ac/ax (Wi-Fi 6E) |
+| Bluetooth | 5.2 + BLE |
+| NFC | Tak (z Apple VAS, Google SmartTap) |
+| USB | USB-C 3.1 Gen 1 |
+
+### Wytrzymałość Zebra TC22
+
+| Parametr | Wartość |
+|----------|---------|
+| Stopień ochrony IP | IP65/IP68 |
+| Upadek | 1,3 m na beton (MIL-STD-810H) |
+| Temperatura pracy | -10°C do +50°C |
+| Temperatura ładowania | +5°C do +40°C |
+| Temperatura przechowywania | -40°C do +70°C |
+| Wilgotność | 5-95% bez kondensacji |
+
+### Certyfikaty Zebra TC22
+
+- MIL-STD-810H
+- IP65/IP68
+- CE, FCC, IC
+- RoHS
+`
+      },
+      {
+        title: 'FAQ – Najczęściej zadawane pytania',
+        content: `
+### Czym jest Zebra TC22?
+
+**Odpowiedź:** Zebra TC22 to nowoczesny **komputer mobilny z 6-calowym ekranem dotykowym Full HD+**, wyposażony w procesor Qualcomm 5430, zaawansowany skaner kodów kreskowych, Wi-Fi 6E, Bluetooth 5.2 i NFC. Jest przeznaczony dla handlu detalicznego, logistyki i magazynów.
+
+### Jaka jest różnica między Zebra TC22 a Zebra TC27?
+
+**Odpowiedź:** Zebra TC22 to wersja **tylko Wi-Fi**, natomiast Zebra TC27 ma dodatkowo **moduł 5G/LTE/CBRS**, slot na kartę SIM i eSIM. Zebra TC22 jest przeznaczony do pracy w zasięgu sieci Wi-Fi, a Zebra TC27 do pracy mobilnej w terenie.
+
+### Jaka jest różnica między Zebra TC22 a Zebra TC21?
+
+**Odpowiedź:** Zebra TC22 jest następcą Zebra TC21 z **większym ekranem 6" FHD+** (vs 5" HD), **nowszym procesorem Qualcomm 5430** (vs Snapdragon 660), **Wi-Fi 6E** (vs Wi-Fi 5), **Android 14** (vs Android 10) i **cieńszą konstrukcją** (12,5 mm vs 13,7 mm).
+
+### Jaki system operacyjny ma Zebra TC22?
+
+**Odpowiedź:** Zebra TC22 pracuje pod kontrolą **Android 14** z gwarancją aktualizacji do **Android 16**. Zebra zapewnia długoterminowe wsparcie bezpieczeństwa dla urządzeń enterprise.
+
+### Jakie skanery są dostępne w Zebra TC22?
+
+**Odpowiedź:** Zebra TC22 jest dostępny z dwoma opcjami skanera: **SE4710** (standard, zasięg do 66 cm) lub **SE55 Advanced Range** (zasięg do 7,4 m). Oba obsługują kody 1D i 2D.
+
+### Jaka jest pojemność baterii Zebra TC22?
+
+**Odpowiedź:** Zebra TC22 ma baterię standardową **3800 mAh** lub rozszerzoną **5200 mAh**. Bateria PowerPrecision jest wymienna na ciepło (Warm Swap) bez wyłączania urządzenia.
+
+### Jaką klasę szczelności ma Zebra TC22?
+
+**Odpowiedź:** Zebra TC22 ma certyfikat **IP65/IP68** (pełna pyłoszczelność i wodoszczelność) oraz spełnia normę **MIL-STD-810H** z odpornością na upadki z **1,3 m** na beton.
+
+### Czy Zebra TC22 obsługuje NFC?
+
+**Odpowiedź:** Tak, Zebra TC22 ma moduł NFC z obsługą **Apple VAS**, **Google SmartTap**, płatności zbliżeniowych i **Zebra Print Touch** do szybkiego parowania z drukarkami.
+
+### Jakie akcesoria są kompatybilne z Zebra TC22?
+
+**Odpowiedź:** Zebra TC22 jest kompatybilny z szeroką gamą akcesoriów: stacje dokujące (1-slot, 5-slot), ładowarki baterii, uchwyty spustowe, obudowy ochronne, paski na rękę oraz skanery pierścieniowe Bluetooth (RS5100, RS6100).
+
+### Jak wykonać twardy reset Zebra TC22?
+
+**Odpowiedź:** Przytrzymaj **przycisk Power przez 10 sekund**. Urządzenie automatycznie się wyłączy i włączy ponownie. Dla pełnego resetu wybierz Enterprise Reset lub Factory Reset w ustawieniach.
+
+### Czy Zebra TC22 obsługuje karty microSD?
+
+**Odpowiedź:** Tak, Zebra TC22 obsługuje karty **microSD do 2 TB**, co pozwala na rozszerzenie pamięci dla aplikacji, mediów i danych.
+
+### Jak skonfigurować skaner w Zebra TC22?
+
+**Odpowiedź:** Użyj aplikacji **DataWedge** preinstalowanej na urządzeniu. Utwórz profil, powiąż go z aplikacją, wybierz aktywne symbole (kody kreskowe) i skonfiguruj opcje wyjścia danych (Intent, Keyboard output).
+`
+      }
+    ]
+  },
+
+  'tc27': {
+    model: 'TC27',
+    title: 'Zebra TC27 – Instrukcja obsługi po Polsku',
+    lastUpdated: '2026-01-15',
+    sourceDocument: 'Zebra TC27 User Guide',
+    keywords: [
+      'zebra tc27 instrukcja', 'zebra tc27 instrukcja po polsku', 'zebra tc27 manual',
+      'terminal mobilny zebra tc27', 'zebra tc27 skanowanie', 'zebra tc27 reset', 'zebra tc27 bateria',
+      'zebra tc27 wifi', 'zebra tc27 wifi 6e', 'zebra tc27 bluetooth', 'zebra tc27 nfc', 'zebra tc27 android',
+      'zebra tc27 5g', 'zebra tc27 lte', 'zebra tc27 sim', 'zebra tc27 esim', 'zebra tc27 dual sim',
+      'zebra tc27 gps', 'zebra tc27 volte', 'zebra tc27 kamera', 'zebra tc27 specyfikacja',
+      'zebra tc27 akcesoria', 'zebra tc27 stacja dokująca', 'zebra tc27 ładowanie',
+      'zebra tc27 ip65', 'zebra tc27 ip68', 'zebra tc27 enterprise', 'komputer dotykowy zebra tc27',
+      'zebra tc27 skanowanie kodów', 'zebra tc27 qualcomm 5430', 'zebra tc27 6 cali', 'zebra tc27 fhd+',
+      'zebra tc27 gorilla glass', 'zebra tc27 se4710', 'zebra tc27 se55', 'zebra tc27 mobility dna',
+      'zebra tc27 datawedge', 'zebra tc27 powerprecision', 'zebra tc27 hotspot', 'zebra tc27 cbrs'
+    ],
+    sections: [
+      {
+        title: '1. Podstawowe informacje',
+        content: `
+### O urządzeniu Zebra TC27
+
+Zebra TC27 to zaawansowany komputer mobilny z **6-calowym ekranem dotykowym Full HD+** oraz **łącznością komórkową 5G/LTE**, zaprojektowany do pracy w terenie. Urządzenie łączy elegancję smartfona z funkcjonalnością przemysłową – wyposażone jest w procesor Qualcomm 5430 (2,1 GHz), zaawansowany skaner kodów kreskowych, podwójne kamery, Wi-Fi 6E oraz Bluetooth 5.2. Konstrukcja spełnia normy IP65/IP68 oraz MIL-STD-810H.
+
+Zebra TC27 jest idealnym narzędziem dla kurierów, techników serwisowych, przedstawicieli handlowych oraz pracowników terenowych. Model TC27 to wersja z łącznością komórkową – dla pracy w zasięgu Wi-Fi dostępny jest model Zebra TC22.
+
+### Parametry techniczne Zebra TC27
+
+| Parametr | Zebra TC27 |
+|----------|------------|
+| **Wyświetlacz** | 6,0" FHD+ (1080 x 2160) |
+| Jasność | 450 nitów |
+| Ochrona ekranu | Corning Gorilla Glass |
+| Procesor | Qualcomm 5430 2,1 GHz (6-rdzeniowy) |
+| System operacyjny | Android 14 (aktualizacje do Android 16) |
+| Pamięć RAM | 6 GB / 8 GB |
+| Pamięć Flash | 64 GB / 128 GB |
+| Karta microSD | Do 2 TB (opcja) |
+| **Łączność** | **5G, LTE, Wi-Fi 6E, Bluetooth 5.2, NFC** |
+| Karty SIM | Nano SIM + eSIM (Dual SIM) |
+
+### Porównanie Zebra TC27 vs Zebra TC22
+
+| Parametr | Zebra TC27 | Zebra TC22 |
+|----------|------------|------------|
+| **Łączność komórkowa** | **5G / LTE / CBRS** | **Brak** |
+| Wi-Fi | 6E (802.11ax) | 6E (802.11ax) |
+| Karta SIM | Nano SIM + eSIM | Nie dotyczy |
+| GPS | Tak (A-GPS, GLONASS) | Nie* |
+| Zastosowanie | Praca mobilna w terenie | Praca w zasięgu Wi-Fi |
+| Połączenia głosowe | VoLTE (5G) + VoIP | Tylko VoIP |
+
+*Zebra TC22 może korzystać z GPS przez akcesoria
+
+### Zastosowania Zebra TC27
+
+- **Kurierzy i dostawcy:** potwierdzenia dostawy, płatności w terenie, nawigacja GPS
+- **Serwis terenowy:** dokumentacja prac, połączenia wideo z ekspertami, płatności
+- **Przedstawiciele handlowi:** mobilny POS, prezentacje produktów, zamówienia
+- **Utilities:** odczyty liczników, zarządzanie zleceniami, nawigacja
+- **Transport:** dokumenty przewozowe, tracking, komunikacja z centralą
+- **Publiczna ochrona:** weryfikacja tożsamości, dostęp do baz danych
+
+### Cechy charakterystyczne Zebra TC27
+
+- **Łączność 5G/LTE** – prędkości komórkowe nowej generacji
+- **Dual SIM (nano SIM + eSIM)** – elastyczność operatorów
+- **GPS/GLONASS** – precyzyjna nawigacja w terenie
+- **Wyświetlacz 6" FHD+** – 32% większy niż poprzednik Zebra TC26
+- **Konstrukcja 12,5 mm** – 10% cieńsza od poprzednika
+- **Certyfikat IP65/IP68** – pełna odporność na kurz i wodę
+- **Upadek z 1,3 m** – zgodność z MIL-STD-810H
+- **Bateria wymienna na ciepło** – ciągłość pracy bez wyłączania
+- **NFC z Apple VAS i Google SmartTap** – płatności i bilety zbliżeniowe
+- **VoLTE** – krystalicznie czyste połączenia głosowe przez 5G
+`
+      },
+      {
+        title: '2. Rozpakowanie i instalacja',
+        content: `
+### Zawartość opakowania Zebra TC27
+
+- Komputer mobilny Zebra TC27
+- Bateria PowerPrecision Li-Ion 3800 mAh
+- Skrócona instrukcja obsługi
+- Przewodnik bezpieczeństwa
+- Karta rejestracyjna produktu
+
+> **Uwaga:** Zasilacz, kable, karty SIM i stacje dokujące są sprzedawane oddzielnie.
+
+### Instalacja karty SIM
+
+Zebra TC27 wymaga karty nano SIM do połączeń komórkowych i transmisji danych:
+
+1. Wyjmij tackę na karty z boku urządzenia
+2. Umieść kartę nano SIM w odpowiednim slocie (kontaktami do dołu)
+3. Opcjonalnie: umieść kartę microSD w drugim slocie
+4. Wsuń tackę z powrotem do urządzenia
+5. Upewnij się, że tacka jest prawidłowo osadzona
+
+> **Uwaga:** Zachowaj środki ostrożności ESD podczas instalacji kart.
+
+### Aktywacja eSIM w Zebra TC27
+
+Zebra TC27 obsługuje również eSIM jako drugą kartę SIM:
+
+1. Połącz urządzenie z internetem (Wi-Fi lub SIM)
+2. Przejdź do: Ustawienia → Sieć i internet → Sieci komórkowe
+3. Dotknij "+" przy sekcji SIM
+4. Wprowadź kod aktywacyjny lub zeskanuj QR od operatora
+5. Dotknij "DALEJ" i poczekaj na pobranie profilu
+6. Dotknij "AKTYWUJ"
+7. eSIM jest gotowa do użycia
+
+### Instalacja baterii Zebra TC27
+
+1. Umieść baterię w komorze, wyrównując styki
+2. Dociśnij baterię do dołu, aż zatrzaski zablokują się na miejscu
+3. Zatrzaski po bokach powinny zaskoczyć automatycznie
+
+### Wyjmowanie baterii
+
+1. Naciśnij jednocześnie oba zatrzaski zwalniające z tyłu urządzenia
+2. Unieś baterię i wyjmij z komory
+
+> **Funkcja Warm Swap:** Zebra TC27 pozwala na wymianę baterii bez wyłączania urządzenia – bateria zapasowa podtrzymuje pracę przez krótki czas.
+
+### Warunki pracy Zebra TC27
+
+| Tryb | Temperatura | Wilgotność |
+|------|-------------|------------|
+| Praca | -10°C do +50°C | 5-95% bez kondensacji |
+| Ładowanie | +5°C do +40°C | – |
+| Przechowywanie | -40°C do +70°C | 5-95% bez kondensacji |
+`
+      },
+      {
+        title: '3. Elementy urządzenia',
+        content: `
+### Widok z przodu Zebra TC27
+
+| Nr | Element | Opis |
+|----|---------|------|
+| 1 | Kamera przednia | 8 MP (5 MP w niektórych wersjach) – wideorozmowy |
+| 2 | LED ładowania/powiadomień | Status baterii i powiadomienia aplikacji |
+| 3 | Głośnik/Słuchawka | Audio w trybie słuchawki i głośnomówiącym |
+| 4 | LED skanowania | Status operacji skanowania |
+| 5 | Czujnik światła/zbliżenia | Automatyczna regulacja jasności, wyłączanie ekranu przy rozmowie |
+| 6 | Ekran dotykowy | 6" FHD+ z obsługą rękawiczek |
+| 7 | Głośnik | Odtwarzanie multimediów i tryb głośnomówiący |
+| 8 | Styki ładowania | Ładowanie przez stacje dokujące |
+| 9 | Złącze USB-C | Ładowanie, transfer danych, akcesoria |
+| 10 | Mikrofon | Komunikacja w trybie słuchawki |
+| 11 | Przycisk skanowania | Uruchamia skanowanie (programowalny) |
+| 12 | Przycisk programowalny | PTT (Push-to-Talk) lub inna funkcja |
+
+### Widok z tyłu Zebra TC27
+
+| Nr | Element | Opis |
+|----|---------|------|
+| 13 | Antena NFC | Komunikacja NFC, płatności zbliżeniowe |
+| 14 | Złącze 8-pin I/O | Komunikacja z akcesoriami, audio |
+| 15 | Mocowanie paska | Punkt montażowy dla paska na rękę |
+| 16 | Zatrzaski baterii | Naciśnij aby zwolnić baterię |
+| 17 | Bateria PowerPrecision | Wymienna bateria Li-Ion |
+| 18 | Przyciski głośności | Regulacja głośności (programowalne) |
+| 19 | Boczny przycisk skanowania | Alternatywny trigger skanera |
+| 20 | Lampa błyskowa | Doświetlenie kamery, latarka |
+| 21 | Kamera tylna | 13 MP (16 MP w niektórych wersjach) |
+| 22 | Tacka na karty | Slot na nano SIM + microSD |
+| 23 | Przycisk zasilania | Włączanie/wyłączanie, blokada ekranu |
+| 24 | Okno skanera | Wyjście promienia skanera |
+| 25 | Mikrofon | Tryb głośnomówiący |
+`
+      },
+      {
+        title: '4. Przyciski i nawigacja',
+        content: `
+### Przyciski fizyczne Zebra TC27
+
+| Przycisk | Krótkie naciśnięcie | Przytrzymanie |
+|----------|---------------------|---------------|
+| **Power** | Włącz/wyłącz ekran | Menu zasilania (wyłącz/restart) |
+| **Głośność +/-** | Regulacja głośności | Programowalna funkcja |
+| **Skanowanie** | Aktywacja skanera | Ciągłe skanowanie |
+| **PTT** | Push-to-Talk | Zależne od aplikacji |
+
+### Przyciski nawigacyjne (na ekranie)
+
+| Przycisk | Funkcja |
+|----------|---------|
+| ◀ **Wstecz** | Powrót do poprzedniego ekranu |
+| ● **Home** | Ekran główny |
+| ▣ **Ostatnie** | Lista ostatnio używanych aplikacji |
+
+### Gesty nawigacyjne Zebra TC27
+
+- **Przeciągnij w dół od góry** – Panel szybkich ustawień i powiadomienia
+- **Przeciągnij w górę od dołu** – Szuflada aplikacji
+- **Przeciągnij od lewej/prawej krawędzi** – Wstecz (w trybie gestów)
+
+### Ikony paska stanu Zebra TC27
+
+| Ikona | Znaczenie |
+|-------|-----------|
+| 📶 | Siła sygnału sieci komórkowej |
+| 5G/LTE/4G | Typ połączenia komórkowego |
+| 📶 (Wi-Fi) | Siła sygnału Wi-Fi |
+| 🔋 | Poziom naładowania baterii |
+| ⚡ | Ładowanie w toku |
+| 🔵 | Bluetooth aktywny |
+| 📍 | Lokalizacja GPS aktywna |
+| ✈️ | Tryb samolotowy |
+| 🔇 | Tryb cichy |
+| 📳 | Tryb wibracji |
+| R | Roaming aktywny |
+| 📞 | Połączenie w toku |
+| ✉️ | Nowa wiadomość SMS |
+
+### Panel szybkich ustawień
+
+Przeciągnij w dół od górnej krawędzi ekranu Zebra TC27, aby uzyskać dostęp do:
+
+- Wi-Fi – włącz/wyłącz
+- Dane komórkowe – włącz/wyłącz
+- Bluetooth – włącz/wyłącz
+- Tryb samolotowy
+- Latarka – włącz/wyłącz
+- Lokalizacja (GPS)
+- Hotspot mobilny
+- Obracanie ekranu
+- Jasność ekranu (suwak)
+- Oszczędzanie baterii
+- NFC – włącz/wyłącz
+`
+      },
+      {
+        title: '5. Łączność komórkowa (WWAN)',
+        content: `
+### Obsługiwane pasma 5G/LTE Zebra TC27
+
+Zebra TC27 obsługuje szeroki zakres pasm dla globalnej łączności:
+
+**5G NR:**
+- n1, n2, n3, n5, n7, n8, n12, n20, n25, n28, n38, n40, n41, n48, n66, n71, n77, n78
+
+**LTE:**
+- B1, B2, B3, B4, B5, B7, B8, B12, B13, B14, B17, B18, B19, B20, B25, B26, B28, B29, B30, B38, B39, B40, B41, B42, B43, B46, B48, B66, B71
+
+**CBRS (tylko USA):**
+- B48
+
+### Konfiguracja sieci komórkowej Zebra TC27
+
+1. Upewnij się, że karta SIM jest zainstalowana
+2. Przejdź do: Ustawienia → Sieć i internet → Sieci komórkowe
+3. Włącz "Dane komórkowe"
+4. Skonfiguruj APN (jeśli wymagane przez operatora):
+   - Dotknij "Nazwy punktów dostępu (APN)"
+   - Dodaj nowy APN z danymi od operatora
+5. Wybierz preferowany tryb sieci (5G/LTE/3G)
+
+### Zarządzanie kartami SIM (Dual SIM)
+
+Zebra TC27 obsługuje dwie karty SIM jednocześnie (nano SIM + eSIM):
+
+1. Przejdź do: Ustawienia → Sieć i internet → Karty SIM
+2. Skonfiguruj preferencje:
+   - Domyślna karta do połączeń
+   - Domyślna karta do SMS
+   - Domyślna karta do danych
+
+### Udostępnianie internetu (Hotspot) Zebra TC27
+
+1. Przejdź do: Ustawienia → Sieć i internet → Hotspot i tethering
+2. Włącz "Hotspot Wi-Fi"
+3. Skonfiguruj nazwę sieci i hasło
+4. Inne urządzenia mogą się połączyć
+
+### Monitorowanie zużycia danych
+
+1. Przejdź do: Ustawienia → Sieć i internet → Użycie danych
+2. Zobacz zużycie dla danych komórkowych i Wi-Fi
+3. Ustaw limit danych (opcjonalnie)
+4. Sprawdź zużycie przez poszczególne aplikacje
+`
+      },
+      {
+        title: '6. Połączenia głosowe',
+        content: `
+### Tryby audio Zebra TC27
+
+| Tryb | Opis |
+|------|------|
+| **Słuchawka** | Głośnik przy uchu, mikrofon przy ustach |
+| **Głośnomówiący** | Głośnik główny, mikrofon tylny |
+| **Bluetooth** | Słuchawka Bluetooth, zestaw HF |
+| **Zestaw przewodowy** | Słuchawki przez USB-C lub jack 3,5mm (adapter) |
+
+### Wykonywanie połączeń Zebra TC27
+
+**Z aplikacji Telefon:**
+1. Otwórz aplikację Telefon
+2. Wprowadź numer na klawiaturze lub wybierz z kontaktów
+3. Naciśnij ikonę słuchawki
+
+**Z historii połączeń:**
+1. Otwórz aplikację Telefon
+2. Przejdź do zakładki "Ostatnie"
+3. Dotknij numeru aby zadzwonić
+
+**Z kontaktów:**
+1. Otwórz aplikację Kontakty
+2. Wybierz kontakt
+3. Dotknij ikony telefonu
+
+### Odbieranie połączeń
+
+- **Odbierz:** Przeciągnij ikonę słuchawki w górę
+- **Odrzuć:** Przeciągnij ikonę słuchawki w dół
+- **Odpowiedz SMS:** Przeciągnij ikonę wiadomości
+
+### Opcje podczas rozmowy
+
+| Opcja | Funkcja |
+|-------|---------|
+| Wycisz | Wyłącza mikrofon |
+| Głośnik | Przełącza na tryb głośnomówiący |
+| Klawiatura | Wyświetla klawiaturę DTMF |
+| Zawieś | Zawiesza bieżące połączenie |
+| Dodaj | Dodaje uczestnika (połączenie konferencyjne) |
+| Bluetooth | Przełącza na zestaw Bluetooth |
+
+### VoLTE (Voice over LTE) Zebra TC27
+
+Zebra TC27 obsługuje VoLTE dla krystalicznie czystych połączeń głosowych przez sieć 5G/LTE:
+
+- Wyższa jakość głosu (HD Voice)
+- Szybsze nawiązywanie połączeń
+- Jednoczesne rozmowy i transfer danych
+- Niższe zużycie baterii
+
+**Włączanie VoLTE:**
+1. Ustawienia → Sieć i internet → Sieci komórkowe
+2. Włącz "VoLTE"
+
+> **Uwaga:** VoLTE musi być obsługiwane przez operatora.
+
+### Połączenia alarmowe Zebra TC27
+
+Zebra TC27 umożliwia wykonywanie połączeń alarmowych (112, 999, 911) nawet bez karty SIM:
+
+1. Na ekranie blokady dotknij "Połączenie alarmowe"
+2. Wybierz numer alarmowy
+3. Połączenie zostanie nawiązane przez dowolną dostępną sieć
+
+> **Uwaga:** Połączenia alarmowe mają najwyższy priorytet.
+`
+      },
+      {
+        title: '7. Bateria i ładowanie',
+        content: `
+### Bateria PowerPrecision Zebra TC27
+
+Zebra TC27 wykorzystuje inteligentne baterie litowo-jonowe PowerPrecision z funkcją monitorowania stanu w czasie rzeczywistym:
+
+| Typ baterii | Pojemność | Nr części |
+|-------------|-----------|-----------|
+| **Standard** | **3800 mAh / 14,63 Wh** | **BTRY-TC2L-2XMAXX-01** |
+| Standard z BLE | 3800 mAh / 14,63 Wh | BTRY-TC2L-2XMAXB-01 |
+| Rozszerzona | 5200 mAh / 20,02 Wh | BTRY-TC2L-3XMAXX-01 |
+
+### Wskaźnik LED ładowania Zebra TC27
+
+| LED | Status |
+|-----|--------|
+| Bursztynowy (stały) | Ładowanie w toku |
+| Zielony (stały) | Naładowana w pełni |
+| Czerwony (stały) | Bateria zużyta – wymień |
+| Bursztynowy (miga 2x/s) | Błąd ładowania (temperatura, timeout) |
+| Czerwony (miga 2x/s) | Błąd + bateria zużyta |
+
+### Opcje ładowania Zebra TC27
+
+| Ładowarka | Opis | Nr części |
+|-----------|------|-----------|
+| Zasilacz USB 5V/12W | Ładowanie przez USB-C | PWR-WUA5V12W0xx |
+| 1-Slot Charge Only | Stacja dokująca pojedyncza | CRD-TC2L-BS1CO-01 |
+| 1-Slot USB Cradle | Stacja z Ethernet | CRD-TC2L-BS1CO-ETH |
+| 5-Slot Charge Only | Stacja 5-stanowiskowa | CRD-TC2L-5SCHG-01 |
+| 5-Slot Ethernet | Stacja 5-stanowiskowa z siecią | CRD-TC2L-5SETH-01 |
+| 4-Slot Battery Charger | Ładowarka 4 baterii | SAC-TC2L-4SCHG-01 |
+
+### Powiadomienia o niskim stanie baterii
+
+| Stan | Komunikat | Działanie |
+|------|-----------|-----------|
+| 18% | "Battery Low" | Podłącz ładowarkę |
+| 10% | "Battery Very Low" | Natychmiast podłącz |
+| < 5% | "Battery Critically Low" | Urządzenie wyłączy się |
+
+### Bezpieczeństwo baterii Zebra TC27
+
+- Używaj wyłącznie oryginalnych baterii Zebra PowerPrecision
+- Nie narażaj baterii na temperatury powyżej 70°C
+- Nie rozbieraj, nie zgniataj ani nie przebijaj baterii
+- Ładuj tylko w temperaturze +5°C do +40°C
+- Przechowuj w suchym miejscu, z dala od źródeł ciepła
+`
+      },
+      {
+        title: '8. Skanowanie kodów kreskowych',
+        content: `
+### Dostępne skanery Zebra TC27
+
+| Model | Typ | Zasięg | Zastosowanie |
+|-------|-----|--------|--------------|
+| **SE4710** | Standard | 5-66 cm | Skanowanie w zasięgu ręki |
+| **SE55** | Advanced Range | 6-744 cm | Skanowanie z dystansu (do 7 m) |
+
+### Obsługiwane kody przez Zebra TC27
+
+**Kody 1D:**
+- Code 39, Code 128, Code 93
+- UPC-A/E, EAN-8/EAN-13
+- Interleaved 2 of 5, Codabar
+- GS1 DataBar (RSS)
+
+**Kody 2D:**
+- QR Code, Data Matrix
+- PDF417, MicroPDF417
+- Aztec, MaxiCode
+- GS1 QR Code
+
+### Zasięg skanowania (SE4710)
+
+| Kod | Blisko | Daleko |
+|-----|--------|--------|
+| 5 mil Code 39 | 6,1 cm | 24,1 cm |
+| 100% UPC-A | 5,1 cm | 26,2 cm |
+| 15 mil QR Code | 4,6 cm | 30,5 cm |
+| 20 mil Code 39 | 5,1 cm | 66,0 cm |
+
+### Zasięg skanowania (SE55 Advanced Range)
+
+| Kod | Blisko | Daleko |
+|-----|--------|--------|
+| 5 mil Code 39 | 6,4 cm | 67,6 cm |
+| 100% UPC | 6,4 cm | 180,3 cm |
+| 20 mil Code 39 | – | 276,9 cm |
+| 100 mil Code 39 | – | 554,0 cm |
+
+### Technika skanowania Zebra TC27
+
+1. Uruchom aplikację do skanowania (np. DataWedge Demo)
+2. Skieruj skaner na kod kreskowy
+3. Naciśnij przycisk skanowania
+4. Utrzymuj stabilnie do momentu odczytu
+5. LED świeci zielono + sygnał dźwiękowy = sukces
+6. LED świeci czerwono = błąd odczytu
+
+### Wskazówki dla optymalnego skanowania
+
+- Trzymaj urządzenie Zebra TC27 pod kątem 15-30° do kodu (unikaj odbić)
+- Dla małych kodów – zbliż urządzenie
+- Dla dużych kodów – oddal urządzenie
+- Upewnij się, że kod jest nieuszkodzony i czytelny
+- W słabym oświetleniu skaner automatycznie doświetla
+`
+      },
+      {
+        title: '9. Łączność bezprzewodowa',
+        content: `
+### Wi-Fi 6E Zebra TC27
+
+Zebra TC27 obsługuje najnowszy standard Wi-Fi 6E (802.11ax):
+
+- Prędkości zbliżone do sieci przewodowej
+- Niskie opóźnienia dla aplikacji głosowych
+- Lepszą wydajność w zatłoczonych sieciach
+- Pasmo 6 GHz (wymaga licencji Mobility DNA Enterprise)
+
+**Łączenie z siecią Wi-Fi:**
+
+1. Ustawienia → Sieć i internet → Wi-Fi
+2. Włącz Wi-Fi
+3. Wybierz sieć z listy
+4. Wprowadź hasło (jeśli wymagane)
+5. Dotknij "Połącz"
+
+### Bluetooth 5.2 Zebra TC27
+
+- Lepsza jakość audio przy niższym zużyciu energii
+- Obsługa słuchawek, skanerów pierścieniowych, drukarek
+- Parowanie przez NFC (Print Touch)
+
+**Parowanie urządzenia Bluetooth:**
+
+1. Ustawienia → Połączone urządzenia → Sparuj nowe urządzenie
+2. Włącz tryb parowania na akcesoriach
+3. Wybierz urządzenie z listy
+4. Potwierdź kod PIN (jeśli wymagany)
+
+### NFC Zebra TC27
+
+Zebra TC27 wyposażony jest w NFC z obsługą:
+
+- **Apple VAS** – bilety, karty lojalnościowe z Apple Wallet
+- **Google SmartTap** – bilety, karty z Google Wallet
+- **Płatności zbliżeniowe** – integracja z systemami POS
+- **Parowanie Print Touch** – szybkie łączenie z drukarkami Zebra
+
+**Odczyt karty NFC:**
+
+1. Włącz NFC w ustawieniach
+2. Zbliż kartę/telefon do tylnej części urządzenia
+3. Przytrzymaj przez 1-2 sekundy
+4. Dane zostaną automatycznie odczytane
+
+### GPS i nawigacja Zebra TC27
+
+Zebra TC27 wyposażony jest w odbiornik GPS/GLONASS:
+
+- A-GPS dla szybszej lokalizacji
+- GLONASS dla lepszej precyzji
+- Wsparcie dla aplikacji nawigacyjnych
+- Śledzenie pojazdów i pracowników terenowych
+
+**Włączanie lokalizacji:**
+
+1. Ustawienia → Lokalizacja
+2. Włącz "Użyj lokalizacji"
+3. Wybierz tryb:
+   - Wysoka dokładność (GPS + sieć)
+   - Oszczędzanie baterii (tylko sieć)
+   - Tylko GPS
+`
+      },
+      {
+        title: '10. Kamery',
+        content: `
+### Specyfikacja kamer Zebra TC27
+
+| Kamera | Rozdzielczość | Funkcje |
+|--------|---------------|---------|
+| **Tylna** | 13 MP (16 MP*) | Autofokus, lampa błyskowa, skanowanie |
+| **Przednia** | 8 MP (5 MP*) | Wideorozmowy, selfie |
+
+*Zależnie od konfiguracji
+
+### Fotografowanie
+
+1. Otwórz aplikację Aparat
+2. Wyceluj obiektyw w obiekt
+3. Dotknij ekranu aby ustawić ostrość (opcjonalnie)
+4. Naciśnij przycisk migawki lub klawisz głośności
+
+### Nagrywanie wideo
+
+1. Przełącz na tryb wideo w aplikacji Aparat
+2. Naciśnij przycisk nagrywania
+3. Naciśnij ponownie aby zatrzymać
+4. Wideo zapisze się automatycznie w Galerii
+
+### Zastosowania kamer Zebra TC27 w terenie
+
+- **Dowód dostawy** – zdjęcia paczek i pokwitowań
+- **Dokumentacja serwisowa** – przed/po naprawie
+- **Wideokonferencje** – połączenia z ekspertami
+- **Skanowanie dokumentów** – umowy, formularze
+`
+      },
+      {
+        title: '11. Aplikacje systemowe Zebra',
+        content: `
+### Preinstalowane aplikacje Zebra TC27
+
+| Aplikacja | Funkcja |
+|-----------|---------|
+| **DataWedge** | Konfiguracja skanera, profile skanowania |
+| **Battery Manager** | Szczegółowe informacje o baterii |
+| **RxLogger** | Logowanie diagnostyczne |
+| **StageNow** | Masowa konfiguracja urządzeń |
+| **WorryFree WiFi** | Zarządzanie sieciami Wi-Fi |
+| **Device Central** | Centralny panel informacji |
+| **Enterprise Keyboard** | Klawiatura biznesowa (wymaga licencji) |
+| **Telefon** | Połączenia głosowe |
+| **Wiadomości** | SMS/MMS |
+
+### DataWedge Zebra TC27
+
+DataWedge to główne narzędzie do konfiguracji skanera:
+
+- Tworzenie profili skanowania dla różnych aplikacji
+- Wybór aktywnych symboli (kodów kreskowych)
+- Konfiguracja formatowania danych
+- Ustawienia dźwięków i wibracji
+- Integracja z aplikacjami przez Intent
+
+**Tworzenie profilu:**
+
+1. Otwórz DataWedge
+2. Menu → Nowy profil
+3. Nazwij profil
+4. Powiąż z aplikacją
+5. Skonfiguruj symbole i opcje wyjścia
+
+### Battery Manager Zebra TC27
+
+Szczegółowe informacje o baterii PowerPrecision:
+
+- Aktualny poziom naładowania
+- Stan zdrowia baterii
+- Liczba cykli ładowania
+- Temperatura baterii
+- Prognozowany czas pracy
+`
+      },
+      {
+        title: '12. Ustawienia systemowe',
+        content: `
+### Wyświetlacz Zebra TC27
+
+| Ustawienie | Opis |
+|------------|------|
+| Jasność | Ręczna lub automatyczna (czujnik światła) |
+| Adaptacyjna jasność | Automatyczne dostosowanie do otoczenia |
+| Tryb nocny | Redukcja niebieskiego światła |
+| Rozmiar czcionki | Mały / Domyślny / Duży / Największy |
+| Wygaszenie ekranu | 15s / 30s / 1min / 2min / 5min / 10min |
+| Tryb dotyku | Palec / Rękawiczka / Mokry palec |
+
+### Dźwięk Zebra TC27
+
+| Ustawienie | Opis |
+|------------|------|
+| Głośność multimediów | Muzyka, wideo, gry |
+| Głośność połączeń | Rozmowy telefoniczne |
+| Głośność dzwonka | Powiadomienia, alarmy |
+| Głośność powiadomień | Wiadomości, e-mail |
+| Wibracje | Włącz/wyłącz dla różnych zdarzeń |
+
+### Bezpieczeństwo Zebra TC27
+
+- Blokada ekranu (PIN / Wzór / Hasło)
+- Blokada karty SIM (PIN)
+- Szyfrowanie urządzenia
+- Zarządzanie certyfikatami
+- Resetowanie do ustawień fabrycznych
+`
+      },
+      {
+        title: '13. Konserwacja',
+        content: `
+### Harmonogram czyszczenia Zebra TC27
+
+| Element | Częstotliwość |
+|---------|---------------|
+| Ekran dotykowy | Codziennie |
+| Okno skanera | Codziennie |
+| Styki ładowania | Co tydzień |
+| Obudowa | W razie potrzeby |
+| Styki baterii | Przy wymianie baterii |
+
+### Czyszczenie ekranu i obudowy
+
+1. Wyłącz urządzenie Zebra TC27 lub zablokuj ekran
+2. Użyj miękkiej, bezpyłowej ściereczki
+3. Zwilż alkoholem izopropylowym (70%)
+4. Delikatnie przetrzyj powierzchnię
+5. Osusz przed użyciem
+
+### Czyszczenie okna skanera
+
+1. Użyj suchej, miękkiej ściereczki
+2. Przy uporczywych zabrudzeniach – alkohol izopropylowy
+3. Nie używaj materiałów ściernych
+4. Regularnie sprawdzaj czy okno nie jest zarysowane
+
+### Dozwolone środki czyszczące
+
+- Alkohol izopropylowy (70%)
+- Chusteczki dezynfekujące (bez wybielacza)
+- Roztwór mydła (łagodny)
+
+### Zabronione środki
+
+- Wybielacze, amoniak
+- Rozpuszczalniki, aceton
+- Materiały ścierne
+- Sprężone powietrze (bezpośrednio na styki)
+`
+      },
+      {
+        title: '14. Rozwiązywanie problemów',
+        content: `
+### Problemy z uruchomieniem Zebra TC27
+
+| Problem | Rozwiązanie |
+|---------|-------------|
+| Urządzenie nie włącza się | Naładuj baterię przez 15 minut, sprawdź poprawność instalacji baterii |
+| Urządzenie zawiesza się | Przytrzymaj Power przez 10 sekund (twardy reset) |
+| Pętla restartu | Wykonaj Enterprise Reset |
+
+### Problemy z baterią Zebra TC27
+
+| Problem | Rozwiązanie |
+|---------|-------------|
+| Szybkie rozładowanie | Zamknij nieużywane aplikacje, zmniejsz jasność, wyłącz zbędne radio |
+| Nie ładuje się | Sprawdź styki, użyj innej ładowarki, sprawdź temperaturę |
+| LED miga na czerwono | Błąd ładowania – temperatura poza zakresem lub uszkodzona bateria |
+
+### Problemy ze skanowaniem Zebra TC27
+
+| Problem | Rozwiązanie |
+|---------|-------------|
+| Skaner nie działa | Sprawdź czy DataWedge jest włączony, zrestartuj urządzenie |
+| Nie odczytuje kodu | Oczyść okno skanera, zmień kąt/odległość, sprawdź stan kodu |
+| Wolne skanowanie | Sprawdź aktywne symbole w DataWedge (wyłącz niepotrzebne) |
+
+### Problemy z siecią komórkową Zebra TC27
+
+| Problem | Rozwiązanie |
+|---------|-------------|
+| Brak sygnału | Sprawdź kartę SIM, włącz/wyłącz tryb samolotowy, zrestartuj |
+| Brak danych | Włącz dane komórkowe, sprawdź APN, sprawdź limit danych |
+| Słaba jakość połączeń | Sprawdź siłę sygnału, włącz VoLTE |
+| Nie działa eSIM | Sprawdź połączenie z internetem, skontaktuj się z operatorem |
+
+### Problemy z Wi-Fi Zebra TC27
+
+| Problem | Rozwiązanie |
+|---------|-------------|
+| Brak połączenia | Sprawdź hasło, odległość od AP, zrestartuj Wi-Fi |
+| Słaby sygnał | Zbliż się do punktu dostępu |
+| Częste rozłączenia | Wyłącz oszczędzanie baterii dla Wi-Fi |
+
+### Problemy z GPS Zebra TC27
+
+| Problem | Rozwiązanie |
+|---------|-------------|
+| Brak lokalizacji | Włącz lokalizację, wyjdź na zewnątrz, poczekaj na fix |
+| Niska dokładność | Użyj trybu "Wysoka dokładność", sprawdź widoczność nieba |
+
+### Resetowanie urządzenia Zebra TC27
+
+**Miękki reset (restart):**
+1. Przytrzymaj przycisk Power
+2. Wybierz "Uruchom ponownie"
+
+**Twardy reset:**
+1. Przytrzymaj Power przez 10 sekund
+2. Urządzenie wyłączy się i włączy ponownie
+
+**Enterprise Reset (zachowuje dane firmowe):**
+1. Ustawienia → System → Opcje resetowania
+2. Wybierz "Enterprise Reset"
+3. Potwierdź operację
+
+**Factory Reset (usuwa wszystkie dane):**
+1. Ustawienia → System → Opcje resetowania
+2. Wybierz "Przywrócenie danych fabrycznych"
+3. Potwierdź operację
+
+> **Ostrzeżenie:** Factory Reset usuwa wszystkie dane użytkownika!
+`
+      },
+      {
+        title: '15. Akcesoria Zebra TC27',
+        content: `
+### Futerały i obudowy ochronne Zebra TC27
+
+| Akcesorium | Nr części |
+|------------|-----------|
+| Obudowa ochronna (Rugged Boot) | SG-TC2L-BOOT-01 |
+| Kabura | SG-TC2L-HLSTR1-01 |
+
+### Paski i uchwyty Zebra TC27
+
+| Akcesorium | Nr części |
+|------------|-----------|
+| Pasek na rękę (Hand Strap) | SG-TC2L-HSTRP-01 |
+| Uchwyt spustowy (Trigger Handle) | TRG-TC2L-SNP1-01 |
+
+### Stacje dokujące Zebra TC27
+
+| Akcesorium | Nr części |
+|------------|-----------|
+| 1-Slot Charge Only | CRD-TC2L-BS1CO-01 |
+| 1-Slot USB Cradle | CRD-TC2L-BS1USB-01 |
+| 1-Slot z baterią | CRD-TC2L-BS1BT-01 |
+| 5-Slot Charge Only | CRD-TC2L-5SCHG-01 |
+| 5-Slot Ethernet | CRD-TC2L-5SETH-01 |
+| Workstation Connect | – |
+
+### Zasilacze i ładowarki Zebra TC27
+
+| Akcesorium | Nr części |
+|------------|-----------|
+| Zasilacz USB 5V/12W | PWR-WUA5V12W0US |
+| Kabel USB-C | CBL-TC5X-USBC2A-01 |
+| 4-Slot Battery Charger | SAC-TC2L-4SCHG-01 |
+
+### Skanery pierścieniowe Zebra (Bluetooth)
+
+| Akcesorium | Opis |
+|------------|------|
+| RS5100 | Skaner pierścieniowy single-finger |
+| RS6000/RS6100 | Skaner pierścieniowy 2-finger |
+| DS3678 | Skaner ręczny Bluetooth |
+
+### Uchwyty samochodowe Zebra TC27
+
+| Akcesorium | Opis |
+|------------|------|
+| Uchwyt RAM Mounts | Montaż w pojazdach |
+| Ładowarka samochodowa | Zasilanie 12/24V |
+`
+      },
+      {
+        title: '16. Specyfikacje techniczne',
+        content: `
+### Wymiary i waga Zebra TC27
+
+| Parametr | Wartość |
+|----------|---------|
+| Wysokość | 158 mm |
+| Szerokość | 76 mm |
+| Grubość | 12,5 mm |
+| Waga (bateria standard) | 236 g |
+| Waga (bateria rozszerzona) | 262 g |
+
+### Wyświetlacz Zebra TC27
+
+| Parametr | Wartość |
+|----------|---------|
+| Przekątna | 6,0" |
+| Rozdzielczość | 1080 x 2160 (FHD+) |
+| Typ | IPS LCD |
+| Jasność | 450 nitów |
+| Ochrona | Corning Gorilla Glass |
+| Dotyk | Pojemnościowy, obsługa rękawiczek |
+
+### Wydajność Zebra TC27
+
+| Parametr | Wartość |
+|----------|---------|
+| Procesor | Qualcomm 5430, 2,1 GHz, 6-rdzeniowy |
+| RAM | 6 GB / 8 GB |
+| Flash | 64 GB / 128 GB |
+| microSD | Do 2 TB (opcja) |
+
+### Łączność Zebra TC27
+
+| Parametr | Wartość |
+|----------|---------|
+| **WWAN** | **5G NR, LTE, CBRS** |
+| Wi-Fi | 802.11 a/b/g/n/ac/ax (Wi-Fi 6E) |
+| Bluetooth | 5.2 + BLE |
+| NFC | Tak (z Apple VAS, Google SmartTap) |
+| USB | USB-C 3.1 Gen 1 |
+| GPS | A-GPS, GLONASS |
+| Karty SIM | Nano SIM + eSIM |
+
+### Wytrzymałość Zebra TC27
+
+| Parametr | Wartość |
+|----------|---------|
+| Stopień ochrony IP | IP65/IP68 |
+| Upadek | 1,3 m na beton (MIL-STD-810H) |
+| Temperatura pracy | -10°C do +50°C |
+| Temperatura ładowania | +5°C do +40°C |
+| Temperatura przechowywania | -40°C do +70°C |
+| Wilgotność | 5-95% bez kondensacji |
+
+### Certyfikaty Zebra TC27
+
+- MIL-STD-810H
+- IP65/IP68
+- CE, FCC, IC, PTCRB
+- RoHS
+`
+      },
+      {
+        title: 'FAQ – Najczęściej zadawane pytania',
+        content: `
+### Czym jest Zebra TC27?
+
+**Odpowiedź:** Zebra TC27 to zaawansowany **komputer mobilny z 6-calowym ekranem FHD+ i łącznością 5G/LTE**, wyposażony w procesor Qualcomm 5430, skaner kodów kreskowych, Wi-Fi 6E, Bluetooth 5.2, NFC i GPS. Jest przeznaczony dla kurierów, serwisu terenowego i przedstawicieli handlowych.
+
+### Jaka jest różnica między Zebra TC27 a Zebra TC22?
+
+**Odpowiedź:** Zebra TC27 ma **moduł 5G/LTE**, slot na kartę **nano SIM + eSIM**, **GPS/GLONASS** i funkcję **telefonu z VoLTE**. Zebra TC22 to wersja tylko Wi-Fi bez łączności komórkowej i GPS.
+
+### Jaka jest różnica między Zebra TC27 a Zebra TC26?
+
+**Odpowiedź:** Zebra TC27 jest następcą Zebra TC26 z **większym ekranem 6" FHD+** (vs 5" HD), **nowszym procesorem Qualcomm 5430**, **5G** (vs tylko LTE), **Wi-Fi 6E** (vs Wi-Fi 5), **Android 14** i **cieńszą konstrukcją** (12,5 mm vs 14,7 mm).
+
+### Jakie karty SIM obsługuje Zebra TC27?
+
+**Odpowiedź:** Zebra TC27 obsługuje **nano SIM** fizycznie oraz **eSIM** (profil cyfrowy). Możliwa jest konfiguracja **Dual SIM** z obiema kartami jednocześnie.
+
+### Jakie pasma 5G obsługuje Zebra TC27?
+
+**Odpowiedź:** Zebra TC27 obsługuje pasma 5G NR: **n1, n2, n3, n5, n7, n8, n12, n20, n25, n28, n38, n40, n41, n48, n66, n71, n77, n78**, co zapewnia kompatybilność z operatorami na całym świecie.
+
+### Czy Zebra TC27 obsługuje VoLTE?
+
+**Odpowiedź:** Tak, Zebra TC27 obsługuje **VoLTE** (Voice over LTE) i **VoNR** (Voice over 5G NR) dla wysokiej jakości połączeń głosowych przez sieci komórkowe.
+
+### Jaka jest pojemność baterii Zebra TC27?
+
+**Odpowiedź:** Zebra TC27 ma baterię standardową **3800 mAh** lub rozszerzoną **5200 mAh**. Bateria PowerPrecision jest wymienna na ciepło (Warm Swap) bez wyłączania urządzenia.
+
+### Czy Zebra TC27 ma GPS?
+
+**Odpowiedź:** Tak, Zebra TC27 ma wbudowany odbiornik **GPS z A-GPS i GLONASS** do precyzyjnej nawigacji w terenie. Jest to główna różnica w stosunku do Zebra TC22 (wersja bez GPS).
+
+### Jaką klasę szczelności ma Zebra TC27?
+
+**Odpowiedź:** Zebra TC27 ma certyfikat **IP65/IP68** (pełna pyłoszczelność i wodoszczelność) oraz spełnia normę **MIL-STD-810H** z odpornością na upadki z **1,3 m** na beton.
+
+### Czy mogę używać Zebra TC27 jako hotspot Wi-Fi?
+
+**Odpowiedź:** Tak, Zebra TC27 może udostępniać połączenie 5G/LTE przez **hotspot Wi-Fi** lub **tethering USB**. Konfiguracja w: Ustawienia > Sieć i internet > Hotspot i tethering.
+
+### Jak wykonać twardy reset Zebra TC27?
+
+**Odpowiedź:** Przytrzymaj **przycisk Power przez 10 sekund**. Urządzenie automatycznie się wyłączy i włączy ponownie.
+
+### Jakie akcesoria są kompatybilne z Zebra TC27?
+
+**Odpowiedź:** Zebra TC27 jest kompatybilny z: stacjami dokującymi (1-slot, 5-slot), ładowarkami baterii, uchwytami spustowymi, obudowami ochronnymi, paskami na rękę, skanerami pierścieniowymi Bluetooth (RS5100, RS6100) oraz uchwytami samochodowymi.
+`
+      }
+    ]
   }
 }
 
