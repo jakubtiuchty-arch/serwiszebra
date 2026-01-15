@@ -26255,6 +26255,2730 @@ Szczegółowe informacje o baterii PowerPrecision:
 `
       }
     ]
+  },
+
+  'tc21hc': {
+    model: 'TC21-HC',
+    title: 'Zebra TC21-HC – Instrukcja obsługi po Polsku',
+    lastUpdated: '2026-01-15',
+    sourceDocument: 'Zebra TC21-HC User Guide',
+    keywords: [
+      'zebra tc21-hc instrukcja', 'zebra tc21-hc instrukcja po polsku', 'zebra tc21-hc manual',
+      'zebra tc21 healthcare', 'terminal medyczny zebra', 'zebra tc21-hc skanowanie', 'zebra tc21-hc reset',
+      'zebra tc21-hc bateria', 'zebra tc21-hc wifi', 'zebra tc21-hc bluetooth', 'zebra tc21-hc nfc',
+      'zebra tc21-hc dezynfekcja', 'zebra tc21-hc szpital', 'zebra tc21-hc służba zdrowia',
+      'zebra tc21-hc przycisk alarmowy', 'zebra tc21-hc alert button', 'zebra tc21-hc se4100',
+      'zebra tc21-hc nicu', 'zebra tc21-hc administrowanie leków', 'zebra tc21-hc identyfikacja pacjenta',
+      'zebra tc21-hc próbki laboratoryjne', 'zebra tc21-hc ip67', 'zebra tc21-hc android',
+      'komputer medyczny zebra', 'zebra healthcare', 'zebra tc21-hc akcesoria medyczne',
+      'zebra tc21-hc dokumentacja medyczna', 'zebra tc21-hc wideokonferencje', 'zebra tc21-hc telemedicine'
+    ],
+    sections: [
+      {
+        title: '1. Podstawowe informacje',
+        content: `
+### O urządzeniu Zebra TC21-HC
+
+Zebra TC21-HC to kompaktowy i wytrzymały komputer dotykowy klasy enterprise, zaprojektowany specjalnie dla **personelu medycznego i pracowników służby zdrowia**. Urządzenie łączy w sobie zaawansowane możliwości skanowania kodów kreskowych, komunikacji bezprzewodowej Wi-Fi, Bluetooth i NFC, a także funkcjonalność smartfona w obudowie przystosowanej do intensywnej dezynfekcji i wymagających warunków pracy w placówkach medycznych.
+
+### Cechy charakterystyczne wersji Healthcare Zebra TC21-HC
+
+Zebra TC21-HC został specjalnie zaprojektowany z myślą o środowisku medycznym:
+
+- **Obudowa odporna na dezynfekcję** – materiały wytrzymujące częste czyszczenie środkami szpitalnymi
+- **Programowalny przycisk alarmowy (Alert Button)** – czerwony przycisk na tylnej obudowie do szybkiego wzywania pomocy w sytuacjach awaryjnych
+- **Skaner SE4100 z bezpiecznym celownikiem LED** – bezpieczny nawet na oddziałach neonatologicznych (NICU), porodowych i położniczych
+- **Biała iluminacja skanera** – łatwo odczytuje kody na kolorowych tackach laboratoryjnych i kasetach biopsyjnych
+- **Dedykowane akcesoria medyczne** – pasek na rękę, klips do paska z możliwością dezynfekcji
+
+### Zastosowania Zebra TC21-HC
+
+- **Identyfikacja pacjenta** – skanowanie opasek na nadgarstek
+- **Administrowanie leków** – weryfikacja przed podaniem (5 praw podawania leków)
+- **Zarządzanie próbkami** – śledzenie próbek laboratoryjnych
+- **Dokumentacja medyczna** – szybki dostęp przez kod
+- **Komunikacja głosowa** – PTT między personelem
+- **Wideokonferencje** – konsultacje z lekarzami specjalistami
+
+### Parametry techniczne Zebra TC21-HC
+
+| Parametr | Zebra TC21-HC |
+|----------|---------------|
+| **Wyświetlacz** | 5,0" HD (1280 x 720), Corning Gorilla Glass |
+| **Procesor** | Qualcomm Snapdragon 660, 1,8 GHz / 2,2 GHz octa-core |
+| **System operacyjny** | Android 10 (z możliwością aktualizacji) |
+| **Pamięć RAM** | 3 GB lub 4 GB |
+| **Pamięć Flash** | 32 GB lub 64 GB |
+| **Karta pamięci** | microSD do 256 GB |
+| **Bateria standardowa** | 3400 mAh |
+| **Bateria rozszerzona** | 5260 mAh |
+| **Skaner** | Imager 2D SE4100 z bezpiecznym celownikiem LED |
+| **Łączność** | Wi-Fi 802.11 a/b/g/n/ac, Bluetooth 5.0 LE, NFC |
+| **Przycisk alarmowy** | Programowalny czerwony przycisk |
+
+### Wymiary i waga Zebra TC21-HC
+
+| Parametr | Bateria standardowa | Bateria rozszerzona |
+|----------|---------------------|---------------------|
+| Długość | 158 mm | 158 mm |
+| Szerokość | 79 mm | 79 mm |
+| Grubość | 13,7 mm | 17,3 mm |
+| Waga | ok. 236 g | ok. 258 g |
+
+### Warunki pracy Zebra TC21-HC
+
+| Parametr | Wartość |
+|----------|---------|
+| Temperatura pracy | -10°C do +50°C |
+| Temperatura przechowywania | -40°C do +70°C |
+| Temperatura ładowania | 0°C do +40°C |
+| Wilgotność względna | 5% – 95% bez kondensacji |
+| Odporność na upadki | 1,2 m na beton |
+| Klasa szczelności | IP67 (pyłoszczelność i wodoszczelność) |
+`
+      },
+      {
+        title: '2. Elementy urządzenia',
+        content: `
+### Widok z przodu Zebra TC21-HC
+
+| Nr | Element | Opis |
+|----|---------|------|
+| 1 | Kamera przednia | Aparat 5 MP do wideokonferencji z lekarzami |
+| 2 | Głośnik słuchawkowy | Odtwarzanie audio w trybie słuchawki |
+| 3 | Czujnik zbliżenia/światła | Wykrywa zbliżenie i natężenie światła |
+| 4 | Dioda LED skanowania | Wskazuje status skanowania |
+| 5 | Dioda LED ładowania | Wskazuje status ładowania |
+| 6 | Ekran dotykowy | Wyświetlacz 5" HD z obsługą rękawiczek medycznych |
+| 7 | Głośnik | Odtwarzanie audio i tryb głośnomówiący |
+| 8 | Złącze USB-C | Komunikacja i ładowanie (z zaślepką ochronną) |
+| 9 | Mikrofon | Komunikacja głosowa |
+| 10 | Przycisk PTT | Push-to-Talk do komunikacji między personelem |
+| 11 | Przycisk skanowania boczny | Inicjuje skanowanie |
+
+### Widok z tyłu Zebra TC21-HC
+
+| Nr | Element | Opis |
+|----|---------|------|
+| 1 | Antena NFC | Komunikacja NFC |
+| 2 | Mocowanie paska | Punkt mocowania paska medycznego |
+| 3 | Zatrzaski baterii | Do wyjmowania baterii |
+| 4 | **Przycisk alarmowy** | **Czerwony przycisk do wzywania pomocy** |
+| 5 | Bateria | PowerPrecision Li-Ion, wymienna |
+| 6 | Przyciski głośności | Regulacja głośności |
+| 7 | Przycisk skanowania tylny | Inicjuje skanowanie |
+| 8 | Lampa błyskowa | Doświetlenie dla kamery |
+| 9 | Kamera tylna | Aparat 13 MP do dokumentacji ran |
+| 10 | Przycisk zasilania | Włączanie/wyłączanie |
+| 11 | Okno skanera | Wyjście promienia skanującego |
+`
+      },
+      {
+        title: '3. Przycisk alarmowy (Alert Button)',
+        content: `
+### Przeznaczenie przycisku alarmowego Zebra TC21-HC
+
+Przycisk alarmowy umożliwia personelowi medycznemu **natychmiastowe wezwanie pomocy** w sytuacjach awaryjnych jednym naciśnięciem. Może być skonfigurowany do:
+
+- Wykonania połączenia telefonicznego na określony numer alarmowy
+- Uruchomienia aplikacji alarmowej
+- Wysłania komunikatu do dyżurki pielęgniarek
+- Aktywacji systemu lokalizacji personelu
+
+### Konfiguracja przycisku alarmowego
+
+Konfiguracja odbywa się przez narzędzie StageNow z użyciem następujących CSP:
+
+1. **PowerMgr** – Ustaw "All Wake-Up Sources" na "Turn on" (budzi urządzenie z uśpienia)
+2. **Intent** – Skonfiguruj akcję:
+   - Mode: "Schedule sending of Intent on key presses"
+   - Keep Device Awake: Włączone
+   - Key Identifier: "Rear Button"
+   - Android Action Name: np. android.intent.action.CALL
+   - URI: np. tel:112 lub numer wewnętrzny
+3. **KeyMappingMgr** – Wyłącz domyślną funkcję przycisku (ustaw na "None")
+
+### Aktywacja przycisku alarmowego
+
+Po skonfigurowaniu przycisk alarmowy jest automatycznie aktywny. Ustawienia można sprawdzić:
+
+1. Przejdź do **Ustawienia** > **Dostępność** > **Alert Accessibility Service**
+2. Usługa powinna być włączona
+
+### Użycie przycisku alarmowego Zebra TC21-HC
+
+**WAŻNE:** Przycisk wymaga **długiego naciśnięcia (min. 1 sekunda)**, aby zapobiec przypadkowym alertom.
+
+- **Gdy urządzenie jest aktywne:** Przytrzymaj czerwony przycisk przez co najmniej 1 sekundę
+- **Gdy urządzenie jest w trybie uśpienia:** Najpierw krótko naciśnij przycisk, aby obudzić urządzenie, następnie przytrzymaj przez co najmniej 1 sekundę
+`
+      },
+      {
+        title: '4. Rozpakowanie i instalacja',
+        content: `
+### Zawartość opakowania Zebra TC21-HC
+
+- Komputer dotykowy Zebra TC21-HC
+- Bateria PowerPrecision Li-Ion
+- Zaślepka złącza USB-C (zamontowana)
+- Przewodnik regulacyjny
+
+> **Uwaga:** Zaślepka USB-C jest zalecana do utrzymania szczelności urządzenia podczas dezynfekcji. Nie zaleca się jej usuwania bez potrzeby.
+
+### Instalacja karty microSD
+
+1. Zdejmij pokrywę dostępową
+2. Przesuń uchwyt karty do pozycji odblokowanej
+3. Włóż kartę microSD
+4. Zamknij uchwyt i zablokuj
+5. **Koniecznie** załóż pokrywę dostępową, aby zapewnić szczelność
+
+### Instalacja baterii Zebra TC21-HC
+
+1. Włóż baterię dolną krawędzią do komory
+2. Dociśnij baterię, aż zatrzaski zablokują się
+
+### Wyjmowanie baterii
+
+1. Naciśnij jednocześnie oba zatrzaski zwalniające
+2. Unieś i wyjmij baterię
+`
+      },
+      {
+        title: '5. Bateria i ładowanie',
+        content: `
+### Informacje ogólne o baterii Zebra TC21-HC
+
+| Typ baterii | Pojemność | Czas ładowania do 90% |
+|-------------|-----------|----------------------|
+| Standardowa | 3400 mAh | ok. 3 godziny |
+| Rozszerzona | 5260 mAh | ok. 4 godziny |
+
+Bateria rozszerzona zapewnia wystarczającą moc na **cały dyżur** bez konieczności wymiany.
+
+### Wskaźniki ładowania Zebra TC21-HC
+
+| Stan diody LED | Znaczenie |
+|----------------|-----------|
+| Miga wolno na bursztynowo | Trwa ładowanie |
+| Świeci ciągle na zielono | Ładowanie zakończone |
+| Miga szybko na bursztynowo | Błąd ładowania |
+
+### Wymiana baterii podczas dyżuru
+
+Aby zapewnić ciągłość pracy, zaleca się:
+
+1. Posiadanie naładowanej baterii zapasowej
+2. Wymianę baterii bez wyłączania urządzenia (hot swap)
+3. Użycie ładowarki 4-Slot Battery Charger do baterii zapasowych
+
+### Bezpieczeństwo baterii Zebra TC21-HC
+
+- Używaj wyłącznie oryginalnych baterii Zebra PowerPrecision
+- Nie narażaj baterii na temperatury powyżej 70°C
+- Ładuj tylko w temperaturze 0°C do +40°C
+- Przechowuj w suchym miejscu
+`
+      },
+      {
+        title: '6. Skanowanie w środowisku medycznym',
+        content: `
+### Skaner SE4100 – bezpieczny dla środowiska medycznego
+
+Zebra TC21-HC jest wyposażony w skaner **SE4100** z celownikiem LED, który jest:
+
+- **Bezpieczny dla oddziałów NICU** (neonatologicznych)
+- **Bezpieczny na salach porodowych** i położniczych
+- **Wyposażony w białą iluminację** do odczytu kodów na kolorowych tackach laboratoryjnych i kasetach biopsyjnych
+
+### Typowe zastosowania skanowania w służbie zdrowia
+
+| Zastosowanie | Opis |
+|--------------|------|
+| Identyfikacja pacjenta | Skanowanie opaski na nadgarstek pacjenta |
+| Administrowanie leków | Weryfikacja leku przed podaniem (5 praw podawania leków) |
+| Zarządzanie próbkami | Śledzenie próbek laboratoryjnych od pobrania do analizy |
+| Inwentaryzacja | Zarządzanie zapasami leków i materiałów medycznych |
+| Dokumentacja | Szybki dostęp do historii pacjenta przez kod |
+
+### Obsługiwane symbologie Zebra TC21-HC
+
+**Kody 1D:** Code 128, Code 39, EAN-13, EAN-8, UPC-A, UPC-E, Codabar, Interleaved 2 of 5
+
+**Kody 2D:** DataMatrix (powszechny w farmacji), QR Code, PDF-417, Aztec Code
+
+### Procedura skanowania
+
+1. Upewnij się, że aplikacja medyczna jest aktywna
+2. Skieruj skaner na kod (opaska pacjenta, lek, próbka)
+3. Naciśnij przycisk skanowania
+4. Zielona dioda i sygnał dźwiękowy potwierdzą odczyt
+5. Dane automatycznie trafią do systemu
+`
+      },
+      {
+        title: '7. Łączność bezprzewodowa',
+        content: `
+### Wi-Fi w środowisku szpitalnym Zebra TC21-HC
+
+Zebra TC21-HC obsługuje zaawansowane funkcje Wi-Fi dla środowisk enterprise:
+
+- **Bezpieczne protokoły:** WPA3, WPA2-Enterprise, 802.1x
+- **Szybki roaming:** Przechodzenie między punktami dostępowymi bez utraty połączenia
+- **VoWiFi:** Wysoka jakość głosu przez Wi-Fi
+
+**Łączenie z siecią szpitalną:**
+
+1. Przejdź do **Ustawienia** > **Sieć i internet** > **Wi-Fi**
+2. Wybierz sieć szpitalną
+3. Wprowadź dane uwierzytelniające (login/hasło domenowe lub certyfikat)
+4. Dotknij **Połącz**
+
+### Bluetooth Zebra TC21-HC
+
+Obsługiwane połączenia:
+
+- Słuchawki Bluetooth (Headset Profile)
+- Skanery zewnętrzne (RS5100, RS6000)
+- Drukarki etykiet
+- Zestawy głośnomówiące
+
+### NFC Zebra TC21-HC
+
+Zastosowania w służbie zdrowia:
+
+- Identyfikacja personelu
+- Odczyt kart pacjentów
+- Szybkie logowanie do aplikacji
+`
+      },
+      {
+        title: '8. Komunikacja głosowa',
+        content: `
+### Workforce Connect – rozwiązania głosowe Zebra
+
+Zebra TC21-HC może służyć jako urządzenie do komunikacji głosowej:
+
+**Push-to-Talk Express:**
+- Podstawowa komunikacja walkie-talkie
+- Bez dodatkowej licencji
+
+**Workforce Connect PTT Pro:**
+- Zaawansowana komunikacja PTT przez Wi-Fi i sieć komórkową (wymaga subskrypcji)
+- Komunikacja między personelem wewnątrz i na zewnątrz placówki
+
+**Workforce Connect Voice:**
+- Pełna funkcjonalność telefonu PBX
+- Integracja z centralą telefoniczną szpitala
+- Wymaga licencji Mobility DNA Enterprise
+
+### Wideokonferencje Zebra TC21-HC
+
+Kamera przednia 5 MP umożliwia:
+
+- Wideokonferencje z lekarzami specjalistami
+- Konsultacje zdalne
+- Telemedicine
+`
+      },
+      {
+        title: '9. Kamera – dokumentacja medyczna',
+        content: `
+### Kamera tylna 13 MP Zebra TC21-HC
+
+Idealna do dokumentacji medycznej:
+
+- Stanu ran i obrażeń
+- Postępów gojenia
+- Objawów dermatologicznych
+- Wyników badań wizualnych
+
+### Kamera przednia 5 MP
+
+Zastosowania:
+
+- Wideokonferencje z personelem medycznym
+- Konsultacje telemedyczne
+- Komunikacja z pacjentami i rodzinami
+
+### Fotografowanie
+
+1. Otwórz aplikację Aparat
+2. Wyceluj obiektyw w obiekt
+3. Dotknij ekranu aby ustawić ostrość
+4. Naciśnij przycisk migawki
+5. Zdjęcie zapisze się automatycznie
+`
+      },
+      {
+        title: '10. Czyszczenie i dezynfekcja',
+        content: `
+### Procedury dla środowiska medycznego Zebra TC21-HC
+
+Obudowa Zebra TC21-HC została specjalnie zaprojektowana do **częstej dezynfekcji** środkami stosowanymi w placówkach medycznych.
+
+### Zatwierdzone środki dezynfekujące dla Zebra TC21-HC
+
+| Składnik aktywny | Maksymalne stężenie |
+|------------------|---------------------|
+| Izopropanol | 70% |
+| Alkohol etylowy | 80% |
+| Chlorek benzalkoniowy | 0,3% |
+| Mieszanki QAC (czwartorzędowe związki amoniowe) | Zgodnie z zaleceniami producenta |
+| Podchloryn sodu (roztwór wybielacza) | 10% |
+| Nadtlenek wodoru | 3% |
+| Chlorheksydyna | 2% |
+
+### Substancje NIEDOZWOLONE
+
+| Substancja | Powód |
+|------------|-------|
+| Aceton | Uszkadza plastik |
+| Toluen | Uszkadza plastik |
+| Fenol | Uszkadza materiały |
+| Chlor (stężony) | Korozja |
+| Benzen | Toksyczny, uszkadza materiały |
+| Formaldehyd | Toksyczny |
+| Amoniak > 0,5% | Uszkadza ekran |
+
+### Procedura dezynfekcji Zebra TC21-HC
+
+1. **Wyłącz urządzenie** i odłącz od zasilania
+2. **Przygotuj roztwór** – zwilż miękką, niestrzępiącą się ściereczkę dozwolonym środkiem (nigdy nie spryskuj bezpośrednio urządzenia)
+3. **Przetrzyj wszystkie powierzchnie:** obudowa, ekran, przyciski, okno skanera, kamera
+4. **Zwróć szczególną uwagę na:** szczeliny między przyciskami, krawędzie ekranu, obszar wokół portów
+5. **Wysusz** miękką, suchą ściereczką
+6. **Poczekaj** aż urządzenie całkowicie wyschnie przed włączeniem
+
+### Częstotliwość dezynfekcji
+
+| Sytuacja | Zalecana częstotliwość |
+|----------|------------------------|
+| Między pacjentami | Każdorazowo |
+| Podczas dyżuru | Co 2-4 godziny |
+| Zmiana dyżuru | Przed i po dyżurze |
+| Po kontakcie z płynami ustrojowymi | Natychmiast |
+| Standardowo | Minimum raz dziennie |
+`
+      },
+      {
+        title: '11. Rozwiązywanie problemów',
+        content: `
+### Reset urządzenia Zebra TC21-HC
+
+**Soft Reset:**
+1. Przytrzymaj przycisk zasilania
+2. Dotknij **Uruchom ponownie**
+
+**Hard Reset:**
+1. Przytrzymaj przycisk zasilania i głośności w górę przez 10-12 sekund
+
+### Typowe problemy Zebra TC21-HC
+
+| Problem | Rozwiązanie |
+|---------|-------------|
+| Przycisk alarmowy nie działa | Sprawdź konfigurację w StageNow i Accessibility |
+| Skaner nie odczytuje kodów na opaskach | Sprawdź, czy opaska nie jest pomięta; oczyść okno skanera |
+| Słaby odczyt kodów na kolorowych tackach | Używaj białej iluminacji skanera |
+| Urządzenie nie łączy się z Wi-Fi szpitalnym | Sprawdź certyfikaty i dane logowania |
+| Bateria szybko się rozładowuje | Zmniejsz jasność; użyj baterii rozszerzonej |
+
+### Problemy z ekranem Zebra TC21-HC
+
+| Problem | Rozwiązanie |
+|---------|-------------|
+| Brak reakcji na dotyk z rękawiczkami | Włącz tryb rękawiczek w ustawieniach |
+| Ekran ciemny | Zwiększ jasność, wyłącz automatyczną jasność |
+
+### Factory Reset (usuwa wszystkie dane)
+
+1. Ustawienia → System → Opcje resetowania
+2. Wybierz "Przywrócenie danych fabrycznych"
+3. Potwierdź operację
+
+> **Ostrzeżenie:** Factory Reset usuwa wszystkie dane użytkownika!
+`
+      },
+      {
+        title: '12. Akcesoria Healthcare',
+        content: `
+### Akcesoria medyczne Zebra TC21-HC
+
+| Akcesorium | Opis |
+|------------|------|
+| Healthcare Belt Clip | Klips do paska odporny na dezynfekcję |
+| Healthcare Handstrap | Pasek na rękę do środowiska medycznego |
+| Protective Boot | Osłona ochronna zwiększająca odporność na upadki |
+| 4-Slot Battery Charger | Ładowarka na 4 baterie zapasowe |
+| USB-C Audio Adapter | Adapter na słuchawki 3,5 mm |
+| 1-Slot Charge Only Cradle | Stacja ładująca |
+
+### Stacje dokujące
+
+| Akcesorium | Opis |
+|------------|------|
+| 1-Slot Charge Only Cradle | Stacja ładująca pojedyncza |
+| 5-Slot Charge Only Cradle | Stacja ładująca 5-stanowiskowa |
+| 4-Slot Battery Charger | Ładowarka 4 baterii |
+
+### Skanery pierścieniowe Bluetooth
+
+| Akcesorium | Opis |
+|------------|------|
+| RS5100 | Skaner pierścieniowy single-finger |
+| RS6000 | Skaner pierścieniowy 2-finger |
+`
+      },
+      {
+        title: '13. Specyfikacje techniczne',
+        content: `
+### Procesor i pamięć Zebra TC21-HC
+
+| Parametr | Wartość |
+|----------|---------|
+| Procesor | Qualcomm Snapdragon 660, 1,8/2,2 GHz octa-core |
+| Pamięć RAM | 3 GB lub 4 GB |
+| Pamięć Flash | 32 GB lub 64 GB |
+| microSD | Do 256 GB |
+
+### Wyświetlacz Zebra TC21-HC
+
+| Parametr | Wartość |
+|----------|---------|
+| Przekątna | 5,0" |
+| Rozdzielczość | 1280 x 720 (HD) |
+| Ochrona | Corning Gorilla Glass |
+| Dotyk | Pojemnościowy, obsługa rękawiczek medycznych |
+
+### Łączność Zebra TC21-HC
+
+| Parametr | Wartość |
+|----------|---------|
+| WLAN | 802.11 a/b/g/n/ac/d/h/i/r/k/v/w |
+| Bluetooth | 5.0 Low Energy |
+| NFC | MIFARE, ISO 14443 A/B, FeliCa, ISO 15693 |
+
+### Wytrzymałość Zebra TC21-HC
+
+| Parametr | Wartość |
+|----------|---------|
+| Klasa IP | IP67 |
+| Upadki | 1,2 m na beton |
+| Temperatura pracy | -10°C do +50°C |
+| Temperatura ładowania | 0°C do +40°C |
+| Odporność na dezynfekcję | Tak (zatwierdzone środki) |
+
+### Skaner Zebra TC21-HC
+
+| Parametr | Wartość |
+|----------|---------|
+| Model | SE4100 |
+| Celownik | LED (bezpieczny dla NICU) |
+| Iluminacja | Biała (dla kolorowych tacek) |
+| Kody 1D | Code 128, Code 39, EAN, UPC, Codabar |
+| Kody 2D | DataMatrix, QR Code, PDF-417, Aztec |
+`
+      },
+      {
+        title: 'FAQ – Najczęściej zadawane pytania',
+        content: `
+### Czym jest Zebra TC21-HC?
+
+**Odpowiedź:** Zebra TC21-HC to **komputer dotykowy dla służby zdrowia** z 5-calowym ekranem HD, skanerem SE4100 bezpiecznym dla oddziałów NICU, programowalnym przyciskiem alarmowym i obudową odporną na częstą dezynfekcję środkami szpitalnymi.
+
+### Czym różni się Zebra TC21-HC od standardowego Zebra TC21?
+
+**Odpowiedź:** Zebra TC21-HC ma: **skaner SE4100 z bezpiecznym celownikiem LED** (zamiast SE4710), **programowalny przycisk alarmowy** (Alert Button), **obudowę odporną na dezynfekcję** środkami szpitalnymi i **białą iluminację skanera** do odczytu kodów na kolorowych tackach laboratoryjnych.
+
+### Czy skaner Zebra TC21-HC jest bezpieczny dla noworodków?
+
+**Odpowiedź:** Tak, skaner SE4100 w Zebra TC21-HC ma **celownik LED bezpieczny dla oddziałów NICU** (neonatologicznych), sal porodowych i położniczych. Nie emituje promieniowania laserowego.
+
+### Jakimi środkami można dezynfekować Zebra TC21-HC?
+
+**Odpowiedź:** Zebra TC21-HC można dezynfekować: **izopropanolem (70%)**, **alkoholem etylowym (80%)**, **chlorkiem benzalkoniowym (0,3%)**, **podchorynem sodu (10%)**, **nadtlenkiem wodoru (3%)** i **chlorheksydyną (2%)**. Zabronione są: aceton, toluen, fenol, benzen, formaldehyd.
+
+### Jak działa przycisk alarmowy w Zebra TC21-HC?
+
+**Odpowiedź:** Przycisk alarmowy (czerwony przycisk z tyłu) wymaga **długiego naciśnięcia (min. 1 sekunda)** i może być skonfigurowany do: wykonania połączenia alarmowego, uruchomienia aplikacji, wysłania powiadomienia do dyżurki lub aktywacji lokalizacji personelu.
+
+### Jak skonfigurować przycisk alarmowy Zebra TC21-HC?
+
+**Odpowiedź:** Konfiguracja przez **StageNow**: 1) PowerMgr – włącz "All Wake-Up Sources", 2) Intent – ustaw akcję (np. tel:112), 3) KeyMappingMgr – wyłącz domyślną funkcję. Sprawdź aktywność w: Ustawienia > Dostępność > Alert Accessibility Service.
+
+### Jaka jest żywotność baterii Zebra TC21-HC podczas dyżuru?
+
+**Odpowiedź:** Bateria standardowa **3400 mAh** wystarcza na część dyżuru. Bateria rozszerzona **5260 mAh** zapewnia pracę przez **cały dyżur** bez wymiany. Zaleca się posiadanie baterii zapasowej i używanie ładowarki 4-Slot Battery Charger.
+
+### Czy Zebra TC21-HC obsługuje rękawiczki medyczne?
+
+**Odpowiedź:** Tak, ekran dotykowy Zebra TC21-HC obsługuje **rękawiczki medyczne**. Można włączyć tryb rękawiczek w ustawieniach wyświetlacza dla lepszej responsywności.
+
+### Jak często należy dezynfekować Zebra TC21-HC?
+
+**Odpowiedź:** Zalecana częstotliwość: **między pacjentami** (każdorazowo), **podczas dyżuru** (co 2-4 godziny), **przy zmianie dyżuru** (przed i po), **po kontakcie z płynami ustrojowymi** (natychmiast), **standardowo** (minimum raz dziennie).
+
+### Jaką klasę szczelności ma Zebra TC21-HC?
+
+**Odpowiedź:** Zebra TC21-HC ma certyfikat **IP67** (pełna pyłoszczelność i wodoszczelność do 1m przez 30 minut) oraz wytrzymuje upadki z **1,2 m** na beton.
+
+### Czy Zebra TC21-HC obsługuje wideokonferencje?
+
+**Odpowiedź:** Tak, Zebra TC21-HC ma kamerę przednią **5 MP** do wideokonferencji z lekarzami specjalistami, konsultacji telemedycznych i komunikacji z pacjentami. Kamera tylna **13 MP** służy do dokumentacji ran i obrażeń.
+
+### Jakie aplikacje głosowe obsługuje Zebra TC21-HC?
+
+**Odpowiedź:** Zebra TC21-HC obsługuje: **Push-to-Talk Express** (bez licencji), **Workforce Connect PTT Pro** (subskrypcja), **Workforce Connect Voice** (integracja z PBX, wymaga licencji Mobility DNA Enterprise).
+`
+      }
+    ]
+  },
+
+  'tc26hc': {
+    model: 'TC26-HC',
+    title: 'Zebra TC26-HC – Instrukcja obsługi po Polsku',
+    lastUpdated: '2026-01-15',
+    sourceDocument: 'Zebra TC26-HC User Guide',
+    keywords: [
+      'zebra tc26-hc instrukcja', 'zebra tc26-hc instrukcja po polsku', 'zebra tc26-hc manual',
+      'zebra tc26 healthcare', 'terminal medyczny zebra lte', 'zebra tc26-hc skanowanie', 'zebra tc26-hc reset',
+      'zebra tc26-hc bateria', 'zebra tc26-hc wifi', 'zebra tc26-hc lte', 'zebra tc26-hc bluetooth',
+      'zebra tc26-hc nfc', 'zebra tc26-hc dezynfekcja', 'zebra tc26-hc szpital', 'zebra tc26-hc służba zdrowia',
+      'zebra tc26-hc przycisk alarmowy', 'zebra tc26-hc alert button', 'zebra tc26-hc se4100',
+      'zebra tc26-hc nicu', 'zebra tc26-hc ambulans', 'zebra tc26-hc ratownictwo', 'zebra tc26-hc gps',
+      'zebra tc26-hc volte', 'zebra tc26-hc sim', 'zebra tc26-hc ip67', 'zebra tc26-hc android',
+      'komputer medyczny zebra lte', 'zebra healthcare lte', 'zebra tc26-hc transport sanitarny',
+      'zebra tc26-hc pielęgniarka środowiskowa', 'zebra tc26-hc wizyty domowe'
+    ],
+    sections: [
+      {
+        title: '1. Podstawowe informacje',
+        content: `
+### O urządzeniu Zebra TC26-HC
+
+Zebra TC26-HC to kompaktowy i wytrzymały komputer dotykowy klasy enterprise, zaprojektowany specjalnie dla **personelu medycznego i pracowników służby zdrowia**. W odróżnieniu od modelu Zebra TC21-HC, **Zebra TC26-HC posiada moduł sieci komórkowej LTE**, umożliwiając pracę również poza placówką medyczną – podczas wizyt domowych, transportu pacjentów, czy działań ratunkowych.
+
+### Cechy charakterystyczne wersji Healthcare z LTE
+
+Zebra TC26-HC łączy wszystkie funkcje medyczne modelu Zebra TC21-HC z pełną łącznością komórkową:
+
+- **Obudowa odporna na dezynfekcję** – materiały wytrzymujące częste czyszczenie środkami szpitalnymi
+- **Programowalny przycisk alarmowy (Alert Button)** – czerwony przycisk na tylnej obudowie do szybkiego wzywania pomocy
+- **Skaner SE4100 z bezpiecznym celownikiem LED** – bezpieczny na oddziałach NICU, porodowych i położniczych
+- **Biała iluminacja skanera** – odczyt kodów na kolorowych tackach laboratoryjnych
+- **Sieć komórkowa LTE** – łączność poza zasięgiem Wi-Fi szpitalnego
+- **VoLTE i VoWiFi** – wysokiej jakości połączenia głosowe
+- **GPS** – lokalizacja zespołów ratunkowych i personelu w terenie
+
+### Zastosowania Zebra TC26-HC
+
+- **Zespoły ratownictwa medycznego** – interwencje w terenie
+- **Pielęgniarki środowiskowe** – wizyty domowe u pacjentów
+- **Transport sanitarny** – opieka podczas transportu
+- **Służby ratunkowe** – działania poza placówką
+- **Opiekunowie pacjentów** – mobilna opieka
+- **Ambulanse** – pełna łączność w pojeździe
+
+### Parametry techniczne Zebra TC26-HC
+
+| Parametr | Zebra TC26-HC |
+|----------|---------------|
+| **Wyświetlacz** | 5,0" HD (1280 x 720), Corning Gorilla Glass |
+| **Procesor** | Qualcomm Snapdragon 660, 1,8 GHz / 2,2 GHz octa-core |
+| **System operacyjny** | Android 10 (z możliwością aktualizacji) |
+| **Pamięć RAM** | 3 GB lub 4 GB |
+| **Pamięć Flash** | 32 GB lub 64 GB |
+| **Karta pamięci** | microSD do 256 GB |
+| **Bateria standardowa** | 3400 mAh |
+| **Bateria rozszerzona** | 5260 mAh |
+| **Skaner** | Imager 2D SE4100 z bezpiecznym celownikiem LED |
+| **WLAN** | Wi-Fi 802.11 a/b/g/n/ac |
+| **WWAN** | LTE, HSPA+, CDMA |
+| **Bluetooth** | 5.0 LE |
+| **NFC** | MIFARE, ISO 14443 A/B, FeliCa, ISO 15693 |
+| **GPS** | GPS/GLONASS |
+| **SIM** | Nano SIM |
+| **Przycisk alarmowy** | Programowalny czerwony przycisk |
+
+### Obsługiwane pasma LTE Zebra TC26-HC
+
+| Region | Pasma |
+|--------|-------|
+| Europa | B1, B3, B5, B7, B8, B20, B28, B38, B40, B41 |
+| Ameryka Północna | B2, B4, B5, B7, B12, B13, B14, B17, B25, B26, B41, B66, B71 |
+
+### Wymiary i waga Zebra TC26-HC
+
+| Parametr | Bateria standardowa | Bateria rozszerzona |
+|----------|---------------------|---------------------|
+| Długość | 158 mm | 158 mm |
+| Szerokość | 79 mm | 79 mm |
+| Grubość | 13,7 mm | 17,3 mm |
+| Waga | ok. 246 g | ok. 268 g |
+
+### Warunki pracy Zebra TC26-HC
+
+| Parametr | Wartość |
+|----------|---------|
+| Temperatura pracy | -10°C do +50°C |
+| Temperatura przechowywania | -40°C do +70°C |
+| Temperatura ładowania | 0°C do +40°C |
+| Wilgotność względna | 5% – 95% bez kondensacji |
+| Odporność na upadki | 1,2 m na beton |
+| Klasa szczelności | IP67 |
+`
+      },
+      {
+        title: '2. Elementy urządzenia',
+        content: `
+### Widok z przodu Zebra TC26-HC
+
+| Nr | Element | Opis |
+|----|---------|------|
+| 1 | Kamera przednia | 5 MP do wideokonferencji medycznych |
+| 2 | Głośnik słuchawkowy | Tryb słuchawki telefonicznej |
+| 3 | Czujnik zbliżenia/światła | Automatyczne sterowanie ekranem |
+| 4 | Dioda LED skanowania | Status skanowania |
+| 5 | Dioda LED ładowania | Status ładowania |
+| 6 | Ekran dotykowy | 5" HD z obsługą rękawiczek medycznych |
+| 7 | Głośnik | Audio i tryb głośnomówiący |
+| 8 | Złącze USB-C | Ładowanie (z zaślepką ochronną) |
+| 9 | Mikrofon | Komunikacja głosowa |
+| 10 | Przycisk PTT | Push-to-Talk |
+| 11 | Przycisk skanowania | Inicjuje skanowanie |
+
+### Widok z tyłu Zebra TC26-HC
+
+| Nr | Element | Opis |
+|----|---------|------|
+| 1 | Antena NFC | Komunikacja NFC |
+| 2 | Mocowanie paska | Punkt mocowania paska medycznego |
+| 3 | Zatrzaski baterii | Wyjmowanie baterii |
+| 4 | **Przycisk alarmowy** | **Czerwony przycisk awaryjny** |
+| 5 | Bateria | PowerPrecision Li-Ion |
+| 6 | Przyciski głośności | Regulacja głośności |
+| 7 | Przycisk skanowania tylny | Skanowanie |
+| 8 | Lampa błyskowa | Doświetlenie |
+| 9 | Kamera tylna | 13 MP dokumentacja medyczna |
+| 10 | Przycisk zasilania | Włączanie/wyłączanie |
+| 11 | Okno skanera | Promień skanujący |
+`
+      },
+      {
+        title: '3. Przycisk alarmowy (Alert Button)',
+        content: `
+### Przeznaczenie przycisku alarmowego Zebra TC26-HC
+
+Przycisk alarmowy zapewnia **natychmiastowe wezwanie pomocy** w sytuacjach awaryjnych – szczególnie ważne dla personelu pracującego w terenie, podczas wizyt domowych czy transportu pacjentów.
+
+Może być skonfigurowany do:
+
+- Wykonania połączenia na numer alarmowy 112/999
+- Połączenia z dyspozytornią pogotowia
+- Wysłania współrzędnych GPS do centrum monitoringu
+- Aktywacji aplikacji bezpieczeństwa personelu
+
+### Konfiguracja przycisku alarmowego
+
+Konfiguracja przez narzędzie StageNow:
+
+1. **PowerMgr** – "All Wake-Up Sources" = "Turn on"
+2. **Intent** – Konfiguracja akcji:
+   - Mode: "Schedule sending of Intent on key presses"
+   - Key Identifier: "Rear Button"
+   - Android Action Name: android.intent.action.CALL
+   - URI: tel:112 lub numer dyspozytorni
+3. **KeyMappingMgr** – Wyłącz domyślną funkcję
+
+### Użycie przycisku alarmowego Zebra TC26-HC
+
+**Wymagane długie naciśnięcie (min. 1 s)** zapobiega przypadkowym alertom:
+
+- **Urządzenie aktywne:** Przytrzymaj czerwony przycisk przez 1+ sekundę
+- **Urządzenie uśpione:** Krótkie naciśnięcie, aby obudzić, następnie długie naciśnięcie
+`
+      },
+      {
+        title: '4. Rozpakowanie i instalacja',
+        content: `
+### Zawartość opakowania Zebra TC26-HC
+
+- Komputer dotykowy Zebra TC26-HC
+- Bateria PowerPrecision Li-Ion
+- Zaślepka złącza USB-C (zamontowana)
+- Przewodnik regulacyjny
+
+> **Uwaga:** Zaślepka USB-C jest zalecana do utrzymania szczelności podczas dezynfekcji.
+
+### Instalacja karty SIM Zebra TC26-HC
+
+**WAŻNE:** Zebra TC26-HC obsługuje wyłącznie karty **nano SIM**.
+
+1. Zdejmij pokrywę dostępową
+2. Przesuń uchwyt karty SIM do pozycji odblokowanej
+3. Podnieś uchwyt
+4. Umieść kartę nano SIM stykami w dół
+5. Zamknij i zablokuj uchwyt
+6. **Koniecznie** załóż pokrywę dla zachowania szczelności
+
+### Instalacja karty microSD
+
+1. Zdejmij pokrywę dostępową
+2. Odblokuj uchwyt karty microSD
+3. Włóż kartę
+4. Zamknij i zablokuj uchwyt
+5. Załóż pokrywę
+
+### Instalacja baterii Zebra TC26-HC
+
+1. Włóż baterię dolną krawędzią
+2. Dociśnij aż zatrzaski zablokują się
+`
+      },
+      {
+        title: '5. Bateria i ładowanie',
+        content: `
+### Informacje ogólne o baterii Zebra TC26-HC
+
+| Typ baterii | Pojemność | Czas ładowania do 90% |
+|-------------|-----------|----------------------|
+| Standardowa | 3400 mAh | ok. 3 godziny |
+| Rozszerzona | 5260 mAh | ok. 4 godziny |
+
+Bateria rozszerzona zapewnia pracę przez **cały dyżur** bez wymiany.
+
+### Wskaźniki ładowania Zebra TC26-HC
+
+| Dioda LED | Znaczenie |
+|-----------|-----------|
+| Miga bursztynowo | Ładowanie |
+| Świeci na zielono | Naładowane |
+| Miga szybko | Błąd ładowania |
+
+### Bezpieczeństwo baterii Zebra TC26-HC
+
+- Używaj wyłącznie oryginalnych baterii Zebra PowerPrecision
+- Nie narażaj baterii na temperatury powyżej 70°C
+- Ładuj tylko w temperaturze 0°C do +40°C
+- Przechowuj w suchym miejscu
+`
+      },
+      {
+        title: '6. Skanowanie w środowisku medycznym',
+        content: `
+### Skaner SE4100 – bezpieczny dla Healthcare Zebra TC26-HC
+
+- **Bezpieczny celownik LED** – dla oddziałów NICU i porodowych
+- **Biała iluminacja** – kody na kolorowych materiałach laboratoryjnych
+
+### Zastosowania skanowania w terenie
+
+| Zastosowanie | Opis |
+|--------------|------|
+| Identyfikacja pacjenta | Skanowanie opasek w ambulansie/u pacjenta |
+| Administrowanie leków | Weryfikacja przy podaniu w terenie |
+| Zarządzanie próbkami | Śledzenie próbek w terenie |
+| Dokumentacja | Dostęp do historii przez kod |
+
+### Obsługiwane symbologie Zebra TC26-HC
+
+**Kody 1D:** Code 128, Code 39, EAN-13, EAN-8, UPC-A, UPC-E, Codabar, Interleaved 2 of 5
+
+**Kody 2D:** DataMatrix (powszechny w farmacji), QR Code, PDF-417, Aztec Code
+
+### Procedura skanowania
+
+1. Skieruj skaner Zebra TC26-HC na kod kreskowy
+2. Naciśnij przycisk skanowania
+3. Zielona dioda potwierdzi odczyt
+4. Dane automatycznie trafią do systemu
+`
+      },
+      {
+        title: '7. Łączność komórkowa (WWAN)',
+        content: `
+### Aktywacja sieci LTE Zebra TC26-HC
+
+1. Upewnij się, że karta SIM jest zainstalowana
+2. Przejdź do **Ustawienia** > **Sieć i internet** > **Sieć komórkowa**
+3. Włącz **Dane mobilne**
+4. Urządzenie połączy się automatycznie
+
+### Konfiguracja APN
+
+Dla kart SIM służb medycznych/ratunkowych może być wymagana konfiguracja APN:
+
+1. **Ustawienia** > **Sieć i internet** > **Sieć komórkowa** > **Zaawansowane** > **Nazwy punktów dostępu**
+2. Dodaj nowy APN z danymi operatora
+3. Zapisz i ustaw jako domyślny
+
+### Roaming Zebra TC26-HC
+
+Dla pracy w terenie lub przy granicach zasięgu:
+
+1. **Ustawienia** > **Sieć i internet** > **Sieć komórkowa**
+2. Włącz **Roaming** w razie potrzeby
+
+### Udostępnianie połączenia (Hotspot)
+
+**Hotspot Wi-Fi** – udostępnianie internetu innym urządzeniom medycznym:
+
+1. **Ustawienia** > **Sieć i internet** > **Hotspot i tethering**
+2. Skonfiguruj i włącz **Hotspot Wi-Fi**
+`
+      },
+      {
+        title: '8. Łączność Wi-Fi, Bluetooth i NFC',
+        content: `
+### Wi-Fi Zebra TC26-HC
+
+Łączenie z siecią szpitalną lub ambulatoryjną:
+
+1. **Ustawienia** > **Sieć i internet** > **Wi-Fi**
+2. Wybierz sieć
+3. Wprowadź dane uwierzytelniające
+4. Połącz
+
+### Bluetooth Zebra TC26-HC
+
+Obsługiwane połączenia:
+
+- Słuchawki do komunikacji
+- Skanery zewnętrzne (RS5100, RS6000)
+- Urządzenia medyczne Bluetooth
+- Drukarki mobilne
+
+### NFC Zebra TC26-HC
+
+Zastosowania w służbie zdrowia:
+
+- Identyfikacja personelu
+- Logowanie do aplikacji
+- Odczyt kart pacjentów
+`
+      },
+      {
+        title: '9. Połączenia głosowe i GPS',
+        content: `
+### Połączenia telefoniczne Zebra TC26-HC
+
+Zebra TC26-HC działa jako pełnoprawny telefon komórkowy:
+
+**Wykonywanie połączeń:**
+1. Otwórz aplikację **Telefon**
+2. Wprowadź numer lub wybierz z kontaktów
+3. Dotknij ikony połączenia
+
+**VoLTE Zebra TC26-HC:**
+- Wysoka jakość głosu przez sieć LTE
+- Włącz w ustawieniach sieci komórkowej
+
+### Komunikacja PTT
+
+**Push-to-Talk Express:**
+- Komunikacja walkie-talkie w zespole
+
+**Workforce Connect PTT Pro:**
+- Zaawansowana komunikacja przez Wi-Fi i LTE
+
+### GPS – lokalizacja Zebra TC26-HC
+
+Zebra TC26-HC posiada zintegrowany GPS/GLONASS umożliwiający:
+
+- Lokalizację zespołów ratunkowych
+- Nawigację do pacjenta
+- Śledzenie transportu sanitarnego
+- Raportowanie pozycji do centrali
+
+**Włączanie GPS:**
+1. Ustawienia → Lokalizacja
+2. Włącz "Użyj lokalizacji"
+3. Wybierz tryb (Wysoka dokładność dla najlepszych wyników)
+`
+      },
+      {
+        title: '10. Kamera – dokumentacja medyczna',
+        content: `
+### Kamera tylna 13 MP Zebra TC26-HC
+
+Dokumentacja w terenie:
+
+- Stan pacjenta na miejscu zdarzenia
+- Obrażenia wypadkowe
+- Warunki środowiskowe
+- Miejsce interwencji
+
+### Kamera przednia 5 MP
+
+Zastosowania:
+
+- Wideokonferencje z lekarzami specjalistami
+- Konsultacje zdalne z centrum medycznym
+- Telemedycyna
+
+### Fotografowanie
+
+1. Otwórz aplikację Aparat
+2. Wyceluj obiektyw w obiekt
+3. Dotknij ekranu aby ustawić ostrość
+4. Naciśnij przycisk migawki
+`
+      },
+      {
+        title: '11. Czyszczenie i dezynfekcja',
+        content: `
+### Procedury dla środowiska medycznego Zebra TC26-HC
+
+Obudowa Zebra TC26-HC jest przeznaczona do **częstej dezynfekcji**.
+
+### Zatwierdzone środki dezynfekujące dla Zebra TC26-HC
+
+| Składnik | Max. stężenie |
+|----------|---------------|
+| Izopropanol | 70% |
+| Alkohol etylowy | 80% |
+| Chlorek benzalkoniowy | 0,3% |
+| Podchloryn sodu | 10% |
+| Nadtlenek wodoru | 3% |
+| Chlorheksydyna | 2% |
+
+### Substancje NIEDOZWOLONE
+
+Aceton, toluen, fenol, chlor (stężony), benzen, formaldehyd, amoniak > 0,5%
+
+### Procedura dezynfekcji Zebra TC26-HC
+
+1. **Wyłącz urządzenie**
+2. **Zwilż ściereczkę** dozwolonym środkiem (nie spryskuj urządzenia)
+3. **Przetrzyj wszystkie powierzchnie**
+4. **Wysusz** czystą ściereczką
+5. **Poczekaj** na wyschnięcie przed włączeniem
+
+### Częstotliwość dezynfekcji
+
+| Sytuacja | Częstotliwość |
+|----------|---------------|
+| Między pacjentami | Każdorazowo |
+| Po interwencji | Natychmiast |
+| Podczas dyżuru | Co 2-4 godziny |
+| Zmiana zespołu | Przed/po dyżurze |
+`
+      },
+      {
+        title: '12. Rozwiązywanie problemów',
+        content: `
+### Reset urządzenia Zebra TC26-HC
+
+**Soft Reset:** Przytrzymaj zasilanie → Uruchom ponownie
+
+**Hard Reset:** Zasilanie + głośność w górę przez 10-12 sekund
+
+### Typowe problemy Zebra TC26-HC
+
+| Problem | Rozwiązanie |
+|---------|-------------|
+| Brak sygnału LTE | Sprawdź kartę SIM i konfigurację APN |
+| Przycisk alarmowy nie działa | Sprawdź konfigurację StageNow i Accessibility |
+| GPS nie działa | Włącz lokalizację w ustawieniach |
+| Słabe skanowanie | Oczyść okno skanera |
+| Brak Wi-Fi | Sprawdź certyfikaty i dane logowania |
+
+### Problemy z siecią komórkową
+
+| Problem | Rozwiązanie |
+|---------|-------------|
+| Brak danych mobilnych | Sprawdź APN i limit danych |
+| Słaba jakość połączeń | Włącz VoLTE |
+| Roaming nie działa | Włącz roaming w ustawieniach |
+
+### Factory Reset (usuwa wszystkie dane)
+
+1. Ustawienia → System → Opcje resetowania
+2. Wybierz "Przywrócenie danych fabrycznych"
+3. Potwierdź operację
+
+> **Ostrzeżenie:** Factory Reset usuwa wszystkie dane użytkownika!
+`
+      },
+      {
+        title: '13. Akcesoria Healthcare',
+        content: `
+### Akcesoria medyczne Zebra TC26-HC
+
+| Akcesorium | Opis |
+|------------|------|
+| Healthcare Belt Clip | Klips odporny na dezynfekcję |
+| Healthcare Handstrap | Pasek medyczny na rękę |
+| Protective Boot | Osłona ochronna |
+| 4-Slot Battery Charger | Ładowarka baterii zapasowych |
+| Vehicle Cradle | Uchwyt do ambulansu |
+| USB-C Audio Adapter | Adapter słuchawkowy |
+
+### Stacje dokujące
+
+| Akcesorium | Opis |
+|------------|------|
+| 1-Slot Charge Only Cradle | Stacja ładująca pojedyncza |
+| 5-Slot Charge Only Cradle | Stacja ładująca 5-stanowiskowa |
+| 4-Slot Battery Charger | Ładowarka 4 baterii |
+
+### Akcesoria samochodowe Zebra TC26-HC
+
+| Akcesorium | Opis |
+|------------|------|
+| Vehicle Cradle | Uchwyt do ambulansu/pojazdu |
+| Ładowarka samochodowa | Zasilanie 12/24V |
+`
+      },
+      {
+        title: '14. Specyfikacje techniczne',
+        content: `
+### Procesor i pamięć Zebra TC26-HC
+
+| Parametr | Wartość |
+|----------|---------|
+| Procesor | Qualcomm Snapdragon 660, 1,8/2,2 GHz octa-core |
+| Pamięć RAM | 3 GB lub 4 GB |
+| Pamięć Flash | 32 GB lub 64 GB |
+| microSD | Do 256 GB |
+
+### Wyświetlacz Zebra TC26-HC
+
+| Parametr | Wartość |
+|----------|---------|
+| Przekątna | 5,0" |
+| Rozdzielczość | 1280 x 720 (HD) |
+| Ochrona | Corning Gorilla Glass |
+| Dotyk | Pojemnościowy, obsługa rękawiczek medycznych |
+
+### Łączność Zebra TC26-HC
+
+| Parametr | Wartość |
+|----------|---------|
+| WWAN | LTE, HSPA+, CDMA |
+| WLAN | 802.11 a/b/g/n/ac |
+| Bluetooth | 5.0 LE |
+| NFC | MIFARE, ISO 14443 A/B, FeliCa, ISO 15693 |
+| GPS | GPS/GLONASS |
+| SIM | Nano SIM |
+
+### Wytrzymałość Zebra TC26-HC
+
+| Parametr | Wartość |
+|----------|---------|
+| Klasa IP | IP67 |
+| Upadki | 1,2 m na beton |
+| Temperatura pracy | -10°C do +50°C |
+| Temperatura ładowania | 0°C do +40°C |
+| Odporność na dezynfekcję | Tak (zatwierdzone środki) |
+`
+      },
+      {
+        title: 'FAQ – Najczęściej zadawane pytania',
+        content: `
+### Czym jest Zebra TC26-HC?
+
+**Odpowiedź:** Zebra TC26-HC to **komputer dotykowy dla służby zdrowia z łącznością LTE**, wyposażony w skaner SE4100 bezpieczny dla NICU, programowalny przycisk alarmowy, GPS i obudowę odporną na dezynfekcję. Przeznaczony dla zespołów ratunkowych, pielęgniarek środowiskowych i transportu sanitarnego.
+
+### Czym różni się Zebra TC26-HC od Zebra TC21-HC?
+
+**Odpowiedź:** Zebra TC26-HC ma dodatkowo: **moduł LTE** do łączności poza Wi-Fi, **GPS/GLONASS** do lokalizacji w terenie, **VoLTE** do połączeń głosowych przez sieć komórkową i **slot na kartę nano SIM**. Zebra TC21-HC działa tylko przez Wi-Fi.
+
+### Dla kogo jest przeznaczony Zebra TC26-HC?
+
+**Odpowiedź:** Zebra TC26-HC jest idealny dla: **zespołów ratownictwa medycznego**, **pielęgniarek środowiskowych** (wizyty domowe), **transportu sanitarnego**, **służb ratunkowych**, **opiekunów pacjentów** – wszędzie tam, gdzie potrzebna jest łączność poza placówką medyczną.
+
+### Czy Zebra TC26-HC obsługuje GPS?
+
+**Odpowiedź:** Tak, Zebra TC26-HC ma wbudowany odbiornik **GPS/GLONASS** umożliwiający: lokalizację zespołów ratunkowych, nawigację do pacjenta, śledzenie transportu sanitarnego i raportowanie pozycji do centrali.
+
+### Jakimi środkami można dezynfekować Zebra TC26-HC?
+
+**Odpowiedź:** Zebra TC26-HC można dezynfekować: **izopropanolem (70%)**, **alkoholem etylowym (80%)**, **chlorkiem benzalkoniowym (0,3%)**, **podchorynem sodu (10%)**, **nadtlenkiem wodoru (3%)** i **chlorheksydyną (2%)**. Zabronione są: aceton, toluen, fenol, benzen, formaldehyd.
+
+### Czy skaner Zebra TC26-HC jest bezpieczny dla noworodków?
+
+**Odpowiedź:** Tak, skaner SE4100 w Zebra TC26-HC ma **celownik LED bezpieczny dla oddziałów NICU** (neonatologicznych), sal porodowych i położniczych. Nie emituje promieniowania laserowego.
+
+### Jak działa przycisk alarmowy w Zebra TC26-HC?
+
+**Odpowiedź:** Przycisk alarmowy (czerwony przycisk z tyłu) wymaga **długiego naciśnięcia (min. 1 sekunda)** i może być skonfigurowany do: wykonania połączenia alarmowego (112), połączenia z dyspozytornią, wysłania współrzędnych GPS lub aktywacji aplikacji bezpieczeństwa.
+
+### Jakie pasma LTE obsługuje Zebra TC26-HC w Polsce?
+
+**Odpowiedź:** Zebra TC26-HC obsługuje europejskie pasma LTE: **B1, B3, B5, B7, B8, B20, B28, B38, B40, B41**, co zapewnia kompatybilność z polskimi operatorami (Orange, Play, Plus, T-Mobile).
+
+### Czy Zebra TC26-HC może działać jako hotspot Wi-Fi?
+
+**Odpowiedź:** Tak, Zebra TC26-HC może udostępniać połączenie LTE przez **hotspot Wi-Fi** lub **tethering USB** innym urządzeniom medycznym w terenie.
+
+### Jaka jest żywotność baterii Zebra TC26-HC podczas dyżuru?
+
+**Odpowiedź:** Bateria standardowa **3400 mAh** wystarcza na część dyżuru. Bateria rozszerzona **5260 mAh** zapewnia pracę przez **cały dyżur** bez wymiany. Zaleca się posiadanie baterii zapasowej.
+
+### Czy Zebra TC26-HC obsługuje VoLTE?
+
+**Odpowiedź:** Tak, Zebra TC26-HC obsługuje **VoLTE** (Voice over LTE) i **VoWiFi** (Voice over Wi-Fi) dla wysokiej jakości połączeń głosowych. VoLTE można włączyć w ustawieniach sieci komórkowej.
+
+### Jakie akcesoria samochodowe są dostępne dla Zebra TC26-HC?
+
+**Odpowiedź:** Dla Zebra TC26-HC dostępne są: **Vehicle Cradle** (uchwyt do ambulansu/pojazdu) i **ładowarka samochodowa 12/24V** do zasilania podczas transportu pacjentów.
+`
+      }
+    ]
+  },
+
+  'tc53': {
+    model: 'TC53',
+    title: 'Zebra TC53 – Instrukcja obsługi po Polsku',
+    lastUpdated: '2026-01-15',
+    sourceDocument: 'Zebra TC53 User Guide',
+    keywords: [
+      'zebra tc53 instrukcja', 'zebra tc53 instrukcja po polsku', 'zebra tc53 manual',
+      'terminal mobilny zebra tc53', 'zebra tc53 skanowanie', 'zebra tc53 reset', 'zebra tc53 bateria',
+      'zebra tc53 wifi', 'zebra tc53 wifi 6e', 'zebra tc53 bluetooth', 'zebra tc53 nfc', 'zebra tc53 android',
+      'zebra tc53 kamera', 'zebra tc53 specyfikacja', 'zebra tc53 akcesoria', 'zebra tc53 stacja dokująca',
+      'zebra tc53 ładowanie', 'zebra tc53 ip65', 'zebra tc53 ip68', 'zebra tc53 enterprise',
+      'komputer dotykowy zebra tc53', 'zebra tc53 skanowanie kodów', 'zebra tc53 qualcomm 6490',
+      'zebra tc53 6 cali', 'zebra tc53 fhd+', 'zebra tc53 gorilla glass', 'zebra tc53 se4720',
+      'zebra tc53 se55', 'zebra tc53 mobility dna', 'zebra tc53 datawedge', 'zebra tc53 powerprecision+',
+      'zebra tc53 hot swap', 'zebra tc53 warm swap', 'zebra tc53 rugged boot', 'zebra tc53 magazyn',
+      'zebra tc53 logistyka', 'zebra tc53 handel detaliczny'
+    ],
+    sections: [
+      {
+        title: '1. Podstawowe informacje',
+        content: `
+### O urządzeniu Zebra TC53
+
+Zebra TC53 to zaawansowany komputer mobilny nowej generacji z **6-calowym ekranem dotykowym Full HD+**, zaprojektowany dla wymagających środowisk przemysłowych. Urządzenie wyposażone jest w najnowszy procesor Qualcomm 6490 (8-rdzeniowy, 2,7 GHz), zaawansowany skaner kodów kreskowych (SE4720 lub SE55), podwójne kamery (16 MP + 8 MP) oraz łączność Wi-Fi 6E, Bluetooth 5.2 i NFC.
+
+Konstrukcja Zebra TC53 spełnia normy IP65/IP68 oraz MIL-STD-810H, zapewniając wyjątkową odporność na upadki (do 1,8 m), wodę, kurz i ekstremalne temperatury. Model TC53 to wersja Wi-Fi – dla pracy wymagającej sieci komórkowej dostępny jest model Zebra TC58.
+
+### Parametry techniczne Zebra TC53
+
+| Parametr | Zebra TC53 |
+|----------|------------|
+| **Wyświetlacz** | 6,0" FHD+ (2160 x 1080) |
+| Jasność | 600 nitów |
+| Ochrona ekranu | Corning Gorilla Glass |
+| Procesor | Qualcomm 6490 2,7 GHz (8-rdzeniowy) |
+| System operacyjny | Android 11 (aktualizacje do Android 14+) |
+| Pamięć RAM | 4 GB / 6 GB / 8 GB |
+| Pamięć Flash | 64 GB / 128 GB |
+| Karta microSD | Do 2 TB |
+| Łączność | Wi-Fi 6E, Bluetooth 5.2, NFC |
+
+### Porównanie Zebra TC53 vs Zebra TC58
+
+| Parametr | Zebra TC53 | Zebra TC58 |
+|----------|------------|------------|
+| **Łączność komórkowa** | **Brak** | **5G / LTE / CBRS** |
+| Wi-Fi | 6E (802.11ax) | 6E (802.11ax) |
+| Karta SIM | Nie dotyczy | Nano SIM |
+| GPS | Opcjonalnie | Zintegrowany |
+| Zastosowanie | Praca w zasięgu Wi-Fi | Praca mobilna w terenie |
+| Połączenia głosowe | VoIP przez Wi-Fi | VoIP + VoLTE (5G) |
+
+### Zastosowania Zebra TC53
+
+- **Handel detaliczny:** sprawdzanie cen, realizacja zamówień online, inwentaryzacja, obsługa punktów POS
+- **Magazyny:** kompletacja zamówień, przyjęcia/wydania towarów, skanowanie na dużych wysokościach (z SE55)
+- **Logistyka wewnętrzna:** śledzenie przesyłek, kontrola stanów, weryfikacja dostaw
+- **Produkcja:** kontrola jakości, śledzenie komponentów, dokumentacja fotograficzna
+- **Służba zdrowia:** identyfikacja pacjentów, zarządzanie lekami, dokumentacja medyczna
+- **Hotelarstwo i eventy:** obsługa zamówień, weryfikacja biletów, płatności NFC
+
+### Cechy charakterystyczne Zebra TC53
+
+- **Wyświetlacz 6" FHD+** – największy i najjaśniejszy w swojej klasie (600 nitów)
+- **Procesor Qualcomm 6490** – 8-rdzeniowy, 2,7 GHz dla błyskawicznej wydajności
+- **Certyfikat IP65/IP68** – pełna odporność na kurz i wodę
+- **Upadek z 1,8 m** – na beton z futerałem ochronnym (MIL-STD-810H)
+- **True Hot Swap** – wymiana baterii bez wyłączania (wersje Premium)
+- **Warm Swap** – szybka wymiana baterii z zachowaniem pamięci
+- **NFC z Apple VAS i Google SmartTap** – obsługa płatności i biletów
+- **3 mikrofony + 2 głośniki** – doskonała jakość dźwięku
+- **Kamera 16 MP z OIS** – opcjonalna stabilizacja obrazu
+`
+      },
+      {
+        title: '2. Rozpakowanie i instalacja',
+        content: `
+### Zawartość opakowania Zebra TC53
+
+- Komputer mobilny Zebra TC53
+- Bateria PowerPrecision+ Li-Ion 4680 mAh
+- Skrócona instrukcja obsługi
+- Przewodnik bezpieczeństwa
+
+> **Uwaga:** Zasilacz, kable, stacje dokujące i futerały ochronne są sprzedawane oddzielnie.
+
+### Instalacja karty microSD (opcjonalnie)
+
+1. Podnieś klapkę dostępową z tyłu urządzenia Zebra TC53
+2. Przesuń uchwyt karty microSD do pozycji "Open"
+3. Podnieś drzwiczki uchwytu karty
+4. Umieść kartę microSD stykami do góry
+5. Zamknij drzwiczki i przesuń uchwyt do pozycji "Lock"
+6. Zamknij klapkę dostępową – musi być prawidłowo uszczelniona
+
+> **Uwaga:** Zachowaj środki ostrożności ESD podczas instalacji kart.
+
+### Instalacja baterii Zebra TC53
+
+1. Włóż baterię do komory, wyrównując styki (najpierw dolna część)
+2. Dociśnij baterię do góry, aż zatrzaski zablokują się na miejscu
+3. Zatrzaski po bokach powinny zaskoczyć automatycznie
+
+### Wyjmowanie baterii
+
+1. Naciśnij jednocześnie oba zatrzaski zwalniające z tyłu urządzenia
+2. Przytrzymując zatrzaski, przesuń je do środka
+3. Unieś baterię i wyjmij z komory
+
+> **Funkcja Warm Swap:** Zebra TC53 pozwala na wymianę baterii z zachowaniem stanu pamięci przez 60 sekund.
+
+> **Funkcja True Hot Swap:** Wersje Premium pozwalają na wymianę baterii bez wyłączania – zachowanie połączenia Wi-Fi przez 30 sekund.
+
+### Warunki pracy Zebra TC53
+
+| Tryb | Temperatura | Wilgotność |
+|------|-------------|------------|
+| Praca | -20°C do +50°C | 5-95% bez kondensacji |
+| Ładowanie | 0°C do +50°C | – |
+| Przechowywanie | -40°C do +70°C | 5-95% bez kondensacji |
+`
+      },
+      {
+        title: '3. Elementy urządzenia',
+        content: `
+### Widok z przodu Zebra TC53
+
+| Nr | Element | Opis |
+|----|---------|------|
+| 1 | Kamera przednia | 8 MP – wideorozmowy i rozpoznawanie twarzy |
+| 2 | LED skanowania | Wskazuje status operacji skanowania |
+| 3 | Słuchawka/Głośnik | Audio w trybie słuchawki |
+| 4 | Czujnik zbliżenia/światła | Automatyczna regulacja jasności ekranu |
+| 5 | LED ładowania/powiadomień | Status baterii i powiadomienia aplikacji |
+| 6 | Ekran dotykowy | 6" FHD+ z obsługą rękawiczek i mokrego dotyku |
+| 7 | Głośnik multimedialny | Odtwarzanie multimediów i tryb głośnomówiący |
+| 8 | Styki ładowania | Ładowanie przez stacje dokujące |
+| 9 | Złącze USB-C | Ładowanie, transfer danych, akcesoria |
+| 10 | Przycisk skanowania (prawy) | Uruchamia skanowanie (programowalny) |
+| 11 | Przyciski głośności | Regulacja głośności (programowalne) |
+
+### Widok z tyłu Zebra TC53
+
+| Nr | Element | Opis |
+|----|---------|------|
+| 12 | Przycisk zasilania | Włączanie/wyłączanie, blokada ekranu |
+| 13 | Mikrofony (3 szt.) | Komunikacja, redukcja szumów |
+| 14 | Złącze audio 3,5 mm | Wyjście słuchawkowe |
+| 15 | Złącze 8-pin I/O | Komunikacja z akcesoriami |
+| 16 | Zatrzaski baterii | Naciśnij aby zwolnić baterię |
+| 17 | Bateria PowerPrecision+ | Wymienna bateria Li-Ion |
+| 18 | Głośnik | Odtwarzanie multimediów |
+| 19 | Styki ładowania DC | Ładowanie przez kabel/stację |
+| 20 | Mocowanie paska | Punkt montażowy dla paska na rękę |
+| 21 | Moduł ToF | Pomiar odległości (tylko wersje Premium) |
+| 22 | Kamera tylna 16 MP | Zdjęcia i wideo z lampą błyskową |
+| 23 | Okno skanera | Wyjście promienia skanera |
+| 24 | Klapka dostępowa | Slot na microSD |
+| 25 | Przycisk PTT | Push-to-Talk (programowalny) |
+| 26 | Przycisk skanowania (lewy) | Alternatywny trigger skanera |
+`
+      },
+      {
+        title: '4. Przyciski i nawigacja',
+        content: `
+### Przyciski fizyczne Zebra TC53
+
+| Przycisk | Krótkie naciśnięcie | Przytrzymanie |
+|----------|---------------------|---------------|
+| **Power** | Włącz/wyłącz ekran | Menu zasilania (wyłącz/restart/Battery Swap) |
+| **Głośność +/-** | Regulacja głośności | Programowalna funkcja |
+| **Skanowanie (L/P)** | Aktywacja skanera | Ciągłe skanowanie |
+| **PTT** | Push-to-Talk | Zależne od aplikacji |
+
+### Przyciski nawigacyjne (na ekranie)
+
+| Przycisk | Funkcja |
+|----------|---------|
+| ◀ **Wstecz** | Powrót do poprzedniego ekranu |
+| ● **Home** | Ekran główny |
+| ▣ **Ostatnie** | Lista ostatnio używanych aplikacji |
+
+### Gesty nawigacyjne Zebra TC53
+
+- **Przeciągnij w dół od góry** – Panel szybkich ustawień i powiadomienia
+- **Przeciągnij w górę od dołu** – Szuflada aplikacji
+- **Przeciągnij od lewej/prawej krawędzi** – Wstecz (w trybie gestów)
+- **Przeciągnij dwoma palcami w dół** – Pełny panel szybkich ustawień
+
+### Ikony paska stanu
+
+| Ikona | Znaczenie |
+|-------|-----------|
+| 📶 | Siła sygnału Wi-Fi |
+| 🔋 | Poziom naładowania baterii |
+| ⚡ | Ładowanie w toku |
+| 🔵 | Bluetooth aktywny |
+| 📍 | Lokalizacja GPS aktywna |
+| ✈️ | Tryb samolotowy |
+| 🔇 | Tryb cichy |
+| 📳 | Tryb wibracji |
+| 🔔 | Powiadomienia aktywne |
+| 📡 | NFC aktywne |
+
+### Panel szybkich ustawień
+
+Przeciągnij w dół od górnej krawędzi ekranu Zebra TC53, aby uzyskać dostęp do:
+
+- Wi-Fi – włącz/wyłącz i wybór sieci
+- Bluetooth – włącz/wyłącz i parowanie
+- Latarka – włącz/wyłącz
+- Tryb samolotowy
+- Obracanie ekranu
+- Jasność ekranu (suwak)
+- Oszczędzanie baterii
+- Tryb nocny (Night Light)
+- NFC – włącz/wyłącz
+- Hotspot Wi-Fi
+`
+      },
+      {
+        title: '5. Bateria i ładowanie',
+        content: `
+### Bateria PowerPrecision+ Zebra TC53
+
+Zebra TC53 wykorzystuje inteligentne baterie litowo-jonowe PowerPrecision+ z funkcją monitorowania stanu w czasie rzeczywistym:
+
+| Typ baterii | Pojemność | Napięcie |
+|-------------|-----------|----------|
+| **Standard** | **4680 mAh / 17,7 Wh** | 3,85V |
+| Rozszerzona | 7000 mAh / 26,95 Wh | 3,85V |
+| Standard z BLE Beacon | 4680 mAh / 17,7 Wh | 3,85V |
+| Do ładowania bezprzewodowego | 4680 mAh / 17,7 Wh | 3,85V |
+
+### Wskaźnik LED ładowania Zebra TC53
+
+| LED | Status |
+|-----|--------|
+| Bursztynowy (miga 1x/4s) | Ładowanie w toku |
+| Zielony (stały) | Naładowana w pełni |
+| Czerwony (miga 1x/4s) | Ładowanie – bateria zużyta (wymień) |
+| Czerwony (stały) | Naładowana – bateria zużyta (wymień) |
+| Bursztynowy (miga 2x/s) | Błąd ładowania (temperatura, timeout) |
+
+### Czas ładowania Zebra TC53
+
+- **Bateria standardowa (4680 mAh):** do 90% w ~2 godziny
+- **Bateria rozszerzona (7000 mAh):** do 90% w ~3 godziny
+
+### Opcje ładowania Zebra TC53
+
+| Ładowarka | Opis |
+|-----------|------|
+| Zasilacz USB-C | Min. 9V/2A przez kabel USB-C |
+| 2-Slot USB Cradle | Stacja 1 urządzenie + 1 bateria z Ethernet |
+| 5-Slot Charge Only | Stacja 5-stanowiskowa |
+| 5-Slot Ethernet | Stacja 5-stanowiskowa z siecią |
+| 4-Slot Battery Charger | Ładowarka 4 baterii zapasowych |
+| Vehicle Cradle | Stacja samochodowa z ładowaniem |
+| Wireless Charging Cradle | Ładowanie bezprzewodowe |
+
+### Funkcja Battery Swap Zebra TC53
+
+Dla urządzeń Premium dostępna jest funkcja True Hot Swap:
+
+1. Naciśnij przycisk Power
+2. Wybierz "Battery Swap"
+3. Postępuj zgodnie z instrukcjami na ekranie
+4. Poczekaj, aż LED zgaśnie
+5. Wymień baterię w ciągu 30 sekund (połączenie Wi-Fi)
+6. Wymień baterię w ciągu 60 sekund (zachowanie pamięci)
+
+### Bezpieczeństwo baterii Zebra TC53
+
+- Używaj wyłącznie oryginalnych baterii Zebra PowerPrecision+
+- Nie narażaj baterii na temperatury powyżej 70°C
+- Ładuj tylko w temperaturze 0°C do +50°C
+- Przechowuj w suchym miejscu, z dala od źródeł ciepła
+`
+      },
+      {
+        title: '6. Skanowanie kodów kreskowych',
+        content: `
+### Dostępne skanery Zebra TC53
+
+| Model | Typ | Zasięg | Zastosowanie |
+|-------|-----|--------|--------------|
+| **SE4720** | Standard | 5-66 cm | Skanowanie w zasięgu ręki |
+| **SE55** | Advanced Range | 6-744 cm | Skanowanie z dystansu (do 7,4 m) |
+
+### Zasięg skanowania SE4720
+
+| Kod | Bliski | Daleki |
+|-----|--------|--------|
+| Code 39 (3 mil) | 7,6 cm | 14,7 cm |
+| Code 128 (5 mil) | 5,8 cm | 24,9 cm |
+| PDF417 (5 mil) | 7,6 cm | 20,1 cm |
+| Data Matrix (10 mil) | 5,3 cm | 27,9 cm |
+| UPC-A (100%) | 5,0 cm | 61,0 cm |
+
+### Zasięg skanowania SE55 (Advanced Range)
+
+| Kod | Bliski | Daleki |
+|-----|--------|--------|
+| Code 39 (3 mil) | 6,9 cm | 41,1 cm |
+| Code 39 (5 mil) | 6,4 cm | 67,6 cm |
+| UPC-A (100%) | 6,4 cm | 180 cm |
+| Code 128 (15 mil, 4") | 18,2 cm | 181 cm |
+| Code 39 (55 mil) | – | 744 cm |
+
+### Obsługiwane kody przez Zebra TC53
+
+**Kody 1D:**
+- Code 39, Code 128, Code 93, Code 11
+- UPC-A/E, EAN-8/EAN-13
+- Interleaved 2 of 5, Discrete 2 of 5
+- Codabar, MSI, GS1 DataBar
+
+**Kody 2D:**
+- QR Code, Micro QR, Data Matrix
+- PDF417, Micro PDF417
+- Aztec, Maxicode, Han Xin, DotCode
+
+**Kody pocztowe:**
+- US Postnet, US Planet, UK Postal
+- Australian Postal, Japanese Postal
+
+### Technika skanowania Zebra TC53
+
+1. Upewnij się, że aplikacja jest otwarta i kursor znajduje się w polu tekstowym
+2. Skieruj okno skanera w stronę kodu kreskowego
+3. Naciśnij i przytrzymaj przycisk skanowania
+4. Wyrównaj wzorzec celownika z kodem kreskowym
+5. LED skanowania zaświeci się na zielono + sygnał dźwiękowy
+6. Dane zostaną wprowadzone do pola tekstowego
+
+> **Tryb Picklist:** Pozwala wybrać konkretny kod, gdy w polu widzenia jest ich więcej.
+
+> **Tryb MultiBarcode:** Pozwala skanować wiele kodów jednocześnie (od 2 do 100).
+
+### Skanery zewnętrzne Bluetooth
+
+Zebra TC53 obsługuje następujące skanery Bluetooth:
+
+- **RS5100** – skaner pierścieniowy single-finger
+- **RS6000/RS6100** – skaner pierścieniowy 2-finger
+- **DS2278** – skaner ręczny cyfrowy
+- **DS3678** – skaner ręczny przemysłowy
+`
+      },
+      {
+        title: '7. Łączność bezprzewodowa',
+        content: `
+### Wi-Fi 6E Zebra TC53
+
+Zebra TC53 obsługuje najnowszy standard Wi-Fi 6E (802.11ax) z pasmem 6 GHz:
+
+| Parametr | Wartość |
+|----------|---------|
+| Standardy | 802.11 a/b/g/n/ac/ax |
+| Pasma | 2,4 GHz / 5 GHz / 6 GHz |
+| Prędkość maks. | do 2402 Mbps (5 GHz/6 GHz) |
+| Szerokość kanału | 20/40/80/160 MHz |
+| Zabezpieczenia | WPA3, WPA2, WPA, 802.1x |
+
+**Łączenie z siecią Wi-Fi:**
+
+1. Przeciągnij w dół od góry ekranu
+2. Przytrzymaj ikonę Wi-Fi
+3. Włącz Wi-Fi przełącznikiem
+4. Wybierz sieć z listy dostępnych
+5. Wprowadź hasło (jeśli wymagane)
+6. Dotknij "Połącz"
+
+### Bluetooth 5.2 Zebra TC53
+
+| Parametr | Wartość |
+|----------|---------|
+| Wersja | Bluetooth 5.2 + BLE |
+| Profile | A2DP, AVRCP, HFP, HSP, HID, OPP, PBAP, PAN, MAP |
+| Zasięg | do 10 m (klasa 2) |
+
+**Parowanie urządzenia Bluetooth:**
+
+1. Ustawienia → Połączone urządzenia → Sparuj nowe urządzenie
+2. Włącz tryb parowania na akcesoriach
+3. Wybierz urządzenie z listy
+4. Potwierdź kod PIN (jeśli wymagany)
+
+### NFC Zebra TC53
+
+| Parametr | Wartość |
+|----------|---------|
+| Standard | ISO 14443 Type A/B, ISO 15693, FeliCa |
+| Tryby | Reader, Writer, Card Emulation, Peer-to-Peer |
+| Funkcje | Apple VAS, Google SmartTap, parowanie urządzeń |
+
+**Odczyt karty NFC:**
+
+1. Włącz NFC w ustawieniach
+2. Zbliż kartę/telefon do tylnej części urządzenia
+3. Przytrzymaj przez 1-2 sekundy
+4. Dane zostaną automatycznie odczytane
+`
+      },
+      {
+        title: '8. Kamera',
+        content: `
+### Specyfikacja kamer Zebra TC53
+
+| Kamera | Rozdzielczość | Funkcje |
+|--------|---------------|---------|
+| Tylna | 16 MP | Autofokus, lampa błyskowa, OIS (opcja) |
+| Przednia | 8 MP | Wideorozmowy, rozpoznawanie twarzy |
+
+### Fotografowanie
+
+1. Otwórz aplikację Kamera
+2. Skieruj urządzenie na obiekt
+3. Dotknij ekranu, aby ustawić ostrość (opcjonalnie)
+4. Naciśnij przycisk migawki lub przycisk głośności
+
+### Nagrywanie wideo
+
+1. Otwórz aplikację Kamera
+2. Przesuń do trybu Video
+3. Naciśnij czerwony przycisk, aby rozpocząć nagrywanie
+4. Naciśnij ponownie, aby zatrzymać
+
+### Zastosowania kamery Zebra TC53 w przedsiębiorstwie
+
+- Dokumentacja dowodów dostawy (Proof of Delivery)
+- Dokumentacja stanu towaru (Proof of Condition)
+- Skanowanie dokumentów i etykiet
+- Wideokonferencje i wsparcie zdalne
+- Kontrola jakości i raportowanie
+`
+      },
+      {
+        title: '9. Ustawienia systemowe',
+        content: `
+### Wyświetlacz Zebra TC53
+
+| Ustawienie | Opis |
+|------------|------|
+| Jasność | Ręczna lub automatyczna (czujnik światła) |
+| Adaptacyjna jasność | Automatyczne dostosowanie do otoczenia |
+| Tryb nocny | Redukcja niebieskiego światła |
+| Rozmiar czcionki | Mały / Domyślny / Duży / Największy |
+| Wygaszenie ekranu | 15s / 30s / 1min / 2min / 5min / 10min / 30min |
+| Tryb dotyku | Palec / Rękawiczka / Mokry palec / Stylus |
+
+### Dźwięk Zebra TC53
+
+| Ustawienie | Opis |
+|------------|------|
+| Głośność multimediów | Muzyka, wideo, gry |
+| Głośność połączeń | Rozmowy VoIP |
+| Głośność dzwonka | Powiadomienia, alarmy |
+| Głośność skanera | Dźwięki potwierdzenia skanowania |
+| Wibracje | Włącz/wyłącz dla różnych zdarzeń |
+
+### Bezpieczeństwo Zebra TC53
+
+- Blokada ekranu (PIN / Wzór / Hasło / Twarz)
+- Szyfrowanie urządzenia
+- Zarządzanie certyfikatami
+- Uprawnienia aplikacji
+- Secure Boot i Verified Boot
+- Resetowanie do ustawień fabrycznych
+`
+      },
+      {
+        title: '10. Konserwacja',
+        content: `
+### Harmonogram czyszczenia Zebra TC53
+
+| Element | Częstotliwość |
+|---------|---------------|
+| Ekran dotykowy | Codziennie |
+| Okno skanera | Codziennie |
+| Styki ładowania | Co tydzień |
+| Obudowa | W razie potrzeby |
+| Styki baterii | Przy wymianie baterii |
+
+### Czyszczenie ekranu i obudowy
+
+1. Wyłącz urządzenie Zebra TC53 lub zablokuj ekran
+2. Użyj miękkiej, bezpyłowej ściereczki
+3. Zwilż alkoholem izopropylowym (70%)
+4. Delikatnie przetrzyj powierzchnię
+5. Osusz przed użyciem
+
+### Czyszczenie okna skanera
+
+1. Użyj suchej, miękkiej ściereczki
+2. Przy uporczywych zabrudzeniach – alkohol izopropylowy
+3. Nie używaj materiałów ściernych
+4. Regularnie sprawdzaj czy okno nie jest zarysowane
+
+### Czyszczenie styków baterii
+
+1. Wyjmij baterię z urządzenia
+2. Użyj wacika nasączonego alkoholem izopropylowym
+3. Delikatnie przetrzyj styki w urządzeniu i baterii
+4. Odczekaj do całkowitego wyschnięcia
+5. Włóż baterię
+
+### Dozwolone środki czyszczące
+
+- Alkohol izopropylowy (70%)
+- Chusteczki dezynfekujące (bez wybielacza)
+- Roztwór mydła (łagodny)
+
+### Zabronione środki
+
+- Wybielacze, amoniak
+- Rozpuszczalniki, aceton
+- Materiały ścierne
+`
+      },
+      {
+        title: '11. Rozwiązywanie problemów',
+        content: `
+### Problemy z uruchomieniem Zebra TC53
+
+| Problem | Rozwiązanie |
+|---------|-------------|
+| Urządzenie nie włącza się | Naładuj baterię przez 15 minut, sprawdź instalację baterii |
+| Urządzenie zawiesza się | Przytrzymaj Power przez 10 sekund (twardy reset) |
+| Pętla restartu | Wykonaj Enterprise Reset |
+| Ekran pozostaje czarny | Sprawdź czy bateria jest naładowana, wykonaj twardy reset |
+
+### Problemy z baterią Zebra TC53
+
+| Problem | Rozwiązanie |
+|---------|-------------|
+| Szybkie rozładowanie | Zamknij nieużywane aplikacje, zmniejsz jasność |
+| Nie ładuje się | Sprawdź styki, użyj innej ładowarki, sprawdź temperaturę |
+| LED miga na czerwono | Błąd ładowania – temperatura poza zakresem |
+| LED czerwony stały | Bateria zużyta – wymień na nową |
+
+### Problemy ze skanowaniem Zebra TC53
+
+| Problem | Rozwiązanie |
+|---------|-------------|
+| Skaner nie działa | Sprawdź czy DataWedge jest włączony, zrestartuj urządzenie |
+| Nie odczytuje kodu | Oczyść okno skanera, zmień kąt/odległość |
+| Wolne skanowanie | Wyłącz niepotrzebne symbole w DataWedge |
+| Błędne odczyty | Włącz tryb Picklist |
+
+### Problemy z Wi-Fi Zebra TC53
+
+| Problem | Rozwiązanie |
+|---------|-------------|
+| Brak połączenia | Sprawdź hasło, odległość od AP, zrestartuj Wi-Fi |
+| Słaby sygnał | Zbliż się do punktu dostępu |
+| Częste rozłączenia | Wyłącz oszczędzanie baterii dla Wi-Fi |
+| Wolne połączenie | Przełącz na pasmo 5 GHz/6 GHz |
+
+### Resetowanie urządzenia Zebra TC53
+
+**Miękki reset (restart):**
+1. Przytrzymaj przycisk Power
+2. Wybierz "Uruchom ponownie"
+
+**Twardy reset:**
+1. Przytrzymaj Power przez 10 sekund
+2. Urządzenie wyłączy się i włączy ponownie
+
+**Enterprise Reset (zachowuje dane firmowe):**
+1. Ustawienia → System → Opcje resetowania
+2. Wybierz "Enterprise Reset"
+3. Potwierdź operację
+
+**Factory Reset (usuwa wszystkie dane):**
+1. Ustawienia → System → Opcje resetowania
+2. Wybierz "Przywrócenie danych fabrycznych"
+3. Potwierdź operację
+
+> **Ostrzeżenie:** Factory Reset usuwa wszystkie dane użytkownika!
+`
+      },
+      {
+        title: '12. Akcesoria Zebra TC53',
+        content: `
+### Futerały i obudowy ochronne Zebra TC53
+
+| Akcesorium | Opis |
+|------------|------|
+| Rugged Boot | Obudowa ochronna zwiększająca odporność na upadki |
+| Exoskeleton | Wzmocniona obudowa zewnętrzna |
+
+### Paski i uchwyty Zebra TC53
+
+| Akcesorium | Opis |
+|------------|------|
+| Hand Strap | Pasek na rękę |
+| Trigger Handle | Uchwyt spustowy do intensywnego skanowania |
+| Lanyard | Smycz zabezpieczająca |
+
+### Stacje dokujące Zebra TC53
+
+| Akcesorium | Opis |
+|------------|------|
+| 2-Slot USB Cradle | 1 urządzenie + 1 bateria, USB/Ethernet |
+| 5-Slot Charge Only | Stacja 5-stanowiskowa (ładowanie) |
+| 5-Slot Ethernet | Stacja 5-stanowiskowa z siecią |
+| Vehicle Cradle | Stacja samochodowa |
+| Workstation Cradle | Stacja do pracy biurowej |
+| Wireless Charging Cradle | Ładowanie bezprzewodowe |
+
+### Ładowarki baterii Zebra TC53
+
+| Akcesorium | Opis |
+|------------|------|
+| 4-Slot Battery Charger | Ładowarka 4 baterii zapasowych |
+| 5-Slot + 4 Battery Cradle | Stacja 5 urządzeń + 4 baterie |
+
+### Skanery zewnętrzne Zebra (Bluetooth)
+
+| Akcesorium | Opis |
+|------------|------|
+| RS5100 | Skaner pierścieniowy Bluetooth |
+| RS6000/RS6100 | Skaner pierścieniowy 2-finger |
+| RFD40 | Czytnik RFID UHF |
+| RFD90 | Czytnik RFID UHF dalekiego zasięgu |
+`
+      },
+      {
+        title: '13. Specyfikacje techniczne',
+        content: `
+### Wymiary i waga Zebra TC53
+
+| Parametr | Wartość |
+|----------|---------|
+| Wysokość | 164,8 mm |
+| Szerokość | 77,35 mm |
+| Grubość | 16,75 mm |
+| Waga (bateria standard) | ~300 g |
+
+### Wyświetlacz Zebra TC53
+
+| Parametr | Wartość |
+|----------|---------|
+| Przekątna | 6,0" |
+| Rozdzielczość | 2160 x 1080 (FHD+) |
+| Typ | IPS LCD |
+| Jasność | 600 nitów |
+| Ochrona | Corning Gorilla Glass |
+| Dotyk | Pojemnościowy, rękawiczki, mokry palec |
+
+### Wydajność Zebra TC53
+
+| Parametr | Wartość |
+|----------|---------|
+| Procesor | Qualcomm 6490, 2,7 GHz, 8-rdzeniowy |
+| RAM | 4 GB / 6 GB / 8 GB |
+| Flash | 64 GB / 128 GB |
+| microSD | Do 2 TB |
+
+### Łączność Zebra TC53
+
+| Parametr | Wartość |
+|----------|---------|
+| Wi-Fi | 802.11 a/b/g/n/ac/ax (Wi-Fi 6E) |
+| Bluetooth | 5.2 + BLE |
+| NFC | Tak (z Apple VAS, Google SmartTap) |
+| USB | USB-C 3.1 Gen 1 |
+
+### Wytrzymałość Zebra TC53
+
+| Parametr | Wartość |
+|----------|---------|
+| Stopień ochrony IP | IP65/IP68 |
+| Upadek (z Rugged Boot) | 1,8 m na beton (MIL-STD-810H) |
+| Upadek (bez ochrony) | 1,5 m na płytki |
+| Temperatura pracy | -20°C do +50°C |
+| Temperatura ładowania | 0°C do +50°C |
+| Temperatura przechowywania | -40°C do +70°C |
+| Wilgotność | 5-95% bez kondensacji |
+
+### Certyfikaty Zebra TC53
+
+- MIL-STD-810H
+- IP65/IP68
+- CE, FCC, IC
+- RoHS
+- Secure Boot, Verified Boot
+`
+      },
+      {
+        title: 'FAQ – Najczęściej zadawane pytania',
+        content: `
+### Czym jest Zebra TC53?
+
+**Odpowiedź:** Zebra TC53 to zaawansowany **komputer mobilny z 6-calowym ekranem FHD+ (600 nitów)**, wyposażony w procesor Qualcomm 6490 (8-rdzeniowy, 2,7 GHz), skaner SE4720 lub SE55, Wi-Fi 6E, Bluetooth 5.2 i NFC. Przeznaczony dla handlu detalicznego, magazynów i logistyki.
+
+### Jaka jest różnica między Zebra TC53 a Zebra TC58?
+
+**Odpowiedź:** Zebra TC53 to wersja **tylko Wi-Fi**, natomiast Zebra TC58 ma dodatkowo **moduł 5G/LTE/CBRS**, slot na kartę SIM i zintegrowany GPS. Zebra TC53 jest przeznaczony do pracy w zasięgu sieci Wi-Fi, a Zebra TC58 do pracy mobilnej w terenie.
+
+### Jakie skanery są dostępne w Zebra TC53?
+
+**Odpowiedź:** Zebra TC53 jest dostępny z dwoma opcjami skanera: **SE4720** (standard, zasięg do 66 cm) lub **SE55 Advanced Range** (zasięg do 7,4 m). Oba obsługują kody 1D i 2D, w tym QR, DataMatrix i PDF417.
+
+### Jaka jest pojemność baterii Zebra TC53?
+
+**Odpowiedź:** Zebra TC53 ma baterię standardową **4680 mAh** lub rozszerzoną **7000 mAh**. Bateria PowerPrecision+ wspiera **True Hot Swap** (wymiana bez wyłączania) i **Warm Swap** (zachowanie pamięci przez 60s).
+
+### Co to jest funkcja True Hot Swap w Zebra TC53?
+
+**Odpowiedź:** **True Hot Swap** (wersje Premium) pozwala wymienić baterię Zebra TC53 **bez wyłączania urządzenia** – połączenie Wi-Fi jest zachowane przez 30 sekund, a pamięć przez 60 sekund. Wybierz "Battery Swap" z menu zasilania.
+
+### Jaką klasę szczelności ma Zebra TC53?
+
+**Odpowiedź:** Zebra TC53 ma certyfikat **IP65/IP68** (pełna pyłoszczelność i wodoszczelność) oraz spełnia normę **MIL-STD-810H** z odpornością na upadki z **1,8 m** na beton (z Rugged Boot).
+
+### Czy Zebra TC53 obsługuje NFC?
+
+**Odpowiedź:** Tak, Zebra TC53 ma moduł NFC z obsługą **Apple VAS**, **Google SmartTap**, płatności zbliżeniowych, odczytu tagów i szybkiego parowania z akcesoriami Bluetooth.
+
+### Jakie akcesoria są kompatybilne z Zebra TC53?
+
+**Odpowiedź:** Zebra TC53 jest kompatybilny z: stacjami dokującymi (2-slot, 5-slot, bezprzewodowa), ładowarkami baterii, uchwytami spustowymi, obudowami Rugged Boot, paskami na rękę, skanerami pierścieniowymi (RS5100, RS6100) i czytnikami RFID (RFD40, RFD90).
+
+### Jak wykonać twardy reset Zebra TC53?
+
+**Odpowiedź:** Przytrzymaj **przycisk Power przez 10 sekund**. Urządzenie automatycznie się wyłączy i włączy ponownie. Dla pełnego resetu wybierz Enterprise Reset lub Factory Reset w ustawieniach.
+
+### Jaki tryb dotyku obsługuje Zebra TC53?
+
+**Odpowiedź:** Zebra TC53 obsługuje **4 tryby dotyku**: Palec, Rękawiczka, Mokry palec i Stylus. Wybierz odpowiedni tryb w ustawieniach wyświetlacza dla optymalnej responsywności.
+
+### Czy Zebra TC53 ma złącze słuchawkowe?
+
+**Odpowiedź:** Tak, Zebra TC53 ma standardowe **złącze audio 3,5 mm** do słuchawek oraz **złącze USB-C** do zestawów słuchawkowych USB. Obsługuje również słuchawki Bluetooth.
+
+### Jakie są wymiary Zebra TC53?
+
+**Odpowiedź:** Zebra TC53 ma wymiary **164,8 x 77,35 x 16,75 mm** i waży około **300 g** z baterią standardową. Jest większy i bardziej wytrzymały niż standardowe smartfony.
+`
+      }
+    ]
+  },
+
+  'tc58': {
+    model: 'TC58',
+    title: 'Zebra TC58 – Instrukcja obsługi po Polsku',
+    lastUpdated: '2026-01-15',
+    sourceDocument: 'Zebra TC58 User Guide',
+    keywords: [
+      'zebra tc58 instrukcja', 'zebra tc58 instrukcja po polsku', 'zebra tc58 manual',
+      'terminal mobilny zebra tc58', 'zebra tc58 skanowanie', 'zebra tc58 reset', 'zebra tc58 bateria',
+      'zebra tc58 wifi', 'zebra tc58 wifi 6e', 'zebra tc58 5g', 'zebra tc58 lte', 'zebra tc58 sim',
+      'zebra tc58 bluetooth', 'zebra tc58 nfc', 'zebra tc58 android', 'zebra tc58 gps',
+      'zebra tc58 kamera', 'zebra tc58 specyfikacja', 'zebra tc58 akcesoria', 'zebra tc58 stacja dokująca',
+      'zebra tc58 ładowanie', 'zebra tc58 ip65', 'zebra tc58 ip68', 'zebra tc58 enterprise',
+      'komputer dotykowy zebra tc58', 'zebra tc58 skanowanie kodów', 'zebra tc58 qualcomm 6490',
+      'zebra tc58 6 cali', 'zebra tc58 fhd+', 'zebra tc58 gorilla glass', 'zebra tc58 se4720',
+      'zebra tc58 se55', 'zebra tc58 mobility dna', 'zebra tc58 datawedge', 'zebra tc58 powerprecision+',
+      'zebra tc58 hot swap', 'zebra tc58 hotspot', 'zebra tc58 volte', 'zebra tc58 kurier',
+      'zebra tc58 logistyka terenowa', 'zebra tc58 serwis techniczny'
+    ],
+    sections: [
+      {
+        title: '1. Podstawowe informacje',
+        content: `
+### O urządzeniu Zebra TC58
+
+Zebra TC58 to zaawansowany komputer mobilny nowej generacji z **6-calowym ekranem dotykowym Full HD+** i pełną łącznością komórkową **5G/LTE**. Urządzenie zaprojektowano dla pracowników terenowych wymagających stałego dostępu do sieci poza zasięgiem Wi-Fi.
+
+Zebra TC58 wyposażono w najnowszy procesor Qualcomm 6490 (8-rdzeniowy, 2,7 GHz), zaawansowany skaner kodów kreskowych (SE4720 lub SE55), zintegrowany GPS (GPS/GLONASS/Galileo/BeiDou), podwójne kamery (16 MP + 8 MP) oraz łączność 5G, Wi-Fi 6E, Bluetooth 5.2 i NFC. Konstrukcja spełnia normy IP65/IP68 oraz MIL-STD-810H.
+
+### Parametry techniczne Zebra TC58
+
+| Parametr | Zebra TC58 |
+|----------|------------|
+| **Wyświetlacz** | 6,0" FHD+ (2160 x 1080) |
+| Jasność | 600 nitów |
+| Ochrona ekranu | Corning Gorilla Glass |
+| Procesor | Qualcomm 6490 2,7 GHz (8-rdzeniowy) |
+| System operacyjny | Android 11 (aktualizacje do Android 14+) |
+| Pamięć RAM | 4 GB / 6 GB / 8 GB |
+| Pamięć Flash | 64 GB / 128 GB |
+| Karta microSD | Do 2 TB |
+| **Łączność komórkowa** | **5G FR1, LTE, CBRS** |
+| Karta SIM | Nano SIM |
+| **GPS** | GPS, GLONASS, Galileo, BeiDou, A-GPS |
+| Łączność bezprzewodowa | Wi-Fi 6E, Bluetooth 5.2, NFC |
+
+### Porównanie Zebra TC53 vs Zebra TC58
+
+| Parametr | Zebra TC53 | Zebra TC58 |
+|----------|------------|------------|
+| **Łączność komórkowa** | **Brak** | **5G / LTE / CBRS** |
+| Wi-Fi | 6E (802.11ax) | 6E (802.11ax) |
+| Karta SIM | Nie dotyczy | Nano SIM |
+| GPS | Opcjonalnie | Zintegrowany |
+| Połączenia głosowe | VoIP przez Wi-Fi | VoIP + VoLTE (5G) |
+| Hotspot mobilny | Nie | Tak |
+| SMS/MMS | Nie | Tak |
+| Zastosowanie | Wewnątrz budynków | Teren i mobilność |
+
+### Zastosowania Zebra TC58
+
+- **Logistyka terenowa:** dostawy, śledzenie przesyłek, potwierdzenia doręczeń
+- **Usługi kurierskie:** skanowanie paczek, nawigacja GPS, dokumentacja fotograficzna
+- **Serwis techniczny:** zlecenia w terenie, dokumentacja napraw, komunikacja z centralą
+- **Służby miejskie:** kontrole terenowe, raportowanie, dostęp do baz danych
+- **Transport:** zarządzanie flotą, śledzenie pojazdów, komunikacja z dyspozytorem
+- **Leśnictwo:** inwentaryzacja w terenie, dostęp do systemów SILP/Leśnik+
+- **Energetyka:** odczyty liczników, inspekcje, raportowanie awarii
+- **Handel mobilny:** sprzedaż obwoźna, zamówienia, płatności mobilne
+
+### Cechy charakterystyczne Zebra TC58
+
+- **Łączność 5G/LTE** – stały dostęp do sieci w terenie
+- **GPS zintegrowany** – nawigacja i śledzenie lokalizacji
+- **Wyświetlacz 6" FHD+** – największy i najjaśniejszy w klasie (600 nitów)
+- **Procesor Qualcomm 6490** – 8-rdzeniowy, 2,7 GHz
+- **Certyfikat IP65/IP68** – pełna odporność na kurz i wodę
+- **Upadek z 1,8 m** – na beton z futerałem ochronnym
+- **True Hot Swap** – wymiana baterii bez utraty połączenia (Premium)
+- **VoLTE** – połączenia głosowe przez sieć 5G/LTE
+- **Mobile Hotspot** – udostępnianie internetu innym urządzeniom
+- **NFC z Apple VAS i Google SmartTap** – płatności i bilety
+`
+      },
+      {
+        title: '2. Rozpakowanie i instalacja',
+        content: `
+### Zawartość opakowania Zebra TC58
+
+- Komputer mobilny Zebra TC58
+- Bateria PowerPrecision+ Li-Ion 4680 mAh
+- Skrócona instrukcja obsługi
+- Przewodnik bezpieczeństwa
+
+> **Uwaga:** Karta SIM, zasilacz, kable, stacje dokujące i futerały ochronne są sprzedawane oddzielnie.
+
+### Instalacja karty SIM Zebra TC58
+
+1. Podnieś klapkę dostępową z tyłu urządzenia
+2. Przesuń uchwyt karty SIM do pozycji "Unlock"
+3. Podnieś drzwiczki uchwytu
+4. Umieść kartę nano SIM stykami do dołu
+5. Zamknij drzwiczki i przesuń uchwyt do pozycji "Lock"
+6. Zamknij klapkę dostępową – musi być prawidłowo uszczelniona
+
+> **Ważne:** Klapka musi być szczelnie zamknięta dla zachowania odporności IP65/IP68.
+
+### Instalacja karty microSD (opcjonalnie)
+
+1. Podnieś klapkę dostępową z tyłu urządzenia
+2. Przesuń uchwyt karty microSD do pozycji "Open"
+3. Umieść kartę microSD stykami do góry
+4. Zamknij drzwiczki i przesuń uchwyt do pozycji "Lock"
+5. Zamknij klapkę dostępową
+
+### Instalacja baterii Zebra TC58
+
+1. Włóż baterię do komory, wyrównując styki (najpierw dolna część)
+2. Dociśnij baterię do góry, aż zatrzaski zablokują się na miejscu
+
+### Wyjmowanie baterii
+
+1. Naciśnij jednocześnie oba zatrzaski zwalniające z tyłu urządzenia
+2. Przytrzymując zatrzaski, przesuń je do środka
+3. Unieś baterię i wyjmij z komory
+
+> **Funkcja True Hot Swap (Premium):** Zebra TC58 Premium pozwala na wymianę baterii bez wyłączania – zachowanie połączenia Wi-Fi/WAN przez 30 sekund.
+
+### Warunki pracy Zebra TC58
+
+| Tryb | Temperatura | Wilgotność |
+|------|-------------|------------|
+| Praca | -20°C do +50°C | 5-95% bez kondensacji |
+| Ładowanie | 0°C do +50°C | – |
+| Przechowywanie | -40°C do +70°C | 5-95% bez kondensacji |
+`
+      },
+      {
+        title: '3. Elementy urządzenia',
+        content: `
+### Widok z przodu Zebra TC58
+
+| Nr | Element | Opis |
+|----|---------|------|
+| 1 | Kamera przednia | 8 MP – wideorozmowy i rozpoznawanie twarzy |
+| 2 | LED skanowania | Wskazuje status operacji skanowania |
+| 3 | Słuchawka/Głośnik | Audio w trybie słuchawki (połączenia głosowe) |
+| 4 | Czujnik zbliżenia/światła | Automatyczna regulacja jasności |
+| 5 | LED ładowania/powiadomień | Status baterii i powiadomienia |
+| 6 | Ekran dotykowy | 6" FHD+ z obsługą rękawiczek i mokrego dotyku |
+| 7 | Głośnik multimedialny | Odtwarzanie multimediów i tryb głośnomówiący |
+| 8 | Styki ładowania | Ładowanie przez stacje dokujące |
+| 9 | Złącze USB-C | Ładowanie, transfer danych, akcesoria |
+| 10 | Przycisk skanowania (prawy) | Uruchamia skanowanie |
+| 11 | Przyciski głośności | Regulacja głośności |
+
+### Widok z tyłu Zebra TC58
+
+| Nr | Element | Opis |
+|----|---------|------|
+| 12 | Przycisk zasilania | Włączanie/wyłączanie, menu zasilania |
+| 13 | Mikrofony (3 szt.) | Komunikacja głosowa, redukcja szumów |
+| 14 | Złącze 8-pin I/O | Komunikacja z akcesoriami |
+| 15 | Zatrzaski baterii | Naciśnij aby zwolnić baterię |
+| 16 | Bateria PowerPrecision+ | Wymienna bateria Li-Ion |
+| 17 | Głośnik | Odtwarzanie multimediów |
+| 18 | Styki ładowania DC | Ładowanie przez kabel/stację |
+| 19 | Mocowanie paska | Punkt montażowy dla paska |
+| 20 | Moduł ToF | Pomiar odległości (tylko Premium) |
+| 21 | Kamera tylna 16 MP | Zdjęcia i wideo z lampą błyskową |
+| 22 | Okno skanera | Wyjście promienia skanera |
+| 23 | Klapka dostępowa | Slot na SIM i microSD |
+| 24 | Przycisk PTT | Push-to-Talk (programowalny) |
+| 25 | Przycisk skanowania (lewy) | Alternatywny trigger skanera |
+
+> **Uwaga:** Zebra TC58 nie posiada złącza audio 3,5 mm – należy używać adapterów USB-C lub zestawów Bluetooth.
+`
+      },
+      {
+        title: '4. Przyciski i nawigacja',
+        content: `
+### Przyciski fizyczne Zebra TC58
+
+| Przycisk | Krótkie naciśnięcie | Przytrzymanie |
+|----------|---------------------|---------------|
+| **Power** | Włącz/wyłącz ekran | Menu zasilania (wyłącz/restart) |
+| **Głośność +/-** | Regulacja głośności | Programowalna funkcja |
+| **Skanowanie (L/P)** | Aktywacja skanera | Ciągłe skanowanie |
+| **PTT** | Push-to-Talk | Zależne od aplikacji |
+
+### Przyciski nawigacyjne (na ekranie)
+
+| Przycisk | Funkcja |
+|----------|---------|
+| ◀ **Wstecz** | Powrót do poprzedniego ekranu |
+| ● **Home** | Ekran główny |
+| ▣ **Ostatnie** | Lista ostatnio używanych aplikacji |
+
+### Ikony paska stanu – łączność komórkowa
+
+| Ikona | Znaczenie |
+|-------|-----------|
+| 5G | Połączenie z siecią 5G |
+| LTE/4G | Połączenie z siecią LTE/4G |
+| H+/H | Połączenie HSPA+/HSPA |
+| 3G | Połączenie z siecią 3G |
+| R | Roaming |
+| ✕ SIM | Brak karty SIM |
+| 📞 | Połączenie głosowe w toku |
+
+### Panel szybkich ustawień Zebra TC58
+
+Przeciągnij w dół od górnej krawędzi ekranu, aby uzyskać dostęp do:
+
+- Dane mobilne – włącz/wyłącz
+- Wi-Fi – włącz/wyłącz i wybór sieci
+- Bluetooth – włącz/wyłącz i parowanie
+- Hotspot mobilny – udostępnianie internetu
+- Latarka – włącz/wyłącz
+- Tryb samolotowy
+- Lokalizacja GPS
+- NFC – włącz/wyłącz
+- Jasność ekranu (suwak)
+- Oszczędzanie baterii
+`
+      },
+      {
+        title: '5. Bateria i ładowanie',
+        content: `
+### Bateria PowerPrecision+ Zebra TC58
+
+Zebra TC58 wykorzystuje inteligentne baterie litowo-jonowe PowerPrecision+:
+
+| Typ baterii | Pojemność | Napięcie |
+|-------------|-----------|----------|
+| **Standard** | **4680 mAh / 17,7 Wh** | 3,85V |
+| Rozszerzona | 7000 mAh / 26,95 Wh | 3,85V |
+| Standard z BLE Beacon | 4680 mAh / 17,7 Wh | 3,85V |
+| Do ładowania bezprzewodowego | 4680 mAh / 17,7 Wh | 3,85V |
+
+### Wskaźnik LED ładowania Zebra TC58
+
+| LED | Status |
+|-----|--------|
+| Bursztynowy (miga 1x/4s) | Ładowanie w toku |
+| Zielony (stały) | Naładowana w pełni |
+| Czerwony (miga 1x/4s) | Ładowanie – bateria zużyta |
+| Bursztynowy (miga 2x/s) | Błąd ładowania |
+
+### Czas ładowania Zebra TC58
+
+- **Bateria standardowa (4680 mAh):** do 90% w ~2 godziny
+- **Bateria rozszerzona (7000 mAh):** do 90% w ~3 godziny
+
+### Opcje ładowania Zebra TC58
+
+| Ładowarka | Opis |
+|-----------|------|
+| Zasilacz USB-C | Min. 9V/2A przez kabel USB-C |
+| 2-Slot USB Cradle | 1 urządzenie + 1 bateria z Ethernet |
+| 5-Slot Charge Only | Stacja 5-stanowiskowa |
+| 5-Slot Ethernet | Stacja 5-stanowiskowa z siecią |
+| 4-Slot Battery Charger | Ładowarka 4 baterii zapasowych |
+| Vehicle Cradle | Stacja samochodowa z ładowaniem |
+| Wireless Charging Cradle | Ładowanie bezprzewodowe |
+
+### Zużycie baterii przez radio komórkowe
+
+Łączność 5G/LTE zwiększa zużycie baterii. Zalecenia:
+
+- Używaj Wi-Fi gdy dostępne
+- Wyłącz dane mobilne gdy niepotrzebne
+- Ogranicz synchronizację w tle
+- Używaj baterii rozszerzonej (7000 mAh) w terenie
+- Noś zapasową baterię
+`
+      },
+      {
+        title: '6. Łączność komórkowa (5G/LTE)',
+        content: `
+### Obsługiwane sieci Zebra TC58
+
+| Standard | Pasma |
+|----------|-------|
+| 5G FR1 | Zależne od regionu |
+| LTE | Kategoria 20 |
+| CBRS | Band 48 (tylko USA) |
+| WCDMA | 3G |
+
+### Konfiguracja karty SIM
+
+1. Przejdź do: Ustawienia → Sieć i internet → Sieć komórkowa
+2. Włącz "Dane mobilne"
+3. Skonfiguruj APN (jeśli wymagane przez operatora)
+
+### Ustawienia APN Zebra TC58
+
+1. Przejdź do: Ustawienia → Sieć i internet → Sieć komórkowa → Nazwy punktów dostępu
+2. Dotknij "+" aby dodać nowy APN
+3. Wprowadź dane od operatora: Nazwa, APN, Typ APN
+4. Zapisz i wybierz nowy APN
+
+### Roaming
+
+1. Przejdź do: Ustawienia → Sieć i internet → Sieć komórkowa
+2. Włącz/wyłącz "Roaming"
+
+> **Uwaga:** Roaming może wiązać się z dodatkowymi opłatami.
+
+### Mobile Hotspot (Tethering) Zebra TC58
+
+Udostępnianie połączenia internetowego innym urządzeniom:
+
+1. Przejdź do: Ustawienia → Sieć i internet → Hotspot i tethering
+2. Dotknij "Hotspot Wi-Fi"
+3. Skonfiguruj nazwę sieci i hasło
+4. Włącz hotspot
+
+### Tryb samolotowy
+
+W trybie samolotowym wszystkie radia są wyłączane. Można włączyć Wi-Fi i Bluetooth osobno:
+
+1. Włącz tryb samolotowy
+2. Włącz Wi-Fi (jeśli potrzebne)
+3. Włącz Bluetooth (jeśli potrzebne)
+`
+      },
+      {
+        title: '7. Skanowanie kodów kreskowych',
+        content: `
+### Dostępne skanery Zebra TC58
+
+| Model | Typ | Zasięg | Zastosowanie |
+|-------|-----|--------|--------------|
+| **SE4720** | Standard | 5-66 cm | Skanowanie w zasięgu ręki |
+| **SE55** | Advanced Range | 6-744 cm | Skanowanie z dystansu (do 7,4 m) |
+
+### Zasięg skanowania SE4720
+
+| Kod | Bliski | Daleki |
+|-----|--------|--------|
+| Code 39 (3 mil) | 7,6 cm | 14,7 cm |
+| Code 128 (5 mil) | 5,8 cm | 24,9 cm |
+| PDF417 (5 mil) | 7,6 cm | 20,1 cm |
+| Data Matrix (10 mil) | 5,3 cm | 27,9 cm |
+| UPC-A (100%) | 5,0 cm | 61,0 cm |
+
+### Zasięg skanowania SE55 (Advanced Range)
+
+| Kod | Bliski | Daleki |
+|-----|--------|--------|
+| Code 39 (3 mil) | 6,9 cm | 41,1 cm |
+| Code 39 (5 mil) | 6,4 cm | 67,6 cm |
+| UPC-A (100%) | 6,4 cm | 180 cm |
+| Code 128 (15 mil, 4") | 18,2 cm | 181 cm |
+| Code 39 (55 mil) | – | 744 cm |
+
+### Obsługiwane kody przez Zebra TC58
+
+**Kody 1D:**
+- Code 39, Code 128, Code 93, Code 11
+- UPC-A/E, EAN-8/EAN-13
+- Interleaved 2 of 5, Codabar, MSI
+- GS1 DataBar
+
+**Kody 2D:**
+- QR Code, Micro QR, Data Matrix
+- PDF417, Micro PDF417
+- Aztec, Maxicode, Han Xin, DotCode
+
+**Kody pocztowe:**
+- US Postnet, US Planet, UK Postal
+- Australian Postal, Japanese Postal
+
+### Technika skanowania Zebra TC58
+
+1. Upewnij się, że aplikacja jest otwarta i kursor znajduje się w polu tekstowym
+2. Skieruj okno skanera w stronę kodu kreskowego
+3. Naciśnij i przytrzymaj przycisk skanowania
+4. Wyrównaj wzorzec celownika z kodem kreskowym
+5. LED skanowania zaświeci się na zielono + sygnał dźwiękowy
+6. Dane zostaną wprowadzone do pola tekstowego
+`
+      },
+      {
+        title: '8. Łączność bezprzewodowa',
+        content: `
+### Wi-Fi 6E Zebra TC58
+
+Zebra TC58 obsługuje najnowszy standard Wi-Fi 6E (802.11ax) z pasmem 6 GHz:
+
+| Parametr | Wartość |
+|----------|---------|
+| Standardy | 802.11 a/b/g/n/ac/ax |
+| Pasma | 2,4 GHz / 5 GHz / 6 GHz |
+| Prędkość maks. | do 2402 Mbps (5 GHz/6 GHz) |
+| Szerokość kanału | 20/40/80/160 MHz |
+| Zabezpieczenia | WPA3, WPA2, WPA, 802.1x |
+
+### Bluetooth 5.2 Zebra TC58
+
+| Parametr | Wartość |
+|----------|---------|
+| Wersja | Bluetooth 5.2 + BLE |
+| Profile | A2DP, AVRCP, HFP, HSP, HID, OPP, PBAP, PAN, MAP |
+| Zasięg | do 10 m (klasa 2) |
+
+### NFC Zebra TC58
+
+| Parametr | Wartość |
+|----------|---------|
+| Standard | ISO 14443 Type A/B, ISO 15693, FeliCa |
+| Tryby | Reader, Writer, Card Emulation, Peer-to-Peer |
+| Funkcje | Apple VAS, Google SmartTap, parowanie urządzeń |
+
+### GPS i lokalizacja Zebra TC58
+
+Zebra TC58 posiada zintegrowany odbiornik GNSS:
+
+| System | Obsługa |
+|--------|---------|
+| GPS | Tak |
+| GLONASS | Tak |
+| Galileo | Tak |
+| BeiDou | Tak |
+| A-GPS | Tak (z siecią komórkową) |
+`
+      },
+      {
+        title: '9. Połączenia głosowe',
+        content: `
+### Wykonywanie połączeń Zebra TC58
+
+Zebra TC58 obsługuje połączenia głosowe przez sieć komórkową (VoLTE) i VoIP:
+
+1. Otwórz aplikację Telefon
+2. Wprowadź numer lub wybierz kontakt
+3. Dotknij ikony połączenia
+
+### Tryby audio Zebra TC58
+
+| Tryb | Opis |
+|------|------|
+| Słuchawka | Audio przez słuchawkę górną |
+| Głośnik | Tryb głośnomówiący |
+| Bluetooth | Przez zestaw słuchawkowy BT |
+| USB | Przez zestaw słuchawkowy USB-C |
+
+### Połączenia alarmowe
+
+Zebra TC58 obsługuje połączenia alarmowe nawet bez karty SIM lub przy zablokowanym ekranie. Numer alarmowy: **112** (Europa).
+
+### Konferencje głosowe
+
+1. Wykonaj połączenie z pierwszym uczestnikiem
+2. Dotknij "Dodaj połączenie"
+3. Wybierz kolejnego uczestnika
+4. Dotknij "Scal" aby utworzyć konferencję
+
+### VoLTE Zebra TC58
+
+Zebra TC58 obsługuje VoLTE dla wysokiej jakości połączeń głosowych:
+
+- Wyższa jakość głosu (HD Voice)
+- Szybsze nawiązywanie połączeń
+- Jednoczesne rozmowy i transfer danych
+`
+      },
+      {
+        title: '10. Kamera i GPS',
+        content: `
+### Specyfikacja kamer Zebra TC58
+
+| Kamera | Rozdzielczość | Funkcje |
+|--------|---------------|---------|
+| Tylna | 16 MP | Autofokus, lampa błyskowa, OIS (opcja) |
+| Przednia | 8 MP | Wideorozmowy, rozpoznawanie twarzy |
+
+### Geotag w zdjęciach Zebra TC58
+
+Zebra TC58 może automatycznie dodawać współrzędne GPS do zdjęć:
+
+1. Włącz lokalizację w ustawieniach
+2. W aplikacji Kamera włącz "Zapisz lokalizację"
+3. Zdjęcia będą zawierać dane GPS
+
+### Zastosowania w terenie
+
+- **Proof of Delivery** – zdjęcie z lokalizacją jako potwierdzenie dostawy
+- **Proof of Condition** – dokumentacja stanu towaru
+- **Inspekcje terenowe** – zdjęcia z automatycznym geotagiem
+- **Nawigacja** – prowadzenie do punktu dostawy
+`
+      },
+      {
+        title: '11. Ustawienia systemowe',
+        content: `
+### Wyświetlacz Zebra TC58
+
+| Ustawienie | Opis |
+|------------|------|
+| Jasność | Ręczna lub automatyczna |
+| Adaptacyjna jasność | Automatyczne dostosowanie |
+| Tryb nocny | Redukcja niebieskiego światła |
+| Rozmiar czcionki | Mały / Domyślny / Duży / Największy |
+| Wygaszenie ekranu | 15s / 30s / 1min / 2min / 5min / 10min / 30min |
+| Tryb dotyku | Palec / Rękawiczka / Mokry palec / Stylus |
+
+### Dźwięk Zebra TC58
+
+| Ustawienie | Opis |
+|------------|------|
+| Głośność multimediów | Muzyka, wideo, gry |
+| Głośność połączeń | Rozmowy głosowe |
+| Głośność dzwonka | Powiadomienia, SMS, alarmy |
+| Głośność skanera | Dźwięki potwierdzenia |
+| Wibracje | Włącz/wyłącz dla różnych zdarzeń |
+
+### Sieć komórkowa Zebra TC58
+
+| Ustawienie | Opis |
+|------------|------|
+| Dane mobilne | Włącz/wyłącz transfer danych |
+| Roaming | Włącz/wyłącz roaming |
+| Preferowany typ sieci | 5G / LTE / 3G / 2G |
+| Nazwy punktów dostępu | Konfiguracja APN |
+| Operatorzy sieci | Automatyczny/ręczny wybór |
+
+### Bezpieczeństwo Zebra TC58
+
+- Blokada ekranu (PIN / Wzór / Hasło / Twarz)
+- Blokada karty SIM (PIN)
+- Szyfrowanie urządzenia
+- Zarządzanie certyfikatami
+- Secure Boot i Verified Boot
+`
+      },
+      {
+        title: '12. Konserwacja',
+        content: `
+### Harmonogram czyszczenia Zebra TC58
+
+| Element | Częstotliwość |
+|---------|---------------|
+| Ekran dotykowy | Codziennie |
+| Okno skanera | Codziennie |
+| Styki ładowania | Co tydzień |
+| Obudowa | W razie potrzeby |
+| Styki baterii | Przy wymianie baterii |
+
+### Czyszczenie ekranu i obudowy
+
+1. Wyłącz urządzenie Zebra TC58 lub zablokuj ekran
+2. Użyj miękkiej, bezpyłowej ściereczki
+3. Zwilż alkoholem izopropylowym (70%)
+4. Delikatnie przetrzyj powierzchnię
+5. Osusz przed użyciem
+
+### Czyszczenie okna skanera
+
+1. Użyj suchej, miękkiej ściereczki
+2. Przy uporczywych zabrudzeniach – alkohol izopropylowy
+3. Nie używaj materiałów ściernych
+4. Regularnie sprawdzaj czy okno nie jest zarysowane
+
+### Dozwolone środki czyszczące
+
+- Alkohol izopropylowy (70%)
+- Chusteczki dezynfekujące (bez wybielacza)
+- Roztwór mydła (łagodny)
+
+### Zabronione środki
+
+- Wybielacze, amoniak
+- Rozpuszczalniki, aceton
+- Materiały ścierne
+`
+      },
+      {
+        title: '13. Rozwiązywanie problemów',
+        content: `
+### Problemy z siecią komórkową Zebra TC58
+
+| Problem | Rozwiązanie |
+|---------|-------------|
+| Brak sygnału | Sprawdź kartę SIM, sprawdź zasięg, zrestartuj urządzenie |
+| Brak danych | Sprawdź ustawienia APN, sprawdź limit danych |
+| Wolne połączenie | Sprawdź siłę sygnału, przełącz na Wi-Fi |
+| Roaming nie działa | Włącz roaming w ustawieniach |
+| Połączenia nie działają | Sprawdź kartę SIM, sprawdź tryb samolotowy |
+
+### Problemy z uruchomieniem Zebra TC58
+
+| Problem | Rozwiązanie |
+|---------|-------------|
+| Urządzenie nie włącza się | Naładuj baterię przez 15 minut |
+| Urządzenie zawiesza się | Przytrzymaj Power przez 10 sekund |
+| Pętla restartu | Wykonaj Enterprise Reset |
+
+### Problemy z baterią Zebra TC58
+
+| Problem | Rozwiązanie |
+|---------|-------------|
+| Szybkie rozładowanie | Wyłącz niepotrzebne radio, zmniejsz jasność |
+| Nie ładuje się | Sprawdź styki, użyj innej ładowarki |
+| LED miga na czerwono | Błąd ładowania – sprawdź temperaturę |
+
+### Problemy ze skanowaniem Zebra TC58
+
+| Problem | Rozwiązanie |
+|---------|-------------|
+| Skaner nie działa | Sprawdź DataWedge, zrestartuj urządzenie |
+| Nie odczytuje kodu | Oczyść okno skanera, zmień kąt/odległość |
+
+### Resetowanie urządzenia Zebra TC58
+
+**Miękki reset:**
+1. Przytrzymaj przycisk Power
+2. Wybierz "Uruchom ponownie"
+
+**Twardy reset:**
+1. Przytrzymaj Power przez 10 sekund
+
+**Enterprise Reset:**
+1. Ustawienia → System → Opcje resetowania
+2. Wybierz "Enterprise Reset"
+
+**Factory Reset:**
+1. Ustawienia → System → Opcje resetowania
+2. Wybierz "Przywrócenie danych fabrycznych"
+
+> **Ostrzeżenie:** Factory Reset usuwa wszystkie dane!
+`
+      },
+      {
+        title: '14. Akcesoria Zebra TC58',
+        content: `
+### Futerały i obudowy Zebra TC58
+
+| Akcesorium | Opis |
+|------------|------|
+| Rugged Boot | Obudowa ochronna |
+| Exoskeleton | Wzmocniona obudowa zewnętrzna |
+
+### Paski i uchwyty Zebra TC58
+
+| Akcesorium | Opis |
+|------------|------|
+| Hand Strap | Pasek na rękę |
+| Trigger Handle | Uchwyt spustowy |
+| Lanyard | Smycz zabezpieczająca |
+
+### Stacje dokujące Zebra TC58
+
+| Akcesorium | Opis |
+|------------|------|
+| 2-Slot USB Cradle | 1 urządzenie + 1 bateria |
+| 5-Slot Charge Only | Stacja 5-stanowiskowa |
+| 5-Slot Ethernet | Stacja z siecią |
+| Vehicle Cradle | Stacja samochodowa |
+| Workstation Cradle | Stacja biurowa |
+
+### Ładowarki i zasilacze Zebra TC58
+
+| Akcesorium | Opis |
+|------------|------|
+| 4-Slot Battery Charger | Ładowarka 4 baterii |
+| Vehicle Power Adapter | Zasilacz samochodowy 12/24V |
+| Power Supply | Zasilacz sieciowy |
+
+### Skanery i czytniki (Bluetooth)
+
+| Akcesorium | Opis |
+|------------|------|
+| RS5100 | Skaner pierścieniowy BT |
+| RS6100 | Skaner pierścieniowy 2-finger |
+| RFD40/RFD90 | Czytnik RFID UHF |
+
+### Audio Zebra TC58
+
+| Akcesorium | Opis |
+|------------|------|
+| USB-C Audio Adapter | Adapter na słuchawki 3,5 mm |
+| USB Headset | Zestaw słuchawkowy USB-C |
+| Bluetooth Headset | Zestaw bezprzewodowy |
+`
+      },
+      {
+        title: '15. Specyfikacje techniczne',
+        content: `
+### Wymiary i waga Zebra TC58
+
+| Parametr | Wartość |
+|----------|---------|
+| Wysokość | 164,8 mm |
+| Szerokość | 77,35 mm |
+| Grubość | 16,75 mm |
+| Waga (bateria standard) | ~300 g |
+
+### Wyświetlacz Zebra TC58
+
+| Parametr | Wartość |
+|----------|---------|
+| Przekątna | 6,0" |
+| Rozdzielczość | 2160 x 1080 (FHD+) |
+| Typ | IPS LCD |
+| Jasność | 600 nitów |
+| Ochrona | Corning Gorilla Glass |
+| Dotyk | Pojemnościowy, rękawiczki, mokry palec |
+
+### Wydajność Zebra TC58
+
+| Parametr | Wartość |
+|----------|---------|
+| Procesor | Qualcomm 6490, 2,7 GHz, 8-rdzeniowy |
+| RAM | 4 GB / 6 GB / 8 GB |
+| Flash | 64 GB / 128 GB |
+| microSD | Do 2 TB |
+
+### Łączność Zebra TC58
+
+| Parametr | Wartość |
+|----------|---------|
+| Sieć komórkowa | 5G FR1, LTE Cat 20, CBRS |
+| Wi-Fi | 802.11 a/b/g/n/ac/ax (Wi-Fi 6E) |
+| Bluetooth | 5.2 + BLE |
+| NFC | Tak (Apple VAS, Google SmartTap) |
+| USB | USB-C 3.1 Gen 1 |
+| GPS | GPS, GLONASS, Galileo, BeiDou, A-GPS |
+| Karta SIM | Nano SIM |
+
+### Wytrzymałość Zebra TC58
+
+| Parametr | Wartość |
+|----------|---------|
+| Stopień ochrony IP | IP65/IP68 |
+| Upadek (z Rugged Boot) | 1,8 m na beton (MIL-STD-810H) |
+| Upadek (bez ochrony) | 1,5 m na płytki |
+| Temperatura pracy | -20°C do +50°C |
+| Temperatura ładowania | 0°C do +50°C |
+| Temperatura przechowywania | -40°C do +70°C |
+| Wilgotność | 5-95% bez kondensacji |
+
+### Certyfikaty Zebra TC58
+
+- MIL-STD-810H
+- IP65/IP68
+- CE, FCC, IC
+- RoHS
+- Secure Boot, Verified Boot
+- Certyfikaty operatorów sieci komórkowych
+`
+      },
+      {
+        title: 'FAQ – Najczęściej zadawane pytania',
+        content: `
+### Czym jest Zebra TC58?
+
+**Odpowiedź:** Zebra TC58 to zaawansowany **komputer mobilny z 6-calowym ekranem FHD+ i łącznością 5G/LTE**, wyposażony w procesor Qualcomm 6490, skaner SE4720/SE55, GPS, Wi-Fi 6E, Bluetooth 5.2 i NFC. Przeznaczony dla logistyki terenowej, kurierów i serwisu technicznego.
+
+### Jaka jest różnica między Zebra TC53 a Zebra TC58?
+
+**Odpowiedź:** Zebra TC58 ma dodatkowo: **moduł 5G/LTE**, slot na kartę **nano SIM**, zintegrowany **GPS** (GPS/GLONASS/Galileo/BeiDou), **VoLTE** do połączeń głosowych i **mobile hotspot**. Zebra TC53 działa tylko przez Wi-Fi.
+
+### Jakie pasma 5G/LTE obsługuje Zebra TC58?
+
+**Odpowiedź:** Zebra TC58 obsługuje **5G FR1**, **LTE Category 20** i **CBRS (Band 48 - USA)**. Konkretne pasma zależą od regionu. W Europie obsługuje typowe pasma LTE operatorów.
+
+### Czy Zebra TC58 ma GPS?
+
+**Odpowiedź:** Tak, Zebra TC58 ma zintegrowany odbiornik GNSS: **GPS, GLONASS, Galileo, BeiDou** oraz **A-GPS** (wspomagany przez sieć komórkową) dla szybszej lokalizacji.
+
+### Jaka jest pojemność baterii Zebra TC58?
+
+**Odpowiedź:** Zebra TC58 ma baterię standardową **4680 mAh** lub rozszerzoną **7000 mAh**. Ze względu na radio 5G/LTE zalecana jest bateria rozszerzona dla pracy w terenie.
+
+### Czy Zebra TC58 może udostępniać internet przez hotspot?
+
+**Odpowiedź:** Tak, Zebra TC58 może udostępniać połączenie 5G/LTE przez **hotspot Wi-Fi** lub **tethering USB** innym urządzeniom. Konfiguracja w: Ustawienia > Sieć i internet > Hotspot i tethering.
+
+### Czy Zebra TC58 obsługuje VoLTE?
+
+**Odpowiedź:** Tak, Zebra TC58 obsługuje **VoLTE** (Voice over LTE) dla wysokiej jakości połączeń głosowych przez sieć 5G/LTE. Umożliwia jednoczesne rozmowy i transfer danych.
+
+### Jakie skanery są dostępne w Zebra TC58?
+
+**Odpowiedź:** Zebra TC58 jest dostępny z dwoma opcjami skanera: **SE4720** (standard, zasięg do 66 cm) lub **SE55 Advanced Range** (zasięg do 7,4 m). Oba obsługują kody 1D i 2D.
+
+### Czy Zebra TC58 ma złącze słuchawkowe 3,5 mm?
+
+**Odpowiedź:** Nie, Zebra TC58 **nie ma złącza audio 3,5 mm**. Należy używać **adaptera USB-C na 3,5 mm**, zestawów słuchawkowych **USB-C** lub słuchawek **Bluetooth**.
+
+### Jaką klasę szczelności ma Zebra TC58?
+
+**Odpowiedź:** Zebra TC58 ma certyfikat **IP65/IP68** (pełna pyłoszczelność i wodoszczelność) oraz spełnia normę **MIL-STD-810H** z odpornością na upadki z **1,8 m** na beton (z Rugged Boot).
+
+### Jak wykonać twardy reset Zebra TC58?
+
+**Odpowiedź:** Przytrzymaj **przycisk Power przez 10 sekund**. Urządzenie automatycznie się wyłączy i włączy ponownie. Dla pełnego resetu wybierz Enterprise Reset lub Factory Reset w ustawieniach.
+
+### Czy Zebra TC58 obsługuje połączenia alarmowe bez karty SIM?
+
+**Odpowiedź:** Tak, Zebra TC58 obsługuje **połączenia alarmowe (112)** nawet bez karty SIM lub przy zablokowanym ekranie. Połączenie zostanie nawiązane przez dowolną dostępną sieć komórkową.
+`
+      }
+    ]
   }
 }
 
