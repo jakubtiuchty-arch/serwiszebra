@@ -36,7 +36,7 @@ const DELIVERED_KEYWORDS = [
   'dostarczona'
 ]
 
-const CRON_VERSION = '2.2.0' // 2026-01-16 - nested Order structure
+const CRON_VERSION = '2.3.0' // 2026-01-16 - debug status fields
 
 export async function GET(request: NextRequest) {
   try {
@@ -138,13 +138,26 @@ export async function GET(request: NextRequest) {
           })
           
           if (matchingOrder) {
-            console.log(`✅ [CRON-REPAIRS] Found order via getOrders:`, JSON.stringify(matchingOrder).substring(0, 500))
+            console.log(`✅ [CRON-REPAIRS] Found order via getOrders:`, JSON.stringify(matchingOrder).substring(0, 1500))
             const o = matchingOrder.Order || matchingOrder
-            const orderStatus = o.status || o.parcel_status || o.delivery_status || matchingOrder.status || ''
+            const orderStatus = o.status || o.parcel_status || o.delivery_status || o.state || matchingOrder.status || ''
+            
+            // Debug: pokaż wszystkie możliwe pola statusu
+            const statusDebug = {
+              'o.status': o?.status,
+              'o.parcel_status': o?.parcel_status,
+              'o.delivery_status': o?.delivery_status,
+              'o.state': o?.state,
+              'o.courier_status': o?.courier_status,
+              'matchingOrder.status': matchingOrder?.status,
+              'all_keys': o ? Object.keys(o) : null
+            }
+            console.log(`📊 [CRON-REPAIRS] Status debug:`, JSON.stringify(statusDebug))
+            
             trackingStatus = {
-              status: orderStatus,
+              status: orderStatus || 'FOUND_NO_STATUS',
               details: o,
-              apiResponse: { method: 'getOrders', order: matchingOrder }
+              apiResponse: { method: 'getOrders', order: matchingOrder, statusDebug }
             }
           } else {
             console.log(`⚠️ [CRON-REPAIRS] No matching order found in ${orders.length} orders`)
@@ -284,7 +297,8 @@ export async function GET(request: NextRequest) {
             trackingNumber: repair.pickup_tracking_number,
             status: 'pending',
             courierStatus: trackingStatus.status,
-            message: 'Not delivered yet'
+            message: 'Not delivered yet',
+            debug: trackingStatus.apiResponse // Pokaż debug info
           })
         }
 
