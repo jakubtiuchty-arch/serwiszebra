@@ -37,6 +37,18 @@ export async function GET(request: NextRequest) {
 
     console.log('🔄 [CRON-REPAIRS] Starting delivery status check...')
 
+    // Sprawdź zmienne środowiskowe
+    if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
+      console.error('❌ [CRON-REPAIRS] Missing Supabase credentials:', {
+        hasUrl: !!process.env.NEXT_PUBLIC_SUPABASE_URL,
+        hasServiceKey: !!process.env.SUPABASE_SERVICE_ROLE_KEY
+      })
+      return NextResponse.json({ 
+        error: 'Supabase credentials not configured',
+        success: false 
+      }, { status: 500 })
+    }
+
     if (!BLPACZKA_API_KEY) {
       console.error('❌ [CRON-REPAIRS] BLPACZKA_API_KEY not configured')
       return NextResponse.json({ 
@@ -55,7 +67,11 @@ export async function GET(request: NextRequest) {
 
     if (fetchError) {
       console.error('❌ [CRON-REPAIRS] Error fetching repairs:', fetchError)
-      return NextResponse.json({ error: 'Database error' }, { status: 500 })
+      return NextResponse.json({ 
+        error: 'Database error', 
+        details: fetchError.message,
+        code: fetchError.code 
+      }, { status: 500 })
     }
 
     if (!repairs || repairs.length === 0) {
