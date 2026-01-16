@@ -100,8 +100,17 @@ export async function GET(request: NextRequest) {
       try {
         checkedCount++
         
-        // Wywołaj BL Paczka API aby sprawdzić status
-        const trackingStatus = await getTrackingStatus(repair.pickup_tracking_number)
+        // ref_number który wysyłamy do BL Paczka przy tworzeniu zamówienia
+        const refNumber = repair.id.split('-')[0].toUpperCase()
+        
+        // Spróbuj śledzenia przez ref_number (jak wysyłamy do BL Paczka)
+        let trackingStatus = await getTrackingStatus(refNumber, 'ref_number')
+        
+        // Jeśli nie zadziałało, spróbuj przez tracking number
+        if (['API_TEXT_ERROR', 'NO_TRACKING_DATA'].includes(trackingStatus.status)) {
+          console.log(`📍 [CRON-REPAIRS] Trying tracking by waybill_no for repair ${repair.id}`)
+          trackingStatus = await getTrackingStatus(repair.pickup_tracking_number, 'waybill_no')
+        }
 
         // trackingStatus zawsze zwraca obiekt (nie null)
 
@@ -248,20 +257,30 @@ export async function GET(request: NextRequest) {
 }
 
 // Funkcja do pobierania statusu trackingu z BL Paczka
-async function getTrackingStatus(trackingNumber: string): Promise<{ status: string; details?: any; apiResponse?: any }> {
+async function getTrackingStatus(identifier: string, type: 'waybill_no' | 'ref_number' = 'waybill_no'): Promise<{ status: string; details?: any; apiResponse?: any }> {
   try {
+    const requestBody: any = {
+      auth: {
+        login: BLPACZKA_LOGIN,
+        api_key: BLPACZKA_API_KEY
+      }
+    }
+    
+    // Dodaj odpowiedni parametr
+    if (type === 'ref_number') {
+      requestBody.ref_number = identifier
+    } else {
+      requestBody.waybill_no = identifier
+    }
+
+    console.log(`📡 [BLPaczka] Tracking request with ${type}=${identifier}`)
+
     const response = await fetch('https://send.blpaczka.com/api/getWaybillTracking.json', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({
-        auth: {
-          login: BLPACZKA_LOGIN,
-          api_key: BLPACZKA_API_KEY
-        },
-        waybill_no: trackingNumber
-      })
+      body: JSON.stringify(requestBody)
     })
 
     // Najpierw pobierz tekst, potem próbuj parsować jako JSON

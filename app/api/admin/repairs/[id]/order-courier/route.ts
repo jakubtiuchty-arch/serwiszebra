@@ -189,23 +189,41 @@ export async function POST(
                         blpaczkaData.data?.waybill_link || 
                         null
 
+    // Numer zamówienia BL Paczka (do śledzenia przez API)
+    const blpaczkaOrderId = blpaczkaData.data?.Order?.[0]?.order_id || 
+                            blpaczkaData.data?.Order?.[0]?.id ||
+                            blpaczkaData.data?.order_id ||
+                            null
+
+    console.log('[BLPaczka] Order details:', {
+      trackingNumber,
+      blpaczkaOrderId,
+      waybillLink
+    })
+
     if (!trackingNumber) {
       throw new Error('Nie otrzymano numeru tracking z BL Paczka')
     }
 
     const courierName = getCourierName(courier_code)
 
-    const updateData: Record<string, string> = {
+    const updateData: Record<string, any> = {
       updated_at: new Date().toISOString()
     }
 
     if (direction === 'pickup') {
       updateData.pickup_courier_name = courierName
       updateData.pickup_tracking_number = trackingNumber
+      if (blpaczkaOrderId) {
+        updateData.pickup_blpaczka_order_id = blpaczkaOrderId
+      }
     } else {
       updateData.courier_name = courierName
       updateData.courier_tracking_number = trackingNumber
       updateData.status = 'wyslane'
+      if (blpaczkaOrderId) {
+        updateData.blpaczka_order_id = blpaczkaOrderId
+      }
     }
 
     const { error: updateError } = await supabase
