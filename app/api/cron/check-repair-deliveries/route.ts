@@ -380,7 +380,7 @@ async function getTrackingStatus(identifier: string, type: 'waybill_no' | 'ref_n
       }
     }
 
-    console.log(`📡 [BLPaczka] Tracking response for ${trackingNumber}:`, JSON.stringify(data).substring(0, 1000))
+    console.log(`📡 [BLPaczka] Tracking response for ${identifier}:`, JSON.stringify(data).substring(0, 1000))
 
     // Zapisz pełną odpowiedź API do debugowania
     const apiDebug = {
@@ -393,7 +393,7 @@ async function getTrackingStatus(identifier: string, type: 'waybill_no' | 'ref_n
     }
 
     if (!data.success && data.status !== 'SUCCESS') {
-      console.error(`❌ [BLPaczka] API error for ${trackingNumber}:`, data.message || data.error_message, apiDebug)
+      console.error(`❌ [BLPaczka] API error for ${identifier}:`, data.message || data.error_message, apiDebug)
       return { status: 'API_ERROR', details: data.message || data.error_message, apiResponse: apiDebug }
     }
 
@@ -415,13 +415,12 @@ async function getTrackingStatus(identifier: string, type: 'waybill_no' | 'ref_n
       return { status: directStatus, details: data.data || data }
     }
 
-    console.log(`⚠️ [BLPaczka] No tracking data found for ${trackingNumber}`)
+    console.log(`⚠️ [BLPaczka] No tracking data found for ${identifier}`)
     return { status: 'NO_TRACKING_DATA', details: 'BL Paczka returned success but no tracking data', apiResponse: null }
 
   } catch (error: any) {
-    console.error(`❌ [BLPaczka] Error fetching tracking for ${trackingNumber}:`, error)
+    console.error(`❌ [BLPaczka] Error fetching tracking for ${identifier}:`, error)
     return { status: 'FETCH_ERROR', details: error.message || 'Network or parsing error', apiResponse: null }
   }
 }
 
-// Force rebuild Fri Jan 16 19:53:18 CET 2026
