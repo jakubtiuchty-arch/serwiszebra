@@ -108,7 +108,19 @@ export async function GET(request: NextRequest) {
             repairId: repair.id,
             trackingNumber: repair.pickup_tracking_number,
             status: 'error',
-            message: 'Could not fetch tracking status'
+            message: 'Could not fetch tracking status (null response)'
+          })
+          continue
+        }
+
+        // Jeśli API zwróciło błąd - zwróć szczegóły
+        if (trackingStatus.status === 'API_ERROR') {
+          results.push({
+            repairId: repair.id,
+            trackingNumber: repair.pickup_tracking_number,
+            status: 'api_error',
+            message: trackingStatus.details,
+            apiDebug: trackingStatus.apiResponse
           })
           continue
         }
@@ -244,7 +256,7 @@ export async function GET(request: NextRequest) {
 }
 
 // Funkcja do pobierania statusu trackingu z BL Paczka
-async function getTrackingStatus(trackingNumber: string): Promise<{ status: string; details?: any } | null> {
+async function getTrackingStatus(trackingNumber: string): Promise<{ status: string; details?: any; apiResponse?: any } | null> {
   try {
     const response = await fetch('https://send.blpaczka.com/api/getWaybillTracking.json', {
       method: 'POST',
@@ -262,11 +274,21 @@ async function getTrackingStatus(trackingNumber: string): Promise<{ status: stri
 
     const data = await response.json()
 
-    console.log(`📡 [BLPaczka] Tracking response for ${trackingNumber}:`, JSON.stringify(data).substring(0, 500))
+    console.log(`📡 [BLPaczka] Tracking response for ${trackingNumber}:`, JSON.stringify(data).substring(0, 1000))
+
+    // Zapisz pełną odpowiedź API do debugowania
+    const apiDebug = {
+      hasSuccess: data.success,
+      hasStatus: data.status,
+      hasData: !!data.data,
+      keys: Object.keys(data),
+      dataKeys: data.data ? Object.keys(data.data) : null,
+      rawResponse: JSON.stringify(data).substring(0, 500)
+    }
 
     if (!data.success && data.status !== 'SUCCESS') {
-      console.error(`❌ [BLPaczka] API error for ${trackingNumber}:`, data.message || data.error_message)
-      return null
+      console.error(`❌ [BLPaczka] API error for ${trackingNumber}:`, data.message || data.error_message, apiDebug)
+      return { status: 'API_ERROR', details: data.message || data.error_message, apiResponse: apiDebug }
     }
 
     // BL Paczka zwraca historię trackingu - weź najnowszy status
