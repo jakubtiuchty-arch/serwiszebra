@@ -57,6 +57,15 @@ export async function PATCH(
       .single()
 
     const statusChanged = currentRepair?.status !== status
+    
+    console.log('📊 [STATUS] Change details:', {
+      repairId,
+      currentStatus: currentRepair?.status,
+      newStatus: status,
+      statusChanged,
+      hasEmail: !!currentRepair?.email,
+      email: currentRepair?.email
+    })
 
     // Przygotuj dane do aktualizacji
     const updateData: Record<string, any> = {
@@ -130,7 +139,10 @@ export async function PATCH(
         try {
           // Specjalny email dla statusu "odebrane" - Potwierdzenie przyjęcia urządzenia z PDF
           if (status === 'odebrane') {
+            console.log('📧 [STATUS] Preparing "odebrane" email for:', currentRepair.email)
+            
             // Generuj PDF potwierdzenia przyjęcia
+            console.log('📄 [STATUS] Generating receipt PDF...')
             const receiptPdf = generateReceiptPDF({
               repairNumber: currentRepair.repair_number || repairId.split('-')[0].toUpperCase(),
               repairId: repairId,
@@ -149,7 +161,10 @@ export async function PATCH(
               createdAt: currentRepair.created_at
             })
 
-            await sendPackageReceivedEmail({
+            console.log('📄 [STATUS] PDF generated, size:', receiptPdf?.length || 0, 'bytes')
+            
+            console.log('📧 [STATUS] Sending package received email...')
+            const emailResult = await sendPackageReceivedEmail({
               to: currentRepair.email,
               customerName: `${currentRepair.first_name} ${currentRepair.last_name}`,
               repairId: repairId,
@@ -157,7 +172,7 @@ export async function PATCH(
               deviceModel: currentRepair.device_model,
               receiptPdf: receiptPdf
             })
-            console.log('✅ Package received confirmation email with PDF sent')
+            console.log('✅ Package received confirmation email with PDF sent, result:', emailResult)
           } else {
             // Standardowy email o zmianie statusu dla pozostałych statusów
             const notifyStatuses = ['diagnoza', 'wycena', 'w_naprawie', 'naprawione', 'wyslane', 'zakonczone']
@@ -175,8 +190,9 @@ export async function PATCH(
               console.log('✅ Status change email sent')
             }
           }
-        } catch (emailError) {
-          console.error('⚠️ Email error:', emailError)
+        } catch (emailError: any) {
+          console.error('⚠️ Email error:', emailError?.message || emailError)
+          console.error('⚠️ Email error stack:', emailError?.stack)
         }
       }
     }
