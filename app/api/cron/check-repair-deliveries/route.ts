@@ -36,7 +36,7 @@ const DELIVERED_KEYWORDS = [
   'dostarczona'
 ]
 
-const CRON_VERSION = '2.1.0' // 2026-01-16 - debug sample orders
+const CRON_VERSION = '2.2.0' // 2026-01-16 - nested Order structure
 
 export async function GET(request: NextRequest) {
   try {
@@ -128,32 +128,41 @@ export async function GET(request: NextRequest) {
           const orders = await getOrdersFromBLPaczka()
           
           // Szukaj zamówienia po numerze tracking lub ref_number
-          const matchingOrder = orders.find((order: any) => 
-            order.waybill_no === repair.pickup_tracking_number ||
-            order.ref_number === refNumber ||
-            order.tracking_number === repair.pickup_tracking_number
-          )
+          // BL Paczka zwraca zagnieżdżoną strukturę: { Order: {...}, CartOrder: {...} }
+          const matchingOrder = orders.find((order: any) => {
+            const o = order.Order || order // Obsłuż zagnieżdżoną strukturę
+            return o.waybill_no === repair.pickup_tracking_number ||
+                   o.ref_number === refNumber ||
+                   o.tracking_number === repair.pickup_tracking_number ||
+                   o.waybill === repair.pickup_tracking_number
+          })
           
           if (matchingOrder) {
             console.log(`✅ [CRON-REPAIRS] Found order via getOrders:`, JSON.stringify(matchingOrder).substring(0, 500))
-            const orderStatus = matchingOrder.status || matchingOrder.parcel_status || matchingOrder.delivery_status || ''
+            const o = matchingOrder.Order || matchingOrder
+            const orderStatus = o.status || o.parcel_status || o.delivery_status || matchingOrder.status || ''
             trackingStatus = {
               status: orderStatus,
-              details: matchingOrder,
+              details: o,
               apiResponse: { method: 'getOrders', order: matchingOrder }
             }
           } else {
             console.log(`⚠️ [CRON-REPAIRS] No matching order found in ${orders.length} orders`)
-            // Pokaż pierwsze 3 zamówienia dla debugowania (tylko klucze i wybrane pola)
-            const sampleOrders = orders.slice(0, 3).map((o: any) => ({
-              keys: Object.keys(o),
-              waybill_no: o.waybill_no,
-              ref_number: o.ref_number,
-              tracking_number: o.tracking_number,
-              id: o.id,
-              order_id: o.order_id,
-              status: o.status
-            }))
+            // Pokaż pierwsze 3 zamówienia dla debugowania (obsłuż zagnieżdżoną strukturę)
+            const sampleOrders = orders.slice(0, 3).map((order: any) => {
+              const o = order.Order || order
+              return {
+                topKeys: Object.keys(order),
+                orderKeys: o ? Object.keys(o) : null,
+                waybill_no: o?.waybill_no,
+                waybill: o?.waybill,
+                ref_number: o?.ref_number,
+                tracking_number: o?.tracking_number,
+                id: o?.id,
+                order_id: o?.order_id,
+                status: o?.status
+              }
+            })
             trackingStatus = {
               status: 'ORDER_NOT_FOUND',
               details: `Tracking ${repair.pickup_tracking_number} not found in ${orders.length} BL Paczka orders`,
