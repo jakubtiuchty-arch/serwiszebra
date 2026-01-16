@@ -103,22 +103,14 @@ export async function GET(request: NextRequest) {
         // Wywołaj BL Paczka API aby sprawdzić status
         const trackingStatus = await getTrackingStatus(repair.pickup_tracking_number)
 
-        if (!trackingStatus) {
-          results.push({
-            repairId: repair.id,
-            trackingNumber: repair.pickup_tracking_number,
-            status: 'error',
-            message: 'Could not fetch tracking status (null response)'
-          })
-          continue
-        }
+        // trackingStatus zawsze zwraca obiekt (nie null)
 
         // Jeśli API zwróciło błąd - zwróć szczegóły
-        if (trackingStatus.status === 'API_ERROR') {
+        if (trackingStatus.status === 'API_ERROR' || trackingStatus.status === 'FETCH_ERROR' || trackingStatus.status === 'NO_TRACKING_DATA') {
           results.push({
             repairId: repair.id,
             trackingNumber: repair.pickup_tracking_number,
-            status: 'api_error',
+            status: trackingStatus.status.toLowerCase(),
             message: trackingStatus.details,
             apiDebug: trackingStatus.apiResponse
           })
@@ -256,7 +248,7 @@ export async function GET(request: NextRequest) {
 }
 
 // Funkcja do pobierania statusu trackingu z BL Paczka
-async function getTrackingStatus(trackingNumber: string): Promise<{ status: string; details?: any; apiResponse?: any } | null> {
+async function getTrackingStatus(trackingNumber: string): Promise<{ status: string; details?: any; apiResponse?: any }> {
   try {
     const response = await fetch('https://send.blpaczka.com/api/getWaybillTracking.json', {
       method: 'POST',
@@ -310,11 +302,11 @@ async function getTrackingStatus(trackingNumber: string): Promise<{ status: stri
     }
 
     console.log(`⚠️ [BLPaczka] No tracking data found for ${trackingNumber}`)
-    return null
+    return { status: 'NO_TRACKING_DATA', details: 'BL Paczka returned success but no tracking data', apiResponse: null }
 
-  } catch (error) {
+  } catch (error: any) {
     console.error(`❌ [BLPaczka] Error fetching tracking for ${trackingNumber}:`, error)
-    return null
+    return { status: 'FETCH_ERROR', details: error.message || 'Network or parsing error', apiResponse: null }
   }
 }
 
