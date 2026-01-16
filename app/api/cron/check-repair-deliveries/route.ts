@@ -111,19 +111,49 @@ export async function GET(request: NextRequest) {
         // ref_number który wysyłamy do BL Paczka przy tworzeniu zamówienia
         const refNumber = repair.id.split('-')[0].toUpperCase()
         
-        // Spróbuj śledzenia przez ref_number (jak wysyłamy do BL Paczka)
+        // Metoda 1: Spróbuj śledzenia przez ref_number
         let trackingStatus = await getTrackingStatus(refNumber, 'ref_number')
         
-        // Jeśli nie zadziałało, spróbuj przez tracking number
+        // Metoda 2: Jeśli nie zadziałało, spróbuj przez waybill_no (tracking number)
         if (['API_TEXT_ERROR', 'NO_TRACKING_DATA'].includes(trackingStatus.status)) {
           console.log(`📍 [CRON-REPAIRS] Trying tracking by waybill_no for repair ${repair.id}`)
           trackingStatus = await getTrackingStatus(repair.pickup_tracking_number, 'waybill_no')
+        }
+        
+        // Metoda 3: Jeśli nadal nie zadziałało, spróbuj przez listę zamówień
+        if (['API_TEXT_ERROR', 'NO_TRACKING_DATA'].includes(trackingStatus.status)) {
+          console.log(`📍 [CRON-REPAIRS] Trying getOrders method for repair ${repair.id}`)
+          const orders = await getOrdersFromBLPaczka()
+          
+          // Szukaj zamówienia po numerze tracking lub ref_number
+          const matchingOrder = orders.find((order: any) => 
+            order.waybill_no === repair.pickup_tracking_number ||
+            order.ref_number === refNumber ||
+            order.tracking_number === repair.pickup_tracking_number
+          )
+          
+          if (matchingOrder) {
+            console.log(`✅ [CRON-REPAIRS] Found order via getOrders:`, JSON.stringify(matchingOrder).substring(0, 500))
+            const orderStatus = matchingOrder.status || matchingOrder.parcel_status || matchingOrder.delivery_status || ''
+            trackingStatus = {
+              status: orderStatus,
+              details: matchingOrder,
+              apiResponse: { method: 'getOrders', order: matchingOrder }
+            }
+          } else {
+            console.log(`⚠️ [CRON-REPAIRS] No matching order found in ${orders.length} orders`)
+            trackingStatus = {
+              status: 'ORDER_NOT_FOUND',
+              details: `Tracking ${repair.pickup_tracking_number} not found in ${orders.length} BL Paczka orders`,
+              apiResponse: { ordersCount: orders.length, searchedTracking: repair.pickup_tracking_number, searchedRef: refNumber }
+            }
+          }
         }
 
         // trackingStatus zawsze zwraca obiekt (nie null)
 
         // Jeśli API zwróciło błąd - zwróć szczegóły
-        if (['API_ERROR', 'FETCH_ERROR', 'NO_TRACKING_DATA', 'API_TEXT_ERROR'].includes(trackingStatus.status)) {
+        if (['API_ERROR', 'FETCH_ERROR', 'NO_TRACKING_DATA', 'API_TEXT_ERROR', 'ORDER_NOT_FOUND'].includes(trackingStatus.status)) {
           results.push({
             repairId: repair.id,
             trackingNumber: repair.pickup_tracking_number,
@@ -261,6 +291,44 @@ export async function GET(request: NextRequest) {
       { error: 'Internal server error', details: error.message },
       { status: 500 }
     )
+  }
+}
+
+// Funkcja do pobierania zamówień z BL Paczka (alternatywna metoda)
+async function getOrdersFromBLPaczka(): Promise<any[]> {
+  try {
+    const response = await fetch('https://send.blpaczka.com/api/getOrders.json', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        auth: {
+          login: BLPACZKA_LOGIN,
+          api_key: BLPACZKA_API_KEY
+        },
+        date_from: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0], // ostatnie 30 dni
+        date_to: new Date().toISOString().split('T')[0]
+      })
+    })
+
+    const responseText = await response.text()
+    console.log(`📡 [BLPaczka] getOrders raw response:`, responseText.substring(0, 1000))
+
+    try {
+      const data = JSON.parse(responseText)
+      if (data.success && data.data?.Order) {
+        return data.data.Order
+      }
+      if (data.success && Array.isArray(data.data)) {
+        return data.data
+      }
+      return []
+    } catch {
+      console.log(`⚠️ [BLPaczka] getOrders returned non-JSON:`, responseText.substring(0, 200))
+      return []
+    }
+  } catch (error: any) {
+    console.error(`❌ [BLPaczka] getOrders error:`, error.message)
+    return []
   }
 }
 
