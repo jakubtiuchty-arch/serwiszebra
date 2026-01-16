@@ -50,11 +50,18 @@ export async function PATCH(
     }
 
     // Sprawdź obecny status i payment_status - pobierz wszystkie dane do PDF
-    const { data: currentRepair } = await supabase
+    const { data: currentRepair, error: fetchError } = await supabase
       .from('repair_requests')
       .select('status, payment_status, payment_method, email, first_name, last_name, device_model, device_serial_number, device_type, phone, company, street, city, zip_code, repair_number, issue_description, repair_type, created_at')
       .eq('id', repairId)
       .single()
+
+    console.log('🔍 [STATUS] Fetch currentRepair:', {
+      repairId,
+      hasData: !!currentRepair,
+      fetchError: fetchError?.message || null,
+      dataKeys: currentRepair ? Object.keys(currentRepair) : null
+    })
 
     const statusChanged = currentRepair?.status !== status
     
