@@ -66,7 +66,7 @@ export async function GET(request: NextRequest) {
     const supabaseAdmin = getSupabaseAdmin()
     const { data: repairs, error: fetchError } = await supabaseAdmin
       .from('repair_requests')
-      .select('id, status, pickup_tracking_number, pickup_courier_name, first_name, last_name, device_model, device_serial_number, device_type, email, phone, company, street, city, zip_code, repair_number, issue_description, repair_type, created_at')
+      .select('id, status, pickup_tracking_number, pickup_courier_name, first_name, last_name, device_model, serial_number, device_type, email, phone, company, street, city, zip_code, repair_number, issue_description, repair_type, created_at')
       .in('status', ['nowe', 'oczekiwanie', 'w_transporcie'])
       .not('pickup_tracking_number', 'is', null)
       .neq('pickup_tracking_number', '')
@@ -166,7 +166,7 @@ export async function GET(request: NextRequest) {
                 customerCity: repair.city,
                 customerZipCode: repair.zip_code,
                 deviceModel: repair.device_model || 'Urządzenie Zebra',
-                deviceSerialNumber: repair.device_serial_number,
+                deviceSerialNumber: repair.serial_number,
                 deviceType: repair.device_type,
                 issueDescription: repair.issue_description || '',
                 repairType: repair.repair_type || 'paid',
