@@ -62,6 +62,14 @@ export async function GET(request: NextRequest) {
       }, { status: 500 })
     }
 
+    // Debug: pokaż że credentials są skonfigurowane (bez wartości)
+    console.log('🔑 [CRON-REPAIRS] BL Paczka credentials:', {
+      hasLogin: !!BLPACZKA_LOGIN,
+      hasApiKey: !!BLPACZKA_API_KEY,
+      loginLength: BLPACZKA_LOGIN?.length,
+      apiKeyLength: BLPACZKA_API_KEY?.length
+    })
+
     // Pobierz naprawy z pickup_tracking_number, które są w statusie "nowe", "oczekiwanie" lub "w_transporcie"
     const supabaseAdmin = getSupabaseAdmin()
     const { data: repairs, error: fetchError } = await supabaseAdmin
@@ -283,9 +291,11 @@ async function getTrackingStatus(identifier: string, type: 'waybill_no' | 'ref_n
       body: JSON.stringify(requestBody)
     })
 
+    console.log(`📡 [BLPaczka] HTTP status for ${type}=${identifier}: ${response.status} ${response.statusText}`)
+
     // Najpierw pobierz tekst, potem próbuj parsować jako JSON
     const responseText = await response.text()
-    console.log(`📡 [BLPaczka] Raw response for ${trackingNumber}:`, responseText.substring(0, 500))
+    console.log(`📡 [BLPaczka] Raw response for ${identifier}:`, responseText.substring(0, 500))
 
     let data: any
     try {
