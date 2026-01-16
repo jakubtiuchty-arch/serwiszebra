@@ -36,11 +36,13 @@ const DELIVERED_KEYWORDS = [
   'dostarczona'
 ]
 
+const CRON_VERSION = '2.0.0' // 2026-01-16
+
 export async function GET(request: NextRequest) {
   try {
     // Endpoint publiczny - tylko sprawdza statusy przesyłek, nie modyfikuje danych wrażliwych
 
-    console.log('🔄 [CRON-REPAIRS] Starting delivery status check...')
+    console.log(`🔄 [CRON-REPAIRS] Starting delivery status check... (v${CRON_VERSION})`)
 
     // Sprawdź zmienne środowiskowe
     if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
@@ -280,6 +282,7 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json({
       success: true,
+      version: CRON_VERSION,
       checked: checkedCount,
       updated: updatedCount,
       results: results
