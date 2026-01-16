@@ -106,7 +106,7 @@ export async function GET(request: NextRequest) {
         // trackingStatus zawsze zwraca obiekt (nie null)
 
         // Jeśli API zwróciło błąd - zwróć szczegóły
-        if (trackingStatus.status === 'API_ERROR' || trackingStatus.status === 'FETCH_ERROR' || trackingStatus.status === 'NO_TRACKING_DATA') {
+        if (['API_ERROR', 'FETCH_ERROR', 'NO_TRACKING_DATA', 'API_TEXT_ERROR'].includes(trackingStatus.status)) {
           results.push({
             repairId: repair.id,
             trackingNumber: repair.pickup_tracking_number,
@@ -264,7 +264,21 @@ async function getTrackingStatus(trackingNumber: string): Promise<{ status: stri
       })
     })
 
-    const data = await response.json()
+    // Najpierw pobierz tekst, potem próbuj parsować jako JSON
+    const responseText = await response.text()
+    console.log(`📡 [BLPaczka] Raw response for ${trackingNumber}:`, responseText.substring(0, 500))
+
+    let data: any
+    try {
+      data = JSON.parse(responseText)
+    } catch (parseError) {
+      // API zwróciło tekst zamiast JSON (błąd)
+      return { 
+        status: 'API_TEXT_ERROR', 
+        details: responseText.substring(0, 200), 
+        apiResponse: { rawText: responseText.substring(0, 500) } 
+      }
+    }
 
     console.log(`📡 [BLPaczka] Tracking response for ${trackingNumber}:`, JSON.stringify(data).substring(0, 1000))
 
