@@ -36,7 +36,7 @@ const DELIVERED_KEYWORDS = [
   'dostarczona'
 ]
 
-const CRON_VERSION = '2.0.0' // 2026-01-16
+const CRON_VERSION = '2.1.0' // 2026-01-16 - debug sample orders
 
 export async function GET(request: NextRequest) {
   try {
@@ -144,10 +144,25 @@ export async function GET(request: NextRequest) {
             }
           } else {
             console.log(`⚠️ [CRON-REPAIRS] No matching order found in ${orders.length} orders`)
+            // Pokaż pierwsze 3 zamówienia dla debugowania (tylko klucze i wybrane pola)
+            const sampleOrders = orders.slice(0, 3).map((o: any) => ({
+              keys: Object.keys(o),
+              waybill_no: o.waybill_no,
+              ref_number: o.ref_number,
+              tracking_number: o.tracking_number,
+              id: o.id,
+              order_id: o.order_id,
+              status: o.status
+            }))
             trackingStatus = {
               status: 'ORDER_NOT_FOUND',
               details: `Tracking ${repair.pickup_tracking_number} not found in ${orders.length} BL Paczka orders`,
-              apiResponse: { ordersCount: orders.length, searchedTracking: repair.pickup_tracking_number, searchedRef: refNumber }
+              apiResponse: { 
+                ordersCount: orders.length, 
+                searchedTracking: repair.pickup_tracking_number, 
+                searchedRef: refNumber,
+                sampleOrders: sampleOrders
+              }
             }
           }
         }
