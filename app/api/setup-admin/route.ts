@@ -1,6 +1,9 @@
 import { createClient } from '@supabase/supabase-js'
 import { NextResponse } from 'next/server'
 
+// Wymuś dynamiczne renderowanie (nie static)
+export const dynamic = 'force-dynamic'
+
 // Ten endpoint jest TYLKO do jednorazowego setupu admina
 // USUŃ GO po ustawieniu roli admin!
 

@@ -7,15 +7,20 @@ import { createClient } from '@supabase/supabase-js'
 import { sendPackageReceivedEmail } from '@/lib/email'
 import { generateReceiptPDF } from '@/lib/receipt-pdf-generator'
 
-// Supabase admin client (bez RLS)
-const supabaseAdmin = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-)
+// Wymuś dynamiczne renderowanie
+export const dynamic = 'force-dynamic'
 
 // BL Paczka API credentials
 const BLPACZKA_LOGIN = process.env.BLPACZKA_LOGIN || 'jakub.tiuchty@takma.com.pl'
 const BLPACZKA_API_KEY = process.env.BLPACZKA_API_KEY || ''
+
+// Funkcja do tworzenia Supabase admin client (wywoływana w runtime)
+function getSupabaseAdmin() {
+  return createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  )
+}
 
 // Statusy BL Paczka oznaczające dostarczenie do odbiorcy
 const DELIVERED_KEYWORDS = [
@@ -58,6 +63,7 @@ export async function GET(request: NextRequest) {
     }
 
     // Pobierz naprawy z pickup_tracking_number, które są w statusie "nowe", "oczekiwanie" lub "w_transporcie"
+    const supabaseAdmin = getSupabaseAdmin()
     const { data: repairs, error: fetchError } = await supabaseAdmin
       .from('repair_requests')
       .select('id, status, pickup_tracking_number, pickup_courier_name, first_name, last_name, device_model, device_serial_number, device_type, email, phone, company, street, city, zip_code, repair_number, issue_description, repair_type, created_at')

@@ -1,14 +1,21 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient as createSupabaseAdmin } from '@supabase/supabase-js'
 import { Resend } from 'resend'
-import { generateShippingNotificationEmail } from '@/lib/email/templates/shipping-notification'  // ⬅️ POPRAWIONE
+import { generateShippingNotificationEmail } from '@/lib/email/templates/shipping-notification'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+// Wymuś dynamiczne renderowanie
+export const dynamic = 'force-dynamic'
 
-const supabaseAdmin = createSupabaseAdmin(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-)
+function getSupabaseAdmin() {
+  return createSupabaseAdmin(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  )
+}
+
+function getResend() {
+  return new Resend(process.env.RESEND_API_KEY)
+}
 
 export async function GET(request: NextRequest) {
   try {
@@ -19,6 +26,9 @@ export async function GET(request: NextRequest) {
     if (cronSecret && authHeader !== `Bearer ${cronSecret}`) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
+
+    const supabaseAdmin = getSupabaseAdmin()
+    const resend = getResend()
 
     console.log('🔄 [CRON] Starting automated Baselinker tracking sync...')
 
