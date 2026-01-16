@@ -36,7 +36,7 @@ const DELIVERED_KEYWORDS = [
   'dostarczona'
 ]
 
-const CRON_VERSION = '2.3.0' // 2026-01-16 - debug status fields
+const CRON_VERSION = '2.4.0' // 2026-01-16 - track by BL Paczka order ID
 
 export async function GET(request: NextRequest) {
   try {
@@ -140,24 +140,37 @@ export async function GET(request: NextRequest) {
           if (matchingOrder) {
             console.log(`✅ [CRON-REPAIRS] Found order via getOrders:`, JSON.stringify(matchingOrder).substring(0, 1500))
             const o = matchingOrder.Order || matchingOrder
-            const orderStatus = o.status || o.parcel_status || o.delivery_status || o.state || matchingOrder.status || ''
             
-            // Debug: pokaż wszystkie możliwe pola statusu
-            const statusDebug = {
-              'o.status': o?.status,
-              'o.parcel_status': o?.parcel_status,
-              'o.delivery_status': o?.delivery_status,
-              'o.state': o?.state,
-              'o.courier_status': o?.courier_status,
-              'matchingOrder.status': matchingOrder?.status,
-              'all_keys': o ? Object.keys(o) : null
-            }
-            console.log(`📊 [CRON-REPAIRS] Status debug:`, JSON.stringify(statusDebug))
-            
-            trackingStatus = {
-              status: orderStatus || 'FOUND_NO_STATUS',
-              details: o,
-              apiResponse: { method: 'getOrders', order: matchingOrder, statusDebug }
+            // getOrders nie zwraca statusu dostawy - użyj ID zamówienia do pobrania trackingu
+            const blpaczkaOrderId = o.id
+            if (blpaczkaOrderId) {
+              console.log(`📍 [CRON-REPAIRS] Trying to track by BL Paczka order ID: ${blpaczkaOrderId}`)
+              
+              // Spróbuj pobrać status przez order ID
+              const trackingByOrderId = await getTrackingStatus(blpaczkaOrderId, 'waybill_no')
+              
+              if (!['API_TEXT_ERROR', 'NO_TRACKING_DATA', 'FETCH_ERROR'].includes(trackingByOrderId.status)) {
+                console.log(`✅ [CRON-REPAIRS] Got tracking status via order ID: ${trackingByOrderId.status}`)
+                trackingStatus = trackingByOrderId
+              } else {
+                // Jeśli order ID nie zadziałało, zwróć informacje o znalezionym zamówieniu
+                trackingStatus = {
+                  status: 'ORDER_FOUND_NO_TRACKING',
+                  details: o,
+                  apiResponse: { 
+                    method: 'getOrders', 
+                    blpaczkaOrderId,
+                    waybill_no: o.waybill_no,
+                    trackingAttemptResult: trackingByOrderId
+                  }
+                }
+              }
+            } else {
+              trackingStatus = {
+                status: 'ORDER_FOUND_NO_ID',
+                details: o,
+                apiResponse: { method: 'getOrders', order: matchingOrder }
+              }
             }
           } else {
             console.log(`⚠️ [CRON-REPAIRS] No matching order found in ${orders.length} orders`)
@@ -192,7 +205,7 @@ export async function GET(request: NextRequest) {
         // trackingStatus zawsze zwraca obiekt (nie null)
 
         // Jeśli API zwróciło błąd - zwróć szczegóły
-        if (['API_ERROR', 'FETCH_ERROR', 'NO_TRACKING_DATA', 'API_TEXT_ERROR', 'ORDER_NOT_FOUND'].includes(trackingStatus.status)) {
+        if (['API_ERROR', 'FETCH_ERROR', 'NO_TRACKING_DATA', 'API_TEXT_ERROR', 'ORDER_NOT_FOUND', 'ORDER_FOUND_NO_TRACKING', 'ORDER_FOUND_NO_ID'].includes(trackingStatus.status)) {
           results.push({
             repairId: repair.id,
             trackingNumber: repair.pickup_tracking_number,
