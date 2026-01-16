@@ -52,7 +52,7 @@ export async function PATCH(
     // Sprawdź obecny status i payment_status - pobierz wszystkie dane do PDF
     const { data: currentRepair, error: fetchError } = await supabase
       .from('repair_requests')
-      .select('status, payment_status, payment_method, email, first_name, last_name, device_model, device_serial_number, device_type, phone, company, street, city, zip_code, repair_number, issue_description, repair_type, created_at')
+      .select('status, payment_status, payment_method, email, first_name, last_name, device_model, serial_number, device_type, phone, company, street, city, zip_code, repair_number, issue_description, repair_type, created_at')
       .eq('id', repairId)
       .single()
 
@@ -161,7 +161,7 @@ export async function PATCH(
               customerCity: currentRepair.city,
               customerZipCode: currentRepair.zip_code,
               deviceModel: currentRepair.device_model || 'Urządzenie Zebra',
-              deviceSerialNumber: currentRepair.device_serial_number,
+              deviceSerialNumber: currentRepair.serial_number,
               deviceType: currentRepair.device_type,
               issueDescription: currentRepair.issue_description || '',
               repairType: currentRepair.repair_type || 'paid',
