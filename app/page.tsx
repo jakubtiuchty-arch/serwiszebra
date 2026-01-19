@@ -138,6 +138,7 @@ export default function HomePage() {
         '@id': 'https://www.serwis-zebry.pl/#website',
         url: 'https://www.serwis-zebry.pl',
         name: 'TAKMA - Autoryzowany Serwis Zebra',
+        alternateName: ['TAKMA Serwis Zebra', 'Serwis Zebra TAKMA', 'TAKMA'],
         description: 'Autoryzowany serwis gwarancyjny i pogwarancyjny Zebra w Polsce',
         publisher: {
           '@id': 'https://www.serwis-zebry.pl/#organization'
