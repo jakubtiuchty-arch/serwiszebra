@@ -38,7 +38,7 @@ export async function GET(request: Request) {
     
     // Znajdź naprawy które:
     // 1. Mają status "wyslane" lub "zakonczone"
-    // 2. Zostały wysłane dokładnie 2 dni temu (lub więcej, ale nie wysłaliśmy jeszcze prośby)
+    // 2. Zostały wysłane dokładnie 2 dni temu (używamy shipped_at)
     // 3. Nie mają jeszcze wysłanej prośby o opinię (review_request_sent = false lub null)
     
     const twoDaysAgo = new Date()
@@ -51,14 +51,15 @@ export async function GET(request: Request) {
 
     console.log(`📅 [CRON] Looking for repairs shipped between ${threeDaysAgo.toISOString()} and ${twoDaysAgo.toISOString()}`)
 
-    // Pobierz naprawy które zostały wysłane ~2 dni temu
+    // Pobierz naprawy które zostały wysłane ~2 dni temu (używamy shipped_at)
     const { data: repairs, error: fetchError } = await supabase
       .from('repair_requests')
-      .select('id, email, first_name, last_name, device_model, repair_number, updated_at, status')
+      .select('id, email, first_name, last_name, device_model, repair_number, shipped_at, status')
       .in('status', ['wyslane', 'zakonczone'])
+      .not('shipped_at', 'is', null)
       .or('review_request_sent.is.null,review_request_sent.eq.false')
-      .lt('updated_at', twoDaysAgo.toISOString())
-      .gt('updated_at', threeDaysAgo.toISOString())
+      .lt('shipped_at', twoDaysAgo.toISOString())
+      .gt('shipped_at', threeDaysAgo.toISOString())
 
     if (fetchError) {
       console.error('❌ [CRON] Database error:', fetchError)

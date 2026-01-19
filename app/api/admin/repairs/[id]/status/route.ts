@@ -87,6 +87,12 @@ export async function PATCH(
       console.log('📄 Pro Forma payment confirmed - marking as paid')
     }
 
+    // Jeśli zmieniamy na "wyslane" - ustaw datę wysyłki (do prośby o opinię)
+    if (status === 'wyslane' && currentRepair?.status !== 'wyslane') {
+      updateData.shipped_at = new Date().toISOString()
+      console.log('📦 Shipped - setting shipped_at for review request')
+    }
+
     // Aktualizacja statusu w repair_requests
     const { data: updatedRepair, error: updateError } = await supabase
       .from('repair_requests')

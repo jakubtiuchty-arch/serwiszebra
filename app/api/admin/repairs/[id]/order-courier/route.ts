@@ -222,6 +222,7 @@ export async function POST(
       updateData.courier_name = courierName
       updateData.courier_tracking_number = trackingNumber
       updateData.status = 'wyslane'
+      updateData.shipped_at = new Date().toISOString() // Data wysyłki do klienta
       // blpaczka_order_id pomijamy - kolumna nie istnieje w bazie
     }
 
