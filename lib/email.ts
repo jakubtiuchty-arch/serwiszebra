@@ -490,6 +490,7 @@ interface RepairPickupScheduledEmailData {
   courierName: string
   trackingNumber: string
   pickupDate: string
+  waybillLink?: string  // Link do etykiety
 }
 
 export async function sendRepairPickupScheduledEmail(data: RepairPickupScheduledEmailData) {
@@ -584,6 +585,22 @@ ${getEmailHeader()}
             </table>
           </div>
 
+          ${data.waybillLink ? `
+          <!-- Etykieta do wydruku -->
+          <div style="background-color: #10b981; border-radius: 8px; padding: 20px; margin-bottom: 24px; text-align: center;">
+            <h4 style="margin: 0 0 12px 0; font-size: 18px; color: #ffffff;">
+              🏷️ Etykieta do wydruku
+            </h4>
+            <p style="margin: 0 0 16px 0; color: rgba(255,255,255,0.9); font-size: 14px;">
+              Wydrukuj etykietę i przyklej na paczkę
+            </p>
+            <a href="${data.waybillLink}" 
+               style="display: inline-block; background-color: white; color: #10b981; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 16px;">
+              📄 Pobierz etykietę (PDF)
+            </a>
+          </div>
+          ` : ''}
+
           <!-- Packing instructions -->
           <div style="background-color: #dbeafe; border-radius: 8px; padding: 20px; margin-bottom: 24px;">
             <h4 style="margin: 0 0 12px 0; font-size: 16px; color: #1e40af;">
@@ -592,7 +609,7 @@ ${getEmailHeader()}
             <ol style="margin: 0; padding-left: 20px; color: #1e3a8a; font-size: 14px; line-height: 1.8;">
               <li><strong>Spakuj urządzenie</strong> w karton z zabezpieczeniami (folia bąbelkowa, styropian)</li>
               <li><strong>Dołącz akcesoria</strong> (kabel zasilający, bateria, kabel USB) - jeśli wymagane</li>
-              <li><strong>Przygotuj list przewozowy</strong> - kurier może go wydrukować lub przynieść ze sobą</li>
+              ${data.waybillLink ? '<li><strong>Wydrukuj etykietę</strong> i przyklej ją na paczkę</li>' : '<li><strong>Przygotuj list przewozowy</strong> - kurier może go wydrukować lub przynieść ze sobą</li>'}
               <li><strong>Bądź dostępny</strong> pod wskazanym adresem w dniu odbioru</li>
             </ol>
           </div>
@@ -607,6 +624,165 @@ ${getEmailHeader()}
           </div>
 
         </div>
+
+      </div>
+    </body>
+    </html>
+  `
+}
+
+// ========== EMAIL DO ADMINA - KURIER ZAMÓWIONY ==========
+
+interface CourierOrderedAdminEmailData {
+  to: string | string[]
+  repairId: string
+  repairNumber?: string
+  customerName: string
+  customerEmail: string
+  customerPhone: string
+  customerAddress: string
+  deviceModel: string
+  courierName: string
+  trackingNumber: string
+  pickupDate: string
+  direction: 'pickup' | 'delivery'
+  waybillLink?: string
+  orderedBy?: string  // Kto zamówił (admin email)
+}
+
+export async function sendCourierOrderedAdminEmail(data: CourierOrderedAdminEmailData) {
+  try {
+    const shortId = getRepairNumber(data.repairId, data.repairNumber)
+    
+    const isPickup = data.direction === 'pickup'
+    const subject = isPickup 
+      ? `🚚 Kurier zamówiony - odbiór od klienta #${shortId}`
+      : `📦 Kurier zamówiony - wysyłka do klienta #${shortId}`
+    
+    const email = await resend.emails.send({
+      from: 'System Serwisowy <system@serwis-zebry.pl>',
+      to: data.to,
+      subject: subject,
+      html: generateCourierOrderedAdminHTML(data, shortId)
+    })
+    
+    console.log('[Email] Courier ordered admin notification sent:', email)
+    return email
+    
+  } catch (error) {
+    console.error('[Email] Error sending courier ordered admin email:', error)
+    throw error
+  }
+}
+
+function generateCourierOrderedAdminHTML(data: CourierOrderedAdminEmailData, shortId: string): string {
+  const isPickup = data.direction === 'pickup'
+  const pickupDateFormatted = new Date(data.pickupDate).toLocaleDateString('pl-PL', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  })
+  
+  const headerColor = isPickup ? '#f59e0b' : '#10b981'
+  const headerText = isPickup ? 'Kurier zamówiony - ODBIÓR' : 'Kurier zamówiony - WYSYŁKA'
+  const actionText = isPickup 
+    ? 'Kurier odbierze urządzenie od klienta i dostarczy do serwisu.'
+    : 'Kurier odbierze urządzenie z serwisu i dostarczy do klienta.'
+
+  return `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="utf-8">
+    </head>
+    <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+      <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
+        
+        <div style="background-color: ${headerColor}; color: white; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+          <h2 style="margin: 0;">🚚 ${headerText}</h2>
+          <p style="margin: 8px 0 0 0; opacity: 0.9;">Naprawa #${shortId} • ${data.deviceModel}</p>
+        </div>
+
+        <div style="background-color: #f9fafb; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+          <h3 style="margin-top: 0; color: #374151;">Szczegóły kuriera:</h3>
+          <table style="width: 100%; border-collapse: collapse;">
+            <tr>
+              <td style="padding: 8px 0; border-bottom: 1px solid #e5e7eb;"><strong>Kurier:</strong></td>
+              <td style="padding: 8px 0; border-bottom: 1px solid #e5e7eb;">${data.courierName}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0; border-bottom: 1px solid #e5e7eb;"><strong>Nr tracking:</strong></td>
+              <td style="padding: 8px 0; border-bottom: 1px solid #e5e7eb; font-family: monospace;">${data.trackingNumber}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0; border-bottom: 1px solid #e5e7eb;"><strong>Data odbioru:</strong></td>
+              <td style="padding: 8px 0; border-bottom: 1px solid #e5e7eb; font-weight: 600;">${pickupDateFormatted}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0;"><strong>Kierunek:</strong></td>
+              <td style="padding: 8px 0;">
+                <span style="background-color: ${headerColor}20; color: ${headerColor}; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600;">
+                  ${isPickup ? 'Klient → Serwis' : 'Serwis → Klient'}
+                </span>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <div style="background-color: #dbeafe; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+          <h3 style="margin-top: 0; color: #1e40af;">Dane klienta:</h3>
+          <table style="width: 100%; border-collapse: collapse;">
+            <tr>
+              <td style="padding: 6px 0;"><strong>Imię i nazwisko:</strong></td>
+              <td style="padding: 6px 0;">${data.customerName}</td>
+            </tr>
+            <tr>
+              <td style="padding: 6px 0;"><strong>Email:</strong></td>
+              <td style="padding: 6px 0;"><a href="mailto:${data.customerEmail}" style="color: #2563eb;">${data.customerEmail}</a></td>
+            </tr>
+            <tr>
+              <td style="padding: 6px 0;"><strong>Telefon:</strong></td>
+              <td style="padding: 6px 0;"><a href="tel:${data.customerPhone}" style="color: #2563eb;">${data.customerPhone}</a></td>
+            </tr>
+            <tr>
+              <td style="padding: 6px 0;"><strong>Adres:</strong></td>
+              <td style="padding: 6px 0;">${data.customerAddress}</td>
+            </tr>
+          </table>
+        </div>
+
+        <div style="background-color: #fef3c7; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+          <p style="margin: 0; color: #92400e;">
+            📋 ${actionText}
+          </p>
+        </div>
+
+        ${data.waybillLink ? `
+        <div style="text-align: center; margin-bottom: 20px;">
+          <a href="${data.waybillLink}" 
+             style="display: inline-block; background-color: #10b981; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; margin-right: 10px;">
+            📄 Pobierz etykietę
+          </a>
+          <a href="https://www.serwis-zebry.pl/admin/zgloszenie/${data.repairId}" 
+             style="display: inline-block; background-color: #111827; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600;">
+            Zobacz zgłoszenie
+          </a>
+        </div>
+        ` : `
+        <div style="text-align: center; margin-bottom: 20px;">
+          <a href="https://www.serwis-zebry.pl/admin/zgloszenie/${data.repairId}" 
+             style="display: inline-block; background-color: #111827; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600;">
+            Zobacz zgłoszenie
+          </a>
+        </div>
+        `}
+
+        ${data.orderedBy ? `
+        <div style="text-align: center; color: #6b7280; font-size: 12px; margin-top: 20px;">
+          <p style="margin: 0;">Kurier zamówiony przez: ${data.orderedBy}</p>
+        </div>
+        ` : ''}
 
       </div>
     </body>

@@ -1,7 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { requireAdminServer } from '@/lib/auth-server'
 import { createClient } from '@/lib/supabase/server'
-import { sendRepairShippedEmail, sendRepairPickupScheduledEmail } from '@/lib/email'
+import { sendRepairShippedEmail, sendRepairPickupScheduledEmail, sendCourierOrderedAdminEmail } from '@/lib/email'
+
+// Email admina do powiadomień o kurierach
+const ADMIN_EMAIL = 'jakub.tiuchty@takma.com.pl'
 
 export async function POST(
   request: NextRequest,
@@ -252,6 +255,10 @@ export async function POST(
         changed_by: adminCheck.user?.id
       })
 
+    // Przygotuj dane klienta do emaila
+    const customerFullAddress = `${repair.street}, ${repair.zip_code} ${repair.city}`
+    const adminUser = adminCheck.user?.email || 'system'
+
     // Wyślij email do klienta
     try {
       if (direction === 'delivery') {
@@ -277,12 +284,36 @@ export async function POST(
           deviceModel: repair.device_model,
           courierName: courierName,
           trackingNumber: trackingNumber,
-          pickupDate: pickup_date
+          pickupDate: pickup_date,
+          waybillLink: waybillLink || undefined  // Dodaj link do etykiety
         })
-        console.log('[Email] Pickup scheduled email sent to:', repair.email)
+        console.log('[Email] Pickup scheduled email sent to:', repair.email, 'with waybill:', waybillLink ? 'YES' : 'NO')
       }
     } catch (emailError) {
-      console.error('[Email] Failed to send courier email:', emailError)
+      console.error('[Email] Failed to send courier email to customer:', emailError)
+    }
+
+    // Wyślij email do admina o zamówieniu kuriera
+    try {
+      await sendCourierOrderedAdminEmail({
+        to: ADMIN_EMAIL,
+        repairId: repair.id,
+        repairNumber: repair.repair_number,
+        customerName: `${repair.first_name} ${repair.last_name}`,
+        customerEmail: repair.email,
+        customerPhone: repair.phone,
+        customerAddress: customerFullAddress,
+        deviceModel: repair.device_model,
+        courierName: courierName,
+        trackingNumber: trackingNumber,
+        pickupDate: pickup_date,
+        direction: direction,
+        waybillLink: waybillLink || undefined,
+        orderedBy: adminUser
+      })
+      console.log('[Email] Courier ordered admin notification sent to:', ADMIN_EMAIL)
+    } catch (adminEmailError) {
+      console.error('[Email] Failed to send admin notification:', adminEmailError)
     }
 
     return NextResponse.json({
