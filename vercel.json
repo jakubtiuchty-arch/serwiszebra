@@ -15,6 +15,10 @@
     {
       "path": "/api/cron/sync-ingram",
       "schedule": "0 */6 * * *"
+    },
+    {
+      "path": "/api/cron/request-review",
+      "schedule": "0 10 * * *"
     }
   ]
 }
