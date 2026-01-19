@@ -217,16 +217,12 @@ export async function POST(
     if (direction === 'pickup') {
       updateData.pickup_courier_name = courierName
       updateData.pickup_tracking_number = trackingNumber
-      if (blpaczkaOrderId) {
-        updateData.pickup_blpaczka_order_id = blpaczkaOrderId
-      }
+      // blpaczka_order_id pomijamy - kolumna nie istnieje w bazie
     } else {
       updateData.courier_name = courierName
       updateData.courier_tracking_number = trackingNumber
       updateData.status = 'wyslane'
-      if (blpaczkaOrderId) {
-        updateData.blpaczka_order_id = blpaczkaOrderId
-      }
+      // blpaczka_order_id pomijamy - kolumna nie istnieje w bazie
     }
 
     const { error: updateError } = await supabase
