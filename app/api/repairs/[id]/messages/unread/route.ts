@@ -19,7 +19,7 @@ export async function GET(
     // Sprawdź czy user ma dostęp do tego zgłoszenia
     const { data: repair, error: repairError } = await supabase
       .from('repair_requests')
-      .select('user_id')
+      .select('user_id, email')
       .eq('id', repairId)
       .single()
 
@@ -30,14 +30,17 @@ export async function GET(
     // Pobierz profil użytkownika
     const { data: profile } = await supabase
       .from('profiles')
-      .select('role')
+      .select('role, email')
       .eq('id', user.id)
       .single()
 
     const isAdmin = profile?.role === 'admin'
     const isOwner = repair.user_id === user.id
+    
+    // Dla gości: sprawdź czy email użytkownika zgadza się z emailem zgłoszenia
+    const isEmailMatch = repair.email && (user.email === repair.email || profile?.email === repair.email)
 
-    if (!isAdmin && !isOwner) {
+    if (!isAdmin && !isOwner && !isEmailMatch) {
       return NextResponse.json({ error: 'Access denied' }, { status: 403 })
     }
 

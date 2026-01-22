@@ -22,18 +22,28 @@ export async function POST(
     const repairId = params.id
     const userId = user.id
 
-    // Sprawdź czy zgłoszenie należy do tego usera
+    // Pobierz zgłoszenie
     const { data: repair, error: repairError } = await supabase
       .from('repair_requests')
       .select('*')
       .eq('id', repairId)
-      .eq('user_id', userId)
       .single()
 
     if (repairError || !repair) {
       return NextResponse.json(
         { error: 'Zgłoszenie nie znalezione' },
         { status: 404 }
+      )
+    }
+    
+    // Sprawdź uprawnienia: user_id musi się zgadzać LUB email musi się zgadzać (dla gości)
+    const isOwner = repair.user_id === userId
+    const isEmailMatch = repair.email && user.email === repair.email
+    
+    if (!isOwner && !isEmailMatch) {
+      return NextResponse.json(
+        { error: 'Brak dostępu do tego zgłoszenia' },
+        { status: 403 }
       )
     }
 

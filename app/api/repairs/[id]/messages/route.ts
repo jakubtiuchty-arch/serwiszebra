@@ -20,7 +20,7 @@ export async function GET(
     // Sprawdź czy user ma dostęp do tego zgłoszenia
     const { data: repair, error: repairError } = await supabase
       .from('repair_requests')
-      .select('user_id')
+      .select('user_id, email')
       .eq('id', repairId)
       .single()
 
@@ -31,14 +31,17 @@ export async function GET(
     // Pobierz profil użytkownika
     const { data: profile } = await supabase
       .from('profiles')
-      .select('role')
+      .select('role, email')
       .eq('id', user.id)
       .single()
 
     const isAdmin = profile?.role === 'admin'
     const isOwner = repair.user_id === user.id
+    
+    // Dla gości: sprawdź czy email użytkownika zgadza się z emailem zgłoszenia
+    const isEmailMatch = repair.email && (user.email === repair.email || profile?.email === repair.email)
 
-    if (!isAdmin && !isOwner) {
+    if (!isAdmin && !isOwner && !isEmailMatch) {
       return NextResponse.json({ error: 'Access denied' }, { status: 403 })
     }
 
@@ -94,21 +97,29 @@ export async function POST(
     // Pobierz profil użytkownika
     const { data: profile } = await supabase
       .from('profiles')
-      .select('role, first_name, last_name')
+      .select('role, first_name, last_name, email')
       .eq('id', user.id)
       .single()
 
     const isAdmin = profile?.role === 'admin'
     const isOwner = repair.user_id === user.id
+    
+    // Dla gości: sprawdź czy email użytkownika zgadza się z emailem zgłoszenia
+    // To pozwala gościom którzy się zalogowali później uzyskać dostęp do swoich zgłoszeń
+    const isEmailMatch = repair.email && (user.email === repair.email || profile?.email === repair.email)
 
     console.log('🔍 User profile check:', {
       user_id: user.id,
+      user_email: user.email,
       profile_role: profile?.role,
+      repair_user_id: repair.user_id,
+      repair_email: repair.email,
       isAdmin,
-      isOwner
+      isOwner,
+      isEmailMatch
     })
 
-    if (!isAdmin && !isOwner) {
+    if (!isAdmin && !isOwner && !isEmailMatch) {
       return NextResponse.json({ error: 'Access denied' }, { status: 403 })
     }
 

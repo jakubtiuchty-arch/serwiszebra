@@ -28,7 +28,6 @@ export async function POST(
       .from('repair_requests')
       .select('*')
       .eq('id', repairId)
-      .eq('user_id', user.id)
       .single()
 
     if (repairError || !repair) {
@@ -36,6 +35,17 @@ export async function POST(
       return NextResponse.json(
         { error: 'Zgłoszenie nie znalezione' },
         { status: 404 }
+      )
+    }
+    
+    // Sprawdź uprawnienia: user_id musi się zgadzać LUB email musi się zgadzać (dla gości)
+    const isOwner = repair.user_id === user.id
+    const isEmailMatch = repair.email && user.email === repair.email
+    
+    if (!isOwner && !isEmailMatch) {
+      return NextResponse.json(
+        { error: 'Brak dostępu do tego zgłoszenia' },
+        { status: 403 }
       )
     }
 
