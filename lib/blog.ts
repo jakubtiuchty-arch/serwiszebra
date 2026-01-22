@@ -947,7 +947,20 @@ Jako autoryzowany partner Zebra oferujemy pełne wsparcie w doborze konfiguracji
       ]
     },
     content: `
-**Drukarka Zebra nie drukuje etykiet najczęściej z powodu:** nieprawidłowo załadowanego ribbonu (35% przypadków), problemów z kalibracją sensora (25%), zużytej głowicy (15%), przestarzałych sterowników (10%) lub błędnych ustawień formatu (10%). Poniżej znajdziesz szczegółową diagnostykę i rozwiązania dla każdego problemu.
+> **Szybka odpowiedź:** Drukarka Zebra nie drukuje etykiet najczęściej z powodu: nieprawidłowo załadowanego ribbonu (**35%** przypadków), problemów z kalibracją sensora (**25%**), zużytej głowicy (**15%**), przestarzałych sterowników (**10%**) lub błędnych ustawień formatu (**10%**). W **60% przypadków** problem rozwiązuje prawidłowe załadowanie ribbonu lub wykonanie auto-kalibracji (przytrzymaj FEED 5 sek.).
+
+---
+
+## Kluczowe liczby i statystyki
+
+- **35%** przypadków – ribbon załadowany odwrotnie (strona barwiąca do dołu)
+- **25%** przypadków – problemy z kalibracją sensora gap/black mark
+- **15%** przypadków – zużyta lub uszkodzona głowica drukująca
+- **150-2400 zł** – typowy koszt naprawy (czyszczenie do wymiany głowicy)
+- **3-5 dni** – standardowy czas naprawy w autoryzowanym serwisie
+- **1-3 mln cm** – żywotność głowicy drukującej
+- **IPA 99%** – alkohol izopropylowy do czyszczenia głowicy
+- **FEED 5 sek.** – sekwencja auto-kalibracji w większości modeli
 
 ---
 
@@ -962,8 +975,6 @@ Jako autoryzowany partner Zebra oferujemy pełne wsparcie w doborze konfiguracji
 | 5 | **Błędny format etykiety** | 10% | Zmierz i ustaw wymiary |
 | 6 | **Błąd ZPL/aplikacji** | 3% | Wyślij testowy kod ZPL |
 | 7 | **Problem z zasilaniem** | 2% | Sprawdź kable i zasilacz |
-
-> **💡 Szybka diagnoza:** W 60% przypadków problem rozwiązuje prawidłowe załadowanie ribbonu lub wykonanie auto-kalibracji (FEED 5 sek.).
 
 ---
 
