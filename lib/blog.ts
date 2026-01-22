@@ -922,11 +922,11 @@ Jako autoryzowany partner Zebra oferujemy pełne wsparcie w doborze konfiguracji
         },
         {
           question: 'Ile kosztuje naprawa drukarki Zebra?',
-          answer: 'Ceny napraw drukarek Zebra zaczynają się od 150 zł za czyszczenie mechanizmu. Wymiana głowicy drukującej kosztuje 450-2400 zł w zależności od modelu. Dokładną wycenę otrzymasz po bezpłatnej diagnozie w autoryzowanym serwisie.'
+          answer: 'Ceny napraw drukarek Zebra zaczynają się od 150 zł za czyszczenie mechanizmu. Wymiana głowicy drukującej kosztuje 450-2400 zł w zależności od modelu. Sprawdź cennik na serwis-zebry.pl/cennik lub otrzymaj wycenę po bezpłatnej diagnozie.'
         },
         {
           question: 'Jak długo trwa naprawa drukarki Zebra?',
-          answer: 'Standardowa naprawa drukarki Zebra trwa 3-5 dni roboczych. Oferujemy również tryb express (1-2 dni) za dodatkową opłatą. Czas może się wydłużyć jeśli wymagana jest dostawa części zamiennych.'
+          answer: 'Standardowa naprawa drukarki Zebra trwa 3-5 dni roboczych. Oferujemy tryb express (1-2 dni) za dodatkową opłatą. Zgłoś naprawę online na serwis-zebry.pl/formularz - oddzwonimy w 24h.'
         },
         {
           question: 'Czy mogę samodzielnie wymienić głowicę w drukarce Zebra?',
@@ -942,7 +942,7 @@ Jako autoryzowany partner Zebra oferujemy pełne wsparcie w doborze konfiguracji
         },
         {
           question: 'Gdzie pobrać sterowniki do drukarki Zebra?',
-          answer: 'Oficjalne sterowniki do drukarek Zebra pobierzesz ze strony zebra.com/drivers. Wybierz model drukarki i system operacyjny (Windows 10/11, Mac, Linux). Przed instalacją odinstaluj stare sterowniki i zrestartuj komputer.'
+          answer: 'Oficjalne sterowniki do drukarek Zebra pobierzesz z naszej strony /sterowniki lub bezpośrednio ze strony producenta. Wybierz model drukarki i system operacyjny (Windows 10/11, Mac, Linux). Przed instalacją odinstaluj stare sterowniki i zrestartuj komputer.'
         }
       ]
     },
@@ -971,7 +971,7 @@ Jako autoryzowany partner Zebra oferujemy pełne wsparcie w doborze konfiguracji
 | 1 | **Ribbon załadowany odwrotnie** | 35% | Sprawdź stronę barwiącą (do dołu) |
 | 2 | **Zła kalibracja sensora** | 25% | Przytrzymaj FEED 5 sek. |
 | 3 | **Zużyta głowica** | 15% | Wyczyść IPA 99% lub wymień |
-| 4 | **Stare sterowniki** | 10% | Pobierz z zebra.com/drivers |
+| 4 | **Stare sterowniki** | 10% | [Pobierz sterowniki](/sterowniki) |
 | 5 | **Błędny format etykiety** | 10% | Zmierz i ustaw wymiary |
 | 6 | **Błąd ZPL/aplikacji** | 3% | Wyślij testowy kod ZPL |
 | 7 | **Problem z zasilaniem** | 2% | Sprawdź kable i zasilacz |
@@ -1068,10 +1068,12 @@ Przyłóż kawałek białej kartki do ribbonu i przetrzyj palcem. Strona, która
 - Nieprawidłowy format wydruku
 
 ### Rozwiązanie:
-1. Pobierz najnowsze sterowniki ze strony [zebra.com/drivers](https://www.zebra.com/drivers)
+1. Pobierz najnowsze sterowniki z naszej strony [Sterowniki Zebra](/sterowniki)
 2. Odinstaluj stare sterowniki
 3. Zainstaluj nowe sterowniki i zrestartuj komputer
 4. Ustaw drukarkę jako domyślną
+
+> **📥 Szybki link:** [Pobierz sterowniki Zebra ZDesigner →](/sterowniki)
 
 ---
 
@@ -1138,13 +1140,20 @@ Jako **autoryzowany partner serwisowy Zebra** oferujemy:
 
 ---
 
-## Przydatne poradniki
+## Przydatne poradniki i zasoby
 
-Sprawdź również inne artykuły, które mogą Ci pomóc:
+Sprawdź również inne artykuły i zasoby, które mogą Ci pomóc:
 
+**Poradniki:**
 - [Jak wyczyścić głowicę drukarki Zebra](/blog/jak-wyczyscic-glowice-drukarki-zebra) - regularna konserwacja zapobiega wielu problemom
 - [Kalibracja drukarki Zebra - poradnik](/blog/kalibracja-drukarki-zebra-poradnik-krok-po-kroku) - rozwiąż problemy z wykrywaniem etykiet
 - [Blady wydruk - przyczyny i rozwiązania](/blog/blady-wydruk-drukarka-zebra-przyczyny-rozwiazania) - gdy wydruk jest zbyt jasny
+- [Sterowniki Zebra Windows 11](/blog/sterowniki-zebra-windows-11-instalacja-problemy) - rozwiązywanie problemów z instalacją
+
+**Zasoby:**
+- [Sterowniki Zebra - pobierz](/sterowniki) - najnowsze sterowniki ZDesigner
+- [Instrukcje obsługi drukarek Zebra](/instrukcje) - instrukcje po polsku
+- [Cennik napraw](/cennik) - sprawdź orientacyjne koszty
 
 ---
 
@@ -1154,10 +1163,10 @@ Sprawdź również inne artykuły, które mogą Ci pomóc:
 Najczęstsze przyczyny to: **nieprawidłowo załadowany ribbon** (35% przypadków), **problemy z kalibracją sensora** (25%), **zużyta głowica drukująca** (15%), **problemy ze sterownikami** (10%), **błędne ustawienia formatu etykiety** (10%) oraz problemy z zasilaniem lub połączeniem (5%).
 
 ### Ile kosztuje naprawa drukarki Zebra?
-Ceny napraw drukarek Zebra zaczynają się od **150 zł** za czyszczenie mechanizmu. Wymiana głowicy drukującej kosztuje **450-2400 zł** w zależności od modelu. Dokładną wycenę otrzymasz po bezpłatnej diagnozie w autoryzowanym serwisie.
+Ceny napraw drukarek Zebra zaczynają się od **150 zł** za czyszczenie mechanizmu. Wymiana głowicy drukującej kosztuje **450-2400 zł** w zależności od modelu. Sprawdź nasz [cennik napraw](/cennik) lub otrzymaj dokładną wycenę po bezpłatnej diagnozie.
 
 ### Jak długo trwa naprawa drukarki Zebra?
-Standardowa naprawa drukarki Zebra trwa **3-5 dni roboczych**. Oferujemy również tryb express (1-2 dni) za dodatkową opłatą. Czas może się wydłużyć jeśli wymagana jest dostawa części zamiennych.
+Standardowa naprawa drukarki Zebra trwa **3-5 dni roboczych**. Oferujemy również tryb express (1-2 dni) za dodatkową opłatą. [Zgłoś naprawę online](/formularz) - oddzwonimy w 24h.
 
 ### Czy mogę samodzielnie wymienić głowicę w drukarce Zebra?
 Tak, samodzielna wymiana głowicy jest możliwa, ale wymaga odpowiednich narzędzi i wiedzy technicznej. Nieprawidłowy montaż może uszkodzić drukarkę i unieważnić gwarancję. Zalecamy skorzystanie z profesjonalnego serwisu.
@@ -1169,7 +1178,7 @@ Aby skalibrować drukarkę Zebra, **przytrzymaj przycisk FEED przez 5 sekund** (
 Puste etykiety najczęściej oznaczają: 1) **Ribbon załadowany odwrotnie** (sprawdź stroną barwiącą do dołu), 2) Używasz etykiet termicznych z ribbonem lub odwrotnie, 3) Zużyta głowica drukująca, 4) Zbyt niska temperatura druku w ustawieniach.
 
 ### Gdzie pobrać sterowniki do drukarki Zebra?
-Oficjalne sterowniki do drukarek Zebra pobierzesz ze strony [zebra.com/drivers](https://www.zebra.com/drivers). Wybierz model drukarki i system operacyjny (Windows 10/11, Mac, Linux). Przed instalacją odinstaluj stare sterowniki i zrestartuj komputer.
+Oficjalne sterowniki do drukarek Zebra pobierzesz z naszej strony [Sterowniki Zebra](/sterowniki) lub bezpośrednio od producenta. Wybierz model drukarki i system operacyjny (Windows 10/11, Mac, Linux). Przed instalacją odinstaluj stare sterowniki i zrestartuj komputer.
 
 ### Moja drukarka Zebra jest na gwarancji - co robić?
 Skontaktuj się z nami - jako **autoryzowany serwis Zebra** obsługujemy również naprawy gwarancyjne. Wyślij zgłoszenie przez formularz lub zadzwoń pod +48 601 619 898.
