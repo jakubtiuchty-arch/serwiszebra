@@ -870,7 +870,7 @@ Jako autoryzowany partner Zebra oferujemy pełne wsparcie w doborze konfiguracji
     slug: 'drukarka-zebra-nie-drukuje-przyczyny-rozwiazania',
     title: 'Drukarka Zebra nie drukuje etykiet - 7 najczęstszych przyczyn i jak je naprawić',
     excerpt: 'Twoja drukarka Zebra nie drukuje etykiet? Poznaj 7 najczęstszych przyczyn tego problemu: głowica, ribbon, kalibracja, sterowniki. Dowiedz się, jak je samodzielnie zdiagnozować i naprawić.',
-    coverImage: '/blog/drukarka-zebra-nie-drukuje-rozwiazania.jpeg',
+    coverImage: '/blog/drukarka-zebra-nie-drukuje-rozwiazania.jpeg?v=2',
     author: {
       name: 'Zespół TAKMA',
       role: 'Certyfikowani technicy Zebra'
