@@ -49,17 +49,18 @@ export async function GET(request: Request) {
     threeDaysAgo.setDate(threeDaysAgo.getDate() - 3)
     threeDaysAgo.setHours(23, 59, 59, 999)
 
-    console.log(`📅 [CRON] Looking for repairs shipped between ${threeDaysAgo.toISOString()} and ${twoDaysAgo.toISOString()}`)
+    console.log(`📅 [CRON] Looking for repairs updated between ${threeDaysAgo.toISOString()} and ${twoDaysAgo.toISOString()}`)
 
-    // Pobierz naprawy które zostały wysłane ~2 dni temu (używamy shipped_at)
+    // Pobierz naprawy które zostały wysłane ~2 dni temu
+    // UWAGA: Używamy updated_at dopóki kolumna shipped_at nie zostanie dodana
+    // Po dodaniu kolumny shipped_at zmień na: .not('shipped_at', 'is', null) i filtruj po shipped_at
     const { data: repairs, error: fetchError } = await supabase
       .from('repair_requests')
-      .select('id, email, first_name, last_name, device_model, repair_number, shipped_at, status')
+      .select('id, email, first_name, last_name, device_model, repair_number, updated_at, status')
       .in('status', ['wyslane', 'zakonczone'])
-      .not('shipped_at', 'is', null)
       .or('review_request_sent.is.null,review_request_sent.eq.false')
-      .lt('shipped_at', twoDaysAgo.toISOString())
-      .gt('shipped_at', threeDaysAgo.toISOString())
+      .lt('updated_at', twoDaysAgo.toISOString())
+      .gt('updated_at', threeDaysAgo.toISOString())
 
     if (fetchError) {
       console.error('❌ [CRON] Database error:', fetchError)

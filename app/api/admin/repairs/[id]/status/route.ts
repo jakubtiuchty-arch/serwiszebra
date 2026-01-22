@@ -88,10 +88,12 @@ export async function PATCH(
     }
 
     // Jeśli zmieniamy na "wyslane" - ustaw datę wysyłki (do prośby o opinię)
-    if (status === 'wyslane' && currentRepair?.status !== 'wyslane') {
-      updateData.shipped_at = new Date().toISOString()
-      console.log('📦 Shipped - setting shipped_at for review request')
-    }
+    // UWAGA: Kolumna shipped_at musi być dodana do bazy:
+    // ALTER TABLE repair_requests ADD COLUMN shipped_at TIMESTAMPTZ;
+    // if (status === 'wyslane' && currentRepair?.status !== 'wyslane') {
+    //   updateData.shipped_at = new Date().toISOString()
+    //   console.log('📦 Shipped - setting shipped_at for review request')
+    // }
 
     // Aktualizacja statusu w repair_requests
     const { data: updatedRepair, error: updateError } = await supabase

@@ -217,15 +217,16 @@ export async function POST(
     if (direction === 'pickup') {
       updateData.pickup_courier_name = courierName
       updateData.pickup_tracking_number = trackingNumber
-      // blpaczka_order_id pomijamy - kolumna nie istnieje w bazie
     } else {
       updateData.courier_name = courierName
       updateData.courier_tracking_number = trackingNumber
       updateData.status = 'wyslane'
-      updateData.shipped_at = new Date().toISOString() // Data wysyłki do klienta
-      // blpaczka_order_id pomijamy - kolumna nie istnieje w bazie
+      // shipped_at - tylko jeśli kolumna istnieje (dodaj przez SQL: ALTER TABLE repair_requests ADD COLUMN shipped_at TIMESTAMPTZ)
+      // updateData.shipped_at = new Date().toISOString()
     }
 
+    console.log('[BLPaczka] Updating database with:', updateData)
+    
     const { error: updateError } = await supabase
       .from('repair_requests')
       .update(updateData)
@@ -233,7 +234,13 @@ export async function POST(
 
     if (updateError) {
       console.error('[BLPaczka] Error updating database:', updateError)
-      throw new Error('Błąd aktualizacji bazy danych')
+      console.error('[BLPaczka] Error details:', {
+        code: updateError.code,
+        message: updateError.message,
+        details: updateError.details,
+        hint: updateError.hint
+      })
+      throw new Error(`Błąd aktualizacji bazy danych: ${updateError.message}`)
     }
 
     const historyNote = direction === 'pickup'
