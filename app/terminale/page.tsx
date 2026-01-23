@@ -22,23 +22,65 @@ export const metadata: Metadata = {
   title: 'Serwis Terminali Zebra – Naprawa TC, MC, Wymiana Ekranów | Odbiór 24h',
   description: 'Profesjonalny serwis terminali mobilnych Zebra: TC21, TC52, TC58, MC33, MC93. ✓ Wymiana wyświetlaczy ✓ Naprawa skanerów ✓ Wymiana baterii ✓ 12 mies. gwarancji ✓ Odbiór kurierem 24h.',
   keywords: [
+    // Główne frazy
     'serwis terminali zebra',
+    'serwis terminali zebra polska',
+    'profesjonalny serwis terminali zebra',
+    'autoryzowany serwis terminali zebra',
+    'naprawa terminali mobilnych zebra',
     'naprawa terminali mobilnych',
-    'naprawa tc52',
-    'serwis tc21',
+    
+    // Seria TC - Touch Computer
+    'serwis tc21', 'serwis tc22', 'serwis tc26', 'serwis tc27',
+    'serwis tc52', 'serwis tc53', 'serwis tc57', 'serwis tc58',
+    'serwis tc72', 'serwis tc73', 'serwis tc77', 'serwis tc78',
+    'naprawa tc21', 'naprawa tc22', 'naprawa tc52', 'naprawa tc53',
+    'naprawa tc57', 'naprawa tc58', 'naprawa tc72', 'naprawa tc77',
+    'zebra tc52 nie działa', 'zebra tc21 naprawa', 'zebra tc58 serwis',
+    
+    // Seria MC - Mobile Computer
+    'serwis mc2200', 'serwis mc2700', 'serwis mc3300', 'serwis mc3390',
+    'serwis mc3400', 'serwis mc3450', 'serwis mc9300', 'serwis mc9400',
+    'naprawa mc3300', 'naprawa mc3400', 'naprawa mc9300', 'naprawa mc9400',
+    'zebra mc3300 nie działa', 'zebra mc9300 naprawa',
+    
+    // Seria WT - Wearable Terminal
+    'serwis wt6000', 'serwis wt6300', 'serwis ws50',
+    'naprawa wt6000', 'naprawa wt6300',
+    
+    // Starsza seria
+    'serwis mc65', 'serwis mc67', 'serwis mc75', 'serwis mc92',
+    'serwis tc55', 'serwis tc70', 'serwis tc75', 'serwis tc8000',
+    'naprawa mc65', 'naprawa mc67', 'naprawa tc70', 'naprawa tc8000',
+    
+    // Usługi
     'wymiana ekranu zebra',
-    'naprawa mc3300',
-    'serwis mc93',
+    'wymiana wyświetlacza terminal zebra',
+    'wymiana ekranu tc52', 'wymiana ekranu tc21', 'wymiana ekranu mc3300',
     'naprawa skanera w terminalu',
+    'naprawa skanera zebra tc52',
+    'wymiana baterii terminal zebra',
+    'wymiana baterii tc52', 'wymiana baterii mc3300',
+    'naprawa płyty głównej terminal zebra',
+    
+    // Long tail - pytania
+    'ile kosztuje naprawa terminala zebra',
+    'ile kosztuje wymiana ekranu zebra tc52',
+    'gdzie naprawić terminal zebra',
+    'serwis terminali zebra cena',
+    'terminal zebra nie włącza się',
+    'terminal zebra nie skanuje',
+    
     // Miasta
     'terminale zebra wrocław', 'serwis terminali zebra wrocław', 'naprawa terminali zebra wrocław',
     'terminale zebra warszawa', 'serwis terminali zebra warszawa', 'naprawa terminali zebra warszawa',
     'terminale zebra kraków', 'serwis terminali zebra kraków', 'naprawa terminali zebra kraków',
-    'terminale zebra poznań', 'serwis terminali zebra poznań',
+    'terminale zebra poznań', 'serwis terminali zebra poznań', 'naprawa terminali zebra poznań',
     'terminale zebra gdańsk', 'serwis terminali zebra gdańsk',
     'terminale zebra katowice', 'serwis terminali zebra katowice',
     'terminale zebra łódź', 'serwis terminali zebra łódź',
-    'terminale zebra zielona góra', 'serwis terminali zebra zielona góra',
+    'terminale zebra szczecin', 'serwis terminali zebra szczecin',
+    'terminale zebra lublin', 'serwis terminali zebra lublin',
   ],
   openGraph: {
     title: 'Serwis Terminali Zebra – Naprawa TC, MC, Wymiana Ekranów',
@@ -57,23 +99,51 @@ const terminalArticles = blogPosts
 const faq = [
   {
     question: 'Ile kosztuje wymiana ekranu w terminalu Zebra?',
-    answer: 'Koszt wymiany wyświetlacza zależy od modelu. Dla TC21/TC26 to 600-900 zł, dla TC52/TC57 700-1000 zł, dla MC33/MC93 800-1200 zł. Cena obejmuje oryginalny wyświetlacz i robociznę.'
+    answer: 'Koszt wymiany wyświetlacza zależy od modelu. Dla TC21/TC22/TC26/TC27 to 600-900 zł, dla TC52/TC53/TC57/TC58 700-1000 zł, dla MC3300/MC3400/MC9300/MC9400 800-1200 zł. Cena obejmuje oryginalny wyświetlacz i robociznę.'
   },
   {
     question: 'Czy naprawiacie skanery w terminalach Zebra?',
-    answer: 'Tak! Naprawiamy moduły skanujące SE4710, SE4750 i inne. Koszt naprawy skanera to 500-1100 zł w zależności od modelu terminala. Diagnostyka jest bezpłatna przy akceptacji naprawy.'
+    answer: 'Tak! Naprawiamy moduły skanujące SE4710, SE4750, SE4850, SE55 i inne. Koszt naprawy skanera to 500-1100 zł w zależności od modelu terminala. Diagnostyka jest bezpłatna przy akceptacji naprawy.'
   },
   {
     question: 'Jak długo trwa naprawa terminala Zebra?',
-    answer: 'Standardowy czas naprawy to 2-5 dni roboczych. Oferujemy też naprawy ekspresowe w 24-48h. Kurier odbierze terminal bezpłatnie z Twojej firmy.'
+    answer: 'Standardowy czas naprawy to 2-5 dni roboczych. Oferujemy też naprawy ekspresowe w 24-48h (dopłata 50 zł). Kurier odbierze terminal bezpłatnie z Twojej firmy w całej Polsce.'
   },
   {
     question: 'Jakie terminale Zebra serwisujecie?',
-    answer: 'Serwisujemy wszystkie terminale Zebra: seria TC (TC21, TC26, TC52, TC57, TC58, TC72, TC77), seria MC (MC2200, MC3300, MC9300), wearable (WT6000) oraz tablety (ET40, ET45, L10).'
+    answer: 'Serwisujemy WSZYSTKIE terminale Zebra: seria TC (TC21, TC22, TC26, TC27, TC52, TC53, TC57, TC58, TC72, TC73, TC77, TC78), seria MC (MC2200, MC2700, MC3300, MC3400, MC9300, MC9400), wearable (WT6000, WT6300, WS50) oraz starsze modele (MC65, MC67, TC70, TC75, TC8000). Ponad 25 lat doświadczenia i 5000+ naprawionych urządzeń.'
   },
   {
     question: 'Czy wymieniacie baterie w terminalach Zebra?',
-    answer: 'Tak, wymieniamy baterie we wszystkich terminalach Zebra. Koszt wymiany baterii to 150-450 zł w zależności od modelu. Używamy oryginalnych baterii Zebra.'
+    answer: 'Tak, wymieniamy baterie we wszystkich terminalach Zebra. Koszt wymiany baterii to 150-450 zł w zależności od modelu. Używamy oryginalnych baterii Zebra z pełną gwarancją producenta.'
+  },
+  {
+    question: 'Terminal Zebra TC52 nie włącza się - co robić?',
+    answer: 'Zebra TC52 nie włącza się najczęściej z powodu: 1) Rozładowanej baterii - podłącz ładowarkę na min. 30 min, 2) Uszkodzonej baterii - wymień na nową, 3) Uszkodzonej płyty głównej - wymaga naprawy serwisowej. Spróbuj najpierw twardego resetu (Power + Vol Up przez 15 sek.). Jeśli nie pomaga - zgłoś do naszego serwisu.'
+  },
+  {
+    question: 'Ile kosztuje naprawa terminala Zebra MC3300?',
+    answer: 'Naprawa terminala Zebra MC3300/MC3400 kosztuje od 200 zł (wymiana baterii) do 1200 zł (wymiana wyświetlacza lub płyty głównej). Najczęstsze naprawy: wymiana ekranu 800-1000 zł, naprawa skanera 500-800 zł, wymiana klawiatury 300-500 zł. Dokładna wycena po bezpłatnej diagnozie.'
+  },
+  {
+    question: 'Terminal Zebra nie skanuje kodów - jak naprawić?',
+    answer: 'Terminal Zebra nie skanuje najczęściej z powodu: 1) Wyłączonego skanera w DataWedge - włącz profil skanowania, 2) Brudnego okienka skanera - wyczyść alkoholem IPA, 3) Uszkodzonego modułu SE47xx - wymaga wymiany w serwisie (500-1100 zł). Sprawdź też czy aplikacja ma uprawnienia do skanera.'
+  },
+  {
+    question: 'Czy naprawiacie terminale wearable WT6000?',
+    answer: 'Tak! Specjalizujemy się w naprawie terminali wearable: WT6000, WT6300, WS50. Naprawiamy wyświetlacze, wymiana pasków, naprawiamy moduły Bluetooth/WiFi, wymieniamy baterie. Mamy doświadczenie z ring skanerami RS5100 i RS6000.'
+  },
+  {
+    question: 'Gdzie naprawić stary terminal Zebra MC65 lub TC70?',
+    answer: 'Naprawiamy również starsze terminale Zebra: MC65, MC67, MC75, MC92, TC55, TC70, TC75, TC8000 i inne. Jako autoryzowany serwis mamy dostęp do części zamiennych nawet do wycofanych modeli. Zgłoś naprawę przez formularz lub zadzwoń: +48 601 619 898.'
+  },
+  {
+    question: 'Czy mogę zamówić odbiór terminala kurierem?',
+    answer: 'Tak! Zamawiamy kuriera DPD, który odbierze terminal bezpłatnie z Twojej firmy w ciągu 24h. Obsługujemy całą Polskę. Po naprawie odsyłamy terminal kurierem na nasz koszt. Wystarczy wypełnić formularz zgłoszeniowy na stronie.'
+  },
+  {
+    question: 'Czy serwisujecie terminale Zebra na gwarancji?',
+    answer: 'Tak! Jako autoryzowany serwis Zebra obsługujemy naprawy gwarancyjne wszystkich modeli terminali. Skontaktuj się z nami - sprawdzimy status gwarancji i przeprowadzimy naprawę. Telefon: +48 601 619 898.'
   }
 ]
 
@@ -81,14 +151,45 @@ const serviceSchema = {
   '@context': 'https://schema.org',
   '@type': 'Service',
   name: 'Serwis Terminali Zebra',
-  description: 'Profesjonalny serwis i naprawa terminali mobilnych Zebra: TC, MC, wymiana ekranów, naprawa skanerów.',
+  description: 'Profesjonalny serwis i naprawa terminali mobilnych Zebra: TC21, TC52, TC58, MC3300, MC9400. Wymiana ekranów, naprawa skanerów, wymiana baterii. 25 lat doświadczenia, 5000+ napraw.',
   provider: {
     '@type': 'LocalBusiness',
-    name: 'TAKMA - Serwis Zebra',
-    telephone: '+48601619898'
+    name: 'TAKMA - Autoryzowany Serwis Zebra',
+    telephone: '+48601619898',
+    email: 'serwis@takma.com.pl',
+    url: 'https://www.serwis-zebry.pl',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'Poświęcka 1a',
+      addressLocality: 'Wrocław',
+      postalCode: '51-128',
+      addressCountry: 'PL'
+    }
   },
-  areaServed: 'Polska',
-  serviceType: ['Naprawa terminali', 'Wymiana ekranów', 'Naprawa skanerów']
+  areaServed: {
+    '@type': 'Country',
+    name: 'Polska'
+  },
+  serviceType: ['Naprawa terminali mobilnych', 'Wymiana wyświetlaczy Zebra', 'Naprawa skanerów w terminalach', 'Wymiana baterii Zebra', 'Serwis terminali wearable']
+}
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Strona główna',
+      item: 'https://www.serwis-zebry.pl'
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Serwis terminali Zebra',
+      item: 'https://www.serwis-zebry.pl/terminale'
+    }
+  ]
 }
 
 const faqSchema = {
@@ -106,6 +207,7 @@ export default function TerminalePage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
       <Header currentPage="other" />
       
@@ -175,14 +277,53 @@ export default function TerminalePage() {
           </div>
         </section>
 
-        {/* Intro */}
-        <section className="py-8 sm:py-10 md:py-12">
+        {/* Szybka odpowiedź - dla Featured Snippets i AI */}
+        <section className="py-6 sm:py-8">
           <div className="max-w-6xl mx-auto px-3 sm:px-4">
-            <div className="bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 border border-amber-200 rounded-xl p-4 sm:p-5 md:p-6 shadow-sm mb-6">
+            <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-blue-50 border-l-4 border-blue-500 rounded-r-xl p-4 sm:p-5 shadow-sm mb-6">
+              <p className="text-sm sm:text-base text-gray-800 leading-relaxed">
+                <strong>Szukasz serwisu terminali Zebra?</strong> TAKMA to <strong>autoryzowany serwis Zebra</strong> z 25-letnim doświadczeniem. 
+                Naprawiamy <strong>wszystkie modele</strong>: seria TC (TC21, TC22, TC52, TC53, TC58, TC72, TC78), 
+                seria MC (MC2200, MC3300, MC3400, MC9300, MC9400), wearable (WT6000, WT6300). 
+                <strong>Odbiór kurierem w 24h</strong> z całej Polski, naprawa <strong>2-5 dni</strong>, <strong>12 miesięcy gwarancji</strong>. 
+                Wymiana ekranów od 600 zł, naprawa skanerów od 500 zł.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Kluczowe liczby - dla GEO/AEO */}
+        <section className="py-4 sm:py-6 bg-white border-y border-gray-100">
+          <div className="max-w-6xl mx-auto px-3 sm:px-4">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+              <div className="text-center">
+                <p className="text-2xl sm:text-3xl font-bold text-gray-900">25 lat</p>
+                <p className="text-xs sm:text-sm text-gray-500">doświadczenia</p>
+              </div>
+              <div className="text-center">
+                <p className="text-2xl sm:text-3xl font-bold text-gray-900">5000+</p>
+                <p className="text-xs sm:text-sm text-gray-500">naprawionych terminali</p>
+              </div>
+              <div className="text-center">
+                <p className="text-2xl sm:text-3xl font-bold text-gray-900">2-5 dni</p>
+                <p className="text-xs sm:text-sm text-gray-500">czas naprawy</p>
+              </div>
+              <div className="text-center">
+                <p className="text-2xl sm:text-3xl font-bold text-gray-900">12 mies.</p>
+                <p className="text-xs sm:text-sm text-gray-500">gwarancji</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Intro */}
+        <section className="py-8 sm:py-10">
+          <div className="max-w-6xl mx-auto px-3 sm:px-4">
+            <div className="bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 border border-amber-200 rounded-xl p-4 sm:p-5 md:p-6 shadow-sm">
               <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
                 Jako <strong>autoryzowany serwis Zebra Technologies</strong> specjalizujemy się w kompleksowej naprawie 
-                terminali mobilnych wszystkich serii – od kompaktowych urządzeń TC21 i TC26, przez popularne modele 
-                TC52 i TC57, po zaawansowane terminale magazynowe MC3300 i MC9300. <strong className="text-blue-900">25 lat doświadczenia.</strong>
+                terminali mobilnych wszystkich serii – od kompaktowych urządzeń TC21 i TC22, przez popularne modele 
+                TC52 i TC58, po zaawansowane terminale magazynowe MC3400 i MC9400. <strong className="text-blue-900">25 lat doświadczenia i 5000+ naprawionych urządzeń.</strong>
               </p>
             </div>
           </div>
@@ -195,25 +336,29 @@ export default function TerminalePage() {
               Jakie terminale serwisujemy?
             </h2>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
               {/* Seria TC */}
               <div className="bg-white rounded-xl p-5 shadow-xl border border-gray-100 hover:shadow-2xl transition-shadow">
                 <div className="w-14 h-14 bg-gray-50 rounded-xl flex items-center justify-center mb-3 border border-gray-100">
                   <Smartphone className="w-7 h-7 text-gray-500" strokeWidth={1.5} />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Seria TC</h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Seria TC (Touch Computer)</h3>
                 <ul className="space-y-1.5 text-gray-600 text-xs">
                   <li className="flex items-start gap-1.5">
                     <CheckCircle2 className="w-3.5 h-3.5 text-green-600 flex-shrink-0 mt-0.5" />
-                    <span>TC22 / TC27</span>
+                    <span>TC21 / TC22 / TC26 / TC27</span>
                   </li>
                   <li className="flex items-start gap-1.5">
                     <CheckCircle2 className="w-3.5 h-3.5 text-green-600 flex-shrink-0 mt-0.5" />
-                    <span>TC53 / TC58</span>
+                    <span>TC52 / TC53 / TC57 / TC58</span>
                   </li>
                   <li className="flex items-start gap-1.5">
                     <CheckCircle2 className="w-3.5 h-3.5 text-green-600 flex-shrink-0 mt-0.5" />
-                    <span>TC73 / TC78</span>
+                    <span>TC72 / TC73 / TC77 / TC78</span>
+                  </li>
+                  <li className="flex items-start gap-1.5">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-green-600 flex-shrink-0 mt-0.5" />
+                    <span>TC55 / TC70 / TC75 / TC8000</span>
                   </li>
                 </ul>
               </div>
@@ -223,11 +368,15 @@ export default function TerminalePage() {
                 <div className="w-14 h-14 bg-gray-50 rounded-xl flex items-center justify-center mb-3 border border-gray-100">
                   <Cpu className="w-7 h-7 text-gray-500" strokeWidth={1.5} />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Seria MC</h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Seria MC (Mobile Computer)</h3>
                 <ul className="space-y-1.5 text-gray-600 text-xs">
                   <li className="flex items-start gap-1.5">
                     <CheckCircle2 className="w-3.5 h-3.5 text-green-600 flex-shrink-0 mt-0.5" />
-                    <span>MC3300 / MC330x</span>
+                    <span>MC2200 / MC2700</span>
+                  </li>
+                  <li className="flex items-start gap-1.5">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-green-600 flex-shrink-0 mt-0.5" />
+                    <span>MC3300 / MC3390 / MC330x</span>
                   </li>
                   <li className="flex items-start gap-1.5">
                     <CheckCircle2 className="w-3.5 h-3.5 text-green-600 flex-shrink-0 mt-0.5" />
@@ -235,7 +384,11 @@ export default function TerminalePage() {
                   </li>
                   <li className="flex items-start gap-1.5">
                     <CheckCircle2 className="w-3.5 h-3.5 text-green-600 flex-shrink-0 mt-0.5" />
-                    <span>MC9400 / MC9450</span>
+                    <span>MC9300 / MC9400 / MC9450</span>
+                  </li>
+                  <li className="flex items-start gap-1.5">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-green-600 flex-shrink-0 mt-0.5" />
+                    <span>MC65 / MC67 / MC75 / MC92</span>
                   </li>
                 </ul>
               </div>
@@ -245,7 +398,7 @@ export default function TerminalePage() {
                 <div className="w-14 h-14 bg-gray-50 rounded-xl flex items-center justify-center mb-3 border border-gray-100">
                   <Watch className="w-7 h-7 text-gray-500" strokeWidth={1.5} />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Wearable</h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Wearable / Ring Skanery</h3>
                 <ul className="space-y-1.5 text-gray-600 text-xs">
                   <li className="flex items-start gap-1.5">
                     <CheckCircle2 className="w-3.5 h-3.5 text-green-600 flex-shrink-0 mt-0.5" />
@@ -257,11 +410,40 @@ export default function TerminalePage() {
                   </li>
                   <li className="flex items-start gap-1.5">
                     <CheckCircle2 className="w-3.5 h-3.5 text-green-600 flex-shrink-0 mt-0.5" />
-                    <span>Ring skanery</span>
+                    <span>RS5100 / RS6000</span>
+                  </li>
+                  <li className="flex items-start gap-1.5">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-green-600 flex-shrink-0 mt-0.5" />
+                    <span>WT4000 / WT41N0</span>
                   </li>
                 </ul>
               </div>
 
+              {/* Akcesoria i stacje */}
+              <div className="bg-white rounded-xl p-5 shadow-xl border border-gray-100 hover:shadow-2xl transition-shadow">
+                <div className="w-14 h-14 bg-gray-50 rounded-xl flex items-center justify-center mb-3 border border-gray-100">
+                  <CheckCircle2 className="w-7 h-7 text-gray-500" strokeWidth={1.5} />
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Akcesoria i stacje</h3>
+                <ul className="space-y-1.5 text-gray-600 text-xs">
+                  <li className="flex items-start gap-1.5">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-green-600 flex-shrink-0 mt-0.5" />
+                    <span>Stacje ładujące CRD-TC5x</span>
+                  </li>
+                  <li className="flex items-start gap-1.5">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-green-600 flex-shrink-0 mt-0.5" />
+                    <span>Stacje ładujące CRD-MC3x</span>
+                  </li>
+                  <li className="flex items-start gap-1.5">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-green-600 flex-shrink-0 mt-0.5" />
+                    <span>Baterie oryginalne</span>
+                  </li>
+                  <li className="flex items-start gap-1.5">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-green-600 flex-shrink-0 mt-0.5" />
+                    <span>Uchwyty i kabury</span>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </section>
@@ -366,8 +548,71 @@ export default function TerminalePage() {
           </div>
         </section>
 
+        {/* Przydatne zasoby - linki wewnętrzne */}
+        <section className="py-10 sm:py-12 bg-gradient-to-br from-gray-50 to-gray-100">
+          <div className="max-w-6xl mx-auto px-3 sm:px-4">
+            <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-6 sm:mb-8 text-center">
+              Przydatne zasoby
+            </h2>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              <Link
+                href="/sterowniki"
+                className="bg-white rounded-xl p-5 shadow-sm border border-gray-100 hover:shadow-lg hover:border-gray-300 transition-all group text-center"
+              >
+                <div className="w-12 h-12 bg-gray-50 rounded-lg flex items-center justify-center mx-auto mb-3 border border-gray-200">
+                  <Smartphone className="w-6 h-6 text-gray-600" />
+                </div>
+                <h3 className="font-medium text-gray-900 group-hover:text-gray-700 transition-colors">
+                  Sterowniki Zebra
+                </h3>
+                <p className="text-xs text-gray-500 mt-1">ADB, USB Driver, EMDK</p>
+              </Link>
+
+              <Link
+                href="/instrukcje"
+                className="bg-white rounded-xl p-5 shadow-sm border border-gray-100 hover:shadow-lg hover:border-gray-300 transition-all group text-center"
+              >
+                <div className="w-12 h-12 bg-gray-50 rounded-lg flex items-center justify-center mx-auto mb-3 border border-gray-200">
+                  <CheckCircle2 className="w-6 h-6 text-gray-600" />
+                </div>
+                <h3 className="font-medium text-gray-900 group-hover:text-gray-700 transition-colors">
+                  Instrukcje po polsku
+                </h3>
+                <p className="text-xs text-gray-500 mt-1">TC21, TC52, MC3300...</p>
+              </Link>
+
+              <Link
+                href="/cennik"
+                className="bg-white rounded-xl p-5 shadow-sm border border-gray-100 hover:shadow-lg hover:border-gray-300 transition-all group text-center"
+              >
+                <div className="w-12 h-12 bg-gray-50 rounded-lg flex items-center justify-center mx-auto mb-3 border border-gray-200">
+                  <Star className="w-6 h-6 text-gray-600" />
+                </div>
+                <h3 className="font-medium text-gray-900 group-hover:text-gray-700 transition-colors">
+                  Cennik napraw
+                </h3>
+                <p className="text-xs text-gray-500 mt-1">Orientacyjne ceny usług</p>
+              </Link>
+
+              <Link
+                href="/blog"
+                className="bg-white rounded-xl p-5 shadow-sm border border-gray-100 hover:shadow-lg hover:border-gray-300 transition-all group text-center"
+              >
+                <div className="w-12 h-12 bg-gray-50 rounded-lg flex items-center justify-center mx-auto mb-3 border border-gray-200">
+                  <AlertTriangle className="w-6 h-6 text-gray-600" />
+                </div>
+                <h3 className="font-medium text-gray-900 group-hover:text-gray-700 transition-colors">
+                  Poradniki
+                </h3>
+                <p className="text-xs text-gray-500 mt-1">Rozwiązywanie problemów</p>
+              </Link>
+            </div>
+          </div>
+        </section>
+
         {/* CTA */}
-        <section className="py-10 sm:py-12 bg-gray-50 border-t border-gray-100">
+        <section className="py-10 sm:py-12 bg-white border-t border-gray-100">
           <div className="max-w-4xl mx-auto px-3 sm:px-4 text-center">
             <div className="flex items-center justify-center gap-1 mb-3">
               {[...Array(5)].map((_, i) => (

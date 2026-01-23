@@ -342,20 +342,20 @@ export default function DrukarkiPage() {
           <div className="max-w-6xl mx-auto px-3 sm:px-4">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
               <div className="text-center">
-                <p className="text-2xl sm:text-3xl font-bold text-blue-600">25 lat</p>
-                <p className="text-xs sm:text-sm text-gray-600">doświadczenia</p>
+                <p className="text-2xl sm:text-3xl font-bold text-gray-900">25 lat</p>
+                <p className="text-xs sm:text-sm text-gray-500">doświadczenia</p>
               </div>
               <div className="text-center">
-                <p className="text-2xl sm:text-3xl font-bold text-green-600">5000+</p>
-                <p className="text-xs sm:text-sm text-gray-600">naprawionych drukarek</p>
+                <p className="text-2xl sm:text-3xl font-bold text-gray-900">5000+</p>
+                <p className="text-xs sm:text-sm text-gray-500">naprawionych drukarek</p>
               </div>
               <div className="text-center">
-                <p className="text-2xl sm:text-3xl font-bold text-amber-600">2-5 dni</p>
-                <p className="text-xs sm:text-sm text-gray-600">czas naprawy</p>
+                <p className="text-2xl sm:text-3xl font-bold text-gray-900">2-5 dni</p>
+                <p className="text-xs sm:text-sm text-gray-500">czas naprawy</p>
               </div>
               <div className="text-center">
-                <p className="text-2xl sm:text-3xl font-bold text-purple-600">12 mies.</p>
-                <p className="text-xs sm:text-sm text-gray-600">gwarancji</p>
+                <p className="text-2xl sm:text-3xl font-bold text-gray-900">12 mies.</p>
+                <p className="text-xs sm:text-sm text-gray-500">gwarancji</p>
               </div>
             </div>
           </div>
@@ -615,12 +615,12 @@ export default function DrukarkiPage() {
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
               <Link
                 href="/sterowniki"
-                className="bg-white rounded-xl p-5 shadow-sm border border-gray-100 hover:shadow-lg hover:border-blue-200 transition-all group text-center"
+                className="bg-white rounded-xl p-5 shadow-sm border border-gray-100 hover:shadow-lg hover:border-gray-300 transition-all group text-center"
               >
-                <div className="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center mx-auto mb-3 border border-blue-100">
-                  <Monitor className="w-6 h-6 text-blue-600" />
+                <div className="w-12 h-12 bg-gray-50 rounded-lg flex items-center justify-center mx-auto mb-3 border border-gray-200">
+                  <Monitor className="w-6 h-6 text-gray-600" />
                 </div>
-                <h3 className="font-medium text-gray-900 group-hover:text-blue-600 transition-colors">
+                <h3 className="font-medium text-gray-900 group-hover:text-gray-700 transition-colors">
                   Sterowniki Zebra
                 </h3>
                 <p className="text-xs text-gray-500 mt-1">Pobierz ZDesigner dla Windows</p>
@@ -628,12 +628,12 @@ export default function DrukarkiPage() {
 
               <Link
                 href="/instrukcje"
-                className="bg-white rounded-xl p-5 shadow-sm border border-gray-100 hover:shadow-lg hover:border-blue-200 transition-all group text-center"
+                className="bg-white rounded-xl p-5 shadow-sm border border-gray-100 hover:shadow-lg hover:border-gray-300 transition-all group text-center"
               >
-                <div className="w-12 h-12 bg-green-50 rounded-lg flex items-center justify-center mx-auto mb-3 border border-green-100">
-                  <CheckCircle2 className="w-6 h-6 text-green-600" />
+                <div className="w-12 h-12 bg-gray-50 rounded-lg flex items-center justify-center mx-auto mb-3 border border-gray-200">
+                  <CheckCircle2 className="w-6 h-6 text-gray-600" />
                 </div>
-                <h3 className="font-medium text-gray-900 group-hover:text-blue-600 transition-colors">
+                <h3 className="font-medium text-gray-900 group-hover:text-gray-700 transition-colors">
                   Instrukcje po polsku
                 </h3>
                 <p className="text-xs text-gray-500 mt-1">ZD421, ZT410, ZQ520...</p>
@@ -641,12 +641,12 @@ export default function DrukarkiPage() {
 
               <Link
                 href="/cennik"
-                className="bg-white rounded-xl p-5 shadow-sm border border-gray-100 hover:shadow-lg hover:border-blue-200 transition-all group text-center"
+                className="bg-white rounded-xl p-5 shadow-sm border border-gray-100 hover:shadow-lg hover:border-gray-300 transition-all group text-center"
               >
-                <div className="w-12 h-12 bg-amber-50 rounded-lg flex items-center justify-center mx-auto mb-3 border border-amber-100">
-                  <Star className="w-6 h-6 text-amber-600" />
+                <div className="w-12 h-12 bg-gray-50 rounded-lg flex items-center justify-center mx-auto mb-3 border border-gray-200">
+                  <Star className="w-6 h-6 text-gray-600" />
                 </div>
-                <h3 className="font-medium text-gray-900 group-hover:text-blue-600 transition-colors">
+                <h3 className="font-medium text-gray-900 group-hover:text-gray-700 transition-colors">
                   Cennik napraw
                 </h3>
                 <p className="text-xs text-gray-500 mt-1">Orientacyjne ceny usług</p>
@@ -654,12 +654,12 @@ export default function DrukarkiPage() {
 
               <Link
                 href="/blog"
-                className="bg-white rounded-xl p-5 shadow-sm border border-gray-100 hover:shadow-lg hover:border-blue-200 transition-all group text-center"
+                className="bg-white rounded-xl p-5 shadow-sm border border-gray-100 hover:shadow-lg hover:border-gray-300 transition-all group text-center"
               >
-                <div className="w-12 h-12 bg-purple-50 rounded-lg flex items-center justify-center mx-auto mb-3 border border-purple-100">
-                  <AlertTriangle className="w-6 h-6 text-purple-600" />
+                <div className="w-12 h-12 bg-gray-50 rounded-lg flex items-center justify-center mx-auto mb-3 border border-gray-200">
+                  <AlertTriangle className="w-6 h-6 text-gray-600" />
                 </div>
-                <h3 className="font-medium text-gray-900 group-hover:text-blue-600 transition-colors">
+                <h3 className="font-medium text-gray-900 group-hover:text-gray-700 transition-colors">
                   Poradniki
                 </h3>
                 <p className="text-xs text-gray-500 mt-1">Rozwiązywanie problemów</p>
