@@ -354,7 +354,7 @@ export default function TerminalePage() {
                 <div className="w-14 h-14 bg-gray-50 rounded-xl flex items-center justify-center mb-3 border border-gray-100">
                   <Smartphone className="w-7 h-7 text-gray-500" strokeWidth={1.5} />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Seria TC (Touch Computer)</h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Seria TC</h3>
                 <ul className="space-y-1.5 text-gray-600 text-xs">
                   <li className="flex items-start gap-1.5">
                     <CheckCircle2 className="w-3.5 h-3.5 text-green-600 flex-shrink-0 mt-0.5" />
@@ -380,7 +380,7 @@ export default function TerminalePage() {
                 <div className="w-14 h-14 bg-gray-50 rounded-xl flex items-center justify-center mb-3 border border-gray-100">
                   <Cpu className="w-7 h-7 text-gray-500" strokeWidth={1.5} />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Seria MC (Mobile Computer)</h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Seria MC</h3>
                 <ul className="space-y-1.5 text-gray-600 text-xs">
                   <li className="flex items-start gap-1.5">
                     <CheckCircle2 className="w-3.5 h-3.5 text-green-600 flex-shrink-0 mt-0.5" />
