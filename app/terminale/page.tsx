@@ -118,12 +118,24 @@ const faq = [
     answer: 'Tak, wymieniamy baterie we wszystkich terminalach Zebra. Koszt wymiany baterii to 150-450 zł w zależności od modelu. Używamy oryginalnych baterii Zebra z pełną gwarancją producenta.'
   },
   {
-    question: 'Terminal Zebra TC52 nie włącza się - co robić?',
-    answer: 'Zebra TC52 nie włącza się najczęściej z powodu: 1) Rozładowanej baterii - podłącz ładowarkę na min. 30 min, 2) Uszkodzonej baterii - wymień na nową, 3) Uszkodzonej płyty głównej - wymaga naprawy serwisowej. Spróbuj najpierw twardego resetu (Power + Vol Up przez 15 sek.). Jeśli nie pomaga - zgłoś do naszego serwisu.'
+    question: 'Terminal Zebra TC58 nie włącza się - co robić?',
+    answer: 'Zebra TC58 nie włącza się najczęściej z powodu: 1) Rozładowanej baterii - podłącz ładowarkę na min. 30 min, 2) Uszkodzonej baterii - wymień na nową, 3) Uszkodzonej płyty głównej - wymaga naprawy serwisowej. Spróbuj najpierw twardego resetu (Power + Vol Up przez 15 sek.). Jeśli nie pomaga - zgłoś do naszego serwisu.'
   },
   {
-    question: 'Ile kosztuje naprawa terminala Zebra MC3300?',
-    answer: 'Naprawa terminala Zebra MC3300/MC3400 kosztuje od 200 zł (wymiana baterii) do 1200 zł (wymiana wyświetlacza lub płyty głównej). Najczęstsze naprawy: wymiana ekranu 800-1000 zł, naprawa skanera 500-800 zł, wymiana klawiatury 300-500 zł. Dokładna wycena po bezpłatnej diagnozie.'
+    question: 'Terminal Zebra TC22 / TC21 nie skanuje - jak naprawić?',
+    answer: 'Zebra TC22 i TC21 nie skanują najczęściej z powodu: 1) Wyłączonego skanera w DataWedge - włącz profil skanowania, 2) Brudnego okienka skanera - wyczyść alkoholem IPA, 3) Uszkodzonego modułu SE4710 - wymaga wymiany w serwisie (500-800 zł). Sprawdź też czy aplikacja ma uprawnienia do skanera.'
+  },
+  {
+    question: 'Ile kosztuje wymiana ekranu w Zebra TC27?',
+    answer: 'Wymiana wyświetlacza w terminalu Zebra TC27 kosztuje 700-900 zł. Cena obejmuje oryginalny wyświetlacz i robociznę. Czas naprawy: 2-5 dni roboczych. TC27 ma większy ekran 6" (vs 5" w TC22), dlatego cena jest nieco wyższa. Oferujemy też naprawy ekspresowe w 24-48h.'
+  },
+  {
+    question: 'Ile kosztuje naprawa terminala Zebra MC3400?',
+    answer: 'Naprawa terminala Zebra MC3400/MC3450 kosztuje od 200 zł (wymiana baterii) do 1200 zł (wymiana wyświetlacza lub płyty głównej). Najczęstsze naprawy: wymiana ekranu 800-1000 zł, naprawa skanera 500-800 zł, wymiana klawiatury 300-500 zł. Dokładna wycena po bezpłatnej diagnozie.'
+  },
+  {
+    question: 'Terminal Zebra MC9300 / MC9400 - gdzie naprawić?',
+    answer: 'Naprawiamy terminale magazynowe Zebra MC9300 i MC9400 w naszym autoryzowanym serwisie. Najczęstsze naprawy: wymiana wyświetlacza (900-1200 zł), naprawa skanera dalekiego zasięgu (600-1000 zł), wymiana klawiatury (400-600 zł). Odbiór kurierem z całej Polski, 12 mies. gwarancji.'
   },
   {
     question: 'Terminal Zebra nie skanuje kodów - jak naprawić?',
@@ -555,20 +567,7 @@ export default function TerminalePage() {
               Przydatne zasoby
             </h2>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              <Link
-                href="/sterowniki"
-                className="bg-white rounded-xl p-5 shadow-sm border border-gray-100 hover:shadow-lg hover:border-gray-300 transition-all group text-center"
-              >
-                <div className="w-12 h-12 bg-gray-50 rounded-lg flex items-center justify-center mx-auto mb-3 border border-gray-200">
-                  <Smartphone className="w-6 h-6 text-gray-600" />
-                </div>
-                <h3 className="font-medium text-gray-900 group-hover:text-gray-700 transition-colors">
-                  Sterowniki Zebra
-                </h3>
-                <p className="text-xs text-gray-500 mt-1">ADB, USB Driver, EMDK</p>
-              </Link>
-
+            <div className="grid sm:grid-cols-3 gap-4">
               <Link
                 href="/instrukcje"
                 className="bg-white rounded-xl p-5 shadow-sm border border-gray-100 hover:shadow-lg hover:border-gray-300 transition-all group text-center"
