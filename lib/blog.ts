@@ -881,38 +881,66 @@ Jako autoryzowany partner Zebra oferujemy pełne wsparcie w doborze konfiguracji
     deviceType: 'drukarki',
     subDeviceType: 'etykiet',
     category: 'troubleshooting',
-    tags: ['drukarka zebra', 'nie drukuje', 'nie drukuje etykiet', 'troubleshooting', 'naprawa', 'GK420', 'ZD420', 'ZT410', 'głowica', 'ribbon', 'kalibracja', 'sterowniki'],
+    tags: ['drukarka zebra', 'nie drukuje', 'nie drukuje etykiet', 'troubleshooting', 'naprawa', 'GK420', 'ZD420', 'ZD421', 'ZD220', 'ZT410', 'ZT230', 'głowica', 'ribbon', 'kalibracja', 'sterowniki'],
     seo: {
       metaTitle: 'Drukarka Zebra nie drukuje etykiet - 7 przyczyn i rozwiązania [2026]',
-      metaDescription: 'Drukarka Zebra nie drukuje etykiet? 7 najczęstszych przyczyn: głowica, ribbon, kalibracja, sterowniki, ZPL. Poradnik krok po kroku dla GK420, ZD420, ZT410. Kiedy do serwisu?',
+      metaDescription: 'Drukarka Zebra nie drukuje etykiet? 7 najczęstszych przyczyn: głowica, ribbon, kalibracja, sterowniki, ZPL. Poradnik dla ZD421, ZD420, ZD220, GK420, ZT410, ZT230. Kiedy do serwisu?',
       keywords: [
         // Główne frazy - z "etykiet"
         'drukarka zebra nie drukuje etykiet', 'drukarka zebra nie drukuje', 'zebra nie drukuje etykiet',
         'drukarka etykiet zebra nie drukuje', 'zebra printer not printing labels',
         'zebra printer not printing', 'naprawa drukarki zebra',
         'problemy z drukarką zebra', 'dlaczego drukarka zebra nie drukuje', 'zebra printer troubleshooting',
-        // Modele - z "etykiet"
-        'zebra zd420 nie drukuje etykiet', 'zebra zd421 nie drukuje etykiet',
-        'zebra zd220 nie drukuje etykiet', 'zebra zd230 nie drukuje etykiet',
-        'zebra zd420 nie drukuje', 'zebra gk420 problemy', 'zebra zt410 nie drukuje',
-        'zebra zd621 nie drukuje', 'zebra zd220 problem', 'zebra gc420 nie działa',
+        
+        // MODELE BIURKOWE - seria ZD
+        'zebra zd421 nie drukuje', 'zebra zd421 nie drukuje etykiet', 'zd421 nie drukuje',
+        'zebra zd420 nie drukuje', 'zebra zd420 nie drukuje etykiet', 'zd420 problem',
+        'zebra zd220 nie drukuje', 'zebra zd220 nie drukuje etykiet', 'zd220 nie działa',
+        'zebra zd230 nie drukuje', 'zebra zd230 nie drukuje etykiet', 'zd230 problem',
+        'zebra zd621 nie drukuje', 'zebra zd621 nie drukuje etykiet', 'zd621 problem',
+        'zebra zd620 nie drukuje', 'zebra zd611 nie drukuje', 'zebra zd411 nie drukuje',
+        
+        // MODELE BIURKOWE - starsza seria GK/GC/GT
+        'zebra gk420 nie drukuje', 'zebra gk420d nie drukuje', 'zebra gk420t nie drukuje',
+        'zebra gc420 nie drukuje', 'zebra gc420t problem', 'zebra gt800 nie drukuje',
+        'gk420 problemy', 'gc420 nie działa', 'zebra gk420 problem',
+        
+        // MODELE PRZEMYSŁOWE - seria ZT
+        'zebra zt410 nie drukuje', 'zebra zt410 nie drukuje etykiet', 'zt410 problem',
+        'zebra zt411 nie drukuje', 'zebra zt421 nie drukuje', 'zebra zt420 nie drukuje',
+        'zebra zt230 nie drukuje', 'zebra zt230 nie drukuje etykiet', 'zt230 problem',
+        'zebra zt231 nie drukuje', 'zebra zt510 nie drukuje', 'zebra zt610 nie drukuje',
+        'zebra zt620 nie drukuje', 'zebra zt111 nie drukuje',
+        
+        // MODELE MOBILNE
+        'zebra zq220 nie drukuje', 'zebra zq320 nie drukuje', 'zebra zq520 nie drukuje',
+        'zebra zq620 nie drukuje', 'zebra zq630 nie drukuje', 'drukarka mobilna zebra nie drukuje',
+        
         // Objawy
         'drukarka zebra nie reaguje', 'zebra drukuje puste etykiety', 'drukarka zebra miga czerwono',
         'drukarka zebra błąd ribbon', 'zebra nie widzi etykiet', 'drukarka zebra offline',
         'drukarka etykiet nie drukuje', 'etykieciarka zebra nie drukuje',
-        // Long tail - pytania
-        'jak naprawić drukarkę zebra', 'co zrobić gdy drukarka zebra nie drukuje etykiet',
-        'jak skalibrować drukarkę zebra', 'ile kosztuje naprawa drukarki zebra',
-        'dlaczego drukarka etykiet nie drukuje',
+        'zebra drukuje co drugą etykietę', 'zebra przeskakuje etykiety',
+        
+        // Long tail - pytania z modelami
+        'jak naprawić drukarkę zebra zd421', 'co zrobić gdy zebra zd420 nie drukuje',
+        'jak skalibrować drukarkę zebra zd220', 'ile kosztuje naprawa drukarki zebra zt410',
+        'dlaczego drukarka zebra gk420 nie drukuje', 'zebra zd421 miga na czerwono',
+        'zebra zd420 błąd ribbon', 'zebra zt410 puste etykiety',
+        
         // Long tail - rozwiązania
         'drukarka zebra sterowniki windows 10', 'drukarka zebra sterowniki windows 11',
-        'reset drukarki zebra', 'kalibracja drukarki zebra', 'drukarka zebra factory reset',
+        'reset drukarki zebra zd421', 'kalibracja drukarki zebra zd420', 'drukarka zebra factory reset',
+        'reset zd220', 'kalibracja zt410', 'reset gk420',
+        
         // Frazy branżowe
         'drukarka etykiet nie drukuje', 'drukarka termiczna zebra problemy',
         'drukarka magazynowa zebra awaria', 'drukarka logistyczna zebra problem',
-        // Frazy angielskie
-        'zebra printer not working', 'zebra label printer fix', 'zebra printer repair guide',
-        'zebra printer blank labels', 'zebra printer error fix'
+        
+        // Frazy angielskie z modelami
+        'zebra zd421 not printing', 'zebra zd420 not printing', 'zebra zt410 not printing',
+        'zebra gk420 not printing', 'zebra printer not working', 'zebra label printer fix',
+        'zebra printer repair guide', 'zebra printer blank labels', 'zebra printer error fix'
       ],
       // Explicit FAQ Schema dla Google Featured Snippets
       faqSchema: [
@@ -943,6 +971,22 @@ Jako autoryzowany partner Zebra oferujemy pełne wsparcie w doborze konfiguracji
         {
           question: 'Gdzie pobrać sterowniki do drukarki Zebra?',
           answer: 'Oficjalne sterowniki do drukarek Zebra pobierzesz z naszej strony /sterowniki lub bezpośrednio ze strony producenta. Wybierz model drukarki i system operacyjny (Windows 10/11, Mac, Linux). Przed instalacją odinstaluj stare sterowniki i zrestartuj komputer.'
+        },
+        {
+          question: 'Zebra ZD421 nie drukuje - co robić?',
+          answer: 'Zebra ZD421 najczęściej nie drukuje z powodu: 1) Ribbon załadowany odwrotnie (sprawdź stronę barwiącą), 2) Brak kalibracji po wymianie etykiet (przytrzymaj FEED 5 sek.), 3) Stare sterowniki Windows. W 80% przypadków problem rozwiązuje prawidłowe załadowanie ribbonu.'
+        },
+        {
+          question: 'Zebra ZD420 miga na czerwono - co oznacza?',
+          answer: 'Czerwona dioda w Zebra ZD420 oznacza: pojedyncze miganie = brak etykiet (Media Out), podwójne miganie = błąd ribbonu (Ribbon Out), ciągłe świecenie = otwarta pokrywa (Head Open). Rozwiązanie: załaduj media, sprawdź ribbon, zamknij pokrywę do kliknięcia.'
+        },
+        {
+          question: 'Zebra GK420 nie reaguje na polecenia - jak naprawić?',
+          answer: 'Zebra GK420 często przestaje reagować z powodu: 1) Przepełnionego bufora - wyłącz na 30 sek., 2) Uszkodzonego kabla USB - wymień kabel, 3) Błędu firmware - wykonaj factory reset. Jeśli czerwona dioda świeci mimo zamkniętej pokrywy - uszkodzony czujnik (wymaga serwisu).'
+        },
+        {
+          question: 'Zebra ZT410 drukuje puste etykiety - przyczyna?',
+          answer: 'Zebra ZT410 drukuje puste etykiety gdy: 1) Ribbon jest załadowany odwrotnie, 2) Używasz etykiet termicznych z ustawieniem termotransfer, 3) Głowica jest zużyta. Sprawdź typ mediów w ustawieniach: Menu → Print Method → Direct Thermal lub Thermal Transfer.'
         }
       ]
     },
@@ -1114,6 +1158,46 @@ Przyłóż kawałek białej kartki do ribbonu i przetrzyj palcem. Strona, która
 
 ---
 
+## Twój model drukarki Zebra
+
+Powyższe rozwiązania dotyczą **wszystkich modeli** drukarek Zebra. Oto najczęściej naprawiane modele w naszym serwisie:
+
+### Drukarki biurkowe (najczęstsze problemy)
+
+| Model | Typowy problem | Szybkie rozwiązanie |
+|-------|----------------|---------------------|
+| **Zebra ZD421** | Błąd ribbon, puste etykiety | Ribbon stroną barwiącą do dołu |
+| **Zebra ZD420** | Nie kalibruje, miga czerwono | FEED 5 sek. (auto-kalibracja) |
+| **Zebra ZD220** | Blady wydruk, offline | Wyczyść głowicę, sprawdź USB |
+| **Zebra ZD230** | Przeskakuje etykiety | Kalibracja sensora gap |
+| **Zebra ZD621** | Nie drukuje po aktualizacji | Zainstaluj [sterowniki](/sterowniki) |
+| **Zebra GK420** | Czerwona dioda, nie reaguje | Reset (wyłącz 30 sek.) |
+| **Zebra GC420** | Puste etykiety | Sprawdź orientację ribbonu |
+
+### Drukarki przemysłowe
+
+| Model | Typowy problem | Szybkie rozwiązanie |
+|-------|----------------|---------------------|
+| **Zebra ZT410** | Błąd HEAD OPEN | Sprawdź zatrzask głowicy |
+| **Zebra ZT411** | Nie widzi etykiet | Kalibracja manualna w menu |
+| **Zebra ZT230** | RIBBON OUT mimo ribbonu | Wymień czujnik ribbonu |
+| **Zebra ZT231** | Blady wydruk | Zwiększ Darkness w ustawieniach |
+| **Zebra ZT510** | Przesuwa etykiety | Ustaw prawidłowy format |
+| **Zebra ZT610** | Nie reaguje na polecenia | Sprawdź połączenie sieciowe |
+
+### Drukarki mobilne
+
+| Model | Typowy problem | Szybkie rozwiązanie |
+|-------|----------------|---------------------|
+| **Zebra ZQ220** | Nie drukuje na zimno | Rozgrzej drukarkę (Head Cold) |
+| **Zebra ZQ320** | Brak połączenia Bluetooth | Sparuj ponownie |
+| **Zebra ZQ520** | Blady wydruk | Użyj odpowiednich etykiet |
+| **Zebra ZQ620** | Zacina papier | Wyczyść mechanizm |
+
+> **Twój model nie jest na liście?** [Zgłoś naprawę](/formularz) - naprawiamy wszystkie modele Zebra!
+
+---
+
 ## Kiedy oddać drukarkę do serwisu?
 
 Jeśli powyższe rozwiązania nie pomogły, problem może wymagać profesjonalnej diagnostyki. **Oddaj drukarkę do serwisu gdy:**
@@ -1179,6 +1263,18 @@ Puste etykiety najczęściej oznaczają: 1) **Ribbon załadowany odwrotnie** (sp
 
 ### Gdzie pobrać sterowniki do drukarki Zebra?
 Oficjalne sterowniki do drukarek Zebra pobierzesz z naszej strony [Sterowniki Zebra](/sterowniki) lub bezpośrednio od producenta. Wybierz model drukarki i system operacyjny (Windows 10/11, Mac, Linux). Przed instalacją odinstaluj stare sterowniki i zrestartuj komputer.
+
+### Zebra ZD421 nie drukuje - co robić?
+**Zebra ZD421** najczęściej nie drukuje z powodu: 1) Ribbon załadowany odwrotnie (sprawdź stronę barwiącą), 2) Brak kalibracji po wymianie etykiet (przytrzymaj FEED 5 sek.), 3) Stare sterowniki Windows (pobierz najnowsze z /sterowniki). W 80% przypadków problem rozwiązuje prawidłowe załadowanie ribbonu.
+
+### Zebra ZD420 miga na czerwono - co oznacza?
+Czerwona dioda w **Zebra ZD420** oznacza: pojedyncze miganie = brak etykiet (Media Out), podwójne miganie = błąd ribbonu (Ribbon Out), ciągłe świecenie = otwarta pokrywa (Head Open). Rozwiązanie: załaduj media, sprawdź ribbon, zamknij pokrywę do kliknięcia.
+
+### Zebra GK420 nie reaguje na polecenia - jak naprawić?
+Starsza **Zebra GK420** często przestaje reagować z powodu: 1) Przepełnionego bufora - wyłącz na 30 sek. i włącz, 2) Uszkodzonego kabla USB - wymień kabel, 3) Błędu firmware - wykonaj factory reset (przytrzymaj FEED przy włączaniu). Jeśli czerwona dioda świeci mimo zamkniętej pokrywy - uszkodzony czujnik (wymaga serwisu).
+
+### Zebra ZT410 drukuje puste etykiety - przyczyna?
+**Zebra ZT410** drukuje puste etykiety gdy: 1) Ribbon jest załadowany odwrotnie, 2) Używasz etykiet termicznych (bez ribbonu) z ustawieniem termotransfer, 3) Głowica jest zużyta. Sprawdź typ mediów w ustawieniach: Menu → Print Method → Direct Thermal lub Thermal Transfer.
 
 ### Moja drukarka Zebra jest na gwarancji - co robić?
 Skontaktuj się z nami - jako **autoryzowany serwis Zebra** obsługujemy również naprawy gwarancyjne. Wyślij zgłoszenie przez formularz lub zadzwoń pod +48 601 619 898.
