@@ -258,7 +258,7 @@ export default function DriversPage() {
             Sterowniki i oprogramowanie Zebra
           </h1>
           <p className="text-xs sm:text-base text-gray-300 max-w-3xl mx-auto px-2">
-            Pobierz oficjalne sterowniki, firmware i narzędzia do drukarek Zebra (Windows 11/10, Server). Instrukcja instalacji + pomoc zdalna serwisu TAKMA (Warszawa | obsługa całej Polski).
+            Oficjalne sterowniki, firmware i narzędzia do drukarek Zebra (Windows 11/10, Server). Krótka instrukcja instalacji i pomoc zdalna serwisu TAKMA (Wrocław | obsługa całej Polski).
           </p>
         </div>
       </section>
@@ -268,8 +268,8 @@ export default function DriversPage() {
         <div className="max-w-5xl mx-auto px-3 sm:px-6 lg:px-8 space-y-3 sm:space-y-4">
           <h2 className="text-lg sm:text-xl font-semibold text-gray-900">Co znajdziesz na tej stronie</h2>
           <p className="text-sm sm:text-base text-gray-700">
-            Aktualne drivery ZDesigner (v10 i v5), firmware Link-OS oraz narzędzia (Zebra Setup Utilities, ZebraDesigner 3).
-            Dodaliśmy krótką instrukcję instalacji i listę najczęstszych problemów po aktualizacji sterownika.
+            Pobierzesz tutaj ZDesigner v10/v5, firmware Link-OS i narzędzia (Zebra Setup Utilities, ZebraDesigner 3).
+            Dołożyliśmy prostą instrukcję instalacji oraz checklistę typowych problemów po aktualizacji.
           </p>
           <div className="flex flex-wrap gap-2 sm:gap-3 text-xs sm:text-sm">
             <Link href="/blog/drukarka-zebra-nie-drukuje-przyczyny-rozwiazania" className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors">
@@ -281,8 +281,8 @@ export default function DriversPage() {
             <Link href="/jak-to-dziala" className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors">
               Jak działa serwis
             </Link>
-            <Link href="/serwis-zebra/warszawa" className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors">
-              Serwis Zebra Warszawa
+            <Link href="/serwis-zebra/wroclaw" className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors">
+              Serwis Zebra Wrocław
             </Link>
           </div>
         </div>
@@ -372,6 +372,71 @@ export default function DriversPage() {
                   </div>
                 </div>
               ))}
+
+              {/* HowTo instalacja */}
+              <div className="bg-white border border-gray-200 rounded-xl p-4 sm:p-6">
+                <div className="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-4">
+                  <div className="flex-1">
+                    <h3 className="text-sm sm:text-lg font-semibold text-gray-900 mb-2">
+                      Jak zainstalować sterownik Zebra (Windows 11/10)
+                    </h3>
+                    <ol className="space-y-2 text-xs sm:text-sm text-gray-700">
+                      <li className="flex gap-2">
+                        <span className="font-semibold text-gray-900">1.</span>
+                        Pobierz ZDesigner v10 (dla ZPL/Link-OS) lub v5 (dla EPL/CPCL).
+                      </li>
+                      <li className="flex gap-2">
+                        <span className="font-semibold text-gray-900">2.</span>
+                        Rozpakuj ZIP, uruchom instalator jako Administrator.
+                      </li>
+                      <li className="flex gap-2">
+                        <span className="font-semibold text-gray-900">3.</span>
+                        Wybierz model (np. ZD421) i port USB/Sieć w kreatorze.
+                      </li>
+                      <li className="flex gap-2">
+                        <span className="font-semibold text-gray-900">4.</span>
+                        Po instalacji wydrukuj stronę testową i skalibruj etykiety.
+                      </li>
+                    </ol>
+                  </div>
+                  <div className="sm:min-w-[220px] bg-gray-50 border border-gray-200 rounded-lg p-3 sm:p-4">
+                    <p className="text-xs sm:text-sm text-gray-800 font-semibold mb-1">Masz Mac/Linux?</p>
+                    <p className="text-[11px] sm:text-xs text-gray-600">
+                      Użyj Zebra Setup Utilities (druk przez sieć) lub CUPS z driverem raw ZPL. W razie problemów – napisz do nas.
+                    </p>
+                    <Link
+                      href="/blog/drukarka-zebra-nie-drukuje-przyczyny-rozwiazania"
+                      className="inline-flex items-center gap-1 text-[11px] sm:text-xs text-blue-600 hover:text-blue-700 mt-2"
+                    >
+                      Sprawdź poradnik rozwiązywania problemów
+                      <ArrowRight className="w-3 h-3" />
+                    </Link>
+                  </div>
+                </div>
+              </div>
+
+              {/* Najczęstsze problemy po instalacji */}
+              <div className="bg-gray-50 border border-gray-200 rounded-xl p-4 sm:p-6">
+                <div className="flex gap-3 sm:gap-4">
+                  <AlertTriangle className="w-4 h-4 sm:w-5 sm:h-5 text-amber-500 mt-0.5 flex-shrink-0" />
+                  <div className="space-y-2">
+                    <h3 className="text-sm sm:text-lg font-semibold text-gray-900">Najczęstsze problemy po instalacji</h3>
+                    <ul className="text-xs sm:text-sm text-gray-700 space-y-1.5 list-disc list-inside">
+                      <li>Druk pustych etykiet → kalibracja czujnika + weryfikacja formatu w sterowniku.</li>
+                      <li>Brak wykrycia przez Windows → zmień port USB, zainstaluj jako Administrator.</li>
+                      <li>Błąd kodowania PL/UTF-8 → włącz CP1250 lub UTF-8 w ustawieniach drukarki.</li>
+                      <li>Po aktualizacji Windows drukarka „Offline” → przeinstaluj driver i przypisz stały port IP.</li>
+                    </ul>
+                    <Link
+                      href="/blog/drukarka-zebra-nie-drukuje-przyczyny-rozwiazania"
+                      className="inline-flex items-center gap-1 text-xs sm:text-sm text-blue-600 hover:text-blue-700"
+                    >
+                      Zobacz pełny poradnik naprawy
+                      <ArrowRight className="w-4 h-4" />
+                    </Link>
+                  </div>
+                </div>
+              </div>
 
               {/* Obsługiwane drukarki */}
               <div className="bg-gray-50 border border-gray-200 rounded-xl p-4 sm:p-6">
@@ -663,7 +728,7 @@ export default function DriversPage() {
             Problemy z instalacją?
           </h2>
           <p className="text-gray-400 text-xs sm:text-sm mb-4 sm:mb-6">
-            Jako autoryzowany serwis Zebra, pomożemy skonfigurować drukarkę
+            Jako autoryzowany serwis Zebra (TAKMA | Wrocław, Polska) pomagamy zdalnie w całym kraju.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4">
             <Link

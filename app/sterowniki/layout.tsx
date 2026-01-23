@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Sterowniki Zebra – Pobierz oficjalne drivery (Windows 11/10) | TAKMA',
-  description: 'Oficjalne sterowniki Zebra: ZDesigner v10/v5, firmware i narzędzia (Zebra Setup Utilities, ZebraDesigner 3). Instrukcja instalacji, wsparcie Windows 11/10/Server. Pomoc zdalna – Polska, Warszawa.',
+  description: 'Oficjalne sterowniki Zebra: ZDesigner v10/v5, firmware i narzędzia (Zebra Setup Utilities, ZebraDesigner 3). Instrukcja instalacji, wsparcie Windows 11/10/Server. Pomoc zdalna – Polska, Wrocław.',
   keywords: [
     // Ogólne
     'sterowniki zebra',
