@@ -892,29 +892,58 @@ Jako autoryzowany partner Zebra oferujemy pełne wsparcie w doborze konfiguracji
         'zebra printer not printing', 'naprawa drukarki zebra',
         'problemy z drukarką zebra', 'dlaczego drukarka zebra nie drukuje', 'zebra printer troubleshooting',
         
-        // MODELE BIURKOWE - seria ZD
-        'zebra zd421 nie drukuje', 'zebra zd421 nie drukuje etykiet', 'zd421 nie drukuje',
-        'zebra zd420 nie drukuje', 'zebra zd420 nie drukuje etykiet', 'zd420 problem',
-        'zebra zd220 nie drukuje', 'zebra zd220 nie drukuje etykiet', 'zd220 nie działa',
+        // MODELE BIURKOWE - seria ZD (aktualna)
+        'zebra zd421 nie drukuje', 'zebra zd421 nie drukuje etykiet', 'zd421 nie drukuje', 'zd421 problem',
+        'zebra zd420 nie drukuje', 'zebra zd420 nie drukuje etykiet', 'zd420 problem', 'zd420 nie działa',
+        'zebra zd220 nie drukuje', 'zebra zd220 nie drukuje etykiet', 'zd220 nie działa', 'zd220 problem',
         'zebra zd230 nie drukuje', 'zebra zd230 nie drukuje etykiet', 'zd230 problem',
         'zebra zd621 nie drukuje', 'zebra zd621 nie drukuje etykiet', 'zd621 problem',
         'zebra zd620 nie drukuje', 'zebra zd611 nie drukuje', 'zebra zd411 nie drukuje',
+        'zd611 nie drukuje', 'zd411 problem', 'zd620 nie działa',
         
-        // MODELE BIURKOWE - starsza seria GK/GC/GT
+        // MODELE BIURKOWE - starsza seria GK/GC/GT/GX/TLP/LP
         'zebra gk420 nie drukuje', 'zebra gk420d nie drukuje', 'zebra gk420t nie drukuje',
-        'zebra gc420 nie drukuje', 'zebra gc420t problem', 'zebra gt800 nie drukuje',
-        'gk420 problemy', 'gc420 nie działa', 'zebra gk420 problem',
+        'zebra gc420 nie drukuje', 'zebra gc420d nie drukuje', 'zebra gc420t nie drukuje',
+        'zebra gt800 nie drukuje', 'zebra gt820 nie drukuje',
+        'zebra gx420 nie drukuje', 'zebra gx420d nie drukuje', 'zebra gx420t nie drukuje',
+        'zebra gx430 nie drukuje', 'zebra gx430t nie drukuje',
+        'zebra lp2844 nie drukuje', 'zebra tlp2844 nie drukuje', 'lp2844 problem',
+        'zebra lp2824 nie drukuje', 'zebra tlp2824 nie drukuje',
+        'gk420 problemy', 'gc420 nie działa', 'zebra gk420 problem', 'gx420 problem',
         
         // MODELE PRZEMYSŁOWE - seria ZT
         'zebra zt410 nie drukuje', 'zebra zt410 nie drukuje etykiet', 'zt410 problem',
-        'zebra zt411 nie drukuje', 'zebra zt421 nie drukuje', 'zebra zt420 nie drukuje',
+        'zebra zt411 nie drukuje', 'zt411 nie drukuje etykiet', 'zt411 problem',
+        'zebra zt421 nie drukuje', 'zebra zt420 nie drukuje',
         'zebra zt230 nie drukuje', 'zebra zt230 nie drukuje etykiet', 'zt230 problem',
-        'zebra zt231 nie drukuje', 'zebra zt510 nie drukuje', 'zebra zt610 nie drukuje',
-        'zebra zt620 nie drukuje', 'zebra zt111 nie drukuje',
+        'zebra zt231 nie drukuje', 'zt231 problem', 'zt231 nie działa',
+        'zebra zt220 nie drukuje', 'zt220 problem',
+        'zebra zt510 nie drukuje', 'zt510 problem',
+        'zebra zt610 nie drukuje', 'zt610 problem', 'zebra zt620 nie drukuje', 'zt620 problem',
+        'zebra zt111 nie drukuje', 'zt111 problem',
         
-        // MODELE MOBILNE
-        'zebra zq220 nie drukuje', 'zebra zq320 nie drukuje', 'zebra zq520 nie drukuje',
-        'zebra zq620 nie drukuje', 'zebra zq630 nie drukuje', 'drukarka mobilna zebra nie drukuje',
+        // MODELE PRZEMYSŁOWE - starsza seria (105SL, S4M, Xi)
+        'zebra 105sl nie drukuje', 'zebra 105slplus nie drukuje', '105sl problem',
+        'zebra s4m nie drukuje', 's4m problem', 'zebra s4m nie działa',
+        'zebra 110xi4 nie drukuje', 'zebra 140xi4 nie drukuje', 'zebra 170xi4 nie drukuje',
+        'zebra 220xi4 nie drukuje', 'xi4 problem',
+        'zebra ze500 nie drukuje', 'zebra ze511 nie drukuje', 'zebra ze521 nie drukuje',
+        
+        // MODELE MOBILNE - seria ZQ
+        'zebra zq110 nie drukuje', 'zq110 problem',
+        'zebra zq210 nie drukuje', 'zq210 problem',
+        'zebra zq220 nie drukuje', 'zq220 nie działa',
+        'zebra zq310 nie drukuje', 'zebra zq320 nie drukuje', 'zq320 problem',
+        'zebra zq510 nie drukuje', 'zebra zq520 nie drukuje', 'zq520 problem',
+        'zebra zq521 nie drukuje',
+        'zebra zq610 nie drukuje', 'zebra zq620 nie drukuje', 'zq620 problem',
+        'zebra zq630 nie drukuje', 'zq630 problem',
+        'drukarka mobilna zebra nie drukuje',
+        
+        // MODELE MOBILNE - starsza seria QL/RW/iMZ
+        'zebra ql220 nie drukuje', 'zebra ql320 nie drukuje', 'zebra ql420 nie drukuje',
+        'zebra rw220 nie drukuje', 'zebra rw420 nie drukuje',
+        'zebra imz220 nie drukuje', 'zebra imz320 nie drukuje',
         
         // Objawy
         'drukarka zebra nie reaguje', 'zebra drukuje puste etykiety', 'drukarka zebra miga czerwono',
@@ -1162,37 +1191,88 @@ Przyłóż kawałek białej kartki do ribbonu i przetrzyj palcem. Strona, która
 
 Powyższe rozwiązania dotyczą **wszystkich modeli** drukarek Zebra. Oto najczęściej naprawiane modele w naszym serwisie:
 
-### Drukarki biurkowe (najczęstsze problemy)
+### Drukarki biurkowe - seria ZD (aktualna)
 
 | Model | Typowy problem | Szybkie rozwiązanie |
 |-------|----------------|---------------------|
 | **Zebra ZD421** | Błąd ribbon, puste etykiety | Ribbon stroną barwiącą do dołu |
 | **Zebra ZD420** | Nie kalibruje, miga czerwono | FEED 5 sek. (auto-kalibracja) |
-| **Zebra ZD220** | Blady wydruk, offline | Wyczyść głowicę, sprawdź USB |
-| **Zebra ZD230** | Przeskakuje etykiety | Kalibracja sensora gap |
 | **Zebra ZD621** | Nie drukuje po aktualizacji | Zainstaluj [sterowniki](/sterowniki) |
-| **Zebra GK420** | Czerwona dioda, nie reaguje | Reset (wyłącz 30 sek.) |
-| **Zebra GC420** | Puste etykiety | Sprawdź orientację ribbonu |
+| **Zebra ZD620** | Błąd MEDIA OUT | Prawidłowo załaduj etykiety |
+| **Zebra ZD611** | Blady wydruk | Zwiększ Darkness lub wyczyść głowicę |
+| **Zebra ZD411** | Offline w Windows | Sprawdź kabel USB i sterowniki |
+| **Zebra ZD230** | Przeskakuje etykiety | Kalibracja sensora gap |
+| **Zebra ZD220** | Blady wydruk, offline | Wyczyść głowicę, sprawdź USB |
 
-### Drukarki przemysłowe
+### Drukarki biurkowe - starsza seria GK/GC/GX/LP
 
 | Model | Typowy problem | Szybkie rozwiązanie |
 |-------|----------------|---------------------|
-| **Zebra ZT410** | Błąd HEAD OPEN | Sprawdź zatrzask głowicy |
-| **Zebra ZT411** | Nie widzi etykiet | Kalibracja manualna w menu |
-| **Zebra ZT230** | RIBBON OUT mimo ribbonu | Wymień czujnik ribbonu |
-| **Zebra ZT231** | Blady wydruk | Zwiększ Darkness w ustawieniach |
-| **Zebra ZT510** | Przesuwa etykiety | Ustaw prawidłowy format |
+| **Zebra GK420d** | Czerwona dioda, nie reaguje | Reset (wyłącz 30 sek.) |
+| **Zebra GK420t** | RIBBON OUT mimo ribbonu | Sprawdź czujnik ribbonu |
+| **Zebra GC420d** | Puste etykiety | Sprawdź orientację ribbonu |
+| **Zebra GC420t** | Blady wydruk | Zwiększ Darkness lub wymień ribbon |
+| **Zebra GX420d** | Nie kalibruje | FEED + CANCEL przy włączaniu |
+| **Zebra GX420t** | Przeskakuje etykiety | Ustaw gap/black mark sensor |
+| **Zebra GT800** | Offline | Zainstaluj sterowniki Windows |
+| **Zebra LP2844** | Nie drukuje | Sprawdź port COM/USB |
+| **Zebra TLP2844** | Zacina ribbon | Wyczyść mechanizm |
+
+### Drukarki przemysłowe - seria ZT
+
+| Model | Typowy problem | Szybkie rozwiązanie |
+|-------|----------------|---------------------|
+| **Zebra ZT411** | Błąd HEAD OPEN | Sprawdź zatrzask głowicy |
+| **Zebra ZT410** | Nie widzi etykiet | Kalibracja manualna w menu |
+| **Zebra ZT421** | Blady wydruk | Zwiększ Darkness/Pressure |
+| **Zebra ZT420** | RIBBON OUT mimo ribbonu | Wymień czujnik ribbonu |
+| **Zebra ZT231** | Przesuwa etykiety | Kalibracja + ustaw format |
+| **Zebra ZT230** | Nie reaguje | Reset do ustawień fabrycznych |
+| **Zebra ZT220** | Błąd PAPER OUT | Prawidłowo załaduj media |
+| **Zebra ZT510** | Drukuje krzywo | Ustaw prowadnice etykiet |
 | **Zebra ZT610** | Nie reaguje na polecenia | Sprawdź połączenie sieciowe |
+| **Zebra ZT620** | Zacina etykiety | Wyczyść wałek i mechanizm |
+| **Zebra ZT111** | Blady wydruk | Użyj właściwego ribbonu |
 
-### Drukarki mobilne
+### Drukarki przemysłowe - starsza seria (105SL, S4M, Xi)
 
 | Model | Typowy problem | Szybkie rozwiązanie |
 |-------|----------------|---------------------|
-| **Zebra ZQ220** | Nie drukuje na zimno | Rozgrzej drukarkę (Head Cold) |
-| **Zebra ZQ320** | Brak połączenia Bluetooth | Sparuj ponownie |
-| **Zebra ZQ520** | Blady wydruk | Użyj odpowiednich etykiet |
-| **Zebra ZQ620** | Zacina papier | Wyczyść mechanizm |
+| **Zebra 105SL Plus** | Błąd RIBBON IN | Sprawdź czujnik ribbonu |
+| **Zebra 105SL** | Nie drukuje | Firmware może wymagać aktualizacji |
+| **Zebra S4M** | Czerwona dioda | Sprawdź pokrywę i ribbon |
+| **Zebra 110Xi4** | Zacina etykiety | Wyczyść wałek dociskowy |
+| **Zebra 140Xi4** | Błąd HEAD | Wymiana głowicy |
+| **Zebra 170Xi4** | Przesuwa media | Kalibracja sensora |
+| **Zebra ZE500** | Nie komunikuje | Sprawdź sieć Ethernet |
+
+### Drukarki mobilne - seria ZQ
+
+| Model | Typowy problem | Szybkie rozwiązanie |
+|-------|----------------|---------------------|
+| **Zebra ZQ630** | Nie drukuje na zimno | Rozgrzej drukarkę (Head Cold) |
+| **Zebra ZQ620** | Brak połączenia Bluetooth | Sparuj ponownie |
+| **Zebra ZQ610** | Blady wydruk | Użyj odpowiednich etykiet |
+| **Zebra ZQ521** | Zacina papier | Wyczyść mechanizm |
+| **Zebra ZQ520** | Bateria nie trzyma | Wymień baterię |
+| **Zebra ZQ510** | Błąd połączenia | Reset Bluetooth |
+| **Zebra ZQ320** | Nie widzi mediów | Prawidłowo załaduj rolkę |
+| **Zebra ZQ310** | Offline | Sprawdź Bluetooth/WiFi |
+| **Zebra ZQ220** | Drukuje krzywo | Ustaw prowadnicę |
+| **Zebra ZQ210** | Blady wydruk na mrozie | Rozgrzej urządzenie |
+| **Zebra ZQ110** | Nie ładuje | Sprawdź złącze ładowania |
+
+### Drukarki mobilne - starsza seria (QL, RW, iMZ)
+
+| Model | Typowy problem | Szybkie rozwiązanie |
+|-------|----------------|---------------------|
+| **Zebra QL420** | Bateria nie trzyma | Wymień baterię |
+| **Zebra QL320** | Nie łączy z hostem | Reset komunikacji |
+| **Zebra QL220** | Blady wydruk | Wymień głowicę |
+| **Zebra RW420** | Zacina papier | Wyczyść mechanizm |
+| **Zebra RW220** | Nie reaguje | Reset do ustawień |
+| **Zebra iMZ320** | Błąd Bluetooth | Aktualizacja firmware |
+| **Zebra iMZ220** | Offline | Sparuj ponownie |
 
 > **Twój model nie jest na liście?** [Zgłoś naprawę](/formularz) - naprawiamy wszystkie modele Zebra!
 
