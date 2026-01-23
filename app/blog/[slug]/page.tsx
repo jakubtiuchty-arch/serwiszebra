@@ -9,7 +9,6 @@ import {
   Clock, 
   Calendar, 
   Tag,
-  Share2,
   BookOpen,
   ArrowRight,
   User,
@@ -19,6 +18,7 @@ import {
   Tablet,
   Package
 } from 'lucide-react'
+import BlogReactions from '@/components/BlogReactions'
 
 // ISR - strony generowane przy pierwszym żądaniu, cache 1h
 export const revalidate = 3600
@@ -358,6 +358,8 @@ export default function BlogPostPage({
                 ))}
               </div>
             </div>
+
+            <BlogReactions slug={post.slug} />
 
             {/* Share */}
             <div className="mt-8 pt-8 border-t border-gray-200">
@@ -1108,4 +1110,3 @@ function extractStepsFromContent(content: string): Array<{
   
   return steps
 }
-

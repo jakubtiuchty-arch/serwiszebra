@@ -9,6 +9,52 @@ export type Json =
 export interface Database {
   public: {
     Tables: {
+      blog_reaction_votes: {
+        Row: {
+          created_at: string
+          fingerprint: string
+          id: string
+          slug: string
+          updated_at: string
+          vote: 'up' | 'down'
+        }
+        Insert: {
+          created_at?: string
+          fingerprint: string
+          id?: string
+          slug: string
+          updated_at?: string
+          vote: 'up' | 'down'
+        }
+        Update: {
+          created_at?: string
+          fingerprint?: string
+          id?: string
+          slug?: string
+          updated_at?: string
+          vote?: 'up' | 'down'
+        }
+      }
+      blog_reactions: {
+        Row: {
+          downvotes: number
+          slug: string
+          updated_at: string
+          upvotes: number
+        }
+        Insert: {
+          downvotes?: number
+          slug: string
+          updated_at?: string
+          upvotes?: number
+        }
+        Update: {
+          downvotes?: number
+          slug?: string
+          updated_at?: string
+          upvotes?: number
+        }
+      }
       repair_requests: {
         Row: {
           id: string
