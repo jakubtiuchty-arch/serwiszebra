@@ -333,12 +333,18 @@ export default function DriversPage() {
       {/* Hero - minimalistyczny */}
       <section className="bg-gradient-to-b from-gray-900 to-gray-800 py-8 sm:py-14 md:py-16">
         <div className="max-w-5xl mx-auto px-3 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-xl sm:text-3xl md:text-4xl font-bold text-white mb-2 sm:mb-4">
+          <h1 className="text-xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-5">
             Sterowniki i oprogramowanie Zebra
           </h1>
-          <p className="text-xs sm:text-base text-gray-300 max-w-3xl mx-auto px-2">
-            Oficjalne sterowniki, firmware i narzędzia do drukarek Zebra (Windows 11/10, Server). Krótka instrukcja instalacji i pomoc zdalna serwisu TAKMA (Wrocław | obsługa całej Polski).
+          <p className="text-sm sm:text-lg text-gray-300 max-w-2xl mx-auto mb-4">
+            Pobierz oficjalne sterowniki ZDesigner do drukarek Zebra dla Windows 10/11.
           </p>
+          <div className="flex flex-wrap justify-center gap-2 sm:gap-3 text-xs sm:text-sm">
+            <span className="px-3 py-1.5 bg-white/10 rounded-full text-gray-300">ZDesigner v10</span>
+            <span className="px-3 py-1.5 bg-white/10 rounded-full text-gray-300">Firmware Link-OS</span>
+            <span className="px-3 py-1.5 bg-white/10 rounded-full text-gray-300">Zebra Setup Utilities</span>
+            <span className="px-3 py-1.5 bg-white/10 rounded-full text-gray-300">ZebraDesigner 3</span>
+          </div>
         </div>
       </section>
 
