@@ -874,7 +874,7 @@ export default function DriversPage() {
             Problemy z instalacją?
           </h2>
           <p className="text-gray-400 text-xs sm:text-sm mb-4 sm:mb-6">
-            Jako autoryzowany serwis Zebra (TAKMA | Wrocław, Polska) pomagamy zdalnie w całym kraju.
+            Jako autoryzowany serwis Zebra pomagamy zdalnie w całej Polsce.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4">
             <Link
