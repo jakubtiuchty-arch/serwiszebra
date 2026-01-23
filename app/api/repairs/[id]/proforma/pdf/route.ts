@@ -21,11 +21,18 @@ export async function GET(
       .from('repair_requests')
       .select('*')
       .eq('id', repairId)
-      .eq('user_id', user.id)
       .single()
 
     if (repairError || !repair) {
       return new NextResponse('Zgłoszenie nie znalezione', { status: 404 })
+    }
+    
+    // Sprawdź uprawnienia: user_id musi się zgadzać LUB email musi się zgadzać (dla gości)
+    const isOwner = repair.user_id === user.id
+    const isEmailMatch = repair.email && user.email === repair.email
+    
+    if (!isOwner && !isEmailMatch) {
+      return new NextResponse('Brak dostępu do tego zgłoszenia', { status: 403 })
     }
 
     const shortId = repair.id.split('-')[0].toUpperCase()
