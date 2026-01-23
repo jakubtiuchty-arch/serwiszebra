@@ -467,43 +467,54 @@ export default function DriversPage() {
 
               {/* HowTo instalacja */}
               <div className="bg-white border border-gray-200 rounded-xl p-4 sm:p-6">
-                <div className="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-4">
-                  <div className="flex-1">
-                    <h3 className="text-sm sm:text-lg font-semibold text-gray-900 mb-2">
-                      Jak zainstalować sterownik Zebra (Windows 11/10)
-                    </h3>
-                    <ol className="space-y-2 text-xs sm:text-sm text-gray-700">
-                      <li className="flex gap-2">
-                        <span className="font-semibold text-gray-900">1.</span>
-                        Pobierz ZDesigner v10 (dla ZPL/Link-OS) lub v5 (dla EPL/CPCL).
-                      </li>
-                      <li className="flex gap-2">
-                        <span className="font-semibold text-gray-900">2.</span>
-                        Rozpakuj ZIP, uruchom instalator jako Administrator.
-                      </li>
-                      <li className="flex gap-2">
-                        <span className="font-semibold text-gray-900">3.</span>
-                        Wybierz model (np. ZD421) i port USB/Sieć w kreatorze.
-                      </li>
-                      <li className="flex gap-2">
-                        <span className="font-semibold text-gray-900">4.</span>
-                        Po instalacji wydrukuj stronę testową i skalibruj etykiety.
-                      </li>
-                    </ol>
+                <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-4">
+                  Jak zainstalować sterownik Zebra (Windows 11/10)
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-4">
+                  <div className="bg-gray-50 rounded-lg p-3 sm:p-4">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="w-6 h-6 rounded-full bg-gray-900 text-white text-xs font-bold flex items-center justify-center">1</span>
+                      <span className="font-medium text-gray-900 text-sm">Pobierz</span>
+                    </div>
+                    <p className="text-xs text-gray-600">ZDesigner v10 (ZPL/Link-OS) lub v5 (EPL/CPCL)</p>
                   </div>
-                  <div className="sm:min-w-[220px] bg-gray-50 border border-gray-200 rounded-lg p-3 sm:p-4">
-                    <p className="text-xs sm:text-sm text-gray-800 font-semibold mb-1">Masz Mac/Linux?</p>
-                    <p className="text-[11px] sm:text-xs text-gray-600">
-                      Użyj Zebra Setup Utilities (druk przez sieć) lub CUPS z driverem raw ZPL. W razie problemów – napisz do nas.
-                    </p>
-                    <Link
-                      href="/blog/drukarka-zebra-nie-drukuje-przyczyny-rozwiazania"
-                      className="inline-flex items-center gap-1 text-[11px] sm:text-xs text-blue-600 hover:text-blue-700 mt-2"
-                    >
-                      Sprawdź poradnik rozwiązywania problemów
-                      <ArrowRight className="w-3 h-3" />
-                    </Link>
+                  <div className="bg-gray-50 rounded-lg p-3 sm:p-4">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="w-6 h-6 rounded-full bg-gray-900 text-white text-xs font-bold flex items-center justify-center">2</span>
+                      <span className="font-medium text-gray-900 text-sm">Zainstaluj</span>
+                    </div>
+                    <p className="text-xs text-gray-600">Rozpakuj ZIP, uruchom jako Administrator</p>
                   </div>
+                  <div className="bg-gray-50 rounded-lg p-3 sm:p-4">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="w-6 h-6 rounded-full bg-gray-900 text-white text-xs font-bold flex items-center justify-center">3</span>
+                      <span className="font-medium text-gray-900 text-sm">Skonfiguruj</span>
+                    </div>
+                    <p className="text-xs text-gray-600">Wybierz model (np. ZD421) i port USB/Sieć</p>
+                  </div>
+                  <div className="bg-gray-50 rounded-lg p-3 sm:p-4">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="w-6 h-6 rounded-full bg-gray-900 text-white text-xs font-bold flex items-center justify-center">4</span>
+                      <span className="font-medium text-gray-900 text-sm">Przetestuj</span>
+                    </div>
+                    <p className="text-xs text-gray-600">Wydrukuj stronę testową i skalibruj etykiety</p>
+                  </div>
+                </div>
+                <div className="flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between bg-amber-50 border border-amber-100 rounded-lg p-3 sm:p-4">
+                  <div className="flex items-start gap-2">
+                    <Info className="w-4 h-4 text-amber-600 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <p className="text-sm font-medium text-amber-900">Masz Mac/Linux?</p>
+                      <p className="text-xs text-amber-700">Użyj Zebra Setup Utilities (druk przez sieć) lub CUPS z driverem raw ZPL.</p>
+                    </div>
+                  </div>
+                  <Link
+                    href="/kontakt"
+                    className="inline-flex items-center gap-1 text-xs font-medium text-amber-700 hover:text-amber-800 whitespace-nowrap"
+                  >
+                    Napisz do nas
+                    <ArrowRight className="w-3 h-3" />
+                  </Link>
                 </div>
               </div>
 
