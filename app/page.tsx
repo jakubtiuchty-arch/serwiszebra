@@ -1623,11 +1623,11 @@ export default function HomePage() {
                 <h4 className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-gray-500 mb-3 sm:mb-5">Serwis</h4>
                 <ul className="space-y-2 sm:space-y-3">
                   {[
+                    { href: '/formularz', label: 'Zgłoś naprawę' },
                     { href: '/drukarki', label: 'Serwis drukarek' },
                     { href: '/terminale', label: 'Serwis terminali' },
                     { href: '/skanery', label: 'Serwis skanerów' },
-                    { href: '/instrukcje', label: 'Instrukcje' },
-                    { href: '/poradniki-wideo', label: 'Poradniki wideo' },
+                    { href: '/tablety', label: 'Serwis tabletów' },
                   ].map((link) => (
                     <li key={link.href}>
                       <Link href={link.href} className="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors duration-200">
