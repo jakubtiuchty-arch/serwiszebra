@@ -93,7 +93,7 @@ export default function Footer() {
               <h4 className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-gray-500 mb-3 sm:mb-5">Serwis</h4>
               <ul className="space-y-2 sm:space-y-3">
                 {[
-                  { href: '/', label: 'Strona główna' },
+                  { href: '/formularz', label: 'Zgłoś naprawę' },
                   { href: '/drukarki', label: 'Serwis drukarek' },
                   { href: '/terminale', label: 'Serwis terminali' },
                   { href: '/skanery', label: 'Serwis skanerów' },
