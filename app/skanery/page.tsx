@@ -199,22 +199,25 @@ export default function SkaneryPage() {
           </div>
         </section>
 
-        {/* Szybka odpowiedź + Kluczowe liczby */}
-        <section className="py-8 sm:py-10 md:py-12">
+        {/* Szybka odpowiedź - dla Featured Snippets i AI */}
+        <section className="py-6 sm:py-8">
           <div className="max-w-6xl mx-auto px-3 sm:px-4">
-            {/* Szybka odpowiedź */}
-            <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 border border-blue-200 rounded-xl p-4 sm:p-5 md:p-6 shadow-sm mb-6">
-              <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
-                {'>'} <strong>Szybka odpowiedź:</strong> Szukasz serwisu skanerów Zebra? TAKMA to autoryzowany serwis z 25-letnim doświadczeniem. 
-                Naprawiamy wszystkie modele: przewodowe (DS2208, DS4608), bezprzewodowe (DS2278, DS3678, DS4678), 
+            <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-blue-50 border-l-4 border-blue-500 rounded-r-xl p-4 sm:p-5 shadow-sm mb-6">
+              <p className="text-sm sm:text-base text-gray-800 leading-relaxed">
+                <strong>Szukasz serwisu skanerów Zebra?</strong> TAKMA to <strong>autoryzowany serwis Zebra</strong> z 25-letnim doświadczeniem. 
+                Naprawiamy <strong>wszystkie modele</strong>: przewodowe (DS2208, DS3608, DS4608), bezprzewodowe (DS2278, DS3678, DS4678), 
                 prezentacyjne (DS9208, DS9908, MP7000), kompaktowe (CS4070, CS6080) i ring skanery (RS5100). 
-                Oferujemy wymianę modułów skanujących, naprawę Bluetooth, wymianę okienek. Odbiór kurierem 24h, 
-                czas naprawy 2-5 dni, 12 miesięcy gwarancji.
+                <strong>Odbiór kurierem w 24h</strong> z całej Polski, naprawa <strong>2-5 dni</strong>, <strong>12 miesięcy gwarancji</strong>. 
+                Wymiana modułu skanującego od 300 zł.
               </p>
             </div>
+          </div>
+        </section>
 
-            {/* Kluczowe liczby */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-5 mb-8">
+        {/* Kluczowe liczby - dla GEO/AEO */}
+        <section className="py-4 sm:py-6 bg-white border-y border-gray-100">
+          <div className="max-w-6xl mx-auto px-3 sm:px-4">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-5">
               <div className="bg-white rounded-xl p-4 shadow-xl border border-gray-100 text-center">
                 <p className="text-2xl sm:text-3xl font-bold text-gray-900">25 lat</p>
                 <p className="text-xs text-gray-500 mt-1">doświadczenia</p>
@@ -232,8 +235,12 @@ export default function SkaneryPage() {
                 <p className="text-xs text-gray-500 mt-1">gwarancji</p>
               </div>
             </div>
+          </div>
+        </section>
             
-            {/* Intro */}
+        {/* Intro */}
+        <section className="py-8 sm:py-10 md:py-12">
+          <div className="max-w-6xl mx-auto px-3 sm:px-4">
             <div className="bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 border border-amber-200 rounded-xl p-4 sm:p-5 md:p-6 shadow-sm">
               <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
                 Specjalizujemy się w <strong>profesjonalnym serwisie skanerów kodów kreskowych Zebra</strong> – 
@@ -420,24 +427,51 @@ export default function SkaneryPage() {
           </section>
         )}
 
-        {/* Przydatne zasoby */}
-        <section className="py-8 sm:py-10 bg-gray-50">
+        {/* Przydatne zasoby - linki wewnętrzne */}
+        <section className="py-10 sm:py-12 bg-gradient-to-br from-gray-50 to-gray-100">
           <div className="max-w-6xl mx-auto px-3 sm:px-4">
-            <h2 className="text-xl sm:text-2xl font-semibold text-gray-900 mb-5 text-center">
+            <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-6 sm:mb-8 text-center">
               Przydatne zasoby
             </h2>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
-              <Link href="/instrukcje" className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:shadow-lg hover:border-blue-200 transition-all text-center group">
-                <div className="text-2xl mb-2">📖</div>
-                <span className="text-sm font-medium text-gray-900 group-hover:text-blue-600 transition-colors">Instrukcje obsługi</span>
+
+            <div className="grid sm:grid-cols-3 gap-4">
+              <Link
+                href="/instrukcje"
+                className="bg-white rounded-xl p-5 shadow-sm border border-gray-100 hover:shadow-lg hover:border-gray-300 transition-all group text-center"
+              >
+                <div className="w-12 h-12 bg-gray-50 rounded-lg flex items-center justify-center mx-auto mb-3 border border-gray-200">
+                  <CheckCircle2 className="w-6 h-6 text-gray-600" />
+                </div>
+                <h3 className="font-medium text-gray-900 group-hover:text-gray-700 transition-colors">
+                  Instrukcje po polsku
+                </h3>
+                <p className="text-xs text-gray-500 mt-1">DS2208, DS3678, LI2208...</p>
               </Link>
-              <Link href="/cennik" className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:shadow-lg hover:border-blue-200 transition-all text-center group">
-                <div className="text-2xl mb-2">💰</div>
-                <span className="text-sm font-medium text-gray-900 group-hover:text-blue-600 transition-colors">Cennik napraw</span>
+
+              <Link
+                href="/cennik"
+                className="bg-white rounded-xl p-5 shadow-sm border border-gray-100 hover:shadow-lg hover:border-gray-300 transition-all group text-center"
+              >
+                <div className="w-12 h-12 bg-gray-50 rounded-lg flex items-center justify-center mx-auto mb-3 border border-gray-200">
+                  <Star className="w-6 h-6 text-gray-600" />
+                </div>
+                <h3 className="font-medium text-gray-900 group-hover:text-gray-700 transition-colors">
+                  Cennik napraw
+                </h3>
+                <p className="text-xs text-gray-500 mt-1">Moduły, okienka, Bluetooth</p>
               </Link>
-              <Link href="/blog" className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:shadow-lg hover:border-blue-200 transition-all text-center group">
-                <div className="text-2xl mb-2">📝</div>
-                <span className="text-sm font-medium text-gray-900 group-hover:text-blue-600 transition-colors">Poradniki</span>
+
+              <Link
+                href="/blog"
+                className="bg-white rounded-xl p-5 shadow-sm border border-gray-100 hover:shadow-lg hover:border-gray-300 transition-all group text-center"
+              >
+                <div className="w-12 h-12 bg-gray-50 rounded-lg flex items-center justify-center mx-auto mb-3 border border-gray-200">
+                  <AlertTriangle className="w-6 h-6 text-gray-600" />
+                </div>
+                <h3 className="font-medium text-gray-900 group-hover:text-gray-700 transition-colors">
+                  Poradniki
+                </h3>
+                <p className="text-xs text-gray-500 mt-1">Rozwiązywanie problemów</p>
               </Link>
             </div>
           </div>
