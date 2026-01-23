@@ -23,23 +23,68 @@ export const metadata: Metadata = {
   title: 'Serwis Skanerów Zebra – Naprawa DS, LI, RS | Odbiór 24h',
   description: 'Profesjonalny serwis skanerów kodów kreskowych Zebra: DS2208, DS3678, DS4608, LI2208. ✓ Naprawa modułów ✓ Wymiana okienek ✓ Problemy z parowaniem ✓ 12 mies. gwarancji ✓ Odbiór kurierem 24h.',
   keywords: [
+    // Główne frazy
     'serwis skanerów zebra',
+    'serwis skanerów zebra polska',
+    'profesjonalny serwis skanerów zebra',
+    'autoryzowany serwis skanerów zebra',
     'naprawa skanerów kodów kreskowych',
-    'naprawa ds2208',
-    'serwis ds3678',
+    'naprawa skanerów zebra',
+    
+    // Seria DS - przewodowe
+    'serwis ds2208', 'naprawa ds2208', 'zebra ds2208 nie skanuje',
+    'serwis ds3608', 'naprawa ds3608', 'zebra ds3608 serwis',
+    'serwis ds4608', 'naprawa ds4608', 'zebra ds4608 nie działa',
+    'serwis ds8108', 'naprawa ds8108',
+    'serwis ds8208', 'naprawa ds8208', 'zebra ds8208 naprawa',
+    
+    // Seria DS - bezprzewodowe
+    'serwis ds2278', 'naprawa ds2278', 'zebra ds2278 parowanie',
+    'serwis ds3678', 'naprawa ds3678', 'zebra ds3678 nie paruje',
+    'serwis ds4678', 'naprawa ds4678', 'zebra ds4678 bluetooth',
+    'serwis ds8178', 'naprawa ds8178',
+    
+    // Seria DS - prezentacyjne
+    'serwis ds9208', 'naprawa ds9208',
+    'serwis ds9308', 'naprawa ds9308',
+    'serwis ds9908', 'naprawa ds9908',
+    'serwis mp7000', 'naprawa mp7000',
+    
+    // Seria LI/LS - liniowe
+    'serwis li2208', 'naprawa li2208', 'zebra li2208 nie skanuje',
+    'serwis ls2208', 'naprawa ls2208', 'zebra ls2208 naprawa',
+    'serwis li4278', 'naprawa li4278', 'zebra li4278 parowanie',
+    
+    // Kompaktowe / Ring
+    'serwis cs4070', 'naprawa cs4070',
+    'serwis cs6080', 'naprawa cs6080',
+    'serwis rs5100', 'naprawa rs5100', 'ring skaner zebra',
+    'serwis rs6000', 'naprawa rs6000',
+    
+    // Usługi
     'naprawa skanera bluetooth zebra',
     'parowanie skanera zebra',
-    'naprawa li2208',
-    'serwis skanerów przemysłowych',
+    'skaner zebra nie paruje',
+    'skaner zebra nie skanuje',
+    'wymiana okienka skanera zebra',
+    'naprawa modułu skanującego',
+    'reset skanera zebra',
+    
+    // Long tail - pytania
+    'ile kosztuje naprawa skanera zebra',
+    'gdzie naprawić skaner zebra',
+    'skaner zebra świeci ale nie skanuje',
+    'jak sparować skaner zebra ze stacją',
+    
     // Miasta
     'skanery zebra wrocław', 'serwis skanerów zebra wrocław', 'naprawa skanerów zebra wrocław',
     'skanery zebra warszawa', 'serwis skanerów zebra warszawa', 'naprawa skanerów zebra warszawa',
     'skanery zebra kraków', 'serwis skanerów zebra kraków', 'naprawa skanerów zebra kraków',
-    'skanery zebra poznań', 'serwis skanerów zebra poznań',
+    'skanery zebra poznań', 'serwis skanerów zebra poznań', 'naprawa skanerów zebra poznań',
     'skanery zebra gdańsk', 'serwis skanerów zebra gdańsk',
     'skanery zebra katowice', 'serwis skanerów zebra katowice',
     'skanery zebra łódź', 'serwis skanerów zebra łódź',
-    'skanery zebra zielona góra', 'serwis skanerów zebra zielona góra',
+    'skanery zebra szczecin', 'serwis skanerów zebra szczecin',
   ],
   openGraph: {
     title: 'Serwis Skanerów Zebra – Naprawa DS, LI, RS',
@@ -58,23 +103,51 @@ const scannerArticles = blogPosts
 const faq = [
   {
     question: 'Ile kosztuje naprawa skanera Zebra?',
-    answer: 'Koszt naprawy skanera zależy od rodzaju usterki. Naprawa modułu skanującego to 300-800 zł, wymiana okna skanera 100-300 zł, naprawa przycisku/spustu 200-400 zł. Diagnostyka bezpłatna przy akceptacji naprawy.'
+    answer: 'Koszt naprawy skanera zależy od rodzaju usterki. Naprawa modułu skanującego to 300-800 zł, wymiana okna skanera 100-300 zł, naprawa przycisku/spustu 200-400 zł, naprawa Bluetooth 250-500 zł. Diagnostyka bezpłatna przy akceptacji naprawy.'
   },
   {
     question: 'Czy naprawiacie skanery Bluetooth Zebra?',
-    answer: 'Tak! Serwisujemy wszystkie skanery bezprzewodowe Zebra: DS2278, DS3678, DS4678, DS8178, LI4278. Naprawiamy problemy z parowaniem, wymianą baterii i modułem Bluetooth.'
+    answer: 'Tak! Serwisujemy wszystkie skanery bezprzewodowe Zebra: DS2278, DS3678, DS4678, DS8178, LI4278, CS4070, CS6080. Naprawiamy problemy z parowaniem, wymianą baterii i modułem Bluetooth. Mamy też stacje dokujące na wymianę.'
   },
   {
-    question: 'Mój skaner nie paruje się ze stacją - czy to naprawicie?',
-    answer: 'Tak, problemy z parowaniem to częsta usterka. Może być związana z modułem Bluetooth, stacją dokującą lub oprogramowaniem. Zdiagnozujemy przyczynę i naprawimy. Często pomaga też reset fabryczny.'
+    question: 'Mój skaner Zebra DS3678 nie paruje się ze stacją - co robić?',
+    answer: 'Skaner DS3678 nie paruje się najczęściej z powodu: 1) Pełnego bufora - zresetuj skaner (zeskanuj kod SET DEFAULTS), 2) Uszkodzonej stacji dokującej - wymień stację, 3) Problemu z modułem Bluetooth - wymaga naprawy serwisowej. Spróbuj najpierw resetu fabrycznego - pomaga w 70% przypadków.'
   },
   {
     question: 'Jakie skanery Zebra serwisujecie?',
-    answer: 'Serwisujemy wszystkie skanery Zebra: przewodowe (DS2208, DS3608, DS4608, DS8108), bezprzewodowe (DS2278, DS3678, DS4678), prezentacyjne (DS9208, DS9908), kompaktowe (CS4070, CS6080) oraz starsze modele (LI2208, LS2208).'
+    answer: 'Serwisujemy WSZYSTKIE skanery Zebra: przewodowe (DS2208, DS3608, DS4608, DS8108, DS8208), bezprzewodowe (DS2278, DS3678, DS4678, DS8178), prezentacyjne (DS9208, DS9308, DS9908, MP7000), kompaktowe (CS4070, CS6080), ring skanery (RS5100, RS6000) oraz starsze modele liniowe (LI2208, LS2208, LI4278). Ponad 25 lat doświadczenia!'
   },
   {
-    question: 'Skaner świeci ale nie skanuje - co może być przyczyną?',
-    answer: 'Jeśli skaner świeci ale nie odczytuje kodów, może to być: zabrudzenie okienka, uszkodzony moduł skanujący, problem z dekoderem lub wyłączona symbologia. Zacznij od wyczyszczenia okienka alkoholem izopropylowym.'
+    question: 'Skaner Zebra świeci ale nie skanuje - co może być przyczyną?',
+    answer: 'Jeśli skaner świeci ale nie odczytuje kodów, może to być: 1) Zabrudzenie okienka - wyczyść alkoholem IPA, 2) Uszkodzony moduł skanujący SE47xx - wymaga wymiany (300-800 zł), 3) Wyłączona symbologia 2D - włącz przez 123Scan lub kody programujące, 4) Problem z dekoderem. W 40% przypadków pomaga czyszczenie okienka.'
+  },
+  {
+    question: 'Skaner Zebra DS2208 nie czyta kodów QR - jak naprawić?',
+    answer: 'Zebra DS2208 nie czyta QR najczęściej dlatego, że symbologia QR jest domyślnie wyłączona. Rozwiązanie: 1) Pobierz 123Scan i włącz QR/DataMatrix, lub 2) Zeskanuj kod "Enable QR Code" z Product Reference Guide. Jeśli nadal nie działa - moduł skanujący może być uszkodzony (naprawa 300-500 zł).'
+  },
+  {
+    question: 'Ile kosztuje wymiana okienka w skanerze Zebra?',
+    answer: 'Wymiana okienka skanera Zebra kosztuje 100-300 zł w zależności od modelu. Dla DS2208/DS2278 to ok. 100-150 zł, dla DS3608/DS3678 ok. 150-200 zł, dla DS4608/DS4678 ok. 200-300 zł. Cena obejmuje oryginalne okienko i robociznę.'
+  },
+  {
+    question: 'Czy naprawiacie skanery prezentacyjne Zebra DS9908?',
+    answer: 'Tak! Serwisujemy skanery prezentacyjne Zebra: DS9208, DS9308, DS9908, MP7000. Najczęstsze naprawy to: wymiana okienka, naprawa modułu skanującego, czyszczenie optyki, naprawa kabla USB. Odbiór kurierem z całej Polski.'
+  },
+  {
+    question: 'Skaner Zebra LI2208 przestał działać - gdzie naprawić?',
+    answer: 'Skaner liniowy Zebra LI2208 naprawiamy w naszym autoryzowanym serwisie. Najczęstsze usterki: uszkodzony kabel (wymiana 100-200 zł), zużyty laser (wymiana modułu 200-400 zł), problem z dekoderem. LI2208 to starszy model, ale nadal mamy do niego części zamienne.'
+  },
+  {
+    question: 'Jak zresetować skaner Zebra do ustawień fabrycznych?',
+    answer: 'Aby zresetować skaner Zebra: 1) Znajdź kod "SET DEFAULTS" lub "Factory Reset" w Quick Start Guide (w pudełku) lub Product Reference Guide (PDF na zebra.com), 2) Zeskanuj kod - skaner wyda serię sygnałów potwierdzających. Można też użyć 123Scan: Actions → Set Defaults. Reset rozwiązuje większość problemów z parowaniem.'
+  },
+  {
+    question: 'Czy mogę zamówić odbiór skanera kurierem?',
+    answer: 'Tak! Zamawiamy kuriera DPD, który odbierze skaner bezpłatnie z Twojej firmy w ciągu 24h. Obsługujemy całą Polskę. Po naprawie odsyłamy skaner kurierem na nasz koszt. Wystarczy wypełnić formularz zgłoszeniowy na stronie.'
+  },
+  {
+    question: 'Czy serwisujecie skanery Zebra na gwarancji?',
+    answer: 'Tak! Jako autoryzowany serwis Zebra obsługujemy naprawy gwarancyjne wszystkich modeli skanerów. Skontaktuj się z nami - sprawdzimy status gwarancji i przeprowadzimy naprawę. Telefon: +48 601 619 898.'
   }
 ]
 
@@ -82,14 +155,57 @@ const serviceSchema = {
   '@context': 'https://schema.org',
   '@type': 'Service',
   name: 'Serwis Skanerów Zebra',
-  description: 'Profesjonalny serwis i naprawa skanerów kodów kreskowych Zebra: DS, LI, parowanie, wymiana modułów.',
+  description: 'Profesjonalny serwis i naprawa skanerów kodów kreskowych Zebra: DS2208, DS3678, DS4608, LI2208. Wymiana modułów skanujących, okienek, naprawa Bluetooth, parowanie. 25 lat doświadczenia, 12 miesięcy gwarancji.',
   provider: {
     '@type': 'LocalBusiness',
-    name: 'TAKMA - Serwis Zebra',
-    telephone: '+48601619898'
+    name: 'TAKMA - Autoryzowany Serwis Zebra',
+    telephone: '+48601619898',
+    email: 'serwis@takma.com.pl',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'Poświęcka 1a',
+      addressLocality: 'Wrocław',
+      postalCode: '51-128',
+      addressCountry: 'PL'
+    }
   },
-  areaServed: 'Polska',
-  serviceType: ['Naprawa skanerów', 'Serwis RS', 'Wymiana modułów']
+  areaServed: {
+    '@type': 'Country',
+    name: 'Polska'
+  },
+  serviceType: [
+    'Naprawa skanerów Zebra',
+    'Wymiana modułu skanującego',
+    'Naprawa Bluetooth skanera',
+    'Wymiana okienka skanera',
+    'Parowanie skanerów bezprzewodowych',
+    'Serwis skanerów prezentacyjnych',
+    'Naprawa ring skanerów'
+  ],
+  offers: {
+    '@type': 'Offer',
+    priceRange: '89-800 PLN',
+    priceCurrency: 'PLN'
+  }
+}
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Strona główna',
+      item: 'https://www.serwis-zebry.pl'
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Serwis skanerów Zebra',
+      item: 'https://www.serwis-zebry.pl/skanery'
+    }
+  ]
 }
 
 const faqSchema = {
@@ -107,6 +223,7 @@ export default function SkaneryPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
       <Header currentPage="other" />
       
@@ -164,15 +281,49 @@ export default function SkaneryPage() {
           </div>
         </section>
 
-        {/* Intro */}
+        {/* Szybka odpowiedź - dla AI */}
         <section className="py-8 sm:py-10 md:py-12">
           <div className="max-w-6xl mx-auto px-3 sm:px-4">
-            <div className="bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 border border-amber-200 rounded-xl p-4 sm:p-5 md:p-6 shadow-sm mb-6">
+            {/* Szybka odpowiedź */}
+            <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 border border-blue-200 rounded-xl p-4 sm:p-5 md:p-6 shadow-sm mb-6">
+              <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
+                {'>'} <strong>Szybka odpowiedź:</strong> Szukasz serwisu skanerów Zebra? TAKMA to autoryzowany serwis z 25-letnim doświadczeniem. 
+                Naprawiamy wszystkie modele: przewodowe (DS2208, DS4608, DS8108), bezprzewodowe (DS2278, DS3678, DS4678), 
+                prezentacyjne (DS9208, DS9908, MP7000), kompaktowe (CS4070, CS6080) i ring skanery (RS5100, RS6000). 
+                Oferujemy wymianę modułów skanujących, naprawę Bluetooth, wymianę okienek. Odbiór kurierem 24h, 
+                standardowy czas naprawy 2-5 dni, na każdą naprawę udzielamy 12 miesięcy gwarancji.
+              </p>
+            </div>
+
+            {/* Kluczowe liczby */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-5 mb-8">
+              <div className="bg-white rounded-xl p-4 shadow-xl border border-gray-100 text-center">
+                <p className="text-2xl sm:text-3xl font-bold text-gray-900">25 lat</p>
+                <p className="text-xs text-gray-500 mt-1">doświadczenia</p>
+              </div>
+              <div className="bg-white rounded-xl p-4 shadow-xl border border-gray-100 text-center">
+                <p className="text-2xl sm:text-3xl font-bold text-gray-900">5000+</p>
+                <p className="text-xs text-gray-500 mt-1">naprawionych skanerów</p>
+              </div>
+              <div className="bg-white rounded-xl p-4 shadow-xl border border-gray-100 text-center">
+                <p className="text-2xl sm:text-3xl font-bold text-gray-900">2-5 dni</p>
+                <p className="text-xs text-gray-500 mt-1">czas naprawy</p>
+              </div>
+              <div className="bg-white rounded-xl p-4 shadow-xl border border-gray-100 text-center">
+                <p className="text-2xl sm:text-3xl font-bold text-gray-900">12 mies.</p>
+                <p className="text-xs text-gray-500 mt-1">gwarancji</p>
+              </div>
+            </div>
+            
+            {/* Intro box */}
+            <div className="bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 border border-amber-200 rounded-xl p-4 sm:p-5 md:p-6 shadow-sm">
               <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
                 Specjalizujemy się w <strong>profesjonalnym serwisie skanerów kodów kreskowych Zebra</strong> – 
-                zarówno modeli przewodowych (DS2208, DS3608, DS4608), jak i bezprzewodowych z Bluetooth 
-                (DS2278, DS3678, DS4678). Jako <strong>autoryzowany partner Zebra Technologies</strong> 
-                mamy dostęp do oryginalnych części zamiennych. <strong className="text-blue-900">25 lat doświadczenia.</strong>
+                zarówno modeli przewodowych (DS2208, DS3608, DS4608, DS8108, DS8208), jak i bezprzewodowych z Bluetooth 
+                (DS2278, DS3678, DS4678, DS8178). Naprawiamy także skanery prezentacyjne (DS9208, DS9308, DS9908, MP7000), 
+                kompaktowe (CS4070, CS6080) oraz ring skanery do terminali (RS5100, RS6000). 
+                Jako <strong>autoryzowany partner Zebra Technologies</strong> mamy dostęp do oryginalnych części zamiennych 
+                i modułów skanujących SE47xx. <strong className="text-blue-900">25 lat doświadczenia.</strong>
               </p>
             </div>
           </div>
@@ -195,15 +346,19 @@ export default function SkaneryPage() {
                 <ul className="space-y-1.5 text-gray-600 text-xs">
                   <li className="flex items-start gap-1.5">
                     <CheckCircle2 className="w-3.5 h-3.5 text-green-600 flex-shrink-0 mt-0.5" />
-                    <span>DS2208 / DS3608</span>
+                    <span>DS2208 / DS3608 / DS4608</span>
                   </li>
                   <li className="flex items-start gap-1.5">
                     <CheckCircle2 className="w-3.5 h-3.5 text-green-600 flex-shrink-0 mt-0.5" />
-                    <span>DS4608 / DS8108</span>
+                    <span>DS8108 / DS8208</span>
                   </li>
                   <li className="flex items-start gap-1.5">
                     <CheckCircle2 className="w-3.5 h-3.5 text-green-600 flex-shrink-0 mt-0.5" />
-                    <span>LI2208 / LS2208</span>
+                    <span>LI2208 / LS2208 / LS1203</span>
+                  </li>
+                  <li className="flex items-start gap-1.5">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-green-600 flex-shrink-0 mt-0.5" />
+                    <span>DS6878 / DS6708</span>
                   </li>
                 </ul>
               </div>
@@ -217,15 +372,19 @@ export default function SkaneryPage() {
                 <ul className="space-y-1.5 text-gray-600 text-xs">
                   <li className="flex items-start gap-1.5">
                     <CheckCircle2 className="w-3.5 h-3.5 text-green-600 flex-shrink-0 mt-0.5" />
-                    <span>DS2278 / DS3678</span>
+                    <span>DS2278 / DS3678 / DS4678</span>
                   </li>
                   <li className="flex items-start gap-1.5">
                     <CheckCircle2 className="w-3.5 h-3.5 text-green-600 flex-shrink-0 mt-0.5" />
-                    <span>DS4678 / DS8178</span>
+                    <span>DS8178 / LI4278</span>
                   </li>
                   <li className="flex items-start gap-1.5">
                     <CheckCircle2 className="w-3.5 h-3.5 text-green-600 flex-shrink-0 mt-0.5" />
-                    <span>LI4278</span>
+                    <span>MT2070 / MT2090</span>
+                  </li>
+                  <li className="flex items-start gap-1.5">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-green-600 flex-shrink-0 mt-0.5" />
+                    <span>Stacje dokujące</span>
                   </li>
                 </ul>
               </div>
@@ -239,25 +398,29 @@ export default function SkaneryPage() {
                 <ul className="space-y-1.5 text-gray-600 text-xs">
                   <li className="flex items-start gap-1.5">
                     <CheckCircle2 className="w-3.5 h-3.5 text-green-600 flex-shrink-0 mt-0.5" />
-                    <span>DS9208 / DS9308</span>
+                    <span>DS9208 / DS9308 / DS9908</span>
                   </li>
                   <li className="flex items-start gap-1.5">
                     <CheckCircle2 className="w-3.5 h-3.5 text-green-600 flex-shrink-0 mt-0.5" />
-                    <span>DS9908</span>
+                    <span>MP7000 / MP7001</span>
                   </li>
                   <li className="flex items-start gap-1.5">
                     <CheckCircle2 className="w-3.5 h-3.5 text-green-600 flex-shrink-0 mt-0.5" />
-                    <span>MP7000</span>
+                    <span>SP72 / SP7208</span>
+                  </li>
+                  <li className="flex items-start gap-1.5">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-green-600 flex-shrink-0 mt-0.5" />
+                    <span>LS9208 / LS9203</span>
                   </li>
                 </ul>
               </div>
 
-              {/* Kompaktowe */}
+              {/* Kompaktowe i Ring */}
               <div className="bg-white rounded-xl p-5 shadow-xl border border-gray-100 hover:shadow-2xl transition-shadow">
                 <div className="w-14 h-14 bg-gray-50 rounded-xl flex items-center justify-center mb-3 border border-gray-100">
                   <Pocket className="w-7 h-7 text-gray-500" strokeWidth={1.5} />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Kompaktowe</h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Kompaktowe i Ring</h3>
                 <ul className="space-y-1.5 text-gray-600 text-xs">
                   <li className="flex items-start gap-1.5">
                     <CheckCircle2 className="w-3.5 h-3.5 text-green-600 flex-shrink-0 mt-0.5" />
@@ -265,15 +428,43 @@ export default function SkaneryPage() {
                   </li>
                   <li className="flex items-start gap-1.5">
                     <CheckCircle2 className="w-3.5 h-3.5 text-green-600 flex-shrink-0 mt-0.5" />
-                    <span>RS5100 / RS6100</span>
+                    <span>RS5100 / RS6100 / RS6000</span>
                   </li>
                   <li className="flex items-start gap-1.5">
                     <CheckCircle2 className="w-3.5 h-3.5 text-green-600 flex-shrink-0 mt-0.5" />
-                    <span>Ring skanery</span>
+                    <span>RS507 / RS419</span>
+                  </li>
+                  <li className="flex items-start gap-1.5">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-green-600 flex-shrink-0 mt-0.5" />
+                    <span>Miniscan MS954 / MS4407</span>
                   </li>
                 </ul>
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* Przydatne zasoby */}
+        <section className="py-8 sm:py-10 bg-gray-50">
+          <div className="max-w-6xl mx-auto px-3 sm:px-4">
+            <h2 className="text-xl sm:text-2xl font-semibold text-gray-900 mb-5 text-center">
+              Przydatne zasoby
+            </h2>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
+              <Link href="/instrukcje" className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:shadow-lg hover:border-blue-200 transition-all text-center group">
+                <div className="text-2xl mb-2">📖</div>
+                <span className="text-sm font-medium text-gray-900 group-hover:text-blue-600 transition-colors">Instrukcje obsługi</span>
+              </Link>
+              <Link href="/cennik" className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:shadow-lg hover:border-blue-200 transition-all text-center group">
+                <div className="text-2xl mb-2">💰</div>
+                <span className="text-sm font-medium text-gray-900 group-hover:text-blue-600 transition-colors">Cennik napraw</span>
+              </Link>
+              <Link href="/blog" className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:shadow-lg hover:border-blue-200 transition-all text-center group">
+                <div className="text-2xl mb-2">📝</div>
+                <span className="text-sm font-medium text-gray-900 group-hover:text-blue-600 transition-colors">Poradniki</span>
+              </Link>
+            </div>
+          </div>
           </div>
         </section>
 
@@ -287,7 +478,7 @@ export default function SkaneryPage() {
               Dokładna wycena po bezpłatnej diagnostyce
             </p>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mb-4">
               <div className="bg-white rounded-xl p-4 border border-gray-100 shadow-lg text-center">
                 <p className="text-xs text-gray-500 mb-1">Moduł skanujący</p>
                 <p className="text-lg font-semibold text-gray-900">od 300 zł</p>
@@ -297,8 +488,26 @@ export default function SkaneryPage() {
                 <p className="text-lg font-semibold text-gray-900">od 100 zł</p>
               </div>
               <div className="bg-white rounded-xl p-4 border border-gray-100 shadow-lg text-center">
+                <p className="text-xs text-gray-500 mb-1">Naprawa Bluetooth</p>
+                <p className="text-lg font-semibold text-gray-900">od 250 zł</p>
+              </div>
+              <div className="bg-white rounded-xl p-4 border border-gray-100 shadow-lg text-center">
                 <p className="text-xs text-gray-500 mb-1">Przycisk/spust</p>
                 <p className="text-lg font-semibold text-gray-900">od 200 zł</p>
+              </div>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
+              <div className="bg-white rounded-xl p-4 border border-gray-100 shadow-lg text-center">
+                <p className="text-xs text-gray-500 mb-1">Wymiana kabla</p>
+                <p className="text-lg font-semibold text-gray-900">od 100 zł</p>
+              </div>
+              <div className="bg-white rounded-xl p-4 border border-gray-100 shadow-lg text-center">
+                <p className="text-xs text-gray-500 mb-1">Stacja dokująca</p>
+                <p className="text-lg font-semibold text-gray-900">od 200 zł</p>
+              </div>
+              <div className="bg-white rounded-xl p-4 border border-gray-100 shadow-lg text-center">
+                <p className="text-xs text-gray-500 mb-1">Bateria</p>
+                <p className="text-lg font-semibold text-gray-900">od 150 zł</p>
               </div>
               <div className="bg-white rounded-xl p-4 border border-gray-100 shadow-lg text-center">
                 <p className="text-xs text-gray-500 mb-1">Czyszczenie</p>
