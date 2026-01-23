@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     // Windows versions
     'sterowniki zebra windows 11',
     'zebra driver windows 10',
-    'zebra sterowniki windows 7',
+    'sterowniki zebra windows 7',
     // Long tail - instalacja
     'jak zainstalować sterowniki zebra',
     'jak zainstalować drukarkę zebra windows 11',
@@ -68,7 +68,7 @@ export const metadata: Metadata = {
     'pobierz sterownik zebra zd420 za darmo',
     'skąd pobrać sterowniki do drukarki zebra',
     'oficjalne sterowniki zebra download',
-    'najnowsze sterowniki zebra 2024',
+    'najnowsze sterowniki zebra 2026',
     'zebra zdesigner driver download free',
     // Zebra Designer - oprogramowanie
     'zebra designer 3 pobierz',
@@ -157,6 +157,12 @@ export const metadata: Metadata = {
     'sterowniki zebra zd621 download',
     'zebra tlp 2844 driver windows 10',
     'zebra lp2824 plus sterowniki',
+    // GEO - miasta
+    'sterowniki zebra wrocław',
+    'sterowniki zebra warszawa',
+    'sterowniki zebra kraków',
+    'sterowniki zebra poznań',
+    'serwis zebra wrocław sterowniki',
   ],
   alternates: {
     canonical: 'https://www.serwis-zebry.pl/sterowniki',
@@ -166,12 +172,260 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'Sterowniki Zebra - Pobierz driver do drukarki',
-    description: 'Oficjalne sterowniki Zebra: ZD420, ZD421, ZD620, ZT410, GK420, ZD220. Download dla Windows 10/11, Mac, Linux.',
+    title: 'Sterowniki Zebra - Pobierz driver do drukarki [2026]',
+    description: 'Oficjalne sterowniki Zebra: ZD420, ZD421, ZD620, ZT410, GK420, ZD220. ZDesigner v10/v5 dla Windows 10/11. Bezpłatna pomoc zdalna w instalacji.',
     url: 'https://www.serwis-zebry.pl/sterowniki',
+    siteName: 'TAKMA - Autoryzowany Serwis Zebra',
+    locale: 'pl_PL',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Sterowniki Zebra - Pobierz driver do drukarki [2026]',
+    description: 'Oficjalne sterowniki Zebra: ZDesigner v10/v5 dla Windows 10/11. Bezpłatna pomoc zdalna w instalacji.',
   },
 }
 
+// Schema.org structured data
+const schemaData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    // BreadcrumbList
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Strona główna',
+          item: 'https://www.serwis-zebry.pl'
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Sterowniki Zebra',
+          item: 'https://www.serwis-zebry.pl/sterowniki'
+        }
+      ]
+    },
+    // SoftwareApplication - ZDesigner v10
+    {
+      '@type': 'SoftwareApplication',
+      name: 'ZDesigner Windows Driver v10',
+      applicationCategory: 'DriverApplication',
+      operatingSystem: 'Windows 10, Windows 11, Windows Server 2019/2022/2025',
+      softwareVersion: '10.6.26.28275',
+      downloadUrl: 'https://www.serwis-zebry.pl/api/downloads/zdesigner-v10',
+      fileSize: '45MB',
+      offers: {
+        '@type': 'Offer',
+        price: '0',
+        priceCurrency: 'PLN'
+      },
+      publisher: {
+        '@type': 'Organization',
+        name: 'Zebra Technologies'
+      },
+      description: 'Główny sterownik do drukarek Zebra z językiem ZPL (Link-OS). Obsługuje ponad 120 modeli drukarek biurkowych, przemysłowych i mobilnych.'
+    },
+    // SoftwareApplication - ZDesigner v5
+    {
+      '@type': 'SoftwareApplication',
+      name: 'ZDesigner Windows Driver v5 (Legacy)',
+      applicationCategory: 'DriverApplication',
+      operatingSystem: 'Windows 7, Windows 8, Windows 10, Windows 11',
+      softwareVersion: '5.1.17.7415',
+      downloadUrl: 'https://www.serwis-zebry.pl/api/downloads/zdesigner-v5',
+      fileSize: '30MB',
+      offers: {
+        '@type': 'Offer',
+        price: '0',
+        priceCurrency: 'PLN'
+      },
+      publisher: {
+        '@type': 'Organization',
+        name: 'Zebra Technologies'
+      },
+      description: 'Sterownik dla starszych drukarek Zebra używających EPL i CPCL (LP2844, TLP2844, GK420d).'
+    },
+    // HowTo - instalacja sterownika
+    {
+      '@type': 'HowTo',
+      name: 'Jak zainstalować sterownik Zebra w Windows 11/10',
+      description: 'Instrukcja krok po kroku instalacji oficjalnego sterownika ZDesigner do drukarek Zebra w systemie Windows.',
+      totalTime: 'PT10M',
+      supply: [
+        {
+          '@type': 'HowToSupply',
+          name: 'Drukarka Zebra'
+        },
+        {
+          '@type': 'HowToSupply',
+          name: 'Kabel USB lub połączenie sieciowe'
+        }
+      ],
+      tool: [
+        {
+          '@type': 'HowToTool',
+          name: 'Sterownik ZDesigner v10 lub v5'
+        }
+      ],
+      step: [
+        {
+          '@type': 'HowToStep',
+          position: 1,
+          name: 'Pobierz sterownik',
+          text: 'Pobierz ZDesigner v10 (dla ZPL/Link-OS) lub v5 (dla EPL/CPCL) z tej strony.'
+        },
+        {
+          '@type': 'HowToStep',
+          position: 2,
+          name: 'Uruchom instalator',
+          text: 'Rozpakuj pobrany plik ZIP i uruchom instalator jako Administrator.'
+        },
+        {
+          '@type': 'HowToStep',
+          position: 3,
+          name: 'Wybierz model drukarki',
+          text: 'W kreatorze instalacji wybierz model drukarki (np. ZD421) i port USB lub sieć.'
+        },
+        {
+          '@type': 'HowToStep',
+          position: 4,
+          name: 'Zakończ instalację',
+          text: 'Po instalacji wydrukuj stronę testową i skalibruj etykiety.'
+        }
+      ]
+    },
+    // FAQPage
+    {
+      '@type': 'FAQPage',
+      mainEntity: [
+        {
+          '@type': 'Question',
+          name: 'Jak zainstalować sterownik Zebra w Windows 11?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Pobierz ZDesigner v10 z tej strony, rozpakuj ZIP i uruchom PrnInst.exe jako Administrator. Wybierz model drukarki i port USB/sieć. Po instalacji wydrukuj stronę testową i skalibruj etykiety.'
+          }
+        },
+        {
+          '@type': 'Question',
+          name: 'Który sterownik Zebra wybrać - v10 czy v5?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'ZDesigner v10 obsługuje nowoczesne drukarki z językiem ZPL/Link-OS (ZD421, ZT410, ZQ630). ZDesigner v5 jest dla starszych drukarek używających EPL/CPCL (LP2844, TLP2844, GK420d). Sprawdź język drukarki w specyfikacji.'
+          }
+        },
+        {
+          '@type': 'Question',
+          name: 'Sterownik Zebra nie wykrywa drukarki - co robić?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Sprawdź czy drukarka jest włączona i podłączona. Użyj innego portu USB lub kabla. Zainstaluj sterownik jako Administrator. Wyłącz tymczasowo antywirusa. Jeśli problem występuje nadal - skontaktuj się z serwisem TAKMA.'
+          }
+        },
+        {
+          '@type': 'Question',
+          name: 'Drukarka Zebra drukuje puste etykiety - jak naprawić?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Sprawdź czy media są prawidłowo załadowane. Wykonaj kalibrację czujnika mediów (przytrzymaj FEED przez 5 sekund). Sprawdź ustawienia rozmiaru etykiety w sterowniku. Upewnij się że głowica drukująca jest czysta.'
+          }
+        },
+        {
+          '@type': 'Question',
+          name: 'Gdzie pobrać sterowniki do drukarki Zebra ZD421?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Oficjalne sterowniki do Zebra ZD421 pobierzesz na tej stronie (ZDesigner v10) lub bezpośrednio ze strony Zebra. Sterownik jest bezpłatny i obsługuje Windows 10, 11 oraz Server.'
+          }
+        },
+        {
+          '@type': 'Question',
+          name: 'Czy sterowniki Zebra działają na Windows 11?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Tak, ZDesigner v10 w pełni obsługuje Windows 11 (wersja 21H2 i nowsze). Obsługuje procesory x86, x64 oraz ARM. Jeśli po aktualizacji Windows drukarka jest offline - przeinstaluj sterownik.'
+          }
+        },
+        {
+          '@type': 'Question',
+          name: 'Jak skonfigurować drukarkę Zebra przez sieć?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Użyj Zebra Setup Utilities do znalezienia drukarki w sieci. Przypisz stały adres IP w konfiguracji drukarki. W kreatorze instalacji sterownika wybierz port TCP/IP i podaj adres IP drukarki.'
+          }
+        },
+        {
+          '@type': 'Question',
+          name: 'Czy Zebra Designer 3 jest darmowy?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Zebra Designer 3 Essentials jest bezpłatny i wystarczy do podstawowego projektowania etykiet. Wersja Professional wymaga płatnej licencji i oferuje zaawansowane funkcje jak połączenie z bazami danych.'
+          }
+        },
+        {
+          '@type': 'Question',
+          name: 'Po aktualizacji Windows drukarka Zebra jest offline - rozwiązanie?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Odinstaluj stary sterownik, pobierz najnowszą wersję ZDesigner v10 i zainstaluj jako Administrator. Przypisz stały port USB lub IP. Zrestartuj usługę spoolera wydruku (Menedżer wydruku w usługach Windows).'
+          }
+        },
+        {
+          '@type': 'Question',
+          name: 'Jak zaktualizować firmware w drukarce Zebra?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Pobierz firmware kompatybilny z Twoim modelem. Użyj Zebra Setup Utilities lub ZDownloader do wysłania pliku .zpl na drukarkę. Nie wyłączaj drukarki podczas aktualizacji! W razie wątpliwości skontaktuj się z serwisem.'
+          }
+        },
+        {
+          '@type': 'Question',
+          name: 'Czy mogę używać drukarki Zebra na Mac/Linux?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Zebra oficjalnie wspiera tylko Windows. Na Mac/Linux możesz użyć Zebra Setup Utilities do druku przez sieć lub skonfigurować CUPS z driverem raw ZPL. Bezpośrednie USB wymaga dodatkowej konfiguracji.'
+          }
+        },
+        {
+          '@type': 'Question',
+          name: 'Jak pobrać 123Scan do konfiguracji skanerów Zebra?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: '123Scan pobierzesz na tej stronie w zakładce Programy użytkowe > Skanery. Dostępne są wersje 32-bit i 64-bit. Program służy do konfiguracji skanerów Zebra, tworzenia profili skanowania i aktualizacji firmware.'
+          }
+        }
+      ]
+    },
+    // Organization
+    {
+      '@type': 'Organization',
+      '@id': 'https://www.serwis-zebry.pl/#organization',
+      name: 'TAKMA - Autoryzowany Serwis Zebra',
+      url: 'https://www.serwis-zebry.pl',
+      telephone: '+48601619898',
+      email: 'serwis@takma.com.pl',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: 'Poświęcka 1a',
+        addressLocality: 'Wrocław',
+        postalCode: '51-128',
+        addressCountry: 'PL'
+      }
+    }
+  ]
+}
+
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return children
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+      />
+      {children}
+    </>
+  )
 }

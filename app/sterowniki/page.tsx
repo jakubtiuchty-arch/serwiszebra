@@ -173,36 +173,115 @@ const printerCategories = [
   }
 ]
 
-// FAQ
+// FAQ - rozszerzone do 12 pytań dla SEO/AEO
 const faqItems = [
   {
-    question: 'Jak zainstalować sterownik Zebra?',
-    answer: `1. Pobierz sterownik z tej strony lub ze strony Zebra
-2. Rozpakuj pliki do wybranego folderu
-3. Uruchom plik PrnInst.exe (Printer Installation Wizard)
+    question: 'Jak zainstalować sterownik Zebra w Windows 11?',
+    answer: `1. Pobierz ZDesigner v10 z tej strony
+2. Rozpakuj pliki ZIP do wybranego folderu
+3. Uruchom PrnInst.exe jako Administrator
 4. Kliknij "Install Printer Driver"
-5. Wybierz model drukarki z listy
-6. Postępuj zgodnie z instrukcjami kreatora`
+5. Wybierz model drukarki (np. ZD421) z listy
+6. Wybierz port USB lub sieć
+7. Wydrukuj stronę testową i skalibruj etykiety`
   },
   {
-    question: 'Sterownik nie wykrywa drukarki - co robić?',
+    question: 'Który sterownik Zebra wybrać - v10 czy v5?',
+    answer: `ZDesigner v10 - dla nowoczesnych drukarek z językiem ZPL/Link-OS (ZD421, ZD620, ZT410, ZT610, ZQ630).
+
+ZDesigner v5 (Legacy) - dla starszych drukarek używających EPL lub CPCL (LP2844, TLP2844, GK420d, GC420).
+
+Sprawdź język drukarki w specyfikacji lub na nalepce z tyłu urządzenia.`
+  },
+  {
+    question: 'Sterownik Zebra nie wykrywa drukarki - co robić?',
     answer: `• Sprawdź czy drukarka jest włączona i podłączona (USB/sieć)
 • Użyj innego portu USB lub kabla
 • Zainstaluj sterownik jako Administrator
 • Wyłącz tymczasowo antywirusa podczas instalacji
+• Zrestartuj usługę spoolera (services.msc → Menedżer wydruku)
 • Jeśli problem nadal występuje - skontaktuj się z naszym serwisem`
   },
   {
-    question: 'Mam starą drukarkę Zebra - jaki sterownik?',
-    answer: `Sterownik ZDesigner v10 obsługuje drukarki z językiem ZPL (Link-OS). Dla starszych drukarek używających EPL lub CPCL (np. LP2844, TLP2844) potrzebny jest sterownik ZDesigner v5.`
-  },
-  {
-    question: 'Drukarka drukuje puste etykiety',
+    question: 'Drukarka Zebra drukuje puste etykiety - jak naprawić?',
     answer: `To częsty problem po instalacji. Sprawdź:
 • Czy media (etykiety) są prawidłowo załadowane
-• Wykonaj kalibrację czujnika mediów
+• Wykonaj kalibrację czujnika mediów (FEED przytrzymaj 5 sek.)
 • Sprawdź ustawienia rozmiaru etykiety w sterowniku
-• Upewnij się, że głowica drukująca jest czysta`
+• Upewnij się, że głowica drukująca jest czysta
+• Dla drukarek termotransferowych - sprawdź ribbon`
+  },
+  {
+    question: 'Gdzie pobrać sterowniki do Zebra ZD421?',
+    answer: `Oficjalne sterowniki do Zebra ZD421 pobierzesz:
+• Na tej stronie - kliknij "Pobierz" przy ZDesigner v10
+• Ze strony Zebra - link "Strona Zebra" obok przycisku pobierania
+
+Sterownik jest bezpłatny i obsługuje Windows 10, 11 oraz Server 2019/2022/2025.`
+  },
+  {
+    question: 'Czy sterowniki Zebra działają na Windows 11?',
+    answer: `Tak! ZDesigner v10 w pełni obsługuje Windows 11 (wersja 21H2 i nowsze). Obsługuje procesory x86, x64 oraz ARM.
+
+Jeśli po aktualizacji Windows drukarka jest "Offline":
+1. Odinstaluj stary sterownik
+2. Pobierz najnowszą wersję ZDesigner v10
+3. Zainstaluj jako Administrator
+4. Przypisz stały port USB lub IP`
+  },
+  {
+    question: 'Jak skonfigurować drukarkę Zebra przez sieć?',
+    answer: `1. Podłącz drukarkę do sieci kablem Ethernet lub skonfiguruj WiFi
+2. Użyj Zebra Setup Utilities do znalezienia drukarki w sieci
+3. Przypisz stały adres IP w konfiguracji drukarki
+4. W kreatorze instalacji sterownika wybierz port TCP/IP
+5. Podaj adres IP drukarki`
+  },
+  {
+    question: 'Czy Zebra Designer 3 jest darmowy?',
+    answer: `Zebra Designer 3 ma dwie wersje:
+• Essentials - bezpłatna, wystarczy do podstawowego projektowania etykiet
+• Professional - płatna licencja, zaawansowane funkcje (bazy danych, RFID)
+
+Essentials pobierzesz na tej stronie w zakładce "Programy użytkowe".`
+  },
+  {
+    question: 'Po aktualizacji Windows drukarka Zebra jest offline',
+    answer: `Rozwiązanie:
+1. Odinstaluj stary sterownik (Panel sterowania → Drukarki)
+2. Pobierz najnowszą wersję ZDesigner v10
+3. Zainstaluj jako Administrator
+4. Przypisz stały port USB lub adres IP
+5. Zrestartuj usługę spoolera wydruku
+6. Wydrukuj stronę testową`
+  },
+  {
+    question: 'Jak zaktualizować firmware w drukarce Zebra?',
+    answer: `1. Pobierz firmware kompatybilny z Twoim modelem
+2. Użyj Zebra Setup Utilities lub ZDownloader
+3. Wyślij plik .zpl na drukarkę
+4. NIE wyłączaj drukarki podczas aktualizacji!
+5. Poczekaj na restart drukarki
+
+⚠️ Nieprawidłowy firmware może uszkodzić drukarkę. W razie wątpliwości skontaktuj się z serwisem TAKMA.`
+  },
+  {
+    question: 'Czy mogę używać drukarki Zebra na Mac/Linux?',
+    answer: `Zebra oficjalnie wspiera tylko Windows. Na Mac/Linux możesz:
+• Użyć Zebra Setup Utilities do druku przez sieć
+• Skonfigurować CUPS z driverem raw ZPL
+• Drukować bezpośrednio przez port sieciowy (np. 9100)
+
+Bezpośrednie USB na Mac/Linux wymaga dodatkowej konfiguracji.`
+  },
+  {
+    question: 'Jak pobrać 123Scan do konfiguracji skanerów Zebra?',
+    answer: `123Scan pobierzesz na tej stronie:
+1. Kliknij zakładkę "Programy użytkowe"
+2. Wybierz "Skanery"
+3. Pobierz wersję 32-bit lub 64-bit
+
+Program służy do konfiguracji skanerów Zebra, tworzenia profili skanowania i aktualizacji firmware.`
   }
 ]
 
@@ -260,6 +339,19 @@ export default function DriversPage() {
           <p className="text-xs sm:text-base text-gray-300 max-w-3xl mx-auto px-2">
             Oficjalne sterowniki, firmware i narzędzia do drukarek Zebra (Windows 11/10, Server). Krótka instrukcja instalacji i pomoc zdalna serwisu TAKMA (Wrocław | obsługa całej Polski).
           </p>
+        </div>
+      </section>
+
+      {/* Szybka odpowiedź - AEO */}
+      <section className="py-4 sm:py-6 bg-white border-b border-gray-100">
+        <div className="max-w-5xl mx-auto px-3 sm:px-6 lg:px-8">
+          <div className="bg-blue-50 border-l-4 border-blue-500 rounded-r-xl p-4 sm:p-5 shadow-sm">
+            <p className="text-sm sm:text-base text-gray-800 leading-relaxed">
+              <strong>Szukasz sterowników do drukarki Zebra?</strong> Pobierz <strong>ZDesigner v10</strong> dla nowoczesnych drukarek (ZD421, ZT410, ZQ630) 
+              lub <strong>ZDesigner v5</strong> dla starszych modeli (LP2844, GK420). Sterowniki są <strong>bezpłatne</strong> i obsługują <strong>Windows 10/11</strong>. 
+              Instalacja: rozpakuj ZIP, uruchom jako Administrator, wybierz model i port. Problemy? <strong>TAKMA</strong> oferuje bezpłatną pomoc zdalną w instalacji sterowników Zebra.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -720,6 +812,43 @@ export default function DriversPage() {
           </div>
         </section>
       )}
+
+      {/* Przydatne zasoby - linki wewnętrzne */}
+      <section className="py-6 sm:py-10 bg-gray-50 border-t border-gray-200">
+        <div className="max-w-5xl mx-auto px-3 sm:px-6 lg:px-8">
+          <h2 className="text-lg sm:text-xl font-semibold text-gray-900 mb-4 sm:mb-6">Przydatne zasoby</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+            <Link href="/drukarki" className="flex items-center gap-3 p-4 bg-white rounded-xl border border-gray-200 hover:border-gray-300 hover:shadow-sm transition-all group">
+              <Printer className="w-5 h-5 text-gray-500 group-hover:text-gray-700" />
+              <div>
+                <p className="font-medium text-gray-900 text-sm">Serwis drukarek</p>
+                <p className="text-xs text-gray-500">Naprawa wszystkich modeli</p>
+              </div>
+            </Link>
+            <Link href="/instrukcje" className="flex items-center gap-3 p-4 bg-white rounded-xl border border-gray-200 hover:border-gray-300 hover:shadow-sm transition-all group">
+              <FileCode className="w-5 h-5 text-gray-500 group-hover:text-gray-700" />
+              <div>
+                <p className="font-medium text-gray-900 text-sm">Instrukcje PL</p>
+                <p className="text-xs text-gray-500">Instrukcje obsługi po polsku</p>
+              </div>
+            </Link>
+            <Link href="/cennik" className="flex items-center gap-3 p-4 bg-white rounded-xl border border-gray-200 hover:border-gray-300 hover:shadow-sm transition-all group">
+              <Settings className="w-5 h-5 text-gray-500 group-hover:text-gray-700" />
+              <div>
+                <p className="font-medium text-gray-900 text-sm">Cennik napraw</p>
+                <p className="text-xs text-gray-500">Orientacyjne ceny usług</p>
+              </div>
+            </Link>
+            <Link href="/blog/drukarka-zebra-nie-drukuje-przyczyny-rozwiazania" className="flex items-center gap-3 p-4 bg-white rounded-xl border border-gray-200 hover:border-gray-300 hover:shadow-sm transition-all group">
+              <Wrench className="w-5 h-5 text-gray-500 group-hover:text-gray-700" />
+              <div>
+                <p className="font-medium text-gray-900 text-sm">Rozwiązywanie problemów</p>
+                <p className="text-xs text-gray-500">Drukarka nie drukuje?</p>
+              </div>
+            </Link>
+          </div>
+        </div>
+      </section>
 
       {/* CTA */}
       <section className="py-8 sm:py-16 bg-gray-900">
