@@ -22,23 +22,20 @@ export const metadata: Metadata = {
   title: 'Serwis Tabletów Zebra – Naprawa ET40, ET45, L10 | Odbiór 24h',
   description: 'Profesjonalny serwis tabletów przemysłowych Zebra: ET40, ET45, ET51, ET56, L10. ✓ Wymiana wyświetlaczy ✓ Naprawa baterii ✓ Serwis doków ✓ 12 mies. gwarancji ✓ Odbiór kurierem 24h.',
   keywords: [
-    'serwis tabletów zebra',
-    'naprawa tabletów przemysłowych',
-    'naprawa et40',
-    'serwis et45',
-    'wymiana ekranu tablet zebra',
-    'naprawa l10 zebra',
-    'serwis tabletów et56',
-    'naprawa tabletu przemysłowego',
-    // Miasta
-    'tablety zebra wrocław', 'serwis tabletów zebra wrocław', 'naprawa tabletów zebra wrocław',
-    'tablety zebra warszawa', 'serwis tabletów zebra warszawa', 'naprawa tabletów zebra warszawa',
-    'tablety zebra kraków', 'serwis tabletów zebra kraków', 'naprawa tabletów zebra kraków',
+    'serwis tabletów zebra', 'naprawa tabletów przemysłowych', 'naprawa tabletów zebra',
+    'serwis et40', 'naprawa et40', 'tablet zebra et40', 'serwis et45', 'naprawa et45',
+    'serwis et51', 'naprawa et51', 'serwis et56', 'naprawa et56',
+    'serwis l10', 'naprawa l10 zebra', 'tablet zebra l10', 'zebra l10ax',
+    'wymiana ekranu tablet zebra', 'wymiana wyświetlacza zebra',
+    'naprawa baterii tablet zebra', 'serwis stacji dokującej zebra',
+    'tablet zebra nie ładuje', 'tablet zebra nie włącza się',
+    'xplore tablet naprawa', 'xslate naprawa', 'xpad naprawa',
+    'tablety zebra wrocław', 'serwis tabletów zebra wrocław',
+    'tablety zebra warszawa', 'serwis tabletów zebra warszawa',
+    'tablety zebra kraków', 'serwis tabletów zebra kraków',
     'tablety zebra poznań', 'serwis tabletów zebra poznań',
     'tablety zebra gdańsk', 'serwis tabletów zebra gdańsk',
     'tablety zebra katowice', 'serwis tabletów zebra katowice',
-    'tablety zebra łódź', 'serwis tabletów zebra łódź',
-    'tablety zebra zielona góra', 'serwis tabletów zebra zielona góra',
   ],
   openGraph: {
     title: 'Serwis Tabletów Zebra – Naprawa ET40, ET45, L10',
@@ -57,23 +54,43 @@ const tabletArticles = blogPosts
 const faq = [
   {
     question: 'Ile kosztuje wymiana ekranu w tablecie Zebra?',
-    answer: 'Koszt wymiany wyświetlacza zależy od modelu. Dla ET40/ET45 to 800-1200 zł, dla ET51/ET56 900-1400 zł, dla L10 1000-1500 zł. Cena obejmuje oryginalny wyświetlacz i robociznę.'
+    answer: 'Koszt wymiany wyświetlacza zależy od modelu. Dla ET40/ET45 to 800-1200 zł, dla ET51/ET56 900-1400 zł, dla L10 1000-1500 zł. Cena obejmuje oryginalny wyświetlacz i robociznę. Używamy tylko oryginalnych części Zebra.'
   },
   {
     question: 'Czy naprawiacie doki do tabletów Zebra?',
-    answer: 'Tak! Serwisujemy stacje dokujące do tabletów Zebra – naprawiamy porty ładowania, złącza i moduły komunikacji. Koszt naprawy doka to 200-500 zł.'
+    answer: 'Tak! Serwisujemy stacje dokujące do tabletów Zebra – naprawiamy porty ładowania, złącza i moduły komunikacji. Koszt naprawy doka to 200-500 zł. Naprawiamy doki do ET40, ET45, ET51, ET56, L10.'
   },
   {
     question: 'Jak długo trwa naprawa tabletu Zebra?',
-    answer: 'Standardowy czas naprawy to 2-5 dni roboczych. Oferujemy też naprawy ekspresowe w 24-48h. Kurier odbierze tablet bezpłatnie z Twojej firmy.'
+    answer: 'Standardowy czas naprawy to 2-5 dni roboczych. Oferujemy też naprawy ekspresowe w 24-48h. Kurier DPD odbierze tablet bezpłatnie z Twojej firmy w ciągu 24h.'
   },
   {
     question: 'Jakie tablety Zebra serwisujecie?',
-    answer: 'Serwisujemy wszystkie tablety przemysłowe Zebra: seria ET (ET40, ET45, ET51, ET56), seria L10 (Xplore), XSLATE, XPAD oraz starsze modele. Posiadamy oryginalne części.'
+    answer: 'Serwisujemy WSZYSTKIE tablety przemysłowe Zebra: seria ET (ET40, ET45, ET51, ET56), seria L10 (L10ax, Android/Windows), Xplore (dawniej), XSLATE, XPAD oraz starsze modele. Posiadamy oryginalne części.'
   },
   {
     question: 'Czy wymieniacie baterie w tabletach Zebra?',
-    answer: 'Tak, wymieniamy baterie we wszystkich tabletach Zebra. Koszt wymiany baterii to 300-600 zł w zależności od modelu. Używamy oryginalnych baterii Zebra z pełną gwarancją.'
+    answer: 'Tak, wymieniamy baterie we wszystkich tabletach Zebra. Koszt wymiany baterii to 300-600 zł w zależności od modelu. Używamy oryginalnych baterii Zebra z pełną gwarancją 12 miesięcy.'
+  },
+  {
+    question: 'Tablet Zebra ET40 nie ładuje się w stacji dokującej - co robić?',
+    answer: 'Tablet nie ładuje się w doku najczęściej z powodu: 1) Zabrudzone styki - wyczyść alkoholem IPA, 2) Uszkodzone złącze w tablecie lub doku - wymiana 250-400 zł, 3) Uszkodzona stacja dokująca - naprawa 200-500 zł. Sprawdź najpierw styki i ładowanie z kabla.'
+  },
+  {
+    question: 'Tablet Zebra nie włącza się - jaka może być przyczyna?',
+    answer: 'Tablet Zebra nie włącza się najczęściej z powodu: 1) Całkowicie rozładowana bateria - podłącz do ładowarki na min. 30 min, 2) Uszkodzona bateria - wymiana 300-600 zł, 3) Uszkodzona płyta główna. Spróbuj twardego resetu (przytrzymaj power 15-20 sek).'
+  },
+  {
+    question: 'Ile kosztuje naprawa pękniętej szybki w tablecie Zebra?',
+    answer: 'Wymiana pękniętej szybki/digitizera w tablecie Zebra kosztuje 500-1000 zł w zależności od modelu. Dla ET40/ET45 to ok. 500-700 zł, dla ET56 600-900 zł, dla L10 800-1000 zł. Jeśli uszkodzony jest też LCD - cena wyższa.'
+  },
+  {
+    question: 'Czy naprawiacie tablety Zebra Xplore L10?',
+    answer: 'Tak! Serwisujemy tablety Zebra L10 (dawniej Xplore) - zarówno wersje Android jak i Windows. Naprawiamy wyświetlacze, baterie, złącza, moduły WiFi/LTE. Mamy oryginalne części do L10ax.'
+  },
+  {
+    question: 'Czy mogę zamówić odbiór tabletu kurierem?',
+    answer: 'Tak! Zamawiamy kuriera DPD, który odbierze tablet bezpłatnie z Twojej firmy w ciągu 24h. Obsługujemy całą Polskę. Po naprawie odsyłamy tablet kurierem na nasz koszt.'
   }
 ]
 
@@ -81,15 +98,31 @@ const serviceSchema = {
   '@context': 'https://schema.org',
   '@type': 'Service',
   name: 'Serwis Tabletów Zebra',
-  description: 'Profesjonalny serwis i naprawa tabletów przemysłowych Zebra: ET40, ET45, L10, wymiana ekranów, naprawa baterii.',
+  description: 'Profesjonalny serwis i naprawa tabletów przemysłowych Zebra: ET40, ET45, ET51, ET56, L10. Wymiana wyświetlaczy, naprawa baterii, serwis stacji dokujących. 25 lat doświadczenia.',
   provider: {
     '@type': 'LocalBusiness',
-    name: 'TAKMA - Serwis Zebra',
+    name: 'TAKMA - Autoryzowany Serwis Zebra',
     telephone: '+48601619898',
-    url: 'https://www.serwis-zebry.pl'
+    email: 'serwis@takma.com.pl',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'Poświęcka 1a',
+      addressLocality: 'Wrocław',
+      postalCode: '51-128',
+      addressCountry: 'PL'
+    }
   },
-  areaServed: 'Polska',
-  serviceType: ['Naprawa tabletów', 'Wymiana ekranów', 'Naprawa baterii']
+  areaServed: { '@type': 'Country', name: 'Polska' },
+  serviceType: ['Naprawa tabletów Zebra', 'Wymiana wyświetlaczy', 'Wymiana baterii', 'Naprawa stacji dokujących']
+}
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Strona główna', item: 'https://www.serwis-zebry.pl' },
+    { '@type': 'ListItem', position: 2, name: 'Serwis tabletów Zebra', item: 'https://www.serwis-zebry.pl/tablety' }
+  ]
 }
 
 const faqSchema = {
@@ -107,6 +140,7 @@ export default function TabletyPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
       <Header currentPage="other" />
       
@@ -164,15 +198,55 @@ export default function TabletyPage() {
           </div>
         </section>
 
+        {/* Szybka odpowiedź - dla Featured Snippets i AI */}
+        <section className="py-6 sm:py-8">
+          <div className="max-w-6xl mx-auto px-3 sm:px-4">
+            <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-blue-50 border-l-4 border-blue-500 rounded-r-xl p-4 sm:p-5 shadow-sm mb-6">
+              <p className="text-sm sm:text-base text-gray-800 leading-relaxed">
+                <strong>Szukasz serwisu tabletów Zebra?</strong> TAKMA to <strong>autoryzowany serwis Zebra</strong> z 25-letnim doświadczeniem. 
+                Naprawiamy <strong>wszystkie modele</strong>: ET40, ET45, ET51, ET56, L10 (Xplore), XSLATE, XPAD. 
+                <strong>Odbiór kurierem w 24h</strong> z całej Polski, naprawa <strong>2-5 dni</strong>, <strong>12 miesięcy gwarancji</strong>. 
+                Wymiana wyświetlacza od 800 zł, baterii od 300 zł.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Kluczowe liczby - dla GEO/AEO */}
+        <section className="py-4 sm:py-6 bg-white border-y border-gray-100">
+          <div className="max-w-6xl mx-auto px-3 sm:px-4">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-5">
+              <div className="bg-white rounded-xl p-4 shadow-xl border border-gray-100 text-center">
+                <p className="text-2xl sm:text-3xl font-bold text-gray-900">25 lat</p>
+                <p className="text-xs text-gray-500 mt-1">doświadczenia</p>
+              </div>
+              <div className="bg-white rounded-xl p-4 shadow-xl border border-gray-100 text-center">
+                <p className="text-2xl sm:text-3xl font-bold text-gray-900">5000+</p>
+                <p className="text-xs text-gray-500 mt-1">naprawionych urządzeń</p>
+              </div>
+              <div className="bg-white rounded-xl p-4 shadow-xl border border-gray-100 text-center">
+                <p className="text-2xl sm:text-3xl font-bold text-gray-900">2-5 dni</p>
+                <p className="text-xs text-gray-500 mt-1">czas naprawy</p>
+              </div>
+              <div className="bg-white rounded-xl p-4 shadow-xl border border-gray-100 text-center">
+                <p className="text-2xl sm:text-3xl font-bold text-gray-900">12 mies.</p>
+                <p className="text-xs text-gray-500 mt-1">gwarancji</p>
+              </div>
+            </div>
+          </div>
+        </section>
+            
         {/* Intro */}
         <section className="py-8 sm:py-10 md:py-12">
           <div className="max-w-6xl mx-auto px-3 sm:px-4">
-            <div className="bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 border border-amber-200 rounded-xl p-4 sm:p-5 md:p-6 shadow-sm mb-6">
+            <div className="bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 border border-amber-200 rounded-xl p-4 sm:p-5 md:p-6 shadow-sm">
               <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
                 Specjalizujemy się w <strong>profesjonalnym serwisie tabletów przemysłowych Zebra</strong> – 
-                od kompaktowych modeli ET40 i ET45, przez wytrzymałe tablety serii ET51/ET56, 
-                po zaawansowane urządzenia L10 (dawniej Xplore). Jako <strong>autoryzowany partner Zebra</strong> 
-                posiadamy dostęp do oryginalnych części zamiennych. <strong className="text-blue-900">25 lat doświadczenia.</strong>
+                od kompaktowych modeli ET40 i ET45 (8" i 10"), przez wytrzymałe tablety serii ET51/ET56 z uchwytem pistoletowym, 
+                po zaawansowane urządzenia L10ax (dawniej Xplore) z Android lub Windows. 
+                Naprawiamy także tablety XSLATE i XPAD. Jako <strong>autoryzowany partner Zebra</strong> 
+                posiadamy dostęp do oryginalnych części zamiennych i wyświetlaczy. 
+                <strong className="text-blue-900"> 25 lat doświadczenia.</strong>
               </p>
             </div>
           </div>
@@ -350,6 +424,56 @@ export default function TabletyPage() {
             </div>
           </section>
         )}
+
+        {/* Przydatne zasoby - linki wewnętrzne */}
+        <section className="py-10 sm:py-12 bg-gradient-to-br from-gray-50 to-gray-100">
+          <div className="max-w-6xl mx-auto px-3 sm:px-4">
+            <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-6 sm:mb-8 text-center">
+              Przydatne zasoby
+            </h2>
+
+            <div className="grid sm:grid-cols-3 gap-4">
+              <Link
+                href="/instrukcje"
+                className="bg-white rounded-xl p-5 shadow-sm border border-gray-100 hover:shadow-lg hover:border-gray-300 transition-all group text-center"
+              >
+                <div className="w-12 h-12 bg-gray-50 rounded-lg flex items-center justify-center mx-auto mb-3 border border-gray-200">
+                  <CheckCircle2 className="w-6 h-6 text-gray-600" />
+                </div>
+                <h3 className="font-medium text-gray-900 group-hover:text-gray-700 transition-colors">
+                  Instrukcje po polsku
+                </h3>
+                <p className="text-xs text-gray-500 mt-1">ET40, ET45, L10...</p>
+              </Link>
+
+              <Link
+                href="/cennik"
+                className="bg-white rounded-xl p-5 shadow-sm border border-gray-100 hover:shadow-lg hover:border-gray-300 transition-all group text-center"
+              >
+                <div className="w-12 h-12 bg-gray-50 rounded-lg flex items-center justify-center mx-auto mb-3 border border-gray-200">
+                  <Star className="w-6 h-6 text-gray-600" />
+                </div>
+                <h3 className="font-medium text-gray-900 group-hover:text-gray-700 transition-colors">
+                  Cennik napraw
+                </h3>
+                <p className="text-xs text-gray-500 mt-1">Wyświetlacze, baterie, doki</p>
+              </Link>
+
+              <Link
+                href="/blog"
+                className="bg-white rounded-xl p-5 shadow-sm border border-gray-100 hover:shadow-lg hover:border-gray-300 transition-all group text-center"
+              >
+                <div className="w-12 h-12 bg-gray-50 rounded-lg flex items-center justify-center mx-auto mb-3 border border-gray-200">
+                  <AlertTriangle className="w-6 h-6 text-gray-600" />
+                </div>
+                <h3 className="font-medium text-gray-900 group-hover:text-gray-700 transition-colors">
+                  Poradniki
+                </h3>
+                <p className="text-xs text-gray-500 mt-1">Rozwiązywanie problemów</p>
+              </Link>
+            </div>
+          </div>
+        </section>
 
         {/* FAQ */}
         <section className="py-10 sm:py-12 md:py-14 bg-white">

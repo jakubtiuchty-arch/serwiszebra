@@ -1,8 +1,8 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Sterowniki Zebra - Pobierz oficjalne sterowniki do drukarek',
-  description: 'Pobierz oficjalne sterowniki do drukarek etykiet Zebra: ZD420, ZD421, ZD620, ZT410, GK420, ZD220. Sterowniki dla Windows 10/11, Mac i Linux. ZDesigner Driver, OPOS Driver.',
+  title: 'Sterowniki Zebra – Pobierz oficjalne drivery (Windows 11/10) | TAKMA',
+  description: 'Oficjalne sterowniki Zebra: ZDesigner v10/v5, firmware i narzędzia (Zebra Setup Utilities, ZebraDesigner 3). Instrukcja instalacji, wsparcie Windows 11/10/Server. Pomoc zdalna – Polska, Warszawa.',
   keywords: [
     // Ogólne
     'sterowniki zebra',

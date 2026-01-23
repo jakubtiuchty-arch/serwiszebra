@@ -359,7 +359,9 @@ export default function BlogPostPage({
               </div>
             </div>
 
-            <BlogReactions slug={post.slug} />
+            {post.category === 'troubleshooting' && (
+              <BlogReactions slug={post.slug} />
+            )}
 
             {/* Share */}
             <div className="mt-8 pt-8 border-t border-gray-200">

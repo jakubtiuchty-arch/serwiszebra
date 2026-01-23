@@ -255,11 +255,36 @@ export default function DriversPage() {
       <section className="bg-gradient-to-b from-gray-900 to-gray-800 py-8 sm:py-14 md:py-16">
         <div className="max-w-5xl mx-auto px-3 sm:px-6 lg:px-8 text-center">
           <h1 className="text-xl sm:text-3xl md:text-4xl font-bold text-white mb-2 sm:mb-4">
-            Oprogramowanie Zebra
+            Sterowniki i oprogramowanie Zebra
           </h1>
-          <p className="text-xs sm:text-base text-gray-400 max-w-2xl mx-auto px-2">
-            Sterowniki, firmware i narzędzia do drukarek etykiet Zebra
+          <p className="text-xs sm:text-base text-gray-300 max-w-3xl mx-auto px-2">
+            Pobierz oficjalne sterowniki, firmware i narzędzia do drukarek Zebra (Windows 11/10, Server). Instrukcja instalacji + pomoc zdalna serwisu TAKMA (Warszawa | obsługa całej Polski).
           </p>
+        </div>
+      </section>
+
+      {/* Krótki opis + linki wewnętrzne */}
+      <section className="py-6 sm:py-10 bg-white border-b border-gray-100">
+        <div className="max-w-5xl mx-auto px-3 sm:px-6 lg:px-8 space-y-3 sm:space-y-4">
+          <h2 className="text-lg sm:text-xl font-semibold text-gray-900">Co znajdziesz na tej stronie</h2>
+          <p className="text-sm sm:text-base text-gray-700">
+            Aktualne drivery ZDesigner (v10 i v5), firmware Link-OS oraz narzędzia (Zebra Setup Utilities, ZebraDesigner 3).
+            Dodaliśmy krótką instrukcję instalacji i listę najczęstszych problemów po aktualizacji sterownika.
+          </p>
+          <div className="flex flex-wrap gap-2 sm:gap-3 text-xs sm:text-sm">
+            <Link href="/blog/drukarka-zebra-nie-drukuje-przyczyny-rozwiazania" className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors">
+              Rozwiązywanie problemów
+            </Link>
+            <Link href="/faq" className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors">
+              FAQ drukarki Zebra
+            </Link>
+            <Link href="/jak-to-dziala" className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors">
+              Jak działa serwis
+            </Link>
+            <Link href="/serwis-zebra/warszawa" className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors">
+              Serwis Zebra Warszawa
+            </Link>
+          </div>
         </div>
       </section>
 
