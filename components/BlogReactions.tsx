@@ -106,7 +106,7 @@ export default function BlogReactions({ slug }: { slug: string }) {
         <div>
           <p className="text-sm font-semibold text-gray-900">Czy artykuł Ci pomógł?</p>
           <p className="text-xs text-gray-500 mt-1">
-            Twoja reakcja podpowie innym, czy treść jest użyteczna.
+            Twoja opinia pomoże nam ulepszać treści i dostosować je do Twoich potrzeb.
           </p>
           {error && <p className="text-xs text-red-600 mt-2">{error}</p>}
           {!error && total > 0 && (

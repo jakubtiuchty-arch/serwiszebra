@@ -359,7 +359,7 @@ export default function BlogPostPage({
               </div>
             </div>
 
-            {post.category === 'troubleshooting' && (
+            {['troubleshooting', 'poradniki'].includes(post.category) && (
               <BlogReactions slug={post.slug} />
             )}
 
