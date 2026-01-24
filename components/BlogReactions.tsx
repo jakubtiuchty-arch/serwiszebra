@@ -206,7 +206,7 @@ function ReactionButton({
       ) : (
         <Icon className="w-4 h-4" />
       )}
-      <span>{label}</span>
+      <span className="whitespace-nowrap">{label}</span>
       <span className="text-xs px-2 py-1 bg-white/70 rounded-full text-gray-700 border border-white/60">
         {count}
       </span>
