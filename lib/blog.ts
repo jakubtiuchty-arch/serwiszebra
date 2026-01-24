@@ -220,7 +220,7 @@ export const blogPosts: BlogPost[] = [
       faqSchema: [
         {
           question: 'Która drukarka Zebra jest najlepsza dla małej firmy?',
-          answer: 'Dla małej firmy drukującej do 500 etykiet dziennie najlepsza jest Zebra ZD220 (ok. 800 zł). Jest tania w zakupie i eksploatacji, wystarczająca do podstawowego etykietowania produktów i wysyłek.'
+          answer: 'Dla małej firmy drukującej do 500 etykiet dziennie najlepsza jest Zebra ZD220 (od 800 zł). Jest tania w zakupie i eksploatacji, wystarczająca do podstawowego etykietowania produktów i wysyłek.'
         },
         {
           question: 'Czym różni się Zebra ZD220 od Zebra ZD421?',
@@ -232,7 +232,7 @@ export const blogPosts: BlogPost[] = [
         },
         {
           question: 'Jaka jest cena drukarki Zebra ZD220, ZD421 i ZT411?',
-          answer: 'Orientacyjne ceny (2026): Zebra ZD220 ok. 800-1000 zł, Zebra ZD421 ok. 1800-2500 zł, Zebra ZT411 ok. 5000-7000 zł. Ceny zależą od konfiguracji (rozdzielczość, łączność, akcesoria).'
+          answer: 'Orientacyjne ceny (2026): Zebra ZD220 od 800 zł, Zebra ZD421 od 1300 zł, Zebra ZT411 od 4000 zł. Ceny zależą od konfiguracji (rozdzielczość, łączność, akcesoria).'
         },
         {
           question: 'Czy Zebra ZD220 obsługuje druk termotransferowy?',
@@ -253,7 +253,7 @@ export const blogPosts: BlogPost[] = [
       ]
     },
     content: `
-> **Szybka odpowiedź:** **Zebra ZD220** (ok. 800 zł) – dla małych firm do 500 etykiet/dzień. **Zebra ZD421** (ok. 1800 zł) – dla średnich firm do 2000 etykiet/dzień z opcją sieci. **Zebra ZT411** (ok. 5000 zł) – przemysłowa 24/7, do 5000+ etykiet/dzień, rozdzielczość do 600 dpi. Wszystkie modele serwisujemy w TAKMA Wrocław.
+> **Szybka odpowiedź:** **Zebra ZD220** (od 800 zł) – dla małych firm do 500 etykiet/dzień. **Zebra ZD421** (od 1300 zł) – dla średnich firm do 2000 etykiet/dzień z opcją sieci. **Zebra ZT411** (od 4000 zł) – przemysłowa 24/7, do 5000+ etykiet/dzień, rozdzielczość do 600 dpi. Wszystkie modele serwisujemy w TAKMA Wrocław.
 
 ---
 
@@ -261,7 +261,7 @@ export const blogPosts: BlogPost[] = [
 
 | Cecha | Zebra ZD220 | Zebra ZD421 | Zebra ZT411 |
 |-------|-------------|-------------|-------------|
-| **Cena orientacyjna** | ~800-1000 zł | ~1800-2500 zł | ~5000-7000 zł |
+| **Cena orientacyjna** | od 800 zł | od 1300 zł | od 4000 zł |
 | **Klasa** | Ekonomiczna | Biurowa | Przemysłowa |
 | **Wydajność dzienna** | do 500 etykiet | do 2000 etykiet | 5000+ (24/7) |
 | **Rozdzielczość** | 203 dpi | 203/300 dpi | 203/300/600 dpi |
@@ -298,7 +298,7 @@ export const blogPosts: BlogPost[] = [
 
 **Zebra ZD220** to drukarka dla firm, które:
 - Drukują **do 500 etykiet dziennie**
-- Mają **ograniczony budżet** (poniżej 1000 zł)
+- Mają **ograniczony budżet** (do 1300 zł)
 - Potrzebują **prostego rozwiązania** bez sieci
 - Drukują **standardowe etykiety wysyłkowe** lub cenowe
 
@@ -398,7 +398,7 @@ export const blogPosts: BlogPost[] = [
 
 ### Wady Zebra ZT411
 
-- ❌ **Wysoka cena** (5000-7000 zł)
+- ❌ **Wysoka cena** (od 4000 zł)
 - ❌ Duże wymiary i waga
 - ❌ Wyższe koszty serwisu
 - ❌ Przekwalifikowana dla małych firm
@@ -451,9 +451,9 @@ export const blogPosts: BlogPost[] = [
 
 ### Krok 4: Jaki masz budżet?
 
-- **Do 1000 zł** → Zebra ZD220
-- **1500-3000 zł** → Zebra ZD421
-- **Ponad 5000 zł** → Zebra ZT411
+- **Do 1300 zł** → Zebra ZD220
+- **1300-4000 zł** → Zebra ZD421
+- **Ponad 4000 zł** → Zebra ZT411
 
 ---
 
@@ -514,7 +514,7 @@ Jako **autoryzowany serwis Zebra** (Wrocław) oferujemy:
 
 | Wybierz | Jeśli... |
 |---------|----------|
-| **Zebra ZD220** | Mała firma, budżet do 1000 zł, do 500 etykiet/dzień |
+| **Zebra ZD220** | Mała firma, budżet do 1300 zł, do 500 etykiet/dzień |
 | **Zebra ZD421** | Średnia firma, potrzebujesz sieci, do 2000 etykiet/dzień |
 | **Zebra ZT411** | Duża firma, praca 24/7, rozdzielczość 600 dpi |
 
