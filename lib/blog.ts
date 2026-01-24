@@ -18639,8 +18639,6 @@ Jako **autoryzowany serwis Zebra** pomożemy Ci:
       ]
     },
     content: `
-# Zebra Setup Utilities – kompletny poradnik konfiguracji drukarki
-
 > **Szybka odpowiedź:** Zebra Setup Utilities (ZSU) to bezpłatne narzędzie Zebra do konfiguracji drukarek. **Pobierz** z [tej strony](/sterowniki), zainstaluj (Windows 10/11), podłącz drukarkę USB lub przez sieć, kliknij **Configure Printer Settings** i ustaw IP, kalibrację lub wyślij firmware. Problemy? TAKMA oferuje **bezpłatną pomoc zdalną** – zadzwoń +48 601 619 898.
 
 ---
