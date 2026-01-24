@@ -353,7 +353,6 @@ export const blogPosts: BlogPost[] = [
 - ✅ Rozdzielczość **203 lub 300 dpi**
 - ✅ Więcej kontroli (3 przyciski, 5 LED)
 - ✅ Wyższa niezawodność vs ZD220
-- ✅ Opcjonalny **czytnik RFID** (ZD421R)
 - ✅ Lepsza jakość druku
 
 ### Wady Zebra ZD421
