@@ -6,6 +6,7 @@ export interface BlogPost {
   excerpt: string
   content: string
   coverImage: string
+  coverImageAlt?: string // Alt text dla obrazu hero (SEO/accessibility)
   author: {
     name: string
     role: string
@@ -25,6 +26,28 @@ export interface BlogPost {
       question: string
       answer: string
     }>
+    softwareApplicationSchema?: {
+      name: string
+      applicationCategory: string
+      operatingSystem: string
+      softwareVersion: string
+      downloadUrl: string
+      fileSize: string
+      offers: {
+        price: string
+        priceCurrency: string
+      }
+      publisher: string
+      description: string
+    }
+    howToSchema?: {
+      name: string
+      description: string
+      totalTime: string
+      supply: string[]
+      tool: string[]
+      steps: string[]
+    }
   }
 }
 
