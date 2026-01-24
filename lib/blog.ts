@@ -414,9 +414,7 @@ export const blogPosts: BlogPost[] = [
 | Zebra ZD421 | ~50 km wydruku |
 | Zebra ZT411 | ~100 km wydruku |
 
-**Aktualne ceny głowic:** [Sklep z częściami Zebra](/sklep)
-
-> 💡 Im wyższa klasa drukarki, tym dłuższa żywotność głowicy i niższy koszt na etykietę w dłuższej perspektywie.
+> 💡 Im wyższa klasa drukarki, tym dłuższa żywotność głowicy i niższy koszt na etykietę w dłuższej perspektywie. Aktualne ceny głowic i części zamiennych – zadzwoń: **+48 601 619 898**.
 
 ### Koszty taśmy (druk termotransferowy)
 
