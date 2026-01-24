@@ -20,8 +20,8 @@ import {
 } from 'lucide-react'
 import BlogReactions from '@/components/BlogReactions'
 
-// ISR - strony generowane przy pierwszym żądaniu, cache 1h
-export const revalidate = 3600
+// ISR - strony rewalidowane co 60 sekund (szybsze odświeżanie po deployu)
+export const revalidate = 60
 export const dynamicParams = true
 
 // Generate metadata for SEO
