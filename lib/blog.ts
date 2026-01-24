@@ -272,7 +272,8 @@ export const blogPosts: BlogPost[] = [
 | **Wyświetlacz** | LED | 5x LED | Dotykowy 4,3" |
 | **Maks. rolka** | 127 mm | 127 mm | 203 mm |
 | **Konstrukcja** | Plastikowa | Plastikowa | Metalowa |
-| **Gwarancja** | 1 rok | 1 rok | 2 lata |
+| **Gwarancja drukarka** | 24 miesiące | 24 miesiące | 24 miesiące |
+| **Gwarancja głowica** | 12 miesięcy | 12 miesięcy | 12 miesięcy |
 
 *DT = druk termiczny bezpośredni, TT = druk termotransferowy*
 
@@ -394,7 +395,6 @@ export const blogPosts: BlogPost[] = [
 - ✅ **WiFi + Bluetooth** + Ethernet + USB
 - ✅ **Print Touch (NFC)** do szybkiego parowania
 - ✅ Opcje: obcinacz, dispenser, nawijak
-- ✅ **Dłuższa gwarancja** (2 lata)
 
 ### Wady Zebra ZT411
 
