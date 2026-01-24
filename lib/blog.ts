@@ -6037,9 +6037,9 @@ Według oficjalnej dokumentacji Zebra Technologies [1]:
 > *"Programming bar codes can be used to change printer/scanner settings. These bar codes are found in the Product Reference Guide for each printer model."*
 
 **Źródła:**
-- [1] [DS2208 Product Reference Guide](https://www.zebra.com/content/dam/zebra/manuals/barcode-scanners/ds2208-prg-en.pdf) - strona 200+
-- [2] [DS4608 Product Reference Guide](https://www.zebra.com/content/dam/zebra/manuals/barcode-scanners/ds4608-prg-en.pdf) - strona 180+
-- [3] [LI2208/LI4278 Product Reference Guide](https://www.zebra.com/content/dam/zebra/manuals/barcode-scanners/li2208-prg-en.pdf) - strona 150+
+1. [DS2208 Product Reference Guide](https://www.zebra.com/content/dam/zebra/manuals/barcode-scanners/ds2208-prg-en.pdf) - strona 200+
+2. [DS4608 Product Reference Guide](https://www.zebra.com/content/dam/zebra/manuals/barcode-scanners/ds4608-prg-en.pdf) - strona 180+
+3. [LI2208/LI4278 Product Reference Guide](https://www.zebra.com/content/dam/zebra/manuals/barcode-scanners/li2208-prg-en.pdf) - strona 150+
 
 **Przydatne narzędzia:**
 - [123Scan - darmowy program do konfiguracji](/sterowniki)
