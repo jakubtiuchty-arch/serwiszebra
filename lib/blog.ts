@@ -408,13 +408,15 @@ export const blogPosts: BlogPost[] = [
 
 ### Koszty głowicy drukującej
 
-| Model | Cena głowicy | Żywotność (km) | Koszt/etykietę* |
-|-------|--------------|----------------|-----------------|
-| Zebra ZD220 | ~400 zł | ~30 km | ~0,013 zł |
-| Zebra ZD421 | ~500 zł | ~50 km | ~0,010 zł |
-| Zebra ZT411 | ~800 zł | ~100 km | ~0,008 zł |
+| Model | Żywotność głowicy |
+|-------|-------------------|
+| Zebra ZD220 | ~30 km wydruku |
+| Zebra ZD421 | ~50 km wydruku |
+| Zebra ZT411 | ~100 km wydruku |
 
-*Przy etykiecie 50mm długości
+**Aktualne ceny głowic:** [Sklep z częściami Zebra](/sklep)
+
+> 💡 Im wyższa klasa drukarki, tym dłuższa żywotność głowicy i niższy koszt na etykietę w dłuższej perspektywie.
 
 ### Koszty taśmy (druk termotransferowy)
 
