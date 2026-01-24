@@ -252,7 +252,7 @@ export const blogPosts: BlogPost[] = [
         }
       ]
     },
-    content: \`
+    content: `
 > **Szybka odpowiedź:** **Zebra ZD220** (ok. 800 zł) – dla małych firm do 500 etykiet/dzień. **Zebra ZD421** (ok. 1800 zł) – dla średnich firm do 2000 etykiet/dzień z opcją sieci. **Zebra ZT411** (ok. 5000 zł) – przemysłowa 24/7, do 5000+ etykiet/dzień, rozdzielczość do 600 dpi. Wszystkie modele serwisujemy w TAKMA Wrocław.
 
 ---
@@ -521,7 +521,7 @@ Jako **autoryzowany serwis Zebra** (Wrocław) oferujemy:
 **Nie wiesz którą wybrać?** Zadzwoń do nas: +48 601 619 898 – pomożemy dobrać drukarkę do Twoich potrzeb.
 
 *Ostatnia aktualizacja: styczeń 2026*
-\`
+`
   },
   {
     slug: 'zebra-tc501-tc701-specyfikacja-cena-premiera',
