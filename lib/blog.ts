@@ -18509,13 +18509,14 @@ Jako **autoryzowany serwis Zebra** pomożemy Ci:
       role: 'Certyfikowani technicy Zebra'
     },
     publishedAt: '2025-12-27',
+    updatedAt: '2026-01-24',
     readingTime: 18,
     deviceType: 'drukarki',
     subDeviceType: 'etykiet',
     category: 'poradniki',
     tags: ['Zebra Setup Utilities', 'konfiguracja', 'narzędzie', 'sieć', 'firmware', 'kalibracja', 'diagnostyka', 'ZSU', 'USB', 'Ethernet', 'pobierz', 'download', 'instalacja'],
     seo: {
-      metaTitle: 'Zebra Setup Utilities – pobierz i skonfiguruj drukarkę [Poradnik 2025]',
+      metaTitle: 'Zebra Setup Utilities – pobierz i skonfiguruj drukarkę [Poradnik 2026]',
       metaDescription: 'Zebra Setup Utilities: pobierz za darmo, instalacja, konfiguracja sieci, wysyłanie firmware, kalibracja drukarki. Poradnik krok po kroku ze zdjęciami dla ZD420, ZT410, GK420.',
       keywords: [
         // Główne frazy - pobieranie
@@ -18577,6 +18578,8 @@ Jako **autoryzowany serwis Zebra** pomożemy Ci:
         'konfiguracja zebra gk420',
         'konfiguracja zebra zd421',
         'konfiguracja zebra zd621',
+        'konfiguracja zebra zt610',
+        'konfiguracja zebra zq630',
         
         // Problemy
         'zebra setup utilities nie działa',
@@ -18592,11 +18595,69 @@ Jako **autoryzowany serwis Zebra** pomożemy Ci:
         // Utilities ogólnie
         'zebra utilities',
         'zebra utilities download',
-        'zebra utilities pobierz'
+        'zebra utilities pobierz',
+        
+        // GEO - miasta
+        'konfiguracja drukarki zebra wrocław',
+        'zebra setup utilities warszawa',
+        'serwis zebra wrocław konfiguracja',
+        'pomoc zdalna zebra polska'
+      ],
+      faqSchema: [
+        {
+          question: 'Gdzie pobrać Zebra Setup Utilities za darmo?',
+          answer: 'Zebra Setup Utilities pobierzesz bezpłatnie na stronie serwis-zebry.pl/sterowniki lub bezpośrednio ze strony zebra.com. Program jest darmowy i działa na Windows 10/11.'
+        },
+        {
+          question: 'Zebra Setup Utilities nie widzi drukarki - co robić?',
+          answer: 'Sprawdź czy drukarka jest włączona i podłączona (USB lub sieć). Zainstaluj sterownik ZDesigner v10. Użyj innego portu USB. Dla połączenia sieciowego sprawdź czy komputer i drukarka są w tej samej podsieci.'
+        },
+        {
+          question: 'Jak skonfigurować IP statyczne w drukarce Zebra?',
+          answer: 'W Zebra Setup Utilities wybierz drukarkę, kliknij Configure Printer Settings, przejdź do zakładki Network. Wyłącz DHCP i wpisz: IP Address (np. 192.168.1.100), Subnet Mask (255.255.255.0), Gateway (192.168.1.1). Kliknij Apply.'
+        },
+        {
+          question: 'Jak zaktualizować firmware drukarki Zebra przez ZSU?',
+          answer: 'Wybierz drukarkę → Open Printer Tools → Action → Send File to Printer. Wybierz plik firmware (.zpl). NIE wyłączaj drukarki podczas aktualizacji! Zrób backup ustawień przed aktualizacją.'
+        },
+        {
+          question: 'Jak skalibrować drukarkę Zebra w Zebra Setup Utilities?',
+          answer: 'Open Printer Tools → Action → Calibrate Media. Dla etykiet z przerwami wybierz Gap/Notch, dla ciągłych Continuous. Kliknij Calibrate i poczekaj aż drukarka wydrukuje kilka etykiet testowych.'
+        },
+        {
+          question: 'Czy Zebra Setup Utilities działa na Windows 11?',
+          answer: 'Tak, Zebra Setup Utilities w pełni obsługuje Windows 11 (21H2 i nowsze). Wymaga .NET Framework 4.5 lub nowszego. Program obsługuje zarówno wersje 32-bit jak i 64-bit.'
+        },
+        {
+          question: 'Jak wysłać komendę ZPL przez Zebra Setup Utilities?',
+          answer: 'Wybierz drukarkę → Open Printer Tools → zakładka Direct Communication. Wpisz komendę ZPL (np. ~WC dla strony testowej) i kliknij Send. Zaznacz Enable Bi-directional Communication aby widzieć odpowiedzi drukarki.'
+        },
+        {
+          question: 'Czy TAKMA pomaga w konfiguracji drukarek Zebra zdalnie?',
+          answer: 'Tak, jako autoryzowany serwis Zebra oferujemy bezpłatną pomoc zdalną w konfiguracji drukarek przez Zebra Setup Utilities. Pomagamy klientom z całej Polski - zadzwoń +48 601 619 898.'
+        }
       ]
     },
     content: `
 # Zebra Setup Utilities – kompletny poradnik konfiguracji drukarki
+
+> **Szybka odpowiedź:** Zebra Setup Utilities (ZSU) to bezpłatne narzędzie Zebra do konfiguracji drukarek. **Pobierz** z [tej strony](/sterowniki), zainstaluj (Windows 10/11), podłącz drukarkę USB lub przez sieć, kliknij **Configure Printer Settings** i ustaw IP, kalibrację lub wyślij firmware. Problemy? TAKMA oferuje **bezpłatną pomoc zdalną** – zadzwoń +48 601 619 898.
+
+---
+
+## W skrócie: Zebra Setup Utilities
+
+| Aspekt | Informacja |
+|--------|------------|
+| **Co to jest?** | Oficjalne narzędzie Zebra do konfiguracji drukarek |
+| **Cena** | Bezpłatne |
+| **System** | Windows 10/11, Server 2019/2022 |
+| **Połączenie** | USB, Ethernet, WiFi |
+| **Funkcje** | Sieć, firmware, kalibracja, ZPL, backup |
+| **Obsługiwane drukarki** | ZD421, ZD621, ZT410, ZT610, GK420, ZQ630 i 100+ innych |
+| **Pobieranie** | [Pobierz Zebra Setup Utilities](/sterowniki) |
+
+---
 
 > **🔧 Zebra Setup Utilities (ZSU)** to oficjalne narzędzie Zebra do konfiguracji, diagnostyki i zarządzania drukarkami etykiet. Pozwala skonfigurować sieć, zaktualizować firmware, skalibrować drukarkę i wysyłać komendy ZPL – wszystko z jednego miejsca.
 
