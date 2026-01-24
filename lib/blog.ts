@@ -5749,15 +5749,16 @@ Domyślnie po ~30 minutach nieaktywności skaner przechodzi w tryb uśpienia. Mo
   
   {
     slug: 'konfiguracja-skanera-zebra-kodami-kreskowymi-enter-tab',
-    title: 'Jak skonfigurować skaner Zebra kodami kreskowymi – Enter, Tab, sufiksy',
+    title: 'Jak skonfigurować skaner Zebra kodami kreskowymi – Enter, Tab, sufiksy [2026]',
     excerpt: 'Gotowe kody do zeskanowania! Dodaj Enter lub Tab po skanowaniu, zmień klawiaturę na polską, włącz QR i DataMatrix. Kody działają na DS2208, DS4608, LI2208, LI4278.',
     coverImage: '/blog/konfiguracja-skanera-zebra-kodami.jpeg',
+    coverImageAlt: 'Kody konfiguracyjne do skanera Zebra - Enter, Tab, QR, DataMatrix do zeskanowania',
     author: {
       name: 'Zespół TAKMA',
       role: 'Certyfikowani technicy Zebra'
     },
     publishedAt: '2025-12-06',
-    updatedAt: '2025-12-10',
+    updatedAt: '2026-01-24',
     readingTime: 12,
     deviceType: 'skanery',
     category: 'poradniki',
@@ -5809,10 +5810,87 @@ Domyślnie po ~30 minutach nieaktywności skaner przechodzi w tryb uśpienia. Mo
         
         // Frazy angielskie
         'zebra scanner programming barcodes', 'zebra scanner enter suffix', 'zebra 123scan tutorial',
-        'zebra scanner factory reset barcode', 'zebra scanner configuration guide'
-      ]
+        'zebra scanner factory reset barcode', 'zebra scanner configuration guide',
+        
+        // GEO - miasta
+        'konfiguracja skanera zebra wrocław',
+        'serwis skanerów zebra warszawa',
+        'programowanie skanerów zebra kraków',
+        'pomoc konfiguracja skanera zebra polska'
+      ],
+      faqSchema: [
+        {
+          question: 'Jak dodać Enter po skanowaniu w skanerze Zebra?',
+          answer: 'Zeskanuj kod "Add Enter Suffix" z tej strony. Skaner automatycznie doda Enter (Carriage Return + Line Feed) po każdym skanowaniu. Działa na DS2208, DS4608, LI2208, LI4278 i innych.'
+        },
+        {
+          question: 'Jak dodać Tab po skanowaniu w skanerze Zebra?',
+          answer: 'Zeskanuj kod "Add Tab Suffix" z tej strony. Po skanowaniu kursor automatycznie przeskoczy do następnego pola formularza. Idealne do wypełniania formularzy.'
+        },
+        {
+          question: 'Jak zresetować skaner Zebra do ustawień fabrycznych?',
+          answer: 'Zeskanuj kod "Set Defaults" z tej strony. Skaner wyda sygnał dźwiękowy potwierdzający reset. Wszystkie ustawienia wrócą do wartości domyślnych.'
+        },
+        {
+          question: 'Jak włączyć skanowanie kodów QR w skanerze Zebra?',
+          answer: 'Zeskanuj kod "Enable QR Code" z tej strony. Skaner musi być imagerem (seria DS), skanery laserowe (LS) nie obsługują kodów 2D.'
+        },
+        {
+          question: 'Jak zmienić klawiaturę na polską w skanerze Zebra?',
+          answer: 'Znajdź kod "Country Code Poland" w PRG (Product Reference Guide) dla Twojego modelu skanera, sekcja Country Codes. Upewnij się że Windows też ma ustawiony polski układ.'
+        },
+        {
+          question: 'Czy ustawienia skanera Zebra są trwałe po zeskanowaniu kodu konfiguracyjnego?',
+          answer: 'Tak! Ustawienia zapisywane są w pamięci nieulotnej skanera (NVRAM) i przetrwają restart oraz odłączenie od zasilania.'
+        },
+        {
+          question: 'Nie mogę zeskanować kodu z ekranu - co robić?',
+          answer: 'Powiększ obraz (Ctrl+), zwiększ jasność ekranu, trzymaj skaner prostopadle 10-20 cm od ekranu. Dla kodów QR/DataMatrix skaner musi być imagerem (DS), nie laserem (LS).'
+        },
+        {
+          question: 'Gdzie znaleźć więcej kodów konfiguracyjnych dla skanera Zebra?',
+          answer: 'W Product Reference Guide (PRG) dla Twojego modelu na zebra.com. Lub użyj darmowego programu 123Scan do graficznej konfiguracji wszystkich parametrów.'
+        }
+      ],
+      howToSchema: {
+        name: 'Jak skonfigurować skaner Zebra kodami kreskowymi',
+        description: 'Instrukcja konfiguracji skanera Zebra przez zeskanowanie kodów programujących - Enter, Tab, QR, DataMatrix.',
+        totalTime: 'PT5M',
+        supply: [
+          'Skaner Zebra (DS2208, DS4608, LI2208, LI4278 lub inny)',
+          'Ekran komputera lub wydrukowane kody'
+        ],
+        tool: [
+          'Skaner Zebra podłączony do komputera',
+          'Przeglądarka internetowa z tą stroną'
+        ],
+        steps: [
+          'Otwórz tę stronę na ekranie komputera',
+          'Zeskanuj kod "Set Defaults" aby zresetować ustawienia',
+          'Zeskanuj kod "Add Enter Suffix" aby dodać Enter po skanowaniu',
+          'Opcjonalnie: zeskanuj "Enable QR Code" aby włączyć kody QR',
+          'Przetestuj skanowanie w dowolnej aplikacji'
+        ]
+      }
     },
     content: `
+> **Szybka odpowiedź:** Aby dodać **Enter po skanowaniu** w skanerze Zebra, zeskanuj kod "Add Enter Suffix" z tej strony. Dla **Tab** - zeskanuj "Add Tab Suffix". Kody działają na **DS2208, DS4608, LI2208, LI4278** i innych modelach. Ustawienia zapisują się w pamięci nieulotnej i przetrwają restart.
+
+---
+
+## W skrócie: Konfiguracja skanera kodami
+
+| Ustawienie | Kod na tej stronie | Czas |
+|------------|-------------------|------|
+| Reset fabryczny | ✅ Set Defaults | 2 sek. |
+| Dodanie Enter | ✅ Add Enter Suffix | 2 sek. |
+| Dodanie Tab | ✅ Add Tab Suffix | 2 sek. |
+| Włączenie QR | ✅ Enable QR Code | 2 sek. |
+| Włączenie DataMatrix | ✅ Enable DataMatrix | 2 sek. |
+| Polska klawiatura | 📖 PRG strona 307 | 2 sek. |
+
+---
+
 ## Programowanie skanera Zebra kodami kreskowymi
 
 Każdy skaner Zebra można skonfigurować **bez podłączania do komputera** — wystarczy zeskanować odpowiednie kody konfiguracyjne. Poniżej znajdziesz **gotowe kody do zeskanowania** dla najpopularniejszych ustawień.
@@ -5950,11 +6028,33 @@ Zeskanuj kod **Set Defaults** — przywróci wszystkie ustawienia fabryczne.
 
 Jeśli konfiguracja kodami nie rozwiązuje problemu, możliwe że skaner wymaga **naprawy lub kalibracji**.
 
-> 🔧 **Zgłoś skaner do serwisu** — [Wypełnij formularz →](/#formularz) — bezpłatna diagnostyka, naprawa modułu skanującego.
+---
+
+## 📚 Oficjalna dokumentacja Zebra
+
+Według oficjalnej dokumentacji Zebra Technologies:
+
+> *"Programming bar codes can be used to change printer/scanner settings. These bar codes are found in the Product Reference Guide for each printer model."*
+> — Zebra Technologies, Product Reference Guide
+
+**Linki do PRG (Product Reference Guide):**
+- [DS2208 PRG](https://www.zebra.com/content/dam/zebra/manuals/barcode-scanners/ds2208-prg-en.pdf) - kody na stronie 200+
+- [DS4608 PRG](https://www.zebra.com/content/dam/zebra/manuals/barcode-scanners/ds4608-prg-en.pdf) - kody na stronie 180+
+- [LI2208/LI4278 PRG](https://www.zebra.com/content/dam/zebra/manuals/barcode-scanners/li2208-prg-en.pdf) - kody na stronie 150+
+
+**Przydatne narzędzia:**
+- [123Scan - darmowy program do konfiguracji](/sterowniki)
+- [Serwis skanerów Zebra](/skanery) - naprawa i konfiguracja
+
+---
+
+## Potrzebujesz pomocy?
+
+> 🔧 **Zgłoś skaner do serwisu** — [Wypełnij formularz →](/formularz) — bezpłatna diagnostyka, naprawa modułu skanującego.
 
 > 📞 **Pilne?** Zadzwoń: **+48 601 619 898** — pomożemy skonfigurować skaner przez telefon.
 
-Serwisujemy wszystkie modele skanerów: DS2208, DS4608, DS8178, LI2208, LI4278, DS36x8, LS2208 i inne.
+Jako **autoryzowany serwis Zebra** (TAKMA, Wrocław) serwisujemy wszystkie modele skanerów: DS2208, DS4608, DS8178, LI2208, LI4278, DS36x8, LS2208 i inne. Pomagamy klientom z całej Polski.
 `
   },
   
