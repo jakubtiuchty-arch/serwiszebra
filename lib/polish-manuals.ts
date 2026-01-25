@@ -28981,6 +28981,486 @@ Zebra TC58 może automatycznie dodawać współrzędne GPS do zdjęć:
     ]
   },
 
+  tc53erfid: {
+    model: 'TC53e-RFID',
+    title: 'Zebra TC53e-RFID – Instrukcja obsługi po Polsku',
+    lastUpdated: '2026-01-25',
+    sourceDocument: 'Zebra TC53e-RFID User Guide',
+    keywords: [
+      'Zebra TC53e-RFID',
+      'Zebra TC53e-RFID instrukcja',
+      'Zebra TC53e-RFID manual',
+      'Zebra TC53e-RFID po polsku',
+      'Zebra TC53e RFID UHF',
+      'terminal RFID Zebra',
+      'komputer mobilny RFID Zebra',
+      'Zebra TC53e-RFID specyfikacja',
+      'Zebra TC53e-RFID skaner',
+      'Zebra TC53e-RFID inwentaryzacja',
+      'Zebra TC53e-RFID 123RFID Mobile',
+      'Zebra TC53e-RFID zasięg',
+      'Zebra TC53e-RFID serwis',
+      'terminal RFID UHF Zebra',
+      'Zebra TC53e-RFID konfiguracja',
+      'Zebra RFID inwentaryzacja'
+    ],
+    sections: [
+      {
+        title: '1. Podstawowe informacje',
+        content: `
+### O urządzeniu Zebra TC53e-RFID
+
+Zebra TC53e-RFID to zaawansowany komputer mobilny nowej generacji z **6-calowym ekranem dotykowym Full HD+** i **zintegrowanym czytnikiem RFID UHF**. Urządzenie łączy funkcjonalność standardowego terminala TC53e ze zintegrowaną anteną RFID, umożliwiającą odczyt tagów RFID bez dodatkowych akcesoriów.
+
+Zebra TC53e-RFID oferuje **zasięg odczytu RFID 1,5-2,0 metra** i prędkość **20 tagów na sekundę**. Wyposażony w Wi-Fi 6, skaner kodów kreskowych SE4720, NFC i Bluetooth 5.2, jest idealnym rozwiązaniem dla inwentaryzacji, śledzenia aktywów i zarządzania zapasami.
+
+### Parametry techniczne Zebra TC53e-RFID
+
+| Parametr | Zebra TC53e-RFID |
+|----------|------------------|
+| **Wyświetlacz** | 6,0" FHD+ (2160 x 1080) |
+| Jasność | 600 nitów |
+| Ochrona ekranu | Corning Gorilla Glass |
+| Procesor | Qualcomm 6490, 2,7 GHz (8-rdzeniowy) |
+| System operacyjny | Android 13+ (aktualizacje do Android 16+) |
+| Pamięć RAM | 6 GB |
+| Pamięć Flash | 64 GB |
+| Łączność bezprzewodowa | Wi-Fi 6 (802.11ax), Bluetooth 5.2, NFC |
+| Skaner kodów | SE4720 2D Imager |
+| **RFID UHF** | **Zintegrowany czytnik/enkoder** |
+| Zasięg RFID | 1,5 – 2,0 m |
+| Prędkość RFID | 20 tagów/sekundę |
+
+### Porównanie Zebra TC53e vs Zebra TC53e-RFID vs Zebra TC58e
+
+| Parametr | Zebra TC53e | Zebra TC53e-RFID | Zebra TC58e |
+|----------|-------------|------------------|-------------|
+| **RFID UHF** | **Brak** | **Zintegrowany** | **Brak** |
+| Łączność komórkowa | Brak | Brak | 5G / LTE |
+| Wi-Fi | 6 (802.11ax) | 6 (802.11ax) | 6 (802.11ax) |
+| GPS | Nie | Nie | Zintegrowany |
+| Zasięg RFID | – | 1,5-2,0 m | – |
+| Zastosowanie | Wewnątrz budynków | **Inwentaryzacja RFID** | Teren i mobilność |
+
+### Zastosowania Zebra TC53e-RFID
+
+- **Inwentaryzacja:** szybkie zliczanie tagów RFID, inwentaryzacja ciągła, kontrola stanów
+- **Zarządzanie aktywami:** śledzenie sprzętu IT, narzędzi, wyposażenia
+- **Handel detaliczny:** zarządzanie zapasami, śledzenie produktów na półkach
+- **Magazyny:** przyjęcia i wydania towaru, lokalizacja produktów, cross-docking
+- **Produkcja:** śledzenie WIP, kontrola jakości, zarządzanie partiami
+- **Służba zdrowia:** śledzenie sprzętu medycznego, zarządzanie lekami
+- **Biblioteki i archiwa:** inwentaryzacja zbiorów, wypożyczenia, zwroty
+
+### Cechy charakterystyczne Zebra TC53e-RFID
+
+- **Zintegrowany RFID UHF** – odczyt tagów bez dodatkowych akcesoriów
+- **Zasięg RFID 1,5-2,0 m** – szybka inwentaryzacja dużych obszarów
+- **20 tagów/sekundę** – wysoka prędkość odczytu
+- **Antena omnidirection** – odczyt tagów z różnych kierunków
+- **Wi-Fi 6 (802.11ax)** – szybka i stabilna łączność bezprzewodowa
+- **Wyświetlacz 6" FHD+** – najjaśniejszy w swojej klasie (600 nitów)
+- **Skaner SE4720** – skanowanie kodów kreskowych 1D/2D
+- **Certyfikat IP65/IP68** – pełna odporność na kurz i wodę
+- **123RFID Mobile** – dedykowana aplikacja do obsługi RFID
+`
+      },
+      {
+        title: '2. Rozpakowanie i instalacja',
+        content: `
+### Zawartość opakowania Zebra TC53e-RFID
+
+- Komputer mobilny Zebra TC53e-RFID
+- Bateria PowerPrecision+ Li-Ion 4680 mAh
+- Skrócona instrukcja obsługi
+- Przewodnik bezpieczeństwa
+
+> **Uwaga:** Zasilacz, kable, stacje dokujące i futerały ochronne są sprzedawane oddzielnie.
+
+### Instalacja baterii Zebra TC53e-RFID
+
+1. Włóż baterię do komory, wyrównując styki (najpierw dolna część)
+2. Dociśnij baterię do góry, aż zatrzaski zablokują się na miejscu
+3. Zatrzaski po bokach powinny zaskoczyć automatycznie
+
+### Wyjmowanie baterii Zebra TC53e-RFID
+
+1. Naciśnij jednocześnie oba zatrzaski zwalniające z tyłu urządzenia
+2. Przytrzymując zatrzaski, przesuń je do środka
+3. Unieś baterię i wyjmij z komory
+
+### Warunki pracy Zebra TC53e-RFID
+
+| Tryb | Temperatura | Wilgotność |
+|------|-------------|------------|
+| Praca | -20°C do +50°C | 5-95% bez kondensacji |
+| Ładowanie | 0°C do +50°C | – |
+| Przechowywanie | -40°C do +70°C | 5-95% bez kondensacji |
+`
+      },
+      {
+        title: '3. Skanowanie RFID UHF',
+        content: `
+### O zintegrowanym module RFID Zebra TC53e-RFID
+
+Zebra TC53e-RFID wyposażony jest w zintegrowany czytnik/enkoder RFID UHF:
+
+| Parametr | Wartość |
+|----------|---------|
+| Zasięg odczytu | 1,5 – 2,0 m |
+| Prędkość odczytu | 20 tagów/sekundę |
+| Typ anteny | Omnidirection (dookólna) |
+| Standard | EPC Gen2 / ISO 18000-6C |
+| Funkcje | Odczyt, zapis, enkodowanie tagów |
+
+### Aplikacja 123RFID Mobile
+
+Do obsługi funkcji RFID wymagana jest aplikacja **123RFID Mobile**:
+
+1. Pobierz aplikację z **Google Play Store**
+2. Wyszukaj "123RFID Mobile" lub "Zebra RFID"
+3. Zainstaluj i uruchom aplikację
+4. Aplikacja automatycznie wykryje zintegrowany moduł RFID
+
+### Skanowanie tagów RFID Zebra TC53e-RFID
+
+1. Uruchom aplikację **123RFID Mobile**
+2. Wybierz operację (Read/Inventory/Locate)
+3. Trzymaj urządzenie tak, aby antena RFID (górna część tyłu) była skierowana w stronę tagów
+4. Dotknij przycisku **Read** na ekranie lub naciśnij przycisk skanowania
+5. Utrzymuj urządzenie w kierunku tagów
+6. Odczytane tagi pojawią się na liście
+7. Dotknij **Stop** aby zakończyć skanowanie
+
+### Prawidłowy chwyt urządzenia Zebra TC53e-RFID
+
+**WAŻNE:** Podczas skanowania RFID trzymaj urządzenie tak, aby:
+- Dłoń znajdowała się **poniżej paska na rękę** i przycisków skanowania
+- Antena RFID (górna część tyłu) była **odkryta** i skierowana w stronę tagów
+- **Nie zasłaniaj anteny dłonią!**
+
+### Tryby pracy RFID Zebra TC53e-RFID
+
+| Tryb | Opis |
+|------|------|
+| **Inventory** | Zliczanie wszystkich tagów w zasięgu |
+| **Read** | Odczyt danych z tagów |
+| **Write** | Zapis danych do tagów |
+| **Locate** | Lokalizowanie konkretnego tagu |
+| **Access** | Operacje z hasłem (lock, kill) |
+
+### Wskazówki dotyczące skanowania RFID
+
+- **Optymalna odległość:** 0,5 – 1,5 m dla najlepszych wyników
+- **Kierunek anteny:** Skieruj górną część urządzenia w stronę tagów
+- **Ruch:** Powoli przemieszczaj urządzenie dla pokrycia większego obszaru
+- **Zakłócenia:** Unikaj metalowych powierzchni i płynów między anteną a tagami
+- **Wiele tagów:** Przy dużej liczbie tagów zwiększ czas skanowania
+
+### Skanery zewnętrzne RFID
+
+Jeśli do Zebra TC53e-RFID podłączony jest zewnętrzny czytnik RFID (RFD40 lub RFD90), **zewnętrzny czytnik nadpisuje zintegrowany moduł RFID**. Aby używać zintegrowanego RFID, odłącz zewnętrzne sanki.
+`
+      },
+      {
+        title: '4. Skanowanie kodów kreskowych',
+        content: `
+### Obsługiwany skaner Zebra TC53e-RFID
+
+| Skaner | Opis | Zasięg |
+|--------|------|--------|
+| SE4720 | Standardowy skaner 2D | Do 91 cm (kod 20 mil) |
+
+### Skanowanie wewnętrznym skanerem Zebra TC53e-RFID
+
+1. Uruchom aplikację obsługującą skanowanie (np. DWDemo)
+2. Skieruj okno skanera na kod kreskowy
+3. Naciśnij przycisk skanowania (boczny lub ekranowy)
+4. Utrzymuj urządzenie w odległości 10-60 cm od kodu
+5. Celuj linią lub wzorem na środek kodu
+6. Poczekaj na potwierdzenie odczytu (dźwięk/wibracja)
+
+### Zasięgi skanowania SE4720 (Zebra TC53e-RFID)
+
+| Typ kodu | Odległość min. | Odległość maks. |
+|----------|----------------|-----------------|
+| Code 39 (3 mil) | 7,6 cm | 14,7 cm |
+| Code 128 (5 mil) | 5,8 cm | 24,9 cm |
+| PDF417 (5 mil) | 7,6 cm | 20,1 cm |
+| Data Matrix (10 mil) | 5,3 cm | 27,9 cm |
+| UPC-A (100%) | 4,1 cm | 63,2 cm |
+| Code 39 (20 mil) | 4,1 cm | 91,7 cm |
+
+### Wskazówki dotyczące skanowania kodów Zebra TC53e-RFID
+
+- Utrzymuj równoległy kąt do kodu (unikaj skrajnych kątów)
+- Unikaj odbić światła na laminowanych etykietach
+- Regularnie czyść okno skanera
+`
+      },
+      {
+        title: '5. Łączność bezprzewodowa',
+        content: `
+### Wi-Fi 6 Zebra TC53e-RFID
+
+| Parametr | Wartość |
+|----------|---------|
+| Standard | 802.11 a/b/g/n/ac/ax (Wi-Fi 6) |
+| Pasma | 2,4 GHz / 5 GHz |
+| Zabezpieczenia | WPA3, WPA2, WPA, 802.1x |
+
+### Łączenie z siecią Wi-Fi Zebra TC53e-RFID
+
+1. Otwórz **Ustawienia** → **Sieć i internet** → **Wi-Fi**
+2. Włącz Wi-Fi (jeśli wyłączone)
+3. Wybierz sieć z listy
+4. Wprowadź hasło (jeśli wymagane)
+5. Dotknij **Połącz**
+
+### Bluetooth 5.2 Zebra TC53e-RFID
+
+| Parametr | Wartość |
+|----------|---------|
+| Wersja | 5.2 + BLE |
+| Profile | A2DP, AVRCP, HFP, HID, SPP, OPP |
+| Zasięg | do 10 m (klasa 2) |
+
+### NFC vs RFID UHF w Zebra TC53e-RFID
+
+| Cecha | NFC | RFID UHF (zintegrowany) |
+|-------|-----|-------------------------|
+| Zasięg | Do 10 cm | 1,5 – 2,0 m |
+| Częstotliwość | 13,56 MHz | 860-960 MHz |
+| Zastosowanie | Płatności, parowanie | Inwentaryzacja, śledzenie |
+
+### Włączanie NFC Zebra TC53e-RFID
+
+1. Otwórz **Ustawienia** → **Połączone urządzenia**
+2. Dotknij **Preferencje połączeń** → **NFC**
+3. Włącz NFC
+`
+      },
+      {
+        title: '6. Bateria i ładowanie',
+        content: `
+### Specyfikacja baterii Zebra TC53e-RFID
+
+| Parametr | Wartość |
+|----------|---------|
+| Typ | Li-Ion PowerPrecision+ |
+| Pojemność | 4680 mAh (standard) |
+| Napięcie | 3,87 V |
+| Czas pracy | 8-12 godzin (zależnie od użycia RFID) |
+| Czas ładowania | ~2,5 godziny (0-90%) |
+
+> **Uwaga:** Intensywne użycie modułu RFID zwiększa zużycie baterii.
+
+### Ładowanie urządzenia Zebra TC53e-RFID
+
+**Przez USB-C:**
+1. Podłącz kabel USB-C do urządzenia
+2. Podłącz drugi koniec do zasilacza
+3. LED zmieni kolor na pomarańczowy (ładowanie)
+4. LED zmieni kolor na zielony (naładowane)
+
+**Przez stację dokującą:**
+1. Umieść urządzenie w stacji
+2. Upewnij się, że styki są prawidłowo połączone
+3. LED stacji wskaże status ładowania
+
+### Wskaźniki LED ładowania Zebra TC53e-RFID
+
+| Kolor LED | Znaczenie |
+|-----------|-----------|
+| Pomarańczowy (stały) | Ładowanie |
+| Zielony (stały) | Naładowane |
+| Pomarańczowy (migający) | Błąd ładowania |
+| Czerwony (migający) | Temperatura poza zakresem |
+
+### Oszczędzanie baterii Zebra TC53e-RFID
+
+- **Wyłączaj RFID gdy nie jest używane**
+- Zmniejsz jasność ekranu
+- Wyłącz Wi-Fi gdy nie jest potrzebne
+- Włącz tryb oszczędzania baterii
+`
+      },
+      {
+        title: '7. Konserwacja i rozwiązywanie problemów',
+        content: `
+### Harmonogram czyszczenia Zebra TC53e-RFID
+
+| Element | Częstotliwość |
+|---------|---------------|
+| Ekran dotykowy | Codziennie |
+| Okno skanera | Codziennie |
+| **Antena RFID** | Co tydzień |
+| Styki ładowania | Co tydzień |
+| Obudowa | W razie potrzeby |
+
+### Czyszczenie Zebra TC53e-RFID
+
+1. Wyłącz urządzenie lub zablokuj ekran
+2. Użyj miękkiej, bezpyłowej ściereczki
+3. Zwilż alkoholem izopropylowym (70%)
+4. Delikatnie przetrzyj powierzchnię
+5. Osusz przed użyciem
+
+### Problemy z RFID Zebra TC53e-RFID
+
+| Problem | Rozwiązanie |
+|---------|-------------|
+| RFID nie działa | Sprawdź czy aplikacja 123RFID Mobile jest uruchomiona |
+| Niski zasięg RFID | Sprawdź chwyt – nie zasłaniaj anteny dłonią |
+| Nie odczytuje tagów | Sprawdź orientację tagów, unikaj metalu i płynów |
+| Wolny odczyt | Zmniejsz odległość od tagów |
+| RFID niedostępne | Sprawdź czy nie podłączono zewnętrznego RFD40/RFD90 |
+
+### Problemy ze skanowaniem kodów Zebra TC53e-RFID
+
+| Problem | Rozwiązanie |
+|---------|-------------|
+| Skaner nie działa | Sprawdź DataWedge, zrestartuj urządzenie |
+| Nie odczytuje kodu | Oczyść okno skanera, zmień kąt/odległość |
+
+### Problemy z baterią Zebra TC53e-RFID
+
+| Problem | Rozwiązanie |
+|---------|-------------|
+| Szybkie rozładowanie | Wyłącz RFID gdy nie jest używane, zmniejsz jasność |
+| Nie ładuje się | Sprawdź styki, użyj innej ładowarki |
+| LED miga na czerwono | Błąd ładowania – sprawdź temperaturę |
+
+### Resetowanie Zebra TC53e-RFID
+
+**Miękki reset:**
+1. Przytrzymaj przycisk Power
+2. Wybierz "Uruchom ponownie"
+
+**Twardy reset:**
+1. Przytrzymaj Power przez 10 sekund
+
+**Enterprise Reset:**
+1. Ustawienia → System → Opcje resetowania
+2. Wybierz "Enterprise Reset"
+
+**Factory Reset:**
+1. Ustawienia → System → Opcje resetowania
+2. Wybierz "Przywrócenie danych fabrycznych"
+
+> **Ostrzeżenie:** Factory Reset usuwa wszystkie dane!
+`
+      },
+      {
+        title: '8. Specyfikacje techniczne',
+        content: `
+### Wymiary i waga Zebra TC53e-RFID
+
+| Parametr | Wartość |
+|----------|---------|
+| Wysokość | 164,8 mm |
+| Szerokość | 77,35 mm |
+| Grubość | 16,75 mm |
+| Waga (z baterią) | ~295 g |
+
+### Wyświetlacz Zebra TC53e-RFID
+
+| Parametr | Wartość |
+|----------|---------|
+| Przekątna | 6,0" |
+| Rozdzielczość | 2160 x 1080 (FHD+) |
+| Jasność | 600 nitów |
+| Ochrona | Corning Gorilla Glass |
+| Dotyk | Pojemnościowy, rękawiczki, mokry palec |
+
+### Wydajność Zebra TC53e-RFID
+
+| Parametr | Wartość |
+|----------|---------|
+| Procesor | Qualcomm 6490, 2,7 GHz, 8-rdzeniowy |
+| RAM | 6 GB |
+| Flash | 64 GB |
+| microSD | Do 2 TB |
+
+### RFID UHF Zebra TC53e-RFID
+
+| Parametr | Wartość |
+|----------|---------|
+| Standard | EPC Gen2 / ISO 18000-6C |
+| Częstotliwość | 860-960 MHz |
+| **Zasięg odczytu** | **1,5 – 2,0 m** |
+| **Prędkość odczytu** | **20 tagów/sekundę** |
+| Antena | Omnidirection (dookólna) |
+| Funkcje | Odczyt, zapis, enkodowanie |
+
+### Łączność Zebra TC53e-RFID
+
+| Parametr | Wartość |
+|----------|---------|
+| Wi-Fi | 802.11 a/b/g/n/ac/ax (Wi-Fi 6) |
+| Bluetooth | 5.2 + BLE |
+| NFC | Tak |
+| USB | USB-C 3.1 Gen 1 |
+
+### Wytrzymałość Zebra TC53e-RFID
+
+| Parametr | Wartość |
+|----------|---------|
+| Stopień ochrony IP | IP65/IP68 |
+| Upadek (z Rugged Boot) | 1,8 m na beton (MIL-STD-810H) |
+| Temperatura pracy | -20°C do +50°C |
+| Temperatura ładowania | 0°C do +50°C |
+| Temperatura przechowywania | -40°C do +70°C |
+| Wilgotność | 5-95% bez kondensacji |
+
+### Certyfikaty Zebra TC53e-RFID
+
+- MIL-STD-810H
+- IP65/IP68
+- CE, FCC, IC
+- RoHS
+- Secure Boot, Verified Boot
+`
+      },
+      {
+        title: '9. FAQ – Często zadawane pytania',
+        content: `
+### Co to jest Zebra TC53e-RFID?
+
+**Odpowiedź:** Zebra TC53e-RFID to zaawansowany **komputer mobilny z 6-calowym ekranem FHD+ (600 nitów)** i **zintegrowanym czytnikiem RFID UHF**. Oferuje zasięg odczytu 1,5-2,0 m i prędkość 20 tagów/sekundę. Przeznaczony dla inwentaryzacji, śledzenia aktywów i zarządzania zapasami.
+
+### Jaka jest różnica między Zebra TC53e a Zebra TC53e-RFID?
+
+**Odpowiedź:** Zebra TC53e-RFID ma **zintegrowany moduł RFID UHF** z zasięgiem do 2 metrów. Standardowy Zebra TC53e nie posiada RFID. Oba modele mają ten sam ekran, procesor, Wi-Fi 6 i skaner SE4720.
+
+### Jaki jest zasięg odczytu RFID w Zebra TC53e-RFID?
+
+**Odpowiedź:** Zasięg odczytu RFID wynosi **1,5 – 2,0 metra** (zależnie od typu tagu i warunków otoczenia). Prędkość odczytu to **20 tagów na sekundę**.
+
+### Jaką aplikację używać do RFID w Zebra TC53e-RFID?
+
+**Odpowiedź:** Do obsługi RFID używaj aplikacji **123RFID Mobile** dostępnej bezpłatnie w Google Play Store. Aplikacja automatycznie wykrywa zintegrowany moduł RFID.
+
+### Czy Zebra TC53e-RFID może skanować kody kreskowe?
+
+**Odpowiedź:** **Tak**, Zebra TC53e-RFID ma zintegrowany skaner **SE4720** do skanowania kodów kreskowych 1D/2D z zasięgiem do 91 cm.
+
+### Jak długo działa bateria w Zebra TC53e-RFID?
+
+**Odpowiedź:** Bateria 4680 mAh zapewnia **8-12 godzin pracy**. Intensywne użycie modułu RFID zwiększa zużycie baterii. Wyłączaj RFID gdy nie jest używane.
+
+### Czy mogę używać zewnętrznego skanera RFID z Zebra TC53e-RFID?
+
+**Odpowiedź:** Tak, ale **zewnętrzny czytnik RFID (RFD40/RFD90) nadpisuje zintegrowany moduł RFID**. Aby wrócić do zintegrowanego RFID, odłącz zewnętrzne sanki.
+
+### Czy Zebra TC53e-RFID jest wodoodporny?
+
+**Odpowiedź:** Tak, Zebra TC53e-RFID posiada certyfikat **IP65/IP68** – jest w pełni odporny na kurz i wodę. Dodatkowo spełnia normę MIL-STD-810H dla upadków z 1,8 m.
+`
+      }
+    ]
+  },
+
   tc58e: {
     model: 'TC58e',
     title: 'Zebra TC58e – Instrukcja obsługi po Polsku',
