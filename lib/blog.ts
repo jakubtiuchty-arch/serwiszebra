@@ -144,7 +144,7 @@ export const blogPosts: BlogPost[] = [
     slug: 'zebra-zd220-vs-zd421-vs-zt411-porownanie',
     title: 'Zebra ZD220 vs ZD421 vs ZT411 – którą drukarkę wybrać? Porównanie [2026]',
     excerpt: 'Porównanie drukarek Zebra ZD220, ZD421 i ZT411. Sprawdź która drukarka etykiet jest najlepsza dla Twojej firmy: budżetowa ZD220, biurowa ZD421 czy przemysłowa ZT411.',
-    coverImage: '/blog/zebra-zd220-vs-zd421-vs-zt411.jpeg',
+    coverImage: '/blog/zebra-zd220-vs-zd421-vs-zt411-porownanie.jpeg',
     coverImageAlt: 'Trzy drukarki Zebra obok siebie: ZD220, ZD421 i ZT411 - porównanie modeli',
     author: {
       name: 'Zespół TAKMA',
