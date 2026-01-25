@@ -782,36 +782,6 @@ export async function getDeliveryAddresses(): Promise<IngramResponse> {
 }
 
 // ============================================
-// Orders List
-// ============================================
-
-/**
- * Pobiera listę zamówień
- * @param dateFrom - Data od (YYYY-MM-DD)
- * @param dateTo - Data do (YYYY-MM-DD)
- */
-export async function getOrdersList(dateFrom?: string, dateTo?: string): Promise<IngramResponse> {
-  let filterXml = ''
-  
-  if (dateFrom) {
-    filterXml += `<DateFrom>${escapeXml(dateFrom)}</DateFrom>`
-  }
-  if (dateTo) {
-    filterXml += `<DateTo>${escapeXml(dateTo)}</DateTo>`
-  }
-
-  const xmlRequest = `<?xml version="1.0" encoding="UTF-8"?>
-<OrdersListRequest>
-  <TransactionHeader>
-    <APIKey>${INGRAM_API_KEY}</APIKey>
-  </TransactionHeader>
-  ${filterXml ? `<Filter>${filterXml}</Filter>` : ''}
-</OrdersListRequest>`
-
-  return sendXmlRequest(xmlRequest, 8000) // 8s timeout
-}
-
-// ============================================
 // Invoices List
 // ============================================
 
