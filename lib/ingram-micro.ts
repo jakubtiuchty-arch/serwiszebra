@@ -862,6 +862,882 @@ export async function getInvoicesList(dateFrom?: string, dateTo?: string): Promi
 }
 
 // ============================================
+// CREATE ORDER - Składanie zamówienia
+// ============================================
+
+/**
+ * DOKUMENTACJA OrderRequest:
+ * 
+ * Currencies:
+ *   - Zamówienie i faktura mogą być w różnych walutach
+ *   - "DEF" = domyślna waluta produktu (zalecane)
+ *   - Dostępne: PLN, EUR, USD, etc.
+ * 
+ * Shipping:
+ *   - "Courier" = wysyłka kurierem na podany adres
+ *   - Inna wartość (np. "Pickup") = odbiór osobisty z magazynu Ingram
+ * 
+ * DeliveryAddressID vs DeliveryAddressAlt:
+ *   - DeliveryAddressID = ID adresu z listy (DeliveryAddressesList)
+ *   - DeliveryAddressAlt = alternatywny adres podany w zamówieniu
+ *   - Jeśli oba są ustawione, DeliveryAddressID ma priorytet
+ * 
+ * PartialShipment:
+ *   - "Yes" = Ingram może wysłać zamówienie w częściach (gdy część produktów dostępna)
+ *   - "No" = Wysyłka tylko gdy całe zamówienie kompletne
+ * 
+ * UWAGA: Anulowanie zamówienia NIE jest możliwe przez API!
+ * W razie potrzeby anulowania - kontakt z account managerem Ingram Micro.
+ */
+
+interface IngramOrderItem {
+  itemId: string        // Ingram SKU (np. ZBP1058930009 lub ZBGK42-202520-000)
+  quantity: number      // Ilość
+  lineReference?: string // Opcjonalny numer linii
+}
+
+interface IngramOrderDeliveryAddress {
+  companyName: string
+  addressLine1: string
+  addressLine2?: string
+  city: string
+  postCode: string
+  countryCode: string   // PL, DE, etc.
+  contactName: string
+  contactEmail: string
+  contactPhone: string
+}
+
+type IngramShippingMethod = 'Courier' | 'Pickup'
+
+interface CreateIngramOrderRequest {
+  customerReferenceNumber: string  // Twój numer zamówienia (np. "ZAM-20260125-001")
+  items: IngramOrderItem[]
+  deliveryAddress?: IngramOrderDeliveryAddress  // Wymagane dla Courier, opcjonalne dla Pickup
+  deliveryAddressId?: number       // Alternatywnie: ID adresu z DeliveryAddressesList
+  currency?: string                // PLN, EUR, DEF (domyślnie PLN)
+  invoiceCurrency?: string         // Waluta faktury (domyślnie = currency)
+  shippingMethod?: IngramShippingMethod  // Courier (domyślnie) lub Pickup
+  partialShipmentAllowed?: boolean // Czy dozwolone częściowe wysyłki (domyślnie: true)
+  attachInvoiceToShipment?: boolean // Dołącz fakturę do przesyłki (domyślnie: true)
+  customerNotes?: string
+  expectedDeliveryDate?: string    // Format: YYYY-MM-DD (opcjonalne)
+}
+
+interface IngramOrderLineResponse {
+  itemId: string
+  quantity: number
+  salesPrice?: number
+  currency?: string
+  miscCharges?: number
+}
+
+interface CreateIngramOrderResponse {
+  success: boolean
+  ingramOrderId?: string          // IMOrderID - numer zamówienia w Ingram Micro
+  documentId?: string             // DocumentID z TransactionHeader
+  timestamp?: string              // TimeStamp odpowiedzi
+  orderLines?: IngramOrderLineResponse[]  // Potwierdzenie linii z cenami
+  error?: string
+  rawResponse?: string
+}
+
+/**
+ * Składa zamówienie w Ingram Micro
+ * 
+ * @param order - Dane zamówienia
+ * @returns Numer zamówienia Ingram lub błąd
+ */
+export async function createIngramOrder(order: CreateIngramOrderRequest): Promise<CreateIngramOrderResponse> {
+  if (!INGRAM_API_KEY) {
+    return { success: false, error: 'Brak klucza API Ingram Micro (INGRAM_API_KEY)' }
+  }
+
+  if (!order.items || order.items.length === 0) {
+    return { success: false, error: 'Brak produktów w zamówieniu' }
+  }
+
+  const shippingMethod = order.shippingMethod || 'Courier'
+  
+  // Dla wysyłki kurierem wymagany jest adres dostawy
+  if (shippingMethod === 'Courier' && !order.deliveryAddress && !order.deliveryAddressId) {
+    return { success: false, error: 'Dla wysyłki kurierem wymagany jest adres dostawy (deliveryAddress lub deliveryAddressId)' }
+  }
+
+  // Buduj XML dla linii zamówienia
+  const orderLinesXml = order.items.map((item, index) => `
+    <OrderLine>
+      <ItemID>${escapeXml(item.itemId)}</ItemID>
+      <CustomerLineReference>${item.lineReference || (index + 1).toString()}</CustomerLineReference>
+      <OrderQty>${item.quantity}</OrderQty>
+    </OrderLine>`).join('')
+
+  // Buduj XML dla adresu dostawy (DeliveryAddressAlt)
+  // Używamy tylko jeśli nie podano DeliveryAddressID
+  let deliveryAddressXml = ''
+  if (order.deliveryAddressId) {
+    // Użyj ID adresu z listy DeliveryAddressesList
+    deliveryAddressXml = `<DeliveryAddressID>${order.deliveryAddressId}</DeliveryAddressID>`
+  } else if (order.deliveryAddress) {
+    // Użyj alternatywnego adresu
+    deliveryAddressXml = `
+    <DeliveryAddressAlt>
+      <CompanyName>${escapeXml(order.deliveryAddress.companyName)}</CompanyName>
+      <AddressLine1>${escapeXml(order.deliveryAddress.addressLine1)}</AddressLine1>
+      ${order.deliveryAddress.addressLine2 ? `<AddressLine2>${escapeXml(order.deliveryAddress.addressLine2)}</AddressLine2>` : ''}
+      <City>${escapeXml(order.deliveryAddress.city)}</City>
+      <PostCode>${escapeXml(order.deliveryAddress.postCode)}</PostCode>
+      <CountryCode>${escapeXml(order.deliveryAddress.countryCode)}</CountryCode>
+      <DeliveryContactName>${escapeXml(order.deliveryAddress.contactName)}</DeliveryContactName>
+      <DeliveryContactEmail>${escapeXml(order.deliveryAddress.contactEmail)}</DeliveryContactEmail>
+      <DeliveryContactPhone>${escapeXml(order.deliveryAddress.contactPhone)}</DeliveryContactPhone>
+      <IsEndUserAddress>Yes</IsEndUserAddress>
+    </DeliveryAddressAlt>`
+  }
+
+  // Buduj EndUser (wymagane dla produktów Zebra)
+  let endUserXml = ''
+  if (order.deliveryAddress) {
+    endUserXml = `
+    <EndUser>
+      <CompanyName>${escapeXml(order.deliveryAddress.companyName)}</CompanyName>
+      <AddressLine1>${escapeXml(order.deliveryAddress.addressLine1)}</AddressLine1>
+      ${order.deliveryAddress.addressLine2 ? `<AddressLine2>${escapeXml(order.deliveryAddress.addressLine2)}</AddressLine2>` : ''}
+      <City>${escapeXml(order.deliveryAddress.city)}</City>
+      <PostCode>${escapeXml(order.deliveryAddress.postCode)}</PostCode>
+      <CountryCode>${escapeXml(order.deliveryAddress.countryCode)}</CountryCode>
+      <EUContactName>${escapeXml(order.deliveryAddress.contactName)}</EUContactName>
+      <EUContactEmail>${escapeXml(order.deliveryAddress.contactEmail)}</EUContactEmail>
+      <EUContactPhone>${escapeXml(order.deliveryAddress.contactPhone)}</EUContactPhone>
+    </EndUser>`
+  }
+
+  // Ustawienia
+  const currency = order.currency || 'PLN'
+  const invoiceCurrency = order.invoiceCurrency || currency
+  const partialShipment = order.partialShipmentAllowed !== false ? 'Yes' : 'No'
+  const attachInvoice = order.attachInvoiceToShipment !== false ? 'Yes' : 'No'
+
+  const xmlRequest = `<?xml version="1.0" encoding="UTF-8"?>
+<OrderRequest>
+  <TransactionHeader>
+    <APIKey>${INGRAM_API_KEY}</APIKey>
+  </TransactionHeader>
+  <OrderDetails>
+    <CustomerReferenceNumber>${escapeXml(order.customerReferenceNumber)}</CustomerReferenceNumber>
+    <OrderCurrency>${currency}</OrderCurrency>
+    <InvoiceCurrency>${invoiceCurrency}</InvoiceCurrency>
+    <Shipping>${shippingMethod}</Shipping>
+    ${deliveryAddressXml}
+    ${order.expectedDeliveryDate ? `<ExpectedDeliveryDate>${order.expectedDeliveryDate}</ExpectedDeliveryDate>` : ''}
+    <PartialShipmentAllowed>${partialShipment}</PartialShipmentAllowed>
+    <AttachInvoiceToShipment>${attachInvoice}</AttachInvoiceToShipment>
+    ${endUserXml}
+    ${order.customerNotes ? `<CustomerNotes>${escapeXml(order.customerNotes)}</CustomerNotes>` : ''}
+  </OrderDetails>
+  <OrderLines>${orderLinesXml}
+  </OrderLines>
+</OrderRequest>`
+
+  console.log('[Ingram Order] Składam zamówienie:', order.customerReferenceNumber)
+  console.log('[Ingram Order] Produkty:', order.items.map(i => `${i.itemId} x${i.quantity}`).join(', '))
+  console.log('[Ingram Order] XML Request:', xmlRequest.substring(0, 500) + '...')
+
+  // Wysyłaj z dłuższym timeout - zamówienia mogą trwać dłużej
+  const response = await sendXmlRequest(xmlRequest, 30000) // 30s timeout
+
+  if (!response.success) {
+    console.error('[Ingram Order] Błąd:', response.error)
+    return { 
+      success: false, 
+      error: response.error,
+      rawResponse: response.rawResponse
+    }
+  }
+
+  const xml = response.data || ''
+
+  // Sprawdź czy są błędy w <Errors>
+  // Format: <Errors><Error>...</Error></Errors> lub <Errors/>
+  const errorsMatch = xml.match(/<Errors>([\s\S]*?)<\/Errors>/)
+  if (errorsMatch && errorsMatch[1].trim()) {
+    // Wyciągnij treść błędów
+    const errorContent = errorsMatch[1].replace(/<\/?Error>/g, '').trim()
+    if (errorContent) {
+      console.error('[Ingram Order] Błędy z API:', errorContent)
+      return {
+        success: false,
+        error: errorContent,
+        rawResponse: response.rawResponse
+      }
+    }
+  }
+
+  // Parsuj TransactionHeader
+  const documentIdMatch = xml.match(/<DocumentID>([^<]+)<\/DocumentID>/)
+  const timestampMatch = xml.match(/<TimeStamp>([^<]+)<\/TimeStamp>/)
+
+  // Parsuj OrderDetails - szukaj IMOrderID (numer zamówienia Ingram)
+  const orderIdMatch = xml.match(/<IMOrderID>([^<]+)<\/IMOrderID>/)
+  const ingramOrderId = orderIdMatch ? orderIdMatch[1] : null
+
+  // Parsuj OrderLines z cenami
+  const orderLines: IngramOrderLineResponse[] = []
+  const orderLineMatches = xml.matchAll(/<OrderLine>([\s\S]*?)<\/OrderLine>/g)
+  for (const match of orderLineMatches) {
+    const lineXml = match[1]
+    const itemIdMatch = lineXml.match(/<ItemID>([^<]+)<\/ItemID>/)
+    const qtyMatch = lineXml.match(/<OrderQty>([^<]+)<\/OrderQty>/)
+    const priceMatch = lineXml.match(/<SalesPrice>([^<]+)<\/SalesPrice>/)
+    const currencyMatch = lineXml.match(/<Currency>([^<]+)<\/Currency>/)
+    const miscMatch = lineXml.match(/<TotalMiscChargesPerUnit>([^<]+)<\/TotalMiscChargesPerUnit>/)
+    
+    if (itemIdMatch && qtyMatch) {
+      orderLines.push({
+        itemId: itemIdMatch[1],
+        quantity: parseInt(qtyMatch[1]),
+        salesPrice: priceMatch ? parseFloat(priceMatch[1]) : undefined,
+        currency: currencyMatch ? currencyMatch[1] : undefined,
+        miscCharges: miscMatch ? parseFloat(miscMatch[1]) : undefined
+      })
+    }
+  }
+
+  if (ingramOrderId) {
+    console.log('[Ingram Order] ✅ Zamówienie złożone!')
+    console.log('[Ingram Order] IMOrderID:', ingramOrderId)
+    console.log('[Ingram Order] DocumentID:', documentIdMatch?.[1])
+    console.log('[Ingram Order] Linie zamówienia:', orderLines.length)
+    
+    return {
+      success: true,
+      ingramOrderId,
+      documentId: documentIdMatch?.[1],
+      timestamp: timestampMatch?.[1],
+      orderLines: orderLines.length > 0 ? orderLines : undefined,
+      rawResponse: response.rawResponse
+    }
+  }
+
+  // Brak numeru zamówienia ale też brak błędu - może zamówienie jest przetwarzane
+  console.warn('[Ingram Order] Odpowiedź bez IMOrderID:', xml.substring(0, 500))
+  
+  // Jeśli mamy DocumentID, traktujemy jako sukces (zamówienie przyjęte do przetwarzania)
+  if (documentIdMatch) {
+    console.log('[Ingram Order] ✅ Zamówienie przyjęte do przetwarzania, DocumentID:', documentIdMatch[1])
+    return {
+      success: true,
+      documentId: documentIdMatch[1],
+      timestamp: timestampMatch?.[1],
+      rawResponse: response.rawResponse
+    }
+  }
+
+  return {
+    success: false,
+    error: 'Nieoczekiwana odpowiedź z Ingram Micro - brak IMOrderID ani DocumentID',
+    rawResponse: response.rawResponse
+  }
+}
+
+/**
+ * Konwertuje SKU produktu na format Ingram Micro
+ * Zebra PN: P1058930-009 → Ingram: ZBP1058930009
+ */
+export function convertSkuToIngram(sku: string): string {
+  // Usuń myślniki
+  const noHyphens = sku.replace(/-/g, '')
+  
+  // Dodaj prefix ZB jeśli brak
+  if (!noHyphens.toUpperCase().startsWith('ZB')) {
+    return 'ZB' + noHyphens
+  }
+  
+  return noHyphens
+}
+
+// ============================================
+// ORDERS LIST - Lista zamówień
+// ============================================
+
+interface OrdersListFilter {
+  customerReferenceNumber?: string  // Nasz numer zamówienia (np. "ZAM-20260125-001")
+  openOrdersOnly?: boolean          // Tylko otwarte zamówienia (domyślnie: false)
+  startDate?: string                // Format: YYYY-MM-DD
+  endDate?: string                  // Format: YYYY-MM-DD
+}
+
+interface IngramOrderSummary {
+  imOrderId: string                 // Numer zamówienia Ingram (np. "12345/ZS17_123587")
+  customerReferenceNumber?: string  // Nasz numer zamówienia
+  creationDateTime?: string         // Data utworzenia (np. "2019-07-27 11:12:01")
+  statusCode?: string               // Kod statusu (np. "created", "completed")
+  statusDescription?: string        // Opis statusu (np. "Customer approval required")
+  totalAmount?: number              // Suma zamówienia
+  currency?: string                 // Waluta (np. "EUR", "PLN")
+  invoiceCurrency?: string          // Waluta faktury
+  shipping?: string                 // Metoda wysyłki (np. "Courier")
+  endUser?: {
+    companyName?: string
+    city?: string
+    countryCode?: string
+  }
+}
+
+interface OrdersListResponse {
+  success: boolean
+  orders: IngramOrderSummary[]
+  tooManyItems?: boolean            // true jeśli więcej niż 50 wyników
+  error?: string
+  rawResponse?: string
+}
+
+/**
+ * Pobiera listę zamówień z Ingram Micro
+ * 
+ * Filtry:
+ * - customerReferenceNumber: nasz numer zamówienia
+ * - openOrdersOnly: true = tylko otwarte, false = wszystkie
+ * - startDate/endDate: zakres dat (YYYY-MM-DD)
+ * 
+ * Maksymalnie 50 zamówień w jednym zapytaniu.
+ * 
+ * @example
+ * // Znajdź zamówienie po naszym numerze
+ * await getOrdersList({ customerReferenceNumber: 'ZAM-20260125-001' })
+ * 
+ * // Otwarte zamówienia z ostatniego miesiąca
+ * await getOrdersList({ 
+ *   openOrdersOnly: true, 
+ *   startDate: '2026-01-01', 
+ *   endDate: '2026-01-31' 
+ * })
+ */
+export async function getOrdersList(filter: OrdersListFilter = {}): Promise<OrdersListResponse> {
+  if (!INGRAM_API_KEY) {
+    return { success: false, orders: [], error: 'Brak klucza API Ingram Micro' }
+  }
+
+  // Buduj atrybuty filtra
+  const attributes: string[] = []
+  
+  if (filter.customerReferenceNumber) {
+    attributes.push(`CustomerReferenceNumber="${escapeXml(filter.customerReferenceNumber)}"`)
+  }
+  if (filter.openOrdersOnly !== undefined) {
+    attributes.push(`OpenOrdersOnly="${filter.openOrdersOnly ? 'Yes' : 'No'}"`)
+  }
+  if (filter.startDate) {
+    attributes.push(`StartDate="${filter.startDate}"`)
+  }
+  if (filter.endDate) {
+    attributes.push(`EndDate="${filter.endDate}"`)
+  }
+
+  const xmlRequest = `<?xml version="1.0" encoding="UTF-8"?>
+<OrdersListRequest>
+  <TransactionHeader>
+    <APIKey>${INGRAM_API_KEY}</APIKey>
+  </TransactionHeader>
+  <OrdersList ${attributes.join(' ')} />
+</OrdersListRequest>`
+
+  console.log('[Ingram OrdersList] Pobieram listę zamówień...')
+  console.log('[Ingram OrdersList] Filtry:', filter)
+
+  const response = await sendXmlRequest(xmlRequest, 15000)
+
+  if (!response.success) {
+    return { 
+      success: false, 
+      orders: [], 
+      error: response.error,
+      rawResponse: response.rawResponse
+    }
+  }
+
+  const xml = response.data || ''
+
+  // Sprawdź błędy
+  const errorsMatch = xml.match(/<Errors>([\s\S]*?)<\/Errors>/)
+  if (errorsMatch && errorsMatch[1].trim()) {
+    const errorContent = errorsMatch[1].replace(/<\/?Error>/g, '').trim()
+    if (errorContent) {
+      return {
+        success: false,
+        orders: [],
+        error: errorContent,
+        rawResponse: response.rawResponse
+      }
+    }
+  }
+
+  // Sprawdź czy jest więcej niż 50 wyników
+  const tooManyMatch = xml.match(/<TooManyItems>(\w+)<\/TooManyItems>/)
+  const tooManyItems = tooManyMatch ? tooManyMatch[1].toLowerCase() === 'true' : false
+
+  // Parsuj zamówienia z <Orders><Order>...</Order></Orders>
+  const orders: IngramOrderSummary[] = []
+  
+  // Wyciągnij sekcję <Orders>
+  const ordersSection = xml.match(/<Orders>([\s\S]*?)<\/Orders>/)
+  if (ordersSection) {
+    // Parsuj każde <Order>...</Order>
+    const orderBlockMatches = ordersSection[1].matchAll(/<Order>([\s\S]*?)<\/Order>/g)
+    
+    for (const match of orderBlockMatches) {
+      const orderXml = match[1]
+      
+      // Podstawowe dane
+      const imOrderIdMatch = orderXml.match(/<IMOrderID>([^<]+)<\/IMOrderID>/)
+      const custRefMatch = orderXml.match(/<CustomerReferenceNumber>([^<]+)<\/CustomerReferenceNumber>/)
+      const creationMatch = orderXml.match(/<CreationDateTime>([^<]+)<\/CreationDateTime>/)
+      
+      // Status: <OrderStatus StatusCode="created">Customer approval required</OrderStatus>
+      const statusMatch = orderXml.match(/<OrderStatus\s+StatusCode="([^"]+)"[^>]*>([^<]*)<\/OrderStatus>/)
+      
+      // Kwoty i waluty
+      const totalMatch = orderXml.match(/<OrderTotalAmount>([^<]+)<\/OrderTotalAmount>/)
+      const currencyMatch = orderXml.match(/<OrderCurrency>([^<]+)<\/OrderCurrency>/)
+      const invCurrencyMatch = orderXml.match(/<InvoiceCurrency>([^<]+)<\/InvoiceCurrency>/)
+      const shippingMatch = orderXml.match(/<Shipping>([^<]+)<\/Shipping>/)
+      
+      // EndUser (podstawowe dane)
+      const endUserMatch = orderXml.match(/<EndUser>([\s\S]*?)<\/EndUser>/)
+      let endUser: IngramOrderSummary['endUser'] = undefined
+      if (endUserMatch) {
+        const euXml = endUserMatch[1]
+        const companyMatch = euXml.match(/<CompanyName>([^<]+)<\/CompanyName>/)
+        const cityMatch = euXml.match(/<City>([^<]+)<\/City>/)
+        const countryMatch = euXml.match(/<CountryCode>([^<]+)<\/CountryCode>/)
+        endUser = {
+          companyName: companyMatch?.[1],
+          city: cityMatch?.[1],
+          countryCode: countryMatch?.[1]
+        }
+      }
+      
+      if (imOrderIdMatch) {
+        orders.push({
+          imOrderId: imOrderIdMatch[1],
+          customerReferenceNumber: custRefMatch?.[1],
+          creationDateTime: creationMatch?.[1],
+          statusCode: statusMatch?.[1],
+          statusDescription: statusMatch?.[2],
+          totalAmount: totalMatch ? parseFloat(totalMatch[1]) : undefined,
+          currency: currencyMatch?.[1],
+          invoiceCurrency: invCurrencyMatch?.[1],
+          shipping: shippingMatch?.[1],
+          endUser
+        })
+      }
+    }
+  }
+
+  console.log('[Ingram OrdersList] Znaleziono zamówień:', orders.length)
+  if (tooManyItems) {
+    console.log('[Ingram OrdersList] UWAGA: Więcej niż 50 wyników - zawęź kryteria wyszukiwania')
+  }
+
+  return {
+    success: true,
+    orders,
+    tooManyItems,
+    rawResponse: response.rawResponse
+  }
+}
+
+/**
+ * Sprawdza status zamówienia w Ingram Micro po naszym numerze zamówienia
+ * 
+ * @param ourOrderNumber - Nasz numer zamówienia (np. "ZAM-20260125-001")
+ * @returns Informacje o zamówieniu lub null jeśli nie znaleziono
+ */
+export async function checkIngramOrderStatus(ourOrderNumber: string): Promise<IngramOrderSummary | null> {
+  const result = await getOrdersList({ customerReferenceNumber: ourOrderNumber })
+  
+  if (!result.success || result.orders.length === 0) {
+    console.log('[Ingram] Nie znaleziono zamówienia:', ourOrderNumber)
+    return null
+  }
+
+  return result.orders[0]
+}
+
+// ============================================
+// ORDER DETAILS - Szczegóły zamówienia
+// ============================================
+
+interface IngramOrderLineDetail {
+  lineNumber: number
+  itemId: string                    // SKU Ingram (np. ZBGK42-202520-000)
+  vpn?: string                      // Vendor Part Number (np. GK42-202520-000)
+  productName?: string
+  orderQty: number
+  price?: number
+  totalNetAmount?: number
+  allocatedQtyFromStock?: number    // Ilość przydzielona z magazynu
+  allocatedQtyInDelivery?: number   // Ilość w drodze
+  shipped?: number                  // Ilość wysłana
+  invoiced?: number                 // Ilość zafakturowana
+}
+
+interface IngramDeliveryLine {
+  lineNumber: number
+  itemId: string
+  qty: number
+  serialNumbers?: string[]          // Numery seryjne produktów!
+}
+
+interface IngramTrackingInfo {
+  status?: string                   // np. "Delivered"
+  carrier?: string                  // np. "UPS", "DPD"
+  trackingNumber?: string           // Numer przesyłki
+  trackingUrl?: string              // URL do śledzenia
+}
+
+interface IngramDeliveryNote {
+  dnNumber: string                  // Numer WZ (np. "WZD18123456")
+  shipmentDate?: string             // Data wysyłki
+  deliveryAddress?: {
+    companyName?: string
+    addressLine1?: string
+    city?: string
+    postCode?: string
+    countryCode?: string
+  }
+  lines: IngramDeliveryLine[]
+  trackingNumbers: IngramTrackingInfo[]
+}
+
+interface IngramOrderDetails {
+  number?: string                   // Pełny numer (np. "12345/ZS10_123789")
+  imOrderId: string                 // ID zamówienia
+  customerReferenceNumber?: string  // Nasz numer zamówienia
+  statusCode?: string
+  statusDescription?: string
+  creationTime?: string
+  deliveryMode?: string             // "Courier" lub "Pickup"
+  deliveryAddress?: {
+    deliveryAddressId?: string
+    friendlyName?: string
+    companyName?: string
+    addressLine1?: string
+    addressLine2?: string
+    city?: string
+    postCode?: string
+    countryCode?: string
+    contactName?: string
+    contactEmail?: string
+    contactPhone?: string
+  }
+  expectedDeliveryDate?: string
+  partialShipmentAllowed?: boolean
+  endUserName?: string
+  orderCurrency?: string
+  orderTotalNetAmount?: number
+  invoiceCurrency?: string
+  customerNotes?: string
+  orderLines: IngramOrderLineDetail[]
+  deliveryNotes: IngramDeliveryNote[]
+  invoiceNumbers: string[]
+}
+
+interface OrderDetailsResponse {
+  success: boolean
+  orderDetails?: IngramOrderDetails
+  error?: string
+  rawResponse?: string
+}
+
+/**
+ * Pobiera szczegółowe informacje o zamówieniu Ingram Micro
+ * 
+ * Zawiera:
+ * - Status zamówienia i każdej linii
+ * - Ilości: zamówione, przydzielone, wysłane, zafakturowane
+ * - Delivery Notes (WZ) z numerami seryjnymi
+ * - Numery tracking z URL do śledzenia
+ * - Numery faktur
+ * 
+ * @param imOrderId - Numer zamówienia Ingram (z getOrdersList)
+ */
+export async function getOrderDetails(imOrderId: string): Promise<OrderDetailsResponse> {
+  if (!INGRAM_API_KEY) {
+    return { success: false, error: 'Brak klucza API Ingram Micro' }
+  }
+
+  const xmlRequest = `<?xml version="1.0" encoding="UTF-8"?>
+<OrderDetailsRequest>
+  <TransactionHeader>
+    <APIKey>${INGRAM_API_KEY}</APIKey>
+  </TransactionHeader>
+  <OrderDetails IMOrderID="${escapeXml(imOrderId)}" />
+</OrderDetailsRequest>`
+
+  console.log('[Ingram OrderDetails] Pobieram szczegóły zamówienia:', imOrderId)
+
+  const response = await sendXmlRequest(xmlRequest, 15000)
+
+  if (!response.success) {
+    return { 
+      success: false, 
+      error: response.error,
+      rawResponse: response.rawResponse
+    }
+  }
+
+  const xml = response.data || ''
+
+  // Sprawdź błędy
+  const errorsMatch = xml.match(/<Errors>([\s\S]*?)<\/Errors>/)
+  if (errorsMatch && errorsMatch[1].trim()) {
+    const errorContent = errorsMatch[1].replace(/<\/?Error>/g, '').trim()
+    if (errorContent) {
+      return {
+        success: false,
+        error: errorContent,
+        rawResponse: response.rawResponse
+      }
+    }
+  }
+
+  // Parsuj OrderDetails
+  const orderDetailsMatch = xml.match(/<OrderDetails>([\s\S]*?)<\/OrderDetails>/)
+  if (!orderDetailsMatch) {
+    return {
+      success: false,
+      error: 'Brak danych zamówienia w odpowiedzi',
+      rawResponse: response.rawResponse
+    }
+  }
+
+  const od = orderDetailsMatch[1]
+
+  // Podstawowe dane
+  const numberMatch = od.match(/<Number>([^<]+)<\/Number>/)
+  const imOrderIdMatch = od.match(/<IMOrderID>([^<]+)<\/IMOrderID>/)
+  const custRefMatch = od.match(/<CustomerReferenceNumber>([^<]+)<\/CustomerReferenceNumber>/)
+  const statusMatch = od.match(/<Status\s+StatusCode="([^"]+)"[^>]*>([^<]*)<\/Status>/)
+  const creationMatch = od.match(/<CreationTime>([^<]+)<\/CreationTime>/)
+  const deliveryModeMatch = od.match(/<DeliveryMode>([^<]+)<\/DeliveryMode>/)
+  const expectedDateMatch = od.match(/<ExpectedDeliveryDate>([^<]+)<\/ExpectedDeliveryDate>/)
+  const partialMatch = od.match(/<PartialShipmentAllowed>([^<]+)<\/PartialShipmentAllowed>/)
+  const endUserMatch = od.match(/<EndUserName>([^<]+)<\/EndUserName>/)
+  const orderCurrencyMatch = od.match(/<OrderCurrency>([^<]+)<\/OrderCurrency>/)
+  const totalNetMatch = od.match(/<OrderTotalNetAmount>([^<]+)<\/OrderTotalNetAmount>/)
+  const invCurrencyMatch = od.match(/<InvoiceCurrency>([^<]+)<\/InvoiceCurrency>/)
+  const notesMatch = od.match(/<CustomerNotes>([^<]+)<\/CustomerNotes>/)
+
+  // Parsuj adres dostawy
+  let deliveryAddress: IngramOrderDetails['deliveryAddress'] = undefined
+  const addrMatch = od.match(/<DeliveryAddress>([\s\S]*?)<\/DeliveryAddress>/)
+  if (addrMatch) {
+    const addr = addrMatch[1]
+    deliveryAddress = {
+      deliveryAddressId: addr.match(/<DeliveryAddressID>([^<]+)<\/DeliveryAddressID>/)?.[1],
+      friendlyName: addr.match(/<FriendlyName>([^<]+)<\/FriendlyName>/)?.[1],
+      companyName: addr.match(/<CompanyName>([^<]+)<\/CompanyName>/)?.[1],
+      addressLine1: addr.match(/<AddressLine1>([^<]+)<\/AddressLine1>/)?.[1],
+      addressLine2: addr.match(/<AddressLine2>([^<]+)<\/AddressLine2>/)?.[1],
+      city: addr.match(/<City>([^<]+)<\/City>/)?.[1],
+      postCode: addr.match(/<PostCode>([^<]+)<\/PostCode>/)?.[1],
+      countryCode: addr.match(/<CountryCode>([^<]+)<\/CountryCode>/)?.[1],
+      contactName: addr.match(/<DeliveryContactName>([^<]+)<\/DeliveryContactName>/)?.[1],
+      contactEmail: addr.match(/<DeliveryContactEmail>([^<]+)<\/DeliveryContactEmail>/)?.[1],
+      contactPhone: addr.match(/<DeliveryContactPhone>([^<]+)<\/DeliveryContactPhone>/)?.[1]
+    }
+  }
+
+  // Parsuj linie zamówienia
+  const orderLines: IngramOrderLineDetail[] = []
+  const orderLinesSection = od.match(/<OrderLines>([\s\S]*?)<\/OrderLines>/)
+  if (orderLinesSection) {
+    const lineMatches = orderLinesSection[1].matchAll(/<OrderLine>([\s\S]*?)<\/OrderLine>/g)
+    for (const match of lineMatches) {
+      const line = match[1]
+      orderLines.push({
+        lineNumber: parseInt(line.match(/<LineNumber>([^<]+)<\/LineNumber>/)?.[1] || '0'),
+        itemId: line.match(/<ItemID>([^<]+)<\/ItemID>/)?.[1] || '',
+        vpn: line.match(/<VPN>([^<]+)<\/VPN>/)?.[1],
+        productName: line.match(/<ProductName>([^<]+)<\/ProductName>/)?.[1],
+        orderQty: parseInt(line.match(/<OrderQty>([^<]+)<\/OrderQty>/)?.[1] || '0'),
+        price: line.match(/<Price>([^<]+)<\/Price>/) ? parseFloat(line.match(/<Price>([^<]+)<\/Price>/)?.[1] || '0') : undefined,
+        totalNetAmount: line.match(/<TotalNetAmount>([^<]+)<\/TotalNetAmount>/) ? parseFloat(line.match(/<TotalNetAmount>([^<]+)<\/TotalNetAmount>/)?.[1] || '0') : undefined,
+        allocatedQtyFromStock: parseInt(line.match(/<AllocatedQtyFromStock>([^<]+)<\/AllocatedQtyFromStock>/)?.[1] || '0'),
+        allocatedQtyInDelivery: parseInt(line.match(/<AllocatedQtyInDelivery>([^<]+)<\/AllocatedQtyInDelivery>/)?.[1] || '0'),
+        shipped: parseInt(line.match(/<Shipped>([^<]+)<\/Shipped>/)?.[1] || '0'),
+        invoiced: parseInt(line.match(/<Invoiced>([^<]+)<\/Invoiced>/)?.[1] || '0')
+      })
+    }
+  }
+
+  // Parsuj Delivery Notes (WZ) z tracking i serial numbers
+  const deliveryNotes: IngramDeliveryNote[] = []
+  const dnSection = od.match(/<DeliveryNotes>([\s\S]*?)<\/DeliveryNotes>/)
+  if (dnSection) {
+    const dnMatches = dnSection[1].matchAll(/<DeliveryNote>([\s\S]*?)<\/DeliveryNote>/g)
+    for (const match of dnMatches) {
+      const dn = match[1]
+      
+      // Linie z numerami seryjnymi
+      const dnLines: IngramDeliveryLine[] = []
+      const linesSection = dn.match(/<Lines>([\s\S]*?)<\/Lines>/)
+      if (linesSection) {
+        const lineMatches = linesSection[1].matchAll(/<Line>([\s\S]*?)<\/Line>/g)
+        for (const lineMatch of lineMatches) {
+          const lineXml = lineMatch[1]
+          
+          // Numery seryjne
+          const serialNumbers: string[] = []
+          const serialMatches = lineXml.matchAll(/<Serial>([^<]+)<\/Serial>/g)
+          for (const serialMatch of serialMatches) {
+            serialNumbers.push(serialMatch[1])
+          }
+          
+          dnLines.push({
+            lineNumber: parseInt(lineXml.match(/<LineNumber>([^<]+)<\/LineNumber>/)?.[1] || '0'),
+            itemId: lineXml.match(/<ItemID>([^<]+)<\/ItemID>/)?.[1] || '',
+            qty: parseInt(lineXml.match(/<Qty>([^<]+)<\/Qty>/)?.[1] || '0'),
+            serialNumbers: serialNumbers.length > 0 ? serialNumbers : undefined
+          })
+        }
+      }
+
+      // Tracking numbers
+      const trackingNumbers: IngramTrackingInfo[] = []
+      const trackingSection = dn.match(/<ShippingTrackingNumbers>([\s\S]*?)<\/ShippingTrackingNumbers>/)
+      if (trackingSection) {
+        const trackMatches = trackingSection[1].matchAll(/<ShippingTrackingNumber>([\s\S]*?)<\/ShippingTrackingNumber>/g)
+        for (const trackMatch of trackMatches) {
+          const track = trackMatch[1]
+          trackingNumbers.push({
+            status: track.match(/<Status>([^<]+)<\/Status>/)?.[1],
+            carrier: track.match(/<Carrier>([^<]+)<\/Carrier>/)?.[1],
+            trackingNumber: track.match(/<CarrierTrackingNumber>([^<]+)<\/CarrierTrackingNumber>/)?.[1],
+            trackingUrl: track.match(/<CarrierTrackingNumberURL>([^<]+)<\/CarrierTrackingNumberURL>/)?.[1]
+          })
+        }
+      }
+
+      // Adres dostawy z WZ
+      const dnAddrMatch = dn.match(/<DeliveryAddress>([\s\S]*?)<\/DeliveryAddress>/)
+      
+      deliveryNotes.push({
+        dnNumber: dn.match(/<DN_Number>([^<]+)<\/DN_Number>/)?.[1] || '',
+        shipmentDate: dn.match(/<ShipmentDate>([^<]+)<\/ShipmentDate>/)?.[1],
+        deliveryAddress: dnAddrMatch ? {
+          companyName: dnAddrMatch[1].match(/<CompanyName>([^<]+)<\/CompanyName>/)?.[1],
+          addressLine1: dnAddrMatch[1].match(/<AddressLine1>([^<]+)<\/AddressLine1>/)?.[1],
+          city: dnAddrMatch[1].match(/<City>([^<]+)<\/City>/)?.[1],
+          postCode: dnAddrMatch[1].match(/<PostCode>([^<]+)<\/PostCode>/)?.[1],
+          countryCode: dnAddrMatch[1].match(/<CountryCode>([^<]+)<\/CountryCode>/)?.[1]
+        } : undefined,
+        lines: dnLines,
+        trackingNumbers
+      })
+    }
+  }
+
+  // Parsuj faktury
+  const invoiceNumbers: string[] = []
+  const invoicesSection = od.match(/<Invoices>([\s\S]*?)<\/Invoices>/)
+  if (invoicesSection) {
+    const invMatches = invoicesSection[1].matchAll(/<Invoice\s+Number="([^"]+)"/g)
+    for (const match of invMatches) {
+      invoiceNumbers.push(match[1])
+    }
+  }
+
+  const orderDetails: IngramOrderDetails = {
+    number: numberMatch?.[1],
+    imOrderId: imOrderIdMatch?.[1] || imOrderId,
+    customerReferenceNumber: custRefMatch?.[1],
+    statusCode: statusMatch?.[1],
+    statusDescription: statusMatch?.[2],
+    creationTime: creationMatch?.[1],
+    deliveryMode: deliveryModeMatch?.[1],
+    deliveryAddress,
+    expectedDeliveryDate: expectedDateMatch?.[1],
+    partialShipmentAllowed: partialMatch?.[1]?.toLowerCase() === 'yes',
+    endUserName: endUserMatch?.[1],
+    orderCurrency: orderCurrencyMatch?.[1],
+    orderTotalNetAmount: totalNetMatch ? parseFloat(totalNetMatch[1]) : undefined,
+    invoiceCurrency: invCurrencyMatch?.[1],
+    customerNotes: notesMatch?.[1],
+    orderLines,
+    deliveryNotes,
+    invoiceNumbers
+  }
+
+  console.log('[Ingram OrderDetails] ✅ Pobrano szczegóły zamówienia')
+  console.log('[Ingram OrderDetails] Status:', orderDetails.statusCode, '-', orderDetails.statusDescription)
+  console.log('[Ingram OrderDetails] Linie:', orderLines.length)
+  console.log('[Ingram OrderDetails] Delivery Notes (WZ):', deliveryNotes.length)
+  console.log('[Ingram OrderDetails] Faktury:', invoiceNumbers.length)
+
+  // Log tracking info jeśli jest
+  for (const dn of deliveryNotes) {
+    for (const track of dn.trackingNumbers) {
+      console.log(`[Ingram OrderDetails] Tracking: ${track.carrier} - ${track.trackingNumber} (${track.status})`)
+    }
+  }
+
+  return {
+    success: true,
+    orderDetails,
+    rawResponse: response.rawResponse
+  }
+}
+
+/**
+ * Pobiera numery tracking i URL do śledzenia dla zamówienia
+ * 
+ * @param imOrderId - Numer zamówienia Ingram
+ * @returns Lista tracking info lub pusta tablica
+ */
+export async function getIngramTrackingInfo(imOrderId: string): Promise<IngramTrackingInfo[]> {
+  const result = await getOrderDetails(imOrderId)
+  
+  if (!result.success || !result.orderDetails) {
+    return []
+  }
+
+  const allTracking: IngramTrackingInfo[] = []
+  for (const dn of result.orderDetails.deliveryNotes) {
+    allTracking.push(...dn.trackingNumbers)
+  }
+  
+  return allTracking
+}
+
+/**
+ * Pobiera numery seryjne produktów z zamówienia Ingram
+ * 
+ * @param imOrderId - Numer zamówienia Ingram
+ * @returns Mapa: itemId -> lista serial numbers
+ */
+export async function getIngramSerialNumbers(imOrderId: string): Promise<Map<string, string[]>> {
+  const result = await getOrderDetails(imOrderId)
+  const serialMap = new Map<string, string[]>()
+  
+  if (!result.success || !result.orderDetails) {
+    return serialMap
+  }
+
+  for (const dn of result.orderDetails.deliveryNotes) {
+    for (const line of dn.lines) {
+      if (line.serialNumbers && line.serialNumbers.length > 0) {
+        const existing = serialMap.get(line.itemId) || []
+        serialMap.set(line.itemId, [...existing, ...line.serialNumbers])
+      }
+    }
+  }
+  
+  return serialMap
+}
+
+// ============================================
 // TEST CONNECTION
 // ============================================
 

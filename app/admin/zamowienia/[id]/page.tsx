@@ -26,7 +26,8 @@ import {
   Trash2,
   Send,
   PackageCheck,
-  ExternalLink
+  ExternalLink,
+  ShoppingCart
 } from 'lucide-react'
 
 interface OrderItem {
@@ -71,6 +72,8 @@ interface Order {
   courier_name?: string
   furgonetka_shipment_id?: string
   baselinker_order_id?: string
+  ingram_order_number?: string
+  ingram_order_date?: string
 }
 
 const STATUS_CONFIG = {
@@ -136,6 +139,10 @@ export default function OrderDetailPage() {
   const [showCourierModal, setShowCourierModal] = useState(false)
   const [isOrderingCourier, setIsOrderingCourier] = useState(false)
   const [courierError, setCourierError] = useState<string | null>(null)
+  
+  // Ingram Micro ordering
+  const [isOrderingIngram, setIsOrderingIngram] = useState(false)
+  const [ingramError, setIngramError] = useState<string | null>(null)
   const [courierForm, setCourierForm] = useState({
     courier_code: 'dpd',
     weight: '1',
@@ -321,6 +328,53 @@ export default function OrderDetailPage() {
       setCourierError(err instanceof Error ? err.message : 'Wystąpił błąd')
     } finally {
       setIsOrderingCourier(false)
+    }
+  }
+
+  const handleOrderIngram = async () => {
+    if (!order) return
+
+    if (order.ingram_order_number) {
+      alert('Zamówienie zostało już złożone w Ingram Micro!')
+      return
+    }
+
+    const confirmed = confirm(
+      'Czy na pewno chcesz złożyć zamówienie w Ingram Micro?\n\n' +
+      'UWAGA: Po złożeniu zamówienia NIE można go anulować przez API.\n' +
+      'W razie potrzeby anulowania - kontakt z account managerem Ingram.'
+    )
+
+    if (!confirmed) return
+
+    setIsOrderingIngram(true)
+    setIngramError(null)
+    
+    try {
+      const response = await fetch(`/api/admin/orders/${orderId}/order-ingram`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Nie udało się złożyć zamówienia w Ingram')
+      }
+      
+      // Odśwież dane zamówienia
+      await fetchOrder()
+      
+      alert(`✅ Zamówienie złożone w Ingram Micro!\n\nNumer zamówienia: ${data.ingram_order_number || 'oczekuje'}\nZamówiono produktów: ${data.items_ordered}`)
+      
+    } catch (err) {
+      console.error('Error ordering from Ingram:', err)
+      setIngramError(err instanceof Error ? err.message : 'Wystąpił błąd')
+      alert('❌ Błąd: ' + (err instanceof Error ? err.message : 'Wystąpił błąd'))
+    } finally {
+      setIsOrderingIngram(false)
     }
   }
 
@@ -697,6 +751,42 @@ export default function OrderDetailPage() {
                 >
                   <PackageCheck className="w-4 h-4" />
                   Zamów kuriera (BL Paczka)
+                </button>
+              )}
+              
+              {/* ZAMÓW W INGRAM MICRO */}
+              {order.ingram_order_number ? (
+                <div className="w-full p-3 bg-green-50 border border-green-200 rounded-lg">
+                  <div className="flex items-center gap-2 text-green-700">
+                    <CheckCircle className="w-4 h-4" />
+                    <span className="text-sm font-medium">Zamówienie Ingram</span>
+                  </div>
+                  <div className="text-xs text-green-600 mt-1 font-mono">
+                    {order.ingram_order_number}
+                  </div>
+                  {order.ingram_order_date && (
+                    <div className="text-xs text-green-500 mt-1">
+                      {new Date(order.ingram_order_date).toLocaleDateString('pl-PL')}
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <button
+                  onClick={handleOrderIngram}
+                  disabled={isOrderingIngram}
+                  className="w-full px-4 py-3 bg-gradient-to-r from-orange-500 to-amber-500 text-white rounded-lg hover:from-orange-600 hover:to-amber-600 transition-all text-sm font-semibold flex items-center justify-center gap-2 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {isOrderingIngram ? (
+                    <>
+                      <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                      Składam zamówienie...
+                    </>
+                  ) : (
+                    <>
+                      <ShoppingCart className="w-4 h-4" />
+                      Zamów w Ingram Micro
+                    </>
+                  )}
                 </button>
               )}
                 
