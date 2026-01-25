@@ -2737,7 +2737,15 @@ ${getEmailHeader()}
           </div>
         </div>
 
-        ${getEmailFooter()}
+        <!-- Footer -->
+        <div style="background-color: #ffffff; padding: 24px; text-align: center; color: #6b7280; font-size: 12px;">
+          <p style="margin: 0 0 4px 0;">
+            TAKMA Tadeusz Tiuchty | ul. Poświęcka 1a, 51-128 Wrocław
+          </p>
+          <p style="margin: 0;">
+            NIP: 9151004377 &nbsp;|&nbsp; www.serwis-zebry.pl
+          </p>
+        </div>
       </div>
     </body>
     </html>
