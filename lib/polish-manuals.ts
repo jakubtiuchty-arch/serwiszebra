@@ -28981,6 +28981,473 @@ Zebra TC58 może automatycznie dodawać współrzędne GPS do zdjęć:
     ]
   },
 
+  tc73: {
+    model: 'TC73',
+    title: 'Zebra TC73 – Instrukcja obsługi po Polsku',
+    lastUpdated: '2026-01-25',
+    sourceDocument: 'Zebra TC73 User Guide',
+    keywords: [
+      'Zebra TC73',
+      'Zebra TC73 instrukcja',
+      'Zebra TC73 manual',
+      'Zebra TC73 po polsku',
+      'Zebra TC73 specyfikacja',
+      'Zebra TC73 Wi-Fi 6E',
+      'Zebra TC73 skaner',
+      'Zebra TC73 bateria',
+      'Zebra TC73 serwis',
+      'terminal mobilny Zebra TC73',
+      'komputer mobilny Zebra TC73',
+      'Zebra TC73 konfiguracja',
+      'Zebra TC73 DataWedge',
+      'Zebra TC73 akcesoria',
+      'Zebra TC73 vs TC78',
+      'Zebra TC73 SE55'
+    ],
+    sections: [
+      {
+        title: '1. Podstawowe informacje',
+        content: `
+### O urządzeniu Zebra TC73
+
+Zebra TC73 to nowa generacja ultra-wytrzymałego komputera mobilnego z **6-calowym ekranem dotykowym Full HD+** i zaawansowaną łącznością bezprzewodową **Wi-Fi 6E**. Urządzenie zostało zaprojektowane dla najbardziej wymagających środowisk pracy – magazynów, centrów logistycznych, zakładów produkcyjnych i przedsiębiorstw usługowych.
+
+Zebra TC73 wyposażono w najnowszy procesor Qualcomm 6490 (8-rdzeniowy, 2,7 GHz), zaawansowany skaner kodów kreskowych (SE4770 Standard Range lub SE55 Advanced Range z technologią IntelliFocus), podwójne kamery (16 MP + 8 MP), łączność Wi-Fi 6E, Bluetooth 5.2 i NFC.
+
+Konstrukcja spełnia normy IP65/IP68 oraz MIL-STD-810H, zapewniając wyjątkową odporność na upadki (do **3,05 m na beton**), wodę, kurz i ekstremalne temperatury.
+
+### Parametry techniczne Zebra TC73
+
+| Parametr | Zebra TC73 |
+|----------|------------|
+| **Wyświetlacz** | 6,0" FHD+ (1080 x 2160) |
+| Ochrona ekranu | Corning Gorilla Glass |
+| Procesor | Qualcomm 6490, 2,7 GHz (8-rdzeniowy) |
+| System operacyjny | Android 11+ (aktualizacje do Android 16+) |
+| Pamięć RAM | 4 GB / 8 GB |
+| Pamięć Flash | 64 GB / 128 GB (UFS) |
+| Łączność bezprzewodowa | **Wi-Fi 6E** (802.11ax), 2x2 MU-MIMO |
+| Bluetooth | 5.2 + Secondary BLE |
+| NFC | Zintegrowany |
+| USB | USB-C 3.1 |
+
+### Porównanie Zebra TC73 vs Zebra TC78
+
+| Parametr | Zebra TC73 | Zebra TC78 |
+|----------|------------|------------|
+| **Łączność komórkowa** | **Brak** | **5G / LTE / CBRS** |
+| Wi-Fi | 6E (802.11ax) | 6E (802.11ax) |
+| Karta SIM | Nie dotyczy | Nano SIM |
+| GPS | Nie | **Zintegrowany** |
+| Połączenia głosowe | VoIP przez Wi-Fi | **VoIP + VoLTE (5G)** |
+| Hotspot mobilny | Nie | **Tak** |
+| Zastosowanie | Wewnątrz budynków | **Teren i mobilność** |
+
+### Zastosowania Zebra TC73
+
+- **Logistyka magazynowa:** przyjęcia towarów, kompletacja zamówień, inwentaryzacja
+- **Produkcja:** kontrola jakości, śledzenie produkcji, zarządzanie materiałami
+- **Handel detaliczny:** zarządzanie zapasami, obsługa klienta, click & collect
+- **Transport i dystrybucja:** zarządzanie załadunkiem, weryfikacja przesyłek
+- **Służba zdrowia:** zarządzanie lekami, identyfikacja pacjentów
+
+### Cechy charakterystyczne Zebra TC73
+
+- **Wyświetlacz 6" FHD+** – 28% większy, edge-to-edge, widoczny w słońcu
+- **Procesor Qualcomm 6490** – 90% więcej mocy, 400% szybsza grafika
+- **Wi-Fi 6E** – 3x szybszy, 4x więcej urządzeń, mniejsze zużycie energii
+- **Skaner SE55 Advanced Range** – zasięg do 180 cm (opcja)
+- **Upadek z 3,05 m** – na beton (MIL-STD-810H)
+- **True Hot Swap** – wymiana baterii bez utraty połączenia (Premium)
+- **Device Tracker** – lokalizacja urządzenia nawet z rozładowaną baterią
+`
+      },
+      {
+        title: '2. Rozpakowanie i instalacja',
+        content: `
+### Zawartość opakowania Zebra TC73
+
+- Komputer mobilny Zebra TC73
+- Bateria PowerPrecision+ Li-Ion (4680 mAh standard lub 7000 mAh extended)
+- Skrócona instrukcja obsługi (Regulatory Guide)
+
+> **Uwaga:** Zasilacz, kable, stacje dokujące, futerały ochronne są sprzedawane oddzielnie.
+
+### Instalacja baterii Zebra TC73
+
+1. Włóż baterię do komory, wyrównując styki (najpierw dolna część)
+2. Dociśnij baterię do góry, aż zatrzaski zablokują się na miejscu
+3. Zatrzaski po bokach powinny zaskoczyć automatycznie
+
+### Wyjmowanie baterii Zebra TC73
+
+1. Naciśnij jednocześnie oba zatrzaski zwalniające z tyłu urządzenia
+2. Przytrzymując zatrzaski, przesuń je do środka
+3. Unieś baterię i wyjmij z komory
+
+> **Funkcja True Hot Swap (Premium):** Wymiana baterii z zachowaniem połączenia Wi-Fi przez 30 sekund i pamięci przez 60 sekund.
+
+> **Funkcja Warm Swap (Standard):** Po wybraniu opcji "Battery Swap" z menu zasilania możesz bezpiecznie wymienić baterię.
+
+### Warunki pracy Zebra TC73
+
+| Tryb | Temperatura | Wilgotność |
+|------|-------------|------------|
+| Praca | -20°C do +50°C | 5-95% bez kondensacji |
+| Ładowanie | 0°C do +50°C | – |
+| Przechowywanie | -40°C do +70°C | 5-95% bez kondensacji |
+`
+      },
+      {
+        title: '3. Skanowanie kodów kreskowych',
+        content: `
+### Obsługiwane skanery Zebra TC73
+
+**SE4770 (Standard Range)**
+- Zasięg: do 63 cm (100% UPC-A)
+- Szeroki kąt widzenia
+- Maksymalna tolerancja ruchu
+
+**SE55 (Advanced Range z IntelliFocus)**
+- Zasięg: do 180 cm (100% UPC-A)
+- Technologia IntelliFocus dla automatycznej ostrości
+- Odczyt kodów w dowolnej odległości
+
+### Obsługiwane symbologie Zebra TC73
+
+| Typ | Symbologie |
+|-----|------------|
+| **1D** | Code 39, Code 128, EAN-8, EAN-13, UPC-A, UPC-E, Interleaved 2 of 5, Codabar, MSI, GS1 DataBar |
+| **2D** | QR Code, Data Matrix, PDF417, Aztec, MaxiCode |
+
+### Skanowanie wewnętrznym skanerem Zebra TC73
+
+1. Uruchom aplikację ze wsparciem skanowania (DataWedge, DWDemo)
+2. Skieruj okno skanera na kod kreskowy
+3. Naciśnij przycisk skanowania (lewy lub prawy)
+4. Wyrównaj promień lasera z kodem
+5. Zwolnij przycisk po usłyszeniu sygnału potwierdzenia
+
+### Wskazówki skanowania Zebra TC73
+
+- Zachowaj odpowiednią odległość od kodu (zależną od rozmiaru i typu)
+- Unikaj odbić światła (zmień kąt skanowania)
+- Upewnij się, że okno skanera jest czyste
+- Sprawdź czy skanowany kod nie jest uszkodzony
+
+### DataWedge Zebra TC73
+
+DataWedge to wbudowana aplikacja do przechwytywania danych ze skanerów:
+
+- **Włączenie:** Ustawienia → DataWedge → Włącz
+- **Konfiguracja:** Możliwość tworzenia profili dla różnych aplikacji
+- **Wyjście:** Dane mogą być przesyłane jako klawiatura, intencja lub schowek
+`
+      },
+      {
+        title: '4. Łączność bezprzewodowa',
+        content: `
+### Wi-Fi 6E Zebra TC73
+
+Zebra TC73 obsługuje najnowszy standard Wi-Fi 6E (802.11ax):
+
+| Parametr | Wartość |
+|----------|---------|
+| Pasma | **2,4 GHz, 5 GHz, 6 GHz** |
+| Technologia | 2x2 MU-MIMO |
+| Zalety | 3x szybszy transfer, 4x więcej urządzeń, mniejsze opóźnienia |
+
+### Łączenie z siecią Wi-Fi Zebra TC73
+
+1. Przejdź do **Ustawienia** → **Sieć i internet** → **Wi-Fi**
+2. Włącz Wi-Fi (jeśli wyłączone)
+3. Wybierz sieć z listy
+4. Wprowadź hasło (jeśli wymagane)
+5. Dotknij **Połącz**
+
+### Bluetooth 5.2 Zebra TC73
+
+Zebra TC73 obsługuje Bluetooth 5.2 z Secondary BLE:
+
+| Parametr | Wartość |
+|----------|---------|
+| Profile | HID, SPP, A2DP, AVRCP, HFP, PBAP |
+| Zasięg | do 10 metrów (Klasa 2) |
+| **Secondary BLE** | Beacon w baterii do lokalizacji urządzenia |
+
+### Parowanie urządzenia Bluetooth Zebra TC73
+
+1. Przejdź do **Ustawienia** → **Połączone urządzenia** → **Bluetooth**
+2. Włącz Bluetooth (jeśli wyłączony)
+3. Dotknij **Sparuj nowe urządzenie**
+4. Wybierz urządzenie z listy
+5. Potwierdź kod parowania (jeśli wymagany)
+
+### NFC Zebra TC73
+
+Zebra TC73 posiada zintegrowany czytnik NFC:
+
+- Odczyt tagów NFC
+- Parowanie urządzeń przez NFC
+- Obsługa kart płatniczych (zależnie od aplikacji)
+`
+      },
+      {
+        title: '5. Bateria i ładowanie',
+        content: `
+### Opcje baterii Zebra TC73
+
+| Typ | Pojemność | Funkcje |
+|-----|-----------|---------|
+| Standard | 4680 mAh | Warm Swap |
+| Standard BLE | 4680 mAh | Warm Swap + lokalizacja BLE |
+| Standard Wireless | 4400 mAh | Ładowanie bezprzewodowe |
+| Extended | 7000 mAh | Warm Swap, dłuższy czas pracy |
+
+### PowerPrecision+ Zebra TC73
+
+Technologia PowerPrecision+ zapewnia:
+
+- Monitorowanie stanu zdrowia baterii
+- Licznik cykli ładowania
+- Informacje o zużyciu baterii
+- Identyfikację baterii do wymiany
+
+### Ładowanie urządzenia Zebra TC73
+
+**Metody ładowania:**
+- **Stacje dokujące** – 1-Slot, 5-Slot Charge Only, 5-Slot Ethernet
+- **Kabel USB-C** – standardowy kabel z zasilaczem
+- **Ładowarka samochodowa** – Vehicle Cradle
+
+### Wskaźniki ładowania Zebra TC73
+
+| Stan LED | Znaczenie |
+|----------|-----------|
+| Wyłączony | Urządzenie nie podłączone |
+| Wolne miganie bursztynowe | Ładowanie w toku |
+| Stały zielony | Ładowanie zakończone |
+| Szybkie miganie bursztynowe | Błąd ładowania |
+| Szybkie miganie czerwone | Błąd ładowania, bateria zużyta |
+
+### Czas ładowania i pracy Zebra TC73
+
+- **Ładowanie do 90%:** około 2 godziny
+- **Czas pracy na baterii:** do 14 godzin (zależnie od użytkowania)
+`
+      },
+      {
+        title: '6. Aplikacje Mobility DNA',
+        content: `
+### Pakiet Mobility DNA Zebra TC73
+
+Zebra TC73 zawiera pakiet narzędzi Zebra Mobility DNA:
+
+### DataWedge
+- Przechwytywanie danych ze skanerów
+- Konfigurowalne profile
+- Integracja z aplikacjami
+
+### StageNow
+- Masowa konfiguracja urządzeń
+- Skanowanie kodów konfiguracyjnych
+- Staging przez NFC
+
+### Device Tracker
+- Lokalizacja zaginionych urządzeń
+- **Tracking nawet z rozładowaną baterią** (bateria BLE)
+- Historia lokalizacji
+
+### LifeGuard for Android
+- Aktualizacje bezpieczeństwa
+- Długoterminowe wsparcie (do Android 16)
+- Łatki bezpieczeństwa
+
+### RxLogger
+- Diagnostyka urządzenia
+- Logowanie zdarzeń
+- Rozwiązywanie problemów
+
+### Wireless Fusion
+- Optymalizacja połączeń Wi-Fi
+- Automatyczne roaming
+- Diagnostyka sieci
+`
+      },
+      {
+        title: '7. Konserwacja i rozwiązywanie problemów',
+        content: `
+### Harmonogram czyszczenia Zebra TC73
+
+| Element | Częstotliwość |
+|---------|---------------|
+| Ekran dotykowy | Codziennie |
+| Okno skanera | Codziennie |
+| Styki ładowania | Co tydzień |
+| Obudowa | W razie potrzeby |
+| Styki baterii | Przy wymianie baterii |
+
+### Czyszczenie Zebra TC73
+
+1. Wyłącz urządzenie lub zablokuj ekran
+2. Użyj miękkiej, bezpyłowej ściereczki
+3. Zwilż alkoholem izopropylowym (70%)
+4. Delikatnie przetrzyj powierzchnię
+5. Osusz przed użyciem
+
+### Dozwolone środki czyszczące
+
+- Alkohol izopropylowy (70%)
+- Chusteczki dezynfekujące (bez wybielacza)
+- Roztwór mydła (łagodny)
+- Nadtlenek wodoru
+
+### Problemy z uruchomieniem Zebra TC73
+
+| Problem | Rozwiązanie |
+|---------|-------------|
+| Urządzenie nie włącza się | Naładuj baterię przez 15 minut |
+| Urządzenie zawiesza się | Przytrzymaj Power + Skanowanie L + Głośność góra przez 4 sek |
+| Pętla restartu | Wykonaj Enterprise Reset |
+| Dwie diody migają | Bateria rozładowana – naładuj |
+
+### Problemy ze skanowaniem Zebra TC73
+
+| Problem | Rozwiązanie |
+|---------|-------------|
+| Skaner nie działa | Sprawdź DataWedge, zrestartuj urządzenie |
+| Nie odczytuje kodu | Oczyść okno skanera, zmień kąt/odległość |
+| Wolne skanowanie | Wyłącz niepotrzebne dekodery |
+
+### Resetowanie Zebra TC73
+
+**Miękki reset:**
+1. Przytrzymaj przycisk Power
+2. Wybierz "Uruchom ponownie"
+
+**Twardy reset:**
+1. Przytrzymaj Power + Skanowanie L + Głośność góra przez 4 sekundy
+
+**Enterprise Reset:**
+1. Ustawienia → System → Opcje resetowania
+2. Wybierz "Enterprise Reset"
+
+**Factory Reset:**
+1. Ustawienia → System → Opcje resetowania
+2. Wybierz "Przywrócenie danych fabrycznych"
+
+> **Ostrzeżenie:** Factory Reset usuwa wszystkie dane!
+`
+      },
+      {
+        title: '8. Specyfikacje techniczne',
+        content: `
+### Wymiary i waga Zebra TC73
+
+| Parametr | Wartość |
+|----------|---------|
+| Wysokość | ~165 mm |
+| Szerokość | ~78 mm |
+| Grubość | ~14 mm (20% cieńszy niż poprzednik) |
+| Waga (z baterią) | ~290 g |
+
+### Wyświetlacz Zebra TC73
+
+| Parametr | Wartość |
+|----------|---------|
+| Przekątna | 6,0" |
+| Rozdzielczość | 1080 x 2160 (FHD+) |
+| Typ | LED backlight |
+| Ochrona | Corning Gorilla Glass |
+| Dotyk | Pojemnościowy, rękawiczki, mokry palec, rysik |
+
+### Wydajność Zebra TC73
+
+| Parametr | Wartość |
+|----------|---------|
+| Procesor | Qualcomm 6490, 2,7 GHz, 8-rdzeniowy |
+| RAM | 4 GB / 8 GB |
+| Flash | 64 GB / 128 GB (UFS) |
+| microSD | Do 2 TB |
+
+### Skanowanie Zebra TC73
+
+| Parametr | SE4770 | SE55 |
+|----------|--------|------|
+| Typ | Standard Range | Advanced Range |
+| Zasięg (100% UPC-A) | do 63 cm | **do 180 cm** |
+| IntelliFocus | Nie | **Tak** |
+
+### Łączność Zebra TC73
+
+| Parametr | Wartość |
+|----------|---------|
+| Wi-Fi | 802.11 a/b/g/n/ac/ax **(Wi-Fi 6E)**, 2x2 MU-MIMO |
+| Bluetooth | 5.2 + Secondary BLE |
+| NFC | Tak |
+| USB | USB-C 3.1 |
+
+### Wytrzymałość Zebra TC73
+
+| Parametr | Wartość |
+|----------|---------|
+| Stopień ochrony IP | IP65/IP68 |
+| **Upadek** | **3,05 m na beton** (MIL-STD-810H) |
+| Upadki wielokrotne | 1000 x 0,5 m / 1000 x 1,0 m |
+| Temperatura pracy | -20°C do +50°C |
+| Temperatura ładowania | 0°C do +50°C |
+| Temperatura przechowywania | -40°C do +70°C |
+| Wilgotność | 5-95% bez kondensacji |
+
+### Certyfikaty Zebra TC73
+
+- MIL-STD-810H
+- IP65/IP68
+- CE, FCC, IC
+- RoHS
+- Secure Boot, Verified Boot
+- **Wi-Fi 6E Certified**
+`
+      },
+      {
+        title: '9. FAQ – Często zadawane pytania',
+        content: `
+### Co to jest Zebra TC73?
+
+**Odpowiedź:** Zebra TC73 to ultra-wytrzymały **komputer mobilny z 6-calowym ekranem FHD+** i łącznością **Wi-Fi 6E**. Wyposażony w procesor Qualcomm 6490, skaner SE4770 lub SE55, Bluetooth 5.2 i NFC. Odporny na upadki z **3,05 m na beton**. Przeznaczony dla magazynów, produkcji i logistyki.
+
+### Jaka jest różnica między Zebra TC73 a Zebra TC78?
+
+**Odpowiedź:** Zebra TC73 to wersja **tylko Wi-Fi 6E**, natomiast Zebra TC78 ma dodatkowo **moduł 5G/LTE**, slot na kartę SIM, zintegrowany GPS, obsługę połączeń głosowych VoLTE i Mobile Hotspot. Zebra TC73 jest przeznaczony do pracy wewnątrz budynków, a Zebra TC78 do pracy mobilnej w terenie.
+
+### Czym wyróżnia się skaner SE55 w Zebra TC73?
+
+**Odpowiedź:** Skaner SE55 (Advanced Range) w Zebra TC73 oferuje zasięg do **180 cm** (vs 63 cm w SE4770). Posiada technologię **IntelliFocus** dla automatycznej ostrości, umożliwiając skanowanie kodów z dowolnej odległości bez ręcznej regulacji.
+
+### Jak długo działa bateria w Zebra TC73?
+
+**Odpowiedź:** Standardowa bateria 4680 mAh zapewnia do **14 godzin pracy**. Dostępna jest też bateria rozszerzona 7000 mAh. Zebra TC73 obsługuje **True Hot Swap** (Premium) lub **Warm Swap** (Standard) do szybkiej wymiany baterii.
+
+### Co to jest Device Tracker w Zebra TC73?
+
+**Odpowiedź:** Device Tracker to funkcja lokalizacji zaginionych urządzeń. Dzięki baterii z **Secondary BLE** (beacon), Zebra TC73 może być zlokalizowany **nawet gdy główna bateria jest rozładowana**.
+
+### Czy Zebra TC73 jest wodoodporny?
+
+**Odpowiedź:** Tak, Zebra TC73 posiada certyfikat **IP65/IP68** – jest w pełni odporny na kurz i wodę. Dodatkowo spełnia normę **MIL-STD-810H** dla upadków z 3,05 m na beton.
+
+### Jak zresetować Zebra TC73?
+
+**Odpowiedź:** **Miękki reset:** Przytrzymaj przycisk Power i wybierz "Uruchom ponownie". **Twardy reset:** Przytrzymaj Power + Skanowanie L + Głośność góra przez 4 sekundy. **Factory Reset:** Ustawienia → System → Opcje resetowania.
+
+### Jakie akcesoria są dostępne dla Zebra TC73?
+
+**Odpowiedź:** Dostępne są m.in.: stacje dokujące (1-Slot, 5-Slot), ładowarki baterii, uchwyty (Hand Strap, Trigger Handle), akcesoria samochodowe (Vehicle Cradle), skanery Bluetooth (RS5100, RS6100) i sanki RFID (RFD40/RFD90).
+`
+      }
+    ]
+  },
+
   tc53erfid: {
     model: 'TC53e-RFID',
     title: 'Zebra TC53e-RFID – Instrukcja obsługi po Polsku',
