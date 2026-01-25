@@ -812,26 +812,6 @@ export async function getOrdersList(dateFrom?: string, dateTo?: string): Promise
 }
 
 // ============================================
-// Order Details
-// ============================================
-
-/**
- * Pobiera szczegóły zamówienia
- * @param orderNumber - Numer zamówienia Ingram Micro
- */
-export async function getOrderDetails(orderNumber: string): Promise<IngramResponse> {
-  const xmlRequest = `<?xml version="1.0" encoding="UTF-8"?>
-<OrderDetailsRequest>
-  <TransactionHeader>
-    <APIKey>${INGRAM_API_KEY}</APIKey>
-  </TransactionHeader>
-  <IMOrderNumber>${escapeXml(orderNumber)}</IMOrderNumber>
-</OrderDetailsRequest>`
-
-  return sendXmlRequest(xmlRequest, 5000) // 5s timeout
-}
-
-// ============================================
 // Invoices List
 // ============================================
 
