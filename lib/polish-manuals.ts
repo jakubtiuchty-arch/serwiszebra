@@ -29007,7 +29007,7 @@ Zebra TC58 może automatycznie dodawać współrzędne GPS do zdjęć:
     sections: [
       {
         title: '1. Podstawowe informacje',
-        content: \`
+        content: `
 ### O urządzeniu Zebra TC53e
 
 Zebra TC53e to zaawansowany komputer mobilny nowej generacji z **6-calowym ekranem dotykowym Full HD+** przeznaczony do pracy wewnątrz budynków. Urządzenie wyposażono w łączność **Wi-Fi 6**, najnowszy procesor Qualcomm 6490 (8-rdzeniowy, 2,7 GHz), zaawansowany skaner kodów kreskowych (SE4720 lub SE55 Advanced Range), zintegrowany NFC, podwójne kamery (16 MP + 8 MP) oraz Bluetooth 5.2.
@@ -29060,11 +29060,11 @@ Konstrukcja Zebra TC53e spełnia normy IP65/IP68 oraz MIL-STD-810H, zapewniając
 - **Warm Swap** – wymiana baterii bez utraty sesji
 - **NFC** – obsługa płatności i identyfikacji
 - **Mobility DNA** – pakiet narzędzi do zarządzania i konfiguracji
-\`
+`
       },
       {
         title: '2. Rozpakowanie i instalacja',
-        content: \`
+        content: `
 ### Zawartość opakowania Zebra TC53e
 
 - Komputer mobilny Zebra TC53e
@@ -29104,11 +29104,11 @@ Konstrukcja Zebra TC53e spełnia normy IP65/IP68 oraz MIL-STD-810H, zapewniając
 | Praca | -20°C do +50°C | 5-95% bez kondensacji |
 | Ładowanie | 0°C do +50°C | – |
 | Przechowywanie | -40°C do +70°C | 5-95% bez kondensacji |
-\`
+`
       },
       {
         title: '3. Elementy urządzenia',
-        content: \`
+        content: `
 ### Widok z przodu Zebra TC53e
 
 | Nr | Element | Opis |
@@ -29143,11 +29143,11 @@ Konstrukcja Zebra TC53e spełnia normy IP65/IP68 oraz MIL-STD-810H, zapewniając
 | 23 | Przycisk skanowania (lewy) | Alternatywny trigger skanera |
 
 > **Uwaga:** Zebra TC53e nie posiada złącza audio 3,5 mm – należy używać adapterów USB-C lub zestawów Bluetooth.
-\`
+`
       },
       {
         title: '4. Skanowanie kodów kreskowych',
-        content: \`
+        content: `
 ### Obsługiwane skanery Zebra TC53e
 
 | Skaner | Opis | Zasięg |
@@ -29193,11 +29193,11 @@ Konstrukcja Zebra TC53e spełnia normy IP65/IP68 oraz MIL-STD-810H, zapewniając
 - Przy jasnym świetle słonecznym zasłoń kod ręką
 - Regularnie czyść okno skanera
 - Używaj trybu prezentacji dla wielu skanów
-\`
+`
       },
       {
         title: '5. Łączność bezprzewodowa',
-        content: \`
+        content: `
 ### Wi-Fi 6 Zebra TC53e
 
 Zebra TC53e obsługuje standard Wi-Fi 6 (802.11ax):
@@ -29242,11 +29242,11 @@ Zebra TC53e obsługuje standard Wi-Fi 6 (802.11ax):
 | Funkcje | Parowanie urządzeń, płatności mobilne, identyfikacja |
 
 Antena NFC znajduje się w górnej części tyłu urządzenia. Zbliż tag NFC do tego obszaru.
-\`
+`
       },
       {
         title: '6. Bateria i ładowanie',
-        content: \`
+        content: `
 ### Specyfikacja baterii Zebra TC53e
 
 | Parametr | Wartość |
@@ -29286,11 +29286,11 @@ Antena NFC znajduje się w górnej części tyłu urządzenia. Zbliż tag NFC do
 - Wyłącz Bluetooth gdy nie jest potrzebne
 - Włącz tryb oszczędzania baterii
 - Skróć czas automatycznego wygaszania ekranu
-\`
+`
       },
       {
         title: '7. Konserwacja i rozwiązywanie problemów',
-        content: \`
+        content: `
 ### Harmonogram czyszczenia Zebra TC53e
 
 | Element | Częstotliwość |
@@ -29351,11 +29351,11 @@ Antena NFC znajduje się w górnej części tyłu urządzenia. Zbliż tag NFC do
 2. Wybierz "Przywrócenie danych fabrycznych"
 
 > **Ostrzeżenie:** Factory Reset usuwa wszystkie dane!
-\`
+`
       },
       {
         title: '8. Specyfikacje techniczne',
-        content: \`
+        content: `
 ### Wymiary i waga Zebra TC53e
 
 | Parametr | Wartość |
@@ -29413,11 +29413,11 @@ Antena NFC znajduje się w górnej części tyłu urządzenia. Zbliż tag NFC do
 - CE, FCC, IC
 - RoHS
 - Secure Boot, Verified Boot
-\`
+`
       },
       {
         title: '9. FAQ – Często zadawane pytania',
-        content: \`
+        content: `
 ### Co to jest Zebra TC53e?
 
 **Odpowiedź:** Zebra TC53e to zaawansowany **komputer mobilny z 6-calowym ekranem FHD+ (600 nitów)**, wyposażony w procesor Qualcomm 6490 (8-rdzeniowy, 2,7 GHz), skaner SE4720 lub SE55, Wi-Fi 6, Bluetooth 5.2 i NFC. Przeznaczony do pracy wewnątrz budynków – magazynów, hal produkcyjnych i sklepów detalicznych.
@@ -29449,7 +29449,7 @@ Antena NFC znajduje się w górnej części tyłu urządzenia. Zbliż tag NFC do
 ### Czy Zebra TC53e jest wodoodporny?
 
 **Odpowiedź:** Tak, Zebra TC53e posiada certyfikat **IP65/IP68** – jest w pełni odporny na kurz i wodę (zanurzenie do 1,5 m przez 30 minut). Dodatkowo spełnia normę **MIL-STD-810H** dla upadków z 1,8 m na beton (z obudową ochronną).
-\`
+`
       }
     ]
   }
