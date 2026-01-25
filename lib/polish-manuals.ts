@@ -28981,6 +28981,547 @@ Zebra TC58 może automatycznie dodawać współrzędne GPS do zdjęć:
     ]
   },
 
+  tc58e: {
+    model: 'TC58e',
+    title: 'Zebra TC58e – Instrukcja obsługi po Polsku',
+    lastUpdated: '2026-01-25',
+    sourceDocument: 'Zebra TC58e User Guide',
+    keywords: [
+      'Zebra TC58e',
+      'Zebra TC58e instrukcja',
+      'Zebra TC58e manual',
+      'Zebra TC58e po polsku',
+      'Zebra TC58e specyfikacja',
+      'Zebra TC58e 5G',
+      'Zebra TC58e LTE',
+      'Zebra TC58e GPS',
+      'Zebra TC58e skaner',
+      'Zebra TC58e bateria',
+      'Zebra TC58e serwis',
+      'terminal mobilny Zebra TC58e',
+      'komputer mobilny Zebra TC58e 5G',
+      'Zebra TC58e konfiguracja',
+      'Zebra TC58e DataWedge',
+      'Zebra TC58e akcesoria'
+    ],
+    sections: [
+      {
+        title: '1. Podstawowe informacje',
+        content: `
+### O urządzeniu Zebra TC58e
+
+Zebra TC58e to zaawansowany komputer mobilny nowej generacji z **6-calowym ekranem dotykowym Full HD+** i pełną łącznością komórkową **5G/LTE**. Urządzenie zaprojektowano dla pracowników terenowych wymagających stałego dostępu do sieci poza zasięgiem Wi-Fi.
+
+Zebra TC58e wyposażono w najnowszy procesor Qualcomm 6490 (8-rdzeniowy, 2,7 GHz), zaawansowany skaner kodów kreskowych (SE4720, SE4770 lub SE55 Advanced Range), zintegrowany GPS (GPS/GLONASS/Galileo/BeiDou), podwójne kamery (16 MP + 8 MP) oraz łączność 5G, Wi-Fi 6, Bluetooth 5.2 i NFC.
+
+Konstrukcja spełnia normy IP65/IP68 oraz MIL-STD-810H, zapewniając wyjątkową odporność na upadki (do 1,8 m), wodę, kurz i ekstremalne temperatury.
+
+### Parametry techniczne Zebra TC58e
+
+| Parametr | Zebra TC58e |
+|----------|-------------|
+| **Wyświetlacz** | 6,0" FHD+ (2160 x 1080) |
+| Jasność | 600 nitów |
+| Ochrona ekranu | Corning Gorilla Glass |
+| Procesor | Qualcomm 6490, 2,7 GHz (8-rdzeniowy) |
+| System operacyjny | Android 13+ (aktualizacje do Android 16+) |
+| Pamięć RAM | 6 GB / 8 GB |
+| Pamięć Flash | 64 GB / 128 GB |
+| Karta microSD | Do 2 TB |
+| Karta SIM | Nano SIM |
+| Łączność komórkowa | **5G FR1, LTE, CBRS** |
+| Łączność bezprzewodowa | Wi-Fi 6 (802.11ax), Bluetooth 5.2, NFC |
+| **GPS** | **Zintegrowany (GPS, GLONASS, Galileo, BeiDou)** |
+
+### Porównanie Zebra TC53e vs Zebra TC58e
+
+| Parametr | Zebra TC53e | Zebra TC58e |
+|----------|-------------|-------------|
+| **Łączność komórkowa** | **Brak** | **5G / LTE / CBRS** |
+| Wi-Fi | 6 (802.11ax) | 6 (802.11ax) |
+| Karta SIM | Nie dotyczy | Nano SIM |
+| GPS | Nie | **Zintegrowany** |
+| Połączenia głosowe | VoIP przez Wi-Fi | **VoIP + VoLTE (5G)** |
+| Hotspot mobilny | Nie | **Tak** |
+| SMS/MMS | Nie | **Tak** |
+| Zastosowanie | Wewnątrz budynków | **Teren i mobilność** |
+
+### Zastosowania Zebra TC58e
+
+- **Logistyka terenowa:** dostawy, śledzenie przesyłek, potwierdzenia doręczeń
+- **Usługi kurierskie:** skanowanie paczek, nawigacja GPS, dokumentacja fotograficzna
+- **Serwis techniczny:** zlecenia w terenie, dokumentacja napraw, komunikacja z centralą
+- **Służby miejskie:** kontrole terenowe, raportowanie, dostęp do baz danych
+- **Transport:** zarządzanie flotą, śledzenie pojazdów, komunikacja z dyspozytorem
+- **Leśnictwo:** inwentaryzacja w terenie, dostęp do systemów SILP/Leśnik+, nawigacja GPS
+
+### Cechy charakterystyczne Zebra TC58e
+
+- **Łączność 5G/LTE** – stały dostęp do sieci w terenie
+- **GPS zintegrowany** – nawigacja i śledzenie lokalizacji
+- **Wyświetlacz 6" FHD+** – najjaśniejszy w swojej klasie (600 nitów)
+- **Procesor Qualcomm 6490** – 8-rdzeniowy, 2,7 GHz
+- **Skaner SE55 Advanced Range** – zasięg do 14 m (opcja)
+- **Certyfikat IP65/IP68** – pełna odporność na kurz i wodę
+- **Upadek z 1,8 m** – na beton z futerałem ochronnym (MIL-STD-810H)
+- **VoLTE** – połączenia głosowe przez sieć 5G/LTE
+- **Mobile Hotspot** – udostępnianie internetu innym urządzeniom
+- **Warm Swap** – wymiana baterii bez utraty połączenia
+`
+      },
+      {
+        title: '2. Rozpakowanie i instalacja',
+        content: `
+### Zawartość opakowania Zebra TC58e
+
+- Komputer mobilny Zebra TC58e
+- Bateria PowerPrecision+ Li-Ion 4680 mAh (lub 7000 mAh)
+- Skrócona instrukcja obsługi
+- Przewodnik bezpieczeństwa
+
+> **Uwaga:** Karta SIM, zasilacz, kable, stacje dokujące i futerały ochronne są sprzedawane oddzielnie.
+
+### Instalacja karty SIM Zebra TC58e
+
+1. Podnieś klapkę dostępową z tyłu urządzenia
+2. Przesuń uchwyt karty SIM do pozycji "Unlock"
+3. Podnieś drzwiczki uchwytu
+4. Umieść kartę nano SIM stykami do dołu
+5. Zamknij drzwiczki i przesuń uchwyt do pozycji "Lock"
+6. Zamknij klapkę dostępową – musi być prawidłowo uszczelniona
+
+> **Ważne:** Klapka musi być szczelnie zamknięta dla zachowania odporności IP65/IP68.
+
+### Instalacja karty microSD Zebra TC58e (opcjonalnie)
+
+1. Podnieś klapkę dostępową z tyłu urządzenia
+2. Przesuń uchwyt karty microSD do pozycji "Open"
+3. Podnieś drzwiczki uchwytu karty
+4. Umieść kartę microSD stykami do góry
+5. Zamknij drzwiczki i przesuń uchwyt do pozycji "Lock"
+6. Zamknij klapkę dostępową
+
+### Instalacja baterii Zebra TC58e
+
+1. Włóż baterię do komory, wyrównując styki (najpierw dolna część)
+2. Dociśnij baterię do góry, aż zatrzaski zablokują się na miejscu
+3. Zatrzaski po bokach powinny zaskoczyć automatycznie
+
+> **Funkcja Warm Swap:** Zebra TC58e pozwala na wymianę baterii z zachowaniem połączenia Wi-Fi/WAN przez 30 sekund i pamięci przez 60 sekund.
+
+### Warunki pracy Zebra TC58e
+
+| Tryb | Temperatura | Wilgotność |
+|------|-------------|------------|
+| Praca | -20°C do +50°C | 5-95% bez kondensacji |
+| Ładowanie | 0°C do +50°C | – |
+| Przechowywanie | -40°C do +70°C | 5-95% bez kondensacji |
+`
+      },
+      {
+        title: '3. Łączność komórkowa (5G/LTE)',
+        content: `
+### Konfiguracja sieci komórkowej Zebra TC58e
+
+1. Upewnij się, że karta SIM jest zainstalowana
+2. Otwórz **Ustawienia** → **Sieć i internet** → **Sieć komórkowa**
+3. Włącz **Dane mobilne**
+4. Sieć powinna połączyć się automatycznie
+
+### Obsługiwane pasma 5G/LTE Zebra TC58e
+
+**5G FR1:** n1, n2, n3, n5, n7, n8, n12, n20, n25, n28, n38, n40, n41, n66, n71, n77, n78
+
+**LTE:** B1-B5, B7, B8, B12, B13, B14, B17, B18, B19, B20, B25, B26, B28, B29, B30, B38, B39, B40, B41, B42, B43, B46, B48, B66, B71
+
+**CBRS:** B48 (dla USA)
+
+### Ustawienia sieci komórkowej Zebra TC58e
+
+| Ustawienie | Opis |
+|------------|------|
+| Dane mobilne | Włącz/wyłącz transfer danych |
+| Roaming | Włącz/wyłącz roaming |
+| Preferowany typ sieci | 5G / LTE / 3G / 2G |
+| Nazwy punktów dostępu (APN) | Konfiguracja APN |
+| Operatorzy sieci | Automatyczny/ręczny wybór |
+
+### Konfiguracja APN Zebra TC58e
+
+1. Otwórz **Ustawienia** → **Sieć i internet** → **Sieć komórkowa** → **Nazwy punktów dostępu**
+2. Dotknij **+** aby dodać nowy APN
+3. Wprowadź dane od operatora: Nazwa, APN, Użytkownik, Hasło
+4. Zapisz i wybierz jako domyślny
+
+### Udostępnianie połączenia (Mobile Hotspot) Zebra TC58e
+
+1. Otwórz **Ustawienia** → **Sieć i internet** → **Hotspot i tethering**
+2. Dotknij **Hotspot Wi-Fi**
+3. Skonfiguruj nazwę sieci i hasło
+4. Włącz hotspot
+
+### Połączenia głosowe (VoLTE) Zebra TC58e
+
+Zebra TC58e obsługuje połączenia głosowe przez sieć 5G/LTE (VoLTE):
+
+1. Otwórz aplikację **Telefon**
+2. Wprowadź numer lub wybierz kontakt
+3. Dotknij przycisku połączenia
+4. Połączenie zostanie zestawione przez sieć LTE/5G
+
+### Wiadomości SMS/MMS Zebra TC58e
+
+1. Otwórz aplikację **Wiadomości**
+2. Dotknij **+** aby utworzyć nową wiadomość
+3. Wprowadź odbiorcę i treść
+4. Dotknij **Wyślij**
+`
+      },
+      {
+        title: '4. GPS i lokalizacja',
+        content: `
+### Włączanie GPS Zebra TC58e
+
+1. Otwórz **Ustawienia** → **Lokalizacja**
+2. Włącz **Używaj lokalizacji**
+3. Wybierz tryb dokładności
+
+### Tryby lokalizacji Zebra TC58e
+
+| Tryb | Opis |
+|------|------|
+| Wysoka dokładność | GPS + Wi-Fi + Sieć komórkowa |
+| Oszczędzanie baterii | Wi-Fi + Sieć komórkowa (bez GPS) |
+| Tylko GPS | Tylko satelity GPS |
+
+### Obsługiwane systemy nawigacji Zebra TC58e
+
+- **GPS** (USA)
+- **GLONASS** (Rosja)
+- **Galileo** (Europa)
+- **BeiDou** (Chiny)
+- **A-GPS** (wspomagany przez sieć)
+
+### Korzystanie z nawigacji Zebra TC58e
+
+1. Otwórz aplikację **Mapy Google** lub inną aplikację nawigacyjną
+2. Wprowadź cel podróży
+3. Wybierz trasę
+4. Rozpocznij nawigację
+
+> **Wskazówka:** Dla najlepszej dokładności GPS, używaj urządzenia na zewnątrz z widocznym niebem.
+
+### Problemy z GPS Zebra TC58e
+
+| Problem | Rozwiązanie |
+|---------|-------------|
+| Brak sygnału GPS | Wyjdź na zewnątrz, sprawdź ustawienia lokalizacji |
+| Niedokładna lokalizacja | Użyj trybu wysokiej dokładności |
+| Wolne uzyskiwanie pozycji | Włącz A-GPS, użyj Wi-Fi |
+`
+      },
+      {
+        title: '5. Skanowanie kodów kreskowych',
+        content: `
+### Obsługiwane skanery Zebra TC58e
+
+| Skaner | Opis | Zasięg |
+|--------|------|--------|
+| SE4720 | Standardowy skaner 2D | Do 91 cm (kod 20 mil) |
+| SE4770 | Skaner 2D | Do 91 cm (kod 20 mil) |
+| SE55 | Skaner dalekiego zasięgu | Do 14 m (kod 100 mil) |
+
+### Skanowanie wewnętrznym skanerem Zebra TC58e
+
+1. Uruchom aplikację obsługującą skanowanie (np. DWDemo)
+2. Skieruj okno skanera na kod kreskowy
+3. Naciśnij przycisk skanowania (boczny lub ekranowy)
+4. Utrzymuj urządzenie w odległości 10-60 cm od kodu
+5. Celuj linią lub wzorem na środek kodu
+6. Poczekaj na potwierdzenie odczytu (dźwięk/wibracja)
+
+### Zasięgi skanowania SE4720/SE4770 (Zebra TC58e)
+
+| Typ kodu | Odległość min. | Odległość maks. |
+|----------|----------------|-----------------|
+| Code 39 (3 mil) | 7,6 cm | 14,7 cm |
+| Code 128 (5 mil) | 5,8 cm | 24,9 cm |
+| PDF417 (5 mil) | 7,6 cm | 20,1 cm |
+| Data Matrix (10 mil) | 5,3 cm | 27,9 cm |
+| UPC-A (100%) | 4,1 cm | 63,2 cm |
+| Code 39 (20 mil) | 4,1 cm | 91,7 cm |
+
+### Zasięgi skanowania SE55 Advanced Range (Zebra TC58e)
+
+| Typ kodu | Odległość min. | Odległość maks. |
+|----------|----------------|-----------------|
+| Code 39 (3 mil) | 6,9 cm | 41,1 cm |
+| UPC-A (100%) | 6,4 cm | 180 cm |
+| Code 128 (15 mil) | 18,2 cm | 181 cm |
+| Code 39 (55 mil) | – | 744 cm |
+| Code 39 (100 mil) | – | 1407 cm |
+
+### Wskazówki dotyczące skanowania Zebra TC58e
+
+- Utrzymuj równoległy kąt do kodu (unikaj skrajnych kątów)
+- Unikaj odbić światła na laminowanych etykietach
+- Przy jasnym świetle słonecznym zasłoń kod ręką
+- Regularnie czyść okno skanera
+`
+      },
+      {
+        title: '6. Łączność bezprzewodowa',
+        content: `
+### Wi-Fi 6 Zebra TC58e
+
+| Parametr | Wartość |
+|----------|---------|
+| Standard | 802.11 a/b/g/n/ac/ax |
+| Pasma | 2,4 GHz / 5 GHz |
+| MIMO | 2x2 MU-MIMO |
+| Szerokość kanału | 20/40/80/160 MHz |
+| Zabezpieczenia | WPA3, WPA2, WPA, 802.1x |
+
+### Łączenie z siecią Wi-Fi Zebra TC58e
+
+1. Otwórz **Ustawienia** → **Sieć i internet** → **Wi-Fi**
+2. Włącz Wi-Fi (jeśli wyłączone)
+3. Wybierz sieć z listy
+4. Wprowadź hasło (jeśli wymagane)
+5. Dotknij **Połącz**
+
+### Bluetooth 5.2 Zebra TC58e
+
+| Parametr | Wartość |
+|----------|---------|
+| Wersja | 5.2 + BLE |
+| Profile | A2DP, AVRCP, HFP, HSP, HID, OPP, PBAP, PAN, MAP |
+| Zasięg | do 10 m (klasa 2) |
+
+### NFC Zebra TC58e
+
+| Parametr | Wartość |
+|----------|---------|
+| Standard | ISO 14443 A/B, ISO 15693, FeliCa |
+| Tryby | Reader, Writer, Card Emulation, Peer-to-Peer |
+| Funkcje | Parowanie urządzeń, płatności mobilne, identyfikacja |
+
+Antena NFC znajduje się w górnej części tyłu urządzenia.
+`
+      },
+      {
+        title: '7. Bateria i ładowanie',
+        content: `
+### Specyfikacja baterii Zebra TC58e
+
+| Parametr | Standard | Rozszerzona |
+|----------|----------|-------------|
+| Typ | Li-Ion PowerPrecision+ | Li-Ion PowerPrecision+ |
+| Pojemność | 4680 mAh | 7000 mAh |
+| Napięcie | 3,87 V | 3,87 V |
+| Czas pracy | 8-12 godzin | 12-18 godzin |
+| Czas ładowania | ~2,5 godziny | ~4 godziny |
+| Ładowanie bezprzewodowe | Tak | Tak |
+
+### Ładowanie urządzenia Zebra TC58e
+
+**Przez USB-C:**
+1. Podłącz kabel USB-C do urządzenia
+2. Podłącz drugi koniec do zasilacza
+3. LED zmieni kolor na pomarańczowy (ładowanie)
+4. LED zmieni kolor na zielony (naładowane)
+
+**Przez stację dokującą:**
+1. Umieść urządzenie w stacji
+2. Upewnij się, że styki są prawidłowo połączone
+3. LED stacji wskaże status ładowania
+
+**Ładowanie bezprzewodowe:**
+1. Umieść urządzenie na ładowarce bezprzewodowej Qi
+2. LED wskaże status ładowania
+
+### Wskaźniki LED ładowania Zebra TC58e
+
+| Kolor LED | Znaczenie |
+|-----------|-----------|
+| Pomarańczowy (stały) | Ładowanie |
+| Zielony (stały) | Naładowane |
+| Pomarańczowy (migający) | Błąd ładowania |
+| Czerwony (migający) | Temperatura poza zakresem |
+
+### Oszczędzanie baterii Zebra TC58e
+
+- Zmniejsz jasność ekranu
+- Wyłącz Wi-Fi gdy korzystasz z sieci komórkowej
+- Wyłącz GPS gdy nie korzystasz z nawigacji
+- Włącz tryb oszczędzania baterii
+- Użyj trybu 4G zamiast 5G gdy wystarczy
+`
+      },
+      {
+        title: '8. Konserwacja i rozwiązywanie problemów',
+        content: `
+### Harmonogram czyszczenia Zebra TC58e
+
+| Element | Częstotliwość |
+|---------|---------------|
+| Ekran dotykowy | Codziennie |
+| Okno skanera | Codziennie |
+| Styki ładowania | Co tydzień |
+| Obudowa | W razie potrzeby |
+
+### Czyszczenie Zebra TC58e
+
+1. Wyłącz urządzenie lub zablokuj ekran
+2. Użyj miękkiej, bezpyłowej ściereczki
+3. Zwilż alkoholem izopropylowym (70%)
+4. Delikatnie przetrzyj powierzchnię
+5. Osusz przed użyciem
+
+### Problemy z siecią komórkową Zebra TC58e
+
+| Problem | Rozwiązanie |
+|---------|-------------|
+| Brak sygnału | Sprawdź kartę SIM, sprawdź zasięg, zrestartuj urządzenie |
+| Brak danych | Sprawdź ustawienia APN, sprawdź limit danych |
+| Wolne połączenie | Sprawdź siłę sygnału, przełącz na Wi-Fi |
+| Roaming nie działa | Włącz roaming w ustawieniach |
+| Połączenia nie działają | Sprawdź kartę SIM, sprawdź tryb samolotowy |
+
+### Problemy ze skanowaniem Zebra TC58e
+
+| Problem | Rozwiązanie |
+|---------|-------------|
+| Skaner nie działa | Sprawdź DataWedge, zrestartuj urządzenie |
+| Nie odczytuje kodu | Oczyść okno skanera, zmień kąt/odległość |
+| Wolne skanowanie | Wyłącz niepotrzebne dekodery |
+
+### Resetowanie Zebra TC58e
+
+**Miękki reset:**
+1. Przytrzymaj przycisk Power
+2. Wybierz "Uruchom ponownie"
+
+**Twardy reset:**
+1. Przytrzymaj Power przez 10 sekund
+
+**Enterprise Reset:**
+1. Ustawienia → System → Opcje resetowania
+2. Wybierz "Enterprise Reset"
+
+**Factory Reset:**
+1. Ustawienia → System → Opcje resetowania
+2. Wybierz "Przywrócenie danych fabrycznych"
+
+> **Ostrzeżenie:** Factory Reset usuwa wszystkie dane!
+`
+      },
+      {
+        title: '9. Specyfikacje techniczne',
+        content: `
+### Wymiary i waga Zebra TC58e
+
+| Parametr | Wartość |
+|----------|---------|
+| Wysokość | 164,8 mm |
+| Szerokość | 77,35 mm |
+| Grubość | 16,75 mm |
+| Waga (bateria standard) | ~300 g |
+| Waga (bateria rozszerzona) | ~340 g |
+
+### Wyświetlacz Zebra TC58e
+
+| Parametr | Wartość |
+|----------|---------|
+| Przekątna | 6,0" |
+| Rozdzielczość | 2160 x 1080 (FHD+) |
+| Typ | IPS LCD |
+| Jasność | 600 nitów |
+| Ochrona | Corning Gorilla Glass |
+| Dotyk | Pojemnościowy, rękawiczki, mokry palec |
+
+### Wydajność Zebra TC58e
+
+| Parametr | Wartość |
+|----------|---------|
+| Procesor | Qualcomm 6490, 2,7 GHz, 8-rdzeniowy |
+| RAM | 6 GB / 8 GB |
+| Flash | 64 GB / 128 GB |
+| microSD | Do 2 TB |
+
+### Łączność Zebra TC58e
+
+| Parametr | Wartość |
+|----------|---------|
+| Sieć komórkowa | 5G FR1, LTE Cat 20, CBRS |
+| Wi-Fi | 802.11 a/b/g/n/ac/ax (Wi-Fi 6) |
+| Bluetooth | 5.2 + BLE |
+| NFC | Tak |
+| USB | USB-C 3.1 Gen 1 |
+| GPS | GPS, GLONASS, Galileo, BeiDou, A-GPS |
+| Karta SIM | Nano SIM |
+
+### Wytrzymałość Zebra TC58e
+
+| Parametr | Wartość |
+|----------|---------|
+| Stopień ochrony IP | IP65/IP68 |
+| Upadek (z Rugged Boot) | 1,8 m na beton (MIL-STD-810H) |
+| Upadek (bez ochrony) | 1,5 m na płytki |
+| Temperatura pracy | -20°C do +50°C |
+| Temperatura ładowania | 0°C do +50°C |
+| Temperatura przechowywania | -40°C do +70°C |
+| Wilgotność | 5-95% bez kondensacji |
+
+### Certyfikaty Zebra TC58e
+
+- MIL-STD-810H
+- IP65/IP68
+- CE, FCC, IC
+- RoHS
+- Secure Boot, Verified Boot
+- Certyfikaty operatorów sieci komórkowych
+`
+      },
+      {
+        title: '10. FAQ – Często zadawane pytania',
+        content: `
+### Co to jest Zebra TC58e?
+
+**Odpowiedź:** Zebra TC58e to zaawansowany **komputer mobilny z 6-calowym ekranem FHD+ (600 nitów)** i pełną łącznością **5G/LTE**. Wyposażony w procesor Qualcomm 6490 (8-rdzeniowy, 2,7 GHz), zintegrowany GPS, skaner SE4720/SE55, Wi-Fi 6, Bluetooth 5.2 i NFC. Przeznaczony dla logistyki terenowej, kurierów i serwisu technicznego.
+
+### Jaka jest różnica między Zebra TC53e a Zebra TC58e?
+
+**Odpowiedź:** Zebra TC53e to wersja **tylko Wi-Fi**, natomiast Zebra TC58e ma dodatkowo **moduł 5G/LTE/CBRS**, slot na kartę SIM, zintegrowany GPS, obsługę połączeń głosowych VoLTE, SMS/MMS i Mobile Hotspot. Zebra TC53e jest przeznaczony do pracy wewnątrz budynków, a Zebra TC58e do pracy mobilnej w terenie.
+
+### Czy Zebra TC58e ma GPS?
+
+**Odpowiedź:** **Tak**, Zebra TC58e posiada zintegrowany odbiornik GNSS obsługujący systemy: GPS, GLONASS, Galileo, BeiDou oraz A-GPS. Jest to główna różnica względem modelu TC53e, który nie ma GPS.
+
+### Jakie karty SIM obsługuje Zebra TC58e?
+
+**Odpowiedź:** Zebra TC58e obsługuje karty **nano SIM**. Urządzenie posiada jeden slot na kartę SIM. Karta SIM jest wymagana do korzystania z sieci 5G/LTE, połączeń głosowych i SMS.
+
+### Jak długo działa bateria w Zebra TC58e?
+
+**Odpowiedź:** Standardowa bateria 4680 mAh zapewnia **8-12 godzin pracy**. Dostępna jest też bateria rozszerzona 7000 mAh zapewniająca **12-18 godzin pracy**. Czas pracy zależy od intensywności użycia sieci 5G/LTE i GPS.
+
+### Czy Zebra TC58e obsługuje połączenia głosowe?
+
+**Odpowiedź:** **Tak**, Zebra TC58e obsługuje połączenia głosowe przez sieć komórkową (VoLTE) oraz VoIP przez Wi-Fi. Urządzenie ma aplikację Telefon i może wykonywać/odbierać połączenia jak smartfon.
+
+### Jak zresetować Zebra TC58e do ustawień fabrycznych?
+
+**Odpowiedź:** Przejdź do **Ustawienia → System → Opcje resetowania → Przywrócenie danych fabrycznych**. Uwaga: ta operacja usuwa wszystkie dane z urządzenia! Dla resetu bez utraty konfiguracji użyj "Enterprise Reset".
+
+### Czy Zebra TC58e jest wodoodporny?
+
+**Odpowiedź:** Tak, Zebra TC58e posiada certyfikat **IP65/IP68** – jest w pełni odporny na kurz i wodę (zanurzenie do 1,5 m przez 30 minut). Ważne: klapka dostępowa (SIM/microSD) musi być szczelnie zamknięta!
+`
+      }
+    ]
+  },
+
   tc53e: {
     model: 'TC53e',
     title: 'Zebra TC53e – Instrukcja obsługi po Polsku',
