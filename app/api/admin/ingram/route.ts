@@ -138,7 +138,10 @@ export async function GET(request: Request) {
 
       // Orders List
       case 'orders':
-        const ordersResult = await getOrdersList(dateFrom || undefined, dateTo || undefined)
+        const ordersResult = await getOrdersList({
+          startDate: dateFrom || undefined,
+          endDate: dateTo || undefined
+        })
         return NextResponse.json(ordersResult)
 
       // Order Details
