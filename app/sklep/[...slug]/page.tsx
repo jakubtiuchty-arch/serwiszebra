@@ -633,11 +633,22 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
 
             {/* Opis produktu */}
             <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6 mb-4 sm:mb-6">
-              <h2 className="text-sm sm:text-base font-semibold text-gray-900 mb-2 sm:mb-3">Opis produktu</h2>
-              <div className="text-xs sm:text-sm text-gray-600 leading-relaxed space-y-2 sm:space-y-3">
-                {product.description && <p>{product.description}</p>}
+              <h2 className="text-sm sm:text-base font-semibold text-gray-900 mb-3 sm:mb-4">Opis produktu</h2>
+              <div className="prose prose-sm max-w-none text-gray-600 
+                prose-headings:text-gray-900 prose-headings:font-semibold prose-headings:text-sm prose-headings:mt-4 prose-headings:mb-2
+                prose-p:text-xs prose-p:sm:text-sm prose-p:leading-relaxed prose-p:mb-3
+                prose-ul:my-2 prose-ul:pl-4 prose-li:text-xs prose-li:sm:text-sm prose-li:mb-1
+                prose-strong:text-gray-800 prose-strong:font-semibold">
+                {product.description && (
+                  <p className="text-sm sm:text-base text-gray-700 font-medium mb-4 pb-3 border-b border-gray-100">
+                    {product.description}
+                  </p>
+                )}
                 {product.description_long && (
-                  <p className="whitespace-pre-line">{product.description_long}</p>
+                  <div 
+                    className="product-description"
+                    dangerouslySetInnerHTML={{ __html: product.description_long }} 
+                  />
                 )}
                 {!product.description && !product.description_long && (
                   <p>

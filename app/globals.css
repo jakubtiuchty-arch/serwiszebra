@@ -233,3 +233,80 @@
   padding-top: 8px !important;
   padding-bottom: 8px !important;
 }
+
+/* Product description styles for shop */
+.product-description {
+  color: #4b5563;
+  line-height: 1.6;
+}
+
+.product-description h3,
+.product-description h4 {
+  color: #111827;
+  font-weight: 600;
+  font-size: 0.875rem;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.product-description p {
+  margin-bottom: 0.75rem;
+  font-size: 0.8125rem;
+}
+
+.product-description ul {
+  list-style-type: disc;
+  padding-left: 1.25rem;
+  margin: 0.5rem 0;
+}
+
+.product-description li {
+  font-size: 0.8125rem;
+  margin-bottom: 0.25rem;
+  color: #4b5563;
+}
+
+.product-description strong {
+  color: #374151;
+  font-weight: 600;
+}
+
+.product-description table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.75rem 0;
+  font-size: 0.75rem;
+}
+
+.product-description th,
+.product-description td {
+  padding: 0.5rem;
+  border: 1px solid #e5e7eb;
+  text-align: left;
+}
+
+.product-description th {
+  background-color: #f9fafb;
+  font-weight: 600;
+  color: #374151;
+}
+
+.product-description td {
+  color: #4b5563;
+}
+
+@media (min-width: 640px) {
+  .product-description h3,
+  .product-description h4 {
+    font-size: 0.9375rem;
+  }
+  
+  .product-description p,
+  .product-description li {
+    font-size: 0.875rem;
+  }
+  
+  .product-description table {
+    font-size: 0.8125rem;
+  }
+}
