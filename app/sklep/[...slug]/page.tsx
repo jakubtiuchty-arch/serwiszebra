@@ -37,6 +37,12 @@ import {
   type PrinterCategory,
   type PrinterModel
 } from '@/lib/shop-categories'
+import {
+  generateProductFAQ,
+  generateAdditionalProperties,
+  PRINTER_MODELS,
+  identifyFromPartNumber
+} from '@/lib/printhead-data'
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
@@ -351,7 +357,40 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
 
     const Icon = PRODUCT_TYPE_ICONS[product.product_type] || Package
     const imageUrl = getProductImageUrl(product)
-    const faqItems = PRODUCT_TYPE_FAQ[product.product_type] || []
+    
+    // Dynamiczne FAQ - dla głowic generuj na podstawie modelu, dla innych użyj generycznego
+    let faqItems: Array<{ question: string; answer: string }> = []
+    let additionalProperties: Array<{ name: string; value: string }> = []
+    let printerModelData = null
+    
+    if (product.product_type === 'glowica' && product.device_model && product.resolution_dpi) {
+      // Normalizuj model
+      const normalizedModel = product.device_model.replace(/^Zebra\s+/i, '').trim()
+      
+      // Znajdź w bazie danych modeli
+      for (const key of Object.keys(PRINTER_MODELS)) {
+        if (key.toLowerCase().replace(/[^a-z0-9]/gi, '') === normalizedModel.toLowerCase().replace(/[^a-z0-9]/gi, '')) {
+          printerModelData = PRINTER_MODELS[key]
+          break
+        }
+      }
+      
+      // Generuj dynamiczne FAQ i additionalProperties
+      faqItems = generateProductFAQ(
+        printerModelData?.id || normalizedModel,
+        product.resolution_dpi,
+        product.sku
+      )
+      
+      additionalProperties = generateAdditionalProperties(
+        printerModelData?.id || normalizedModel,
+        product.resolution_dpi,
+        product.sku
+      )
+    } else {
+      // Fallback do generycznego FAQ per typ produktu
+      faqItems = PRODUCT_TYPE_FAQ[product.product_type] || []
+    }
 
     // Dodaj produkt do breadcrumbs
     const productBreadcrumbs = [
@@ -359,8 +398,8 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
       { label: product.name, href: '' }
     ]
 
-    // Generuj rozszerzony Schema JSON-LD
-    const productSchema = {
+    // Generuj rozszerzony Schema JSON-LD z additionalProperty
+    const productSchema: Record<string, unknown> = {
       "@context": "https://schema.org",
       "@type": "Product",
       "name": product.name,
@@ -417,6 +456,15 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
         "worstRating": "1"
       }
     }
+    
+    // Dodaj additionalProperty jeśli dostępne
+    if (additionalProperties.length > 0) {
+      productSchema.additionalProperty = additionalProperties.map(prop => ({
+        "@type": "PropertyValue",
+        "name": prop.name,
+        "value": prop.value
+      }))
+    }
 
     // FAQ Schema
     const faqSchema = faqItems.length > 0 ? {
@@ -432,6 +480,11 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
       }))
     } : null
 
+    // Generuj "Szybka odpowiedź" dla głowic
+    const quickAnswer = product.product_type === 'glowica' && product.resolution_dpi 
+      ? `Głowica ${product.sku} to oryginalna część ${product.resolution_dpi} DPI do ${product.device_model || 'drukarki Zebra'}. Cena: ${product.price_brutto.toFixed(2).replace('.', ',')} zł brutto. Wysyłka ${product.stock > 0 ? '24h z magazynu w Polsce' : '3-7 dni'}. Gwarancja producenta 12 miesięcy.`
+      : null
+
     return (
       <>
         <Header currentPage="other" />
@@ -439,6 +492,16 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
         
         <div className="min-h-screen bg-gray-50">
           <div className="max-w-5xl mx-auto px-4 py-4 sm:py-6">
+            
+            {/* Szybka odpowiedź (Paragraph 0 dla AEO) */}
+            {quickAnswer && (
+              <div className="bg-blue-50 border-l-4 border-blue-500 rounded-r-xl p-4 mb-4 sm:mb-6">
+                <p className="text-sm text-gray-800 leading-relaxed">
+                  <strong className="text-blue-700">W skrócie:</strong> {quickAnswer}
+                </p>
+              </div>
+            )}
+
             {/* Main content - Mobile First */}
             <div className="flex flex-col md:flex-row gap-4 sm:gap-6 mb-4 sm:mb-6 md:items-start">
               {/* Image */}

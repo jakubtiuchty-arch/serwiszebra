@@ -2,12 +2,13 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { ArrowLeft, Save, Wand2, Plus, X, Eye } from 'lucide-react'
+import { ArrowLeft, Save, Wand2, Plus, X, Eye, Sparkles, Loader2 } from 'lucide-react'
 import Link from 'next/link'
 
 export default function DodajProduktPage() {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
+  const [generatingDescriptions, setGeneratingDescriptions] = useState(false)
   const [imagePreview, setImagePreview] = useState<string | null>(null)
   
   // Podstawowe dane
@@ -43,6 +44,7 @@ export default function DodajProduktPage() {
   // SEO
   const [metaTitle, setMetaTitle] = useState('')
   const [metaDescription, setMetaDescription] = useState('')
+  const [seoKeywords, setSeoKeywords] = useState<string[]>([])
 
   // Media
   const [imageFile, setImageFile] = useState<File | null>(null)
@@ -67,7 +69,7 @@ export default function DodajProduktPage() {
     setPriceBrutto(Math.round(calculatedBrutto * 100) / 100)
   }
 
-  // Generowanie SEO
+  // Generowanie SEO (prosty fallback)
   const generateSEO = () => {
     const dpiText = resolutionDpi ? ` ${resolutionDpi}dpi` : ''
     const modelText = deviceModel ? ` ${deviceModel}` : ''
@@ -77,6 +79,79 @@ export default function DodajProduktPage() {
     
     setMetaTitle(generatedTitle.substring(0, 60))
     setMetaDescription(generatedDescription.substring(0, 160))
+  }
+
+  // Auto-generowanie unikalnych opisów SEO dla głowic
+  const generateDescriptions = async () => {
+    if (productType !== 'glowica') {
+      alert('Auto-generowanie opisów jest dostępne tylko dla głowic drukujących.')
+      return
+    }
+
+    if (!sku) {
+      alert('Wprowadź Part Number (SKU) aby wygenerować opisy.')
+      return
+    }
+
+    setGeneratingDescriptions(true)
+
+    try {
+      const response = await fetch('/api/admin/products/generate-description', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          deviceModel,
+          resolutionDpi,
+          sku,
+          priceNetto: priceNetto || undefined,
+          productType
+        })
+      })
+
+      const result = await response.json()
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Błąd generowania opisów')
+      }
+
+      // Uzupełnij pola
+      if (result.data) {
+        setDescription(result.data.description)
+        setDescriptionLong(result.data.descriptionLong)
+        setMetaTitle(result.data.metaTitle.substring(0, 60))
+        setMetaDescription(result.data.metaDescription.substring(0, 160))
+        setSeoKeywords(result.data.keywords || [])
+
+        // Jeśli rozpoznano model, zaktualizuj
+        if (result.data.identifiedModel && !deviceModel) {
+          setDeviceModel(result.data.identifiedModel)
+        }
+        if (result.data.identifiedResolution && !resolutionDpi) {
+          setResolutionDpi(result.data.identifiedResolution)
+        }
+
+        // Dodaj kompatybilne modele z FAQ jeśli są
+        if (result.data.additionalProperties) {
+          const compatProp = result.data.additionalProperties.find(
+            (p: { name: string; value: string }) => p.name === 'Kompatybilność'
+          )
+          if (compatProp) {
+            const models = compatProp.value.split(', ').filter((m: string) => m !== deviceModel)
+            models.forEach((m: string) => {
+              if (!compatibleModels.includes(m)) {
+                setCompatibleModels(prev => [...prev, m])
+              }
+            })
+          }
+        }
+      }
+
+    } catch (error: any) {
+      console.error('Error generating descriptions:', error)
+      alert(error.message || 'Błąd generowania opisów')
+    } finally {
+      setGeneratingDescriptions(false)
+    }
   }
 
   // Dodawanie parametru
@@ -185,7 +260,16 @@ export default function DodajProduktPage() {
     }
   }
 
-  const availableModels = ['ZD420', 'ZD620', 'ZT230', 'ZT411', 'TC21', 'TC26', 'GK420d', 'GX420d']
+  const availableModels = [
+    // Biurkowe
+    'ZD220t', 'ZD230t', 'ZD411t', 'ZD421t', 'ZD611t', 'ZD621t',
+    'GK420t', 'GK420d', 'GX420t', 'GX420d', 'GX430t',
+    // Przemysłowe
+    'ZT210', 'ZT220', 'ZT230', 'ZT410', 'ZT411', 'ZT420', 'ZT421',
+    'ZT510', 'ZT610', 'ZT620', '105SLPlus', 'ZM400', 'ZM600', '110Xi4', '220Xi4',
+    // Terminale
+    'TC21', 'TC26', 'TC52', 'TC57', 'MC3300'
+  ]
   const dpiOptions = [203, 300, 600]
 
   return (
@@ -569,12 +653,44 @@ export default function DodajProduktPage() {
 
         {/* SEKCJA 5: OPISY */}
         <div className="bg-white rounded-xl border border-gray-200 p-6">
-          <h2 className="text-xl font-semibold text-gray-900 mb-6">Opisy produktu</h2>
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-xl font-semibold text-gray-900">Opisy produktu</h2>
+            {productType === 'glowica' && (
+              <button
+                type="button"
+                onClick={generateDescriptions}
+                disabled={generatingDescriptions || !sku}
+                className="flex items-center gap-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 disabled:from-gray-400 disabled:to-gray-500 text-white px-4 py-2 rounded-lg font-medium transition-all shadow-md hover:shadow-lg"
+              >
+                {generatingDescriptions ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    Generowanie...
+                  </>
+                ) : (
+                  <>
+                    <Sparkles className="w-4 h-4" />
+                    Generuj unikalne opisy SEO
+                  </>
+                )}
+              </button>
+            )}
+          </div>
+
+          {productType === 'glowica' && !description && !descriptionLong && (
+            <div className="bg-purple-50 border border-purple-200 rounded-lg p-4 mb-4">
+              <p className="text-sm text-purple-800">
+                <strong>💡 Wskazówka:</strong> Wprowadź Part Number (SKU) i kliknij "Generuj unikalne opisy SEO" 
+                aby automatycznie wypełnić opisy, meta title, meta description i słowa kluczowe 
+                na podstawie specyfikacji głowicy.
+              </p>
+            </div>
+          )}
           
           <div className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Krótki opis
+                Krótki opis <span className="text-xs text-gray-500">(widoczny w liście produktów)</span>
               </label>
               <textarea
                 value={description}
@@ -583,33 +699,76 @@ export default function DodajProduktPage() {
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
                 placeholder="Krótki opis produktu (1-2 zdania)"
               />
+              <p className="text-xs text-gray-500 mt-1">{description.length} znaków</p>
             </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Szczegółowy opis
+                Szczegółowy opis <span className="text-xs text-gray-500">(na stronie produktu)</span>
               </label>
               <textarea
                 value={descriptionLong}
                 onChange={(e) => setDescriptionLong(e.target.value)}
-                rows={8}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
-                placeholder="Pełny opis produktu ze szczegółami technicznymi..."
+                rows={12}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none font-mono text-sm"
+                placeholder="Pełny opis produktu ze szczegółami technicznymi... (obsługuje markdown)"
               />
+              <p className="text-xs text-gray-500 mt-1">{descriptionLong.length} znaków • Obsługuje formatowanie Markdown</p>
             </div>
+
+            {/* Słowa kluczowe SEO */}
+            {seoKeywords.length > 0 && (
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Słowa kluczowe SEO <span className="text-xs text-green-600">({seoKeywords.length} wygenerowanych)</span>
+                </label>
+                <div className="flex flex-wrap gap-1.5 p-3 bg-gray-50 rounded-lg border border-gray-200 max-h-32 overflow-y-auto">
+                  {seoKeywords.map((keyword, index) => (
+                    <span
+                      key={index}
+                      className="inline-flex items-center bg-white text-gray-700 px-2 py-0.5 rounded text-xs border border-gray-200"
+                    >
+                      {keyword}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </div>
 
         {/* SEKCJA 6: SEO - IS KING! 👑 */}
         <div className="bg-gradient-to-r from-yellow-50 to-orange-50 rounded-xl border-2 border-yellow-300 p-6">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="w-10 h-10 bg-yellow-400 rounded-full flex items-center justify-center">
-              <span className="text-2xl">👑</span>
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-yellow-400 rounded-full flex items-center justify-center">
+                <span className="text-2xl">👑</span>
+              </div>
+              <div>
+                <h2 className="text-xl font-semibold text-gray-900">SEO - Optymalizacja</h2>
+                <p className="text-sm text-gray-600">Kluczowe dla widoczności w Google!</p>
+              </div>
             </div>
-            <div>
-              <h2 className="text-xl font-semibold text-gray-900">SEO - Optymalizacja</h2>
-              <p className="text-sm text-gray-600">Kluczowe dla widoczności w Google!</p>
-            </div>
+            {productType === 'glowica' && (
+              <button
+                type="button"
+                onClick={generateDescriptions}
+                disabled={generatingDescriptions || !sku}
+                className="flex items-center gap-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 disabled:from-gray-400 disabled:to-gray-500 text-white px-4 py-2 rounded-lg font-medium transition-all shadow-md"
+              >
+                {generatingDescriptions ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    Generowanie...
+                  </>
+                ) : (
+                  <>
+                    <Sparkles className="w-4 h-4" />
+                    Auto-generuj z PN
+                  </>
+                )}
+              </button>
+            )}
           </div>
           
           <div className="space-y-4">
@@ -624,7 +783,7 @@ export default function DodajProduktPage() {
                   className="flex items-center gap-1 text-sm bg-yellow-400 hover:bg-yellow-500 text-gray-900 px-3 py-1 rounded-lg font-medium transition-colors"
                 >
                   <Wand2 className="w-4 h-4" />
-                  Generuj automatycznie
+                  Prosty szablon
                 </button>
               </div>
               <input
