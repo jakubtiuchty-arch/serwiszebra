@@ -28981,6 +28981,548 @@ Zebra TC58 może automatycznie dodawać współrzędne GPS do zdjęć:
     ]
   },
 
+  tc78: {
+    model: 'TC78',
+    title: 'Zebra TC78 – Instrukcja obsługi po Polsku',
+    lastUpdated: '2026-01-25',
+    sourceDocument: 'Zebra TC78 User Guide',
+    keywords: [
+      'Zebra TC78',
+      'Zebra TC78 instrukcja',
+      'Zebra TC78 manual',
+      'Zebra TC78 po polsku',
+      'Zebra TC78 specyfikacja',
+      'Zebra TC78 5G',
+      'Zebra TC78 LTE',
+      'Zebra TC78 GPS',
+      'Zebra TC78 skaner',
+      'Zebra TC78 bateria',
+      'Zebra TC78 serwis',
+      'terminal mobilny Zebra TC78',
+      'komputer mobilny Zebra TC78 5G',
+      'Zebra TC78 konfiguracja',
+      'Zebra TC78 VoLTE',
+      'Zebra TC78 Wi-Fi 6E',
+      'Zebra TC78 akcesoria'
+    ],
+    sections: [
+      {
+        title: '1. Podstawowe informacje',
+        content: `
+### O urządzeniu Zebra TC78
+
+Zebra TC78 to nowa generacja ultra-wytrzymałego komputera mobilnego z **6-calowym ekranem dotykowym Full HD+** i pełną łącznością komórkową **5G/LTE**. Urządzenie zostało zaprojektowane dla pracowników terenowych wymagających stałego dostępu do sieci poza zasięgiem Wi-Fi – kierowców dostawczych, kurierów, serwisantów i pracowników służb miejskich.
+
+Zebra TC78 wyposażono w najnowszy procesor Qualcomm 6490 (8-rdzeniowy, 2,7 GHz), zaawansowany skaner kodów kreskowych (SE4770 lub SE55 Advanced Range z IntelliFocus), **zintegrowany GPS** (GPS, GLONASS, Galileo, BeiDou), podwójne kamery (16 MP + 8 MP), łączność 5G/LTE/CBRS, Wi-Fi 6E, Bluetooth 5.2 i NFC.
+
+Konstrukcja spełnia normy IP65/IP68 oraz MIL-STD-810H, zapewniając wyjątkową odporność na upadki (do **3,05 m na beton**), wodę, kurz i ekstremalne temperatury.
+
+### Parametry techniczne Zebra TC78
+
+| Parametr | Zebra TC78 |
+|----------|------------|
+| **Wyświetlacz** | 6,0" FHD+ (1080 x 2160) |
+| Ochrona ekranu | Corning Gorilla Glass |
+| Procesor | Qualcomm 6490, 2,7 GHz (8-rdzeniowy) |
+| System operacyjny | Android 11+ (aktualizacje do Android 16+) |
+| Pamięć RAM | 4 GB / 8 GB |
+| Pamięć Flash | 64 GB / 128 GB (UFS) |
+| Karta SIM | Nano SIM |
+| **Łączność komórkowa** | **5G FR1, LTE, CBRS** |
+| Łączność bezprzewodowa | **Wi-Fi 6E** (802.11ax), 2x2 MU-MIMO |
+| Bluetooth | 5.2 + Secondary BLE |
+| **GPS** | **GPS, GLONASS, Galileo, BeiDou, A-GPS** |
+| Ładowanie bezprzewodowe | Tak (kompatybilne baterie) |
+
+### Porównanie Zebra TC73 vs Zebra TC78
+
+| Parametr | Zebra TC73 | Zebra TC78 |
+|----------|------------|------------|
+| **Łączność komórkowa** | **Brak** | **5G / LTE / CBRS** |
+| Wi-Fi | 6E (802.11ax) | 6E (802.11ax) |
+| Karta SIM | Nie dotyczy | Nano SIM |
+| GPS | Nie | **Zintegrowany** |
+| Połączenia głosowe | VoIP przez Wi-Fi | **VoIP + VoLTE (5G)** |
+| Hotspot mobilny | Nie | **Tak** |
+| SMS/MMS | Nie | **Tak** |
+| Ładowanie bezprzewodowe | Nie | **Tak (opcja)** |
+| Zastosowanie | Wewnątrz budynków | **Teren i mobilność** |
+
+### Zastosowania Zebra TC78
+
+- **Logistyka terenowa:** dostawy, śledzenie przesyłek, potwierdzenia doręczeń
+- **Usługi kurierskie:** skanowanie paczek, nawigacja GPS, dokumentacja fotograficzna
+- **Serwis techniczny:** zlecenia w terenie, dokumentacja napraw, komunikacja z centralą
+- **Służby miejskie:** kontrole terenowe, raportowanie, dostęp do baz danych
+- **Transport:** zarządzanie flotą, śledzenie pojazdów, komunikacja z dyspozytorem
+- **Leśnictwo:** inwentaryzacja w terenie, dostęp do SILP/Leśnik+, nawigacja GPS
+
+### Cechy charakterystyczne Zebra TC78
+
+- **Łączność 5G/LTE** – stały dostęp do sieci w terenie
+- **GPS zintegrowany** – nawigacja i śledzenie lokalizacji (GPS, GLONASS, Galileo, BeiDou)
+- **Wyświetlacz 6" FHD+** – 28% większy, edge-to-edge, widoczny w słońcu
+- **Procesor Qualcomm 6490** – 90% więcej mocy, 400% szybsza grafika
+- **Wi-Fi 6E** – 3x szybszy, 4x więcej urządzeń
+- **Skaner SE55 Advanced Range** – zasięg do 180 cm (opcja)
+- **Upadek z 3,05 m** – na beton (MIL-STD-810H)
+- **True Hot Swap** – wymiana baterii bez utraty połączenia (Premium)
+- **VoLTE** – połączenia głosowe przez sieć 5G/LTE (HD Voice)
+- **Mobile Hotspot** – udostępnianie internetu
+- **Ładowanie bezprzewodowe** – kompatybilne z Qi
+- **Device Tracker** – lokalizacja nawet z rozładowaną baterią
+`
+      },
+      {
+        title: '2. Rozpakowanie i instalacja',
+        content: `
+### Zawartość opakowania Zebra TC78
+
+- Komputer mobilny Zebra TC78
+- Bateria PowerPrecision+ Li-Ion (4680 mAh lub 4400 mAh Wireless)
+- Skrócona instrukcja obsługi (Regulatory Guide)
+
+> **Uwaga:** Karta SIM, zasilacz, kable, stacje dokujące są sprzedawane oddzielnie.
+
+### Instalacja karty SIM Zebra TC78
+
+Slot karty SIM znajduje się pod klapką dostępową z tyłu urządzenia.
+
+1. Wyjmij baterię z urządzenia
+2. Zdejmij klapkę dostępową
+3. Przesuń uchwyt karty SIM do pozycji "Unlock"
+4. Podnieś drzwiczki uchwytu
+5. Umieść kartę nano SIM stykami do dołu
+6. Zamknij drzwiczki i przesuń uchwyt do pozycji "Lock"
+7. Zamknij klapkę dostępową – musi być prawidłowo uszczelniona
+
+> **Ważne:** Klapka musi być szczelnie zamknięta dla zachowania odporności IP65/IP68.
+
+### Instalacja baterii Zebra TC78
+
+1. Włóż baterię do komory, wyrównując styki (najpierw dolna część)
+2. Dociśnij baterię do góry, aż zatrzaski zablokują się na miejscu
+3. Zatrzaski po bokach powinny zaskoczyć automatycznie
+
+> **Funkcja True Hot Swap (Premium):** Wymiana baterii z zachowaniem połączenia Wi-Fi/WAN przez 30 sekund.
+
+> **Funkcja Warm Swap (Standard):** Po wybraniu opcji "Battery Swap" z menu zasilania możesz bezpiecznie wymienić baterię.
+
+### Warunki pracy Zebra TC78
+
+| Tryb | Temperatura | Wilgotność |
+|------|-------------|------------|
+| Praca | -20°C do +50°C | 5-95% bez kondensacji |
+| Ładowanie | 0°C do +50°C | – |
+| Przechowywanie | -40°C do +70°C | 5-95% bez kondensacji |
+`
+      },
+      {
+        title: '3. Łączność komórkowa (5G/LTE)',
+        content: `
+### Sieci obsługiwane Zebra TC78
+
+Zebra TC78 obsługuje następujące technologie sieci komórkowej:
+
+- **5G FR1** – najnowszy standard 5G z prędkościami jak połączenie kablowe
+- **LTE/4G** – szerokopasmowa sieć komórkowa
+- **LTE-CA** – agregacja nośników dla wyższych prędkości
+- **CBRS** – prywatne sieci LTE (tylko Ameryka Północna)
+- **HSPA+/HSPA/3G** – sieci starszej generacji
+
+### Konfiguracja sieci komórkowej Zebra TC78
+
+1. Upewnij się, że karta nano SIM jest zainstalowana
+2. Przejdź do **Ustawienia** → **Sieć i internet** → **Sieć komórkowa**
+3. Włącz dane mobilne
+4. Sprawdź ustawienia APN (automatycznie lub ręcznie od operatora)
+
+### Ustawienia APN Zebra TC78
+
+Jeśli internet nie działa automatycznie:
+
+1. **Ustawienia** → **Sieć i internet** → **Sieć komórkowa** → **Nazwy punktów dostępu**
+2. Dotknij "+" aby dodać nowy APN
+3. Wprowadź dane od operatora: Nazwa, APN, Użytkownik, Hasło
+4. Zapisz i wybierz nowy APN
+
+### Mobile Hotspot (Punkt dostępu) Zebra TC78
+
+Udostępnianie połączenia internetowego innym urządzeniom:
+
+1. **Ustawienia** → **Sieć i internet** → **Hotspot i tethering**
+2. Dotknij "Hotspot Wi-Fi"
+3. Skonfiguruj nazwę sieci i hasło
+4. Włącz hotspot
+
+### Połączenia głosowe VoLTE Zebra TC78
+
+Zebra TC78 obsługuje HD Voice przez VoLTE:
+
+- **Super-wideband (SWB)** – najwyższa jakość dźwięku
+- **Wideband (WB)** – bardzo dobra jakość
+- **Fullband (FB)** – pełne pasmo audio
+
+**Wykonywanie połączenia:**
+1. Otwórz aplikację **Telefon**
+2. Wprowadź numer lub wybierz kontakt
+3. Naciśnij przycisk dzwonienia
+4. Rozmawiaj przez słuchawkę, głośnik lub zestaw Bluetooth
+
+### SMS/MMS Zebra TC78
+
+1. Otwórz aplikację **Wiadomości**
+2. Utwórz nową wiadomość
+3. Wprowadź numer odbiorcy
+4. Wpisz treść lub dołącz multimedia
+5. Wyślij
+`
+      },
+      {
+        title: '4. Nawigacja GPS',
+        content: `
+### System GPS Zebra TC78
+
+Zebra TC78 posiada zintegrowany moduł GPS obsługujący wiele systemów satelitarnych:
+
+- **GPS** – amerykański system nawigacji
+- **GLONASS** – rosyjski system nawigacji
+- **Galileo** – europejski system nawigacji
+- **BeiDou** – chiński system nawigacji
+- **A-GPS** – wspomagane GPS przez sieć komórkową
+
+### Włączanie lokalizacji Zebra TC78
+
+1. Przeciągnij w dół panel szybkich ustawień
+2. Dotknij ikony **Lokalizacja**
+
+lub
+
+1. **Ustawienia** → **Lokalizacja**
+2. Włącz "Użyj lokalizacji"
+
+### Tryby lokalizacji Zebra TC78
+
+| Tryb | Opis |
+|------|------|
+| **Wysoka dokładność** | GPS + Wi-Fi + sieci komórkowe (zalecany) |
+| Oszczędzanie baterii | Tylko Wi-Fi i sieci komórkowe |
+| Tylko urządzenie | Tylko GPS |
+
+### Wskazówki GPS Zebra TC78
+
+- Pierwsze ustalenie pozycji (cold start) może potrwać do 2 minut
+- Na zewnątrz GPS działa najlepiej
+- Wewnątrz budynków używaj trybu wysokiej dokładności
+- A-GPS przyspiesza uzyskanie pozycji
+
+### Problemy z GPS Zebra TC78
+
+| Problem | Rozwiązanie |
+|---------|-------------|
+| Brak sygnału GPS | Wyjdź na zewnątrz, sprawdź ustawienia lokalizacji |
+| Niedokładna lokalizacja | Użyj trybu wysokiej dokładności |
+| Wolne uzyskiwanie pozycji | Włącz A-GPS, użyj Wi-Fi |
+`
+      },
+      {
+        title: '5. Skanowanie kodów kreskowych',
+        content: `
+### Obsługiwane skanery Zebra TC78
+
+**SE4770 (Standard Range)**
+- Zasięg: do 63 cm (100% UPC-A)
+- Szeroki kąt widzenia
+- Maksymalna tolerancja ruchu
+
+**SE55 (Advanced Range z IntelliFocus)**
+- Zasięg: do 180 cm (100% UPC-A)
+- Technologia IntelliFocus dla automatycznej ostrości
+- Odczyt kodów w dowolnej odległości
+
+### Obsługiwane symbologie Zebra TC78
+
+| Typ | Symbologie |
+|-----|------------|
+| **1D** | Code 39, Code 128, EAN-8, EAN-13, UPC-A, UPC-E, Interleaved 2 of 5, Codabar, MSI, GS1 DataBar |
+| **2D** | QR Code, Data Matrix, PDF417, Aztec, MaxiCode |
+
+### Skanowanie wewnętrznym skanerem Zebra TC78
+
+1. Uruchom aplikację ze wsparciem skanowania (DataWedge, DWDemo)
+2. Skieruj okno skanera na kod kreskowy
+3. Naciśnij przycisk skanowania (lewy lub prawy)
+4. Wyrównaj promień lasera z kodem
+5. Zwolnij przycisk po usłyszeniu sygnału potwierdzenia
+
+### Wskazówki skanowania Zebra TC78
+
+- Zachowaj odpowiednią odległość od kodu
+- Unikaj odbić światła (zmień kąt skanowania)
+- Upewnij się, że okno skanera jest czyste
+- Sprawdź czy skanowany kod nie jest uszkodzony
+
+### DataWedge Zebra TC78
+
+DataWedge to wbudowana aplikacja do przechwytywania danych ze skanerów:
+
+- **Włączenie:** Ustawienia → DataWedge → Włącz
+- **Konfiguracja:** Możliwość tworzenia profili dla różnych aplikacji
+- **Wyjście:** Dane jako klawiatura, intencja lub schowek
+`
+      },
+      {
+        title: '6. Łączność bezprzewodowa',
+        content: `
+### Wi-Fi 6E Zebra TC78
+
+Zebra TC78 obsługuje najnowszy standard Wi-Fi 6E (802.11ax):
+
+| Parametr | Wartość |
+|----------|---------|
+| Pasma | **2,4 GHz, 5 GHz, 6 GHz** |
+| Technologia | 2x2 MU-MIMO |
+| Zalety | 3x szybszy transfer, 4x więcej urządzeń, mniejsze opóźnienia |
+
+### Łączenie z siecią Wi-Fi Zebra TC78
+
+1. Przejdź do **Ustawienia** → **Sieć i internet** → **Wi-Fi**
+2. Włącz Wi-Fi (jeśli wyłączone)
+3. Wybierz sieć z listy
+4. Wprowadź hasło (jeśli wymagane)
+5. Dotknij **Połącz**
+
+### Bluetooth 5.2 Zebra TC78
+
+| Parametr | Wartość |
+|----------|---------|
+| Profile | HID, SPP, A2DP, AVRCP, HFP, PBAP |
+| Zasięg | do 10 metrów (Klasa 2) |
+| **Secondary BLE** | Beacon w baterii do lokalizacji urządzenia |
+
+### NFC Zebra TC78
+
+Zebra TC78 posiada zintegrowany czytnik NFC:
+
+- Odczyt tagów NFC
+- Parowanie urządzeń przez NFC
+- Obsługa kart płatniczych (zależnie od aplikacji)
+`
+      },
+      {
+        title: '7. Bateria i ładowanie',
+        content: `
+### Opcje baterii Zebra TC78
+
+| Typ | Pojemność | Funkcje |
+|-----|-----------|---------|
+| Standard | 4680 mAh | Warm Swap |
+| Standard BLE | 4680 mAh | Warm Swap + lokalizacja BLE |
+| **Standard Wireless** | **4400 mAh** | **Ładowanie bezprzewodowe** |
+| Extended | 7000 mAh | Warm Swap, dłuższy czas pracy |
+
+### Bateria z ładowaniem bezprzewodowym Zebra TC78
+
+Zebra TC78 obsługuje baterie kompatybilne z ładowaniem bezprzewodowym:
+
+- Kompatybilne z **Wireless Charging Vehicle Cradle**
+- Kompatybilne z ładowarkami **Qi**
+- Logo bezprzewodowe na baterii identyfikuje wersję Wireless
+
+### Ładowanie urządzenia Zebra TC78
+
+**Metody ładowania:**
+- **Stacje dokujące** – 1-Slot, 5-Slot Charge Only, 5-Slot Ethernet
+- **Kabel USB-C** – standardowy kabel z zasilaczem
+- **Ładowarka samochodowa** – Vehicle Cradle
+- **Ładowanie bezprzewodowe** – Wireless Charging Vehicle Cradle lub ładowarki Qi
+
+### Wskaźniki ładowania Zebra TC78
+
+| Stan LED | Znaczenie |
+|----------|-----------|
+| Wyłączony | Urządzenie nie podłączone |
+| Wolne miganie bursztynowe | Ładowanie w toku |
+| Stały zielony | Ładowanie zakończone |
+| Szybkie miganie bursztynowe | Błąd ładowania |
+| Szybkie miganie czerwone | Błąd ładowania, bateria zużyta |
+
+### Czas ładowania i pracy Zebra TC78
+
+- **Ładowanie do 90%:** około 2 godziny
+- **Czas pracy na baterii:** do 14 godzin (zależnie od użytkowania)
+`
+      },
+      {
+        title: '8. Konserwacja i rozwiązywanie problemów',
+        content: `
+### Harmonogram czyszczenia Zebra TC78
+
+| Element | Częstotliwość |
+|---------|---------------|
+| Ekran dotykowy | Codziennie |
+| Okno skanera | Codziennie |
+| Styki ładowania | Co tydzień |
+| Obudowa | W razie potrzeby |
+
+### Czyszczenie Zebra TC78
+
+1. Wyłącz urządzenie lub zablokuj ekran
+2. Użyj miękkiej, bezpyłowej ściereczki
+3. Zwilż alkoholem izopropylowym (70%)
+4. Delikatnie przetrzyj powierzchnię
+5. Osusz przed użyciem
+
+### Problemy z siecią komórkową Zebra TC78
+
+| Problem | Rozwiązanie |
+|---------|-------------|
+| Brak sygnału | Sprawdź kartę SIM, sprawdź zasięg, zrestartuj urządzenie |
+| Brak danych | Sprawdź ustawienia APN, sprawdź limit danych |
+| Wolne połączenie | Sprawdź siłę sygnału, przełącz na Wi-Fi |
+| Roaming nie działa | Włącz roaming w ustawieniach |
+| Połączenia nie działają | Sprawdź kartę SIM, sprawdź tryb samolotowy |
+
+### Problemy ze skanowaniem Zebra TC78
+
+| Problem | Rozwiązanie |
+|---------|-------------|
+| Skaner nie działa | Sprawdź DataWedge, zrestartuj urządzenie |
+| Nie odczytuje kodu | Oczyść okno skanera, zmień kąt/odległość |
+
+### Resetowanie Zebra TC78
+
+**Miękki reset:**
+1. Przytrzymaj przycisk Power
+2. Wybierz "Uruchom ponownie"
+
+**Twardy reset:**
+1. Przytrzymaj Power + Skanowanie L + Głośność góra przez 4 sekundy
+
+**Enterprise Reset:**
+1. Ustawienia → System → Opcje resetowania
+2. Wybierz "Enterprise Reset"
+
+**Factory Reset:**
+1. Ustawienia → System → Opcje resetowania
+2. Wybierz "Przywrócenie danych fabrycznych"
+
+> **Ostrzeżenie:** Factory Reset usuwa wszystkie dane!
+`
+      },
+      {
+        title: '9. Specyfikacje techniczne',
+        content: `
+### Wymiary i waga Zebra TC78
+
+| Parametr | Wartość |
+|----------|---------|
+| Wysokość | ~165 mm |
+| Szerokość | ~78 mm |
+| Grubość | ~14 mm (20% cieńszy niż poprzednik) |
+| Waga (z baterią) | ~295 g |
+
+### Wyświetlacz Zebra TC78
+
+| Parametr | Wartość |
+|----------|---------|
+| Przekątna | 6,0" |
+| Rozdzielczość | 1080 x 2160 (FHD+) |
+| Typ | LED backlight |
+| Ochrona | Corning Gorilla Glass |
+| Dotyk | Pojemnościowy, rękawiczki, mokry palec, rysik |
+
+### Wydajność Zebra TC78
+
+| Parametr | Wartość |
+|----------|---------|
+| Procesor | Qualcomm 6490, 2,7 GHz, 8-rdzeniowy |
+| RAM | 4 GB / 8 GB |
+| Flash | 64 GB / 128 GB (UFS) |
+| microSD | Do 2 TB |
+
+### Skanowanie Zebra TC78
+
+| Parametr | SE4770 | SE55 |
+|----------|--------|------|
+| Typ | Standard Range | Advanced Range |
+| Zasięg (100% UPC-A) | do 63 cm | **do 180 cm** |
+| IntelliFocus | Nie | **Tak** |
+
+### Łączność Zebra TC78
+
+| Parametr | Wartość |
+|----------|---------|
+| **Sieć komórkowa** | **5G FR1, LTE Cat 20, CBRS** |
+| Wi-Fi | 802.11 a/b/g/n/ac/ax **(Wi-Fi 6E)**, 2x2 MU-MIMO |
+| Bluetooth | 5.2 + Secondary BLE |
+| NFC | Tak |
+| USB | USB-C 3.1 |
+| **GPS** | **GPS, GLONASS, Galileo, BeiDou, A-GPS** |
+| Karta SIM | Nano SIM |
+
+### Wytrzymałość Zebra TC78
+
+| Parametr | Wartość |
+|----------|---------|
+| Stopień ochrony IP | IP65/IP68 |
+| **Upadek** | **3,05 m na beton** (MIL-STD-810H) |
+| Upadki wielokrotne | 1000 x 0,5 m / 1000 x 1,0 m |
+| Temperatura pracy | -20°C do +50°C |
+| Temperatura ładowania | 0°C do +50°C |
+| Temperatura przechowywania | -40°C do +70°C |
+| Wilgotność | 5-95% bez kondensacji |
+
+### Certyfikaty Zebra TC78
+
+- MIL-STD-810H
+- IP65/IP68
+- CE, FCC, IC
+- RoHS
+- Secure Boot, Verified Boot
+- **Wi-Fi 6E Certified**
+- Certyfikaty operatorów sieci komórkowych
+`
+      },
+      {
+        title: '10. FAQ – Często zadawane pytania',
+        content: `
+### Co to jest Zebra TC78?
+
+**Odpowiedź:** Zebra TC78 to ultra-wytrzymały **komputer mobilny z 6-calowym ekranem FHD+**, łącznością **5G/LTE** i zintegrowanym **GPS**. Wyposażony w procesor Qualcomm 6490, skaner SE4770 lub SE55, Wi-Fi 6E, Bluetooth 5.2. Odporny na upadki z **3,05 m na beton**. Przeznaczony dla logistyki terenowej, kurierów i serwisu technicznego.
+
+### Jaka jest różnica między Zebra TC73 a Zebra TC78?
+
+**Odpowiedź:** Zebra TC73 to wersja **tylko Wi-Fi 6E**, natomiast Zebra TC78 ma dodatkowo **moduł 5G/LTE**, slot na kartę SIM, **zintegrowany GPS**, obsługę połączeń głosowych VoLTE, SMS/MMS, Mobile Hotspot i ładowanie bezprzewodowe. Zebra TC73 jest przeznaczony do pracy wewnątrz budynków, a Zebra TC78 do pracy mobilnej w terenie.
+
+### Czy Zebra TC78 ma GPS?
+
+**Odpowiedź:** **Tak**, Zebra TC78 posiada zintegrowany odbiornik GNSS obsługujący systemy: **GPS, GLONASS, Galileo, BeiDou** oraz **A-GPS**. Jest to główna różnica względem modelu TC73, który nie ma GPS.
+
+### Czy Zebra TC78 obsługuje połączenia głosowe?
+
+**Odpowiedź:** **Tak**, Zebra TC78 obsługuje połączenia głosowe przez sieć komórkową (**VoLTE**) oraz VoIP przez Wi-Fi. Urządzenie ma aplikację Telefon i może wykonywać/odbierać połączenia jak smartfon z jakością HD Voice.
+
+### Czy Zebra TC78 obsługuje ładowanie bezprzewodowe?
+
+**Odpowiedź:** **Tak**, ale wymaga baterii w wersji **Wireless** (4400 mAh). Ładowanie jest kompatybilne z **Wireless Charging Vehicle Cradle** i ładowarkami **Qi**.
+
+### Jak długo działa bateria w Zebra TC78?
+
+**Odpowiedź:** Standardowa bateria 4680 mAh zapewnia do **14 godzin pracy**. Dostępna jest też bateria rozszerzona 7000 mAh. Zebra TC78 obsługuje **True Hot Swap** (Premium) lub **Warm Swap** (Standard).
+
+### Czy Zebra TC78 jest wodoodporny?
+
+**Odpowiedź:** Tak, Zebra TC78 posiada certyfikat **IP65/IP68** – jest w pełni odporny na kurz i wodę. Dodatkowo spełnia normę **MIL-STD-810H** dla upadków z 3,05 m na beton.
+
+### Jak zresetować Zebra TC78?
+
+**Odpowiedź:** **Miękki reset:** Przytrzymaj przycisk Power i wybierz "Uruchom ponownie". **Twardy reset:** Przytrzymaj Power + Skanowanie L + Głośność góra przez 4 sekundy. **Factory Reset:** Ustawienia → System → Opcje resetowania.
+`
+      }
+    ]
+  },
+
   tc73: {
     model: 'TC73',
     title: 'Zebra TC73 – Instrukcja obsługi po Polsku',
