@@ -39,12 +39,18 @@ const PRODUCT_TYPE_ICONS: Record<string, any> = {
   kabel: Cable
 }
 
+// Darmowa wysyłka powyżej 1000 zł brutto
+const FREE_SHIPPING_THRESHOLD = 1000
+
 export default function CheckoutPage() {
   const router = useRouter()
   const [mounted, setMounted] = useState(false)
   const items = useCartStore((state) => state.items)
   const getTotalPrice = useCartStore((state) => state.getTotalPrice())
   const getTotalPriceBrutto = useCartStore((state) => state.getTotalPriceBrutto())
+  
+  // Sprawdź czy kwalifikuje się do darmowej wysyłki
+  const qualifiesForFreeShipping = getTotalPriceBrutto >= FREE_SHIPPING_THRESHOLD
 
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [userEmail, setUserEmail] = useState('')
@@ -405,7 +411,11 @@ useEffect(() => {
         const subtotalBrutto = items.reduce((sum, item) => 
           sum + (item.price_brutto * item.quantity), 0
         )
-        const deliveryCostBrutto = deliveryMethod === 'courier' ? 24.60 : 0.00
+        // Darmowa wysyłka powyżej 1000 zł
+        const isFreeShipping = subtotalBrutto >= FREE_SHIPPING_THRESHOLD || deliveryMethod !== 'courier'
+        const deliveryCostBrutto = isFreeShipping ? 0.00 : 24.60
+        const deliveryCostNetto = isFreeShipping ? 0.00 : 20.00
+        const deliveryVat = isFreeShipping ? 0 : 4.60
         const totalBrutto = subtotalBrutto + deliveryCostBrutto
 
         const orderRequest: CreateOrderRequest = {
@@ -433,10 +443,10 @@ useEffect(() => {
           deliveryMethod: deliveryMethod,
           paymentMethod: paymentMethod,
           subtotalNetto: getTotalPrice,
-          deliveryCostNetto: deliveryMethod === 'courier' ? 20.00 : 0.00,
-          deliveryCostBrutto: deliveryMethod === 'courier' ? 24.60 : 0.00,
-          vatAmount: vatAmount + (deliveryMethod === 'courier' ? 4.60 : 0),
-          totalNetto: getTotalPrice + (deliveryMethod === 'courier' ? 20.00 : 0.00),
+          deliveryCostNetto: deliveryCostNetto,
+          deliveryCostBrutto: deliveryCostBrutto,
+          vatAmount: vatAmount + deliveryVat,
+          totalNetto: getTotalPrice + deliveryCostNetto,
           totalBrutto: totalBrutto,
           orderNumber: invoiceNumber
         }
@@ -467,11 +477,14 @@ useEffect(() => {
         const subtotalBrutto = items.reduce((sum, item) => 
           sum + (item.price_brutto * item.quantity), 0
         )
-        const deliveryCostBrutto = deliveryMethod === 'courier' ? 24.60 : 0.00
-        const deliveryCostNetto = deliveryMethod === 'courier' ? 20.00 : 0.00
+        // Darmowa wysyłka powyżej 1000 zł
+        const isFreeShipping = subtotalBrutto >= FREE_SHIPPING_THRESHOLD || deliveryMethod !== 'courier'
+        const deliveryCostBrutto = isFreeShipping ? 0.00 : 24.60
+        const deliveryCostNetto = isFreeShipping ? 0.00 : 20.00
+        const deliveryVat = isFreeShipping ? 0 : 4.60
         const totalBrutto = subtotalBrutto + deliveryCostBrutto
         const totalNetto = getTotalPrice + deliveryCostNetto
-        const totalVat = vatAmount + (deliveryMethod === 'courier' ? 4.60 : 0)
+        const totalVat = vatAmount + deliveryVat
 
         const orderRequest: CreateOrderRequest = {
           customer: {
@@ -1082,9 +1095,15 @@ console.log('🎯 Modal should be visible now')
                       <p className="text-xs text-gray-600">
                         Dostawa na adres w ciągu 1-2 dni roboczych
                       </p>
-                      <p className="text-xs font-semibold text-gray-900 mt-1">
-                        Koszt: 20.00 zł netto (24.60 zł brutto)
-                      </p>
+                      {qualifiesForFreeShipping ? (
+                        <p className="text-xs font-semibold text-green-600 mt-1">
+                          ✓ Darmowa wysyłka (zamówienie powyżej 1000 zł)
+                        </p>
+                      ) : (
+                        <p className="text-xs font-semibold text-gray-900 mt-1">
+                          Koszt: 20.00 zł netto (24.60 zł brutto)
+                        </p>
+                      )}
                     </div>
                   </label>
 
@@ -1275,23 +1294,25 @@ console.log('🎯 Modal should be visible now')
                   <div className="flex items-center justify-between text-xs text-gray-700 transition-all duration-300">
                     <span>Dostawa {deliveryMethod === 'courier' ? '(Kurier)' : '(Odbiór osobisty)'}</span>
                     <span className={`font-semibold transition-colors ${
-                      deliveryMethod === 'osobisty' ? 'text-green-600' : 'text-gray-900'
+                      deliveryMethod === 'osobisty' || qualifiesForFreeShipping ? 'text-green-600' : 'text-gray-900'
                     }`}>
-                      {deliveryMethod === 'courier' ? '20.00' : '0.00'} zł
+                      {deliveryMethod === 'courier' && !qualifiesForFreeShipping ? '20.00 zł' : (
+                        qualifiesForFreeShipping && deliveryMethod === 'courier' ? 'GRATIS' : '0.00 zł'
+                      )}
                     </span>
                   </div>
 
                   <div className="flex items-center justify-between text-xs text-gray-700 transition-all duration-300">
                     <span>VAT (23%)</span>
                     <span className="font-semibold text-gray-900">
-                      {(vatAmount + (deliveryMethod === 'courier' ? 20 * 0.23 : 0)).toFixed(2)} zł
+                      {(vatAmount + (deliveryMethod === 'courier' && !qualifiesForFreeShipping ? 20 * 0.23 : 0)).toFixed(2)} zł
                     </span>
                   </div>
 
                   <div className="flex items-center justify-between pt-1.5 border-t border-gray-200 transition-all duration-300">
                     <span className="text-sm font-semibold text-gray-700">Suma brutto</span>
                     <span className="text-lg font-black text-gray-900">
-                      {(getTotalPriceBrutto + (deliveryMethod === 'courier' ? 24.60 : 0.00)).toFixed(2)} zł
+                      {(getTotalPriceBrutto + (deliveryMethod === 'courier' && !qualifiesForFreeShipping ? 24.60 : 0.00)).toFixed(2)} zł
                     </span>
                   </div>
                 </div>
