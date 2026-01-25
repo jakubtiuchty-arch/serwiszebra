@@ -548,7 +548,7 @@ export function generateKeywords(
   }
   
   // Usuń duplikaty i zwróć
-  return [...new Set(keywords)]
+  return Array.from(new Set(keywords))
 }
 
 /**
