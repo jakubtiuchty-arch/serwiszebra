@@ -28981,6 +28981,485 @@ Zebra TC58 może automatycznie dodawać współrzędne GPS do zdjęć:
     ]
   },
 
+  mc3300x: {
+    model: 'MC3300x',
+    title: 'Zebra MC3300x – Instrukcja obsługi po Polsku',
+    lastUpdated: '2026-01-25',
+    sourceDocument: 'Zebra MC3300x User Guide',
+    keywords: [
+      'Zebra MC3300x',
+      'Zebra MC3300x instrukcja',
+      'Zebra MC3300x manual',
+      'Zebra MC3300x po polsku',
+      'Zebra MC3300x specyfikacja',
+      'Zebra MC3300x skaner',
+      'Zebra MC3300x bateria',
+      'Zebra MC3300x serwis',
+      'terminal magazynowy Zebra MC3300x',
+      'komputer mobilny Zebra MC3300x',
+      'Zebra MC3300x konfiguracja',
+      'Zebra MC3300x DataWedge',
+      'Zebra MC3300x klawiatura',
+      'Zebra MC3300x akcesoria',
+      'Zebra MC3300x SE4850',
+      'Zebra MC3300x Gun',
+      'Zebra MC3300x Rotate'
+    ],
+    sections: [
+      {
+        title: '1. Podstawowe informacje',
+        content: `
+### O urządzeniu Zebra MC3300x
+
+Zebra MC3300x to wytrzymały komputer mobilny klasy enterprise z **4-calowym kolorowym ekranem WVGA** i **klawiaturą fizyczną** (29, 38 lub 47 klawiszy). Urządzenie oferuje różnorodne opcje skanerów: od laserowego SE965 do zaawansowanego imagera SE4850-ER z zasięgiem do **21 metrów**.
+
+Terminal wyposażono w łączność **Wi-Fi 802.11a/b/g/n/ac**, **Bluetooth 5.0** z BLE oraz **NFC**. Solidna konstrukcja spełnia normy IP54 oraz MIL-STD-810G, zapewniając wysoką odporność na upadki (wielokrotne z 1,8 m na beton). Urządzenie pracuje pod kontrolą systemu Android 11 (AOSP lub GMS).
+
+### Wersje urządzenia Zebra MC3300x
+
+| Wersja | Kod | Opis |
+|--------|-----|------|
+| **Gun (Trigger)** | MC3300x-G | Pistoletowy uchwyt z triggerem skanowania |
+| **Rotate** | MC3300x-R | Obrotowa głowica skanera (3 pozycje) |
+| **Straight** | MC3300x-S | Prosty skaner 0° |
+| **Straight 45°** | MC3300x-S45 | Skaner pod kątem 45° |
+
+### Parametry techniczne Zebra MC3300x
+
+| Parametr | Zebra MC3300x |
+|----------|---------------|
+| **Wyświetlacz** | 4,0" WVGA (800 x 480) |
+| Typ wyświetlacza | LCD kolorowy |
+| Procesor | Qualcomm Snapdragon |
+| System operacyjny | Android 11 (AOSP lub GMS) |
+| Pamięć RAM | 4 GB |
+| Pamięć Flash | 16 GB / 32 GB |
+| Łączność | Wi-Fi 802.11a/b/g/n/ac, Bluetooth 5.0 + BLE, NFC |
+| Klawiatura | 29 / 38 / 47 klawiszy |
+
+### Opcje skanera Zebra MC3300x
+
+| Skaner | Typ | Zasięg maksymalny |
+|--------|-----|-------------------|
+| **SE965** | Laser 1D | Do 2,5 m (kod 100 mil) |
+| **SE4720** | Imager 2D | Do 91 cm (kod 20 mil) |
+| **SE4770** | Imager 2D | Do 91 cm (kod 20 mil) |
+| **SE4850-ER** | Imager 2D Extended Range | **Do 21 m** (kod 100 mil) |
+
+### Zastosowania Zebra MC3300x
+
+- **Magazyny i centra dystrybucji:** kompletacja, przyjęcia, wydania, cross-docking
+- **Produkcja:** śledzenie WIP, kontrola jakości, zarządzanie partiami
+- **Transport i logistyka:** sortowanie przesyłek, weryfikacja dostaw
+- **Handel detaliczny:** przyjęcie towaru, inwentaryzacja, zarządzanie zapasami
+- **Leśnictwo:** inwentaryzacja, dostęp do SILP/Leśnik+ przez Wi-Fi
+
+### Cechy charakterystyczne Zebra MC3300x
+
+- **Klawiatura fizyczna** – 29, 38 lub 47 klawiszy
+- **Skaner SE4850-ER** – zasięg do 21 metrów (opcja)
+- **Obrotowa głowica** – wersja MC3300x-R z 3 pozycjami skanera
+- **Hot Swap baterii** – wymiana bez utraty sesji (~5 minut)
+- **Certyfikat IP54** – ochrona przed kurzem i zachlapaniem
+- **Upadek z 1,8 m** – wielokrotne upadki na beton (MIL-STD-810G)
+- **PowerPrecision+ 7000 mAh** – bateria na pełną zmianę
+`
+      },
+      {
+        title: '2. Rozpakowanie i instalacja',
+        content: `
+### Zawartość opakowania Zebra MC3300x
+
+- Komputer mobilny Zebra MC3300x
+- Bateria PowerPrecision+ Li-Ion 7000 mAh
+- Pasek na rękę (preinstalowany w MC3300x-R/S)
+- Przewodnik regulacyjny
+
+> **Uwaga:** Zasilacz, kable, stacje dokujące są sprzedawane oddzielnie.
+
+### Instalacja baterii Zebra MC3300x-G (Gun)
+
+Zebra MC3300x-G jest kompatybilny z bateriami:
+- 7000 mAh PowerPrecision+ Extended (2.5X)
+- 5200 mAh PowerPrecision+ High Capacity (2X)
+
+1. Poluzuj pasek na rękę (jeśli zainstalowany)
+2. Wyrównaj baterię z komorą baterii
+3. Wsuń przednią część baterii do komory
+4. Dociśnij baterię do góry – przyciski zwalniające muszą powrócić do pozycji wyjściowej
+5. Naciśnij i przytrzymaj przycisk **Power** aż pojawi się logo Zebra
+
+### Instalacja baterii Zebra MC3300x-R/S (Rotate/Straight)
+
+Zebra MC3300x-R/S jest kompatybilny ze wszystkimi bateriami:
+- 7000 mAh PowerPrecision+ Extended (2.5X)
+- 5200 mAh PowerPrecision+ High Capacity (2X)
+- 2740 mAh PowerPrecision+ Standard (1X)
+
+### Wyjmowanie baterii Zebra MC3300x
+
+1. Naciśnij jednocześnie oba przyciski zwalniające baterii (po bokach urządzenia)
+2. Bateria wysunie się lekko
+3. Wyjmij baterię z komory
+
+> **Funkcja Hot Swap:** Zebra MC3300x zachowuje łączność Wi-Fi/Bluetooth przez 30 sekund, a następnie dane RAM przez około 5 minut.
+
+### Warunki pracy Zebra MC3300x
+
+| Tryb | Temperatura | Wilgotność |
+|------|-------------|------------|
+| Praca | -20°C do +50°C | 5-95% bez kondensacji |
+| Ładowanie | 0°C do +40°C | – |
+| Przechowywanie | -40°C do +70°C | 10-95% bez kondensacji |
+`
+      },
+      {
+        title: '3. Klawiatury',
+        content: `
+### Typy klawiatur Zebra MC3300x
+
+Zebra MC3300x oferuje trzy typy klawiatur fizycznych:
+
+| Typ | Opis | Zastosowanie |
+|-----|------|--------------|
+| **29 klawiszy** | Klawiatura numeryczna z funkcjami alfa | Podstawowe wprowadzanie danych |
+| **38 klawiszy** | Rozszerzona klawiatura numeryczna | Więcej funkcji specjalnych |
+| **47 klawiszy** | Pełna klawiatura alfanumeryczna | Intensywne wprowadzanie tekstu |
+
+### Klawiatura 29-klawiszowa Zebra MC3300x
+
+Klawiatura zawiera przycisk Power, klawisze aplikacyjne, klawisze nawigacji i funkcyjne. Kolory wskazują alternatywne funkcje: **niebieski** (funkcyjne) i **pomarańczowy** (alfa).
+
+| Klawisz | Funkcja |
+|---------|---------|
+| **Power (czerwony)** | Włącza/wyłącza ekran |
+| **P1 (Program 1)** | Programowalny – domyślnie Wstecz |
+| **Diamond (◊)** | Wyświetla siatkę 3x3 z symbolami |
+| **Scan (żółty)** | Uruchamia skanowanie |
+| **Strzałki** | Nawigacja góra/dół/lewo/prawo |
+| **0-9** | Cyfry / znaki alfa (z Orange) / funkcje specjalne (z Blue) |
+
+### Klawiatura 47-klawiszowa Zebra MC3300x
+
+Pełna klawiatura alfanumeryczna z oddzielnymi literami A-Z.
+
+| Klawisz | Normalny | SHIFT + klawisz | Blue + klawisz |
+|---------|----------|-----------------|----------------|
+| A-Z | małe litery | WIELKIE LITERY | F1-F12 |
+| 2/4/6/8 | Cyfry | – | Strzałki nawigacji |
+
+### Klawisze modyfikujące Zebra MC3300x
+
+| Klawisz | Opis |
+|---------|------|
+| **Blue (niebieski)** | Aktywuje funkcje oznaczone na niebiesko |
+| **Orange (pomarańczowy)** | Aktywuje funkcje alfa/nawigacji |
+| **SHIFT** | Wielkie litery |
+| **CTRL** | Funkcje sterujące |
+
+### Programowanie przycisków Zebra MC3300x
+
+1. Przejdź do **Ustawienia** → **Key Programmer**
+2. Wybierz przycisk do przeprogramowania
+3. Wybierz nową funkcję
+4. Dotknij przycisku Home
+`
+      },
+      {
+        title: '4. Skanowanie kodów kreskowych',
+        content: `
+### Obsługiwane skanery Zebra MC3300x
+
+| Skaner | Typ | Opis |
+|--------|-----|------|
+| **SE965** | Laser 1D | Skaner laserowy do kodów jednowymiarowych |
+| **SE4720** | Imager 2D | Standardowy imager 2D |
+| **SE4770** | Imager 2D | Zaawansowany imager 2D |
+| **SE4850-ER** | Imager 2D Extended Range | Imager dalekiego zasięgu |
+
+### Obsługiwane symbologie Zebra MC3300x
+
+**Kody 1D:** Code 39, Code 128, EAN-8, EAN-13, UPC-A, UPC-E, Interleaved 2 of 5, Codabar, MSI, GS1 DataBar
+
+**Kody 2D:** QR Code, Data Matrix, PDF417, Aztec, MaxiCode
+
+### Skanowanie – instrukcja Zebra MC3300x
+
+1. Uruchom aplikację obsługującą skanowanie (np. DWDemo)
+2. Skieruj okno skanera na kod kreskowy
+3. Naciśnij przycisk skanowania (trigger, boczny lub ekranowy)
+4. Celuj linią lasera lub wzorem oświetlacza na środek kodu
+5. Poczekaj na potwierdzenie odczytu (dźwięk/wibracja/LED)
+
+### Zasięgi skanowania SE4850-ER (Extended Range) Zebra MC3300x
+
+| Typ kodu | Odległość maks. |
+|----------|-----------------|
+| 10 mil Code 39 | 216 cm |
+| 13 mil UPC (100%) | 229 cm |
+| 20 mil Code 39 | 437 cm |
+| 55 mil Code 39 | 1092 cm (10,9 m) |
+| **100 mil Code 39 (papier)** | **1778 cm (17,8 m)** |
+| **100 mil Code 39 (odblaskowy)** | **2134 cm (21,3 m)** |
+
+### Wskazówki skanowania Zebra MC3300x
+
+- **Kąt skanowania:** Unikaj prostopadłego ustawienia (odbicia). Optymalne: 15-18° odchylenia
+- **Oświetlenie:** SE4850-ER wymaga minimum 20 ft-cd dla dalekiego zasięgu
+- **Czystość:** Regularnie czyść okno skanera
+
+### DataWedge Zebra MC3300x
+
+DataWedge to aplikacja Zebra do przechwytywania danych ze skanera. Domyślnie włączona.
+
+**Włączanie/wyłączanie:**
+1. Przejdź do **DataWedge** w aplikacjach
+2. Dotknij menu (⋮) → **Settings**
+3. Włącz/wyłącz **DataWedge enabled**
+`
+      },
+      {
+        title: '5. Łączność bezprzewodowa',
+        content: `
+### Wi-Fi Zebra MC3300x
+
+Zebra MC3300x obsługuje Wi-Fi 802.11a/b/g/n/ac (2,4 GHz i 5 GHz).
+
+**Łączenie z siecią Wi-Fi:**
+1. Przejdź do **Ustawienia** → **Sieć i internet** → **Wi-Fi**
+2. Włącz Wi-Fi
+3. Wybierz sieć z listy
+4. Wprowadź hasło (jeśli wymagane)
+5. Dotknij **Połącz**
+
+### Bluetooth Zebra MC3300x
+
+Zebra MC3300x obsługuje Bluetooth 5.0 + EDR z Bluetooth Low Energy (BLE).
+
+**Profile Bluetooth:**
+- HSP (Headset Profile)
+- HFP (Hands-Free Profile)
+- A2DP (Advanced Audio Distribution Profile)
+- HID (Human Interface Device)
+- SPP (Serial Port Profile)
+
+**Parowanie urządzenia Bluetooth:**
+1. Przejdź do **Ustawienia** → **Połączone urządzenia** → **Sparuj nowe urządzenie**
+2. Wybierz urządzenie z listy
+3. Potwierdź kod parowania
+
+### NFC Zebra MC3300x
+
+Zebra MC3300x wyposażony jest w NFC do:
+- Parowania z urządzeniami Bluetooth
+- Odczytu tagów NFC
+- Wymiany danych między urządzeniami
+
+**Odczyt karty NFC:**
+1. Upewnij się, że NFC jest włączone
+2. Przyłóż kartę/tag NFC do tylnej części urządzenia (obszar anteny NFC)
+3. Poczekaj na odczyt (sygnał dźwiękowy)
+`
+      },
+      {
+        title: '6. Bateria i ładowanie',
+        content: `
+### Specyfikacja baterii Zebra MC3300x
+
+| Bateria | Pojemność | Czas ładowania (do 90%) |
+|---------|-----------|-------------------------|
+| PowerPrecision+ 7000 mAh (2.5X) | 7000 mAh | ~5,2 h |
+| PowerPrecision+ 5200 mAh (2X) | 5200 mAh | ~3,8 h |
+| PowerPrecision+ 2740 mAh (1X) | 2740 mAh | ~2,2 h |
+
+### Wskaźniki LED ładowania Zebra MC3300x
+
+| Stan LED | Znaczenie |
+|----------|-----------|
+| **Wyłączony** | Bateria nie ładuje się / brak zasilania |
+| **Bursztynowy migający** | Aktywna sesja bezprzewodowa podczas Hot Swap |
+| **Bursztynowy ciągły** | Ładowanie w toku |
+| **Zielony ciągły** | Ładowanie zakończone |
+| **Czerwony migający** | Błąd ładowania (temperatura, czas) |
+
+### Hot Swap – wymiana baterii Zebra MC3300x
+
+Zebra MC3300x zachowuje dane przy wymianie baterii:
+1. **0-30 sekund:** Łączność Wi-Fi/Bluetooth zachowana (migający bursztynowy LED)
+2. **30 sekund - 5 minut:** Dane RAM zachowane (Critical Suspend)
+3. **Powyżej 5 minut:** Dane mogą zostać utracone
+
+> **Ważne:** Superkondensator musi być naładowany, aby Hot Swap działał poprawnie. Po całkowitym rozładowaniu baterii poczekaj ~10 minut.
+
+### Akcesoria do ładowania Zebra MC3300x
+
+**Stacje dokujące:**
+- 1-Slot USB Charge Cradle
+- 5-Slot Charge Only ShareCradle
+- 5-Slot Ethernet ShareCradle
+
+**Ładowarki baterii zapasowych:**
+- 4-Slot Spare Battery Charger
+- 20-Slot Spare Battery Charger
+`
+      },
+      {
+        title: '7. Konserwacja i rozwiązywanie problemów',
+        content: `
+### Harmonogram czyszczenia Zebra MC3300x
+
+| Element | Częstotliwość |
+|---------|---------------|
+| Ekran dotykowy | Codziennie |
+| Okno skanera | Codziennie |
+| Styki ładowania | Co tydzień |
+| Obudowa | W razie potrzeby |
+| Styki baterii | Przy wymianie baterii |
+
+### Czyszczenie Zebra MC3300x
+
+1. Wyłącz urządzenie lub zablokuj ekran
+2. Użyj miękkiej, bezpyłowej ściereczki
+3. Zwilż alkoholem izopropylowym (70%)
+4. Delikatnie przetrzyj powierzchnię
+5. Osusz przed użyciem
+
+### Problemy z uruchomieniem Zebra MC3300x
+
+| Problem | Rozwiązanie |
+|---------|-------------|
+| Urządzenie nie włącza się | Naładuj baterię przez 15 minut |
+| Urządzenie zawiesza się | Przytrzymaj Power przez 10 sekund |
+| Pętla restartu | Wykonaj Enterprise Reset |
+
+### Problemy ze skanowaniem Zebra MC3300x
+
+| Problem | Rozwiązanie |
+|---------|-------------|
+| Skaner nie działa | Sprawdź DataWedge, zrestartuj urządzenie |
+| Nie odczytuje kodu | Oczyść okno skanera, zmień kąt/odległość |
+| SE4850-ER nie skanuje daleko | Sprawdź oświetlenie (min. 20 ft-cd) |
+
+### Problemy z baterią Zebra MC3300x
+
+| Problem | Rozwiązanie |
+|---------|-------------|
+| Szybkie rozładowanie | Wyłącz niepotrzebne radio, zmniejsz jasność |
+| Hot Swap nie działa | Poczekaj 10 minut na naładowanie superkondensatora |
+
+### Resetowanie Zebra MC3300x
+
+**Miękki reset:**
+1. Przytrzymaj przycisk Power
+2. Wybierz "Restart"
+
+**Twardy reset:**
+1. Przytrzymaj Power przez 10 sekund
+
+**Enterprise Reset:**
+1. **Ustawienia** → **System** → **Advanced** → **Reset options**
+2. Wybierz "Enterprise Reset"
+
+**Factory Reset:**
+1. **Ustawienia** → **System** → **Advanced** → **Reset options**
+2. Wybierz "Erase all data (factory reset)"
+
+> **Ostrzeżenie:** Factory Reset usuwa wszystkie dane!
+`
+      },
+      {
+        title: '8. Specyfikacje techniczne',
+        content: `
+### Wymiary i waga Zebra MC3300x
+
+| Wersja | Wysokość | Szerokość | Głębokość | Waga (z baterią) |
+|--------|----------|-----------|-----------|------------------|
+| MC3300x-G | ~220 mm | ~82 mm | ~155 mm | ~490 g |
+| MC3300x-R | ~196 mm | ~82 mm | ~68 mm | ~420 g |
+| MC3300x-S | ~196 mm | ~82 mm | ~56 mm | ~400 g |
+
+### Wyświetlacz Zebra MC3300x
+
+| Parametr | Wartość |
+|----------|---------|
+| Przekątna | 4,0" |
+| Rozdzielczość | 800 x 480 (WVGA) |
+| Typ | LCD kolorowy |
+
+### Wydajność Zebra MC3300x
+
+| Parametr | Wartość |
+|----------|---------|
+| Procesor | Qualcomm Snapdragon |
+| RAM | 4 GB |
+| Flash | 16 GB / 32 GB |
+| System | Android 11 (AOSP lub GMS) |
+
+### Łączność Zebra MC3300x
+
+| Parametr | Wartość |
+|----------|---------|
+| Wi-Fi | 802.11 a/b/g/n/ac (2,4 GHz / 5 GHz) |
+| Bluetooth | 5.0 + EDR, BLE |
+| NFC | Tak |
+
+### Wytrzymałość Zebra MC3300x
+
+| Parametr | Wartość |
+|----------|---------|
+| Stopień ochrony IP | IP54 |
+| Upadek | 1,8 m na beton (wielokrotne) |
+| Temperatura pracy | -20°C do +50°C |
+| Temperatura ładowania | 0°C do +40°C |
+| Standard militarny | MIL-STD-810G |
+
+### Certyfikaty Zebra MC3300x
+
+- MIL-STD-810G
+- IP54
+- CE, FCC, IC
+- RoHS
+`
+      },
+      {
+        title: '9. FAQ – Często zadawane pytania',
+        content: `
+### Co to jest Zebra MC3300x?
+
+**Odpowiedź:** Zebra MC3300x to wytrzymały **komputer mobilny z 4-calowym ekranem WVGA** i **klawiaturą fizyczną** (29, 38 lub 47 klawiszy). Dostępny w wersjach Gun (pistoletowy), Rotate (obrotowa głowica) i Straight. Oferuje skanery od laserowego SE965 do imagera SE4850-ER z zasięgiem **do 21 metrów**.
+
+### Jakie wersje Zebra MC3300x są dostępne?
+
+**Odpowiedź:** Zebra MC3300x dostępny jest w 4 wersjach: **MC3300x-G (Gun)** – pistoletowy uchwyt z triggerem, **MC3300x-R (Rotate)** – obrotowa głowica skanera, **MC3300x-S (Straight)** – prosty skaner 0°, **MC3300x-S45** – skaner pod kątem 45°.
+
+### Jaki skaner wybrać do Zebra MC3300x?
+
+**Odpowiedź:** **SE965 (Laser 1D)** – do kodów 1D, zasięg do 2,5 m. **SE4720/SE4770 (Imager 2D)** – kody 1D i 2D, zasięg do 91 cm. **SE4850-ER (Extended Range)** – skanowanie dalekiego zasięgu do **21 metrów** (kody na regałach wysokiego składowania).
+
+### Jak działa Hot Swap baterii w Zebra MC3300x?
+
+**Odpowiedź:** Zebra MC3300x zachowuje łączność Wi-Fi/Bluetooth przez **30 sekund** po wyjęciu baterii, a dane RAM przez około **5 minut**. Wymień baterię w tym czasie, aby zachować ciągłość sesji. Superkondensator musi być naładowany (~10 minut po pełnym rozładowaniu).
+
+### Jak długo działa bateria w Zebra MC3300x?
+
+**Odpowiedź:** Bateria 7000 mAh PowerPrecision+ Extended wystarcza na **pełną zmianę roboczą** (8-12 godzin intensywnego użytkowania). Czas ładowania do 90% wynosi ~5,2 godziny.
+
+### Czy Zebra MC3300x jest wodoodporny?
+
+**Odpowiedź:** Zebra MC3300x posiada certyfikat **IP54** – jest odporny na kurz i zachlapanie wodą. Nie jest jednak przeznaczony do zanurzania w wodzie (jak urządzenia IP67/IP68).
+
+### Jak zresetować Zebra MC3300x?
+
+**Odpowiedź:** **Miękki reset:** Przytrzymaj przycisk Power i wybierz "Restart". **Twardy reset:** Przytrzymaj Power przez 10 sekund. **Factory Reset:** Ustawienia → System → Reset options → Erase all data.
+
+### Jakie akcesoria są dostępne dla Zebra MC3300x?
+
+**Odpowiedź:** Dostępne są m.in.: stacje dokujące (1-Slot USB, 5-Slot Charge/Ethernet), ładowarki baterii (4-Slot, 20-Slot), obudowy ochronne (Rubber Boot), kabury (Rigid, Fabric), paski na rękę, skanery Bluetooth (RS5100, RS6100, DS3678).
+`
+      }
+    ]
+  },
+
   tc78: {
     model: 'TC78',
     title: 'Zebra TC78 – Instrukcja obsługi po Polsku',
