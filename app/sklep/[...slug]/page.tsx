@@ -682,26 +682,22 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
             )}
 
             {/* Usługa montażu */}
-            <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-indigo-600 via-purple-600 to-indigo-700 p-5 sm:p-6 mb-4 sm:mb-6 shadow-lg">
-              {/* Dekoracyjne koła */}
-              <div className="absolute -top-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-2xl" />
-              <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-purple-400/20 rounded-full blur-xl" />
-              
-              <div className="relative flex items-start gap-4">
-                <div className="bg-white/20 backdrop-blur-sm rounded-xl p-3 flex-shrink-0">
-                  <Wrench className="w-6 h-6 text-white" />
+            <div className="rounded-xl bg-gray-900 p-5 sm:p-6 mb-4 sm:mb-6 border border-gray-800">
+              <div className="flex items-start gap-4">
+                <div className="bg-gray-800 rounded-lg p-3 flex-shrink-0">
+                  <Wrench className="w-5 h-5 text-gray-300" />
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-base sm:text-lg font-bold text-white mb-2">
+                  <h3 className="text-base sm:text-lg font-semibold text-white mb-2">
                     Potrzebujesz wymiany części?
                   </h3>
-                  <p className="text-sm text-indigo-100 mb-4 leading-relaxed">
+                  <p className="text-sm text-gray-400 mb-4 leading-relaxed">
                     Odbierzemy drukarkę kurierem, wymienimy część w naszym serwisie 
                     i odeślemy sprawne urządzenie. Szybko i z gwarancją.
                   </p>
                   <Link 
                     href="/#formularz" 
-                    className="inline-flex items-center gap-2 bg-white text-indigo-700 px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-indigo-50 transition-colors shadow-md"
+                    className="inline-flex items-center gap-2 bg-white text-gray-900 px-5 py-2.5 rounded-lg text-sm font-medium hover:bg-gray-100 transition-colors"
                   >
                     <Truck className="w-4 h-4" />
                     Zamów odbiór kurierem
