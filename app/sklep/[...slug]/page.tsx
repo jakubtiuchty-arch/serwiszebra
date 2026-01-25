@@ -682,22 +682,22 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
             )}
 
             {/* Usługa montażu */}
-            <div className="rounded-xl bg-gray-900 p-5 sm:p-6 mb-4 sm:mb-6 border border-gray-800">
+            <div className="rounded-xl bg-gray-50 p-5 sm:p-6 mb-4 sm:mb-6 border border-gray-200">
               <div className="flex items-start gap-4">
-                <div className="bg-gray-800 rounded-lg p-3 flex-shrink-0">
-                  <Wrench className="w-5 h-5 text-gray-300" />
+                <div className="bg-blue-100 rounded-lg p-3 flex-shrink-0">
+                  <Wrench className="w-5 h-5 text-blue-600" />
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-base sm:text-lg font-semibold text-white mb-2">
+                  <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-2">
                     Potrzebujesz wymiany części?
                   </h3>
-                  <p className="text-sm text-gray-400 mb-4 leading-relaxed">
+                  <p className="text-sm text-gray-600 mb-4 leading-relaxed">
                     Odbierzemy drukarkę kurierem, wymienimy część w naszym serwisie 
                     i odeślemy sprawne urządzenie. Szybko i z gwarancją.
                   </p>
                   <Link 
                     href="/#formularz" 
-                    className="inline-flex items-center gap-2 bg-white text-gray-900 px-5 py-2.5 rounded-lg text-sm font-medium hover:bg-gray-100 transition-colors"
+                    className="inline-flex items-center gap-2 bg-blue-600 text-white px-5 py-2.5 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
                   >
                     <Truck className="w-4 h-4" />
                     Zamów odbiór kurierem
@@ -706,17 +706,17 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
               </div>
             </div>
 
-            {/* Contact - Mobile First */}
-            <div className="p-3 sm:p-4 bg-white rounded-lg border border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4">
+            {/* Contact */}
+            <div className="p-4 sm:p-5 bg-white rounded-xl border border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4">
               <div className="text-center sm:text-left">
-                <p className="text-xs sm:text-sm font-medium text-gray-900">Pomoc w doborze części?</p>
-                <p className="text-[10px] sm:text-xs text-gray-500">Zadzwoń – doradzimy</p>
+                <p className="text-sm sm:text-base font-medium text-gray-900">Pomoc w doborze części?</p>
+                <p className="text-xs sm:text-sm text-gray-500">Zadzwoń – doradzimy bezpłatnie</p>
               </div>
               <a
                 href="tel:+48601619898"
-                className="flex items-center gap-2 bg-gray-900 text-white px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium hover:bg-gray-800 transition-colors"
+                className="flex items-center gap-2 bg-gray-100 text-gray-900 px-4 sm:px-5 py-2.5 rounded-lg text-sm font-medium hover:bg-gray-200 transition-colors border border-gray-200"
               >
-                <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                <Phone className="w-4 h-4 text-blue-600" />
                 601 619 898
               </a>
             </div>
