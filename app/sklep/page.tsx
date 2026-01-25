@@ -428,7 +428,7 @@ export default function SklepPage() {
                           className="bg-white rounded-xl border border-gray-200 overflow-hidden hover:border-blue-300 hover:shadow-md active:bg-gray-50 transition-all group"
                         >
                           {/* Image */}
-                          <div className="relative h-36 sm:h-44 bg-gradient-to-b from-gray-50 to-white flex items-center justify-center p-4">
+                          <div className="relative h-36 sm:h-44 bg-white flex items-center justify-center p-4">
                             {imageUrl ? (
                               <Image
                                 src={imageUrl}
