@@ -28979,6 +28979,479 @@ Zebra TC58 może automatycznie dodawać współrzędne GPS do zdjęć:
 `
       }
     ]
+  },
+
+  TC53e: {
+    model: 'TC53e',
+    title: 'Zebra TC53e – Instrukcja obsługi po Polsku',
+    lastUpdated: '2026-01-25',
+    sourceDocument: 'Zebra TC53e User Guide',
+    keywords: [
+      'Zebra TC53e',
+      'Zebra TC53e instrukcja',
+      'Zebra TC53e manual',
+      'Zebra TC53e po polsku',
+      'Zebra TC53e specyfikacja',
+      'Zebra TC53e skaner',
+      'Zebra TC53e Wi-Fi',
+      'Zebra TC53e bateria',
+      'Zebra TC53e serwis',
+      'terminal mobilny Zebra TC53e',
+      'komputer mobilny Zebra TC53e',
+      'Zebra TC53e konfiguracja',
+      'Zebra TC53e DataWedge',
+      'Zebra TC53e SE4720',
+      'Zebra TC53e SE55',
+      'Zebra TC53e akcesoria'
+    ],
+    sections: [
+      {
+        title: '1. Podstawowe informacje',
+        content: \`
+### O urządzeniu Zebra TC53e
+
+Zebra TC53e to zaawansowany komputer mobilny nowej generacji z **6-calowym ekranem dotykowym Full HD+** przeznaczony do pracy wewnątrz budynków. Urządzenie wyposażono w łączność **Wi-Fi 6**, najnowszy procesor Qualcomm 6490 (8-rdzeniowy, 2,7 GHz), zaawansowany skaner kodów kreskowych (SE4720 lub SE55 Advanced Range), zintegrowany NFC, podwójne kamery (16 MP + 8 MP) oraz Bluetooth 5.2.
+
+Konstrukcja Zebra TC53e spełnia normy IP65/IP68 oraz MIL-STD-810H, zapewniając wyjątkową odporność na upadki (do 1,8 m), wodę, kurz i ekstremalne temperatury. TC53e jest idealnym narzędziem dla magazynów, hal produkcyjnych, sklepów detalicznych i wszystkich zastosowań wymagających niezawodnego skanowania w środowisku z dostępem do Wi-Fi.
+
+### Parametry techniczne Zebra TC53e
+
+| Parametr | Zebra TC53e |
+|----------|-------------|
+| **Wyświetlacz** | 6,0" FHD+ (2160 x 1080) |
+| Jasność | 600 nitów |
+| Ochrona ekranu | Corning Gorilla Glass |
+| Procesor | Qualcomm 6490, 2,7 GHz (8-rdzeniowy) |
+| System operacyjny | Android 13+ (aktualizacje do Android 16+) |
+| Pamięć RAM | 6 GB / 8 GB |
+| Pamięć Flash | 64 GB / 128 GB |
+| Karta microSD | Do 2 TB |
+| Łączność bezprzewodowa | Wi-Fi 6 (802.11ax), Bluetooth 5.2, NFC |
+| Skaner | SE4720 2D / SE55 2D Advanced Range |
+
+### Porównanie Zebra TC53e vs Zebra TC58e vs Zebra TC53e-RFID
+
+| Parametr | Zebra TC53e | Zebra TC58e | Zebra TC53e-RFID |
+|----------|-------------|-------------|------------------|
+| **Łączność komórkowa** | **Brak** | **5G / LTE** | **Brak** |
+| Wi-Fi | 6 (802.11ax) | 6 (802.11ax) | 6 (802.11ax) |
+| Karta SIM | Nie dotyczy | Nano SIM | Nie dotyczy |
+| GPS | Nie | Zintegrowany | Nie |
+| RFID UHF | Nie | Nie | **Zintegrowany** |
+| Zastosowanie | Wewnątrz budynków | Teren i mobilność | Inwentaryzacja RFID |
+
+### Zastosowania Zebra TC53e
+
+- **Magazyny:** kompletacja zamówień, przyjęcia i wydania towaru, inwentaryzacja
+- **Produkcja:** śledzenie WIP, kontrola jakości, zarządzanie partiami
+- **Handel detaliczny:** obsługa klienta, zarządzanie zapasami, ceny i promocje
+- **Transport i logistyka:** sortowanie, załadunek, cross-docking
+- **Służba zdrowia:** identyfikacja pacjentów, zarządzanie lekami, dokumentacja
+
+### Cechy charakterystyczne Zebra TC53e
+
+- **Wi-Fi 6 (802.11ax)** – szybka i stabilna łączność bezprzewodowa
+- **Wyświetlacz 6" FHD+** – największy i najjaśniejszy w swojej klasie (600 nitów)
+- **Procesor Qualcomm 6490** – 8-rdzeniowy, 2,7 GHz dla błyskawicznej wydajności
+- **Skaner SE55 Advanced Range** – zasięg do 14 m (opcja)
+- **Certyfikat IP65/IP68** – pełna odporność na kurz i wodę
+- **Upadek z 1,8 m** – na beton z futerałem ochronnym (MIL-STD-810H)
+- **Gorilla Glass** – ochrona ekranu i okna skanera
+- **Warm Swap** – wymiana baterii bez utraty sesji
+- **NFC** – obsługa płatności i identyfikacji
+- **Mobility DNA** – pakiet narzędzi do zarządzania i konfiguracji
+\`
+      },
+      {
+        title: '2. Rozpakowanie i instalacja',
+        content: \`
+### Zawartość opakowania Zebra TC53e
+
+- Komputer mobilny Zebra TC53e
+- Bateria PowerPrecision+ Li-Ion 4680 mAh
+- Skrócona instrukcja obsługi
+- Przewodnik bezpieczeństwa
+
+> **Uwaga:** Zasilacz, kable, stacje dokujące i futerały ochronne są sprzedawane oddzielnie.
+
+### Instalacja karty microSD Zebra TC53e (opcjonalnie)
+
+1. Podnieś klapkę dostępową z tyłu urządzenia (pod baterią)
+2. Przesuń uchwyt karty microSD do pozycji "Open"
+3. Podnieś drzwiczki uchwytu karty
+4. Umieść kartę microSD stykami do góry
+5. Zamknij drzwiczki i przesuń uchwyt do pozycji "Lock"
+6. Zamknij klapkę dostępową
+
+### Instalacja baterii Zebra TC53e
+
+1. Włóż baterię do komory, wyrównując styki (najpierw dolna część)
+2. Dociśnij baterię do góry, aż zatrzaski zablokują się na miejscu
+3. Zatrzaski po bokach powinny zaskoczyć automatycznie
+
+### Wyjmowanie baterii Zebra TC53e
+
+1. Naciśnij jednocześnie oba zatrzaski zwalniające z tyłu urządzenia
+2. Przytrzymując zatrzaski, przesuń je do środka
+3. Unieś baterię i wyjmij z komory
+
+> **Funkcja Warm Swap:** Zebra TC53e pozwala na wymianę baterii z zachowaniem sesji przez około 60 sekund.
+
+### Warunki pracy Zebra TC53e
+
+| Tryb | Temperatura | Wilgotność |
+|------|-------------|------------|
+| Praca | -20°C do +50°C | 5-95% bez kondensacji |
+| Ładowanie | 0°C do +50°C | – |
+| Przechowywanie | -40°C do +70°C | 5-95% bez kondensacji |
+\`
+      },
+      {
+        title: '3. Elementy urządzenia',
+        content: \`
+### Widok z przodu Zebra TC53e
+
+| Nr | Element | Opis |
+|----|---------|------|
+| 1 | Kamera przednia | 8 MP – wideorozmowy i rozpoznawanie twarzy |
+| 2 | LED skanowania | Wskazuje status operacji skanowania |
+| 3 | Słuchawka/Głośnik | Audio w trybie słuchawki |
+| 4 | Czujnik zbliżenia/światła | Automatyczna regulacja jasności |
+| 5 | LED ładowania/powiadomień | Status baterii i powiadomienia aplikacji |
+| 6 | Ekran dotykowy | 6" FHD+ z obsługą rękawiczek i mokrego dotyku |
+| 7 | Głośnik multimedialny | Odtwarzanie multimediów i tryb głośnomówiący |
+| 8 | Styki ładowania | Ładowanie przez stacje dokujące |
+| 9 | Złącze USB-C | Ładowanie, transfer danych, akcesoria |
+| 10 | Przycisk skanowania (prawy) | Uruchamia skanowanie (programowalny) |
+| 11 | Przyciski głośności | Regulacja głośności (programowalne) |
+
+### Widok z tyłu Zebra TC53e
+
+| Nr | Element | Opis |
+|----|---------|------|
+| 12 | Przycisk zasilania | Włączanie/wyłączanie, blokada ekranu, menu zasilania |
+| 13 | Mikrofony (3 szt.) | Komunikacja głosowa, redukcja szumów |
+| 14 | Złącze 8-pin I/O | Komunikacja z akcesoriami, audio |
+| 15 | Zatrzaski baterii | Naciśnij aby zwolnić baterię |
+| 16 | Bateria PowerPrecision+ | Wymienna bateria Li-Ion 4680 mAh |
+| 17 | Głośnik | Odtwarzanie multimediów |
+| 18 | Styki ładowania DC | Ładowanie przez kabel/stację |
+| 19 | Mocowanie paska | Punkt montażowy dla paska na rękę |
+| 20 | Kamera tylna 16 MP | Zdjęcia i wideo z lampą błyskową |
+| 21 | Okno skanera | Wyjście promienia skanera |
+| 22 | Przycisk PTT | Push-to-Talk (programowalny) |
+| 23 | Przycisk skanowania (lewy) | Alternatywny trigger skanera |
+
+> **Uwaga:** Zebra TC53e nie posiada złącza audio 3,5 mm – należy używać adapterów USB-C lub zestawów Bluetooth.
+\`
+      },
+      {
+        title: '4. Skanowanie kodów kreskowych',
+        content: \`
+### Obsługiwane skanery Zebra TC53e
+
+| Skaner | Opis | Zasięg |
+|--------|------|--------|
+| SE4720 | Standardowy skaner 2D | Do 91 cm (kod 20 mil) |
+| SE55 | Skaner dalekiego zasięgu | Do 14 m (kod 100 mil) |
+
+### Skanowanie wewnętrznym skanerem Zebra TC53e
+
+1. Uruchom aplikację obsługującą skanowanie (np. DWDemo)
+2. Skieruj okno skanera na kod kreskowy
+3. Naciśnij przycisk skanowania (boczny lub ekranowy)
+4. Utrzymuj urządzenie w odległości 10-60 cm od kodu
+5. Celuj linią lub wzorem na środek kodu
+6. Poczekaj na potwierdzenie odczytu (dźwięk/wibracja)
+
+### Zasięgi skanowania SE4720 (Zebra TC53e)
+
+| Typ kodu | Odległość min. | Odległość maks. |
+|----------|----------------|-----------------|
+| Code 39 (3 mil) | 7,6 cm | 14,7 cm |
+| Code 128 (5 mil) | 5,8 cm | 24,9 cm |
+| PDF417 (5 mil) | 7,6 cm | 20,1 cm |
+| Data Matrix (10 mil) | 5,3 cm | 27,9 cm |
+| UPC-A (100%) | 4,1 cm | 63,2 cm |
+| Code 39 (20 mil) | 4,1 cm | 91,7 cm |
+
+### Zasięgi skanowania SE55 Advanced Range (Zebra TC53e)
+
+| Typ kodu | Odległość min. | Odległość maks. |
+|----------|----------------|-----------------|
+| Code 39 (3 mil) | 6,9 cm | 41,1 cm |
+| Code 39 (5 mil) | 6,4 cm | 67,6 cm |
+| UPC-A (100%) | 6,4 cm | 180 cm |
+| Code 128 (15 mil) | 18,2 cm | 181 cm |
+| Code 39 (55 mil) | – | 744 cm |
+| Code 39 (100 mil) | – | 1407 cm |
+
+### Wskazówki dotyczące skanowania Zebra TC53e
+
+- Utrzymuj równoległy kąt do kodu (unikaj skrajnych kątów)
+- Unikaj odbić światła na laminowanych etykietach
+- Przy jasnym świetle słonecznym zasłoń kod ręką
+- Regularnie czyść okno skanera
+- Używaj trybu prezentacji dla wielu skanów
+\`
+      },
+      {
+        title: '5. Łączność bezprzewodowa',
+        content: \`
+### Wi-Fi 6 Zebra TC53e
+
+Zebra TC53e obsługuje standard Wi-Fi 6 (802.11ax):
+
+| Parametr | Wartość |
+|----------|---------|
+| Standard | 802.11 a/b/g/n/ac/ax |
+| Pasma | 2,4 GHz / 5 GHz |
+| MIMO | 2x2 MU-MIMO |
+| Szerokość kanału | 20/40/80/160 MHz |
+| Zabezpieczenia | WPA3, WPA2, WPA, 802.1x |
+
+### Łączenie z siecią Wi-Fi Zebra TC53e
+
+1. Otwórz **Ustawienia** → **Sieć i internet** → **Wi-Fi**
+2. Włącz Wi-Fi (jeśli wyłączone)
+3. Wybierz sieć z listy
+4. Wprowadź hasło (jeśli wymagane)
+5. Dotknij **Połącz**
+
+### Bluetooth 5.2 Zebra TC53e
+
+| Parametr | Wartość |
+|----------|---------|
+| Wersja | 5.2 + BLE |
+| Profile | A2DP, AVRCP, HFP, HSP, HID, OPP, PBAP, PAN, MAP |
+| Zasięg | do 10 m (klasa 2) |
+
+### Parowanie urządzeń Bluetooth Zebra TC53e
+
+1. Upewnij się, że urządzenie Bluetooth jest w trybie parowania
+2. W ustawieniach Bluetooth dotknij **Sparuj nowe urządzenie**
+3. Wybierz urządzenie z listy
+4. Potwierdź kod parowania (jeśli wyświetlony)
+
+### NFC Zebra TC53e
+
+| Parametr | Wartość |
+|----------|---------|
+| Standard | ISO 14443 A/B, ISO 15693, FeliCa |
+| Tryby | Reader, Writer, Card Emulation, Peer-to-Peer |
+| Funkcje | Parowanie urządzeń, płatności mobilne, identyfikacja |
+
+Antena NFC znajduje się w górnej części tyłu urządzenia. Zbliż tag NFC do tego obszaru.
+\`
+      },
+      {
+        title: '6. Bateria i ładowanie',
+        content: \`
+### Specyfikacja baterii Zebra TC53e
+
+| Parametr | Wartość |
+|----------|---------|
+| Typ | Li-Ion PowerPrecision+ |
+| Pojemność | 4680 mAh (standard) / 7000 mAh (rozszerzona) |
+| Napięcie | 3,87 V |
+| Czas pracy | 8-14 godzin (zależnie od użycia) |
+| Czas ładowania | ~2,5 godziny (0-90%) |
+
+### Ładowanie urządzenia Zebra TC53e
+
+**Przez USB-C:**
+1. Podłącz kabel USB-C do urządzenia
+2. Podłącz drugi koniec do zasilacza lub komputera
+3. LED zmieni kolor na pomarańczowy (ładowanie)
+4. LED zmieni kolor na zielony (naładowane)
+
+**Przez stację dokującą:**
+1. Umieść urządzenie w stacji
+2. Upewnij się, że styki są prawidłowo połączone
+3. LED stacji wskaże status ładowania
+
+### Wskaźniki LED ładowania Zebra TC53e
+
+| Kolor LED | Znaczenie |
+|-----------|-----------|
+| Pomarańczowy (stały) | Ładowanie |
+| Zielony (stały) | Naładowane |
+| Pomarańczowy (migający) | Błąd ładowania |
+| Czerwony (migający) | Temperatura poza zakresem |
+
+### Oszczędzanie baterii Zebra TC53e
+
+- Zmniejsz jasność ekranu
+- Wyłącz Wi-Fi gdy nie jest potrzebne
+- Wyłącz Bluetooth gdy nie jest potrzebne
+- Włącz tryb oszczędzania baterii
+- Skróć czas automatycznego wygaszania ekranu
+\`
+      },
+      {
+        title: '7. Konserwacja i rozwiązywanie problemów',
+        content: \`
+### Harmonogram czyszczenia Zebra TC53e
+
+| Element | Częstotliwość |
+|---------|---------------|
+| Ekran dotykowy | Codziennie |
+| Okno skanera | Codziennie |
+| Styki ładowania | Co tydzień |
+| Obudowa | W razie potrzeby |
+| Styki baterii | Przy wymianie baterii |
+
+### Czyszczenie Zebra TC53e
+
+1. Wyłącz urządzenie lub zablokuj ekran
+2. Użyj miękkiej, bezpyłowej ściereczki
+3. Zwilż alkoholem izopropylowym (70%)
+4. Delikatnie przetrzyj powierzchnię
+5. Osusz przed użyciem
+
+### Problemy z uruchomieniem Zebra TC53e
+
+| Problem | Rozwiązanie |
+|---------|-------------|
+| Urządzenie nie włącza się | Naładuj baterię przez 15 minut, sprawdź instalację baterii |
+| Urządzenie zawiesza się | Przytrzymaj Power przez 10 sekund |
+| Pętla restartu | Wykonaj Enterprise Reset |
+
+### Problemy ze skanowaniem Zebra TC53e
+
+| Problem | Rozwiązanie |
+|---------|-------------|
+| Skaner nie działa | Sprawdź DataWedge, zrestartuj urządzenie |
+| Nie odczytuje kodu | Oczyść okno skanera, zmień kąt/odległość |
+| Wolne skanowanie | Wyłącz niepotrzebne dekodery |
+
+### Problemy z Wi-Fi Zebra TC53e
+
+| Problem | Rozwiązanie |
+|---------|-------------|
+| Brak połączenia | Sprawdź hasło, zrestartuj router |
+| Słaby sygnał | Zbliż się do punktu dostępowego |
+| Częste rozłączenia | Sprawdź ustawienia oszczędzania energii |
+
+### Resetowanie Zebra TC53e
+
+**Miękki reset:**
+1. Przytrzymaj przycisk Power
+2. Wybierz "Uruchom ponownie"
+
+**Twardy reset:**
+1. Przytrzymaj Power przez 10 sekund
+
+**Enterprise Reset:**
+1. Ustawienia → System → Opcje resetowania
+2. Wybierz "Enterprise Reset"
+
+**Factory Reset:**
+1. Ustawienia → System → Opcje resetowania
+2. Wybierz "Przywrócenie danych fabrycznych"
+
+> **Ostrzeżenie:** Factory Reset usuwa wszystkie dane!
+\`
+      },
+      {
+        title: '8. Specyfikacje techniczne',
+        content: \`
+### Wymiary i waga Zebra TC53e
+
+| Parametr | Wartość |
+|----------|---------|
+| Wysokość | 164,8 mm |
+| Szerokość | 77,35 mm |
+| Grubość | 16,75 mm |
+| Waga (z baterią std.) | ~290 g |
+
+### Wyświetlacz Zebra TC53e
+
+| Parametr | Wartość |
+|----------|---------|
+| Przekątna | 6,0" |
+| Rozdzielczość | 2160 x 1080 (FHD+) |
+| Typ | IPS LCD |
+| Jasność | 600 nitów |
+| Ochrona | Corning Gorilla Glass |
+| Dotyk | Pojemnościowy, rękawiczki, mokry palec |
+
+### Wydajność Zebra TC53e
+
+| Parametr | Wartość |
+|----------|---------|
+| Procesor | Qualcomm 6490, 2,7 GHz, 8-rdzeniowy |
+| RAM | 6 GB / 8 GB |
+| Flash | 64 GB / 128 GB |
+| microSD | Do 2 TB |
+
+### Łączność Zebra TC53e
+
+| Parametr | Wartość |
+|----------|---------|
+| Wi-Fi | 802.11 a/b/g/n/ac/ax (Wi-Fi 6) |
+| Bluetooth | 5.2 + BLE |
+| NFC | Tak |
+| USB | USB-C 3.1 Gen 1 |
+
+### Wytrzymałość Zebra TC53e
+
+| Parametr | Wartość |
+|----------|---------|
+| Stopień ochrony IP | IP65/IP68 |
+| Upadek (z Rugged Boot) | 1,8 m na beton (MIL-STD-810H) |
+| Upadek (bez ochrony) | 1,5 m na płytki |
+| Temperatura pracy | -20°C do +50°C |
+| Temperatura ładowania | 0°C do +50°C |
+| Temperatura przechowywania | -40°C do +70°C |
+| Wilgotność | 5-95% bez kondensacji |
+
+### Certyfikaty Zebra TC53e
+
+- MIL-STD-810H
+- IP65/IP68
+- CE, FCC, IC
+- RoHS
+- Secure Boot, Verified Boot
+\`
+      },
+      {
+        title: '9. FAQ – Często zadawane pytania',
+        content: \`
+### Co to jest Zebra TC53e?
+
+**Odpowiedź:** Zebra TC53e to zaawansowany **komputer mobilny z 6-calowym ekranem FHD+ (600 nitów)**, wyposażony w procesor Qualcomm 6490 (8-rdzeniowy, 2,7 GHz), skaner SE4720 lub SE55, Wi-Fi 6, Bluetooth 5.2 i NFC. Przeznaczony do pracy wewnątrz budynków – magazynów, hal produkcyjnych i sklepów detalicznych.
+
+### Jaka jest różnica między Zebra TC53e a Zebra TC58e?
+
+**Odpowiedź:** Zebra TC53e to wersja **tylko Wi-Fi**, natomiast Zebra TC58e ma dodatkowo **moduł 5G/LTE**, slot na kartę SIM i zintegrowany GPS. Zebra TC53e jest przeznaczony do pracy w zasięgu sieci Wi-Fi, a Zebra TC58e do pracy mobilnej w terenie.
+
+### Jakie skanery są dostępne w Zebra TC53e?
+
+**Odpowiedź:** Zebra TC53e oferuje dwa skanery: **SE4720** (standardowy, zasięg do 91 cm) oraz **SE55 Advanced Range** (daleki zasięg do 14 m). Oba są skanerami 2D obsługującymi kody 1D, 2D, QR, Data Matrix i inne.
+
+### Czy Zebra TC53e ma GPS?
+
+**Odpowiedź:** **Nie**, Zebra TC53e nie posiada wbudowanego GPS (to wersja Wi-Fi only). Jeśli potrzebujesz GPS, wybierz model **Zebra TC58e** z pełną łącznością komórkową i zintegrowanym GPS.
+
+### Jak długo działa bateria w Zebra TC53e?
+
+**Odpowiedź:** Standardowa bateria 4680 mAh zapewnia **8-14 godzin pracy** przy typowym użyciu. Dostępna jest też bateria rozszerzona 7000 mAh dla dłuższego czasu pracy. Funkcja Warm Swap pozwala wymienić baterię bez utraty sesji.
+
+### Jaki system operacyjny ma Zebra TC53e?
+
+**Odpowiedź:** Zebra TC53e działa na systemie **Android 13** z gwarancją aktualizacji do Android 16+. Urządzenie otrzymuje regularne aktualizacje bezpieczeństwa przez cały cykl życia produktu.
+
+### Jak zresetować Zebra TC53e do ustawień fabrycznych?
+
+**Odpowiedź:** Przejdź do **Ustawienia → System → Opcje resetowania → Przywrócenie danych fabrycznych**. Uwaga: ta operacja usuwa wszystkie dane z urządzenia! Dla resetu bez utraty konfiguracji użyj "Enterprise Reset".
+
+### Czy Zebra TC53e jest wodoodporny?
+
+**Odpowiedź:** Tak, Zebra TC53e posiada certyfikat **IP65/IP68** – jest w pełni odporny na kurz i wodę (zanurzenie do 1,5 m przez 30 minut). Dodatkowo spełnia normę **MIL-STD-810H** dla upadków z 1,8 m na beton (z obudową ochronną).
+\`
+      }
+    ]
   }
 }
 
