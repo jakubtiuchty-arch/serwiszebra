@@ -28981,7 +28981,7 @@ Zebra TC58 może automatycznie dodawać współrzędne GPS do zdjęć:
     ]
   },
 
-  TC53e: {
+  tc53e: {
     model: 'TC53e',
     title: 'Zebra TC53e – Instrukcja obsługi po Polsku',
     lastUpdated: '2026-01-25',
