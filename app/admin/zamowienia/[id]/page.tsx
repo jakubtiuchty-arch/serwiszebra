@@ -24,7 +24,9 @@ import {
   Cable,
   Edit,
   Trash2,
-  Send
+  Send,
+  PackageCheck,
+  ExternalLink
 } from 'lucide-react'
 
 interface OrderItem {
@@ -129,6 +131,21 @@ export default function OrderDetailPage() {
   const [shipmentError, setShipmentError] = useState<string | null>(null)
   const [isSendingToBaselinker, setIsSendingToBaselinker] = useState(false)
   const [baselinkerError, setBaselinkerError] = useState<string | null>(null)
+  
+  // BL Paczka courier modal
+  const [showCourierModal, setShowCourierModal] = useState(false)
+  const [isOrderingCourier, setIsOrderingCourier] = useState(false)
+  const [courierError, setCourierError] = useState<string | null>(null)
+  const [courierForm, setCourierForm] = useState({
+    courier_code: 'dpd',
+    weight: '1',
+    side_x: '30',
+    side_y: '20',
+    side_z: '15',
+    pickup_date: new Date().toISOString().split('T')[0],
+    pickup_time_from: '09',
+    pickup_time_to: '17'
+  })
 
   useEffect(() => {
     fetchOrder()
@@ -268,6 +285,42 @@ export default function OrderDetailPage() {
       console.error('Error deleting order:', err)
       alert('❌ Błąd podczas usuwania zamówienia. Spróbuj ponownie.')
       setIsDeleting(false)
+    }
+  }
+
+  const handleOrderCourier = async () => {
+    if (!order) return
+
+    setIsOrderingCourier(true)
+    setCourierError(null)
+    
+    try {
+      const response = await fetch(`/api/admin/orders/${orderId}/order-courier`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(courierForm)
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Nie udało się zamówić kuriera')
+      }
+      
+      // Odśwież dane zamówienia
+      await fetchOrder()
+      
+      setShowCourierModal(false)
+      setShowSuccessToast(true)
+      setTimeout(() => setShowSuccessToast(false), 3000)
+      
+    } catch (err) {
+      console.error('Error ordering courier:', err)
+      setCourierError(err instanceof Error ? err.message : 'Wystąpił błąd')
+    } finally {
+      setIsOrderingCourier(false)
     }
   }
 
@@ -629,11 +682,22 @@ export default function OrderDetailPage() {
                       rel="noopener noreferrer"
                       className="w-full px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm font-medium flex items-center justify-center gap-2"
                     >
-                      <Truck className="w-4 h-4" />
+                      <ExternalLink className="w-4 h-4" />
                       Śledź przesyłkę
                     </a>
                   )}
                 </div>
+              )}
+
+              {/* ZAMÓW KURIERA - tylko jeśli nie wysłano jeszcze */}
+              {!order.tracking_number && order.delivery_method === 'courier' && (
+                <button
+                  onClick={() => setShowCourierModal(true)}
+                  className="w-full px-4 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg hover:from-blue-700 hover:to-indigo-700 transition-all text-sm font-semibold flex items-center justify-center gap-2 shadow-lg"
+                >
+                  <PackageCheck className="w-4 h-4" />
+                  Zamów kuriera (BL Paczka)
+                </button>
               )}
                 
               <button className="w-full px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors text-sm font-medium">
@@ -792,6 +856,195 @@ export default function OrderDetailPage() {
             >
               <XCircle className="w-5 h-5" />
             </button>
+          </div>
+        </div>
+      )}
+
+      {/* MODAL: Zamów kuriera BL Paczka */}
+      {showCourierModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full p-6 max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                <Truck className="w-6 h-6 text-blue-600" />
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-gray-900">Zamów kuriera</h3>
+                <p className="text-sm text-gray-600">BL Paczka - wysyłka do klienta</p>
+              </div>
+            </div>
+
+            {/* Adres dostawy */}
+            <div className="bg-gray-50 rounded-lg p-4 mb-6">
+              <h4 className="text-xs font-semibold text-gray-500 uppercase mb-2">Adres dostawy</h4>
+              <p className="text-sm font-medium text-gray-900">{order?.contact_person}</p>
+              {order?.customer_company_name && (
+                <p className="text-sm text-gray-700">{order.customer_company_name}</p>
+              )}
+              <p className="text-sm text-gray-700">{order?.delivery_street}</p>
+              <p className="text-sm text-gray-700">{order?.delivery_postal_code} {order?.delivery_city}</p>
+            </div>
+            
+            <div className="space-y-4">
+              {/* Kurier */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Kurier
+                </label>
+                <select
+                  value={courierForm.courier_code}
+                  onChange={(e) => setCourierForm(prev => ({ ...prev, courier_code: e.target.value }))}
+                  className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                >
+                  <option value="dpd">DPD</option>
+                  <option value="inpost">InPost</option>
+                  <option value="dhl">DHL</option>
+                  <option value="ups">UPS</option>
+                  <option value="gls">GLS</option>
+                </select>
+              </div>
+
+              {/* Waga */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Waga paczki (kg)
+                </label>
+                <input
+                  type="number"
+                  step="0.1"
+                  min="0.1"
+                  value={courierForm.weight}
+                  onChange={(e) => setCourierForm(prev => ({ ...prev, weight: e.target.value }))}
+                  className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                />
+              </div>
+
+              {/* Wymiary */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Wymiary paczki (cm)
+                </label>
+                <div className="grid grid-cols-3 gap-3">
+                  <div>
+                    <input
+                      type="number"
+                      placeholder="Długość"
+                      value={courierForm.side_x}
+                      onChange={(e) => setCourierForm(prev => ({ ...prev, side_x: e.target.value }))}
+                      className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-center"
+                    />
+                    <span className="text-xs text-gray-500 block text-center mt-1">dł.</span>
+                  </div>
+                  <div>
+                    <input
+                      type="number"
+                      placeholder="Szerokość"
+                      value={courierForm.side_y}
+                      onChange={(e) => setCourierForm(prev => ({ ...prev, side_y: e.target.value }))}
+                      className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-center"
+                    />
+                    <span className="text-xs text-gray-500 block text-center mt-1">szer.</span>
+                  </div>
+                  <div>
+                    <input
+                      type="number"
+                      placeholder="Wysokość"
+                      value={courierForm.side_z}
+                      onChange={(e) => setCourierForm(prev => ({ ...prev, side_z: e.target.value }))}
+                      className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-center"
+                    />
+                    <span className="text-xs text-gray-500 block text-center mt-1">wys.</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Data odbioru */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Data odbioru paczki
+                </label>
+                <input
+                  type="date"
+                  value={courierForm.pickup_date}
+                  onChange={(e) => setCourierForm(prev => ({ ...prev, pickup_date: e.target.value }))}
+                  min={new Date().toISOString().split('T')[0]}
+                  className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                />
+              </div>
+
+              {/* Godziny odbioru */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Godziny odbioru
+                </label>
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <select
+                      value={courierForm.pickup_time_from}
+                      onChange={(e) => setCourierForm(prev => ({ ...prev, pickup_time_from: e.target.value }))}
+                      className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    >
+                      {Array.from({ length: 10 }, (_, i) => i + 8).map(hour => (
+                        <option key={hour} value={hour.toString().padStart(2, '0')}>
+                          {hour.toString().padStart(2, '0')}:00
+                        </option>
+                      ))}
+                    </select>
+                    <span className="text-xs text-gray-500 block text-center mt-1">od</span>
+                  </div>
+                  <div>
+                    <select
+                      value={courierForm.pickup_time_to}
+                      onChange={(e) => setCourierForm(prev => ({ ...prev, pickup_time_to: e.target.value }))}
+                      className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    >
+                      {Array.from({ length: 10 }, (_, i) => i + 9).map(hour => (
+                        <option key={hour} value={hour.toString().padStart(2, '0')}>
+                          {hour.toString().padStart(2, '0')}:00
+                        </option>
+                      ))}
+                    </select>
+                    <span className="text-xs text-gray-500 block text-center mt-1">do</span>
+                  </div>
+                </div>
+              </div>
+
+              {courierError && (
+                <div className="p-3 bg-red-50 border border-red-200 rounded-lg">
+                  <p className="text-sm text-red-800">{courierError}</p>
+                </div>
+              )}
+            </div>
+
+            <div className="flex gap-3 mt-6">
+              <button
+                onClick={() => {
+                  setShowCourierModal(false)
+                  setCourierError(null)
+                }}
+                disabled={isOrderingCourier}
+                className="flex-1 px-4 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium disabled:opacity-50"
+              >
+                Anuluj
+              </button>
+              <button
+                onClick={handleOrderCourier}
+                disabled={isOrderingCourier}
+                className="flex-1 px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+              >
+                {isOrderingCourier ? (
+                  <>
+                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                    Zamawianie...
+                  </>
+                ) : (
+                  <>
+                    <Truck className="w-4 h-4" />
+                    Zamów kuriera
+                  </>
+                )}
+              </button>
+            </div>
           </div>
         </div>
       )}

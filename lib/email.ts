@@ -2624,3 +2624,122 @@ export async function sendNewOrderNotificationEmail(data: NewOrderNotificationEm
     `
   })
 }
+
+// ============================================
+// Email: Zamówienie wysłane (sklep)
+// ============================================
+
+interface OrderShippedEmailData {
+  customerEmail: string
+  customerName: string
+  orderNumber: string
+  courierName: string
+  trackingNumber: string
+  trackingUrl: string
+}
+
+export async function sendOrderShippedEmail(data: OrderShippedEmailData) {
+  try {
+    const email = await resend.emails.send({
+      from: 'Sklep TAKMA <sklep@serwis-zebry.pl>',
+      to: data.customerEmail,
+      subject: `Twoje zamówienie ${data.orderNumber} zostało wysłane!`,
+      html: generateOrderShippedHTML(data)
+    })
+    
+    console.log('[Email] Order shipped email sent:', email)
+    return email
+    
+  } catch (error) {
+    console.error('[Email] Error sending order shipped email:', error)
+    throw error
+  }
+}
+
+function generateOrderShippedHTML(data: OrderShippedEmailData): string {
+  return `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      ${getEmailStyles()}
+    </head>
+    <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #ffffff;">
+      <div style="max-width: 600px; margin: 0 auto; background-color: white; border-radius: 8px; overflow: hidden;">
+        
+${getEmailHeader()}
+
+        <!-- Content -->
+        <div style="padding: 32px 24px;">
+          
+          <!-- Success message -->
+          <div style="text-align: center; margin-bottom: 32px;">
+            <div style="display: inline-block; background-color: #10b981; width: 64px; height: 64px; border-radius: 50%; margin-bottom: 16px;">
+              <div style="color: white; font-size: 32px; line-height: 64px;">📦</div>
+            </div>
+            <h2 style="margin: 0 0 8px 0; font-size: 24px; color: #111827;">
+              Twoje zamówienie jest w drodze!
+            </h2>
+            <p style="margin: 0; color: #6b7280;">
+              Paczka została nadana i wkrótce do Ciebie dotrze
+            </p>
+          </div>
+
+          <!-- Order info -->
+          <div style="background-color: #f9fafb; border-radius: 8px; padding: 20px; margin-bottom: 24px;">
+            <table style="width: 100%;">
+              <tr>
+                <td style="color: #6b7280; font-size: 14px;">Nr zamówienia:</td>
+                <td style="text-align: right; font-weight: 600; color: #111827;">${data.orderNumber}</td>
+              </tr>
+              <tr>
+                <td style="color: #6b7280; font-size: 14px; padding-top: 8px;">Kurier:</td>
+                <td style="text-align: right; padding-top: 8px; font-weight: 600; color: #111827;">${data.courierName}</td>
+              </tr>
+              <tr>
+                <td style="color: #6b7280; font-size: 14px; padding-top: 8px;">Nr przesyłki:</td>
+                <td style="text-align: right; padding-top: 8px; font-family: monospace; color: #111827;">${data.trackingNumber}</td>
+              </tr>
+            </table>
+          </div>
+
+          <!-- Tracking button -->
+          <div style="text-align: center; margin-bottom: 32px;">
+            <a href="${data.trackingUrl}" 
+               style="display: inline-block; background-color: #2563eb; color: white; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 16px;">
+              🔍 Śledź przesyłkę
+            </a>
+          </div>
+
+          <!-- Info -->
+          <div style="background-color: #fef3c7; border-radius: 8px; padding: 16px; margin-bottom: 24px; border-left: 4px solid #f59e0b;">
+            <p style="margin: 0; font-size: 14px; color: #92400e;">
+              <strong>💡 Wskazówka:</strong> Paczka powinna dotrzeć w ciągu 1-2 dni roboczych. 
+              Otrzymasz powiadomienie SMS od kuriera z dokładnym terminem dostawy.
+            </p>
+          </div>
+
+          <!-- Contact -->
+          <div style="text-align: center; padding-top: 24px; border-top: 1px solid #e5e7eb;">
+            <p style="margin: 0 0 8px 0; color: #6b7280; font-size: 14px;">
+              Masz pytania dotyczące zamówienia?
+            </p>
+            <p style="margin: 0;">
+              <a href="tel:+48601619898" style="color: #2563eb; text-decoration: none; font-weight: 600;">
+                📞 601 619 898
+              </a>
+              &nbsp;&nbsp;|&nbsp;&nbsp;
+              <a href="mailto:serwis@takma.com.pl" style="color: #2563eb; text-decoration: none; font-weight: 600;">
+                ✉️ serwis@takma.com.pl
+              </a>
+            </p>
+          </div>
+        </div>
+
+        ${getEmailFooter()}
+      </div>
+    </body>
+    </html>
+  `
+}
