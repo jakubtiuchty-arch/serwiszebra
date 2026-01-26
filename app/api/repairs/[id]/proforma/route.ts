@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@/lib/supabase/server'
+import { createClient, createServiceClient } from '@/lib/supabase/server'
 import { sendProFormaEmail, sendProFormaAdminEmail } from '@/lib/email'
 
 export async function POST(
@@ -23,8 +23,11 @@ export async function POST(
       )
     }
 
+    // Użyj service client do odczytu (omija RLS)
+    const serviceClient = createServiceClient()
+
     // Pobierz zgłoszenie
-    const { data: repair, error: repairError } = await supabase
+    const { data: repair, error: repairError } = await serviceClient
       .from('repair_requests')
       .select('*')
       .eq('id', repairId)
@@ -43,6 +46,7 @@ export async function POST(
     const isEmailMatch = repair.email && user.email === repair.email
     
     if (!isOwner && !isEmailMatch) {
+      console.error('❌ Access denied:', { userId: user.id, repairUserId: repair.user_id, userEmail: user.email, repairEmail: repair.email })
       return NextResponse.json(
         { error: 'Brak dostępu do tego zgłoszenia' },
         { status: 403 }
@@ -66,7 +70,8 @@ export async function POST(
     }
 
     // Zaktualizuj status płatności na 'proforma' i główny status
-    const { error: updateError } = await supabase
+    // Używamy service client żeby ominąć RLS - klient nie może bezpośrednio zmieniać statusu
+    const { error: updateError } = await serviceClient
       .from('repair_requests')
       .update({
         status: 'proforma',
@@ -79,14 +84,14 @@ export async function POST(
     if (updateError) {
       console.error('❌ Error updating repair:', updateError)
       return NextResponse.json(
-        { error: 'Błąd aktualizacji statusu' },
+        { error: 'Błąd aktualizacji statusu', details: updateError.message },
         { status: 500 }
       )
     }
 
-    // Dodaj wpis do historii (opcjonalne - może nie przejść przez RLS)
+    // Dodaj wpis do historii używając service client
     try {
-      await supabase
+      await serviceClient
         .from('repair_status_history')
         .insert({
           repair_request_id: repairId,
@@ -94,6 +99,7 @@ export async function POST(
           notes: 'Klient wybrał płatność pro forma - oczekiwanie na przelew',
           changed_by: user.id,
         })
+      console.log('✅ History entry added')
     } catch (historyErr) {
       console.warn('⚠️ Could not add history entry:', historyErr)
     }
