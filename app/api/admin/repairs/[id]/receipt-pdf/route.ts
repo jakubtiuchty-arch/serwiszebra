@@ -148,7 +148,7 @@ function generateReceiptHtml(repair: any): string {
       font-weight: 600;
       color: #1f2937;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: normal;
     }
     
     .document-title .date {
@@ -172,7 +172,7 @@ function generateReceiptHtml(repair: any): string {
       background: #374151;
       padding: 2mm 3mm;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      letter-spacing: normal;
     }
     
     .section-content {
