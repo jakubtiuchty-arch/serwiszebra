@@ -28,10 +28,268 @@ export async function GET(
       return NextResponse.json({ error: 'Zgłoszenie nie znalezione' }, { status: 404 })
     }
 
-    // Generuj HTML dla PDF
-    const html = generateReceiptHtml(repair)
+    const formatDate = (dateStr: string | null) => {
+      if (!dateStr) return '-'
+      return format(new Date(dateStr), 'd MMMM yyyy, HH:mm', { locale: pl })
+    }
 
-    // Zwróć HTML (frontend może użyć window.print() do PDF)
+    // Numer zgłoszenia
+    const repairNumber = repair.repair_number || 
+      format(new Date(repair.created_at), 'yyyyMMddHHmm')
+
+    // Pobierz base URL z requestu
+    const url = new URL(request.url)
+    const baseUrl = `${url.protocol}//${url.host}`
+
+    // Generowanie kodu kreskowego Code 128 jako SVG
+    const barcodeSvg = generateCode128Svg(repairNumber)
+
+    const html = `
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Potwierdzenie przyjęcia - #${repairNumber}</title>
+  <style>
+    @media print {
+      .no-print { display: none !important; }
+      body { padding: 20px; margin: 0; }
+    }
+    @page { 
+      size: A4; 
+      margin: 15mm;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { 
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+      font-size: 11px; 
+      line-height: 1.4;
+      color: #333;
+      padding: 40px;
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+    }
+    .print-controls {
+      background: #2563eb;
+      color: white;
+      padding: 15px 20px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .print-btn {
+      background: white;
+      color: #2563eb;
+      border: none;
+      padding: 10px 25px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .print-btn:hover { background: #f0f0f0; }
+    .document { background: white; }
+    
+    .header { 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: flex-start;
+      margin-bottom: 30px;
+      padding-bottom: 15px;
+      border-bottom: 3px solid #1f2937;
+    }
+    .logo-section h1 { font-size: 26px; font-weight: 700; color: #1f2937; margin-bottom: 5px; }
+    .logo-section .subtitle { font-size: 11px; color: #6b7280; margin-bottom: 2px; }
+    
+    .barcode-section { text-align: center; }
+    .barcode-label { font-size: 10px; color: #6b7280; margin-bottom: 5px; }
+    .barcode-number { font-size: 18px; font-weight: 700; color: #1f2937; font-family: monospace; margin-top: 5px; }
+    .barcode-svg { max-width: 180px; height: auto; }
+    
+    .document-title { text-align: center; margin: 25px 0; }
+    .document-title h2 { font-size: 18px; font-weight: 600; color: #1f2937; margin-bottom: 8px; }
+    .document-title .date { font-size: 12px; color: #6b7280; }
+    
+    .two-columns { display: flex; gap: 20px; margin-bottom: 25px; }
+    .column { flex: 1; }
+    
+    .section { border: 1px solid #e5e7eb; border-radius: 8px; overflow: hidden; }
+    .section-title { 
+      font-size: 11px; 
+      font-weight: 600; 
+      color: white; 
+      background: #374151; 
+      padding: 8px 12px;
+    }
+    .section-content { padding: 12px; background: #f9fafb; }
+    
+    .data-row { display: flex; margin-bottom: 8px; font-size: 11px; }
+    .data-label { width: 120px; color: #6b7280; }
+    .data-value { color: #1f2937; font-weight: 500; }
+    .data-value.bold { font-weight: 700; font-size: 13px; }
+    
+    .problem-section { margin-bottom: 25px; }
+    .problem-box { 
+      background: #fef3c7; 
+      border: 1px solid #fcd34d; 
+      border-radius: 8px; 
+      padding: 12px;
+    }
+    .problem-title { font-size: 10px; font-weight: 600; color: #92400e; margin-bottom: 8px; }
+    .problem-text { font-size: 11px; line-height: 1.6; color: #78350f; white-space: pre-wrap; }
+    
+    .info-box { 
+      background: #eff6ff; 
+      border: 1px solid #93c5fd; 
+      border-radius: 8px; 
+      padding: 15px;
+      margin-bottom: 25px;
+    }
+    .info-title { font-size: 11px; font-weight: 600; color: #1e40af; margin-bottom: 10px; }
+    .info-list { font-size: 11px; color: #1e40af; padding-left: 20px; }
+    .info-list li { margin-bottom: 5px; }
+    
+    .footer { 
+      text-align: center; 
+      color: #9ca3af; 
+      font-size: 9px; 
+      padding-top: 15px;
+      border-top: 1px solid #e5e7eb;
+    }
+    .footer p { margin-bottom: 3px; }
+  </style>
+</head>
+<body>
+  <div class="print-controls no-print">
+    <div>
+      <strong>Potwierdzenie #${repairNumber}</strong> - Kliknij przycisk aby wydrukować
+    </div>
+    <button class="print-btn" onclick="window.print()">🖨️ Drukuj / Zapisz PDF</button>
+  </div>
+
+  <div class="document">
+    <div class="header">
+      <div class="logo-section">
+        <h1>TAKMA</h1>
+        <div class="subtitle">Autoryzowany Serwis Zebra</div>
+        <div class="subtitle">ul. Poświęcka 1a, 51-128 Wrocław</div>
+        <div class="subtitle">Tel: 601 619 898 | serwis@takma.com.pl</div>
+      </div>
+      <div class="barcode-section">
+        <div class="barcode-label">NUMER ZGŁOSZENIA</div>
+        ${barcodeSvg}
+        <div class="barcode-number">#${repairNumber}</div>
+      </div>
+    </div>
+    
+    <div class="document-title">
+      <h2>POTWIERDZENIE PRZYJĘCIA URZĄDZENIA DO SERWISU</h2>
+      <div class="date">Data zgłoszenia: ${formatDate(repair.created_at)}</div>
+    </div>
+    
+    <div class="two-columns">
+      <div class="column">
+        <div class="section">
+          <div class="section-title">DANE KLIENTA</div>
+          <div class="section-content">
+            <div class="data-row">
+              <span class="data-label">Imię i nazwisko:</span>
+              <span class="data-value">${repair.first_name} ${repair.last_name}</span>
+            </div>
+            ${repair.company ? `
+            <div class="data-row">
+              <span class="data-label">Firma:</span>
+              <span class="data-value">${repair.company}</span>
+            </div>
+            ` : ''}
+            <div class="data-row">
+              <span class="data-label">Telefon:</span>
+              <span class="data-value">${repair.phone}</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Email:</span>
+              <span class="data-value">${repair.email}</span>
+            </div>
+            ${repair.street ? `
+            <div class="data-row">
+              <span class="data-label">Adres:</span>
+              <span class="data-value">${repair.street}<br>${repair.zip_code || ''} ${repair.city || ''}</span>
+            </div>
+            ` : ''}
+          </div>
+        </div>
+      </div>
+      
+      <div class="column">
+        <div class="section">
+          <div class="section-title">DANE URZĄDZENIA</div>
+          <div class="section-content">
+            <div class="data-row">
+              <span class="data-label">Model:</span>
+              <span class="data-value bold">${repair.device_model}</span>
+            </div>
+            ${repair.serial_number ? `
+            <div class="data-row">
+              <span class="data-label">Numer seryjny:</span>
+              <span class="data-value" style="font-family: monospace;">${repair.serial_number}</span>
+            </div>
+            ` : ''}
+            <div class="data-row">
+              <span class="data-label">Typ urządzenia:</span>
+              <span class="data-value">${repair.device_type || 'terminal'}</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Typ naprawy:</span>
+              <span class="data-value">${repair.repair_type === 'warranty' ? 'Gwarancyjna' : 'Płatna'}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="problem-section">
+      <div class="section">
+        <div class="section-title">OPIS ZGŁOSZONEGO PROBLEMU</div>
+        <div class="section-content">
+          <div class="problem-box">
+            <div class="problem-title">OPIS USTERKI PODANY PRZEZ KLIENTA:</div>
+            <div class="problem-text">${repair.issue_description || 'Brak opisu problemu.'}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="info-box">
+      <div class="info-title">INFORMACJE DLA KLIENTA:</div>
+      <ul class="info-list">
+        <li>Diagnoza urządzenia zostanie wykonana w ciągu 2-3 dni roboczych.</li>
+        <li>Po diagnozie otrzymasz wycenę naprawy na podany adres e-mail.</li>
+        <li>Status naprawy możesz śledzić w panelu klienta: <strong>serwis-zebry.pl/panel-klienta</strong></li>
+        <li>W razie pytań zadzwoń: <strong>601 619 898</strong></li>
+      </ul>
+    </div>
+    
+    <div class="footer">
+      <p><strong>TAKMA Tadeusz Tiuchty</strong> | NIP: 9151004377 | ul. Poświęcka 1a, 51-128 Wrocław</p>
+      <p>www.serwis-zebry.pl | serwis@takma.com.pl</p>
+      <p>Dokument wygenerowany: ${format(new Date(), 'd.MM.yyyy HH:mm', { locale: pl })}</p>
+    </div>
+  </div>
+
+  <script>
+    window.onload = function() {
+      setTimeout(function() {
+        window.print();
+      }, 500);
+    }
+  </script>
+</body>
+</html>
+`
+
     return new NextResponse(html, {
       headers: {
         'Content-Type': 'text/html; charset=utf-8',
@@ -44,391 +302,8 @@ export async function GET(
   }
 }
 
-function generateReceiptHtml(repair: any): string {
-  const formatDate = (dateStr: string | null) => {
-    if (!dateStr) return '-'
-    return format(new Date(dateStr), 'd MMMM yyyy, HH:mm', { locale: pl })
-  }
-
-  const formatDateShort = (dateStr: string | null) => {
-    if (!dateStr) return '-'
-    return format(new Date(dateStr), 'd.MM.yyyy', { locale: pl })
-  }
-
-  // Numer zgłoszenia - używamy repair_number lub generujemy z daty
-  const repairNumber = repair.repair_number || 
-    format(new Date(repair.created_at), 'yyyyMMddHHmm')
-
-  // Generowanie kodu kreskowego Code 128 jako SVG
-  const barcodeValue = repairNumber
-  const barcodeSvg = generateCode128Svg(barcodeValue)
-
-  return `
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Potwierdzenie przyjęcia - #${repairNumber}</title>
-  <style>
-    @page {
-      size: A4;
-      margin: 10mm;
-    }
-    
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      letter-spacing: 0 !important;
-      word-spacing: normal !important;
-    }
-    
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 10pt;
-      line-height: 1.4;
-      color: #1f2937;
-      background: white;
-    }
-    
-    .container {
-      max-width: 210mm;
-      margin: 0 auto;
-      padding: 8mm;
-    }
-    
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 6mm;
-      padding-bottom: 4mm;
-      border-bottom: 2px solid #1f2937;
-    }
-    
-    .logo-section h1 {
-      font-size: 20pt;
-      font-weight: 700;
-      color: #1f2937;
-    }
-    
-    .logo-section .subtitle {
-      font-size: 9pt;
-      color: #6b7280;
-      margin-top: 1mm;
-    }
-    
-    .barcode-section {
-      text-align: center;
-    }
-    
-    .barcode-section .barcode-label {
-      font-size: 8pt;
-      color: #6b7280;
-      margin-bottom: 2mm;
-    }
-    
-    .barcode-section .barcode-number {
-      font-size: 14pt;
-      font-weight: 700;
-      color: #1f2937;
-      font-family: monospace;
-      margin-top: 2mm;
-    }
-    
-    .document-title {
-      text-align: center;
-      margin: 6mm 0;
-    }
-    
-    .document-title h2 {
-      font-size: 14pt;
-      font-weight: 600;
-      color: #1f2937;
-    }
-    
-    .document-title .date {
-      font-size: 10pt;
-      color: #6b7280;
-      margin-top: 2mm;
-    }
-    
-    .section {
-      margin-bottom: 5mm;
-      border: 1px solid #e5e7eb;
-      border-radius: 2mm;
-      overflow: hidden;
-    }
-    
-    .section-title {
-      font-size: 9pt;
-      font-weight: 600;
-      color: white;
-      background: #374151;
-      padding: 2mm 3mm;
-    }
-    
-    .section-content {
-      padding: 3mm;
-      background: #f9fafb;
-    }
-    
-    .data-table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-    
-    .data-table td {
-      padding: 1.5mm 2mm;
-      vertical-align: top;
-      font-size: 10pt;
-    }
-    
-    .data-table .label {
-      width: 35%;
-      color: #6b7280;
-      font-weight: 500;
-    }
-    
-    .data-table .value {
-      color: #1f2937;
-      font-weight: 500;
-    }
-    
-    .problem-box {
-      background: #fef3c7;
-      border: 1px solid #fcd34d;
-      border-radius: 2mm;
-      padding: 3mm;
-      margin-top: 2mm;
-    }
-    
-    .problem-box h4 {
-      font-size: 9pt;
-      font-weight: 600;
-      color: #92400e;
-      margin-bottom: 2mm;
-    }
-    
-    .problem-box p {
-      font-size: 10pt;
-      line-height: 1.5;
-      white-space: pre-wrap;
-      color: #78350f;
-    }
-    
-    .two-columns {
-      display: flex;
-      gap: 4mm;
-    }
-    
-    .column {
-      flex: 1;
-    }
-    
-    .info-box {
-      background: #eff6ff;
-      border: 1px solid #93c5fd;
-      border-radius: 2mm;
-      padding: 3mm;
-      margin-top: 4mm;
-    }
-    
-    .info-box h4 {
-      font-size: 9pt;
-      font-weight: 600;
-      color: #1e40af;
-      margin-bottom: 2mm;
-    }
-    
-    .info-box ul {
-      font-size: 9pt;
-      color: #1e40af;
-      padding-left: 5mm;
-    }
-    
-    .info-box li {
-      margin-bottom: 1mm;
-    }
-    
-    .footer {
-      margin-top: 6mm;
-      padding-top: 4mm;
-      border-top: 1px solid #e5e7eb;
-    }
-    
-    .footer-info {
-      font-size: 8pt;
-      color: #9ca3af;
-      text-align: center;
-      margin-bottom: 4mm;
-    }
-    
-    .barcode-svg {
-      max-width: 60mm;
-      height: auto;
-    }
-    
-    @media print {
-      body {
-        print-color-adjust: exact;
-        -webkit-print-color-adjust: exact;
-      }
-      .no-print {
-        display: none !important;
-      }
-    }
-    
-    .print-button {
-      position: fixed;
-      top: 10mm;
-      right: 10mm;
-      background: #2563eb;
-      color: white;
-      border: none;
-      padding: 3mm 6mm;
-      border-radius: 2mm;
-      font-size: 10pt;
-      font-weight: 600;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 2mm;
-    }
-    
-    .print-button:hover {
-      background: #1d4ed8;
-    }
-  </style>
-</head>
-<body>
-  <button class="print-button no-print" onclick="window.print()">🖨️ Drukuj / Zapisz PDF</button>
-  
-  <div class="container">
-    <!-- Header z logo i kodem kreskowym -->
-    <div class="header">
-      <div class="logo-section">
-        <h1>TAKMA</h1>
-        <div class="subtitle">Autoryzowany Serwis Zebra</div>
-        <div class="subtitle">ul. Poświęcka 1a, 51-128 Wrocław</div>
-        <div class="subtitle">Tel: 601 619 898</div>
-      </div>
-      <div class="barcode-section">
-        <div class="barcode-label">NUMER ZGŁOSZENIA</div>
-        ${barcodeSvg}
-        <div class="barcode-number">#${repairNumber}</div>
-      </div>
-    </div>
-    
-    <!-- Tytuł dokumentu -->
-    <div class="document-title">
-      <h2>POTWIERDZENIE PRZYJĘCIA URZĄDZENIA DO SERWISU</h2>
-      <div class="date">Data zgłoszenia: ${formatDate(repair.created_at)}</div>
-    </div>
-    
-    <!-- Dane klienta i urządzenia -->
-    <div class="two-columns">
-      <div class="column">
-        <div class="section">
-          <div class="section-title">DANE KLIENTA</div>
-          <div class="section-content">
-            <table class="data-table">
-              <tr>
-                <td class="label">Imię i nazwisko:</td>
-                <td class="value">${repair.first_name} ${repair.last_name}</td>
-              </tr>
-              ${repair.company ? `
-              <tr>
-                <td class="label">Firma:</td>
-                <td class="value">${repair.company}</td>
-              </tr>
-              ` : ''}
-              <tr>
-                <td class="label">Telefon:</td>
-                <td class="value">${repair.phone}</td>
-              </tr>
-              <tr>
-                <td class="label">Email:</td>
-                <td class="value">${repair.email}</td>
-              </tr>
-              <tr>
-                <td class="label">Adres:</td>
-                <td class="value">${repair.street || '-'}<br>${repair.zip_code || ''} ${repair.city || ''}</td>
-              </tr>
-            </table>
-          </div>
-        </div>
-      </div>
-      
-      <div class="column">
-        <div class="section">
-          <div class="section-title">DANE URZĄDZENIA</div>
-          <div class="section-content">
-            <table class="data-table">
-              <tr>
-                <td class="label">Model:</td>
-                <td class="value" style="font-weight: 700; font-size: 11pt;">${repair.device_model}</td>
-              </tr>
-              ${repair.device_serial_number ? `
-              <tr>
-                <td class="label">Numer seryjny:</td>
-                <td class="value" style="font-family: monospace;">${repair.device_serial_number}</td>
-              </tr>
-              ` : ''}
-              <tr>
-                <td class="label">Typ urządzenia:</td>
-                <td class="value">${repair.device_type || 'Drukarka etykiet'}</td>
-              </tr>
-              <tr>
-                <td class="label">Typ naprawy:</td>
-                <td class="value">${repair.repair_type === 'warranty' ? 'Gwarancyjna' : 'Płatna'}</td>
-              </tr>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Opis problemu -->
-    <div class="section">
-      <div class="section-title">OPIS ZGŁOSZONEGO PROBLEMU</div>
-      <div class="section-content">
-        <div class="problem-box">
-          <h4>Opis usterki podany przez klienta:</h4>
-          <p>${repair.issue_description || 'Brak opisu problemu.'}</p>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Informacje dla klienta -->
-    <div class="info-box">
-      <h4>Informacje dla klienta:</h4>
-      <ul>
-        <li>Diagnoza urządzenia zostanie wykonana w ciągu 2-3 dni roboczych.</li>
-        <li>Po diagnozie otrzymasz wycenę naprawy na podany adres e-mail.</li>
-        <li>Status naprawy możesz śledzić w panelu klienta: <strong>serwis-zebry.pl/panel-klienta</strong></li>
-        <li>W razie pytań zadzwoń: <strong>601 619 898</strong></li>
-      </ul>
-    </div>
-    
-    <!-- Footer -->
-    <div class="footer">
-      <div class="footer-info">
-        <strong>TAKMA Tadeusz Tiuchty</strong> | NIP: 9151004377 | ul. Poświęcka 1a, 51-128 Wrocław<br>
-        www.serwis-zebry.pl | serwis@takma.com.pl<br>
-        Dokument wygenerowany: ${format(new Date(), 'd.MM.yyyy HH:mm', { locale: pl })}
-      </div>
-    </div>
-  </div>
-</body>
-</html>
-`
-}
-
 // Generator kodu kreskowego Code 128 jako SVG
 function generateCode128Svg(text: string): string {
-  // Code 128 character set B (ASCII 32-127)
   const CODE128_CHARS = ' !"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~'
   
   const CODE128_PATTERNS: Record<number, string> = {
@@ -464,7 +339,6 @@ function generateCode128Svg(text: string): string {
     106: '1100011101011' // STOP
   }
 
-  // Koduj tekst
   let pattern = CODE128_PATTERNS[104] // START B
   let checksum = 104
   
@@ -476,22 +350,17 @@ function generateCode128Svg(text: string): string {
     }
   }
   
-  // Dodaj checksum
   const checksumValue = checksum % 103
   pattern += CODE128_PATTERNS[checksumValue]
-  
-  // Dodaj STOP
   pattern += CODE128_PATTERNS[106]
 
-  // Generuj SVG
   const barWidth = 1
   const height = 40
-  let x = 10 // margin
+  let x = 10
   let svgBars = ''
   
   for (let i = 0; i < pattern.length; i++) {
     if (pattern[i] === '1') {
-      // Znajdź długość ciągu 1-ek
       let width = 1
       while (i + width < pattern.length && pattern[i + width] === '1') {
         width++
@@ -500,7 +369,6 @@ function generateCode128Svg(text: string): string {
       x += width * barWidth
       i += width - 1
     } else {
-      // Znajdź długość ciągu 0-ek
       let width = 1
       while (i + width < pattern.length && pattern[i + width] === '0') {
         width++
@@ -510,10 +378,9 @@ function generateCode128Svg(text: string): string {
     }
   }
   
-  const totalWidth = x + 10 // margin
+  const totalWidth = x + 10
 
   return `<svg class="barcode-svg" viewBox="0 0 ${totalWidth} ${height}" xmlns="http://www.w3.org/2000/svg">
     ${svgBars}
   </svg>`
 }
-
