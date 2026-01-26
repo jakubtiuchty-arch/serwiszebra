@@ -24,7 +24,7 @@ export async function POST(
     }
 
     // Użyj service client do odczytu (omija RLS)
-    const serviceClient = createServiceClient()
+    const serviceClient = await createServiceClient()
 
     // Pobierz zgłoszenie
     const { data: repair, error: repairError } = await serviceClient
