@@ -258,7 +258,7 @@ export async function GET(request: NextRequest) {
           if (repair.email) {
             try {
               // Generuj PDF potwierdzenia przyjęcia
-              const receiptPdf = generateReceiptPDF({
+              const receiptPdf = await generateReceiptPDF({
                 repairNumber: repair.repair_number || repair.id.split('-')[0].toUpperCase(),
                 repairId: repair.id,
                 customerName: `${repair.first_name} ${repair.last_name}`,
