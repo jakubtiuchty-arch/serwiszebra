@@ -158,7 +158,7 @@ export async function PATCH(
             
             // Generuj PDF potwierdzenia przyjęcia
             console.log('📄 [STATUS] Generating receipt PDF...')
-            const receiptPdf = await generateReceiptPDF({
+            const receiptPdf = generateReceiptPDF({
               repairNumber: currentRepair.repair_number || repairId.split('-')[0].toUpperCase(),
               repairId: repairId,
               customerName: `${currentRepair.first_name} ${currentRepair.last_name}`,
