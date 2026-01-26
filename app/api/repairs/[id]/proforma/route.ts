@@ -69,12 +69,12 @@ export async function POST(
       )
     }
 
-    // Zaktualizuj status płatności na 'proforma' i główny status
-    // Używamy service client żeby ominąć RLS - klient nie może bezpośrednio zmieniać statusu
+    // Zaktualizuj payment_status i payment_method na 'proforma'
+    // NIE zmieniamy głównego statusu - zostaje obecny (np. 'wycena')
+    // Używamy service client żeby ominąć RLS
     const { error: updateError } = await serviceClient
       .from('repair_requests')
       .update({
-        status: 'proforma',
         payment_status: 'proforma',
         payment_method: 'proforma',
         updated_at: new Date().toISOString(),
@@ -89,13 +89,15 @@ export async function POST(
       )
     }
 
+    console.log('✅ Repair updated with proforma payment')
+
     // Dodaj wpis do historii używając service client
     try {
       await serviceClient
         .from('repair_status_history')
         .insert({
           repair_request_id: repairId,
-          status: 'proforma',
+          status: repair.status, // Zachowaj obecny status
           notes: 'Klient wybrał płatność pro forma - oczekiwanie na przelew',
           changed_by: user.id,
         })
