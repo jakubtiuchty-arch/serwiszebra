@@ -80,10 +80,12 @@ function generateReceiptHtml(repair: any): string {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      letter-spacing: 0 !important;
+      word-spacing: normal !important;
     }
     
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+      font-family: Arial, Helvetica, sans-serif;
       font-size: 10pt;
       line-height: 1.4;
       color: #1f2937;
@@ -96,7 +98,6 @@ function generateReceiptHtml(repair: any): string {
       padding: 8mm;
     }
     
-    /* Header */
     .header {
       display: flex;
       justify-content: space-between;
@@ -110,7 +111,6 @@ function generateReceiptHtml(repair: any): string {
       font-size: 20pt;
       font-weight: 700;
       color: #1f2937;
-      letter-spacing: -0.5px;
     }
     
     .logo-section .subtitle {
@@ -133,11 +133,10 @@ function generateReceiptHtml(repair: any): string {
       font-size: 14pt;
       font-weight: 700;
       color: #1f2937;
-      font-family: 'Courier New', monospace;
+      font-family: monospace;
       margin-top: 2mm;
     }
     
-    /* Title */
     .document-title {
       text-align: center;
       margin: 6mm 0;
@@ -147,8 +146,6 @@ function generateReceiptHtml(repair: any): string {
       font-size: 14pt;
       font-weight: 600;
       color: #1f2937;
-      text-transform: uppercase;
-      letter-spacing: normal;
     }
     
     .document-title .date {
@@ -157,7 +154,6 @@ function generateReceiptHtml(repair: any): string {
       margin-top: 2mm;
     }
     
-    /* Sections */
     .section {
       margin-bottom: 5mm;
       border: 1px solid #e5e7eb;
@@ -171,8 +167,6 @@ function generateReceiptHtml(repair: any): string {
       color: white;
       background: #374151;
       padding: 2mm 3mm;
-      text-transform: uppercase;
-      letter-spacing: normal;
     }
     
     .section-content {
@@ -180,7 +174,6 @@ function generateReceiptHtml(repair: any): string {
       background: #f9fafb;
     }
     
-    /* Data table */
     .data-table {
       width: 100%;
       border-collapse: collapse;
@@ -203,7 +196,6 @@ function generateReceiptHtml(repair: any): string {
       font-weight: 500;
     }
     
-    /* Problem box */
     .problem-box {
       background: #fef3c7;
       border: 1px solid #fcd34d;
@@ -226,7 +218,6 @@ function generateReceiptHtml(repair: any): string {
       color: #78350f;
     }
     
-    /* Two columns */
     .two-columns {
       display: flex;
       gap: 4mm;
@@ -236,7 +227,6 @@ function generateReceiptHtml(repair: any): string {
       flex: 1;
     }
     
-    /* Info box */
     .info-box {
       background: #eff6ff;
       border: 1px solid #93c5fd;
@@ -262,7 +252,6 @@ function generateReceiptHtml(repair: any): string {
       margin-bottom: 1mm;
     }
     
-    /* Footer */
     .footer {
       margin-top: 6mm;
       padding-top: 4mm;
@@ -276,7 +265,6 @@ function generateReceiptHtml(repair: any): string {
       margin-bottom: 4mm;
     }
     
-    /* Barcode SVG */
     .barcode-svg {
       max-width: 60mm;
       height: auto;
@@ -287,13 +275,11 @@ function generateReceiptHtml(repair: any): string {
         print-color-adjust: exact;
         -webkit-print-color-adjust: exact;
       }
-      
       .no-print {
         display: none !important;
       }
     }
     
-    /* Print button */
     .print-button {
       position: fixed;
       top: 10mm;
@@ -337,7 +323,7 @@ function generateReceiptHtml(repair: any): string {
     
     <!-- Tytuł dokumentu -->
     <div class="document-title">
-      <h2>Potwierdzenie przyjęcia urządzenia do serwisu</h2>
+      <h2>POTWIERDZENIE PRZYJĘCIA URZĄDZENIA DO SERWISU</h2>
       <div class="date">Data zgłoszenia: ${formatDate(repair.created_at)}</div>
     </div>
     
@@ -345,7 +331,7 @@ function generateReceiptHtml(repair: any): string {
     <div class="two-columns">
       <div class="column">
         <div class="section">
-          <div class="section-title">Dane klienta</div>
+          <div class="section-title">DANE KLIENTA</div>
           <div class="section-content">
             <table class="data-table">
               <tr>
@@ -377,7 +363,7 @@ function generateReceiptHtml(repair: any): string {
       
       <div class="column">
         <div class="section">
-          <div class="section-title">Dane urządzenia</div>
+          <div class="section-title">DANE URZĄDZENIA</div>
           <div class="section-content">
             <table class="data-table">
               <tr>
@@ -406,7 +392,7 @@ function generateReceiptHtml(repair: any): string {
     
     <!-- Opis problemu -->
     <div class="section">
-      <div class="section-title">Opis zgłoszonego problemu</div>
+      <div class="section-title">OPIS ZGŁOSZONEGO PROBLEMU</div>
       <div class="section-content">
         <div class="problem-box">
           <h4>Opis usterki podany przez klienta:</h4>
