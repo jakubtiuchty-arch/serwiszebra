@@ -2749,21 +2749,22 @@ Zależy od przyczyny: czyszczenie mechanizmu 150-360 zł, wymiana wałka 150-290
   {
     slug: 'kalibracja-drukarki-zebra-poradnik-krok-po-kroku',
     title: 'Kalibracja drukarki Zebra - kompletny poradnik krok po kroku',
-    excerpt: 'Drukarka Zebra drukuje na niewłaściwym miejscu lub wypluwa puste etykiety? Prawdopodobnie potrzebuje kalibracji. Poznaj wszystkie metody kalibracji dla różnych modeli Zebra.',
+    excerpt: 'Jak skalibrować drukarkę Zebra? Przytrzymaj FEED 5 sekund (ZD420/ZD421) lub puść po 2 mignięciach (GK420). Poznaj wszystkie metody kalibracji dla różnych modeli.',
     coverImage: '/blog/kalibracja-drukarki-zebra-krok-po-kroku.jpeg',
     author: {
       name: 'Zespół TAKMA',
-      role: 'Certyfikowani technicy Zebra'
+      role: 'Certyfikowani technicy Zebra z 25-letnim doświadczeniem'
     },
-    publishedAt: '2025-12-01',
+    publishedAt: '2026-01-20',
+    updatedAt: '2026-01-26',
     readingTime: 12,
     deviceType: 'drukarki',
     subDeviceType: 'etykiet',
     category: 'poradniki',
-    tags: ['kalibracja', 'sensor', 'gap', 'black mark', 'etykiety', 'GK420', 'ZD420', 'ZD621', 'ZT411', 'auto-kalibracja', 'Smart Calibration', 'Zebra Setup Utilities'],
+    tags: ['kalibracja', 'sensor', 'gap', 'black mark', 'etykiety', 'GK420', 'ZD420', 'ZD421', 'ZD621', 'ZT411', 'auto-kalibracja', 'Smart Calibration', 'Zebra Setup Utilities', 'FEED', 'puste etykiety'],
     seo: {
-      metaTitle: 'Kalibracja drukarki Zebra - poradnik krok po kroku [2026]',
-      metaDescription: 'Jak skalibrować drukarkę Zebra? Poradnik dla GK420, ZD420, ZD621, ZT411. Auto-kalibracja przyciskiem, Smart Calibration, Zebra Setup Utilities. Drukuje puste etykiety? Pomija? Napraw!',
+      metaTitle: 'Jak skalibrować drukarkę Zebra? Instrukcja krok po kroku [2026]',
+      metaDescription: 'Kalibracja Zebra: FEED 5 sek. (ZD420/ZD421) lub 2 mignięcia (GK420). Drukuje puste etykiety? Pomija? Napraw w 2 minuty! Instrukcja + video.',
       keywords: [
         // Główne frazy
         'kalibracja drukarki zebra', 
@@ -2825,9 +2826,59 @@ Zależy od przyczyny: czyszczenie mechanizmu 150-360 zł, wymiana wałka 150-290
         'po zmianie etykiet zebra źle drukuje',
         'zebra nie rozpoznaje nowych etykiet',
         'kalibracja zebra po wymianie rolki'
+      ],
+      faqSchema: [
+        {
+          question: 'Jak skalibrować drukarkę Zebra ZD421 krok po kroku?',
+          answer: 'Załaduj etykiety i zamknij pokrywę, przytrzymaj przycisk FEED przez 5 sekund, puść gdy drukarka zacznie wysuwać etykiety, poczekaj aż drukarka się zatrzyma. Cały proces trwa około 30 sekund.'
+        },
+        {
+          question: 'Ile trwa kalibracja drukarki Zebra?',
+          answer: 'Auto-kalibracja trwa 30 sekund do 2 minut w zależności od modelu. Drukarka wysunie 3-5 etykiet podczas procesu. Kalibracja ręczna przez Zebra Setup Utilities może zająć 5-10 minut.'
+        },
+        {
+          question: 'Czy kalibracja drukarki Zebra kasuje ustawienia?',
+          answer: 'Nie, kalibracja mediów nie kasuje innych ustawień drukarki (prędkość druku, temperatura głowicy, ustawienia sieciowe). Kalibracja aktualizuje tylko parametry rozpoznawania etykiet.'
+        },
+        {
+          question: 'Dlaczego drukarka Zebra drukuje puste etykiety po kalibracji?',
+          answer: 'Najczęstsze przyczyny: 1) Ribbon załadowany odwrotnie - sprawdź stronę barwiącą, 2) Używasz etykiet termicznych z ustawieniem termo-transfer, 3) Sensor zabrudzony kurzem - oczyść sprężonym powietrzem.'
+        },
+        {
+          question: 'Co oznacza błąd Media Out po kalibracji Zebra?',
+          answer: 'Błąd Media Out po kalibracji oznacza, że sensor nie wykrywa etykiet. Sprawdź czy etykiety są prawidłowo załadowane, typ sensora (Gap vs Black Mark) oraz czystość sensora. Dla transparentnych etykiet użyj kalibracji ręcznej.'
+        },
+        {
+          question: 'Dlaczego Zebra drukuje co drugą etykietę?',
+          answer: 'Drukowanie co drugą etykietę oznacza nieprawidłową długość etykiety w ustawieniach. Wykonaj auto-kalibrację (FEED 5 sek.) lub ustaw ręcznie długość etykiety w sterowniku: Preferencje drukarki → Opcje → Label Length.'
+        },
+        {
+          question: 'Jak często trzeba kalibrować drukarkę Zebra?',
+          answer: 'Kalibrację wykonuj przy każdej zmianie typu/rozmiaru etykiet, po założeniu rolki od nowego producenta, po resecie do ustawień fabrycznych, po wymianie głowicy lub wałka. Przy tych samych etykietach - co 5-10 rolek.'
+        },
+        {
+          question: 'Jak skalibrować Zebra GK420d przyciskiem?',
+          answer: 'Wyłącz drukarkę, przytrzymaj przycisk FEED, włącz drukarkę trzymając FEED, obserwuj diodę i puść po 2 mignięciach. Drukarka wykona kalibrację automatycznie. Uwaga: nie trzymaj dłużej niż 5-6 mignięć - to resetuje ustawienia fabryczne.'
+        }
       ]
     },
     content: `
+> **🎯 Szybka odpowiedź:** Aby skalibrować drukarkę Zebra, **przytrzymaj przycisk FEED przez 5 sekund** (modele ZD420, ZD421, ZD620, ZD621) lub włącz drukarkę trzymając FEED i **puść po 2 mignięciach diody** (modele GK420, GX420). Drukarka automatycznie wykryje typ i rozmiar etykiet. Cały proces trwa 30 sekund.
+
+---
+
+## TL;DR - Kalibracja w pigułce
+
+| Model drukarki | Metoda kalibracji | Czas |
+|----------------|-------------------|------|
+| **ZD420, ZD421, ZD620, ZD621** | Przytrzymaj FEED **5 sekund** | 30 sek |
+| **GK420d/t, GX420d/t** | Włącz trzymając FEED, puść po **2 mignięciach** | 30 sek |
+| **ZT230, ZT411, ZT610** | Menu → Media → **Calibrate** | 1 min |
+
+**90% problemów z kalibracją** rozwiązuje samo przytrzymanie przycisku FEED. Jeśli to nie pomoże - czytaj dalej.
+
+---
+
 ## Czym jest kalibracja drukarki i dlaczego jest ważna?
 
 Kalibracja to proces, podczas którego drukarka Zebra **uczy się rozpoznawać** używane etykiety. Drukarka musi wiedzieć:
@@ -3119,23 +3170,48 @@ Jako **autoryzowany partner serwisowy Zebra** oferujemy:
 
 ## FAQ - Najczęściej zadawane pytania
 
+### Jak skalibrować drukarkę Zebra ZD421 krok po kroku?
+1. Załaduj etykiety i zamknij pokrywę
+2. **Przytrzymaj przycisk FEED przez 5 sekund**
+3. Puść gdy drukarka zacznie wysuwać etykiety
+4. Poczekaj aż drukarka się zatrzyma - kalibracja zakończona!
+Cały proces trwa około 30 sekund.
+
+### Ile trwa kalibracja drukarki Zebra?
+**Auto-kalibracja trwa 30 sekund do 2 minut** w zależności od modelu. Drukarka wysunie 3-5 etykiet podczas procesu. Kalibracja ręczna przez Zebra Setup Utilities może zająć 5-10 minut.
+
+### Czy kalibracja drukarki Zebra kasuje ustawienia?
+**Nie**, kalibracja mediów nie kasuje innych ustawień drukarki (prędkość druku, temperatura głowicy, ustawienia sieciowe). Kalibracja aktualizuje tylko parametry rozpoznawania etykiet.
+
+### Dlaczego drukarka Zebra drukuje puste etykiety po kalibracji?
+Najczęstsze przyczyny: 1) **Ribbon załadowany odwrotnie** - sprawdź stronę barwiącą, 2) Używasz etykiet termicznych z ustawieniem termo-transfer, 3) Sensor zabrudzony kurzem - oczyść sprężonym powietrzem.
+
+### Co oznacza błąd "Media Out" po kalibracji Zebra?
+Błąd "Media Out" po kalibracji oznacza, że **sensor nie wykrywa etykiet**. Sprawdź: 1) Czy etykiety są prawidłowo załadowane, 2) Typ sensora (Gap vs Black Mark), 3) Czystość sensora. Dla transparentnych etykiet użyj kalibracji ręcznej.
+
+### Dlaczego Zebra drukuje co drugą etykietę?
+Drukowanie co drugą etykietę oznacza **nieprawidłową długość etykiety** w ustawieniach. Wykonaj auto-kalibrację (FEED 5 sek.) lub ustaw ręcznie długość etykiety w sterowniku: Preferencje drukarki → Opcje → Label Length.
+
 ### Jak często trzeba kalibrować drukarkę Zebra?
-Kalibrację wykonuj przy każdej zmianie typu lub rozmiaru etykiet. Jeśli używasz ciągle tych samych etykiet od tego samego producenta - kalibracja przy każdej nowej rolce nie jest konieczna, ale zalecana.
+Kalibrację wykonuj: 1) Przy **każdej zmianie typu/rozmiaru** etykiet, 2) Po założeniu rolki od **nowego producenta**, 3) Po **resecie** do ustawień fabrycznych, 4) Po **wymianie głowicy** lub wałka. Przy tych samych etykietach - co 5-10 rolek.
 
-### Czy kalibracja kasuje ustawienia drukarki?
-Nie, sama kalibracja mediów nie kasuje innych ustawień (prędkość, temperatura, sieć). Kalibracja uczy drukarkę tylko parametrów etykiet.
-
-### Dlaczego drukarka nie rozpoznaje moich etykiet?
-Najczęstsze przyczyny: transparentne podłoże (sensor tego nie widzi), bardzo cienkie etykiety, etykiety z nietypowym materiałem. Spróbuj kalibracji ręcznej z podaniem dokładnych wymiarów.
-
-### Czy mogę używać etykiet bez przerw (continuous)?
-Tak, ale musisz ustawić drukarkę w tryb "Continuous" i podać dokładną długość etykiety w sterowniku lub kodzie ZPL. Drukarka nie będzie szukać przerwy.
+### Jak skalibrować Zebra GK420d przyciskiem?
+1. **Wyłącz** drukarkę
+2. **Przytrzymaj** przycisk FEED
+3. **Włącz** drukarkę trzymając FEED
+4. Obserwuj diodę - **puść po 2 mignięciach**
+5. Drukarka wykona kalibrację automatycznie
+**Uwaga:** Nie trzymaj dłużej niż 5-6 mignięć - to resetuje ustawienia fabryczne!
 
 ### Co zrobić gdy Smart Calibration nie działa?
-1. Oczyść sensor sprężonym powietrzem
-2. Spróbuj innego rodzaju etykiet (dla testu)
-3. Wykonaj kalibrację przez Zebra Setup Utilities
-4. Jeśli nadal nie działa - sensor może wymagać wymiany
+1. **Oczyść sensor** sprężonym powietrzem lub alkoholem IPA
+2. Spróbuj **innych etykiet** (dla testu)
+3. Wykonaj kalibrację przez **Zebra Setup Utilities**
+4. Sprawdź **pozycję sensora** (w drukarkach przemysłowych)
+5. Jeśli nadal nie działa - sensor może wymagać **wymiany w serwisie** (koszt 150-550 zł)
+
+### Gdzie jest sensor w drukarce Zebra?
+Sensor znajduje się **pod ścieżką etykiet**, zwykle jest to żółta lub zielona plastikowa część. W drukarkach biurkowych (ZD420, GK420) sensor jest stały. W drukarkach przemysłowych (ZT411, ZT610) **sensor jest ruchomy** i można go przesuwać dla wąskich etykiet.
 `
   },
   {
