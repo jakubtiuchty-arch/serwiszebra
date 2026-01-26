@@ -35,6 +35,30 @@ export async function GET(
       return new NextResponse('Brak dostępu do tego zgłoszenia', { status: 403 })
     }
 
+    // Pobierz dane z profilu użytkownika (jeśli istnieje user_id)
+    let profile = null
+    if (repair.user_id) {
+      const { data: profileData } = await supabase
+        .from('profiles')
+        .select('company_name, nip, street, city, postal_code, phone')
+        .eq('id', repair.user_id)
+        .single()
+      profile = profileData
+    }
+
+    // Połącz dane z repair i profilu (repair ma priorytet)
+    const customerData = {
+      firstName: repair.first_name,
+      lastName: repair.last_name,
+      company: repair.company || profile?.company_name || null,
+      nip: repair.nip || profile?.nip || null,
+      street: repair.street || profile?.street || null,
+      city: repair.city || profile?.city || null,
+      zipCode: repair.zip_code || profile?.postal_code || null,
+      phone: repair.phone || profile?.phone || null,
+      email: repair.email
+    }
+
     const shortId = repair.id.split('-')[0].toUpperCase()
     const amount = repair.final_price || repair.estimated_price || 0
     const today = new Date().toLocaleDateString('pl-PL')
@@ -239,12 +263,13 @@ export async function GET(
       </div>
       <div class="party">
         <div class="party-title">Nabywca</div>
-        <div class="party-name">${repair.first_name} ${repair.last_name}</div>
-        ${repair.company ? `<div class="party-text"><strong>${repair.company}</strong></div>` : ''}
-        ${repair.street ? `<div class="party-text">${repair.street}</div>` : ''}
-        <div class="party-text">${repair.zip_code || ''} ${repair.city || ''}</div>
-        ${repair.nip ? `<div class="party-text"><strong>NIP: ${repair.nip}</strong></div>` : ''}
-        <div class="party-text">Email: ${repair.email}</div>
+        ${customerData.company ? `<div class="party-name">${customerData.company}</div>` : `<div class="party-name">${customerData.firstName} ${customerData.lastName}</div>`}
+        ${customerData.company ? `<div class="party-text">${customerData.firstName} ${customerData.lastName}</div>` : ''}
+        ${customerData.street ? `<div class="party-text">${customerData.street}</div>` : ''}
+        ${(customerData.zipCode || customerData.city) ? `<div class="party-text">${customerData.zipCode || ''} ${customerData.city || ''}</div>` : ''}
+        ${customerData.nip ? `<div class="party-text"><strong>NIP: ${customerData.nip}</strong></div>` : ''}
+        <div class="party-text">Email: ${customerData.email}</div>
+        ${customerData.phone ? `<div class="party-text">Tel: ${customerData.phone}</div>` : ''}
       </div>
     </div>
 
