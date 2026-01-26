@@ -2,13 +2,20 @@ import jsPDF from 'jspdf'
 import { format } from 'date-fns'
 import { pl } from 'date-fns/locale'
 
-// Funkcja zamieniająca polskie znaki na ASCII (jsPDF nie obsługuje polskich znaków)
+// Funkcja zamieniająca polskie znaki na ASCII (jsPDF helvetica nie obsługuje polskich znaków)
 function removeDiacritics(text: string): string {
   const polishChars: Record<string, string> = {
     'ą': 'a', 'ć': 'c', 'ę': 'e', 'ł': 'l', 'ń': 'n', 'ó': 'o', 'ś': 's', 'ź': 'z', 'ż': 'z',
     'Ą': 'A', 'Ć': 'C', 'Ę': 'E', 'Ł': 'L', 'Ń': 'N', 'Ó': 'O', 'Ś': 'S', 'Ź': 'Z', 'Ż': 'Z'
   }
   return text.replace(/[ąćęłńóśźżĄĆĘŁŃÓŚŹŻ]/g, char => polishChars[char] || char)
+}
+
+// Funkcja formatująca typ urządzenia z wielkiej litery
+function formatDeviceType(type: string | null | undefined): string {
+  if (!type) return 'Terminal'
+  const formatted = type.charAt(0).toUpperCase() + type.slice(1).toLowerCase()
+  return removeDiacritics(formatted)
 }
 
 interface ReceiptData {
@@ -156,7 +163,7 @@ export function generateReceiptPDF(data: ReceiptData): Buffer {
   }
   
   doc.text('Typ urzadzenia:', 112, yPos + 19)
-  doc.text(removeDiacritics(deviceType || 'Drukarka etykiet'), 145, yPos + 19)
+  doc.text(formatDeviceType(deviceType), 145, yPos + 19)
   
   doc.text('Typ naprawy:', 112, yPos + 26)
   const repairTypeLabel = repairType === 'warranty' ? 'Gwarancyjna' : 'Platna'
