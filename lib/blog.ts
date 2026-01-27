@@ -1288,7 +1288,7 @@ Jako autoryzowany partner Zebra oferujemy pełne wsparcie w doborze konfiguracji
     tags: ['cennik serwisu zebra', 'ile kosztuje naprawa', 'naprawa drukarki zebra', 'wymiana głowicy cena', 'serwis drukarek zebra', 'koszt naprawy', 'ZD420', 'ZD621', 'ZT411', 'GK420', 'cena serwisu'],
     seo: {
       metaTitle: 'Ile kosztuje naprawa drukarki Zebra? Cennik serwisu 2026',
-      metaDescription: 'Cennik napraw drukarek Zebra 2026: wymiana głowicy 250-800 zł, naprawa mechanizmu 150-400 zł, diagnostyka BEZPŁATNA. ZD420, ZD621, ZT411. Sprawdź ceny!',
+      metaDescription: 'Cennik napraw drukarek Zebra 2026: wymiana głowicy od 430 zł netto, naprawa mechanizmu 180-650 zł, diagnostyka BEZPŁATNA. ZD420, ZD621, ZT411.',
       keywords: [
         'ile kosztuje naprawa drukarki zebra',
         'cennik naprawy drukarki zebra',
@@ -1307,11 +1307,11 @@ Jako autoryzowany partner Zebra oferujemy pełne wsparcie w doborze konfiguracji
       faqSchema: [
         {
           question: 'Ile kosztuje naprawa drukarki Zebra?',
-          answer: 'Koszt naprawy drukarki Zebra zależy od typu usterki. Orientacyjne ceny: wymiana głowicy 250-800 zł, naprawa mechanizmu 150-400 zł, wymiana wałka dociskowego 100-200 zł, naprawa płyty głównej 300-600 zł. Diagnostyka w autoryzowanym serwisie TAKMA jest bezpłatna.'
+          answer: 'Koszt naprawy drukarki Zebra zależy od typu usterki (ceny netto). Drukarki biurkowe: wymiana głowicy 430-890 zł, naprawa mechanizmu 180-320 zł, naprawa płyty głównej 350-580 zł. Drukarki przemysłowe: wymiana głowicy 1600-5020 zł, naprawa mechanizmu 300-650 zł, naprawa płyty głównej 800-1540 zł. Diagnostyka bezpłatna. Gwarancja na głowicę: 6 miesięcy.'
         },
         {
           question: 'Ile kosztuje wymiana głowicy w drukarce Zebra?',
-          answer: 'Koszt wymiany głowicy zależy od modelu: ZD220/ZD230 - 250-360 zł, ZD420/ZD421 - 330-430 zł, ZD620/ZD621 - 400-530 zł, ZT411/ZT421 - 580-800 zł. Cena obejmuje oryginalną głowicę i usługę wymiany z 12-miesięczną gwarancją.'
+          answer: 'Koszt wymiany głowicy zależy od modelu (ceny netto): ZD420 203dpi - 430-480 zł, ZD421 203dpi - 450-480 zł, ZD621 203dpi - 460-490 zł. Głowice 300dpi: 820-890 zł. Drukarki przemysłowe: ZT411 - 1600-5020 zł, ZT421 - 1800-2800 zł, ZT610 - 1950-2800 zł. Gwarancja na głowicę: 6 miesięcy.'
         },
         {
           question: 'Czy diagnostyka drukarki Zebra jest płatna?',
@@ -1327,15 +1327,15 @@ Jako autoryzowany partner Zebra oferujemy pełne wsparcie w doborze konfiguracji
         },
         {
           question: 'Jakie są koszty naprawy drukarki Zebra ZD420/ZD421?',
-          answer: 'Typowe koszty naprawy ZD420/ZD421: wymiana głowicy 330-430 zł, wymiana wałka dociskowego 120-180 zł, naprawa mechanizmu 180-280 zł, naprawa płyty głównej 350-500 zł. Diagnostyka bezpłatna, 12 mies. gwarancji.'
+          answer: 'Typowe koszty naprawy ZD420/ZD421 (netto): wymiana głowicy 203dpi - 430-480 zł, głowica 300dpi - 820-890 zł, wymiana wałka dociskowego - 120-180 zł, naprawa mechanizmu - 180-280 zł, naprawa płyty głównej - 350-520 zł. Diagnostyka bezpłatna. Gwarancja na głowicę: 6 miesięcy.'
         },
         {
           question: 'Ile kosztuje naprawa drukarki przemysłowej Zebra ZT411?',
-          answer: 'Koszty naprawy ZT411/ZT421: wymiana głowicy 580-800 zł, naprawa mechanizmu 300-500 zł, naprawa płyty głównej 500-800 zł. Przy cenie nowej ZT411 (~8000 zł) naprawy są prawie zawsze opłacalne.'
+          answer: 'Koszty naprawy ZT411/ZT421/ZT610 (netto): wymiana głowicy 203dpi - 1600-1950 zł, głowica 300dpi - 1900-2800 zł, głowica 600dpi - 2800-5020 zł, naprawa mechanizmu - 300-650 zł, wymiana wałka - 200-390 zł, naprawa płyty głównej - 800-1540 zł. Gwarancja na głowicę: 6 miesięcy.'
         },
         {
           question: 'Czy serwis Zebra oferuje gwarancję na naprawy?',
-          answer: 'Tak, autoryzowany serwis TAKMA oferuje 12-miesięczną gwarancję na wszystkie naprawy i wymienione części. Używamy wyłącznie oryginalnych części Zebra.'
+          answer: 'Tak, autoryzowany serwis TAKMA oferuje gwarancję na wszystkie naprawy. Gwarancja na wymianę głowicy drukującej: 6 miesięcy. Gwarancja na pozostałe naprawy i części: 12 miesięcy. Używamy wyłącznie oryginalnych części Zebra.'
         },
         {
           question: 'Jak zamówić naprawę drukarki Zebra?',
@@ -1348,20 +1348,20 @@ Jako autoryzowany partner Zebra oferujemy pełne wsparcie w doborze konfiguracji
       ]
     },
     content: `
-> **🎯 Szybka odpowiedź:** Naprawa drukarki Zebra kosztuje od **150 zł** (drobne naprawy) do **800 zł** (wymiana głowicy w modelach przemysłowych). **Diagnostyka jest bezpłatna.** Najczęstsza naprawa - wymiana głowicy - kosztuje **250-450 zł** dla drukarek biurkowych i **500-800 zł** dla przemysłowych. Czas naprawy: 2-5 dni roboczych.
+> **🎯 Szybka odpowiedź:** Naprawa drukarki Zebra kosztuje od **180 zł netto** (drobne naprawy) do **5000+ zł** (wymiana głowicy 600dpi w modelach przemysłowych). **Diagnostyka jest bezpłatna.** Wymiana głowicy kosztuje **430-890 zł netto** dla drukarek biurkowych (ZD420/ZD621) i **1600-5020 zł netto** dla przemysłowych (ZT411/ZT610). Gwarancja na głowicę: 6 miesięcy. Czas naprawy: 2-5 dni roboczych.
 
 ## TL;DR - Cennik napraw drukarek Zebra 2026
 
 | Typ naprawy | Cena od-do | Czas naprawy |
 |-------------|------------|--------------|
 | **Diagnostyka** | BEZPŁATNA | 24-48h |
-| **Wymiana głowicy** | 250-800 zł | 1-3 dni |
+| **Wymiana głowicy** | 430-5020 zł netto | 1-3 dni |
 | **Naprawa mechanizmu** | 150-400 zł | 2-4 dni |
 | **Wymiana wałka dociskowego** | 100-250 zł | 1-2 dni |
 | **Naprawa płyty głównej** | 300-800 zł | 3-7 dni |
 | **Czyszczenie i konserwacja** | 80-150 zł | 1 dzień |
 
-*Ceny zawierają części i robociznę. 12 miesięcy gwarancji na naprawę.*
+*Ceny netto, zawierają części i robociznę. Gwarancja na głowicę: 6 mies., pozostałe naprawy: 12 mies.*
 
 ---
 
@@ -1369,18 +1369,18 @@ Jako autoryzowany partner Zebra oferujemy pełne wsparcie w doborze konfiguracji
 
 **Wymiana głowicy** to najczęstsza naprawa drukarek Zebra. Głowica drukująca zużywa się naturalnie po wydrukowaniu 1-4 milionów centymetrów.
 
-### Cennik wymiany głowicy wg modelu:
+### Cennik wymiany głowicy wg modelu (ceny netto):
 
-| Model drukarki | Typ | Cena głowicy | Usługa | **Razem** |
-|----------------|-----|--------------|--------|-----------|
-| ZD220, ZD230 | Biurkowa | 200-280 zł | 50-80 zł | **250-360 zł** |
-| ZD420, ZD421 | Biurkowa | 280-350 zł | 50-80 zł | **330-430 zł** |
-| ZD620, ZD621 | Biurkowa premium | 350-450 zł | 50-80 zł | **400-530 zł** |
-| GK420d/t, GX420 | Biurkowa (legacy) | 250-320 zł | 50-80 zł | **300-400 zł** |
-| ZT230 | Przemysłowa | 400-500 zł | 80-100 zł | **480-600 zł** |
-| ZT411, ZT421 | Przemysłowa | 500-700 zł | 80-100 zł | **580-800 zł** |
-| ZT610, ZT620 | Przemysłowa hi-end | 600-900 zł | 100-150 zł | **700-1050 zł** |
-| ZQ520, ZQ630 | Mobilna | 350-500 zł | 80-100 zł | **430-600 zł** |
+| Model drukarki | Typ | 203 dpi | 300 dpi | 600 dpi |
+|----------------|-----|---------|---------|---------|
+| ZD420 | Biurkowa | **430-480 zł** | **820-850 zł** | - |
+| ZD421 | Biurkowa | **450-480 zł** | **830-890 zł** | - |
+| ZD621 | Biurkowa premium | **460-490 zł** | **830-890 zł** | - |
+| ZT411 | Przemysłowa | **1 600 zł** | **1 900 zł** | **5 020 zł** |
+| ZT421 | Przemysłowa | **1 800 zł** | **2 800 zł** | **2 800 zł** |
+| ZT610 | Przemysłowa hi-end | **1 950 zł** | **2 200 zł** | **2 800 zł** |
+
+*Ceny zawierają oryginalną głowicę Zebra i usługę wymiany. Gwarancja: 6 miesięcy.*
 
 ### Kiedy wymiana głowicy jest konieczna?
 
@@ -1421,11 +1421,13 @@ Jako autoryzowany partner Zebra oferujemy pełne wsparcie w doborze konfiguracji
 
 | Naprawa | ZD420 | ZD421 | ZD621 |
 |---------|-------|-------|-------|
-| Wymiana głowicy 203dpi | 330-380 zł | 350-400 zł | 400-450 zł |
-| Wymiana głowicy 300dpi | 400-450 zł | 420-480 zł | 480-530 zł |
+| Wymiana głowicy 203dpi | 430-480 zł | 450-480 zł | 460-490 zł |
+| Wymiana głowicy 300dpi | 820-850 zł | 830-890 zł | 830-890 zł |
 | Naprawa mechanizmu | 180-280 zł | 180-280 zł | 200-320 zł |
 | Wymiana wałka | 120-180 zł | 120-180 zł | 140-200 zł |
 | Naprawa płyty głównej | 350-500 zł | 380-520 zł | 420-580 zł |
+
+*Ceny netto. Gwarancja na wymianę głowicy: 6 miesięcy.*
 
 **Powiązane:** [Kody błędów ZD420/ZD421 - diagnostyka LED](/blog/kody-bledow-zebra-zd420-zd421-diody-led)
 
@@ -1433,11 +1435,14 @@ Jako autoryzowany partner Zebra oferujemy pełne wsparcie w doborze konfiguracji
 
 | Naprawa | ZT411 | ZT421 | ZT610 |
 |---------|-------|-------|-------|
-| Wymiana głowicy 203dpi | 580-700 zł | 620-750 zł | 700-850 zł |
-| Wymiana głowicy 300dpi | 700-850 zł | 750-900 zł | 850-1050 zł |
-| Wymiana głowicy 600dpi | 1200-1500 zł | 1300-1600 zł | 1500-1800 zł |
+| Wymiana głowicy 203dpi | 1 600 zł | 1 800 zł | 1 950 zł |
+| Wymiana głowicy 300dpi | 1 900 zł | 2 800 zł | 2 200 zł |
+| Wymiana głowicy 600dpi | 5 020 zł | 2 800 zł | 2 800 zł |
 | Naprawa mechanizmu | 300-500 zł | 320-550 zł | 400-650 zł |
-| Naprawa płyty głównej | 500-800 zł | 550-850 zł | 650-950 zł |
+| Wymiana wałka | 200-290 zł | 280-390 zł | 200-290 zł |
+| Naprawa płyty głównej | 800-1540 zł | 800-1540 zł | 800-1540 zł |
+
+*Ceny netto. Gwarancja na wymianę głowicy: 6 miesięcy.*
 
 ### Drukarki mobilne ZQ520/ZQ620/ZQ630:
 
@@ -1493,7 +1498,7 @@ Jako autoryzowany partner Zebra oferujemy pełne wsparcie w doborze konfiguracji
 - ✅ Oryginalne części zamienne Zebra
 - ✅ Robocizna
 - ✅ Kalibracja i testy
-- ✅ **12 miesięcy gwarancji**
+- ✅ **Gwarancja** (głowica: 6 mies., pozostałe: 12 mies.)
 - ✅ Transport kurierski (odbiór + zwrot)
 
 ---
@@ -1517,7 +1522,7 @@ Jeśli masz wiele drukarek lub zależy Ci na przewidywalnych kosztach, rozważ [
 
 Koszt zależy od typu usterki:
 - **Drobne naprawy** (czyszczenie, kalibracja): 80-150 zł
-- **Wymiana głowicy**: 250-800 zł (zależnie od modelu)
+- **Wymiana głowicy**: 430-5020 zł netto (zależnie od modelu)
 - **Naprawa mechanizmu**: 150-400 zł
 - **Naprawa elektroniki**: 300-800 zł
 
@@ -1536,23 +1541,28 @@ Diagnostyka jest **bezpłatna**.
 
 ### Czy dostanę gwarancję na naprawę?
 
-Tak, udzielamy **12 miesięcy gwarancji** na wszystkie naprawy i wymienione części. Używamy wyłącznie oryginalnych części Zebra.
+Tak, udzielamy gwarancję na wszystkie naprawy:
+- **Wymiana głowicy drukującej: 6 miesięcy**
+- **Pozostałe naprawy i części: 12 miesięcy**
+
+Używamy wyłącznie oryginalnych części Zebra.
 
 ### Jakie są koszty naprawy ZD420?
 
-Typowe koszty dla Zebra ZD420/ZD421:
-- Wymiana głowicy 203dpi: 330-380 zł
-- Wymiana głowicy 300dpi: 400-450 zł
+Typowe koszty dla Zebra ZD420/ZD421 (netto):
+- Wymiana głowicy 203dpi: 430-480 zł
+- Wymiana głowicy 300dpi: 820-890 zł
 - Naprawa mechanizmu: 180-280 zł
-- Naprawa płyty głównej: 350-500 zł
+- Naprawa płyty głównej: 350-520 zł
 
 ### Ile kosztuje naprawa drukarki przemysłowej ZT411?
 
-Drukarki przemysłowe:
-- Wymiana głowicy 203dpi: 580-700 zł
-- Wymiana głowicy 300dpi: 700-850 zł
+Drukarki przemysłowe (netto):
+- Wymiana głowicy 203dpi: 1 600 zł
+- Wymiana głowicy 300dpi: 1 900 zł
+- Wymiana głowicy 600dpi: 5 020 zł
 - Naprawa mechanizmu: 300-500 zł
-- Naprawa płyty głównej: 500-800 zł
+- Naprawa płyty głównej: 800-1540 zł
 
 Przy cenie nowej ZT411 (~8000 zł) naprawy są prawie zawsze opłacalne.
 
@@ -1573,7 +1583,7 @@ Skontaktuj się z nami - jako **Autoryzowany Serwis Zebra** oferujemy:
 
 - ✅ **Bezpłatna diagnostyka** i wycena
 - ✅ **Bezpłatny odbiór kurierem** w całej Polsce
-- ✅ **12 miesięcy gwarancji** na naprawę
+- ✅ **Gwarancja** na naprawę (głowica 6 mies., inne 12 mies.)
 - ✅ **Oryginalne części** Zebra
 - ✅ **2-5 dni** czas naprawy
 
