@@ -38,29 +38,28 @@ export async function GET(request: Request) {
     
     // Znajdź naprawy które:
     // 1. Mają status "wyslane" lub "zakonczone"
-    // 2. Zostały wysłane dokładnie 2 dni temu (używamy shipped_at)
+    // 2. Zostały wysłane co najmniej 2 dni temu (ale nie więcej niż 14 dni)
     // 3. Nie mają jeszcze wysłanej prośby o opinię (review_request_sent = false lub null)
     
     const twoDaysAgo = new Date()
     twoDaysAgo.setDate(twoDaysAgo.getDate() - 2)
-    twoDaysAgo.setHours(0, 0, 0, 0)
+    twoDaysAgo.setHours(23, 59, 59, 999) // Koniec dnia 2 dni temu
     
-    const threeDaysAgo = new Date()
-    threeDaysAgo.setDate(threeDaysAgo.getDate() - 3)
-    threeDaysAgo.setHours(23, 59, 59, 999)
+    const fourteenDaysAgo = new Date()
+    fourteenDaysAgo.setDate(fourteenDaysAgo.getDate() - 14)
+    fourteenDaysAgo.setHours(0, 0, 0, 0) // Początek dnia 14 dni temu
 
-    console.log(`📅 [CRON] Looking for repairs updated between ${threeDaysAgo.toISOString()} and ${twoDaysAgo.toISOString()}`)
+    console.log(`📅 [CRON] Looking for repairs updated between ${fourteenDaysAgo.toISOString()} and ${twoDaysAgo.toISOString()}`)
 
-    // Pobierz naprawy które zostały wysłane ~2 dni temu
-    // UWAGA: Używamy updated_at dopóki kolumna shipped_at nie zostanie dodana
-    // Po dodaniu kolumny shipped_at zmień na: .not('shipped_at', 'is', null) i filtruj po shipped_at
+    // Pobierz naprawy które zostały wysłane między 2 a 14 dni temu
+    // Szersze okno czasowe zapewnia że nie przegapimy żadnej naprawy
     const { data: repairs, error: fetchError } = await supabase
       .from('repair_requests')
       .select('id, email, first_name, last_name, device_model, repair_number, updated_at, status')
       .in('status', ['wyslane', 'zakonczone'])
       .or('review_request_sent.is.null,review_request_sent.eq.false')
-      .lt('updated_at', twoDaysAgo.toISOString())
-      .gt('updated_at', threeDaysAgo.toISOString())
+      .lte('updated_at', twoDaysAgo.toISOString())
+      .gte('updated_at', fourteenDaysAgo.toISOString())
 
     if (fetchError) {
       console.error('❌ [CRON] Database error:', fetchError)
