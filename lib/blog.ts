@@ -969,6 +969,9 @@ Tak, oba modele działają w zakresie od **-20°C do +50°C**. TC701 jest dodatk
 ### Ile waży Zebra TC501 z baterią rozszerzoną?
 Zebra TC501 z baterią standardową (5000 mAh) waży **273 g**, z baterią rozszerzoną (7240 mAh) – **303 g**. TC701 odpowiednio **284 g** i **314 g**
 
+### Gdzie kupić Zebra TC501 lub TC701 w Polsce?
+Jako **autoryzowany partner Zebra Technologies** oferujemy terminale TC501 i TC701 z pełnym wsparciem technicznym i gwarancją. [Skontaktuj się z nami](/kontakt) po indywidualną wycenę i pomoc w doborze konfiguracji. Oferujemy także **serwis gwarancyjny i pogwarancyjny** oraz [kontrakty serwisowe Zebra OneCare](/blog/kontrakty-serwisowe-zebra-onecare-przewodnik).
+
 ---
 
 ## Dostępne konfiguracje (Part Numbers)
