@@ -1656,7 +1656,7 @@ Skontaktuj się z nami - jako **Autoryzowany Serwis Zebra** oferujemy:
         },
         {
           question: 'Jak skalibrować drukarkę Zebra ZD421?',
-          answer: 'Kalibracja ZD421: Przytrzymaj przycisk FEED przez 5 sekund aż mignie zielona dioda. Drukarka wykona auto-kalibrację. Dla kalibracji manualnej użyj Zebra Setup Utilities.'
+          answer: 'Kalibracja SmartCal w ZD421: Przytrzymaj jednocześnie PAUSE + CANCEL przez 2 sekundy. Drukarka automatycznie wysunie kilka etykiet i wykalibruje czujniki. Po zakończeniu STATUS zaświeci na zielono.'
         },
         {
           question: 'Czy ZD420 i ZD421 mają tę samą głowicę drukującą?',
@@ -1672,7 +1672,7 @@ Skontaktuj się z nami - jako **Autoryzowany Serwis Zebra** oferujemy:
         },
         {
           question: 'Jaka jest żywotność głowicy w drukarce ZD420/ZD421?',
-          answer: 'Głowica w ZD420/ZD421 wytrzymuje 1-3 miliony cm wydruku. Żywotność zależy od jakości etykiet i ribbona oraz częstotliwości czyszczenia. Regularne czyszczenie co 500 etykiet wydłuża żywotność 2-3 krotnie.'
+          answer: 'Głowica w ZD420/ZD421 wytrzymuje 1-3 miliony cm wydruku. Żywotność zależy od jakości etykiet i ribbona oraz częstotliwości czyszczenia. Zgodnie z instrukcją Zebra: czyść głowicę co 5 rolek materiału lub przy każdej wymianie ribbonu.'
         },
         {
           question: 'Czy mogę samodzielnie wymienić głowicę w ZD420/ZD421?',
@@ -1711,8 +1711,20 @@ Skontaktuj się z nami - jako **Autoryzowany Serwis Zebra** oferujemy:
 | Wyświetlacz | Opcjonalnie | Standardowo |
 | Głowice | 203/300 dpi | 203/300 dpi |
 | Kompatybilność głowic | ✅ Te same | ✅ Te same |
+| Prędkość druku 203dpi | do 152 mm/s | do 152 mm/s |
+| Prędkość druku 300dpi | do 102 mm/s | do 102 mm/s |
+| Szerokość druku | do 104 mm | do 104 mm |
+| Maks. średnica rolki | 127 mm | 127 mm |
 
 > **💡 Ważne:** Głowice drukujące są **wymienne między ZD420 a ZD421** - ten sam numer części!
+
+### Wydruk testowy (raport konfiguracji)
+
+Aby wydrukować raport konfiguracji i sprawdzić ustawienia:
+1. Drukarka musi być włączona i gotowa (STATUS = zielony)
+2. **Przytrzymaj FEED + CANCEL przez 2 sekundy**
+3. Drukarka wydrukuje raport konfiguracji
+4. Sprawdź czy PRINT METHOD = THERMAL-TRANS (dla trybu z ribbonem)
 
 ---
 
@@ -1726,14 +1738,19 @@ Skontaktuj się z nami - jako **Autoryzowany Serwis Zebra** oferujemy:
 | Wolne miganie | Wstrzymana (PAUSE) | Naciśnij PAUSE |
 | Szybkie miganie | Pobieranie danych | Poczekaj |
 
-### 🔴 Czerwona dioda
+### 🔴 Czerwona dioda (STATUS)
 
 | Wzór | Błąd | Rozwiązanie |
 |------|------|-------------|
-| Pojedyncze miganie | **Media Out** | Załaduj etykiety lub [skalibruj](/blog/kalibracja-drukarki-zebra-poradnik-krok-po-kroku) |
-| Podwójne miganie | **Ribbon Out** | Sprawdź ribbon (strona matowa do głowicy) |
-| Ciągłe świecenie | **Head Open** | Zamknij pokrywę do kliknięcia |
-| Szybkie miganie | **Błąd krytyczny** | Sprawdź wyświetlacz, zrestartuj |
+| Ciągłe świecenie | **Otwarta pokrywa lub błąd** | Zamknij pokrywę – dociśnij aż zatrzaśnie |
+| Mruganie | **Brak materiału / błąd czujnika** | Załaduj etykiety lub wykonaj SmartCal (PAUSE+CANCEL 2 sek.) |
+
+### 🔴 Czerwona dioda (SUPPLIES)
+
+| Wzór | Błąd | Rozwiązanie |
+|------|------|-------------|
+| Ciągłe świecenie | **Brak materiału** | Załaduj nową rolkę etykiet |
+| Mruganie | **Ribbon Out** | Sprawdź ribbon (strona matowa do głowicy) lub wymień |
 
 ### 🟠 Pomarańczowa dioda
 
@@ -1752,10 +1769,17 @@ Skontaktuj się z nami - jako **Autoryzowany Serwis Zebra** oferujemy:
 
 **Najczęstszy problem** - drukarka nie rozpoznaje etykiet.
 
-**Rozwiązanie:**
-1. **Auto-kalibracja:** Przytrzymaj FEED przez 5 sekund
-2. **Wyczyść sensor:** Sprężone powietrze lub IPA 99%
-3. **Sprawdź ustawienia:** Menu → Media Setup → Media Type
+**Rozwiązanie - Kalibracja SmartCal (z oficjalnej instrukcji Zebra):**
+1. Upewnij się, że drukarka jest włączona (STATUS = zielony)
+2. **Przytrzymaj jednocześnie PAUSE + CANCEL przez 2 sekundy**
+3. Zwolnij przyciski
+4. Drukarka automatycznie wysunie kilka etykiet i wykalibruje czujniki
+5. Po zakończeniu STATUS zaświeci na zielono
+
+**Jeśli nie pomoże:**
+- Wyczyść czujnik gap/black mark sprężonym powietrzem lub IPA 99%
+- Sprawdź pozycję czujnika (dla etykiet z black mark przesuń nad znacznik)
+- Sprawdź ustawienia: Menu → Media Setup → Media Type (Gap/Black Mark/Continuous)
 
 📖 [Kalibracja drukarki Zebra krok po kroku](/blog/kalibracja-drukarki-zebra-poradnik-krok-po-kroku)
 
@@ -1785,6 +1809,15 @@ Skontaktuj się z nami - jako **Autoryzowany Serwis Zebra** oferujemy:
 | 5 | Wymień głowicę | ❌ Serwis |
 
 📖 [Blady wydruk - przyczyny i rozwiązania](/blog/blady-wydruk-drukarka-zebra-przyczyny-rozwiazania)
+
+### Harmonogram czyszczenia (z oficjalnej instrukcji Zebra)
+
+| Element | Częstotliwość |
+|---------|---------------|
+| Głowica drukująca | **Co 5 rolek materiału** lub przy wymianie ribbonu |
+| Ścieżka materiału | W razie potrzeby |
+| Czujniki | W razie problemów z detekcją |
+| Wałek napędowy | W razie potrzeby |
 
 ---
 
