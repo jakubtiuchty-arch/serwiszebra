@@ -1622,20 +1622,100 @@ Skontaktuj się z nami - jako **Autoryzowany Serwis Zebra** oferujemy:
       metaTitle: 'Serwis drukarki Zebra ZD420/ZD421 - diagnostyka i naprawa [2026]',
       metaDescription: 'Drukarka Zebra ZD420 lub ZD421 nie działa? Kompletna diagnostyka LED, najczęstsze usterki i rozwiązania. Kiedy naprawisz sam, a kiedy do serwisu? Cennik napraw.',
       keywords: [
+        // Główne frazy serwisowe
         'serwis drukarki zebra zd420',
         'serwis drukarki zebra zd421',
         'naprawa zebra zd420',
         'naprawa zebra zd421',
+        'serwis zd420', 'serwis zd421',
+        'naprawa zd420', 'naprawa zd421',
+        
+        // Warianty modeli
+        'serwis zebra zd420d', 'serwis zebra zd420t',
+        'serwis zebra zd421d', 'serwis zebra zd421t',
+        'naprawa zd420d', 'naprawa zd420t',
+        'naprawa zd421d', 'naprawa zd421t',
+        
+        // Problemy i błędy - ZD420
         'zebra zd420 nie drukuje',
-        'zebra zd421 nie drukuje',
+        'zebra zd420 nie drukuje etykiet',
         'zebra zd420 miga na czerwono',
-        'zebra zd421 kody błędów',
+        'zebra zd420 czerwona dioda',
         'zebra zd420 media out',
+        'zebra zd420 ribbon out',
+        'zebra zd420 head open',
+        'zebra zd420 blady wydruk',
+        'zebra zd420 białe linie',
+        'zebra zd420 zacina etykiety',
+        'zebra zd420 nie włącza się',
+        'zebra zd420 offline',
+        'zebra zd420 błąd',
+        'zebra zd420 problem',
+        
+        // Problemy i błędy - ZD421
+        'zebra zd421 nie drukuje',
+        'zebra zd421 nie drukuje etykiet',
+        'zebra zd421 miga na czerwono',
+        'zebra zd421 czerwona dioda',
+        'zebra zd421 kody błędów',
+        'zebra zd421 media out',
         'zebra zd421 ribbon out',
+        'zebra zd421 head open',
+        'zebra zd421 blady wydruk',
+        'zebra zd421 białe linie',
+        'zebra zd421 zacina etykiety',
+        'zebra zd421 nie włącza się',
+        'zebra zd421 offline',
+        'zebra zd421 błąd',
+        'zebra zd421 problem',
+        
+        // Naprawy i części
         'wymiana głowicy zd420',
+        'wymiana głowicy zd421',
+        'głowica zd420 cena',
+        'głowica zd421 cena',
+        'wymiana wałka zd420',
+        'wymiana wałka zd421',
+        
+        // Diagnostyka i kalibracja
         'kalibracja zebra zd420',
+        'kalibracja zebra zd421',
+        'kalibracja zd420', 'kalibracja zd421',
+        'smartcal zd420', 'smartcal zd421',
+        'reset zebra zd420',
         'reset zebra zd421',
-        'ile kosztuje naprawa zd421'
+        'reset fabryczny zd420',
+        'reset fabryczny zd421',
+        'diagnostyka zd420',
+        'diagnostyka zd421',
+        
+        // Koszty i pytania
+        'ile kosztuje naprawa zd420',
+        'ile kosztuje naprawa zd421',
+        'cennik napraw zd420',
+        'cennik napraw zd421',
+        'koszt wymiany głowicy zd420',
+        'koszt wymiany głowicy zd421',
+        
+        // Sterowniki i konfiguracja
+        'sterowniki zd420',
+        'sterowniki zd421',
+        'sterowniki zebra zd420 windows 11',
+        'sterowniki zebra zd421 windows 11',
+        'konfiguracja zd420',
+        'konfiguracja zd421',
+        
+        // Angielskie
+        'zebra zd420 troubleshooting',
+        'zebra zd421 troubleshooting',
+        'zebra zd420 repair',
+        'zebra zd421 repair',
+        'zebra zd420 service',
+        'zebra zd421 service',
+        'zebra zd420 not printing',
+        'zebra zd421 not printing',
+        'zebra zd420 error codes',
+        'zebra zd421 error codes'
       ],
       faqSchema: [
         {
