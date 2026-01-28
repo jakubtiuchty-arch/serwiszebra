@@ -1948,6 +1948,7 @@ Jeśli masz wiele drukarek ZD420/ZD421, rozważ **kontrakt serwisowy Zebra OneCa
       metaTitle: 'Najczęstsze awarie drukarek Zebra - TOP 10 problemów [2026]',
       metaDescription: 'TOP 10 awarii drukarek Zebra: zużyta głowica, ribbon out, błąd kalibracji, zacięcia. Które naprawisz sam? Kiedy do serwisu? Diagnostyka + rozwiązania.',
       keywords: [
+        // Główne frazy
         'najczęstsze awarie drukarek zebra',
         'problemy z drukarką zebra',
         'awarie drukarki zebra',
@@ -1958,11 +1959,69 @@ Jeśli masz wiele drukarek ZD420/ZD421, rozważ **kontrakt serwisowy Zebra OneCa
         'naprawa drukarki zebra',
         'drukarka zebra błędy',
         'zebra printer problems',
+        
+        // Objawy i błędy
         'drukarka zebra nie drukuje',
         'drukarka zebra blady wydruk',
         'drukarka zebra ribbon out',
         'drukarka zebra media out',
-        'drukarka zebra czerwona dioda'
+        'drukarka zebra czerwona dioda',
+        'drukarka zebra białe linie',
+        'drukarka zebra zacina etykiety',
+        'drukarka zebra nie włącza się',
+        'drukarka zebra offline',
+        'drukarka zebra dziwne dźwięki',
+        
+        // Long-tail z modelami biurkowymi - seria ZD
+        'awarie zebra zd421', 'problemy zebra zd421', 'usterki zd421',
+        'awarie zebra zd420', 'problemy zebra zd420', 'usterki zd420',
+        'awarie zebra zd621', 'problemy zebra zd621', 'usterki zd621',
+        'awarie zebra zd620', 'problemy zebra zd620',
+        'awarie zebra zd611', 'problemy zebra zd611',
+        'awarie zebra zd411', 'problemy zebra zd411',
+        'awarie zebra zd230', 'problemy zebra zd230',
+        'awarie zebra zd220', 'problemy zebra zd220',
+        
+        // Long-tail z modelami biurkowymi - starsza seria GK/GC
+        'awarie zebra gk420', 'problemy zebra gk420', 'usterki gk420',
+        'awarie zebra gk420d', 'awarie zebra gk420t',
+        'awarie zebra gc420', 'problemy zebra gc420',
+        'awarie zebra gx420', 'problemy zebra gx420',
+        'awarie zebra lp2844', 'problemy zebra lp2844',
+        
+        // Long-tail z modelami przemysłowymi - seria ZT
+        'awarie zebra zt411', 'problemy zebra zt411', 'usterki zt411',
+        'awarie zebra zt410', 'problemy zebra zt410',
+        'awarie zebra zt421', 'problemy zebra zt421',
+        'awarie zebra zt231', 'problemy zebra zt231',
+        'awarie zebra zt230', 'problemy zebra zt230',
+        'awarie zebra zt510', 'problemy zebra zt510',
+        'awarie zebra zt610', 'problemy zebra zt610',
+        'awarie zebra zt620', 'problemy zebra zt620',
+        
+        // Long-tail z modelami przemysłowymi - starsza seria
+        'awarie zebra 105sl', 'problemy zebra 105sl',
+        'awarie zebra s4m', 'problemy zebra s4m',
+        'awarie zebra 110xi4', 'problemy zebra xi4',
+        
+        // Long-tail z modelami mobilnymi - seria ZQ
+        'awarie zebra zq520', 'problemy zebra zq520',
+        'awarie zebra zq620', 'problemy zebra zq620',
+        'awarie zebra zq630', 'problemy zebra zq630',
+        'awarie drukarka mobilna zebra',
+        
+        // Pytania i intencje
+        'jakie są awarie drukarek zebra',
+        'co się psuje w drukarce zebra',
+        'dlaczego drukarka zebra nie działa',
+        'jak naprawić drukarkę zebra',
+        'ile kosztuje naprawa drukarki zebra',
+        'kiedy wymienić głowicę zebra',
+        
+        // Angielskie
+        'zebra printer faults', 'zebra printer errors',
+        'zebra printer troubleshooting', 'zebra printer repair',
+        'common zebra printer problems', 'zebra printer not working'
       ],
       faqSchema: [
         {
@@ -1996,6 +2055,14 @@ Jeśli masz wiele drukarek ZD420/ZD421, rozważ **kontrakt serwisowy Zebra OneCa
         {
           question: 'Kiedy drukarkę Zebra oddać do serwisu?',
           answer: 'Oddaj do serwisu gdy: białe linie mimo czyszczenia (zużyta głowica), drukarka się nie włącza, częste zacięcia mimo prawidłowego ładowania, uszkodzenia mechaniczne, problemy po zalaniu/upadku, potrzebujesz gwarancji na naprawę.'
+        },
+        {
+          question: 'Jak zapobiegać awariom drukarki Zebra?',
+          answer: 'Profilaktyka: 1) Czyść głowicę co 5 rolek materiału lub przy wymianie ribbonu, 2) Używaj oryginalnych materiałów eksploatacyjnych Zebra, 3) Regularnie kalibruj drukarkę po zmianie etykiet, 4) Trzymaj drukarkę w czystym, suchym miejscu (5-40°C), 5) Aktualizuj firmware.'
+        },
+        {
+          question: 'Jakie są najczęstsze awarie drukarek Zebra ZD420 i ZD421?',
+          answer: 'Najpopularniejsze modele biurkowe ZD420/ZD421 najczęściej mają: błąd Media Out (kalibracja SmartCal: PAUSE+CANCEL 2 sek.), Ribbon Out (sprawdź orientację ribbonu), blady wydruk (wyczyść głowicę IPA 99%), Head Open mimo zamkniętej pokrywy (wyczyść zatrzask). 60% problemów naprawisz sam.'
         }
       ]
     },
