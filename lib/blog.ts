@@ -1275,12 +1275,12 @@ Jako autoryzowany partner Zebra oferujemy pełne wsparcie w doborze konfiguracji
     slug: 'cennik-naprawy-drukarki-zebra-koszty-serwisu',
     title: 'Ile kosztuje naprawa drukarki Zebra? Cennik serwisu 2026',
     excerpt: 'Sprawdź aktualne ceny napraw drukarek Zebra: wymiana głowicy od 250 zł, naprawa mechanizmu od 150 zł, diagnostyka bezpłatna. Cennik serwisu dla ZD420, ZD621, ZT411, GK420.',
-    coverImage: '/blog/cennik-naprawy-drukarki-zebra.jpeg',
+    coverImage: '/blog/ile-kosztuje-naprawa-drukarki-zebra-cennik-2026.jpeg',
     author: {
       name: 'Zespół TAKMA',
       role: 'Autoryzowany Serwis Zebra'
     },
-    publishedAt: '2026-01-27',
+    publishedAt: '2026-01-28',
     readingTime: 10,
     deviceType: 'drukarki',
     subDeviceType: 'etykiet',
