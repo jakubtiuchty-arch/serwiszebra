@@ -554,22 +554,127 @@ Jako **autoryzowany serwis Zebra** (Wrocław) oferujemy:
       'hot swap bateria'
     ],
     seo: {
-      metaTitle: 'Zebra TC501 i Zebra TC701 – Nowe terminale mobilne z AI | Premiera 2026',
-      metaDescription: 'Zebra TC501/TC701: procesor Qualcomm Dragonwing z AI, Wi-Fi 7, 5G, wbudowany RFID, aparat 50 MP, skaner 30m. Specyfikacja, zastosowania i porównanie nowych terminali mobilnych.',
+      metaTitle: 'Zebra TC501 i TC701 - Specyfikacja, Cena, Premiera 2026 | AI Terminal',
+      metaDescription: 'Zebra TC501 i TC701: specyfikacja, cena, premiera 2026. Procesor AI Dragonwing, Wi-Fi 7, 5G, RFID, skaner 30m. Porównanie TC501 vs TC701. Gdzie kupić?',
       keywords: [
+        // Główne frazy - KRYTYCZNE dla pozycjonowania
+        'Zebra TC501',
+        'Zebra TC701',
+        'Zebra TC501 specyfikacja',
         'Zebra TC701 specyfikacja',
         'Zebra TC501 cena',
-        'terminal mobilny z RFID',
-        'komputer mobilny Android przemysłowy',
+        'Zebra TC701 cena',
+        'Zebra TC501 premiera',
+        'Zebra TC701 premiera',
+        'Zebra TC501 kupić',
+        'Zebra TC701 kupić',
+        'Zebra TC501 gdzie kupić',
+        'Zebra TC701 gdzie kupić',
+        
+        // Porównania
+        'Zebra TC501 vs TC701',
+        'TC501 vs TC701 porównanie',
+        'Zebra TC501 vs TC52',
+        'Zebra TC701 vs TC72',
+        'TC501 vs TC52 różnice',
+        'TC701 vs TC72 różnice',
+        
+        // Specyfikacje techniczne
+        'Zebra TC501 parametry',
+        'Zebra TC701 dane techniczne',
+        'Zebra TC501 Wi-Fi 7',
+        'Zebra TC701 5G',
+        'Zebra TC501 RFID',
+        'Zebra TC701 RFID UHF',
+        'Zebra TC501 skaner AC670',
+        'Zebra TC701 skaner 30m',
+        'Zebra TC501 procesor AI',
+        'Zebra TC701 Dragonwing',
+        'Zebra TC501 Android 15',
+        'Zebra TC701 Android 15',
+        'Zebra TC501 bateria hot swap',
+        'Zebra TC701 IP68',
+        
+        // Part numbers
+        'TC5010 part number',
+        'TC7010 part number',
+        'Zebra TC5010-041E2B0001-A6',
+        'Zebra TC7010-041E2B0001-A6',
+        
+        // Zastosowania
+        'terminal mobilny dla magazynu',
+        'terminal mobilny dla logistyki',
+        'terminal mobilny dla kuriera',
+        'komputer mobilny przemysłowy 2026',
+        'terminal z czytnikiem RFID',
+        'terminal mobilny z AI',
+        'komputer mobilny Wi-Fi 7',
+        'terminal 5G dla firm',
+        
+        // Cechy
+        'terminal mobilny z RFID wbudowanym',
         'skaner dalekiego zasięgu AC670',
         'urządzenie mobilne Wi-Fi 7',
         '5G mobile computer logistyka',
-        'wytrzymały smartfon IP68',
+        'terminal IP68 wytrzymały',
         'komputer mobilny z procesorem AI',
-        'Zebra TC7 series 2026',
-        'Dragonwing Q-6690',
-        'terminal dla magazynu',
-        'komputer mobilny dla kuriera'
+        'Qualcomm Dragonwing Q-6690',
+        'AMOLED 1500 nit terminal',
+        'hot swap bateria terminal',
+        
+        // Angielskie
+        'Zebra TC501 specs',
+        'Zebra TC701 specs',
+        'Zebra TC501 price',
+        'Zebra TC701 price',
+        'Zebra TC501 datasheet',
+        'Zebra TC701 datasheet',
+        'Zebra TC501 release date',
+        'Zebra TC701 release date',
+        'Zebra TC501 review',
+        'Zebra TC701 review'
+      ],
+      faqSchema: [
+        {
+          question: 'Co to jest Zebra TC501 i TC701?',
+          answer: 'Zebra TC501 i TC701 to najnowsze terminale mobilne (komputery przemysłowe) firmy Zebra Technologies z premierą w styczniu 2026. Wyposażone są w procesor AI Qualcomm Dragonwing, Wi-Fi 7, 5G, wbudowany czytnik RFID UHF i skaner dalekiego zasięgu AC670 (30m). TC501 jest dla handlu detalicznego, TC701 dla logistyki i chłodni.'
+        },
+        {
+          question: 'Ile kosztuje Zebra TC501 i TC701?',
+          answer: 'Ceny Zebra TC501 zaczynają się od około 5000-6000 PLN netto za wersję podstawową (8GB/128GB). Zebra TC701 kosztuje od około 6000-7500 PLN netto. Wersje z 12GB RAM, 256GB ROM i skanerem AC670 są droższe. Skontaktuj się z autoryzowanym partnerem Zebra po aktualną wycenę.'
+        },
+        {
+          question: 'Kiedy premiera Zebra TC501 i TC701?',
+          answer: 'Premiera Zebra TC501 i TC701 odbyła się w styczniu 2026 roku. Urządzenia są już dostępne do zamówienia u autoryzowanych partnerów Zebra w Polsce i Europie.'
+        },
+        {
+          question: 'Jakie są różnice między Zebra TC501 a TC701?',
+          answer: 'TC501 jest lżejszy (273g vs 284g), przeznaczony dla handlu detalicznego z odpornością na upadki z 2,44m. TC701 jest bardziej wytrzymały (upadki z 3,66m), odporny na temperatury od -30°C do +50°C, przeznaczony dla logistyki, chłodni i pracy na zewnątrz. Oba mają ten sam procesor, Wi-Fi 7, 5G i RFID.'
+        },
+        {
+          question: 'Czy Zebra TC501/TC701 ma wbudowany czytnik RFID?',
+          answer: 'Tak, po raz pierwszy w serii TC5/TC7 oba modele mają wbudowany czytnik RFID UHF o zasięgu do 2 metrów i prędkości ponad 200 tagów/sekundę. Obsługuje EPC Class 1 Gen2. Eliminuje to potrzebę zakupu dodatkowych nakładek RFID.'
+        },
+        {
+          question: 'Jaki procesor ma Zebra TC501 i TC701?',
+          answer: 'Oba modele wyposażone są w najnowszy procesor Qualcomm Dragonwing Q-6690 z 8 rdzeniami (do 2,9 GHz), dedykowanym silnikiem AI, 12 GB RAM i 256 GB pamięci. Jest 300% wydajniejszy niż poprzednia generacja TC52/TC72.'
+        },
+        {
+          question: 'Czy Zebra TC501/TC701 ma Wi-Fi 7?',
+          answer: 'Tak, oba modele mają Wi-Fi 7 (802.11be) z prędkością do 5764 Mbps - 2x szybciej niż Wi-Fi 6. Obsługują tri-band (2.4/5/6 GHz) i są kompatybilne z sieciami enterprise.'
+        },
+        {
+          question: 'Jaki skaner ma Zebra TC501/TC701?',
+          answer: 'Dostępne są 3 opcje skanerów: AC670 (zasięg do 30m, robi też kolorowe zdjęcia), SR560 (intensywne skanowanie 2D), SR500 (uniwersalny). Skaner AC670 to przełom - jednocześnie skanuje kod i robi zdjęcie z 30 metrów.'
+        },
+        {
+          question: 'Gdzie kupić Zebra TC501 lub TC701 w Polsce?',
+          answer: 'Zebra TC501 i TC701 można kupić u autoryzowanych partnerów Zebra w Polsce. TAKMA jako Premier Partner Zebra oferuje sprzedaż, wdrożenia, konfigurację floty, szkolenia i serwis gwarancyjny. Zadzwoń: +48 601 619 898.'
+        },
+        {
+          question: 'Czy Zebra TC501/TC701 zastępuje TC52/TC72?',
+          answer: 'Tak, Zebra TC501 jest następcą TC52/TC52x, a TC701 jest następcą TC72/TC72x. Nowe modele oferują 300% więcej mocy procesora, 3x więcej RAM, Wi-Fi 7 zamiast Wi-Fi 6, wbudowany RFID i lepsze aparaty. Są kompatybilne z akcesoriami poprzedników.'
+        }
       ]
     },
     content: `
