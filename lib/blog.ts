@@ -557,88 +557,34 @@ Jako **autoryzowany serwis Zebra** (Wrocław) oferujemy:
       metaTitle: 'Zebra TC501 vs TC701 - Porównanie Terminali AI | Który wybrać? 2026',
       metaDescription: 'Porównanie Zebra TC501 vs TC701: różnice, specyfikacja, cena. TC501 dla handlu (273g), TC701 dla logistyki (upadki 3,66m). Procesor AI, Wi-Fi 7, 5G, RFID.',
       keywords: [
-        // Główne frazy - KRYTYCZNE dla pozycjonowania
-        'Zebra TC501',
-        'Zebra TC701',
-        'Zebra TC501 specyfikacja',
-        'Zebra TC701 specyfikacja',
-        'Zebra TC501 cena',
-        'Zebra TC701 cena',
-        'Zebra TC501 premiera',
-        'Zebra TC701 premiera',
-        'Zebra TC501 kupić',
-        'Zebra TC701 kupić',
-        'Zebra TC501 gdzie kupić',
-        'Zebra TC701 gdzie kupić',
-        
-        // Porównania - główny fokus tego wpisu
+        // TYLKO PORÓWNANIA - unikamy kanibalizacji z dedykowanymi wpisami TC501/TC701
         'Zebra TC501 vs TC701',
+        'TC501 vs TC701',
         'TC501 vs TC701 porównanie',
         'TC501 vs TC701 różnice',
         'TC501 czy TC701',
         'TC501 vs TC701 który lepszy',
         'porównanie TC501 TC701',
-        'Zebra TC501 vs TC52',
-        'Zebra TC701 vs TC72',
-        'TC501 vs TC52 różnice',
-        'TC701 vs TC72 różnice',
+        'porównanie terminali Zebra',
         'który terminal Zebra wybrać',
         'TC501 dla sklepu czy TC701',
+        'TC501 vs TC701 dla magazynu',
+        'TC501 vs TC701 dla logistyki',
+        'różnice TC501 TC701',
+        'TC501 TC701 comparison',
+        'Zebra TC501 vs TC701 specs',
         
-        // Specyfikacje techniczne
-        'Zebra TC501 parametry',
-        'Zebra TC701 dane techniczne',
-        'Zebra TC501 Wi-Fi 7',
-        'Zebra TC701 5G',
-        'Zebra TC501 RFID',
-        'Zebra TC701 RFID UHF',
-        'Zebra TC501 skaner AC670',
-        'Zebra TC701 skaner 30m',
-        'Zebra TC501 procesor AI',
-        'Zebra TC701 Dragonwing',
-        'Zebra TC501 Android 15',
-        'Zebra TC701 Android 15',
-        'Zebra TC501 bateria hot swap',
-        'Zebra TC701 IP68',
+        // Porównania z poprzednikami
+        'TC501 TC701 vs TC52 TC72',
+        'następca TC52 TC72',
+        'nowe terminale Zebra 2026',
+        'premiera TC501 TC701',
         
-        // Part numbers
-        'TC5010 part number',
-        'TC7010 part number',
-        'Zebra TC5010-041E2B0001-A6',
-        'Zebra TC7010-041E2B0001-A6',
-        
-        // Zastosowania
-        'terminal mobilny dla magazynu',
-        'terminal mobilny dla logistyki',
-        'terminal mobilny dla kuriera',
-        'komputer mobilny przemysłowy 2026',
-        'terminal z czytnikiem RFID',
-        'terminal mobilny z AI',
-        'komputer mobilny Wi-Fi 7',
-        'terminal 5G dla firm',
-        
-        // Cechy
-        'terminal mobilny z RFID wbudowanym',
-        'skaner dalekiego zasięgu AC670',
-        'urządzenie mobilne Wi-Fi 7',
-        '5G mobile computer logistyka',
-        'terminal IP68 wytrzymały',
-        'komputer mobilny z procesorem AI',
-        'Qualcomm Dragonwing Q-6690',
-        'AMOLED 1500 nit terminal',
-        'hot swap bateria terminal',
-        
-        // Angielskie
-        'Zebra TC501 specs',
-        'Zebra TC701 specs',
-        'Zebra TC501 price',
-        'Zebra TC701 price',
-        'Zebra TC501 datasheet',
-        'Zebra TC701 datasheet',
-        'Zebra TC501 release date',
-        'Zebra TC701 release date',
-        'Zebra TC501 review',
-        'Zebra TC701 review'
+        // Ogólne frazy o wyborze
+        'jaki terminal Zebra wybrać',
+        'terminal dla handlu vs logistyki',
+        'terminal rugged vs ultra-rugged',
+        'komputer mobilny przemysłowy porównanie'
       ],
       faqSchema: [
         {
