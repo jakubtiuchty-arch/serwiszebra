@@ -38,6 +38,17 @@ export async function generateMetadata({
     }
   }
 
+  const canonicalUrl = `https://www.serwis-zebry.pl/blog/${post.slug}`
+  
+  // Map category to article:section
+  const sectionMap: Record<string, string> = {
+    'poradniki': 'Poradniki',
+    'troubleshooting': 'Rozwiązywanie problemów',
+    'porownania': 'Porównania',
+    'aktualnosci': 'Aktualności',
+    'nowosci-produktowe': 'Nowości produktowe'
+  }
+  
   return {
     title: post.seo.metaTitle,
     description: post.seo.metaDescription,
@@ -46,6 +57,7 @@ export async function generateMetadata({
       title: post.seo.metaTitle,
       description: post.seo.metaDescription,
       type: 'article',
+      url: canonicalUrl, // og:url - WYMAGANE dla deduplication
       publishedTime: post.publishedAt,
       modifiedTime: post.updatedAt || post.publishedAt,
       authors: [post.author.name],
@@ -68,12 +80,20 @@ export async function generateMetadata({
       images: [`https://www.serwis-zebry.pl${post.coverImage}`],
     },
     alternates: {
-      canonical: `https://www.serwis-zebry.pl/blog/${post.slug}`,
+      canonical: canonicalUrl,
       languages: {
-        'pl': `https://www.serwis-zebry.pl/blog/${post.slug}`,
-        'x-default': `https://www.serwis-zebry.pl/blog/${post.slug}`,
+        'pl': canonicalUrl,
+        'x-default': canonicalUrl,
       },
-    }
+      types: {
+        'application/rss+xml': 'https://www.serwis-zebry.pl/rss.xml', // RSS feed
+      },
+    },
+    // article:section meta tag
+    other: {
+      'article:section': sectionMap[post.category] || BLOG_CATEGORIES[post.category]?.name || 'Artykuły',
+      'article:tag': post.tags.slice(0, 5).join(', '),
+    },
   }
 }
 
@@ -146,8 +166,16 @@ export default function BlogPostPage({
     mainEntity: extractFAQFromContent(post.content)
   } : null
 
-  // HowTo Schema for step-by-step guides (poradniki category)
-  const howToSchema = post.category === 'poradniki' ? {
+  // HowTo Schema for step-by-step guides
+  // Include for: poradniki category OR content with numbered steps/instructions
+  const hasStepByStepContent = 
+    post.category === 'poradniki' || 
+    post.category === 'troubleshooting' ||
+    /\d+\.\s+(Otwórz|Zamknij|Wyczyść|Skalibruj|Naciśnij|Przytrzymaj|Przetrzyj|Sprawdź|Usuń|Załaduj|Włącz|Wyłącz|Poczekaj)/i.test(post.content) ||
+    /### (Krok|Czyszczenie|Kalibracja|Reset|Konserwacja)/i.test(post.content)
+  
+  const steps = extractStepsFromContent(post.content)
+  const howToSchema = hasStepByStepContent && steps.length >= 3 ? {
     '@context': 'https://schema.org',
     '@type': 'HowTo',
     name: post.title,
@@ -155,7 +183,7 @@ export default function BlogPostPage({
     image: `https://www.serwis-zebry.pl${post.coverImage}`,
     totalTime: `PT${post.readingTime}M`,
     tool: extractToolsFromContent(post.content),
-    step: extractStepsFromContent(post.content)
+    step: steps
   } : null
 
   // BreadcrumbList Schema for navigation
@@ -227,6 +255,9 @@ export default function BlogPostPage({
       <div className="min-h-screen bg-white">
         {/* Header */}
         <Header currentPage="blog" />
+        
+        {/* Main content wrapper for semantic SEO */}
+        <main id="main-content">
 
         {/* Breadcrumb */}
         <div className="bg-gray-50 border-b border-gray-200">
@@ -305,36 +336,54 @@ export default function BlogPostPage({
                 </div>
                 <div className="flex items-center gap-2 text-sm text-gray-500">
                   <Calendar className="w-4 h-4" />
-                  {new Date(post.publishedAt).toLocaleDateString('pl-PL', {
-                    day: 'numeric',
-                    month: 'long',
-                    year: 'numeric'
-                  })}
+                  <time dateTime={post.publishedAt}>
+                    {new Date(post.publishedAt).toLocaleDateString('pl-PL', {
+                      day: 'numeric',
+                      month: 'long',
+                      year: 'numeric'
+                    })}
+                  </time>
+                  {post.updatedAt && post.updatedAt !== post.publishedAt && (
+                    <span className="text-gray-400">
+                      (aktualizacja: <time dateTime={post.updatedAt}>
+                        {new Date(post.updatedAt).toLocaleDateString('pl-PL', {
+                          day: 'numeric',
+                          month: 'long',
+                          year: 'numeric'
+                        })}
+                      </time>)
+                    </span>
+                  )}
                 </div>
               </div>
             </header>
 
-            {/* Cover Image */}
+            {/* Cover Image - wrapped in figure/figcaption for semantic SEO */}
             {post.coverImage && (
-              <div className="relative w-full h-64 sm:h-96 rounded-2xl overflow-hidden mb-8 bg-gradient-to-br from-blue-100 to-indigo-100">
-                {post.coverImage !== '/blog/placeholder.jpg' ? (
-                  <Image
-                    src={post.coverImage}
-                    alt={post.title}
-                    fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1200px) 80vw, 1200px"
-                    quality={80}
-                    className="object-cover"
-                    priority
-                    placeholder="blur"
-                    blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAUH/8QAIhAAAgEDAwUBAAAAAAAAAAAAAQIDAAQRBQYhEhMiMWH/xAAVAQEBAAAAAAAAAAAAAAAAAAADBP/EABoRAAICAwAAAAAAAAAAAAAAAAECABEDITH/2gAMAwEAAhEDEQA/ANL1HeLWt2tvb2cLJFGqLI0hJbA+AAD+5qf/AJ7qn1fyn2lKVJk7nAmK3TP/2Q=="
-                  />
-                ) : (
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <BookOpen className="w-24 h-24 text-blue-300" />
-                  </div>
-                )}
-              </div>
+              <figure className="mb-8">
+                <div className="relative w-full h-64 sm:h-96 rounded-2xl overflow-hidden bg-gradient-to-br from-blue-100 to-indigo-100">
+                  {post.coverImage !== '/blog/placeholder.jpg' ? (
+                    <Image
+                      src={post.coverImage}
+                      alt={post.title}
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1200px) 80vw, 1200px"
+                      quality={80}
+                      className="object-cover"
+                      priority
+                      placeholder="blur"
+                      blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAUH/8QAIhAAAgEDAwUBAAAAAAAAAAAAAQIDAAQRBQYhEhMiMWH/xAAVAQEBAAAAAAAAAAAAAAAAAAADBP/EABoRAAICAwAAAAAAAAAAAAAAAAECABEDITH/2gAMAwEAAhEDEQA/ANL1HeLWt2tvb2cLJFGqLI0hJbA+AAD+5qf/AJ7qn1fyn2lKVJk7nAmK3TP/2Q=="
+                    />
+                  ) : (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <BookOpen className="w-24 h-24 text-blue-300" />
+                    </div>
+                  )}
+                </div>
+                <figcaption className="mt-2 text-center text-sm text-gray-500">
+                  {post.title}
+                </figcaption>
+              </figure>
             )}
 
             {/* Content */}
@@ -560,6 +609,8 @@ export default function BlogPostPage({
           </div>
         </section>
 
+        </main>
+        
         {/* Footer */}
         <footer className="bg-gray-900 text-white py-8">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">

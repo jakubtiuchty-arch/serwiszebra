@@ -3371,6 +3371,7 @@ Skontaktuj się z nami - jako **Autoryzowany Serwis Zebra** oferujemy:
       role: 'Autoryzowany Serwis Zebra'
     },
     publishedAt: '2026-01-29',
+    updatedAt: '2026-02-01', // Aktualizacja SEO: linki zewnętrzne, HowTo schema
     readingTime: 15,
     deviceType: 'drukarki',
     subDeviceType: 'etykiet',
@@ -3484,6 +3485,8 @@ Skontaktuj się z nami - jako **Autoryzowany Serwis Zebra** oferujemy:
 
 **Zebra ZT411** i **ZT421** to drukarki przemysłowe nowej generacji z **kolorowym wyświetlaczem dotykowym 4,3"**. Następcy popularnych modeli ZT410/ZT420.
 
+📎 Oficjalna strona producenta: [Zebra ZT411 na zebra.com](https://www.zebra.com/us/en/products/printers/industrial/zt400-series.html) (specyfikacja techniczna, sterowniki)
+
 ### Różnice między ZT411 a ZT421
 
 | Cecha | ZT411 | ZT421 |
@@ -3549,7 +3552,7 @@ Skontaktuj się z nami - jako **Autoryzowany Serwis Zebra** oferujemy:
 
 ## Najczęstsze problemy ZT411/ZT421
 
-### 1. Błąd "PAPER OUT" mimo załadowanych etykiet ⭐⭐⭐⭐⭐
+### 1. Błąd "PAPER OUT" mimo załadowanych etykiet
 
 **Najczęstszy problem** - drukarka nie rozpoznaje etykiet.
 
@@ -3579,7 +3582,7 @@ Skontaktuj się z nami - jako **Autoryzowany Serwis Zebra** oferujemy:
 
 ---
 
-### 2. Błąd "RIBBON OUT" mimo załadowanego ribbonu ⭐⭐⭐⭐
+### 2. Błąd "RIBBON OUT" mimo załadowanego ribbonu
 
 **Rozwiązanie:**
 
@@ -3600,7 +3603,7 @@ Skontaktuj się z nami - jako **Autoryzowany Serwis Zebra** oferujemy:
 
 ---
 
-### 3. Blady/nieczytelny wydruk ⭐⭐⭐⭐
+### 3. Blady/nieczytelny wydruk
 
 **Rozwiązanie (sprawdź po kolei):**
 
@@ -3628,7 +3631,7 @@ Skontaktuj się z nami - jako **Autoryzowany Serwis Zebra** oferujemy:
 
 ---
 
-### 4. Przegrzanie głowicy (HEAD OVER TEMP) ⭐⭐⭐
+### 4. Przegrzanie głowicy (HEAD OVER TEMP)
 
 **Rozwiązanie:**
 
@@ -3639,7 +3642,7 @@ Skontaktuj się z nami - jako **Autoryzowany Serwis Zebra** oferujemy:
 
 ---
 
-### 5. Zacięcie obcinacza (CUTTER JAM) ⭐⭐⭐
+### 5. Zacięcie obcinacza (CUTTER JAM)
 
 **Rozwiązanie:**
 
@@ -3656,7 +3659,7 @@ Skontaktuj się z nami - jako **Autoryzowany Serwis Zebra** oferujemy:
 
 ---
 
-### 6. Białe pionowe linie na wydruku ⭐⭐⭐
+### 6. Białe pionowe linie na wydruku
 
 **Zużyta głowica** - wymaga wymiany.
 
@@ -3673,6 +3676,8 @@ Jeśli linie pozostają → **wymiana głowicy w serwisie**.
 ---
 
 ## Konserwacja ZT411/ZT421 (z oficjalnej instrukcji Zebra)
+
+> 📚 Źródło: Oficjalny [User Guide Zebra ZT411/ZT421](https://www.zebra.com/us/en/support-downloads/printers/industrial/zt411.html) (PDF do pobrania)
 
 ### Harmonogram czyszczenia
 
