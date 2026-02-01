@@ -131,10 +131,10 @@ const clusterArticles = [
   { title: 'Serwis drukarki Zebra ZD420/ZD421', slug: 'serwis-drukarki-zebra-zd420-zd421-diagnostyka-naprawa', desc: 'Diagnostyka i naprawa' },
   { title: 'Serwis drukarki Zebra ZT411/ZT421', slug: 'serwis-drukarki-zebra-zt411-zt421-diagnostyka-naprawa', desc: 'Drukarki przemysłowe' },
   { title: 'Serwis drukarki Zebra GK420/GC420', slug: 'serwis-drukarki-zebra-gk420-gc420-diagnostyka-naprawa', desc: 'Seria G - biurkowe' },
+  { title: 'Serwis drukarki mobilnej ZQ630/ZQ620/ZQ610', slug: 'serwis-drukarki-mobilnej-zebra-zq610-zq620-zq630', desc: 'Drukarki mobilne' },
   { title: 'Najczęstsze awarie drukarek Zebra - TOP 10', slug: 'najczestsze-awarie-drukarek-zebra-top10', desc: 'Problemy i rozwiązania' },
   { title: 'Jak wyczyścić głowicę drukarki Zebra', slug: 'jak-wyczyscic-glowice-drukarki-zebra', desc: 'Poradnik krok po kroku' },
   { title: 'Drukarka Zebra nie drukuje - 7 przyczyn', slug: 'drukarka-zebra-nie-drukuje-przyczyny-rozwiazania', desc: 'Diagnostyka problemów' },
-  { title: 'Kontrakty serwisowe Zebra OneCare', slug: 'kontrakty-serwisowe-zebra-onecare-przewodnik', desc: 'Gwarancja rozszerzona' },
   { title: 'Wymiana głowicy drukarki Zebra', slug: 'wymiana-glowicy-drukarki-zebra-kiedy-konieczna-ile-kosztuje', desc: 'Kiedy i ile kosztuje' },
 ]
 

@@ -25161,6 +25161,473 @@ Wymiana głowicy w GK420/GC420/GX420 kosztuje **250-400 zł netto** (część + 
 
 Model "d" jest prostszy, model "t" oferuje trwalsze wydruki na etykiety syntetyczne.
 `
+  },
+
+  // NOWY WPIS: Serwis drukarki mobilnej Zebra ZQ610/ZQ620/ZQ630
+  {
+    slug: 'serwis-drukarki-mobilnej-zebra-zq610-zq620-zq630',
+    title: 'Serwis drukarki mobilnej Zebra ZQ630/ZQ620/ZQ610 Plus - diagnostyka i naprawa [2026]',
+    excerpt: 'Kompletny przewodnik serwisowy dla mobilnych drukarek Zebra ZQ630, ZQ620, ZQ610 Plus. Kody błędów LCD, problemy z baterią, Bluetooth, Wi-Fi, RFID. Cennik napraw.',
+    coverImage: '/blog/serwis-drukarki-mobilnej-zebra-zq630.jpeg',
+    author: {
+      name: 'Zespół TAKMA',
+      role: 'Autoryzowany Serwis Zebra'
+    },
+    publishedAt: '2026-02-01',
+    readingTime: 16,
+    deviceType: 'drukarki',
+    subDeviceType: 'mobilne',
+    category: 'poradniki',
+    tags: ['ZQ630', 'ZQ630 Plus', 'ZQ620', 'ZQ620 Plus', 'ZQ610', 'ZQ610 Plus', 'drukarka mobilna', 'serwis', 'naprawa', 'bateria', 'Bluetooth', 'Wi-Fi', 'RFID', 'kody błędów', 'LCD', 'PowerPrecision'],
+    seo: {
+      metaTitle: 'Serwis drukarki mobilnej Zebra ZQ630/ZQ620/ZQ610 Plus [2026]',
+      metaDescription: 'Serwis Zebra ZQ630: kody błędów LCD, wymiana baterii 180-350 zł, naprawa Bluetooth/Wi-Fi/RFID. ZQ620, ZQ610. Poradnik + cennik. Odbiór 24h.',
+      keywords: [
+        // ZQ630 - GŁÓWNY FOKUS (najpopularniejszy model)
+        'serwis zebra zq630',
+        'naprawa zebra zq630',
+        'zebra zq630 serwis',
+        'zebra zq630 naprawa',
+        'serwis drukarki zq630',
+        'naprawa drukarki zq630',
+        'zebra zq630 plus serwis',
+        'zebra zq630 plus naprawa',
+        'zq630 nie drukuje',
+        'zebra zq630 nie drukuje',
+        'zq630 błąd',
+        'zebra zq630 błąd',
+        'zq630 error',
+        'zq630 kody błędów',
+        'zq630 media out',
+        'zq630 head open',
+        'zq630 battery low',
+        'zq630 paper jam',
+        'zq630 head over temp',
+        'zq630 replace head',
+        'zq630 bateria',
+        'zebra zq630 bateria',
+        'wymiana baterii zq630',
+        'zq630 bateria nie ładuje',
+        'zq630 bateria szybko się rozładowuje',
+        'zq630 battery replacement',
+        'zq630 głowica',
+        'wymiana głowicy zq630',
+        'zq630 printhead',
+        'zq630 blady wydruk',
+        'zq630 słaby wydruk',
+        'zq630 bluetooth',
+        'zq630 wifi',
+        'zq630 nie łączy się',
+        'zq630 bluetooth nie działa',
+        'zq630 wifi nie działa',
+        'zq630 rfid',
+        'zq630 rfid serwis',
+        'zq630 kalibracja',
+        'zq630 reset',
+        'zq630 reset fabryczny',
+        'zq630 firmware update',
+        'ile kosztuje naprawa zq630',
+        'gdzie naprawić zq630',
+        'zq630 serwis Polska',
+        'zq630 troubleshooting',
+        'zq630 service manual',
+        'zq630 repair',
+        // ZQ620
+        'serwis zebra zq620',
+        'naprawa zebra zq620',
+        'zq620 nie drukuje',
+        'zq620 błąd',
+        'zq620 bateria',
+        'wymiana baterii zq620',
+        // ZQ610
+        'serwis zebra zq610',
+        'naprawa zebra zq610',
+        'zq610 nie drukuje',
+        'zq610 błąd',
+        'zq610 bateria',
+        // Ogólne frazy mobilne
+        'drukarka mobilna zebra serwis',
+        'naprawa drukarki mobilnej zebra',
+        'serwis drukarek mobilnych zebra',
+        'zebra zq600 plus serwis',
+        'zq600 plus troubleshooting',
+        'zq600 plus error codes'
+      ],
+      faqSchema: [
+        {
+          question: 'Co oznacza czerwony ekran w drukarce Zebra ZQ610/ZQ620/ZQ630?',
+          answer: 'Czerwony ekran w drukarkach ZQ600 Plus oznacza błąd krytyczny: Media Out (brak nośnika), Head Open (otwarta głowica), Battery Low Shutdown (krytycznie niski poziom baterii), Head Authentication Failed (nieautoryzowana głowica). Sprawdź komunikat na wyświetlaczu i wykonaj odpowiednie działanie.'
+        },
+        {
+          question: 'Ile kosztuje naprawa drukarki mobilnej Zebra ZQ610/ZQ620/ZQ630?',
+          answer: 'Koszt naprawy drukarek mobilnych Zebra: wymiana baterii PowerPrecision+ 180-350 zł, naprawa Bluetooth/Wi-Fi 250-450 zł, wymiana głowicy 350-550 zł, naprawa LCD 300-500 zł. Diagnostyka bezpłatna przy zleceniu naprawy.'
+        },
+        {
+          question: 'Jak wydrukować etykietę konfiguracyjną w ZQ610/ZQ620/ZQ630?',
+          answer: 'Etykieta konfiguracyjna ZQ600: 1) Wyłącz drukarkę. 2) Załaduj papier ciągły. 3) Przytrzymaj FEED i naciśnij POWER. 4) Gdy rozpocznie się druk, zwolnij FEED. Drukarka wydrukuje test głowicy i raport konfiguracji.'
+        },
+        {
+          question: 'Dlaczego bateria w drukarce ZQ620 szybko się rozładowuje?',
+          answer: 'Szybkie rozładowywanie baterii ZQ620 może wynikać z: zużycia baterii (ponad 500 cykli), ciągłego połączenia Wi-Fi/Bluetooth, wysokiej temperatury pracy, lub uszkodzenia baterii. Sprawdź stan baterii w menu Settings > Battery Health. Jeśli wskazuje Replace - wymień baterię.'
+        },
+        {
+          question: 'Jak sparować drukarkę ZQ610 przez Bluetooth?',
+          answer: 'Parowanie Bluetooth ZQ610: 1) Menu > Settings > Bluetooth > Discoverable ON. 2) Na telefonie/komputerze wyszukaj urządzenia Bluetooth. 3) Wybierz ZQ610_XXXXXX. 4) Potwierdź kod PIN na wyświetlaczu drukarki. Alternatywnie: użyj NFC Print Touch - zbliż telefon do ikony NFC na drukarce.'
+        },
+        {
+          question: 'Co zrobić gdy ZQ630 pokazuje błąd Head Open mimo zamkniętej pokrywy?',
+          answer: 'Błąd Head Open mimo zamkniętej pokrywy: 1) Otwórz i zamknij pokrywę ponownie (upewnij się, że zatrzasnęła). 2) Sprawdź czy nic nie blokuje zatrzasku. 3) Oczyść czujnik zamknięcia sprężonym powietrzem. 4) Jeśli problem pozostaje - uszkodzony czujnik wymaga serwisu.'
+        },
+        {
+          question: 'Jaka jest różnica między ZQ610, ZQ620 i ZQ630?',
+          answer: 'Różnice w serii ZQ600 Plus: ZQ610 - szerokość druku 2 cale (48mm), waga 0,6kg, małe etykiety. ZQ620 - szerokość 3 cale (72mm), waga 0,73kg, średnie etykiety. ZQ630 - szerokość 4 cale (104mm), waga 1,1kg, duże etykiety + opcja RFID. Wszystkie mają Wi-Fi 6, Bluetooth 5.3, IP54.'
+        },
+        {
+          question: 'Jak wejść w tryb diagnostyki komunikacji (DUMP) w ZQ620?',
+          answer: 'Tryb DUMP w ZQ620: 1) Wydrukuj etykietę konfiguracyjną (FEED+POWER przy starcie). 2) Na końcu wydruku pojawi się Press FEED to enter DUMP mode. 3) Naciśnij FEED w ciągu 3 sekund. 4) Drukarka wejdzie w tryb diagnostyczny i będzie drukować wszystkie otrzymane dane w HEX.'
+        },
+        {
+          question: 'Czy można używać baterii z ZQ610 w ZQ620?',
+          answer: 'Baterie ZQ610 i ZQ620 są wymienne (2-ogniwowe PowerPrecision+). ZQ630 używa większej baterii 4-ogniwowej i nie jest kompatybilna z mniejszymi modelami. Zawsze używaj oryginalnych baterii Zebra - nieoryginalne mogą powodować błędy Battery Authentication Failed.'
+        },
+        {
+          question: 'Drukarka ZQ630 drukuje blado - co robić?',
+          answer: 'Blady wydruk ZQ630: 1) Wyczyść głowicę alkoholem IPA 90%. 2) Zwiększ Darkness w menu Settings > Print > Darkness. 3) Sprawdź czy używasz właściwych etykiet termicznych. 4) Sprawdź stan głowicy - jeśli zużyta, wymień. 5) Upewnij się, że bateria jest naładowana powyżej 20%.'
+        }
+      ]
+    },
+    content: `
+> **🎯 Szybka odpowiedź:** Drukarki mobilne **Zebra serii ZQ600 Plus** (ZQ610, ZQ620, ZQ630) to profesjonalne urządzenia do pracy w terenie. **Czerwony ekran** oznacza błąd krytyczny - sprawdź komunikat LCD. **Żółty ekran** to ostrzeżenie. **Koszt naprawy**: od 180 zł (bateria) do 550 zł (głowica). **Etykieta konfiguracyjna**: FEED+POWER przy starcie. Jako [autoryzowany serwis drukarek Zebra](/drukarki) naprawiamy wszystkie modele mobilne z **12-miesięczną gwarancją**.
+
+## TL;DR - Serwis Zebra ZQ610/ZQ620/ZQ630
+
+| Parametr | Wartość |
+|----------|---------|
+| **Kolory alertów** | 🔴 Czerwony = błąd, 🟡 Żółty = ostrzeżenie, 🟢 Zielony = info |
+| **Etykieta konfiguracyjna** | FEED + POWER przy włączaniu |
+| **Tryb DUMP** | Po etykiecie konfiguracyjnej → FEED |
+| **Wymiana baterii** | 180-350 zł |
+| **Wymiana głowicy** | 350-550 zł |
+| **Naprawa Bluetooth/Wi-Fi** | 250-450 zł |
+| **Diagnostyka** | Bezpłatna |
+| **Gwarancja naprawy** | 12 miesięcy |
+
+---
+
+## Porównanie modeli ZQ600 Plus
+
+| Parametr | ZQ610 Plus | ZQ620 Plus | ZQ630 Plus |
+|----------|------------|------------|------------|
+| **Szerokość druku** | 48 mm (2") | 72 mm (3") | 104 mm (4") |
+| **Zastosowanie** | Małe etykiety | Średnie etykiety | Duże etykiety |
+| **Waga z baterią** | 0,6 kg | 0,73 kg | 1,1 kg |
+| **Bateria** | 2-cell | 2-cell | 4-cell |
+| **Opcja RFID** | ❌ | ❌ | ✅ |
+| **Wi-Fi** | Wi-Fi 6 | Wi-Fi 6 | Wi-Fi 6 |
+| **Bluetooth** | 5.3 | 5.3 | 5.3 |
+| **IP** | IP54 | IP54 | IP54 |
+
+> 💡 **Wskazówka:** Baterie ZQ610 i ZQ620 są wymienne (2-cell). ZQ630 używa większej baterii 4-cell.
+
+---
+
+## Diagnostyka LED - pierścień wokół przycisku Power
+
+| Kolor | Zachowanie | Znaczenie |
+|-------|------------|-----------|
+| 🟢 Zielony | Stały | Bateria naładowana, drukarka gotowa |
+| 🟢 Zielony | Pulsujący | Tryb uśpienia |
+| 🟠 Bursztynowy | Stały | Ładowanie w toku |
+| 🟠 Bursztynowy | Pulsujący | Ładowanie w trybie uśpienia |
+| 🔴 Czerwony | Stały | **Bateria do wymiany** |
+| 🔴 Czerwony | Migający | **Błąd ładowania** |
+
+---
+
+## System alertów LCD - kolory i znaczenie
+
+Drukarki ZQ600 Plus wyświetlają alerty na kolorowym ekranie LCD:
+
+| Typ alertu | Kolor tła | Kolor tekstu | Przykłady |
+|------------|-----------|--------------|-----------|
+| **BŁĄD** | 🔴 Czerwony | Biały | Media Out, Head Open, Battery Shutdown |
+| **OSTRZEŻENIE** | 🟡 Żółty | Czarny | Battery Low, Head Over Temp, Paper Jam |
+| **INFORMACJA** | 🟢 Zielony | Biały | Bluetooth Pairing, Downloading Firmware |
+
+---
+
+## Najczęstsze błędy i rozwiązania
+
+### 1. Media Out (Brak nośnika) 🔴 ⭐⭐⭐⭐⭐
+
+**Najczęstszy błąd!**
+
+| Krok | Czynność |
+|------|----------|
+| 1 | Sprawdź czy etykiety są załadowane |
+| 2 | Sprawdź czy pokrywa jest zamknięta i zatrzaśnięta |
+| 3 | Upewnij się, że czujnik etykiet nie jest zablokowany |
+| 4 | W trybie odklejania - usuń wydrukowaną etykietę |
+| 5 | Naciśnij LEFT/RIGHT SELECT aby potwierdzić |
+
+---
+
+### 2. Head Open (Otwarta głowica) 🔴 ⭐⭐⭐⭐
+
+| Krok | Czynność |
+|------|----------|
+| 1 | Zamknij pokrywę głowicy - musi zatrzasnąć |
+| 2 | Sprawdź czy nic nie blokuje zatrzasku |
+| 3 | Oczyść czujnik zamknięcia sprężonym powietrzem |
+| 4 | Jeśli problem pozostaje → **serwis** (uszkodzony czujnik) |
+
+---
+
+### 3. Battery Low / Battery Shutdown 🟡/🔴 ⭐⭐⭐⭐
+
+| Alert | Znaczenie | Akcja |
+|-------|-----------|-------|
+| **Battery Low** (żółty) | Niski poziom baterii | Naładuj lub wymień baterię |
+| **Battery Health Replace** (żółty) | Bateria zużyta | Wymień baterię |
+| **Battery Health Shutdown** (czerwony) | Bateria krytyczna | Natychmiast wymień! |
+| **Battery Authentication Fail** (czerwony) | Nieoryginalna bateria | Użyj oryginalnej Zebra |
+
+**Sprawdź stan baterii:** Menu → Settings → Battery Health
+
+**Koszt wymiany baterii:** 180-350 zł (zależnie od modelu)
+
+📖 Szczegóły: [Problemy z baterią w drukarce mobilnej Zebra](/blog/problemy-bateria-drukarka-zebra-mobilna)
+
+---
+
+### 4. Head Over Temp / Head Cold 🟡 ⭐⭐⭐
+
+Głowica jest zbyt gorąca lub zbyt zimna.
+
+| Problem | Przyczyna | Rozwiązanie |
+|---------|-----------|-------------|
+| **Head Over Temp** | Intensywne drukowanie | Poczekaj 5-10 min na ostygnięcie |
+| **Head Cold** | Praca w zimnie (<0°C) | Ogrzej drukarkę przed użyciem |
+| **Head Under Temp** | Zbyt niska temperatura | Przenieś do cieplejszego miejsca |
+
+📖 Szczegóły: [Drukarka Zebra nie drukuje w zimnie - Head Cold](/blog/drukarka-zebra-nie-drukuje-zimno-head-cold)
+
+---
+
+### 5. Bluetooth Pairing Failed / Rejected 🔴 ⭐⭐⭐
+
+| Krok | Czynność |
+|------|----------|
+| 1 | Włącz Discoverable: Menu → Settings → Bluetooth → ON |
+| 2 | Usuń stare parowanie z telefonu/komputera |
+| 3 | Wyszukaj ponownie urządzenie ZQ6XX_XXXXXX |
+| 4 | Potwierdź kod PIN na wyświetlaczu drukarki |
+| 5 | Alternatywnie: użyj NFC Print Touch |
+
+**NFC Print Touch:** Zbliż telefon do ikony NFC na boku drukarki (max 7,6 cm).
+
+---
+
+### 6. WLAN Loss Signal / Invalid Channels 🟡/🔴 ⭐⭐⭐
+
+| Problem | Rozwiązanie |
+|---------|-------------|
+| **WLAN Loss Signal** | Przesuń bliżej routera, sprawdź siłę sygnału |
+| **WLAN Invalid Channels** | Zmień kanał Wi-Fi w routerze |
+| **WLAN Invalid Security Mode** | Sprawdź hasło i typ szyfrowania |
+
+📖 Szczegóły: [Drukarka Zebra Wi-Fi rozłącza się offline](/blog/drukarka-zebra-wifi-rozlacza-sie-offline)
+
+---
+
+### 7. Paper Jam (Zacięcie etykiety) 🟡 ⭐⭐⭐
+
+| Krok | Czynność |
+|------|----------|
+| 1 | Otwórz zatrzask zwalniający głowicę |
+| 2 | Otwórz pokrywę nośnika |
+| 3 | Delikatnie wyjmij zacięty materiał |
+| 4 | Sprawdź czy nie pozostały resztki |
+| 5 | Ponownie załaduj etykiety |
+| 6 | Zamknij pokrywę |
+
+---
+
+### 8. Replace Head (Wymień głowicę) 🔴 ⭐⭐
+
+| Sygnał | Znaczenie |
+|--------|-----------|
+| **Replace Head** | Głowica zużyta - wymaga wymiany |
+| **Head Authentication Failed** | Nieautoryzowana głowica |
+| **Head Thermistor Fault** | Uszkodzony czujnik temperatury głowicy |
+
+**Koszt wymiany głowicy:** 350-550 zł
+
+📖 Szczegóły: [Wymiana głowicy drukarki Zebra](/blog/wymiana-glowicy-drukarki-zebra-kiedy-konieczna-ile-kosztuje)
+
+---
+
+## Drukowanie etykiety konfiguracyjnej
+
+Etykieta konfiguracyjna to kluczowe narzędzie diagnostyczne.
+
+| Krok | Czynność |
+|------|----------|
+| 1 | **Wyłącz** drukarkę |
+| 2 | Załaduj **papier ciągły** (bez przerw/czarnych pasków) |
+| 3 | **Przytrzymaj FEED** + naciśnij **POWER** |
+| 4 | Gdy rozpocznie się druk → **zwolnij FEED** |
+
+**Co zawiera raport:**
+- Test głowicy (linia "x" - sprawdza wszystkie elementy)
+- Numer seryjny i model
+- Wersja firmware
+- Adres Bluetooth/MAC
+- Konfiguracja Wi-Fi
+- Zainstalowana pamięć
+- Lista załadowanych czcionek i plików
+
+---
+
+## Tryb diagnostyki komunikacji (DUMP)
+
+Przydatny gdy drukarka nie reaguje na polecenia.
+
+| Krok | Czynność |
+|------|----------|
+| 1 | Wydrukuj etykietę konfiguracyjną (jak wyżej) |
+| 2 | Na końcu wydruku pojawi się: **"Press FEED key to enter DUMP mode"** |
+| 3 | Naciśnij **FEED** w ciągu 3 sekund |
+| 4 | Drukarka wydrukuje: **"Entering DUMP mode"** |
+| 5 | Teraz drukuje wszystkie otrzymane dane w HEX |
+
+**Wyjście z trybu DUMP:**
+1. Wyłącz drukarkę
+2. Odczekaj 5 sekund
+3. Włącz drukarkę
+
+---
+
+## Typowe problemy i rozwiązania - tabela
+
+| Problem | Rozwiązanie |
+|---------|-------------|
+| **Brak zasilania** | Sprawdź baterię, naładuj lub wymień |
+| **Nośnik nie jest podawany** | Zamknij pokrywę, sprawdź czujnik etykiet |
+| **Słaby/wyblakły wydruk** | Wyczyść głowicę, zwiększ Darkness |
+| **Częściowy wydruk** | Wyczyść głowicę, sprawdź etykiety |
+| **Zniekształcony wydruk** | Wyrównaj etykiety, wyczyść głowicę |
+| **Brak wydruku** | Sprawdź baud rate, kabel, połączenie RF |
+| **Krótki czas pracy baterii** | Wymień baterię (ponad 1 rok = normalne zużycie) |
+| **Pomijanie etykiet** | Sprawdź czujnik przerwy/paska, skalibruj |
+| **Pusty ekran LCD** | Włącz drukarkę, sprawdź baterię |
+| **Brak połączenia NFC** | Zbliż telefon do 7,6 cm od ikony NFC |
+
+---
+
+## Cennik napraw ZQ610/ZQ620/ZQ630
+
+| Usługa | Koszt netto | Gwarancja |
+|--------|-------------|-----------|
+| Czyszczenie + konserwacja | 100-180 zł | 3 mies. |
+| Wymiana baterii PowerPrecision+ | 180-350 zł | 12 mies. |
+| Wymiana głowicy drukującej | 350-550 zł | 6 mies. |
+| Naprawa modułu Bluetooth | 250-400 zł | 12 mies. |
+| Naprawa modułu Wi-Fi | 300-450 zł | 12 mies. |
+| Naprawa/wymiana LCD | 300-500 zł | 12 mies. |
+| Naprawa mechanizmu druku | 250-400 zł | 12 mies. |
+| Wymiana obudowy | 200-350 zł | 12 mies. |
+
+*Ceny netto. Diagnostyka bezpłatna przy zleceniu naprawy.*
+
+📖 Szczegóły: [Ile kosztuje naprawa drukarki Zebra?](/blog/cennik-naprawy-drukarki-zebra-koszty-serwisu)
+
+---
+
+## Kiedy oddać drukarkę ZQ600 do serwisu?
+
+Oddaj do serwisu gdy:
+
+✅ **Replace Head** - głowica wymaga wymiany  
+✅ **Battery Authentication Fail** - problem z kontrolerem baterii  
+✅ **Head Thermistor Fault** - uszkodzony czujnik temperatury  
+✅ **Head Open** mimo zamkniętej pokrywy - uszkodzony czujnik  
+✅ **Bluetooth/Wi-Fi nie działa** mimo prawidłowej konfiguracji  
+✅ **Ekran LCD nie wyświetla** lub wyświetla artefakty  
+✅ **Mechaniczne uszkodzenie** obudowy lub mechanizmu  
+
+---
+
+## Bezpłatna diagnostyka w autoryzowanym serwisie
+
+Jako **autoryzowany serwis Zebra Technologies** oferujemy:
+
+- ✅ **Bezpłatna diagnostyka** i wycena
+- ✅ **Bezpłatny odbiór kurierem** z całej Polski
+- ✅ **Oryginalne części** Zebra (baterie, głowice, moduły)
+- ✅ **Gwarancja 12 miesięcy** na naprawę
+- ✅ **2-5 dni** czas naprawy
+
+> **📞 Zadzwoń:** +48 601 619 898
+
+> **📝 Zgłoś online:** [Formularz naprawy](/#formularz)
+
+📖 **Wszystkie usługi:** [Serwis drukarek Zebra](/drukarki) - naprawy, konserwacja, części
+
+---
+
+## Powiązane artykuły
+
+- [Serwis drukarek Zebra](/drukarki) - naprawy, konserwacja, części
+- [Ile kosztuje naprawa drukarki Zebra?](/blog/cennik-naprawy-drukarki-zebra-koszty-serwisu)
+- [Problemy z baterią w drukarce mobilnej Zebra](/blog/problemy-bateria-drukarka-zebra-mobilna)
+- [Drukarka Zebra nie drukuje w zimnie - Head Cold](/blog/drukarka-zebra-nie-drukuje-zimno-head-cold)
+- [Drukarka Zebra Wi-Fi rozłącza się offline](/blog/drukarka-zebra-wifi-rozlacza-sie-offline)
+- [Wymiana głowicy drukarki Zebra](/blog/wymiana-glowicy-drukarki-zebra-kiedy-konieczna-ile-kosztuje)
+- [Białe linie na etykiecie - drukarka mobilna](/blog/biale-linie-etykiety-drukarka-mobilna-zebra)
+- [Fałszywy błąd Media Out w drukarce mobilnej](/blog/falszywy-blad-media-out-drukarka-zebra-mobilna)
+
+---
+
+## FAQ - Najczęściej zadawane pytania
+
+### Co oznacza czerwony ekran w drukarce ZQ610/ZQ620/ZQ630?
+
+**Czerwony ekran** oznacza błąd krytyczny wymagający interwencji:
+- **Media Out** - załaduj etykiety
+- **Head Open** - zamknij pokrywę głowicy
+- **Battery Shutdown** - wymień baterię
+- **Replace Head** - głowica do wymiany
+
+Sprawdź dokładny komunikat na wyświetlaczu i postępuj zgodnie z instrukcją.
+
+### Jak wydrukować etykietę konfiguracyjną?
+
+1. Wyłącz drukarkę
+2. Załaduj papier ciągły
+3. **Przytrzymaj FEED** + naciśnij **POWER**
+4. Gdy zacznie się druk → zwolnij FEED
+
+Raport zawiera numer seryjny, wersję firmware, konfigurację sieci i test głowicy.
+
+### Ile kosztuje wymiana baterii w ZQ620?
+
+Wymiana baterii PowerPrecision+ w ZQ610/ZQ620 kosztuje **180-280 zł netto**, w ZQ630 (bateria 4-cell) **250-350 zł netto**. Cena zawiera oryginalną baterię Zebra i gwarancję 12 miesięcy.
+
+### Jak sparować ZQ610 przez NFC?
+
+**NFC Print Touch** - najszybsza metoda parowania:
+1. Włącz NFC w telefonie
+2. Zbliż telefon do ikony NFC na boku drukarki (max 7,6 cm)
+3. Potwierdź parowanie na telefonie
+4. Gotowe!
+
+### Czy baterie ZQ610 i ZQ620 są wymienne?
+
+**Tak**, baterie 2-ogniwowe PowerPrecision+ są kompatybilne między ZQ610 i ZQ620. 
+
+**Nie**, bateria 4-ogniwowa z ZQ630 jest większa i nie pasuje do mniejszych modeli.
+`
   }
 
 ]
