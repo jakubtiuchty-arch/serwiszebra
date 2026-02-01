@@ -9,14 +9,13 @@ import {
   Phone, 
   CheckCircle2,
   ChevronRight,
-  AlertTriangle,
   Star,
   Monitor,
   Factory,
   Smartphone,
-  CreditCard
+  CreditCard,
+  BookOpen
 } from 'lucide-react'
-import { blogPosts } from '@/lib/blog'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 
@@ -126,58 +125,97 @@ export const metadata: Metadata = {
   },
 }
 
-const printerArticles = blogPosts
-  .filter(post => post.deviceType === 'drukarki')
-  .slice(0, 6)
+// Kluczowe artykuły klastra - jawne linki dla SEO
+const clusterArticles = [
+  { title: 'Ile kosztuje naprawa drukarki Zebra? Cennik 2026', slug: 'cennik-naprawy-drukarki-zebra-koszty-serwisu', desc: 'Aktualne ceny napraw' },
+  { title: 'Serwis drukarki Zebra ZD420/ZD421', slug: 'serwis-drukarki-zebra-zd420-zd421-diagnostyka-naprawa', desc: 'Diagnostyka i naprawa' },
+  { title: 'Serwis drukarki Zebra ZT411/ZT421', slug: 'serwis-drukarki-zebra-zt411-zt421-diagnostyka-naprawa', desc: 'Drukarki przemysłowe' },
+  { title: 'Serwis drukarki Zebra GK420/GC420', slug: 'serwis-drukarki-zebra-gk420-gc420-diagnostyka-naprawa', desc: 'Seria G - biurkowe' },
+  { title: 'Najczęstsze awarie drukarek Zebra - TOP 10', slug: 'najczestsze-awarie-drukarek-zebra-top10', desc: 'Problemy i rozwiązania' },
+  { title: 'Jak wyczyścić głowicę drukarki Zebra', slug: 'jak-wyczyscic-glowice-drukarki-zebra', desc: 'Poradnik krok po kroku' },
+  { title: 'Drukarka Zebra nie drukuje - 7 przyczyn', slug: 'drukarka-zebra-nie-drukuje-przyczyny-rozwiazania', desc: 'Diagnostyka problemów' },
+  { title: 'Kontrakty serwisowe Zebra OneCare', slug: 'kontrakty-serwisowe-zebra-onecare-przewodnik', desc: 'Gwarancja rozszerzona' },
+  { title: 'Wymiana głowicy drukarki Zebra', slug: 'wymiana-glowicy-drukarki-zebra-kiedy-konieczna-ile-kosztuje', desc: 'Kiedy i ile kosztuje' },
+]
 
 const faq = [
   {
     question: 'Ile kosztuje wymiana głowicy w drukarce Zebra?',
-    answer: 'Koszt wymiany głowicy zależy od modelu drukarki. Dla drukarek desktop (ZD421, ZD420, GK420) to 250-530 zł, dla przemysłowych (ZT410, ZT610, 105SL) 580-2499 zł. Cena obejmuje robociznę i kalibrację po wymianie.'
+    answer: 'Koszt wymiany głowicy zależy od modelu drukarki. Dla drukarek desktop (ZD421, ZD420, GK420) to 250-530 zł, dla przemysłowych (ZT410, ZT610, 105SL) 580-2499 zł. Cena obejmuje robociznę i kalibrację po wymianie.',
+    link: '/blog/wymiana-glowicy-drukarki-zebra-kiedy-konieczna-ile-kosztuje',
+    linkText: 'Szczegóły wymiany głowicy →'
   },
   {
     question: 'Jak długo trwa naprawa drukarki Zebra?',
-    answer: 'Standardowy czas naprawy to 2-5 dni roboczych. Oferujemy też naprawy ekspresowe w 24-48h (dopłata 50 zł). Kurier odbierze drukarkę bezpłatnie z Twojej firmy w całej Polsce.'
+    answer: 'Standardowy czas naprawy to 2-5 dni roboczych. Oferujemy też naprawy ekspresowe w 24-48h (dopłata 50 zł). Kurier odbierze drukarkę bezpłatnie z Twojej firmy w całej Polsce.',
+    link: '/blog/cennik-naprawy-drukarki-zebra-koszty-serwisu',
+    linkText: 'Zobacz pełny cennik →'
   },
   {
     question: 'Czy serwisujecie drukarki kart plastikowych Zebra?',
-    answer: 'Tak! Serwisujemy wszystkie drukarki kart Zebra: ZC100, ZC300, ZC350, ZXP1, ZXP3, ZXP7, ZXP9, P330i, P430i. Naprawiamy moduły kodowania magnetycznego i chipowego, moduły laminacji, wymieniamy głowice i rolki transportowe.'
+    answer: 'Tak! Serwisujemy wszystkie drukarki kart Zebra: ZC100, ZC300, ZC350, ZXP1, ZXP3, ZXP7, ZXP9, P330i, P430i. Naprawiamy moduły kodowania magnetycznego i chipowego, moduły laminacji, wymieniamy głowice i rolki transportowe.',
+    link: null,
+    linkText: null
   },
   {
     question: 'Jakie drukarki Zebra naprawiacie?',
-    answer: 'Naprawiamy WSZYSTKIE drukarki Zebra: desktop (ZD421, ZD420, ZD220, GK420, GC420, LP2844), przemysłowe (ZT410, ZT610, ZT230, 105SL, Xi4), mobilne (ZQ630, ZQ520, QL420, iMZ320) oraz drukarki kart (ZC300, ZXP7). Ponad 25 lat doświadczenia i 5000+ naprawionych urządzeń.'
+    answer: 'Naprawiamy WSZYSTKIE drukarki Zebra: desktop (ZD421, ZD420, ZD220, GK420, GC420, LP2844), przemysłowe (ZT410, ZT610, ZT230, 105SL, Xi4), mobilne (ZQ630, ZQ520, QL420, iMZ320) oraz drukarki kart (ZC300, ZXP7). Ponad 25 lat doświadczenia i 5000+ naprawionych urządzeń.',
+    link: '/blog/najczestsze-awarie-drukarek-zebra-top10',
+    linkText: 'TOP 10 awarii drukarek →'
   },
   {
     question: 'Czy udzielacie gwarancji na naprawy drukarek?',
-    answer: 'Tak, na wszystkie naprawy drukarek udzielamy 12 miesięcy gwarancji. Używamy oryginalnych części Zebra lub wysokiej jakości zamienników z gwarancją producenta.'
+    answer: 'Tak, na wszystkie naprawy drukarek udzielamy 12 miesięcy gwarancji. Używamy oryginalnych części Zebra lub wysokiej jakości zamienników z gwarancją producenta.',
+    link: '/blog/kontrakty-serwisowe-zebra-onecare-przewodnik',
+    linkText: 'Kontrakty serwisowe Zebra OneCare →'
   },
   {
     question: 'Drukarka Zebra ZD421 nie drukuje - co robić?',
-    answer: 'Zebra ZD421 najczęściej nie drukuje z powodu: 1) Ribbon załadowany odwrotnie (sprawdź stronę barwiącą - do dołu), 2) Brak kalibracji po wymianie etykiet (przytrzymaj FEED 5 sek.), 3) Stare sterowniki Windows. W 80% przypadków problem rozwiązuje prawidłowe załadowanie ribbonu. Jeśli nie pomaga - zgłoś do naszego serwisu.'
+    answer: 'Zebra ZD421 najczęściej nie drukuje z powodu: 1) Ribbon załadowany odwrotnie (sprawdź stronę barwiącą - do dołu), 2) Brak kalibracji po wymianie etykiet (przytrzymaj FEED 5 sek.), 3) Stare sterowniki Windows. W 80% przypadków problem rozwiązuje prawidłowe załadowanie ribbonu. Jeśli nie pomaga - zgłoś do naszego serwisu.',
+    link: '/blog/serwis-drukarki-zebra-zd420-zd421-diagnostyka-naprawa',
+    linkText: 'Pełna diagnostyka ZD420/ZD421 →'
   },
   {
     question: 'Ile kosztuje naprawa drukarki Zebra GK420?',
-    answer: 'Naprawa drukarki Zebra GK420 kosztuje od 150 zł (czyszczenie) do 400 zł (wymiana głowicy). Najczęstsze problemy to: czerwona dioda (uszkodzony czujnik 100-200 zł), zużyta głowica (250-400 zł), uszkodzony mechanizm (150-300 zł). Dokładna wycena po bezpłatnej diagnozie.'
+    answer: 'Naprawa drukarki Zebra GK420 kosztuje od 150 zł (czyszczenie) do 400 zł (wymiana głowicy). Najczęstsze problemy to: czerwona dioda (uszkodzony czujnik 100-200 zł), zużyta głowica (250-400 zł), uszkodzony mechanizm (150-300 zł). Dokładna wycena po bezpłatnej diagnozie.',
+    link: '/blog/cennik-naprawy-drukarki-zebra-koszty-serwisu',
+    linkText: 'Cennik napraw wszystkich modeli →'
   },
   {
     question: 'Czy naprawiacie drukarki przemysłowe Zebra 105SL i Xi4?',
-    answer: 'Tak! Specjalizujemy się w naprawie drukarek przemysłowych Zebra: 105SL, 105SL Plus, S4M oraz całej serii Xi4 (110Xi4, 140Xi4, 170Xi4, 220Xi4). Wymieniamy głowice, płyty główne, mechanizmy podawania. Mamy dostęp do części zamiennych nawet do starszych modeli.'
+    answer: 'Tak! Specjalizujemy się w naprawie drukarek przemysłowych Zebra: 105SL, 105SL Plus, S4M oraz całej serii Xi4 (110Xi4, 140Xi4, 170Xi4, 220Xi4). Wymieniamy głowice, płyty główne, mechanizmy podawania. Mamy dostęp do części zamiennych nawet do starszych modeli.',
+    link: '/blog/serwis-drukarki-zebra-zt411-zt421-diagnostyka-naprawa',
+    linkText: 'Serwis drukarek przemysłowych →'
   },
   {
     question: 'Gdzie naprawić drukarkę mobilną Zebra ZQ520 lub ZQ630?',
-    answer: 'Naprawiamy wszystkie drukarki mobilne Zebra: ZQ630, ZQ620, ZQ610, ZQ521, ZQ520, ZQ510, ZQ320, ZQ220, QL420, QL320, RW420, iMZ320. Najczęstsze naprawy to: wymiana baterii, naprawa Bluetooth/WiFi, wymiana głowicy, naprawa mechanizmu. Odbiór kurierem z całej Polski.'
+    answer: 'Naprawiamy wszystkie drukarki mobilne Zebra: ZQ630, ZQ620, ZQ610, ZQ521, ZQ520, ZQ510, ZQ320, ZQ220, QL420, QL320, RW420, iMZ320. Najczęstsze naprawy to: wymiana baterii, naprawa Bluetooth/WiFi, wymiana głowicy, naprawa mechanizmu. Odbiór kurierem z całej Polski.',
+    link: null,
+    linkText: null
   },
   {
     question: 'Czy mogę zamówić odbiór drukarki kurierem?',
-    answer: 'Tak! Zamawiamy kuriera DPD, który odbierze drukarkę bezpłatnie z Twojej firmy w ciągu 24h. Obsługujemy całą Polskę. Po naprawie odsyłamy drukarkę kurierem na nasz koszt. Wystarczy wypełnić formularz zgłoszeniowy na stronie.'
+    answer: 'Tak! Zamawiamy kuriera DPD, który odbierze drukarkę bezpłatnie z Twojej firmy w ciągu 24h. Obsługujemy całą Polskę. Po naprawie odsyłamy drukarkę kurierem na nasz koszt. Wystarczy wypełnić formularz zgłoszeniowy na stronie.',
+    link: '/#formularz',
+    linkText: 'Zgłoś naprawę online →'
   },
   {
     question: 'Jak skalibrować drukarkę Zebra po wymianie etykiet?',
-    answer: 'Aby skalibrować drukarkę Zebra: 1) Przytrzymaj przycisk FEED przez 5 sekund (auto-kalibracja), 2) Lub użyj Zebra Setup Utilities: Open Printer Tools → Action → Calibrate Media. Dla modeli ZT/Xi: Menu → Calibration → Calibrate. Po kalibracji wydrukuj etykietę testową.'
+    answer: 'Aby skalibrować drukarkę Zebra: 1) Przytrzymaj przycisk FEED przez 5 sekund (auto-kalibracja), 2) Lub użyj Zebra Setup Utilities: Open Printer Tools → Action → Calibrate Media. Dla modeli ZT/Xi: Menu → Calibration → Calibrate. Po kalibracji wydrukuj etykietę testową.',
+    link: '/blog/kalibracja-drukarki-zebra-poradnik-krok-po-kroku',
+    linkText: 'Szczegółowy poradnik kalibracji →'
+  },
+  {
+    question: 'Jak wyczyścić głowicę drukującą w drukarce Zebra?',
+    answer: 'Głowicę drukującą czyść alkoholem izopropylowym IPA 99,7% i specjalnymi patyczkami. Regularność: co 5 rolek etykiet lub przy wymianie ribbonu. Nie używaj wody ani zwykłego alkoholu - zniszczą głowicę.',
+    link: '/blog/jak-wyczyscic-glowice-drukarki-zebra',
+    linkText: 'Poradnik czyszczenia krok po kroku →'
   },
   {
     question: 'Czy serwisujecie drukarki Zebra na gwarancji?',
-    answer: 'Tak! Jako autoryzowany serwis Zebra obsługujemy naprawy gwarancyjne wszystkich modeli. Skontaktuj się z nami - sprawdzimy status gwarancji i przeprowadzimy naprawę. Telefon: +48 601 619 898.'
+    answer: 'Tak! Jako autoryzowany serwis Zebra obsługujemy naprawy gwarancyjne wszystkich modeli. Skontaktuj się z nami - sprawdzimy status gwarancji i przeprowadzimy naprawę. Telefon: +48 601 619 898.',
+    link: '/blog/kontrakty-serwisowe-zebra-onecare-przewodnik',
+    linkText: 'Kontrakty i gwarancja Zebra →'
   }
 ]
 
@@ -505,6 +543,43 @@ export default function DrukarkiPage() {
           </div>
         </section>
 
+        {/* Kluczowe poradniki - klaster SEO */}
+        <section className="py-10 sm:py-12 md:py-14 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+          <div className="max-w-6xl mx-auto px-3 sm:px-4">
+            <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-2 text-center">
+              Poradniki serwisowe drukarek Zebra
+            </h2>
+            <p className="text-sm text-gray-600 text-center mb-6 sm:mb-8">
+              Sprawdź nasze szczegółowe przewodniki po naprawie i konserwacji
+            </p>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+              {clusterArticles.map((article) => (
+                <Link
+                  key={article.slug}
+                  href={`/blog/${article.slug}`}
+                  className="bg-white rounded-xl p-4 shadow-md border border-gray-100 hover:shadow-xl hover:border-blue-300 transition-all group"
+                >
+                  <h3 className="font-medium text-gray-900 group-hover:text-blue-600 transition-colors text-sm mb-1">
+                    {article.title}
+                  </h3>
+                  <p className="text-xs text-gray-500">{article.desc}</p>
+                </Link>
+              ))}
+            </div>
+
+            <div className="text-center mt-6">
+              <Link
+                href="/blog?kategoria=drukarki"
+                className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 font-medium text-sm"
+              >
+                Wszystkie poradniki o drukarkach
+                <ChevronRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </div>
+        </section>
+
         {/* Cennik - spójny z miastami */}
         <section className="py-10 sm:py-12 bg-gradient-to-br from-gray-50 to-gray-100">
           <div className="max-w-5xl mx-auto px-3 sm:px-4">
@@ -536,49 +611,6 @@ export default function DrukarkiPage() {
           </div>
         </section>
 
-        {/* Najczęstsze problemy */}
-        {printerArticles.length > 0 && (
-          <section className="py-10 sm:py-12 md:py-14">
-            <div className="max-w-6xl mx-auto px-3 sm:px-4">
-              <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-6 sm:mb-8 text-center">
-                Najczęstsze problemy z drukarkami Zebra
-              </h2>
-
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {printerArticles.map((article) => (
-                  <Link
-                    key={article.slug}
-                    href={`/blog/${article.slug}`}
-                    className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:shadow-lg hover:border-blue-200 transition-all group"
-                  >
-                    <div className="flex items-start gap-3">
-                      <div className="w-10 h-10 bg-red-50 rounded-lg flex items-center justify-center flex-shrink-0 border border-red-100">
-                        <AlertTriangle className="w-5 h-5 text-red-500 animate-pulse" strokeWidth={1.5} />
-                      </div>
-                      <div>
-                        <h3 className="font-medium text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-2 text-sm">
-                          {article.title}
-                        </h3>
-                        <p className="text-xs text-gray-500 mt-1">{article.readingTime} min</p>
-                      </div>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-
-              <div className="text-center mt-6">
-                <Link
-                  href="/blog"
-                  className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 font-medium text-sm"
-                >
-                  Zobacz wszystkie poradniki
-                  <ChevronRight className="w-4 h-4" />
-                </Link>
-              </div>
-            </div>
-          </section>
-        )}
-
         {/* FAQ */}
         <section className="py-10 sm:py-12 md:py-14 bg-white">
           <div className="max-w-4xl mx-auto px-3 sm:px-4">
@@ -597,7 +629,12 @@ export default function DrukarkiPage() {
                     <ChevronRight className="w-5 h-5 text-gray-400 group-open:rotate-90 transition-transform flex-shrink-0" />
                   </summary>
                   <div className="px-5 pb-4 text-sm text-gray-600">
-                    {item.answer}
+                    <p>{item.answer}</p>
+                    {item.link && (
+                      <Link href={item.link} className="inline-block mt-2 text-blue-600 hover:text-blue-800 font-medium text-xs">
+                        {item.linkText}
+                      </Link>
+                    )}
                   </div>
                 </details>
               ))}
@@ -657,7 +694,7 @@ export default function DrukarkiPage() {
                 className="bg-white rounded-xl p-5 shadow-sm border border-gray-100 hover:shadow-lg hover:border-gray-300 transition-all group text-center"
               >
                 <div className="w-12 h-12 bg-gray-50 rounded-lg flex items-center justify-center mx-auto mb-3 border border-gray-200">
-                  <AlertTriangle className="w-6 h-6 text-gray-600" />
+                  <BookOpen className="w-6 h-6 text-gray-600" />
                 </div>
                 <h3 className="font-medium text-gray-900 group-hover:text-gray-700 transition-colors">
                   Poradniki
