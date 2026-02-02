@@ -1021,6 +1021,7 @@ Przygotowaliśmy dedykowane strony z pełną specyfikacją, cenami i konfiguracj
       role: 'Autoryzowany partner Zebra'
     },
     publishedAt: '2026-01-29',
+    updatedAt: '2026-02-02', // Dodano Product Schema, linki zewnętrzne
     readingTime: 10,
     deviceType: 'terminale',
     category: 'nowosci-produktowe',
@@ -1145,6 +1146,8 @@ Przygotowaliśmy dedykowane strony z pełną specyfikacją, cenami i konfiguracj
 ## Co to jest Zebra TC501?
 
 **Zebra TC501** to mobilny komputer przemysłowy nowej generacji, zaprojektowany specjalnie dla **handlu detalicznego** i **lekkiej logistyki**. Jest oficjalnym następcą popularnych modeli **TC53 i TC58**.
+
+📎 Oficjalna strona producenta: [Zebra TC501 na zebra.com](https://www.zebra.com/us/en/products/mobile-computers/handheld/tc5-series.html) (specyfikacja techniczna, data sheet)
 
 ### Główne zastosowania Zebra TC501:
 - 🛒 **Sklepy** – sprawdzanie cen, stanów magazynowych, BOPIS

@@ -37,6 +37,10 @@ export const metadata: Metadata = {
     'naprawa tc21', 'naprawa tc22', 'naprawa tc52', 'naprawa tc53',
     'naprawa tc57', 'naprawa tc58', 'naprawa tc72', 'naprawa tc77',
     'zebra tc52 nie działa', 'zebra tc21 naprawa', 'zebra tc58 serwis',
+    // Nowe modele 2026
+    'zebra tc501', 'zebra tc701', 'tc501', 'tc701',
+    'zebra tc501 specyfikacja', 'zebra tc501 cena', 'zebra tc501 gdzie kupić',
+    'zebra tc701 specyfikacja', 'zebra tc701 cena', 'terminal zebra ai',
     
     // Seria MC - Mobile Computer
     'serwis mc2200', 'serwis mc2700', 'serwis mc3300', 'serwis mc3390',
@@ -487,6 +491,72 @@ export default function TerminalePage() {
                 <p className="text-xs text-gray-500 mb-1">Konserwacja</p>
                 <p className="text-lg font-semibold text-gray-900">od 149 zł</p>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Nowości produktowe - TC501, TC701 */}
+        <section className="py-10 sm:py-12 md:py-14 bg-gradient-to-b from-blue-50 to-white">
+          <div className="max-w-6xl mx-auto px-3 sm:px-4">
+            <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-2 text-center">
+              🆕 Nowości produktowe 2026
+            </h2>
+            <p className="text-gray-600 text-center mb-6 sm:mb-8">
+              Najnowsze terminale Zebra z procesorem AI - pełna specyfikacja i ceny
+            </p>
+            
+            <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
+              {/* TC501 */}
+              <Link
+                href="/blog/zebra-tc501-specyfikacja-cena-gdzie-kupic"
+                className="bg-white rounded-xl p-5 sm:p-6 shadow-md border border-blue-100 hover:shadow-xl hover:border-blue-300 transition-all group"
+              >
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="bg-green-100 text-green-700 text-xs font-semibold px-2 py-1 rounded">PREMIERA 2026</span>
+                  <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
+                </div>
+                <h3 className="text-lg sm:text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors mb-2">
+                  Zebra TC501 – Terminal AI dla handlu
+                </h3>
+                <p className="text-sm text-gray-600 mb-3">
+                  Wi-Fi 7, 5G, RFID UHF, skaner 30m, procesor Dragonwing. Następca TC52/TC53.
+                </p>
+                <div className="flex items-center justify-between">
+                  <span className="text-lg font-semibold text-blue-600">od 5000 zł netto</span>
+                  <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-blue-600 transition-colors" />
+                </div>
+              </Link>
+              
+              {/* TC701 */}
+              <Link
+                href="/blog/zebra-tc701-specyfikacja-cena-gdzie-kupic"
+                className="bg-white rounded-xl p-5 sm:p-6 shadow-md border border-blue-100 hover:shadow-xl hover:border-blue-300 transition-all group"
+              >
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="bg-green-100 text-green-700 text-xs font-semibold px-2 py-1 rounded">PREMIERA 2026</span>
+                  <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
+                </div>
+                <h3 className="text-lg sm:text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors mb-2">
+                  Zebra TC701 – Terminal ultra-rugged
+                </h3>
+                <p className="text-sm text-gray-600 mb-3">
+                  IP68, upadki 3m, -30°C, Wi-Fi 7, 5G, RFID UHF. Następca TC72/TC73.
+                </p>
+                <div className="flex items-center justify-between">
+                  <span className="text-lg font-semibold text-blue-600">od 8000 zł netto</span>
+                  <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-blue-600 transition-colors" />
+                </div>
+              </Link>
+            </div>
+            
+            <div className="text-center mt-6">
+              <Link
+                href="/blog/zebra-tc501-tc701-specyfikacja-cena-premiera"
+                className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium text-sm"
+              >
+                Zobacz porównanie TC501 vs TC701
+                <ChevronRight className="w-4 h-4" />
+              </Link>
             </div>
           </div>
         </section>

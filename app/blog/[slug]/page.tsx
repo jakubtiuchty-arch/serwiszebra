@@ -112,6 +112,8 @@ export default function BlogPostPage({
 
   // Schema.org structured data for Article
   const wordCount = post.content.split(/\s+/).length
+  const canonicalUrl = `https://www.serwis-zebry.pl/blog/${post.slug}`
+  
   const articleSchema = {
     '@context': 'https://schema.org',
     '@type': 'TechArticle', // Bardziej precyzyjny typ dla artykułów technicznych
@@ -135,7 +137,7 @@ export default function BlogPostPage({
     dateModified: post.updatedAt || post.publishedAt,
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `https://www.serwis-zebry.pl/blog/${post.slug}`
+      '@id': canonicalUrl
     },
     keywords: post.tags.join(', '),
     wordCount: wordCount,
@@ -145,6 +147,11 @@ export default function BlogPostPage({
     about: {
       '@type': 'Thing',
       name: 'Zebra Technologies'
+    },
+    // Speakable for voice search (AEO)
+    speakable: {
+      '@type': 'SpeakableSpecification',
+      cssSelector: ['article header h1', 'article header p', '.prose > blockquote:first-of-type']
     }
   }
 
@@ -164,6 +171,52 @@ export default function BlogPostPage({
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
     mainEntity: extractFAQFromContent(post.content)
+  } : null
+
+  // Product Schema for product pages (nowosci-produktowe category with price mentions)
+  const isProductPage = post.category === 'nowosci-produktowe' && 
+    (post.content.includes('Cena') || post.content.includes('cena') || post.content.includes('zł'))
+  
+  const productSchema = isProductPage ? {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: post.title.replace(/–.*$/, '').trim(), // Clean title
+    description: post.excerpt,
+    image: `https://www.serwis-zebry.pl${post.coverImage}`,
+    brand: {
+      '@type': 'Brand',
+      name: 'Zebra Technologies'
+    },
+    manufacturer: {
+      '@type': 'Organization',
+      name: 'Zebra Technologies',
+      url: 'https://www.zebra.com'
+    },
+    offers: {
+      '@type': 'AggregateOffer',
+      priceCurrency: 'PLN',
+      lowPrice: extractPriceFromContent(post.content, 'low'),
+      highPrice: extractPriceFromContent(post.content, 'high'),
+      offerCount: 1,
+      availability: 'https://schema.org/InStock',
+      seller: {
+        '@type': 'Organization',
+        name: 'TAKMA - Autoryzowany Partner Zebra',
+        url: 'https://www.serwis-zebry.pl'
+      }
+    },
+    review: {
+      '@type': 'Review',
+      reviewRating: {
+        '@type': 'Rating',
+        ratingValue: '5',
+        bestRating: '5'
+      },
+      author: {
+        '@type': 'Organization',
+        name: 'Zespół TAKMA'
+      }
+    }
   } : null
 
   // HowTo Schema for step-by-step guides
@@ -245,6 +298,12 @@ export default function BlogPostPage({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
+        />
+      )}
+      {productSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
         />
       )}
       <script
@@ -1162,4 +1221,40 @@ function extractStepsFromContent(content: string): Array<{
   }
   
   return steps
+}
+
+// Extract price from content for Product schema
+function extractPriceFromContent(content: string, type: 'low' | 'high'): string {
+  // Look for price patterns like "5000 zł", "~5000 zł", "od 5000 zł", "5000-9000 zł"
+  const pricePatterns = [
+    /(?:od|~|około|cena)\s*(\d[\d\s]*)\s*(?:zł|PLN)/gi,
+    /(\d[\d\s]*)\s*-\s*(\d[\d\s]*)\s*(?:zł|PLN)/gi,
+    /(\d{4,})\s*(?:zł|PLN)/gi
+  ]
+  
+  const prices: number[] = []
+  
+  for (const pattern of pricePatterns) {
+    let match
+    while ((match = pattern.exec(content)) !== null) {
+      // Extract all number groups from the match
+      for (let i = 1; i < match.length; i++) {
+        if (match[i]) {
+          const price = parseInt(match[i].replace(/\s/g, ''))
+          if (price >= 1000 && price <= 50000) { // Reasonable price range
+            prices.push(price)
+          }
+        }
+      }
+    }
+  }
+  
+  if (prices.length === 0) {
+    return type === 'low' ? '5000' : '10000' // Default fallback
+  }
+  
+  const sortedPrices = [...new Set(prices)].sort((a, b) => a - b)
+  return type === 'low' 
+    ? sortedPrices[0].toString() 
+    : sortedPrices[sortedPrices.length - 1].toString()
 }
