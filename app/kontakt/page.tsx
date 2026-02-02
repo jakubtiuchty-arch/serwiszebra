@@ -395,7 +395,7 @@ export default function ContactPage() {
       <footer className="bg-white border-t border-gray-200 py-4 mt-6">
         <div className="max-w-5xl mx-auto px-4 text-center">
           <p className="text-gray-500 text-xs sm:text-sm">
-            © 2025 TAKMA - Autoryzowany Serwis Zebra
+            © 2025-2026 TAKMA - Autoryzowany Serwis Zebra
           </p>
         </div>
       </footer>

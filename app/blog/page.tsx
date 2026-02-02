@@ -891,7 +891,7 @@ export default function BlogPage() {
           {/* Copyright */}
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <p className="text-gray-500 text-sm">
-              © 2025 TAKMA - Serwis Zebra. Wszystkie prawa zastrzeżone.
+              © 2025-2026 TAKMA - Serwis Zebra. Wszystkie prawa zastrzeżone.
             </p>
             <div className="flex items-center gap-4 text-sm">
               <Link href="/feed.xml" className="text-gray-400 hover:text-white flex items-center gap-1.5" aria-label="Subskrybuj RSS">

@@ -301,7 +301,7 @@ function OrderSuccessPageContent() {
       <footer className="bg-gray-900 text-white py-12 px-6">
         <div className="max-w-7xl mx-auto text-center">
           <p className="text-gray-400">
-            © 2025 TAKMA - Autoryzowany Serwis Zebra
+            © 2025-2026 TAKMA - Autoryzowany Serwis Zebra
           </p>
         </div>
       </footer>

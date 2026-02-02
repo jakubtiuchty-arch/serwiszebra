@@ -277,7 +277,7 @@ export const generateOrderConfirmationEmail = (params: OrderConfirmationEmailPar
                 <a href="tel:+48 607 819 688" style="color: #10b981; text-decoration: none; font-weight: 600; font-size: 14px;">+48 123 456 789</a>
               </p>
               <p style="margin: 16px 0 0; color: #9ca3af; font-size: 12px;">
-                © 2025 serwis-zebry.pl · Autoryzowany Serwis Zebra
+                © 2025-2026 serwis-zebry.pl · Autoryzowany Serwis Zebra
               </p>
             </td>
           </tr>

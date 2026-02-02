@@ -814,7 +814,7 @@ export default function VideoTutorialsPage() {
         <footer className="bg-gray-900 text-white py-4 sm:py-6">
           <div className="max-w-7xl mx-auto px-4 text-center">
             <p className="text-gray-500 text-[10px] sm:text-xs">
-              © 2025 TAKMA - Serwis Zebra. Wszystkie prawa zastrzeżone.
+              © 2025-2026 TAKMA - Serwis Zebra. Wszystkie prawa zastrzeżone.
             </p>
           </div>
         </footer>

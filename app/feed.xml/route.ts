@@ -56,7 +56,7 @@ export async function GET() {
       <title>Blog Serwis Zebra</title>
       <link>${siteUrl}/blog</link>
     </image>
-    <copyright>© 2025 TAKMA - Serwis Zebra</copyright>
+    <copyright>© 2025-2026 TAKMA - Serwis Zebra</copyright>
     <managingEditor>serwis@takma.com.pl (Zespół Serwis Zebra)</managingEditor>
     <webMaster>serwis@takma.com.pl (Zespół Serwis Zebra)</webMaster>
     <ttl>60</ttl>
