@@ -1347,46 +1347,151 @@ Zebra TC501 oferuje **trzy opcje skanerów**:
 
 ---
 
-## Zebra TC501 vs konkurencja – Honeywell, Datalogic
+## Zebra TC501 vs konkurencja – szczegółowe porównanie
 
-Jak TC501 wypada na tle głównych konkurentów? Porównujemy z **Honeywell CT47** i **Datalogic Memor 30/35**:
+Jak TC501 wypada na tle głównych konkurentów? Oto obiektywna analiza techniczna:
 
-| Parametr | Zebra TC501 | Honeywell CT47 | Datalogic Memor 35 |
-|----------|-------------|----------------|-------------------|
-| **Procesor** | Dragonwing Q-6690 | Snapdragon 778G | Snapdragon 680 |
-| **Silnik AI** | **Tak (NPU)** | Nie | Nie |
-| **Wi-Fi** | **Wi-Fi 7** | Wi-Fi 6E | Wi-Fi 6 |
-| **5G** | **Tak** | Tak | Opcja |
-| **RFID wbudowany** | **Tak (UHF)** | Nie | Nie |
-| **Skaner max zasięg** | **30 m (AC670)** | 15 m | 12 m |
-| **Wyświetlacz** | 6" AMOLED 1500 nit | 5,5" LCD 700 nit | 5,5" IPS 550 nit |
-| **Upadki** | 2,44 m | 2,4 m | 1,8 m |
-| **Hot Swap baterii** | **Tak** | Tak | Nie |
-| **Waga** | **273 g** | 296 g | 285 g |
-| **Cena od** | ~5000 zł | ~4500 zł | ~3500 zł |
-| **Wsparcie Android** | 5 lat | 4 lata | 3 lata |
+### Podsumowanie przewag TC501 nad konkurencją
+
+| Cecha | TC501 | Konkurencja |
+|-------|-------|-------------|
+| **Wyświetlacz** | AMOLED **1500 nitów** | Do 3x ciemniejszy |
+| **Procesor** | Qualcomm Dragonwing™ Q-6690 z **silnikiem AI** | Starsze, mniej wydajne platformy |
+| **Wi-Fi** | **Wi-Fi 7** | Brak wsparcia (większość konkurentów) |
+| **Bluetooth** | **6.0** | Starsze wersje |
+| **Tylny aparat** | **50 MP** | Do 284% niższa rozdzielczość |
+| **Skaner** | AC670 z zasięgiem **30+ m** | Do 3x krótszy zasięg |
+| **RFID** | **Zintegrowany UHF RFID** | Brak lub wymaga dodatkowego sprzętu |
+| **Wytrzymałość (upadek)** | Do 3,6 m (TC701) / 2,44 m (TC501) | Do 1,5 m (Samsung) |
+| **Hot swap baterii** | **Tak** | Często niedostępny |
+| **Mapa drogowa Android** | Android 15 + **4 wersje** | Krótsza |
+
+---
+
+### TC501 vs Honeywell CT70
+
+**Waga i ergonomia:**
+CT70 jest o **13,5% cięższy** niż TC501. Przy całodziennej pracy w handlu detalicznym ta różnica ma znaczenie dla komfortu pracownika.
+
+**Pamięć:**
+TC501 oferuje o **50% więcej RAM** (12 GB vs 8 GB) i **2x więcej pamięci Flash** (256 GB vs 128 GB) niż CT70.
+
+**Wyświetlacz:**
+TC501 z ekranem AMOLED jest **150% jaśniejszy** (1500 vs 600 nitów) i oferuje lepszą czytelność pod ekstremalnymi kątami widzenia.
+
+**Przechwytywanie danych:**
+- CT70 nie posiada opcji kamery szerokokątnej
+- Tylny aparat TC501 ma **284% lepszą rozdzielczość** (50 MP vs 13 MP)
+- Skaner Zebra AC670 oferuje **3x większy zasięg** (30 m vs 10 m) niż Honeywell FlexRange
+- CT70 nie posiada zintegrowanego UHF RFID ani kolorowego przechwytywania obrazów
+
+**Rozwiązania software:**
+Honeywell Device Finder oferuje tylko podstawowe odzyskiwanie urządzeń. Zebra DNA (Device Tracker, Identity Guardian) jest znacznie bardziej rozbudowany.
+
+---
+
+### TC501 vs Datalogic Memor 30/35
+
+**Waga:**
+Memor jest o **15% cięższy** niż TC501 (315 g vs 273 g).
+
+**Wyświetlacz:**
+TC501 z AMOLED jest **200% jaśniejszy** (1500 vs 500 nitów) – kluczowe dla pracy w sklepach z oświetleniem mieszanym.
+
+**Wytrzymałość:**
+- TC501: upadki z **2,44 m** na beton
+- Memor 30/35: upadki z **1,2 m** (2x gorsza specyfikacja)
+- Memor oferuje minimalną specyfikację upadków obrotowych bez etui ochronnego
+
+**Platforma:**
+Memor 30/35 są zbudowane na platformie Qualcomm o niższej wydajności:
+- Tylko **6 GB RAM** (vs 12 GB w TC501)
+- Krótsza mapa drogowa Android
+- **Brak wsparcia dla Wi-Fi 7**
+
+**Przechwytywanie danych:**
+- Brak opcji kamery szerokokątnej
+- Tylny aparat TC501 ma **284% lepszą rozdzielczość**
+- Skaner AC670 oferuje **3x większy zasięg**
+- Brak zintegrowanego RFID ani wymiarowania
+
+---
+
+### TC501 vs Bluebird S50/S70
+
+**Ergonomia:**
+- S50 ma podobny rozmiar do TC501
+- S70 jest prawie **2x grubszy** i o **~20% cięższy** niż TC701
+
+**Wyświetlacz:**
+TC501 z AMOLED jest **150% jaśniejszy** niż wyświetlacze S50/S70.
+
+**Platforma:**
+Bluebird oferuje mniej wydajną platformę Qualcomm:
+- Gorzej przystosowana do aplikacji AI na urządzeniu
+- Niższe opcje pamięci
+- Krótsza mapa drogowa Android
+- **Brak wsparcia dla Wi-Fi 7**
+
+**Wytrzymałość:**
+- S50: upadki tylko z **1,5 m** (vs 2,44 m TC501)
+- TC501 oferuje **podwójną liczbę upadków obrotowych** w porównaniu do S50
+
+**Przechwytywanie danych:**
+- Brak opcji kamery szerokokątnej
+- Tylny aparat 50 MP tylko opcjonalnie
+- Starsze silniki skanujące – brak AC670
+- Brak zintegrowanego UHF RFID
+
+---
+
+### TC501 vs Samsung XCover7 Pro
+
+Samsung XCover7 Pro to smartfon konsumencki z dodatkami enterprise – **nie jest prawdziwym konkurentem** dla TC501 w środowisku przemysłowym:
+
+**Wyświetlacz:**
+TC501 jest **3x jaśniejszy** (1500 vs 500 nitów).
+
+**Wytrzymałość:**
+- Samsung: upadki z **1,5 m** (vs 2,44 m TC501)
+- Brak podwójnej klasy szczelności (IP65)
+- Brak specyfikacji upadków obrotowych
+
+**Platforma:**
+- **Połowa RAM i Flash** w porównaniu do TC501
+- Krótsza mapa drogowa Android
+- **Brak Wi-Fi 7 ani Bluetooth 6.0**
+
+**Przechwytywanie danych:**
+- **Brak RFID**
+- **Brak zintegrowanych opcji skanera** – wymaga nakładek
+- **60%+ niższa rozdzielczość** kamery szerokokątnej
+
+**Bateria:**
+- **Brak hot swap** – urządzenie musi zostać wycofane z użytku do ładowania
+- Brak ładowania bezprzewodowego
+- Bateria nie jest wymienialna
+
+> **Werdykt:** Samsung XCover7 Pro może być opcją dla mobilnych pracowników biurowych, ale **nie nadaje się do intensywnej pracy w handlu, magazynie czy logistyce**.
+
+---
 
 ### Kiedy wybrać Zebra TC501?
-- Potrzebujesz **wbudowanego RFID** bez nakładek
-- Wymagasz **Wi-Fi 7** lub **skanera 30 m**
-- Planujesz **5+ lat użytkowania** (najdłuższe wsparcie Android)
-- Masz aplikacje korzystające z **AI na urządzeniu**
 
-### Kiedy wybrać Honeywell CT47?
-- Masz już ekosystem Honeywell (WMS, skanery)
-- Wystarczy Ci Wi-Fi 6E i nie potrzebujesz RFID
-- Szukasz nieco niższej ceny przy podobnej wytrzymałości
+✅ Potrzebujesz **wbudowanego RFID** bez nakładek
+✅ Wymagasz **Wi-Fi 7** lub **skanera 30 m**
+✅ Planujesz **5+ lat użytkowania** (najdłuższe wsparcie Android)
+✅ Masz aplikacje korzystające z **AI na urządzeniu**
+✅ Pracownicy noszą terminal przez cały dzień (najlżejszy w klasie)
+✅ Potrzebujesz najjaśniejszego wyświetlacza do pracy na zewnątrz
 
-### Kiedy wybrać Datalogic Memor?
-- Bardzo ograniczony budżet
-- Lekkie zastosowania (retail bez RFID)
-- Krótszy cykl wymiany urządzeń (3 lata)
+> **Rekomendacja eksperta TAKMA:** Dla firm planujących długoterminowe wdrożenie (5+ lat) z RFID i aplikacjami AI, **TC501 ma najniższy TCO** mimo wyższej ceny zakupu. Konkurencja nie oferuje porównywalnej kombinacji wbudowanego RFID, Wi-Fi 7, skanera 30 m i wsparcia dla AI.
 
-> **Rekomendacja eksperta TAKMA:** Dla firm planujących długoterminowe wdrożenie (5+ lat) z RFID i aplikacjami AI, **TC501 ma najniższy TCO** mimo wyższej ceny zakupu.
-
-📎 Porównanie specyfikacji konkurentów:
-- [Honeywell CT47 – specyfikacja](https://sps.honeywell.com/us/en/products/productivity/mobile-computers/healthcare-computers/ct47-hc-mobile-computer)
+📎 **Zewnętrzne porównania specyfikacji:**
+- [Honeywell CT70 – specyfikacja](https://sps.honeywell.com/us/en/products/productivity/mobile-computers/handheld-computers/ct70-mobile-computer)
 - [Datalogic Memor 35 – datasheet](https://www.datalogic.com/eng/retail-manufacturing-transportation-logistics-healthcare/mobile-computers/memor-35-pd-1015.html)
+- [Bluebird S70 – specyfikacja](https://www.bluebird.co.kr/en/product/s70)
+- [Samsung XCover7 Pro – specyfikacja](https://www.samsung.com/business/smartphones/galaxy-xcover/)
 
 ---
 
