@@ -206,7 +206,7 @@ export default function Footer() {
               {/* Lewa: Copyright */}
               <div className="md:flex-1 text-center md:text-left order-2 md:order-none">
                 <p className="text-xs text-gray-500">
-                  © 2025 <span className="text-gray-400">TAKMA</span> - Serwis Zebra.<br className="block sm:hidden" /> Wszystkie prawa zastrzeżone.
+                  © 2025-2026 <span className="text-gray-400">TAKMA</span> - Serwis Zebra.<br className="block sm:hidden" /> Wszystkie prawa zastrzeżone.
                 </p>
               </div>
 

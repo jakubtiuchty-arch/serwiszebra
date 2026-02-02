@@ -674,7 +674,7 @@ export default function BlogPostPage({
         <footer className="bg-gray-900 text-white py-8">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <p className="text-gray-400 text-sm">
-              © 2025 TAKMA - Serwis Zebra. Wszystkie prawa zastrzeżone.
+              © 2025-2026 TAKMA - Serwis Zebra. Wszystkie prawa zastrzeżone.
             </p>
           </div>
         </footer>
