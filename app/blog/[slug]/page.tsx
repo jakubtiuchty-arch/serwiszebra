@@ -114,17 +114,39 @@ export default function BlogPostPage({
   const wordCount = post.content.split(/\s+/).length
   const canonicalUrl = `https://www.serwis-zebry.pl/blog/${post.slug}`
   
+  // Parse author info - prefer Person for E-E-A-T (Google rewards content from identifiable experts)
+  const parseAuthor = () => {
+    const authorName = post.author.name
+    // Check if author contains "Krzysztof Wójcik" - real person for E-E-A-T
+    if (authorName.includes('Krzysztof Wójcik')) {
+      return {
+        '@type': 'Person',
+        name: 'Krzysztof Wójcik',
+        jobTitle: 'Kierownik Serwisu',
+        worksFor: {
+          '@type': 'Organization',
+          name: 'TAKMA - Autoryzowany Serwis Zebra',
+          url: 'https://www.serwis-zebry.pl'
+        },
+        description: 'Certyfikowany technik Zebra z 20-letnim doświadczeniem w naprawach urządzeń mobilnych i drukarek przemysłowych.',
+        url: 'https://www.serwis-zebry.pl/o-nas#zespol'
+      }
+    }
+    // Fallback to Organization for older posts
+    return {
+      '@type': 'Organization',
+      name: authorName,
+      url: 'https://www.serwis-zebry.pl'
+    }
+  }
+  
   const articleSchema = {
     '@context': 'https://schema.org',
     '@type': 'TechArticle', // Bardziej precyzyjny typ dla artykułów technicznych
     headline: post.title,
     description: post.excerpt,
     image: `https://www.serwis-zebry.pl${post.coverImage}`,
-    author: {
-      '@type': 'Organization',
-      name: post.author.name,
-      url: 'https://www.serwis-zebry.pl'
-    },
+    author: parseAuthor(),
     publisher: {
       '@type': 'Organization',
       name: 'TAKMA - Autoryzowany Serwis Zebra',
@@ -177,6 +199,28 @@ export default function BlogPostPage({
   const isProductPage = post.category === 'nowosci-produktowe' && 
     (post.content.includes('Cena') || post.content.includes('cena') || post.content.includes('zł'))
   
+  // Get explicit price range from post SEO if available, otherwise extract from content
+  const getPriceRange = () => {
+    // Hard-coded price ranges for specific products to avoid TCO table pollution
+    const priceOverrides: Record<string, { low: string; high: string; count: number }> = {
+      'zebra-tc501-specyfikacja-cena-gdzie-kupic': { low: '5000', high: '10500', count: 5 },
+      'zebra-tc701-specyfikacja-cena-gdzie-kupic': { low: '8000', high: '15000', count: 5 },
+    }
+    
+    if (priceOverrides[post.slug]) {
+      return priceOverrides[post.slug]
+    }
+    
+    return {
+      low: extractPriceFromContent(post.content, 'low'),
+      high: extractPriceFromContent(post.content, 'high'),
+      count: 1
+    }
+  }
+  
+  const priceRange = getPriceRange()
+  
+  // Product Schema WITHOUT self-review (Google considers self-reviews as spam)
   const productSchema = isProductPage ? {
     '@context': 'https://schema.org',
     '@type': 'Product',
@@ -195,28 +239,17 @@ export default function BlogPostPage({
     offers: {
       '@type': 'AggregateOffer',
       priceCurrency: 'PLN',
-      lowPrice: extractPriceFromContent(post.content, 'low'),
-      highPrice: extractPriceFromContent(post.content, 'high'),
-      offerCount: 1,
+      lowPrice: priceRange.low,
+      highPrice: priceRange.high,
+      offerCount: priceRange.count, // Number of configurations/variants
       availability: 'https://schema.org/InStock',
       seller: {
         '@type': 'Organization',
         name: 'TAKMA - Autoryzowany Partner Zebra',
         url: 'https://www.serwis-zebry.pl'
       }
-    },
-    review: {
-      '@type': 'Review',
-      reviewRating: {
-        '@type': 'Rating',
-        ratingValue: '5',
-        bestRating: '5'
-      },
-      author: {
-        '@type': 'Organization',
-        name: 'Zespół TAKMA'
-      }
     }
+    // REMOVED: self-review - Google treats this as spammy markup
   } : null
 
   // HowTo Schema for step-by-step guides
@@ -1090,8 +1123,24 @@ function processInline(text: string): string {
     .replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold text-gray-900">$1</strong>')
     // Italic (but not the asterisk footnote)
     .replace(/(?<!\s)\*([^*\n]+)\*(?!\*)/g, '<em>$1</em>')
-    // Links (after images!)
-    .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" class="text-blue-600 hover:underline font-medium">$1</a>')
+    // Links (after images!) - add nofollow for competitor domains
+    .replace(/\[(.*?)\]\((.*?)\)/g, (match, text, url) => {
+      // List of competitor domains that should get nofollow
+      const competitorDomains = ['honeywell.com', 'datalogic.com', 'bluebird.co', 'samsung.com']
+      const isCompetitor = competitorDomains.some(domain => url.toLowerCase().includes(domain))
+      const isExternal = url.startsWith('http') && !url.includes('serwis-zebry.pl')
+      
+      if (isCompetitor) {
+        // Competitors: nofollow noopener noreferrer (don't pass PageRank)
+        return `<a href="${url}" target="_blank" rel="nofollow noopener noreferrer" class="text-blue-600 hover:underline font-medium">${text}</a>`
+      } else if (isExternal) {
+        // External (like zebra.com): noopener noreferrer but follow (do pass PageRank to partners)
+        return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline font-medium">${text}</a>`
+      } else {
+        // Internal links: no rel needed
+        return `<a href="${url}" class="text-blue-600 hover:underline font-medium">${text}</a>`
+      }
+    })
     // Inline code
     .replace(/`([^`]+)`/g, '<code class="bg-gray-100 px-1.5 py-0.5 rounded text-sm font-mono text-gray-800">$1</code>')
     // Checkmarks (emoji fallback)

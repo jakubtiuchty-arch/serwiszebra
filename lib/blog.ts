@@ -1015,7 +1015,7 @@ Przygotowaliśmy dedykowane strony z pełną specyfikacją, cenami i konfiguracj
     slug: 'zebra-tc501-specyfikacja-cena-gdzie-kupic',
     title: 'Zebra TC501 – Specyfikacja, Cena, Gdzie Kupić (2026)',
     excerpt: 'Kompletna specyfikacja Zebra TC501: procesor AI Dragonwing, Wi-Fi 7, 5G, RFID UHF, skaner 30m. Cena, part numbers, porównanie z TC52. Gdzie kupić w Polsce?',
-    coverImage: '/blog/Zebra TC501-specyfikacja-cena-gdzie kupi.jpeg',
+    coverImage: '/blog/zebra-tc501-specyfikacja-cena-gdzie-kupic.jpeg',
     author: {
       name: 'Zespół TAKMA',
       role: 'Autoryzowany partner Zebra'
@@ -1692,7 +1692,7 @@ Jako **autoryzowany partner Zebra** oferujemy:
     slug: 'zebra-tc701-specyfikacja-cena-gdzie-kupic',
     title: 'Zebra TC701 – Specyfikacja, Cena, Gdzie Kupić (2026)',
     excerpt: 'Kompletna specyfikacja Zebra TC701: terminal ultra-rugged z procesorem AI, Wi-Fi 7, 5G, RFID UHF, upadki 3,66m. Cena, part numbers. Dla logistyki i chłodni.',
-    coverImage: '/blog/Zebra TC701-specyfikacja-cena-gdzie kupi.jpeg',
+    coverImage: '/blog/zebra-tc701-specyfikacja-cena-gdzie-kupic.jpeg',
     author: {
       name: 'Zespół TAKMA',
       role: 'Autoryzowany partner Zebra'

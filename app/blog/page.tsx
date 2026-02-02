@@ -324,8 +324,65 @@ export default function BlogPage() {
     setSelectedSubDeviceType(null)
   }
 
+  // Blog and CollectionPage schemas for the listing page only
+  const blogSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Blog',
+    '@id': 'https://www.serwis-zebry.pl/blog#blog',
+    name: 'Blog Serwis Zebra',
+    description: 'Praktyczne poradniki napraw drukarek etykiet, terminali mobilnych i skanerów Zebra.',
+    url: 'https://www.serwis-zebry.pl/blog',
+    inLanguage: 'pl-PL',
+    publisher: {
+      '@type': 'Organization',
+      name: 'TAKMA - Serwis Zebra',
+      url: 'https://www.serwis-zebry.pl',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://www.serwis-zebry.pl/takma_logo_1.png',
+      },
+    },
+    blogPost: allPosts.slice(0, 20).map((post) => ({
+      '@type': 'BlogPosting',
+      headline: post.title,
+      description: post.excerpt,
+      url: `https://www.serwis-zebry.pl/blog/${post.slug}`,
+      datePublished: post.publishedAt,
+      dateModified: post.updatedAt || post.publishedAt,
+      image: post.coverImage ? `https://www.serwis-zebry.pl${post.coverImage}` : undefined,
+    })),
+  }
+
+  const collectionPageSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: 'Blog Serwis Zebra',
+    description: 'Kolekcja artykułów o naprawach i konfiguracji urządzeń Zebra',
+    url: 'https://www.serwis-zebry.pl/blog',
+    mainEntity: {
+      '@type': 'ItemList',
+      numberOfItems: allPosts.length,
+      itemListElement: allPosts.slice(0, 20).map((post, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        url: `https://www.serwis-zebry.pl/blog/${post.slug}`,
+        name: post.title,
+      })),
+    },
+  }
+
   return (
     <div className="min-h-screen bg-gray-50">
+      {/* Schema.org for Blog listing page ONLY (not individual posts) */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionPageSchema) }}
+      />
+      
       {/* Header */}
       <Header currentPage="blog" />
 

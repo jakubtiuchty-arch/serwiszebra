@@ -4,6 +4,7 @@
 # Pozwól wszystkim botom na indeksowanie
 User-agent: *
 Allow: /
+Crawl-delay: 1
 
 # Zablokuj prywatne obszary
 Disallow: /api/
@@ -21,13 +22,6 @@ Allow: /sklep/*
 Allow: /blog
 Allow: /blog/*
 
-# Sitemap
-Sitemap: https://www.serwis-zebry.pl/sitemap.xml
-
-# Crawl-delay dla botów
-User-agent: *
-Crawl-delay: 1
-
 # Specjalne reguły dla Google
 User-agent: Googlebot
 Allow: /
@@ -37,3 +31,6 @@ Crawl-delay: 0
 User-agent: Bingbot
 Allow: /
 Crawl-delay: 1
+
+# Sitemap
+Sitemap: https://www.serwis-zebry.pl/sitemap.xml

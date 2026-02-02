@@ -251,8 +251,8 @@ export const metadata: Metadata = {
       'x-default': 'https://www.serwis-zebry.pl',
     },
   },
-  verification: {
-    google: 'your-google-verification-code',
-    // yandex: 'your-yandex-verification-code',
-  },
+  // verification: {
+  //   google: 'TUTAJ_WKLEJ_KOD_Z_GOOGLE_SEARCH_CONSOLE',
+  //   // Aby uzyskać kod: Google Search Console → Ustawienia → Weryfikacja własności → Tag HTML
+  // },
 }
