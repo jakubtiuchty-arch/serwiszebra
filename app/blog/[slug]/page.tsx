@@ -1253,7 +1253,7 @@ function extractPriceFromContent(content: string, type: 'low' | 'high'): string 
     return type === 'low' ? '5000' : '10000' // Default fallback
   }
   
-  const sortedPrices = [...new Set(prices)].sort((a, b) => a - b)
+  const sortedPrices = Array.from(new Set(prices)).sort((a, b) => a - b)
   return type === 'low' 
     ? sortedPrices[0].toString() 
     : sortedPrices[sortedPrices.length - 1].toString()
