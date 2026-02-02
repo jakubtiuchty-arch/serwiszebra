@@ -1578,7 +1578,7 @@ Jako **autoryzowany partner Zebra** oferujemy:
 
 ---
 
-*Autor: **Jakub Tiuchty**, Specjalista ds. rozwiązań mobilnych, TAKMA. 15 lat doświadczenia we wdrożeniach terminali Zebra w sieciach handlowych i logistyce. Certyfikowany technik Zebra.*
+*Autor: **Krzysztof Wójcik**, Kierownik Serwisu TAKMA. 20 lat doświadczenia w naprawach i serwisie urządzeń Zebra. Certyfikowany technik Zebra Repair Specialist.*
 
 *Źródła: [Zebra Technologies](https://www.zebra.com), [Qualcomm](https://www.qualcomm.com), oficjalne specyfikacje producenta.*
 `
