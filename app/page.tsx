@@ -353,16 +353,12 @@ export default function HomePage() {
                   <a href="/panel" className="hidden md:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
                     Panel serwisowy
                   </a>
-                  <div className="hidden md:block relative group">
-                    <div className="px-3 py-1.5 bg-gradient-to-r from-blue-50 via-indigo-50 to-purple-50 rounded-full border border-gray-200 shadow-sm cursor-not-allowed">
-                      <span className="text-sm font-semibold text-gray-900">Sklep</span>
-                    </div>
-                    {/* Tooltip */}
-                    <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5 bg-gray-900 text-white text-xs rounded-lg whitespace-nowrap opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all shadow-lg">
-                      Zapraszamy niebawem! 🎉
-                      <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-1 border-4 border-transparent border-t-gray-900"></div>
-                    </div>
-                  </div>
+                  <a 
+                    href="/sklep" 
+                    className="hidden md:block px-3 py-1.5 bg-gradient-to-r from-blue-50 via-indigo-50 to-purple-50 rounded-full border border-gray-200 shadow-sm hover:shadow-md hover:border-blue-300 transition-all"
+                  >
+                    <span className="text-sm font-semibold text-gray-900">Sklep</span>
+                  </a>
                   {!isLoading && (
                     isLoggedIn ? (
                       <button

@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Calendar, ThumbsUp, Zap, Menu, X, User, LogIn, BookOpen, Download, HelpCircle, Info, Phone, Home, Video } from 'lucide-react'
+import { Calendar, ThumbsUp, Zap, Menu, X, User, LogIn, BookOpen, Download, HelpCircle, Info, Phone, Home, Video, ShoppingBag } from 'lucide-react'
 import { trackCTAClick, trackInternalLink } from '@/lib/analytics'
 
 interface HeaderProps {
@@ -124,16 +124,13 @@ export default function Header({ currentPage = 'other', hidePartnerLogos = false
                 Panel serwisowy
               </Link>
               
-              {/* Sklep - coming soon */}
-              <div className="hidden md:block relative group">
-                <div className="px-3 py-1.5 bg-gradient-to-r from-blue-50 via-indigo-50 to-purple-50 rounded-full border border-gray-200 shadow-sm cursor-not-allowed">
-                  <span className="text-sm font-semibold text-gray-900">Sklep</span>
-                </div>
-                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5 bg-gray-900 text-white text-xs rounded-lg whitespace-nowrap opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all shadow-lg">
-                  Zapraszamy niebawem! 🎉
-                  <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-1 border-4 border-transparent border-t-gray-900"></div>
-                </div>
-              </div>
+              {/* Sklep */}
+              <Link 
+                href="/sklep" 
+                className="hidden md:block px-3 py-1.5 bg-gradient-to-r from-blue-50 via-indigo-50 to-purple-50 rounded-full border border-gray-200 shadow-sm hover:shadow-md hover:border-blue-300 transition-all"
+              >
+                <span className="text-sm font-semibold text-gray-900">Sklep</span>
+              </Link>
 
               <Link href="/logowanie" className="hidden md:block text-sm text-gray-700 hover:text-gray-900 transition-colors font-medium">
                 Zaloguj
@@ -231,6 +228,15 @@ export default function Header({ currentPage = 'other', hidePartnerLogos = false
               >
                 <Download className="w-4 h-4" />
                 <span>Sterowniki</span>
+              </Link>
+              
+              <Link
+                href="/sklep"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors"
+              >
+                <ShoppingBag className="w-4 h-4" />
+                <span className="font-medium">Sklep</span>
               </Link>
               
               <Link
