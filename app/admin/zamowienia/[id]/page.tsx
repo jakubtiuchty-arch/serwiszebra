@@ -794,7 +794,7 @@ export default function OrderDetailPage() {
             <div className="space-y-2 mb-6">
               {Object.entries(STATUS_CONFIG).map(([key, config]) => {
                 const Icon = config.icon
-                const isCurrentStatus = order?.order_status === key
+                const isCurrentStatus = order?.status === key
                 
                 return (
                   <button
