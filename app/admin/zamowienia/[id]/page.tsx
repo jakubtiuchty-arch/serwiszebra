@@ -191,7 +191,7 @@ export default function OrderDetailPage() {
 
       const data = await response.json()
       
-      setOrder({ ...order, order_status: selectedStatus, updated_at: data.order.updated_at })
+      setOrder({ ...order, status: selectedStatus, updated_at: data.order.updated_at })
       setShowStatusModal(false)
       setNewStatus('')
       
