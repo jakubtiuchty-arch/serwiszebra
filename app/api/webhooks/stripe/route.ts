@@ -150,9 +150,29 @@ export async function POST(request: NextRequest) {
       const session = event.data.object as Stripe.Checkout.Session;
       
       if (session.payment_status === 'paid') {
-        // Sprawdź czy to zamówienie czy naprawa
-        if (session.metadata?.order_id) {
-          // SKLEP - zamówienie
+        // Sprawdź typ płatności (shop_order, order, repair)
+        if (session.metadata?.shop_order_id) {
+          // SKLEP - zamówienie z shop_orders
+          const shopOrderId = session.metadata.shop_order_id;
+          console.log(`✅ [Webhook] Processing shop_order payment: ${shopOrderId}`);
+
+          await supabase
+            .from('shop_orders')
+            .update({
+              payment_status: 'succeeded',
+              stripe_payment_id: session.payment_intent as string,
+              paid_at: new Date().toISOString(),
+              status: 'confirmed',
+              updated_at: new Date().toISOString(),
+            })
+            .eq('id', shopOrderId);
+
+          console.log(`✅ [Webhook] Shop order ${shopOrderId} marked as paid`);
+          
+          // TODO: Wysłać email potwierdzający płatność
+        }
+        else if (session.metadata?.order_id) {
+          // ADMIN - zamówienie z orders
           const orderId = session.metadata.order_id;
 
           await supabase

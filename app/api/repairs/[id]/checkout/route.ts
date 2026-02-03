@@ -69,7 +69,6 @@ if (['zakonczone', 'wyslane', 'anulowane'].includes(repair.status)) {
     const shortId = repair.id.split('-')[0].toUpperCase();
 
     // Utwórz Stripe Checkout Session
-    // Uwaga: payment_method_types usunięte - Stripe automatycznie wybierze dostępne metody
     const session = await stripe.checkout.sessions.create({
       line_items: [
         {
@@ -79,12 +78,14 @@ if (['zakonczone', 'wyslane', 'anulowane'].includes(repair.status)) {
               name: `Naprawa urządzenia ${repair.device_model}`,
               description: `Zgłoszenie #${shortId}${repair.serial_number ? ` | S/N: ${repair.serial_number}` : ''}`,
             },
-            unit_amount: Math.round(amountToPay * 100), // Stripe przyjmuje grosze
+            unit_amount: Math.round(amountToPay * 100),
           },
           quantity: 1,
         },
       ],
       mode: 'payment',
+      // Tylko karta i Przelewy24 (BLIK) - bez Klarna
+      payment_method_types: ['card', 'p24', 'blik'],
       success_url: `${request.nextUrl.origin}/panel/zgloszenie/${repairId}?payment=success`,
       cancel_url: `${request.nextUrl.origin}/panel/zgloszenie/${repairId}?payment=cancelled`,
       customer_email: repair.email,

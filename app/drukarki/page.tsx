@@ -128,6 +128,7 @@ export const metadata: Metadata = {
 // Kluczowe artykuły klastra - jawne linki dla SEO
 const clusterArticles = [
   { title: 'Ile kosztuje naprawa drukarki Zebra? Cennik 2026', slug: 'cennik-naprawy-drukarki-zebra-koszty-serwisu', desc: 'Aktualne ceny napraw' },
+  { title: 'Serwis drukarki Zebra ZD620/ZD621', slug: 'serwis-drukarki-zebra-zd620-zd621-diagnostyka-naprawa', desc: 'Premium desktop + RFID' },
   { title: 'Serwis drukarki Zebra ZD420/ZD421', slug: 'serwis-drukarki-zebra-zd420-zd421-diagnostyka-naprawa', desc: 'Diagnostyka i naprawa' },
   { title: 'Serwis drukarki Zebra ZT411/ZT421', slug: 'serwis-drukarki-zebra-zt411-zt421-diagnostyka-naprawa', desc: 'Drukarki przemysłowe' },
   { title: 'Serwis drukarki Zebra GK420/GC420', slug: 'serwis-drukarki-zebra-gk420-gc420-diagnostyka-naprawa', desc: 'Seria G - biurkowe' },

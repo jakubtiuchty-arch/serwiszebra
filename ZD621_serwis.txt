@@ -1,0 +1,3254 @@
+ZD621 and ZD421
+Link-OS® Desktop Printers
+Service Manual
+P213529-02EN
+ZEBRA and the stylized Zebra head are trademarks of Zebra Technologies Corporation, registered in
+many jurisdictions worldwide. All other trademarks are the property of their respective owners.
+© 2021 Zebra Technologies Corporation and/or its affiliates. All rights reserved.
+Information in this document is subject to change without notice. The software described in this document
+is furnished under a license agreement or nondisclosure agreement. The software may be used or copied
+only in accordance with the terms of those agreements.
+For further information regarding legal and proprietary statements, please go to:
+SOFTWARE: zebra.com/linkoslegal
+COPYRIGHTS: zebra.com/copyright
+WARRANTY: zebra.com/warranty
+END USER LICENSE AGREEMENT: zebra.com/eula
+Terms of Use
+Proprietary Statement
+This manual contains proprietary information of Zebra Technologies Corporation and its subsidiaries
+(“Zebra Technologies”). It is intended solely for the information and use of parties operating and
+maintaining the equipment described herein. Such proprietary information may not be used, reproduced,
+or disclosed to any other parties for any other purpose without the express, written permission of Zebra
+Technologies.
+Product Improvements
+Continuous improvement of products is a policy of Zebra Technologies. All specifications and designs are
+subject to change without notice.
+Liability Disclaimer
+Zebra Technologies takes steps to ensure that its published Engineering specifications and manuals are
+correct; however, errors do occur. Zebra Technologies reserves the right to correct any such errors and
+disclaims liability resulting therefrom.
+Limitation of Liability
+In no event shall Zebra Technologies or anyone else involved in the creation, production, or delivery of the
+accompanying product (including hardware and software) be liable for any damages whatsoever
+(including, without limitation, consequential damages including loss of business profits, business
+interruption, or loss of business information) arising out of the use of, the results of use of, or inability to
+use such product, even if Zebra Technologies has been advised of the possibility of such damages. Some
+jurisdictions do not allow the exclusion or limitation of incidental or consequential damages, so the above
+limitation or exclusion may not apply to you.
+Publication Date
+March 31, 2025
+2
+Contents
+Contents .............................................................................................................................................. 3
+About this Guide................................................................................................................................. 9
+Related Documents and Software ................................................................................... 9
+Other Valuable Printer Resources.......................................................................... 10
+Zebra OneCare Printer Service and Support ......................................................... 10
+Icon Conventions ........................................................................................................... 11
+Introduction....................................................................................................................................... 12
+How Repairs and Maintenance Procedures Are Documented....................................... 13
+Thermal Printing............................................................................................................. 13
+Preparing a Static-Safe Work Area................................................................................ 13
+Packaging ...................................................................................................................... 13
+Environmental and Shock Protection............................................................................. 13
+Long Term Printer Inactivity or Storage ......................................................................... 13
+Real Time Clock (RTC).................................................................................................. 14
+Fuses ............................................................................................................................. 14
+Cleaning and Maintenance .............................................................................................................. 15
+Cleaning Supplies .......................................................................................................... 15
+Get Zebra Supplies and Accessories for Cleaning Your Printer............................. 15
+Recommended Cleaning Schedule................................................................................ 15
+Printhead ................................................................................................................ 15
+Standard Platen (Drive) Roller................................................................................ 16
+Linerless Platen (Drive) Roller ......................................................................... 16
+Media Path ............................................................................................................. 16
+Interior .................................................................................................................... 16
+Exterior ................................................................................................................... 17
+Label Dispenser Option .......................................................................................... 17
+3
+Contents
+Cutter Option .......................................................................................................... 17
+Cleaning the Printhead.................................................................................................. 18
+ZD621/ZD421 Direct Thermal Printers ................................................................... 18
+ZD621/ZD421 Thermal Transfer Printers ............................................................... 19
+ZD421 Ribbon Cartridge Printers ........................................................................... 20
+Media Path Cleaning..................................................................................................... 21
+Lower Half of ZD621/ZD421 Printers ..................................................................... 21
+Upper Half of ZD621/ZD421 Direct Thermal Printers............................................. 22
+Upper Half of ZD621/420 Thermal Transfer Printers.............................................. 22
+Upper Half of ZD421 Thermal Transfer Ribbon Cartridge Printers ........................ 23
+Cleaning the Cutter and Label Dispenser Options........................................................ 24
+Cleaning the Cutter Option ..................................................................................... 24
+Cleaning the Label Dispenser Option .............................................................. 25
+Sensor Cleaning............................................................................................................ 26
+Lower Half of ZD621/ZD421 Printers ..................................................................... 26
+Upper Half of ZD621/ZD421 Direct Thermal Printers............................................. 27
+Upper Half of ZD621/ZD421 Thermal Transfer Printers......................................... 27
+Upper Half of ZD421 Ribbon Cartridge Printers ..................................................... 28
+Cleaning Ribbon Cartridge Sensor......................................................................... 29
+Platen Cleaning and Replacement................................................................................ 30
+Removing the Platen Roller.................................................................................... 31
+Replacing the Platen Roller .................................................................................... 33
+Updating Printer Firmware ............................................................................................ 34
+USB Host for File Transfers.................................................................................... 34
+USB Host Port Uses......................................................................................... 34
+Using USB Host for Firmware Updates .................................................................. 35
+Flash Drive Preparation and Firmware Update................................................ 35
+Run a SmartCal Media Calibration after Repairs.......................................................... 36
+SmartCal Procedure ............................................................................................... 36
+Test Printing with the Configuration Report .................................................................. 37
+Troubleshooting ............................................................................................................................... 38
+Resolving Alerts and Errors ........................................................................................... 38
+Alert: Printhead Open ............................................................................................. 38
+Alert: Media Out...................................................................................................... 39
+Alert: Ribbon In (ZD421 Cartridge Printer only)...................................................... 40
+Alert: Ribbon Out .................................................................................................... 41
+Alert: Ribbon Low (ZD421 Cartridge Printer only) .................................................. 42
+Alert: CUT ERROR................................................................................................. 43
+Alert: PRINTHEAD OVER TEMP ........................................................................... 44
+Alert: PRINTHEAD SHUTDOWN ........................................................................... 45
+4
+Contents
+Alert: PRINTHEAD UNDER TEMP......................................................................... 45
+Alert: OUT OF MEMORY ....................................................................................... 46
+Resolving Print Issues................................................................................................... 47
+Issue: General Print Quality Issues ........................................................................ 47
+Issue: No Print on the Label ................................................................................... 48
+Issue: Labels Are Distorted in Size or Print Area Start Position Varies.................. 48
+Communication Issues................................................................................................... 49
+Issue: Label Job Sent, No Data Transfer ............................................................... 49
+Issue: Label Job Sent, Skips Labels or Prints Bad Content ................................... 49
+Issue: Label Job Sent, Data Transfers, But No Print.............................................. 50
+Miscellaneous Issues..................................................................................................... 50
+Issue: Settings are Lost or Ignored......................................................................... 50
+Issue: Non-continuous labels act as Continuous labels. ........................................ 51
+Issue: Printer Locks-Up .......................................................................................... 52
+Issue: Erroneous Ribbon Cartridge Faults ............................................................. 52
+Issue: Battery Has a Red Indicator......................................................................... 53
+Required Tools.................................................................................................................................. 54
+Replacing Parts................................................................................................................................. 55
+Repair Procedure Sequence for ZD421(c) Cartridge Printers ...................................... 56
+Repair Paths for ZD421(d) and ZD621(d) Direct Thermal Printers............................... 57
+Repair Paths for ZD421(t) Thermal Transfer Printers................................................... 58
+Repair Paths for ZD621(t) Thermal Transfer Printers................................................... 59
+Repair Paths for ZD621R RFID Thermal Transfer Printers .......................................... 60
+How to Determine a Repair Sequence for your Part .............................................. 61
+Repair Path Example ....................................................................................... 61
+Repair Preparation and Post Repair Basic Operational Tests...................................... 62
+ZD421 Ribbon Cartridge Printer - Accessing the Printhead ................................... 63
+Transfer Ribbon Roll Printers: Accessing Inside the Cover .......................................... 64
+Replacing the Printhead................................................................................................ 66
+ZD621 and ZD421 Direct Thermal Printhead ......................................................... 67
+Removing the Printhead................................................................................... 67
+Replacing the Printhead................................................................................... 69
+ZD621 and ZD421 Thermal Transfer Ribbon Roll Printhead ................................. 71
+Removing the Printhead................................................................................... 71
+Replacing the Printhead................................................................................... 73
+ZD421 Thermal Transfer Ribbon Cartridge Printhead............................................ 76
+5
+Contents
+Printhead Removal........................................................................................... 76
+Replacing the Platen (Drive) Roller............................................................................... 80
+Replacing Wired Connectivity Modules......................................................................... 83
+Replacing the Wireless Connectivity Module................................................................ 84
+Replacing a Front Bezel Option (Tear-off, Dispense, Cut)............................................ 87
+Removing the Printer Base for Repair Access.............................................................. 89
+Replacing the Printer’s Feet........................................................................................... 90
+Installation........................................................................................................ 90
+Replacing the Window .................................................................................................. 91
+Repair Prerequisites ............................................................................................... 91
+Thermal Transfer Roll and Cartridge Printers......................................................... 91
+Direct Thermal Printer Window Replacement ........................................................ 92
+Replacing the Motor....................................................................................................... 94
+ZD421(t) and ZD621(t) - Replacing the Head-Up Sensor ...................................... 95
+Replacing the Main PCBA ...................................................................................... 98
+ZD621R - Replacing the RFID Programming and Antenna PCBA’s........................... 101
+Accessing the ZD421(c) Movable Sensor................................................................... 105
+Accessing ZD621(d) and ZD421(d) Head-up and Movable Sensors........................... 108
+Accessing the ZD621(t) Movable Sensor.................................................................... 111
+Accessing the ZD621R Head-up and Movable Sensors............................................. 114
+Replacing the Movable Lower Media (Blackmark) Sensor ......................................... 118
+Replacing the Hinge in Thermal Transfer Printers...................................................... 122
+Replacing the Hinge in Direct Thermal Printers.......................................................... 127
+Replacing the Cover Assembly on Thermal Transfer (Roll) Printers .......................... 128
+Replacing the Cover Assembly on Cartridge Printers.................................................. 130
+Replacing the Cover Assembly on Direct Thermal Printers........................................ 131
+Replacing the CTD Cover Assembly on ZD621(d) ...................................................... 132
+Accessing under the Cover - Thermal Transfer Printers............................................. 133
+Accessing under the Cover - Direct Thermal Printers................................................. 136
+Replacing a 3-Button Control Panel PCBA................................................................. 138
+Replacing a Color Touch Display Control Panel......................................................... 139
+Replacing the Latch Assembly - ZD421(c), ZD621(t), and Zd621R............................ 140
+Replacing the Latch Assembly - ZD421(t) .................................................................. 141
+Replacing the Latch Arm Assembly - Direct Thermal Printers..................................... 142
+Replacing the Upper Array Sensor - Thermal Transfer Printer................................... 146
+Replacing the Upper Array Sensor - Thermal Transfer Printer................................... 147
+Replacing the Ribbon Roll Printer’s Ribbon Trailer Sensor PCBA ....................... 150
+Replacing the Cartridge Printer Ribbon Sensor PCBA ................................................ 152
+Replacing the Ribbon Carriage in Thermal Transfer (Roll) Printers............................ 154
+Replacing the Ribbon Transport........................................................................... 157
+Replacing the Upper Media (Gap/Web) Sensor (ZD421C).......................................... 160
+Replacing the Print Mechanism .................................................................................. 163
+6
+Contents
+Main PCBA Layout.......................................................................................................................... 164
+Main Printed Circuit Board Assembly (Top View) ........................................................ 165
+Main Printed Circuit Board Assembly (Back View) ...................................................... 166
+Cable Routing for ZD421c.............................................................................................................. 167
+ZD421c - Ribbon Cartridge printers ............................................................................. 167
+Cable Routing for ZD421d.............................................................................................................. 177
+ZD421d - Direct Thermal printers................................................................................. 177
+Cable Routing for ZD621d.............................................................................................................. 184
+ZD621d - Direct Thermal printers................................................................................. 184
+Basic 3 Button UI................................................................................................ 184
+Color Touch Display UI ...................................................................................... 185
+3 Button UI............................................................................................................ 190
+Cable Routing for ZD421t............................................................................................................... 192
+ZD421t Ribbon Roll Thermal Transfer Printers............................................................ 192
+Cable Routing for ZD621t............................................................................................................... 201
+ZD621 Ribbon Roll Thermal Transfer Printers............................................................. 201
+Basic 3 Button UI................................................................................................ 201
+Color Touch Display UI ...................................................................................... 202
+Cable Routing for ZD621R ............................................................................................................. 211
+ZD621RFID Thermal Transfer Printers........................................................................ 211
+Basic 3 Button UI................................................................................................ 211
+Media................................................................................................................................................ 221
+Types of Thermal Media .............................................................................................. 221
+Determining Thermal Media Types ...................................................................... 221
+To perform a media scratch test, complete these steps: ............................... 221
+General Media and Print Specifications ............................................................... 222
+Label Dispenser (Peeler) ............................................................................... 223
+Standard (Media) Cutter................................................................................. 224
+Linerless (Media) Cutter - Direct Thermal only .............................................. 224
+7
+Contents
+ZPL Configuration .......................................................................................................................... 225
+Managing the ZPL Printer Configuration...................................................................... 225
+ZPL Printer Configuration Format......................................................................... 226
+Configuration Setting to Command Cross-reference .................................................. 227
+Printer Memory Management and Related Status Reports ......................................... 230
+ZPL Programming for Memory Management ....................................................... 230
+8
+About this Guide
+This guide provides information about servicing the Zebra Link-OS ZD421 and ZD621 desktop printers.
+Use this guide to repair these printers.
+Related Documents and Software
+Use these links to get to your Online printer support resources:
+• ZD621 Thermal Transfer Printer — zebra.com/ZD621t-info
+• ZD621 Direct Thermal Printer — zebra.com/ZD621d-info
+• ZD421 Thermal Transfer Ribbon Cartridge Printer — zebra.com/ZD421c-info
+• ZD421 Thermal Transfer Printer — zebra.com/ZD421t-info
+• ZD421 Direct Thermal Printer — zebra.com/ZD421d-info
+• ZD621R Thermal Transfer Printer — zebra.com/ZD621r-info
+The printer resources to support this printer include:
+• “How To” videos
+• Printer accessory, supplies, parts, and software links
+• Various setup and configuration guides
+• Programmer’s manuals,
+• Printer Drivers (Windows, Apple, OPOS, etc.)
+• Printer Firmware
+• Printer Fonts
+• Utilities
+• Knowledge base and support contacts
+• Printer warranty and repair links
+9
+About this Guide
+Other Valuable Printer Resources
+Zebra has a large suite of free and fee-based software, Apps (applications), and other technical resources
+for your Zebra Link-OS printer.
+These are just some of the extensive software and resource areas available online at Zebra.com:
+• Label Design software
+• Printer Management tools
+• Virtual Devices for legacy languages normally associated with other printer brands
+• Cloud-based Enterprise printer management and printing
+• XML and PDF format file printing
+• Oracle and SAP support
+• Zebra Savanna ™ Data Intelligence platform - turns raw data from devices (IoT) and sensors into
+actionable intelligence for your business
+• A suite of Link-OS Mobile Apps (applications for phones, tablets, etc.)
+• Link-OS software development kit (SDK)
+• Additional Operating Systems (OS) and Service platforms
+See ZebraLink, Zebra Link-OS, and Zebra Savanna from this Online link: zebra.com/software
+Zebra OneCare Printer Service and Support
+For maximum productivity, we can help your business ensure its Zebra printers are Online and ready for
+business. See the descriptions of the Zebra OneCare service and support options available for your
+printers Online at this link: zebra.com/zebraonecare
+10
+About this Guide
+Icon Conventions
+The documentation set is designed to give the reader more visual clues. The following graphic icons are
+used throughout the documentation set. These icons and their associated meanings are described below.
+NOTE: The text here indicates information that is supplemental for the user to know and that is not
+required to complete a task.
+IMPORTANT: The text here indicates information that is important for the user to know.
+CAUTION—EYE INJURY: Wear protective eyewear when performing certain tasks.
+CAUTION—PRODUCT DAMAGE: If the precaution is not taken, the product could be damaged.
+CAUTION: If the precaution is not heeded, the user could receive minor or moderate injury.
+CAUTION—HOT SURFACE: Touching this area could result in burns.
+CAUTION—ESD: Observe proper electrostatic safety precautions.
+CAUTION—ELECTRIC SHOCK: Disconnect the printer power before performing certain procedures to
+avoid the risk of electric shock.
+WARNING: If danger is not avoided, the user CAN be seriously injured or killed.
+DANGER! If danger is not avoided, the user WILL be seriously injured or killed.
+NOTE: This is an icon for wired networking notes.
+NOTE: This is an icon for wireless networking notes.
+11
+Introduction
+This manual provides ZD421 and ZD621 printer repair, maintenance, and troubleshooting procedures for
+field engineers or technicians.
+Follow the part replacement procedures as closely as possible. If you are unsure of any procedure, please
+contact your service representative or call the products technical support group at Zebra Technologies
+Corporation.
+Zebra Technologies stocks all replacement parts for the printer. Be sure your facility stocks sufficient parts
+for the printer so that scheduled maintenance can take place in a timely manner.
+To simplify the documentation, the base printer model displayed on the printer has an added model type
+identifier in parentheses.
+• ZD421(c) represents the ZD421 Thermal Transfer Cartridge Printer
+• ZD421(d) represents the ZD421 Direct Thermal Printer
+• ZD621(d) represents the ZD621 Direct Thermal Printer
+• ZD421(t) represents the ZD421 and ZD421CN Thermal Transfer (Roll) Printer
+• ZD621(t) represents the ZD621 Thermal Transfer (Roll) Printer
+• ZD621R represents the ZD621R RFID Thermal Transfer (Roll) Printer
+12
+Introduction
+How Repairs and Maintenance Procedures Are Documented
+This manual is designed to provide training and instruction for repair and maintenance of your Zebra
+printer.
+Each Link-OS 4 inch Desktop printer Spares Kit has one or more repair procedures that support it. The
+Replacing Parts section of this service manual includes a repair flow diagram. See a list of available Spare
+Parts Kits at:
+zebra.com/parts
+Thermal Printing
+CAUTION—HOT SURFACE: The printhead becomes hot while printing. To protect from damaging the
+printhead and risk of personal injury, avoid touching the printhead. Only use the cleaning pen to perform
+printhead maintenance.
+Preparing a Static-Safe Work Area
+Prepare a static-safe work area before opening the printer for repair. The area must include a properly
+grounded conductive cushioned mat to hold the printer and a conductive wrist strap for the technician.
+ESD protective devices are available from most electronic supply stores or by contacting 3M corporation at
+(800) 328-1368.
+CAUTION—ESD: The discharge of electrostatic energy that accumulates on the surface of the human
+body or other surfaces can damage or destroy the printhead and other electronic components used in this
+device. You must observe static-safe procedures when working with the printhead or the electronic
+components under the top cover.
+Packaging
+Printers are carton shipped and wrapped inside a protective bag. Keep all packing materials in case you
+need to reship the printer later or store the printer for any length of time.
+Environmental and Shock Protection
+Extreme temperature and humidity fluctuations or mishandling can damage the printer and power supply.
+Allow 30 minutes or more before opening the printer's plastic bag. This time allows the printer to stabilize
+temperature especially after storage in a cool, dry location and then placed in a warmer, more humid
+location. Warm, humid air condenses on the cool components of the printer and this condensation may
+damage the components.
+Move the printer carefully. Mechanical damage can certainly result from falls or rough handling.
+Long Term Printer Inactivity or Storage
+Over time the printhead may stick to the platen (drive) roller. To prevent this, always store the printer with a
+piece of media (a label or paper) between the printhead and platen roller. Do not ship the printer with a roll
+of media installed or damage to the printer or media may result.
+13
+Introduction
+Real Time Clock (RTC)
+The Real Time Clock (RTC) is included with ZD621 and ZD421 printers.
+The clock’s battery is rated to provide approximately ten (10) years of service and is not user replaceable.
+See a Zebra authorized service technician to replace the battery. For more details on battery replacement,
+see the warranty for your printer on the Zebra Website at: zebra.com/warranty.
+IMPORTANT: Recycle batteries according to local your guidelines and regulations. Wrap the battery when
+disposing (or storing) to avoid a short circuit.
+CAUTION:
+• Do not short circuit the battery. Short circuiting the battery may result in heat generation, fire or
+bursting.
+• Do not heat, disassemble or dispose of battery in fire.
+• The printer has a 3 V lithium battery. You can discern a low or flat battery if the printer provides a
+consistently delayed date stamp. Battery replacement must be performed by a qualified service
+technician. Only use a Zebra approved replacement battery.
+Fuses
+There are no replaceable fuses in ZD-Series printers or power supplies.
+14
+Cleaning and Maintenance
+This section provides routine cleaning and maintenance procedures.
+Cleaning Supplies
+The following printer cleaning supplies are recommended for use with your printer:
+• Printhead Cleaning Pens for simple operator printhead cleaning
+• 99.7% pure Isopropyl Alcohol (Never re-moisten cleaning materials used to clean the printer).
+• Fiber-free Cleaning Swabs for media path, guides, and sensors.
+• Cleaning Wipes (lint free) for media path and interior.
+• Can of compressed air
+IMPORTANT:
+• Using too much alcohol can result in contamination of the electronic components requiring a much
+longer drying time before the printer will function properly.
+• Do Not Use an air compressor in place of the can of compressed air. Air compressors have micro
+contaminants and particles the get into the air system and damage your printer.
+CAUTION—EYE INJURY: Use eye protection to protect your eyes from flying particles and objects when
+using compressed air.
+Get Zebra Supplies and Accessories for Cleaning Your Printer
+See the Zebra web site at zebra.com/accessories.
+Recommended Cleaning Schedule
+Printhead
+Interval: Clean the printhead after every roll printed.
+Procedure: Cleaning the Printhead on page 18.
+15
+Cleaning and Maintenance
+Standard Platen (Drive) Roller
+Interval: As needed to improve print quality. Platen rollers can slip causing print image distortion and in
+worst case scenarios not move the media (labels, receipts, tags, etc.).
+Procedure: See Platen Cleaning and Replacement on page 30.
+NOTE: Standard platen rollers are identified by color: black (203 dpi) and gray (300 dpi).
+Linerless Platen (Drive) Roller
+Interval: If there is observed build-up of particles on the platen roller, use this procedure. The linerless
+platen normally does not require cleaning. The adhesive side of the media picks up particles as you print.
+If the linerless media is sticking and binding in the printer, the linerless platen normally needs to be
+replaced. The silicon non-stick coating has been used up.
+IMPORTANT:
+• Linerless platen rollers are identified by color: reddish-brown (203 dpi) and brown (300 dpi).
+• Cleaning the roller with solutions or rubbing the delicate surface of this type of roller will permanently
+damage or shorten the usable life of the linerless platen.
+• The platen roller can accumulate adhesive on the outer edges of the roller. After using many rolls of
+media, these ‘rings’ of adhesive can get dislodged when using the printer. These particle clumps can
+then get transferred to other areas in the printer, most importantly, the printhead.
+Procedure: To remove adhesive particles, use the adhesive side of a piece of linerless media to gently
+press and remove the particles from the plater roller. Use the Platen Cleaning and Replacement on
+page 30 procedure to get better access for particle removal.
+Media Path
+Interval: Clean as needed.
+Method: Clean it thoroughly with fiber-free cleaning swabs and cloths moistened with 99% isopropyl
+alcohol. Let alcohol evaporate completely.
+Procedure: See Media Path Cleaning on page 21.
+Interior
+Interval: Clean the printer as needed.
+Method: Use a soft cloth, brush or compressed air to wipe or blow dust and particles out of the printer. A
+99.7% isopropyl alcohol and a fiber-free cleaning cloth can be used to dissolve contaminants like oils and
+grime.
+16
+Cleaning and Maintenance
+Exterior
+Interval: Clean as needed.
+Method: Use a soft cloth, brush or compressed air to wipe or blow dust and particles out of the printer. The
+exterior of the printer can be cleaned using plain soap and water solutions to moisten the cloth. Only use
+the minimum amount of cleaning to avoid getting solution in the printer or other areas. Do not clean
+connectors or interior of the printer. with this method.
+Healthcare Printer Models: The latest models now include ultra-violet (UV) and disinfectant-safe plastics
+for hospital and other similar environments. The user interface is sealed so it can be cleaned with the rest
+of the printer’s exterior. See the ‘Guide To Disinfecting and Cleaning Zebra® Healthcare Printers’ on the
+Zebra Web site for the latest information on tested and approved cleaning materials, and cleaning
+methods.
+Label Dispenser Option
+Interval: As needed to improve label dispensing operations.
+Procedure: See Label Dispenser Option on page 17 cleaning.
+Cutter Option
+Interval: Not an operator serviceable component. Do not clean inside the cutter opening or blade
+mechanism. You may use the exterior cleaning to clean the cutter bezel (housing).
+Method: None at this time.
+Procedure: None
+CAUTION: Never attempt to insert objects or fingers in to the cutter mechanism. Never remove the cutter
+cover (bezel). There are no operator serviceable parts in the cutter unit.
+IMPORTANT:
+• The blade has a special coating to resist adhesives and wear. Cleaning it may ruin the blade.
+• Using unapproved items such as tools, alcohol, solvents, or cotton swabs. They may damage or
+shorten the cutter’s usable life or cause the cutter to bind.
+17
+Cleaning and Maintenance
+Cleaning the Printhead
+Always use a new cleaning pen on the printhead (an old pen carries contaminants from its previous use
+that may damage the printhead).
+When you load new media, you should clean the printhead for optimal print operations.
+CAUTION—HOT SURFACE: The printhead becomes hot while printing. To protect from damaging the
+printhead and risk of personal injury, avoid touching the printhead. Only use the cleaning pen to perform
+printhead maintenance.
+CAUTION—ESD: Observe proper electrostatic safety precautions when handling static-sensitive
+components such as circuit boards and printheads.
+CAUTION: Do not use the cleaning pens or swabs on the platen (drive) roller or other parts of the printer to
+avoid cross contamination and damage to the printhead or printer operation.
+ZD621/ZD421 Direct Thermal Printers
+When you load new media, you can also clean the printhead.
+1. Rub the cleaning pen across the dark area of the printhead. Clean from the middle to the outside. This
+will move adhesive transferred from the edges of media to the outside of media path.
+2. Wait one minute before closing the printer to allow the components to dry.
+18
+Cleaning and Maintenance
+ZD621/ZD421 Thermal Transfer Printers
+When you load new media or ribbon, you can also clean the printhead.
+1. If transfer ribbon is installed, remove it before proceeding.
+2. Rub the cleaning pen across the dark area of the printhead. Clean from the middle to the outside. This
+will move adhesive transferred from the edges of media to the outside of media path.
+3. Wait one minute before closing the printer or loading ribbon to allow all components to dry.
+19
+Cleaning and Maintenance
+ZD421 Ribbon Cartridge Printers
+1. 2. 3. Pull the two (2) release arms out to release the ribbon drive transport. See ZD421 Ribbon Cartridge
+Printer - Accessing the Printhead on page 63 for more details.
+Lift the printhead actuator arm up to gain access to the printhead. Rub the cleaning pen across the dark
+area of the printhead. Clean from the middle to the outside. This will move adhesive transferred from
+the outer edges of media to the area outside of media path.
+Wait one minute before closing the printer.
+4. Release the printhead actuator arm and then push the ribbon drive transport into the printhead actuator
+arm. The release arms will snap into place relinking the ribbon drive transport to the top cover and the
+printhead actuator arm.
+20
+Cleaning and Maintenance
+Media Path Cleaning
+Use a cleaning swab and/or a lint free cloth to remove debris, dust or crust that has built-up on the holders,
+guides and media path surfaces. Lightly moisten the swab or cloth with 99% solution medical-grade
+alcohol. For hard to clean areas, use extra alcohol on a cleaning swab to soak the debris to break up any
+adhesive that may have accumulated on surfaces in the media compartment.
+Do not clean the printhead, sensors, or platen as part of this process.
+Lower Half of ZD621/ZD421 Printers
+1. Wipe the inside surfaces of the roll holders (3)and the underside of the media guides (1) with a cleaning
+swabs and wipes.
+2. Wipe the movable sensor slide channel, but do not clean the sensor (2). Move the sensor to get to all
+areas.
+3. Wait one minute before closing the printer.
+4. Discard used cleaning supplies.
+1
+3
+2
+21
+Cleaning and Maintenance
+Upper Half of ZD621/ZD421 Direct Thermal Printers
+1. Wipe the areas (outlined in orange) to remove adhesive and other contaminants. Do not clean the
+sensor array (1).
+1
+Upper Half of ZD621/420 Thermal Transfer Printers
+1. Wipe the area (outlined in orange) near the printhead on the front of the ribbon carriage.
+22
+Cleaning and Maintenance
+Upper Half of ZD421 Thermal Transfer Ribbon Cartridge Printers
+1. 2. Pull the two release arms (3) out to release the ribbon drive transport (3). See ZD421 Ribbon Cartridge
+Printer - Accessing the Printhead on page 63 for more details.
+Wipe the areas (outlined in orange) below the printhead actuator arm (2) and the ribbon drive transport.
+Do not clean the array sensor (1)
+1
+2
+3
+4
+3. Release the printhead actuator arm (4) and then push the ribbon drive transport (3) into the printhead
+actuator arm. The release arms will snap into place relinking the ribbon drive transport to the top cover
+and the printhead actuator arm.
+23
+Cleaning and Maintenance
+Cleaning the Cutter and Label Dispenser Options
+This is a continuation of cleaning the media path for either option, if installed.
+Cleaning the Cutter Option
+The plastic media path surfaces can be cleaned but not the internal cutter blades or mechanism.
+IMPORTANT: The cutter blade mechanism does not require maintenance cleaning. Do not clean the
+blade. This blade has a special coating to resist adhesives and wear. Using unapproved items such as
+tools, alcohol, solvents, or cotton swabs. They may damage or shorten the cutter’s usable life or cause the
+cutter to bind.
+CAUTION: Never attempt to insert objects or fingers into the cutter mechanism. Never remove the cutter
+cover (bezel). There are no operator serviceable parts in the cutter unit.
+1. 2. Wipe the ridges and the plastic surfaces of the media entry (inside) and exit slot (outside) of the cutter.
+Clean (1) inside the areas outlined in orange.
+Repeat as necessary to remove any adhesive or contaminate residue after it dries.
+1
+1
+24
+Cleaning and Maintenance
+Cleaning the Label Dispenser Option
+1. 2. 3. 4. Open the door and clean the peel bar (1), inner surfaces (5), and ridges (3) on the door.
+Wipe the roller (2) while rotating it. Discard the swab or cloth.
+Clean again with a new swab or cloth to remove diluted residue.
+Clean the Label Taken sensor window (4). The window should be clear of streaks and residue.
+5
+4
+1
+2
+3
+25
+Cleaning and Maintenance
+Sensor Cleaning
+Dust can accumulate on the media sensors. Do not use an air compressor to remove dust. Compressors
+add moisture, fine grit, and lubricant, which can contaminate your printer.
+Lower Half of ZD621/ZD421 Printers
+1. Clean the movable sensor’s window (1). Gently brush away dust or use a can of compressed air; if
+necessary, use a dry swab to brush away dust. If adhesives or other contaminants remain, use an
+alcohol moistened swab to break it up.
+2. Use a dry swab to remove any residue that may be left from the first cleaning.
+3. Repeat steps 1 and 2 as required until all residue and streaks are removed from the sensor.
+.
+1
+26
+Cleaning and Maintenance
+Upper Half of ZD621/ZD421 Direct Thermal Printers
+1. Spray the upper web (gap) array sensor (1) below the printhead with a can of compressed air. If
+necessary, use an alcohol moistened swab to break up adhesive or other non-dust contaminants. Use
+a dry swab to remove any residue that may be left from the first cleaning.
+1
+Upper Half of ZD621/ZD421 Thermal Transfer Printers
+1. Spray the upper web (gap) array sensor (1) below the printhead with a can of compressed air.
+Complete sensor cleaning (very rare) requires a service technician.
+1
+27
+Cleaning and Maintenance
+Upper Half of ZD421 Ribbon Cartridge Printers
+1. 2. 3. Pull the two release arms (4) out to release the ribbon drive transport (3). See ZD421 Ribbon Cartridge
+Printer - Accessing the Printhead on page 63 for more details.
+Swing the printhead actuator arm (5) up until it touches the printer’s top cover. Hold the printhead
+actuator arm in this position for access to the area below the printhead, see the next graphic.
+Spray the upper web (gap) array sensor (2) under the ribbon drive transport (5) and the ribbon out
+sensor (1) on the underside of the printhead actuator arm with a can of compressed air. If necessary,
+use an alcohol moistened swab to break it up. Use a dry swab to remove any residue that may be left
+from the first cleaning.
+1
+2
+5
+3
+4
+28
+Cleaning and Maintenance
+Cleaning Ribbon Cartridge Sensor
+IMPORTANT: Only clean the Ribbon Cartridge Sensor Pins when the cartridges are failing detection.
+1. Clean the Ribbon Cartridge interface pins (1) with a gentle wiping from right to left. Up and down
+motions may damage the pins.
+.
+1
+29
+Cleaning and Maintenance
+Platen Cleaning and Replacement
+The platen (drive roller) normally does not require cleaning. Normally, paper and liner dust can accumulate
+without affecting print operations.
+Clean the platen (and media path) whenever the printer has significantly poorer performance, print quality
+or media handling. The platen is the print surface and drive roller for your media. If sticking or jamming
+continues even after cleaning, you must replace the platen.
+IMPORTANT:
+• Contaminants on the platen roller can damage the printhead or cause the media to slip or stick when
+printing. Adhesive, dirt, general dust, oils and other contaminants should be cleaned immediately off
+the platen.
+• Linerless Platens — Do not wash or scrub. Only remove adhesive particles by using the adhesive side
+of linerless media. Lightly touch the platen roller with a linerless label to lift particles off the exposed
+area of the platen roller and the media path areas.
+30
+Cleaning and Maintenance
+Removing the Platen Roller
+The platen can be cleaned with a fiber-free swab (such as a Texpad swab) or a lint free, clean, damp cloth
+very lightly moistened with medical grade alcohol (99.7% pure or better).
+1. Open the cover (and dispenser door, if the dispenser is installed). Remove media from platen area.
+2. Pull the platen bearing (1) latch release tabs on the right and left sides towards the front of the printer
+and rotate them up to release the platen (2).
+1
+1
+2
+31
+Cleaning and Maintenance
+3. Lift the platen (2) out of the printer’s bottom frame using the platen bearings (1).
+1
+2
+4. Slide the gear (2) and the two platen bearings (1) off the shaft of the platen roller (3).
+1
+2
+3
+5. Cleaning Only — Clean the platen with the alcohol moistened swab. Clean from the center out.
+Repeat this process until all of the roller surface has been cleaned. If there has been heavy adhesive
+build-up or label jam, repeat with a new swab to remove residual contaminants. Adhesives and oils, for
+example, may be thinned by the initial cleaning but not completely removed.
+IMPORTANT: LINERLESS PLATENS — Only use the adhesive side of a piece of linerless media to gently
+lift the particles from the plater roller for cleaning.
+32
+Cleaning and Maintenance
+Replacing the Platen Roller
+1. 2. Discard the cleaning swabs after use - do not reuse.
+Make sure the platen bearings (1) and drive gear (2) are on the shaft of the platen roller (3).
+1 2
+3
+3. 4. Align the platen (3) with the gear (2)to the left and lower it into the printer’s bottom frame.
+Rotate the platen bearing (1) latch release tabs down on the right and left sides towards the rear of the
+printer and snap them into place.
+1
+5. Allow the printer to dry for one minute before closing the dispenser door, media cover or loading labels.
+33
+Cleaning and Maintenance
+Updating Printer Firmware
+The printer’s firmware may need to be updated periodically to get new features, improvements, and printer
+upgrades for media handling and communications.
+Use Zebra Setup Utilities (ZSU) to load new firmware.
+1. Open Zebra Setup Utilities.
+2. Select your installed ZD621/ZD421 printer.
+3. Click on the Open Printer Tools button and a Tools window will open.
+4. Click on the Action tab.
+5. Load the printer with media.
+6. Click on the text line - Send file. The lower half of the window will present a filename and path with a
+Browse (...) button to select the latest firmware file you have downloaded from the Zebra Web site.
+7. Observe the user interface and wait.
+If the firmware version is different than the version installed on the printer, the firmware will be
+downloaded to the printer. Otherwise, the printer waits with the STATUS on green for the next
+command or print job. The data indicator will flash green while the new firmware is downloading.
+The printer will restart with all indicators flashing. When the firmware update has completed, the
+STATUS indicator will display solid Green. The firmware is validated and installation is complete.
+A printer configuration report is automatically printed to verify new firmware versions.
+USB Host for File Transfers
+The USB host port allows you to connect USB devices—such as a keyboard, scanner, or USB Flash
+(memory) drive—to the printer.
+USB Host Port Uses
+• Firmware updates
+• File transfers and management
+• A port for low power USB data entry devices (keyboards, scales, scanners, and other wedge devices)
+USB Host Port
+IMPORTANT: The USB Flash drive must be formatted with the FAT file system. Filenames may be 1 to 16
+alphanumeric characters (A, a, B, b, C, c, ..., 0, 1, 2, 3, ...) only. Only use ASCII characters. Do not use
+Asian characters, Cyrillic characters, or accented characters in file names. Some functions may not work
+properly if there are underscores in a file name. Use periods instead.
+34
+Cleaning and Maintenance
+Using USB Host for Firmware Updates
+The USB host port allows you to connect an USB Flash drive to the printer to perform firmware updates.
+This is an example of using the powerful printer management, Zebra Mirror functions. See the Zebra
+Programming Manual for more information about mirroring, and the usb.mirror Set-Get-Do commands.
+NOTE: See the About this Guide on page 9 section for information and support links for your specific
+printer model.
+IMPORTANT: Supports USB Flash drives (or “thumb drive” or “memory stick”) up to 1 Terabyte (TB).
+The printer will not recognize drives larger than 1 TB.
+Flash Drive Preparation and Firmware Update
+1. 2. 3. 4. 5. 6. On your USB Flash Drive, create the following:
+• a folder called Zebra
+• in that folder, create three sub-directories:
+• appl
+• commands
+• files
+In the /appl folder, place a copy of the latest firmware for your printer.
+Load the printer with media.
+Insert the USB Flash drive into the USB host port on your printer.
+Observe the user interface and wait.
+If the firmware version is different than the version installed on the printer, the firmware will be
+downloaded to the printer. The data indicator will flash green while the firmware is downloading.
+The printer will restart with all indicators flashing. When the firmware update has completed, the
+STATUS indicator will display solid Green. The firmware is validated and installation is complete.
+A printer configuration report is automatically printed to verify new firmware versions.
+Remove the USB Flash drive from the printer.
+35
+Cleaning and Maintenance
+Run a SmartCal Media Calibration after Repairs
+The printer needs to set the media parameters for prior to printing optimal operation. The printer will
+automatically determine media type (web/gap, black mark/notch, or continuous) and measure media
+characteristics.
+IMPORTANT: After the initial calibration to a specific media is completed, it is not required to perform
+additional calibrations each time the media is replaced. The printer automatically measures the media to
+adjust for small changes in the media characteristics while printing. Pressing the FEED (Advance) once
+or twice after a new roll of media (same batch) has been installed will synchronize the labels. It is then
+ready to continue printing.
+SmartCal Procedure
+1. Make sure the media and ribbon cartridge (if you are thermal transfer printing) are loaded properly in
+the printer and the top cover of the printer is closed.
+2. Press the POWER button to turn the printer on.
+3. Once the printer is in the ready state with the STATUS (1) indicator solid green, then press and hold the
+PAUSE and CANCEL button for 2 seconds and release.
+The printer will measure a few labels and adjust media sensing levels.
+When the printer stops, the Status (1) indicator will turn solid green.
+1
+36
+Cleaning and Maintenance
+Test Printing with the Configuration Report
+Before you connect the printer to a computer, make sure that the printer is in proper working order. You
+can do this by printing a configuration report. The information on the configuration report may be helpful
+with printer installation and troubleshooting.
+1. Make sure the media and ribbon cartridge (if you are thermal transfer printing) are loaded properly in
+the printer and the top cover of the printer is closed.
+2. Turn the printer ON.
+3. Once the printer is in the ready state with the STATUS (1) indicator solid green, then press and hold the
+FEED and CANCEL buttons for 2 seconds and release.
+The Printer and Network Configuration Reports (shown below) will be printed.
+When the printer stops, the Status indicator will turn solid green.
+1
+If you cannot get these reports to print, go to Troubleshooting on page 38.
+37
+Troubleshooting
+This section provides troubleshooting procedures and information.
+Resolving Alerts and Errors
+Alert: Printhead Open
+A print command or a FEED button has been pressed and the printer has detected that the printhead
+(cover) is not closed.
+Possible Cause - 1
+The cover is open or has not been closed properly.
+Resolution
+Close the cover/printhead. Push down on the front top corners of the printer’s cover. You should normally
+hear and feel the cover latches snap in place to lock the cover closed for printing.
+Possible Cause - 2
+The printer’s Head-up switch needs service.
+38
+Troubleshooting
+Resolution
+Replace the Head-Up switch.
+• ZD421(t) and ZD621(t) - Replacing the Head-Up Sensor on page 103
+• Accessing ZD621(d) and ZD421(d) Head-up and Movable Sensors on page 116
+• Accessing the ZD621R Head-up and Movable Sensors on page 122
+Alert: Media Out
+A print command, a FEED button has been pressed, or you are printing; and the printer can not detect
+media in the print path.
+Possible Cause - 1
+There is no media (roll) in the printer.
+Resolution
+Load your chosen media in the printer and close the printer. You may need to press the FEED button once
+or the PAUSE button the get the printer to resume your print operation.
+Possible Cause - 2
+Open the printer: If there is a missing label on the roll between two labels at the end of a roll of labels, then
+this is a method used by the label roll manufacture to identify the end of the roll.
+Resolution
+Replace the empty media roll and continue printing. Do not power the printer off or you will lose your print
+job.
+Possible Cause - 3
+Misaligned media sensor.
+39
+Troubleshooting
+Resolution
+Check the position of the media sensor. The printer may need to be calibrated for the media after the
+adjusting the sensor location.
+Possible Cause - 4
+The printer is set for noncontinuous (labels or black mark) media, but continuous media is loaded.
+Resolution
+1. Check the position of the media sensor is in the center default location.
+2. The printer may need to be calibrated for the media after the adjusting the sensor location.
+Possible Cause - 5
+The media sensor is dirty.
+Resolution
+1. Clean the upper web (gap) sensor array and the lower movable media sensors. See Sensor Cleaning
+on page 26.
+2. Reload your media, adjust the movable media sensor’s position for your media, and recalibrate the
+printer for the media.
+Possible Cause - 6
+The media sensing is not working. Possible data corruption of memory or faulty components.
+Resolution
+1. Reload the printer’s firmware. See Updating Printer Firmware on page 34.
+2. Replace the upper gap array or lower movable (blackmark) sensors. See the following:
+• Accessing the ZD421(c) Movable Sensor on page 113
+• Accessing ZD621(d) and ZD421(d) Head-up and Movable Sensors on page 116
+• Accessing the ZD621(t) Movable Sensor on page 119
+• Accessing the ZD621R Head-up and Movable Sensors on page 122
+• Replacing the Movable Lower Media (Blackmark) Sensor on page 126
+• Replacing the Upper Media (Gap/Web) Sensor (ZD421C) on page 168
+Alert: Ribbon In (ZD421 Cartridge Printer only)
+A print command has been sent to the printer and it is in direct thermal mode with ribbon installed.
+NOTE: The printer has two different heat settings - one for direct thermal and one for thermal transfer.
+They are designed to have equivalent print density/darkness at the same setting level.
+40
+Troubleshooting
+Possible Cause - 1
+There is a ribbon cartridge in the printer while the printer is set to direct thermal mode (and printing on
+direct thermal media).
+Resolution
+Remove the ribbon cartridge from the printer without turning the printer OFF. Close the printer. You may
+need to press the FEED button once or the PAUSE button to resume your printing.
+Possible Cause - 2
+The printer is incorrectly set to Direct Thermal Mode when you are trying to print using Transfer Media and
+Ribbon Cartridge to print.
+Resolution
+1. Change the PRINT METHOD to THERMAL TRANS (Thermal Transfer) mode. The print format/form
+send for this print job may have direct thermal mode set with a ^MTD set instead of ^MTT.
+See the ZPL Programmer’s Manual for details. For printer links to manuals, see the section About this
+Guide on page 9.
+To change this setting:
+• Use the printer’s color touch display user interface (if present) to change the setting.
+• Use an Ethernet (LAN or WLAN) printer’s Print Server Web page to access and set the PRINT
+METHOD to THERMAL TRANS (Thermal Transfer) mode.
+Alert: Ribbon Out
+1. The printer is printing and stops while printing.
+2. A print job has been sent to the printer and the printer immediately reports this Alert.
+Possible Cause - 1
+The printer has detected the end of the ribbon. The end of the ribbon has a reflective trailer on the end of
+Genuine Zebra Transfer Ribbon that the printer ‘sees’ as end of ribbon condition.
+41
+Troubleshooting
+Resolution
+Remove the ribbon and replace the ribbon rolls or ribbon cartridge in the printer without turning the printer
+OFF. Close the printer. You may need to press the FEED button once or the PAUSE button the get the
+printer to resume your print operation.
+Possible Cause - 2 (ZD421 Cartridge Printer only)
+A ribbon cartridge needs to be loaded in the printer. The printer is set for Thermal Transfer Mode.
+Possible Cause - 3 (ZD421 Cartridge Printer only)
+The media sensing is not working. There is a possible dirty ribbon cartridge data chip or cartridge sensor
+contacts; data corruption of memory; or faulty cartridge or printer components.
+Resolution
+1. Try another working ribbon cartridge, if available.
+2. Clean the ribbon cartridge chip with an alcohol moistened swab.
+3. Clean the ribbon cartridge sensor’s contact pins. See Upper Half of ZD421 Thermal Transfer Ribbon
+Cartridge Printers on page 23 for cleaning instructions.
+4. Reload the printer’s firmware. See Updating Printer Firmware on page 34.
+5. Replace the ribbon cartridge sensor. See Replacing the Cartridge Printer Ribbon Sensor PCBA on
+page 160.
+Possible Cause - 4 (Standard Roll - Thermal Transfer Printers)
+The media sensing is not working.
+Resolution
+1. Reload the printer’s firmware. See Updating Printer Firmware on page 34.
+2. Replace the Ribbon Trailer Sensor. See Replacing the Ribbon Roll Printer’s Ribbon Trailer Sensor
+PCBA on page 158.
+Alert: Ribbon Low (ZD421 Cartridge Printer only)
+The printer reports this Alert.
+Possible Cause - 1
+The printer has calculated that the ribbon cartridge has only 10% of the ribbon left in the cartridge. The
+ribbon low value can be changed by programming.
+Resolution
+Check for the availability of ribbon cartridges. To change the ribbon low warning point. See the ZPL
+Programmer’s Manual for details on printer programming. For printer links to manuals, the section Related
+Documents and Software on page 9.
+42
+Troubleshooting
+Alert: CUT ERROR
+The cutter blade is bound and is not moving properly.
+CAUTION: Never attempt to insert objects or fingers in to the cutter mechanism. Never remove the cutter
+cover (bezel). There are no operator serviceable parts in the cutter unit.
+IMPORTANT: Using unapproved items such as tools, alcohol, solvents, cotton swabs, etc.; all may
+damage or shorten the cutter’s usable life or cause the cutter to bind.
+Possible Cause - 1
+Media, adhesive, or external object has stopped the cutter blade from operating.
+Resolution
+1. Turn the printer off by holding the power button down for 5 seconds. Wait for the printer to shutdown
+completely. Turn the printer on.
+2. If the printer does not recover from this error, call a service technician. This is not a operator
+serviceable item.
+43
+Troubleshooting
+Alert: PRINTHEAD OVER TEMP
+The printhead is over temperature and paused to allow the printhead to cool.
+Possible Cause - 1
+The printer is printing a large batch job, typically with large amounts of print.
+Resolution
+The print operation will resume after the printhead has cooled.
+Possible Cause - 2
+The ambient temperature at the printers location exceeds the specified operating range. Sometimes,
+ambient temperatures in the printer can be higher if it is in direct sunlight.
+Resolution
+Move the printer location or cool ambient temperature where the printer is operating.
+Possible Cause - 1
+Printhead has had a critical current or power failure.
+Resolution
+1. 2. Turn the printer off by holding the power using the POWER button down for 5 seconds. Wait for the
+printer to shutdown completely.
+Turn the printer on.
+Replace the printhead.See Replacing the Printhead on page 66.
+44
+Troubleshooting
+Alert: PRINTHEAD SHUTDOWN
+The printhead is below operating temperature for proper printing.
+Possible Cause - 1
+Printhead has had a critical current or power failure.
+Resolution
+1. Turn the printer off by holding the power using the POWER button down for 5 seconds. Wait for the
+printer to shutdown completely.
+Turn the printer on.
+2. Replace the printhead.See Replacing the Printhead on page 66.
+Alert: PRINTHEAD UNDER TEMP
+1. The printhead is below operating temperature for proper printing.
+Possible Cause - 1
+The ambient temperature at the printers location is below the specified operating range.
+Resolution
+Turn the printer off. Move the printer location and wait for it to warm naturally. Moisture may condense in
+and on the printer if the temperature changes too quickly.
+Possible Cause - 2
+The printhead thermistor has failed.
+45
+Troubleshooting
+Resolution
+1. Turn the printer off by holding the power button down for 5 seconds. Wait for thee printer to shutdown
+completely. Turn the printer on.
+2. Replace the printhead.
+Alert: OUT OF MEMORY
+Data can not be stored in the specified memory location. There are four types of storage memory:
+Graphic, Format, Bitmap and Font. There is not enough memory to perform the function specified on the
+second line of the error message.
+Possible Cause - 1
+There is not enough memory to perform the function specified on the second line of the error message.
+Resolution
+1. Free up some of the printer’s memory by adjusting the label format or printer parameters to make the
+print area smaller.
+2. Remove unused graphics, fonts, or formats.
+3. Ensure that the data is not directed to a device that is not installed or is unavailable.
+46
+Troubleshooting
+Resolving Print Issues
+This section helps you identify issues with printing or print quality, the possible causes, and solutions.
+Issue: General Print Quality Issues
+The printed image does not look right.
+Possible Cause - 1
+The printer is set at an incorrect darkness level and/or print speed.
+Resolution
+Perform the Print Quality Report (FEED self test) to determine the ideal darkness and speed settings for
+your application. Do not set print speeds above the manufacturer’s maximum rated speed for your media.
+Possible Cause - 2
+The printhead is dirty.
+Resolution
+Clean the printhead. See Cleaning the Printhead on page 18.
+Possible Cause - 3
+The platen roller is dirty or damaged.
+Resolution
+Clean or replace the platen. Platens can wear out or get damaged. See Platen Cleaning and Replacement
+on page 30.
+Possible Cause - 4
+The printhead has worn out.
+Resolution
+Replace the printhead. The printhead can wear out and be damaged. See Replacing the Printhead on
+page 66.
+Possible Cause - 5
+Thermal Transfer printing - Printing looks fuzzy, has smudge marks, or has voids or holes in print with no
+particular pattern.
+Resolution
+The print material (wax, wax-resin, or resin) may not match the material (paper, media coating, or
+synthetics) in use. Set the printer for no higher than the maximum recommended print speed of the ribbon.
+Possible Cause - 6
+You may be using the wrong power supply.
+47
+Troubleshooting
+Resolution
+Verify you are using the power supply that came with this printer.
+Issue: No Print on the Label
+The printed image does not look right.
+Possible Cause - 1
+The media may not be direct thermal media (and is thermal media made for thermal transfer printers).
+Resolution
+See the test procedure, Determining Thermal Media Types on page 221.
+Possible Cause - 2
+Media has been loaded incorrectly.
+Resolution
+The media printable surface must face up towards the printhead.
+Issue: Labels Are Distorted in Size or Print Area Start Position Varies
+Includes printed image that skips between labels (mis-registration).
+Possible Cause - 1
+Media has been loaded incorrectly or the movable media sensor is not set properly.
+Resolution
+Verify that the sensor is set and positioned correctly for your media type and sensing location.
+Possible Cause - 2
+The media sensors are not calibrated for your media length, physical properties, or sensing type
+(gap/notch, continuous, or mark).
+Resolution
+1. Run a SmartCal media calibration, see SmartCal Procedure on page 36.
+2. If it still skips labels after step 1, try a manual media calibration. See the printers user guide.
+Possible Cause - 3
+The platen (drive) roller is slipping or damaged.
+Resolution
+Clean or replace the platen. Platens can wear out or get damaged. See Platen Cleaning and Replacement
+on page 30.
+48
+Troubleshooting
+Possible Cause - 4
+The printer has communication issues with cables or communication settings.
+Resolution
+See Communication Issues on page 49.
+Communication Issues
+This section identifies problems with communications, the possible causes, and the recommended
+solutions.
+Issue: Label Job Sent, No Data Transfer
+A label format was sent to the printer but was not recognized. The DATA light does not flash.
+Possible Cause
+The communication parameters are incorrect.
+Resolution - 1
+Check the printer driver or software communications settings (if applicable).
+Resolution - 2
+Serial Port Only - Check the printer’s handshake protocol and serial port settings. The setting used must
+match the one being used by the host computer.
+Resolution - 3
+The serial cable you are trying to use may not be a standard DTE or DCE type cable, is damaged, or is too
+long per the RS-232 Serial ports specifications.
+Issue: Label Job Sent, Skips Labels or Prints Bad Content
+A label format was sent to the printer. Several labels print, then the printer skips, misplaces, misses, or
+distorts the image on the label.
+Possible Cause
+The serial communication settings are incorrect.
+Resolution - 1
+Check the printer driver or software communications settings (if applicable). Ensure that the flow control
+settings and other serial port handshake setting match the host system.
+49
+Troubleshooting
+Issue: Label Job Sent, Data Transfers, But No Print
+A label format was sent to the printer but was not recognized. The DATA light flashes but no printing
+occurs.
+Possible Cause - 1
+The prefix and delimiter characters set in the printer do not match the ones in the label format.
+Resolution
+Verify the ZPL command prefix (COMMAND CHAR) and delimiter (DELIM./CHAR) characters.
+Possible Cause - 2
+Incorrect data is being sent to the printer.
+Resolution
+Check the communication settings on the computer. Ensure that they match the printer settings.
+Possible Cause - 3
+Incorrect data is being sent to the printer.
+Resolution
+Check the label format. See the ZPL Programming Guide for details on printer programming. For printer
+links to manuals, the section Related Documents and Software on page 9.
+Miscellaneous Issues
+This section identifies miscellaneous issues with the printer, the possible causes, and the recommended
+solutions.
+Issue: Settings are Lost or Ignored
+Some parameters are set incorrectly.
+Possible Cause - 1
+Printer settings were changed without saving them.
+Resolution
+The ZPL ^JU command was not used to save your configuration before turning the printer off. Cycle the
+printer OFF and then back ON to verify settings have been saved.
+Possible Cause - 2
+The label format/form commands or commands sent directly to the printer have syntax errors or have been
+used incorrectly.
+• A firmware command turned off the ability to change the parameter.
+• A firmware command changed the parameter back to default setting.
+50
+Troubleshooting
+Resolution
+See the ZPL programmer’s guide to verify command usage and syntax. See the section About this Guide
+on page 9 for support links to view the ZPL Programming Guide for your printer model.
+Possible Cause - 3
+The prefix and delimiter characters set in the printer do not match the ones in the label format.
+Resolution
+Verify the ZPL programming settings of the Control, Command and Delimiter settings are correct for your
+system software environment. Print a Configuration Report or use the display Language Menu (if present)
+for these three (3) menu items and compare it the commands in label format/form you are trying to print.
+Possible Cause - 4
+The Main Logic board may not be working properly. Firmware is corrupted or the printer needs service.
+Resolution
+1. Reset the printer to factory defaults. See System > Settings > Restore Defaults or use the Zebra
+Setup Utility and Open Printer Tools > Action > Load printer defaults.
+2. Reload printer firmware. See Updating Printer Firmware on page 34.
+3. Replace the Main PCBA.
+Issue: Non-continuous labels act as Continuous labels.
+A non-continuous label format with matching media loaded in the printer, was sent to the printer but prints
+like it is continuous media.
+Possible Cause - 1
+The printer was not calibrated for the media being used.
+Resolution
+Set the movable media for the media in use and run a SmartCal media calibration, see SmartCal
+Procedure on page 36.
+Possible Cause - 2
+The printer is configured for continuous media.
+Resolution
+Set the printer for the correct media type (gap/notch, continuous, or mark) and calibrate the printer using
+Run a SmartCal Procedure on page 36 and if necessary use Manual Media Calibration for hard to calibrate
+media types. See Print > Print Quality > Label Type for ZD621 printers with the display to check and set
+media type.
+51
+Troubleshooting
+Issue: Printer Locks-Up
+All indicator lights are on and the printer locks up or the printer locks up while restarting.
+Possible Cause - 1
+The printer memory has been corrupted by an unknown event.
+Resolution - 1
+1. Reset the printer to factory defaults. See System > Settings > Restore Defaults or use the Zebra
+Setup Utility and Open Printer Tools > Action > Load printer defaults.
+2. Reload printer firmware. See Updating Printer Firmware on page 34.
+3. Replace the Main PCBA.
+Issue: Erroneous Ribbon Cartridge Faults
+The printer is not detecting the ribbon cartridge properly.
+• The printer has a Ribbon Out warning, but a ribbon cartridge is installed.
+• Or the printer has as Ribbon Cartridge Authentication error, but a Genuine Zebra Ribbon Cartridge
+is installed and has not been refurbished or altered.
+Possible Cause
+The ribbon cartridge sensor contact pins or the ribbon cartridge’s smart chip’s contacts may be dirty or the
+chip may be damaged.
+Resolution
+1. Clean the ribbon cartridge’s smart chip contact with alcohol and a lightly moistened cotton swab if they
+look contaminated.
+2. Try a different cartridge.
+3. Clean the ribbon cartridge sensor contact pins - see Cleaning Ribbon Cartridge Sensor on page 29.
+4. Reload printer firmware. See Updating Printer Firmware on page 34.
+5. Replace the ribbon cartridge sensor.
+52
+Troubleshooting
+Issue: Battery Has a Red Indicator
+Battery has a fault.
+Possible Cause - 1
+The battery has reached its usable life or has a general component failure.
+Possible Cause - 2
+Battery is too hot or too cold
+Resolution
+1. Remove the battery from the printer and check charge status by charging the battery.
+2. Let the battery cool down or warm up to ambient temperature and recheck the battery charge.
+3. Replace the battery.
+53
+Required Tools
+TOOLS: Make use of the following tools while performing replacement procedures:
+• #10 hexalobular (T10) driver (magnetized)
+Torque value range: 0.53 +/-0.11 NM = 4.7 inch*lb
+• #6 hexalobular (T6) driver (magnetized)
+Torque value range: 0.53 +/-0.11 NM = 4.7 inch*lb
+• Small flat-blade (slot-head) screwdriver
+• Small pliers
+• Printhead cleaning pen
+• Fiber free swabs
+• Lint free wipes
+• Isopropyl Alcohol – 99.7% pure solution
+54
+Replacing Parts
+The part replacement procedures in this manual have been broken down into common procedures and
+sub-procedures with most aligning to spare parts. Each procedure lists which procedures and actions must
+precede it in order to perform the procedure. A “Repair Path’ flow diagram in on the following page.
+In the event you must replace a part, review the repair path flow diagram to see which procedures to
+perform. Read the part’s procedure to identify procedures and steps required to remove the old part and
+install the new part. Many repair sequences include simple functionality tests, cleaning or other operations
+after the spare has been replaced to verify the repair and printer state.
+55
+Replacing Parts
+Repair Procedure Sequence for ZD421(c) Cartridge Printers
+The Repair Path flow diagram shows the starting point (green blocks) to the endpoint – the replacement
+procedure for your spare part. The diagram does not include any general repair preparation or post repair
+operations that may be recommended for the printer.
+Latch
+Assy
+Cover
+Assy.
+Control Panel
+PCBA
+Window
+Printhead
+Inner Lid
+(Upper Frame)
+incl. Control
+PCBA, etc.
+Ribbon
+Sensor
+Upper Gap
+Array Sensor
+Wired
+Connectivity
+Options
+Ribbon
+Transport
+Wireless
+Connectivity
+Options
+Hinge
+Printer Base
+(Not replaceable)
+Main PCBA
+Print Mech.
+(Lower Frame)
+Bezels
+(Std., Cutter,
+and Dispense)
+Motor
+Movable Media
+Sensor
+(Lower Gap &
+Black Mark)
+Multi-part Access Procedure
+Feet (4)
+Head-Up
+Sensor
+Platen
+Assy.
+56
+Replacing Parts
+Repair Paths for ZD421(d) and ZD621(d) Direct Thermal Printers
+The Repair Path flow diagram shows the starting point (green blocks) to the endpoint – the replacement
+procedure for your spare part. The diagram does not include any general repair preparation or post repair
+operations that may be recommended for the printer.
+Window Cover
+Assy.
+Control Panel
+PCBA
+Latch
+Assy
+Printhead
+Inner Lid
+(Upper Frame)
+incl. Control
+PCBA, etc.
+Upper Gap
+Array Sensor
+Wired
+Connectivity
+Options
+Hinge
+Print Mech.
+(Lower Frame)
+Wireless
+Connectivity
+Options
+Main PCBA
+Platen
+Assy.
+Printer Base
+(Not replaceable)
+Motor
+Movable Media
+Sensor
+(Lower Gap &
+Black Mark)
+Multi-part Access Procedure
+Bezels
+(Std., Cutter,
+and Dispense)
+Head-Up
+Sensor
+Feet (4)
+57
+Replacing Parts
+Repair Paths for ZD421(t) Thermal Transfer Printers
+The Repair Path flow diagram shows the starting point (green blocks) to the endpoint – the replacement
+procedure for your spare part. The diagram does not include any general repair preparation or post repair
+operations that may be recommended for the printer.
+Latch
+Assy
+Cover
+Assy.
+Upper Gap
+Array Sensor
+Printhead
+Inner Lid
+(Upper Frame)
+incl. Control
+PCBA, etc.
+Control Panel
+PCBA
+Ribbon
+Sensor
+Wired
+Connectivity
+Options
+Ribbon
+Carriage
+Wireless
+Connectivity
+Options
+Hinge
+Bezels
+(Std., Cutter,
+and Dispense)
+Main PCBA
+Print Mech.
+(Lower Frame)
+Printer Base
+(Not replaceable)
+Motor
+Movable Media
+Sensor
+(Lower Gap &
+Black Mark)
+Ribbon Holder
+Hubs
+Head-Up
+Sensor
+Feet (4)
+Platen
+Assy.
+Window
+58
+Replacing Parts
+Repair Paths for ZD621(t) Thermal Transfer Printers
+The Repair Path flow diagram shows the starting point (green blocks) to the endpoint – the replacement
+procedure for your spare part. The diagram does not include any general repair preparation or post repair
+operations that may be recommended for the printer.
+Latch
+Assy
+Cover
+Assy.
+Control Panel
+PCBA
+Window
+Printhead
+Inner Lid
+(Upper Frame)
+incl. Control
+PCBA, etc.
+Upper Gap
+Array Sensor
+Ribbon
+Sensor
+Hinge
+Ribbon
+Carriage
+Wired
+Connectivity
+Options
+Wireless
+Connectivity
+Option
+Main PCBA
+Print Mech.
+(Lower Frame)
+Printer Base
+(Not replaceable)
+Head-Up
+Sensor Motor
+Movable Media
+Sensor
+(Lower Gap &
+Black Mark)
+Multi-part Access Procedure
+Bezels
+(Std., Cutter,
+and Dispense)
+Feet (4)
+Platen
+Assy.
+Ribbon Holder
+Hubs
+59
+Replacing Parts
+Repair Paths for ZD621R RFID Thermal Transfer Printers
+The Repair Path flow diagram shows the starting point (green blocks) to the endpoint – the replacement
+procedure for your spare part. The diagram does not include any general repair preparation or post repair
+operations that may be recommended for the printer.
+Latch
+Assy
+Cover
+Assy.
+Control Panel
+PCBA
+Window
+Printhead
+Inner Lid
+(Upper Frame)
+incl. Control
+PCBA, etc.
+Upper Gap
+Array Sensor
+Ribbon
+Sensor
+Ribbon Holder
+Hubs
+Hinge
+Ribbon
+Carriage
+Wired
+Connectivity
+Options
+Feet (4)
+Wireless
+Connectivity
+Options
+Main PCBA
+Print Mech.
+(Lower Frame)
+Printer Base
+(Not replaceable)
+Head-Up
+Sensor Motor
+Movable Media
+Sensor
+(Lower Gap &
+Black Mark)
+Bezels
+(Std., Cutter,
+and Dispense)
+RFID Module
+and Antenna
+Platen
+Assy.
+Multi-part Access Procedure
+60
+Replacing Parts
+How to Determine a Repair Sequence for your Part
+Repair procedures are broken down into sub-procedures that mainly align to spare parts. Many
+procedures require you to remove other parts to gain access to the part needing replacement. The green
+blocks represent stand alone or starting procedures needing to be performed to access other parts. Use
+the connecting arrow lines (going backwards and forward) to determine procedure order for your repair
+item. One or more starting procedure paths may be needed to access a given part being replaced.
+Individual repair procedures include references to prerequisite procedures for each procedure in repair
+order.
+After you have diagnosed and identified the part that needs replacing in your printer, you can use the
+repair flow charts to identify the prerequisite repair procedures needed to complete your repair.
+Repair Path Example
+For this example, we have chosen the main PCBA. It requires multiple paths to complete the repair.
+During the troubleshooting process (for the purposes of this example), we have determined that the printer
+has a problem with the main PCBA (yellow square below). By following the arrows leading into the main
+PCBA repair square, we can see the connectivity options and the printer base precede the main PCBA.
+The connectivity options procedure square is green to denote a starting procedure. It has no arrows
+leading into it, therefore no prerequisite procedures. The printer base has an arrow coming from the bezel
+procedure square and it is a prerequisite for both the printer base and main PCBA repair procedures by
+following all the arrows to the Main PCBA.
+Connectivity
+Options
+(Serial,
+Ethernet, etc.)
+Ribbon
+Transport
+Hinge
+Bezels
+(Std., Cutter,
+and Dispense)
+Main PCBA Print Mech.
+(Lower Frame)
+Printer Base
+(Not replaceable)
+61
+Replacing Parts
+Repair Preparation and Post Repair Basic Operational Tests
+To prevent additional damage or injury, the printer and its repair area needs to be
+prepared prior to repairing the printer.
+Preparation
+CAUTION—ESD: Observe proper electrostatic safety precautions when handling static-sensitive
+components such as circuit boards and printheads.
+• The repair surface and area should be clean.
+• Use electrostatic protection (grounded mats, ground straps, etc.).
+• Remove all media and ribbon cartridges from the printer.
+• Disconnect all cables and power from the printer.
+Post Repair Cleaning and Basic Testing
+1. Clean the printer. This will leave the printer in a optimal state and provide assurance the contamination
+has not migrated or been added during handling and repair.
+• Cleaning the Printhead on page 18
+• Sensor Cleaning on page 26
+• Media Path Cleaning on page 21
+• Platen Cleaning and Replacement on page 30
+2. Load a full width roll of labels and a ribbon cartridge into the printer; see the printers user’s guide for
+details.
+3. Connect the printer to power and turn ON the printer. The printer runs self tests and configures itself for
+the options installed.
+4. Set the print width to full width printing, if needed after troubleshooting and repair.
+5. Calibrate the media (see Run a SmartCal Media Calibration after Repairs on page 36).
+6. Print a configuration report to test printing and provide information on the status and configuration of the
+printer and it’s option (see Test Printing with the Configuration Report on page 37).
+62
+Replacing Parts
+ZD421 Ribbon Cartridge Printer - Accessing the Printhead
+1. 2. 3. Pull both release arms (3) out (lighter gray parts).
+Ribbon (drive) transport (1) drops down.
+Lift printhead actuator arm (2) up to access the printhead.
+2
+1
+3
+1
+2
+3
+4
+1 - Printhead 2 - Ribbon Sensor
+3 - Ribbon Cartridge Authentication
+and Status Interface
+4 - Ribbon Sensor’s Reflector
+63
+Replacing Parts
+Transfer Ribbon Roll Printers: Accessing Inside the Cover
+Disconnecting the thermal transfer printer’s inner cover top cover for the ribbon carriage makes it easier to
+access for repairs. It’s a simple tool-less process to disconnect the two link arms holding them together.
+Disconnecting the Cover from the Ribbon Carriage
+1. With the printer’s cover open, slide your hand under the flapper arm (curved part) that slides into the
+ribbon carriage and is connected to the inner frame of the cover. Use your index finger to touch the left
+link arm (1) where it contacts the inner frame.
+2. Push the link arm (1) towards the outside of the printer until it just clears the top of the post. Slide it up
+and off the post.
+3. Repeat steps 1 and 2 to disconnect the right side link arm.
+4. Pull the ribbon carriage down and towards the front of the printer while holding the cover in the full open
+position. The flapper arm will come loose and swing down into the inner cover.
+1
+1
+1
+64
+Replacing Parts
+Re-connecting the Ribbon Carriage
+1. Swing the flapper arm (2 -orange in drawing below) up and the ribbon carriage up so the two side posts
+slide into the curved channels (1- green surface highlight channel) on the inside of the ribbon carriage.
+1
+2
+2. 3. The free ends of the links on the ribbon carriage go back on the posts on the inner frame of the top
+cover. Move the link arm and ribbon carriage to get the hole at the end of the link arm close to
+alignment and push the link arm up and over the post and release when centered. The link arm on the
+other side is now aligned and it is easy to push it over and on the post.
+Verify that the top cover now opens and closes with the carriage moving with the cover.
+65
+Replacing Parts
+Replacing the Printhead
+If you need to replace the printhead, read the procedure and review the removal and installation steps
+before actually replacing the printhead.
+Preparation
+CAUTION—ESD: Observe proper electrostatic safety precautions when handling static-sensitive
+components such as circuit boards and printheads.
+CAUTION: Unplug the printer from the power supply and allow the printer to cool to prevent injuries or
+damage to printer circuitry.
+Use one of the following model-specific procedures to replace the printhead.
+• ZD621 and ZD421 Direct Thermal Printhead on page 67
+• ZD621 and ZD421 Thermal Transfer Ribbon Roll Printhead on page 71
+• ZD421 Thermal Transfer Ribbon Cartridge Printhead on page 76
+66
+Replacing Parts
+ZD621 and ZD421 Direct Thermal Printhead
+Removing the Printhead
+1. Turn the printer OFF.
+2. Open the printer to access the printhead (1).
+1
+3. Push the printhead release latch away from the printhead. The right side of printhead releases.
+67
+Replacing Parts
+4. Swing the loose right side of the printhead out of the printer. Pull it out and to the right a little to get the
+left side of the printhead clear. Pull the printhead out and free of the top cover to gain access to its
+attached cables on the backside of the printhead. Note, the red highlights of the left side printhead
+retainer slot location.
+5. Gently but firmly pull the two printhead cable bundle connectors (1) off of the printhead (2). Pull the
+ground wire (3) off the printhead (2).
+1
+3
+2
+68
+Replacing Parts
+Replacing the Printhead
+1. 2. Push the right side printhead cable connector (1) into the printhead. The connector is keyed to only
+insert one way.
+Attach the ground wire (2)to the printhead’s ground tab (3).
+2
+1
+3
+3. 4. Push the left side printhead cable connector onto the printhead.
+Insert the left side of the printhead assembly into the recessed slot (1 - highlighted in red) on the left
+side of the printer.
+1
+69
+Replacing Parts
+5. Align the Spring Wire Notch (1) on the backside of the printhead to the Spring Wire. Push the right side
+of the printhead into the printer until the latch locks the right side of the printhead into the printer.
+1
+6. Verify that the printhead moves up and down freely when pressure is applied and remains locked when
+released.
+7. 8. Clean the printhead. Use a new pen to wipe body oils (fingerprints) and debris of the printhead. Clean
+from the center of the printhead to the outside. See Cleaning the Printhead on page 18.
+Reload media. Plug in the power cord, turn on the printer and print a status report to ensure proper
+function. See Test Printing with the Configuration Report on page 37.
+70
+Replacing Parts
+ZD621 and ZD421 Thermal Transfer Ribbon Roll Printhead
+Removing the Printhead
+1. Turn the printer OFF.
+2. Open the printer to gain access to the printhead (1).
+1
+3. Push the printhead release latch toward the printhead (shown as green for visibility). The right side
+printhead releases down and away from the Printhead Actuator Arm.
+71
+Replacing Parts
+4. Swing the loose right side of the printhead out of the printer. Pull it to the right a little to get the left side
+of the printhead clear. Pull the printhead down and free of the ribbon carriage to gain access to its
+attached cables.
+5. Gently but firmly pull the two printhead cable bundle connectors (1) off of the printhead (2).
+1
+2
+72
+Replacing Parts
+Replacing the Printhead
+1. 2. Push the right side printhead cable connector into the printhead. The connector is keyed to only insert
+one way.
+Push the left side printhead cable connector onto the printhead.
+3. Insert the center tab on the printhead assembly into the center slot on the Printhead Actuator Arm.
+73
+Replacing Parts
+4. Insert the left side tab of the printhead assembly into the recessed slot (1) on the left side of the
+printhead’s actuator arm (2).
+1
+2
+5. Push the right side of the printhead into the printer until the latch locks the right side of the printhead
+into the printer.
+74
+Replacing Parts
+6. Verify that the printhead moves up and down freely when pressure is applied and remains locked when
+released.
+7. 8. Clean the printhead. Use a new pen to wipe body oils (fingerprints) and debris of the printhead. Clean
+from the center of the printhead to the outside. See Cleaning the Printhead on page 18.
+Reload media. Plug in the power cord, turn on the printer and print a status report to ensure proper
+function. See Test Printing with the Configuration Report on page 37.
+75
+Replacing Parts
+ZD421 Thermal Transfer Ribbon Cartridge Printhead
+Printhead Removal
+1. 2. 3. Turn the printer OFF. Open the printer.
+Pull the two (2) release arms out to release the ribbon drive transport. See ZD421 Ribbon Cartridge
+Printer - Accessing the Printhead on page 63 for more details.
+Swing the printhead actuator arm up until it touches the printer’s top cover. Hold the printhead actuator
+arm in this position for access to the printhead. Push the printhead release latch toward the printhead
+(shown as pink for visibility). The right side printhead releases down and away from the printhead
+actuator arm.
+4. Swing the loose right side of the printhead out of the printer. Pull it to the right a little to get the left side
+of the printhead clear. Pull the printhead down and free of the printhead actuator arm to gain access to
+its attached cables.
+76
+Replacing Parts
+5. Gently but firmly pull the two printhead cable bundle connectors (1) off of the printhead assembly (2).
+1
+2
+77
+Replacing Parts
+Replacing the Printhead
+1. 2. 3. Push the right side printhead cable connector into the printhead. The connector is keyed to only insert
+one way.
+Push the left side printhead cable connector onto the printhead.
+Insert the center tab (1) on the printhead assembly into the center slot (2) on the printhead actuator
+arm.
+1 2
+4. Insert the left side tab of the printhead assembly into the recessed slot (2) on the left side of the
+printhead actuator arm.
+1 2
+78
+Replacing Parts
+5. Push the right side of the printhead into the slot (1) until the latch locks the right side of the printhead
+into the printer.
+1
+6. Verify that the printhead moves freely into the printer when pressure is applied (see arrow) and remains
+locked when pressure is released.
+7. 8. Clean the printhead by using a new cleaning pen to wipe body oils (fingerprints) and debris off the
+printhead. See Cleaning the Printhead on page 18.
+Reload media. Turn on the printer and print a Configuration Status report to ensure proper function.
+See Test Printing with the Configuration Report on page 37.
+79
+Replacing Parts
+Replacing the Platen (Drive) Roller
+If you need to replace the platen drive roller assembly, read the procedure and review the removal and
+installation steps before actually replacing the platen.
+CAUTION—ESD: Observe proper electrostatic safety precautions when handling static-sensitive
+components such as circuit boards and printheads.
+Removal
+1. 2. 3. Open the cover (and dispenser door if the dispenser is installed).
+Remove media from platen area.
+Pull the platen bearing latch release tabs (1) on the right and left sides towards the front of the printer
+and rotate them up.
+1
+1
+80
+Replacing Parts
+4. Lift the platen out of the printer’s bottom frame by the platen bearing arms (1).
+1
+1
+5. Slide the gear and the two (2) bearings off the shaft of the platen roller.
+81
+Replacing Parts
+Installation
+Your new platen may be dirty from shipping and handling. Inspect the platen for dirt and other
+contaminates. Clean if necessary.
+Clean the platen with a 99.7% pure isopropyl alcohol moistened swab or fiber free cloth. Clean from the
+center out. Repeat this process until all of the roller surface has been cleaned.
+1. Make sure the bearings and drive gear are on the shaft of the platen roller.
+2. 3. 4. Align the platen with the gear to the left and lower it into the printer’s bottom frame.
+Rotate the platen bearing latch release tabs down on the right and left sides towards the rear of the
+printer and snap them into place.
+If you cleaned the platen roller, allow the printer to dry for one minute before closing the dispenser door,
+media cover or loading labels.
+82
+Replacing Parts
+Replacing Wired Connectivity Modules
+CAUTION—ESD: Observe proper electrostatic safety precautions when handling static-sensitive
+components such as circuit boards and printheads.
+Connectivity modules can easily be removed for the purpose of reconfiguring a printer or repair. You
+should not remove and replace connectivity modules as a general practice. The connector and PCBA’s
+have not been designed for this use.
+Removal
+1. 3. Turn power off and disconnect the power cable.
+2. Remove the interface cables.
+4. 5. Remove the module access door. Push down on the top of the door with your finger tip. This releases
+the latch. Pull the door away and down to remove.
+Reattach an interface cable to the connectivity module and secure the cable.
+Gently pull on the interface cable that is secured to the connectivity module. Slowly pull the module out
+of the printer.
+Installation
+1. 2. 3. With the module’s access door removed, slide the connectivity module into the printer. Push the circuit
+card in slowly but firmly until the card is just past the inside lip of the access door.
+Align the bottom of the connectivity module door cover to the bottom lip of the module access opening.
+Swing the door up and snap the cover closed.
+Reconnect power. Turn power on and update the printer firmware which includes connectivity module
+updates to synchronize versions.
+83
+Replacing Parts
+Replacing the Wireless Connectivity Module
+Use this procedure to install the Wireless Connectivity Module.
+CAUTION—ESD: Observe proper electrostatic safety precautions when handling static-sensitive
+components such as circuit boards and printheads.
+NOTE: If you are removing the base of the printer to repair other parts, it is easier to lift the
+Wireless Module off the Main PCBA after the base is removed.
+Removal
+1. 2. 3. 4. 5. Remove any media from the printer and close the cover.
+Turn power off and disconnect the power cable.
+Remove the interface cables, if any.
+Turn the printer over to access the wireless connectivity door.
+Open the module access door by pushing the latch at the top of the door with your fingertip. The printer
+base has a recessed area for your fingertip. This releases the latch. Lift and swing the door up to
+remove it.
+84
+Replacing Parts
+Installation
+1. Align the antenna arm (1) of the wireless module into the well. Lower and align the module (2) to the
+printer's Wi-Fi connector (3). Push the module (2) in gently but firmly until fully seated.
+2. Align the shortest side of the wireless connectivity door (1) to the shortest side of the opening. Swing
+the door on the tab (1) in the middle of the door printer and swing the door closed. Push the door to lock
+the latch.
+NOTE: The wireless connectivity door will not close correctly if the module has not been fully seated. This
+is a good test to verify complete insertion.
+85
+Replacing Parts
+3. Place the three (3) Wi-Fi identification labels included on the bottom of the printer. These assist with
+printer configuration (and later reconfiguration) of your printer. Mobile apps, use of scanners, and
+printer support are aided by these printer configuration labels.
+Label Locations for Thermal Transfer Printers
+Label Locations for Direct Thermal Printers
+Replacing the Wireless Connectivity Module Antenna
+Use this procedure to remove or install the wireless connectivity module antenna.
+CAUTION—ESD: Observe proper electrostatic safety precautions when handling static-sensitive
+components such as circuit boards and printheads.
+NOTE: If you are removing the base of the printer to repair other parts, it is easier to lift the Wireless
+Module off the Main PCBA after the base is removed.
+86
+Replacing Parts
+Prerequisites
+1. Remove any media from the printer and close the cover.
+2. Turn power off and disconnect the power cable.
+3. Remove any interface cables.
+4. This procedure requires Kapton tape.
+Removal
+1. 2. Turn the printer over to access the wireless connectivity door.
+Remove all three screws securing the front bezel or option and bottom cover to the printer.
+3. Remove all covers from the printer.
+87
+Replacing Parts
+4. Disconnect the antenna from the wireless module.
+5. Remove the wireless module from the printer.
+88
+Replacing Parts
+6. Remove the tape from the printer body.
+If you have the... Then...
+ZD411D
+ZD611D
+ZD411T
+ZD611T
+ZD611R
+7. Route the antenna behind the other cables.
+If you have the... Then...
+ZD411D/ZD611D
+89
+Replacing Parts
+If you have the... Then...
+ZD411T/ZD611T/
+ZD611R
+Route the antenna behind the other cables..
+8. Remove the antenna adhesive.
+Installation
+1. Follow these steps to install the P1110774-05 Wi-Fi 6 MIMO antenna.
+Place the adhesive of the antenna on the back of the printer body.
+• Ensure the long edge of the adhesive is parallel to the edge of the printer.
+If you have the... Then...
+ZD411D
+ZD611D
+90
+Replacing Parts
+If you have the... ZD411T
+ZD611T
+ZD611R
+2. Route the antenna through the frame post.
+If you have the... ZD411D
+ZD611D
+ZD411T
+ZD611T
+ZD611R
+3. Tape the antenna to the printer body with Kapton tape.
+91
+Then...
+Then...
+1
+Replacing Parts
+• Use a tape length of 35 +/- 5 mm.
+If you have the... Then...
+ZD411D
+ZD611D
+ZD411T
+ZD611T
+ZD611R
+4. Route the antenna through the antenna frame.
+1
+2
+92
+Replacing Parts
+5. Replace the bottom cover and secure it with the screws.
+6. Replace the front bezel and Wi-Fi door.
+Connecting the Antenna to the Wi-Fi module
+1. Place the adhesive of the P1110774-04 BT antenna board straight. Ensure it is parallel to the radio
+board’s top and left edge.
+93
+Replacing Parts
+2. Connect the Bluetooth antenna to the Wi-Fi module.
+3. Connect the antenna (P111074-02) to the top of the module.
+94
+Replacing Parts
+Replacing a Front Bezel Option (Tear-off, Dispense, Cut)
+CAUTION—ESD: Observe proper electrostatic safety precautions when handling static-sensitive
+components such as circuit boards and printheads.
+All three (3) of the front bezel options (standard tear-off bezel, the dispenser module, and cutter module)
+mount in the same way
+Removal
+1. Remove any media from the printer and close the cover.
+2. Turn power off and disconnect the power cable.
+3. Remove the interface cables, if any.
+4. Turn the printer upside down. Remove the two (2) mounting screws securing the bezel. Save the
+screws.
+5. Slide the bezel down the front and pull the loose bezel out.
+95
+Replacing Parts
+Installation
+1. 2. Place the front bezel option and printer right side up with the top of the module even with the bottom of
+the top cover. Center and push the module into the front of the printer and slide it up until it stops.
+Turn the printer upside down and attach the media exit option to the printer with the two screws to 4.7
++/- 1 in lbs.
+3. Reconnect power. Turn power on and update the printer firmware which includes connectivity module
+updates to synchronize versions.
+96
+Replacing Parts
+Removing the Printer Base for Repair Access
+The printer base (bottom cover) is not a spare part and must be replaced at a Zebra repair center.
+Repair Prerequisites
+You must remove the bezels using the Replacing a Front Bezel Option (Tear-off, Dispense, Cut) on
+page 95 before you can remove the printer base. No need to remove connectivity option PCBA’s and
+doors to remove the base.
+Removal
+1. 2. Installation
+1. 2. 3. Remove the two (2) screws.
+Lift the base off the printer.
+Place the base on the lower printer’s frame.
+Secure the base with the two (2) screws to 4.7 +/- 1 in lbs.
+See the Replacing the Wireless Connectivity Module on page 84 or Replacing Wired Connectivity
+Modules on page 83 for replacing the connectivity access doors.
+97
+Replacing Parts
+Replacing the Printer’s Feet
+Installation
+1. Turn the printer over with the bottom facing up.
+2. Replace any missing feet as needed. Insert the adhesive backed rubber foot into the round foot holder
+(see below).
+98
+Replacing Parts
+Replacing the Window
+Repair Prerequisites
+Open the printer to gain access to the window release tabs on the inside of the printer. For better access to
+the window, use the following:
+• ZD421 Ribbon Cartridge Printer - Accessing the Printhead on page 63
+• Transfer Ribbon Roll Printers: Accessing Inside the Cover on page 64
+Thermal Transfer Roll and Cartridge Printers
+For direct thermal printers see: Direct Thermal Printer Window Replacement on page 100.
+Removal
+1. Use your finger to push the window’s release tabs towards the middle area of the window.
+Installation
+1. Slide the three (3) tabs on the window part into the three (3) slots in the top cover at the rear of the
+2. printer.
+Swing the window down into the front of the window recess area. The window has 2 latching tabs (1).
+Press them into the cover to latch. You may want to leave the window’s protective cover on until the
+printer is installed for use.
+1 1
+99
+Replacing Parts
+Direct Thermal Printer Window Replacement
+Removal
+1. Open the printer to gain access to the window release tabs on the inside of the printer.
+2. Use push the window out of the top cover. Press the middle of the window on the left side. Push it out
+and towards the cover hinge until you can see a gap (1) between the window and cover. Continue to
+push while shifting your fingers to the right to side to release the window.
+1
+100
+Replacing Parts
+Installation
+1. Slide the window’s tab (1 - window wide) into the slot (2) on the back of the top cover at the rear of the
+printer.
+1
+2
+2. Swing the window down into the front of the window recess area. Push the lip of the window (1) under
+the front edge of the window recess. The window lip will slide down and into place.
+101
+Replacing Parts
+Replacing the Motor
+Repair Prerequisites
+You must remove the main pcba, (direct thermal only) front bezel option (tear-off, dispenser, or cutter) and
+printer base before you can remove the motor.
+1
+2
+Removal
+1. Remove the two screws (2) holding the motor (1) to the inner frame. Pull the motor out of the gears and
+inner frame. Note the location of the connector motor.
+Disconnect the cable from the motor or from the main PCBA on thermal transfer printers.
+2. Installation
+1. 2. 3. Connect the cable to the motor on thermal transfer printers.
+Orient the motor with the cable connector:
+• ZD421(t) - connector is positioned towards the rear of the printer.
+• ZD421(d) and ZD621(d) - connector is positioned away from the bottom, towards to the inner frame.
+• ZD421(c), ZD621(t), and ZD621R - connector is positioned to the front of the printer.
+Correct motor cable positioning is important to keep the media sensor’s cabling loose.
+Secure the motor to the inner frame with the two (2) screws to 7.5 +/- 1 in lbs.
+102
+Replacing Parts
+ZD421(t) and ZD621(t) - Replacing the Head-Up Sensor
+Repair Prerequisites
+You must remove the front bezel option (tear-off, dispenser, or cutter) and printer base before you can
+remove this head-up sensor.
+1
+2
+3
+Removal
+1. 2. Disconnect the head-up sensor cable (1) from the main PCBA.
+Remove the screw (2) holding the head-up sensor (3) in the inner frame. Pull the sensor out of the inner
+frame.
+103
+Replacing Parts
+3. Disconnect the cable from the main PCBA. The ZD621(t) has a cable hook
+Installation
+1. 2. Connect the cable to the Main PCBA.
+ZD621(t) - attach the cable to the cable hook on the side of the Wi-Fi mounting tower.
+104
+Replacing Parts
+3. Slide the head-up sensor PCBA into the slot in the inner frame. The PCBA’s switch will slide in easier if
+the top cover is not latched to the inner frame (3). The switch on the PCBA faces the front of the printer
+with the cable oriented towards the printer bottom. Secure it with the screw.
+.
+1
+105
+Replacing Parts
+Replacing the Main PCBA
+Repair Prerequisites
+You must remove the Front bezel option (tear-off, dispenser, or cutter) and printer base before you can
+remove the main PCBA. The Connectivity option modules can be removed during or prior to this
+procedure.
+Removal
+1. Remove any wired and wireless connectivity modules (1) that may be installed.
+1
+2. Remove the one or two screws used to retain the Main PCBA.
+106
+Replacing Parts
+3. Lift the PCBA off the one or 2 mounting posts (1). The second screw (2) and mounting post (2) are only
+with ZD621(t) and ZD421(c) models, Slide the main PCBA side ways, away from the connectivity
+module’s mounting bracket. Carefully lift the main PCBA away from the printer to disconnect the wires
+from the board.
+2
+1
+107
+Replacing Parts
+4. Carefully remove each connector from the Main PCBA. See Main PCBA Layout on page 164 for
+illustrated connector for both side of the Main PCBA.
+a. Disconnect the CUT/PEEL (media handling option) cable J25 on the backside of the PCBA.
+b. ZD621 printers with color touch display - Disconnect the LCD cable J23 on the backside of the
+PCBA.
+c. Disconnect the BLACKLINE (movable media) sensor cable from J17 on the backside of the PCBA.
+d. Disconnect the USER INTERFACE (control panel) cable from J4.
+e. Disconnect the CARTRIDGE (reader) sensor cable from J3.
+f. Disconnect the RFID (reader/programming module) cable from J2.
+g. Disconnect the MOTOR cable (number hidden).
+h. Disconnect the LOCK (lock switch) cable from J15.
+i. Disconnect the HEAD UP (switch) sensor cable from J14.
+j. Disconnect the RIBBON sensor cable from J16.
+k. Disconnect the two PRINTHEAD cables at J20 and the single ground wire at J11 next to the
+printhead connectors.
+Installation
+1. 2. 3. 4. Reconnect the cables to the main board in reverse order for easiest access.
+Slide the main PCBA into the slot on the outside of the Connectivity PCBA mounting bracket and
+between the mounting post and loosened screw.
+Align the main PCBA to the other mounting posts and tighten the loosened screw to secure the main
+board to the printer.
+ZD421(c) and ZD621(t) - Finish securing the main PCBA to print mechanism with a screw to the
+mounting post near the motor.
+108
+Replacing Parts
+ZD621R - Replacing the RFID Programming and Antenna PCBA’s
+Repair Prerequisites
+You must remove the front bezel option (tear-off, dispenser, or cutter) and printer base before you can
+remove this RFID programming PCBA.
+Removal
+1. Disconnect the RFID cable from the Main PCBA.
+2. Remove the two (2) screws holding the RFID programming PCBA (1). Lift the PCBA out and let it hang
+off the front of the printer by the antenna’s coupling cable. Do not disconnect the cable.
+1
+3. Push the release tab on the antenna cover (1).
+1
+109
+Replacing Parts
+4. Flip the printer over and gently set it down. Open the media compartment. Lift the loose antenna cover
+off the inside of the printer.
+1
+5. Lift the Antenna PCBA (1) up. Turn it sideways and slide it through the antenna access hole.
+1
+110
+Replacing Parts
+Installation
+1. With the RFID antenna and programming model PCBA’s connected with the antenna coupling cable,
+slide the Antenna PCBA up from the bottom and through the antenna access hole.
+1
+2. Set the loose Antenna PCBA (2)into the inner frame. Snap the Antenna Cover (1) into the inner frame
+to lock it in place.
+1
+2
+3. Flip the printer over and close the cover.
+111
+Replacing Parts
+4. Attach the RFID programming module (1) to the media sensor’s cover with 2 screws to 1.5 +/- .05 in.
+lbs.
+.
+1
+5. Connect the RFID cable from the RFID programming to the main PCBA.
+112
+Replacing Parts
+Accessing the ZD421(c) Movable Sensor
+Repair Prerequisites
+You must remove the front bezel option (tear-off, dispenser, or cutter) and printer base before proceeding.
+Removal for Access
+1. Remove the wired and wireless connectivity options installed.
+2. Remove the two screws holding the main PCBA to the inner frame. Disconnect the cables from the
+main PCBA.
+113
+Replacing Parts
+3. Remove the two screws holding the motor (2) to the inner frame. Pull the motor out. Note the location of
+the of the motors cable connector.
+1
+4. Remove the two media roller tensioning springs (1).
+1
+114
+Replacing Parts
+1. Remove the four screws securing the roll holder cover that retains the roll holder parts and covers the
+movable of sensor. Many roll holder parts are loose and will fall out if you are not careful.
+2. The movable media sensor is now accessible. Note the sensor’s cable exits toward the inside of the
+printer for ZD421(c) printer model.
+Re-assemble
+1. installed.
+Reverse the ‘Removal for Access’ sequence. Remember to replace any connectivity options that were
+115
+Replacing Parts
+Accessing ZD621(d) and ZD421(d) Head-up and Movable Sensors
+Repair Prerequisites
+You must remove the front bezel option (tear-off, dispenser, or cutter) and printer base before proceeding.
+Removal for Access
+1. Remove the wired and wireless connectivity options installed.
+2. Remove the screw holding the main PCBA to the inner frame. Disconnect the cables from the main
+PCBA.
+116
+Replacing Parts
+3. Remove the two screws holding the motor (1) to the inner frame. Pull the motor out. Note the location of
+the of the motors cable connector.
+1
+4. Remove the screw securing the media sensor cover (1) that covers the movable of sensor (2) and
+holds the main PCBA. Pull the media cover out of the motor mount wall on the inner frame of the
+printer.
+1
+2
+117
+Replacing Parts
+5. The movable media sensor is now accessible. Note the sensor’s cable exits toward the front of the
+ZD621(d) and ZD421(d) printer models.
+The head-up sensor can be lifted out of the inner frame now that the media sensor cover is removed.
+See Accessing ZD621(d) and ZD421(d) Head-up and Movable Sensors on page 116 for reference.
+Re-assemble
+1. Reverse the ‘Removal for Access’ sequence. Remember to replace any connectivity options that were
+installed.
+118
+Replacing Parts
+Accessing the ZD621(t) Movable Sensor
+Repair Prerequisites
+You must remove the Front Bezel Option (tear-off, dispenser, or cutter) and printer base before
+proceeding.
+Removal for Access
+1. Remove the wired and wireless connectivity options installed.
+2. Remove the two screws holding the main PCBA to the inner frame. Disconnect the cables from the
+main PCBA.
+119
+Replacing Parts
+3. Remove the two screws holding the motor (1) to the inner frame. Pull the motor out. Note the location of
+the of the motors cable connector.
+1
+4. Remove the two media roller tensioning springs (1).
+1
+120
+Replacing Parts
+5. Remove the four screws securing the roll holder cover that retains the roll holder parts and covers the
+movable of sensor. Many roll holder parts are loose and will fall out if you are not careful.
+6. The movable media sensor is now accessible. Note the sensor’s cable exits toward the inside of the
+printer for ZD621(t) printer model.
+Re-assemble
+1. installed.
+Reverse the ‘Removal for Access’ sequence. Remember to replace any connectivity options that were
+121
+Replacing Parts
+Accessing the ZD621R Head-up and Movable Sensors
+Repair Prerequisites
+You must remove the Front Bezel Option (tear-off, dispenser, or cutter) and printer base before
+proceeding.
+Removal for Access
+1. Remove the wired and wireless connectivity options installed.
+2. Remove the screw holding the main PCBA to the inner frame. Disconnect the cables from the main
+PCBA.
+122
+Replacing Parts
+3. Remove the two screws holding the motor (1) to the inner frame. Pull the motor out. Note the location of
+the of the motors cable connector.
+1
+4. Remove the two screws holding the RFID programming PCBA (1). Lift the PCBA out and let it hang off
+the front of the printer by the antenna’s coupling cable. Do not disconnect the cable.
+1
+123
+Replacing Parts
+5. Remove the two media roller tensioning springs (1).
+1
+6. Remove the four screws securing the roll holder cover (1) that retains the roll holder parts and covers
+the movable of sensor. Many roll holder parts are loose and will fall out if you are not careful.
+1
+124
+Replacing Parts
+7. The movable media sensor is now accessible. Note the sensor’s cable exits toward the inside of the
+printer for ZD421(c) printer model.
+Re-assemble
+1. Reverse the ‘Removal for Access’ sequence. Remember to replace any connectivity options that were
+installed.
+125
+Replacing Parts
+Replacing the Movable Lower Media (Blackmark) Sensor
+Repair Prerequisites
+You must remove the front bezel option (tear-off, dispenser, or cutter), printer base, motor, and the main
+PCBA before you can remove the movable sensor.
+Removal
+1. Unhook the sensor’s cable from the backside of the movable sensor.
+2. ZD421(c), ZD621(t), ZD621R: Release the two gold prongs holding the movable sensor. Pinch them
+toward the center of the movable sensor. Push down into the bracket when the prongs release at
+holding the black plastic bracket.
+126
+Replacing Parts
+ZD421(d), ZD621(d), ZD621(t): Release the two gold prongs holding the movable sensor. Push them
+away the center of the movable sensor. Push down on the prongs into the bracket and lift the black
+plastic bracket and metal spring-lock up.
+3. 4. Pull the metal spring-lock and black plastic bracket out of the frame and clear of the sensor’s cable.
+Open the printer. The golden sensor body, it’s PCBA, and cable can now be pulled out of the printer’s
+inner cavity and movable sensor’s recessed slide track.
+Installation
+1. Slide the new sensor’s PCBA and cable into the lens bracket for the PCBA. The cable is on the open
+end of the golden sensor body and hangs below the bracket.
+Models: ZD421(c), ZD621(t), ZD621R
+Models: ZD421(d), ZD621(d), ZD621(t)
+127
+Replacing Parts
+1. Snap the PCBA and bracket into the movable sensor body. The lens bracket should be flush with the
+top surface of the sensor body. The arrow on the sensor body points toward the rear of the printer.
+2. 3. Place the sensor’s cable and connector into sensor guide channel and cable slot. There is a wider
+opening on one end to allow the connector to slip through the slot.
+Align the (gold plastic) sensor body (with the sensor PCBA inside) to the movable sensor channel on
+the inside of the printer. The prongs go into the cable channel. The arrow point (1) on the sensor body
+points to the rear of the printer.
+1
+4. Put the sensor’s cable into the center of the metal spring-lock with the metal spring-lock’s notch facing
+the inner frame. Put the sensor’s cable into the center of the black plastic bracket with the black plastic
+bracket’s cable retainer (hooks) facing away from the inner frame.
+128
+Replacing Parts
+5. Align the black plastic bracket to the metal spring-lock and lock them to the movable sensor. The
+prong’s tabs will lock the bracket and spring in place.
+Slide the movable sensor from end to end to verify that the bracket is locked properly.
+129
+Replacing Parts
+Replacing the Hinge in Thermal Transfer Printers
+Repair Prerequisites
+You must remove the front bezel option (tear-off, dispenser, or cutter) and printer base before you can
+remove the hinge. The main PCBA can be removed to gain better access to cable connectors on the main
+PCBA.
+Removal
+1. 2. 3. Open the printer (with bezel and printer base removed).
+Disconnect the link arms if you are replacing the cover assembly or the print mechanism (the lower
+frame). See Disconnecting the Cover from the Ribbon Carriage on page 64.
+Lift the hinge lock bracket (2) off to free the right hinge mechanism. Use a small flat bladed screwdriver
+to pry the two tab locks (1) on the hinge lock bracket on the inside of the printer.
+1 1 2
+130
+Replacing Parts
+4. Remove the two screws securing the hinge cap (2) to the print mechanism (lower frame).
+1
+2
+5. Remove the loose hinge cap (2) and disconnect the 2 links (1) connecting the upper inner frame to the
+ribbon carriage.
+131
+Replacing Parts
+Installation
+1. Insert the right side of the upper inner frame hinge (1) in the right lower frame’s hinge (2). Push the
+hinge lock bracket (3) down onto the rear wall of the lower inner frame. Many parts are hidden in the
+illustration to help you identify the primary parts.
+1
+2
+3
+132
+Replacing Parts
+2. 3. Align the cables exiting the center of the inner frames hinge joint and pull them straight down towards
+the bottom of the printer.
+Align the sensor cable exiting the ribbon transport or ribbon carriage where it joins the print mechanism
+(lower inner frame) and put the cable straight down into the channel in the print mechanism (lower inner
+frame) towards the bottom of the printer.
+Ribbon Cartridge Printers Transfer Roll Printers
+with standard 3 button interface
+133
+Replacing Parts
+4. Place the Hinge on the printer and verify that the cables are not pinched between the inner frames.
+5. Secure the hinge to the frame with the two screws to 4.7 +/- 1 in. lbs.
+134
+Replacing Parts
+Replacing the Hinge in Direct Thermal Printers
+Repair Prerequisites
+You must remove the front bezel option (tear-off, dispenser, or cutter) and printer base before you can
+remove the hinge. The main PCBA can be removed to gain better access to cable connector on the main
+PCBA.
+Removal
+1. 2. 3. Open the printer (with bezel and printer base removed).
+Remove the screw securing the hinge cap to the print mechanism (lower frame). Rotate the loose hinge
+cap and pull it out of the hinge
+Disconnect the outside printhead cable with the black wires and the ground wire from the Main PCBA.
+4. Remove the ferrite clamp. Push the printhead connector and cable out of the hinge.
+Replacement
+5. 6. 7. 8. 9. Put the printhead cable in the new hinge.
+Put the hinge on the top cover and pull the printhead through the hinge to remove slack in the cable.
+Align the hinge with the lower frame and swing the square end into the matching square on the lower
+frame.
+Secure the hinge to the frame with the screw.
+Re-attach the printhead cable to the main PCBA.
+135
+Replacing Parts
+Replacing the Cover Assembly on Thermal Transfer (Roll) Printers
+Repair Prerequisites
+You must remove the front bezel option (tear-off, dispenser, or cutter), printer base, the main PCBA, and
+the hinge before you can remove the cover assembly.
+Removal
+1. Disconnect the link arms connecting the cover to the ribbon carriage assembly. See Disconnecting the
+Cover from the Ribbon Carriage on page 64.
+2
+1
+3
+2. 3. Release the LDC (CTD - Color Touch Display) flexible circuit cable (1) from the main PCBA. Unwind
+the flex cable from the toroid block.
+Disconnect the control panel (USER IF) cable (2) from the main PCBA and remove its ferrite clamp (3).
+Use a small flat bladed screw driver or a fingernail to release the latches on the side of the clamp body.
+136
+Replacing Parts
+4. Pull the control panel (USER IF) cable (2) out from between the inner frame (4) and connectivity
+module bracket (5).
+4
+5
+5. Pull the cover assembly (6) out of the left side hinge cap (7) on the lower frame.
+6
+7
+Replacement
+1. Reverse the removal process to install the new cover.
+137
+Replacing Parts
+Replacing the Cover Assembly on Cartridge Printers
+Repair Prerequisites
+You must remove the front bezel option (tear-off, dispenser, or cutter), printer base, the, main PCBA, and
+the hinge before you can remove the cover assembly.
+Removal
+1. Remove the two ferrite clamps (3) attached to the printhead cables by gently prying the clamp’s lock
+open.
+1
+2
+3 4
+2. 3. 4. 5. Replacement
+1. Disconnect the two wire connector (3)near the right hinge.
+Cut the cable tie (2) securing the ribbon sensor cable onto the inner frame.
+Remove the ferrite clamp (1) on the ribbon sensor cable (placed next to the tie).
+Slide the right side of the cover out of the hinge on the printer.
+Reverse the removal process to install the new cover.
+138
+Replacing Parts
+Replacing the Cover Assembly on Direct Thermal Printers
+Repair Prerequisites
+You must remove the front bezel option (tear-off, dispenser, or cutter), printer base, main PCBA, and the
+hinge before you can remove the cover Assembly.
+Does not include the ZD621 direct thermal printer with a color touch display.
+Removal
+1. With the hinge and the main PCBA removed, the slide the cover assembly out of the left side hinge cap.
+Replacement
+1. Reverse the removal process to install the new cover. Note the ferrite (1) locations below to verify
+placement after the new cover assembly, hinge, and main PCBA have been reinstalled.
+1
+1
+139
+Replacing Parts
+Replacing the CTD Cover Assembly on ZD621(d)
+Repair Prerequisites
+You must remove the front bezel option (tear-off, dispenser, or cutter), printer base, main PCBA, and the
+hinge before you can remove the cover assembly.
+Removal
+1. Unwind the LDC (Color Touch Display) flexible circuit cable (1) out of the toroid block(3).
+1 1
+1 2 1 2
+1 3
+2. 3. Remove the ferrites clamps (2) from the printhead and control panel cables.
+Gently pull the flex circuit off the side of the inner frame.
+4. Replacement
+1. Slide the cover out of the left side hinge cap.
+Reverse the removal process to install the new cover.
+140
+Replacing Parts
+Accessing under the Cover - Thermal Transfer Printers
+CAUTION—ESD: Prepare your work area by protecting against static discharge. Your work area must be
+static-safe and include a properly grounded conductive cushioned mat to hold the printer and a conductive
+wrist strap for yourself.
+Repair Prerequisites
+Before you begin this procedure, turn the printer OFF, open the printer, and remove media or ribbon.
+Exploded View Thermal Transfer Printer: Cartridge and Roll Printers are similar
+141
+Replacing Parts
+Removal
+1. Slide both of the gold latch release slider buttons towards the front of the top cover. Stop sliding the
+gold buttons when they are slightly past the mid point in the slide channel. Push the button out of the
+slide channel (and cover) from the inside of the cover. Note the ZD421(t) printer has a different latch
+and is mounted on the ribbon carriage instead.
+142
+Replacing Parts
+2. Remove the screws (1) securing the top cover to the inner lid. Remove the top cover.
+Screws 1 1
+Installation
+1. 2. 3. 4. Place the new cover on the top inner frame. Align the cover to the mounting holes.
+Use the mounting screws to secure the cover to the frame 4.7 +/- 1 in. lbs.
+Swing the latch arms up until it touches the front of the cover. Snap the gold latch release slider buttons
+into the right and left sides of the cover. Verify they slide freely an release the latch arm.
+Close the cover and verify the printer latches closed. Open and close the cover a few times to verify
+mechanism and latch function.
+143
+Replacing Parts
+Accessing under the Cover - Direct Thermal Printers
+CAUTION—ESD: Prepare your work area by protecting against static discharge. Your work area must be
+static-safe and include a properly grounded conductive cushioned mat to hold the printer and a conductive
+wrist strap for yourself.
+Repair Prerequisites
+Before you begin this procedure, turn the printer OFF, open the printer, and remove media.
+Removal
+1. Remove the four screws (1) securing the top cover to the inner lid.
+2. Pull the cover off the upper inner frame.
+1
+3. ZD621(d) with a Color Touch Display - The power and printer control buttons are now loose.
+144
+Replacing Parts
+Installation
+1. ZD621(d) with a Color Touch Display - Place the power and printer control buttons on the control panel.
+Use the alignment pins.
+1
+2
+2. 3. 4. Place the new cover on the top inner frame. Align the cover to the mounting holes.
+Use the mounting screws to secure the cover to the frame 4.7 +/- 1 in. lbs.
+Close the cover and verify the printer latches closed. Open and close the cover a few times to verify
+mechanism and latch function.
+145
+Replacing Parts
+Replacing a 3-Button Control Panel PCBA
+Repair Prerequisites
+You must remove the cover before performing this procedure.
+Removal
+1. With the cover removed, remove the screw holding the control panel PCBA to the inner frame.
+2. Lift the PCBA off the inner frame and disconnect the cable(s) from the backside of the PCBA.
+Installation
+1. Reconnect the cable(s) to the new control panel PCBA.
+2. Place the PCBA with the connector/cable side facing down with the two small guide holes (1) to guide
+pins (2) molded into the top of the inner frame.
+1
+1
+2
+2
+3. Secure the PCBA to the inner frame with the screw.
+146
+Replacing Parts
+Replacing a Color Touch Display Control Panel
+Repair Prerequisites
+You must remove the cover assembly before performing this procedure.
+Removal
+1. 2. 3. With the cover removed, lift the power (1) and printer control (3) buttons
+Remove the 2 screws holding the CTD control panel PCBA and bracket (2) to the inner frame.
+Lift the PCBA off the inner frame and disconnect the cables from the backside of the PCBA.
+Installation
+1. 2. Reconnect the cables to the new CDT control panel PCBA.
+Place the PCBA with the connector/cable side facing down onto the top of the inner frame.
+3
+1
+2
+3. 4. Secure the PCBA to the inner frame with the 2 screws 1.5 +/- 0.5 in. lbs.
+Place the power and printer control buttons on the control panel. Use the alignment pins.
+147
+Replacing Parts
+Replacing the Latch Assembly - ZD421(c), ZD621(t), and Zd621R
+Repair Prerequisites
+You must remove the cover assembly on thermal transfer printers before performing this procedure.
+Removal
+1. Cartridge Printer - With the cover removed and inner frame in the full open position, rotate the latch
+assembly up and lift it out of the inner frame.
+Ribbon Roll Printer - With the cover removed and inner frame in the full open position, rotate the latch
+assembly down and lift it out of the inner frame.
+Installation
+1. With the inner frame in the full open position, slide the flat surface on the latch assembly’s pivot bar into
+the two (2) molded ‘C’ shaped latch bar bearings at the top of the inner frame. Orient the latch arm
+assembly to lift and remove.
+• 1 - Ribbon Cartridge Printers
+• 2 - Ribbon Roll Printers
+1 2
+148
+Replacing Parts
+Replacing the Latch Assembly - ZD421(t)
+Repair Prerequisites
+None
+Removal
+1. Open the printer. Locate the latches on the side of the ribbon carriage. Remove the screw holding the
+latch arm (1), washer, and spring (1) on both sides of the printer. Pull it off the post. The spring is loose
+now.
+1
+2
+Installation
+2. Place the spring on the spring post of the latch.
+3. 4. 5. Align the latch with the latch post on the ribbon carriage. As the latch and spring near the post align the
+top of the spring with spring post on the side of the ribbon carriage.
+Push the latch on the post while rotating the latch counterclockwise to get the latch to clear the latch
+stop feature. Let the latch rest on the stop.
+Use the washer and screw to finish securing the latches to the ribbon carriage.
+149
+Replacing Parts
+Replacing the Latch Arm Assembly - Direct Thermal Printers
+Repair Prerequisites
+You must remove the cover and the control panel PCBA before performing this procedure. The latch on
+ZD421(d) models is all plastic version.
+Removal
+1. Remove the control panel mounting plate (2). It is attached to the inner frame by two screws (1). ZD621
+models have a media dancer spring that may come loose (3).
+1
+2
+3
+2. The inner frame may be latched into the inner frame. To release the latch arm assembly (4), pull the
+latch forward and lift the inner frame up.
+4
+150
+Replacing Parts
+3. Lift one side of the latch assembly out of the inner frame with stead firm pressure. The spring may pop
+or fall out. Repeat on the other side of the latch to completely remove the assembly (latch bar and
+springs).
+151
+Replacing Parts
+Installation
+1. 2. Align and insert the new latch assembly and press it into the inner frame.
+Insert a latch spring on the small, short post on the front side of each latch arm. Slide the other end of
+the spring into the square recesses immediately across from the latch arms.
+3. ZD621 Printers only: Place the media dancer’s spring on the post (plus sign shape) in the middle of the
+inner frame.
+152
+Replacing Parts
+4. 5. Take the control panel mounting plate and insert the upper array sensor and control panel interface
+cables (3) into the largest opening.
+ZD621 printers: Align the media dancer spring (1) to the cup (2) on the back of the mounting plate. Put
+a small tool in the cup’s hole to guide the spring into the cup.
+1 2
+4
+3
+4
+1
+6. Place the mounting bracket on the two mounting posts (4) on the inner frame and secure it to the inner
+frame with two screws to 4.7 +/- 1 in. lbs.
+153
+Replacing Parts
+Replacing the Upper Array Sensor - Thermal Transfer Printer
+Repair Prerequisites
+You must remove the cover assembly, control panel PCBA (3-button or LCD version) and latch assembly
+before performing this procedure.The upper array sensor is unplugged control panel PCBA.
+1
+2
+3
+Removal
+1. Using a pliers or special tool lift the press-on fitting (1) securing the upper array sensor PCBA (2) to the
+inner frame. Pull the PCBA off the sensor mounting posts (3).
+Installation
+2. Put the upper array sensor PCBA on the two guide pins with the row of LEDs in the slot and wires on
+top facing out and on the inside of the printer. Hold the PCBA on the posts while pressing the fitting on
+the long post to secure the PCBA to the inner frame.
+154
+Replacing Parts
+Replacing the Upper Array Sensor - Thermal Transfer Printer
+Repair Prerequisites
+You must remove the cover assembly and the control panel PCBA (3-button or LCD version) before
+performing this procedure.The upper array sensor is unplugged control panel PCBA.
+Removal
+1. Swing the flapper arm up. This aligns the flat surfaces on the on the arm’s pivot posts. The narrower
+width can slide out of the two slots in the arm’s pivot bracket. Slide the flapper arm out of the bracket.
+1
+2. Pull the sensor cable out of the out of the backside of the flapper arm (1).
+2
+3
+4
+3. Remove the screw securing the sensor cover (2) from the top side of the flapper arm (1). Set the cover
+aside. Remove the sensor array PCBA and cable.
+155
+Replacing Parts
+Installation
+1. Insert the new PCBA’s cable and connector into the hole in the center of the flapper and route it through
+the cable channel on the backside of the flapper arm.
+2. 3. Put the upper array sensor PCBA on the two guide pins with the row of LEDs in the slot and wires on
+top facing out. Hold the PCBA on the posts while pulling the wires and cable connector to remove slack
+(out the back of the flapper arm to the top).
+Place the sensor cover on top of the senor PCBA and secure it with the screw. Verify that the wires are
+not pinched and the PCBA is still in place.
+156
+Replacing Parts
+4. 5. 6. Insert the cable and connector through the hole (1) in the inner frame’s flapper arm pivot bracket.
+Insert the two flapper arm pivot posts (2) into the bracket (3). Swing the flapper arm down away from
+the top of the printer. This will lock the flapper arm in the bracket.
+Replace the control panel PCBA and cover to complete reassembly.
+1
+2
+3 3
+157
+Replacing Parts
+Replacing the Ribbon Roll Printer’s Ribbon Trailer Sensor PCBA
+CAUTION—ESD: Prepare your work area by protecting against static discharge. Your work area must be
+static-safe and include a properly grounded conductive cushioned mat to hold the printer and a conductive
+wrist strap for yourself.
+Removal
+1. Open the printer. Remove the ribbon rolls. Note the sensor is in slightly different spots on each model
+2. 3. type.
+Turn the printer around. Look down into the top of the ribbon carriage.
+Remove the screw securing the Ribbon Sensor PCBA (1) to the ribbon chassis’s front cross member.
+1 1
+158
+Replacing Parts
+4. Push the PCBA out of the ribbon carriage cross member from the bottom and lift it up. Note the wire
+routing. Disconnect the cable’s connector from the PCBA. The black sensor extending through the
+cross member is colored orange in this illustration.
+Installation
+1. 2. Connect the cable (1)to the to the new PCBA.
+Place the sensor on the PCBA into the square hole in the cross member and secure it to the cross
+member with the screw.
+1
+3. Verify the cable’s wiring is routed in the channel (under the tabs).
+159
+Replacing Parts
+Replacing the Cartridge Printer Ribbon Sensor PCBA
+Repair Prerequisites
+You must remove the cover assembly before performing this procedure.
+1
+2
+3
+3
+Removal
+1. Pry the cover (1) off the printhead actuator arm with your hand. Grab the sides of the cover (close to
+actuators arm’s hinge) and lift up. Swing it up and lift the cover out.
+160
+Replacing Parts
+2. Remove the screw (2) securing the ribbon sensor PCBA (3) to the printhead actuator arm. Lift the
+PCBA out. The printhead may be unlatched from the printhead actuator arm if necessary to gain more
+clearance from the printhead cable, see Removing the Printhead on page 71.
+3. Installation
+1. 2. Disconnect the cable from the PCBA.
+3. 4. Connect the cable to the ribbon sensor PCBA (3).
+Place the ribbon sensor PCBA (3) with the black sensor body down into the actuator arm body. The
+connector/cable side is on the outer edge of the actuator arm body. Align the PCBA with the two
+notches and the screw hole in the actuator arm body.
+Secure the PCBA to the actuator arm body with screw.
+Place the actuator arm’s cover back onto the actuator arm body. Slide the notches on the cover under
+the tabs (4) on the actuator arm body. Swing the narrow end down into the arm’s hinge. Press the cover
+into the actuator arm body to lock it in place.
+4
+161
+Replacing Parts
+Replacing the Ribbon Carriage in Thermal Transfer (Roll) Printers
+Repair Prerequisites
+You must remove the front bezel option (tear-off, dispenser, or cutter), printer base, main PCBA, and hinge
+before you can remove the ribbon carriage.
+Removal
+1. Remove the screw and washer (1) on each side of the print mechanism at the ribbon carriage’s hinges.
+1
+1
+162
+Replacing Parts
+2. Push the ribbon carriage’s hinge pin out of the hinge bracket molded into the print mechanism (lower
+frame) on the left side. The inner frame and transport both bend to allow you to get the pin out of the
+bracket.
+3. Pull the ribbon carriage up and way from the printer. Gently pull the printhead cables (and connectors)
+out of the well in the top of the lower frame.
+163
+Replacing Parts
+Installation
+1. 2. Insert the printhead cable (and connector) into the opening between the right cover hinge and right
+ribbon carriage hinges.
+Align the ribbon carriage with the two hinge springs (2) with the two hinge spring wells (1) in the top of
+the lower inner frame. Lower the springs into the wells until the carriages hinge pins and hinge brackets
+are close.
+1
+2
+3. Push the right side transport hinge pin into the right side bracket on the inner frame. Repeat for the left
+4. 5. side.
+Pull the printhead cable completely through the lower frame to remove slack at the carriage hinge.
+Re-attach the two oroid clamps to the two branches of printhead cables below the hinge area.
+Secure the ribbon carriage hinges to the print mechanism with a screw and washer on each side of the
+printer.
+164
+Replacing Parts
+Replacing the Ribbon Transport
+Repair Prerequisites
+You must remove the front bezel option (tear-off, dispenser, or cutter), printer base, main PCBA and hinge
+before you can remove the ribbon transport.
+Removal
+1. Loosen the tape (1) holding the cartridge sensor cable (2) to free the cable.
+1
+2
+2. Disconnect the upper (gap/web) media sensor cable (3) in the right hinge area. The printhead cables
+with ferrite's are just out of this picture.
+3
+165
+3. 4. 5. 6. Replacing Parts
+Disconnect the two link arms (1) that connect the ribbon transport to the top cover (and upper frame).
+1
+Remove the screw and washer on each side of the print mechanism at the ribbon transport’s hinge.
+Push the ribbon transport’s hinge pin out (3) of the hinge bracket (2) molded into the print mechanism
+(lower frame) on the left side. The inner frame and transport both bend to allow you to get the pin out of
+the bracket.
+3
+2
+Pull the ribbon transport up and out of the printer. Gently pull the upper media sensor’s cable (and
+connector) out of the well in the top of the lower frame.
+166
+Replacing Parts
+Installation
+1. Align the ribbon transport with the two hinge springs with the two hinge spring wells in the top of the
+lower inner frame. Lower the springs (2) into the spring wells (3) until the transports hinge pins and
+hinge brackets are close.
+1
+3 4
+2
+2. Push the right side transport hinge pin into the right side bracket on the inner frame. Repeat for the left
+3. 4. 5. 6. side.
+Insert the upper media sensor cable and connector (1) into the larger well (4) on the top of the inner
+frame on the left side of the printer.
+Plug the cartridge sensor and upper media sensor cables into the main PCBA.
+Re-secure the cartridge sensor and ribbon sensor cables to the bottom of the print mechanism with
+tape.
+Secure the ribbon transport hinge to the print mechanism with a screw and washer on each side of the
+printer.
+167
+Replacing Parts
+Replacing the Upper Media (Gap/Web) Sensor (ZD421C)
+Repair Prerequisites
+You must remove the front bezel option (tear-off, dispenser, or cutter), printer base, hinge, and ribbon
+transport before you can remove the upper media Sensor. The main PCBA can be removed to gain better
+access to cable connectors on the main PCBA.
+1
+2
+3
+Removal
+1. 2. With the ribbon transport removed from the printer, remove the two screws securing the lift side panel
+(3) to the transport.
+At the ribbon transport’s hinge pin, lift the side panel off the transport. The side panel has snap to lock
+features that are holding the panel lightly in place. Continue lifting all the way around the side panel to
+release the latches and pull it away from the transport frame.
+168
+Replacing Parts
+3. Remove the screw securing the sensor cover and remove the cover.
+1
+1
+2
+4. Locate the cable on side of the transport frame and pull it out. The cable channels include cable capture
+features (1) to hold the cable in place during assembly. Pull the cable around them and then out of the
+transport frame through the inside of the transport’s side frame to release the upper sensor PCBA (2).
+169
+Replacing Parts
+Installation
+1. Place the new upper media sensor PCBA on the two guide posts with the four LEDs in the hole in the
+transport frame’s cross member. The cable from the sensor PCBA exits toward the back of the
+transport (hinges in the back) and the cable sits in a notch in the cross member.
+2. 3. 4. 5. Place the sensor cover over the upper media sensor PCBA and secure it and the PCBA to the frame
+with a screw. Verify that the cable is not pinched between the frame and the cover.
+Put the cable’s loose end with the connector through the transport’s right inside wall and route the cable
+through the channel and under the cable capture feature.
+From the outside of the transport frame’s right side, gently pull the cable tight and route it through the
+cable channel and out over the hinge pin. Push the cable in the channel and under the cable capture
+feature. Pull the cable gently tight again to remove any slack.
+Align and press the left side transport frame’s cover pack onto the transport. Secure it to the frame with
+two (2) screws to 4.7 +/- 1 in. lbs.
+170
+Replacing Parts
+Replacing the Print Mechanism
+Repair Prerequisites
+You must remove the front bezel option (tear-off, dispenser, or cutter), printer base, main PCBA, hinge,
+and cover assembly (cover and inner upper frame) before you can remove the print mechanism.
+Removal and Installation
+1. ZD421(d) and ZD621(d): Cover assembly (cover and inner upper frame) releases the print mechanism
+for replacement.
+2. ZD421(t), ZD621(t), and ZD621R: Cover assembly (cover and inner upper frame) releases the print
+mechanism. See Replacing the Ribbon Carriage in Thermal Transfer (Roll) Printers on page 162 to
+remove and connect it to the new print mechanism.
+3. ZD421(c): Cover assembly (cover and inner upper frame) releases the print mechanism with the ribbon
+transport. See Replacing the Ribbon Transport on page 165 to remove and connect it to the new print
+mechanism.
+171
+Main PCBA Layout
+This section shows the Main PCBA and its connector locations from the top and bottom sides of
+the circuit board assembly.
+164
+Main PCBA Layout
+Main Printed Circuit Board Assembly (Top View)
+5
+6
+1 - Lithium Battery Not
+Replaceable
+1
+2 - Head-up Sensor
+3 - Ribbon Sensor
+7
+8
+4 - Printhead has 2 cables
+and a ground wire
+5 - Media Option Interface
+(back)
+9
+6 - Movable (Blackline)
+Sensor (back)
+7 - Lock
+8 - Motor
+9 - RFID
+10
+10 - Cartridge Sensor
+11 - LCD (back)
+12 - Control Panel (User IF)
+2
+11
+3
+12
+4
+165
+Main PCBA Layout
+Main Printed Circuit Board Assembly (Back View)
+1 - Printhead and ground
+2 - Ribbon Sensor
+3 - Head-Up
+4 - Wireless Connectivity
+Connector
+1
+5 - Hardware Option
+Connector
+(Cutter- Peeler-Tear)
+6 - Movable Media Sensor
+(Blackline)
+7 - Control Panel (USER IF)
+8 - LCD (back)
+9 - Cartridge Sensor
+10 - RFID
+11 - Motor
+7
+12 - Lock
+2
+8
+3
+9
+10
+4
+11
+12
+5 6
+166
+Cable Routing for ZD421c
+This section provides a visual printer reference for service personnel if wiring and components have shifted
+or come loose during repairs. The printer is shown with the cover and base removed.
+ZD421c - Ribbon Cartridge printers
+167
+Cable Routing for ZD421c
+168
+Cable Routing for ZD421c
+169
+Cable Routing for ZD421c
+170
+Cable Routing for ZD421c
+171
+Cable Routing for ZD421c
+172
+Cable Routing for ZD421c
+173
+Cable Routing for ZD421c
+174
+Cable Routing for ZD421c
+175
+Cable Routing for ZD421c
+176
+Cable Routing for ZD421d
+This section provides a visual printer reference for service personnel if wiring and components have shifted
+or come loose during repairs. The printer is shown with the cover and base removed.
+ZD421d - Direct Thermal printers
+177
+Cable Routing for ZD421d
+178
+Cable Routing for ZD421d
+179
+Cable Routing for ZD421d
+180
+Cable Routing for ZD421d
+181
+Cable Routing for ZD421d
+182
+Cable Routing for ZD421d
+183
+Cable Routing for ZD621d
+This section provides a visual printer reference for service personnel if wiring and components have shifted
+or come loose during repairs. The printer is shown with the cover and base removed.
+ZD621d - Direct Thermal printers
+Basic 3 Button UI
+184
+Cable Routing for ZD621d
+Color Touch Display UI
+185
+Cable Routing for ZD621d
+1
+1 - Color Touch Display Cable
+186
+Cable Routing for ZD621d
+187
+Cable Routing for ZD621d
+188
+Cable Routing for ZD621d
+189
+Cable Routing for ZD621d
+3 Button UI
+190
+Cable Routing for ZD621d
+191
+Cable Routing for ZD421t
+This section provides a visual printer reference for service personnel if wiring and components have shifted
+or come loose during repairs. The printer is shown with the cover and base removed.
+ZD421t Ribbon Roll Thermal Transfer Printers
+192
+Cable Routing for ZD421t
+193
+Cable Routing for ZD421t
+194
+Cable Routing for ZD421t
+195
+Cable Routing for ZD421t
+196
+Cable Routing for ZD421t
+197
+Cable Routing for ZD421t
+198
+Cable Routing for ZD421t
+199
+Cable Routing for ZD421t
+200
+Cable Routing for ZD421t
+Route cable to avoid contact with the Wi-Fi antenna.
+201
+Cable Routing for ZD621t
+This section provides a visual printer reference for service personnel if wiring and components have shifted
+or come loose during repairs. The printer is shown with the cover and base removed.
+ZD621 Ribbon Roll Thermal Transfer Printers
+Basic 3 Button UI
+201
+Cable Routing for ZD621t
+Color Touch Display UI
+202
+Cable Routing for ZD621t
+203
+Cable Routing for ZD621t
+204
+Cable Routing for ZD621t
+205
+Cable Routing for ZD621t
+206
+Cable Routing for ZD621t
+207
+Cable Routing for ZD621t
+208
+Cable Routing for ZD621t
+209
+Cable Routing for ZD621t
+210
+Cable Routing for ZD621R
+This section provides a visual printer reference for service personnel if wiring and components have shifted
+or come loose during repairs. The printer is shown with the cover and base removed.
+ZD621RFID Thermal Transfer Printers
+Basic 3 Button UI
+211
+Cable Routing for ZD621R
+Color Touch Display UI
+212
+Cable Routing for ZD621R
+213
+Cable Routing for ZD621R
+214
+Cable Routing for ZD621R
+215
+Cable Routing for ZD621R
+216
+Cable Routing for ZD621R
+217
+Cable Routing for ZD621R
+218
+Cable Routing for ZD621R
+219
+Cable Routing for ZD621R
+220
+Media
+This section provides a simple media overview for your printer.
+Types of Thermal Media
+IMPORTANT: strongly recommends the use of Zebra-brand supplies in order to ensure consistent
+high-quality printing. A wide range of paper, polypropylene, polyester, and vinyl stock has been
+specifically engineered to enhance the printing capabilities of the printer and to prevent premature
+printhead wear.
+To purchase supplies, go to http://www.zebra.com/howtobuy.
+• Your printer can use various types of media:
+• Standard media—Most standard (non-continuous) media uses an adhesive backing that sticks
+individual labels or a continuous length of labels to a liner.
+• Continuous roll media—Most continuous roll media is direct thermal media (similar to FAX paper) and
+is used for receipt or ticket style printing.
+• Tag stock—Tags are usually made from a heavy paper (up to 0.0075in./0.19mm thick). Tag stock does
+not have adhesive or a liner, and it is typically perforated between tags.
+The printer typically uses roll media, but you can use fan-fold or other continuous media too.
+Determining Thermal Media Types
+Thermal transfer media requires ribbon for printing while direct thermal media does not. To determine if
+ribbon must be used with a particular media, perform a media scratch test.
+To perform a media scratch test, complete these steps:
+1. Scratch the print surface of the media with a fingernail or pen cap. Press firmly and quickly while
+dragging it across the media surface. Direct thermal media is chemically treated to print (expose) when
+heat is applied. This test method uses friction heat to expose the media.
+2. Did a black mark appear on the media?
+If a black mark... Then the media is...
+Appears on the media Direct thermal. No ribbon is required.
+Does not appear on the media Thermal transfer. A ribbon is required.
+Not supported by direct thermal printers.
+221
+Media
+General Media and Print Specifications
+• Direct Thermal — Max. Media width: 108mm (4.25 inches)
+• Thermal Transfer — Max. Media width: 118mm (4.65 inch)
+• All Printers — Min. Media width: 15mm (0.585 inch)
+• Media length:
+• 990mm (39 inches) max.
+• 6.35mm (0.25 inches) min. – Tear Off or Label
+• 12.7mm(0.50 inches) min. – Peel
+• 25.4mm (1.0 inch) min. - Cutter
+• Media thickness:
+• 0.06mm (0.0024 inches) min. – all requirements
+• 0.1905mm (0.0075 inches) max. – all requirements
+• Media Roll Outer Diameter (O.D.) max.: 127mm (5.0 inches)
+• Media Roll Core Inner Diameter (I.D.):
+• 12.7mm (0.5 inch) I.D. - Standard roll configuration
+• 25.4mm (1 inch) I.D. - Standard roll configuration
+• 38.1mm (1.5 inches) I.D. - with optional media roll adapter
+• 50.8mm (2.0 inches) I.D. - with optional media roll adapter
+• 76.2mm (3.0 inches) I.D. - with optional media roll adapter
+• Ribbon Rolls - 74 meter
+• Ribbon Length - 74 m (243 feet)
+• Ribbon Width Max. - 110 mm (4.33 inches)
+• Ribbon Width Min. - 33 mm (1.3 inches) ‡
+• Ribbon Core I.D. - 12.7mm (0.5 inches)
+• Wax, Wax/Resin, and Resin transfer materials
+• Ribbon Rolls - 300 meter
+• Ribbon Length - 300 m (984 feet)
+• Ribbon Width Max. - 110 mm (4.33 inches)
+• Ribbon Width Min. - 33 mm (1.3 inches) ‡
+• Wax, Wax/Resin, and Resin transfer materials
+‡ - Transfer ribbon should always cover the entire width of the media (and liner) to prevent damaging the printhead.
+222
+Media
+• ZD421 Ribbon Cartridges
+• Ribbon Length - 74 m (243 feet)
+• Ribbon Width Max. - 110 mm (4.33 inches)
+• Ribbon Width Min. - 33 mm (1.3 inches) ‡
+• Colors available in Black - Wax, Wax Resin, and Resin transfer materials
+• Dot pitch:
+• 203 dpi: 0.125mm (0.0049 inches)
+• 300 dpi: 0.085mm (0.0033 inches)
+• Barcode modulus x-dim:
+• 203 dpi: 0.005-0.050 inches
+• 300 dpi: 0.00327 - 0.03267 inches
+Label Dispenser (Peeler)
+The printer supports a field installed label dispense option with label taken sensor for batch processing of
+labels.
+• Paper Thickness:
+• Min. 0.06 mm (0.0024 inches)
+• Max. 0.1905 mm (0.0075 inches)
+• Media Width:
+• Min.15 mm (0.585 inches)
+• Thermal Transfer Printers Max. 118 mm (4.65 inches)
+• Direct Thermal Printers Max. 108 mm (4.25 inches)
+• Label Length:
+• All Printers Max. (theoretical): 990mm (39 inches)
+• Thermal Transfer Printers Max. (tested): 279.4mm (11 inches)
+• Direct Thermal Printers Max. (tested): 330mm (13 inches).
+• All Printers Min.: 12.7mm (0.5 inches).
+223
+Media
+Standard (Media) Cutter
+The printer supports a field installed media cutter option for full width cutting of label liner, tag or receipt
+media.
+• A medium duty cutter for cutting label liner and light tag media (LINER/TAG). Do not cut through labels,
+adhesive or embedded circuitry.
+• Paper Thickness:
+• Min. 0.06 mm (0.0024 inches)
+• Max. 0.1905 mm (0.0075 inches)
+• Cut Width:
+• Min.15 mm (0.585 inches)
+• Thermal Transfer Printers Max. 118 mm (4.65 inches)
+• Direct Thermal Printers Max. 109 mm (4.29 inches)
+• Minimum distance between cuts (label length): 25.4 mm (1 inch). Cutting shorter media lengths
+between the cuts may cause the cutter to jam or error.
+• By design, the cutter is self cleaning and does not require preventive maintenance of the internal cutter
+mechanism.
+Linerless (Media) Cutter - Direct Thermal only
+The printer supports a field installed media cutter option for full width cutting of linerless media.
+• A full width linerless media cutter (LINERLESS CUT).
+• Paper Thickness:
+• Min. 0.06 mm (0.0024 inches)
+• Max. 0.1905 mm (0.0075 inches)
+• Cut Width:
+• Min. 15 mm (0.585 inches)
+• Max. 118 mm (4.65 inches)
+• Minimum distance between cuts (label length): 25.4 mm (1 inch). Cutting shorter media lengths
+between the cuts may cause the cutter to jam or error.
+• By design, the cutter is self cleaning and does not require preventive maintenance of the internal cutter
+mechanism. See Linerless Platen (Drive) Roller on page 16 cleaning and Media Path Cleaning on
+page 21 to maintain optimal linerless media cut operation.
+224
+ZPL Configuration
+This section provides an overview of managing printer configuration, the configuring status report, and
+printer and memory printouts.
+Managing the ZPL Printer Configuration
+The ZPL printer is designed to allow you to change printer settings dynamically for fast first label out
+printing. Printer parameters that are persistent will be retained for future formats to use. Those settings will
+remain in effect until they are changed by subsequent commands, the printer is reset, power is cycled, or
+when you restore a parameter that has a factory default by resetting the printer to factory defaults. The
+ZPL Configuration Update command (^JU) saves and restores printer configurations to initialize (or
+re-initialize) the printer with pre-configured settings.
+• To keep settings after a power cycle or printer reset, a ^JUS can be sent to the printer to save all current
+persistent settings.
+• The values are recalled with a ^JUR command to restore the last saved values to the printer.
+ZPL stores all parameters at once with a single command mentioned above. The legacy EPL programming
+language (supported by this printer) changes and saves individual commands immediately. Most printer
+settings are shared between ZPL and EPL. For example, changing the speed setting with EPL will also
+change the speed set for ZPL operations. The changed EPL setting will persist even after a power cycle or
+reset issued by either printer language.
+A printer configuration report is available to assist the developer. The configuration report lists operating
+parameters, sensor settings, and printer status. It can be accessed by using the procedure in Test Printing
+with the Configuration Report on page 37. The Zebra Setup Utility and the ZebraDesigner ™ Windows
+driver also print this report and other printer reports to help you manage your printer.
+225
+ZPL Configuration
+ZPL Printer Configuration Format
+Managing more than one printer can be done by creating a printer configuration programming file to send
+to one or more printers or ZebraNet™ Bridge can be used to clone a printer’s setup. Figure 1 below shows
+the basic structure of a ZPL programming configuration file.
+Refer to the ZPL programmer’s guide and the Configuration Setting to Command Cross-reference on
+page 227 to create a programming file. The Zebra Setup Utility (ZSU) can be used to send programming
+files to the printer. Windows Notepad (text editor) can be used to create programing files.
+Figure 1 Configuration Parameter Format Structure
+226
+ZPL Configuration
+Configuration Setting to Command Cross-reference
+The printer configuration report, shown below, provides a listing of a majority of the configurations settings
+that can be set by ZPL command.
+Figure 2 Configuration Report Printout
+1
+1 - Sensor Settings used for Service Purposes
+227
+ZPL Configuration
+Table 1 ZPL Commands and Configuration Report Listing Cross-Reference
+Command Listing Name Description
+~SD DARKNESS Default: 10.0
+— DARKNESS SWITCH LOW (Default), MEDIUM, or HIGH
+^PR PRINT SPEED Default: 152.4 mm/s / 6 IPS (max.) - 203 dpi
+101.6 mm/s / 4 IPS (max.) - 300 dpi
+~TA TEAR OFF Default: +000
+^MN MEDIA TYPE Default: GAP/NOTCH
+SENSOR SELECT Default: AUTO (^MNA - Auto-Detect)
+^MT PRINT METHOD THERMAL-TRANS or DIRECT-THERMAL
+^PW PRINT WIDTH Default: 448 (dots for 203 dpi) or 640(dots for 300 dpi)
+^LL LABEL LENGTH Default: 1225 (dots) (dynamically updated while printing)
+^ML MAXIMUM LENGTH Default: 39.0IN 989MM
+— USB COMM. Connection Status: Connected / Not Connected
+^SCa BAUD Default: 9600
+^SC,b DATA BITS Default: 8 BITS
+^SC,,c PARITY Default: NONE
+^SC,,,,e HOST HANDSHAKE Default: AUTO
+^SC,,,,,f PROTOCOL Default: NONE
+— SGD —** COMMUNICATIONS Default: NORMAL MODE
+SER COMM. MODE Default: AUTO
+^CT / ~CT CONTROL CHAR Default: <~> 7EH
+^CC / ~CC COMMAND CHAR Default: <^> 5EH
+^CD / ~CD DELIM./CHAR Default: <,> 2CH
+^SZ ZPL MODE Default: ZPL II
+— SGD —** COMMAND OVERRIDE Default: INACTIVE
+^MFa MEDIA POWER UP Default: NO MOTION
+^MF,b HEAD CLOSE Default: FEED
+~JS BACKFEED Default: DEFAULT
+^LT LABEL TOP Default: +000
+^LS LEFT POSITION Default: +0000
+~JD / ~JE HEXDUMP Default: NO (~JE)
+REPRINT MODE Default: DISABLED
+From this point in the configuration report listing, the printout has sensor settings and values displayed to
+troubleshoot sensor and media operations. These are typically used by Zebra Tech Support to diagnose
+printer problems.
+** - Not supported with a ZPL command, uses the Set Get Do command in the ZPL manual. Refer to
+device.command_override.xxxxx in the ZPL Programmer’s manual.
+228
+ZPL Configuration
+The configuration settings listed here resume after the TAKE LABEL sensor value. These listings contain
+printer features seldom changed from default or provide status information.
+Table 2 ZPL Commands and Configuration Report Listing Cross-Reference
+Command Listing Name Description
+^MP MODES ENABLED Default: CWF (refer to ^MP Command)
+MODES DISABLED Default: (nothing set)
+^JM RESOLUTION Default: 448 8/mm (203 dpi); 640 8/mm (300 dpi)
+— FIRMWARE Lists ZPL Firmware Version
+— XML SCHEMA 1.3
+— HARDWARE ID Lists Firmware Boot-block Version
+LINK-OS VERSION
+— CONFIGURATION CUSTOMIZED (after first use)
+— RAM 2104k........ R:
+— ONBOARD FLASH 6144k.........E:
+^MU FORMAT CONVERT NONE
+RTC DATE Date Displayed
+RTC TIME Time Displayed
+^JI / ~JI ZBI DISABLED (Requires key to enable)
+— ZBI VERSION 2.1 (Displayed if installed)
+— ZBI STATUS READY
+^JH
+^MA
+~RO
+LAST CLEANED X,XXX IN
+HEAD USAGE X,XXX IN
+TOTAL USAGE X,XXX IN
+RESET CNTR1 X,XXX IN
+RESET CNTR2 X,XXX IN
+NONRESET CNTR0 (1, 2) X,XXX IN
+RESET CNTR1 X,XXX IN
+RESET CNTR2 X,XXX IN
+SLOT1 EMPTY / SERIAL / WIRED
+MASS STORAGE COUNT 0
+HID COUNT 0
+USB HOST LOCK OUT OFF /ON
+— SERIAL NUMBER XXXXXXXXXXX
+^JH EARLY WARNING MAINT. OFF
+The printer has the ability to set a command or a group of commands once for all reports (receipts or
+labels) that follow. Those settings will remain in effect until they are changed by subsequent commands,
+the printer is reset, or you restore factory defaults.
+229
+ZPL Configuration
+Printer Memory Management and Related Status Reports
+To help you manage printer resources, the printer supports a variety of format commands to manage
+memory, transfer objects (between memory areas, import and export), object naming, and provide various
+printer operating status reports. They are very similar to the old DOS commands like DIR (directory listing)
+and DEL (delete file). The most common reports are also part of the Zebra Setup Utility and
+ZebraDesigner ™ Windows driver.
+It is recommended that a single command be processed within this type of format (form).A single
+command is easily reused as a maintenance and development tool.
+Many of the commands that transfer objects, manage and report on memory are control (~) commands.
+They do not need the be within a format (form). They will be processed immediately upon receipt by the
+printer whether in a format (form) or not.
+ZPL Programming for Memory Management
+ZPL has various printer memory locations that are used to run the printer, assemble the print image, store
+formats (forms), graphics, fonts and configuration settings.
+• ZPL treats Formats (Forms), Fonts, and Graphics like files; and memory locations like disk drives in the
+DOS operating system environment:
+• Memory Object Naming: Up to sixteen (16) alphanumeric characters followed by a three (3)
+alphanumeric character file extension, for example: 123456789ABCDEF.TTF
+Legacy ZPL printers with V60.13 firmware and earlier can only use the 8.3 file name format verses
+today’s 16.3 file name format.
+• Allows moving objects between memory locations and deleting objects.
+• Supports DOS directory style file list reports as printouts or status to the host.
+• Allows use of ‘wild cards’ (*) in file access
+230
+ZPL Configuration
+Table 3 Object Management and Status Report Commands
+Command Name Description
+^WD Print Directory
+Label
+Prints a list of objects and resident barcodes and fonts in all
+addressable memory locations
+~WC Print Configuration
+Label
+Prints a configuration status report (label)
+Same as FEED Button mode one flash routine
+^ID Object Delete Deletes objects from printer memory
+^TO Transfer Object Used to copy an object or group of objects from one
+memory area to another.
+^CM Change Memory
+Letter Designation
+Reassigns a letter designation to a printer memory area.
+^JB Initialize Flash
+memory
+Similar to formatting a disk - erases all objects from the
+specified memory locations B: or E:.
+~JB Reset Optional
+Memory
+Similar to formatting a disk - erases all objects from the B:
+memory (factory option).
+~DY Download Objects Downloads and installs wide variety of printer usable
+programming objects: fonts (OpenType and TrueType),
+graphics, and other object data types.
+Recommendation: Use ZebraNet™ Bridge for downloading
+graphics and fonts in the printer.
+~DG Download Graphic Downloads an ASCII Hex representation of a graphic
+image. This is used by ZebraDesigner ™ (label creation
+application) for graphics.
+^FL Font Linking Appends secondary TrueType font or fonts to the primary
+TrueType font to add glyphs (characters).
+^LF List Font Links Prints a list of the linked fonts
+^CW Font Identifier Assigns a single alphanumeric character as an alias to a
+font stored in memory.
+IMPORTANT: Some factory installed ZPL fonts in your printer cannot be copied, cloned or restored to your
+printer by reloading or updating firmware. If these license restricted ZPL fonts are removed by an explicit
+ZPL object delete command, they must be repurchased and reinstalled via a font activation and installation
+utility. EPL fonts do not have this restriction.
+231
+zebra.com

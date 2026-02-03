@@ -17,6 +17,7 @@ export async function POST(request: Request) {
       apartmentNumber,
       postalCode,
       city,
+      paymentMethod,
       notes,
       items,
       totalNetto,
@@ -71,6 +72,9 @@ export async function POST(request: Request) {
         // Kwoty
         total_netto: totalNetto,
         total_brutto: totalBrutto,
+        // Płatność
+        payment_method: paymentMethod || 'bankTransfer',
+        payment_status: paymentMethod === 'stripe' ? 'pending' : null,
         // Dodatkowe
         notes: notes || null,
         items: items

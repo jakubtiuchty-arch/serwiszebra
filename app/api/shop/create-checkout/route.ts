@@ -14,14 +14,15 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Pobierz zamówienie wraz z produktami
+    // Pobierz zamówienie z shop_orders
     const { data: order, error: orderError } = await supabase
-      .from('orders')
-      .select('*, order_items(*)')
+      .from('shop_orders')
+      .select('*')
       .eq('id', orderId)
       .single();
 
     if (orderError || !order) {
+      console.error('Order not found:', orderError);
       return NextResponse.json(
         { error: 'Order not found' },
         { status: 404 }
@@ -36,33 +37,22 @@ export async function POST(request: NextRequest) {
       );
     }
 
-// Przygotuj line items dla Stripe
-const lineItems = order.order_items.map((item: any) => ({
-  price_data: {
-    currency: 'pln',
-    product_data: {
-      name: item.product_name,
-      description: item.product_sku || undefined,
-    },
-    unit_amount: Math.round(item.unit_price_brutto * 100), // ✅ POPRAWIONE
-  },
-  quantity: item.quantity,
-}));
+    // Parsuj items z JSON
+    const items = order.items || [];
 
-    // Dodaj koszt dostawy jeśli istnieje
-    if (order.delivery_cost_brutto > 0) {
-      lineItems.push({
-        price_data: {
-          currency: 'pln',
-          product_data: {
-            name: 'Dostawa',
-            description: order.delivery_method || 'Przesyłka kurierska',
-          },
-          unit_amount: Math.round(order.delivery_cost_brutto * 100),
+    // Przygotuj line items dla Stripe
+    const lineItems = items.map((item: any) => ({
+      price_data: {
+        currency: 'pln',
+        product_data: {
+          name: item.name,
+          description: item.sku || undefined,
         },
-        quantity: 1,
-      });
-    }
+        // Cena brutto w groszach
+        unit_amount: Math.round(item.priceBrutto * 100),
+      },
+      quantity: item.quantity,
+    }));
 
     // Utwórz Stripe Checkout Session
     const session = await stripe.checkout.sessions.create({
@@ -70,18 +60,26 @@ const lineItems = order.order_items.map((item: any) => ({
       mode: 'payment',
       // Tylko karta i Przelewy24 (BLIK) - bez Klarna
       payment_method_types: ['card', 'p24', 'blik'],
-      success_url: `${request.nextUrl.origin}/zamowienie/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${request.nextUrl.origin}/zamowienie/cancel?order_id=${orderId}`,
-      customer_email: order.customer_email || order.guest_email,
+      success_url: `${request.nextUrl.origin}/sklep/zamowienie/sukces?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${request.nextUrl.origin}/sklep/zamowienie/anulowano?order_id=${orderId}`,
+      customer_email: order.email,
       metadata: {
-        order_id: orderId,
+        shop_order_id: orderId,
         order_number: order.order_number,
+        type: 'shop_order',
       },
+      payment_intent_data: {
+        metadata: {
+          shop_order_id: orderId,
+          order_number: order.order_number,
+          type: 'shop_order',
+        }
+      }
     });
 
     // Zapisz session_id w bazie
     const { error: updateError } = await supabase
-      .from('orders')
+      .from('shop_orders')
       .update({
         stripe_session_id: session.id,
         payment_status: 'processing',
@@ -90,12 +88,12 @@ const lineItems = order.order_items.map((item: any) => ({
       .eq('id', orderId);
 
     if (updateError) {
-      console.error('Error updating order:', updateError);
+      console.error('Error updating order with session_id:', updateError);
     }
 
     return NextResponse.json({ url: session.url });
   } catch (error) {
-    console.error('Error creating checkout session:', error);
+    console.error('Error creating shop checkout session:', error);
     return NextResponse.json(
       { error: 'Failed to create checkout session' },
       { status: 500 }

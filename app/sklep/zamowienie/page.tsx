@@ -13,7 +13,9 @@ import {
   Truck,
   CheckCircle,
   Loader2,
-  ShoppingBag
+  ShoppingBag,
+  CreditCard,
+  FileText
 } from 'lucide-react'
 
 const DEFAULT_PRINTHEAD_IMAGE = '/sklep_photo/głowica-203dpi-do-drukarki-zebra-zd421t-P1112640-218.png'
@@ -31,6 +33,8 @@ interface OrderFormData {
   apartmentNumber: string
   postalCode: string
   city: string
+  // Płatność
+  paymentMethod: 'stripe' | 'bankTransfer'
   // Dodatkowe
   notes: string
   acceptTerms: boolean
@@ -42,6 +46,8 @@ export default function ZamowieniePage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [completedOrderId, setCompletedOrderId] = useState<string | null>(null)
+  const [completedOrderNumber, setCompletedOrderNumber] = useState<string | null>(null)
   
   const [formData, setFormData] = useState<OrderFormData>({
     companyName: '',
@@ -54,6 +60,7 @@ export default function ZamowieniePage() {
     apartmentNumber: '',
     postalCode: '',
     city: '',
+    paymentMethod: 'stripe',
     notes: '',
     acceptTerms: false
   })
@@ -76,6 +83,7 @@ export default function ZamowieniePage() {
     setIsSubmitting(true)
 
     try {
+      // 1. Utwórz zamówienie w bazie
       const response = await fetch('/api/orders', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -99,6 +107,34 @@ export default function ZamowieniePage() {
         throw new Error(data.error || 'Błąd składania zamówienia')
       }
 
+      const orderData = await response.json()
+
+      // 2. Jeśli płatność online - przekieruj do Stripe
+      if (formData.paymentMethod === 'stripe') {
+        const checkoutResponse = await fetch('/api/shop/create-checkout', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ orderId: orderData.orderId })
+        })
+
+        if (!checkoutResponse.ok) {
+          const checkoutError = await checkoutResponse.json()
+          throw new Error(checkoutError.error || 'Błąd tworzenia sesji płatności')
+        }
+
+        const { url } = await checkoutResponse.json()
+        
+        // Wyczyść koszyk przed przekierowaniem
+        clearCart()
+        
+        // Przekieruj do Stripe Checkout
+        window.location.href = url
+        return
+      }
+
+      // 3. Przelew bankowy - zapisz dane zamówienia i pokaż sukces
+      setCompletedOrderId(orderData.orderId)
+      setCompletedOrderNumber(orderData.orderNumber)
       setIsSuccess(true)
       clearCart()
     } catch (err) {
@@ -137,6 +173,12 @@ export default function ZamowieniePage() {
     )
   }
 
+  // Funkcja otwierania pro formy (HTML do druku/PDF)
+  const handleOpenProforma = () => {
+    if (!completedOrderId) return
+    window.open(`/api/shop/orders/${completedOrderId}/proforma`, '_blank')
+  }
+
   // Sukces
   if (isSuccess) {
     return (
@@ -150,13 +192,53 @@ export default function ZamowieniePage() {
             <h1 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2 sm:mb-3">
               Zamówienie przyjęte!
             </h1>
+            
+            {completedOrderNumber && (
+              <p className="text-lg font-mono font-bold text-gray-900 mb-2">
+                {completedOrderNumber}
+              </p>
+            )}
+            
             <p className="text-sm sm:text-base text-gray-600 mb-2">
               Dziękujemy za złożenie zamówienia.
             </p>
-            <p className="text-xs sm:text-sm text-gray-500 mb-6 sm:mb-8">
-              Potwierdzenie zostało wysłane na podany adres e-mail. 
-              Skontaktujemy się wkrótce w celu potwierdzenia szczegółów i płatności.
+            <p className="text-xs sm:text-sm text-gray-500 mb-4">
+              Potwierdzenie zostało wysłane na podany adres e-mail.
             </p>
+
+            {/* Pro Forma sekcja - tylko dla przelewu */}
+            {completedOrderId && (
+              <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-6">
+                <div className="flex items-center gap-2 justify-center mb-2">
+                  <FileText className="w-5 h-5 text-blue-600" />
+                  <h3 className="font-semibold text-blue-900">Faktura Pro Forma</h3>
+                </div>
+                <p className="text-xs text-blue-700 mb-3">
+                  Pobierz pro formę i opłać zamówienie przelewem. Realizacja po zaksięgowaniu wpłaty.
+                </p>
+                <button
+                  onClick={handleOpenProforma}
+                  className="w-full py-2.5 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-2 text-sm"
+                >
+                  <FileText className="w-4 h-4" />
+                  Otwórz Pro Formę
+                </button>
+              </div>
+            )}
+
+            {/* Dane do przelewu */}
+            {completedOrderId && (
+              <div className="bg-gray-100 rounded-xl p-4 mb-6 text-left">
+                <h4 className="font-semibold text-gray-900 mb-2 text-sm">Dane do przelewu:</h4>
+                <div className="text-xs text-gray-600 space-y-1">
+                  <p><span className="font-medium">Odbiorca:</span> TAKMA Tadeusz Tiuchty</p>
+                  <p><span className="font-medium">Nr konta:</span> 39 1020 5297 0000 1902 0283 3069</p>
+                  <p><span className="font-medium">Bank:</span> PKO Bank Polski</p>
+                  <p><span className="font-medium">Tytuł:</span> Zamówienie {completedOrderNumber}</p>
+                </div>
+              </div>
+            )}
+
             <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 justify-center">
               <Link
                 href="/sklep"
@@ -308,13 +390,21 @@ export default function ZamowieniePage() {
                           <Loader2 className="w-5 h-5 animate-spin" />
                           Przetwarzanie...
                         </>
+                      ) : formData.paymentMethod === 'stripe' ? (
+                        <>
+                          <CreditCard className="w-5 h-5" />
+                          Przejdź do płatności
+                        </>
                       ) : (
                         'Złóż zamówienie'
                       )}
                     </button>
 
                     <p className="mt-3 text-xs text-gray-500 text-center">
-                      Po złożeniu zamówienia skontaktujemy się w celu potwierdzenia płatności
+                      {formData.paymentMethod === 'stripe' 
+                        ? 'Zostaniesz przekierowany do bezpiecznej strony płatności'
+                        : 'Po złożeniu zamówienia pobierzesz fakturę pro forma (PDF)'
+                      }
                     </p>
                   </div>
                 </div>
@@ -504,6 +594,72 @@ export default function ZamowieniePage() {
                   </div>
                 </div>
 
+                {/* Metoda płatności */}
+                <div className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-5 shadow-sm">
+                  <h2 className="text-base sm:text-lg font-semibold text-gray-900 mb-3 sm:mb-4">
+                    Metoda płatności
+                  </h2>
+                  
+                  <div className="space-y-3">
+                    {/* Płatność online */}
+                    <label 
+                      className={`flex items-start gap-3 p-4 rounded-xl border-2 cursor-pointer transition-all ${
+                        formData.paymentMethod === 'stripe' 
+                          ? 'border-green-500 bg-green-50' 
+                          : 'border-gray-200 hover:border-gray-300'
+                      }`}
+                    >
+                      <input
+                        type="radio"
+                        name="paymentMethod"
+                        value="stripe"
+                        checked={formData.paymentMethod === 'stripe'}
+                        onChange={handleChange}
+                        className="mt-1 w-4 h-4 text-green-600"
+                      />
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2">
+                          <CreditCard className="w-5 h-5 text-green-600" />
+                          <span className="font-semibold text-gray-900">Płatność online</span>
+                          <span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full font-medium">
+                            Zalecane
+                          </span>
+                        </div>
+                        <p className="text-sm text-gray-500 mt-1">
+                          Karta płatnicza, BLIK, przelewy24. Szybka i bezpieczna płatność przez Stripe.
+                        </p>
+                      </div>
+                    </label>
+
+                    {/* Przelew bankowy */}
+                    <label 
+                      className={`flex items-start gap-3 p-4 rounded-xl border-2 cursor-pointer transition-all ${
+                        formData.paymentMethod === 'bankTransfer' 
+                          ? 'border-blue-500 bg-blue-50' 
+                          : 'border-gray-200 hover:border-gray-300'
+                      }`}
+                    >
+                      <input
+                        type="radio"
+                        name="paymentMethod"
+                        value="bankTransfer"
+                        checked={formData.paymentMethod === 'bankTransfer'}
+                        onChange={handleChange}
+                        className="mt-1 w-4 h-4 text-blue-600"
+                      />
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2">
+                          <FileText className="w-5 h-5 text-blue-600" />
+                          <span className="font-semibold text-gray-900">Pro forma</span>
+                        </div>
+                        <p className="text-sm text-gray-500 mt-1">
+                          Pobierz fakturę pro forma i opłać przelewem. Realizacja po zaksięgowaniu.
+                        </p>
+                      </div>
+                    </label>
+                  </div>
+                </div>
+
                 {/* Uwagi */}
                 <div className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-5 shadow-sm">
                   <h2 className="text-base sm:text-lg font-semibold text-gray-900 mb-3 sm:mb-4">
@@ -558,6 +714,11 @@ export default function ZamowieniePage() {
                         <Loader2 className="w-5 h-5 animate-spin" />
                         Przetwarzanie...
                       </>
+                    ) : formData.paymentMethod === 'stripe' ? (
+                      <>
+                        <CreditCard className="w-5 h-5" />
+                        Zapłać {subtotalBrutto.toFixed(2).replace('.', ',')} zł
+                      </>
                     ) : (
                       <>
                         Złóż zamówienie
@@ -567,7 +728,10 @@ export default function ZamowieniePage() {
                   </button>
 
                   <p className="mt-3 text-xs text-gray-500 text-center">
-                    Po złożeniu zamówienia skontaktujemy się w celu potwierdzenia płatności
+                    {formData.paymentMethod === 'stripe' 
+                      ? 'Bezpieczna płatność przez Stripe'
+                      : 'Pobierzesz fakturę pro forma (PDF)'
+                    }
                   </p>
                 </div>
 
