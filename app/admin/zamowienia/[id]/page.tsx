@@ -597,30 +597,18 @@ export default function OrderDetailPage() {
             <div className="space-y-3">
               <div className="flex items-center justify-between text-sm text-gray-700">
                 <span>Suma netto</span>
-                <span className="font-semibold">{order.subtotal_netto.toFixed(2)} zł</span>
-              </div>
-              
-              <div className="flex items-center justify-between text-sm text-gray-700">
-                <span>Dostawa</span>
-                <span className="font-semibold">{order.delivery_cost_netto.toFixed(2)} zł</span>
+                <span className="font-semibold">{(order.total_netto || 0).toFixed(2)} zł</span>
               </div>
               
               <div className="flex items-center justify-between text-sm text-gray-700">
                 <span>VAT (23%)</span>
-                <span className="font-semibold">{order.vat_amount.toFixed(2)} zł</span>
-              </div>
-              
-              <div className="pt-3 border-t border-gray-200">
-                <div className="flex items-center justify-between">
-                  <span className="text-base font-semibold text-gray-700">Razem netto</span>
-                  <span className="text-lg font-bold text-gray-900">{order.total_netto.toFixed(2)} zł</span>
-                </div>
+                <span className="font-semibold">{((order.total_brutto || 0) - (order.total_netto || 0)).toFixed(2)} zł</span>
               </div>
 
-              <div className="pt-2 border-t-2 border-gray-300">
+              <div className="pt-3 border-t-2 border-gray-300">
                 <div className="flex items-center justify-between">
                   <span className="text-base font-semibold text-gray-700">Razem brutto</span>
-                  <span className="text-2xl font-black text-gray-900">{order.total_brutto.toFixed(2)} zł</span>
+                  <span className="text-2xl font-black text-gray-900">{(order.total_brutto || 0).toFixed(2)} zł</span>
                 </div>
               </div>
             </div>
@@ -631,14 +619,7 @@ export default function OrderDetailPage() {
               <Truck className="w-4 h-4" />
               Dostawa
             </h2>
-            <p className="text-sm text-gray-700">
-              {order.delivery_method === 'courier' ? 'Kurier DPD/InPost' : 'Odbiór osobisty'}
-            </p>
-            {order.delivery_method === 'courier' && (
-              <p className="text-xs text-gray-500 mt-1">
-                Koszt: {order.delivery_cost_brutto.toFixed(2)} zł brutto
-              </p>
-            )}
+            <p className="text-sm text-gray-700">Kurier</p>
           </div>
 
           <div className="bg-white rounded-xl border border-gray-200 p-6">
