@@ -281,7 +281,18 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
   if (slugPath.length === 1) {
     return {
       title: `${productType.namePlural} do drukarek Zebra | Sklep TAKMA`,
-      description: `${productType.namePlural} do drukarek Zebra. Oryginalne części zamienne z gwarancją. Szybka wysyłka.`
+      description: `${productType.namePlural} do drukarek Zebra. Oryginalne części zamienne z gwarancją. Szybka wysyłka.`,
+      openGraph: {
+        title: `${productType.namePlural} do drukarek Zebra | TAKMA`,
+        description: `Oryginalne ${productType.namePlural.toLowerCase()} do drukarek Zebra. Wysyłka 24h, gwarancja producenta.`,
+        url: `https://www.serwis-zebry.pl/sklep/${productType.slug}`,
+        type: 'website',
+        siteName: 'TAKMA - Autoryzowany Serwis Zebra',
+        locale: 'pl_PL'
+      },
+      alternates: {
+        canonical: `https://www.serwis-zebry.pl/sklep/${productType.slug}`
+      }
     }
   }
 
@@ -296,6 +307,7 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
         openGraph: {
           title: 'Głowice do drukarek przemysłowych Zebra | TAKMA',
           description: 'Oryginalne głowice 203/300/600 DPI do ZT411, ZT421, ZT610, ZT620. Szybka wysyłka, gwarancja producenta.',
+          url: 'https://www.serwis-zebry.pl/sklep/glowice/drukarki-przemyslowe',
           type: 'website',
           siteName: 'TAKMA - Autoryzowany Serwis Zebra',
           locale: 'pl_PL'
@@ -314,6 +326,7 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
         openGraph: {
           title: 'Głowice do drukarek biurkowych Zebra | TAKMA',
           description: 'Oryginalne głowice 203/300 DPI do ZD421, ZD621, GK420. Szybka wysyłka, gwarancja.',
+          url: 'https://www.serwis-zebry.pl/sklep/glowice/drukarki-biurkowe',
           type: 'website',
           siteName: 'TAKMA - Autoryzowany Serwis Zebra',
           locale: 'pl_PL'

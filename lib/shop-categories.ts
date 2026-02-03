@@ -21,6 +21,7 @@ export interface ProductTypeCategory {
   slug: string
   namePlural: string
   printerCategories: PrinterCategory[]
+  enabled?: boolean // false = ukryta kategoria
 }
 
 // Główna struktura kategorii
@@ -30,6 +31,7 @@ export const SHOP_CATEGORIES: ProductTypeCategory[] = [
     name: 'Głowica',
     namePlural: 'Głowice drukujące',
     slug: 'glowice',
+    enabled: true,
     printerCategories: [
       {
         id: 'desktop',
@@ -80,6 +82,7 @@ export const SHOP_CATEGORIES: ProductTypeCategory[] = [
     name: 'Wałek',
     namePlural: 'Wałki dociskowe',
     slug: 'walki',
+    enabled: false, // Ukryte - do włączenia później
     printerCategories: [
       {
         id: 'desktop',
@@ -107,6 +110,7 @@ export const SHOP_CATEGORIES: ProductTypeCategory[] = [
     name: 'Akumulator',
     namePlural: 'Akumulatory',
     slug: 'akumulatory',
+    enabled: false, // Ukryte - do włączenia później
     printerCategories: [
       {
         id: 'mobile',
@@ -132,6 +136,11 @@ export const SHOP_CATEGORIES: ProductTypeCategory[] = [
 ]
 
 // Helper functions
+
+// Zwraca tylko włączone kategorie (do wyświetlania w UI)
+export function getEnabledCategories(): ProductTypeCategory[] {
+  return SHOP_CATEGORIES.filter(cat => cat.enabled !== false)
+}
 
 export function getProductTypeBySlug(slug: string): ProductTypeCategory | undefined {
   return SHOP_CATEGORIES.find(cat => cat.slug === slug)

@@ -2590,7 +2590,7 @@ export async function sendNewOrderNotificationEmail(data: NewOrderNotificationEm
 
   await resend.emails.send({
     from: 'Sklep TAKMA <sklep@serwis-zebry.pl>',
-    to: 'serwis@takma.com.pl',
+    to: 'sklep@takma.com.pl',
     subject: `🛒 Nowe zamówienie ${data.orderNumber} - ${data.companyName}`,
     html: `
     <!DOCTYPE html>

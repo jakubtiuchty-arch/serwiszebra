@@ -21,7 +21,7 @@ import {
   Check,
   SlidersHorizontal
 } from 'lucide-react'
-import { SHOP_CATEGORIES, getProductUrl } from '@/lib/shop-categories'
+import { getEnabledCategories, getProductUrl } from '@/lib/shop-categories'
 
 interface Product {
   id: string
@@ -160,7 +160,7 @@ export default function SklepPage() {
     <>
       {/* Kategorie */}
       <div className="space-y-1">
-        {SHOP_CATEGORIES.map((productType) => {
+        {getEnabledCategories().map((productType) => {
           const isProductTypeExpanded = expandedProductTypes.includes(productType.id)
           
           return (
@@ -259,7 +259,7 @@ export default function SklepPage() {
             </h1>
             
             <p className="text-sm text-gray-600 mb-4 max-w-xl">
-              Oryginalne głowice, wałki i akumulatory. Wysyłka 24h, gwarancja producenta.
+              Oryginalne głowice drukujące 203/300/600 DPI. Wysyłka 24h, gwarancja producenta.
             </p>
 
             {/* Badges - scroll horizontal na mobile */}
