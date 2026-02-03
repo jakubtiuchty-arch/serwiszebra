@@ -415,12 +415,12 @@ export default function OrderDetailPage() {
         Powrót do listy zamówień
       </Link>
 
-      <div className="bg-white rounded-xl border border-gray-200 p-6 mb-6">
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+      <div className="bg-white rounded-xl border border-gray-200 p-4 mb-4">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
           <div>
-            <div className="flex items-center gap-3 mb-2">
-              <FileText className="w-6 h-6 text-gray-400" />
-              <h1 className="text-2xl font-bold text-gray-900">
+            <div className="flex items-center gap-2 mb-1">
+              <FileText className="w-5 h-5 text-gray-400" />
+              <h1 className="text-xl font-bold text-gray-900">
                 Zamówienie {order.order_number}
               </h1>
             </div>
@@ -442,14 +442,14 @@ export default function OrderDetailPage() {
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
-            <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl border-2 font-semibold ${statusConfig.color}`}>
-              <StatusIcon className="w-5 h-5" />
+          <div className="flex items-center gap-2">
+            <div className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border-2 text-sm font-semibold ${statusConfig.color}`}>
+              <StatusIcon className="w-4 h-4" />
               {statusConfig.label}
             </div>
             <button
               onClick={() => setShowStatusModal(true)}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700 transition-colors"
               title="Zmień status"
             >
               <Edit className="w-4 h-4" />
