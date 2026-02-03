@@ -48,8 +48,15 @@ export async function POST(request: Request) {
 
     const supabase = await createClient()
 
-    // Generuj numer zamówienia
-    const orderNumber = `ZAM-${Date.now().toString(36).toUpperCase()}`
+    // Generuj numer zamówienia (format: ZAM-YYYYMMDDHHmmss)
+    const now = new Date()
+    const year = now.getFullYear()
+    const month = String(now.getMonth() + 1).padStart(2, '0')
+    const day = String(now.getDate()).padStart(2, '0')
+    const hours = String(now.getHours()).padStart(2, '0')
+    const minutes = String(now.getMinutes()).padStart(2, '0')
+    const seconds = String(now.getSeconds()).padStart(2, '0')
+    const orderNumber = `ZAM-${year}${month}${day}${hours}${minutes}${seconds}`
 
     // Utwórz zamówienie w bazie
     const { data: order, error: orderError } = await supabase
