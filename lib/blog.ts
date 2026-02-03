@@ -2511,6 +2511,11 @@ Jako autoryzowany partner Zebra oferujemy pełne wsparcie w doborze konfiguracji
 
 *Ceny zawierają oryginalną głowicę Zebra i usługę wymiany. Gwarancja: 6 miesięcy.*
 
+> **🛒 Kup głowicę drukującą online:**
+> - [Głowice do drukarek biurkowych](/sklep/glowice/drukarki-biurkowe) (ZD420, ZD421, ZD621, GK420)
+> - [Głowice do drukarek przemysłowych](/sklep/glowice/drukarki-przemyslowe) (ZT411, ZT421, ZT610)
+> - [Wszystkie głowice drukujące Zebra →](/sklep/glowice)
+
 ### Kiedy wymiana głowicy jest konieczna?
 
 - ❌ **Białe pionowe linie** na wydruku (mimo [czyszczenia](/blog/jak-wyczyscic-glowice-drukarki-zebra))
@@ -3038,6 +3043,8 @@ Aby wydrukować raport konfiguracji i sprawdzić ustawienia:
 - 203 dpi: **430-480 zł netto**
 - 300 dpi: **820-850 zł netto**
 
+> **🛒 Kup głowicę online:** [Głowice do ZD420/ZD421](/sklep/glowice/drukarki-biurkowe/zebra-zd421t) - oryginalne części Zebra z gwarancją
+
 📖 [Wymiana głowicy - kiedy konieczna, ile kosztuje](/blog/wymiana-glowicy-drukarki-zebra-kiedy-konieczna-ile-kosztuje)
 
 ---
@@ -3077,6 +3084,8 @@ Menu → Settings → Reset Printer → Factory Defaults → Yes
 | Wymiana wałka dociskowego | 180-250 zł | 12 miesięcy |
 | Naprawa mechanizmu | 250-350 zł | 12 miesięcy |
 | Naprawa płyty głównej | 350-600 zł | 12 miesięcy |
+
+> **🛒 Potrzebujesz głowicę?** [Kup głowicę do ZD420/ZD421 online →](/sklep/glowice/drukarki-biurkowe/zebra-zd421t)
 
 📖 [Pełny cennik napraw drukarek Zebra](/blog/cennik-naprawy-drukarki-zebra-koszty-serwisu)
 
@@ -3312,6 +3321,8 @@ Jeśli masz wiele drukarek ZD420/ZD421, rozważ **kontrakt serwisowy Zebra OneCa
 ### Koszt naprawy:
 - Drukarki biurkowe (ZD420/ZD621): **430-890 zł netto**
 - Drukarki przemysłowe (ZT411/ZT610): **1600-5020 zł netto**
+
+> **🛒 Kup głowicę online:** [Głowice biurkowe](/sklep/glowice/drukarki-biurkowe) | [Głowice przemysłowe](/sklep/glowice/drukarki-przemyslowe)
 
 > **💡 Profilaktyka:** Regularne [czyszczenie głowicy](/blog/jak-wyczyscic-glowice-drukarki-zebra) co 500 etykiet wydłuża żywotność 2-3 krotnie!
 
@@ -4020,6 +4031,11 @@ Jeśli linie pozostają → **wymiana głowicy w serwisie**.
 | ZT411 | 600 dpi | 2800-5020 zł | 6 miesięcy |
 | ZT421 | 203 dpi | 1800-1950 zł | 6 miesięcy |
 | ZT421 | 300 dpi | 2100-2800 zł | 6 miesięcy |
+
+> **🛒 Kup głowicę online:**
+> - [Głowica do ZT411](/sklep/glowice/drukarki-przemyslowe/zebra-zt411) - oryginalne części Zebra
+> - [Głowica do ZT421](/sklep/glowice/drukarki-przemyslowe/zebra-zt421) - z gwarancją 6 miesięcy
+> - [Wszystkie głowice przemysłowe →](/sklep/glowice/drukarki-przemyslowe)
 
 ### Inne naprawy
 
@@ -4910,6 +4926,10 @@ Orientacyjne koszty (część + usługa):
 | ZT230, ZT410 | 480-600 zł |
 | ZT411, ZT421 | 580-800 zł |
 
+> **🛒 Kup głowicę online:**
+> - [Głowice biurkowe (ZD420, ZD621, GK420)](/sklep/glowice/drukarki-biurkowe)
+> - [Głowice przemysłowe (ZT411, ZT421, ZT610)](/sklep/glowice/drukarki-przemyslowe)
+
 Regularne czyszczenie wydłuża żywotność głowicy **2-3 krotnie** i oszczędza setki złotych rocznie.
 
 ### Czy mogę czyścić gorącą głowicę?
@@ -5052,6 +5072,11 @@ Głowica składa się z tysięcy mikroskopijnych elementów grzejnych. W drukarc
 | ZT230 | 400-500 zł | 80-100 zł | 480-600 zł |
 | ZT411, ZT421 | 500-700 zł | 80-100 zł | 580-800 zł |
 | ZT610, ZT620 | 700-1000 zł | 100-150 zł | 800-1150 zł |
+
+> **🛒 Kup głowicę drukującą online:**
+> - [Głowice do drukarek biurkowych](/sklep/glowice/drukarki-biurkowe) (ZD220, ZD420, ZD621, GK420)
+> - [Głowice do drukarek przemysłowych](/sklep/glowice/drukarki-przemyslowe) (ZT230, ZT411, ZT610)
+> - [Wszystkie głowice Zebra →](/sklep/glowice)
 
 *Ceny netto, orientacyjne. Dokładna wycena po diagnozie.*
 
@@ -25166,6 +25191,8 @@ Oznaczają uszkodzone elementy grzejne głowicy.
 
 **Koszt wymiany głowicy GK420/GC420:** 250-400 zł (część + usługa + kalibracja)
 
+> **🛒 Kup głowicę online:** [Głowice do GK420/GC420](/sklep/glowice/drukarki-biurkowe/zebra-gk420t) - oryginalne części Zebra z gwarancją
+
 📖 Szczegóły: [Wymiana głowicy drukarki Zebra](/blog/wymiana-glowicy-drukarki-zebra-kiedy-konieczna-ile-kosztuje)
 
 ---
@@ -26273,6 +26300,8 @@ Open Printer Tools → Action → Load printer defaults
 | Wymiana czujnika | 120-250 zł | 6 miesięcy |
 | Naprawa modułu WiFi/BT | 200-350 zł | 6 miesięcy |
 | **Naprawa modułu RFID (ZD621R)** | 400-700 zł | 6 miesięcy |
+
+> **🛒 Kup głowicę online:** [Głowice do ZD620/ZD621](/sklep/glowice/drukarki-biurkowe/zebra-zd621t) - oryginalne części Zebra z 6-miesięczną gwarancją
 
 > **💰 Oszczędność:** [Kontrakty serwisowe Zebra OneCare](/blog/kontrakty-serwisowe-zebra-onecare-przewodnik) obniżają koszty o 30-50% rocznie.
 
