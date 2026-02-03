@@ -58,8 +58,8 @@ export async function POST(request: NextRequest) {
     const session = await stripe.checkout.sessions.create({
       line_items: lineItems,
       mode: 'payment',
-      // Tylko karta (P24 i BLIK wymagają aktywacji w Stripe Dashboard)
-      payment_method_types: ['card'],
+      // Karta + BLIK (P24 wymaga dodatkowej weryfikacji w Stripe)
+      payment_method_types: ['card', 'blik'],
       success_url: `${request.nextUrl.origin}/sklep/zamowienie/sukces?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${request.nextUrl.origin}/sklep/zamowienie/anulowano?order_id=${orderId}`,
       customer_email: order.email,
