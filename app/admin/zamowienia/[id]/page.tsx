@@ -32,40 +32,35 @@ import {
 
 interface OrderItem {
   id: string
-  product_name: string
-  product_sku: string
-  product_type: string
+  name: string
+  sku: string
   quantity: number
-  unit_price_netto: number
-  unit_price_brutto: number
-  total_netto: number
-  total_brutto: number
+  priceNetto: number
+  priceBrutto: number
 }
 
 interface Order {
   id: string
   order_number: string
-  order_status: string
-  customer_company_name: string
-  customer_email: string
-  contact_person: string
-  customer_nip: string
-  customer_phone: string
-  delivery_street: string
-  delivery_city: string
-  delivery_postal_code: string
-  customer_notes?: string
-  delivery_method: string
-  delivery_cost_netto: number
-  delivery_cost_brutto: number
+  status: string
+  company_name: string
+  email: string
+  contact_name: string
+  nip: string
+  phone: string
+  street: string
+  house_number: string
+  apartment_number?: string
+  postal_code: string
+  city: string
+  notes?: string
   payment_method: string
-  subtotal_netto: number
-  vat_amount: number
+  payment_status?: string
   total_netto: number
   total_brutto: number
   created_at: string
-  updated_at: string
-  order_items: OrderItem[]
+  updated_at?: string
+  items: OrderItem[]
   tracking_number?: string
   tracking_url?: string
   label_url?: string
@@ -76,8 +71,8 @@ interface Order {
   ingram_order_date?: string
 }
 
-const STATUS_CONFIG = {
-  pending: {
+const STATUS_CONFIG: Record<string, { label: string; color: string; icon: any }> = {
+  new: {
     label: 'Nowe',
     color: 'bg-yellow-100 text-yellow-800 border-yellow-300',
     icon: AlertCircle
@@ -87,7 +82,7 @@ const STATUS_CONFIG = {
     color: 'bg-blue-100 text-blue-800 border-blue-300',
     icon: CheckCircle
   },
-  in_progress: {
+  processing: {
     label: 'W realizacji',
     color: 'bg-purple-100 text-purple-800 border-purple-300',
     icon: Clock
@@ -407,7 +402,7 @@ export default function OrderDetailPage() {
     )
   }
 
-  const statusConfig = STATUS_CONFIG[order.order_status as keyof typeof STATUS_CONFIG] || STATUS_CONFIG.pending
+  const statusConfig = STATUS_CONFIG[order.status] || STATUS_CONFIG.new
   const StatusIcon = statusConfig.icon
 
   return (
@@ -442,7 +437,7 @@ export default function OrderDetailPage() {
               </div>
               <div className="flex items-center gap-1">
                 <Building2 className="w-4 h-4" />
-                {order.customer_company_name}
+                {order.company_name}
               </div>
             </div>
           </div>
@@ -477,15 +472,15 @@ export default function OrderDetailPage() {
               <div className="space-y-3">
                 <div>
                   <label className="text-xs font-medium text-gray-500 uppercase">Firma</label>
-                  <p className="text-sm text-gray-900 font-semibold">{order.customer_company_name}</p>
+                  <p className="text-sm text-gray-900 font-semibold">{order.company_name}</p>
                 </div>
                 <div>
                   <label className="text-xs font-medium text-gray-500 uppercase">NIP</label>
-                  <p className="text-sm text-gray-900">{order.customer_nip}</p>
+                  <p className="text-sm text-gray-900">{order.nip}</p>
                 </div>
                 <div>
                   <label className="text-xs font-medium text-gray-500 uppercase">Osoba kontaktowa</label>
-                  <p className="text-sm text-gray-900">{order.contact_person}</p>
+                  <p className="text-sm text-gray-900">{order.contact_name}</p>
                 </div>
               </div>
 
@@ -495,8 +490,8 @@ export default function OrderDetailPage() {
                     <Mail className="w-3 h-3" />
                     Email
                   </label>
-                  <a href={`mailto:${order.customer_email}`} className="text-sm text-blue-600 hover:text-blue-700">
-                    {order.customer_email}
+                  <a href={`mailto:${order.email}`} className="text-sm text-blue-600 hover:text-blue-700">
+                    {order.email}
                   </a>
                 </div>
                 <div>
@@ -504,8 +499,8 @@ export default function OrderDetailPage() {
                     <Phone className="w-3 h-3" />
                     Telefon
                   </label>
-                  <a href={`tel:${order.customer_phone}`} className="text-sm text-blue-600 hover:text-blue-700">
-                    {order.customer_phone}
+                  <a href={`tel:${order.phone}`} className="text-sm text-blue-600 hover:text-blue-700">
+                    {order.phone}
                   </a>
                 </div>
               </div>
@@ -518,8 +513,8 @@ export default function OrderDetailPage() {
               Adres dostawy
             </h2>
             <div className="text-sm text-gray-900 space-y-1">
-              <p>{order.delivery_street}</p>
-              <p>{order.delivery_postal_code} {order.delivery_city}</p>
+              <p>{`${order.street} ${order.house_number}${order.apartment_number ? '/' + order.apartment_number : ''}`}</p>
+              <p>{order.postal_code} {order.city}</p>
             </div>
           </div>
 
@@ -527,7 +522,7 @@ export default function OrderDetailPage() {
             <div className="p-6 border-b border-gray-200">
               <h2 className="text-lg font-semibold text-gray-900 flex items-center gap-2">
                 <Package className="w-5 h-5" />
-                Produkty ({order.order_items.length})
+                Produkty ({(order.items || []).length})
               </h2>
             </div>
 
@@ -542,19 +537,17 @@ export default function OrderDetailPage() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
-                  {order.order_items.map((item) => {
-                    const Icon = PRODUCT_TYPE_ICONS[item.product_type] || Package
-                    
+                  {(order.items || []).map((item: any, index: number) => {
                     return (
-                      <tr key={item.id} className="hover:bg-gray-50 transition-colors">
+                      <tr key={item.id || index} className="hover:bg-gray-50 transition-colors">
                         <td className="px-6 py-4">
                           <div className="flex items-center gap-3">
                             <div className="w-10 h-10 bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                              <Icon className="w-5 h-5 text-gray-400" />
+                              <Package className="w-5 h-5 text-gray-400" />
                             </div>
                             <div>
-                              <p className="text-sm font-semibold text-gray-900">{item.product_name}</p>
-                              <p className="text-xs text-gray-500">PN: {item.product_sku}</p>
+                              <p className="text-sm font-semibold text-gray-900">{item.name}</p>
+                              <p className="text-xs text-gray-500">PN: {item.sku}</p>
                             </div>
                           </div>
                         </td>
@@ -563,18 +556,18 @@ export default function OrderDetailPage() {
                         </td>
                         <td className="px-6 py-4 text-right">
                           <div className="text-sm font-semibold text-gray-900">
-                            {item.unit_price_netto.toFixed(2)} zł
+                            {(item.priceNetto || item.price_netto || 0).toFixed(2)} zł
                           </div>
                           <div className="text-xs text-gray-500">
-                            {item.unit_price_brutto.toFixed(2)} zł brutto
+                            {(item.priceBrutto || item.price_brutto || 0).toFixed(2)} zł brutto
                           </div>
                         </td>
                         <td className="px-6 py-4 text-right">
                           <div className="text-sm font-bold text-gray-900">
-                            {item.total_netto.toFixed(2)} zł
+                            {((item.priceNetto || item.price_netto || 0) * item.quantity).toFixed(2)} zł
                           </div>
                           <div className="text-xs text-gray-500">
-                            {item.total_brutto.toFixed(2)} zł brutto
+                            {((item.priceBrutto || item.price_brutto || 0) * item.quantity).toFixed(2)} zł brutto
                           </div>
                         </td>
                       </tr>
@@ -585,13 +578,13 @@ export default function OrderDetailPage() {
             </div>
           </div>
 
-          {order.customer_notes && (
+          {order.notes && (
             <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-6">
               <h2 className="text-sm font-semibold text-yellow-900 mb-2 flex items-center gap-2">
                 <AlertCircle className="w-4 h-4" />
                 Uwagi do zamówienia
               </h2>
-              <p className="text-sm text-yellow-800">{order.customer_notes}</p>
+              <p className="text-sm text-yellow-800">{order.notes}</p>
             </div>
           )}
         </div>
@@ -664,7 +657,7 @@ export default function OrderDetailPage() {
             <h2 className="text-sm font-semibold text-gray-900 mb-4">Akcje</h2>
             
             {/* BASELINKER BUTTON - tylko jeśli nie wysłano */}
-            {!order.baselinker_order_id && order.order_status === 'confirmed' && (
+            {!order.baselinker_order_id && order.status === 'confirmed' && (
               <div className="mb-4">
                 <button
                   onClick={handleSendToBaselinker}
@@ -969,7 +962,7 @@ export default function OrderDetailPage() {
               <h4 className="text-xs font-semibold text-gray-500 uppercase mb-2">Adres dostawy</h4>
               <p className="text-sm font-medium text-gray-900">{order?.contact_person}</p>
               {order?.customer_company_name && (
-                <p className="text-sm text-gray-700">{order.customer_company_name}</p>
+                <p className="text-sm text-gray-700">{order.company_name}</p>
               )}
               <p className="text-sm text-gray-700">{order?.delivery_street}</p>
               <p className="text-sm text-gray-700">{order?.delivery_postal_code} {order?.delivery_city}</p>

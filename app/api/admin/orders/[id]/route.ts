@@ -40,23 +40,10 @@ export async function GET(
       return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
     }
 
-    // Pobierz zamówienie z produktami
+    // Pobierz zamówienie z shop_orders
     const { data: order, error } = await supabase
-      .from('orders')
-      .select(`
-        *,
-        order_items (
-          id,
-          product_name,
-          product_sku,
-          product_type,
-          quantity,
-          unit_price_netto,
-          unit_price_brutto,
-          total_netto,
-          total_brutto
-        )
-      `)
+      .from('shop_orders')
+      .select('*')
       .eq('id', params.id)
       .single()
 
@@ -108,7 +95,7 @@ export async function PUT(
     const { status } = body
 
     // Walidacja statusu
-    const validStatuses = ['pending', 'confirmed', 'in_progress', 'shipped', 'completed', 'cancelled']
+    const validStatuses = ['new', 'confirmed', 'processing', 'shipped', 'completed', 'cancelled']
     if (!status || !validStatuses.includes(status)) {
       return NextResponse.json(
         { error: 'Invalid status' },
@@ -116,11 +103,11 @@ export async function PUT(
       )
     }
 
-    // Aktualizuj order_status (nie status!)
+    // Aktualizuj status w shop_orders
     const { data: updatedOrder, error } = await supabase
-      .from('orders')
+      .from('shop_orders')
       .update({
-        order_status: status,
+        status: status,
         updated_at: new Date().toISOString()
       })
       .eq('id', params.id)
@@ -175,19 +162,9 @@ export async function DELETE(
       return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
     }
 
-    // Najpierw usuń order_items (przez CASCADE powinno się usunąć automatycznie, ale dla pewności)
-    const { error: itemsError } = await supabase
-      .from('order_items')
-      .delete()
-      .eq('order_id', params.id)
-
-    if (itemsError) {
-      console.error('Error deleting order items:', itemsError)
-    }
-
-    // Usuń zamówienie
+    // Usuń zamówienie z shop_orders
     const { error } = await supabase
-      .from('orders')
+      .from('shop_orders')
       .delete()
       .eq('id', params.id)
 
