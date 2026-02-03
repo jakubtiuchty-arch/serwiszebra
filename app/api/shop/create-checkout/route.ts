@@ -58,8 +58,8 @@ export async function POST(request: NextRequest) {
     const session = await stripe.checkout.sessions.create({
       line_items: lineItems,
       mode: 'payment',
-      // Tylko karta i Przelewy24 (BLIK) - bez Klarna
-      payment_method_types: ['card', 'p24', 'blik'],
+      // Tylko karta i Przelewy24 - bez Klarna i BLIK (wymaga osobnej aktywacji)
+      payment_method_types: ['card', 'p24'],
       success_url: `${request.nextUrl.origin}/sklep/zamowienie/sukces?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${request.nextUrl.origin}/sklep/zamowienie/anulowano?order_id=${orderId}`,
       customer_email: order.email,
@@ -92,10 +92,23 @@ export async function POST(request: NextRequest) {
     }
 
     return NextResponse.json({ url: session.url });
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error creating shop checkout session:', error);
+    console.error('Error details:', {
+      message: error?.message,
+      type: error?.type,
+      code: error?.code,
+      statusCode: error?.statusCode,
+      raw: error?.raw
+    });
+    
+    // Zwróć szczegóły błędu dla debugowania
     return NextResponse.json(
-      { error: 'Failed to create checkout session' },
+      { 
+        error: 'Failed to create checkout session',
+        details: error?.message || 'Unknown error',
+        code: error?.code
+      },
       { status: 500 }
     );
   }

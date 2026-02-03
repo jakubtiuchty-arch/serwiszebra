@@ -119,7 +119,8 @@ export default function ZamowieniePage() {
 
         if (!checkoutResponse.ok) {
           const checkoutError = await checkoutResponse.json()
-          throw new Error(checkoutError.error || 'Błąd tworzenia sesji płatności')
+          console.error('Checkout error:', checkoutError)
+          throw new Error(checkoutError.details || checkoutError.error || 'Błąd tworzenia sesji płatności')
         }
 
         const { url } = await checkoutResponse.json()
