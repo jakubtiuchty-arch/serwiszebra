@@ -941,12 +941,12 @@ export default function OrderDetailPage() {
             {/* Adres dostawy */}
             <div className="bg-gray-50 rounded-lg p-4 mb-6">
               <h4 className="text-xs font-semibold text-gray-500 uppercase mb-2">Adres dostawy</h4>
-              <p className="text-sm font-medium text-gray-900">{order?.contact_person}</p>
-              {order?.customer_company_name && (
+              <p className="text-sm font-medium text-gray-900">{order?.contact_name}</p>
+              {order?.company_name && (
                 <p className="text-sm text-gray-700">{order.company_name}</p>
               )}
-              <p className="text-sm text-gray-700">{order?.delivery_street}</p>
-              <p className="text-sm text-gray-700">{order?.delivery_postal_code} {order?.delivery_city}</p>
+              <p className="text-sm text-gray-700">{order?.street} {order?.house_number}{order?.apartment_number ? `/${order.apartment_number}` : ''}</p>
+              <p className="text-sm text-gray-700">{order?.postal_code} {order?.city}</p>
             </div>
             
             <div className="space-y-4">
