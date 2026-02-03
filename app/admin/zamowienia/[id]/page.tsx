@@ -718,7 +718,7 @@ export default function OrderDetailPage() {
               )}
 
               {/* ZAMÓW KURIERA - tylko jeśli nie wysłano jeszcze */}
-              {!order.tracking_number && order.delivery_method === 'courier' && (
+              {!order.tracking_number && (
                 <button
                   onClick={() => setShowCourierModal(true)}
                   className="w-full px-4 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg hover:from-blue-700 hover:to-indigo-700 transition-all text-sm font-semibold flex items-center justify-center gap-2 shadow-lg"
