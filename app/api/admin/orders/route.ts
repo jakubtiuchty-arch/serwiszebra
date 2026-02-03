@@ -29,32 +29,19 @@ export async function GET(request: NextRequest) {
     const sortBy = searchParams.get('sortBy') || 'created_at'
     const sortOrder = searchParams.get('sortOrder') || 'desc'
 
-// Buduj zapytanie z POPRAWNYMI nazwami kolumn
+// Buduj zapytanie dla shop_orders (zamówienia ze sklepu)
 let query = supabase
-  .from('orders')
-  .select(`
-    *,
-    order_items (
-      id,
-      product_name,
-      product_sku,
-      product_type,
-      quantity,
-      unit_price_netto,
-      unit_price_brutto,
-      total_netto,
-      total_brutto
-    )
-  `)
+  .from('shop_orders')
+  .select('*')
 
-// Filtruj po order_status (nie status!)
+// Filtruj po status
 if (status && status !== 'all') {
-  query = query.eq('order_status', status)  // ✅ ZMIENIONE
+  query = query.eq('status', status)
 }
 
-// Wyszukiwanie - poprawione nazwy kolumn
+// Wyszukiwanie
 if (search) {
-  query = query.or(`order_number.ilike.%${search}%,customer_company_name.ilike.%${search}%,customer_email.ilike.%${search}%`)  // ✅ ZMIENIONE
+  query = query.or(`order_number.ilike.%${search}%,company_name.ilike.%${search}%,email.ilike.%${search}%`)
 }
 
     // Sortowanie
