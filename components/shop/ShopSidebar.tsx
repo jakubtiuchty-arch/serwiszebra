@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { Search, ChevronDown, X } from 'lucide-react'
-import { SHOP_CATEGORIES } from '@/lib/shop-categories'
+import { getEnabledCategories } from '@/lib/shop-categories'
 
 interface ShopSidebarProps {
   currentProductType?: string
@@ -90,7 +90,7 @@ export default function ShopSidebar({
       <div className="bg-white rounded-xl border border-gray-200 p-4">
         <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">Kategorie</h3>
         <div className="space-y-1">
-          {SHOP_CATEGORIES.map((productType) => {
+          {getEnabledCategories().map((productType) => {
             const isExpanded = expandedProductTypes.includes(productType.id)
             const isCurrent = currentProductType === productType.id
 
