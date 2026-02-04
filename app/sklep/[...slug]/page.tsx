@@ -26,6 +26,7 @@ import Footer from '@/components/Footer'
 import ShopSubheader from '@/components/shop/ShopSubheader'
 import ShopSidebar from '@/components/shop/ShopSidebar'
 import ShopCategoryClient from '@/components/shop/ShopCategoryClient'
+import RealTimeStock from '@/components/shop/RealTimeStock'
 import {
   SHOP_CATEGORIES,
   getProductTypeBySlug,
@@ -669,46 +670,13 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
                   {product.price_brutto.toFixed(2).replace('.', ',')} zł brutto
                 </div>
 
-                {/* Dostępność z informacją o czasie dostawy */}
-                <div className="mb-4 space-y-1">
-                  {product.stock > 0 ? (
-                    <>
-                      {(product.attributes?.stock_pl ?? 0) > 0 && (
-                        <div className="flex items-center gap-2 text-green-600">
-                          <Truck className="w-4 h-4" />
-                          <span className="text-sm font-medium">Dostawa 24h:</span>
-                          <span className="text-sm">{product.attributes?.stock_pl} szt.</span>
-                        </div>
-                      )}
-                      {(product.attributes?.stock_de ?? 0) > 0 && (
-                        <div className="flex items-center gap-2 text-blue-600">
-                          <Truck className="w-4 h-4" />
-                          <span className="text-sm font-medium">Dostawa 72h:</span>
-                          <span className="text-sm">{product.attributes?.stock_de} szt.</span>
-                        </div>
-                      )}
-                      {(product.attributes?.stock_pl ?? 0) === 0 && 
-                       (product.attributes?.stock_de ?? 0) === 0 && (
-                        <div className="flex items-center gap-2 text-green-600">
-                          <Check className="w-4 h-4" />
-                          <span className="text-sm font-medium">Dostępny</span>
-                          <span className="text-xs text-gray-500">({product.stock} szt.)</span>
-                        </div>
-                      )}
-                    </>
-                  ) : (product.attributes?.in_delivery ?? 0) > 0 ? (
-                    <div className="flex items-center gap-2 text-amber-600">
-                      <Truck className="w-4 h-4" />
-                      <span className="text-sm font-medium">Wysyłka 3-5 dni</span>
-                      <span className="text-xs text-amber-500">({product.attributes?.in_delivery} szt. w drodze)</span>
-                    </div>
-                  ) : (
-                    <div className="flex items-center gap-2 text-amber-600">
-                      <Clock className="w-4 h-4" />
-                      <span className="text-sm font-medium">Wysyłka 5-7 dni</span>
-                      <span className="text-xs text-amber-500">(na zamówienie)</span>
-                    </div>
-                  )}
+                {/* Dostępność - real-time z Ingram API */}
+                <div className="mb-4">
+                  <RealTimeStock 
+                    sku={product.sku}
+                    fallbackStockPL={product.attributes?.stock_pl ?? 0}
+                    fallbackStockDE={product.attributes?.stock_de ?? 0}
+                  />
                 </div>
 
                 {/* Add to Cart */}
