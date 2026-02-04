@@ -266,15 +266,24 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
       openGraph: {
         title: seoTitle,
         description: seoDescription,
-        type: 'website',
+        type: 'article', // product type not supported, using article as fallback
         siteName: 'TAKMA - Autoryzowany Serwis Zebra',
         locale: 'pl_PL',
+        url: `https://www.serwis-zebry.pl/sklep/${slugPath.join('/')}`,
         images: imageUrl ? [{
           url: `https://www.serwis-zebry.pl${imageUrl}`,
           width: 800,
           height: 800,
-          alt: `${product.name} - zdjęcie produktu`
+          alt: `${product.name} ${product.sku} - oryginalna część zamienna Zebra`
         }] : []
+      },
+      other: {
+        'og:type': 'product',
+        'product:price:amount': product.price_brutto.toString(),
+        'product:price:currency': 'PLN',
+        'product:availability': product.stock > 0 ? 'in stock' : 'out of stock',
+        'product:brand': 'Zebra',
+        'product:condition': 'new'
       },
       twitter: {
         card: 'summary_large_image',
@@ -452,7 +461,7 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
           "@type": "Organization",
           "name": "TAKMA - Autoryzowany Serwis Zebra"
         },
-        "priceValidUntil": new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+        "priceValidUntil": new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
         "shippingDetails": {
           "@type": "OfferShippingDetails",
           "shippingRate": {
@@ -522,6 +531,79 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
       }))
     } : null
 
+    // BreadcrumbList Schema
+    const breadcrumbSchema = {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": productBreadcrumbs.map((crumb, index) => ({
+        "@type": "ListItem",
+        "position": index + 1,
+        "name": crumb.label,
+        "item": crumb.href ? `https://www.serwis-zebry.pl${crumb.href}` : undefined
+      })).filter(item => item.item)
+    }
+
+    // HowTo Schema - Wymiana głowicy (tylko dla głowic)
+    const howToSchema = product.product_type === 'glowica' ? {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": `Jak wymienić głowicę w drukarce ${product.device_model || 'Zebra'}`,
+      "description": `Instrukcja wymiany głowicy drukującej ${product.sku} w drukarce ${product.device_model || 'Zebra'}. Wymiana zajmuje 5-10 minut.`,
+      "image": imageUrl ? `https://www.serwis-zebry.pl${imageUrl}` : undefined,
+      "totalTime": "PT10M",
+      "estimatedCost": {
+        "@type": "MonetaryAmount",
+        "currency": "PLN",
+        "value": product.price_brutto
+      },
+      "supply": [
+        { "@type": "HowToSupply", "name": `Nowa głowica ${product.sku}` },
+        { "@type": "HowToSupply", "name": "Śrubokręt imbusowy (opcjonalnie)" }
+      ],
+      "tool": [
+        { "@type": "HowToTool", "name": "Alkohol izopropylowy IPA 99%" },
+        { "@type": "HowToTool", "name": "Ściereczka bezpyłowa" }
+      ],
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "Wyłącz drukarkę",
+          "text": "Wyłącz drukarkę i odłącz kabel zasilający. Poczekaj 2-3 minuty aż głowica ostygnie."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "Otwórz pokrywę",
+          "text": "Otwórz pokrywę drukarki i wyjmij etykiety oraz ribbon (jeśli dotyczy)."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "Odłącz taśmę flat cable",
+          "text": "Ostrożnie odłącz taśmę flat cable od starej głowicy. Zwróć uwagę na kierunek podłączenia."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "name": "Odkręć śruby mocujące",
+          "text": "Odkręć 2-4 śruby imbusowe mocujące głowicę do mechanizmu drukarki."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 5,
+          "name": "Zamontuj nową głowicę",
+          "text": "Włóż nową głowicę, dokręć śruby i podłącz taśmę flat cable."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 6,
+          "name": "Wykonaj kalibrację",
+          "text": "Zamknij pokrywę, włącz drukarkę i wykonaj kalibrację czujników z menu drukarki."
+        }
+      ]
+    } : null
+
     // Generuj "Szybka odpowiedź" dla głowic
     const quickAnswer = product.product_type === 'glowica' && product.resolution_dpi 
       ? `Głowica ${product.sku} to oryginalna część ${product.resolution_dpi} DPI do ${product.device_model || 'drukarki Zebra'}. Cena: ${product.price_brutto.toFixed(2).replace('.', ',')} zł brutto. Wysyłka ${product.stock > 0 ? '24h z magazynu w Polsce' : '3-7 dni'}. Gwarancja producenta 12 miesięcy.`
@@ -552,7 +634,7 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
                   {imageUrl ? (
                     <Image
                       src={imageUrl}
-                      alt={`${product.name} - oryginalna część zamienna Zebra`}
+                      alt={`${product.name} ${product.sku} - oryginalna głowica drukująca Zebra`}
                       fill
                       className="object-contain p-3 sm:p-4"
                       priority
@@ -884,6 +966,24 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
             type="application/ld+json"
             dangerouslySetInnerHTML={{
               __html: JSON.stringify(faqSchema)
+            }}
+          />
+        )}
+
+        {/* JSON-LD BreadcrumbList Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(breadcrumbSchema)
+          }}
+        />
+
+        {/* JSON-LD HowTo Schema - Wymiana głowicy */}
+        {howToSchema && (
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify(howToSchema)
             }}
           />
         )}
