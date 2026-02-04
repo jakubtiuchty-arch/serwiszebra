@@ -18,6 +18,61 @@ import {
 } from 'lucide-react'
 import { trackRepairFormSubmit, trackRepairFormStart } from '@/lib/gtm'
 
+// Lista wzorców modeli Zebra (case-insensitive)
+const ZEBRA_MODEL_PATTERNS = [
+  // Drukarki biurkowe
+  /^zd/i, /^zt/i, /^zc/i, /^zq/i, /^zxp/i, 
+  /^gk/i, /^gc/i, /^gx/i, /^gt/i,
+  /^lp/i, /^tlp/i,
+  // Drukarki przemysłowe
+  /^105sl/i, /^110xi/i, /^140xi/i, /^170xi/i, /^220xi/i,
+  /^zm/i, /^ze/i, /^xi/i, /^s4m/i, /^z4m/i, /^z6m/i,
+  /^pac/i, /^r110/i, /^rz/i,
+  // Drukarki mobilne
+  /^rw/i, /^ql/i, /^p4t/i, /^rp/i, /^imz/i, /^ez/i,
+  // Terminale mobilne
+  /^tc/i, /^mc/i, /^wt/i, /^ec/i, /^ps/i, /^cc/i,
+  // Skanery
+  /^ds/i, /^li/i, /^ls/i, /^cs/i, /^mt/i, /^mp/i,
+  // Tablety
+  /^et/i, /^l10/i, /^xplore/i, /^xc/i, /^xr/i,
+  // Akcesoria - słowa kluczowe
+  /głowica/i, /glowica/i, /wałek/i, /walek/i, /zasilacz/i, /bateria/i, /akumulator/i, /kabel/i,
+  // Ogólne słowo "Zebra"
+  /zebra/i,
+]
+
+// Konkurencyjne marki, które ODRZUCAMY
+const COMPETITOR_BRANDS = [
+  /citizen/i, /epson/i, /brother/i, /tsc/i, /sato/i, /cab/i,
+  /honeywell/i, /intermec/i, /datamax/i, /printronix/i,
+  /godex/i, /argox/i, /bixolon/i, /star/i, /pos-x/i,
+  /datalogic/i, /opticon/i, /newland/i, /cino/i,
+  /samsung/i, /apple/i, /iphone/i, /huawei/i, /xiaomi/i,
+  /hp\s/i, /canon/i, /lexmark/i, /kyocera/i, /ricoh/i,
+]
+
+// Funkcja sprawdzająca czy model to Zebra
+function isZebraDevice(model: string): boolean {
+  const trimmedModel = model.trim()
+  
+  // Sprawdź czy to konkurencja (natychmiast odrzuć)
+  for (const pattern of COMPETITOR_BRANDS) {
+    if (pattern.test(trimmedModel)) {
+      return false
+    }
+  }
+  
+  // Sprawdź czy pasuje do wzorców Zebra
+  for (const pattern of ZEBRA_MODEL_PATTERNS) {
+    if (pattern.test(trimmedModel)) {
+      return true
+    }
+  }
+  
+  return false
+}
+
 // Zod Schema
 const repairFormSchema = z.object({
   // KROK 1: Dane kontaktowe
@@ -32,7 +87,12 @@ const repairFormSchema = z.object({
   deviceType: z.enum(['drukarka', 'terminal', 'skaner', 'tablet', 'akcesoria', 'inne'], {
     message: 'Wybierz typ urządzenia',
   }),
-  deviceModel: z.string().min(1, 'Wpisz model urządzenia'),
+  deviceModel: z.string()
+    .min(1, 'Wpisz model urządzenia')
+    .refine(
+      (val) => isZebraDevice(val),
+      'Serwisujemy tylko urządzenia marki Zebra Technologies. Wpisz model Zebra (np. ZD421, TC52, DS3608).'
+    ),
   serialNumber: z.string().optional(),
   purchaseDate: z.string().optional(),
   isWarranty: z.enum(['tak', 'nie', 'nie_wiem']),
