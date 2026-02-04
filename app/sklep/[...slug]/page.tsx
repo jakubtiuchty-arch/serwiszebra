@@ -470,6 +470,10 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
             "value": "0",
             "currency": "PLN"
           },
+          "shippingDestination": {
+            "@type": "DefinedRegion",
+            "addressCountry": "PL"
+          },
           "deliveryTime": {
             "@type": "ShippingDeliveryTime",
             "handlingTime": {
@@ -485,6 +489,14 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
               "unitCode": "DAY"
             }
           }
+        },
+        "hasMerchantReturnPolicy": {
+          "@type": "MerchantReturnPolicy",
+          "applicableCountry": "PL",
+          "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+          "merchantReturnDays": 14,
+          "returnMethod": "https://schema.org/ReturnByMail",
+          "returnFees": "https://schema.org/FreeReturn"
         }
       },
       "aggregateRating": {
