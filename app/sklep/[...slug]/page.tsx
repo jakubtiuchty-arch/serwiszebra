@@ -670,12 +670,14 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
                   {product.price_brutto.toFixed(2).replace('.', ',')} zł brutto
                 </div>
 
-                {/* Dostępność - real-time z Ingram API */}
+                {/* Dostępność (dane z ostatniego synca CSV) */}
                 <div className="mb-4">
                   <RealTimeStock 
                     sku={product.sku}
                     fallbackStockPL={product.attributes?.stock_pl ?? 0}
                     fallbackStockDE={product.attributes?.stock_de ?? 0}
+                    fallbackInDelivery={product.attributes?.in_delivery ?? 0}
+                    totalStock={product.stock}
                   />
                 </div>
 

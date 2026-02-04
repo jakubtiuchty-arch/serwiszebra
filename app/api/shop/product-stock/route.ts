@@ -14,46 +14,44 @@ export async function GET(request: Request) {
   }
 
   try {
-    // Pobierz dane z XML PNA API (real-time)
+    console.log(`[Product Stock API] Checking stock for SKU: ${sku}`)
+    
+    // Użyj funkcji z lib/ingram-micro.ts która obsługuje różne formaty SKU
     const result = await checkPriceAndAvailability([sku], true) // tryAllFormats = true
     
-    if (!result.success || !result.data || !Array.isArray(result.data)) {
+    console.log('[Product Stock API] Result:', JSON.stringify(result).substring(0, 500))
+    
+    if (!result.success) {
       return NextResponse.json({
         sku,
         found: false,
-        stock: 0,
-        message: result.error || 'Nie znaleziono produktu w Ingram Micro'
+        stock_pl: 0,
+        stock_de: 0,
+        total_stock: 0,
+        error: result.error || 'Nie znaleziono produktu',
+        updated_at: new Date().toISOString()
       })
     }
 
-    const items = result.data as Array<{
-      itemId: string
-      vpn: string
-      qty: number
-      warehouse: string
-      price: number
-      eta: string
-    }>
-
-    // Sumuj stock z różnych magazynów
-    let stockPL = 0  // Magazyn w Polsce (24h)
-    let stockDE = 0  // Magazyn w Niemczech (72h)
+    // Parsuj dane z odpowiedzi
+    const items = Array.isArray(result.data) ? result.data : []
+    
+    let stockPL = 0
+    let stockDE = 0
     let price = 0
 
     for (const item of items) {
-      // Ingram zwraca warehouse jako "PL" lub "DE" lub "IM" (dla magazynu centralnego)
+      const qty = item.qty || 0
       const warehouse = (item.warehouse || '').toUpperCase()
       
-      if (warehouse === 'PL' || warehouse === 'POLAND' || warehouse === 'POL') {
-        stockPL += item.qty
-      } else if (warehouse === 'DE' || warehouse === 'GERMANY' || warehouse === 'IM' || warehouse === 'CENTRAL') {
-        stockDE += item.qty
+      // Przypisz stock do odpowiedniego magazynu
+      if (warehouse === 'DE' || warehouse === 'IM' || warehouse === 'CENTRAL') {
+        stockDE += qty
       } else {
-        // Nieznany magazyn - domyślnie traktuj jako DE
-        stockDE += item.qty
+        // Domyślnie PL (24h)
+        stockPL += qty
       }
       
-      // Weź najwyższą cenę
       if (item.price > price) {
         price = item.price
       }
@@ -61,7 +59,7 @@ export async function GET(request: Request) {
 
     // Jeśli nie ma rozróżnienia na magazyny, cały stock przypisz do PL
     if (stockPL === 0 && stockDE === 0 && items.length > 0) {
-      stockPL = items.reduce((sum, item) => sum + item.qty, 0)
+      stockPL = items.reduce((sum: number, item: { qty?: number }) => sum + (item.qty || 0), 0)
     }
 
     return NextResponse.json({

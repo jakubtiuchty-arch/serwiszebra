@@ -673,9 +673,13 @@ export async function testRawXml(xmlBody: string): Promise<IngramResponse> {
 
 /**
  * Parsuje XML response PnA
+ * Obsługuje różne formaty odpowiedzi Ingram (PNAResponse i PriceAvailabilityResponse)
  */
 function parsePnAResponse(xml: string): PnAItem[] {
   const items: PnAItem[] = []
+  
+  console.log('[Ingram PnA] Parsing XML response, length:', xml.length)
+  console.log('[Ingram PnA] XML preview:', xml.substring(0, 800))
   
   // Regex do wyciągania <Item>...</Item>
   const itemRegex = /<Item>([\s\S]*?)<\/Item>/g
@@ -684,22 +688,56 @@ function parsePnAResponse(xml: string): PnAItem[] {
   while ((match = itemRegex.exec(xml)) !== null) {
     const itemXml = match[1]
     
+    // Qty może być w różnych tagach: Qty, Stock, Quantity, AvailableQty
+    const qtyStr = extractXmlValue(itemXml, 'Qty') 
+      || extractXmlValue(itemXml, 'Stock') 
+      || extractXmlValue(itemXml, 'Quantity')
+      || extractXmlValue(itemXml, 'AvailableQty')
+      || '0'
+    
     const item: PnAItem = {
       itemId: extractXmlValue(itemXml, 'ItemID') || '',
       vpn: extractXmlValue(itemXml, 'VPN') || '',
-      ean: extractXmlValue(itemXml, 'EAN_UPC_Code') || '',
-      name: extractXmlValue(itemXml, 'ProductName') || '',
-      manufacturer: extractXmlValue(itemXml, 'Manufacturer') || '',
+      ean: extractXmlValue(itemXml, 'EAN_UPC_Code') || extractXmlValue(itemXml, 'EAN') || '',
+      name: extractXmlValue(itemXml, 'ProductName') || extractXmlValue(itemXml, 'Name') || '',
+      manufacturer: extractXmlValue(itemXml, 'Manufacturer') || extractXmlValue(itemXml, 'Vendor') || '',
       price: parseFloat(extractXmlValue(itemXml, 'Price') || '0'),
       currency: extractXmlValue(itemXml, 'Currency') || 'PLN',
-      qty: parseInt(extractXmlValue(itemXml, 'Qty') || '0'),
-      warehouse: extractXmlValue(itemXml, 'Warehouse') || '',
-      eta: extractXmlValue(itemXml, 'ETA') || '',
+      qty: parseInt(qtyStr),
+      warehouse: extractXmlValue(itemXml, 'Warehouse') || extractXmlValue(itemXml, 'Location') || '',
+      eta: extractXmlValue(itemXml, 'ETA') || extractXmlValue(itemXml, 'Availability') || '',
     }
     
+    console.log('[Ingram PnA] Parsed item:', item)
     items.push(item)
   }
 
+  // Jeśli nie znaleziono Item, spróbuj parsować płaską strukturę (PriceAvailabilityResponse)
+  if (items.length === 0) {
+    const stock = extractXmlValue(xml, 'Stock') || extractXmlValue(xml, 'Qty') || '0'
+    const price = extractXmlValue(xml, 'Price') || '0'
+    const itemId = extractXmlValue(xml, 'ItemID') || extractXmlValue(xml, 'SKU') || ''
+    const availability = extractXmlValue(xml, 'Availability') || ''
+    
+    if (stock !== '0' || itemId) {
+      const item: PnAItem = {
+        itemId: itemId,
+        vpn: extractXmlValue(xml, 'VPN') || '',
+        ean: extractXmlValue(xml, 'EAN') || '',
+        name: extractXmlValue(xml, 'ProductName') || '',
+        manufacturer: extractXmlValue(xml, 'Manufacturer') || '',
+        price: parseFloat(price),
+        currency: extractXmlValue(xml, 'Currency') || 'PLN',
+        qty: parseInt(stock),
+        warehouse: extractXmlValue(xml, 'Warehouse') || 'PL', // domyślnie PL
+        eta: availability,
+      }
+      console.log('[Ingram PnA] Parsed flat structure:', item)
+      items.push(item)
+    }
+  }
+
+  console.log('[Ingram PnA] Total items parsed:', items.length)
   return items
 }
 
