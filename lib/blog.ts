@@ -24979,7 +24979,7 @@ Jako **autoryzowany serwis Zebra** oferujemy:
     readingTime: 18,
     deviceType: 'drukarki',
     subDeviceType: 'etykiet',
-    category: 'poradniki',
+    category: 'troubleshooting',
     tags: ['GK420d', 'GK420t', 'GC420d', 'GC420t', 'GX420d', 'GX420t', 'G-Series', 'serwis', 'naprawa', 'diagnostyka', 'LED', 'głowica', 'wałek dociskowy', 'konserwacja', 'kalibracja'],
     seo: {
       metaTitle: 'Serwis drukarki Zebra GK420/GC420 - diagnostyka i naprawa [2026]',
@@ -25489,7 +25489,7 @@ Model "d" jest prostszy, model "t" oferuje trwalsze wydruki na etykiety syntetyc
     readingTime: 16,
     deviceType: 'drukarki',
     subDeviceType: 'mobilne',
-    category: 'poradniki',
+    category: 'troubleshooting',
     tags: ['ZQ630', 'ZQ630 Plus', 'ZQ620', 'ZQ620 Plus', 'ZQ610', 'ZQ610 Plus', 'drukarka mobilna', 'serwis', 'naprawa', 'bateria', 'Bluetooth', 'Wi-Fi', 'RFID', 'kody błędów', 'LCD', 'PowerPrecision'],
     seo: {
       metaTitle: 'Serwis drukarki mobilnej Zebra ZQ630/ZQ620/ZQ610 Plus [2026]',
