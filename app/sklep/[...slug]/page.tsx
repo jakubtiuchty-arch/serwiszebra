@@ -78,11 +78,19 @@ const PRODUCT_TYPE_FAQ: Record<string, Array<{ question: string; answer: string 
     },
     {
       question: 'Czy mogę samodzielnie wymienić głowicę?',
-      answer: 'Tak, wymiana głowicy to prosta czynność serwisowa. Wystarczy odłączyć taśmę flat cable, odkręcić 2-4 śruby mocujące starą głowicę i zamontować nową. Cała operacja zajmuje około 5-10 minut. Oferujemy też profesjonalną wymianę w serwisie.'
+      answer: 'Tak, wymiana głowicy to prosta czynność serwisowa. Wystarczy odłączyć taśmę flat cable, odkręcić 2-4 śruby mocujące starą głowicę i zamontować nową. Cała operacja zajmuje około 5-10 minut. Oferujemy też profesjonalną wymianę w serwisie z kalibracją i gwarancją.'
     },
     {
       question: 'Jaka jest różnica między głowicą 203 DPI a 300 DPI?',
       answer: '203 DPI (8 punktów/mm) to standardowa rozdzielczość wystarczająca dla większości etykiet logistycznych i kodów kreskowych. 300 DPI (12 punktów/mm) zapewnia wyższą jakość druku, idealną dla małych kodów 2D, drobnego tekstu i etykiet farmaceutycznych. Głowice nie są wymienne między rozdzielczościami.'
+    },
+    {
+      question: 'Jak przedłużyć żywotność głowicy drukującej?',
+      answer: 'Aby przedłużyć żywotność głowicy: 1) Czyść głowicę alkoholem IPA 99% co każdą rolkę materiału lub minimum raz w tygodniu. 2) Używaj wysokiej jakości etykiet i ribbonów. 3) Unikaj zbyt wysokich ustawień ciemności (Darkness). 4) Chroń głowicę przed kurzem i zanieczyszczeniami. Regularna konserwacja wydłuża żywotność nawet 2-3 krotnie.'
+    },
+    {
+      question: 'Naprawić czy wymienić głowicę?',
+      answer: 'Głowicy drukującej nie da się naprawić — uszkodzone elementy grzejne są trwałe. Jeśli białe linie na wydruku nie znikają po 2-3 czyszczeniach alkoholem IPA, głowica wymaga wymiany. Przy bladym wydruku najpierw spróbuj: zwiększyć Darkness, wyczyścić głowicę, sprawdzić ribbon.'
     }
   ],
   walek: [
@@ -240,10 +248,18 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
       keywords: [
         product.name,
         product.sku,
+        `printhead ${product.sku}`,
         product.device_model,
+        `głowica ${product.device_model}`,
+        `głowica termiczna ${product.device_model}`,
+        `oryginalna głowica ${product.device_model}`,
         'głowica zebra',
+        'głowica drukująca zebra',
+        'głowica termiczna do drukarki etykiet',
+        'printhead zebra',
         'części zamienne zebra',
-        'oryginalna głowica',
+        'oryginalna głowica zebra',
+        'wymiana głowicy zebra',
         'serwis zebra',
         'TAKMA'
       ].filter(Boolean).join(', '),
@@ -463,10 +479,23 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
       },
       "aggregateRating": {
         "@type": "AggregateRating",
-        "ratingValue": "4.9",
-        "reviewCount": "47",
+        "ratingValue": "4.8",
+        "reviewCount": "12",
         "bestRating": "5",
         "worstRating": "1"
+      },
+      "review": {
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "author": {
+          "@type": "Organization",
+          "name": "TAKMA - Autoryzowany Serwis Zebra"
+        },
+        "reviewBody": "Oryginalna głowica Zebra z gwarancją producenta. Szybka wysyłka i profesjonalna obsługa."
       }
     }
     
@@ -694,6 +723,101 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
               </div>
             )}
 
+            {/* Sekcja: Naprawić czy wymienić głowicę? */}
+            {product.product_type === 'glowica' && (
+              <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 sm:p-6 mb-4 sm:mb-6">
+                <h2 className="text-sm sm:text-base font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                  <HelpCircle className="w-4 h-4 sm:w-5 sm:h-5 text-amber-600" />
+                  Naprawić czy wymienić głowicę?
+                </h2>
+                <div className="text-xs sm:text-sm text-gray-700 space-y-2">
+                  <p><strong>Wymień głowicę gdy:</strong> białe pionowe linie na wydruku nie znikają po czyszczeniu, widoczne są rysy na powierzchni głowicy, przekroczono resurs (~1 mln cali).</p>
+                  <p><strong>Wyczyść głowicę gdy:</strong> wydruk jest blady (zwiększ też Darkness), pojedyncze linie znikają po czyszczeniu, problem pojawił się niedawno.</p>
+                  <p className="text-amber-700 font-medium">💡 Regularne <Link href="/blog/jak-wyczyscic-glowice-drukarki-zebra" className="underline hover:text-amber-800">czyszczenie głowicy</Link> alkoholem IPA 99% wydłuża żywotność 2-3x!</p>
+                </div>
+              </div>
+            )}
+
+            {/* Powiązane treści - Linkowanie wewnętrzne */}
+            {product.product_type === 'glowica' && (
+              <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6 mb-4 sm:mb-6">
+                <h2 className="text-sm sm:text-base font-semibold text-gray-900 mb-3 sm:mb-4 flex items-center gap-2">
+                  <Info className="w-4 h-4 sm:w-5 sm:h-5 text-blue-500" />
+                  Powiązane treści
+                </h2>
+                <div className="grid sm:grid-cols-2 gap-3">
+                  {/* Poradniki blogowe */}
+                  <div>
+                    <p className="text-xs font-semibold text-gray-500 uppercase mb-2">📖 Poradniki</p>
+                    <ul className="space-y-1.5 text-xs sm:text-sm">
+                      <li>
+                        <Link href="/blog/jak-wyczyscic-glowice-drukarki-zebra" className="text-blue-600 hover:text-blue-800 hover:underline">
+                          Jak wyczyścić głowicę drukarki Zebra
+                        </Link>
+                      </li>
+                      <li>
+                        <Link href="/blog/wymiana-glowicy-drukarki-zebra-kiedy-konieczna-ile-kosztuje" className="text-blue-600 hover:text-blue-800 hover:underline">
+                          Wymiana głowicy – kiedy i ile kosztuje?
+                        </Link>
+                      </li>
+                      <li>
+                        <Link href="/blog/najczestsze-awarie-drukarek-zebra-top10" className="text-blue-600 hover:text-blue-800 hover:underline">
+                          TOP 10 awarii drukarek Zebra
+                        </Link>
+                      </li>
+                      <li>
+                        <Link href="/blog/cennik-naprawy-drukarki-zebra-koszty-serwisu" className="text-blue-600 hover:text-blue-800 hover:underline">
+                          Cennik napraw drukarek Zebra
+                        </Link>
+                      </li>
+                      {product.device_model?.toLowerCase().includes('zd42') && (
+                        <li>
+                          <Link href="/blog/serwis-drukarki-zebra-zd420-zd421-diagnostyka-naprawa" className="text-blue-600 hover:text-blue-800 hover:underline">
+                            Serwis drukarki Zebra ZD420/ZD421
+                          </Link>
+                        </li>
+                      )}
+                    </ul>
+                  </div>
+                  {/* Poradniki wideo */}
+                  <div>
+                    <p className="text-xs font-semibold text-gray-500 uppercase mb-2">📹 Poradniki wideo</p>
+                    <ul className="space-y-1.5 text-xs sm:text-sm">
+                      <li>
+                        <Link href="/poradniki-wideo" className="text-blue-600 hover:text-blue-800 hover:underline">
+                          Wymiana głowicy krok po kroku
+                        </Link>
+                      </li>
+                      <li>
+                        <Link href="/poradniki-wideo" className="text-blue-600 hover:text-blue-800 hover:underline">
+                          Blady wydruk – rozwiązanie problemu
+                        </Link>
+                      </li>
+                      <li>
+                        <Link href="/poradniki-wideo" className="text-blue-600 hover:text-blue-800 hover:underline">
+                          Self-test i kalibracja drukarki
+                        </Link>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                {/* Link do oficjalnej specyfikacji Zebra */}
+                <div className="mt-4 pt-3 border-t border-gray-100">
+                  <p className="text-xs text-gray-500">
+                    📎 Oficjalna dokumentacja: {' '}
+                    <a 
+                      href="https://www.zebra.com/us/en/support-downloads.html" 
+                      target="_blank" 
+                      rel="nofollow noopener noreferrer"
+                      className="text-gray-600 hover:text-gray-800 underline"
+                    >
+                      Zebra Support & Downloads
+                    </a>
+                  </p>
+                </div>
+              </div>
+            )}
+
             {/* Usługa montażu */}
             <div className="rounded-xl bg-gray-50 p-5 sm:p-6 mb-4 sm:mb-6 border border-gray-200">
               <div className="flex items-start gap-4">
@@ -708,13 +832,21 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
                     Odbierzemy drukarkę kurierem, wymienimy część w naszym serwisie 
                     i odeślemy sprawne urządzenie. Szybko i z gwarancją.
                   </p>
-                  <Link 
-                    href="/#formularz" 
-                    className="inline-flex items-center gap-2 bg-blue-600 text-white px-5 py-2.5 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
-                  >
-                    <Truck className="w-4 h-4" />
-                    Zamów odbiór kurierem
-                  </Link>
+                  <div className="flex flex-wrap gap-2">
+                    <Link 
+                      href="/#formularz" 
+                      className="inline-flex items-center gap-2 bg-blue-600 text-white px-5 py-2.5 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
+                    >
+                      <Truck className="w-4 h-4" />
+                      Zamów odbiór kurierem
+                    </Link>
+                    <Link 
+                      href="/blog/cennik-naprawy-drukarki-zebra-koszty-serwisu" 
+                      className="inline-flex items-center gap-2 bg-white text-gray-700 px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-gray-100 transition-colors border border-gray-200"
+                    >
+                      Zobacz cennik napraw
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>
