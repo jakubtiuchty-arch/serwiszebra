@@ -267,7 +267,7 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
       openGraph: {
         title: seoTitle,
         description: seoDescription,
-        type: 'article', // product type not supported, using article as fallback
+        // Usunięto type: 'article' - używamy other['og:type'] = 'product'
         siteName: 'TAKMA - Autoryzowany Serwis Zebra',
         locale: 'pl_PL',
         url: `https://www.serwis-zebry.pl/sklep/${slugPath.join('/')}`,
@@ -279,7 +279,7 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
         }] : []
       },
       other: {
-        'og:type': 'product',
+        'og:type': 'product', // og:type = product dla stron produktowych
         'product:price:amount': product.price_brutto.toString(),
         'product:price:currency': 'PLN',
         'product:availability': product.stock > 0 ? 'in stock' : 'out of stock',
@@ -499,26 +499,8 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
           "returnFees": "https://schema.org/FreeReturn"
         }
       },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.8",
-        "reviewCount": "12",
-        "bestRating": "5",
-        "worstRating": "1"
-      },
-      "review": {
-        "@type": "Review",
-        "reviewRating": {
-          "@type": "Rating",
-          "ratingValue": "5",
-          "bestRating": "5"
-        },
-        "author": {
-          "@type": "Organization",
-          "name": "TAKMA - Autoryzowany Serwis Zebra"
-        },
-        "reviewBody": "Oryginalna głowica Zebra z gwarancją producenta. Szybka wysyłka i profesjonalna obsługa."
-      }
+      // UWAGA: Usunięto aggregateRating i review - Google wymaga prawdziwych recenzji widocznych na stronie
+      // Dodaj recenzje gdy będą realne opinie klientów
     }
     
     // Dodaj additionalProperty jeśli dostępne
@@ -627,7 +609,7 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
         <Header currentPage="other" />
         <ShopSubheader breadcrumbs={productBreadcrumbs} />
         
-        <div className="min-h-screen bg-gray-50">
+        <main id="main-content" className="min-h-screen bg-gray-50">
           <div className="max-w-5xl mx-auto px-4 py-4 sm:py-6">
             
             {/* Szybka odpowiedź (Paragraph 0 dla AEO) */}
@@ -930,7 +912,7 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
               </a>
             </div>
           </div>
-        </div>
+        </main>
 
         <Footer />
 

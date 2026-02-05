@@ -225,7 +225,7 @@ export default function Footer() {
                   <a 
                     href="https://qba.dev" 
                     target="_blank" 
-                    rel="noopener noreferrer"
+                    rel="nofollow noopener noreferrer"
                     onClick={() => trackExternalLink('https://qba.dev', 'qba.dev')}
                     className="group relative inline-flex items-center ml-0.5"
                   >
