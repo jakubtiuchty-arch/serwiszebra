@@ -450,11 +450,18 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
         "name": product.manufacturer || "Zebra"
       },
       "image": imageUrl ? `https://www.serwis-zebry.pl${imageUrl}` : undefined,
+      "category": product.product_type === 'glowica' ? 'Głowice drukujące > Drukarki Zebra' : 'Części zamienne Zebra',
+      "model": product.device_model || undefined,
+      "countryOfOrigin": {
+        "@type": "Country",
+        "name": "Chiny"
+      },
       "offers": {
         "@type": "Offer",
         "url": `https://www.serwis-zebry.pl/sklep/${slugPath.join('/')}`,
         "price": product.price_brutto,
         "priceCurrency": "PLN",
+        "itemCondition": "https://schema.org/NewCondition",
         "availability": product.stock > 0 
           ? "https://schema.org/InStock" 
           : "https://schema.org/OutOfStock",
@@ -510,6 +517,24 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
         "name": prop.name,
         "value": prop.value
       }))
+    }
+
+    // Dodatkowe FAQ widoczne na stronie (sekcja "Naprawić czy wymienić" + dodatkowe)
+    if (product.product_type === 'glowica') {
+      faqItems.push(
+        {
+          question: 'Jak przedłużyć żywotność głowicy drukującej?',
+          answer: 'Regularne czyszczenie głowicy alkoholem izopropylowym (IPA 99%) co każdą rolkę materiału lub minimum raz w tygodniu znacząco wydłuża żywotność. Unikaj niskiej jakości etykiet i ribbonów, które mogą rysować powierzchnię głowicy. Nie ustawiaj zbyt wysokiego parametru Darkness.'
+        },
+        {
+          question: 'Jak rozpoznać zużytą głowicę drukującą?',
+          answer: 'Zużyta głowica objawia się pionowymi białymi liniami na wydruku, bladym lub nierównomiernym drukiem, oraz nieczytelnymi kodami kreskowymi. Jeśli czyszczenie alkoholem IPA nie pomaga po 2-3 próbach, głowica wymaga wymiany.'
+        },
+        {
+          question: 'Naprawić czy wymienić głowicę?',
+          answer: 'Głowicy drukującej nie da się naprawić — uszkodzone elementy grzejne są trwałe. Wymień głowicę gdy: białe pionowe linie nie znikają po czyszczeniu, widoczne rysy na powierzchni, przekroczono resurs (~1 mln cali). Wyczyść głowicę gdy: wydruk jest blady, pojedyncze linie znikają po czyszczeniu, problem pojawił się niedawno.'
+        }
+      )
     }
 
     // FAQ Schema
@@ -599,6 +624,18 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
       ]
     } : null
 
+    // Speakable Schema dla voice search (AEO)
+    const speakableSchema = {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": product.name,
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [".quick-answer", "h1", ".product-price"]
+      },
+      "url": `https://www.serwis-zebry.pl/sklep/${slugPath.join('/')}`
+    }
+
     // Generuj "Szybka odpowiedź" dla głowic
     const quickAnswer = product.product_type === 'glowica' && product.resolution_dpi 
       ? `Głowica ${product.sku} to oryginalna część ${product.resolution_dpi} DPI do ${product.device_model || 'drukarki Zebra'}. Cena: ${product.price_brutto.toFixed(2).replace('.', ',')} zł brutto. Wysyłka ${product.stock > 0 ? '24h z magazynu w Polsce' : '3-7 dni'}. Gwarancja producenta 12 miesięcy.`
@@ -610,11 +647,11 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
         <ShopSubheader breadcrumbs={productBreadcrumbs} />
         
         <main id="main-content" className="min-h-screen bg-gray-50">
-          <div className="max-w-5xl mx-auto px-4 py-4 sm:py-6">
+          <article className="max-w-5xl mx-auto px-4 py-4 sm:py-6" itemScope itemType="https://schema.org/Product">
             
-            {/* Szybka odpowiedź (Paragraph 0 dla AEO) */}
+            {/* Szybka odpowiedź (Paragraph 0 dla AEO + Speakable) */}
             {quickAnswer && (
-              <div className="bg-blue-50 border-l-4 border-blue-500 rounded-r-xl p-4 mb-4 sm:mb-6">
+              <div className="quick-answer bg-blue-50 border-l-4 border-blue-500 rounded-r-xl p-4 mb-4 sm:mb-6">
                 <p className="text-sm text-gray-800 leading-relaxed">
                   <strong className="text-blue-700">W skrócie:</strong> {quickAnswer}
                 </p>
@@ -623,13 +660,13 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
 
             {/* Main content - Mobile First */}
             <div className="flex flex-col md:flex-row gap-4 sm:gap-6 mb-4 sm:mb-6 md:items-start">
-              {/* Image */}
-              <div className="bg-white rounded-xl border border-gray-200 overflow-hidden md:w-80 lg:w-96 flex-shrink-0">
+              {/* Image - wrapped in <figure> for semantic SEO */}
+              <figure className="bg-white rounded-xl border border-gray-200 overflow-hidden md:w-80 lg:w-96 flex-shrink-0 m-0">
                 <div className="relative aspect-square bg-white flex items-center justify-center">
                   {imageUrl ? (
                     <Image
                       src={imageUrl}
-                      alt={`${product.name} ${product.sku} - oryginalna głowica drukująca Zebra`}
+                      alt={`${product.name} ${product.resolution_dpi || ''} dpi ${product.sku} - oryginalna głowica drukująca Zebra`}
                       fill
                       className="object-contain p-3 sm:p-4"
                       priority
@@ -639,7 +676,10 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
                     <Icon className="w-16 h-16 sm:w-20 sm:h-20 text-gray-300" />
                   )}
                 </div>
-              </div>
+                <figcaption className="sr-only">
+                  {product.name} {product.sku} - oryginalna część zamienna Zebra
+                </figcaption>
+              </figure>
 
               {/* Details */}
               <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6 flex-1">
@@ -654,7 +694,7 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
                 </p>
 
                 {/* Cena */}
-                <div className="flex items-baseline gap-2 mb-1">
+                <div className="product-price flex items-baseline gap-2 mb-1">
                   <span className="text-2xl sm:text-3xl font-bold text-gray-900">
                     {product.price.toFixed(2).replace('.', ',')} zł
                   </span>
@@ -847,17 +887,37 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
                     </ul>
                   </div>
                 </div>
-                {/* Link do oficjalnej specyfikacji Zebra */}
+                {/* Link do oficjalnej specyfikacji Zebra - konkretny model */}
                 <div className="mt-4 pt-3 border-t border-gray-100">
                   <p className="text-xs text-gray-500">
                     📎 Oficjalna dokumentacja: {' '}
+                    {product.device_model ? (
+                      <a 
+                        href={`https://www.zebra.com/us/en/support-downloads/printers/${product.device_model.toLowerCase().replace(/\s+/g, '-').replace('zebra-', '')}.html`}
+                        target="_blank" 
+                        rel="nofollow noopener noreferrer"
+                        className="text-gray-600 hover:text-gray-800 underline"
+                      >
+                        Zebra {product.device_model} – Support & Downloads
+                      </a>
+                    ) : (
+                      <a 
+                        href="https://www.zebra.com/us/en/support-downloads.html" 
+                        target="_blank" 
+                        rel="nofollow noopener noreferrer"
+                        className="text-gray-600 hover:text-gray-800 underline"
+                      >
+                        Zebra Support & Downloads
+                      </a>
+                    )}
+                    {' | '}
                     <a 
                       href="https://www.zebra.com/us/en/support-downloads.html" 
                       target="_blank" 
                       rel="nofollow noopener noreferrer"
                       className="text-gray-600 hover:text-gray-800 underline"
                     >
-                      Zebra Support & Downloads
+                      Centrum wsparcia Zebra
                     </a>
                   </p>
                 </div>
@@ -911,7 +971,7 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
                 601 619 898
               </a>
             </div>
-          </div>
+          </article>
         </main>
 
         <Footer />
@@ -951,6 +1011,14 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
             }}
           />
         )}
+
+        {/* JSON-LD Speakable Schema - Voice Search / AEO */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(speakableSchema)
+          }}
+        />
       </>
     )
   }
