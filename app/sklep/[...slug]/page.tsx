@@ -203,6 +203,11 @@ function getProductImageUrl(product: Product): string | null {
   return getLocalProductImage(product.product_type)
 }
 
+// Helper: Czy produkt ma własne zdjęcie (nie fallback)?
+function hasOwnImage(product: Product): boolean {
+  return !!product.image_url
+}
+
 // Helper: Generuj opis SEO
 function generateSeoDescription(product: Product): string {
   const parts = [
@@ -240,6 +245,7 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
     }
 
     const imageUrl = getProductImageUrl(product)
+    const ownImage = hasOwnImage(product)
     const seoDescription = generateSeoDescription(product)
     const seoTitle = generateSeoTitle(product)
 
@@ -267,11 +273,11 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
       openGraph: {
         title: seoTitle,
         description: seoDescription,
-        // Usunięto type: 'article' - używamy other['og:type'] = 'product'
         siteName: 'TAKMA - Autoryzowany Serwis Zebra',
         locale: 'pl_PL',
         url: `https://www.serwis-zebry.pl/sklep/${slugPath.join('/')}`,
-        images: imageUrl ? [{
+        // Tylko własne zdjęcie produktu w OG (unikaj fallbacku w meta tagach)
+        images: ownImage && imageUrl ? [{
           url: `https://www.serwis-zebry.pl${imageUrl}`,
           width: 800,
           height: 800,
@@ -290,7 +296,7 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
         card: 'summary_large_image',
         title: seoTitle,
         description: seoDescription,
-        images: imageUrl ? [`https://www.serwis-zebry.pl${imageUrl}`] : []
+        images: ownImage && imageUrl ? [`https://www.serwis-zebry.pl${imageUrl}`] : []
       },
       alternates: {
         canonical: `https://www.serwis-zebry.pl/sklep/${slugPath.join('/')}`
@@ -396,7 +402,10 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
 
     const Icon = PRODUCT_TYPE_ICONS[product.product_type] || Package
     const imageUrl = getProductImageUrl(product)
-    
+    const ownImage = hasOwnImage(product)
+    // URL obrazka do Schema.org — tylko własne zdjęcie produktu (nie fallback)
+    const schemaImageUrl = ownImage && imageUrl ? `https://www.serwis-zebry.pl${imageUrl}` : undefined
+
     // Dynamiczne FAQ - dla głowic generuj na podstawie modelu, dla innych użyj generycznego
     let faqItems: Array<{ question: string; answer: string }> = []
     let additionalProperties: Array<{ name: string; value: string }> = []
@@ -418,7 +427,8 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
       faqItems = generateProductFAQ(
         printerModelData?.id || normalizedModel,
         product.resolution_dpi,
-        product.sku
+        product.sku,
+        product.price
       )
       
       additionalProperties = generateAdditionalProperties(
@@ -449,7 +459,7 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
         "@type": "Brand",
         "name": product.manufacturer || "Zebra"
       },
-      "image": imageUrl ? `https://www.serwis-zebry.pl${imageUrl}` : undefined,
+      "image": schemaImageUrl,
       "category": product.product_type === 'glowica' ? 'Głowice drukujące > Drukarki Zebra' : 'Części zamienne Zebra',
       "model": product.device_model || undefined,
       "countryOfOrigin": {
@@ -569,7 +579,7 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
       "@type": "HowTo",
       "name": `Jak wymienić głowicę w drukarce ${product.device_model || 'Zebra'}`,
       "description": `Instrukcja wymiany głowicy drukującej ${product.sku} w drukarce ${product.device_model || 'Zebra'}. Wymiana zajmuje 5-10 minut.`,
-      "image": imageUrl ? `https://www.serwis-zebry.pl${imageUrl}` : undefined,
+      "image": schemaImageUrl,
       "totalTime": "PT10M",
       "estimatedCost": {
         "@type": "MonetaryAmount",

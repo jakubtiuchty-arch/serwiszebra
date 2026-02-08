@@ -23,10 +23,37 @@ export const metadata: Metadata = {
     title: 'Sklep z częściami Zebra – Głowice drukujące | TAKMA',
     description: 'Oryginalne głowice drukujące do drukarek Zebra 203/300/600 DPI. Wysyłka 24h, gwarancja producenta.',
     url: 'https://www.serwis-zebry.pl/sklep',
+    siteName: 'TAKMA - Autoryzowany Serwis Zebra',
+    locale: 'pl_PL',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Sklep z częściami Zebra – Głowice drukujące | TAKMA',
+    description: 'Oryginalne głowice drukujące do drukarek Zebra 203/300/600 DPI. Wysyłka 24h, gwarancja producenta. Autoryzowany partner Zebra.',
   },
   alternates: {
     canonical: 'https://www.serwis-zebry.pl/sklep',
   },
+}
+
+// BreadcrumbList JSON-LD dla strony głównej sklepu
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Start",
+      "item": "https://www.serwis-zebry.pl"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Sklep",
+      "item": "https://www.serwis-zebry.pl/sklep"
+    }
+  ]
 }
 
 export default function SklepLayout({
@@ -34,6 +61,13 @@ export default function SklepLayout({
 }: {
   children: React.ReactNode
 }) {
-  return children
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      {children}
+    </>
+  )
 }
-

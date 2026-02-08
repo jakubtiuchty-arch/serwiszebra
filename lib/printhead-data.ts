@@ -557,17 +557,21 @@ export function generateKeywords(
 export function generateProductFAQ(
   model: string,
   resolution: number,
-  partNumber: string
+  partNumber: string,
+  priceNetto?: number
 ): Array<{ question: string; answer: string }> {
   const printer = PRINTER_MODELS[model]
   const modelName = printer?.name || model
-  
+
   const faq: Array<{ question: string; answer: string }> = []
-  
-  // Pytanie o cenę
+
+  // Pytanie o cenę — użyj rzeczywistej ceny produktu jeśli dostępna
+  const priceText = priceNetto
+    ? `${priceNetto.toFixed(2).replace('.', ',')} zł netto`
+    : `około ${printer?.category === 'industrial' ? '1 000–2 500' : '400–800'} zł netto`
   faq.push({
     question: `Jaka jest cena głowicy do ${modelName}?`,
-    answer: `Ceny oryginalnych głowic ${resolution} DPI do ${modelName} zaczynają się od około ${printer?.category === 'industrial' ? '1000-1500' : '400-600'} zł netto. Aktualna cena widoczna jest na stronie produktu.`
+    answer: `Cena oryginalnej głowicy ${resolution} DPI do ${modelName} to ${priceText}. Aktualna cena widoczna jest na stronie produktu. Wysyłka z magazynu w Polsce w ciągu 24h.`
   })
   
   // Pytanie o kompatybilność

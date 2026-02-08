@@ -1,6 +1,7 @@
 import { MetadataRoute } from 'next'
 import { blogPosts } from '@/lib/blog'
 import { createClient } from '@supabase/supabase-js'
+import { getEnabledCategories, getCategoryPathForProduct } from '@/lib/shop-categories'
 
 // Lista miast dla Local SEO
 const cities = [
@@ -158,7 +159,63 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     console.error('Error fetching manuals for sitemap:', error)
   }
   
+  // 5. Strony sklepu — kategorie i produkty
+  let shopPages: MetadataRoute.Sitemap = []
+  try {
+    // Kategorie statyczne z hierarchii
+    const enabledCategories = getEnabledCategories()
+    for (const productType of enabledCategories) {
+      // Poziom 1: /sklep/glowice
+      shopPages.push({
+        url: `${baseUrl}/sklep/${productType.slug}`,
+        lastModified: now,
+        changeFrequency: 'weekly',
+        priority: 0.8,
+      })
+      for (const printerCategory of productType.printerCategories) {
+        // Poziom 2: /sklep/glowice/drukarki-biurkowe
+        shopPages.push({
+          url: `${baseUrl}/sklep/${productType.slug}/${printerCategory.slug}`,
+          lastModified: now,
+          changeFrequency: 'weekly',
+          priority: 0.8,
+        })
+        for (const model of printerCategory.models) {
+          // Poziom 3: /sklep/glowice/drukarki-biurkowe/zebra-zd421t
+          shopPages.push({
+            url: `${baseUrl}/sklep/${productType.slug}/${printerCategory.slug}/${model.slug}`,
+            lastModified: now,
+            changeFrequency: 'weekly',
+            priority: 0.7,
+          })
+        }
+      }
+    }
+
+    // Produkty dynamiczne z Supabase
+    const { data: products } = await supabase
+      .from('products')
+      .select('slug, product_type, device_model, updated_at')
+      .eq('is_active', true)
+
+    if (products) {
+      for (const product of products) {
+        const categoryPath = getCategoryPathForProduct(product)
+        if (categoryPath) {
+          shopPages.push({
+            url: `${baseUrl}/sklep/${categoryPath.productType.slug}/${categoryPath.printerCategory.slug}/${categoryPath.model.slug}/${product.slug}`,
+            lastModified: product.updated_at ? new Date(product.updated_at) : now,
+            changeFrequency: 'weekly',
+            priority: 0.9,
+          })
+        }
+      }
+    }
+  } catch (error) {
+    console.error('Error generating shop sitemap:', error)
+  }
+
   // Połącz wszystkie strony
-  return [...staticPages, ...blogPages, ...cityPages, ...manualPages]
+  return [...staticPages, ...blogPages, ...cityPages, ...manualPages, ...shopPages]
 }
 
