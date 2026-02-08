@@ -34,6 +34,7 @@ import {
   getModelBySlug,
   getBreadcrumbs,
   getProductUrl,
+  getCategoryPathForProduct,
   type ProductTypeCategory,
   type PrinterCategory,
   type PrinterModel
@@ -161,6 +162,45 @@ async function getProduct(slug: string): Promise<Product | null> {
   } catch (error) {
     console.error('Error fetching product:', error)
     return null
+  }
+}
+
+// Pobierz powiązane produkty (inna rozdzielczość tego samego modelu + kompatybilne modele)
+async function getRelatedProducts(currentProduct: Product): Promise<Product[]> {
+  try {
+    // Pobierz produkty tego samego typu (np. glowica) z wyjątkiem bieżącego
+    const res = await fetch(
+      `${supabaseUrl}/rest/v1/products?is_active=eq.true&product_type=eq.${currentProduct.product_type}&id=neq.${currentProduct.id}&select=*&order=name.asc&limit=10`,
+      {
+        headers: {
+          'apikey': supabaseKey,
+          'Authorization': `Bearer ${supabaseKey}`
+        },
+        cache: 'no-store'
+      }
+    )
+    const allProducts: Product[] = await res.json()
+
+    // Priorytetyzacja: 1) ten sam model, inna DPI  2) kompatybilne modele  3) ta sama kategoria
+    const sameModel = allProducts.filter(p =>
+      p.device_model === currentProduct.device_model && p.slug !== currentProduct.slug
+    )
+    const compatibleModels = allProducts.filter(p =>
+      p.device_model !== currentProduct.device_model &&
+      currentProduct.compatible_models?.some(cm =>
+        p.device_model?.toLowerCase().includes(cm.toLowerCase())
+      )
+    )
+    const otherSameCategory = allProducts.filter(p =>
+      p.category === currentProduct.category &&
+      p.device_model !== currentProduct.device_model &&
+      !compatibleModels.includes(p)
+    )
+
+    // Zwróć max 4 powiązane produkty
+    return [...sameModel, ...compatibleModels, ...otherSameCategory].slice(0, 4)
+  } catch {
+    return []
   }
 }
 
@@ -405,6 +445,9 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
     const ownImage = hasOwnImage(product)
     // URL obrazka do Schema.org — tylko własne zdjęcie produktu (nie fallback)
     const schemaImageUrl = ownImage && imageUrl ? `https://www.serwis-zebry.pl${imageUrl}` : undefined
+
+    // Powiązane produkty
+    const relatedProducts = await getRelatedProducts(product)
 
     // Dynamiczne FAQ - dla głowic generuj na podstawie modelu, dla innych użyj generycznego
     let faqItems: Array<{ question: string; answer: string }> = []
@@ -934,6 +977,41 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
               </div>
             )}
 
+            {/* Powiązane produkty */}
+            {relatedProducts.length > 0 && (
+              <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6 mb-4 sm:mb-6">
+                <h2 className="text-sm sm:text-base font-semibold text-gray-900 mb-3 sm:mb-4 flex items-center gap-2">
+                  <Package className="w-4 h-4 sm:w-5 sm:h-5 text-blue-500" />
+                  Powiązane produkty
+                </h2>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                  {relatedProducts.map((rp) => {
+                    const rpUrl = getProductUrl(rp)
+                    const rpImage = getProductImageUrl(rp)
+                    return (
+                      <Link key={rp.id} href={rpUrl} className="group border border-gray-100 rounded-lg p-3 hover:border-blue-200 hover:shadow-sm transition-all">
+                        <div className="relative aspect-square bg-gray-50 rounded-md mb-2 flex items-center justify-center overflow-hidden">
+                          {rpImage ? (
+                            <Image
+                              src={rpImage}
+                              alt={rp.name}
+                              fill
+                              className="object-contain p-2"
+                              sizes="(max-width: 640px) 40vw, 120px"
+                            />
+                          ) : (
+                            <Package className="w-8 h-8 text-gray-300" />
+                          )}
+                        </div>
+                        <p className="text-xs font-medium text-gray-900 group-hover:text-blue-600 line-clamp-2 leading-tight">{rp.name}</p>
+                        <p className="text-xs text-gray-500 mt-1">{rp.price.toFixed(2).replace('.', ',')} zł netto</p>
+                      </Link>
+                    )
+                  })}
+                </div>
+              </div>
+            )}
+
             {/* Usługa montażu */}
             <div className="rounded-xl bg-gray-50 p-5 sm:p-6 mb-4 sm:mb-6 border border-gray-200">
               <div className="flex items-start gap-4">
@@ -1085,6 +1163,26 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
     ? Array.from(new Set(products.map(p => p.resolution_dpi).filter((r): r is number => r !== null))).sort((a, b) => a - b)
     : []
 
+  // ItemList Schema — lista produktów w kategorii
+  const itemListSchema = products.length > 0 ? {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": pageTitle,
+    "numberOfItems": products.length,
+    "itemListElement": products.map((p, index) => {
+      const categoryPath = getCategoryPathForProduct(p)
+      const productUrl = categoryPath
+        ? `https://www.serwis-zebry.pl/sklep/${categoryPath.productType.slug}/${categoryPath.printerCategory.slug}/${categoryPath.model.slug}/${p.slug}`
+        : `https://www.serwis-zebry.pl/sklep/${p.slug}`
+      return {
+        "@type": "ListItem",
+        "position": index + 1,
+        "name": p.name,
+        "url": productUrl
+      }
+    })
+  } : null
+
   // FAQ Schema dla kategorii głowic przemysłowych
   const industrialFaqSchema = productType.id === 'glowica' && printerCategory?.id === 'industrial' ? {
     "@context": "https://schema.org",
@@ -1167,6 +1265,12 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
 
   return (
     <>
+      {itemListSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
+        />
+      )}
       {industrialFaqSchema && (
         <script
           type="application/ld+json"

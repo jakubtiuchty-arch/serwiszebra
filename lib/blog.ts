@@ -416,6 +416,8 @@ export const blogPosts: BlogPost[] = [
 
 > 💡 Im wyższa klasa drukarki, tym dłuższa żywotność głowicy i niższy koszt na etykietę w dłuższej perspektywie.
 
+> **🛒 Kup głowicę online:** [Głowice biurkowe (ZD220, ZD421)](/sklep/glowice/drukarki-biurkowe) | [Głowice przemysłowe (ZT411)](/sklep/glowice/drukarki-przemyslowe) | [Wszystkie głowice →](/sklep/glowice)
+
 ### Koszty taśmy (druk termotransferowy)
 
 | Taśma | Cena | Wydajność | Model |
@@ -5719,6 +5721,10 @@ Jeśli po dokładnym czyszczeniu nadal są:
 
 **Koszt wymiany głowicy:** 450-2400 zł (w zależności od modelu)
 
+> **🛒 Kup oryginalną głowicę online:**
+> - [Głowice do drukarek biurkowych](/sklep/glowice/drukarki-biurkowe) (ZD420, ZD421, ZD621, GK420)
+> - [Głowice do drukarek przemysłowych](/sklep/glowice/drukarki-przemyslowe) (ZT411, ZT421, ZT610)
+
 ---
 
 ## 5. Niewłaściwy typ taśmy (ribbon)
@@ -5777,6 +5783,8 @@ Niektóre problemy wymagają profesjonalnej interwencji:
 [CHECK] Wymiana uszkodzonej głowicy drukującej
 [CHECK] Diagnostyka elektroniki (gdy zasilacz OK, ale problem pozostaje)
 [CHECK] Kalibracja mechanizmu po wymianie części
+
+> **🛒 Potrzebujesz nową głowicę?** [Kup oryginalną głowicę Zebra online →](/sklep/glowice) — wysyłka 24h, gwarancja 6 miesięcy
 
 ---
 

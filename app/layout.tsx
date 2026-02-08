@@ -16,6 +16,40 @@ const inter = Inter({
 export const metadata = seoMetadata
 export const viewport = seoViewport
 
+// Organization JSON-LD (site-wide)
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "TAKMA",
+  "legalName": "TAKMA - Autoryzowany Serwis Zebra",
+  "url": "https://www.serwis-zebry.pl",
+  "logo": "https://www.serwis-zebry.pl/takma_logo_1.png",
+  "telephone": "+48601619898",
+  "email": "serwis@takma.com.pl",
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "PL"
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+48601619898",
+    "contactType": "customer service",
+    "availableLanguage": "Polish"
+  },
+  "hasCredential": {
+    "@type": "EducationalOccupationalCredential",
+    "credentialCategory": "Zebra Premier Partner"
+  },
+  "knowsAbout": [
+    "Zebra Technologies",
+    "Drukarki etykiet Zebra",
+    "Terminale mobilne Zebra",
+    "Skanery kodów kreskowych Zebra",
+    "Głowice drukujące Zebra",
+    "Serwis drukarek przemysłowych"
+  ]
+}
+
 export default function RootLayout({
   children,
 }: {
@@ -101,6 +135,10 @@ export default function RootLayout({
           Przejdź do treści
         </a>
         {children}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
         <CookieBanner />
         <Analytics />
       </body>
