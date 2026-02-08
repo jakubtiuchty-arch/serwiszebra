@@ -94,10 +94,10 @@ export default function Footer() {
               <ul className="space-y-2 sm:space-y-3">
                 {[
                   { href: '/formularz', label: 'Zgłoś naprawę' },
-                  { href: '/drukarki', label: 'Serwis drukarek' },
-                  { href: '/terminale', label: 'Serwis terminali' },
-                  { href: '/skanery', label: 'Serwis skanerów' },
-                  { href: '/tablety', label: 'Serwis tabletów' },
+                  { href: '/serwis-drukarek-zebra', label: 'Serwis drukarek' },
+                  { href: '/serwis-terminali-zebra', label: 'Serwis terminali' },
+                  { href: '/serwis-skanerow-zebra', label: 'Serwis skanerów' },
+                  { href: '/serwis-tabletow-zebra', label: 'Serwis tabletów' },
                 ].map((link) => (
                   <li key={link.href}>
                     <Link href={link.href} className="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors duration-200">

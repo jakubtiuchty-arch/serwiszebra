@@ -1679,7 +1679,7 @@ Jako **autoryzowany partner Zebra** oferujemy:
 - [Instrukcje obsługi terminali Zebra](/instrukcje)
 
 ### Serwis terminali
-- [Serwis terminali Zebra – naprawy, wymiana ekranów](/terminale)
+- [Serwis terminali Zebra – naprawy, wymiana ekranów](/serwis-terminali-zebra)
 
 ---
 
@@ -2729,7 +2729,7 @@ Skontaktuj się z nami - jako **Autoryzowany Serwis Zebra** oferujemy:
 
 ## Powiązane artykuły
 
-- [Serwis drukarek Zebra](/drukarki) - naprawy, konserwacja, części
+- [Serwis drukarek Zebra](/serwis-drukarek-zebra) - naprawy, konserwacja, części
 - [Wymiana głowicy - kiedy i ile kosztuje?](/blog/wymiana-glowicy-drukarki-zebra-kiedy-konieczna-ile-kosztuje)
 - [Jak wyczyścić głowicę drukarki Zebra](/blog/jak-wyczyscic-glowice-drukarki-zebra)
 - [Drukarka Zebra nie drukuje - 7 przyczyn](/blog/drukarka-zebra-nie-drukuje-przyczyny-rozwiazania)
@@ -3144,7 +3144,7 @@ Jeśli masz wiele drukarek ZD420/ZD421, rozważ **kontrakt serwisowy Zebra OneCa
 - [Kody błędów ZD420/ZD421 - diagnostyka LED](/blog/kody-bledow-zebra-zd420-zd421-diody-led)
 - [Sterowniki Zebra Windows 11](/blog/sterowniki-zebra-windows-11-instalacja-problemy)
 
-📖 **Wszystkie usługi:** [Serwis drukarek Zebra](/drukarki)
+📖 **Wszystkie usługi:** [Serwis drukarek Zebra](/serwis-drukarek-zebra)
 `
   },
   {
@@ -3638,13 +3638,13 @@ Skontaktuj się z nami - jako **Autoryzowany Serwis Zebra** oferujemy:
 
 > **📝 Zgłoś online:** [Formularz naprawy](/#formularz)
 
-📖 **Wszystkie usługi:** [Serwis drukarek Zebra](/drukarki) - naprawy, przeglądy, głowice i części zamienne
+📖 **Wszystkie usługi:** [Serwis drukarek Zebra](/serwis-drukarek-zebra) - naprawy, przeglądy, głowice i części zamienne
 
 ---
 
 ## Powiązane artykuły
 
-- [Serwis drukarek Zebra](/drukarki) - naprawy, konserwacja, części
+- [Serwis drukarek Zebra](/serwis-drukarek-zebra) - naprawy, konserwacja, części
 - [Ile kosztuje naprawa drukarki Zebra? Cennik](/blog/cennik-naprawy-drukarki-zebra-koszty-serwisu)
 - [Jak wyczyścić głowicę drukarki Zebra](/blog/jak-wyczyscic-glowice-drukarki-zebra)
 - [Kalibracja drukarki Zebra - poradnik](/blog/kalibracja-drukarki-zebra-poradnik-krok-po-kroku)
@@ -4066,13 +4066,13 @@ Skontaktuj się z nami - jako **Autoryzowany Serwis Zebra** oferujemy:
 
 > **📝 Zgłoś online:** [Formularz naprawy](/#formularz)
 
-📖 **Wszystkie usługi:** [Serwis drukarek Zebra](/drukarki)
+📖 **Wszystkie usługi:** [Serwis drukarek Zebra](/serwis-drukarek-zebra)
 
 ---
 
 ## Powiązane artykuły
 
-- [Serwis drukarek Zebra](/drukarki) - naprawy, konserwacja, części
+- [Serwis drukarek Zebra](/serwis-drukarek-zebra) - naprawy, konserwacja, części
 - [Ile kosztuje naprawa drukarki Zebra? Cennik](/blog/cennik-naprawy-drukarki-zebra-koszty-serwisu)
 - [Serwis drukarki Zebra ZD420/ZD421](/blog/serwis-drukarki-zebra-zd420-zd421-diagnostyka-naprawa)
 - [Jak wyczyścić głowicę drukarki Zebra](/blog/jak-wyczyscic-glowice-drukarki-zebra)
@@ -4531,7 +4531,7 @@ Jako **autoryzowany partner serwisowy Zebra** oferujemy:
 
 [**Wyślij zgłoszenie →**](/#formularz)
 
-📖 **Wszystkie usługi:** [Serwis drukarek Zebra - naprawy i części](/drukarki)
+📖 **Wszystkie usługi:** [Serwis drukarek Zebra - naprawy i części](/serwis-drukarek-zebra)
 
 ---
 
@@ -4959,13 +4959,13 @@ Jeśli czyszczenie nie pomaga lub wolisz zlecić konserwację specjalistom:
 
 > **📝 Zgłoś online:** [Formularz naprawy](/#formularz)
 
-📖 **Wszystkie usługi:** [Serwis drukarek Zebra](/drukarki) - konserwacja, naprawy, wymiana głowic
+📖 **Wszystkie usługi:** [Serwis drukarek Zebra](/serwis-drukarek-zebra) - konserwacja, naprawy, wymiana głowic
 
 ---
 
 ## Powiązane artykuły
 
-- [Serwis drukarek Zebra](/drukarki) - naprawy, konserwacja, części
+- [Serwis drukarek Zebra](/serwis-drukarek-zebra) - naprawy, konserwacja, części
 - [Wymiana głowicy - kiedy i ile kosztuje?](/blog/wymiana-glowicy-drukarki-zebra-kiedy-konieczna-ile-kosztuje)
 - [Ile kosztuje naprawa drukarki Zebra?](/blog/cennik-naprawy-drukarki-zebra-koszty-serwisu)
 - [Drukarka Zebra nie drukuje - 7 przyczyn](/blog/drukarka-zebra-nie-drukuje-przyczyny-rozwiazania)
@@ -5204,13 +5204,13 @@ Standardowa wymiana trwa 1-2 dni robocze od momentu dostarczenia drukarki. W try
 
 ---
 
-📖 **Wszystkie usługi:** [Serwis drukarek Zebra](/drukarki) - wymiana głowic, naprawy, konserwacja
+📖 **Wszystkie usługi:** [Serwis drukarek Zebra](/serwis-drukarek-zebra) - wymiana głowic, naprawy, konserwacja
 
 ---
 
 ## Powiązane artykuły
 
-- [Serwis drukarek Zebra](/drukarki) - naprawy, konserwacja, części
+- [Serwis drukarek Zebra](/serwis-drukarek-zebra) - naprawy, konserwacja, części
 - [Ile kosztuje naprawa drukarki Zebra?](/blog/cennik-naprawy-drukarki-zebra-koszty-serwisu)
 - [Jak wyczyścić głowicę drukarki Zebra](/blog/jak-wyczyscic-glowice-drukarki-zebra)
 - [Drukarka Zebra nie drukuje - 7 przyczyn](/blog/drukarka-zebra-nie-drukuje-przyczyny-rozwiazania)
@@ -9578,7 +9578,7 @@ Według oficjalnej dokumentacji Zebra Technologies [1]:
 
 **Przydatne narzędzia:**
 - [123Scan - darmowy program do konfiguracji](/sterowniki)
-- [Serwis skanerów Zebra](/skanery) - naprawa i konfiguracja
+- [Serwis skanerów Zebra](/serwis-skanerow-zebra) - naprawa i konfiguracja
 
 *Ostatnia aktualizacja: styczeń 2026*
 
@@ -19571,13 +19571,13 @@ Czas nie obejmuje transportu — warto uwzględnić 1-2 dni na dostawę kuriersk
 
 ---
 
-📖 **Wszystkie usługi serwisowe:** [Serwis drukarek Zebra](/drukarki) - naprawy, konserwacja, kontrakty
+📖 **Wszystkie usługi serwisowe:** [Serwis drukarek Zebra](/serwis-drukarek-zebra) - naprawy, konserwacja, kontrakty
 
 ---
 
 ## Powiązane artykuły
 
-- [Serwis drukarek Zebra](/drukarki) - naprawy, konserwacja, części
+- [Serwis drukarek Zebra](/serwis-drukarek-zebra) - naprawy, konserwacja, części
 - [Ile kosztuje naprawa drukarki Zebra?](/blog/cennik-naprawy-drukarki-zebra-koszty-serwisu)
 - [Najczęstsze awarie drukarek Zebra](/blog/najczestsze-awarie-drukarek-zebra-top10)
 - [Serwis drukarki Zebra ZD420/ZD421](/blog/serwis-drukarki-zebra-zd420-zd421-diagnostyka-naprawa)
@@ -25081,7 +25081,7 @@ Jako **autoryzowany serwis Zebra** oferujemy:
       ]
     },
     content: `
-> **🎯 Szybka odpowiedź:** Drukarki **Zebra serii G** (GK420, GC420, GX420) to jedne z najpopularniejszych modeli biurkowych, wciąż używane w tysiącach firm. **Czerwona dioda** najczęściej oznacza brak etykiet lub otwartą pokrywę. **Koszt naprawy**: od 80 zł (czyszczenie) do 400 zł (wymiana głowicy). **Kalibracja**: FEED przytrzymaj → 2 migania → zwolnij. Jako [autoryzowany serwis drukarek Zebra](/drukarki) naprawiamy wszystkie modele serii G z **12-miesięczną gwarancją**.
+> **🎯 Szybka odpowiedź:** Drukarki **Zebra serii G** (GK420, GC420, GX420) to jedne z najpopularniejszych modeli biurkowych, wciąż używane w tysiącach firm. **Czerwona dioda** najczęściej oznacza brak etykiet lub otwartą pokrywę. **Koszt naprawy**: od 80 zł (czyszczenie) do 400 zł (wymiana głowicy). **Kalibracja**: FEED przytrzymaj → 2 migania → zwolnij. Jako [autoryzowany serwis drukarek Zebra](/serwis-drukarek-zebra) naprawiamy wszystkie modele serii G z **12-miesięczną gwarancją**.
 
 ## TL;DR - Serwis Zebra GK420/GC420
 
@@ -25416,13 +25416,13 @@ Jako **autoryzowany serwis Zebra Technologies** oferujemy:
 
 > **📝 Zgłoś online:** [Formularz naprawy](/#formularz)
 
-📖 **Wszystkie usługi:** [Serwis drukarek Zebra](/drukarki) - naprawy, konserwacja, części
+📖 **Wszystkie usługi:** [Serwis drukarek Zebra](/serwis-drukarek-zebra) - naprawy, konserwacja, części
 
 ---
 
 ## Powiązane artykuły
 
-- [Serwis drukarek Zebra](/drukarki) - naprawy, konserwacja, części
+- [Serwis drukarek Zebra](/serwis-drukarek-zebra) - naprawy, konserwacja, części
 - [Czerwona dioda w Zebra GK420 - diagnostyka](/blog/zebra-gk420-czerwona-dioda-diagnostyka)
 - [Ile kosztuje naprawa drukarki Zebra?](/blog/cennik-naprawy-drukarki-zebra-koszty-serwisu)
 - [Jak wyczyścić głowicę drukarki Zebra](/blog/jak-wyczyscic-glowice-drukarki-zebra)
@@ -25609,7 +25609,7 @@ Model "d" jest prostszy, model "t" oferuje trwalsze wydruki na etykiety syntetyc
       ]
     },
     content: `
-> **🎯 Szybka odpowiedź:** Drukarki mobilne **Zebra serii ZQ600 Plus** (ZQ610, ZQ620, ZQ630) to profesjonalne urządzenia do pracy w terenie. **Czerwony ekran** oznacza błąd krytyczny - sprawdź komunikat LCD. **Żółty ekran** to ostrzeżenie. **Koszt naprawy**: od 180 zł (bateria) do 550 zł (głowica). **Etykieta konfiguracyjna**: FEED+POWER przy starcie. Jako [autoryzowany serwis drukarek Zebra](/drukarki) naprawiamy wszystkie modele mobilne z **12-miesięczną gwarancją**.
+> **🎯 Szybka odpowiedź:** Drukarki mobilne **Zebra serii ZQ600 Plus** (ZQ610, ZQ620, ZQ630) to profesjonalne urządzenia do pracy w terenie. **Czerwony ekran** oznacza błąd krytyczny - sprawdź komunikat LCD. **Żółty ekran** to ostrzeżenie. **Koszt naprawy**: od 180 zł (bateria) do 550 zł (głowica). **Etykieta konfiguracyjna**: FEED+POWER przy starcie. Jako [autoryzowany serwis drukarek Zebra](/serwis-drukarek-zebra) naprawiamy wszystkie modele mobilne z **12-miesięczną gwarancją**.
 
 ## TL;DR - Serwis Zebra ZQ610/ZQ620/ZQ630
 
@@ -25884,13 +25884,13 @@ Jako **autoryzowany serwis Zebra Technologies** oferujemy:
 
 > **📝 Zgłoś online:** [Formularz naprawy](/#formularz)
 
-📖 **Wszystkie usługi:** [Serwis drukarek Zebra](/drukarki) - naprawy, konserwacja, części
+📖 **Wszystkie usługi:** [Serwis drukarek Zebra](/serwis-drukarek-zebra) - naprawy, konserwacja, części
 
 ---
 
 ## Powiązane artykuły
 
-- [Serwis drukarek Zebra](/drukarki) - naprawy, konserwacja, części
+- [Serwis drukarek Zebra](/serwis-drukarek-zebra) - naprawy, konserwacja, części
 - [Ile kosztuje naprawa drukarki Zebra?](/blog/cennik-naprawy-drukarki-zebra-koszty-serwisu)
 - [Problemy z baterią w drukarce mobilnej Zebra](/blog/problemy-bateria-drukarka-zebra-mobilna)
 - [Drukarka Zebra nie drukuje w zimnie - Head Cold](/blog/drukarka-zebra-nie-drukuje-zimno-head-cold)
@@ -26340,7 +26340,7 @@ Open Printer Tools → Action → Load printer defaults
 - [Błąd Ribbon Out - rozwiązanie](/blog/blad-ribbon-out-drukarka-zebra-rozwiazanie)
 - [Kontrakty serwisowe Zebra OneCare](/blog/kontrakty-serwisowe-zebra-onecare-przewodnik)
 
-👉 **[Serwis Drukarek Zebra - naprawy, konserwacja, części](/drukarki)**
+👉 **[Serwis Drukarek Zebra - naprawy, konserwacja, części](/serwis-drukarek-zebra)**
 `
   },
 
@@ -26914,7 +26914,7 @@ Zebra ZD220 jest najczęściej używana do druku etykiet kurierskich. Oto szybka
 - [Błąd Ribbon Out — rozwiązanie](/blog/blad-ribbon-out-drukarka-zebra-rozwiazanie)
 - [Kontrakty serwisowe Zebra OneCare](/blog/kontrakty-serwisowe-zebra-onecare-przewodnik)
 
-👉 **[Serwis Drukarek Zebra — naprawy, konserwacja, części](/drukarki)**
+👉 **[Serwis Drukarek Zebra — naprawy, konserwacja, części](/serwis-drukarek-zebra)**
 `
   },
 
@@ -27749,7 +27749,7 @@ Drukarka musi mieć kartę WiFi (P1083320-037x). Konfiguracja: **Menu** > **Netw
 - [Błąd Ribbon Out — rozwiązanie](/blog/blad-ribbon-out-drukarka-zebra-rozwiazanie)
 - [Kontrakty serwisowe Zebra OneCare](/blog/kontrakty-serwisowe-zebra-onecare-przewodnik)
 
-👉 **[Serwis Drukarek Zebra — naprawy, konserwacja, części](/drukarki)**
+👉 **[Serwis Drukarek Zebra — naprawy, konserwacja, części](/serwis-drukarek-zebra)**
 `
   },
 
@@ -28369,7 +28369,7 @@ Tak. Zebra ZT111 zastąpiła model ZT220 w ofercie. Drukarka jest kompatybilna z
 - [Serwis drukarki Zebra GK420/GC420](/blog/serwis-drukarki-zebra-gk420-gc420-diagnostyka-naprawa)
 - [Kontrakty serwisowe Zebra OneCare](/blog/kontrakty-serwisowe-zebra-onecare-przewodnik)
 
-👉 **[Serwis Drukarek Zebra — naprawy, konserwacja, części](/drukarki)**
+👉 **[Serwis Drukarek Zebra — naprawy, konserwacja, części](/serwis-drukarek-zebra)**
 `
   }
 

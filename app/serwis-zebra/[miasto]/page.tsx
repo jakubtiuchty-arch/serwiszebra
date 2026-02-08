@@ -532,7 +532,7 @@ export default function CityServicePage({ params }: { params: { miasto: string }
                 Oferujemy <strong>naprawę drukarek etykiet Zebra</strong> wszystkich serii – od popularnych modeli desktop 
                 (ZD420, ZD620, GK420) przez wydajne drukarki przemysłowe (ZT410, ZT610), po mobilne (ZQ520, ZQ630). 
                 Najczęściej wykonywane usługi to wymiana głowic drukujących, naprawa mechanizmów podawania etykiet, 
-                czyszczenie sensorów i kalibracja parametrów wydruku. Więcej informacji o <Link href="/drukarki" className="text-blue-600 hover:underline">serwisie drukarek Zebra</Link>.
+                czyszczenie sensorów i kalibracja parametrów wydruku. Więcej informacji o <Link href="/serwis-drukarek-zebra" className="text-blue-600 hover:underline">serwisie drukarek Zebra</Link>.
               </p>
               <p className="mt-3">
                 Typowe usterki drukarek, które naprawiamy w {city.nameLocative}: blady wydruk (wymiana głowicy lub kalibracja), 
@@ -545,7 +545,7 @@ export default function CityServicePage({ params }: { params: { miasto: string }
               <p>
                 Specjalizujemy się w <strong>serwisie terminali mobilnych Zebra</strong> – TC21, TC52, MC3300, MC9300 
                 i wielu innych. Wymieniamy uszkodzone wyświetlacze dotykowe, naprawiamy moduły skanujące, 
-                baterie oraz porty ładowania. Szczegóły na stronie <Link href="/terminale" className="text-blue-600 hover:underline">serwis terminali Zebra</Link>.
+                baterie oraz porty ładowania. Szczegóły na stronie <Link href="/serwis-terminali-zebra" className="text-blue-600 hover:underline">serwis terminali Zebra</Link>.
               </p>
               <p className="mt-3">
                 Terminale mobilne Zebra są intensywnie eksploatowane w magazynach, na produkcji i w logistyce. 
@@ -558,7 +558,7 @@ export default function CityServicePage({ params }: { params: { miasto: string }
               <p>
                 Dla <strong>skanerów kodów kreskowych</strong> oferujemy naprawę modułów optycznych, wymianę okienek skanera 
                 oraz rozwiązywanie problemów z parowaniem Bluetooth. Serwisujemy popularne modele: DS2208, DS3678, DS8178, 
-                LI3678 i wiele innych. Więcej na stronie <Link href="/skanery" className="text-blue-600 hover:underline">serwis skanerów Zebra</Link>.
+                LI3678 i wiele innych. Więcej na stronie <Link href="/serwis-skanerow-zebra" className="text-blue-600 hover:underline">serwis skanerów Zebra</Link>.
               </p>
 
               <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">Jak wygląda proces naprawy?</h3>

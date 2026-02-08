@@ -73,25 +73,25 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     // Podstrony urządzeń
     {
-      url: `${baseUrl}/drukarki`,
+      url: `${baseUrl}/serwis-drukarek-zebra`,
       lastModified: now,
       changeFrequency: 'weekly',
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/terminale`,
+      url: `${baseUrl}/serwis-terminali-zebra`,
       lastModified: now,
       changeFrequency: 'weekly',
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/skanery`,
+      url: `${baseUrl}/serwis-skanerow-zebra`,
       lastModified: now,
       changeFrequency: 'weekly',
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/tablety`,
+      url: `${baseUrl}/serwis-tabletow-zebra`,
       lastModified: now,
       changeFrequency: 'weekly',
       priority: 0.9,

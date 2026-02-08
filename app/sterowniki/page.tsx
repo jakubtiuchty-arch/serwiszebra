@@ -835,7 +835,7 @@ export default function DriversPage() {
         <div className="max-w-5xl mx-auto px-3 sm:px-6 lg:px-8">
           <h2 className="text-lg sm:text-xl font-semibold text-gray-900 mb-4 sm:mb-6">Przydatne zasoby</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-            <Link href="/drukarki" className="flex items-center gap-3 p-4 bg-white rounded-xl border border-gray-200 hover:border-gray-300 hover:shadow-sm transition-all group">
+            <Link href="/serwis-drukarek-zebra" className="flex items-center gap-3 p-4 bg-white rounded-xl border border-gray-200 hover:border-gray-300 hover:shadow-sm transition-all group">
               <Printer className="w-5 h-5 text-gray-500 group-hover:text-gray-700" />
               <div>
                 <p className="font-medium text-gray-900 text-sm">Serwis drukarek</p>

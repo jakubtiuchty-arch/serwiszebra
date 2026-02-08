@@ -11,6 +11,26 @@ const nextConfig = {
         destination: '/blog/zebra-tc501-tc701-specyfikacja-cena-premiera',
         permanent: true, // 301 redirect
       },
+      {
+        source: '/drukarki',
+        destination: '/serwis-drukarek-zebra',
+        statusCode: 303,
+      },
+      {
+        source: '/terminale',
+        destination: '/serwis-terminali-zebra',
+        statusCode: 303,
+      },
+      {
+        source: '/skanery',
+        destination: '/serwis-skanerow-zebra',
+        statusCode: 303,
+      },
+      {
+        source: '/tablety',
+        destination: '/serwis-tabletow-zebra',
+        statusCode: 303,
+      },
     ]
   },
   

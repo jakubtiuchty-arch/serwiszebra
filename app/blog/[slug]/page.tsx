@@ -549,7 +549,7 @@ export default function BlogPostPage({
             <div className="flex flex-wrap gap-3">
               {post.deviceType === 'drukarki' && (
                 <>
-                  <Link href="/drukarki" className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 text-blue-700 rounded-lg hover:bg-blue-100 transition-colors text-sm font-medium">
+                  <Link href="/serwis-drukarek-zebra" className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 text-blue-700 rounded-lg hover:bg-blue-100 transition-colors text-sm font-medium">
                     <Printer className="w-4 h-4" />
                     Serwis drukarek Zebra
                   </Link>
@@ -561,7 +561,7 @@ export default function BlogPostPage({
               )}
               {post.deviceType === 'terminale' && (
                 <>
-                  <Link href="/terminale" className="inline-flex items-center gap-2 px-4 py-2 bg-green-50 text-green-700 rounded-lg hover:bg-green-100 transition-colors text-sm font-medium">
+                  <Link href="/serwis-terminali-zebra" className="inline-flex items-center gap-2 px-4 py-2 bg-green-50 text-green-700 rounded-lg hover:bg-green-100 transition-colors text-sm font-medium">
                     <Smartphone className="w-4 h-4" />
                     Serwis terminali Zebra
                   </Link>
@@ -573,7 +573,7 @@ export default function BlogPostPage({
               )}
               {post.deviceType === 'skanery' && (
                 <>
-                  <Link href="/skanery" className="inline-flex items-center gap-2 px-4 py-2 bg-orange-50 text-orange-700 rounded-lg hover:bg-orange-100 transition-colors text-sm font-medium">
+                  <Link href="/serwis-skanerow-zebra" className="inline-flex items-center gap-2 px-4 py-2 bg-orange-50 text-orange-700 rounded-lg hover:bg-orange-100 transition-colors text-sm font-medium">
                     <ScanLine className="w-4 h-4" />
                     Serwis skanerów Zebra
                   </Link>

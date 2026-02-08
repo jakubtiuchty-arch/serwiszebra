@@ -571,11 +571,11 @@ export default function FAQPage() {
               {' • '}
               <Link href="/blog" className="text-blue-600 hover:underline">Blog</Link>
               {' • '}
-              <Link href="/drukarki" className="text-blue-600 hover:underline">Serwis Drukarek</Link>
+              <Link href="/serwis-drukarek-zebra" className="text-blue-600 hover:underline">Serwis Drukarek</Link>
               {' • '}
-              <Link href="/terminale" className="text-blue-600 hover:underline">Serwis Terminali</Link>
+              <Link href="/serwis-terminali-zebra" className="text-blue-600 hover:underline">Serwis Terminali</Link>
               {' • '}
-              <Link href="/skanery" className="text-blue-600 hover:underline">Serwis Skanerów</Link>
+              <Link href="/serwis-skanerow-zebra" className="text-blue-600 hover:underline">Serwis Skanerów</Link>
             </p>
           </div>
         </section>
