@@ -27751,6 +27751,626 @@ Drukarka musi mieć kartę WiFi (P1083320-037x). Konfiguracja: **Menu** > **Netw
 
 👉 **[Serwis Drukarek Zebra — naprawy, konserwacja, części](/drukarki)**
 `
+  },
+
+  // NOWY WPIS: Serwis drukarki Zebra ZT111
+  {
+    slug: 'serwis-drukarki-zebra-zt111-diagnostyka-naprawa',
+    title: 'Serwis drukarki Zebra ZT111 — diagnostyka, naprawa i kalibracja [2026]',
+    excerpt: 'Kompletny przewodnik serwisowy drukarki przemysłowej Zebra ZT111. Diagnostyka 5 diod LED, 9 schematów naprawczych krok po kroku, kalibracja czujników, regulacja docisku głowicy, konserwacja i części zamienne. Cennik napraw ZT111. Bezpłatna diagnostyka.',
+    coverImage: '/blog/serwis-drukarki-zebra-zt111-diagnostyka-naprawa.jpeg',
+    coverImageAlt: 'Serwis drukarki przemysłowej Zebra ZT111 — profesjonalna diagnostyka i naprawa z wymianą głowicy, kalibracją czujników i konserwacją',
+    author: {
+      name: 'Krzysztof Wójcik',
+      role: 'Kierownik Serwisu TAKMA'
+    },
+    publishedAt: '2026-02-08',
+    readingTime: 20,
+    deviceType: 'drukarki',
+    subDeviceType: 'etykiet',
+    category: 'troubleshooting',
+    tags: ['ZT111', 'drukarka przemysłowa', 'serwis drukarki zebra', 'naprawa ZT111', 'diagnostyka', 'drukarka etykiet', 'ZT220', 'kalibracja', 'etykiety logistyczne', 'Ethernet', 'WiFi', 'ZPL', 'ZT100 Series'],
+    seo: {
+      metaTitle: 'Serwis drukarki Zebra ZT111 — diagnostyka, naprawa i kalibracja [2026]',
+      metaDescription: 'Drukarka Zebra ZT111 nie drukuje? Diagnostyka 5 diod LED, 9 schematów naprawczych krok po kroku, kalibracja czujników, błędy MEDIA OUT, RIBBON OUT, HEAD OPEN. Cennik napraw ZT111. Bezpłatna diagnostyka.',
+      keywords: [
+        'serwis drukarki zebra zt111', 'serwis zebra zt111', 'naprawa zebra zt111', 'naprawa zt111',
+        'naprawa drukarki przemysłowej zebra', 'serwis zt111',
+        'zebra zt111 nie drukuje', 'zebra zt111 błąd', 'zebra zt111 media out', 'zebra zt111 ribbon out',
+        'zebra zt111 head open', 'zebra zt111 head over temp',
+        'zebra zt111 blady wydruk', 'zebra zt111 białe linie', 'zebra zt111 puste etykiety',
+        'zebra zt111 nie wykrywa etykiet', 'zebra zt111 cutter error', 'zebra zt111 błąd gilotyny',
+        'zebra zt111 printhead shutdown', 'zebra zt111 head element out',
+        'zebra zt111 migająca dioda', 'zebra zt111 status czerwony', 'zebra zt111 status żółty',
+        'zebra zt111 supplies miga', 'zebra zt111 network miga', 'zebra zt111 pause świeci',
+        'zebra zt111 kalibracja', 'kalibracja zebra zt111', 'kalibracja czujników zt111',
+        'zebra zt111 reset', 'reset fabryczny zt111', 'zebra zt111 ustawienia fabryczne',
+        'zebra zt111 reset sieci', 'zebra zt111 ^JUF', 'zebra zt111 ^JUN',
+        'wymiana głowicy zt111', 'głowica zt111 cena', 'głowica zebra zt111', 'głowica 203 dpi zt111', 'głowica 300 dpi zt111',
+        'wymiana wałka zt111', 'wałek dociskowy zt111', 'wymiana wałka dociskowego zt111',
+        'ile kosztuje naprawa zt111', 'cennik napraw zt111', 'cennik serwisu zt111',
+        'zebra zt111 sterowniki', 'sterowniki zt111 windows 11', 'sterowniki zt111 windows 10',
+        'zebra zt111 ethernet', 'zebra zt111 wifi', 'zebra zt111 sieć', 'zebra zt111 network error',
+        'zebra zt111 drukuje co drugą etykietę', 'zebra zt111 wolno drukuje',
+        'zebra zt111 docisk głowicy', 'zebra zt111 regulacja głowicy', 'zebra zt111 printhead pressure',
+        'zebra zt111 ribbon tension', 'zebra zt111 napięcie taśmy',
+        'zebra zt111 sensor profile', 'zebra zt111 profil czujnika',
+        'zebra zt111 konserwacja', 'zebra zt111 czyszczenie', 'zebra zt111 maintenance',
+        'zebra zt111 części zamienne', 'zebra zt111 part number',
+        'zebra zt111 vs zt231', 'zebra zt111 vs zt230', 'zebra zt111 vs zt211',
+        'zamiennik zebra zt220', 'następca zt220',
+        'zebra zt111 specyfikacja', 'zebra zt111 dane techniczne',
+        'zebra zt111 cena', 'drukarka zebra zt111', 'drukarka etykiet zebra zt111',
+        'zebra zt111 drukarka przemysłowa', 'zebra zt100 series',
+        'zebra zt111 jak skalibrować', 'zebra zt111 instrukcja obsługi',
+        'zebra zt111 konfiguracja', 'zebra zt111 ustawienia druku'
+      ],
+      faqSchema: [
+        {
+          question: 'Drukarka Zebra ZT111 nie włącza się — co zrobić?',
+          answer: 'Sprawdź podłączenie do zasilania i pozycję włącznika. Jeśli drukarka nie reaguje: zweryfikuj kabel zasilający, upewnij się, że panel sterowania jest poprawnie podłączony, sprawdź zasilacz (P/N P1123335-023) i kable elektroniki (P/N P1123335-028). Jeśli to nie pomoże — konieczna jest wymiana zasilacza lub płyty głównej (MLB P/N P1123335-021). Bezpłatna diagnostyka: serwis-zebry.pl/#formularz'
+        },
+        {
+          question: 'Co oznaczają diody STATUS i SUPPLIES na drukarce Zebra ZT111?',
+          answer: 'ZT111 ma 5 diod diagnostycznych: STATUS (zielona=gotowa, żółta=przegrzanie głowicy, czerwona=błąd), PAUSE (żółta=pauza), DATA (miga=transfer danych), SUPPLIES (czerwona ciągła=brak mediów, migająca czerwona=brak taśmy, migająca żółta=taśma załadowana w trybie DT), NETWORK (zielona=100Base-T, żółta=10Base-T, czerwona=błąd). Szczegółowa diagnostyka: serwis-zebry.pl'
+        },
+        {
+          question: 'Jak skalibrować czujniki w drukarce Zebra ZT111?',
+          answer: 'Auto kalibracja: ustaw POWER UP ACTION lub HEAD CLOSE ACTION na CALIBRATE. Ręczna kalibracja: przytrzymaj PAUSE + CANCEL przez 2 sekundy, otwórz głowicę, wysuń ok. 150 mm mediów i odklej etykiety zostawiając sam podkład, zamknij głowicę, naciśnij PAUSE. Po pierwszej fazie załaduj ponownie media z etykietą na czujniku, zamknij głowicę, naciśnij PAUSE. Po zakończeniu naciśnij PAUSE ponownie.'
+        },
+        {
+          question: 'Ile kosztuje naprawa drukarki Zebra ZT111?',
+          answer: 'Cennik napraw ZT111: diagnostyka — bezpłatna, czyszczenie/konserwacja — od 200 zł, wymiana głowicy 203 dpi — od 800 zł, wymiana głowicy 300 dpi — od 1100 zł, naprawa płyty głównej — od 700 zł, naprawa gilotyny — od 400 zł, wymiana wałka dociskowego — od 300 zł. Czas realizacji 1-3 dni robocze. Formularz: serwis-zebry.pl/#formularz'
+        },
+        {
+          question: 'Jak zresetować drukarkę Zebra ZT111 do ustawień fabrycznych?',
+          answer: 'Trzy metody: (1) Klawisze: przytrzymaj FEED + PAUSE podczas włączania drukarki — reset fabryczny. (2) Komenda ZPL: wyślij ^JUF (reset fabryczny) lub ^JUN (reset sieci). (3) Strona WWW drukarki: View and Modify Printer Settings > Restore Default Configuration. Reset sieci: CANCEL + PAUSE podczas włączania.'
+        },
+        {
+          question: 'Drukarka Zebra ZT111 nie łączy się z siecią — jak naprawić?',
+          answer: 'Ethernet: sprawdź diodę NETWORK (zgaszona=brak połączenia, zielona=100Base-T OK, żółta=10Base-T, czerwona=błąd). Zresetuj sieć: CANCEL + PAUSE przy włączaniu lub wyślij ^JUN. Sprawdź kabel i konfigurację IP. WiFi: NETWORK miga czerwono=łączenie z siecią, miga żółto=uwierzytelnianie, zielona ciągła=połączono (silny sygnał), miga zielono=słaby sygnał. Sprawdź antenę i konfigurację SSID.'
+        },
+        {
+          question: 'Czym różni się Zebra ZT111 od ZT231?',
+          answer: 'ZT111 to podstawowy model z rodziny ZT: panel sterowania z 3 przyciskami i 5 diodami LED (bez wyświetlacza LCD ani ekranu dotykowego), plastikowa obudowa, brak obsługi RFID i brak interfejsu aplikatora. ZT231 ma kolorowy ekran dotykowy, metalową obudowę, opcję RFID (ZT231R), interfejs aplikatora i zdalne zarządzanie Link-OS. Oba modele mają identyczny mechanizm druku, głowice i prędkość drukowania.'
+        },
+        {
+          question: 'Jak wyczyścić głowicę drukującą w Zebra ZT111?',
+          answer: 'Otwórz pokrywę mediów, podnieś dźwignię zamka głowicy. Wyjmij taśmę i media. Użyj zestawu Zebra Preventive Maintenance Kit (P/N 47362) lub patyczka nasączonego 99,7% alkoholem izopropylowym. Przetrzyj brązowy pasek głowicy od końca do końca. Wyczyść też wałek dociskowy obracając go ręcznie. Częstotliwość: co rolkę etykiet (tryb DT) lub co rolkę taśmy (tryb TT).'
+        },
+        {
+          question: 'Jakie przyciski ma panel sterowania Zebra ZT111?',
+          answer: 'ZT111 ma uproszczony panel sterowania z 3 przyciskami: PAUSE (wstrzymanie/wznowienie drukowania), FEED (podanie jednej etykiety) i CANCEL (anulowanie zadań druku). Nad przyciskami znajduje się 5 diod LED: STATUS, PAUSE, DATA, SUPPLIES i NETWORK. Nie ma wyświetlacza LCD — wszystkie ustawienia konfiguruje się przez komendy ZPL lub stronę WWW drukarki.'
+        },
+        {
+          question: 'Jak wydrukować etykietę konfiguracyjną na Zebra ZT111?',
+          answer: 'Wyłącz drukarkę. Przytrzymaj przycisk CANCEL i włącz drukarkę. Trzymaj CANCEL aż do zgaśnięcia pierwszej diody na panelu sterowania. Drukarka wydrukuje etykietę konfiguracyjną z wszystkimi parametrami, a następnie etykietę konfiguracji sieci z adresem IP, MAC i innymi ustawieniami sieciowymi.'
+        }
+      ]
+    },
+    content: `> **🎯 Szybka odpowiedź:** Drukarka **Zebra ZT111** nie drukuje? Sprawdź **5 diod LED** (STATUS, PAUSE, DATA, SUPPLIES, NETWORK) — czerwona STATUS + czerwona SUPPLIES = **brak mediów**, czerwona STATUS + migająca SUPPLIES = **brak taśmy**. Wykonaj kalibrację: przytrzymaj **PAUSE + CANCEL** przez 2 sekundy. Jeśli to nie pomoże — [wyślij drukarkę do bezpłatnej diagnostyki](https://www.serwis-zebry.pl/#formularz).
+
+**Zebra ZT111** to ekonomiczna drukarka przemysłowa z rodziny ZT100 Series — następca popularnego modelu **ZT220**. Mimo przystępnej ceny oferuje ten sam mechanizm druku co droższa ZT231, rozdzielczość **203 lub 300 dpi** i prędkość do **254 mm/s (10 cali/s)**. Panel sterowania to **3 przyciski fizyczne** (PAUSE, FEED, CANCEL) oraz **5 diod LED** — bez wyświetlacza LCD.
+
+---
+
+## Panel sterowania — 3 przyciski i 5 diod LED
+
+W przeciwieństwie do ZT231 z ekranem dotykowym, **ZT111 ma uproszczony panel sterowania** z trzema przyciskami fizycznymi:
+
+| Przycisk | Funkcja | Ikona |
+|----------|---------|-------|
+| **PAUSE** | Wstrzymanie/wznowienie drukowania | ⏸ |
+| **FEED** | Podanie jednej etykiety | ⚙ |
+| **CANCEL** | Anulowanie zadań druku | ✕ |
+
+Nad przyciskami znajduje się **5 diod LED**: STATUS, PAUSE, DATA, SUPPLIES i NETWORK. Kolory i stany diod informują o bieżącym stanie drukarki — to jedyny sposób diagnostyki bez podłączenia do komputera.
+
+### Kluczowe kombinacje przycisków
+
+| Kombinacja | Kiedy | Efekt |
+|------------|-------|-------|
+| **CANCEL** (przytrzymaj przy włączaniu) | Włączanie drukarki | Wydruk etykiety konfiguracyjnej + etykiety sieci |
+| **PAUSE** (przytrzymaj przy włączaniu) | Włączanie drukarki | Test PAUSE (test mechanizmu druku) |
+| **FEED** (przytrzymaj przy włączaniu) | Włączanie drukarki | Test FEED (ocena jakości kodów kreskowych) |
+| **FEED + PAUSE** (przytrzymaj przy włączaniu) | Włączanie drukarki | **Reset do ustawień fabrycznych** |
+| **CANCEL + PAUSE** (przytrzymaj przy włączaniu) | Włączanie drukarki | **Reset ustawień sieci** |
+| **PAUSE + CANCEL** (przytrzymaj 2 sek.) | Drukarka włączona | **Ręczna kalibracja czujników** |
+
+> ⚠️ **Uwaga:** ZT111 nie ma wyświetlacza — wszystkie ustawienia zaawansowane konfiguruje się przez **komendy ZPL**, **stronę WWW drukarki** (jeśli jest podłączona do sieci) lub **Zebra Setup Utilities**.
+
+---
+
+## Diagnostyka diod LED — tabela stanów
+
+### Stany podstawowe
+
+| Dioda STATUS | Pozostałe diody | Znaczenie |
+|-------------|----------------|-----------|
+| 🟢 Zielona ciągła | Żółte przez 2 sek. po włączeniu | ✅ Drukarka gotowa do pracy |
+| 🟡 Żółta ciągła | — | ⚠️ Głowica przegrzana — poczekaj na ostygnięcie |
+| 🟡 Migająca żółta | — | ⚠️ Głowica niedogrzana LUB przegrzanie płyty głównej/zasilacza |
+| 🔴 Czerwona ciągła | SUPPLIES 🔴 czerwona ciągła | 🛑 **Brak mediów (MEDIA OUT)** — załaduj etykiety |
+| 🔴 Czerwona ciągła | SUPPLIES 🔴 migająca czerwona | 🛑 **Brak taśmy (RIBBON OUT)** — załaduj taśmę |
+| 🔴 Czerwona ciągła | PAUSE 🟡 żółta ciągła | 🛑 **Głowica otwarta (HEAD OPEN)** — zamknij głowicę |
+| 🔴 Czerwona ciągła | Sama | 🛑 **Błąd gilotyny** — ostrze w ścieżce mediów |
+| 🟡 Żółta ciągła | SUPPLIES 🟡 migająca żółta | ⚠️ Tryb DT, ale taśma załadowana — wyjmij taśmę lub zmień tryb |
+| 🔴 Migająca czerwona | — | 🛑 Nie można odczytać rozdzielczości głowicy |
+| 🔴 Czerwona | PAUSE 🔴 + DATA 🔴 | 🛑 Zainstalowano nieoryginalną głowicę — wymień na oryginalną Zebra |
+
+### Dioda PAUSE
+
+| Stan | Znaczenie |
+|------|-----------|
+| 🟡 Żółta ciągła | Drukarka wstrzymana — naciśnij PAUSE aby wznowić |
+
+### Dioda NETWORK — połączenie Ethernet
+
+| Stan | Znaczenie |
+|------|-----------|
+| ⚫ Zgaszona | Brak połączenia Ethernet |
+| 🟢 Zielona ciągła | Połączenie 100 Base-T aktywne |
+| 🟡 Żółta ciągła | Połączenie 10 Base-T aktywne |
+| 🔴 Czerwona ciągła | Błąd Ethernet — drukarka nie jest połączona z siecią |
+
+### Dioda NETWORK — połączenie WiFi (opcjonalne)
+
+| Stan | Znaczenie |
+|------|-----------|
+| ⚫ Zgaszona → 🔴 miga → 🟡 miga | Wykryto moduł WiFi, łączenie z siecią (miga czerwono), uwierzytelnianie (miga żółto) |
+| 🟢 Zielona ciągła | Połączono z siecią WiFi — silny sygnał |
+| 🟢 Migająca zielona | Połączono z siecią WiFi — **słaby sygnał** |
+| 🔴 Czerwona ciągła | Błąd WiFi — drukarka nie jest połączona z siecią |
+
+---
+
+## Schematy naprawcze krok po kroku
+
+Poniższe procedury diagnostyczne prowadzą przez systematyczną eliminację przyczyn awarii. Wykonuj kroki w podanej kolejności — każdy następny zakłada, że poprzedni nie rozwiązał problemu.
+
+### Schemat 1: Brak zasilania lub brak reakcji drukarki
+
+1. Sprawdź, czy drukarka jest **włączona** (włącznik w pozycji I)
+2. Zweryfikuj podłączenie **kabla zasilającego** do drukarki i gniazdka
+3. Sprawdź, czy **panel sterowania** jest poprawnie podłączony do płyty głównej
+4. Wymień **zasilacz** (P/N P1123335-023)
+5. Wymień **kable elektroniki** (P/N P1123335-028)
+6. Wymień **płytę główną MLB** (P/N P1123335-021)
+
+### Schemat 2: Drukarka nie drukuje lub drukuje puste etykiety
+
+1. Sprawdź, czy media są **prawidłowo załadowane** i przechodzą przez czujnik mediów
+2. Wydrukuj **etykietę konfiguracyjną** (CANCEL przy włączaniu) — jeśli się drukuje, drukarka działa
+3. Sprawdź, czy **taśma** (ribbon) jest załadowana prawidłowo i nie jest zużyta (tryb TT)
+4. Wydrukuj **profil czujnika** (komenda ZPL: \`~JG\`) — sprawdź czy czujnik wykrywa przerwy między etykietami
+5. Wykonaj **kalibrację czujników** (PAUSE + CANCEL przez 2 sekundy)
+6. Sprawdź ustawienie **typu mediów** (ciągłe vs z przerwami vs z czarną linią)
+7. Wymień **czujnik mediów** (P/N P1123335-030) jeśli profil nie pokazuje żadnych zmian
+8. Wymień **głowicę drukującą** jeśli etykieta konfiguracyjna ma białe linie
+
+### Schemat 3: Słaba jakość wydruku
+
+1. Wyczyść **głowicę drukującą** zestawem Zebra Preventive Maintenance Kit (P/N 47362) lub patyczkiem z 99,7% alkoholem izopropylowym
+2. Wyczyść **wałek dociskowy** — obracaj ręcznie i przecieraj
+3. Sprawdź ustawienie **ciemności wydruku** (darkness) — zwiększ jeśli za jasny, zmniejsz jeśli rozmazany
+4. Sprawdź **prędkość druku** — zmniejszenie poprawia jakość
+5. Sprawdź ustawienia **docisku głowicy** (pokrętła regulacji)
+6. Sprawdź czy taśma jest **co najmniej tak szeroka jak media** — węższa taśma odsłania elementy głowicy na materiał ścierny
+7. Wykonaj test **PAUSE** (PAUSE przy włączaniu) — sprawdź wydruk pod kątem brakujących linii
+8. Jeśli brakuje linii — wymień **głowicę drukującą** (P/N P1123335-012 dla 203 dpi / P1123335-013 dla 300 dpi)
+
+### Schemat 4: Problemy z gilotyną (opcja Cutter)
+
+1. Sprawdź, czy media są prawidłowo poprowadzone przez moduł gilotyny
+2. Sprawdź, czy ostrze gilotyny **nie jest zablokowane** w ścieżce mediów
+3. Wyczyść ostrze gilotyny — **wyłącz drukarkę i odłącz zasilanie** przed czyszczeniem
+4. **Nasmaruj** ostrze olejem silikonowym lub PTFE
+5. Sprawdź, czy gilotyna jest odpowiednio zamocowana (**śruba mocująca** i podkładka)
+6. Wymień **moduł gilotyny** (P/N P1123335-041) jeśli nadal nie tnie prawidłowo
+
+### Schemat 5: Problemy z odrywaniem/odklejaniem (opcja Peel)
+
+1. Sprawdź, czy **dźwignia mechanizmu odklejania** jest prawidłowo zamknięta
+2. Sprawdź, czy podkład (liner) jest prawidłowo poprowadzony **przez wałki mechanizmu odklejania**
+3. Wyczyść **wałek dociskowy mechanizmu odklejania** patyczkiem z alkoholem
+4. Wyczyść **listwę odrywającą** — usuń nagromadzony klej
+5. Sprawdź **czujnik etykiety** (Take Label Sensor) — jeśli nie wykrywa pobrania etykiety
+6. Wymień **czujnik etykiety** (P/N P1123335-033) lub **moduł odklejania** (P/N P1123335-042)
+
+### Schemat 6: Problemy z komunikacją (host → drukarka)
+
+1. Sprawdź **kable połączeniowe** (USB, RS-232, Ethernet)
+2. Sprawdź, czy **sterowniki** są zainstalowane ([pobierz najnowsze sterowniki](/sterowniki))
+3. Uruchom **test diagnostyki komunikacji** — włącz DIAGNOSTICS MODE, wyślij dane z hosta, sprawdź kody błędów: FE (błąd ramki), OE (przepełnienie), PE (błąd parzystości), NE (szum)
+4. Sprawdź ustawienia **portu szeregowego** (prędkość baud, bity danych, parzystość, protokół) — muszą być identyczne po obu stronach
+5. Sprawdź, czy drukarka nie jest w **trybie pauzy**
+6. Wymień **kabel komunikacyjny** lub wypróbuj **inny port/interfejs**
+
+### Schemat 7: Problemy z taśmą (ribbon)
+
+1. Sprawdź, czy taśma jest **prawidłowo załadowana** — strona powleczona tuszem musi być skierowana do etykiet
+2. Sprawdź, czy taśma jest nawinięta na właściwą szpulę (Supply vs Take-Up)
+3. Sprawdź **napięcie taśmy** — za małe powoduje fałdy, za duże może rwać taśmę
+4. Sprawdź **czujnik taśmy** (Ribbon Sensor) — wydrukuj profil czujnika (\`~JG\`) i zweryfikuj odczyty
+5. Jeśli czujnik taśmy nie wykrywa taśmy mimo jej obecności — **wyczyść czujnik taśmy** dmuchnięciem sprężonym powietrzem
+6. Wymień **czujnik taśmy** (P/N P1123335-031) jeśli problem się powtarza
+
+### Schemat 8: Błędy sieci Ethernet
+
+1. Sprawdź diodę **NETWORK** — zgaszona oznacza brak połączenia fizycznego
+2. Sprawdź **kabel Ethernet** — wypróbuj inny kabel
+3. Sprawdź, czy switch/router ma aktywne połączenie na danym porcie
+4. **Zresetuj ustawienia sieci** — przytrzymaj CANCEL + PAUSE przy włączaniu lub wyślij \`^JUN\`
+5. Wydrukuj **etykietę konfiguracji sieci** (CANCEL przy włączaniu) — sprawdź adres IP, maskę, bramę
+6. Sprawdź, czy adres IP nie jest w konflikcie z innym urządzeniem w sieci
+7. Wymień **kartę Ethernet** (P/N P1123335-035) jeśli dioda NETWORK nie reaguje
+
+### Schemat 9: Błędy sieci WiFi (opcjonalny moduł bezprzewodowy)
+
+1. Sprawdź, czy drukarka rozpoznaje **moduł WiFi** — dioda NETWORK powinna migać po włączeniu
+2. Jeśli nie: wyjmij i ponownie zainstaluj moduł WiFi
+3. Sprawdź, czy **antena** jest dokręcona
+4. **Zresetuj konfigurację WiFi** — przywróć ustawienia domyślne modułu i skonfiguruj ponownie sieć bezprzewodową
+5. Sprawdź **siłę sygnału** — NETWORK migająca zielona = słaby sygnał, przenieś drukarkę bliżej punktu dostępowego
+6. Jeśli moduł WiFi nie łączy się po rekonfiguracji — wymień **moduł WiFi** (P/N P1083320-037A/B/C w zależności od regionu)
+
+---
+
+## Kalibracja czujników
+
+Kalibrację należy wykonać po:
+- Zmianie rozmiaru lub typu etykiet
+- Zmianie taśmy (ribbon)
+- Przeskakiwaniu etykiet
+- Dryfowaniu obrazu (przesunięcie w pionie lub poziomie)
+- Niewykrywaniu taśmy po jej załadowaniu
+
+### Auto kalibracja
+
+Ustaw parametr **POWER UP ACTION** lub **HEAD CLOSE ACTION** na jedną z opcji:
+- **CALIBRATE** — pełna kalibracja: regulacja poziomów czujników, progów, pomiar długości etykiety, przesunięcie do następnej przerwy
+- **SHORT CAL** — skrócona kalibracja: ustawia progi mediów i przerw bez regulacji wzmocnienia czujnika
+
+### Ręczna kalibracja — kompletna procedura
+
+1. Przytrzymaj **PAUSE + CANCEL** przez 2 sekundy — diody STATUS i PAUSE migną żółto raz, potem PAUSE zacznie migać żółto
+2. **Otwórz głowicę** (podnieś dźwignię zamka głowicy)
+3. Wysuń ok. **150 mm mediów** z drukarki
+4. **Odklej etykiety** z wysuniętego odcinka — zostaw sam podkład (liner)
+5. Wciągnij media tak, aby **sam podkład** znajdował się między czujnikami mediów
+6. Przesuń **taśmę** (jeśli jest) w prawo, z dala od czujników
+7. **Zamknij głowicę**
+8. Naciśnij **PAUSE** — zaczyna się kalibracja. PAUSE gaśnie, SUPPLIES miga żółto. Zakończenie: SUPPLIES gaśnie, PAUSE świeci żółto
+9. **Otwórz głowicę** ponownie
+10. Przesuń **taśmę** z powrotem na miejsce i naciągnij ją
+11. Wciągnij media tak, aby **etykieta** znajdowała się na czujnikach
+12. **Zamknij głowicę**
+13. Naciśnij **PAUSE** — druga faza kalibracji. SUPPLIES miga żółto. Po zakończeniu SUPPLIES gaśnie
+14. Naciśnij **PAUSE** ponownie — drukarka wznawia pracę
+15. Naciśnij **FEED** — sprawdź czy etykieta podaje się na właściwą pozycję
+
+---
+
+## Regulacja docisku głowicy
+
+Nieprawidłowy docisk głowicy powoduje:
+- **Za słaby docisk** → blady wydruk, nierównomierne barwienie
+- **Za mocny docisk** → przedwczesne zużycie głowicy, marszczenie taśmy
+- **Nierówny docisk** → wydruk ciemniejszy po jednej stronie
+
+ZT111 (podobnie jak ZT231) posiada **dwa pokrętła regulacji docisku** — wewnętrzne i zewnętrzne — z zakresem **1-4** w krokach po 0,5.
+
+### Zalecane ustawienia startowe
+
+| Szerokość etykiety | Pokrętło wewnętrzne | Pokrętło zewnętrzne |
+|---------------------|----------------------|----------------------|
+| ≥ 89 mm (3,5") | 2 | 2 |
+| 76 mm (3") | 2,5 | 1,5 |
+| 51 mm (2") | 3 | 1 |
+| 25 mm (1") | 4 | 1 |
+
+### Jak korygować dryfowanie
+
+- Etykiety dryfują **w lewo** → zwiększ **zewnętrzne** pokrętło
+- Etykiety dryfują **w prawo** → zwiększ **wewnętrzne** pokrętło
+- Wydruk za jasny **po lewej stronie** → zwiększ **wewnętrzne** pokrętło
+- Wydruk za jasny **po prawej stronie** → zwiększ **zewnętrzne** pokrętło
+
+---
+
+## Regulacja napięcia taśmy
+
+Nieprawidłowe napięcie taśmy powoduje fałdy na wydruku lub zrywanie taśmy.
+
+Ustawienia dostępne przez komendy ZPL lub stronę WWW drukarki — zakres regulacji pozwala dostosować napięcie do szerokości i typu taśmy.
+
+**Wskazówki:**
+- Zbyt małe napięcie → taśma marszczy się, pojawiają się pionowe fałdy na wydruku
+- Zbyt duże napięcie → taśma może się rwać lub przesuwać na szpuli
+- Po zmianie taśmy na inną szerokość — sprawdź napięcie
+
+---
+
+## Reset do ustawień fabrycznych
+
+### Metoda 1: Kombinacja przycisków
+
+| Reset | Kombinacja | Opis |
+|-------|------------|------|
+| **Fabryczny** | Przytrzymaj **FEED + PAUSE** przy włączaniu | Przywraca wszystkie ustawienia do domyślnych (oprócz ustawień sieci) |
+| **Sieci** | Przytrzymaj **CANCEL + PAUSE** przy włączaniu | Reinicjalizuje moduł sieciowy (Ethernet/WiFi) |
+
+### Metoda 2: Komendy ZPL
+
+| Komenda | Efekt |
+|---------|-------|
+| \`^JUF\` | Reset fabryczny |
+| \`^JUN\` | Reset ustawień sieci |
+| \`^JUR\` | Przywrócenie ostatnio zapisanych ustawień |
+
+### Metoda 3: Strona WWW drukarki
+
+Jeśli drukarka jest podłączona do sieci:
+- **Reset fabryczny:** View and Modify Printer Settings → Restore Default Configuration
+- **Reset sieci:** Print Server Settings → Reset Print Server
+- **Ostatnie zapisane:** View and Modify Printer Settings → Restore Saved Configuration
+
+> ⚠️ **Uwaga:** Reset fabryczny kasuje WSZYSTKIE ustawienia (ciemność, prędkość, typ mediów itd.) — po resecie trzeba je ponownie skonfigurować. Ustawienia sieci NIE są resetowane przy resecie fabrycznym.
+
+---
+
+## Konserwacja — harmonogram i procedury
+
+Regularna konserwacja wydłuża żywotność głowicy drukującej i zapobiega awariom.
+
+### Harmonogram czyszczenia
+
+| Element | Metoda | Częstotliwość |
+|---------|--------|--------------|
+| **Głowica drukująca** | Patyczek z alkoholem / zestaw P/N 47362 | Co rolkę etykiet (DT) lub co rolkę taśmy (TT) |
+| **Wałek dociskowy** | Patyczek z alkoholem | Jak głowica |
+| **Czujnik mediów** | Sprężone powietrze | Jak głowica |
+| **Czujnik taśmy** | Sprężone powietrze | Jak głowica |
+| **Ścieżka mediów** | Patyczek z alkoholem | Jak głowica |
+| **Ścieżka taśmy** | Patyczek z alkoholem | Jak głowica |
+| **Wałek mechanizmu odklejania** | Patyczek z alkoholem | Jak głowica |
+| **Moduł gilotyny (media ciągłe)** | Patyczek z alkoholem | Co rolkę mediów |
+| **Moduł gilotyny (etykiety na podkładzie)** | Alkohol + sprężone powietrze | Co 2-3 rolki |
+| **Listwa odrywająca** | Patyczek z alkoholem | Raz w miesiącu |
+| **Czujnik etykiety (Take Label)** | Sprężone powietrze | Co 6 miesięcy |
+
+### Czyszczenie głowicy i wałka dociskowego
+
+1. Otwórz pokrywę mediów
+2. Podnieś **dźwignię zamka głowicy** — głowica się podniesie
+3. Wyjmij taśmę i media
+4. Przetrzyj **brązowy pasek głowicy** od końca do końca patyczkiem nasączonym 99,7% alkoholem izopropylowym. **Uwaga:** głowica może być gorąca!
+5. Obracając ręcznie **wałek dociskowy**, przetrzyj go dokładnie
+6. Poczekaj na odparowanie alkoholu
+7. Załaduj ponownie taśmę i media, zamknij głowicę
+8. Naciśnij **PAUSE** aby wznowić drukowanie
+
+> 💡 **Wskazówka:** Jeśli czyszczenie alkoholem nie poprawia jakości, użyj folii czyszczącej Save-A-Printhead — usuwa zanieczyszczenia bez uszkodzenia głowicy.
+
+### Czyszczenie gilotyny
+
+**Ważne:** Przed czyszczeniem gilotyny **wyłącz drukarkę i odłącz zasilanie!**
+
+1. Otwórz pokrywę mediów, wyjmij media z gilotyny
+2. Odkręć śrubę mocującą i zdejmij osłonę gilotyny
+3. Jeśli ostrze nie jest w pełni odsłonięte — obróć śrubę silnika gilotyny
+4. Przetrzyj **obie powierzchnie tnące** patyczkiem z 90% alkoholem izopropylowym
+5. Po odparowaniu — nasącz czysty patyczek **olejem silikonowym lub PTFE**
+6. Nałóż równą warstwę oleju na obie powierzchnie ostrza. **Nie dopuść do kontaktu oleju z głowicą lub wałkiem!**
+7. Załóż osłonę, zamocuj śrubę
+8. Podłącz zasilanie i włącz — ostrze wróci na pozycję roboczą
+
+### Smarowanie
+
+Jedyne miejsce w drukarce wymagające smarowania to **moduł gilotyny**. Żadnych innych części nie należy smarować — nieodpowiednie środki mogą uszkodzić wykończenie i mechanizm drukarki.
+
+---
+
+## Etykiety konfiguracyjne i testy diagnostyczne
+
+### Etykieta konfiguracyjna
+
+Zawiera wszystkie bieżące parametry drukarki: ciemność, prędkość, tryb druku, typ mediów, szerokość, długość etykiety, ustawienia komunikacji, wersję firmware, liczniki i wiele więcej.
+
+**Jak wydrukować:** Wyłącz drukarkę → przytrzymaj **CANCEL** → włącz drukarkę → trzymaj CANCEL aż do zgaśnięcia pierwszej diody.
+
+### Test PAUSE (test mechanizmu druku)
+
+Sprawdza, czy wszystkie elementy głowicy działają prawidłowo.
+
+**Jak uruchomić:** Wyłącz → przytrzymaj **PAUSE** → włącz → trzymaj PAUSE aż do zgaśnięcia pierwszej diody.
+
+Drukarka wydrukuje 15 etykiet testowych z najniższą prędkością, a następnie wstrzyma się. Każde naciśnięcie:
+- **PAUSE** → kolejne 15 etykiet
+- **CANCEL** → przełącza tryb testu (różne prędkości i ilości)
+
+Wyjście z testu: przytrzymaj **CANCEL**.
+
+### Profil czujnika
+
+Komenda ZPL \`~JG\` drukuje profil odczytów czujników. Pozwala zweryfikować:
+- Czy czujnik **wykrywa przerwy** między etykietami (powinny być widoczne szpilki na profilu)
+- Czy **czujnik taśmy** prawidłowo wykrywa taśmę
+- Czy progi detekcji są ustawione prawidłowo
+
+---
+
+## ZT111 vs ZT231 — porównanie modeli
+
+| Cecha | ZT111 | ZT231 |
+|-------|-------|-------|
+| **Panel sterowania** | 3 przyciski + 5 diod LED | Kolorowy ekran dotykowy + 5 diod LED |
+| **Obudowa** | Metalowa rama + **plastikowe** elementy | Metalowa rama + **metalowe** elementy |
+| **Zegar czasu rzeczywistego (RTC)** | Brak | Wbudowany |
+| **Zdalne zarządzanie** | Brak (tylko strona WWW) | Link-OS z kreatorami i filmikami instruktażowymi |
+| **Obsługa RFID** | ❌ Niedostępna | ✅ Opcjonalna (ZT231R) |
+| **Interfejs aplikatora** | ❌ Niedostępny | ✅ Opcjonalny |
+| **Liner Take-Up (LTU)** | ❌ Niedostępny | ✅ Opcjonalny |
+| **Prędkość druku (203 dpi)** | Do 254 mm/s (10 ips) | Do 254 mm/s (10 ips) |
+| **Rozdzielczość** | 203 lub 300 dpi | 203 lub 300 dpi |
+| **Głowica drukująca** | Identyczna (E3 Element Energy Equalizer) | Identyczna |
+| **Mechanizm druku** | Identyczny | Identyczny |
+| **Gilotyna / Odklejanie** | ✅ Opcjonalne | ✅ Opcjonalne |
+| **Łączność** | USB 2.0, RS-232, Ethernet, WiFi (opcja) | USB 2.0, RS-232, Ethernet, WiFi (opcja) |
+| **Cena orientacyjna** | ~1 400–1 950 zł netto | ~2 500–3 500 zł netto |
+| **Następca modelu** | ZT220 | ZT230 |
+
+**Podsumowanie:** ZT111 oferuje **identyczny mechanizm druku** jak ZT231 — tę samą głowicę, prędkość i rozdzielczość. Różnica to przede wszystkim panel sterowania (przyciski zamiast ekranu dotykowego), plastikowa obudowa i brak opcji RFID/aplikatora. Dla firm, które nie potrzebują ekranu dotykowego i zdalnego zarządzania — **ZT111 to najlepsza wartość w ofercie Zebra**.
+
+---
+
+## Części zamienne — numery katalogowe
+
+### Obudowa i panel sterowania
+
+| Część | Numer katalogowy |
+|-------|-----------------|
+| Panel sterowania ZT111 | **P1123335-001** |
+| Pokrywa elektroniki ZT111 | **P1037990-005** |
+| Pokrywa mediów ZT111 | **P1123335-007** |
+| Dolne panele przednie ZT111 (z panelami odrywania i odklejania) | **P1123335-010** |
+| Okno mediów ZT111 | **P1123335-011** |
+
+### Mechanizm druku
+
+| Część | Numer katalogowy |
+|-------|-----------------|
+| Głowica drukująca 203 dpi | **P1123335-012** (nowa wersja: **P1123335-052**) |
+| Głowica drukująca 300 dpi | **P1123335-013** (nowa wersja: **P1123335-053**) |
+| Mechanizm druku TT (z czujnikiem taśmy i kablami) | **P1123335-014** |
+| Mechanizm druku DT (z kablami głowicy) | **P1123335-015** |
+| Dźwignia zamka głowicy (Toggle Bar) | **P1123335-016** |
+| Listwa taśmy i szczotka antystatyczna | **P1037974-066** |
+| Styk uziemienia | **P1037974-015** |
+| Konwersja 203 dpi → 300 dpi | **P1123335-017** |
+| Konwersja 300 dpi → 203 dpi | **P1123335-018** |
+| Wałek dociskowy (Platen Roller) | **P1037974-028** |
+| Pokrywa dostępu do wałka | **P1123335-019** |
+
+### Elektronika
+
+| Część | Numer katalogowy |
+|-------|-----------------|
+| Płyta główna (MLB) ZT111 | **P1123335-021** |
+| Zasilacz ZT111 | **P1123335-023** |
+| Karta Ethernet | **P1123335-035** |
+| Moduł WiFi 802.11ac (USA/Kanada) | **P1083320-037A** |
+| Moduł WiFi 802.11ac (reszta świata) | **P1083320-037C** |
+| Antena WiFi zamienna | **P1037974-053** |
+| Kable elektroniki (komplet) | **P1123335-028** |
+| Pokrywy opcji elektronicznych | **P1123335-029** |
+
+### Czujniki
+
+| Część | Numer katalogowy |
+|-------|-----------------|
+| Czujnik mediów | **P1123335-030** |
+| Czujnik taśmy | **P1123335-031** |
+| Czujnik otwarcia głowicy | **P1123335-032** |
+| Czujnik etykiety (Take Label) | **P1123335-033** |
+
+### Napęd
+
+| Część | Numer katalogowy |
+|-------|-----------------|
+| Koła zębate napędu (203 i 300 dpi) | **P1037974-061** |
+| Silnik napędu | **P1123335-034** |
+
+### Ścieżka mediów
+
+| Część | Numer katalogowy |
+|-------|-----------------|
+| Wieszak mediów | **P1037974-027** |
+| Szpula taśmy (Supply) | **P1037974-050** |
+| Szpula taśmy (Take-Up) | **P1037974-051** |
+| Szpula do taśm powleconych od wewnątrz | **79830M** |
+| Prowadnica mediów | **P1123335-037** |
+| Listwa odrywająca (Tear Bar) | **P1123335-038** |
+| Kompletny system taśmy | **P1123335-039** |
+| Obudowa wałka dociskowego | **P1123335-040** |
+
+### Opcje obsługi mediów
+
+| Część | Numer katalogowy |
+|-------|-----------------|
+| Moduł gilotyny (Cutter) | **P1123335-041** |
+| Pokrywa gilotyny z płytką PCBA | **P1123335-043** |
+| Szczotka antystatyczna i osłona gilotyny | **P1037974-036** |
+| Tacka gilotyny (Catch Tray) | **P1037974-037** |
+| Moduł odklejania (Peel) | **P1123335-042** |
+| Zespół odklejania | **P1123335-044** |
+| Wałek modułu odklejania | **P1037974-039** |
+
+---
+
+## Cennik napraw Zebra ZT111
+
+| Usługa | Cena od |
+|--------|---------|
+| **Diagnostyka** | **Bezpłatna** |
+| Czyszczenie i konserwacja | 200 zł |
+| Wymiana głowicy drukującej 203 dpi | 800 zł |
+| Wymiana głowicy drukującej 300 dpi | 1 100 zł |
+| Wymiana wałka dociskowego | 300 zł |
+| Naprawa/wymiana płyty głównej (MLB) | 700 zł |
+| Naprawa zasilacza | 400 zł |
+| Naprawa/wymiana gilotyny | 400 zł |
+| Naprawa modułu odklejania (Peel) | 350 zł |
+| Wymiana karty Ethernet | 350 zł |
+| Naprawa/wymiana modułu WiFi | 500 zł |
+| Wymiana czujnika mediów | 300 zł |
+| Wymiana czujnika taśmy | 300 zł |
+| Kalibracja i regulacja | 150 zł |
+
+> 📞 **Bezpłatna diagnostyka** — [wyślij zgłoszenie przez formularz](https://www.serwis-zebry.pl/#formularz) lub zadzwoń. Czas realizacji naprawy: **1-3 dni robocze**.
+
+---
+
+## Najczęściej zadawane pytania (FAQ)
+
+**Czy Zebra ZT111 obsługuje RFID?**
+Nie. Moduł RFID jest dostępny wyłącznie w modelu **ZT231R**. ZT111 nie ma możliwości rozbudowy o RFID.
+
+**Czy mogę użyć głowicy z ZT231 w ZT111?**
+Tak. Głowice drukujące są **identyczne** w modelach ZT111, ZT211 i ZT231 — zarówno 203 dpi (P1123335-012 / P1123335-052), jak i 300 dpi (P1123335-013 / P1123335-053).
+
+**Jak sprawdzić wersję firmware w ZT111?**
+Wydrukuj etykietę konfiguracyjną: wyłącz drukarkę, przytrzymaj CANCEL, włącz drukarkę. Na wydruku znajdziesz pozycję FIRMWARE VERSION.
+
+**Czy ZT111 obsługuje WiFi i Bluetooth?**
+Tak, ale jako opcje dodatkowe. Dostępny jest moduł WiFi 802.11ac (P/N P1083320-037x) z obsługą Bluetooth BLE.
+
+**Czy ZT111 ma wyświetlacz LCD?**
+Nie. ZT111 ma **wyłącznie** 3 przyciski fizyczne (PAUSE, FEED, CANCEL) i 5 diod LED. Konfiguracja odbywa się przez komendy ZPL, stronę WWW drukarki lub oprogramowanie Zebra Setup Utilities.
+
+**Jaka jest maksymalna szerokość druku ZT111?**
+104 mm (4,09 cala) — identycznie jak w ZT231.
+
+**Ile waży drukarka Zebra ZT111?**
+Około 7,7 kg — to lżejszy model niż ZT231, głównie dzięki plastikowej obudowie.
+
+**Czy ZT111 to następca ZT220?**
+Tak. Zebra ZT111 zastąpiła model ZT220 w ofercie. Drukarka jest kompatybilna z etykietami i taśmami używanymi wcześniej w ZT220.
+
+---
+
+## Powiązane artykuły
+
+- [Drukarka Zebra nie drukuje — przyczyny i rozwiązania](/blog/drukarka-zebra-nie-drukuje-przyczyny-rozwiazania)
+- [Kalibracja drukarki Zebra — poradnik krok po kroku](/blog/kalibracja-drukarki-zebra-poradnik-krok-po-kroku)
+- [Serwis drukarki Zebra ZT231/ZT231R](/blog/serwis-drukarki-zebra-zt231-zt231r-diagnostyka-naprawa)
+- [Błąd Ribbon Out — rozwiązanie](/blog/blad-ribbon-out-drukarka-zebra-rozwiazanie)
+- [Sterowniki Zebra dla Windows 11 — instalacja](/blog/sterowniki-zebra-windows-11-instalacja-problemy)
+- [Serwis drukarki Zebra GK420/GC420](/blog/serwis-drukarki-zebra-gk420-gc420-diagnostyka-naprawa)
+- [Kontrakty serwisowe Zebra OneCare](/blog/kontrakty-serwisowe-zebra-onecare-przewodnik)
+
+👉 **[Serwis Drukarek Zebra — naprawy, konserwacja, części](/drukarki)**
+`
   }
 
 ]
@@ -27887,7 +28507,7 @@ function detectDeviceTypeFromQuery(query: string): 'drukarki' | 'terminale' | 's
   }
   
   // Modele drukarek
-  const printerModels = ['zt411', 'zt421', 'zt410', 'zt420', 'zd421', 'zd621', 'zd420', 'zd620', 'zd888', 'zt510', 'zt610', 'zq630', 'zq620', 'zq520', 'zq320', 'zc300', 'zc350', 'zxp']
+  const printerModels = ['zt111', 'zt211', 'zt231', 'zt411', 'zt421', 'zt410', 'zt420', 'zd421', 'zd621', 'zd420', 'zd620', 'zd888', 'zt510', 'zt610', 'zq630', 'zq620', 'zq520', 'zq320', 'zc300', 'zc350', 'zxp']
   for (const model of printerModels) {
     if (q.includes(model)) return 'drukarki'
   }
