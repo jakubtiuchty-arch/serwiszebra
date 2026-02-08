@@ -27022,29 +27022,29 @@ Zebra ZT231 posiada **5 diod diagnostycznych** nad wyświetlaczem: **STATUS**, *
 
 | STATUS | PAUSE | DATA | SUPPLIES | NETWORK | Znaczenie |
 |--------|-------|------|----------|---------|-----------|
-| Zielona | — | — | — | — | **Drukarka gotowa** do pracy (pozostałe żółte przez 2s przy starcie) |
-| — | Żółta | — | — | — | **Drukarka wstrzymana** (PAUSE) — naciśnij PAUSE aby wznowić |
-| Czerwona | — | — | Czerwona | — | **Brak mediów** (MEDIA OUT) — załaduj etykiety |
-| Czerwona | — | — | Miga czerwona | — | **Brak taśmy** (RIBBON OUT) — załaduj taśmę termotransferową |
-| Żółta | — | — | Miga żółta | — | **Taśma załadowana w trybie DT** — wyjmij taśmę lub zmień na TT |
-| Czerwona | Żółta | — | — | — | **Głowica otwarta** (HEAD OPEN) — zamknij głowicę drukującą |
-| Żółta | — | — | — | — | **Przegrzanie głowicy** (HEAD OVER TEMP) — poczekaj na schłodzenie |
-| Miga żółta | — | — | — | — | **Głowica zbyt zimna / MLB over temp** — UWAGA: głowica może być gorąca! |
-| Czerwona | Czerwona | Czerwona | — | — | **Nieoryginalna głowica** — zainstaluj oryginalną głowicę Zebra |
-| Miga czerwona | — | — | — | — | **Nie można odczytać DPI** głowicy — sprawdź połączenie głowicy |
-| Czerwona | — | — | — | — | **Błąd gilotyny** (CUTTER ERROR) — ostrze w ścieżce etykiet |
+| 🟢 | — | — | — | — | ✅ **Drukarka gotowa** do pracy (pozostałe żółte przez 2s przy starcie) |
+| — | 🟡 | — | — | — | ⏸ **Drukarka wstrzymana** (PAUSE) — naciśnij PAUSE aby wznowić |
+| 🔴 | — | — | 🔴 | — | 🛑 **Brak mediów** (MEDIA OUT) — załaduj etykiety |
+| 🔴 | — | — | 🔴 miga | — | 🛑 **Brak taśmy** (RIBBON OUT) — załaduj taśmę termotransferową |
+| 🟡 | — | — | 🟡 miga | — | ⚠️ **Taśma załadowana w trybie DT** — wyjmij taśmę lub zmień na TT |
+| 🔴 | 🟡 | — | — | — | 🛑 **Głowica otwarta** (HEAD OPEN) — zamknij głowicę drukującą |
+| 🟡 | — | — | — | — | ⚠️ **Przegrzanie głowicy** (HEAD OVER TEMP) — poczekaj na schłodzenie |
+| 🟡 miga | — | — | — | — | ⚠️ **Głowica zbyt zimna / MLB over temp** — UWAGA: głowica może być gorąca! |
+| 🔴 | 🔴 | 🔴 | — | — | 🛑 **Nieoryginalna głowica** — zainstaluj oryginalną głowicę Zebra |
+| 🔴 miga | — | — | — | — | 🛑 **Nie można odczytać DPI** głowicy — sprawdź połączenie głowicy |
+| 🔴 | — | — | — | — | 🛑 **Błąd gilotyny** (CUTTER ERROR) — ostrze w ścieżce etykiet |
 
 ### Dioda NETWORK — diagnostyka sieci
 
 | NETWORK | Znaczenie |
 |---------|-----------|
-| Zgaszona | **Brak połączenia** Ethernet / brak karty sieciowej |
-| Zielona | **Ethernet 100 Base-T** — połączenie OK |
-| Żółta | **Ethernet 10 Base-T** — połączenie wolne |
-| Czerwona | **Błąd Ethernet** — brak komunikacji z siecią |
-| Miga czerwono→żółto→zielona | **WiFi łączenie**: czerwona=asocjacja, żółta=autentykacja, zielona=połączone |
-| Miga zielona | **WiFi słaby sygnał** — sprawdź odległość od punktu dostępowego |
-| Czerwona (WiFi) | **Błąd WLAN** — drukarka nie może połączyć się z siecią bezprzewodową |
+| ⚫ Zgaszona | **Brak połączenia** Ethernet / brak karty sieciowej |
+| 🟢 | **Ethernet 100 Base-T** — połączenie OK |
+| 🟡 | **Ethernet 10 Base-T** — połączenie wolne |
+| 🔴 | **Błąd Ethernet** — brak komunikacji z siecią |
+| 🔴 miga → 🟡 miga → 🟢 | **WiFi łączenie**: 🔴 asocjacja → 🟡 autentykacja → 🟢 połączone |
+| 🟢 miga | **WiFi słaby sygnał** — sprawdź odległość od punktu dostępowego |
+| 🔴 (WiFi) | **Błąd WLAN** — drukarka nie może połączyć się z siecią bezprzewodową |
 
 ---
 
