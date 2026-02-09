@@ -29026,6 +29026,543 @@ ZT220 zastąpiono modelem ZT111 (ten sam panel LED bez wyświetlacza, szybszy �
 
 👉 **[Serwis Drukarek Zebra — naprawy, konserwacja, części](/serwis-drukarek-zebra)**
 `
+  },
+
+  {
+    slug: 'serwis-drukarki-kart-zebra-zc100-zc300-diagnostyka-naprawa',
+    title: 'Serwis drukarki kart Zebra ZC100/ZC300 — diagnostyka, naprawa i konserwacja [2026]',
+    excerpt: 'Kompletny przewodnik serwisowy drukarek kart plastikowych Zebra ZC100 i ZC300. Diagnostyka 5 diod LED (ZC100) i komunikatów LCD (ZC300), usuwanie zacięć kart, problemy z jakością wydruku, czyszczenie głowicy, wymiana głowicy drukującej, błędy taśmy i kart. Cennik napraw. Bezpłatna diagnostyka.',
+    coverImage: '/blog/serwis-drukarki-kart-zebra-zc100-zc300-diagnostyka-naprawa.jpeg',
+    coverImageAlt: 'Serwis drukarek kart plastikowych Zebra ZC100 i ZC300 — profesjonalna diagnostyka LED i LCD, wymiana głowicy, czyszczenie i naprawa',
+    author: {
+      name: 'Krzysztof Wójcik',
+      role: 'Kierownik Serwisu TAKMA'
+    },
+    publishedAt: '2026-02-09',
+    readingTime: 20,
+    deviceType: 'drukarki',
+    subDeviceType: 'kart',
+    category: 'troubleshooting',
+    tags: ['ZC100', 'ZC300', 'drukarka kart', 'drukarka kart plastikowych', 'serwis drukarki zebra', 'naprawa ZC100', 'naprawa ZC300', 'diagnostyka', 'LED', 'LCD', 'karty plastikowe', 'e-legitymacje', 'identyfikatory', 'sublimacja'],
+    seo: {
+      metaTitle: 'Serwis drukarki kart Zebra ZC100/ZC300 — diagnostyka, naprawa i konserwacja [2026]',
+      metaDescription: 'Drukarka kart Zebra ZC100 lub ZC300 nie drukuje? Diagnostyka 5 diod LED, komunikaty LCD, usuwanie zacięć, błędy taśmy, jakość wydruku. Czyszczenie głowicy, wymiana głowicy, cennik napraw. Bezpłatna diagnostyka.',
+      keywords: [
+        'serwis drukarki kart zebra zc100', 'serwis drukarki kart zebra zc300', 'serwis zebra zc100', 'serwis zebra zc300',
+        'naprawa zebra zc100', 'naprawa zebra zc300', 'naprawa zc100', 'naprawa zc300',
+        'naprawa drukarki kart zebra', 'serwis zc100', 'serwis zc300', 'serwis drukarki kart',
+        'zebra zc100 nie drukuje', 'zebra zc300 nie drukuje', 'zebra zc100 błąd', 'zebra zc300 błąd',
+        'zebra zc100 card jam', 'zebra zc300 card jam', 'zebra zc100 zacięcie karty', 'zebra zc300 zacięcie karty',
+        'zebra zc100 ribbon out', 'zebra zc300 ribbon out', 'zebra zc100 brak taśmy', 'zebra zc300 brak taśmy',
+        'zebra zc100 cards out', 'zebra zc300 cards out', 'zebra zc100 brak kart', 'zebra zc300 brak kart',
+        'zebra zc100 invalid ribbon', 'zebra zc300 invalid ribbon', 'zebra zc300 ribbon color detect error',
+        'zebra zc100 critical error', 'zebra zc300 critical error', 'zebra zc100 cleaning error',
+        'zebra zc100 dioda czerwona', 'zebra zc100 dioda miga', 'zebra zc100 status led',
+        'zebra zc300 komunikat lcd', 'zebra zc300 error lcd', 'zebra zc300 wyświetlacz',
+        'zebra zc100 blady wydruk', 'zebra zc300 blady wydruk', 'zebra zc100 jakość wydruku',
+        'zebra zc100 smugi na karcie', 'zebra zc300 smugi na karcie', 'zebra zc100 plamy na karcie',
+        'zebra zc100 czyszczenie', 'zebra zc300 czyszczenie', 'czyszczenie drukarki kart zebra',
+        'zebra zc100 czyszczenie głowicy', 'zebra zc300 czyszczenie głowicy',
+        'zebra zc100 wymiana głowicy', 'zebra zc300 wymiana głowicy', 'głowica zc100', 'głowica zc300',
+        'zebra zc100 kalibracja taśmy', 'zebra zc300 kalibracja taśmy',
+        'ile kosztuje naprawa zc100', 'ile kosztuje naprawa zc300', 'cennik napraw zc100', 'cennik napraw zc300',
+        'zebra zc100 sterowniki', 'zebra zc300 sterowniki', 'sterowniki zc100 windows', 'sterowniki zc300 windows',
+        'zebra zc100 ethernet', 'zebra zc100 wifi', 'zebra zc300 bluetooth', 'zebra zc300 sieć',
+        'zebra zc100 vs zc300', 'zc100 vs zc300', 'różnice zc100 zc300',
+        'zebra zc100 specyfikacja', 'zebra zc300 specyfikacja', 'zebra zc100 dane techniczne',
+        'drukarka kart zebra serwis', 'drukarka kart plastikowych zebra', 'drukarka e-legitymacje serwis',
+        'drukarka identyfikatorów zebra', 'drukarka kart id zebra serwis',
+        'zebra zc100 konserwacja', 'zebra zc300 konserwacja', 'zebra zc100 maintenance',
+        'zebra zc100 części zamienne', 'zebra zc300 części zamienne',
+        'zebra zc100 taśma ymcko', 'zebra zc300 taśma ymcko', 'kaseta taśmy zc100', 'kaseta taśmy zc300',
+        'zebra zc100 marszczenie taśmy', 'zebra zc300 ribbon wrinkle',
+        'zebra zc100 enkoder magnetyczny', 'zebra zc300 smart card',
+        'zebra zc100 cena', 'zebra zc300 cena', 'drukarka kart zebra cena',
+        'zebra zc100 instrukcja', 'zebra zc300 instrukcja obsługi'
+      ],
+      faqSchema: [
+        {
+          question: 'Drukarka kart Zebra ZC100 nie drukuje — co zrobić?',
+          answer: 'Sprawdź 5 diod LED na panelu: POWER (czerwona ciągła=błąd krytyczny), CARD (czerwona ciągła=brak kart, migająca czerwona=zacięcie karty), RIBBON (migająca czerwona=brak taśmy/zacięcie taśmy, czerwona ciągła=niewłaściwa taśma). Upewnij się, że kaseta z taśmą jest prawidłowo zainstalowana, karty załadowane do podajnika i głowica zamknięta. Wykonaj czyszczenie drukarki. Bezpłatna diagnostyka: serwis-zebry.pl/#formularz'
+        },
+        {
+          question: 'Co oznaczają diody LED na drukarce kart Zebra ZC100/ZC300?',
+          answer: 'Obie drukarki mają 5 diod LED: POWER (zielona=gotowa, czerwona=błąd krytyczny), CARD (zielona=karty dostępne, migająca zielona=drukowanie, migająca czerwona=zacięcie, czerwona=brak kart), RIBBON (zielona=taśma OK, bursztynowa=taśma się kończy, migająca czerwona=brak/zacięcie taśmy, czerwona=niewłaściwa taśma), CLEAN (bursztynowa=czyszczenie wymagane, czerwona=błąd czyszczenia/pełny kosz odrzutów), MANUAL FEED (zielona=gotowa na kartę, czerwona=błąd podawania).'
+        },
+        {
+          question: 'Jakie komunikaty wyświetla LCD na drukarce Zebra ZC300?',
+          answer: 'ZC300 wyświetla komunikaty na kolorowym LCD: ostrzeżenia na żółtym tle (Ribbon low — taśma się kończy) i błędy na czerwonym tle (Ribbon out — brak taśmy, Card jam — zacięcie karty, Ribbon color detect error — błąd detekcji taśmy, Invalid ribbon — niewłaściwa taśma). Naciśnięcie lewego przycisku pokazuje animację rozwiązania problemu. ZC100 nie ma LCD — diagnostyka wyłącznie przez diody LED.'
+        },
+        {
+          question: 'Jak usunąć zacięcie karty w drukarce Zebra ZC100/ZC300?',
+          answer: 'Otwórz górną pokrywę drukarki. Wyjmij kasetę z taśmą. Obróć kółko ręcznego przesuwu (manual advance wheel) w kierunku przodu drukarki — karta wysunie się z mechanizmu. Włóż kasetę z powrotem i zamknij pokrywę. UWAGA: nigdy nie używaj narzędzi do wyjmowania kart — to grozi uszkodzeniem mechanizmu i utratą gwarancji.'
+        },
+        {
+          question: 'Ile kosztuje naprawa drukarki kart Zebra ZC100/ZC300?',
+          answer: 'Cennik napraw ZC100/ZC300: diagnostyka — bezpłatna, czyszczenie i konserwacja — od 250 zł, wymiana głowicy drukującej — od 900 zł, naprawa mechanizmu transportu kart — od 500 zł, naprawa enkodera magnetycznego — od 400 zł, naprawa płyty głównej — od 700 zł. Czas realizacji 1-3 dni robocze. Formularz: serwis-zebry.pl/#formularz'
+        },
+        {
+          question: 'Jak wyczyścić drukarkę kart Zebra ZC100/ZC300?',
+          answer: 'Trzy metody: (1) Ze sterownika — Printing Preferences > Help & Support > Clean Now, włóż kartę czyszczącą do slotu manual feed. (2) Z LCD (tylko ZC300) — Tools > Cleaning > potwierdź prawym przyciskiem. (3) Ręczne czyszczenie głowicy — wyłącz drukarkę, otwórz pokrywę, przetrzyj głowicę wacikiem nasączonym alkoholem izopropylowym (ruch lewo-prawo), poczekaj 2-3 minuty przed włączeniem.'
+        },
+        {
+          question: 'Czym różni się Zebra ZC100 od ZC300?',
+          answer: 'ZC100 ma panel z 5 diodami LED bez wyświetlacza — diagnostyka wyłącznie przez kolory diod. ZC300 ma dodatkowy 2-calowy kolorowy LCD z 3 przyciskami, animowane instrukcje pomocy, menu konfiguracyjne i wyświetlanie adresu IP. ZC300 jest szybsza (200 vs 180 kart/h kolor, 800 vs 700 kart/h mono). Mechanizm druku, głowica, kasety taśm i karty są identyczne — wymienne między modelami.'
+        },
+        {
+          question: 'Jak wymienić głowicę drukującą w Zebra ZC100/ZC300?',
+          answer: 'Otwórz górną pokrywę. Wciśnij głowicę do góry i obróć, aby zwolnić ją z zaczepów. Odłącz konektor kabla. Podłącz kabel do nowej głowicy. Zanotuj numer seryjny i wartość rezystancji (na głowicy). Zamontuj głowicę w zaczepach. W sterowniku: Advanced > Diagnostics and Calibration > Commands & Calibration > Printhead — wpisz numer seryjny i rezystancję nowej głowicy.'
+        },
+        {
+          question: 'Co oznacza błąd "Invalid ribbon" na drukarce Zebra ZC100/ZC300?',
+          answer: 'Czerwona ciągła dioda RIBBON oznacza, że drukarka wykryła niekompatybilną lub nieoryginalną kasetę z taśmą. Rozwiązanie: (1) Wyjmij i włóż ponownie kasetę — upewnij się, że wskoczyła na swoje miejsce z kliknięciem. (2) Sprawdź czy kaseta jest przeznaczona do serii ZC (kasety z innych serii Zebra nie pasują). (3) Sprawdź chip identyfikacyjny na kasecie — jeśli uszkodzony, wymień kasetę na nową.'
+        },
+        {
+          question: 'Jak podłączyć drukarkę Zebra ZC300 do sieci?',
+          answer: 'Ethernet: podłącz kabel RJ-45 — drukarka automatycznie pobiera adres IP przez DHCP. Adres IP wyświetla się na ekranie LCD. Sprawdź diody portu Ethernet: pomarańczowa (1 mignięcie=10Mbps, 2 mignięcia=100Mbps), zielona (ciągła=połączenie, migająca=transmisja). Wi-Fi (opcja): skonfiguruj przez sterownik drukarki — podaj SSID i hasło. Ikona Wi-Fi na LCD: szara=wyłączone, czerwona=brak połączenia, żółta=słaby sygnał, biała=połączono.'
+        }
+      ]
+    },
+    content: `> **🎯 Szybka odpowiedź:** Drukarka kart **Zebra ZC100** lub **ZC300** nie drukuje? Sprawdź **5 diod LED** na panelu: czerwona **CARD** = brak kart, migająca czerwona **CARD** = zacięcie karty, migająca czerwona **RIBBON** = brak taśmy, czerwona ciągła **RIBBON** = niewłaściwa taśma. Na **ZC300** sprawdź komunikat na **LCD** — żółty ekran = ostrzeżenie, czerwony = błąd. Jeśli to nie pomoże — [wyślij drukarkę do bezpłatnej diagnostyki](https://www.serwis-zebry.pl/#formularz).
+
+**Zebra ZC100** i **ZC300** to kompaktowe drukarki kart plastikowych wykorzystujące technologię **sublimacji barwnikowej** (full-color) i **transferu termicznego** (monochromatyczne). Drukują karty CR80 w rozdzielczości **300 dpi** — identyfikatory pracownicze, karty członkowskie, e-legitymacje szkolne, karty dostępu i karty lojalnościowe.
+
+**ZC100** ma uproszczony panel z **5 diodami LED** (bez wyświetlacza), natomiast **ZC300** posiada dodatkowy **2-calowy kolorowy LCD** z animowanymi instrukcjami pomocy i menu konfiguracyjne. Mechanizm druku obu modeli jest **identyczny** — te same głowice, kasety z taśmą i procedury serwisowe.
+
+---
+
+## Zebra ZC100 vs ZC300 — porównanie modeli
+
+| Cecha | **ZC100** | **ZC300** |
+|-------|-----------|-----------|
+| **Panel sterowania** | 5 diod LED | 5 diod LED + **2" kolorowy LCD** + 3 przyciski |
+| **Diagnostyka** | Kolory i stany diod LED | Komunikaty tekstowe na LCD + diody LED |
+| **Konfiguracja** | Tylko przez sterownik PC | Menu LCD + sterownik PC |
+| **Prędkość (kolor YMCKO)** | do 180 kart/h | do **200 kart/h** |
+| **Prędkość (mono K)** | do 700 kart/h | do **800 kart/h** |
+| **Druk dwustronny** | Opcja (moduł flipper) | Opcja (do **140 kart/h** kolor) |
+| **Czyszczenie** | Przez sterownik | Przez **LCD** lub sterownik |
+| **Wyświetlanie IP** | Tylko w sterowniku | **Bezpośrednio na LCD** |
+| **Pomoc na urządzeniu** | Brak | **Animowane instrukcje** na LCD |
+| **Rozdzielczość** | 300 dpi | 300 dpi |
+| **Podajnik kart** | 100 kart (30 mil) | 100 kart (30 mil) |
+| **Głowica drukująca** | Identyczna | Identyczna |
+| **Kasety taśm** | Identyczne (seria ZC) | Identyczne (seria ZC) |
+
+> **💡 Wskazówka:** Mimo różnic w panelu sterowania, **mechanizm druku ZC100 i ZC300 jest identyczny**. Wszystkie procedury serwisowe dotyczące głowicy, taśmy, kart i czyszczenia są takie same dla obu modeli.
+
+---
+
+## Panel sterowania — 5 diod LED
+
+Oba modele (ZC100 i ZC300) mają **5 diod LED** na panelu sterowania. ZC300 dodatkowo wyposażona jest w **2-calowy kolorowy wyświetlacz LCD** z **3 przyciskami programowalnymi** (soft keys).
+
+### 5 diod LED — znaczenie stanów
+
+**Dioda POWER (ikona zasilania)**
+
+| Stan | Kolor | Znaczenie |
+|------|-------|-----------|
+| Miga | 🟢 Zielona | Drukarka się **uruchamia** (bootowanie) |
+| Świeci ciągłe | 🟢 Zielona | Drukarka **gotowa** — normalny stan pracy |
+| Świeci ciągłe | 🔴 Czerwona | **Błąd krytyczny** — wymagany serwis |
+
+**Dioda CARD (ikona karty)**
+
+| Stan | Kolor | Znaczenie |
+|------|-------|-----------|
+| Miga | 🟢 Zielona | **Drukowanie / kodowanie** w toku |
+| Świeci ciągłe | 🟢 Zielona | Karty **dostępne** w podajniku |
+| Miga | 🔴 Czerwona | **Zacięcie karty** (card jam) |
+| Świeci ciągłe | 🔴 Czerwona | **Brak kart** (cards out) |
+
+**Dioda RIBBON (ikona kasety)**
+
+| Stan | Kolor | Znaczenie |
+|------|-------|-----------|
+| Miga | 🟢 Zielona | **Drukowanie** w toku |
+| Świeci ciągłe | 🟢 Zielona | Taśma **dostępna** — kaseta załadowana |
+| Świeci ciągłe | 🟡 Bursztynowa | **Taśma się kończy** (ribbon low) |
+| Miga | 🔴 Czerwona | **Brak taśmy / zacięcie taśmy / zerwanie taśmy** |
+| Świeci ciągłe | 🔴 Czerwona | **Niewłaściwa taśma** (invalid ribbon) — niekompatybilna kaseta |
+
+**Dioda CLEAN (ikona czyszczenia)**
+
+| Stan | Kolor | Znaczenie |
+|------|-------|-----------|
+| Miga | 🟢 Zielona | **Czyszczenie** w toku |
+| Świeci ciągłe | 🟢 Zielona | Czyszczenie **zakończone** (gaśnie po 30 sekundach) |
+| Świeci ciągłe | 🟡 Bursztynowa | **Czyszczenie wymagane** — uruchom cykl czyszczenia |
+| Świeci ciągłe | 🔴 Czerwona | **Błąd czyszczenia** lub **pełny kosz odrzutów** |
+
+**Dioda MANUAL FEED (ikona ręcznego podawania)**
+
+| Stan | Kolor | Znaczenie |
+|------|-------|-----------|
+| Świeci ciągłe | 🟢 Zielona | **Gotowa** na kartę / kartę czyszczącą |
+| Świeci ciągłe | 🔴 Czerwona | **Błąd podawania karty** |
+
+> **⚠️ Najczęstsza kombinacja błędu:** czerwona POWER = **błąd krytyczny** wymagający serwisu. Migająca czerwona CARD + migająca czerwona RIBBON = jednoczesne **zacięcie karty i taśmy** — otwórz pokrywę i użyj kółka ręcznego przesuwu.
+
+---
+
+## Komunikaty wyświetlacza LCD — ZC300
+
+Model **ZC300** wyświetla komunikaty na **2-calowym kolorowym LCD**, co znacząco ułatwia diagnostykę w porównaniu do ZC100.
+
+### Ostrzeżenia (żółte tło) — nie blokują druku
+
+| Komunikat LCD | Znaczenie | Rozwiązanie |
+|---------------|-----------|-------------|
+| **Ribbon low** | Taśma się kończy | Przygotuj nową kasetę z taśmą — obecna wystarczy jeszcze na kilkadziesiąt kart |
+
+### Błędy (czerwone tło) — wymagają natychmiastowej reakcji
+
+| Komunikat LCD | Znaczenie | Rozwiązanie |
+|---------------|-----------|-------------|
+| **Ribbon out** | Brak taśmy | Załaduj nową kasetę z taśmą |
+| **Card jam** | Zacięcie karty | Otwórz pokrywę → wyjmij kasetę → obróć kółko ręcznego przesuwu |
+| **Cards out** | Brak kart | Załaduj karty do podajnika |
+| **Invalid ribbon** | Niewłaściwa taśma | Użyj oryginalnej kasety Zebra ZC Series |
+| **Ribbon color detect error** | Błąd detekcji koloru taśmy | Wyjmij i ponownie załaduj kasetę; sprawdź chip identyfikacyjny |
+| **Cleaning required** | Wymagane czyszczenie | Uruchom cykl czyszczenia z menu Tools |
+| **Reject bin full** | Pełny kosz odrzutów | Wyjmij karty z kosza odrzutów (nad flipperem) |
+
+> **💡 ZC100 vs ZC300 diagnostyka:** Na ZC100 błąd taśmy sygnalizowany jest przez **migającą czerwoną diodę RIBBON**. Na ZC300 zobaczysz jednoznaczny komunikat np. **"Ribbon out"** lub **"Ribbon color detect error"** na LCD — łatwiej zidentyfikować przyczynę.
+
+### Ikony połączeń na LCD (ZC300)
+
+Górna belka wyświetlacza LCD pokazuje stan połączeń kolorowymi ikonami:
+
+| Połączenie | Szara ikona | Czerwona | Żółta | Biała/Zielona |
+|-----------|-------------|----------|-------|---------------|
+| **Ethernet** | Wyłączone | Kabel podłączony, **brak IP** | — | Połączono z siecią |
+| **Bluetooth** | Wyłączony | Sparowany, **niepołączony** | — | Sparowany i połączony |
+| **Wi-Fi** | Wyłączone | **Brak połączenia** | **Słaby sygnał** | Połączono |
+
+### Menu LCD (ZC300)
+
+| Przycisk | Ekran główny | W menu |
+|----------|-------------|---------|
+| **Lewy** | Help (pomoc) | Powrót |
+| **Środkowy** | Info (informacje) | Przewijanie |
+| **Prawy** | Tools (narzędzia) | Wybierz/Potwierdź |
+
+**Menu Help** — animowane instrukcje: ładowanie kart, ładowanie taśmy, drukowanie karty demo, czyszczenie, usuwanie zacięcia karty, usuwanie zacięcia taśmy, kod QR do strony wsparcia.
+
+**Menu Info** — informacje o drukarce, sieci przewodowej, Wi-Fi, Bluetooth, taśmie, licznik kart, zainstalowane opcje.
+
+**Menu Tools** — druk karty testowej, wybór języka, czyszczenie.
+
+---
+
+## Diody portu Ethernet (tył drukarki)
+
+Port Ethernet z tyłu drukarki ma **2 diody LED**:
+
+### Dioda pomarańczowa — prędkość łącza
+
+| Stan | Znaczenie |
+|------|-----------|
+| Zgaszona | Brak połączenia |
+| **1 mignięcie** (pauza, 1 mignięcie...) | Połączenie **10Base** (10 Mbps) |
+| **2 mignięcia** (pauza, 2 mignięcia...) | Połączenie **100Base** (100 Mbps) |
+
+### Dioda zielona — aktywność
+
+| Stan | Znaczenie |
+|------|-----------|
+| Zgaszona | Brak połączenia |
+| Świeci ciągłe | Połączenie **aktywne** |
+| Miga | **Transmisja danych** |
+
+> Jeśli obie diody są zgaszone — drukarka nie wykrywa kabla. Sprawdź kabel RJ-45, podłącz ponownie z obydwu stron (aż do kliknięcia), przetestuj z innym kablem.
+
+---
+
+## 8 schematów naprawczych krok po kroku
+
+### 1. Zacięcie karty (Card Jam)
+
+**Objawy:** ZC100: migająca czerwona dioda CARD. ZC300: komunikat **"Card jam"** na LCD (czerwony ekran).
+
+1. **Otwórz** górną pokrywę drukarki (naciśnij przycisk zwalniający pokrywę)
+2. **Wyjmij kasetę** z taśmą
+3. Znajdź **kółko ręcznego przesuwu** (manual advance wheel) wewnątrz drukarki
+4. **Obracaj kółko** w kierunku przodu drukarki — zacięta karta wysunie się z mechanizmu
+5. **Włóż kasetę** z powrotem i **zamknij pokrywę**
+6. Drukarka automatycznie wznowi drukowanie
+
+> **⚠️ UWAGA:** Nigdy nie używaj narzędzi (śrubokrętów, pincet, noży) do wyjmowania kart — grozi to uszkodzeniem mechanizmu transportu i **utratą gwarancji**!
+
+> Nie pomogło? → [Wyślij drukarkę do bezpłatnej diagnostyki](https://www.serwis-zebry.pl/#formularz)
+
+### 2. Brak kart (Cards Out)
+
+**Objawy:** ZC100: czerwona ciągła dioda CARD. ZC300: komunikat na LCD.
+
+1. Sprawdź **podajnik kart** (input hopper) — jeśli pusty, załaduj karty
+2. Sprawdź czy karty nie są **sklejone** — rozdziel je przed załadowaniem (zgięcie talii kart w łuk pomaga rozdzielić)
+3. Sprawdź **orientację kart** dla kart z paskiem magnetycznym lub chipem kontaktowym:
+   - Pasek magnetyczny: **na dole, po prawej stronie**
+   - Chip kontaktowy: **chip do góry, z przodu**
+4. Upewnij się, że karty mają grubość **10-40 mil** (0,25-1,02 mm) — standardowe CR80
+
+### 3. Brak taśmy / Zacięcie taśmy (Ribbon Out / Ribbon Jam)
+
+**Objawy:** ZC100: migająca czerwona dioda RIBBON. ZC300: komunikat **"Ribbon out"** na LCD.
+
+1. Otwórz górną pokrywę i sprawdź kasetę z taśmą
+2. Jeśli taśma się **skończyła** — zainstaluj nową kasetę Zebra ZC Series
+3. Jeśli taśma jest **zacięta lub zerwana** — wyjmij kasetę, ostrożnie rozplącz taśmę, nawinie ponownie na szpulę odbiorczą
+4. Sprawdź czy kaseta jest **prawidłowo zainstalowana** — musi wejść z kliknięciem
+5. Jeśli problem się powtarza — **wymień kasetę** na nową (uszkodzony chip identyfikacyjny)
+
+### 4. Niewłaściwa taśma (Invalid Ribbon)
+
+**Objawy:** ZC100: czerwona ciągła dioda RIBBON. ZC300: komunikat na LCD.
+
+1. Wyjmij i **włóż ponownie** kasetę z taśmą — upewnij się, że wskoczyła z kliknięciem
+2. Sprawdź czy kaseta jest przeznaczona do **serii ZC** (kasety z innych serii Zebra nie pasują!)
+3. Sprawdź **chip identyfikacyjny** na kasecie — jeśli zabrudzony, przetrzyj go suchą ściereczką
+4. Spróbuj z **inną kasetą** — jeśli działa, oryginalna kaseta jest uszkodzona
+5. Jeśli żadna kaseta nie jest akceptowana — problem z **czytnikiem chipa** w drukarce → serwis
+
+> Nie pomogło? → [Wyślij drukarkę do bezpłatnej diagnostyki](https://www.serwis-zebry.pl/#formularz)
+
+### 5. Błąd detekcji koloru taśmy (Ribbon Color Detect Error)
+
+**Objawy:** ZC300: komunikat **"Ribbon color detect error"** na LCD (czerwony ekran). ZC100: migająca czerwona dioda RIBBON.
+
+1. Wyjmij kasetę z taśmą i **sprawdź wizualnie** — czy taśma nie jest pognieciona lub skręcona
+2. **Włóż kasetę ponownie** — upewnij się, że taśma jest naprężona (bez luzu)
+3. Sprawdź **czujnik koloru** wewnątrz drukarki — wyczyść sprężonym powietrzem
+4. Jeśli problem się powtarza z różnymi kasetami → **uszkodzony czujnik koloru** → serwis
+
+### 6. Problemy z jakością wydruku
+
+**Objawy:** Blady wydruk, plamy, smugi, przesunięty obraz, nieostre kolory.
+
+| Problem | Przyczyna | Rozwiązanie |
+|---------|-----------|-------------|
+| **Plamy i plamki** na karcie | Brud w drukarce | Wykonaj czyszczenie drukarki, wymień wałek czyszczący |
+| **Blady/przesunięty obraz** | Złe pozycjonowanie | W sterowniku: **Print Position** — dostosuj pozycję |
+| **Smugi koloru** (ribbon wrinkle) | Marszczenie taśmy | Skontaktuj się z serwisem |
+| **Rozmazanie** ciemnych kolorów | Za wysoka temperatura | W sterowniku: **Color Optimization** — zmniejsz wartość Preheat |
+| **Nieostre czarne teksty** | Złe ustawienie K Extraction | W sterowniku: **K Extraction** — dostosuj progi RGB (do 25,25,25) |
+| **Niedokładne kolory** | Brak kalibracji kolorów | W sterowniku: **Color Optimization** lub utwórz profil ICC |
+| **Halo kolorowe** wokół tekstu | Mis-registration paneli | Skontaktuj się z serwisem — wymaga kalibracji mechanizmu |
+
+### 7. Błąd czyszczenia / Pełny kosz odrzutów
+
+**Objawy:** ZC100: czerwona ciągła dioda CLEAN. ZC300: komunikat na LCD.
+
+1. Sprawdź **kosz odrzutów** (reject bin) nad modułem flipper — jeśli pełny, wyjmij karty
+2. Jeśli kosz nie jest pełny — otwórz pokrywę, sprawdź czy nic nie blokuje ścieżki czyszczenia
+3. Użyj **nowej karty czyszczącej** — stara może być zbyt brudna
+4. Zrestartuj drukarkę (wyłącz, poczekaj 10 sekund, włącz)
+
+### 8. Błąd krytyczny (Critical Error)
+
+**Objawy:** ZC100 i ZC300: czerwona ciągła dioda POWER.
+
+1. **Wyłącz drukarkę** — odłącz kabel zasilający, poczekaj 30 sekund
+2. **Włącz ponownie** — jeśli dioda POWER świeci zielono, problem rozwiązany
+3. Jeśli dioda POWER nadal świeci **czerwono** → **błąd sprzętowy** wymagający serwisu (płyta główna, głowica, mechanizm)
+
+> Nie pomogło? → [Wyślij drukarkę do bezpłatnej diagnostyki](https://www.serwis-zebry.pl/#formularz)
+
+---
+
+## Czyszczenie drukarki — 3 metody
+
+Regularne czyszczenie jest **kluczowe** dla jakości wydruku kart. Dioda CLEAN świecąca **bursztynowo** oznacza, że drukarka wymaga czyszczenia.
+
+### Metoda 1: Czyszczenie ze sterownika (ZC100 i ZC300)
+
+1. Otwórz **Preferencje drukowania** (Printing Preferences) drukarki
+2. Kliknij zakładkę **Help & Support**
+3. W sekcji Cleaning kliknij **Clean Now**
+4. Gdy dioda MANUAL FEED zaświeci się na **zielono** — włóż **kartę czyszczącą** do slotu ręcznego podawania
+5. Poczekaj aż cykl czyszczenia się zakończy (dioda CLEAN miga na zielono → świeci zielono)
+
+### Metoda 2: Czyszczenie z menu LCD (tylko ZC300)
+
+1. Na ekranie głównym naciśnij **prawy przycisk** (Tools)
+2. Przejdź do **Cleaning** (środkowy przycisk do przewijania)
+3. Naciśnij **prawy przycisk** aby wybrać
+4. Na pytanie **"Would you like to start the cleaning process?"** naciśnij prawy przycisk
+5. Gdy slot manual feed zaświeci się na zielono — włóż kartę czyszczącą
+6. Poczekaj aż drukarka zakończy cykl
+
+### Metoda 3: Ręczne czyszczenie głowicy (ZC100 i ZC300)
+
+Gdy standardowe czyszczenie kartą nie pomaga i na kartach nadal pojawiają się artefakty:
+
+1. **Wyłącz** drukarkę
+2. **Otwórz** górną pokrywę
+3. Wyjmij kasetę z taśmą
+4. **Przetrzyj głowicę** wacikiem nasączonym alkoholem izopropylowym — ruch **lewo-prawo** wzdłuż elementów grzejnych
+5. Poczekaj **2-3 minuty** na wyschnięcie
+6. Włóż kasetę i zamknij pokrywę
+7. **Włącz** drukarkę
+
+> **⚠️ UWAGA:** Używaj wyłącznie **wacików z pianki** (foam-tipped swabs). Waciki bawełniane zostawiają włókna. **Nigdy nie używaj ostrych przedmiotów** do czyszczenia głowicy — trwale ją uszkodzisz!
+
+---
+
+## Czyszczenie enkodera magnetycznego
+
+Jeśli drukarka ma opcję kodowania paska magnetycznego i pojawiają się błędy kodowania:
+
+1. **Wyłącz** drukarkę
+2. **Otwórz** górną pokrywę
+3. Znajdź **enkoder magnetyczny** (element kontaktowy w ścieżce transportu kart)
+4. **Przetrzyj** enkoder wacikiem nasączonym alkoholem izopropylowym — ruch lewo-prawo
+5. Poczekaj **2-3 minuty** na wyschnięcie
+6. Zamknij pokrywę i **włącz** drukarkę
+
+---
+
+## Wymiana głowicy drukującej
+
+Głowicę należy wymienić, gdy pojawiają się **trwałe białe linie** na wydrukach (przepalone elementy grzejne) lub gdy głowica jest fizycznie uszkodzona.
+
+### Demontaż starej głowicy
+
+1. **Otwórz** górną pokrywę
+2. **Wciśnij głowicę do góry** i **obróć** — zwolni się z zaczepów
+3. **Odłącz konektor** kabla od głowicy
+
+### Montaż nowej głowicy
+
+1. **Podłącz konektor** kabla do nowej głowicy
+2. **Zanotuj numer seryjny** i **wartość rezystancji** wydrukowane na głowicy
+3. Włóż kulkę stabilizującą w gniazdo w pokrywie górnej
+4. **Wciśnij głowicę do góry** i **obróć w zaczepy**
+5. W sterowniku drukarki: **Advanced** → **Diagnostics and Calibration** → **Commands & Calibration**
+6. W sekcji **Printhead** — wpisz **numer seryjny** i **wartość rezystancji** nowej głowicy
+
+> **💡 Ważne:** Bez wpisania prawidłowego numeru seryjnego i rezystancji drukarka może drukować z nieprawidłową jakością lub zgłaszać błędy głowicy.
+
+---
+
+## Orientacja kart w podajniku
+
+| Typ karty | Orientacja w podajniku |
+|-----------|----------------------|
+| **Zwykłe PVC** | Dowolna orientacja |
+| **Z paskiem magnetycznym** | Pasek na dole, po prawej stronie |
+| **Z chipem kontaktowym** | Chip do góry, z przodu drukarki |
+| **Zbliżeniowe (contactless)** | Dowolna orientacja |
+
+---
+
+## Materiały eksploatacyjne i części zamienne
+
+### Kasety z taśmą (ribbon)
+
+Drukarki ZC100/ZC300 używają **kaset Zebra ZC Series** z wbudowanym:
+- **Wałkiem czyszczącym** (cleaning roller) — wymienia się automatycznie z każdą nową kasetą
+- **Chipem identyfikacyjnym** — autoryzacja kasety i śledzenie zużycia
+
+| Typ taśmy | Zastosowanie | Wydajność |
+|-----------|-------------|-----------|
+| **YMCKO** | Pełny kolor + czarny + warstwa ochronna | ~200 kart (jednostronnie) |
+| **YMCKOK** | Jak YMCKO + czarny na rewersie | ~200 kart (dwustronnie) |
+| **K (czarna)** | Tekst, kody kreskowe (monochromatyczne) | ~2000 kart |
+| **KdO** | Czarny + warstwa ochronna | ~500 kart |
+
+### Części zamienne
+
+| Część | Opis |
+|-------|------|
+| **Głowica drukująca** | Wymiana przy białych liniach / uszkodzeniu — wymagany nr seryjny + rezystancja |
+| **Wałek czyszczący** | Wbudowany w kasetę — wymienia się automatycznie |
+| **Karty czyszczące** | Jednorazowe karty do cyklu czyszczenia |
+| **Zasilacz 100W** | Zewnętrzny zasilacz — używać wyłącznie oryginalnego |
+| **Moduł flipper** | Opcja druku dwustronnego + kosz odrzutów |
+| **Enkoder magnetyczny** | Opcja kodowania pasków ISO 7811 (HiCo/LoCo, 3 ścieżki) |
+| **Moduł Wi-Fi** | Opcja bezprzewodowa 802.11b/g |
+| **Enkoder smart card** | Opcja kontaktowa (DB-9) lub zbliżeniowa (antena) |
+
+---
+
+## Cennik napraw ZC100/ZC300
+
+| Usługa | Cena od (netto) | Czas realizacji |
+|--------|-----------------|-----------------|
+| **Diagnostyka** | **Bezpłatna** | 1 dzień roboczy |
+| **Czyszczenie i konserwacja** | 250 zł | 1 dzień roboczy |
+| **Wymiana głowicy drukującej** | 900 zł | 1-2 dni robocze |
+| **Naprawa mechanizmu transportu kart** | 500 zł | 2-3 dni robocze |
+| **Naprawa enkodera magnetycznego** | 400 zł | 1-2 dni robocze |
+| **Naprawa enkodera smart card** | 500 zł | 2-3 dni robocze |
+| **Naprawa płyty głównej** | 700 zł | 2-3 dni robocze |
+| **Naprawa/wymiana zasilacza** | 350 zł | 1 dzień roboczy |
+| **Naprawa modułu flipper (duplex)** | 450 zł | 1-2 dni robocze |
+| **Naprawa modułu Wi-Fi** | 300 zł | 1-2 dni robocze |
+| **Wymiana wyświetlacza LCD (ZC300)** | 400 zł | 1-2 dni robocze |
+
+> **📦 Jak zlecić naprawę?** Wypełnij [formularz serwisowy](https://www.serwis-zebry.pl/#formularz) — odpowiemy w ciągu 24 godzin. Wysyłka drukarki kurierem na nasz koszt. Diagnostyka zawsze bezpłatna.
+
+---
+
+## Najczęściej zadawane pytania (FAQ)
+
+**Drukarka kart Zebra ZC100 nie drukuje — co zrobić?**
+
+Sprawdź 5 diod LED: POWER (czerwona=błąd krytyczny), CARD (czerwona=brak kart, migająca czerwona=zacięcie), RIBBON (migająca czerwona=brak taśmy, czerwona=niewłaściwa kaseta). Upewnij się, że kaseta z taśmą jest zainstalowana, karty w podajniku i głowica zamknięta. Wykonaj czyszczenie. [Bezpłatna diagnostyka →](https://www.serwis-zebry.pl/#formularz)
+
+**Co oznaczają diody LED na drukarce kart Zebra ZC100/ZC300?**
+
+5 diod: POWER (zielona=gotowa, czerwona=błąd krytyczny), CARD (zielona=karty OK, migająca czerwona=zacięcie, czerwona=brak kart), RIBBON (zielona=taśma OK, bursztynowa=kończy się, migająca czerwona=brak/zacięcie, czerwona=niewłaściwa), CLEAN (bursztynowa=czyszczenie wymagane, czerwona=błąd/pełny kosz), MANUAL FEED (zielona=gotowa, czerwona=błąd).
+
+**Jakie komunikaty wyświetla LCD na drukarce Zebra ZC300?**
+
+Ostrzeżenia (żółty ekran): Ribbon low. Błędy (czerwony ekran): Ribbon out, Card jam, Cards out, Invalid ribbon, Ribbon color detect error, Cleaning required, Reject bin full. Naciśnięcie lewego przycisku pokazuje animację rozwiązania problemu.
+
+**Jak usunąć zacięcie karty w ZC100/ZC300?**
+
+Otwórz górną pokrywę, wyjmij kasetę z taśmą, obróć kółko ręcznego przesuwu w kierunku przodu drukarki — karta wysunie się z mechanizmu. Nigdy nie używaj narzędzi do wyjmowania kart! Włóż kasetę i zamknij pokrywę.
+
+**Ile kosztuje naprawa drukarki kart Zebra ZC100/ZC300?**
+
+Cennik: diagnostyka — bezpłatna, czyszczenie — od 250 zł, wymiana głowicy — od 900 zł, naprawa transportu kart — od 500 zł, naprawa enkodera — od 400 zł, naprawa płyty głównej — od 700 zł. [Formularz serwisowy →](https://www.serwis-zebry.pl/#formularz)
+
+**Jak wyczyścić drukarkę kart Zebra ZC100/ZC300?**
+
+Ze sterownika: Printing Preferences > Help & Support > Clean Now, włóż kartę czyszczącą. Z LCD (ZC300): Tools > Cleaning. Ręcznie: wyłącz drukarkę, otwórz pokrywę, przetrzyj głowicę wacikiem z alkoholem izopropylowym (ruch lewo-prawo), poczekaj 2-3 minuty.
+
+**Czym różni się Zebra ZC100 od ZC300?**
+
+ZC100 ma 5 diod LED bez wyświetlacza. ZC300 ma dodatkowy 2-calowy kolorowy LCD z animowanymi instrukcjami i menu. ZC300 jest szybsza (200 vs 180 kart/h kolor). Mechanizm druku, głowica i kasety taśm są identyczne.
+
+**Jak wymienić głowicę w drukarce Zebra ZC100/ZC300?**
+
+Otwórz pokrywę, wciśnij głowicę do góry i obróć z zaczepów, odłącz kabel. Podłącz kabel do nowej głowicy, zanotuj numer seryjny i rezystancję, zamontuj w zaczepach. W sterowniku: Advanced > Diagnostics and Calibration > Commands & Calibration > Printhead — wpisz dane nowej głowicy.
+
+**Co oznacza błąd "Invalid ribbon"?**
+
+Czerwona ciągła RIBBON = niekompatybilna kaseta. Wyjmij i włóż ponownie. Sprawdź czy kaseta jest do serii ZC. Sprawdź chip identyfikacyjny. Spróbuj inną kasetę. Jeśli żadna nie działa — uszkodzony czytnik chipa w drukarce, wymagany serwis.
+
+**Jak podłączyć drukarkę Zebra ZC300 do sieci?**
+
+Ethernet: podłącz kabel RJ-45 — DHCP automatycznie. IP wyświetla się na LCD. Diody portu: pomarańczowa (1 mignięcie=10Mbps, 2=100Mbps), zielona (ciągła=połączenie, migająca=dane). Wi-Fi (opcja): konfiguracja w sterowniku. Ikona LCD: szara=wył., czerwona=brak, żółta=słaby, biała=OK.
+
+---
+
+## Powiązane artykuły
+
+- [Kody błędów drukarek kart Zebra ZC300/ZXP](/blog/kody-bledow-drukarki-kart-zebra-zc300-zxp)
+- [Drukarka Zebra zacina karty — przyczyny i rozwiązania](/blog/drukarka-zebra-zacina-karty-przyczyny-rozwiazania)
+- [Biała linia na karcie — wymiana głowicy Zebra](/blog/biala-linia-na-karcie-wymiana-glowicy-zebra)
+- [Błędy kodowania paska magnetycznego Zebra](/blog/bledy-kodowania-paska-magnetycznego-zebra)
+- [Porównanie drukarek kart Zebra ZC100, ZC300, ZXP](/blog/porownanie-drukarek-kart-zebra-zc100-zc300-zxp)
+- [Drukarka Zebra nie drukuje — przyczyny i rozwiązania](/blog/drukarka-zebra-nie-drukuje-przyczyny-rozwiazania)
+
+👉 **[Serwis Drukarek Zebra — naprawy, konserwacja, części](/serwis-drukarek-zebra)**
+`
   }
 
 ]
