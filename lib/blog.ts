@@ -28379,6 +28379,653 @@ Tak. Zebra ZT111 zastąpiła model ZT220 w ofercie. Drukarka jest kompatybilna z
 
 👉 **[Serwis Drukarek Zebra — naprawy, konserwacja, części](/serwis-drukarek-zebra)**
 `
+  },
+
+  {
+    slug: 'serwis-drukarki-zebra-zt220-zt230-diagnostyka-naprawa',
+    title: 'Serwis drukarki Zebra ZT220/ZT230 — diagnostyka, naprawa i kalibracja [2026]',
+    excerpt: 'Kompletny przewodnik serwisowy drukarek przemysłowych Zebra ZT220 i ZT230. Diagnostyka 5 diod LED (ZT220), komunikaty LCD (ZT230), 8 schematów naprawczych krok po kroku, kalibracja ręczna 14 kroków, regulacja docisku głowicy i napięcia taśmy. Koniec wsparcia 2027 — migracja do ZT111/ZT231. Cennik napraw. Bezpłatna diagnostyka.',
+    coverImage: '/blog/serwis-drukarki-zebra-zt220-zt230-diagnostyka-naprawa.jpeg',
+    coverImageAlt: 'Serwis drukarek przemysłowych Zebra ZT220 i ZT230 — profesjonalna diagnostyka LED i LCD, kalibracja czujników, wymiana głowicy i konserwacja',
+    author: {
+      name: 'Krzysztof Wójcik',
+      role: 'Kierownik Serwisu TAKMA'
+    },
+    publishedAt: '2026-02-08',
+    readingTime: 22,
+    deviceType: 'drukarki',
+    subDeviceType: 'etykiet',
+    category: 'troubleshooting',
+    tags: ['ZT220', 'ZT230', 'ZT200 Series', 'drukarka przemysłowa', 'serwis drukarki zebra', 'naprawa ZT220', 'naprawa ZT230', 'diagnostyka', 'drukarka etykiet', 'kalibracja', 'LCD', 'LED', 'EOL', 'ZT111', 'ZT231'],
+    seo: {
+      metaTitle: 'Serwis drukarki Zebra ZT220/ZT230 — diagnostyka, naprawa i kalibracja [2026]',
+      metaDescription: 'Drukarka Zebra ZT220 lub ZT230 nie drukuje? Diagnostyka 5 diod LED, komunikaty LCD, 8 schematów naprawczych, kalibracja 14 kroków, błędy MEDIA OUT, RIBBON OUT, HEAD OPEN. Koniec wsparcia 2027. Cennik napraw. Bezpłatna diagnostyka.',
+      keywords: [
+        'serwis drukarki zebra zt220', 'serwis drukarki zebra zt230', 'serwis zebra zt220', 'serwis zebra zt230',
+        'naprawa zebra zt220', 'naprawa zebra zt230', 'naprawa zt220', 'naprawa zt230',
+        'naprawa drukarki przemysłowej zebra', 'serwis zt220', 'serwis zt230', 'serwis zt200',
+        'zebra zt220 nie drukuje', 'zebra zt230 nie drukuje', 'zebra zt220 błąd', 'zebra zt230 błąd',
+        'zebra zt220 media out', 'zebra zt230 media out', 'zebra zt220 ribbon out', 'zebra zt230 ribbon out',
+        'zebra zt220 head open', 'zebra zt230 head open', 'zebra zt220 head over temp', 'zebra zt230 head over temp',
+        'zebra zt220 blady wydruk', 'zebra zt230 blady wydruk', 'zebra zt220 puste etykiety',
+        'zebra zt220 nie wykrywa etykiet', 'zebra zt230 nie wykrywa etykiet',
+        'zebra zt230 thermistor fault', 'zebra zt230 cutter fault', 'zebra zt230 rewind full',
+        'zebra zt220 migająca dioda', 'zebra zt220 status czerwony', 'zebra zt220 status żółty',
+        'zebra zt220 supplies miga', 'zebra zt220 network miga', 'zebra zt220 pause świeci',
+        'zebra zt230 komunikaty lcd', 'zebra zt230 wyświetlacz', 'zebra zt230 error messages',
+        'zebra zt230 printer paused', 'zebra zt230 printer ready', 'zebra zt230 head element bad',
+        'zebra zt220 kalibracja', 'kalibracja zebra zt220', 'kalibracja zebra zt230', 'kalibracja czujników zt200',
+        'zebra zt220 kalibracja ręczna', 'zebra zt220 smartcal', 'zebra zt230 kalibracja 14 kroków',
+        'zebra zt220 reset', 'reset fabryczny zt220', 'zebra zt230 reset', 'reset fabryczny zt230',
+        'zebra zt220 ustawienia fabryczne', 'zebra zt230 ustawienia fabryczne',
+        'zebra zt220 reset sieci', 'zebra zt220 ^JUF', 'zebra zt220 ^JUN',
+        'wymiana głowicy zt220', 'głowica zt220 cena', 'głowica zebra zt220', 'głowica zt230',
+        'głowica 203 dpi zt220', 'głowica 300 dpi zt230',
+        'wymiana wałka zt220', 'wałek dociskowy zt220', 'wymiana wałka dociskowego zt230',
+        'ile kosztuje naprawa zt220', 'cennik napraw zt220', 'cennik serwisu zt230',
+        'zebra zt220 sterowniki', 'sterowniki zt220 windows 11', 'sterowniki zt230 windows 10',
+        'zebra zt220 ethernet', 'zebra zt220 wifi', 'zebra zt230 sieć', 'zebra zt220 network error',
+        'zebra zt220 drukuje co drugą etykietę', 'zebra zt230 wolno drukuje',
+        'zebra zt220 docisk głowicy', 'zebra zt220 regulacja głowicy', 'zebra zt220 printhead pressure',
+        'zebra zt220 ribbon tension', 'zebra zt220 napięcie taśmy', 'zebra zt230 napięcie taśmy',
+        'zebra zt220 sensor profile', 'zebra zt220 profil czujnika',
+        'zebra zt220 konserwacja', 'zebra zt220 czyszczenie', 'zebra zt220 maintenance',
+        'zebra zt220 części zamienne', 'zebra zt220 part number', 'zebra zt230 części zamienne',
+        'zebra zt220 vs zt230', 'zebra zt220 vs zt111', 'zebra zt230 vs zt231',
+        'zamiennik zebra zt220', 'następca zt220', 'zamiennik zt230', 'następca zt230',
+        'zebra zt220 end of life', 'zebra zt230 koniec wsparcia', 'zebra zt200 eol',
+        'zebra zt220 specyfikacja', 'zebra zt220 dane techniczne',
+        'zebra zt220 cena', 'drukarka zebra zt220', 'drukarka zebra zt230',
+        'zebra zt200 series', 'zebra zt220 instrukcja obsługi', 'zebra zt230 instrukcja',
+        'zebra zt220 jak skalibrować', 'zebra zt230 konfiguracja'
+      ],
+      faqSchema: [
+        {
+          question: 'Drukarka Zebra ZT220 nie drukuje — co zrobić?',
+          answer: 'Sprawdź 5 diod LED na panelu: STATUS (zielona=OK, czerwona=błąd), SUPPLIES (czerwona=brak mediów, bursztynowa migająca=brak taśmy). Wykonaj kalibrację czujników: przytrzymaj PAUSE + FEED przez 2 sekundy. Jeśli dioda STATUS jest czerwona — otwórz pokrywę i sprawdź czy głowica jest zamknięta, media i taśma załadowane prawidłowo. Bezpłatna diagnostyka: serwis-zebry.pl/#formularz'
+        },
+        {
+          question: 'Co oznaczają diody LED na drukarce Zebra ZT220?',
+          answer: 'ZT220 ma 5 diod: STATUS (zielona=gotowa, zielona migająca=pauza, bursztynowa=przegrzanie głowicy, czerwona=błąd), PAUSE (bursztynowa=pauza aktywna), DATA (zielona=transfer danych lub dane w buforze), SUPPLIES (czerwona=brak mediów, bursztynowa migająca=brak taśmy, bursztynowa ciągła=taśma załadowana w trybie DT), NETWORK (zielona=100Base-T, bursztynowa=10Base-T, czerwona=błąd). Każda kombinacja wskazuje konkretny problem.'
+        },
+        {
+          question: 'Jakie komunikaty wyświetla LCD na drukarce Zebra ZT230?',
+          answer: 'ZT230 wyświetla na LCD: PRINTER READY (gotowa), PRINTER PAUSED (wstrzymana), HEAD OPEN (głowica otwarta), RIBBON OUT (brak taśmy), MEDIA OUT (brak mediów), HEAD ELEMENT BAD (uszkodzona głowica), HEAD OVER TEMP (przegrzanie), THERMISTOR FAULT (awaria termistora), REWIND FULL (pełny nawijak), CUTTER FAULT (awaria gilotyny), OUT OF MEMORY (brak pamięci). Komunikat wskazuje dokładną przyczynę problemu.'
+        },
+        {
+          question: 'Jak skalibrować czujniki w drukarce Zebra ZT220/ZT230?',
+          answer: 'Szybka kalibracja SmartCal: przytrzymaj PAUSE + FEED przez 2 sekundy — drukarka automatycznie skalibruje czujniki. Kalibracja ręczna (14 kroków): wyłącz drukarkę, przytrzymaj PAUSE i włącz, zwolnij gdy STATUS zmieni kolor, wybierz tryb kalibracji przyciskami PAUSE/FEED/CANCEL, podawaj media zgodnie z instrukcjami diod. Kalibracja ręczna jest wymagana przy niestandardowych mediach.'
+        },
+        {
+          question: 'Ile kosztuje naprawa drukarki Zebra ZT220/ZT230?',
+          answer: 'Cennik napraw ZT220/ZT230: diagnostyka — bezpłatna, czyszczenie/konserwacja — od 200 zł, wymiana głowicy 203 dpi — od 750 zł, wymiana głowicy 300 dpi — od 1050 zł, naprawa płyty głównej — od 650 zł, naprawa gilotyny (ZT230) — od 400 zł, wymiana wałka dociskowego — od 300 zł. Czas realizacji 1-3 dni robocze. Formularz: serwis-zebry.pl/#formularz'
+        },
+        {
+          question: 'Jak zresetować drukarkę Zebra ZT220/ZT230 do ustawień fabrycznych?',
+          answer: 'Trzy metody: (1) Klawisze: przytrzymaj FEED + PAUSE podczas włączania drukarki — reset do ustawień fabrycznych. (2) Komenda ZPL: wyślij ^JUF (reset fabryczny) lub ^JUN (reset sieci). (3) Menu LCD (tylko ZT230): Tools > LOAD DEFAULTS > FACTORY DEFAULTS. Reset sieci: przytrzymaj CANCEL + PAUSE podczas włączania drukarki.'
+        },
+        {
+          question: 'Czym różni się Zebra ZT220 od ZT230?',
+          answer: 'ZT220 ma panel z 3 przyciskami i 5 diodami LED — bez wyświetlacza. ZT230 ma dodatkowy wyświetlacz LCD z komunikatami tekstowymi i menu konfiguracyjne. Oba modele mają identyczny mechanizm druku, te same głowice (203 lub 300 dpi), tę samą prędkość drukowania (152 mm/s) i identyczne porty komunikacyjne. ZT230 ma opcję gilotyny (cutter). Mechanizm druku i części zamienne są wymienne między modelami.'
+        },
+        {
+          question: 'Kiedy kończy się wsparcie dla drukarek Zebra ZT220/ZT230?',
+          answer: 'Seria ZT200 (ZT220, ZT230) została wycofana ze sprzedaży 27 czerwca 2022 r. Wsparcie serwisowe Zebra kończy się 31 stycznia 2027 r. Po tej dacie Zebra nie gwarantuje dostępności części zamiennych ani aktualizacji firmware. Zalecana migracja: ZT220 na ZT111, ZT230 na ZT231. TAKMA serwisuje ZT200 bez ograniczeń czasowych.'
+        },
+        {
+          question: 'Jak wyczyścić głowicę drukującą w Zebra ZT220/ZT230?',
+          answer: 'Otwórz pokrywę mediów i podnieś dźwignię zamka głowicy. Wyjmij taśmę i media. Użyj zestawu Zebra Preventive Maintenance Kit lub patyczka nasączonego 99,7% alkoholem izopropylowym. Przetrzyj brązowy pasek głowicy od końca do końca. Wyczyść też wałek dociskowy (platen roller) obracając go ręcznie. Częstotliwość: co rolkę etykiet (tryb termiczny bezpośredni) lub co rolkę taśmy (tryb termotransferowy).'
+        },
+        {
+          question: 'Jaki model zastępuje drukarkę Zebra ZT220?',
+          answer: 'Bezpośrednim następcą ZT220 jest Zebra ZT111 z rodziny ZT100 Series. ZT111 ma identyczny uproszczony panel sterowania (3 przyciski + 5 diod LED, bez LCD), ale nowszy mechanizm druku, wyższą prędkość (254 mm/s vs 152 mm/s), lepszą łączność (Bluetooth, WiFi opcjonalnie) i wsparcie Link-OS. ZT230 z LCD zastąpiono modelem ZT231 z kolorowym ekranem dotykowym. Oba nowe modele są kompatybilne z mediami i taśmami ZT200.'
+        }
+      ]
+    },
+    content: `> **🎯 Szybka odpowiedź:** Drukarka **Zebra ZT220** lub **ZT230** nie drukuje? Sprawdź **5 diod LED** na panelu (ZT220) lub komunikat na **wyświetlaczu LCD** (ZT230). Czerwona STATUS + czerwona SUPPLIES = **brak mediów**, czerwona STATUS + migająca bursztynowa SUPPLIES = **brak taśmy**. Wykonaj kalibrację: przytrzymaj **PAUSE + FEED** przez 2 sekundy. Jeśli to nie pomoże — [wyślij drukarkę do bezpłatnej diagnostyki](https://www.serwis-zebry.pl/#formularz).
+
+**Zebra ZT220** i **ZT230** to drukarki przemysłowe z serii ZT200 — jedne z najpopularniejszych modeli w polskich magazynach, centrach logistycznych i zakładach produkcyjnych. **ZT220** ma uproszczony panel z **3 przyciskami i 5 diodami LED** (bez wyświetlacza), natomiast **ZT230** posiada dodatkowy **wyświetlacz LCD** z komunikatami tekstowymi i menu konfiguracyjne.
+
+**Model ZT220 oraz ZT230 został wycofany ze sprzedaży 27 czerwca 2022 r.**, a wsparcie serwisowe Zebra kończy się **31 stycznia 2027 r.** Mimo statusu EOL (End of Life) drukarki te nadal pracują w tysiącach firm — ten przewodnik pomoże Ci utrzymać je w pełnej sprawności do końca ich życia eksploatacyjnego.
+
+---
+
+## Seria ZT200 — ZT220 vs ZT230
+
+| Cecha | **ZT220** | **ZT230** |
+|-------|-----------|-----------|
+| **Panel sterowania** | 3 przyciski + 5 diod LED | 3 przyciski + 5 diod LED + **wyświetlacz LCD** |
+| **Diagnostyka** | Kolory i stany diod LED | Komunikaty tekstowe na LCD + diody LED |
+| **Konfiguracja** | Komendy ZPL / strona WWW | Menu LCD + komendy ZPL / strona WWW |
+| **Rozdzielczość** | 203 dpi | 203 dpi / **300 dpi** |
+| **Prędkość druku** | 152 mm/s (6 cali/s) | 152 mm/s (6 cali/s) |
+| **Gilotyna (cutter)** | Brak | Opcja |
+| **Wewnętrzny nawijak** | Brak | Opcja |
+| **Następca** | **ZT111** | **ZT231** |
+| **Mechanizm druku** | Identyczny | Identyczny |
+| **Głowice drukujące** | Wymienne z ZT230 | Wymienne z ZT220 |
+
+> **💡 Wskazówka:** Mimo różnic w panelu sterowania, **mechanizm druku ZT220 i ZT230 jest identyczny**. Wszystkie procedury serwisowe dotyczące głowicy, wałka, mediów i taśmy są takie same dla obu modeli.
+
+---
+
+## Panel sterowania — 3 przyciski i 5 diod LED
+
+Oba modele (ZT220 i ZT230) mają **3 przyciski fizyczne** na panelu sterowania:
+
+| Przycisk | Funkcja | Opis |
+|----------|---------|------|
+| **PAUSE** | Wstrzymanie/wznowienie | Wstrzymuje drukowanie po bieżącej etykiecie. Ponowne naciśnięcie wznawia. |
+| **FEED** | Podanie etykiety | Podaje jedną pustą etykietę. W trybie ciągłym — podaje media o długość jednego formatu. |
+| **CANCEL** | Anulowanie | Anuluje jedno zadanie druku w buforze. Przytrzymanie 2 sekundy — anuluje wszystkie zadania. |
+
+Nad przyciskami znajduje się **5 diod LED**: **STATUS**, **PAUSE**, **DATA**, **SUPPLIES** i **NETWORK**. W modelu ZT230 dodatkowo zamontowany jest **wyświetlacz LCD** wyświetlający komunikaty tekstowe.
+
+### Kluczowe kombinacje przycisków
+
+| Kombinacja | Kiedy | Efekt |
+|------------|-------|-------|
+| **CANCEL** (przytrzymaj przy włączaniu) | Włączanie drukarki | Wydruk etykiety konfiguracyjnej + etykiety sieci |
+| **PAUSE** (przytrzymaj przy włączaniu) | Włączanie drukarki | Test PAUSE (test mechanizmu druku) |
+| **FEED + PAUSE** (przytrzymaj przy włączaniu) | Włączanie drukarki | **Reset do ustawień fabrycznych** |
+| **CANCEL + PAUSE** (przytrzymaj przy włączaniu) | Włączanie drukarki | **Reset ustawień sieci** |
+| **PAUSE + FEED** (przytrzymaj 2 sek.) | Drukarka włączona | **Kalibracja SmartCal** |
+| **PAUSE + CANCEL** (przytrzymaj 2 sek.) | Drukarka włączona | Kalibracja ręczna (tryb kalibracji) |
+| **PAUSE + FEED + CANCEL** (przytrzymaj 2 sek.) | Drukarka włączona | **Kalibracja ręczna (14 kroków)** |
+
+---
+
+## Diagnostyka 5 diod LED — ZT220
+
+Panel sterowania ZT220 wyposażony jest w **5 diod LED**. Każda dioda może świecić w różnych kolorach i trybach — kombinacje stanów pozwalają zidentyfikować problem bez podłączania drukarki do komputera.
+
+### Dioda STATUS
+
+| Stan | Kolor | Znaczenie |
+|------|-------|-----------|
+| Świeci ciągłe | 🟢 Zielona | Drukarka **gotowa** — normalny stan pracy |
+| Miga | 🟢 Zielona | Drukarka **wstrzymana** lub w buforze przechowywany jest niekompletny format |
+| Świeci ciągłe | 🟡 Bursztynowa | **Przegrzanie głowicy** (HEAD OVER TEMP) — drukarka czeka na schłodzenie |
+| Świeci ciągłe | 🔴 Czerwona | **Błąd krytyczny**: głowica otwarta / brak mediów / brak taśmy / awaria termistora |
+
+### Dioda PAUSE
+
+| Stan | Kolor | Znaczenie |
+|------|-------|-----------|
+| Świeci ciągłe | 🟡 Bursztynowa | Drukarka jest w trybie **pauzy** — naciśnij PAUSE aby wznowić |
+| Zgaszona | — | Drukarka nie jest wstrzymana |
+
+### Dioda DATA
+
+| Stan | Kolor | Znaczenie |
+|------|-------|-----------|
+| Świeci ciągłe | 🟢 Zielona | W buforze są **dane do wydrukowania** (format zapisany, ale niewydrukowany) |
+| Miga | 🟢 Zielona | **Transfer danych** w toku |
+| Zgaszona | — | Brak danych w buforze |
+
+### Dioda SUPPLIES
+
+| Stan | Kolor | Znaczenie |
+|------|-------|-----------|
+| Świeci ciągłe | 🔴 Czerwona | **MEDIA OUT** — brak mediów (etykiet/papieru) lub media nieprawidłowo załadowane |
+| Miga | 🟡 Bursztynowa | **RIBBON OUT** — brak taśmy termotransferowej lub taśma nieprawidłowo załadowana |
+| Świeci ciągłe | 🟡 Bursztynowa | Taśma załadowana, ale drukarka ustawiona na tryb **termiczny bezpośredni (DT)** — wyjmij taśmę lub zmień tryb na TT |
+| Zgaszona | — | Media i taśma załadowane prawidłowo |
+
+### Dioda NETWORK
+
+| Stan | Kolor | Znaczenie |
+|------|-------|-----------|
+| Świeci ciągłe | 🟢 Zielona | Połączenie Ethernet **100Base-T** aktywne |
+| Świeci ciągłe | 🟡 Bursztynowa | Połączenie Ethernet **10Base-T** aktywne |
+| Świeci ciągłe | 🔴 Czerwona | **Błąd sieci** — kabel odłączony lub problem z konfiguracją |
+| Miga | Dowolny | Aktywność sieciowa (transmisja danych) |
+| Zgaszona | — | Brak modułu sieciowego lub brak połączenia |
+
+> **⚠️ Najczęstsza kombinacja błędu:** czerwona STATUS + czerwona SUPPLIES = **MEDIA OUT** (brak mediów). Otwórz pokrywę, sprawdź czy etykiety nie skończyły się i czy są prawidłowo provadzone przez czujnik.
+
+---
+
+## Komunikaty wyświetlacza LCD — ZT230
+
+Model **ZT230** wyświetla komunikaty tekstowe na wyświetlaczu LCD, co znacząco ułatwia diagnostykę w porównaniu do ZT220.
+
+| Komunikat LCD | Znaczenie | Rozwiązanie |
+|---------------|-----------|-------------|
+| **PRINTER READY** | Drukarka gotowa do pracy | Stan normalny — brak działań |
+| **PRINTER PAUSED** | Drukarka wstrzymana | Naciśnij **PAUSE** aby wznowić drukowanie |
+| **HEAD OPEN** | Głowica drukująca otwarta | Zamknij głowicę — opuść dźwignię zamka do końca |
+| **RIBBON OUT** | Brak taśmy lub taśma nieprawidłowo załadowana | Załaduj taśmę lub zmień tryb druku na DT (jeśli nie używasz taśmy) |
+| **MEDIA OUT** | Brak mediów | Załaduj etykiety/papier i wykonaj kalibrację |
+| **HEAD ELEMENT BAD** | Uszkodzony element głowicy | Głowica ma przepalone punkty — wymiana głowicy drukującej |
+| **HEAD OVER TEMP** | Przegrzanie głowicy | Poczekaj na schłodzenie. Jeśli powtarza się — zmniejsz ciemność lub prędkość druku |
+| **THERMISTOR FAULT** | Awaria termistora głowicy | Sprawdź kabel danych głowicy. Jeśli kabel OK — **wymiana głowicy** |
+| **REWIND FULL** | Pełny wewnętrzny nawijak | Wyjmij wydrukowane etykiety z nawijaka |
+| **CUTTER FAULT** | Awaria gilotyny | Wyczyść ostrze gilotyny. Jeśli zablokowane — **serwis** |
+| **OUT OF MEMORY** | Brak pamięci | Zmniejsz rozmiar etykiety, usuń niewykorzystane formaty komendą **^ID** |
+
+> **💡 ZT220 vs ZT230 diagnostyka:** Na ZT220 ten sam problem (np. brak mediów) sygnalizowany jest przez **czerwoną diodę SUPPLIES + czerwoną STATUS**. Na ZT230 zobaczysz jednoznaczny komunikat **MEDIA OUT** na wyświetlaczu LCD — jest to znacznie łatwiejsze do zdiagnozowania.
+
+---
+
+## 8 schematów naprawczych krok po kroku
+
+### 1. Drukarka nie drukuje — brak reakcji na zadanie druku
+
+**Objawy:** Drukarka włączona, diody świecą, ale po wysłaniu zadania nie drukuje.
+
+1. Sprawdź diodę **PAUSE** — jeśli świeci bursztynowo → naciśnij **PAUSE** aby wznowić
+2. Sprawdź diodę **DATA** — jeśli nie świeci → dane nie docierają do drukarki
+3. Sprawdź połączenie (USB/Ethernet/RS-232) — odłącz i podłącz ponownie kabel
+4. Wydrukuj etykietę konfiguracyjną: przytrzymaj **CANCEL** przy włączaniu drukarki
+5. Jeśli etykieta konfiguracyjna drukuje się prawidłowo → problem z komunikacją (sterownik/port/kabel)
+6. Jeśli etykieta konfiguracyjna nie drukuje się → wykonaj reset fabryczny: **FEED + PAUSE** przy włączaniu
+7. Po resecie wykonaj kalibrację: **PAUSE + FEED** przez 2 sekundy
+
+> Nie pomogło? → [Wyślij drukarkę do bezpłatnej diagnostyki](https://www.serwis-zebry.pl/#formularz)
+
+### 2. Błąd MEDIA OUT — brak mediów
+
+**Objawy:** ZT220: czerwona STATUS + czerwona SUPPLIES. ZT230: komunikat **MEDIA OUT** na LCD.
+
+1. Otwórz pokrywę mediów i sprawdź czy etykiety się nie skończyły
+2. Jeśli etykiety są załadowane — sprawdź czy przechodzą **nad czujnikiem mediów** (pod głowicą)
+3. Sprawdź pozycję czujnika — suwak czujnika musi być ustawiony na **środku etykiety** (dla mediów z przerwą) lub na **pozycji czarnego znacznika** (black mark)
+4. Wyczyść czujnik mediów sprężonym powietrzem lub patyczkiem z alkoholem izopropylowym
+5. Wykonaj kalibrację: przytrzymaj **PAUSE + FEED** przez 2 sekundy
+6. Jeśli kalibracja nie pomoże — wykonaj kalibrację ręczną: **PAUSE + FEED + CANCEL** przez 2 sekundy
+
+> Nie pomogło? → [Wyślij drukarkę do bezpłatnej diagnostyki](https://www.serwis-zebry.pl/#formularz)
+
+### 3. Błąd RIBBON OUT — brak taśmy
+
+**Objawy:** ZT220: czerwona STATUS + migająca bursztynowa SUPPLIES. ZT230: komunikat **RIBBON OUT** na LCD.
+
+1. Sprawdź czy taśma jest załadowana i prawidłowo nawleczona (strona kolorowa do mediów)
+2. Sprawdź czy taśma nie jest zerwana — jeśli tak, sklej i nawiń ponownie
+3. Sprawdź **czujnik taśmy** — wyczyść patyczkiem z alkoholem izopropylowym
+4. Jeśli nie używasz taśmy (tryb termiczny bezpośredni) — zmień tryb druku na **DT**: komenda ZPL **^MT,D** lub w ustawieniach drukarki
+5. Sprawdź napięcie taśmy — zbyt luźna taśma może powodować fałszywy błąd
+6. Wykonaj kalibrację: **PAUSE + FEED** przez 2 sekundy
+
+> Nie pomogło? → [Wyślij drukarkę do bezpłatnej diagnostyki](https://www.serwis-zebry.pl/#formularz)
+
+### 4. Błąd HEAD OPEN — głowica otwarta
+
+**Objawy:** ZT220: czerwona STATUS. ZT230: komunikat **HEAD OPEN** na LCD.
+
+1. Upewnij się, że **dźwignia zamka głowicy** jest opuszczona do końca (pozycja zamkniętej kłódki)
+2. Sprawdź czy nic nie blokuje zamknięcia głowicy (resztki etykiety, ciało obce)
+3. Oczyść styki zamka i sprawdź **przełącznik otwarcia głowicy** (micro switch)
+4. Jeśli przełącznik uszkodzony — **wymiana przełącznika w serwisie**
+
+> Nie pomogło? → [Wyślij drukarkę do bezpłatnej diagnostyki](https://www.serwis-zebry.pl/#formularz)
+
+### 5. Błąd HEAD OVER TEMP — przegrzanie głowicy
+
+**Objawy:** ZT220: bursztynowa STATUS. ZT230: komunikat **HEAD OVER TEMP** na LCD.
+
+1. **Poczekaj** — drukarka automatycznie wznowi drukowanie po schłodzeniu głowicy
+2. Zmniejsz **ciemność druku (darkness)** — zbyt wysoka wartość powoduje nadmierne nagrzewanie
+3. Zmniejsz **prędkość druku** — wolniejszy druk generuje mniej ciepła
+4. Sprawdź temperaturę otoczenia — ZT200 pracuje do **40°C**
+5. Sprawdź wentylację — nie blokuj otworów wentylacyjnych drukarki
+6. Jeśli problem powtarza się często → **wymiana głowicy** (uszkodzony termistor)
+
+> Nie pomogło? → [Wyślij drukarkę do bezpłatnej diagnostyki](https://www.serwis-zebry.pl/#formularz)
+
+### 6. Blady lub nieczytelny wydruk
+
+**Objawy:** Etykiety drukują się, ale wydruk jest blady, nieostry lub częściowo niewidoczny.
+
+1. **Wyczyść głowicę** patyczkiem z 99,7% alkoholem izopropylowym
+2. Sprawdź **ciemność druku** — zwiększ wartość Darkness (komenda ZPL **~SD** lub panel LCD na ZT230)
+3. Sprawdź **prędkość druku** — zbyt wysoka prędkość może powodować blady wydruk
+4. Sprawdź **docisk głowicy** — pokrętła Inside/Outside (skala 1-4)
+5. Sprawdź czy taśma jest kompatybilna z mediami (wax/wax-resin/resin)
+6. Sprawdź czy taśma jest nawleczona stroną kolorową do etykiety
+7. Jeśli blady wydruk pojawia się w jednym miejscu (pionowa biała linia) → **uszkodzona głowica** (przepalony element grzejny)
+
+### 7. Przesunięte etykiety — drukowanie co drugiej
+
+**Objawy:** Wydruk pojawia się na co drugiej etykiecie lub jest przesunięty w pionie.
+
+1. Wykonaj kalibrację: **PAUSE + FEED** przez 2 sekundy
+2. Sprawdź ustawienie czujnika mediów — suwak musi być na **środku przerwy między etykietami**
+3. Sprawdź **Media Type** — ustaw prawidłowy typ: Gap/Notch (z przerwą), Black Mark (czarny znacznik), Continuous (ciągłe)
+4. Sprawdź **długość etykiety** w formacie druku — musi odpowiadać rzeczywistej długości etykiety
+5. Sprawdź prowadnice mediów — nie mogą być zbyt ciasne ani zbyt luźne
+6. Wykonaj **kalibrację ręczną** jeśli SmartCal nie pomaga: **PAUSE + FEED + CANCEL** przez 2 sekundy
+
+### 8. Problemy z komunikacją — drukarka nie odpowiada
+
+**Objawy:** Komputer nie widzi drukarki lub wydruki są zniekształcone (losowe znaki zamiast etykiety).
+
+1. Sprawdź diodę **NETWORK** (Ethernet): zielona=100Mbps OK, bursztynowa=10Mbps OK, czerwona=błąd, zgaszona=brak połączenia
+2. **USB:** odłącz i podłącz kabel, sprawdź port USB w menedżerze urządzeń
+3. **Ethernet:** sprawdź kabel sieciowy, zweryfikuj adres IP (wydrukuj etykietę konfiguracji sieci: **CANCEL + PAUSE** przy włączaniu)
+4. **RS-232:** sprawdź zgodność parametrów portu szeregowego (baud rate, parity, data bits, stop bits)
+5. Jeśli etykiety drukują się jako zniekształcony tekst → **zmień język drukarki** na ZPL (komenda **^XA^JUS^XZ**)
+6. Zresetuj ustawienia sieci: **CANCEL + PAUSE** przy włączaniu drukarki
+
+> Nie pomogło? → [Wyślij drukarkę do bezpłatnej diagnostyki](https://www.serwis-zebry.pl/#formularz)
+
+---
+
+## Kalibracja czujników — 3 metody
+
+Prawidłowa kalibracja czujników to **najważniejsza czynność serwisowa** dla ZT220/ZT230. Nieprawidłowa kalibracja powoduje błędy MEDIA OUT, drukowanie co drugiej etykiety i przesunięcia wydruku.
+
+### Metoda 1: SmartCal (szybka kalibracja)
+
+Najczęściej stosowana metoda. Wystarczy w większości przypadków.
+
+1. Upewnij się, że media i taśma są prawidłowo załadowane
+2. Zamknij głowicę
+3. Przytrzymaj **PAUSE + FEED** przez **2 sekundy**
+4. Drukarka automatycznie podaje media i kalibruje czujnik przerwy/czarnego znacznika
+5. Po zakończeniu drukarka jest gotowa do pracy
+
+### Metoda 2: Automatyczna kalibracja (Power Up / Head Close)
+
+Kalibracja wykonuje się automatycznie po każdym włączeniu drukarki lub zamknięciu głowicy.
+
+1. W ustawieniach drukarki ustaw **POWER UP ACTION = CALIBRATE** (komenda ZPL: **^MF,C**)
+2. Ustaw **HEAD CLOSE ACTION = CALIBRATE** (komenda ZPL: **~JS,C**)
+3. Od tej chwili drukarka kalibruje czujniki automatycznie
+
+### Metoda 3: Kalibracja ręczna — 14 kroków
+
+Wymagana gdy SmartCal nie działa prawidłowo (niestandardowe media, czarne etykiety, przezroczyste podkłady).
+
+1. **Wyłącz** drukarkę
+2. **Przytrzymaj PAUSE** i **włącz** drukarkę
+3. Gdy dioda **STATUS** zmieni kolor z zielonej na bursztynową — **zwolnij PAUSE**
+4. Dioda STATUS miga bursztynowo — drukarka jest w trybie kalibracji
+5. **Naciśnij PAUSE** aby wybrać kalibrację czujnika mediów
+6. Drukarka podaje media — **otwórz głowicę**
+7. **Wyjmij ok. 150 mm mediów** spod głowicy
+8. Jeśli to media z przerwą — **odklej etykiety** z wysuniętego fragmentu, zostaw sam podkład (liner)
+9. **Zamknij głowicę** na samym podkładzie (bez etykiet)
+10. Naciśnij **PAUSE** — drukarka mierzy pusty podkład jako punkt odniesienia
+11. Po zakończeniu pomiaru — **otwórz głowicę**
+12. **Załaduj media z etykietami** prawidłowo na czujniku, **zamknij głowicę**
+13. Naciśnij **PAUSE** — drukarka mierzy media z etykietą i oblicza różnicę
+14. Po zakończeniu naciśnij **PAUSE** aby wyjść z trybu kalibracji
+
+> **⚠️ Kiedy kalibracja ręczna jest niezbędna:** czarne lub kolorowe etykiety, przezroczyste podkłady, bardzo małe etykiety (poniżej 25 mm), media z czarnym znacznikiem (black mark) na nietypowej pozycji.
+
+---
+
+## Regulacja docisku głowicy drukującej
+
+Prawidłowy docisk głowicy jest kluczowy dla jakości wydruku. ZT220/ZT230 mają **dwa pokrętła regulacyjne**: **Inside** (strona wewnętrzna) i **Outside** (strona zewnętrzna).
+
+### Lokalizacja pokręteł
+
+Pokrętła znajdują się na **ramie głowicy** — dostępne po otwarciu pokrywy mediów. Pokrętło **Inside** reguluje docisk po stronie wewnętrznej drukarki (bliżej mechanizmu), **Outside** po stronie zewnętrznej.
+
+### Skala docisku
+
+| Pozycja | Docisk | Zastosowanie |
+|---------|--------|-------------|
+| **1** | Minimalny | Wąskie media (mniej niż 50 mm szerokości) |
+| **2** | Niski | Media o średniej szerokości |
+| **3** | Średni | Standardowe etykiety logistyczne |
+| **4** | Maksymalny | Szerokie media na pełną szerokość głowicy |
+
+### Kiedy regulować docisk
+
+- **Blady wydruk po jednej stronie** → zwiększ docisk po tej stronie (Inside lub Outside)
+- **Marszczenie taśmy** → zmniejsz docisk — zbyt silny docisk powoduje fałdowanie taśmy
+- **Nierówne zużycie głowicy** → wyrównaj docisk na obu pokrętłach
+- **Po wymianie głowicy** → ustaw oba pokrętła na **pozycję 2** i dostosuj
+
+> **💡 Wskazówka:** Zacznij od pozycji **2** na obu pokrętłach. Zwiększaj stopniowo o 0,5 do uzyskania równomiernego wydruku na całej szerokości etykiety.
+
+---
+
+## Regulacja napięcia taśmy termotransferowej
+
+ZT220/ZT230 mają mechanizm regulacji napięcia taśmy za pomocą **nasadek na trzpieniach** (spindle end caps).
+
+### Jak regulować napięcie
+
+Drukarka posiada **trzpień podawczy** (supply spindle) i **trzpień odbiorczy** (take-up spindle). Na każdym trzpieniu znajduje się **nasadka** (end cap), którą można przesuwać:
+
+| Pozycja nasadki | Napięcie | Kiedy używać |
+|-----------------|----------|-------------|
+| **Wyciągnięta** (pulled out) | **Normalne** | Standardowe taśmy — ustawienie domyślne |
+| **Wciśnięta** (pushed in) | **Niskie** | Wąskie taśmy, taśmy o małej średnicy, problemy z marszczeniem |
+
+### Kiedy zmniejszyć napięcie
+
+- **Taśma się marszczy** → wciśnij nasadki na obu trzpieniach (niskie napięcie)
+- **Taśma się zrywa** → wciśnij nasadki (zmniejsz napięcie) + sprawdź docisk głowicy
+- **Wąska taśma** (mniej niż 50 mm) → niskie napięcie zapobiega marszczeniu
+
+### Kiedy zwiększyć napięcie
+
+- **Taśma się luźno nawija** → wyciągnij nasadki (normalne napięcie)
+- **Taśma się ześlizguje** z trzpienia → normalne napięcie + sprawdź prowadnice
+
+---
+
+## Harmonogram konserwacji ZT220/ZT230
+
+Regularna konserwacja wydłuża żywotność drukarki i głowicy. Harmonogram oparty na oficjalnej instrukcji serwisowej Zebra (P/N P1050513-002).
+
+| Element | Częstotliwość | Narzędzie |
+|---------|--------------|-----------|
+| **Głowica drukująca** | Co rolkę etykiet (DT) lub co rolkę taśmy (TT) | Patyczek + 99,7% alkohol izopropylowy |
+| **Wałek dociskowy (platen)** | Co rolkę etykiet (DT) lub co rolkę taśmy (TT) | Patyczek + 99,7% alkohol izopropylowy |
+| **Ścieżka mediów** | Co miesiąc | Sprężone powietrze + alkohol izopropylowy |
+| **Czujnik mediów** | Co miesiąc | Sprężone powietrze (ostrożnie!) |
+| **Czujnik taśmy** | Co miesiąc | Sprężone powietrze |
+| **Wnętrze drukarki** | Co 6 miesięcy | Odkurzacz + sprężone powietrze |
+| **Obudowa zewnętrzna** | W razie potrzeby | Wilgotna ściereczka (NIE alkohol na plastik!) |
+| **Gilotyna (ZT230)** | Co 6 miesięcy | Patyczek + alkohol izopropylowy |
+
+> **⚠️ Uwaga:** Używaj wyłącznie **99,7% alkoholu izopropylowego** lub zestawu **Zebra Preventive Maintenance Kit**. Nie używaj acetonu, rozcieńczalników ani środków ściernych — uszkodzą głowicę!
+
+---
+
+## Testy diagnostyczne
+
+ZT220/ZT230 oferuje kilka wbudowanych testów diagnostycznych uruchamianych kombinacjami przycisków podczas włączania drukarki.
+
+### Test CANCEL — etykieta konfiguracyjna
+
+1. **Wyłącz** drukarkę
+2. Przytrzymaj **CANCEL** i **włącz** drukarkę
+3. Trzymaj CANCEL aż **pierwsza dioda zgaśnie**
+4. Drukarka wydrukuje **etykietę konfiguracyjną** z parametrami: firmware, prędkość, ciemność, typ mediów, rozdzielczość, tryb druku, adres IP
+
+### Test PAUSE — test mechanizmu druku
+
+1. **Wyłącz** drukarkę
+2. Przytrzymaj **PAUSE** i **włącz** drukarkę
+3. Trzymaj PAUSE aż pierwsza dioda zgaśnie
+4. Drukarka drukuje **wzór testowy** — weryfikacja jakości głowicy i mechanizmu
+
+### Test FEED — test jakości głowicy
+
+1. **Wyłącz** drukarkę
+2. Przytrzymaj **FEED** i **włącz** drukarkę
+3. Trzymaj FEED aż pierwsza dioda zgaśnie
+4. Drukarka drukuje **wzór testowy FEED** — widoczne uszkodzone elementy grzejne (białe pionowe linie)
+
+### Profil czujnika (Sensor Profile)
+
+Wydruk profilu czujnika pokazuje graficznie odczyty czujnika mediów. Przydatny do diagnostyki problemów z wykrywaniem etykiet.
+
+1. Przytrzymaj **PAUSE + FEED** przez 2 sekundy — kalibracja SmartCal
+2. Natychmiast po kalibracji przytrzymaj **PAUSE + CANCEL** przez 2 sekundy
+3. Drukarka wydrukuje **profil czujnika** — wykres z odczytami czujnika
+4. Na wykresie powinny być widoczne **wyraźne piki** w miejscach przerw między etykietami
+
+### Etykieta konfiguracji sieci
+
+1. **Wyłącz** drukarkę
+2. Przytrzymaj **CANCEL + PAUSE** (jednocześnie oba) i **włącz** drukarkę
+3. Trzymaj przyciski aż drukarka zacznie drukować
+4. Etykieta zawiera: **adres IP**, maskę podsieci, bramę, adres MAC, DHCP/Static, DNS
+
+---
+
+## Reset do ustawień fabrycznych
+
+### Metoda 1: Przyciski (ZT220 i ZT230)
+
+1. **Wyłącz** drukarkę
+2. Przytrzymaj **FEED + PAUSE** (jednocześnie oba)
+3. **Włącz** drukarkę trzymając oba przyciski
+4. Trzymaj aż diody zamigają — drukarka resetuje się do **ustawień fabrycznych**
+
+### Metoda 2: Komendy ZPL
+
+| Komenda | Efekt |
+|---------|-------|
+| **^JUF** | Reset do ustawień fabrycznych (wszystkie parametry) |
+| **^JUN** | Reset ustawień sieci (adres IP, DHCP, porty) |
+| **~JR** | Restart drukarki (power cycle) |
+
+### Metoda 3: Menu LCD (tylko ZT230)
+
+1. Naciśnij **strzałkę w prawo** na panelu LCD
+2. Przejdź do **Tools** (Narzędzia)
+3. Wybierz **LOAD DEFAULTS**
+4. Wybierz **FACTORY DEFAULTS** → potwierdź
+
+### Reset sieci (ZT220 i ZT230)
+
+1. **Wyłącz** drukarkę
+2. Przytrzymaj **CANCEL + PAUSE** (jednocześnie oba)
+3. **Włącz** drukarkę trzymając oba przyciski
+4. Trzymaj aż diody zamigają — drukarka resetuje **ustawienia sieci** (IP, maska, brama)
+
+> **⚠️ Uwaga:** Reset fabryczny kasuje **wszystkie ustawienia** — formaty etykiet, parametry druku, konfigurację sieci. Po resecie wykonaj kalibrację i skonfiguruj ponownie adres IP.
+
+---
+
+## Koniec wsparcia — migracja z ZT200
+
+### Kluczowe daty
+
+| Data | Zdarzenie |
+|------|-----------|
+| **27 czerwca 2022** | Koniec sprzedaży (End of Sale) — ZT220 i ZT230 wycofane z oferty |
+| **31 stycznia 2027** | Koniec wsparcia serwisowego Zebra (End of Support) — koniec gwarancji części i firmware |
+
+### Zalecane ścieżki migracji
+
+| Model wycofany | Następca | Kluczowe różnice |
+|---------------|----------|-----------------|
+| **ZT220** | **ZT111** | Szybszy (254 vs 152 mm/s), Bluetooth, Link-OS, ten sam panel LED (3 przyciski + 5 diod) |
+| **ZT230** | **ZT231** | Kolorowy ekran dotykowy zamiast LCD, RFID opcja, Link-OS, szybszy (305 vs 152 mm/s) |
+
+### Co oznacza EOL dla Twojej firmy
+
+- **Do 31 stycznia 2027** — Zebra zapewnia części zamienne i wsparcie techniczne
+- **Po 31 stycznia 2027** — brak gwarancji dostępności oryginalnych części, brak aktualizacji firmware
+- **TAKMA** serwisuje drukarki ZT220/ZT230 **bez ograniczeń czasowych** — posiadamy zapas części zamiennych i doświadczenie z serią ZT200
+
+> **💡 Planuj migrację:** Jeśli Twoje drukarki ZT220/ZT230 mają ponad 5 lat — rozważ stopniową wymianę na ZT111/ZT231. Nowe modele są kompatybilne z Twoimi etykietami i taśmami. [Skontaktuj się z nami](https://www.serwis-zebry.pl/#formularz) po doradztwo w zakresie migracji.
+
+---
+
+## Katalog części zamiennych ZT220/ZT230
+
+| Część | Nr katalogowy (P/N) | Kompatybilność |
+|-------|---------------------|----------------|
+| **Głowica 203 dpi** | P1037974-010 | ZT220, ZT230 |
+| **Głowica 300 dpi** | P1037974-011 | ZT230 |
+| **Wałek dociskowy (platen roller)** | P1058930-080 | ZT220, ZT230 |
+| **Taśma napędowa (drive belt)** | — skontaktuj się z serwisem | ZT220, ZT230 |
+| **Płyta główna (MLB)** | — zależna od konfiguracji | ZT220, ZT230 |
+| **Zasilacz** | — zależny od konfiguracji | ZT220, ZT230 |
+| **Moduł gilotyny (cutter)** | — opcja ZT230 | ZT230 |
+| **Zestaw konserwacyjny** | 47362 (Preventive Maintenance Kit) | ZT220, ZT230 |
+
+> **⚠️ Dostępność części:** Ze względu na status EOL, dostępność niektórych części może być ograniczona po styczniu 2027. TAKMA posiada zapas najczęściej potrzebnych komponentów. [Zapytaj o dostępność](https://www.serwis-zebry.pl/#formularz).
+
+---
+
+## Cennik napraw ZT220/ZT230
+
+| Usługa | Cena od (netto) | Czas realizacji |
+|--------|-----------------|-----------------|
+| **Diagnostyka** | **Bezpłatna** | 1 dzień roboczy |
+| **Czyszczenie i konserwacja** | 200 zł | 1 dzień roboczy |
+| **Wymiana głowicy 203 dpi** | 750 zł | 1-2 dni robocze |
+| **Wymiana głowicy 300 dpi** | 1 050 zł | 1-2 dni robocze |
+| **Naprawa płyty głównej (MLB)** | 650 zł | 2-3 dni robocze |
+| **Wymiana wałka dociskowego** | 300 zł | 1 dzień roboczy |
+| **Naprawa gilotyny (ZT230)** | 400 zł | 1-2 dni robocze |
+| **Naprawa zasilacza** | 350 zł | 1-2 dni robocze |
+| **Naprawa mechanizmu napędu** | 500 zł | 2-3 dni robocze |
+| **Wymiana wyświetlacza LCD (ZT230)** | 450 zł | 1-2 dni robocze |
+
+> **📦 Jak zlecić naprawę?** Wypełnij [formularz serwisowy](https://www.serwis-zebry.pl/#formularz) — odpowiemy w ciągu 24 godzin. Wysyłka drukarki kurierem na nasz koszt. Diagnostyka zawsze bezpłatna.
+
+---
+
+## Najczęściej zadawane pytania (FAQ)
+
+**Drukarka Zebra ZT220 nie drukuje — co zrobić?**
+
+Sprawdź 5 diod LED na panelu: STATUS (zielona=OK, czerwona=błąd), SUPPLIES (czerwona=brak mediów, bursztynowa migająca=brak taśmy). Wykonaj kalibrację czujników: przytrzymaj PAUSE + FEED przez 2 sekundy. Jeśli dioda STATUS jest czerwona — otwórz pokrywę i sprawdź czy głowica jest zamknięta, media i taśma załadowane prawidłowo. [Bezpłatna diagnostyka →](https://www.serwis-zebry.pl/#formularz)
+
+**Co oznaczają diody LED na drukarce Zebra ZT220?**
+
+ZT220 ma 5 diod: STATUS (zielona=gotowa, bursztynowa=przegrzanie, czerwona=błąd), PAUSE (bursztynowa=pauza), DATA (zielona=dane w buforze), SUPPLIES (czerwona=brak mediów, bursztynowa migająca=brak taśmy), NETWORK (zielona=100Base-T, bursztynowa=10Base-T, czerwona=błąd).
+
+**Jakie komunikaty wyświetla LCD na drukarce Zebra ZT230?**
+
+Najczęstsze komunikaty: PRINTER READY (gotowa), PRINTER PAUSED (wstrzymana), HEAD OPEN (głowica otwarta), RIBBON OUT (brak taśmy), MEDIA OUT (brak mediów), HEAD ELEMENT BAD (uszkodzona głowica), HEAD OVER TEMP (przegrzanie), THERMISTOR FAULT (awaria termistora), CUTTER FAULT (awaria gilotyny).
+
+**Jak skalibrować czujniki w drukarce Zebra ZT220/ZT230?**
+
+Szybka kalibracja SmartCal: przytrzymaj PAUSE + FEED przez 2 sekundy. Kalibracja ręczna (14 kroków): wyłącz drukarkę, przytrzymaj PAUSE i włącz, zwolnij gdy STATUS zmieni kolor, podawaj media zgodnie z instrukcjami diod. Kalibracja ręczna wymagana przy niestandardowych mediach.
+
+**Ile kosztuje naprawa drukarki Zebra ZT220/ZT230?**
+
+Cennik: diagnostyka — bezpłatna, czyszczenie — od 200 zł, wymiana głowicy 203 dpi — od 750 zł, wymiana głowicy 300 dpi — od 1050 zł, naprawa płyty głównej — od 650 zł, naprawa gilotyny — od 400 zł, wymiana wałka — od 300 zł. [Formularz serwisowy →](https://www.serwis-zebry.pl/#formularz)
+
+**Jak zresetować drukarkę Zebra ZT220/ZT230 do ustawień fabrycznych?**
+
+Trzy metody: (1) Przytrzymaj FEED + PAUSE podczas włączania — reset fabryczny. (2) Wyślij komendę ZPL ^JUF (reset fabryczny) lub ^JUN (reset sieci). (3) Menu LCD na ZT230: Tools > LOAD DEFAULTS > FACTORY DEFAULTS.
+
+**Czym różni się Zebra ZT220 od ZT230?**
+
+ZT220 ma panel z 5 diodami LED bez wyświetlacza — diagnostyka przez kolory diod. ZT230 ma dodatkowy LCD z komunikatami tekstowymi i menu konfiguracyjne. Mechanizm druku, głowice i części zamienne są identyczne. ZT230 ma opcję gilotyny i wewnętrznego nawijaka.
+
+**Kiedy kończy się wsparcie dla drukarek Zebra ZT220/ZT230?**
+
+Seria ZT200 wycofana ze sprzedaży 27 czerwca 2022. Wsparcie serwisowe Zebra kończy się 31 stycznia 2027. Po tej dacie brak gwarancji dostępności części. TAKMA serwisuje ZT200 bez ograniczeń czasowych.
+
+**Jak wyczyścić głowicę drukującą w Zebra ZT220/ZT230?**
+
+Otwórz pokrywę, podnieś dźwignię zamka głowicy. Wyjmij taśmę i media. Przetrzyj brązowy pasek głowicy patyczkiem z 99,7% alkoholem izopropylowym. Wyczyść też wałek dociskowy. Częstotliwość: co rolkę etykiet (DT) lub co rolkę taśmy (TT).
+
+**Jaki model zastępuje drukarkę Zebra ZT220?**
+
+ZT220 zastąpiono modelem ZT111 (ten sam panel LED bez wyświetlacza, szybszy — 254 vs 152 mm/s). ZT230 zastąpiono modelem ZT231 (kolorowy ekran dotykowy zamiast LCD, opcja RFID). Oba nowe modele są kompatybilne z mediami i taśmami ZT200.
+
+---
+
+## Powiązane artykuły
+
+- [Drukarka Zebra nie drukuje — przyczyny i rozwiązania](/blog/drukarka-zebra-nie-drukuje-przyczyny-rozwiazania)
+- [Kalibracja drukarki Zebra — poradnik krok po kroku](/blog/kalibracja-drukarki-zebra-poradnik-krok-po-kroku)
+- [Serwis drukarki Zebra ZT111](/blog/serwis-drukarki-zebra-zt111-diagnostyka-naprawa)
+- [Serwis drukarki Zebra ZT231/ZT231R](/blog/serwis-drukarki-zebra-zt231-zt231r-diagnostyka-naprawa)
+- [Błąd Ribbon Out — rozwiązanie](/blog/blad-ribbon-out-drukarka-zebra-rozwiazanie)
+- [Sterowniki Zebra dla Windows 11 — instalacja](/blog/sterowniki-zebra-windows-11-instalacja-problemy)
+- [Kontrakty serwisowe Zebra OneCare](/blog/kontrakty-serwisowe-zebra-onecare-przewodnik)
+
+👉 **[Serwis Drukarek Zebra — naprawy, konserwacja, części](/serwis-drukarek-zebra)**
+`
   }
 
 ]
