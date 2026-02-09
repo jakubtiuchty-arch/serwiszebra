@@ -22,6 +22,7 @@ import {
   SlidersHorizontal
 } from 'lucide-react'
 import { getEnabledCategories, getProductUrl } from '@/lib/shop-categories'
+import { getProductFallbackImage } from '@/lib/product-images'
 
 interface Product {
   id: string
@@ -54,14 +55,9 @@ interface FilterState {
   search: string
 }
 
-// Domyślne zdjęcia dla typów produktów
-const DEFAULT_PRODUCT_IMAGES: Record<string, string> = {
-  glowica: '/sklep_photo/głowica-203dpi-do-drukarki-zebra-zd421t-P1112640-218.png'
-}
-
 function getProductImage(product: Product): string | null {
   if (product.image_url) return product.image_url
-  return DEFAULT_PRODUCT_IMAGES[product.product_type] || null
+  return getProductFallbackImage(product.product_type, product.device_model, product.resolution_dpi)
 }
 
 export default function SklepPage() {
@@ -439,7 +435,7 @@ export default function SklepPage() {
                               />
                             ) : (
                               <Image
-                                src={DEFAULT_PRODUCT_IMAGES.glowica}
+                                src={getProductFallbackImage(product.product_type, product.device_model, product.resolution_dpi) || '/sklep_photo/glowica-203dpi-do-drukarki-zebra-zd421t.png'}
                                 alt={product.name}
                                 width={140}
                                 height={140}

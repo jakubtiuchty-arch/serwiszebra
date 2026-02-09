@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { Package, Printer, Battery, Cable, Phone, ArrowUpDown, ShoppingCart } from 'lucide-react'
 import { useCartStore } from '@/lib/cart-store'
 import { getProductUrl } from '@/lib/shop-categories'
+import { getProductFallbackImage } from '@/lib/product-images'
 
 const PRODUCT_TYPE_ICONS: Record<string, any> = {
   glowica: Printer,
@@ -14,15 +15,10 @@ const PRODUCT_TYPE_ICONS: Record<string, any> = {
   kabel: Cable
 }
 
-// Domyślne zdjęcia dla typów produktów (gdy brak image_url)
-const DEFAULT_PRODUCT_IMAGES: Record<string, string> = {
-  glowica: '/sklep_photo/głowica-203dpi-do-drukarki-zebra-zd421t-P1112640-218.png'
-}
-
 // Helper: Pobierz URL zdjęcia dla produktu
 function getProductImage(product: Product): string | null {
   if (product.image_url) return product.image_url
-  return DEFAULT_PRODUCT_IMAGES[product.product_type] || null
+  return getProductFallbackImage(product.product_type, product.device_model, product.resolution_dpi)
 }
 
 interface Product {
@@ -212,7 +208,7 @@ export default function ShopCategoryClient({
                     />
                   ) : (
                     <Image
-                      src={DEFAULT_PRODUCT_IMAGES.glowica}
+                      src={getProductFallbackImage(product.product_type, product.device_model, product.resolution_dpi) || '/sklep_photo/glowica-203dpi-do-drukarki-zebra-zd421t.png'}
                       alt={product.name}
                       width={140}
                       height={140}

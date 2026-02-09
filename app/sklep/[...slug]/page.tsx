@@ -45,6 +45,7 @@ import {
   PRINTER_MODELS,
   identifyFromPartNumber
 } from '@/lib/printhead-data'
+import { getProductFallbackImage } from '@/lib/product-images'
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
@@ -56,15 +57,9 @@ const PRODUCT_TYPE_ICONS: Record<string, any> = {
   kabel: Cable
 }
 
-// Domyślne zdjęcie dla głowic (używane gdy brak image_url w bazie)
-const DEFAULT_PRINTHEAD_IMAGE = '/sklep_photo/głowica-203dpi-do-drukarki-zebra-zd421t-P1112640-218.png'
-
-// Helper: Pobierz URL zdjęcia dla produktu
-function getLocalProductImage(productType: string): string | null {
-  if (productType === 'glowica') {
-    return DEFAULT_PRINTHEAD_IMAGE
-  }
-  return null
+// Helper: Pobierz URL zdjęcia dla produktu (z unikalną nazwą per model/DPI)
+function getLocalProductImage(product: { product_type: string; device_model: string; resolution_dpi: number | null }): string | null {
+  return getProductFallbackImage(product.product_type, product.device_model, product.resolution_dpi)
 }
 
 // FAQ dla typów produktów
@@ -240,7 +235,7 @@ async function getProductsForCategory(filters: {
 // Helper: Pobierz URL zdjęcia (z bazy lub lokalny fallback)
 function getProductImageUrl(product: Product): string | null {
   if (product.image_url) return product.image_url
-  return getLocalProductImage(product.product_type)
+  return getLocalProductImage(product)
 }
 
 // Helper: Czy produkt ma własne zdjęcie (nie fallback)?

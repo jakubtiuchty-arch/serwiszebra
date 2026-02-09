@@ -6,17 +6,16 @@ import Link from 'next/link'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import { useCartStore } from '@/lib/cart-store'
-import { 
-  Trash2, 
-  Plus, 
-  Minus, 
+import { getProductFallbackImage } from '@/lib/product-images'
+import {
+  Trash2,
+  Plus,
+  Minus,
   ArrowRight,
   ArrowLeft,
   Package,
   ShoppingBag
 } from 'lucide-react'
-
-const DEFAULT_PRINTHEAD_IMAGE = '/sklep_photo/głowica-203dpi-do-drukarki-zebra-zd421t-P1112640-218.png'
 
 export default function KoszykPage() {
   const { items, removeItem, updateQuantity, clearCart } = useCartStore()
@@ -136,7 +135,7 @@ export default function KoszykPage() {
                     <div className="w-20 h-20 sm:w-28 sm:h-28 bg-gray-50 rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0 overflow-hidden">
                       {item.product_type === 'glowica' ? (
                         <Image
-                          src={DEFAULT_PRINTHEAD_IMAGE}
+                          src={getProductFallbackImage(item.product_type, item.device_model, item.resolution_dpi) || '/sklep_photo/glowica-203dpi-do-drukarki-zebra-zd421t.png'}
                           alt={item.name}
                           width={100}
                           height={100}

@@ -18,7 +18,7 @@ import {
   FileText
 } from 'lucide-react'
 
-const DEFAULT_PRINTHEAD_IMAGE = '/sklep_photo/głowica-203dpi-do-drukarki-zebra-zd421t-P1112640-218.png'
+import { getProductFallbackImage } from '@/lib/product-images'
 
 interface OrderFormData {
   // Dane kontaktowe
@@ -303,7 +303,7 @@ export default function ZamowieniePage() {
                         <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gray-50 rounded-lg flex items-center justify-center flex-shrink-0">
                           {item.product_type === 'glowica' ? (
                             <Image
-                              src={DEFAULT_PRINTHEAD_IMAGE}
+                              src={getProductFallbackImage(item.product_type, item.device_model, item.resolution_dpi) || '/sklep_photo/glowica-203dpi-do-drukarki-zebra-zd421t.png'}
                               alt={item.name}
                               width={40}
                               height={40}

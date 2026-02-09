@@ -25,8 +25,7 @@ const PRODUCT_TYPE_ICONS: Record<string, any> = {
   kabel: Cable
 }
 
-// Domyślne zdjęcie dla głowic
-const DEFAULT_PRINTHEAD_IMAGE = '/sklep_photo/głowica-203dpi-do-drukarki-zebra-zd421t-P1112640-218.png'
+import { getProductFallbackImage } from '@/lib/product-images'
 
 export default function KoszykPage() {
   const [mounted, setMounted] = useState(false)
@@ -154,7 +153,7 @@ export default function KoszykPage() {
                             <div className="w-14 h-14 bg-white rounded-lg flex items-center justify-center flex-shrink-0 border border-gray-100 overflow-hidden">
                               {item.product_type === 'glowica' ? (
                                 <Image
-                                  src={DEFAULT_PRINTHEAD_IMAGE}
+                                  src={getProductFallbackImage(item.product_type, item.device_model, item.resolution_dpi) || '/sklep_photo/glowica-203dpi-do-drukarki-zebra-zd421t.png'}
                                   alt={item.name}
                                   width={48}
                                   height={48}
@@ -236,7 +235,7 @@ export default function KoszykPage() {
                             <div className="w-14 h-14 bg-white rounded-lg flex items-center justify-center flex-shrink-0 border border-gray-100 overflow-hidden">
                               {item.product_type === 'glowica' ? (
                                 <Image
-                                  src={DEFAULT_PRINTHEAD_IMAGE}
+                                  src={getProductFallbackImage(item.product_type, item.device_model, item.resolution_dpi) || '/sklep_photo/glowica-203dpi-do-drukarki-zebra-zd421t.png'}
                                   alt={item.name}
                                   width={48}
                                   height={48}
