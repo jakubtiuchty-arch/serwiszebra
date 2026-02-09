@@ -122,7 +122,7 @@ const breadcrumbSchema = {
   '@type': 'BreadcrumbList',
   itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'Strona główna', item: 'https://www.serwis-zebry.pl' },
-    { '@type': 'ListItem', position: 2, name: 'Serwis skanerów Zebra', item: 'https://www.serwis-zebry.pl/skanery' }
+    { '@type': 'ListItem', position: 2, name: 'Serwis skanerów Zebra', item: 'https://www.serwis-zebry.pl/serwis-skanerow-zebra' }
   ]
 }
 

@@ -121,7 +121,7 @@ const breadcrumbSchema = {
   '@type': 'BreadcrumbList',
   itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'Strona główna', item: 'https://www.serwis-zebry.pl' },
-    { '@type': 'ListItem', position: 2, name: 'Serwis tabletów Zebra', item: 'https://www.serwis-zebry.pl/tablety' }
+    { '@type': 'ListItem', position: 2, name: 'Serwis tabletów Zebra', item: 'https://www.serwis-zebry.pl/serwis-tabletow-zebra' }
   ]
 }
 

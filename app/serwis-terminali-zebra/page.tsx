@@ -203,7 +203,7 @@ const breadcrumbSchema = {
       '@type': 'ListItem',
       position: 2,
       name: 'Serwis terminali Zebra',
-      item: 'https://www.serwis-zebry.pl/terminale'
+      item: 'https://www.serwis-zebry.pl/serwis-terminali-zebra'
     }
   ]
 }

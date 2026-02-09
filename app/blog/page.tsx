@@ -869,9 +869,9 @@ export default function BlogPage() {
               <h4 className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-4">Serwis</h4>
               <ul className="space-y-2">
                 {[
-                  { href: '/drukarki', label: 'Serwis drukarek' },
-                  { href: '/terminale', label: 'Serwis terminali' },
-                  { href: '/skanery', label: 'Serwis skanerów' },
+                  { href: '/serwis-drukarek-zebra', label: 'Serwis drukarek' },
+                  { href: '/serwis-terminali-zebra', label: 'Serwis terminali' },
+                  { href: '/serwis-skanerow-zebra', label: 'Serwis skanerów' },
                   { href: '/instrukcje', label: 'Instrukcje' },
                   { href: '/poradniki-wideo', label: 'Poradniki wideo' },
                 ].map((link) => (

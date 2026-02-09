@@ -260,7 +260,7 @@ const breadcrumbSchema = {
       '@type': 'ListItem',
       position: 2,
       name: 'Serwis drukarek Zebra',
-      item: 'https://www.serwis-zebry.pl/drukarki'
+      item: 'https://www.serwis-zebry.pl/serwis-drukarek-zebra'
     }
   ]
 }
