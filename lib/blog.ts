@@ -29563,6 +29563,509 @@ Ethernet: podłącz kabel RJ-45 — DHCP automatycznie. IP wyświetla się na LC
 
 👉 **[Serwis Drukarek Zebra — naprawy, konserwacja, części](/serwis-drukarek-zebra)**
 `
+  },
+
+  {
+    slug: 'serwis-drukarki-opasek-zebra-hc100-diagnostyka-naprawa',
+    title: 'Serwis drukarki opasek Zebra HC100 — diagnostyka, naprawa i konserwacja [2026]',
+    excerpt: 'Kompletny przewodnik serwisowy drukarki opasek identyfikacyjnych Zebra HC100. Diagnostyka diod LED, problemy z kasetą mediów, wymiana głowicy termicznej (61330M), wymiana wałka dociskowego (61331M), czyszczenie, kody błędów. Następca ZD510-HC. Cennik napraw. Bezpłatna diagnostyka.',
+    coverImage: '/blog/serwis-drukarki-opasek-zebra-hc100-diagnostyka-naprawa.webp',
+    coverImageAlt: 'Serwis drukarki opasek identyfikacyjnych Zebra HC100 — profesjonalna diagnostyka, wymiana głowicy, czyszczenie i naprawa',
+    author: {
+      name: 'Krzysztof Wójcik',
+      role: 'Kierownik Serwisu TAKMA'
+    },
+    publishedAt: '2026-02-09',
+    readingTime: 18,
+    deviceType: 'drukarki',
+    subDeviceType: 'opasek',
+    category: 'troubleshooting',
+    tags: ['HC100', 'drukarka opasek', 'drukarka opaski na rękę', 'wristband printer', 'serwis drukarki zebra', 'naprawa HC100', 'diagnostyka', 'LED', 'opaski identyfikacyjne', 'szpital', 'opieka zdrowotna', 'ZD510-HC', 'Z-Band'],
+    seo: {
+      metaTitle: 'Serwis drukarki opasek Zebra HC100 — diagnostyka, naprawa i konserwacja [2026]',
+      metaDescription: 'Drukarka opasek Zebra HC100 nie drukuje? Diagnostyka diod LED, problemy z kasetą, wymiana głowicy i wałka, czyszczenie, kody błędów. Następca ZD510-HC. Cennik napraw. Bezpłatna diagnostyka.',
+      keywords: [
+        'serwis drukarki opasek zebra hc100', 'serwis zebra hc100', 'naprawa zebra hc100', 'naprawa hc100',
+        'zebra hc100 serwis', 'zebra hc100 naprawa', 'serwis drukarki opasek', 'naprawa drukarki opasek zebra',
+        'zebra hc100 nie drukuje', 'zebra hc100 błąd', 'zebra hc100 error', 'zebra hc100 troubleshooting',
+        'zebra hc100 dioda pomarańczowa', 'zebra hc100 dioda miga', 'zebra hc100 led status',
+        'zebra hc100 kaseta nie wysuwa', 'zebra hc100 cartridge jam', 'zebra hc100 media error',
+        'zebra hc100 zacięcie opaski', 'zebra hc100 jakość wydruku', 'zebra hc100 słaby wydruk',
+        'zebra hc100 wymiana głowicy', 'zebra hc100 głowica 61330M', 'zebra hc100 printhead',
+        'zebra hc100 wymiana wałka', 'zebra hc100 platen roller 61331M', 'zebra hc100 czyszczenie',
+        'zebra hc100 cleaning card', 'zebra hc100 karta czyszcząca 61332M',
+        'zebra hc100 płyta główna', 'zebra hc100 main logic board 61335M',
+        'zebra hc100 wifi', 'zebra hc100 wireless', 'zebra hc100 ethernet',
+        'zebra hc100 specyfikacja', 'zebra hc100 dane techniczne', 'zebra hc100 parametry',
+        'zebra hc100 następca', 'zebra hc100 zamiennik', 'zebra zd510-hc',
+        'drukarka opasek szpital', 'drukarka opasek pacjent', 'drukarka wristband',
+        'opaski identyfikacyjne zebra', 'opaski szpitalne zebra', 'z-band direct', 'z-band quickclip',
+        'zebra hc100 opaski', 'zebra hc100 wristband', 'zebra hc100 media cartridge',
+        'zebra hc100 smart card reader', 'zebra hc100 czytnik kart smart',
+        'drukarka opasek opieka zdrowotna', 'identyfikacja pacjentów zebra'
+      ],
+      faqSchema: [
+        {
+          question: 'Co to jest Zebra HC100 i do czego służy?',
+          answer: 'Zebra HC100 to drukarka opasek identyfikacyjnych na rękę (wristband printer). Drukuje opaski dla pacjentów w szpitalach, klinikach, przychodniach — ale też na basenach, w parkach rozrywki, na koncertach i w ośrodkach wypoczynkowych. Wykorzystuje technologię druku termicznego bezpośredniego (300 dpi) i zamknięte kasety z opaskami (Z-Band Direct, Z-Band QuickClip, Z-Band UltraSoft). Opaski mają powłokę antybakteryjną skuteczną przeciw MRSA, E. coli i S. aureus.'
+        },
+        {
+          question: 'Czy Zebra HC100 jest jeszcze produkowana?',
+          answer: 'Nie. Zebra HC100 została wycofana ze sprzedaży: Ameryka Północna — 31 października 2018, EMEA/LATAM — 31 stycznia 2019, APAC — 28 lutego 2019. Wsparcie serwisowe zakończyło się: NA — 30 listopada 2021, EMEA — 28 lutego 2022, APAC — 31 marca 2022. Następcą jest Zebra ZD510-HC, która akceptuje te same kasety z opaskami co HC100.'
+        },
+        {
+          question: 'Co oznacza pomarańczowa dioda media na drukarce Zebra HC100?',
+          answer: 'Stała pomarańczowa dioda Media (przy zielonej diodzie drukarki) oznacza niski poziom opasek w kasecie — zwykle 20 lub mniej sztuk. Drukarka nadal drukuje, ale należy przygotować nową kasetę. Migająca pomarańczowa dioda Media oznacza błąd medium — np. zacięcie opaski, brak kasety lub uszkodzony czytnik smart card.'
+        },
+        {
+          question: 'Jak wyczyścić głowicę w drukarce Zebra HC100?',
+          answer: 'Metodą rekomendowaną jest użycie karty czyszczącej (P/N 61332M). Włóż kartę czyszczącą w szczelinę mediów tak, aby ok. 6 mm wystawało z przodu. Zamknij pokrywę, włącz drukarkę i przytrzymaj Eject przez ok. 15 sekund podczas autotestu. Alternatywnie: otwórz pokrywę, przetrzyj brązowy pasek na głowicy wacikiem z alkoholem izopropylowym (90% alkohol, 10% woda dejonizowana), poczekaj aż wyschnie.'
+        },
+        {
+          question: 'Ile kosztuje naprawa drukarki opasek Zebra HC100?',
+          answer: 'Cennik orientacyjny: diagnostyka — bezpłatna, czyszczenie i konserwacja — od 200 zł, wymiana głowicy termicznej — od 800 zł, wymiana wałka dociskowego — od 400 zł, naprawa/wymiana płyty głównej — od 700 zł, naprawa mechanizmu kasety — od 350 zł. Ceny mogą się różnić w zależności od stanu urządzenia.'
+        },
+        {
+          question: 'Jakie opaski pasują do drukarki Zebra HC100?',
+          answer: 'Do HC100 pasują zamknięte kasety Zebra: Z-Band Direct (klejone, białe i kolorowe, rozmiary adult/child/infant), Z-Band QuickClip (z klipsem, wielokrotne zakładanie), Z-Band UltraSoft (ultra miękkie, polypropylene), Z-Band Splash (wodoodporne, na baseny i imprezy), Z-Band Fun (rozrywka). Kasety są kompatybilne również z następcą ZD510-HC.'
+        },
+        {
+          question: 'Kaseta nie wysuwa się z drukarki Zebra HC100 — co zrobić?',
+          answer: 'Krok 1: Wyłącz drukarkę, włącz ponownie i naciśnij Eject. Krok 2: Jeśli nie pomoże — wymuszone wysunięcie: przytrzymaj Eject przez minimum 6 sekund, aż dioda statusu zamiga na żółto. Krok 3: Jeśli kaseta nadal nie wychodzi — wyłącz drukarkę, przytrzymaj Eject 6 sekund, zwolnij, otwórz pokrywę i wyjmij ręcznie. Krok 4: Jeśli żaden z kroków nie pomaga — wymagany serwis (problem z mechanizmem wysuwu).'
+        },
+        {
+          question: 'Czym zastąpić drukarkę Zebra HC100?',
+          answer: 'Oficjalnym następcą Zebra HC100 jest Zebra ZD510-HC. Kluczowe ulepszenia: Ethernet + USB + Bluetooth (opcjonalnie WiFi), chip NFC do parowania mobilnego, obudowa odporna na dezynfekcję (UV + chemikalia), system Link-OS, platforma Print DNA. Co ważne — kasety z opaskami HC100 są w pełni kompatybilne z ZD510-HC, nie trzeba wymieniać zapasów.'
+        }
+      ]
+    },
+    content: `> **🎯 Szybka odpowiedź:** Drukarka opasek **Zebra HC100** nie drukuje? Sprawdź **3 diody LED**: pomarańczowa **Media** ciągła = mało opasek (~20 szt.), migająca pomarańczowa **Media** = błąd kasety, migająca pomarańczowa **Printer** = otwarta pokrywa, czerwona **Printer** = błąd krytyczny. Kaseta nie wysuwa się? Przytrzymaj **Eject 6 sekund** (wymuszone wysunięcie). Czyszczenie głowicy: karta czyszcząca **61332M** lub wacik z 90% IPA. Następca HC100 → **ZD510-HC** (te same kasety z opaskami). [Wyślij drukarkę do bezpłatnej diagnostyki →](https://www.serwis-zebry.pl/#formularz)
+
+**Zebra HC100** to specjalistyczna drukarka opasek identyfikacyjnych na rękę (wristband printer), zaprojektowana przede wszystkim dla sektora opieki zdrowotnej — szpitali, klinik, przychodni i laboratoriów. Wykorzystuje zamknięte kasety z opaskami, druk termiczny bezpośredni o rozdzielczości **300 dpi** i wbudowany czytnik kart smart do śledzenia zużycia mediów. Choć model HC100 został oficjalnie **wycofany ze sprzedaży** (zastąpiony przez ZD510-HC), tysiące tych drukarek nadal pracują w placówkach medycznych w Polsce i Europie.
+
+---
+
+## TL;DR — Serwis Zebra HC100 w pigułce
+
+| Problem | Objaw LED | Sam naprawisz? | Koszt serwisu |
+|---------|-----------|----------------|---------------|
+| **Kaseta nie wysuwa się** | Brak reakcji na Eject | ✅ Tak (Eject 6s) | od 350 zł |
+| **Drukarka nie rozpoznaje kasety** | 🔴 Media czerwona/migająca | ✅ Tak (czyszczenie styków) | od 400 zł |
+| **Słaba jakość wydruku** | Brak sygnału LED | ✅ Tak (czyszczenie) | od 200 zł |
+| **Zacięcie opaski** | 🟠 Media obrotowa | ✅ Tak (wyjęcie + czyszczenie) | od 200 zł |
+| **Zużyta głowica termiczna** | Blady druk, przerwy | ❌ Serwis | od 800 zł |
+| **Zużyty wałek dociskowy** | Nierówny docisk | ❌ Serwis | od 400 zł |
+| **Uszkodzona płyta główna** | Drukarka nie startuje | ❌ Serwis | od 700 zł |
+| **Uszkodzony czytnik smart card** | Żadna kaseta nie działa | ❌ Serwis | od 400 zł |
+
+> **💡 Wskazówka:** HC100 została wycofana ze sprzedaży (EMEA: styczeń 2019), ale **kasety z opaskami są nadal produkowane** i kompatybilne z następcą ZD510-HC. Części zamienne również są dostępne.
+
+---
+
+## Zebra HC100 — specyfikacja techniczna
+
+| Parametr | Wartość |
+|---|---|
+| **Technologia druku** | Termiczny bezpośredni (direct thermal) |
+| **Rozdzielczość** | 300 dpi (12 dot/mm) |
+| **Prędkość druku** | 2"/s (51 mm/s) — opieka zdrowotna; 4"/s (102 mm/s) — Z-Band Fun/Splash |
+| **Procesor** | 32-bit RISC |
+| **Pamięć** | 8 MB Flash / 16 MB SDRAM |
+| **Łączność** | USB, RS-232, opcjonalnie 802.11b/g WiFi, 10/100 Ethernet |
+| **Język programowania** | ZPL (Zebra Programming Language) |
+| **Wymiary** | 127 x 178 x 242 mm (szer. x wys. x gł.) |
+| **Waga** | 1,4 kg (3,1 lbs) |
+| **Zasilanie** | 24 VDC / 2,92 A / 70 W (zasilacz FSP070-RDBM, 100-240 VAC) |
+| **Media** | Zamknięte kasety Z-Band (Direct, QuickClip, UltraSoft, Splash, Fun) |
+| **Rozmiary opasek** | Adult, Child, Infant |
+| **Samokalibracja** | Tak |
+
+**Kluczowa cecha HC100:** opaski z serii Z-Band Direct i Z-Band UltraSoft posiadają **powłokę antybakteryjną** skuteczną przeciwko Staphylococcus aureus, Pseudomonas aeruginosa, Escherichia coli i MRSA — co jest krytyczne w środowisku szpitalnym.
+
+---
+
+## Diagnostyka diod LED — tabela statusów Zebra HC100
+
+HC100 posiada trzy wskaźniki świetlne: **dioda drukarki** (Printer Status), **dioda mediów** (Media Status) i **dioda sieci bezprzewodowej** (Wireless Status). Poprawna interpretacja ich stanów to podstawa diagnostyki.
+
+**Dioda drukarki (Printer Status)**
+
+| Stan diody | Znaczenie | Co zrobić |
+|---|---|---|
+| 🟢 **Zielona ciągła** | Drukarka gotowa do pracy | Normalna praca — nie wymaga działań |
+| 🟢 **Zielona migająca** | Trwa przetwarzanie danych / drukowanie | Poczekaj na zakończenie druku |
+| 🟠 **Pomarańczowa migająca** | Pokrywa otwarta | Zamknij pokrywę górną — naciśnij aż do kliknięcia z obu stron |
+| 🟠 **Pomarańczowa ciągła** | Błąd drukarki / pauza | Sprawdź komunikaty na hoście, naciśnij Pause/Feed |
+| 🔴 **Czerwona ciągła** | Błąd krytyczny | Wyłącz drukarkę, odczekaj 10 sekund, włącz. Jeśli nadal czerwona — serwis |
+| ⚫ **Wygaszona** | Brak zasilania | Sprawdź zasilacz (24 VDC), kabel, bezpiecznik |
+
+**Dioda mediów (Media Status)**
+
+| Stan diody | Znaczenie | Co zrobić |
+|---|---|---|
+| 🟢 **Zielona ciągła** | Media OK — kaseta prawidłowo załadowana | Normalna praca |
+| 🟠 **Pomarańczowa ciągła** (przy zielonej drukarki) | Niski poziom opasek (~20 lub mniej) | Przygotuj nową kasetę, drukarka nadal drukuje |
+| 🟠 **Pomarańczowa migająca** | Błąd mediów | Wyjmij i włóż ponownie kasetę, wyczyść styki smart card |
+| 🟠 **Pomarańczowa obrotowa** | Opaska wisi z drukarki podczas próby wysunięcia kasety | Oderwij opaskę wystającą z drukarki, ponów wysunięcie |
+| 🔴 **Czerwona ciągła** | Brak kasety / kaseta uszkodzona | Włóż kasetę, sprawdź chip smart card |
+| ⚫ **Wygaszona** | Brak kasety w drukarce | Włóż kasetę z opaskami |
+
+**Dioda sieci bezprzewodowej (Wireless Status)**
+
+| Stan diody | Znaczenie | Co zrobić |
+|---|---|---|
+| 🟢 **Zielona ciągła** | Połączenie WiFi aktywne, silny sygnał | Normalna praca |
+| 🟢 **Zielona migająca** | Wyszukiwanie sieci / słaby sygnał | Zbliż drukarkę do access pointu |
+| ⚫ **Wygaszona** | WiFi wyłączone lub brak modułu wireless | Sprawdź konfigurację sieci, moduł WiFi |
+
+> **⚠️ Najczęstsza kombinacja błędu:** 🔴 czerwona Printer + 🟠 migająca Media = jednoczesny **błąd krytyczny i problem z kasetą** — wyłącz drukarkę, wyjmij kasetę, wyczyść styki smart card, włóż ponownie. Jeśli czerwona Printer nie gaśnie po restarcie — wymagany serwis.
+
+---
+
+## Najczęstsze problemy i rozwiązania
+
+### Problem 1: Kaseta nie wysuwa się z drukarki
+
+To najczęstszy problem zgłaszany przez użytkowników HC100. Przyczyny: zacięta opaska, uszkodzony mechanizm wysuwu, problem z elektroniką.
+
+**Procedura krok po kroku:**
+
+1. Naciśnij przycisk **Eject** (ikona trójkąta w górę)
+2. Jeśli kaseta nie wyszła — wyłącz drukarkę (O), włącz ponownie (I), poczekaj na pełne uruchomienie, naciśnij **Eject**
+3. Jeśli nadal bez efektu — **wymuszone wysunięcie**: przytrzymaj **Eject przez 6 sekund**, dioda statusu zamiga na żółto, zwolnij przycisk
+4. Jeśli wymuszone wysunięcie nie działa — wyłącz drukarkę, przytrzymaj **Eject przez 6 sekund**, otwórz pokrywę górną (przyciski po obu stronach) i wyjmij kasetę ręcznie
+5. Jeśli żaden krok nie pomógł — **skontaktuj się z serwisem** (uszkodzony mechanizm wysuwu, problem z płytą główną lub silnikiem)
+
+> **💡 Wskazówka:** Wymuszone wysunięcie (Eject 6s) rozwiązuje **~80% problemów** z kasetą. Jeśli musisz używać go regularnie — wałek dociskowy lub mechanizm wysuwu wymaga serwisu.
+
+### Problem 2: Drukarka nie rozpoznaje kasety
+
+Objawy: dioda Media czerwona lub pomarańczowa migająca, drukarka nie drukuje pomimo włożonej kasety.
+
+**Rozwiązanie:**
+
+1. Wyjmij kasetę i sprawdź **styki chipa smart card** z tyłu kasety — wyczyść wacikiem z alkoholem izopropylowym (90/10)
+2. Wyczyść **piny czytnika smart card** wewnątrz drukarki (widoczne z tyłu gniazda kasety) — użyj wacika z alkoholem
+3. Poczekaj aż roztwór wyschnie, włóż kasetę ponownie
+4. Spróbuj inną kasetę — jeśli żadna nie jest rozpoznawana, problem leży w **czytniku smart card** (P/N 61339M) — wymagany serwis
+
+### Problem 3: Słaba jakość wydruku na opaskach
+
+Objawy: blady druk, przerwy w tekście lub kodach kreskowych, plamy, smugi.
+
+**Przyczyny i rozwiązania:**
+
+- **Brudna głowica termiczna** — wyczyść kartą czyszczącą (P/N 61332M) lub wacikiem z alkoholem izopropylowym
+- **Zużyta głowica** — po wydrukowaniu kilkudziesięciu tysięcy opasek głowica się zużywa → wymiana (P/N 61330M)
+- **Druk na niepokrytych obszarach opaski** — zmodyfikuj szablon ZPL, aby druk mieścił się w strefie druku (start 25,4 mm od krawędzi wiodącej)
+- **Druk na otworach klipsów (Z-Band QuickClip)** lub **szczelinach zabezpieczających (Z-Band Direct)** — przesuń pola wydruku
+- **Zużyty wałek dociskowy** — wymiana (P/N 61331M)
+
+> **💡 Wskazówka:** Jeśli kody kreskowe na opaskach nie skanują się — to najczęściej brudna głowica lub druk w złej strefie (za blisko krawędzi). Wyczyść głowicę i sprawdź szablon ZPL — strefa druku zaczyna się **25,4 mm** od krawędzi wiodącej opaski.
+
+### Problem 4: Zacięcie opaski w drukarce
+
+Objawy: opaska wystaje z drukarki, ale nie wysuwa się do końca; drukarka nie reaguje na polecenia.
+
+**Rozwiązanie:**
+
+1. **Odetnij** wystającą część opaski
+2. Wyjmij kasetę (Eject lub wymuszone wysunięcie)
+3. Otwórz pokrywę górną i sprawdź ścieżkę mediów — usuń resztki opaski
+4. Wyczyść ścieżkę mediów wacikiem z alkoholem
+5. Zamknij pokrywę, włóż kasetę, drukuj testowo
+
+### Problem 5: Drukarka nie włącza się / brak zasilania
+
+Objawy: żadna dioda nie świeci, brak reakcji na włącznik.
+
+**Diagnostyka:**
+
+1. Sprawdź czy zasilacz jest podłączony — wyjście 24 VDC / 2,92 A (model FSP070-RDBM)
+2. Sprawdź kabel zasilający i gniazdko — podłącz inny sprzęt do tego samego gniazdka
+3. Sprawdź złącze DC na drukarce — czy nie jest luźne lub uszkodzone
+4. Jeśli zasilacz jest sprawny a drukarka nie reaguje — uszkodzona **płyta główna** (MLB, P/N 61335M/61336M) — wymagany serwis
+
+### Problem 6: Problemy z łącznością (USB/Serial/WiFi/Ethernet)
+
+**USB:**
+- Zainstaluj najnowszy sterownik Zebra (Zebra Setup Utilities)
+- Sprawdź kabel USB — spróbuj innego kabla i portu
+- Wyłącz i włącz drukarkę z podłączonym kablem
+
+**RS-232 (Serial):**
+- Sprawdź ustawienia portu: baud rate, parity, data bits, stop bits
+- Sprawdź kabel null-modem
+
+**WiFi (802.11b/g):**
+- Dioda wireless wygaszona = moduł WiFi nieaktywny lub nie zainstalowany
+- Skonfiguruj parametry sieci przez ZPL lub Zebra Setup Utilities
+- Sprawdź zasięg — zbliż drukarkę do access pointu
+
+**Ethernet (10/100):**
+- Sprawdź diody na porcie RJ-45
+- Drukarka otrzymuje IP przez DHCP — wydrukuj stronę konfiguracji (przytrzymaj Pause/Feed przy włączaniu)
+
+---
+
+## Czyszczenie drukarki Zebra HC100 — procedura krok po kroku
+
+Regularne czyszczenie głowicy termicznej i ścieżki mediów to klucz do długiej żywotności HC100 i wysokiej jakości wydruku. Zebra zaleca czyszczenie **po każdej wymianie kasety z opaskami**.
+
+**Metoda 1: Karta czyszcząca (zalecana)**
+
+1. Wyjmij kasetę z opaskami (Eject)
+2. Włóż kartę czyszczącą (P/N **61332M**) w szczelinę mediów — niech ok. 6 mm wystaje z przodu drukarki
+3. Zamknij pokrywę górną
+4. Włącz drukarkę (I)
+5. Podczas autotestu przytrzymaj przycisk **Eject przez ok. 15 sekund**
+6. Drukarka przeciągnie kartę czyszczącą przez głowicę i ścieżkę mediów
+7. Wyjmij kartę i włóż kasetę z opaskami
+
+> **⚠️ Uwaga:** Karta czyszcząca zawiera alkohol izopropylowy — jest łatwopalna. Przechowuj z dala od źródeł ognia.
+
+**Metoda 2: Ręczne czyszczenie**
+
+1. Wyłącz drukarkę (O)
+2. Otwórz pokrywę górną (przyciski po obu stronach)
+3. Unieś pokrywę do tyłu
+4. Zamocz wacik w roztworze: 90% alkohol izopropylowy + 10% woda dejonizowana (lub użyj wacika z Zebra Preventive Maintenance Kit P/N **47362**)
+5. Na spodzie głowicy termicznej przetrzyj brązowy pasek od końca do końca
+6. Poczekaj aż roztwór wyschnie
+7. Zamknij pokrywę, włóż kasetę
+
+---
+
+## Wymiana podzespołów — numery katalogowe i procedury
+
+HC100 posiada modułową budowę z 10 zestawami serwisowymi (Maintenance Kits). Poniżej najważniejsze:
+
+### Wymiana głowicy termicznej (P/N 61330M)
+
+Zestaw 61330M zawiera: głowicę termiczną 2" (61259-12), szczelinę mediów (61248), płytkę dźwigni głowicy (61230).
+
+**Procedura:**
+
+1. Wyłącz drukarkę, odczekaj aż głowica ostygnie (ryzyko poparzenia!)
+2. Wyjmij kasetę z opaskami
+3. Otwórz pokrywę górną
+4. Podnieś metalową płytkę dźwigni głowicy
+5. Unieś głowicę do góry i wyciągnij — odłącz zatrzaski od chassis
+6. Delikatnie wyjmij kable z klipsów na krawędziach głowicy
+7. Odłącz dwa złącza kabli głowicy (prawe i lewe) oraz zielony przewód uziemienia
+8. Zamontuj nową głowicę w odwrotnej kolejności
+9. Podłącz kable, przeprowadź przez klipsy, podłącz uziemienie
+10. Wyczyść linię druku na nowej głowicy wacikiem z alkoholem
+11. Wyrównaj zatrzaski z otworami w chassis, wciśnij do zatrzaśnięcia
+12. Zamknij pokrywę, włóż kasetę, drukuj testowo
+
+### Wymiana wałka dociskowego (P/N 61331M)
+
+Zestaw 61331M zawiera: wałek (61241), 2x łożysko blokujące (61232), 1x pierścień E-ring (02133).
+
+**Procedura:**
+
+1. Wyłącz drukarkę, otwórz pokrywę
+2. Podnieś głowicę — ustaw ją pionowo opartą o pokrywę
+3. Obróć zielone zatrzaski zwalniające wałka do pozycji pionowej (odblokowanie)
+4. Wyciągnij zatrzaski do góry
+5. Wyjmij wałek dociskowy
+6. Włóż nowy wałek z zębatką po lewej stronie, trzymając zatrzaski pionowo
+7. Zablokuj — obróć zielone zatrzaski do przodu (pozycja zablokowana)
+8. Wyczyść głowicę wacikiem z alkoholem
+9. Zamontuj głowicę z powrotem, zamknij pokrywę
+
+### Wymiana płyty głównej (MLB) (P/N 61335M / 61336M)
+
+- **61335M** — Main Logic Board 8 MB
+- **61336M** — Main Logic Board 64 MB
+
+Wymiana płyty głównej wymaga otwarcia obudowy (śruby Phillips), odłączenia kabli i przeniesienia karty WiFi/Ethernet (jeśli zainstalowane). Ta procedura powinna być wykonywana przez **wykwalifikowanego technika serwisowego**.
+
+### Kompletna lista zestawów serwisowych
+
+| P/N | Nazwa | Opis |
+|---|---|---|
+| **61330M** | Printhead Assembly Kit | Głowica termiczna + media chute + lever plate |
+| **61331M** | Platen Roller Assembly Kit | Wałek dociskowy + łożyska + E-ring |
+| **61332M** | Cleaning Card Kit (10 szt.) | Karty czyszczące głowicę i ścieżkę mediów |
+| **61335M** | Main Logic Board Kit (8 MB) | Płyta główna 8 MB Flash |
+| **61336M** | Main Logic Board Kit (64 MB) | Płyta główna 64 MB Flash |
+| **61337M** | Wireless Print Server Kit | Moduł WiFi 802.11b/g (ZebraNet) |
+| **P1051273-001** | Wireless Plus Print Server Kit | Nowszy moduł WiFi (ZebraNet Plus) |
+| **61338M** | 10/100 Print Server Kit | Moduł Ethernet 10/100 Mbps |
+| **61339M** | Smart Card Reader Board Kit | Czytnik kart smart (identyfikacja kaset) |
+| **61340M** | Upper Print Mechanism Cover | Pokrywa górna mechanizmu druku |
+| **61341M** | Print Mechanism Chassis Kit | Chassis mechanizmu druku |
+| **61342M** | Main Frame Assembly Kit | Rama główna drukarki |
+| **61343M** | Outer Enclosure and Trim Kit | Obudowa zewnętrzna |
+| **47362** | Preventive Maintenance Kit | Zestaw do konserwacji profilaktycznej (waciki) |
+
+---
+
+## Typy opasek kompatybilnych z Zebra HC100
+
+Zebra HC100 wykorzystuje zamknięte kasety z opaskami. Każda kaseta ma chip smart card, który automatycznie identyfikuje typ medium i śledzi pozostałą ilość.
+
+**Z-Band Direct** — opaski samoprzylepne (adhesive closure)
+- Najbardziej popularne w szpitalach
+- Powłoka antybakteryjna (S. aureus, E. coli, MRSA, P. aeruginosa)
+- Rozmiary: Adult (1" x 11"), Child (1" x 7"), Infant (0.75" x 7.6875")
+- Kolory: białe, z paskiem czerwonym, niebieskim, zielonym, żółtym, różowym, pomarańczowym
+- Przykład P/N: **10006995K** (adult biały, 200/rolka, 6/box)
+
+**Z-Band QuickClip** — opaski z klipsem
+- Wielokrotne zakładanie i zdejmowanie
+- Syntetyczne, wytrzymałe
+- Przykład P/N: **10007000K** (1.1875" x 11", 4 rolki + 1160 klipsów)
+
+**Z-Band UltraSoft** — ultra miękkie opaski
+- Polypropylene, maksymalny komfort dla pacjenta
+- Idealne dla noworodków i osób z wrażliwą skórą
+- Przykład P/N: **10015355K** (adult 1" x 11", 175/kaseta, 6/box)
+
+**Z-Band Splash** — opaski wodoodporne
+- Do basenów, parków wodnych, imprez plenerowych
+- Przykład P/N: **10012717-1K** (czerwone, 1" x 10", 350/kaseta, 6/box)
+
+**Z-Band Fun** — opaski do rozrywki
+- Imprezy, koncerty, festiwale, ośrodki wypoczynkowe
+- Szybki druk 4"/s (102 mm/s)
+
+**Ważne:** Wszystkie kasety HC100 są **w pełni kompatybilne** z następcą ZD510-HC — nie trzeba wymieniać zapasów opasek przy migracji.
+
+---
+
+## Cennik napraw drukarki opasek Zebra HC100
+
+| Usługa | Cena od |
+|---|---|
+| **Diagnostyka** | Bezpłatna |
+| **Czyszczenie i konserwacja** | 200 zł |
+| **Wymiana głowicy termicznej** | 800 zł |
+| **Wymiana wałka dociskowego** | 400 zł |
+| **Naprawa mechanizmu wysuwu kasety** | 350 zł |
+| **Naprawa/wymiana czytnika smart card** | 400 zł |
+| **Naprawa/wymiana płyty głównej** | 700 zł |
+| **Wymiana/naprawa modułu WiFi** | 450 zł |
+| **Wymiana obudowy zewnętrznej** | 300 zł |
+| **Przegląd serwisowy (kompletny)** | 350 zł |
+
+**Bezpłatna diagnostyka** — przyślij drukarkę kurierem lub przynieś osobiście. Określimy problem i podamy dokładną wycenę przed rozpoczęciem naprawy.
+
+> **💡 Wskazówka:** Naprawa HC100 jest opłacalna, gdy koszt nie przekracza **50%** wartości nowej drukarki ZD510-HC. Przy awarii płyty głównej + głowicy jednocześnie — rozważ migrację na ZD510-HC.
+
+[Formularz serwisowy →](https://www.serwis-zebry.pl/#formularz)
+
+---
+
+## Zebra HC100 vs ZD510-HC — porównanie z następcą
+
+| Parametr | HC100 | ZD510-HC |
+|---|---|---|
+| **Status** | Wycofana (EoS 2022) | Aktualnie w sprzedaży |
+| **Rozdzielczość** | 300 dpi | 300 dpi |
+| **Prędkość** | 2-4"/s | 2-4"/s |
+| **Łączność** | USB, RS-232, opcja WiFi/Ethernet | USB, Ethernet, Bluetooth, opcja WiFi |
+| **NFC (Print Touch)** | Nie | Tak — parowanie mobilne |
+| **System operacyjny** | Firmware | Link-OS |
+| **Dezynfekcja UV** | Nie | Tak — obudowa odporna na UV i chemikalia |
+| **Print DNA** | Nie | Tak — pełna platforma zarządzania |
+| **Kasety opasek** | Z-Band (wszystkie typy) | Z-Band (wszystkie typy) — kompatybilne! |
+
+**Kiedy wymienić HC100 na ZD510-HC?**
+- Gdy koszty naprawy przekraczają 50% wartości nowej drukarki
+- Gdy potrzebujesz łączności Ethernet/Bluetooth
+- Gdy wymagana jest zgodność z nowymi standardami dezynfekcji UV
+- Gdy potrzebujesz zdalnego zarządzania (Link-OS / Print DNA)
+
+**Kiedy warto naprawić HC100?**
+- Gdy drukarka działa poprawnie poza jednym komponentem
+- Gdy masz zapas kaset i akcesoriów
+- Gdy koszt naprawy jest niższy niż zakup ZD510-HC
+- Gdy nie potrzebujesz nowych funkcji łączności
+
+---
+
+## Daty wycofania Zebra HC100
+
+| Region | Koniec sprzedaży (EoS) | Koniec wsparcia (EoSS) |
+|---|---|---|
+| **Ameryka Północna** | 31 października 2018 | 30 listopada 2021 |
+| **EMEA / LATAM** | 31 stycznia 2019 | 28 lutego 2022 |
+| **APAC** | 28 lutego 2019 | 31 marca 2022 |
+
+Mimo zakończenia oficjalnego wsparcia Zebra, autoryzowane serwisy nadal naprawiają HC100 — części zamienne i kasety z opaskami są dostępne.
+
+---
+
+## Zastosowania drukarki opasek Zebra HC100
+
+**Opieka zdrowotna (główne zastosowanie):**
+- Identyfikacja pacjentów przy przyjęciu na oddział
+- Opaski z kodem kreskowym do weryfikacji tożsamości (podawanie leków, pobieranie krwi, procedury)
+- Opaski noworodkowe (infant size) z powłoką antybakteryjną
+- Izby przyjęć, laboratoria, sale operacyjne, oddziały psychiatryczne
+
+**Rozrywka i eventy:**
+- Parki wodne i baseny (Z-Band Splash — wodoodporne)
+- Parki rozrywki, koncerty, festiwale (Z-Band Fun — szybki druk 4"/s)
+- Ośrodki wypoczynkowe, hotele all-inclusive
+- Kontrola dostępu na imprezach masowych
+
+---
+
+## FAQ — najczęściej zadawane pytania
+
+**Co to jest Zebra HC100 i do czego służy?**
+
+Zebra HC100 to drukarka opasek identyfikacyjnych na rękę (wristband printer) wykorzystująca druk termiczny bezpośredni 300 dpi. Drukuje opaski dla pacjentów w szpitalach (z powłoką antybakteryjną przeciw MRSA, E. coli, S. aureus) oraz dla gości w parkach rozrywki, na basenach i imprezach. Używa zamkniętych kaset Z-Band z chipem smart card do śledzenia zużycia mediów.
+
+**Czy Zebra HC100 jest jeszcze produkowana?**
+
+Nie. HC100 została wycofana ze sprzedaży w regionie EMEA 31 stycznia 2019 r. Wsparcie serwisowe Zebra zakończyło się 28 lutego 2022 r. Następcą jest Zebra ZD510-HC, która akceptuje te same kasety z opaskami. Autoryzowane serwisy nadal naprawiają HC100 — części zamienne są dostępne.
+
+**Co oznacza pomarańczowa dioda media na drukarce Zebra HC100?**
+
+Stała pomarańczowa dioda Media (przy zielonej diodzie drukarki) = niski poziom opasek w kasecie (~20 lub mniej). Drukarka nadal drukuje — przygotuj nową kasetę. Migająca pomarańczowa = błąd mediów (zacięcie opaski, problem z kasetą, uszkodzony chip smart card). Obrotowa pomarańczowa = opaska wisi z drukarki podczas próby wysunięcia kasety — oderwij opaskę i spróbuj ponownie.
+
+**Jak wyczyścić głowicę w drukarce Zebra HC100?**
+
+Karta czyszcząca (P/N 61332M): wyjmij kasetę, włóż kartę czyszczącą w szczelinę (~6 mm wystaje z przodu), zamknij pokrywę, włącz drukarkę i trzymaj Eject 15 sekund podczas autotestu. Ręcznie: wyłącz drukarkę, otwórz pokrywę, przetrzyj brązowy pasek na spodzie głowicy wacikiem z 90% alkoholem izopropylowym (od końca do końca), poczekaj aż wyschnie.
+
+**Kaseta nie wysuwa się z drukarki Zebra HC100 — co zrobić?**
+
+1) Naciśnij Eject. 2) Wyłącz/włącz drukarkę i naciśnij Eject. 3) Wymuszone wysunięcie: przytrzymaj Eject 6 sekund aż dioda zamiga na żółto. 4) Wyłącz drukarkę, przytrzymaj Eject 6 sekund, otwórz pokrywę i wyjmij ręcznie. 5) Jeśli nic nie pomaga — serwis. [Formularz serwisowy →](https://www.serwis-zebry.pl/#formularz)
+
+**Ile kosztuje naprawa drukarki opasek Zebra HC100?**
+
+Cennik: diagnostyka — bezpłatna, czyszczenie — od 200 zł, wymiana głowicy — od 800 zł, wymiana wałka — od 400 zł, naprawa mechanizmu kasety — od 350 zł, naprawa czytnika smart card — od 400 zł, naprawa płyty głównej — od 700 zł. [Formularz serwisowy →](https://www.serwis-zebry.pl/#formularz)
+
+**Jakie opaski pasują do drukarki Zebra HC100?**
+
+Zamknięte kasety Zebra: Z-Band Direct (klejone, białe/kolorowe, adult/child/infant, z powłoką antybakteryjną), Z-Band QuickClip (z klipsem), Z-Band UltraSoft (ultra miękkie, idealne dla noworodków), Z-Band Splash (wodoodporne, na baseny), Z-Band Fun (rozrywka). Wszystkie kasety HC100 pasują też do następcy ZD510-HC.
+
+**Czym zastąpić drukarkę Zebra HC100?**
+
+Oficjalny następca: Zebra ZD510-HC. Kluczowe ulepszenia: Ethernet + USB + Bluetooth (opcja WiFi), NFC do parowania mobilnego, obudowa odporna na UV i dezynfekcję chemiczną, Link-OS, Print DNA. Kasety z opaskami HC100 są kompatybilne z ZD510-HC — nie trzeba wymieniać zapasów.
+
+**Jak podłączyć drukarkę Zebra HC100 do sieci?**
+
+USB: podłącz kabel, zainstaluj sterownik Zebra Setup Utilities. RS-232: kabel null-modem, skonfiguruj parametry portu. WiFi (opcja 802.11b/g): skonfiguruj przez ZPL lub Setup Utilities — dioda wireless 🟢 zielona = połączenie OK. Ethernet (opcja 10/100): kabel RJ-45, DHCP automatycznie — wydrukuj stronę konfiguracji (Pause/Feed przy włączaniu) aby sprawdzić IP.
+
+---
+
+## Powiązane artykuły
+
+- [Drukarka Zebra nie drukuje — przyczyny i rozwiązania](/blog/drukarka-zebra-nie-drukuje-przyczyny-rozwiazania)
+- [Serwis drukarki kart Zebra ZC100/ZC300 — diagnostyka i naprawa](/blog/serwis-drukarki-kart-zebra-zc100-zc300-diagnostyka-naprawa)
+- [Kody błędów drukarek kart Zebra ZC300/ZXP](/blog/kody-bledow-drukarki-kart-zebra-zc300-zxp)
+- [Porównanie drukarek kart Zebra ZC100, ZC300, ZXP](/blog/porownanie-drukarek-kart-zebra-zc100-zc300-zxp)
+- [Drukarka Zebra zacina karty — przyczyny i rozwiązania](/blog/drukarka-zebra-zacina-karty-przyczyny-rozwiazania)
+- [Biała linia na karcie — wymiana głowicy Zebra](/blog/biala-linia-na-karcie-wymiana-glowicy-zebra)
+
+👉 **[Serwis Drukarek Zebra — naprawy, konserwacja, części](/serwis-drukarek-zebra)**
+`
   }
 
 ]
