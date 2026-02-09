@@ -40,10 +40,10 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Serwis Tabletów Zebra – Naprawa ET40, ET45, L10',
     description: 'Profesjonalny serwis tabletów przemysłowych Zebra. Wymiana wyświetlaczy, naprawa baterii, serwis doków.',
-    url: 'https://www.serwis-zebry.pl/tablety',
+    url: 'https://www.serwis-zebry.pl/serwis-tabletow-zebra',
   },
   alternates: {
-    canonical: 'https://www.serwis-zebry.pl/tablety',
+    canonical: 'https://www.serwis-zebry.pl/serwis-tabletow-zebra',
   },
 }
 

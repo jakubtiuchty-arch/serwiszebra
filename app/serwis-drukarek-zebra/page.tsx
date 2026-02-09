@@ -118,10 +118,10 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Serwis Drukarek Zebra – Profesjonalna Naprawa Wszystkich Modeli',
     description: 'Serwis drukarek Zebra: etykiet, kart plastikowych, mobilnych. Wymiana głowic, naprawa mechanizmu, kalibracja. Odbiór kurierem w 24h. 25 lat doświadczenia.',
-    url: 'https://www.serwis-zebry.pl/drukarki',
+    url: 'https://www.serwis-zebry.pl/serwis-drukarek-zebra',
   },
   alternates: {
-    canonical: 'https://www.serwis-zebry.pl/drukarki',
+    canonical: 'https://www.serwis-zebry.pl/serwis-drukarek-zebra',
   },
 }
 

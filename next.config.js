@@ -14,22 +14,22 @@ const nextConfig = {
       {
         source: '/drukarki',
         destination: '/serwis-drukarek-zebra',
-        statusCode: 303,
+        permanent: true, // 301 redirect
       },
       {
         source: '/terminale',
         destination: '/serwis-terminali-zebra',
-        statusCode: 303,
+        permanent: true, // 301 redirect
       },
       {
         source: '/skanery',
         destination: '/serwis-skanerow-zebra',
-        statusCode: 303,
+        permanent: true, // 301 redirect
       },
       {
         source: '/tablety',
         destination: '/serwis-tabletow-zebra',
-        statusCode: 303,
+        permanent: true, // 301 redirect
       },
     ]
   },
