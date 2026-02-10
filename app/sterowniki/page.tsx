@@ -419,7 +419,7 @@ export default function DriversPage() {
             <div className="space-y-4 sm:space-y-6">
               {printerDrivers.map((driver) => (
                 <div key={driver.id} className="bg-white border border-gray-200 rounded-xl p-4 sm:p-6">
-                  <div className="flex flex-col sm:flex-row sm:items-start gap-4">
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-4">
                     <div className="flex-1">
                       <div className="flex flex-wrap items-center gap-2 mb-2">
                         <h2 className="text-base sm:text-xl font-semibold text-gray-900">{driver.name}</h2>
@@ -581,7 +581,7 @@ export default function DriversPage() {
               {/* Dostępne firmware */}
               {firmware.map((fw) => (
                 <div key={fw.id} className="bg-white border border-gray-200 rounded-xl p-4 sm:p-6">
-                  <div className="flex flex-col sm:flex-row sm:items-start gap-4">
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-4">
                     <div className="flex-1">
                       <div className="flex flex-wrap items-center gap-2 mb-2">
                         <h2 className="text-base sm:text-xl font-semibold text-gray-900">{fw.name}</h2>
@@ -707,7 +707,7 @@ export default function DriversPage() {
                 <div className="space-y-3 sm:space-y-4">
                   {printerUtilities.map((util) => (
                     <div key={util.id} className="bg-white border border-gray-200 rounded-xl p-4 sm:p-6">
-                      <div className="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-4">
+                      <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
                         <div className="flex-1">
                           <div className="flex flex-wrap items-center gap-2 mb-1">
                             <h3 className="font-semibold text-gray-900 text-sm sm:text-base">{util.name}</h3>
@@ -744,7 +744,7 @@ export default function DriversPage() {
                 <div className="space-y-3 sm:space-y-4">
                   {scannerUtilities.map((util) => (
                     <div key={util.id} className="bg-white border border-gray-200 rounded-xl p-4 sm:p-6">
-                      <div className="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-4">
+                      <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
                         <div className="flex-1">
                           <div className="flex flex-wrap items-center gap-2 mb-1">
                             <h3 className="font-semibold text-gray-900 text-sm sm:text-base">{util.name}</h3>
