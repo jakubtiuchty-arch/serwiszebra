@@ -118,6 +118,48 @@ type RepairFormData = z.infer<typeof repairFormSchema>
 
 // Lista usunięta - teraz pole tekstowe
 
+// Kompresja obrazka po stronie klienta (max 1200px, JPEG 0.7)
+async function compressImage(file: File, maxWidth = 1200, quality = 0.7): Promise<File> {
+  return new Promise((resolve) => {
+    // Jeśli plik jest mały (<500KB), nie kompresuj
+    if (file.size < 500 * 1024) {
+      resolve(file)
+      return
+    }
+
+    const img = new Image()
+    const canvas = document.createElement('canvas')
+    const ctx = canvas.getContext('2d')!
+
+    img.onload = () => {
+      let { width, height } = img
+      if (width > maxWidth) {
+        height = Math.round((height * maxWidth) / width)
+        width = maxWidth
+      }
+
+      canvas.width = width
+      canvas.height = height
+      ctx.drawImage(img, 0, 0, width, height)
+
+      canvas.toBlob(
+        (blob) => {
+          if (blob && blob.size < file.size) {
+            resolve(new File([blob], file.name.replace(/\.\w+$/, '.jpg'), { type: 'image/jpeg' }))
+          } else {
+            resolve(file) // Oryginał mniejszy — zostaw
+          }
+        },
+        'image/jpeg',
+        quality
+      )
+    }
+
+    img.onerror = () => resolve(file) // Fallback do oryginału
+    img.src = URL.createObjectURL(file)
+  })
+}
+
 export default function RepairForm() {
   const router = useRouter()
   const [currentStep, setCurrentStep] = useState(1)
@@ -270,10 +312,11 @@ export default function RepairForm() {
       formDataToSend.append('pickupDate', data.pickupDate)
       if (data.courierNotes) formDataToSend.append('courierNotes', data.courierNotes)
 
-      // Dodaj zdjęcia
-      uploadedFiles.forEach((file, index) => {
-        formDataToSend.append(`photo_${index}`, file)
-      })
+      // Dodaj zdjęcia (skompresowane)
+      for (let i = 0; i < uploadedFiles.length; i++) {
+        const compressed = await compressImage(uploadedFiles[i])
+        formDataToSend.append(`photo_${i}`, compressed)
+      }
 
       // Wyślij request
       const response = await fetch('/api/repair-request', {
@@ -281,7 +324,18 @@ export default function RepairForm() {
         body: formDataToSend,
       })
 
-      const result = await response.json()
+      // Bezpieczne parsowanie odpowiedzi (serwer może zwrócić non-JSON, np. 413)
+      const responseText = await response.text()
+      let result: any
+      try {
+        result = JSON.parse(responseText)
+      } catch {
+        // Odpowiedź nie jest JSON-em (np. "Request Entity Too Large" z Vercel)
+        if (responseText.includes('Entity Too Large') || responseText.includes('too large') || responseText.includes('FUNCTION_PAYLOAD')) {
+          throw new Error('Przesyłane dane są za duże. Zmniejsz rozmiar lub liczbę zdjęć i spróbuj ponownie.')
+        }
+        throw new Error(`Błąd serwera: ${responseText.substring(0, 200)}`)
+      }
 
       if (!response.ok) {
         throw new Error(result.error || 'Błąd podczas wysyłania zgłoszenia')
