@@ -753,10 +753,20 @@ export default function AdminRepairDetailPage() {
             </div>
 
             {/* Zamów kuriera - PRIORYTET #1 */}
-            {((repair.status === 'nowe' && !repair.pickup_tracking_number) ||
-              (repair.status === 'zakonczone' && !repair.courier_tracking_number)) && (
+            {(repair.status === 'nowe' ||
+              repair.status === 'zakonczone' ||
+              repair.status === 'wyslane') && (
               <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow border border-gray-200 p-4">
                 <h3 className="text-sm font-semibold text-gray-900 mb-3">Zamów kuriera</h3>
+                {/* Ostrzeżenie jeśli kurier już zamówiony */}
+                {((repair.status === 'nowe' && repair.pickup_tracking_number) ||
+                  (repair.status !== 'nowe' && repair.courier_tracking_number)) && (
+                  <div className="mb-3 p-2.5 bg-amber-50 border border-amber-200 rounded-lg">
+                    <p className="text-xs text-amber-800">
+                      <span className="font-semibold">Kurier już zamówiony</span> (tracking: {repair.status === 'nowe' ? repair.pickup_tracking_number : repair.courier_tracking_number}). Nowe zamówienie nadpisze poprzednie.
+                    </p>
+                  </div>
+                )}
                 <form onSubmit={handleOrderCourier} className="space-y-3">
                   <div>
                     <label className="block text-xs font-semibold text-gray-700 mb-1">Kurier</label>
@@ -881,7 +891,9 @@ export default function AdminRepairDetailPage() {
                     ) : (
                       <>
                         <Truck className="w-3 h-3 mr-2" />
-                        {repair.status === 'nowe' ? 'Zamów odbiór' : 'Zamów wysyłkę'}
+                        {repair.status === 'nowe'
+                          ? (repair.pickup_tracking_number ? 'Zamów ponownie odbiór' : 'Zamów odbiór')
+                          : (repair.courier_tracking_number ? 'Zamów ponownie wysyłkę' : 'Zamów wysyłkę')}
                       </>
                     )}
                   </button>
