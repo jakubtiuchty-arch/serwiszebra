@@ -9,27 +9,27 @@ const nextConfig = {
       {
         source: '/blog/zebra-tc501-tc701-terminal-mobilny-ai-premiera-2026',
         destination: '/blog/zebra-tc501-tc701-specyfikacja-cena-premiera',
-        permanent: true, // 301 redirect
+        statusCode: 301,
       },
       {
         source: '/drukarki',
         destination: '/serwis-drukarek-zebra',
-        permanent: true, // 301 redirect
+        statusCode: 301,
       },
       {
         source: '/terminale',
         destination: '/serwis-terminali-zebra',
-        permanent: true, // 301 redirect
+        statusCode: 301,
       },
       {
         source: '/skanery',
         destination: '/serwis-skanerow-zebra',
-        permanent: true, // 301 redirect
+        statusCode: 301,
       },
       {
         source: '/tablety',
         destination: '/serwis-tabletow-zebra',
-        permanent: true, // 301 redirect
+        statusCode: 301,
       },
     ]
   },
