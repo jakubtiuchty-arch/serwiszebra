@@ -213,9 +213,7 @@ Sprawdź język drukarki w specyfikacji lub na nalepce z tyłu urządzenia.`
   },
   {
     question: 'Gdzie pobrać sterowniki do Zebra ZD421?',
-    answer: `Oficjalne sterowniki do Zebra ZD421 pobierzesz:
-• Na tej stronie - kliknij "Pobierz" przy ZDesigner v10
-• Ze strony Zebra - link "Strona Zebra" obok przycisku pobierania
+    answer: `Oficjalne sterowniki do Zebra ZD421 pobierzesz na tej stronie - kliknij "Pobierz" przy ZDesigner v10.
 
 Sterownik jest bezpłatny i obsługuje Windows 10, 11 oraz Server 2019/2022/2025.`
   },
@@ -457,15 +455,6 @@ export default function DriversPage() {
                           Pobierz
                         </a>
                       )}
-                      <a
-                        href={driver.externalUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2.5 border border-gray-300 text-gray-700 rounded-lg font-medium hover:bg-gray-50 transition-colors text-xs sm:text-sm"
-                      >
-                        Strona Zebra
-                        <ExternalLink className="w-3.5 h-3.5" />
-                      </a>
                     </div>
                   </div>
                 </div>
@@ -743,15 +732,6 @@ export default function DriversPage() {
                               Pobierz
                             </a>
                           )}
-                          <a
-                            href={util.externalUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2.5 border border-gray-300 text-gray-700 rounded-lg font-medium hover:bg-gray-50 transition-colors text-xs sm:text-sm"
-                          >
-                            Strona Zebra
-                            <ExternalLink className="w-3.5 h-3.5" />
-                          </a>
                         </div>
                       </div>
                     </div>
@@ -789,15 +769,6 @@ export default function DriversPage() {
                               Pobierz
                             </a>
                           )}
-                          <a
-                            href={util.externalUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2.5 border border-gray-300 text-gray-700 rounded-lg font-medium hover:bg-gray-50 transition-colors text-xs sm:text-sm"
-                          >
-                            Strona Zebra
-                            <ExternalLink className="w-3.5 h-3.5" />
-                          </a>
                         </div>
                       </div>
                     </div>
