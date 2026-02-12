@@ -59,6 +59,8 @@ interface RepairRequest {
   is_warranty: boolean
   // Notatki serwisowe (diagnoza i wykonane prace)
   service_notes: string | null
+  // Szczegóły wyceny (widoczne dla klienta i admina)
+  price_notes: string | null
 }
 
 interface StatusHistory {
@@ -242,7 +244,7 @@ export default function AdminRepairDetailPage() {
         setPriceForm({
           estimated_price: data.repair.estimated_price || '',
           final_price: data.repair.final_price || '',
-          notes: ''
+          notes: data.repair.price_notes || ''
         })
         setServiceNotesForm({
           service_notes: data.repair.service_notes || ''
@@ -648,6 +650,12 @@ export default function AdminRepairDetailPage() {
                     {repair.final_price ? `${formatPrice(repair.final_price)} zł` : '—'}
                   </p>
                 </div>
+                {repair.price_notes && (
+                  <div>
+                    <p className="text-xs text-gray-500">Szczegóły wyceny</p>
+                    <p className="text-sm text-gray-700">{repair.price_notes}</p>
+                  </div>
+                )}
                 {repair.payment_status === 'succeeded' && repair.paid_at && (
                   <div>
                     <p className="text-xs text-gray-500">Data płatności</p>
