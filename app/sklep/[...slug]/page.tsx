@@ -160,12 +160,15 @@ async function getProduct(slug: string): Promise<Product | null> {
   }
 }
 
-// Pobierz powiązane produkty (inna rozdzielczość tego samego modelu + kompatybilne modele)
+// Pobierz powiązane produkty — cross-type: głowica↔wałek do tego samego modelu drukarki
 async function getRelatedProducts(currentProduct: Product): Promise<Product[]> {
   try {
-    // Pobierz produkty tego samego typu (np. glowica) z wyjątkiem bieżącego
+    // Szukaj produktów INNEGO typu (głowica→wałek, wałek→głowica) do tego samego modelu
+    const deviceModel = currentProduct.device_model
+    if (!deviceModel) return []
+
     const res = await fetch(
-      `${supabaseUrl}/rest/v1/products?is_active=eq.true&product_type=eq.${currentProduct.product_type}&id=neq.${currentProduct.id}&select=*&order=name.asc&limit=10`,
+      `${supabaseUrl}/rest/v1/products?is_active=eq.true&product_type=neq.${currentProduct.product_type}&id=neq.${currentProduct.id}&select=*&order=name.asc&limit=10`,
       {
         headers: {
           'apikey': supabaseKey,
@@ -176,24 +179,14 @@ async function getRelatedProducts(currentProduct: Product): Promise<Product[]> {
     )
     const allProducts: Product[] = await res.json()
 
-    // Priorytetyzacja: 1) ten sam model, inna DPI  2) kompatybilne modele  3) ta sama kategoria
-    const sameModel = allProducts.filter(p =>
-      p.device_model === currentProduct.device_model && p.slug !== currentProduct.slug
-    )
-    const compatibleModels = allProducts.filter(p =>
-      p.device_model !== currentProduct.device_model &&
-      currentProduct.compatible_models?.some(cm =>
-        p.device_model?.toLowerCase().includes(cm.toLowerCase())
-      )
-    )
-    const otherSameCategory = allProducts.filter(p =>
-      p.category === currentProduct.category &&
-      p.device_model !== currentProduct.device_model &&
-      !compatibleModels.includes(p)
+    // Filtruj: ten sam model drukarki lub kompatybilny
+    const modelLower = deviceModel.toLowerCase()
+    const related = allProducts.filter(p =>
+      p.device_model?.toLowerCase().includes(modelLower) ||
+      modelLower.includes(p.device_model?.toLowerCase() || '')
     )
 
-    // Zwróć max 4 powiązane produkty
-    return [...sameModel, ...compatibleModels, ...otherSameCategory].slice(0, 4)
+    return related.slice(0, 4)
   } catch {
     return []
   }
@@ -441,8 +434,8 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
     // URL obrazka do Schema.org — tylko własne zdjęcie produktu (nie fallback)
     const schemaImageUrl = ownImage && imageUrl ? `https://www.serwis-zebry.pl${imageUrl}` : undefined
 
-    // Powiązane produkty
-    const relatedProducts = await getRelatedProducts(product)
+    // Powiązane produkty — wyłączone do czasu włączenia wałków w sklepie
+    const relatedProducts: Product[] = []
 
     // Dynamiczne FAQ - dla głowic generuj na podstawie modelu, dla innych użyj generycznego
     let faqItems: Array<{ question: string; answer: string }> = []

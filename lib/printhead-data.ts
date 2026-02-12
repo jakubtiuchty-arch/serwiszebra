@@ -151,8 +151,87 @@ export const PRINTER_MODELS: Record<string, PrinterModelData> = {
     lifespanInches: 1000000,
     compatibleWith: []
   },
-  
+  'ZD421d': {
+    id: 'ZD421d',
+    name: 'Zebra ZD421d',
+    category: 'desktop',
+    printWidthMm: 104,
+    availableResolutions: [203, 300],
+    technology: 'thermal',
+    lifespanInches: 1000000,
+    compatibleWith: ['ZD421t', 'ZD421c']
+  },
+  'ZD621d': {
+    id: 'ZD621d',
+    name: 'Zebra ZD621d',
+    category: 'desktop',
+    printWidthMm: 104,
+    availableResolutions: [203, 300],
+    technology: 'thermal',
+    lifespanInches: 1500000,
+    compatibleWith: ['ZD621t']
+  },
+  'ZD620t': {
+    id: 'ZD620t',
+    name: 'Zebra ZD620t',
+    category: 'desktop',
+    printWidthMm: 104,
+    availableResolutions: [203, 300],
+    technology: 'thermotransfer',
+    lifespanInches: 1000000,
+    compatibleWith: ['ZD620d']
+  },
+  'ZD620d': {
+    id: 'ZD620d',
+    name: 'Zebra ZD620d',
+    category: 'desktop',
+    printWidthMm: 104,
+    availableResolutions: [203, 300],
+    technology: 'thermal',
+    lifespanInches: 1000000,
+    compatibleWith: ['ZD620t']
+  },
+  'ZD220d': {
+    id: 'ZD220d',
+    name: 'Zebra ZD220d',
+    category: 'desktop',
+    printWidthMm: 104,
+    availableResolutions: [203],
+    technology: 'thermal',
+    lifespanInches: 1000000,
+    compatibleWith: ['ZD230d']
+  },
   // DRUKARKI PRZEMYSŁOWE
+  'ZT111': {
+    id: 'ZT111',
+    name: 'Zebra ZT111',
+    category: 'industrial',
+    printWidthMm: 104,
+    availableResolutions: [203, 300],
+    technology: 'both',
+    lifespanInches: 1500000,
+    compatibleWith: ['ZT211', 'ZT231']
+  },
+  'ZT220': {
+    id: 'ZT220',
+    name: 'Zebra ZT220',
+    category: 'industrial',
+    printWidthMm: 104,
+    availableResolutions: [203, 300],
+    technology: 'both',
+    lifespanInches: 2000000,
+    compatibleWith: ['ZT230']
+  },
+  'ZT230': {
+    id: 'ZT230',
+    name: 'Zebra ZT230',
+    category: 'industrial',
+    printWidthMm: 104,
+    availableResolutions: [203, 300],
+    technology: 'both',
+    lifespanInches: 2000000,
+    compatibleWith: ['ZT220']
+  },
   'ZT410': {
     id: 'ZT410',
     name: 'Zebra ZT410',
@@ -263,6 +342,26 @@ export const PRINTER_MODELS: Record<string, PrinterModelData> = {
     lifespanInches: 3000000,
     compatibleWith: []
   },
+  '140Xi4': {
+    id: '140Xi4',
+    name: 'Zebra 140Xi4',
+    category: 'industrial',
+    printWidthMm: 128,
+    availableResolutions: [203],
+    technology: 'both',
+    lifespanInches: 3000000,
+    compatibleWith: []
+  },
+  '170Xi4': {
+    id: '170Xi4',
+    name: 'Zebra 170Xi4',
+    category: 'industrial',
+    printWidthMm: 168,
+    availableResolutions: [203],
+    technology: 'both',
+    lifespanInches: 3000000,
+    compatibleWith: []
+  },
   '220Xi4': {
     id: '220Xi4',
     name: 'Zebra 220Xi4',
@@ -278,29 +377,56 @@ export const PRINTER_MODELS: Record<string, PrinterModelData> = {
 // === PART NUMBERS ===
 
 export const PART_NUMBERS: Record<string, { model: string, resolution: number }> = {
-  // ZD220/ZD230
+  // ZD220/ZD230 Thermal Transfer
   'P1115690': { model: 'ZD220t', resolution: 203 },
-  
+
+  // ZD220/ZD230 Direct Thermal
+  'P1115689': { model: 'ZD220d', resolution: 203 },
+
   // ZD411
   'P1112640-200': { model: 'ZD411t', resolution: 203 },
   'P1112640-201': { model: 'ZD411t', resolution: 300 },
   
-  // ZD421
+  // ZD421 Thermal Transfer
   'P1112640-218': { model: 'ZD421t', resolution: 203 },
   'P1112640-219': { model: 'ZD421t', resolution: 300 },
-  
+
+  // ZD421 Direct Thermal
+  'P1112640-019': { model: 'ZD421d', resolution: 203 },
+  'P1112640-020': { model: 'ZD421d', resolution: 300 },
+
+  // ZD620 Thermal Transfer
+  'P1080383-226': { model: 'ZD620t', resolution: 203 },
+  'P1080383-227': { model: 'ZD620t', resolution: 300 },
+
+  // ZD620 Direct Thermal
+  'P1080383-415': { model: 'ZD620d', resolution: 203 },
+  'P1080383-416': { model: 'ZD620d', resolution: 300 },
+
   // ZD611
   'P1112640-214': { model: 'ZD611t', resolution: 203 },
   'P1112640-215': { model: 'ZD611t', resolution: 300 },
   
-  // ZD621
+  // ZD621 Thermal Transfer
   'P1112640-220': { model: 'ZD621t', resolution: 203 },
   'P1112640-221': { model: 'ZD621t', resolution: 300 },
-  
+
+  // ZD621 Direct Thermal
+  'P1112640-050': { model: 'ZD621d', resolution: 203 },
+  'P1112640-051': { model: 'ZD621d', resolution: 300 },
+
   // GK420/GX420
   '105934-037': { model: 'GK420t', resolution: 203 },
   '105934-038': { model: 'GX430t', resolution: 300 },
   
+  // ZT111/ZT211/ZT231
+  'P1123335-012': { model: 'ZT111', resolution: 203 },
+  'P1123335-057': { model: 'ZT111', resolution: 300 },
+
+  // ZT220/ZT230
+  'P1037974-010': { model: 'ZT220', resolution: 203 },
+  'P1037974-011': { model: 'ZT220', resolution: 300 },
+
   // ZT410/ZT411
   'P1058930-009': { model: 'ZT410', resolution: 203 },
   'P1058930-010': { model: 'ZT410', resolution: 300 },
@@ -341,6 +467,12 @@ export const PART_NUMBERS: Record<string, { model: string, resolution: number }>
   'P1004231': { model: '110Xi4', resolution: 300 },
   'P1004232': { model: '110Xi4', resolution: 600 },
   
+  // 140Xi4
+  'P1004234': { model: '140Xi4', resolution: 203 },
+
+  // 170Xi4
+  'P1004236': { model: '170Xi4', resolution: 203 },
+
   // 220Xi4
   'P1004237': { model: '220Xi4', resolution: 203 },
   'P1004238': { model: '220Xi4', resolution: 300 },

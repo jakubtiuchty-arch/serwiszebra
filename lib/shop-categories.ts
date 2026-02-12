@@ -39,11 +39,16 @@ export const SHOP_CATEGORIES: ProductTypeCategory[] = [
         slug: 'drukarki-biurkowe',
         models: [
           { id: 'zd220t', name: 'Zebra ZD220t', slug: 'zebra-zd220t', resolutions: [203] },
+          { id: 'zd220d', name: 'Zebra ZD220d', slug: 'zebra-zd220d', resolutions: [203] },
           { id: 'zd230t', name: 'Zebra ZD230t', slug: 'zebra-zd230t', resolutions: [203] },
           { id: 'zd411t', name: 'Zebra ZD411t', slug: 'zebra-zd411t', resolutions: [203, 300] },
           { id: 'zd421t', name: 'Zebra ZD421t', slug: 'zebra-zd421t', resolutions: [203, 300] },
+          { id: 'zd421d', name: 'Zebra ZD421d', slug: 'zebra-zd421d', resolutions: [203, 300] },
           { id: 'zd611t', name: 'Zebra ZD611t', slug: 'zebra-zd611t', resolutions: [203, 300] },
+          { id: 'zd620t', name: 'Zebra ZD620t', slug: 'zebra-zd620t', resolutions: [203, 300] },
+          { id: 'zd620d', name: 'Zebra ZD620d', slug: 'zebra-zd620d', resolutions: [203, 300] },
           { id: 'zd621t', name: 'Zebra ZD621t', slug: 'zebra-zd621t', resolutions: [203, 300] },
+          { id: 'zd621d', name: 'Zebra ZD621d', slug: 'zebra-zd621d', resolutions: [203, 300] },
           { id: 'gk420d', name: 'Zebra GK420d', slug: 'zebra-gk420d', resolutions: [203] },
           { id: 'gk420t', name: 'Zebra GK420t', slug: 'zebra-gk420t', resolutions: [203] },
           { id: 'gx420d', name: 'Zebra GX420d', slug: 'zebra-gx420d', resolutions: [203] },
@@ -56,6 +61,7 @@ export const SHOP_CATEGORIES: ProductTypeCategory[] = [
         name: 'Drukarki przemysłowe',
         slug: 'drukarki-przemyslowe',
         models: [
+          { id: 'zt111', name: 'Zebra ZT111', slug: 'zebra-zt111', resolutions: [203, 300] },
           { id: 'zt210', name: 'Zebra ZT210', slug: 'zebra-zt210', resolutions: [203, 300] },
           { id: 'zt220', name: 'Zebra ZT220', slug: 'zebra-zt220', resolutions: [203, 300] },
           { id: 'zt230', name: 'Zebra ZT230', slug: 'zebra-zt230', resolutions: [203, 300] },
@@ -73,6 +79,8 @@ export const SHOP_CATEGORIES: ProductTypeCategory[] = [
           { id: 'zm600', name: 'Zebra ZM600', slug: 'zebra-zm600', resolutions: [203, 300] },
           { id: '105sl', name: 'Zebra 105SL Plus', slug: 'zebra-105sl-plus', resolutions: [203, 300] },
           { id: '110xi4', name: 'Zebra 110Xi4', slug: 'zebra-110xi4', resolutions: [203, 300, 600] },
+          { id: '140xi4', name: 'Zebra 140Xi4', slug: 'zebra-140xi4', resolutions: [203] },
+          { id: '170xi4', name: 'Zebra 170Xi4', slug: 'zebra-170xi4', resolutions: [203] },
         ]
       },
     ]

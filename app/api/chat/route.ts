@@ -1118,6 +1118,55 @@ export async function POST(req: NextRequest) {
       }
     }
 
+    // === KROK 1.5: Szukaj w instrukcjach (tabela manuals) ===
+    let manualLinks: Array<{ title: string; url: string }> = []
+    let manualContext = ''
+
+    if (lastUserMessage) {
+      const detectedModels = detectPrinterModel(lastUserMessage)
+      if (detectedModels.length > 0) {
+        try {
+          // Szukaj instrukcji dla wykrytych modeli
+          const { data: manuals } = await supabase
+            .from('manuals')
+            .select('model, name, category, documents')
+            .eq('is_active', true)
+
+          if (manuals && manuals.length > 0) {
+            // Matchuj wykryte modele z instrukcjami (startsWith — ZD421 pasuje do ZD421d, ZD421t itd.)
+            for (const model of detectedModels) {
+              const modelClean = model.toUpperCase().replace(/[^A-Z0-9]/g, '')
+              const matchingManuals = manuals.filter(m => {
+                const mClean = m.model.toUpperCase().replace(/[^A-Z0-9]/g, '')
+                return mClean === modelClean || mClean.startsWith(modelClean) || modelClean.startsWith(mClean)
+              })
+              for (const manual of matchingManuals) {
+                const docs = manual.documents || {}
+                const availableDocs: string[] = []
+                if (docs.quickStart || docs.quickstart) availableDocs.push('Quick Start')
+                if (docs.userGuide || docs.userguide) availableDocs.push('User Guide')
+                if (docs.service) availableDocs.push('Service Manual')
+                if (docs.programming) availableDocs.push('Programming Guide')
+
+                const manualUrl = `/instrukcje/zebra-${manual.model.toLowerCase()}`
+                // Unikaj duplikatów
+                if (!manualLinks.some(ml => ml.url === manualUrl)) {
+                  manualLinks.push({
+                    title: `Instrukcja ${manual.name} (${availableDocs.join(', ')})`,
+                    url: manualUrl
+                  })
+                  manualContext += `\n[INSTRUKCJA] Mamy instrukcję do ${manual.name} na stronie ${manualUrl}. Dostępne dokumenty: ${availableDocs.join(', ')}.`
+                  console.log(`📖 Znaleziono instrukcję: ${manual.name} (${availableDocs.join(', ')})`)
+                }
+              }
+            }
+          }
+        } catch (err: any) {
+          console.error('❌ Błąd szukania instrukcji:', err.message)
+        }
+      }
+    }
+
     // === KROK 2: Szukaj w Vertex AI RAG (tylko jeśli blog nie wystarczy) ===
     let knowledgeContext = ''
     let ragContextFound = false
@@ -1149,9 +1198,14 @@ export async function POST(req: NextRequest) {
     // === KROK 3: Zbuduj kontekst dla AI ===
     let enhancedSystemPrompt = SYSTEM_PROMPT
 
-    // Dodaj kontekst z bloga (jako wiedza wewnętrzna, bez linków w trakcie!)
+    // Dodaj kontekst z bloga (jako wiedza wewnętrzna — AI rozwiązuje problem, NIE odsyła na blog)
     if (blogContext) {
-      enhancedSystemPrompt += `\n\n=== 🔥 OBOWIĄZKOWA WIEDZA Z BLOGA - UŻYJ JEJ! ===\n${blogContext}\n\n🚨 KRYTYCZNE:\n- MUSISZ użyć tej wiedzy do odpowiedzi!\n- NIE odsyłaj klienta na zebra.com - MY mamy tę wiedzę!\n- Podaj KONKRETNE instrukcje z artykułu powyżej!\n- Link do artykułu podawaj dopiero na końcu rozmowy (gdy [SERIOUS_ISSUE] lub problem rozwiązany)`
+      enhancedSystemPrompt += `\n\n=== 🔥 OBOWIĄZKOWA WIEDZA Z BLOGA - UŻYJ JEJ! ===\n${blogContext}\n\n🚨 KRYTYCZNE:\n- MUSISZ użyć tej wiedzy do odpowiedzi!\n- NIE odsyłaj klienta na zebra.com - MY mamy tę wiedzę!\n- Podaj KONKRETNE instrukcje z artykułu powyżej!\n- NIGDY nie odsyłaj klienta na blog ani do artykułu — Ty rozwiązujesz problem! Opisz rozwiązanie w 3-4 zdaniach.`
+    }
+
+    // Dodaj kontekst z instrukcji (AI czerpie wiedzę, NIE odsyła klienta do instrukcji)
+    if (manualContext) {
+      enhancedSystemPrompt += `\n\n=== WIEDZA Z INSTRUKCJI PRODUCENTA ===${manualContext}\n\nUżyj tej wiedzy do rozwiązania problemu klienta. NIGDY nie odsyłaj klienta do instrukcji — Ty jesteś ekspertem i rozwiązujesz problem bezpośrednio w czacie.`
     }
 
     // Dodaj kontekst z RAG (techniczne szczegóły z manuali)
@@ -1250,19 +1304,26 @@ ZRÓB DOKŁADNIE TAK - WKLEJ [BARCODE:...] W ODPOWIEDŹ!`
           // Na końcu dodaj citations, (opcjonalnie) /blog i scanner barcodes jako JSON (jeśli są)
           // WAŻNE: Jeśli blog znalazł odpowiedź, NIE pokazuj citations z RAG (często nieodpowiednie)
           const finalCitations = blogLinks.length > 0 ? [] : citations
-          
-          // Link do bloga pokazujemy gdy:
-          // 1. Użytkownik potwierdził rozwiązanie LUB AI potwierdza sukces
-          // 2. NIE ma [SERIOUS_ISSUE] (nie kierujemy do serwisu)
-          const problemResolved = userSaysResolved(lastUserMessage) || aiConfirmsResolved(fullAiResponse)
-          const allowUiBlogLink = problemResolved && !fullAiResponse.includes('[SERIOUS_ISSUE]')
-          const uiBlogLinks = allowUiBlogLink ? [{ title: 'Więcej poradników', url: '/blog' }] : []
 
-          const hasData = finalCitations.length > 0 || uiBlogLinks.length > 0 || scannerBarcodes.length > 0
+          // Wykryj czy pytanie jest informacyjne (nie troubleshooting)
+          // Informacyjne: "co to jest", "jakie są parametry", "czym się różni", "jak działa"
+          // Troubleshooting: "nie drukuje", "błąd", "problem", "nie działa", "zacina się"
+          const troubleshootingPatterns = /nie drukuj|nie działa|błąd|error|problem|zacina|zacięci|nie łączy|nie skanuj|nie czyta|nie reaguj|migaj|świeci na czerwono|pasy na wydruk|blady wydruk|rozmazany|nie odpowiad|zawiesz|restart|reset|naprawa|serwis|zepsut|uszkodz/i
+          const isTroubleshooting = troubleshootingPatterns.test(lastUserMessage) || fullAiResponse.includes('[SERIOUS_ISSUE]')
+
+          // Linki do bloga/instrukcji TYLKO gdy pytanie informacyjne (nie troubleshooting)
+          // Przy troubleshootingu AI rozwiązuje problem sam → nie odsyłamy nigdzie
+          const problemResolved = userSaysResolved(lastUserMessage) || aiConfirmsResolved(fullAiResponse)
+          const allowUiBlogLink = !isTroubleshooting && problemResolved
+          const uiBlogLinks = allowUiBlogLink ? [{ title: 'Więcej poradników', url: '/blog' }] : []
+          const uiManualLinks = !isTroubleshooting ? manualLinks : []
+
+          const hasData = finalCitations.length > 0 || uiBlogLinks.length > 0 || scannerBarcodes.length > 0 || uiManualLinks.length > 0
           if (hasData) {
-            const dataJson = JSON.stringify({ 
+            const dataJson = JSON.stringify({
               citations: finalCitations,
               blogLinks: uiBlogLinks,
+              manualLinks: uiManualLinks,
               scannerBarcodes: scannerBarcodes.map(b => ({
                 id: b.id,
                 name: b.name,

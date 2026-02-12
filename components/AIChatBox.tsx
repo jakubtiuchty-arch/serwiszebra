@@ -36,11 +36,17 @@ interface ScannerBarcode {
   imageUrl: string
 }
 
+interface ManualLink {
+  title: string
+  url: string
+}
+
 interface Message {
   role: 'user' | 'assistant'
   content: string
   citations?: Citation[]
   blogLinks?: BlogLink[]
+  manualLinks?: ManualLink[]
   scannerBarcodes?: ScannerBarcode[]
 }
 
@@ -375,24 +381,25 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
           let content = assistantMessage
           let citations: Citation[] | undefined = undefined
           let blogLinks: BlogLink[] | undefined = undefined
+          let manualLinks: ManualLink[] | undefined = undefined
           let scannerBarcodes: ScannerBarcode[] | undefined = undefined
 
           if (citationsMatch) {
-            // Oddziel treść od citations/blogLinks/scannerBarcodes
             content = assistantMessage.substring(0, citationsMatch.index)
             try {
               const data = JSON.parse(citationsMatch[1])
               citations = data.citations
               blogLinks = data.blogLinks
+              manualLinks = data.manualLinks
               scannerBarcodes = data.scannerBarcodes
             } catch (e) {
-              console.error('Błąd parsowania citations/blogLinks/scannerBarcodes:', e)
+              console.error('Błąd parsowania citations/blogLinks/manualLinks/scannerBarcodes:', e)
             }
           }
 
           setMessages(prev => [
             ...prev.slice(0, -1),
-            { role: 'assistant', content, citations, blogLinks, scannerBarcodes }
+            { role: 'assistant', content, citations, blogLinks, manualLinks, scannerBarcodes }
           ])
         }
       }
@@ -727,6 +734,24 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
                           key={idx}
                           href={link.url}
                           className="text-xs text-blue-600 hover:text-blue-800 underline underline-offset-2 hover:no-underline transition-colors"
+                        >
+                          {link.title}
+                        </a>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Manual Links - pokazywane ZAWSZE gdy mamy instrukcję do modelu */}
+                  {msg.role === 'assistant' &&
+                   msg.manualLinks &&
+                   msg.manualLinks.length > 0 && (
+                    <div className="flex flex-wrap items-center gap-2 px-3 py-2 bg-emerald-50 rounded-xl border border-emerald-100 mt-2">
+                      <span className="text-xs font-medium text-emerald-700">📖</span>
+                      {msg.manualLinks.map((link, idx) => (
+                        <a
+                          key={idx}
+                          href={link.url}
+                          className="text-xs text-emerald-600 hover:text-emerald-800 underline underline-offset-2 hover:no-underline transition-colors"
                         >
                           {link.title}
                         </a>

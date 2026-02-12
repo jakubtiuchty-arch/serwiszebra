@@ -30423,7 +30423,7 @@ export function searchBlogForAI(query: string): {
   const relevantPosts = scoredPosts
     .filter(p => p.score >= 15) // Wyższy próg = tylko naprawdę relevantne artykuły
     .sort((a, b) => b.score - a.score)
-    .slice(0, 1) // Max 1 artykuł - tylko najlepiej pasujący
+    .slice(0, 3) // Max 3 artykuły - więcej kontekstu przy 77+ wpisach
   
   if (relevantPosts.length === 0) {
     console.log('Blog: no relevant articles found')
