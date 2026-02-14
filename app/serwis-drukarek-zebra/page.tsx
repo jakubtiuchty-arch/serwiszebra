@@ -20,20 +20,22 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 
 export const metadata: Metadata = {
-  title: 'Serwis Drukarek Zebra – Naprawa Etykiet, Kart, Mobilnych | Odbiór 24h',
-  description: 'Serwis drukarek Zebra ✓ Profesjonalna naprawa wszystkich modeli: etykiet (ZD420, ZT410, GK420), kart plastikowych (ZC300, ZXP), mobilnych (ZQ520, ZQ630). Wymiana głowic, naprawa mechanizmu, 12 mies. gwarancji, odbiór kurierem 24h.',
+  title: {
+    absolute: 'Serwis Drukarek Zebra – Naprawa Wszystkich Modeli | TAKMA',
+  },
+  description: 'Profesjonalny serwis drukarek Zebra. Naprawa etykiet, kart, mobilnych. 25 lat doświadczenia, 5000+ napraw, 12 mies. gwarancji. Odbiór 24h.',
   keywords: [
     // Główna fraza - maksymalny priorytet
     'serwis drukarek zebra',
     'serwis drukarek zebra polska',
     'profesjonalny serwis drukarek zebra',
     'autoryzowany serwis drukarek zebra',
-    
+
     // Warianty z "naprawa"
     'naprawa drukarek zebra',
     'naprawa drukarek etykiet zebra',
     'naprawa drukarek termicznych zebra',
-    
+
     // Typy drukarek
     'serwis drukarek etykiet zebra',
     'serwis drukarek termicznych zebra',
@@ -41,46 +43,46 @@ export const metadata: Metadata = {
     'serwis drukarek kart zebra',
     'serwis drukarek mobilnych zebra',
     'serwis drukarek kart plastikowych zebra',
-    
+
     // Modele - Desktop (seria ZD)
     'serwis zd421', 'serwis zd420', 'serwis zd621', 'serwis zd620',
     'serwis zd411', 'serwis zd611', 'serwis zd220', 'serwis zd230',
     'naprawa zd421', 'naprawa zd420', 'naprawa zd621', 'naprawa zd220',
-    
+
     // Modele - Desktop (starsza seria GK/GC/GX/LP)
     'serwis gk420d', 'serwis gk420t', 'serwis gc420d', 'serwis gc420t',
     'serwis gx420d', 'serwis gx420t', 'serwis gx430t',
     'serwis lp2844', 'serwis tlp2844', 'serwis gt800',
     'naprawa gk420', 'naprawa gc420', 'naprawa gx420', 'naprawa lp2844',
-    
+
     // Modele - Przemysłowe (seria ZT)
     'serwis zt411', 'serwis zt410', 'serwis zt421', 'serwis zt420',
     'serwis zt610', 'serwis zt620', 'serwis zt510',
     'serwis zt231', 'serwis zt230', 'serwis zt220', 'serwis zt111',
     'naprawa zt410', 'naprawa zt411', 'naprawa zt610', 'naprawa zt230',
-    
+
     // Modele - Przemysłowe (starsza seria)
     'serwis 105sl', 'serwis 105sl plus', 'serwis s4m',
     'serwis 110xi4', 'serwis 140xi4', 'serwis 170xi4', 'serwis 220xi4',
     'naprawa 105sl', 'naprawa s4m', 'naprawa xi4',
-    
+
     // Modele - Mobilne (seria ZQ)
     'serwis zq630', 'serwis zq620', 'serwis zq610',
     'serwis zq521', 'serwis zq520', 'serwis zq510',
     'serwis zq320', 'serwis zq310', 'serwis zq220', 'serwis zq210',
     'naprawa zq630', 'naprawa zq520', 'naprawa zq620',
-    
+
     // Modele - Mobilne (starsza seria)
     'serwis ql420', 'serwis ql320', 'serwis ql220',
     'serwis rw420', 'serwis imz320', 'serwis imz220',
     'naprawa ql420', 'naprawa rw420', 'naprawa imz320',
-    
+
     // Modele - Kart plastikowych
     'serwis zc350', 'serwis zc300', 'serwis zc100',
     'serwis zxp9', 'serwis zxp7', 'serwis zxp3', 'serwis zxp1',
     'serwis p330i', 'serwis p430i',
     'naprawa zc300', 'naprawa zc350', 'naprawa zxp7', 'naprawa zxp9',
-    
+
     // Usługi
     'wymiana głowicy zebra',
     'wymiana głowicy drukującej zebra',
@@ -89,7 +91,7 @@ export const metadata: Metadata = {
     'naprawa mechanizmu zebra',
     'konserwacja drukarki zebra',
     'serwis gwarancyjny zebra',
-    
+
     // Long tail - pytania
     'gdzie naprawić drukarkę zebra',
     'ile kosztuje naprawa drukarki zebra',
@@ -97,13 +99,13 @@ export const metadata: Metadata = {
     'ile kosztuje wymiana głowicy zebra',
     'jak długo trwa naprawa drukarki zebra',
     'czy naprawiacie drukarki zebra na gwarancji',
-    
+
     // Problemy
     'drukarka zebra nie drukuje serwis',
     'zebra zd421 nie drukuje naprawa',
     'zebra gk420 czerwona dioda serwis',
     'zebra zt410 błąd ribbon serwis',
-    
+
     // Miasta
     'drukarki zebra wrocław', 'serwis drukarek zebra wrocław', 'naprawa drukarek zebra wrocław',
     'drukarki zebra warszawa', 'serwis drukarek zebra warszawa', 'naprawa drukarek zebra warszawa',
@@ -116,9 +118,23 @@ export const metadata: Metadata = {
     'drukarki zebra lublin', 'serwis drukarek zebra lublin',
   ],
   openGraph: {
-    title: 'Serwis Drukarek Zebra – Profesjonalna Naprawa Wszystkich Modeli',
-    description: 'Serwis drukarek Zebra: etykiet, kart plastikowych, mobilnych. Wymiana głowic, naprawa mechanizmu, kalibracja. Odbiór kurierem w 24h. 25 lat doświadczenia.',
+    title: 'Serwis Drukarek Zebra – Naprawa Wszystkich Modeli | TAKMA',
+    description: 'Profesjonalny serwis drukarek Zebra. Naprawa etykiet, kart, mobilnych. 25 lat doświadczenia, 5000+ napraw, 12 mies. gwarancji. Odbiór 24h.',
     url: 'https://www.serwis-zebry.pl/serwis-drukarek-zebra',
+    images: [
+      {
+        url: '/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Serwis Drukarek Zebra - TAKMA',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Serwis Drukarek Zebra – Naprawa Wszystkich Modeli | TAKMA',
+    description: 'Profesjonalny serwis drukarek Zebra. 25 lat doświadczenia, 5000+ napraw, 12 mies. gwarancji. Odbiór 24h.',
+    images: ['/og-image.jpg'],
   },
   alternates: {
     canonical: 'https://www.serwis-zebry.pl/serwis-drukarek-zebra',
