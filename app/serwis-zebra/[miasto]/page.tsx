@@ -398,6 +398,12 @@ export default function CityServicePage({ params }: { params: { miasto: string }
       {
         '@type': 'ListItem',
         position: 2,
+        name: 'Serwis Drukarek Zebra',
+        item: 'https://www.serwis-zebry.pl/serwis-drukarek-zebra'
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
         name: `Serwis Zebra ${city.name}`,
         item: `https://www.serwis-zebry.pl/serwis-zebra/${city.slug}`
       }
@@ -442,6 +448,15 @@ export default function CityServicePage({ params }: { params: { miasto: string }
             </>
           )}
           <div className="relative max-w-6xl mx-auto px-3 sm:px-4 text-center md:text-left">
+            {/* Breadcrumb nawigacja — widoczna, linkuje do filara */}
+            <nav aria-label="Breadcrumb" className="flex items-center justify-center md:justify-start gap-1.5 text-xs text-gray-500 mb-4">
+              <Link href="/" className="hover:text-blue-600 transition-colors">Strona główna</Link>
+              <ChevronRight className="w-3 h-3" />
+              <Link href="/serwis-drukarek-zebra" className="hover:text-blue-600 transition-colors font-medium">Serwis Drukarek Zebra</Link>
+              <ChevronRight className="w-3 h-3" />
+              <span className="text-gray-700">{city.name}</span>
+            </nav>
+
             <div className="flex items-center justify-center md:justify-start gap-1.5 sm:gap-2 mb-3">
               <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
               <span className="text-blue-600 font-medium text-sm">{city.name} i okolice</span>
@@ -510,7 +525,7 @@ export default function CityServicePage({ params }: { params: { miasto: string }
           <div className="max-w-6xl mx-auto px-3 sm:px-4">
             <div className="bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 border border-amber-200 rounded-xl p-4 sm:p-5 md:p-6 shadow-sm mb-6">
               <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
-                {city.introText} Specjalizujemy się w naprawie urządzeń Zebra Technologies – drukarki etykiet, terminale mobilne, skanery kodów. <strong className="text-blue-900">25 lat doświadczenia.</strong>
+                {city.introText} Jesteśmy częścią ogólnopolskiego <Link href="/serwis-drukarek-zebra" className="text-blue-700 font-semibold hover:underline">serwisu drukarek Zebra</Link> z 25-letnim doświadczeniem. Specjalizujemy się w naprawie urządzeń Zebra Technologies – drukarki etykiet, terminale mobilne, skanery kodów.
               </p>
             </div>
             
@@ -593,14 +608,23 @@ export default function CityServicePage({ params }: { params: { miasto: string }
               </p>
             </div>
 
-            {/* Linki do innych miast */}
+            {/* Link do strony filarowej + linki do innych miast */}
             <div className="mt-8 pt-6 border-t border-gray-200">
+              <div className="mb-4">
+                <Link
+                  href="/serwis-drukarek-zebra"
+                  className="inline-flex items-center gap-2 text-sm font-medium text-blue-600 hover:text-blue-800 hover:underline"
+                >
+                  <ChevronRight className="w-4 h-4 rotate-180" />
+                  Serwis drukarek Zebra — strona ogólnopolska
+                </Link>
+              </div>
               <h3 className="text-sm font-medium text-gray-900 mb-3">Serwis Zebra w innych miastach:</h3>
               <div className="flex flex-wrap gap-2">
                 {Object.entries(citiesData)
                   .filter(([slug]) => slug !== params.miasto)
                   .map(([slug, data]) => (
-                    <Link 
+                    <Link
                       key={slug}
                       href={`/serwis-zebra/${slug}`}
                       className="text-sm text-blue-600 hover:text-blue-800 hover:underline"
@@ -817,7 +841,8 @@ export default function CityServicePage({ params }: { params: { miasto: string }
         <section className="py-6 bg-white border-t border-gray-100">
           <div className="max-w-6xl mx-auto px-3 sm:px-4 text-center">
             <p className="text-sm text-gray-500 flex flex-wrap justify-center gap-4">
-              <Link href="/" className="text-gray-600 hover:text-blue-600">← Strona główna</Link>
+              <Link href="/" className="text-gray-600 hover:text-blue-600">Strona główna</Link>
+              <Link href="/serwis-drukarek-zebra" className="text-gray-600 hover:text-blue-600">Serwis drukarek Zebra</Link>
               <Link href="/blog" className="text-gray-600 hover:text-blue-600">Blog</Link>
               <Link href="/kontakt" className="text-gray-600 hover:text-blue-600">Kontakt</Link>
             </p>
