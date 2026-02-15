@@ -100,66 +100,122 @@ const terminalArticles = blogPosts
   .filter(post => post.deviceType === 'terminale')
   .slice(0, 6)
 
-const faq = [
+// Kluczowe artykuły klastra - jawne linki dla SEO
+const clusterArticles = [
+  { title: 'Najczęstsze awarie terminali Zebra - TOP 10', slug: 'najczestsze-awarie-terminali-zebra-top10', desc: 'Problemy i rozwiązania' },
+  { title: 'Serwis TC52/TC53 - diagnostyka i naprawa', slug: 'serwis-terminala-zebra-tc52-tc53-diagnostyka-naprawa', desc: 'Co się psuje, cennik' },
+  { title: 'Serwis MC3300/MC3400 - diagnostyka i naprawa', slug: 'serwis-terminala-zebra-mc3300-mc3400-diagnostyka-naprawa', desc: 'Terminal magazynowy' },
+  { title: 'Serwis TC21/TC22/TC26/TC27', slug: 'serwis-terminala-zebra-tc21-tc22-tc26-tc27-diagnostyka-naprawa', desc: 'Entry-level terminale' },
+  { title: 'Ekran dotykowy terminala nie reaguje', slug: 'ekran-dotykowy-terminal-zebra-nie-reaguje-diagnostyka', desc: 'Diagnostyka i naprawa' },
+  { title: 'Bateria terminala Zebra - diagnostyka', slug: 'bateria-terminal-zebra-szybko-sie-rozladowuje-diagnostyka', desc: 'PowerPrecision, Hot Swap' },
+  { title: 'Klawiatura MC3300/MC3400 nie działa', slug: 'klawiatura-terminal-zebra-mc3300-mc3400-problemy-naprawa', desc: 'Diagnostyka i naprawa' },
+  { title: 'TC52 vs TC53 vs TC501 - porównanie', slug: 'zebra-tc52-vs-tc53-vs-tc501-porownanie-terminali', desc: 'Który wybrać?' },
+  { title: 'Najlepszy terminal do magazynu 2026', slug: 'najlepszy-terminal-zebra-do-magazynu-2026', desc: 'Ranking modeli' },
+  { title: 'Naprawa czy wymiana terminala?', slug: 'naprawa-czy-wymiana-terminala-zebra-poradnik-decyzyjny', desc: 'Kalkulator kosztów' },
+]
+
+const faq: { question: string; answer: string; link: string | null; linkText: string | null }[] = [
   {
     question: 'Ile kosztuje wymiana ekranu w terminalu Zebra?',
-    answer: 'Koszt wymiany wyświetlacza zależy od modelu. Dla TC21/TC22/TC26/TC27 to 600-900 zł, dla TC52/TC53/TC57/TC58 700-1000 zł, dla MC3300/MC3400/MC9300/MC9400 800-1200 zł. Cena obejmuje oryginalny wyświetlacz i robociznę.'
+    answer: 'Koszt wymiany wyświetlacza zależy od modelu. Dla TC21/TC22/TC26/TC27 to 600-900 zł, dla TC52/TC53/TC57/TC58 700-1000 zł, dla MC3300/MC3400/MC9300/MC9400 800-1200 zł. Cena obejmuje oryginalny wyświetlacz i robociznę.',
+    link: '/blog/ekran-dotykowy-terminal-zebra-nie-reaguje-diagnostyka',
+    linkText: 'Diagnostyka ekranu dotykowego →'
   },
   {
     question: 'Czy naprawiacie skanery w terminalach Zebra?',
-    answer: 'Tak! Naprawiamy moduły skanujące SE4710, SE4750, SE4850, SE55 i inne. Koszt naprawy skanera to 500-1100 zł w zależności od modelu terminala. Diagnostyka jest bezpłatna przy akceptacji naprawy.'
+    answer: 'Tak! Naprawiamy moduły skanujące SE4710, SE4750, SE4850, SE55 i inne. Koszt naprawy skanera to 500-1100 zł w zależności od modelu terminala. Diagnostyka jest bezpłatna przy akceptacji naprawy.',
+    link: '/blog/skaner-terminala-zebra-nie-dziala-diagnostyka-naprawa',
+    linkText: 'Diagnostyka skanera krok po kroku →'
   },
   {
     question: 'Jak długo trwa naprawa terminala Zebra?',
-    answer: 'Standardowy czas naprawy to 2-5 dni roboczych. Oferujemy też naprawy ekspresowe w 24-48h (dopłata 50 zł). Kurier odbierze terminal bezpłatnie z Twojej firmy w całej Polsce.'
+    answer: 'Standardowy czas naprawy to 2-5 dni roboczych. Oferujemy też naprawy ekspresowe w 24-48h (dopłata 50 zł). Kurier odbierze terminal bezpłatnie z Twojej firmy w całej Polsce.',
+    link: null,
+    linkText: null
   },
   {
     question: 'Jakie terminale Zebra serwisujecie?',
-    answer: 'Serwisujemy WSZYSTKIE terminale Zebra: seria TC (TC21, TC22, TC26, TC27, TC52, TC53, TC57, TC58, TC72, TC73, TC77, TC78), seria MC (MC2200, MC2700, MC3300, MC3400, MC9300, MC9400), wearable (WT6000, WT6300, WS50) oraz starsze modele (MC65, MC67, TC70, TC75, TC8000). Ponad 25 lat doświadczenia i 5000+ naprawionych urządzeń.'
+    answer: 'Serwisujemy WSZYSTKIE terminale Zebra: seria TC (TC21, TC22, TC26, TC27, TC52, TC53, TC57, TC58, TC72, TC73, TC77, TC78), seria MC (MC2200, MC2700, MC3300, MC3400, MC9300, MC9400), wearable (WT6000, WT6300, WS50) oraz starsze modele (MC65, MC67, TC70, TC75, TC8000). Ponad 25 lat doświadczenia i 5000+ naprawionych urządzeń.',
+    link: '/blog/najczestsze-awarie-terminali-zebra-top10',
+    linkText: 'TOP 10 awarii terminali →'
   },
   {
     question: 'Czy wymieniacie baterie w terminalach Zebra?',
-    answer: 'Tak, wymieniamy baterie we wszystkich terminalach Zebra. Koszt wymiany baterii to 150-450 zł w zależności od modelu. Używamy oryginalnych baterii Zebra z pełną gwarancją producenta.'
+    answer: 'Tak, wymieniamy baterie we wszystkich terminalach Zebra. Koszt wymiany baterii to 150-450 zł w zależności od modelu. Używamy oryginalnych baterii Zebra z pełną gwarancją producenta.',
+    link: '/blog/bateria-terminal-zebra-szybko-sie-rozladowuje-diagnostyka',
+    linkText: 'Diagnostyka baterii terminala →'
   },
   {
     question: 'Terminal Zebra TC58 nie włącza się - co robić?',
-    answer: 'Zebra TC58 nie włącza się najczęściej z powodu: 1) Rozładowanej baterii - podłącz ładowarkę na min. 30 min, 2) Uszkodzonej baterii - wymień na nową, 3) Uszkodzonej płyty głównej - wymaga naprawy serwisowej. Spróbuj najpierw twardego resetu (Power + Vol Up przez 15 sek.). Jeśli nie pomaga - zgłoś do naszego serwisu.'
+    answer: 'Zebra TC58 nie włącza się najczęściej z powodu: 1) Rozładowanej baterii - podłącz ładowarkę na min. 30 min, 2) Uszkodzonej baterii - wymień na nową, 3) Uszkodzonej płyty głównej - wymaga naprawy serwisowej. Spróbuj najpierw twardego resetu (Power + Vol Up przez 15 sek.). Jeśli nie pomaga - zgłoś do naszego serwisu.',
+    link: '/blog/zebra-terminal-nie-wlacza-sie-fastboot-boot-loop',
+    linkText: 'Poradnik Fastboot i Boot Loop →'
   },
   {
     question: 'Terminal Zebra TC22 / TC21 nie skanuje - jak naprawić?',
-    answer: 'Zebra TC22 i TC21 nie skanują najczęściej z powodu: 1) Wyłączonego skanera w DataWedge - włącz profil skanowania, 2) Brudnego okienka skanera - wyczyść alkoholem IPA, 3) Uszkodzonego modułu SE4710 - wymaga wymiany w serwisie (500-800 zł). Sprawdź też czy aplikacja ma uprawnienia do skanera.'
+    answer: 'Zebra TC22 i TC21 nie skanują najczęściej z powodu: 1) Wyłączonego skanera w DataWedge - włącz profil skanowania, 2) Brudnego okienka skanera - wyczyść alkoholem IPA, 3) Uszkodzonego modułu SE4710 - wymaga wymiany w serwisie (500-800 zł). Sprawdź też czy aplikacja ma uprawnienia do skanera.',
+    link: '/blog/serwis-terminala-zebra-tc21-tc22-tc26-tc27-diagnostyka-naprawa',
+    linkText: 'Serwis TC21/TC22/TC26/TC27 →'
   },
   {
     question: 'Ile kosztuje wymiana ekranu w Zebra TC27?',
-    answer: 'Wymiana wyświetlacza w terminalu Zebra TC27 kosztuje 700-900 zł. Cena obejmuje oryginalny wyświetlacz i robociznę. Czas naprawy: 2-5 dni roboczych. TC27 ma większy ekran 6" (vs 5" w TC22), dlatego cena jest nieco wyższa. Oferujemy też naprawy ekspresowe w 24-48h.'
+    answer: 'Wymiana wyświetlacza w terminalu Zebra TC27 kosztuje 700-900 zł. Cena obejmuje oryginalny wyświetlacz i robociznę. Czas naprawy: 2-5 dni roboczych. TC27 ma większy ekran 6" (vs 5" w TC22), dlatego cena jest nieco wyższa. Oferujemy też naprawy ekspresowe w 24-48h.',
+    link: '/blog/zebra-tc22-vs-tc27-porownanie-roznice',
+    linkText: 'Porównanie TC22 vs TC27 →'
   },
   {
     question: 'Ile kosztuje naprawa terminala Zebra MC3400?',
-    answer: 'Naprawa terminala Zebra MC3400/MC3450 kosztuje od 200 zł (wymiana baterii) do 1200 zł (wymiana wyświetlacza lub płyty głównej). Najczęstsze naprawy: wymiana ekranu 800-1000 zł, naprawa skanera 500-800 zł, wymiana klawiatury 300-500 zł. Dokładna wycena po bezpłatnej diagnozie.'
+    answer: 'Naprawa terminala Zebra MC3400/MC3450 kosztuje od 200 zł (wymiana baterii) do 1200 zł (wymiana wyświetlacza lub płyty głównej). Najczęstsze naprawy: wymiana ekranu 800-1000 zł, naprawa skanera 500-800 zł, wymiana klawiatury 300-500 zł. Dokładna wycena po bezpłatnej diagnozie.',
+    link: '/blog/serwis-terminala-zebra-mc3300-mc3400-diagnostyka-naprawa',
+    linkText: 'Serwis MC3300/MC3400 — szczegóły →'
   },
   {
     question: 'Terminal Zebra MC9300 / MC9400 - gdzie naprawić?',
-    answer: 'Naprawiamy terminale magazynowe Zebra MC9300 i MC9400 w naszym autoryzowanym serwisie. Najczęstsze naprawy: wymiana wyświetlacza (900-1200 zł), naprawa skanera dalekiego zasięgu (600-1000 zł), wymiana klawiatury (400-600 zł). Odbiór kurierem z całej Polski, 12 mies. gwarancji.'
+    answer: 'Naprawiamy terminale magazynowe Zebra MC9300 i MC9400 w naszym autoryzowanym serwisie. Najczęstsze naprawy: wymiana wyświetlacza (900-1200 zł), naprawa skanera dalekiego zasięgu (600-1000 zł), wymiana klawiatury (400-600 zł). Odbiór kurierem z całej Polski, 12 mies. gwarancji.',
+    link: null,
+    linkText: null
   },
   {
     question: 'Terminal Zebra nie skanuje kodów - jak naprawić?',
-    answer: 'Terminal Zebra nie skanuje najczęściej z powodu: 1) Wyłączonego skanera w DataWedge - włącz profil skanowania, 2) Brudnego okienka skanera - wyczyść alkoholem IPA, 3) Uszkodzonego modułu SE47xx - wymaga wymiany w serwisie (500-1100 zł). Sprawdź też czy aplikacja ma uprawnienia do skanera.'
+    answer: 'Terminal Zebra nie skanuje najczęściej z powodu: 1) Wyłączonego skanera w DataWedge - włącz profil skanowania, 2) Brudnego okienka skanera - wyczyść alkoholem IPA, 3) Uszkodzonego modułu SE47xx - wymaga wymiany w serwisie (500-1100 zł). Sprawdź też czy aplikacja ma uprawnienia do skanera.',
+    link: '/blog/datawedge-konfiguracja-terminal-zebra',
+    linkText: 'Konfiguracja DataWedge →'
+  },
+  {
+    question: 'Który terminal Zebra wybrać do magazynu?',
+    answer: 'Wybór zależy od zastosowania: TC22 dla małych magazynów (WiFi, kompaktowy), MC3400 dla dużych magazynów (klawiatura, skaner dalekiego zasięgu SE58 do 13m), TC78 do chłodni (-30°C, IP68). Dla kurierów: TC58 z 5G/LTE i GPS. Pomożemy dobrać optymalny model do Twoich potrzeb.',
+    link: '/blog/najlepszy-terminal-zebra-do-magazynu-2026',
+    linkText: 'Ranking terminali do magazynu 2026 →'
+  },
+  {
+    question: 'TC52 kończy wsparcie - co dalej?',
+    answer: 'Zebra TC52 osiągnął End of Life w październiku 2024. Następca to TC53 (aktualny) lub TC501 (premiera 2026, procesor AI). Jeśli TC52 wymaga naprawy, warto rozważyć czy opłaca się naprawa czy upgrade. Naprawiamy TC52 i pomagamy w migracji na nowe modele.',
+    link: '/blog/zebra-tc52-vs-tc53-vs-tc501-porownanie-terminali',
+    linkText: 'TC52 vs TC53 vs TC501 — porównanie →'
   },
   {
     question: 'Czy naprawiacie terminale wearable WT6000?',
-    answer: 'Tak! Specjalizujemy się w naprawie terminali wearable: WT6000, WT6300, WS50. Naprawiamy wyświetlacze, wymiana pasków, naprawiamy moduły Bluetooth/WiFi, wymieniamy baterie. Mamy doświadczenie z ring skanerami RS5100 i RS6000.'
+    answer: 'Tak! Specjalizujemy się w naprawie terminali wearable: WT6000, WT6300, WS50. Naprawiamy wyświetlacze, wymiana pasków, naprawiamy moduły Bluetooth/WiFi, wymieniamy baterie. Mamy doświadczenie z ring skanerami RS5100 i RS6000.',
+    link: null,
+    linkText: null
   },
   {
     question: 'Gdzie naprawić stary terminal Zebra MC65 lub TC70?',
-    answer: 'Naprawiamy również starsze terminale Zebra: MC65, MC67, MC75, MC92, TC55, TC70, TC75, TC8000 i inne. Jako autoryzowany serwis mamy dostęp do części zamiennych nawet do wycofanych modeli. Zgłoś naprawę przez formularz lub zadzwoń: +48 601 619 898.'
+    answer: 'Naprawiamy również starsze terminale Zebra: MC65, MC67, MC75, MC92, TC55, TC70, TC75, TC8000 i inne. Jako autoryzowany serwis mamy dostęp do części zamiennych nawet do wycofanych modeli. Zgłoś naprawę przez formularz lub zadzwoń: +48 601 619 898.',
+    link: null,
+    linkText: null
   },
   {
     question: 'Czy mogę zamówić odbiór terminala kurierem?',
-    answer: 'Tak! Zamawiamy kuriera DPD, który odbierze terminal bezpłatnie z Twojej firmy w ciągu 24h. Obsługujemy całą Polskę. Po naprawie odsyłamy terminal kurierem na nasz koszt. Wystarczy wypełnić formularz zgłoszeniowy na stronie.'
+    answer: 'Tak! Zamawiamy kuriera DPD, który odbierze terminal bezpłatnie z Twojej firmy w ciągu 24h. Obsługujemy całą Polskę. Po naprawie odsyłamy terminal kurierem na nasz koszt. Wystarczy wypełnić formularz zgłoszeniowy na stronie.',
+    link: '/#formularz',
+    linkText: 'Zgłoś naprawę online →'
   },
   {
     question: 'Czy serwisujecie terminale Zebra na gwarancji?',
-    answer: 'Tak! Jako autoryzowany serwis Zebra obsługujemy naprawy gwarancyjne wszystkich modeli terminali. Skontaktuj się z nami - sprawdzimy status gwarancji i przeprowadzimy naprawę. Telefon: +48 601 619 898.'
+    answer: 'Tak! Jako autoryzowany serwis Zebra obsługujemy naprawy gwarancyjne wszystkich modeli terminali. Skontaktuj się z nami - sprawdzimy status gwarancji i przeprowadzimy naprawę. Telefon: +48 601 619 898.',
+    link: null,
+    linkText: null
   }
 ]
 
@@ -495,6 +551,43 @@ export default function TerminalePage() {
           </div>
         </section>
 
+        {/* Poradniki serwisowe terminali Zebra - klaster SEO */}
+        <section className="py-10 sm:py-12 md:py-14 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+          <div className="max-w-6xl mx-auto px-3 sm:px-4">
+            <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-2 text-center">
+              Poradniki serwisowe terminali Zebra
+            </h2>
+            <p className="text-sm text-gray-600 text-center mb-6 sm:mb-8">
+              Sprawdź nasze szczegółowe przewodniki po naprawie i diagnostyce
+            </p>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+              {clusterArticles.map((article) => (
+                <Link
+                  key={article.slug}
+                  href={`/blog/${article.slug}`}
+                  className="bg-white rounded-xl p-4 shadow-md border border-gray-100 hover:shadow-xl hover:border-blue-300 transition-all group"
+                >
+                  <h3 className="font-medium text-gray-900 group-hover:text-blue-600 transition-colors text-sm mb-1">
+                    {article.title}
+                  </h3>
+                  <p className="text-xs text-gray-500">{article.desc}</p>
+                </Link>
+              ))}
+            </div>
+
+            <div className="text-center mt-6">
+              <Link
+                href="/blog?kategoria=terminale"
+                className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 font-medium text-sm"
+              >
+                Wszystkie poradniki o terminalach
+                <ChevronRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </div>
+        </section>
+
         {/* Nowości produktowe - TC501, TC701 */}
         <section className="py-10 sm:py-12 md:py-14 bg-gradient-to-b from-blue-50 to-white">
           <div className="max-w-6xl mx-auto px-3 sm:px-4">
@@ -622,7 +715,12 @@ export default function TerminalePage() {
                     <ChevronRight className="w-5 h-5 text-gray-400 group-open:rotate-90 transition-transform flex-shrink-0" />
                   </summary>
                   <div className="px-5 pb-4 text-sm text-gray-600">
-                    {item.answer}
+                    <p>{item.answer}</p>
+                    {item.link && (
+                      <Link href={item.link} className="inline-block mt-2 text-blue-600 hover:text-blue-800 font-medium text-xs">
+                        {item.linkText}
+                      </Link>
+                    )}
                   </div>
                 </details>
               ))}

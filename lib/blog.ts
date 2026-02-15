@@ -141,6 +141,2504 @@ export const BLOG_CATEGORIES = {
 // Wszystkie artykuły bloga
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'najczestsze-awarie-terminali-zebra-top10',
+    title: 'Najczęstsze awarie terminali Zebra — TOP 10 problemów i rozwiązań [2026]',
+    excerpt: 'Poznaj 10 najczęstszych awarii terminali mobilnych Zebra: pęknięte ekrany, zepsute skanery, problemy z baterią, WiFi, boot loop. Dowiedz się, które naprawisz sam, a które wymagają serwisu. Cennik napraw TC21, TC52, MC3300, MC3400.',
+    coverImage: '/blog/najczestsze-awarie-terminali-zebra-top10.jpeg',
+    coverImageAlt: 'Terminal mobilny Zebra z ekranem diagnostyki - najczęstsze awarie i rozwiązania',
+    author: {
+      name: 'Krzysztof Wójcik',
+      role: 'Kierownik Serwisu TAKMA'
+    },
+    publishedAt: '2026-02-15',
+    readingTime: 18,
+    deviceType: 'terminale',
+    category: 'troubleshooting',
+    tags: ['awarie terminali zebra', 'problemy terminal zebra', 'naprawa terminala zebra', 'troubleshooting', 'diagnostyka', 'TC52', 'TC53', 'MC3300', 'MC3400', 'TC21', 'TC22', 'TC58', 'ekran', 'skaner', 'bateria', 'wifi', 'boot loop'],
+    seo: {
+      metaTitle: 'Najczęstsze awarie terminali Zebra — TOP 10 problemów [2026]',
+      metaDescription: 'TOP 10 awarii terminali Zebra: pęknięty ekran, skaner nie działa, bateria, WiFi, boot loop, klawiatura MC. Które naprawisz sam? Kiedy do serwisu? Cennik napraw.',
+      keywords: [
+        // Główne frazy
+        'najczęstsze awarie terminali zebra',
+        'problemy z terminalem zebra',
+        'awarie terminala zebra',
+        'usterki terminala zebra',
+        'terminal zebra nie działa',
+        'terminal zebra problemy',
+        'diagnostyka terminala zebra',
+        'naprawa terminala zebra',
+        'terminal zebra błędy',
+
+        // Objawy i błędy
+        'terminal zebra ekran nie działa',
+        'terminal zebra nie skanuje',
+        'terminal zebra bateria szybko się rozładowuje',
+        'terminal zebra nie włącza się',
+        'terminal zebra wifi nie działa',
+        'terminal zebra boot loop',
+        'terminal zebra zawiesza się',
+        'terminal zebra klawiatura nie działa',
+
+        // Long-tail z modelami TC
+        'awarie zebra tc21', 'problemy zebra tc21', 'usterki tc21',
+        'awarie zebra tc22', 'problemy zebra tc22', 'usterki tc22',
+        'awarie zebra tc26', 'problemy zebra tc26',
+        'awarie zebra tc27', 'problemy zebra tc27',
+        'awarie zebra tc52', 'problemy zebra tc52', 'usterki tc52',
+        'awarie zebra tc53', 'problemy zebra tc53', 'usterki tc53',
+        'awarie zebra tc57', 'problemy zebra tc57',
+        'awarie zebra tc58', 'problemy zebra tc58', 'usterki tc58',
+        'awarie zebra tc72', 'problemy zebra tc72',
+        'awarie zebra tc73', 'problemy zebra tc73',
+
+        // Long-tail z modelami MC
+        'awarie zebra mc3300', 'problemy zebra mc3300', 'usterki mc3300',
+        'awarie zebra mc3400', 'problemy zebra mc3400', 'usterki mc3400',
+        'awarie zebra mc9300', 'problemy zebra mc9300',
+        'awarie zebra mc9400', 'problemy zebra mc9400',
+
+        // Pytania i intencje
+        'jakie są awarie terminali zebra',
+        'co się psuje w terminalu zebra',
+        'dlaczego terminal zebra nie działa',
+        'jak naprawić terminal zebra',
+        'ile kosztuje naprawa terminala zebra',
+        'kiedy wymienić terminal zebra',
+
+        // Angielskie
+        'zebra terminal faults', 'zebra terminal errors',
+        'zebra terminal troubleshooting', 'zebra terminal repair',
+        'zebra mobile computer problems', 'zebra handheld not working'
+      ],
+      faqSchema: [
+        {
+          question: 'Jakie są najczęstsze awarie terminali Zebra?',
+          answer: 'TOP 5 najczęstszych awarii terminali Zebra: 1) Pęknięty lub niereagujący ekran dotykowy, 2) Skaner nie działa lub nie odczytuje kodów, 3) Bateria szybko się rozładowuje lub nie ładuje, 4) Problemy z WiFi i Bluetooth (rozłączenia, słaby sygnał), 5) Boot loop — terminal zawiesza się na logo Zebra. Około 40% problemów można rozwiązać samodzielnie (reset, czyszczenie, konfiguracja DataWedge).'
+        },
+        {
+          question: 'Ile kosztuje naprawa terminala Zebra?',
+          answer: 'Orientacyjne koszty netto naprawy terminali Zebra: wymiana ekranu 600-1200 zł (zależy od modelu), naprawa skanera 500-1100 zł, wymiana baterii 150-450 zł, wymiana klawiatury MC 300-500 zł, konserwacja od 149 zł. Diagnostyka jest bezpłatna przy akceptacji naprawy.'
+        },
+        {
+          question: 'Które problemy z terminalem Zebra mogę naprawić samodzielnie?',
+          answer: 'Samodzielnie naprawisz: czyszczenie okienka skanera i styków ładowania, konfigurację DataWedge, reset do ustawień fabrycznych (Enterprise lub Factory), aktualizację Android przez LifeGuard, przełączanie trybu rękawiczek na ekranie. Do serwisu oddaj: wymianę ekranu, naprawę modułu skanera, wymianę klawiatury MC, naprawę płyty głównej.'
+        },
+        {
+          question: 'Co zrobić gdy terminal Zebra nie włącza się?',
+          answer: 'Gdy terminal Zebra nie włącza się: 1) Podłącz ładowarkę na min. 30 minut, 2) Wykonaj twardy reset — przytrzymaj Power przez 10 sekund, 3) Spróbuj innej baterii, 4) Sprawdź styki ładowania. Jeśli LED ładowania nie świeci i inne baterie nie pomagają — terminal wymaga naprawy płyty głównej w serwisie.'
+        },
+        {
+          question: 'Terminal Zebra skaner nie działa — jak naprawić?',
+          answer: 'Skaner terminala Zebra najczęściej nie działa z powodu: 1) Wyłączonego profilu DataWedge — włącz Scanner Input w aktywnym profilu, 2) Brudnego okienka skanera — wyczyść alkoholem IPA, 3) Uszkodzonego modułu SE4710/SE55 — wymaga wymiany w serwisie (500-1100 zł). Zrestartuj urządzenie przed dalszą diagnostyką.'
+        },
+        {
+          question: 'Jak zapobiegać awariom terminali Zebra?',
+          answer: 'Profilaktyka: 1) Stosuj obudowy ochronne (Rugged Boot) — zmniejszają uszkodzenia z upadków o 80%, 2) Czyść okienko skanera co tydzień, 3) Regularnie aktualizuj Android przez LifeGuard, 4) Wymieniaj baterie co 12-18 miesięcy, 5) Używaj stacji dokujących zamiast kabli USB, 6) Nie ładuj w temperaturze poniżej 0°C.'
+        },
+        {
+          question: 'Kiedy terminal Zebra oddać do serwisu zamiast naprawiać samemu?',
+          answer: 'Oddaj do serwisu gdy: ekran jest pęknięty lub nie reaguje mimo resetu, skaner nie działa mimo czyszczenia i resetu DataWedge, terminal nie włącza się na żadnej baterii, po upadku lub zalaniu, klawiatura MC3300/MC3400 nie reaguje, terminal przegrzewa się lub puchnie bateria.'
+        }
+      ]
+    },
+    content: `
+> **Szybka odpowiedź:** Najczęstsze awarie terminali Zebra to: **pęknięte ekrany** (upadki), **niedzałające skanery** (DataWedge, moduł SE), **problemy z baterią** (szybkie rozładowanie, brak ładowania), **rozłączenia WiFi** i **boot loop** (zawieszenie na logo). Około **40% problemów** rozwiążesz samodzielnie (reset, czyszczenie, konfiguracja). Pozostałe 60% wymaga [serwisu](/serwis-terminali-zebra).
+
+## TL;DR — TOP 10 awarii terminali Zebra
+
+| # | Awaria | Częstość | Sam naprawisz? | Koszt serwisu |
+|---|--------|----------|----------------|---------------|
+| 1 | Pęknięty/niereagujący ekran | ⭐⭐⭐⭐⭐ | ❌ Serwis | 600-1200 zł |
+| 2 | Skaner nie działa | ⭐⭐⭐⭐⭐ | ✅/❌ | 0-1100 zł |
+| 3 | Bateria szybko się rozładowuje | ⭐⭐⭐⭐ | ✅/❌ | 0-450 zł |
+| 4 | WiFi / Bluetooth rozłącza się | ⭐⭐⭐⭐ | ✅ Tak | Bezpłatnie |
+| 5 | Boot loop / zawieszenie na logo | ⭐⭐⭐ | ✅/❌ | 0-800 zł |
+| 6 | Klawiatura MC nie działa | ⭐⭐⭐ | ✅/❌ | 0-500 zł |
+| 7 | Błędy aktualizacji Android | ⭐⭐⭐ | ✅ Tak | Bezpłatnie |
+| 8 | Terminal nie ładuje się | ⭐⭐ | ✅/❌ | 0-400 zł |
+| 9 | Problemy z DataWedge | ⭐⭐ | ✅ Tak | Bezpłatnie |
+| 10 | Uszkodzenia po upadku | ⭐⭐ | ❌ Serwis | 300-1500 zł |
+
+---
+
+## 1. Pęknięty lub niereagujący ekran dotykowy ⭐⭐⭐⭐⭐
+
+**Najczęstsza awaria wymagająca serwisu** — terminale padają na beton w magazynach, na rampach załadunkowych i w terenie.
+
+### Objawy:
+- ❌ **Pęknięte szkło** ekranu (Gorilla Glass)
+- ❌ Ekran **nie reaguje na dotyk** (działa, ale nie wykrywa palca)
+- ❌ **Martwe piksele** — czarne lub kolorowe punkty na ekranie
+- ❌ Ekran działa, ale **nie w rękawiczach**
+
+### Rozwiązanie:
+
+**Gdy ekran nie reaguje (ale nie jest pęknięty):**
+1. Wykonaj **twardy reset** — Power 10 sekund
+2. Sprawdź **tryb dotyku**: Ustawienia → Wyświetlacz → Touch Panel Mode → **Finger and Glove**
+3. Zdejmij **folię ochronną** — może blokować dotyk
+4. Wyczyść ekran mikrofibą
+
+**Gdy ekran jest pęknięty:**
+- **Wymiana ekranu w serwisie** — jedyne rozwiązanie
+- Nie próbuj naprawiać samodzielnie — anuluje gwarancję
+
+### Koszt naprawy:
+| Model | Koszt wymiany ekranu |
+|-------|---------------------|
+| TC21/TC22/TC26/TC27 | 600-900 zł netto |
+| TC52/TC53/TC57/TC58 | 700-1000 zł netto |
+| MC3300/MC3400 | 800-1000 zł netto |
+| MC9300/MC9400 | 900-1200 zł netto |
+
+> **Profilaktyka:** Stosuj **obudowy Rugged Boot** — zwiększają odporność na upadki z 1,2m do 1,8m na beton. Inwestycja 100-200 zł chroni przed naprawą za 800+ zł.
+
+---
+
+## 2. Skaner nie działa lub nie odczytuje kodów ⭐⭐⭐⭐⭐
+
+**Najczęściej rozwiązywalna samodzielnie** — w 70% przypadków problem jest softwarowy (DataWedge), nie sprzętowy.
+
+### Objawy:
+- ❌ Brak wiązki skanera po naciśnięciu przycisku
+- ❌ Wiązka jest, ale **kody nie są odczytywane**
+- ❌ Skaner odczytuje, ale **dane nie trafiają do aplikacji**
+- ❌ **Podwójne skanowanie** jednym naciśnięciem
+
+### Rozwiązanie:
+
+**Krok 1: Sprawdź DataWedge** (rozwiązuje 60% problemów)
+1. Otwórz aplikację **DataWedge**
+2. Upewnij się, że profil jest **aktywny** (zielony checkbox)
+3. W profilu: **Scanner Input → Enabled**
+4. Sprawdź **Keystroke Output → Enabled** (bez tego dane nie trafią do pola tekstowego)
+
+**Krok 2: Wyczyść okienko skanera**
+- Użyj **alkoholu IPA** i miękkiej ściereczki
+- Sprawdź czy okienko nie jest **zarysowane** — wymaga wymiany
+
+**Krok 3: Restart urządzenia**
+- Twardy reset: Power 10 sekund
+
+**Krok 4: Jeśli problem pozostaje → serwis**
+- Uszkodzony moduł SE4710/SE4750/SE55/SE58 wymaga wymiany
+
+### Koszt naprawy:
+- Softwarowe (DataWedge): **bezpłatnie** (zrobisz sam)
+- Wymiana modułu skanera: **500-1100 zł** netto
+
+📖 **Szczegółowy poradnik:** [Skaner w terminalu Zebra nie działa — diagnostyka](/blog/skaner-terminala-zebra-nie-dziala-diagnostyka-naprawa) | [Konfiguracja DataWedge](/blog/datawedge-konfiguracja-terminal-zebra)
+
+---
+
+## 3. Bateria szybko się rozładowuje ⭐⭐⭐⭐
+
+**Problem nr 1 w terenie** — kurierzy, magazynierzy i handlowcy potrzebują terminala na pełną zmianę (8-12h).
+
+### Objawy:
+- ❌ Terminal **nie wytrzymuje całej zmiany** (rozładowuje się po 4-6h)
+- ❌ **LED miga wolno na czerwono** co 4 sekundy → bateria do wymiany
+- ❌ Bateria **nie ładuje się** — LED nie świeci
+- ❌ **LED świeci czerwono-bursztynowo** na przemian → temperatura poza zakresem
+
+### Rozwiązanie:
+
+**Szybkie optymalizacje (wydłużają czas pracy o 20-40%):**
+1. Zmniejsz **jasność ekranu** do 40-50%
+2. Włącz **Battery Saver Mode**
+3. Zamknij **nieużywane aplikacje** w tle
+4. Wyłącz **Bluetooth** jeśli nie używasz ring skanera
+5. Przełącz WiFi na **pasmo 5 GHz** (mniej energii niż 2.4 GHz)
+
+**Gdy LED miga wolno na czerwono:**
+- Bateria osiągnęła **koniec żywotności** — wymiana konieczna
+- Żywotność baterii Li-Ion: **12-18 miesięcy** przy codziennym użytkowaniu
+
+**Wymiana baterii bez wyłączania (Warm Swap):**
+- TC22/TC27: wymień w ciągu **30 sekund** — WiFi zachowane, RAM do 5 minut
+- MC3400: **Hot Swap** — poczekaj na naładowanie superkondensatora
+
+### Koszt naprawy:
+| Element | Koszt |
+|---------|-------|
+| Bateria standardowa TC22 (3800 mAh) | 150-250 zł |
+| Bateria extended TC22 (5200 mAh) | 200-350 zł |
+| Bateria MC3400 (7000 mAh) | 250-450 zł |
+
+📖 **Szczegółowy poradnik:** [Bateria Zebra TC58 — jak przedłużyć czas pracy](/blog/zebra-tc58-bateria-nie-wytrzymuje-trasy-kurierskiej)
+
+---
+
+## 4. WiFi / Bluetooth rozłącza się ⭐⭐⭐⭐
+
+**Najczęstszy problem w dużych magazynach** — terminal traci połączenie przy przechodzeniu między punktami dostępu (roaming).
+
+### Objawy:
+- ❌ Terminal **traci WiFi** przy przemieszczaniu się po magazynie
+- ❌ **Słaby sygnał** mimo bliskości routera
+- ❌ Bluetooth **nie paruje** z drukarką/skanerem
+- ❌ Wolne połączenie mimo silnego sygnału
+
+### Rozwiązanie:
+
+**WiFi:**
+1. Przejdź do **Ustawienia → WiFi → Zaawansowane**
+2. Wyłącz **oszczędzanie energii WiFi** (powoduje rozłączenia!)
+3. Przełącz na **pasmo 5 GHz lub 6 GHz** (WiFi 6E) — mniej zakłóceń
+4. Sprawdź **zakłócenia** — inne urządzenia na 2.4 GHz (mikrofale, Bluetooth)
+5. Upewnij się, że AP obsługują **802.11r (Fast Roaming)**
+
+**Bluetooth:**
+1. Wyłącz i włącz **Bluetooth**
+2. **Usuń sparowane urządzenie** i sparuj ponownie
+3. Dla ring skanerów RS5100/RS6100 — użyj **NFC Tap-to-Pair** (przyłóż skaner do terminala)
+
+### Koszt: BEZPŁATNIE (konfiguracja)
+
+📖 **Szczegółowy poradnik:** [Problemy z WiFi i Bluetooth w terminalu Zebra](/blog/problemy-wifi-bluetooth-terminal-zebra)
+
+---
+
+## 5. Boot loop / zawieszenie na logo Zebra ⭐⭐⭐
+
+**Poważna awaria** — terminal uruchamia się w kółko lub zawiesza na ekranie startowym.
+
+### Objawy:
+- ❌ Terminal **restartuje się** w kółko (boot loop)
+- ❌ Zawiesza się na **logo Zebra** i nie ładuje systemu
+- ❌ Utknął w **trybie Fastboot**
+- ❌ Ekran jest **czarny** ale LED miga
+
+### Rozwiązanie:
+
+**Krok 1: Twardy reset**
+- Przytrzymaj **Power** przez 10-15 sekund
+
+**Krok 2: Enterprise Reset (zachowuje konfigurację firmową)**
+- Wyłącz terminal
+- Przytrzymaj **Power + Vol Up** (TC21/TC22) lub **Power + Trigger** (MC3300)
+- W menu Recovery: **Enterprise Reset**
+
+**Krok 3: Factory Reset (ostateczność!)**
+- Jak wyżej, ale wybierz **Factory Reset**
+- ⚠️ **Usuwa WSZYSTKIE dane!** Usuń konto Google PRZED resetem (ochrona FRP)
+
+**Krok 4: Jeśli nie pomaga → serwis**
+- Problem z pamięcią Flash lub płytą główną
+
+### Koszt:
+- Reset softwarowy: **bezpłatnie**
+- Naprawa płyty głównej: **400-800 zł** netto
+
+📖 **Szczegółowy poradnik:** [Terminal Zebra nie włącza się — Fastboot i Boot Loop](/blog/zebra-terminal-nie-wlacza-sie-fastboot-boot-loop) | [Reset fabryczny — Factory vs Enterprise](/blog/reset-fabryczny-terminal-zebra-factory-enterprise)
+
+---
+
+## 6. Klawiatura MC3300/MC3400 nie działa ⭐⭐⭐
+
+**Problem unikalny dla serii MC** — terminale z fizyczną klawiaturą mają problemy, których seria TC (dotykowa) nie ma.
+
+### Objawy:
+- ❌ **Klawisze nie reagują** na naciśnięcie
+- ❌ Klawiatura wpisuje **nieprawidłowe znaki**
+- ❌ Tryb **Orange/Blue jest aktywny** — inne znaki niż oczekiwane
+- ❌ Klawisze są **fizycznie uszkodzone** (pęknięte, zablokowane)
+
+### Rozwiązanie:
+
+**Gdy klawisze wpisują złe znaki:**
+1. Sprawdź czy tryb **Orange** (pomarańczowy) lub **Blue** (niebieski) nie jest aktywny — naciśnij klawisz modyfikatora aby wyłączyć
+2. Zresetuj **Key Programmer** do wartości domyślnych
+
+**Gdy klawisze nie reagują:**
+1. Restart urządzenia
+2. Sprawdź czy problem dotyczy **wszystkich klawiszy** czy tylko kilku
+3. Kilka klawiszy → prawdopodobnie **zanieczyszczenie** — wyczyść
+4. Wszystkie klawisze → **uszkodzenie płyty klawiatury** → serwis
+
+### Koszt naprawy:
+| Element | Koszt |
+|---------|-------|
+| Czyszczenie klawiatury | Bezpłatnie (sam) |
+| Wymiana klawiatury (29/38/47 klawiszy) | 300-500 zł netto |
+
+MC3400 ma **3 warianty klawiatury**: 29-key (numeryczna), 38-key (funkcyjna), 47-key (alfanumeryczna). Upewnij się, że zamawiasz właściwy typ.
+
+---
+
+## 7. Błędy aktualizacji Android ⭐⭐⭐
+
+**Rosnący problem** — Zebra regularnie wydaje aktualizacje LifeGuard (bezpieczeństwo Android), ale mogą powodować regresje.
+
+### Objawy:
+- ❌ Aktualizacja **nie instaluje się** — błąd lub restart
+- ❌ Po aktualizacji **skaner nie działa** (znany bug)
+- ❌ Po aktualizacji **ekran dotykowy nie reaguje** (znany bug MC3300 po Android 14)
+- ❌ Terminal jest **wolniejszy** po aktualizacji
+
+### Rozwiązanie:
+
+1. **Przed aktualizacją:** Zrób backup konfiguracji (StageNow profile)
+2. Aktualizuj przez **LifeGuard OTA**: Ustawienia → System → Aktualizacje
+3. Jeśli OTA nie działa: pobierz pakiet z **zebra.com** i zainstaluj przez **Recovery Mode**
+4. Po problemach: wykonaj **Enterprise Reset** (zachowuje konfigurację /enterprise)
+
+**Znane bugi:**
+- TC22: skaner skanuje podwójnie → naprawiony w 13-34-23.00-TN-U00
+- MC3300: touchscreen po Android 14 → naprawiony w kolejnym patchu LifeGuard
+
+### Koszt: BEZPŁATNIE
+
+📖 **Szczegółowy poradnik:** [Aktualizacja Android 14 — TC52, TC72, MC3300](/blog/aktualizacja-zebra-android-14-tc52-tc72-mc3300-mc9300) | [Aktualizacja Android 14 — MC3400, TC53e](/blog/aktualizacja-zebra-android-14-mc3400-mc9400-tc53e-wt5400)
+
+---
+
+## 8. Terminal nie ładuje się ⭐⭐
+
+### Objawy:
+- ❌ **LED ładowania nie świeci** po umieszczeniu w stacji
+- ❌ LED świeci, ale **procent baterii nie rośnie**
+- ❌ Ładuje się **bardzo wolno** (ponad 4h do pełna)
+
+### Rozwiązanie:
+
+1. **Wyczyść styki** (pogo pins) na terminalu i stacji dokującej — alkohol IPA
+2. Sprawdź **zasilacz stacji** — czy jest podłączony i prawidłowy model
+3. Włóż terminal **mocno** do stacji (musi kliknąć)
+4. Sprawdź **temperaturę** — ładowanie działa tylko w zakresie 0-40°C (TC) / 5-40°C (TC22/TC27)
+5. Spróbuj **innego slotu** w stacji wielostanowiskowej
+6. Spróbuj **innej baterii** — stara bateria może nie przyjmować ładowania
+
+### Koszt:
+- Czyszczenie styków: **bezpłatnie**
+- Wymiana portu ładowania: **200-400 zł** netto
+- Wymiana baterii: **150-450 zł** netto
+
+---
+
+## 9. Problemy z DataWedge (dane nie trafiają do aplikacji) ⭐⭐
+
+**Najczęstsza "awaria" softwarowa** — skaner działa, wiązka jest, kody się dekodują, ale dane nie pojawiają się w aplikacji.
+
+### Objawy:
+- ❌ Skaner skanuje ale dane **nie pojawiają się** w polu tekstowym
+- ❌ Dane trafiają do **złej aplikacji**
+- ❌ Skanowanie działa w jednej aplikacji ale **nie w drugiej**
+- ❌ Po aktualizacji skanowanie **przestało działać**
+
+### Rozwiązanie:
+
+1. Otwórz **DataWedge** → upewnij się, że profil jest aktywny
+2. W profilu sprawdź:
+   - **Scanner Input** → Enabled
+   - **Keystroke Output** → Enabled (krytyczne!)
+   - **Associated Apps** → czy Twoja aplikacja jest dodana
+3. Jeśli aplikacja wymaga **Intent Output** zamiast Keystroke — skonfiguruj Intent
+4. Po aktualizacji: **Profile0** (profil domyślny) może nadpisać Twoje ustawienia
+
+### Koszt: BEZPŁATNIE
+
+📖 **Szczegółowy poradnik:** [DataWedge — konfiguracja skanera krok po kroku](/blog/datawedge-konfiguracja-terminal-zebra)
+
+---
+
+## 10. Uszkodzenia mechaniczne po upadku ⭐⭐
+
+**Problem „niespodziewany"** — mimo norm IP65/IP68 i MIL-STD-810H, terminale padają na beton z wysokości większych niż specyfikacja.
+
+### Objawy:
+- ❌ **Pęknięta obudowa** — naruszenie szczelności IP
+- ❌ **Wyrwany trigger** (przycisk skanera) — szczególnie MC3300/MC3400 w wersji Gun
+- ❌ **Uszkodzony port USB-C** — po upadku na kant
+- ❌ Terminal działa ale **ekran migocze** (luźna taśma)
+
+### Rozwiązanie:
+
+Uszkodzenia mechaniczne **zawsze wymagają serwisu**. Nie próbuj klejić obudowy ani naprawiać samodzielnie — naruszysz szczelność IP.
+
+### Koszt naprawy:
+| Element | Koszt |
+|---------|-------|
+| Wymiana obudowy | 300-600 zł netto |
+| Naprawa triggera MC | 200-400 zł netto |
+| Naprawa portu USB-C | 250-450 zł netto |
+| Wymiana ekranu | 600-1200 zł netto |
+
+> **Profilaktyka:** Obudowy ochronne **Rugged Boot** (100-200 zł) i **smycze zabezpieczające** (50 zł) — tanie ubezpieczenie przed naprawami za 800+ zł.
+
+---
+
+## Podsumowanie — co naprawisz sam, a co wymaga serwisu?
+
+### Naprawisz samodzielnie (bezpłatnie):
+- ✅ Konfiguracja DataWedge (skaner nie wysyła danych)
+- ✅ Czyszczenie okienka skanera i styków ładowania
+- ✅ Przełączanie trybu dotyku (rękawiczki)
+- ✅ Optymalizacja baterii (jasność, WiFi, Battery Saver)
+- ✅ Reset do ustawień fabrycznych (Enterprise/Factory)
+- ✅ Aktualizacja Android (LifeGuard OTA)
+- ✅ Konfiguracja WiFi (pasmo, roaming, oszczędzanie energii)
+
+### Wymaga serwisu:
+- ❌ Wymiana pękniętego ekranu (600-1200 zł)
+- ❌ Wymiana uszkodzonego modułu skanera (500-1100 zł)
+- ❌ Wymiana klawiatury MC (300-500 zł)
+- ❌ Naprawa płyty głównej (400-800 zł)
+- ❌ Naprawa uszkodzeń po upadku (300-1500 zł)
+- ❌ Wymiana portu ładowania (200-400 zł)
+
+---
+
+## Potrzebujesz pomocy?
+
+Jesteśmy **autoryzowanym serwisem Zebra** z 25-letnim doświadczeniem i 5000+ naprawionych urządzeń.
+
+- **Bezpłatna diagnostyka** — wycenimy naprawę przed rozpoczęciem
+- **Odbiór kurierem 24h** z całej Polski (bezpłatnie)
+- **Naprawa 2-5 dni** roboczych (ekspres 24-48h za dopłatą)
+- **6 miesięcy gwarancji** na każdą naprawę
+
+[**Zgłoś naprawę →**](/#formularz) | [Zadzwoń: +48 601 619 898](tel:+48601619898) | [Serwis terminali Zebra](/serwis-terminali-zebra)
+
+*Ostatnia aktualizacja: luty 2026*
+`
+  },
+  {
+    slug: 'serwis-terminala-zebra-tc52-tc53-diagnostyka-naprawa',
+    title: 'Serwis terminala Zebra TC52/TC53 — diagnostyka i naprawa [2026]',
+    excerpt: 'Kompletny przewodnik serwisowy po terminalach Zebra TC52 i TC53. Najczęstsze awarie, diagnostyka krok po kroku, cennik napraw, TC52 EOL — kiedy naprawić, a kiedy wymienić na TC501?',
+    coverImage: '/blog/serwis-terminala-zebra-tc52-tc53-diagnostyka-naprawa.jpeg',
+    coverImageAlt: 'Terminal mobilny Zebra TC53 z otwartą komorą baterii i narzędziami serwisowymi — diagnostyka i naprawa',
+    author: {
+      name: 'Krzysztof Wójcik',
+      role: 'Kierownik Serwisu TAKMA'
+    },
+    publishedAt: '2026-02-15',
+    readingTime: 15,
+    deviceType: 'terminale',
+    category: 'troubleshooting',
+    tags: ['TC52', 'TC53', 'TC52x', 'TC53e', 'serwis terminala zebra', 'naprawa TC52', 'naprawa TC53', 'diagnostyka', 'troubleshooting', 'TC52 EOL', 'wymiana ekranu', 'bateria TC53'],
+    seo: {
+      metaTitle: 'Serwis terminala Zebra TC52/TC53 — diagnostyka i naprawa [2026]',
+      metaDescription: 'Terminal Zebra TC52 lub TC53 nie działa? Diagnostyka LED, awarie ekranu, baterii, skanera. Cennik napraw od 150 zł. TC52 EOL — naprawić czy wymienić? Bezpłatna diagnostyka.',
+      keywords: [
+        // Główne frazy serwisowe
+        'serwis terminala zebra tc52',
+        'serwis terminala zebra tc53',
+        'naprawa zebra tc52',
+        'naprawa zebra tc53',
+        'serwis tc52', 'serwis tc53',
+        'naprawa tc52', 'naprawa tc53',
+        // Warianty modeli
+        'serwis zebra tc52x',
+        'serwis zebra tc53e',
+        'naprawa tc52x', 'naprawa tc53e',
+        // Problemy i awarie — TC52
+        'zebra tc52 nie włącza się',
+        'zebra tc52 nie działa',
+        'zebra tc52 ekran nie reaguje',
+        'zebra tc52 bateria szybko się rozładowuje',
+        'zebra tc52 skaner nie działa',
+        'zebra tc52 wifi się rozłącza',
+        'zebra tc52 boot loop',
+        'zebra tc52 pętla restartu',
+        'zebra tc52 zawiesza się',
+        'zebra tc52 nie ładuje się',
+        'zebra tc52 pęknięty ekran',
+        'zebra tc52 problem',
+        'zebra tc52 błąd',
+        // Problemy i awarie — TC53
+        'zebra tc53 nie włącza się',
+        'zebra tc53 nie działa',
+        'zebra tc53 ekran nie reaguje',
+        'zebra tc53 bateria szybko się rozładowuje',
+        'zebra tc53 skaner nie działa',
+        'zebra tc53 wifi się rozłącza',
+        'zebra tc53 boot loop',
+        'zebra tc53 pętla restartu',
+        'zebra tc53 zawiesza się',
+        'zebra tc53 nie ładuje się',
+        'zebra tc53 pęknięty ekran',
+        'zebra tc53 problem',
+        'zebra tc53 błąd',
+        // Naprawy i części
+        'wymiana ekranu tc52',
+        'wymiana ekranu tc53',
+        'wymiana baterii tc52',
+        'wymiana baterii tc53',
+        'ekran tc52 cena',
+        'ekran tc53 cena',
+        'bateria tc52 cena',
+        'bateria tc53 cena',
+        'wymiana portu usb tc52',
+        'wymiana portu usb tc53',
+        // Diagnostyka i reset
+        'reset tc52',
+        'reset tc53',
+        'reset fabryczny tc52',
+        'reset fabryczny tc53',
+        'enterprise reset tc52',
+        'enterprise reset tc53',
+        'diagnostyka tc52',
+        'diagnostyka tc53',
+        'twardy reset tc52',
+        'twardy reset tc53',
+        // Koszty
+        'ile kosztuje naprawa tc52',
+        'ile kosztuje naprawa tc53',
+        'cennik napraw tc52',
+        'cennik napraw tc53',
+        'koszt wymiany ekranu tc52',
+        'koszt wymiany ekranu tc53',
+        // EOL i migracja
+        'tc52 end of life',
+        'tc52 eol',
+        'tc52 koniec wsparcia',
+        'tc52 następca',
+        'tc52 zamiennik',
+        'tc52 vs tc53',
+        'migracja tc52 tc53',
+        'tc52 czy tc53',
+        'tc53 vs tc501',
+        // Akcesoria i baterie
+        'bateria tc52 powerprecision',
+        'bateria tc53 powerprecision',
+        'ładowarka tc52',
+        'ładowarka tc53',
+        'stacja dokująca tc52',
+        'stacja dokująca tc53',
+        // Angielskie
+        'zebra tc52 troubleshooting',
+        'zebra tc53 troubleshooting',
+        'zebra tc52 repair',
+        'zebra tc53 repair',
+        'zebra tc52 not turning on',
+        'zebra tc53 not turning on',
+        'zebra tc52 screen replacement',
+        'zebra tc53 screen replacement'
+      ],
+      faqSchema: [
+        {
+          question: 'Ile kosztuje naprawa terminala Zebra TC52?',
+          answer: 'Koszt naprawy Zebra TC52 zależy od usterki: wymiana ekranu dotykowego: 700-1000 zł netto, wymiana baterii: 150-350 zł, naprawa portu USB/ładowania: 200-400 zł, naprawa płyty głównej: 500-900 zł. Diagnostyka jest bezpłatna.'
+        },
+        {
+          question: 'Ile kosztuje naprawa terminala Zebra TC53?',
+          answer: 'Koszt naprawy Zebra TC53 zależy od usterki: wymiana ekranu 6" FHD+: 800-1200 zł netto, wymiana baterii PowerPrecision+: 200-400 zł, naprawa skanera SE4720/SE55: 300-600 zł, naprawa płyty głównej: 600-1100 zł. Diagnostyka bezpłatna.'
+        },
+        {
+          question: 'Czy warto naprawiać Zebra TC52 po końcu wsparcia (EOL)?',
+          answer: 'TC52 osiągnął EOL w październiku 2024, ale wsparcie serwisowe trwa do grudnia 2028. Naprawa opłaca się przy usterce do 40% wartości nowego TC53 (ok. 1500-2000 zł). Przy droższych naprawach lepiej rozważyć migrację na TC53 lub TC501.'
+        },
+        {
+          question: 'Jak zresetować terminal Zebra TC52/TC53?',
+          answer: 'Twardy reset: przytrzymaj przycisk Power przez 10 sekund. Enterprise Reset (zachowuje dane firmowe): Settings → System → Advanced → Reset options → Enterprise Reset. Factory Reset (kasuje wszystko): ta sama ścieżka → Factory data reset.'
+        },
+        {
+          question: 'Zebra TC52 nie włącza się — co robić?',
+          answer: 'Sprawdź: 1) Naładuj baterię przez minimum 15 minut w stacji dokującej, 2) Wyjmij i włóż baterię ponownie, 3) Wykonaj twardy reset (Power 10 sekund), 4) Spróbuj innej baterii. Jeśli LED ładowania nie świeci — problem z portem lub płytą główną, wymagany serwis.'
+        },
+        {
+          question: 'Jaka jest żywotność baterii w terminalu TC52/TC53?',
+          answer: 'Bateria PowerPrecision+ w TC52/TC53 wytrzymuje 500-800 pełnych cykli ładowania (2-3 lata intensywnego użytkowania). Na jednym ładowaniu: 8-12h pracy (TC52) lub 10-14h (TC53). Bateria rozszerzona (5400 mAh TC53): do 18h.'
+        },
+        {
+          question: 'Jak długo trwa naprawa terminala TC52/TC53?',
+          answer: 'Standardowa naprawa TC52/TC53 trwa 3-5 dni roboczych. Wymiana baterii: 1 dzień. Wymiana ekranu: 3-5 dni. Naprawa płyty głównej: 5-7 dni. Tryb express (24-48h) dostępny za dopłatą.'
+        },
+        {
+          question: 'Czym różni się TC52 od TC53?',
+          answer: 'TC53 to następca TC52 z kluczowymi ulepszeniami: procesor Qualcomm 6490 (vs SDM660), ekran 6" FHD+ (vs 5" FHD), Wi-Fi 6E (vs Wi-Fi 5), Bluetooth 5.2 (vs 4.2), ochrona Gorilla Glass (vs bez), lepsza kamera 16MP (vs 13MP). Obudowa TC53 jest nieco większa.'
+        }
+      ]
+    },
+    content: `
+> **Szybka odpowiedź:** Terminale **Zebra TC52** i **TC53** to najpopularniejsze urządzenia mobilne w logistyce i handlu — naprawiamy ich setki rocznie. Najczęstsze awarie: **pęknięty ekran** (upadki), **zużyta bateria** (cykle), **skaner nie czyta** (DataWedge/okno). **TC52 osiągnął EOL** (październik 2024), ale wsparcie serwisowe trwa do **grudnia 2028**. Koszt naprawy: od **150 zł** (bateria) do **1200 zł** (ekran TC53). **Diagnostyka bezpłatna.**
+
+## TL;DR — Diagnostyka TC52/TC53 w pigułce
+
+| Problem | Objaw | Sam naprawisz? | Koszt serwisu |
+|---------|-------|----------------|---------------|
+| Pęknięty ekran | Rysy, pęknięcia, brak reakcji na dotyk | ❌ Serwis | 700-1200 zł |
+| Zużyta bateria | <4h pracy, LED czerwony, nagrzewanie | ✅ Wymień sam | 150-400 zł |
+| Skaner nie czyta | Brak odczytu, wolne skanowanie | ✅/❌ | 0-600 zł |
+| Nie włącza się | Czarny ekran, brak reakcji | ✅/❌ | 0-900 zł |
+| WiFi się rozłącza | Częste zrywanie połączenia | ✅ Tak | 0 zł (config) |
+| Boot loop | Pętla restartu, zawiesza się | ✅/❌ | 0-400 zł |
+| Port USB uszkodzony | Nie ładuje przez kabel | ❌ Serwis | 200-400 zł |
+| Przycisk Power | Nie reaguje, wymaga mocnego nacisku | ❌ Serwis | 150-300 zł |
+
+---
+
+## TC52 vs TC53 — specyfikacja i różnice
+
+Zanim przejdziemy do diagnostyki — kluczowe różnice między modelami, bo wpływają na dostępność części i opłacalność naprawy:
+
+| Parametr | TC52 / TC52x | TC53 / TC53e |
+|----------|-------------|-------------|
+| **Status** | **EOL (paź. 2024)** | Aktywny |
+| Wsparcie serwisowe | Do XII 2028 | Do ~2031 |
+| Procesor | SDM660 (8-core, 2.2 GHz) | **QC 6490 (8-core, 2.7 GHz)** |
+| Wyświetlacz | 5.0" FHD (1920×1080) | **6.0" FHD+ (2160×1080)** |
+| Ochrona ekranu | Gorilla Glass (brak w starszych) | **Corning Gorilla Glass** |
+| RAM | 4 GB | 4 / 6 / **8 GB** |
+| Flash | 32 / 64 GB | 64 / **128 GB** |
+| Skaner | SE4720 | SE4720 / **SE55** |
+| WiFi | Wi-Fi 5 (802.11ac) | **Wi-Fi 6E (802.11ax)** |
+| Bluetooth | 4.2 | **5.2** |
+| NFC | Tak | Tak |
+| Kamera tylna | 13 MP | **16 MP** |
+| IP | IP65/IP68 | IP65/IP68 |
+| Upadki | 1.5 m (MIL-STD-810G) | **1.8 m (MIL-STD-810H)** |
+| Bateria standardowa | 4150 mAh | 4680 mAh |
+| Bateria rozszerzona | 6700 mAh | **5400 mAh** |
+| System | Android 8→11 | Android 11→**14+** |
+| Cena nowego (2026) | Niedostępny (EOL) | ~5000-6500 zł netto |
+
+> **TC52 EOL — co to oznacza?** Od października 2024 Zebra nie produkuje nowych TC52. Części zamienne są jeszcze dostępne (do XII 2028), ale ceny rosną. Jeśli planujesz flotę na 3+ lata, rozważ [migrację na TC53 lub TC501](/blog/zebra-tc52-vs-tc53-vs-tc501-porownanie-terminali).
+
+---
+
+## Najczęstsze awarie TC52/TC53
+
+### 1. Pęknięty/uszkodzony ekran dotykowy
+
+**Najczęstsza przyczyna wizyt w serwisie** — mimo normy MIL-STD, upadki na beton z >1.5 m lub uderzenie w kant potrafią zniszczyć ekran.
+
+**Objawy:**
+- Widoczne pęknięcia lub rysy na szkle
+- Ekran nie reaguje na dotyk (całkowicie lub w części)
+- Wyświetla obraz, ale dotyk nie działa
+- Martwe piksele, kolorowe linie na wyświetlaczu
+- Dotyk „sam klika" (ghost touch po pęknięciu)
+
+**Co możesz sprawdzić sam:**
+1. **Zdejmij folię ochronną** — stara folia może blokować dotyk
+2. **Wyczyść ekran** — tłuszcz i brud mogą ograniczyć czułość
+3. **Zmień tryb dotyku:** Settings → Display → Touch Mode:
+   - **Finger Only** — standardowy (palec)
+   - **Glove Mode** — dla rękawiczek (zwiększona czułość)
+   - **Stylus & Finger** — dla rysików
+4. **Twardy reset** (Power 10 sek.) — jeśli dotyk przestał reagować po aktualizacji
+
+**Kiedy do serwisu:**
+- Pęknięte szkło → **wymiana modułu ekranowego**
+- Ghost touch → wymiana digitizera
+- Martwe piksele → wymiana wyświetlacza LCD
+
+**Cennik:**
+
+| Naprawa | TC52 / TC52x | TC53 / TC53e |
+|---------|-------------|-------------|
+| Wymiana ekranu (LCD + digitizer) | 700-1000 zł | 800-1200 zł |
+| Wymiana samego digitizera | 500-700 zł | 600-900 zł |
+| Wymiana folii ochronnej | 30-50 zł (DIY) | 30-50 zł (DIY) |
+
+> **Porada:** Folia ochronna za 30 zł oszczędzi naprawę za 1000 zł. Zawsze używaj folii hartowanej + etui z bumperem.
+
+---
+
+### 2. Problemy z baterią — szybkie rozładowanie
+
+Baterie PowerPrecision+ to materiał eksploatacyjny — po 500-800 cyklach pojemność spada poniżej 80%.
+
+**Objawy:**
+- Terminal wytrzymuje <4 godziny zamiast 8-12h
+- Bateria nagrzewa się podczas ładowania
+- LED ładowania miga na czerwono (błąd temperatury)
+- LED ładowania świeci ciągłe czerwone (bateria zużyta)
+- Terminal wyłącza się przy 20-30% baterii
+
+**Diagnostyka LED ładowania:**
+
+| LED | Znaczenie |
+|-----|-----------|
+| Zielone ciągłe | W pełni naładowana |
+| Żółte ciągłe | Ładowanie w toku |
+| Czerwone ciągłe | **Bateria zużyta — wymień** |
+| Czerwone migające | Błąd ładowania (temperatura poza 0-50°C) |
+| Brak LED | Brak kontaktu — sprawdź styki |
+
+**Co możesz zrobić sam:**
+1. **Sprawdź stan baterii:** Settings → About Phone → Battery Information → sprawdź Health (Good/Poor)
+2. **Zamknij zbędne aplikacje** — przesuń w górę z dolnej krawędzi
+3. **Zmniejsz jasność** ekranu + włącz auto-jasność
+4. **Wyłącz zbędne radio:** WiFi, Bluetooth, NFC — jeśli nie używasz
+5. **Wyłącz Wi-Fi 6 GHz** (TC53) — pasmo 6 GHz zużywa więcej energii
+6. **Wymień baterię** — wystarczy zdjąć klapkę, wyjąć starą, włożyć nową
+
+**Ważne — Warm Swap (TC52/TC53):**
+Terminal TC52/TC53 obsługuje **Warm Swap** — po wyjęciu baterii masz **~30 sekund** na włożenie nowej, zanim urządzenie się wyłączy (WiFi może się rozłączyć). Nie jest to Hot Swap jak w MC3400 (z superkondensatorem).
+
+**Cennik baterii:**
+
+| Bateria | TC52 | TC53 |
+|---------|------|------|
+| Standardowa (4150/4680 mAh) | 150-250 zł | 200-350 zł |
+| Rozszerzona (6700/5400 mAh) | 250-350 zł | 300-400 zł |
+| Wymiana w serwisie (z diagnostyką) | +50 zł | +50 zł |
+
+> **Porada:** Bateria PowerPrecision+ ma wbudowany chip BLE — możesz sprawdzić liczbę cykli i stan zdrowia w aplikacji **Zebra PowerPrecision Console**. Jeśli Decommission Date jest bliski — czas na wymianę.
+
+[Bateria terminala Zebra — kompletna diagnostyka](/blog/bateria-terminal-zebra-szybko-sie-rozladowuje-diagnostyka)
+
+---
+
+### 3. Skaner kodów kreskowych nie działa
+
+Drugi najczęstszy problem po ekranie — ale w **80% przypadków** to konfiguracja DataWedge, nie awaria skanera.
+
+**Objawy:**
+- Naciśnięcie przycisku skanowania — brak wiązki
+- Wiązka się pojawia, ale kod nie jest odczytywany
+- Wolne skanowanie (>1 sekunda na odczyt)
+- Podwójne skanowanie (jeden kod odczytywany 2x)
+- Skaner odczytuje tylko niektóre typy kodów
+
+**Rozwiązanie krok po kroku:**
+
+**Krok 1 — Sprawdź DataWedge (80% problemów):**
+1. Otwórz **DataWedge** (szuflada aplikacji)
+2. Sprawdź czy profil jest **Enabled** (zielona kropka)
+3. Sprawdź **Barcode Input** → włączony
+4. Sprawdź **Keystroke Output** lub **Intent Output** → włączony
+5. W **Scanner Selection** sprawdź czy wybrany właściwy skaner
+
+**Krok 2 — Oczyść okno skanera:**
+- Użyj alkoholu IPA 99% i miękkiej ściereczki
+- Nie używaj ostrych przedmiotów — rysy na oknie = błędne odczyty
+
+**Krok 3 — Przetestuj w DataWedge Demo:**
+1. Otwórz DataWedge → Menu → **Demo mode**
+2. Zeskanuj dowolny kod — jeśli odczytuje, problem jest w konfiguracji aplikacji
+3. Jeśli nie odczytuje → spróbuj restart urządzenia
+
+**Krok 4 — Sprawdź symbologie:**
+- DataWedge → Profil → Barcode Input → **Decoders**
+- Upewnij się że potrzebne symbologie są włączone (EAN-13, Code128, QR Code, DataMatrix)
+- **Wyłącz niepotrzebne** symbologie — przyspieszy skanowanie
+
+**Kiedy do serwisu:**
+- Brak wiązki mimo prawidłowej konfiguracji → uszkodzony moduł skanera
+- Błędne odczyty mimo czystego okna → wymiana okna skanera / modułu SE4720 lub SE55
+
+**Cennik:**
+
+| Naprawa | Cena |
+|---------|------|
+| Konfiguracja DataWedge (zdalna) | 80-150 zł |
+| Wymiana okna skanera | 100-200 zł |
+| Wymiana modułu skanera SE4720 | 300-500 zł |
+| Wymiana modułu skanera SE55 | 400-600 zł |
+
+[DataWedge — konfiguracja skanera Zebra krok po kroku](/blog/datawedge-zebra-konfiguracja-skanera)
+[Skaner terminala Zebra nie działa — diagnostyka](/blog/skaner-terminala-zebra-nie-dziala-rozwiazania)
+
+---
+
+### 4. Terminal nie włącza się / czarny ekran
+
+**Objawy:**
+- Po naciśnięciu Power — brak reakcji
+- Ekran pozostaje czarny, ale LED ładowania świeci
+- Terminal wibruje, ale ekran nie włącza się
+- Urządzenie uruchamia się do logo Zebra i zawiesza
+
+**Rozwiązanie krok po kroku:**
+
+| Krok | Czynność | Czas |
+|------|----------|------|
+| 1 | Podłącz do ładowarki/stacji dokującej na 15 min | 15 min |
+| 2 | Sprawdź LED ładowania (żółte = OK) | — |
+| 3 | Wyjmij i włóż baterię ponownie | 1 min |
+| 4 | Twardy reset: **przytrzymaj Power 10 sekund** | 10 sek |
+| 5 | Spróbuj innej baterii (jeśli masz) | 1 min |
+| 6 | Spróbuj innej ładowarki/kabla | — |
+| 7 | Jeśli uruchamia się do logo → [Enterprise Reset](/blog/reset-fabryczny-terminal-zebra-instrukcja) | 5 min |
+
+**Jeśli nic nie pomaga:**
+- Brak LED ładowania → uszkodzony port USB-C lub płyta główna → **serwis**
+- Wibruje bez obrazu → uszkodzony wyświetlacz → **serwis**
+- Boot loop → uszkodzony system → Enterprise/Factory Reset, jeśli nie pomoże → **serwis**
+
+**Cennik:**
+
+| Naprawa | Cena |
+|---------|------|
+| Enterprise/Factory Reset | 80-120 zł |
+| Naprawa portu USB-C | 200-400 zł |
+| Naprawa płyty głównej | 500-900 zł (TC52) / 600-1100 zł (TC53) |
+| Wymiana wyświetlacza | 700-1200 zł |
+
+[Terminal Zebra nie włącza się — boot loop, fastboot, recovery](/blog/terminal-zebra-nie-wlacza-sie-fastboot-recovery)
+
+---
+
+### 5. Problemy z WiFi — zrywanie połączenia
+
+WiFi to krytyczna funkcja terminala w magazynie. Częste rozłączenia = stracony czas i frustracja operatorów.
+
+**Objawy:**
+- Połączenie zrywa się co kilka minut
+- Słaby sygnał mimo bliskości access pointa
+- Roaming między AP trwa długo (>1 sek.)
+- „Połączono, brak internetu"
+
+**Rozwiązanie:**
+
+**TC53 — konfiguracja Wi-Fi 6E:**
+1. Settings → Network & Internet → Wi-Fi → Advanced
+2. **Wyłącz pasmo 6 GHz** jeśli infrastruktura nie wspiera Wi-Fi 6E
+3. Ustaw preferowane pasmo na **5 GHz** (najlepszy balans zasięg/prędkość)
+4. Włącz **802.11r (Fast Transition)** — przyspiesza roaming między AP
+5. Wyłącz **oszczędzanie baterii dla WiFi** (Settings → Battery → Battery Saver → wyłącz)
+
+**TC52 — konfiguracja Wi-Fi 5:**
+1. Settings → Network & Internet → Wi-Fi → Advanced
+2. Ustaw pasmo na **5 GHz**
+3. Włącz **PMKID caching** — przyspiesza ponowne łączenie
+4. W Fusion (Zebra Wireless Config) sprawdź **Roaming Trigger** — ustaw na -70 dBm
+
+**Kiedy do serwisu:**
+- Antena WiFi fizycznie uszkodzona (upadek) → wymiana modułu → 300-500 zł
+- Problem z 1 urządzeniem przy działającej sieci → diagnostyka sprzętowa
+
+[Problemy WiFi/Bluetooth w terminalach Zebra — rozwiązania](/blog/terminal-zebra-problem-wifi-bluetooth-rozwiazania)
+
+---
+
+### 6. Boot loop / pętla restartu
+
+**Objawy:**
+- Terminal uruchamia się do logo Zebra i restartuje w kółko
+- Zawiesza się na ekranie startowym
+- Restartuje się losowo podczas pracy
+
+**Rozwiązanie:**
+
+| Metoda | Kiedy stosować | Dane |
+|--------|---------------|------|
+| Twardy reset (Power 10 sek.) | Jednorazowe zawieszenie | Zachowane |
+| **Enterprise Reset** | Boot loop po aktualizacji | Dane firmowe zachowane |
+| **Factory Reset** | Nic innego nie działa | Kasuje wszystko |
+
+**Enterprise Reset (zalecany):**
+1. Wyłącz terminal (wyjmij baterię jeśli trzeba)
+2. **Przytrzymaj Volume Up + Power** jednocześnie
+3. Puść Power gdy pojawi się logo Zebra, **trzymaj Volume Up**
+4. W menu Recovery wybierz **Enterprise Reset**
+5. Potwierdź i czekaj na restart (5-10 minut)
+
+**Losowe restarty podczas pracy:**
+- Sprawdź czy bateria dobrze trzyma (luźna bateria = reset)
+- Zaktualizuj firmware do najnowszej wersji LifeGuard
+- Sprawdź logi: **RxLogger** (Settings → System → RxLogger) — szukaj wzorca przed crashem
+
+[Reset fabryczny terminala Zebra — instrukcja krok po kroku](/blog/reset-fabryczny-terminal-zebra-instrukcja)
+
+---
+
+## TC52 End of Life — naprawiać czy wymieniać?
+
+TC52 osiągnął **End of Life w październiku 2024**. Wsparcie serwisowe Zebra trwa do **grudnia 2028**. Co to oznacza w praktyce?
+
+### Kalkulator opłacalności naprawy
+
+| Scenariusz | Naprawa TC52 | Nowy TC53 | Nowy TC501 |
+|------------|-------------|-----------|------------|
+| Wymiana baterii | **150-350 zł** | ~5500 zł | ~7000 zł |
+| Wymiana ekranu | **700-1000 zł** | ~5500 zł | ~7000 zł |
+| Naprawa płyty | **500-900 zł** | ~5500 zł | ~7000 zł |
+| Ekran + bateria + port | **1200-1700 zł** | ~5500 zł | ~7000 zł |
+
+**Zasada:** Naprawa opłaca się gdy koszt < **40% ceny nowego TC53** (ok. 2000-2200 zł).
+
+### Kiedy naprawiać TC52?
+- Usterka do 1000 zł (bateria, prosty ekran, port)
+- Masz zapas TC52 na części
+- Planujesz wymianę floty w ciągu 1-2 lat
+- Aplikacje nie wymagają Androida 14+
+
+### Kiedy wymienić na TC53/TC501?
+- Naprawa > 1500 zł (ekonomicznie nieuzasadniona)
+- Potrzebujesz WiFi 6E lub BT 5.2
+- Aplikacje wymagają Androida 14+
+- Planujesz flotę na 3+ lata
+- Potrzebujesz RFID (tylko TC501)
+
+> **Następca TC52:** [Zebra TC501 — nowa generacja z AI i RFID](/blog/zebra-tc501-specyfikacja-cena-gdzie-kupic)
+
+---
+
+## Cennik napraw TC52/TC53 — podsumowanie
+
+| Usługa | TC52 / TC52x | TC53 / TC53e | Gwarancja |
+|--------|-------------|-------------|-----------|
+| **Diagnostyka** | Bezpłatna | Bezpłatna | — |
+| Wymiana baterii | 150-350 zł | 200-400 zł | 6 mies. |
+| Czyszczenie + diagnostyka | 80-120 zł | 80-120 zł | 1 mies. |
+| **Wymiana ekranu** | 700-1000 zł | 800-1200 zł | 6 mies. |
+| Naprawa portu USB-C | 200-400 zł | 250-400 zł | 6 mies. |
+| Naprawa skanera | 300-500 zł | 400-600 zł | 6 mies. |
+| Wymiana przycisku Power | 150-300 zł | 150-300 zł | 6 mies. |
+| Enterprise/Factory Reset | 80-120 zł | 80-120 zł | — |
+| **Naprawa płyty głównej** | 500-900 zł | 600-1100 zł | 6 mies. |
+
+> Ceny netto. Bezpłatny odbiór kurierem w całej Polsce.
+
+---
+
+## Co naprawisz sam, a co wymaga serwisu?
+
+### Sam naprawisz (50% problemów):
+- Wymiana baterii (snap-in, bez narzędzi)
+- Konfiguracja DataWedge (skaner nie działa)
+- Czyszczenie okna skanera (IPA 99%)
+- Konfiguracja WiFi (pasmo, roaming)
+- Enterprise/Factory Reset
+- Wymiana folii ochronnej
+
+### Wymaga serwisu:
+- Wymiana ekranu (LCD + digitizer)
+- Naprawa/wymiana modułu skanera
+- Naprawa portu USB-C / złącza ładowania
+- Naprawa płyty głównej
+- Wymiana anteny WiFi/BT
+
+---
+
+## Profesjonalny serwis TC52/TC53
+
+Jako **Autoryzowany Serwis Zebra** (Premier Partner + Authorized Repair Specialist) oferujemy:
+
+- **Bezpłatna diagnostyka** — wycenimy zanim naprawimy
+- **Bezpłatny odbiór kurierem** z całej Polski (UPS/DPD)
+- **Naprawa 3-5 dni** roboczych (tryb express 24-48h za dopłatą)
+- **Gwarancja 6 miesięcy** na każdą naprawę
+- **Oryginalne części Zebra** — certyfikowane podzespoły
+- **Urządzenie zastępcze** — na czas naprawy (dla kontraktów)
+
+> **Masz większą flotę TC52/TC53?** Zapytaj o kontrakt serwisowy z priorytetowym czasem reakcji i urządzeniami zastępczymi.
+
+[**Zgłoś naprawę →**](/#formularz) | [Zadzwoń: +48 601 619 898](tel:+48601619898) | [Serwis terminali Zebra](/serwis-terminali-zebra)
+
+---
+
+## Powiązane poradniki
+
+- [TOP 10 awarii terminali Zebra — diagnostyka i rozwiązania](/blog/najczestsze-awarie-terminali-zebra-top10)
+- [Terminal Zebra nie włącza się — boot loop, fastboot](/blog/terminal-zebra-nie-wlacza-sie-fastboot-recovery)
+- [Skaner terminala nie działa — rozwiązania](/blog/skaner-terminala-zebra-nie-dziala-rozwiazania)
+- [Bateria terminala Zebra — diagnostyka i wymiana](/blog/bateria-terminal-zebra-szybko-sie-rozladowuje-diagnostyka)
+- [Ekran dotykowy terminala nie reaguje — diagnostyka](/blog/ekran-dotykowy-terminal-zebra-nie-reaguje-diagnostyka)
+- [DataWedge — konfiguracja skanera Zebra](/blog/datawedge-zebra-konfiguracja-skanera)
+- [Reset fabryczny terminala Zebra — instrukcja](/blog/reset-fabryczny-terminal-zebra-instrukcja)
+- [TC52 vs TC53 vs TC501 — porównanie](/blog/zebra-tc52-vs-tc53-vs-tc501-porownanie-terminali)
+- [Zebra TC501 — specyfikacja, cena](/blog/zebra-tc501-specyfikacja-cena-gdzie-kupic)
+
+[Serwis terminali Zebra — wszystkie usługi →](/serwis-terminali-zebra)
+
+*Ostatnia aktualizacja: luty 2026*
+`
+  },
+  {
+    slug: 'ekran-dotykowy-terminal-zebra-nie-reaguje-diagnostyka',
+    title: 'Ekran dotykowy terminala Zebra nie reaguje — diagnostyka i naprawa [2026]',
+    excerpt: 'Ekran terminala Zebra nie reaguje na dotyk? Kompletna diagnostyka: tryby dotyku, rękawiczki, ghost touch, pęknięcia, martwe piksele. Kiedy naprawisz sam, a kiedy do serwisu? Cennik wymiany ekranu.',
+    coverImage: '/blog/ekran-dotykowy-terminal-zebra-nie-reaguje-diagnostyka.jpeg',
+    coverImageAlt: 'Ekran dotykowy terminala Zebra z diagnostyką — tryby dotyku i naprawa',
+    author: {
+      name: 'Krzysztof Wójcik',
+      role: 'Kierownik Serwisu TAKMA'
+    },
+    publishedAt: '2026-02-15',
+    readingTime: 12,
+    deviceType: 'terminale',
+    category: 'troubleshooting',
+    tags: ['ekran dotykowy', 'touchscreen', 'glove mode', 'ghost touch', 'wymiana ekranu', 'digitizer', 'Gorilla Glass', 'TC52', 'TC53', 'TC22', 'MC3400', 'diagnostyka'],
+    seo: {
+      metaTitle: 'Ekran dotykowy terminala Zebra nie reaguje — diagnostyka i naprawa [2026]',
+      metaDescription: 'Ekran terminala Zebra nie reaguje? Tryby dotyku (palec/rękawiczka/stylus), ghost touch, pęknięcia, martwe piksele. Diagnostyka krok po kroku + cennik wymiany ekranu od 500 zł.',
+      keywords: [
+        // Główne frazy
+        'ekran terminala zebra nie reaguje',
+        'ekran dotykowy terminal zebra',
+        'terminal zebra ekran nie działa',
+        'touchscreen zebra nie działa',
+        'ekran zebra nie odpowiada',
+        // Tryby dotyku
+        'tryb rękawiczek zebra',
+        'glove mode zebra',
+        'zebra touch panel mode',
+        'ekran zebra rękawiczki',
+        'tryb dotyku terminal zebra',
+        'zebra finger and glove mode',
+        'mokry palec zebra',
+        'stylus zebra terminal',
+        // Uszkodzenia ekranu
+        'pęknięty ekran terminal zebra',
+        'wymiana ekranu terminal zebra',
+        'wymiana ekranu zebra tc52',
+        'wymiana ekranu zebra tc53',
+        'wymiana ekranu zebra tc22',
+        'wymiana digitizera zebra',
+        'ghost touch terminal zebra',
+        'martwe piksele terminal zebra',
+        'ekran zebra sam klika',
+        // Modele
+        'zebra tc52 ekran nie reaguje',
+        'zebra tc53 ekran nie reaguje',
+        'zebra tc22 ekran nie reaguje',
+        'zebra tc21 ekran nie reaguje',
+        'zebra mc3400 ekran nie reaguje',
+        'zebra tc72 ekran nie reaguje',
+        'zebra tc58 ekran nie reaguje',
+        // Koszty
+        'wymiana ekranu terminal zebra cena',
+        'ile kosztuje wymiana ekranu zebra',
+        'koszt wymiany ekranu tc52',
+        'koszt wymiany ekranu tc53',
+        'naprawa ekranu terminal zebra',
+        // Folia i ochrona
+        'folia ochronna terminal zebra',
+        'gorilla glass terminal zebra',
+        'ochrona ekranu zebra',
+        // Angielskie
+        'zebra terminal touchscreen not working',
+        'zebra tc52 screen not responding',
+        'zebra tc53 touch screen replacement',
+        'zebra glove mode settings'
+      ],
+      faqSchema: [
+        {
+          question: 'Dlaczego ekran terminala Zebra nie reaguje na dotyk?',
+          answer: 'Najczęstsze przyczyny: 1) Zły tryb dotyku — przełącz na Glove Mode jeśli nosisz rękawiczki, 2) Brudny ekran lub stara folia ochronna, 3) Uszkodzony digitizer po upadku (ghost touch, martwe strefy), 4) Zawieszenie systemu — wykonaj twardy reset (Power 10 sek.).'
+        },
+        {
+          question: 'Jak włączyć tryb rękawiczek w terminalu Zebra?',
+          answer: 'Settings → Display → Touch Panel Mode → wybierz "Finger and Glove" (TC22/TC53) lub "Glove and Finger" (MC3400). Obsługiwane rękawiczki: latex medyczny, skóra, bawełna, wełna. Ciężkie rękawiczki outdoorowe mogą nie być wykrywane.'
+        },
+        {
+          question: 'Ile kosztuje wymiana ekranu w terminalu Zebra?',
+          answer: 'Koszt wymiany ekranu (LCD + digitizer): TC21/TC22: 500-800 zł, TC52/TC53: 700-1200 zł, TC72/TC73: 800-1300 zł, MC3400: 400-700 zł. Ceny netto, z gwarancją 6 miesięcy. Diagnostyka bezpłatna.'
+        },
+        {
+          question: 'Co to jest ghost touch i jak go naprawić?',
+          answer: 'Ghost touch to samoczynne „klikanie" ekranu bez dotykania — zwykle po pęknięciu szkła lub zalaniu. Tymczasowe rozwiązanie: zdejmij folię, wyczyść ekran, restart. Trwałe rozwiązanie: wymiana digitizera w serwisie (500-1200 zł w zależności od modelu).'
+        },
+        {
+          question: 'Czy mogę sam wymienić ekran w terminalu Zebra?',
+          answer: 'Technicznie możliwe (części dostępne np. na Amazon), ale samodzielna wymiana anuluje gwarancję Zebra i wymaga specjalistycznych narzędzi. Zalecamy serwis autoryzowany — gwarancja 6 miesięcy na naprawę i pewność prawidłowego montażu.'
+        },
+        {
+          question: 'Jak czyścić ekran terminala Zebra?',
+          answer: 'Użyj miękkiej ściereczki z mikrofibry zwilżonej alkoholem izopropylowym (70%). Nie stosuj: acetonu, rozpuszczalników, materiałów ściernych. Częstotliwość: biuro — co tydzień, magazyn — codziennie, przemysł — po każdej zmianie.'
+        }
+      ]
+    },
+    content: `
+> **Szybka odpowiedź:** Ekran terminala Zebra nie reaguje? W **70% przypadków** to problem z konfiguracją, nie awaria sprzętu. Sprawdź **tryb dotyku** (Settings → Display → Touch Panel Mode) — jeśli nosisz rękawiczki, przełącz na **Glove Mode**. Zdejmij starą folię, wyczyść ekran, zrestartuj urządzenie. Jeśli ekran jest pęknięty lub ma ghost touch → serwis. Wymiana ekranu: od **500 zł** (TC21) do **1300 zł** (TC73).
+
+## TL;DR — Diagnostyka ekranu w pigułce
+
+| Problem | Przyczyna | Sam naprawisz? | Koszt serwisu |
+|---------|-----------|----------------|---------------|
+| Brak reakcji na dotyk | Tryb dotyku / zawieszenie | ✅ Tak | 0 zł |
+| Nie działa w rękawiczkach | Zły tryb panelu dotykowego | ✅ Tak | 0 zł |
+| Ekran reaguje z opóźnieniem | Brudny ekran / stara folia | ✅ Tak | 0 zł |
+| Ghost touch (sam klika) | Pęknięcie / zalanie | ❌ Serwis | 500-1200 zł |
+| Martwe strefy na ekranie | Uszkodzony digitizer | ❌ Serwis | 500-1200 zł |
+| Martwe piksele | Uszkodzony LCD | ❌ Serwis | 700-1300 zł |
+| Pęknięte szkło | Upadek / uderzenie | ❌ Serwis | 500-1300 zł |
+| Ekran czarny (ale działa) | Jasność / wyświetlacz | ✅/❌ | 0-1300 zł |
+| Brak obracania ekranu | Auto-rotate wyłączony | ✅ Tak | 0 zł |
+
+---
+
+## Krok 1: Tryb dotyku — najczęstsza przyczyna
+
+**70% zgłoszeń „ekran nie reaguje" to źle ustawiony tryb dotyku.** Każdy terminal Zebra ma kilka trybów panelu dotykowego — jeśli operatorzy noszą rękawiczki, a terminal jest w trybie „Finger Only", ekran nie zareaguje.
+
+### Tryby dotyku wg modelu
+
+**TC22 / TC27 / TC53 / TC58 / TC73 / TC78:**
+
+| Tryb | Kiedy używać |
+|------|-------------|
+| **Finger Only** (domyślny) | Praca bez rękawiczek |
+| **Finger and Glove** | Rękawiczki lekkie/średnie (latex, skóra, bawełna, wełna) |
+| **Wet Finger** | Mokre dłonie (kuchnia, deszcz) |
+| **Stylus and Finger** | Rysik + palec |
+
+Ścieżka: **Settings → Display → Touch Panel Mode**
+
+**MC3300x / MC3400 / MC3450:**
+
+| Tryb | Kiedy używać |
+|------|-------------|
+| **Stylus and Finger** (domyślny) | Praca bez rękawiczek |
+| **Glove and Finger (bez folii)** | Rękawiczki bez folii ochronnej |
+| **Glove and Finger (z folią)** | Rękawiczki z folią ochronną |
+
+Ścieżka: **Settings → Display → Advanced → TouchPanelUI**
+
+**TC21 / TC26:**
+
+| Tryb | Kiedy używać |
+|------|-------------|
+| **Finger** (domyślny) | Praca bez rękawiczek |
+| **Finger and Glove** | Rękawiczki lekkie/średnie |
+
+Ścieżka: **Settings → Display Settings → Touch Panel Mode**
+
+> **Ważne:** Ciężkie rękawiczki outdoorowe (narciarskie, robocze gumowe) **mogą nie być wykrywane** nawet w trybie Glove. W takich przypadkach rozważ rysik pojemnościowy lub ring scanner (RS5100/RS6100).
+
+---
+
+## Krok 2: Czyszczenie i folia ochronna
+
+Brudny ekran lub stara folia mogą drastycznie obniżyć czułość dotyku.
+
+### Jak czyścić ekran terminala Zebra
+
+| Krok | Czynność |
+|------|----------|
+| 1 | Wyłącz terminal lub zablokuj ekran |
+| 2 | Użyj miękkiej ściereczki z mikrofibry |
+| 3 | Zwilż alkoholem izopropylowym (IPA 70%) |
+| 4 | Delikatnie przetrzyj ekran w jednym kierunku |
+| 5 | Osusz przed użyciem |
+
+**Dozwolone środki czyszczące:**
+- Alkohol izopropylowy (do 70%)
+- Chusteczki dezynfekujące (bez wybielacza)
+- Łagodny roztwór mydła
+- Nadtlenek wodoru (do 3%)
+
+**Zabronione (niszczą powłokę ekranu):**
+- Aceton, toluen, benzen
+- Rozpuszczalniki i amoniak
+- Materiały ścierne (papier, szorstka ściereczka)
+- Sprężone powietrze bezpośrednio na ekran
+
+### Częstotliwość czyszczenia
+
+| Środowisko | Częstotliwość |
+|------------|---------------|
+| Biurowe | Co tydzień |
+| Magazynowe | Codziennie |
+| Przemysłowe / chłodnia | Po każdej zmianie |
+
+### Folia ochronna
+
+- **Stara folia** (>6 miesięcy) → może blokować dotyk, szczególnie na krawędziach
+- **Bąbelki pod folią** → powodują martwe strefy
+- **Folia hartowana 9H** → lepsza ochrona niż zwykła PET, nie wpływa na czułość
+- Koszt: **30-80 zł** za folię dopasowaną do modelu
+
+> **Porada:** Wymiana folii co 6 miesięcy kosztuje 30-80 zł. Wymiana ekranu po upadku bez folii: 500-1300 zł. Matematyka jest prosta.
+
+---
+
+## Krok 3: Restart i reset
+
+Jeśli ekran przestał reagować nagle (bez widocznych uszkodzeń):
+
+| Metoda | Jak wykonać | Kiedy stosować |
+|--------|-------------|----------------|
+| **Twardy reset** | Przytrzymaj **Power 10 sekund** | Jednorazowe zawieszenie |
+| **Soft reboot** | Power → Restart | Ekran reaguje, ale wolno |
+| **Enterprise Reset** | Volume Up + Power → Recovery → Enterprise Reset | Problem po aktualizacji |
+
+Po restarcie sprawdź:
+1. Czy tryb dotyku się nie zmienił (Settings → Display → Touch Panel Mode)
+2. Czy nie ma aktualizacji LifeGuard (Settings → System → System Update)
+3. Czy problem występuje w konkretnej aplikacji czy wszędzie
+
+**Test:** Otwórz **Settings → Display → Touch Panel Mode** i dotknij ekranu. Jeśli ustawienia się otwierają — digitizer działa, problem jest w aplikacji.
+
+---
+
+## Krok 4: Diagnostyka sprzętowa — kiedy do serwisu
+
+Jeśli kroki 1-3 nie pomogły, problem jest prawdopodobnie sprzętowy.
+
+### Pęknięty ekran / szkło
+
+**Objawy:** widoczne rysy, pęknięcia, odłamki szkła
+**Przyczyna:** upadek >1.5 m na twardy grunt, uderzenie w kant
+**Naprawa:** wymiana modułu ekranowego (LCD + digitizer) w serwisie
+
+Wszystkie terminale Zebra mają **Corning Gorilla Glass**, ale ma swoje limity:
+
+| Model | Odporność na upadki | Gorilla Glass |
+|-------|---------------------|---------------|
+| TC21/TC26 | 1.2 m (MIL-STD-810G) | Tak |
+| TC22/TC27 | 1.5 m (MIL-STD-810H) | Tak |
+| TC52/TC52x | 1.5 m (MIL-STD-810G) | Tak |
+| TC53/TC53e | 1.8 m (MIL-STD-810H) | Tak |
+| TC72/TC73 | 1.8 m (MIL-STD-810H) | Tak |
+| TC77/TC78 | 1.8 m (MIL-STD-810H) | Tak |
+| TC58/TC58e | 1.5 m (MIL-STD-810H) | Tak |
+| MC3300x | 1.8 m (MIL-STD-810G) | Tak |
+| MC3400 | 1.8 m (MIL-STD-810H) | Tak |
+
+> **Uwaga:** Norma MIL-STD dotyczy upadków na **sklejkę**. Na beton lub metal — odporność jest znacznie niższa.
+
+### Ghost touch (ekran sam klika)
+
+**Objawy:** kursor skacze, aplikacje otwierają się same, przypadkowe kliknięcia
+**Przyczyny:**
+- Mikropęknięcie digitizera (niewidoczne gołym okiem)
+- Zalanie / wilgoć pod ekranem
+- Uszkodzona folia flex łącząca digitizer z płytą
+
+**Tymczasowe rozwiązanie:**
+1. Zdejmij folię ochronną
+2. Wyczyść ekran IPA 70%
+3. Restart urządzenia
+4. Jeśli dalej → **serwis** (wymiana digitizera)
+
+### Martwe piksele
+
+**Objawy:** stale świecące lub ciemne punkty na wyświetlaczu
+**Polityka Zebra:** pojedyncze martwe piksele mogą **nie kwalifikować się** do wymiany gwarancyjnej (dopuszczalna norma produkcyjna)
+**Kiedy do serwisu:** klaster martwych pikseli, linie na ekranie, plamy kolorowe
+
+### Ekran czarny (terminal działa)
+
+**Objawy:** terminal wibruje, dźwięki działają, ale ekran czarny
+**Sprawdź:**
+1. Jasność — może być na minimum (Volume Up aby zwiększyć)
+2. Tryb oszczędzania baterii — może ściemniać ekran
+3. Podłącz do stacji dokującej — czy LED ładowania świeci?
+
+**Jeśli LED świeci, a ekran czarny** → uszkodzony wyświetlacz LCD lub taśma flex → **serwis**
+
+---
+
+## Cennik wymiany ekranu — wszystkie modele
+
+| Model | LCD + Digitizer | Sam digitizer | Gwarancja |
+|-------|----------------|---------------|-----------|
+| **TC21 / TC26** | 500-800 zł | 350-550 zł | 6 mies. |
+| **TC22 / TC27** | 600-900 zł | 400-650 zł | 6 mies. |
+| **TC52 / TC52x** | 700-1000 zł | 500-700 zł | 6 mies. |
+| **TC53 / TC53e** | 800-1200 zł | 600-900 zł | 6 mies. |
+| **TC58 / TC58e** | 800-1200 zł | 600-900 zł | 6 mies. |
+| **TC72 / TC73** | 800-1300 zł | 600-1000 zł | 6 mies. |
+| **TC77 / TC78** | 800-1300 zł | 600-1000 zł | 6 mies. |
+| **MC3300x** | 400-650 zł | 300-450 zł | 6 mies. |
+| **MC3400 / MC3450** | 400-700 zł | 300-500 zł | 6 mies. |
+
+> Ceny netto. **Diagnostyka bezpłatna.** Bezpłatny odbiór kurierem w całej Polsce.
+
+### Samodzielna wymiana vs serwis
+
+| | Samodzielnie | Serwis TAKMA |
+|---|---|---|
+| Koszt części | 300-800 zł (Amazon/AliExpress) | W cenie naprawy |
+| Narzędzia | Potrzebne (zestaw iFixit) | Zawarte |
+| Gwarancja Zebra | **Anulowana** | Zachowana |
+| Gwarancja na naprawę | Brak | **6 miesięcy** |
+| Ryzyko | Wysokie (uszkodzenie taśmy flex) | Minimalne |
+| Czas | 1-3 godziny + dostawa części | 3-5 dni roboczych |
+
+---
+
+## Zapobieganie — jak chronić ekran
+
+| Ochrona | Koszt | Skuteczność |
+|---------|-------|-------------|
+| **Folia hartowana 9H** | 30-80 zł | Chroni przed zarysowaniami, częściowo przed pęknięciami |
+| **Etui z bumperem** | 80-200 zł | Amortyzuje upadki, chroni narożniki |
+| **Smycz / uchwyt na rękę** | 20-50 zł | Zapobiega upadkom |
+| **Boot (etui gumowe)** | 100-250 zł | Najlepsza ochrona (narożniki + krawędzie) |
+
+> **Porada:** Inwestycja 150-300 zł w folię + etui oszczędza 500-1300 zł na wymianie ekranu. Przy flocie 50 terminali to różnica między 7 500 zł a 65 000 zł rocznie.
+
+---
+
+## Specyfikacja ekranów — porównanie modeli
+
+| Model | Przekątna | Rozdzielczość | Jasność | Tryby dotyku |
+|-------|-----------|---------------|---------|-------------|
+| TC21/TC26 | 5.0" | 1280×720 (HD) | 450 nit | Palec, Rękawiczka |
+| TC22/TC27 | 6.0" | 2160×1080 (FHD+) | 450 nit | Palec, Rękawiczka, Mokry |
+| TC52/TC52x | 5.0" | 1920×1080 (FHD) | 450 nit | Palec, Rękawiczka, Stylus |
+| TC53/TC53e | 6.0" | 2160×1080 (FHD+) | 600 nit | Palec, Rękawiczka, Mokry, Stylus |
+| TC58/TC58e | 6.0" | 2160×1080 (FHD+) | 600 nit | Palec, Rękawiczka, Mokry, Stylus |
+| TC72/TC73 | 6.0" | 2160×1080 (FHD+) | 600 nit | Palec, Rękawiczka, Mokry, Stylus |
+| TC77/TC78 | 6.0" | 2160×1080 (FHD+) | 600 nit | Palec, Rękawiczka, Mokry, Stylus |
+| MC3300x | 4.0" | 800×480 (WVGA) | 350 nit | Palec, Rękawiczka, Stylus |
+| MC3400 | 4.0" | 800×480 (WVGA) | 350/600 nit | Palec, Rękawiczka, Stylus |
+
+---
+
+## Profesjonalny serwis ekranów
+
+Jako **Autoryzowany Serwis Zebra** (Premier Partner + Authorized Repair Specialist):
+
+- **Bezpłatna diagnostyka** — sprawdzimy czy wymiana ekranu jest konieczna
+- **Bezpłatny odbiór kurierem** z całej Polski
+- **Naprawa 3-5 dni** roboczych (express 24-48h za dopłatą)
+- **Gwarancja 6 miesięcy** na wymianę ekranu
+- **Oryginalne części Zebra** — certyfikowane moduły ekranowe
+- **Kalibracja po wymianie** — test dotyku we wszystkich strefach
+
+[**Zgłoś naprawę →**](/#formularz) | [Zadzwoń: +48 601 619 898](tel:+48601619898) | [Serwis terminali Zebra](/serwis-terminali-zebra)
+
+---
+
+## Powiązane poradniki
+
+- [TOP 10 awarii terminali Zebra — diagnostyka i rozwiązania](/blog/najczestsze-awarie-terminali-zebra-top10)
+- [Serwis TC52/TC53 — diagnostyka i naprawa](/blog/serwis-terminala-zebra-tc52-tc53-diagnostyka-naprawa)
+- [Serwis MC3300/MC3400 — diagnostyka i naprawa](/blog/serwis-terminala-zebra-mc3300-mc3400-diagnostyka-naprawa)
+- [Terminal Zebra nie włącza się — boot loop, fastboot](/blog/terminal-zebra-nie-wlacza-sie-fastboot-recovery)
+- [Bateria terminala Zebra — diagnostyka i wymiana](/blog/bateria-terminal-zebra-szybko-sie-rozladowuje-diagnostyka)
+- [Reset fabryczny terminala Zebra — instrukcja](/blog/reset-fabryczny-terminal-zebra-instrukcja)
+
+[Serwis terminali Zebra — wszystkie usługi →](/serwis-terminali-zebra)
+
+*Ostatnia aktualizacja: luty 2026*
+`
+  },
+  {
+    slug: 'bateria-terminal-zebra-szybko-sie-rozladowuje-diagnostyka',
+    title: 'Bateria terminala Zebra szybko się rozładowuje — diagnostyka i wymiana [2026]',
+    excerpt: 'Bateria terminala Zebra nie trzyma? PowerPrecision+ diagnostyka, LED ładowania, Hot Swap vs Warm Swap, wymiana baterii krok po kroku. Cennik baterii do TC52, TC53, TC22, MC3400.',
+    coverImage: '/blog/bateria-terminal-zebra-szybko-sie-rozladowuje-diagnostyka.jpeg',
+    coverImageAlt: 'Bateria PowerPrecision+ terminala Zebra z diagnostyką LED — wymiana i serwis',
+    author: {
+      name: 'Krzysztof Wójcik',
+      role: 'Kierownik Serwisu TAKMA'
+    },
+    publishedAt: '2026-02-15',
+    readingTime: 14,
+    deviceType: 'terminale',
+    category: 'troubleshooting',
+    tags: ['bateria', 'PowerPrecision', 'PowerPrecision+', 'Hot Swap', 'Warm Swap', 'ładowanie', 'LED', 'TC52', 'TC53', 'TC22', 'MC3400', 'wymiana baterii', 'BLE Beacon'],
+    seo: {
+      metaTitle: 'Bateria terminala Zebra szybko się rozładowuje — diagnostyka i wymiana [2026]',
+      metaDescription: 'Bateria terminala Zebra nie trzyma? Diagnostyka LED, PowerPrecision+, Hot Swap vs Warm Swap. Cennik baterii od 150 zł. Wymiana krok po kroku. Bezpłatna diagnostyka.',
+      keywords: [
+        'bateria terminal zebra',
+        'bateria zebra szybko się rozładowuje',
+        'bateria terminala zebra nie trzyma',
+        'wymiana baterii terminal zebra',
+        'wymiana baterii zebra tc52',
+        'wymiana baterii zebra tc53',
+        'wymiana baterii zebra tc22',
+        'wymiana baterii zebra mc3400',
+        'bateria powerprecision zebra',
+        'powerprecision+ zebra',
+        'zebra powerprecision console',
+        'bateria tc52 cena',
+        'bateria tc53 cena',
+        'bateria tc22 cena',
+        'bateria mc3400 cena',
+        'hot swap zebra',
+        'warm swap zebra',
+        'terminal zebra nie ładuje się',
+        'zebra tc52 nie ładuje',
+        'zebra tc53 nie ładuje',
+        'zebra mc3400 nie ładuje',
+        'led ładowania zebra',
+        'led czerwony terminal zebra',
+        'led miga na czerwono zebra',
+        'żywotność baterii zebra',
+        'cykl ładowania zebra',
+        'ile wytrzymuje bateria zebra',
+        'bateria zebra ile godzin',
+        'stacja dokująca zebra ładowanie',
+        'ładowarka terminal zebra',
+        'bateria ble beacon zebra',
+        'BTRY-TC2L zebra',
+        'BTRY-MC3X zebra',
+        'zebra battery not charging',
+        'zebra powerprecision battery life',
+        'zebra tc52 battery replacement',
+        'zebra tc53 battery replacement',
+        'zebra mc3400 hot swap'
+      ],
+      faqSchema: [
+        {
+          question: 'Ile kosztuje bateria do terminala Zebra?',
+          answer: 'Cena baterii zależy od modelu: TC21/TC22 standardowa (3800 mAh): 120-200 zł, TC22 rozszerzona (5200 mAh): 200-300 zł, TC52/TC53 standardowa (4680 mAh): 200-350 zł, TC53 rozszerzona (7000 mAh): 300-450 zł, MC3400 (7000 mAh): 250-400 zł. Ceny netto.'
+        },
+        {
+          question: 'Jak sprawdzić stan baterii w terminalu Zebra?',
+          answer: 'Otwórz Settings → Battery lub aplikację Battery Manager / PowerPrecision Console. Sprawdź: Health (Good/Decommission), liczbę cykli ładowania, pojemność. Jeśli Health = Decommission lub cykli > 500 — czas na wymianę.'
+        },
+        {
+          question: 'Co oznacza czerwona dioda ładowania w terminalu Zebra?',
+          answer: 'Czerwona stała = bateria zużyta, wymień na nową. Czerwona migająca wolno (co 4 sek.) = bateria osiągnęła koniec żywotności. Czerwona migająca szybko (2x/sek.) = błąd ładowania, temperatura poza zakresem (sprawdź 0-40°C).'
+        },
+        {
+          question: 'Czym różni się Hot Swap od Warm Swap w terminalach Zebra?',
+          answer: 'Hot Swap (MC3400): superkondensator utrzymuje zasilanie — 30 sekund na wymianę baterii z zachowaniem WiFi, ~5 minut RAM. Warm Swap (TC22/TC53): po wyjęciu baterii masz 30-60 sekund na wymianę, WiFi może się rozłączyć. Hot Swap jest płynniejszy.'
+        },
+        {
+          question: 'Ile godzin wytrzymuje bateria terminala Zebra?',
+          answer: 'Na jednym ładowaniu: TC22 (3800 mAh): 8-10h, TC53 (4680 mAh): 10-14h, TC53 rozszerzona (7000 mAh): do 18h, MC3400 (7000 mAh): 10-14h. Zależy od jasności ekranu, WiFi, częstotliwości skanowania.'
+        },
+        {
+          question: 'Czy baterie z MC3300x pasują do MC3400?',
+          answer: 'Tak, baterie MC33/MC3300x (5200 mAh) są kompatybilne z MC3400, ale obniżają klasę ochrony z IP65/IP67 do IP65. Baterie MC3400 (7000 mAh) działają też w MC3300x. Zalecamy baterie dedykowane dla pełnej ochrony IP.'
+        }
+      ]
+    },
+    content: `
+> **Szybka odpowiedź:** Bateria terminala Zebra szybko się rozładowuje? Sprawdź **Battery Manager** (Settings → Battery) — jeśli Health = **Decommission** lub cykli > 500, czas na wymianę. LED ładowania **czerwony stały** = bateria zużyta. **Wymiana baterii to 2 minuty** bez narzędzi (snap-in). Koszt nowej baterii: od **120 zł** (TC22) do **450 zł** (TC53 rozszerzona). Diagnostyka w serwisie **bezpłatna**.
+
+## TL;DR — Diagnostyka baterii w pigułce
+
+| Problem | Przyczyna | Sam naprawisz? | Koszt |
+|---------|-----------|----------------|-------|
+| Trzyma <4 godziny | Zużyta bateria (>500 cykli) | ✅ Wymień sam | 120-450 zł |
+| LED czerwony stały | Koniec żywotności baterii | ✅ Wymień sam | 120-450 zł |
+| LED czerwony migający szybko | Temperatura poza zakresem | ✅ Poczekaj | 0 zł |
+| LED nie świeci wcale | Brudne styki / uszkodzony port | ✅/❌ | 0-400 zł |
+| Nagrzewa się przy ładowaniu | Normalne (do 45°C) lub zużyta | ✅ Sprawdź | 0-350 zł |
+| Wyłącza się przy 20-30% | Bateria fałszuje odczyty | ✅ Wymień | 120-450 zł |
+| Hot Swap nie działa | Superkondensator nienaładowany | ✅ Poczekaj | 0 zł |
+| Warm Swap za krótki | Normalne (~30 sek.) | — | — |
+
+---
+
+## Baterie PowerPrecision / PowerPrecision+ — co to jest?
+
+Wszystkie terminale Zebra używają inteligentnych baterii **PowerPrecision** (starsze modele) lub **PowerPrecision+** (nowsze). To nie zwykłe baterie — mają wbudowany chip, który monitoruje:
+
+- **Stan zdrowia** (Health: Good / Decommission)
+- **Liczbę cykli ładowania** (pełnych cykli 0-100%)
+- **Temperaturę** w czasie rzeczywistym
+- **Pojemność rzeczywistą** vs nominalna
+- **Datę produkcji** i numer seryjny
+- **Szacowany czas pracy** na aktualnym naładowaniu
+
+Baterie z **BLE Beacon** dodatkowo umożliwiają lokalizację terminala przez Zebra Device Tracker.
+
+### Specyfikacja baterii wg modelu
+
+| Model | Bateria std. | Bateria rozszerzona | Nr części (std.) |
+|-------|-------------|--------------------|--------------------|
+| **TC21/TC26** | 3100 mAh | — | BTRY-TC2X-PRST-01 |
+| **TC22/TC27** | 3800 mAh | 5200 mAh | BTRY-TC2L-2XMAXX-01 |
+| **TC52/TC52x** | 4150 mAh | 6700 mAh | BTRY-TC5X-PRST-01 |
+| **TC53/TC53e** | 4680 mAh | 7000 mAh | PowerPrecision+ |
+| **TC58/TC58e** | 4680 mAh | 7000 mAh | PowerPrecision+ |
+| **TC72/TC73** | 4680 mAh | 7000 mAh | PowerPrecision+ |
+| **MC3300x** | 5200 mAh | — | BTRY-MC33-52MA-01 |
+| **MC3400** | 7000 mAh | — | BTRY-MC3X-70MA-01 |
+
+---
+
+## Diagnostyka LED ładowania
+
+### TC22 / TC27
+
+| LED | Znaczenie | Co robić? |
+|-----|-----------|-----------|
+| 🟠 Bursztynowy stały | Ładowanie w toku | Czekaj |
+| 🟢 Zielony stały | Naładowana 100% | Gotowe |
+| 🔴 Czerwony wolno migający (co 4s) | **Bateria do wymiany** | Zamów nową |
+| 🔴 Czerwony stały | Bateria zużyta | Wymień natychmiast |
+| 🔴🟠 Czerwony/Bursztynowy naprzemiennie | Temperatura poza zakresem (5-40°C) | Przenieś do pokojowej temp. |
+| 🟠 Bursztynowy szybko migający (2x/s) | Błąd ładowania | Sprawdź styki, inną ładowarkę |
+| ⚫ Brak LED | Nie ładuje | Sprawdź zasilacz i położenie w stacji |
+
+### TC53 / TC53e / TC58
+
+| LED | Znaczenie | Co robić? |
+|-----|-----------|-----------|
+| 🟠 Bursztynowy migający (1x/4s) | Ładowanie w toku | Czekaj |
+| 🟢 Zielony stały | Naładowana 100% | Gotowe |
+| 🔴 Czerwony migający (1x/4s) | Ładowanie + **bateria zużyta** | Wymień po naładowaniu |
+| 🔴 Czerwony stały | Naładowana + **bateria zużyta** | Zamów nową |
+| 🟠 Bursztynowy szybko migający (2x/s) | Błąd (temperatura/timeout) | Sprawdź temp. 0-50°C |
+| ⚫ Brak LED | Nie ładuje | Sprawdź zasilacz, styki |
+
+### MC3400 / MC3450
+
+| LED | Znaczenie | Co robić? |
+|-----|-----------|-----------|
+| 🟠 Bursztynowy stały | Ładowanie w toku | Czekaj |
+| 🟠 Bursztynowy migający | **Hot Swap aktywny** — sesja WiFi | Wymień baterię teraz! |
+| 🟢 Zielony stały | Naładowana 100% | Gotowe |
+| 🔴 Czerwony stały | Błąd ładowania | Sprawdź baterię/stację |
+| 🔴 Czerwony szybko migający (2x/s) | Temperatura poza zakresem (0-40°C) | Przenieś do pokojowej temp. |
+
+---
+
+## Hot Swap vs Warm Swap — różnice
+
+| Cecha | Hot Swap (MC3400) | Warm Swap (TC22/TC53) |
+|-------|-------------------|----------------------|
+| **Mechanizm** | Superkondensator | Wewnętrzna bateria podtrzymania |
+| **Czas na wymianę (WiFi)** | 30 sekund | 30-60 sekund |
+| **Czas na wymianę (RAM)** | ~5 minut | ~60 sekund |
+| **WiFi się rozłącza?** | Nie (jeśli < 30 sek.) | Może się rozłączyć |
+| **Sesja aplikacji** | Zachowana | Może wymagać ponownego logowania |
+| **LED podczas wymiany** | Bursztynowy migający | Brak (terminal wyłączony) |
+| **Wymagane warunki** | Superkondensator naładowany | Bateria musi mieć > 10% |
+
+### Procedura Hot Swap (MC3400):
+1. Upewnij się, że terminal jest włączony i naładowany (>20%)
+2. Naciśnij **oba przyciski zwalniające** jednocześnie
+3. Wyjmij baterię — LED zacznie **migać bursztynowo**
+4. Włóż nową baterię w ciągu **30 sekund**
+5. Dociśnij do zatrzaśnięcia
+6. WiFi reconnect automatycznie
+
+### Procedura Warm Swap (TC22/TC53):
+1. Upewnij się, że bateria ma > 10%
+2. Naciśnij oba zatrzaski zwalniające
+3. Wyjmij baterię
+4. Włóż nową baterię w ciągu **30 sekund** (najszybciej jak się da)
+5. Terminal może się zrestartować — WiFi wymaga ponownego połączenia
+
+> **Porada:** Przy Warm Swap trzymaj nową baterię w gotowości **przed** wyjęciem starej. Im szybciej wymienisz, tym mniejsza szansa na restart.
+
+---
+
+## Najczęstsze problemy z baterią
+
+### 1. Bateria trzyma mniej niż 4 godziny
+
+**Diagnostyka krok po kroku:**
+
+| Krok | Czynność | Gdzie |
+|------|----------|-------|
+| 1 | Sprawdź Health baterii | Settings → Battery → Battery Manager |
+| 2 | Sprawdź liczbę cykli | Battery Manager → Cycles |
+| 3 | Sprawdź zużycie baterii | Settings → Battery (lista aplikacji) |
+| 4 | Zmniejsz jasność ekranu | Settings → Display → Brightness |
+| 5 | Wyłącz zbędne radio | WiFi 6 GHz, Bluetooth, NFC |
+| 6 | Włącz Battery Saver | Settings → Battery → Battery Saver |
+| 7 | Zamknij aplikacje w tle | Przycisk kwadrat → przesuń w górę |
+
+**Kiedy wymienić baterię:**
+- Health = **Decommission** → wymień natychmiast
+- Cykli > **500** → planuj wymianę
+- Pojemność < **80%** nominału → wymień
+- Terminal wyłącza się przy 20-30% → bateria fałszuje odczyty → wymień
+
+### 2. Terminal nie ładuje się
+
+**Sprawdź kolejno:**
+1. **Styki pogo pins** w stacji dokującej — czyste? (wyczyść IPA 70%)
+2. **Zasilacz** podłączony? (sprawdź kontrolkę na zasilaczu)
+3. **Bateria prawidłowo włożona?** (wyjmij i włóż ponownie)
+4. **Inna stacja/kabel** — przetestuj na innym urządzeniu
+5. **Temperatura** — ładowanie działa tylko w zakresie 0-50°C (TC53) / 5-40°C (TC22) / 0-40°C (MC3400)
+
+**Jeśli LED nie świeci na żadnej stacji** → uszkodzony port ładowania → **serwis** (200-400 zł)
+
+### 3. Bateria nagrzewa się
+
+- **Do 45°C podczas ładowania** — normalne, nie przejmuj się
+- **Powyżej 45°C** — ładowanie automatycznie się zatrzymuje
+- **Powyżej 58°C** — terminal się wyłączy (zabezpieczenie)
+- **Nagrzewa się podczas pracy** — sprawdź aplikacje w tle (Settings → Battery)
+
+> **Uwaga:** Nie ładuj terminali na słońcu, przy kaloryferze ani w zamkniętym samochodzie latem. Temperatura powyżej 50°C trwale uszkadza baterię.
+
+---
+
+## Cennik baterii — wszystkie modele
+
+| Model | Bateria | Pojemność | Cena |
+|-------|---------|-----------|------|
+| **TC21/TC26** | Standardowa | 3100 mAh | 100-180 zł |
+| **TC22/TC27** | Standardowa | 3800 mAh | 120-200 zł |
+| **TC22/TC27** | Rozszerzona | 5200 mAh | 200-300 zł |
+| **TC52/TC52x** | Standardowa | 4150 mAh | 150-250 zł |
+| **TC52/TC52x** | Rozszerzona | 6700 mAh | 250-350 zł |
+| **TC53/TC53e** | Standardowa | 4680 mAh | 200-350 zł |
+| **TC53/TC53e** | Rozszerzona | 7000 mAh | 300-450 zł |
+| **TC58/TC58e** | Standardowa | 4680 mAh | 200-350 zł |
+| **TC72/TC73** | Standardowa | 4680 mAh | 200-350 zł |
+| **MC3300x** | Standardowa | 5200 mAh | 180-280 zł |
+| **MC3400** | Rozszerzona | 7000 mAh | 250-400 zł |
+| **MC3400** | BLE Beacon | 7000 mAh | 300-450 zł |
+
+> Ceny netto. Baterie oryginalne Zebra PowerPrecision/PowerPrecision+.
+
+---
+
+## Czas ładowania wg modelu
+
+| Model | Bateria | Do 80% | Do 100% |
+|-------|---------|--------|---------|
+| TC22/TC27 | 3800 mAh | ~80 min | ~2h |
+| TC22/TC27 | 5200 mAh | ~110 min | ~2.5h |
+| TC53/TC53e | 4680 mAh | ~90 min | ~2h |
+| TC53/TC53e | 7000 mAh | ~2h | ~3h |
+| MC3400 | 7000 mAh | ~3h | ~4.5h |
+
+> **Porada:** Ładuj do 80-90% zamiast do 100% — wydłuża żywotność baterii o 30-50%. Możesz ustawić limit w Battery Manager.
+
+---
+
+## Jak wydłużyć żywotność baterii
+
+| Porada | Efekt |
+|--------|-------|
+| Zmniejsz jasność ekranu do 40-60% | +15-25% czasu pracy |
+| Wyłącz WiFi 6 GHz (TC53) — używaj 5 GHz | +10-15% |
+| Wyłącz Bluetooth gdy nie używasz skanera ring | +5-10% |
+| Wyłącz NFC gdy nie parujesz urządzeń | +3-5% |
+| Włącz Battery Saver poniżej 20% | +30 min |
+| Skróć timeout ekranu do 15-30 sek. | +10-20% |
+| Zamykaj aplikacje w tle | +5-15% |
+| Nie ładuj w temperaturach > 40°C | Dłuższa żywotność baterii |
+| Ładuj do 80-90% zamiast 100% | +30-50% cykli życia |
+
+---
+
+## Wymiana baterii — krok po kroku
+
+Wymiana baterii w terminalach Zebra to **2 minuty bez narzędzi**:
+
+### TC22/TC27/TC53/TC58:
+1. Odłóż terminal ekranem do dołu na miękką powierzchnię
+2. **Naciśnij oba zatrzaski** zwalniające jednocześnie (po bokach z tyłu)
+3. Unieś baterię i wyjmij z komory
+4. Włóż nową baterię — wyrównaj styki, dolna część pierwsza
+5. Dociśnij do góry aż zatrzaski **klikną**
+6. Włącz terminal (przytrzymaj Power)
+
+### MC3400 (Gun):
+1. **Poluzuj pasek na rękę**
+2. Naciśnij **dwa przyciski zwalniające** po bokach
+3. Bateria wysunie się lekko — wyjmij ją
+4. Włóż nową baterię, wyrównując kontakty
+5. Dociśnij mocno — przyciski muszą wrócić do pozycji
+6. Dokręć pasek na rękę
+7. Włącz terminal (przytrzymaj Power)
+
+---
+
+## Profesjonalny serwis baterii
+
+Jako **Autoryzowany Serwis Zebra** oferujemy:
+
+- **Bezpłatna diagnostyka** baterii (sprawdzenie cykli, pojemności, stanu)
+- **Oryginalne baterie Zebra** PowerPrecision/PowerPrecision+ w magazynie
+- **Ładowarki baterii zapasowych** (4-slot, 20-slot) — sprzedaż i konfiguracja
+- **Kontrakty serwisowe** z wymianą baterii w cenie
+- **Doradztwo** — dobór baterii (standardowa vs rozszerzona vs BLE Beacon)
+
+> **Masz flotę 20+ terminali?** Zapytaj o pakiet baterii z rabatem flotowym i ładowarkę 20-slot.
+
+[**Zgłoś naprawę →**](/#formularz) | [Zadzwoń: +48 601 619 898](tel:+48601619898) | [Serwis terminali Zebra](/serwis-terminali-zebra)
+
+---
+
+## Powiązane poradniki
+
+- [TOP 10 awarii terminali Zebra — diagnostyka i rozwiązania](/blog/najczestsze-awarie-terminali-zebra-top10)
+- [Serwis TC52/TC53 — diagnostyka i naprawa](/blog/serwis-terminala-zebra-tc52-tc53-diagnostyka-naprawa)
+- [Ekran dotykowy terminala nie reaguje — diagnostyka](/blog/ekran-dotykowy-terminal-zebra-nie-reaguje-diagnostyka)
+- [Terminal Zebra nie włącza się — boot loop, fastboot](/blog/terminal-zebra-nie-wlacza-sie-fastboot-recovery)
+- [Hot Swap baterii nie działa — MC3400, TC53](/blog/hot-swap-bateria-zebra-mc3400-tc53-nie-dziala)
+- [PowerPrecision+ — zarządzanie bateriami Zebra](/blog/powerprecision-zarzadzanie-bateriami-zebra-poradnik)
+
+[Serwis terminali Zebra — wszystkie usługi →](/serwis-terminali-zebra)
+
+*Ostatnia aktualizacja: luty 2026*
+`
+  },
+  {
+    slug: 'klawiatura-terminal-zebra-mc3300-mc3400-problemy-naprawa',
+    title: 'Klawiatura terminala Zebra MC3300/MC3400 nie działa — diagnostyka i naprawa [2026]',
+    excerpt: 'Klawiatura MC3300 lub MC3400 nie reaguje? Diagnostyka trybów Orange/Blue, remapping klawiszy, 29/38/47 klawiszy — różnice. Cennik wymiany klawiatury od 300 zł.',
+    coverImage: '/blog/klawiatura-terminal-zebra-mc3300-mc3400-problemy-naprawa.jpeg',
+    coverImageAlt: 'Klawiatura terminala Zebra MC3400 z podświetleniem — diagnostyka trybów Orange i Blue',
+    author: {
+      name: 'Krzysztof Wójcik',
+      role: 'Kierownik Serwisu TAKMA'
+    },
+    publishedAt: '2026-02-15',
+    readingTime: 10,
+    deviceType: 'terminale',
+    category: 'troubleshooting',
+    tags: ['MC3300', 'MC3300x', 'MC3400', 'MC3450', 'klawiatura', 'keyboard', 'Orange key', 'Blue key', 'Key Programmer', '29-key', '38-key', '47-key', 'wymiana klawiatury'],
+    seo: {
+      metaTitle: 'Klawiatura terminala Zebra MC3300/MC3400 nie działa — diagnostyka i naprawa [2026]',
+      metaDescription: 'Klawiatura MC3300 lub MC3400 nie działa? Tryby Orange/Blue, remapping klawiszy, 3 typy klawiatur (29/38/47). Diagnostyka krok po kroku + cennik wymiany od 300 zł.',
+      keywords: [
+        'klawiatura mc3300 nie działa',
+        'klawiatura mc3400 nie działa',
+        'zebra mc3400 klawiatura',
+        'zebra mc3300 klawiatura',
+        'wymiana klawiatury mc3300',
+        'wymiana klawiatury mc3400',
+        'klawiatura mc3300x',
+        'klawiatura mc3450',
+        'mc3400 klawisze nie działają',
+        'mc3300 klawisze nie reagują',
+        'mc3400 orange key',
+        'mc3400 blue key',
+        'mc3400 key programmer',
+        'mc3400 key mapping',
+        'mc3400 remapping klawiszy',
+        'mc3400 29 klawiszy',
+        'mc3400 38 klawiszy',
+        'mc3400 47 klawiszy',
+        'mc3400 klawiatura alfanumeryczna',
+        'mc3400 klawiatura numeryczna',
+        'mc3300 vs mc3400 klawiatura',
+        'terminal z klawiaturą fizyczną zebra',
+        'klawiatura terminal magazynowy zebra',
+        'zebra enterprise keyboard',
+        'zebra mc3400 keyboard not working',
+        'zebra mc3300 keyboard replacement',
+        'zebra mc3400 key remapping'
+      ],
+      faqSchema: [
+        {
+          question: 'Dlaczego klawiatura MC3400 wpisuje złe znaki?',
+          answer: 'Najprawdopodobniej aktywny jest tryb Orange (alfa) lub Blue (funkcyjny). Sprawdź pasek stanu — jeśli widzisz ikonę Orange/Blue, naciśnij ten klawisz ponownie aby wyłączyć tryb. Jeśli problem trwa, zresetuj Key Programmer do ustawień domyślnych.'
+        },
+        {
+          question: 'Jakie klawiatury są dostępne do MC3400?',
+          answer: 'MC3400 oferuje 3 typy klawiatur: 29-klawiszowa (numeryczna, podstawowe dane), 38-klawiszowa (rozszerzona numeryczna z F1-F6), 47-klawiszowa (pełna alfanumeryczna A-Z). Klawisze MC3400 są 12% większe niż w MC3300x.'
+        },
+        {
+          question: 'Ile kosztuje wymiana klawiatury w MC3300/MC3400?',
+          answer: 'Wymiana klawiatury MC3300x: 300-450 zł netto, MC3400: 350-500 zł netto. Cena zawiera części i robociznę. Diagnostyka bezpłatna, gwarancja 6 miesięcy na naprawę.'
+        },
+        {
+          question: 'Jak przeprogramować klawisze w MC3400?',
+          answer: 'Settings → System → Key Mapping (lub Key Programmer). Programowalne: GRIP_TRIGGER, SCAN, P1, DIAMOND, LEFT/RIGHT_TRIGGER_1, 0-9, A-Z, F1-F10, ENTER, ESC. Nie programowalne: POWER, BACK, HOME, RECENT.'
+        },
+        {
+          question: 'Czy klawiatury MC3300x pasują do MC3400?',
+          answer: 'Nie, klawiatury MC3300x i MC3400 nie są wymienne. MC3400 ma klawisze 12% większe z większą przestrzenią między nimi. Obudowa i złącze są inne. Potrzebujesz klawiatury dedykowanej do swojego modelu.'
+        }
+      ]
+    },
+    content: `
+> **Szybka odpowiedź:** Klawiatura MC3300/MC3400 wpisuje złe znaki? W **90% przypadków** to aktywny tryb **Orange** (alfa) lub **Blue** (funkcyjny) — sprawdź ikonę w pasku stanu i naciśnij klawisz Orange/Blue aby wyłączyć. Klawisze nie reagują? Spróbuj **restart** (Power 10 sek.) i reset Key Programmer. Fizyczne uszkodzenie → wymiana klawiatury od **300 zł**. **Diagnostyka bezpłatna.**
+
+## TL;DR — Diagnostyka klawiatury w pigułce
+
+| Problem | Przyczyna | Sam naprawisz? | Koszt serwisu |
+|---------|-----------|----------------|---------------|
+| Wpisuje złe znaki | Tryb Orange/Blue aktywny | ✅ Tak | 0 zł |
+| Klawisze nie reagują | Zawieszenie / zużycie | ✅/❌ | 0-500 zł |
+| Pojedynczy klawisz nie działa | Mechaniczne uszkodzenie | ❌ Serwis | 300-500 zł |
+| Podświetlenie nie działa | Ustawienia / awaria | ✅/❌ | 0-300 zł |
+| Klawisze „się kleją" | Brud / zalanie | ✅/❌ | 0-400 zł |
+| Trigger skanera nie działa | Key mapping / mechaniczne | ✅/❌ | 0-350 zł |
+
+---
+
+## 3 typy klawiatur MC3300/MC3400
+
+MC3300x i MC3400 to jedyne terminale Zebra z **fizyczną klawiaturą** — dlatego są tak popularne w magazynach, produkcji i logistyce. Dostępne są 3 warianty:
+
+### Porównanie klawiatur
+
+| Cecha | 29 klawiszy | 38 klawiszy | 47 klawiszy |
+|-------|-------------|-------------|-------------|
+| **Typ** | Numeryczna | Rozszerzona numeryczna | Alfanumeryczna |
+| **Litery** | Przez tryb Orange | Przez tryb Orange | Osobne klawisze A-Z |
+| **Klawisze F** | Przez tryb Blue | F1-F6 fizyczne | F1-F12 przez Blue |
+| **Zastosowanie** | Skanowanie, cyfry | Cyfry + funkcje | Intensywny tekst |
+| **Idealna dla** | Magazyn WMS | Produkcja ERP | Inwentaryzacja, notatki |
+
+### Jak działają tryby Orange i Blue?
+
+Klawiatura numeryczna (29/38 klawiszy) ma ograniczoną liczbę fizycznych klawiszy. Aby wprowadzać litery i funkcje specjalne, używa się **trybów modyfikujących**:
+
+**Tryb Orange (pomarańczowy)** — aktywuje litery i nawigację:
+- Naciśnij **Orange** → ikona pojawi się w pasku stanu
+- Teraz klawisze numeryczne wpisują litery (np. 2 = A, B, C)
+- Naciśnij **Orange** ponownie aby wyłączyć
+
+**Tryb Blue (niebieski)** — aktywuje funkcje specjalne:
+- Naciśnij **Blue** → ikona pojawi się w pasku stanu
+- Teraz klawisze numeryczne wywołują funkcje (F1-F10)
+- Naciśnij **Blue** ponownie aby wyłączyć
+
+**Tryb SHIFT** — wielkie litery:
+- Jedno naciśnięcie = jedna wielka litera
+- Podwójne naciśnięcie = **Shift Lock** (wszystkie wielkie)
+
+> **To jest przyczyna nr 1 problemów z klawiaturą!** Operator przypadkowo nacisnął Orange/Blue i nie wie jak wyłączyć — klawiatura „wpisuje złe znaki".
+
+---
+
+## Najczęstsze problemy z klawiaturą
+
+### 1. Klawiatura wpisuje nieprawidłowe znaki
+
+**Najczęstszy problem** — w 90% przypadków to aktywny tryb Orange lub Blue.
+
+**Rozwiązanie:**
+1. Sprawdź **pasek stanu** u góry ekranu — czy widoczna jest ikona Orange (pomarańczowy klucz) lub Blue (niebieski klucz)?
+2. **Tak** → naciśnij klawisz Orange lub Blue aby wyłączyć tryb
+3. **Nie** → zresetuj Key Programmer:
+   - Settings → System → **Key Mapping** (MC3400) lub **Key Programmer** (MC3300x)
+   - Przywróć ustawienia domyślne (Reset to defaults)
+4. Jeśli dalej problem → **restart urządzenia** (Power 10 sek.)
+
+### 2. Klawisze nie reagują wcale
+
+**Rozwiązanie krok po kroku:**
+
+| Krok | Czynność |
+|------|----------|
+| 1 | **Twardy reset** — przytrzymaj Power 10 sekund |
+| 2 | Sprawdź czy ekran dotykowy działa (jeśli nie — problem ogólny, nie klawiatury) |
+| 3 | Sprawdź jeden klawisz na raz — czy **żaden** nie działa czy tylko niektóre? |
+| 4 | Otwórz **Settings → System → Key Programmer** → przetestuj każdy klawisz |
+| 5 | Wykonaj **Enterprise Reset** (Volume Up + Power → Recovery) |
+
+**Jeśli żaden klawisz nie działa po resecie** → uszkodzona taśma flex klawiatury → **serwis**
+**Jeśli jeden/kilka klawiszy nie działa** → mechaniczne zużycie kontaktu → **serwis**
+
+### 3. Klawisze się „kleją" / wymagają mocnego nacisku
+
+**Przyczyny:**
+- Brud, kurz, okruchy pod klawiszami (środowisko magazynowe)
+- Rozlany płyn (woda, kawa, środki czyszczące)
+- Zużycie mechaniczne po 2-3 latach intensywnej pracy
+
+**Co możesz zrobić:**
+1. **Wyłącz terminal** i wyjmij baterię
+2. Odwróć urządzenie i **delikatnie potrząśnij** — usunie okruchy
+3. Użyj **sprężonego powietrza** (krótkie impulsy) między klawiszami
+4. Przetryj klawisze **ściereczką z IPA 70%**
+5. **Nie** demontuj klawiszy samodzielnie — łatwo uszkodzić mechanizm
+
+**Jeśli klawisze dalej się kleją po czyszczeniu** → wymiana klawiatury w serwisie
+
+### 4. Trigger skanera nie działa
+
+**Przyczyny:**
+- Przeprogramowany trigger (Key Programmer)
+- Mechaniczne uszkodzenie triggera (Gun model)
+- Problem z DataWedge (nie klawiatury)
+
+**Rozwiązanie:**
+1. Sprawdź **Key Programmer** — czy SCAN / GRIP_TRIGGER nie został przeprogramowany
+2. Sprawdź **DataWedge** — czy profil jest aktywny
+3. Przetestuj skanowanie z **ekranowego przycisku** — jeśli działa, problem jest z fizycznym triggerem
+4. Sprawdź trigger na **obu stronach** (MC3400 Gun ma Left i Right trigger)
+
+**Jeśli trigger mechanicznie nie klika** → wymiana modułu triggera → **serwis** (200-350 zł)
+
+### 5. Podświetlenie klawiatury nie działa
+
+**Rozwiązanie:**
+1. Settings → Display → **Keyboard Backlight** → włącz
+2. Sprawdź **timeout podświetlenia** — może się wyłączać po kilku sekundach
+3. Sprawdź **Battery Saver** — może wyłączać podświetlenie
+4. Jeśli wszystko OK a podświetlenie nie działa → uszkodzona dioda LED → **serwis**
+
+---
+
+## Key Programmer — remapping klawiszy
+
+MC3300x i MC3400 pozwalają na przeprogramowanie większości klawiszy:
+
+### Klawisze programowalne (MC3400):
+
+| Klawisz | Domyślna funkcja | Można zmienić? |
+|---------|-------------------|----------------|
+| GRIP_TRIGGER | Skanowanie | ✅ Tak |
+| SCAN (żółty) | Skanowanie | ✅ Tak |
+| P1 | Wstecz (Back) | ✅ Tak |
+| DIAMOND (◊) | Siatka symboli | ✅ Tak |
+| LEFT/RIGHT_TRIGGER | Skanowanie | ✅ Tak |
+| 0-9 | Cyfry | ✅ Tak |
+| A-Z (47-key) | Litery | ✅ Tak |
+| F1-F10 | Funkcje | ✅ Tak |
+| ENTER | Zatwierdzenie | ✅ Tak |
+| ESC | Escape | ✅ Tak |
+| **POWER** | Włącz/wyłącz | ❌ Nie |
+| **BACK** (wirtualny) | Cofnij | ❌ Nie |
+| **HOME** (wirtualny) | Ekran główny | ❌ Nie |
+
+### Jak przeprogramować klawisz:
+
+**MC3400:**
+1. Settings → System → **Key Mapping**
+2. Wybierz klawisz do zmiany
+3. Przypisz nową funkcję
+4. Zapisz
+
+**MC3300x:**
+1. Settings → **Key Programmer**
+2. Wybierz klawisz
+3. Wybierz funkcję z zakładek: **Shortcut**, **Keys and Buttons**, **Trigger**
+4. Potwierdź przyciskiem Home
+
+> **Porada:** Nie przeprogramowuj przycisku SCAN — może to powodować konflikty z DataWedge.
+
+---
+
+## MC3300x vs MC3400 — różnice w klawiaturze
+
+| Cecha | MC3300x | MC3400 |
+|-------|---------|--------|
+| Rozmiar klawiszy | Standardowy | **12% większe** |
+| Przestrzeń między klawiszami | Mniejsza | **Większa** |
+| Typy klawiatur | 29 / 38 / 47 | 29 / 38 / 47 |
+| Key Programmer | Settings → Key Programmer | Settings → System → Key Mapping |
+| Enterprise Keyboard | Tak (wymaga licencji) | Tak (wymaga licencji) |
+| Kompatybilność klawiatur | Tylko MC3300x | Tylko MC3400 |
+| Podświetlenie | Tak | Tak |
+
+> **Ważne:** Klawiatury MC3300x i MC3400 **nie są wymienne** — różna obudowa i złącze.
+
+---
+
+## Cennik napraw klawiatury
+
+| Usługa | MC3300x | MC3400 | Gwarancja |
+|--------|---------|--------|-----------|
+| **Diagnostyka** | Bezpłatna | Bezpłatna | — |
+| Czyszczenie klawiatury | 80-120 zł | 80-120 zł | 1 mies. |
+| **Wymiana klawiatury (29-key)** | 300-400 zł | 350-450 zł | 6 mies. |
+| **Wymiana klawiatury (38-key)** | 320-420 zł | 370-470 zł | 6 mies. |
+| **Wymiana klawiatury (47-key)** | 350-450 zł | 400-500 zł | 6 mies. |
+| Wymiana triggera (Gun) | 200-300 zł | 200-350 zł | 6 mies. |
+| Naprawa podświetlenia | 150-250 zł | 150-250 zł | 6 mies. |
+
+> Ceny netto. Bezpłatny odbiór kurierem w całej Polsce.
+
+---
+
+## Która klawiatura do jakiego zastosowania?
+
+| Zastosowanie | Zalecana klawiatura | Dlaczego? |
+|-------------|---------------------|-----------|
+| **Magazyn WMS** (skanowanie + ilości) | 29-key | Wystarczą cyfry, szybka praca jedną ręką |
+| **Produkcja ERP** (kody + funkcje) | 38-key | Klawisze F1-F6 dla funkcji systemowych |
+| **Inwentaryzacja** (opisy, notatki) | 47-key | Pełne A-Z bez trybów Orange |
+| **Logistyka kurierska** | 29-key | Kompaktowa, odporna, lekka |
+| **Retail** (ceny, kody) | 29-key lub 38-key | Cyfry + ewentualne funkcje |
+
+---
+
+## Profesjonalny serwis klawiatur MC3300/MC3400
+
+Jako **Autoryzowany Serwis Zebra** oferujemy:
+
+- **Bezpłatna diagnostyka** — sprawdzimy czy wymiana jest konieczna
+- **Bezpłatny odbiór kurierem** z całej Polski
+- **Naprawa 3-5 dni** roboczych (express 24-48h za dopłatą)
+- **Gwarancja 6 miesięcy** na wymianę klawiatury
+- **Oryginalne klawiatury Zebra** — wszystkie 3 typy w magazynie
+- **Konfiguracja Key Programmer** — ustawimy mapping pod Twój WMS/ERP
+
+[**Zgłoś naprawę →**](/#formularz) | [Zadzwoń: +48 601 619 898](tel:+48601619898) | [Serwis terminali Zebra](/serwis-terminali-zebra)
+
+---
+
+## Powiązane poradniki
+
+- [TOP 10 awarii terminali Zebra — diagnostyka i rozwiązania](/blog/najczestsze-awarie-terminali-zebra-top10)
+- [Serwis MC3300/MC3400 — diagnostyka i naprawa](/blog/serwis-terminala-zebra-mc3300-mc3400-diagnostyka-naprawa)
+- [MC3300 vs MC3400 — porównanie i migracja](/blog/zebra-mc3300-vs-mc3400-porownanie-migracja)
+- [Skaner terminala Zebra nie działa — rozwiązania](/blog/skaner-terminala-zebra-nie-dziala-rozwiazania)
+- [DataWedge — konfiguracja skanera Zebra](/blog/datawedge-zebra-konfiguracja-skanera)
+- [Najlepszy terminal do magazynu 2026](/blog/najlepszy-terminal-zebra-do-magazynu-2026)
+
+[Serwis terminali Zebra — wszystkie usługi →](/serwis-terminali-zebra)
+
+*Ostatnia aktualizacja: luty 2026*
+`
+  },
+  {
+    slug: 'zebra-tc52-vs-tc53-vs-tc501-porownanie-terminali',
+    title: 'Zebra TC52 vs TC53 vs TC501 — który terminal wybrać? Porównanie [2026]',
+    excerpt: 'Porównanie terminali Zebra TC52, TC53 i TC501. TC52 wycofany z produkcji — sprawdź czy naprawiać, migrować na TC53 czy czekać na TC501 z AI. Specyfikacje, ceny, koszty serwisu.',
+    coverImage: '/blog/zebra-tc52-vs-tc53-vs-tc501-porownanie-terminali.jpeg',
+    coverImageAlt: 'Trzy terminale mobilne Zebra obok siebie: TC52 (wycofany), TC53 (aktualny) i TC501 (nowa generacja z AI) — porównanie modeli',
+    author: {
+      name: 'Krzysztof Wójcik',
+      role: 'Kierownik Serwisu TAKMA'
+    },
+    publishedAt: '2026-02-15',
+    readingTime: 15,
+    deviceType: 'terminale',
+    category: 'porownania',
+    tags: [
+      'Zebra TC52',
+      'Zebra TC53',
+      'Zebra TC501',
+      'porównanie terminali',
+      'terminal mobilny',
+      'kolektor danych',
+      'migracja TC52',
+      'TC52 EOL',
+      'TC52 end of life',
+      'następca TC52',
+      'terminal do magazynu',
+      'terminal Zebra porównanie'
+    ],
+    seo: {
+      metaTitle: 'Zebra TC52 vs TC53 vs TC501 — porównanie terminali mobilnych [2026]',
+      metaDescription: 'TC52 wycofany z produkcji (EOL). Porównanie z TC53 i nowym TC501 z AI. Specyfikacje, ceny, koszty serwisu. Który terminal Zebra wybrać w 2026? Poradnik autoryzowanego serwisu TAKMA.',
+      keywords: [
+        // Główne frazy porównawcze
+        'tc52 vs tc53',
+        'tc52 vs tc501',
+        'tc53 vs tc501',
+        'zebra tc52 vs tc53',
+        'zebra tc53 vs tc501',
+        'porównanie terminali zebra',
+        'terminal zebra porównanie',
+        'porównanie kolektorów danych zebra',
+
+        // EOL / migracja
+        'tc52 eol',
+        'tc52 end of life',
+        'zebra tc52 wycofany',
+        'następca tc52',
+        'następca zebra tc52',
+        'zamiennik tc52',
+        'migracja tc52 tc53',
+        'migracja tc52',
+        'tc52 koniec produkcji',
+        'tc52 koniec wsparcia',
+
+        // Model-specific
+        'zebra tc52 specyfikacja',
+        'zebra tc53 specyfikacja',
+        'zebra tc501 specyfikacja',
+        'zebra tc52 cena',
+        'zebra tc53 cena',
+        'zebra tc501 cena',
+        'zebra tc501 premiera',
+        'zebra tc501 kiedy',
+        'zebra tc501 ai',
+
+        // Intencja zakupowa
+        'jaki terminal zebra wybrać',
+        'jaki terminal do magazynu 2026',
+        'kolektor danych zebra wybór',
+        'terminal mobilny zebra kupić',
+        'terminal zebra nowy vs używany',
+
+        // Serwisowe
+        'naprawa tc52 czy wymiana',
+        'serwis tc52 opłacalność',
+        'tc52 naprawa vs nowy tc53',
+        'koszt naprawy tc52',
+        'ile kosztuje naprawa tc52',
+
+        // Techniczne
+        'qualcomm 6490 vs dragonwing',
+        'wifi 6e vs wifi 7',
+        'android 11 vs android 15',
+        'powerprecision plus',
+        'hot swap terminal zebra',
+
+        // GEO
+        'terminal zebra polska',
+        'kolektor danych wrocław',
+        'serwis terminali zebra autoryzowany',
+        'terminal zebra warszawa',
+        'terminal zebra kraków'
+      ],
+      faqSchema: [
+        {
+          question: 'Czy Zebra TC52 jest jeszcze dostępna w sprzedaży?',
+          answer: 'Nie. Zebra TC52 została wycofana z produkcji (EOL) w październiku 2024. Nowe egzemplarze nie są dostępne u autoryzowanych dystrybutorów. Można kupić używane TC52 na rynku wtórnym (od 1500 zł), ale bez gwarancji producenta. Oficjalnym następcą jest Zebra TC53.'
+        },
+        {
+          question: 'Czym różni się Zebra TC53 od TC52?',
+          answer: 'TC53 ma nowszy procesor Qualcomm 6490 (2.7 GHz, 8 rdzeni vs 1.8 GHz w TC52), Wi-Fi 6E (vs Wi-Fi 5), Bluetooth 5.2 (vs 5.0), jaśniejszy ekran 600 nit (vs 450 nit), opcję 8 GB RAM i 128 GB pamięci, oraz wsparcie do Android 16+. Obudowa i akcesoria są kompatybilne.'
+        },
+        {
+          question: 'Co to jest Zebra TC501 i kiedy będzie dostępna?',
+          answer: 'Zebra TC501 to terminal nowej generacji z procesorem Qualcomm Dragonwing Q-6690 (300% szybszy), Wi-Fi 7, Bluetooth 6.0, 12 GB RAM, 256 GB pamięci, kamerą 50 MP, zintegrowanym RFID UHF i dedykowanym silnikiem AI. Premiera zapowiedziana na 2026 rok. Cena orientacyjna od 8000 zł.'
+        },
+        {
+          question: 'Czy opłaca się naprawiać TC52 zamiast kupić TC53?',
+          answer: 'Zależy od rodzaju naprawy. Wymiana baterii TC52 (200-350 zł) lub naprawa ekranu (500-900 zł) jest opłacalna jeśli terminal ma mniej niż 3 lata. Naprawa płyty głównej (1200-2000 zł) jest nieopłacalna — za podobną kwotę kupisz używany TC53. Zasada: jeśli koszt naprawy > 50% ceny nowego TC53, lepiej wymienić.'
+        },
+        {
+          question: 'Czy akcesoria TC52 pasują do TC53?',
+          answer: 'Tak, większość akcesoriów TC52 jest kompatybilna z TC53: uchwyty, ładowarki 1-slotowe i 5-slotowe, kabura, smycz. Etui ochronne (boot) wymaga wersji dedykowanej dla TC53 ze względu na nieznacznie zmienione wymiary. Skanery pierścieniowe RS5100 i RS6100 działają z oboma modelami.'
+        },
+        {
+          question: 'Jaki jest koszt migracji z TC52 na TC53 dla 50 urządzeń?',
+          answer: 'Orientacyjny koszt migracji 50 urządzeń: TC53 (50 x 3500 zł = 175 000 zł) + akcesoria (uchwyty, ładowarki — 15 000-25 000 zł) + konfiguracja StageNow (5 000-10 000 zł) = łącznie 195 000-210 000 zł. Alternatywnie: migracja etapowa — wymieniaj TC52 stopniowo gdy się psują.'
+        },
+        {
+          question: 'Czy warto czekać na TC501 zamiast kupić TC53?',
+          answer: 'Jeśli potrzebujesz terminali teraz — kup TC53. TC501 będzie dostępny w 2026, ale w pierwszych miesiącach cena będzie wysoka (od 8000 zł vs 3500 zł za TC53). TC53 będzie wspierany do minimum 2029-2030. Czekaj na TC501 tylko jeśli potrzebujesz AI, RFID UHF lub Wi-Fi 7.'
+        }
+      ]
+    },
+    content: `
+> **Szybka odpowiedź:** **TC52 wycofana** z produkcji (EOL październik 2024) — naprawiamy, ale nowe niedostępne. **TC53** (od 3500 zł) — bezpośredni następca, kompatybilne akcesoria, Wi-Fi 6E, wsparcie do 2030. **TC501** (od 8000 zł, premiera 2026) — nowa generacja z AI, Wi-Fi 7, RFID, 300% szybszy procesor. **Rekomendacja:** Kupuj TC53 teraz, na TC501 czekaj tylko jeśli potrzebujesz AI lub RFID.
+
+---
+
+## Porównanie w pigułce — TC52 vs TC53 vs TC501
+
+| Cecha | Zebra TC52 (EOL) | Zebra TC53 (Aktualny) | Zebra TC501 (Nowa generacja) |
+|-------|-------------------|----------------------|-------------------------------|
+| **Status** | Wycofany (EOL X/2024) | W sprzedaży | Premiera 2026 |
+| **Cena nowego** | Niedostępny (używany od 1500 zł) | od 3500 zł | od 8000 zł (estymacja) |
+| **Procesor** | Qualcomm SD660, 2.2 GHz | Qualcomm 6490, 2.7 GHz (8 rdzeni) | Dragonwing Q-6690, 2.9 GHz (8 rdzeni) |
+| **RAM** | 4 GB | 4/6/8 GB | do 12 GB LPDDR5 |
+| **Pamięć** | 32 GB | 64/128 GB | do 256 GB UFS 3.1 |
+| **Ekran** | 5.0" HD (1280x720), 450 nit | 6.0" FHD+ (2160x1080), 600 nit | 6.0" AMOLED FHD+ (2160x1080), 1500 nit |
+| **Wi-Fi** | Wi-Fi 5 (802.11ac) | Wi-Fi 6E (802.11ax) | Wi-Fi 7 (802.11be) |
+| **Bluetooth** | 5.0 | 5.2 | 6.0 |
+| **NFC** | Tak | Tak (Apple VAS, Google SmartTap) | Tak |
+| **5G/LTE** | Nie (TC57 = wersja LTE) | Nie (TC58 = wersja 5G) | Tak (opcjonalnie) |
+| **RFID UHF** | Nie | Nie | Tak — zintegrowany (do 2 m) |
+| **Silnik AI** | Nie | Nie | Tak — Dragonwing AI Engine |
+| **Kamera tylna** | 13 MP | 16 MP | 50 MP (PDAF + HDR) |
+| **Kamera przednia** | 5 MP | 8 MP | 8 MP |
+| **Bateria** | 4150 mAh | 4680 mAh | 5000 mAh / 7240 mAh (ext.) |
+| **Ładowanie bezprzewodowe** | Nie | Nie | Tak (Qi) |
+| **Hot Swap** | Warm Swap (~60 s) | Warm Swap (~60 s) / Hot Swap (Premium) | Hot Swap (standard) |
+| **Odporność na upadek** | 1.5 m | 1.8 m (z bootem) | 3.66 m (z bootem) |
+| **IP** | IP65/IP68 | IP65/IP68 | IP65/IP68 |
+| **Waga** | ~249 g | ~290 g | ~284 g |
+| **System** | Android 8 → max 13 | Android 11 → 16+ | Android 15 → 19+ |
+| **Wsparcie Zebra** | Do ~2026 (tylko security) | Do ~2030 | Do ~2034 |
+| **Skaner** | SE4720 | SE4720 / SE55 | AC670 / SR560 / SR500 |
+
+---
+
+## TC52 — wycofana, ale wciąż popularna
+
+### Dlaczego TC52 była hitem?
+
+Zebra TC52 przez lata była **najpopularniejszym terminalem mobilnym** w polskich magazynach, logistyce i handlu detalicznym. Powody:
+
+- **Najlepsza relacja cena/wydajność** w swojej klasie
+- **Kompaktowa obudowa** (5" ekran) wygodna do jednoręcznej obsługi
+- **Solidna odporność** IP65/IP68 + upadki z 1.5 m
+- **Ogromna baza akcesoriów** — uchwyty, ładowarki, pistolety
+- **Długi cykl życia** — Android 8 do 13 (5 lat aktualizacji)
+
+### TC52 End of Life — co to oznacza?
+
+Od października 2024 Zebra oficjalnie **wycofała TC52 z produkcji** (End of Life). Co to znaczy w praktyce:
+
+| Element | Status po EOL |
+|---------|---------------|
+| Nowe urządzenia | Niedostępne u autoryzowanych dystrybutorów |
+| Oryginalne części zamienne | Dostępne jeszcze przez ~2 lata (do wyczerpania) |
+| Aktualizacje Android | Brak nowych wersji (max Android 13) |
+| Patche bezpieczeństwa | Tylko krytyczne, do ~2026 |
+| Serwis gwarancyjny Zebra | Zakończony |
+| **Serwis TAKMA** | **Naprawiamy TC52 bez ograniczeń** |
+
+**Ważne:** EOL **nie oznacza**, że TC52 przestaje działać. Twoje terminale będą działać tak samo jak dotychczas. Ale z czasem:
+- Brak patchy bezpieczeństwa = ryzyko w środowiskach z danymi osobowymi
+- Wyczerpanie części zamiennych = dłuższy czas naprawy
+- Brak wsparcia nowych standardów (Wi-Fi 6E, nowe API Android)
+
+### Ile jeszcze warto używać TC52?
+
+**Nasza rekomendacja serwisowa:**
+
+| Wiek TC52 | Stan | Rekomendacja |
+|-----------|------|--------------|
+| < 2 lata | Sprawna | Używaj dalej, naprawy opłacalne |
+| 2-3 lata | Sprawna | Używaj, planuj migrację na 2027 |
+| 3-4 lata | Zużyta bateria | Wymień baterię (200-350 zł), zaplanuj wymianę |
+| > 4 lata | Zużyta | Migruj na TC53 — naprawy nieopłacalne |
+
+---
+
+## TC53 — bezpośredni następca TC52
+
+### Co zyskujesz migrując z TC52 na TC53?
+
+| Ulepszenie | TC52 → TC53 | Korzyść biznesowa |
+|------------|-------------|-------------------|
+| Procesor | 2.2 → 2.7 GHz (8 rdzeni) | Szybsze skanowanie, płynniejsze aplikacje |
+| RAM | 4 GB → do 8 GB | Więcej otwartych aplikacji jednocześnie |
+| Pamięć | 32 GB → do 128 GB | Więcej danych offline, zdjęcia, mapy |
+| Ekran | 5" HD → 6" FHD+ | Lepszy komfort pracy, mniej scrollowania |
+| Jasność | 450 → 600 nit | Czytelność na słońcu (magazyn outdoor) |
+| Wi-Fi | 5 → 6E | 3x szybszy transfer, mniej interferencji |
+| Skaner | SE4720 → SE4720/SE55 | SE55: skanowanie z 14 m (wysokie regały) |
+| System | max Android 13 → Android 16+ | 3+ lata dodatkowych aktualizacji |
+| Hot Swap | Tylko Warm Swap | Hot Swap (Premium) — zero przestojów |
+
+### Kompatybilność akcesoriów TC52 → TC53
+
+Dobra wiadomość — **większość akcesoriów TC52 pasuje do TC53**:
+
+| Akcesorium | Kompatybilne? | Uwagi |
+|------------|---------------|-------|
+| Ładowarka 1-slotowa USB | Tak | Ten sam model |
+| Ładowarka 5-slotowa | Tak | Ethernet i charge-only |
+| Ładowarka baterii 4-slotowa | Tak | Te same baterie PowerPrecision+ |
+| Uchwyt samochodowy | Tak | Ten sam slot |
+| Skaner RS5100 (pierścieniowy) | Tak | BLE pairing |
+| Skaner RS6100 (2-palcowy) | Tak | BLE pairing |
+| Boot ochronny | Nowa wersja | TC53 ma większy ekran → inny boot |
+| Kabura | Sprawdź wymiary | Może wymagać nowej |
+| Trigger handle | Nowa wersja | Zmienione wymiary |
+
+**Oszczędność:** Jeśli masz ładowarki TC52, nie musisz ich wymieniać przy migracji na TC53.
+
+### Cena i dostępność TC53
+
+| Wariant | Cena orientacyjna (2026) | Uwagi |
+|---------|--------------------------|-------|
+| TC53 (4 GB / 64 GB, SE4720) | od 3 500 zł | Podstawowy, Wi-Fi only |
+| TC53 (8 GB / 128 GB, SE55) | od 4 500 zł | Rekomendowany dla magazynów |
+| TC53 Premium (Hot Swap) | od 5 000 zł | Praca ciągła bez przestojów |
+| TC58 (5G/LTE) | od 5 500 zł | Praca w terenie |
+
+---
+
+## TC501 — nowa generacja z AI
+
+### Rewolucja technologiczna
+
+TC501 to **nie jest kolejna aktualizacja** — to zupełnie nowa platforma. Kluczowe innowacje:
+
+**Procesor Dragonwing Q-6690 z silnikiem AI:**
+- 300% szybszy od procesora TC53
+- Dedykowany co-procesor AI — przetwarzanie na urządzeniu bez chmury
+- 12 GB RAM LPDDR5 — wielozadaniowość bez kompromisów
+- 256 GB UFS 3.1 — 8x więcej pamięci niż TC52
+
+**Ekran AMOLED 1500 nit:**
+- 2.5x jaśniejszy od TC53 (1500 vs 600 nit)
+- 40% niższe zużycie energii (AMOLED vs LCD)
+- Gorilla Glass Victus — najtrwalsze szkło na rynku
+
+**Zintegrowany RFID UHF:**
+- Czytnik RFID wbudowany w terminal — bez dodatkowych nakładek
+- Zasięg do 2 m, prędkość 200+ tagów/sekundę
+- Inwentaryzacja RFID bez dodatkowego sprzętu
+
+**Wi-Fi 7 + Bluetooth 6.0:**
+- 2x szybszy transfer niż Wi-Fi 6E
+- Multi-Link Operation — łączenie pasm jednocześnie
+- Bluetooth 6.0 — większy zasięg, niższe zużycie energii
+
+**Kamera 50 MP z AI:**
+- 4x wyższa rozdzielczość niż TC53
+- Auto-wykrywanie brudnej soczewki
+- Automatyczne zamazywanie twarzy (RODO)
+- Znaki wodne z timestampem
+
+**Odporność na upadek 3.66 m:**
+- 2x lepsza od TC53 (3.66 m vs 1.8 m)
+- 3500 cykli tumble (+75% vs poprzednia generacja)
+- 25% lżejszy mimo lepszej ochrony
+
+### Dla kogo TC501?
+
+TC501 ma sens jeśli potrzebujesz **przynajmniej jednej** z tych funkcji:
+
+| Funkcja TC501 | Kto potrzebuje | Alternatywa na TC53 |
+|---------------|----------------|---------------------|
+| AI na urządzeniu | Rozpoznawanie produktów, automatyczna inwentaryzacja | Brak (wymaga chmury) |
+| Zintegrowany RFID | Inwentaryzacja RFID bez nakładki | Osobny czytnik RFID (~3000 zł) |
+| Wi-Fi 7 | Magazyny z dużym ruchem sieciowym | Wi-Fi 6E wystarcza w 90% przypadków |
+| Kamera 50 MP | Dokumentacja fotograficzna, OCR | 16 MP TC53 wystarcza dla kodów |
+| Bateria 7240 mAh | Wielozmianowa praca ciągła | 4680 mAh + Hot Swap |
+| Upadek 3.66 m | Ekstremalnie trudne warunki | 1.8 m wystarcza w większości magazynów |
+| Ładowanie Qi | Stacje bezprzewodowe | Ładowarka stykowa |
+
+### Cena i dostępność TC501
+
+| Wariant | Cena orientacyjna (2026) | Uwagi |
+|---------|--------------------------|-------|
+| TC501 (8 GB / 128 GB) | od 8 000 zł | Podstawowy |
+| TC501 (12 GB / 256 GB, RFID) | od 10 000 zł | Pełne wyposażenie |
+| TC701 (ultra-rugged) | od 9 000 zł | Kurier, teren, mróz |
+
+**Ważne:** Ceny mogą się zmienić po oficjalnej premierze. Podane kwoty to estymacja na podstawie pozycjonowania cenowego Zebra.
+
+---
+
+## Koszty serwisu vs zakup nowego
+
+### Typowe naprawy TC52 — czy się opłaca?
+
+| Naprawa TC52 | Koszt serwisu TAKMA | Czas | Opłacalność |
+|--------------|---------------------|------|-------------|
+| Wymiana baterii | 200-350 zł | 1 dzień | Zawsze opłacalna |
+| Naprawa ekranu | 500-900 zł | 3-5 dni | Jeśli TC52 < 3 lata |
+| Naprawa skanera | 400-700 zł | 3-5 dni | Jeśli TC52 < 3 lata |
+| Naprawa Wi-Fi/BT | 600-1000 zł | 5-7 dni | Rozważ wymianę |
+| Naprawa płyty głównej | 1200-2000 zł | 7-10 dni | Kup TC53 |
+| Naprawa złącza ładowania | 300-500 zł | 3-5 dni | Opłacalna |
+
+### Kalkulator: naprawa TC52 vs nowy TC53
+
+**Zasada 50%:** Jeśli koszt naprawy TC52 przekracza 50% ceny nowego TC53 (3500 zł) — czyli **powyżej 1750 zł** — ekonomicznie korzystniej kupić nowy terminal.
+
+**Przykład 1 — opłaca się naprawiać:**
+- TC52, 2 lata, zużyta bateria
+- Koszt: wymiana baterii 250 zł
+- Nowy TC53: 3500 zł
+- **Decyzja: Napraw** (oszczędzasz 3250 zł)
+
+**Przykład 2 — nie opłaca się:**
+- TC52, 4 lata, pęknięty ekran + słaba bateria
+- Koszt: ekran 800 zł + bateria 250 zł = 1050 zł
+- Ale: urządzenie ma 4 lata, EOL, brak patchy bezpieczeństwa
+- **Decyzja: Kup TC53** (4+ lata wsparcia, wyższa wydajność)
+
+**Przykład 3 — zdecydowanie nie:**
+- TC52, 3+ lata, uszkodzona płyta główna
+- Koszt: 1500 zł naprawy + bateria się kończy (250 zł w ciągu roku)
+- Nowy TC53: 3500 zł
+- **Decyzja: Kup TC53** (1750 zł naprawy to 50% ceny nowego)
+
+### Gwarancja na naprawy TAKMA
+
+| Element | Gwarancja |
+|---------|-----------|
+| Naprawa serwisowa | 6 miesięcy |
+| Oryginalna bateria Zebra | 6 miesięcy |
+| Wymiana ekranu (oryginalny) | 6 miesięcy |
+| Diagnostyka | Bezpłatna |
+
+---
+
+## Ścieżka migracji — krok po kroku
+
+### Scenariusz A: Masz 10-20 terminali TC52
+
+**Rekomendacja: Migracja etapowa na TC53**
+
+1. **Natychmiast:** Wymień baterie w TC52 które tego potrzebują (przedłuż życie o 1-2 lata)
+2. **Gdy TC52 się psuje:** Zamiast naprawiać za >1000 zł → kup TC53
+3. **Do końca 2027:** Wymień wszystkie TC52 starsze niż 4 lata
+4. **Konfiguracja:** StageNow — masowe wdrożenie konfiguracji na TC53 (1 profil QR)
+
+**Koszt:** Rozłożony w czasie, brak jednorazowego wydatku.
+
+### Scenariusz B: Masz 50+ terminali TC52
+
+**Rekomendacja: Planowana migracja na TC53 (opcjonalnie mix z TC501)**
+
+1. **Audyt floty:** Sprawdź wiek i stan każdego TC52 (bezpłatnie w TAKMA)
+2. **Priorytetyzacja:** Najstarsze i najbardziej zużyte — pierwsze do wymiany
+3. **Zakup hurtowy TC53:** Negocjuj cenę przy 50+ szt. (oszczędność 10-15%)
+4. **Konfiguracja StageNow:** Jeden profil konfiguracyjny dla całej floty
+5. **Rozważ TC501** dla kluczowych stanowisk (RFID, AI) → mix TC53 + TC501
+
+**Koszt orientacyjny (50 szt.):**
+- 50x TC53 (3500 zł): 175 000 zł
+- Akcesoria (booty, ładowarki): 15 000-25 000 zł
+- Konfiguracja i wdrożenie: 5 000-10 000 zł
+- **Razem: 195 000-210 000 zł**
+
+### Scenariusz C: Czekasz na TC501
+
+**Rekomendacja: Kup TC53 teraz, TC501 w 2027**
+
+- TC501 w pierwszych miesiącach będzie **drogi** i mogą być **problemy z dostępnością**
+- TC53 kupisz teraz za 3500 zł i będziesz miał wsparcie do 2030
+- W 2027 cena TC501 spadnie, a dostępność się ustabilizuje
+- Wtedy zamień na TC501 terminale na kluczowych stanowiskach
+
+---
+
+## Który terminal wybrać? Podsumowanie
+
+### Wybierz TC53 jeśli:
+- Potrzebujesz terminala **teraz**
+- Masz ograniczony budżet (3500-5000 zł/szt.)
+- Chcesz kompatybilność z akcesoriami TC52
+- Wi-Fi 6E i Bluetooth 5.2 Ci wystarczają
+- Nie potrzebujesz AI ani RFID na urządzeniu
+
+### Wybierz TC501 jeśli:
+- Potrzebujesz **zintegrowanego RFID UHF** (inwentaryzacja)
+- Potrzebujesz **AI na urządzeniu** (rozpoznawanie produktów)
+- Masz budżet 8000+ zł/szt.
+- Możesz poczekać na premierę (2026)
+- Planujesz użytkowanie 5+ lat
+
+### Zostań przy TC52 jeśli:
+- Terminal ma **mniej niż 3 lata** i jest sprawny
+- Nie potrzebujesz nowych funkcji (Wi-Fi 6E, SE55)
+- Planujesz wymianę w ciągu **1-2 lat**
+- **Nie zostawaj** jeśli przetwarzasz dane osobowe (brak patchy)
+
+---
+
+## Najczęstsze pytania o migrację
+
+### Czy aplikacje z TC52 działają na TC53?
+Tak, w 99% przypadków. TC53 ma Android 11+ (TC52 miała Android 8-13). Aplikacje napisane dla Android 8+ będą działać. Jedyny wyjątek: aplikacje korzystające z przestarzałych API Android (przed wersją 8) — ale takich jest minimum.
+
+### Jak przenieść dane z TC52 na TC53?
+Najszybsza metoda:
+1. **StageNow** — profil konfiguracyjny (Wi-Fi, APN, ustawienia) → skan QR i gotowe
+2. **MDM (np. SOTI, VMware)** — automatyczna konfiguracja po zarejestrowaniu urządzenia
+3. **Ręcznie** — backup → restore (dla pojedynczych urządzeń)
+
+### Czy TAKMA naprawia TC52 po EOL?
+**Tak.** Naprawiamy TC52 niezależnie od statusu EOL u producenta. Mamy zapas części zamiennych i doświadczenie w serwisie TC52 od 2019 roku. Diagnostyka bezpłatna, gwarancja 6 miesięcy na naprawę.
+
+---
+
+## Podsumowanie techniczne
+
+| Parametr | TC52 | TC53 | TC501 | Zwycięzca |
+|----------|------|------|-------|-----------|
+| Procesor | ★★ | ★★★ | ★★★★★ | TC501 |
+| Ekran | ★★ | ★★★ | ★★★★★ | TC501 |
+| Bateria | ★★ | ★★★ | ★★★★★ | TC501 |
+| Wi-Fi | ★★ | ★★★★ | ★★★★★ | TC501 |
+| Skaner | ★★★ | ★★★★ | ★★★★★ | TC501 |
+| Odporność | ★★★ | ★★★ | ★★★★★ | TC501 |
+| Cena | ★★★★★ | ★★★★ | ★★ | TC52 (używana) |
+| Dostępność | ★ | ★★★★★ | ★★★ | TC53 |
+| Przyszłościowość | ★ | ★★★★ | ★★★★★ | TC501 |
+| **Najlepsza wartość 2026** | | **TC53** | | |
+
+---
+
+## Potrzebujesz pomocy z migracją?
+
+**Bezpłatna konsultacja** — pomożemy dobrać najlepszą ścieżkę migracji dla Twojej floty.
+
+**TAKMA — Autoryzowany Serwis Zebra:**
+- Diagnoza stanu Twoich TC52 — **bezpłatna**
+- Doradztwo: TC53 vs TC501 — dopasowane do Twoich potrzeb
+- Konfiguracja StageNow — masowe wdrożenie nowych terminali
+- Serwis TC52/TC53 — gwarancja 6 mies.
+
+[Skontaktuj się z nami →](/#formularz)
+
+---
+
+## Powiązane poradniki
+
+- [Najczęstsze awarie terminali Zebra — TOP 10](/blog/najczestsze-awarie-terminali-zebra-top10)
+- [Serwis TC52/TC53 — diagnostyka i naprawa](/blog/serwis-terminala-zebra-tc52-tc53-diagnostyka-naprawa)
+- [Bateria terminala Zebra — diagnostyka](/blog/bateria-terminal-zebra-szybko-sie-rozladowuje-diagnostyka)
+- [MC3300 vs MC3400 — porównanie i migracja](/blog/zebra-mc3300-vs-mc3400-porownanie-migracja)
+- [Najlepszy terminal do magazynu 2026](/blog/najlepszy-terminal-zebra-do-magazynu-2026)
+
+[Serwis terminali Zebra — wszystkie usługi →](/serwis-terminali-zebra)
+
+*Ostatnia aktualizacja: luty 2026*
+`
+  },
+  {
     slug: 'zebra-zd220-vs-zd421-vs-zt411-porownanie',
     title: 'Zebra ZD220 vs ZD421 vs ZT411 – którą drukarkę wybrać? Porównanie [2026]',
     excerpt: 'Porównanie drukarek Zebra ZD220, ZD421 i ZT411. Sprawdź która drukarka etykiet jest najlepsza dla Twojej firmy: budżetowa ZD220, biurowa ZD421 czy przemysłowa ZT411.',
