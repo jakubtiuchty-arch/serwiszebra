@@ -618,7 +618,7 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
         <ShopSubheader breadcrumbs={productBreadcrumbs} />
         
         <main id="main-content" className="min-h-screen bg-gray-50">
-          <article className="max-w-5xl mx-auto px-4 py-4 sm:py-6" itemScope itemType="https://schema.org/Product">
+          <article className="max-w-5xl mx-auto px-4 py-4 sm:py-6">
             
             {/* Szybka odpowiedź (Paragraph 0 dla AEO + Speakable) */}
             {quickAnswer && (
