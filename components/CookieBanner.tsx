@@ -84,53 +84,45 @@ export default function CookieBanner() {
   if (!showBanner) return null
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 p-4 sm:p-6">
+    <div className="fixed bottom-0 left-0 right-0 z-50 p-2 sm:p-4 md:p-6">
       <div className="max-w-4xl mx-auto">
-        <div className="bg-white rounded-2xl shadow-2xl border border-gray-200 overflow-hidden">
-          {/* Główny banner */}
+        <div className="bg-white rounded-xl sm:rounded-2xl shadow-2xl border border-gray-200 overflow-hidden">
+          {/* Główny banner — compact na mobile */}
           {!showSettings ? (
-            <div className="p-4 sm:p-6">
-              <div className="flex items-start gap-4">
-                <div className="hidden sm:flex w-12 h-12 bg-blue-50 rounded-xl items-center justify-center flex-shrink-0">
+            <div className="p-3 sm:p-4 md:p-6">
+              <div className="flex items-start gap-3 sm:gap-4">
+                <div className="hidden md:flex w-12 h-12 bg-blue-50 rounded-xl items-center justify-center flex-shrink-0">
                   <Shield className="w-6 h-6 text-blue-600" />
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                    🍪 Ta strona używa plików cookies
-                  </h3>
-                  <p className="text-sm text-gray-600 mb-4">
-                    Używamy plików cookies, aby zapewnić najlepsze doświadczenia na naszej stronie. 
-                    Cookies niezbędne są wymagane do działania strony. Cookies analityczne pomagają 
-                    nam zrozumieć, jak korzystasz ze strony. Cookies marketingowe pozwalają na 
-                    wyświetlanie spersonalizowanych reklam.
+                  <p className="text-sm text-gray-600 mb-3 sm:mb-4">
+                    <span className="hidden sm:inline">Używamy plików cookies, aby zapewnić najlepsze doświadczenia na naszej stronie. </span>
+                    Cookies niezbędne są wymagane do działania strony.{' '}
+                    <Link href="/polityka-prywatnosci" className="text-blue-600 hover:underline">
+                      Polityka prywatności
+                    </Link>
                   </p>
                   <div className="flex flex-wrap gap-2 sm:gap-3">
                     <button
                       onClick={acceptAll}
-                      className="flex-1 sm:flex-none bg-blue-600 text-white font-medium px-5 py-2.5 rounded-lg hover:bg-blue-700 transition-colors text-sm"
+                      className="flex-1 sm:flex-none bg-blue-600 text-white font-medium px-4 py-2 sm:px-5 sm:py-2.5 rounded-lg hover:bg-blue-700 transition-colors text-sm"
                     >
-                      Akceptuj wszystkie
+                      Akceptuj
                     </button>
                     <button
                       onClick={acceptNecessary}
-                      className="flex-1 sm:flex-none bg-gray-100 text-gray-700 font-medium px-5 py-2.5 rounded-lg hover:bg-gray-200 transition-colors text-sm"
+                      className="flex-1 sm:flex-none bg-gray-100 text-gray-700 font-medium px-4 py-2 sm:px-5 sm:py-2.5 rounded-lg hover:bg-gray-200 transition-colors text-sm"
                     >
-                      Tylko niezbędne
+                      Niezbędne
                     </button>
                     <button
                       onClick={() => setShowSettings(true)}
-                      className="flex items-center justify-center gap-2 text-gray-600 hover:text-gray-900 font-medium px-4 py-2.5 text-sm transition-colors"
+                      className="hidden sm:flex items-center justify-center gap-2 text-gray-600 hover:text-gray-900 font-medium px-4 py-2.5 text-sm transition-colors"
                     >
                       <Settings className="w-4 h-4" />
                       Ustawienia
                     </button>
                   </div>
-                  <p className="text-xs text-gray-500 mt-3">
-                    Więcej informacji w naszej{' '}
-                    <Link href="/polityka-prywatnosci" className="text-blue-600 hover:underline">
-                      Polityce prywatności
-                    </Link>
-                  </p>
                 </div>
               </div>
             </div>

@@ -21,6 +21,7 @@ import {
   Info
 } from 'lucide-react'
 import AddToCartButton from '@/components/AddToCartButton'
+import StickyAddToCart from '@/components/shop/StickyAddToCart'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import ShopSubheader from '@/components/shop/ShopSubheader'
@@ -398,7 +399,10 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
     }
     return {
       title: `${productType.namePlural} - ${printerCategory.name} | Sklep TAKMA`,
-      description: `${productType.namePlural} do ${printerCategory.name.toLowerCase()} Zebra. Oryginalne części z gwarancją.`
+      description: `${productType.namePlural} do ${printerCategory.name.toLowerCase()} Zebra. Oryginalne części z gwarancją.`,
+      alternates: {
+        canonical: `https://www.serwis-zebry.pl/sklep/${slugPath.join('/')}`
+      }
     }
   }
 
@@ -407,7 +411,10 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
     if (model) {
       return {
         title: `${productType.namePlural} do ${model.name} | Sklep TAKMA`,
-        description: `${productType.namePlural} do drukarki ${model.name}. Oryginalne części z gwarancją. Wysyłka 24h.`
+        description: `${productType.namePlural} do drukarki ${model.name}. Oryginalne części z gwarancją. Wysyłka 24h.`,
+        alternates: {
+          canonical: `https://www.serwis-zebry.pl/sklep/${slugPath.join('/')}`
+        }
       }
     }
   }
@@ -431,8 +438,13 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
     const Icon = PRODUCT_TYPE_ICONS[product.product_type] || Package
     const imageUrl = getProductImageUrl(product)
     const ownImage = hasOwnImage(product)
-    // URL obrazka do Schema.org — tylko własne zdjęcie produktu (nie fallback)
-    const schemaImageUrl = ownImage && imageUrl ? `https://www.serwis-zebry.pl${imageUrl}` : undefined
+    // URL obrazka do Schema.org — własne zdjęcie lub fallback (Google wymaga image dla Product rich results)
+    const fallbackImageUrl = getLocalProductImage(product)
+    const schemaImageUrl = ownImage && imageUrl
+      ? `https://www.serwis-zebry.pl${imageUrl}`
+      : fallbackImageUrl
+        ? `https://www.serwis-zebry.pl${fallbackImageUrl}`
+        : 'https://www.serwis-zebry.pl/takma_logo_1.png'
 
     // Powiązane produkty — wyłączone do czasu włączenia wałków w sklepie
     const relatedProducts: Product[] = []
@@ -578,103 +590,21 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
       )
     }
 
-    // FAQ Schema
-    const faqSchema = faqItems.length > 0 ? {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": faqItems.map(item => ({
-        "@type": "Question",
-        "name": item.question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": item.answer
-        }
-      }))
-    } : null
-
     // BreadcrumbList Schema
     const breadcrumbSchema = {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
-      "itemListElement": productBreadcrumbs.map((crumb, index) => ({
-        "@type": "ListItem",
-        "position": index + 1,
-        "name": crumb.label,
-        "item": crumb.href ? `https://www.serwis-zebry.pl${crumb.href}` : undefined
-      })).filter(item => item.item)
-    }
-
-    // HowTo Schema - Wymiana głowicy (tylko dla głowic)
-    const howToSchema = product.product_type === 'glowica' ? {
-      "@context": "https://schema.org",
-      "@type": "HowTo",
-      "name": `Jak wymienić głowicę w drukarce ${product.device_model || 'Zebra'}`,
-      "description": `Instrukcja wymiany głowicy drukującej ${product.sku} w drukarce ${product.device_model || 'Zebra'}. Wymiana zajmuje 5-10 minut.`,
-      "image": schemaImageUrl,
-      "totalTime": "PT10M",
-      "estimatedCost": {
-        "@type": "MonetaryAmount",
-        "currency": "PLN",
-        "value": product.price_brutto
-      },
-      "supply": [
-        { "@type": "HowToSupply", "name": `Nowa głowica ${product.sku}` },
-        { "@type": "HowToSupply", "name": "Śrubokręt imbusowy (opcjonalnie)" }
-      ],
-      "tool": [
-        { "@type": "HowToTool", "name": "Alkohol izopropylowy IPA 99%" },
-        { "@type": "HowToTool", "name": "Ściereczka bezpyłowa" }
-      ],
-      "step": [
-        {
-          "@type": "HowToStep",
-          "position": 1,
-          "name": "Wyłącz drukarkę",
-          "text": "Wyłącz drukarkę i odłącz kabel zasilający. Poczekaj 2-3 minuty aż głowica ostygnie."
-        },
-        {
-          "@type": "HowToStep",
-          "position": 2,
-          "name": "Otwórz pokrywę",
-          "text": "Otwórz pokrywę drukarki i wyjmij etykiety oraz ribbon (jeśli dotyczy)."
-        },
-        {
-          "@type": "HowToStep",
-          "position": 3,
-          "name": "Odłącz taśmę flat cable",
-          "text": "Ostrożnie odłącz taśmę flat cable od starej głowicy. Zwróć uwagę na kierunek podłączenia."
-        },
-        {
-          "@type": "HowToStep",
-          "position": 4,
-          "name": "Odkręć śruby mocujące",
-          "text": "Odkręć 2-4 śruby imbusowe mocujące głowicę do mechanizmu drukarki."
-        },
-        {
-          "@type": "HowToStep",
-          "position": 5,
-          "name": "Zamontuj nową głowicę",
-          "text": "Włóż nową głowicę, dokręć śruby i podłącz taśmę flat cable."
-        },
-        {
-          "@type": "HowToStep",
-          "position": 6,
-          "name": "Wykonaj kalibrację",
-          "text": "Zamknij pokrywę, włącz drukarkę i wykonaj kalibrację czujników z menu drukarki."
+      "itemListElement": productBreadcrumbs.map((crumb, index) => {
+        const entry: Record<string, unknown> = {
+          "@type": "ListItem",
+          "position": index + 1,
+          "name": crumb.label
         }
-      ]
-    } : null
-
-    // Speakable Schema dla voice search (AEO)
-    const speakableSchema = {
-      "@context": "https://schema.org",
-      "@type": "WebPage",
-      "name": product.name,
-      "speakable": {
-        "@type": "SpeakableSpecification",
-        "cssSelector": [".quick-answer", "h1", ".product-price"]
-      },
-      "url": `https://www.serwis-zebry.pl/sklep/${slugPath.join('/')}`
+        if (crumb.href) {
+          entry.item = `https://www.serwis-zebry.pl${crumb.href}`
+        }
+        return entry
+      })
     }
 
     // Generuj "Szybka odpowiedź" dla głowic
@@ -1050,6 +980,20 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
           </article>
         </main>
 
+        {/* Sticky CTA na mobile — widoczny po scrollu */}
+        <StickyAddToCart
+          product={{
+            id: product.id,
+            name: product.name,
+            slug: product.slug,
+            sku: product.sku,
+            price: product.price,
+            price_brutto: product.price_brutto,
+            product_type: product.product_type,
+            stock: product.stock,
+          }}
+        />
+
         <Footer />
 
         {/* JSON-LD Product Schema */}
@@ -1060,16 +1004,6 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
           }}
         />
 
-        {/* JSON-LD FAQ Schema */}
-        {faqSchema && (
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{
-              __html: JSON.stringify(faqSchema)
-            }}
-          />
-        )}
-
         {/* JSON-LD BreadcrumbList Schema */}
         <script
           type="application/ld+json"
@@ -1078,23 +1012,6 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
           }}
         />
 
-        {/* JSON-LD HowTo Schema - Wymiana głowicy */}
-        {howToSchema && (
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{
-              __html: JSON.stringify(howToSchema)
-            }}
-          />
-        )}
-
-        {/* JSON-LD Speakable Schema - Voice Search / AEO */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(speakableSchema)
-          }}
-        />
       </>
     )
   }
@@ -1171,85 +1088,36 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
     })
   } : null
 
-  // FAQ Schema dla kategorii głowic przemysłowych
-  const industrialFaqSchema = productType.id === 'glowica' && printerCategory?.id === 'industrial' ? {
+  // BreadcrumbList Schema dla kategorii
+  const categoryBreadcrumbSchema = {
     "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
+    "@type": "BreadcrumbList",
+    "itemListElement": [
       {
-        "@type": "Question",
-        "name": "Czy głowica ZT410 pasuje do ZT411?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Tak! Głowice do ZT410 są w pełni kompatybilne z ZT411. Zebra zachowała tę samą konstrukcję głowicy w obu modelach. Part Number dla 203 DPI: P1058930-009, dla 300 DPI: P1058930-010, dla 600 DPI: P1058930-011."
-        }
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Start",
+        "item": "https://www.serwis-zebry.pl"
       },
       {
-        "@type": "Question",
-        "name": "Jak sprawdzić aktualną rozdzielczość drukarki Zebra?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Wydrukuj raport konfiguracji (Configuration Report) — znajdziesz tam RESOLUTION lub DPI. Alternatywnie, sprawdź etykietę na głowicy."
-        }
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Sklep",
+        "item": "https://www.serwis-zebry.pl/sklep"
       },
-      {
-        "@type": "Question",
-        "name": "Ile kosztuje głowica do drukarki przemysłowej Zebra?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Ceny oryginalnych głowic Zebra do drukarek przemysłowych to ok. 1000-3500 zł netto w zależności od modelu i rozdzielczości. Głowice 600 DPI są najdroższe."
+      ...breadcrumbs.map((crumb, index) => {
+        const entry: Record<string, unknown> = {
+          "@type": "ListItem",
+          "position": index + 3,
+          "name": crumb.label
         }
-      },
-      {
-        "@type": "Question",
-        "name": "Jaką rozdzielczość głowicy wybrać: 203 DPI, 300 DPI czy 600 DPI?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "203 DPI to standard dla etykiet logistycznych i kodów 1D. 300 DPI jest idealna dla kodów 2D (QR, DataMatrix) i etykiet farmaceutycznych. 600 DPI to najwyższa jakość do mikro-kodów i etykiet jubilerskich."
+        if (crumb.href) {
+          entry.item = `https://www.serwis-zebry.pl${crumb.href}`
         }
-      },
-      {
-        "@type": "Question",
-        "name": "Jaka jest żywotność głowicy w drukarce przemysłowej Zebra?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Głowice przemysłowe Zebra mają żywotność 1-3 miliony cali druku (25-75 km etykiet) w zależności od rozdzielczości i materiałów. Regularne czyszczenie alkoholem IPA wydłuża żywotność nawet o 50%."
-        }
-      }
+        return entry
+      })
     ]
-  } : null
-
-  // FAQ Schema dla kategorii głowic biurkowych
-  const desktopFaqSchema = productType.id === 'glowica' && printerCategory?.id === 'desktop' ? {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "Czy głowica GK420 pasuje do ZD421?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Nie. ZD421 to nowsza generacja z inną konstrukcją. Głowice GK420 pasują tylko do GK420d/t i GX420d/t."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Jaka jest cena głowicy do drukarki biurkowej Zebra?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Oryginalne głowice Zebra do drukarek biurkowych kosztują ok. 400-1200 zł netto. Głowice 300 DPI są droższe od 203 DPI."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Jaka jest różnica między drukiem termicznym a termotransferowym?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Druk termiczny (Direct Thermal) drukuje bezpośrednio na papierze termicznym bez taśmy, ale wydruk blaknie w czasie. Druk termotransferowy (Thermal Transfer) używa taśmy barwiącej (ribbon) i daje trwały wydruk odporny na ścieranie i UV."
-        }
-      }
-    ]
-  } : null
+  }
 
   return (
     <>
@@ -1259,18 +1127,10 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
           dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
         />
       )}
-      {industrialFaqSchema && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(industrialFaqSchema) }}
-        />
-      )}
-      {desktopFaqSchema && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(desktopFaqSchema) }}
-        />
-      )}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(categoryBreadcrumbSchema) }}
+      />
       <Header currentPage="other" />
       <ShopSubheader breadcrumbs={breadcrumbs} />
       

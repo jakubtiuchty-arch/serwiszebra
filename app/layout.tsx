@@ -28,6 +28,9 @@ const organizationSchema = {
   "email": "serwis@takma.com.pl",
   "address": {
     "@type": "PostalAddress",
+    "streetAddress": "ul. Poświęcka 1a",
+    "addressLocality": "Wrocław",
+    "postalCode": "51-128",
     "addressCountry": "PL"
   },
   "contactPoint": {
