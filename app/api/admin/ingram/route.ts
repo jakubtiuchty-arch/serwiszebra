@@ -1,12 +1,13 @@
 import { NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
-import { 
+import {
   checkPriceAndAvailability,
   getProductDetails,
   getDeliveryAddresses,
   getOrdersList,
   getOrderDetails,
   getInvoicesList,
+  getInvoiceDetails,
   testIngramConnection,
   syncProductsWithIngram,
   testSkuFormats,
@@ -157,6 +158,16 @@ export async function GET(request: Request) {
         const invoicesResult = await getInvoicesList(dateFrom || undefined, dateTo || undefined)
         return NextResponse.json(invoicesResult)
 
+      // Invoice Details (z PDF)
+      case 'invoicedetails': {
+        const invoiceNum = searchParams.get('invoice')
+        if (!invoiceNum) {
+          return NextResponse.json({ error: 'Brak parametru invoice (np. ?invoice=FS10_123456)' }, { status: 400 })
+        }
+        const invoiceResult = await getInvoiceDetails(invoiceNum)
+        return NextResponse.json(invoiceResult)
+      }
+
       // Sync with database
       case 'sync':
         const syncResult = await syncProductsWithIngram(supabase)
@@ -202,6 +213,10 @@ export async function GET(request: Request) {
             invoices: {
               description: 'Lista faktur',
               example: '/api/admin/ingram?action=invoices&from=2024-01-01'
+            },
+            invoicedetails: {
+              description: 'Szczegóły faktury z PDF (base64)',
+              example: '/api/admin/ingram?action=invoicedetails&invoice=FS10_123456'
             },
             sync: {
               description: 'Synchronizuje ceny produktów z Ingram Micro',

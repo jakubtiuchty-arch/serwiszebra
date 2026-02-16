@@ -36,16 +36,36 @@ interface IngramResponse {
   workingFormat?: string
 }
 
+interface PnAWarehouse {
+  name: string
+  countryCode: string
+  leadTimeDays: number
+  qtyAvailable: number
+  qtyInDelivery: number
+}
+
 interface PnAItem {
   itemId: string
   vpn: string
   ean: string
   name: string
   manufacturer: string
-  price: number
+  listPrice: number           // Cena katalogowa
+  yourPrice: number           // Nasza cena zakupu (baza do marży)
+  miscChargesPerUnit: number  // Dodatkowe opłaty per szt.
   currency: string
-  qty: number
-  warehouse: string
+  minOrderQty: number
+  multiplicity: number
+  // Stock
+  qtyTotal: number            // Suma całkowita
+  qtyLocalWarehouse: number   // Magazyn PL (24h)
+  qtyLocalInDelivery: number  // W drodze do PL
+  additionalWarehouses: PnAWarehouse[]
+  backorderAllowed: boolean
+  // Legacy compatibility
+  price: number               // = yourPrice (kompatybilność wsteczna)
+  qty: number                 // = qtyTotal (kompatybilność wsteczna)
+  warehouse: string           // 'PL' jeśli qtyLocalWarehouse > 0
   eta: string
 }
 
@@ -385,8 +405,8 @@ async function sendXmlRequest(xmlBody: string, timeoutMs: number = 5000): Promis
     const response = await fetch(INGRAM_XML_API_URL, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/xml',
-        'Accept': 'application/xml',
+        'Content-Type': 'text/xml; charset=utf-8',
+        'Accept': 'text/xml',
       },
       body: xmlBody,
       signal: controller.signal,
@@ -500,7 +520,7 @@ export async function checkPriceAndAvailability(skus: string[], tryAllFormats: b
   if (tryAllFormats && skus.length === 1) {
     const sku = skus[0]
     const withoutZB = sku.replace(/^ZB/i, '')
-    
+
     // Formaty do przetestowania
     skusToCheck = [
       sku,                                        // oryginalny: P1112640-218
@@ -508,57 +528,56 @@ export async function checkPriceAndAvailability(skus: string[], tryAllFormats: b
       'ZB' + withoutZB.replace(/-/g, ''),         // ZB + bez myślników: ZBP1112640218
       withoutZB.replace(/-/g, ''),                // bez myślników: P1112640218
     ].filter((v, i, a) => a.indexOf(v) === i)     // usuń duplikaty
-    
+
     console.log('[Ingram] Próbuję formatów SKU:', skusToCheck)
   }
 
-  // Tylko 2 najważniejsze warianty XML (szybsze)
-  const xmlVariants = [
-    // Wariant 1: ItemID
-    skusToCheck.map(sku => `<Item><ItemID>${escapeXml(sku)}</ItemID></Item>`).join(''),
-    // Wariant 2: VPN (Vendor Part Number)
-    skusToCheck.map(sku => `<Item><VPN>${escapeXml(sku)}</VPN></Item>`).join(''),
-  ]
+  // IMCEE-XML 2.0: PNAInformation z ItemID jako atrybut
+  const pnaInfoXml = skusToCheck.map(sku =>
+    `    <PNAInformation ItemID="${escapeXml(sku)}"/>`
+  ).join('\n')
 
-  for (let i = 0; i < xmlVariants.length; i++) {
-    const itemsXml = xmlVariants[i]
-    const variantName = ['ItemID', 'VPN'][i]
-    
-    const xmlRequest = `<?xml version="1.0" encoding="UTF-8"?>
+  const xmlRequest = `<?xml version="1.0" encoding="UTF-8"?>
 <PNARequest>
   <TransactionHeader>
     <APIKey>${INGRAM_API_KEY}</APIKey>
+    <MyPriceCurrency>PLN</MyPriceCurrency>
   </TransactionHeader>
-  <Items>${itemsXml}</Items>
+  <PNAInformations>
+${pnaInfoXml}
+  </PNAInformations>
 </PNARequest>`
 
-    console.log(`[Ingram] Próbuję wariant ${variantName}...`)
-    const response = await sendXmlRequest(xmlRequest, 4000) // 4s timeout
-    
-    if (!response.success) {
-      continue // Próbuj następny wariant
-    }
+  console.log('[Ingram PnA] Wysyłam request dla', skusToCheck.length, 'SKU...')
+  const response = await sendXmlRequest(xmlRequest, 15000) // 15s timeout
 
-    // Parsuj odpowiedź PnA
-    const items = parsePnAResponse(response.data)
-    
-    // Jeśli znaleziono produkty, zwróć wynik
-    if (items.length > 0) {
-      console.log(`[Ingram] Sukces z wariantem ${variantName}!`)
-      return { 
-        success: true, 
-        data: items, 
-        rawResponse: response.rawResponse,
-        triedFormats: tryAllFormats ? skusToCheck : undefined,
-        workingFormat: variantName
-      }
+  if (!response.success) {
+    return {
+      success: false,
+      data: [],
+      error: response.error,
+      rawResponse: response.rawResponse,
+      triedFormats: tryAllFormats ? skusToCheck : undefined
     }
   }
 
-  // Żaden wariant nie zadziałał - zwróć ostatnią odpowiedź bez dodatkowego requestu
-  return { 
-    success: true, 
-    data: [], 
+  // Parsuj odpowiedź PnA
+  const items = parsePnAResponse(response.data)
+
+  if (items.length > 0) {
+    console.log('[Ingram PnA] Znaleziono', items.length, 'produktów')
+    return {
+      success: true,
+      data: items,
+      rawResponse: response.rawResponse,
+      triedFormats: tryAllFormats ? skusToCheck : undefined,
+      workingFormat: 'IMCEE-XML 2.0'
+    }
+  }
+
+  return {
+    success: true,
+    data: [],
     triedFormats: tryAllFormats ? skusToCheck : undefined,
     error: 'Nie znaleziono produktu w Ingram Micro'
   }
@@ -573,12 +592,11 @@ export async function testSingleSku(sku: string): Promise<IngramResponse> {
 <PNARequest>
   <TransactionHeader>
     <APIKey>${INGRAM_API_KEY}</APIKey>
+    <MyPriceCurrency>PLN</MyPriceCurrency>
   </TransactionHeader>
-  <Items>
-    <Item>
-      <ItemID>${escapeXml(sku)}</ItemID>
-    </Item>
-  </Items>
+  <PNAInformations>
+    <PNAInformation ItemID="${escapeXml(sku)}"/>
+  </PNAInformations>
 </PNARequest>`
 
   // 30s timeout - Ingram odpowiada bardzo wolno dla PnA
@@ -600,61 +618,55 @@ export async function testSingleSku(sku: string): Promise<IngramResponse> {
  */
 export async function testSkuFormats(sku: string): Promise<IngramResponse> {
   const withoutZB = sku.replace(/^ZB/i, '')
-  
-  // Więcej formatów do przetestowania
+
+  // Formaty SKU do przetestowania (IMCEE-XML 2.0 używa ItemID jako atrybutu)
   const formats = [
     sku,                                        // oryginalny: P1112640-218
     'ZB' + withoutZB,                           // ZB + oryginalny: ZBP1112640-218
     'ZB' + withoutZB.replace(/-/g, ''),         // ZB + bez myślników: ZBP1112640218
     withoutZB.replace(/-/g, ''),                // bez myślników: P1112640218
   ].filter((v, i, a) => a.indexOf(v) === i)     // usuń duplikaty
-  
-  // Tylko 3 najważniejsze tagi XML
-  const xmlTags = ['ItemID', 'VPN', 'IngramSKU']
-  const results: { format: string; xmlTag: string; found: boolean }[] = []
-  
-  console.log(`[Ingram] Testuję ${formats.length} formatów x ${xmlTags.length} tagów XML dla SKU: ${sku}`)
-  
+
+  const results: { format: string; found: boolean }[] = []
+
+  console.log(`[Ingram] Testuję ${formats.length} formatów SKU (IMCEE-XML 2.0) dla: ${sku}`)
+
   for (const format of formats) {
-    for (const xmlTag of xmlTags) {
-      const xmlRequest = `<?xml version="1.0" encoding="UTF-8"?>
+    const xmlRequest = `<?xml version="1.0" encoding="UTF-8"?>
 <PNARequest>
   <TransactionHeader>
     <APIKey>${INGRAM_API_KEY}</APIKey>
+    <MyPriceCurrency>PLN</MyPriceCurrency>
   </TransactionHeader>
-  <Items>
-    <Item>
-      <${xmlTag}>${escapeXml(format)}</${xmlTag}>
-    </Item>
-  </Items>
+  <PNAInformations>
+    <PNAInformation ItemID="${escapeXml(format)}"/>
+  </PNAInformations>
 </PNARequest>`
 
-      const response = await sendXmlRequest(xmlRequest, 4000) // 4s timeout per request
-      const items = response.success ? parsePnAResponse(response.data) : []
-      const found = items.length > 0
-      
-      results.push({ format, xmlTag, found })
-      
-      console.log(`[Ingram] ${format} + <${xmlTag}>: ${found ? 'ZNALEZIONO!' : 'nie znaleziono'}`)
-      
-      // Jeśli znaleziono, zwróć natychmiast
-      if (found) {
-        return { 
-          success: true, 
-          data: items, 
-          rawResponse: response.rawResponse,
-          workingFormat: `${format} with <${xmlTag}>`
-        }
+    const response = await sendXmlRequest(xmlRequest, 10000) // 10s timeout per request
+    const items = response.success ? parsePnAResponse(response.data) : []
+    const found = items.length > 0
+
+    results.push({ format, found })
+
+    console.log(`[Ingram] ${format}: ${found ? 'ZNALEZIONO!' : 'nie znaleziono'}`)
+
+    // Jeśli znaleziono, zwróć natychmiast
+    if (found) {
+      return {
+        success: true,
+        data: items,
+        rawResponse: response.rawResponse,
+        workingFormat: format
       }
     }
   }
-  
-  return { 
-    success: false, 
+
+  return {
+    success: false,
     error: `Nie znaleziono produktu "${sku}". Sprawdź czy SKU jest poprawne.`,
-    data: { 
-      testedFormats: formats, 
-      testedXmlTags: xmlTags,
+    data: {
+      testedFormats: formats,
       results
     }
   }
@@ -677,67 +689,88 @@ export async function testRawXml(xmlBody: string): Promise<IngramResponse> {
  */
 function parsePnAResponse(xml: string): PnAItem[] {
   const items: PnAItem[] = []
-  
+
   console.log('[Ingram PnA] Parsing XML response, length:', xml.length)
   console.log('[Ingram PnA] XML preview:', xml.substring(0, 800))
-  
-  // Regex do wyciągania <Item>...</Item>
-  const itemRegex = /<Item>([\s\S]*?)<\/Item>/g
+
+  // IMCEE-XML 2.0: <Products><Product>...</Product></Products>
+  const productRegex = /<Product>([\s\S]*?)<\/Product>/g
   let match
 
-  while ((match = itemRegex.exec(xml)) !== null) {
-    const itemXml = match[1]
-    
-    // Qty może być w różnych tagach: Qty, Stock, Quantity, AvailableQty
-    const qtyStr = extractXmlValue(itemXml, 'Qty') 
-      || extractXmlValue(itemXml, 'Stock') 
-      || extractXmlValue(itemXml, 'Quantity')
-      || extractXmlValue(itemXml, 'AvailableQty')
-      || '0'
-    
-    const item: PnAItem = {
-      itemId: extractXmlValue(itemXml, 'ItemID') || '',
-      vpn: extractXmlValue(itemXml, 'VPN') || '',
-      ean: extractXmlValue(itemXml, 'EAN_UPC_Code') || extractXmlValue(itemXml, 'EAN') || '',
-      name: extractXmlValue(itemXml, 'ProductName') || extractXmlValue(itemXml, 'Name') || '',
-      manufacturer: extractXmlValue(itemXml, 'Manufacturer') || extractXmlValue(itemXml, 'Vendor') || '',
-      price: parseFloat(extractXmlValue(itemXml, 'Price') || '0'),
-      currency: extractXmlValue(itemXml, 'Currency') || 'PLN',
-      qty: parseInt(qtyStr),
-      warehouse: extractXmlValue(itemXml, 'Warehouse') || extractXmlValue(itemXml, 'Location') || '',
-      eta: extractXmlValue(itemXml, 'ETA') || extractXmlValue(itemXml, 'Availability') || '',
+  while ((match = productRegex.exec(xml)) !== null) {
+    const productXml = match[1]
+
+    // Podstawowe dane
+    const itemId = extractXmlValue(productXml, 'ItemID') || ''
+    const vpn = extractXmlValue(productXml, 'VPN') || ''
+
+    // Cena — kontener <Price>
+    const priceSection = productXml.match(/<Price>([\s\S]*?)<\/Price>/)
+    const priceXml = priceSection ? priceSection[1] : ''
+    const listPrice = parseFloat(extractXmlValue(priceXml, 'ListPrice') || '0')
+    const yourPrice = parseFloat(extractXmlValue(priceXml, 'YourPrice') || '0')
+    const currency = extractXmlValue(priceXml, 'Currency') || 'PLN'
+    const miscCharges = parseFloat(extractXmlValue(priceXml, 'TotalMiscChargesPerUnit') || '0')
+
+    // Zamówienia
+    const minOrderQty = parseInt(extractXmlValue(productXml, 'MinOrderQty') || '1')
+    const multiplicity = parseInt(extractXmlValue(productXml, 'Multiplicity') || '1')
+
+    // Dostępność — kontener <Availability>
+    const availSection = productXml.match(/<Availability>([\s\S]*?)<\/Availability>/)
+    const availXml = availSection ? availSection[1] : ''
+    const backorderAllowed = (extractXmlValue(availXml, 'BackorderAllowed') || '').toLowerCase() === 'yes'
+    const qtyTotal = parseInt(extractXmlValue(availXml, 'QtyTotalAvailable') || '0')
+    const qtyLocalWarehouse = parseInt(extractXmlValue(availXml, 'QtyLocalWarehouseAvailable') || '0')
+    const qtyLocalInDelivery = parseInt(extractXmlValue(availXml, 'QtyLocalWarehouseAvailableInDelivery') || '0')
+
+    // Dodatkowe magazyny — <AdditionalWarehouses><Warehouse>...</Warehouse></AdditionalWarehouses>
+    const additionalWarehouses: PnAWarehouse[] = []
+    const warehousesSection = availXml.match(/<AdditionalWarehouses>([\s\S]*?)<\/AdditionalWarehouses>/)
+    if (warehousesSection) {
+      const whRegex = /<Warehouse>([\s\S]*?)<\/Warehouse>/g
+      let whMatch
+      while ((whMatch = whRegex.exec(warehousesSection[1])) !== null) {
+        const whXml = whMatch[1]
+        additionalWarehouses.push({
+          name: extractXmlValue(whXml, 'Name') || '',
+          countryCode: extractXmlValue(whXml, 'CountryCode') || '',
+          leadTimeDays: parseInt(extractXmlValue(whXml, 'AdditionalLeadTime') || '0'),
+          qtyAvailable: parseInt(extractXmlValue(whXml, 'QtyAvailable') || '0'),
+          qtyInDelivery: parseInt(extractXmlValue(whXml, 'QtyAvailableInDelivery') || '0'),
+        })
+      }
     }
-    
-    console.log('[Ingram PnA] Parsed item:', item)
+
+    const item: PnAItem = {
+      itemId,
+      vpn,
+      ean: extractXmlValue(productXml, 'EAN_UPC_Code') || extractXmlValue(productXml, 'EAN') || '',
+      name: extractXmlValue(productXml, 'ProductName') || '',
+      manufacturer: extractXmlValue(productXml, 'Manufacturer') || '',
+      listPrice,
+      yourPrice,
+      miscChargesPerUnit: miscCharges,
+      currency,
+      minOrderQty,
+      multiplicity,
+      qtyTotal,
+      qtyLocalWarehouse,
+      qtyLocalInDelivery,
+      additionalWarehouses,
+      backorderAllowed,
+      // Kompatybilność wsteczna
+      price: yourPrice,
+      qty: qtyTotal,
+      warehouse: qtyLocalWarehouse > 0 ? 'PL' : (additionalWarehouses.length > 0 ? additionalWarehouses[0].countryCode : ''),
+      eta: '',
+    }
+
+    console.log('[Ingram PnA] Parsed product:', itemId, '| YourPrice:', yourPrice, currency, '| Stock PL:', qtyLocalWarehouse, '| Total:', qtyTotal)
     items.push(item)
   }
 
-  // Jeśli nie znaleziono Item, spróbuj parsować płaską strukturę (PriceAvailabilityResponse)
-  if (items.length === 0) {
-    const stock = extractXmlValue(xml, 'Stock') || extractXmlValue(xml, 'Qty') || '0'
-    const price = extractXmlValue(xml, 'Price') || '0'
-    const itemId = extractXmlValue(xml, 'ItemID') || extractXmlValue(xml, 'SKU') || ''
-    const availability = extractXmlValue(xml, 'Availability') || ''
-    
-    if (stock !== '0' || itemId) {
-      const item: PnAItem = {
-        itemId: itemId,
-        vpn: extractXmlValue(xml, 'VPN') || '',
-        ean: extractXmlValue(xml, 'EAN') || '',
-        name: extractXmlValue(xml, 'ProductName') || '',
-        manufacturer: extractXmlValue(xml, 'Manufacturer') || '',
-        price: parseFloat(price),
-        currency: extractXmlValue(xml, 'Currency') || 'PLN',
-        qty: parseInt(stock),
-        warehouse: extractXmlValue(xml, 'Warehouse') || 'PL', // domyślnie PL
-        eta: availability,
-      }
-      console.log('[Ingram PnA] Parsed flat structure:', item)
-      items.push(item)
-    }
-  }
-
-  console.log('[Ingram PnA] Total items parsed:', items.length)
+  console.log('[Ingram PnA] Total products parsed:', items.length)
   return items
 }
 
@@ -1726,6 +1759,210 @@ export async function getIngramSerialNumbers(imOrderId: string): Promise<Map<str
 }
 
 // ============================================
+// INVOICE DETAILS
+// ============================================
+
+interface InvoiceLineDetail {
+  lineNumber: number
+  itemId: string
+  vpn: string
+  productName: string
+  qty: number
+  unitPrice: number
+  totalNetAmount: number
+  miscChargesPerUnit: number
+  serialNumbers: string[]
+}
+
+interface InvoiceVatSummary {
+  vatRate: string
+  netAmount: number
+  vatAmount: number
+  grossAmount: number
+}
+
+interface InvoiceDetailsData {
+  invoiceNumber: string
+  invoiceDate: string
+  dueDate: string
+  currency: string
+  totalNetAmount: number
+  totalVatAmount: number
+  totalGrossAmount: number
+  billTo: {
+    companyName: string
+    addressLine1: string
+    city: string
+    postCode: string
+    countryCode: string
+    nip: string
+  }
+  shipTo: {
+    companyName: string
+    addressLine1: string
+    city: string
+    postCode: string
+    countryCode: string
+  }
+  lines: InvoiceLineDetail[]
+  vatSummary: InvoiceVatSummary[]
+  invoiceDocumentBase64: string | null  // PDF zakodowany w base64
+  imOrderId: string
+}
+
+/**
+ * Pobiera szczegóły faktury z Ingram Micro (IMCEE-XML 2.0)
+ * Zawiera dane faktury, linie z produktami, VAT summary i PDF w base64
+ *
+ * @param invoiceNumber - Numer faktury Ingram (np. "FS10_123456")
+ */
+export async function getInvoiceDetails(invoiceNumber: string): Promise<{
+  success: boolean
+  invoiceDetails?: InvoiceDetailsData
+  error?: string
+  rawResponse?: string
+}> {
+  if (!INGRAM_API_KEY) {
+    return { success: false, error: 'Brak klucza API Ingram Micro' }
+  }
+
+  const xmlRequest = `<?xml version="1.0" encoding="UTF-8"?>
+<InvoiceDetailsRequest>
+  <TransactionHeader>
+    <APIKey>${INGRAM_API_KEY}</APIKey>
+  </TransactionHeader>
+  <Invoice InvoiceNumber="${escapeXml(invoiceNumber)}"/>
+</InvoiceDetailsRequest>`
+
+  console.log('[Ingram InvoiceDetails] Pobieram fakturę:', invoiceNumber)
+
+  const response = await sendXmlRequest(xmlRequest, 30000) // 30s timeout - PDF może być duży
+
+  if (!response.success) {
+    return {
+      success: false,
+      error: response.error,
+      rawResponse: response.rawResponse
+    }
+  }
+
+  const xml = response.data || ''
+
+  // Sprawdź błędy
+  const errorsMatch = xml.match(/<Errors>([\s\S]*?)<\/Errors>/)
+  if (errorsMatch && errorsMatch[1].trim()) {
+    const errorContent = errorsMatch[1].replace(/<\/?Error>/g, '').trim()
+    if (errorContent) {
+      return { success: false, error: errorContent, rawResponse: response.rawResponse }
+    }
+  }
+
+  // Parsuj dane faktury
+  const invoiceSection = xml.match(/<Invoice>([\s\S]*?)<\/Invoice>/) || xml.match(/<InvoiceDetails>([\s\S]*?)<\/InvoiceDetails>/)
+  if (!invoiceSection) {
+    return { success: false, error: 'Brak danych faktury w odpowiedzi', rawResponse: response.rawResponse }
+  }
+
+  const inv = invoiceSection[1]
+
+  // BillTo
+  const billToMatch = inv.match(/<BillTo>([\s\S]*?)<\/BillTo>/)
+  const billToXml = billToMatch ? billToMatch[1] : ''
+
+  // ShipTo
+  const shipToMatch = inv.match(/<ShipTo>([\s\S]*?)<\/ShipTo>/)
+  const shipToXml = shipToMatch ? shipToMatch[1] : ''
+
+  // Linie faktury
+  const lines: InvoiceLineDetail[] = []
+  const linesSection = inv.match(/<InvoiceLines>([\s\S]*?)<\/InvoiceLines>/) || inv.match(/<Lines>([\s\S]*?)<\/Lines>/)
+  if (linesSection) {
+    const lineRegex = /<(?:InvoiceLine|Line)>([\s\S]*?)<\/(?:InvoiceLine|Line)>/g
+    let lineMatch
+    while ((lineMatch = lineRegex.exec(linesSection[1])) !== null) {
+      const lineXml = lineMatch[1]
+      const serialNumbers: string[] = []
+      const serialRegex = /<Serial>([^<]+)<\/Serial>/g
+      let serialMatch
+      while ((serialMatch = serialRegex.exec(lineXml)) !== null) {
+        serialNumbers.push(serialMatch[1])
+      }
+
+      lines.push({
+        lineNumber: parseInt(extractXmlValue(lineXml, 'LineNumber') || '0'),
+        itemId: extractXmlValue(lineXml, 'ItemID') || '',
+        vpn: extractXmlValue(lineXml, 'VPN') || '',
+        productName: extractXmlValue(lineXml, 'ProductName') || '',
+        qty: parseInt(extractXmlValue(lineXml, 'Qty') || extractXmlValue(lineXml, 'InvoicedQty') || '0'),
+        unitPrice: parseFloat(extractXmlValue(lineXml, 'UnitPrice') || extractXmlValue(lineXml, 'Price') || '0'),
+        totalNetAmount: parseFloat(extractXmlValue(lineXml, 'TotalNetAmount') || '0'),
+        miscChargesPerUnit: parseFloat(extractXmlValue(lineXml, 'TotalMiscChargesPerUnit') || '0'),
+        serialNumbers
+      })
+    }
+  }
+
+  // VAT Summary
+  const vatSummary: InvoiceVatSummary[] = []
+  const vatSection = inv.match(/<VATSummary>([\s\S]*?)<\/VATSummary>/)
+  if (vatSection) {
+    const vatRegex = /<VATLine>([\s\S]*?)<\/VATLine>/g
+    let vatMatch
+    while ((vatMatch = vatRegex.exec(vatSection[1])) !== null) {
+      const vatXml = vatMatch[1]
+      vatSummary.push({
+        vatRate: extractXmlValue(vatXml, 'VATRate') || '',
+        netAmount: parseFloat(extractXmlValue(vatXml, 'NetAmount') || '0'),
+        vatAmount: parseFloat(extractXmlValue(vatXml, 'VATAmount') || '0'),
+        grossAmount: parseFloat(extractXmlValue(vatXml, 'GrossAmount') || '0')
+      })
+    }
+  }
+
+  // PDF faktury (base64)
+  const invoiceDoc = extractXmlValue(inv, 'InvoiceDocument') || null
+
+  const invoiceDetails: InvoiceDetailsData = {
+    invoiceNumber: extractXmlValue(inv, 'InvoiceNumber') || invoiceNumber,
+    invoiceDate: extractXmlValue(inv, 'InvoiceDate') || '',
+    dueDate: extractXmlValue(inv, 'DueDate') || extractXmlValue(inv, 'PaymentDueDate') || '',
+    currency: extractXmlValue(inv, 'Currency') || 'PLN',
+    totalNetAmount: parseFloat(extractXmlValue(inv, 'TotalNetAmount') || '0'),
+    totalVatAmount: parseFloat(extractXmlValue(inv, 'TotalVATAmount') || extractXmlValue(inv, 'TotalVatAmount') || '0'),
+    totalGrossAmount: parseFloat(extractXmlValue(inv, 'TotalGrossAmount') || '0'),
+    billTo: {
+      companyName: extractXmlValue(billToXml, 'CompanyName') || '',
+      addressLine1: extractXmlValue(billToXml, 'AddressLine1') || '',
+      city: extractXmlValue(billToXml, 'City') || '',
+      postCode: extractXmlValue(billToXml, 'PostCode') || '',
+      countryCode: extractXmlValue(billToXml, 'CountryCode') || '',
+      nip: extractXmlValue(billToXml, 'NIP') || extractXmlValue(billToXml, 'TaxID') || ''
+    },
+    shipTo: {
+      companyName: extractXmlValue(shipToXml, 'CompanyName') || '',
+      addressLine1: extractXmlValue(shipToXml, 'AddressLine1') || '',
+      city: extractXmlValue(shipToXml, 'City') || '',
+      postCode: extractXmlValue(shipToXml, 'PostCode') || '',
+      countryCode: extractXmlValue(shipToXml, 'CountryCode') || ''
+    },
+    lines,
+    vatSummary,
+    invoiceDocumentBase64: invoiceDoc,
+    imOrderId: extractXmlValue(inv, 'IMOrderID') || ''
+  }
+
+  console.log('[Ingram InvoiceDetails] Faktura:', invoiceDetails.invoiceNumber)
+  console.log('[Ingram InvoiceDetails] Linie:', lines.length)
+  console.log('[Ingram InvoiceDetails] PDF:', invoiceDoc ? 'TAK' : 'NIE')
+
+  return {
+    success: true,
+    invoiceDetails,
+    rawResponse: invoiceDoc ? '[PDF base64 usunięty z rawResponse]' : response.rawResponse
+  }
+}
+
+// ============================================
 // TEST CONNECTION
 // ============================================
 
@@ -1843,11 +2080,14 @@ export async function syncProductsWithIngram(supabase: SupabaseClient): Promise<
       const leadTime = ingramProduct.stockPL > 0 ? '1' : (ingramProduct.stockDE > 0 ? '3' : null)
 
       // Przygotuj dane o stockach jako JSON w attributes
+      // CSV pole 'price' to cena zakupu (odpowiednik YourPrice z PnA)
       const stockInfo = {
         stock_pl: ingramProduct.stockPL,
         stock_de: ingramProduct.stockDE,
         in_delivery: ingramProduct.inDelivery,
-        ingram_price: ingramProduct.price,
+        ingram_your_price: ingramProduct.price,
+        ingram_price_with_margin: ingramProduct.priceWithMargin,
+        ingram_currency: ingramProduct.currency,
         last_sync: new Date().toISOString()
       }
 
