@@ -26,9 +26,9 @@ Adres sklepu: https://www.serwis-zebry.pl/sklep
   - Drukarki przemysłowe: https://www.serwis-zebry.pl/sklep/glowice/drukarki-przemyslowe
   - Rozdzielczości: 203 DPI, 300 DPI, 600 DPI
 
-- **Wałki dociskowe (platen roller)** — https://www.serwis-zebry.pl/sklep/walki
-  - Drukarki biurkowe: https://www.serwis-zebry.pl/sklep/walki/drukarki-biurkowe
-  - Drukarki przemysłowe: https://www.serwis-zebry.pl/sklep/walki/drukarki-przemyslowe
+- **Wałki dociskowe (platen roller)** — https://www.serwis-zebry.pl/sklep/walki-dociskowe
+  - Drukarki biurkowe: https://www.serwis-zebry.pl/sklep/walki-dociskowe/drukarki-biurkowe
+  - Drukarki przemysłowe: https://www.serwis-zebry.pl/sklep/walki-dociskowe/drukarki-przemyslowe
 
 - **Akumulatory** — https://www.serwis-zebry.pl/sklep/akumulatory
 

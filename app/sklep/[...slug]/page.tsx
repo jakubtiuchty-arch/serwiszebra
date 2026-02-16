@@ -432,7 +432,7 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
         openGraph: {
           title: 'Wałki dociskowe do drukarek przemysłowych Zebra | TAKMA',
           description: 'Oryginalne wałki dociskowe do ZT230, ZT411, ZT421, ZT510, ZT610, ZT620. Gwarancja producenta.',
-          url: 'https://www.serwis-zebry.pl/sklep/walki/drukarki-przemyslowe',
+          url: 'https://www.serwis-zebry.pl/sklep/walki-dociskowe/drukarki-przemyslowe',
           type: 'website',
           siteName: 'TAKMA - Autoryzowany Serwis Zebra',
           locale: 'pl_PL',
@@ -444,7 +444,7 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
           }]
         },
         alternates: {
-          canonical: 'https://www.serwis-zebry.pl/sklep/walki/drukarki-przemyslowe'
+          canonical: 'https://www.serwis-zebry.pl/sklep/walki-dociskowe/drukarki-przemyslowe'
         }
       }
     }
@@ -457,7 +457,7 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
         openGraph: {
           title: 'Wałki dociskowe do drukarek biurkowych Zebra | TAKMA',
           description: 'Oryginalne wałki dociskowe do ZD220, ZD421, ZD510-HC, ZD621. Szybka wysyłka, gwarancja.',
-          url: 'https://www.serwis-zebry.pl/sklep/walki/drukarki-biurkowe',
+          url: 'https://www.serwis-zebry.pl/sklep/walki-dociskowe/drukarki-biurkowe',
           type: 'website',
           siteName: 'TAKMA - Autoryzowany Serwis Zebra',
           locale: 'pl_PL',
@@ -469,7 +469,7 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
           }]
         },
         alternates: {
-          canonical: 'https://www.serwis-zebry.pl/sklep/walki/drukarki-biurkowe'
+          canonical: 'https://www.serwis-zebry.pl/sklep/walki-dociskowe/drukarki-biurkowe'
         }
       }
     }
@@ -1573,7 +1573,7 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
             </div>
           </section>
 
-          {/* FAQPage Schema — /sklep/walki */}
+          {/* FAQPage Schema — /sklep/walki-dociskowe */}
           <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{ __html: JSON.stringify({
@@ -2016,7 +2016,7 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
           </section>
         )}
 
-        {/* FAQPage Schema — /sklep/walki/drukarki-przemyslowe */}
+        {/* FAQPage Schema — /sklep/walki-dociskowe/drukarki-przemyslowe */}
         {productType.id === 'walek' && slugPath.length === 2 && printerCategory?.id === 'industrial' && (
           <script
             type="application/ld+json"
@@ -2120,7 +2120,7 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
           </section>
         )}
 
-        {/* FAQPage Schema — /sklep/walki/drukarki-biurkowe */}
+        {/* FAQPage Schema — /sklep/walki-dociskowe/drukarki-biurkowe */}
         {productType.id === 'walek' && slugPath.length === 2 && printerCategory?.id === 'desktop' && (
           <script
             type="application/ld+json"

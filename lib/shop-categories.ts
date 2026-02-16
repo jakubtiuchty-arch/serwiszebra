@@ -89,7 +89,7 @@ export const SHOP_CATEGORIES: ProductTypeCategory[] = [
     id: 'walek',
     name: 'Wałek',
     namePlural: 'Wałki dociskowe',
-    slug: 'walki',
+    slug: 'walki-dociskowe',
     enabled: true,
     printerCategories: [
       {

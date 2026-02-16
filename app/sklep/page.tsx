@@ -221,7 +221,7 @@ export default function SklepPage() {
                 wydruku</strong> (500 000 - 1 000 000 etykiet). Popularne Part Numbers:{' '}
                 <strong>P1058930-080</strong> (ZT411), <strong>P1083347-005</strong> (ZT610),{' '}
                 <strong>P1112640-016</strong> (ZD421/ZD621).{' '}
-                <Link href="/sklep/walki" className="text-blue-600 hover:text-blue-800 font-medium">
+                <Link href="/sklep/walki-dociskowe" className="text-blue-600 hover:text-blue-800 font-medium">
                   Zobacz wałki dociskowe →
                 </Link>
               </p>
