@@ -6,8 +6,9 @@ import Link from 'next/link'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import ShopSubheader from '@/components/shop/ShopSubheader'
+import SearchAutocomplete from '@/components/shop/SearchAutocomplete'
 import { useCartStore } from '@/lib/cart-store'
-import { 
+import {
   Package,
   Loader2,
   ArrowUpDown,
@@ -15,7 +16,6 @@ import {
   Truck,
   Shield,
   Phone,
-  Search,
   ChevronDown,
   X,
   Check,
@@ -74,20 +74,9 @@ export default function SklepPage() {
   })
   const [expandedCategories, setExpandedCategories] = useState<string[]>(['desktop'])
   const [expandedProductTypes, setExpandedProductTypes] = useState<string[]>(['glowica'])
-  const [searchInput, setSearchInput] = useState('')
   const [showMobileFilters, setShowMobileFilters] = useState(false)
-  
-  const addToCart = useCartStore((state) => state.addItem)
 
-  // Debounced search
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (searchInput !== filters.search) {
-        setFilters(prev => ({ ...prev, search: searchInput }))
-      }
-    }, 300)
-    return () => clearTimeout(timer)
-  }, [searchInput])
+  const addToCart = useCartStore((state) => state.addItem)
 
   useEffect(() => {
     fetchProducts()
@@ -96,16 +85,33 @@ export default function SklepPage() {
   async function fetchProducts() {
     setLoading(true)
     try {
-      const params = new URLSearchParams()
-      if (filters.search) params.append('search', filters.search)
-      if (filters.productType) params.append('productType', filters.productType)
-      if (filters.printerModel) params.append('deviceModel', filters.printerModel)
-      if (filters.resolution) params.append('resolution', filters.resolution)
-      if (sortBy) params.append('sortBy', sortBy)
+      if (filters.search) {
+        // Inteligentne wyszukiwanie przez /api/search
+        const params = new URLSearchParams()
+        params.append('q', filters.search)
+        params.append('mode', 'full')
+        params.append('limit', '50')
 
-      const res = await fetch(`/api/products?${params.toString()}`)
-      const data = await res.json()
-      setProducts(data.products || [])
+        const res = await fetch(`/api/search?${params.toString()}`)
+        const data = await res.json()
+        setProducts(data.products || [])
+
+        // Jeśli parser zwrócił sortIntent, użyj go
+        if (data.parsed?.sortIntent && data.parsed.sortIntent !== sortBy) {
+          setSortBy(data.parsed.sortIntent)
+        }
+      } else {
+        // Bez wyszukiwania — klasyczny endpoint z filtrami kategorii
+        const params = new URLSearchParams()
+        if (filters.productType) params.append('productType', filters.productType)
+        if (filters.printerModel) params.append('deviceModel', filters.printerModel)
+        if (filters.resolution) params.append('resolution', filters.resolution)
+        if (sortBy) params.append('sortBy', sortBy)
+
+        const res = await fetch(`/api/products?${params.toString()}`)
+        const data = await res.json()
+        setProducts(data.products || [])
+      }
     } catch (error) {
       console.error('Error fetching products:', error)
     } finally {
@@ -283,32 +289,18 @@ export default function SklepPage() {
             {/* Mobile: Search + Filter Button */}
             <div className="lg:hidden mb-4">
               <div className="flex gap-2">
-                {/* Search */}
-                <div className="flex-1 relative">
-                  <Search className={`absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 ${searchInput ? 'text-blue-500' : 'text-gray-400'}`} />
-                  <input
-                    type="text"
-                    value={searchInput}
-                    onChange={(e) => setSearchInput(e.target.value)}
-                    placeholder="Szukaj..."
-                    className="w-full pl-9 pr-9 py-2.5 text-sm bg-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  />
-                  {searchInput && (
-                    <button
-                      onClick={() => {
-                        setSearchInput('')
-                        setFilters(prev => ({ ...prev, search: '' }))
-                      }}
-                      className="absolute right-3 top-1/2 -translate-y-1/2"
-                    >
-                      <X className="w-4 h-4 text-gray-400" />
-                    </button>
-                  )}
-                </div>
+                <SearchAutocomplete
+                  onSearch={(query, sortIntent) => {
+                    setFilters(prev => ({ ...prev, search: query }))
+                    if (sortIntent) setSortBy(sortIntent)
+                  }}
+                  placeholder="Szukaj..."
+                  className="flex-1"
+                />
                 {/* Filter Button */}
                 <button
                   onClick={() => setShowMobileFilters(true)}
-                  className="flex items-center gap-2 px-4 py-2.5 bg-white border border-gray-200 rounded-lg text-sm font-medium text-gray-700"
+                  className="flex items-center gap-2 px-4 py-2.5 bg-white border border-gray-200 rounded-lg text-sm font-medium text-gray-700 flex-shrink-0"
                 >
                   <SlidersHorizontal className="w-4 h-4" />
                   <span className="hidden sm:inline">Filtry</span>
@@ -328,27 +320,13 @@ export default function SklepPage() {
               <aside className="hidden lg:block w-64 flex-shrink-0">
                 {/* Search */}
                 <div className="bg-white rounded-xl border border-gray-200 p-3 mb-4">
-                  <div className="relative">
-                    <Search className={`absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 ${searchInput ? 'text-blue-500' : 'text-gray-400'}`} />
-                    <input
-                      type="text"
-                      value={searchInput}
-                      onChange={(e) => setSearchInput(e.target.value)}
-                      placeholder="Szukaj: model, PN..."
-                      className="w-full pl-9 pr-9 py-2 text-sm bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white"
-                    />
-                    {searchInput && (
-                      <button
-                        onClick={() => {
-                          setSearchInput('')
-                          setFilters(prev => ({ ...prev, search: '' }))
-                        }}
-                        className="absolute right-3 top-1/2 -translate-y-1/2"
-                      >
-                        <X className="w-4 h-4 text-gray-400" />
-                      </button>
-                    )}
-                  </div>
+                  <SearchAutocomplete
+                    onSearch={(query, sortIntent) => {
+                      setFilters(prev => ({ ...prev, search: query }))
+                      if (sortIntent) setSortBy(sortIntent)
+                    }}
+                    placeholder="Szukaj: model, PN..."
+                  />
                 </div>
 
                 {/* Categories */}
@@ -532,6 +510,19 @@ export default function SklepPage() {
       )}
 
       <Footer />
+
+      {/* BreadcrumbList JSON-LD — tylko na stronie głównej sklepu */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Start", "item": "https://www.serwis-zebry.pl" },
+            { "@type": "ListItem", "position": 2, "name": "Sklep" }
+          ]
+        }) }}
+      />
     </>
   )
 }
