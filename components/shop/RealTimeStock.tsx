@@ -9,6 +9,7 @@ interface RealTimeStockProps {
   fallbackStockDE?: number
   fallbackInDelivery?: number
   totalStock?: number
+  onStockLoaded?: (total: number) => void
 }
 
 interface StockData {
@@ -27,7 +28,8 @@ export default function RealTimeStock({
   fallbackStockPL = 0,
   fallbackStockDE = 0,
   fallbackInDelivery = 0,
-  totalStock = 0
+  totalStock = 0,
+  onStockLoaded,
 }: RealTimeStockProps) {
 
   const [stock, setStock] = useState<StockData>({
@@ -48,12 +50,14 @@ export default function RealTimeStock({
       .then(res => res.json())
       .then(data => {
         if (data.found) {
+          const total = data.total_stock ?? 0
           setStock({
             stockPL: data.stock_pl ?? 0,
             stockDE: data.stock_de ?? 0,
             inDelivery: data.in_delivery ?? 0,
-            total: data.total_stock ?? 0,
+            total,
           })
+          onStockLoaded?.(total)
         }
       })
       .catch(() => {

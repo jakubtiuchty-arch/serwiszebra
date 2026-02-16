@@ -2639,6 +2639,1044 @@ Najszybsza metoda:
 `
   },
   {
+    slug: 'serwis-terminala-zebra-mc3300-mc3300x-diagnostyka-naprawa',
+    title: 'Serwis terminala Zebra MC3300/MC3300x — diagnostyka i naprawa [2026]',
+    excerpt: 'Kompletny poradnik serwisowy Zebra MC3300x. Najczęstsze awarie, koszty napraw, diagnostyka skanera SE4850-ER, bateria Hot Swap, IP54 vs IP65. Kiedy naprawiać, a kiedy migrować na MC3400?',
+    coverImage: '/blog/serwis-terminala-zebra-mc3300-mc3300x-diagnostyka-naprawa.jpeg',
+    coverImageAlt: 'Terminal mobilny Zebra MC3300x z fizyczną klawiaturą — widok diagnostyczny z ikonami serwisowymi',
+    author: {
+      name: 'Krzysztof Wójcik',
+      role: 'Kierownik Serwisu TAKMA'
+    },
+    publishedAt: '2026-02-15',
+    readingTime: 15,
+    deviceType: 'terminale',
+    category: 'troubleshooting',
+    tags: [
+      'Zebra MC3300',
+      'Zebra MC3300x',
+      'serwis MC3300',
+      'naprawa MC3300',
+      'terminal z klawiaturą',
+      'kolektor danych MC3300',
+      'SE4850-ER',
+      'skaner dalekiego zasięgu',
+      'Hot Swap MC3300',
+      'IP54 terminal',
+      'MC3300 vs MC3400',
+      'MC3300 EOL'
+    ],
+    seo: {
+      metaTitle: 'Serwis Zebra MC3300/MC3300x — diagnostyka, naprawa, koszty [2026]',
+      metaDescription: 'Najczęstsze awarie MC3300x i koszty napraw. Diagnostyka skanera, baterii Hot Swap, klawiatury, Wi-Fi. Kiedy naprawiać MC3300x, a kiedy migrować na MC3400? Autoryzowany serwis TAKMA.',
+      keywords: [
+        // Główne frazy serwisowe
+        'serwis mc3300',
+        'serwis mc3300x',
+        'naprawa mc3300',
+        'naprawa mc3300x',
+        'serwis terminala mc3300',
+        'naprawa terminala mc3300',
+        'zebra mc3300 serwis',
+        'zebra mc3300x naprawa',
+
+        // Problemowe
+        'mc3300 nie włącza się',
+        'mc3300 nie działa',
+        'mc3300x nie ładuje',
+        'mc3300 skaner nie działa',
+        'mc3300 wifi nie łączy',
+        'mc3300 bateria nie trzyma',
+        'mc3300 ekran nie reaguje',
+        'mc3300 hot swap nie działa',
+
+        // Kosztowe
+        'ile kosztuje naprawa mc3300',
+        'koszt naprawy mc3300',
+        'wymiana ekranu mc3300 cena',
+        'wymiana baterii mc3300 cena',
+        'wymiana skanera mc3300 cena',
+
+        // Skaner dalekiego zasięgu
+        'se4850 nie skanuje',
+        'se4850-er zasięg',
+        'skaner dalekiego zasięgu zebra',
+        'mc3300 skaner long range',
+
+        // Migracja
+        'mc3300 vs mc3400',
+        'mc3300 eol',
+        'mc3300 end of life',
+        'następca mc3300',
+        'mc3300 zamiennik',
+        'mc3300 naprawa czy wymiana',
+
+        // Techniczne
+        'mc3300x specyfikacja',
+        'mc3300x bateria 7000mah',
+        'mc3300x ip54',
+        'mc3300x recovery mode',
+        'mc3300x factory reset',
+
+        // GEO
+        'serwis mc3300 wrocław',
+        'naprawa mc3300 polska',
+        'serwis terminali zebra autoryzowany'
+      ],
+      faqSchema: [
+        {
+          question: 'Ile kosztuje naprawa terminala Zebra MC3300x?',
+          answer: 'Koszty napraw MC3300x: wymiana baterii 200-400 zł, naprawa ekranu 400-700 zł, naprawa skanera SE4720 400-600 zł (SE4850-ER 600-900 zł), naprawa płyty głównej 1000-1800 zł, naprawa złącza ładowania 250-450 zł. Diagnostyka bezpłatna, gwarancja 6 miesięcy.'
+        },
+        {
+          question: 'Czy MC3300x jest jeszcze wspierany przez Zebra?',
+          answer: 'MC3300x został zastąpiony przez MC3400 i zbliża się do końca wsparcia. Aktualizacje bezpieczeństwa są ograniczone. TAKMA naprawia MC3300x niezależnie od statusu wsparcia producenta — mamy zapas oryginalnych części zamiennych.'
+        },
+        {
+          question: 'Czy bateria MC3300x pasuje do MC3400?',
+          answer: 'Tak, baterie są kompatybilne w obu kierunkach. Bateria 7000 mAh z MC3400 działa w MC3300x. Uwaga: starsza bateria 5200 mAh z MC33 obniża klasę IP w MC3400 z IP65/IP67 do IP65. Bateria 2740 mAh pasuje tylko do MC3300x-R/S.'
+        },
+        {
+          question: 'Dlaczego Hot Swap w MC3300x nie działa?',
+          answer: 'Hot Swap wymaga naładowanego superkondensatora — po włączeniu MC3300x odczekaj minimum 10 minut przed wymianą baterii. Hot Swap utrzymuje Wi-Fi/Bluetooth przez 30 sekund i dane RAM przez 5 minut. Jeśli nadal nie działa — superkondensator może być uszkodzony (naprawa 400-600 zł).'
+        },
+        {
+          question: 'Czy ładowarki MC3300x pasują do MC3400?',
+          answer: 'Tak, pełna kompatybilność wsteczna. Wszystkie stacje dokujące MC3300x (1-slot USB, 5-slot Charge Only, 5-slot Ethernet, 4-slot battery charger) działają z MC3400 bez żadnych modyfikacji.'
+        },
+        {
+          question: 'Czy opłaca się naprawiać MC3300x zamiast kupić MC3400?',
+          answer: 'Zależy od kosztu naprawy. Wymiana baterii (200-400 zł) lub skanera (400-600 zł) jest opłacalna. Naprawa płyty głównej (1000-1800 zł) jest nieopłacalna — za podobną kwotę kupisz używany MC3400. Zasada: koszt naprawy > 50% ceny nowego MC3400 = kupuj nowy.'
+        }
+      ]
+    },
+    content: `
+> **Szybka odpowiedź:** MC3300x nie włącza się? Ładuj baterię 15 minut, potem przytrzymaj Power 10 sek. (hard reset). Skaner SE4850-ER nie skanuje daleko? Sprawdź oświetlenie (min. 20 ft-cd) i wyczyść okienko skanera. Hot Swap nie działa? Odczekaj 10 minut po włączeniu (ładowanie superkondensatora). Koszt naprawy MC3300x: od **200 zł** (bateria) do **1800 zł** (płyta główna). **Diagnostyka bezpłatna.**
+
+## TL;DR — Diagnostyka MC3300x w pigułce
+
+| Problem | Najczęstsza przyczyna | Sam naprawisz? | Koszt serwisu |
+|---------|----------------------|----------------|---------------|
+| Nie włącza się | Rozładowana bateria / zawieszenie | ✅/❌ | 0-400 zł |
+| Skaner nie czyta kodów | DataWedge / brudne okienko | ✅ Tak | 0 zł |
+| Skaner SE4850 krótki zasięg | Oświetlenie / ustawienia | ✅ Tak | 0 zł |
+| Bateria szybko pada | Zużycie / tło aplikacji | ✅/❌ | 200-400 zł |
+| Hot Swap nie działa | Superkondensator | ❌ Serwis | 400-600 zł |
+| Wi-Fi się rozłącza | Ustawienia / antena | ✅/❌ | 0-800 zł |
+| Ekran nie reaguje | Tryb dotyku / digitizer | ✅/❌ | 0-700 zł |
+| Klawiatura wadzi | Orange/Blue mode / brud | ✅/❌ | 0-500 zł |
+| Złącze ładowania luźne | Zużycie mechaniczne | ❌ Serwis | 250-450 zł |
+| Boot loop | System / flash | ❌ Serwis | 300-800 zł |
+
+---
+
+## Zebra MC3300x — specyfikacja serwisowa
+
+MC3300x to jedyny terminal Zebra z **fizyczną klawiaturą** (oprócz nowszego MC3400). Popularny w magazynach, logistyce i produkcji dzięki klawiaturze wygodnej w rękawicach i skanerowi dalekiego zasięgu SE4850-ER.
+
+### Kluczowe parametry MC3300x
+
+| Parametr | Specyfikacja |
+|----------|-------------|
+| **Ekran** | 4.0" WVGA (800×480) LCD |
+| **Procesor** | Qualcomm Snapdragon |
+| **System** | Android 11 (AOSP / GMS) |
+| **RAM / Pamięć** | 4 GB / 16-32 GB |
+| **Wi-Fi** | 802.11 a/b/g/n/ac (2.4 + 5 GHz) |
+| **Bluetooth** | 5.0 + BLE |
+| **NFC** | Tak |
+| **Klawiatury** | 29 / 38 / 47 klawiszy |
+| **Skanery** | SE965 (1D), SE4720 (2D), SE4770 (2D), SE4850-ER (daleki zasięg) |
+| **Baterie** | 2740 / 5200 / 7000 mAh (PowerPrecision+) |
+| **Hot Swap** | Tak (superkondensator: 30 s WiFi, 5 min RAM) |
+| **IP** | **IP54** (uwaga: niższe niż MC3400 IP65/IP67) |
+| **Upadki** | 1.8 m na beton (wielokrotne) |
+| **Waga** | 400-490 g (zależnie od modelu) |
+| **Temp. pracy** | -20°C do +50°C |
+
+### Warianty MC3300x
+
+| Model | Opis | Skaner |
+|-------|------|--------|
+| MC3300x-**G** | Gun grip (pistolet) | SE4850-ER (daleki zasięg do 21 m) |
+| MC3300x-**R** | Rotating turret head | SE4770 (2D standard) |
+| MC3300x-**S** | Straight shooter | SE4720/SE4770 (2D standard) |
+
+---
+
+## Problem 1: MC3300x nie włącza się
+
+### Diagnostyka krok po kroku
+
+**Krok 1 — Sprawdź baterię:**
+- Włóż baterię do ładowarki 4-slotowej i sprawdź LED
+- 🟠 Pomarańczowy ciągły = ładuje się (OK)
+- 🟢 Zielony ciągły = naładowana (OK)
+- 🔴 Czerwony migający 2x/s = błąd ładowania (temperatura/czas)
+- ⚫ Brak LED = sprawdź styki ładowarki
+
+**Krok 2 — Hard reset:**
+- Przytrzymaj przycisk **Power przez 10 sekund**
+- Terminal powinien się zrestartować
+- Jeśli nie reaguje → Krok 3
+
+**Krok 3 — Reset z baterią:**
+1. Wyjmij baterię
+2. Odczekaj 30 sekund
+3. Włóż baterię ponownie
+4. Przytrzymaj Power 3 sekundy
+
+**Krok 4 — Enterprise Reset (boot loop):**
+1. Wyłącz terminal
+2. Przytrzymaj **Power + Volume Up** jednocześnie
+3. W menu Recovery wybierz "Enterprise Reset"
+4. Terminal zrestartuje się z domyślnymi ustawieniami (dane firmowe zachowane)
+
+**Jeśli nic nie pomaga** → uszkodzenie płyty głównej lub złącza zasilania. Wymagany serwis.
+
+---
+
+## Problem 2: Skaner nie działa / krótki zasięg
+
+MC3300x oferuje 4 silniki skanujące — diagnostyka zależy od modelu.
+
+### Zasięg skanerów MC3300x
+
+| Skaner | Typ | Zasięg max | Typowe zastosowanie |
+|--------|-----|------------|---------------------|
+| SE965 | Laser 1D | 2.5 m | Tylko kody kreskowe 1D |
+| SE4720 | Imager 2D | 91 cm | Uniwersalny (magazyn, handel) |
+| SE4770 | Imager 2D | 91 cm | Lepsza wydajność outdoor |
+| **SE4850-ER** | **Long Range 2D** | **21 m** (reflective) | **Wysokie regały, magazyn** |
+
+### SE4850-ER — skaner dalekiego zasięgu (najczęstsze problemy)
+
+SE4850-ER to **unikalna cecha MC3300x-G** — skanowanie z odległości do 21 m. Ale wymaga specjalnych warunków:
+
+**Problem: SE4850-ER nie skanuje z dużej odległości**
+
+| Sprawdź | Rozwiązanie |
+|---------|-------------|
+| Oświetlenie | SE4850-ER wymaga **minimum 20 ft-cd** (~215 lux). W ciemnym magazynie zasięg spada |
+| Typ kodu | Kody refleksyjne: do 21 m. Kody papierowe: do 17.8 m. Kody małe (10 mil): max 2.2 m |
+| Okienko skanera | Wyczyść miękką ściereczką + izopropyl 70%. Zarysowane okienko = wymiana |
+| Kąt skanowania | Optymalne 15-18° od prostopadłej — nie celuj prosto |
+| DataWedge | Sprawdź czy dekodery dla skanowanych kodów są włączone |
+
+**Problem: Skaner SE4720/SE4770 nie czyta kodów 2D**
+
+1. **DataWedge** → Sprawdź czy profil jest aktywny i dekodery QR/Data Matrix włączone
+2. **Wyczyść okienko** skanera (codzienna konserwacja!)
+3. **Sprawdź jakość kodu** — uszkodzone/zamazane kody nie skanują
+4. **Wyłącz niepotrzebne dekodery** → szybsze skanowanie
+5. **Restart** terminala jeśli powyższe nie pomogło
+
+### Cennik napraw skanera MC3300x
+
+| Naprawa | Koszt | Czas |
+|---------|-------|------|
+| Czyszczenie + kalibracja | 80-150 zł | 1-2 dni |
+| Wymiana okienka skanera | 150-250 zł | 2-3 dni |
+| Wymiana modułu SE4720/SE4770 | 400-600 zł | 3-5 dni |
+| Wymiana modułu SE4850-ER | 600-900 zł | 5-7 dni |
+| Wymiana modułu SE965 (1D) | 300-500 zł | 3-5 dni |
+
+---
+
+## Problem 3: Bateria szybko się rozładowuje
+
+### 3 opcje baterii MC3300x
+
+| Bateria | Pojemność | Czas pracy | Czas ładowania | Kompatybilność |
+|---------|-----------|------------|----------------|----------------|
+| Standard (1X) | 2740 mAh | ~6 h | ~2.2 h do 90% | Tylko MC3300x-R/S |
+| High Capacity (2X) | 5200 mAh | ~10 h | ~3.8 h do 90% | Wszystkie MC3300x |
+| Extended (2.5X) | 7000 mAh | ~14 h | ~5.2 h do 90% | Wszystkie MC3300x + MC3400 |
+
+### Diagnostyka baterii
+
+**Sprawdź stan baterii:**
+Settings → Phone Information → Battery Information
+
+| Parametr | Wartość OK | Wymiana |
+|----------|-----------|---------|
+| Health | Good | Poor / Critical |
+| Wear Level | < 80% | > 80% |
+| Temperatura | 20-40°C | > 45°C lub < 0°C |
+| Cykle ładowania | < 500 | > 500 |
+
+### LED ładowania MC3300x
+
+| LED | Znaczenie |
+|-----|-----------|
+| ⚫ Brak | Nie ładuje / brak zasilania |
+| 🟠 Pomarańczowy migający | Aktywna sesja Wi-Fi (Hot Swap) |
+| 🟠 Pomarańczowy ciągły | Ładowanie w toku |
+| 🟢 Zielony ciągły | Naładowana (100%) |
+| 🔴 Czerwony migający 2x/s | Błąd ładowania (temperatura/timeout) |
+
+### Optymalizacja żywotności baterii
+
+1. **Zmniejsz jasność** ekranu do 40-50%
+2. **Wyłącz nieużywane radia** — Bluetooth, NFC (jeśli niepotrzebne)
+3. **Zamknij aplikacje w tle** — sprawdź Developer Options → Running Services
+4. **Battery Saver Mode** — automatycznie ogranicza tło
+5. **Ładowanie: 20-80%** — nie rozładowuj do 0% i nie ładuj do 100% codziennie
+6. **Temperatura** — nie ładuj w temperaturze > 40°C ani < 0°C
+
+### Cennik baterii MC3300x
+
+| Bateria | Cena wymiany (z robocizną) |
+|---------|---------------------------|
+| Standard 2740 mAh | 200-280 zł |
+| High Capacity 5200 mAh | 280-350 zł |
+| Extended 7000 mAh | 350-400 zł |
+
+**Tip:** Bateria 7000 mAh z MC3400 (BTRY-MC3X-70MA-01) jest kompatybilna z MC3300x i odwrotnie.
+
+---
+
+## Problem 4: Hot Swap nie działa
+
+Hot Swap w MC3300x to jedna z najważniejszych funkcji dla pracy ciągłej — umożliwia wymianę baterii **bez wyłączania terminala**.
+
+### Jak działa Hot Swap MC3300x
+
+| Czas bez baterii | Co się dzieje |
+|------------------|---------------|
+| 0-30 sekund | ✅ Wi-Fi i Bluetooth utrzymane |
+| 30 s - 5 minut | ⚠️ Wi-Fi/BT rozłączone, dane RAM zachowane |
+| > 5 minut | ❌ Dane mogą zostać utracone, restart |
+
+### Dlaczego Hot Swap nie działa?
+
+| Przyczyna | Rozwiązanie |
+|-----------|-------------|
+| **Superkondensator nie naładowany** | Po włączeniu MC3300x odczekaj **minimum 10 minut** przed pierwszą wymianą baterii |
+| **Superkondensator zużyty** | Wymiana w serwisie (400-600 zł) |
+| **Za długa wymiana** | Miej baterię przygotowaną — wymiana powinna trwać < 15 sekund |
+| **Niska temperatura** | W chłodni (< 0°C) superkondensator trzyma krócej |
+
+### Procedura prawidłowej wymiany baterii Hot Swap
+
+1. Upewnij się, że terminal jest **włączony minimum 10 minut**
+2. Przygotuj naładowaną baterię zapasową
+3. Odblokuj zatrzask baterii
+4. Szybko wyjmij starą baterię
+5. **W ciągu 15 sekund** włóż nową baterię
+6. Zatrzask powinien kliknąć
+7. Terminal kontynuuje pracę bez restartu
+
+---
+
+## Problem 5: Wi-Fi się rozłącza
+
+### Najczęstsze przyczyny problemów z Wi-Fi
+
+| Problem | Przyczyna | Rozwiązanie |
+|---------|-----------|-------------|
+| Nie łączy się | Złe hasło / SSID | Zapomnij sieć → połącz ponownie |
+| Słaby sygnał | Odległość od AP | Sprawdź pasmo 2.4 vs 5 GHz |
+| Częste rozłączenia | Power Saving | Settings → Wi-Fi → Advanced → wyłącz oszczędzanie energii |
+| Wolny transfer | Interferencje | Przełącz na pasmo 5 GHz |
+| Rozłączenia przy roamingu | Ustawienia roaming | Włącz 802.11r/k/v w konfiguracji Wi-Fi |
+
+**MC3300x obsługuje:** Wi-Fi 802.11 a/b/g/n/ac (2.4 GHz + 5 GHz). Brak Wi-Fi 6/6E — to ograniczenie w porównaniu z MC3400.
+
+### Kiedy problem wymaga serwisu?
+
+- Wi-Fi nie działa po restarcie i resecie ustawień sieciowych → **uszkodzenie anteny Wi-Fi** (600-800 zł)
+- Bluetooth nie paruje żadnych urządzeń → **moduł BT** (400-600 zł)
+- NFC nie działa → **antena NFC** (300-500 zł)
+
+---
+
+## Problem 6: Ekran nie reaguje na dotyk
+
+MC3300x ma ekran 4.0" WVGA z trybami dotyku:
+
+### Tryby dotyku MC3300x
+
+| Tryb | Kiedy używać |
+|------|-------------|
+| Finger Only | Gołe palce, praca biurowa |
+| Stylus and Finger | Stylus rysikowy + palce |
+| Glove and Finger | **Rękawice robocze** (najczęściej w magazynie) |
+| Glove and Finger with Protector | Rękawice + folia ochronna na ekranie |
+
+**90% problemów z ekranem** w magazynie to **zły tryb dotyku**. Sprawdź: Settings → Display → Touch Mode.
+
+### Cennik napraw ekranu MC3300x
+
+| Naprawa | Koszt | Czas |
+|---------|-------|------|
+| Wymiana folii ochronnej | 30-50 zł | 1 dzień |
+| Kalibracja dotyku + czyszczenie | 80-120 zł | 1-2 dni |
+| Wymiana digitizera (dotyk) | 400-600 zł | 3-5 dni |
+| Wymiana LCD + digitizer | 500-700 zł | 3-5 dni |
+
+---
+
+## IP54 vs IP65/IP67 — ważna różnica
+
+MC3300x ma klasę ochrony **IP54** — znacząco niższą niż MC3400 (IP65/IP67):
+
+| Klasa | Pył | Woda | Co to oznacza |
+|-------|-----|------|---------------|
+| **IP54** (MC3300x) | Chroniony przed pyłem (częściowo) | Odporny na zachlapanie | Nie zanurzaj, nie myj pod bieżącą wodą |
+| **IP65** (MC3400) | Pyłoszczelny | Odporny na strumień wody | Mycie pod kranem OK |
+| **IP67** (MC3400) | Pyłoszczelny | Odporny na zanurzenie (1 m / 30 min) | Zanurzenie w kałuży OK |
+
+**Konsekwencje serwisowe IP54:**
+- MC3300x jest **bardziej podatny na zalanie** niż MC3400
+- Zalanie cieczą = najczęstsza przyczyna korozji płyty głównej
+- Praca w deszczu lub mokrym środowisku → rozważ migrację na MC3400
+
+---
+
+## MC3300x — status i przyszłość
+
+### Czy MC3300x jest wycofany?
+
+MC3300x został **zastąpiony przez MC3400/MC3450**. Choć Zebra nie ogłosiła jeszcze formalnej daty EOL, model jest w fazie **end of sale** — nowe sztuki są coraz trudniej dostępne.
+
+| Element | Status MC3300x |
+|---------|---------------|
+| Nowe urządzenia | Ograniczona dostępność |
+| Części zamienne | Dostępne (kompatybilne z MC3400) |
+| Aktualizacje Android | Ograniczone (max Android 11-13) |
+| Baterie | Kompatybilne z MC3400 (7000 mAh) |
+| Ładowarki | Kompatybilne z MC3400 (pełna wsteczna kompatybilność) |
+| **Serwis TAKMA** | **Naprawiamy bez ograniczeń** |
+
+### Kiedy migrować na MC3400?
+
+| Sytuacja | Rekomendacja |
+|----------|-------------|
+| MC3300x < 2 lata, sprawny | Używaj dalej |
+| MC3300x 2-3 lata, drobne usterki | Napraw, planuj migrację |
+| MC3300x > 3 lata, poważna awaria | Migruj na MC3400 |
+| Potrzebujesz IP65/IP67 | Migruj na MC3400 |
+| Praca w mokrym środowisku | Migruj na MC3400 |
+| Koszt naprawy > 50% ceny MC3400 | Migruj na MC3400 |
+
+---
+
+## Pełny cennik serwisu MC3300x
+
+| Naprawa | Koszt | Czas | Gwarancja |
+|---------|-------|------|-----------|
+| **Diagnostyka** | **Bezpłatna** | 1-2 dni | — |
+| Wymiana baterii 2740 mAh | 200-280 zł | 1 dzień | 6 mies. |
+| Wymiana baterii 5200 mAh | 280-350 zł | 1 dzień | 6 mies. |
+| Wymiana baterii 7000 mAh | 350-400 zł | 1 dzień | 6 mies. |
+| Czyszczenie klawiatury | 80-120 zł | 1-2 dni | 3 mies. |
+| Wymiana klawiatury (29/38/47) | 300-500 zł | 3-5 dni | 6 mies. |
+| Naprawa skanera SE4720/SE4770 | 400-600 zł | 3-5 dni | 6 mies. |
+| Naprawa skanera SE4850-ER | 600-900 zł | 5-7 dni | 6 mies. |
+| Naprawa skanera SE965 (1D) | 300-500 zł | 3-5 dni | 6 mies. |
+| Naprawa ekranu LCD + digitizer | 500-700 zł | 3-5 dni | 6 mies. |
+| Naprawa Wi-Fi / anteny | 600-800 zł | 5-7 dni | 6 mies. |
+| Naprawa Bluetooth / NFC | 300-600 zł | 3-5 dni | 6 mies. |
+| Naprawa Hot Swap (superkondensator) | 400-600 zł | 5-7 dni | 6 mies. |
+| Naprawa złącza ładowania | 250-450 zł | 3-5 dni | 6 mies. |
+| Naprawa płyty głównej | 1000-1800 zł | 7-10 dni | 6 mies. |
+| Enterprise Reset (software) | 100-200 zł | 1 dzień | — |
+
+---
+
+## Konserwacja MC3300x — przedłuż żywotność
+
+### Harmonogram czyszczenia
+
+| Element | Częstotliwość |
+|---------|--------------|
+| Ekran dotykowy | Codziennie |
+| Okienko skanera | Codziennie |
+| Styki ładowania | Co tydzień |
+| Obudowa | W razie potrzeby |
+| Styki baterii | Przy wymianie baterii |
+
+### Dozwolone środki czyszczące
+- Alkohol izopropylowy 70%
+- Chusteczki dezynfekujące (bez chloru)
+- Łagodny roztwór mydła
+
+### Zakazane środki
+- Wybielacz, amoniak
+- Rozpuszczalniki, aceton
+- Materiały ścierne
+- Sprężone powietrze bezpośrednio na styki
+
+---
+
+## Naprawa czy wymiana? Kalkulator
+
+**Cena nowego MC3400:** od 5000 zł
+**Zasada 50%:** Koszt naprawy > 2500 zł = kup MC3400
+
+| Scenariusz | Koszt naprawy | Decyzja |
+|------------|---------------|---------|
+| Zużyta bateria (2 lata) | 280-400 zł | ✅ **Napraw** |
+| Pęknięty ekran (2 lata) | 500-700 zł | ✅ **Napraw** |
+| Uszkodzony skaner SE4850-ER | 600-900 zł | ⚠️ Rozważ wiek terminala |
+| Płyta główna + bateria | 1200-2200 zł | ❌ **Kup MC3400** |
+| Wi-Fi + ekran | 1100-1500 zł | ⚠️ Rozważ wiek terminala |
+
+**Bonus migracji:** MC3400 ma IP65/IP67 (vs IP54), 2.5x szybszy procesor, większe klawisze (+12%), Android do wersji 18.
+
+---
+
+## Zgłoś naprawę MC3300x
+
+**TAKMA — Autoryzowany Serwis Zebra**
+
+- **Bezpłatna diagnostyka** — sprawdzimy i wycenimy przed naprawą
+- **Bezpłatny kurier** — odbieramy z całej Polski
+- **Gwarancja 6 miesięcy** na każdą naprawę
+- **Ekspres 24-48 h** dostępny dla pilnych zgłoszeń
+- **Oryginalne części** Zebra na stanie
+
+[Zgłoś naprawę MC3300x →](/#formularz)
+
+---
+
+## Powiązane poradniki
+
+- [Najczęstsze awarie terminali Zebra — TOP 10](/blog/najczestsze-awarie-terminali-zebra-top10)
+- [Klawiatura MC3300/MC3400 — diagnostyka i naprawa](/blog/klawiatura-terminal-zebra-mc3300-mc3400-problemy-naprawa)
+- [Serwis MC3400 — diagnostyka i naprawa](/blog/serwis-terminala-zebra-mc3400-diagnostyka-naprawa)
+- [MC3300 vs MC3400 — porównanie i migracja](/blog/zebra-mc3300-vs-mc3400-porownanie-migracja)
+- [Bateria terminala Zebra — diagnostyka](/blog/bateria-terminal-zebra-szybko-sie-rozladowuje-diagnostyka)
+- [Skaner terminala Zebra nie działa — rozwiązania](/blog/skaner-terminala-zebra-nie-dziala-rozwiazania)
+
+[Serwis terminali Zebra — wszystkie usługi →](/serwis-terminali-zebra)
+
+*Ostatnia aktualizacja: luty 2026*
+`
+  },
+  {
+    slug: 'serwis-terminala-zebra-mc3400-diagnostyka-naprawa',
+    title: 'Serwis terminala Zebra MC3400 — diagnostyka i naprawa [2026]',
+    excerpt: 'Kompletny poradnik serwisowy Zebra MC3400/MC3450. Najczęstsze awarie, koszty napraw, skaner SE55/SE58 (do 32 m), Hot Swap, IP65/IP67, Wi-Fi 6E. Diagnostyka i cennik autoryzowanego serwisu.',
+    coverImage: '/blog/serwis-terminala-zebra-mc3400-diagnostyka-naprawa.jpeg',
+    coverImageAlt: 'Terminal mobilny Zebra MC3400 z fizyczną klawiaturą i pistoletem — widok diagnostyczny z ikonami serwisowymi',
+    author: {
+      name: 'Krzysztof Wójcik',
+      role: 'Kierownik Serwisu TAKMA'
+    },
+    publishedAt: '2026-02-15',
+    readingTime: 15,
+    deviceType: 'terminale',
+    category: 'troubleshooting',
+    tags: [
+      'Zebra MC3400',
+      'Zebra MC3450',
+      'serwis MC3400',
+      'naprawa MC3400',
+      'terminal z klawiaturą',
+      'kolektor danych MC3400',
+      'SE55 skaner',
+      'SE58 skaner',
+      'Hot Swap MC3400',
+      'IP65 IP67',
+      'MC3450 5G',
+      'Wi-Fi 6E terminal'
+    ],
+    seo: {
+      metaTitle: 'Serwis Zebra MC3400/MC3450 — diagnostyka, naprawa, koszty [2026]',
+      metaDescription: 'Najczęstsze awarie MC3400 i koszty napraw. Skaner SE55 (14 m) i SE58 (32 m), bateria Hot Swap, Wi-Fi 6E, IP65/IP67. Standard vs Expanded vs Full Featured. Autoryzowany serwis TAKMA.',
+      keywords: [
+        // Główne frazy serwisowe
+        'serwis mc3400',
+        'naprawa mc3400',
+        'serwis mc3450',
+        'naprawa mc3450',
+        'serwis terminala mc3400',
+        'naprawa terminala mc3400',
+        'zebra mc3400 serwis',
+        'zebra mc3400 naprawa',
+
+        // Problemowe
+        'mc3400 nie włącza się',
+        'mc3400 nie działa',
+        'mc3400 skaner nie działa',
+        'mc3400 wifi nie łączy',
+        'mc3400 bateria nie trzyma',
+        'mc3400 ekran nie reaguje',
+        'mc3400 hot swap nie działa',
+        'mc3400 se55 nie skanuje',
+        'mc3400 se58 zasięg',
+
+        // Kosztowe
+        'ile kosztuje naprawa mc3400',
+        'koszt naprawy mc3400',
+        'wymiana ekranu mc3400 cena',
+        'wymiana baterii mc3400 cena',
+        'wymiana skanera mc3400 cena',
+
+        // Skaner dalekiego zasięgu
+        'se55 nie skanuje',
+        'se58 zasięg',
+        'se55 vs se58',
+        'skaner dalekiego zasięgu zebra mc3400',
+        'se55 advanced range',
+        'se58 extended range',
+
+        // MC3450 5G
+        'mc3450 5g',
+        'mc3450 lte',
+        'terminal 5g zebra',
+        'mc3450 gps',
+
+        // Techniczne
+        'mc3400 specyfikacja',
+        'mc3400 bateria 7000mah',
+        'mc3400 ip65 ip67',
+        'mc3400 wifi 6e',
+        'mc3400 bluetooth 5.3',
+        'mc3400 android 18',
+        'mc3400 standard vs expanded',
+        'mc3400 recovery mode',
+        'mc3400 factory reset',
+
+        // GEO
+        'serwis mc3400 wrocław',
+        'naprawa mc3400 polska',
+        'serwis terminali zebra autoryzowany'
+      ],
+      faqSchema: [
+        {
+          question: 'Ile kosztuje naprawa terminala Zebra MC3400?',
+          answer: 'Koszty napraw MC3400: wymiana baterii 350-400 zł, naprawa ekranu 500-800 zł, naprawa skanera SE4710/SE4770 400-600 zł (SE55 700-1000 zł, SE58 900-1200 zł), naprawa płyty głównej 1200-2000 zł. Diagnostyka bezpłatna, gwarancja 6 miesięcy na każdą naprawę.'
+        },
+        {
+          question: 'Jaka jest różnica między skanerem SE55 a SE58 w MC3400?',
+          answer: 'SE55 Advanced Range skanuje do 14 m (kody 100 mil) — idealny do wysokich regałów magazynowych. SE58 Extended Range skanuje do 32 m z zielonym laserem 7x lepiej widocznym — do portów, placów kontenerowych i hal produkcyjnych. SE4710/SE4770 to skanery standardowe do 91 cm.'
+        },
+        {
+          question: 'Czym różni się MC3400 Standard od Expanded i Full Featured?',
+          answer: 'Standard: 4 GB RAM, 64 GB flash, ekran 350 nit, Android do ~14. Expanded: 6 GB RAM, 64 GB flash, ekran 600 nit, Android do 18. Full Featured: 6 GB RAM, 128 GB flash, ekran 600 nit, Android do 18. Dla magazynu rekomendujemy minimum Expanded.'
+        },
+        {
+          question: 'Czy MC3400 jest wodoodporny?',
+          answer: 'Tak, MC3400 ma klasę IP65 + IP67 — pyłoszczelny i odporny na zanurzenie w wodzie do 1 m przez 30 minut. Uwaga: użycie starszej baterii 5200 mAh z MC33/MC3300x obniża klasę do IP65 (traci odporność na zanurzenie). Z oryginalną baterią 7000 mAh — pełna ochrona.'
+        },
+        {
+          question: 'Czym różni się MC3400 od MC3450?',
+          answer: 'MC3450 dodaje łączność 5G/LTE (dane), GPS (GPS, GLONASS, Galileo), dual SIM (nano SIM + eSIM). MC3400 jest Wi-Fi only. Reszta specyfikacji identyczna. MC3450 jest przeznaczony do pracy w terenie bez zasięgu Wi-Fi — kurier, logistyka, serwis terenowy.'
+        },
+        {
+          question: 'Czy akcesoria MC3300x pasują do MC3400?',
+          answer: 'Tak, prawie wszystkie: ładowarki (1-slot, 5-slot, 4-slot battery), baterie 7000 mAh, kabura, smycz, uchwyty, kable USB, mocowanie na wózek widłowy. Nie pasują: boot ochronny (nowy design) i folia na ekran (inne wymiary). Pełna kompatybilność wsteczna stacji dokujących.'
+        }
+      ]
+    },
+    content: `
+> **Szybka odpowiedź:** MC3400 nie włącza się? Ładuj baterię 15 min, potem przytrzymaj Power 10 sek. (hard reset). Skaner SE55/SE58 nie skanuje daleko? Sprawdź oświetlenie (min. 20 ft-cd), wyczyść okienko, sprawdź kąt (15-18° od prostopadłej). Hot Swap nie działa? Odczekaj 10 min po włączeniu — superkondensator musi się naładować. Koszt naprawy MC3400: od **350 zł** (bateria) do **2000 zł** (płyta główna). **Diagnostyka bezpłatna.**
+
+## TL;DR — Diagnostyka MC3400 w pigułce
+
+| Problem | Najczęstsza przyczyna | Sam naprawisz? | Koszt serwisu |
+|---------|----------------------|----------------|---------------|
+| Nie włącza się | Rozładowana bateria / zawieszenie | ✅/❌ | 0-400 zł |
+| Skaner nie czyta kodów | DataWedge / brudne okienko | ✅ Tak | 0 zł |
+| SE55/SE58 krótki zasięg | Oświetlenie / kąt / ustawienia | ✅ Tak | 0 zł |
+| Bateria szybko pada | Zużycie / aplikacje w tle | ✅/❌ | 350-400 zł |
+| Hot Swap nie działa | Superkondensator nie naładowany | ✅/❌ | 0-600 zł |
+| Wi-Fi 6E się rozłącza | Pasmo 6 GHz / ustawienia | ✅/❌ | 0-800 zł |
+| Ekran nie reaguje | Tryb dotyku / folia / digitizer | ✅/❌ | 0-800 zł |
+| Klawiatura wadzi | Orange/Blue mode / brud | ✅/❌ | 0-500 zł |
+| MC3450 brak 5G/LTE | SIM / APN / zasięg | ✅/❌ | 0-1000 zł |
+| Boot loop | System / flash | ❌ Serwis | 300-800 zł |
+
+---
+
+## Zebra MC3400 — specyfikacja serwisowa
+
+MC3400 to **następca MC3300x** — jedyny aktualny terminal Zebra z fizyczną klawiaturą. Kluczowe ulepszenia: procesor 2.5x szybszy, Wi-Fi 6E, skanery do 32 m zasięgu, IP65/IP67.
+
+### 3 wersje MC3400 — którą masz?
+
+| Parametr | Standard | Expanded | Full Featured |
+|----------|----------|----------|---------------|
+| **RAM** | 4 GB | 6 GB | 6 GB |
+| **Pamięć** | 64 GB | 64 GB | 128 GB |
+| **Jasność ekranu** | 350 nit | **600 nit** | **600 nit** |
+| **Android max** | ~14 | **18** | **18** |
+| **Rekomendacja** | Lekka praca | **Magazyn** | Wymagające środowiska |
+
+**Jak sprawdzić wersję?** Settings → About phone → Model number
+
+### Kluczowe parametry MC3400
+
+| Parametr | Specyfikacja |
+|----------|-------------|
+| **Ekran** | 4.0" WVGA (800x480), Gorilla Glass |
+| **Procesor** | Qualcomm 4490 Octa-Core, 2.4 GHz |
+| **System** | Android 11 → aktualizacje do Android 18 |
+| **RAM / Pamięć** | 4-6 GB / 64-128 GB |
+| **Wi-Fi** | **6E** (2.4 + 5 + 6 GHz), 2x2 MU-MIMO |
+| **Bluetooth** | **5.3** + BLE |
+| **NFC** | Tak |
+| **5G/LTE** | Tylko MC3450 (dane) |
+| **GPS** | Tylko MC3450 (GPS, GLONASS, Galileo) |
+| **Klawiatury** | 29 / 38 / 47 klawiszy (**12% większe** niż MC3300x) |
+| **Skanery** | SE4710, SE4770, **SE55** (14 m), **SE58** (32 m) |
+| **Bateria** | 7000 mAh PowerPrecision+ (+ wersja BLE Beacon) |
+| **Hot Swap** | Tak (30 s WiFi, 5 min RAM) |
+| **IP** | **IP65 + IP67** (pyłoszczelny + zanurzenie 1 m/30 min) |
+| **Upadki** | **2.4 m** na beton (23°C), 1.8 m pełen zakres temp. |
+| **Waga** | 400-490 g (zależnie od formy) |
+| **Temp. pracy** | -20°C do +50°C |
+
+### Warianty MC3400 i MC3450
+
+| Model | Forma | Skaner | Łączność |
+|-------|-------|--------|----------|
+| MC3400-**G** | Gun (pistolet) | SE55 / SE58 | Wi-Fi 6E |
+| MC3400-**S** | Straight Shooter | SE4710 / SE4770 | Wi-Fi 6E |
+| MC3450-**G** | Gun (pistolet) | SE55 / SE58 | Wi-Fi 6E + **5G/LTE** |
+| MC3450-**S** | Straight Shooter | SE4710 / SE4770 | Wi-Fi 6E + **5G/LTE** |
+
+---
+
+## Problem 1: MC3400 nie włącza się
+
+### Diagnostyka krok po kroku
+
+**Krok 1 — Sprawdź baterię:**
+- Włóż baterię do ładowarki 4-slotowej
+- 🟠 Pomarańczowy ciągły = ładuje się (OK)
+- 🟢 Zielony ciągły = naładowana 100%
+- 🔴 Czerwony ciągły = błąd ładowania
+- 🔴 Czerwony migający 2x/s = temperatura poza zakresem (0-40°C) lub ładowanie > 8 h
+
+**Krok 2 — Hard reset:**
+- Przytrzymaj **Power przez 10 sekund**
+- Terminal zrestartuje się (dane nie zostaną usunięte)
+
+**Krok 3 — Reset z baterią:**
+1. Wyjmij baterię
+2. Odczekaj 30 sekund
+3. Włóż baterię → Power 3 sek.
+
+**Krok 4 — Recovery Mode (boot loop):**
+1. Wyłącz terminal
+2. Przytrzymaj **Power + Scan (górny) + Volume Up** jednocześnie
+3. W menu Recovery: nawigacja Volume, potwierdzenie Power/Enter
+4. Wybierz "Enterprise Reset" (zachowuje dane firmowe)
+
+**Jeśli nie pomaga** → uszkodzenie płyty głównej lub zasilania → serwis.
+
+---
+
+## Problem 2: Skaner SE55/SE58 — daleki zasięg nie działa
+
+MC3400 oferuje 4 silniki skanujące — w tym **dwa unikalne skanery dalekiego zasięgu**.
+
+### Porównanie skanerów MC3400
+
+| Skaner | Typ | Zasięg max | Laser | Zastosowanie |
+|--------|-----|------------|-------|-------------|
+| SE4710 | Standard 2D | 91 cm | Czerwony | Handel detaliczny |
+| SE4770 | Standard 2D | 91 cm | Czerwony | Indoor/outdoor |
+| **SE55** | **Advanced Range** | **14 m** | Zielony | **Wysokie regały magazynowe** |
+| **SE58** | **Extended Range** | **32 m** | **Zielony 7x jaśniejszy** | **Porty, hale, place** |
+
+### Szczegółowe zasięgi SE55 vs SE58
+
+| Kod | SE55 | SE58 |
+|-----|------|------|
+| Code 39 (5 mil) | 6.4-68 cm | 5.1-150 cm |
+| UPC-A (100%) | 6.4-180 cm | 5.6-353 cm |
+| Code 39 (20 mil) | do 277 cm | do 584 cm |
+| Code 39 (55 mil) | do 744 cm (7.4 m) | do 1783 cm (17.8 m) |
+| Code 39 (100 mil) | do 1407 cm (14 m) | do 3270 cm (**32.7 m**) |
+
+### Najczęstsze problemy ze skanerami dalekiego zasięgu
+
+**SE55/SE58 nie skanuje z dużej odległości:**
+
+| Sprawdź | Rozwiązanie |
+|---------|-------------|
+| **Oświetlenie** | Minimum 20 ft-cd (~215 lux). W ciemnym magazynie zasięg drastycznie spada |
+| **Typ kodu** | Kody refleksyjne: max zasięg. Papierowe: ~60% zasięgu. Małe kody (5 mil): max 1.5 m |
+| **Kąt skanowania** | Optymalne **15-18° od prostopadłej** — nie celuj prosto w kod |
+| **Okienko skanera** | Wyczyść codziennie! Kurz/zarysowania = spadek zasięgu |
+| **DataWedge** | Profil aktywny? Dekodery włączone? Scanner Input → Enabled? |
+| **Picklist Mode** | Jeśli włączony — celownik musi dotykać kodu. Wyłącz dla skanowania masowego |
+| **IntelliFocus (SE55)** | Technologia autofokusu — jeśli nie działa, restart terminala |
+
+**Skaner SE4710/SE4770 nie czyta kodów:**
+1. Sprawdź DataWedge → profil → Scanner Input → Enabled
+2. Wyczyść okienko skanera
+3. Sprawdź dekodery — wyłącz niepotrzebne (szybsze skanowanie)
+4. Restart terminala
+
+### Cennik napraw skanera MC3400
+
+| Naprawa | Koszt | Czas |
+|---------|-------|------|
+| Czyszczenie + kalibracja | 80-150 zł | 1-2 dni |
+| Wymiana okienka skanera | 150-250 zł | 2-3 dni |
+| Wymiana modułu SE4710/SE4770 | 400-600 zł | 3-5 dni |
+| Wymiana modułu SE55 | 700-1000 zł | 5-7 dni |
+| Wymiana modułu SE58 | 900-1200 zł | 5-7 dni |
+
+---
+
+## Problem 3: Bateria i Hot Swap
+
+### Bateria MC3400 — opcje
+
+| Bateria | Pojemność | Czas ładowania | Funkcje specjalne |
+|---------|-----------|----------------|-------------------|
+| PowerPrecision+ 7000 mAh | 25.20 Wh | ~4.5 h do 100% | Standard |
+| PowerPrecision+ 7000 mAh BLE | 25.20 Wh | ~4.5 h do 100% | **Device Tracker** — lokalizacja wyłączonego terminala |
+| MC33 5200 mAh (kompatybilna) | 18.72 Wh | ~3.5 h do 100% | **Obniża IP do IP65** (traci IP67!) |
+
+**Ważne:** Bateria BLE Beacon (BTRY-MC3X-7BLE-01) umożliwia namierzenie terminala nawet gdy jest **wyłączony** — idealna dla dużych magazynów gdzie terminale się "gubią".
+
+### LED ładowania MC3400
+
+| LED | Znaczenie |
+|-----|-----------|
+| ⚫ Brak | Nie ładuje / brak zasilania |
+| 🟠 Pomarańczowy ciągły | Ładowanie w toku |
+| 🟠 Pomarańczowy migający | Aktywna sesja Wi-Fi/BT (Hot Swap w toku) |
+| 🟢 Zielony ciągły | Naładowana 100% |
+| 🔴 Czerwony ciągły | Błąd ładowania |
+| 🔴 Czerwony migający 2x/s | Temperatura poza zakresem / ładowanie > 8 h |
+| 🔵 Niebieski migający | Powiadomienie aplikacji |
+
+### Hot Swap MC3400 — jak działa
+
+| Czas bez baterii | Co się dzieje |
+|------------------|---------------|
+| 0-30 sekund | ✅ Wi-Fi i Bluetooth utrzymane (LED pomarańczowy miga) |
+| 30 s - 5 minut | ⚠️ Wi-Fi/BT rozłączone, dane RAM zachowane |
+| > 5 minut | ❌ Dane mogą zostać utracone, restart |
+
+### Procedura wymiany baterii Hot Swap (MC3400 Gun)
+
+1. Upewnij się, że terminal działa **min. 10 minut** (ładowanie superkondensatora)
+2. Przygotuj naładowaną baterię
+3. Poluzuj pasek na rękę
+4. Naciśnij **oba przyciski zwalniające** jednocześnie
+5. Wyjmij starą baterię
+6. **W ciągu 15 sekund** włóż nową — wyrównaj styki i dociśnij do kliknięcia
+7. Terminal kontynuuje pracę
+
+**Dlaczego Hot Swap nie działa?**
+
+| Przyczyna | Rozwiązanie |
+|-----------|-------------|
+| Superkondensator nie naładowany | Odczekaj 10 minut po włączeniu |
+| Superkondensator zużyty | Wymiana w serwisie (400-600 zł) |
+| Wymiana trwa zbyt długo | Przygotuj baterię wcześniej, wymiana < 15 sek. |
+| Niska temperatura (chłodnia) | Superkondensator trzyma krócej w mrozie |
+
+### Cennik baterii MC3400
+
+| Bateria | Cena wymiany |
+|---------|-------------|
+| PowerPrecision+ 7000 mAh | 350-400 zł |
+| PowerPrecision+ 7000 mAh BLE Beacon | 400-500 zł |
+| Naprawa superkondensatora (Hot Swap) | 400-600 zł |
+
+---
+
+## Problem 4: Wi-Fi 6E nie działa prawidłowo
+
+MC3400 obsługuje **Wi-Fi 6E** — tri-band (2.4 / 5 / **6 GHz**). Pasmo 6 GHz to nowa technologia i wymaga kompatybilnej infrastruktury.
+
+### Najczęstsze problemy z Wi-Fi 6E
+
+| Problem | Przyczyna | Rozwiązanie |
+|---------|-----------|-------------|
+| Nie łączy się z 6 GHz | Access Point nie wspiera Wi-Fi 6E | Sprawdź model AP — musi obsługiwać 802.11ax na 6 GHz |
+| Słaby zasięg 6 GHz | Krótszy zasięg niż 2.4/5 GHz | 6 GHz ma wyższą przepustowość ale krótszy zasięg — więcej AP |
+| Częste rozłączenia | Power Saving Wi-Fi | Settings → Wi-Fi → Advanced → wyłącz oszczędzanie energii |
+| Wolny transfer | Interferencje na 2.4/5 GHz | Wymuś pasmo 6 GHz w konfiguracji (jeśli AP wspiera) |
+| Roaming między AP | Konfiguracja 802.11r/k/v | Włącz szybki roaming w ustawieniach Wi-Fi |
+
+**Kiedy problem wymaga serwisu:**
+- Wi-Fi nie działa po restarcie i resecie sieciowym → uszkodzenie anteny (600-800 zł)
+- Bluetooth nie paruje → moduł BT (400-600 zł)
+- NFC nie działa → antena NFC (300-500 zł)
+
+---
+
+## Problem 5: Ekran nie reaguje na dotyk
+
+MC3400 ma ekran 4.0" WVGA z Gorilla Glass i trybami dotyku:
+
+| Tryb | Kiedy używać |
+|------|-------------|
+| Finger Only | Gołe palce (domyślny) |
+| Stylus and Finger | Rysik + palce |
+| Glove and Finger | **Rękawice robocze** (bez folii) |
+| Glove and Finger with Protector | Rękawice + folia ochronna |
+
+**90% problemów z dotykiem w magazynie** → zły tryb dotyku. Sprawdź: Settings → Display → Touch Mode.
+
+**Różnica między wersjami:** Standard = 350 nit (ciemniejszy). Expanded/Full = **600 nit** (czytelny na słońcu). Jeśli ekran wydaje się ciemny — sprawdź wersję terminala.
+
+### Cennik napraw ekranu MC3400
+
+| Naprawa | Koszt | Czas |
+|---------|-------|------|
+| Wymiana folii ochronnej | 30-50 zł | 1 dzień |
+| Kalibracja dotyku | 80-120 zł | 1-2 dni |
+| Wymiana digitizera (dotyk) | 500-700 zł | 3-5 dni |
+| Wymiana LCD + digitizer | 600-800 zł | 3-5 dni |
+
+---
+
+## Problem 6: MC3450 — problemy z 5G/LTE
+
+MC3450 to wersja MC3400 z łącznością komórkową. Specyficzne problemy:
+
+| Problem | Rozwiązanie |
+|---------|-------------|
+| Brak sygnału 5G/LTE | Sprawdź kartę SIM (nano SIM), sprawdź zasięg operatora |
+| Brak danych mobilnych | Sprawdź APN: Settings → Network → Mobile network → Access Point Names |
+| eSIM nie aktywuje się | Skontaktuj się z operatorem — eSIM wymaga profilu aktywacyjnego |
+| GPS nie działa | Sprawdź uprawnienia lokalizacji dla aplikacji. Wyjdź na otwartą przestrzeń |
+| Połączenia głosowe | MC3450 obsługuje **tylko dane** — brak VoLTE. Użyj VoIP (np. Teams) |
+
+**Ważne:** MC3450 obsługuje **dual SIM** (nano SIM + eSIM) — ale tylko dane, nie głos.
+
+---
+
+## IP65/IP67 — przewaga MC3400 nad MC3300x
+
+| Klasa | Pył | Woda | MC3400 | MC3300x |
+|-------|-----|------|--------|---------|
+| IP54 | Częściowa ochrona | Zachlapanie | — | ✅ |
+| **IP65** | **Pyłoszczelny** | **Strumień wody** | ✅ | — |
+| **IP67** | **Pyłoszczelny** | **Zanurzenie 1 m / 30 min** | ✅ | — |
+
+**Uwaga:** Użycie baterii 5200 mAh z MC33/MC3300x w MC3400 **obniża klasę IP do IP65** — traci odporność na zanurzenie (IP67). Zawsze używaj oryginalnej baterii 7000 mAh.
+
+---
+
+## Pełny cennik serwisu MC3400
+
+| Naprawa | Koszt | Czas | Gwarancja |
+|---------|-------|------|-----------|
+| **Diagnostyka** | **Bezpłatna** | 1-2 dni | — |
+| Wymiana baterii 7000 mAh | 350-400 zł | 1 dzień | 6 mies. |
+| Wymiana baterii 7000 mAh BLE | 400-500 zł | 1 dzień | 6 mies. |
+| Czyszczenie klawiatury | 80-120 zł | 1-2 dni | 3 mies. |
+| Wymiana klawiatury (29/38/47) | 350-550 zł | 3-5 dni | 6 mies. |
+| Naprawa skanera SE4710/SE4770 | 400-600 zł | 3-5 dni | 6 mies. |
+| Naprawa skanera SE55 | 700-1000 zł | 5-7 dni | 6 mies. |
+| Naprawa skanera SE58 | 900-1200 zł | 5-7 dni | 6 mies. |
+| Naprawa ekranu LCD + digitizer | 600-800 zł | 3-5 dni | 6 mies. |
+| Naprawa Wi-Fi 6E / anteny | 600-800 zł | 5-7 dni | 6 mies. |
+| Naprawa Bluetooth / NFC | 300-600 zł | 3-5 dni | 6 mies. |
+| Naprawa Hot Swap (superkondensator) | 400-600 zł | 5-7 dni | 6 mies. |
+| Naprawa złącza ładowania | 250-450 zł | 3-5 dni | 6 mies. |
+| Naprawa modułu 5G/LTE (MC3450) | 800-1200 zł | 7-10 dni | 6 mies. |
+| Naprawa GPS (MC3450) | 400-600 zł | 3-5 dni | 6 mies. |
+| Naprawa płyty głównej | 1200-2000 zł | 7-10 dni | 6 mies. |
+| Enterprise Reset (software) | 100-200 zł | 1 dzień | — |
+
+---
+
+## Kompatybilność wsteczna z MC3300x
+
+Dobra wiadomość — **prawie wszystkie akcesoria MC3300x działają z MC3400**:
+
+| Akcesorium | Kompatybilne? | Uwagi |
+|------------|---------------|-------|
+| Ładowarka 1-slot USB | ✅ Tak | CRD-MC33-2SUCHG-01 |
+| Ładowarka 5-slot | ✅ Tak | Charge Only i Ethernet |
+| Ładowarka baterii 4-slot | ✅ Tak | SAC-MC3X-4SCHG-01 |
+| Bateria 7000 mAh | ✅ Tak | BTRY-MC3X-70MA-01 (obu kierunkach) |
+| Bateria 5200 mAh (MC33) | ⚠️ Tak | **Obniża IP do IP65!** |
+| Kabura / holster | ✅ Tak | |
+| Pasek na rękę | ✅ Tak | |
+| Kabel USB | ✅ Tak | |
+| Mocowanie na wózek | ✅ Tak | |
+| Skaner RS5100 / RS6100 | ✅ Tak | BLE pairing |
+| Boot ochronny | ❌ Nowy | Inny design — SG-MC34 |
+| Folia na ekran | ❌ Nowa | Inne wymiary |
+
+---
+
+## Konserwacja MC3400 — harmonogram
+
+| Element | Częstotliwość | Czym czyścić |
+|---------|--------------|--------------|
+| Ekran dotykowy | Codziennie | Mikrofibra + woda lub płyn do ekranów |
+| Okienko skanera | Codziennie | Miękka ściereczka + izopropyl 70% |
+| Styki ładowania | Co tydzień | Patyczek bawełniany + izopropyl 70% |
+| Obudowa | W razie potrzeby | Mydło + woda lub izopropyl 70% |
+| Klawiatura | Co tydzień | Sprężone powietrze + wilgotna ściereczka |
+
+**Zakazane:** Wybielacz, amoniak, rozpuszczalniki, aceton, materiały ścierne.
+
+---
+
+## Narzędzia diagnostyczne MC3400
+
+### Device Diagnostic Tool (DDT)
+
+Wbudowane narzędzie testujące wszystkie podzespoły:
+
+| Test | Co sprawdza |
+|------|-------------|
+| Scanner Test | Wszystkie dekodery i zasięg |
+| Button Test | Klawisze fizyczne i wirtualne |
+| Touch Screen Test | Multitouch i precyzja |
+| Wi-Fi Test | Połączenie, siła sygnału, pasma |
+| Bluetooth Test | Parowanie i transfer |
+| Battery Test | Zdrowie, pojemność, cykle |
+| WWAN Test | 5G/LTE (tylko MC3450) |
+| Audio Test | Głośniki i mikrofony |
+| Camera Test | Kamera tylna i przednia |
+
+**Jak uruchomić:** Settings → System → Device Diagnostic Tool
+
+### RxLogger — zaawansowana diagnostyka
+
+Dla administratorów IT: Settings → RxLogger → Start. Logi zapisywane w /sdcard/RxLogger/ — przydatne do analizy powtarzających się problemów.
+
+---
+
+## Zgłoś naprawę MC3400
+
+**TAKMA — Autoryzowany Serwis Zebra**
+
+- **Bezpłatna diagnostyka** — sprawdzimy i wycenimy
+- **Bezpłatny kurier** — odbieramy z całej Polski
+- **Gwarancja 6 miesięcy** na każdą naprawę
+- **Ekspres 24-48 h** dostępny
+- **Oryginalne części** Zebra na stanie
+- **Serwisujemy MC3400, MC3450 i starsze MC3300x**
+
+[Zgłoś naprawę MC3400 →](/#formularz)
+
+---
+
+## Powiązane poradniki
+
+- [Najczęstsze awarie terminali Zebra — TOP 10](/blog/najczestsze-awarie-terminali-zebra-top10)
+- [Serwis MC3300x — diagnostyka i naprawa](/blog/serwis-terminala-zebra-mc3300-mc3300x-diagnostyka-naprawa)
+- [Klawiatura MC3300/MC3400 — diagnostyka i naprawa](/blog/klawiatura-terminal-zebra-mc3300-mc3400-problemy-naprawa)
+- [MC3300 vs MC3400 — porównanie i migracja](/blog/zebra-mc3300-vs-mc3400-porownanie-migracja)
+- [Bateria terminala Zebra — diagnostyka](/blog/bateria-terminal-zebra-szybko-sie-rozladowuje-diagnostyka)
+- [Najlepszy terminal do magazynu 2026](/blog/najlepszy-terminal-zebra-do-magazynu-2026)
+
+[Serwis terminali Zebra — wszystkie usługi →](/serwis-terminali-zebra)
+
+*Ostatnia aktualizacja: luty 2026*
+`
+  },
+  {
     slug: 'zebra-zd220-vs-zd421-vs-zt411-porownanie',
     title: 'Zebra ZD220 vs ZD421 vs ZT411 – którą drukarkę wybrać? Porównanie [2026]',
     excerpt: 'Porównanie drukarek Zebra ZD220, ZD421 i ZT411. Sprawdź która drukarka etykiet jest najlepsza dla Twojej firmy: budżetowa ZD220, biurowa ZD421 czy przemysłowa ZT411.',

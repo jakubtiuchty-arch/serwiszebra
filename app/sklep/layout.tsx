@@ -36,38 +36,10 @@ export const metadata: Metadata = {
   },
 }
 
-// BreadcrumbList JSON-LD dla strony głównej sklepu
-const breadcrumbSchema = {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position": 1,
-      "name": "Start",
-      "item": "https://www.serwis-zebry.pl"
-    },
-    {
-      "@type": "ListItem",
-      "position": 2,
-      "name": "Sklep",
-      "item": "https://www.serwis-zebry.pl/sklep"
-    }
-  ]
-}
-
 export default function SklepLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-      />
-      {children}
-    </>
-  )
+  return <>{children}</>
 }

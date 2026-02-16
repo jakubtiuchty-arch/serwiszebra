@@ -87,10 +87,10 @@ export default function AddToCartButton({ product }: AddToCartButtonProps) {
         onClick={handleAddToCart}
         className={`flex-1 py-2.5 px-4 rounded-lg font-semibold text-sm transition-all duration-200 flex items-center justify-center gap-2 ${
           isAdded
-            ? 'bg-green-600 text-white'
+            ? 'bg-[#A8F000] text-gray-900'
             : isOnOrder
             ? 'bg-amber-500 text-white hover:bg-amber-600'
-            : 'bg-green-600 text-white hover:bg-green-700'
+            : 'bg-[#A8F000] text-gray-900 hover:bg-[#96D800]'
         }`}
       >
         {isAdded ? (

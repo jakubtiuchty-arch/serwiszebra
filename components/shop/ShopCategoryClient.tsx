@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Package, Printer, Battery, Cable, Phone, ArrowUpDown, ShoppingCart } from 'lucide-react'
@@ -63,7 +63,32 @@ export default function ShopCategoryClient({
 }: ShopCategoryClientProps) {
   const [selectedResolutions, setSelectedResolutions] = useState<number[]>([])
   const [sortBy, setSortBy] = useState('name')
+  const [liveStockMap, setLiveStockMap] = useState<Record<string, number>>({})
   const addToCart = useCartStore((state) => state.addItem)
+
+  // Pobierz live stock z Ingram API dla wszystkich produktów
+  useEffect(() => {
+    const skus = initialProducts.map(p => p.sku).filter(Boolean)
+    if (skus.length === 0) return
+
+    const controller = new AbortController()
+    Promise.all(
+      skus.map(sku =>
+        fetch(`/api/shop/product-stock?sku=${encodeURIComponent(sku)}`, { signal: controller.signal })
+          .then(r => r.json())
+          .then(data => data.found ? { sku, total: data.total_stock ?? 0 } : null)
+          .catch(() => null)
+      )
+    ).then(results => {
+      const map: Record<string, number> = {}
+      for (const r of results) {
+        if (r) map[r.sku] = r.total
+      }
+      setLiveStockMap(map)
+    })
+
+    return () => controller.abort()
+  }, [initialProducts])
 
   // Filtruj i sortuj produkty
   const filteredProducts = useMemo(() => {
@@ -225,13 +250,13 @@ export default function ShopCategoryClient({
 
                   {/* Dostępność */}
                   <div className="mb-2">
-                    {product.stock > 0 ? (
+                    {(product.stock > 0 || (liveStockMap[product.sku] ?? 0) > 0 || (product.attributes?.stock_pl ?? 0) > 0 || (product.attributes?.stock_de ?? 0) > 0) ? (
                       <span className="text-[10px] sm:text-xs text-green-600 font-medium">
                         ✓ Dostępny
                       </span>
                     ) : (
-                      <span className="text-[10px] sm:text-xs text-red-500 font-medium">
-                        Niedostępny
+                      <span className="text-[10px] sm:text-xs text-amber-500 font-medium">
+                        Na zamówienie
                       </span>
                     )}
                   </div>
@@ -248,8 +273,8 @@ export default function ShopCategoryClient({
                     <button
                       onClick={(e) => handleAddToCart(e, product)}
                       className={`p-2 sm:p-2.5 rounded-lg text-white transition-colors ${
-                        product.stock > 0 
-                          ? 'bg-green-600 hover:bg-green-700' 
+                        (product.stock > 0 || (liveStockMap[product.sku] ?? 0) > 0 || (product.attributes?.stock_pl ?? 0) > 0 || (product.attributes?.stock_de ?? 0) > 0)
+                          ? 'bg-[#A8F000] hover:bg-[#96D800] text-gray-900'
                           : 'bg-amber-500 hover:bg-amber-600'
                       }`}
                     >

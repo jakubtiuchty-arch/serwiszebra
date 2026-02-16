@@ -84,7 +84,7 @@ export default function CookieBanner() {
   if (!showBanner) return null
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 p-2 sm:p-4 md:p-6">
+    <div className="fixed bottom-0 left-0 right-0 z-50 p-2 sm:p-4 md:p-6 mb-14 md:mb-0">
       <div className="max-w-4xl mx-auto">
         <div className="bg-white rounded-xl sm:rounded-2xl shadow-2xl border border-gray-200 overflow-hidden">
           {/* Główny banner — compact na mobile */}

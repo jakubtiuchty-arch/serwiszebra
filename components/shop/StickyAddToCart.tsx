@@ -21,16 +21,35 @@ interface StickyAddToCartProps {
 export default function StickyAddToCart({ product }: StickyAddToCartProps) {
   const [isAdded, setIsAdded] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
+  const [liveStock, setLiveStock] = useState<number | null>(null)
   const addItem = useCartStore((state) => state.addItem)
 
   useEffect(() => {
     const handleScroll = () => {
-      // Pokaż sticky CTA po przewinięciu 400px (kiedy oryginalny przycisk zniknie z ekranu)
       setIsVisible(window.scrollY > 400)
     }
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  // Pobierz live stock z API (ten sam endpoint co RealTimeStock)
+  useEffect(() => {
+    if (!product.sku) return
+    const controller = new AbortController()
+    fetch(`/api/shop/product-stock?sku=${encodeURIComponent(product.sku)}`, {
+      signal: controller.signal,
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.found) {
+          setLiveStock(data.total_stock ?? 0)
+        }
+      })
+      .catch(() => {})
+    return () => controller.abort()
+  }, [product.sku])
+
+  const effectiveStock = liveStock !== null ? liveStock : product.stock
 
   const handleAddToCart = () => {
     trackAddToCart(product.name, product.id, 1, product.price_brutto)
@@ -42,13 +61,13 @@ export default function StickyAddToCart({ product }: StickyAddToCartProps) {
       price: product.price,
       price_brutto: product.price_brutto,
       product_type: product.product_type,
-      stock: product.stock,
+      stock: effectiveStock,
     })
     setIsAdded(true)
     setTimeout(() => setIsAdded(false), 2000)
   }
 
-  const isOnOrder = product.stock === 0
+  const isOnOrder = effectiveStock === 0
 
   if (!isVisible) return null
 
@@ -65,10 +84,10 @@ export default function StickyAddToCart({ product }: StickyAddToCartProps) {
           onClick={handleAddToCart}
           className={`flex-shrink-0 py-3 px-5 rounded-lg font-semibold text-sm transition-all flex items-center gap-2 ${
             isAdded
-              ? 'bg-green-600 text-white'
+              ? 'bg-[#A8F000] text-gray-900'
               : isOnOrder
               ? 'bg-amber-500 text-white active:bg-amber-600'
-              : 'bg-green-600 text-white active:bg-green-700'
+              : 'bg-[#A8F000] text-gray-900 active:bg-[#96D800]'
           }`}
         >
           {isAdded ? (

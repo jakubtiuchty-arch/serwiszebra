@@ -20,14 +20,13 @@ import {
   Wrench,
   Info
 } from 'lucide-react'
-import AddToCartButton from '@/components/AddToCartButton'
 import StickyAddToCart from '@/components/shop/StickyAddToCart'
+import ProductPurchasePanel from '@/components/shop/ProductPurchasePanel'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import ShopSubheader from '@/components/shop/ShopSubheader'
 import ShopSidebar from '@/components/shop/ShopSidebar'
 import ShopCategoryClient from '@/components/shop/ShopCategoryClient'
-import RealTimeStock from '@/components/shop/RealTimeStock'
 import {
   SHOP_CATEGORIES,
   getProductTypeBySlug,
@@ -281,7 +280,22 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
     return {
       title: seoTitle,
       description: seoDescription,
-      keywords: [
+      keywords: (product.product_type === 'walek' ? [
+        product.name,
+        product.sku,
+        `platen roller ${product.sku}`,
+        product.device_model,
+        `wałek dociskowy ${product.device_model}`,
+        `wałek do drukarki ${product.device_model}`,
+        `platen roller zebra ${product.device_model}`,
+        'wałek dociskowy zebra',
+        'wałek do drukarki etykiet',
+        'platen roller zebra',
+        'wymiana wałka zebra',
+        'części zamienne zebra',
+        'serwis zebra',
+        'TAKMA'
+      ] : [
         product.name,
         product.sku,
         `printhead ${product.sku}`,
@@ -298,7 +312,7 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
         'wymiana głowicy zebra',
         'serwis zebra',
         'TAKMA'
-      ].filter(Boolean).join(', '),
+      ]).filter(Boolean).join(', '),
       openGraph: {
         title: seoTitle,
         description: seoDescription,
@@ -371,7 +385,13 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
           url: 'https://www.serwis-zebry.pl/sklep/glowice/drukarki-przemyslowe',
           type: 'website',
           siteName: 'TAKMA - Autoryzowany Serwis Zebra',
-          locale: 'pl_PL'
+          locale: 'pl_PL',
+          images: [{
+            url: 'https://www.serwis-zebry.pl/sklep_photo/glowica-203dpi-do-drukarki-zebra-zt411.png',
+            width: 800,
+            height: 800,
+            alt: 'Głowica drukująca do drukarki przemysłowej Zebra ZT411'
+          }]
         },
         alternates: {
           canonical: 'https://www.serwis-zebry.pl/sklep/glowice/drukarki-przemyslowe'
@@ -390,10 +410,66 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
           url: 'https://www.serwis-zebry.pl/sklep/glowice/drukarki-biurkowe',
           type: 'website',
           siteName: 'TAKMA - Autoryzowany Serwis Zebra',
-          locale: 'pl_PL'
+          locale: 'pl_PL',
+          images: [{
+            url: 'https://www.serwis-zebry.pl/sklep_photo/glowica-203dpi-do-drukarki-zebra-zd421t.png',
+            width: 800,
+            height: 800,
+            alt: 'Głowica drukująca do drukarki biurkowej Zebra ZD421'
+          }]
         },
         alternates: {
           canonical: 'https://www.serwis-zebry.pl/sklep/glowice/drukarki-biurkowe'
+        }
+      }
+    }
+    // SEO dla wałków do drukarek przemysłowych
+    if (productType.id === 'walek' && printerCategory.id === 'industrial') {
+      return {
+        title: 'Wałki dociskowe do drukarek przemysłowych Zebra ZT411, ZT610, ZT620 | TAKMA',
+        description: 'Oryginalne wałki dociskowe (platen roller) do drukarek przemysłowych Zebra: ZT230, ZT411, ZT421, ZT510, ZT610, ZT620. Wysyłka 24-72h. Gwarancja producenta.',
+        keywords: 'wałek zt411, wałek zt610, wałek zt620, platen roller zebra, wałek dociskowy zebra przemysłowa, wymiana wałka zebra',
+        openGraph: {
+          title: 'Wałki dociskowe do drukarek przemysłowych Zebra | TAKMA',
+          description: 'Oryginalne wałki dociskowe do ZT230, ZT411, ZT421, ZT510, ZT610, ZT620. Gwarancja producenta.',
+          url: 'https://www.serwis-zebry.pl/sklep/walki/drukarki-przemyslowe',
+          type: 'website',
+          siteName: 'TAKMA - Autoryzowany Serwis Zebra',
+          locale: 'pl_PL',
+          images: [{
+            url: 'https://www.serwis-zebry.pl/sklep_photo/P1058930-080.png',
+            width: 800,
+            height: 800,
+            alt: 'Wałek dociskowy do drukarki przemysłowej Zebra ZT411'
+          }]
+        },
+        alternates: {
+          canonical: 'https://www.serwis-zebry.pl/sklep/walki/drukarki-przemyslowe'
+        }
+      }
+    }
+    // SEO dla wałków do drukarek biurkowych
+    if (productType.id === 'walek' && printerCategory.id === 'desktop') {
+      return {
+        title: 'Wałki dociskowe do drukarek biurkowych Zebra ZD220, ZD421, ZD621 | TAKMA',
+        description: 'Oryginalne wałki dociskowe (platen roller) do drukarek biurkowych Zebra: ZD220, ZD421, ZD510-HC, ZD621. Rozdzielczości 203/300 DPI. Wysyłka 24-72h.',
+        keywords: 'wałek zd421, wałek zd621, wałek zd220, platen roller zebra biurkowa, wałek dociskowy 203 dpi, wymiana wałka zebra',
+        openGraph: {
+          title: 'Wałki dociskowe do drukarek biurkowych Zebra | TAKMA',
+          description: 'Oryginalne wałki dociskowe do ZD220, ZD421, ZD510-HC, ZD621. Szybka wysyłka, gwarancja.',
+          url: 'https://www.serwis-zebry.pl/sklep/walki/drukarki-biurkowe',
+          type: 'website',
+          siteName: 'TAKMA - Autoryzowany Serwis Zebra',
+          locale: 'pl_PL',
+          images: [{
+            url: 'https://www.serwis-zebry.pl/sklep_photo/P1112640-061.png',
+            width: 800,
+            height: 800,
+            alt: 'Wałek dociskowy do drukarki biurkowej Zebra ZD421'
+          }]
+        },
+        alternates: {
+          canonical: 'https://www.serwis-zebry.pl/sklep/walki/drukarki-biurkowe'
         }
       }
     }
@@ -594,17 +670,25 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
     const breadcrumbSchema = {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
-      "itemListElement": productBreadcrumbs.map((crumb, index) => {
-        const entry: Record<string, unknown> = {
+      "itemListElement": [
+        {
           "@type": "ListItem",
-          "position": index + 1,
-          "name": crumb.label
-        }
-        if (crumb.href) {
-          entry.item = `https://www.serwis-zebry.pl${crumb.href}`
-        }
-        return entry
-      })
+          "position": 1,
+          "name": "Start",
+          "item": "https://www.serwis-zebry.pl"
+        },
+        ...productBreadcrumbs.map((crumb, index) => {
+          const entry: Record<string, unknown> = {
+            "@type": "ListItem",
+            "position": index + 2,
+            "name": crumb.label
+          }
+          if (crumb.href) {
+            entry.item = `https://www.serwis-zebry.pl${crumb.href}`
+          }
+          return entry
+        })
+      ]
     }
 
     // Generuj "Szybka odpowiedź" dla głowic
@@ -675,19 +759,8 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
                   {product.price_brutto.toFixed(2).replace('.', ',')} zł brutto
                 </div>
 
-                {/* Dostępność (dane z ostatniego synca CSV) */}
-                <div className="mb-4">
-                  <RealTimeStock 
-                    sku={product.sku}
-                    fallbackStockPL={product.attributes?.stock_pl ?? 0}
-                    fallbackStockDE={product.attributes?.stock_de ?? 0}
-                    fallbackInDelivery={product.attributes?.in_delivery ?? 0}
-                    totalStock={product.stock}
-                  />
-                </div>
-
-                {/* Add to Cart */}
-                <AddToCartButton
+                {/* Dostępność + Dodaj do koszyka (live stock z API Ingram) */}
+                <ProductPurchasePanel
                   product={{
                     id: product.id,
                     name: product.name,
@@ -698,6 +771,9 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
                     product_type: product.product_type,
                     stock: product.stock,
                   }}
+                  fallbackStockPL={product.attributes?.stock_pl ?? 0}
+                  fallbackStockDE={product.attributes?.stock_de ?? 0}
+                  fallbackInDelivery={product.attributes?.in_delivery ?? 0}
                 />
               </div>
             </div>
@@ -1012,6 +1088,27 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
           }}
         />
 
+        {/* JSON-LD FAQPage Schema — generowane z faqItems */}
+        {faqItems.length > 0 && (
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                "mainEntity": faqItems.map(item => ({
+                  "@type": "Question",
+                  "name": item.question,
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": item.answer
+                  }
+                }))
+              })
+            }}
+          />
+        )}
+
       </>
     )
   }
@@ -1057,10 +1154,18 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
   }
 
   // Pobierz produkty
-  const products = await getProductsForCategory({
+  let products = await getProductsForCategory({
     productType: filters.productType,
     deviceModel: filters.model || undefined
   })
+
+  // Filtruj po kategorii drukarki (biurkowe/przemysłowe) gdy jesteśmy na Level 2
+  if (filters.printerCategory && !filters.model) {
+    products = products.filter(p => {
+      const path = getCategoryPathForProduct(p)
+      return path?.printerCategory.id === filters.printerCategory
+    })
+  }
 
   // Dostępne rozdzielczości - agreguj z produktów w tej kategorii
   // (pokazuj filtr DPI gdy są produkty z różnymi rozdzielczościami)
@@ -1105,7 +1210,7 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
         "name": "Sklep",
         "item": "https://www.serwis-zebry.pl/sklep"
       },
-      ...breadcrumbs.map((crumb, index) => {
+      ...breadcrumbs.slice(1).map((crumb, index) => {
         const entry: Record<string, unknown> = {
           "@type": "ListItem",
           "position": index + 3,
@@ -1195,206 +1300,412 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
 
         {/* SEO Content Section - Głowice */}
         {productType.id === 'glowica' && slugPath.length === 1 && (
+          <>
+          <section className="py-6 sm:py-8 bg-blue-50 border-t border-blue-100">
+            <div className="max-w-4xl mx-auto px-4">
+              <div className="bg-white rounded-xl border border-blue-200 p-5 sm:p-6 shadow-sm">
+                <h2 className="text-base sm:text-lg font-bold text-gray-900 mb-3">
+                  Głowice drukujące Zebra — oryginalne części z gwarancją
+                </h2>
+                <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
+                  Oferujemy <strong>oryginalne głowice drukujące Zebra</strong> w rozdzielczościach 203, 300 i 600 DPI
+                  do drukarek biurkowych (ZD421, ZD621, GK420) i przemysłowych (ZT411, ZT610, ZT620).
+                  Żywotność oryginalnej głowicy: <strong>1-2 mln cali druku</strong> (25-50 km).
+                  Gwarancja producenta 12 miesięcy. Wysyłka 24h z magazynu w Polsce.
+                  Ceny od ~400 zł netto (203 DPI) do ~3500 zł (600 DPI).
+                </p>
+              </div>
+            </div>
+          </section>
+
           <section className="py-8 sm:py-12 bg-white border-t border-gray-100">
             <div className="max-w-4xl mx-auto px-4">
               <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">
-                Głowice drukujące do drukarek Zebra — wszystko co musisz wiedzieć
+                Głowice drukujące do drukarek Zebra — kompletny przewodnik
               </h2>
-              
+
               <div className="prose prose-sm sm:prose-base prose-gray max-w-none">
                 <p className="text-gray-600 leading-relaxed mb-4">
-                  <strong>Głowica drukująca (printhead)</strong> to najważniejszy komponent każdej drukarki etykiet. 
-                  Odpowiada za przenoszenie obrazu na materiał — w przypadku drukarek termicznych poprzez kontrolowane 
+                  <strong>Głowica drukująca (printhead)</strong> to najważniejszy komponent każdej drukarki etykiet.
+                  Odpowiada za przenoszenie obrazu na materiał — w przypadku drukarek termicznych poprzez kontrolowane
                   nagrzewanie mikro-elementów grzejnych, które aktywują papier termiczny lub topią taśmę barwiącą (ribbon).
+                  Od stanu głowicy zależy jakość wydruku, czytelność kodów kreskowych i niezawodność etykietowania.
                 </p>
+
+                <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
+                  Tabela Part Numbers — głowice Zebra
+                </h3>
+                <div className="overflow-x-auto mb-6">
+                  <table className="w-full text-sm">
+                    <thead className="bg-gray-50">
+                      <tr>
+                        <th className="px-3 py-2 text-left font-semibold">Model drukarki</th>
+                        <th className="px-3 py-2 text-left font-semibold">Rozdzielczość</th>
+                        <th className="px-3 py-2 text-left font-semibold">Part Number</th>
+                        <th className="px-3 py-2 text-left font-semibold">Cena od (netto)</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-gray-100">
+                      <tr><td className="px-3 py-2 font-medium">ZT411 / ZT410</td><td className="px-3 py-2">203 DPI</td><td className="px-3 py-2 font-mono text-xs">P1058930-009</td><td className="px-3 py-2">~1 000 zł</td></tr>
+                      <tr><td className="px-3 py-2 font-medium">ZT411 / ZT410</td><td className="px-3 py-2">300 DPI</td><td className="px-3 py-2 font-mono text-xs">P1058930-010</td><td className="px-3 py-2">~1 500 zł</td></tr>
+                      <tr><td className="px-3 py-2 font-medium">ZT411 / ZT410</td><td className="px-3 py-2">600 DPI</td><td className="px-3 py-2 font-mono text-xs">P1058930-011</td><td className="px-3 py-2">~3 000 zł</td></tr>
+                      <tr><td className="px-3 py-2 font-medium">ZT610</td><td className="px-3 py-2">203 DPI</td><td className="px-3 py-2 font-mono text-xs">P1083320-010</td><td className="px-3 py-2">~1 000 zł</td></tr>
+                      <tr><td className="px-3 py-2 font-medium">ZT610</td><td className="px-3 py-2">300 DPI</td><td className="px-3 py-2 font-mono text-xs">P1083320-011</td><td className="px-3 py-2">~1 500 zł</td></tr>
+                      <tr><td className="px-3 py-2 font-medium">ZT610</td><td className="px-3 py-2">600 DPI</td><td className="px-3 py-2 font-mono text-xs">P1083320-012</td><td className="px-3 py-2">~3 500 zł</td></tr>
+                      <tr><td className="px-3 py-2 font-medium">ZT620</td><td className="px-3 py-2">203 DPI</td><td className="px-3 py-2 font-mono text-xs">P1083320-015</td><td className="px-3 py-2">~1 200 zł</td></tr>
+                      <tr><td className="px-3 py-2 font-medium">ZT421 / ZT420</td><td className="px-3 py-2">203 DPI</td><td className="px-3 py-2 font-mono text-xs">P1058930-012</td><td className="px-3 py-2">~1 200 zł</td></tr>
+                      <tr><td className="px-3 py-2 font-medium">ZT230</td><td className="px-3 py-2">203 DPI</td><td className="px-3 py-2 font-mono text-xs">P1037974-010</td><td className="px-3 py-2">~800 zł</td></tr>
+                      <tr><td className="px-3 py-2 font-medium">ZD421 / ZD411</td><td className="px-3 py-2">203 DPI</td><td className="px-3 py-2 font-mono text-xs">P1112640-019</td><td className="px-3 py-2">~500 zł</td></tr>
+                      <tr><td className="px-3 py-2 font-medium">ZD421 / ZD411</td><td className="px-3 py-2">300 DPI</td><td className="px-3 py-2 font-mono text-xs">P1112640-020</td><td className="px-3 py-2">~800 zł</td></tr>
+                      <tr><td className="px-3 py-2 font-medium">ZD621 / ZD611</td><td className="px-3 py-2">203 DPI</td><td className="px-3 py-2 font-mono text-xs">P1112640-019</td><td className="px-3 py-2">~500 zł</td></tr>
+                      <tr><td className="px-3 py-2 font-medium">GK420 / GX420</td><td className="px-3 py-2">203 DPI</td><td className="px-3 py-2 font-mono text-xs">105934-037</td><td className="px-3 py-2">~400 zł</td></tr>
+                      <tr><td className="px-3 py-2 font-medium">105SL Plus</td><td className="px-3 py-2">203 DPI</td><td className="px-3 py-2 font-mono text-xs">P1053360-018</td><td className="px-3 py-2">~1 000 zł</td></tr>
+                      <tr><td className="px-3 py-2 font-medium">ZM400</td><td className="px-3 py-2">203 DPI</td><td className="px-3 py-2 font-mono text-xs">79800M</td><td className="px-3 py-2">~900 zł</td></tr>
+                    </tbody>
+                  </table>
+                </div>
 
                 <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
                   Kiedy wymienić głowicę w drukarce Zebra?
                 </h3>
                 <p className="text-gray-600 leading-relaxed mb-4">
-                  Typowe objawy zużytej głowicy to: <strong>pionowe białe linie</strong> na wydruku (uszkodzone elementy grzewcze), 
-                  <strong>blady lub nierównomierny wydruk</strong>, oraz <strong>nieczytelne kody kreskowe</strong> mimo prawidłowych 
-                  ustawień ciemności. Żywotność głowicy zależy od jakości materiałów — średnio wynosi 1-2 miliony cali druku 
-                  (25-50 km etykiet).
+                  Typowe objawy zużytej głowicy to: <strong>pionowe białe linie</strong> na wydruku (uszkodzone elementy grzewcze),
+                  <strong>blady lub nierównomierny wydruk</strong>, oraz <strong>nieczytelne kody kreskowe</strong> mimo prawidłowych
+                  ustawień ciemności. Żywotność głowicy zależy od jakości materiałów — średnio wynosi 1-2 miliony cali druku
+                  (25-50 km etykiet). Głowica 600 DPI zużywa się szybciej niż 203 DPI ze względu na gęstsze elementy grzewcze.
                 </p>
 
                 <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
                   Rozdzielczość głowicy: 203 DPI vs 300 DPI vs 600 DPI
                 </h3>
                 <ul className="text-gray-600 space-y-2 mb-4">
-                  <li><strong>203 DPI (8 punktów/mm)</strong> — standard dla etykiet logistycznych, kodów kreskowych 1D, 
-                  etykiet wysyłkowych. Najczęściej wybierana rozdzielczość.</li>
-                  <li><strong>300 DPI (12 punktów/mm)</strong> — idealna dla małych kodów 2D (QR, DataMatrix), drobnego tekstu, 
-                  etykiet farmaceutycznych i elektronicznych.</li>
-                  <li><strong>600 DPI (24 punkty/mm)</strong> — najwyższa jakość do etykiet jubilerskich, elektroniki, 
-                  mikro-kodów i aplikacji wymagających precyzji.</li>
+                  <li><strong>203 DPI (8 punktów/mm)</strong> — standard dla etykiet logistycznych, kodów kreskowych 1D,
+                  etykiet wysyłkowych. Najczęściej wybierana, najdłuższa żywotność, najniższa cena.</li>
+                  <li><strong>300 DPI (12 punktów/mm)</strong> — idealna dla małych kodów 2D (QR, DataMatrix), drobnego tekstu,
+                  etykiet farmaceutycznych i elektronicznych. Dobry kompromis cena/jakość.</li>
+                  <li><strong>600 DPI (24 punkty/mm)</strong> — najwyższa jakość do etykiet jubilerskich, elektroniki,
+                  mikro-kodów. Najwyższa cena, najkrótsza żywotność.</li>
                 </ul>
 
                 <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
-                  Dlaczego warto kupić oryginalną głowicę Zebra?
+                  Oryginalna głowica vs zamiennik — czy warto oszczędzać?
                 </h3>
                 <p className="text-gray-600 leading-relaxed mb-4">
-                  Oryginalne głowice Zebra gwarantują <strong>pełną kompatybilność</strong> z drukarką, 
-                  <strong>optymalną jakość wydruku</strong> i <strong>maksymalną żywotność</strong>. 
-                  Zamienniki często mają niższą gęstość elementów grzewczych, co skutkuje gorszą jakością i krótszą żywotnością. 
-                  Dodatkowo, użycie nieoryginalnych części może unieważnić gwarancję drukarki.
+                  Oryginalne głowice Zebra gwarantują <strong>pełną kompatybilność</strong> z drukarką,
+                  <strong>optymalną jakość wydruku</strong> i <strong>maksymalną żywotność</strong>.
+                  Zamienniki często mają niższą gęstość elementów grzewczych, co skutkuje gorszą jakością i krótszą żywotnością
+                  (nawet 50% krócej). Dodatkowo, użycie nieoryginalnych części może unieważnić gwarancję drukarki.
+                  Przy cenie głowicy od ~400 zł i żywotności 25-50 km etykiet — koszt na etykietę jest minimalny.
                 </p>
 
                 <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
                   Jak samodzielnie wymienić głowicę?
                 </h3>
                 <p className="text-gray-600 leading-relaxed mb-4">
-                  Wymiana głowicy to prosta czynność serwisowa zajmująca 5-10 minut. Wystarczy: odłączyć drukarkę od zasilania, 
-                  otworzyć obudowę, odłączyć taśmę flat cable ze starej głowicy, odkręcić śruby mocujące (2-4 szt.), 
-                  zamontować nową głowicę i podłączyć kabel. Po wymianie zalecamy <strong>kalibrację czujników</strong> 
+                  Wymiana głowicy to prosta czynność serwisowa zajmująca 5-10 minut. Wystarczy: odłączyć drukarkę od zasilania,
+                  otworzyć obudowę, odłączyć taśmę flat cable ze starej głowicy, odkręcić śruby mocujące (2-4 szt.),
+                  zamontować nową głowicę i podłączyć kabel. Po wymianie zalecamy <strong>kalibrację czujników</strong>
                   i wydruk raportu konfiguracji.
                 </p>
 
+                <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
+                  Najczęściej zadawane pytania
+                </h3>
+                <div className="space-y-4 mb-6">
+                  <div className="border-l-4 border-blue-500 pl-4">
+                    <p className="font-semibold text-gray-900">Jak dobrać głowicę do mojej drukarki?</p>
+                    <p className="text-gray-600 text-sm mt-1">Sprawdź model drukarki na tabliczce znamionowej i rozdzielczość w raporcie konfiguracji (Configuration Report). Part Number obecnej głowicy jest wygrawerowany na jej boku. Na tej podstawie dobierz nową głowicę w sklepie lub podaj dane — pomożemy.</p>
+                  </div>
+                  <div className="border-l-4 border-blue-500 pl-4">
+                    <p className="font-semibold text-gray-900">Jak samodzielnie wymienić głowicę drukującą?</p>
+                    <p className="text-gray-600 text-sm mt-1">Wyłącz drukarkę, otwórz obudowę, odłącz flat cable, odkręć 2-4 śruby starej głowicy, zamontuj nową i podłącz kabel. Cała operacja zajmuje 5-10 minut. Po wymianie wykonaj kalibrację czujników (Media Calibration).</p>
+                  </div>
+                  <div className="border-l-4 border-blue-500 pl-4">
+                    <p className="font-semibold text-gray-900">Jaka jest żywotność głowicy drukującej?</p>
+                    <p className="text-gray-600 text-sm mt-1">Oryginalna głowica Zebra ma żywotność 1-2 miliony cali druku (25-50 km etykiet). 203 DPI wytrzymuje dłużej niż 600 DPI. Regularne czyszczenie alkoholem IPA 99% wydłuża żywotność nawet 2-3 krotnie.</p>
+                  </div>
+                  <div className="border-l-4 border-blue-500 pl-4">
+                    <p className="font-semibold text-gray-900">Jaka jest różnica między 203, 300 i 600 DPI?</p>
+                    <p className="text-gray-600 text-sm mt-1">203 DPI (8 pkt/mm) — logistyka, kody 1D, etykiety wysyłkowe. 300 DPI (12 pkt/mm) — kody 2D, farmacja, drobny tekst. 600 DPI (24 pkt/mm) — jubilerstwo, mikro-kody, precyzja. Głowice nie są wymienne między rozdzielczościami.</p>
+                  </div>
+                  <div className="border-l-4 border-blue-500 pl-4">
+                    <p className="font-semibold text-gray-900">Ile kosztuje głowica do drukarki Zebra?</p>
+                    <p className="text-gray-600 text-sm mt-1">Oryginalne głowice Zebra kosztują od ~400 zł netto (biurkowe 203 DPI) do ~3 500 zł (przemysłowe 600 DPI). Cena zależy od modelu drukarki i rozdzielczości. 300 DPI jest zwykle o 50-100% droższa od 203 DPI.</p>
+                  </div>
+                  <div className="border-l-4 border-blue-500 pl-4">
+                    <p className="font-semibold text-gray-900">Jak czyścić głowicę drukującą?</p>
+                    <p className="text-gray-600 text-sm mt-1">Używaj alkoholu izopropylowego (IPA) 99% i wacika lub dedykowanej karty czyszczącej Zebra. Czyść elementy grzewcze co każdą rolkę materiału lub minimum raz w tygodniu. Nigdy nie używaj wody, acetonu ani ostrych narzędzi.</p>
+                  </div>
+                  <div className="border-l-4 border-blue-500 pl-4">
+                    <p className="font-semibold text-gray-900">Czy głowica jest objęta gwarancją?</p>
+                    <p className="text-gray-600 text-sm mt-1">Tak, wszystkie oryginalne głowice Zebra w naszym sklepie objęte są 12-miesięczną gwarancją producenta. Gwarancja obejmuje wady materiałowe i produkcyjne. Nie obejmuje uszkodzeń mechanicznych i zużycia eksploatacyjnego.</p>
+                  </div>
+                  <div className="border-l-4 border-blue-500 pl-4">
+                    <p className="font-semibold text-gray-900">Oryginalna głowica czy zamiennik — co wybrać?</p>
+                    <p className="text-gray-600 text-sm mt-1">Zdecydowanie oryginalna. Zamienniki mają niższą gęstość elementów grzewczych, krótszą żywotność (nawet o 50%) i mogą unieważnić gwarancję drukarki. Przy kosztach rzędu groszy na etykietę — oszczędność na zamienniku nie jest warta ryzyka.</p>
+                  </div>
+                </div>
+
                 <div className="bg-blue-50 border border-blue-100 rounded-lg p-4 mt-6">
                   <p className="text-blue-800 text-sm">
-                    <strong>Potrzebujesz pomocy?</strong> Oferujemy profesjonalną wymianę głowicy w serwisie — 
-                    odbieramy drukarkę kurierem, wymieniamy głowicę, kalibrujemy i odsyłamy. 
+                    <strong>Potrzebujesz pomocy?</strong> Oferujemy profesjonalną wymianę głowicy w serwisie —
+                    odbieramy drukarkę kurierem, wymieniamy głowicę, kalibrujemy i odsyłamy.
                     <a href="/#formularz" className="underline ml-1">Zgłoś naprawę →</a>
                   </p>
                 </div>
               </div>
             </div>
           </section>
+
+          {/* FAQPage Schema — /sklep/glowice */}
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": [
+                { "@type": "Question", "name": "Jak dobrać głowicę do mojej drukarki?", "acceptedAnswer": { "@type": "Answer", "text": "Sprawdź model drukarki na tabliczce znamionowej i rozdzielczość w raporcie konfiguracji (Configuration Report). Part Number obecnej głowicy jest wygrawerowany na jej boku." }},
+                { "@type": "Question", "name": "Jak samodzielnie wymienić głowicę drukującą?", "acceptedAnswer": { "@type": "Answer", "text": "Wyłącz drukarkę, otwórz obudowę, odłącz flat cable, odkręć 2-4 śruby starej głowicy, zamontuj nową i podłącz kabel. Cała operacja zajmuje 5-10 minut. Po wymianie wykonaj kalibrację czujników." }},
+                { "@type": "Question", "name": "Jaka jest żywotność głowicy drukującej?", "acceptedAnswer": { "@type": "Answer", "text": "Oryginalna głowica Zebra ma żywotność 1-2 miliony cali druku (25-50 km etykiet). 203 DPI wytrzymuje dłużej niż 600 DPI. Regularne czyszczenie alkoholem IPA 99% wydłuża żywotność nawet 2-3 krotnie." }},
+                { "@type": "Question", "name": "Jaka jest różnica między 203, 300 i 600 DPI?", "acceptedAnswer": { "@type": "Answer", "text": "203 DPI (8 pkt/mm) — logistyka, kody 1D. 300 DPI (12 pkt/mm) — kody 2D, farmacja. 600 DPI (24 pkt/mm) — jubilerstwo, mikro-kody. Głowice nie są wymienne między rozdzielczościami." }},
+                { "@type": "Question", "name": "Ile kosztuje głowica do drukarki Zebra?", "acceptedAnswer": { "@type": "Answer", "text": "Oryginalne głowice Zebra kosztują od ~400 zł netto (biurkowe 203 DPI) do ~3 500 zł (przemysłowe 600 DPI)." }},
+                { "@type": "Question", "name": "Jak czyścić głowicę drukującą?", "acceptedAnswer": { "@type": "Answer", "text": "Używaj alkoholu izopropylowego (IPA) 99% i wacika lub dedykowanej karty czyszczącej Zebra. Czyść co każdą rolkę materiału lub minimum raz w tygodniu." }},
+                { "@type": "Question", "name": "Czy głowica jest objęta gwarancją?", "acceptedAnswer": { "@type": "Answer", "text": "Tak, wszystkie oryginalne głowice Zebra w naszym sklepie objęte są 12-miesięczną gwarancją producenta." }},
+                { "@type": "Question", "name": "Oryginalna głowica czy zamiennik — co wybrać?", "acceptedAnswer": { "@type": "Answer", "text": "Zdecydowanie oryginalna. Zamienniki mają niższą gęstość elementów grzewczych, krótszą żywotność i mogą unieważnić gwarancję drukarki." }}
+              ]
+            }) }}
+          />
+          </>
         )}
 
         {/* SEO Content Section - Wałki dociskowe */}
         {productType.id === 'walek' && slugPath.length === 1 && (
+          <>
           <section className="py-8 sm:py-12 bg-white border-t border-gray-100">
             <div className="max-w-4xl mx-auto px-4">
               <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">
                 Wałki dociskowe do drukarek Zebra — kompletny przewodnik
               </h2>
-              
+
               <div className="prose prose-sm sm:prose-base prose-gray max-w-none">
                 <p className="text-gray-600 leading-relaxed mb-4">
-                  <strong>Wałek dociskowy (platen roller)</strong> to gumowy cylinder odpowiedzialny za równomierny 
-                  transport materiału pod głowicą drukującą. Współpracuje z głowicą, zapewniając stały docisk etykiety 
+                  <strong>Wałek dociskowy (platen roller)</strong> to gumowy cylinder odpowiedzialny za równomierny
+                  transport materiału pod głowicą drukującą. Współpracuje z głowicą, zapewniając stały docisk etykiety
                   podczas druku — od jego stanu zależy jakość wydruku i prawidłowe prowadzenie materiału.
                 </p>
+
+                <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
+                  Tabela Part Numbers — wałki Zebra
+                </h3>
+                <div className="overflow-x-auto mb-6">
+                  <table className="w-full text-sm">
+                    <thead className="bg-gray-50">
+                      <tr>
+                        <th className="px-3 py-2 text-left font-semibold">Model drukarki</th>
+                        <th className="px-3 py-2 text-left font-semibold">Part Number wałka</th>
+                        <th className="px-3 py-2 text-left font-semibold">Szerokość</th>
+                        <th className="px-3 py-2 text-left font-semibold">Kompatybilność</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-gray-100">
+                      <tr><td className="px-3 py-2 font-medium">ZT411 / ZT410</td><td className="px-3 py-2 font-mono text-xs">P1058930-080</td><td className="px-3 py-2">104 mm</td><td className="px-3 py-2 text-xs text-gray-500">ZT410, ZT411</td></tr>
+                      <tr><td className="px-3 py-2 font-medium">ZT421 / ZT420</td><td className="px-3 py-2 font-mono text-xs">P1058930-081</td><td className="px-3 py-2">168 mm</td><td className="px-3 py-2 text-xs text-gray-500">ZT420, ZT421</td></tr>
+                      <tr><td className="px-3 py-2 font-medium">ZT610</td><td className="px-3 py-2 font-mono text-xs">P1083347-005</td><td className="px-3 py-2">104 mm</td><td className="px-3 py-2 text-xs text-gray-500">ZT610</td></tr>
+                      <tr><td className="px-3 py-2 font-medium">ZT620</td><td className="px-3 py-2 font-mono text-xs">P1083347-006</td><td className="px-3 py-2">168 mm</td><td className="px-3 py-2 text-xs text-gray-500">ZT620</td></tr>
+                      <tr><td className="px-3 py-2 font-medium">ZT230</td><td className="px-3 py-2 font-mono text-xs">P1037974-003</td><td className="px-3 py-2">104 mm</td><td className="px-3 py-2 text-xs text-gray-500">ZT230</td></tr>
+                      <tr><td className="px-3 py-2 font-medium">ZT510</td><td className="px-3 py-2 font-mono text-xs">P1083347-018</td><td className="px-3 py-2">104 mm</td><td className="px-3 py-2 text-xs text-gray-500">ZT510</td></tr>
+                      <tr><td className="px-3 py-2 font-medium">ZD421 / ZD411 / ZD621</td><td className="px-3 py-2 font-mono text-xs">P1112640-016</td><td className="px-3 py-2">56 mm</td><td className="px-3 py-2 text-xs text-gray-500">ZD411, ZD421, ZD611, ZD621</td></tr>
+                      <tr><td className="px-3 py-2 font-medium">ZD220 / ZD230</td><td className="px-3 py-2 font-mono text-xs">P1080383-417</td><td className="px-3 py-2">56 mm</td><td className="px-3 py-2 text-xs text-gray-500">ZD220, ZD230</td></tr>
+                      <tr><td className="px-3 py-2 font-medium">ZD510-HC</td><td className="px-3 py-2 font-mono text-xs">P1112640-017</td><td className="px-3 py-2">56 mm</td><td className="px-3 py-2 text-xs text-gray-500">ZD510-HC (medyczny)</td></tr>
+                    </tbody>
+                  </table>
+                </div>
 
                 <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
                   Kiedy wymienić wałek dociskowy?
                 </h3>
                 <p className="text-gray-600 leading-relaxed mb-4">
-                  Wałek wymaga wymiany gdy zauważysz: <strong>nierównomierny wydruk</strong> (jaśniejszy/ciemniejszy w różnych 
-                  miejscach), <strong>problemy z prowadzeniem etykiet</strong> (zacięcia, krzywy podawanie), 
-                  <strong>poślizg materiału</strong>, lub <strong>widoczne zużycie gumy</strong> (stwardnienie, pęknięcia, 
-                  wgłębienia). Typowa żywotność to 2-3 lata przy normalnym użytkowaniu.
+                  Wałek wymaga wymiany gdy zauważysz: <strong>nierównomierny wydruk</strong> (jaśniejszy/ciemniejszy w różnych
+                  miejscach), <strong>problemy z prowadzeniem etykiet</strong> (zacięcia, krzywy podawanie),
+                  <strong>poślizg materiału</strong>, lub <strong>widoczne zużycie gumy</strong> (stwardnienie, pęknięcia,
+                  wgłębienia). Typowa żywotność to 500 000 - 1 000 000 etykiet (2-3 lata).
+                  <strong> Zebra zaleca wymianę wałka razem z głowicą</strong> — stary wałek skraca żywotność nowej głowicy.
                 </p>
 
                 <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
-                  Objawy zużytego wałka dociskowego
+                  Najczęściej zadawane pytania
                 </h3>
-                <ul className="text-gray-600 space-y-2 mb-4">
-                  <li><strong>Nierówny docisk</strong> — wydruk ciemniejszy z jednej strony, jaśniejszy z drugiej</li>
-                  <li><strong>Poślizg etykiet</strong> — materiał nie jest podawany równomiernie</li>
-                  <li><strong>Zacięcia papieru</strong> — etykiety zawijają się lub blokują</li>
-                  <li><strong>Hałas podczas druku</strong> — skrzypienie lub stukanie</li>
-                  <li><strong>Błędy czujników</strong> — drukarka nie wykrywa etykiet prawidłowo</li>
-                </ul>
-
-                <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
-                  Jak dbać o wałek dociskowy?
-                </h3>
-                <p className="text-gray-600 leading-relaxed mb-4">
-                  Regularne czyszczenie wałka <strong>alkoholem izopropylowym (IPA)</strong> wydłuża jego żywotność. 
-                  Czyść wałek co najmniej raz w miesiącu lub przy każdej wymianie rolki etykiet. Unikaj używania 
-                  rozpuszczalników i ostrych narzędzi. Przechowuj zapasowe wałki w chłodnym, suchym miejscu.
-                </p>
-
-                <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
-                  Wymiana wałka — krok po kroku
-                </h3>
-                <p className="text-gray-600 leading-relaxed mb-4">
-                  Wymiana wałka dociskowego to prosta czynność: wyłącz drukarkę, otwórz pokrywę, zwolnij mechanizm 
-                  blokujący wałek (zazwyczaj dźwignia lub zatrzask), wyjmij stary wałek, włóż nowy i zablokuj. 
-                  Po wymianie wykonaj <strong>kalibrację czujników</strong> dla optymalnego działania.
-                </p>
+                <div className="space-y-4 mb-6">
+                  <div className="border-l-4 border-blue-500 pl-4">
+                    <p className="font-semibold text-gray-900">Jak dobrać wałek do drukarki?</p>
+                    <p className="text-gray-600 text-sm mt-1">Sprawdź model drukarki na tabliczce znamionowej i znajdź odpowiedni Part Number w tabeli powyżej. Wałki nie zależą od rozdzielczości — jeden wałek pasuje do wszystkich wariantów DPI danego modelu.</p>
+                  </div>
+                  <div className="border-l-4 border-blue-500 pl-4">
+                    <p className="font-semibold text-gray-900">Czy wymienić wałek razem z głowicą?</p>
+                    <p className="text-gray-600 text-sm mt-1">Tak — Zebra zaleca wymianę wałka przy każdej wymianie głowicy. Stary, nierówny wałek skraca żywotność nowej głowicy i pogarsza jakość druku od pierwszego dnia. Koszt wałka jest niewielki w porównaniu z głowicą.</p>
+                  </div>
+                  <div className="border-l-4 border-blue-500 pl-4">
+                    <p className="font-semibold text-gray-900">Jakie są objawy zużytego wałka?</p>
+                    <p className="text-gray-600 text-sm mt-1">Nierówny docisk (jasne/ciemne paski), poślizg etykiet, zacięcia papieru, zwiększony hałas podczas druku, błędy kalibracji czujników. Widoczne uszkodzenia gumy (pęknięcia, wgniecenia) wymagają natychmiastowej wymiany.</p>
+                  </div>
+                  <div className="border-l-4 border-blue-500 pl-4">
+                    <p className="font-semibold text-gray-900">Jak czyścić wałek dociskowy?</p>
+                    <p className="text-gray-600 text-sm mt-1">Czyść wałek alkoholem izopropylowym (IPA 99%) co 5 000-10 000 etykiet lub przy wymianie rolki materiału. Obracaj wałek i przecieraj całą powierzchnię. Nigdy nie używaj rozpuszczalników ani ostrych narzędzi.</p>
+                  </div>
+                  <div className="border-l-4 border-blue-500 pl-4">
+                    <p className="font-semibold text-gray-900">Jaka jest żywotność wałka dociskowego?</p>
+                    <p className="text-gray-600 text-sm mt-1">Oryginalny wałek Zebra wytrzymuje 500 000 - 1 000 000 etykiet (ok. 150-300 km wydruku), co przekłada się na 2-3 lata przy normalnym użytkowaniu. Regularne czyszczenie wydłuża żywotność nawet dwukrotnie.</p>
+                  </div>
+                  <div className="border-l-4 border-green-500 pl-4">
+                    <p className="font-semibold text-gray-900">Jak wymienić wałek — krok po kroku?</p>
+                    <p className="text-gray-600 text-sm mt-1">Wyłącz drukarkę, otwórz pokrywę, zwolnij mechanizm blokujący (dźwignia/zatrzask), wyjmij stary wałek, włóż nowy i zablokuj. Po wymianie wykonaj kalibrację czujników. Cała operacja zajmuje 2-5 minut.</p>
+                  </div>
+                </div>
 
                 <div className="bg-blue-50 border border-blue-100 rounded-lg p-4 mt-6">
                   <p className="text-blue-800 text-sm">
-                    <strong>Potrzebujesz pomocy?</strong> Wymieniamy wałki dociskowe w ramach serwisu — 
-                    odbieramy drukarkę kurierem, wymieniamy części, kalibrujemy i odsyłamy. 
+                    <strong>Potrzebujesz pomocy?</strong> Wymieniamy wałki dociskowe w ramach serwisu —
+                    odbieramy drukarkę kurierem, wymieniamy części, kalibrujemy i odsyłamy.
                     <a href="/#formularz" className="underline ml-1">Zgłoś naprawę →</a>
                   </p>
                 </div>
               </div>
             </div>
           </section>
+
+          {/* FAQPage Schema — /sklep/walki */}
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": [
+                { "@type": "Question", "name": "Jak dobrać wałek do drukarki?", "acceptedAnswer": { "@type": "Answer", "text": "Sprawdź model drukarki na tabliczce znamionowej. Wałki nie zależą od rozdzielczości — jeden wałek pasuje do wszystkich wariantów DPI danego modelu." }},
+                { "@type": "Question", "name": "Czy wymienić wałek razem z głowicą?", "acceptedAnswer": { "@type": "Answer", "text": "Tak — Zebra zaleca wymianę wałka przy każdej wymianie głowicy. Stary wałek skraca żywotność nowej głowicy." }},
+                { "@type": "Question", "name": "Jakie są objawy zużytego wałka?", "acceptedAnswer": { "@type": "Answer", "text": "Nierówny docisk, poślizg etykiet, zacięcia papieru, zwiększony hałas, błędy kalibracji czujników." }},
+                { "@type": "Question", "name": "Jak czyścić wałek dociskowy?", "acceptedAnswer": { "@type": "Answer", "text": "Czyść alkoholem izopropylowym (IPA 99%) co 5 000-10 000 etykiet. Nigdy nie używaj rozpuszczalników." }},
+                { "@type": "Question", "name": "Jaka jest żywotność wałka dociskowego?", "acceptedAnswer": { "@type": "Answer", "text": "500 000 - 1 000 000 etykiet (150-300 km), ok. 2-3 lata przy normalnym użytkowaniu." }},
+                { "@type": "Question", "name": "Jak wymienić wałek — krok po kroku?", "acceptedAnswer": { "@type": "Answer", "text": "Wyłącz drukarkę, otwórz pokrywę, zwolnij mechanizm blokujący, wyjmij stary wałek, włóż nowy i zablokuj. 2-5 minut." }}
+              ]
+            }) }}
+          />
+          </>
         )}
 
         {/* SEO Content Section - Akumulatory */}
         {productType.id === 'akumulator' && slugPath.length === 1 && (
+          <>
           <section className="py-8 sm:py-12 bg-white border-t border-gray-100">
             <div className="max-w-4xl mx-auto px-4">
               <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">
                 Akumulatory do urządzeń Zebra — przewodnik kupującego
               </h2>
-              
+
               <div className="prose prose-sm sm:prose-base prose-gray max-w-none">
                 <p className="text-gray-600 leading-relaxed mb-4">
-                  <strong>Akumulatory litowo-jonowe (Li-Ion)</strong> to serce urządzeń mobilnych Zebra — drukarek 
-                  przenośnych, terminali i skanerów. Od ich pojemności i stanu zależy czas pracy bez ładowania. 
+                  <strong>Akumulatory litowo-jonowe (Li-Ion)</strong> to serce urządzeń mobilnych Zebra — drukarek
+                  przenośnych, terminali i skanerów. Od ich pojemności i stanu zależy czas pracy bez ładowania.
                   Oryginalne baterie Zebra zapewniają optymalną wydajność i bezpieczeństwo użytkowania.
                 </p>
 
                 <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
-                  Jak długo działa bateria w urządzeniach Zebra?
+                  Tabela modeli — akumulatory Zebra
                 </h3>
-                <p className="text-gray-600 leading-relaxed mb-4">
-                  Czas pracy zależy od modelu i intensywności użytkowania. Typowe wartości:
-                </p>
-                <ul className="text-gray-600 space-y-2 mb-4">
-                  <li><strong>Drukarki mobilne (ZQ520, ZQ630)</strong> — 4-8 godzin pracy, 300-500 etykiet na ładowanie</li>
-                  <li><strong>Terminale (TC21, TC52)</strong> — 8-14 godzin przy typowym użyciu</li>
-                  <li><strong>Skanery (DS8178)</strong> — 50 000+ skanów na ładowanie</li>
-                </ul>
+                <div className="overflow-x-auto mb-6">
+                  <table className="w-full text-sm">
+                    <thead className="bg-gray-50">
+                      <tr>
+                        <th className="px-3 py-2 text-left font-semibold">Typ urządzenia</th>
+                        <th className="px-3 py-2 text-left font-semibold">Modele</th>
+                        <th className="px-3 py-2 text-left font-semibold">Pojemność</th>
+                        <th className="px-3 py-2 text-left font-semibold">Czas pracy</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-gray-100">
+                      <tr><td className="px-3 py-2 font-medium">Drukarki mobilne</td><td className="px-3 py-2">ZQ520, ZQ630</td><td className="px-3 py-2">2500-4400 mAh</td><td className="px-3 py-2">4-8 godz.</td></tr>
+                      <tr><td className="px-3 py-2 font-medium">Terminale</td><td className="px-3 py-2">TC21, TC52, TC72</td><td className="px-3 py-2">3100-6400 mAh</td><td className="px-3 py-2">8-14 godz.</td></tr>
+                      <tr><td className="px-3 py-2 font-medium">Skanery</td><td className="px-3 py-2">DS8178, LI3678</td><td className="px-3 py-2">2200-3100 mAh</td><td className="px-3 py-2">50 000+ skanów</td></tr>
+                    </tbody>
+                  </table>
+                </div>
 
                 <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
                   Kiedy wymienić akumulator?
                 </h3>
                 <p className="text-gray-600 leading-relaxed mb-4">
-                  Baterie Li-Ion tracą pojemność z czasem — po <strong>300-500 pełnych cyklach</strong> ładowania 
-                  pojemność spada do ok. 80% początkowej. Wymień akumulator gdy: czas pracy znacząco się skrócił, 
+                  Baterie Li-Ion tracą pojemność z czasem — po <strong>300-500 pełnych cyklach</strong> ładowania
+                  pojemność spada do ok. 80% początkowej. Wymień akumulator gdy: czas pracy znacząco się skrócił,
                   bateria szybko się rozładowuje, urządzenie niespodziewanie się wyłącza, lub bateria jest <strong>spuchnięta</strong> (natychmiast wycofaj z użytku!).
                 </p>
 
                 <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
-                  Dlaczego oryginalne akumulatory Zebra?
+                  Najczęściej zadawane pytania
                 </h3>
-                <ul className="text-gray-600 space-y-2 mb-4">
-                  <li><strong>Bezpieczeństwo</strong> — certyfikowane ogniwa z zabezpieczeniami przed przegrzaniem, 
-                  przeładowaniem i zwarciem</li>
-                  <li><strong>Kompatybilność</strong> — pełna współpraca z elektroniką urządzenia i ładowarkami</li>
-                  <li><strong>Żywotność</strong> — wyższa liczba cykli ładowania niż zamienniki</li>
-                  <li><strong>Gwarancja</strong> — objęte gwarancją producenta, zamienniki mogą ją unieważnić</li>
-                </ul>
-
-                <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
-                  Jak przedłużyć żywotność baterii?
-                </h3>
-                <p className="text-gray-600 leading-relaxed mb-4">
-                  Unikaj <strong>głębokiego rozładowania</strong> (poniżej 20%) i <strong>przegrzewania</strong>. 
-                  Przechowuj zapasowe baterie naładowane w 40-60% w temperaturze pokojowej. Używaj tylko 
-                  oryginalnych ładowarek Zebra. Regularnie aktualizuj firmware urządzenia — często zawiera 
-                  optymalizacje zarządzania energią.
-                </p>
+                <div className="space-y-4 mb-6">
+                  <div className="border-l-4 border-blue-500 pl-4">
+                    <p className="font-semibold text-gray-900">Jaka jest żywotność baterii w urządzeniach Zebra?</p>
+                    <p className="text-gray-600 text-sm mt-1">Oryginalne akumulatory Zebra wytrzymują 300-500 pełnych cykli ładowania, co przekłada się na 2-3 lata użytkowania. Po tym czasie pojemność spada do ~80% początkowej wartości.</p>
+                  </div>
+                  <div className="border-l-4 border-blue-500 pl-4">
+                    <p className="font-semibold text-gray-900">Ile cykli ładowania wytrzyma bateria?</p>
+                    <p className="text-gray-600 text-sm mt-1">Standardowo 300-500 pełnych cykli (0-100%). Ładowanie częściowe (np. od 20% do 80%) jest korzystniejsze i może wydłużyć żywotność do 800-1000 cykli.</p>
+                  </div>
+                  <div className="border-l-4 border-blue-500 pl-4">
+                    <p className="font-semibold text-gray-900">Jak prawidłowo ładować akumulator Zebra?</p>
+                    <p className="text-gray-600 text-sm mt-1">Używaj wyłącznie oryginalnych ładowarek Zebra. Unikaj głębokiego rozładowania (poniżej 20%) i przegrzewania podczas ładowania. Optymalna temperatura ładowania: 10-35°C. Nie zostawiaj urządzenia w ładowarce na dłużej niż potrzeba.</p>
+                  </div>
+                  <div className="border-l-4 border-red-500 pl-4">
+                    <p className="font-semibold text-gray-900">Co zrobić ze spuchniętą baterią?</p>
+                    <p className="text-gray-600 text-sm mt-1">Natychmiast wycofaj z użytku! Spuchnięta bateria to sygnał uszkodzenia ogniw — grozi przegrzaniem lub pożarem. Nie próbuj ładować ani używać. Oddaj do punktu zbiórki baterii lub prześlij do nas — utylizujemy bezpiecznie.</p>
+                  </div>
+                  <div className="border-l-4 border-blue-500 pl-4">
+                    <p className="font-semibold text-gray-900">Czy zamienniki baterii są bezpieczne?</p>
+                    <p className="text-gray-600 text-sm mt-1">Zamienniki mogą nie mieć certyfikowanych zabezpieczeń przed przegrzaniem, przeładowaniem i zwarciem. Oryginalne baterie Zebra mają chip komunikujący się z elektroniką urządzenia — zamienniki mogą powodować problemy z ładowaniem i unieważnić gwarancję.</p>
+                  </div>
+                  <div className="border-l-4 border-blue-500 pl-4">
+                    <p className="font-semibold text-gray-900">Jak wymienić baterię w urządzeniu Zebra?</p>
+                    <p className="text-gray-600 text-sm mt-1">W większości urządzeń Zebra bateria jest wymienna bez narzędzi — wystarczy zwolnić zatrzask i wyjąć starą baterię. W niektórych modelach (np. drukarki mobilne) bateria jest zabezpieczona śrubą. Przed wymianą wyłącz urządzenie.</p>
+                  </div>
+                  <div className="border-l-4 border-blue-500 pl-4">
+                    <p className="font-semibold text-gray-900">Czym jest Zebra Battery Manager?</p>
+                    <p className="text-gray-600 text-sm mt-1">Battery Manager to narzędzie Zebra do monitorowania stanu baterii w terminalach (TC21, TC52, TC72). Pokazuje aktualną pojemność, liczbę cykli, temperaturę i stan zdrowia. Pomaga planować wymiany przed awarią.</p>
+                  </div>
+                  <div className="border-l-4 border-blue-500 pl-4">
+                    <p className="font-semibold text-gray-900">Jak przechowywać zapasowe baterie?</p>
+                    <p className="text-gray-600 text-sm mt-1">Przechowuj naładowane w 40-60% w temperaturze 15-25°C, z dala od źródeł ciepła. Co 3-6 miesięcy sprawdź poziom naładowania i doładuj do 50% jeśli spadł poniżej 20%. Nie przechowuj w pełni rozładowanych.</p>
+                  </div>
+                </div>
 
                 <div className="bg-blue-50 border border-blue-100 rounded-lg p-4 mt-6">
                   <p className="text-blue-800 text-sm">
-                    <strong>Potrzebujesz pomocy?</strong> Diagnozujemy problemy z baterią i zasilaniem. 
-                    Jeśli urządzenie nie ładuje się prawidłowo, może to być usterka ładowarki lub elektroniki. 
+                    <strong>Potrzebujesz pomocy?</strong> Diagnozujemy problemy z baterią i zasilaniem.
+                    Jeśli urządzenie nie ładuje się prawidłowo, może to być usterka ładowarki lub elektroniki.
                     <a href="/#formularz" className="underline ml-1">Zgłoś do serwisu →</a>
                   </p>
                 </div>
               </div>
             </div>
           </section>
+
+          {/* FAQPage Schema — /sklep/akumulatory */}
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": [
+                { "@type": "Question", "name": "Jaka jest żywotność baterii w urządzeniach Zebra?", "acceptedAnswer": { "@type": "Answer", "text": "Oryginalne akumulatory Zebra wytrzymują 300-500 pełnych cykli ładowania, co przekłada się na 2-3 lata użytkowania." }},
+                { "@type": "Question", "name": "Ile cykli ładowania wytrzyma bateria?", "acceptedAnswer": { "@type": "Answer", "text": "Standardowo 300-500 pełnych cykli (0-100%). Ładowanie częściowe (20-80%) może wydłużyć żywotność do 800-1000 cykli." }},
+                { "@type": "Question", "name": "Jak prawidłowo ładować akumulator Zebra?", "acceptedAnswer": { "@type": "Answer", "text": "Używaj wyłącznie oryginalnych ładowarek Zebra. Unikaj głębokiego rozładowania poniżej 20%. Optymalna temperatura: 10-35°C." }},
+                { "@type": "Question", "name": "Co zrobić ze spuchniętą baterią?", "acceptedAnswer": { "@type": "Answer", "text": "Natychmiast wycofaj z użytku! Spuchnięta bateria grozi przegrzaniem lub pożarem. Oddaj do punktu zbiórki lub prześlij do nas." }},
+                { "@type": "Question", "name": "Czy zamienniki baterii są bezpieczne?", "acceptedAnswer": { "@type": "Answer", "text": "Zamienniki mogą nie mieć certyfikowanych zabezpieczeń. Oryginalne baterie Zebra mają chip komunikujący się z urządzeniem — zamienniki mogą unieważnić gwarancję." }},
+                { "@type": "Question", "name": "Jak wymienić baterię w urządzeniu Zebra?", "acceptedAnswer": { "@type": "Answer", "text": "W większości urządzeń bateria jest wymienna bez narzędzi — zwolnij zatrzask i wyjmij starą baterię. Przed wymianą wyłącz urządzenie." }},
+                { "@type": "Question", "name": "Czym jest Zebra Battery Manager?", "acceptedAnswer": { "@type": "Answer", "text": "Narzędzie do monitorowania stanu baterii w terminalach Zebra. Pokazuje pojemność, cykle, temperaturę i stan zdrowia." }},
+                { "@type": "Question", "name": "Jak przechowywać zapasowe baterie?", "acceptedAnswer": { "@type": "Answer", "text": "Przechowuj naładowane w 40-60% w temperaturze 15-25°C. Co 3-6 miesięcy sprawdź poziom i doładuj do 50%." }}
+              ]
+            }) }}
+          />
+          </>
         )}
 
         {/* SEO Content Section - Głowice do drukarek PRZEMYSŁOWYCH */}
@@ -1483,14 +1794,30 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
 
                 <div className="bg-blue-50 border border-blue-100 rounded-lg p-4 mt-6">
                   <p className="text-blue-800 text-sm">
-                    <strong>Nie wiesz którą głowicę wybrać?</strong> Podaj model drukarki i rozdzielczość — 
-                    pomożemy dobrać właściwą część. 
+                    <strong>Nie wiesz którą głowicę wybrać?</strong> Podaj model drukarki i rozdzielczość —
+                    pomożemy dobrać właściwą część.
                     <a href="/kontakt" className="underline ml-1">Skontaktuj się →</a>
                   </p>
                 </div>
               </div>
             </div>
           </section>
+        )}
+
+        {/* FAQPage Schema — /sklep/glowice/drukarki-przemyslowe */}
+        {productType.id === 'glowica' && slugPath.length === 2 && printerCategory?.id === 'industrial' && (
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": [
+                { "@type": "Question", "name": "Czy głowica ZT410 pasuje do ZT411?", "acceptedAnswer": { "@type": "Answer", "text": "Tak! Głowice do ZT410 są w pełni kompatybilne z ZT411. Zebra zachowała tę samą konstrukcję głowicy w obu modelach. Part Number dla 203 DPI: P1058930-009, dla 300 DPI: P1058930-010, dla 600 DPI: P1058930-011." }},
+                { "@type": "Question", "name": "Jak sprawdzić aktualną rozdzielczość drukarki?", "acceptedAnswer": { "@type": "Answer", "text": "Wydrukuj raport konfiguracji (Configuration Report) — znajdziesz tam RESOLUTION lub DPI. Alternatywnie, sprawdź etykietę na głowicy." }},
+                { "@type": "Question", "name": "Ile kosztuje głowica do drukarki przemysłowej?", "acceptedAnswer": { "@type": "Answer", "text": "Ceny oryginalnych głowic Zebra to ok. 1000-3500 zł netto w zależności od modelu i rozdzielczości. Głowice 600 DPI są najdroższe." }}
+              ]
+            }) }}
+          />
         )}
 
         {/* SEO Content Section - Głowice do drukarek BIURKOWYCH */}
@@ -1565,14 +1892,247 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
 
                 <div className="bg-blue-50 border border-blue-100 rounded-lg p-4 mt-6">
                   <p className="text-blue-800 text-sm">
-                    <strong>Nie masz pewności jaki model głowicy?</strong> Sprawdź etykietę na drukarce lub 
-                    prześlij zdjęcie — pomożemy dobrać właściwą część. 
+                    <strong>Nie masz pewności jaki model głowicy?</strong> Sprawdź etykietę na drukarce lub
+                    prześlij zdjęcie — pomożemy dobrać właściwą część.
                     <a href="/kontakt" className="underline ml-1">Napisz do nas →</a>
                   </p>
                 </div>
               </div>
             </div>
           </section>
+        )}
+
+        {/* FAQPage Schema — /sklep/glowice/drukarki-biurkowe */}
+        {productType.id === 'glowica' && slugPath.length === 2 && printerCategory?.id === 'desktop' && (
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": [
+                { "@type": "Question", "name": "Czy głowica GK420 pasuje do ZD421?", "acceptedAnswer": { "@type": "Answer", "text": "Nie. ZD421 to nowsza generacja z inną konstrukcją. Głowice GK420 pasują tylko do GK420d/t i GX420d/t." }},
+                { "@type": "Question", "name": "Jaka jest cena głowicy do drukarki biurkowej?", "acceptedAnswer": { "@type": "Answer", "text": "Oryginalne głowice Zebra do drukarek biurkowych kosztują ok. 400-1200 zł netto. Głowice 300 DPI są droższe od 203 DPI." }}
+              ]
+            }) }}
+          />
+        )}
+
+        {/* SEO Content Section - Wałki do drukarek PRZEMYSŁOWYCH */}
+        {productType.id === 'walek' && slugPath.length === 2 && printerCategory?.id === 'industrial' && (
+          <section className="py-8 sm:py-12 bg-white border-t border-gray-100">
+            <div className="max-w-4xl mx-auto px-4">
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">
+                Wałki dociskowe do drukarek przemysłowych Zebra — przewodnik
+              </h2>
+
+              <div className="prose prose-sm sm:prose-base prose-gray max-w-none">
+                <p className="text-gray-600 leading-relaxed mb-4">
+                  <strong>Wałek dociskowy (platen roller)</strong> to gumowy walec dociskający etykietę do głowicy
+                  drukującej. W drukarkach przemysłowych Zebra serii ZT wałek pracuje pod dużym obciążeniem —
+                  przetwarza tysiące etykiet dziennie, narażony na ścieranie, chemikalia i wysokie temperatury.
+                  Zużyty wałek powoduje <strong>jasne paski na wydruku</strong>, nierówne podawanie materiału
+                  i błędy kalibracji.
+                </p>
+
+                <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
+                  Wałki do popularnych modeli przemysłowych
+                </h3>
+                <div className="overflow-x-auto mb-6">
+                  <table className="w-full text-sm">
+                    <thead className="bg-gray-50">
+                      <tr>
+                        <th className="px-3 py-2 text-left font-semibold">Model drukarki</th>
+                        <th className="px-3 py-2 text-left font-semibold">Part Number wałka</th>
+                        <th className="px-3 py-2 text-left font-semibold">Szerokość</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-gray-100">
+                      <tr><td className="px-3 py-2">ZT230</td><td className="px-3 py-2">P1037974-003</td><td className="px-3 py-2">104 mm (4")</td></tr>
+                      <tr><td className="px-3 py-2">ZT411</td><td className="px-3 py-2">P1058930-080</td><td className="px-3 py-2">104 mm (4")</td></tr>
+                      <tr><td className="px-3 py-2">ZT421</td><td className="px-3 py-2">P1058930-081</td><td className="px-3 py-2">168 mm (6.6")</td></tr>
+                      <tr><td className="px-3 py-2">ZT510</td><td className="px-3 py-2">P1083347-018</td><td className="px-3 py-2">104 mm (4")</td></tr>
+                      <tr><td className="px-3 py-2">ZT610</td><td className="px-3 py-2">P1083347-005</td><td className="px-3 py-2">104 mm (4")</td></tr>
+                      <tr><td className="px-3 py-2">ZT620</td><td className="px-3 py-2">P1083347-006</td><td className="px-3 py-2">168 mm (6.6")</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
+                  Kiedy wymienić wałek dociskowy?
+                </h3>
+                <ul className="text-gray-600 space-y-2 mb-4">
+                  <li><strong>Jasne paski na wydruku</strong> — nierówna powierzchnia wałka nie dociska etykiety
+                  równomiernie do głowicy, co skutkuje bladymi lub białymi pasami.</li>
+                  <li><strong>Nierówne podawanie etykiet</strong> — zużyta guma traci przyczepność, etykiety
+                  ślizgają się lub są podawane ukośnie.</li>
+                  <li><strong>Widoczne uszkodzenia powierzchni</strong> — rysy, wgniecenia, stwardniała lub
+                  popękana guma wymagają natychmiastowej wymiany.</li>
+                  <li><strong>Po wymianie głowicy</strong> — zalecana wymiana wałka razem z głowicą, aby
+                  nowa głowica miała równomierny docisk od pierwszego dnia.</li>
+                </ul>
+
+                <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
+                  Żywotność i konserwacja
+                </h3>
+                <p className="text-gray-600 leading-relaxed mb-4">
+                  Wałek dociskowy w drukarce przemysłowej wytrzymuje przeciętnie <strong>500 000 — 1 000 000 etykiet</strong>.
+                  Regularne czyszczenie alkoholem izopropylowym (IPA 99%) co 5 000 — 10 000 etykiet wydłuża żywotność
+                  wałka nawet dwukrotnie. Nigdy nie czyść wałka ostrymi przedmiotami ani rozpuszczalnikami
+                  — mogą uszkodzić powłokę gumową.
+                </p>
+
+                <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
+                  FAQ — Wałki przemysłowe
+                </h3>
+                <div className="space-y-4 mb-6">
+                  <div className="border-l-4 border-green-500 pl-4">
+                    <p className="font-semibold text-gray-900">Czy wałek ZT410 pasuje do ZT411?</p>
+                    <p className="text-gray-600 text-sm mt-1"><strong>Tak!</strong> Wałki do ZT410 i ZT411 są wymienne.
+                    Zebra zachowała identyczną konstrukcję mechaniczną wałka w obu generacjach.
+                    Part Number: <strong>P1058930-080</strong>.</p>
+                  </div>
+                  <div className="border-l-4 border-blue-500 pl-4">
+                    <p className="font-semibold text-gray-900">Czy wałek wpływa na jakość druku?</p>
+                    <p className="text-gray-600 text-sm mt-1">Tak, bezpośrednio. Wałek odpowiada za równomierny
+                    docisk etykiety do głowicy na całej szerokości druku. Zużyty wałek to najczęstsza przyczyna
+                    pasków i nierównego wydruku — nawet z nową głowicą.</p>
+                  </div>
+                  <div className="border-l-4 border-blue-500 pl-4">
+                    <p className="font-semibold text-gray-900">Wałek i głowica — wymienić razem?</p>
+                    <p className="text-gray-600 text-sm mt-1">Zebra zaleca wymianę wałka przy każdej wymianie głowicy.
+                    Stary, nierówny wałek skraca żywotność nowej głowicy i pogarsza jakość druku od pierwszego dnia.</p>
+                  </div>
+                </div>
+
+                <div className="bg-blue-50 border border-blue-100 rounded-lg p-4 mt-6">
+                  <p className="text-blue-800 text-sm">
+                    <strong>Problemy z jakością druku?</strong> Wyślij zdjęcie wydruku —
+                    pomożemy zdiagnozować, czy to kwestia głowicy, wałka, czy ustawień.
+                    <a href="/#formularz" className="underline ml-1">Zgłoś do serwisu →</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* FAQPage Schema — /sklep/walki/drukarki-przemyslowe */}
+        {productType.id === 'walek' && slugPath.length === 2 && printerCategory?.id === 'industrial' && (
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": [
+                { "@type": "Question", "name": "Czy wałek ZT410 pasuje do ZT411?", "acceptedAnswer": { "@type": "Answer", "text": "Tak! Wałki do ZT410 i ZT411 są wymienne. Zebra zachowała identyczną konstrukcję mechaniczną. Part Number: P1058930-080." }},
+                { "@type": "Question", "name": "Czy wałek wpływa na jakość druku?", "acceptedAnswer": { "@type": "Answer", "text": "Tak, bezpośrednio. Wałek odpowiada za równomierny docisk etykiety do głowicy na całej szerokości druku. Zużyty wałek to najczęstsza przyczyna pasków i nierównego wydruku." }},
+                { "@type": "Question", "name": "Wałek i głowica — wymienić razem?", "acceptedAnswer": { "@type": "Answer", "text": "Zebra zaleca wymianę wałka przy każdej wymianie głowicy. Stary, nierówny wałek skraca żywotność nowej głowicy i pogarsza jakość druku od pierwszego dnia." }}
+              ]
+            }) }}
+          />
+        )}
+
+        {/* SEO Content Section - Wałki do drukarek BIURKOWYCH */}
+        {productType.id === 'walek' && slugPath.length === 2 && printerCategory?.id === 'desktop' && (
+          <section className="py-8 sm:py-12 bg-white border-t border-gray-100">
+            <div className="max-w-4xl mx-auto px-4">
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">
+                Wałki dociskowe do drukarek biurkowych Zebra — poradnik
+              </h2>
+
+              <div className="prose prose-sm sm:prose-base prose-gray max-w-none">
+                <p className="text-gray-600 leading-relaxed mb-4">
+                  <strong>Wałek dociskowy (platen roller)</strong> w drukarkach biurkowych Zebra serii ZD
+                  pełni tę samą funkcję co w modelach przemysłowych — dociska etykietę do głowicy
+                  drukującej, zapewniając równomierny transfer ciepła. W drukarkach kompaktowych
+                  wałek jest mniejszy, ale równie ważny dla jakości wydruku.
+                </p>
+
+                <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
+                  Wałki do popularnych modeli biurkowych
+                </h3>
+                <div className="overflow-x-auto mb-6">
+                  <table className="w-full text-sm">
+                    <thead className="bg-gray-50">
+                      <tr>
+                        <th className="px-3 py-2 text-left font-semibold">Model drukarki</th>
+                        <th className="px-3 py-2 text-left font-semibold">Part Number wałka</th>
+                        <th className="px-3 py-2 text-left font-semibold">Zastosowanie</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-gray-100">
+                      <tr><td className="px-3 py-2">ZD220 / ZD230</td><td className="px-3 py-2">P1080383-417</td><td className="px-3 py-2">Etykiety wysyłkowe, cenówki</td></tr>
+                      <tr><td className="px-3 py-2">ZD411 / ZD421</td><td className="px-3 py-2">P1112640-016</td><td className="px-3 py-2">Magazyn, apteki, laboratoria</td></tr>
+                      <tr><td className="px-3 py-2">ZD510-HC</td><td className="px-3 py-2">P1112640-017</td><td className="px-3 py-2">Szpitale, opaska na rękę</td></tr>
+                      <tr><td className="px-3 py-2">ZD611 / ZD621</td><td className="px-3 py-2">P1112640-016</td><td className="px-3 py-2">Logistyka, etykiety produktowe</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
+                  Objawy zużytego wałka w drukarce biurkowej
+                </h3>
+                <ul className="text-gray-600 space-y-2 mb-4">
+                  <li><strong>Blade lub nierówne wydruki</strong> — głowica nie dociska równomiernie
+                  przez zużytą powierzchnię wałka. Efekt szczególnie widoczny na krawędziach etykiety.</li>
+                  <li><strong>Etykiety nie podają się prawidłowo</strong> — poślizg, zacięcia
+                  lub ukośne podawanie przy małych etykietach (np. do opakowań).</li>
+                  <li><strong>Zwiększona głośność pracy</strong> — stwardniała guma powoduje
+                  wyraźny hałas podczas drukowania.</li>
+                </ul>
+
+                <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
+                  ZD510-HC — wałek do zastosowań medycznych
+                </h3>
+                <p className="text-gray-600 leading-relaxed mb-4">
+                  Drukarka <strong>ZD510-HC (Healthcare)</strong> jest przeznaczona do szpitali i klinik —
+                  drukuje opaski na rękę pacjentów. Wałek P1112640-017 w tym modelu jest odporny na
+                  środki dezynfekujące stosowane w placówkach medycznych. Stosowanie nieoryginalnych
+                  zamienników może prowadzić do degradacji gumy pod wpływem chemikaliów.
+                </p>
+
+                <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
+                  FAQ — Wałki biurkowe
+                </h3>
+                <div className="space-y-4 mb-6">
+                  <div className="border-l-4 border-green-500 pl-4">
+                    <p className="font-semibold text-gray-900">Czy wałek ZD411 pasuje do ZD421?</p>
+                    <p className="text-gray-600 text-sm mt-1"><strong>Tak!</strong> Oba modele używają tego samego wałka
+                    P1112640-016. ZD421 to szersza wersja ZD411 z tą samą mechaniką wałka.</p>
+                  </div>
+                  <div className="border-l-4 border-blue-500 pl-4">
+                    <p className="font-semibold text-gray-900">Czy mogę używać zamiennika wałka?</p>
+                    <p className="text-gray-600 text-sm mt-1">Nieoryginalne wałki mają inną twardość gumy (Shore A)
+                    i mogą powodować nierówny docisk, przyspieszając zużycie głowicy. Przy stosunkowo niskiej cenie
+                    wałka oryginalnego — to ryzyko nie jest warte oszczędności.</p>
+                  </div>
+                </div>
+
+                <div className="bg-blue-50 border border-blue-100 rounded-lg p-4 mt-6">
+                  <p className="text-blue-800 text-sm">
+                    <strong>Nie wiesz jaki wałek do Twojej drukarki?</strong> Podaj model drukarki —
+                    dobierzemy właściwy wałek i sprawdzimy dostępność.
+                    <a href="/kontakt" className="underline ml-1">Napisz do nas →</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* FAQPage Schema — /sklep/walki/drukarki-biurkowe */}
+        {productType.id === 'walek' && slugPath.length === 2 && printerCategory?.id === 'desktop' && (
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": [
+                { "@type": "Question", "name": "Czy wałek ZD411 pasuje do ZD421?", "acceptedAnswer": { "@type": "Answer", "text": "Tak! Oba modele używają tego samego wałka P1112640-016. ZD421 to szersza wersja ZD411 z tą samą mechaniką wałka." }},
+                { "@type": "Question", "name": "Czy mogę używać zamiennika wałka?", "acceptedAnswer": { "@type": "Answer", "text": "Nieoryginalne wałki mają inną twardość gumy (Shore A) i mogą powodować nierówny docisk, przyspieszając zużycie głowicy. Przy niskiej cenie wałka oryginalnego — to ryzyko nie jest warte oszczędności." }}
+              ]
+            }) }}
+          />
         )}
       </div>
 

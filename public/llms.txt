@@ -1,0 +1,88 @@
+# TAKMA — Autoryzowany Serwis i Sklep Zebra Technologies
+
+> TAKMA to autoryzowany partner serwisowy Zebra Technologies w Polsce.
+> Specjalizujemy się w serwisie drukarek etykiet Zebra oraz sprzedaży oryginalnych części zamiennych.
+> Strona: https://www.serwis-zebry.pl
+
+## O firmie
+
+TAKMA działa na rynku drukarek etykiet Zebra od ponad 15 lat. Jesteśmy autoryzowanym partnerem serwisowym Zebra Technologies — posiadamy certyfikowane kompetencje w naprawie i konserwacji drukarek termicznych. Obsługujemy klientów biznesowych (B2B) w całej Polsce — od małych firm po duże centra logistyczne i zakłady produkcyjne.
+
+Właściciel: Tadeusz Tiuchty — certyfikowany technik Zebra z wieloletnim doświadczeniem.
+
+Kontakt:
+- Telefon: +48 601 619 898
+- Email: kontakt@takma.com.pl
+- Adres: Polska (serwis z odbiorem kurierskim w całej Polsce)
+
+## Sklep — Oryginalne części zamienne Zebra
+
+Adres sklepu: https://www.serwis-zebry.pl/sklep
+
+### Kategorie produktów
+
+- **Głowice drukujące** — https://www.serwis-zebry.pl/sklep/glowice
+  - Drukarki biurkowe: https://www.serwis-zebry.pl/sklep/glowice/drukarki-biurkowe
+  - Drukarki przemysłowe: https://www.serwis-zebry.pl/sklep/glowice/drukarki-przemyslowe
+  - Rozdzielczości: 203 DPI, 300 DPI, 600 DPI
+
+- **Wałki dociskowe (platen roller)** — https://www.serwis-zebry.pl/sklep/walki
+  - Drukarki biurkowe: https://www.serwis-zebry.pl/sklep/walki/drukarki-biurkowe
+  - Drukarki przemysłowe: https://www.serwis-zebry.pl/sklep/walki/drukarki-przemyslowe
+
+- **Akumulatory** — https://www.serwis-zebry.pl/sklep/akumulatory
+
+### Popularne produkty (Part Numbers)
+
+Głowice drukujące:
+- P1058930-009 — Głowica ZT411 203 DPI
+- P1058930-010 — Głowica ZT411 300 DPI
+- P1058930-011 — Głowica ZT411 600 DPI
+- P1083320-010 — Głowica ZT610 203 DPI
+- P1083320-011 — Głowica ZT610 300 DPI
+- P1083320-012 — Głowica ZT610 600 DPI
+- P1112640-019 — Głowica ZD421/ZD411 203 DPI
+- P1112640-020 — Głowica ZD421/ZD411 300 DPI
+- P1083320-015 — Głowica ZT620 203 DPI
+- P1058930-012 — Głowica ZT421 203 DPI
+- P1037974-010 — Głowica ZT230 203 DPI
+- 105934-037 — Głowica GK420 203 DPI
+- P1053360-018 — Głowica 105SL Plus 203 DPI
+
+Wałki dociskowe:
+- P1058930-080 — Wałek ZT411
+- P1058930-081 — Wałek ZT421
+- P1083347-005 — Wałek ZT610
+- P1083347-006 — Wałek ZT620
+- P1112640-016 — Wałek ZD421/ZD621
+- P1037974-003 — Wałek ZT230
+
+## Usługi serwisowe
+
+- **Naprawa drukarek Zebra** — https://www.serwis-zebry.pl/
+- **Wymiana głowicy drukującej** — https://www.serwis-zebry.pl/uslugi/wymiana-glowicy
+- **Diagnostyka i kalibracja** — https://www.serwis-zebry.pl/uslugi
+- **Odbiór kurierski** — odbieramy drukarkę, naprawiamy, odsyłamy
+
+## Blog i poradniki
+
+- Jak wyczyścić głowicę drukarki Zebra: https://www.serwis-zebry.pl/blog/jak-wyczyscic-glowice-drukarki-zebra
+- Wymiana głowicy — kiedy i ile kosztuje: https://www.serwis-zebry.pl/blog/wymiana-glowicy-drukarki-zebra-kiedy-konieczna-ile-kosztuje
+- TOP 10 awarii drukarek Zebra: https://www.serwis-zebry.pl/blog/najczestsze-awarie-drukarek-zebra-top10
+- Cennik napraw drukarek Zebra: https://www.serwis-zebry.pl/blog/cennik-naprawy-drukarki-zebra-koszty-serwisu
+- Poradniki wideo: https://www.serwis-zebry.pl/poradniki-wideo
+
+## Obsługiwane modele drukarek
+
+Biurkowe: ZD220, ZD230, ZD411, ZD421, ZD611, ZD621, GK420, GX420, GX430
+Przemysłowe: ZT230, ZT410, ZT411, ZT420, ZT421, ZT510, ZT610, ZT620, 105SL Plus, ZM400, S4M
+Mobilne: ZQ520, ZQ630
+
+## Kluczowe fakty
+
+- 100% oryginalne części Zebra Technologies
+- Gwarancja producenta 12 miesięcy
+- Wysyłka 24h z magazynu w Polsce
+- Faktury VAT dla firm (B2B)
+- Profesjonalny serwis z odbiorem kurierskim
+- Autoryzowany partner serwisowy Zebra

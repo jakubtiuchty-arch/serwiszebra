@@ -90,16 +90,17 @@ export const SHOP_CATEGORIES: ProductTypeCategory[] = [
     name: 'Wałek',
     namePlural: 'Wałki dociskowe',
     slug: 'walki',
-    enabled: false, // Ukryte - do włączenia później
+    enabled: true,
     printerCategories: [
       {
         id: 'desktop',
         name: 'Drukarki biurkowe',
         slug: 'drukarki-biurkowe',
         models: [
+          { id: 'zd220', name: 'Zebra ZD220', slug: 'zebra-zd220', resolutions: [] },
           { id: 'zd421', name: 'Zebra ZD421', slug: 'zebra-zd421', resolutions: [] },
+          { id: 'zd510-hc', name: 'Zebra ZD510-HC', slug: 'zebra-zd510-hc', resolutions: [] },
           { id: 'zd621', name: 'Zebra ZD621', slug: 'zebra-zd621', resolutions: [] },
-          { id: 'gk420', name: 'Zebra GK420', slug: 'zebra-gk420', resolutions: [] },
         ]
       },
       {
@@ -109,6 +110,10 @@ export const SHOP_CATEGORIES: ProductTypeCategory[] = [
         models: [
           { id: 'zt230', name: 'Zebra ZT230', slug: 'zebra-zt230', resolutions: [] },
           { id: 'zt411', name: 'Zebra ZT411', slug: 'zebra-zt411', resolutions: [] },
+          { id: 'zt421', name: 'Zebra ZT421', slug: 'zebra-zt421', resolutions: [] },
+          { id: 'zt510', name: 'Zebra ZT510', slug: 'zebra-zt510', resolutions: [] },
+          { id: 'zt610', name: 'Zebra ZT610', slug: 'zebra-zt610', resolutions: [] },
+          { id: 'zt620', name: 'Zebra ZT620', slug: 'zebra-zt620', resolutions: [] },
         ]
       }
     ]
