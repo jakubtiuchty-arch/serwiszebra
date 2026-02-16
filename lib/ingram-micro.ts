@@ -778,7 +778,7 @@ function parsePnAResponse(xml: string): PnAItem[] {
  * Helper do wyciągania wartości z XML
  */
 function extractXmlValue(xml: string, tag: string): string | null {
-  const regex = new RegExp(`<${tag}>([^<]*)</${tag}>`)
+  const regex = new RegExp(`<${tag}[^>]*>([^<]*)</${tag}>`)
   const match = xml.match(regex)
   return match ? match[1] : null
 }
