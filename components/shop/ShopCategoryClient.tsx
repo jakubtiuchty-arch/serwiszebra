@@ -227,15 +227,11 @@ export default function ShopCategoryClient({
                   <div className="mb-2">
                     {product.stock > 0 ? (
                       <span className="text-[10px] sm:text-xs text-green-600 font-medium">
-                        ✓ Wysyłka 24-72h
-                      </span>
-                    ) : (product.attributes?.in_delivery ?? 0) > 0 ? (
-                      <span className="text-[10px] sm:text-xs text-amber-600 font-medium">
-                        Wysyłka 3-5 dni
+                        ✓ Dostępny
                       </span>
                     ) : (
-                      <span className="text-[10px] sm:text-xs text-amber-600 font-medium">
-                        Wysyłka 5-7 dni
+                      <span className="text-[10px] sm:text-xs text-red-500 font-medium">
+                        Niedostępny
                       </span>
                     )}
                   </div>
