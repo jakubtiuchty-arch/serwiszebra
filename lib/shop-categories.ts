@@ -161,14 +161,14 @@ export const SHOP_CATEGORIES: ProductTypeCategory[] = [
       //     { id: 'li3678', name: 'Zebra LI3678', slug: 'zebra-li3678', resolutions: [] },
       //   ]
       // },
-      // {
-      //   id: 'tablets',
-      //   name: 'Tablety',
-      //   slug: 'tablety',
-      //   models: [
-      //     { id: 'et60-et65', name: 'Zebra ET60/ET65', slug: 'zebra-et60-et65', resolutions: [] },
-      //   ]
-      // },
+      {
+        id: 'tablets',
+        name: 'Tablety',
+        slug: 'tablety',
+        models: [
+          { id: 'et60-et65', name: 'Zebra ET60/ET65', slug: 'zebra-et60-et65', resolutions: [] },
+        ]
+      },
     ]
   }
 ]

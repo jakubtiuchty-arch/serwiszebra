@@ -42,6 +42,9 @@ const BATTERY_IMAGES: Record<string, string> = {
   'BTRY-MPP-34MA1-01': '/sklep_photo/BTRY-MPP-34MA1-01.png',
   'BTRY-MPP-EXT1-01': '/sklep_photo/BTRY-MPP-EXT1-01.png',
   'BTRY-MPP-68MA1-01': '/sklep_photo/BTRY-MPP-68MA1-01.png',
+  'BTRY-ET6X-0AH-01': '/sklep_photo/BTRY-ET6X-0AH-01.png',
+  'BTRY-ET6XA-9AH-01': '/sklep_photo/BTRY-ET6XA-9AH-01.png',
+  'BTRY-ET6XA-18AH-01': '/sklep_photo/BTRY-ET6XA-18AH-01.png',
 }
 
 export function getRollerImageBySku(sku: string): string | null {
