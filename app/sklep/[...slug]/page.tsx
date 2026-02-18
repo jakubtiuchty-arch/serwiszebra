@@ -111,7 +111,7 @@ const PRODUCT_TYPE_FAQ: Record<string, Array<{ question: string; answer: string 
     },
     {
       question: 'Czy bateria Standard wystarczy, czy lepiej Extended?',
-      answer: 'Standard (mniejsza pojemność) — lżejsza, tańsza, wystarczająca do 4-6h pracy. Extended (większa pojemność) — cięższa, droższa, ale wytrzymuje pełną zmianę 8-12h. Dla pracy wielozmianowej lub w terenie zalecamy Extended.'
+      answer: 'Standard (mniejsza pojemność) — lżejsza, tańsza, wystarczająca do 4-8h pracy. Extended (większa pojemność) — cięższa, droższa, ale wytrzymuje do 14h pracy w zależności od modelu i intensywności użytkowania. Dla pracy wielozmianowej lub w terenie zalecamy Extended.'
     },
     {
       question: 'Czy mogę używać zamiennych baterii w urządzeniach Zebra?',
@@ -313,18 +313,22 @@ function generateSeoDescription(product: Product): string {
   return parts.join(' ')
 }
 
-// Helper: Generuj tytuł SEO (max ~60 znaków — unikaj obcinania w SERP)
+// Helper: Generuj tytuł SEO (max ~70 znaków, nazwa najpierw + PN)
 function generateSeoTitle(product: Product): string {
   const suffix = ' | TAKMA'
-  // Próba 1: Nazwa + SKU + TAKMA
-  const full = `${product.name} ${product.sku}${suffix}`
-  if (full.length <= 60) return full
-  // Próba 2: Nazwa + TAKMA
-  const short = `${product.name}${suffix}`
-  if (short.length <= 60) return short
-  // Próba 3: SKU + Nazwa (obcięte)
-  const maxName = 60 - product.sku.length - suffix.length - 3
-  return `${product.sku} ${product.name.slice(0, maxName)}${suffix}`
+  // Nazwa produktu często zawiera PN w nawiasach, np. "Akumulator 3100 mAh do Zebra TC21/TC26 (BTRY-TC2Y-1XMA1-01)"
+  // Próba 1: Pełna nazwa | TAKMA
+  const full = `${product.name}${suffix}`
+  if (full.length <= 70) return full
+  // Próba 2: Nazwa bez PN w nawiasach | PN | TAKMA
+  const nameWithoutPN = product.name.replace(/\s*\([^)]*\)\s*$/, '').trim()
+  const withPN = `${nameWithoutPN} | ${product.sku}${suffix}`
+  if (withPN.length <= 70) return withPN
+  // Próba 3: Nazwa bez PN | TAKMA
+  const short = `${nameWithoutPN}${suffix}`
+  if (short.length <= 70) return short
+  // Próba 4: Obcięta nazwa | TAKMA
+  return `${nameWithoutPN.slice(0, 70 - suffix.length)}${suffix}`
 }
 
 // Generuj metadane
@@ -415,8 +419,7 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
           width: 800,
           height: 800,
           alt: `${product.name} ${product.sku} - oryginalna część zamienna Zebra`
-        }],
-        type: 'website'
+        }]
       },
       other: {
         'og:type': 'product',
@@ -649,13 +652,22 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
       )
     } else {
       // Fallback do generycznego FAQ per typ produktu
-      faqItems = PRODUCT_TYPE_FAQ[product.product_type] || []
+      faqItems = [...(PRODUCT_TYPE_FAQ[product.product_type] || [])]
     }
 
-    // Dodaj produkt do breadcrumbs
+    // Dodaj dynamiczne pytanie o kompatybilność (dla każdego typu produktu)
+    if (product.device_model && product.sku) {
+      faqItems.unshift({
+        question: `Czy ${product.sku} pasuje do ${product.device_model}?`,
+        answer: `Tak — ${product.sku} to oryginalna część Zebra dedykowana do ${product.device_model}${product.compatible_models?.length ? `. Kompatybilna również z: ${product.compatible_models.join(', ')}` : ''}. Przed zakupem sprawdź Part Number na etykiecie starej części lub w specyfikacji urządzenia.`
+      })
+    }
+
+    // Dodaj produkt do breadcrumbs (z URL dla ostatniego elementu — schema.org best practice)
+    const productUrl = `/sklep/${slugPath.join('/')}`
     const productBreadcrumbs = [
       ...breadcrumbs,
-      { label: product.name, href: '' }
+      { label: product.name, href: productUrl }
     ]
 
     // Generuj rozszerzony Schema JSON-LD z additionalProperty
@@ -733,6 +745,10 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
       },
       // UWAGA: Usunięto aggregateRating i review - Google wymaga prawdziwych recenzji widocznych na stronie
       // Dodaj recenzje gdy będą realne opinie klientów
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [".quick-answer", ".product-price"]
+      }
     }
     
     // Dodaj additionalProperty jeśli dostępne
@@ -792,11 +808,11 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
     const priceInfo = `${product.price_brutto.toFixed(2).replace('.', ',')} zł brutto`
     let quickAnswer: string | null = null
     if (product.product_type === 'glowica' && product.resolution_dpi) {
-      quickAnswer = `Głowica ${product.sku} to oryginalna część ${product.resolution_dpi} DPI do ${product.device_model || 'drukarki Zebra'}. Cena: ${priceInfo}. Wysyłka ${deliveryInfo}. Gwarancja producenta 12 miesięcy.`
+      quickAnswer = `Głowica ${product.sku} to oryginalna część ${product.resolution_dpi} DPI do ${product.device_model || 'drukarki Zebra'}. Cena: ${priceInfo}. Wysyłka ${deliveryInfo}. Gwarancja producenta 12 miesięcy. TAKMA — autoryzowany dystrybutor i serwis Zebra Technologies w Polsce od 2008 roku.`
     } else if (product.product_type === 'walek') {
-      quickAnswer = `Wałek dociskowy ${product.sku} to oryginalny platen roller do ${product.device_model || 'drukarki Zebra'}. Cena: ${priceInfo}. Wysyłka ${deliveryInfo}. Gwarancja 12 miesięcy. TAKMA — autoryzowany dystrybutor Zebra.`
+      quickAnswer = `Wałek dociskowy ${product.sku} to oryginalny platen roller do ${product.device_model || 'drukarki Zebra'}. Cena: ${priceInfo}. Wysyłka ${deliveryInfo}. Gwarancja 12 miesięcy. TAKMA — autoryzowany dystrybutor i serwis Zebra Technologies w Polsce od 2008 roku.`
     } else if (product.product_type === 'akumulator') {
-      quickAnswer = `Akumulator ${product.sku} to oryginalna bateria Li-Ion do ${product.device_model || 'urządzenia Zebra'}. Cena: ${priceInfo}. Wysyłka ${deliveryInfo}. Gwarancja producenta 12 miesięcy. Certyfikowany — pełna kompatybilność z ładowarkami Zebra.`
+      quickAnswer = `Akumulator ${product.sku} to oryginalna bateria Li-Ion do ${product.device_model || 'urządzenia Zebra'}. Cena: ${priceInfo}. Wysyłka ${deliveryInfo}. Gwarancja producenta 12 miesięcy. TAKMA — autoryzowany dystrybutor i serwis Zebra Technologies w Polsce od 2008 roku.`
     }
 
     return (
@@ -994,7 +1010,7 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
                 </h2>
                 <div className="text-xs sm:text-sm text-gray-700 space-y-2">
                   <p><strong>Wymień akumulator gdy:</strong> urządzenie nie wytrzymuje pełnej zmiany, nieoczekiwane restarty, spuchnięta obudowa baterii, czas ładowania znacznie się wydłużył.</p>
-                  <p><strong>Standard vs Extended:</strong> Standard (4-6h pracy) wystarczy do lekkich zastosowań. Extended (8-12h) — do pracy wielozmianowej i w terenie.</p>
+                  <p><strong>Standard vs Extended:</strong> Standard (4-8h pracy) wystarczy do lekkich zastosowań. Extended (do 14h w zależności od modelu) — do pracy wielozmianowej i w terenie.</p>
                   <p className="text-amber-700 font-medium">Przechowuj zapasowe baterie naładowane do 40-60% w temperaturze 15-25°C. Pełne rozładowanie skraca żywotność!</p>
                 </div>
               </div>
@@ -1103,7 +1119,7 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
               </div>
             )}
 
-            {/* Usługa montażu */}
+            {/* Usługa montażu / serwisu */}
             <div className="rounded-xl bg-gray-50 p-5 sm:p-6 mb-4 sm:mb-6 border border-gray-200">
               <div className="flex items-start gap-4">
                 <div className="bg-blue-100 rounded-lg p-3 flex-shrink-0">
@@ -1111,11 +1127,12 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
                 </div>
                 <div className="flex-1">
                   <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-2">
-                    Potrzebujesz wymiany części?
+                    {product.product_type === 'akumulator' ? 'Potrzebujesz pomocy z urządzeniem?' : 'Potrzebujesz wymiany części?'}
                   </h3>
                   <p className="text-sm text-gray-600 mb-4 leading-relaxed">
-                    Odbierzemy drukarkę kurierem, wymienimy część w naszym serwisie 
-                    i odeślemy sprawne urządzenie. Szybko i z gwarancją.
+                    {product.product_type === 'akumulator'
+                      ? 'Odbierzemy urządzenie kurierem, wymienimy akumulator i skonfigurujemy w naszym serwisie, a następnie odeślemy sprawny sprzęt. Szybko i z gwarancją.'
+                      : 'Odbierzemy drukarkę kurierem, wymienimy część w naszym serwisie i odeślemy sprawne urządzenie. Szybko i z gwarancją.'}
                   </p>
                   <div className="flex flex-wrap gap-2">
                     <Link 
