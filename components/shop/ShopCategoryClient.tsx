@@ -215,6 +215,12 @@ export default function ShopCategoryClient({
             const productUrl = getProductUrl(product)
             const imageUrl = getProductImage(product)
 
+            // Dostępność: priorytet live data z Ingram API, fallback na dane z DB
+            const hasLiveData = product.sku in liveStockMap
+            const isAvailable = hasLiveData
+              ? liveStockMap[product.sku] > 0
+              : (product.stock > 0 || (product.attributes?.stock_pl ?? 0) > 0 || (product.attributes?.stock_de ?? 0) > 0)
+
             return (
               <Link
                 key={product.id}
@@ -250,13 +256,13 @@ export default function ShopCategoryClient({
 
                   {/* Dostępność */}
                   <div className="mb-2">
-                    {(product.stock > 0 || (liveStockMap[product.sku] ?? 0) > 0 || (product.attributes?.stock_pl ?? 0) > 0 || (product.attributes?.stock_de ?? 0) > 0) ? (
+                    {isAvailable ? (
                       <span className="text-[10px] sm:text-xs text-green-600 font-medium">
                         ✓ Dostępny
                       </span>
                     ) : (
-                      <span className="text-[10px] sm:text-xs text-amber-500 font-medium">
-                        Na zamówienie
+                      <span className="text-[10px] sm:text-xs text-red-500 font-medium">
+                        Chwilowo niedostępny
                       </span>
                     )}
                   </div>
@@ -273,9 +279,9 @@ export default function ShopCategoryClient({
                     <button
                       onClick={(e) => handleAddToCart(e, product)}
                       className={`p-2 sm:p-2.5 rounded-lg text-white transition-colors ${
-                        (product.stock > 0 || (liveStockMap[product.sku] ?? 0) > 0 || (product.attributes?.stock_pl ?? 0) > 0 || (product.attributes?.stock_de ?? 0) > 0)
+                        isAvailable
                           ? 'bg-[#A8F000] hover:bg-[#96D800] text-gray-900'
-                          : 'bg-amber-500 hover:bg-amber-600'
+                          : 'bg-red-500 hover:bg-red-600'
                       }`}
                     >
                       <ShoppingCart className="w-4 h-4" />

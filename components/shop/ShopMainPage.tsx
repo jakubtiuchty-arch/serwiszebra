@@ -70,7 +70,32 @@ export default function ShopMainPage() {
   const [expandedProductTypes, setExpandedProductTypes] = useState<string[]>(['glowica'])
   const [showMobileFilters, setShowMobileFilters] = useState(false)
 
+  const [liveStockMap, setLiveStockMap] = useState<Record<string, number>>({})
   const addToCart = useCartStore((state) => state.addItem)
+
+  // Pobierz live stock z Ingram API dla załadowanych produktów
+  useEffect(() => {
+    const skus = products.map(p => p.sku).filter(Boolean)
+    if (skus.length === 0) return
+
+    const controller = new AbortController()
+    Promise.all(
+      skus.map(sku =>
+        fetch(`/api/shop/product-stock?sku=${encodeURIComponent(sku)}`, { signal: controller.signal })
+          .then(r => r.json())
+          .then(data => data.found ? { sku, total: data.total_stock ?? 0 } : null)
+          .catch(() => null)
+      )
+    ).then(results => {
+      const map: Record<string, number> = {}
+      for (const r of results) {
+        if (r) map[r.sku] = r.total
+      }
+      setLiveStockMap(map)
+    })
+
+    return () => controller.abort()
+  }, [products])
 
   useEffect(() => {
     fetchProducts()
@@ -368,45 +393,51 @@ export default function ShopMainPage() {
                         </div>
 
                         <div className="p-3 sm:p-4 border-t border-gray-100">
-                          <h3 className="text-xs sm:text-sm font-semibold text-gray-900 mb-2 line-clamp-2 leading-tight">
+                          <h3 className="text-xs sm:text-sm font-semibold text-gray-900 group-hover:text-blue-600 mb-2 line-clamp-2 leading-tight">
                             {product.name}
                           </h3>
 
-                          <div className="mb-2">
-                            {product.stock > 0 ? (
-                              <span className="text-[10px] sm:text-xs text-green-600 font-medium">
-                                ✓ Wysyłka 24-72h
-                              </span>
-                            ) : (product.attributes?.in_delivery ?? 0) > 0 ? (
-                              <span className="text-[10px] sm:text-xs text-amber-600 font-medium">
-                                Wysyłka 3-5 dni
-                              </span>
-                            ) : (
-                              <span className="text-[10px] sm:text-xs text-amber-600 font-medium">
-                                Wysyłka 5-7 dni
-                              </span>
-                            )}
-                          </div>
+                          {(() => {
+                            const hasLiveData = product.sku in liveStockMap
+                            const isAvailable = hasLiveData
+                              ? liveStockMap[product.sku] > 0
+                              : (product.stock > 0 || (product.attributes?.stock_pl ?? 0) > 0 || (product.attributes?.stock_de ?? 0) > 0)
+                            return (
+                              <>
+                                <div className="mb-2">
+                                  {isAvailable ? (
+                                    <span className="text-[10px] sm:text-xs text-green-600 font-medium">
+                                      ✓ Dostępny
+                                    </span>
+                                  ) : (
+                                    <span className="text-[10px] sm:text-xs text-red-500 font-medium">
+                                      Chwilowo niedostępny
+                                    </span>
+                                  )}
+                                </div>
 
-                          <div className="flex items-end justify-between">
-                            <div>
-                              <div className="text-base sm:text-lg font-bold text-gray-900">
-                                {product.price.toFixed(2).replace('.', ',')} zł
-                              </div>
-                              <div className="text-[10px] sm:text-xs text-gray-500">netto</div>
-                            </div>
+                                <div className="flex items-end justify-between">
+                                  <div>
+                                    <div className="text-base sm:text-lg font-bold text-gray-900">
+                                      {product.price.toFixed(2).replace('.', ',')} zł
+                                    </div>
+                                    <div className="text-[10px] sm:text-xs text-gray-500">netto</div>
+                                  </div>
 
-                            <button
-                              onClick={(e) => handleAddToCart(e, product)}
-                              className={`p-2 sm:p-2.5 rounded-lg text-white transition-colors ${
-                                product.stock > 0
-                                  ? 'bg-green-600 hover:bg-green-700'
-                                  : 'bg-amber-500 hover:bg-amber-600'
-                              }`}
-                            >
-                              <ShoppingCart className="w-4 h-4" />
-                            </button>
-                          </div>
+                                  <button
+                                    onClick={(e) => handleAddToCart(e, product)}
+                                    className={`p-2 sm:p-2.5 rounded-lg text-white transition-colors ${
+                                      isAvailable
+                                        ? 'bg-[#A8F000] hover:bg-[#96D800] text-gray-900'
+                                        : 'bg-red-500 hover:bg-red-600'
+                                    }`}
+                                  >
+                                    <ShoppingCart className="w-4 h-4" />
+                                  </button>
+                                </div>
+                              </>
+                            )
+                          })()}
                         </div>
                       </Link>
                     )
