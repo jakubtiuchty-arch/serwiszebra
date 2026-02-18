@@ -388,13 +388,14 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
     return { title: 'Kategoria nie znaleziona | Sklep TAKMA' }
   }
 
+  const metaDeviceLabel = productType.id === 'akumulator' ? 'urządzeń Zebra' : 'drukarek Zebra'
   if (slugPath.length === 1) {
     return {
-      title: `${productType.namePlural} do drukarek Zebra | Sklep TAKMA`,
-      description: `${productType.namePlural} do drukarek Zebra. Oryginalne części zamienne z gwarancją. Szybka wysyłka.`,
+      title: `${productType.namePlural} do ${metaDeviceLabel} | Sklep TAKMA`,
+      description: `${productType.namePlural} do ${metaDeviceLabel}. Oryginalne części zamienne z gwarancją. Szybka wysyłka.`,
       openGraph: {
-        title: `${productType.namePlural} do drukarek Zebra | TAKMA`,
-        description: `Oryginalne ${productType.namePlural.toLowerCase()} do drukarek Zebra. Wysyłka 24h, gwarancja producenta.`,
+        title: `${productType.namePlural} do ${metaDeviceLabel} | TAKMA`,
+        description: `Oryginalne ${productType.namePlural.toLowerCase()} do ${metaDeviceLabel}. Wysyłka 24h, gwarancja producenta.`,
         url: `https://www.serwis-zebry.pl/sklep/${productType.slug}`,
         type: 'website',
         siteName: 'TAKMA - Autoryzowany Serwis Zebra',
@@ -1160,7 +1161,8 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
   let printerCategory: PrinterCategory | undefined
   let model: PrinterModel | undefined
   let pageTitle = productType.namePlural
-  let pageSubtitle = `Oryginalne ${productType.namePlural.toLowerCase()} do drukarek Zebra`
+  const deviceLabel = productType.id === 'akumulator' ? 'urządzeń Zebra' : 'drukarek Zebra'
+  let pageSubtitle = `Oryginalne ${productType.namePlural.toLowerCase()} do ${deviceLabel}`
 
   // Filtry
   const filters = {
