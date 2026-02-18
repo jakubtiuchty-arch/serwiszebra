@@ -43,7 +43,8 @@ export interface PrinterModelData {
   printWidthMm: number
   availableResolutions: number[]
   technology: 'thermal' | 'thermotransfer' | 'both'
-  lifespanInches: number
+  lifespanInches: number  // default (203 DPI)
+  lifespanByResolution?: Record<number, number>  // per-DPI override
   compatibleWith: string[]  // inne modele z tą samą głowicą
 }
 
@@ -220,6 +221,7 @@ export const PRINTER_MODELS: Record<string, PrinterModelData> = {
     availableResolutions: [203, 300],
     technology: 'both',
     lifespanInches: 2000000,
+    lifespanByResolution: { 203: 2000000, 300: 1500000 },
     compatibleWith: ['ZT230']
   },
   'ZT230': {
@@ -230,6 +232,7 @@ export const PRINTER_MODELS: Record<string, PrinterModelData> = {
     availableResolutions: [203, 300],
     technology: 'both',
     lifespanInches: 2000000,
+    lifespanByResolution: { 203: 2000000, 300: 1500000 },
     compatibleWith: ['ZT220']
   },
   'ZT410': {
@@ -240,6 +243,7 @@ export const PRINTER_MODELS: Record<string, PrinterModelData> = {
     availableResolutions: [203, 300, 600],
     technology: 'both',
     lifespanInches: 2000000,
+    lifespanByResolution: { 203: 2000000, 300: 1500000, 600: 1000000 },
     compatibleWith: ['ZT411']
   },
   'ZT411': {
@@ -250,6 +254,7 @@ export const PRINTER_MODELS: Record<string, PrinterModelData> = {
     availableResolutions: [203, 300, 600],
     technology: 'both',
     lifespanInches: 2000000,
+    lifespanByResolution: { 203: 2000000, 300: 1500000, 600: 1000000 },
     compatibleWith: ['ZT410']
   },
   'ZT420': {
@@ -260,6 +265,7 @@ export const PRINTER_MODELS: Record<string, PrinterModelData> = {
     availableResolutions: [203, 300],
     technology: 'both',
     lifespanInches: 2000000,
+    lifespanByResolution: { 203: 2000000, 300: 1500000 },
     compatibleWith: ['ZT421']
   },
   'ZT421': {
@@ -270,6 +276,7 @@ export const PRINTER_MODELS: Record<string, PrinterModelData> = {
     availableResolutions: [203, 300],
     technology: 'both',
     lifespanInches: 2000000,
+    lifespanByResolution: { 203: 2000000, 300: 1500000 },
     compatibleWith: ['ZT420']
   },
   'ZT510': {
@@ -280,6 +287,7 @@ export const PRINTER_MODELS: Record<string, PrinterModelData> = {
     availableResolutions: [203, 300],
     technology: 'both',
     lifespanInches: 2000000,
+    lifespanByResolution: { 203: 2000000, 300: 1500000 },
     compatibleWith: []
   },
   'ZT610': {
@@ -290,6 +298,7 @@ export const PRINTER_MODELS: Record<string, PrinterModelData> = {
     availableResolutions: [203, 300, 600],
     technology: 'both',
     lifespanInches: 3000000,
+    lifespanByResolution: { 203: 3000000, 300: 2500000, 600: 1500000 },
     compatibleWith: []
   },
   'ZT620': {
@@ -300,6 +309,7 @@ export const PRINTER_MODELS: Record<string, PrinterModelData> = {
     availableResolutions: [203, 300],
     technology: 'both',
     lifespanInches: 3000000,
+    lifespanByResolution: { 203: 3000000, 300: 2500000 },
     compatibleWith: []
   },
   '105SLPlus': {
@@ -310,6 +320,7 @@ export const PRINTER_MODELS: Record<string, PrinterModelData> = {
     availableResolutions: [203, 300],
     technology: 'both',
     lifespanInches: 2000000,
+    lifespanByResolution: { 203: 2000000, 300: 1500000 },
     compatibleWith: []
   },
   'ZM400': {
@@ -320,6 +331,7 @@ export const PRINTER_MODELS: Record<string, PrinterModelData> = {
     availableResolutions: [203, 300, 600],
     technology: 'both',
     lifespanInches: 2000000,
+    lifespanByResolution: { 203: 2000000, 300: 1500000, 600: 1000000 },
     compatibleWith: []
   },
   'ZM600': {
@@ -330,6 +342,7 @@ export const PRINTER_MODELS: Record<string, PrinterModelData> = {
     availableResolutions: [203, 300],
     technology: 'both',
     lifespanInches: 2000000,
+    lifespanByResolution: { 203: 2000000, 300: 1500000 },
     compatibleWith: []
   },
   '110Xi4': {
@@ -340,6 +353,7 @@ export const PRINTER_MODELS: Record<string, PrinterModelData> = {
     availableResolutions: [203, 300, 600],
     technology: 'both',
     lifespanInches: 3000000,
+    lifespanByResolution: { 203: 3000000, 300: 2500000, 600: 1500000 },
     compatibleWith: []
   },
   '140Xi4': {
@@ -370,6 +384,7 @@ export const PRINTER_MODELS: Record<string, PrinterModelData> = {
     availableResolutions: [203, 300],
     technology: 'both',
     lifespanInches: 3000000,
+    lifespanByResolution: { 203: 3000000, 300: 2500000 },
     compatibleWith: []
   }
 }
@@ -481,12 +496,26 @@ export const PART_NUMBERS: Record<string, { model: string, resolution: number }>
 // === FUNKCJE GENERUJĄCE UNIKALNE OPISY ===
 
 /**
+ * Pobiera żywotność głowicy z uwzględnieniem rozdzielczości
+ * Wyższe DPI = krótsza żywotność (dotyczy drukarek przemysłowych)
+ */
+function getLifespanForResolution(printer: PrinterModelData, resolution: number): number {
+  if (printer.lifespanByResolution && printer.lifespanByResolution[resolution]) {
+    return printer.lifespanByResolution[resolution]
+  }
+  return printer.lifespanInches
+}
+
+/**
  * Formatuje żywotność w czytelny sposób
+ * Używa toFixed(1) jeśli wartość ma część dziesiętną (np. 1,5 mln), toFixed(0) jeśli pełna (np. 2 mln)
  */
 function formatLifespan(inches: number): string {
   const km = Math.round(inches * 0.0000254)
   if (inches >= 1000000) {
-    return `~${(inches / 1000000).toFixed(0)} mln cali (${km} km)`
+    const mln = inches / 1000000
+    const mlnStr = mln % 1 === 0 ? mln.toFixed(0) : mln.toFixed(1).replace('.', ',')
+    return `~${mlnStr} mln cali (${km} km)`
   }
   return `~${inches.toLocaleString('pl-PL')} cali`
 }
@@ -536,7 +565,8 @@ export function generateShortDescription(
     ? ` Pasuje również do: ${printer.compatibleWith.join(', ')}.`
     : ''
   
-  return `Oryginalna głowica ${resolution} DPI (${resolution / 25.4} punktów/mm) do drukarki ${printer.name}. Part Number: ${partNumber}. Żywotność ${formatLifespan(printer.lifespanInches)}. Idealna do ${getResolutionUseCase(resolution)}.${compatibleText}`
+  const lifespan = getLifespanForResolution(printer, resolution)
+  return `Oryginalna głowica ${resolution} DPI (${resolution / 25.4} punktów/mm) do drukarki ${printer.name}. Part Number: ${partNumber}. Żywotność ${formatLifespan(lifespan)}. Idealna do ${getResolutionUseCase(resolution)}.${compatibleText}`
 }
 
 /**
@@ -564,12 +594,13 @@ export function generateLongDescription(
   
   const categoryText = getCategoryName(printer.category)
   
+  const lifespan = getLifespanForResolution(printer, resolution)
   let description = `Głowica drukująca ${partNumber} to oryginalna część zamienna do drukarki ${categoryText} ${printer.name} w rozdzielczości ${resolution} DPI. Zapewnia ostrą jakość druku ${getResolutionUseCase(resolution)}.
 
 **Specyfikacja techniczna:**
 • Rozdzielczość: ${resolution} DPI (${(resolution / 25.4).toFixed(1)} punktów/mm)
 • Szerokość druku: ${printer.printWidthMm} mm (${(printer.printWidthMm / 25.4).toFixed(1)}")
-• Żywotność: ${formatLifespan(printer.lifespanInches)}
+• Żywotność: ${formatLifespan(lifespan)}
 • Technologia: druk ${technologyText}${compatibleText}
 
 **Kiedy wymienić głowicę?**
@@ -720,10 +751,11 @@ export function generateProductFAQ(
     answer: `Wymiana głowicy w ${modelName} to prosta czynność: 1) Wyłącz drukarkę i odłącz od zasilania. 2) Otwórz pokrywę drukarki. 3) Odłącz taśmę flat cable. 4) Odkręć śruby mocujące (2-4 szt.). 5) Wyjmij starą głowicę i włóż nową. 6) Podłącz kabel i zamknij pokrywę. Cała operacja zajmuje 5-10 minut.`
   })
   
-  // Pytanie o żywotność
+  // Pytanie o żywotność — per-resolution
+  const lifespanInches = printer ? getLifespanForResolution(printer, resolution) : 1000000
   faq.push({
     question: `Jaka jest żywotność głowicy ${resolution} DPI w ${modelName}?`,
-    answer: `Głowica ${resolution} DPI w ${modelName} ma żywotność około ${formatLifespan(printer?.lifespanInches || 1000000)}. Żywotność zależy od jakości materiałów i częstotliwości czyszczenia — regularne czyszczenie alkoholem IPA wydłuża ją nawet o 50%.`
+    answer: `Głowica ${resolution} DPI w ${modelName} ma żywotność około ${formatLifespan(lifespanInches)}. Żywotność zależy od jakości materiałów i częstotliwości czyszczenia — regularne czyszczenie alkoholem IPA wydłuża ją nawet o 50%.`
   })
   
   // Pytanie o rozdzielczość (jeśli dostępne są różne)
@@ -763,8 +795,9 @@ export function generateAdditionalProperties(
   ]
   
   if (printer) {
+    const lifespan = getLifespanForResolution(printer, resolution)
     properties.push({ name: 'Szerokość druku', value: `${printer.printWidthMm} mm` })
-    properties.push({ name: 'Żywotność', value: formatLifespan(printer.lifespanInches) })
+    properties.push({ name: 'Żywotność', value: formatLifespan(lifespan) })
     
     if (printer.compatibleWith.length > 0) {
       properties.push({ 

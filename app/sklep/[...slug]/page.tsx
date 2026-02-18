@@ -67,7 +67,7 @@ const PRODUCT_TYPE_FAQ: Record<string, Array<{ question: string; answer: string 
   glowica: [
     {
       question: 'Jak często należy wymieniać głowicę drukującą?',
-      answer: 'Głowica drukująca wymaga wymiany po około 1-2 milionach cali druku (25-50 km). Żywotność zależy od jakości materiałów, częstotliwości czyszczenia i warunków pracy. Objawy zużycia to blady wydruk, białe linie na etykietach lub nierówna jakość druku.'
+      answer: 'Żywotność głowicy zależy od modelu drukarki: biurkowe (ZD/GK) — ok. 1 mln cali (25 km), przemysłowe (ZT/ZM) — 1,5-3 mln cali (37-76 km). Na trwałość wpływa jakość materiałów, częstotliwość czyszczenia i warunki pracy. Objawy zużycia to blady wydruk, białe linie na etykietach lub nierówna jakość druku.'
     },
     {
       question: 'Jak rozpoznać uszkodzoną głowicę?',
@@ -87,7 +87,7 @@ const PRODUCT_TYPE_FAQ: Record<string, Array<{ question: string; answer: string 
     },
     {
       question: 'Naprawić czy wymienić głowicę?',
-      answer: 'Głowicy drukującej nie da się naprawić — uszkodzone elementy grzejne są trwałe. Jeśli białe linie na wydruku nie znikają po 2-3 czyszczeniach alkoholem IPA, głowica wymaga wymiany. Przy bladym wydruku najpierw spróbuj: zwiększyć Darkness, wyczyścić głowicę, sprawdzić ribbon.'
+      answer: 'Głowicy drukującej nie da się naprawić — uszkodzone elementy grzejne są trwałe. Jeśli białe linie na wydruku nie znikają po 2-3 czyszczeniach alkoholem IPA, głowica wymaga wymiany. Przy bladym wydruku najpierw spróbuj: zwiększyć Darkness, wyczyścić głowicę, sprawdzić ribbon. Resurs producenta zależy od modelu (1-3 mln cali).'
     }
   ],
   walek: [
@@ -304,11 +304,15 @@ function generateSeoDescription(product: Product): string {
     akumulator: 'Oryginalny'
   }
   const prefix = genderPrefix[product.product_type] || 'Oryginalny'
+  // Lowercase pierwsza litera nazwy produktu po prefiksie (np. "Głowica" → "głowica")
+  const productName = product.name.charAt(0).toLowerCase() + product.name.slice(1)
+  // Cena z przecinkiem (polski format) zamiast kropki
+  const pricePL = product.price_brutto.toFixed(2).replace('.', ',')
   const parts = [
-    `${prefix} ${product.name}.`,
+    `${prefix} ${productName}.`,
     '✓ Gwarancja 12 mies.',
     '✓ Wysyłka 24h',
-    `✓ ${product.price_brutto.toFixed(2)} zł brutto.`,
+    `✓ ${pricePL} zł brutto.`,
     'Autoryzowany dystrybutor Zebra – TAKMA.'
   ]
   return parts.join(' ')
@@ -762,7 +766,7 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
       }))
     }
 
-    // Dodatkowe FAQ widoczne na stronie (sekcja "Naprawić czy wymienić" + dodatkowe)
+    // Dodatkowe FAQ widoczne na stronie
     if (product.product_type === 'glowica') {
       faqItems.push(
         {
@@ -772,10 +776,6 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
         {
           question: 'Jak rozpoznać zużytą głowicę drukującą?',
           answer: 'Zużyta głowica objawia się pionowymi białymi liniami na wydruku, bladym lub nierównomiernym drukiem, oraz nieczytelnymi kodami kreskowymi. Jeśli czyszczenie alkoholem IPA nie pomaga po 2-3 próbach, głowica wymaga wymiany.'
-        },
-        {
-          question: 'Naprawić czy wymienić głowicę?',
-          answer: 'Głowicy drukującej nie da się naprawić — uszkodzone elementy grzejne są trwałe. Wymień głowicę gdy: białe pionowe linie nie znikają po czyszczeniu, widoczne rysy na powierzchni, przekroczono resurs (~1 mln cali). Wyczyść głowicę gdy: wydruk jest blady, pojedyncze linie znikają po czyszczeniu, problem pojawił się niedawno.'
         }
       )
     }
@@ -982,10 +982,10 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
               <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 sm:p-6 mb-4 sm:mb-6">
                 <h2 className="text-sm sm:text-base font-semibold text-gray-900 mb-3 flex items-center gap-2">
                   <HelpCircle className="w-4 h-4 sm:w-5 sm:h-5 text-amber-600" />
-                  Naprawić czy wymienić głowicę?
+                  Wymiana czy czyszczenie głowicy?
                 </h2>
                 <div className="text-xs sm:text-sm text-gray-700 space-y-2">
-                  <p><strong>Wymień głowicę gdy:</strong> białe pionowe linie na wydruku nie znikają po czyszczeniu, widoczne są rysy na powierzchni głowicy, przekroczono resurs (~1 mln cali).</p>
+                  <p><strong>Wymień głowicę gdy:</strong> białe pionowe linie na wydruku nie znikają po czyszczeniu, widoczne są rysy na powierzchni głowicy, głowica osiągnęła resurs producenta.</p>
                   <p><strong>Wyczyść głowicę gdy:</strong> wydruk jest blady (zwiększ też Darkness), pojedyncze linie znikają po czyszczeniu, problem pojawił się niedawno.</p>
                   <p className="text-amber-700 font-medium">Regularne <Link href="/blog/jak-wyczyscic-glowice-drukarki-zebra" className="underline hover:text-amber-800">czyszczenie głowicy</Link> alkoholem IPA 99% wydłuża żywotność 2-3x!</p>
                 </div>
