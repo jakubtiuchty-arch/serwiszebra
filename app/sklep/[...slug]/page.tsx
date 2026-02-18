@@ -1263,6 +1263,72 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
           />
         )}
 
+        {/* JSON-LD HowTo Schema — instrukcja wymiany głowicy (AI citations) */}
+        {product.product_type === 'glowica' && (
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "HowTo",
+                "name": `Jak wymienić głowicę drukującą w ${product.device_model || 'drukarce Zebra'}`,
+                "description": `Instrukcja wymiany głowicy ${product.sku} (${product.resolution_dpi} DPI) w drukarce ${product.device_model || 'Zebra'}. Wymiana zajmuje 5-10 minut i nie wymaga specjalistycznych narzędzi.`,
+                "totalTime": "PT10M",
+                "estimatedCost": {
+                  "@type": "MonetaryAmount",
+                  "currency": "PLN",
+                  "value": product.price_brutto
+                },
+                "supply": [
+                  { "@type": "HowToSupply", "name": `Nowa głowica ${product.sku}` },
+                  { "@type": "HowToSupply", "name": "Alkohol izopropylowy IPA 99%" }
+                ],
+                "tool": [
+                  { "@type": "HowToTool", "name": "Śrubokręt krzyżakowy (Phillips)" }
+                ],
+                "step": [
+                  {
+                    "@type": "HowToStep",
+                    "position": 1,
+                    "name": "Wyłącz drukarkę",
+                    "text": "Wyłącz drukarkę i odłącz kabel zasilający. Poczekaj aż głowica ostygnie (ok. 1 minutę)."
+                  },
+                  {
+                    "@type": "HowToStep",
+                    "position": 2,
+                    "name": "Otwórz pokrywę drukarki",
+                    "text": "Otwórz górną pokrywę drukarki, aby uzyskać dostęp do mechanizmu drukującego i głowicy."
+                  },
+                  {
+                    "@type": "HowToStep",
+                    "position": 3,
+                    "name": "Odłącz taśmę flat cable",
+                    "text": "Ostrożnie odłącz taśmę flat cable (flex) łączącą głowicę z płytą główną. Zwolnij zatrzask i wyciągnij taśmę."
+                  },
+                  {
+                    "@type": "HowToStep",
+                    "position": 4,
+                    "name": "Odkręć śruby mocujące",
+                    "text": "Odkręć 2-4 śruby mocujące starą głowicę (w zależności od modelu drukarki) i wyjmij ją."
+                  },
+                  {
+                    "@type": "HowToStep",
+                    "position": 5,
+                    "name": "Zamontuj nową głowicę",
+                    "text": `Włóż nową głowicę ${product.sku} i przykręć śruby mocujące. Podłącz taśmę flat cable do złącza.`
+                  },
+                  {
+                    "@type": "HowToStep",
+                    "position": 6,
+                    "name": "Kalibracja i test",
+                    "text": "Zamknij pokrywę, włącz drukarkę i wykonaj kalibrację czujników (Feed + Pause). Wydrukuj etykietę testową."
+                  }
+                ]
+              })
+            }}
+          />
+        )}
+
       </>
     )
   }
