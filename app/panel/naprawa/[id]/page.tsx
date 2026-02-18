@@ -1057,12 +1057,14 @@ const handlePaymentSuccess = async () => {
 
       <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-4">
         <p className="text-sm text-amber-900 leading-relaxed mb-2">
-          <strong>Opłata za diagnostykę:</strong>
+          <strong>Opłata za diagnostykę i przesyłkę:</strong>
         </p>
-        <p className="text-2xl font-bold text-amber-700 mb-2">121,77 zł <span className="text-sm font-normal">(brutto)</span></p>
-        <p className="text-xs text-amber-700">
-          Diagnostyka jest bezpłatna przy akceptacji naprawy. W przypadku rezygnacji pobieramy opłatę 99 zł netto (121,77 zł brutto).
-        </p>
+        <p className="text-2xl font-bold text-amber-700 mb-2">166,05 zł <span className="text-sm font-normal">(brutto)</span></p>
+        <div className="text-xs text-amber-700 space-y-0.5">
+          <p>Diagnostyka: 99 zł netto</p>
+          <p>Przesyłka (odbiór + odesłanie): 36 zł netto</p>
+          <p className="pt-1 font-semibold">Razem: 135 zł netto (166,05 zł brutto)</p>
+        </div>
       </div>
 
       {repair && (
@@ -1082,7 +1084,7 @@ const handlePaymentSuccess = async () => {
           className="w-full px-4 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg text-sm font-semibold hover:from-blue-700 hover:to-indigo-700 transition-colors flex items-center justify-center gap-2"
         >
           <CreditCard className="w-4 h-4" />
-          Opłać diagnostykę (121,77 zł) i odbierz urządzenie
+          Opłać diagnostykę (166,05 zł) i odbierz urządzenie
         </button>
         <button
           onClick={() => setShowRejectModal(false)}
@@ -1199,11 +1201,11 @@ const handlePaymentSuccess = async () => {
     repairId={repair.id}
     repairNumber={repair.repair_number}
     deviceModel={repair.device_model}
-    totalAmount={121.77}
+    totalAmount={166.05}
     isDiagnosticFee={true}
     onPaymentSuccess={async () => {
       // Anuluj w tle (silent=true) - modal sam pokazuje sukces
-      await handleCancelRepair('Wycena odrzucona - opłacono diagnostykę 121,77 zł', true, true)
+      await handleCancelRepair('Wycena odrzucona - opłacono diagnostykę 99 zł + przesyłka 36 zł (135 zł netto / 166,05 zł brutto)', true, true)
       // Modal sam się zamknie po pokazaniu sukcesu (auto-close po 5s)
     }}
   />

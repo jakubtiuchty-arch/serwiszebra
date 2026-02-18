@@ -123,27 +123,52 @@ export const SHOP_CATEGORIES: ProductTypeCategory[] = [
     name: 'Akumulator',
     namePlural: 'Akumulatory',
     slug: 'akumulatory',
-    enabled: false, // Ukryte - do włączenia później
+    enabled: true,
     printerCategories: [
-      {
-        id: 'mobile',
-        name: 'Drukarki mobilne',
-        slug: 'drukarki-mobilne',
-        models: [
-          { id: 'zq520', name: 'Zebra ZQ520', slug: 'zebra-zq520', resolutions: [] },
-          { id: 'zq630', name: 'Zebra ZQ630', slug: 'zebra-zq630', resolutions: [] },
-        ]
-      },
       {
         id: 'terminals',
         name: 'Terminale',
         slug: 'terminale',
         models: [
-          { id: 'tc21', name: 'Zebra TC21/TC26', slug: 'zebra-tc21-tc26', resolutions: [] },
-          { id: 'tc52', name: 'Zebra TC52/TC57', slug: 'zebra-tc52-tc57', resolutions: [] },
-          { id: 'mc3300', name: 'Zebra MC3300', slug: 'zebra-mc3300', resolutions: [] },
+          { id: 'tc21-tc26', name: 'Zebra TC21/TC26', slug: 'zebra-tc21-tc26', resolutions: [] },
+          { id: 'tc22-tc27', name: 'Zebra TC22/TC27', slug: 'zebra-tc22-tc27', resolutions: [] },
+          { id: 'tc53-tc58', name: 'Zebra TC53/TC58', slug: 'zebra-tc53-tc58', resolutions: [] },
+          { id: 'tc501-tc701', name: 'Zebra TC501/TC701', slug: 'zebra-tc501-tc701', resolutions: [] },
+          { id: 'mc22-mc27', name: 'Zebra MC22/MC27', slug: 'zebra-mc22-mc27', resolutions: [] },
+          { id: 'mc3300x', name: 'Zebra MC3300x', slug: 'zebra-mc3300x', resolutions: [] },
+          { id: 'mc9400', name: 'Zebra MC9400/MC9450', slug: 'zebra-mc9400-mc9450', resolutions: [] },
         ]
-      }
+      },
+      {
+        id: 'mobile',
+        name: 'Drukarki mobilne',
+        slug: 'drukarki-mobilne',
+        models: [
+          { id: 'zq220', name: 'Zebra ZQ220 Plus', slug: 'zebra-zq220-plus', resolutions: [] },
+          { id: 'zq310', name: 'Zebra ZQ310 Plus', slug: 'zebra-zq310-plus', resolutions: [] },
+          { id: 'zq511', name: 'Zebra ZQ511/ZQ511 Plus', slug: 'zebra-zq511', resolutions: [] },
+          { id: 'zq520', name: 'Zebra ZQ520/ZQ521', slug: 'zebra-zq520-zq521', resolutions: [] },
+          { id: 'zq610', name: 'Zebra ZQ610', slug: 'zebra-zq610', resolutions: [] },
+          { id: 'zq630', name: 'Zebra ZQ630/ZQ630 Plus', slug: 'zebra-zq630', resolutions: [] },
+        ]
+      },
+      // {
+      //   id: 'scanners',
+      //   name: 'Skanery',
+      //   slug: 'skanery',
+      //   models: [
+      //     { id: 'ds8178', name: 'Zebra DS8178', slug: 'zebra-ds8178', resolutions: [] },
+      //     { id: 'li3678', name: 'Zebra LI3678', slug: 'zebra-li3678', resolutions: [] },
+      //   ]
+      // },
+      // {
+      //   id: 'tablets',
+      //   name: 'Tablety',
+      //   slug: 'tablety',
+      //   models: [
+      //     { id: 'et60-et65', name: 'Zebra ET60/ET65', slug: 'zebra-et60-et65', resolutions: [] },
+      //   ]
+      // },
     ]
   }
 ]
@@ -186,9 +211,13 @@ export function getCategoryPathForProduct(product: {
   const productType = SHOP_CATEGORIES.find(cat => cat.id === product.product_type)
   if (!productType) return null
 
+  // Normalize: replace / with - for matching (e.g. "MC22/MC27" matches id "mc22-mc27")
+  const normalizedDeviceModel = product.device_model.toLowerCase().replace(/\//g, '-')
+
   for (const printerCategory of productType.printerCategories) {
     const model = printerCategory.models.find(
-      m => product.device_model.toLowerCase().includes(m.id.toLowerCase())
+      m => normalizedDeviceModel.includes(m.id.toLowerCase()) ||
+           product.device_model.toLowerCase().includes(m.id.toLowerCase())
     )
     if (model) {
       return { productType, printerCategory, model }

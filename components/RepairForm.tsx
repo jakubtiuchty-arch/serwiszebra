@@ -1038,7 +1038,6 @@ export default function RepairForm() {
         {/* ✨ NOWY KOMPONENT - REGISTRATION LIGHTBOX */}
         <RegistrationLightbox
           isOpen={showRegistrationLightbox}
-          onClose={() => setShowRegistrationLightbox(false)}
           repairId={submittedRepairId || ''}
           userEmail={submittedEmail}
           userFirstName={submittedFirstName}

@@ -2,13 +2,11 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { X, Loader2, CheckCircle } from 'lucide-react'
-import { ComparisonTable } from './ComparisonTable'
+import { Loader2, CheckCircle, ShieldCheck, Bell, MessageSquare, CreditCard } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 
 interface RegistrationLightboxProps {
   isOpen: boolean
-  onClose: () => void
   repairId: string
   userEmail: string
   userFirstName?: string
@@ -18,7 +16,6 @@ interface RegistrationLightboxProps {
 
 export function RegistrationLightbox({
   isOpen,
-  onClose,
   repairId,
   userEmail,
   userFirstName,
@@ -105,22 +102,16 @@ export function RegistrationLightbox({
     }
   }
 
-  const handleSkip = () => {
-    // Redirect to tracking page without registration
-    window.location.href = `/zgloszenie-wyslane?id=${repairId}`
-  }
-
   return (
     <AnimatePresence>
       {isOpen && (
         <>
-          {/* BACKDROP */}
+          {/* BACKDROP — brak zamknięcia po kliknięciu */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[9998]"
-            onClick={onClose}
           />
 
           {/* LIGHTBOX */}
@@ -133,18 +124,9 @@ export function RegistrationLightbox({
               className="bg-white rounded-2xl shadow-2xl w-full max-w-md relative"
               onClick={(e) => e.stopPropagation()}
             >
-              {/* CLOSE BUTTON */}
-              <button
-                onClick={onClose}
-                className="absolute top-2 right-2 text-gray-400 hover:text-gray-600 transition-colors z-10 p-1 hover:bg-gray-100 rounded-full"
-                aria-label="Zamknij"
-              >
-                <X className="w-5 h-5" />
-              </button>
-
               <div className="p-4">
-                {/* HEADER - inline z ikoną */}
-                <div className="flex items-center gap-3 mb-4">
+                {/* HEADER */}
+                <div className="flex items-center gap-3 mb-3">
                   <div className="flex-shrink-0 w-12 h-12 rounded-full bg-green-100 flex items-center justify-center">
                     <CheckCircle className="w-6 h-6 text-green-600" />
                   </div>
@@ -158,17 +140,37 @@ export function RegistrationLightbox({
                   </div>
                 </div>
 
-                {/* COMPARISON TABLE */}
-                <ComparisonTable />
+                {/* BENEFITS LIST — co daje konto */}
+                <div className="bg-gray-50 rounded-lg p-2.5 mb-3">
+                  <p className="text-xs font-semibold text-gray-700 mb-1.5">Twoje konto umożliwi:</p>
+                  <div className="grid grid-cols-2 gap-1.5">
+                    <div className="flex items-center gap-1.5 text-xs text-gray-600">
+                      <ShieldCheck className="w-3.5 h-3.5 text-green-600 flex-shrink-0" />
+                      <span>Status naprawy na żywo</span>
+                    </div>
+                    <div className="flex items-center gap-1.5 text-xs text-gray-600">
+                      <Bell className="w-3.5 h-3.5 text-green-600 flex-shrink-0" />
+                      <span>Powiadomienia email</span>
+                    </div>
+                    <div className="flex items-center gap-1.5 text-xs text-gray-600">
+                      <MessageSquare className="w-3.5 h-3.5 text-green-600 flex-shrink-0" />
+                      <span>Chat z serwisem</span>
+                    </div>
+                    <div className="flex items-center gap-1.5 text-xs text-gray-600">
+                      <CreditCard className="w-3.5 h-3.5 text-green-600 flex-shrink-0" />
+                      <span>Płatność BLIK/kartą</span>
+                    </div>
+                  </div>
+                </div>
 
                 {/* REGISTRATION FORM */}
                 <form onSubmit={handleSubmit}>
                   <div className="bg-orange-50 border border-orange-200 rounded-xl p-3">
                     <h3 className="text-sm font-bold text-gray-900 mb-2 text-center">
-                      🚀 Załóż konto w 30 sekund
+                      Utwórz hasło do konta
                     </h3>
 
-                    {/* EMAIL (read-only) - mniejszy */}
+                    {/* EMAIL (read-only) */}
                     <div className="mb-2">
                       <input
                         type="email"
@@ -178,7 +180,7 @@ export function RegistrationLightbox({
                       />
                     </div>
 
-                    {/* PASSWORD FIELDS - zawsze w rzędzie */}
+                    {/* PASSWORD FIELDS */}
                     <div className="grid grid-cols-2 gap-2 mb-2">
                       <input
                         type="password"
@@ -201,7 +203,7 @@ export function RegistrationLightbox({
                       />
                     </div>
 
-                    {/* CHECKBOXES - kompaktowe */}
+                    {/* CHECKBOXES */}
                     <div className="space-y-1 mb-3">
                       <label className="flex items-center gap-2 cursor-pointer">
                         <input
@@ -248,22 +250,11 @@ export function RegistrationLightbox({
                       {isLoading ? (
                         <>
                           <Loader2 className="w-4 h-4 animate-spin" />
-                          Tworzenie...
+                          Tworzenie konta...
                         </>
                       ) : (
-                        'Załóż konto i śledź naprawę'
+                        'Utwórz konto i śledź naprawę'
                       )}
-                    </button>
-                  </div>
-
-                  {/* SKIP LINK */}
-                  <div className="text-center mt-3">
-                    <button
-                      type="button"
-                      onClick={handleSkip}
-                      className="text-xs text-gray-500 hover:text-gray-700 underline"
-                    >
-                      Pomiń → śledzę przez link w emailu
                     </button>
                   </div>
                 </form>

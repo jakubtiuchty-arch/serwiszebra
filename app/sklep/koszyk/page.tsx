@@ -133,9 +133,9 @@ export default function KoszykPage() {
                   <div className="flex gap-3 sm:gap-4">
                     {/* Zdjęcie */}
                     <div className="w-20 h-20 sm:w-28 sm:h-28 bg-gray-50 rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0 overflow-hidden">
-                      {item.product_type === 'glowica' ? (
+                      {getProductFallbackImage(item.product_type, item.device_model, item.resolution_dpi, item.sku) ? (
                         <Image
-                          src={getProductFallbackImage(item.product_type, item.device_model, item.resolution_dpi) || '/sklep_photo/glowica-203dpi-do-drukarki-zebra-zd421t.png'}
+                          src={getProductFallbackImage(item.product_type, item.device_model, item.resolution_dpi, item.sku)!}
                           alt={item.name}
                           width={100}
                           height={100}

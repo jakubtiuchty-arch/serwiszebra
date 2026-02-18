@@ -366,7 +366,7 @@ export const blogPosts: BlogPost[] = [
 | Bateria extended TC22 (5200 mAh) | 200-350 zł |
 | Bateria MC3400 (7000 mAh) | 250-450 zł |
 
-📖 **Szczegółowy poradnik:** [Bateria Zebra TC58 — jak przedłużyć czas pracy](/blog/zebra-tc58-bateria-nie-wytrzymuje-trasy-kurierskiej)
+📖 **Szczegółowy poradnik:** [Bateria Zebra TC58 — jak przedłużyć czas pracy](/blog/zebra-tc58-bateria-nie-wytrzymuje-trasy-kurierskiej) | 🛒 [Kup oryginalną baterię →](/sklep/akumulatory/terminale)
 
 ---
 
@@ -881,7 +881,7 @@ Terminal TC52/TC53 obsługuje **Warm Swap** — po wyjęciu baterii masz **~30 s
 
 > **Porada:** Bateria PowerPrecision+ ma wbudowany chip BLE — możesz sprawdzić liczbę cykli i stan zdrowia w aplikacji **Zebra PowerPrecision Console**. Jeśli Decommission Date jest bliski — czas na wymianę.
 
-[Bateria terminala Zebra — kompletna diagnostyka](/blog/bateria-terminal-zebra-szybko-sie-rozladowuje-diagnostyka)
+[Bateria terminala Zebra — kompletna diagnostyka](/blog/bateria-terminal-zebra-szybko-sie-rozladowuje-diagnostyka) | [Kup baterię TC52/TC53 →](/sklep/akumulatory/terminale/zebra-tc53-tc58)
 
 ---
 
@@ -1498,6 +1498,7 @@ Jako **Autoryzowany Serwis Zebra** (Premier Partner + Authorized Repair Speciali
 - [Serwis MC3300/MC3400 — diagnostyka i naprawa](/blog/serwis-terminala-zebra-mc3300-mc3400-diagnostyka-naprawa)
 - [Terminal Zebra nie włącza się — boot loop, fastboot](/blog/terminal-zebra-nie-wlacza-sie-fastboot-recovery)
 - [Bateria terminala Zebra — diagnostyka i wymiana](/blog/bateria-terminal-zebra-szybko-sie-rozladowuje-diagnostyka)
+- [Akumulatory do terminali Zebra — sklep online](/sklep/akumulatory/terminale)
 - [Reset fabryczny terminala Zebra — instrukcja](/blog/reset-fabryczny-terminal-zebra-instrukcja)
 
 [Serwis terminali Zebra — wszystkie usługi →](/serwis-terminali-zebra)
@@ -1634,6 +1635,8 @@ Baterie z **BLE Beacon** dodatkowo umożliwiają lokalizację terminala przez Ze
 | **MC3300x** | 5200 mAh | — | BTRY-MC33-52MA-01 |
 | **MC3400** | 7000 mAh | — | BTRY-MC3X-70MA-01 |
 
+> 🛒 **Potrzebujesz oryginalnej baterii?** Sprawdź [akumulatory do terminali Zebra w naszym sklepie](/sklep/akumulatory/terminale) — oryginalne PowerPrecision/PowerPrecision+ z gwarancją.
+
 ---
 
 ## Diagnostyka LED ładowania
@@ -1767,6 +1770,8 @@ Baterie z **BLE Beacon** dodatkowo umożliwiają lokalizację terminala przez Ze
 
 > Ceny netto. Baterie oryginalne Zebra PowerPrecision/PowerPrecision+.
 
+> 🛒 **Zamów online:** [Akumulatory do terminali Zebra](/sklep/akumulatory/terminale) — TC22, TC53, MC3300x, MC3400 i inne modele. Wysyłka 24h.
+
 ---
 
 ## Czas ładowania wg modelu
@@ -1827,7 +1832,7 @@ Wymiana baterii w terminalach Zebra to **2 minuty bez narzędzi**:
 Jako **Autoryzowany Serwis Zebra** oferujemy:
 
 - **Bezpłatna diagnostyka** baterii (sprawdzenie cykli, pojemności, stanu)
-- **Oryginalne baterie Zebra** PowerPrecision/PowerPrecision+ w magazynie
+- **[Oryginalne baterie Zebra](/sklep/akumulatory/terminale)** PowerPrecision/PowerPrecision+ w magazynie
 - **Ładowarki baterii zapasowych** (4-slot, 20-slot) — sprzedaż i konfiguracja
 - **Kontrakty serwisowe** z wymianą baterii w cenie
 - **Doradztwo** — dobór baterii (standardowa vs rozszerzona vs BLE Beacon)
@@ -1846,6 +1851,7 @@ Jako **Autoryzowany Serwis Zebra** oferujemy:
 - [Terminal Zebra nie włącza się — boot loop, fastboot](/blog/terminal-zebra-nie-wlacza-sie-fastboot-recovery)
 - [Hot Swap baterii nie działa — MC3400, TC53](/blog/hot-swap-bateria-zebra-mc3400-tc53-nie-dziala)
 - [PowerPrecision+ — zarządzanie bateriami Zebra](/blog/powerprecision-zarzadzanie-bateriami-zebra-poradnik)
+- [Akumulatory do terminali Zebra — sklep online](/sklep/akumulatory/terminale)
 
 [Serwis terminali Zebra — wszystkie usługi →](/serwis-terminali-zebra)
 
@@ -2630,6 +2636,7 @@ Najszybsza metoda:
 - [Najczęstsze awarie terminali Zebra — TOP 10](/blog/najczestsze-awarie-terminali-zebra-top10)
 - [Serwis TC52/TC53 — diagnostyka i naprawa](/blog/serwis-terminala-zebra-tc52-tc53-diagnostyka-naprawa)
 - [Bateria terminala Zebra — diagnostyka](/blog/bateria-terminal-zebra-szybko-sie-rozladowuje-diagnostyka)
+- [Akumulatory do terminali Zebra — sklep online](/sklep/akumulatory/terminale)
 - [MC3300 vs MC3400 — porównanie i migracja](/blog/zebra-mc3300-vs-mc3400-porownanie-migracja)
 - [Najlepszy terminal do magazynu 2026](/blog/najlepszy-terminal-zebra-do-magazynu-2026)
 
@@ -2932,7 +2939,7 @@ Settings → Phone Information → Battery Information
 | High Capacity 5200 mAh | 280-350 zł |
 | Extended 7000 mAh | 350-400 zł |
 
-**Tip:** Bateria 7000 mAh z MC3400 (BTRY-MC3X-70MA-01) jest kompatybilna z MC3300x i odwrotnie.
+**Tip:** Bateria 7000 mAh z MC3400 (BTRY-MC3X-70MA-01) jest kompatybilna z MC3300x i odwrotnie. [Zamów w sklepie →](/sklep/akumulatory/terminale/zebra-mc3300x)
 
 ---
 
@@ -3484,6 +3491,8 @@ MC3400 oferuje 4 silniki skanujące — w tym **dwa unikalne skanery dalekiego z
 | PowerPrecision+ 7000 mAh | 350-400 zł |
 | PowerPrecision+ 7000 mAh BLE Beacon | 400-500 zł |
 | Naprawa superkondensatora (Hot Swap) | 400-600 zł |
+
+> 🛒 [Akumulatory do MC3400/MC3300x w sklepie →](/sklep/akumulatory/terminale/zebra-mc3300x)
 
 ---
 
@@ -5124,6 +5133,7 @@ Przykład: **TC5010-041E2B0001-A6**
 ### Baterie
 - **BTRY-TC5X-52MA1** – standardowa 5000 mAh
 - **BTRY-TC5X-72MA1** – rozszerzona 7240 mAh
+- [Akumulatory do terminali Zebra w sklepie →](/sklep/akumulatory/terminale)
 
 ### Ładowarki
 - Ładowarka 4-slotowa baterii
@@ -6071,7 +6081,7 @@ Jako autoryzowany partner Zebra oferujemy pełne wsparcie w doborze konfiguracji
 
 | Usterka | Koszt naprawy | Objawy |
 |---------|---------------|--------|
-| Wymiana wałka dociskowego | 100-250 zł | Nierówny transport etykiet, smugi |
+| [Wymiana wałka dociskowego](/sklep/walki-dociskowe) | 100-250 zł | Nierówny transport etykiet, smugi |
 | Naprawa napędu | 200-400 zł | Zacięcia, szarpanie etykiet |
 | Wymiana sensorów | 150-300 zł | Błędy kalibracji, "Media Out" |
 | Naprawa obudowy/zawiasów | 80-200 zł | Pokrywa się nie zamyka |
@@ -6121,7 +6131,7 @@ Jako autoryzowany partner Zebra oferujemy pełne wsparcie w doborze konfiguracji
 | Naprawa | ZQ520 | ZQ620 | ZQ630 |
 |---------|-------|-------|-------|
 | Wymiana głowicy | 430-550 zł | 450-580 zł | 480-620 zł |
-| Wymiana baterii | 180-280 zł | 200-300 zł | 220-350 zł |
+| [Wymiana baterii](/sklep/akumulatory/drukarki-mobilne) | 180-280 zł | 200-300 zł | 220-350 zł |
 | Naprawa mechanizmu | 200-350 zł | 220-380 zł | 250-420 zł |
 | Naprawa modułu WiFi/BT | 250-400 zł | 280-450 zł | 300-500 zł |
 
@@ -6619,11 +6629,11 @@ Menu → Settings → Reset Printer → Factory Defaults → Yes
 | Czyszczenie + kalibracja | 80-120 zł | 1 miesiąc |
 | **Wymiana głowicy 203dpi** | 430-480 zł | 6 miesięcy |
 | **Wymiana głowicy 300dpi** | 820-850 zł | 6 miesięcy |
-| Wymiana wałka dociskowego | 180-250 zł | 12 miesięcy |
+| [Wymiana wałka dociskowego](/sklep/walki-dociskowe/drukarki-biurkowe) | 180-250 zł | 12 miesięcy |
 | Naprawa mechanizmu | 250-350 zł | 12 miesięcy |
 | Naprawa płyty głównej | 350-600 zł | 12 miesięcy |
 
-> **🛒 Potrzebujesz głowicę?** [Kup głowicę do ZD420/ZD421 online →](/sklep/glowice/drukarki-biurkowe/zebra-zd421t)
+> **🛒 Potrzebujesz głowicę?** [Kup głowicę do ZD420/ZD421 online →](/sklep/glowice/drukarki-biurkowe/zebra-zd421t) | **Wałek?** [Wałki do drukarek biurkowych →](/sklep/walki-dociskowe/drukarki-biurkowe)
 
 📖 [Pełny cennik napraw drukarek Zebra](/blog/cennik-naprawy-drukarki-zebra-koszty-serwisu)
 
@@ -6956,7 +6966,7 @@ Jeśli masz wiele drukarek ZD420/ZD421, rozważ **kontrakt serwisowy Zebra OneCa
 - Problem występuje mimo prawidłowego ładowania
 - Słyszysz **dziwne dźwięki** z mechanizmu
 
-### Koszt: 0 zł (czyszczenie) do 120-390 zł (wymiana wałka)
+### Koszt: 0 zł (czyszczenie) do 120-390 zł ([wymiana wałka](/sklep/walki-dociskowe))
 
 ---
 
@@ -7581,10 +7591,12 @@ Jeśli linie pozostają → **wymiana głowicy w serwisie**.
 |--------|------------|
 | Naprawa mechanizmu podawania | 300-650 zł |
 | Naprawa/wymiana obcinacza | 200-400 zł |
-| Wymiana wałka dociskowego | 200-390 zł |
+| [Wymiana wałka dociskowego](/sklep/walki-dociskowe/drukarki-przemyslowe) | 200-390 zł |
 | Naprawa płyty głównej | 800-1540 zł |
 | Czyszczenie i konserwacja | 120-180 zł |
 | **Diagnostyka** | **BEZPŁATNA** |
+
+> **🛒 Kup wałek online:** [Wałki do drukarek przemysłowych →](/sklep/walki-dociskowe/drukarki-przemyslowe)
 
 📖 **[Pełny cennik napraw drukarek Zebra →](/blog/cennik-naprawy-drukarki-zebra-koszty-serwisu)**
 
@@ -7987,7 +7999,7 @@ Powyższe rozwiązania dotyczą **wszystkich modeli** drukarek Zebra. Oto najcz�
 | **Zebra ZT220** | Błąd PAPER OUT | Prawidłowo załaduj media |
 | **Zebra ZT510** | Drukuje krzywo | Ustaw prowadnice etykiet |
 | **Zebra ZT610** | Nie reaguje na polecenia | Sprawdź połączenie sieciowe |
-| **Zebra ZT620** | Zacina etykiety | Wyczyść wałek i mechanizm |
+| **Zebra ZT620** | Zacina etykiety | Wyczyść [wałek](/sklep/walki-dociskowe/drukarki-przemyslowe) i mechanizm |
 | **Zebra ZT111** | Blady wydruk | Użyj właściwego ribbonu |
 
 ### Drukarki przemysłowe - starsza seria (105SL, S4M, Xi)
@@ -7997,7 +8009,7 @@ Powyższe rozwiązania dotyczą **wszystkich modeli** drukarek Zebra. Oto najcz�
 | **Zebra 105SL Plus** | Błąd RIBBON IN | Sprawdź czujnik ribbonu |
 | **Zebra 105SL** | Nie drukuje | Firmware może wymagać aktualizacji |
 | **Zebra S4M** | Czerwona dioda | Sprawdź pokrywę i ribbon |
-| **Zebra 110Xi4** | Zacina etykiety | Wyczyść wałek dociskowy |
+| **Zebra 110Xi4** | Zacina etykiety | Wyczyść [wałek dociskowy](/sklep/walki-dociskowe/drukarki-przemyslowe) |
 | **Zebra 140Xi4** | Błąd HEAD | Wymiana głowicy |
 | **Zebra 170Xi4** | Przesuwa media | Kalibracja sensora |
 | **Zebra ZE500** | Nie komunikuje | Sprawdź sieć Ethernet |
@@ -8010,7 +8022,7 @@ Powyższe rozwiązania dotyczą **wszystkich modeli** drukarek Zebra. Oto najcz�
 | **Zebra ZQ620** | Brak połączenia Bluetooth | Sparuj ponownie |
 | **Zebra ZQ610** | Blady wydruk | Użyj odpowiednich etykiet |
 | **Zebra ZQ521** | Zacina papier | Wyczyść mechanizm |
-| **Zebra ZQ520** | Bateria nie trzyma | Wymień baterię |
+| **Zebra ZQ520** | Bateria nie trzyma | [Wymień baterię](/sklep/akumulatory/drukarki-mobilne) |
 | **Zebra ZQ510** | Błąd połączenia | Reset Bluetooth |
 | **Zebra ZQ320** | Nie widzi mediów | Prawidłowo załaduj rolkę |
 | **Zebra ZQ310** | Offline | Sprawdź Bluetooth/WiFi |
@@ -8098,13 +8110,13 @@ Sprawdź również inne artykuły i zasoby, które mogą Ci pomóc:
 Najczęstsze przyczyny to: **nieprawidłowo załadowany ribbon** (35% przypadków), **problemy z kalibracją sensora** (25%), **zużyta głowica drukująca** (15%), **problemy ze sterownikami** (10%), **błędne ustawienia formatu etykiety** (10%) oraz problemy z zasilaniem lub połączeniem (5%).
 
 ### Ile kosztuje naprawa drukarki Zebra?
-Ceny napraw drukarek Zebra zaczynają się od **150 zł** za czyszczenie mechanizmu. Wymiana głowicy drukującej kosztuje **450-2400 zł** w zależności od modelu. Sprawdź nasz [pełny cennik napraw](/blog/cennik-naprawy-drukarki-zebra-koszty-serwisu) lub otrzymaj dokładną wycenę po bezpłatnej diagnozie.
+Ceny napraw drukarek Zebra zaczynają się od **150 zł** za czyszczenie mechanizmu. [Wymiana głowicy drukującej](/sklep/glowice) kosztuje **450-2400 zł** w zależności od modelu. Sprawdź nasz [pełny cennik napraw](/blog/cennik-naprawy-drukarki-zebra-koszty-serwisu) lub otrzymaj dokładną wycenę po bezpłatnej diagnozie.
 
 ### Jak długo trwa naprawa drukarki Zebra?
 Standardowa naprawa drukarki Zebra trwa **3-5 dni roboczych**. Oferujemy również tryb express (1-2 dni) za dodatkową opłatą. [Zgłoś naprawę online](/formularz) - oddzwonimy w 24h.
 
 ### Czy mogę samodzielnie wymienić głowicę w drukarce Zebra?
-Tak, samodzielna wymiana głowicy jest możliwa, ale wymaga odpowiednich narzędzi i wiedzy technicznej. Nieprawidłowy montaż może uszkodzić drukarkę i unieważnić gwarancję. Zalecamy skorzystanie z profesjonalnego serwisu.
+Tak, samodzielna wymiana głowicy jest możliwa, ale wymaga odpowiednich narzędzi i wiedzy technicznej. Nieprawidłowy montaż może uszkodzić drukarkę i unieważnić gwarancję. Oryginalne głowice kupisz w [naszym sklepie](/sklep/glowice) — zalecamy też skorzystanie z profesjonalnego serwisu.
 
 ### Jak skalibrować drukarkę Zebra?
 Aby skalibrować drukarkę Zebra, **przytrzymaj przycisk FEED przez 5 sekund** (auto-kalibracja) lub użyj Zebra Setup Utilities: Open Printer Tools → Action → Calibrate Media. Po kalibracji wykonaj wydruk testowy.
@@ -8450,7 +8462,7 @@ Wałek czyść **razem z głowicą**:
 3. Usuń resztki kleju i kurzu
 4. Odczekaj aż wyschnie
 
-Brudny wałek = smugi, nierówny transport etykiet, zacięcia.
+Brudny wałek = smugi, nierówny transport etykiet, zacięcia. Jeśli wałek jest zużyty — [kup nowy w sklepie](/sklep/walki-dociskowe).
 
 ### Ile kosztuje wymiana głowicy jeśli czyszczenie nie pomaga?
 
@@ -8959,7 +8971,7 @@ Czasem drukarka pozornie działa (drukuje), ale jakość wydruku jest zła. To m
 **Rozwiązanie:**
 1. Sprawdź wałek - czy ma rowki, nacięcia?
 2. Zmniejsz "Darkness"
-3. Wymień wałek (80-150 zł w serwisie)
+3. [Wymień wałek](/sklep/walki-dociskowe/drukarki-biurkowe) (80-150 zł w serwisie)
 
 ### Pionowe białe linie
 
@@ -8967,7 +8979,7 @@ Czasem drukarka pozornie działa (drukuje), ale jakość wydruku jest zła. To m
 
 **Rozwiązanie:**
 1. Wyczyść głowicę
-2. Jeśli nie pomoże - wymiana głowicy (250-400 zł)
+2. Jeśli nie pomoże - [wymiana głowicy](/sklep/glowice/drukarki-biurkowe/zebra-gk420t) (250-400 zł)
 
 ---
 
@@ -9170,6 +9182,8 @@ Wałek dociskowy to gumowy element, który dociska etykietę do głowicy drukuj�
 - Koszt części: 80-150 zł
 - Koszt wymiany w serwisie: 150-290 zł
 - Zalecana wymiana co 2-3 lata przy intensywnym użytkowaniu
+
+> **🛒 Kup wałek online:** [Wałki do drukarek biurkowych](/sklep/walki-dociskowe/drukarki-biurkowe) | [Wałki do drukarek przemysłowych](/sklep/walki-dociskowe/drukarki-przemyslowe) | [Wszystkie wałki →](/sklep/walki-dociskowe)
 
 > **⚠️ Uwaga:** Zużyty wałek może uszkodzić głowicę drukującą! Nierównomierny docisk powoduje szybsze zużycie elementów grzejnych.
 
@@ -9475,7 +9489,7 @@ Zależy od przyczyny: czyszczenie mechanizmu 150-360 zł, wymiana wałka 150-290
         },
         {
           question: 'Jak często trzeba kalibrować drukarkę Zebra?',
-          answer: 'Kalibrację wykonuj przy każdej zmianie typu/rozmiaru etykiet, po założeniu rolki od nowego producenta, po resecie do ustawień fabrycznych, po wymianie głowicy lub wałka. Przy tych samych etykietach - co 5-10 rolek.'
+          answer: 'Kalibrację wykonuj przy każdej zmianie typu/rozmiaru etykiet, po założeniu rolki od nowego producenta, po resecie do ustawień fabrycznych, po wymianie [głowicy](/sklep/glowice) lub [wałka](/sklep/walki-dociskowe). Przy tych samych etykietach - co 5-10 rolek.'
         },
         {
           question: 'Jak skalibrować Zebra GK420d przyciskiem?',
@@ -9522,7 +9536,7 @@ Kalibrację należy wykonać zawsze gdy:
 [CHECK] Drukarka **wypluwa puste** etykiety przed drukowaniem
 [CHECK] Drukarka **"szuka"** początku etykiety (przesuwa papier tam i z powrotem)
 [CHECK] Po **resecie** do ustawień fabrycznych
-[CHECK] Po **wymianie** głowicy lub wałka
+[CHECK] Po **wymianie** [głowicy](/sklep/glowice) lub [wałka](/sklep/walki-dociskowe)
 
 ---
 
@@ -10029,7 +10043,7 @@ Jeśli terminal zawiesza się na logo Zebra i nie idzie dalej przez **więcej ni
 - Włóż ponownie (powinno być słyszalne kliknięcie)
 
 **Krok 3: Spróbuj innej baterii**
-- Jeśli masz zapasową baterię - przetestuj
+- Jeśli masz [zapasową baterię](/sklep/akumulatory/terminale) - przetestuj
 
 **Krok 4: Hard Reset**
 - Nawet przy czarnym ekranie wykonaj hard reset dla swojego modelu
@@ -10848,7 +10862,7 @@ Jeśli parowanie nadal nie działa:
 Słaba bateria w urządzeniu Bluetooth powoduje niestabilne połączenie:
 - **Słuchawki** - naładuj
 - **Skanery pierścieniowe** - sprawdź poziom baterii
-- **Drukarki przenośne** - naładuj lub wymień akumulator
+- **Drukarki przenośne** - naładuj lub [wymień akumulator](/sklep/akumulatory)
 
 ### Krok 2: Interferencje z WiFi
 
@@ -11595,7 +11609,7 @@ Dotyczy modeli z LTE: TC26, TC27, TC57, TC78
 2. Sprawdź **poziom naładowania** i **stan zdrowia**
 3. Lub użyj **Device Diagnostic Tool** (DDT)
 
-> **💡 Pro tip:** Bateria na "końcu żywotności" ma poniżej 80% oryginalnej pojemności. Zebra zaleca wymianę po **300-500 cyklach** ładowania lub po **12-18 miesiącach** intensywnego użytkowania.
+> **💡 Pro tip:** Bateria na "końcu żywotności" ma poniżej 80% oryginalnej pojemności. Zebra zaleca wymianę po **300-500 cyklach** ładowania lub po **12-18 miesiącach** intensywnego użytkowania. [Kup oryginalną baterię →](/sklep/akumulatory/terminale)
 
 ---
 
@@ -12818,6 +12832,7 @@ Domyślnie po ~30 minutach nieaktywności skaner przechodzi w tryb uśpienia. Mo
 ## Zobacz też
 
 - [Bateria skanera Zebra – ładowanie, żywotność i problemy](/blog/bateria-skanera-zebra-ladowanie-zywotnosc-problemy)
+- [Akumulatory do urządzeń Zebra — sklep online](/sklep/akumulatory)
 - [Skaner Zebra nie skanuje – diagnostyka i rozwiązania](/blog/skaner-zebra-nie-skanuje-diagnostyka-rozwiazania)
 - [Konfiguracja skanera kodami kreskowymi – Enter, Tab, sufiksy](/blog/konfiguracja-skanera-zebra-kodami-kreskowymi-enter-tab)
 - [Porównanie skanerów Zebra – który model wybrać?](/blog/porownanie-skanerow-zebra-ktory-wybrac)
@@ -14487,6 +14502,8 @@ Aby wyłączyć baterię przed długim przechowywaniem lub transportem:
 | **SAC-DS3678-4** | SAC-DS3678-4CHG | 4-slot battery charger dla DS3678 |
 | **SAC-MPP** | SAC-MPP-1BCHGXX1-01 | Single slot charger |
 
+> 🛒 **Zamów oryginalne baterie do skanerów Zebra** w [naszym sklepie](/sklep/akumulatory) — PowerPrecision+ z gwarancją, wysyłka 24h.
+
 ---
 
 ## Przechowywanie baterii
@@ -14568,10 +14585,13 @@ W 123Scan: Scanner → Battery → Battery Statistics
 - **DS8178:** ~250-350 PLN
 - **DS3678:** ~300-400 PLN
 
+Sprawdź aktualne ceny w [sklepie — akumulatory Zebra](/sklep/akumulatory).
+
 ---
 
 ## Zobacz też
 
+- [Akumulatory do urządzeń Zebra — sklep online](/sklep/akumulatory)
 - [Parowanie skanera Bluetooth Zebra – kompletny poradnik](/blog/parowanie-skanera-bluetooth-zebra-poradnik)
 - [Skaner Zebra nie skanuje – diagnostyka i rozwiązania](/blog/skaner-zebra-nie-skanuje-diagnostyka-rozwiazania)
 - [Porównanie skanerów Zebra – który model wybrać?](/blog/porownanie-skanerow-zebra-ktory-wybrac)
@@ -14907,6 +14927,7 @@ Tak, przy naprawie flotowej (5+ skanerów) oferujemy rabaty 10-20%.
 ## Zobacz też
 
 - [Bateria skanera Zebra – ładowanie, żywotność i problemy](/blog/bateria-skanera-zebra-ladowanie-zywotnosc-problemy)
+- [Akumulatory do urządzeń Zebra — sklep online](/sklep/akumulatory)
 - [Skaner Zebra nie skanuje – diagnostyka i rozwiązania](/blog/skaner-zebra-nie-skanuje-diagnostyka-rozwiazania)
 - [Porównanie skanerów Zebra – który model wybrać?](/blog/porownanie-skanerow-zebra-ktory-wybrac)
 - [Co oznaczają HD, SR, XR, ER, KD w skanerach Zebra?](/blog/oznaczenia-skanerow-zebra-hd-sr-xr-er-kd)
@@ -14981,7 +15002,7 @@ TC58 obsługuje **4 typy baterii**. Wybór właściwej ma ogromny wpływ na czas
 
 *Czas pracy przy typowym użytkowaniu kurierskim (skanowanie, GPS, dane mobilne)
 
-> 💡 **Rekomendacja:** Jeśli Twoja trasa przekracza 100 paczek lub 8 godzin – **bateria rozszerzona 7,000 mAh** to podstawa.
+> 💡 **Rekomendacja:** Jeśli Twoja trasa przekracza 100 paczek lub 8 godzin – **bateria rozszerzona 7,000 mAh** to podstawa. Sprawdź [akumulatory do terminali Zebra w naszym sklepie](/sklep/akumulatory/terminale).
 
 ---
 
@@ -15070,7 +15091,7 @@ Jeśli optymalizacja nie wystarczy, **bateria zapasowa** to jedyne rozwiązanie.
 | Standardowa 4,680 mAh | 250-350 zł |
 | Rozszerzona 7,000 mAh | 350-450 zł |
 
-> 💡 **Tip:** Zapytaj pracodawcę – firmy kurierskie często kupują baterie hurtowo.
+> 💡 **Tip:** Zapytaj pracodawcę – firmy kurierskie często kupują baterie hurtowo. Oryginalne baterie TC58 dostępne w [naszym sklepie](/sklep/akumulatory/terminale/zebra-tc53-tc58).
 
 ### Czasy ładowania baterii TC58
 
@@ -15246,7 +15267,7 @@ Tak, ale różnica jest minimalna:
 
 1. Przez pracodawcę (DHL, InPost, DPD mają umowy z dystrybutorami)
 2. Autoryzowani dystrybutorzy Zebra w Polsce
-3. Serwis Zebra – oferujemy oryginalne części
+3. **[Sklep serwis-zebry.pl](/sklep/akumulatory/terminale/zebra-tc53-tc58)** — oryginalne baterie TC58 z wysyłką 24h
 
 ---
 
@@ -15258,7 +15279,7 @@ Tak, ale różnica jest minimalna:
 
 ---
 
-> 🔧 **Bateria TC58 wymaga wymiany?** [Zgłoś terminal do serwisu](/panel) — oryginalne baterie Zebra w 24h!
+> 🔧 **Bateria TC58 wymaga wymiany?** [Kup oryginalny akumulator](/sklep/akumulatory/terminale/zebra-tc53-tc58) lub [zgłoś terminal do serwisu](/panel) — oryginalne baterie Zebra w 24h!
 
 > 📞 **Pytania?** Zadzwoń: **+48 601 619 898** — doradzamy kurierom od lat!
 `
@@ -15836,7 +15857,7 @@ Rano trzymaj TC58 przy sobie (kieszeń kurtki) przez 10-15 minut przed użyciem.
 
 **3. Noś baterię zapasową przy ciele**
 
-Bateria zapasowa w kieszeni kurtki będzie ciepła i gotowa do użycia.
+Bateria zapasowa w kieszeni kurtki będzie ciepła i gotowa do użycia. [Kup zapasową baterię TC58 →](/sklep/akumulatory/terminale/zebra-tc53-tc58)
 
 **4. Włącz tryb rękawiczek**
 
@@ -15924,6 +15945,7 @@ TC58 ma certyfikat **IP68** (zanurzenie 1.5m/30 min) i **IP65** (strumienie wody
 ## Zobacz też
 
 - [Bateria TC58 nie wytrzymuje trasy kurierskiej](/blog/zebra-tc58-bateria-nie-wytrzymuje-trasy-kurierskiej)
+- [Akumulatory do terminali Zebra — sklep online](/sklep/akumulatory/terminale/zebra-tc53-tc58)
 - [Skaner TC58 przestał działać w trasie](/blog/zebra-tc58-skaner-nie-dziala-naprawa-w-trasie)
 - [TC58 nie łączy się z siecią – ustawienia APN](/blog/zebra-tc58-siec-4g-5g-ustawienia-apn-polscy-operatorzy)
 
@@ -16211,6 +16233,7 @@ GPS włączony ciągle: ~5-10% baterii dziennie. To niewiele, **nie wyłączaj G
 ## Zobacz też
 
 - [Bateria TC58 nie wytrzymuje trasy kurierskiej](/blog/zebra-tc58-bateria-nie-wytrzymuje-trasy-kurierskiej)
+- [Akumulatory do terminali TC58 — sklep online](/sklep/akumulatory/terminale/zebra-tc53-tc58)
 - [Skaner TC58 przestał działać w trasie](/blog/zebra-tc58-skaner-nie-dziala-naprawa-w-trasie)
 - [TC58 w upale i mrozie – ochrona terminala](/blog/zebra-tc58-upal-mroz-praca-w-ekstremalnych-temperaturach)
 
@@ -16572,6 +16595,7 @@ Możliwe przyczyny:
 ## Zobacz też
 
 - [Bateria TC58 nie wytrzymuje trasy kurierskiej](/blog/zebra-tc58-bateria-nie-wytrzymuje-trasy-kurierskiej)
+- [Akumulatory do terminali TC58 — sklep online](/sklep/akumulatory/terminale/zebra-tc53-tc58)
 - [Skaner TC58 przestał działać w trasie](/blog/zebra-tc58-skaner-nie-dziala-naprawa-w-trasie)
 - [GPS TC58 pokazuje złą lokalizację](/blog/zebra-tc58-gps-pokazuje-zla-lokalizacje-naprawa)
 
@@ -16790,7 +16814,7 @@ Bateria mostkowa często **ulega awarii razem z główną**. Objawy:
 | Robocizna (wymiana mostkowej) | — | 200-400 zł |
 | **Pełna wymiana obu baterii** | — | **850-1550 zł** |
 
-> 💡 **Przy flocie 10+ tabletów** – negocjuj rabat flotowy. Oferujemy do 20% zniżki.
+> 💡 **Przy flocie 10+ tabletów** – negocjuj rabat flotowy. Oferujemy do 20% zniżki. Sprawdź [oryginalne akumulatory Zebra w sklepie](/sklep/akumulatory).
 
 ---
 
@@ -16902,13 +16926,14 @@ Sprawdź warunki umowy OneCare jeśli masz.
 
 ## Zobacz też
 
+- [Akumulatory do urządzeń Zebra — sklep online](/sklep/akumulatory)
 - [Tablet Zebra nie włącza się – diagnostyka](/blog/tablet-zebra-nie-wlacza-sie-diagnostyka-naprawa)
 - [Tablet Zebra nie ładuje się w stacji dokującej](/blog/tablet-zebra-nie-laduje-stacja-dokujaca-naprawa)
 - [Wymiana ekranu w tablecie Zebra](/blog/wymiana-ekranu-tablet-zebra-naprawa-dotyku)
 
 ---
 
-> 🔧 **Spuchnięta bateria w L10?** [Zgłoś do wymiany](/panel) — bezpieczna utylizacja i oryginalne części.
+> 🔧 **Spuchnięta bateria w L10?** [Zamów oryginalną baterię](/sklep/akumulatory) lub [zgłoś do wymiany](/panel) — bezpieczna utylizacja i oryginalne części.
 
 > 📞 **Zarządzasz flotą tabletów?** Zadzwoń: **+48 601 619 898** — oferujemy serwis flotowy z rabatami.
 `
@@ -17177,7 +17202,7 @@ W tych przypadkach **odłącz zasilacz, wyjmij baterię** (jeśli bezpieczne) i 
 
 ### Tablet włącza się tylko na zasilaczu, bez baterii
 
-To znak że **bateria jest uszkodzona** (nie trzyma ładunku lub ma uszkodzone ogniwa). Wymień baterię.
+To znak że **bateria jest uszkodzona** (nie trzyma ładunku lub ma uszkodzone ogniwa). [Wymień baterię](/sklep/akumulatory).
 
 ### Tablet włącza się, ale zaraz się wyłącza
 
@@ -17592,6 +17617,7 @@ Docki pojazdowe L10 i ET60/ET80 mają **porty przekazywania sygnału antenowego*
 - [Spuchnięta bateria w tablecie Zebra L10](/blog/spuchnieta-bateria-tablet-zebra-l10-objawy-naprawa)
 - [Tablet Zebra nie włącza się](/blog/tablet-zebra-nie-wlacza-sie-diagnostyka-naprawa)
 - [Problemy z WiFi i GSM w tabletach Zebra](/blog/tablet-zebra-wifi-gsm-problemy-lacznosc-naprawa)
+- [Akumulatory do urządzeń Zebra — sklep online](/sklep/akumulatory)
 
 ---
 
@@ -21100,7 +21126,7 @@ W oprogramowaniu do projektowania etykiet (np. ZebraDesigner):
 
 | Element | Metoda | Częstotliwość |
 |---------|--------|---------------|
-| **Wałek dociskowy (Platen)** | Obróć i przetrzyj alkoholem | Co 5 rolek |
+| **[Wałek dociskowy (Platen)](/sklep/walki-dociskowe)** | Obróć i przetrzyj alkoholem | Co 5 rolek |
 | **Czujniki mediów** | Delikatnie zdmuchnij kurz | Co 5 rolek |
 | **Obudowa wewnętrzna** | Miękka szczotka | W razie potrzeby |
 | **Listwa zrywająca (Tear Bar)** | Wacik z alkoholem | W razie potrzeby |
@@ -22135,6 +22161,8 @@ Drukarki Zebra wymagają **wyłącznie oryginalnych baterii PowerPrecision+**:
 
 > **⚠️ UWAGA:** Baterie zamienne (nieoryginalne) mogą nie działać wcale lub powodować "Battery failure and shuts down".
 
+> 🛒 **Kup oryginalną baterię:** [Akumulatory do drukarek mobilnych Zebra](/sklep/akumulatory/drukarki-mobilne) — ZQ630, ZQ520, ZQ511 i inne modele w sklepie.
+
 ---
 
 ## 5. Wskaźniki ładowania – co oznaczają?
@@ -22228,7 +22256,7 @@ Drukarki Zebra wymagają **wyłącznie oryginalnych baterii PowerPrecision+**:
 | ZQ520/ZQ521 | 250-400 zł |
 | ZQ320/ZQ310 | 200-350 zł |
 
-> **🔧 Potrzebujesz oryginalnej baterii?** [Skontaktuj się z nami →](/#formularz)
+> **🔧 Potrzebujesz oryginalnej baterii?** [Zamów w sklepie →](/sklep/akumulatory/drukarki-mobilne) lub [skontaktuj się z nami](/#formularz)
 
 ---
 
@@ -22267,7 +22295,7 @@ Naładowaną do 40-60%, w temperaturze pokojowej – **do 1 roku** bez znaczące
 
 Jeśli diagnostyka nie pomogła:
 
-> 🔧 **Zgłoś drukarkę do serwisu** — [Wypełnij formularz →](/#formularz) — bezpłatna diagnostyka, oryginalne baterie Zebra.
+> 🔧 **Zgłoś drukarkę do serwisu** — [Wypełnij formularz →](/#formularz) — bezpłatna diagnostyka. [Oryginalne baterie Zebra w sklepie →](/sklep/akumulatory/drukarki-mobilne)
 
 > 📞 **Pilne?** Zadzwoń: **+48 601 619 898** — pomożemy zdiagnozować problem przez telefon.
 
@@ -28636,7 +28664,7 @@ Jako **autoryzowany serwis Zebra** oferujemy:
 | **Reset fabryczny** | FEED przytrzymaj → 4 migania → zwolnij |
 | **Czyszczenie głowicy** | Po każdej rolce etykiet, IPA 90% |
 | **Wymiana głowicy** | 250-400 zł (część + usługa) |
-| **Wymiana wałka** | 120-180 zł |
+| **[Wymiana wałka](/sklep/walki-dociskowe/drukarki-biurkowe)** | 120-180 zł |
 | **Diagnostyka** | Bezpłatna |
 | **Gwarancja naprawy** | 12 miesięcy |
 
@@ -29374,7 +29402,7 @@ Przydatny gdy drukarka nie reaguje na polecenia.
 | **Częściowy wydruk** | Wyczyść głowicę, sprawdź etykiety |
 | **Zniekształcony wydruk** | Wyrównaj etykiety, wyczyść głowicę |
 | **Brak wydruku** | Sprawdź baud rate, kabel, połączenie RF |
-| **Krótki czas pracy baterii** | Wymień baterię (ponad 1 rok = normalne zużycie) |
+| **Krótki czas pracy baterii** | [Wymień baterię](/sklep/akumulatory/drukarki-mobilne) (ponad 1 rok = normalne zużycie) |
 | **Pomijanie etykiet** | Sprawdź czujnik przerwy/paska, skalibruj |
 | **Pusty ekran LCD** | Włącz drukarkę, sprawdź baterię |
 | **Brak połączenia NFC** | Zbliż telefon do 7,6 cm od ikony NFC |
@@ -29386,7 +29414,7 @@ Przydatny gdy drukarka nie reaguje na polecenia.
 | Usługa | Koszt netto | Gwarancja |
 |--------|-------------|-----------|
 | Czyszczenie + konserwacja | 100-180 zł | 3 mies. |
-| Wymiana baterii PowerPrecision+ | 180-350 zł | 12 mies. |
+| [Wymiana baterii PowerPrecision+](/sklep/akumulatory/drukarki-mobilne) | 180-350 zł | 12 mies. |
 | Wymiana głowicy drukującej | 350-550 zł | 6 mies. |
 | Naprawa modułu Bluetooth | 250-400 zł | 12 mies. |
 | Naprawa modułu Wi-Fi | 300-450 zł | 12 mies. |
@@ -29840,12 +29868,12 @@ Open Printer Tools → Action → Load printer defaults
 | Naprawa płyty głównej | 350-600 zł | 6 miesięcy |
 | **Wymiana głowicy 203dpi** | 480-530 zł | 6 miesięcy |
 | **Wymiana głowicy 300dpi** | 850-920 zł | 6 miesięcy |
-| Wymiana wałka platena | 150-200 zł | 6 miesięcy |
+| [Wymiana wałka platena](/sklep/walki-dociskowe/drukarki-biurkowe) | 150-200 zł | 6 miesięcy |
 | Wymiana czujnika | 120-250 zł | 6 miesięcy |
 | Naprawa modułu WiFi/BT | 200-350 zł | 6 miesięcy |
 | **Naprawa modułu RFID (ZD621R)** | 400-700 zł | 6 miesięcy |
 
-> **🛒 Kup głowicę online:** [Głowice do ZD620/ZD621](/sklep/glowice/drukarki-biurkowe/zebra-zd621t) - oryginalne części Zebra z 6-miesięczną gwarancją
+> **🛒 Kup głowicę online:** [Głowice do ZD620/ZD621](/sklep/glowice/drukarki-biurkowe/zebra-zd621t) | **Wałek?** [Wałki do drukarek biurkowych →](/sklep/walki-dociskowe/drukarki-biurkowe)
 
 > **💰 Oszczędność:** [Kontrakty serwisowe Zebra OneCare](/blog/kontrakty-serwisowe-zebra-onecare-przewodnik) obniżają koszty o 30-50% rocznie.
 
@@ -30374,7 +30402,7 @@ Zebra ZD220 nie ma wyświetlacza — komunikuje się **jedną diodą LED STATUS*
 | Naprawa mechanizmu podawania | 150-300 zł | 6 miesięcy |
 | Naprawa płyty głównej | 250-450 zł | 6 miesięcy |
 | **Wymiana głowicy 203dpi** | **350-420 zł** | 6 miesięcy |
-| Wymiana wałka platena | 120-180 zł | 6 miesięcy |
+| [Wymiana wałka platena](/sklep/walki-dociskowe/drukarki-biurkowe) | 120-180 zł | 6 miesięcy |
 | Wymiana czujnika materiału | 100-200 zł | 6 miesięcy |
 | Naprawa portu USB | 150-250 zł | 6 miesięcy |
 | Aktualizacja firmware + konfiguracja | 50-80 zł | 30 dni |
@@ -31198,9 +31226,9 @@ Weryfikacja połączenia z komputerem:
 | Czyszczenie i konserwacja | 200 zł |
 | Kalibracja sensorów | 150 zł |
 | Regulacja docisku głowicy | 150 zł |
-| Wymiana głowicy 203 dpi | 900 zł |
-| Wymiana głowicy 300 dpi | 1 200 zł |
-| Wymiana wałka dociskowego | 450 zł |
+| [Wymiana głowicy 203 dpi](/sklep/glowice/drukarki-przemyslowe) | 900 zł |
+| [Wymiana głowicy 300 dpi](/sklep/glowice/drukarki-przemyslowe) | 1 200 zł |
+| [Wymiana wałka dociskowego](/sklep/walki-dociskowe/drukarki-przemyslowe) | 450 zł |
 | Naprawa płyty głównej MLB | 800 zł |
 | Wymiana zasilacza | 500 zł |
 | Naprawa modułu gilotyny | 400 zł |
@@ -31858,9 +31886,9 @@ Komenda ZPL \`~JG\` drukuje profil odczytów czujników. Pozwala zweryfikować:
 |--------|---------|
 | **Diagnostyka** | **Bezpłatna** |
 | Czyszczenie i konserwacja | 200 zł |
-| Wymiana głowicy drukującej 203 dpi | 800 zł |
-| Wymiana głowicy drukującej 300 dpi | 1 100 zł |
-| Wymiana wałka dociskowego | 300 zł |
+| [Wymiana głowicy drukującej 203 dpi](/sklep/glowice/drukarki-przemyslowe) | 800 zł |
+| [Wymiana głowicy drukującej 300 dpi](/sklep/glowice/drukarki-przemyslowe) | 1 100 zł |
+| [Wymiana wałka dociskowego](/sklep/walki-dociskowe/drukarki-przemyslowe) | 300 zł |
 | Naprawa/wymiana płyty głównej (MLB) | 700 zł |
 | Naprawa zasilacza | 400 zł |
 | Naprawa/wymiana gilotyny | 400 zł |
@@ -32493,10 +32521,10 @@ Wydruk profilu czujnika pokazuje graficznie odczyty czujnika mediów. Przydatny 
 |--------|-----------------|-----------------|
 | **Diagnostyka** | **Bezpłatna** | 1 dzień roboczy |
 | **Czyszczenie i konserwacja** | 200 zł | 1 dzień roboczy |
-| **Wymiana głowicy 203 dpi** | 750 zł | 1-2 dni robocze |
-| **Wymiana głowicy 300 dpi** | 1 050 zł | 1-2 dni robocze |
+| **[Wymiana głowicy 203 dpi](/sklep/glowice/drukarki-przemyslowe)** | 750 zł | 1-2 dni robocze |
+| **[Wymiana głowicy 300 dpi](/sklep/glowice/drukarki-przemyslowe)** | 1 050 zł | 1-2 dni robocze |
 | **Naprawa płyty głównej (MLB)** | 650 zł | 2-3 dni robocze |
-| **Wymiana wałka dociskowego** | 300 zł | 1 dzień roboczy |
+| **[Wymiana wałka dociskowego](/sklep/walki-dociskowe/drukarki-przemyslowe)** | 300 zł | 1 dzień roboczy |
 | **Naprawa gilotyny (ZT230)** | 400 zł | 1-2 dni robocze |
 | **Naprawa zasilacza** | 350 zł | 1-2 dni robocze |
 | **Naprawa mechanizmu napędu** | 500 zł | 2-3 dni robocze |

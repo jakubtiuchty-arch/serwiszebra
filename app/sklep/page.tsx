@@ -79,16 +79,13 @@ export default function SklepPage() {
             </p>
 
             <div className="flex gap-2 overflow-x-auto pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 sm:overflow-visible">
-              <div className="flex items-center gap-1.5 bg-white/80 border border-gray-200 px-2.5 py-1 rounded-full text-xs whitespace-nowrap">
-                <Check className="w-3.5 h-3.5 text-green-600" />
-                <span className="text-gray-700">Oryginalne</span>
+              <div className="bg-white/80 border border-gray-200 px-2.5 py-1 rounded-full text-xs whitespace-nowrap">
+                <span className="text-gray-700">Oryginalne części</span>
               </div>
-              <div className="flex items-center gap-1.5 bg-white/80 border border-gray-200 px-2.5 py-1 rounded-full text-xs whitespace-nowrap">
-                <Truck className="w-3.5 h-3.5 text-amber-600" />
-                <span className="text-gray-700">24h</span>
+              <div className="bg-white/80 border border-gray-200 px-2.5 py-1 rounded-full text-xs whitespace-nowrap">
+                <span className="text-gray-700">Wysyłka 24h</span>
               </div>
-              <div className="flex items-center gap-1.5 bg-white/80 border border-gray-200 px-2.5 py-1 rounded-full text-xs whitespace-nowrap">
-                <Shield className="w-3.5 h-3.5 text-blue-600" />
+              <div className="bg-white/80 border border-gray-200 px-2.5 py-1 rounded-full text-xs whitespace-nowrap">
                 <span className="text-gray-700">Gwarancja</span>
               </div>
             </div>

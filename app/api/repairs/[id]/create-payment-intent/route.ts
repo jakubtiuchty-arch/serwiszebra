@@ -72,8 +72,8 @@ export async function POST(
     }
 
     // Określ kwotę do zapłaty
-    const amountToPay = isDiagnosticFee 
-      ? 121.77 // Stała opłata za diagnostykę (99 zł netto + VAT 23% = 121,77 zł brutto)
+    const amountToPay = isDiagnosticFee
+      ? 166.05 // Diagnostyka 99 zł netto + przesyłka 36 zł netto = 135 zł netto + VAT 23% = 166,05 zł brutto
       : (repair.final_price || repair.estimated_price);
 
     if (!amountToPay || amountToPay <= 0) {

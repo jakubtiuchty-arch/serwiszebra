@@ -278,7 +278,7 @@ export default function SearchAutocomplete({
 
   function getProductImage(product: AutocompleteResult): string | null {
     if (product.image_url) return product.image_url
-    return getProductFallbackImage(product.product_type, product.device_model, product.resolution_dpi)
+    return getProductFallbackImage(product.product_type, product.device_model, product.resolution_dpi, product.sku)
   }
 
   return (

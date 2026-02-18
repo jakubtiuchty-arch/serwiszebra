@@ -51,7 +51,7 @@ interface FilterState {
 
 function getProductImage(product: Product): string | null {
   if (product.image_url) return product.image_url
-  return getProductFallbackImage(product.product_type, product.device_model, product.resolution_dpi)
+  return getProductFallbackImage(product.product_type, product.device_model, product.resolution_dpi, product.sku)
 }
 
 export default function ShopMainPage() {
@@ -358,7 +358,7 @@ export default function ShopMainPage() {
                             />
                           ) : (
                             <Image
-                              src={getProductFallbackImage(product.product_type, product.device_model, product.resolution_dpi) || '/sklep_photo/glowica-203dpi-do-drukarki-zebra-zd421t.png'}
+                              src={getProductFallbackImage(product.product_type, product.device_model, product.resolution_dpi, product.sku) || '/sklep_photo/glowica-203dpi-do-drukarki-zebra-zd421t.png'}
                               alt={product.name}
                               width={140}
                               height={140}
