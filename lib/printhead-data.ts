@@ -398,9 +398,11 @@ export const PART_NUMBERS: Record<string, { model: string, resolution: number }>
   // ZD220/ZD230 Direct Thermal
   'P1115689': { model: 'ZD220d', resolution: 203 },
 
-  // ZD411
+  // ZD411/ZD611
   'P1112640-200': { model: 'ZD411t', resolution: 203 },
   'P1112640-201': { model: 'ZD411t', resolution: 300 },
+  'P1117258-232': { model: 'ZD411t', resolution: 203 },
+  'P1117258-233': { model: 'ZD411t', resolution: 300 },
   
   // ZD421 Thermal Transfer
   'P1112640-218': { model: 'ZD421t', resolution: 203 },
@@ -425,14 +427,17 @@ export const PART_NUMBERS: Record<string, { model: string, resolution: number }>
   // ZD621 Thermal Transfer
   'P1112640-220': { model: 'ZD621t', resolution: 203 },
   'P1112640-221': { model: 'ZD621t', resolution: 300 },
+  'P1112640-240': { model: 'ZD621t', resolution: 203 },
+  'P1112640-241': { model: 'ZD621t', resolution: 300 },
 
   // ZD621 Direct Thermal
   'P1112640-050': { model: 'ZD621d', resolution: 203 },
   'P1112640-051': { model: 'ZD621d', resolution: 300 },
 
-  // GK420/GX420
+  // GK420/GX420/GX430
   '105934-037': { model: 'GK420t', resolution: 203 },
   '105934-038': { model: 'GX430t', resolution: 300 },
+  '105934-039': { model: 'GX430t', resolution: 300 },
   
   // ZT111/ZT211/ZT231
   'P1123335-012': { model: 'ZT111', resolution: 203 },
@@ -454,6 +459,8 @@ export const PART_NUMBERS: Record<string, { model: string, resolution: number }>
   // ZT510
   'P1083320-015': { model: 'ZT510', resolution: 203 },
   'P1083320-016': { model: 'ZT510', resolution: 300 },
+  'P1083347-005': { model: 'ZT510', resolution: 203 },
+  'P1083347-006': { model: 'ZT510', resolution: 300 },
   
   // ZT610
   'P1083320-010': { model: 'ZT610', resolution: 203 },
@@ -491,6 +498,11 @@ export const PART_NUMBERS: Record<string, { model: string, resolution: number }>
   // 220Xi4
   'P1004237': { model: '220Xi4', resolution: 203 },
   'P1004238': { model: '220Xi4', resolution: 300 },
+  'P1004239': { model: '220Xi4', resolution: 300 },
+
+  // ZT411 RFID (ta sama głowica co ZT411)
+  'P1105147-300': { model: 'ZT411', resolution: 203 },
+  'P1105147-301': { model: 'ZT411', resolution: 300 },
 }
 
 // === FUNKCJE GENERUJĄCE UNIKALNE OPISY ===

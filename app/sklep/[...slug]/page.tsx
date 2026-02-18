@@ -631,27 +631,41 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
     let printerModelData = null
     
     if (product.product_type === 'glowica' && product.device_model && product.resolution_dpi) {
-      // Normalizuj model
-      const normalizedModel = product.device_model.replace(/^Zebra\s+/i, '').trim()
-      
-      // Znajdź w bazie danych modeli
-      for (const key of Object.keys(PRINTER_MODELS)) {
-        if (key.toLowerCase().replace(/[^a-z0-9]/gi, '') === normalizedModel.toLowerCase().replace(/[^a-z0-9]/gi, '')) {
-          printerModelData = PRINTER_MODELS[key]
-          break
+      // Znajdź model drukarki — priorytet: SKU (najdokładniejsze) → compound device_model parts
+      const identified = identifyFromPartNumber(product.sku)
+      if (identified) {
+        printerModelData = PRINTER_MODELS[identified.model] || null
+      }
+
+      if (!printerModelData) {
+        // Fallback: spróbuj każdą część compound device_model (np. "ZT410/ZT411" → ["ZT410", "ZT411"])
+        const normalizedModel = product.device_model.replace(/^Zebra\s+/i, '').trim()
+        const modelParts = normalizedModel.split('/').map(s => s.trim())
+        for (const key of Object.keys(PRINTER_MODELS)) {
+          const keyAlpha = key.toLowerCase().replace(/[^a-z0-9]/g, '')
+          for (const part of modelParts) {
+            const partAlpha = part.toLowerCase().replace(/[^a-z0-9]/g, '')
+            if (keyAlpha === partAlpha || partAlpha.startsWith(keyAlpha)) {
+              printerModelData = PRINTER_MODELS[key]
+              break
+            }
+          }
+          if (printerModelData) break
         }
       }
-      
+
+      const modelId = printerModelData?.id || product.device_model.replace(/^Zebra\s+/i, '').trim()
+
       // Generuj dynamiczne FAQ i additionalProperties
       faqItems = generateProductFAQ(
-        printerModelData?.id || normalizedModel,
+        modelId,
         product.resolution_dpi,
         product.sku,
         product.price
       )
-      
+
       additionalProperties = generateAdditionalProperties(
-        printerModelData?.id || normalizedModel,
+        modelId,
         product.resolution_dpi,
         product.sku
       )
@@ -905,26 +919,50 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
                 <Info className="w-4 h-4 sm:w-5 sm:h-5 text-blue-500" />
                 Specyfikacja
               </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-0">
-                <div className="flex justify-between py-2 border-b border-gray-100 text-xs sm:text-sm">
-                  <span className="text-gray-500">Producent</span>
-                  <span className="font-medium text-gray-900">{product.manufacturer || 'Zebra'}</span>
-                </div>
-                {product.resolution_dpi && (
-                  <div className="flex justify-between py-2 border-b border-gray-100 text-xs sm:text-sm">
-                    <span className="text-gray-500">Rozdzielczość</span>
-                    <span className="font-medium text-gray-900">{product.resolution_dpi} DPI</span>
-                  </div>
-                )}
-                <div className="flex justify-between py-2 border-b border-gray-100 text-xs sm:text-sm">
-                  <span className="text-gray-500">Stan</span>
-                  <span className="font-medium text-green-600">Nowy, oryginalny</span>
-                </div>
-                <div className="flex justify-between py-2 border-b border-gray-100 text-xs sm:text-sm">
-                  <span className="text-gray-500">Gwarancja</span>
-                  <span className="font-medium text-gray-900">12 miesięcy</span>
-                </div>
-              </div>
+              <table className="w-full text-xs sm:text-sm">
+                <tbody>
+                  <tr className="border-b border-gray-100">
+                    <td className="py-2 text-gray-500 pr-4">Producent</td>
+                    <td className="py-2 font-medium text-gray-900 text-right">{product.manufacturer || 'Zebra'}</td>
+                  </tr>
+                  <tr className="border-b border-gray-100">
+                    <td className="py-2 text-gray-500 pr-4">Part Number</td>
+                    <td className="py-2 font-medium font-mono text-gray-900 text-right">{product.sku}</td>
+                  </tr>
+                  {product.ean && (
+                    <tr className="border-b border-gray-100">
+                      <td className="py-2 text-gray-500 pr-4">EAN</td>
+                      <td className="py-2 font-medium font-mono text-gray-900 text-right">{product.ean}</td>
+                    </tr>
+                  )}
+                  {product.device_model && (
+                    <tr className="border-b border-gray-100">
+                      <td className="py-2 text-gray-500 pr-4">Model drukarki</td>
+                      <td className="py-2 font-medium text-gray-900 text-right">{product.device_model}</td>
+                    </tr>
+                  )}
+                  {product.resolution_dpi && (
+                    <tr className="border-b border-gray-100">
+                      <td className="py-2 text-gray-500 pr-4">Rozdzielczość</td>
+                      <td className="py-2 font-medium text-gray-900 text-right">{product.resolution_dpi} DPI ({(product.resolution_dpi / 25.4).toFixed(1)} punktów/mm)</td>
+                    </tr>
+                  )}
+                  {printerModelData && (
+                    <tr className="border-b border-gray-100">
+                      <td className="py-2 text-gray-500 pr-4">Szerokość druku</td>
+                      <td className="py-2 font-medium text-gray-900 text-right">{printerModelData.printWidthMm} mm</td>
+                    </tr>
+                  )}
+                  <tr className="border-b border-gray-100">
+                    <td className="py-2 text-gray-500 pr-4">Stan</td>
+                    <td className="py-2 font-medium text-green-600 text-right">Nowy, oryginalny</td>
+                  </tr>
+                  <tr>
+                    <td className="py-2 text-gray-500 pr-4">Gwarancja</td>
+                    <td className="py-2 font-medium text-gray-900 text-right">12 miesięcy (producent)</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
 
             {/* Opis produktu */}
