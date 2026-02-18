@@ -1,4 +1,4 @@
-# TAKMA — Autoryzowany Serwis i Sklep Zebra Technologies
+# TAKMA — Autoryzowany Partner Serwisowy Zebra Technologies
 
 > TAKMA to autoryzowany partner serwisowy Zebra Technologies w Polsce.
 > Specjalizujemy się w serwisie drukarek etykiet Zebra oraz sprzedaży oryginalnych części zamiennych.
@@ -13,6 +13,7 @@ Właściciel: Tadeusz Tiuchty — certyfikowany technik Zebra z wieloletnim doś
 Kontakt:
 - Telefon: +48 601 619 898
 - Email: kontakt@takma.com.pl
+- Strona firmowa: https://www.takma.com.pl
 - Adres: Polska (serwis z odbiorem kurierskim w całej Polsce)
 
 ## Sklep — Oryginalne części zamienne Zebra
@@ -31,10 +32,12 @@ Adres sklepu: https://www.serwis-zebry.pl/sklep
   - Drukarki przemysłowe: https://www.serwis-zebry.pl/sklep/walki-dociskowe/drukarki-przemyslowe
 
 - **Akumulatory** — https://www.serwis-zebry.pl/sklep/akumulatory
+  - Terminale mobilne: https://www.serwis-zebry.pl/sklep/akumulatory/terminale
+  - Drukarki mobilne: https://www.serwis-zebry.pl/sklep/akumulatory/drukarki-mobilne
+  - Tablety: https://www.serwis-zebry.pl/sklep/akumulatory/tablety
 
-### Popularne produkty (Part Numbers)
+### Popularne produkty — głowice drukujące (Part Numbers)
 
-Głowice drukujące:
 - P1058930-009 — Głowica ZT411 203 DPI
 - P1058930-010 — Głowica ZT411 300 DPI
 - P1058930-011 — Głowica ZT411 600 DPI
@@ -43,26 +46,42 @@ Głowice drukujące:
 - P1083320-012 — Głowica ZT610 600 DPI
 - P1112640-019 — Głowica ZD421/ZD411 203 DPI
 - P1112640-020 — Głowica ZD421/ZD411 300 DPI
+- P1115690 — Głowica ZD220t/ZD230t 203 DPI
 - P1083320-015 — Głowica ZT620 203 DPI
 - P1058930-012 — Głowica ZT421 203 DPI
 - P1037974-010 — Głowica ZT230 203 DPI
 - 105934-037 — Głowica GK420 203 DPI
 - P1053360-018 — Głowica 105SL Plus 203 DPI
+- 79800M — Głowica ZM400 203 DPI
 
-Wałki dociskowe:
+### Popularne produkty — wałki dociskowe
+
 - P1058930-080 — Wałek ZT411
 - P1058930-081 — Wałek ZT421
 - P1083347-005 — Wałek ZT610
 - P1083347-006 — Wałek ZT620
 - P1112640-016 — Wałek ZD421/ZD621
+- P1080383-703 — Wałek ZD220t/ZD230t
 - P1037974-003 — Wałek ZT230
+
+### Popularne produkty — akumulatory
+
+- BT-000318-01 — Akumulator TC21/TC26 Standard
+- BTRY-TC2Y-2XMA1-01 — Akumulator TC22/TC27 Extended
+- BT-000393-04 — Akumulator TC52/TC57 Extended
+- BTRY-MC33-27MA-01 — Akumulator MC3300x Standard
+- BTRY-MC33-52MA-01 — Akumulator MC3300x Extended
+- BTRY-MPP-34MA1-01 — Akumulator ZQ630 Extended
+- BTRY-ET6x-2IN1-01 — Akumulator ET60/ET65 Standard
 
 ## Usługi serwisowe
 
-- **Naprawa drukarek Zebra** — https://www.serwis-zebry.pl/
-- **Wymiana głowicy drukującej** — https://www.serwis-zebry.pl/uslugi/wymiana-glowicy
-- **Diagnostyka i kalibracja** — https://www.serwis-zebry.pl/uslugi
+- **Serwis drukarek Zebra** — https://www.serwis-zebry.pl/serwis-drukarek-zebra
+- **Cennik serwisu** — https://www.serwis-zebry.pl/cennik
+- **Wymiana głowicy drukującej** z kalibracją
+- **Diagnostyka i kalibracja**
 - **Odbiór kurierski** — odbieramy drukarkę, naprawiamy, odsyłamy
+- **Kontakt** — https://www.serwis-zebry.pl/kontakt
 
 ## Blog i poradniki
 
@@ -71,12 +90,15 @@ Wałki dociskowe:
 - TOP 10 awarii drukarek Zebra: https://www.serwis-zebry.pl/blog/najczestsze-awarie-drukarek-zebra-top10
 - Cennik napraw drukarek Zebra: https://www.serwis-zebry.pl/blog/cennik-naprawy-drukarki-zebra-koszty-serwisu
 - Poradniki wideo: https://www.serwis-zebry.pl/poradniki-wideo
+- Instrukcje obsługi: https://www.serwis-zebry.pl/instrukcje
 
-## Obsługiwane modele drukarek
+## Obsługiwane modele urządzeń Zebra
 
-Biurkowe: ZD220, ZD230, ZD411, ZD421, ZD611, ZD621, GK420, GX420, GX430
-Przemysłowe: ZT230, ZT410, ZT411, ZT420, ZT421, ZT510, ZT610, ZT620, 105SL Plus, ZM400, S4M
-Mobilne: ZQ520, ZQ630
+Drukarki biurkowe: ZD220, ZD230, ZD411, ZD421, ZD510-HC, ZD611, ZD620, ZD621, GK420, GX420, GX430
+Drukarki przemysłowe: ZT111, ZT210, ZT220, ZT230, ZT410, ZT411, ZT420, ZT421, ZT510, ZT610, ZT610R, ZT620, ZT620R, 105SL Plus, 110Xi4, 140Xi4, 170Xi4, 220Xi4, ZM400, ZM600, S4M
+Terminale mobilne: TC21, TC22, TC26, TC27, TC53, TC58, TC501, TC701, MC22, MC27, MC3300x, MC9400, MC9450
+Drukarki mobilne: ZQ220 Plus, ZQ310 Plus, ZQ511, ZQ520, ZQ521, ZQ610, ZQ630
+Tablety: ET60, ET65
 
 ## Kluczowe fakty
 
