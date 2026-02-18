@@ -153,6 +153,7 @@ interface Product {
   compatible_models: string[]
   manufacturer: string
   image_url: string | null
+  ean: string | null
   lead_time_days: string | null
   attributes: {
     stock_pl?: number
@@ -678,6 +679,7 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
       "description": product.description || generateSeoDescription(product),
       "sku": product.sku,
       "mpn": product.sku,
+      ...(product.ean ? { "gtin13": product.ean } : {}),
       "brand": {
         "@type": "Brand",
         "name": product.manufacturer || "Zebra"

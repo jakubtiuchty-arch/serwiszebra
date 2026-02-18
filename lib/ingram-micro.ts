@@ -2092,16 +2092,22 @@ export async function syncProductsWithIngram(supabase: SupabaseClient): Promise<
       }
 
       // Aktualizuj w bazie
+      const updateData: Record<string, unknown> = {
+        price: priceNetto,
+        price_brutto: priceBrutto,
+        stock: totalStock,
+        lead_time_days: leadTime,
+        attributes: stockInfo,
+        updated_at: new Date().toISOString(),
+      }
+      // Zapisz EAN jeśli dostępny z Ingram (pole gtin13 w Product schema)
+      if (ingramProduct.ean) {
+        updateData.ean = ingramProduct.ean
+      }
+
       const { error: updateError } = await supabase
         .from('products')
-        .update({
-          price: priceNetto,
-          price_brutto: priceBrutto,
-          stock: totalStock,
-          lead_time_days: leadTime,
-          attributes: stockInfo, // Zapisz szczegóły w attributes
-          updated_at: new Date().toISOString(),
-        })
+        .update(updateData)
         .eq('id', product.id)
 
       if (updateError) {
