@@ -102,12 +102,36 @@ const PRODUCT_TYPE_FAQ: Record<string, Array<{ question: string; answer: string 
   ],
   akumulator: [
     {
-      question: 'Jak długo działa bateria w drukarce mobilnej?',
-      answer: 'Typowa bateria Li-Ion w drukarkach mobilnych Zebra zapewnia 4-8 godzin pracy (300-500 etykiet). Żywotność baterii to około 300-500 pełnych cykli ładowania, co przekłada się na 2-3 lata użytkowania.'
+      question: 'Ile cykli ładowania wytrzymuje akumulator Zebra?',
+      answer: 'Oryginalne akumulatory Li-Ion Zebra wytrzymują 300-500 pełnych cykli ładowania, co przekłada się na 2-3 lata intensywnego użytkowania. Po przekroczeniu tego limitu pojemność spada poniżej 80% nominalnej — czas na wymianę.'
     },
     {
-      question: 'Czy mogę używać baterii zamiennych?',
-      answer: 'Zalecamy oryginalne baterie Zebra, które gwarantują pełną kompatybilność, bezpieczeństwo i optymalną wydajność. Baterie zamienne mogą mieć krótszą żywotność lub powodować problemy z ładowaniem.'
+      question: 'Jak rozpoznać zużyty akumulator?',
+      answer: 'Objawy zużytego akumulatora: urządzenie nie wytrzymuje pełnej zmiany roboczej, bateria szybko się rozładowuje, nieoczekiwane restarty, spuchnięta obudowa baterii, urządzenie nagrzewa się podczas ładowania. Spuchnięta bateria wymaga natychmiastowej wymiany.'
+    },
+    {
+      question: 'Czy bateria Standard wystarczy, czy lepiej Extended?',
+      answer: 'Standard (mniejsza pojemność) — lżejsza, tańsza, wystarczająca do 4-6h pracy. Extended (większa pojemność) — cięższa, droższa, ale wytrzymuje pełną zmianę 8-12h. Dla pracy wielozmianowej lub w terenie zalecamy Extended.'
+    },
+    {
+      question: 'Czy mogę używać zamiennych baterii w urządzeniach Zebra?',
+      answer: 'Zdecydowanie zalecamy oryginalne akumulatory Zebra. Posiadają certyfikaty bezpieczeństwa, wbudowane układy ochronne (BMS) i gwarantują pełną kompatybilność z ładowarkami Zebra. Zamienniki mogą powodować problemy z ładowaniem, przegrzewanie i utratę gwarancji urządzenia.'
+    },
+    {
+      question: 'Jak prawidłowo przechowywać zapasowe akumulatory?',
+      answer: 'Przechowuj w temperaturze 15-25°C, z naładowaniem 40-60%. Unikaj pełnego rozładowania i przechowywania naładowanej do 100% baterii. Nie przechowuj w temperaturze powyżej 45°C. Co 3 miesiące sprawdź stan naładowania i doładuj do 50% jeśli spadło poniżej 20%.'
+    },
+    {
+      question: 'W jakiej temperaturze mogą pracować akumulatory Zebra?',
+      answer: 'Standardowe akumulatory Li-Ion Zebra działają w zakresie -10°C do +50°C. Wersje Freezer (mrozoodporne, np. do MC9400) pracują nawet w -30°C. Do pracy w chłodniach i mroźniach wybierz dedykowane modele z oznaczeniem FRZ.'
+    },
+    {
+      question: 'Jak wydłużyć żywotność akumulatora Zebra?',
+      answer: 'Unikaj pełnego rozładowywania — ładuj gdy poziom spadnie do 20-30%. Nie pozostawiaj urządzenia w ładowarce na noc po pełnym naładowaniu. Używaj oryginalnych ładowarek Zebra. Przechowuj zapasowe baterie w 40-60% naładowania. Unikaj ekstremalnych temperatur.'
+    },
+    {
+      question: 'Czy akumulator z terminala pasuje do drukarki mobilnej?',
+      answer: 'Nie — akumulatory Zebra są dedykowane do konkretnych serii urządzeń. Bateria z TC22/TC27 nie pasuje do ZQ630. Każdy model urządzenia wymaga odpowiedniego Part Number baterii. Sprawdź PN na etykiecie starego akumulatora lub w specyfikacji urządzenia.'
     }
   ]
 }
@@ -271,27 +295,36 @@ function hasOwnImage(product: Product): boolean {
   return !!product.image_url
 }
 
-// Helper: Generuj opis SEO
+// Helper: Generuj opis SEO (gender-aware — "Oryginalna głowica" vs "Oryginalny akumulator/wałek")
 function generateSeoDescription(product: Product): string {
+  const genderPrefix: Record<string, string> = {
+    glowica: 'Oryginalna',
+    walek: 'Oryginalny',
+    akumulator: 'Oryginalny'
+  }
+  const prefix = genderPrefix[product.product_type] || 'Oryginalny'
   const parts = [
-    `Oryginalna ${product.name}.`,
-    '✓ Gwarancja producenta',
+    `${prefix} ${product.name}.`,
+    '✓ Gwarancja 12 mies.',
     '✓ Wysyłka 24h',
-    `✓ Cena ${product.price_brutto.toFixed(2)} zł brutto.`,
+    `✓ ${product.price_brutto.toFixed(2)} zł brutto.`,
     'Autoryzowany dystrybutor Zebra – TAKMA.'
   ]
   return parts.join(' ')
 }
 
-// Helper: Generuj tytuł SEO
+// Helper: Generuj tytuł SEO (max ~60 znaków — unikaj obcinania w SERP)
 function generateSeoTitle(product: Product): string {
-  const typeNames: Record<string, string> = {
-    glowica: 'Głowica drukująca',
-    walek: 'Wałek dociskowy',
-    akumulator: 'Akumulator'
-  }
-  const typeName = typeNames[product.product_type] || 'Część'
-  return `${product.name} – Oryginalna ${typeName} | Kup w TAKMA`
+  const suffix = ' | TAKMA'
+  // Próba 1: Nazwa + SKU + TAKMA
+  const full = `${product.name} ${product.sku}${suffix}`
+  if (full.length <= 60) return full
+  // Próba 2: Nazwa + TAKMA
+  const short = `${product.name}${suffix}`
+  if (short.length <= 60) return short
+  // Próba 3: SKU + Nazwa (obcięte)
+  const maxName = 60 - product.sku.length - suffix.length - 3
+  return `${product.sku} ${product.name.slice(0, maxName)}${suffix}`
 }
 
 // Generuj metadane
@@ -312,10 +345,33 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
     const seoDescription = generateSeoDescription(product)
     const seoTitle = generateSeoTitle(product)
 
+    // OG/Twitter image — własne zdjęcie > fallback > logo TAKMA (nigdy puste!)
+    const fallbackImg = getLocalProductImage(product)
+    const ogImageUrl = ownImage && imageUrl
+      ? `https://www.serwis-zebry.pl${imageUrl}`
+      : fallbackImg
+        ? `https://www.serwis-zebry.pl${fallbackImg}`
+        : 'https://www.serwis-zebry.pl/takma_logo_1.png'
+
     return {
       title: seoTitle,
       description: seoDescription,
-      keywords: (product.product_type === 'walek' ? [
+      keywords: (product.product_type === 'akumulator' ? [
+        product.name,
+        product.sku,
+        `battery ${product.sku}`,
+        product.device_model,
+        `akumulator ${product.device_model}`,
+        `bateria ${product.device_model}`,
+        `akumulator zebra ${product.device_model}`,
+        'akumulator zebra',
+        'bateria zebra terminal',
+        'bateria do terminala zebra',
+        'bateria do drukarki mobilnej zebra',
+        'battery zebra',
+        'części zamienne zebra',
+        'TAKMA'
+      ] : product.product_type === 'walek' ? [
         product.name,
         product.sku,
         `platen roller ${product.sku}`,
@@ -354,16 +410,16 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
         siteName: 'TAKMA - Autoryzowany Serwis Zebra',
         locale: 'pl_PL',
         url: `https://www.serwis-zebry.pl/sklep/${slugPath.join('/')}`,
-        // Tylko własne zdjęcie produktu w OG (unikaj fallbacku w meta tagach)
-        images: ownImage && imageUrl ? [{
-          url: `https://www.serwis-zebry.pl${imageUrl}`,
+        images: [{
+          url: ogImageUrl,
           width: 800,
           height: 800,
           alt: `${product.name} ${product.sku} - oryginalna część zamienna Zebra`
-        }] : []
+        }],
+        type: 'website'
       },
       other: {
-        'og:type': 'product', // og:type = product dla stron produktowych
+        'og:type': 'product',
         'product:price:amount': product.price_brutto.toString(),
         'product:price:currency': 'PLN',
         'product:availability': (product.stock > 0 || (product.attributes?.stock_pl ?? 0) > 0 || (product.attributes?.stock_de ?? 0) > 0) ? 'in stock' : 'out of stock',
@@ -374,7 +430,7 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
         card: 'summary_large_image',
         title: seoTitle,
         description: seoDescription,
-        images: ownImage && imageUrl ? [`https://www.serwis-zebry.pl${imageUrl}`] : []
+        images: [ogImageUrl]
       },
       alternates: {
         canonical: `https://www.serwis-zebry.pl/sklep/${slugPath.join('/')}`
@@ -615,8 +671,12 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
         "name": product.manufacturer || "Zebra"
       },
       "image": schemaImageUrl,
-      "category": product.product_type === 'glowica' ? 'Głowice drukujące > Drukarki Zebra' : 'Części zamienne Zebra',
+      "category": product.product_type === 'glowica' ? 'Głowice drukujące > Drukarki Zebra'
+        : product.product_type === 'walek' ? 'Wałki dociskowe > Drukarki Zebra'
+        : product.product_type === 'akumulator' ? 'Akumulatory > Urządzenia Zebra'
+        : 'Części zamienne Zebra',
       "model": product.device_model || undefined,
+      "dateModified": new Date().toISOString().split('T')[0],
       "countryOfOrigin": {
         "@type": "Country",
         "name": "Chiny"
@@ -727,10 +787,17 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
       ]
     }
 
-    // Generuj "Szybka odpowiedź" dla głowic
-    const quickAnswer = product.product_type === 'glowica' && product.resolution_dpi 
-      ? `Głowica ${product.sku} to oryginalna część ${product.resolution_dpi} DPI do ${product.device_model || 'drukarki Zebra'}. Cena: ${product.price_brutto.toFixed(2).replace('.', ',')} zł brutto. Wysyłka ${product.stock > 0 ? '24h z magazynu w Polsce' : '3-7 dni'}. Gwarancja producenta 12 miesięcy.`
-      : null
+    // Generuj "Szybka odpowiedź" (Paragraph 0 — AEO snippet) dla każdego typu produktu
+    const deliveryInfo = product.stock > 0 ? '24h z magazynu w Polsce' : '3-7 dni'
+    const priceInfo = `${product.price_brutto.toFixed(2).replace('.', ',')} zł brutto`
+    let quickAnswer: string | null = null
+    if (product.product_type === 'glowica' && product.resolution_dpi) {
+      quickAnswer = `Głowica ${product.sku} to oryginalna część ${product.resolution_dpi} DPI do ${product.device_model || 'drukarki Zebra'}. Cena: ${priceInfo}. Wysyłka ${deliveryInfo}. Gwarancja producenta 12 miesięcy.`
+    } else if (product.product_type === 'walek') {
+      quickAnswer = `Wałek dociskowy ${product.sku} to oryginalny platen roller do ${product.device_model || 'drukarki Zebra'}. Cena: ${priceInfo}. Wysyłka ${deliveryInfo}. Gwarancja 12 miesięcy. TAKMA — autoryzowany dystrybutor Zebra.`
+    } else if (product.product_type === 'akumulator') {
+      quickAnswer = `Akumulator ${product.sku} to oryginalna bateria Li-Ion do ${product.device_model || 'urządzenia Zebra'}. Cena: ${priceInfo}. Wysyłka ${deliveryInfo}. Gwarancja producenta 12 miesięcy. Certyfikowany — pełna kompatybilność z ładowarkami Zebra.`
+    }
 
     return (
       <>
@@ -757,7 +824,7 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
                   {imageUrl ? (
                     <Image
                       src={imageUrl}
-                      alt={`${product.name} ${product.resolution_dpi || ''} dpi ${product.sku} - oryginalna głowica drukująca Zebra`}
+                      alt={`${product.name} ${product.sku}${product.resolution_dpi ? ` ${product.resolution_dpi} DPI` : ''} - oryginalna część zamienna Zebra`}
                       fill
                       className="object-contain p-3 sm:p-4"
                       priority
@@ -863,8 +930,8 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
                 )}
                 {!product.description && !product.description_long && (
                   <p>
-                    Oryginalna {product.name} do drukarki {product.device_model || 'Zebra'}. 
-                    Część zamienna produkowana przez Zebra Technologies, gwarantująca pełną 
+                    {product.product_type === 'akumulator' ? 'Oryginalny' : 'Oryginalna'} {product.name} do {product.product_type === 'akumulator' ? 'urządzenia' : 'drukarki'} {product.device_model || 'Zebra'}.
+                    Część zamienna produkowana przez Zebra Technologies, gwarantująca pełną
                     kompatybilność i niezawodność działania.
                   </p>
                 )}
@@ -892,7 +959,7 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
               </div>
             )}
 
-            {/* Sekcja: Naprawić czy wymienić głowicę? */}
+            {/* Sekcja poradnikowa per typ produktu */}
             {product.product_type === 'glowica' && (
               <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 sm:p-6 mb-4 sm:mb-6">
                 <h2 className="text-sm sm:text-base font-semibold text-gray-900 mb-3 flex items-center gap-2">
@@ -902,110 +969,101 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
                 <div className="text-xs sm:text-sm text-gray-700 space-y-2">
                   <p><strong>Wymień głowicę gdy:</strong> białe pionowe linie na wydruku nie znikają po czyszczeniu, widoczne są rysy na powierzchni głowicy, przekroczono resurs (~1 mln cali).</p>
                   <p><strong>Wyczyść głowicę gdy:</strong> wydruk jest blady (zwiększ też Darkness), pojedyncze linie znikają po czyszczeniu, problem pojawił się niedawno.</p>
-                  <p className="text-amber-700 font-medium">💡 Regularne <Link href="/blog/jak-wyczyscic-glowice-drukarki-zebra" className="underline hover:text-amber-800">czyszczenie głowicy</Link> alkoholem IPA 99% wydłuża żywotność 2-3x!</p>
+                  <p className="text-amber-700 font-medium">Regularne <Link href="/blog/jak-wyczyscic-glowice-drukarki-zebra" className="underline hover:text-amber-800">czyszczenie głowicy</Link> alkoholem IPA 99% wydłuża żywotność 2-3x!</p>
+                </div>
+              </div>
+            )}
+            {product.product_type === 'walek' && (
+              <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 sm:p-6 mb-4 sm:mb-6">
+                <h2 className="text-sm sm:text-base font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                  <HelpCircle className="w-4 h-4 sm:w-5 sm:h-5 text-amber-600" />
+                  Kiedy wymienić wałek dociskowy?
+                </h2>
+                <div className="text-xs sm:text-sm text-gray-700 space-y-2">
+                  <p><strong>Wymień wałek gdy:</strong> nierówny docisk materiału, ciemniejsze/jaśniejsze pasy na wydruku, widoczne zużycie gumy (stwardniała, potrzaskana, wklęsła).</p>
+                  <p><strong>Zebra zaleca:</strong> wymieniać wałek razem z głowicą drukującą — zużyty wałek skraca żywotność nowej głowicy nawet o 50%.</p>
+                  <p className="text-amber-700 font-medium">Czyść wałek alkoholem IPA 99% raz w tygodniu — wydłuża żywotność i poprawia jakość druku.</p>
+                </div>
+              </div>
+            )}
+            {product.product_type === 'akumulator' && (
+              <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 sm:p-6 mb-4 sm:mb-6">
+                <h2 className="text-sm sm:text-base font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                  <HelpCircle className="w-4 h-4 sm:w-5 sm:h-5 text-amber-600" />
+                  Kiedy wymienić akumulator?
+                </h2>
+                <div className="text-xs sm:text-sm text-gray-700 space-y-2">
+                  <p><strong>Wymień akumulator gdy:</strong> urządzenie nie wytrzymuje pełnej zmiany, nieoczekiwane restarty, spuchnięta obudowa baterii, czas ładowania znacznie się wydłużył.</p>
+                  <p><strong>Standard vs Extended:</strong> Standard (4-6h pracy) wystarczy do lekkich zastosowań. Extended (8-12h) — do pracy wielozmianowej i w terenie.</p>
+                  <p className="text-amber-700 font-medium">Przechowuj zapasowe baterie naładowane do 40-60% w temperaturze 15-25°C. Pełne rozładowanie skraca żywotność!</p>
                 </div>
               </div>
             )}
 
-            {/* Powiązane treści - Linkowanie wewnętrzne */}
-            {product.product_type === 'glowica' && (
-              <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6 mb-4 sm:mb-6">
-                <h2 className="text-sm sm:text-base font-semibold text-gray-900 mb-3 sm:mb-4 flex items-center gap-2">
-                  <Info className="w-4 h-4 sm:w-5 sm:h-5 text-blue-500" />
-                  Powiązane treści
-                </h2>
-                <div className="grid sm:grid-cols-2 gap-3">
-                  {/* Poradniki blogowe */}
-                  <div>
-                    <p className="text-xs font-semibold text-gray-500 uppercase mb-2">📖 Poradniki</p>
-                    <ul className="space-y-1.5 text-xs sm:text-sm">
-                      <li>
-                        <Link href="/blog/jak-wyczyscic-glowice-drukarki-zebra" className="text-blue-600 hover:text-blue-800 hover:underline">
-                          Jak wyczyścić głowicę drukarki Zebra
-                        </Link>
-                      </li>
-                      <li>
-                        <Link href="/blog/wymiana-glowicy-drukarki-zebra-kiedy-konieczna-ile-kosztuje" className="text-blue-600 hover:text-blue-800 hover:underline">
-                          Wymiana głowicy – kiedy i ile kosztuje?
-                        </Link>
-                      </li>
-                      <li>
-                        <Link href="/blog/najczestsze-awarie-drukarek-zebra-top10" className="text-blue-600 hover:text-blue-800 hover:underline">
-                          TOP 10 awarii drukarek Zebra
-                        </Link>
-                      </li>
-                      <li>
-                        <Link href="/blog/cennik-naprawy-drukarki-zebra-koszty-serwisu" className="text-blue-600 hover:text-blue-800 hover:underline">
-                          Cennik napraw drukarek Zebra
-                        </Link>
-                      </li>
-                      {product.device_model?.toLowerCase().includes('zd42') && (
-                        <li>
-                          <Link href="/blog/serwis-drukarki-zebra-zd420-zd421-diagnostyka-naprawa" className="text-blue-600 hover:text-blue-800 hover:underline">
-                            Serwis drukarki Zebra ZD420/ZD421
-                          </Link>
-                        </li>
-                      )}
-                    </ul>
-                  </div>
-                  {/* Poradniki wideo */}
-                  <div>
-                    <p className="text-xs font-semibold text-gray-500 uppercase mb-2">📹 Poradniki wideo</p>
-                    <ul className="space-y-1.5 text-xs sm:text-sm">
-                      <li>
-                        <Link href="/poradniki-wideo" className="text-blue-600 hover:text-blue-800 hover:underline">
-                          Wymiana głowicy krok po kroku
-                        </Link>
-                      </li>
-                      <li>
-                        <Link href="/poradniki-wideo" className="text-blue-600 hover:text-blue-800 hover:underline">
-                          Blady wydruk – rozwiązanie problemu
-                        </Link>
-                      </li>
-                      <li>
-                        <Link href="/poradniki-wideo" className="text-blue-600 hover:text-blue-800 hover:underline">
-                          Self-test i kalibracja drukarki
-                        </Link>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                {/* Link do oficjalnej specyfikacji Zebra - konkretny model */}
-                <div className="mt-4 pt-3 border-t border-gray-100">
-                  <p className="text-xs text-gray-500">
-                    📎 Oficjalna dokumentacja: {' '}
-                    {product.device_model ? (
-                      <a 
-                        href={`https://www.zebra.com/us/en/support-downloads/printers/${product.device_model.toLowerCase().replace(/\s+/g, '-').replace('zebra-', '')}.html`}
-                        target="_blank" 
-                        rel="nofollow noopener noreferrer"
-                        className="text-gray-600 hover:text-gray-800 underline"
-                      >
-                        Zebra {product.device_model} – Support & Downloads
-                      </a>
-                    ) : (
-                      <a 
-                        href="https://www.zebra.com/us/en/support-downloads.html" 
-                        target="_blank" 
-                        rel="nofollow noopener noreferrer"
-                        className="text-gray-600 hover:text-gray-800 underline"
-                      >
-                        Zebra Support & Downloads
-                      </a>
+            {/* Powiązane treści - Linkowanie wewnętrzne (dla każdego typu) */}
+            <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6 mb-4 sm:mb-6">
+              <h2 className="text-sm sm:text-base font-semibold text-gray-900 mb-3 sm:mb-4 flex items-center gap-2">
+                <Info className="w-4 h-4 sm:w-5 sm:h-5 text-blue-500" />
+                Powiązane treści
+              </h2>
+              <div className="grid sm:grid-cols-2 gap-3">
+                <div>
+                  <p className="text-xs font-semibold text-gray-500 uppercase mb-2">Poradniki</p>
+                  <ul className="space-y-1.5 text-xs sm:text-sm">
+                    {product.product_type === 'glowica' && (
+                      <>
+                        <li><Link href="/blog/jak-wyczyscic-glowice-drukarki-zebra" className="text-blue-600 hover:text-blue-800 hover:underline">Jak wyczyścić głowicę drukarki Zebra</Link></li>
+                        <li><Link href="/blog/wymiana-glowicy-drukarki-zebra-kiedy-konieczna-ile-kosztuje" className="text-blue-600 hover:text-blue-800 hover:underline">Wymiana głowicy – kiedy i ile kosztuje?</Link></li>
+                      </>
                     )}
-                    {' | '}
-                    <a 
-                      href="https://www.zebra.com/us/en/support-downloads.html" 
-                      target="_blank" 
+                    {product.product_type === 'walek' && (
+                      <>
+                        <li><Link href="/blog/wymiana-glowicy-drukarki-zebra-kiedy-konieczna-ile-kosztuje" className="text-blue-600 hover:text-blue-800 hover:underline">Wymiana głowicy i wałka – kiedy i ile kosztuje?</Link></li>
+                        <li><Link href="/blog/jak-wyczyscic-glowice-drukarki-zebra" className="text-blue-600 hover:text-blue-800 hover:underline">Czyszczenie głowicy i wałka drukarki Zebra</Link></li>
+                      </>
+                    )}
+                    <li><Link href="/blog/najczestsze-awarie-drukarek-zebra-top10" className="text-blue-600 hover:text-blue-800 hover:underline">TOP 10 awarii drukarek Zebra</Link></li>
+                    <li><Link href="/blog/cennik-naprawy-drukarki-zebra-koszty-serwisu" className="text-blue-600 hover:text-blue-800 hover:underline">Cennik napraw drukarek Zebra</Link></li>
+                    {product.device_model?.toLowerCase().includes('zd42') && (
+                      <li><Link href="/blog/serwis-drukarki-zebra-zd420-zd421-diagnostyka-naprawa" className="text-blue-600 hover:text-blue-800 hover:underline">Serwis drukarki Zebra ZD420/ZD421</Link></li>
+                    )}
+                  </ul>
+                </div>
+                <div>
+                  <p className="text-xs font-semibold text-gray-500 uppercase mb-2">Przydatne linki</p>
+                  <ul className="space-y-1.5 text-xs sm:text-sm">
+                    <li><Link href="/poradniki-wideo" className="text-blue-600 hover:text-blue-800 hover:underline">Poradniki wideo Zebra</Link></li>
+                    <li><Link href="/instrukcje" className="text-blue-600 hover:text-blue-800 hover:underline">Instrukcje obsługi</Link></li>
+                    <li><Link href="/serwis-drukarek-zebra" className="text-blue-600 hover:text-blue-800 hover:underline">Serwis drukarek Zebra</Link></li>
+                  </ul>
+                </div>
+              </div>
+              {/* Link do oficjalnej specyfikacji Zebra */}
+              <div className="mt-4 pt-3 border-t border-gray-100">
+                <p className="text-xs text-gray-500">
+                  Oficjalna dokumentacja: {' '}
+                  {product.device_model ? (
+                    <a
+                      href={`https://www.zebra.com/us/en/support-downloads/printers/${product.device_model.toLowerCase().replace(/\s+/g, '-').replace('zebra-', '')}.html`}
+                      target="_blank"
                       rel="nofollow noopener noreferrer"
                       className="text-gray-600 hover:text-gray-800 underline"
                     >
-                      Centrum wsparcia Zebra
+                      Zebra {product.device_model} – Support & Downloads
                     </a>
-                  </p>
-                </div>
+                  ) : (
+                    <a
+                      href="https://www.zebra.com/us/en/support-downloads.html"
+                      target="_blank"
+                      rel="nofollow noopener noreferrer"
+                      className="text-gray-600 hover:text-gray-800 underline"
+                    >
+                      Zebra Support & Downloads
+                    </a>
+                  )}
+                </p>
               </div>
-            )}
+            </div>
 
             {/* Powiązane produkty */}
             {relatedProducts.length > 0 && (
