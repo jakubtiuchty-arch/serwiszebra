@@ -137,6 +137,8 @@ export const SHOP_CATEGORIES: ProductTypeCategory[] = [
           { id: 'mc22-mc27', name: 'Zebra MC22/MC27', slug: 'zebra-mc22-mc27', resolutions: [] },
           { id: 'mc3300x', name: 'Zebra MC3300x', slug: 'zebra-mc3300x', resolutions: [] },
           { id: 'mc9400', name: 'Zebra MC9400/MC9450', slug: 'zebra-mc9400-mc9450', resolutions: [] },
+          { id: 'tc52-tc57', name: 'Zebra TC52/TC57', slug: 'zebra-tc52-tc57', resolutions: [] },
+          { id: 'mc93', name: 'Zebra MC93/MC9300', slug: 'zebra-mc93', resolutions: [] },
         ]
       },
       {
