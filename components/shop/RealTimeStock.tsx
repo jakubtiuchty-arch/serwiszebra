@@ -100,10 +100,9 @@ export default function RealTimeStock({
           <span className="text-xs text-amber-500">({stock.inDelivery} szt. w drodze)</span>
         </div>
       ) : (
-        <div className="flex items-center gap-2 text-amber-600">
+        <div className="flex items-center gap-2 text-red-500">
           <Clock className="w-4 h-4" />
-          <span className="text-sm font-medium">Na zamówienie</span>
-          <span className="text-xs text-amber-500">(3-7 dni roboczych)</span>
+          <span className="text-sm font-medium">Chwilowo niedostępny</span>
         </div>
       )}
     </div>

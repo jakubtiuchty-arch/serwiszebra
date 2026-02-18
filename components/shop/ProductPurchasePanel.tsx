@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import RealTimeStock from './RealTimeStock'
 import AddToCartButton from '../AddToCartButton'
+import NotifyWhenAvailable from './NotifyWhenAvailable'
 
 interface ProductPurchasePanelProps {
   product: {
@@ -43,7 +44,11 @@ export default function ProductPurchasePanel({
           onStockLoaded={setLiveStock}
         />
       </div>
-      <AddToCartButton product={{ ...product, stock: effectiveStock }} />
+      {effectiveStock > 0 ? (
+        <AddToCartButton product={{ ...product, stock: effectiveStock }} />
+      ) : (
+        <NotifyWhenAvailable sku={product.sku} productName={product.name} variant="full" />
+      )}
     </>
   )
 }

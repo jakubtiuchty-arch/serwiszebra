@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { ShoppingCart, Check } from 'lucide-react'
 import { useCartStore } from '@/lib/cart-store'
 import { trackAddToCart } from '@/lib/analytics'
+import NotifyWhenAvailable from './NotifyWhenAvailable'
 
 interface StickyAddToCartProps {
   product: {
@@ -67,7 +68,7 @@ export default function StickyAddToCart({ product }: StickyAddToCartProps) {
     setTimeout(() => setIsAdded(false), 2000)
   }
 
-  const isOnOrder = effectiveStock === 0
+  const isOutOfStock = effectiveStock === 0
 
   if (!isVisible) return null
 
@@ -80,28 +81,30 @@ export default function StickyAddToCart({ product }: StickyAddToCartProps) {
             {product.price_brutto.toFixed(2).replace('.', ',')} zł
           </div>
         </div>
-        <button
-          onClick={handleAddToCart}
-          className={`flex-shrink-0 py-3 px-5 rounded-lg font-semibold text-sm transition-all flex items-center gap-2 ${
-            isAdded
-              ? 'bg-[#A8F000] text-gray-900'
-              : isOnOrder
-              ? 'bg-amber-500 text-white active:bg-amber-600'
-              : 'bg-[#A8F000] text-gray-900 active:bg-[#96D800]'
-          }`}
-        >
-          {isAdded ? (
-            <>
-              <Check className="w-4 h-4" />
-              Dodano!
-            </>
-          ) : (
-            <>
-              <ShoppingCart className="w-4 h-4" />
-              {isOnOrder ? 'Zamów' : 'Do koszyka'}
-            </>
-          )}
-        </button>
+        {isOutOfStock ? (
+          <NotifyWhenAvailable sku={product.sku} productName={product.name} variant="compact" />
+        ) : (
+          <button
+            onClick={handleAddToCart}
+            className={`flex-shrink-0 py-3 px-5 rounded-lg font-semibold text-sm transition-all flex items-center gap-2 ${
+              isAdded
+                ? 'bg-[#A8F000] text-gray-900'
+                : 'bg-[#A8F000] text-gray-900 active:bg-[#96D800]'
+            }`}
+          >
+            {isAdded ? (
+              <>
+                <Check className="w-4 h-4" />
+                Dodano!
+              </>
+            ) : (
+              <>
+                <ShoppingCart className="w-4 h-4" />
+                Do koszyka
+              </>
+            )}
+          </button>
+        )}
       </div>
     </div>
   )
