@@ -410,6 +410,7 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
         'TAKMA'
       ]).filter(Boolean).join(', '),
       openGraph: {
+        type: 'website' as const,
         title: seoTitle,
         description: seoDescription,
         siteName: 'TAKMA - Autoryzowany Serwis Zebra',
@@ -423,7 +424,6 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
         }]
       },
       other: {
-        'og:type': 'product',
         'product:price:amount': product.price_brutto.toString(),
         'product:price:currency': 'PLN',
         'product:availability': (product.stock > 0 || (product.attributes?.stock_pl ?? 0) > 0 || (product.attributes?.stock_de ?? 0) > 0) ? 'in stock' : 'out of stock',
