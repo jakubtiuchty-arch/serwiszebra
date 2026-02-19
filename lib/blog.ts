@@ -33630,6 +33630,586 @@ USB: podłącz kabel, zainstaluj sterownik Zebra Setup Utilities. RS-232: kabel 
 
 👉 **[Serwis Drukarek Zebra — naprawy, konserwacja, części](/serwis-drukarek-zebra)**
 `
+  },
+  {
+    slug: 'serwis-terminala-zebra-tc21-tc26-diagnostyka-naprawa',
+    title: 'Serwis terminala Zebra TC21/TC26 — diagnostyka i naprawa [2026]',
+    excerpt: 'Kompletny przewodnik serwisowy po terminalach Zebra TC21 i TC26. Najczęstsze awarie, diagnostyka krok po kroku, cennik napraw. TC21 EOL (luty 2025) — kiedy naprawić, a kiedy przejść na TC22?',
+    coverImage: '/blog/serwis-terminala-zebra-tc21-tc26-diagnostyka-naprawa.jpeg',
+    coverImageAlt: 'Terminal mobilny Zebra TC21 z otwartą komorą baterii i narzędziami serwisowymi — diagnostyka i naprawa',
+    author: {
+      name: 'Krzysztof Wójcik',
+      role: 'Kierownik Serwisu TAKMA'
+    },
+    publishedAt: '2026-02-19',
+    readingTime: 15,
+    deviceType: 'terminale',
+    category: 'troubleshooting',
+    tags: ['TC21', 'TC26', 'TC21-HC', 'TC26-HC', 'serwis terminala zebra', 'naprawa TC21', 'naprawa TC26', 'diagnostyka', 'troubleshooting', 'TC21 EOL', 'wymiana ekranu', 'bateria TC21', 'SE4710', 'SE4100'],
+    seo: {
+      metaTitle: 'Serwis terminala Zebra TC21/TC26 — diagnostyka i naprawa [2026]',
+      metaDescription: 'Terminal Zebra TC21 lub TC26 nie działa? Diagnostyka ekranu, baterii, skanera, WiFi. Cennik napraw od 150 zł. TC21 EOL (luty 2025) — naprawić czy wymienić na TC22? Bezpłatna diagnostyka.',
+      keywords: [
+        // Główne frazy serwisowe
+        'serwis terminala zebra tc21',
+        'serwis terminala zebra tc26',
+        'naprawa zebra tc21',
+        'naprawa zebra tc26',
+        'serwis tc21', 'serwis tc26',
+        'naprawa tc21', 'naprawa tc26',
+        'serwis zebra tc21-hc',
+        'naprawa tc21-hc', 'naprawa tc26-hc',
+        'naprawa terminala tc21',
+        'naprawa kolektora danych zebra tc21',
+        'serwis terminali mobilnych zebra',
+        // Problemy i awarie — TC21
+        'zebra tc21 nie włącza się',
+        'zebra tc21 nie działa',
+        'zebra tc21 ekran nie reaguje',
+        'zebra tc21 bateria szybko się rozładowuje',
+        'zebra tc21 skaner nie działa',
+        'zebra tc21 wifi się rozłącza',
+        'zebra tc21 boot loop',
+        'zebra tc21 nie ładuje się',
+        'zebra tc21 pęknięty ekran',
+        'tc21 nie uruchamia się',
+        'tc21 dioda miga na czerwono',
+        'tc21 skaner nie czyta kodów',
+        'tc21 nie skanuje kodów',
+        'tc21 wifi zrywa połączenie',
+        // Problemy i awarie — TC26
+        'zebra tc26 nie włącza się',
+        'zebra tc26 nie działa',
+        'zebra tc26 ekran nie reaguje',
+        'zebra tc26 bateria szybko się rozładowuje',
+        'zebra tc26 skaner nie działa',
+        'zebra tc26 wifi się rozłącza',
+        'tc26 nie działa lte',
+        'tc26 bluetooth nie łączy',
+        // Koszty i cennik
+        'ile kosztuje naprawa tc21',
+        'ile kosztuje naprawa tc26',
+        'cennik napraw tc21',
+        'wymiana ekranu zebra tc21',
+        'wymiana ekranu zebra tc21 cena',
+        'wymiana baterii zebra tc21',
+        'części zamienne zebra tc21',
+        'ile kosztuje naprawa terminala zebra',
+        // EOL i migracja
+        'tc21 end of life',
+        'tc21 eol',
+        'tc21 koniec wsparcia',
+        'tc21 następca',
+        'tc21 vs tc22',
+        'tc21 vs tc26 różnice',
+        'czy opłaca się naprawiać tc21',
+        'tc21 zamiennik',
+        'migracja tc21 tc22',
+        // Techniczne
+        'konfiguracja datawedge tc21',
+        'aktualizacja firmware tc21',
+        'reset fabryczny zebra tc21',
+        'żywotność baterii zebra tc21',
+        'tc21 bateria pojemność',
+        // Angielskie
+        'zebra tc21 troubleshooting',
+        'zebra tc26 troubleshooting',
+        'zebra tc21 repair',
+        'zebra tc26 repair',
+        'zebra tc21 not turning on',
+        'zebra tc21 screen replacement',
+        'zebra tc21 common problems',
+        'zebra tc21 battery life'
+      ],
+      faqSchema: [
+        {
+          question: 'Ile kosztuje naprawa terminala Zebra TC21?',
+          answer: 'Koszt naprawy Zebra TC21 zależy od usterki: wymiana ekranu dotykowego (LCD + digitizer): 600-800 zł netto, wymiana baterii: 150-250 zł, naprawa skanera SE4710/SE4100: 500-800 zł, naprawa przycisku Power: 200-350 zł, naprawa portu USB-C: 200-350 zł. Diagnostyka jest bezpłatna, gwarancja 12 miesięcy na każdą naprawę.'
+        },
+        {
+          question: 'Ile kosztuje naprawa terminala Zebra TC26?',
+          answer: 'Koszt naprawy Zebra TC26 zależy od usterki: wymiana ekranu: 600-900 zł netto, wymiana baterii: 150-300 zł, naprawa skanera: 500-800 zł, naprawa portu USB/ładowania: 200-400 zł, naprawa płyty głównej: 400-700 zł. Diagnostyka bezpłatna, czas naprawy 2-5 dni roboczych.'
+        },
+        {
+          question: 'Zebra TC21 nie skanuje kodów — jak naprawić?',
+          answer: 'W 70% przypadków problem ze skanerem TC21 jest softwarowy. Sprawdź: 1) Czy DataWedge jest włączony, 2) Czy profil skanowania jest aktywny (Barcode Input → Enabled), 3) Wyczyść okienko skanera alkoholem IPA, 4) Otwórz DataWedge Demo i przetestuj. Jeśli demo skanuje a Twoja aplikacja nie — problem w konfiguracji profilu. Jeśli nie skanuje wcale — uszkodzony moduł SE4710/SE4100, wymaga serwisu (500-800 zł).'
+        },
+        {
+          question: 'Zebra TC21 nie włącza się — co robić?',
+          answer: 'Sprawdź kolejno: 1) Podłącz ładowarkę na minimum 30 minut (bateria może być całkowicie rozładowana), 2) Wyjmij i włóż baterię ponownie, 3) Wykonaj twardy reset — przytrzymaj Power przez 8+ sekund, 4) Spróbuj innej baterii. Jeśli LED ładowania nie świeci w ogóle — problem z portem USB-C lub płytą główną, wymagany serwis.'
+        },
+        {
+          question: 'Czy warto naprawiać Zebra TC21 po końcu wsparcia (EOL)?',
+          answer: 'TC21 osiągnął EOL w lutym 2025, ale wsparcie serwisowe Zebra trwa do marca 2028. Naprawa opłaca się gdy koszt jest niższy niż 40% ceny nowego TC22 (ok. 1400-1800 zł). Typowa wymiana ekranu (600-800 zł) lub baterii (150-250 zł) jest zdecydowanie opłacalna. Przy awarii płyty głównej lub wielu uszkodzeniach lepiej rozważyć upgrade na TC22.'
+        },
+        {
+          question: 'Czym różni się TC21 od TC26?',
+          answer: 'TC21 i TC26 mają identyczny hardware (procesor, ekran, skaner, bateria) z jedną kluczową różnicą: TC26 ma wbudowany modem LTE Cat 6, pełny GPS (A-GPS, GLONASS, BeiDou, Galileo) i eSIM. TC21 jest wyłącznie WiFi — do pracy wewnątrz budynków. TC26 jest przeznaczony dla pracowników terenowych (kurierzy, serwisanci).'
+        },
+        {
+          question: 'Jaka jest żywotność baterii Zebra TC21?',
+          answer: 'Bateria standardowa TC21 (3300 mAh, BTRY-TC2Y-1XMA1-01) wytrzymuje 8-10 godzin pracy. Bateria rozszerzona (5260 mAh, BTRY-TC2Y-2XMA1-01): 12-15 godzin. Po 300-500 cyklach ładowania (1.5-2.5 roku intensywnej pracy) pojemność spada poniżej 80%. Gdy LED miga czerwonym co 4 sekundy — czas na wymianę. Koszt oryginalnej baterii: 150-300 zł.'
+        },
+        {
+          question: 'Jak długo trwa naprawa terminala TC21/TC26?',
+          answer: 'Standardowa naprawa TC21/TC26 trwa 2-5 dni roboczych. Wymiana baterii: 1 dzień. Wymiana ekranu: 3-5 dni. Naprawa skanera: 3-5 dni. Naprawa płyty głównej: 5-7 dni. Tryb express (24-48h) dostępny za dopłatą. Odbiór kurierem z całej Polski w cenie.'
+        }
+      ]
+    },
+    content: `
+> **Szybka odpowiedź:** Terminale **Zebra TC21** i **TC26** to jedne z najpopularniejszych urządzeń mobilnych w polskich magazynach i handlu detalicznym — naprawiamy ich setki rocznie. Najczęstsze awarie: **pęknięty ekran** (upadki), **zużyta bateria** (cykle), **skaner nie czyta** (DataWedge/sprzęt), **WiFi zrywa połączenie** (znany problem TC21). TC21/TC26 osiągnęły **EOL w lutym 2025** — wsparcie serwisowe Zebra trwa do **marca 2028**. Następca: **TC22/TC27**. Koszt naprawy: od **150 zł** (bateria) do **900 zł** (ekran). **Diagnostyka bezpłatna.**
+
+*Dane na podstawie 5000+ napraw terminali Zebra w autoryzowanym serwisie TAKMA (25 lat doświadczenia). Statystyki awaryjności oparte na własnej bazie serwisowej z lat 2020-2026.*
+
+## TL;DR — Diagnostyka TC21/TC26 w pigułce
+
+| Problem | Objaw | Sam naprawisz? | Koszt serwisu |
+|---------|-------|----------------|---------------|
+| Pęknięty ekran | Rysy, pęknięcia, brak reakcji na dotyk | ❌ Serwis | 600-900 zł |
+| Zużyta bateria | <6h pracy, LED czerwony co 4 sek. | ✅ Wymień sam | 150-300 zł |
+| Skaner nie czyta | Brak odczytu, DataWedge wyłączony | ✅/❌ | 0-800 zł |
+| Nie włącza się | Czarny ekran, brak reakcji | ✅/❌ | 0-700 zł |
+| WiFi się rozłącza | Częste zrywanie połączenia w magazynie | ✅ Tak | 0 zł (config) |
+| Boot loop | Pętla restartu, zawiesza się na logo | ✅/❌ | 0-400 zł |
+| Przycisk Power/Scan | Nie reaguje, wymaga mocnego nacisku | ❌ Serwis | 200-400 zł |
+| Port USB-C | Nie ładuje przez kabel | ❌ Serwis | 200-400 zł |
+
+---
+
+## TC21 vs TC26 — specyfikacja i różnice
+
+Zanim przejdziemy do diagnostyki — kluczowe różnice między modelami, bo wpływają na dostępność części i zakres naprawy:
+
+| Parametr | TC21 | TC26 |
+|----------|------|------|
+| **Status** | **EOL (luty 2025)** | **EOL (luty 2025)** |
+| Wsparcie serwisowe | Do III 2028 | Do III 2028 |
+| Procesor | Snapdragon 660, 8-core, 1.8/2.2 GHz | identyczny |
+| Wyświetlacz | 5.0" HD (1280×720), Gorilla Glass | identyczny |
+| RAM / Flash | 3 lub 4 GB / 32 lub 64 GB | identyczny |
+| Skaner | SE4100 lub SE4710 | identyczny |
+| Bateria std/ext | 3300 mAh / 5260 mAh | identyczny |
+| WiFi | 802.11 a/b/g/n/ac (WiFi 5) | identyczny |
+| Bluetooth | 5.0 BLE | identyczny |
+| **WWAN (LTE)** | **NIE** | **TAK — LTE Cat 6** |
+| **GPS** | **Ograniczony (WiFi-based)** | **Pełny: A-GPS, GLONASS, BeiDou, Galileo** |
+| **eSIM** | NIE | TAK |
+| NFC | Tak (Apple VAS, Google Smart Tap) | Tak |
+| IP | IP67 | IP67 |
+| Upadki | 1.2 m (bez boota) / 1.5 m (z bootem) | identyczny |
+| Waga | 236 g (std bat) | nieco więcej (antena WWAN) |
+| Premiera | Czerwiec 2020 | Czerwiec 2020 |
+| System | Android 10 → 14 | Android 10 → 14 |
+| Następca | **TC22** | **TC27** |
+
+> **TC21 vs TC26 — jednym zdaniem:** Hardware identyczny. Jedyna różnica: TC26 ma modem LTE Cat 6, pełny GPS i eSIM. TC21 jest **wyłącznie WiFi** — do pracy „w 4 ścianach". TC26 jest dla pracowników terenowych (kurierzy, serwisanci, inspektorzy).
+
+---
+
+## TC21/TC26 End of Life — co to oznacza w 2026?
+
+Zebra TC21 i TC26 osiągnęły **End of Sale (EOS) 28 lutego 2025**. Nie da się już kupić nowego egzemplarza u autoryzowanego dystrybutora.
+
+| Element | Status po EOL |
+|---------|---------------|
+| Nowe urządzenia | **Niedostępne** (tylko rynek wtórny) |
+| Oryginalne części zamienne | **Dostępne** do marca 2028 |
+| Wsparcie serwisowe Zebra | **Do 31 marca 2028** |
+| Aktualizacje LifeGuard | Do marca 2028 (security patches) |
+| Ostatni wspierany Android | **Android 14** |
+| Następca | **TC22** (WiFi) / **TC27** (WiFi + 5G/LTE) |
+
+> **Co to znaczy dla Ciebie?** Masz jeszcze **2 lata** wsparcia serwisowego i dostępności części. Naprawa TC21/TC26 jest opłacalna — nowy TC22 kosztuje 3500-4500 zł netto. Wymiana ekranu za 600-800 zł to ułamek tej kwoty.
+
+---
+
+## Najczęstsze awarie TC21/TC26
+
+### 1. Pęknięty/uszkodzony ekran dotykowy
+
+**Najczęstsza przyczyna wizyt w serwisie** (35% zgłoszeń) — mimo Gorilla Glass i IP67, upadki na beton z >1.2 m bez protective boota potrafią zniszczyć ekran.
+
+**Objawy:**
+- Widoczne pęknięcia lub rysy na szkle
+- Ekran nie reaguje na dotyk (całkowicie lub w części)
+- Wyświetla obraz, ale dotyk nie działa
+- Martwe piksele, kolorowe linie
+- Ghost touch — dotyk „sam klika"
+
+**Co możesz sprawdzić sam:**
+1. **Zdejmij folię ochronną** — stara folia może blokować dotyk
+2. **Wyczyść ekran** — tłuszcz i brud ograniczają czułość
+3. **Zmień tryb dotyku:** Settings → Display → Touch Mode:
+   - **Finger Only** — standardowy
+   - **Glove Mode** — dla rękawiczek (zwiększona czułość)
+   - **Stylus & Finger** — dla rysików
+4. **Twardy reset** (Power 8 sek.) — jeśli dotyk przestał reagować po aktualizacji
+
+**Kiedy wymaga serwisu:**
+- Widoczne pęknięcie — wymiana LCD + digitizer (zintegrowany moduł)
+- Ghost touch po upadku — uszkodzony flex cable digitizera
+
+| Naprawa ekranu | Koszt |
+|----------------|-------|
+| Wymiana LCD + digitizer (oryginał) | 600-900 zł |
+| Wymiana LCD + digitizer (zamiennik) | 400-600 zł |
+| Wymiana flex cable LCD | 200-300 zł |
+
+---
+
+### 2. Bateria szybko się rozładowuje / nie ładuje
+
+**25% zgłoszeń serwisowych** — bateria standardowa 3300 mAh wytrzymuje 8-10 godzin, ale po 1.5-2.5 roku intensywnej pracy (300-500 cykli) pojemność spada poniżej 80%.
+
+**Opcje baterii TC21/TC26:**
+
+| Bateria | Pojemność | Part Number | Czas pracy | Koszt wymiany |
+|---------|-----------|-------------|------------|---------------|
+| Standard | 3300 mAh | BTRY-TC2Y-1XMA1-01 | 8-10h | 150-250 zł |
+| Extended | 5260 mAh | BTRY-TC2Y-2XMA1-01 | 12-15h | 200-350 zł |
+
+**Diagnostyka LED ładowania:**
+
+| LED | Znaczenie |
+|-----|-----------|
+| Czerwony stały | Ładuje się |
+| Zielony stały | Naładowana (>90%) |
+| **Czerwony miga co 4 sek.** | **Bateria EOL — WYMIENIĆ** |
+| Żółty/pomarańczowy | Ładowanie wstrzymane (temperatura poza 5-40°C) |
+| LED nie świeci | Problem z portem, zasilaczem lub płytą główną |
+
+**Co możesz sprawdzić sam:**
+1. **Battery Manager** (Settings → Battery) — sprawdź liczbę cykli i health status
+2. **PowerPrecision** — wbudowana diagnostyka zdrowia baterii
+3. Jeśli LED miga czerwonym co 4 sek. — bateria do wymiany (użytkownik wymienia sam)
+4. Sprawdź czy ładujesz w temperaturze 5-40°C — poza tym zakresem TC21 wstrzymuje ładowanie
+
+**Kiedy wymaga serwisu:**
+- LED nie świeci wcale przy podłączeniu ładowarki → uszkodzony port USB-C lub pin ładowania
+- Bateria puchnie (deformacja obudowy) → **natychmiast wyjąć, nie używać** → serwis
+
+**Optymalizacja żywotności baterii:**
+- Nie zostawiaj terminala na ładowarce na noc (po 100% odłącz)
+- Przechowuj w 15-25°C
+- Używaj oryginalnych zasilaczy i stacji dokujących
+- Wyłącz GPS i Bluetooth gdy niepotrzebne
+- Ustaw Battery Saver w Settings → Battery
+
+---
+
+### 3. Skaner nie działa / nie czyta kodów
+
+**20% zgłoszeń** — ale aż **70% to usterki softwarowe** (DataWedge), nie sprzętowe. Nie wymieniaj modułu skanera, zanim nie sprawdzisz konfiguracji.
+
+**Warianty skanera w TC21/TC26:**
+
+| Silnik | Typ | Zasięg 1D (Code 39, 20 mil) | Zasięg 2D (QR 20 mil) |
+|--------|-----|------------------------------|------------------------|
+| SE4100 | Podstawowy imager | do ~40 cm | do ~25 cm |
+| SE4710 | PRZM Intelligent | do **66 cm** | do **36 cm** |
+
+#### Krok 1: Sprawdź DataWedge (rozwiązuje 70% przypadków)
+
+1. Otwórz aplikację **DataWedge** (ikona na pulpicie lub Settings → DataWedge)
+2. Sprawdź czy DataWedge jest **włączony** (niebieski checkbox u góry)
+3. Znajdź profil Twojej aplikacji lub użyj profilu **Profile0 (default)**
+4. Wejdź w profil → **Barcode Input** → **Enabled** musi być ON
+5. Sprawdź **Scanner Selection** → powinno być „Auto" lub „Internal Imager"
+6. Sprawdź **Keystroke Output** → **Enabled** musi być ON
+
+#### Krok 2: Wyczyść okienko skanera
+
+- Użyj ściereczki z mikrofibry lub wacika nasączonego alkoholem IPA
+- Nie używaj środków ściernych — zarysują szybkę okienka
+- Sprawdź czy okienko nie jest pęknięte lub zmatowiałe (po upadku)
+
+#### Krok 3: Test diagnostyczny
+
+- Otwórz **DataWedge Demo** (preinstalowana aplikacja testowa)
+- Nakieruj skaner na dowolny kod kreskowy
+- Jeśli DataWedge Demo skanuje, a Twoja aplikacja nie — problem jest w konfiguracji profilu
+- Jeśli DataWedge Demo też nie skanuje — przejdź do kroku 4
+
+#### Krok 4: Restart i aktualizacja firmware
+
+1. Przytrzymaj **Power** przez 8 sekund → **Restart**
+2. Po restarcie przetestuj skanowanie
+3. Sprawdź aktualizacje LifeGuard: Settings → System → System Update
+4. Zainstaluj najnowszy firmware — rozwiązuje znane bugi skanera
+
+#### Krok 5: Jeśli nic nie pomaga — serwis
+
+Problem sprzętowy modułu SE4710 lub SE4100 — najczęściej uszkodzony flex cable lub silnik skanera po upadku.
+
+| Naprawa skanera | Koszt |
+|-----------------|-------|
+| Wymiana silnika SE4710 | 400-600 zł |
+| Wymiana silnika SE4100 | 500-700 zł |
+| Wymiana flex cable skanera | 200-350 zł |
+| Wymiana szybki okienka skanera | 100-200 zł |
+
+Więcej o diagnostyce skanera: [Skaner terminala Zebra nie działa — diagnostyka i naprawa →](/blog/skaner-terminala-zebra-nie-dziala-diagnostyka-naprawa)
+
+---
+
+### 4. WiFi zrywa połączenie / słaby roaming
+
+**10% zgłoszeń** — TC21 ma **znany problem z roamingiem** między access pointami w dużych magazynach. Urządzenie „przykleja się" do słabego AP zamiast przełączyć się na silniejszy.
+
+**Znane problemy zgłaszane na Zebra Support Community:**
+- TC21 traci WiFi przy przechodzeniu między AP (roaming)
+- Połączenie zrywa się i łączy ponownie co kilka minut
+- Słaby zasięg mimo silnej infrastruktury WiFi
+- „No AP found" mimo widocznej sieci na innych urządzeniach
+
+**Rozwiązania (konfiguracja — koszt 0 zł):**
+
+1. **Wymuś 5 GHz** — Settings → WiFi → Advanced → Band Preference → 5 GHz only
+2. **Włącz Fast Transition (802.11r):**
+   - Przez StageNow lub MX Wi-Fi Manager
+   - Wymaga wsparcia na infrastrukturze (AP musi obsługiwać 802.11r)
+3. **Włącz 802.11k i 802.11v** — przyspiesza wykrywanie lepszych AP
+4. **Skonfiguruj PMKID caching** — przyspiesza re-uwierzytelnienie po roamingu
+5. **Dla infrastruktury Cisco** — włącz CCKM (Cisco Centralized Key Management)
+6. **Wyłącz WiFi Power Save** — Settings → WiFi → Advanced → WiFi sleep → Never
+7. **Zaktualizuj firmware** — LifeGuard patche naprawiają bugi roamingu
+
+**Kiedy wymaga serwisu:**
+- WiFi nie łączy się wcale (nawet po factory reset) → uszkodzony moduł WiFi → naprawa płyty głównej
+- Rzadko — koszt: 400-700 zł
+
+**Specyficznie dla TC26 — problemy z LTE:**
+
+| Problem | Rozwiązanie |
+|---------|-------------|
+| Brak zasięgu LTE | Sprawdź kartę SIM / aktywację eSIM |
+| Wolne dane | Sprawdź ustawienia APN operatora |
+| Brak GPS | Włącz Location Services → Mode → High Accuracy |
+| Przełączanie WiFi/LTE | Settings → Network → Preferred network type |
+
+---
+
+### 5. TC21/TC26 nie włącza się
+
+**Częsty problem** — ale w 60% przypadków rozwiązanie jest proste: rozładowana bateria lub konieczność twardego resetu.
+
+**Diagnostyka krok po kroku:**
+
+| Krok | Akcja | Oczekiwany wynik |
+|------|-------|-----------------|
+| 1 | Podłącz ładowarkę i czekaj **30 minut** | LED ładowania powinien się zaświecić |
+| 2 | Wyjmij baterię, odczekaj 30 sek., włóż ponownie | Eliminuje zacięcie kontaktów |
+| 3 | Przytrzymaj **Power 8+ sekund** | Hard reset — wymusza restart |
+| 4 | Spróbuj **innej baterii** | Eliminuje baterię jako przyczynę |
+| 5 | Recovery Mode: trzymaj **PTT** + naciśnij **Power** | Pojawia się Android Recovery Menu |
+
+**Jeśli LED ładowania nie świeci wcale** — problem z portem USB-C, pinem ładowania lub płytą główną. Wymagany serwis.
+
+| Naprawa | Koszt |
+|---------|-------|
+| Wymiana portu USB-C | 200-350 zł |
+| Wymiana pinu ładowania (2-pin na tylnej obudowie) | 200-400 zł |
+| Naprawa płyty głównej | 400-700 zł |
+
+---
+
+### 6. Boot loop / zawiesza się na logo Zebra
+
+**Urządzenie restartuje się w pętli** lub zatrzymuje się na logo Zebra/Android. Najczęściej po nieudanej aktualizacji firmware lub przepełnieniu pamięci.
+
+**3 metody naprawy:**
+
+**Metoda 1: Soft Reset**
+- Przytrzymaj **Power 8 sekund** → urządzenie się wyłączy
+- Włącz ponownie normalnie
+
+**Metoda 2: Recovery Mode**
+1. Wyłącz urządzenie (wyjmij baterię jeśli nie reaguje)
+2. Włóż baterię, przytrzymaj przycisk **PTT** (Push-To-Talk, NIE żółty scan)
+3. Jednocześnie naciśnij **Power**
+4. Trzymaj PTT aż pojawi się **Android Recovery Menu**
+5. Opcje: **Wipe cache partition** (bezpieczna) lub **Wipe data/factory reset** (kasuje dane)
+
+**Metoda 3: ADB Sideload (zaawansowane)**
+
+Wykonaj komendę: \`adb reboot recovery\` → z menu Recovery wybierz „Apply update from ADB" → wgraj najnowszy LifeGuard pakiet
+
+**Uwaga:** Jeśli boot loop wraca po factory reset — problem sprzętowy (uszkodzona pamięć flash lub płyta główna). Wymagany serwis.
+
+Więcej o resecie: [Reset terminala Zebra — Factory vs Enterprise Reset →](/blog/reset-fabryczny-terminal-zebra-factory-enterprise)
+
+---
+
+### 7. Uszkodzone przyciski (Power, Scan trigger, Volume)
+
+**10% zgłoszeń** — przyciski fizyczne zużywają się mechanicznie, szczególnie przycisk skanowania (trigger) przy intensywnym użyciu magazynowym.
+
+**Objawy:**
+- Przycisk wymaga mocniejszego nacisku niż kiedyś
+- Przycisk nie reaguje wcale
+- Przycisk „zacina się" w pozycji wciśniętej
+- Przycisk reaguje podwójnie (double press)
+
+**Co możesz sprawdzić sam:**
+1. **Zebra Device Diagnostic Tool** (DDT) → Button Test → sprawdź każdy przycisk
+2. **Przemapuj przyciski** przez Settings → Key Programmer — przypisz skanowanie do innego przycisku
+3. **Wyczyść wokół przycisku** — brud i wilgoć mogą blokować mechanizm
+
+**Kiedy wymaga serwisu** — zużyty switch wymaga wymiany:
+
+| Część | Koszt |
+|-------|-------|
+| Power switch | 200-300 zł |
+| Scan trigger (side key set) | 200-350 zł |
+| Volume buttons | 150-250 zł |
+
+Więcej: [Przycisk zasilania lub skanowania TC21/TC26 nie działa →](/blog/zebra-tc21-tc26-przycisk-zasilania-skanowania-nie-dziala)
+
+---
+
+## TC21 vs TC22 — czy warto upgrade'ować?
+
+TC22 to następca TC21 z istotnymi ulepszeniami. Porównanie:
+
+| Parametr | TC21 (EOL) | TC22 (aktualny) |
+|----------|-----------|-----------------|
+| Ekran | 5" HD (1280×720) | **6" FHD+ (2160×1080)** — 32% większy |
+| Procesor | Snapdragon 660, 8-core | **Qualcomm 5430, 6-core** — 2× wydajność |
+| RAM | 3/4 GB | **6/8 GB** |
+| Storage | 32/64 GB | **64/128 GB** |
+| WiFi | WiFi 5 (802.11ac) | **WiFi 6E (802.11ax)** |
+| Bluetooth | 5.0 | **5.2** |
+| IP | IP67 | **IP68** |
+| Upadki | 1.2 m / 1.5 m (z bootem) | **1.5 m** na beton |
+| Skaner | SE4100/SE4710 | SE4100/SE4710/**SE55** |
+| Android | max 14 | do **Android 16** |
+| Wsparcie | do III 2028 | do ~**2031** |
+| Grubość | 13.7 mm | **~10% cieńszy** |
+| Cena nowego | Niedostępny | ~3500-4500 zł netto |
+
+**Kiedy naprawić TC21:**
+- Koszt naprawy < 1400 zł (40% ceny nowego TC22)
+- Wsparcie do 2028 jest wystarczające
+- Infrastruktura WiFi nie obsługuje WiFi 6
+- Budżet jest ograniczony
+
+**Kiedy wymienić na TC22:**
+- Koszt naprawy > 1500 zł
+- Potrzebujesz WiFi 6E (nowa infrastruktura AP)
+- Użytkownicy narzekają na mały ekran (5" HD vs 6" FHD+)
+- Planujesz flotę na 3+ lata
+- Potrzebujesz 8 GB RAM (ciężkie aplikacje WMS)
+
+---
+
+## Cennik napraw TC21/TC26 — podsumowanie 2026
+
+| Naprawa | TC21 | TC26 | Czas naprawy |
+|---------|------|------|-------------|
+| Wymiana ekranu (LCD + digitizer) | 600-800 zł | 600-900 zł | 3-5 dni |
+| Wymiana baterii (oryginalna) | 150-250 zł | 150-300 zł | 1 dzień |
+| Naprawa skanera SE4710/SE4100 | 500-800 zł | 500-800 zł | 3-5 dni |
+| Naprawa przycisku Power | 200-350 zł | 200-400 zł | 2-3 dni |
+| Naprawa portu USB-C | 200-350 zł | 200-400 zł | 2-4 dni |
+| Naprawa płyty głównej | 400-700 zł | 400-700 zł | 5-7 dni |
+| Wymiana obudowy | 250-450 zł | 300-500 zł | 3-5 dni |
+| Konserwacja (czyszczenie + testy) | 149 zł | 149 zł | 1-2 dni |
+
+**Ceny netto. Diagnostyka bezpłatna. Gwarancja 12 miesięcy na każdą naprawę.**
+
+---
+
+## Co naprawisz sam, a co wymaga serwisu?
+
+### ✅ Sam naprawisz (~50% problemów):
+
+- **Wymiana baterii** — wysuwasz zatrzask, wyjmujesz starą, wkładasz nową
+- **Konfiguracja DataWedge** — 70% problemów ze skanerem to ustawienia
+- **Reset WiFi** — wymuś 5 GHz, włącz 802.11r, wyłącz Power Save
+- **Soft/hard reset** — Power 8 sek. lub Recovery Mode (PTT + Power)
+- **Factory reset** — z Settings lub Recovery Mode (kasuje dane!)
+- **Czyszczenie okienka skanera** — alkohol IPA + mikrofibra
+- **Zmiana trybu dotyku** — Glove Mode dla rękawiczek
+
+### ❌ Wymaga serwisu:
+
+- Pęknięty ekran (wymiana LCD + digitizer)
+- Uszkodzony port USB-C (wymiana złącza)
+- Awaria modułu skanera SE4710/SE4100
+- Zużyty przycisk Power/Scan (wymiana switcha)
+- Boot loop po factory reset (uszkodzona płyta/flash)
+- Brak LED ładowania (problem z pinem lub płytą)
+
+---
+
+## Narzędzia diagnostyczne TC21/TC26
+
+### Zebra Device Diagnostic Tool (DDT)
+
+Darmowa aplikacja od Zebra — zainstaluj z Google Play (**Zebra Device Diagnostic Tool**, wersja 3.1):
+
+| Test | Co sprawdza |
+|------|-------------|
+| Scanner Test | Działanie skanera we wszystkich symbologiach |
+| Button Test | PTT, scan trigger, przyciski głośności, Power |
+| Touch Screen Test | Responsywność ekranu dotykowego |
+| WiFi Test | MAC, siła sygnału, ESSID, IP, prędkość |
+| Battery Test | Health, napięcie, prąd, temperatura, cykle |
+| Bluetooth Test | Radio BT, status, power cycle |
+| USB Test | Działanie portu USB |
+| Camera Test | Robienie zdjęcia, ocena jakości |
+
+### Battery Manager (wbudowany)
+- Settings → Battery Manager
+- Pokazuje: health status, napięcie, prąd, temperaturę, liczbę cykli
+
+### StageNow (Zebra Mobility DNA)
+- Narzędzie do masowej konfiguracji urządzeń
+- Deploy konfiguracji przez skanowanie barcode, NFC tag lub ADB
+- Rozwiązuje problemy z WiFi, DataWedge i profilami firmowymi
+
+---
+
+## Konserwacja TC21/TC26 — przedłuż żywotność
+
+| Element | Częstotliwość | Jak? |
+|---------|---------------|------|
+| Okienko skanera | Co tydzień | Alkohol IPA + mikrofibra |
+| Ekran dotykowy | Co tydzień | Wilgotna ściereczka, bez alkoholu |
+| Port USB-C | Co miesiąc | Dmuchawka / sprężone powietrze |
+| Pin ładowania (2-pin tył) | Co miesiąc | Wacik + alkohol IPA |
+| Styki w stacji dokującej | Co miesiąc | Czysta ściereczka |
+| Aktualizacja firmware | Co kwartał | Settings → System → System Update |
+
+---
+
+## Zgłoś naprawę TC21/TC26
+
+- **Bezpłatna diagnostyka** — sprawdzimy czy wymiana jest konieczna
+- **Bezpłatny odbiór kurierem** z całej Polski
+- **Naprawa 2-5 dni** roboczych (express 24-48h za dopłatą)
+- **Gwarancja 12 miesięcy** na każdą naprawę
+- **Oryginalne części Zebra** w magazynie
+
+[**Zgłoś naprawę →**](/#formularz) | [Zadzwoń: +48 601 619 898](tel:+48601619898) | [Serwis terminali Zebra](/serwis-terminali-zebra)
+
+---
+
+## Powiązane poradniki
+
+- [TOP 10 awarii terminali Zebra — diagnostyka i rozwiązania](/blog/najczestsze-awarie-terminali-zebra-top10)
+- [Przycisk Power/Scan TC21/TC26 nie działa — naprawa](/blog/zebra-tc21-tc26-przycisk-zasilania-skanowania-nie-dziala)
+- [Skaner terminala Zebra nie działa — diagnostyka i naprawa](/blog/skaner-terminala-zebra-nie-dziala-diagnostyka-naprawa)
+- [Reset terminala Zebra — Factory vs Enterprise Reset](/blog/reset-fabryczny-terminal-zebra-factory-enterprise)
+- [Bateria terminala Zebra szybko się rozładowuje — diagnostyka](/blog/bateria-terminal-zebra-szybko-sie-rozladowuje-diagnostyka)
+- [Ekran dotykowy terminala Zebra nie reaguje — diagnostyka](/blog/ekran-dotykowy-terminal-zebra-nie-reaguje-diagnostyka)
+- [Terminal Zebra nie włącza się — Fastboot i Boot Loop](/blog/zebra-terminal-nie-wlacza-sie-fastboot-boot-loop)
+- [Zebra TC52 vs TC53 vs TC501 — porównanie terminali](/blog/zebra-tc52-vs-tc53-vs-tc501-porownanie-terminali)
+
+[Serwis terminali Zebra — wszystkie usługi →](/serwis-terminali-zebra)
+
+*Ostatnia aktualizacja: luty 2026*
+`
   }
 
 ]

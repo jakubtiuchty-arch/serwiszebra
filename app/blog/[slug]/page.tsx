@@ -381,7 +381,7 @@ export default function BlogPostPage({
         <article className="py-8 sm:py-12">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             {/* Back link */}
-            <BackButton 
+            <BackButton
               fallbackUrl="/blog"
               label="Wróć do bloga"
               className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-6"
@@ -479,7 +479,7 @@ export default function BlogPostPage({
             )}
 
             {/* Content */}
-            <div 
+            <div
               className="prose prose-sm sm:prose-lg max-w-none prose-headings:font-bold prose-headings:text-gray-900 prose-p:text-gray-700 prose-a:text-blue-600 prose-strong:text-gray-900 prose-code:bg-gray-100 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-pre:bg-gray-900 prose-blockquote:border-blue-500 prose-blockquote:bg-blue-50 prose-blockquote:py-1 prose-blockquote:not-italic prose-img:rounded-xl"
               dangerouslySetInnerHTML={{ __html: parseMarkdown(post.content) }}
             />
@@ -489,7 +489,7 @@ export default function BlogPostPage({
               <h3 className="text-sm font-semibold text-gray-500 uppercase mb-4">Tagi</h3>
               <div className="flex flex-wrap gap-2">
                 {post.tags.map((tag) => (
-                  <span 
+                  <span
                     key={tag}
                     className="inline-flex items-center gap-1 px-3 py-1.5 bg-gray-100 rounded-full text-sm text-gray-700 hover:bg-gray-200 transition-colors"
                   >
@@ -1097,6 +1097,7 @@ function generateHeadingId(text: string): string {
     .replace(/-+/g, '-')      // Replace multiple hyphens with single
     .replace(/^-|-$/g, '')    // Remove leading/trailing hyphens
 }
+
 
 // Process inline markdown (bold, italic, links, code, images)
 function processInline(text: string): string {
