@@ -2649,7 +2649,7 @@ Najszybsza metoda:
     slug: 'serwis-terminala-zebra-mc3300-mc3300x-diagnostyka-naprawa',
     title: 'Serwis terminala Zebra MC3300/MC3300x — diagnostyka i naprawa [2026]',
     excerpt: 'Kompletny poradnik serwisowy Zebra MC3300x. Najczęstsze awarie, koszty napraw, diagnostyka skanera SE4850-ER, bateria Hot Swap, IP54 vs IP65. Kiedy naprawiać, a kiedy migrować na MC3400?',
-    coverImage: '/blog/serwis-terminala-zebra-mc3300-mc3300x-diagnostyka-naprawa.jpeg',
+    coverImage: '/blog/serwis-terminala-zebra-mc3300-mc3300x-diagnostyka-naprawa.webp',
     coverImageAlt: 'Terminal mobilny Zebra MC3300x z fizyczną klawiaturą — widok diagnostyczny z ikonami serwisowymi',
     author: {
       name: 'Krzysztof Wójcik',
