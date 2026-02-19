@@ -23,6 +23,8 @@ export default function StickyAddToCart({ product }: StickyAddToCartProps) {
   const [isAdded, setIsAdded] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
   const [liveStock, setLiveStock] = useState<number | null>(null)
+  const [livePrice, setLivePrice] = useState<number | null>(null)
+  const [livePriceBrutto, setLivePriceBrutto] = useState<number | null>(null)
   const addItem = useCartStore((state) => state.addItem)
 
   useEffect(() => {
@@ -44,6 +46,10 @@ export default function StickyAddToCart({ product }: StickyAddToCartProps) {
       .then(data => {
         if (data.found) {
           setLiveStock(data.total_stock ?? 0)
+          if (data.live_price > 0) {
+            setLivePrice(data.live_price)
+            setLivePriceBrutto(data.live_price_brutto)
+          }
         }
       })
       .catch(() => {})
@@ -51,16 +57,18 @@ export default function StickyAddToCart({ product }: StickyAddToCartProps) {
   }, [product.sku])
 
   const effectiveStock = liveStock !== null ? liveStock : product.stock
+  const effectivePrice = livePrice ?? product.price
+  const effectivePriceBrutto = livePriceBrutto ?? product.price_brutto
 
   const handleAddToCart = () => {
-    trackAddToCart(product.name, product.id, 1, product.price_brutto)
+    trackAddToCart(product.name, product.id, 1, effectivePriceBrutto)
     addItem({
       id: product.id,
       name: product.name,
       slug: product.slug,
       sku: product.sku,
-      price: product.price,
-      price_brutto: product.price_brutto,
+      price: effectivePrice,
+      price_brutto: effectivePriceBrutto,
       product_type: product.product_type,
       stock: effectiveStock,
     })
@@ -78,7 +86,7 @@ export default function StickyAddToCart({ product }: StickyAddToCartProps) {
         <div className="flex-1 min-w-0">
           <div className="text-sm font-semibold text-gray-900 truncate">{product.name}</div>
           <div className="text-sm font-bold text-gray-900">
-            {product.price_brutto.toFixed(2).replace('.', ',')} zł
+            {effectivePriceBrutto.toFixed(2).replace('.', ',')} zł
           </div>
         </div>
         {isOutOfStock ? (

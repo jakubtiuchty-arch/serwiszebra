@@ -519,14 +519,16 @@ export async function checkPriceAndAvailability(skus: string[], tryAllFormats: b
   let skusToCheck = skus
   if (tryAllFormats && skus.length === 1) {
     const sku = skus[0]
-    const withoutZB = sku.replace(/^ZB/i, '')
+    const withoutPrefix = sku.replace(/^(ZB|SB)/i, '')
 
-    // Formaty do przetestowania
+    // Formaty do przetestowania (ZB = głowice/drukarki, SB = baterie/akcesoria)
     skusToCheck = [
       sku,                                        // oryginalny: P1112640-218
-      'ZB' + withoutZB,                           // ZB + oryginalny: ZBP1112640-218
-      'ZB' + withoutZB.replace(/-/g, ''),         // ZB + bez myślników: ZBP1112640218
-      withoutZB.replace(/-/g, ''),                // bez myślników: P1112640218
+      'ZB' + withoutPrefix,                       // ZB + oryginalny: ZBP1112640-218
+      'SB' + withoutPrefix,                       // SB + oryginalny: SBBTRY-TC2Y-2XMA1-01
+      'ZB' + withoutPrefix.replace(/-/g, ''),     // ZB + bez myślników: ZBP1112640218
+      'SB' + withoutPrefix.replace(/-/g, ''),     // SB + bez myślników: SBBTRYTC2Y2XMA101
+      withoutPrefix.replace(/-/g, ''),            // bez myślników: P1112640218
     ].filter((v, i, a) => a.indexOf(v) === i)     // usuń duplikaty
 
     console.log('[Ingram] Próbuję formatów SKU:', skusToCheck)
@@ -617,14 +619,16 @@ export async function testSingleSku(sku: string): Promise<IngramResponse> {
  * Ograniczona wersja - tylko najważniejsze kombinacje (max 6 requestów)
  */
 export async function testSkuFormats(sku: string): Promise<IngramResponse> {
-  const withoutZB = sku.replace(/^ZB/i, '')
+  const withoutPrefix = sku.replace(/^(ZB|SB)/i, '')
 
   // Formaty SKU do przetestowania (IMCEE-XML 2.0 używa ItemID jako atrybutu)
   const formats = [
     sku,                                        // oryginalny: P1112640-218
-    'ZB' + withoutZB,                           // ZB + oryginalny: ZBP1112640-218
-    'ZB' + withoutZB.replace(/-/g, ''),         // ZB + bez myślników: ZBP1112640218
-    withoutZB.replace(/-/g, ''),                // bez myślników: P1112640218
+    'ZB' + withoutPrefix,                       // ZB + oryginalny: ZBP1112640-218
+    'SB' + withoutPrefix,                       // SB + oryginalny: SBBTRY-TC2Y-2XMA1-01
+    'ZB' + withoutPrefix.replace(/-/g, ''),     // ZB + bez myślników: ZBP1112640218
+    'SB' + withoutPrefix.replace(/-/g, ''),     // SB + bez myślników: SBBTRYTC2Y2XMA101
+    withoutPrefix.replace(/-/g, ''),            // bez myślników: P1112640218
   ].filter((v, i, a) => a.indexOf(v) === i)     // usuń duplikaty
 
   const results: { format: string; found: boolean }[] = []

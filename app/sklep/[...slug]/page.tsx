@@ -883,18 +883,7 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
                   PN: <span className="font-mono font-medium text-gray-600">{product.sku}</span>
                 </p>
 
-                {/* Cena */}
-                <div className="product-price flex items-baseline gap-2 mb-1">
-                  <span className="text-2xl sm:text-3xl font-bold text-gray-900">
-                    {product.price.toFixed(2).replace('.', ',')} zł
-                  </span>
-                  <span className="text-sm text-gray-500">netto</span>
-                </div>
-                <div className="text-base text-gray-500 mb-4">
-                  {product.price_brutto.toFixed(2).replace('.', ',')} zł brutto
-                </div>
-
-                {/* Dostępność + Dodaj do koszyka (live stock z API Ingram) */}
+                {/* Cena + Dostępność + Dodaj do koszyka (live price & stock z API Ingram) */}
                 <ProductPurchasePanel
                   product={{
                     id: product.id,

@@ -132,13 +132,10 @@ export const SHOP_CATEGORIES: ProductTypeCategory[] = [
         models: [
           { id: 'tc21-tc26', name: 'Zebra TC21/TC26', slug: 'zebra-tc21-tc26', resolutions: [] },
           { id: 'tc22-tc27', name: 'Zebra TC22/TC27', slug: 'zebra-tc22-tc27', resolutions: [] },
-          { id: 'tc53-tc58', name: 'Zebra TC53/TC58', slug: 'zebra-tc53-tc58', resolutions: [] },
-          { id: 'tc501-tc701', name: 'Zebra TC501/TC701', slug: 'zebra-tc501-tc701', resolutions: [] },
+          { id: 'tc53-tc58', name: 'Zebra TC53/TC58/TC73/TC78', slug: 'zebra-tc53-tc58', resolutions: [] },
           { id: 'mc22-mc27', name: 'Zebra MC22/MC27', slug: 'zebra-mc22-mc27', resolutions: [] },
           { id: 'mc3300x', name: 'Zebra MC3300x', slug: 'zebra-mc3300x', resolutions: [] },
-          { id: 'mc9400', name: 'Zebra MC9400/MC9450', slug: 'zebra-mc9400-mc9450', resolutions: [] },
-          { id: 'tc52-tc57', name: 'Zebra TC52/TC57', slug: 'zebra-tc52-tc57', resolutions: [] },
-          { id: 'mc93', name: 'Zebra MC93/MC9300', slug: 'zebra-mc93', resolutions: [] },
+          { id: 'mc93', name: 'Zebra MC93/MC9300/MC9400/MC9450', slug: 'zebra-mc93', resolutions: [] },
         ]
       },
       {
