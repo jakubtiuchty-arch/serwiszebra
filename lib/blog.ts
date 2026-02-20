@@ -15276,6 +15276,7 @@ Tak, ale różnica jest minimalna:
 - [Skaner TC58 przestał działać w trasie – szybka naprawa](/blog/zebra-tc58-skaner-nie-dziala-naprawa-w-trasie)
 - [TC58 w upale i mrozie – ochrona terminala](/blog/zebra-tc58-upal-mroz-praca-w-ekstremalnych-temperaturach)
 - [TC58 nie łączy się z siecią – ustawienia APN](/blog/zebra-tc58-siec-4g-5g-ustawienia-apn-polscy-operatorzy)
+- [**Serwis terminala Zebra TC58 — diagnostyka i naprawa [2026]**](/blog/serwis-terminala-zebra-tc58-diagnostyka-naprawa)
 
 ---
 
@@ -15668,6 +15669,7 @@ Problem z **DataWedge** lub konfiguracją aplikacji. Zgłoś do IT – to nie je
 - [Bateria TC58 nie wytrzymuje trasy kurierskiej](/blog/zebra-tc58-bateria-nie-wytrzymuje-trasy-kurierskiej)
 - [DataWedge – konfiguracja skanera w terminalach Zebra](/blog/datawedge-konfiguracja-terminal-zebra)
 - [TC58 nie łączy się z siecią – ustawienia APN](/blog/zebra-tc58-siec-4g-5g-ustawienia-apn-polscy-operatorzy)
+- [**Serwis terminala Zebra TC58 — diagnostyka i naprawa [2026]**](/blog/serwis-terminala-zebra-tc58-diagnostyka-naprawa)
 
 ---
 
@@ -15948,6 +15950,7 @@ TC58 ma certyfikat **IP68** (zanurzenie 1.5m/30 min) i **IP65** (strumienie wody
 - [Akumulatory do terminali Zebra — sklep online](/sklep/akumulatory/terminale/zebra-tc53-tc58)
 - [Skaner TC58 przestał działać w trasie](/blog/zebra-tc58-skaner-nie-dziala-naprawa-w-trasie)
 - [TC58 nie łączy się z siecią – ustawienia APN](/blog/zebra-tc58-siec-4g-5g-ustawienia-apn-polscy-operatorzy)
+- [**Serwis terminala Zebra TC58 — diagnostyka i naprawa [2026]**](/blog/serwis-terminala-zebra-tc58-diagnostyka-naprawa)
 
 ---
 
@@ -16236,6 +16239,7 @@ GPS włączony ciągle: ~5-10% baterii dziennie. To niewiele, **nie wyłączaj G
 - [Akumulatory do terminali TC58 — sklep online](/sklep/akumulatory/terminale/zebra-tc53-tc58)
 - [Skaner TC58 przestał działać w trasie](/blog/zebra-tc58-skaner-nie-dziala-naprawa-w-trasie)
 - [TC58 w upale i mrozie – ochrona terminala](/blog/zebra-tc58-upal-mroz-praca-w-ekstremalnych-temperaturach)
+- [**Serwis terminala Zebra TC58 — diagnostyka i naprawa [2026]**](/blog/serwis-terminala-zebra-tc58-diagnostyka-naprawa)
 
 ---
 
@@ -16598,6 +16602,7 @@ Możliwe przyczyny:
 - [Akumulatory do terminali TC58 — sklep online](/sklep/akumulatory/terminale/zebra-tc53-tc58)
 - [Skaner TC58 przestał działać w trasie](/blog/zebra-tc58-skaner-nie-dziala-naprawa-w-trasie)
 - [GPS TC58 pokazuje złą lokalizację](/blog/zebra-tc58-gps-pokazuje-zla-lokalizacje-naprawa)
+- [**Serwis terminala Zebra TC58 — diagnostyka i naprawa [2026]**](/blog/serwis-terminala-zebra-tc58-diagnostyka-naprawa)
 
 ---
 
@@ -34205,6 +34210,392 @@ Darmowa aplikacja od Zebra — zainstaluj z Google Play (**Zebra Device Diagnost
 - [Ekran dotykowy terminala Zebra nie reaguje — diagnostyka](/blog/ekran-dotykowy-terminal-zebra-nie-reaguje-diagnostyka)
 - [Terminal Zebra nie włącza się — Fastboot i Boot Loop](/blog/zebra-terminal-nie-wlacza-sie-fastboot-boot-loop)
 - [Zebra TC52 vs TC53 vs TC501 — porównanie terminali](/blog/zebra-tc52-vs-tc53-vs-tc501-porownanie-terminali)
+
+[Serwis terminali Zebra — wszystkie usługi →](/serwis-terminali-zebra)
+
+*Ostatnia aktualizacja: luty 2026*
+`
+  },
+  {
+    slug: 'serwis-terminala-zebra-tc58-diagnostyka-naprawa',
+    title: 'Serwis terminala Zebra TC58 — diagnostyka i naprawa [2026]',
+    excerpt: 'Kompletny przewodnik serwisowy terminala Zebra TC58 — flagowego urządzenia dla kurierów z 5G i dual-band GNSS. Najczęstsze awarie, diagnostyka krok po kroku, cennik napraw. Kiedy naprawić, a kiedy wymienić?',
+    coverImage: '/blog/serwis-terminala-zebra-tc58-diagnostyka-naprawa.jpeg',
+    coverImageAlt: 'Terminal mobilny Zebra TC58 z ekranem diagnostyki i narzędziami serwisowymi — profesjonalny serwis i naprawa',
+    author: {
+      name: 'Krzysztof Wójcik',
+      role: 'Kierownik Serwisu TAKMA'
+    },
+    publishedAt: '2026-02-19',
+    readingTime: 16,
+    deviceType: 'terminale',
+    category: 'troubleshooting',
+    tags: ['TC58', 'serwis terminala zebra', 'naprawa TC58', 'diagnostyka', 'troubleshooting', '5G', 'kurier', 'SE4720', 'SE55', 'DHL', 'InPost', 'DPD', 'wymiana ekranu', 'bateria TC58', 'GNSS'],
+    seo: {
+      metaTitle: 'Serwis terminala Zebra TC58 — diagnostyka i naprawa [2026]',
+      metaDescription: 'Terminal Zebra TC58 nie działa? Diagnostyka ekranu, baterii, skanera 5G, GPS. Cennik napraw od 150 zł. Najczęstsze awarie kurierskich TC58 (DHL, InPost, DPD). Bezpłatna diagnostyka TAKMA.',
+      keywords: [
+        // Główne frazy serwisowe
+        'serwis terminala zebra tc58',
+        'naprawa zebra tc58',
+        'serwis tc58', 'naprawa tc58',
+        'naprawa terminala tc58',
+        'naprawa kolektora danych zebra tc58',
+        'serwis terminali mobilnych zebra',
+        // Frazy problemowe
+        'tc58 nie włącza się',
+        'tc58 nie ładuje',
+        'tc58 ekran nie działa',
+        'tc58 skaner nie skanuje',
+        'tc58 wifi nie działa',
+        'tc58 5g nie łączy',
+        'tc58 gps nie działa',
+        'tc58 boot loop',
+        'tc58 bateria szybko się rozładowuje',
+        'tc58 przegrzewa się',
+        // Cennik
+        'ile kosztuje naprawa tc58',
+        'cennik napraw tc58',
+        'wymiana ekranu zebra tc58',
+        'wymiana ekranu zebra tc58 cena',
+        'wymiana baterii zebra tc58',
+        'części zamienne zebra tc58',
+        // Kurierskie
+        'terminal kurierski naprawa',
+        'terminal dhl naprawa',
+        'terminal inpost naprawa',
+        'terminal dpd naprawa',
+        'tc58 kurier awaria',
+        // Techniczne
+        'konfiguracja datawedge tc58',
+        'reset fabryczny zebra tc58',
+        'tc58 se4720 naprawa',
+        'tc58 se55 naprawa',
+        'tc58 dual band gnss',
+        // Angielskie
+        'zebra tc58 troubleshooting',
+        'zebra tc58 repair',
+        'zebra tc58 not turning on',
+        'zebra tc58 screen replacement',
+        'zebra tc58 common problems',
+        'zebra tc58 battery life',
+        'zebra tc58 scanner not working'
+      ],
+      faqSchema: [
+        {
+          question: 'Ile kosztuje naprawa terminala Zebra TC58?',
+          answer: 'Koszt naprawy Zebra TC58 zależy od usterki: wymiana ekranu dotykowego 6" (LCD + digitizer): 800-1200 zł netto, wymiana baterii: 150-350 zł, naprawa skanera SE4720/SE55: 600-1000 zł, naprawa modułu 5G: 500-900 zł, naprawa portu USB-C: 250-400 zł. Diagnostyka jest bezpłatna, gwarancja 12 miesięcy na każdą naprawę.'
+        },
+        {
+          question: 'Ile trwa naprawa terminala Zebra TC58?',
+          answer: 'Standardowa naprawa TC58 w serwisie TAKMA trwa 3-5 dni roboczych. Wymiana baterii i drobne naprawy softwarowe — 1-2 dni. Wymiana ekranu lub skanera — 3-5 dni. Naprawa modułu 5G/WWAN — 5-7 dni (wymaga kalibracji anten). Ekspresowa naprawa 24h dostępna za dopłatą 50%.'
+        },
+        {
+          question: 'Czy opłaca się naprawiać terminal Zebra TC58?',
+          answer: 'TC58 to aktualny model Zebra z pełnym wsparciem (do ~2030). Naprawa prawie zawsze się opłaca — nowy TC58 kosztuje 7000-10000 zł, a nawet najdroższa naprawa (ekran + skaner) to 1500-2000 zł. Jedyny wyjątek to uszkodzenie płyty głównej przy wielokrotnych upadkach z dużej wysokości.'
+        },
+        {
+          question: 'Jakie są najczęstsze awarie terminala Zebra TC58?',
+          answer: 'W serwisie TAKMA najczęściej naprawiamy: 1) pęknięty ekran 6" po upadku (30%), 2) szybkie rozładowywanie baterii w trasie kurierskiej (25%), 3) problemy ze skanerem SE4720/SE55 (15%), 4) utrata zasięgu 5G/LTE (10%), 5) problemy z GPS/nawigacją (8%), 6) uszkodzenia po pracy w ekstremalnych temperaturach (7%), 7) boot loop/zawieszanie (5%).'
+        },
+        {
+          question: 'Skaner TC58 nie skanuje kodów — co zrobić?',
+          answer: 'Najpierw spróbuj: 1) Wyczyść okienko skanera miękką ściereczką. 2) Zrestartuj terminal (przytrzymaj Power 10 sekund). 3) Sprawdź ustawienia DataWedge: Ustawienia → DataWedge → profil → Scanner Input → Enabled. 4) Przetestuj w Zebra Device Diagnostic Tool. Jeśli nie pomoże — 70% problemów to konfiguracja software, 30% wymaga serwisu hardware.'
+        },
+        {
+          question: 'TC58 nie łączy się z siecią 5G — jak naprawić?',
+          answer: 'Sprawdź: 1) Czy karta SIM jest poprawnie włożona (nano-SIM). 2) Ustaw ręcznie APN operatora (Orange: internet, Play: internet, T-Mobile: internet, Plus: internet). 3) Wymuś tryb sieci: Ustawienia → Sieć → Preferowany typ sieci → NR/LTE. 4) Zresetuj ustawienia sieciowe. Jeśli nadal nie działa — możliwe uszkodzenie modułu WWAN lub anteny 5G.'
+        },
+        {
+          question: 'Bateria TC58 nie wytrzymuje całej trasy kurierskiej — co zrobić?',
+          answer: 'TC58 z baterią 4680 mAh powinien wytrzymać 10-12h pracy. Jeśli nie: 1) Sprawdź stan baterii w PowerPrecision (Gifted/Good/Poor). 2) Wyłącz 5G gdy nie potrzebujesz (ogromny wpływ na baterię). 3) Zmniejsz jasność ekranu do 40%. 4) Wyłącz Bluetooth i NFC gdy nie używasz. 5) Rozważ baterię extended 7000 mAh. Bateria poniżej 80% pojemności kwalifikuje się do wymiany.'
+        },
+        {
+          question: 'Gdzie naprawić terminal Zebra TC58?',
+          answer: 'TAKMA to autoryzowany serwis Zebra z certyfikatem Zebra Registered Repair. Serwisujemy TC58 w naszym centrum serwisowym. Oferujemy: bezpłatną diagnostykę, oryginalne części Zebra, gwarancję 12 miesięcy, odbiór kurierem z całej Polski. Kontakt: formularz na serwis-zebry.pl lub telefon.'
+        }
+      ]
+    },
+    content: `
+> **Szybka odpowiedź:** Najczęstsze awarie Zebra TC58 w serwisie kurierskim to: **pęknięte ekrany 6"** (upadki przy dostawach), **bateria nie wytrzymuje trasy** (szczególnie z 5G), **problemy ze skanerem** SE4720/SE55 i **utrata łączności 5G/LTE**. Około **45% problemów** rozwiążesz samodzielnie (reset, DataWedge, optymalizacja baterii). Reszta wymaga serwisu — koszt naprawy od **150 zł**, bezpłatna diagnostyka.
+
+## TL;DR — najczęstsze awarie TC58 i koszty napraw
+
+| Awaria | Częstość | Sam naprawisz? | Koszt serwisu |
+|---|---|---|---|
+| Pęknięty ekran 6" | 30% | ❌ Nie | 800–1200 zł |
+| Bateria nie wytrzymuje trasy | 25% | ✅ Częściowo | 150–350 zł |
+| Skaner SE4720/SE55 nie skanuje | 15% | ✅ 70% tak | 600–1000 zł |
+| Brak zasięgu 5G/LTE | 10% | ✅ Częściowo | 500–900 zł |
+| GPS pokazuje złą lokalizację | 8% | ✅ 80% tak | 400–700 zł |
+| Uszkodzenia temperaturowe | 7% | ⚠️ Profilaktyka | 300–800 zł |
+| Boot loop / zawieszanie | 5% | ✅ 60% tak | 200–500 zł |
+
+> Ceny netto. Diagnostyka zawsze bezpłatna. Gwarancja 12 miesięcy na naprawę.
+
+## Zebra TC58 — specyfikacja serwisowa
+
+TC58 to flagowy terminal mobilny Zebra zaprojektowany dla kurierów i pracowników terenowych. Kluczowe parametry z perspektywy serwisu:
+
+| Parametr | TC58 WiFi | TC58 WWAN (5G) |
+|---|---|---|
+| Wyświetlacz | 6" HD+ (720×1440), Corning Gorilla Glass | 6" HD+ (720×1440), Corning Gorilla Glass |
+| Procesor | Qualcomm QCM6490, 8 rdzeni | Qualcomm QCM6490, 8 rdzeni |
+| RAM / Flash | 4 GB / 64 GB (lub 8/128) | 4 GB / 64 GB (lub 8/128) |
+| Skaner | SE4720 (standard) lub SE55 (daleki zasięg) | SE4720 (standard) lub SE55 (daleki zasięg) |
+| Łączność | Wi-Fi 6E, Bluetooth 5.2, NFC | 5G Sub-6, LTE, Wi-Fi 6E, BT 5.2, NFC |
+| GNSS | — | Dual-Band L1+L5 (GPS, GLONASS, Galileo, BeiDou) |
+| Bateria | 4680 mAh (standard) / 7000 mAh (extended) | 4680 mAh (standard) / 7000 mAh (extended) |
+| Wytrzymałość | IP68, MIL-STD-810H, upadki na beton z 1.8m | IP68, MIL-STD-810H, upadki na beton z 1.8m |
+| Temperatura pracy | -20°C do +50°C | -20°C do +50°C |
+| System | Android 13 (upgrade do A15) | Android 13 (upgrade do A15) |
+| Wymiary | 163.5 × 75.5 × 13.2 mm | 163.5 × 75.5 × 13.2 mm |
+| Waga | 258 g (z baterią standard) | 261 g (z baterią standard) |
+
+> **Serwis TAKMA:** TC58 to aktualny model z pełnym wsparciem Zebra (przewidywane do ~2030). Naprawa **zawsze się opłaca** — nowy TC58 to 7000-10 000 zł.
+
+## 1. Pęknięty ekran 6" — 30% napraw
+
+Ekran 6" TC58 to największy wyświetlacz w serii TC. Corning Gorilla Glass chroni przed zarysowaniami, ale nie przed upadkami na krawędź — a te zdarzają się kurierom po kilkadziesiąt razy dziennie.
+
+### Objawy
+- Pęknięcia widoczne na szkle (rysy, pajęczyna)
+- Ekran dotykowy nie reaguje w części lub całości
+- Czarne plamy na wyświetlaczu (uszkodzony LCD pod szkłem)
+- Obraz wyświetla się, ale dotyk nie działa (uszkodzony digitizer)
+- Kolorowe paski lub migotanie
+
+### Diagnostyka
+1. **Sprawdź w trybie Recovery** — przytrzymaj Power + Volume Up → jeśli ekran działa w Recovery, problem może być w Androidzie
+2. **Test dotyku** — Zebra Device Diagnostic Tool → Touch Panel Test → sprawdź czy wszystkie obszary reagują
+3. **Test LCD** — Device Diagnostic Tool → Display Test → sprawdź kolorowe plansze
+
+### Rozwiązanie
+Wymiana ekranu TC58 wymaga serwisu — moduł LCD + digitizer jest zintegrowany i wymaga kalibracji.
+
+**Koszt wymiany ekranu TC58: 800–1200 zł netto** (w zależności od wariantu: standardowy vs HC)
+
+> **Profilaktyka:** Etui ochronne z gumowanymi rogami zmniejsza ryzyko pęknięcia o 70%. Dla kurierów — obowiązkowe.
+
+## 2. Bateria nie wytrzymuje trasy kurierskiej — 25% napraw
+
+TC58 z 5G to apetyt na energię. Moduł 5G, 6-calowy ekran i ciągłe skanowanie potrafią wyczerpać baterię 4680 mAh w 6-7 godzin zamiast deklarowanych 10-12.
+
+### Diagnostyka baterii
+1. **Sprawdź stan w PowerPrecision:** Ustawienia → Bateria → Battery Information
+   - **Gifted** (>90%) — bateria sprawna
+   - **Good** (80-90%) — bateria OK, ale wymiana w ciągu 3-6 miesięcy
+   - **Poor** (<80%) — bateria do natychmiastowej wymiany
+2. **Sprawdź cykle ładowania:** ponad 500 pełnych cykli = bateria zużyta
+3. **Zmierz czas pracy:** jeśli bateria 100% → 0% w mniej niż 6h przy normalnym użytkowaniu — wymiana
+
+### Rozwiązania DIY
+- **Wyłącz 5G gdy nie potrzebujesz** — przejdź na LTE (oszczędność 25-30% baterii!)
+- Zmniejsz jasność do 40-50%
+- Wyłącz Bluetooth i NFC gdy nie skanujesz
+- Ustaw ekran na wygaszanie po 15 sekundach
+- Rozważ **baterię extended 7000 mAh** (+50% czasu pracy)
+
+**Koszt wymiany baterii TC58: 150–350 zł netto** (standard 4680 mAh lub extended 7000 mAh)
+
+> 🛒 **Kup akumulator do TC58:** [Akumulatory do terminali Zebra TC53/TC58 — sklep online →](/sklep/akumulatory/terminale/zebra-tc53-tc58)
+
+> **Więcej szczegółów:** [Bateria Zebra TC58 nie wytrzymuje trasy kurierskiej — jak przedłużyć czas pracy →](/blog/zebra-tc58-bateria-nie-wytrzymuje-trasy-kurierskiej)
+
+## 3. Skaner SE4720/SE55 nie skanuje — 15% napraw
+
+TC58 wyposażony jest w skaner SE4720 (standard, zasięg do 71 cm) lub SE55 (extended range, do 15.2 m). 70% problemów ze skanerem to konfiguracja DataWedge — nie hardware.
+
+### Szybka diagnostyka (3 minuty)
+
+1. **Wyczyść okienko skanera** — kurz, odciski palców, zarysowania blokują wiązkę
+2. **Soft Reset** — przytrzymaj Power 10 sekund, puść, poczekaj na restart
+3. **Sprawdź DataWedge** — Ustawienia → DataWedge → odpowiedni profil → Scanner Input → **Enabled**
+4. **Test w Zebra Diagnostic Tool** — jeśli skanuje w teście diagnostycznym, problem jest w aplikacji kurierskiej
+
+### Kiedy serwis?
+- Okienko skanera zarysowane/pęknięte — wymaga wymiany modułu
+- Wiązka lasera nie świeci się wcale — uszkodzony emiter
+- Skanuje sporadycznie mimo czystego okienka — problem z układem SE4720/SE55
+
+**Koszt naprawy skanera TC58: 600–1000 zł netto**
+
+> **Pełna diagnostyka:** [Skaner Zebra TC58 przestał działać w trasie — szybka naprawa →](/blog/zebra-tc58-skaner-nie-dziala-naprawa-w-trasie)
+
+## 4. Brak zasięgu 5G/LTE — 10% napraw
+
+TC58 WWAN obsługuje 5G Sub-6 i LTE Cat 20. Problemy z siecią to najczęściej konfiguracja APN, a nie hardware — ale uszkodzenia anten po upadkach się zdarzają.
+
+### Szybka diagnostyka
+
+1. **Sprawdź kartę SIM** — wyjmij, wyczyść styki, włóż ponownie
+2. **Sprawdź APN** — Ustawienia → Sieć → Nazwy punktów dostępu:
+   - Orange: APN = internet
+   - Play: APN = internet
+   - T-Mobile: APN = internet
+   - Plus: APN = internet
+3. **Wymuś tryb sieci** — Ustawienia → Sieć → Preferowany typ sieci → NR/LTE/WCDMA
+4. **Reset ustawień sieciowych** — Ustawienia → System → Opcje resetowania → Resetuj Wi-Fi, sieć i Bluetooth
+
+### Kiedy serwis?
+- Po upadku — brak zasięgu lub bardzo słaby sygnał (antena 5G wewnętrzna uszkodzona)
+- Slot SIM uszkodzony mechanicznie
+- Moduł WWAN nie jest wykrywany przez system
+
+**Koszt naprawy modułu 5G/LTE: 500–900 zł netto**
+
+> **Gotowe ustawienia APN:** [TC58 nie łączy się z siecią 4G/5G — ustawienia APN →](/blog/zebra-tc58-siec-4g-5g-ustawienia-apn-polscy-operatorzy)
+
+## 5. GPS pokazuje złą lokalizację — 8% napraw
+
+TC58 WWAN ma Dual-Band GNSS (L1+L5) obsługujący GPS, GLONASS, Galileo i BeiDou. Mimo to kurierzy zgłaszają „GPS drift" — nawigacja pokazuje pozycję 50-200m obok.
+
+### Przyczyny i rozwiązania
+
+| Problem | Przyczyna | Rozwiązanie |
+|---|---|---|
+| Drift 50-200m | Słaby sygnał / multipath | Włącz wszystkie systemy GNSS |
+| Lokalizacja skacze | Cold Start po restarcie | Poczekaj 2-3 minuty na fix |
+| GPS nie działa wcale | Wyłączona lokalizacja | Ustawienia → Lokalizacja → Włącz |
+| Niedokładność w mieście | Multipath od budynków | Włącz a-GPS (dane operatora) |
+
+### Konfiguracja GNSS krok po kroku
+1. Ustawienia → Lokalizacja → **Włącz**
+2. Tryb lokalizacji → **Wysoka dokładność** (GPS + sieć + Wi-Fi)
+3. Włącz **a-GPS** — korzysta z danych operatora dla szybszego fixa
+4. Sprawdź uprawnienia aplikacji nawigacyjnej
+
+**Koszt naprawy modułu GNSS: 400–700 zł netto** (tylko gdy hardware uszkodzony)
+
+> **Pełna diagnostyka GPS:** [GPS w Zebra TC58 pokazuje złą lokalizację — jak naprawić →](/blog/zebra-tc58-gps-pokazuje-zla-lokalizacje-naprawa)
+
+## 6. Uszkodzenia temperaturowe — 7% napraw
+
+TC58 pracuje w zakresie -20°C do +50°C, ale w polskich warunkach kurierskich latem w samochodzie bywa +70°C, a zimą -25°C.
+
+### Najczęstsze problemy
+
+| Sezon | Problem | Przyczyna |
+|---|---|---|
+| Lato | Terminal wyłącza się sam | Automatyczne wyłączanie przy 58°C |
+| Lato | Ekran ciemnieje | Ochrona LCD przed przegrzaniem |
+| Zima | Nie ładuje się | Ładowanie zablokowane poniżej 0°C |
+| Zima | Bateria „spada" z 50% do 10% | Spadek pojemności Li-Ion w mrozie |
+| Zima | Ekran reaguje wolno | Spowolnienie matrycy LCD |
+
+### Profilaktyka
+- **Lato:** Nie zostawiaj w samochodzie na słońcu! Używaj uchwytu z nawiewem
+- **Zima:** Trzymaj terminal blisko ciała. Ładuj w temperaturze pokojowej
+- **Tryb rękawiczek:** Ustawienia → Wyświetlacz → Touch Panel → Glove Mode
+
+**Koszt naprawy uszkodzeń temperaturowych: 300–800 zł netto** (w zależności od zakresu)
+
+> **Szczegółowy poradnik:** [Zebra TC58 w upale i mrozie — jak chronić terminal →](/blog/zebra-tc58-upal-mroz-praca-w-ekstremalnych-temperaturach)
+
+## 7. Boot loop i zawieszanie się — 5% napraw
+
+Terminal uruchamia się, pokazuje logo Zebra i restartuje się w pętli. Albo zawiesza się w trakcie pracy.
+
+### Rozwiązanie — 3 metody
+
+**Metoda 1: Soft Reset**
+Przytrzymaj przycisk **Power 10-12 sekund** → terminal się zrestartuje.
+
+**Metoda 2: Recovery Mode**
+1. Wyłącz terminal (przytrzymaj Power + wybierz „Wyłącz")
+2. Przytrzymaj **Power + Volume Up** jednocześnie
+3. Gdy pojawi się logo Zebra, puść Power, trzymaj Volume Up
+4. W menu Recovery wybierz **Wipe cache partition** (Volume Down = nawigacja, Power = wybór)
+5. Zrestartuj
+
+**Metoda 3: Enterprise Reset** (ostateczność — kasuje dane użytkownika, zachowuje konfigurację firmową)
+1. Wejdź w Recovery Mode (jak wyżej)
+2. Wybierz **Apply from sdcard** → /sdcard/enterprise-reset.zip
+3. Lub przez Ustawienia → System → Opcje resetowania → Enterprise Reset
+
+> ⚠️ **Uwaga:** Enterprise Reset kasuje dane! Upewnij się, że masz backup konfiguracji MDM (SOTI, VMware, 42Gears).
+
+**Koszt naprawy software: 200–400 zł netto** | **Koszt przy uszkodzeniu flash: 400–700 zł netto**
+
+## TC58 — podsumowanie kosztów napraw
+
+| Naprawa | Koszt netto | Czas naprawy | Gwarancja |
+|---|---|---|---|
+| Wymiana ekranu 6" (LCD + digitizer) | 800–1200 zł | 3-5 dni | 12 miesięcy |
+| Wymiana baterii (standard 4680 mAh) | 150–250 zł | 1-2 dni | 12 miesięcy |
+| Wymiana baterii (extended 7000 mAh) | 250–350 zł | 1-2 dni | 12 miesięcy |
+| Naprawa skanera SE4720 | 600–800 zł | 3-5 dni | 12 miesięcy |
+| Naprawa skanera SE55 | 800–1000 zł | 3-5 dni | 12 miesięcy |
+| Naprawa modułu 5G/WWAN | 500–900 zł | 5-7 dni | 12 miesięcy |
+| Naprawa modułu GNSS | 400–700 zł | 3-5 dni | 12 miesięcy |
+| Naprawa portu USB-C | 250–400 zł | 2-3 dni | 12 miesięcy |
+| Naprawa software / Enterprise Reset | 200–400 zł | 1-2 dni | 12 miesięcy |
+| Czyszczenie po zalaniu | 300–600 zł | 3-5 dni | 6 miesięcy |
+
+> Wszystkie ceny netto. **Diagnostyka bezpłatna.** Odbiór kurierem z całej Polski.
+
+## Co możesz naprawić sam, a co wymaga serwisu?
+
+| Zrobisz sam ✅ | Potrzebujesz serwisu 🔧 |
+|---|---|
+| Reset software (Soft/Hard) | Wymiana ekranu LCD + digitizer |
+| Konfiguracja DataWedge | Wymiana modułu skanera |
+| Czyszczenie okienka skanera | Naprawa modułu 5G/WWAN |
+| Ustawienia APN operatora | Naprawa anteny GPS/GNSS |
+| Wymiana baterii (Hot Swap) | Naprawa portu USB-C |
+| Konfiguracja GNSS | Naprawa po uszkodzeniu temperaturowym |
+| Optymalizacja zużycia baterii | Wymiana płyty głównej |
+| Enterprise Reset | Naprawa po zalaniu |
+| Aktualizacja firmware (OTA) | Wymiana obudowy / przycisków |
+
+## Narzędzia diagnostyczne Zebra
+
+### Zebra Device Diagnostic Tool
+Wbudowane narzędzie do testowania podzespołów TC58:
+- **Skaner:** testuje wiązkę i dekodowanie
+- **Ekran dotykowy:** test wszystkich obszarów dotyku
+- **Bateria:** stan, cykle, temperatura
+- **Wi-Fi/5G:** siła sygnału, prędkość
+- **GPS:** liczba satelitów, dokładność
+- **Głośnik/mikrofon:** test audio
+
+Uruchomienie: Ustawienia → System → Zebra Device Diagnostic Tool (lub wyszukaj „Diagnostic" w szufladzie aplikacji)
+
+## Harmonogram konserwacji TC58 dla flot kurierskich
+
+| Częstotliwość | Czynność |
+|---|---|
+| Codziennie | Wyczyść ekran i okienko skanera |
+| Co tydzień | Sprawdź stan baterii w PowerPrecision |
+| Co miesiąc | Sprawdź dostępność aktualizacji firmware |
+| Co 3 miesiące | Pełna diagnostyka w Zebra Device Diagnostic Tool |
+| Co 6 miesięcy | Inspekcja wizualna obudowy, portów, uszczelek |
+| Co 12 miesięcy | Profesjonalny przegląd serwisowy TAKMA |
+| Po 500 cyklach | Wymiana baterii (niezależnie od stanu) |
+
+## Zgłoś naprawę TC58
+
+Twój terminal TC58 wymaga naprawy? Skontaktuj się z serwisem TAKMA:
+
+1. **Wypełnij formularz** na [serwis-zebry.pl/formularz](/formularz) — opisz usterkę
+2. **Bezpłatna diagnostyka** — określimy problem i kosztorys
+3. **Odbiór kurierem** z dowolnego miejsca w Polsce
+4. **Naprawa 3-5 dni** z gwarancją 12 miesięcy
+5. **Wysyłka zwrotna** — terminal wraca sprawny
+
+> 💡 **Masz flotę TC58?** Zapytaj o [kontrakt serwisowy](/blog/kontrakty-serwisowe-zebra-onecare-serwis-autoryzowany) — stała stawka miesięczna, priorytetowa obsługa, terminal zastępczy.
+
+## Powiązane artykuły
+
+- [🛒 Akumulatory do terminali Zebra TC53/TC58 — sklep online](/sklep/akumulatory/terminale/zebra-tc53-tc58)
+- [Bateria TC58 nie wytrzymuje trasy kurierskiej — jak przedłużyć czas pracy](/blog/zebra-tc58-bateria-nie-wytrzymuje-trasy-kurierskiej)
+- [Skaner TC58 przestał działać w trasie — szybka naprawa dla kurierów](/blog/zebra-tc58-skaner-nie-dziala-naprawa-w-trasie)
+- [TC58 w upale i mrozie — jak chronić terminal](/blog/zebra-tc58-upal-mroz-praca-w-ekstremalnych-temperaturach)
+- [GPS w TC58 pokazuje złą lokalizację — jak naprawić](/blog/zebra-tc58-gps-pokazuje-zla-lokalizacje-naprawa)
+- [TC58 nie łączy się z siecią 4G/5G — ustawienia APN](/blog/zebra-tc58-siec-4g-5g-ustawienia-apn-polscy-operatorzy)
+- [TOP 10 awarii terminali Zebra — diagnostyka i rozwiązania](/blog/najczestsze-awarie-terminali-zebra-top10)
+- [Naprawa czy wymiana terminala Zebra — kiedy się opłaca?](/blog/naprawa-czy-wymiana-terminala-zebra-kiedy-sie-oplaca)
+- [Reset terminala Zebra — Factory vs Enterprise Reset](/blog/reset-fabryczny-terminal-zebra-factory-enterprise)
 
 [Serwis terminali Zebra — wszystkie usługi →](/serwis-terminali-zebra)
 
