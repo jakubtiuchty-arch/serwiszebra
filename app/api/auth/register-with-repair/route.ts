@@ -48,6 +48,7 @@ export async function POST(request: Request) {
         last_name: validatedData.lastName || '',
         phone: validatedData.phone || '',
         marketing_consent: validatedData.marketingConsent,
+        source: 'serwis-zebry',
       },
     })
 

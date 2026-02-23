@@ -16,6 +16,12 @@ import Link from 'next/link'
   const [error, setError] = useState<string | null>(null)
   const [showPassword, setShowPassword] = useState(false)
 
+  // Pre-fill email z query string (np. z TAKMA po rejestracji)
+  useEffect(() => {
+    const prefillEmail = searchParams.get('email')
+    if (prefillEmail) setEmail(prefillEmail)
+  }, [searchParams])
+
   // Sprawdź czy użytkownik już jest zalogowany
   useEffect(() => {
     async function checkUser() {

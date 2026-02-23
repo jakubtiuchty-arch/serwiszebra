@@ -21,6 +21,7 @@ export default function PanelLayout({
   const router = useRouter()
   const pathname = usePathname()
   const [user, setUser] = useState<UserProfile | null>(null)
+  const [userSource, setUserSource] = useState<string>('serwis-zebry')
   const [loading, setLoading] = useState(true)
   const [repairsCount, setRepairsCount] = useState(0)
 
@@ -33,7 +34,13 @@ export default function PanelLayout({
           return
         }
         setUser(profile)
-        
+
+        // Pobierz source z user_metadata (Supabase Auth)
+        const supabase = createClient()
+        const { data: { session } } = await supabase.auth.getSession()
+        const source = session?.user?.user_metadata?.source
+        if (source) setUserSource(source)
+
         // Pobierz liczbę napraw dla touru
         const response = await fetch('/api/repairs')
         if (response.ok) {
@@ -55,7 +62,11 @@ export default function PanelLayout({
     try {
       const supabase = createClient()
       await supabase.auth.signOut()
-      router.push('/')
+      if (userSource === 'takma') {
+        window.location.href = 'https://takma.com.pl'
+      } else {
+        router.push('/')
+      }
     } catch (error) {
       console.error('Error logging out:', error)
     }
@@ -90,9 +101,10 @@ export default function PanelLayout({
       )}
 
       {/* SIDEBAR */}
-      <PanelSidebar 
+      <PanelSidebar
         userName={userName}
         userEmail={user?.email || ''}
+        userSource={userSource}
         onLogout={handleLogout}
       />
 

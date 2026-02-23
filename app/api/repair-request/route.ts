@@ -154,6 +154,7 @@ export async function POST(request: NextRequest) {
         pickup_date: validatedData.pickupDate,
         courier_notes: validatedData.courierNotes || null,
         status: 'nowe',
+        source: 'serwis-zebry',
       })
       .select()
       .single()

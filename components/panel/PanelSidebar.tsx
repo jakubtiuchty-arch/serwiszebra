@@ -18,10 +18,11 @@ import {
 interface PanelSidebarProps {
   userName: string
   userEmail: string
+  userSource?: string
   onLogout: () => void
 }
 
-export default function PanelSidebar({ userName, userEmail, onLogout }: PanelSidebarProps) {
+export default function PanelSidebar({ userName, userEmail, userSource, onLogout }: PanelSidebarProps) {
   const pathname = usePathname()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [showComingSoonModal, setShowComingSoonModal] = useState(false)
@@ -106,15 +107,15 @@ export default function PanelSidebar({ userName, userEmail, onLogout }: PanelSid
     {isActive('/panel') && <ChevronRight className="w-3 h-3 text-blue-600" />}
   </Link>
 
-  {/* Strona główna */}
-  <Link
-    href="/"
+  {/* Strona główna — dynamiczny link wg źródła użytkownika */}
+  <a
+    href={userSource === 'takma' ? 'https://takma.com.pl' : '/'}
     onClick={() => setMobileMenuOpen(false)}
     className="flex items-center gap-2 px-3 py-2 rounded-lg transition-all text-sm mb-0.5 text-gray-700 hover:bg-gray-50"
   >
     <Home className="w-4 h-4 text-gray-400" />
     <span className="flex-1">Strona główna</span>
-  </Link>
+  </a>
 
   {/* Raporty i Analityka - Coming Soon */}
   <button
