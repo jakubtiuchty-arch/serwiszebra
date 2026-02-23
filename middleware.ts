@@ -234,15 +234,26 @@ export async function middleware(request: NextRequest) {
   
   // Jeśli user jest na /logowanie lub /rejestracja a jest już zalogowany
   if (session && (pathname === '/logowanie' || pathname === '/rejestracja')) {
-    // Sprawdź czy jest adminem
-    const { data: profile } = await supabase
-      .from('profiles')
-      .select('role')
-      .eq('id', session.user.id)
-      .single()
+    // Sprawdź czy jest explicit redirect w query params (np. z TAKMA po rejestracji)
+    const explicitRedirect = url.searchParams.get('redirect')
 
-    // Admina przekieruj do /admin, usera do /panel
-    url.pathname = profile?.role === 'admin' ? '/admin' : '/panel'
+    if (explicitRedirect) {
+      // Użyj explicit redirect (np. /panel z TAKMA)
+      url.pathname = explicitRedirect
+    } else {
+      // Sprawdź czy jest adminem
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('role')
+        .eq('id', session.user.id)
+        .single()
+
+      // Admina przekieruj do /admin, usera do /panel
+      url.pathname = profile?.role === 'admin' ? '/admin' : '/panel'
+    }
+
+    // Wyczyść query params przed redirectem
+    url.search = ''
     return NextResponse.redirect(url)
   }
 
