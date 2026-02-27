@@ -5877,7 +5877,7 @@ Skanery DS82 są przygotowane na transformację kodów kreskowych:
 
 ### Jaka jest różnica między Zebra DS8208 a DS8288?
 
-DS8208 to model **przewodowy** zasilany przez USB, natomiast DS8288 to model **bezprzewodowy** z baterią lub superkondensatorem i ładowaniem indukcyjnym. Oba oferują identyczną wydajność skanowania z czujnikiem 2 MP.
+Zebra DS8208 to model **przewodowy** zasilany przez USB, natomiast Zebra DS8288 to model **bezprzewodowy** z baterią lub superkondensatorem i ładowaniem indukcyjnym. Oba oferują identyczną wydajność skanowania z czujnikiem 2 MP.
 
 ### Czy skanery DS82 obsługują RFID?
 
@@ -12373,11 +12373,12 @@ Zależy od usterki:
 - [Konfiguracja skanera kodami kreskowymi – Enter, Tab, sufiksy](/blog/konfiguracja-skanera-zebra-kodami-kreskowymi-enter-tab)
 - [Naprawa skanera Zebra – kiedy warto naprawiać, a kiedy wymienić?](/blog/naprawa-skanera-zebra-kiedy-warto-kiedy-wymienic)
 - [Zebra DS2208 i DS2278 — najczęstsze problemy, diagnostyka i naprawa](/blog/zebra-ds2208-ds2278-problemy-naprawa-serwis)
+- [Zebra DS3608 i DS3678 — skanery przemysłowe: problemy i naprawa](/blog/zebra-ds3608-ds3678-skaner-przemyslowy-naprawa)
 
 > 💡 **Potrzebujesz naprawy?** [Zgłoś skaner do serwisu](/panel) — wycena w 24h!
 `
   },
-  
+
   {
     slug: 'parowanie-skanera-bluetooth-zebra-poradnik',
     title: 'Parowanie skanera Bluetooth Zebra – kompletny poradnik krok po kroku',
@@ -12841,11 +12842,12 @@ Domyślnie po ~30 minutach nieaktywności skaner przechodzi w tryb uśpienia. Mo
 - [Konfiguracja skanera kodami kreskowymi – Enter, Tab, sufiksy](/blog/konfiguracja-skanera-zebra-kodami-kreskowymi-enter-tab)
 - [Porównanie skanerów Zebra – który model wybrać?](/blog/porownanie-skanerow-zebra-ktory-wybrac)
 - [Zebra DS2208 i DS2278 — najczęstsze problemy, diagnostyka i naprawa](/blog/zebra-ds2208-ds2278-problemy-naprawa-serwis)
+- [Zebra DS3608 i DS3678 — skanery przemysłowe: problemy i naprawa](/blog/zebra-ds3608-ds3678-skaner-przemyslowy-naprawa)
 
 > 💡 **Potrzebujesz naprawy?** [Zgłoś skaner do serwisu](/panel) — wycena w 24h!
 `
   },
-  
+
   {
     slug: 'konfiguracja-skanera-zebra-kodami-kreskowymi-enter-tab',
     title: 'Jak skonfigurować skaner Zebra kodami kreskowymi – Enter, Tab, sufiksy [2026]',
@@ -14607,6 +14609,7 @@ Sprawdź aktualne ceny w [sklepie — akumulatory Zebra](/sklep/akumulatory).
 - [Porównanie skanerów Zebra – który model wybrać?](/blog/porownanie-skanerow-zebra-ktory-wybrac)
 - [Naprawa skanera Zebra – kiedy warto naprawiać?](/blog/naprawa-skanera-zebra-kiedy-warto-kiedy-wymienic)
 - [Zebra DS2208 i DS2278 — najczęstsze problemy, diagnostyka i naprawa](/blog/zebra-ds2208-ds2278-problemy-naprawa-serwis)
+- [Zebra DS3608 i DS3678 — skanery przemysłowe: problemy i naprawa](/blog/zebra-ds3608-ds3678-skaner-przemyslowy-naprawa)
 
 > 🔋 **Potrzebujesz nowej baterii lub naprawy?** [Zgłoś się do nas](/panel) — doradzimy i dostarczymy oryginalne części!
 `
@@ -14944,6 +14947,7 @@ Tak, przy naprawie flotowej (5+ skanerów) oferujemy rabaty 10-20%.
 - [Porównanie skanerów Zebra – który model wybrać?](/blog/porownanie-skanerow-zebra-ktory-wybrac)
 - [Co oznaczają HD, SR, XR, ER, KD w skanerach Zebra?](/blog/oznaczenia-skanerow-zebra-hd-sr-xr-er-kd)
 - [Zebra DS2208 i DS2278 — najczęstsze problemy, diagnostyka i naprawa](/blog/zebra-ds2208-ds2278-problemy-naprawa-serwis)
+- [Zebra DS3608 i DS3678 — skanery przemysłowe: problemy i naprawa](/blog/zebra-ds3608-ds3678-skaner-przemyslowy-naprawa)
 
 ---
 
@@ -35066,6 +35070,7 @@ Twój skaner Zebra wymaga naprawy? Skontaktuj się z serwisem TAKMA:
 - [Naprawa skanera Zebra — kiedy warto, kiedy wymienić?](/blog/naprawa-skanera-zebra-kiedy-warto-kiedy-wymienic)
 - [Zebra DS8208 i DS8288 — skanery nowej generacji](/blog/zebra-ds8208-ds8288-skaner-specyfikacja-cena)
 - [Zebra DS2208 i DS2278 — najczęstsze problemy, diagnostyka i naprawa](/blog/zebra-ds2208-ds2278-problemy-naprawa-serwis)
+- [Zebra DS3608 i DS3678 — skanery przemysłowe: problemy i naprawa](/blog/zebra-ds3608-ds3678-skaner-przemyslowy-naprawa)
 - [TOP 10 awarii terminali Zebra — diagnostyka i rozwiązania](/blog/najczestsze-awarie-terminali-zebra-top10)
 
 [Serwis skanerów Zebra — wszystkie usługi →](/serwis-skanerow-zebra)
@@ -35076,7 +35081,7 @@ Twój skaner Zebra wymaga naprawy? Skontaktuj się z serwisem TAKMA:
 
   {
     slug: 'zebra-ds2208-ds2278-problemy-naprawa-serwis',
-    title: 'Zebra DS2208 i DS2278 — najczęstsze problemy, diagnostyka i naprawa',
+    title: 'Zebra DS2208 i DS2278 — najczęstsze problemy, diagnostyka i naprawa [2026]',
     excerpt: 'Kompletny przewodnik po problemach ze skanerami Zebra DS2208 (przewodowy) i DS2278 (bezprzewodowy). Kody LED, sygnały dźwiękowe, rozwiązania krok po kroku, koszty napraw i porady serwisowe.',
     coverImage: '/blog/zebra-ds2208-ds2278-problemy-naprawa-serwis.jpeg',
     coverImageAlt: 'Skaner Zebra DS2208 z podświetloną linią celowania podczas skanowania kodu kreskowego',
@@ -35298,7 +35303,7 @@ Skaner DS2208/DS2278 komunikuje swój stan przez sygnały dźwiękowe. Poniższa
 
 ---
 
-## 1. DS2208 nie skanuje kodów QR
+## 1. Zebra DS2208 nie skanuje kodów QR
 
 **Objaw:** Skaner odczytuje kody kreskowe 1D (EAN-13, Code 128), ale ignoruje kody QR i inne kody 2D. Po nacelowaniu na kod QR brak sygnału dźwiękowego.
 
@@ -35320,7 +35325,7 @@ Skaner DS2208/DS2278 komunikuje swój stan przez sygnały dźwiękowe. Poniższa
 
 ---
 
-## 2. DS2208 nie działa po podłączeniu USB — Windows nie wykrywa
+## 2. Zebra DS2208 nie działa po podłączeniu USB — Windows nie wykrywa
 
 **Objaw:** Po podłączeniu kablem USB system wyświetla „Nieznane urządzenie USB" (Device Descriptor Request Failed) lub nie reaguje. Skaner może świecić się na czerwono lub nie włączać się wcale.
 
@@ -35348,7 +35353,7 @@ Skaner DS2208/DS2278 komunikuje swój stan przez sygnały dźwiękowe. Poniższa
 
 ---
 
-## 3. DS2278 nie łączy się po Bluetooth / traci połączenie
+## 3. Zebra DS2278 nie łączy się po Bluetooth / traci połączenie
 
 **Objaw:** DS2278 nie paruje się z komputerem/tabletem, lub paruje się ale po kilku sekundach traci połączenie. Skaner może łączyć się z bazą (cradle), ale nie przesyłać danych.
 
@@ -35378,7 +35383,7 @@ Skaner DS2208/DS2278 komunikuje swój stan przez sygnały dźwiękowe. Poniższa
 
 ---
 
-## 4. DS2208 miga na czerwono
+## 4. Zebra DS2208 miga na czerwono
 
 **Objaw:** Po podłączeniu do komputera lub podczas skanowania dioda LED świeci/miga na czerwono. Skaner nie odczytuje kodów lub odczytuje ale nie przesyła.
 
@@ -35406,7 +35411,7 @@ Skaner DS2208/DS2278 komunikuje swój stan przez sygnały dźwiękowe. Poniższa
 
 ---
 
-## 5. DS2208 piszczy ale nie przesyła danych
+## 5. Zebra DS2208 piszczy ale nie przesyła danych
 
 **Objaw:** Skaner emituje sygnał dźwiękowy po nacelowaniu na kod, świeci zielona dioda (potwierdzenie dekodowania), ale dane nie pojawiają się w aplikacji. Czasami dane trafiają do Notatnika, ale nie do programu POS/magazynowego.
 
@@ -35435,7 +35440,7 @@ Skaner DS2208/DS2278 komunikuje swój stan przez sygnały dźwiękowe. Poniższa
 
 ---
 
-## 6. DS2278 bateria szybko się rozładowuje
+## 6. Zebra DS2278 bateria szybko się rozładowuje
 
 **Objaw:** Skaner DS2278, który powinien wytrzymać do 14 godzin pracy (110 000 skanów), rozładowuje się po kilku godzinach. Wymaga częstego ładowania.
 
@@ -35469,7 +35474,7 @@ Skaner DS2208/DS2278 komunikuje swój stan przez sygnały dźwiękowe. Poniższa
 
 ---
 
-## 7. DS2208 wolno skanuje / wymaga wielu prób
+## 7. Zebra DS2208 wolno skanuje / wymaga wielu prób
 
 **Objaw:** Skaner potrzebuje kilku prób (3–10 naciśnięć spustu) żeby odczytać jeden kod. Odczyt trwa 2–5 sekund zamiast natychmiastowego. Problem może dotyczyć wszystkich kodów lub tylko niektórych typów.
 
@@ -35536,7 +35541,7 @@ Skaner DS2208/DS2278 komunikuje swój stan przez sygnały dźwiękowe. Poniższa
 
 ---
 
-## 9. DS2208 nie czyta kodów z ekranu telefonu
+## 9. Zebra DS2208 nie czyta kodów z ekranu telefonu
 
 **Objaw:** Skaner bez problemu czyta kody na papierze, ale nie odczytuje kodów QR lub kreskowych wyświetlonych na ekranie smartfona, tabletu lub monitora.
 
@@ -35670,10 +35675,591 @@ W serwisie Serwis Zebra oferujemy **bezpłatną diagnostykę** każdego skanera 
 - [Naprawa skanera Zebra — kiedy warto, kiedy wymienić?](/blog/naprawa-skanera-zebra-kiedy-warto-kiedy-wymienic)
 - [Bateria skanera Zebra — problemy z ładowaniem, żywotność i wymiana](/blog/bateria-skanera-zebra-ladowanie-zywotnosc-problemy)
 - [Skaner Zebra — konfiguracja, parowanie i reset Bluetooth](/blog/skaner-zebra-bluetooth-konfiguracja-parowanie-reset)
+- [Zebra DS3608 i DS3678 — skanery przemysłowe: problemy i naprawa](/blog/zebra-ds3608-ds3678-skaner-przemyslowy-naprawa)
 
 [Serwis skanerów Zebra — diagnostyka i naprawa →](/serwis-skanerow-zebra)
 
 *Ostatnia aktualizacja: luty 2026*
+`
+  },
+
+  {
+    slug: 'zebra-ds3608-ds3678-skaner-przemyslowy-naprawa',
+    title: 'Zebra DS3608 i DS3678 — problemy, diagnostyka i naprawa [2026]',
+    excerpt: 'Kompletny przewodnik po skanerach Zebra DS3608 (przewodowy) i DS3678 (bezprzewodowy). Warianty SR/ER/HP/HD/DP, specyfikacja z manuali, diagnostyka LED i beeper, 10 najczęstszych usterek z rozwiązaniami krok po kroku, koszty napraw.',
+    coverImage: '/blog/zebra-ds3608-ds3678-skaner-przemyslowy-naprawa.jpeg',
+    coverImageAlt: 'Skaner przemysłowy Zebra DS3608 w zielonym kolorze Industrial Green na tle środowiska magazynowego',
+    author: {
+      name: 'Krzysztof Wójcik',
+      role: 'Specjalista ds. serwisu skanerów Zebra'
+    },
+    publishedAt: '2026-03-01',
+    readingTime: 22,
+    deviceType: 'skanery',
+    subDeviceType: 'ręczne',
+    category: 'troubleshooting',
+    tags: ['DS3608', 'DS3678', 'skaner Zebra', 'ultra-rugged', 'przemysłowy', 'SE4750', 'SE4850', 'STB3678', 'IP67', 'IP68', 'PowerPrecision+', 'Extended Range', 'DPM', 'naprawa', 'diagnostyka', 'Bluetooth', 'factory reset'],
+    seo: {
+      metaTitle: 'Zebra DS3608 / DS3678 — problemy, diagnostyka, naprawa skanera przemysłowego | Serwis Zebra',
+      metaDescription: 'Skaner Zebra DS3608 nie skanuje? DS3678 traci Bluetooth? Sprawdź 10 najczęstszych usterek ultra-wytrzymałych skanerów z rozwiązaniami krok po kroku. Dane z oficjalnych manuali Zebra, tabele LED i beeper, koszty napraw.',
+      keywords: [
+        'zebra ds3608 problemy',
+        'zebra ds3678 bluetooth nie łączy',
+        'ds3608 nie skanuje',
+        'ds3678 stb3678 parowanie',
+        'ds3608 reset fabryczny',
+        'ds3678 bateria powerprecision',
+        'ds3608 er extended range',
+        'ds3608 se4850 autofokus',
+        'ds3678 cradle nie ładuje',
+        'ds3608 trigger nie działa',
+        'ds3608 okienko zarysowane',
+        'ds3608 flex cable',
+        'ds3608 usb nie działa',
+        'ds3608 firmware aktualizacja',
+        'ds3608 dp dpm direct part marking',
+        'ds3608 sr vs er vs hp vs hd',
+        'ds3678 ip67 ip68',
+        'serwis skanerów zebra przemysłowych',
+        'naprawa skanera ds3608',
+        'ds3608 specyfikacja techniczna',
+        'ds3678 wymiana baterii',
+        'ds3608 czyszczenie konserwacja',
+        'ds3608 kody dźwiękowe beeper',
+        'ds3608 diody led diagnostyka',
+        'skaner przemysłowy zebra naprawa'
+      ],
+      faqSchema: [
+        {
+          question: 'Jaka jest różnica między Zebra DS3608 a DS3678?',
+          answer: 'DS3608 to wersja przewodowa (USB/RS-232/Ethernet), a DS3678 to wersja bezprzewodowa (Bluetooth 4.0 Class 1, zasięg do 100 m). Oba mają identyczny silnik skanujący i obudowę IP65/IP67. DS3608 działa od -30°C, DS3678 od -20°C (ograniczenie baterii). DS3678 waży ok. 100 g więcej (411 g vs 305 g) i wymaga bazy STB3678. Dostępne w 5 wariantach: SR, ER, HP, HD, DP.'
+        },
+        {
+          question: 'Dlaczego skaner Zebra DS3678 traci połączenie Bluetooth z bazą STB3678?',
+          answer: 'Najczęstsze przyczyny: nieaktualny firmware skanera lub bazy, zakłócenia WiFi 2.4 GHz w magazynie, wadliwy kabel USB między bazą a hostem (niewystarczające zasilanie), lub utrata parowania po factory reset. Rozwiązanie: zaktualizuj firmware przez 123Scan, włącz Wi-Fi Friendly Mode, użyj oryginalnego kabla Zebra podłączonego bezpośrednio (nie przez hub USB), i ponownie sparuj skanując kod z bazy.'
+        },
+        {
+          question: 'Ile kosztuje naprawa skanera Zebra DS3608 / DS3678?',
+          answer: 'Koszty naprawy: wymiana okienka 100-350 zł, wymiana triggera 200-400 zł, wymiana flex cable silnika 200-400 zł, wymiana silnika SE4750 400-800 zł, wymiana SE4850 (Extended Range) 400-1100 zł, naprawa Bluetooth/płytka STB3678 250-500 zł, wymiana baterii DS3678 80-250 zł (DIY). Reset konfiguracji i firmware to 0 zł — można wykonać samodzielnie przez 123Scan. Diagnostyka w serwisie jest bezpłatna.'
+        },
+        {
+          question: 'Jak zresetować skaner Zebra DS3608 do ustawień fabrycznych?',
+          answer: 'Trzy metody: (1) Zeskanuj kod "Set Factory Defaults" z Product Reference Guide MN-002689-22EN — skaner wyda serię tonów potwierdzających. (2) Użyj programu Zebra 123Scan: podłącz USB → Restore Defaults. (3) DS3678 hard reset: wyjmij baterię na 10 sekund, włóż z powrotem. UWAGA: reset kasuje WSZYSTKIE ustawienia — interfejs, symbologie, reguły ADF, beeper, parowanie Bluetooth. Po resecie trzeba ponownie skonfigurować skaner.'
+        },
+        {
+          question: 'Czym różnią się warianty DS3608-SR, ER, HP, HD i DP?',
+          answer: 'SR (Standard Range): silnik SE4750, zasięg do 1,5 m — ogólne zastosowanie magazynowe. ER (Extended Range): silnik SE4850 z IntelliFocus, zasięg do 21 m — duże magazyny, wózki widłowe. HP (High Performance): SE4750, zasięg do 2,1 m + OCR + przechwytywanie dokumentów. HD (High Density): SE4750, skanowanie miniaturowych kodów od 3 mil — elektronika, farmacja. DP (Direct Part Marking): SE4750-DL, odczyt znakowania bezpośredniego (dot peen, laser etch) — automotive, lotnictwo.'
+        },
+        {
+          question: 'Jak sparować skaner DS3678 z bazą STB3678?',
+          answer: 'Upewnij się, że baza jest zasilona (zielona LED). Znajdź kod parowania na spodzie bazy STB3678. Zeskanuj ten kod skanerem DS3678. Sygnał potwierdzający: high-low-high-low + low-high. LED skanera zmieni się na stały zielony. Alternatywnie: włóż skaner do bazy (jeśli Contact Pairing jest włączone). Jedna baza może obsługiwać do 7 skanerów (tryb Multipoint). PIN domyślny: 0000.'
+        },
+        {
+          question: 'Jak długo wytrzymuje bateria w skanerze Zebra DS3678?',
+          answer: 'Bateria PowerPrecision+ 3100 mAh (BTRY-36IAB0E-00) zapewnia: ponad 100 000 skanów (wersja SR), ponad 70 000 skanów (HP/ER). Ładowanie przez zasilacz zewnętrzny: ok. 3 godziny (0-90%), przez USB: do 10 godzin. Cykl życia: 300-500 pełnych cykli ładowania. Bateria jest wymienna przez użytkownika (user-replaceable). Koszt oryginalnej: 160-240 zł, zamiennik: 80-140 zł.'
+        },
+        {
+          question: 'Co oznaczają sygnały dźwiękowe na skanerze Zebra DS3608?',
+          answer: 'Trójtonal rosnący (low-medium-high) = poprawne uruchomienie. Jeden krótki bip = poprawne skanowanie. 4 długie niskie tony = błąd transmisji (sprawdź kabel i interfejs). Seria high-low-high-low = wejście w tryb programowania. DS3678 dodatkowo: ciągły ton = poza zasięgiem bazy, 6 szybkich wysokich tonów + wibracje = bateria krytycznie niska (natychmiast ładuj).'
+        }
+      ]
+    },
+    content: `
+> **Szybka odpowiedź:** Skaner **Zebra DS3608** nie skanuje? **DS3678** traci połączenie z bazą? W **60% przypadków** to problem z **firmware lub konfiguracją** — rozwiążesz przez **aktualizację 123Scan** i ponowne parowanie z bazą STB3678. 4 długie niskie tony = **błąd transmisji** (sprawdź kabel). Niebieska LED + 6 pisków + wibracje na DS3678 = **bateria krytyczna** (natychmiast ładuj). Warianty: **SR** (do 1,5 m), **ER** (do 21 m), **HP** (OCR), **HD** (miniaturowe kody), **DP** (DPM). Koszt naprawy: od **0 zł** (konfiguracja) do **1100 zł** (wymiana silnika SE4850). **Diagnostyka bezpłatna.**
+
+## TL;DR — 10 najczęstszych usterek DS3608/DS3678
+
+| # | Problem | Częstość | Sam naprawisz? | Koszt serwisu |
+|---|---------|----------|----------------|---------------|
+| 1 | DS3678 traci Bluetooth z bazą | ⭐⭐⭐⭐⭐ | ✅/❌ | 0–500 zł |
+| 2 | SE4850 nie ostrzy (ER) | ⭐⭐⭐⭐ | ❌ Serwis | 400–1100 zł |
+| 3 | Trigger nie działa | ⭐⭐⭐ | ✅/❌ | 200–400 zł |
+| 4 | Okienko skanera zarysowane | ⭐⭐⭐ | ✅/❌ | 100–350 zł |
+| 5 | Flex cable poluzowany (wibracje) | ⭐⭐⭐ | ❌ Serwis | 200–400 zł |
+| 6 | DS3608 nie włącza się po USB | ⭐⭐⭐ | ✅/❌ | 0–800 zł |
+| 7 | Bateria PP+ szybko pada | ⭐⭐⭐ | ✅ Tak | 80–250 zł |
+| 8 | Firmware bazy STB3678 | ⭐⭐ | ✅ Tak | 0 zł |
+| 9 | Uszkodzenia chemiczne | ⭐⭐ | ❌ Serwis | 300–600 zł |
+| 10 | Factory reset — utrata konfiguracji | ⭐⭐ | ✅ Tak | 0 zł |
+
+---
+
+## Specyfikacja techniczna DS3608 i DS3678
+
+Dane z oficjalnego Product Reference Guide Zebra (MN-002689-22EN). DS3608 i DS3678 to **ultra-wytrzymałe skanery klasy przemysłowej** — zaprojektowane do pracy w magazynach, na liniach produkcyjnych, w mroźniach i na zewnątrz.
+
+### DS3608 vs DS3678 — porównanie
+
+| Parametr | DS3608 (przewodowy) | DS3678 (bezprzewodowy) |
+|---|---|---|
+| **Wymiary** | 18,5 × 7,6 × 13,2 cm | 18,5 × 7,6 × 14,2 cm |
+| **Waga (SR)** | ~305 g | ~411 g (z baterią) |
+| **Waga (ER)** | ~335 g | ~436 g (z baterią) |
+| **Interfejsy** | USB, RS-232, Keyboard Wedge, Ethernet | Bluetooth 4.0 Class 1 |
+| **Zasięg BT** | — | do 100 m (Classic) |
+| **Klasa IP** | IP65 / IP67 | IP65 / IP67 |
+| **Upadki na beton** | 2,4 m (SR/HP/HD) / 3,0 m (ER/DP) | 2,4 m (SR/HP/HD) / 3,0 m (ER/DP) |
+| **Tumble test** | 5000 obrotów (SR) / 7500 (ER/DP) | 5000 obrotów (SR) / 7500 (ER/DP) |
+| **Temperatura pracy** | od −30°C do +50°C | od −20°C do +50°C |
+| **Bateria** | — (zasilanie z hosta) | PowerPrecision+ 3100 mAh |
+| **Skany na ładowaniu** | — | >100 000 (SR) / >70 000 (ER/HP) |
+| **ESD** | ±25 kV powietrze, ±10 kV kontakt | ±25 kV powietrze, ±10 kV kontakt |
+| **Gwarancja** | 36 miesięcy | 36 miesięcy (bateria: 12 mies.) |
+
+### Warianty — który wybrać?
+
+| Wariant | Silnik | Zasięg max | IP | Drop | Zastosowanie |
+|---|---|---|---|---|---|
+| **SR** (Standard Range) | SE4750-SR | ~1,5 m | IP65/67 | 2,4 m | Magazyn standardowy, linia pakująca |
+| **ER** (Extended Range) | SE4850-ER | ~21 m | IP65/68 | 3,0 m | Duży magazyn, wózki widłowe, yard |
+| **HP** (High Performance) | SE4750-HP | ~2,1 m | IP65/67 | 2,4 m | Produkcja, OCR, dokumenty, ekrany |
+| **HD** (High Density) | SE4750-HD | ~18 cm | IP65/67 | 2,4 m | Elektronika, farmacja, PCB, probówki |
+| **DP** (Direct Part Marking) | SE4750-DL | Bliski kontakt | IP65/68 | 3,0 m | Automotive, lotnictwo, IUID, DPM |
+
+**Wersja ER** wykorzystuje silnik **SE4850 z IntelliFocus** — automatyczny autofokus dostosowujący ostrość do odległości kodu. To jedyny wariant z podwójnym sensorem (1280×800 bliski + 1920×1080 daleki) i polem widzenia 32°/12° (near/far).
+
+### Zasięgi dekodowania — SE4750-SR vs SE4850-ER
+
+| Typ kodu | Rozdzielczość | SE4750-SR (bliski–daleki) | SE4850-ER (bliski–daleki) |
+|---|---|---|---|
+| **Code 39** | 3 mil | 7,1–15,8 cm | — |
+| **Code 39** | 10 mil | — | 12,7–157,5 cm |
+| **Code 39** | 20 mil | 4,1–92,2 cm | 20,3–348 cm |
+| **Code 128** | 5 mil | 5,8–22,1 cm | — |
+| **UPC-A** | 13 mil | 4,1–58,4 cm | 17,8–195,6 cm |
+| **Data Matrix** | 10 mil | 6,1–25,4 cm | 15,2–96,5 cm |
+| **Code 39** | 100 mil | — | 53,3–1524 cm **(15,2 m!)** |
+| **Data Matrix** | 300 mil (refl.) | — | 58,4–1310 cm **(13,1 m!)** |
+
+---
+
+## Tabela diagnostyczna — sygnały dźwiękowe (beeper)
+
+### DS3608 — sygnały podstawowe
+
+| Zdarzenie | Sygnał | Ton | Co robić |
+|---|---|---|---|
+| Uruchomienie | 1 seria | Low→Medium→High (rosnąca) | OK — prawidłowe włączenie |
+| Poprawne skanowanie | 1 krótki bip | Medium | OK — kod odczytany |
+| **Błąd transmisji** | **4 długie** | **Niski** | **Sprawdź kabel USB/RS-232!** |
+| Wejście w programowanie | 1 seria | High-Low-High-Low | Tryb konfiguracji aktywny |
+| Parametr zaakceptowany | 1 seria | High-Low | OK — ustawienie zapisane |
+| Błąd parametru | 1 seria | Long Low-Long High | Błędny kod konfiguracyjny |
+
+### DS3678 — dodatkowe sygnały bezprzewodowe
+
+| Zdarzenie | Sygnał | Ton | Co robić |
+|---|---|---|---|
+| Parowanie BT OK | 1 seria | High-Low-High-Low + Low-High | OK — sparowano z bazą |
+| Parowanie BT nieudane | 1 seria | Long Low, Long High | Powtórz parowanie |
+| Połączono z bazą | 1 | Medium-High | OK — połączenie aktywne |
+| **Poza zasięgiem** | **Ciągły ton** | **Continuous** | **Podejdź bliżej do bazy** |
+| **Niska bateria** | **1 seria** | **Niski** | **Włóż do ładowarki** |
+| **Bateria krytyczna** | **6 szybkich** | **Wysoki + wibracje** | **NATYCHMIAST ładuj!** |
+| Virtual Tether | Seria | Konfigurowalny | Skaner oddala się od bazy |
+
+---
+
+## Tabela diagnostyczna — wskaźniki LED
+
+### DS3608 LED
+
+| Stan LED | Kolor | Znaczenie |
+|---|---|---|
+| Pojedynczy błysk | Zielony | Uruchomienie OK / poprawne skanowanie |
+| Ciągłe świecenie | Zielony | Gotowy do pracy |
+| Miganie | Bursztynowy | Tryb programowania |
+| **Miganie** | **Czerwony** | **Błąd transmisji / skanowania** |
+| **Ciągłe świecenie** | **Czerwony** | **Awaria krytyczna** |
+| Wyłączony | — | Brak zasilania / tryb uśpienia |
+
+### DS3678 LED
+
+| Stan LED | Kolor | Znaczenie |
+|---|---|---|
+| Ciągłe świecenie | Zielony | Połączony z bazą, gotowy |
+| Pojedynczy błysk | Zielony | Poprawne skanowanie |
+| Miganie | Bursztynowy | Szukanie połączenia / parowanie |
+| Miganie | Niebieski | Tryb discoverable (BT) |
+| **Miganie** | **Czerwony** | **Niska bateria / błąd komunikacji** |
+| **6 szybkich + wibracje** | **Niebieski** | **Bateria krytyczna!** |
+
+### STB3678 Cradle (baza) LED
+
+| Stan LED | Kolor | Znaczenie |
+|---|---|---|
+| Ciągłe świecenie | Zielony | Gotowa / bateria naładowana |
+| Świecenie | Bursztynowy | Ładowanie w toku |
+| Miganie | Bursztynowy | Ładowanie rozpoczęte |
+| **Świecenie** | **Czerwony** | **Błąd ładowania!** |
+| Wyłączony | — | Brak zasilania |
+
+---
+
+## 1. Zebra DS3678 traci połączenie Bluetooth z bazą STB3678
+
+**Najczęstszy problem** — dotyczy nawet 40% zgłoszeń serwisowych DS3678.
+
+### Objawy
+- Skaner losowo traci połączenie z bazą po kilku godzinach
+- Czerwona/bursztynowa LED miga na bazie
+- 4 krótkie piski po skanowaniu (brak transmisji)
+- Niebieska LED + wibracje + 6 pisków = brak połączenia z hostem
+
+### Rozwiązanie krok po kroku
+
+**Krok 1 — Power cycle bazy:**
+Odłącz zasilanie STB3678 na 10 sekund, podłącz ponownie.
+
+**Krok 2 — Ponowne parowanie:**
+Zeskanuj kod parowania ze **spodu bazy STB3678**. Potwierdzenie: seria tonów High-Low-High-Low + Low-High. LED = stały zielony.
+
+**Krok 3 — Sprawdź kabel USB:**
+Użyj **oryginalnego kabla Zebra**, podłącz **bezpośrednio do PC** (nie hub USB). Baza potrzebuje stabilnego zasilania.
+
+**Krok 4 — Wi-Fi Friendly Mode:**
+Jeśli w magazynie dużo WiFi AP — włącz tryb Wi-Fi Friendly w 123Scan (minimalizuje zakłócenia 2.4 GHz).
+
+**Krok 5 — Aktualizacja firmware:**
+Pobierz najnowszy firmware z Zebra Support, wgraj przez 123Scan. Aktualizuj **i skaner, i bazę**.
+
+**Krok 6 — Factory reset:**
+Zeskanuj kod „Set Factory Defaults" z PRG, sparuj od nowa.
+
+| Element | Koszt |
+|---|---|
+| Firmware + parowanie (DIY) | 0 zł |
+| Nowa płytka główna STB3678 | ~140 zł ($34.90) |
+| Naprawa w serwisie | 250–500 zł |
+
+---
+
+## 2. Silnik SE4850 nie ostrzy — utrata zasięgu (wersja ER)
+
+Dotyczy wyłącznie wariantów **DS3608-ER / DS3678-ER** z silnikiem **SE4850** i technologią **IntelliFocus** (automatyczny autofokus).
+
+### Objawy
+- Skaner nie czyta kodów z odległości >3 m (wcześniej czytał do 21 m)
+- Wzorzec celowania (aiming pattern) rozmyty lub nieruchomy
+- Działa tylko z bliskiej odległości — jakby stał się skanerem SR
+- Po upadku: czerwona LED, brak dekodowania
+
+### Przyczyny
+- **Upadek z wysokości** — mimo 3,0 m drop spec, silny upadek może zablokować mechanizm autofokusu
+- **Poluzowanie taśmy flex** SE4850 na płycie głównej (wibracje na wózku widłowym)
+- **Zarysowane okienko** — autofokus wymaga czystego obrazu
+- Wadliwy firmware silnika
+
+### Rozwiązanie krok po kroku
+
+1. **Wyczyść okienko** — miękka ściereczka + IPA 70%
+2. **Factory reset** — zeskanuj kod resetujący z PRG
+3. **Aktualizacja firmware** — 123Scan, Check for updates, Flash
+4. **Sprawdź taśmę flex** — przerywane skanowanie po stuknięciu = poluzowana taśma (wymaga otwarcia obudowy)
+5. **Wymiana SE4850** — jeśli autofokus nie wraca po firmware update
+
+| Element | Koszt |
+|---|---|
+| Czyszczenie + firmware (DIY) | 0 zł |
+| Taśma flex SE4850 | ~20 zł ($4.90) |
+| Silnik SE4850 (ER) | ~520 zł ($128) |
+| Naprawa w serwisie | 400–1100 zł |
+
+---
+
+## 3. Trigger (spust) nie działa
+
+### Objawy
+- Wciśnięcie spustu nie wywołuje skanowania
+- Trigger „klika" mechanicznie, ale brak wiązki celowania
+- Zacina się lub nie wraca do pozycji wyjściowej
+
+### Przyczyny
+- **Mechaniczne zużycie** — trigger wytrzymuje ok. **1–3 mln naciśnięć**. Przy 1000+ skanów/zmianę zużywa się w 1–3 lata
+- **Zanieczyszczenia** — kurz, piasek w mechanizmie
+- **Uszkodzony microswitch** na płytce PCB
+- **Tryb „Presentation Mode"** — skaner skonfigurowany na automatyczne skanowanie bez triggera
+
+### Rozwiązanie krok po kroku
+
+1. **Sprawdź konfigurację** — upewnij się, że tryb „Hand-Held Trigger Mode" jest aktywny
+2. **Czyszczenie** — nawilżona ściereczka wokół triggera, usuń zanieczyszczenia
+3. **Test diagnostyczny** — Zebra Scanner Utilities, Scanner Diagnostics
+4. **Wymiana triggera** — część na zatrzasku, nie wymaga lutowania
+
+| Element | Koszt |
+|---|---|
+| Konfiguracja + czyszczenie (DIY) | 0 zł |
+| Trigger (część) | ~28 zł ($6.90) |
+| Naprawa w serwisie | 200–400 zł |
+
+---
+
+## 4. Okienko skanera zarysowane
+
+### Objawy
+- Problemy z odczytem kodów, szczególnie drobnych 2D / Data Matrix
+- Wzorzec celowania rozmyty / rozproszony
+- Widoczne rysy na okienku wyjściowym
+- Skaner „traci zasięg" — musi być bliżej kodu
+
+### Przyczyny
+- Tarcie o metalowe/betonowe powierzchnie przy bliskim skanowaniu
+- Upadki na twardą powierzchnię (uderzenie punktowe)
+- Piasek/pył w środowisku (działa jak papier ścierny przy czyszczeniu)
+- Szorstkie tkaniny lub agresywne chemikalia
+
+### Rozwiązanie
+
+1. **Wyczyść okienko** — miękka bezpyłowa ściereczka + IPA 70%
+2. **Oceń zarysowanie** — powierzchowne rysy mogą nie wpływać na skanowanie
+3. **Wymień okienko (lens)** — prosta naprawa, tania część
+
+| Wariant | Koszt okienka |
+|---|---|
+| DS3608-ER / DS3678-ER | ~20 zł ($4.90) |
+| DS3608-HP / DS3678-SR | ~20 zł ($4.90) |
+| DS3608-DP | ~10 zł ($2.50) |
+| Lens holder (ER) | ~60 zł ($14.90) |
+| **Naprawa w serwisie** | **100–350 zł** |
+
+---
+
+## 5. Flex cable poluzowany — przerywane skanowanie przy wibracjach
+
+Problem typowy dla skanerów montowanych na **wózkach widłowych**, **taśmociągach** i w środowiskach z intensywnymi wibracjami.
+
+### Objawy
+- Skaner **czasem skanuje, czasem nie** — losowe zachowanie
+- Delikatne stuknięcie/poruszenie „naprawia" problem na chwilę
+- Brak wzorca celowania mimo włączenia skanera
+- Problem nasila się przy wibracjach
+
+### Przyczyny
+- **Wibracje przemysłowe** — taśma flex łącząca silnik skanujący z płytą główną poluzowuje się na złączu FPC
+- **Wielokrotne upadki** — nawet w zakresie specyfikacji (2,4–3,0 m) stopniowo poluzowują złącze
+- Sporadyczna wada produkcyjna (zły docisk złącza FPC)
+
+### Rozwiązanie
+
+1. **Test „wiggle"** — porusz skanerem i obserwuj wiązkę celującą. Migocze = problem z flex cable
+2. **Otwarcie obudowy** — śruby Torx, nie wymaga lutowania
+3. **Dociśnij złącze** flex cable na płytce głównej
+4. **Wymień taśmę** — jeśli nadłamana lub pęknięta
+
+| Wariant silnika | Koszt taśmy flex |
+|---|---|
+| SE4850 (ER) | ~20 zł ($4.90) |
+| SE4750 (DP/HP/HD) | ~52 zł ($12.90) |
+| SE4710 (SR) | ~28 zł ($6.90) |
+| **Naprawa w serwisie** | **200–400 zł** |
+
+---
+
+## 6. Zebra DS3608 nie włącza się po podłączeniu USB
+
+### Objawy
+- Po podłączeniu kabla USB nic się nie dzieje — brak LED, brak pisku
+- LED świeci się, ale brak skanowania po wciśnięciu triggera
+- Skaner „budzi się" i natychmiast gaśnie
+- Działa chwilowo po odłączeniu/podłączeniu kabla
+
+### Przyczyny
+- **Niewystarczające zasilanie USB** — DS3608 pobiera do 450 mA; port USB 2.0 może nie wystarczać
+- **Wadliwy kabel** — przetarty, nadłamany (szczególnie przy złączu)
+- **Błędny interfejs** — skaner skonfigurowany na RS-232, a podłączony do USB
+- **Uszkodzone złącze USB** — wgięte/złamane piny
+- **Problem ze sterownikiem** Windows 10/11 po resume ze sleep
+
+### Rozwiązanie krok po kroku
+
+1. **Sprawdź zasilanie** — podłącz bezpośrednio do PC (port USB 3.0), nie hub. Lub użyj zasilacza zewnętrznego (12V)
+2. **Wymień kabel** — przetestuj innym oryginalnym kablem Zebra
+3. **Factory reset** — jeśli LED świeci, zeskanuj „Set Factory Defaults"
+4. **Wymuś interfejs USB** — zeskanuj kod „USB HID Keyboard" z instrukcji
+5. **Sterownik Windows** — zainstaluj CoreScanner Driver z pakietu 123Scan
+6. **Sprawdź piny** złącza USB na skanerze
+
+| Element | Koszt |
+|---|---|
+| Kabel USB Zebra | 60–120 zł ($15–30) |
+| Płyta główna DS3608 | 400–600 zł ($98–148) |
+| Naprawa w serwisie | 300–800 zł |
+
+---
+
+## 7. Bateria PowerPrecision+ szybko się rozładowuje (DS3678)
+
+### Specyfikacja baterii
+
+| Parametr | Wartość |
+|---|---|
+| **Model** | BTRY-36IAB0E-00 |
+| **Pojemność** | 3100–3150 mAh (PowerPrecision+) |
+| **Napięcie** | 3,7 V / 12,58 Wh |
+| **Ładowanie (zasilacz)** | ok. 3 godziny (0–90%) |
+| **Ładowanie (USB)** | do 10 godzin |
+| **Cykl życia** | 300–500 pełnych cykli |
+| **Gwarancja** | 12 miesięcy |
+
+### Przyczyny degradacji
+- Naturalne starzenie — po 500 cyklach pojemność spada do ~80%
+- Ładowanie w ekstremalnych temperaturach (poniżej 0°C lub powyżej 40°C)
+- Długie przetrzymywanie w pełnym rozładowaniu
+- Uszkodzenia mechaniczne (upadki)
+
+### Rozwiązanie
+
+1. **Sprawdź stan baterii** — PowerPrecision+ raportuje stan zdrowia przez 123Scan lub host
+2. **Kalibracja** — rozładuj do końca, naładuj do pełna, powtórz 3x
+3. **Wymiana** — bateria jest **wymienna przez użytkownika** (snap-in, bez narzędzi)
+
+| Element | Koszt |
+|---|---|
+| Oryginalna Zebra BTRY-36IAB0E-00 | 160–240 zł ($40–60) |
+| Zamiennik (Artisan Power, DFTIM) | 80–140 zł ($20–35) |
+
+---
+
+## 8. Firmware bazy STB3678 — problemy z aktualizacją
+
+### Objawy
+- 123Scan: „The firmware selected does not match the target scanner"
+- 123Scan: „This scanner does not have a valid plugin available"
+- Aktualizacja „wisi" lub kończy się błędem
+- Po nieudanej aktualizacji baza nie reaguje
+
+### Rozwiązanie krok po kroku
+
+1. **Zaktualizuj 123Scan** do najnowszej wersji z Zebra Support
+2. **Zaktualizuj CoreScanner Driver** — musi być Microsoft-signed SNAPI Imaging driver
+3. **Podłącz bezpośrednio USB** — nie hub, oryginalny kabel Zebra
+4. **Włóż skaner do bazy** — firmware bazy aktualizuje się **PRZEZ skaner** w bazie
+5. **„Mass Upgrade"** w 123Scan, poczekaj, „Update Firmware"
+6. **Nie odłączaj** kabla ani skanera (3–10 minut)
+
+| Element | Koszt |
+|---|---|
+| Firmware update (DIY) | 0 zł |
+| Płytka główna STB3678 (jeśli „zbrickowana") | ~140 zł ($34.90) |
+
+---
+
+## 9. Uszkodzenia chemiczne obudowy
+
+Zebra DS3608/DS3678 ma obudowę **Industrial Green** z wytrzymałego tworzywa — ale nie jest odporna na **wszystkie** chemikalia.
+
+### Substancje ZABRONIONE (niszczą obudowę)
+
+| Substancja | Efekt |
+|---|---|
+| **Aceton** | Rozpuszcza plastik, matowi okienko |
+| **Toluen / benzen** | Zniszczenie plastiku |
+| **Ketony (MEK)** | Pękanie obudowy |
+| **Chlorowane węglowodory** | Niszczą uszczelki i plastik |
+| **Amoniak (roztwory)** | Matowienie powierzchni |
+| **Kwas karbolowy (fenol)** | Zniszczenie obudowy |
+
+### Substancje DOPUSZCZONE
+
+- Alkohol izopropylowy (IPA) 70% — **PODSTAWOWY** środek czyszczący
+- Łagodny roztwór mydła z wodą
+- Nadtlenek wodoru (ograniczone stężenie)
+- Gotowe chusteczki Zebra do skanerów
+- Podchloryn sodu — **TYLKO do skanera, NIE do bazy STB3678!**
+
+### Rozwiązanie
+1. Natychmiast przestań używać agresywnego środka
+2. Przemyj skaner czystą wodą, osusz
+3. Jeśli plastik popękany — wymiana obudowy
+4. Jeśli uszczelki stwardniałe — utrata IP67, wymiana w serwisie
+
+| Element | Koszt |
+|---|---|
+| Top + back cover | ~300 zł ($70–80) |
+| Naprawa w serwisie | 300–600 zł |
+
+---
+
+## 10. Factory reset — przywrócenie ustawień fabrycznych
+
+Trzy metody resetu DS3608/DS3678:
+
+### Metoda 1: Kod kreskowy (zalecana)
+1. Otwórz Product Reference Guide (MN-002689-22EN), rozdział „User Preferences"
+2. Znajdź kod „**Set Factory Defaults**"
+3. Zeskanuj — seria tonów potwierdza reset
+4. Gotowe — skaner powrócił do ustawień fabrycznych
+
+### Metoda 2: 123Scan
+1. Podłącz skaner USB, otwórz 123Scan
+2. Wybierz „Restore Defaults"
+3. Poczekaj na potwierdzenie z skanera
+
+### Metoda 3: Hard Reset (DS3678)
+1. Wyłącz skaner
+2. **Wyjmij baterię** na 10 sekund
+3. Włóż baterię i włącz skaner
+4. Uruchomi się z ustawieniami fabrycznymi
+
+### Co kasuje factory reset?
+
+| Ustawienie | Resetowane? |
+|---|---|
+| Typ interfejsu (USB HID, RS-232) | Tak |
+| Symbologie (włączone/wyłączone) | Tak |
+| Reguły ADF/MDF | Tak |
+| Ustawienia beepera i LED | Tak |
+| **Parowanie Bluetooth (DS3678)** | Tak |
+| Firmware | Nie |
+
+**Po resecie** konieczne jest ponowne skonfigurowanie skanera i sparowanie z bazą (DS3678).
+
+---
+
+## Podsumowanie kosztów napraw DS3608 / DS3678
+
+| Naprawa | Część ($) | Serwis PL (zł) | DIY? |
+|---|---|---|---|
+| Bluetooth / parowanie | $0 (firmware) | 0–500 | Tak (firmware) |
+| Silnik SE4850 (ER) | $128 | 400–1100 | Serwis |
+| Silnik SE4750 (SR/HP/HD) | $80–98 | 400–800 | Serwis |
+| Flex cable silnika | $4.90–12.90 | 200–400 | Zaawansowane |
+| Trigger | $6.90 | 200–400 | Zaawansowane |
+| Okienko skanera | $2.50–4.90 | 100–350 | Zaawansowane |
+| Bateria PP+ | $20–60 | 80–250 | Łatwe |
+| Kabel USB | $15–30 | 60–120 | Łatwe |
+| Płyta główna DS3608 | $98–148 | 400–600 | Serwis |
+| Płyta główna STB3678 | $34.90 | 250–500 | Serwis |
+| Obudowa (top + back) | $70–80 | 300–600 | Serwis |
+| Factory reset / firmware | $0 | 0 | DIY |
+
+---
+
+## Czego potrzebujesz do samodzielnej diagnostyki
+
+- **123Scan** (darmowe) — konfiguracja, firmware, diagnostyka. Pobierz z Zebra Support
+- **Product Reference Guide** MN-002689-22EN — kody konfiguracyjne, tabele symbologii
+- **Kabel USB** — oryginalny Zebra, bez huba
+- **Alkohol izopropylowy 70%** + miękka ściereczka — do czyszczenia okienka
+- **Śrubokręt Torx** — do otwarcia obudowy (tylko zaawansowane naprawy)
+
+---
+
+## Powiązane artykuły
+
+- [Serwis skanerów Zebra — diagnostyka, naprawa, kalibracja](/blog/serwis-skanerow-zebra-diagnostyka-naprawa)
+- [Skaner Zebra nie skanuje — diagnostyka i rozwiązania](/blog/skaner-zebra-nie-skanuje-diagnostyka-rozwiazania)
+- [Parowanie skanera Bluetooth Zebra — kompletny poradnik](/blog/parowanie-skanera-bluetooth-zebra-poradnik)
+- [Bateria skanera Zebra — problemy z ładowaniem, żywotność i wymiana](/blog/bateria-skanera-zebra-ladowanie-zywotnosc-problemy)
+- [Naprawa skanera Zebra — kiedy warto, kiedy wymienić?](/blog/naprawa-skanera-zebra-kiedy-warto-kiedy-wymienic)
+- [Zebra DS2208 i DS2278 — najczęstsze problemy i naprawa](/blog/zebra-ds2208-ds2278-problemy-naprawa-serwis)
+- [Oznaczenia skanerów Zebra: HD, SR, XR, ER, KD — przewodnik](/blog/oznaczenia-skanerow-zebra-hd-sr-xr-er-kd)
+- [Porównanie skanerów Zebra — który model wybrać?](/blog/porownanie-skanerow-zebra-ktory-wybrac)
+
+[Serwis skanerów Zebra — diagnostyka i naprawa →](/serwis-skanerow-zebra)
+
+*Ostatnia aktualizacja: marzec 2026*
 `
   }
 
