@@ -1348,7 +1348,8 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
       notFound()
     }
     pageTitle = `${productType.namePlural} - ${printerCategory.name}`
-    pageSubtitle = `${productType.namePlural} do ${printerCategory.name.toLowerCase()} Zebra`
+    const categoryGenitive: Record<string, string> = { 'Terminale': 'terminali', 'Drukarki mobilne': 'drukarek mobilnych' }
+    pageSubtitle = `${productType.namePlural} do ${categoryGenitive[printerCategory.name] || printerCategory.name.toLowerCase()} Zebra`
     filters.printerCategory = printerCategory.id
   }
 
