@@ -35081,7 +35081,7 @@ Twój skaner Zebra wymaga naprawy? Skontaktuj się z serwisem TAKMA:
     coverImage: '/blog/zebra-ds2208-ds2278-problemy-naprawa-serwis.jpeg',
     coverImageAlt: 'Skaner Zebra DS2208 z podświetloną linią celowania podczas skanowania kodu kreskowego',
     author: {
-      name: 'Tadeusz Tiuchty',
+      name: 'Krzysztof Wójcik',
       role: 'Specjalista ds. serwisu skanerów Zebra'
     },
     publishedAt: '2026-02-28',
