@@ -34309,7 +34309,7 @@ Darmowa aplikacja od Zebra — zainstaluj z Google Play (**Zebra Device Diagnost
         },
         {
           question: 'Czy opłaca się naprawiać terminal Zebra TC58?',
-          answer: 'TC58 to aktualny model Zebra z pełnym wsparciem (do ~2030). Naprawa prawie zawsze się opłaca — nowy TC58 kosztuje 7000-10000 zł, a nawet najdroższa naprawa (ekran + skaner) to 1500-2000 zł. Jedyny wyjątek to uszkodzenie płyty głównej przy wielokrotnych upadkach z dużej wysokości.'
+          answer: 'TC58 to aktualny model Zebra z pełnym wsparciem (do ~2030). Naprawa prawie zawsze się opłaca — [nowy TC58](https://www.takma.com.pl/produkt/zebra-tc58) kosztuje 7000-10000 zł, a nawet najdroższa naprawa (ekran + skaner) to 1500-2000 zł. Jedyny wyjątek to uszkodzenie płyty głównej przy wielokrotnych upadkach z dużej wysokości.'
         },
         {
           question: 'Jakie są najczęstsze awarie terminala Zebra TC58?',
@@ -34369,7 +34369,7 @@ TC58 to flagowy terminal mobilny Zebra zaprojektowany dla kurierów i pracownik�
 | Wymiary | 163.5 × 75.5 × 13.2 mm | 163.5 × 75.5 × 13.2 mm |
 | Waga | 258 g (z baterią standard) | 261 g (z baterią standard) |
 
-> **Serwis TAKMA:** TC58 to aktualny model z pełnym wsparciem Zebra (przewidywane do ~2030). Naprawa **zawsze się opłaca** — nowy TC58 to 7000-10 000 zł.
+> **Serwis TAKMA:** TC58 to aktualny model z pełnym wsparciem Zebra (przewidywane do ~2030). Naprawa **zawsze się opłaca** — [nowy TC58](https://www.takma.com.pl/produkt/zebra-tc58) to 7000-10 000 zł.
 
 ## 1. Pęknięty ekran 6" — 30% napraw
 
@@ -34550,6 +34550,8 @@ Przytrzymaj przycisk **Power 10-12 sekund** → terminal się zrestartuje.
 | Czyszczenie po zalaniu | 300–600 zł | 3-5 dni | 6 miesięcy |
 
 > Wszystkie ceny netto. **Diagnostyka bezpłatna.** Odbiór kurierem z całej Polski.
+
+> 🛒 **Naprawa nieopłacalna?** Kup [nowy terminal Zebra TC58](https://www.takma.com.pl/produkt/zebra-tc58) w sklepie TAKMA — autoryzowanego partnera Zebra. Oryginalne urządzenie z pełną gwarancją producenta.
 
 ## Co możesz naprawić sam, a co wymaga serwisu?
 
