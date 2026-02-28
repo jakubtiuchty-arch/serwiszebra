@@ -287,12 +287,14 @@ export const blogPosts: BlogPost[] = [
 ### Koszt naprawy:
 | Model | Koszt wymiany ekranu |
 |-------|---------------------|
-| TC21/TC22/TC26/TC27 | 600-900 zł netto |
-| TC52/TC53/TC57/TC58 | 700-1000 zł netto |
-| MC3300/MC3400 | 800-1000 zł netto |
-| MC9300/MC9400 | 900-1200 zł netto |
+| [TC22](https://www.takma.com.pl/produkt/zebra-tc22)/[TC27](https://www.takma.com.pl/produkt/zebra-tc27) | 600-900 zł netto |
+| [TC53](https://www.takma.com.pl/produkt/zebra-tc53)/[TC58](https://www.takma.com.pl/produkt/zebra-tc58) | 700-1000 zł netto |
+| [MC3400](https://www.takma.com.pl/produkt/zebra-mc3400) | 800-1000 zł netto |
+| [MC9400](https://www.takma.com.pl/produkt/zebra-mc9400) | 900-1200 zł netto |
 
 > **Profilaktyka:** Stosuj **obudowy Rugged Boot** — zwiększają odporność na upadki z 1,2m do 1,8m na beton. Inwestycja 100-200 zł chroni przed naprawą za 800+ zł.
+
+> 🛒 **Ekran pęknięty na starszym modelu?** Rozważ wymianę na następcę: TC21 → [TC22](https://www.takma.com.pl/produkt/zebra-tc22), TC52 → [TC53](https://www.takma.com.pl/produkt/zebra-tc53), MC3300 → [MC3400](https://www.takma.com.pl/produkt/zebra-mc3400).
 
 ---
 
@@ -362,9 +364,9 @@ export const blogPosts: BlogPost[] = [
 ### Koszt naprawy:
 | Element | Koszt |
 |---------|-------|
-| Bateria standardowa TC22 (3800 mAh) | 150-250 zł |
-| Bateria extended TC22 (5200 mAh) | 200-350 zł |
-| Bateria MC3400 (7000 mAh) | 250-450 zł |
+| Bateria standardowa [TC22](https://www.takma.com.pl/produkt/zebra-tc22) (3800 mAh) | 150-250 zł |
+| Bateria extended [TC22](https://www.takma.com.pl/produkt/zebra-tc22) (5200 mAh) | 200-350 zł |
+| Bateria [MC3400](https://www.takma.com.pl/produkt/zebra-mc3400) (7000 mAh) | 250-450 zł |
 
 📖 **Szczegółowy poradnik:** [Bateria Zebra TC58 — jak przedłużyć czas pracy](/blog/zebra-tc58-bateria-nie-wytrzymuje-trasy-kurierskiej) | 🛒 [Kup oryginalną baterię →](/sklep/akumulatory/terminale)
 
@@ -463,7 +465,7 @@ export const blogPosts: BlogPost[] = [
 | Czyszczenie klawiatury | Bezpłatnie (sam) |
 | Wymiana klawiatury (29/38/47 klawiszy) | 300-500 zł netto |
 
-MC3400 ma **3 warianty klawiatury**: 29-key (numeryczna), 38-key (funkcyjna), 47-key (alfanumeryczna). Upewnij się, że zamawiasz właściwy typ.
+[MC3400](https://www.takma.com.pl/produkt/zebra-mc3400) ma **3 warianty klawiatury**: 29-key (numeryczna), 38-key (funkcyjna), 47-key (alfanumeryczna). Upewnij się, że zamawiasz właściwy typ.
 
 ---
 
@@ -587,6 +589,20 @@ Uszkodzenia mechaniczne **zawsze wymagają serwisu**. Nie próbuj klejić obudow
 - ❌ Naprawa płyty głównej (400-800 zł)
 - ❌ Naprawa uszkodzeń po upadku (300-1500 zł)
 - ❌ Wymiana portu ładowania (200-400 zł)
+
+---
+
+## Kup nowy terminal Zebra
+
+Naprawa nieopłacalna lub potrzebujesz dodatkowe urządzenie? W sklepie **TAKMA** — autoryzowanym partnerze Zebra — kupisz oryginalne terminale z pełną gwarancją producenta:
+
+- Kompaktowe: [TC22](https://www.takma.com.pl/produkt/zebra-tc22) | [TC27](https://www.takma.com.pl/produkt/zebra-tc27)
+- Korporacyjne: [TC53](https://www.takma.com.pl/produkt/zebra-tc53) | [TC53e](https://www.takma.com.pl/produkt/zebra-tc53e) | [TC501](https://www.takma.com.pl/produkt/zebra-tc501)
+- Kurierskie (5G): [TC58](https://www.takma.com.pl/produkt/zebra-tc58) | [TC58e](https://www.takma.com.pl/produkt/zebra-tc58e)
+- Magazynowe MC: [MC3400](https://www.takma.com.pl/produkt/zebra-mc3400) | [MC3450](https://www.takma.com.pl/produkt/zebra-mc3450) | [MC9400](https://www.takma.com.pl/produkt/zebra-mc9400)
+- Rugged: [TC73](https://www.takma.com.pl/produkt/zebra-tc73) | [TC78](https://www.takma.com.pl/produkt/zebra-tc78)
+
+[Zobacz wszystkie terminale Zebra w TAKMA →](https://www.takma.com.pl/terminale-mobilne)
 
 ---
 
