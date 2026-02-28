@@ -34622,7 +34622,7 @@ Twój terminal TC58 wymaga naprawy? Skontaktuj się z serwisem TAKMA:
   {
     slug: 'serwis-skanerow-zebra-diagnostyka-naprawa',
     title: 'Serwis skanerów Zebra — diagnostyka i naprawa wszystkich modeli [2026]',
-    excerpt: 'Kompletny przewodnik serwisowy skanerów Zebra: DS2208, DS4608, DS8178, DS3678, DS9308, LS2208 i inne. Najczęstsze awarie, diagnostyka krok po kroku, cennik napraw. Kiedy naprawić, a kiedy wymienić?',
+    excerpt: 'Kompletny przewodnik serwisowy skanerów Zebra: DS2208, DS4608, DS8288, DS3678, DS9308, LS2208 i inne. Najczęstsze awarie, diagnostyka krok po kroku, cennik napraw. Kiedy naprawić, a kiedy wymienić?',
     coverImage: '/blog/serwis-skanerow-zebra-diagnostyka-naprawa.jpeg',
     coverImageAlt: 'Skanery kodów kreskowych Zebra z narzędziami serwisowymi — profesjonalna diagnostyka i naprawa',
     author: {
@@ -34633,10 +34633,10 @@ Twój terminal TC58 wymaga naprawy? Skontaktuj się z serwisem TAKMA:
     readingTime: 18,
     deviceType: 'skanery',
     category: 'troubleshooting',
-    tags: ['serwis skanerów', 'naprawa skanera', 'DS2208', 'DS4608', 'DS8178', 'DS3678', 'DS9308', 'LS2208', 'LI4278', 'diagnostyka', 'troubleshooting', 'Bluetooth', 'okienko skanera', 'trigger', 'kabel USB', 'czyszczenie'],
+    tags: ['serwis skanerów', 'naprawa skanera', 'DS2208', 'DS4608', 'DS8288', 'DS3678', 'DS9308', 'LS2208', 'LI4278', 'diagnostyka', 'troubleshooting', 'Bluetooth', 'okienko skanera', 'trigger', 'kabel USB', 'czyszczenie'],
     seo: {
       metaTitle: 'Serwis skanerów Zebra — diagnostyka i naprawa wszystkich modeli [2026]',
-      metaDescription: 'Skaner Zebra nie skanuje? Diagnostyka DS2208, DS4608, DS8178, DS3678, DS9308, LS2208. Cennik napraw od 100 zł. Najczęstsze awarie skanerów kodów kreskowych. Bezpłatna diagnostyka TAKMA.',
+      metaDescription: 'Skaner Zebra nie skanuje? Diagnostyka DS2208, DS4608, DS8288, DS3678, DS9308, LS2208. Cennik napraw od 100 zł. Najczęstsze awarie skanerów kodów kreskowych. Bezpłatna diagnostyka TAKMA.',
       keywords: [
         'serwis skanerów zebra',
         'naprawa skanera zebra',
@@ -34683,7 +34683,7 @@ Twój terminal TC58 wymaga naprawy? Skontaktuj się z serwisem TAKMA:
         },
         {
           question: 'Czy opłaca się naprawiać skaner Zebra?',
-          answer: 'Złota reguła: naprawa opłaca się jeśli koszt nie przekracza 50% ceny nowego skanera. Dla DS2208 (nowy ~800 zł) — opłacalna do ~400 zł. Dla DS8178 (nowy ~3500 zł) — opłacalna do ~1750 zł. Dla DS3678 (nowy ~5000 zł) — opłacalna do ~2500 zł. Wyjątek: modele EOL (LS2208, LI4278) — lepiej wymienić na nowszy.'
+          answer: 'Złota reguła: naprawa opłaca się jeśli koszt nie przekracza 50% ceny nowego skanera. Dla DS2208 (nowy ~800 zł) — opłacalna do ~400 zł. Dla DS8288 (nowy ~3500 zł) — opłacalna do ~1750 zł. Dla DS3678 (nowy ~5000 zł) — opłacalna do ~2500 zł. Wyjątek: modele EOL (LS2208, LI4278) — lepiej wymienić na nowszy.'
         },
         {
           question: 'Jakie są najczęstsze awarie skanerów Zebra?',
@@ -34699,7 +34699,7 @@ Twój terminal TC58 wymaga naprawy? Skontaktuj się z serwisem TAKMA:
         },
         {
           question: 'Gdzie naprawić skaner Zebra?',
-          answer: 'TAKMA to autoryzowany serwis Zebra z certyfikatem Zebra Registered Repair. Serwisujemy wszystkie modele skanerów: DS2208, DS4608, DS8178, DS3678, DS9308, LS2208, LI4278 i inne. Oferujemy: bezpłatną diagnostykę, oryginalne części Zebra, gwarancję 12 miesięcy, odbiór kurierem z całej Polski. Kontakt: formularz na serwis-zebry.pl lub telefon.'
+          answer: 'TAKMA to autoryzowany serwis Zebra z certyfikatem Zebra Registered Repair. Serwisujemy wszystkie modele skanerów: DS2208, DS4608, DS8288, DS3678, DS9308, LS2208, LI4278 i inne. Oferujemy: bezpłatną diagnostykę, oryginalne części Zebra, gwarancję 12 miesięcy, odbiór kurierem z całej Polski. Kontakt: formularz na serwis-zebry.pl lub telefon.'
         },
         {
           question: 'Jak wyczyścić okienko skanera Zebra?',
@@ -34734,7 +34734,7 @@ Serwisujemy **wszystkie modele** skanerów Zebra — od kompaktowych biurkowych 
 |---|---|---|---|---|---|
 | **[DS2208](https://www.takma.com.pl/produkt/zebra-ds2208)** | SE2100 | 1D/2D | IP52 | 1.5m na beton | Kasa, biuro, apteka |
 | **DS4608** | SE4710 | 1D/2D | IP52 | 1.8m na beton | Retail, logistyka |
-| **DS8108** | SE4770 | 1D/2D | IP52 | 1.8m na beton | Magazyn, logistyka premium |
+| **[DS8208](https://www.takma.com.pl/produkt/zebra-ds8208)** | SE4770 | 1D/2D | IP52 | 1.8m na beton | Magazyn, logistyka premium |
 | **DS3608** ([SR](https://www.takma.com.pl/produkt/zebra-ds3608-sr) / [HP](https://www.takma.com.pl/produkt/zebra-ds3608-hp) / [HD](https://www.takma.com.pl/produkt/zebra-ds3608-hd) / [XR](https://www.takma.com.pl/produkt/zebra-ds3608-xr)) | SE4850 (ER) | 1D/2D (do 21m!) | IP67 | 2.4m na beton | Magazyn wysokiego składu |
 | **LS2208** | laser | tylko 1D | brak | 1.5m | Kasa (EOL — nie kupuj nowego) |
 
@@ -34743,7 +34743,7 @@ Serwisujemy **wszystkie modele** skanerów Zebra — od kompaktowych biurkowych 
 | Model | Silnik | Bluetooth | Bateria | IP | Zastosowanie |
 |---|---|---|---|---|---|
 | **[DS2278](https://www.takma.com.pl/produkt/zebra-ds2278)** | SE2100 | BT 4.0 | Li-Ion | IP42 | Kasa, biuro |
-| **DS8178** | SE4770 | BT 4.0 | Li-Ion PowerPrecision+ | IP52 | Magazyn, logistyka |
+| **[DS8288](https://www.takma.com.pl/produkt/zebra-ds8288)** | SE4770 | BT 4.0 | Li-Ion PowerPrecision+ | IP52 | Magazyn, logistyka |
 | **DS3678** ([SR](https://www.takma.com.pl/produkt/zebra-ds3678-sr) / [HP](https://www.takma.com.pl/produkt/zebra-ds3678-hp) / [HD](https://www.takma.com.pl/produkt/zebra-ds3678-hd) / [XR](https://www.takma.com.pl/produkt/zebra-ds3678-xr)) | SE4850 (ER) | BT 4.0 | Li-Ion PowerPrecision+ | IP67 | Magazyn, produkcja |
 | **LI4278** | laser | BT 2.1 | NiMH | IP43 | Kasa (EOL — nie kupuj nowego) |
 | **CS6080** | SE4710 | BT 5.0 | Li-Ion | IP65 | Retail, companion |
@@ -34752,8 +34752,8 @@ Serwisujemy **wszystkie modele** skanerów Zebra — od kompaktowych biurkowych 
 
 | Model | Silnik | Interfejs | Zastosowanie |
 |---|---|---|---|
-| **DS9308** | SE2100 | USB/RS-232 | Kasa samoobsługowa, retail |
-| **DS9908** | dedykowany | USB/RS-232 | Kasa hybrydowa, retail premium |
+| **[DS9308](https://www.takma.com.pl/produkt/zebra-ds9308)** | SE2100 | USB/RS-232 | Kasa samoobsługowa, retail |
+| **[DS9908](https://www.takma.com.pl/produkt/zebra-ds9908)** | dedykowany | USB/RS-232 | Kasa hybrydowa, retail premium |
 | **SP72** | SE4710 | USB/RS-232 | Punkt sprzedaży, apteka |
 
 > **Uwaga EOL:** Modele **LS2208**, **LI4278**, **LS3578**, **DS6878** są End of Life. Naprawa możliwa, ale rozważ wymianę na nowszy model (DS2208 → następca LS2208, DS2278 → następca LI4278).
@@ -34814,12 +34814,12 @@ Okienko wyjściowe (exit window) to szklana/plastikowa osłona modułu skanując
 
 ## 3. Problemy z Bluetooth — 15% napraw
 
-Dotyczy modeli bezprzewodowych: DS2278, DS8178, DS3678, LI4278, CS6080. Większość problemów to konfiguracja, nie hardware.
+Dotyczy modeli bezprzewodowych: DS2278, DS8288, DS3678, LI4278, CS6080. Większość problemów to konfiguracja, nie hardware.
 
 ### Szybka diagnostyka (5 minut)
 
 1. **Sprawdź baterię** — naładuj skaner do 100%. Poniżej 20% Bluetooth może się rozłączać
-2. **Sprawdź zasięg** — DS2278: do 10m, DS8178: do 100m, DS3678: do 100m. Ściany i metalowe regały skracają zasięg
+2. **Sprawdź zasięg** — DS2278: do 10m, DS8288: do 100m, DS3678: do 100m. Ściany i metalowe regały skracają zasięg
 3. **Rozparuj i sparuj ponownie:**
    - Zeskanuj kod **DISCONNECT BLUETOOTH** z PRG (Product Reference Guide)
    - Zeskanuj kod parowania z podstawki lub hosta
@@ -34867,7 +34867,7 @@ Moduł skanujący (scan engine) to "serce" skanera. Uszkadza się najrzadziej, a
 |---|---|---|---|---|
 | SE2100 | DS2208, DS2278, DS9308 | 2D imager | do 36 cm | 300–450 zł |
 | SE4710 | DS4608, CS6080, SP72 | 2D imager | do 61 cm | 400–600 zł |
-| SE4770 | DS8108, DS8178 | 2D imager | do 71 cm | 450–650 zł |
+| SE4770 | DS8208, DS8288 | 2D imager | do 71 cm | 450–650 zł |
 | SE4850 | DS3608, DS3678 | 2D extended range | do 21 m | 500–700 zł |
 | Laser | LS2208, LI4278 | 1D laser | do 43 cm | 200–350 zł |
 
@@ -34886,7 +34886,7 @@ Moduł skanujący (scan engine) to "serce" skanera. Uszkadza się najrzadziej, a
 
 ## 6. Problemy z baterią — 8% napraw (modele bezprzewodowe)
 
-Dotyczy: DS2278, DS8178, DS3678, LI4278, CS6080.
+Dotyczy: DS2278, DS8288, DS3678, LI4278, CS6080.
 
 ### Diagnostyka baterii
 
@@ -34904,7 +34904,7 @@ Dotyczy: DS2278, DS8178, DS3678, LI4278, CS6080.
 |---|---|---|---|
 | LI4278 | NiMH 730 mAh | BTRY-LS42RAA0E-00 | ~36 000 skanów |
 | DS2278 | Li-Ion 1060 mAh | BTRY-DS22EAB0E-00 | ~57 000 skanów |
-| DS8178 | Li-Ion 1060 mAh | BTRY-DS81EAB0E-00 | ~57 000 skanów |
+| DS8288 | Li-Ion 1060 mAh | BTRY-DS81EAB0E-00 | ~57 000 skanów |
 | DS3678 | Li-Ion 3100 mAh | BTRY-DS36EAB0E-00 | ~70 000 skanów |
 | CS6080 | Li-Ion 1200 mAh | BTRY-CS60EAB00-00 | ~45 000 skanów |
 
@@ -34930,7 +34930,7 @@ Skanery Zebra są projektowane do upadków (IP52-IP67, 1.5-2.4m na beton), ale p
 | Podstawka (cradle) | Średnia | Wszystkie bezprzewodowe |
 
 ### Profilaktyka
-- **Etui ochronne** — gumowe bumper chroni przed upadkami (dostępne dla DS8178, DS3678)
+- **Etui ochronne** — gumowe bumper chroni przed upadkami (dostępne dla DS8288, DS3678)
 - **Linka zabezpieczająca** — zapobiega upadkom z wysokości (magazyn)
 - **Regularne oględziny** — pęknięcia obudowy, luźne elementy, stan uszczelek
 
@@ -34977,11 +34977,11 @@ Skanery Zebra są projektowane do upadków (IP52-IP67, 1.5-2.4m na beton), ale p
 | **[DS2208](https://www.takma.com.pl/produkt/zebra-ds2208)** | ~800 zł | ~400 zł | Naprawiaj kabel/okienko, przy module → nowy |
 | **DS4608** | ~1 200 zł | ~600 zł | Naprawiaj większość usterek |
 | **[DS2278](https://www.takma.com.pl/produkt/zebra-ds2278)** | ~1 100 zł | ~550 zł | Naprawiaj, chyba że moduł + Bluetooth |
-| **DS8108** | ~1 800 zł | ~900 zł | Naprawiaj prawie zawsze |
-| **DS8178** | ~3 500 zł | ~1 750 zł | Naprawiaj zawsze |
+| **[DS8208](https://www.takma.com.pl/produkt/zebra-ds8208)** | ~1 800 zł | ~900 zł | Naprawiaj prawie zawsze |
+| **[DS8288](https://www.takma.com.pl/produkt/zebra-ds8288)** | ~3 500 zł | ~1 750 zł | Naprawiaj zawsze |
 | **[DS3608](https://www.takma.com.pl/produkt/zebra-ds3608-sr)** | ~3 000 zł | ~1 500 zł | Naprawiaj zawsze |
 | **[DS3678](https://www.takma.com.pl/produkt/zebra-ds3678-sr)** | ~5 000 zł | ~2 500 zł | Naprawiaj zawsze |
-| **DS9308** | ~1 500 zł | ~750 zł | Naprawiaj większość usterek |
+| **[DS9308](https://www.takma.com.pl/produkt/zebra-ds9308)** | ~1 500 zł | ~750 zł | Naprawiaj większość usterek |
 | **LS2208** | EOL (~300 zł używany) | ~150 zł | Wymień na [DS2208](https://www.takma.com.pl/produkt/zebra-ds2208) |
 | **LI4278** | EOL (~400 zł używany) | ~200 zł | Wymień na [DS2278](https://www.takma.com.pl/produkt/zebra-ds2278) |
 
@@ -34997,7 +34997,7 @@ Większość problemów softwarowych rozwiązuje reset. Oto 3 metody:
 Zeskanuj kod kreskowy **Set All Defaults** z Product Reference Guide (PRG) Twojego modelu.
 - DS2208/DS2278: strona 4-3 w PRG
 - DS4608: strona 4-2 w PRG
-- DS8108/DS8178: strona 4-3 w PRG
+- DS8208/DS8288: strona 4-3 w PRG
 - DS3608/DS3678: strona 4-2 w PRG
 
 ### Metoda 2: Przez 123Scan
@@ -35014,7 +35014,7 @@ Dla modeli bezprzewodowych: przytrzymaj trigger przez 10 sekund → puść → p
 
 ## Sygnały diagnostyczne LED i dźwięk
 
-### Skanery przewodowe (DS2208, DS4608, DS8108)
+### Skanery przewodowe (DS2208, DS4608, DS8208)
 
 | LED | Dźwięk | Znaczenie |
 |---|---|---|
@@ -35024,7 +35024,7 @@ Dla modeli bezprzewodowych: przytrzymaj trigger przez 10 sekund → puść → p
 | Pomarańczowy | — | Skaner w trybie konfiguracji |
 | Brak LED | — | Brak zasilania — sprawdź kabel |
 
-### Skanery bezprzewodowe (DS2278, DS8178, DS3678)
+### Skanery bezprzewodowe (DS2278, DS8288, DS3678)
 
 | LED | Dźwięk | Znaczenie |
 |---|---|---|
@@ -35050,8 +35050,8 @@ Dla modeli bezprzewodowych: przytrzymaj trigger przez 10 sekund → puść → p
 
 Potrzebujesz nowego skanera zamiast naprawy? W sklepie **TAKMA** — autoryzowanym partnerze Zebra — kupisz oryginalne urządzenia z pełną gwarancją producenta:
 
-- Przewodowe: [DS2208](https://www.takma.com.pl/produkt/zebra-ds2208) | [DS3608-SR](https://www.takma.com.pl/produkt/zebra-ds3608-sr) | [DS3608-HP](https://www.takma.com.pl/produkt/zebra-ds3608-hp) | [DS3608-HD](https://www.takma.com.pl/produkt/zebra-ds3608-hd) | [DS3608-XR](https://www.takma.com.pl/produkt/zebra-ds3608-xr)
-- Bezprzewodowe: [DS2278](https://www.takma.com.pl/produkt/zebra-ds2278) | [DS3678-SR](https://www.takma.com.pl/produkt/zebra-ds3678-sr) | [DS3678-HP](https://www.takma.com.pl/produkt/zebra-ds3678-hp) | [DS3678-HD](https://www.takma.com.pl/produkt/zebra-ds3678-hd) | [DS3678-XR](https://www.takma.com.pl/produkt/zebra-ds3678-xr)
+- Przewodowe: [DS2208](https://www.takma.com.pl/produkt/zebra-ds2208) | [DS8208](https://www.takma.com.pl/produkt/zebra-ds8208) | [DS3608-SR](https://www.takma.com.pl/produkt/zebra-ds3608-sr) | [DS3608-HP](https://www.takma.com.pl/produkt/zebra-ds3608-hp) | [DS3608-HD](https://www.takma.com.pl/produkt/zebra-ds3608-hd) | [DS3608-XR](https://www.takma.com.pl/produkt/zebra-ds3608-xr)
+- Bezprzewodowe: [DS2278](https://www.takma.com.pl/produkt/zebra-ds2278) | [DS8288](https://www.takma.com.pl/produkt/zebra-ds8288) | [DS3678-SR](https://www.takma.com.pl/produkt/zebra-ds3678-sr) | [DS3678-HP](https://www.takma.com.pl/produkt/zebra-ds3678-hp) | [DS3678-HD](https://www.takma.com.pl/produkt/zebra-ds3678-hd) | [DS3678-XR](https://www.takma.com.pl/produkt/zebra-ds3678-xr)
 - Prezentacyjne: [DS9308](https://www.takma.com.pl/produkt/zebra-ds9308) | [DS9908](https://www.takma.com.pl/produkt/zebra-ds9908)
 
 [Zobacz wszystkie skanery Zebra w TAKMA →](https://www.takma.com.pl/skanery-kodow-kreskowych)
