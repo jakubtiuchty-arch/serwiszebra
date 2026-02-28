@@ -36305,6 +36305,529 @@ Trzy metody resetu DS3608/DS3678:
 
 *Ostatnia aktualizacja: marzec 2026*
 `
+  },
+
+  {
+    slug: 'skaner-zebra-nie-laczy-bluetooth-parowanie-reset',
+    title: 'Skaner Zebra nie łączy się przez Bluetooth — diagnostyka i naprawa [2026]',
+    excerpt: 'Skaner Zebra Bluetooth nie łączy się, rozłącza lub nie jest widoczny? Diagnostyka LED i sygnałów dźwiękowych, procedury resetów, rozwiązywanie problemów z parowaniem DS2278, DS3678, DS8288, LI4278.',
+    coverImage: '/blog/skaner-zebra-bluetooth-diagnostyka.jpeg',
+    author: {
+      name: 'Krzysztof Wójcik',
+      role: 'Specjalista ds. urządzeń mobilnych'
+    },
+    publishedAt: '2026-02-28',
+    readingTime: 18,
+    deviceType: 'skanery',
+    category: 'poradniki',
+    tags: ["bluetooth","skaner bezprzewodowy","parowanie","reset bluetooth","DS2278","DS3678","DS8288","LI4278","troubleshooting","diagnostyka"],
+    seo: {
+      metaTitle: 'Skaner Zebra nie łączy Bluetooth - diagnostyka i naprawa [2026]',
+      metaDescription: 'Skaner Zebra nie łączy się przez Bluetooth? Diagnostyka LED, kody dźwiękowe, reset parowania. DS2278, DS3678, DS8288. Procedury z manuali Zebra.',
+      keywords: [
+        'skaner zebra nie łączy bluetooth', 'skaner zebra bluetooth nie działa', 'zebra scanner bluetooth problem',
+        'skaner zebra nie paruje', 'zebra bluetooth reset', 'skaner zebra rozłącza się',
+        'ds2278 bluetooth problem', 'ds3678 nie łączy', 'ds8288 bluetooth',
+        'li4278 nie paruje', 'zebra bluetooth troubleshooting', 'zebra bluetooth diagnostyka',
+        'reset parowania zebra', 'skaner zebra bluetooth LED', 'skaner zebra ciągle rozłącza',
+        'zebra scanner not connecting', 'zebra bluetooth pairing failed', 'zebra bluetooth keeps disconnecting',
+        'zebra scanner bluetooth reset', 'ds2278 pairing problem', 'ds3678 bluetooth issue',
+        'skaner bezprzewodowy zebra problem', 'zebra bluetooth nie widzi', 'zebra bluetooth out of range',
+        'skaner zebra nie łączy się z podstawką', 'zebra bluetooth interferencje wifi',
+        'skaner zebra bluetooth migający LED', 'ds3678 factory reset bluetooth'
+      ],
+      faqSchema: [
+        {
+          question: 'Dlaczego skaner Zebra nie łączy się przez Bluetooth?',
+          answer: 'Najczęstsze przyczyny: skaner jest sparowany z innym urządzeniem (maks. 1 host na raz), rozładowana bateria (poniżej 30%), skaner poza zasięgiem BT (LI4278 — 10m, DS2278/DS3678/DS8288 — do 100m), lub zakłócenia WiFi 2.4GHz. Pierwszym krokiem diagnostycznym jest sprawdzenie LED skanera: niebieskie miganie = tryb parowania aktywny, bursztynowe = szuka połączenia, zielone ciągłe = połączony.'
+        },
+        {
+          question: 'Jak zresetować Bluetooth w skanerze Zebra?',
+          answer: 'Trzy metody: (1) Zeskanuj kod "Set Factory Defaults" z Product Reference Guide — kasuje wszystkie ustawienia w tym parowanie. (2) W programie 123Scan2 na PC: Restore Defaults. (3) Hard reset (DS3678/DS2278): wyłącz skaner, wyjmij baterię, odczekaj 10 sekund, włóż baterię. Po każdym resecie trzeba ponownie sparować skaner z hostem.'
+        },
+        {
+          question: 'Skaner Zebra skanuje ale dane nie trafiają do systemu — co robić?',
+          answer: 'Jeśli skaner bipa (poprawny odczyt) ale dane nie pojawiają się w aplikacji: (1) Sprawdź tryb BT — HID wysyła dane jak klawiatura (wymaga fokusa na polu tekstowym), SPP wymaga sterownika portu COM. (2) Sprawdź Country Code — ustaw na Poland dla polskich znaków. (3) Upewnij się, że interfejs jest poprawnie skonfigurowany (4 długie niskie tony = błąd transmisji).'
+        },
+        {
+          question: 'Jak daleko działa Bluetooth w skanerze Zebra?',
+          answer: 'Zasięg zależy od klasy BT i konfiguracji: LI4278 (Class 2) — do 10m. DS2278 sam w sobie jest Class 2 (10m), ale z podstawką CR2278 osiąga 100m (podstawka ma radio Class 1). DS8288 i DS3678 (Class 1) — do 100m w otwartej przestrzeni, 50-70m wewnątrz. Metalowe regały, ściany betonowe i zakłócenia WiFi 2.4GHz mogą zmniejszyć zasięg o 30-50%. DS3678 obsługuje Wi-Fi Friendly Mode minimalizujący interferencje.'
+        },
+        {
+          question: 'Ile skanerów Zebra można sparować z jedną podstawką?',
+          answer: 'Zależy od modelu podstawki: CR0078-P (Presentation) — do 7 skanerów, CR0078-S (Standard) — do 3 skanerów, STB3678 (DS3678) — do 7 skanerów w trybie Multipoint-to-Point. Baza zarządza kolejką transmisji — każdy skaner przesyła dane niezależnie.'
+        },
+        {
+          question: 'Czy parowanie Bluetooth przetrwa wymianę baterii w skanerze?',
+          answer: 'Tak — informacje o parowaniu są zapisane w pamięci nieulotnej (flash) skanera. Wymiana baterii nie kasuje parowania. Jedyny sposób na usunięcie parowania: reset fabryczny (Set Factory Defaults), skanowanie kodu Unpair z PRG, lub sparowanie z nowym hostem (zastępuje poprzednie).'
+        },
+        {
+          question: 'Skaner Zebra miga na niebiesko i nie łączy się — co to znaczy?',
+          answer: 'Niebieskie miganie LED (DS3678) oznacza tryb discoverable — skaner jest widoczny dla urządzeń BT i czeka na sparowanie. Jeśli nie łączy się: (1) Host musi aktywnie szukać urządzeń BT. (2) Tryb discoverable trwa ~2 minuty — po tym skaner wraca do normalnego trybu. (3) Upewnij się, że wybrałeś prawidłowy tryb BT (HID/SPP) przed włączeniem discoverable.'
+        },
+        {
+          question: 'Kiedy awaria Bluetooth wymaga serwisu a nie resetu?',
+          answer: 'Objawy wskazujące na uszkodzenie modułu Bluetooth (wymaga serwisu): skaner nie wchodzi w tryb discoverable po resecie fabrycznym, LED nigdy nie miga na niebiesko, skaner paruje ale zasięg spadł poniżej 2-3m (uszkodzona antena), wielokrotne resety nie pomagają. Koszt wymiany modułu BT: 300-600 zł + diagnoza.'
+        }
+      ]
+    },
+    content: `
+> **Szybka odpowiedź:** Jeśli skaner Zebra Bluetooth nie łączy się — sprawdź LED skanera (niebieskie miganie = tryb parowania, bursztynowe = szuka połączenia, brak = problem z zasilaniem/BT). Najczęstszą przyczyną jest skaner sparowany z innym urządzeniem — rozwiązanie: [reset fabryczny](#reset-bluetooth-3-metody) (skanuj kod Set Factory Defaults z PRG). Dalej: sprawdź baterię (min. 30%), zasięg i interferencje WiFi.
+
+---
+
+## Szybka diagnostyka — tabela problemów Bluetooth
+
+| Objaw | LED skanera | Sygnał dźwiękowy | Przyczyna | Rozwiązanie |
+|-------|-------------|-------------------|-----------|-------------|
+| Skaner nie reaguje | Brak | Brak | Rozładowana bateria / wyłączony | Naładuj baterię, sprawdź styki |
+| Nie wchodzi w parowanie | Zielony ciągły | Brak | Sparowany z innym hostem | [Reset fabryczny](#reset-bluetooth-3-metody) |
+| Miga niebiesko, host nie widzi | Niebieski migający | Brak | Tryb discoverable — host nie szuka | Włącz wyszukiwanie BT na hoście |
+| Miga bursztynowo | Bursztynowy migający | Brak | Szuka połączenia z bazą | Sprawdź czy baza jest zasilona |
+| Parowanie OK, brak danych | Zielony ciągły | 4 długie niskie tony | Błąd interfejsu/transmisji | Sprawdź tryb HID/SPP, Country Code |
+| Ciągle się rozłącza | Zielony → brak → zielony | Ciągły ton (poza zasięgiem) | Za daleko od bazy / interferencje | Przybliż do bazy, włącz Wi-Fi Friendly Mode |
+| Rozłącza i nie wraca | Brak po rozłączeniu | Brak | Auto-Reconnect wyłączony | [Skonfiguruj Auto-Reconnect](#optymalna-konfiguracja-auto-reconnect) |
+
+> **Instrukcja parowania:** Jeśli szukasz instrukcji JAK sparować skaner krok po kroku (nie rozwiązywania problemów), przejdź do → [Parowanie skanera Bluetooth Zebra — kompletny poradnik](/blog/parowanie-skanera-bluetooth-zebra-poradnik)
+
+---
+
+## 5-minutowa diagnostyka Bluetooth
+
+Zanim przejdziesz do szczegółowych rozwiązań, przejdź przez tę listę kontrolną:
+
+### Krok 1: Sprawdź zasilanie (30 sekund)
+- **Czy skaner się włącza?** Naciśnij trigger — jeśli brak reakcji, naładuj baterię (DS3678: min. 3h przez zasilacz, do 10h przez USB)
+- **Poziom baterii:** 6 szybkich wysokich tonów + niebieska LED + wibracje = **bateria krytyczna**, natychmiast naładuj
+- **Styki ładowania:** Wyczyść styki skanera i bazy alkoholem izopropylowym (IPA 70%)
+
+### Krok 2: Odczytaj LED (30 sekund)
+
+| LED skanera | Stan | Co dalej |
+|-------------|------|----------|
+| Zielony ciągły | Połączony z hostem | Problem nie dotyczy BT — sprawdź interfejs (HID/SPP) |
+| Bursztynowy migający | Szuka połączenia | Baza zasilona? Skaner sparowany z tą bazą? |
+| Niebieski migający | Tryb discoverable | Szukaj skanera na hoście w ciągu 2 minut |
+| Czerwony migający | Niska bateria lub błąd komunikacji | Naładuj baterię, sprawdź bazę |
+| Brak LED | Wyłączony lub awaria | Naładuj/wymień baterię, sprawdź styki |
+
+### Krok 3: Sprawdź bazę/cradle (30 sekund)
+- **LED bazy:** Zielony = OK, bursztynowy = ładowanie, czerwony = **błąd** (sprawdź zasilacz PWR-BGA12V50W0WW)
+- **Kabel:** Kabel USB/RS-232 z bazy do hosta — wciśnięty do końca?
+- **Zasilacz bazy:** Podłączony i sprawny? Baza bez zasilania = brak komunikacji BT
+
+### Krok 4: Zidentyfikuj problem (2 minuty)
+Na podstawie LED i sygnałów — przejdź do odpowiedniej sekcji poniżej.
+
+---
+
+## Problem 1: Skaner nie wchodzi w tryb parowania
+
+**Objawy:** LED świeci na zielono (ciągle) lub nie reaguje na kod discoverable. Brak niebieskiego migania.
+
+**Przyczyny i rozwiązania:**
+
+### A) Skaner jest już sparowany z innym urządzeniem
+Skaner Zebra Bluetooth może być połączony tylko z **jednym hostem** w danym momencie. Jeśli jest sparowany z inną bazą/komputerem — nie wejdzie w tryb parowania.
+
+**Rozwiązanie:**
+1. Zeskanuj kod **"Unpair"** z Product Reference Guide (PRG)
+2. Lub wykonaj [reset fabryczny](#reset-bluetooth-3-metody)
+3. LED powinien zmienić się na bursztynowy (szuka połączenia)
+
+### B) Bateria poniżej progu krytycznego
+Przy baterii poniżej ~10% skaner może odmówić włączenia modułu BT (oszczędzanie energii).
+
+**Rozwiązanie:**
+1. Naładuj baterię do min. 30% (DS3678: LED bazy bursztynowy = ładowanie, zielony = naładowano)
+2. Sprawdź kondycję baterii w 123Scan2 → Battery Health (PowerPrecision raportuje stan zdrowia)
+3. Bateria DS3678 (BTRY-36IAB0E-00, 3100 mAh) po 500+ cyklach ładowania traci pojemność — wymień na nową
+
+### C) Firmware zablokował BT
+Rzadko, ale po nieudanej aktualizacji firmware moduł BT może nie startować.
+
+**Rozwiązanie:**
+1. Podłącz skaner **przewodowo** (USB) do PC
+2. Otwórz 123Scan2 → sprawdź wersję firmware
+3. Zaktualizuj firmware z [zebra.com/support](https://www.zebra.com/support)
+4. Po aktualizacji — reset fabryczny i ponowne parowanie
+
+---
+
+## Problem 2: Skaner w trybie discoverable ale host go nie widzi
+
+**Objawy:** LED skanera miga na niebiesko (DS3678), ale skaner nie pojawia się na liście urządzeń Bluetooth hosta.
+
+**Przyczyny i rozwiązania:**
+
+### A) Tryb discoverable wygasł
+Skaner jest widoczny dla innych urządzeń przez ok. **2 minuty** po zeskanowaniu kodu Discoverable Mode. Po tym czasie wraca do normalnego trybu.
+
+**Rozwiązanie:** Zeskanuj ponownie kod **"Discoverable Mode - General Discoverable"** z PRG i **natychmiast** szukaj skanera na hoście.
+
+### B) Host szuka urządzeń BLE zamiast Classic
+Skanery Zebra (DS2278, DS3678, DS8288) używają **Bluetooth 4.0 Classic** do transmisji danych. Niektóre aplikacje szukają tylko urządzeń BLE (Low Energy).
+
+**Rozwiązanie:**
+- Windows: Ustawienia → Bluetooth i urządzenia → **Dodaj urządzenie → Bluetooth** (nie "Wszystko inne")
+- iOS/Android: Użyj systemowych ustawień Bluetooth, nie aplikacji skanującej BLE
+
+### C) Zbyt duża odległość
+
+| Model | Klasa BT | Maks. zasięg (otwarta przestrzeń) | Zasięg wewnątrz budynku |
+|-------|----------|-----------------------------------|------------------------|
+| LI4278 | Class 2 | 10 m | 5-8 m |
+| [DS2278](https://www.takma.com.pl/produkt/zebra-ds2278) (sam skaner) | Class 2 | 10 m | 5-8 m |
+| [DS2278](https://www.takma.com.pl/produkt/zebra-ds2278) + podstawka CR2278 | Class 1 (podstawka) | 100 m | 50-70 m |
+| [DS8288](https://www.takma.com.pl/produkt/zebra-ds8288) | Class 1 | 100 m | 50-70 m |
+| [DS3678](https://www.takma.com.pl/produkt/zebra-ds3678-sr) | Class 1 | 100 m | 50-70 m |
+
+> **Uwaga:** DS2278 sam w sobie jest Class 2 (zasięg 10m). Zasięg 100m osiąga **tylko z podstawką CR2278**, która ma radio Class 1. Jeśli parujesz DS2278 bezpośrednio z komputerem (bez podstawki) — maks. zasięg to 10m.
+
+**Rozwiązanie:** Przy pierwszym parowaniu zbliż skaner i host na **<1 m** od siebie. Po sparowaniu zasięg Class 1 (z podstawką) to do 100 m.
+
+### D) Za dużo sparowanych urządzeń na hoście
+Windows/macOS mają limit aktywnych połączeń BT (~7).
+
+**Rozwiązanie:** Usuń nieużywane urządzenia BT z listy sparowanych na hoście.
+
+---
+
+## Problem 3: Parowanie udane ale brak danych
+
+**Objawy:** Skaner jest sparowany (LED zielony ciągły), skanuje kody (bip potwierdzający), ale dane nie trafiają do aplikacji. Lub: 4 długie niskie tony po skanowaniu (błąd transmisji).
+
+### A) Nieprawidłowy tryb BT
+
+| Tryb | Dane | Sterowniki | Typowe zastosowanie |
+|------|------|------------|---------------------|
+| **HID Keyboard** | Jak klawiatura — trafia do aktywnego pola | Nie wymaga | Dowolna aplikacja z polem tekstowym |
+| **SPP (Serial Port)** | Raw data na port COM | Wymaga sterownika Bluetooth Serial Port | Aplikacje legacy, dedykowane systemy |
+| **SSI** | Pakiety SSI — dwukierunkowa | Wymaga EMDK/SDK | Zaawansowane integracje |
+
+**Rozwiązanie:**
+1. Sprawdź jaki tryb jest ustawiony (zeskanuj kod "Show Configuration" z PRG)
+2. Dla prostej pracy (dane jak z klawiatury): zeskanuj kod **"Bluetooth HID Keyboard Emulation"**
+3. Dla aplikacji COM: zeskanuj kod **"SPP Slave/Server"** i zainstaluj sterownik
+
+### B) Brak fokusa na polu tekstowym (tryb HID)
+W trybie HID dane trafiają do **aktywnej aplikacji** — jak wpisywanie z klawiatury.
+
+**Rozwiązanie:** Kliknij w pole tekstowe przed skanowaniem. Ustaw sufiks Enter (CR/LF) w konfiguracji skanera.
+
+### C) Nieprawidłowy Country Code
+Polskie znaki (ą, ę, ś, ź) mogą być gubione lub zamieniane.
+
+**Rozwiązanie:** W PRG lub 123Scan2 ustaw Country Code na **Poland**.
+
+### D) Interfejs hosta nie odpowiada
+4 długie niskie tony = **Transmit Error** — skaner odczytał kod, ale nie może wysłać danych do hosta.
+
+**Rozwiązanie:**
+1. Sprawdź kabel USB między bazą/cradle a hostem
+2. Sprawdź sterownik USB w Device Manager (Windows)
+3. Odłącz i podłącz kabel ponownie
+4. Wyłącz oszczędzanie energii USB: Device Manager → USB Root Hub → Power Management → odznacz "Allow computer to turn off this device"
+
+---
+
+## Problem 4: Skaner ciągle się rozłącza
+
+**Objawy:** Połączenie BT nawiązane, ale skaner co jakiś czas się rozłącza. Sygnał rozłączenia: **wysoka/niska nuta**. Lub ciągły ton = poza zasięgiem bazy.
+
+### A) Skaner zbyt daleko od bazy
+
+DS3678 emituje **ciągły ton (continuous tone)** gdy znajdzie się poza zasięgiem Bluetooth. Virtual Tether generuje dodatkowy alarm konfigurowalny.
+
+**Rozwiązanie:**
+1. Zmniejsz dystans skaner–baza
+2. Usuń metalowe przeszkody między skanerem a bazą
+3. Sprawdź czy baza nie jest umieszczona na metalowej powierzchni/w szafie
+4. Jeśli LI4278 (Class 2, 10m) — wymień na [DS2278](https://www.takma.com.pl/produkt/zebra-ds2278) (Class 1, 100m)
+
+### B) Zakłócenia WiFi 2.4 GHz
+Bluetooth i WiFi 2.4 GHz współdzielą pasmo częstotliwości. W środowisku z wieloma access pointami — interferencje są najczęstszą przyczyną rozłączeń.
+
+**Rozwiązanie — Wi-Fi Friendly Mode (DS3678):**
+1. Zeskanuj kod **"Enable Wi-Fi Friendly Mode"** z PRG (sekcja Bluetooth Configuration)
+2. Tryb ten minimalizuje zakłócenia kosztem niewielkiego zmniejszenia przepustowości BT
+3. Alternatywa: przenieś access pointy WiFi na pasmo **5 GHz** (nie koliduje z BT)
+
+### C) Niska bateria
+Przy niskim poziomie baterii moduł BT pracuje na mniejszej mocy → mniejszy zasięg → częstsze rozłączenia.
+
+**Objawy z manuala:**
+- **Czerwone miganie LED** = niski poziom baterii
+- **6 szybkich wysokich tonów + niebieska LED + wibracje** = bateria krytycznie niska (DS3678)
+
+**Rozwiązanie:** Naładuj baterię. DS3678: 0-90% w ok. 3h przez zasilacz zewnętrzny, do 10h przez USB.
+
+### D) Problem z oszczędzaniem energii USB (Windows)
+Windows może wyłączać porty USB w ramach zarządzania energią, co przerywa połączenie BT bazy.
+
+**Rozwiązanie:**
+1. Device Manager → Universal Serial Bus controllers
+2. Dla każdego **USB Root Hub**: Properties → Power Management
+3. Odznacz **"Allow the computer to turn off this device to save power"**
+4. Restart komputera
+
+---
+
+## Problem 5: Skaner nie łączy się ponownie po wyjściu z zasięgu
+
+**Objawy:** Skaner wyszedł z zasięgu BT, wrócił w zasięg, ale nie łączy się automatycznie z bazą.
+
+### Przyczyna: Auto-Reconnect wyłączony lub źle skonfigurowany
+
+Domyślna konfiguracja Auto-Reconnect:
+
+| Parametr | Wartość domyślna | Opis |
+|----------|------------------|------|
+| Auto-Reconnect | Immediately | Próba połączenia natychmiast po utracie |
+| Reconnect Attempt Interval | 30 sekund | Odstęp między próbami |
+| Number of Retry Attempts | Do not retry | Domyślnie brak ponownych prób! |
+| Sleep Between Attempts | 1 minuta | Przerwa po wyczerpaniu prób |
+
+**Problem:** Domyślna wartość "Do not retry" oznacza, że skaner **nie próbuje się ponownie połączyć** po pierwszej nieudanej próbie.
+
+**Rozwiązanie — zmień konfigurację:**
+
+W PRG lub 123Scan2 ustaw:
+1. **Auto-Reconnect:** Immediately
+2. **Reconnect Attempt Interval:** 10 sekund
+3. **Number of Retry Attempts:** Unlimited (nieskończone)
+4. **Sleep Between Attempts:** 5 minut (kompromis między szybkością a baterią)
+
+> **Batch Mode:** Jeśli skaner regularnie pracuje poza zasięgiem — włącz tryb **Batch and Send**. Dane są buforowane lokalnie i wysyłane automatycznie po powrocie w zasięg. Pojemność bufora DS3678: ponad 2000 kodów. Wzór: 61 440 bajtów ÷ (liczba znaków + 3) = max. kodów.
+
+---
+
+<h2 id="reset-bluetooth-3-metody">Reset Bluetooth — 3 metody</h2>
+
+Reset Bluetooth kasuje sparowanie i wszystkie ustawienia. Po resecie trzeba ponownie skonfigurować skaner i sparować z hostem.
+
+### Metoda 1: Skanowanie kodu resetującego (zalecana)
+
+1. Otwórz Product Reference Guide (PRG) dla modelu skanera — sekcja **"User Preferences"**
+2. Znajdź kod kreskowy **"Set Factory Defaults"** (lub "Restore Defaults")
+3. Zeskanuj ten kod
+4. Skaner wyda serię tonów potwierdzających: **wysoka-niska-wysoka-niska** (parametr zaakceptowany)
+5. LED zmieni się na bursztynowy migający (szuka nowego połączenia)
+
+> PRG do pobrania z [zebra.com/support](https://www.zebra.com/support) → wpisz model skanera → Documentation → Product Reference Guide
+
+### Metoda 2: Reset przez 123Scan2 (z PC)
+
+1. Podłącz skaner **przewodowo** (USB) do komputera
+2. Otwórz program **123Scan2** (bezpłatny, do pobrania z zebra.com)
+3. Wybierz **Restore Defaults**
+4. Poczekaj na potwierdzenie dźwiękowe z skanera
+
+### Metoda 3: Hard Reset — wyjęcie baterii (DS3678, DS2278, DS8288)
+
+1. Wyłącz skaner
+2. **Wyjmij baterię** (DS3678: przesuń zatrzask i wyciągnij baterię PowerPrecision+)
+3. Odczekaj **10 sekund**
+4. Włóż baterię z powrotem i włącz skaner
+5. Skaner uruchomi się z ustawieniami fabrycznymi — trójtonal rosnący (low-medium-high)
+
+**UWAGA — reset kasuje WSZYSTKO:**
+- Typ interfejsu (USB HID, RS-232)
+- Reguły ADF/MDF
+- Aktywowane/dezaktywowane symbologie
+- Ustawienia beepera i LED
+- **Parowanie Bluetooth** — trzeba sparować od nowa
+
+Po resecie: [instrukcja parowania krok po kroku →](/blog/parowanie-skanera-bluetooth-zebra-poradnik)
+
+---
+
+## Diagnostyka LED — pełna tabela stanów Bluetooth
+
+### LED skanera DS3678 (bezprzewodowy)
+
+| Stan LED | Kolor | Znaczenie | Co robić |
+|----------|-------|-----------|----------|
+| Ciągłe świecenie | Zielony | Połączony i gotowy do pracy | OK — skaner działa prawidłowo |
+| Miganie | Bursztynowy | Szuka połączenia / parowanie w toku | Sprawdź czy baza jest zasilona i w zasięgu |
+| Miganie | Niebieski | Tryb discoverable (parowanie BT) | Szukaj skanera na hoście w ciągu 2 min |
+| Miganie | Czerwony | Niski poziom baterii lub błąd komunikacji | Naładuj baterię, sprawdź bazę/kabel |
+| Pojedynczy błysk | Zielony | Poprawne skanowanie kodu | OK — dane wysłane do hosta |
+| 6 szybkich błysków + wibracje | Niebieski | Bateria krytycznie niska | Natychmiast naładuj! |
+| Brak | Wyłączony | Skaner wyłączony lub awaria | Naładuj/wymień baterię |
+
+### LED bazy STB3678
+
+| Stan LED | Kolor | Znaczenie | Co robić |
+|----------|-------|-----------|----------|
+| Ciągłe świecenie | Zielony | Normalna praca / bateria naładowana | OK |
+| Świecenie | Bursztynowy | Ładowanie w toku | Poczekaj ~3h do pełna |
+| Świecenie | Czerwony | **Błąd ładowania lub usterka** | Sprawdź zasilacz (PWR-BGA12V50W0WW), wyczyść styki IPA |
+| Brak | Wyłączony | Brak zasilania bazy | Sprawdź zasilacz, kabel, gniazdko |
+
+---
+
+## Diagnostyka dźwiękowa — kody beepera Bluetooth
+
+Sygnały dźwiękowe z Product Reference Guide DS3608/DS3678:
+
+| Zdarzenie | Sygnał | Opis |
+|-----------|--------|------|
+| Włączenie skanera | Trójtonal rosnący (low → medium → high) | Pomyślne uruchomienie |
+| Poprawne skanowanie | 1 krótki średni ton | Kod odczytany i wysłany |
+| **Parowanie udane** | Seria: wysoka-niska-wysoka-niska + niska-wysoka | Połączono z bazą/hostem |
+| **Parowanie nieudane** | Długi niski + długi wysoki ton | Sprawdź bazę, powtórz parowanie |
+| **Połączenie nawiązane** | 1 ton średni-wysoki | BT aktywne |
+| **Poza zasięgiem** | Ciągły ton | Przybliż skaner do bazy |
+| **Błąd transmisji** | 4 długie niskie tony | Dane nie wysłane — sprawdź kabel/interfejs |
+| Wejście w programowanie | Seria: wysoka-niska-wysoka-niska | Tryb konfiguracji aktywny |
+| Parametr zaakceptowany | Seria: wysoka-niska | Konfiguracja zapisana |
+| Niska bateria | Niski ton | Naładuj baterię |
+| **Bateria krytyczna** | 6 szybkich wysokich tonów + wibracje | NATYCHMIAST naładuj |
+
+> **Głośność beepera** można zmienić w PRG: Low / Medium / High. Jeśli nie słyszysz sygnałów — sprawdź czy beeper nie jest wyłączony (zeskanuj "Enable Good Decode Beep" z PRG).
+
+---
+
+<h2 id="optymalna-konfiguracja-auto-reconnect">Optymalna konfiguracja Auto-Reconnect</h2>
+
+Auto-Reconnect decyduje o tym, czy skaner próbuje ponownie się połączyć po utracie sygnału BT.
+
+### Zalecane ustawienia dla magazynu/produkcji
+
+| Parametr | Zalecana wartość | Domyślna | Dlaczego |
+|----------|-----------------|----------|----------|
+| Auto-Reconnect | **Immediately** | Immediately | Natychmiastowa próba po utracie |
+| Reconnect Interval | **10 sekund** | 30 sekund | Szybszy powrót do pracy |
+| Retry Attempts | **Unlimited** | Do not retry | Kluczowe! Domyślnie brak ponownych prób |
+| Sleep Between Attempts | **5 minut** | 1 minuta | Oszczędza baterię przy dłuższych przerwach |
+| Reconnect Beep Feedback | **Włączony** | Wyłączony | Pracownik słyszy gdy połączenie wraca |
+
+### Jak zmienić:
+1. **PRG:** Zeskanuj kody z sekcji "Auto-Reconnect" — po jednym kodzie na parametr
+2. **123Scan2:** Device Settings → Bluetooth → Auto-Reconnect → ustaw wartości i zapisz do skanera
+
+---
+
+## Zakłócenia WiFi — szczegółowe rozwiązania
+
+Bluetooth (2.402–2.480 GHz) i WiFi 2.4 GHz (2.412–2.484 GHz) współdzielą to samo pasmo częstotliwości. W magazynach z gęstą siecią WiFi — to najczęstsza przyczyna niestabilnych połączeń BT.
+
+### Objawy interferencji WiFi:
+- Skaner łączy się i rozłącza w losowych momentach
+- Zasięg BT znacznie krótszy niż specyfikacja (np. 15m zamiast 70m)
+- Problem nasila się w określonych strefach budynku (blisko access pointów)
+- Dane docierają z opóźnieniem lub gubieniem znaków
+
+### Rozwiązania:
+
+**1. Wi-Fi Friendly Mode (DS3678)**
+Zeskanuj kod z PRG (sekcja Bluetooth Configuration). Tryb ten modyfikuje sposób transmisji BT aby unikać kolizji z WiFi. Zmniejsza przepustowość BT o ~10-15% ale stabilizuje połączenie.
+
+**2. Przenieś WiFi na 5 GHz**
+Pasmo 5 GHz nie koliduje z Bluetooth. Większość nowoczesnych AP (access pointów) obsługuje dual-band.
+
+**3. Optymalna pozycja bazy STB3678**
+- Min. **3 m od routera WiFi** / access pointa
+- Unikaj metalowych powierzchni pod/za bazą
+- Antena BT w bazie jest kierunkowa — ustaw bazę przodem do strefy roboczej
+- Umieść bazę na wysokości ~1m od podłogi
+
+**4. Redukcja szumu BT**
+- Wyłącz nieużywane urządzenia Bluetooth w pobliżu
+- Kuchenki mikrofalowe (2.45 GHz) generują silne zakłócenia — odsuń bazę od zaplecza socjalnego
+
+---
+
+## Kiedy moduł Bluetooth wymaga serwisu
+
+Niektóre objawy wskazują na fizyczne uszkodzenie modułu BT lub anteny — sam reset nie pomoże.
+
+### Objawy awarii hardware BT:
+
+| Objaw | Prawdopodobna przyczyna |
+|-------|------------------------|
+| Skaner **nigdy** nie miga na niebiesko (discoverable) po resecie fabrycznym | Uszkodzony moduł BT |
+| Zasięg BT spadł do **<3 m** (wcześniej działał normalnie) | Uszkodzona antena BT |
+| Skaner paruje się ale **rozłącza co kilka sekund** (niezależnie od odległości) | Moduł BT niestabilny |
+| LED bazy czerwony + brak komunikacji (zasilacz sprawny) | Uszkodzony moduł BT bazy |
+| Skaner **włącza się normalnie** (trójtonal) ale BT w ogóle nie startuje | Uszkodzony moduł BT / firmware |
+
+### Co zrobić:
+1. Wykonaj **wszystkie 3 metody resetu** (kod PRG, 123Scan2, wyjęcie baterii)
+2. Zaktualizuj firmware do najnowszej wersji
+3. Spróbuj sparować z **inną bazą/hostem** — jeśli problem się powtarza, wina skanera
+4. Spróbuj sparować **inny skaner** z tą samą bazą — jeśli działa, wina skanera
+
+Jeśli powyższe kroki nie pomogą — moduł BT wymaga wymiany w serwisie.
+
+> **Koszt naprawy modułu BT:** Wymiana modułu Bluetooth + diagnostyka: **300-600 zł netto** w zależności od modelu. Czas naprawy: 3-7 dni roboczych. [Zgłoś skaner do serwisu →](/#formularz)
+
+### Kiedy lepiej wymienić skaner na nowy:
+- Model **End of Life (EOL):** LI4278, DS6878 — Zebra nie produkuje już tych modeli. Zamiennik: [Zebra DS2278](https://www.takma.com.pl/produkt/zebra-ds2278)
+- Koszt naprawy > 50% ceny nowego skanera
+- Skaner ma więcej niż jedną usterkę (BT + bateria + trigger)
+
+---
+
+## Modele skanerów bezprzewodowych Zebra — specyfikacja BT
+
+| Model | Bluetooth | Klasa | Zasięg | Profil | Multipoint | Bateria | Status |
+|-------|-----------|-------|--------|--------|------------|---------|--------|
+| LI4278 | BT 2.1 | Class 2 | 10 m | HID, SPP | do 3 (CR0078-S) | Li-Ion | **EOL** |
+| [DS2278](https://www.takma.com.pl/produkt/zebra-ds2278) | BT 4.0 | Class 2 (10m) / Class 1 z podstawką (100m) | 10 m / 100 m z CR2278 | HID, SPP | do 7 (z CR2278) | 2400 mAh Li-Ion | Aktywny |
+| [DS8288](https://www.takma.com.pl/produkt/zebra-ds8288) | BT 4.0 | Class 1 | 100 m | HID, SPP | do 7 | Li-Ion PowerPrecision+ | Aktywny |
+| [DS3678-SR](https://www.takma.com.pl/produkt/zebra-ds3678-sr) | BT 4.0 | Class 1 | 100 m | HID, SPP | 1 baza → 7 skanerów | 3100 mAh PP+ | Aktywny |
+| [DS3678-HP](https://www.takma.com.pl/produkt/zebra-ds3678-hp) | BT 4.0 | Class 1 | 100 m | HID, SPP | 1 baza → 7 skanerów | 3100 mAh PP+ | Aktywny |
+| [DS3678-HD](https://www.takma.com.pl/produkt/zebra-ds3678-hd) | BT 4.0 | Class 1 | 100 m | HID, SPP | 1 baza → 7 skanerów | 3100 mAh PP+ | Aktywny |
+| [DS3678-XR](https://www.takma.com.pl/produkt/zebra-ds3678-xr) | BT 4.0 | Class 1 | 100 m | HID, SPP | 1 baza → 7 skanerów | 3100 mAh PP+ | Aktywny |
+
+> **LI4278 — czas na wymianę.** LI4278 (Class 2, 10m zasięg) jest modelem EOL — Zebra nie produkuje go od kilku lat. Zamiennik to [Zebra DS2278](https://www.takma.com.pl/produkt/zebra-ds2278) — BT 4.0 Class 1, 10× większy zasięg, skanowanie kodów 2D, lepszy silnik skanujący.
+
+---
+
+## FAQ — najczęściej zadawane pytania
+
+### Dlaczego skaner Zebra nie łączy się przez Bluetooth?
+Najczęstsze przyczyny: skaner jest sparowany z innym urządzeniem (maks. 1 host na raz), rozładowana bateria (poniżej 30%), skaner poza zasięgiem BT, lub zakłócenia WiFi 2.4 GHz. Pierwszym krokiem jest sprawdzenie LED skanera — tabela stanów [powyżej](#diagnostyka-led--pełna-tabela-stanów-bluetooth).
+
+### Jak zresetować Bluetooth w skanerze Zebra?
+[Trzy metody:](#reset-bluetooth-3-metody) (1) Zeskanuj kod "Set Factory Defaults" z PRG. (2) W 123Scan2: Restore Defaults. (3) Hard reset: wyłącz skaner, wyjmij baterię na 10 sekund, włóż z powrotem. Po każdym resecie trzeba ponownie sparować skaner.
+
+### Skaner skanuje ale dane nie trafiają do systemu — co robić?
+Sprawdź: (1) Tryb BT — HID wysyła dane jak klawiatura (wymaga aktywnego pola tekstowego), SPP wymaga sterownika COM. (2) Country Code — ustaw Poland. (3) 4 długie niskie tony = błąd transmisji → sprawdź kabel USB baza–host.
+
+### Jak daleko działa Bluetooth w skanerze Zebra?
+LI4278 (Class 2): do 10m, wewnątrz 5-8m. DS2278 sam = Class 2 (10m), z podstawką CR2278 = do 100m. DS8288 i DS3678 (Class 1): do 100m, wewnątrz 50-70m. Metalowe regały i WiFi 2.4GHz zmniejszają zasięg o 30-50%.
+
+### Ile skanerów można sparować z jedną podstawką?
+CR0078-P (Presentation): do 7 skanerów. CR0078-S (Standard): do 3. STB3678 (DS3678): do 7 w trybie Multipoint-to-Point.
+
+### Czy parowanie przetrwa wymianę baterii?
+Tak — parowanie jest w pamięci nieulotnej (flash). Wymiana baterii nie kasuje parowania. Kasuje: reset fabryczny lub sparowanie z nowym hostem.
+
+### Skaner miga na niebiesko i nie łączy się — co to znaczy?
+Niebieskie miganie (DS3678) = tryb discoverable — skaner czeka na sparowanie. Host musi aktywnie szukać urządzeń BT. Tryb trwa ~2 minuty. Upewnij się, że wybrałeś prawidłowy tryb BT (HID/SPP) przed włączeniem discoverable.
+
+### Kiedy awaria BT wymaga serwisu?
+Objawy hardware: skaner nie wchodzi w discoverable po resecie, LED nigdy nie miga na niebiesko, zasięg spadł <3m, wielokrotne resety nie pomagają. Koszt wymiany modułu BT: 300-600 zł + diagnostyka. [Zgłoś do serwisu →](/#formularz)
+
+---
+
+## Powiązane artykuły
+
+- [Parowanie skanera Bluetooth Zebra — kompletny poradnik krok po kroku](/blog/parowanie-skanera-bluetooth-zebra-poradnik)
+- [Serwis skanerów Zebra — diagnostyka, naprawa, kalibracja](/blog/serwis-skanerow-zebra-diagnostyka-naprawa)
+- [Skaner Zebra nie skanuje — diagnostyka i rozwiązania](/blog/skaner-zebra-nie-skanuje-diagnostyka-rozwiazania)
+- [Bateria skanera Zebra — problemy z ładowaniem, żywotność i wymiana](/blog/bateria-skanera-zebra-ladowanie-zywotnosc-problemy)
+- [Naprawa skanera Zebra — kiedy warto, kiedy wymienić?](/blog/naprawa-skanera-zebra-kiedy-warto-kiedy-wymienic)
+- [Zebra DS2208 i DS2278 — najczęstsze problemy i naprawa](/blog/zebra-ds2208-ds2278-problemy-naprawa-serwis)
+- [Zebra DS3608 i DS3678 — skanery przemysłowe: problemy i naprawa](/blog/zebra-ds3608-ds3678-skaner-przemyslowy-naprawa)
+
+> **Potrzebujesz pomocy?** [Zgłoś skaner do serwisu](/panel) — bezpłatna diagnostyka, wycena w 24h. Odbiór kurierem z całej Polski.
+
+*Ostatnia aktualizacja: luty 2026*
+`
   }
 
 ]
