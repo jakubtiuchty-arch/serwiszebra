@@ -34732,19 +34732,19 @@ Serwisujemy **wszystkie modele** skanerów Zebra — od kompaktowych biurkowych 
 
 | Model | Silnik | Typ kodów | IP | Upadki | Zastosowanie |
 |---|---|---|---|---|---|
-| **DS2208** | SE2100 | 1D/2D | IP52 | 1.5m na beton | Kasa, biuro, apteka |
+| **[DS2208](https://www.takma.com.pl/produkt/zebra-ds2208)** | SE2100 | 1D/2D | IP52 | 1.5m na beton | Kasa, biuro, apteka |
 | **DS4608** | SE4710 | 1D/2D | IP52 | 1.8m na beton | Retail, logistyka |
 | **DS8108** | SE4770 | 1D/2D | IP52 | 1.8m na beton | Magazyn, logistyka premium |
-| **DS3608** | SE4850 (ER) | 1D/2D (do 21m!) | IP67 | 2.4m na beton | Magazyn wysokiego składu |
+| **DS3608** ([SR](https://www.takma.com.pl/produkt/zebra-ds3608-sr) / [HP](https://www.takma.com.pl/produkt/zebra-ds3608-hp) / [HD](https://www.takma.com.pl/produkt/zebra-ds3608-hd) / [XR](https://www.takma.com.pl/produkt/zebra-ds3608-xr)) | SE4850 (ER) | 1D/2D (do 21m!) | IP67 | 2.4m na beton | Magazyn wysokiego składu |
 | **LS2208** | laser | tylko 1D | brak | 1.5m | Kasa (EOL — nie kupuj nowego) |
 
 ### Skanery bezprzewodowe (Bluetooth)
 
 | Model | Silnik | Bluetooth | Bateria | IP | Zastosowanie |
 |---|---|---|---|---|---|
-| **DS2278** | SE2100 | BT 4.0 | Li-Ion | IP42 | Kasa, biuro |
+| **[DS2278](https://www.takma.com.pl/produkt/zebra-ds2278)** | SE2100 | BT 4.0 | Li-Ion | IP42 | Kasa, biuro |
 | **DS8178** | SE4770 | BT 4.0 | Li-Ion PowerPrecision+ | IP52 | Magazyn, logistyka |
-| **DS3678** | SE4850 (ER) | BT 4.0 | Li-Ion PowerPrecision+ | IP67 | Magazyn, produkcja |
+| **DS3678** ([SR](https://www.takma.com.pl/produkt/zebra-ds3678-sr) / [HP](https://www.takma.com.pl/produkt/zebra-ds3678-hp) / [HD](https://www.takma.com.pl/produkt/zebra-ds3678-hd) / [XR](https://www.takma.com.pl/produkt/zebra-ds3678-xr)) | SE4850 (ER) | BT 4.0 | Li-Ion PowerPrecision+ | IP67 | Magazyn, produkcja |
 | **LI4278** | laser | BT 2.1 | NiMH | IP43 | Kasa (EOL — nie kupuj nowego) |
 | **CS6080** | SE4710 | BT 5.0 | Li-Ion | IP65 | Retail, companion |
 
@@ -34855,7 +34855,7 @@ Wymiana triggera wymaga serwisu — element jest zintegrowany z obudową i wymag
 
 **Koszt wymiany triggera: 150–250 zł netto**
 
-> **Profilaktyka:** W środowiskach o dużym natężeniu skanowań (>5000 skanów/dzień) rozważ model z wzmocnionym triggerem (DS3608/DS3678) lub skaner prezentacyjny (DS9308).
+> **Profilaktyka:** W środowiskach o dużym natężeniu skanowań (>5000 skanów/dzień) rozważ model z wzmocnionym triggerem ([DS3608](https://www.takma.com.pl/produkt/zebra-ds3608-sr)/[DS3678](https://www.takma.com.pl/produkt/zebra-ds3678-sr)) lub skaner prezentacyjny ([DS9308](https://www.takma.com.pl/produkt/zebra-ds9308)).
 
 ## 5. Uszkodzony moduł skanujący — 10% napraw
 
@@ -34974,18 +34974,18 @@ Skanery Zebra są projektowane do upadków (IP52-IP67, 1.5-2.4m na beton), ale p
 
 | Model | Cena nowego (netto) | Opłacalna naprawa do | Rekomendacja |
 |---|---|---|---|
-| **DS2208** | ~800 zł | ~400 zł | Naprawiaj kabel/okienko, przy module → nowy |
+| **[DS2208](https://www.takma.com.pl/produkt/zebra-ds2208)** | ~800 zł | ~400 zł | Naprawiaj kabel/okienko, przy module → nowy |
 | **DS4608** | ~1 200 zł | ~600 zł | Naprawiaj większość usterek |
-| **DS2278** | ~1 100 zł | ~550 zł | Naprawiaj, chyba że moduł + Bluetooth |
+| **[DS2278](https://www.takma.com.pl/produkt/zebra-ds2278)** | ~1 100 zł | ~550 zł | Naprawiaj, chyba że moduł + Bluetooth |
 | **DS8108** | ~1 800 zł | ~900 zł | Naprawiaj prawie zawsze |
 | **DS8178** | ~3 500 zł | ~1 750 zł | Naprawiaj zawsze |
-| **DS3608** | ~3 000 zł | ~1 500 zł | Naprawiaj zawsze |
-| **DS3678** | ~5 000 zł | ~2 500 zł | Naprawiaj zawsze |
+| **[DS3608](https://www.takma.com.pl/produkt/zebra-ds3608-sr)** | ~3 000 zł | ~1 500 zł | Naprawiaj zawsze |
+| **[DS3678](https://www.takma.com.pl/produkt/zebra-ds3678-sr)** | ~5 000 zł | ~2 500 zł | Naprawiaj zawsze |
 | **DS9308** | ~1 500 zł | ~750 zł | Naprawiaj większość usterek |
-| **LS2208** | EOL (~300 zł używany) | ~150 zł | Wymień na DS2208 |
-| **LI4278** | EOL (~400 zł używany) | ~200 zł | Wymień na DS2278 |
+| **LS2208** | EOL (~300 zł używany) | ~150 zł | Wymień na [DS2208](https://www.takma.com.pl/produkt/zebra-ds2208) |
+| **LI4278** | EOL (~400 zł używany) | ~200 zł | Wymień na [DS2278](https://www.takma.com.pl/produkt/zebra-ds2278) |
 
-> **Modele EOL (End of Life):** LS2208, LI4278, LS3578, DS6878 — Zebra nie produkuje już tych modeli. Naprawa możliwa (mamy części), ale długoterminowo lepiej wymienić na nowszy model z aktywnym wsparciem.
+> **Modele EOL (End of Life):** LS2208, LI4278, LS3578, DS6878 — Zebra nie produkuje już tych modeli. Naprawa możliwa (mamy części), ale długoterminowo lepiej wymienić na nowszy model z aktywnym wsparciem. Zamienniki: [Zebra DS2208](https://www.takma.com.pl/produkt/zebra-ds2208) (za LS2208), [Zebra DS2278](https://www.takma.com.pl/produkt/zebra-ds2278) (za LI4278).
 
 > **Szczegółowa analiza:** [Naprawa skanera Zebra — kiedy warto, kiedy wymienić →](/blog/naprawa-skanera-zebra-kiedy-warto-kiedy-wymienic)
 
@@ -35045,6 +35045,18 @@ Dla modeli bezprzewodowych: przytrzymaj trigger przez 10 sekund → puść → p
 | Co 3 miesiące | Test wszystkich symbologii, sprawdź firmware |
 | Co 6 miesięcy | Pełna inspekcja: kabel, trigger, okienko, obudowa, bateria |
 | Co 12 miesięcy | Profesjonalny przegląd serwisowy TAKMA |
+
+## Kup nowy skaner Zebra
+
+Potrzebujesz nowego skanera zamiast naprawy? W sklepie **TAKMA** — autoryzowanym partnerze Zebra — kupisz oryginalne urządzenia z pełną gwarancją producenta:
+
+- Przewodowe: [DS2208](https://www.takma.com.pl/produkt/zebra-ds2208) | [DS3608-SR](https://www.takma.com.pl/produkt/zebra-ds3608-sr) | [DS3608-HP](https://www.takma.com.pl/produkt/zebra-ds3608-hp) | [DS3608-HD](https://www.takma.com.pl/produkt/zebra-ds3608-hd) | [DS3608-XR](https://www.takma.com.pl/produkt/zebra-ds3608-xr)
+- Bezprzewodowe: [DS2278](https://www.takma.com.pl/produkt/zebra-ds2278) | [DS3678-SR](https://www.takma.com.pl/produkt/zebra-ds3678-sr) | [DS3678-HP](https://www.takma.com.pl/produkt/zebra-ds3678-hp) | [DS3678-HD](https://www.takma.com.pl/produkt/zebra-ds3678-hd) | [DS3678-XR](https://www.takma.com.pl/produkt/zebra-ds3678-xr)
+- Prezentacyjne: [DS9308](https://www.takma.com.pl/produkt/zebra-ds9308) | [DS9908](https://www.takma.com.pl/produkt/zebra-ds9908)
+
+[Zobacz wszystkie skanery Zebra w TAKMA →](https://www.takma.com.pl/skanery-kodow-kreskowych)
+
+---
 
 ## Zgłoś naprawę skanera Zebra
 
@@ -35619,6 +35631,10 @@ Regularna konserwacja znacząco wydłuża żywotność skanera i zapobiega więk
 
 > **Czas naprawy w serwisie:** diagnostyka gratis, naprawa 1–5 dni roboczych, gwarancja 12 miesięcy na naprawę.
 
+> **Naprawa nieopłacalna?** Jeśli koszt naprawy przekracza 50% ceny nowego skanera, rozważ wymianę:
+> - [Nowy Zebra DS2208 (przewodowy) — sprawdź cenę →](https://www.takma.com.pl/produkt/zebra-ds2208)
+> - [Nowy Zebra DS2278 (bezprzewodowy) — sprawdź cenę →](https://www.takma.com.pl/produkt/zebra-ds2278)
+
 ---
 
 ## Narzędzia do samodzielnej diagnostyki
@@ -35664,6 +35680,8 @@ Poniższe problemy **wymagają profesjonalnej naprawy** — nie próbuj naprawia
 - ❌ Uszkodzony moduł Bluetooth w DS2278
 
 W serwisie Serwis Zebra oferujemy **bezpłatną diagnostykę** każdego skanera DS2200 Series. Czas naprawy: 1–5 dni roboczych z 12-miesięczną gwarancją.
+
+Jeśli skaner jest po gwarancji i koszt naprawy jest nieopłacalny — rozważ zakup nowego: [Zebra DS2208 (przewodowy)](https://www.takma.com.pl/produkt/zebra-ds2208) lub [Zebra DS2278 (bezprzewodowy)](https://www.takma.com.pl/produkt/zebra-ds2278) w sklepie TAKMA.
 
 ---
 
@@ -35816,6 +35834,8 @@ Dane z oficjalnego Product Reference Guide Zebra (MN-002689-22EN). DS3608 i DS36
 | **HD** (High Density) | SE4750-HD | ~18 cm | IP65/67 | 2,4 m | Elektronika, farmacja, PCB, probówki |
 | **DP** (Direct Part Marking) | SE4750-DL | Bliski kontakt | IP65/68 | 3,0 m | Automotive, lotnictwo, IUID, DPM |
 
+**Kup w TAKMA:** Przewodowe: [DS3608-SR](https://www.takma.com.pl/produkt/zebra-ds3608-sr) | [DS3608-XR](https://www.takma.com.pl/produkt/zebra-ds3608-xr) | [DS3608-HP](https://www.takma.com.pl/produkt/zebra-ds3608-hp) | [DS3608-HD](https://www.takma.com.pl/produkt/zebra-ds3608-hd) — Bezprzewodowe: [DS3678-SR](https://www.takma.com.pl/produkt/zebra-ds3678-sr) | [DS3678-XR](https://www.takma.com.pl/produkt/zebra-ds3678-xr) | [DS3678-HP](https://www.takma.com.pl/produkt/zebra-ds3678-hp) | [DS3678-HD](https://www.takma.com.pl/produkt/zebra-ds3678-hd)
+
 **Wersja ER** wykorzystuje silnik **SE4850 z IntelliFocus** — automatyczny autofokus dostosowujący ostrość do odległości kodu. To jedyny wariant z podwójnym sensorem (1280×800 bliski + 1920×1080 daleki) i polem widzenia 32°/12° (near/far).
 
 ### Zasięgi dekodowania — SE4750-SR vs SE4850-ER
@@ -35964,6 +35984,8 @@ Dotyczy wyłącznie wariantów **DS3608-ER / DS3678-ER** z silnikiem **SE4850** 
 | Taśma flex SE4850 | ~20 zł ($4.90) |
 | Silnik SE4850 (ER) | ~520 zł ($128) |
 | Naprawa w serwisie | 400–1100 zł |
+
+> Przy koszcie naprawy powyżej 800 zł warto rozważyć [nowy DS3608-XR](https://www.takma.com.pl/produkt/zebra-ds3608-xr) lub [DS3678-XR](https://www.takma.com.pl/produkt/zebra-ds3678-xr) z pełną gwarancją producenta.
 
 ---
 
@@ -36233,6 +36255,10 @@ Trzy metody resetu DS3608/DS3678:
 | Płyta główna STB3678 | $34.90 | 250–500 | Serwis |
 | Obudowa (top + back) | $70–80 | 300–600 | Serwis |
 | Factory reset / firmware | $0 | 0 | DIY |
+
+> **Zamiast kosztownej naprawy — rozważ nowy skaner.** Gdy koszt naprawy przekracza 50% ceny nowego urządzenia, zakup nowego skanera jest bardziej opłacalny:
+> - Przewodowe: [Zebra DS3608-SR](https://www.takma.com.pl/produkt/zebra-ds3608-sr) | [DS3608-XR](https://www.takma.com.pl/produkt/zebra-ds3608-xr) | [DS3608-HP](https://www.takma.com.pl/produkt/zebra-ds3608-hp) | [DS3608-HD](https://www.takma.com.pl/produkt/zebra-ds3608-hd)
+> - Bezprzewodowe: [Zebra DS3678-SR](https://www.takma.com.pl/produkt/zebra-ds3678-sr) | [DS3678-XR](https://www.takma.com.pl/produkt/zebra-ds3678-xr) | [DS3678-HP](https://www.takma.com.pl/produkt/zebra-ds3678-hp) | [DS3678-HD](https://www.takma.com.pl/produkt/zebra-ds3678-hd)
 
 ---
 
