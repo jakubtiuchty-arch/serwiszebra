@@ -80,6 +80,7 @@ const formatPrice = (price: number | null | undefined): string => {
 
 const STATUS_LABELS: Record<string, string> = {
   nowe: 'Nowe',
+  odbior_od_klienta: 'Odbiór od klienta',
   odebrane: 'Odebrane',
   diagnoza: 'Diagnoza',
   wycena: 'Wycena',
@@ -96,6 +97,7 @@ const STATUS_LABELS: Record<string, string> = {
 
 const STATUS_COLORS: Record<string, string> = {
   nowe: 'bg-blue-100 text-blue-800 border-blue-200',
+  odbior_od_klienta: 'bg-orange-100 text-orange-800 border-orange-200',
   odebrane: 'bg-purple-100 text-purple-800 border-purple-200',
   diagnoza: 'bg-yellow-100 text-yellow-800 border-yellow-200',
   wycena: 'bg-cyan-100 text-cyan-800 border-cyan-200',
@@ -111,10 +113,10 @@ const STATUS_COLORS: Record<string, string> = {
 }
 
 // Statusy dla napraw płatnych
-const PAID_STATUSES = ['nowe', 'odebrane', 'diagnoza', 'wycena', 'proforma', 'w_naprawie', 'zakonczone', 'wyslane', 'anulowane']
+const PAID_STATUSES = ['nowe', 'odbior_od_klienta', 'odebrane', 'diagnoza', 'wycena', 'proforma', 'w_naprawie', 'zakonczone', 'wyslane', 'anulowane']
 
 // Statusy dla napraw gwarancyjnych
-const WARRANTY_STATUSES = ['nowe', 'odebrane', 'weryfikacja_gwarancji', 'gwarancja_potwierdzona', 'gwarancja_odrzucona', 'w_naprawie', 'zakonczone', 'wyslane', 'anulowane']
+const WARRANTY_STATUSES = ['nowe', 'odbior_od_klienta', 'odebrane', 'weryfikacja_gwarancji', 'gwarancja_potwierdzona', 'gwarancja_odrzucona', 'w_naprawie', 'zakonczone', 'wyslane', 'anulowane']
 
 const REPAIR_TYPE_LABELS: Record<string, string> = {
   paid: 'Płatna',

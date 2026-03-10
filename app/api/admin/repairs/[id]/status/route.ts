@@ -33,6 +33,7 @@ export async function PATCH(
 
     const validStatuses = [
       'nowe',
+      'odbior_od_klienta',
       'odebrane',
       'diagnoza',
       'wycena',

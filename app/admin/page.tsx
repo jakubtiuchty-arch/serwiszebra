@@ -9,6 +9,7 @@ import { createClient } from '@/lib/supabase/client'
 
 interface RepairRequest {
   id: string
+  repair_number: string | null
   device_model: string
   device_serial_number: string | null
   issue_description: string
@@ -127,6 +128,7 @@ export default function AdminDashboard() {
   const getStatusInfo = (status: string) => {
     const statusMap: Record<string, { label: string; color: string }> = {
       nowe: { label: 'Nowe', color: 'bg-blue-100 text-blue-800' },
+      odbior_od_klienta: { label: 'Odbiór od klienta', color: 'bg-orange-100 text-orange-800' },
       odebrane: { label: 'Odebrane', color: 'bg-purple-100 text-purple-800' },
       diagnoza: { label: 'Diagnoza', color: 'bg-yellow-100 text-yellow-800' },
       wycena: { label: 'Wycena', color: 'bg-cyan-100 text-cyan-800' },
@@ -210,6 +212,7 @@ export default function AdminDashboard() {
             >
               <option value="all">Wszystkie statusy</option>
               <option value="nowe">Nowe</option>
+              <option value="odbior_od_klienta">Odbiór od klienta</option>
               <option value="odebrane">Odebrane</option>
               <option value="diagnoza">Diagnoza</option>
               <option value="wycena">Wycena</option>
@@ -251,7 +254,7 @@ export default function AdminDashboard() {
                     <div>
                       <div className="flex items-center gap-2">
                         <div className="text-xs font-bold text-gray-900">
-                          #{repair.id.slice(0, 8).toUpperCase()}
+                          #{repair.repair_number || repair.id.slice(0, 8).toUpperCase()}
                         </div>
                         {/* Badge nieprzeczytanych wiadomości */}
                         {unreadCounts[repair.id] > 0 && (
@@ -323,7 +326,7 @@ export default function AdminDashboard() {
                         <td className="px-4 py-2.5 whitespace-nowrap">
                           <div className="flex items-center gap-2">
                             <div className="text-xs font-semibold text-gray-900">
-                              #{repair.id.slice(0, 8).toUpperCase()}
+                              #{repair.repair_number || repair.id.slice(0, 8).toUpperCase()}
                             </div>
                             {/* Badge nieprzeczytanych wiadomości */}
                             {unreadCounts[repair.id] > 0 && (

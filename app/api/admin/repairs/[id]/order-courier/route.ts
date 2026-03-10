@@ -217,6 +217,7 @@ export async function POST(
     if (direction === 'pickup') {
       updateData.pickup_courier_name = courierName
       updateData.pickup_tracking_number = trackingNumber
+      updateData.status = 'odbior_od_klienta'
     } else {
       updateData.courier_name = courierName
       updateData.courier_tracking_number = trackingNumber
@@ -254,7 +255,7 @@ export async function POST(
       .from('repair_status_history')
       .insert({
         repair_request_id: repairId,
-        status: direction === 'pickup' ? repair.status : 'wyslane',
+        status: direction === 'pickup' ? 'odbior_od_klienta' : 'wyslane',
         notes: historyNote,
         changed_by: adminCheck.user?.id
       })
