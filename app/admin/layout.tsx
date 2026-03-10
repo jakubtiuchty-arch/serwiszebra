@@ -59,7 +59,13 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       icon: LayoutDashboard,
       current: pathname === '/admin' || pathname.startsWith('/admin/zgloszenie'),
     },
-    
+    {
+      name: 'Katalog',
+      href: '/admin/katalog',
+      icon: ClipboardList,
+      current: pathname === '/admin/katalog',
+    },
+
     // Sklep - tylko dla superadminów
     { type: 'header', name: 'Sklep', superAdminOnly: true },
     {
