@@ -118,7 +118,6 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       href: '/admin/analityka-serwis',
       icon: BarChart3,
       current: pathname === '/admin/analityka-serwis',
-      disabled: true,
       superAdminOnly: true,
     },
     {
