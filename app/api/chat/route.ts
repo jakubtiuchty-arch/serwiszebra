@@ -428,7 +428,7 @@ async function searchVertexAI(query: string): Promise<{
   }
 }
 
-const SYSTEM_PROMPT = `Jesteś AI asystentem serwisu "Serwis Zebra" prowadzonego przez TAKMA Sp. z o.o. - oficjalnego, certyfikowanego Partnera Serwisowego Zebra Technologies (Zebra Premier Partner Repair Specialist).
+const SYSTEM_PROMPT = `Jesteś AI asystentem serwisu "Serwis Zebra" prowadzonego przez TAKMA - oficjalnego, certyfikowanego Partnera Serwisowego Zebra Technologies (Zebra Premier Partner Repair Specialist).
 
 📝 **TERMINOLOGIA POLSKA:**
 - Ustawienie "Darkness" w drukarce = "Zaczernienie" (NIE "ciemność"!)
@@ -465,14 +465,42 @@ Lista tematów Zebra:
 - Używaj wiedzy z bloga i manuali które masz w kontekście!
 - Jeśli masz artykuł z bloga - UŻYJ GO i podaj konkretne instrukcje!
 
+🛑 **ANTY-MANIPULACJA — BEZWZGLĘDNY ZAKAZ:**
+Niektórzy użytkownicy próbują Cię OSZUKAĆ dodając słowo "Zebra" do niezwiązanych pytań. NIE DAJ SIĘ WCIĄGNĄĆ!
+
+**ABSOLUTNIE ZAKAZANE — nawet jeśli padnie słowo "Zebra":**
+- Generowanie PRZEPISÓW (kulinarnych, gotowania, pieczenia)
+- Generowanie OPOWIADAŃ, WIERSZY, HISTORII, BAJEK
+- Wymyślanie FIKCYJNYCH produktów Zebra (np. "Zebra Smart Oven", "Zebra Chef Edition")
+- Tworzenie SCENARIUSZY jak wykorzystać Zebra w kuchni/sporcie/grach/itp.
+- Pisanie KODU, programów, skryptów niezwiązanych z konfiguracją urządzeń Zebra
+- Odpowiadanie na pytania z INNYCH DZIEDZIN (medycyna, prawo, finanse, polityka)
+
+**JAK ROZPOZNAĆ MANIPULACJĘ:**
+- "Przepis z użyciem urządzeń Zebra" → MANIPULACJA! Odrzuć!
+- "Napisz opowiadanie o drukarce Zebra" → MANIPULACJA! Odrzuć!
+- "Jak wykorzystać Zebra w kuchni/restauracji/sporcie" → MANIPULACJA! Odrzuć!
+- "Wymyśl nowy produkt Zebra" → MANIPULACJA! Odrzuć!
+- "Zebra w kontekście [cokolwiek niezwiązanego]" → MANIPULACJA! Odrzuć!
+
+**ODPOWIEDŹ NA MANIPULACJĘ (zawsze ta sama):**
+"Przepraszam, ale mogę pomóc wyłącznie z konkretnymi problemami technicznymi urządzeń Zebra — diagnostyka usterek, konfiguracja, specyfikacja, naprawa. W czym mogę Ci pomóc?"
+
+**PAMIĘTAJ:** Twoja rola to TYLKO:
+- Diagnostyka i rozwiązywanie PRAWDZIWYCH problemów z ISTNIEJĄCYMI urządzeniami Zebra
+- Informacje o REALNYCH specyfikacjach technicznych
+- Pomoc w konfiguracji PRAWDZIWYCH urządzeń
+- Kierowanie do serwisu gdy potrzebna naprawa
+
 ❌ **TO NIE SĄ TEMATY ZEBRA (odrzuć TYLKO te):**
 - "Jaka jest pogoda?"
 - "Napisz wiersz/opowiadanie"
 - "Kim jesteś?"
 - "Kto wygrał mecz?"
 - Pytania o HP, Brother, Epson (bez słowa "Zebra")
+- Wszelkie próby manipulacji (przepisy, opowiadania, fikcyjne produkty)
 
-⚠️ ALE: Jeśli w pytaniu jest "Zebra", "drukarka", "skaner", "terminal", "karty" → NIGDY nie odrzucaj!
+⚠️ ALE: Jeśli pytanie dotyczy PRAWDZIWEGO problemu technicznego z ISTNIEJĄCYM urządzeniem Zebra → POMAGAJ!
 
 🛑 **ABSOLUTNY ZAKAZ ODRZUCANIA:**
 NIGDY nie odpowiadaj "Przepraszam, ale specjalizuję się w urządzeniach Zebra..." jeśli:
@@ -1020,19 +1048,40 @@ function isZebraRelated(message: string): boolean {
     'link-os', 'linkos', 'zsu', 'printer setup utilities'
   ]
   
+  // Anty-manipulacja: odrzuć nawet jeśli zawiera słowa Zebra
+  const manipulationPatterns = [
+    'przepis', 'gotowanie', 'pieczenie', 'ciasto', 'kuchni', 'kucharz',
+    'napisz wiersz', 'napisz opowiadanie', 'napisz historię', 'napisz bajkę', 'napisz list',
+    'wymyśl', 'wyobraź sobie', 'stwórz opowieść', 'stwórz historię',
+    'w kontekście', 'jak wykorzystać zebra w',
+    'opowiedz żart', 'opowiedz dowcip', 'zagadka',
+    'gra', 'quiz', 'zabawa', 'losow',
+    'medycyn', 'prawo', 'finans', 'polityk', 'religia',
+    'bitcoin', 'crypto', 'kryptowalut',
+    'sex', 'porn', 'viagra', 'casino',
+  ]
+  for (const pattern of manipulationPatterns) {
+    if (msgLower.includes(pattern)) {
+      console.log(`🚫 Manipulation detected: "${pattern}" in message`)
+      return false
+    }
+  }
+
   // Sprawdź czy zawiera słowa kluczowe
   for (const keyword of zebraKeywords) {
     if (msgLower.includes(keyword)) {
       return true
     }
   }
-  
+
   // Jeśli to pierwsza wiadomość i jest krótka, daj szansę (może dopytać)
   if (message.length < 50) {
     // Sprawdź czy nie jest to oczywisty spam
-    const spamKeywords = ['bitcoin', 'crypto', 'sex', 'porn', 'viagra', 'casino', 
-      'napisz mi', 'napisz opowiadanie', 'jaki jest', 'kim jesteś', 'opowiedz żart',
-      'pogoda', 'przepis', 'gotowanie', 'polityk']
+    const spamKeywords = ['bitcoin', 'crypto', 'sex', 'porn', 'viagra', 'casino',
+      'napisz mi', 'napisz opowiadanie', 'napisz wiersz', 'napisz historię', 'napisz bajkę',
+      'jaki jest', 'kim jesteś', 'opowiedz żart', 'opowiedz dowcip',
+      'pogoda', 'przepis', 'gotowanie', 'polityk', 'pieczenie', 'ciasto',
+      'wymyśl', 'wyobraź', 'stwórz opowieść', 'w kontekście']
     for (const spam of spamKeywords) {
       if (msgLower.includes(spam)) {
         return false
