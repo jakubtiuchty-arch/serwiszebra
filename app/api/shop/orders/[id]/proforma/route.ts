@@ -1,5 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
+import { Resend } from 'resend'
+
+const resend = new Resend(process.env.RESEND_API_KEY)
 
 export async function GET(
   request: NextRequest,
@@ -372,6 +375,50 @@ export async function GET(
 `
 
     console.log(`✅ Pro forma HTML generated for shop order ${orderId}`)
+
+    // Wyślij powiadomienie email na dyk@takma.com.pl
+    try {
+      await resend.emails.send({
+        from: 'System Serwisowy <system@serwis-zebry.pl>',
+        to: 'dyk@takma.com.pl',
+        subject: `Pro Forma - zamówienie sklepowe #${shortId}`,
+        html: `
+          <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+            <div style="background: #2563eb; color: white; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+              <h2 style="margin: 0;">Pro Forma wygenerowana - sklep</h2>
+            </div>
+            <div style="background: #f9fafb; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+              <table style="width: 100%; border-collapse: collapse;">
+                <tr>
+                  <td style="padding: 8px 0; border-bottom: 1px solid #e5e7eb;"><strong>Nr zamówienia:</strong></td>
+                  <td style="padding: 8px 0; border-bottom: 1px solid #e5e7eb; font-family: monospace;">#${shortId}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0; border-bottom: 1px solid #e5e7eb;"><strong>Firma:</strong></td>
+                  <td style="padding: 8px 0; border-bottom: 1px solid #e5e7eb;">${customerData.companyName || '—'}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0; border-bottom: 1px solid #e5e7eb;"><strong>NIP:</strong></td>
+                  <td style="padding: 8px 0; border-bottom: 1px solid #e5e7eb; font-family: monospace;">${customerData.nip || '—'}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0; border-bottom: 1px solid #e5e7eb;"><strong>Kontakt:</strong></td>
+                  <td style="padding: 8px 0; border-bottom: 1px solid #e5e7eb;">${customerData.contactName || '—'} (${customerData.email})</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0;"><strong>Kwota brutto:</strong></td>
+                  <td style="padding: 8px 0; font-weight: bold; color: #059669; font-size: 18px;">${subtotalBrutto.toFixed(2)} zł</td>
+                </tr>
+              </table>
+            </div>
+            <p style="color: #6b7280; font-size: 12px; text-align: center;">Klient wygenerował pro formę w sklepie serwis-zebry.pl</p>
+          </div>
+        `,
+      })
+      console.log('✅ Shop proforma email sent to dyk@takma.com.pl')
+    } catch (emailError) {
+      console.error('⚠️ Shop proforma email error:', emailError)
+    }
 
     return new NextResponse(html, {
       headers: {
