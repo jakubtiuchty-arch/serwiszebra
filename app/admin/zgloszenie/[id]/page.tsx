@@ -49,6 +49,7 @@ interface RepairRequest {
   last_name: string
   phone: string
   company: string | null
+  nip: string | null
   street: string | null
   city: string | null
   zip_code: string | null
@@ -592,6 +593,12 @@ export default function AdminRepairDetailPage() {
                   <div>
                     <p className="text-xs text-gray-500">Firma</p>
                     <p className="font-semibold text-gray-900 text-sm">{repair.company}</p>
+                  </div>
+                )}
+                {repair.nip && (
+                  <div>
+                    <p className="text-xs text-gray-500">NIP</p>
+                    <p className="font-semibold text-gray-900 text-sm font-mono">{repair.nip}</p>
                   </div>
                 )}
                 <div>
