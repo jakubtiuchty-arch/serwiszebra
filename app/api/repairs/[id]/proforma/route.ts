@@ -120,25 +120,15 @@ export async function POST(
       })
       console.log('✅ Pro Forma email sent to customer')
 
-      // Wyślij email do admina o wyborze pro formy
-      const adminEmailData = {
+      // Wyślij email do admina + dyk@takma.com.pl o wyborze pro formy
+      await sendProFormaAdminEmail({
+        to: [process.env.ADMIN_EMAIL || 'jakub.tiuchty@gmail.com', 'dyk@takma.com.pl'],
         repairId: repairId,
         repairNumber: repair.repair_number,
         customerName: `${repair.first_name} ${repair.last_name}`,
         deviceModel: repair.device_model,
         amount: repair.final_price || repair.estimated_price || 0
-      }
-
-      await Promise.all([
-        sendProFormaAdminEmail({
-          to: process.env.ADMIN_EMAIL || 'jakub.tiuchty@gmail.com',
-          ...adminEmailData,
-        }),
-        sendProFormaAdminEmail({
-          to: 'dyk@takma.com.pl',
-          ...adminEmailData,
-        }),
-      ])
+      })
       console.log('✅ Pro Forma notification sent to admin + dyk@takma.com.pl')
     } catch (emailError) {
       console.error('⚠️ Pro Forma email error:', emailError)

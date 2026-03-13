@@ -929,7 +929,7 @@ ${getEmailHeader()}
 // ========== EMAIL O PRO FORMIE - DO ADMINA ==========
 
 interface ProFormaAdminEmailData {
-  to: string
+  to: string | string[]
   repairId: string
   repairNumber?: string
   customerName: string
