@@ -229,7 +229,7 @@ export default function RegulaminPage() {
                 <li>Uszkodzenia powstałe w transporcie z winy przewoźnika</li>
               </ul>
               <p>9.3. Maksymalna odpowiedzialność Serwisu ograniczona jest do wartości wykonanej usługi.</p>
-              <p>9.4. Urządzenia nieodebrane w terminie 30 dni od zakończenia naprawy lub rezygnacji mogą zostać zutylizowane po uprzednim powiadomieniu Klienta.</p>
+              <p>9.4. W przypadku nieodebrania sprzętu po zakończeniu naprawy, po uprzednim poinformowaniu Klienta i wskazaniu ostatecznego terminu odbioru, Serwis zastrzega sobie prawo do naliczania opłaty magazynowej w wysokości 10,00 zł netto (12,30 zł brutto) za każdy dzień przechowywania, licząc od dnia następującego po upływie wyznaczonego terminu.</p>
             </div>
           </section>
 
