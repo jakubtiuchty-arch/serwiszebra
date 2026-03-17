@@ -74,10 +74,10 @@ export async function POST(request: NextRequest) {
     
     const { data: profile } = await supabase
       .from('profiles')
-      .select('first_name, last_name, phone')
+      .select('first_name, last_name, phone, street, city, postal_code, company_name, nip')
       .eq('id', session.user.id)
       .single()
-    
+
     console.log('✅ Profil:', profile)
 
     // Generuj numer zgłoszenia
@@ -106,9 +106,11 @@ export async function POST(request: NextRequest) {
       
       photo_urls: body.photo_urls || [],
       
-      street: body.street || null,
-      zip_code: body.zip_code || null,
-      city: body.city || null,
+      company: body.company || profile?.company_name || null,
+      nip: body.nip || profile?.nip || null,
+      street: body.street || profile?.street || null,
+      zip_code: body.zip_code || profile?.postal_code || null,
+      city: body.city || profile?.city || null,
       contact_phone: body.contact_phone || profile?.phone || null,
       
       pickup_date: null,
