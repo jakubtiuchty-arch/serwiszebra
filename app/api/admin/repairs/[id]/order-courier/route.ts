@@ -109,8 +109,27 @@ export async function POST(
 
     if (missingFields.length > 0) {
       console.error('[BLPaczka] Missing customer address fields:', missingFields)
+      console.error('[BLPaczka] Raw repair address data:', {
+        street: repair.street,
+        zip_code: repair.zip_code,
+        city: repair.city,
+        phone: repair.phone,
+        contact_phone: repair.contact_phone,
+        allKeys: Object.keys(repair).filter(k => ['street', 'zip_code', 'city', 'phone', 'contact_phone', 'address', 'postal', 'postal_code'].includes(k))
+      })
       return NextResponse.json(
-        { error: `Brak danych adresowych klienta: ${missingFields.join(', ')}. Uzupełnij dane w zgłoszeniu przed zamówieniem kuriera.` },
+        {
+          error: `Brak danych adresowych klienta: ${missingFields.join(', ')}. Uzupełnij dane w zgłoszeniu przed zamówieniem kuriera.`,
+          debug: {
+            street: repair.street || null,
+            zip_code: repair.zip_code || null,
+            city: repair.city || null,
+            phone: repair.phone || null,
+            contact_phone: repair.contact_phone || null,
+            repair_id: repairId,
+            direction
+          }
+        },
         { status: 400 }
       )
     }

@@ -392,7 +392,10 @@ export default function AdminRepairDetailPage() {
 
       if (!response.ok) {
         const errorData = await response.json()
-        throw new Error(errorData.error || 'Nie udało się zamówić kuriera')
+        const debugInfo = errorData.debug
+          ? `\n\nDane z bazy: street=${errorData.debug.street}, zip_code=${errorData.debug.zip_code}, city=${errorData.debug.city}, phone=${errorData.debug.phone}, contact_phone=${errorData.debug.contact_phone}, direction=${errorData.debug.direction}`
+          : ''
+        throw new Error((errorData.error || 'Nie udało się zamówić kuriera') + debugInfo)
       }
 
       const data = await response.json()
