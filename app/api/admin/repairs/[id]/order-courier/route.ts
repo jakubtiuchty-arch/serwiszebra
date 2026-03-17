@@ -98,7 +98,23 @@ export async function POST(
       phone: repair.phone,
       email: repair.email
     }
-    
+
+    // Walidacja: sprawdź czy dane adresowe klienta są kompletne
+    // (potrzebne zarówno dla pickup jako nadawca, jak i delivery jako odbiorca)
+    const missingFields: string[] = []
+    if (!customerData.postal) missingFields.push('kod pocztowy')
+    if (!customerData.street && !repair.street) missingFields.push('ulica')
+    if (!customerData.city) missingFields.push('miasto')
+    if (!customerData.phone) missingFields.push('telefon')
+
+    if (missingFields.length > 0) {
+      console.error('[BLPaczka] Missing customer address fields:', missingFields)
+      return NextResponse.json(
+        { error: `Brak danych adresowych klienta: ${missingFields.join(', ')}. Uzupełnij dane w zgłoszeniu przed zamówieniem kuriera.` },
+        { status: 400 }
+      )
+    }
+
     // Dla PICKUP: nadawca = klient, odbiorca = TAKMA
     // Dla DELIVERY: nadawca = TAKMA, odbiorca = klient
     const sender = direction === 'pickup' ? customerData : takmaData
@@ -181,7 +197,14 @@ export async function POST(
     console.log('[BLPaczka] Response:', JSON.stringify(blpaczkaData, null, 2))
 
     if (!blpaczkaData.success) {
-      throw new Error(blpaczkaData.message || 'Błąd API BL Paczka')
+      // Wyciągnij szczegóły błędów walidacji z BLPaczka
+      const errorDetails = blpaczkaData.errors
+        ? Object.entries(blpaczkaData.errors).map(([k, v]) => `${k}: ${v}`).join(', ')
+        : ''
+      const errorMsg = blpaczkaData.message || 'Błąd API BL Paczka'
+      console.error('[BLPaczka] API Error:', errorMsg, errorDetails ? `Details: ${errorDetails}` : '')
+      console.error('[BLPaczka] Full error response:', JSON.stringify(blpaczkaData))
+      throw new Error(errorDetails ? `${errorMsg} (${errorDetails})` : errorMsg)
     }
 
     const trackingNumber = blpaczkaData.data?.Order?.[0]?.waybill_no || 
