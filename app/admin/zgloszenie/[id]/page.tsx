@@ -190,7 +190,11 @@ export default function AdminRepairDetailPage() {
     pickup_date: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString().split('T')[0],
     direction: 'delivery' as 'delivery' | 'pickup',
     pickup_time_from: '09',
-    pickup_time_to: '17'
+    pickup_time_to: '17',
+    // Adres klienta (edytowalny gdy brakuje w zgłoszeniu)
+    customer_street: '',
+    customer_zip_code: '',
+    customer_city: '',
   })
   const [serviceNotesForm, setServiceNotesForm] = useState({
     service_notes: ''
@@ -252,6 +256,12 @@ export default function AdminRepairDetailPage() {
         setServiceNotesForm({
           service_notes: data.repair.service_notes || ''
         })
+        setCourierForm(prev => ({
+          ...prev,
+          customer_street: data.repair.street || '',
+          customer_zip_code: data.repair.zip_code || '',
+          customer_city: data.repair.city || '',
+        }))
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Wystąpił błąd')
@@ -381,6 +391,11 @@ export default function AdminRepairDetailPage() {
     try {
       const direction = repair!.status === 'nowe' ? 'pickup' : 'delivery'
 
+      // Walidacja adresu po stronie frontendu
+      if (!courierForm.customer_street.trim() || !courierForm.customer_zip_code.trim() || !courierForm.customer_city.trim()) {
+        throw new Error('Uzupełnij adres klienta (ulica, kod pocztowy, miasto) przed zamówieniem kuriera.')
+      }
+
       const response = await fetch(`/api/admin/repairs/${repairId}/order-courier`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -392,10 +407,7 @@ export default function AdminRepairDetailPage() {
 
       if (!response.ok) {
         const errorData = await response.json()
-        const debugInfo = errorData.debug
-          ? `\n\nDane z bazy: street=${errorData.debug.street}, zip_code=${errorData.debug.zip_code}, city=${errorData.debug.city}, phone=${errorData.debug.phone}, contact_phone=${errorData.debug.contact_phone}, direction=${errorData.debug.direction}`
-          : ''
-        throw new Error((errorData.error || 'Nie udało się zamówić kuriera') + debugInfo)
+        throw new Error(errorData.error || 'Nie udało się zamówić kuriera')
       }
 
       const data = await response.json()
@@ -893,6 +905,42 @@ export default function AdminRepairDetailPage() {
                         <option value="17">17:00</option>
                         <option value="18">18:00</option>
                       </select>
+                    </div>
+                  </div>
+
+                  {/* Adres klienta */}
+                  <div className="border-t border-gray-200 pt-3 mt-1">
+                    <label className="block text-xs font-semibold text-gray-700 mb-2">
+                      Adres klienta {(!repair.street || !repair.zip_code || !repair.city) && <span className="text-red-500">(uzupełnij!)</span>}
+                    </label>
+                    <div className="space-y-2">
+                      <input
+                        type="text"
+                        value={courierForm.customer_street}
+                        onChange={(e) => setCourierForm({ ...courierForm, customer_street: e.target.value })}
+                        className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        placeholder="Ulica i numer *"
+                        required
+                      />
+                      <div className="grid grid-cols-2 gap-2">
+                        <input
+                          type="text"
+                          value={courierForm.customer_zip_code}
+                          onChange={(e) => setCourierForm({ ...courierForm, customer_zip_code: e.target.value })}
+                          className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                          placeholder="Kod pocztowy *"
+                          pattern="\d{2}-\d{3}"
+                          required
+                        />
+                        <input
+                          type="text"
+                          value={courierForm.customer_city}
+                          onChange={(e) => setCourierForm({ ...courierForm, customer_city: e.target.value })}
+                          className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                          placeholder="Miasto *"
+                          required
+                        />
+                      </div>
                     </div>
                   </div>
 

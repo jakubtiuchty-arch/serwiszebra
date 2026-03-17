@@ -23,7 +23,7 @@ export async function POST(
     const supabase = await createClient()
     const repairId = params.id
     const body = await request.json()
-    const { 
+    const {
       courier_code,
       weight,
       side_x,
@@ -32,7 +32,10 @@ export async function POST(
       pickup_date,
       direction = 'delivery',
       pickup_time_from = '09',
-      pickup_time_to = '17'
+      pickup_time_to = '17',
+      customer_street,
+      customer_zip_code,
+      customer_city,
     } = body
 
     // Walidacja
@@ -57,20 +60,44 @@ export async function POST(
       )
     }
 
+    // Jeśli adres przyszedł z formularza kuriera — użyj go i zapisz do zgłoszenia
+    const effectiveStreet = customer_street?.trim() || repair.street || ''
+    const effectiveZipCode = customer_zip_code?.trim() || repair.zip_code || ''
+    const effectiveCity = customer_city?.trim() || repair.city || ''
+
+    // Zapisz adres do zgłoszenia jeśli był pusty a przyszedł z formularza
+    if (customer_street || customer_zip_code || customer_city) {
+      const addressUpdate: Record<string, string> = {}
+      if (customer_street?.trim() && !repair.street) addressUpdate.street = customer_street.trim()
+      if (customer_zip_code?.trim() && !repair.zip_code) addressUpdate.zip_code = customer_zip_code.trim()
+      if (customer_city?.trim() && !repair.city) addressUpdate.city = customer_city.trim()
+      // Zawsze nadpisz danymi z formularza (admin mógł poprawić)
+      if (customer_street?.trim()) addressUpdate.street = customer_street.trim()
+      if (customer_zip_code?.trim()) addressUpdate.zip_code = customer_zip_code.trim()
+      if (customer_city?.trim()) addressUpdate.city = customer_city.trim()
+
+      if (Object.keys(addressUpdate).length > 0) {
+        const { error: addrError } = await supabase
+          .from('repair_requests')
+          .update({ ...addressUpdate, updated_at: new Date().toISOString() })
+          .eq('id', repairId)
+
+        if (addrError) {
+          console.warn('[BLPaczka] Could not save address to repair:', addrError)
+        } else {
+          console.log('[BLPaczka] Address saved to repair:', addressUpdate)
+        }
+      }
+    }
+
     // Dane nadawcy i odbiorcy zależą od kierunku
     // PICKUP: Klient (nadawca) -> TAKMA (odbiorca)
     // DELIVERY: TAKMA (nadawca) -> Klient (odbiorca)
-    
+
     console.log('[BLPaczka] Direction received:', direction)
     console.log('[BLPaczka] Repair status:', repair.status)
-    console.log('[BLPaczka] Customer data:', {
-      name: repair.company ? `${repair.company} - ${repair.first_name} ${repair.last_name}` : `${repair.first_name} ${repair.last_name}`,
-      street: repair.street,
-      city: repair.city,
-      postal: repair.zip_code,
-      phone: repair.phone
-    })
-    
+    console.log('[BLPaczka] Customer address:', { street: effectiveStreet, zip_code: effectiveZipCode, city: effectiveCity })
+
     const takmaData = {
       name: 'TAKMA TADEUSZ TIUCHTY',
       street: 'ul. Poświęcka',
@@ -80,56 +107,36 @@ export async function POST(
       phone: '726151515',
       email: 'jakub.tiuchty@takma.com.pl'
     }
-    
+
     // Buduj nazwę klienta: FIRMA + Imię Nazwisko (jeśli firma jest podana)
-    const customerFullName = repair.company 
+    const customerFullName = repair.company
       ? `${repair.company} - ${repair.first_name} ${repair.last_name}`
       : `${repair.first_name} ${repair.last_name}`
-    
+
     // Wyciągnij ulicę i numer domu osobno
-    const streetParts = parseStreetAddress(repair.street || '')
-    
+    const streetParts = parseStreetAddress(effectiveStreet)
+
     const customerData = {
       name: customerFullName,
       street: streetParts.street,
       house_no: streetParts.houseNo,
-      postal: repair.zip_code || '',
-      city: repair.city || '',
+      postal: effectiveZipCode,
+      city: effectiveCity,
       phone: repair.phone,
       email: repair.email
     }
 
     // Walidacja: sprawdź czy dane adresowe klienta są kompletne
-    // (potrzebne zarówno dla pickup jako nadawca, jak i delivery jako odbiorca)
     const missingFields: string[] = []
     if (!customerData.postal) missingFields.push('kod pocztowy')
-    if (!customerData.street && !repair.street) missingFields.push('ulica')
+    if (!customerData.street) missingFields.push('ulica')
     if (!customerData.city) missingFields.push('miasto')
     if (!customerData.phone) missingFields.push('telefon')
 
     if (missingFields.length > 0) {
       console.error('[BLPaczka] Missing customer address fields:', missingFields)
-      console.error('[BLPaczka] Raw repair address data:', {
-        street: repair.street,
-        zip_code: repair.zip_code,
-        city: repair.city,
-        phone: repair.phone,
-        contact_phone: repair.contact_phone,
-        allKeys: Object.keys(repair).filter(k => ['street', 'zip_code', 'city', 'phone', 'contact_phone', 'address', 'postal', 'postal_code'].includes(k))
-      })
       return NextResponse.json(
-        {
-          error: `Brak danych adresowych klienta: ${missingFields.join(', ')}. Uzupełnij dane w zgłoszeniu przed zamówieniem kuriera.`,
-          debug: {
-            street: repair.street || null,
-            zip_code: repair.zip_code || null,
-            city: repair.city || null,
-            phone: repair.phone || null,
-            contact_phone: repair.contact_phone || null,
-            repair_id: repairId,
-            direction
-          }
-        },
+        { error: `Brak danych adresowych klienta: ${missingFields.join(', ')}. Uzupełnij adres w formularzu kuriera.` },
         { status: 400 }
       )
     }
