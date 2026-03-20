@@ -19,6 +19,7 @@ const REGULAR_ADMIN_ALLOWED_PATHS = [
   '/admin/zgloszenie', // Szczegóły zgłoszeń
   '/admin/uzytkownicy', // Użytkownicy
   '/admin/instrukcje',  // Instrukcje PDF
+  '/admin/katalog',     // Katalog części zamiennych
 ]
 
 function isSuperAdminEmail(email: string | undefined): boolean {
