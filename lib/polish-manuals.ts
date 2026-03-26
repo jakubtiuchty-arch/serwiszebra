@@ -31961,6 +31961,616 @@ Antena NFC znajduje się w górnej części tyłu urządzenia. Zbliż tag NFC do
 `
       }
     ]
+  },
+  'tc501': {
+    model: 'TC501',
+    title: 'Zebra TC501 – Instrukcja obsługi po Polsku',
+    lastUpdated: '2026-03-25',
+    sourceDocument: 'Zebra TC501 Product Reference Guide (MN-006220-02EN Rev. A)',
+    keywords: [
+      'zebra tc501 instrukcja', 'zebra tc501 instrukcja po polsku', 'zebra tc501 manual',
+      'terminal mobilny zebra tc501', 'zebra tc501 skanowanie', 'zebra tc501 reset', 'zebra tc501 bateria',
+      'zebra tc501 wifi', 'zebra tc501 wifi 7', 'zebra tc501 bluetooth', 'zebra tc501 nfc', 'zebra tc501 android 15',
+      'zebra tc501 kamera', 'zebra tc501 kamera 50mp', 'zebra tc501 specyfikacja', 'zebra tc501 akcesoria',
+      'zebra tc501 stacja dokująca', 'zebra tc501 ładowanie', 'zebra tc501 ip65 ip68', 'zebra tc501 enterprise',
+      'komputer dotykowy zebra tc501', 'zebra tc501 skanowanie kodów', 'zebra tc501 usb-c',
+      'zebra tc501 rozwiązywanie problemów', 'zebra tc501 czyszczenie'
+    ],
+    sections: [
+      {
+        title: '1. Podstawowe informacje',
+        content: `
+### O urządzeniu TC501
+
+Zebra TC501 to najnowszej generacji wytrzymały komputer dotykowy klasy enterprise, zaprojektowany do pracy zarówno wewnątrz obiektów, jak i na zewnątrz. Urządzenie łączy w sobie zaawansowane możliwości skanowania kodów kreskowych, komunikację bezprzewodową **Wi-Fi 7** (802.11be), Bluetooth 5.4, 5G i NFC, a także profesjonalną kamerę **50 MP** – wszystko w ergonomicznej, wytrzymałej obudowie.
+
+TC501 działa pod kontrolą systemu **Android 15** z gwarancją aktualizacji bezpieczeństwa do Android 18, co zapewnia wieloletnie wsparcie. Urządzenie wyposażono w wydajny procesor **Qualcomm QCS8550 octa-core 3,2 GHz**, 8 GB RAM i 128 GB pamięci wewnętrznej (UFS 3.1).
+
+Dzięki **6-calowemu wyświetlaczowi Full HD+** (2340 x 1080) z Corning Gorilla Glass 5, TC501 oferuje doskonałą czytelność w każdych warunkach oświetlenia. Urządzenie spełnia normy **IP65/IP68** (pyłoszczelność i wodoszczelność) oraz **MIL-STD-810H** (odporność na upadki z 1,8 m).
+
+### Parametry techniczne
+
+| Parametr | TC501 |
+|----------|-------|
+| **Wyświetlacz** | 6,0" Full HD+ (2340 x 1080), Corning Gorilla Glass 5 |
+| **Procesor** | Qualcomm QCS8550, 3,2 GHz octa-core |
+| **System operacyjny** | Android 15 (aktualizacje do Android 18) |
+| **Pamięć RAM** | 8 GB LPDDR5 |
+| **Pamięć wewnętrzna** | 128 GB UFS 3.1 |
+| **Karta pamięci** | microSD do 2 TB (SDXC) |
+| **Bateria standardowa** | 3800 mAh PowerPrecision+ |
+| **Bateria rozszerzona** | 5200 mAh PowerPrecision+ |
+| **Kamera tylna** | 50 MP z PDAF, lampą LED i trybem makro |
+| **Kamera przednia** | 8 MP |
+| **Skaner** | SE4710 (SR) lub SE55 (SR/XR) / opcja SE4770 (SR500, SR560, AC670) |
+| **Łączność** | Wi-Fi 7 (802.11be), Bluetooth 5.4, NFC, 5G/4G (opcja) |
+| **USB** | USB-C 3.1 Gen 1 (OTG, DisplayPort Alt Mode) |
+
+### Wymiary i waga
+
+| Parametr | Bateria standardowa | Bateria rozszerzona |
+|----------|---------------------|---------------------|
+| Długość | 164,4 mm | 164,4 mm |
+| Szerokość | 76,4 mm | 76,4 mm |
+| Grubość | 11,1 mm | 15,3 mm |
+| Waga | ok. 258 g | ok. 296 g |
+
+### Warunki pracy
+
+| Parametr | Wartość |
+|----------|---------|
+| Temperatura pracy | -20°C do +50°C |
+| Temperatura przechowywania | -40°C do +70°C |
+| Temperatura ładowania | 0°C do +40°C |
+| Wilgotność względna | 5% – 95% bez kondensacji |
+| Odporność na upadki | 1,8 m na beton (MIL-STD-810H) |
+| Test obracania (tumble) | 600 upadków z 0,5 m |
+| Klasa szczelności | **IP65/IP68** |
+`
+      },
+      {
+        title: '2. Elementy urządzenia',
+        content: `
+### Widok z przodu
+
+| Element | Opis |
+|---------|------|
+| Kamera przednia | Aparat 8 MP do zdjęć, wideo i wideokonferencji |
+| Głośnik słuchawkowy | Odtwarzanie audio w trybie słuchawki |
+| Czujnik zbliżenia/światła | Wykrywa zbliżenie obiektu i natężenie światła |
+| Dioda LED skanowania | Wskazuje status skanowania kodów kreskowych |
+| Dioda LED powiadomień | Wskazuje ładowanie, powiadomienia i alarmy |
+| Ekran dotykowy | Wyświetlacz 6" Full HD+ z wielopunktowym dotykiem (mokre palce, rękawiczki) |
+| Głośnik | Głośnik o dużej mocy (do 100 dBA) |
+| Złącze USB-C | Komunikacja USB 3.1, ładowanie, DisplayPort Alt Mode |
+| Mikrofon | Podwójny mikrofon z redukcją szumów |
+| Przycisk PTT | Przycisk Push-to-Talk (programowalny) |
+| Przycisk skanowania boczny | Inicjuje skanowanie kodów kreskowych (dwustronny) |
+
+### Widok z tyłu
+
+| Element | Opis |
+|---------|------|
+| Antena NFC | Komunikacja z urządzeniami i znacznikami NFC |
+| Mocowanie paska | Punkt mocowania opcjonalnego paska na rękę |
+| Zatrzaski baterii | Przytrzymaj, aby wyjąć baterię |
+| Bateria | PowerPrecision+ Li-Ion, wymienna, z diagnostyką |
+| Przyciski głośności | Regulacja głośności (programowalne) |
+| Przycisk skanowania tylny | Inicjuje skanowanie kodów kreskowych |
+| Lampa błyskowa LED | Doświetlenie dla kamery (z trybem latarki) |
+| Kamera tylna | Aparat 50 MP z PDAF i autofokusem |
+| Przycisk zasilania | Włączanie/wyłączanie ekranu i urządzenia |
+| Okno skanera | Wyjście promienia skanującego |
+
+Na dolnej krawędzi urządzenia znajdują się **styki ładowania (POGO pins)** umożliwiające szybkie ładowanie przez stacje dokujące i akcesoria.
+`
+      },
+      {
+        title: '3. Rozpakowanie i pierwsze uruchomienie',
+        content: `
+### Zawartość opakowania
+
+- Komputer dotykowy Zebra TC501
+- Bateria PowerPrecision+ (3800 mAh lub 5200 mAh, w zależności od konfiguracji)
+- Przewód USB-C (opcjonalnie)
+- Skrócona instrukcja obsługi (Quick Start Guide)
+- Informacje prawne i bezpieczeństwa
+
+> **Uwaga:** Ładowarka, stacja dokująca i inne akcesoria sprzedawane są osobno.
+
+### Instalacja baterii
+
+1. Umieść urządzenie ekranem do dołu na czystej, miękkiej powierzchni
+2. Włóż baterię pod kątem – najpierw dolna krawędź (styki kontaktowe) do komory baterii
+3. Dociśnij górną część baterii aż do słyszalnego kliknięcia zatrzasku
+4. Urządzenie włączy się automatycznie po pierwszym włożeniu naładowanej baterii
+
+### Wyjmowanie baterii
+
+1. Przytrzymaj przycisk zasilania → wybierz **"Wyłącz"** z menu na ekranie
+2. Poczekaj na pełne wyłączenie urządzenia
+3. Naciśnij oba zatrzaski baterii jednocześnie i unieś baterię
+
+> **Ważne:** Nigdy nie wyjmuj baterii podczas pracy urządzenia – grozi to utratą danych!
+
+### Pierwsze uruchomienie
+
+1. Włóż naładowaną baterię (urządzenie włączy się automatycznie)
+2. Poczekaj na pełne uruchomienie systemu Android 15 (ok. 1-2 minuty)
+3. Postępuj zgodnie z kreatorem konfiguracji:
+   - Wybierz język (**Polski**)
+   - Połącz się z siecią Wi-Fi
+   - Skonfiguruj zabezpieczenia (PIN, hasło lub wzór)
+   - Zaakceptuj warunki licencji
+4. Po zakończeniu konfiguracji pojawi się ekran główny
+
+### Podstawowe gesty
+
+| Gest | Funkcja |
+|------|---------|
+| Dotknij | Wybierz element |
+| Dotknij i przytrzymaj | Menu kontekstowe |
+| Przesuń | Przewijanie treści |
+| Uszczypnij/rozsuń | Przybliżanie/oddalanie |
+| Przesuń w górę od dołu | Ekran główny |
+| Przesuń w górę i przytrzymaj | Ostatnie aplikacje |
+| Przesuń z prawej strony | Powrót |
+`
+      },
+      {
+        title: '4. Ładowanie baterii',
+        content: `
+### Metody ładowania
+
+TC501 obsługuje **kilka metod ładowania**, co zapewnia elastyczność w różnych środowiskach pracy:
+
+| Metoda | Opis |
+|--------|------|
+| **Kabel USB-C** | Ładowanie przez dołączony kabel USB-C (5V/3A lub 9V/3A z QC) |
+| **Stacja dokująca 1-slot** | CRD-TC5X-1SE1B-01 – ładowanie + komunikacja |
+| **Stacja dokująca 5-slot** | CRD-TC5X-5SE1B-01 – ładowanie do 5 urządzeń |
+| **Stacja na baterię** | SAC-TC5X-4BATC-01 – ładowanie 4 baterii osobno |
+| **Ładowarka samochodowa** | CHG-TC5X-VE1-01 – ładowanie w pojeździe |
+
+### Wskaźniki ładowania
+
+Dioda LED przy ładowaniu informuje o statusie:
+
+| Kolor LED | Znaczenie |
+|-----------|-----------|
+| 🔴 Czerwony (stały) | Ładowanie w toku (0–89%) |
+| 🟡 Pomarańczowy (stały) | Ładowanie prawie gotowe (90–99%) |
+| 🟢 Zielony (stały) | Bateria w pełni naładowana (100%) |
+| 🔴 Czerwony (migający) | Błąd ładowania – sprawdź baterię |
+
+### Czas ładowania
+
+| Typ baterii | Czas ładowania (USB-C) | Czas ładowania (stacja dokująca) |
+|-------------|------------------------|----------------------------------|
+| Standardowa 3800 mAh | ok. 2,5 godziny | ok. 2 godziny |
+| Rozszerzona 5200 mAh | ok. 3,5 godziny | ok. 3 godziny |
+
+### Żywotność baterii PowerPrecision+
+
+Baterie PowerPrecision+ posiadają **wbudowaną diagnostykę** umożliwiającą monitorowanie stanu zdrowia:
+
+- Przejdź do **Ustawienia → Bateria → Diagnostyka PowerPrecision+**
+- Sprawdź: stan zdrowia (Health), liczba cykli, temperatura, szacowany czas pracy
+- Bateria jest zalecana do wymiany, gdy stan zdrowia spadnie poniżej **60%**
+
+### Wskazówki dotyczące baterii
+
+- **Ładuj regularnie** – nie czekaj na całkowite rozładowanie
+- **Przechowuj w temperaturze pokojowej** – ekstremalne temperatury skracają żywotność
+- **Używaj tylko oryginalnych baterii Zebra** – nieoryginalne mogą uszkodzić urządzenie
+- **Bateria rozszerzona (5200 mAh)** zalecana dla pracy powyżej 8 godzin dziennie
+`
+      },
+      {
+        title: '5. Skanowanie kodów kreskowych',
+        content: `
+### Dostępne moduły skanujące
+
+TC501 jest dostępny z różnymi modułami skanującymi w zależności od konfiguracji:
+
+| Moduł | Typ | Zasięg | Zastosowanie |
+|-------|-----|--------|-------------|
+| **SE4710** | Imager 2D (SR) | Do 61 cm | Skanowanie standardowe, retail, magazyn |
+| **SE55** | Imager 2D (SR/XR) | Do 5,1 m (XR) | Skanowanie bliskie i dalekiego zasięgu |
+| **SE4770 (SR500)** | Imager 2D | Do 1,5 m | Skanowanie standardowe, uniwersalne |
+| **SE4770 (SR560)** | Imager 2D | Do 2,4 m | Rozszerzony zasięg |
+| **SE4770 (AC670)** | Imager 2D | Do 5,1 m | Magazyn, logistyka, daleki zasięg |
+
+### Obsługiwane symbologie
+
+TC501 odczytuje **wszystkie popularne typy kodów kreskowych**:
+
+**Kody 1D:**
+- Code 128, Code 39, Code 93
+- EAN-8, EAN-13, UPC-A, UPC-E
+- Interleaved 2 of 5, Codabar
+- GS1-128, GS1 DataBar
+
+**Kody 2D:**
+- QR Code, Data Matrix, PDF417
+- Aztec, MaxiCode, Micro QR
+- GS1 QR Code, DotCode
+
+### Jak skanować
+
+1. **Uruchom aplikację** obsługującą skanowanie (np. DataWedge, aplikacja magazynowa)
+2. **Skieruj okno skanera** na kod kreskowy
+3. **Naciśnij przycisk skanowania** (boczny lub tylny) – pojawi się wiązka celownicza
+4. **Wyceluj** wiązkę na środek kodu kreskowego
+5. **Zwolnij przycisk** po usłyszeniu sygnału potwierdzenia (beep) i zielonym wskaźniku LED
+
+### Konfiguracja DataWedge
+
+TC501 ma wbudowaną aplikację **DataWedge** do zaawansowanej konfiguracji skanera:
+
+1. Otwórz **DataWedge** z menu aplikacji
+2. Wybierz profil (lub utwórz nowy)
+3. Skonfiguruj:
+   - **Input**: wybierz typ skanera (Barcode Scanner)
+   - **Output**: ustaw miejsce docelowe danych (Keystroke, Intent, IP)
+   - **Decoders**: włącz/wyłącz poszczególne symbologie
+   - **Reader params**: dostosuj parametry skanowania (wiązka celownicza, czas skanu, dźwięk)
+
+### Wskazówki dla optymalnego skanowania
+
+- Trzymaj urządzenie w odległości **15-30 cm** od kodu (dla modułu SE4710)
+- Unikaj **odbić światła** – skanuj pod lekkim kątem przy błyszczących etykietach
+- Upewnij się, że wiązka celownicza pokrywa **cały kod** łącznie ze strefami cichymi
+- W przypadku uszkodzonych kodów, zmniejsz prędkość skanowania w ustawieniach DataWedge
+`
+      },
+      {
+        title: '6. Łączność bezprzewodowa',
+        content: `
+### Wi-Fi 7 (802.11be)
+
+TC501 jako jeden z pierwszych terminali mobilnych wspiera **Wi-Fi 7** – najnowszy standard bezprzewodowy:
+
+| Parametr | Wartość |
+|----------|---------|
+| Standard | 802.11 a/b/g/n/ac/ax/be (Wi-Fi 7) |
+| Pasma | 2,4 GHz / 5 GHz / 6 GHz |
+| MIMO | 2x2 MU-MIMO |
+| Szyfrowanie | WPA3-Personal, WPA3-Enterprise, OWE |
+| Roaming | 802.11r (Fast BSS Transition) / 802.11k/v |
+
+**Konfiguracja Wi-Fi:**
+
+1. Przejdź do **Ustawienia → Sieć i internet → Wi-Fi**
+2. Włącz Wi-Fi przełącznikiem
+3. Wybierz sieć z listy dostępnych
+4. Wprowadź hasło (jeśli wymagane)
+5. Dla sieci WPA3-Enterprise: skonfiguruj certyfikat i dane uwierzytelniające
+
+> **Wi-Fi 7** zapewnia do **4× większą przepustowość** niż Wi-Fi 6E, minimalne opóźnienia i płynne przełączanie między punktami dostępowymi (roaming).
+
+### Bluetooth 5.4
+
+| Parametr | Wartość |
+|----------|---------|
+| Wersja | Bluetooth 5.4 LE |
+| Zasięg | Do 100 m (klasa 1) |
+| Profile | A2DP, AVRCP, HFP, HSP, PBAP, OPP, SPP, HID |
+
+**Parowanie urządzeń Bluetooth:**
+
+1. Przejdź do **Ustawienia → Podłączone urządzenia → Sparuj nowe urządzenie**
+2. Włącz tryb parowania na urządzeniu docelowym (np. drukarka, słuchawki)
+3. Wybierz urządzenie z listy
+4. Potwierdź kod parowania (jeśli wymagany)
+
+### NFC (Near Field Communication)
+
+TC501 obsługuje **odczyt i zapis znaczników NFC** oraz komunikację peer-to-peer:
+
+- **Odczyt znaczników**: zbliż urządzenie do znacznika NFC (antena NFC na pleckach, w górnej części)
+- **Android Beam / udostępnianie**: zbliż dwa urządzenia NFC do siebie
+- **Karty zbliżeniowe**: obsługa kart pracowniczych, kontroli dostępu itp.
+
+### 5G / 4G LTE (opcja WWAN)
+
+W konfiguracjach z modułem komórkowym, TC501 obsługuje:
+
+| Parametr | Wartość |
+|----------|---------|
+| 5G | Sub-6 GHz |
+| 4G LTE | Cat 20 (do 2 Gbps download) |
+| SIM | Nano SIM + eSIM |
+| GPS | GPS, GLONASS, Galileo, BeiDou |
+
+> **Uwaga:** Moduł WWAN jest dostępny tylko w wybranych konfiguracjach (TC501 z oznaczeniem "WWAN").
+`
+      },
+      {
+        title: '7. Kamera i multimedia',
+        content: `
+### Kamera tylna 50 MP
+
+TC501 wyposażono w profesjonalną kamerę tylną **50 megapikseli** z zaawansowanymi funkcjami:
+
+| Parametr | Wartość |
+|----------|---------|
+| Rozdzielczość | 50 MP (8000 x 6000 px) |
+| Autofokus | PDAF (Phase Detection Auto Focus) |
+| Lampa błyskowa | LED |
+| Tryb makro | Tak – zdjęcia z odległości 4 cm |
+| Wideo | 4K @ 30 fps, 1080p @ 60 fps |
+| HDR | Tak |
+| Zoom cyfrowy | Do 10× |
+
+**Zastosowania kamery w środowisku enterprise:**
+
+- **Dokumentacja** – fotografowanie uszkodzeń, przesyłek, etykiet
+- **Tryb makro** – zdjęcia drobnych elementów, numerów seryjnych, PCB
+- **Skanowanie dokumentów** – wysoka rozdzielczość dla OCR
+- **Wideokonferencje** – z kamerą przednią 8 MP
+
+### Kamera przednia 8 MP
+
+| Parametr | Wartość |
+|----------|---------|
+| Rozdzielczość | 8 MP |
+| Wideo | 1080p @ 30 fps |
+| Zastosowanie | Wideokonferencje, selfie, kontrola tożsamości |
+
+### Multimedia
+
+- **Głośnik**: wbudowany głośnik o wysokiej mocy – do **100 dBA** – słyszalny w hałaśliwym otoczeniu
+- **Mikrofony**: podwójny mikrofon z redukcją szumów – idealny do komunikacji głosowej
+- **Jack audio**: złącze 3,5 mm do słuchawek/zestawu (w zależności od konfiguracji) lub USB-C audio
+`
+      },
+      {
+        title: '8. Ustawienia i konfiguracja',
+        content: `
+### Zarządzanie urządzeniem (MDM/EMM)
+
+TC501 obsługuje pełne zdalne zarządzanie przez platformy MDM:
+
+| Platforma | Wsparcie |
+|-----------|----------|
+| **Zebra OEMConfig** | Pełna konfiguracja urządzenia przez EMM |
+| **Zebra StageNow** | Szybki provisioning i konfiguracja |
+| **SOTI MobiControl** | Zarządzanie flotą urządzeń |
+| **VMware Workspace ONE** | Unified Endpoint Management |
+| **Microsoft Intune** | Zarządzanie przez chmurę Microsoft |
+
+### Zebra Mobility DNA
+
+TC501 zawiera zestaw narzędzi **Mobility DNA** ułatwiających wdrożenie i zarządzanie:
+
+| Narzędzie | Funkcja |
+|-----------|---------|
+| **DataWedge** | Konfiguracja skanera i przetwarzanie danych |
+| **StageNow** | Masowe wdrażanie konfiguracji |
+| **Enterprise Browser** | Bezpieczna przeglądarka dla aplikacji webowych |
+| **Device Tracker** | Lokalizacja zaginionych urządzeń |
+| **WorryFree WiFi** | Optymalizacja połączeń Wi-Fi |
+| **LifeGuard** | Aktualizacje bezpieczeństwa przez cały cykl życia |
+| **PowerPrecision+** | Diagnostyka i zarządzanie bateriami |
+
+### Tryb kiosku
+
+Aby ograniczyć urządzenie do jednej aplikacji:
+
+1. Przejdź do **Ustawienia → Zabezpieczenia → Przypnij aplikację**
+2. Włącz opcję przypinania
+3. Otwórz żądaną aplikację → przesuń w górę i przytrzymaj → naciśnij ikonę pinezki
+4. Urządzenie będzie zablokowane na tej aplikacji
+
+> Dla zaawansowanego trybu kiosku użyj **Zebra Enterprise Home Screen** lub platformy MDM.
+
+### Aktualizacje systemu
+
+TC501 z systemem **Android 15** otrzymuje:
+- **Aktualizacje bezpieczeństwa LifeGuard** – comiesięczne poprawki bezpieczeństwa
+- **Aktualizacje systemu** – nowe wersje Android (do A18)
+- Aktualizacje można wdrażać zdalnie przez MDM lub lokalnie przez StageNow
+`
+      },
+      {
+        title: '9. Czyszczenie i konserwacja',
+        content: `
+### Codzienna konserwacja
+
+Aby zapewnić długą żywotność urządzenia TC501:
+
+1. **Ekran** – przecieraj miękką, suchą ściereczką z mikrofibry
+2. **Okno skanera** – czyść delikatnie miękką ściereczką (brud obniża jakość skanowania)
+3. **Styki ładowania** – sprawdzaj czystość styków na urządzeniu i stacji dokującej
+4. **Obudowa** – wycieraj wilgotną ściereczką w razie potrzeby
+
+### Środki czyszczące
+
+TC501 jest odporny na **środki dezynfekujące** stosowane w służbie zdrowia i przemyśle:
+
+| Środek | Dozwolony |
+|--------|-----------|
+| Alkohol izopropylowy (70%) | ✅ Tak |
+| Chusteczki dezynfekujące | ✅ Tak |
+| Roztwór wybielacza (10%) | ✅ Tak |
+| Woda z mydłem | ✅ Tak |
+| Rozpuszczalniki (aceton, benzen) | ❌ NIE |
+| Środki ścierne | ❌ NIE |
+
+### Procedura czyszczenia
+
+1. **Wyłącz urządzenie** lub ustaw w trybie czyszczenia (Ustawienia → System → Tryb czyszczenia)
+2. **Wyjmij baterię** jeśli to możliwe
+3. Nasącz miękką ściereczkę zatwierdzonym środkiem czyszczącym
+4. Delikatnie przetrzyj **ekran, obudowę i okno skanera**
+5. Poczekaj aż urządzenie **całkowicie wyschnie** przed ponownym użyciem
+6. Nie rozpylaj środka bezpośrednio na urządzenie
+
+### Wymiana akcesoriów eksploatacyjnych
+
+| Element | Częstotliwość wymiany |
+|---------|-----------------------|
+| Bateria | Co 12-18 miesięcy (przy intensywnym użyciu) lub gdy stan < 60% |
+| Folia ochronna ekranu | Co 3-6 miesięcy |
+| Osłona ochronna (boot) | Co 12-24 miesiące |
+| Rysik / stylus | Wg potrzeb |
+`
+      },
+      {
+        title: '10. Rozwiązywanie problemów',
+        content: `
+### Najczęstsze problemy i rozwiązania
+
+#### Urządzenie nie włącza się
+
+| Krok | Działanie |
+|------|-----------|
+| 1 | Sprawdź czy bateria jest prawidłowo włożona (słyszalne kliknięcie) |
+| 2 | Podłącz urządzenie do ładowarki na min. 15 minut |
+| 3 | Naciśnij i przytrzymaj przycisk zasilania przez **10 sekund** (twardy reset) |
+| 4 | Wyjmij baterię, odczekaj 10 sekund, włóż ponownie |
+| 5 | Spróbuj z inną baterią (jeśli dostępna) |
+
+#### Urządzenie się zawiesza / działa wolno
+
+| Krok | Działanie |
+|------|-----------|
+| 1 | Przytrzymaj przycisk zasilania → "Uruchom ponownie" |
+| 2 | Zamknij nieużywane aplikacje (Ostatnie → zamknij wszystko) |
+| 3 | Sprawdź dostępną pamięć (Ustawienia → Pamięć) |
+| 4 | Wyczyść pamięć podręczną aplikacji |
+| 5 | Wykonaj "Enterprise Reset" (zachowuje konfigurację firmową) |
+
+#### Skaner nie odczytuje kodów
+
+| Krok | Działanie |
+|------|-----------|
+| 1 | Wyczyść okno skanera miękką ściereczką |
+| 2 | Sprawdź czy DataWedge jest włączony (ikona na pasku) |
+| 3 | Sprawdź czy dana symbologia jest aktywna w ustawieniach DataWedge |
+| 4 | Zmień odległość skanowania (15-30 cm dla SE4710) |
+| 5 | Sprawdź jakość kodu kreskowego (uszkodzony, wyblakły) |
+| 6 | Uruchom ponownie usługę skanera w DataWedge |
+
+#### Problemy z Wi-Fi
+
+| Krok | Działanie |
+|------|-----------|
+| 1 | Wyłącz i włącz Wi-Fi |
+| 2 | "Zapomnij" sieć i połącz się ponownie |
+| 3 | Sprawdź czy router obsługuje wybrany standard (2,4/5/6 GHz) |
+| 4 | Zresetuj ustawienia sieciowe (Ustawienia → System → Resetuj → Resetuj Wi-Fi) |
+| 5 | Sprawdź WorryFree WiFi Analytics – diagnostyka sieci |
+
+#### Bateria szybko się rozładowuje
+
+| Krok | Działanie |
+|------|-----------|
+| 1 | Sprawdź stan zdrowia baterii (PowerPrecision+ → Health) |
+| 2 | Zmniejsz jasność ekranu lub włącz automatyczną jasność |
+| 3 | Wyłącz nieużywane połączenia (Bluetooth, NFC, GPS) |
+| 4 | Sprawdź zużycie baterii przez aplikacje (Ustawienia → Bateria) |
+| 5 | Wymień baterię jeśli liczba cykli > 300 lub stan < 60% |
+
+### Resety urządzenia
+
+| Typ resetu | Skutek | Jak wykonać |
+|------------|--------|-------------|
+| **Miękki reset** | Restart systemu, dane zachowane | Przytrzymaj zasilanie → "Uruchom ponownie" |
+| **Twardy reset** | Wymuszony restart | Przytrzymaj zasilanie **10 sekund** |
+| **Enterprise Reset** | Reset ustawień, dane firmowe zachowane | Ustawienia → System → Resetuj → Enterprise Reset |
+| **Reset fabryczny** | Przywraca ustawienia fabryczne, **KASUJE WSZYSTKO** | Ustawienia → System → Resetuj → Przywrócenie danych fabrycznych |
+
+> **Uwaga:** Przed resetem fabrycznym wykonaj kopię zapasową ważnych danych!
+`
+      },
+      {
+        title: '11. Akcesoria',
+        content: `
+### Stacje dokujące i ładowarki
+
+| Akcesorium | Nr katalogowy | Opis |
+|------------|---------------|------|
+| Stacja dokująca 1-slot | CRD-TC5X-1SE1B-01 | Ładowanie + komunikacja USB/Ethernet |
+| Stacja dokująca 5-slot | CRD-TC5X-5SE1B-01 | Ładowanie 5 urządzeń jednocześnie |
+| Ładowarka 4 baterii | SAC-TC5X-4BATC-01 | Ładowanie 4 baterii poza urządzeniem |
+| Ładowarka samochodowa | CHG-TC5X-VE1-01 | Ładowanie w pojeździe (12/24V) |
+| Kabel USB-C | CBL-TC5X-USBC-01 | Kabel USB-C do ładowania i danych |
+
+### Obudowy i uchwyty
+
+| Akcesorium | Nr katalogowy | Opis |
+|------------|---------------|------|
+| Osłona ochronna (boot) | SG-TC5X-EXO1-01 | Gumowa osłona zwiększająca odporność |
+| Etui z klipem | SG-TC5X-HLST1-01 | Etui z klipem do paska |
+| Pasek na rękę | SG-TC5X-HDSTPW-01 | Pasek zabezpieczający przed upuszczeniem |
+| Uchwyt samochodowy | CRD-TC5X-VE1-01 | Montaż w pojeździe |
+
+### Baterie
+
+| Akcesorium | Nr katalogowy | Opis |
+|------------|---------------|------|
+| Bateria standardowa 3800 mAh | BTRY-TC5X-38MA2-01 | PowerPrecision+ Li-Ion |
+| Bateria rozszerzona 5200 mAh | BTRY-TC5X-52MA2-01 | PowerPrecision+ Li-Ion, praca >12h |
+
+### Inne
+
+| Akcesorium | Nr katalogowy | Opis |
+|------------|---------------|------|
+| Rysik pojemnościowy | STY-TC5X-10 | Do obsługi ekranu w rękawiczkach |
+| Karta microSD 32 GB | Dowolna SDXC | Rozszerzenie pamięci (do 2 TB) |
+| Zestaw słuchawkowy | HS3100 | Bezprzewodowy zestaw Bluetooth |
+| Uchwyt pistoletowy | TRG-TC5X-SNP1-01 | Ergonomiczny uchwyt ze spustem skanowania |
+
+> **Wskazówka:** W przypadku intensywnego użytkowania polecamy zakup **2 baterii** na zmianę – jedna w urządzeniu, druga na ładowarce.
+`
+      },
+      {
+        title: '12. Najczęściej zadawane pytania (FAQ)',
+        content: `
+### Jaki system operacyjny ma Zebra TC501?
+
+**Odpowiedź:** Zebra TC501 działa na systemie **Android 15** z gwarancją aktualizacji bezpieczeństwa LifeGuard do Android 18. Urządzenie otrzymuje regularne comiesięczne poprawki bezpieczeństwa przez cały cykl życia produktu.
+
+### Jak zresetować Zebra TC501 do ustawień fabrycznych?
+
+**Odpowiedź:** Przejdź do **Ustawienia → System → Opcje resetowania → Przywrócenie danych fabrycznych**. Uwaga: ta operacja usuwa **wszystkie dane** z urządzenia! Dla resetu bez utraty konfiguracji firmowej użyj "Enterprise Reset".
+
+### Czy Zebra TC501 jest wodoodporny?
+
+**Odpowiedź:** Tak, Zebra TC501 posiada certyfikat **IP65/IP68** – jest w pełni odporny na kurz i wodę (zanurzenie do 1,5 m przez 35 minut w słodkiej wodzie). Dodatkowo spełnia normę **MIL-STD-810H** dla upadków z 1,8 m na beton.
+
+### Czy TC501 obsługuje Wi-Fi 7?
+
+**Odpowiedź:** Tak! TC501 jest jednym z pierwszych terminali mobilnych z obsługą **Wi-Fi 7 (802.11be)**, działającym w pasmach 2,4 GHz, 5 GHz i 6 GHz. Wi-Fi 7 zapewnia do 4× większą przepustowość niż Wi-Fi 6E i minimalne opóźnienia.
+
+### Jaka jest rozdzielczość kamery w TC501?
+
+**Odpowiedź:** Kamera tylna ma rozdzielczość **50 MP** z autofokusem PDAF, trybem makro (od 4 cm) i nagrywaniem wideo 4K @ 30 fps. Kamera przednia to **8 MP** do wideokonferencji.
+
+### Ile trwa ładowanie baterii TC501?
+
+**Odpowiedź:** Bateria standardowa (3800 mAh) ładuje się ok. **2-2,5 godziny**, a bateria rozszerzona (5200 mAh) ok. **3-3,5 godziny**. Zalecamy używanie oryginalnych ładowarek i stacji dokujących Zebra.
+
+### Czy TC501 może skanować kody 2D?
+
+**Odpowiedź:** Tak, TC501 obsługuje **wszystkie popularne kody 1D i 2D**, w tym QR Code, Data Matrix, PDF417, EAN/UPC, Code 128 i wiele innych. Dostępne są różne moduły skanujące (SE4710, SE55, SE4770) o zasięgu od 61 cm do 5,1 m.
+
+### Czy mogę używać TC501 w rękawiczkach?
+
+**Odpowiedź:** Tak, wyświetlacz TC501 obsługuje **dotyk mokrymi palcami i w rękawiczkach**. Funkcja ta jest domyślnie aktywna i można ją dostosować w ustawieniach ekranu.
+
+### Jaka jest różnica między TC501 a TC53e?
+
+**Odpowiedź:** TC501 jest **następcą serii TC5x** z istotnymi ulepszeniami: procesor QCS8550 (vs SD 6490), Wi-Fi 7 (vs Wi-Fi 6E), kamera 50 MP (vs 16 MP), Android 15 (vs Android 13), ekran 6" (vs 6"), USB-C 3.1 Gen 1. TC501 oferuje wyższą wydajność i dłuższe wsparcie aktualizacji.
+
+### Jak sprawdzić stan baterii TC501?
+
+**Odpowiedź:** Przejdź do **Ustawienia → Bateria → Diagnostyka PowerPrecision+**. Zobaczysz tam stan zdrowia baterii (Health %), liczbę cykli ładowania, temperaturę i szacowany czas pracy. Wymień baterię gdy stan zdrowia spadnie poniżej 60%.
+`
+      }
+    ]
   }
 }
 
