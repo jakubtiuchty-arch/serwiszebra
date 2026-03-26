@@ -283,7 +283,7 @@ export default async function ModelPage({ params }: { params: { model: string } 
     } : undefined,
     programming: programmingDoc ? {
       ...programmingDoc,
-      url: `/instrukcje/${modelSlug}/${manual.category?.startsWith('drukarki') ? 'programowanie-zpl' : 'podrecznik-produktu'}`
+      url: `/instrukcje/${modelSlug}/programowanie-zpl`
     } : undefined,
     service: serviceDoc ? {
       ...serviceDoc,
@@ -474,18 +474,11 @@ export default async function ModelPage({ params }: { params: { model: string } 
                 >
                   <div className="flex items-center gap-4">
                     <div className="p-2 bg-purple-100 rounded-lg">
-                      {manual.category?.startsWith('drukarki')
-                        ? <Code className="w-6 h-6 text-purple-600" />
-                        : <BookOpen className="w-6 h-6 text-purple-600" />
-                      }
+                      <Code className="w-6 h-6 text-purple-600" />
                     </div>
                     <div>
-                      <p className="font-semibold text-gray-900 group-hover:text-purple-700">
-                        {manual.category?.startsWith('drukarki') ? 'Programowanie ZPL' : 'Podręcznik produktu'}
-                      </p>
-                      <p className="text-sm text-gray-500">
-                        {manual.category?.startsWith('drukarki') ? 'Komendy i przykłady języka ZPL' : 'Product Reference Guide – szczegółowa dokumentacja'}
-                      </p>
+                      <p className="font-semibold text-gray-900 group-hover:text-purple-700">Programowanie ZPL</p>
+                      <p className="text-sm text-gray-500">Komendy i przykłady języka ZPL</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
@@ -546,13 +539,11 @@ export default async function ModelPage({ params }: { params: { model: string } 
               <ul>
                 <li><strong>Quick Start Zebra {manual.model}</strong> – szybki start, pierwsze uruchomienie, podstawowa konfiguracja</li>
                 <li><strong>User Guide Zebra {manual.model}</strong> – pełna instrukcja obsługi ze wszystkimi funkcjami i ustawieniami</li>
-                {manual.category.startsWith('drukarki') ? (
+                {manual.category.startsWith('drukarki') && (
                   <>
                     <li><strong>Programowanie ZPL Zebra {manual.model}</strong> – komendy ZPL, tworzenie etykiet, przykłady kodu</li>
                     <li><strong>Kalibracja Zebra {manual.model}</strong> – jak skalibrować drukarkę, ustawienia czujników</li>
                   </>
-                ) : (
-                  <li><strong>Product Reference Guide Zebra {manual.model}</strong> – szczegółowa dokumentacja techniczna, konfiguracja, akcesoria</li>
                 )}
                 <li><strong>Troubleshooting Zebra {manual.model}</strong> – rozwiązywanie problemów, kody błędów, diagnostyka</li>
               </ul>

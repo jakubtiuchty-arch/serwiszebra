@@ -12,7 +12,6 @@ const typMapping: Record<string, string[]> = {
   'szybki-start': ['quickStart', 'quickstart'],
   'instrukcja-obslugi': ['userGuide', 'userguide'],
   'programowanie-zpl': ['programming'],
-  'podrecznik-produktu': ['programming'],
   'instrukcja-serwisowa': ['service']
 }
 
