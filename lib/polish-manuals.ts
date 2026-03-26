@@ -31966,7 +31966,7 @@ Antena NFC znajduje się w górnej części tyłu urządzenia. Zbliż tag NFC do
     model: 'TC501',
     title: 'Zebra TC501 – Instrukcja obsługi po Polsku',
     lastUpdated: '2026-03-25',
-    sourceDocument: 'Zebra TC501 Product Reference Guide (MN-006220-02EN Rev. A)',
+    sourceDocument: 'Zebra TC501 Product Reference Guide (MN-005565-01EN Rev. A)',
     keywords: [
       'zebra tc501 instrukcja', 'zebra tc501 instrukcja po polsku', 'zebra tc501 manual',
       'terminal mobilny zebra tc501', 'zebra tc501 skanowanie', 'zebra tc501 reset', 'zebra tc501 bateria',
@@ -32020,7 +32020,7 @@ Dzięki **6-calowemu wyświetlaczowi AMOLED FHD+** (2160 x 1080) o jasności **1
 |----------|---------|
 | Temperatura pracy | -20°C do +50°C |
 | Temperatura przechowywania | -40°C do +70°C |
-| Temperatura ładowania | 0°C do +40°C |
+| Temperatura ładowania | 5°C do +40°C |
 | Wilgotność względna | 5% – 95% bez kondensacji |
 | Odporność na upadki | 2,4 m na beton (2,7 m z rugged boot), MIL-STD-810H |
 | Klasa szczelności | **IP65/IP68** |
@@ -32134,12 +32134,13 @@ TC501 obsługuje **kilka metod ładowania**, co zapewnia elastyczność w różn
 
 Dioda LED przy ładowaniu informuje o statusie:
 
-| Kolor LED | Znaczenie |
+| Stan LED | Znaczenie |
 |-----------|-----------|
-| 🔴 Czerwony (stały) | Ładowanie w toku (0–89%) |
-| 🟡 Pomarańczowy (stały) | Ładowanie prawie gotowe (90–99%) |
-| 🟢 Zielony (stały) | Bateria w pełni naładowana (100%) |
-| 🔴 Czerwony (migający) | Błąd ładowania – sprawdź baterię |
+| Wyłączona | Urządzenie nie ładuje się / nieprawidłowo umieszczone w stacji / brak zasilania |
+| Wolno migający bursztyn (co 4 s) | Ładowanie w toku |
+| Zielony (stały) | Ładowanie zakończone – bateria w pełni naładowana |
+| Czerwony (stały) | Bateria ładuje się lub naładowana, ale osiągnęła koniec żywotności (wymień baterię) |
+| Szybko migający czerwony (2×/s) | Błąd ładowania – temperatura zbyt niska/wysoka lub ładowanie trwa zbyt długo (>12h) |
 
 ### Czas ładowania
 
@@ -32427,7 +32428,7 @@ TC501 jest odporny na **środki dezynfekujące** stosowane w służbie zdrowia i
 |------|-----------|
 | 1 | Sprawdź czy bateria jest prawidłowo włożona (słyszalne kliknięcie) |
 | 2 | Podłącz urządzenie do ładowarki na min. 15 minut |
-| 3 | Naciśnij i przytrzymaj przycisk zasilania przez **10 sekund** (twardy reset) |
+| 3 | Wykonaj twardy reset: naciśnij jednocześnie **Power + lewy skan + Volume Up** przez min. **4 sekundy** |
 | 4 | Wyjmij baterię, odczekaj 10 sekund, włóż ponownie |
 | 5 | Spróbuj z inną baterią (jeśli dostępna) |
 
@@ -32477,7 +32478,7 @@ TC501 jest odporny na **środki dezynfekujące** stosowane w służbie zdrowia i
 | Typ resetu | Skutek | Jak wykonać |
 |------------|--------|-------------|
 | **Miękki reset** | Restart systemu, dane zachowane | Przytrzymaj zasilanie → "Uruchom ponownie" |
-| **Twardy reset** | Wymuszony restart | Przytrzymaj zasilanie **10 sekund** |
+| **Twardy reset** | Wymuszony restart | Jednocześnie naciśnij **Power + lewy skan + Volume Up** przez **4 sekundy** |
 | **Enterprise Reset** | Reset ustawień, dane firmowe zachowane | Ustawienia → System → Resetuj → Enterprise Reset |
 | **Reset fabryczny** | Przywraca ustawienia fabryczne, **KASUJE WSZYSTKO** | Ustawienia → System → Resetuj → Przywrócenie danych fabrycznych |
 
