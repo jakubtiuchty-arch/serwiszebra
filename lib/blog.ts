@@ -38226,67 +38226,6 @@ Skontaktuj się z nami — jako **Autoryzowany Serwis Zebra** oferujemy:
 
 ---
 
-## TC501 — specyfikacja techniczna
-
-| Parametr | Zebra TC501 |
-|----------|-------------|
-| **Procesor** | Qualcomm Dragonwing Q-6690, 8 rdzeni, do 2,9 GHz (dedykowany silnik AI) |
-| **Wyświetlacz** | 6,0" LCD, 2160×1080 (Full HD+), 5 trybów dotyku |
-| **RAM** | 8 GB lub 12 GB LPDDR5 |
-| **Pamięć** | 128 GB lub 256 GB UFS 3.1 + microSD do 2 TB |
-| **Skaner** | SR500, SR560 lub AC670 (do 30 m zasięgu) |
-| **UHF RFID** | Wbudowany, do 2 m, >200 tagów/s |
-| **Wi-Fi** | Wi-Fi 7 (802.11be) — 2,4 / 5 / 6 GHz, do 5764 Mbps |
-| **Bluetooth** | 6.0 + BLE Audio 5.3 |
-| **NFC** | 13,56 MHz (ISO 14443, FeliCa, ISO 15693) |
-| **5G** | Release 17, Dual SIM, eSIM (opcja) |
-| **Kamera tylna** | 50 MP PDAF + opcja ultrawide 13 MP z iTOF |
-| **Kamera przednia** | 8 MP |
-| **Bateria std.** | 5000 mAh PowerPrecision Plus (19,45 Wh) |
-| **Bateria rozszerzona** | 7240 mAh (28,16 Wh) |
-| **USB** | USB-C 3.1 |
-| **IP** | IP65/IP68 |
-| **Upadki** | 2,4 m na beton, MIL-STD-810H |
-| **System** | Android 15 + wsparcie 4 kolejnych wersji |
-| **Waga** | 284 g (bat. std.) / 314 g (bat. rozszerzona) |
-
-### Konfiguracje SKU dostępne w Polsce
-
-| SKU | Procesor | RAM / Pamięć | Skaner | Dodatkowe |
-|-----|----------|-------------|--------|-----------|
-| TC5010-021A1A0001-A6 | 2,0 GHz | 8 GB / 128 GB | SR500 | — |
-| TC5010-021B1A0001-A6 | 2,0 GHz | 8 GB / 128 GB | SR560 | — |
-| TC5010-021E1A0001-A6 | 2,0 GHz | 8 GB / 128 GB | AC670 | — |
-| TC5010-041A2B0001-A6 | 2,9 GHz | 12 GB / 256 GB | SR500 | Kamera ultrawide |
-| TC5010-041B2B0001-A6 | 2,9 GHz | 12 GB / 256 GB | SR560 | Kamera ultrawide |
-| TC5010-041E2B0001-A6 | 2,9 GHz | 12 GB / 256 GB | AC670 | Kamera ultrawide |
-| TC5010-041B2C00A1-A6 | 2,9 GHz | 12 GB / 256 GB | SR560 | Czujnik ToF |
-
----
-
-## TC501 vs TC53 vs TC701 — porównanie
-
-| Parametr | TC53 | **TC501** | TC701 |
-|----------|------|----------|-------|
-| **Status** | Aktywny (od 2022) | **Nowy (2025/2026)** | Nowy (2025/2026) |
-| Procesor | QC 6490 (2,7 GHz) | **QC Q-6690 z AI (2,9 GHz)** | QC Q-6690 z AI (2,9 GHz) |
-| Wyświetlacz | 6" FHD+ LCD | 6" FHD+ LCD | **6" FHD+ AMOLED 1500 nit** |
-| Ochrona ekranu | Corning Gorilla Glass | 5 trybów dotyku | **Gorilla Glass Victus** |
-| Wi-Fi | Wi-Fi 6E | **Wi-Fi 7 (tri-band)** | Wi-Fi 7 (tri-band) |
-| Bluetooth | 5.2 | **6.0** | 6.0 |
-| Kamera tylna | 16 MP | **50 MP** | 50 MP |
-| UHF RFID | Brak (potrzebna nakładka) | **Wbudowany (2 m)** | Wbudowany (2 m) |
-| Upadki na beton | 1,8 m | 2,4 m | **3,66 m** |
-| Hot Swap baterii | ❌ Nie | **✅ Tak (30s Wi-Fi)** | ✅ Tak (30s Wi-Fi) |
-| BLE Beacon baterii | ❌ Nie | **✅ Tak (7 dni)** | ✅ Tak (7 dni) |
-| Android | 11→14+ | **15 + 4 wersje** | 15 + 4 wersje |
-| Temp. pracy min. | 0°C | 0°C | **-20°C** |
-| Docelowe środowisko | Sklep, magazyn | **Sklep, lekka logistyka** | Chłodnia, outdoor, heavy-duty |
-
-> **Kiedy TC501, a kiedy TC701?** TC501 to idealne upgrade z TC53 — ten sam rozmiar, ale dużo mocniejszy. TC701 wybierz gdy urządzenie pracuje w chłodni, na zewnątrz lub w trudnych warunkach (centra dystrybucyjne, terminale przeładunkowe).
-
----
-
 ## Najczęstsze problemy TC501
 
 ### 1. Pęknięty/uszkodzony ekran dotykowy 6" LCD
@@ -38440,9 +38379,9 @@ TC501 jest dostępny z 3 modułami skanującymi: **SR500** (standardowy), **SR56
 |---------|---------------|
 | Konfiguracja DataWedge (zdalna) | 0-100 zł |
 | Wymiana okna skanera | 150-300 zł |
-| Wymiana modułu SR500 | 400-600 zł |
-| Wymiana modułu SR560 | 500-700 zł |
-| Wymiana modułu AC670 | 600-900 zł |
+| Wymiana modułu SR500 | Kontakt |
+| Wymiana modułu SR560 | Kontakt |
+| Wymiana modułu AC670 | Kontakt |
 
 ---
 
@@ -38636,9 +38575,9 @@ TC501 posiada moduł NFC/HF RFID (13,56 MHz) z tyłu urządzenia.
 | Wymiana baterii rozszerzonej | 300-450 zł | 6 mies. |
 | Wymiana ekranu (LCD + digitizer) | 900-1400 zł | 12 mies. |
 | Naprawa portu USB-C | 250-450 zł | 6 mies. |
-| Wymiana modułu skanera SR500 | 400-600 zł | 12 mies. |
-| Wymiana modułu skanera SR560 | 500-700 zł | 12 mies. |
-| Wymiana modułu skanera AC670 | 600-900 zł | 12 mies. |
+| Wymiana modułu skanera SR500 | Kontakt | 12 mies. |
+| Wymiana modułu skanera SR560 | Kontakt | 12 mies. |
+| Wymiana modułu skanera AC670 | Kontakt | 12 mies. |
 | Naprawa modułu UHF RFID | 300-600 zł | 12 mies. |
 | Naprawa płyty głównej | 700-1200 zł | 12 mies. |
 | Naprawa przycisku Power/skanowania | 200-350 zł | 6 mies. |
@@ -38657,9 +38596,9 @@ TC501 jest nowym urządzeniem, więc naprawa prawie zawsze się opłaca. Orienta
 |----------------------------------------|-------------|
 | **<30% wartości nowego** (do ~1500 zł) | ✅ **Napraw** — zdecydowanie opłacalne |
 | **30-50% wartości** (1500-2500 zł) | ⚠️ Napraw jeśli reszta urządzenia jest w dobrym stanie |
-| **>50% wartości** (>2500 zł) | ❌ Rozważ zakup nowego TC501 lub [TC701](/blog/zebra-tc701-specyfikacja-cena-gdzie-kupic) |
+| **>50% wartości** (>2500 zł) | ❌ Rozważ zakup nowego [TC501](https://www.takma.com.pl/produkt/zebra-tc501) lub [TC701](https://www.takma.com.pl/produkt/zebra-tc701) |
 
-> **Czy rozważasz [TC701](/blog/zebra-tc701-specyfikacja-cena-gdzie-kupic)?** TC701 ma ten sam procesor i łączność, ale ekran AMOLED, odporność na upadki z 3,66 m i pracę od -20°C. Idealne do chłodni i pracy outdoor.
+> **Czy rozważasz [TC701](https://www.takma.com.pl/produkt/zebra-tc701)?** TC701 ma ten sam procesor i łączność, ale ekran AMOLED, odporność na upadki z 3,66 m i pracę od -20°C. Idealne do chłodni i pracy outdoor.
 
 ---
 
