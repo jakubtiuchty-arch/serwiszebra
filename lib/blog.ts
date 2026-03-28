@@ -38092,6 +38092,609 @@ Skontaktuj się z nami — jako **Autoryzowany Serwis Zebra** oferujemy:
 
 *Artykuł opracowany na podstawie oficjalnej instrukcji obsługi Zebra ZT510 (P1095460-07EN Rev A).*
 `
+  },
+
+  // =============================================
+  // ZEBRA TC501 — Problemy, diagnostyka i naprawa [2026]
+  // =============================================
+  {
+    slug: 'serwis-terminala-zebra-tc501-problemy-diagnostyka-naprawa',
+    title: 'Zebra TC501 — problemy, diagnostyka i naprawa [2026]',
+    excerpt: 'Kompletny przewodnik serwisowy po terminalu Zebra TC501. Najczęstsze awarie, diagnostyka krok po kroku, cennik napraw, porównanie z TC53 i TC701. Kiedy naprawić, a kiedy wymienić? Bezpłatna diagnostyka.',
+    coverImage: '/blog/zebra-tc501-problemy-diagnostyka-naprawa.jpeg',
+    coverImageAlt: 'Terminal mobilny Zebra TC501 z narzędziami serwisowymi — diagnostyka i naprawa najczęstszych usterek',
+    author: {
+      name: 'Krzysztof Wójcik',
+      role: 'Kierownik Serwisu TAKMA'
+    },
+    publishedAt: '2026-03-28',
+    readingTime: 16,
+    deviceType: 'terminale',
+    category: 'troubleshooting',
+    tags: ['TC501', 'serwis terminala zebra', 'naprawa TC501', 'diagnostyka TC501', 'troubleshooting', 'zebra tc501 problemy', 'wymiana ekranu TC501', 'bateria TC501', 'skaner TC501', 'wifi 7 TC501', 'android 15 TC501', 'TC501 vs TC53', 'TC501 vs TC701'],
+    seo: {
+      metaTitle: 'Zebra TC501 — problemy, diagnostyka i naprawa [2026]',
+      metaDescription: 'Terminal Zebra TC501 nie działa? Diagnostyka LED, awarie ekranu, baterii, skanera, Wi-Fi 7, UHF RFID. Cennik napraw od 200 zł. TC501 vs TC53 vs TC701 — co wybrać? Bezpłatna diagnostyka.',
+      keywords: [
+        'serwis terminala zebra tc501',
+        'naprawa zebra tc501',
+        'serwis tc501', 'naprawa tc501',
+        'zebra tc501 serwis',
+        'zebra tc501 naprawa',
+        'zebra tc501 nie włącza się',
+        'zebra tc501 nie działa',
+        'zebra tc501 ekran nie reaguje',
+        'zebra tc501 bateria szybko się rozładowuje',
+        'zebra tc501 skaner nie działa',
+        'zebra tc501 wifi się rozłącza',
+        'zebra tc501 wifi 7 problemy',
+        'zebra tc501 boot loop',
+        'zebra tc501 pętla restartu',
+        'zebra tc501 zawiesza się',
+        'zebra tc501 nie ładuje się',
+        'zebra tc501 pęknięty ekran',
+        'zebra tc501 problem',
+        'zebra tc501 błąd',
+        'zebra tc501 rfid nie działa',
+        'zebra tc501 nfc nie działa',
+        'zebra tc501 bluetooth problemy',
+        'zebra tc501 kamera nie działa',
+        'zebra tc501 5g nie łączy',
+        'zebra tc501 hot swap nie działa',
+        'zebra tc501 usb-c nie ładuje',
+        'wymiana ekranu tc501',
+        'wymiana baterii tc501',
+        'ekran tc501 cena',
+        'bateria tc501 cena',
+        'wymiana portu usb tc501',
+        'wymiana skanera tc501',
+        'reset tc501',
+        'reset fabryczny tc501',
+        'enterprise reset tc501',
+        'twardy reset tc501',
+        'diagnostyka tc501',
+        'zebra tc501 recovery mode',
+        'ile kosztuje naprawa tc501',
+        'cennik napraw tc501',
+        'koszt wymiany ekranu tc501',
+        'tc501 vs tc53',
+        'tc501 vs tc701',
+        'tc53 czy tc501',
+        'tc501 następca tc53',
+        'bateria tc501 powerprecision',
+        'ładowarka tc501',
+        'stacja dokująca tc501',
+        'zebra tc501 troubleshooting',
+        'zebra tc501 repair',
+        'zebra tc501 not turning on',
+        'zebra tc501 screen replacement',
+        'zebra tc501 factory reset',
+        'zebra tc501 hard reset'
+      ],
+      faqSchema: [
+        {
+          question: 'Ile kosztuje naprawa terminala Zebra TC501?',
+          answer: 'Koszt naprawy Zebra TC501 zależy od usterki: wymiana ekranu dotykowego 6" LCD: 900-1400 zł netto, wymiana baterii PowerPrecision Plus: 200-450 zł, naprawa portu USB-C: 250-450 zł, naprawa skanera SR500/SR560/AC670: 400-700 zł, naprawa płyty głównej: 700-1200 zł. Diagnostyka jest bezpłatna.'
+        },
+        {
+          question: 'Jak zresetować terminal Zebra TC501?',
+          answer: 'Miękki reset: przytrzymaj Power → „Uruchom ponownie". Twardy reset (gdy nie reaguje): jednocześnie naciśnij Power + lewy skan + Volume Up przez 4 sekundy. Enterprise Reset: Ustawienia → System → Opcje resetowania → Wymaż wszystkie dane (zachowuje folder /enterprise). Factory Reset: przez microSD lub ADB — kasuje WSZYSTKO.'
+        },
+        {
+          question: 'Zebra TC501 nie włącza się — co robić?',
+          answer: 'Sprawdź: 1) Naładuj baterię przez minimum 15 minut (stacja lub USB-C), 2) Wyjmij i włóż baterię ponownie (styki kontaktowe), 3) Wykonaj twardy reset (Power + lewy skan + Volume Up, 4 sekundy), 4) Spróbuj innej baterii. Jeśli LED ładowania nie świeci — problem z portem USB-C lub płytą główną, wymagany serwis.'
+        },
+        {
+          question: 'Jaka jest żywotność baterii w terminalu Zebra TC501?',
+          answer: 'Bateria PowerPrecision Plus w TC501 wytrzymuje ok. 500-800 pełnych cykli ładowania (2-3 lata intensywnego użytkowania). Na jednym ładowaniu: 8-14h pracy (bateria standardowa 5000 mAh) lub do 18h (bateria rozszerzona 7240 mAh). Szybkie ładowanie: 0-70% w ~45 minut.'
+        },
+        {
+          question: 'Czym różni się TC501 od TC53?',
+          answer: 'TC501 to następca TC53 z istotnymi ulepszeniami: procesor Qualcomm Dragonwing Q-6690 z AI (vs QC 6490), Wi-Fi 7 tri-band (vs Wi-Fi 6E), Bluetooth 6.0 (vs 5.2), kamera 50 MP (vs 16 MP), USB-C 3.1 (vs 3.0), Android 15 z 4 latami aktualizacji, wbudowany UHF RFID i Hot Swap baterii z superkondensatorem.'
+        },
+        {
+          question: 'Czym różni się TC501 od TC701?',
+          answer: 'TC501 i TC701 współdzielą procesor, kamery i łączność. TC701 to wersja ultra-rugged: ekran AMOLED 1500 nitów z Gorilla Glass Victus (vs LCD w TC501), upadki z 3,66 m (vs 2,4 m), 3500 cykli tumble, praca od -20°C i certyfikat szoku termicznego. TC701 do chłodni i outdoor, TC501 do sklepów i lekkiej logistyki.'
+        },
+        {
+          question: 'Czy TC501 ma wbudowany RFID?',
+          answer: 'Tak! Zebra TC501 posiada zintegrowany czytnik UHF RFID krótkiego zasięgu (do 2 m), odczytujący ponad 200 tagów na sekundę. Obsługuje EPC Class 1 Gen2 i Gen 2 V2. Dodatkowo ma moduł NFC/HF RFID (13,56 MHz) do kart zbliżeniowych i znaczników.'
+        },
+        {
+          question: 'Jak długo trwa naprawa terminala TC501?',
+          answer: 'Standardowa naprawa TC501 trwa 3-5 dni roboczych. Wymiana baterii: 1 dzień. Wymiana ekranu: 3-5 dni. Naprawa płyty głównej: 5-7 dni. Tryb express (24-48h) dostępny za dopłatą. Diagnostyka bezpłatna, odbiór kurierem w całej Polsce.'
+        }
+      ]
+    },
+    content: `
+> **Szybka odpowiedź:** **Zebra TC501** to najnowszy terminal mobilny Zebra z procesorem AI, Wi-Fi 7 i kamerą 50 MP — następca popularnego TC53. Jako nowe urządzenie (premiera 2025/2026) najczęstsze zgłoszenia dotyczą: **konfiguracji Wi-Fi 7** (tri-band), **problemów z Hot Swap baterii**, **ustawień skanera SR500/SR560/AC670** i **wbudowanego UHF RFID**. Koszt naprawy: od **200 zł** (bateria) do **1400 zł** (ekran). **Diagnostyka bezpłatna.**
+
+## TL;DR — Diagnostyka TC501 w pigułce
+
+| Problem | Objaw | Sam naprawisz? | Koszt serwisu |
+|---------|-------|----------------|---------------|
+| Pęknięty ekran LCD | Rysy, pęknięcia, brak reakcji na dotyk | ❌ Serwis | 900-1400 zł |
+| Zużyta bateria | <6h pracy, LED czerwony, nagrzewanie | ✅ Wymień sam | 200-450 zł |
+| Skaner nie czyta | Brak odczytu, wolne skanowanie | ✅/❌ | 0-700 zł |
+| Nie włącza się | Czarny ekran, brak reakcji | ✅/❌ | 0-1200 zł |
+| Wi-Fi 7 się rozłącza | Częste zrywanie, wolne pasmo 6 GHz | ✅ Tak | 0 zł (config) |
+| Boot loop | Pętla restartu, zawiesza się | ✅/❌ | 0-500 zł |
+| Port USB-C uszkodzony | Nie ładuje przez kabel | ❌ Serwis | 250-450 zł |
+| UHF RFID nie czyta | Brak odczytu tagów | ✅/❌ | 0-600 zł |
+| Hot Swap nie działa | Urządzenie restartuje przy wymianie baterii | ✅ Tak | 0 zł |
+| Kamera 50 MP rozmyta | Nieostre zdjęcia, blur | ✅ Tak | 0-400 zł |
+
+---
+
+## TC501 — specyfikacja techniczna
+
+| Parametr | Zebra TC501 |
+|----------|-------------|
+| **Procesor** | Qualcomm Dragonwing Q-6690, 8 rdzeni, do 2,9 GHz (dedykowany silnik AI) |
+| **Wyświetlacz** | 6,0" LCD, 2160×1080 (Full HD+), 5 trybów dotyku |
+| **RAM** | 8 GB lub 12 GB LPDDR5 |
+| **Pamięć** | 128 GB lub 256 GB UFS 3.1 + microSD do 2 TB |
+| **Skaner** | SR500, SR560 lub AC670 (do 30 m zasięgu) |
+| **UHF RFID** | Wbudowany, do 2 m, >200 tagów/s |
+| **Wi-Fi** | Wi-Fi 7 (802.11be) — 2,4 / 5 / 6 GHz, do 5764 Mbps |
+| **Bluetooth** | 6.0 + BLE Audio 5.3 |
+| **NFC** | 13,56 MHz (ISO 14443, FeliCa, ISO 15693) |
+| **5G** | Release 17, Dual SIM, eSIM (opcja) |
+| **Kamera tylna** | 50 MP PDAF + opcja ultrawide 13 MP z iTOF |
+| **Kamera przednia** | 8 MP |
+| **Bateria std.** | 5000 mAh PowerPrecision Plus (19,45 Wh) |
+| **Bateria rozszerzona** | 7240 mAh (28,16 Wh) |
+| **USB** | USB-C 3.1 |
+| **IP** | IP65/IP68 |
+| **Upadki** | 2,4 m na beton, MIL-STD-810H |
+| **System** | Android 15 + wsparcie 4 kolejnych wersji |
+| **Waga** | 284 g (bat. std.) / 314 g (bat. rozszerzona) |
+
+### Konfiguracje SKU dostępne w Polsce
+
+| SKU | Procesor | RAM / Pamięć | Skaner | Dodatkowe |
+|-----|----------|-------------|--------|-----------|
+| TC5010-021A1A0001-A6 | 2,0 GHz | 8 GB / 128 GB | SR500 | — |
+| TC5010-021B1A0001-A6 | 2,0 GHz | 8 GB / 128 GB | SR560 | — |
+| TC5010-021E1A0001-A6 | 2,0 GHz | 8 GB / 128 GB | AC670 | — |
+| TC5010-041A2B0001-A6 | 2,9 GHz | 12 GB / 256 GB | SR500 | Kamera ultrawide |
+| TC5010-041B2B0001-A6 | 2,9 GHz | 12 GB / 256 GB | SR560 | Kamera ultrawide |
+| TC5010-041E2B0001-A6 | 2,9 GHz | 12 GB / 256 GB | AC670 | Kamera ultrawide |
+| TC5010-041B2C00A1-A6 | 2,9 GHz | 12 GB / 256 GB | SR560 | Czujnik ToF |
+
+---
+
+## TC501 vs TC53 vs TC701 — porównanie
+
+| Parametr | TC53 | **TC501** | TC701 |
+|----------|------|----------|-------|
+| **Status** | Aktywny (od 2022) | **Nowy (2025/2026)** | Nowy (2025/2026) |
+| Procesor | QC 6490 (2,7 GHz) | **QC Q-6690 z AI (2,9 GHz)** | QC Q-6690 z AI (2,9 GHz) |
+| Wyświetlacz | 6" FHD+ LCD | 6" FHD+ LCD | **6" FHD+ AMOLED 1500 nit** |
+| Ochrona ekranu | Corning Gorilla Glass | 5 trybów dotyku | **Gorilla Glass Victus** |
+| Wi-Fi | Wi-Fi 6E | **Wi-Fi 7 (tri-band)** | Wi-Fi 7 (tri-band) |
+| Bluetooth | 5.2 | **6.0** | 6.0 |
+| Kamera tylna | 16 MP | **50 MP** | 50 MP |
+| UHF RFID | Brak (potrzebna nakładka) | **Wbudowany (2 m)** | Wbudowany (2 m) |
+| Upadki na beton | 1,8 m | 2,4 m | **3,66 m** |
+| Hot Swap baterii | ❌ Nie | **✅ Tak (30s Wi-Fi)** | ✅ Tak (30s Wi-Fi) |
+| BLE Beacon baterii | ❌ Nie | **✅ Tak (7 dni)** | ✅ Tak (7 dni) |
+| Android | 11→14+ | **15 + 4 wersje** | 15 + 4 wersje |
+| Temp. pracy min. | 0°C | 0°C | **-20°C** |
+| Docelowe środowisko | Sklep, magazyn | **Sklep, lekka logistyka** | Chłodnia, outdoor, heavy-duty |
+
+> **Kiedy TC501, a kiedy TC701?** TC501 to idealne upgrade z TC53 — ten sam rozmiar, ale dużo mocniejszy. TC701 wybierz gdy urządzenie pracuje w chłodni, na zewnątrz lub w trudnych warunkach (centra dystrybucyjne, terminale przeładunkowe).
+
+---
+
+## Najczęstsze problemy TC501
+
+### 1. Pęknięty/uszkodzony ekran dotykowy 6" LCD
+
+TC501 posiada ekran 6" LCD FHD+ z 5 trybami dotyku. Mimo normy MIL-STD-810H i odporności na upadki z 2,4 m, upadki na kant lub twarde przedmioty mogą uszkodzić wyświetlacz.
+
+**Objawy:**
+- Widoczne pęknięcia lub rysy na szkle
+- Ekran nie reaguje na dotyk (całkowicie lub w wybranym obszarze)
+- Wyświetla obraz, ale dotyk nie działa
+- Martwe piksele, kolorowe linie na wyświetlaczu
+- Ghost touch — dotyk „sam klika" po pęknięciu
+
+**Co możesz sprawdzić sam:**
+1. **Zdejmij folię ochronną** — stara/uszkodzona folia może blokować dotyk
+2. **Wyczyść ekran** — tłuszcz, pot i brud ograniczają czułość
+3. **Zmień tryb dotyku:** Ustawienia → Wyświetlacz → Touch Mode:
+   - **Tylko palec** — domyślny
+   - **Rękawiczki + Palec** — zwiększona czułość (z folią lub bez)
+   - **Rysik + Palec** — dla rysików (z folią lub bez)
+4. **Twardy reset** — jeśli dotyk przestał reagować po aktualizacji (Power + lewy skan + Volume Up, 4s)
+
+**Kiedy do serwisu:**
+- Pęknięte szkło → wymiana modułu ekranowego
+- Ghost touch → wymiana digitizera
+- Martwe piksele → wymiana wyświetlacza LCD
+
+**Cennik:**
+
+| Naprawa | Koszt (netto) |
+|---------|---------------|
+| Wymiana ekranu (LCD + digitizer) | 900-1400 zł |
+| Wymiana samego digitizera | 600-900 zł |
+| Folia ochronna (DIY) | 40-60 zł |
+
+> **Porada:** Folia hartowana za 50 zł oszczędzi naprawę za 1400 zł. Używaj osłony ochronnej Rugged Boot.
+
+---
+
+### 2. Problemy z baterią — szybkie rozładowanie
+
+TC501 obsługuje 3 typy baterii PowerPrecision Plus: standardową (5000 mAh), rozszerzoną (7240 mAh) i bezprzewodową Qi (5000 mAh). Po 500-800 cyklach pojemność spada poniżej 80%.
+
+**Objawy:**
+- Terminal wytrzymuje <6 godzin zamiast 8-14h
+- Bateria nagrzewa się podczas ładowania
+- LED ładowania miga szybko na czerwono (błąd temperatury)
+- LED ładowania świeci ciągłe czerwone (bateria EOL — koniec żywotności)
+- Terminal wyłącza się przy 18% lub 10% baterii
+
+**Diagnostyka LED ładowania TC501:**
+
+| Stan LED | Znaczenie |
+|----------|-----------|
+| Wolno migająca bursztynowa (co 4s) | Ładowanie w toku |
+| Zielona ciągła | Bateria w pełni naładowana |
+| Czerwona ciągła | **Bateria EOL — wymień** |
+| Szybko migająca czerwona (2×/s) | Błąd ładowania (temp. poza 5-40°C lub >12h) |
+| Brak LED | Brak kontaktu lub zasilania |
+
+**Poziomy ostrzeżeń baterii TC501:**
+
+| Poziom | Komunikat | Co zrobić |
+|--------|-----------|-----------|
+| **18%** | „Naładuj wkrótce" | Ostrzeżenie — podłącz ładowarkę |
+| **10%** | „Naładuj teraz" | Krytyczne — podłącz natychmiast |
+| **4%** | Automatyczne wyłączenie | Wymiana baterii lub ładowanie |
+
+**Co możesz zrobić sam:**
+1. **Sprawdź stan baterii:** Battery Manager (aplikacja Zebra) → sprawdź Health i liczbę cykli
+2. **Zamknij zbędne aplikacje** — przesuń w górę od dołu
+3. **Zmniejsz jasność** + włącz auto-jasność
+4. **Wyłącz zbędne radio:** Wi-Fi 6 GHz (zużywa więcej energii), Bluetooth, NFC, 5G — jeśli nie używasz
+5. **Wyłącz UHF RFID** gdy nie skanujesz tagów — moduł zużywa energię
+6. **Wymień baterię** — naciśnij oba zatrzaski, wyjmij starą, włóż nową (dolną krawędzią najpierw)
+
+**Cennik:**
+
+| Bateria | Koszt (netto) |
+|---------|---------------|
+| Standardowa 5000 mAh | 200-350 zł |
+| Rozszerzona 7240 mAh | 300-450 zł |
+| Z ładowaniem Qi 5000 mAh | 350-500 zł |
+
+> **Wskazówka:** Kup 2 baterie na zmianę — jedna w urządzeniu, druga na ładowarce 4-slot. Funkcja Hot Swap pozwala wymienić baterię bez wyłączania (30s utrzymanie Wi-Fi/5G).
+
+---
+
+### 3. Hot Swap baterii nie działa / urządzenie restartuje
+
+TC501 posiada **superkondensator** umożliwiający wymianę baterii bez wyłączania (30s Wi-Fi/5G, 60s pamięć). Jeśli urządzenie mimo to restartuje:
+
+**Przyczyny:**
+- Zbyt wolna wymiana — masz **30 sekund** na włożenie nowej baterii
+- Superkondensator nie naładowany — urządzenie musi pracować min. kilka minut po włączeniu
+- Nowa bateria włożona nieprawidłowo — włóż dolną krawędzią (styki) najpierw
+- Zwarcie na stykach — wyczyść styki baterii alkoholem izopropylowym
+
+**Jak prawidłowo wykonać Hot Swap:**
+1. Upewnij się, że urządzenie pracuje od min. 5 minut (superkondensator musi się naładować)
+2. Przygotuj naładowaną zapasową baterię
+3. Naciśnij oba zatrzaski jednocześnie → wyjmij baterię
+4. **Natychmiast** (w ciągu 30s) włóż nową baterię dolną krawędzią
+5. Dociśnij aż do kliknięcia zatrzasków
+6. Urządzenie powinno kontynuować pracę bez restartu
+
+> **Ważne:** Hot Swap nie zadziała jeśli urządzenie jest w trybie uśpienia (deep sleep) dłużej niż kilka minut. Obudź urządzenie przed wymianą baterii.
+
+---
+
+### 4. Skaner kodów kreskowych nie działa
+
+TC501 jest dostępny z 3 modułami skanującymi: **SR500** (standardowy), **SR560** (ulepszony) i **AC670** (premium, do 30 m). Problemy ze skanowaniem to druga najczęstsza kategoria zgłoszeń.
+
+**Objawy:**
+- Brak wiązki laserowej po naciśnięciu przycisku skanowania
+- Wiązka się pojawia, ale kody nie są dekodowane
+- Wolne skanowanie — opóźnienie odczytu
+- Odczyt tylko z bardzo bliskiej odległości
+- Skanowanie działa w jednej aplikacji, a w innej nie
+
+**Co możesz sprawdzić sam:**
+
+**Krok 1 — Sprawdź DataWedge:**
+1. Otwórz **DataWedge** z menu aplikacji
+2. Sprawdź, czy profil dla Twojej aplikacji jest **włączony**
+3. W profilu → **Barcode Input** → upewnij się, że skaner jest **Enabled**
+4. Sprawdź **Decoder Selection** — czy potrzebne symbologie (Code 128, EAN-13, QR, Data Matrix) są włączone
+
+**Krok 2 — Sprawdź tryb skanowania:**
+- **Decode** — standardowy, jeden kod
+- **Picklist** — celuje w konkretny kod (może powodować wrażenie „nie skanuje" jeśli celownik jest obok kodu)
+- **MultiBarcode** — skanuje wiele kodów naraz (do 100)
+
+**Krok 3 — Wyczyść okno skanera:**
+- Użyj chusteczki do soczewek — brud, tłuszcz i kurz drastycznie obniżają skuteczność
+- Sprawdź, czy okno skanera nie ma zarysowań
+
+**Krok 4 — Testuj w DWDemo:**
+- Otwórz aplikację **DWDemo** (preinstalowana)
+- Zeskanuj kod — jeśli działa w DWDemo, problem jest w konfiguracji DataWedge Twojej aplikacji
+
+**Kiedy do serwisu:**
+- Brak wiązki laserowej mimo prawidłowej konfiguracji → uszkodzony moduł skanujący
+- Wiązka jest, ale brak dekodowania → kalibracja lub wymiana modułu
+- Fizyczne uszkodzenie okna skanera
+
+**Cennik:**
+
+| Naprawa | Koszt (netto) |
+|---------|---------------|
+| Konfiguracja DataWedge (zdalna) | 0-100 zł |
+| Wymiana okna skanera | 150-300 zł |
+| Wymiana modułu SR500 | 400-600 zł |
+| Wymiana modułu SR560 | 500-700 zł |
+| Wymiana modułu AC670 | 600-900 zł |
+
+---
+
+### 5. UHF RFID nie odczytuje tagów
+
+TC501 posiada **wbudowany czytnik UHF RFID** (do 2 m, >200 tagów/s) — to nowość w tej klasie urządzeń. Problemy z RFID to nowa kategoria zgłoszeń.
+
+**Objawy:**
+- Urządzenie nie wykrywa tagów UHF
+- Wykrywa tylko z bardzo bliskiej odległości (<20 cm zamiast 2 m)
+- Odczyt wolny — znacznie mniej niż 200 tagów/s
+- Odczyt niestabilny — tag pojawia się i znika
+
+**Co możesz sprawdzić sam:**
+1. **Sprawdź aplikację RFID** — upewnij się, że aplikacja obsługująca RFID jest uruchomiona i skonfigurowana
+2. **Sprawdź pasmo częstotliwości** — EU: 865-868 MHz, US: 902-928 MHz. Upewnij się, że ustawienie regionu jest prawidłowe
+3. **Oddal od metalu** — duże metalowe powierzchnie zakłócają sygnał RFID. Oddal urządzenie i tagi od metalu
+4. **Sprawdź tag** — przetestuj z innym tagiem, upewnij się, że tag nie jest zablokowany/uszkodzony
+5. **Sprawdź orientację** — antena RFID jest z tyłu urządzenia. Skieruj plecy TC501 w stronę tagu
+6. **Restart RFID** — wyłącz i włącz moduł RFID w ustawieniach
+
+**Kiedy do serwisu:**
+- Brak odczytu mimo prawidłowej konfiguracji i różnych tagów → uszkodzona antena RFID
+- Drastycznie zmniejszony zasięg → problem z modułem RF
+
+**Cennik:**
+
+| Naprawa | Koszt (netto) |
+|---------|---------------|
+| Konfiguracja RFID (zdalna) | 0-150 zł |
+| Naprawa anteny UHF RFID | 300-500 zł |
+| Wymiana modułu RFID | 400-600 zł |
+
+---
+
+### 6. Wi-Fi 7 — problemy z połączeniem
+
+TC501 obsługuje **Wi-Fi 7 (802.11be)** z trzema pasmami (2,4 / 5 / 6 GHz) i Multi-Link Operation (MLO). Nowy standard może powodować problemy z kompatybilnością ze starszymi access pointami.
+
+**Objawy:**
+- Częste rozłączanie z siecią Wi-Fi
+- Wolna transmisja mimo Wi-Fi 7
+- Pasmo 6 GHz niedostępne
+- Urządzenie nie widzi sieci firmowej
+- Problemy z roamingiem między access pointami
+
+**Co możesz sprawdzić sam:**
+
+**Krok 1 — Diagnoza z Wireless Analyzer:**
+1. Otwórz **Wireless Analyzer** (preinstalowana aplikacja Zebra)
+2. Sprawdź siłę sygnału (RSSI) — powinno być >-70 dBm
+3. Sprawdź, które pasmo jest aktywne (2,4 / 5 / 6 GHz)
+4. Sprawdź zakłócenia na kanale
+
+**Krok 2 — Konfiguracja pasma:**
+- **Pasmo 6 GHz** — wymaga access pointów Wi-Fi 6E/7. Jeśli Twoja infrastruktura nie obsługuje 6 GHz, wyłącz to pasmo
+- **MLO (Multi-Link Operation)** — wymaga infrastruktury Wi-Fi 7. Wyłącz MLO jeśli AP nie obsługuje
+- **Zabezpieczenia** — pasmo 6 GHz wymaga minimum WPA3. Sprawdź, czy AP obsługuje WPA3
+
+**Krok 3 — Kompatybilność wsteczna:**
+- TC501 działa ze starszymi standardami (Wi-Fi 5/6/6E)
+- Jeśli problemy występują tylko na Wi-Fi 7/6 GHz — ustaw ręcznie pasmo 5 GHz
+
+**Krok 4 — Roaming:**
+- Upewnij się, że access pointy mają spójną konfigurację (SSID, zabezpieczenia, kanały)
+- Rozważ 802.11r (Fast Transition) jeśli infrastruktura obsługuje
+
+> **Porada dla adminów:** Aktualizuj firmware access pointów do najnowszej wersji. Wiele problemów z Wi-Fi 7 wynika z niedojrzałego firmware AP, nie z urządzenia.
+
+---
+
+### 7. Terminal nie włącza się / czarny ekran
+
+**Objawy:**
+- Czarny ekran mimo naciśnięcia przycisku Power
+- Ekran miga krótko i gaśnie
+- Urządzenie wibruje, ale ekran pozostaje czarny
+
+**Diagnostyka krok po kroku:**
+
+| Krok | Czynność | Jeśli nie pomoże |
+|------|----------|------------------|
+| 1 | Naciśnij i przytrzymaj **Power** przez 6 sekund | → Krok 2 |
+| 2 | Podłącz do ładowarki/stacji — poczekaj 15 min — spróbuj Power | → Krok 3 |
+| 3 | Wyjmij baterię → włóż → Power | → Krok 4 |
+| 4 | Spróbuj innej baterii (pożycz z innego TC501) | → Krok 5 |
+| 5 | **Twardy reset:** Power + lewy skan + Volume Up → trzymaj 4s → zwolnij gdy ekran zgaśnie | → Krok 6 |
+| 6 | Podłącz przez USB-C do komputera — czy ADB widzi urządzenie? | → Serwis |
+
+**Kiedy do serwisu:**
+- Żaden krok nie pomógł → problem z płytą główną lub wyświetlaczem
+- ADB nie widzi urządzenia → poważna awaria sprzętowa
+
+**Cennik:**
+
+| Naprawa | Koszt (netto) |
+|---------|---------------|
+| Wymiana baterii (jeśli to był problem) | 200-450 zł |
+| Naprawa portu USB-C (jeśli nie ładowało) | 250-450 zł |
+| Naprawa/wymiana wyświetlacza | 900-1400 zł |
+| Naprawa płyty głównej | 700-1200 zł |
+
+---
+
+### 8. Boot loop / pętla restartu
+
+**Objawy:**
+- Urządzenie ciągle się restartuje (logo Zebra → restart → logo → restart...)
+- Urządzenie zawiesza się na logo Zebra
+- System uruchamia się, ale po chwili restartuje
+
+**Co możesz zrobić sam:**
+
+**Krok 1 — Wejdź w Android Recovery:**
+1. Przytrzymaj **Power** → dotknij **„Uruchom ponownie"** (jeśli ekran jest dostępny)
+2. Natychmiast po restarcie przytrzymaj przycisk **PTT** aż urządzenie zawibruje
+3. Pojawi się ekran **System Recovery**
+
+**Krok 2 — Enterprise Reset (z Recovery):**
+1. W Recovery: Volume Up/Down → **„Wipe data/factory reset"**
+2. Potwierdź przyciskiem Power
+3. Wybierz **„Enterprise Reset"** (zachowuje folder /enterprise z konfiguracją firmową)
+4. Poczekaj na zakończenie i reboot
+
+**Krok 3 — Factory Reset (ostateczność):**
+- Jeśli Enterprise Reset nie pomoże → wybierz **„Factory Reset"**
+- **UWAGA:** Factory Reset kasuje WSZYSTKO, łącznie z folderem /enterprise!
+
+> **Ważne:** Przed resetem — jeśli masz dostęp do urządzenia, wykonaj backup ważnych danych. Po Enterprise Reset konfiguracja firmowa (StageNow) zostanie zachowana.
+
+---
+
+### 9. Kamera 50 MP — nieostre zdjęcia
+
+TC501 posiada kamerę tylną **50 MP** z PDAF i funkcjami AI Camera. Problemy z ostrością to nowa kategoria zgłoszeń.
+
+**Objawy:**
+- Zdjęcia są rozmyte (blur)
+- Autofokus nie działa lub fokusuje wolno
+- Zdjęcia są ciemne mimo dobrego oświetlenia
+- Komunikat „Dirty Lens" na ekranie
+
+**Co możesz sprawdzić sam:**
+1. **Wyczyść obiektyw** — komunikat „Dirty Lens" to funkcja AI Camera, która automatycznie wykrywa brud na obiektywie. Wyczyść obiektyw chusteczką do soczewek
+2. **Sprawdź ustawienia rozdzielczości** — w 50 MP kamera potrzebuje więcej światła. Spróbuj 12,5 MP (domyślny)
+3. **Sprawdź Blur Detection** — AI Camera wykrywa rozmyte zdjęcia. Jeśli regularnie dostajesz komunikat — trzymaj urządzenie stabilniej lub użyj MFNR (Multi-Frame Noise Reduction)
+4. **Przytrzymaj stabilnie** — 50 MP wymaga stabilniejszego trzymania niż 16 MP
+
+**Kiedy do serwisu:**
+- Autofokus nie działa mimo czystego obiektywu → uszkodzony moduł AF
+- Ciemne zdjęcia mimo czystego obiektywu → problem z diodą LED lub sensorem
+
+---
+
+### 10. Problemy z NFC
+
+TC501 posiada moduł NFC/HF RFID (13,56 MHz) z tyłu urządzenia.
+
+**Objawy:**
+- Nie odczytuje kart/tagów NFC
+- Parowanie BT przez NFC nie działa
+- Emulacja karty (Card Emulation) nie działa
+
+**Co możesz sprawdzić sam:**
+1. **Włącz NFC:** Ustawienia → Podłączone urządzenia → NFC → Włącz
+2. **Prawidłowa pozycja** — antena NFC jest na pleckach TC501. Przyłóż kartę/tag do środka pleców urządzenia
+3. **Zdejmij osłonę** — grube etui mogą blokować NFC. Testuj bez osłony
+4. **Sprawdź tryb:** Reader Mode / Card Emulation / ECP Polling — upewnij się, że właściwy tryb jest włączony
+
+---
+
+## Resety TC501 — kompletna ściąga
+
+| Typ resetu | Co robi | Jak wykonać |
+|------------|---------|-------------|
+| **Miękki reset** | Restart systemu, dane zachowane | Power → „Uruchom ponownie" |
+| **Twardy reset** | Wymuszony restart (gdy nie reaguje) | **Power + lewy skan + Vol Up** przez **4s** |
+| **Enterprise Reset** | Kasuje /data i /sdcard, **zachowuje** /enterprise | Ustawienia → System → Opcje resetowania → Wymaż wszystkie dane |
+| **Factory Reset** | Przywraca obraz fabryczny, **KASUJE WSZYSTKO** | Przez microSD, ADB lub Recovery Mode |
+
+> **Porada:** Zawsze próbuj Enterprise Reset przed Factory Reset — zachowuje konfigurację firmową i profile StageNow.
+
+---
+
+## Cennik napraw TC501
+
+| Usługa | Koszt (netto) | Gwarancja |
+|--------|---------------|-----------|
+| **Diagnostyka** | **Bezpłatna** | — |
+| Wymiana baterii standardowej | 200-350 zł | 6 mies. |
+| Wymiana baterii rozszerzonej | 300-450 zł | 6 mies. |
+| Wymiana ekranu (LCD + digitizer) | 900-1400 zł | 12 mies. |
+| Naprawa portu USB-C | 250-450 zł | 6 mies. |
+| Wymiana modułu skanera SR500 | 400-600 zł | 12 mies. |
+| Wymiana modułu skanera SR560 | 500-700 zł | 12 mies. |
+| Wymiana modułu skanera AC670 | 600-900 zł | 12 mies. |
+| Naprawa modułu UHF RFID | 300-600 zł | 12 mies. |
+| Naprawa płyty głównej | 700-1200 zł | 12 mies. |
+| Naprawa przycisku Power/skanowania | 200-350 zł | 6 mies. |
+| Czyszczenie po zalaniu | 300-500 zł | 3 mies. |
+| **Express (24-48h)** | **+50% do ceny** | Jak wyżej |
+
+> Ceny netto. Odbiór kurierem w całej Polsce bezpłatny. Czas naprawy: 3-5 dni roboczych.
+
+---
+
+## Kiedy naprawić, a kiedy wymienić?
+
+TC501 jest nowym urządzeniem, więc naprawa prawie zawsze się opłaca. Orientacyjna zasada:
+
+| Koszt naprawy vs. wartość nowego TC501 | Rekomendacja |
+|----------------------------------------|-------------|
+| **<30% wartości nowego** (do ~1500 zł) | ✅ **Napraw** — zdecydowanie opłacalne |
+| **30-50% wartości** (1500-2500 zł) | ⚠️ Napraw jeśli reszta urządzenia jest w dobrym stanie |
+| **>50% wartości** (>2500 zł) | ❌ Rozważ zakup nowego TC501 lub [TC701](/blog/zebra-tc701-specyfikacja-cena-gdzie-kupic) |
+
+> **Czy rozważasz [TC701](/blog/zebra-tc701-specyfikacja-cena-gdzie-kupic)?** TC701 ma ten sam procesor i łączność, ale ekran AMOLED, odporność na upadki z 3,66 m i pracę od -20°C. Idealne do chłodni i pracy outdoor.
+
+---
+
+## Potrzebujesz pomocy z terminalem TC501?
+
+Skontaktuj się z nami — jako **Autoryzowany Serwis Zebra** oferujemy:
+
+- ✅ **Bezpłatna diagnostyka** i wycena
+- ✅ **Bezpłatny odbiór kurierem** w całej Polsce
+- ✅ **Gwarancja** na naprawę
+- ✅ **Oryginalne części** Zebra
+- ✅ **3-5 dni** czas naprawy
+
+> **Zadzwoń:** +48 601 619 898
+
+> [Formularz naprawy →](/#formularz)
+
+[Serwis terminali Zebra — wszystkie usługi](/serwis-terminali-zebra)
+
+---
+
+## Powiązane artykuły
+
+- [Zebra TC501 — specyfikacja, cena, gdzie kupić](/blog/zebra-tc501-specyfikacja-cena-gdzie-kupic)
+- [Zebra TC501 i TC701 — premiera nowej generacji](/blog/zebra-tc501-tc701-specyfikacja-cena-premiera)
+- [Zebra TC701 — specyfikacja, cena, gdzie kupić](/blog/zebra-tc701-specyfikacja-cena-gdzie-kupic)
+- [TC52 vs TC53 vs TC501 — porównanie terminali](/blog/zebra-tc52-vs-tc53-vs-tc501-porownanie-terminali)
+- [Serwis terminala Zebra TC52/TC53 — diagnostyka i naprawa](/blog/serwis-terminala-zebra-tc52-tc53-diagnostyka-naprawa)
+- [Najczęstsze awarie terminali Zebra — TOP 10](/blog/najczestsze-awarie-terminali-zebra-top10)
+- [Ekran dotykowy terminala Zebra nie reaguje](/blog/ekran-dotykowy-terminal-zebra-nie-reaguje-diagnostyka)
+- [Bateria terminala Zebra szybko się rozładowuje](/blog/bateria-terminal-zebra-szybko-sie-rozladowuje-diagnostyka)
+- [Kontrakty serwisowe Zebra OneCare](/blog/kontrakty-serwisowe-zebra-onecare-przewodnik)
+
+*Artykuł opracowany na podstawie oficjalnej dokumentacji Zebra TC501/TC701 Product Reference Guide i Przewodnika PL.*
+`
   }
 
 ]
