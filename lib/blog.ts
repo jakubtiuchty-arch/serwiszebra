@@ -38108,10 +38108,11 @@ Skontaktuj się z nami — jako **Autoryzowany Serwis Zebra** oferujemy:
       role: 'Kierownik Serwisu TAKMA'
     },
     publishedAt: '2026-03-28',
-    readingTime: 16,
+    updatedAt: '2026-03-28',
+    readingTime: 18,
     deviceType: 'terminale',
     category: 'troubleshooting',
-    tags: ['TC501', 'serwis terminala zebra', 'naprawa TC501', 'diagnostyka TC501', 'troubleshooting', 'zebra tc501 problemy', 'wymiana ekranu TC501', 'bateria TC501', 'skaner TC501', 'wifi 7 TC501', 'android 15 TC501', 'TC501 vs TC53', 'TC501 vs TC701'],
+    tags: ['TC501', 'serwis terminala zebra', 'naprawa TC501', 'diagnostyka TC501', 'troubleshooting', 'zebra tc501 problemy', 'wymiana ekranu TC501', 'bateria TC501', 'skaner TC501', 'wifi 7 TC501', 'android 15 TC501', 'TC501 vs TC53', 'TC501 vs TC701', 'bluetooth TC501'],
     seo: {
       metaTitle: 'Zebra TC501 — problemy, diagnostyka i naprawa [2026]',
       metaDescription: 'Terminal Zebra TC501 nie działa? Diagnostyka LED, awarie ekranu, baterii, skanera, Wi-Fi 7, UHF RFID. Cennik napraw od 200 zł. TC501 vs TC53 vs TC701 — co wybrać? Bezpłatna diagnostyka.',
@@ -38219,10 +38220,11 @@ Skontaktuj się z nami — jako **Autoryzowany Serwis Zebra** oferujemy:
 | Nie włącza się | Czarny ekran, brak reakcji | ✅/❌ | 0-1200 zł |
 | Wi-Fi 7 się rozłącza | Częste zrywanie, wolne pasmo 6 GHz | ✅ Tak | 0 zł (config) |
 | Boot loop | Pętla restartu, zawiesza się | ✅/❌ | 0-500 zł |
-| Port USB-C uszkodzony | Nie ładuje przez kabel | ❌ Serwis | 250-450 zł |
+| Port USB-C 3.1 uszkodzony | Nie ładuje przez kabel | ❌ Serwis | 250-450 zł |
 | UHF RFID nie czyta | Brak odczytu tagów | ✅/❌ | 0-600 zł |
 | Hot Swap nie działa | Urządzenie restartuje przy wymianie baterii | ✅ Tak | 0 zł |
 | Kamera 50 MP rozmyta | Nieostre zdjęcia, blur | ✅ Tak | 0-400 zł |
+| Bluetooth nie paruje | Skaner/drukarka nie łączy się | ✅ Tak | 0 zł (config) |
 
 ---
 
@@ -38242,10 +38244,12 @@ TC501 posiada ekran 6" LCD FHD+ z 5 trybami dotyku. Mimo normy MIL-STD-810H i od
 **Co możesz sprawdzić sam:**
 1. **Zdejmij folię ochronną** — stara/uszkodzona folia może blokować dotyk
 2. **Wyczyść ekran** — tłuszcz, pot i brud ograniczają czułość
-3. **Zmień tryb dotyku:** Ustawienia → Wyświetlacz → Touch Mode:
+3. **Zmień tryb dotyku:** Ustawienia → Wyświetlacz → Touch Mode (TC501 obsługuje **5 trybów**):
    - **Tylko palec** — domyślny
    - **Rękawiczki + Palec** — zwiększona czułość (z folią lub bez)
+   - **Mokre dłonie + Palec (Wet + Finger)** — praca w deszczu lub z mokrymi rękami
    - **Rysik + Palec** — dla rysików (z folią lub bez)
+   - **Rękawiczki + Rysik + Palec** — wszystkie metody jednocześnie
 4. **Twardy reset** — jeśli dotyk przestał reagować po aktualizacji (Power + lewy skan + Volume Up, 4s)
 
 **Kiedy do serwisu:**
@@ -38514,21 +38518,23 @@ TC501 obsługuje **Wi-Fi 7 (802.11be)** z trzema pasmami (2,4 / 5 / 6 GHz) i Mul
 
 ---
 
-### 9. Kamera 50 MP — nieostre zdjęcia
+### 9. Kamera 50 MP / 8 MP — nieostre zdjęcia
 
-TC501 posiada kamerę tylną **50 MP** z PDAF i funkcjami AI Camera. Problemy z ostrością to nowa kategoria zgłoszeń.
+TC501 posiada kamerę tylną **50 MP** z autofokusem PDAF, kamerę przednią **8 MP** (wideokonferencje, kontrola tożsamości) oraz opcjonalną kamerę **ultrawide 13 MP z iTOF** (wybrane SKU). Kamera tylna 50 MP jest przydatna nie tylko do dokumentacji fotograficznej, ale też do **zastosowań serwisowych**: dokumentacja uszkodzeń opakowań, skanowanie dokumentów przewozowych, fotografowanie regałów i palet.
 
 **Objawy:**
 - Zdjęcia są rozmyte (blur)
 - Autofokus nie działa lub fokusuje wolno
 - Zdjęcia są ciemne mimo dobrego oświetlenia
 - Komunikat „Dirty Lens" na ekranie
+- Kamera przednia 8 MP nie działa (wideokonferencje)
 
 **Co możesz sprawdzić sam:**
 1. **Wyczyść obiektyw** — komunikat „Dirty Lens" to funkcja AI Camera, która automatycznie wykrywa brud na obiektywie. Wyczyść obiektyw chusteczką do soczewek
 2. **Sprawdź ustawienia rozdzielczości** — w 50 MP kamera potrzebuje więcej światła. Spróbuj 12,5 MP (domyślny)
 3. **Sprawdź Blur Detection** — AI Camera wykrywa rozmyte zdjęcia. Jeśli regularnie dostajesz komunikat — trzymaj urządzenie stabilniej lub użyj MFNR (Multi-Frame Noise Reduction)
 4. **Przytrzymaj stabilnie** — 50 MP wymaga stabilniejszego trzymania niż 16 MP
+5. **Kamera przednia** — sprawdź, czy aplikacja ma uprawnienia do kamery (Ustawienia → Aplikacje → [aplikacja] → Uprawnienia → Kamera)
 
 **Kiedy do serwisu:**
 - Autofokus nie działa mimo czystego obiektywu → uszkodzony moduł AF
@@ -38550,6 +38556,39 @@ TC501 posiada moduł NFC/HF RFID (13,56 MHz) z tyłu urządzenia.
 2. **Prawidłowa pozycja** — antena NFC jest na pleckach TC501. Przyłóż kartę/tag do środka pleców urządzenia
 3. **Zdejmij osłonę** — grube etui mogą blokować NFC. Testuj bez osłony
 4. **Sprawdź tryb:** Reader Mode / Card Emulation / ECP Polling — upewnij się, że właściwy tryb jest włączony
+
+---
+
+### 11. Bluetooth 6.0 — problemy z parowaniem peryferiów
+
+TC501 obsługuje **Bluetooth 6.0** z BLE Audio 5.3. Problemy z parowaniem skanerów pierścieniowych, drukarek i zestawów słuchawkowych to częsta kategoria zgłoszeń.
+
+**Objawy:**
+- Skaner pierścieniowy (RS5100, RS6100) nie paruje się z TC501
+- Drukarka Zebra nie drukuje przez Bluetooth
+- Zestaw słuchawkowy BT nie łączy się lub zrywa połączenie
+- Parowanie przez NFC nie działa
+- Urządzenie BT jest widoczne, ale połączenie się nie nawiązuje
+
+**Co możesz sprawdzić sam:**
+1. **Włącz Bluetooth:** Ustawienia → Podłączone urządzenia → upewnij się, że Bluetooth jest włączony
+2. **Usuń stare parowanie** — jeśli urządzenie było wcześniej sparowane z innym terminalem: Ustawienia → Podłączone urządzenia → Wcześniej połączone → „Zapomij" → sparuj ponownie
+3. **Zasięg** — TC501 to urządzenie Bluetooth Class 2 z zasięgiem do **10 m**. Zbliż urządzenia
+4. **Tryb parowania** — upewnij się, że skaner/drukarka jest w trybie parowania (zazwyczaj przytrzymaj przycisk BT przez 3-5 s)
+5. **Parowanie przez NFC** — zbliż skaner (np. RS5100) do anteny NFC na pleckach TC501. Jeśli nie działa — sprawdź, czy NFC jest włączone
+6. **Restart Bluetooth** — wyłącz i włącz BT w ustawieniach. W uporczywych przypadkach: Ustawienia → Aplikacje → Bluetooth → Wyczyść dane
+7. **Sprawdź profil BT** — TC501 obsługuje A2DP, AVRCP, HID, HFP, HSP, SPP i inne. Upewnij się, że peryferium korzysta z obsługiwanego profilu
+
+**Najczęstsze pary BT z TC501:**
+
+| Peryferium | Profil BT | Parowanie |
+|------------|-----------|-----------|
+| Skaner RS5100 / RS6100 | SSI over BT | NFC lub kody parowania |
+| Skaner DS2278 / DS8178 | HID / SPP | Kody parowania DataWedge |
+| Drukarka Zebra ZQ / ZD | SPP / BLE | Discoverable mode |
+| Zestaw słuchawkowy HS3100 | HFP / A2DP | Standardowe parowanie BT |
+
+> **Porada:** Po aktualizacji systemu Android może być wymagane ponowne sparowanie wszystkich urządzeń BT. Zaplanuj to przy aktualizacjach floty.
 
 ---
 
