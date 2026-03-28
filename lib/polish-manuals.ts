@@ -32815,6 +32815,554 @@ Aby zapobiec **retencji obrazu** (efekt wypalenia):
 `
       }
     ]
+  },
+
+  // =============================================
+  // ZEBRA ET401 — Tablet Przemysłowy
+  // Źródło: ET401 Skrócona instrukcja obsługi (MN-005280-01PL Rev. A)
+  //         ET401 Quick Start Guide (MN-005280-02EN Rev. A)
+  //         ET401 Product Spec Sheet (PL)
+  // =============================================
+  'et401': {
+    model: 'ET401',
+    title: 'Zebra ET401 – Skrócona instrukcja obsługi po polsku',
+    lastUpdated: '2026-03-28',
+    sourceDocument: 'ET401 Skrócona instrukcja obsługi (MN-005280-01PL Rev. A) + ET401 Spec Sheet PL',
+    keywords: [
+      'zebra et401 instrukcja',
+      'et401 instrukcja obsługi',
+      'et401 tablet przemysłowy',
+      'et401 skrócona instrukcja',
+      'et401 konfiguracja',
+      'et401 ładowanie',
+      'et401 akumulator',
+      'et401 skanowanie',
+      'et401 NFC',
+      'et401 eSIM',
+      'et401 stacja dokująca',
+      'et401 akcesoria',
+      'et401 dane techniczne',
+      'et401 specyfikacja',
+      'zebra tablet rugged',
+      'et401 wymiana baterii',
+      'et401 karta SIM',
+      'et401 microSD'
+    ],
+    sections: [
+      {
+        title: '1. Podstawowe informacje',
+        content: `
+### O tablecie Zebra ET401
+
+Zebra ET401 to **tablet przemysłowy klasy korporacyjnej** dostępny w wersjach **8-calowej** i **10-calowej**. Jest następcą tabletów ET40/ET45 — oferuje o **25% dłuższy cykl eksploatacji** (8 lat wsparcia), mocniejszy procesor i najnowsze technologie bezprzewodowe.
+
+### Numery modeli
+
+Dokument dotyczy następujących numerów modeli: **ET401** (obejmuje warianty ET4010A, ET4010B, ET401EA, ET401EB, ET4015A, ET4015B).
+
+### Kluczowe cechy
+
+| Cecha | Wartość |
+|-------|---------|
+| **Wyświetlacz** | 8" (20,3 cm) lub 10,1" (25,7 cm), WUXGA 1920×1200, 600 nitów, Gorilla Glass 5 |
+| **Procesor** | Qualcomm Dragonwing Q-6690, do 2,0 GHz |
+| **Pamięć** | 6 GB LPDDR5 RAM / 64 GB UFS 2.2 Flash (opcja: 8 GB / 128 GB UFS 3.1) |
+| **Karta pamięci** | microSD do 2 TB |
+| **System** | Android |
+| **Klasa szczelności** | IP68 (pył i zanurzenie w wodzie) |
+| **Odporność na upadki** | 1,2 m na beton (1,5 m z osłoną ochronną, MIL-STD-810H) |
+| **Temperatura pracy** | -20°C do +50°C |
+| **Temperatura przechowywania** | -40°C do +70°C |
+| **Waga** | 8": 480 g (1,05 lb) · 10": 680 g (1,49 lb) |
+| **Wymiary 8"** | 212,7 × 134,4 × 11,4 mm |
+| **Wymiary 10"** | 256,1 × 162,7 × 11,4 mm |
+| **SIM** | Dwie karty SIM (nano SIM + eSIM) |
+| **Gwarancja** | 1 rok na wady produkcyjne i materiałowe |
+
+### Panel dotykowy
+
+Wielotrybowy pojemnościowy panel dotykowy z wprowadzaniem danych **palcem, w rękawiczkach lub bez** — z rysikiem dotykowym, ignorowanie fałszywych sygnałów dotyku powodowanych przez krople wody. Powłoka odporna na odciski palców.
+
+### Zawartość opakowania
+
+W pudełku powinny znajdować się **2 elementy**:
+
+1. Urządzenie (tablet ET401)
+2. Przewodnik po przepisach
+
+> **Uwaga:** Przed pierwszym użyciem urządzenia zdejmij folię ochronną ze skanera, wyświetlacza i okna aparatu.
+`
+      },
+      {
+        title: '2. Opis urządzenia',
+        content: `
+### Widok z przodu (Tabela 1)
+
+Elementy wspólne dla wersji 8-calowej i 10-calowej:
+
+| Nr | Element | Opis |
+|----|---------|------|
+| 1 | **Przedni przycisk skanowania** | Rozpoczyna rejestrowanie danych kodu kreskowego, gdy aktywna jest aplikacja umożliwiająca skanowanie |
+| 2 | **Ekran dotykowy** | Wyświetla wszystkie informacje niezbędne do obsługi urządzenia |
+| 3 | **Dioda LED ładowania** | Wskazuje stan zasilania i stan naładowania akumulatora podczas ładowania oraz powiadomienia generowane przez aplikacje |
+| 4 | **Przedni aparat** | 8 MP — do użycia podczas wideokonferencji |
+| 5 | **Czujnik oświetlenia** | Określa intensywność światła otoczenia w celu regulowania podświetlenia wyświetlacza |
+| 6 | **Przycisk zasilania** | Włącza i wyłącza wyświetlacz. Naciśnij i zwolnij, aby włączyć urządzenie. Naciśnij i przytrzymaj, aby zresetować urządzenie lub wyłączyć zasilanie |
+| 7 | **Przycisk programowalny** | Można skonfigurować pod kątem użytku z innymi aplikacjami |
+| 8 | **Dioda LED przechwytywania danych** | Zaczyna świecić podczas przechwytywania danych |
+| 9 | **Okno skanowania** | Opcjonalnie, w zależności od modelu — umożliwia rejestrowanie danych za pomocą rejestratora obrazów |
+| 10 | **Port USB-C** | Zapewnia komunikację między hostem a klientem przez port USB (USB 3.1) |
+| 11 | **Prawy głośnik** | Emituje dźwięk (głośniki stereo) |
+| 12 | **Antena NFC** | Umożliwia bezprzewodową wymianę danych o krótkim zasięgu za pomocą urządzeń obsługujących technologię NFC |
+| 13 | **Wskaźnik wyrównania stacji dokującej** | Ułatwia ustawienie urządzenia względem stacji dokującej |
+| 14 | **Gniazdo połączeniowe** | Zapewnia komunikację urządzenia ze stacją dokującą |
+| 15 | **Lewy głośnik** | Emituje dźwięk (głośniki stereo) |
+
+### Widok z tyłu (Tabela 2)
+
+| Nr | Element | Opis |
+|----|---------|------|
+| 1 | **Zatrzask blokady stacji dokującej** | Służy do mocowania urządzenia w stacji dokującej |
+| 2 | **Pokrywa akumulatora** | Zapewnia dostęp do akumulatora |
+| 3 | **Tylny aparat Ultra-Wide-Angle (UWA)** | 13 MP (opcjonalnie) — obejmuje szersze pole widzenia dla szczegółowych zdjęć |
+| 4 | **Tylny mikrofon** | Służy do nagrywania dźwięku |
+| 5 | **Aparat tylny** | 16 MP z automatyczną regulacją ostrości i detekcją fazy |
+| 6 | **Lampa błyskowa LED aparatu tylnego** | Zapewnia oświetlenie aparatu |
+| 7 | **Wycięcie pokrywy komory akumulatora** | Podnieś część pokrywy akumulatora z nacięciem, aby zdjąć pokrywę akumulatora z urządzenia |
+| 8 | **Górny przycisk skanowania** | Rozpoczyna rejestrowanie danych kodu kreskowego (programowalny) |
+| 9 | **Górny mikrofon** | Służy do komunikacji głosowej i nagrywania dźwięku |
+| 10 | **Przycisk zwiększania głośności** | Umożliwia zwiększenie głośności dźwięku |
+| 11 | **Przycisk zmniejszania głośności** | Umożliwia zmniejszenie głośności dźwięku |
+
+### Przyciski urządzenia
+
+| Przycisk | Funkcja |
+|----------|---------|
+| **Zasilanie** | Krótkie naciśnięcie: włącz/wyłącz ekran. Przytrzymanie: menu zasilania (wyłącz/uruchom ponownie) |
+| **Volume Up / Down** | Regulacja głośności |
+| **Przedni skan** | Skanowanie kodów kreskowych (wymaga aktywnej aplikacji) |
+| **Górny skan** | Skanowanie kodów kreskowych — programowalny |
+| **Przycisk programowalny** | Konfigurowalne działanie przez aplikacje |
+`
+      },
+      {
+        title: '3. Konfiguracja urządzenia',
+        content: `
+### Kolejność konfiguracji
+
+Przed pierwszym użyciem należy skonfigurować urządzenie:
+
+1. Zainstaluj kartę nano SIM (tylko w urządzeniach WAN)
+2. Włóż kartę microSD (jeśli potrzebna)
+3. Naładuj urządzenie
+4. Włącz urządzenie
+
+### Instalowanie karty nano SIM i karty microSD
+
+Gniazdo na karty SIM/microSD znajduje się **we wnęce akumulatora** i można je znaleźć po wyjęciu akumulatora. Szuflada na kartę SIM/SD może pomieścić **jedną kartę nano SIM** i **jedną kartę microSD**.
+
+> **PRZESTROGA:** Nie próbuj wyjmować akumulatora, gdy urządzenie jest włączone.
+
+#### Procedura krok po kroku:
+
+1. **Wyłącz urządzenie** — naciśnij przycisk zasilania i przytrzymaj go, aż zostanie wyświetlone menu. Dotknij **Power off (Wyłącz zasilanie)**
+2. Przytrzymaj urządzenie jedną ręką i **podnieś róg pokrywy akumulatora** z obszaru nacięcia
+3. Umieść kciuk pod pokrywą i **przesuń go wzdłuż krótkiej krawędzi** pokrywy w kierunku drugiej strony
+4. Ostrożnie **unieś krawędzie pokrywy**, zwalniając zatrzaski
+5. **Zdejmij pokrywę** z tylnej obudowy
+
+> **PRZESTROGA:** Nie używaj żadnych narzędzi do zdejmowania pokrywy akumulatora ani wyjmowania akumulatora. Przedziurawienie akumulatora lub uszczelki może spowodować niebezpieczne warunki i ryzyko obrażeń.
+
+6. Paznokciem przesuń **przełącznik blokady akumulatora** i przytrzymaj go w położeniu odblokowania (1). Podnieś akumulator z części z nacięciem (2), obróć go do góry, a następnie wyjmij z wnęki akumulatora
+7. Po wyjęciu akumulatora z urządzenia **zwolnij przełącznik blokady** akumulatora
+8. **Wyciągnij szufladę** karty SIM/SD z urządzenia
+9. **Połóż kartę microSD** na tacce (1), a potem **włóż kartę SIM** (2) na dole tacki
+
+> **UWAGA:** Upewnij się, że styki obu kart są skierowane **do góry**.
+
+10. Przed włożeniem kart nano SIM i microSD do szuflady upewnij się, że są prawidłowo ustawione. **Wciśnij szufladę** karty SIM/SD i upewnij się, że trafiła na swoje miejsce
+11. **Wymień baterię** — stroną ze stykami skierowaną do przodu
+12. Delikatnie popchnij akumulator w kierunku styków, jednocześnie obracając go w dół we wnęce akumulatora, upewniając się, że jest prawidłowo osadzony
+
+#### Zakładanie pokrywy akumulatora:
+
+> **PRZESTROGA:** Przed wymianą należy upewnić się, że pokrywa akumulatora jest prawidłowo ustawiona, aby zapobiec uszkodzeniu.
+
+13. Wsuń stronę pokrywy akumulatora z wypustkami do otworów we wnęce akumulatora
+14. Obróć pokrywę w dół
+15. Ostrożnie **dociśnij krawędzie pokrywy**, aby upewnić się, że jest prawidłowo osadzona
+`
+      },
+      {
+        title: '4. eSIM — aktywacja, wyłączanie, kasowanie',
+        content: `
+### Włączanie eSIM
+
+Przed użyciem eSIM w urządzeniu należy ją aktywować.
+
+> **UWAGA:** Przed dodaniem eSIM należy skontaktować się z operatorem, aby uzyskać usługę eSIM i jej aktywację lub kod QR.
+
+1. Na urządzeniu nawiąż połączenie internetowe za pośrednictwem Wi-Fi lub danych komórkowych za pomocą zainstalowanej karty SIM
+2. Przejdź do **Settings (Ustawienia)** > **Network & internet (Sieć i Internet)**
+3. Dotknij **SIMs (SIM)**
+4. Jeśli zainstalowano już jakąś kartę eSIM, dotknij **+ Add more (+ Dodaj więcej)**. Wyświetlony zostanie ekran **Mobile network (sieci komórkowej)**
+5. Wybierz:
+   - **MANUAL CODE ENTRY (RĘCZNE WPISANIE KODU)** — aby wprowadzić kod aktywacyjny, lub
+   - **SCAN (SKANUJ)** — aby zeskanować kod QR i pobrać profil eSIM
+6. Dotknij **OK**
+7. Wpisz kod aktywacyjny lub zeskanuj kod QR
+8. Dotknij **NEXT (DALEJ)**
+9. Dotknij **ACTIVATE (AKTYWUJ)**, a następnie **Done (Gotowe)**
+
+Funkcja eSIM jest teraz włączona.
+
+### Wyłączanie eSIM
+
+Tymczasowo wyłącz moduł eSIM i aktywuj go ponownie później.
+
+1. Na urządzeniu nawiąż połączenie internetowe za pośrednictwem Wi-Fi lub danych komórkowych za pomocą zainstalowanej karty SIM
+2. Dotknij **Settings (Ustawienia)** > **Network & internet (Sieć i Internet)** > **SIMs (SIM)**
+3. W obszarze **Downloaded SIM (Pobrana karta SIM)** dotknij nazwy eSIM, aby ją wyłączyć
+4. Dotknij przełącznika **Use this SIM (Użyj SIM)**, aby wyłączyć eSIM
+5. Dotknij **Turn off (Wyłącz)**
+
+### Kasowanie profilu eSIM
+
+Usunięcie profilu eSIM powoduje **całkowite usunięcie go z urządzenia**.
+
+> **UWAGA:** Po usunięciu eSIM z urządzenia ponowne użycie **nie jest możliwe**.
+
+1. Na urządzeniu nawiąż połączenie internetowe
+2. Dotknij **Settings (Ustawienia)** > **Network & internet (Sieć i Internet)** > **SIMs (SIM)**
+3. W obszarze **Downloaded SIM (Pobrane karty SIM)** dotknij nazwy eSIM
+4. Dotknij **Erase eSIM (Usuń eSIM)**
+5. Wyświetli się komunikat **Erase this eSIM? (Czy usunąć eSIM?)**. Dotknij **Erase (Usuń)**
+`
+      },
+      {
+        title: '5. Ładowanie urządzenia',
+        content: `
+### Pierwsze ładowanie
+
+Przed pierwszym użyciem tego urządzenia należy podłączyć je do **zewnętrznego źródła zasilania** i nie odłączać aż do pełnego naładowania. Po całkowitym naładowaniu urządzenia kontrolka LED wskaźnika ładowania **zaświeci się na zielono**. Podczas ładowania urządzenia można z niego korzystać.
+
+### Czas ładowania
+
+| Wersja | Czas od 0 do 80% |
+|--------|-------------------|
+| **8-calowa** | ok. **3 godziny** |
+| **10-calowa** | ok. **4 godziny** |
+
+### Akumulator
+
+| Wersja | Pojemność |
+|--------|-----------|
+| 8" | Bateria litowo-jonowa **6100 mAh**, 3,91 V (23,46 Wh), wymienna przez użytkownika |
+| 10" | Bateria litowo-jonowa **7600 mAh**, 3,91 V (29,71 Wh), wymienna przez użytkownika |
+| Dodatkowa (opcja) | Bateria dodatkowa **3400 mAh**, 7,6 V (25,84 Wh) — do użytku z dodatkową tylną nasadką z gniazdami rozszerzeń |
+
+### Temperatura ładowania
+
+Akumulatory powinny być ładowane w temperaturze od **0°C do +40°C** (od 32°F do 104°F) zgodnie z informacjami podawanymi przez akumulator. Ładowarka inteligentnie steruje procesem ładowania — na krótki okres czasu włącza i wyłącza ładowanie akumulatora, aby utrzymać jego temperaturę w dopuszczalnych granicach.
+
+### Tryb bezakumulatorowy
+
+Gdy nie zainstaluje się akumulatora, urządzenie może działać przyłączone do wejścia DC. Prawidłowe wejścia DC to:
+
+- **Wejście PD USB-C** (12 V)
+- **Dolne wejście/wyjście PD** (12 V)
+- **Dolne wejście/wyjście 12 V**
+- **Tylne wejście/wyjście 12 V**
+
+> **UWAGA:** W trybie bezakumulatorowym nie należy ładować z kilku źródeł ładowania. Urządzenie może nie działać prawidłowo, jeśli przyłączone jest do kilku źródeł zasilania.
+
+### Wskaźniki ładowania (Tabela 3)
+
+| Dioda LED | Oznacza |
+|-----------|---------|
+| **Wył.** | Urządzenie nie jest umieszczone w bazie, nie jest w niej prawidłowo osadzone albo brak zasilania bazy |
+| **Wolno migająca pomarańczowa** (1 mignięcie co 4 s) | Trwa ładowanie urządzenia |
+| **Wolno migająca czerwona** (1 mignięcie co 4 s) | Trwa ładowanie urządzenia, ale kończy się okres użytkowania akumulatora |
+| **Szybko migająca pomarańczowa** (2 mignięcia/s) | Błąd ładowania: temperatura zbyt niska/wysoka lub ładowanie trwa zbyt długo (zwykle ponad 8 godzin) |
+| **Szybko migająca czerwona** (2 mignięcia/s) | Błąd ładowania i kończy się okres użytkowania akumulatora |
+| **Świeci na zielono** | Ładowanie zakończone |
+| **Świeci na czerwono** | Ładowanie zakończone, ale kończy się okres użyteczności akumulatora |
+`
+      },
+      {
+        title: '6. Akcesoria do ładowania',
+        content: `
+### Akcesoria do ładowania
+
+Aby zapewnić optymalne ładowanie, należy używać ładowarek zatwierdzonych przez firmę Zebra.
+
+| Opis | Numer części | Ładowanie akumulatora | Ładowanie akumulatora dodatkowego | USB | Ethernet |
+|------|-------------|----------------------|----------------------------------|-----|----------|
+| **Baza z 1 gniazdem PD** | CRD-ET4A-1SCG1-01 | Tak | Tak | Nie | Nie |
+| **4-gniazd. stacja (8-cal.)** | CRD-ET4X-4S8I1-01 | Tak | Tak | Nie | Nie |
+| **4-gniazd. stacja (10-cal.)** | CRD-ET4X-4S10I1-01 | Tak | Tak | Nie | Nie |
+| **Kabel USB-A na USB-C** | CBL-TC5X-USBC2A-01 | Nie | Nie | Tak (USB 2.0) | Nie |
+| **Kabel USB-C na USB-C** | CBL-EC5X-USBC3A-01 | Tak | Nie | Tak | Nie |
+| **Zasilacz PD 45W** | PWR-WUA5V45W1XX | Tak | Tak | Nie | Nie |
+
+> **UWAGA:** Zasilacz Power Delivery (PD) 45W wymaga kabla CBL-EC5X-USBC3A-01. Wymieniaj XX na oznaczenie regionu: US (Stany Zjednoczone), GB (Wielka Brytania), UE (Unia Europejska), AU (Australia), CN (Chiny), IN (Indie), KR (Korea), BR (Brazylia).
+
+### 1-gniazd. zasilająca stacja dokująca PD
+
+Stacja CRD-ET4A-1SCG1-01 ładuje jedno urządzenie 8- lub 10-calowe:
+
+- Zapewnia zasilanie do obsługi urządzenia
+- Ładuje akumulator urządzenia i opcjonalny akumulator PowerPack zainstalowany w module rozszerzenia
+
+### 4-gniazd. stacja dokująca (tylko ładowanie)
+
+Stacja 4-gniazd. ładuje do czterech urządzeń 8- lub 10-calowych oraz do czterech akumulatorów PowerPack:
+
+- Zapewnia zasilanie do obsługi urządzenia
+- Jednocześnie ładuje do czterech urządzeń i do czterech akumulatorów PowerPack przy użyciu opcjonalnego adaptera Battery Charger Adapter
+- Dostępne są **dwie oddzielne** stacje: jedna dla urządzeń 8-calowych (CRD-ET4X-4S8I1-01) i jedna dla 10-calowych (CRD-ET4X-4S10I1-01)
+
+### 4-gniazd. ładowarka akumulatorów PowerPack
+
+Ładuje do czterech akumulatorów PowerPack jednocześnie. Zasilanie: 12 V DC.
+
+### Zasilacz USB PD 45 W
+
+Do ładowania urządzenia używa się zasilacza USB PD 45 W i kabla USB-C **CBL-EC5X-USBC3A-01**.
+
+### Inne akcesoria
+
+- **Osłony ochronne** (4 warianty): w wersjach 8- i 10-calowych, ze skanerem lub bez skanera
+- **Ochraniacze ekranu**: dostępne w wersjach 8- i 10-calowych
+- **Nakładka na adapter** (Adapter Boot)
+`
+      },
+      {
+        title: '7. Skanowanie kodów kreskowych',
+        content: `
+### Skanowanie za pomocą wewnętrznego skanera
+
+Skaner wewnętrzny służy do odczytu danych z kodów kreskowych.
+
+> **UWAGA:** Aby odczytać kod kreskowy, wymagana jest aplikacja z obsługą skanowania. Urządzenie zawiera aplikację **DataWedge**, która umożliwia skanerowi dekodowanie danych kodu kreskowego i wyświetlanie zawartości kodu kreskowego.
+
+#### Procedura skanowania:
+
+1. Upewnij się, że **aplikacja jest otwarta** w urządzeniu, a pole tekstowe jest na pierwszym planie (kursor tekstu w polu tekstowym)
+2. **Skieruj okno wyjściowe** na kod kreskowy
+3. **Naciśnij i przytrzymaj** jeden z przycisków skanowania. Kropka celowania z podświetleniem włącza się, aby ułatwić celowanie
+4. Upewnij się, że kod kreskowy znajduje się **wewnątrz obszaru** utworzonego przez wzorzec celowania
+5. Dioda LED przechwytywania danych **zaświeci się na zielono** i zostanie odtworzony sygnał dźwiękowy — oznacza to pomyślne zdekodowanie kodu kreskowego
+
+> **UWAGA:** W **trybie listy wyboru** (Pick List Mode), który jest domyślnie włączony, urządzenie dekoduje kod kreskowy **tylko wtedy**, gdy środek punktu celowniczego dotyka kodu kreskowego.
+
+### Opcjonalne skanery
+
+| Skaner | Opis |
+|--------|------|
+| **SE4100** | Skaner do pracy o niskiej lub umiarkowanej intensywności — kody kreskowe ze standardowej odległości, 1D/2D |
+| **SR500** | Skaner do wszystkich warunków oświetlenia, w tym ostrym świetle słonecznym, z ostrzejszym celownikiem LED z czerwonym podświetleniem — większy zasięg skanowania, rejestracja obrazów, dokumentów i OCR/tekstu |
+
+### Skanowanie aparatem tylnym
+
+Urządzenie może również skanować za pomocą aparatu tylnego (16 MP z autofokusem i detekcją fazy).
+`
+      },
+      {
+        title: '8. Odczyt kart NFC',
+        content: `
+### Odczyt kart NFC
+
+Odczytywanie kart zbliżeniowych przy użyciu anteny NFC.
+
+#### Procedura:
+
+1. Uruchom aplikację obsługującą NFC
+2. Trzymaj urządzenie ekranem skierowanym do góry
+3. **Wyrównaj kartę NFC** z anteną NFC (1) na froncie urządzenia — antena NFC znajduje się w dolnej prawej części ekranu (oznaczona numerem 12 na widoku z przodu)
+4. Trzymaj kartę stabilnie, aż transakcja zostanie zakończona (zwykle sygnalizowane przez aplikację)
+
+### Obsługiwane standardy NFC
+
+| Standard | Opis |
+|----------|------|
+| **NFC ISO 14443** | Typ A i B — karty Mifare, FeliCa |
+| **ISO 15693** | Znaczniki NFC Forum 2, 3, 4, 5 |
+| **Emulacja karty hosta** | Host Card Emulation |
+| **Płatności zbliżeniowe** | Obsługa płatności, VAS (usługi o wartości dodanej) |
+| **Apple ECP** | Certyfikaty Apple ECP 1.0 i ECP 2.0, certyfikaty Apple VAS |
+| **Google Smart Tap** | Obsługa Google Smart Tap, biblioteka VAS/SDK |
+`
+      },
+      {
+        title: '9. Łączność bezprzewodowa',
+        content: `
+### Wi-Fi
+
+| Parametr | Wartość |
+|----------|---------|
+| **Standard** | IEEE 802.11 ax/ac/n/a/g/b/d/h/i/r/k/u/v/w |
+| **Pasma** | Trójzakresowy: **2,4 GHz, 5 GHz, 6 GHz** |
+| **MIMO** | 2×2 MU-MIMO |
+| **Certyfikat** | Wi-Fi CERTIFIED 7 (Wi-Fi 7), MLO (Multi-Link Operation) |
+| **Nadawanie** | Jednoczesne nadawanie i odbieranie MLMR |
+| **Tryby** | Trójzakresowy i dwuzakresowy (2,4+5s, 5s+5s, 5s+6, 2,4+5, 2,4+6) |
+| **Moduł** | Wysokopasmowy z obsługą równoległą (HBS), IPv4, IPv6, Wi-Fi Aware |
+| **Szybki roaming** | 802.11r Fast BSS Transition, buforowanie PMK, Cisco CCKM, OKC |
+
+### Bluetooth
+
+| Parametr | Wartość |
+|----------|---------|
+| **Wersja** | Bluetooth **6.0** |
+| **Klasa** | Klasa 1 |
+| **Profile** | Klasyczny Bluetooth (BR/EDR) i Bluetooth LE |
+| **Audio** | BLE Audio |
+| **Beacon** | Funkcja BLE Beaconing |
+| **Pozycjonowanie** | Bluetooth Channel Sounding |
+
+### Sieć komórkowa (WAN) — tylko w modelach z WAN
+
+| Parametr | Wartość |
+|----------|---------|
+| **5G** | 5G FR1: n1/2/3/5/7/8/12/13/14/20/25/26/28/29/30/38/40/41/48/53/66/70/71/75/76/77/78/79 |
+| **4G LTE** | B1/2/3/4/5/7/8/12/13/14/17/18/19/20/25/26/28/29/30/32/34/38/39/40/41/42/43/48/66/68/70/71, 10G, 3G |
+| **2G** | 850/900/1800/1900 |
+| **Karty SIM** | Podwójna karta SIM, gotowość dwóch kart, VoLTE, GigaBit LTE-A, 5G NR Sub-6 (NSA, SA) |
+
+### GPS / Nawigacja
+
+GPS, GLONASS, a-GLONASS, Galileo, Beidou, QZSS — Dual-Band GNSS z obsługą XTRA.
+
+### Audio
+
+| Element | Opis |
+|---------|------|
+| **Głośniki** | Stereo (lewy + prawy) |
+| **Mikrofony** | Dwa mikrofony (górny + tylny) |
+| **Słuchawki** | Przez port USB-C lub bezprzewodowy zestaw słuchawkowy Bluetooth |
+| **BLE Audio** | Obsługa BLE Audio |
+| **VoIP** | Komunikacja PTT (Push-to-Talk) |
+| **Redukcja szumów** | Tłumienie szumów Qualcomm Fluence AI |
+`
+      },
+      {
+        title: '10. Rejestracja danych',
+        content: `
+### Skanowanie kodów kreskowych
+
+| Parametr | Wartość |
+|----------|---------|
+| **Metoda** | Skanowanie za pomocą aparatu tylnego (16 MP). Opcjonalnie laserowy mechanizm skanowania SR500 lub SE4100 1D/2D |
+| **Obsługiwane kody** | 1D i 2D — w tym QR Code, Data Matrix, PDF417, EAN/UPC, Code 128 i wiele innych |
+
+### Aparat / Kamera
+
+| Aparat | Rozdzielczość | Opis |
+|--------|---------------|------|
+| **Aparat tylny** | **16 MP** | Autofokus z detekcją fazy |
+| **Aparat przedni** | **8 MP** | Do wideokonferencji |
+| **Ultraszerokokątny aparat tylny (UWA)** | **13 MP** (opcjonalnie) | Szersze pole widzenia |
+
+### RFID (opcjonalnie)
+
+| Parametr | Wartość |
+|----------|---------|
+| **Typ** | Wbudowana technologia RFID UHF krótkiego zasięgu |
+| **Zasięg** | > 1,2 m (4 stopy) |
+| **Szybkość odczytu** | 90 znaczników na sekundę |
+| **Standard** | EPC klasa 1 gen. 2, EPC gen. 2 wer. 2 |
+| **Częstotliwości** | EU 865-868 MHz, USA 902-928 MHz |
+
+> **Uwaga:** Technologia RFID jest dostępna w konkretnych modelach (np. z wbudowanymi funkcjami RFID — seria Dragonwing Q-6690).
+`
+      },
+      {
+        title: '11. Czujniki i sensory',
+        content: `
+### Technologia czujników interaktywnych (IST)
+
+| Czujnik | Opis |
+|---------|------|
+| **Żyroskop** | Trójosiowy — wykrywa obrót urządzenia |
+| **Akcelerometr** | Trójosiowy — wykrywa przyspieszenie i orientację |
+| **Czujnik światła** | Automatyczna regulacja jasności ekranu |
+| **Magnetometr (eCompass)** | Automatycznie wykrywa kierunek i orientację |
+
+### Odporność środowiskowa
+
+| Parametr | Wartość |
+|----------|---------|
+| **Klasa szczelności** | IP68 |
+| **Odporność na upadki** | Wielokrotne upadki na beton z wys. 1,2 m (4 ft). Z osłoną ochronną: 1,5 m (5,1 ft) wg MIL-STD-810H |
+| **Temperatura pracy** | -20°C do +50°C (-4°F do 122°F) |
+| **Temperatura przechowywania** | -40°C do +70°C (-40°F do 158°F) |
+| **Wilgotność** | 5–95% (bez kondensacji) |
+| **Wstrząs termiczny** | -40°C do +70°C (-40°F do 158°F) |
+| **Drgania** | Sinusoidalne: 4 g szczytowe, 5 Hz do 2 kHz · Losowe: 6 g RMS (20 Hz do 2 kHz) |
+| **ESD** | +/- 15 kV wyładowania w powietrzu, +/- 8 kV wyładowania bezpośrednie, ±18 kV wyładowania pośrednie |
+`
+      },
+      {
+        title: '12. Zalecenia dotyczące ergonomii',
+        content: `
+### Zalecenia ergonomiczne
+
+Przy korzystaniu z urządzenia należy przestrzegać poniższych zaleceń dotyczących ergonomii:
+
+- **Utrzymuj naturalną postawę ciała** — szyja, plecy i ramiona powinny być rozluźnione i wyprostowane. Nie garb się ani nie wysuwaj szyi do przodu
+- **Podnieś ekran** — użyj stojaka lub etui, aby podnieść urządzenie do poziomu oczu i zmniejszyć naprężenia szyi
+- **Łokcie i ramiona** — przy pracy na urządzeniu trzymaj łokcie blisko ciała, a ramiona rozluźnione. Unikaj podnoszenia ramion, aby ich nie naprężać
+`
+      },
+      {
+        title: '13. Najczęściej zadawane pytania (FAQ)',
+        content: `
+### Czy Zebra ET401 jest wodoodporny?
+
+**Odpowiedź:** Tak, Zebra ET401 posiada certyfikat **IP68** — jest w pełni odporna na pył i zanurzenie w wodzie. Można go używać w deszczu, przypadkowo upuścić do kałuży, a nawet spryskać wodą z węża, aby go wyczyścić.
+
+### Jaka jest różnica między wersją 8" a 10"?
+
+**Odpowiedź:** Obie wersje mają **identyczne funkcje**, ale różnią się rozmiarem ekranu, wagą i pojemnością baterii:
+- **8"**: 212,7 × 134,4 × 11,4 mm, 480 g, bateria 6100 mAh (od 0 do 80% w ~3h)
+- **10"**: 256,1 × 162,7 × 11,4 mm, 680 g, bateria 7600 mAh (od 0 do 80% w ~4h)
+
+### Jak zainstalować kartę SIM w ET401?
+
+**Odpowiedź:** Karta nano SIM jest instalowana **pod akumulatorem**. Trzeba: 1) wyłączyć urządzenie, 2) zdjąć pokrywę akumulatora, 3) odblokować i wyjąć akumulator, 4) wyciągnąć szufladę SIM/SD, 5) włożyć kartę SIM (styki do góry), 6) wsunąć szufladę, 7) włożyć akumulator i założyć pokrywę. ET401 obsługuje też **eSIM** (aktywacja przez Ustawienia > Sieć i Internet > SIM).
+
+### Czy ET401 obsługuje 5G?
+
+**Odpowiedź:** Tak, modele WAN obsługują **5G FR1** (sub-6 GHz) — NSA i SA. Obsługiwane pasma to m.in. n1, n3, n5, n7, n8, n28, n41, n77, n78, n79. Obsługuje również 4G LTE i 2G.
+
+### Jaki Wi-Fi ma ET401?
+
+**Odpowiedź:** ET401 obsługuje **Wi-Fi 7** (Wi-Fi CERTIFIED 7) z trójzakresową łącznością **2,4 GHz + 5 GHz + 6 GHz**, 2×2 MU-MIMO i MLO (Multi-Link Operation). To ponad dwukrotnie większa prędkość niż Wi-Fi 6.
+
+### Czy ET401 może pracować bez baterii?
+
+**Odpowiedź:** Tak! W **trybie bezakumulatorowym** ET401 działa podłączony do zewnętrznego źródła zasilania 12 V — przez USB-C PD, dolne wejście/wyjście PD, dolne wejście/wyjście 12 V lub tylne wejście/wyjście 12 V. Idealne dla tabletów zamontowanych na stałe w pojazdach, kioskach lub stacjach roboczych.
+
+### Jakie są akcesoria do ładowania?
+
+**Odpowiedź:** Dostępne są: **baza z 1 gniazdem PD** (CRD-ET4A-1SCG1-01), **4-gniazd. stacja dokująca** (osobna dla 8" i 10"), **4-gniazd. ładowarka akumulatorów PowerPack**, **kabel USB-C** (CBL-EC5X-USBC3A-01) i **zasilacz USB PD 45W** (PWR-WUA5V45W1XX).
+
+### Jak długo Zebra będzie wspierać ET401?
+
+**Odpowiedź:** Zebra ET401 ma **8-letni cykl eksploatacji** — o 25% dłuższy niż poprzednie generacje tabletów. Oznacza to wsparcie serwisowe i techniczne do **2034 roku** (w zależności od procesora Qualcomm Product Longevity).
+
+### Co oznaczają kolory diody LED ładowania?
+
+**Odpowiedź:**
+- **Wolno migająca pomarańczowa** (1 mignięcie co 4 s) → trwa ładowanie
+- **Szybko migająca pomarańczowa** (2 mignięcia/s) → błąd ładowania (temperatura lub za długo)
+- **Świeci na zielono** → ładowanie zakończone
+- **Wolno/szybko migająca czerwona** → problem z akumulatorem (kończy się jego żywotność)
+- **Świeci na czerwono** → naładowany, ale akumulator wymaga wymiany
+`
+      }
+    ]
   }
 }
 
