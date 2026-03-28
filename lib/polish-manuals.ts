@@ -32818,6 +32818,897 @@ Aby zapobiec **retencji obrazu** (efekt wypalenia):
   },
 
   // =============================================
+  // ZEBRA TC701 — Komputer mobilny ultra-wzmocniony
+  // Źródło: Zebra TC501/TC701 Przewodnik PL
+  //         PN-Y_TC501_TC701.md.txt (konfiguracje SKU)
+  //         Zebra TC701 Product Reference Guide
+  // =============================================
+  'tc701': {
+    model: 'TC701',
+    title: 'Zebra TC701 – Instrukcja obsługi po Polsku',
+    lastUpdated: '2026-03-28',
+    sourceDocument: 'Zebra TC701 Product Reference Guide + TC501/TC701 Przewodnik PL',
+    keywords: [
+      'zebra tc701 instrukcja', 'zebra tc701 instrukcja po polsku', 'zebra tc701 manual',
+      'terminal mobilny zebra tc701', 'zebra tc701 skanowanie', 'zebra tc701 reset', 'zebra tc701 bateria',
+      'zebra tc701 wifi', 'zebra tc701 wifi 7', 'zebra tc701 bluetooth', 'zebra tc701 nfc', 'zebra tc701 android 15',
+      'zebra tc701 kamera', 'zebra tc701 kamera 50mp', 'zebra tc701 specyfikacja', 'zebra tc701 akcesoria',
+      'zebra tc701 stacja dokująca', 'zebra tc701 ładowanie', 'zebra tc701 ip68 ip65', 'zebra tc701 enterprise',
+      'komputer dotykowy zebra tc701', 'zebra tc701 skanowanie kodów', 'zebra tc701 usb-c',
+      'zebra tc701 rozwiązywanie problemów', 'zebra tc701 czyszczenie', 'zebra tc701 ultra rugged',
+      'zebra tc701 amoled', 'zebra tc701 rfid', 'zebra tc701 5g', 'zebra tc701 ai'
+    ],
+    sections: [
+      {
+        title: '1. Podstawowe informacje',
+        content: `
+### O urządzeniu TC701
+
+Zebra TC701 to najnowszej generacji **ultra-wzmocniony (ultra-rugged)** komputer mobilny klasy enterprise, zaprojektowany do pracy w najbardziej wymagających warunkach – centrach dystrybucyjnych, terminalach przeładunkowych i na zewnątrz w ekstremalnych temperaturach. Urządzenie łączy zaawansowane możliwości skanowania kodów kreskowych (moduły SR560 lub AC670), komunikację bezprzewodową Wi-Fi 7 (pasma 2,4 / 5 / 6 GHz), Bluetooth 6.0, NFC/HF RFID (13,56 MHz), zintegrowany czytnik **UHF RFID** oraz opcjonalny moduł WWAN 5G – a także profesjonalną kamerę **50 MP** – wszystko w ultra-wytrzymałej obudowie.
+
+TC701 jest pierwszym urządzeniem mobilnym Zebra zaprojektowanym specjalnie pod kątem **sztucznej inteligencji (AI)**, z dedykowanym silnikiem AI w procesorze Qualcomm Dragonwing Q-6690.
+
+TC701 jest dostępny w **5 konfiguracjach SKU** różniących się procesorem (2,0 GHz / 2,9 GHz), pamięcią RAM (8 GB / 12 GB), pamięcią wewnętrzną (128 GB / 256 GB) oraz modułem skanującym (SR560 lub AC670). Wybrane konfiguracje posiadają również kamerę ultrawide z sensorem iTOF.
+
+Urządzenie posiada **6-calowy ekran dotykowy AMOLED** o jasności **1500 nitów** z obsługą 5 trybów dotyku (palec, rękawiczki, rysik, z folią ochronną i bez). Ekran wyposażono w szkło **Corning Gorilla Glass Victus**. Urządzenie spełnia normy **IP68 + IP65** oraz **MIL-STD-810H** (odporność na upadki z **3,66 m na beton**).
+
+### Konfiguracje SKU
+
+| SKU | Procesor | RAM / Pamięć | Skaner | Dodatkowe |
+|-----|----------|-------------|--------|-----------|
+| TC7010-021B1A0001-A6 | 2,0 GHz octa-core | 8 GB / 128 GB | SR560 | — |
+| TC7010-021E1A0001-A6 | 2,0 GHz octa-core | 8 GB / 128 GB | AC670 | — |
+| TC7010-041B2B0001-A6 | 2,9 GHz octa-core | 12 GB / 256 GB | SR560 | Kamera ultrawide |
+| TC7010-041E2B0001-A6 | 2,9 GHz octa-core | 12 GB / 256 GB | AC670 | Kamera ultrawide |
+| TC7010-041B2C00A1-A6 | 2,9 GHz octa-core | 12 GB / 256 GB | SR560 | Czujnik ToF |
+
+### Parametry techniczne
+
+| Parametr | TC701 |
+|----------|-------|
+| **Wyświetlacz** | 6,0" AMOLED, 2160×1080 (Full HD+), 1500 nitów, Gorilla Glass Victus |
+| **Procesor** | Qualcomm Dragonwing Q-6690, 8 rdzeni, do 2,9 GHz (z dedykowanym silnikiem AI) |
+| **Pamięć RAM** | 8 GB lub 12 GB LPDDR5 |
+| **Pamięć wewnętrzna** | 128 GB lub 256 GB UFS 3.1 |
+| **Karta pamięci** | microSD do 2 TB |
+| **System operacyjny** | Android 15 + wsparcie dla 4 kolejnych wersji |
+| **Bateria standardowa** | 5000 mAh (19,45 Wh) PowerPrecision Plus |
+| **Bateria rozszerzona** | 7240 mAh (28,16 Wh) PowerPrecision Plus |
+| **Bateria bezprzewodowa** | 5000 mAh PowerPrecision Plus (ładowanie Qi) |
+| **Kamera tylna** | 50 MP z autofokusem PDAF, LED (opcja kamera ultrawide 13 MP z iTOF) |
+| **Kamera przednia** | 8 MP, stała ostrość |
+| **Skaner** | SR560 lub AC670 |
+| **NFC/HF RFID** | 13,56 MHz – ISO/IEC 14443 A/B, FeliCa, ISO/IEC 15693 |
+| **UHF RFID** | Zintegrowany, do 2 m zasięgu, >200 tagów/s |
+| **Łączność** | Wi-Fi 7 (2,4 / 5 / 6 GHz), Bluetooth 6.0, NFC, 5G Release 17 (opcja), eSIM |
+| **USB** | USB-C 3.1 |
+| **Waga** | 284 g (bateria standardowa), 314 g (bateria rozszerzona) |
+| **Wymiary** | 165,0 × 77,9 × 15,5 mm |
+
+### Warunki pracy
+
+| Parametr | Wartość |
+|----------|---------|
+| Temperatura pracy | -20°C do +50°C |
+| Temperatura ładowania | 5°C do 40°C |
+| Temperatura przechowywania | -40°C do +70°C |
+| Wilgotność względna | 5% – 95% bez kondensacji |
+| Odporność na upadki | **3,66 m (12 ft)** na beton (temp. pokojowa), 2,44 m (8 ft, pełny zakres temp.) |
+| Test tumble | **3500 cykli** z 1 m |
+| Klasa szczelności | **IP68 + IP65**, **MIL-STD-810H** |
+| ESD | ±20 kV (wyładowanie powietrzne) |
+
+### Porównanie TC701 vs TC501
+
+| Parametr | TC701 (ultra-rugged) | TC501 (rugged) |
+|----------|---------------------|----------------|
+| Wyświetlacz | AMOLED, 1500 nitów, Gorilla Glass Victus | LCD, 5 trybów dotyku |
+| Upadki na beton | 3,66 m (+50% vs prev. gen.) | 2,4 m |
+| Test tumble | 3500 cykli (+75%) | Standardowy |
+| Temperatura pracy (min.) | -20°C | Standardowa |
+| Szok termiczny | Tak (certyfikowany) | Nie |
+| Docelowe środowisko | Centra dystrybucyjne, chłodnie, outdoor | Sklepy, lekka logistyka |
+
+> **Uwaga:** TC701 i TC501 współdzielą procesor, kamery, łączność i ekosystem akcesoriów. TC701 wyróżnia się wyświetlaczem AMOLED i znacząco wyższą wytrzymałością.
+`
+      },
+      {
+        title: '2. Elementy urządzenia',
+        content: `
+### Widok z przodu
+
+| Element | Opis |
+|---------|------|
+| Kamera przednia 8 MP | Zdjęcia, wideo i wideokonferencje |
+| Głośnik słuchawkowy | Odtwarzanie audio w trybie słuchawki (góra przodu) |
+| Czujnik zbliżenia/światła | Wykrywa zbliżenie obiektu i natężenie światła otoczenia |
+| Dioda LED skanowania (Scan LED) | Wskazuje status skanowania kodów kreskowych |
+| Dioda LED ładowania (Charging LED) | Wskazuje status ładowania baterii |
+| Ekran dotykowy 6" AMOLED | 1500 nitów, Gorilla Glass Victus, 5 trybów dotyku |
+| Przycisk skanowania (lewy, programowalny) | Inicjuje skanowanie kodów kreskowych |
+
+### Widok boczny
+
+| Element | Opis |
+|---------|------|
+| Przyciski głośności (góra/dół) | Regulacja głośności – programowalne |
+| Przycisk PTT | Push-to-Talk – programowalny |
+
+### Widok z tyłu
+
+| Element | Opis |
+|---------|------|
+| Przycisk zasilania | Włączanie/wyłączanie urządzenia i ekranu |
+| Okno skanera | Moduł skanujący (SR560 / AC670) |
+| Mikrofon | Jeden z dwóch mikrofonów |
+| Common Back IO | Złącze do akcesoriów (tył) |
+| Górne/dolne punkty mocowania | Mocowanie akcesoriów (pasek, osłona ochronna) |
+| Zatrzaski baterii | Naciśnij oba jednocześnie, aby wyjąć baterię |
+| Bateria | PowerPrecision Plus Li-Ion, wymienna |
+| Kamera tylna 50 MP | Główna kamera z lampą błyskową LED |
+| Kamera iTOF/ultrawide 13 MP | Tylko w wybranych konfiguracjach SKU |
+| Antena UHF RFID | Zintegrowany czytnik RFID krótkiego zasięgu |
+
+### Widok z dołu
+
+| Element | Opis |
+|---------|------|
+| Głośnik (zestawu głośnomówiącego) | Głośnik do trybu głośnomówiącego |
+| Styki ładowania (Bottom IO Pins) | Styki POGO do ładowania przez stacje dokujące |
+| Mikrofon | Drugi mikrofon urządzenia |
+| Port USB-C 3.1 | Ładowanie, transmisja danych, audio (brak gniazda 3,5 mm!) |
+
+### Programowalne przyciski
+
+| Przycisk | Domyślna funkcja | Klucz systemowy |
+|----------|------------------|-----------------|
+| PTT (lewy bok) | Push-to-Talk | LEFT_TRIGGER_2 |
+| Skanowanie (lewy) | Skanowanie | SCAN |
+| Skanowanie (prawy) | Skanowanie | RIGHT_TRIGGER_1 |
+| Głośność + | Zwiększ głośność | VOLUMEUP |
+| Głośność − | Zmniejsz głośność | VOLUMEDOWN |
+`
+      },
+      {
+        title: '3. Rozpakowanie i pierwsze uruchomienie',
+        content: `
+### Zawartość opakowania
+
+W pudełku znajdują się **3 elementy**:
+
+- **Komputer mobilny Zebra TC701**
+- **Bateria li-ion PowerPrecision Plus** (ładowalna)
+- **Przewodnik po przepisach** (Regulatory Guide)
+
+> **Uwaga:** Kabel USB-C, ładowarka, stacja dokująca i inne akcesoria sprzedawane są **osobno**!
+
+### Instalacja baterii
+
+1. Umieść urządzenie ekranem do dołu na czystej, miękkiej powierzchni
+2. Włóż baterię **dolną krawędzią najpierw** (styki kontaktowe) do komory baterii z tyłu urządzenia
+3. Dociśnij górną część baterii aż do słyszalnego kliknięcia zatrzasków
+4. **Naciśnij i przytrzymaj przycisk zasilania (Power)** aby włączyć urządzenie
+
+> **Ważne:** Urządzenie NIE włącza się automatycznie po włożeniu baterii – trzeba nacisnąć przycisk Power.
+
+### Wyjmowanie baterii
+
+1. Przytrzymaj przycisk zasilania → wybierz **"Wyłącz"** z menu na ekranie
+2. Poczekaj na pełne wyłączenie urządzenia
+3. Naciśnij **oba zatrzaski baterii** jednocześnie i unieś baterię
+
+> **Ważne:** Nigdy nie wyjmuj baterii podczas pracy urządzenia – grozi to utratą danych!
+
+### Funkcja Hot Swap (wymiana baterii bez wyłączania)
+
+TC701 posiada wbudowany **superkondensator** umożliwiający szybką wymianę baterii bez utraty połączeń:
+
+- **30 sekund** – utrzymanie połączenia Wi-Fi i WWAN/5G
+- **60 sekund** – utrzymanie danych w pamięci operacyjnej
+- Aby skorzystać: wyjmij baterię → natychmiast włóż nową → urządzenie nie wymaga restartu
+
+### Funkcja BLE Beacon
+
+Bateria TC701 emituje **sygnał BLE Beacon** nawet gdy urządzenie jest wyłączone – przez **do 7 dni**. Umożliwia to lokalizację urządzenia za pomocą narzędzia Zebra Device Tracker.
+
+### Pierwsze uruchomienie
+
+1. Włóż naładowaną baterię i **naciśnij przycisk Power**
+2. Poczekaj na pełne uruchomienie systemu (ok. 1-2 minuty)
+3. Postępuj zgodnie z kreatorem konfiguracji:
+   - Wybierz język (**Polski**)
+   - Połącz się z siecią Wi-Fi
+   - Skonfiguruj zabezpieczenia (PIN, hasło lub wzór)
+   - Zaakceptuj warunki licencji
+4. Po zakończeniu konfiguracji pojawi się ekran główny
+
+> Jeśli urządzenie się nie włącza, przytrzymaj przycisk Power przez **6 sekund**.
+
+### Podstawowe gesty
+
+| Gest | Funkcja |
+|------|---------|
+| Dotknij | Wybierz element |
+| Dotknij i przytrzymaj | Menu kontekstowe |
+| Przesuń | Przewijanie treści |
+| Uszczypnij/rozsuń | Przybliżanie/oddalanie |
+| Przesuń w górę od dołu | Ekran główny |
+| Przesuń w górę i przytrzymaj | Ostatnie aplikacje |
+| Przesuń z prawej strony | Powrót |
+
+### Tryby panelu dotykowego
+
+TC701 obsługuje **5 trybów dotyku** (Ustawienia → Wyświetlacz → Touch Mode):
+
+| Tryb | Opis |
+|------|------|
+| Rysik + Palec (bez folii) | Obsługa rysikiem i palcem, bez folii ochronnej |
+| Rysik + Palec (z folią) | Obsługa rysikiem i palcem, z folią ochronną |
+| Rękawiczki + Palec (bez folii) | Obsługa w rękawiczkach, bez folii ochronnej |
+| Rękawiczki + Palec (z folią) | Obsługa w rękawiczkach, z folią ochronną |
+| Tylko palec | Obsługa wyłącznie palcem (domyślny) |
+
+Obsługiwane rękawiczki: lateksowe (medyczne), skórzane, bawełniane, wełniane.
+`
+      },
+      {
+        title: '4. Ładowanie baterii',
+        content: `
+### Typy baterii TC701
+
+TC701 obsługuje **3 typy baterii** PowerPrecision Plus:
+
+| Typ | Pojemność | Opis |
+|-----|-----------|------|
+| **Standardowa** | 5000 mAh (19,45 Wh) | Bateria standardowej pojemności, ogniwa premium |
+| **Rozszerzona** | 7240 mAh (28,16 Wh) | Bateria rozszerzonej pojemności, dłuższy czas pracy |
+| **Z ładowaniem bezprzewodowym** | 5000 mAh | Standardowa pojemność + ładowanie bezprzewodowe Qi |
+
+> **Uwaga:** Ładowanie bezprzewodowe wymaga specjalnej baterii z modułem Qi. Standardowa i rozszerzona bateria NIE obsługują ładowania bezprzewodowego.
+
+### Metody ładowania
+
+| Metoda | Opis |
+|--------|------|
+| **Kabel USB-C** | Kabel USB-C 3.0, szybkie ładowanie |
+| **Stacja 1-slot** | Ładowanie + Ethernet |
+| **Stacja 1-slot (szybkie)** | Szybkie ładowanie |
+| **Stacja 2-slot** | Szybkie ładowanie 2 urządzeń |
+| **Stacja 5-slot** | Szybkie ładowanie 5 urządzeń |
+| **Stacja 10-slot** | Ładowanie do 10 urządzeń |
+| **Ładowarka baterii 4-slot** | Ładowanie 4 zapasowych baterii |
+| **Ładowanie bezprzewodowe Qi** | Tylko z baterią Qi |
+
+> TC701 korzysta z ekosystemu akcesoriów **ShareCradle** – nowe stacje dokujące z szybszym ładowaniem, kompatybilne wstecz z adapterami.
+
+### Wskaźniki ładowania (Charging LED)
+
+| Stan LED | Znaczenie |
+|-----------|-----------|
+| Wyłączona | Urządzenie nie ładuje się / nieprawidłowo umieszczone w stacji / brak zasilania |
+| Wolno migający bursztyn (co 4 s) | Ładowanie w toku |
+| Zielony (stały) | Ładowanie zakończone – bateria w pełni naładowana |
+| Czerwony (stały) | Bateria osiągnęła koniec żywotności (EOL) – wymień baterię |
+| Szybko migający czerwony (2×/s) | Błąd ładowania – temperatura poza zakresem 5-40°C lub ładowanie trwa >12h |
+
+### Czas ładowania
+
+| Parametr | Wartość |
+|----------|---------|
+| **0 → 70%** | ~45 minut (szybkie ładowanie) |
+| **90% naładowania** | Wystarcza na **8-14 godzin** pracy (w zależności od użycia) |
+
+### Poziomy niskiego naładowania baterii
+
+| Poziom | Komunikat | Działanie |
+|--------|-----------|-----------|
+| **18%** | "Naładuj wkrótce" | Ostrzeżenie – podłącz ładowarkę |
+| **10%** | "Naładuj teraz" | Krytyczne – podłącz natychmiast |
+| **4%** | Urządzenie wyłącza się | Automatyczne wyłączenie |
+
+### Temperatura ładowania
+
+- **Wymagana temperatura otoczenia:** 5°C do 40°C (41°F do 104°F)
+- Poza tym zakresem ładowanie **nie rozpocznie się** lub zostanie przerwane
+- Maks. temperatura pracy: **50°C** (122°F), min.: **-20°C** (-4°F)
+
+### Wskazówki dotyczące baterii
+
+- **Ładuj regularnie** – nie czekaj na całkowite rozładowanie
+- **Używaj tylko oryginalnych baterii Zebra** – nieoryginalne mogą powodować pożar, eksplozję lub wyciek
+- **Hot-swap** – wymiana baterii bez wyłączania: superkondensator utrzymuje połączenie Wi-Fi/5G przez 30s i pamięć przez 60s
+- **BLE Beacon** – bateria emituje sygnał BLE przez do 7 dni po wyłączeniu urządzenia (do lokalizacji)
+- Baterie PowerPrecision Plus posiadają **ogniwa premium-grade** i wbudowaną diagnostykę stanu zdrowia
+`
+      },
+      {
+        title: '5. Skanowanie kodów kreskowych',
+        content: `
+### Wbudowane moduły skanujące
+
+TC701 jest dostępny z jednym z dwóch modułów skanujących (w zależności od SKU):
+
+| Moduł | Celownik | Opis |
+|-------|----------|------|
+| **SR560** | Czerwony punkt (red dot) | Skaner standardowego zasięgu – ulepszona wydajność, celownik 2D |
+| **AC670** | Zielony kreska-punkt-kreska | Skaner premium/dalekiego zasięgu – jednoczesne skanowanie kodów i zdjęcia kolorowe, do **30 m** |
+
+> **Uwaga:** W odróżnieniu od TC501, TC701 **nie jest dostępny** z modułem SR500.
+
+### Zintegrowany czytnik UHF RFID
+
+TC701 posiada **wbudowany czytnik UHF RFID krótkiego zasięgu** – nowość w serii TC7:
+
+| Parametr | Wartość |
+|----------|---------|
+| Zasięg odczytu | do **2 m (6,5 ft)** |
+| Szybkość | >**200 tagów na sekundę** |
+| Standardy | EPC Class 1 Gen2, EPC Gen 2 V2 |
+| Pasma | EU 865-868 MHz, US 902-928 MHz |
+
+Wbudowany RFID eliminuje potrzebę zakupu dodatkowych czytników lub nakładek RFID.
+
+### Tryby skanowania
+
+TC701 obsługuje **3 tryby operacyjne** skanera:
+
+| Tryb | Opis |
+|------|------|
+| **Decode** | Standardowy – skanuje i dekoduje jeden kod kreskowy |
+| **Picklist** | Celownik punktowy – dekoduje tylko kod na który celownik jest skierowany |
+| **MultiBarcode** | Skanowanie wielu kodów jednocześnie – do **100 kodów** na raz |
+
+### Skanowanie kamerą
+
+Oprócz wbudowanego skanera, TC701 może skanować kody kreskowe **kamerą tylną 50 MP**. Tryb ten jest przeznaczony do **lekkiego użycia** (poniżej 100 skanów dziennie).
+
+### Zewnętrzne skanery Bluetooth
+
+TC701 obsługuje parowanie z zewnętrznymi skanerami Bluetooth:
+
+**Skanery pierścieniowe (ring scanners):**
+- Zebra RS507 / RS507X
+- Zebra RS5100
+- Zebra RS6000
+- Zebra RS6100
+
+**Skanery ręczne Bluetooth:**
+- Zebra DS2278
+- Zebra DS3678
+- Zebra DS8178
+- Zebra LI3678
+
+**Skanery USB-C:** Obsługiwane przez port USB-C 3.1.
+
+Parowanie skanerów BT: przez **NFC** (zbliż skaner do anteny NFC na pleckach TC701), **SSI** lub tryb **HID**.
+
+### Obsługiwane symbologie
+
+TC701 odczytuje **wszystkie popularne typy kodów kreskowych**:
+
+**Kody 1D:** Code 128, Code 39, Code 93, EAN-8, EAN-13, UPC-A, UPC-E, Interleaved 2 of 5, Codabar, GS1-128, GS1 DataBar, Code 11, MSI, Trioptic Code 39, ISBT 128 i inne.
+
+**Kody 2D:** QR Code, Data Matrix, PDF417, Aztec, MaxiCode, Micro QR, Micro PDF, Han Xin, Grid Matrix, DotCode i inne.
+
+### Jak skanować
+
+1. **Uruchom aplikację** obsługującą skanowanie (np. DataWedge, DWDemo, aplikacja magazynowa)
+2. **Skieruj okno skanera** na kod kreskowy
+3. **Naciśnij przycisk skanowania** (lewy lub prawy) – pojawi się wiązka celownicza
+4. **Wyceluj** wiązkę na środek kodu kreskowego
+5. **Zwolnij przycisk** po usłyszeniu sygnału potwierdzenia (beep) i zielonym wskaźniku LED
+
+### Konfiguracja DataWedge
+
+TC701 ma wbudowaną aplikację **DataWedge** do zaawansowanej konfiguracji skanera:
+
+1. Otwórz **DataWedge** z menu aplikacji
+2. Wybierz profil (lub utwórz nowy)
+3. Skonfiguruj:
+   - **Input**: wybierz typ skanera (Barcode Scanner)
+   - **Output**: ustaw miejsce docelowe danych (Keystroke, Intent, IP)
+   - **Decoders**: włącz/wyłącz poszczególne symbologie
+   - **Reader params**: dostosuj parametry skanowania
+
+### Zasięg skanowania (przykłady dla AC670)
+
+| Kod kreskowy | Zasięg bliski | Zasięg daleki |
+|--------------|---------------|---------------|
+| 5 mil PDF417 | 16,3 cm | 100 cm |
+| 10 mil QR | 12,7 cm | 117 cm |
+| 100% UPCA | 5,6 cm | 373 cm |
+| 100 mil Code 128 RFL | – | ~2650 cm (~26,5 m) |
+`
+      },
+      {
+        title: '6. Łączność bezprzewodowa',
+        content: `
+### Wi-Fi 7 (WLAN)
+
+TC701 obsługuje najnowszy standard **Wi-Fi 7 (802.11be)** w **trzech pasmach**:
+
+| Parametr | Wartość |
+|----------|---------|
+| Standard | **Wi-Fi 7 (802.11be/ax/ac/n/a/g/b)** |
+| Pasma | **2,4 GHz / 5 GHz / 6 GHz** (tri-band) |
+| Maks. prędkość | do **5764 Mbps** w paśmie 6 GHz |
+| Multi-Link Operation | Jednoczesna praca na wielu pasmach (MLO) |
+| Zabezpieczenia | None, OWE, WEP, WPA/WPA2/WPA3-Personal, WPA/WPA2/WPA3-Enterprise, WPA3-Enterprise 192-bit |
+| Wi-Fi Direct | Tak |
+| Hotspot Wi-Fi | Do **8 urządzeń** jednocześnie |
+
+**Konfiguracja Wi-Fi:**
+
+1. Przejdź do **Ustawienia → Sieć i internet → Wi-Fi**
+2. Włącz Wi-Fi przełącznikiem
+3. Wybierz sieć z listy dostępnych
+4. Wprowadź hasło (jeśli wymagane)
+5. Dla sieci WPA3-Enterprise: skonfiguruj certyfikat i dane uwierzytelniające
+
+### Bluetooth 6.0
+
+| Parametr | Wartość |
+|----------|---------|
+| Wersja | **Bluetooth 6.0** |
+| Klasa urządzenia | **Class 1/2** |
+| BLE | Tak (BLE Audio 5.3) |
+| Zasięg | Zwiększony vs. poprzednia generacja |
+
+**Parowanie urządzeń Bluetooth:**
+
+1. Przejdź do **Ustawienia → Podłączone urządzenia → Sparuj nowe urządzenie**
+2. Włącz tryb parowania na urządzeniu docelowym
+3. Wybierz urządzenie z listy
+4. Potwierdź kod parowania (jeśli wymagany)
+
+> Parowanie ze skanerami Bluetooth (RS5100, DS2278 itp.) możliwe także przez NFC.
+
+### NFC / HF RFID
+
+TC701 posiada moduł **NFC/HF RFID** (antena na pleckach urządzenia):
+
+| Parametr | Wartość |
+|----------|---------|
+| Częstotliwość | **13,56 MHz** |
+| Standardy | ISO/IEC 14443 Type A i B, FeliCa, ISO/IEC 15693 |
+
+**Tryby pracy NFC:**
+
+| Tryb | Opis |
+|------|------|
+| **Reader Mode** | Odczyt i zapis znaczników NFC/RFID |
+| **Card Emulation** | Urządzenie emuluje kartę NFC (kontrola dostępu, płatności) |
+| **ECP Polling** | Enhanced Contactless Polling – kompatybilność z Apple VAS |
+
+### 5G / WWAN (opcja)
+
+W konfiguracjach z modułem WWAN, TC701 obsługuje najnowszy standard **5G Release 17**:
+
+| Parametr | Wartość |
+|----------|---------|
+| Standard | **5G Release 17 Gen 3** |
+| Pasma | Sub-6, NSA/SA |
+| Dual SIM | Tak (Dual SIM/Dual Standby) |
+| Agregacja | Do 3DL, 2UL |
+| VoNR/VoLTE | Tak, HD Voice |
+| Prywatne sieci | 5G i CBRS |
+| eSIM | Tak |
+
+### Lokalizacja GPS
+
+TC701 obsługuje **triple-band GNSS** – precyzyjną lokalizację:
+
+- GPS, GLONASS, Galileo, BeiDou, QZSS
+- Precyzyjne pozycjonowanie w trudnych warunkach
+
+### Miracast / Cast
+
+TC701 obsługuje bezprzewodowe przesyłanie obrazu (Miracast) na zewnętrzne wyświetlacze.
+`
+      },
+      {
+        title: '7. Kamera i multimedia',
+        content: `
+### Kamera tylna 50 MP
+
+TC701 wyposażono w kamerę tylną **50 megapikseli** z autofokusem fazowym (PDAF). Wybrane konfiguracje SKU posiadają dodatkową kamerę **ultrawide 13 MP z sensorem iTOF**.
+
+**Rozmiary zdjęć (kamera tylna):**
+
+| Rozmiar | Rozdzielczość |
+|---------|---------------|
+| **50M** | Maks. rozdzielczość 50 megapikseli |
+| 12.5M | Domyślny rozmiar |
+| 8M, 5M | Mniejsze rozmiary |
+| 720p, WVGA, VGA, QVGA | Formaty wideo/niskiej rozdzielczości |
+
+**Tryby wideo (kamera tylna):**
+
+| Tryb | Opis |
+|------|------|
+| **4K UHD** | Najwyższa jakość |
+| HD 1080p | Domyślny tryb wideo |
+| HD 720p, SD 480p, VGA, CIF, QVGA | Niższe rozdzielczości |
+
+**Funkcje kamery AI (Enterprise AI Camera):**
+- **Dirty Lens Detection** – automatyczne wykrywanie brudnego obiektywu
+- **Blur Detection** – powiadomienie o rozmazanym zdjęciu
+- **Privacy Blur** – automatyczne rozmywanie twarzy (RODO)
+- **Watermark** – znak wodny z datą i godziną
+- **Face Detection** – wykrywanie twarzy
+- **Google Lens** – rozpoznawanie obiektów i tekstu
+- **QR Code Mode** – szybki tryb skanowania QR kamerą
+- **MFNR** – Multi-Frame Noise Reduction
+
+### Kamera ultrawide 13 MP (opcja)
+
+| Parametr | Wartość |
+|----------|---------|
+| Rozdzielczość | 13 MP z autofokusem |
+| Zasięg ostrości | 5 cm do nieskończoności |
+| Zastosowanie | Fotografowanie regałów, dużych przesyłek, dokumentacja |
+
+### Kamera przednia 8 MP
+
+| Parametr | Wartość |
+|----------|---------|
+| Rozdzielczość | 8 MP |
+| Zastosowanie | Wideokonferencje, selfie, kontrola tożsamości |
+
+### Audio
+
+TC701 **nie posiada gniazda audio 3,5 mm**. Dźwięk odtwarzany jest przez:
+
+| Źródło audio | Opis |
+|--------------|------|
+| **Głośnik słuchawkowy** | Przód urządzenia (góra) – tryb słuchawki do rozmów |
+| **Głośnik zestawu głośnomówiącego** | Dół urządzenia – tryb głośnomówiący |
+| **Zestaw słuchawkowy USB-C** | Przewodowy z przyciskiem PTT |
+| **Zestaw Bluetooth** | HS3100 i inne – bezprzewodowe |
+
+> **Ważne:** Brak gniazda 3,5 mm jack! Słuchawki przewodowe wyłącznie przez złącze USB-C.
+`
+      },
+      {
+        title: '8. Ustawienia i konfiguracja',
+        content: `
+### Preinstalowane aplikacje Zebra
+
+TC701 zawiera następujące aplikacje fabryczne:
+
+| Aplikacja | Funkcja |
+|-----------|---------|
+| **Battery Manager** | Monitorowanie stanu baterii, cykli ładowania, diagnostyka PowerPrecision Plus |
+| **DataWedge** | Zaawansowana konfiguracja skanera – profile, dekodery, wyjścia danych |
+| **DWDemo** | Aplikacja demonstracyjna do testowania skanowania kodów |
+| **StageNow** | Masowe wdrażanie konfiguracji przez kody QR lub NFC |
+| **RxLogger** | Zaawansowane logowanie diagnostyczne do rozwiązywania problemów |
+| **License Manager** | Zarządzanie licencjami oprogramowania Zebra |
+| **Wireless Analyzer** | Analiza sieci Wi-Fi – siła sygnału, kanały, zakłócenia |
+| **Zebra Bluetooth Settings** | Zaawansowane ustawienia Bluetooth |
+| **Zebra Data Services** | Usługi danych analitycznych Zebra |
+| **Zebra Showcase** | Demonstracja możliwości urządzenia |
+| **DisplayLink Presenter** | Bezprzewodowa prezentacja na zewnętrznym ekranie |
+
+### Zebra DNA — pakiet oprogramowania
+
+TC701 zawiera pełny pakiet **Zebra DNA**:
+
+| Narzędzie | Funkcja |
+|-----------|---------|
+| **StageNow** | Masowe wdrażanie konfiguracji |
+| **Identity Guardian** | Rozpoznawanie twarzy (wymaga licencji) |
+| **Device Guardian** | Lokalizacja zagubionych urządzeń (wymaga licencji) |
+| **LifeGuard for Android** | Regularne aktualizacje bezpieczeństwa |
+| **Wireless Workstation Connect** | Tryb stacji roboczej z ZEC500 |
+| **Push-to-Talk** | Komunikacja głosowa przez Wi-Fi/5G |
+| **Enterprise Home Screen** | Kontrolowany interfejs użytkownika |
+
+### Bezpieczeństwo
+
+| Funkcja | Opis |
+|---------|------|
+| **Secure Element** | Android StrongBox |
+| **FIPS 140-2** | ISO 19790 – walidowany |
+| **Common Criteria** | ISO 15408 – certyfikowany |
+| **Secure Boot** | Weryfikacja integralności systemu |
+| **Verified Boot** | Ochrona przed modyfikacją OS |
+
+### Zarządzanie urządzeniem (MDM/EMM)
+
+- **Zebra OEMConfig** – pełna konfiguracja urządzenia przez EMM
+- **StageNow** – szybki provisioning przez kody kreskowe lub NFC
+- **EMDK for Android** – narzędzia deweloperskie
+- **GMS Restricted Mode** – możliwość wyłączenia usług Google
+
+### Opcje deweloperskie
+
+1. Przejdź do **Ustawienia → Informacje o telefonie**
+2. Dotknij **Numer kompilacji 7 razy**
+3. Wróć → **Ustawienia → System → Opcje deweloperskie**
+4. Włącz **Debugowanie USB** aby połączyć z komputerem przez ADB
+
+### Aktualizacje systemu
+
+| Metoda | Opis |
+|--------|------|
+| **USB Drive** | Tryb recovery → zainstaluj aktualizację |
+| **ADB** | Przez połączenie USB-C (adb sideload) |
+| **microSD** | Skopiuj paczkę na kartę → recovery → install from SD |
+| **MDM** | Zdalne wdrożenie przez platformę zarządzania |
+`
+      },
+      {
+        title: '9. Czyszczenie i konserwacja',
+        content: `
+### Codzienna konserwacja
+
+Aby zapewnić długą żywotność urządzenia TC701:
+
+1. **Ekran AMOLED** – przecieraj zatwierdzoną chusteczką alkoholową; uważaj aby płyn nie gromadził się przy krawędziach; wycieraj do sucha miękką, niepylącą ściereczką
+2. **Okno skanera i kamery** – czyść chusteczką do soczewek; brud obniża jakość skanowania i zdjęć
+3. **Styki baterii** – czyść wacikiem nasączonym alkoholem izopropylowym; pocieraj styki na baterii i w urządzeniu; powtórz min. 3 razy; osusz suchym wacikiem
+4. **Obudowa** – wycieraj zatwierdzoną chusteczką alkoholową
+5. **Styki stacji dokującej** – czyść wacikiem z alkoholem; odczekaj **10-30 minut** do wyschnięcia przed podłączeniem zasilania
+6. **Rowki prowadzące baterii** – czyść wacikiem nasączonym alkoholem, osusz
+
+### Zatwierdzone środki czyszczące
+
+| Środek | Dozwolony |
+|--------|-----------|
+| Alkohol izopropylowy | ✅ Tak |
+| Podchloryn sodu (wybielacz) | ✅ Tak (z rękawiczkami, zmyj resztki alkoholem) |
+| Nadtlenek wodoru | ✅ Tak |
+| Chlorek amonu | ✅ Tak |
+| Łagodne mydło do naczyń | ✅ Tak |
+| Rozpuszczalniki (aceton, benzen) | ❌ NIE |
+| Środki ścierne | ❌ NIE |
+| Etanoloamina (np. w żelach antybakteryjnych) | ❌ NIE |
+| Rękawiczki winylowe z ftalanami | ❌ NIE |
+
+> **Ważne:** Po czyszczeniu środkami na bazie wybielacza, metalowe powierzchnie mogą ulegać korozji. Natychmiast zmyj resztki alkoholem.
+
+### Procedura czyszczenia
+
+1. **Wyłącz urządzenie** i/lub odłącz od zasilania
+2. Użyj **gotowych chusteczek** nasączonych zatwierdzonym środkiem lub **zwilżonej** (nie mokrej) miękkiej ściereczki
+3. **Nigdy nie rozpylaj** środka bezpośrednio na urządzenie
+4. Użyj zwilżonego wacika do czyszczenia trudno dostępnych miejsc
+5. **Nie pozwól** aby płyn się gromadził
+6. Poczekaj aż urządzenie **całkowicie wyschnie** przed ponownym użyciem
+7. Upewnij się, że styki elektryczne są suche przed podłączeniem zasilania
+
+### Zapobieganie retencji obrazu (AMOLED)
+
+Ekran AMOLED może być podatny na **retencję obrazu** (burn-in). Aby temu zapobiec:
+
+- Ustaw automatyczne wygaszanie ekranu po kilku minutach nieaktywności
+- Zmieniaj tapetę okresowo
+- Wyłączaj ekran gdy urządzenie nie jest używane
+- Użyj wygaszacza ekranu (czarne tło, mały ruchomy element)
+- Unikaj wyświetlania statycznych elementów o wysokim kontraście przez dłuższy czas
+`
+      },
+      {
+        title: '10. Rozwiązywanie problemów',
+        content: `
+### Resety urządzenia
+
+| Typ resetu | Skutek | Jak wykonać |
+|------------|--------|-------------|
+| **Miękki reset (Soft)** | Restart systemu, dane zachowane | Przytrzymaj **Power** → dotknij **"Uruchom ponownie"** |
+| **Twardy reset (Hard)** | Wymuszony restart (gdy urządzenie nie reaguje) | Jednocześnie naciśnij **Power + lewy skan + Volume Up** przez min. **4 sekundy** → zwolnij gdy ekran zgaśnie |
+| **Enterprise Reset** | Kasuje /data i /sdcard, **zachowuje** folder /enterprise | **Ustawienia → System → Opcje resetowania → Wymaż wszystkie dane** → dotknij 2× |
+| **Reset fabryczny (Factory)** | Przywraca obraz fabryczny, **KASUJE WSZYSTKO** | Przez microSD, ADB lub recovery mode |
+
+> **Uwaga:** Enterprise Reset zachowuje konfigurację firmową z folderu /enterprise. Factory Reset kasuje również ten folder!
+
+### Wejście w tryb Android Recovery (ręcznie)
+
+1. Przytrzymaj przycisk **Power** → dotknij **"Uruchom ponownie"**
+2. Natychmiast po restarcie przytrzymaj przycisk **PTT** aż urządzenie zawibruje
+3. Pojawi się ekran **System Recovery**
+4. Nawiguj przyciskami **Volume Up/Down**, potwierdź przyciskiem **Power**
+
+### Najczęstsze problemy i rozwiązania
+
+#### Urządzenie nie włącza się
+
+| Problem | Przyczyna | Rozwiązanie |
+|---------|-----------|-------------|
+| Nie włącza się po włożeniu baterii | Przycisk Power nie naciśnięty | Naciśnij przycisk **Power** |
+| Nie włącza się mimo naciśnięcia Power | Bateria rozładowana | Naładuj lub wymień baterię |
+| Nie włącza się mimo naciśnięcia Power | Bateria nieprawidłowo włożona | Wyjmij i włóż baterię prawidłowo |
+| Nie włącza się mimo naciśnięcia Power | Awaria systemu | Wykonaj **twardy reset** (Power + lewy skan + Volume Up, 4s) |
+
+#### Bateria się nie ładuje
+
+| Przyczyna | Rozwiązanie |
+|-----------|-------------|
+| Bateria uszkodzona | Wymień baterię. Jeśli problem nie ustąpi – wykonaj reset |
+| Urządzenie wyjęte ze stacji w trakcie ładowania | Włóż urządzenie z powrotem do stacji |
+| Temperatura baterii poza zakresem | Bateria nie ładuje się poniżej **5°C** i powyżej **40°C** |
+
+#### Ekran AMOLED nieczytelny
+
+| Przyczyna | Rozwiązanie |
+|-----------|-------------|
+| Urządzenie wyłączone | Naciśnij przycisk Power |
+| Zbyt niska jasność ekranu | Zwiększ jasność w ustawieniach |
+| Silne światło słoneczne | Ustaw jasność na maksimum (1500 nitów) lub włącz tryb automatyczny |
+
+#### Skaner nie odczytuje kodów
+
+| Przyczyna | Rozwiązanie |
+|-----------|-------------|
+| Aplikacja skanująca nie załadowana | Załaduj aplikację lub włącz DataWedge |
+| Kod kreskowy nieczytelny | Upewnij się, że kod nie jest uszkodzony/wyblakły |
+| Niewłaściwa odległość | Ustaw urządzenie w prawidłowym zasięgu skanowania |
+| Symbologia nie włączona | Włącz odpowiednią symbologię w DataWedge |
+| Bateria słaba | Sprawdź poziom baterii, naładuj urządzenie |
+
+#### RFID nie odczytuje tagów
+
+| Przyczyna | Rozwiązanie |
+|-----------|-------------|
+| Tag poza zasięgiem | Zbliż urządzenie (maks. 2 m) |
+| Tag uszkodzony lub zablokowany | Przetestuj z innym tagiem |
+| Aplikacja RFID nie uruchomiona | Uruchom aplikację obsługującą RFID |
+| Zakłócenia metalowe | Oddal urządzenie od dużych metalowych powierzchni |
+
+#### Problemy z Wi-Fi
+
+| Przyczyna | Rozwiązanie |
+|-----------|-------------|
+| Radio Wi-Fi wyłączone | Włącz Wi-Fi w ustawieniach |
+| Poza zasięgiem punktu dostępowego | Zbliż się do punktu dostępowego |
+
+#### Problemy z Bluetooth
+
+| Przyczyna | Rozwiązanie |
+|-----------|-------------|
+| Radio Bluetooth wyłączone | Włącz Bluetooth w ustawieniach |
+| Poza zasięgiem | Zbliż się do urządzenia Bluetooth |
+
+#### Problemy z 5G/WWAN
+
+| Przyczyna | Rozwiązanie |
+|-----------|-------------|
+| Słaby zasięg sieci | Przejdź w miejsce z lepszym zasięgiem |
+| APN nieprawidłowo skonfigurowany | Sprawdź konfigurację APN |
+| Karta SIM nieprawidłowo zainstalowana | Wyjmij i ponownie zainstaluj kartę SIM |
+
+> **Uwaga:** Przed Enterprise Reset lub Factory Reset wykonaj kopię zapasową ważnych danych!
+`
+      },
+      {
+        title: '11. Akcesoria i ekosystem',
+        content: `
+### Stacje dokujące ShareCradle
+
+TC701 korzysta z nowej generacji stacji **ShareCradle** z większą konfigurowalnością i szybszym ładowaniem:
+
+| Typ | Opis |
+|-----|------|
+| **Stacja 1-slot z Ethernet** | Ładowanie + połączenie LAN |
+| **Stacja 1-slot szybkie ładowanie** | Szybkie ładowanie jednego urządzenia |
+| **Stacja 2-slot** | Szybkie ładowanie 2 urządzeń |
+| **Stacja 5-slot** | Szybkie ładowanie 5 urządzeń |
+| **Stacja 5-slot z Ethernet** | 5 urządzeń + LAN |
+| **Stacja 10-slot** | Ładowanie do 10 urządzeń |
+| **Ładowarka baterii 4-slot** | Ładowanie 4 zapasowych baterii |
+
+> Istniejące stacje ShareCradle z poprzednich generacji TC7 działają z **adapterami/shimsami**.
+
+### Stacja robocza mobilna
+
+- **ZEC500 Enterprise Computer** z aplikacją **Wireless Workstation Connect**
+- Bezprzewodowe połączenie TC701 z dużym monitorem
+- Natychmiastowe przełączanie między trybem mobilnym a stacjonarnym
+
+### Ochrona i uchwyty
+
+| Akcesoria | Opis |
+|-----------|------|
+| **Osłona ochronna Rugged Boot** | 2-częściowa, zwiększa odporność na upadki |
+| **Pasek na rękę (Hand Strap)** | Bezpieczny chwyt podczas pracy |
+| **Folia ochronna na ekran** | Ochrona Gorilla Glass Victus |
+| **Miękkie etui (Soft Holster)** | Do noszenia na pasku |
+| **Uchwyt (Holder)** | Wersja rugged i standardowa |
+
+### Rysik i Trigger Handle
+
+| Akcesoria | Opis |
+|-----------|------|
+| **Rysik metalowy** | Stal nierdzewna/mosiądz, końcówka micro-knit, 5 cali |
+| **Elektroniczny uchwyt pistoletowy** | Forma pistoletu, wygodne skanowanie seryjeone |
+
+### Mocowanie na nadgarstek
+
+| Typ | Opis |
+|-----|------|
+| **Adapter Standard BOA** | Mocowanie na nadgarstek – standardowy rozmiar |
+| **Adapter Extended BOA** | Mocowanie na nadgarstek – rozszerzony rozmiar |
+
+### Zestawy słuchawkowe
+
+| Typ | Opis |
+|-----|------|
+| **Przewodowy USB-C z PTT** | Zestaw słuchawkowy z przyciskiem Push-to-Talk |
+| **Bezprzewodowy Bluetooth HS3100** | Zestaw Bluetooth w różnych wariantach |
+
+> **Wskazówka:** W przypadku intensywnego użytkowania polecamy zakup **2 baterii** na zmianę – jedna w urządzeniu, druga na ładowarce.
+`
+      },
+      {
+        title: '12. Najczęściej zadawane pytania (FAQ)',
+        content: `
+### Jak zresetować Zebra TC701?
+
+**Odpowiedź:** TC701 oferuje **4 typy resetów**:
+- **Miękki reset** – przytrzymaj Power → "Uruchom ponownie"
+- **Twardy reset** – jednocześnie naciśnij **Power + lewy skan + Volume Up** przez **4 sekundy** (gdy urządzenie nie reaguje)
+- **Enterprise Reset** – Ustawienia → System → Opcje resetowania → Wymaż wszystkie dane (zachowuje folder /enterprise)
+- **Factory Reset** – przez microSD lub ADB – **kasuje WSZYSTKO** łącznie z folderem /enterprise
+
+### Czy Zebra TC701 jest wodoodporny?
+
+**Odpowiedź:** Tak, Zebra TC701 posiada certyfikat **IP68 + IP65** i spełnia normę **MIL-STD-810H**. Wytrzymuje upadki z **3,66 m (12 ft) na beton** w temperaturze pokojowej i 2,44 m (8 ft) w pełnym zakresie temperatur. Przeszedł **3500 cykli tumble** z 1 m – o 75% więcej niż poprzednia generacja.
+
+### Czym TC701 różni się od TC501?
+
+**Odpowiedź:** TC701 to wersja **ultra-rugged** – posiada wyświetlacz **AMOLED** (vs LCD w TC501) o jasności 1500 nitów ze szkłem Gorilla Glass Victus, wytrzymuje upadki z **3,66 m** (vs 2,4 m w TC501), posiada certyfikat szoku termicznego i pracuje w temperaturach od **-20°C**. Idealny do chłodni, centrów dystrybucyjnych i pracy na zewnątrz.
+
+### Jakie pasma Wi-Fi obsługuje TC701?
+
+**Odpowiedź:** TC701 obsługuje **Wi-Fi 7 (802.11be)** w pasmach **2,4 GHz, 5 GHz i 6 GHz** z prędkością do **5764 Mbps**. Obsługuje Multi-Link Operation (MLO) i zabezpieczenia WPA3-Enterprise 192-bit.
+
+### Czy TC701 ma wbudowany RFID?
+
+**Odpowiedź:** Tak! TC701 posiada **zintegrowany czytnik UHF RFID** krótkiego zasięgu (do 2 m), odczytujący ponad **200 tagów na sekundę**. Obsługuje standardy EPC Class 1 Gen2 i EPC Gen 2 V2. Dodatkowo posiada moduł NFC/HF RFID (13,56 MHz).
+
+### Jaka jest rozdzielczość kamery w TC701?
+
+**Odpowiedź:** Kamera tylna ma rozdzielczość **50 MP** z autofokusem PDAF. Nagrywanie wideo do **4K UHD**. Kamera przednia to **8 MP**. Wybrane SKU posiadają dodatkową kamerę **ultrawide 13 MP** z sensorem iTOF. Funkcje AI Camera: wykrywanie brudnej soczewki, rozmycie twarzy (RODO), znak wodny.
+
+### Ile trwa ładowanie baterii TC701?
+
+**Odpowiedź:** Bateria TC701 ładuje się od 0 do **70% w ~45 minut** (szybkie ładowanie). Dostępne 3 typy baterii: standardowa (5000 mAh), rozszerzona (7240 mAh) i z ładowaniem bezprzewodowym Qi. Funkcja **Hot Swap** pozwala wymienić baterię bez wyłączania urządzenia (30s Wi-Fi/5G, 60s pamięć).
+
+### Czy TC701 obsługuje 5G?
+
+**Odpowiedź:** Tak, TC701 obsługuje **5G Release 17 Gen 3** w wybranych konfiguracjach z modułem WWAN. Obsługuje prywatne sieci 5G, CBRS, Dual SIM/Dual Standby, VoNR i VoLTE z HD Voice.
+
+### Czy TC701 ma gniazdo słuchawkowe 3,5 mm?
+
+**Odpowiedź:** **NIE.** TC701 nie posiada gniazda audio 3,5 mm. Słuchawki podłącza się przez **USB-C** lub **Bluetooth** (np. HS3100).
+
+### Czy mogę używać TC701 w rękawiczkach?
+
+**Odpowiedź:** Tak! TC701 obsługuje **5 trybów dotyku**, w tym tryb rękawiczkowy. Obsługiwane rękawiczki: lateksowe, skórzane, bawełniane, wełniane. Ekran AMOLED działa doskonale w rękawiczkach nawet w niskich temperaturach.
+
+### Czy TC701 nadaje się do pracy w chłodni?
+
+**Odpowiedź:** Tak! TC701 jest zaprojektowany do pracy w temperaturach od **-20°C do +50°C**. Przeszedł testy **szoku termicznego** – gwarantuje niezawodną pracę przy przemieszczaniu się między strefami o skrajnie różnych temperaturach (np. chłodnia ↔ hala magazynowa). Ekran AMOLED o jasności 1500 nitów zapewnia doskonałą czytelność w każdych warunkach.
+
+### Jakie aplikacje AI można uruchamiać na TC701?
+
+**Odpowiedź:** Dzięki procesorowi Qualcomm Dragonwing Q-6690 z **dedykowanym silnikiem AI** i do **12 GB RAM**, TC701 obsługuje aplikacje AI na urządzeniu (on-device): automatyczne rozpoznawanie produktów, wykrywanie oszustw przy zwrotach, inteligentna weryfikacja dostaw, automatyczne zliczanie zapasów, rozpoznawanie uszkodzeń opakowań. Wspierane przez **Zebra AI Frontline Suite**.
+
+### Co oznaczają kolory diody LED ładowania?
+
+**Odpowiedź:**
+- **Wolno migająca bursztynowa** (1 mignięcie co 4 s) → trwa ładowanie
+- **Szybko migająca bursztynowa** (2 mignięcia/s) → błąd ładowania (temperatura lub za długo)
+- **Świeci na zielono** → ładowanie zakończone
+- **Świeci na czerwono** → bateria wymaga wymiany (EOL)
+- **Szybko migająca czerwona** → błąd ładowania
+`
+      }
+    ]
+  },
+
+  // =============================================
   // ZEBRA ET401 — Tablet Przemysłowy
   // Źródło: ET401 Skrócona instrukcja obsługi (MN-005280-01PL Rev. A)
   //         ET401 Quick Start Guide (MN-005280-02EN Rev. A)
