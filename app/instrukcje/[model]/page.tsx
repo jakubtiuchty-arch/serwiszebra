@@ -25,6 +25,9 @@ import {
 } from 'lucide-react'
 import { hasPolishManual } from '@/lib/polish-manuals'
 
+// ISR — odświeżaj dane co 60 sekund
+export const revalidate = 60
+
 // Supabase client (server-side)
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
