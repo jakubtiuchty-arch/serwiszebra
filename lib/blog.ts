@@ -948,8 +948,8 @@ Drugi najczęstszy problem po ekranie — ale w **80% przypadków** to konfigura
 | Wymiana modułu skanera SE4720 | 300-500 zł |
 | Wymiana modułu skanera SE55 | 400-600 zł |
 
-[DataWedge — konfiguracja skanera Zebra krok po kroku](/blog/datawedge-zebra-konfiguracja-skanera)
-[Skaner terminala Zebra nie działa — diagnostyka](/blog/skaner-terminala-zebra-nie-dziala-rozwiazania)
+DataWedge — konfiguracja skanera Zebra krok po kroku
+Skaner terminala Zebra nie działa — diagnostyka
 
 ---
 
@@ -971,7 +971,7 @@ Drugi najczęstszy problem po ekranie — ale w **80% przypadków** to konfigura
 | 4 | Twardy reset: **przytrzymaj Power 10 sekund** | 10 sek |
 | 5 | Spróbuj innej baterii (jeśli masz) | 1 min |
 | 6 | Spróbuj innej ładowarki/kabla | — |
-| 7 | Jeśli uruchamia się do logo → [Enterprise Reset](/blog/reset-fabryczny-terminal-zebra-instrukcja) | 5 min |
+| 7 | Jeśli uruchamia się do logo → Enterprise Reset | 5 min |
 
 **Jeśli nic nie pomaga:**
 - Brak LED ładowania → uszkodzony port USB-C lub płyta główna → **serwis**
@@ -987,7 +987,7 @@ Drugi najczęstszy problem po ekranie — ale w **80% przypadków** to konfigura
 | Naprawa płyty głównej | 500-900 zł (TC52) / 600-1100 zł (TC53) |
 | Wymiana wyświetlacza | 700-1200 zł |
 
-[Terminal Zebra nie włącza się — boot loop, fastboot, recovery](/blog/terminal-zebra-nie-wlacza-sie-fastboot-recovery)
+Terminal Zebra nie włącza się — boot loop, fastboot, recovery
 
 ---
 
@@ -1020,7 +1020,7 @@ WiFi to krytyczna funkcja terminala w magazynie. Częste rozłączenia = stracon
 - Antena WiFi fizycznie uszkodzona (upadek) → wymiana modułu → 300-500 zł
 - Problem z 1 urządzeniem przy działającej sieci → diagnostyka sprzętowa
 
-[Problemy WiFi/Bluetooth w terminalach Zebra — rozwiązania](/blog/terminal-zebra-problem-wifi-bluetooth-rozwiazania)
+Problemy WiFi/Bluetooth w terminalach Zebra — rozwiązania
 
 ---
 
@@ -1051,7 +1051,7 @@ WiFi to krytyczna funkcja terminala w magazynie. Częste rozłączenia = stracon
 - Zaktualizuj firmware do najnowszej wersji LifeGuard
 - Sprawdź logi: **RxLogger** (Settings → System → RxLogger) — szukaj wzorca przed crashem
 
-[Reset fabryczny terminala Zebra — instrukcja krok po kroku](/blog/reset-fabryczny-terminal-zebra-instrukcja)
+Reset fabryczny terminala Zebra — instrukcja krok po kroku
 
 ---
 
@@ -1146,12 +1146,12 @@ Jako **Autoryzowany Serwis Zebra** (Premier Partner + Authorized Repair Speciali
 ## Powiązane poradniki
 
 - [TOP 10 awarii terminali Zebra — diagnostyka i rozwiązania](/blog/najczestsze-awarie-terminali-zebra-top10)
-- [Terminal Zebra nie włącza się — boot loop, fastboot](/blog/terminal-zebra-nie-wlacza-sie-fastboot-recovery)
-- [Skaner terminala nie działa — rozwiązania](/blog/skaner-terminala-zebra-nie-dziala-rozwiazania)
+- Terminal Zebra nie włącza się — boot loop, fastboot
+- Skaner terminala nie działa — rozwiązania
 - [Bateria terminala Zebra — diagnostyka i wymiana](/blog/bateria-terminal-zebra-szybko-sie-rozladowuje-diagnostyka)
 - [Ekran dotykowy terminala nie reaguje — diagnostyka](/blog/ekran-dotykowy-terminal-zebra-nie-reaguje-diagnostyka)
-- [DataWedge — konfiguracja skanera Zebra](/blog/datawedge-zebra-konfiguracja-skanera)
-- [Reset fabryczny terminala Zebra — instrukcja](/blog/reset-fabryczny-terminal-zebra-instrukcja)
+- DataWedge — konfiguracja skanera Zebra
+- Reset fabryczny terminala Zebra — instrukcja
 - [TC52 vs TC53 vs TC501 — porównanie](/blog/zebra-tc52-vs-tc53-vs-tc501-porownanie-terminali)
 - [Zebra TC501 — specyfikacja, cena](/blog/zebra-tc501-specyfikacja-cena-gdzie-kupic)
 
@@ -1520,11 +1520,11 @@ Jako **Autoryzowany Serwis Zebra** (Premier Partner + Authorized Repair Speciali
 
 - [TOP 10 awarii terminali Zebra — diagnostyka i rozwiązania](/blog/najczestsze-awarie-terminali-zebra-top10)
 - [Serwis TC52/TC53 — diagnostyka i naprawa](/blog/serwis-terminala-zebra-tc52-tc53-diagnostyka-naprawa)
-- [Serwis MC3300/MC3400 — diagnostyka i naprawa](/blog/serwis-terminala-zebra-mc3300-mc3400-diagnostyka-naprawa)
-- [Terminal Zebra nie włącza się — boot loop, fastboot](/blog/terminal-zebra-nie-wlacza-sie-fastboot-recovery)
+- Serwis MC3300/MC3400 — diagnostyka i naprawa
+- Terminal Zebra nie włącza się — boot loop, fastboot
 - [Bateria terminala Zebra — diagnostyka i wymiana](/blog/bateria-terminal-zebra-szybko-sie-rozladowuje-diagnostyka)
 - [Akumulatory do terminali Zebra — sklep online](/sklep/akumulatory/terminale)
-- [Reset fabryczny terminala Zebra — instrukcja](/blog/reset-fabryczny-terminal-zebra-instrukcja)
+- Reset fabryczny terminala Zebra — instrukcja
 
 > **Częste problemy z ekranem?** Rozważ wymianę na nowy model z lepszą ochroną: [Zebra TC22](https://www.takma.com.pl/produkt/zebra-tc22) | [TC53](https://www.takma.com.pl/produkt/zebra-tc53) | [MC3400](https://www.takma.com.pl/produkt/zebra-mc3400) — sprawdź dostępność i ceny w [sklepie TAKMA](https://www.takma.com.pl/kategoria-produktu/terminale-mobilne/).
 
@@ -1875,9 +1875,9 @@ Jako **Autoryzowany Serwis Zebra** oferujemy:
 - [TOP 10 awarii terminali Zebra — diagnostyka i rozwiązania](/blog/najczestsze-awarie-terminali-zebra-top10)
 - [Serwis TC52/TC53 — diagnostyka i naprawa](/blog/serwis-terminala-zebra-tc52-tc53-diagnostyka-naprawa)
 - [Ekran dotykowy terminala nie reaguje — diagnostyka](/blog/ekran-dotykowy-terminal-zebra-nie-reaguje-diagnostyka)
-- [Terminal Zebra nie włącza się — boot loop, fastboot](/blog/terminal-zebra-nie-wlacza-sie-fastboot-recovery)
-- [Hot Swap baterii nie działa — MC3400, TC53](/blog/hot-swap-bateria-zebra-mc3400-tc53-nie-dziala)
-- [PowerPrecision+ — zarządzanie bateriami Zebra](/blog/powerprecision-zarzadzanie-bateriami-zebra-poradnik)
+- Terminal Zebra nie włącza się — boot loop, fastboot
+- Hot Swap baterii nie działa — MC3400, TC53
+- PowerPrecision+ — zarządzanie bateriami Zebra
 - [Akumulatory do terminali Zebra — sklep online](/sklep/akumulatory/terminale)
 
 > **Bateria nie trzyma mimo wymiany?** Jeśli terminal jest starszej generacji (TC21, TC52, MC3300x), rozważ przejście na nowszy model z lepszą baterią: [Zebra TC22](https://www.takma.com.pl/produkt/zebra-tc22) | [TC53](https://www.takma.com.pl/produkt/zebra-tc53) | [MC3400](https://www.takma.com.pl/produkt/zebra-mc3400) — zobacz [terminale mobilne w sklepie TAKMA](https://www.takma.com.pl/kategoria-produktu/terminale-mobilne/).
@@ -2185,11 +2185,11 @@ Jako **Autoryzowany Serwis Zebra** oferujemy:
 ## Powiązane poradniki
 
 - [TOP 10 awarii terminali Zebra — diagnostyka i rozwiązania](/blog/najczestsze-awarie-terminali-zebra-top10)
-- [Serwis MC3300/MC3400 — diagnostyka i naprawa](/blog/serwis-terminala-zebra-mc3300-mc3400-diagnostyka-naprawa)
-- [MC3300 vs MC3400 — porównanie i migracja](/blog/zebra-mc3300-vs-mc3400-porownanie-migracja)
-- [Skaner terminala Zebra nie działa — rozwiązania](/blog/skaner-terminala-zebra-nie-dziala-rozwiazania)
-- [DataWedge — konfiguracja skanera Zebra](/blog/datawedge-zebra-konfiguracja-skanera)
-- [Najlepszy terminal do magazynu 2026](/blog/najlepszy-terminal-zebra-do-magazynu-2026)
+- Serwis MC3300/MC3400 — diagnostyka i naprawa
+- MC3300 vs MC3400 — porównanie i migracja
+- Skaner terminala Zebra nie działa — rozwiązania
+- DataWedge — konfiguracja skanera Zebra
+- Najlepszy terminal do magazynu 2026
 
 [Serwis terminali Zebra — wszystkie usługi →](/serwis-terminali-zebra)
 
@@ -2670,8 +2670,8 @@ Najszybsza metoda:
 - [Serwis TC52/TC53 — diagnostyka i naprawa](/blog/serwis-terminala-zebra-tc52-tc53-diagnostyka-naprawa)
 - [Bateria terminala Zebra — diagnostyka](/blog/bateria-terminal-zebra-szybko-sie-rozladowuje-diagnostyka)
 - [Akumulatory do terminali Zebra — sklep online](/sklep/akumulatory/terminale)
-- [MC3300 vs MC3400 — porównanie i migracja](/blog/zebra-mc3300-vs-mc3400-porownanie-migracja)
-- [Najlepszy terminal do magazynu 2026](/blog/najlepszy-terminal-zebra-do-magazynu-2026)
+- MC3300 vs MC3400 — porównanie i migracja
+- Najlepszy terminal do magazynu 2026
 
 ### Kup terminal w sklepie TAKMA
 
@@ -3195,9 +3195,9 @@ MC3300x został **zastąpiony przez MC3400/MC3450**. Choć Zebra nie ogłosiła 
 - [Najczęstsze awarie terminali Zebra — TOP 10](/blog/najczestsze-awarie-terminali-zebra-top10)
 - [Klawiatura MC3300/MC3400 — diagnostyka i naprawa](/blog/klawiatura-terminal-zebra-mc3300-mc3400-problemy-naprawa)
 - [Serwis MC3400 — diagnostyka i naprawa](/blog/serwis-terminala-zebra-mc3400-diagnostyka-naprawa)
-- [MC3300 vs MC3400 — porównanie i migracja](/blog/zebra-mc3300-vs-mc3400-porownanie-migracja)
+- MC3300 vs MC3400 — porównanie i migracja
 - [Bateria terminala Zebra — diagnostyka](/blog/bateria-terminal-zebra-szybko-sie-rozladowuje-diagnostyka)
-- [Skaner terminala Zebra nie działa — rozwiązania](/blog/skaner-terminala-zebra-nie-dziala-rozwiazania)
+- Skaner terminala Zebra nie działa — rozwiązania
 
 ### Czas na nowy terminal?
 
@@ -3724,9 +3724,9 @@ Dla administratorów IT: Settings → RxLogger → Start. Logi zapisywane w /sdc
 - [Najczęstsze awarie terminali Zebra — TOP 10](/blog/najczestsze-awarie-terminali-zebra-top10)
 - [Serwis MC3300x — diagnostyka i naprawa](/blog/serwis-terminala-zebra-mc3300-mc3300x-diagnostyka-naprawa)
 - [Klawiatura MC3300/MC3400 — diagnostyka i naprawa](/blog/klawiatura-terminal-zebra-mc3300-mc3400-problemy-naprawa)
-- [MC3300 vs MC3400 — porównanie i migracja](/blog/zebra-mc3300-vs-mc3400-porownanie-migracja)
+- MC3300 vs MC3400 — porównanie i migracja
 - [Bateria terminala Zebra — diagnostyka](/blog/bateria-terminal-zebra-szybko-sie-rozladowuje-diagnostyka)
-- [Najlepszy terminal do magazynu 2026](/blog/najlepszy-terminal-zebra-do-magazynu-2026)
+- Najlepszy terminal do magazynu 2026
 
 ### Kup MC3400 w sklepie TAKMA
 
@@ -4802,7 +4802,7 @@ Zebra TC501 został zaprojektowany z myślą o konkretnych scenariuszach bizneso
 **Problem:** Weryfikacja leków wymaga skanowania bardzo małych kodów 2D DataMatrix na opakowaniach.
 **Rozwiązanie z TC501:** Skaner SR560 zoptymalizowany pod intensywne skanowanie małych kodów 2D. Wersja "Healthcare" (TC501-HC) odporna na środki dezynfekujące.
 
-> **📖 Powiązane:** [Jak wybrać terminal mobilny dla magazynu?](/blog/jak-wybrac-terminal-mobilny-dla-magazynu)
+> **📖 Powiązane:** Jak wybrać terminal mobilny dla magazynu?
 
 ---
 
@@ -5115,7 +5115,7 @@ Sama cena zakupu to tylko część kosztów. Oto analiza **TCO na 5 lat** dla fl
 
 > **Wniosek:** TC501 mimo wyższej ceny zakupu ma **najniższy TCO dzięki wbudowanemu RFID** i dłuższemu wsparciu Android.
 
-📖 **Powiązane:** [Ile kosztuje naprawa terminala Zebra? Cennik serwisu](/blog/cennik-naprawy-terminala-zebra)
+📖 **Powiązane:** Ile kosztuje naprawa terminala Zebra? Cennik serwisu
 
 ---
 
@@ -5281,7 +5281,7 @@ Jako **autoryzowany partner Zebra** oferujemy:
 ### Poradniki dla użytkowników terminali
 - [Terminal Zebra nie włącza się – Boot Loop, Fastboot](/blog/zebra-terminal-nie-wlacza-sie-fastboot-boot-loop)
 - [Skaner terminala Zebra nie działa](/blog/skaner-terminala-zebra-nie-dziala-diagnostyka-naprawa)
-- [Konfiguracja DataWedge krok po kroku](/blog/konfiguracja-datawedge-zebra-terminal-skaner)
+- Konfiguracja DataWedge krok po kroku
 - [Reset fabryczny terminala Zebra](/blog/reset-fabryczny-terminal-zebra-factory-enterprise)
 - [Kody błędów terminala Zebra – diody LED](/blog/kody-bledow-terminal-zebra-led-komunikaty)
 - [Instrukcje obsługi terminali Zebra](/instrukcje)
@@ -7696,7 +7696,7 @@ Skontaktuj się z nami - jako **Autoryzowany Serwis Zebra** oferujemy:
 - [Wymiana głowicy - kiedy i ile kosztuje](/blog/wymiana-glowicy-drukarki-zebra-kiedy-konieczna-ile-kosztuje)
 - [Kalibracja drukarki Zebra - poradnik](/blog/kalibracja-drukarki-zebra-poradnik-krok-po-kroku)
 - [Kontrakty serwisowe Zebra OneCare](/blog/kontrakty-serwisowe-zebra-onecare-przewodnik)
-- [Porównanie ZD220 vs ZD421 vs ZT411](/blog/porownanie-drukarek-zebra-zd220-zd421-zt411)
+- Porównanie ZD220 vs ZD421 vs ZT411
 `
   },
   {
@@ -34719,7 +34719,7 @@ Twój terminal TC58 wymaga naprawy? Skontaktuj się z serwisem TAKMA:
 4. **Naprawa 3-5 dni** z gwarancją 12 miesięcy
 5. **Wysyłka zwrotna** — terminal wraca sprawny
 
-> 💡 **Masz flotę TC58?** Zapytaj o [kontrakt serwisowy](/blog/kontrakty-serwisowe-zebra-onecare-serwis-autoryzowany) — stała stawka miesięczna, priorytetowa obsługa, terminal zastępczy.
+> 💡 **Masz flotę TC58?** Zapytaj o kontrakt serwisowy — stała stawka miesięczna, priorytetowa obsługa, terminal zastępczy.
 
 ## Powiązane artykuły
 
@@ -34730,7 +34730,7 @@ Twój terminal TC58 wymaga naprawy? Skontaktuj się z serwisem TAKMA:
 - [GPS w TC58 pokazuje złą lokalizację — jak naprawić](/blog/zebra-tc58-gps-pokazuje-zla-lokalizacje-naprawa)
 - [TC58 nie łączy się z siecią 4G/5G — ustawienia APN](/blog/zebra-tc58-siec-4g-5g-ustawienia-apn-polscy-operatorzy)
 - [TOP 10 awarii terminali Zebra — diagnostyka i rozwiązania](/blog/najczestsze-awarie-terminali-zebra-top10)
-- [Naprawa czy wymiana terminala Zebra — kiedy się opłaca?](/blog/naprawa-czy-wymiana-terminala-zebra-kiedy-sie-oplaca)
+- Naprawa czy wymiana terminala Zebra — kiedy się opłaca?
 - [Reset terminala Zebra — Factory vs Enterprise Reset](/blog/reset-fabryczny-terminal-zebra-factory-enterprise)
 
 [Serwis terminali Zebra — wszystkie usługi →](/serwis-terminali-zebra)
@@ -35187,7 +35187,7 @@ Twój skaner Zebra wymaga naprawy? Skontaktuj się z serwisem TAKMA:
 4. **Naprawa 2-5 dni** z gwarancją 12 miesięcy
 5. **Wysyłka zwrotna** — skaner wraca sprawny
 
-> 💡 **Masz flotę skanerów?** Zapytaj o [kontrakt serwisowy](/blog/kontrakty-serwisowe-zebra-onecare-serwis-autoryzowany) — stała stawka miesięczna, priorytetowa obsługa, skaner zastępczy.
+> 💡 **Masz flotę skanerów?** Zapytaj o kontrakt serwisowy — stała stawka miesięczna, priorytetowa obsługa, skaner zastępczy.
 
 ## Powiązane artykuły
 
@@ -35807,11 +35807,11 @@ Jeśli skaner jest po gwarancji i koszt naprawy jest nieopłacalny — rozważ z
 ## Powiązane artykuły
 
 - [Serwis skanerów Zebra — kompletny przewodnik diagnostyki i napraw](/blog/serwis-skanerow-zebra-diagnostyka-naprawa)
-- [Skaner Zebra nie skanuje — 10 przyczyn i rozwiązań](/blog/skaner-zebra-nie-skanuje-przyczyny-rozwiazania)
+- Skaner Zebra nie skanuje — 10 przyczyn i rozwiązań
 - [Porównanie skanerów Zebra — który model wybrać?](/blog/porownanie-skanerow-zebra-ktory-wybrac)
 - [Naprawa skanera Zebra — kiedy warto, kiedy wymienić?](/blog/naprawa-skanera-zebra-kiedy-warto-kiedy-wymienic)
 - [Bateria skanera Zebra — problemy z ładowaniem, żywotność i wymiana](/blog/bateria-skanera-zebra-ladowanie-zywotnosc-problemy)
-- [Skaner Zebra — konfiguracja, parowanie i reset Bluetooth](/blog/skaner-zebra-bluetooth-konfiguracja-parowanie-reset)
+- Skaner Zebra — konfiguracja, parowanie i reset Bluetooth
 - [Zebra DS3608 i DS3678 — skanery przemysłowe: problemy i naprawa](/blog/zebra-ds3608-ds3678-skaner-przemyslowy-naprawa)
 
 [Serwis skanerów Zebra — diagnostyka i naprawa →](/serwis-skanerow-zebra)
@@ -37543,7 +37543,7 @@ Skontaktuj się z nami — jako **Autoryzowany Serwis Zebra** oferujemy:
 - [Konfiguracja Ethernet — poradnik](/blog/konfiguracja-drukarki-zebra-ethernet-siec)
 - [Drukarka Zebra nie drukuje — przyczyny](/blog/drukarka-zebra-nie-drukuje-przyczyny-rozwiazania)
 - [Serwis drukarki Zebra ZT220/ZT230](/blog/serwis-drukarki-zebra-zt220-zt230-diagnostyka-naprawa)
-- [Porównanie ZD220 vs ZD421 vs ZT411](/blog/porownanie-drukarek-zebra-zd220-zd421-zt411)
+- Porównanie ZD220 vs ZD421 vs ZT411
 - [Kontrakty serwisowe Zebra OneCare](/blog/kontrakty-serwisowe-zebra-onecare-przewodnik)
 
 *Artykuł opracowany na podstawie oficjalnych instrukcji obsługi Zebra ZT610 i ZT620.*
