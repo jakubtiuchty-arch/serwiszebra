@@ -58,15 +58,23 @@ export async function generateMetadata({ params }: { params: { model: string } }
 
   return {
     title: `${polishManual.title} | Serwis Zebra`,
-    description: `Polska skrócona instrukcja obsługi ${manual.model}. Kalibracja, zakładanie etykiet, błędy LED, czyszczenie głowicy, reset fabryczny. Najważniejsze informacje po polsku. Pobierz PDF.`,
+    description: `Instrukcja obsługi ${manual.model} po polsku. Kalibracja, błędy LED, czyszczenie głowicy, reset fabryczny. Pobierz PDF.`,
     keywords: allKeywords,
     openGraph: {
       title: polishManual.title,
-      description: `Polska skrócona instrukcja obsługi ${manual.model}. Kalibracja, błędy, konserwacja. Pobierz PDF.`,
+      description: `Instrukcja obsługi ${manual.model} po polsku. Kalibracja, błędy, konserwacja. Pobierz PDF.`,
       url: `https://www.serwis-zebry.pl/instrukcje/zebra-${manual.model.toLowerCase()}/instrukcja-po-polsku`,
+      type: 'article',
+      siteName: 'TAKMA - Autoryzowany Serwis Zebra',
+      locale: 'pl_PL',
+      images: [{ url: 'https://www.serwis-zebry.pl/og-image.jpg', width: 1200, height: 630, alt: `Instrukcja ${manual.model} po polsku` }],
     },
     alternates: {
       canonical: `https://www.serwis-zebry.pl/instrukcje/zebra-${manual.model.toLowerCase()}/instrukcja-po-polsku`,
+      languages: {
+        'pl': `https://www.serwis-zebry.pl/instrukcje/zebra-${manual.model.toLowerCase()}/instrukcja-po-polsku`,
+        'x-default': `https://www.serwis-zebry.pl/instrukcje/zebra-${manual.model.toLowerCase()}/instrukcja-po-polsku`,
+      },
     },
   }
 }

@@ -153,7 +153,7 @@ export async function generateMetadata({ params }: { params: { model: string } }
 
   return {
     title: `Instrukcja obsługi ${manual.model} – Pobierz PDF | Serwis Zebra`,
-    description: `Darmowa instrukcja obsługi Zebra ${manual.model}. ${manual.description}. Pobierz PDF: Quick Start Guide, User Manual, programowanie ZPL. Dokumentacja po polsku i angielsku.`,
+    description: `Darmowa instrukcja obsługi Zebra ${manual.model}. Pobierz PDF: Quick Start, User Manual, ZPL. Po polsku i angielsku.`,
     keywords: [
       // Podstawowe frazy
       `instrukcja ${manual.model}`,
@@ -236,10 +236,17 @@ export async function generateMetadata({ params }: { params: { model: string } }
       title: `Instrukcja obsługi Zebra ${manual.model} – Pobierz PDF`,
       description: `Pobierz darmową instrukcję obsługi ${manual.model}. Quick Start, User Guide, ZPL Manual.`,
       url: `https://www.serwis-zebry.pl/instrukcje/zebra-${manual.model.toLowerCase()}`,
-      type: 'article'
+      type: 'article',
+      siteName: 'TAKMA - Autoryzowany Serwis Zebra',
+      locale: 'pl_PL',
+      images: [{ url: 'https://www.serwis-zebry.pl/og-image.jpg', width: 1200, height: 630, alt: `Instrukcja Zebra ${manual.model}` }],
     },
     alternates: {
-      canonical: `https://www.serwis-zebry.pl/instrukcje/zebra-${manual.model.toLowerCase()}`
+      canonical: `https://www.serwis-zebry.pl/instrukcje/zebra-${manual.model.toLowerCase()}`,
+      languages: {
+        'pl': `https://www.serwis-zebry.pl/instrukcje/zebra-${manual.model.toLowerCase()}`,
+        'x-default': `https://www.serwis-zebry.pl/instrukcje/zebra-${manual.model.toLowerCase()}`,
+      },
     }
   }
 }

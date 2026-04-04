@@ -2,6 +2,7 @@ import { MetadataRoute } from 'next'
 import { blogPosts } from '@/lib/blog'
 import { createClient } from '@supabase/supabase-js'
 import { getEnabledCategories, getCategoryPathForProduct } from '@/lib/shop-categories'
+import { hasPolishManual } from '@/lib/polish-manuals'
 
 // Lista miast dla Local SEO
 const cities = [
@@ -148,12 +149,25 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       .eq('is_active', true)
     
     if (manuals) {
-      manualPages = manuals.map((manual) => ({
-        url: `${baseUrl}/instrukcje/zebra-${manual.model.toLowerCase()}`,
-        lastModified: manual.updated_at ? new Date(manual.updated_at) : now,
-        changeFrequency: 'monthly' as const,
-        priority: 0.8,
-      }))
+      manualPages = manuals.flatMap((manual) => {
+        const modelLower = manual.model.toLowerCase()
+        const pages: MetadataRoute.Sitemap = [{
+          url: `${baseUrl}/instrukcje/zebra-${modelLower}`,
+          lastModified: manual.updated_at ? new Date(manual.updated_at) : now,
+          changeFrequency: 'monthly' as const,
+          priority: 0.8,
+        }]
+        // Dodaj stronę instrukcji po polsku jeśli istnieje
+        if (hasPolishManual(modelLower)) {
+          pages.push({
+            url: `${baseUrl}/instrukcje/zebra-${modelLower}/instrukcja-po-polsku`,
+            lastModified: manual.updated_at ? new Date(manual.updated_at) : now,
+            changeFrequency: 'monthly' as const,
+            priority: 0.7,
+          })
+        }
+        return pages
+      })
     }
   } catch (error) {
     console.error('Error fetching manuals for sitemap:', error)
