@@ -61,6 +61,7 @@ async function saveChatLog(data: {
   ragContextFound: boolean
   responseTimeMs: number
   modelUsed: string
+  userIp?: string
 }) {
   try {
     const { error } = await supabase.from('chat_logs').insert({
@@ -70,6 +71,7 @@ async function saveChatLog(data: {
       rag_context_found: data.ragContextFound,
       response_time_ms: data.responseTimeMs,
       model_used: data.modelUsed,
+      user_ip: data.userIp || null,
     })
 
     if (error) {
@@ -1107,7 +1109,13 @@ export async function POST(req: NextRequest) {
 
   try {
     const { messages, sessionId, attachments } = await req.json()
-    
+
+    // Pobierz IP użytkownika z headerów (Vercel/Cloudflare/proxy)
+    const userIp = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim()
+      || req.headers.get('x-real-ip')
+      || req.ip
+      || 'unknown'
+
     // Sprawdź czy są załączniki (obrazy/wideo)
     const hasAttachments = attachments && attachments.length > 0
     if (hasAttachments) {
@@ -1133,6 +1141,7 @@ export async function POST(req: NextRequest) {
         ragContextFound: false,
         responseTimeMs: Date.now() - startTime,
         modelUsed: 'pre-filter-rejected',
+        userIp,
       }).catch((err: any) => console.error('Błąd zapisywania logu:', err))
 
       return new Response(OFF_TOPIC_RESPONSE, {
@@ -1394,6 +1403,7 @@ ZRÓB DOKŁADNIE TAK - WKLEJ [BARCODE:...] W ODPOWIEDŹ!`
             ragContextFound,
             responseTimeMs: responseTime,
             modelUsed: `gemini-2.5-flash${hasAttachments ? ' (multimodal)' : ''} + vertex-ai-rag`,
+            userIp,
           }).catch((err: any) => console.error('Błąd zapisywania logu czatu:', err))
 
         } catch (error: any) {

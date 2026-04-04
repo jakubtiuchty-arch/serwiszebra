@@ -15,6 +15,7 @@ interface ChatLog {
   quality_rating: number | null
   is_correct: boolean | null
   human_feedback: string | null
+  user_ip: string | null
 }
 
 export default function ChatLogsPage() {
@@ -164,6 +165,11 @@ export default function ChatLogsPage() {
                     <span className="ml-2 text-xs text-gray-400">
                       Session: {log.session_id}
                     </span>
+                    {log.user_ip && (
+                      <span className="ml-2 text-xs text-gray-400">
+                        IP: {log.user_ip}
+                      </span>
+                    )}
                   </div>
                   <div className="flex items-center gap-2 text-xs">
                     <span className={`px-2 py-1 rounded ${log.rag_context_found ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-600'}`}>
