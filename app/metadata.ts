@@ -20,10 +20,10 @@ export const metadata: Metadata = {
     shortcut: '/favicon.ico',
   },
   title: {
-    default: 'Serwis Zebra – Autoryzowany Serwis Gwarancyjny i Pogwarancyjny | AI 24/7',
+    default: 'Serwis Zebra – Autoryzowany Serwis Drukarek i Terminali',
     template: '%s | Serwis Zebra'
   },
-  description: 'Autoryzowany serwis gwarancyjny i pogwarancyjny Zebra z diagnostyką AI 24/7 🤖 Jedyny taki w Polsce! Opisz problem – wycenę masz w 2 minuty. ✓ Panel klienta ✓ Kurier pod drzwi w 24h ✓ Wideoporadniki ✓ 25 lat doświadczenia. Drukarki, terminale, skanery.',
+  description: 'Autoryzowany serwis Zebra z diagnostyką AI 24/7. Wycena w 2 minuty, kurier 24h, panel klienta. Drukarki, terminale, skanery. 25 lat doświadczenia.',
   keywords: [
     'serwis zebra',
     'serwis drukarek zebra',

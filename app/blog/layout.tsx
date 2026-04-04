@@ -3,8 +3,8 @@ import { Metadata } from 'next'
 // Layout for blog pages - metadata only applies to /blog listing page
 // Individual blog posts ([slug]/page.tsx) have their own metadata and schemas
 export const metadata: Metadata = {
-  title: 'Blog o naprawach urządzeń Zebra – Poradniki i rozwiązania problemów',
-  description: 'Praktyczne poradniki napraw drukarek etykiet, terminali mobilnych i skanerów Zebra. Rozwiązania problemów, konfiguracja, konserwacja. Porady certyfikowanych techników z 25-letnim doświadczeniem.',
+  title: 'Blog – Poradniki napraw urządzeń Zebra',
+  description: 'Poradniki napraw drukarek, terminali i skanerów Zebra. Rozwiązania problemów, konfiguracja, konserwacja. Porady techników.',
   keywords: ['blog zebra', 'poradniki zebra', 'naprawa drukarki zebra', 'troubleshooting zebra', 'konfiguracja zebra'],
   alternates: {
     canonical: 'https://www.serwis-zebry.pl/blog',

@@ -7,12 +7,17 @@ export const metadata: Metadata = {
     canonical: 'https://www.serwis-zebry.pl/kontakt',
     languages: {
       'pl': 'https://www.serwis-zebry.pl/kontakt',
+      'x-default': 'https://www.serwis-zebry.pl/kontakt',
     },
   },
   openGraph: {
     title: 'Kontakt - Serwis Zebra',
     description: 'Skontaktuj się z autoryzowanym serwisem Zebra. Szybka odpowiedź i profesjonalna obsługa.',
     url: 'https://www.serwis-zebry.pl/kontakt',
+    type: 'website',
+    siteName: 'TAKMA - Autoryzowany Serwis Zebra',
+    locale: 'pl_PL',
+    images: [{ url: 'https://www.serwis-zebry.pl/og-image.jpg', width: 1200, height: 630, alt: 'Kontakt - Serwis Zebra' }],
   },
 }
 

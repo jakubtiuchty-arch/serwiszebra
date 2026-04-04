@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'FAQ – Serwis urządzeń Zebra | Pytania i odpowiedzi',
-  description: 'Odpowiedzi na najczęstsze pytania o serwis Zebra: czas naprawy, koszty wymiany głowicy, gwarancja, wysyłka kurierem, płatności. Drukarki, terminale, skanery Zebra.',
+  description: 'Najczęstsze pytania o serwis Zebra: czas naprawy, koszty, gwarancja, wysyłka kurierem. Drukarki, terminale, skanery.',
   keywords: ['faq serwis zebra', 'pytania serwis zebra', 'ile kosztuje naprawa zebra', 'czas naprawy zebra', 'gwarancja zebra'],
   alternates: {
     canonical: 'https://www.serwis-zebry.pl/faq',

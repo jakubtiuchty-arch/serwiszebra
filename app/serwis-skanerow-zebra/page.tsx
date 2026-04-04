@@ -21,7 +21,7 @@ import Footer from '@/components/Footer'
 
 export const metadata: Metadata = {
   title: 'Serwis Skanerów Zebra – Naprawa DS, LI, RS | Odbiór 24h',
-  description: 'Profesjonalny serwis skanerów kodów kreskowych Zebra: DS2208, DS3678, DS4608, LI2208. ✓ Naprawa modułów ✓ Wymiana okienek ✓ Problemy z parowaniem ✓ 12 mies. gwarancji ✓ Odbiór kurierem 24h.',
+  description: 'Serwis skanerów Zebra: DS2208, DS3678, DS4608, LI2208. Naprawa modułów, wymiana okienek, Bluetooth. 12 mies. gwarancji, kurier 24h.',
   keywords: [
     'serwis skanerów zebra', 'naprawa skanerów kodów kreskowych', 'naprawa skanerów zebra',
     'serwis ds2208', 'naprawa ds2208', 'serwis ds3608', 'naprawa ds3608',

@@ -19,8 +19,8 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 
 export const metadata: Metadata = {
-  title: 'Serwis Terminali Zebra – Naprawa TC, MC, Wymiana Ekranów | Odbiór 24h',
-  description: 'Profesjonalny serwis terminali mobilnych Zebra: TC21, TC52, TC58, MC33, MC93. ✓ Wymiana wyświetlaczy ✓ Naprawa skanerów ✓ Wymiana baterii ✓ 12 mies. gwarancji ✓ Odbiór kurierem 24h.',
+  title: 'Serwis Terminali Zebra – Naprawa TC, MC | 24h',
+  description: 'Serwis terminali Zebra: TC21, TC52, TC58, MC33, MC93. Wymiana ekranów, naprawa skanerów, baterie. 12 mies. gwarancji, kurier 24h.',
   keywords: [
     // Główne frazy
     'serwis terminali zebra',

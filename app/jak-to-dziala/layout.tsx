@@ -1,8 +1,8 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Jak działa Serwis Zebra? – Diagnoza AI, Panel Klienta, Kurier pod Drzwi',
-  description: 'Poznaj jedyny w Polsce serwis Zebra z diagnostyką AI 24/7, dedykowanym panelem klienta i odbiorem kurierem. Krok po kroku: zgłoszenie, diagnoza, wycena, naprawa, odbiór. Autoryzowany serwis drukarek, terminali i skanerów Zebra.',
+  title: 'Jak działa Serwis Zebra? – Diagnoza AI, Kurier 24h',
+  description: 'Serwis Zebra z diagnostyką AI 24/7 i panelem klienta. Krok po kroku: zgłoszenie, diagnoza, wycena, naprawa, odbiór kurierem.',
   keywords: [
     'jak działa serwis zebra',
     'serwis zebra online',
@@ -31,6 +31,8 @@ export const metadata: Metadata = {
     description: 'Jedyny w Polsce serwis z diagnostyką AI, panelem klienta i kurierem pod drzwi. Poznaj proces naprawy krok po kroku.',
     url: 'https://www.serwis-zebry.pl/jak-to-dziala',
     type: 'website',
+    siteName: 'TAKMA - Autoryzowany Serwis Zebra',
+    locale: 'pl_PL',
     images: [
       {
         url: 'https://www.serwis-zebry.pl/og-image-jak-to-dziala.jpg',

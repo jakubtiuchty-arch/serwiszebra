@@ -1,8 +1,8 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Poradniki wideo Zebra - Drukarki, terminale, skanery, tablety',
-  description: 'Darmowe poradniki wideo do urządzeń Zebra: drukarki ZD220, ZD421, ZT410, terminale TC52, TC72, skanery DS2208, DS3678, tablety ET40, ET45. Kalibracja, konfiguracja, naprawa krok po kroku od autoryzowanego serwisu.',
+  title: 'Poradniki wideo Zebra – Kalibracja, naprawa',
+  description: 'Darmowe poradniki wideo Zebra: kalibracja, wymiana głowicy, konfiguracja sieci. Drukarki, terminale, skanery krok po kroku.',
   keywords: [
     // Główne frazy
     'poradniki wideo zebra',
@@ -181,6 +181,8 @@ export const metadata: Metadata = {
     description: 'Darmowe poradniki wideo do drukarek Zebra. Kalibracja, wymiana głowicy, konfiguracja sieci. Instrukcje od autoryzowanego serwisu.',
     url: 'https://www.serwis-zebry.pl/poradniki-wideo',
     type: 'website',
+    siteName: 'TAKMA - Autoryzowany Serwis Zebra',
+    locale: 'pl_PL',
     images: [
       {
         url: 'https://www.serwis-zebry.pl/zd220_zd230_odlejak_yt.jpeg',

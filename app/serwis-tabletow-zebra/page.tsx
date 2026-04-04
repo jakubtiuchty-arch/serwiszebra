@@ -20,7 +20,7 @@ import Footer from '@/components/Footer'
 
 export const metadata: Metadata = {
   title: 'Serwis Tabletów Zebra – Naprawa ET40, ET45, L10 | Odbiór 24h',
-  description: 'Profesjonalny serwis tabletów przemysłowych Zebra: ET40, ET45, ET51, ET56, L10. ✓ Wymiana wyświetlaczy ✓ Naprawa baterii ✓ Serwis doków ✓ 12 mies. gwarancji ✓ Odbiór kurierem 24h.',
+  description: 'Serwis tabletów Zebra: ET40, ET45, ET51, ET56, L10. Wymiana wyświetlaczy, naprawa baterii, serwis doków. 12 mies. gwarancji.',
   keywords: [
     'serwis tabletów zebra', 'naprawa tabletów przemysłowych', 'naprawa tabletów zebra',
     'serwis et40', 'naprawa et40', 'tablet zebra et40', 'serwis et45', 'naprawa et45',

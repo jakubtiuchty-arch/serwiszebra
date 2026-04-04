@@ -1,8 +1,8 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Instrukcje obsługi Zebra PDF – Manuele, Quick Start, User Guide po polsku',
-  description: 'Darmowe instrukcje obsługi urządzeń Zebra po polsku i angielsku. Drukarki etykiet ZD420, ZD421, ZD620, ZT410, ZT420. Terminale TC21, TC52, MC3300. Skanery DS2208, DS3678. Pobierz PDF: Quick Start Guide, User Manual, ZPL Programming Guide, Service Manual.',
+  title: 'Instrukcje obsługi Zebra PDF – Pobierz za darmo',
+  description: 'Darmowe instrukcje obsługi Zebra po polsku. Drukarki ZD420, ZT410, terminale TC52, MC3300, skanery DS2208. Pobierz PDF.',
   keywords: [
     // Główne frazy
     'instrukcja obsługi zebra',
@@ -302,12 +302,14 @@ export const metadata: Metadata = {
     description: 'Kompletna baza instrukcji obsługi urządzeń Zebra. Drukarki ZD420, ZD421, terminale TC21, TC52, skanery DS2208. Quick Start, User Guide, ZPL Manual. Pobierz bezpłatnie.',
     url: 'https://www.serwis-zebry.pl/instrukcje',
     type: 'website',
+    siteName: 'TAKMA - Autoryzowany Serwis Zebra',
+    locale: 'pl_PL',
     images: [{
-      url: '/og-image-instrukcje.jpg',
+      url: 'https://www.serwis-zebry.pl/og-image-instrukcje.jpg',
       width: 1200,
       height: 630,
       alt: 'Instrukcje obsługi Zebra - baza PDF'
-    }]
+    }],
   },
   alternates: {
     canonical: 'https://www.serwis-zebry.pl/instrukcje',
