@@ -708,7 +708,7 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
         : product.product_type === 'akumulator' ? 'Akumulatory > Urządzenia Zebra'
         : 'Części zamienne Zebra',
       "model": product.device_model || undefined,
-      "dateModified": new Date().toISOString().split('T')[0],
+      "dateModified": new Date().toISOString(),
       "countryOfOrigin": {
         "@type": "Country",
         "name": "Chiny"
@@ -726,7 +726,7 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
           "@type": "Organization",
           "name": "TAKMA - Autoryzowany Serwis Zebra"
         },
-        "priceValidUntil": new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+        "priceValidUntil": new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toISOString(),
         "shippingDetails": {
           "@type": "OfferShippingDetails",
           "shippingRate": {

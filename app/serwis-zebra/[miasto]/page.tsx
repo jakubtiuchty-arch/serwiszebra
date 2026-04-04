@@ -28,6 +28,8 @@ const citiesData: Record<string, {
   metaDescription: string
   heroText: string
   introText: string
+  lat: number
+  lng: number
 }> = {
   'warszawa': {
     name: 'Warszawa',
@@ -38,7 +40,9 @@ const citiesData: Record<string, {
     metaTitle: 'Serwis Zebra Warszawa – Naprawa, Kurier 24h',
     metaDescription: 'Serwis Zebra w Warszawie. Kurier 24h, naprawa 2-5 dni, 12 mies. gwarancji, bezpłatna wycena. Drukarki, terminale, skanery.',
     heroText: 'Profesjonalny serwis urządzeń Zebra dla firm z Warszawy i okolic',
-    introText: 'Obsługujemy firmy z Warszawy i całego Mazowsza. Kurier odbierze Twoje urządzenie w ciągu 24 godzin – bez wychodzenia z biura.'
+    introText: 'Obsługujemy firmy z Warszawy i całego Mazowsza. Kurier odbierze Twoje urządzenie w ciągu 24 godzin – bez wychodzenia z biura.',
+    lat: 52.2297,
+    lng: 21.0122,
   },
   'krakow': {
     name: 'Kraków',
@@ -49,7 +53,9 @@ const citiesData: Record<string, {
     metaTitle: 'Serwis Zebra Kraków – Naprawa, Kurier 24h',
     metaDescription: 'Serwis Zebra w Krakowie. Kurier 24h, naprawa 2-5 dni, 12 mies. gwarancji, bezpłatna wycena. Drukarki, terminale, skanery.',
     heroText: 'Profesjonalny serwis urządzeń Zebra dla firm z Krakowa i okolic',
-    introText: 'Obsługujemy firmy z Krakowa i całej Małopolski. Kurier odbierze Twoje urządzenie w ciągu 24 godzin – bez wychodzenia z biura.'
+    introText: 'Obsługujemy firmy z Krakowa i całej Małopolski. Kurier odbierze Twoje urządzenie w ciągu 24 godzin – bez wychodzenia z biura.',
+    lat: 50.0647,
+    lng: 19.9450,
   },
   'wroclaw': {
     name: 'Wrocław',
@@ -60,7 +66,9 @@ const citiesData: Record<string, {
     metaTitle: 'Serwis Zebra Wrocław – Naprawa, Kurier 24-48h',
     metaDescription: 'Serwis Zebra we Wrocławiu. Kurier 24-48h, naprawa 2-5 dni, 12 mies. gwarancji, bezpłatna wycena. Drukarki, terminale, skanery.',
     heroText: 'Profesjonalny serwis urządzeń Zebra dla firm z Wrocławia i okolic',
-    introText: 'Obsługujemy firmy z Wrocławia i całego Dolnego Śląska. Kurier odbierze Twoje urządzenie w ciągu 24-48 godzin – bez wychodzenia z biura.'
+    introText: 'Obsługujemy firmy z Wrocławia i całego Dolnego Śląska. Kurier odbierze Twoje urządzenie w ciągu 24-48 godzin – bez wychodzenia z biura.',
+    lat: 51.1079,
+    lng: 17.0385,
   },
   'poznan': {
     name: 'Poznań',
@@ -71,7 +79,9 @@ const citiesData: Record<string, {
     metaTitle: 'Serwis Zebra Poznań – Naprawa, Kurier 24-48h',
     metaDescription: 'Serwis Zebra w Poznaniu. Kurier 24-48h, naprawa 2-5 dni, 12 mies. gwarancji, bezpłatna wycena. Drukarki, terminale, skanery.',
     heroText: 'Profesjonalny serwis urządzeń Zebra dla firm z Poznania i okolic',
-    introText: 'Obsługujemy firmy z Poznania i całej Wielkopolski. Kurier odbierze Twoje urządzenie w ciągu 24-48 godzin – bez wychodzenia z biura.'
+    introText: 'Obsługujemy firmy z Poznania i całej Wielkopolski. Kurier odbierze Twoje urządzenie w ciągu 24-48 godzin – bez wychodzenia z biura.',
+    lat: 52.4064,
+    lng: 16.9252,
   },
   'gdansk': {
     name: 'Gdańsk',
@@ -82,7 +92,9 @@ const citiesData: Record<string, {
     metaTitle: 'Serwis Zebra Gdańsk – Naprawa, Kurier 24-48h',
     metaDescription: 'Serwis Zebra w Gdańsku i Trójmieście. Kurier 24-48h, naprawa 2-5 dni, 12 mies. gwarancji. Drukarki, terminale, skanery.',
     heroText: 'Profesjonalny serwis urządzeń Zebra dla firm z Trójmiasta i okolic',
-    introText: 'Obsługujemy firmy z Gdańska, Gdyni, Sopotu i całego Pomorza. Kurier odbierze Twoje urządzenie w ciągu 24-48 godzin.'
+    introText: 'Obsługujemy firmy z Gdańska, Gdyni, Sopotu i całego Pomorza. Kurier odbierze Twoje urządzenie w ciągu 24-48 godzin.',
+    lat: 54.3520,
+    lng: 18.6466,
   },
   'katowice': {
     name: 'Katowice',
@@ -93,7 +105,9 @@ const citiesData: Record<string, {
     metaTitle: 'Serwis Zebra Katowice – Naprawa, Kurier 24h',
     metaDescription: 'Serwis Zebra na Śląsku. Kurier 24h, naprawa 2-5 dni, 12 mies. gwarancji. Drukarki, terminale, skanery.',
     heroText: 'Profesjonalny serwis urządzeń Zebra dla firm ze Śląska',
-    introText: 'Obsługujemy firmy z Katowic i całego Śląska. Kurier odbierze Twoje urządzenie w ciągu 24 godzin – bez wychodzenia z biura.'
+    introText: 'Obsługujemy firmy z Katowic i całego Śląska. Kurier odbierze Twoje urządzenie w ciągu 24 godzin – bez wychodzenia z biura.',
+    lat: 50.2649,
+    lng: 19.0238,
   },
   'lodz': {
     name: 'Łódź',
@@ -104,7 +118,9 @@ const citiesData: Record<string, {
     metaTitle: 'Serwis Zebra Łódź – Naprawa, Kurier 24h',
     metaDescription: 'Serwis Zebra w Łodzi. Kurier 24h, naprawa 2-5 dni, 12 mies. gwarancji, bezpłatna wycena. Drukarki, terminale, skanery.',
     heroText: 'Profesjonalny serwis urządzeń Zebra dla firm z Łodzi i okolic',
-    introText: 'Obsługujemy firmy z Łodzi i całego województwa łódzkiego. Kurier odbierze Twoje urządzenie w ciągu 24 godzin – bez wychodzenia z biura.'
+    introText: 'Obsługujemy firmy z Łodzi i całego województwa łódzkiego. Kurier odbierze Twoje urządzenie w ciągu 24 godzin – bez wychodzenia z biura.',
+    lat: 51.7592,
+    lng: 19.4560,
   },
   'szczecin': {
     name: 'Szczecin',
@@ -115,7 +131,9 @@ const citiesData: Record<string, {
     metaTitle: 'Serwis Zebra Szczecin – Naprawa, Kurier 24-48h',
     metaDescription: 'Serwis Zebra w Szczecinie. Kurier 24-48h, naprawa 2-5 dni, 12 mies. gwarancji, bezpłatna wycena. Drukarki, terminale, skanery.',
     heroText: 'Profesjonalny serwis urządzeń Zebra dla firm ze Szczecina i okolic',
-    introText: 'Obsługujemy firmy ze Szczecina i całego Pomorza Zachodniego. Kurier odbierze Twoje urządzenie w ciągu 24-48 godzin – bez wychodzenia z biura.'
+    introText: 'Obsługujemy firmy ze Szczecina i całego Pomorza Zachodniego. Kurier odbierze Twoje urządzenie w ciągu 24-48 godzin – bez wychodzenia z biura.',
+    lat: 53.4285,
+    lng: 14.5528,
   },
   'bydgoszcz': {
     name: 'Bydgoszcz',
@@ -126,7 +144,9 @@ const citiesData: Record<string, {
     metaTitle: 'Serwis Zebra Bydgoszcz – Naprawa, Kurier 24-48h',
     metaDescription: 'Serwis Zebra w Bydgoszczy. Kurier 24-48h, naprawa 2-5 dni, 12 mies. gwarancji, bezpłatna wycena. Drukarki, terminale, skanery.',
     heroText: 'Profesjonalny serwis urządzeń Zebra dla firm z Bydgoszczy i okolic',
-    introText: 'Obsługujemy firmy z Bydgoszczy, Torunia i całego Kujawsko-Pomorskiego. Kurier odbierze Twoje urządzenie w ciągu 24-48 godzin.'
+    introText: 'Obsługujemy firmy z Bydgoszczy, Torunia i całego Kujawsko-Pomorskiego. Kurier odbierze Twoje urządzenie w ciągu 24-48 godzin.',
+    lat: 53.1235,
+    lng: 18.0084,
   },
   'lublin': {
     name: 'Lublin',
@@ -137,7 +157,9 @@ const citiesData: Record<string, {
     metaTitle: 'Serwis Zebra Lublin – Naprawa, Kurier 24-48h',
     metaDescription: 'Serwis Zebra w Lublinie. Kurier 24-48h, naprawa 2-5 dni, 12 mies. gwarancji, bezpłatna wycena. Drukarki, terminale, skanery.',
     heroText: 'Profesjonalny serwis urządzeń Zebra dla firm z Lublina i okolic',
-    introText: 'Obsługujemy firmy z Lublina i całego województwa lubelskiego. Kurier odbierze Twoje urządzenie w ciągu 24-48 godzin – bez wychodzenia z biura.'
+    introText: 'Obsługujemy firmy z Lublina i całego województwa lubelskiego. Kurier odbierze Twoje urządzenie w ciągu 24-48 godzin – bez wychodzenia z biura.',
+    lat: 51.2465,
+    lng: 22.5684,
   },
   'bialystok': {
     name: 'Białystok',
@@ -148,7 +170,9 @@ const citiesData: Record<string, {
     metaTitle: 'Serwis Zebra Białystok – Naprawa, Kurier 24-48h',
     metaDescription: 'Serwis Zebra w Białymstoku. Kurier 24-48h, naprawa 2-5 dni, 12 mies. gwarancji, bezpłatna wycena. Drukarki, terminale, skanery.',
     heroText: 'Profesjonalny serwis urządzeń Zebra dla firm z Białegostoku i okolic',
-    introText: 'Obsługujemy firmy z Białegostoku i całego Podlasia. Kurier odbierze Twoje urządzenie w ciągu 24-48 godzin – bez wychodzenia z biura.'
+    introText: 'Obsługujemy firmy z Białegostoku i całego Podlasia. Kurier odbierze Twoje urządzenie w ciągu 24-48 godzin – bez wychodzenia z biura.',
+    lat: 53.1325,
+    lng: 23.1688,
   },
   'rzeszow': {
     name: 'Rzeszów',
@@ -159,7 +183,9 @@ const citiesData: Record<string, {
     metaTitle: 'Serwis Zebra Rzeszów – Naprawa, Kurier 24-48h',
     metaDescription: 'Serwis Zebra w Rzeszowie. Kurier 24-48h, naprawa 2-5 dni, 12 mies. gwarancji, bezpłatna wycena. Drukarki, terminale, skanery.',
     heroText: 'Profesjonalny serwis urządzeń Zebra dla firm z Rzeszowa i Doliny Lotniczej',
-    introText: 'Obsługujemy firmy z Rzeszowa, Doliny Lotniczej i całego Podkarpacia. Kurier odbierze Twoje urządzenie w ciągu 24-48 godzin.'
+    introText: 'Obsługujemy firmy z Rzeszowa, Doliny Lotniczej i całego Podkarpacia. Kurier odbierze Twoje urządzenie w ciągu 24-48 godzin.',
+    lat: 50.0412,
+    lng: 21.9991,
   },
   'torun': {
     name: 'Toruń',
@@ -170,7 +196,9 @@ const citiesData: Record<string, {
     metaTitle: 'Serwis Zebra Toruń – Naprawa, Kurier 24-48h',
     metaDescription: 'Serwis Zebra w Toruniu. Kurier 24-48h, naprawa 2-5 dni, 12 mies. gwarancji, bezpłatna wycena. Drukarki, terminale, skanery.',
     heroText: 'Profesjonalny serwis urządzeń Zebra dla firm z Torunia i okolic',
-    introText: 'Obsługujemy firmy z Torunia, Bydgoszczy i całego Kujawsko-Pomorskiego. Kurier odbierze Twoje urządzenie w ciągu 24-48 godzin.'
+    introText: 'Obsługujemy firmy z Torunia, Bydgoszczy i całego Kujawsko-Pomorskiego. Kurier odbierze Twoje urządzenie w ciągu 24-48 godzin.',
+    lat: 53.0138,
+    lng: 18.5984,
   },
   'kielce': {
     name: 'Kielce',
@@ -181,7 +209,9 @@ const citiesData: Record<string, {
     metaTitle: 'Serwis Zebra Kielce – Naprawa, Kurier 24-48h',
     metaDescription: 'Serwis Zebra w Kielcach. Kurier 24-48h, naprawa 2-5 dni, 12 mies. gwarancji, bezpłatna wycena. Drukarki, terminale, skanery.',
     heroText: 'Profesjonalny serwis urządzeń Zebra dla firm z Kielc i okolic',
-    introText: 'Obsługujemy firmy z Kielc i całego województwa świętokrzyskiego. Kurier odbierze Twoje urządzenie w ciągu 24-48 godzin – bez wychodzenia z biura.'
+    introText: 'Obsługujemy firmy z Kielc i całego województwa świętokrzyskiego. Kurier odbierze Twoje urządzenie w ciągu 24-48 godzin – bez wychodzenia z biura.',
+    lat: 50.8661,
+    lng: 20.6286,
   },
   'olsztyn': {
     name: 'Olsztyn',
@@ -192,7 +222,9 @@ const citiesData: Record<string, {
     metaTitle: 'Serwis Zebra Olsztyn – Naprawa, Kurier 24-48h',
     metaDescription: 'Serwis Zebra w Olsztynie. Kurier 24-48h, naprawa 2-5 dni, 12 mies. gwarancji, bezpłatna wycena. Drukarki, terminale, skanery.',
     heroText: 'Profesjonalny serwis urządzeń Zebra dla firm z Olsztyna i okolic',
-    introText: 'Obsługujemy firmy z Olsztyna i całego Warmii i Mazur. Kurier odbierze Twoje urządzenie w ciągu 24-48 godzin – bez wychodzenia z biura.'
+    introText: 'Obsługujemy firmy z Olsztyna i całego Warmii i Mazur. Kurier odbierze Twoje urządzenie w ciągu 24-48 godzin – bez wychodzenia z biura.',
+    lat: 53.7784,
+    lng: 20.4801,
   },
   'opole': {
     name: 'Opole',
@@ -203,7 +235,9 @@ const citiesData: Record<string, {
     metaTitle: 'Serwis Zebra Opole – Naprawa, Kurier 24-48h',
     metaDescription: 'Serwis Zebra w Opolu. Kurier 24-48h, naprawa 2-5 dni, 12 mies. gwarancji, bezpłatna wycena. Drukarki, terminale, skanery.',
     heroText: 'Profesjonalny serwis urządzeń Zebra dla firm z Opola i okolic',
-    introText: 'Obsługujemy firmy z Opola i całego Opolskiego. Kurier odbierze Twoje urządzenie w ciągu 24-48 godzin – bez wychodzenia z biura.'
+    introText: 'Obsługujemy firmy z Opola i całego Opolskiego. Kurier odbierze Twoje urządzenie w ciągu 24-48 godzin – bez wychodzenia z biura.',
+    lat: 50.6751,
+    lng: 17.9213,
   },
   'zielona-gora': {
     name: 'Zielona Góra',
@@ -214,7 +248,9 @@ const citiesData: Record<string, {
     metaTitle: 'Serwis Zebra Zielona Góra – Naprawa, Kurier 24-48h',
     metaDescription: 'Serwis Zebra w Zielonej Górze. Kurier 24-48h, naprawa 2-5 dni, 12 mies. gwarancji, bezpłatna wycena. Drukarki, terminale, skanery.',
     heroText: 'Profesjonalny serwis drukarek Zebra dla firm z Zielonej Góry i okolic',
-    introText: 'Obsługujemy firmy z Zielonej Góry, Gorzowa Wielkopolskiego i całego Lubuskiego. Kurier odbierze Twoje urządzenie w ciągu 24-48 godzin.'
+    introText: 'Obsługujemy firmy z Zielonej Góry, Gorzowa Wielkopolskiego i całego Lubuskiego. Kurier odbierze Twoje urządzenie w ciągu 24-48 godzin.',
+    lat: 51.9356,
+    lng: 15.5062,
   }
 }
 
@@ -357,9 +393,10 @@ export default function CityServicePage({ params }: { params: { miasto: string }
       '@type': 'GeoCircle',
       geoMidpoint: {
         '@type': 'GeoCoordinates',
-        name: city.name
+        latitude: city.lat,
+        longitude: city.lng,
       },
-      geoRadius: '100000'
+      geoRadius: 100000,
     },
     priceRange: '$$',
     openingHoursSpecification: {
