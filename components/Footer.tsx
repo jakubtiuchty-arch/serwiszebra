@@ -134,16 +134,24 @@ export default function Footer() {
               <h4 className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-gray-500 mb-3 sm:mb-5">Informacje</h4>
               <ul className="space-y-2 sm:space-y-3">
                 {[
-                  { href: '/blog', label: 'Blog' },
-                  { href: '/sterowniki', label: 'Sterowniki' },
-                  { href: '/faq', label: 'FAQ' },
-                  { href: '/o-nas', label: 'O nas' },
-                  { href: '/kontakt', label: 'Kontakt' },
+                  { href: '/blog', label: 'Blog', external: false },
+                  { href: '/sterowniki', label: 'Sterowniki', external: false },
+                  { href: '/faq', label: 'FAQ', external: false },
+                  { href: '/o-nas', label: 'O nas', external: false },
+                  { href: '/kontakt', label: 'Kontakt', external: false },
+                  { href: 'https://www.zt411.pl', label: 'Drukarka ZT411 →', external: true },
+                  { href: 'https://tc22.pl', label: 'Terminal TC22 →', external: true },
                 ].map((link) => (
                   <li key={link.href}>
-                    <Link href={link.href} className="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors duration-200">
-                      {link.label}
-                    </Link>
+                    {link.external ? (
+                      <a href={link.href} target="_blank" rel="noopener" className="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors duration-200">
+                        {link.label}
+                      </a>
+                    ) : (
+                      <Link href={link.href} className="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors duration-200">
+                        {link.label}
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>
