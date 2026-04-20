@@ -139,7 +139,7 @@ export default function Footer() {
                   { href: '/faq', label: 'FAQ', external: false },
                   { href: '/o-nas', label: 'O nas', external: false },
                   { href: '/kontakt', label: 'Kontakt', external: false },
-                  { href: 'https://www.zt411.pl', label: 'Drukarka ZT411 →', external: true },
+                  { href: 'https://zebrazt411.pl', label: 'Drukarka ZT411 →', external: true },
                   { href: 'https://tc22.pl', label: 'Terminal TC22 →', external: true },
                 ].map((link) => (
                   <li key={link.href}>
