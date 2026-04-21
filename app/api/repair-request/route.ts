@@ -169,6 +169,63 @@ export async function POST(request: NextRequest) {
 
     console.log('✅ Request created:', newRequest.id)
 
+    // 1b. Auto-rejestracja — utwórz konto jeśli nie istnieje
+    let generatedPassword: string | undefined
+    try {
+      // Sprawdź czy użytkownik już istnieje
+      const { data: existingUsers } = await supabase.auth.admin.listUsers()
+      const existingUser = existingUsers?.users?.find(
+        (u: any) => u.email?.toLowerCase() === validatedData.email.toLowerCase()
+      )
+
+      let userId: string | null = null
+
+      if (existingUser) {
+        // Użytkownik istnieje — podepnij zgłoszenie
+        userId = existingUser.id
+        console.log('🔵 Existing user found:', userId)
+      } else {
+        // Utwórz nowe konto z czytelnym hasłem
+        generatedPassword = `Serwis${Math.random().toString(36).slice(2, 8)}!`
+        const { data: authData, error: authError } = await supabase.auth.admin.createUser({
+          email: validatedData.email,
+          password: generatedPassword,
+          email_confirm: true,
+          user_metadata: {
+            first_name: validatedData.firstName,
+            last_name: validatedData.lastName,
+          },
+        })
+
+        if (authError) {
+          console.error('⚠️ Auto-register error:', authError.message)
+          generatedPassword = undefined
+        } else {
+          userId = authData.user.id
+          // Uzupełnij profil o dane firmy i adres
+          await supabase.from('profiles').update({
+            phone: validatedData.phone,
+            company_name: validatedData.company || null,
+            nip: validatedData.nip || null,
+            street: validatedData.street,
+            city: validatedData.city,
+            postal_code: validatedData.zipCode,
+          }).eq('id', userId)
+          console.log('✅ Auto-registered user:', userId)
+        }
+      }
+
+      // Podepnij user_id do zgłoszenia
+      if (userId) {
+        await supabase.from('repair_requests')
+          .update({ user_id: userId })
+          .eq('id', newRequest.id)
+        console.log('✅ Repair linked to user')
+      }
+    } catch (autoRegError: any) {
+      console.error('⚠️ Auto-register failed (non-blocking):', autoRegError.message)
+    }
+
     // 2. Upload zdjęć (jeśli są)
     let photoUrls: string[] = []
     if (files.length > 0) {
@@ -202,7 +259,8 @@ export async function POST(request: NextRequest) {
         deviceType: validatedData.deviceType,
         deviceModel: validatedData.deviceModel,
         problemDescription: validatedData.issueDescription,
-        isWarranty: isWarrantyRepair
+        isWarranty: isWarrantyRepair,
+        generatedPassword,
       })
       console.log('✅ Customer email sent')
 

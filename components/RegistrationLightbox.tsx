@@ -3,7 +3,6 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Loader2, CheckCircle, ShieldCheck, Bell, MessageSquare, CreditCard } from 'lucide-react'
-import { createClient } from '@/lib/supabase/client'
 
 interface RegistrationLightboxProps {
   isOpen: boolean
@@ -18,22 +17,17 @@ export function RegistrationLightbox({
   isOpen,
   repairId,
   userEmail,
-  userFirstName,
-  userLastName,
-  userPhone,
 }: RegistrationLightboxProps) {
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
-  const [marketingConsent, setMarketingConsent] = useState(false)
-  const [termsAccepted, setTermsAccepted] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [done, setDone] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError(null)
 
-    // Validation
     if (password.length < 8) {
       setError('Hasło musi mieć minimum 8 znaków')
       return
@@ -44,57 +38,37 @@ export function RegistrationLightbox({
       return
     }
 
-    if (!termsAccepted) {
-      setError('Musisz zaakceptować regulamin')
-      return
-    }
-
     setIsLoading(true)
 
     try {
-      const supabase = createClient()
-
-      // KRYTYCZNE: Wyloguj obecnego użytkownika przed rejestracją nowego
-      await supabase.auth.signOut()
-      console.log('🔓 Wylogowano poprzedniego użytkownika')
-
-      const response = await fetch('/api/auth/register-with-repair', {
+      // Ustaw hasło przez admin API (konto już istnieje z auto-rejestracji)
+      const response = await fetch('/api/auth/set-password', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          email: userEmail,
-          password,
-          firstName: userFirstName,
-          lastName: userLastName,
-          phone: userPhone,
-          repairId,
-          marketingConsent,
-        }),
+        body: JSON.stringify({ email: userEmail, password }),
       })
 
       const data = await response.json()
 
       if (!response.ok) {
-        throw new Error(data.error || 'Błąd rejestracji')
+        throw new Error(data.error || 'Błąd ustawiania hasła')
       }
 
-      console.log('✅ Konto utworzone, loguję użytkownika...')
+      // Zaloguj użytkownika
+      const { createClient } = await import('@/lib/supabase/client')
+      const supabase = createClient()
+      await supabase.auth.signOut()
 
-      // KRYTYCZNE: Zaloguj NOWEGO użytkownika przed przekierowaniem
       const { error: signInError } = await supabase.auth.signInWithPassword({
         email: userEmail,
-        password
+        password,
       })
 
       if (signInError) {
-        console.error('❌ Błąd logowania po rejestracji:', signInError)
-        throw new Error('Konto utworzone, ale nie udało się zalogować. Przejdź do strony logowania.')
+        throw new Error('Hasło ustawione, ale nie udało się zalogować. Przejdź do strony logowania.')
       }
 
-      // Poczekaj chwilę żeby sesja się zapisała
       await new Promise(resolve => setTimeout(resolve, 500))
-
-      // Success - redirect to panel
       window.location.href = '/panel'
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Wystąpił błąd')
@@ -102,11 +76,15 @@ export function RegistrationLightbox({
     }
   }
 
+  const handleSkip = () => {
+    setDone(true)
+    window.location.href = '/zgloszenie-wyslane'
+  }
+
   return (
     <AnimatePresence>
-      {isOpen && (
+      {isOpen && !done && (
         <>
-          {/* BACKDROP — brak zamknięcia po kliknięciu */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -114,7 +92,6 @@ export function RegistrationLightbox({
             className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[9998]"
           />
 
-          {/* LIGHTBOX */}
           <div className="fixed inset-0 z-[9999] flex items-center justify-center p-3">
             <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
@@ -135,14 +112,14 @@ export function RegistrationLightbox({
                       Zgłoszenie wysłane!
                     </h2>
                     <p className="text-sm text-gray-600">
-                      ID: <span className="font-mono font-semibold text-orange-600">#{repairId.slice(0, 8).toUpperCase()}</span>
+                      Konto utworzone automatycznie na <span className="font-semibold">{userEmail}</span>
                     </p>
                   </div>
                 </div>
 
-                {/* BENEFITS LIST — co daje konto */}
+                {/* BENEFITS */}
                 <div className="bg-gray-50 rounded-lg p-2.5 mb-3">
-                  <p className="text-xs font-semibold text-gray-700 mb-1.5">Twoje konto umożliwi:</p>
+                  <p className="text-xs font-semibold text-gray-700 mb-1.5">Panel klienta umożliwia:</p>
                   <div className="grid grid-cols-2 gap-1.5">
                     <div className="flex items-center gap-1.5 text-xs text-gray-600">
                       <ShieldCheck className="w-3.5 h-3.5 text-green-600 flex-shrink-0" />
@@ -163,24 +140,13 @@ export function RegistrationLightbox({
                   </div>
                 </div>
 
-                {/* REGISTRATION FORM */}
+                {/* SET PASSWORD FORM */}
                 <form onSubmit={handleSubmit}>
                   <div className="bg-orange-50 border border-orange-200 rounded-xl p-3">
                     <h3 className="text-sm font-bold text-gray-900 mb-2 text-center">
-                      Utwórz hasło do konta
+                      Ustaw hasło do panelu klienta
                     </h3>
 
-                    {/* EMAIL (read-only) */}
-                    <div className="mb-2">
-                      <input
-                        type="email"
-                        value={userEmail}
-                        disabled
-                        className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg bg-gray-100 text-gray-600"
-                      />
-                    </div>
-
-                    {/* PASSWORD FIELDS */}
                     <div className="grid grid-cols-2 gap-2 mb-2">
                       <input
                         type="password"
@@ -203,45 +169,12 @@ export function RegistrationLightbox({
                       />
                     </div>
 
-                    {/* CHECKBOXES */}
-                    <div className="space-y-1 mb-3">
-                      <label className="flex items-center gap-2 cursor-pointer">
-                        <input
-                          type="checkbox"
-                          checked={termsAccepted}
-                          onChange={(e) => setTermsAccepted(e.target.checked)}
-                          required
-                          className="w-4 h-4 text-orange-600 border-gray-300 rounded focus:ring-orange-500"
-                        />
-                        <span className="text-xs text-gray-700">
-                          Akceptuję{' '}
-                          <a href="/regulamin" target="_blank" className="text-orange-600 underline">regulamin</a>
-                          {' '}i{' '}
-                          <a href="/polityka-prywatnosci" target="_blank" className="text-orange-600 underline">politykę prywatności</a>
-                        </span>
-                      </label>
-
-                      <label className="flex items-center gap-2 cursor-pointer">
-                        <input
-                          type="checkbox"
-                          checked={marketingConsent}
-                          onChange={(e) => setMarketingConsent(e.target.checked)}
-                          className="w-4 h-4 text-orange-600 border-gray-300 rounded focus:ring-orange-500"
-                        />
-                        <span className="text-xs text-gray-700">
-                          Chcę otrzymywać promocje (opcjonalne)
-                        </span>
-                      </label>
-                    </div>
-
-                    {/* ERROR MESSAGE */}
                     {error && (
                       <div className="mb-2 p-2 bg-red-50 border border-red-200 rounded-lg text-red-700 text-xs">
                         {error}
                       </div>
                     )}
 
-                    {/* SUBMIT BUTTON */}
                     <button
                       type="submit"
                       disabled={isLoading}
@@ -250,14 +183,24 @@ export function RegistrationLightbox({
                       {isLoading ? (
                         <>
                           <Loader2 className="w-4 h-4 animate-spin" />
-                          Tworzenie konta...
+                          Ustawiam hasło...
                         </>
                       ) : (
-                        'Utwórz konto i śledź naprawę'
+                        'Ustaw hasło i przejdź do panelu'
                       )}
                     </button>
                   </div>
                 </form>
+
+                {/* SKIP */}
+                <div className="mt-2 text-center">
+                  <button
+                    onClick={handleSkip}
+                    className="text-xs text-gray-500 hover:text-gray-700 underline"
+                  >
+                    Pomiń — hasło ustawię później
+                  </button>
+                </div>
 
                 {/* TRUST BADGES */}
                 <div className="mt-3 pt-2 border-t border-gray-200">

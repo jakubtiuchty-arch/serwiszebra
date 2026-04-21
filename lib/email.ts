@@ -1241,6 +1241,7 @@ interface RepairSubmittedEmailData {
   deviceModel: string
   problemDescription: string
   isWarranty: boolean
+  generatedPassword?: string // Hasło do auto-utworzonego konta
 }
 
 export async function sendRepairSubmittedEmail(data: RepairSubmittedEmailData) {
@@ -1334,6 +1335,28 @@ function generateRepairSubmittedHTML(data: RepairSubmittedEmailData, shortId: st
               ${data.problemDescription}
             </p>
           </div>
+
+          <!-- Login credentials -->
+          ${data.generatedPassword ? `
+          <div style="background-color: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 20px; margin-bottom: 24px;">
+            <h4 style="margin: 0 0 12px 0; font-size: 16px; color: #166534;">
+              🔑 Twoje dane do panelu klienta
+            </h4>
+            <table style="width: 100%;">
+              <tr>
+                <td style="color: #6b7280; font-size: 14px;">Login (email):</td>
+                <td style="text-align: right; font-weight: 600; color: #111827;">${data.to}</td>
+              </tr>
+              <tr>
+                <td style="color: #6b7280; font-size: 14px; padding-top: 8px;">Hasło:</td>
+                <td style="text-align: right; font-weight: 600; color: #111827; font-family: monospace;">${data.generatedPassword}</td>
+              </tr>
+            </table>
+            <p style="margin: 12px 0 0 0; color: #6b7280; font-size: 12px;">
+              Hasło możesz zmienić w panelu klienta po zalogowaniu.
+            </p>
+          </div>
+          ` : ''}
 
           <!-- Next steps -->
           <div style="background-color: #dbeafe; border-radius: 8px; padding: 20px; margin-bottom: 24px;">
