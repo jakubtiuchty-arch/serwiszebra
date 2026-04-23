@@ -162,7 +162,7 @@ export async function POST(request: NextRequest) {
     if (insertError) {
       console.error('❌ Database insert error:', insertError)
       return NextResponse.json(
-        { error: 'Błąd zapisu do bazy danych', details: insertError.message },
+        { error: `Błąd zapisu do bazy danych: ${insertError.message}` },
         { status: 500 }
       )
     }
@@ -172,17 +172,17 @@ export async function POST(request: NextRequest) {
     // 1b. Auto-rejestracja — utwórz konto jeśli nie istnieje
     let generatedPassword: string | undefined
     try {
-      // Sprawdź czy użytkownik już istnieje
-      const { data: existingUsers } = await supabase.auth.admin.listUsers()
-      const existingUser = existingUsers?.users?.find(
-        (u: any) => u.email?.toLowerCase() === validatedData.email.toLowerCase()
-      )
+      // Sprawdź czy profil z tym emailem już istnieje (szybsze niż listUsers)
+      const { data: existingProfile } = await supabase
+        .from('profiles')
+        .select('id')
+        .ilike('email', validatedData.email)
+        .maybeSingle()
 
       let userId: string | null = null
 
-      if (existingUser) {
-        // Użytkownik istnieje — podepnij zgłoszenie
-        userId = existingUser.id
+      if (existingProfile) {
+        userId = existingProfile.id
         console.log('🔵 Existing user found:', userId)
       } else {
         // Utwórz nowe konto z czytelnym hasłem

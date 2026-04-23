@@ -14,13 +14,14 @@ export async function POST(req: NextRequest) {
 
     const supabase = await createServiceClient()
 
-    // Znajdź użytkownika po emailu
-    const { data: users } = await supabase.auth.admin.listUsers()
-    const user = users?.users?.find(
-      (u: any) => u.email?.toLowerCase() === email.toLowerCase()
-    )
+    // Znajdź użytkownika po emailu w profilu
+    const { data: profile } = await supabase
+      .from('profiles')
+      .select('id')
+      .ilike('email', email)
+      .maybeSingle()
 
-    if (!user) {
+    if (!profile) {
       return NextResponse.json(
         { error: 'Nie znaleziono konta z tym adresem email' },
         { status: 404 }
@@ -28,7 +29,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Ustaw nowe hasło
-    const { error } = await supabase.auth.admin.updateUserById(user.id, {
+    const { error } = await supabase.auth.admin.updateUserById(profile.id, {
       password,
     })
 
