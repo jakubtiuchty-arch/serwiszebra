@@ -144,7 +144,7 @@ export default function Footer() {
                 ].map((link) => (
                   <li key={link.href}>
                     {link.external ? (
-                      <a href={link.href} target="_blank" rel="noopener" className="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors duration-200">
+                      <a href={link.href} target="_blank" rel="noopener nofollow" className="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors duration-200">
                         {link.label}
                       </a>
                     ) : (
