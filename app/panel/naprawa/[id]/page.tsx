@@ -84,8 +84,9 @@ interface StatusHistory {
   changed_at: string
 }
 
-const STATUS_CONFIG = {
+const STATUS_CONFIG: Record<string, { label: string; className: string }> = {
   nowe: { label: 'Nowe', className: 'bg-blue-100 text-blue-800' },
+  odbior_od_klienta: { label: 'Odbiór od klienta', className: 'bg-indigo-100 text-indigo-800' },
   odebrane: { label: 'Odebrane', className: 'bg-gray-100 text-gray-800' },
   diagnoza: { label: 'Diagnoza', className: 'bg-blue-100 text-blue-800' },
   wycena: { label: 'Wycena', className: 'bg-blue-100 text-blue-800' },
@@ -386,7 +387,7 @@ const handlePaymentSuccess = async () => {
     )
   }
 
-  const statusConfig = STATUS_CONFIG[repair.status as keyof typeof STATUS_CONFIG]
+  const statusConfig = STATUS_CONFIG[repair.status] || { label: repair.status.replace(/_/g, ' '), className: 'bg-gray-100 text-gray-800' }
   const urgencyConfig = repair.urgency ? URGENCY_CONFIG[repair.urgency as keyof typeof URGENCY_CONFIG] : null
   const displayNumber = repair.repair_number || repair.id.split('-')[0].toUpperCase()
 

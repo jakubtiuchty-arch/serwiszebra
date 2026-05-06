@@ -21,7 +21,7 @@ interface Repair {
   device_model: string
   serial_number: string | null
   issue_description: string
-  status: 'nowe' | 'odebrane' | 'diagnoza' | 'wycena' | 'w_naprawie' | 'zakonczone' | 'wyslane' | 'anulowane'
+  status: string
   created_at: string
   urgency: 'niska' | 'srednia' | 'wysoka' | 'krytyczna' | null
 }

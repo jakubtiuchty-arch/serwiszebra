@@ -13,16 +13,16 @@ interface RepairCardProps {
     device_model: string
     serial_number: string | null
     issue_description: string
-    status: 'nowe' | 'odebrane' | 'diagnoza' | 'wycena' | 'proforma' | 'w_naprawie' | 'zakonczone' | 'wyslane' | 'anulowane' | 'weryfikacja_gwarancji' | 'gwarancja_potwierdzona' | 'gwarancja_odrzucona'
+    status: string
     created_at: string
     urgency: 'standard' | 'express' | 'niska' | 'srednia' | 'wysoka' | 'krytyczna' | null
     repair_type?: 'paid' | 'warranty' | 'warranty_rejected'
   }
 }
 
-const STATUS_CONFIG = {
-  nowe: { 
-    label: 'Nowe', 
+const STATUS_CONFIG: Record<string, { label: string; sublabel: string; progress: number; color: string; bgColor: string; borderColor: string; textColor: string; dotColor: string; barColor: string }> = {
+  nowe: {
+    label: 'Nowe',
     sublabel: '',
     progress: 14,
     color: 'blue',
@@ -32,8 +32,19 @@ const STATUS_CONFIG = {
     dotColor: 'bg-blue-500',
     barColor: 'bg-blue-500'
   },
-  odebrane: { 
-    label: 'Odebrane', 
+  odbior_od_klienta: {
+    label: 'Odbiór od klienta',
+    sublabel: 'KURIER W DRODZE',
+    progress: 21,
+    color: 'indigo',
+    bgColor: 'bg-indigo-50',
+    borderColor: 'border-indigo-200',
+    textColor: 'text-indigo-700',
+    dotColor: 'bg-indigo-500',
+    barColor: 'bg-indigo-500'
+  },
+  odebrane: {
+    label: 'Odebrane',
     sublabel: '',
     progress: 28,
     color: 'purple',
@@ -210,7 +221,17 @@ export default function RepairCard({ repair }: RepairCardProps) {
       : repair.serial_number
     : null
 
-  const statusConfig = STATUS_CONFIG[repair.status]
+  const statusConfig = STATUS_CONFIG[repair.status] || {
+    label: repair.status.replace(/_/g, ' '),
+    sublabel: '',
+    progress: 50,
+    color: 'gray',
+    bgColor: 'bg-gray-50',
+    borderColor: 'border-gray-200',
+    textColor: 'text-gray-700',
+    dotColor: 'bg-gray-500',
+    barColor: 'bg-gray-500',
+  }
 
   return (
     <Link href={`/panel/naprawa/${repair.id}`}>
