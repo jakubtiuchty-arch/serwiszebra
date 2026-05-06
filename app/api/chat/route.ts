@@ -1057,7 +1057,7 @@ function isZebraRelated(message: string): boolean {
     'wymyśl', 'wyobraź sobie', 'stwórz opowieść', 'stwórz historię',
     'w kontekście', 'jak wykorzystać zebra w',
     'opowiedz żart', 'opowiedz dowcip', 'zagadka',
-    'gra', 'quiz', 'zabawa', 'losow',
+    'quiz', 'zabawa', 'losow',
     'medycyn', 'prawo', 'finans', 'polityk', 'religia',
     'bitcoin', 'crypto', 'kryptowalut',
     'sex', 'porn', 'viagra', 'casino',
