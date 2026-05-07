@@ -786,6 +786,7 @@ export default function AdminRepairDetailPage() {
 
             {/* Zamów kuriera - PRIORYTET #1 */}
             {(repair.status === 'nowe' ||
+              repair.status === 'odbior_od_klienta' ||
               repair.status === 'zakonczone' ||
               repair.status === 'wyslane') && (
               <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow border border-gray-200 p-4">
