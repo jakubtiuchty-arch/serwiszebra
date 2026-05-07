@@ -314,7 +314,7 @@ export default function ChatBox({ repairId, currentUserType }: ChatBoxProps) {
 
                     <div className="flex items-center gap-1 mt-1 justify-end">
                       <p className={`text-[10px] font-medium ${isFromClient ? 'text-gray-500' : 'text-white/70'}`}>
-                        {format(new Date(msg.created_at), 'HH:mm', { locale: pl })}
+                        {format(new Date(msg.created_at), 'dd.MM HH:mm', { locale: pl })}
                       </p>
 
                       {/* Pokaż status odczytu ZAWSZE (nie tylko dla własnych wiadomości) */}
