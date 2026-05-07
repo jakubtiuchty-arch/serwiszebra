@@ -87,7 +87,7 @@ export default function Footer() {
 
         {/* Links section */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-6 sm:gap-8 lg:gap-10">
+          <div className="grid grid-cols-2 md:grid-cols-6 gap-6 sm:gap-8 lg:gap-10">
             {/* Nawigacja */}
             <div className="text-center">
               <h4 className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-gray-500 mb-3 sm:mb-5">Serwis</h4>
@@ -152,6 +152,26 @@ export default function Footer() {
                         {link.label}
                       </Link>
                     )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* TAKMA - sklep B2B */}
+            <div className="text-center">
+              <h4 className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-gray-500 mb-3 sm:mb-5">TAKMA</h4>
+              <ul className="space-y-2 sm:space-y-3">
+                {[
+                  { href: 'https://www.takma.com.pl/terminale-mobilne-zebra', label: 'Terminale mobilne Zebra' },
+                  { href: 'https://www.takma.com.pl/drukarki-etykiet-zebra', label: 'Drukarki etykiet Zebra' },
+                  { href: 'https://www.takma.com.pl/skanery-kodow-kreskowych-zebra', label: 'Skanery kodów Zebra' },
+                  { href: 'https://www.takma.com.pl/tablety-przemyslowe-zebra', label: 'Tablety Zebra' },
+                  { href: 'https://www.takma.com.pl/materialy-eksploatacyjne', label: 'Materiały eksploatacyjne' },
+                ].map((link) => (
+                  <li key={link.href}>
+                    <a href={link.href} target="_blank" rel="noopener" className="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors duration-200">
+                      {link.label}
+                    </a>
                   </li>
                 ))}
               </ul>
