@@ -38680,7 +38680,7 @@ Skontaktuj się z nami — jako **Autoryzowany Serwis Zebra** oferujemy:
     slug: 'jak-wybrac-terminal-mobilny-zebra-2026',
     title: 'Jak wybrać terminal mobilny Zebra w 2026 — pełny przewodnik',
     excerpt: 'Porównanie 18 modeli Zebra (TC22, TC27, TC53, TC501, MC3400, MC9400). Dla kogo Wi-Fi, dla kogo 5G, kiedy klawiatura. Przewodnik od autoryzowanego serwisu Zebra.',
-    coverImage: '/blog/jak-wybrac-terminal-mobilny-zebra-2026.jpeg',
+    coverImage: '/blog/jak-wybrac-terminal-mobilny-zebra-2026.png',
     coverImageAlt: 'Porównanie terminali mobilnych Zebra — TC22, TC53, MC3400, MC9400',
     author: {
       name: 'Krzysztof Wójcik',
