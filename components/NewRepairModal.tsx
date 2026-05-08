@@ -88,6 +88,9 @@ export default function NewRepairModal({ isOpen, onClose, onSuccess }: NewRepair
       if (!formData.device_model.trim()) {
         throw new Error('Model urządzenia jest wymagany')
       }
+      if (!formData.serial_number.trim()) {
+        throw new Error('Numer seryjny jest wymagany')
+      }
       if (!formData.issue_description.trim()) {
         throw new Error('Opis problemu jest wymagany')
       }
@@ -275,7 +278,7 @@ export default function NewRepairModal({ isOpen, onClose, onSuccess }: NewRepair
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                     <div>
                       <label className="block text-xs font-semibold text-gray-900 mb-1">
-                        Numer seryjny
+                        Numer seryjny *
                       </label>
                       <input
                         type="text"
@@ -283,6 +286,7 @@ export default function NewRepairModal({ isOpen, onClose, onSuccess }: NewRepair
                         value={formData.serial_number}
                         onChange={handleChange}
                         onFocus={handleFocus}
+                        required
                         placeholder="np. 23028928982"
                         className="w-full px-2.5 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       />

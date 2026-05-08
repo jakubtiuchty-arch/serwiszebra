@@ -93,7 +93,7 @@ const repairFormSchema = z.object({
       (val) => isZebraDevice(val),
       'Serwisujemy tylko urządzenia marki Zebra Technologies. Wpisz model Zebra (np. ZD421, TC52, DS3608).'
     ),
-  serialNumber: z.string().optional(),
+  serialNumber: z.string().min(1, 'Numer seryjny jest wymagany'),
   purchaseDate: z.string().optional(),
   isWarranty: z.enum(['tak', 'nie', 'nie_wiem']),
   
@@ -207,7 +207,7 @@ export default function RepairForm() {
     if (currentStep === 1) {
       fieldsToValidate = ['firstName', 'lastName', 'email', 'phone']
     } else if (currentStep === 2) {
-      fieldsToValidate = ['deviceType', 'deviceModel', 'isWarranty']
+      fieldsToValidate = ['deviceType', 'deviceModel', 'serialNumber', 'isWarranty']
     } else if (currentStep === 3) {
       fieldsToValidate = ['issueDescription', 'urgency']
     } else if (currentStep === 4) {
@@ -298,7 +298,7 @@ export default function RepairForm() {
       
       formDataToSend.append('deviceType', data.deviceType)
       formDataToSend.append('deviceModel', data.deviceModel)
-      if (data.serialNumber) formDataToSend.append('serialNumber', data.serialNumber)
+      formDataToSend.append('serialNumber', data.serialNumber)
       if (data.purchaseDate) formDataToSend.append('purchaseDate', data.purchaseDate)
       formDataToSend.append('isWarranty', data.isWarranty)
       
@@ -585,15 +585,19 @@ export default function RepairForm() {
 
                 <div>
                   <label htmlFor="serialNumber" className="block text-sm font-medium text-gray-700 mb-2">
-                    Numer seryjny (opcjonalnie)
+                    Numer seryjny *
                   </label>
                   <input
                     {...register('serialNumber')}
                     id="serialNumber"
                     type="text"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    required
+                    className={`w-full px-3 py-2 border rounded-full focus:ring-2 focus:ring-blue-500 focus:border-transparent ${errors.serialNumber ? 'border-red-500' : 'border-gray-300'}`}
                     placeholder="S/N: XXXXXXXXXXXX"
                   />
+                  {errors.serialNumber && (
+                    <p className="mt-1 text-sm text-red-600">{errors.serialNumber.message}</p>
+                  )}
                 </div>
 
                 <div>
