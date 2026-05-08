@@ -38736,8 +38736,6 @@ Wpływa na cenę o 200-1 000 zł + karta SIM 30-50 zł/mies.
 - **Wi-Fi** — terminal nie opuszcza budynku: magazyn, sklep, szpital. Modele: <a href="https://www.takma.com.pl/produkt/zebra-tc22">TC22</a>, <a href="https://www.takma.com.pl/produkt/zebra-tc53">TC53</a>, <a href="https://www.takma.com.pl/produkt/zebra-tc501">TC501</a>, <a href="https://www.takma.com.pl/produkt/zebra-mc3400">MC3400</a>, <a href="https://www.takma.com.pl/produkt/zebra-mc9400">MC9400</a>
 - **5G/LTE** — pracownik w terenie: kurier, serwisant, yard management. Modele: <a href="https://www.takma.com.pl/produkt/zebra-tc27">TC27</a>, <a href="https://www.takma.com.pl/produkt/zebra-tc58">TC58</a>, <a href="https://www.takma.com.pl/produkt/zebra-tc78">TC78</a>, <a href="https://www.takma.com.pl/produkt/zebra-mc9450">MC9450</a>
 
-> **Ciekawostka:** <a href="https://www.takma.com.pl/produkt/zebra-tc501">TC501</a> w wersji 5G (3 730 zł) jest **tańszy** niż wersja Wi-Fi (5 688 zł).
-
 ---
 
 ### 2. Ekran dotykowy czy klawiatura?
