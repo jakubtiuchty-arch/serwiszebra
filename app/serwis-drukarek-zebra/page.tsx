@@ -1,12 +1,12 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
-import { 
-  Printer, 
-  Truck, 
-  Clock, 
-  Shield, 
-  Phone, 
+import {
+  Printer,
+  Truck,
+  Clock,
+  Shield,
+  Phone,
   CheckCircle2,
   ChevronRight,
   Star,
@@ -14,7 +14,10 @@ import {
   Factory,
   Smartphone,
   CreditCard,
-  BookOpen
+  BookOpen,
+  Award,
+  BadgeCheck,
+  Wrench
 } from 'lucide-react'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
@@ -23,13 +26,22 @@ export const metadata: Metadata = {
   title: {
     absolute: 'Serwis Drukarek Zebra – Naprawa Wszystkich Modeli | TAKMA',
   },
-  description: 'Profesjonalny serwis drukarek Zebra. Naprawa etykiet, kart, mobilnych. 25 lat doświadczenia, 5000+ napraw, 12 mies. gwarancji. Odbiór 24h.',
+  description: 'Autoryzowany serwis drukarek Zebra. Naprawy gwarancyjne i pogwarancyjne wszystkich modeli – etykiet, kart, mobilnych. 25 lat doświadczenia, 12 mies. gwarancji, odbiór 24h.',
   keywords: [
     // Główna fraza - maksymalny priorytet
     'serwis drukarek zebra',
     'serwis drukarek zebra polska',
     'profesjonalny serwis drukarek zebra',
     'autoryzowany serwis drukarek zebra',
+    'autoryzowany serwis zebra technologies',
+
+    // Autoryzacja + gwarancja/pogwarancja
+    'serwis gwarancyjny drukarek zebra',
+    'serwis pogwarancyjny drukarek zebra',
+    'naprawa gwarancyjna drukarek zebra',
+    'naprawa pogwarancyjna drukarek zebra',
+    'naprawa drukarek zebra na gwarancji',
+    'naprawa drukarek zebra po gwarancji',
 
     // Warianty z "naprawa"
     'naprawa drukarek zebra',
@@ -119,7 +131,7 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     title: 'Serwis Drukarek Zebra – Naprawa Wszystkich Modeli | TAKMA',
-    description: 'Profesjonalny serwis drukarek Zebra. Naprawa etykiet, kart, mobilnych. 25 lat doświadczenia, 5000+ napraw, 12 mies. gwarancji. Odbiór 24h.',
+    description: 'Autoryzowany serwis drukarek Zebra. Naprawy gwarancyjne i pogwarancyjne wszystkich modeli – etykiet, kart, mobilnych. 25 lat doświadczenia, 12 mies. gwarancji, odbiór 24h.',
     url: 'https://www.serwis-zebry.pl/serwis-drukarek-zebra',
     images: [
       {
@@ -133,7 +145,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Serwis Drukarek Zebra – Naprawa Wszystkich Modeli | TAKMA',
-    description: 'Profesjonalny serwis drukarek Zebra. 25 lat doświadczenia, 5000+ napraw, 12 mies. gwarancji. Odbiór 24h.',
+    description: 'Autoryzowany serwis drukarek Zebra. Naprawy gwarancyjne i pogwarancyjne. 25 lat doświadczenia, 12 mies. gwarancji, odbiór 24h.',
     images: ['/og-image.jpg'],
   },
   alternates: {
@@ -156,6 +168,18 @@ const clusterArticles = [
 ]
 
 const faq = [
+  {
+    question: 'Czy jesteście autoryzowanym serwisem Zebra?',
+    answer: 'Tak. TAKMA to autoryzowany serwis Zebra Technologies z 25-letnim doświadczeniem. Posiadamy oficjalne uprawnienia producenta, dostęp do oryginalnych części zamiennych, narzędzi diagnostycznych i pełnej dokumentacji technicznej. Wykonujemy naprawy gwarancyjne i pogwarancyjne wszystkich modeli drukarek Zebra – etykiet, kart plastikowych i mobilnych.',
+    link: null,
+    linkText: null
+  },
+  {
+    question: 'Czym różni się naprawa gwarancyjna od pogwarancyjnej?',
+    answer: 'Naprawa gwarancyjna to bezpłatna naprawa w ramach gwarancji producenta (zwykle 12-24 miesiące od zakupu) lub kontraktu serwisowego Zebra OneCare. Naprawa pogwarancyjna dotyczy urządzeń po wygaśnięciu gwarancji – płatna wg cennika, ale wykonywana w tym samym standardzie autoryzowanego serwisu, z 12-miesięczną gwarancją na nasze prace. Naprawiamy oba typy z użyciem oryginalnych części Zebra.',
+    link: '/blog/kontrakty-serwisowe-zebra-onecare-przewodnik',
+    linkText: 'Kontrakty serwisowe Zebra OneCare →'
+  },
   {
     question: 'Ile kosztuje wymiana głowicy w drukarce Zebra?',
     answer: 'Koszt wymiany głowicy zależy od modelu drukarki. Dla drukarek desktop (ZD421, ZD420, GK420) to 250-530 zł, dla przemysłowych (ZT410, ZT610, 105SL) 580-2499 zł. Cena obejmuje robociznę i kalibrację po wymianie.',
@@ -230,7 +254,7 @@ const faq = [
   },
   {
     question: 'Czy serwisujecie drukarki Zebra na gwarancji?',
-    answer: 'Tak! Jako autoryzowany serwis Zebra obsługujemy naprawy gwarancyjne wszystkich modeli. Skontaktuj się z nami - sprawdzimy status gwarancji i przeprowadzimy naprawę. Telefon: +48 601 619 898.',
+    answer: 'Tak. Jako autoryzowany serwis Zebra Technologies obsługujemy naprawy gwarancyjne wszystkich modeli – w ramach gwarancji producenta oraz kontraktów Zebra OneCare. Sprawdzimy status gwarancji i przeprowadzimy naprawę zgodnie ze standardami producenta, z użyciem oryginalnych części – bez ryzyka utraty gwarancji. Telefon: +48 601 619 898.',
     link: '/blog/kontrakty-serwisowe-zebra-onecare-przewodnik',
     linkText: 'Kontrakty i gwarancja Zebra →'
   }
@@ -239,8 +263,12 @@ const faq = [
 const serviceSchema = {
   '@context': 'https://schema.org',
   '@type': 'Service',
-  name: 'Serwis Drukarek Zebra',
-  description: 'Profesjonalny serwis i naprawa drukarek Zebra: etykiet, kart plastikowych, mobilnych. 25 lat doświadczenia, 5000+ napraw, 12 mies. gwarancji.',
+  name: 'Autoryzowany Serwis Drukarek Zebra',
+  description: 'Autoryzowany serwis i naprawa drukarek Zebra: etykiet, kart plastikowych, mobilnych. Naprawy gwarancyjne i pogwarancyjne. 25 lat doświadczenia, 12 mies. gwarancji na naprawy.',
+  brand: {
+    '@type': 'Brand',
+    name: 'Zebra Technologies'
+  },
   provider: {
     '@type': 'LocalBusiness',
     name: 'TAKMA - Autoryzowany Serwis Zebra',
@@ -259,7 +287,15 @@ const serviceSchema = {
     '@type': 'Country',
     name: 'Polska'
   },
-  serviceType: ['Naprawa drukarek Zebra', 'Wymiana głowic drukujących', 'Serwis drukarek przemysłowych', 'Serwis drukarek mobilnych', 'Serwis drukarek kart plastikowych']
+  serviceType: [
+    'Autoryzowany serwis drukarek Zebra',
+    'Naprawy gwarancyjne drukarek Zebra',
+    'Naprawy pogwarancyjne drukarek Zebra',
+    'Wymiana głowic drukujących Zebra',
+    'Serwis drukarek przemysłowych Zebra',
+    'Serwis drukarek mobilnych Zebra',
+    'Serwis drukarek kart plastikowych Zebra'
+  ]
 }
 
 const breadcrumbSchema = {
@@ -329,8 +365,8 @@ export default function DrukarkiPage() {
           </div>
           <div className="relative max-w-6xl mx-auto px-3 sm:px-4 text-center md:text-left">
             <div className="flex items-center justify-center md:justify-start gap-1.5 sm:gap-2 mb-3">
-              <Printer className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
-              <span className="text-blue-600 font-medium text-sm">Serwis Drukarek</span>
+              <Award className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
+              <span className="text-blue-600 font-medium text-sm">Autoryzowany Serwis Zebra</span>
             </div>
             
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-gray-900 mb-3 sm:mb-4">
@@ -341,7 +377,7 @@ export default function DrukarkiPage() {
             </h1>
             
             <p className="text-sm sm:text-base text-gray-600 mb-5 sm:mb-6 max-w-2xl md:mx-0">
-              Profesjonalny serwis drukarek Zebra z 25-letnim doświadczeniem. Wymiana głowic, naprawa mechanizmu, kalibracja.
+              Autoryzowany serwis drukarek Zebra z 25-letnim doświadczeniem. Naprawy gwarancyjne i pogwarancyjne wszystkich modeli – wymiana głowic, mechanizmów, kalibracja.
             </p>
 
             <div className="flex flex-wrap justify-center md:justify-start gap-2 sm:gap-3 mb-5 sm:mb-6">
@@ -383,10 +419,10 @@ export default function DrukarkiPage() {
           <div className="max-w-6xl mx-auto px-3 sm:px-4">
             <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-blue-50 border-l-4 border-blue-500 rounded-r-xl p-4 sm:p-5 shadow-sm mb-6">
               <p className="text-sm sm:text-base text-gray-800 leading-relaxed">
-                <strong>Szukasz serwisu drukarek Zebra?</strong> TAKMA to <strong>autoryzowany serwis Zebra</strong> z 25-letnim doświadczeniem. 
-                Naprawiamy <strong>wszystkie modele</strong>: biurkowe (ZD421, ZD420, GK420), przemysłowe (ZT410, ZT610, 105SL), 
-                mobilne (ZQ520, ZQ630) i drukarki kart (ZC300, ZXP7). <strong>Odbiór kurierem w 24h</strong> z całej Polski, 
-                naprawa <strong>2-5 dni</strong>, <strong>12 miesięcy gwarancji</strong>. Wymiana głowic od 250 zł.
+                <strong>Szukasz serwisu drukarek Zebra?</strong> TAKMA to <strong>autoryzowany serwis Zebra Technologies</strong> z 25-letnim doświadczeniem.
+                Wykonujemy <strong>naprawy gwarancyjne i pogwarancyjne</strong> wszystkich modeli: biurkowe (ZD421, ZD420, GK420), przemysłowe (ZT410, ZT610, 105SL),
+                mobilne (ZQ520, ZQ630) i drukarki kart (ZC300, ZXP7). <strong>Odbiór kurierem w 24h</strong> z całej Polski,
+                naprawa <strong>2-5 dni</strong>, <strong>12 miesięcy gwarancji</strong> na nasze prace. Wymiana głowic od 250 zł.
               </p>
             </div>
           </div>
@@ -421,10 +457,66 @@ export default function DrukarkiPage() {
           <div className="max-w-6xl mx-auto px-3 sm:px-4">
             <div className="bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 border border-amber-200 rounded-xl p-4 sm:p-5 md:p-6 shadow-sm">
               <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
-                Specjalizujemy się w <strong>profesjonalnym serwisie drukarek Zebra</strong> wszystkich typów – od kompaktowych 
-                drukarek biurkowych, przez wydajne modele przemysłowe, po mobilne drukarki paragonów i etykiet. 
+                Specjalizujemy się w <strong>profesjonalnym serwisie drukarek Zebra</strong> wszystkich typów – od kompaktowych
+                drukarek biurkowych, przez wydajne modele przemysłowe, po mobilne drukarki paragonów i etykiet.
                 Jako <strong>autoryzowany serwis Zebra Technologies</strong> posiadamy pełną dokumentację techniczną i dostęp do oryginalnych części.
               </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Autoryzowany Serwis Zebra - trust badge */}
+        <section className="py-10 sm:py-12 bg-white">
+          <div className="max-w-6xl mx-auto px-3 sm:px-4">
+            <div className="text-center mb-8">
+              <div className="inline-flex items-center gap-2 bg-blue-50 border border-blue-200 px-4 py-2 rounded-full mb-4">
+                <Award className="w-5 h-5 text-blue-600" />
+                <span className="text-blue-700 font-semibold text-sm">Autoryzowany Serwis Zebra Technologies</span>
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-3">
+                Naprawiamy drukarki Zebra na gwarancji i po gwarancji
+              </h2>
+              <p className="text-sm sm:text-base text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                TAKMA to <strong>autoryzowany przez Zebra Technologies</strong> serwis – posiadamy oficjalne uprawnienia
+                producenta do wykonywania <strong>napraw gwarancyjnych</strong> oraz dostęp do oryginalnych części
+                zamiennych i pełnej dokumentacji technicznej. Naprawiamy też wszystkie modele <strong>po gwarancji</strong>,
+                w tym EOL sprzed 20 lat.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
+              <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-5 border border-blue-100">
+                <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-3 shadow-sm">
+                  <Award className="w-6 h-6 text-blue-600" strokeWidth={1.5} />
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Autoryzacja Zebra</h3>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  Oficjalne uprawnienia <strong>Zebra Technologies</strong>. Dostęp do <strong>oryginalnych części</strong>,
+                  narzędzi diagnostycznych i bazy wiedzy producenta.
+                </p>
+              </div>
+
+              <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-5 border border-green-100">
+                <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-3 shadow-sm">
+                  <BadgeCheck className="w-6 h-6 text-green-600" strokeWidth={1.5} />
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Naprawy gwarancyjne</h3>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  Obsługujemy <strong>gwarancję producenta</strong> oraz kontrakty <strong>Zebra OneCare</strong>.
+                  Naprawa bez ryzyka utraty gwarancji – zgodnie ze standardami Zebra.
+                </p>
+              </div>
+
+              <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl p-5 border border-amber-100">
+                <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-3 shadow-sm">
+                  <Wrench className="w-6 h-6 text-amber-600" strokeWidth={1.5} />
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Naprawy pogwarancyjne</h3>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  Naprawiamy <strong>wszystkie modele Zebra</strong> również po gwarancji, w tym EOL
+                  (LP2844, 105SL, GK420, Xi4). 12 mies. gwarancji na nasze prace.
+                </p>
+              </div>
             </div>
           </div>
         </section>
