@@ -247,7 +247,7 @@ const citiesData: Record<string, {
     deliveryTime: '24-48h',
     metaTitle: 'Serwis Zebra Zielona Góra – Naprawa, Kurier 24-48h',
     metaDescription: 'Serwis Zebra w Zielonej Górze. Kurier 24-48h, naprawa 2-5 dni, 12 mies. gwarancji, bezpłatna wycena. Drukarki, terminale, skanery.',
-    heroText: 'Profesjonalny serwis drukarek Zebra dla firm z Zielonej Góry i okolic',
+    heroText: 'Profesjonalny serwis Zebra dla firm z Zielonej Góry i okolic',
     introText: 'Obsługujemy firmy z Zielonej Góry, Gorzowa Wielkopolskiego i całego Lubuskiego. Kurier odbierze Twoje urządzenie w ciągu 24-48 godzin.',
     lat: 51.9356,
     lng: 15.5062,
@@ -273,14 +273,14 @@ export async function generateMetadata({ params }: { params: { miasto: string } 
 
   // Dodatkowe keywords dla miast z aglomeracjami
   const extraKeywords: Record<string, string[]> = {
-    'gdansk': ['serwis zebra gdynia', 'serwis zebra sopot', 'serwis zebra trójmiasto', 'naprawa drukarek zebra trójmiasto'],
-    'katowice': ['serwis zebra śląsk', 'serwis zebra gliwice', 'serwis zebra zabrze', 'naprawa drukarek zebra górny śląsk'],
-    'lodz': ['serwis zebra pabianice', 'serwis zebra zgierz', 'naprawa drukarek zebra łódzkie'],
-    'bydgoszcz': ['serwis zebra toruń', 'serwis zebra inowrocław', 'naprawa drukarek zebra kujawsko-pomorskie'],
-    'torun': ['serwis zebra bydgoszcz', 'serwis zebra włocławek', 'naprawa drukarek zebra kujawsko-pomorskie'],
-    'rzeszow': ['serwis zebra dolina lotnicza', 'serwis zebra przemyśl', 'naprawa drukarek zebra podkarpacie'],
-    'szczecin': ['serwis zebra świnoujście', 'serwis zebra stargard', 'naprawa drukarek zebra pomorze zachodnie'],
-    'zielona-gora': ['serwis drukarek zebra zielona góra', 'serwis zebra gorzów wielkopolski', 'naprawa drukarek zebra lubuskie', 'serwis zebra lubuskie'],
+    'gdansk': ['serwis zebra gdynia', 'serwis zebra sopot', 'serwis zebra trójmiasto', 'naprawa zebra trójmiasto'],
+    'katowice': ['serwis zebra śląsk', 'serwis zebra gliwice', 'serwis zebra zabrze', 'naprawa zebra górny śląsk'],
+    'lodz': ['serwis zebra pabianice', 'serwis zebra zgierz', 'naprawa zebra łódzkie'],
+    'bydgoszcz': ['serwis zebra toruń', 'serwis zebra inowrocław', 'naprawa zebra kujawsko-pomorskie'],
+    'torun': ['serwis zebra bydgoszcz', 'serwis zebra włocławek', 'naprawa zebra kujawsko-pomorskie'],
+    'rzeszow': ['serwis zebra dolina lotnicza', 'serwis zebra przemyśl', 'naprawa zebra podkarpacie'],
+    'szczecin': ['serwis zebra świnoujście', 'serwis zebra stargard', 'naprawa zebra pomorze zachodnie'],
+    'zielona-gora': ['serwis zebra zielona góra', 'serwis zebra gorzów wielkopolski', 'naprawa zebra lubuskie', 'serwis zebra lubuskie'],
   }
 
   return {
@@ -288,9 +288,9 @@ export async function generateMetadata({ params }: { params: { miasto: string } 
     description: city.metaDescription,
     keywords: [
       `serwis zebra ${city.name.toLowerCase()}`,
-      `naprawa drukarek zebra ${city.name.toLowerCase()}`,
+      `naprawa zebra ${city.name.toLowerCase()}`,
       `naprawa terminali zebra ${city.name.toLowerCase()}`,
-      `serwis drukarek etykiet ${city.name.toLowerCase()}`,
+      `naprawa skanerów zebra ${city.name.toLowerCase()}`,
       `autoryzowany serwis zebra ${city.name.toLowerCase()}`,
       ...(extraKeywords[params.miasto] || []),
     ],
@@ -562,7 +562,7 @@ export default function CityServicePage({ params }: { params: { miasto: string }
           <div className="max-w-6xl mx-auto px-3 sm:px-4">
             <div className="bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 border border-amber-200 rounded-xl p-4 sm:p-5 md:p-6 shadow-sm mb-6">
               <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
-                {city.introText} Jesteśmy częścią ogólnopolskiego <Link href="/serwis-drukarek-zebra" className="text-blue-700 font-semibold hover:underline">serwisu drukarek Zebra</Link> z 25-letnim doświadczeniem. Specjalizujemy się w naprawie urządzeń Zebra Technologies – drukarki etykiet, terminale mobilne, skanery kodów.
+                {city.introText} Jesteśmy częścią ogólnopolskiego <Link href="/serwis-drukarek-zebra" className="text-blue-700 font-semibold hover:underline">autoryzowanego serwisu Zebra</Link> z 25-letnim doświadczeniem. Specjalizujemy się w naprawie urządzeń Zebra Technologies – drukarki etykiet, terminale mobilne, skanery kodów.
               </p>
             </div>
             
@@ -579,12 +579,12 @@ export default function CityServicePage({ params }: { params: { miasto: string }
                 poziom kompetencji w naprawach urządzeń tej marki.
               </p>
               
-              <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">Naprawa drukarek etykiet Zebra</h3>
+              <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">Naprawa Zebra w {city.nameLocative} — drukarki etykiet</h3>
               <p>
-                Oferujemy <strong>naprawę drukarek etykiet Zebra</strong> wszystkich serii – od popularnych modeli desktop 
-                (ZD420, ZD620, GK420) przez wydajne drukarki przemysłowe (ZT410, ZT610), po mobilne (ZQ520, ZQ630). 
-                Najczęściej wykonywane usługi to wymiana głowic drukujących, naprawa mechanizmów podawania etykiet, 
-                czyszczenie sensorów i kalibracja parametrów wydruku. Więcej informacji o <Link href="/serwis-drukarek-zebra" className="text-blue-600 hover:underline">serwisie drukarek Zebra</Link>.
+                W ramach lokalnego serwisu w {city.nameLocative} naprawiamy <strong>drukarki etykiet Zebra</strong> wszystkich serii –
+                od popularnych modeli desktop (ZD420, ZD620, GK420) przez wydajne drukarki przemysłowe (ZT410, ZT610), po mobilne (ZQ520, ZQ630).
+                Najczęściej wykonywane usługi to wymiana głowic drukujących, naprawa mechanizmów podawania etykiet,
+                czyszczenie sensorów i kalibracja parametrów wydruku. Pełną ofertę usług naprawczych dla drukarek znajdziesz w <Link href="/serwis-drukarek-zebra" className="text-blue-600 hover:underline">centralnym katalogu napraw Zebra</Link>.
               </p>
               <p className="mt-3">
                 Typowe usterki drukarek, które naprawiamy w {city.nameLocative}: blady wydruk (wymiana głowicy lub kalibracja), 
