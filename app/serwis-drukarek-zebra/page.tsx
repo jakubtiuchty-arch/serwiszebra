@@ -462,8 +462,8 @@ export default function DrukarkiPage() {
                 <p className="text-xs sm:text-sm text-gray-500">czas naprawy</p>
               </div>
               <div className="text-center">
-                <p className="text-2xl sm:text-3xl font-bold text-gray-900">12 mies.</p>
-                <p className="text-xs sm:text-sm text-gray-500">gwarancji</p>
+                <p className="text-2xl sm:text-3xl font-bold text-gray-900">24h</p>
+                <p className="text-xs sm:text-sm text-gray-500">odbiór kurierem</p>
               </div>
             </div>
           </div>
