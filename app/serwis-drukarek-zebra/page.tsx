@@ -413,57 +413,6 @@ export default function DrukarkiPage() {
           </div>
         </section>
 
-        {/* Szybka odpowiedź - dla Featured Snippets i AI */}
-        <section className="py-6 sm:py-8">
-          <div className="max-w-6xl mx-auto px-3 sm:px-4">
-            <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-blue-50 border-l-4 border-blue-500 rounded-r-xl p-4 sm:p-5 shadow-sm mb-6">
-              <p className="text-sm sm:text-base text-gray-800 leading-relaxed">
-                <strong>Szukasz serwisu drukarek Zebra?</strong> TAKMA to <strong>autoryzowany serwis Zebra Technologies</strong> z 25-letnim doświadczeniem.
-                Wykonujemy <strong>naprawy gwarancyjne i pogwarancyjne</strong> wszystkich modeli: biurkowe (ZD421, ZD420, GK420), przemysłowe (ZT410, ZT610, 105SL),
-                mobilne (ZQ520, ZQ630) i drukarki kart (ZC300, ZXP7). <strong>Odbiór kurierem w 24h</strong> z całej Polski,
-                naprawa <strong>2-5 dni</strong>, <strong>12 miesięcy gwarancji</strong> na nasze prace. Wymiana głowic od 250 zł.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* Kluczowe liczby - dla GEO/AEO */}
-        <section className="py-4 sm:py-6 bg-white border-y border-gray-100">
-          <div className="max-w-6xl mx-auto px-3 sm:px-4">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
-              <div className="text-center">
-                <p className="text-2xl sm:text-3xl font-bold text-gray-900">25 lat</p>
-                <p className="text-xs sm:text-sm text-gray-500">doświadczenia</p>
-              </div>
-              <div className="text-center">
-                <p className="text-2xl sm:text-3xl font-bold text-gray-900">5000+</p>
-                <p className="text-xs sm:text-sm text-gray-500">naprawionych drukarek</p>
-              </div>
-              <div className="text-center">
-                <p className="text-2xl sm:text-3xl font-bold text-gray-900">2-5 dni</p>
-                <p className="text-xs sm:text-sm text-gray-500">czas naprawy</p>
-              </div>
-              <div className="text-center">
-                <p className="text-2xl sm:text-3xl font-bold text-gray-900">12 mies.</p>
-                <p className="text-xs sm:text-sm text-gray-500">gwarancji</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Intro */}
-        <section className="py-8 sm:py-10">
-          <div className="max-w-6xl mx-auto px-3 sm:px-4">
-            <div className="bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 border border-amber-200 rounded-xl p-4 sm:p-5 md:p-6 shadow-sm">
-              <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
-                Specjalizujemy się w <strong>profesjonalnym serwisie drukarek Zebra</strong> wszystkich typów – od kompaktowych
-                drukarek biurkowych, przez wydajne modele przemysłowe, po mobilne drukarki paragonów i etykiet.
-                Jako <strong>autoryzowany serwis Zebra Technologies</strong> posiadamy pełną dokumentację techniczną i dostęp do oryginalnych części.
-              </p>
-            </div>
-          </div>
-        </section>
-
         {/* Autoryzowany Serwis Zebra */}
         <section className="py-10 sm:py-14 bg-white">
           <div className="max-w-4xl mx-auto px-3 sm:px-4">
@@ -497,6 +446,25 @@ export default function DrukarkiPage() {
                   />
                 </div>
               ))}
+            </div>
+
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mt-8 lg:mt-10">
+              <div className="text-center">
+                <p className="text-2xl sm:text-3xl font-bold text-gray-900">25 lat</p>
+                <p className="text-xs sm:text-sm text-gray-500">doświadczenia</p>
+              </div>
+              <div className="text-center">
+                <p className="text-2xl sm:text-3xl font-bold text-gray-900">5000+</p>
+                <p className="text-xs sm:text-sm text-gray-500">naprawionych drukarek</p>
+              </div>
+              <div className="text-center">
+                <p className="text-2xl sm:text-3xl font-bold text-gray-900">2-5 dni</p>
+                <p className="text-xs sm:text-sm text-gray-500">czas naprawy</p>
+              </div>
+              <div className="text-center">
+                <p className="text-2xl sm:text-3xl font-bold text-gray-900">12 mies.</p>
+                <p className="text-xs sm:text-sm text-gray-500">gwarancji</p>
+              </div>
             </div>
           </div>
         </section>
