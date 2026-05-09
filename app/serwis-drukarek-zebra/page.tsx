@@ -16,7 +16,6 @@ import {
   CreditCard,
   BookOpen,
   Award,
-  BadgeCheck,
   Wrench
 } from 'lucide-react'
 import Header from '@/components/Header'
@@ -465,57 +464,29 @@ export default function DrukarkiPage() {
           </div>
         </section>
 
-        {/* Autoryzowany Serwis Zebra - trust badge */}
-        <section className="py-10 sm:py-12 bg-white">
-          <div className="max-w-6xl mx-auto px-3 sm:px-4">
-            <div className="text-center mb-8">
-              <div className="inline-flex items-center gap-2 bg-blue-50 border border-blue-200 px-4 py-2 rounded-full mb-4">
-                <Award className="w-5 h-5 text-blue-600" />
-                <span className="text-blue-700 font-semibold text-sm">Autoryzowany Serwis Zebra Technologies</span>
-              </div>
-              <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-3">
-                Naprawiamy drukarki Zebra na gwarancji i po gwarancji
+        {/* Autoryzowany Serwis Zebra */}
+        <section className="py-10 sm:py-14 bg-white">
+          <div className="max-w-4xl mx-auto px-3 sm:px-4">
+            <div className="bg-gradient-to-br from-lime-400 via-green-400 to-emerald-500 rounded-2xl sm:rounded-3xl p-6 sm:p-10 text-center shadow-lg">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                Autoryzowany Serwis Zebra
               </h2>
-              <p className="text-sm sm:text-base text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                TAKMA to <strong>autoryzowany przez Zebra Technologies</strong> serwis – posiadamy oficjalne uprawnienia
-                producenta do wykonywania <strong>napraw gwarancyjnych</strong> oraz dostęp do oryginalnych części
-                zamiennych i pełnej dokumentacji technicznej. Naprawiamy też wszystkie modele <strong>po gwarancji</strong>,
-                w tym EOL sprzed 20 lat.
+              <p className="text-sm sm:text-base text-gray-800 max-w-2xl mx-auto leading-relaxed">
+                TAKMA to autoryzowany przez Zebra Technologies serwis – posiadamy oficjalne uprawnienia producenta
+                do wykonywania napraw gwarancyjnych oraz dostęp do oryginalnych części zamiennych i pełnej
+                dokumentacji technicznej. Naprawiamy też wszystkie modele <strong>po gwarancji</strong>, w tym EOL sprzed 20 lat.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
-              <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-5 border border-blue-100">
-                <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-3 shadow-sm">
-                  <Award className="w-6 h-6 text-blue-600" strokeWidth={1.5} />
-                </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Autoryzacja Zebra</h3>
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  Oficjalne uprawnienia <strong>Zebra Technologies</strong>. Dostęp do <strong>oryginalnych części</strong>,
-                  narzędzi diagnostycznych i bazy wiedzy producenta.
-                </p>
-              </div>
-
-              <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-5 border border-green-100">
-                <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-3 shadow-sm">
-                  <BadgeCheck className="w-6 h-6 text-green-600" strokeWidth={1.5} />
-                </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Naprawy gwarancyjne</h3>
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  Obsługujemy <strong>gwarancję producenta</strong> oraz kontrakty <strong>Zebra OneCare</strong>.
-                  Naprawa bez ryzyka utraty gwarancji – zgodnie ze standardami Zebra.
-                </p>
-              </div>
-
-              <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl p-5 border border-amber-100">
-                <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-3 shadow-sm">
-                  <Wrench className="w-6 h-6 text-amber-600" strokeWidth={1.5} />
-                </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Naprawy pogwarancyjne</h3>
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  Naprawiamy <strong>wszystkie modele Zebra</strong> również po gwarancji, w tym EOL
-                  (LP2844, 105SL, GK420, Xi4). 12 mies. gwarancji na nasze prace.
-                </p>
+            <div className="flex justify-center mt-8">
+              <div className="bg-gray-50 border border-gray-200 rounded-2xl p-6 sm:p-8 inline-block">
+                <Image
+                  src="/zebra-premier-repair-specialist.jpeg"
+                  alt="Zebra Premier Solution Partner — Printer Repair Specialist"
+                  width={400}
+                  height={120}
+                  className="h-16 sm:h-20 w-auto"
+                />
               </div>
             </div>
           </div>
