@@ -423,7 +423,7 @@ export default function DrukarkiPage() {
                   Autoryzowany Serwis Zebra
                 </h2>
                 <p className="text-sm sm:text-base text-[#0A1A2F]/80 font-medium leading-relaxed max-w-3xl mx-auto">
-                  Oficjalne uprawnienia Zebra Technologies do napraw gwarancyjnych. Oryginalne części, pełna dokumentacja techniczna. Naprawiamy też wszystkie modele <strong>po gwarancji</strong>, w tym EOL sprzed 20 lat.
+                  Oficjalne uprawnienia Zebra Technologies do napraw gwarancyjnych. Oryginalne części, pełna dokumentacja techniczna. Naprawiamy też wszystkie modele <strong>po&nbsp;gwarancji</strong>, w&nbsp;tym EOL sprzed 20&nbsp;lat.
                 </p>
               </div>
             </div>
