@@ -363,6 +363,7 @@ export default function DrukarkiPage() {
             <div className="absolute inset-0 bg-gradient-to-r from-blue-50 via-blue-50/95 via-60% to-transparent" />
           </div>
           <div className="relative max-w-6xl mx-auto px-3 sm:px-4 text-center md:text-left">
+            <p className="text-sm sm:text-base font-medium text-gray-500 mb-2">Autoryzowany serwis drukarek Zebra</p>
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-gray-900 mb-3 sm:mb-4">
               Serwis Drukarek Zebra
               <span className="block text-base sm:text-lg md:text-xl font-normal text-gray-600 mt-1 sm:mt-2">
@@ -408,59 +409,6 @@ export default function DrukarkiPage() {
           </div>
         </section>
 
-        {/* Autoryzowany Serwis Zebra */}
-        <section className="py-10 sm:py-14 bg-white">
-          <div className="max-w-6xl mx-auto px-3 sm:px-4">
-            <div className="relative overflow-hidden rounded-2xl lg:rounded-3xl shadow-xl bg-gradient-to-br from-[#A8F000] to-[#8dbd00]">
-              <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:16px_16px]" />
-              <div className="relative z-10 px-6 py-4 sm:px-10 sm:py-5 lg:px-16 lg:py-6 text-center">
-                <h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-[#0A1A2F] tracking-tight mb-2 lg:mb-3">
-                  Autoryzowany Serwis Zebra
-                </h2>
-                <p className="text-sm sm:text-base text-[#0A1A2F]/80 font-medium leading-relaxed max-w-3xl mx-auto">
-                  Posiadamy oficjalne uprawnienia Zebra Technologies do napraw gwarancyjnych, dostęp do oryginalnych części i&nbsp;pełnej dokumentacji technicznej. Naprawiamy też wszystkie modele <strong>po&nbsp;gwarancji</strong>, w&nbsp;tym EOL sprzed 20&nbsp;lat.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 lg:gap-6 mt-6 lg:mt-8">
-              {[
-                { badge: '/certyfikat-1-zebra.png', alt: 'Zebra Printer Repair Specialist' },
-                { badge: '/certyfikat-2-zebra.png', alt: 'Zebra Public Sector Specialist' },
-                { badge: '/certyfikat-3-zebra.png', alt: 'Zebra Premier Solution Partner' },
-              ].map((cert) => (
-                <div key={cert.badge} className="bg-white rounded-xl px-4 py-3 shadow-sm border border-gray-100">
-                  <Image
-                    src={cert.badge}
-                    alt={cert.alt}
-                    width={200}
-                    height={80}
-                    className="h-10 sm:h-12 lg:h-14 w-auto object-contain"
-                  />
-                </div>
-              ))}
-            </div>
-
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mt-8 lg:mt-10">
-              <div className="text-center">
-                <p className="text-2xl sm:text-3xl font-bold text-gray-900">25 lat</p>
-                <p className="text-xs sm:text-sm text-gray-500">doświadczenia</p>
-              </div>
-              <div className="text-center">
-                <p className="text-2xl sm:text-3xl font-bold text-gray-900">5000+</p>
-                <p className="text-xs sm:text-sm text-gray-500">naprawionych drukarek</p>
-              </div>
-              <div className="text-center">
-                <p className="text-2xl sm:text-3xl font-bold text-gray-900">2-5 dni</p>
-                <p className="text-xs sm:text-sm text-gray-500">czas naprawy</p>
-              </div>
-              <div className="text-center">
-                <p className="text-2xl sm:text-3xl font-bold text-gray-900">24h</p>
-                <p className="text-xs sm:text-sm text-gray-500">odbiór kurierem</p>
-              </div>
-            </div>
-          </div>
-        </section>
 
         {/* Kategorie drukarek - spójne z miastami */}
         <section className="py-10 sm:py-12 md:py-14 bg-white">
