@@ -467,27 +467,36 @@ export default function DrukarkiPage() {
         {/* Autoryzowany Serwis Zebra */}
         <section className="py-10 sm:py-14 bg-white">
           <div className="max-w-4xl mx-auto px-3 sm:px-4">
-            <div className="bg-gradient-to-br from-lime-400 via-green-400 to-emerald-500 rounded-2xl sm:rounded-3xl p-6 sm:p-10 text-center shadow-lg">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                Autoryzowany Serwis Zebra
-              </h2>
-              <p className="text-sm sm:text-base text-gray-800 max-w-2xl mx-auto leading-relaxed">
-                TAKMA to autoryzowany przez Zebra Technologies serwis – posiadamy oficjalne uprawnienia producenta
-                do wykonywania napraw gwarancyjnych oraz dostęp do oryginalnych części zamiennych i pełnej
-                dokumentacji technicznej. Naprawiamy też wszystkie modele <strong>po gwarancji</strong>, w tym EOL sprzed 20 lat.
-              </p>
+            <div className="relative overflow-hidden rounded-2xl lg:rounded-3xl shadow-xl bg-gradient-to-br from-[#A8F000] to-[#8dbd00]">
+              <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:16px_16px]" />
+              <div className="relative z-10 px-5 py-4 sm:px-8 sm:py-5 lg:px-10 lg:py-6 text-center">
+                <h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-[#0A1A2F] tracking-tight mb-2 lg:mb-3">
+                  Autoryzowany Serwis Zebra
+                </h2>
+                <p className="text-sm sm:text-base text-[#0A1A2F]/80 font-medium leading-relaxed max-w-2xl mx-auto">
+                  TAKMA to autoryzowany przez Zebra Technologies serwis – posiadamy oficjalne uprawnienia producenta
+                  do wykonywania napraw gwarancyjnych oraz dostęp do oryginalnych części zamiennych i pełnej
+                  dokumentacji technicznej. Naprawiamy też wszystkie modele <strong>po gwarancji</strong>, w tym EOL sprzed 20 lat.
+                </p>
+              </div>
             </div>
 
-            <div className="flex justify-center mt-8">
-              <div className="bg-gray-50 border border-gray-200 rounded-2xl p-6 sm:p-8 inline-block">
-                <Image
-                  src="/zebra-premier-repair-specialist.jpeg"
-                  alt="Zebra Premier Solution Partner — Printer Repair Specialist"
-                  width={400}
-                  height={120}
-                  className="h-16 sm:h-20 w-auto"
-                />
-              </div>
+            <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 lg:gap-6 mt-6 lg:mt-8">
+              {[
+                { badge: '/certyfikat-1-zebra.png', alt: 'Zebra Printer Repair Specialist' },
+                { badge: '/certyfikat-2-zebra.png', alt: 'Zebra Public Sector Specialist' },
+                { badge: '/certyfikat-3-zebra.png', alt: 'Zebra Premier Solution Partner' },
+              ].map((cert) => (
+                <div key={cert.badge} className="bg-white rounded-xl px-4 py-3 shadow-sm border border-gray-100">
+                  <Image
+                    src={cert.badge}
+                    alt={cert.alt}
+                    width={200}
+                    height={80}
+                    className="h-10 sm:h-12 lg:h-14 w-auto object-contain"
+                  />
+                </div>
+              ))}
             </div>
           </div>
         </section>
