@@ -548,6 +548,9 @@ export default function DrukarkiPage() {
           </div>
         </section>
 
+        {/* Proces serwisowy — animowany timeline */}
+        <RepairProcessSteps />
+
         {/* Najczęstsze awarie wg typu */}
         <section className="py-10 sm:py-12 md:py-14 bg-white">
           <div className="max-w-6xl mx-auto px-3 sm:px-4">
@@ -679,9 +682,6 @@ export default function DrukarkiPage() {
             </p>
           </div>
         </section>
-
-        {/* Proces serwisowy — animowany timeline jak na TAKMA */}
-        <RepairProcessSteps />
 
         {/* Czas realizacji */}
         <section className="py-8 sm:py-10 bg-white">
