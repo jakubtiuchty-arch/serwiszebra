@@ -400,7 +400,7 @@ export default function DrukarkiPage() {
             <div className="flex flex-wrap gap-3 justify-center md:justify-start">
               <Link
                 href="/#formularz"
-                className="inline-flex items-center gap-2 bg-blue-600 text-white font-medium px-5 py-2.5 rounded-lg hover:bg-blue-700 transition-colors text-sm"
+                className="inline-flex items-center gap-2 bg-[#A8F000] text-[#0A1A2F] font-medium px-5 py-2.5 rounded-lg hover:bg-[#8dbd00] transition-colors text-sm"
               >
                 Zgłoś naprawę
                 <ChevronRight className="w-4 h-4" />
@@ -601,7 +601,7 @@ export default function DrukarkiPage() {
             </div>
             <div className="text-center mt-6 sm:mt-8">
               <p className="text-sm text-gray-600 mb-3">Nie widzisz swojej awarii? Zgłoś ją do nas — bezpłatna diagnostyka*, dokładna wycena.</p>
-              <Link href="/#formularz" className="inline-flex items-center gap-2 bg-blue-600 text-white font-medium px-5 py-2.5 rounded-lg hover:bg-blue-700 transition-colors text-sm">
+              <Link href="/#formularz" className="inline-flex items-center gap-2 bg-[#A8F000] text-[#0A1A2F] font-medium px-5 py-2.5 rounded-lg hover:bg-[#8dbd00] transition-colors text-sm">
                 Zgłoś naprawę <ChevronRight className="w-4 h-4" />
               </Link>
             </div>
@@ -877,7 +877,7 @@ export default function DrukarkiPage() {
             <div className="flex flex-wrap justify-center gap-3">
               <Link
                 href="/#formularz"
-                className="inline-flex items-center gap-2 bg-blue-600 text-white font-medium px-6 py-2.5 rounded-lg hover:bg-blue-700 transition-colors text-sm"
+                className="inline-flex items-center gap-2 bg-[#A8F000] text-[#0A1A2F] font-medium px-6 py-2.5 rounded-lg hover:bg-[#8dbd00] transition-colors text-sm"
               >
                 Zgłoś naprawę online
                 <ChevronRight className="w-4 h-4" />
