@@ -16,7 +16,14 @@ import {
   CreditCard,
   BookOpen,
   Award,
-  Wrench
+  Wrench,
+  ClipboardList,
+  Zap,
+  Users,
+  MapPin,
+  AlertCircle,
+  Package,
+  Search
 } from 'lucide-react'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
@@ -577,32 +584,248 @@ export default function DrukarkiPage() {
           </div>
         </section>
 
-        {/* Cennik - spójny z miastami */}
-        <section className="py-10 sm:py-12 bg-gradient-to-br from-gray-50 to-gray-100">
-          <div className="max-w-5xl mx-auto px-3 sm:px-4">
+        {/* Najczęstsze awarie wg typu */}
+        <section className="py-10 sm:py-12 md:py-14 bg-gradient-to-br from-red-50 via-orange-50 to-amber-50">
+          <div className="max-w-6xl mx-auto px-3 sm:px-4">
             <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-2 text-center">
-              Cennik orientacyjny
+              Najczęstsze awarie drukarek Zebra wg typu
             </h2>
-            <p className="text-sm text-gray-600 text-center mb-6">
-              Dokładna wycena po bezpłatnej diagnostyce
+            <p className="text-sm text-gray-600 text-center mb-8 max-w-3xl mx-auto">
+              25 lat doświadczenia w naprawach pozwala nam szybko zdiagnozować typową awarię — zwykle już na podstawie modelu i objawów.
             </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
+              <div className="bg-white rounded-xl p-5 sm:p-6 shadow-lg border border-gray-100">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center border border-blue-100">
+                    <Monitor className="w-6 h-6 text-blue-600" strokeWidth={1.5} />
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-900">Drukarki desktop (ZD/GK)</h3>
+                </div>
+                <ul className="space-y-2 text-sm text-gray-700">
+                  <li className="flex items-start gap-2"><AlertCircle className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" /><span><strong>Zużyta głowica drukująca</strong> — białe pasy na wydruku, słaby kontrast po 2-3 latach pracy.</span></li>
+                  <li className="flex items-start gap-2"><AlertCircle className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" /><span><strong>Czerwona dioda</strong> (GK420, ZD420) — uszkodzony czujnik etykiet lub zacięty mechanizm.</span></li>
+                  <li className="flex items-start gap-2"><AlertCircle className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" /><span><strong>Błąd kalibracji</strong> po wymianie etykiet — wymaga rekalibracji sensora taśmy.</span></li>
+                  <li className="flex items-start gap-2"><AlertCircle className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" /><span><strong>Zacinanie się ribbonu</strong> — zużyte rolki lub zła grubość taśmy.</span></li>
+                </ul>
+              </div>
+              <div className="bg-white rounded-xl p-5 sm:p-6 shadow-lg border border-gray-100">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-12 h-12 bg-orange-50 rounded-xl flex items-center justify-center border border-orange-100">
+                    <Factory className="w-6 h-6 text-orange-600" strokeWidth={1.5} />
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-900">Drukarki przemysłowe (ZT/Xi4)</h3>
+                </div>
+                <ul className="space-y-2 text-sm text-gray-700">
+                  <li className="flex items-start gap-2"><AlertCircle className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" /><span><strong>Błąd ribbon</strong> (ZT410, ZT411) — uszkodzony czujnik taśmy lub błędna konfiguracja.</span></li>
+                  <li className="flex items-start gap-2"><AlertCircle className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" /><span><strong>Awaria silnika krokowego</strong> — drukarka się nie rusza lub porusza nierówno.</span></li>
+                  <li className="flex items-start gap-2"><AlertCircle className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" /><span><strong>Uszkodzona płyta główna</strong> — skutek przepięć lub upływu rocznego.</span></li>
+                  <li className="flex items-start gap-2"><AlertCircle className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" /><span><strong>Problem z odklejaczem</strong> (peeler) — brak odklejania etykiet lub błąd sensora.</span></li>
+                </ul>
+              </div>
+              <div className="bg-white rounded-xl p-5 sm:p-6 shadow-lg border border-gray-100">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-12 h-12 bg-green-50 rounded-xl flex items-center justify-center border border-green-100">
+                    <Smartphone className="w-6 h-6 text-green-600" strokeWidth={1.5} />
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-900">Drukarki mobilne (ZQ/QL)</h3>
+                </div>
+                <ul className="space-y-2 text-sm text-gray-700">
+                  <li className="flex items-start gap-2"><AlertCircle className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" /><span><strong>Zużyta bateria</strong> — najczęstsza wymiana po 18-24 miesiącach pracy.</span></li>
+                  <li className="flex items-start gap-2"><AlertCircle className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" /><span><strong>Problem Bluetooth/WiFi</strong> — moduł komunikacyjny do wymiany.</span></li>
+                  <li className="flex items-start gap-2"><AlertCircle className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" /><span><strong>Uszkodzony wyświetlacz LCD</strong> — typowa naprawa po upadku.</span></li>
+                  <li className="flex items-start gap-2"><AlertCircle className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" /><span><strong>Zacięty mechanizm</strong> — kurz, zabrudzenia lub uszkodzenie wałków.</span></li>
+                </ul>
+              </div>
+              <div className="bg-white rounded-xl p-5 sm:p-6 shadow-lg border border-gray-100">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-12 h-12 bg-purple-50 rounded-xl flex items-center justify-center border border-purple-100">
+                    <CreditCard className="w-6 h-6 text-purple-600" strokeWidth={1.5} />
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-900">Drukarki kart (ZC/ZXP)</h3>
+                </div>
+                <ul className="space-y-2 text-sm text-gray-700">
+                  <li className="flex items-start gap-2"><AlertCircle className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" /><span><strong>Awaria modułu kodowania</strong> magnetycznego/chipowego — najczęściej w ZC300/ZXP7.</span></li>
+                  <li className="flex items-start gap-2"><AlertCircle className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" /><span><strong>Uszkodzony moduł laminacji</strong> (ZXP9) — wymiana folii i kalibracja.</span></li>
+                  <li className="flex items-start gap-2"><AlertCircle className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" /><span><strong>Czyszczenie sensorów kart</strong> — kurz blokuje detekcję karty.</span></li>
+                  <li className="flex items-start gap-2"><AlertCircle className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" /><span><strong>Wymiana wałków transportowych</strong> — zużyte powodują zacinanie kart.</span></li>
+                </ul>
+              </div>
+            </div>
+            <div className="text-center mt-6 sm:mt-8">
+              <p className="text-sm text-gray-600 mb-3">Nie widzisz swojej awarii? Zgłoś ją do nas — bezpłatna diagnostyka, dokładna wycena.</p>
+              <Link href="/#formularz" className="inline-flex items-center gap-2 bg-blue-600 text-white font-medium px-5 py-2.5 rounded-lg hover:bg-blue-700 transition-colors text-sm">
+                Zgłoś naprawę <ChevronRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </div>
+        </section>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
-              <div className="bg-white rounded-xl p-4 border border-gray-100 shadow-lg text-center">
-                <p className="text-xs text-gray-500 mb-1">Głowica drukująca</p>
-                <p className="text-lg font-semibold text-gray-900">od 250 zł</p>
+        {/* Cennik wg modelu */}
+        <section className="py-10 sm:py-12 bg-gradient-to-br from-gray-50 to-gray-100">
+          <div className="max-w-6xl mx-auto px-3 sm:px-4">
+            <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-2 text-center">Cennik napraw drukarek Zebra wg modelu</h2>
+            <p className="text-sm text-gray-600 text-center mb-6 sm:mb-8 max-w-3xl mx-auto">
+              Ceny orientacyjne na podstawie typowych zleceń. Każda naprawa zaczyna się od <strong>bezpłatnej diagnostyki</strong> — dokładną wycenę otrzymujesz przed rozpoczęciem prac. Wszystkie ceny netto.
+            </p>
+            <div className="bg-white rounded-xl shadow-lg overflow-hidden mb-6">
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm">
+                  <thead className="bg-gradient-to-r from-blue-50 to-indigo-50 border-b border-gray-200">
+                    <tr>
+                      <th className="text-left p-3 sm:p-4 font-semibold text-gray-900">Typ / model drukarki</th>
+                      <th className="text-center p-3 sm:p-4 font-semibold text-gray-900">Wymiana głowicy</th>
+                      <th className="text-center p-3 sm:p-4 font-semibold text-gray-900">Naprawa mechanizmu</th>
+                      <th className="text-center p-3 sm:p-4 font-semibold text-gray-900">Konserwacja</th>
+                      <th className="text-center p-3 sm:p-4 font-semibold text-gray-900">Diagnostyka</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-100">
+                    <tr className="hover:bg-gray-50"><td className="p-3 sm:p-4 font-medium text-gray-900">Desktop ZD421/ZD420/ZD220</td><td className="text-center p-3 sm:p-4 text-gray-700">250-380 zł</td><td className="text-center p-3 sm:p-4 text-gray-700">150-280 zł</td><td className="text-center p-3 sm:p-4 text-gray-700">149 zł</td><td className="text-center p-3 sm:p-4 text-green-600 font-medium">bezpłatna</td></tr>
+                    <tr className="hover:bg-gray-50"><td className="p-3 sm:p-4 font-medium text-gray-900">Desktop GK420/GC420/GX420</td><td className="text-center p-3 sm:p-4 text-gray-700">250-400 zł</td><td className="text-center p-3 sm:p-4 text-gray-700">150-300 zł</td><td className="text-center p-3 sm:p-4 text-gray-700">149 zł</td><td className="text-center p-3 sm:p-4 text-green-600 font-medium">bezpłatna</td></tr>
+                    <tr className="hover:bg-gray-50"><td className="p-3 sm:p-4 font-medium text-gray-900">Przemysłowe ZT411/ZT421</td><td className="text-center p-3 sm:p-4 text-gray-700">580-980 zł</td><td className="text-center p-3 sm:p-4 text-gray-700">350-650 zł</td><td className="text-center p-3 sm:p-4 text-gray-700">250 zł</td><td className="text-center p-3 sm:p-4 text-green-600 font-medium">bezpłatna</td></tr>
+                    <tr className="hover:bg-gray-50"><td className="p-3 sm:p-4 font-medium text-gray-900">Przemysłowe ZT610/ZT620</td><td className="text-center p-3 sm:p-4 text-gray-700">1200-2499 zł</td><td className="text-center p-3 sm:p-4 text-gray-700">580-1200 zł</td><td className="text-center p-3 sm:p-4 text-gray-700">350 zł</td><td className="text-center p-3 sm:p-4 text-green-600 font-medium">bezpłatna</td></tr>
+                    <tr className="hover:bg-gray-50"><td className="p-3 sm:p-4 font-medium text-gray-900">Przemysłowe 105SL / S4M / Xi4</td><td className="text-center p-3 sm:p-4 text-gray-700">850-1800 zł</td><td className="text-center p-3 sm:p-4 text-gray-700">450-900 zł</td><td className="text-center p-3 sm:p-4 text-gray-700">250 zł</td><td className="text-center p-3 sm:p-4 text-green-600 font-medium">bezpłatna</td></tr>
+                    <tr className="hover:bg-gray-50"><td className="p-3 sm:p-4 font-medium text-gray-900">Mobilne ZQ520/ZQ630/ZQ521</td><td className="text-center p-3 sm:p-4 text-gray-700">380-650 zł</td><td className="text-center p-3 sm:p-4 text-gray-700">250-450 zł</td><td className="text-center p-3 sm:p-4 text-gray-700">199 zł</td><td className="text-center p-3 sm:p-4 text-green-600 font-medium">bezpłatna</td></tr>
+                    <tr className="hover:bg-gray-50"><td className="p-3 sm:p-4 font-medium text-gray-900">Kart plastikowych ZC300/ZXP7</td><td className="text-center p-3 sm:p-4 text-gray-700">580-1500 zł</td><td className="text-center p-3 sm:p-4 text-gray-700">350-850 zł</td><td className="text-center p-3 sm:p-4 text-gray-700">199 zł</td><td className="text-center p-3 sm:p-4 text-green-600 font-medium">bezpłatna</td></tr>
+                  </tbody>
+                </table>
               </div>
-              <div className="bg-white rounded-xl p-4 border border-gray-100 shadow-lg text-center">
-                <p className="text-xs text-gray-500 mb-1">Wałek dociskowy</p>
-                <p className="text-lg font-semibold text-gray-900">od 150 zł</p>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mb-6">
+              <div className="bg-white rounded-xl p-4 border border-gray-100 shadow-md"><p className="text-xs text-gray-500 mb-1">Wałek dociskowy</p><p className="text-base font-semibold text-gray-900">od 150 zł</p></div>
+              <div className="bg-white rounded-xl p-4 border border-gray-100 shadow-md"><p className="text-xs text-gray-500 mb-1">Wymiana ribbonu</p><p className="text-base font-semibold text-gray-900">od 80 zł</p></div>
+              <div className="bg-white rounded-xl p-4 border border-gray-100 shadow-md"><p className="text-xs text-gray-500 mb-1">Naprawa płyty głównej</p><p className="text-base font-semibold text-gray-900">od 350 zł</p></div>
+              <div className="bg-white rounded-xl p-4 border border-gray-100 shadow-md"><p className="text-xs text-gray-500 mb-1">Ekspres (24-48h)</p><p className="text-base font-semibold text-gray-900">+50 zł</p></div>
+            </div>
+          </div>
+        </section>
+
+        {/* Proces serwisowy krok po kroku */}
+        <section className="py-10 sm:py-12 md:py-14 bg-white">
+          <div className="max-w-6xl mx-auto px-3 sm:px-4">
+            <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-2 text-center">Jak wygląda naprawa drukarki Zebra — krok po kroku</h2>
+            <p className="text-sm text-gray-600 text-center mb-8 sm:mb-10 max-w-3xl mx-auto">
+              Cały proces od zgłoszenia do zwrotu naprawionej drukarki zajmuje średnio 5-7 dni roboczych. Działamy na terenie całej Polski — kurier odbierze drukarkę bezpłatnie.
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
+              <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-5 border border-blue-100 relative">
+                <div className="absolute -top-3 left-5 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full">KROK 1</div>
+                <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-3 mt-2 shadow-sm"><ClipboardList className="w-6 h-6 text-blue-600" strokeWidth={1.5} /></div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Zgłoszenie online</h3>
+                <p className="text-sm text-gray-600 leading-relaxed">Wypełniasz formularz (model, opis problemu) lub dzwonisz na +48 601 619 898. Otrzymujesz numer zlecenia i zamawiamy kuriera.</p>
               </div>
-              <div className="bg-white rounded-xl p-4 border border-gray-100 shadow-lg text-center">
-                <p className="text-xs text-gray-500 mb-1">Mechanizm</p>
-                <p className="text-lg font-semibold text-gray-900">od 150 zł</p>
+              <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-5 border border-blue-100 relative">
+                <div className="absolute -top-3 left-5 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full">KROK 2</div>
+                <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-3 mt-2 shadow-sm"><Truck className="w-6 h-6 text-blue-600" strokeWidth={1.5} /></div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Bezpłatny odbiór 24h</h3>
+                <p className="text-sm text-gray-600 leading-relaxed">Kurier DPD odbierze drukarkę z Twojej firmy w ciągu 24h od zgłoszenia.</p>
               </div>
-              <div className="bg-white rounded-xl p-4 border border-gray-100 shadow-lg text-center">
-                <p className="text-xs text-gray-500 mb-1">Konserwacja</p>
-                <p className="text-lg font-semibold text-gray-900">od 149 zł</p>
+              <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-5 border border-blue-100 relative">
+                <div className="absolute -top-3 left-5 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full">KROK 3</div>
+                <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-3 mt-2 shadow-sm"><Search className="w-6 h-6 text-blue-600" strokeWidth={1.5} /></div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Bezpłatna diagnostyka</h3>
+                <p className="text-sm text-gray-600 leading-relaxed">W ciągu 1-2 dni roboczych diagnozujemy usterkę i przesyłamy dokładną wycenę do akceptacji.</p>
+              </div>
+              <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-5 border border-green-100 relative">
+                <div className="absolute -top-3 left-5 bg-green-600 text-white text-xs font-bold px-3 py-1 rounded-full">KROK 4</div>
+                <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-3 mt-2 shadow-sm"><Wrench className="w-6 h-6 text-green-600" strokeWidth={1.5} /></div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Naprawa</h3>
+                <p className="text-sm text-gray-600 leading-relaxed">Po akceptacji wyceny rozpoczynamy naprawę. Używamy <strong>oryginalnych części Zebra</strong>. Standardowy czas: 2-5 dni roboczych.</p>
+              </div>
+              <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-5 border border-green-100 relative">
+                <div className="absolute -top-3 left-5 bg-green-600 text-white text-xs font-bold px-3 py-1 rounded-full">KROK 5</div>
+                <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-3 mt-2 shadow-sm"><CheckCircle2 className="w-6 h-6 text-green-600" strokeWidth={1.5} /></div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Test jakości</h3>
+                <p className="text-sm text-gray-600 leading-relaxed">Pełny test druku, kalibracja i weryfikacja wszystkich funkcji. Tylko sprawne urządzenia opuszczają serwis.</p>
+              </div>
+              <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-5 border border-green-100 relative">
+                <div className="absolute -top-3 left-5 bg-green-600 text-white text-xs font-bold px-3 py-1 rounded-full">KROK 6</div>
+                <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-3 mt-2 shadow-sm"><Package className="w-6 h-6 text-green-600" strokeWidth={1.5} /></div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Wysyłka zwrotna</h3>
+                <p className="text-sm text-gray-600 leading-relaxed">Odsyłamy drukarkę kurierem na nasz koszt. Otrzymujesz raport serwisowy.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Czas realizacji */}
+        <section className="py-8 sm:py-10 bg-gradient-to-br from-amber-50 to-orange-50">
+          <div className="max-w-5xl mx-auto px-3 sm:px-4">
+            <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-2 text-center">Czas realizacji naprawy — od zgłoszenia do zwrotu</h2>
+            <p className="text-sm text-gray-600 text-center mb-6 sm:mb-8 max-w-3xl mx-auto">
+              Czas zależy od typu naprawy i dostępności części. Większość zleceń realizujemy w 5-7 dni roboczych.
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+              <div className="bg-white rounded-xl p-5 shadow-md border border-gray-100">
+                <Clock className="w-8 h-8 text-blue-600 mb-3" strokeWidth={1.5} />
+                <h3 className="font-semibold text-gray-900 mb-1">Standardowa</h3>
+                <p className="text-2xl font-bold text-blue-600 mb-1">5-7 dni</p>
+                <p className="text-xs text-gray-500">Większość napraw drukarek desktop i mobilnych.</p>
+              </div>
+              <div className="bg-white rounded-xl p-5 shadow-md border border-gray-100">
+                <Zap className="w-8 h-8 text-amber-500 mb-3" strokeWidth={1.5} />
+                <h3 className="font-semibold text-gray-900 mb-1">Ekspresowa</h3>
+                <p className="text-2xl font-bold text-amber-600 mb-1">24-48h</p>
+                <p className="text-xs text-gray-500">Dopłata 50 zł. Wymagane wcześniejsze ustalenie.</p>
+              </div>
+              <div className="bg-white rounded-xl p-5 shadow-md border border-gray-100">
+                <Award className="w-8 h-8 text-green-600 mb-3" strokeWidth={1.5} />
+                <h3 className="font-semibold text-gray-900 mb-1">Gwarancyjna</h3>
+                <p className="text-2xl font-bold text-green-600 mb-1">3-5 dni</p>
+                <p className="text-xs text-gray-500">Naprawy w ramach Zebra OneCare lub gwarancji producenta.</p>
+              </div>
+              <div className="bg-white rounded-xl p-5 shadow-md border border-gray-100">
+                <Factory className="w-8 h-8 text-red-600 mb-3" strokeWidth={1.5} />
+                <h3 className="font-semibold text-gray-900 mb-1">Krytyczna</h3>
+                <p className="text-2xl font-bold text-red-600 mb-1">indywidualnie</p>
+                <p className="text-xs text-gray-500">Przestój linii produkcyjnej — zadzwoń, ustalimy priorytet.</p>
+              </div>
+            </div>
+            <div className="bg-white rounded-xl p-4 sm:p-5 mt-6 border border-gray-100 shadow-sm">
+              <p className="text-sm text-gray-700 leading-relaxed">
+                <strong>Co wpływa na czas naprawy?</strong> Najczęściej dostępność części zamiennych. Mamy magazyn części dla wszystkich popularnych modeli — w tym starszych jak <strong>105SL, GK420, LP2844</strong> — więc 90% napraw realizujemy bez czekania na sprowadzenie.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Dlaczego nasz serwis */}
+        <section className="py-10 sm:py-12 md:py-14 bg-white">
+          <div className="max-w-6xl mx-auto px-3 sm:px-4">
+            <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-2 text-center">Dlaczego nasz serwis drukarek Zebra?</h2>
+            <p className="text-sm text-gray-600 text-center mb-8 sm:mb-10 max-w-3xl mx-auto">
+              Specjalizujemy się wyłącznie w urządzeniach Zebra Technologies — to nasza jedyna domena, a nie poboczne zlecenia.
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+              <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-5 border border-blue-100">
+                <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-3 shadow-sm"><Award className="w-6 h-6 text-blue-600" strokeWidth={1.5} /></div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">25 lat doświadczenia</h3>
+                <p className="text-sm text-gray-600 leading-relaxed">Od 2000 roku naprawiamy wyłącznie drukarki Zebra. Ponad <strong>5000 wykonanych napraw</strong> daje nam ekspercką wiedzę.</p>
+              </div>
+              <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-5 border border-green-100">
+                <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-3 shadow-sm"><Shield className="w-6 h-6 text-green-600" strokeWidth={1.5} /></div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Autoryzacja Zebra Technologies</h3>
+                <p className="text-sm text-gray-600 leading-relaxed">Oficjalne uprawnienia producenta. Naprawiamy w standardzie Zebra, używamy <strong>wyłącznie oryginalnych części</strong>.</p>
+              </div>
+              <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl p-5 border border-amber-100">
+                <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-3 shadow-sm"><Package className="w-6 h-6 text-amber-600" strokeWidth={1.5} /></div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Części do starszych modeli</h3>
+                <p className="text-sm text-gray-600 leading-relaxed">Naprawiamy też modele EOL (LP2844, 105SL, GK420, Xi4). Mamy <strong>części do drukarek sprzed 20+ lat</strong>.</p>
+              </div>
+              <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-5 border border-purple-100">
+                <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-3 shadow-sm"><MapPin className="w-6 h-6 text-purple-600" strokeWidth={1.5} /></div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Cała Polska — kurier 24h</h3>
+                <p className="text-sm text-gray-600 leading-relaxed">Kurier DPD odbierze drukarkę z dowolnego miejsca w Polsce w ciągu 24h. Po naprawie odsyłamy na nasz koszt.</p>
+              </div>
+              <div className="bg-gradient-to-br from-cyan-50 to-blue-50 rounded-xl p-5 border border-cyan-100">
+                <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-3 shadow-sm"><Users className="w-6 h-6 text-cyan-600" strokeWidth={1.5} /></div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Polskojęzyczna obsługa</h3>
+                <p className="text-sm text-gray-600 leading-relaxed">Inżynierowie po polsku, którzy rozumieją kontekst Twojej firmy. Telefoniczne wsparcie techniczne.</p>
+              </div>
+              <div className="bg-gradient-to-br from-rose-50 to-red-50 rounded-xl p-5 border border-rose-100">
+                <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-3 shadow-sm"><Factory className="w-6 h-6 text-rose-600" strokeWidth={1.5} /></div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Fabryki i logistyka</h3>
+                <p className="text-sm text-gray-600 leading-relaxed">Obsługujemy zakłady produkcyjne, magazyny, apteki, szpitale. Rozumiemy <strong>krytyczność przestoju</strong> — ekspres 24-48h.</p>
               </div>
             </div>
           </div>
