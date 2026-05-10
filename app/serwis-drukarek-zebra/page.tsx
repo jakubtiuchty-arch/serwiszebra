@@ -558,18 +558,18 @@ export default function DrukarkiPage() {
               Najczęstsze awarie drukarek Zebra wg typu
             </h2>
             <p className="text-sm text-gray-600 text-center mb-8 max-w-3xl mx-auto">
-              Na podstawie 5000+ napraw — te usterki widzimy najczęściej. 60% z nich można rozwiązać samodzielnie, reszta wymaga serwisu.
+              Masz podobny problem? Wyślij drukarkę do nas — zdiagnozujemy usterkę i naprawimy oryginalnymi częściami Zebra.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
               <div className="bg-white rounded-xl overflow-hidden border border-gray-200 shadow-lg">
-                <div className="bg-gradient-to-r from-blue-50 to-indigo-50 px-5 py-3 -mx-0 mb-4 border-b border-gray-200"><h3 className="text-lg font-semibold text-gray-900">Drukarki desktop (ZD220, ZD420, ZD421, ZD620, GK420)</h3></div>
-                <div className="divide-y divide-gray-100 px-5 pb-5">
+                <div className="bg-gradient-to-r from-blue-50 to-indigo-50 px-5 py-3 border-b border-gray-200"><h3 className="text-lg font-semibold text-gray-900">Drukarki desktop (ZD220, ZD420, ZD421, ZD620, GK420)</h3></div>
+                <div className="divide-y divide-gray-100 px-5">
                   {[
-                    { title: 'Media Out / puste etykiety', desc: 'Zła kalibracja czujnika SmartCal. Najczęstszy problem (35% zgłoszeń).' },
-                    { title: 'Ribbon Out mimo załadowanej taśmy', desc: 'Ribbon załadowany odwrotnie lub zły tryb druku (Direct Thermal zamiast Thermal Transfer).' },
-                    { title: 'Białe linie na wydruku', desc: 'Zużyta lub zabrudzona głowica. Wymiana co 2-3 lata intensywnej pracy.' },
-                    { title: 'Czerwona dioda (GK420/GC420)', desc: 'Uszkodzony czujnik etykiet, zacięty mechanizm lub Head Open.' },
-                    { title: 'Blady wydruk', desc: 'Niewłaściwy zasilacz, zużyty wałek dociskowy lub zbyt niska wartość Darkness.' },
+                    { title: 'Media Out / puste etykiety', desc: 'Najczęstszy problem — 35% zgłoszeń serwisowych.' },
+                    { title: 'Ribbon Out mimo załadowanej taśmy', desc: 'Wymaga diagnostyki czujnika i konfiguracji trybu druku.' },
+                    { title: 'Białe linie na wydruku', desc: 'Zużyta głowica drukująca — wymiana z kalibracją.' },
+                    { title: 'Czerwona dioda (GK420/GC420)', desc: 'Uszkodzony czujnik etykiet lub mechanizm podawania.' },
+                    { title: 'Blady wydruk', desc: 'Diagnostyka zasilacza, wałka dociskowego i parametrów druku.' },
                   ].map((item, i) => (
                     <div key={i} className="flex items-start gap-3 py-3">
                       <span className="flex-shrink-0 w-7 h-7 rounded-full bg-gray-900 text-white text-xs font-bold flex items-center justify-center mt-0.5">{i + 1}</span>
@@ -577,16 +577,19 @@ export default function DrukarkiPage() {
                     </div>
                   ))}
                 </div>
+                <div className="px-5 py-3 border-t border-gray-100">
+                  <Link href="/#formularz" className="text-sm font-medium text-blue-600 hover:text-blue-800">Zgłoś drukarkę desktop do naprawy →</Link>
+                </div>
               </div>
               <div className="bg-white rounded-xl overflow-hidden border border-gray-200 shadow-lg">
-                <div className="bg-gradient-to-r from-blue-50 to-indigo-50 px-5 py-3 -mx-0 mb-4 border-b border-gray-200"><h3 className="text-lg font-semibold text-gray-900">Drukarki przemysłowe (ZT410, ZT411, ZT510, ZT610, 105SL)</h3></div>
-                <div className="divide-y divide-gray-100 px-5 pb-5">
+                <div className="bg-gradient-to-r from-blue-50 to-indigo-50 px-5 py-3 border-b border-gray-200"><h3 className="text-lg font-semibold text-gray-900">Drukarki przemysłowe (ZT410, ZT411, ZT510, ZT610, 105SL)</h3></div>
+                <div className="divide-y divide-gray-100 px-5">
                   {[
-                    { title: 'Paper Out mimo załadowanych etykiet', desc: 'Rozkalibrowane czujniki gap/black mark. Częste po zmianie dostawcy etykiet.' },
-                    { title: 'Ribbon Out / fałszywy alarm', desc: 'Charakterystyczne dla ZT510: źle przeprowadzony materiał przez ścieżkę.' },
-                    { title: 'Head Over Temp / Printhead Shutdown', desc: 'Przegrzanie głowicy przy zbyt szybkim druku ciągłym.' },
-                    { title: 'Cutter Jam', desc: 'Zablokowana gilotyna, zużyte ostrze. Wymiana co 500k cięć.' },
-                    { title: 'Marszczenie ribbonu', desc: 'Zły balans naciągu, nierównomierny druk. Częste w ZT610/ZT620.' },
+                    { title: 'Paper Out mimo załadowanych etykiet', desc: 'Wymaga rekalibracji czujników — częste po zmianie dostawcy etykiet.' },
+                    { title: 'Ribbon Out / fałszywy alarm', desc: 'Diagnostyka ścieżki materiału i czujnika taśmy.' },
+                    { title: 'Head Over Temp / Printhead Shutdown', desc: 'Przegrzanie głowicy — wymaga serwisowej interwencji.' },
+                    { title: 'Cutter Jam', desc: 'Zablokowana gilotyna — wymiana ostrza i kalibracja.' },
+                    { title: 'Marszczenie ribbonu', desc: 'Regulacja naciągu i diagnostyka mechanizmu. Częste w ZT610/ZT620.' },
                   ].map((item, i) => (
                     <div key={i} className="flex items-start gap-3 py-3">
                       <span className="flex-shrink-0 w-7 h-7 rounded-full bg-gray-900 text-white text-xs font-bold flex items-center justify-center mt-0.5">{i + 1}</span>
@@ -594,16 +597,19 @@ export default function DrukarkiPage() {
                     </div>
                   ))}
                 </div>
+                <div className="px-5 py-3 border-t border-gray-100">
+                  <Link href="/#formularz" className="text-sm font-medium text-blue-600 hover:text-blue-800">Zgłoś drukarkę przemysłową do naprawy →</Link>
+                </div>
               </div>
               <div className="bg-white rounded-xl overflow-hidden border border-gray-200 shadow-lg">
-                <div className="bg-gradient-to-r from-blue-50 to-indigo-50 px-5 py-3 -mx-0 mb-4 border-b border-gray-200"><h3 className="text-lg font-semibold text-gray-900">Drukarki mobilne (ZQ520, ZQ620, ZQ630)</h3></div>
-                <div className="divide-y divide-gray-100 px-5 pb-5">
+                <div className="bg-gradient-to-r from-blue-50 to-indigo-50 px-5 py-3 border-b border-gray-200"><h3 className="text-lg font-semibold text-gray-900">Drukarki mobilne (ZQ520, ZQ620, ZQ630)</h3></div>
+                <div className="divide-y divide-gray-100 px-5">
                   {[
-                    { title: 'Battery Low Shutdown', desc: 'Bateria traci pojemność po 18-24 miesiącach. Wymiana 200-400 zł.' },
-                    { title: 'Head Authentication Failed', desc: 'Nieautoryzowana/uszkodzona głowica. Wymaga oryginalnej części.' },
-                    { title: 'Problemy Bluetooth/WiFi', desc: 'Rozłączanie, brak parowania. Często firmware lub moduł do wymiany.' },
-                    { title: 'Media Out', desc: 'Czujnik nośnika zabrudzony kurzem z pracy terenowej.' },
-                    { title: 'Blady wydruk w niskich temperaturach', desc: 'Głowica nie nagrzewa się wystarczająco na mrozie.' },
+                    { title: 'Battery Low Shutdown', desc: 'Wymiana baterii — oryginalne ogniwa Zebra z kalibracją.' },
+                    { title: 'Head Authentication Failed', desc: 'Wymiana głowicy na oryginalną część Zebra.' },
+                    { title: 'Problemy Bluetooth/WiFi', desc: 'Diagnostyka modułu komunikacyjnego i firmware.' },
+                    { title: 'Media Out', desc: 'Czyszczenie i kalibracja czujnika nośnika.' },
+                    { title: 'Blady wydruk w niskich temperaturach', desc: 'Regulacja parametrów druku i diagnostyka głowicy.' },
                   ].map((item, i) => (
                     <div key={i} className="flex items-start gap-3 py-3">
                       <span className="flex-shrink-0 w-7 h-7 rounded-full bg-gray-900 text-white text-xs font-bold flex items-center justify-center mt-0.5">{i + 1}</span>
@@ -611,27 +617,33 @@ export default function DrukarkiPage() {
                     </div>
                   ))}
                 </div>
+                <div className="px-5 py-3 border-t border-gray-100">
+                  <Link href="/#formularz" className="text-sm font-medium text-blue-600 hover:text-blue-800">Zgłoś drukarkę mobilną do naprawy →</Link>
+                </div>
               </div>
               <div className="bg-white rounded-xl overflow-hidden border border-gray-200 shadow-lg">
-                <div className="bg-gradient-to-r from-blue-50 to-indigo-50 px-5 py-3 -mx-0 mb-4 border-b border-gray-200"><h3 className="text-lg font-semibold text-gray-900">Drukarki kart (ZC100, ZC300, ZXP7, ZXP9)</h3></div>
-                <div className="divide-y divide-gray-100 px-5 pb-5">
+                <div className="bg-gradient-to-r from-blue-50 to-indigo-50 px-5 py-3 border-b border-gray-200"><h3 className="text-lg font-semibold text-gray-900">Drukarki kart (ZC100, ZC300, ZXP7, ZXP9)</h3></div>
+                <div className="divide-y divide-gray-100 px-5">
                   {[
-                    { title: 'Card Jam / zacięcie karty', desc: 'Zużyte wałki transportowe lub krzywo podawane karty z podajnika.' },
-                    { title: 'Ribbon Color Detect Error', desc: 'Czujnik nie rozpoznaje taśmy. Czyszczenie lub wymiana sensora.' },
-                    { title: 'Błędy kodowania magnetycznego (Error 9001-9004)', desc: 'Brudna lub uszkodzona głowica mag stripe.' },
-                    { title: 'Białe linie / smugi na karcie', desc: 'Zużyta głowica drukująca, wymiana co 10-20 tys. kart.' },
-                    { title: 'Laminator Card Feed Fail (ZXP7/ZXP9)', desc: 'Zacięcie folii laminacyjnej, wymaga serwisu.' },
+                    { title: 'Card Jam / zacięcie karty', desc: 'Wymiana wałków transportowych i regulacja podajnika.' },
+                    { title: 'Ribbon Color Detect Error', desc: 'Czyszczenie lub wymiana sensora taśmy.' },
+                    { title: 'Błędy kodowania magnetycznego (Error 9001-9004)', desc: 'Naprawa lub wymiana głowicy mag stripe.' },
+                    { title: 'Białe linie / smugi na karcie', desc: 'Wymiana głowicy drukującej z kalibracją kolorów.' },
+                    { title: 'Laminator Card Feed Fail (ZXP7/ZXP9)', desc: 'Naprawa modułu laminacji — wymaga serwisu.' },
                   ].map((item, i) => (
                     <div key={i} className="flex items-start gap-3 py-3">
                       <span className="flex-shrink-0 w-7 h-7 rounded-full bg-gray-900 text-white text-xs font-bold flex items-center justify-center mt-0.5">{i + 1}</span>
                       <div><p className="font-semibold text-gray-900 text-sm">{item.title}</p><p className="text-gray-600 text-sm mt-0.5">{item.desc}</p></div>
                     </div>
                   ))}
+                </div>
+                <div className="px-5 py-3 border-t border-gray-100">
+                  <Link href="/#formularz" className="text-sm font-medium text-blue-600 hover:text-blue-800">Zgłoś drukarkę kart do naprawy →</Link>
                 </div>
               </div>
             </div>
             <div className="text-center mt-6 sm:mt-8">
-              <p className="text-sm text-gray-600 mb-3">Nie widzisz swojej awarii? Zgłoś ją do nas — bezpłatna diagnostyka*, dokładna wycena.</p>
+              <p className="text-sm text-gray-600 mb-3">Rozpoznajesz swój problem? Wyślij drukarkę do nas — diagnostyka*, wycena i naprawa w 5-7 dni.</p>
               <Link href="/#formularz" className="inline-flex items-center gap-2 bg-[#A8F000] text-[#0A1A2F] font-medium px-5 py-2.5 rounded-lg hover:bg-[#8dbd00] transition-colors text-sm">
                 Zgłoś naprawę <ChevronRight className="w-4 h-4" />
               </Link>
