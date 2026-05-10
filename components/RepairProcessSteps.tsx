@@ -76,13 +76,13 @@ export default function RepairProcessSteps() {
                 className={`relative flex flex-col items-center text-center transition-all duration-[1200ms] transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'}`}
                 style={{ transitionDelay: `${isVisible ? stepIdx * 600 : 0}ms` }}
               >
-                <div className={`h-16 w-16 rounded-full bg-white border-4 shadow-md flex items-center justify-center mb-6 relative z-10 transition-all duration-[1000ms] ${isVisible ? 'border-blue-500 scale-100' : 'border-gray-200 scale-90'}`}>
-                  <step.icon className={`h-7 w-7 transition-colors duration-[1000ms] ${isVisible ? 'text-blue-600' : 'text-gray-400'}`} />
+                <div className={`h-16 w-16 rounded-full bg-white border-4 shadow-md flex items-center justify-center mb-6 relative z-10 transition-all duration-[1000ms] ${isVisible ? 'border-[#A8F000] scale-100' : 'border-gray-200 scale-90'}`}>
+                  <step.icon className={`h-7 w-7 transition-colors duration-[1000ms] ${isVisible ? 'text-[#6B8A00]' : 'text-gray-400'}`} />
                 </div>
                 <h3 className="text-lg font-bold text-gray-900 mb-3">{step.name}</h3>
                 <p className="text-sm text-gray-600 leading-relaxed px-2">{step.description}</p>
                 {'link' in step && step.link && (
-                  <Link href={step.link} className="inline-block mt-3 text-sm font-medium text-blue-600 hover:text-blue-800">
+                  <Link href={step.link} className="inline-block mt-3 text-sm font-medium text-[#6B8A00] hover:text-blue-800">
                     Zgłoś naprawę →
                   </Link>
                 )}
