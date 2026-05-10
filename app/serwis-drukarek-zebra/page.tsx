@@ -643,7 +643,7 @@ export default function DrukarkiPage() {
               </div>
             </div>
             <div className="text-center mt-6 sm:mt-8">
-              <p className="text-sm text-gray-600 mb-3">Rozpoznajesz swój problem? Wyślij drukarkę do nas — diagnostyka*, wycena i naprawa w 5-7 dni.</p>
+              <p className="text-sm text-gray-600 mb-3">Rozpoznajesz swój problem? Wyślij drukarkę do nas — diagnostyka, wycena i naprawa w 5-7 dni.</p>
               <Link href="/#formularz" className="inline-flex items-center gap-2 bg-[#A8F000] text-[#0A1A2F] font-medium px-5 py-2.5 rounded-lg hover:bg-[#8dbd00] transition-colors text-sm">
                 Zgłoś naprawę <ChevronRight className="w-4 h-4" />
               </Link>
