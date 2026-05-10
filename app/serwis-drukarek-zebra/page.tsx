@@ -547,43 +547,6 @@ export default function DrukarkiPage() {
           </div>
         </section>
 
-        {/* Kluczowe poradniki - klaster SEO */}
-        <section className="py-10 sm:py-12 md:py-14 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
-          <div className="max-w-6xl mx-auto px-3 sm:px-4">
-            <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-2 text-center">
-              Poradniki serwisowe drukarek Zebra
-            </h2>
-            <p className="text-sm text-gray-600 text-center mb-6 sm:mb-8">
-              Sprawdź nasze szczegółowe przewodniki po naprawie i konserwacji
-            </p>
-
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-              {clusterArticles.map((article) => (
-                <Link
-                  key={article.slug}
-                  href={`/blog/${article.slug}`}
-                  className="bg-white rounded-xl p-4 shadow-md border border-gray-100 hover:shadow-xl hover:border-blue-300 transition-all group"
-                >
-                  <h3 className="font-medium text-gray-900 group-hover:text-blue-600 transition-colors text-sm mb-1">
-                    {article.title}
-                  </h3>
-                  <p className="text-xs text-gray-500">{article.desc}</p>
-                </Link>
-              ))}
-            </div>
-
-            <div className="text-center mt-6">
-              <Link
-                href="/blog?kategoria=drukarki"
-                className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 font-medium text-sm"
-              >
-                Wszystkie poradniki o drukarkach
-                <ChevronRight className="w-4 h-4" />
-              </Link>
-            </div>
-          </div>
-        </section>
-
         {/* Najczęstsze awarie wg typu */}
         <section className="py-10 sm:py-12 md:py-14 bg-white">
           <div className="max-w-6xl mx-auto px-3 sm:px-4">
@@ -815,6 +778,43 @@ export default function DrukarkiPage() {
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">Fabryki i logistyka</h3>
                 <p className="text-sm text-gray-600 leading-relaxed">Obsługujemy zakłady produkcyjne, magazyny, apteki, szpitale. Rozumiemy <strong>krytyczność przestoju</strong> — ekspres 24-48h.</p>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Kluczowe poradniki - klaster SEO */}
+        <section className="py-10 sm:py-12 md:py-14 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+          <div className="max-w-6xl mx-auto px-3 sm:px-4">
+            <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-2 text-center">
+              Poradniki serwisowe drukarek Zebra
+            </h2>
+            <p className="text-sm text-gray-600 text-center mb-6 sm:mb-8">
+              Sprawdź nasze szczegółowe przewodniki po naprawie i konserwacji
+            </p>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+              {clusterArticles.map((article) => (
+                <Link
+                  key={article.slug}
+                  href={`/blog/${article.slug}`}
+                  className="bg-white rounded-xl p-4 shadow-md border border-gray-100 hover:shadow-xl hover:border-blue-300 transition-all group"
+                >
+                  <h3 className="font-medium text-gray-900 group-hover:text-blue-600 transition-colors text-sm mb-1">
+                    {article.title}
+                  </h3>
+                  <p className="text-xs text-gray-500">{article.desc}</p>
+                </Link>
+              ))}
+            </div>
+
+            <div className="text-center mt-6">
+              <Link
+                href="/blog?kategoria=drukarki"
+                className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 font-medium text-sm"
+              >
+                Wszystkie poradniki o drukarkach
+                <ChevronRight className="w-4 h-4" />
+              </Link>
             </div>
           </div>
         </section>
