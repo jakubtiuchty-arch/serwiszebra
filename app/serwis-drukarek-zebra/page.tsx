@@ -656,33 +656,24 @@ export default function DrukarkiPage() {
         <RepairProcessSteps />
 
         {/* Czas realizacji */}
-        <section className="py-8 sm:py-10 bg-gradient-to-br from-amber-50 to-orange-50">
+        <section className="py-8 sm:py-10 bg-gray-50">
           <div className="max-w-5xl mx-auto px-3 sm:px-4">
             <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-2 text-center">Czas realizacji naprawy — od zgłoszenia do zwrotu</h2>
             <p className="text-sm text-gray-600 text-center mb-6 sm:mb-8 max-w-3xl mx-auto">
               Czas zależy od typu naprawy i dostępności części. Większość zleceń realizujemy w 5-7 dni roboczych.
             </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
               <div className="bg-white rounded-xl p-5 shadow-md border border-gray-100">
-                <Clock className="w-8 h-8 text-blue-600 mb-3" strokeWidth={1.5} />
                 <h3 className="font-semibold text-gray-900 mb-1">Standardowa</h3>
                 <p className="text-2xl font-bold text-blue-600 mb-1">5-7 dni</p>
                 <p className="text-xs text-gray-500">Większość napraw drukarek desktop i mobilnych.</p>
               </div>
               <div className="bg-white rounded-xl p-5 shadow-md border border-gray-100">
-                <Zap className="w-8 h-8 text-amber-500 mb-3" strokeWidth={1.5} />
                 <h3 className="font-semibold text-gray-900 mb-1">Ekspresowa</h3>
                 <p className="text-2xl font-bold text-amber-600 mb-1">24-48h</p>
-                <p className="text-xs text-gray-500">Dopłata 50 zł. Wymagane wcześniejsze ustalenie.</p>
+                <p className="text-xs text-gray-500">Koszt 299,00 zł netto. Wymagane wcześniejsze ustalenie.</p>
               </div>
               <div className="bg-white rounded-xl p-5 shadow-md border border-gray-100">
-                <Award className="w-8 h-8 text-green-600 mb-3" strokeWidth={1.5} />
-                <h3 className="font-semibold text-gray-900 mb-1">Gwarancyjna</h3>
-                <p className="text-2xl font-bold text-green-600 mb-1">3-5 dni</p>
-                <p className="text-xs text-gray-500">Naprawy w ramach Zebra OneCare lub gwarancji producenta.</p>
-              </div>
-              <div className="bg-white rounded-xl p-5 shadow-md border border-gray-100">
-                <Factory className="w-8 h-8 text-red-600 mb-3" strokeWidth={1.5} />
                 <h3 className="font-semibold text-gray-900 mb-1">Krytyczna</h3>
                 <p className="text-2xl font-bold text-red-600 mb-1">indywidualnie</p>
                 <p className="text-xs text-gray-500">Przestój linii produkcyjnej — zadzwoń, ustalimy priorytet.</p>
