@@ -379,7 +379,7 @@ export default function DrukarkiPage() {
             </h1>
 
             <p className="text-sm sm:text-base text-gray-600 mb-5 sm:mb-6 max-w-2xl md:mx-0">
-              Autoryzowany serwis drukarek Zebra z 25-letnim doświadczeniem. Naprawy gwarancyjne i pogwarancyjne wszystkich modeli – wymiana głowic, mechanizmów, kalibracja.
+              <strong className="font-semibold">Autoryzowany</strong> serwis drukarek Zebra z <strong className="font-semibold">25-letnim doświadczeniem</strong>. Naprawy <strong className="font-semibold">gwarancyjne</strong> i pogwarancyjne wszystkich modeli – wymiana głowic, mechanizmów, kalibracja.
             </p>
 
             <div className="flex flex-wrap justify-center md:justify-start gap-2 sm:gap-3 mb-5 sm:mb-6">
