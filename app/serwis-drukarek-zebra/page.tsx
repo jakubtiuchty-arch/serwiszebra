@@ -427,7 +427,7 @@ export default function DrukarkiPage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
               {/* Desktop */}
               <div className="bg-white rounded-xl p-5 shadow-xl border border-gray-100 hover:shadow-2xl transition-shadow">
-                <div className="w-14 h-14 bg-gray-50 rounded-xl flex items-center justify-center mb-3 border border-gray-100">
+                <div className="w-14 h-14 bg-white rounded-xl flex items-center justify-center mb-3 border border-gray-100">
                   <Image src="/ikona-biurkowe-desktop.png" alt="Drukarka biurkowa Zebra" width={40} height={40} className="w-9 h-9 object-contain" />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">Desktop (biurkowe)</h3>
@@ -457,7 +457,7 @@ export default function DrukarkiPage() {
 
               {/* Przemysłowe */}
               <div className="bg-white rounded-xl p-5 shadow-xl border border-gray-100 hover:shadow-2xl transition-shadow">
-                <div className="w-14 h-14 bg-gray-50 rounded-xl flex items-center justify-center mb-3 border border-gray-100">
+                <div className="w-14 h-14 bg-white rounded-xl flex items-center justify-center mb-3 border border-gray-100">
                   <Image src="/ikona-przemyslowe.png" alt="Drukarka przemysłowa Zebra" width={40} height={40} className="w-9 h-9 object-contain" />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">Przemysłowe</h3>
@@ -487,7 +487,7 @@ export default function DrukarkiPage() {
 
               {/* Mobilne */}
               <div className="bg-white rounded-xl p-5 shadow-xl border border-gray-100 hover:shadow-2xl transition-shadow">
-                <div className="w-14 h-14 bg-gray-50 rounded-xl flex items-center justify-center mb-3 border border-gray-100">
+                <div className="w-14 h-14 bg-white rounded-xl flex items-center justify-center mb-3 border border-gray-100">
                   <Image src="/ikona-mobilne.png" alt="Drukarka mobilna Zebra" width={40} height={40} className="w-9 h-9 object-contain" />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">Mobilne</h3>
@@ -517,7 +517,7 @@ export default function DrukarkiPage() {
 
               {/* Kart */}
               <div className="bg-white rounded-xl p-5 shadow-xl border border-gray-100 hover:shadow-2xl transition-shadow">
-                <div className="w-14 h-14 bg-gray-50 rounded-xl flex items-center justify-center mb-3 border border-gray-100">
+                <div className="w-14 h-14 bg-white rounded-xl flex items-center justify-center mb-3 border border-gray-100">
                   <Image src="/ikona-kart-plastikowych.png" alt="Drukarka kart plastikowych Zebra" width={40} height={40} className="w-9 h-9 object-contain" />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">Kart plastikowych</h3>
