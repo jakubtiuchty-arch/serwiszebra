@@ -363,7 +363,6 @@ export default function DrukarkiPage() {
             <div className="absolute inset-0 bg-gradient-to-r from-blue-50 via-blue-50/95 via-60% to-transparent" />
           </div>
           <div className="relative max-w-6xl mx-auto px-3 sm:px-4 text-center md:text-left">
-            <p className="text-sm sm:text-base font-medium text-gray-500 mb-2">Autoryzowany serwis drukarek Zebra</p>
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-gray-900 mb-3 sm:mb-4">
               Serwis Drukarek Zebra
               <span className="block text-base sm:text-lg md:text-xl font-normal text-gray-600 mt-1 sm:mt-2">
