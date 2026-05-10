@@ -695,33 +695,27 @@ export default function DrukarkiPage() {
               Specjalizujemy się wyłącznie w urządzeniach Zebra Technologies — to nasza jedyna domena, a nie poboczne zlecenia.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
-              <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-5 border border-blue-100">
-                <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-3 shadow-sm"><Award className="w-6 h-6 text-blue-600" strokeWidth={1.5} /></div>
+              <div className="bg-white rounded-xl p-5 border border-gray-200">
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">25 lat doświadczenia</h3>
                 <p className="text-sm text-gray-600 leading-relaxed">Od 2000 roku naprawiamy wyłącznie drukarki Zebra. Ponad <strong>5000 wykonanych napraw</strong> daje nam ekspercką wiedzę.</p>
               </div>
-              <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-5 border border-green-100">
-                <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-3 shadow-sm"><Shield className="w-6 h-6 text-green-600" strokeWidth={1.5} /></div>
+              <div className="bg-white rounded-xl p-5 border border-gray-200">
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">Autoryzacja Zebra Technologies</h3>
                 <p className="text-sm text-gray-600 leading-relaxed">Oficjalne uprawnienia producenta. Naprawiamy w standardzie Zebra, używamy <strong>wyłącznie oryginalnych części</strong>.</p>
               </div>
-              <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl p-5 border border-amber-100">
-                <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-3 shadow-sm"><Package className="w-6 h-6 text-amber-600" strokeWidth={1.5} /></div>
+              <div className="bg-white rounded-xl p-5 border border-gray-200">
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">Części do starszych modeli</h3>
                 <p className="text-sm text-gray-600 leading-relaxed">Naprawiamy też modele EOL (LP2844, 105SL, GK420, Xi4). Mamy <strong>części do drukarek sprzed 20+ lat</strong>.</p>
               </div>
-              <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-5 border border-purple-100">
-                <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-3 shadow-sm"><MapPin className="w-6 h-6 text-purple-600" strokeWidth={1.5} /></div>
+              <div className="bg-white rounded-xl p-5 border border-gray-200">
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">Cała Polska — kurier 24h</h3>
                 <p className="text-sm text-gray-600 leading-relaxed">Kurier DPD odbierze drukarkę z dowolnego miejsca w Polsce w ciągu 24h. Po naprawie odsyłamy na nasz koszt.</p>
               </div>
-              <div className="bg-gradient-to-br from-cyan-50 to-blue-50 rounded-xl p-5 border border-cyan-100">
-                <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-3 shadow-sm"><Users className="w-6 h-6 text-cyan-600" strokeWidth={1.5} /></div>
+              <div className="bg-white rounded-xl p-5 border border-gray-200">
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">Polskojęzyczna obsługa</h3>
                 <p className="text-sm text-gray-600 leading-relaxed">Inżynierowie po polsku, którzy rozumieją kontekst Twojej firmy. Telefoniczne wsparcie techniczne.</p>
               </div>
-              <div className="bg-gradient-to-br from-rose-50 to-red-50 rounded-xl p-5 border border-rose-100">
-                <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-3 shadow-sm"><Factory className="w-6 h-6 text-rose-600" strokeWidth={1.5} /></div>
+              <div className="bg-white rounded-xl p-5 border border-gray-200">
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">Fabryki i logistyka</h3>
                 <p className="text-sm text-gray-600 leading-relaxed">Obsługujemy zakłady produkcyjne, magazyny, apteki, szpitale. Rozumiemy <strong>krytyczność przestoju</strong> — ekspres 24-48h.</p>
               </div>
