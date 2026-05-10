@@ -645,7 +645,7 @@ export default function DrukarkiPage() {
               <div className="bg-white rounded-xl p-4 border border-gray-100 shadow-md"><p className="text-xs text-gray-500 mb-1">Ekspres (24-48h)</p><p className="text-base font-semibold text-gray-900">+50 zł</p></div>
             </div>
 
-            <p className="text-xs text-gray-500 mt-4">
+            <p className="text-xs text-gray-500 mt-4 text-center">
               * Diagnostyka jest bezpłatna w przypadku zlecenia naprawy w naszym serwisie. W przypadku rezygnacji z naprawy koszt diagnostyki wynosi 99,00 zł netto.
             </p>
           </div>
