@@ -688,34 +688,34 @@ export default function DrukarkiPage() {
         </section>
 
         {/* Dlaczego nasz serwis */}
-        <section className="py-10 sm:py-12 md:py-14 bg-white">
+        <section className="py-10 sm:py-12 md:py-14 bg-gray-50">
           <div className="max-w-6xl mx-auto px-3 sm:px-4">
             <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-2 text-center">Dlaczego nasz serwis drukarek Zebra?</h2>
             <p className="text-sm text-gray-600 text-center mb-8 sm:mb-10 max-w-3xl mx-auto">
               Specjalizujemy się wyłącznie w urządzeniach Zebra Technologies — to nasza jedyna domena, a nie poboczne zlecenia.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
-              <div className="bg-white rounded-xl p-5 border border-gray-200">
+              <div className="bg-white rounded-xl p-5 border border-gray-100 shadow-lg">
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">25 lat doświadczenia</h3>
                 <p className="text-sm text-gray-600 leading-relaxed">Od 2000 roku naprawiamy wyłącznie drukarki Zebra. Ponad <strong>5000 wykonanych napraw</strong> daje nam ekspercką wiedzę.</p>
               </div>
-              <div className="bg-white rounded-xl p-5 border border-gray-200">
+              <div className="bg-white rounded-xl p-5 border border-gray-100 shadow-lg">
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">Autoryzacja Zebra Technologies</h3>
                 <p className="text-sm text-gray-600 leading-relaxed">Oficjalne uprawnienia producenta. Naprawiamy w standardzie Zebra, używamy <strong>wyłącznie oryginalnych części</strong>.</p>
               </div>
-              <div className="bg-white rounded-xl p-5 border border-gray-200">
+              <div className="bg-white rounded-xl p-5 border border-gray-100 shadow-lg">
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">Części do starszych modeli</h3>
                 <p className="text-sm text-gray-600 leading-relaxed">Naprawiamy też modele EOL (LP2844, 105SL, GK420, Xi4). Mamy <strong>części do drukarek sprzed 20+ lat</strong>.</p>
               </div>
-              <div className="bg-white rounded-xl p-5 border border-gray-200">
+              <div className="bg-white rounded-xl p-5 border border-gray-100 shadow-lg">
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">Cała Polska — kurier 24h</h3>
                 <p className="text-sm text-gray-600 leading-relaxed">Kurier DPD odbierze drukarkę z dowolnego miejsca w Polsce w ciągu 24h. Po naprawie odsyłamy na nasz koszt.</p>
               </div>
-              <div className="bg-white rounded-xl p-5 border border-gray-200">
+              <div className="bg-white rounded-xl p-5 border border-gray-100 shadow-lg">
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">Polskojęzyczna obsługa</h3>
                 <p className="text-sm text-gray-600 leading-relaxed">Inżynierowie po polsku, którzy rozumieją kontekst Twojej firmy. Telefoniczne wsparcie techniczne.</p>
               </div>
-              <div className="bg-white rounded-xl p-5 border border-gray-200">
+              <div className="bg-white rounded-xl p-5 border border-gray-100 shadow-lg">
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">Fabryki i logistyka</h3>
                 <p className="text-sm text-gray-600 leading-relaxed">Obsługujemy zakłady produkcyjne, magazyny, apteki, szpitale. Rozumiemy <strong>krytyczność przestoju</strong> — ekspres 24-48h.</p>
               </div>
