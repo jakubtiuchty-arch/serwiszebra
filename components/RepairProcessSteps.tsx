@@ -1,12 +1,14 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
+import Link from 'next/link'
 import { ClipboardList, Truck, Search, Wrench } from 'lucide-react'
 
 const steps = [
   {
     name: 'Krok 1: Zgłoszenie',
-    description: 'Wypełnij formularz na stronie lub zadzwoń na +48 601 619 898. Podaj model drukarki i opis usterki. Otrzymasz numer zlecenia.',
+    description: 'Wypełnij formularz zgłoszeniowy — podaj model drukarki i opis usterki. Otrzymasz numer zlecenia i dostęp do panelu klienta.',
+    link: '/#formularz',
     icon: ClipboardList,
   },
   {
@@ -79,6 +81,11 @@ export default function RepairProcessSteps() {
                 </div>
                 <h3 className="text-lg font-bold text-gray-900 mb-3">{step.name}</h3>
                 <p className="text-sm text-gray-600 leading-relaxed px-2">{step.description}</p>
+                {'link' in step && step.link && (
+                  <Link href={step.link} className="inline-block mt-3 text-sm font-medium text-blue-600 hover:text-blue-800">
+                    Zgłoś naprawę →
+                  </Link>
+                )}
               </div>
             ))}
           </div>
