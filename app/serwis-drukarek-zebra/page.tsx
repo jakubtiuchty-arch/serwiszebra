@@ -729,7 +729,7 @@ export default function DrukarkiPage() {
 
         {/* Dlaczego nasz serwis */}
         <section className="py-10 sm:py-12 md:py-14 bg-gray-50 relative overflow-hidden">
-          <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'url(/dlaczego-nasz-serwis.png)', backgroundSize: 'cover', backgroundPosition: 'center' }} />
+          <div className="absolute inset-0 opacity-[0.08]" style={{ backgroundImage: 'url(/dlaczego-nasz-serwis.png)', backgroundSize: 'cover', backgroundPosition: 'center' }} />
           <div className="relative z-10 max-w-6xl mx-auto px-3 sm:px-4">
             <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-2 text-center">Dlaczego nasz serwis drukarek Zebra?</h2>
             <p className="text-sm text-gray-600 text-center mb-8 sm:mb-10 max-w-3xl mx-auto">
