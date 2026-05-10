@@ -683,10 +683,10 @@ export default function DrukarkiPage() {
               </div>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mb-6">
-              <div className="bg-white rounded-xl p-4 border border-gray-100 shadow-md"><p className="text-xs text-gray-500 mb-1">Wałek dociskowy</p><p className="text-base font-semibold text-gray-900">od 150 zł</p></div>
-              <div className="bg-white rounded-xl p-4 border border-gray-100 shadow-md"><p className="text-xs text-gray-500 mb-1">Wymiana ribbonu</p><p className="text-base font-semibold text-gray-900">od 80 zł</p></div>
-              <div className="bg-white rounded-xl p-4 border border-gray-100 shadow-md"><p className="text-xs text-gray-500 mb-1">Naprawa płyty głównej</p><p className="text-base font-semibold text-gray-900">od 350 zł</p></div>
-              <div className="bg-white rounded-xl p-4 border border-gray-100 shadow-md"><p className="text-xs text-gray-500 mb-1">Ekspres (24-48h)</p><p className="text-base font-semibold text-gray-900">299 zł netto</p></div>
+              <div className="bg-white rounded-xl p-4 border border-gray-100 shadow-md text-center"><p className="text-xs text-gray-500 mb-1">Wałek dociskowy</p><p className="text-base font-semibold text-gray-900">od 150 zł</p></div>
+              <div className="bg-white rounded-xl p-4 border border-gray-100 shadow-md text-center"><p className="text-xs text-gray-500 mb-1">Wymiana ribbonu</p><p className="text-base font-semibold text-gray-900">od 80 zł</p></div>
+              <div className="bg-white rounded-xl p-4 border border-gray-100 shadow-md text-center"><p className="text-xs text-gray-500 mb-1">Naprawa płyty głównej</p><p className="text-base font-semibold text-gray-900">od 350 zł</p></div>
+              <div className="bg-white rounded-xl p-4 border border-gray-100 shadow-md text-center"><p className="text-xs text-gray-500 mb-1">Ekspres (24-48h)</p><p className="text-base font-semibold text-gray-900">299 zł netto</p></div>
             </div>
 
             <p className="text-xs text-gray-500 mt-4 text-center">
