@@ -558,9 +558,9 @@ export default function DrukarkiPage() {
               Na podstawie 5000+ napraw — te usterki widzimy najczęściej. 60% z nich można rozwiązać samodzielnie, reszta wymaga serwisu.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
-              <div className="bg-white rounded-xl p-5 sm:p-6 border border-gray-200 shadow-lg">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Drukarki desktop (ZD220, ZD420, ZD421, ZD620, GK420)</h3>
-                <div className="divide-y divide-gray-100">
+              <div className="bg-white rounded-xl overflow-hidden border border-gray-200 shadow-lg">
+                <div className="bg-gradient-to-r from-blue-50 to-indigo-50 px-5 py-3 -mx-0 mb-4 border-b border-gray-200"><h3 className="text-lg font-semibold text-gray-900">Drukarki desktop (ZD220, ZD420, ZD421, ZD620, GK420)</h3></div>
+                <div className="divide-y divide-gray-100 px-5 pb-5">
                   {[
                     { title: 'Media Out / puste etykiety', desc: 'Zła kalibracja czujnika SmartCal. Najczęstszy problem (35% zgłoszeń).' },
                     { title: 'Ribbon Out mimo załadowanej taśmy', desc: 'Ribbon załadowany odwrotnie lub zły tryb druku (Direct Thermal zamiast Thermal Transfer).' },
@@ -575,9 +575,9 @@ export default function DrukarkiPage() {
                   ))}
                 </div>
               </div>
-              <div className="bg-white rounded-xl p-5 sm:p-6 border border-gray-200 shadow-lg">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Drukarki przemysłowe (ZT410, ZT411, ZT510, ZT610, 105SL)</h3>
-                <div className="divide-y divide-gray-100">
+              <div className="bg-white rounded-xl overflow-hidden border border-gray-200 shadow-lg">
+                <div className="bg-gradient-to-r from-blue-50 to-indigo-50 px-5 py-3 -mx-0 mb-4 border-b border-gray-200"><h3 className="text-lg font-semibold text-gray-900">Drukarki przemysłowe (ZT410, ZT411, ZT510, ZT610, 105SL)</h3></div>
+                <div className="divide-y divide-gray-100 px-5 pb-5">
                   {[
                     { title: 'Paper Out mimo załadowanych etykiet', desc: 'Rozkalibrowane czujniki gap/black mark. Częste po zmianie dostawcy etykiet.' },
                     { title: 'Ribbon Out / fałszywy alarm', desc: 'Charakterystyczne dla ZT510: źle przeprowadzony materiał przez ścieżkę.' },
@@ -592,9 +592,9 @@ export default function DrukarkiPage() {
                   ))}
                 </div>
               </div>
-              <div className="bg-white rounded-xl p-5 sm:p-6 border border-gray-200 shadow-lg">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Drukarki mobilne (ZQ520, ZQ620, ZQ630)</h3>
-                <div className="divide-y divide-gray-100">
+              <div className="bg-white rounded-xl overflow-hidden border border-gray-200 shadow-lg">
+                <div className="bg-gradient-to-r from-blue-50 to-indigo-50 px-5 py-3 -mx-0 mb-4 border-b border-gray-200"><h3 className="text-lg font-semibold text-gray-900">Drukarki mobilne (ZQ520, ZQ620, ZQ630)</h3></div>
+                <div className="divide-y divide-gray-100 px-5 pb-5">
                   {[
                     { title: 'Battery Low Shutdown', desc: 'Bateria traci pojemność po 18-24 miesiącach. Wymiana 200-400 zł.' },
                     { title: 'Head Authentication Failed', desc: 'Nieautoryzowana/uszkodzona głowica. Wymaga oryginalnej części.' },
@@ -609,9 +609,9 @@ export default function DrukarkiPage() {
                   ))}
                 </div>
               </div>
-              <div className="bg-white rounded-xl p-5 sm:p-6 border border-gray-200 shadow-lg">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Drukarki kart (ZC100, ZC300, ZXP7, ZXP9)</h3>
-                <div className="divide-y divide-gray-100">
+              <div className="bg-white rounded-xl overflow-hidden border border-gray-200 shadow-lg">
+                <div className="bg-gradient-to-r from-blue-50 to-indigo-50 px-5 py-3 -mx-0 mb-4 border-b border-gray-200"><h3 className="text-lg font-semibold text-gray-900">Drukarki kart (ZC100, ZC300, ZXP7, ZXP9)</h3></div>
+                <div className="divide-y divide-gray-100 px-5 pb-5">
                   {[
                     { title: 'Card Jam / zacięcie karty', desc: 'Zużyte wałki transportowe lub krzywo podawane karty z podajnika.' },
                     { title: 'Ribbon Color Detect Error', desc: 'Czujnik nie rozpoznaje taśmy. Czyszczenie lub wymiana sensora.' },
