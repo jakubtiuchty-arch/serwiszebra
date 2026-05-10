@@ -369,7 +369,11 @@ export default function DrukarkiPage() {
                 – Etykiet, Kart Plastikowych, Mobilnych
               </span>
             </h1>
-            
+
+            <p className="text-sm sm:text-base text-gray-600 mb-5 sm:mb-6 max-w-2xl md:mx-0">
+              Autoryzowany serwis drukarek Zebra z 25-letnim doświadczeniem. Naprawy gwarancyjne i pogwarancyjne wszystkich modeli – wymiana głowic, mechanizmów, kalibracja.
+            </p>
+
             <div className="flex flex-wrap justify-center md:justify-start gap-2 sm:gap-3 mb-5 sm:mb-6">
               <div className="flex items-center gap-1.5 bg-white/80 backdrop-blur-sm border border-gray-200 px-3 py-1.5 rounded-full text-xs sm:text-sm shadow-sm">
                 <Truck className="w-4 h-4 text-green-600" />
