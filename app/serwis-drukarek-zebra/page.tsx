@@ -651,49 +651,51 @@ export default function DrukarkiPage() {
           </div>
         </section>
 
-        {/* Proces serwisowy krok po kroku */}
-        <section className="py-10 sm:py-12 md:py-14 bg-white">
-          <div className="max-w-6xl mx-auto px-3 sm:px-4">
-            <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-2 text-center">Jak wygląda naprawa drukarki Zebra — krok po kroku</h2>
-            <p className="text-sm text-gray-600 text-center mb-8 sm:mb-10 max-w-3xl mx-auto">
-              Cały proces od zgłoszenia do zwrotu naprawionej drukarki zajmuje średnio 5-7 dni roboczych. Działamy na terenie całej Polski — kurier odbierze drukarkę bezpłatnie.
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
-              <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-5 border border-blue-100 relative">
-                <div className="absolute -top-3 left-5 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full">KROK 1</div>
-                <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-3 mt-2 shadow-sm"><ClipboardList className="w-6 h-6 text-blue-600" strokeWidth={1.5} /></div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Zgłoszenie online</h3>
-                <p className="text-sm text-gray-600 leading-relaxed">Wypełniasz formularz (model, opis problemu) lub dzwonisz na +48 601 619 898. Otrzymujesz numer zlecenia i zamawiamy kuriera.</p>
-              </div>
-              <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-5 border border-blue-100 relative">
-                <div className="absolute -top-3 left-5 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full">KROK 2</div>
-                <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-3 mt-2 shadow-sm"><Truck className="w-6 h-6 text-blue-600" strokeWidth={1.5} /></div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Bezpłatny odbiór 24h</h3>
-                <p className="text-sm text-gray-600 leading-relaxed">Kurier DPD odbierze drukarkę z Twojej firmy w ciągu 24h od zgłoszenia.</p>
-              </div>
-              <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-5 border border-blue-100 relative">
-                <div className="absolute -top-3 left-5 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full">KROK 3</div>
-                <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-3 mt-2 shadow-sm"><Search className="w-6 h-6 text-blue-600" strokeWidth={1.5} /></div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Bezpłatna diagnostyka*</h3>
-                <p className="text-sm text-gray-600 leading-relaxed">W ciągu 1-2 dni roboczych diagnozujemy usterkę i przesyłamy dokładną wycenę do akceptacji.</p>
-              </div>
-              <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-5 border border-green-100 relative">
-                <div className="absolute -top-3 left-5 bg-green-600 text-white text-xs font-bold px-3 py-1 rounded-full">KROK 4</div>
-                <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-3 mt-2 shadow-sm"><Wrench className="w-6 h-6 text-green-600" strokeWidth={1.5} /></div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Naprawa</h3>
-                <p className="text-sm text-gray-600 leading-relaxed">Po akceptacji wyceny rozpoczynamy naprawę. Używamy <strong>oryginalnych części Zebra</strong>. Standardowy czas: 2-5 dni roboczych.</p>
-              </div>
-              <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-5 border border-green-100 relative">
-                <div className="absolute -top-3 left-5 bg-green-600 text-white text-xs font-bold px-3 py-1 rounded-full">KROK 5</div>
-                <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-3 mt-2 shadow-sm"><CheckCircle2 className="w-6 h-6 text-green-600" strokeWidth={1.5} /></div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Test jakości</h3>
-                <p className="text-sm text-gray-600 leading-relaxed">Pełny test druku, kalibracja i weryfikacja wszystkich funkcji. Tylko sprawne urządzenia opuszczają serwis.</p>
-              </div>
-              <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-5 border border-green-100 relative">
-                <div className="absolute -top-3 left-5 bg-green-600 text-white text-xs font-bold px-3 py-1 rounded-full">KROK 6</div>
-                <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-3 mt-2 shadow-sm"><Package className="w-6 h-6 text-green-600" strokeWidth={1.5} /></div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Wysyłka zwrotna</h3>
-                <p className="text-sm text-gray-600 leading-relaxed">Odsyłamy drukarkę kurierem na nasz koszt. Otrzymujesz raport serwisowy.</p>
+        {/* Proces serwisowy — design z TAKMA */}
+        <section className="bg-gray-50 py-10 sm:py-14">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl font-bold tracking-tight text-gray-900">
+                Jak wygląda naprawa drukarki Zebra — krok po kroku
+              </h2>
+              <p className="mt-4 text-lg text-gray-600">
+                Cały proces zajmuje średnio 5-7 dni roboczych. Kurier odbierze drukarkę z dowolnego miejsca w Polsce.
+              </p>
+            </div>
+
+            <div className="relative">
+              <div className="relative z-10 grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div className="relative flex flex-col items-center text-center">
+                  <div className="h-16 w-16 rounded-full bg-white border-4 border-blue-500 shadow-md flex items-center justify-center mb-6">
+                    <ClipboardList className="h-7 w-7 text-blue-600" />
+                  </div>
+                  <h3 className="text-lg font-bold text-gray-900 mb-3">Krok 1: Zgłoszenie</h3>
+                  <p className="text-sm text-gray-600 leading-relaxed px-2">Wypełnij formularz na stronie lub zadzwoń na +48 601 619 898. Podaj model drukarki i opis usterki. Otrzymasz numer zlecenia.</p>
+                </div>
+
+                <div className="relative flex flex-col items-center text-center">
+                  <div className="h-16 w-16 rounded-full bg-white border-4 border-blue-500 shadow-md flex items-center justify-center mb-6">
+                    <Truck className="h-7 w-7 text-blue-600" />
+                  </div>
+                  <h3 className="text-lg font-bold text-gray-900 mb-3">Krok 2: Odbiór kurierem</h3>
+                  <p className="text-sm text-gray-600 leading-relaxed px-2">Zamawiamy kuriera DPD pod odbiór drukarki ze wskazanego adresu. Odbiór zazwyczaj w ciągu 24h.</p>
+                </div>
+
+                <div className="relative flex flex-col items-center text-center">
+                  <div className="h-16 w-16 rounded-full bg-white border-4 border-blue-500 shadow-md flex items-center justify-center mb-6">
+                    <Search className="h-7 w-7 text-blue-600" />
+                  </div>
+                  <h3 className="text-lg font-bold text-gray-900 mb-3">Krok 3: Diagnostyka i wycena</h3>
+                  <p className="text-sm text-gray-600 leading-relaxed px-2">Drukarka jest diagnozowana przez naszych techników. Wycenę otrzymujesz w panelu klienta do akceptacji.</p>
+                </div>
+
+                <div className="relative flex flex-col items-center text-center">
+                  <div className="h-16 w-16 rounded-full bg-white border-4 border-blue-500 shadow-md flex items-center justify-center mb-6">
+                    <Wrench className="h-7 w-7 text-blue-600" />
+                  </div>
+                  <h3 className="text-lg font-bold text-gray-900 mb-3">Krok 4: Naprawa i odesłanie</h3>
+                  <p className="text-sm text-gray-600 leading-relaxed px-2">Po akceptacji wyceny naprawiamy oryginalnymi częściami Zebra i odsyłamy kurierem na nasz koszt.</p>
+                </div>
               </div>
             </div>
           </div>
