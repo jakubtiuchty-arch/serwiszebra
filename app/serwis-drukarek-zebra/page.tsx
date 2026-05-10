@@ -646,7 +646,7 @@ export default function DrukarkiPage() {
             </div>
 
             <p className="text-xs text-gray-500 mt-4">
-              * Diagnostyka jest bezpłatna w przypadku zlecenia naprawy w naszym serwisie. W przypadku rezygnacji z naprawy koszt diagnostyki wynosi 100-200 zł netto w zależności od modelu.
+              * Diagnostyka jest bezpłatna w przypadku zlecenia naprawy w naszym serwisie. W przypadku rezygnacji z naprawy koszt diagnostyki wynosi 99,00 zł netto.
             </p>
           </div>
         </section>
