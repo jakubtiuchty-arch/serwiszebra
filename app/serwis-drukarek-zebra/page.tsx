@@ -636,7 +636,7 @@ export default function DrukarkiPage() {
               </div>
             </div>
             <div className="text-center mt-6 sm:mt-8">
-              <p className="text-sm text-gray-600 mb-3">Nie widzisz swojej awarii? Zgłoś ją do nas — bezpłatna diagnostyka, dokładna wycena.</p>
+              <p className="text-sm text-gray-600 mb-3">Nie widzisz swojej awarii? Zgłoś ją do nas — bezpłatna diagnostyka*, dokładna wycena.</p>
               <Link href="/#formularz" className="inline-flex items-center gap-2 bg-blue-600 text-white font-medium px-5 py-2.5 rounded-lg hover:bg-blue-700 transition-colors text-sm">
                 Zgłoś naprawę <ChevronRight className="w-4 h-4" />
               </Link>
@@ -649,7 +649,7 @@ export default function DrukarkiPage() {
           <div className="max-w-6xl mx-auto px-3 sm:px-4">
             <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-2 text-center">Cennik napraw drukarek Zebra wg modelu</h2>
             <p className="text-sm text-gray-600 text-center mb-6 sm:mb-8 max-w-3xl mx-auto">
-              Ceny orientacyjne na podstawie typowych zleceń. Każda naprawa zaczyna się od <strong>bezpłatnej diagnostyki</strong> — dokładną wycenę otrzymujesz przed rozpoczęciem prac. Wszystkie ceny netto.
+              Ceny orientacyjne na podstawie typowych zleceń. Każda naprawa zaczyna się od <strong>bezpłatnej diagnostyki*</strong> — dokładną wycenę otrzymujesz przed rozpoczęciem prac. Wszystkie ceny netto.
             </p>
             <div className="bg-white rounded-xl shadow-lg overflow-hidden mb-6">
               <div className="overflow-x-auto">
@@ -681,6 +681,10 @@ export default function DrukarkiPage() {
               <div className="bg-white rounded-xl p-4 border border-gray-100 shadow-md"><p className="text-xs text-gray-500 mb-1">Naprawa płyty głównej</p><p className="text-base font-semibold text-gray-900">od 350 zł</p></div>
               <div className="bg-white rounded-xl p-4 border border-gray-100 shadow-md"><p className="text-xs text-gray-500 mb-1">Ekspres (24-48h)</p><p className="text-base font-semibold text-gray-900">+50 zł</p></div>
             </div>
+
+            <p className="text-xs text-gray-500 mt-4">
+              * Diagnostyka jest bezpłatna w przypadku zlecenia naprawy w naszym serwisie. W przypadku rezygnacji z naprawy koszt diagnostyki wynosi 100-200 zł netto w zależności od modelu.
+            </p>
           </div>
         </section>
 
@@ -707,7 +711,7 @@ export default function DrukarkiPage() {
               <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-5 border border-blue-100 relative">
                 <div className="absolute -top-3 left-5 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full">KROK 3</div>
                 <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-3 mt-2 shadow-sm"><Search className="w-6 h-6 text-blue-600" strokeWidth={1.5} /></div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Bezpłatna diagnostyka</h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Bezpłatna diagnostyka*</h3>
                 <p className="text-sm text-gray-600 leading-relaxed">W ciągu 1-2 dni roboczych diagnozujemy usterkę i przesyłamy dokładną wycenę do akceptacji.</p>
               </div>
               <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-5 border border-green-100 relative">
