@@ -585,69 +585,53 @@ export default function DrukarkiPage() {
         </section>
 
         {/* Najczęstsze awarie wg typu */}
-        <section className="py-10 sm:py-12 md:py-14 bg-gradient-to-br from-red-50 via-orange-50 to-amber-50">
+        <section className="py-10 sm:py-12 md:py-14 bg-white">
           <div className="max-w-6xl mx-auto px-3 sm:px-4">
             <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-2 text-center">
               Najczęstsze awarie drukarek Zebra wg typu
             </h2>
             <p className="text-sm text-gray-600 text-center mb-8 max-w-3xl mx-auto">
-              25 lat doświadczenia w naprawach pozwala nam szybko zdiagnozować typową awarię — zwykle już na podstawie modelu i objawów.
+              Na podstawie 5000+ napraw — te usterki widzimy najczęściej. 60% z nich można rozwiązać samodzielnie, reszta wymaga serwisu.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
-              <div className="bg-white rounded-xl p-5 sm:p-6 shadow-lg border border-gray-100">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center border border-blue-100">
-                    <Monitor className="w-6 h-6 text-blue-600" strokeWidth={1.5} />
-                  </div>
-                  <h3 className="text-lg font-semibold text-gray-900">Drukarki desktop (ZD/GK)</h3>
-                </div>
-                <ul className="space-y-2 text-sm text-gray-700">
-                  <li className="flex items-start gap-2"><AlertCircle className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" /><span><strong>Zużyta głowica drukująca</strong> — białe pasy na wydruku, słaby kontrast po 2-3 latach pracy.</span></li>
-                  <li className="flex items-start gap-2"><AlertCircle className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" /><span><strong>Czerwona dioda</strong> (GK420, ZD420) — uszkodzony czujnik etykiet lub zacięty mechanizm.</span></li>
-                  <li className="flex items-start gap-2"><AlertCircle className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" /><span><strong>Błąd kalibracji</strong> po wymianie etykiet — wymaga rekalibracji sensora taśmy.</span></li>
-                  <li className="flex items-start gap-2"><AlertCircle className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" /><span><strong>Zacinanie się ribbonu</strong> — zużyte rolki lub zła grubość taśmy.</span></li>
+              <div className="bg-white rounded-xl p-5 sm:p-6 border border-gray-200">
+                <h3 className="text-lg font-semibold text-gray-900 mb-4">Drukarki desktop (ZD220, ZD420, ZD421, ZD620, GK420)</h3>
+                <ul className="space-y-2.5 text-sm text-gray-700">
+                  <li><strong>Media Out / puste etykiety</strong> — zła kalibracja czujnika SmartCal. Najczęstszy problem (35% zgłoszeń).</li>
+                  <li><strong>Ribbon Out mimo załadowanej taśmy</strong> — ribbon załadowany odwrotnie lub zły tryb druku (Direct Thermal zamiast Thermal Transfer).</li>
+                  <li><strong>Białe linie na wydruku</strong> — zużyta lub zabrudzona głowica. Wymiana co 2-3 lata intensywnej pracy.</li>
+                  <li><strong>Czerwona dioda</strong> (GK420/GC420) — uszkodzony czujnik etykiet, zacięty mechanizm lub Head Open.</li>
+                  <li><strong>Blady wydruk</strong> — niewłaściwy zasilacz, zużyty wałek dociskowy lub zbyt niska wartość Darkness.</li>
                 </ul>
               </div>
-              <div className="bg-white rounded-xl p-5 sm:p-6 shadow-lg border border-gray-100">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-12 h-12 bg-orange-50 rounded-xl flex items-center justify-center border border-orange-100">
-                    <Factory className="w-6 h-6 text-orange-600" strokeWidth={1.5} />
-                  </div>
-                  <h3 className="text-lg font-semibold text-gray-900">Drukarki przemysłowe (ZT/Xi4)</h3>
-                </div>
-                <ul className="space-y-2 text-sm text-gray-700">
-                  <li className="flex items-start gap-2"><AlertCircle className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" /><span><strong>Błąd ribbon</strong> (ZT410, ZT411) — uszkodzony czujnik taśmy lub błędna konfiguracja.</span></li>
-                  <li className="flex items-start gap-2"><AlertCircle className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" /><span><strong>Awaria silnika krokowego</strong> — drukarka się nie rusza lub porusza nierówno.</span></li>
-                  <li className="flex items-start gap-2"><AlertCircle className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" /><span><strong>Uszkodzona płyta główna</strong> — skutek przepięć lub upływu rocznego.</span></li>
-                  <li className="flex items-start gap-2"><AlertCircle className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" /><span><strong>Problem z odklejaczem</strong> (peeler) — brak odklejania etykiet lub błąd sensora.</span></li>
+              <div className="bg-white rounded-xl p-5 sm:p-6 border border-gray-200">
+                <h3 className="text-lg font-semibold text-gray-900 mb-4">Drukarki przemysłowe (ZT410, ZT411, ZT510, ZT610, 105SL)</h3>
+                <ul className="space-y-2.5 text-sm text-gray-700">
+                  <li><strong>Paper Out mimo załadowanych etykiet</strong> — rozkalibrowne czujniki gap/black mark. Częste po zmianie dostawcy etykiet.</li>
+                  <li><strong>Ribbon Out / fałszywy alarm</strong> — charakterystyczne dla ZT510: źle przeprowadzony materiał przez ścieżkę.</li>
+                  <li><strong>Head Over Temp / Printhead Shutdown</strong> — przegrzanie głowicy przy zbyt szybkim druku ciągłym.</li>
+                  <li><strong>Cutter Jam</strong> — zablokowana gilotyna, zużyte ostrze. Wymiana co 500k cięć.</li>
+                  <li><strong>Marszczenie ribbonu</strong> — zły balans naciągu, nierównomierny druk. Częste w ZT610/ZT620.</li>
                 </ul>
               </div>
-              <div className="bg-white rounded-xl p-5 sm:p-6 shadow-lg border border-gray-100">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-12 h-12 bg-green-50 rounded-xl flex items-center justify-center border border-green-100">
-                    <Smartphone className="w-6 h-6 text-green-600" strokeWidth={1.5} />
-                  </div>
-                  <h3 className="text-lg font-semibold text-gray-900">Drukarki mobilne (ZQ/QL)</h3>
-                </div>
-                <ul className="space-y-2 text-sm text-gray-700">
-                  <li className="flex items-start gap-2"><AlertCircle className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" /><span><strong>Zużyta bateria</strong> — najczęstsza wymiana po 18-24 miesiącach pracy.</span></li>
-                  <li className="flex items-start gap-2"><AlertCircle className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" /><span><strong>Problem Bluetooth/WiFi</strong> — moduł komunikacyjny do wymiany.</span></li>
-                  <li className="flex items-start gap-2"><AlertCircle className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" /><span><strong>Uszkodzony wyświetlacz LCD</strong> — typowa naprawa po upadku.</span></li>
-                  <li className="flex items-start gap-2"><AlertCircle className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" /><span><strong>Zacięty mechanizm</strong> — kurz, zabrudzenia lub uszkodzenie wałków.</span></li>
+              <div className="bg-white rounded-xl p-5 sm:p-6 border border-gray-200">
+                <h3 className="text-lg font-semibold text-gray-900 mb-4">Drukarki mobilne (ZQ520, ZQ620, ZQ630)</h3>
+                <ul className="space-y-2.5 text-sm text-gray-700">
+                  <li><strong>Battery Low Shutdown</strong> — bateria traci pojemność po 18-24 miesiącach. Wymiana 200-400 zł.</li>
+                  <li><strong>Head Authentication Failed</strong> — nieautoryzowana/uszkodzona głowica. Wymaga oryginalnej części.</li>
+                  <li><strong>Problemy Bluetooth/WiFi</strong> — rozłączanie, brak parowania. Często firmware lub moduł do wymiany.</li>
+                  <li><strong>Media Out</strong> — czujnik nośnika zabrudzony kurzem z pracy terenowej.</li>
+                  <li><strong>Blady wydruk w niskich temperaturach</strong> — głowica nie nagrzewa się wystarczająco na mrozie.</li>
                 </ul>
               </div>
-              <div className="bg-white rounded-xl p-5 sm:p-6 shadow-lg border border-gray-100">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-12 h-12 bg-purple-50 rounded-xl flex items-center justify-center border border-purple-100">
-                    <CreditCard className="w-6 h-6 text-purple-600" strokeWidth={1.5} />
-                  </div>
-                  <h3 className="text-lg font-semibold text-gray-900">Drukarki kart (ZC/ZXP)</h3>
-                </div>
-                <ul className="space-y-2 text-sm text-gray-700">
-                  <li className="flex items-start gap-2"><AlertCircle className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" /><span><strong>Awaria modułu kodowania</strong> magnetycznego/chipowego — najczęściej w ZC300/ZXP7.</span></li>
-                  <li className="flex items-start gap-2"><AlertCircle className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" /><span><strong>Uszkodzony moduł laminacji</strong> (ZXP9) — wymiana folii i kalibracja.</span></li>
-                  <li className="flex items-start gap-2"><AlertCircle className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" /><span><strong>Czyszczenie sensorów kart</strong> — kurz blokuje detekcję karty.</span></li>
-                  <li className="flex items-start gap-2"><AlertCircle className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" /><span><strong>Wymiana wałków transportowych</strong> — zużyte powodują zacinanie kart.</span></li>
+              <div className="bg-white rounded-xl p-5 sm:p-6 border border-gray-200">
+                <h3 className="text-lg font-semibold text-gray-900 mb-4">Drukarki kart (ZC100, ZC300, ZXP7, ZXP9)</h3>
+                <ul className="space-y-2.5 text-sm text-gray-700">
+                  <li><strong>Card Jam / zacięcie karty</strong> — zużyte wałki transportowe lub krzywo podawane karty z podajnika.</li>
+                  <li><strong>Ribbon Color Detect Error</strong> — czujnik nie rozpoznaje taśmy. Czyszczenie lub wymiana sensora.</li>
+                  <li><strong>Błędy kodowania magnetycznego</strong> (Error 9001-9004) — brudna lub uszkodzona głowica mag stripe.</li>
+                  <li><strong>Białe linie / smugi na karcie</strong> — zużyta głowica drukująca, wymiana co 10-20 tys. kart.</li>
+                  <li><strong>Laminator Card Feed Fail</strong> (ZXP7/ZXP9) — zacięcie folii laminacyjnej, wymaga serwisu.</li>
                 </ul>
               </div>
             </div>
