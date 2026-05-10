@@ -656,7 +656,7 @@ export default function DrukarkiPage() {
         <RepairProcessSteps />
 
         {/* Czas realizacji */}
-        <section className="py-8 sm:py-10 bg-gray-50">
+        <section className="py-8 sm:py-10 bg-white">
           <div className="max-w-5xl mx-auto px-3 sm:px-4">
             <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-2 text-center">Czas realizacji naprawy — od zgłoszenia do zwrotu</h2>
             <p className="text-sm text-gray-600 text-center mb-6 sm:mb-8 max-w-3xl mx-auto">
