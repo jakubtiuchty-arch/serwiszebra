@@ -679,7 +679,7 @@ export default function DrukarkiPage() {
                 <p className="text-xs text-gray-500">Przestój linii produkcyjnej — zadzwoń, ustalimy priorytet.</p>
               </div>
             </div>
-            <div className="bg-white rounded-xl p-4 sm:p-5 mt-6 border border-gray-100 shadow-sm">
+            <div className="bg-[#A8F000]/15 rounded-xl p-4 sm:p-5 mt-6 border border-[#A8F000]/30">
               <p className="text-sm text-gray-700 leading-relaxed">
                 <strong>Co wpływa na czas naprawy?</strong> Najczęściej dostępność części zamiennych. Mamy magazyn części dla wszystkich popularnych modeli — w tym starszych jak <strong>105SL, GK420, LP2844</strong> — więc 90% napraw realizujemy bez czekania na sprowadzenie.
               </p>
