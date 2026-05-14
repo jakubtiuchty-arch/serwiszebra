@@ -304,18 +304,9 @@ function generateSeoDescription(product: Product): string {
     akumulator: 'Oryginalny'
   }
   const prefix = genderPrefix[product.product_type] || 'Oryginalny'
-  // Lowercase pierwsza litera nazwy produktu po prefiksie (np. "Głowica" → "głowica")
   const productName = product.name.charAt(0).toLowerCase() + product.name.slice(1)
-  // Cena z przecinkiem (polski format) zamiast kropki
   const pricePL = product.price_brutto.toFixed(2).replace('.', ',')
-  const parts = [
-    `${prefix} ${productName}.`,
-    '✓ Gwarancja 12 mies.',
-    '✓ Wysyłka 24h',
-    `✓ ${pricePL} zł brutto.`,
-    'Autoryzowany dystrybutor Zebra – TAKMA.'
-  ]
-  return parts.join(' ')
+  return `${prefix} ${productName}. Cena: ${pricePL} zł brutto. Gwarancja 12 mies., wysyłka 24h. ${product.sku}. Autoryzowany dystrybutor Zebra – TAKMA.`
 }
 
 // Helper: Generuj tytuł SEO (max ~70 znaków, nazwa najpierw + PN)
@@ -454,12 +445,30 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
 
   const metaDeviceLabel = productType.id === 'akumulator' ? 'urządzeń Zebra' : 'drukarek Zebra'
   if (slugPath.length === 1) {
-    return {
+    const categoryDescriptions: Record<string, { title: string; description: string }> = {
+      glowice: {
+        title: 'Głowice drukujące Zebra 203/300/600 DPI — od 481 zł | TAKMA',
+        description: 'Oryginalne głowice do drukarek Zebra: ZD421, ZD621, ZT411, ZT610, GK420. 203/300/600 DPI. Ceny od 481 zł netto. Wysyłka 24h, gwarancja producenta.'
+      },
+      'walki-dociskowe': {
+        title: 'Wałki dociskowe Zebra (platen roller) — od 73 zł | TAKMA',
+        description: 'Oryginalne wałki dociskowe do drukarek Zebra: ZD220, ZD421, ZD621, ZT411, ZT610. Ceny od 73 zł netto. Wysyłka 24h, gwarancja producenta.'
+      },
+      akumulatory: {
+        title: 'Akumulatory Zebra — terminale TC, MC, drukarki ZQ | TAKMA',
+        description: 'Oryginalne akumulatory do terminali Zebra TC22, TC52, MC3300, MC9400 i drukarek mobilnych ZQ630, ZQ520. Od 78 zł netto. Wysyłka 24h.'
+      }
+    }
+    const catMeta = categoryDescriptions[productType.slug] || {
       title: `${productType.namePlural} do ${metaDeviceLabel} | Sklep TAKMA`,
-      description: `${productType.namePlural} do ${metaDeviceLabel}. Oryginalne części zamienne z gwarancją. Szybka wysyłka.`,
+      description: `${productType.namePlural} do ${metaDeviceLabel}. Oryginalne części zamienne z gwarancją.`
+    }
+    return {
+      title: catMeta.title,
+      description: catMeta.description,
       openGraph: {
-        title: `${productType.namePlural} do ${metaDeviceLabel} | TAKMA`,
-        description: `Oryginalne ${productType.namePlural.toLowerCase()} do ${metaDeviceLabel}. Wysyłka 24h, gwarancja producenta.`,
+        title: catMeta.title,
+        description: catMeta.description,
         url: `https://www.serwis-zebry.pl/sklep/${productType.slug}`,
         type: 'website',
         siteName: 'TAKMA - Autoryzowany Serwis Zebra',
@@ -574,8 +583,16 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
       }
     }
     return {
-      title: `${productType.namePlural} - ${printerCategory.name} | Sklep TAKMA`,
-      description: `${productType.namePlural} do ${printerCategory.name.toLowerCase()} Zebra. Oryginalne części z gwarancją.`,
+      title: `${productType.namePlural} do ${printerCategory.name.toLowerCase()} Zebra | TAKMA`,
+      description: `Oryginalne ${productType.namePlural.toLowerCase()} do ${printerCategory.name.toLowerCase()} Zebra. Gwarancja producenta, wysyłka 24h. Autoryzowany dystrybutor.`,
+      openGraph: {
+        title: `${productType.namePlural} do ${printerCategory.name.toLowerCase()} Zebra | TAKMA`,
+        description: `Oryginalne ${productType.namePlural.toLowerCase()} do ${printerCategory.name.toLowerCase()} Zebra. Wysyłka 24h.`,
+        url: `https://www.serwis-zebry.pl/sklep/${slugPath.join('/')}`,
+        type: 'website',
+        siteName: 'TAKMA - Autoryzowany Serwis Zebra',
+        locale: 'pl_PL'
+      },
       alternates: {
         canonical: `https://www.serwis-zebry.pl/sklep/${slugPath.join('/')}`
       }
@@ -585,9 +602,18 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
   if (slugPath.length === 3 && printerCategory) {
     const model = getModelBySlug(slugPath[0], slugPath[1], slugPath[2])
     if (model) {
+      const typeLabel = productType.id === 'glowica' ? 'Głowice drukujące' : productType.id === 'walek' ? 'Wałki dociskowe' : 'Akumulatory'
       return {
-        title: `${productType.namePlural} do ${model.name} | Sklep TAKMA`,
-        description: `${productType.namePlural} do drukarki ${model.name}. Oryginalne części z gwarancją. Wysyłka 24h.`,
+        title: `${typeLabel} do ${model.name} — oryginalne | TAKMA`,
+        description: `Oryginalne ${productType.namePlural.toLowerCase()} do drukarki ${model.name}. Gwarancja producenta, wysyłka 24h. Sprawdź cenę i dostępność.`,
+        openGraph: {
+          title: `${typeLabel} do ${model.name} | TAKMA`,
+          description: `Oryginalne ${productType.namePlural.toLowerCase()} do ${model.name}. Wysyłka 24h, gwarancja.`,
+          url: `https://www.serwis-zebry.pl/sklep/${slugPath.join('/')}`,
+          type: 'website',
+          siteName: 'TAKMA - Autoryzowany Serwis Zebra',
+          locale: 'pl_PL'
+        },
         alternates: {
           canonical: `https://www.serwis-zebry.pl/sklep/${slugPath.join('/')}`
         }
