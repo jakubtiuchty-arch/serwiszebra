@@ -582,12 +582,14 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
         }
       }
     }
+    const genitive: Record<string, string> = { 'Terminale': 'terminali', 'Drukarki mobilne': 'drukarek mobilnych', 'Drukarki biurkowe': 'drukarek biurkowych', 'Drukarki przemysłowe': 'drukarek przemysłowych', 'Tablety': 'tabletów' }
+    const catGenitive = genitive[printerCategory.name] || printerCategory.name.toLowerCase()
     return {
-      title: `${productType.namePlural} do ${printerCategory.name.toLowerCase()} Zebra | TAKMA`,
-      description: `Oryginalne ${productType.namePlural.toLowerCase()} do ${printerCategory.name.toLowerCase()} Zebra. Gwarancja producenta, wysyłka 24h. Autoryzowany dystrybutor.`,
+      title: `${productType.namePlural} do ${catGenitive} Zebra | TAKMA`,
+      description: `Oryginalne ${productType.namePlural.toLowerCase()} do ${catGenitive} Zebra. Gwarancja producenta, wysyłka 24h. Autoryzowany dystrybutor.`,
       openGraph: {
-        title: `${productType.namePlural} do ${printerCategory.name.toLowerCase()} Zebra | TAKMA`,
-        description: `Oryginalne ${productType.namePlural.toLowerCase()} do ${printerCategory.name.toLowerCase()} Zebra. Wysyłka 24h.`,
+        title: `${productType.namePlural} do ${catGenitive} Zebra | TAKMA`,
+        description: `Oryginalne ${productType.namePlural.toLowerCase()} do ${catGenitive} Zebra. Wysyłka 24h.`,
         url: `https://www.serwis-zebry.pl/sklep/${slugPath.join('/')}`,
         type: 'website',
         siteName: 'TAKMA - Autoryzowany Serwis Zebra',
