@@ -1,10 +1,9 @@
-import { GoogleGenAI } from '@google/genai'
+import OpenAI from 'openai'
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
-import { SearchServiceClient } from '@google-cloud/discoveryengine'
 import { searchBlogForAI } from '@/lib/blog'
 
-const genAI = new GoogleGenAI({ apiKey: process.env.GOOGLE_API_KEY! })
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY! })
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -14,44 +13,6 @@ const supabase = createClient(
     global: { headers: { 'x-my-custom-header': 'no-cache' } },
   }
 )
-
-// Initialize Vertex AI Discovery Engine Client
-// Parse credentials from environment variable (JSON string) for serverless deployment
-const getSearchClient = () => {
-  const credentialsJson = process.env.GOOGLE_APPLICATION_CREDENTIALS_JSON
-  
-  if (credentialsJson) {
-    // Production: use JSON credentials from env variable
-    try {
-      const credentials = JSON.parse(credentialsJson)
-      return new SearchServiceClient({
-        credentials,
-        apiEndpoint: 'eu-discoveryengine.googleapis.com',
-      })
-    } catch (e) {
-      console.error('❌ Failed to parse GOOGLE_APPLICATION_CREDENTIALS_JSON:', e)
-    }
-  }
-  
-  // Fallback: try keyFilename (local development)
-  if (process.env.GOOGLE_APPLICATION_CREDENTIALS) {
-    return new SearchServiceClient({
-      keyFilename: process.env.GOOGLE_APPLICATION_CREDENTIALS,
-      apiEndpoint: 'eu-discoveryengine.googleapis.com',
-    })
-  }
-  
-  // Last resort: use default credentials
-  return new SearchServiceClient({
-    apiEndpoint: 'eu-discoveryengine.googleapis.com',
-  })
-}
-
-const searchClient = getSearchClient()
-
-const PROJECT_ID = process.env.GOOGLE_CLOUD_PROJECT_ID!
-const LOCATION = 'eu' // Europe multi-region
-const DATA_STORE_ID = 'zebra-manuals-eu_1764279128042' // EU data store with full bucket import
 
 // Funkcja do zapisywania logów czatu do Supabase
 async function saveChatLog(data: {
@@ -84,29 +45,25 @@ async function saveChatLog(data: {
   }
 }
 
-// Funkcja do tłumaczenia polskiego tekstu na angielski za pomocą Gemini Flash
+// Funkcja do tłumaczenia polskiego tekstu na angielski (OpenAI)
 async function translateToEnglish(text: string): Promise<string> {
   try {
     console.log('🌐 Tłumaczę na angielski:', text)
-
-    const response = await genAI.models.generateContent({
-      model: 'gemini-2.0-flash',
-      contents: [{ 
-        role: 'user', 
-        parts: [{ text: `Translate the following Polish text to English. Return ONLY the translation, nothing else:\n\n${text}` }] 
-      }],
-      config: {
-        temperature: 0.3,
-        maxOutputTokens: 200,
-      }
+    const response = await openai.chat.completions.create({
+      model: 'gpt-4o-mini',
+      temperature: 0.3,
+      max_tokens: 200,
+      messages: [
+        { role: 'system', content: 'Translate the following Polish text to English. Return ONLY the translation, nothing else.' },
+        { role: 'user', content: text }
+      ],
     })
-
-    const translation = response.text?.trim() || text
+    const translation = response.choices[0]?.message?.content?.trim() || text
     console.log('✅ Przetłumaczono na:', translation)
     return translation
   } catch (error) {
     console.error('❌ Błąd tłumaczenia:', error)
-    return text // Fallback - zwróć oryginalny tekst
+    return text
   }
 }
 
@@ -278,155 +235,79 @@ function citationMatchesModel(citation: { title: string; uri: string }, detected
   )
 }
 
-// Funkcja do wyszukiwania w Vertex AI RAG
-async function searchVertexAI(query: string): Promise<{
+// Funkcja do wyszukiwania w Supabase manuals (vector search)
+async function searchManuals(query: string): Promise<{
   context: string
-  citations: Array<{ title: string; uri: string; pageNumber?: number }>
   found: boolean
 }> {
   try {
-    console.log('🔍 Vertex AI search dla:', query)
+    console.log('🔍 Supabase manuals search dla:', query)
 
     // Detect printer model from query
     const detectedModels = detectPrinterModel(query)
 
-    // Tłumacz polskie zapytanie na angielski (manuali są w języku angielskim)
+    // Tłumacz polskie zapytanie na angielski (manuali są po angielsku)
     let translatedQuery = await translateToEnglish(query)
 
-    // Boost search for detected models by appending model to query
     if (detectedModels.length > 0) {
       translatedQuery = `${translatedQuery} ${detectedModels.join(' ')}`
       console.log('🎯 Boosted query with models:', translatedQuery)
-    } else {
-      console.log('🌐 Zapytanie po tłumaczeniu:', translatedQuery)
     }
 
-    const servingConfig = `projects/${PROJECT_ID}/locations/${LOCATION}/collections/default_collection/dataStores/${DATA_STORE_ID}/servingConfigs/default_config`
+    // Utwórz embedding zapytania
+    const embeddingResponse = await openai.embeddings.create({
+      model: 'text-embedding-3-small',
+      input: translatedQuery,
+    })
+    const queryEmbedding = embeddingResponse.data[0].embedding
 
-    // NOTE: Discovery Engine for unstructured data stores does not support filtering by uri/link
-    // We rely on post-processing citation filtering based on detected models instead
-    // This happens in the citationMatchesModel() function below
-
-    const request: any = {
-      servingConfig,
-      query: translatedQuery, // Użyj przetłumaczonego zapytania
-      pageSize: 3, // Reduced from 10 to 3 for faster response
-      queryExpansionSpec: { condition: 'AUTO' },
-      spellCorrectionSpec: { mode: 'AUTO' },
-      contentSearchSpec: {
-        snippetSpec: {
-          maxSnippetCount: 2, // Reduced from 5 to 2 for faster response
-          returnSnippet: true,
-        },
-        // For chunked data stores, we get chunks automatically
-        chunkSpec: {
-          numPreviousChunks: 0,
-          numNextChunks: 0,
-        },
-      },
-    }
-
-    const [response] = await searchClient.search(request as any)
-
-    if (!response || response.length === 0) {
-      console.log('⚠️ Brak wyników z Vertex AI')
-      return { context: '', citations: [], found: false }
-    }
-
-    console.log(`✅ Vertex AI zwrócił ${response.length} wyników`)
-
-    const citations: Array<{ title: string; uri: string; pageNumber?: number }> = []
-    const contextParts: string[] = []
-
-    response.forEach((result: any, idx: number) => {
-      // DEBUG: Log całego result
-      console.log(`\n🔍 Result ${idx + 1} FULL:`, JSON.stringify(result, null, 2))
-
-      const document = result.document
-      if (document) {
-        const structData = document.structData || document.derivedStructData
-
-        const title = structData?.fields?.title?.stringValue ||
-                     structData?.title ||
-                     document.name ||
-                     'Unknown Document'
-
-        const uri = structData?.fields?.link?.stringValue ||
-                   structData?.uri ||
-                   document.name ||
-                   ''
-
-        // Try to extract content from multiple sources
-        let content = ''
-
-        // 1. Try chunk content (for chunked data stores)
-        if (result.chunk?.content) {
-          content = result.chunk.content
-        }
-
-        // 2. Try snippets from derivedStructData.fields (nested structure)
-        if (!content && structData?.fields?.snippets?.listValue?.values) {
-          const snippetValues = structData.fields.snippets.listValue.values
-          const snippets = snippetValues
-            .map((v: any) => v.structValue?.fields?.snippet?.stringValue || '')
-            .filter((s: string) => s.length > 0)
-
-          if (snippets.length > 0) {
-            // Remove HTML tags like <b>
-            content = snippets
-              .map((s: string) => s.replace(/<[^>]*>/g, ''))
-              .join('\n\n')
-          }
-        }
-
-        // 3. Try extractive answers (fallback)
-        if (!content && result.document?.derivedStructData?.extractiveAnswers) {
-          const answers = result.document.derivedStructData.extractiveAnswers
-          content = answers.map((a: any) => a.content || '').join('\n\n')
-        }
-
-        // Extract page number if available
-        const pageNumber = structData?.fields?.page_number?.stringValue ||
-                          structData?.fields?.pageNumber?.stringValue ||
-                          structData?.page_number ||
-                          structData?.pageNumber
-
-        console.log(`  ${idx + 1}. ${title}`)
-        console.log(`     Content length: ${content?.length || 0}`)
-
-        if (content) {
-          contextParts.push(`[${title}${pageNumber ? ` - Strona ${pageNumber}` : ''}]\n${content}`)
-        }
-
-        // Create citation object
-        const citation = {
-          title,
-          uri,
-          pageNumber: pageNumber ? parseInt(pageNumber) : undefined,
-        }
-
-        // Only add citation if it matches the detected printer model
-        if (citationMatchesModel(citation, detectedModels)) {
-          console.log(`  ✅ Citation dodany: ${title}`)
-          citations.push(citation)
-        } else {
-          console.log(`  ❌ Citation odrzucony (nie pasuje do modelu): ${title}`)
-        }
-      }
+    // Szukaj w Supabase vector search (manuals_documents)
+    const filterManual = detectedModels.length > 0 ? detectedModels[0] : null
+    // Próbuj z filtrem modelu, jeśli brak wyników — szukaj globalnie
+    let { data, error } = await supabase.rpc('match_documents', {
+      query_embedding: queryEmbedding,
+      match_threshold: 0.4,
+      match_count: 5,
+      filter_manual: filterManual ? `${filterManual}_Manual` : null,
     })
 
-    const context = contextParts.join('\n\n---\n\n')
+    // Fallback: jeśli brak wyników z filtrem, szukaj globalnie
+    if ((!data || data.length === 0) && filterManual) {
+      console.log('🔄 Brak wyników z filtrem, szukam globalnie...')
+      const fallback = await supabase.rpc('match_documents', {
+        query_embedding: queryEmbedding,
+        match_threshold: 0.4,
+        match_count: 5,
+        filter_manual: null,
+      })
+      data = fallback.data
+      error = fallback.error
+    }
 
-    console.log(`📊 Filtorwanie citations: ${citations.length} z ${response.length} wyników`)
+    if (error) {
+      console.error('❌ Supabase match_documents error:', error)
+      return { context: '', found: false }
+    }
+
+    if (!data || data.length === 0) {
+      console.log('⚠️ Brak wyników z Supabase manuals')
+      return { context: '', found: false }
+    }
+
+    console.log(`✅ Supabase zwrócił ${data.length} wyników`)
+
+    const contextParts = data.map((doc: any, idx: number) => {
+      console.log(`  ${idx + 1}. ${doc.manual_name} (str. ${doc.page_number}) — similarity: ${(doc.similarity * 100).toFixed(1)}%`)
+      return `[${doc.manual_name}${doc.page_number ? ` - Strona ${doc.page_number}` : ''}]\n${doc.content}`
+    })
 
     return {
-      context,
-      citations,
+      context: contextParts.join('\n\n---\n\n'),
       found: contextParts.length > 0,
     }
   } catch (error) {
-    console.error('❌ Błąd Vertex AI search:', error)
-    return { context: '', citations: [], found: false }
+    console.error('❌ Błąd Supabase manuals search:', error)
+    return { context: '', found: false }
   }
 }
 
@@ -1143,7 +1024,7 @@ export async function POST(req: NextRequest) {
     const isRelated = isZebraRelated(lastUserMessage)
     console.log(`🔍 Pre-filter check: "${lastUserMessage.substring(0, 60)}..." | messages: ${messages.length} | isRelated: ${isRelated} | hasAttachments: ${hasAttachments}`)
     
-    if (lastUserMessage && messages.length <= 2 && !isRelated && !hasAttachments) {
+    if (lastUserMessage && !isRelated && !hasAttachments) {
       console.log('🚫 Off-topic message rejected:', lastUserMessage.substring(0, 50))
       
       // Zapisz log (bez kosztu API)
@@ -1238,29 +1119,24 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // === KROK 2: Szukaj w Vertex AI RAG (tylko jeśli blog nie wystarczy) ===
+    // === KROK 2: Szukaj w Supabase manuals (vector search) ===
     let knowledgeContext = ''
     let ragContextFound = false
     let citations: Array<{ title: string; uri: string; pageNumber?: number }> = []
 
-    // Szukaj w RAG tylko jeśli:
-    // - Blog nie znalazł nic, LUB
-    // - Pytanie dotyczy konkretnego modelu (techniczne szczegóły)
     const needsRAG = !blogFound || lastUserMessage.match(/zt\d|zd\d|gc\d|gk\d|tc\d|mc\d|ds\d/i)
 
     if (lastUserMessage && needsRAG) {
-      console.log('🔍 Szukam w Vertex AI RAG dla:', lastUserMessage)
-      const searchResult = await searchVertexAI(lastUserMessage)
+      console.log('🔍 Szukam w Supabase manuals dla:', lastUserMessage)
+      const searchResult = await searchManuals(lastUserMessage)
 
       knowledgeContext = searchResult.context
       ragContextFound = searchResult.found
-      citations = searchResult.citations
 
       if (ragContextFound) {
-        console.log('✅ Znaleziono kontekst z Vertex AI')
-        console.log(`📚 Citations: ${citations.length} źródeł`)
+        console.log('✅ Znaleziono kontekst z Supabase manuals')
       } else {
-        console.log('❌ Nie znaleziono kontekstu w Vertex AI')
+        console.log('❌ Nie znaleziono kontekstu w Supabase manuals')
       }
     } else if (blogFound) {
       console.log('⚡ Pominięto RAG - blog wystarczy')
@@ -1315,46 +1191,41 @@ Trzymaj skaner 10-20 cm od ekranu. Skaner potwierdzi zapisanie ustawienia sygna�
 ZRÓB DOKŁADNIE TAK - WKLEJ [BARCODE:...] W ODPOWIEDŹ!`
     }
 
-    // Konwertuj messages do formatu Gemini (nowe API)
-    const geminiHistory = messages.slice(0, -1).map((msg: any) => ({
-      role: msg.role === 'assistant' ? 'model' : 'user',
-      parts: [{ text: msg.content }],
-    }))
+    // Buduj messages dla OpenAI GPT-5.5
+    const openaiMessages: any[] = [
+      { role: 'system', content: enhancedSystemPrompt },
+      ...messages.slice(0, -1).map((msg: any) => ({
+        role: msg.role as 'user' | 'assistant',
+        content: msg.content,
+      })),
+    ]
 
-    // Buduj content dla ostatniej wiadomości użytkownika
-    const userParts: any[] = []
-    
-    // Dodaj tekst (z system promptem i historią)
-    const textPrompt = `${enhancedSystemPrompt}\n\n${geminiHistory.map((msg: any) =>
-      `${msg.role === 'user' ? 'User' : 'Assistant'}: ${msg.parts[0].text}`
-    ).join('\n\n')}\n\nUser: ${lastUserMessage}${hasAttachments ? '\n\n[Użytkownik załączył zdjęcie/wideo urządzenia - przeanalizuj je i zdiagnozuj problem]' : ''}\nAssistant:`
-    
-    userParts.push({ text: textPrompt })
-    
-    // Dodaj załączniki jako inlineData (obrazy/wideo)
+    // Ostatnia wiadomość użytkownika (z załącznikami jeśli są)
     if (hasAttachments) {
+      const userContent: any[] = [{ type: 'text', text: lastUserMessage + '\n\n[Użytkownik załączył zdjęcie urządzenia - przeanalizuj je i zdiagnozuj problem]' }]
       for (const attachment of attachments) {
-        // Gemini obsługuje: image/jpeg, image/png, image/gif, image/webp, video/mp4, video/mpeg, video/mov, video/avi, video/webm
-        const supportedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'video/mp4', 'video/mpeg', 'video/quicktime', 'video/x-msvideo', 'video/webm']
-        
-        if (supportedTypes.some(t => attachment.type.startsWith(t.split('/')[0]))) {
-          userParts.push({
-            inlineData: {
-              mimeType: attachment.type,
-              data: attachment.data
-            }
+        if (attachment.type.startsWith('image/')) {
+          userContent.push({
+            type: 'image_url',
+            image_url: { url: `data:${attachment.type};base64,${attachment.data}` }
           })
-          console.log(`✅ Dodano załącznik do Gemini: ${attachment.name} (${attachment.type})`)
+          console.log(`✅ Dodano obraz do GPT-5.5: ${attachment.name} (${attachment.type})`)
         } else {
-          console.log(`⚠️ Nieobsługiwany typ pliku: ${attachment.type}`)
+          console.log(`⚠️ Nieobsługiwany typ pliku (video nie wspierane w GPT-5.5): ${attachment.type}`)
         }
       }
+      openaiMessages.push({ role: 'user', content: userContent })
+    } else {
+      openaiMessages.push({ role: 'user', content: lastUserMessage })
     }
 
-    // Wywołaj model z nowym API (streaming) - z multimodal jeśli są załączniki
-    const responseStream = await genAI.models.generateContentStream({
-      model: 'gemini-2.5-flash',  // Upgrade: lepsze rozumowanie, 20-30% mniej tokenów
-      contents: [{ role: 'user', parts: userParts }],
+    // Wywołaj GPT-5.5 (streaming)
+    const responseStream = await openai.chat.completions.create({
+      model: 'gpt-5.5',
+      stream: true,
+      temperature: 0.7,
+      max_tokens: 2000,
+      messages: openaiMessages,
     })
 
     // Stwórz readable stream i zbieraj odpowiedź
@@ -1365,7 +1236,7 @@ ZRÓB DOKŁADNIE TAK - WKLEJ [BARCODE:...] W ODPOWIEDŹ!`
       async start(controller) {
         try {
           for await (const chunk of responseStream) {
-            const text = chunk.text
+            const text = chunk.choices[0]?.delta?.content || ''
             if (text) {
               fullAiResponse += text
               controller.enqueue(encoder.encode(text))
@@ -1415,7 +1286,7 @@ ZRÓB DOKŁADNIE TAK - WKLEJ [BARCODE:...] W ODPOWIEDŹ!`
             aiResponse: fullAiResponse,
             ragContextFound,
             responseTimeMs: responseTime,
-            modelUsed: `gemini-2.5-flash${hasAttachments ? ' (multimodal)' : ''} + vertex-ai-rag`,
+            modelUsed: `gpt-5.5${hasAttachments ? ' (vision)' : ''} + supabase-rag`,
             userIp,
           }).catch((err: any) => console.error('Błąd zapisywania logu czatu:', err))
 
