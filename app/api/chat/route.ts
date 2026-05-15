@@ -328,10 +328,10 @@ Odpowiadasz WYŁĄCZNIE na pytania dotyczące:
 Jeśli klient pyta o ZAKUP, CENĘ, DOSTĘPNOŚĆ, ETYKIETY, AKCESORIA, OFERTĘ, NOWE URZĄDZENIE — NIE ODPOWIADAJ merytorycznie! Zamiast tego:
 "W sprawach zakupu urządzeń, etykiet, akcesoriów i materiałów eksploatacyjnych zapraszam do sklepu TAKMA — autoryzowanego partnera Zebra: **[takma.com.pl](https://www.takma.com.pl)** lub telefonicznie: +48 601 619 898."
 
-🚫 **NIGDY NIE DEKODUJ NUMERÓW KATALOGOWYCH (PART NUMBER):**
-Jeśli klient podaje numer jak ZD4A042-30EE00EZ, P1058930-009 itp. i pyta "jaki to model" / "jaki typ drukarki" — NIE ZGADUJ! NIE DEKODUJ! Odpowiedz:
-"Niestety nie mogę wiarygodnie zidentyfikować modelu po numerze katalogowym. Skontaktuj się z TAKMA (**[takma.com.pl](https://www.takma.com.pl)**, tel. +48 601 619 898) — pomogą zidentyfikować urządzenie i dobrać części."
-Powód: numery katalogowe mają złożoną strukturę i AI regularnie się myli w ich dekodowaniu.
+🔧 **NUMERY KATALOGOWE (PART NUMBER) — CZĘŚCI SERWISOWE vs URZĄDZENIA:**
+Jeśli klient podaje part number i masz go w kontekście [SKLEP_PRODUKTY] poniżej — odpowiedz na podstawie tych danych (nazwa, cena, link do sklepu). To są CZĘŚCI SERWISOWE (głowice, wałki, akumulatory) i wpisują się w temat serwisu.
+Jeśli klient podaje part number URZĄDZENIA (np. ZD4A042-30EE00EZ, TC52x-1234 itp.) — NIE DEKODUJ, NIE ZGADUJ! Odpowiedz:
+"Identyfikacja modelu po numerze katalogowym urządzenia wymaga weryfikacji. Skontaktuj się z TAKMA (**[takma.com.pl](https://www.takma.com.pl)**, tel. +48 601 619 898) — pomogą zidentyfikować urządzenie."
 
 ✅ **TO SĄ TEMATY ZEBRA (ODPOWIADAJ NA NIE!):**
 🚨 **ZASADA NADRZĘDNA:** Jeśli w pytaniu jest słowo "Zebra" + jakiekolwiek urządzenie → TO JEST TEMAT ZEBRA! POMAGAJ!
@@ -1142,6 +1142,32 @@ export async function POST(req: NextRequest) {
       console.log('⚡ Pominięto RAG - blog wystarczy')
     }
 
+    // === KROK 2.5: Szukaj part numberów w sklepie (części serwisowe) ===
+    let productContext = ''
+    try {
+      // Wykryj potencjalne part numbery w wiadomości (P1xxxxxx, BTRY-xxx, 105934-xxx itp.)
+      const pnPatterns = lastUserMessage.match(/\b(P\d{6,}[-\d]*|BTRY-[A-Z0-9-]+|1\d{5}-\d{3})\b/gi)
+      if (pnPatterns && pnPatterns.length > 0) {
+        console.log('🔍 Wykryto potencjalne part numbery:', pnPatterns)
+        const { data: products } = await supabase
+          .from('products')
+          .select('name, sku, price_brutto, product_type, device_model, resolution_dpi')
+          .eq('is_active', true)
+          .in('sku', pnPatterns.map((pn: string) => pn.toUpperCase()))
+
+        if (products && products.length > 0) {
+          productContext = products.map(p => {
+            const dpi = p.resolution_dpi ? ` ${p.resolution_dpi} DPI` : ''
+            const price = p.price_brutto.toFixed(2).replace('.', ',')
+            return `${p.sku}: ${p.name}${dpi} — ${price} zł brutto — https://www.serwis-zebry.pl/sklep`
+          }).join('\n')
+          console.log(`✅ Znaleziono ${products.length} produktów w sklepie`)
+        }
+      }
+    } catch (err: any) {
+      console.error('⚠️ Błąd wyszukiwania produktów:', err.message)
+    }
+
     // === KROK 3: Zbuduj kontekst dla AI ===
     let enhancedSystemPrompt = SYSTEM_PROMPT
 
@@ -1153,6 +1179,11 @@ export async function POST(req: NextRequest) {
     // Dodaj kontekst z instrukcji (AI czerpie wiedzę, NIE odsyła klienta do instrukcji)
     if (manualContext) {
       enhancedSystemPrompt += `\n\n=== WIEDZA Z INSTRUKCJI PRODUCENTA ===${manualContext}\n\nUżyj tej wiedzy do rozwiązania problemu klienta. NIGDY nie odsyłaj klienta do instrukcji — Ty jesteś ekspertem i rozwiązujesz problem bezpośrednio w czacie.`
+    }
+
+    // Dodaj kontekst produktów ze sklepu (części serwisowe)
+    if (productContext) {
+      enhancedSystemPrompt += `\n\n=== [SKLEP_PRODUKTY] CZĘŚCI SERWISOWE Z NASZEGO SKLEPU ===\n${productContext}\n\nKlient pytał o part number który MAMY W SKLEPIE. Podaj mu nazwę, cenę i link. To są oryginalne części serwisowe Zebra.`
     }
 
     // Dodaj kontekst z RAG (techniczne szczegóły z manuali)
