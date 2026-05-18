@@ -122,7 +122,9 @@ export async function POST(
         side_y: parseInt(side_y),
         side_z: parseInt(side_z),
         postal_sender: sender.postal,
-        postal_delivery: recipient.postal
+        postal_delivery: recipient.postal,
+        // Źródło pochodzenia zamówienia (wymagane przez BL Paczka API)
+        origin: 'serwis-zebry'
       },
       CartOrder: {
         payment: 'bank'
