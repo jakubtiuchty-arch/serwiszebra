@@ -256,8 +256,14 @@ export default function AdminRepairDetailPage() {
         setServiceNotesForm({
           service_notes: data.repair.service_notes || ''
         })
+        // Auto-default kierunku: status 'nowe' lub 'odbior_od_klienta' (kurier nie odebrał) → pickup, inne → delivery
+        const defaultDirection: 'pickup' | 'delivery' =
+          data.repair.status === 'nowe' || data.repair.status === 'odbior_od_klienta'
+            ? 'pickup'
+            : 'delivery'
         setCourierForm(prev => ({
           ...prev,
+          direction: defaultDirection,
           customer_street: data.repair.street || '',
           customer_zip_code: data.repair.zip_code || '',
           customer_city: data.repair.city || '',
@@ -389,7 +395,7 @@ export default function AdminRepairDetailPage() {
     setSubmitting('courier')
 
     try {
-      const direction = repair!.status === 'nowe' ? 'pickup' : 'delivery'
+      const direction = courierForm.direction
 
       // Walidacja adresu po stronie frontendu
       if (!courierForm.customer_street.trim() || !courierForm.customer_zip_code.trim() || !courierForm.customer_city.trim()) {
@@ -412,7 +418,7 @@ export default function AdminRepairDetailPage() {
 
       const data = await response.json()
 
-      const directionText = repair!.status === 'nowe'
+      const directionText = direction === 'pickup'
         ? 'Odbiór od klienta'
         : 'Wysyłka do klienta'
 
@@ -801,6 +807,19 @@ export default function AdminRepairDetailPage() {
                   </div>
                 )}
                 <form onSubmit={handleOrderCourier} className="space-y-3">
+                  <div>
+                    <label className="block text-xs font-semibold text-gray-700 mb-1">Kierunek</label>
+                    <select
+                      value={courierForm.direction}
+                      onChange={(e) => setCourierForm({ ...courierForm, direction: e.target.value as 'pickup' | 'delivery' })}
+                      className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      required
+                    >
+                      <option value="pickup">Odbiór od klienta (klient → TAKMA)</option>
+                      <option value="delivery">Wysyłka do klienta (TAKMA → klient)</option>
+                    </select>
+                  </div>
+
                   <div>
                     <label className="block text-xs font-semibold text-gray-700 mb-1">Kurier</label>
                     <select
