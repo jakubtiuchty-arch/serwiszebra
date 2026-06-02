@@ -8,9 +8,12 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_ROLE_KEY!
 )
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-})
+// Lazy init — żeby `next build` nie crashował gdy OPENAI_API_KEY brak w build env
+let _openai: OpenAI | null = null
+function getOpenAI(): OpenAI {
+  if (!_openai) _openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
+  return _openai
+}
 
 // Funkcja do dzielenia tekstu na chunki
 function splitIntoChunks(text: string, chunkSize: number = 1000, overlap: number = 200): string[] {
@@ -28,7 +31,7 @@ function splitIntoChunks(text: string, chunkSize: number = 1000, overlap: number
 
 // Funkcja do tworzenia embeddings z OpenAI
 async function createEmbedding(text: string): Promise<number[]> {
-  const response = await openai.embeddings.create({
+  const response = await getOpenAI().embeddings.create({
     model: 'text-embedding-3-small', // Tańszy i szybszy model
     input: text,
   })

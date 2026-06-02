@@ -11,13 +11,16 @@ const supabase = createClient(
   }
 )
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-})
+// Lazy init — żeby `next build` nie crashował gdy OPENAI_API_KEY brak w build env
+let _openai: OpenAI | null = null
+function getOpenAI(): OpenAI {
+  if (!_openai) _openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
+  return _openai
+}
 
 // Funkcja do tworzenia embeddings z OpenAI
 async function createEmbedding(text: string): Promise<number[]> {
-  const response = await openai.embeddings.create({
+  const response = await getOpenAI().embeddings.create({
     model: 'text-embedding-3-small',
     input: text,
   })
@@ -27,7 +30,7 @@ async function createEmbedding(text: string): Promise<number[]> {
 // Funkcja do tłumaczenia pytania PL→EN dla lepszego dopasowania
 async function translateToEnglish(text: string): Promise<string> {
   try {
-    const response = await openai.chat.completions.create({
+    const response = await getOpenAI().chat.completions.create({
       model: 'gpt-3.5-turbo',
       messages: [
         {

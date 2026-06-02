@@ -7,7 +7,14 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_ROLE_KEY!
 )
 
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
+// Lazy init — żeby `next build` nie crashował gdy OPENAI_API_KEY nie jest dostępne podczas collect page data
+let _openai: OpenAI | null = null
+function getOpenAI(): OpenAI {
+  if (!_openai) {
+    _openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
+  }
+  return _openai
+}
 
 // Kategorie pytań
 const CATEGORIES = [
@@ -26,7 +33,7 @@ const CATEGORIES = [
 // Funkcja do kategoryzacji pytania przez AI
 async function categorizeQuestion(question: string): Promise<string> {
   try {
-    const response = await openai.chat.completions.create({
+    const response = await getOpenAI().chat.completions.create({
       model: 'gpt-3.5-turbo',
       messages: [
         {
@@ -70,7 +77,7 @@ async function evaluateResponse(question: string, answer: string): Promise<{
   issues: string[]
 }> {
   try {
-    const response = await openai.chat.completions.create({
+    const response = await getOpenAI().chat.completions.create({
       model: 'gpt-3.5-turbo',
       messages: [
         {

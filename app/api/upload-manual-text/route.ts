@@ -12,9 +12,12 @@ const supabase = createClient(
   }
 )
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-})
+// Lazy init — żeby `next build` nie crashował gdy OPENAI_API_KEY brak w build env
+let _openai: OpenAI | null = null
+function getOpenAI(): OpenAI {
+  if (!_openai) _openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
+  return _openai
+}
 
 // Funkcja do dzielenia tekstu na chunki
 function splitIntoChunks(text: string, chunkSize: number = 1000, overlap: number = 200): string[] {
@@ -47,7 +50,7 @@ async function createEmbedding(text: string): Promise<number[]> {
     // Ogranicz długość tekstu do 8191 tokenów (limit OpenAI)
     const truncatedText = text.slice(0, 8000)
 
-    const response = await openai.embeddings.create({
+    const response = await getOpenAI().embeddings.create({
       model: 'text-embedding-3-small',
       input: truncatedText,
     })

@@ -3,7 +3,12 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 import { searchBlogForAI } from '@/lib/blog'
 
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY! })
+// Lazy init — żeby `next build` nie crashował gdy OPENAI_API_KEY brak w build env
+let _openai: OpenAI | null = null
+function getOpenAI(): OpenAI {
+  if (!_openai) _openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY! })
+  return _openai
+}
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -49,7 +54,7 @@ async function saveChatLog(data: {
 async function translateToEnglish(text: string): Promise<string> {
   try {
     console.log('🌐 Tłumaczę na angielski:', text)
-    const response = await openai.chat.completions.create({
+    const response = await getOpenAI().chat.completions.create({
       model: 'gpt-4o-mini',
       temperature: 0.3,
       max_tokens: 200,
@@ -255,7 +260,7 @@ async function searchManuals(query: string): Promise<{
     }
 
     // Utwórz embedding zapytania
-    const embeddingResponse = await openai.embeddings.create({
+    const embeddingResponse = await getOpenAI().embeddings.create({
       model: 'text-embedding-3-small',
       input: translatedQuery,
     })
@@ -1260,7 +1265,7 @@ ZRÓB DOKŁADNIE TAK - WKLEJ [BARCODE:...] W ODPOWIEDŹ!`
     }
 
     // Wywołaj GPT-5.5 (streaming)
-    const responseStream = await openai.chat.completions.create({
+    const responseStream = await getOpenAI().chat.completions.create({
       model: 'gpt-5.5',
       stream: true,
       max_completion_tokens: 2000,
