@@ -1138,7 +1138,7 @@ export async function POST(req: NextRequest) {
     let ragContextFound = false
     let citations: Array<{ title: string; uri: string; pageNumber?: number }> = []
 
-    const needsRAG = !blogFound || lastUserMessage.match(/zt\d|zd\d|gc\d|gk\d|tc\d|mc\d|ds\d/i)
+    const needsRAG = !blogFound || lastUserMessage.match(/zt\d|zd\d|gc\d|gk\d|gx\d|tc\d|mc\d|ds\d|zq\d|zc\d|zxp\d|li\d|ls\d|cs\d|et\d|wt\d/i)
 
     if (lastUserMessage && needsRAG) {
       console.log('🔍 Szukam w Supabase manuals dla:', lastUserMessage)
