@@ -8,6 +8,13 @@ const supabase = createClient(
 
 export async function GET(req: NextRequest) {
   try {
+    // Autoryzacja: endpoint kasuje całą bazę RAG — wymagany CRON_SECRET
+    const authHeader = req.headers.get('authorization')
+    const cronSecret = process.env.CRON_SECRET
+    if (!cronSecret || authHeader !== `Bearer ${cronSecret}`) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
     // Policz ile jest dokumentów
     const { count: beforeCount } = await supabase
       .from('manuals_documents')
