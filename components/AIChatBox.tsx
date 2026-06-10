@@ -75,6 +75,8 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
   const recognitionRef = useRef<any>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
   const videoInputRef = useRef<HTMLInputElement>(null)
+  const textInputMobileRef = useRef<HTMLInputElement>(null)
+  const textInputDesktopRef = useRef<HTMLInputElement>(null)
   
   // Wyłącz glow po 4 sekundach lub gdy użytkownik zacznie pisać
   useEffect(() => {
@@ -143,6 +145,16 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
     
     prevLoadingRef.current = loading
     prevMessagesLengthRef.current = messages.length
+  }, [loading, messages.length])
+
+  // Po zakończeniu odpowiedzi AI przywróć focus na input (disabled podczas
+  // loadingu zabiera focus i kursor znika — klient nie wie gdzie pisać)
+  useEffect(() => {
+    if (loading || messages.length === 0) return
+    const visibleInput = [textInputDesktopRef, textInputMobileRef]
+      .map(r => r.current)
+      .find(el => el && el.offsetParent !== null)
+    visibleInput?.focus()
   }, [loading, messages.length])
 
   const scrollToForm = () => {
@@ -562,11 +574,12 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
             </button>
 
             <input
+              ref={textInputMobileRef}
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyPress={handleKeyPress}
-              placeholder={messages.length === 0 ? currentPlaceholder : ""}
+              placeholder={messages.length === 0 ? currentPlaceholder : "Napisz odpowiedź..."}
               className="flex-1 text-[16px] text-gray-700 placeholder-gray-400 focus:outline-none bg-transparent px-3 caret-blue-500"
               disabled={loading}
               autoFocus
@@ -848,11 +861,12 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
             />
 
             <input
+              ref={textInputDesktopRef}
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyPress={handleKeyPress}
-              placeholder={messages.length === 0 ? currentPlaceholder : ""}
+              placeholder={messages.length === 0 ? currentPlaceholder : "Napisz odpowiedź..."}
               className="flex-1 text-base text-gray-700 placeholder-gray-400 focus:outline-none bg-transparent py-3 caret-blue-500"
               disabled={loading}
               autoFocus
