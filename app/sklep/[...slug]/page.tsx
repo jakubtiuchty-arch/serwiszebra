@@ -445,11 +445,37 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
 
   const metaDeviceLabel = productType.id === 'akumulator' ? 'urządzeń Zebra' : 'drukarek Zebra'
   if (slugPath.length === 1) {
+    // Głowice: cena "od X zł" liczona z realnego minimum DOSTĘPNEGO produktu,
+    // żeby deklaracja w title/description nie rozjeżdżała się z listingiem
+    if (productType.slug === 'glowice') {
+      const glowice = await getProductsForCategory({ productType: 'glowica' })
+      const availablePrices = glowice.filter(p => (p.stock ?? 0) > 0).map(p => p.price)
+      const minPrice = availablePrices.length > 0 ? Math.floor(Math.min(...availablePrices)) : 422
+      const glowiceTitle = `Głowice do drukarek Zebra 203/300/600 DPI od ${minPrice} zł | TAKMA`
+      const glowiceDescription = `Oryginalne głowice do drukarek etykiet Zebra: ZD421, ZD621, ZT411, ZT610, GK420. 203/300/600 DPI, ceny od ${minPrice} zł netto. Wysyłka 24h, gwarancja 12 mies.`
+      return {
+        title: glowiceTitle,
+        description: glowiceDescription,
+        openGraph: {
+          title: glowiceTitle,
+          description: glowiceDescription,
+          url: 'https://www.serwis-zebry.pl/sklep/glowice',
+          type: 'website',
+          siteName: 'TAKMA - Autoryzowany Serwis Zebra',
+          locale: 'pl_PL',
+          images: [{
+            url: 'https://www.serwis-zebry.pl/sklep_photo/glowica-203dpi-do-drukarki-zebra-zt411.png',
+            width: 800,
+            height: 800,
+            alt: 'Oryginalna głowica drukująca do drukarki Zebra'
+          }]
+        },
+        alternates: {
+          canonical: 'https://www.serwis-zebry.pl/sklep/glowice'
+        }
+      }
+    }
     const categoryDescriptions: Record<string, { title: string; description: string }> = {
-      glowice: {
-        title: 'Głowice drukujące Zebra 203/300/600 DPI — od 481 zł | TAKMA',
-        description: 'Oryginalne głowice do drukarek Zebra: ZD421, ZD621, ZT411, ZT610, GK420. 203/300/600 DPI. Ceny od 481 zł netto. Wysyłka 24h, gwarancja producenta.'
-      },
       'walki-dociskowe': {
         title: 'Wałki dociskowe Zebra (platen roller) — od 73 zł | TAKMA',
         description: 'Oryginalne wałki dociskowe do drukarek Zebra: ZD220, ZD421, ZD621, ZT411, ZT610. Ceny od 73 zł netto. Wysyłka 24h, gwarancja producenta.'
@@ -1412,7 +1438,8 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
     ? Array.from(new Set(products.map(p => p.resolution_dpi).filter((r): r is number => r !== null))).sort((a, b) => a - b)
     : []
 
-  // ItemList Schema — lista produktów w kategorii
+  // ItemList Schema — lista produktów w kategorii (pełne dane oferty:
+  // sku, cena brutto i dostępność zgodna z realnym stanem magazynowym)
   const itemListSchema = products.length > 0 ? {
     "@context": "https://schema.org",
     "@type": "ItemList",
@@ -1426,11 +1453,51 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
       return {
         "@type": "ListItem",
         "position": index + 1,
-        "name": p.name,
-        "url": productUrl
+        "item": {
+          "@type": "Product",
+          "name": p.name,
+          "sku": p.sku,
+          "url": productUrl,
+          ...(getProductImageUrl(p) ? { "image": getProductImageUrl(p) } : {}),
+          "brand": { "@type": "Brand", "name": "Zebra" },
+          "offers": {
+            "@type": "Offer",
+            "price": p.price_brutto.toFixed(2),
+            "priceCurrency": "PLN",
+            "availability": (p.stock ?? 0) > 0
+              ? "https://schema.org/InStock"
+              : "https://schema.org/OutOfStock",
+            "url": productUrl
+          }
+        }
       }
     })
   } : null
+
+  // CollectionPage Schema — strona kategorii głowic
+  const collectionPageSchema = productType.id === 'glowica' && slugPath.length === 1 ? {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": pageTitle,
+    "description": "Oryginalne głowice do drukarek etykiet Zebra w rozdzielczościach 203, 300 i 600 DPI — do drukarek biurkowych i przemysłowych.",
+    "url": "https://www.serwis-zebry.pl/sklep/glowice",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "TAKMA - Autoryzowany Serwis Zebra",
+      "url": "https://www.serwis-zebry.pl"
+    }
+  } : null
+
+  // Ceny głowic do treści strony (intro, tabela, FAQ) — zawsze z bazy,
+  // minimum liczone WYŁĄCZNIE z produktów dostępnych od ręki
+  const glowicaAvailablePrices = productType.id === 'glowica'
+    ? products.filter(p => (p.stock ?? 0) > 0).map(p => p.price)
+    : []
+  const glowicaMinPrice = glowicaAvailablePrices.length > 0 ? Math.floor(Math.min(...glowicaAvailablePrices)) : 422
+  const glowicaMaxPrice = productType.id === 'glowica' && products.length > 0
+    ? Math.ceil(Math.max(...products.map(p => p.price)))
+    : 5448
+  const formatPln = (v: number) => v.toLocaleString('pl-PL')
 
   // BreadcrumbList Schema dla kategorii
   const categoryBreadcrumbSchema = {
@@ -1469,6 +1536,12 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
+        />
+      )}
+      {collectionPageSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionPageSchema) }}
         />
       )}
       <script
@@ -1548,7 +1621,7 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
                   do drukarek biurkowych (ZD421, ZD621, GK420) i przemysłowych (ZT411, ZT610, ZT620).
                   Żywotność oryginalnej głowicy: <strong>1-2 mln cali druku</strong> (25-50 km).
                   Gwarancja producenta 12 miesięcy. Wysyłka 24h z magazynu w Polsce.
-                  Ceny od ~400 zł netto (203 DPI) do ~3500 zł (600 DPI).
+                  Ceny od {formatPln(glowicaMinPrice)} zł netto (203 DPI) do {formatPln(glowicaMaxPrice)} zł (600 DPI).
                 </p>
               </div>
             </div>
@@ -1557,7 +1630,7 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
           <section className="py-8 sm:py-12 bg-white border-t border-gray-100">
             <div className="max-w-4xl mx-auto px-4">
               <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">
-                Głowice drukujące do drukarek Zebra — kompletny przewodnik
+                Głowice do drukarek etykiet Zebra — kompletny przewodnik
               </h2>
 
               <div className="prose prose-sm sm:prose-base prose-gray max-w-none">
@@ -1566,37 +1639,39 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
                   Odpowiada za przenoszenie obrazu na materiał — w przypadku drukarek termicznych poprzez kontrolowane
                   nagrzewanie mikro-elementów grzejnych, które aktywują papier termiczny lub topią taśmę barwiącą (ribbon).
                   Od stanu głowicy zależy jakość wydruku, czytelność kodów kreskowych i niezawodność etykietowania.
+                  Prawidłowo dobrana głowica do drukarki musi zgadzać się z modelem urządzenia i rozdzielczością —
+                  dlatego każdy produkt w naszym sklepie ma przypisany Part Number i listę zgodnych drukarek.
                 </p>
 
                 <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
                   Tabela Part Numbers — głowice Zebra
                 </h3>
                 <div className="overflow-x-auto mb-6">
+                  {/* Tabela generowana z bazy produktów — PN, model, DPI, cena i stan
+                      zawsze zgodne z listingiem (rozjazdy hardcodowanych danych nie wracają) */}
                   <table className="w-full text-sm">
                     <thead className="bg-gray-50">
                       <tr>
                         <th className="px-3 py-2 text-left font-semibold">Model drukarki</th>
                         <th className="px-3 py-2 text-left font-semibold">Rozdzielczość</th>
                         <th className="px-3 py-2 text-left font-semibold">Part Number</th>
-                        <th className="px-3 py-2 text-left font-semibold">Cena od (netto)</th>
+                        <th className="px-3 py-2 text-left font-semibold">Cena (netto)</th>
+                        <th className="px-3 py-2 text-left font-semibold">Dostępność</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-100">
-                      <tr><td className="px-3 py-2 font-medium">ZT411 / ZT410</td><td className="px-3 py-2">203 DPI</td><td className="px-3 py-2 font-mono text-xs">P1058930-009</td><td className="px-3 py-2">~1 000 zł</td></tr>
-                      <tr><td className="px-3 py-2 font-medium">ZT411 / ZT410</td><td className="px-3 py-2">300 DPI</td><td className="px-3 py-2 font-mono text-xs">P1058930-010</td><td className="px-3 py-2">~1 500 zł</td></tr>
-                      <tr><td className="px-3 py-2 font-medium">ZT411 / ZT410</td><td className="px-3 py-2">600 DPI</td><td className="px-3 py-2 font-mono text-xs">P1058930-011</td><td className="px-3 py-2">~3 000 zł</td></tr>
-                      <tr><td className="px-3 py-2 font-medium">ZT610</td><td className="px-3 py-2">203 DPI</td><td className="px-3 py-2 font-mono text-xs">P1083320-010</td><td className="px-3 py-2">~1 000 zł</td></tr>
-                      <tr><td className="px-3 py-2 font-medium">ZT610</td><td className="px-3 py-2">300 DPI</td><td className="px-3 py-2 font-mono text-xs">P1083320-011</td><td className="px-3 py-2">~1 500 zł</td></tr>
-                      <tr><td className="px-3 py-2 font-medium">ZT610</td><td className="px-3 py-2">600 DPI</td><td className="px-3 py-2 font-mono text-xs">P1083320-012</td><td className="px-3 py-2">~3 500 zł</td></tr>
-                      <tr><td className="px-3 py-2 font-medium">ZT620</td><td className="px-3 py-2">203 DPI</td><td className="px-3 py-2 font-mono text-xs">P1083320-015</td><td className="px-3 py-2">~1 200 zł</td></tr>
-                      <tr><td className="px-3 py-2 font-medium">ZT421 / ZT420</td><td className="px-3 py-2">203 DPI</td><td className="px-3 py-2 font-mono text-xs">P1058930-012</td><td className="px-3 py-2">~1 200 zł</td></tr>
-                      <tr><td className="px-3 py-2 font-medium">ZT230</td><td className="px-3 py-2">203 DPI</td><td className="px-3 py-2 font-mono text-xs">P1037974-010</td><td className="px-3 py-2">~800 zł</td></tr>
-                      <tr><td className="px-3 py-2 font-medium">ZD421 / ZD411</td><td className="px-3 py-2">203 DPI</td><td className="px-3 py-2 font-mono text-xs">P1112640-019</td><td className="px-3 py-2">~500 zł</td></tr>
-                      <tr><td className="px-3 py-2 font-medium">ZD421 / ZD411</td><td className="px-3 py-2">300 DPI</td><td className="px-3 py-2 font-mono text-xs">P1112640-020</td><td className="px-3 py-2">~800 zł</td></tr>
-                      <tr><td className="px-3 py-2 font-medium">ZD621 / ZD611</td><td className="px-3 py-2">203 DPI</td><td className="px-3 py-2 font-mono text-xs">P1112640-019</td><td className="px-3 py-2">~500 zł</td></tr>
-                      <tr><td className="px-3 py-2 font-medium">GK420 / GX420</td><td className="px-3 py-2">203 DPI</td><td className="px-3 py-2 font-mono text-xs">105934-037</td><td className="px-3 py-2">~400 zł</td></tr>
-                      <tr><td className="px-3 py-2 font-medium">105SL Plus</td><td className="px-3 py-2">203 DPI</td><td className="px-3 py-2 font-mono text-xs">P1053360-018</td><td className="px-3 py-2">~1 000 zł</td></tr>
-                      <tr><td className="px-3 py-2 font-medium">ZM400</td><td className="px-3 py-2">203 DPI</td><td className="px-3 py-2 font-mono text-xs">79800M</td><td className="px-3 py-2">~900 zł</td></tr>
+                      {[...products]
+                        .filter(p => p.device_model && p.resolution_dpi)
+                        .sort((a, b) => a.device_model.localeCompare(b.device_model, 'pl') || (a.resolution_dpi! - b.resolution_dpi!))
+                        .map(p => (
+                          <tr key={p.sku}>
+                            <td className="px-3 py-2 font-medium">{p.device_model}</td>
+                            <td className="px-3 py-2">{p.resolution_dpi} DPI</td>
+                            <td className="px-3 py-2 font-mono text-xs">{p.sku}</td>
+                            <td className="px-3 py-2">{formatPln(Math.round(p.price))} zł</td>
+                            <td className="px-3 py-2">{(p.stock ?? 0) > 0 ? 'Dostępny' : 'Chwilowo niedostępny'}</td>
+                          </tr>
+                        ))}
                     </tbody>
                   </table>
                 </div>
@@ -1605,10 +1680,21 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
                   Kiedy wymienić głowicę w drukarce Zebra?
                 </h3>
                 <p className="text-gray-600 leading-relaxed mb-4">
-                  Typowe objawy zużytej głowicy to: <strong>pionowe białe linie</strong> na wydruku (uszkodzone elementy grzewcze),
+                  Zużyta głowica drukarki daje typowe objawy: <strong>pionowe białe linie</strong> na wydruku (uszkodzone elementy grzewcze),
                   <strong>blady lub nierównomierny wydruk</strong>, oraz <strong>nieczytelne kody kreskowe</strong> mimo prawidłowych
-                  ustawień ciemności. Żywotność głowicy zależy od jakości materiałów — średnio wynosi 1-2 miliony cali druku
+                  ustawień zaczernienia. Żywotność głowicy zależy od jakości materiałów — średnio wynosi 1-2 miliony cali druku
                   (25-50 km etykiet). Głowica 600 DPI zużywa się szybciej niż 203 DPI ze względu na gęstsze elementy grzewcze.
+                </p>
+
+                <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
+                  Głowica termiczna czy termotransferowa?
+                </h3>
+                <p className="text-gray-600 leading-relaxed mb-4">
+                  Sama głowica termiczna jest taka sama dla obu technologii druku — różni się sposób pracy.
+                  W druku termicznym bezpośrednim (direct thermal, modele z literą „d", np. ZD421d) głowica aktywuje
+                  ciepłem papier termiczny. Głowice do drukarek termotransferowych (modele z literą „t", np. ZD421t, oraz
+                  wszystkie przemysłowe ZT) topią barwnik z taśmy ribbon, co daje trwalszy wydruk. Przy zakupie liczy się
+                  więc model drukarki i rozdzielczość — nie technologia druku.
                 </p>
 
                 <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
@@ -1631,7 +1717,7 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
                   <strong>optymalną jakość wydruku</strong> i <strong>maksymalną żywotność</strong>.
                   Zamienniki często mają niższą gęstość elementów grzewczych, co skutkuje gorszą jakością i krótszą żywotnością
                   (nawet 50% krócej). Dodatkowo, użycie nieoryginalnych części może unieważnić gwarancję drukarki.
-                  Przy cenie głowicy od ~400 zł i żywotności 25-50 km etykiet — koszt na etykietę jest minimalny.
+                  Przy cenie głowicy od {formatPln(glowicaMinPrice)} zł i żywotności 25-50 km etykiet — koszt na etykietę jest minimalny.
                 </p>
 
                 <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
@@ -1666,7 +1752,7 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
                   </div>
                   <div className="border-l-4 border-blue-500 pl-4">
                     <p className="font-semibold text-gray-900">Ile kosztuje głowica do drukarki Zebra?</p>
-                    <p className="text-gray-600 text-sm mt-1">Oryginalne głowice Zebra kosztują od ~400 zł netto (biurkowe 203 DPI) do ~3 500 zł (przemysłowe 600 DPI). Cena zależy od modelu drukarki i rozdzielczości. 300 DPI jest zwykle o 50-100% droższa od 203 DPI.</p>
+                    <p className="text-gray-600 text-sm mt-1">Oryginalne głowice Zebra kosztują od {formatPln(glowicaMinPrice)} zł netto (biurkowe 203 DPI) do {formatPln(glowicaMaxPrice)} zł (przemysłowe 600 DPI). Cena zależy od modelu drukarki i rozdzielczości. 300 DPI jest zwykle o 50-100% droższa od 203 DPI.</p>
                   </div>
                   <div className="border-l-4 border-blue-500 pl-4">
                     <p className="font-semibold text-gray-900">Jak czyścić głowicę drukującą?</p>
@@ -1704,7 +1790,7 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
                 { "@type": "Question", "name": "Jak samodzielnie wymienić głowicę drukującą?", "acceptedAnswer": { "@type": "Answer", "text": "Wyłącz drukarkę, otwórz obudowę, odłącz flat cable, odkręć 2-4 śruby starej głowicy, zamontuj nową i podłącz kabel. Cała operacja zajmuje 5-10 minut. Po wymianie wykonaj kalibrację czujników." }},
                 { "@type": "Question", "name": "Jaka jest żywotność głowicy drukującej?", "acceptedAnswer": { "@type": "Answer", "text": "Oryginalna głowica Zebra ma żywotność 1-2 miliony cali druku (25-50 km etykiet). 203 DPI wytrzymuje dłużej niż 600 DPI. Regularne czyszczenie alkoholem IPA 99% wydłuża żywotność nawet 2-3 krotnie." }},
                 { "@type": "Question", "name": "Jaka jest różnica między 203, 300 i 600 DPI?", "acceptedAnswer": { "@type": "Answer", "text": "203 DPI (8 pkt/mm) — logistyka, kody 1D. 300 DPI (12 pkt/mm) — kody 2D, farmacja. 600 DPI (24 pkt/mm) — jubilerstwo, mikro-kody. Głowice nie są wymienne między rozdzielczościami." }},
-                { "@type": "Question", "name": "Ile kosztuje głowica do drukarki Zebra?", "acceptedAnswer": { "@type": "Answer", "text": "Oryginalne głowice Zebra kosztują od ~400 zł netto (biurkowe 203 DPI) do ~3 500 zł (przemysłowe 600 DPI)." }},
+                { "@type": "Question", "name": "Ile kosztuje głowica do drukarki Zebra?", "acceptedAnswer": { "@type": "Answer", "text": `Oryginalne głowice Zebra kosztują od ${formatPln(glowicaMinPrice)} zł netto (biurkowe 203 DPI) do ${formatPln(glowicaMaxPrice)} zł (przemysłowe 600 DPI).` }},
                 { "@type": "Question", "name": "Jak czyścić głowicę drukującą?", "acceptedAnswer": { "@type": "Answer", "text": "Używaj alkoholu izopropylowego (IPA) 99% i wacika lub dedykowanej karty czyszczącej Zebra. Czyść co każdą rolkę materiału lub minimum raz w tygodniu." }},
                 { "@type": "Question", "name": "Czy głowica jest objęta gwarancją?", "acceptedAnswer": { "@type": "Answer", "text": "Tak, wszystkie oryginalne głowice Zebra w naszym sklepie objęte są 12-miesięczną gwarancją producenta." }},
                 { "@type": "Question", "name": "Oryginalna głowica czy zamiennik — co wybrać?", "acceptedAnswer": { "@type": "Answer", "text": "Zdecydowanie oryginalna. Zamienniki mają niższą gęstość elementów grzewczych, krótszą żywotność i mogą unieważnić gwarancję drukarki." }}

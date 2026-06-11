@@ -210,7 +210,7 @@ export default function Footer() {
                 {[
                   { src: 'https://cdn.worldvectorlogo.com/logos/stripe-4.svg', alt: 'Stripe', w: 50, h: 20, cls: 'h-4 sm:h-5' },
                   { src: '/P24_logo.png', alt: 'Przelewy24', w: 70, h: 20, cls: 'h-4 sm:h-5' },
-                  { src: '/blik_logo.png', alt: 'BLIK', w: 80, h: 32, cls: 'h-7 sm:h-9' },
+                  { src: '/blik_logo.png', alt: 'Płatność BLIK', w: 80, h: 32, cls: 'h-7 sm:h-9' },
                 ].map((pay) => (
                   <Image 
                     key={pay.alt} 

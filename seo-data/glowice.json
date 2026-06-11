@@ -1,0 +1,95 @@
+{
+  "generated": "2026-06-11",
+  "page": "/sklep/glowice",
+  "sources": {
+    "gsc": "NIEDOSTĘPNE — GSC niepodpięte do projektu Ahrefs (gsc-keywords zwraca 0 wierszy); zastępczo indeks Ahrefs",
+    "ga4": "NIEDOSTĘPNE — Supermetrics GA4 NOT_AUTHENTICATED; zastępczo Ahrefs Web Analytics",
+    "ahrefs": "site-explorer + keywords-explorer + serp-overview, 2026-06-10/11"
+  },
+  "quickWins": {
+    "note": "Strona /sklep/glowice NIE rankuje na żadną frazę w indeksie Ahrefs (mode=prefix, 0 wierszy, sprawdzone z www i bez). Quick winy pozycji 4-20 nie istnieją — frazy docelowe pochodzą z luk konkurencji i klastra related terms.",
+    "targetPhrases": [
+      { "keyword": "głowice do drukarek", "volume": 80, "kd": 0, "why": "4 konkurentów w TOP10 (4labels #1, jantar #4, kodeo #5, ppuhbart #9), niski DR wystarcza (kodeo DR0 #5)" },
+      { "keyword": "głowica do drukarki", "volume": 90, "kd": 0, "why": "rajotech #4 i lagraf #4 kategoriami/produktami; nasz blog tylko w PAA" },
+      { "keyword": "głowica drukarki", "volume": 150, "kd": 0, "why": "lagraf #4, rajotech #10; nasz blog cennikowy w PAA box" },
+      { "keyword": "głowica drukująca", "volume": 90, "kd": 0, "why": "rajotech #7, lagraf #12" },
+      { "keyword": "głowice do drukarek etykiet", "volume": null, "kd": null, "why": "exact-match title lidera 4labels (#1); fraza doprecyzowująca intencję vs inkjet HP/Canon" },
+      { "keyword": "głowice drukujące", "volume": 40, "kd": null, "why": "klaster related terms" },
+      { "keyword": "głowica termiczna / głowice do drukarek termotransferowych", "volume": null, "kd": null, "why": "lagraf rankuje kategorią 'głowice-do-drukarek-termotransferowych-glowice-termiczne' #4 na 2 frazy" }
+    ]
+  },
+  "cannibalization": {
+    "finding": "Na frazy 'głowica drukarki' (150) i 'głowica do drukarki' (90) rankuje /blog/cennik-naprawy-drukarki-zebra-koszty-serwisu (#2, PAA box), a kategoria /sklep/glowice wcale. Blog odpowiada na intencję informacyjną (koszt naprawy) — nie usuwać; kategoria ma przejąć intencję zakupową. Dodać z bloga link do /sklep/glowice (intencja mieszana).",
+    "urls": [
+      { "url": "/blog/cennik-naprawy-drukarki-zebra-koszty-serwisu", "keywords": ["głowica drukarki #2 (question)", "głowica do drukarki #2 (question)"] }
+    ]
+  },
+  "analytics90d": {
+    "source": "Ahrefs Web Analytics 2026-03-12..2026-06-10",
+    "categoryPage": { "url": "/sklep/glowice", "pageviews": 21, "visitors": 16, "bounce": 25.0, "avgVisitSec": 24, "exits": 5, "exitRate": 38.5 },
+    "subcategories": [
+      { "url": "/sklep/glowice/drukarki-biurkowe", "pageviews": 27, "visitors": 21, "bounce": 6.7 },
+      { "url": "/sklep/glowice/drukarki-przemyslowe", "pageviews": 13, "visitors": 12, "bounce": 25.0 }
+    ],
+    "topProducts": [
+      { "url": ".../zebra-gk420d/glowica-203-dpi-zebra-gk420d", "pageviews": 70, "bounce": 96.9, "exitRate": 98.5 },
+      { "url": ".../zebra-zt610/glowica-203-dpi-zebra-zt610", "pageviews": 64, "bounce": 98.4, "exitRate": 98.4 },
+      { "url": ".../zebra-zt410/glowica-203-dpi-zebra-zt410", "pageviews": 61, "bounce": 96.5, "exitRate": 96.6 }
+    ],
+    "insight": "Ruch wchodzi z Google na strony PRODUKTÓW głowic (bounce 95-98%, wyjścia 96-98%) i nie eksploruje sklepu. Kategoria prawie nie dostaje wejść organicznych (21 pv/90 dni). Konwersje (koszyk) — brak danych (GA4 niepodpięte).",
+    "conversions": null
+  },
+  "serp": {
+    "głowice do drukarek": [
+      { "pos": 1, "url": "4labels.pl/drukarki-etykiet/akcesoria/glowice.html", "dr": 16, "type": "kategoria etykiety" },
+      { "pos": 3, "url": "dodrukarki.pl/category/tusze-glowice-hp", "dr": 44, "type": "inkjet HP" },
+      { "pos": 4, "url": "jshop.jantar.pl/pl/c/Glowice-do-drukarek/100", "dr": 40, "type": "kategoria etykiety" },
+      { "pos": 5, "url": "kodeo.pl/glowice-do-drukarek-c-7_25_26.html", "dr": 0, "type": "kategoria etykiety" },
+      { "pos": 6, "url": "botland.com.pl/k/glowice-do-drukarki-3d", "dr": 69, "type": "3D" },
+      { "pos": 7, "url": "hyprotech.com.pl/glowica-drukarki-wszystko-co-warto-wiedziec...", "dr": 8, "type": "blog etykiety" },
+      { "pos": 8, "url": "centrumpapieru.pl/produkty/45/glowice-drukujace", "dr": 28, "type": "kategoria" },
+      { "pos": 9, "url": "ppuhbart.pl/drukarki-etykiet-glowice", "dr": 40, "type": "kategoria etykiety" }
+    ],
+    "głowica drukarki": [
+      { "pos": 1, "url": "allegro.pl/listing", "dr": 91, "type": "marketplace" },
+      { "pos": 2, "url": "serwis-zebry.pl/blog/cennik-naprawy-drukarki-zebra-koszty-serwisu", "dr": null, "type": "PAA — MY (blog)" },
+      { "pos": 3, "url": "everprint.pl (HP)", "dr": 6, "type": "inkjet" },
+      { "pos": 4, "url": "sklep.lagraf.com.pl/glowice-do-drukarek-termotransferowych-glowice-termiczne/", "dr": 40, "type": "kategoria etykiety" },
+      { "pos": 5, "url": "vprint.pl blog", "dr": 28, "type": "blog" },
+      { "pos": 8, "url": "botland (3D)", "dr": 69, "type": "3D" },
+      { "pos": 10, "url": "rajotech.pl/glowice-drukujace/glowica-do-drukarki-zebra-zt410-zt411-203dpi/", "dr": null, "type": "produkt Zebra (image)" }
+    ],
+    "głowica drukująca": [
+      { "pos": 1, "url": "hppartner.pl (HP)", "dr": 15, "type": "inkjet" },
+      { "pos": 3, "url": "print24.com.pl blog", "dr": 45, "type": "blog" },
+      { "pos": 6, "url": "met.com.pl encyklopedia", "dr": 3, "type": "definicja" },
+      { "pos": 7, "url": "rajotech.pl (Zebra ZT410/411)", "dr": null, "type": "produkt Zebra (image)" }
+    ]
+  },
+  "competitorGaps": {
+    "note": "Frazy, na które rankują ≥2 konkurentów (sklepy etykietowe), a my nie rankujemy kategorią:",
+    "phrases": [
+      { "keyword": "głowice do drukarek", "volume": 80, "competitors": ["4labels #1", "jantar #4", "kodeo #5", "ppuhbart #9"] },
+      { "keyword": "głowica do drukarki", "volume": 90, "competitors": ["rajotech #4", "lagraf #4", "ppuhbart #12"] },
+      { "keyword": "głowica drukarki", "volume": 150, "competitors": ["lagraf #4", "rajotech #10"] },
+      { "keyword": "głowica drukująca", "volume": 90, "competitors": ["rajotech #7", "lagraf #12"] },
+      { "keyword": "głowica", "volume": 2200, "competitors": ["lagraf #17", "kodeo #30", "4labels #47"] }
+    ],
+    "competitorContentNotes": {
+      "4labels.pl (#1)": "Title 'Głowice do drukarek etykiet', H1 'Głowice', BRAK H2/H3, BRAK tabeli PN, BRAK FAQ, BRAK schema — wygrywa exact-matchem i wiekiem domeny. Opis: dobór wg modelu, DPI 200-600, marki (Zebra, Citizen, Godex, Honeywell, Sato, TSC, Toshiba), wymiana jako eksploatacja.",
+      "lagraf": "kategoria 'głowice do drukarek termotransferowych / głowice termiczne' — dwie frazy w slugu/title",
+      "rajotech": "rankuje stroną PRODUKTU głowicy ZT410/ZT411 — nie kategorią"
+    }
+  },
+  "relatedTermsCluster": [
+    { "keyword": "głowica", "volume": 2200 },
+    { "keyword": "głowice", "volume": 157 },
+    { "keyword": "drukarki zebra", "volume": 154 },
+    { "keyword": "głowica drukarki", "volume": 120 },
+    { "keyword": "głowica do drukarki", "volume": 100 },
+    { "keyword": "głowica drukująca", "volume": 82 },
+    { "keyword": "głowice do drukarek", "volume": 80 },
+    { "keyword": "naprawa drukarki", "volume": 70 },
+    { "keyword": "głowice drukujące", "volume": 40 }
+  ]
+}

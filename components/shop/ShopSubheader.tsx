@@ -26,7 +26,7 @@ export default function ShopSubheader({ breadcrumbs }: ShopSubheaderProps) {
       <div className="max-w-6xl mx-auto px-3 sm:px-4">
         <div className="flex items-center justify-between h-11 sm:h-12">
           {/* Breadcrumbs - Mobile optimized */}
-          <nav className="flex items-center gap-1 sm:gap-1.5 text-xs sm:text-sm overflow-hidden">
+          <nav aria-label="Breadcrumb" className="flex items-center gap-1 sm:gap-1.5 text-xs sm:text-sm overflow-hidden">
             {/* Home icon on mobile, text on desktop */}
             <Link href="/" className="text-gray-500 hover:text-blue-600 transition-colors flex-shrink-0">
               <Home className="w-4 h-4 sm:hidden" />

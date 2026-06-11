@@ -1,0 +1,772 @@
+{
+  "generated": "2026-06-11",
+  "currentMeta": {
+    "title": "Głowice drukujące Zebra 203/300/600 DPI — od 481 zł | TAKMA",
+    "titleLength": 59,
+    "description": "Oryginalne głowice do drukarek Zebra: ZD421, ZD621, ZT411, ZT610, GK420. 203/300/600 DPI. Ceny od 481 zł netto. Wysyłka 24h, gwarancja producenta.",
+    "descriptionLength": 146,
+    "priceClaim": 481,
+    "realMinPriceAvailable": {
+      "sku": "P1117258-233",
+      "model": "ZD411t/ZD611t",
+      "price": 422.5,
+      "stock": 2
+    },
+    "priceClaimIssue": "'od 481 zł' pochodzi z 105934-037 (481.60, stock=0 — NIEDOSTĘPNY); realne minimum dostępnego: 422.5 zł (P1117258-233)"
+  },
+  "schema": {
+    "FAQPage": true,
+    "CollectionPage": false,
+    "ItemList": false,
+    "BreadcrumbList": "do weryfikacji w audycie"
+  },
+  "ahrefsRankings": "0 fraz (strona niewidoczna w indeksie)",
+  "tableDiscrepancies": [
+    {
+      "model": "ZT411 / ZT410",
+      "dpi": 203,
+      "pn": "P1058930-009",
+      "tablePrice": 1000,
+      "dbPrice": 1770.56,
+      "issues": [
+        "cena tabeli 1000 zł vs baza 1770.56 zł (-44%)"
+      ],
+      "status": "FAIL"
+    },
+    {
+      "model": "ZT411 / ZT410",
+      "dpi": 300,
+      "pn": "P1058930-010",
+      "tablePrice": 1500,
+      "dbPrice": 2065.67,
+      "issues": [
+        "cena tabeli 1500 zł vs baza 2065.67 zł (-27%)"
+      ],
+      "status": "FAIL"
+    },
+    {
+      "model": "ZT411 / ZT410",
+      "dpi": 600,
+      "pn": "P1058930-011",
+      "tablePrice": 3000,
+      "dbPrice": 5447.84,
+      "issues": [
+        "cena tabeli 3000 zł vs baza 5447.84 zł (-45%)"
+      ],
+      "status": "FAIL"
+    },
+    {
+      "model": "ZT610",
+      "dpi": 203,
+      "pn": "P1083320-010",
+      "tablePrice": 1000,
+      "dbPrice": 2107.79,
+      "issues": [
+        "cena tabeli 1000 zł vs baza 2107.79 zł (-53%)"
+      ],
+      "status": "FAIL"
+    },
+    {
+      "model": "ZT610",
+      "dpi": 300,
+      "pn": "P1083320-011",
+      "tablePrice": 1500,
+      "dbPrice": 2351.03,
+      "issues": [
+        "cena tabeli 1500 zł vs baza 2351.03 zł (-36%)"
+      ],
+      "status": "FAIL"
+    },
+    {
+      "model": "ZT610",
+      "dpi": 600,
+      "pn": "P1083320-012",
+      "tablePrice": 3500,
+      "dbPrice": 2999.5,
+      "issues": [
+        "cena tabeli 3500 zł vs baza 2999.50 zł (+17%)"
+      ],
+      "status": "FAIL"
+    },
+    {
+      "model": "ZT620",
+      "dpi": 203,
+      "pn": "P1083320-015",
+      "tablePrice": 1200,
+      "dbPrice": 2614.51,
+      "issues": [
+        "cena tabeli 1200 zł vs baza 2614.51 zł (-54%)"
+      ],
+      "status": "FAIL"
+    },
+    {
+      "model": "ZT421 / ZT420",
+      "dpi": 203,
+      "pn": "P1058930-012",
+      "tablePrice": 1200,
+      "dbPrice": 1952.18,
+      "issues": [
+        "cena tabeli 1200 zł vs baza 1952.18 zł (-39%)"
+      ],
+      "status": "FAIL"
+    },
+    {
+      "model": "ZT230",
+      "dpi": 203,
+      "pn": "P1037974-010",
+      "tablePrice": 800,
+      "dbPrice": 1404.27,
+      "issues": [
+        "cena tabeli 800 zł vs baza 1404.27 zł (-43%)"
+      ],
+      "status": "FAIL"
+    },
+    {
+      "model": "ZD421 / ZD411",
+      "dpi": 203,
+      "pn": "P1112640-019",
+      "tablePrice": 500,
+      "dbPrice": 476.66,
+      "issues": [],
+      "status": "PASS"
+    },
+    {
+      "model": "ZD421 / ZD411",
+      "dpi": 300,
+      "pn": "P1112640-020",
+      "tablePrice": 800,
+      "dbPrice": 971.53,
+      "issues": [
+        "cena tabeli 800 zł vs baza 971.53 zł (-18%)"
+      ],
+      "status": "FAIL"
+    },
+    {
+      "model": "ZD621 / ZD611",
+      "dpi": 203,
+      "pn": "P1112640-019",
+      "tablePrice": 500,
+      "dbPrice": 476.66,
+      "issues": [
+        "PN przypisany w bazie do: ZD421d"
+      ],
+      "status": "FAIL"
+    },
+    {
+      "model": "GK420 / GX420",
+      "dpi": 203,
+      "pn": "105934-037",
+      "tablePrice": 400,
+      "dbPrice": 481.6,
+      "issues": [
+        "cena tabeli 400 zł vs baza 481.60 zł (-17%)"
+      ],
+      "status": "FAIL"
+    },
+    {
+      "model": "105SL Plus",
+      "dpi": 203,
+      "pn": "P1053360-018",
+      "tablePrice": 1000,
+      "dbPrice": null,
+      "issues": [
+        "PN nie istnieje w bazie aktywnych produktów"
+      ],
+      "status": "FAIL"
+    },
+    {
+      "model": "ZM400",
+      "dpi": 203,
+      "pn": "79800M",
+      "tablePrice": 900,
+      "dbPrice": null,
+      "issues": [
+        "PN nie istnieje w bazie aktywnych produktów"
+      ],
+      "status": "FAIL"
+    }
+  ],
+  "failCount": 14,
+  "productsSnapshot": [
+    {
+      "sku": "P1004234",
+      "name": "Głowica 203 DPI do drukarki Zebra 140Xi4 - P1004234",
+      "device_model": "140Xi4",
+      "resolution_dpi": 203,
+      "price": 2086.16,
+      "price_brutto": 2565.98,
+      "stock": 0,
+      "slug": "glowica-203-dpi-zebra-140xi4",
+      "compatible_models": [],
+      "lead_time_days": null
+    },
+    {
+      "sku": "P1004236",
+      "name": "Głowica 203 DPI do drukarki Zebra 170Xi4 - P1004236",
+      "device_model": "170Xi4",
+      "resolution_dpi": 203,
+      "price": 2723.53,
+      "price_brutto": 3349.94,
+      "stock": 49,
+      "slug": "glowica-203-dpi-zebra-170xi4",
+      "compatible_models": [],
+      "lead_time_days": "1"
+    },
+    {
+      "sku": "P1004238",
+      "name": "Głowica 203 DPI do drukarki Zebra 220Xi4 - P1004238",
+      "device_model": "220Xi4",
+      "resolution_dpi": 203,
+      "price": 3236.98,
+      "price_brutto": 3981.49,
+      "stock": 4,
+      "slug": "glowica-203-dpi-zebra-220xi4",
+      "compatible_models": [
+        "220Xi4"
+      ],
+      "lead_time_days": "1"
+    },
+    {
+      "sku": "P1004239",
+      "name": "Głowica 300 DPI do drukarki Zebra 220Xi4 - P1004239",
+      "device_model": "220Xi4",
+      "resolution_dpi": 300,
+      "price": 3403.6,
+      "price_brutto": 4186.43,
+      "stock": 30,
+      "slug": "glowica-300-dpi-zebra-220xi4",
+      "compatible_models": [
+        "220Xi4"
+      ],
+      "lead_time_days": "3"
+    },
+    {
+      "sku": "105934-037",
+      "name": "Głowica 203 DPI do drukarki Zebra GK420d/GX420d - 105934-037",
+      "device_model": "GK420d/GX420d",
+      "resolution_dpi": 203,
+      "price": 481.6,
+      "price_brutto": 592.37,
+      "stock": 0,
+      "slug": "glowica-203-dpi-zebra-gk420d",
+      "compatible_models": [
+        "GK420d"
+      ],
+      "lead_time_days": null
+    },
+    {
+      "sku": "105934-038",
+      "name": "Głowica 203 DPI do drukarki Zebra GK420t/GX420t - 105934-038",
+      "device_model": "GK420t/GX420t",
+      "resolution_dpi": 203,
+      "price": 463.16,
+      "price_brutto": 569.69,
+      "stock": 0,
+      "slug": "glowica-203-dpi-zebra-gk420t",
+      "compatible_models": [
+        "GK420t"
+      ],
+      "lead_time_days": null
+    },
+    {
+      "sku": "105934-039",
+      "name": "Głowica 300 DPI do drukarki Zebra GX430t - 105934-039",
+      "device_model": "GX430t",
+      "resolution_dpi": 300,
+      "price": 952.51,
+      "price_brutto": 1171.59,
+      "stock": 0,
+      "slug": "glowica-300-dpi-zebra-gx430t",
+      "compatible_models": [
+        "GX430t"
+      ],
+      "lead_time_days": null
+    },
+    {
+      "sku": "P1115689",
+      "name": "Głowica 203 DPI do drukarki Zebra ZD220d - P1115689",
+      "device_model": "ZD220d",
+      "resolution_dpi": 203,
+      "price": 460.87,
+      "price_brutto": 566.87,
+      "stock": 34,
+      "slug": "glowica-203-dpi-zebra-zd220d",
+      "compatible_models": [
+        "ZD230d"
+      ],
+      "lead_time_days": "3"
+    },
+    {
+      "sku": "P1115690",
+      "name": "Głowica 203 DPI do drukarki Zebra ZD220t - P1115690",
+      "device_model": "ZD220t/ZD230t",
+      "resolution_dpi": 203,
+      "price": 460.87,
+      "price_brutto": 566.87,
+      "stock": 0,
+      "slug": "glowica-203-dpi-zebra-zd220t",
+      "compatible_models": [
+        "ZD220t"
+      ],
+      "lead_time_days": null
+    },
+    {
+      "sku": "P1117258-233",
+      "name": "Głowica 300 DPI do drukarki Zebra ZD411t - P1117258-233",
+      "device_model": "ZD411t/ZD611t",
+      "resolution_dpi": 300,
+      "price": 422.5,
+      "price_brutto": 519.68,
+      "stock": 2,
+      "slug": "glowica-300-dpi-zebra-zd411t",
+      "compatible_models": [
+        "ZD411t"
+      ],
+      "lead_time_days": "3"
+    },
+    {
+      "sku": "P1117258-232",
+      "name": "Głowica 203 DPI do drukarki Zebra ZD411t - P1117258-232",
+      "device_model": "ZD411t/ZD611t",
+      "resolution_dpi": 203,
+      "price": 372.25,
+      "price_brutto": 457.87,
+      "stock": 0,
+      "slug": "glowica-203-dpi-zebra-zd411t",
+      "compatible_models": [
+        "ZD411t"
+      ],
+      "lead_time_days": null
+    },
+    {
+      "sku": "P1112640-020",
+      "name": "Głowica 300 DPI do drukarki Zebra ZD421d - P1112640-020",
+      "device_model": "ZD421d",
+      "resolution_dpi": 300,
+      "price": 971.53,
+      "price_brutto": 1194.98,
+      "stock": 47,
+      "slug": "glowica-300-dpi-zebra-zd421d",
+      "compatible_models": [
+        "ZD421t",
+        "ZD421c"
+      ],
+      "lead_time_days": "3"
+    },
+    {
+      "sku": "P1112640-019",
+      "name": "Głowica 203 DPI do drukarki Zebra ZD421d - P1112640-019",
+      "device_model": "ZD421d",
+      "resolution_dpi": 203,
+      "price": 476.66,
+      "price_brutto": 586.29,
+      "stock": 127,
+      "slug": "glowica-203-dpi-zebra-zd421d",
+      "compatible_models": [
+        "ZD421t",
+        "ZD421c"
+      ],
+      "lead_time_days": "1"
+    },
+    {
+      "sku": "P1112640-218",
+      "name": "Głowica 203 DPI do drukarki Zebra ZD421t - P1112640-218",
+      "device_model": "ZD421t",
+      "resolution_dpi": 203,
+      "price": 476.66,
+      "price_brutto": 586.29,
+      "stock": 215,
+      "slug": "glowica-203-dpi-zebra-zd421t",
+      "compatible_models": [
+        "ZD421t",
+        "ZD421"
+      ],
+      "lead_time_days": "1"
+    },
+    {
+      "sku": "P1112640-219",
+      "name": "Głowica 300 DPI do drukarki Zebra ZD421t - P1112640-219",
+      "device_model": "ZD421t",
+      "resolution_dpi": 300,
+      "price": 971.53,
+      "price_brutto": 1194.98,
+      "stock": 22,
+      "slug": "glowica-300-dpi-zebra-zd421t",
+      "compatible_models": [
+        "ZD421t"
+      ],
+      "lead_time_days": "3"
+    },
+    {
+      "sku": "P1080383-416",
+      "name": "Głowica 300 DPI do drukarki Zebra ZD620d - P1080383-416",
+      "device_model": "ZD620d",
+      "resolution_dpi": 300,
+      "price": 950.69,
+      "price_brutto": 1169.35,
+      "stock": 0,
+      "slug": "glowica-300-dpi-zebra-zd620d",
+      "compatible_models": [
+        "ZD620t"
+      ],
+      "lead_time_days": null
+    },
+    {
+      "sku": "P1080383-415",
+      "name": "Głowica 203 DPI do drukarki Zebra ZD620d - P1080383-415",
+      "device_model": "ZD620d",
+      "resolution_dpi": 203,
+      "price": 462.78,
+      "price_brutto": 569.22,
+      "stock": 0,
+      "slug": "glowica-203-dpi-zebra-zd620d",
+      "compatible_models": [
+        "ZD620t"
+      ],
+      "lead_time_days": null
+    },
+    {
+      "sku": "P1080383-227",
+      "name": "Głowica 300 DPI do drukarki Zebra ZD620t - P1080383-227",
+      "device_model": "ZD620t",
+      "resolution_dpi": 300,
+      "price": 943.23,
+      "price_brutto": 1160.17,
+      "stock": 0,
+      "slug": "glowica-300-dpi-zebra-zd620t",
+      "compatible_models": [
+        "ZD620d"
+      ],
+      "lead_time_days": null
+    },
+    {
+      "sku": "P1080383-226",
+      "name": "Głowica 203 DPI do drukarki Zebra ZD620t - P1080383-226",
+      "device_model": "ZD620t",
+      "resolution_dpi": 203,
+      "price": 462.78,
+      "price_brutto": 569.22,
+      "stock": 0,
+      "slug": "glowica-203-dpi-zebra-zd620t",
+      "compatible_models": [
+        "ZD620d"
+      ],
+      "lead_time_days": null
+    },
+    {
+      "sku": "P1112640-050",
+      "name": "Głowica 203 DPI do drukarki Zebra ZD621d - P1112640-050",
+      "device_model": "ZD621d",
+      "resolution_dpi": 203,
+      "price": 476.66,
+      "price_brutto": 586.29,
+      "stock": 0,
+      "slug": "glowica-203-dpi-zebra-zd621d",
+      "compatible_models": [
+        "ZD621t"
+      ],
+      "lead_time_days": null
+    },
+    {
+      "sku": "P1112640-051",
+      "name": "Głowica 300 DPI do drukarki Zebra ZD621d - P1112640-051",
+      "device_model": "ZD621d",
+      "resolution_dpi": 300,
+      "price": 971.53,
+      "price_brutto": 1194.98,
+      "stock": 16,
+      "slug": "glowica-300-dpi-zebra-zd621d",
+      "compatible_models": [
+        "ZD621t"
+      ],
+      "lead_time_days": "3"
+    },
+    {
+      "sku": "P1112640-241",
+      "name": "Głowica 300 DPI do drukarki Zebra ZD621t - P1112640-241",
+      "device_model": "ZD621t",
+      "resolution_dpi": 300,
+      "price": 971.53,
+      "price_brutto": 1194.98,
+      "stock": 34,
+      "slug": "glowica-300-dpi-zebra-zd621t",
+      "compatible_models": [
+        "ZD621t"
+      ],
+      "lead_time_days": "1"
+    },
+    {
+      "sku": "P1112640-240",
+      "name": "Głowica 203 DPI do drukarki Zebra ZD621t - P1112640-240",
+      "device_model": "ZD621t",
+      "resolution_dpi": 203,
+      "price": 476.66,
+      "price_brutto": 586.29,
+      "stock": 2,
+      "slug": "glowica-203-dpi-zebra-zd621t",
+      "compatible_models": [
+        "ZD621t"
+      ],
+      "lead_time_days": "3"
+    },
+    {
+      "sku": "P1123335-012",
+      "name": "Głowica 203 DPI do drukarki Zebra ZT111 - P1123335-012",
+      "device_model": "ZT111",
+      "resolution_dpi": 203,
+      "price": 1217.35,
+      "price_brutto": 1497.34,
+      "stock": 0,
+      "slug": "glowica-203-dpi-zebra-zt111",
+      "compatible_models": [
+        "ZT211",
+        "ZT231"
+      ],
+      "lead_time_days": null
+    },
+    {
+      "sku": "P1123335-057",
+      "name": "Głowica 300 DPI do drukarki Zebra ZT111 - P1123335-057",
+      "device_model": "ZT111",
+      "resolution_dpi": 300,
+      "price": 1793.97,
+      "price_brutto": 2206.58,
+      "stock": 0,
+      "slug": "glowica-300-dpi-zebra-zt111",
+      "compatible_models": [
+        "ZT211",
+        "ZT231"
+      ],
+      "lead_time_days": null
+    },
+    {
+      "sku": "P1037974-010",
+      "name": "Głowica 203 DPI do drukarki Zebra ZT210 - P1037974-010",
+      "device_model": "ZT210/ZT220/ZT230",
+      "resolution_dpi": 203,
+      "price": 1404.27,
+      "price_brutto": 1727.25,
+      "stock": 304,
+      "slug": "glowica-203-dpi-zebra-zt210",
+      "compatible_models": [
+        "ZT210"
+      ],
+      "lead_time_days": "1"
+    },
+    {
+      "sku": "P1037974-011",
+      "name": "Głowica 300 DPI do drukarki Zebra ZT210 - P1037974-011",
+      "device_model": "ZT210/ZT220/ZT230",
+      "resolution_dpi": 300,
+      "price": 1880.3,
+      "price_brutto": 2312.77,
+      "stock": 29,
+      "slug": "glowica-300-dpi-zebra-zt210",
+      "compatible_models": [
+        "ZT210"
+      ],
+      "lead_time_days": "1"
+    },
+    {
+      "sku": "P1058930-009",
+      "name": "Głowica 203 DPI do drukarki Zebra ZT410/ZT411 - P1058930-009",
+      "device_model": "ZT410/ZT411",
+      "resolution_dpi": 203,
+      "price": 1770.56,
+      "price_brutto": 2177.79,
+      "stock": 419,
+      "slug": "glowica-203-dpi-zebra-zt410",
+      "compatible_models": [
+        "ZT410",
+        "ZT411"
+      ],
+      "lead_time_days": "3"
+    },
+    {
+      "sku": "P1058930-011",
+      "name": "Głowica 600 DPI do drukarki Zebra ZT410/ZT411 - P1058930-011",
+      "device_model": "ZT410/ZT411",
+      "resolution_dpi": 600,
+      "price": 5447.84,
+      "price_brutto": 6700.84,
+      "stock": 6,
+      "slug": "glowica-600-dpi-zebra-zt410",
+      "compatible_models": [
+        "ZT410",
+        "ZT411"
+      ],
+      "lead_time_days": "3"
+    },
+    {
+      "sku": "P1058930-010",
+      "name": "Głowica 300 DPI do drukarki Zebra ZT410/ZT411 - P1058930-010",
+      "device_model": "ZT410/ZT411",
+      "resolution_dpi": 300,
+      "price": 2065.67,
+      "price_brutto": 2540.77,
+      "stock": 280,
+      "slug": "glowica-300-dpi-zebra-zt410",
+      "compatible_models": [
+        "ZT410",
+        "ZT411"
+      ],
+      "lead_time_days": "1"
+    },
+    {
+      "sku": "P1105147-301",
+      "name": "Głowica 300 DPI do drukarki Zebra ZT411 RFID - P1105147-301",
+      "device_model": "ZT411 RFID",
+      "resolution_dpi": 300,
+      "price": 2594.17,
+      "price_brutto": 3190.83,
+      "stock": 0,
+      "slug": "glowica-300-dpi-zebra-zt411-rfid",
+      "compatible_models": [
+        "ZT411 RFID"
+      ],
+      "lead_time_days": null
+    },
+    {
+      "sku": "P1105147-300",
+      "name": "Głowica 203 DPI do drukarki Zebra ZT411 RFID - P1105147-300",
+      "device_model": "ZT411 RFID",
+      "resolution_dpi": 203,
+      "price": 2290.17,
+      "price_brutto": 2816.91,
+      "stock": 3,
+      "slug": "glowica-203-dpi-zebra-zt411-rfid",
+      "compatible_models": [
+        "ZT411 RFID"
+      ],
+      "lead_time_days": "3"
+    },
+    {
+      "sku": "P1058930-013",
+      "name": "Głowica 300 DPI do drukarki Zebra ZT420/ZT421 - P1058930-013",
+      "device_model": "ZT420/ZT421",
+      "resolution_dpi": 300,
+      "price": 3041.69,
+      "price_brutto": 3741.28,
+      "stock": 106,
+      "slug": "glowica-300-dpi-zebra-zt420",
+      "compatible_models": [
+        "ZT420",
+        "ZT421"
+      ],
+      "lead_time_days": "3"
+    },
+    {
+      "sku": "P1058930-012",
+      "name": "Głowica 203 DPI do drukarki Zebra ZT420/ZT421 - P1058930-012",
+      "device_model": "ZT420/ZT421",
+      "resolution_dpi": 203,
+      "price": 1952.18,
+      "price_brutto": 2401.18,
+      "stock": 244,
+      "slug": "glowica-203-dpi-zebra-zt420",
+      "compatible_models": [
+        "ZT420",
+        "ZT421"
+      ],
+      "lead_time_days": "1"
+    },
+    {
+      "sku": "P1083347-006",
+      "name": "Głowica 300 DPI do drukarki Zebra ZT510 - P1083347-006",
+      "device_model": "ZT510",
+      "resolution_dpi": 300,
+      "price": 2067.25,
+      "price_brutto": 2542.72,
+      "stock": 37,
+      "slug": "glowica-300-dpi-zebra-zt510",
+      "compatible_models": [
+        "ZT510"
+      ],
+      "lead_time_days": "3"
+    },
+    {
+      "sku": "P1083347-005",
+      "name": "Głowica 203 DPI do drukarki Zebra ZT510 - P1083347-005",
+      "device_model": "ZT510",
+      "resolution_dpi": 203,
+      "price": 1864.59,
+      "price_brutto": 2293.45,
+      "stock": 34,
+      "slug": "glowica-203-dpi-zebra-zt510",
+      "compatible_models": [
+        "ZT510"
+      ],
+      "lead_time_days": "3"
+    },
+    {
+      "sku": "P1083320-010",
+      "name": "Głowica 203 DPI do drukarki Zebra ZT610 - P1083320-010",
+      "device_model": "ZT610/ZT610R",
+      "resolution_dpi": 203,
+      "price": 2107.79,
+      "price_brutto": 2592.58,
+      "stock": 22,
+      "slug": "glowica-203-dpi-zebra-zt610",
+      "compatible_models": [
+        "ZT610"
+      ],
+      "lead_time_days": "1"
+    },
+    {
+      "sku": "P1083320-012",
+      "name": "Głowica 600 DPI do drukarki Zebra ZT610 - P1083320-012",
+      "device_model": "ZT610/ZT610R",
+      "resolution_dpi": 600,
+      "price": 2999.5,
+      "price_brutto": 3689.39,
+      "stock": 35,
+      "slug": "glowica-600-dpi-zebra-zt610",
+      "compatible_models": [
+        "ZT610"
+      ],
+      "lead_time_days": "1"
+    },
+    {
+      "sku": "P1083320-011",
+      "name": "Głowica 300 DPI do drukarki Zebra ZT610 - P1083320-011",
+      "device_model": "ZT610/ZT610R",
+      "resolution_dpi": 300,
+      "price": 2351.03,
+      "price_brutto": 2891.77,
+      "stock": 67,
+      "slug": "glowica-300-dpi-zebra-zt610",
+      "compatible_models": [
+        "ZT610"
+      ],
+      "lead_time_days": "1"
+    },
+    {
+      "sku": "P1083320-015",
+      "name": "Głowica 203 DPI do drukarki Zebra ZT620 - P1083320-015",
+      "device_model": "ZT620/ZT620R",
+      "resolution_dpi": 203,
+      "price": 2614.51,
+      "price_brutto": 3215.85,
+      "stock": 30,
+      "slug": "glowica-203-dpi-zebra-zt620",
+      "compatible_models": [
+        "ZT620"
+      ],
+      "lead_time_days": "3"
+    },
+    {
+      "sku": "P1083320-016",
+      "name": "Głowica 300 DPI do drukarki Zebra ZT620 - P1083320-016",
+      "device_model": "ZT620/ZT620R",
+      "resolution_dpi": 300,
+      "price": 2979.27,
+      "price_brutto": 3664.5,
+      "stock": 54,
+      "slug": "glowica-300-dpi-zebra-zt620",
+      "compatible_models": [
+        "ZT620"
+      ],
+      "lead_time_days": "1"
+    }
+  ]
+}
