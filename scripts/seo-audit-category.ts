@@ -1,9 +1,9 @@
 /**
- * Audyt SEO strony kategorii /sklep/glowice — kryteria statyczne,
- * spójność danych z bazą produktów i pokrycie frazowe (seo-data/glowice.json).
+ * Audyt SEO stron kategorii głowic (/sklep/glowice + podkategorie) —
+ * kryteria statyczne, spójność danych z bazą produktów i pokrycie frazowe.
  *
  * Uruchomienie:
- *   node --experimental-strip-types scripts/seo-audit-category.ts [--url http://localhost:3003]
+ *   node --experimental-strip-types scripts/seo-audit-category.ts [--url http://localhost:3002]
  *
  * Exit code 0 = 100% PASS, 1 = są FAIL-e.
  */
@@ -13,10 +13,46 @@ import { resolve } from 'path'
 
 const ROOT = resolve(import.meta.dirname, '..')
 const urlIdx = process.argv.indexOf('--url')
-const BASE_URL = urlIdx > -1 ? process.argv[urlIdx + 1] : 'http://localhost:3003'
-const PAGE_PATH = '/sklep/glowice'
-const CANONICAL = 'https://www.serwis-zebry.pl/sklep/glowice'
-const MAIN_PHRASE = 'głowice do drukarek'
+const BASE_URL = urlIdx > -1 ? process.argv[urlIdx + 1] : 'http://localhost:3002'
+
+interface PageConfig {
+  path: string
+  canonical: string
+  mainPhrase: string
+  /** frazy wymagane w H2/H3/akapitach/listach tej strony */
+  phrases: string[]
+  /** czy title i meta description muszą zawierać deklarację "od X zł" */
+  requireClaimInMeta: boolean
+  /** czy frazy z seo-data/glowice.json (quick wins + luki konkurencji) obowiązują */
+  useSeoDataPhrases: boolean
+}
+
+const PAGES: PageConfig[] = [
+  {
+    path: '/sklep/glowice',
+    canonical: 'https://www.serwis-zebry.pl/sklep/glowice',
+    mainPhrase: 'głowice do drukarek',
+    phrases: [],
+    requireClaimInMeta: true,
+    useSeoDataPhrases: true,
+  },
+  {
+    path: '/sklep/glowice/drukarki-biurkowe',
+    canonical: 'https://www.serwis-zebry.pl/sklep/glowice/drukarki-biurkowe',
+    mainPhrase: 'głowice do drukarek biurkowych',
+    phrases: ['głowica zd421', 'głowica gk420', 'druk termiczny', 'druk termotransferowy', 'wymiana głowicy'],
+    requireClaimInMeta: false,
+    useSeoDataPhrases: false,
+  },
+  {
+    path: '/sklep/glowice/drukarki-przemyslowe',
+    canonical: 'https://www.serwis-zebry.pl/sklep/glowice/drukarki-przemyslowe',
+    mainPhrase: 'głowice do drukarek przemysłowych',
+    phrases: ['głowica zt411', 'głowica zt610', 'szerokość druku', 'wymiana głowicy', 'żywotność'],
+    requireClaimInMeta: false,
+    useSeoDataPhrases: false,
+  },
+]
 
 // ── env ──
 const env: Record<string, string> = {}
@@ -32,13 +68,9 @@ interface Product {
 }
 
 interface Check { id: string; name: string; status: 'PASS' | 'FAIL'; detail: string }
-const checks: Check[] = []
-function check(id: string, name: string, ok: boolean, detail: string) {
-  checks.push({ id, name, status: ok ? 'PASS' : 'FAIL', detail })
-}
 
 // ── helpers ──
-const strip = (html: string) => html.replace(/<[^>]+>/g, ' ').replace(/&nbsp;| /g, ' ')
+const strip = (html: string) => html.replace(/<[^>]+>/g, ' ').replace(/&nbsp;| /g, ' ')
   .replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/\s+/g, ' ').trim()
 const norm = (s: string) => s.toLowerCase().replace(/\s+/g, ' ')
 
@@ -49,32 +81,25 @@ function extractAll(html: string, re: RegExp): string[] {
   return out
 }
 
-async function main() {
-  // ── dane ──
-  const dbRes = await fetch(
-    `${env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/products?product_type=eq.glowica&is_active=eq.true` +
-    `&select=sku,name,device_model,resolution_dpi,price,price_brutto,stock,slug`,
-    { headers: { apikey: env.SUPABASE_SERVICE_ROLE_KEY, Authorization: `Bearer ${env.SUPABASE_SERVICE_ROLE_KEY}` } }
-  )
-  const products: Product[] = await dbRes.json()
-  if (!Array.isArray(products) || products.length === 0) {
-    console.error('Nie udało się pobrać produktów z bazy'); process.exit(2)
+async function auditPage(cfg: PageConfig, products: Product[], seoData: any): Promise<Check[]> {
+  const checks: Check[] = []
+  function check(id: string, name: string, ok: boolean, detail: string) {
+    checks.push({ id, name, status: ok ? 'PASS' : 'FAIL', detail })
   }
+
   const bySku = new Map(products.map(p => [p.sku.toUpperCase(), p]))
-  const available = products.filter(p => (p.stock ?? 0) > 0)
-  const minAvailPrice = Math.min(...available.map(p => p.price))
-  const expectedClaim = Math.floor(minAvailPrice)
 
-  const seoData = JSON.parse(readFileSync(resolve(ROOT, 'seo-data/glowice.json'), 'utf8'))
-
-  const pageRes = await fetch(`${BASE_URL}${PAGE_PATH}`, { headers: { 'User-Agent': 'seo-audit' } })
-  if (!pageRes.ok) { console.error(`Strona ${BASE_URL}${PAGE_PATH} → HTTP ${pageRes.status}`); process.exit(2) }
+  const pageRes = await fetch(`${BASE_URL}${cfg.path}`, { headers: { 'User-Agent': 'seo-audit' } })
+  if (!pageRes.ok) {
+    check('S0', 'Strona odpowiada HTTP 200', false, `HTTP ${pageRes.status}`)
+    return checks
+  }
   const html = await pageRes.text()
 
   // ── STATYCZNE ──
   const title = (html.match(/<title>([^<]*)<\/title>/)?.[1] ?? '').trim()
   check('S1a', 'Title 50-60 znaków', title.length >= 50 && title.length <= 60, `"${title}" (${title.length})`)
-  check('S1b', `Title zawiera frazę główną "${MAIN_PHRASE}"`, norm(title).includes(MAIN_PHRASE), `"${title}"`)
+  check('S1b', `Title zawiera frazę główną "${cfg.mainPhrase}"`, norm(title).includes(cfg.mainPhrase), `"${title}"`)
 
   const desc = html.match(/<meta name="description" content="([^"]*)"/)?.[1] ?? ''
   check('S2', 'Meta description 140-160 znaków', desc.length >= 140 && desc.length <= 160, `(${desc.length}) "${desc.slice(0, 80)}..."`)
@@ -83,7 +108,7 @@ async function main() {
   check('S3', 'Dokładnie jeden H1', h1s.length === 1, `znaleziono ${h1s.length}: ${h1s.map(h => strip(h)).join(' | ')}`)
 
   const canonical = html.match(/<link rel="canonical" href="([^"]*)"/)?.[1]
-  check('S4', 'Canonical', canonical === CANONICAL, `${canonical}`)
+  check('S4', 'Canonical', canonical === cfg.canonical, `${canonical}`)
 
   const ogProps = ['og:title', 'og:description', 'og:url', 'og:image']
   const missingOg = ogProps.filter(p => !html.includes(`property="${p}"`))
@@ -101,6 +126,7 @@ async function main() {
   }
 
   // ItemList: name, sku, price, availability zgodne ze stanem
+  const pageSkus: string[] = []
   const itemList = ldBlocks.find(b => b['@type'] === 'ItemList')
   if (itemList) {
     const items: any[] = itemList.itemListElement ?? []
@@ -111,6 +137,7 @@ async function main() {
       const offer = prod.offers
       if (!prod.name) problems.push(`poz.${it.position}: brak name`)
       if (!sku) { problems.push(`poz.${it.position}: brak sku`); continue }
+      pageSkus.push(String(sku).toUpperCase())
       const db = bySku.get(String(sku).toUpperCase())
       if (!db) { problems.push(`${sku}: brak w bazie`); continue }
       if (!offer?.price) problems.push(`${sku}: brak offers.price`)
@@ -156,7 +183,14 @@ async function main() {
     badAlts.length ? `${badAlts.length} bez/z krótkim altem: ${badAlts.slice(0, 3).map(a => a.slice(0, 60)).join(' || ')}` : 'OK')
 
   // ── SPÓJNOŚĆ DANYCH ──
-  // Tabela part numbers: wiersze <tr> z 4 kolumnami (model, dpi, pn, cena)
+  // minimum cenowe liczone z produktów DOSTĘPNYCH widocznych na TEJ stronie (sku z ItemList)
+  const pageProducts = pageSkus.map(s => bySku.get(s)).filter((p): p is Product => !!p)
+  const availOnPage = pageProducts.filter(p => (p.stock ?? 0) > 0)
+  const expectedClaim = availOnPage.length > 0
+    ? Math.floor(Math.min(...availOnPage.map(p => p.price)))
+    : NaN
+
+  // Tabela part numbers: wiersze <tr> z kolumnami (model, dpi, pn, cena[, dostępność])
   const tableHtml = html.match(/Tabela Part Numbers[\s\S]*?<table[^>]*>([\s\S]*?)<\/table>/)?.[1] ?? ''
   const rows = extractAll(tableHtml, /<tr[^>]*>([\s\S]*?)<\/tr>/g)
     .map(r => extractAll(r, /<td[^>]*>([\s\S]*?)<\/td>/g).map(strip))
@@ -166,7 +200,7 @@ async function main() {
   } else {
     const problems: string[] = []
     for (const cells of rows) {
-      const [model, dpiStr, pn, priceStr] = cells
+      const [model, dpiStr, pn, priceStr, availStr] = cells
       const dpi = parseInt(dpiStr)
       const price = parseFloat(priceStr.replace(/[^\d,\.]/g, '').replace(/\s/g, '').replace(',', '.'))
       const db = bySku.get(pn.toUpperCase())
@@ -179,61 +213,89 @@ async function main() {
         problems.push(`${pn}: ${dpi} DPI vs baza ${db.resolution_dpi}`)
       if (!isFinite(price) || Math.abs(price - db.price) / db.price > 0.10)
         problems.push(`${pn}: cena ${priceStr} vs baza ${db.price.toFixed(2)} zł netto (>±10%)`)
+      if (availStr !== undefined) {
+        const wantAvail = (db.stock ?? 0) > 0 ? 'Dostępny' : 'Chwilowo niedostępny'
+        if (availStr.trim() !== wantAvail)
+          problems.push(`${pn}: dostępność "${availStr}" vs stan w bazie stock=${db.stock}`)
+      }
     }
-    check('C1', `Tabela PN (${rows.length} wierszy) zgodna z bazą: PN, model, DPI, cena ±10%`,
+    check('C1', `Tabela PN (${rows.length} wierszy) zgodna z bazą: PN, model, DPI, cena ±10%, dostępność`,
       problems.length === 0, problems.length ? problems.slice(0, 8).join('; ') : 'OK')
   }
 
-  // Ceny "od X zł" w title / description / treści
-  const claims = [
-    { src: 'title', text: title },
-    { src: 'meta description', text: desc },
-  ]
+  // Ceny "od X zł" w title / description (jeśli wymagane) i w treści
   const claimProblems: string[] = []
-  for (const { src, text } of claims) {
-    const m = text.match(/od\s*~?\s*(\d[\d\s]*)\s*zł/i)
-    if (!m) { claimProblems.push(`${src}: brak "od X zł"`); continue }
-    const claimed = parseInt(m[1].replace(/\s/g, ''))
-    if (claimed !== expectedClaim)
-      claimProblems.push(`${src}: "od ${claimed} zł" vs realne minimum dostępnego ${expectedClaim} zł (${minAvailPrice.toFixed(2)})`)
+  if (cfg.requireClaimInMeta) {
+    for (const { src, text } of [{ src: 'title', text: title }, { src: 'meta description', text: desc }]) {
+      const m = text.match(/od\s*~?\s*(\d[\d\s]*)\s*zł/i)
+      if (!m) { claimProblems.push(`${src}: brak "od X zł"`); continue }
+      const claimed = parseInt(m[1].replace(/\s/g, ''))
+      if (claimed !== expectedClaim)
+        claimProblems.push(`${src}: "od ${claimed} zł" vs realne minimum dostępnego ${expectedClaim} zł`)
+    }
   }
-  // dodatkowo: każde "od X zł netto" w treści strony nie może być niższe od minimum
+  // każde "od X zł" w treści strony nie może być niższe od minimum dostępnego na tej stronie
   const bodyClaims = extractAll(strip(html), /od\s*~?\s*(\d[\d\s]{0,6})\s*zł/gi)
     .map(s => parseInt(s.replace(/\s/g, ''))).filter(v => isFinite(v) && v > 50)
   for (const v of bodyClaims) {
-    if (v < expectedClaim - 1) claimProblems.push(`treść: "od ${v} zł" poniżej minimum dostępnego (${expectedClaim} zł)`)
+    if (isFinite(expectedClaim) && v < expectedClaim - 1)
+      claimProblems.push(`treść: "od ${v} zł" poniżej minimum dostępnego (${expectedClaim} zł)`)
   }
-  check('C2', `Deklaracje cen "od X zł" = minimum dostępnego produktu (${expectedClaim} zł)`,
-    claimProblems.length === 0, claimProblems.length ? claimProblems.join('; ') : `OK (od ${expectedClaim} zł)`)
+  check('C2', `Deklaracje cen "od X zł" ≥ minimum dostępnego na stronie (${expectedClaim} zł)`,
+    claimProblems.length === 0, claimProblems.length ? claimProblems.join('; ') : `OK (min ${expectedClaim} zł)`)
 
   // ── DYNAMICZNE: pokrycie frazowe ──
   const h23 = extractAll(html, /<h[23][^>]*>([\s\S]*?)<\/h[23]>/g).map(strip).map(norm)
   const paras = extractAll(html, /<p[^>]*>([\s\S]*?)<\/p>/g).map(strip).map(norm)
-  const haystack = [...h23, ...paras]
-  const phrases: string[] = []
-  for (const tp of seoData.quickWins?.targetPhrases ?? []) {
-    for (const ph of String(tp.keyword).split('/')) {
-      const p = ph.trim().toLowerCase()
-      if (p && !phrases.includes(p)) phrases.push(p)
+  const lis = extractAll(html, /<li[^>]*>([\s\S]*?)<\/li>/g).map(strip).map(norm)
+  const haystack = [...h23, ...paras, ...lis]
+  const phrases: string[] = [...cfg.phrases]
+  if (cfg.useSeoDataPhrases) {
+    for (const tp of seoData.quickWins?.targetPhrases ?? []) {
+      for (const ph of String(tp.keyword).split('/')) {
+        const p = ph.trim().toLowerCase()
+        if (p && !phrases.includes(p)) phrases.push(p)
+      }
     }
-  }
-  for (const g of seoData.competitorGaps?.phrases ?? []) {
-    const p = String(g.keyword).trim().toLowerCase()
-    if (p && p !== 'głowica' && !phrases.includes(p)) phrases.push(p) // "głowica" solo — zbyt ogólne na exact match
+    for (const g of seoData.competitorGaps?.phrases ?? []) {
+      const p = String(g.keyword).trim().toLowerCase()
+      if (p && p !== 'głowica' && !phrases.includes(p)) phrases.push(p) // "głowica" solo — zbyt ogólne
+    }
   }
   for (const ph of phrases) {
     const covered = haystack.some(t => t.includes(ph))
-    check('D1', `Fraza "${ph}" w H2/H3 lub akapicie`, covered, covered ? 'pokryta' : 'BRAK')
+    check('D1', `Fraza "${ph}" w H2/H3, akapicie lub liście`, covered, covered ? 'pokryta' : 'BRAK')
   }
 
-  // ── RAPORT ──
-  const fails = checks.filter(c => c.status === 'FAIL')
-  console.log(`\n═══ AUDYT SEO ${PAGE_PATH} (${BASE_URL}) ═══`)
-  for (const c of checks) {
-    console.log(`${c.status === 'PASS' ? '✅' : '❌'} [${c.id}] ${c.name}${c.status === 'FAIL' ? ` — ${c.detail}` : ''}`)
+  return checks
+}
+
+async function main() {
+  const dbRes = await fetch(
+    `${env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/products?product_type=eq.glowica&is_active=eq.true` +
+    `&select=sku,name,device_model,resolution_dpi,price,price_brutto,stock,slug`,
+    { headers: { apikey: env.SUPABASE_SERVICE_ROLE_KEY, Authorization: `Bearer ${env.SUPABASE_SERVICE_ROLE_KEY}` } }
+  )
+  const products: Product[] = await dbRes.json()
+  if (!Array.isArray(products) || products.length === 0) {
+    console.error('Nie udało się pobrać produktów z bazy'); process.exit(2)
   }
-  console.log(`\nWynik: ${checks.length - fails.length}/${checks.length} PASS${fails.length ? `, ${fails.length} FAIL` : ' — 100%'}`)
-  process.exit(fails.length ? 1 : 0)
+  const seoData = JSON.parse(readFileSync(resolve(ROOT, 'seo-data/glowice.json'), 'utf8'))
+
+  let totalPass = 0, totalFail = 0
+  for (const cfg of PAGES) {
+    const checks = await auditPage(cfg, products, seoData)
+    const fails = checks.filter(c => c.status === 'FAIL')
+    totalPass += checks.length - fails.length
+    totalFail += fails.length
+    console.log(`\n═══ AUDYT SEO ${cfg.path} (${BASE_URL}) ═══`)
+    for (const c of checks) {
+      console.log(`${c.status === 'PASS' ? '✅' : '❌'} [${c.id}] ${c.name}${c.status === 'FAIL' ? ` — ${c.detail}` : ''}`)
+    }
+    console.log(`Strona: ${checks.length - fails.length}/${checks.length} PASS`)
+  }
+  console.log(`\n══════ ŁĄCZNIE: ${totalPass}/${totalPass + totalFail} PASS${totalFail ? `, ${totalFail} FAIL` : ' — 100%'} ══════`)
+  process.exit(totalFail ? 1 : 0)
 }
 
 main().catch(e => { console.error('FATAL:', e.message); process.exit(2) })
