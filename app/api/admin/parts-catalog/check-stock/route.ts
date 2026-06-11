@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { checkPriceAndAvailability } from '@/lib/ingram-micro'
 import { lookupStock } from '@/lib/bluestar'
+import { lookupStock as lookupJarltechStock } from '@/lib/jarltech'
 
 // Cache kursu NBP (12h)
 let cachedEurRate: { rate: number; fetchedAt: number } | null = null
@@ -72,12 +73,13 @@ export async function GET(req: NextRequest) {
       }
     }
 
-    // Równoległe: Ingram + Bluestar + kurs NBP
-    const [ingramResult, bluestarResult, eurRate] = await Promise.all([
+    // Równoległe: Ingram + Bluestar + Jarltech + kurs NBP
+    const [ingramResult, bluestarResult, jarltechResult, eurRate] = await Promise.all([
       ingramSkus.length > 0
         ? checkPriceAndAvailability(ingramSkus).catch(() => ({ success: false as const, data: [] }))
         : Promise.resolve({ success: false as const, data: [] }),
       lookupStock(partNumbers).catch(() => []),
+      lookupJarltechStock(partNumbers).catch(() => []),
       getEurPlnRate(),
     ])
 
@@ -133,9 +135,39 @@ export async function GET(req: NextRequest) {
       }
     }
 
+    // Wyniki Jarltech (ceny w EUR → przelicz na PLN; uwaga: unitPrice może być
+    // ceną pakietu — priceQuantity; do porównania, nie do wyceny sklepu)
+    const jarltech: Record<string, {
+      priceEur: number
+      pricePln: number
+      priceQuantity?: number
+      stock: number
+      incomingQty: number
+      incomingDate?: string
+      available: boolean
+    }> = {}
+
+    if (Array.isArray(jarltechResult)) {
+      for (const item of jarltechResult) {
+        if (item.found) {
+          const priceEur = item.unitPrice ?? 0
+          jarltech[item.partNumber] = {
+            priceEur,
+            pricePln: Math.round(priceEur * eurRate * 100) / 100,
+            ...(item.priceQuantity && item.priceQuantity > 1 ? { priceQuantity: item.priceQuantity } : {}),
+            stock: item.inventory,
+            incomingQty: item.incomingQty,
+            ...(item.incomingDate ? { incomingDate: item.incomingDate } : {}),
+            available: item.availability === 'available',
+          }
+        }
+      }
+    }
+
     return NextResponse.json({
       ingram,
       bluestar,
+      jarltech,
       eurRate,
     })
   } catch (error: any) {

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import {
   Package,
   Search,
@@ -29,11 +29,13 @@ interface DistributorStock {
   priceEur?: number
   stock: number
   available: boolean
+  hint?: string
 }
 
 interface PartStockResult {
   ingram: DistributorStock | null
   bluestar: DistributorStock | null
+  jarltech: DistributorStock | null
   eurRate: number
   catalogPricePln: number | null
 }
@@ -68,6 +70,50 @@ export default function KatalogPage() {
       .catch(err => console.error('Błąd pobierania filtrów:', err))
   }, [])
 
+  // Auto-load stanów dla całej widocznej strony katalogu — paczki po 10 PN
+  // (limit API), sekwencyjnie żeby nie zalać dystrybutorów. Zmiana strony/filtrów
+  // unieważnia trwające dociąganie (generation guard).
+  const autoLoadGen = useRef(0)
+
+  const autoLoadStock = useCallback(async (partsList: Part[]) => {
+    const gen = ++autoLoadGen.current
+    const CHUNK = 10
+
+    setStockLoading(prev => {
+      const next = { ...prev }
+      for (const p of partsList) next[p.id] = true
+      return next
+    })
+
+    for (let i = 0; i < partsList.length; i += CHUNK) {
+      if (gen !== autoLoadGen.current) return // strona/filtr zmienione — przerwij
+      const chunk = partsList.slice(i, i + CHUNK)
+      try {
+        const params = new URLSearchParams()
+        params.set('partNumbers', chunk.map(p => p.part_number).join(','))
+        const res = await fetch(`/api/admin/parts-catalog/check-stock?${params}`)
+        const data = await res.json()
+
+        if (gen !== autoLoadGen.current) return
+        setStockResults(prev => {
+          const next = { ...prev }
+          for (const p of chunk) next[p.id] = mapStockEntry(data, p)
+          return next
+        })
+      } catch (err) {
+        console.error('Błąd auto-load stock:', err)
+      } finally {
+        if (gen === autoLoadGen.current) {
+          setStockLoading(prev => {
+            const next = { ...prev }
+            for (const p of chunk) next[p.id] = false
+            return next
+          })
+        }
+      }
+    }
+  }, [])
+
   const fetchParts = useCallback(async () => {
     setLoading(true)
     try {
@@ -80,14 +126,17 @@ export default function KatalogPage() {
 
       const res = await fetch(`/api/admin/parts-catalog?${params}`)
       const data = await res.json()
-      setParts(data.parts || [])
+      const fetched: Part[] = data.parts || []
+      setParts(fetched)
       setTotal(data.total || 0)
+      // Od razu dociągnij stany dystrybutorów dla widocznych wierszy
+      if (fetched.length > 0) autoLoadStock(fetched)
     } catch (err) {
       console.error('Błąd pobierania części:', err)
     } finally {
       setLoading(false)
     }
-  }, [selectedModel, selectedCategory, searchQuery, page])
+  }, [selectedModel, selectedCategory, searchQuery, page, autoLoadStock])
 
   useEffect(() => { fetchParts() }, [fetchParts])
 
@@ -101,6 +150,46 @@ export default function KatalogPage() {
 
   useEffect(() => { setPage(1) }, [selectedModel, selectedCategory])
 
+  // Mapowanie odpowiedzi check-stock → wynik dla jednej części
+  const mapStockEntry = (data: any, part: Part): PartStockResult => {
+    const eurRate = data.eurRate || 4.30
+    const ingramEntry = data.ingram?.[part.part_number] || null
+    const bluestarEntry = data.bluestar?.[part.part_number] || null
+    const jarltechEntry = data.jarltech?.[part.part_number] || null
+
+    // Hint Jarltech: dostawy przychodzące + ostrzeżenie o cenie pakietowej
+    const jarltechHints: string[] = []
+    if (jarltechEntry?.incomingQty > 0) {
+      jarltechHints.push(`w dostawie ${jarltechEntry.incomingQty} szt.${jarltechEntry.incomingDate ? `, ETA ${jarltechEntry.incomingDate}` : ''}`)
+    }
+    if (jarltechEntry?.priceQuantity > 1) {
+      jarltechHints.push(`cena za pakiet ${jarltechEntry.priceQuantity} szt.!`)
+    }
+
+    return {
+      ingram: ingramEntry ? {
+        pricePln: ingramEntry.pricePln,
+        stock: ingramEntry.stock,
+        available: ingramEntry.available,
+      } : null,
+      bluestar: bluestarEntry ? {
+        pricePln: bluestarEntry.pricePln,
+        priceEur: bluestarEntry.priceEur,
+        stock: bluestarEntry.stock,
+        available: bluestarEntry.available,
+      } : null,
+      jarltech: jarltechEntry ? {
+        pricePln: jarltechEntry.pricePln,
+        priceEur: jarltechEntry.priceEur,
+        stock: jarltechEntry.stock,
+        available: jarltechEntry.available,
+        ...(jarltechHints.length ? { hint: jarltechHints.join(' · ') } : {}),
+      } : null,
+      eurRate,
+      catalogPricePln: part.price_eur ? Math.round(part.price_eur * eurRate * 100) / 100 : null,
+    }
+  }
+
   const checkStock = async (part: Part) => {
     setStockLoading(prev => ({ ...prev, [part.id]: true }))
     try {
@@ -110,28 +199,7 @@ export default function KatalogPage() {
       const res = await fetch(`/api/admin/parts-catalog/check-stock?${params}`)
       const data = await res.json()
 
-      const eurRate = data.eurRate || 4.30
-      const ingramEntry = data.ingram?.[part.part_number] || null
-      const bluestarEntry = data.bluestar?.[part.part_number] || null
-
-      setStockResults(prev => ({
-        ...prev,
-        [part.id]: {
-          ingram: ingramEntry ? {
-            pricePln: ingramEntry.pricePln,
-            stock: ingramEntry.stock,
-            available: ingramEntry.available,
-          } : null,
-          bluestar: bluestarEntry ? {
-            pricePln: bluestarEntry.pricePln,
-            priceEur: bluestarEntry.priceEur,
-            stock: bluestarEntry.stock,
-            available: bluestarEntry.available,
-          } : null,
-          eurRate,
-          catalogPricePln: part.price_eur ? Math.round(part.price_eur * eurRate * 100) / 100 : null,
-        },
-      }))
+      setStockResults(prev => ({ ...prev, [part.id]: mapStockEntry(data, part) }))
     } catch (err) {
       console.error('Błąd sprawdzania stock:', err)
     } finally {
@@ -305,6 +373,13 @@ export default function KatalogPage() {
                                 data={result.bluestar}
                                 fmtPln={fmtPln}
                               />
+                              {/* Jarltech */}
+                              <StockRow
+                                label="Jarltech"
+                                labelColor="text-teal-700 bg-teal-50"
+                                data={result.jarltech}
+                                fmtPln={fmtPln}
+                              />
                             </div>
                           ) : (
                             <div className="flex justify-end">
@@ -382,7 +457,7 @@ function StockRow({
 }: {
   label: string
   labelColor: string
-  data: { pricePln: number; stock: number; available: boolean } | null
+  data: { pricePln: number; stock: number; available: boolean; hint?: string } | null
   fmtPln: (v: number) => string
 }) {
   if (!data) {
@@ -395,19 +470,24 @@ function StockRow({
   }
 
   return (
-    <div className="flex items-center justify-between gap-2">
-      <span className={`text-[10px] font-semibold px-1.5 py-0.5 rounded ${labelColor}`}>{label}</span>
-      <div className="flex items-center gap-2">
-        <span className={`inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[10px] font-semibold ${
-          data.available ? 'bg-green-100 text-green-800' : data.stock > 0 ? 'bg-yellow-100 text-yellow-800' : 'bg-red-100 text-red-700'
-        }`}>
-          {data.available ? <Check className="w-2.5 h-2.5" /> : <X className="w-2.5 h-2.5" />}
-          {data.stock} szt.
-        </span>
-        <span className="font-mono text-[11px] font-semibold text-gray-800 min-w-[80px] text-right">
-          {fmtPln(data.pricePln)}
-        </span>
+    <div>
+      <div className="flex items-center justify-between gap-2">
+        <span className={`text-[10px] font-semibold px-1.5 py-0.5 rounded ${labelColor}`}>{label}</span>
+        <div className="flex items-center gap-2">
+          <span className={`inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[10px] font-semibold ${
+            data.available ? 'bg-green-100 text-green-800' : data.stock > 0 ? 'bg-yellow-100 text-yellow-800' : 'bg-red-100 text-red-700'
+          }`}>
+            {data.available ? <Check className="w-2.5 h-2.5" /> : <X className="w-2.5 h-2.5" />}
+            {data.stock} szt.
+          </span>
+          <span className="font-mono text-[11px] font-semibold text-gray-800 min-w-[80px] text-right">
+            {fmtPln(data.pricePln)}
+          </span>
+        </div>
       </div>
+      {data.hint && (
+        <div className="text-[10px] text-gray-500 text-right mt-0.5">{data.hint}</div>
+      )}
     </div>
   )
 }
