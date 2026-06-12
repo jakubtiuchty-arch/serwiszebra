@@ -4,6 +4,17 @@ Checkpoint postępu prac. Najnowszy wpis na górze. Po każdym etapie/buildzie d
 
 ---
 
+## 2026-06-12 — SEO /sklep/akumulatory (3 strony): wzorzec zastosowany, audyt 174/174
+
+- Strony: main + /terminale (11 produktów TC/MC) + /drukarki-mobilne (5 ZQ); tablety ET tylko na main (19).
+- **Naprawione dane**: meta „Od 78 zł" liczone z produktu stock=0 (ZQ220) → dynamicznie od 205 zł (realne min. dostępnego); tabela main zawierała TC501/TC701 `BTRY-TC5X-46MA1-01` SPOZA bazy, brakowało 3 baterii ET60/ET65; FAQ terminale podawało „Freezer 300-450 zł" (realnie BTRY-MC93-FRZ-01 = 609 zł) → ceny dynamiczne min-max.
+- Usunięte niezweryfikowalne twierdzenie „BTRY-NGTC5TC7 pasuje do TC52/TC72" (kompatybilność wsteczna — brak potwierdzenia, prawdopodobnie fałsz).
+- Tabele hybrydowe: wiersze z bazy (PN/cena/dostępność live) + `BATTERY_SPECS` lookup po SKU (typ/mAh — dane stałe producenta); main grupowana (Terminale/Drukarki/Tablety przez `batteryGroup()`); import Fragment dodany.
+- Metadata podkategorii dedykowane (było generic za krótkie): terminale 57 zn., mobilne 50 zn., + og:image (BTRY-MC93-STN / BTRY-MPP-34MA1).
+- **Globalne ujednolicenie FAQ**: 30× `border-l-4 border-{blue,red,green}-500 pl-4` → `border border-slate-200 rounded-xl p-4` (też stare FAQ głowic main). Quick-answer box na kartach produktów (1×) zostawiony — osobna decyzja.
+- Audyt: 9 stron (głowice+wałki+akumulatory), **174/174 PASS**. Build EXIT=0.
+- TODO: commit+push po potwierdzeniu; GSC Request indexing 3 stron akumulatorów po deployu.
+
 ## 2026-06-12 — SEO /sklep/walki-dociskowe (3 strony): wzorzec głowic zastosowany, audyt 118/118
 
 - **Dane** (`seo-data/walki.json`): „wałek dociskowy" 315/mies. KD 0, ale SERP o OBCEJ intencji (wałki dekarskie/malarskie — Leroy, Castorama, YATO) → celujemy w long-tail kwalifikowany: „wałki dociskowe do drukarek", frazy modelowe (wałek zt411/zd421), „platen roller" (10/mies.).
@@ -12,7 +23,7 @@ Checkpoint postępu prac. Najnowszy wpis na górze. Po każdym etapie/buildzie d
 - Tabele PN generowane z bazy na 3 stronach (kolumna DPI: „wszystkie" gdy NULL), ceny dynamiczne (min dostępnego 73 zł, max 536), CollectionPage schema (mapa rozszerzona o wałki), title/desc w limitach (50/58/55 + 149/149/146), FAQ przestylowane na border-slate-200.
 - Audyt rozszerzony: PAGES z `productType` (glowica|walek), fetch per typ. **ŁĄCZNIE 118/118 PASS** (6 stron). Build EXIT=0 (po fixie TS2802: Array.from zamiast spread Set).
 - Słowa: main 1027, biurkowe 812, przemysłowe 712 (krótszy listing — 6 produktów/podstronę).
-- TODO: commit+push po potwierdzeniu; GSC Request indexing 3 stron wałków po deployu.
+- WYSŁANE: commit `1c17890` na main. TODO: GSC Request indexing 3 stron wałków po deployu.
 
 ## 2026-06-11 — integracja Jarltech (3. dystrybutor) — admin + fallback /sklep
 

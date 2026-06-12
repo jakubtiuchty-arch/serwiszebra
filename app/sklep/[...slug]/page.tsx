@@ -1,3 +1,4 @@
+import { Fragment } from 'react'
 import { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -504,12 +505,36 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
         }
       }
     }
-    const categoryDescriptions: Record<string, { title: string; description: string }> = {
-      akumulatory: {
-        title: 'Akumulatory Zebra — terminale TC, MC, drukarki ZQ | TAKMA',
-        description: 'Oryginalne akumulatory do terminali Zebra TC22, TC52, MC3300, MC9400 i drukarek mobilnych ZQ630, ZQ520. Od 78 zł netto. Wysyłka 24h.'
+    // Akumulatory: cena "od X zł" z realnego minimum DOSTĘPNEGO produktu
+    if (productType.slug === 'akumulatory') {
+      const akumulatory = await getProductsForCategory({ productType: 'akumulator' })
+      const availablePrices = akumulatory.filter(p => (p.stock ?? 0) > 0).map(p => p.price)
+      const minPrice = availablePrices.length > 0 ? Math.floor(Math.min(...availablePrices)) : 205
+      const akumTitle = `Akumulatory do urządzeń Zebra TC, MC, ZQ od ${minPrice} zł | TAKMA`
+      const akumDescription = `Oryginalne akumulatory do terminali Zebra TC21, TC22, MC9400, drukarek mobilnych ZQ511, ZQ630 i tabletów ET60. Ceny od ${minPrice} zł netto. Wysyłka 24h.`
+      return {
+        title: akumTitle,
+        description: akumDescription,
+        openGraph: {
+          title: akumTitle,
+          description: akumDescription,
+          url: 'https://www.serwis-zebry.pl/sklep/akumulatory',
+          type: 'website',
+          siteName: 'TAKMA - Autoryzowany Serwis Zebra',
+          locale: 'pl_PL',
+          images: [{
+            url: 'https://www.serwis-zebry.pl/sklep_photo/BTRY-MC93-STN-01.png',
+            width: 800,
+            height: 800,
+            alt: 'Oryginalny akumulator do terminala Zebra MC9400'
+          }]
+        },
+        alternates: {
+          canonical: 'https://www.serwis-zebry.pl/sklep/akumulatory'
+        }
       }
     }
+    const categoryDescriptions: Record<string, { title: string; description: string }> = {}
     const catMeta = categoryDescriptions[productType.slug] || {
       title: `${productType.namePlural} do ${metaDeviceLabel} | Sklep TAKMA`,
       description: `${productType.namePlural} do ${metaDeviceLabel}. Oryginalne części zamienne z gwarancją.`
@@ -580,6 +605,54 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
         },
         alternates: {
           canonical: 'https://www.serwis-zebry.pl/sklep/glowice/drukarki-biurkowe'
+        }
+      }
+    }
+    // SEO dla akumulatorów do terminali
+    if (productType.id === 'akumulator' && printerCategory.id === 'terminals') {
+      return {
+        title: 'Akumulatory do terminali Zebra TC21, TC22, MC9400 | TAKMA',
+        description: 'Oryginalne akumulatory do terminali Zebra: TC21/TC26, TC22/TC27, TC53/TC58, MC22/MC27, MC3300x, MC9400. Standard, Extended i Freezer. Wysyłka 24h.',
+        openGraph: {
+          title: 'Akumulatory do terminali Zebra | TAKMA',
+          description: 'Oryginalne baterie Standard, Extended i Freezer do terminali TC i MC. Wysyłka 24h, gwarancja 12 mies.',
+          url: 'https://www.serwis-zebry.pl/sklep/akumulatory/terminale',
+          type: 'website',
+          siteName: 'TAKMA - Autoryzowany Serwis Zebra',
+          locale: 'pl_PL',
+          images: [{
+            url: 'https://www.serwis-zebry.pl/sklep_photo/BTRY-MC93-STN-01.png',
+            width: 800,
+            height: 800,
+            alt: 'Oryginalny akumulator do terminala Zebra MC9400'
+          }]
+        },
+        alternates: {
+          canonical: 'https://www.serwis-zebry.pl/sklep/akumulatory/terminale'
+        }
+      }
+    }
+    // SEO dla akumulatorów do drukarek mobilnych
+    if (productType.id === 'akumulator' && printerCategory.id === 'mobile') {
+      return {
+        title: 'Akumulatory do drukarek mobilnych Zebra ZQ | TAKMA',
+        description: 'Oryginalne akumulatory do drukarek mobilnych Zebra: ZQ220 Plus, ZQ310 Plus, ZQ511, ZQ610, ZQ630. Od 2200 do 6800 mAh. Wysyłka 24h, gwarancja 12 mies.',
+        openGraph: {
+          title: 'Akumulatory do drukarek mobilnych Zebra | TAKMA',
+          description: 'Oryginalne baterie do drukarek ZQ220, ZQ310, ZQ511, ZQ610, ZQ630. Wysyłka 24h, gwarancja 12 mies.',
+          url: 'https://www.serwis-zebry.pl/sklep/akumulatory/drukarki-mobilne',
+          type: 'website',
+          siteName: 'TAKMA - Autoryzowany Serwis Zebra',
+          locale: 'pl_PL',
+          images: [{
+            url: 'https://www.serwis-zebry.pl/sklep_photo/BTRY-MPP-34MA1-01.png',
+            width: 800,
+            height: 800,
+            alt: 'Oryginalny akumulator do drukarki mobilnej Zebra ZQ511'
+          }]
+        },
+        alternates: {
+          canonical: 'https://www.serwis-zebry.pl/sklep/akumulatory/drukarki-mobilne'
         }
       }
     }
@@ -1524,9 +1597,21 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
     'walki-dociskowe/drukarki-przemyslowe': {
       url: 'https://www.serwis-zebry.pl/sklep/walki-dociskowe/drukarki-przemyslowe',
       description: 'Oryginalne wałki dociskowe do drukarek przemysłowych Zebra serii ZT230, ZT411, ZT421, ZT510, ZT610 i ZT620.'
+    },
+    'akumulatory': {
+      url: 'https://www.serwis-zebry.pl/sklep/akumulatory',
+      description: 'Oryginalne akumulatory Li-Ion do urządzeń Zebra — terminali TC i MC, drukarek mobilnych ZQ i tabletów ET.'
+    },
+    'akumulatory/terminale': {
+      url: 'https://www.serwis-zebry.pl/sklep/akumulatory/terminale',
+      description: 'Oryginalne akumulatory do terminali Zebra serii TC i MC — warianty Standard, Extended i Freezer.'
+    },
+    'akumulatory/drukarki-mobilne': {
+      url: 'https://www.serwis-zebry.pl/sklep/akumulatory/drukarki-mobilne',
+      description: 'Oryginalne akumulatory do drukarek mobilnych Zebra serii ZQ — od ZQ220 Plus do ZQ630 Plus.'
     }
   }
-  const glowiceCollection = (productType.id === 'glowica' || productType.id === 'walek')
+  const glowiceCollection = (productType.id === 'glowica' || productType.id === 'walek' || productType.id === 'akumulator')
     ? collectionPagesMap[slugPath.join('/')]
     : undefined
   const collectionPageSchema = glowiceCollection ? {
@@ -1559,6 +1644,36 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
   const walekMaxPrice = productType.id === 'walek' && products.length > 0
     ? Math.ceil(Math.max(...products.map(p => p.price)))
     : 536
+  // Analogicznie dla akumulatorów
+  const akumAvailablePrices = productType.id === 'akumulator'
+    ? products.filter(p => (p.stock ?? 0) > 0).map(p => p.price)
+    : []
+  const akumMinPrice = akumAvailablePrices.length > 0 ? Math.floor(Math.min(...akumAvailablePrices)) : 205
+  const akumMaxPrice = productType.id === 'akumulator' && products.length > 0
+    ? Math.ceil(Math.max(...products.map(p => p.price)))
+    : 629
+  // Specyfikacje baterii (typ + pojemność) — dane stałe producenta, klucz = SKU;
+  // wiersze tabel pochodzą z bazy, więc nieistniejące produkty nie mają jak się pojawić
+  const BATTERY_SPECS: Record<string, string> = {
+    'BTRY-TC2Y-1XMA1-01': 'Standard 3100 mAh',
+    'BTRY-TC2Y-2XMA1-01': 'Extended 5200 mAh',
+    'BTRY-TC2L-2XMAXX-01': 'Standard 3800 mAh',
+    'BTRY-TC2L-3XMAXX-01': 'Extended 5200 mAh',
+    'BTRY-NGTC5TC7-44MA-01': 'Standard 4400 mAh',
+    'BTRY-NGTC5TC7-66MA-01': 'Extended 6600 mAh',
+    'BTRY-MC2X-35MA-01': 'Standard 3500 mAh',
+    'BTRY-MC2X-49MA-01': 'Extended 4900 mAh',
+    'BTRY-MC3X-70MA-01': 'Standard 7000 mAh',
+    'BTRY-MC93-STN-01': 'Standard 5000 mAh',
+    'BTRY-MC93-FRZ-01': 'Freezer 2900 mAh (-30°C)',
+    'BTRY-MPV-25MAC1-01': 'Standard 2500 mAh',
+    'BTRY-MPM-22MA1-01': 'Standard 2200 mAh',
+    'BTRY-MPP-34MA1-01': 'Standard 3400 mAh',
+    'BTRY-MPP-EXT1-01': 'Extended 6800 mAh',
+    'BTRY-MPP-68MA1-01': 'Standard 6800 mAh',
+  }
+  const batteryGroup = (model: string) =>
+    model.startsWith('ZQ') ? 'Drukarki mobilne' : model.startsWith('ET') ? 'Tablety' : 'Terminale mobilne'
   const formatPln = (v: number) => v.toLocaleString('pl-PL')
 
   // BreadcrumbList Schema dla kategorii
@@ -1796,35 +1911,35 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
                   Najczęściej zadawane pytania
                 </h3>
                 <div className="space-y-4 mb-6">
-                  <div className="border-l-4 border-blue-500 pl-4">
+                  <div className="border border-slate-200 rounded-xl p-4">
                     <p className="font-semibold text-gray-900">Jak dobrać głowicę do mojej drukarki?</p>
                     <p className="text-gray-600 text-sm mt-1">Sprawdź model drukarki na tabliczce znamionowej i rozdzielczość w raporcie konfiguracji (Configuration Report). Part Number obecnej głowicy jest wygrawerowany na jej boku. Na tej podstawie dobierz nową głowicę w sklepie lub podaj dane — pomożemy.</p>
                   </div>
-                  <div className="border-l-4 border-blue-500 pl-4">
+                  <div className="border border-slate-200 rounded-xl p-4">
                     <p className="font-semibold text-gray-900">Jak samodzielnie wymienić głowicę drukującą?</p>
                     <p className="text-gray-600 text-sm mt-1">Wyłącz drukarkę, otwórz obudowę, odłącz flat cable, odkręć 2-4 śruby starej głowicy, zamontuj nową i podłącz kabel. Cała operacja zajmuje 5-10 minut. Po wymianie wykonaj kalibrację czujników (Media Calibration).</p>
                   </div>
-                  <div className="border-l-4 border-blue-500 pl-4">
+                  <div className="border border-slate-200 rounded-xl p-4">
                     <p className="font-semibold text-gray-900">Jaka jest żywotność głowicy drukującej?</p>
                     <p className="text-gray-600 text-sm mt-1">Oryginalna głowica Zebra ma żywotność 1-2 miliony cali druku (25-50 km etykiet). 203 DPI wytrzymuje dłużej niż 600 DPI. Regularne czyszczenie alkoholem IPA 99% wydłuża żywotność nawet 2-3 krotnie.</p>
                   </div>
-                  <div className="border-l-4 border-blue-500 pl-4">
+                  <div className="border border-slate-200 rounded-xl p-4">
                     <p className="font-semibold text-gray-900">Jaka jest różnica między 203, 300 i 600 DPI?</p>
                     <p className="text-gray-600 text-sm mt-1">203 DPI (8 pkt/mm) — logistyka, kody 1D, etykiety wysyłkowe. 300 DPI (12 pkt/mm) — kody 2D, farmacja, drobny tekst. 600 DPI (24 pkt/mm) — jubilerstwo, mikro-kody, precyzja. Głowice nie są wymienne między rozdzielczościami.</p>
                   </div>
-                  <div className="border-l-4 border-blue-500 pl-4">
+                  <div className="border border-slate-200 rounded-xl p-4">
                     <p className="font-semibold text-gray-900">Ile kosztuje głowica do drukarki Zebra?</p>
                     <p className="text-gray-600 text-sm mt-1">Oryginalne głowice Zebra kosztują od {formatPln(glowicaMinPrice)} zł netto (biurkowe 203 DPI) do {formatPln(glowicaMaxPrice)} zł (przemysłowe 600 DPI). Cena zależy od modelu drukarki i rozdzielczości. 300 DPI jest zwykle o 50-100% droższa od 203 DPI.</p>
                   </div>
-                  <div className="border-l-4 border-blue-500 pl-4">
+                  <div className="border border-slate-200 rounded-xl p-4">
                     <p className="font-semibold text-gray-900">Jak czyścić głowicę drukującą?</p>
                     <p className="text-gray-600 text-sm mt-1">Używaj alkoholu izopropylowego (IPA) 99% i wacika lub dedykowanej karty czyszczącej Zebra. Czyść elementy grzewcze co każdą rolkę materiału lub minimum raz w tygodniu. Nigdy nie używaj wody, acetonu ani ostrych narzędzi.</p>
                   </div>
-                  <div className="border-l-4 border-blue-500 pl-4">
+                  <div className="border border-slate-200 rounded-xl p-4">
                     <p className="font-semibold text-gray-900">Czy głowica jest objęta gwarancją?</p>
                     <p className="text-gray-600 text-sm mt-1">Tak, wszystkie oryginalne głowice Zebra w naszym sklepie objęte są 12-miesięczną gwarancją producenta. Gwarancja obejmuje wady materiałowe i produkcyjne. Nie obejmuje uszkodzeń mechanicznych i zużycia eksploatacyjnego.</p>
                   </div>
-                  <div className="border-l-4 border-blue-500 pl-4">
+                  <div className="border border-slate-200 rounded-xl p-4">
                     <p className="font-semibold text-gray-900">Oryginalna głowica czy zamiennik — co wybrać?</p>
                     <p className="text-gray-600 text-sm mt-1">Zdecydowanie oryginalna. Zamienniki mają niższą gęstość elementów grzewczych, krótszą żywotność (nawet o 50%) i mogą unieważnić gwarancję drukarki. Przy kosztach rzędu groszy na etykietę — oszczędność na zamienniku nie jest warta ryzyka.</p>
                   </div>
@@ -2079,38 +2194,41 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
                 </p>
 
                 <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
-                  Akumulatory Zebra — pełna tabela Part Numbers
+                  Tabela Part Numbers — akumulatory Zebra
                 </h3>
                 <div className="overflow-x-auto mb-6">
+                  {/* Tabela generowana z bazy produktów — PN, ceny i dostępność zawsze aktualne */}
                   <table className="w-full text-sm">
                     <thead className="bg-gray-50">
                       <tr>
                         <th className="px-3 py-2 text-left font-semibold">Urządzenie</th>
+                        <th className="px-3 py-2 text-left font-semibold">Typ / pojemność</th>
                         <th className="px-3 py-2 text-left font-semibold">Part Number</th>
-                        <th className="px-3 py-2 text-left font-semibold">Typ</th>
-                        <th className="px-3 py-2 text-left font-semibold">Pojemność</th>
+                        <th className="px-3 py-2 text-left font-semibold">Cena (netto)</th>
+                        <th className="px-3 py-2 text-left font-semibold">Dostępność</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-100">
-                      <tr className="bg-gray-50/50"><td colSpan={4} className="px-3 py-1.5 font-semibold text-xs text-gray-500 uppercase tracking-wider">Terminale mobilne</td></tr>
-                      <tr><td className="px-3 py-2 font-medium">TC21/TC26</td><td className="px-3 py-2 font-mono text-xs">BTRY-TC2Y-1XMA1-01</td><td className="px-3 py-2">Standard</td><td className="px-3 py-2">3100 mAh</td></tr>
-                      <tr><td className="px-3 py-2 font-medium">TC21/TC26</td><td className="px-3 py-2 font-mono text-xs">BTRY-TC2Y-2XMA1-01</td><td className="px-3 py-2">Extended</td><td className="px-3 py-2">5200 mAh</td></tr>
-                      <tr><td className="px-3 py-2 font-medium">TC22/TC27</td><td className="px-3 py-2 font-mono text-xs">BTRY-TC2L-2XMAXX-01</td><td className="px-3 py-2">Standard</td><td className="px-3 py-2">3800 mAh</td></tr>
-                      <tr><td className="px-3 py-2 font-medium">TC22/TC27</td><td className="px-3 py-2 font-mono text-xs">BTRY-TC2L-3XMAXX-01</td><td className="px-3 py-2">Extended</td><td className="px-3 py-2">5200 mAh</td></tr>
-                      <tr><td className="px-3 py-2 font-medium">TC53/TC58</td><td className="px-3 py-2 font-mono text-xs">BTRY-NGTC5TC7-44MA-01</td><td className="px-3 py-2">Standard</td><td className="px-3 py-2">4400 mAh</td></tr>
-                      <tr><td className="px-3 py-2 font-medium">TC53/TC58</td><td className="px-3 py-2 font-mono text-xs">BTRY-NGTC5TC7-66MA-01</td><td className="px-3 py-2">Extended</td><td className="px-3 py-2">6600 mAh</td></tr>
-                      <tr><td className="px-3 py-2 font-medium">TC501/TC701</td><td className="px-3 py-2 font-mono text-xs">BTRY-TC5X-46MA1-01</td><td className="px-3 py-2">Standard</td><td className="px-3 py-2">4600 mAh</td></tr>
-                      <tr><td className="px-3 py-2 font-medium">MC22/MC27</td><td className="px-3 py-2 font-mono text-xs">BTRY-MC2X-35MA-01</td><td className="px-3 py-2">Standard</td><td className="px-3 py-2">3500 mAh</td></tr>
-                      <tr><td className="px-3 py-2 font-medium">MC22/MC27</td><td className="px-3 py-2 font-mono text-xs">BTRY-MC2X-49MA-01</td><td className="px-3 py-2">Extended</td><td className="px-3 py-2">4900 mAh</td></tr>
-                      <tr><td className="px-3 py-2 font-medium">MC3300x</td><td className="px-3 py-2 font-mono text-xs">BTRY-MC3X-70MA-01</td><td className="px-3 py-2">Standard</td><td className="px-3 py-2">7000 mAh</td></tr>
-                      <tr><td className="px-3 py-2 font-medium">MC9400/MC9450</td><td className="px-3 py-2 font-mono text-xs">BTRY-MC93-STN-01</td><td className="px-3 py-2">Standard</td><td className="px-3 py-2">5000 mAh</td></tr>
-                      <tr><td className="px-3 py-2 font-medium">MC9400/MC9450</td><td className="px-3 py-2 font-mono text-xs">BTRY-MC93-FRZ-01</td><td className="px-3 py-2">Freezer</td><td className="px-3 py-2">2900 mAh</td></tr>
-                      <tr className="bg-gray-50/50"><td colSpan={4} className="px-3 py-1.5 font-semibold text-xs text-gray-500 uppercase tracking-wider">Drukarki mobilne</td></tr>
-                      <tr><td className="px-3 py-2 font-medium">ZQ220 Plus</td><td className="px-3 py-2 font-mono text-xs">BTRY-MPV-25MAC1-01</td><td className="px-3 py-2">Standard</td><td className="px-3 py-2">2500 mAh</td></tr>
-                      <tr><td className="px-3 py-2 font-medium">ZQ310 Plus</td><td className="px-3 py-2 font-mono text-xs">BTRY-MPM-22MA1-01</td><td className="px-3 py-2">Standard</td><td className="px-3 py-2">2200 mAh</td></tr>
-                      <tr><td className="px-3 py-2 font-medium">ZQ511/ZQ610</td><td className="px-3 py-2 font-mono text-xs">BTRY-MPP-34MA1-01</td><td className="px-3 py-2">Standard</td><td className="px-3 py-2">3400 mAh</td></tr>
-                      <tr><td className="px-3 py-2 font-medium">ZQ511 Plus</td><td className="px-3 py-2 font-mono text-xs">BTRY-MPP-EXT1-01</td><td className="px-3 py-2">Extended</td><td className="px-3 py-2">6800 mAh</td></tr>
-                      <tr><td className="px-3 py-2 font-medium">ZQ630/ZQ630 Plus</td><td className="px-3 py-2 font-mono text-xs">BTRY-MPP-68MA1-01</td><td className="px-3 py-2">Standard</td><td className="px-3 py-2">6800 mAh</td></tr>
+                      {['Terminale mobilne', 'Drukarki mobilne', 'Tablety'].map(group => {
+                        const rows = [...products]
+                          .filter(p => p.device_model && batteryGroup(p.device_model) === group)
+                          .sort((a, b) => a.device_model.localeCompare(b.device_model, 'pl') || a.sku.localeCompare(b.sku))
+                        if (rows.length === 0) return null
+                        return (
+                          <Fragment key={group}>
+                            <tr className="bg-gray-50/50"><td colSpan={5} className="px-3 py-1.5 font-semibold text-xs text-gray-500 uppercase tracking-wider">{group}</td></tr>
+                            {rows.map(p => (
+                              <tr key={p.sku}>
+                                <td className="px-3 py-2 font-medium">{p.device_model}</td>
+                                <td className="px-3 py-2">{BATTERY_SPECS[p.sku] ?? '—'}</td>
+                                <td className="px-3 py-2 font-mono text-xs">{p.sku}</td>
+                                <td className="px-3 py-2">{formatPln(Math.round(p.price))} zł</td>
+                                <td className="px-3 py-2">{(p.stock ?? 0) > 0 ? 'Dostępny' : 'Chwilowo niedostępny'}</td>
+                              </tr>
+                            ))}
+                          </Fragment>
+                        )
+                      })}
                     </tbody>
                   </table>
                 </div>
@@ -2150,43 +2268,47 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
                   Najczęściej zadawane pytania
                 </h3>
                 <div className="space-y-4 mb-6">
-                  <div className="border-l-4 border-blue-500 pl-4">
+                  <div className="border border-slate-200 rounded-xl p-4">
                     <p className="font-semibold text-gray-900">Jaka jest żywotność baterii w urządzeniach Zebra?</p>
                     <p className="text-gray-600 text-sm mt-1">Oryginalne akumulatory Zebra wytrzymują 300-500 pełnych cykli ładowania, co przekłada się na 2-3 lata użytkowania przy jednym cyklu dziennie. Po tym czasie pojemność spada do ~80% wartości nominalnej. Baterie Extended mają identyczną liczbę cykli — ale każdy cykl daje dłuższy czas pracy.</p>
                   </div>
-                  <div className="border-l-4 border-blue-500 pl-4">
+                  <div className="border border-slate-200 rounded-xl p-4">
                     <p className="font-semibold text-gray-900">Standard czy Extended — którą baterię wybrać?</p>
                     <p className="text-gray-600 text-sm mt-1">Standard wystarcza na jedną zmianę (4-8 godzin). Extended (nawet 2x większa pojemność) to wybór dla pracy dwuzmianowej lub intensywnego skanowania/druku. Jeśli wymieniacie baterie w ciągu dnia — Extended eliminuje tę konieczność i zwiększa produktywność.</p>
                   </div>
-                  <div className="border-l-4 border-blue-500 pl-4">
+                  <div className="border border-slate-200 rounded-xl p-4">
                     <p className="font-semibold text-gray-900">Ile cykli ładowania wytrzyma bateria?</p>
                     <p className="text-gray-600 text-sm mt-1">Standardowo 300-500 pełnych cykli (0-100%). Ładowanie częściowe (np. od 20% do 80%) jest korzystniejsze i może wydłużyć żywotność do 800-1000 cykli. Zebra Battery Manager pozwala śledzić liczbę cykli w czasie rzeczywistym.</p>
                   </div>
-                  <div className="border-l-4 border-blue-500 pl-4">
+                  <div className="border border-slate-200 rounded-xl p-4">
                     <p className="font-semibold text-gray-900">Jak prawidłowo ładować akumulator Zebra?</p>
                     <p className="text-gray-600 text-sm mt-1">Używaj wyłącznie oryginalnych ładowarek Zebra (stacja dokująca lub zasilacz). Unikaj głębokiego rozładowania poniżej 20% i przegrzewania podczas ładowania. Optymalna temperatura ładowania: 10-35°C. Nie zostawiaj urządzenia w ładowarce po osiągnięciu 100%.</p>
                   </div>
-                  <div className="border-l-4 border-red-500 pl-4">
+                  <div className="border border-slate-200 rounded-xl p-4">
+                    <p className="font-semibold text-gray-900">Ile kosztuje akumulator do urządzenia Zebra?</p>
+                    <p className="text-gray-600 text-sm mt-1">Oryginalne akumulatory Zebra kosztują od {formatPln(akumMinPrice)} zł do {formatPln(akumMaxPrice)} zł netto — najtańsze są baterie Standard do terminali TC, najdroższe wysokopojemne baterie do tabletów ET i wariant Freezer do MC9400. Aktualne ceny i dostępność znajdziesz w tabeli powyżej.</p>
+                  </div>
+                  <div className="border border-slate-200 rounded-xl p-4">
                     <p className="font-semibold text-gray-900">Co zrobić ze spuchniętą baterią?</p>
                     <p className="text-gray-600 text-sm mt-1">Natychmiast wycofaj z użytku! Spuchnięta bateria to sygnał uszkodzenia ogniw Li-Ion — grozi przegrzaniem, wydzielaniem gazów lub pożarem. Nie próbuj ładować ani używać. Nie wyrzucaj do zwykłych śmieci — oddaj do punktu zbiórki baterii lub prześlij do nas, utylizujemy bezpiecznie zgodnie z przepisami.</p>
                   </div>
-                  <div className="border-l-4 border-blue-500 pl-4">
+                  <div className="border border-slate-200 rounded-xl p-4">
                     <p className="font-semibold text-gray-900">Czy zamienniki baterii Zebra są bezpieczne?</p>
                     <p className="text-gray-600 text-sm mt-1">Zamienniki mogą nie mieć certyfikowanych zabezpieczeń (ochrona przed przegrzaniem, przeładowaniem, zwarciem). Oryginalne baterie Zebra mają chip Smart Battery komunikujący się z elektroniką urządzenia — zamienniki mogą powodować błędne odczyty poziomu naładowania, problemy z ładowaniem i unieważniają gwarancję producenta.</p>
                   </div>
-                  <div className="border-l-4 border-blue-500 pl-4">
+                  <div className="border border-slate-200 rounded-xl p-4">
                     <p className="font-semibold text-gray-900">Jak wymienić baterię w terminalu Zebra?</p>
                     <p className="text-gray-600 text-sm mt-1">W terminalach (TC21, TC22, TC53, MC22, MC33, MC9400) bateria jest wymienna bez narzędzi — wyłącz urządzenie, naciśnij zatrzask zwalniający i wyjmij starą baterię. W drukarkach mobilnych (ZQ511, ZQ630) bateria może być zabezpieczona śrubą. Wymiana zajmuje 10-30 sekund.</p>
                   </div>
-                  <div className="border-l-4 border-blue-500 pl-4">
+                  <div className="border border-slate-200 rounded-xl p-4">
                     <p className="font-semibold text-gray-900">Czy bateria do MC9400 pasuje do MC9300?</p>
                     <p className="text-gray-600 text-sm mt-1">Tak — baterie MC93xx są kompatybilne wstecz. Part Number BTRY-MC93-STN-01 (Standard, 5000 mAh) i BTRY-MC93-FRZ-01 (Freezer, 2900 mAh) pasują zarówno do MC9300 jak i MC9400/MC9450.</p>
                   </div>
-                  <div className="border-l-4 border-blue-500 pl-4">
+                  <div className="border border-slate-200 rounded-xl p-4">
                     <p className="font-semibold text-gray-900">Jak przechowywać zapasowe baterie?</p>
                     <p className="text-gray-600 text-sm mt-1">Przechowuj naładowane w 40-60% w suchym pomieszczeniu o temperaturze 15-25°C, z dala od źródeł ciepła i światła słonecznego. Co 3-6 miesięcy sprawdź poziom naładowania i doładuj do 50% jeśli spadł poniżej 20%. Nigdy nie przechowuj w pełni rozładowanych — głębokie rozładowanie uszkadza ogniwa trwale.</p>
                   </div>
-                  <div className="border-l-4 border-blue-500 pl-4">
+                  <div className="border border-slate-200 rounded-xl p-4">
                     <p className="font-semibold text-gray-900">Czym jest Zebra Battery Manager?</p>
                     <p className="text-gray-600 text-sm mt-1">Battery Manager to oprogramowanie Zebra preinstalowane na terminalach z Androidem (TC21, TC22, TC52, TC53, TC72, MC22, MC33, MC9400). Pokazuje w czasie rzeczywistym: aktualną pojemność (mAh), liczbę cykli ładowania, temperaturę ogniw, procentowy State of Health i przewidywany czas pracy. Umożliwia fleet management — zdalny monitoring baterii w całej flocie urządzeń.</p>
                   </div>
@@ -2214,6 +2336,7 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
                 { "@type": "Question", "name": "Standard czy Extended — którą baterię wybrać?", "acceptedAnswer": { "@type": "Answer", "text": "Standard wystarcza na jedną zmianę (4-8 godzin). Extended to wybór dla pracy dwuzmianowej lub intensywnego skanowania/druku. Extended eliminuje konieczność wymiany baterii w ciągu dnia." }},
                 { "@type": "Question", "name": "Ile cykli ładowania wytrzyma bateria?", "acceptedAnswer": { "@type": "Answer", "text": "Standardowo 300-500 pełnych cykli (0-100%). Ładowanie częściowe (20-80%) może wydłużyć żywotność do 800-1000 cykli." }},
                 { "@type": "Question", "name": "Jak prawidłowo ładować akumulator Zebra?", "acceptedAnswer": { "@type": "Answer", "text": "Używaj wyłącznie oryginalnych ładowarek Zebra. Unikaj głębokiego rozładowania poniżej 20%. Optymalna temperatura ładowania: 10-35°C." }},
+                { "@type": "Question", "name": "Ile kosztuje akumulator do urządzenia Zebra?", "acceptedAnswer": { "@type": "Answer", "text": `Oryginalne akumulatory Zebra kosztują od ${formatPln(akumMinPrice)} zł do ${formatPln(akumMaxPrice)} zł netto — najtańsze są baterie Standard do terminali TC, najdroższe baterie do tabletów ET i wariant Freezer.` }},
                 { "@type": "Question", "name": "Co zrobić ze spuchniętą baterią?", "acceptedAnswer": { "@type": "Answer", "text": "Natychmiast wycofaj z użytku! Spuchnięta bateria grozi przegrzaniem lub pożarem. Oddaj do punktu zbiórki lub prześlij do nas — utylizujemy bezpiecznie." }},
                 { "@type": "Question", "name": "Czy zamienniki baterii Zebra są bezpieczne?", "acceptedAnswer": { "@type": "Answer", "text": "Zamienniki mogą nie mieć certyfikowanych zabezpieczeń. Oryginalne baterie Zebra mają chip Smart Battery komunikujący się z urządzeniem — zamienniki mogą unieważnić gwarancję." }},
                 { "@type": "Question", "name": "Jak wymienić baterię w terminalu Zebra?", "acceptedAnswer": { "@type": "Answer", "text": "W terminalach bateria jest wymienna bez narzędzi — wyłącz urządzenie, naciśnij zatrzask i wyjmij baterię. Wymiana zajmuje 10-30 sekund." }},
@@ -2274,37 +2397,35 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
                 </p>
 
                 <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
-                  Tabela kompatybilności baterii — terminale Zebra
+                  Tabela Part Numbers — baterie do terminali Zebra
                 </h3>
                 <div className="overflow-x-auto mb-6">
+                  {/* Tabela generowana z bazy produktów — PN, ceny i dostępność zawsze aktualne */}
                   <table className="w-full text-sm">
                     <thead className="bg-gray-50">
                       <tr>
                         <th className="px-3 py-2 text-left font-semibold">Terminal</th>
+                        <th className="px-3 py-2 text-left font-semibold">Typ / pojemność</th>
                         <th className="px-3 py-2 text-left font-semibold">Part Number</th>
-                        <th className="px-3 py-2 text-left font-semibold">Typ</th>
-                        <th className="px-3 py-2 text-left font-semibold">Pojemność</th>
-                        <th className="px-3 py-2 text-left font-semibold">Czas pracy*</th>
+                        <th className="px-3 py-2 text-left font-semibold">Cena (netto)</th>
+                        <th className="px-3 py-2 text-left font-semibold">Dostępność</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-100">
-                      <tr className="bg-gray-50/50"><td colSpan={5} className="px-3 py-1.5 font-semibold text-xs text-gray-500 uppercase tracking-wider">Seria TC — Touch Computer</td></tr>
-                      <tr><td className="px-3 py-2 font-medium">TC21/TC26</td><td className="px-3 py-2 font-mono text-xs">BTRY-TC2Y-1XMA1-01</td><td className="px-3 py-2">Standard</td><td className="px-3 py-2">3100 mAh</td><td className="px-3 py-2">~6h</td></tr>
-                      <tr><td className="px-3 py-2 font-medium">TC21/TC26</td><td className="px-3 py-2 font-mono text-xs">BTRY-TC2Y-2XMA1-01</td><td className="px-3 py-2">Extended</td><td className="px-3 py-2">5200 mAh</td><td className="px-3 py-2">~10h</td></tr>
-                      <tr><td className="px-3 py-2 font-medium">TC22/TC27</td><td className="px-3 py-2 font-mono text-xs">BTRY-TC2L-2XMAXX-01</td><td className="px-3 py-2">Standard</td><td className="px-3 py-2">3800 mAh</td><td className="px-3 py-2">~8h</td></tr>
-                      <tr><td className="px-3 py-2 font-medium">TC22/TC27</td><td className="px-3 py-2 font-mono text-xs">BTRY-TC2L-3XMAXX-01</td><td className="px-3 py-2">Extended</td><td className="px-3 py-2">5200 mAh</td><td className="px-3 py-2">~12h</td></tr>
-                      <tr><td className="px-3 py-2 font-medium">TC53/TC58</td><td className="px-3 py-2 font-mono text-xs">BTRY-NGTC5TC7-44MA-01</td><td className="px-3 py-2">Standard</td><td className="px-3 py-2">4400 mAh</td><td className="px-3 py-2">~8h</td></tr>
-                      <tr><td className="px-3 py-2 font-medium">TC53/TC58</td><td className="px-3 py-2 font-mono text-xs">BTRY-NGTC5TC7-66MA-01</td><td className="px-3 py-2">Extended</td><td className="px-3 py-2">6600 mAh</td><td className="px-3 py-2">~14h</td></tr>
-                      <tr><td className="px-3 py-2 font-medium">TC501/TC701</td><td className="px-3 py-2 font-mono text-xs">BTRY-TC5X-46MA1-01</td><td className="px-3 py-2">Standard</td><td className="px-3 py-2">4600 mAh</td><td className="px-3 py-2">~9h</td></tr>
-                      <tr className="bg-gray-50/50"><td colSpan={5} className="px-3 py-1.5 font-semibold text-xs text-gray-500 uppercase tracking-wider">Seria MC — Mobile Computer</td></tr>
-                      <tr><td className="px-3 py-2 font-medium">MC22/MC27</td><td className="px-3 py-2 font-mono text-xs">BTRY-MC2X-35MA-01</td><td className="px-3 py-2">Standard</td><td className="px-3 py-2">3500 mAh</td><td className="px-3 py-2">~7h</td></tr>
-                      <tr><td className="px-3 py-2 font-medium">MC22/MC27</td><td className="px-3 py-2 font-mono text-xs">BTRY-MC2X-49MA-01</td><td className="px-3 py-2">Extended</td><td className="px-3 py-2">4900 mAh</td><td className="px-3 py-2">~11h</td></tr>
-                      <tr><td className="px-3 py-2 font-medium">MC3300x</td><td className="px-3 py-2 font-mono text-xs">BTRY-MC3X-70MA-01</td><td className="px-3 py-2">Standard</td><td className="px-3 py-2">7000 mAh</td><td className="px-3 py-2">~14h</td></tr>
-                      <tr><td className="px-3 py-2 font-medium">MC9400/MC9450</td><td className="px-3 py-2 font-mono text-xs">BTRY-MC93-STN-01</td><td className="px-3 py-2">Standard</td><td className="px-3 py-2">5000 mAh</td><td className="px-3 py-2">~10h</td></tr>
-                      <tr><td className="px-3 py-2 font-medium">MC9400/MC9450</td><td className="px-3 py-2 font-mono text-xs">BTRY-MC93-FRZ-01</td><td className="px-3 py-2">Freezer</td><td className="px-3 py-2">2900 mAh</td><td className="px-3 py-2">~6h (-30°C)</td></tr>
+                      {[...products]
+                        .filter(p => p.device_model)
+                        .sort((a, b) => a.device_model.localeCompare(b.device_model, 'pl') || a.sku.localeCompare(b.sku))
+                        .map(p => (
+                          <tr key={p.sku}>
+                            <td className="px-3 py-2 font-medium">{p.device_model}</td>
+                            <td className="px-3 py-2">{BATTERY_SPECS[p.sku] ?? '—'}</td>
+                            <td className="px-3 py-2 font-mono text-xs">{p.sku}</td>
+                            <td className="px-3 py-2">{formatPln(Math.round(p.price))} zł</td>
+                            <td className="px-3 py-2">{(p.stock ?? 0) > 0 ? 'Dostępny' : 'Chwilowo niedostępny'}</td>
+                          </tr>
+                        ))}
                     </tbody>
                   </table>
-                  <p className="text-xs text-gray-400 mt-2">* Orientacyjny czas pracy przy typowym użytkowaniu (skanowanie co 10s, WiFi, ekran 50% jasności). Rzeczywisty czas zależy od intensywności i warunków.</p>
                 </div>
 
                 <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
@@ -2315,7 +2436,6 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
                 </p>
                 <ul className="text-gray-600 space-y-2 mb-4">
                   <li><strong>TC21/TC26 → TC22/TC27</strong> — baterie NIE są wymienne. TC22/TC27 używa nowego formatu (BTRY-TC2L) o wyższej pojemności bazowej (3800 vs 3100 mAh).</li>
-                  <li><strong>TC52/TC72 → TC53/TC58</strong> — baterie SĄ kompatybilne wstecz. BTRY-NGTC5TC7 pasuje do obu generacji.</li>
                   <li><strong>MC9300 → MC9400/MC9450</strong> — baterie SĄ kompatybilne. BTRY-MC93-STN-01 i BTRY-MC93-FRZ-01 pasują do wszystkich wariantów MC93xx/MC94xx.</li>
                   <li><strong>MC3300 → MC3300x</strong> — baterie SĄ kompatybilne. BTRY-MC3X-70MA-01 pasuje do obu generacji.</li>
                 </ul>
@@ -2346,27 +2466,27 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
                   FAQ — Baterie do terminali Zebra
                 </h3>
                 <div className="space-y-4 mb-6">
-                  <div className="border-l-4 border-blue-500 pl-4">
+                  <div className="border border-slate-200 rounded-xl p-4">
                     <p className="font-semibold text-gray-900">Jak wymienić baterię w terminalu Zebra?</p>
                     <p className="text-gray-600 text-sm mt-1">Wyłącz terminal (lub włącz tryb hot-swap jeśli obsługiwany). Naciśnij zatrzask zwalniający na dole obudowy i wysuń baterię. Włóż nową baterię aż do kliknięcia zatrzasku. Cała operacja zajmuje 10-30 sekund, bez narzędzi. Terminal z Androidem wznowi sesję po ponownym uruchomieniu.</p>
                   </div>
-                  <div className="border-l-4 border-blue-500 pl-4">
+                  <div className="border border-slate-200 rounded-xl p-4">
                     <p className="font-semibold text-gray-900">Czy bateria TC21 pasuje do TC26?</p>
                     <p className="text-gray-600 text-sm mt-1">Tak — TC21 i TC26 to ten sam terminal w dwóch wariantach (WiFi-only i WiFi+Cellular). Używają identycznych baterii: BTRY-TC2Y-1XMA1-01 (Standard, 3100 mAh) i BTRY-TC2Y-2XMA1-01 (Extended, 5200 mAh).</p>
                   </div>
-                  <div className="border-l-4 border-blue-500 pl-4">
+                  <div className="border border-slate-200 rounded-xl p-4">
                     <p className="font-semibold text-gray-900">Ile baterii potrzebuję na flotę terminali?</p>
                     <p className="text-gray-600 text-sm mt-1">Przy pracy jednozmianowej z baterią Extended — 1 bateria na terminal wystarczy. Przy dwóch zmianach ze Standard — potrzebujesz 2 baterie na terminal + ładowarkę wielostanowiskową (np. 4-slot battery charger). Zasada: (liczba terminali x liczba zmian) / 1.5 = minimalna liczba baterii.</p>
                   </div>
-                  <div className="border-l-4 border-blue-500 pl-4">
+                  <div className="border border-slate-200 rounded-xl p-4">
                     <p className="font-semibold text-gray-900">Jaki jest koszt baterii do terminala Zebra?</p>
-                    <p className="text-gray-600 text-sm mt-1">Oryginalne baterie Standard kosztują ok. 150-250 zł netto, Extended 200-350 zł netto, Freezer 300-450 zł netto w zależności od modelu. Przy żywotności 2-3 lata i 250 dniach pracy rocznie, koszt baterii to ok. 0,20-0,50 zł dziennie — wielokrotnie mniej niż strata produktywności z powodu rozładowanego terminala.</p>
+                    <p className="text-gray-600 text-sm mt-1">Oryginalne baterie do terminali Zebra kosztują od {formatPln(akumMinPrice)} zł do {formatPln(akumMaxPrice)} zł netto w zależności od modelu i wariantu (Standard/Extended/Freezer). Przy żywotności 2-3 lata i 250 dniach pracy rocznie koszt baterii to mniej niż 1 zł dziennie — wielokrotnie mniej niż strata produktywności z powodu rozładowanego terminala.</p>
                   </div>
-                  <div className="border-l-4 border-red-500 pl-4">
+                  <div className="border border-slate-200 rounded-xl p-4">
                     <p className="font-semibold text-gray-900">Czy mogę używać zamiennika baterii w terminalu?</p>
                     <p className="text-gray-600 text-sm mt-1">Nie zalecamy. Zamienniki nie mają chipu Smart Battery Zebra — terminal nie rozpozna prawdziwej pojemności, nie pokaże poprawnego SoH i może wyświetlać ostrzeżenia. Zamienniki nie mają certyfikacji Zebra dla wariantów Freezer i mogą stanowić zagrożenie pożarowe. Unieważniają gwarancję producenta.</p>
                   </div>
-                  <div className="border-l-4 border-blue-500 pl-4">
+                  <div className="border border-slate-200 rounded-xl p-4">
                     <p className="font-semibold text-gray-900">Bateria Standard czy Extended do MC9400?</p>
                     <p className="text-gray-600 text-sm mt-1">MC9400 to terminal wytrzymały do intensywnej pracy magazynowej. Standard (5000 mAh) wystarcza na jedną zmianę (~10h). Jeśli pracujecie w mroźni — jedynym wyborem jest Freezer (BTRY-MC93-FRZ-01, 2900 mAh). MC9400 nie oferuje wariantu Extended — bateria Standard ma już dużą pojemność.</p>
                   </div>
@@ -2393,7 +2513,7 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
                 { "@type": "Question", "name": "Jak wymienić baterię w terminalu Zebra?", "acceptedAnswer": { "@type": "Answer", "text": "Naciśnij zatrzask zwalniający na dole obudowy i wysuń baterię. Włóż nową aż do kliknięcia. 10-30 sekund, bez narzędzi." }},
                 { "@type": "Question", "name": "Czy bateria TC21 pasuje do TC26?", "acceptedAnswer": { "@type": "Answer", "text": "Tak — TC21 i TC26 to ten sam terminal w wariantach WiFi-only i WiFi+Cellular. Używają identycznych baterii BTRY-TC2Y." }},
                 { "@type": "Question", "name": "Ile baterii potrzebuję na flotę terminali?", "acceptedAnswer": { "@type": "Answer", "text": "Przy jednej zmianie z baterią Extended — 1 na terminal. Przy dwóch zmianach ze Standard — 2 na terminal + ładowarka wielostanowiskowa." }},
-                { "@type": "Question", "name": "Jaki jest koszt baterii do terminala Zebra?", "acceptedAnswer": { "@type": "Answer", "text": "Oryginalne baterie Standard: 150-250 zł netto, Extended: 200-350 zł netto, Freezer: 300-450 zł netto. Koszt dzienny: ok. 0,20-0,50 zł." }},
+                { "@type": "Question", "name": "Jaki jest koszt baterii do terminala Zebra?", "acceptedAnswer": { "@type": "Answer", "text": `Oryginalne baterie do terminali Zebra kosztują od ${formatPln(akumMinPrice)} zł do ${formatPln(akumMaxPrice)} zł netto w zależności od modelu i wariantu (Standard/Extended/Freezer).` }},
                 { "@type": "Question", "name": "Czy mogę używać zamiennika baterii w terminalu?", "acceptedAnswer": { "@type": "Answer", "text": "Nie zalecamy. Zamienniki nie mają chipu Smart Battery, mogą wyświetlać ostrzeżenia i stanowić zagrożenie pożarowe. Unieważniają gwarancję." }},
                 { "@type": "Question", "name": "Bateria Standard czy Extended do MC9400?", "acceptedAnswer": { "@type": "Answer", "text": "Standard (5000 mAh) wystarcza na jedną zmianę (~10h). Do mroźni jedyny wybór to Freezer (BTRY-MC93-FRZ-01, 2900 mAh). MC9400 nie oferuje Extended." }}
               ]
@@ -2433,6 +2553,38 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
                   <strong>ZQ630</strong> (etykiety 4", IP54). Wydajność baterii decyduje o liczbie wydrukowanych
                   etykiet na jednym ładowaniu — kluczowy parametr dla kurierów i magazynierów pracujących z dala od ładowarki.
                 </p>
+
+                <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
+                  Tabela Part Numbers — baterie do drukarek mobilnych
+                </h3>
+                <div className="overflow-x-auto mb-6">
+                  {/* Tabela generowana z bazy produktów — PN, ceny i dostępność zawsze aktualne */}
+                  <table className="w-full text-sm">
+                    <thead className="bg-gray-50">
+                      <tr>
+                        <th className="px-3 py-2 text-left font-semibold">Drukarka</th>
+                        <th className="px-3 py-2 text-left font-semibold">Typ / pojemność</th>
+                        <th className="px-3 py-2 text-left font-semibold">Part Number</th>
+                        <th className="px-3 py-2 text-left font-semibold">Cena (netto)</th>
+                        <th className="px-3 py-2 text-left font-semibold">Dostępność</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-gray-100">
+                      {[...products]
+                        .filter(p => p.device_model)
+                        .sort((a, b) => a.device_model.localeCompare(b.device_model, 'pl') || a.sku.localeCompare(b.sku))
+                        .map(p => (
+                          <tr key={p.sku}>
+                            <td className="px-3 py-2 font-medium">{p.device_model}</td>
+                            <td className="px-3 py-2">{BATTERY_SPECS[p.sku] ?? '—'}</td>
+                            <td className="px-3 py-2 font-mono text-xs">{p.sku}</td>
+                            <td className="px-3 py-2">{formatPln(Math.round(p.price))} zł</td>
+                            <td className="px-3 py-2">{(p.stock ?? 0) > 0 ? 'Dostępny' : 'Chwilowo niedostępny'}</td>
+                          </tr>
+                        ))}
+                    </tbody>
+                  </table>
+                </div>
 
                 <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
                   Wydajność baterii — ile etykiet na jednym ładowaniu?
@@ -2497,27 +2649,27 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
                   FAQ — Baterie do drukarek mobilnych
                 </h3>
                 <div className="space-y-4 mb-6">
-                  <div className="border-l-4 border-blue-500 pl-4">
+                  <div className="border border-slate-200 rounded-xl p-4">
                     <p className="font-semibold text-gray-900">Jak wymienić baterię w drukarce mobilnej Zebra?</p>
                     <p className="text-gray-600 text-sm mt-1">Wyłącz drukarkę. W ZQ220/ZQ310 — przesuń zatrzask i wyjmij baterię. W ZQ511/ZQ610/ZQ630 — odkręć śrubę zabezpieczającą (palcem lub monetą), przesuń zatrzask i wysuń baterię. Włóż nową i zamknij. Czas wymiany: 15-60 sekund.</p>
                   </div>
-                  <div className="border-l-4 border-blue-500 pl-4">
+                  <div className="border border-slate-200 rounded-xl p-4">
                     <p className="font-semibold text-gray-900">Czy bateria ZQ511 pasuje do ZQ610?</p>
                     <p className="text-gray-600 text-sm mt-1">Tak — ZQ511 i ZQ610 używają tej samej baterii Standard BTRY-MPP-34MA1-01 (3400 mAh). Jednak bateria Extended (BTRY-MPP-EXT1-01) jest kompatybilna tylko z ZQ511 Plus.</p>
                   </div>
-                  <div className="border-l-4 border-blue-500 pl-4">
+                  <div className="border border-slate-200 rounded-xl p-4">
                     <p className="font-semibold text-gray-900">Ile etykiet wydrukuje ZQ630 na jednej baterii?</p>
                     <p className="text-gray-600 text-sm mt-1">Ok. 1500 standardowych etykiet 4" (100x150 mm) z kodem kreskowym przy temperaturze 22°C. W zimie (0-5°C) pojemność spada o 20-30%, więc realnie ok. 1000-1200 etykiet. Druk z dużą pokrywalnością (pełne grafiki) zmniejsza wydajność o kolejne 20-30%.</p>
                   </div>
-                  <div className="border-l-4 border-blue-500 pl-4">
+                  <div className="border border-slate-200 rounded-xl p-4">
                     <p className="font-semibold text-gray-900">Jak wydłużyć żywotność baterii w drukarce mobilnej?</p>
                     <p className="text-gray-600 text-sm mt-1">Ładuj częściowo (20-80%), unikaj pozostawiania w gorącym samochodzie latem (powyżej 45°C), wyłączaj drukarkę gdy nie jest używana (tryb uśpienia też pobiera prąd). Zima: trzymaj drukarkę blisko ciała lub w ogrzewanej kabinie — zimna bateria drukuje wolniej i krócej.</p>
                   </div>
-                  <div className="border-l-4 border-blue-500 pl-4">
+                  <div className="border border-slate-200 rounded-xl p-4">
                     <p className="font-semibold text-gray-900">Standard czy Extended do pracy kurierskiej?</p>
                     <p className="text-gray-600 text-sm mt-1">Kurier z 50-80 przesyłek dziennie (2 etykiety na przesyłkę = 100-160 etykiet) — Standard wystarczy z zapasem. Kurier z 150+ przesyłek, praca zimą, lub druk POD (Proof of Delivery) — Extended daje spokój na cały dzień bez ładowania.</p>
                   </div>
-                  <div className="border-l-4 border-blue-500 pl-4">
+                  <div className="border border-slate-200 rounded-xl p-4">
                     <p className="font-semibold text-gray-900">Drukarka nie ładuje baterii — co zrobić?</p>
                     <p className="text-gray-600 text-sm mt-1">Sprawdź złącze zasilacza (luzy, zabrudzenia). Spróbuj inny zasilacz. Jeśli bateria jest spuchnięta — natychmiast wymień. Jeśli nowa bateria też się nie ładuje, problem leży w elektronice zasilania drukarki — wyślij do serwisu.</p>
                   </div>

@@ -84,6 +84,33 @@ const PAGES: PageConfig[] = [
     requireClaimInMeta: false,
     useSeoDataPhrases: false,
   },
+  {
+    path: '/sklep/akumulatory',
+    canonical: 'https://www.serwis-zebry.pl/sklep/akumulatory',
+    productType: 'akumulator',
+    mainPhrase: 'akumulatory do urządzeń zebra',
+    phrases: ['akumulator zebra', 'żywotność baterii', 'smart battery', 'cykli ładowania'],
+    requireClaimInMeta: true,
+    useSeoDataPhrases: false,
+  },
+  {
+    path: '/sklep/akumulatory/terminale',
+    canonical: 'https://www.serwis-zebry.pl/sklep/akumulatory/terminale',
+    productType: 'akumulator',
+    mainPhrase: 'akumulatory do terminali zebra',
+    phrases: ['bateria tc21', 'mc9400', 'smart battery', 'freezer'],
+    requireClaimInMeta: false,
+    useSeoDataPhrases: false,
+  },
+  {
+    path: '/sklep/akumulatory/drukarki-mobilne',
+    canonical: 'https://www.serwis-zebry.pl/sklep/akumulatory/drukarki-mobilne',
+    productType: 'akumulator',
+    mainPhrase: 'akumulatory do drukarek mobilnych',
+    phrases: ['bateria zq511', 'zq630', 'ładowanie'],
+    requireClaimInMeta: false,
+    useSeoDataPhrases: false,
+  },
 ]
 
 // ── env ──
