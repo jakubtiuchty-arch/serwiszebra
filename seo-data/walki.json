@@ -1,0 +1,29 @@
+{
+  "generated": "2026-06-12",
+  "page": "/sklep/walki-dociskowe",
+  "sources": {
+    "gsc": "NIEDOSTĘPNE — jak przy głowicach; zastępczo Ahrefs",
+    "ahrefs": "keywords-explorer + serp-overview, 2026-06-12"
+  },
+  "keyInsight": {
+    "finding": "Fraza 'wałek dociskowy' (315/mies., KD 0) ma SERP o OBCEJ intencji: wałki dekarskie do papy/membran EPDM (gp-system #4, sklep-dekarski #7), malarskie (Leroy Merlin #5, Castorama #9), narzędzia YATO (toya24 #6), Allegro listing #1. ZERO wyników drukarkowych w TOP10.",
+    "decision": "NIE celujemy w generyczne 'wałek dociskowy' — zły ruch i nierealny SERP (DR 60-91). Celujemy w long-tail kwalifikowany drukarkami: 'wałek dociskowy do drukarki', 'wałek do drukarki zebra', 'platen roller', frazy modelowe. Wszystkie mają 0 wolumenu w indeksie Ahrefs (greenfield jak głowice — kategoria głowic też nie rankowała na nic przed optymalizacją).",
+    "titleStrategy": "Fraza główna w title: 'wałki dociskowe do drukarek Zebra' — kwalifikacja odcina intencję dekarską/malarską."
+  },
+  "targetPhrases": [
+    { "keyword": "wałki dociskowe do drukarek", "volume": 0, "why": "fraza główna kategorii, kwalifikowana" },
+    { "keyword": "wałek dociskowy do drukarki", "volume": 0, "why": "singular, intencja zakupowa" },
+    { "keyword": "wałek do drukarki zebra", "volume": 0, "why": "brand-qualified" },
+    { "keyword": "platen roller", "volume": 10, "why": "terminologia angielska używana przez techników; jedyna fraza z wolumenem w klastrze" },
+    { "keyword": "wymiana wałka", "volume": 0, "why": "intencja serwisowa → konwersja na część lub usługę" },
+    { "keyword": "wałek zt411", "volume": 0, "why": "fraza modelowa (przemysłowe), wzorzec rajotech z głowic" },
+    { "keyword": "wałek zd421", "volume": 0, "why": "fraza modelowa (biurkowe)" }
+  ],
+  "dbSnapshot2026_06_12": {
+    "total": 15,
+    "available": 12,
+    "minAvailablePrice": 73.16,
+    "maxPrice": 535.05,
+    "note": "Wałki przemysłowe (ZT) mają resolution_dpi=NULL — wałek pasuje do wszystkich rozdzielczości danego modelu. Tabela PN musi pokazywać '—' zamiast DPI i nie wycinać wierszy z NULL."
+  }
+}

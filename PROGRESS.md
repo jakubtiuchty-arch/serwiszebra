@@ -4,6 +4,16 @@ Checkpoint postępu prac. Najnowszy wpis na górze. Po każdym etapie/buildzie d
 
 ---
 
+## 2026-06-12 — SEO /sklep/walki-dociskowe (3 strony): wzorzec głowic zastosowany, audyt 118/118
+
+- **Dane** (`seo-data/walki.json`): „wałek dociskowy" 315/mies. KD 0, ale SERP o OBCEJ intencji (wałki dekarskie/malarskie — Leroy, Castorama, YATO) → celujemy w long-tail kwalifikowany: „wałki dociskowe do drukarek", frazy modelowe (wałek zt411/zd421), „platen roller" (10/mies.).
+- **Naprawione PN (7 z 9 wierszy hardcodowanej tabeli było błędnych!)**: ZT610 wałek to P1083320-032 (tabela podawała P1083347-005 = głowica ZT510 203dpi!), ZT620→-033 (było -006 = głowica ZT510 300dpi), ZT230→P1037974-028 (było -003), ZT510→P1083347-012 (było -018), ZD510-HC→P1100266-008 (było P1112640-017), ZD220/230→P1080383-700/-703 d/t (było -417), ZD421/621→4 osobne wałki d/t×203/300 (było „wspólny P1112640-016", którego NIE MA w bazie).
+- **Fix merytoryczny FAQ**: „wałek nie zależy od DPI" prawdziwe TYLKO dla przemysłowych ZT; w biurkowych ZD osobne PN dla 203/300 DPI ORAZ wersji d/t. FAQ „ZD411 pasuje do ZD421" usunięte (nie mamy wałka ZD411); nowe: ZD421d vs t, ZD421↔ZD621 (wspólne tylko w wersjach d).
+- Tabele PN generowane z bazy na 3 stronach (kolumna DPI: „wszystkie" gdy NULL), ceny dynamiczne (min dostępnego 73 zł, max 536), CollectionPage schema (mapa rozszerzona o wałki), title/desc w limitach (50/58/55 + 149/149/146), FAQ przestylowane na border-slate-200.
+- Audyt rozszerzony: PAGES z `productType` (glowica|walek), fetch per typ. **ŁĄCZNIE 118/118 PASS** (6 stron). Build EXIT=0 (po fixie TS2802: Array.from zamiast spread Set).
+- Słowa: main 1027, biurkowe 812, przemysłowe 712 (krótszy listing — 6 produktów/podstronę).
+- TODO: commit+push po potwierdzeniu; GSC Request indexing 3 stron wałków po deployu.
+
 ## 2026-06-11 — integracja Jarltech (3. dystrybutor) — admin + fallback /sklep
 
 - `lib/jarltech.ts` — port z takmy (OAuth2 client credentials, PN→ID mapping cache 24h, item price/stock/incoming-stock równolegle, concurrency 4, cache 1h). Klucze JARLTECH_* dodane do `.env.local` — **DODAĆ TEŻ NA VERCEL!**
@@ -12,7 +22,7 @@ Checkpoint postępu prac. Najnowszy wpis na górze. Po każdym etapie/buildzie d
 - `RealTimeStock.tsx`: „Na zamówienie — wysyłka 4-7 dni (X szt. u dostawcy)" lub „Dostępny wkrótce (dostawa do dystrybutora: data)". ŚWIADOMA DECYZJA: jarltech_stock NIE odblokowuje koszyka (onStockLoaded dostaje 0) — sprzedaż z magazynu Jarltecha wymaga decyzji o procesie zamówień.
 - Test live: P1058930-009 → Jarltech 485 szt. + 819 w dostawie ETA 2026-06-26, 392,05 EUR = 1 667,39 zł (kurs NBP 4,253). Build EXIT=0.
 - **AKTUALIZACJA (model takma)**: user potwierdził model Magazyn PL/EU — `/api/shop/product-stock` odpytuje RÓWNOLEGLE Ingram+BlueStar+Jarltech przy każdej karcie (cache 1h per lib): `stock_pl`=Ingram lokalny (24h), `stock_de`=Ingram DE+BlueStar+Jarltech (EU, 2-3 dni), `total_stock`=PL+EU → **koszyk odblokowany dla stanów EU** (u nich zamawiamy). `RealTimeStock`: kropki jak w takmie („Magazyn PL: X szt. — wysyłka 24h" / „Magazyn EU: X szt. — wysyłka 2-3 dni"), plus „Dostępny wkrótce (ETA)" z incoming Jarltecha. Ceny nadal TYLKO z Ingrama. Test: P1058930-009 → PL 3 szt. + EU 1412 szt. Build EXIT=0.
-- TODO: env JARLTECH_* na Vercel (bez tego magazyn EU = sam BlueStar+IngramDE).
+- DONE: env JARLTECH_* dodane na Vercel (serwiszebra_prod; Production przez CLI, Preview+Dev przez REST API — CLI 54 ma buga `--yes` przy preview). Redeploy + weryfikacja na produkcji 2026-06-11: P1058930-009 → PL 3 + EU 875, jarltech_eta obecne. Commity: `8b4e4f4` (SEO podkategorie), `ec81dcc` (Jarltech+PL/EU+auto-load).
 - **Auto-load stock w /admin/katalog**: po wczytaniu listy części stany 3 dystrybutorów dociągają się same paczkami po 10 PN (limit API), sekwencyjnie, z generation guardem (zmiana strony/filtra przerywa). Wiersze wypełniają się progresywnie (~9 s/paczka na zimno, cache 1h → instant przy powrocie). Przycisk „Sprawdź stock" został jako ręczny refresh pojedynczego wiersza. Build EXIT=0.
 
 ## 2026-06-11 — SEO podkategorie głowic: rozbudowa thin content, audyt 63/63 PASS

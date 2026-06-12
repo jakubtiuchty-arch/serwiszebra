@@ -475,11 +475,36 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
         }
       }
     }
+    // Wałki: cena "od X zł" z realnego minimum DOSTĘPNEGO produktu (jak głowice)
+    if (productType.slug === 'walki-dociskowe') {
+      const walki = await getProductsForCategory({ productType: 'walek' })
+      const availablePrices = walki.filter(p => (p.stock ?? 0) > 0).map(p => p.price)
+      const minPrice = availablePrices.length > 0 ? Math.floor(Math.min(...availablePrices)) : 73
+      const walkiTitle = `Wałki dociskowe do drukarek Zebra od ${minPrice} zł | TAKMA`
+      const walkiDescription = `Oryginalne wałki dociskowe (platen roller) do drukarek Zebra: ZD220, ZD421, ZD621, ZT411, ZT610. Ceny od ${minPrice} zł netto. Wysyłka 24h, gwarancja 12 mies.`
+      return {
+        title: walkiTitle,
+        description: walkiDescription,
+        openGraph: {
+          title: walkiTitle,
+          description: walkiDescription,
+          url: 'https://www.serwis-zebry.pl/sklep/walki-dociskowe',
+          type: 'website',
+          siteName: 'TAKMA - Autoryzowany Serwis Zebra',
+          locale: 'pl_PL',
+          images: [{
+            url: 'https://www.serwis-zebry.pl/sklep_photo/P1058930-080.png',
+            width: 800,
+            height: 800,
+            alt: 'Oryginalny wałek dociskowy (platen roller) do drukarki Zebra'
+          }]
+        },
+        alternates: {
+          canonical: 'https://www.serwis-zebry.pl/sklep/walki-dociskowe'
+        }
+      }
+    }
     const categoryDescriptions: Record<string, { title: string; description: string }> = {
-      'walki-dociskowe': {
-        title: 'Wałki dociskowe Zebra (platen roller) — od 73 zł | TAKMA',
-        description: 'Oryginalne wałki dociskowe do drukarek Zebra: ZD220, ZD421, ZD621, ZT411, ZT610. Ceny od 73 zł netto. Wysyłka 24h, gwarancja producenta.'
-      },
       akumulatory: {
         title: 'Akumulatory Zebra — terminale TC, MC, drukarki ZQ | TAKMA',
         description: 'Oryginalne akumulatory do terminali Zebra TC22, TC52, MC3300, MC9400 i drukarek mobilnych ZQ630, ZQ520. Od 78 zł netto. Wysyłka 24h.'
@@ -561,8 +586,8 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
     // SEO dla wałków do drukarek przemysłowych
     if (productType.id === 'walek' && printerCategory.id === 'industrial') {
       return {
-        title: 'Wałki dociskowe do drukarek przemysłowych Zebra ZT411, ZT610, ZT620 | TAKMA',
-        description: 'Oryginalne wałki dociskowe (platen roller) do drukarek przemysłowych Zebra: ZT230, ZT411, ZT421, ZT510, ZT610, ZT620. Wysyłka 24-72h. Gwarancja producenta.',
+        title: 'Wałki dociskowe do drukarek przemysłowych Zebra ZT | TAKMA',
+        description: 'Oryginalne wałki dociskowe (platen roller) do drukarek przemysłowych Zebra: ZT230, ZT411, ZT421, ZT510, ZT610, ZT620. Wysyłka 24h, gwarancja 12 mies.',
         keywords: 'wałek zt411, wałek zt610, wałek zt620, platen roller zebra, wałek dociskowy zebra przemysłowa, wymiana wałka zebra',
         openGraph: {
           title: 'Wałki dociskowe do drukarek przemysłowych Zebra | TAKMA',
@@ -586,8 +611,8 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
     // SEO dla wałków do drukarek biurkowych
     if (productType.id === 'walek' && printerCategory.id === 'desktop') {
       return {
-        title: 'Wałki dociskowe do drukarek biurkowych Zebra ZD220, ZD421, ZD621 | TAKMA',
-        description: 'Oryginalne wałki dociskowe (platen roller) do drukarek biurkowych Zebra: ZD220, ZD421, ZD510-HC, ZD621. Rozdzielczości 203/300 DPI. Wysyłka 24-72h.',
+        title: 'Wałki dociskowe do drukarek biurkowych Zebra ZD | TAKMA',
+        description: 'Oryginalne wałki dociskowe (platen roller) do drukarek biurkowych Zebra: ZD220, ZD230, ZD421, ZD621, ZD510-HC. Wysyłka 24h, gwarancja 12 miesięcy.',
         keywords: 'wałek zd421, wałek zd621, wałek zd220, platen roller zebra biurkowa, wałek dociskowy 203 dpi, wymiana wałka zebra',
         openGraph: {
           title: 'Wałki dociskowe do drukarek biurkowych Zebra | TAKMA',
@@ -1474,8 +1499,8 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
     })
   } : null
 
-  // CollectionPage Schema — kategoria głowic i jej podkategorie
-  const glowiceCollectionPages: Record<string, { url: string; description: string }> = {
+  // CollectionPage Schema — kategorie głowic i wałków wraz z podkategoriami
+  const collectionPagesMap: Record<string, { url: string; description: string }> = {
     'glowice': {
       url: 'https://www.serwis-zebry.pl/sklep/glowice',
       description: 'Oryginalne głowice do drukarek etykiet Zebra w rozdzielczościach 203, 300 i 600 DPI — do drukarek biurkowych i przemysłowych.'
@@ -1487,9 +1512,23 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
     'glowice/drukarki-przemyslowe': {
       url: 'https://www.serwis-zebry.pl/sklep/glowice/drukarki-przemyslowe',
       description: 'Oryginalne głowice do drukarek przemysłowych Zebra serii ZT, 105SL i ZM w rozdzielczościach 203, 300 i 600 DPI.'
+    },
+    'walki-dociskowe': {
+      url: 'https://www.serwis-zebry.pl/sklep/walki-dociskowe',
+      description: 'Oryginalne wałki dociskowe (platen roller) do drukarek etykiet Zebra — do modeli biurkowych ZD i przemysłowych ZT.'
+    },
+    'walki-dociskowe/drukarki-biurkowe': {
+      url: 'https://www.serwis-zebry.pl/sklep/walki-dociskowe/drukarki-biurkowe',
+      description: 'Oryginalne wałki dociskowe do drukarek biurkowych Zebra serii ZD220, ZD230, ZD421, ZD621 i ZD510-HC.'
+    },
+    'walki-dociskowe/drukarki-przemyslowe': {
+      url: 'https://www.serwis-zebry.pl/sklep/walki-dociskowe/drukarki-przemyslowe',
+      description: 'Oryginalne wałki dociskowe do drukarek przemysłowych Zebra serii ZT230, ZT411, ZT421, ZT510, ZT610 i ZT620.'
     }
   }
-  const glowiceCollection = productType.id === 'glowica' ? glowiceCollectionPages[slugPath.join('/')] : undefined
+  const glowiceCollection = (productType.id === 'glowica' || productType.id === 'walek')
+    ? collectionPagesMap[slugPath.join('/')]
+    : undefined
   const collectionPageSchema = glowiceCollection ? {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
@@ -1512,6 +1551,14 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
   const glowicaMaxPrice = productType.id === 'glowica' && products.length > 0
     ? Math.ceil(Math.max(...products.map(p => p.price)))
     : 5448
+  // Analogicznie dla wałków (minimum z DOSTĘPNYCH, max z całego listingu)
+  const walekAvailablePrices = productType.id === 'walek'
+    ? products.filter(p => (p.stock ?? 0) > 0).map(p => p.price)
+    : []
+  const walekMinPrice = walekAvailablePrices.length > 0 ? Math.floor(Math.min(...walekAvailablePrices)) : 73
+  const walekMaxPrice = productType.id === 'walek' && products.length > 0
+    ? Math.ceil(Math.max(...products.map(p => p.price)))
+    : 536
   const formatPln = (v: number) => v.toLocaleString('pl-PL')
 
   // BreadcrumbList Schema dla kategorii
@@ -1829,42 +1876,63 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
                   <strong>Wałek dociskowy (platen roller)</strong> to gumowy cylinder odpowiedzialny za równomierny
                   transport materiału pod głowicą drukującą. Współpracuje z głowicą, zapewniając stały docisk etykiety
                   podczas druku — od jego stanu zależy jakość wydruku i prawidłowe prowadzenie materiału.
+                  Prawidłowo dobrany wałek dociskowy do drukarki musi zgadzać się z pełnym symbolem modelu —
+                  dlatego każdy wałek do drukarki Zebra w naszym sklepie ma przypisany Part Number
+                  i listę zgodnych urządzeń. Sama wymiana wałka zajmuje kilka minut i nie wymaga
+                  wizyty w serwisie. Ceny zaczynają się od {formatPln(walekMinPrice)} zł netto.
                 </p>
 
                 <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
                   Tabela Part Numbers — wałki Zebra
                 </h3>
                 <div className="overflow-x-auto mb-6">
+                  {/* Tabela generowana z bazy produktów — PN, ceny i dostępność zawsze aktualne */}
                   <table className="w-full text-sm">
                     <thead className="bg-gray-50">
                       <tr>
                         <th className="px-3 py-2 text-left font-semibold">Model drukarki</th>
-                        <th className="px-3 py-2 text-left font-semibold">Part Number wałka</th>
-                        <th className="px-3 py-2 text-left font-semibold">Szerokość</th>
-                        <th className="px-3 py-2 text-left font-semibold">Kompatybilność</th>
+                        <th className="px-3 py-2 text-left font-semibold">Rozdzielczość</th>
+                        <th className="px-3 py-2 text-left font-semibold">Part Number</th>
+                        <th className="px-3 py-2 text-left font-semibold">Cena (netto)</th>
+                        <th className="px-3 py-2 text-left font-semibold">Dostępność</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-100">
-                      <tr><td className="px-3 py-2 font-medium">ZT411 / ZT410</td><td className="px-3 py-2 font-mono text-xs">P1058930-080</td><td className="px-3 py-2">104 mm</td><td className="px-3 py-2 text-xs text-gray-500">ZT410, ZT411</td></tr>
-                      <tr><td className="px-3 py-2 font-medium">ZT421 / ZT420</td><td className="px-3 py-2 font-mono text-xs">P1058930-081</td><td className="px-3 py-2">168 mm</td><td className="px-3 py-2 text-xs text-gray-500">ZT420, ZT421</td></tr>
-                      <tr><td className="px-3 py-2 font-medium">ZT610</td><td className="px-3 py-2 font-mono text-xs">P1083347-005</td><td className="px-3 py-2">104 mm</td><td className="px-3 py-2 text-xs text-gray-500">ZT610</td></tr>
-                      <tr><td className="px-3 py-2 font-medium">ZT620</td><td className="px-3 py-2 font-mono text-xs">P1083347-006</td><td className="px-3 py-2">168 mm</td><td className="px-3 py-2 text-xs text-gray-500">ZT620</td></tr>
-                      <tr><td className="px-3 py-2 font-medium">ZT230</td><td className="px-3 py-2 font-mono text-xs">P1037974-003</td><td className="px-3 py-2">104 mm</td><td className="px-3 py-2 text-xs text-gray-500">ZT230</td></tr>
-                      <tr><td className="px-3 py-2 font-medium">ZT510</td><td className="px-3 py-2 font-mono text-xs">P1083347-018</td><td className="px-3 py-2">104 mm</td><td className="px-3 py-2 text-xs text-gray-500">ZT510</td></tr>
-                      <tr><td className="px-3 py-2 font-medium">ZD421 / ZD411 / ZD621</td><td className="px-3 py-2 font-mono text-xs">P1112640-016</td><td className="px-3 py-2">56 mm</td><td className="px-3 py-2 text-xs text-gray-500">ZD411, ZD421, ZD611, ZD621</td></tr>
-                      <tr><td className="px-3 py-2 font-medium">ZD220 / ZD230</td><td className="px-3 py-2 font-mono text-xs">P1080383-417</td><td className="px-3 py-2">56 mm</td><td className="px-3 py-2 text-xs text-gray-500">ZD220, ZD230</td></tr>
-                      <tr><td className="px-3 py-2 font-medium">ZD510-HC</td><td className="px-3 py-2 font-mono text-xs">P1112640-017</td><td className="px-3 py-2">56 mm</td><td className="px-3 py-2 text-xs text-gray-500">ZD510-HC (medyczny)</td></tr>
+                      {[...products]
+                        .filter(p => p.device_model)
+                        .sort((a, b) => a.device_model.localeCompare(b.device_model, 'pl') || ((a.resolution_dpi ?? 0) - (b.resolution_dpi ?? 0)))
+                        .map(p => (
+                          <tr key={p.sku}>
+                            <td className="px-3 py-2 font-medium">{p.device_model}</td>
+                            <td className="px-3 py-2">{p.resolution_dpi ? `${p.resolution_dpi} DPI` : 'wszystkie'}</td>
+                            <td className="px-3 py-2 font-mono text-xs">{p.sku}</td>
+                            <td className="px-3 py-2">{formatPln(Math.round(p.price))} zł</td>
+                            <td className="px-3 py-2">{(p.stock ?? 0) > 0 ? 'Dostępny' : 'Chwilowo niedostępny'}</td>
+                          </tr>
+                        ))}
                     </tbody>
                   </table>
                 </div>
+
+                <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
+                  Czy wałek zależy od rozdzielczości drukarki?
+                </h3>
+                <p className="text-gray-600 leading-relaxed mb-4">
+                  W drukarkach <strong>przemysłowych ZT</strong> — nie: jeden wałek pasuje do wszystkich wariantów
+                  DPI danego modelu (w tabeli „wszystkie"). W drukarkach <strong>biurkowych serii ZD</strong> jest
+                  inaczej: wałki dla wersji 203 i 300 DPI mają osobne Part Numbers, a dodatkowo wersja termiczna (d)
+                  i termotransferowa (t) używają innych wałków — np. ZD421d 203 DPI to P1112640-061,
+                  a ZD421t 203 DPI to P1112640-216. Przy zamawianiu wałka do drukarki biurkowej zawsze
+                  sprawdzaj pełny symbol modelu i rozdzielczość z raportu konfiguracji.
+                </p>
 
                 <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
                   Kiedy wymienić wałek dociskowy?
                 </h3>
                 <p className="text-gray-600 leading-relaxed mb-4">
                   Wałek wymaga wymiany gdy zauważysz: <strong>nierównomierny wydruk</strong> (jaśniejszy/ciemniejszy w różnych
-                  miejscach), <strong>problemy z prowadzeniem etykiet</strong> (zacięcia, krzywy podawanie),
-                  <strong>poślizg materiału</strong>, lub <strong>widoczne zużycie gumy</strong> (stwardnienie, pęknięcia,
+                  miejscach), <strong>problemy z prowadzeniem etykiet</strong> (zacięcia, krzywe podawanie),
+                  <strong> poślizg materiału</strong> lub <strong>widoczne zużycie gumy</strong> (stwardnienie, pęknięcia,
                   wgłębienia). Typowa żywotność to 500 000 - 1 000 000 etykiet (2-3 lata).
                   <strong> Zebra zaleca wymianę wałka razem z głowicą</strong> — stary wałek skraca żywotność nowej głowicy.
                 </p>
@@ -1873,29 +1941,33 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
                   Najczęściej zadawane pytania
                 </h3>
                 <div className="space-y-4 mb-6">
-                  <div className="border-l-4 border-blue-500 pl-4">
+                  <div className="border border-slate-200 rounded-xl p-4">
                     <p className="font-semibold text-gray-900">Jak dobrać wałek do drukarki?</p>
-                    <p className="text-gray-600 text-sm mt-1">Sprawdź model drukarki na tabliczce znamionowej i znajdź odpowiedni Part Number w tabeli powyżej. Wałki nie zależą od rozdzielczości — jeden wałek pasuje do wszystkich wariantów DPI danego modelu.</p>
+                    <p className="text-gray-600 text-sm mt-1">Sprawdź model drukarki na tabliczce znamionowej i znajdź odpowiedni Part Number w tabeli powyżej. W przemysłowych ZT jeden wałek pasuje do wszystkich wariantów DPI; w biurkowych ZD wałek zależy od rozdzielczości (203/300 DPI) i wersji druku (d/t).</p>
                   </div>
-                  <div className="border-l-4 border-blue-500 pl-4">
+                  <div className="border border-slate-200 rounded-xl p-4">
                     <p className="font-semibold text-gray-900">Czy wymienić wałek razem z głowicą?</p>
-                    <p className="text-gray-600 text-sm mt-1">Tak — Zebra zaleca wymianę wałka przy każdej wymianie głowicy. Stary, nierówny wałek skraca żywotność nowej głowicy i pogarsza jakość druku od pierwszego dnia. Koszt wałka jest niewielki w porównaniu z głowicą.</p>
+                    <p className="text-gray-600 text-sm mt-1">Tak — Zebra zaleca wymianę wałka przy każdej wymianie głowicy. Stary, nierówny wałek skraca żywotność nowej głowicy i pogarsza jakość druku od pierwszego dnia. Przy cenie wałka od {formatPln(walekMinPrice)} zł to niewielki koszt w porównaniu z głowicą.</p>
                   </div>
-                  <div className="border-l-4 border-blue-500 pl-4">
+                  <div className="border border-slate-200 rounded-xl p-4">
                     <p className="font-semibold text-gray-900">Jakie są objawy zużytego wałka?</p>
                     <p className="text-gray-600 text-sm mt-1">Nierówny docisk (jasne/ciemne paski), poślizg etykiet, zacięcia papieru, zwiększony hałas podczas druku, błędy kalibracji czujników. Widoczne uszkodzenia gumy (pęknięcia, wgniecenia) wymagają natychmiastowej wymiany.</p>
                   </div>
-                  <div className="border-l-4 border-blue-500 pl-4">
+                  <div className="border border-slate-200 rounded-xl p-4">
+                    <p className="font-semibold text-gray-900">Ile kosztuje wałek do drukarki Zebra?</p>
+                    <p className="text-gray-600 text-sm mt-1">Oryginalne wałki dociskowe Zebra kosztują od {formatPln(walekMinPrice)} zł netto (biurkowe ZD) do {formatPln(walekMaxPrice)} zł (przemysłowe ZT i medyczny ZD510-HC). Wałki do drukarek przemysłowych 168 mm są droższe od wersji 104 mm.</p>
+                  </div>
+                  <div className="border border-slate-200 rounded-xl p-4">
                     <p className="font-semibold text-gray-900">Jak czyścić wałek dociskowy?</p>
                     <p className="text-gray-600 text-sm mt-1">Czyść wałek alkoholem izopropylowym (IPA 99%) co 5 000-10 000 etykiet lub przy wymianie rolki materiału. Obracaj wałek i przecieraj całą powierzchnię. Nigdy nie używaj rozpuszczalników ani ostrych narzędzi.</p>
                   </div>
-                  <div className="border-l-4 border-blue-500 pl-4">
+                  <div className="border border-slate-200 rounded-xl p-4">
                     <p className="font-semibold text-gray-900">Jaka jest żywotność wałka dociskowego?</p>
                     <p className="text-gray-600 text-sm mt-1">Oryginalny wałek Zebra wytrzymuje 500 000 - 1 000 000 etykiet (ok. 150-300 km wydruku), co przekłada się na 2-3 lata przy normalnym użytkowaniu. Regularne czyszczenie wydłuża żywotność nawet dwukrotnie.</p>
                   </div>
-                  <div className="border-l-4 border-green-500 pl-4">
+                  <div className="border border-slate-200 rounded-xl p-4">
                     <p className="font-semibold text-gray-900">Jak wymienić wałek — krok po kroku?</p>
-                    <p className="text-gray-600 text-sm mt-1">Wyłącz drukarkę, otwórz pokrywę, zwolnij mechanizm blokujący (dźwignia/zatrzask), wyjmij stary wałek, włóż nowy i zablokuj. Po wymianie wykonaj kalibrację czujników. Cała operacja zajmuje 2-5 minut.</p>
+                    <p className="text-gray-600 text-sm mt-1">Wyłącz drukarkę, otwórz pokrywę, zwolnij mechanizm blokujący (dźwignia/zatrzask), wyjmij stary wałek, włóż nowy i zablokuj. Po wymianie wałka wykonaj kalibrację czujników. Cała operacja zajmuje 2-5 minut.</p>
                   </div>
                 </div>
 
@@ -1917,12 +1989,13 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
               "@context": "https://schema.org",
               "@type": "FAQPage",
               "mainEntity": [
-                { "@type": "Question", "name": "Jak dobrać wałek do drukarki?", "acceptedAnswer": { "@type": "Answer", "text": "Sprawdź model drukarki na tabliczce znamionowej. Wałki nie zależą od rozdzielczości — jeden wałek pasuje do wszystkich wariantów DPI danego modelu." }},
+                { "@type": "Question", "name": "Jak dobrać wałek do drukarki?", "acceptedAnswer": { "@type": "Answer", "text": "Sprawdź model drukarki na tabliczce znamionowej. W przemysłowych ZT jeden wałek pasuje do wszystkich wariantów DPI; w biurkowych ZD wałek zależy od rozdzielczości (203/300 DPI) i wersji druku (d/t)." }},
                 { "@type": "Question", "name": "Czy wymienić wałek razem z głowicą?", "acceptedAnswer": { "@type": "Answer", "text": "Tak — Zebra zaleca wymianę wałka przy każdej wymianie głowicy. Stary wałek skraca żywotność nowej głowicy." }},
                 { "@type": "Question", "name": "Jakie są objawy zużytego wałka?", "acceptedAnswer": { "@type": "Answer", "text": "Nierówny docisk, poślizg etykiet, zacięcia papieru, zwiększony hałas, błędy kalibracji czujników." }},
+                { "@type": "Question", "name": "Ile kosztuje wałek do drukarki Zebra?", "acceptedAnswer": { "@type": "Answer", "text": `Oryginalne wałki dociskowe Zebra kosztują od ${formatPln(walekMinPrice)} zł netto (biurkowe ZD) do ${formatPln(walekMaxPrice)} zł (przemysłowe ZT i medyczny ZD510-HC).` }},
                 { "@type": "Question", "name": "Jak czyścić wałek dociskowy?", "acceptedAnswer": { "@type": "Answer", "text": "Czyść alkoholem izopropylowym (IPA 99%) co 5 000-10 000 etykiet. Nigdy nie używaj rozpuszczalników." }},
                 { "@type": "Question", "name": "Jaka jest żywotność wałka dociskowego?", "acceptedAnswer": { "@type": "Answer", "text": "500 000 - 1 000 000 etykiet (150-300 km), ok. 2-3 lata przy normalnym użytkowaniu." }},
-                { "@type": "Question", "name": "Jak wymienić wałek — krok po kroku?", "acceptedAnswer": { "@type": "Answer", "text": "Wyłącz drukarkę, otwórz pokrywę, zwolnij mechanizm blokujący, wyjmij stary wałek, włóż nowy i zablokuj. 2-5 minut." }}
+                { "@type": "Question", "name": "Jak wymienić wałek — krok po kroku?", "acceptedAnswer": { "@type": "Answer", "text": "Wyłącz drukarkę, otwórz pokrywę, zwolnij mechanizm blokujący, wyjmij stary wałek, włóż nowy i zablokuj. Po wymianie wykonaj kalibrację czujników. 2-5 minut." }}
               ]
             }) }}
           />
@@ -2819,27 +2892,42 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
                 </p>
 
                 <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
-                  Wałki do popularnych modeli przemysłowych
+                  Tabela Part Numbers — wałki przemysłowe
                 </h3>
                 <div className="overflow-x-auto mb-6">
+                  {/* Tabela generowana z bazy produktów — PN, ceny i dostępność zawsze aktualne */}
                   <table className="w-full text-sm">
                     <thead className="bg-gray-50">
                       <tr>
                         <th className="px-3 py-2 text-left font-semibold">Model drukarki</th>
-                        <th className="px-3 py-2 text-left font-semibold">Part Number wałka</th>
-                        <th className="px-3 py-2 text-left font-semibold">Szerokość</th>
+                        <th className="px-3 py-2 text-left font-semibold">Rozdzielczość</th>
+                        <th className="px-3 py-2 text-left font-semibold">Part Number</th>
+                        <th className="px-3 py-2 text-left font-semibold">Cena (netto)</th>
+                        <th className="px-3 py-2 text-left font-semibold">Dostępność</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-100">
-                      <tr><td className="px-3 py-2">ZT230</td><td className="px-3 py-2">P1037974-003</td><td className="px-3 py-2">104 mm (4")</td></tr>
-                      <tr><td className="px-3 py-2">ZT411</td><td className="px-3 py-2">P1058930-080</td><td className="px-3 py-2">104 mm (4")</td></tr>
-                      <tr><td className="px-3 py-2">ZT421</td><td className="px-3 py-2">P1058930-081</td><td className="px-3 py-2">168 mm (6.6")</td></tr>
-                      <tr><td className="px-3 py-2">ZT510</td><td className="px-3 py-2">P1083347-018</td><td className="px-3 py-2">104 mm (4")</td></tr>
-                      <tr><td className="px-3 py-2">ZT610</td><td className="px-3 py-2">P1083347-005</td><td className="px-3 py-2">104 mm (4")</td></tr>
-                      <tr><td className="px-3 py-2">ZT620</td><td className="px-3 py-2">P1083347-006</td><td className="px-3 py-2">168 mm (6.6")</td></tr>
+                      {[...products]
+                        .filter(p => p.device_model)
+                        .sort((a, b) => a.device_model.localeCompare(b.device_model, 'pl') || ((a.resolution_dpi ?? 0) - (b.resolution_dpi ?? 0)))
+                        .map(p => (
+                          <tr key={p.sku}>
+                            <td className="px-3 py-2 font-medium">{p.device_model}</td>
+                            <td className="px-3 py-2">{p.resolution_dpi ? `${p.resolution_dpi} DPI` : 'wszystkie'}</td>
+                            <td className="px-3 py-2 font-mono text-xs">{p.sku}</td>
+                            <td className="px-3 py-2">{formatPln(Math.round(p.price))} zł</td>
+                            <td className="px-3 py-2">{(p.stock ?? 0) > 0 ? 'Dostępny' : 'Chwilowo niedostępny'}</td>
+                          </tr>
+                        ))}
                     </tbody>
                   </table>
                 </div>
+                <p className="text-gray-600 leading-relaxed mb-4">
+                  Wałek ZT411 (P1058930-080) i wałek ZT610 (P1083320-032) to maszyny 104 mm (4") —
+                  ich odpowiedniki do szerokich drukarek 168 mm (6.6"), czyli ZT421 i ZT620, są fizycznie
+                  dłuższe i mają osobne Part Numbers. W przemysłowych ZT jeden wałek pasuje do wszystkich
+                  rozdzielczości danego modelu, więc przy wymianie wałka liczy się wyłącznie symbol drukarki.
+                </p>
 
                 <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
                   Kiedy wymienić wałek dociskowy?
@@ -2869,19 +2957,24 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
                   FAQ — Wałki przemysłowe
                 </h3>
                 <div className="space-y-4 mb-6">
-                  <div className="border-l-4 border-green-500 pl-4">
+                  <div className="border border-slate-200 rounded-xl p-4">
                     <p className="font-semibold text-gray-900">Czy wałek ZT410 pasuje do ZT411?</p>
                     <p className="text-gray-600 text-sm mt-1"><strong>Tak!</strong> Wałki do ZT410 i ZT411 są wymienne.
                     Zebra zachowała identyczną konstrukcję mechaniczną wałka w obu generacjach.
                     Part Number: <strong>P1058930-080</strong>.</p>
                   </div>
-                  <div className="border-l-4 border-blue-500 pl-4">
+                  <div className="border border-slate-200 rounded-xl p-4">
+                    <p className="font-semibold text-gray-900">Czy wałek ZT610 pasuje do ZT620?</p>
+                    <p className="text-gray-600 text-sm mt-1">Nie. ZT610 to drukarka 104 mm (wałek P1083320-032),
+                    a ZT620 — 168 mm (wałek P1083320-033). Wałki mają różną długość i nie są wymienne.</p>
+                  </div>
+                  <div className="border border-slate-200 rounded-xl p-4">
                     <p className="font-semibold text-gray-900">Czy wałek wpływa na jakość druku?</p>
                     <p className="text-gray-600 text-sm mt-1">Tak, bezpośrednio. Wałek odpowiada za równomierny
                     docisk etykiety do głowicy na całej szerokości druku. Zużyty wałek to najczęstsza przyczyna
                     pasków i nierównego wydruku — nawet z nową głowicą.</p>
                   </div>
-                  <div className="border-l-4 border-blue-500 pl-4">
+                  <div className="border border-slate-200 rounded-xl p-4">
                     <p className="font-semibold text-gray-900">Wałek i głowica — wymienić razem?</p>
                     <p className="text-gray-600 text-sm mt-1">Zebra zaleca wymianę wałka przy każdej wymianie głowicy.
                     Stary, nierówny wałek skraca żywotność nowej głowicy i pogarsza jakość druku od pierwszego dnia.</p>
@@ -2909,6 +3002,7 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
               "@type": "FAQPage",
               "mainEntity": [
                 { "@type": "Question", "name": "Czy wałek ZT410 pasuje do ZT411?", "acceptedAnswer": { "@type": "Answer", "text": "Tak! Wałki do ZT410 i ZT411 są wymienne. Zebra zachowała identyczną konstrukcję mechaniczną. Part Number: P1058930-080." }},
+                { "@type": "Question", "name": "Czy wałek ZT610 pasuje do ZT620?", "acceptedAnswer": { "@type": "Answer", "text": "Nie. ZT610 to drukarka 104 mm (wałek P1083320-032), a ZT620 — 168 mm (wałek P1083320-033). Wałki mają różną długość i nie są wymienne." }},
                 { "@type": "Question", "name": "Czy wałek wpływa na jakość druku?", "acceptedAnswer": { "@type": "Answer", "text": "Tak, bezpośrednio. Wałek odpowiada za równomierny docisk etykiety do głowicy na całej szerokości druku. Zużyty wałek to najczęstsza przyczyna pasków i nierównego wydruku." }},
                 { "@type": "Question", "name": "Wałek i głowica — wymienić razem?", "acceptedAnswer": { "@type": "Answer", "text": "Zebra zaleca wymianę wałka przy każdej wymianie głowicy. Stary, nierówny wałek skraca żywotność nowej głowicy i pogarsza jakość druku od pierwszego dnia." }}
               ]
@@ -2933,25 +3027,48 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
                 </p>
 
                 <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
-                  Wałki do popularnych modeli biurkowych
+                  Tabela Part Numbers — wałki biurkowe
                 </h3>
                 <div className="overflow-x-auto mb-6">
+                  {/* Tabela generowana z bazy produktów — PN, ceny i dostępność zawsze aktualne */}
                   <table className="w-full text-sm">
                     <thead className="bg-gray-50">
                       <tr>
                         <th className="px-3 py-2 text-left font-semibold">Model drukarki</th>
-                        <th className="px-3 py-2 text-left font-semibold">Part Number wałka</th>
-                        <th className="px-3 py-2 text-left font-semibold">Zastosowanie</th>
+                        <th className="px-3 py-2 text-left font-semibold">Rozdzielczość</th>
+                        <th className="px-3 py-2 text-left font-semibold">Part Number</th>
+                        <th className="px-3 py-2 text-left font-semibold">Cena (netto)</th>
+                        <th className="px-3 py-2 text-left font-semibold">Dostępność</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-100">
-                      <tr><td className="px-3 py-2">ZD220 / ZD230</td><td className="px-3 py-2">P1080383-417</td><td className="px-3 py-2">Etykiety wysyłkowe, cenówki</td></tr>
-                      <tr><td className="px-3 py-2">ZD411 / ZD421</td><td className="px-3 py-2">P1112640-016</td><td className="px-3 py-2">Magazyn, apteki, laboratoria</td></tr>
-                      <tr><td className="px-3 py-2">ZD510-HC</td><td className="px-3 py-2">P1112640-017</td><td className="px-3 py-2">Szpitale, opaska na rękę</td></tr>
-                      <tr><td className="px-3 py-2">ZD611 / ZD621</td><td className="px-3 py-2">P1112640-016</td><td className="px-3 py-2">Logistyka, etykiety produktowe</td></tr>
+                      {[...products]
+                        .filter(p => p.device_model)
+                        .sort((a, b) => a.device_model.localeCompare(b.device_model, 'pl') || ((a.resolution_dpi ?? 0) - (b.resolution_dpi ?? 0)))
+                        .map(p => (
+                          <tr key={p.sku}>
+                            <td className="px-3 py-2 font-medium">{p.device_model}</td>
+                            <td className="px-3 py-2">{p.resolution_dpi ? `${p.resolution_dpi} DPI` : 'wszystkie'}</td>
+                            <td className="px-3 py-2 font-mono text-xs">{p.sku}</td>
+                            <td className="px-3 py-2">{formatPln(Math.round(p.price))} zł</td>
+                            <td className="px-3 py-2">{(p.stock ?? 0) > 0 ? 'Dostępny' : 'Chwilowo niedostępny'}</td>
+                          </tr>
+                        ))}
                     </tbody>
                   </table>
                 </div>
+
+                <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
+                  Wałek w serii ZD zależy od rozdzielczości i wersji druku
+                </h3>
+                <p className="text-gray-600 leading-relaxed mb-4">
+                  Inaczej niż w drukarkach przemysłowych, w serii ZD wałek dociskowy jest dobierany
+                  do konkretnej konfiguracji: wersja 203 i 300 DPI ma osobne Part Numbers, a wersja
+                  termiczna (d) i termotransferowa (t) — również. Przykład: wałek ZD421d 203 DPI to
+                  P1112640-061 (wspólny z ZD621d), ale wałek ZD421t 203 DPI to już P1112640-216.
+                  Przed zamówieniem sprawdź pełny symbol modelu z tabliczki znamionowej
+                  i rozdzielczość z raportu konfiguracji drukarki.
+                </p>
 
                 <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
                   Objawy zużytego wałka w drukarce biurkowej
@@ -2970,25 +3087,42 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
                 </h3>
                 <p className="text-gray-600 leading-relaxed mb-4">
                   Drukarka <strong>ZD510-HC (Healthcare)</strong> jest przeznaczona do szpitali i klinik —
-                  drukuje opaski na rękę pacjentów. Wałek P1112640-017 w tym modelu jest odporny na
+                  drukuje opaski na rękę pacjentów. Wałek P1100266-008 w tym modelu jest odporny na
                   środki dezynfekujące stosowane w placówkach medycznych. Stosowanie nieoryginalnych
                   zamienników może prowadzić do degradacji gumy pod wpływem chemikaliów.
+                </p>
+
+                <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
+                  Wymiana wałka w drukarce biurkowej
+                </h3>
+                <p className="text-gray-600 leading-relaxed mb-4">
+                  W serii ZD wymiana wałka nie wymaga narzędzi: wyłącz drukarkę, otwórz pokrywę,
+                  zwolnij zatrzaski łożysk po obu stronach wałka, wyjmij stary wałek i wciśnij nowy
+                  do zatrzaśnięcia. Po wymianie wałka wykonaj kalibrację czujników — bez niej drukarka
+                  może źle wykrywać przerwy między etykietami. Cała operacja zajmuje 2-3 minuty.
                 </p>
 
                 <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
                   FAQ — Wałki biurkowe
                 </h3>
                 <div className="space-y-4 mb-6">
-                  <div className="border-l-4 border-green-500 pl-4">
-                    <p className="font-semibold text-gray-900">Czy wałek ZD411 pasuje do ZD421?</p>
-                    <p className="text-gray-600 text-sm mt-1"><strong>Tak!</strong> Oba modele używają tego samego wałka
-                    P1112640-016. ZD421 to szersza wersja ZD411 z tą samą mechaniką wałka.</p>
+                  <div className="border border-slate-200 rounded-xl p-4">
+                    <p className="font-semibold text-gray-900">Czy wałek ZD421d pasuje do ZD421t?</p>
+                    <p className="text-gray-600 text-sm mt-1">Nie — wersja termiczna i termotransferowa mają osobne wałki:
+                    ZD421d 203 DPI to P1112640-061, a ZD421t 203 DPI to P1112640-216. Do tego wersje 203 i 300 DPI
+                    również różnią się Part Number. Dobieraj wałek po pełnym symbolu modelu.</p>
                   </div>
-                  <div className="border-l-4 border-blue-500 pl-4">
+                  <div className="border border-slate-200 rounded-xl p-4">
+                    <p className="font-semibold text-gray-900">Czy wałek ZD421 pasuje do ZD621?</p>
+                    <p className="text-gray-600 text-sm mt-1">W wersjach termicznych (d) — tak: ZD421d i ZD621d używają
+                    wspólnych wałków P1112640-061 (203 DPI) i P1112640-062 (300 DPI). Wersje termotransferowe (t)
+                    mają już osobne Part Numbers dla każdego modelu.</p>
+                  </div>
+                  <div className="border border-slate-200 rounded-xl p-4">
                     <p className="font-semibold text-gray-900">Czy mogę używać zamiennika wałka?</p>
                     <p className="text-gray-600 text-sm mt-1">Nieoryginalne wałki mają inną twardość gumy (Shore A)
-                    i mogą powodować nierówny docisk, przyspieszając zużycie głowicy. Przy stosunkowo niskiej cenie
-                    wałka oryginalnego — to ryzyko nie jest warte oszczędności.</p>
+                    i mogą powodować nierówny docisk, przyspieszając zużycie głowicy. Przy cenie oryginalnego wałka
+                    biurkowego od {formatPln(walekMinPrice)} zł — to ryzyko nie jest warte oszczędności.</p>
                   </div>
                 </div>
 
@@ -3012,7 +3146,8 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
               "@context": "https://schema.org",
               "@type": "FAQPage",
               "mainEntity": [
-                { "@type": "Question", "name": "Czy wałek ZD411 pasuje do ZD421?", "acceptedAnswer": { "@type": "Answer", "text": "Tak! Oba modele używają tego samego wałka P1112640-016. ZD421 to szersza wersja ZD411 z tą samą mechaniką wałka." }},
+                { "@type": "Question", "name": "Czy wałek ZD421d pasuje do ZD421t?", "acceptedAnswer": { "@type": "Answer", "text": "Nie — wersja termiczna i termotransferowa mają osobne wałki: ZD421d 203 DPI to P1112640-061, a ZD421t 203 DPI to P1112640-216. Wersje 203 i 300 DPI również różnią się Part Number." }},
+                { "@type": "Question", "name": "Czy wałek ZD421 pasuje do ZD621?", "acceptedAnswer": { "@type": "Answer", "text": "W wersjach termicznych (d) tak: ZD421d i ZD621d używają wspólnych wałków P1112640-061 (203 DPI) i P1112640-062 (300 DPI). Wersje termotransferowe (t) mają osobne Part Numbers." }},
                 { "@type": "Question", "name": "Czy mogę używać zamiennika wałka?", "acceptedAnswer": { "@type": "Answer", "text": "Nieoryginalne wałki mają inną twardość gumy (Shore A) i mogą powodować nierówny docisk, przyspieszając zużycie głowicy. Przy niskiej cenie wałka oryginalnego — to ryzyko nie jest warte oszczędności." }}
               ]
             }) }}

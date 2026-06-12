@@ -18,6 +18,8 @@ const BASE_URL = urlIdx > -1 ? process.argv[urlIdx + 1] : 'http://localhost:3002
 interface PageConfig {
   path: string
   canonical: string
+  /** product_type w bazie (glowica | walek) — do weryfikacji tabeli PN i cen */
+  productType: string
   mainPhrase: string
   /** frazy wymagane w H2/H3/akapitach/listach tej strony */
   phrases: string[]
@@ -31,6 +33,7 @@ const PAGES: PageConfig[] = [
   {
     path: '/sklep/glowice',
     canonical: 'https://www.serwis-zebry.pl/sklep/glowice',
+    productType: 'glowica',
     mainPhrase: 'głowice do drukarek',
     phrases: [],
     requireClaimInMeta: true,
@@ -39,6 +42,7 @@ const PAGES: PageConfig[] = [
   {
     path: '/sklep/glowice/drukarki-biurkowe',
     canonical: 'https://www.serwis-zebry.pl/sklep/glowice/drukarki-biurkowe',
+    productType: 'glowica',
     mainPhrase: 'głowice do drukarek biurkowych',
     phrases: ['głowica zd421', 'głowica gk420', 'druk termiczny', 'druk termotransferowy', 'wymiana głowicy'],
     requireClaimInMeta: false,
@@ -47,8 +51,36 @@ const PAGES: PageConfig[] = [
   {
     path: '/sklep/glowice/drukarki-przemyslowe',
     canonical: 'https://www.serwis-zebry.pl/sklep/glowice/drukarki-przemyslowe',
+    productType: 'glowica',
     mainPhrase: 'głowice do drukarek przemysłowych',
     phrases: ['głowica zt411', 'głowica zt610', 'szerokość druku', 'wymiana głowicy', 'żywotność'],
+    requireClaimInMeta: false,
+    useSeoDataPhrases: false,
+  },
+  {
+    path: '/sklep/walki-dociskowe',
+    canonical: 'https://www.serwis-zebry.pl/sklep/walki-dociskowe',
+    productType: 'walek',
+    mainPhrase: 'wałki dociskowe do drukarek',
+    phrases: ['wałek dociskowy do drukarki', 'wałek do drukarki zebra', 'platen roller', 'wymiana wałka'],
+    requireClaimInMeta: true,
+    useSeoDataPhrases: false,
+  },
+  {
+    path: '/sklep/walki-dociskowe/drukarki-biurkowe',
+    canonical: 'https://www.serwis-zebry.pl/sklep/walki-dociskowe/drukarki-biurkowe',
+    productType: 'walek',
+    mainPhrase: 'wałki dociskowe do drukarek biurkowych',
+    phrases: ['wałek zd421', 'wymiana wałka', 'platen roller'],
+    requireClaimInMeta: false,
+    useSeoDataPhrases: false,
+  },
+  {
+    path: '/sklep/walki-dociskowe/drukarki-przemyslowe',
+    canonical: 'https://www.serwis-zebry.pl/sklep/walki-dociskowe/drukarki-przemyslowe',
+    productType: 'walek',
+    mainPhrase: 'wałki dociskowe do drukarek przemysłowych',
+    phrases: ['wałek zt411', 'wałek zt610', 'platen roller'],
     requireClaimInMeta: false,
     useSeoDataPhrases: false,
   },
@@ -270,21 +302,30 @@ async function auditPage(cfg: PageConfig, products: Product[], seoData: any): Pr
   return checks
 }
 
-async function main() {
+async function fetchProducts(productType: string): Promise<Product[]> {
   const dbRes = await fetch(
-    `${env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/products?product_type=eq.glowica&is_active=eq.true` +
+    `${env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/products?product_type=eq.${productType}&is_active=eq.true` +
     `&select=sku,name,device_model,resolution_dpi,price,price_brutto,stock,slug`,
     { headers: { apikey: env.SUPABASE_SERVICE_ROLE_KEY, Authorization: `Bearer ${env.SUPABASE_SERVICE_ROLE_KEY}` } }
   )
-  const products: Product[] = await dbRes.json()
-  if (!Array.isArray(products) || products.length === 0) {
-    console.error('Nie udało się pobrać produktów z bazy'); process.exit(2)
+  return dbRes.json()
+}
+
+async function main() {
+  const productTypes = Array.from(new Set(PAGES.map(p => p.productType)))
+  const productsByType = new Map<string, Product[]>()
+  for (const pt of productTypes) {
+    const products = await fetchProducts(pt)
+    if (!Array.isArray(products) || products.length === 0) {
+      console.error(`Nie udało się pobrać produktów typu ${pt} z bazy`); process.exit(2)
+    }
+    productsByType.set(pt, products)
   }
   const seoData = JSON.parse(readFileSync(resolve(ROOT, 'seo-data/glowice.json'), 'utf8'))
 
   let totalPass = 0, totalFail = 0
   for (const cfg of PAGES) {
-    const checks = await auditPage(cfg, products, seoData)
+    const checks = await auditPage(cfg, productsByType.get(cfg.productType)!, seoData)
     const fails = checks.filter(c => c.status === 'FAIL')
     totalPass += checks.length - fails.length
     totalFail += fails.length
