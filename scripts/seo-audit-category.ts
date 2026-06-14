@@ -103,6 +103,15 @@ const PAGES: PageConfig[] = [
     useSeoDataPhrases: false,
   },
   {
+    path: '/sklep/konwertery',
+    canonical: 'https://www.serwis-zebry.pl/sklep/konwertery',
+    productType: 'konwerter',
+    mainPhrase: 'konwertery dpi do drukarek zebra',
+    phrases: ['zmiana rozdzielczości', 'konwersja 203 na 300', 'zestaw konwersji dpi', '203 dpi', '300 dpi', 'zt411'],
+    requireClaimInMeta: true,
+    useSeoDataPhrases: false,
+  },
+  {
     path: '/sklep/akumulatory/terminale',
     canonical: 'https://www.serwis-zebry.pl/sklep/akumulatory/terminale',
     productType: 'akumulator',

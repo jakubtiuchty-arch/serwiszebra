@@ -4,6 +4,16 @@ Checkpoint postępu prac. Najnowszy wpis na górze. Po każdym etapie/buildzie d
 
 ---
 
+## 2026-06-14 — SEO: kontent kategorii Konwertery DPI + karty produktów (pętla, audyt 214/214)
+
+- **Research (Ahrefs+GSC, projekt serwis-zebry 9640672)**: „konwerter dpi" (vol 150, KD 0) = PUŁAPKA intencji (darmowe online konwertery DPI zdjęć — related: online/za darmo/zdjęć). Realna intencja z GSC = **model+DPI**: „zt410 300 dpi", „zebra zt411 dpi settings" (poz. 3.6), „zebra 600 dpi". Target konwerterów = „zmiana rozdzielczości drukarki Zebra", „konwersja 203 na 300 DPI", model-specific — NIE generyczne „konwerter dpi".
+- **Kontent kategorii** `/sklep/konwertery` (blok w `[...slug]/page.tsx`, slugPath===1): intro + „203 czy 300 DPI" + tabela PN (z bazy: Urządzenie/Kierunek/PN/Cena/Dostępność) + lista modeli + 5×FAQ + FAQPage schema + CollectionPage (collectionPagesMap + warunek). Zmienne `konwerterMin/MaxPrice`. Metadata branch skrócony do 140–160 zn.
+- **Karty produktów**: `PRODUCT_TYPE_FAQ['konwerter']` (4 Q&A na stronach produktów) + przepisane 13 opisów (description/description_long/meta) z frazami zmiana rozdzielczości/kierunek/kalibracja (live w PROD DB).
+- **Audyt**: `/sklep/konwertery` dodane do `seo-audit-category.ts` (mainPhrase „konwertery dpi do drukarek zebra", frazy zmiana rozdzielczości/konwersja 203 na 300/zestaw konwersji dpi/203 dpi/300 dpi/zt411, requireClaimInMeta). **Wynik: 21/21, łącznie 214/214 PASS — 100%**, bez regresji.
+- **Stan**: tsc czysto, build EXIT=0. Do commitu+pusha. **TODO**: podkategoria `/sklep/konwertery/drukarki-przemyslowe` (slugPath===2) nie ma jeszcze własnego bloku kontentu — główna kategoria pokrywa temat; do dorobienia jako kolejny increment.
+
+---
+
 ## 2026-06-14 — Sklep: KONWERTERY jako osobna kategoria + zdjęcia
 
 - **Zdjęcie konwertera**: `konwerter.jpg` → `public/sklep_photo/`, ustawione jako `image_url` dla wszystkich 13 konwerterów. **Alt per-konwerter** automatyczny — front renderuje alt z `product.name` (brak kolumny `image_alt`; nazwy są unikalne), linie 1044/235/243.

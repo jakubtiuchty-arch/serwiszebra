@@ -136,6 +136,24 @@ const PRODUCT_TYPE_FAQ: Record<string, Array<{ question: string; answer: string 
       question: 'Czy akumulator z terminala pasuje do drukarki mobilnej?',
       answer: 'Nie — akumulatory Zebra są dedykowane do konkretnych serii urządzeń. Bateria z TC22/TC27 nie pasuje do ZQ630. Każdy model urządzenia wymaga odpowiedniego Part Number baterii. Sprawdź PN na etykiecie starego akumulatora lub w specyfikacji urządzenia.'
     }
+  ],
+  konwerter: [
+    {
+      question: 'Co zawiera zestaw konwersji DPI?',
+      answer: 'Zestaw konwersji DPI zawiera głowicę drukującą o docelowej rozdzielczości oraz elementy potrzebne do zmiany gęstości druku w danej drukarce. Dzięki temu zmienisz rozdzielczość (np. z 203 na 300 DPI) bez kupowania nowej maszyny — wymieniasz tylko głowicę i powiązane części, a następnie aktualizujesz ustawienia drukarki.'
+    },
+    {
+      question: 'Czy zmiana DPI wymaga serwisu?',
+      answer: 'Montaż obejmuje wymianę głowicy i zmianę ustawień rozdzielczości, co wymaga ostrożności i kalibracji. Doświadczony dział utrzymania ruchu zwykle radzi sobie sam, ale zalecamy montaż w autoryzowanym serwisie Zebra — gwarantuje to poprawną kalibrację i zachowanie gwarancji.'
+    },
+    {
+      question: 'Czym różni się 203 DPI od 300 DPI?',
+      answer: '203 DPI (8 punktów/mm) to standard do etykiet logistycznych i typowych kodów kreskowych — szybciej i taniej. 300 DPI (12 punktów/mm) daje wyższą jakość przy drobnych kodach 2D, małym tekście i etykietach farmaceutycznych. Wybierz rozdzielczość według najmniejszego elementu, jaki musisz wydrukować czytelnie.'
+    },
+    {
+      question: 'Czy konwersja jest odwracalna?',
+      answer: 'Tak — odpowiednim zestawem możesz wrócić do poprzedniej rozdzielczości (np. z 300 z powrotem na 203 DPI). Drukarka pozostaje ta sama, zmienia się tylko głowica i ustawienia gęstości druku.'
+    }
   ]
 }
 
@@ -514,7 +532,7 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
       const availablePrices = konwertery.filter(p => (p.stock ?? 0) > 0).map(p => p.price)
       const minPrice = availablePrices.length > 0 ? Math.floor(Math.min(...availablePrices)) : 1398
       const kTitle = `Konwertery DPI do drukarek Zebra ZT, ZE od ${minPrice} zł | TAKMA`
-      const kDescription = `Oryginalne zestawy konwersji rozdzielczości DPI do drukarek przemysłowych Zebra: ZT111/211/231, ZT411/421, ZE511, ZE521, ZT210/220/230. Zmiana 203↔300↔600 DPI bez wymiany drukarki. Ceny od ${minPrice} zł netto, wysyłka 24h.`
+      const kDescription = `Zestawy konwersji DPI do drukarek przemysłowych Zebra ZT i ZE. Zmień rozdzielczość 203/300/600 DPI bez wymiany drukarki. Ceny od ${minPrice} zł netto, wysyłka 24h.`
       return {
         title: kTitle,
         description: kDescription,
@@ -1681,9 +1699,17 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
     'akumulatory/drukarki-mobilne': {
       url: 'https://www.serwis-zebry.pl/sklep/akumulatory/drukarki-mobilne',
       description: 'Oryginalne akumulatory do drukarek mobilnych Zebra serii ZQ — od ZQ220 Plus do ZQ630 Plus.'
+    },
+    'konwertery': {
+      url: 'https://www.serwis-zebry.pl/sklep/konwertery',
+      description: 'Oryginalne zestawy konwersji rozdzielczości DPI do drukarek przemysłowych Zebra — zmiana 203, 300 i 600 DPI w seriach ZT i print engine ZE bez wymiany drukarki.'
+    },
+    'konwertery/drukarki-przemyslowe': {
+      url: 'https://www.serwis-zebry.pl/sklep/konwertery/drukarki-przemyslowe',
+      description: 'Zestawy konwersji DPI do drukarek przemysłowych Zebra serii ZT111/211/231, ZT410/411/420/421 oraz ZT210/220/230 — zmiana rozdzielczości głowicy 203↔300↔600 DPI.'
     }
   }
-  const glowiceCollection = (productType.id === 'glowica' || productType.id === 'walek' || productType.id === 'akumulator' || productType.id === 'zasilacz')
+  const glowiceCollection = (productType.id === 'glowica' || productType.id === 'walek' || productType.id === 'akumulator' || productType.id === 'zasilacz' || productType.id === 'konwerter')
     ? collectionPagesMap[slugPath.join('/')]
     : undefined
   const collectionPageSchema = glowiceCollection ? {
@@ -1732,6 +1758,14 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
   const zasilaczMaxPrice = productType.id === 'zasilacz' && products.length > 0
     ? Math.ceil(Math.max(...products.map(p => p.price)))
     : 2086
+  // Analogicznie dla konwerterów DPI
+  const konwerterAvailablePrices = productType.id === 'konwerter'
+    ? products.filter(p => (p.stock ?? 0) > 0).map(p => p.price)
+    : []
+  const konwerterMinPrice = konwerterAvailablePrices.length > 0 ? Math.floor(Math.min(...konwerterAvailablePrices)) : 1398
+  const konwerterMaxPrice = productType.id === 'konwerter' && products.length > 0
+    ? Math.ceil(Math.max(...products.map(p => p.price)))
+    : 5682
   // Specyfikacje baterii (typ + pojemność) — dane stałe producenta, klucz = SKU;
   // wiersze tabel pochodzą z bazy, więc nieistniejące produkty nie mają jak się pojawić
   const BATTERY_SPECS: Record<string, string> = {
@@ -2360,6 +2394,135 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
                 { "@type": "Question", "name": "Czy mogę użyć zamiennika zasilacza?", "acceptedAnswer": { "@type": "Answer", "text": "Odradzamy. Drukarki termiczne pobierają wysokie prądy szczytowe przy nagrzewaniu głowicy — zamiennik o zaniżonych parametrach powoduje restarty, blade wydruki i może uszkodzić elektronikę." }},
                 { "@type": "Question", "name": "Drukarka nie włącza się — zasilacz czy coś innego?", "acceptedAnswer": { "@type": "Answer", "text": "Kolejność diagnozy: gniazdko i kabel → dioda na kostce (biurkowe) → wyłącznik zasilania → zasilacz → płyta główna." }},
                 { "@type": "Question", "name": "Czy wymiana zasilacza wymaga serwisu?", "acceptedAnswer": { "@type": "Answer", "text": "W drukarkach biurkowych nie — zasilacz jest zewnętrzny. W przemysłowych ZT/Xi4 wymiana wewnętrznego modułu zajmuje 15-30 minut; oferujemy też wymianę w serwisie." }}
+              ]
+            }) }}
+          />
+          </>
+        )}
+
+        {/* SEO Content Section - Konwertery DPI */}
+        {productType.id === 'konwerter' && slugPath.length === 1 && (
+          <>
+          <section className="py-8 sm:py-12 bg-white border-t border-gray-100">
+            <div className="max-w-4xl mx-auto px-4">
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">
+                Konwertery DPI do drukarek Zebra — zmiana rozdzielczości bez wymiany drukarki
+              </h2>
+
+              <div className="prose prose-sm sm:prose-base prose-gray max-w-none">
+                <p className="text-gray-600 leading-relaxed mb-4">
+                  <strong>Zestaw konwersji DPI</strong> pozwala zmienić rozdzielczość drukowania drukarki
+                  przemysłowej Zebra — najczęściej <strong>konwersja 203 na 300 DPI</strong> albo z powrotem
+                  z 300 na 203 DPI — bez kupowania nowej maszyny. To realna oszczędność, gdy zmieniają się
+                  wymagania: drobne kody 2D, etykiety farmaceutyczne czy mały tekst potrzebują 300 DPI,
+                  a szybki druk etykiet logistycznych wystarczy w 203 DPI. Zmiana rozdzielczości drukarki
+                  Zebra polega na wymianie głowicy na docelową gęstość punktów wraz z elementami zestawu
+                  i aktualizacją ustawień. Ceny zestawów zaczynają się od {formatPln(konwerterMinPrice)} zł netto.
+                </p>
+
+                <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
+                  203 czy 300 DPI — co wybrać?
+                </h3>
+                <p className="text-gray-600 leading-relaxed mb-4">
+                  <strong>203 DPI</strong> (8 punktów/mm) to standard do etykiet logistycznych, wysyłkowych
+                  i typowych kodów kreskowych — drukuje szybciej i taniej. <strong>300 DPI</strong>
+                  (12 punktów/mm) daje wyraźnie wyższą jakość: drobne kody 2D (DataMatrix, QR), mały tekst,
+                  etykiety farmaceutyczne i jubilerskie. Niektóre modele (ZT411, ZT610) obsługują też
+                  <strong> 600 DPI</strong> do najdrobniejszych nadruków. Jeśli kupujesz drukarkę „na zapas",
+                  konwersja w drugą stronę zawsze jest możliwa odpowiednim zestawem.
+                </p>
+
+                <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
+                  Tabela Part Numbers — konwertery DPI Zebra
+                </h3>
+                <div className="overflow-x-auto mb-6">
+                  {/* Tabela generowana z bazy produktów — PN, ceny i dostępność zawsze aktualne */}
+                  <table className="w-full text-sm">
+                    <thead className="bg-gray-50">
+                      <tr>
+                        <th className="px-3 py-2 text-left font-semibold">Urządzenie</th>
+                        <th className="px-3 py-2 text-left font-semibold">Kierunek konwersji</th>
+                        <th className="px-3 py-2 text-left font-semibold">Part Number</th>
+                        <th className="px-3 py-2 text-left font-semibold">Cena (netto)</th>
+                        <th className="px-3 py-2 text-left font-semibold">Dostępność</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-gray-100">
+                      {[...products]
+                        .filter(p => p.device_model)
+                        .sort((a, b) => a.device_model.localeCompare(b.device_model, 'pl') || a.sku.localeCompare(b.sku))
+                        .map(p => (
+                          <tr key={p.sku}>
+                            <td className="px-3 py-2 font-medium">{p.device_model}</td>
+                            <td className="px-3 py-2">{p.name.replace(/^Zestaw konwersji DPI\s*/, '').split(' do drukarki')[0]}</td>
+                            <td className="px-3 py-2 font-mono text-xs">{p.sku}</td>
+                            <td className="px-3 py-2">{formatPln(Math.round(p.price))} zł</td>
+                            <td className="px-3 py-2">{(p.stock ?? 0) > 0 ? 'Dostępny' : 'Chwilowo niedostępny'}</td>
+                          </tr>
+                        ))}
+                    </tbody>
+                  </table>
+                </div>
+
+                <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
+                  Dla jakich drukarek Zebra mamy zestawy konwersji?
+                </h3>
+                <ul className="text-gray-600 space-y-2 mb-4">
+                  <li><strong>Seria ZT111 / ZT211 / ZT231</strong> — kompaktowe przemysłowe, konwersja 203 ↔ 300 DPI.</li>
+                  <li><strong>Seria ZT410 / ZT411 / ZT420 / ZT421</strong> — najpopularniejsze przemysłowe; konwersja 203 ↔ 300 DPI, a dla ZT411 także do 600 DPI.</li>
+                  <li><strong>Seria ZT210 / ZT220 / ZT230</strong> — starsze przemysłowe, konwersja 203 ↔ 300 DPI.</li>
+                  <li><strong>Print engine ZE511 / ZE521</strong> — moduły druku do linii produkcyjnych, konwersja 203 ↔ 300 DPI.</li>
+                </ul>
+
+                <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
+                  Najczęściej zadawane pytania
+                </h3>
+                <div className="space-y-4 mb-6">
+                  <div className="border border-slate-200 rounded-xl p-4">
+                    <p className="font-semibold text-gray-900">Czy mogę zmienić rozdzielczość drukarki Zebra z 203 na 300 DPI?</p>
+                    <p className="text-gray-600 text-sm mt-1">Tak. Zmiana rozdzielczości drukarki Zebra polega na zamontowaniu zestawu konwersji DPI z głowicą docelowej gęstości (np. konwersja 203 na 300 DPI w ZT411) i aktualizacji ustawień. Sama drukarka pozostaje ta sama — wymieniasz tylko głowicę i powiązane elementy.</p>
+                  </div>
+                  <div className="border border-slate-200 rounded-xl p-4">
+                    <p className="font-semibold text-gray-900">Czym różni się 203 DPI od 300 DPI?</p>
+                    <p className="text-gray-600 text-sm mt-1">203 DPI (8 pkt/mm) to standard logistyczny — szybciej i taniej. 300 DPI (12 pkt/mm) daje wyższą jakość przy drobnych kodach 2D, małym tekście i etykietach farmaceutycznych. Wybór zależy od najmniejszego elementu, jaki musisz wydrukować czytelnie.</p>
+                  </div>
+                  <div className="border border-slate-200 rounded-xl p-4">
+                    <p className="font-semibold text-gray-900">Ile kosztuje zmiana DPI w drukarce Zebra?</p>
+                    <p className="text-gray-600 text-sm mt-1">Zestawy konwersji DPI kosztują od {formatPln(konwerterMinPrice)} zł do {formatPln(konwerterMaxPrice)} zł netto, zależnie od modelu i kierunku konwersji. To znacznie taniej niż zakup nowej drukarki o innej rozdzielczości.</p>
+                  </div>
+                  <div className="border border-slate-200 rounded-xl p-4">
+                    <p className="font-semibold text-gray-900">Czy konwersję DPI mogę zrobić samodzielnie?</p>
+                    <p className="text-gray-600 text-sm mt-1">Montaż zestawu obejmuje wymianę głowicy i zmianę ustawień rozdzielczości — wymaga ostrożności i kalibracji. Dział utrzymania ruchu zwykle radzi sobie sam, ale zalecamy montaż w autoryzowanym serwisie Zebra, żeby mieć pewność kalibracji i zachować gwarancję.</p>
+                  </div>
+                  <div className="border border-slate-200 rounded-xl p-4">
+                    <p className="font-semibold text-gray-900">Czy do każdej drukarki Zebra jest zestaw konwersji?</p>
+                    <p className="text-gray-600 text-sm mt-1">Zestawy konwersji DPI są dostępne dla drukarek przemysłowych serii ZT (ZT111/211/231, ZT410/411/420/421, ZT210/220/230) oraz print engine ZE511/ZE521. Konwersja do 600 DPI dotyczy modeli, które tę rozdzielczość obsługują (m.in. ZT411).</p>
+                  </div>
+                </div>
+
+                <div className="bg-blue-50 border border-blue-100 rounded-lg p-4 mt-6">
+                  <p className="text-blue-800 text-sm">
+                    <strong>Nie wiesz, który zestaw pasuje?</strong> Podaj model drukarki i docelową rozdzielczość —
+                    dobierzemy właściwy zestaw konwersji DPI i, jeśli chcesz, wykonamy montaż z kalibracją w serwisie.
+                    <a href="/#formularz" className="underline ml-1">Zapytaj o konwersję →</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* FAQPage Schema — /sklep/konwertery */}
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": [
+                { "@type": "Question", "name": "Czy mogę zmienić rozdzielczość drukarki Zebra z 203 na 300 DPI?", "acceptedAnswer": { "@type": "Answer", "text": "Tak. Zmiana rozdzielczości polega na zamontowaniu zestawu konwersji DPI z głowicą docelowej gęstości (np. konwersja 203 na 300 DPI w ZT411) i aktualizacji ustawień. Drukarka pozostaje ta sama." }},
+                { "@type": "Question", "name": "Czym różni się 203 DPI od 300 DPI?", "acceptedAnswer": { "@type": "Answer", "text": "203 DPI (8 pkt/mm) to standard logistyczny — szybciej i taniej. 300 DPI (12 pkt/mm) daje wyższą jakość przy drobnych kodach 2D, małym tekście i etykietach farmaceutycznych." }},
+                { "@type": "Question", "name": "Ile kosztuje zmiana DPI w drukarce Zebra?", "acceptedAnswer": { "@type": "Answer", "text": `Zestawy konwersji DPI kosztują od ${formatPln(konwerterMinPrice)} zł do ${formatPln(konwerterMaxPrice)} zł netto, zależnie od modelu i kierunku konwersji — znacznie taniej niż nowa drukarka.` }},
+                { "@type": "Question", "name": "Czy konwersję DPI mogę zrobić samodzielnie?", "acceptedAnswer": { "@type": "Answer", "text": "Montaż obejmuje wymianę głowicy i zmianę ustawień rozdzielczości. Zalecamy montaż w autoryzowanym serwisie Zebra dla pewności kalibracji i zachowania gwarancji." }},
+                { "@type": "Question", "name": "Czy do każdej drukarki Zebra jest zestaw konwersji?", "acceptedAnswer": { "@type": "Answer", "text": "Zestawy są dostępne dla drukarek przemysłowych serii ZT (ZT111/211/231, ZT410/411/420/421, ZT210/220/230) oraz print engine ZE511/ZE521. Konwersja do 600 DPI dotyczy modeli ją obsługujących (m.in. ZT411)." }}
               ]
             }) }}
           />
