@@ -1,0 +1,41 @@
+{
+  "_opis": "Egzamin dla ChatAI: realne pytania serwisowe. kind=instrukcja → RAG POWINIEN znaleźć fragment (jeśli mamy manual). kind=serwis → fizyczna naprawa/cena, poza zakresem manuala (oczekiwany brak).",
+  "questions": [
+    { "q": "ZD421 drukuje blade etykiety, jak ustawić zaczernienie?", "model": "ZD421", "kind": "instrukcja" },
+    { "q": "ZD421 dioda STATUS miga na czerwono podczas druku, co to znaczy?", "model": "ZD421", "kind": "instrukcja" },
+    { "q": "Jak skalibrować czujnik etykiet w ZD421?", "model": "ZD421", "kind": "instrukcja" },
+    { "q": "ZD421 pokazuje błąd ribbon out, nie wykrywa taśmy", "model": "ZD421", "kind": "instrukcja" },
+    { "q": "ZD621 jak załadować etykiety i taśmę barwiącą?", "model": "ZD621", "kind": "instrukcja" },
+    { "q": "ZD220 drukuje za jasno, jak zwiększyć zaczernienie?", "model": "ZD220", "kind": "instrukcja" },
+    { "q": "ZT411 wyświetla błąd HEAD OPEN mimo zamkniętej głowicy", "model": "ZT411", "kind": "instrukcja" },
+    { "q": "Jak skalibrować media w drukarce ZT411?", "model": "ZT411", "kind": "instrukcja" },
+    { "q": "Zebra ZT231 z odklejakiem źle kalibruje etykiety 100x150", "model": "ZT231", "kind": "instrukcja" },
+    { "q": "ZT230 drukuje rozmazane etykiety, jak zmienić prędkość i zaczernienie?", "model": "ZT230", "kind": "instrukcja" },
+    { "q": "ZT610 jak ustawić tryb odklejania peel-off?", "model": "ZT610", "kind": "instrukcja" },
+    { "q": "ZQ520 nie drukuje po wymianie baterii, miga czerwona dioda", "model": "ZQ520", "kind": "instrukcja" },
+    { "q": "ZQ630 drukuje coraz wolniej i robi przerwy w połowie etykiety", "model": "ZQ630", "kind": "instrukcja" },
+    { "q": "Jak sparować ZQ511 przez Bluetooth z telefonem?", "model": "ZQ511", "kind": "instrukcja" },
+    { "q": "Drukarka ZC300 zacina karty przy drukowaniu", "model": "ZC300", "kind": "instrukcja" },
+    { "q": "ZXP7 drukuje karty z pustymi miejscami i smugami", "model": "ZXP7", "kind": "instrukcja" },
+    { "q": "Skaner DS2208 nie dodaje Entera po zeskanowaniu kodu", "model": "DS2208", "kind": "instrukcja" },
+    { "q": "Jak przywrócić ustawienia fabryczne w skanerze DS2208?", "model": "DS2208", "kind": "instrukcja" },
+    { "q": "LI2208 skaner nie reaguje, jak go zresetować?", "model": "LI2208", "kind": "instrukcja" },
+    { "q": "Terminal TC21 ma problem z ładowaniem pod USB", "model": "TC21", "kind": "instrukcja" },
+    { "q": "MC3300 jak zresetować do ustawień fabrycznych?", "model": "MC3300", "kind": "instrukcja" },
+    { "q": "MC9300 skaner nie czyta kodów kreskowych", "model": "MC9300", "kind": "instrukcja" },
+    { "q": "TC78 jak zrobić aktualizację systemu Android?", "model": "TC78", "kind": "instrukcja" },
+
+    { "q": "GK420d przeskakuje etykiety i drukuje w połowie etykiety", "model": "GK420D", "kind": "instrukcja" },
+    { "q": "GK420t białe pasy na wydruku, jak wyczyścić głowicę?", "model": "GK420T", "kind": "instrukcja" },
+    { "q": "GX430t jak skalibrować czujnik etykiet?", "model": "GX430T", "kind": "instrukcja" },
+    { "q": "Terminal TC52 nie łączy się z WiFi, sieć jest widoczna", "model": "TC52", "kind": "instrukcja" },
+    { "q": "TC57 jak zaktualizować oprogramowanie?", "model": "TC57", "kind": "instrukcja" },
+    { "q": "Zebra LP2824 Plus dioda mruga naprzemiennie zielono-czerwono", "model": "LP2824", "kind": "instrukcja" },
+    { "q": "ZXP3 drukuje karty z pustymi miejscami", "model": "ZXP3", "kind": "instrukcja" },
+
+    { "q": "Terminal MC3300 ma pęknięty ekran po upadku", "model": "MC3300", "kind": "serwis" },
+    { "q": "TC53 wpadł do wody i nie włącza się", "model": "TC53", "kind": "serwis" },
+    { "q": "ZQ520 ma wgnieciony korpus po upadku", "model": "ZQ520", "kind": "serwis" },
+    { "q": "Ile kosztuje wymiana głowicy w ZT411?", "model": "ZT411", "kind": "serwis" }
+  ]
+}

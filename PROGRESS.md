@@ -4,6 +4,19 @@ Checkpoint postępu prac. Najnowszy wpis na górze. Po każdym etapie/buildzie d
 
 ---
 
+## 2026-06-14 — ChatAI samodoskonalenie: KROK 4 — egzamin RAG (golden set) + KLUCZOWE wnioski
+
+- **Co**: `scripts/chat-exam.mjs` + `scripts/chat-exam-questions.json` (34 pytania) + `scripts/chat-exam-results.md`. Replikuje ścieżkę RAG chatu (detectPrinterModel→tłumaczenie→embedding→match_documents próg 0.4 z filtrem+fallback), dodatkowo próg 0.2. Klasyfikuje: ok / luka_wyszukiwania / temat_nieznaleziony / zly_manual / brak_manuala / serwis.
+- **WAŻNE odkrycie**: `manuals_documents` ma **38 971 chunków / 111 manuali** (wcześniejsze „2" to limit 1000 wierszy Supabase przy select). Pełna lista w results.md.
+- **WYNIK: 70% trafności** (21/30 pytań instrukcyjnych). **0 luk wyszukiwania** → dla modeli które MAMY, RAG i chunking działają dobrze (moja hipoteza o naiwnym chunkingu = NIEtrafiona).
+- **Prawdziwe problemy**:
+  1. **BRAK MANUALA (7)**: GK420d/t, GX430t, TC52, TC57, LP2824, ZXP3 — częste modele, nie mamy PDF. ZŁA RZECZ: przy braku własnego manuala RAG zwraca CUDZY (GK420d→ZD411 61%, TC52→TC701 51%, LP2824→ZT230 60%) → chat może doradzać z instrukcji złego urządzenia.
+  2. **ZŁY MANUAL (2)**: DS2208→LS2208 (bo skanery DS/LS/LI NIE są w detectPrinterModel → brak filtra→sibling wygrywa), MC3300 factory reset→MC9200 (filtr 0.4 pusty→fallback).
+- **Nowy roadmap** (po egzaminie): (a) dograć 7 brakujących manuali, (b) dodać skanery DS/LS/LI/CS do detectPrinterModel, (c) guard: gdy fallback zwraca manual ≠ wykryty model → nie podawaj jako pewnego źródła.
+- **Stan**: skrypty + raport (nie dotykają builda). Do commitu. Baseline trafności = 70%.
+
+---
+
 ## 2026-06-14 — ChatAI samodoskonalenie: KROK 3 — widok „Złe odpowiedzi" + auto-diagnoza
 
 - **Cel**: jedno miejsce na cotygodniowy przegląd wpadek; każda z automatyczną diagnozą wg 3 powodów + czarną skrzynką.
