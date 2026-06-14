@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { AlertTriangle, BookX, SearchX, MessageSquareWarning, ThumbsDown, MessageSquare } from 'lucide-react'
+import { AlertTriangle, BookX, SearchX, MessageSquareWarning, ThumbsDown, MessageSquare, HelpCircle } from 'lucide-react'
 
 interface RagSource {
   manual: string
@@ -9,7 +9,7 @@ interface RagSource {
   sim: number
 }
 
-type Diagnosis = 'brak_wiedzy' | 'slabe_dopasowanie' | 'zla_odpowiedz'
+type Diagnosis = 'brak_wiedzy' | 'slabe_dopasowanie' | 'zla_odpowiedz' | 'brak_danych'
 
 interface ProblemLog {
   id: string
@@ -32,29 +32,38 @@ interface Summary {
   brak_wiedzy: number
   slabe_dopasowanie: number
   zla_odpowiedz: number
+  brak_danych: number
   thumbs_down: number
   days: number
 }
 
-// Opis każdej diagnozy po ludzku — co to znaczy i co naprawić
+// Opis każdej diagnozy po ludzku — co to znaczy i co naprawić.
+// UWAGA: "Nie sięgnął do instrukcji" ≠ brak PDF-a. Manual może istnieć, tylko temat nie jest w nim opisany
+// (np. wymiana pękniętego ekranu) albo wyszukiwanie go nie złapało.
 const DIAGNOSIS = {
   brak_wiedzy: {
-    label: 'Brak instrukcji',
-    fix: 'Chat nic nie znalazł → dograć instrukcję tego urządzenia',
+    label: 'Nie sięgnął do instrukcji',
+    fix: 'Chat nie wyciągnął nic z instrukcji. Sprawdź: czy temat w ogóle jest w manualu (fizyczne naprawy zwykle nie są) — jeśli jest, to problem wyszukiwania.',
     badge: 'bg-red-100 text-red-700 border border-red-200',
     Icon: BookX,
   },
   slabe_dopasowanie: {
     label: 'Słabe dopasowanie',
-    fix: 'Znalazł, ale fragmenty słabo pasują → poprawić wyszukiwanie',
+    fix: 'Znalazł fragmenty, ale słabo pasują → poprawić wyszukiwanie (chunking/próg).',
     badge: 'bg-amber-100 text-amber-700 border border-amber-200',
     Icon: SearchX,
   },
   zla_odpowiedz: {
     label: 'Zła mimo dobrego kontekstu',
-    fix: 'Miał dobre fragmenty, a odpowiedź zła → poprawić styl/prompt',
+    fix: 'Miał dobre fragmenty, a odpowiedź zła → poprawić styl/prompt.',
     badge: 'bg-purple-100 text-purple-700 border border-purple-200',
     Icon: MessageSquareWarning,
+  },
+  brak_danych: {
+    label: 'Sprzed nagrywania',
+    fix: 'Log sprzed „czarnej skrzynki" — nie mamy zapisu, czego chat użył. Nowe odpowiedzi będą zdiagnozowane.',
+    badge: 'bg-gray-100 text-gray-600 border border-gray-200',
+    Icon: HelpCircle,
   },
 } as const
 
@@ -63,7 +72,7 @@ export default function ZleOdpowiedziPage() {
   const [summary, setSummary] = useState<Summary | null>(null)
   const [loading, setLoading] = useState(true)
   const [days, setDays] = useState(7)
-  const [signal, setSignal] = useState<'all' | 'rated' | 'norag'>('all')
+  const [signal, setSignal] = useState<'all' | 'rated' | 'norag'>('rated')
 
   useEffect(() => {
     fetchProblems()
@@ -95,8 +104,9 @@ export default function ZleOdpowiedziPage() {
             <AlertTriangle className="w-6 h-6 text-amber-500" />
             <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Złe odpowiedzi chatu</h1>
           </div>
-          <p className="text-xs text-gray-500">
-            Wpadki z ostatnich {days} dni, każda z automatyczną diagnozą i „czarną skrzynką". Najgorsze dopasowania na górze.
+          <p className="text-xs text-gray-500 max-w-3xl">
+            Z ostatnich {days} dni, posortowane wg siły sygnału. <strong>Ocenione źle</strong> = realne skargi (👎 użytkownika / admina).
+            <strong> Bez instrukcji</strong> = chat nie sięgnął do manuala — to NIE znaczy, że PDF-a nie ma (temat może nie być opisany, np. fizyczna naprawa).
           </p>
         </div>
 
@@ -118,9 +128,9 @@ export default function ZleOdpowiedziPage() {
         {/* Rodzaj sygnału */}
         <div className="flex flex-wrap gap-2 mb-4">
           {([
-            { value: 'all', label: 'Wszystkie problemy' },
             { value: 'rated', label: 'Ocenione źle (👎 / admin)' },
-            { value: 'norag', label: 'Brak instrukcji (RAG pusty)' },
+            { value: 'norag', label: 'Bez instrukcji (diagnostyka)' },
+            { value: 'all', label: 'Wszystko razem' },
           ] as const).map((s) => (
             <button
               key={s.value}
@@ -167,7 +177,12 @@ export default function ZleOdpowiedziPage() {
         ) : logs.length === 0 ? (
           <div className="bg-white rounded-xl border border-gray-200 p-12 text-center">
             <MessageSquare className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-            <p className="text-gray-600">Brak złych odpowiedzi w tym okresie 🎉</p>
+            <p className="text-gray-600">Brak wpadek w tym okresie 🎉</p>
+            {signal === 'rated' && (
+              <p className="text-xs text-gray-400 mt-2">
+                Nikt nie kliknął 👎 ani nie oznaczono złej odpowiedzi. Zajrzyj do „Bez instrukcji" po diagnostykę wyszukiwania.
+              </p>
+            )}
           </div>
         ) : (
           <div className="space-y-3">
@@ -219,8 +234,10 @@ export default function ZleOdpowiedziPage() {
                   {/* Czarna skrzynka: czego użył chat */}
                   <div className="border-t border-gray-100 pt-2">
                     <p className="text-xs font-medium text-gray-500 mb-1">Czarna skrzynka — użyte instrukcje:</p>
-                    {sources.length === 0 ? (
-                      <p className="text-xs text-red-600">Nic nie znaleziono w instrukcjach.</p>
+                    {log.rag_sources == null ? (
+                      <p className="text-xs text-gray-400">Log sprzed czarnej skrzynki — brak nagrania, czego chat użył.</p>
+                    ) : sources.length === 0 ? (
+                      <p className="text-xs text-red-600">Chat nie wyciągnął żadnych fragmentów z instrukcji (RAG pusty).</p>
                     ) : (
                       <div className="flex flex-wrap gap-1.5">
                         {sources.map((s, i) => {

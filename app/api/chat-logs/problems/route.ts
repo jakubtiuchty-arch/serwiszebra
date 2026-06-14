@@ -9,15 +9,19 @@ const supabase = createClient(
 // Próg "dobrego" dopasowania RAG. Poniżej = fragmenty słabo pasują.
 const GOOD_SIM = 0.5
 
-type Diagnosis = 'brak_wiedzy' | 'slabe_dopasowanie' | 'zla_odpowiedz'
+type Diagnosis = 'brak_wiedzy' | 'slabe_dopasowanie' | 'zla_odpowiedz' | 'brak_danych'
 
-// Automatyczna diagnoza wg 3 powodów złej odpowiedzi
+// Automatyczna diagnoza. UWAGA: brak kontekstu RAG ≠ brak PDF-a — manual może istnieć,
+// tylko temat nie jest w nim opisany (np. wymiana pękniętego ekranu) albo wyszukiwanie go nie złapało.
 function diagnose(log: any): Diagnosis {
+  if (!log.rag_context_found) return 'brak_wiedzy'              // chat nie wyciągnął nic z instrukcji (wiarygodne też dla starych logów)
+  // kontekst był — czy mamy szczegóły z czarnej skrzynki?
+  if (log.rag_sources == null) return 'brak_danych'            // log sprzed czarnej skrzynki — brak detali do diagnozy
   const sources = Array.isArray(log.rag_sources) ? log.rag_sources : []
-  const topSim = sources.length > 0 ? Number(sources[0]?.sim ?? 0) : Number(log.rag_similarity_score ?? 0)
-  if (!log.rag_context_found || sources.length === 0) return 'brak_wiedzy'        // nic nie znalazł → dograć instrukcję
-  if (topSim < GOOD_SIM) return 'slabe_dopasowanie'                               // znalazł, ale słabo pasuje → poprawić wyszukiwanie
-  return 'zla_odpowiedz'                                                          // dobry kontekst, a zła odpowiedź → poprawić prompt
+  if (sources.length === 0) return 'brak_wiedzy'
+  const topSim = Number(sources[0]?.sim ?? 0)
+  if (topSim < GOOD_SIM) return 'slabe_dopasowanie'            // znalazł, ale słabo pasuje → poprawić wyszukiwanie
+  return 'zla_odpowiedz'                                       // dobry kontekst, a zła odpowiedź → poprawić prompt
 }
 
 // Siła sygnału: realne skargi (👎 / admin) ważniejsze niż sam brak RAG
@@ -56,12 +60,15 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: error.message }, { status: 500 })
     }
 
-    // Sortowanie: najpierw siła sygnału (skargi na górze), potem najsłabsze dopasowanie
+    // Sortowanie: najpierw siła sygnału (skargi na górze), logi sprzed czarnej skrzynki na dół, potem najsłabsze dopasowanie
     const withDiagnosis = (logs || [])
       .map((log) => ({ ...log, diagnosis: diagnose(log) }))
       .sort((a, b) => {
         const r = signalRank(a) - signalRank(b)
         if (r !== 0) return r
+        const pa = a.diagnosis === 'brak_danych' ? 1 : 0
+        const pb = b.diagnosis === 'brak_danych' ? 1 : 0
+        if (pa !== pb) return pa - pb
         const sa = a.rag_similarity_score ?? -1 // brak dopasowania = najgorzej = na górę
         const sb = b.rag_similarity_score ?? -1
         return sa - sb
@@ -72,6 +79,7 @@ export async function GET(req: NextRequest) {
       brak_wiedzy: withDiagnosis.filter((l) => l.diagnosis === 'brak_wiedzy').length,
       slabe_dopasowanie: withDiagnosis.filter((l) => l.diagnosis === 'slabe_dopasowanie').length,
       zla_odpowiedz: withDiagnosis.filter((l) => l.diagnosis === 'zla_odpowiedz').length,
+      brak_danych: withDiagnosis.filter((l) => l.diagnosis === 'brak_danych').length,
       thumbs_down: withDiagnosis.filter((l) => l.user_rating === -1).length,
       days,
     }
