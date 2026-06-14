@@ -21,6 +21,7 @@ const supabase = createClient(
 
 // Funkcja do zapisywania logów czatu do Supabase
 async function saveChatLog(data: {
+  id: string
   sessionId: string
   userMessage: string
   aiResponse: string
@@ -31,6 +32,7 @@ async function saveChatLog(data: {
 }) {
   try {
     const { error } = await supabase.from('chat_logs').insert({
+      id: data.id,
       session_id: data.sessionId,
       user_message: data.userMessage,
       ai_response: data.aiResponse,
@@ -1041,8 +1043,9 @@ export async function POST(req: NextRequest) {
     if (lastUserMessage && !isRelated && !hasAttachments) {
       console.log('🚫 Off-topic message rejected:', lastUserMessage.substring(0, 50))
       
-      // Zapisz log (bez kosztu API)
+      // Zapisz log (bez kosztu API) — odrzucenie off-topic, oceny 👍/👎 tu nie potrzebujemy
       saveChatLog({
+        id: crypto.randomUUID(),
         sessionId: sessionId || 'unknown',
         userMessage: lastUserMessage,
         aiResponse: OFF_TOPIC_RESPONSE,
@@ -1275,6 +1278,8 @@ ZRÓB DOKŁADNIE TAK - WKLEJ [BARCODE:...] W ODPOWIEDŹ!`
     // Stwórz readable stream i zbieraj odpowiedź
     const encoder = new TextEncoder()
     let fullAiResponse = ''
+    // ID logu generujemy z góry, żeby odesłać go na front (przyciski 👍/👎 wiedzą, którą odpowiedź oceniają)
+    const logId = crypto.randomUUID()
 
     const readableStream = new ReadableStream({
       async start(controller) {
@@ -1304,27 +1309,28 @@ ZRÓB DOKŁADNIE TAK - WKLEJ [BARCODE:...] W ODPOWIEDŹ!`
           const uiBlogLinks = allowUiBlogLink ? [{ title: 'Więcej poradników', url: '/blog' }] : []
           const uiManualLinks = !isTroubleshooting ? manualLinks : []
 
-          const hasData = finalCitations.length > 0 || uiBlogLinks.length > 0 || scannerBarcodes.length > 0 || uiManualLinks.length > 0
-          if (hasData) {
-            const dataJson = JSON.stringify({
-              citations: finalCitations,
-              blogLinks: uiBlogLinks,
-              manualLinks: uiManualLinks,
-              scannerBarcodes: scannerBarcodes.map(b => ({
-                id: b.id,
-                name: b.name,
-                description: b.description,
-                imageUrl: b.imageUrl
-              }))
-            })
-            controller.enqueue(encoder.encode(`\n\n__CITATIONS__${dataJson}`))
-          }
+          // Zawsze odsyłamy metadane (z logId), nawet bez citations — front potrzebuje logId do oceny 👍/👎
+          const dataJson = JSON.stringify({
+            logId,
+            resolved: problemResolved, // gdy true → front NIE pokazuje CTA „Wyślij do serwisu"
+            citations: finalCitations,
+            blogLinks: uiBlogLinks,
+            manualLinks: uiManualLinks,
+            scannerBarcodes: scannerBarcodes.map(b => ({
+              id: b.id,
+              name: b.name,
+              description: b.description,
+              imageUrl: b.imageUrl
+            }))
+          })
+          controller.enqueue(encoder.encode(`\n\n__CITATIONS__${dataJson}`))
 
           controller.close()
 
           // Po zakończeniu streamu zapisz log do Supabase (asynchronicznie, nie blokuj odpowiedzi)
           const responseTime = Date.now() - startTime
           saveChatLog({
+            id: logId,
             sessionId: sessionId || 'unknown',
             userMessage: lastUserMessage + (hasAttachments ? ` [+${attachments.length} załączników]` : ''),
             aiResponse: fullAiResponse,

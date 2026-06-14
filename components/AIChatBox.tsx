@@ -13,7 +13,9 @@ import {
   Video,
   Image as ImageIcon,
   Paperclip,
-  Plus
+  Plus,
+  ThumbsUp,
+  ThumbsDown
 } from 'lucide-react'
 import { trackChatOpen, trackChatMessage } from '@/lib/gtm'
 import { trackAIChatOpen, trackAIChatMessage } from '@/lib/analytics'
@@ -48,6 +50,9 @@ interface Message {
   blogLinks?: BlogLink[]
   manualLinks?: ManualLink[]
   scannerBarcodes?: ScannerBarcode[]
+  logId?: string            // ID logu w bazie — potrzebne do oceny 👍/👎
+  feedback?: 'up' | 'down'  // ocena wystawiona przez użytkownika
+  resolved?: boolean        // backend wykrył, że problem rozwiązany → nie pokazuj CTA „Wyślij do serwisu"
 }
 
 const placeholders = [
@@ -100,12 +105,66 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
   // 4. Last message is from AI
   // 5. Last AI message is NOT a question (no "?")
   // 6. NOT currently loading (prevents button disappearing during streaming)
+  // Ocena odpowiedzi przez użytkownika (👍 / 👎) → zapis do bazy (chat_logs.user_rating)
+  const sendFeedback = async (idx: number, logId: string, rating: 'up' | 'down') => {
+    setMessages(prev => {
+      if (prev[idx]?.feedback) return prev // już oceniono — nie zmieniaj
+      return prev.map((m, i) => (i === idx ? { ...m, feedback: rating } : m))
+    })
+    try {
+      await fetch('/api/chat-logs/feedback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ logId, rating }),
+      })
+    } catch (e) {
+      console.error('Błąd wysyłania oceny:', e)
+    }
+  }
+
+  // Przyciski oceny pod odpowiedzią AI (tylko gdy mamy logId, czyli odpowiedź jest kompletna)
+  const renderFeedback = (msg: Message, idx: number) => {
+    if (msg.role !== 'assistant' || !msg.logId || !msg.content.trim()) return null
+    if (msg.feedback) {
+      return (
+        <div className="flex items-center gap-1 mt-1.5 px-1">
+          <span className="text-xs text-gray-400">
+            {msg.feedback === 'up' ? 'Dzięki za ocenę! 👍' : 'Dzięki, popracujemy nad tym. 👎'}
+          </span>
+        </div>
+      )
+    }
+    return (
+      <div className="flex items-center gap-1 mt-1.5 px-1">
+        <span className="text-xs text-gray-400 mr-1">Pomocne?</span>
+        <button
+          type="button"
+          onClick={() => sendFeedback(idx, msg.logId!, 'up')}
+          aria-label="Pomocne"
+          className="p-1 rounded-md text-gray-400 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"
+        >
+          <ThumbsUp className="w-3.5 h-3.5" />
+        </button>
+        <button
+          type="button"
+          onClick={() => sendFeedback(idx, msg.logId!, 'down')}
+          aria-label="Niepomocne"
+          className="p-1 rounded-md text-gray-400 hover:text-red-600 hover:bg-red-50 transition-colors"
+        >
+          <ThumbsDown className="w-3.5 h-3.5" />
+        </button>
+      </div>
+    )
+  }
+
   const messageCount = messages.length
   const lastMessage = messages[messages.length - 1]
   const isLastMessageAI = lastMessage?.role === 'assistant'
   const lastMessageIsQuestion = lastMessage?.content?.includes('?') || false
   const isSeriousIssue = lastMessage?.content?.includes('[SERIOUS_ISSUE]') || false
   const isInfoOnly = lastMessage?.content?.includes('[INFO_ONLY]') || false  // Pytanie o specyfikację/informacje - NIE pokazuj CTA
+  // Problem rozwiązany → NIE pokazuj „Wyślij do serwisu" (flaga z backendu; fallback: link „Więcej poradników" leci tylko gdy rozwiązane)
+  const problemResolved = lastMessage?.resolved === true || (lastMessage?.blogLinks?.length ?? 0) > 0
   const suggestsRepair =
     lastMessage?.content?.toLowerCase().includes('wysłać do serwisu') ||
     lastMessage?.content?.toLowerCase().includes('wysłanie do serwisu') ||
@@ -118,6 +177,7 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
     !lastMessageIsQuestion &&
     !loading &&
     !isInfoOnly &&  // ❌ NIE pokazuj CTA dla pytań informacyjnych (specyfikacja, waga, wymiary itp.)
+    !problemResolved &&  // ❌ NIE pokazuj CTA gdy problem już rozwiązany (bez sensu wysyłać sprawny sprzęt)
     (isSeriousIssue || suggestsRepair || messageCount >= 6)  // ✨ Pokaż wcześniej dla poważnych usterek lub sugestii naprawy
 
   // Scroll do dołu - płynnie
@@ -395,6 +455,8 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
           let blogLinks: BlogLink[] | undefined = undefined
           let manualLinks: ManualLink[] | undefined = undefined
           let scannerBarcodes: ScannerBarcode[] | undefined = undefined
+          let logId: string | undefined = undefined
+          let resolved: boolean | undefined = undefined
 
           if (citationsMatch) {
             content = assistantMessage.substring(0, citationsMatch.index)
@@ -404,6 +466,8 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
               blogLinks = data.blogLinks
               manualLinks = data.manualLinks
               scannerBarcodes = data.scannerBarcodes
+              logId = data.logId
+              resolved = data.resolved
             } catch (e) {
               console.error('Błąd parsowania citations/blogLinks/manualLinks/scannerBarcodes:', e)
             }
@@ -411,7 +475,7 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
 
           setMessages(prev => [
             ...prev.slice(0, -1),
-            { role: 'assistant', content, citations, blogLinks, manualLinks, scannerBarcodes }
+            { role: 'assistant', content, citations, blogLinks, manualLinks, scannerBarcodes, logId, resolved }
           ])
         }
       }
@@ -508,6 +572,7 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
                           })}
                       </div>
                     </div>
+                    {renderFeedback(msg, idx)}
                   </div>
 
                   {msg.role === 'user' && (
@@ -618,15 +683,14 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
             </div>
           </div>
 
-          {/* Powered by Gemini - badge */}
+          {/* Powered by ChatGPT 5.5 - badge */}
           <div className="flex items-center justify-center mt-2">
-            <div className="flex items-center gap-1 px-2 py-0.5 bg-white/70 rounded-full border border-gray-200">
+            <div className="flex items-center gap-1.5 px-2 py-0.5 bg-white/70 rounded-full border border-gray-200">
               <span className="text-[9px] text-gray-500">Powered by</span>
-              <span 
-                className="text-[11px] font-medium bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent"
-              >
-                Gemini
-              </span>
+              <svg viewBox="0 0 24 24" className="w-3 h-3 text-gray-800" fill="currentColor" aria-hidden="true">
+                <path d="M22.282 9.821a5.985 5.985 0 0 0-.516-4.91 6.046 6.046 0 0 0-6.51-2.9A6.065 6.065 0 0 0 4.981 4.18a5.985 5.985 0 0 0-3.998 2.9 6.046 6.046 0 0 0 .743 7.097 5.98 5.98 0 0 0 .51 4.911 6.051 6.051 0 0 0 6.515 2.9A5.985 5.985 0 0 0 13.26 24a6.056 6.056 0 0 0 5.772-4.206 5.99 5.99 0 0 0 3.997-2.9 6.056 6.056 0 0 0-.747-7.073zM13.26 22.43a4.476 4.476 0 0 1-2.876-1.04l.142-.08 4.778-2.758a.795.795 0 0 0 .393-.681v-6.738l2.02 1.168a.071.071 0 0 1 .038.052v5.583a4.504 4.504 0 0 1-4.494 4.494zM3.6 18.304a4.47 4.47 0 0 1-.535-3.014l.142.085 4.783 2.759a.78.78 0 0 0 .78 0l5.843-3.37v2.332a.08.08 0 0 1-.033.062L9.74 22.034a4.49 4.49 0 0 1-6.14-1.64zM2.34 7.896a4.485 4.485 0 0 1 2.366-1.973V11.6a.766.766 0 0 0 .388.676l5.815 3.355-2.02 1.168a.076.076 0 0 1-.071 0l-4.83-2.786A4.504 4.504 0 0 1 2.34 7.872zm16.597 3.855l-5.833-3.387L15.119 7.2a.076.076 0 0 1 .071 0l4.83 2.791a4.494 4.494 0 0 1-.676 8.105v-5.678a.79.79 0 0 0-.407-.667zm2.01-3.023l-.142-.085-4.774-2.782a.776.776 0 0 0-.785 0L9.409 9.23V6.897a.066.066 0 0 1 .028-.061l4.83-2.787a4.5 4.5 0 0 1 6.68 4.66zm-12.64 4.135l-2.02-1.164a.08.08 0 0 1-.038-.057V6.075a4.5 4.5 0 0 1 7.375-3.453l-.142.08L8.704 5.46a.795.795 0 0 0-.393.681zm1.097-2.365l2.602-1.5 2.607 1.5v3l-2.597 1.5-2.607-1.5z"/>
+              </svg>
+              <span className="text-[11px] font-medium text-gray-800">ChatGPT 5.5</span>
             </div>
           </div>
           <style jsx>{`
@@ -773,6 +837,8 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
                   )}
 
                   {/* Citations z manuali - UKRYTE - używane tylko wewnętrznie przez AI */}
+
+                  {renderFeedback(msg, idx)}
                 </div>
 
                 {msg.role === 'user' && (
@@ -962,13 +1028,14 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
         </div>
       </div>
 
-      {/* Powered by Gemini - OUTSIDE chatbox */}
+      {/* Powered by ChatGPT 5.5 - OUTSIDE chatbox */}
       <div className="flex justify-center mt-3">
-        <div className="flex items-center gap-1 px-2 py-1 bg-gray-50 rounded-full border border-gray-200">
+        <div className="flex items-center gap-1.5 px-2.5 py-1 bg-gray-50 rounded-full border border-gray-200">
           <span className="text-[10px] text-gray-500">Powered by</span>
-          <span className="text-xs font-medium tracking-tight" style={{ fontFamily: '"Google Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}>
-            Gemini
-          </span>
+          <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 text-gray-800" fill="currentColor" aria-hidden="true">
+            <path d="M22.282 9.821a5.985 5.985 0 0 0-.516-4.91 6.046 6.046 0 0 0-6.51-2.9A6.065 6.065 0 0 0 4.981 4.18a5.985 5.985 0 0 0-3.998 2.9 6.046 6.046 0 0 0 .743 7.097 5.98 5.98 0 0 0 .51 4.911 6.051 6.051 0 0 0 6.515 2.9A5.985 5.985 0 0 0 13.26 24a6.056 6.056 0 0 0 5.772-4.206 5.99 5.99 0 0 0 3.997-2.9 6.056 6.056 0 0 0-.747-7.073zM13.26 22.43a4.476 4.476 0 0 1-2.876-1.04l.142-.08 4.778-2.758a.795.795 0 0 0 .393-.681v-6.738l2.02 1.168a.071.071 0 0 1 .038.052v5.583a4.504 4.504 0 0 1-4.494 4.494zM3.6 18.304a4.47 4.47 0 0 1-.535-3.014l.142.085 4.783 2.759a.78.78 0 0 0 .78 0l5.843-3.37v2.332a.08.08 0 0 1-.033.062L9.74 22.034a4.49 4.49 0 0 1-6.14-1.64zM2.34 7.896a4.485 4.485 0 0 1 2.366-1.973V11.6a.766.766 0 0 0 .388.676l5.815 3.355-2.02 1.168a.076.076 0 0 1-.071 0l-4.83-2.786A4.504 4.504 0 0 1 2.34 7.872zm16.597 3.855l-5.833-3.387L15.119 7.2a.076.076 0 0 1 .071 0l4.83 2.791a4.494 4.494 0 0 1-.676 8.105v-5.678a.79.79 0 0 0-.407-.667zm2.01-3.023l-.142-.085-4.774-2.782a.776.776 0 0 0-.785 0L9.409 9.23V6.897a.066.066 0 0 1 .028-.061l4.83-2.787a4.5 4.5 0 0 1 6.68 4.66zm-12.64 4.135l-2.02-1.164a.08.08 0 0 1-.038-.057V6.075a4.5 4.5 0 0 1 7.375-3.453l-.142.08L8.704 5.46a.795.795 0 0 0-.393.681zm1.097-2.365l2.602-1.5 2.607 1.5v3l-2.597 1.5-2.607-1.5z"/>
+          </svg>
+          <span className="text-xs font-medium text-gray-800 tracking-tight">ChatGPT 5.5</span>
         </div>
       </div>
     </div>
