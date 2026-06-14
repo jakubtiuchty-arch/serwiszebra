@@ -901,6 +901,17 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
               autoFocus
             />
 
+            {/* Attach button - DESKTOP ONLY (mobile ma w dolnym pasku) — załącznik: zdjęcie/wideo błędu */}
+            <button
+              onClick={() => fileInputRef.current?.click()}
+              disabled={loading}
+              className="hidden md:flex flex-shrink-0 p-2 rounded-full text-gray-400 hover:text-blue-600 hover:bg-blue-50 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              aria-label="Dodaj załącznik (zdjęcie błędu drukarki)"
+              title="Dodaj zdjęcie lub wideo błędu"
+            >
+              <Paperclip className="w-6 h-6" />
+            </button>
+
             {/* Mic button - DESKTOP ONLY (mobile has it in bottom bar) */}
             <button
               onClick={toggleRecording}
