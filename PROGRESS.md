@@ -4,6 +4,16 @@ Checkpoint postępu prac. Najnowszy wpis na górze. Po każdym etapie/buildzie d
 
 ---
 
+## 2026-06-14 — ChatAI samodoskonalenie: KROK 2 — „czarna skrzynka" (diagnoza RAG)
+
+- **Cel**: przy 👎 wiedzieć DLACZEGO (3 powody: brak instrukcji / złe wyszukiwanie / zły styl). Dotąd log miał tylko `rag_context_found` (boolean).
+- **Migracja** `supabase-chat-blackbox.sql`: `detected_model TEXT`, `rag_sources JSONB` (`[{manual,page,sim}]`). Najlepsze dopasowanie → istniejąca `rag_similarity_score`. **MUSI być w Supabase PRZED pushem** (inaczej insert logu pada na nieznanych kolumnach → brak logowania).
+- **Kod** `app/api/chat/route.ts`: `searchManuals` zwraca `sources` (manual/page/sim z `match_documents`); call site łapie do `ragSources`; `saveChatLog` zapisuje `rag_sources` + `rag_similarity_score=top` + `detected_model` (`detectPrinterModel(lastUserMessage).join(',')`). Off-topic call: pola opcjonalne (null).
+- **Stan**: tsc czysto, build EXIT=0, dev 3002 /→200. CZEKA na: user uruchomi SQL → commit+push.
+- **Następne**: KROK 3 = widok „złe odpowiedzi z ostatniego tygodnia" (👎 + czarna skrzynka w jednym miejscu) → potem golden set + tuning retrievalu.
+
+---
+
 ## 2026-06-14 — FIX: „Wyślij do serwisu" pokazywał się mimo rozwiązanego problemu
 
 - **Bug (żywy na PRODZIE, stara logika)**: CTA „Wyślij do serwisu" wyskakiwał przy `messageCount >= 6` niezależnie od tego, czy problem rozwiązany. Klient naprawiał sprzęt → chat i tak namawiał na wysyłkę.

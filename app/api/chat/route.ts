@@ -29,14 +29,21 @@ async function saveChatLog(data: {
   responseTimeMs: number
   modelUsed: string
   userIp?: string
+  detectedModel?: string | null
+  ragSources?: Array<{ manual: string; page: number | null; sim: number }>
 }) {
   try {
+    const sources = data.ragSources ?? []
+    const topSim = sources.length > 0 ? sources[0].sim : null
     const { error } = await supabase.from('chat_logs').insert({
       id: data.id,
       session_id: data.sessionId,
       user_message: data.userMessage,
       ai_response: data.aiResponse,
       rag_context_found: data.ragContextFound,
+      rag_similarity_score: topSim,            // czarna skrzynka: najlepsze dopasowanie
+      rag_sources: sources,                    // czarna skrzynka: co i jak dobrze znaleziono
+      detected_model: data.detectedModel ?? null,
       response_time_ms: data.responseTimeMs,
       model_used: data.modelUsed,
       user_ip: data.userIp || null,
@@ -246,6 +253,7 @@ function citationMatchesModel(citation: { title: string; uri: string }, detected
 async function searchManuals(query: string): Promise<{
   context: string
   found: boolean
+  sources: Array<{ manual: string; page: number | null; sim: number }>
 }> {
   try {
     console.log('🔍 Supabase manuals search dla:', query)
@@ -293,12 +301,12 @@ async function searchManuals(query: string): Promise<{
 
     if (error) {
       console.error('❌ Supabase match_documents error:', error)
-      return { context: '', found: false }
+      return { context: '', found: false, sources: [] }
     }
 
     if (!data || data.length === 0) {
       console.log('⚠️ Brak wyników z Supabase manuals')
-      return { context: '', found: false }
+      return { context: '', found: false, sources: [] }
     }
 
     console.log(`✅ Supabase zwrócił ${data.length} wyników`)
@@ -308,13 +316,21 @@ async function searchManuals(query: string): Promise<{
       return `[${doc.manual_name}${doc.page_number ? ` - Strona ${doc.page_number}` : ''}]\n${doc.content}`
     })
 
+    // Czarna skrzynka: zapamiętaj, co i jak dobrze zostało znalezione
+    const sources = data.map((doc: any) => ({
+      manual: doc.manual_name,
+      page: doc.page_number ?? null,
+      sim: Math.round((doc.similarity ?? 0) * 1000) / 1000,
+    }))
+
     return {
       context: contextParts.join('\n\n---\n\n'),
       found: contextParts.length > 0,
+      sources,
     }
   } catch (error) {
     console.error('❌ Błąd Supabase manuals search:', error)
-    return { context: '', found: false }
+    return { context: '', found: false, sources: [] }
   }
 }
 
@@ -1139,6 +1155,7 @@ export async function POST(req: NextRequest) {
     // === KROK 2: Szukaj w Supabase manuals (vector search) ===
     let knowledgeContext = ''
     let ragContextFound = false
+    let ragSources: Array<{ manual: string; page: number | null; sim: number }> = []
     let citations: Array<{ title: string; uri: string; pageNumber?: number }> = []
 
     const needsRAG = !blogFound || lastUserMessage.match(/zt\d|zd\d|gc\d|gk\d|gx\d|tc\d|mc\d|ds\d|zq\d|zc\d|zxp\d|li\d|ls\d|cs\d|et\d|wt\d/i)
@@ -1149,6 +1166,7 @@ export async function POST(req: NextRequest) {
 
       knowledgeContext = searchResult.context
       ragContextFound = searchResult.found
+      ragSources = searchResult.sources
 
       if (ragContextFound) {
         console.log('✅ Znaleziono kontekst z Supabase manuals')
@@ -1338,6 +1356,8 @@ ZRÓB DOKŁADNIE TAK - WKLEJ [BARCODE:...] W ODPOWIEDŹ!`
             responseTimeMs: responseTime,
             modelUsed: `gpt-5.5${hasAttachments ? ' (vision)' : ''} + supabase-rag`,
             userIp,
+            detectedModel: detectPrinterModel(lastUserMessage).join(',') || null,
+            ragSources,
           }).catch((err: any) => console.error('Błąd zapisywania logu czatu:', err))
 
         } catch (error: any) {
