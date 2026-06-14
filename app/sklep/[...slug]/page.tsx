@@ -1829,11 +1829,26 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
       alt: 'Akumulatory do terminali i drukarek mobilnych Zebra — oryginalne części zamienne',
     },
     konwerter: {
-      src: '/sklep_photo/hero/glowice-v4.jpeg',
+      src: '/sklep_photo/hero/konwertery.jpeg',
       alt: 'Konwertery DPI do drukarek przemysłowych Zebra — zmiana rozdzielczości głowicy',
     },
   }
-  const heroImage = HERO_IMAGES[productType.id]
+  // Hero per-URL (podkategorie konwerterów mają osobne grafiki) — ma pierwszeństwo nad HERO_IMAGES[productType.id]
+  const HERO_IMAGES_BY_SLUG: Record<string, { src: string; alt: string }> = {
+    'konwertery': {
+      src: '/sklep_photo/hero/konwertery.jpeg',
+      alt: 'Konwertery DPI do drukarek Zebra — zmiana rozdzielczości głowicy bez wymiany drukarki',
+    },
+    'konwertery/drukarki-przemyslowe': {
+      src: '/sklep_photo/hero/konwertery-przemyslowe.jpeg',
+      alt: 'Konwertery DPI do drukarek przemysłowych Zebra serii ZT — zmiana 203 na 300 DPI',
+    },
+    'konwertery/print-engine': {
+      src: '/sklep_photo/hero/konwertery-print-engine.jpeg',
+      alt: 'Konwertery DPI do print engine Zebra ZE511 i ZE521',
+    },
+  }
+  const heroImage = HERO_IMAGES_BY_SLUG[slugPath.join('/')] ?? HERO_IMAGES[productType.id]
 
   // BreadcrumbList Schema dla kategorii
   const categoryBreadcrumbSchema = {
