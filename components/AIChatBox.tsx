@@ -799,44 +799,7 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
                     </div>
                   </div>
 
-                  {/* Blog Links - TYLKO gdy problem rozwiązany (backend wysyła tylko wtedy) */}
-                  {msg.role === 'assistant' && 
-                   msg.blogLinks && 
-                   msg.blogLinks.length > 0 && 
-                   !msg.content.includes('[SERIOUS_ISSUE]') && (
-                    <div className="flex flex-wrap items-center gap-2 px-3 py-2 bg-blue-50 rounded-xl border border-blue-100 mt-2">
-                      <span className="text-xs font-medium text-blue-700">📚</span>
-                      {msg.blogLinks.map((link, idx) => (
-                        <a
-                          key={idx}
-                          href={link.url}
-                          className="text-xs text-blue-600 hover:text-blue-800 underline underline-offset-2 hover:no-underline transition-colors"
-                        >
-                          {link.title}
-                        </a>
-                      ))}
-                    </div>
-                  )}
-
-                  {/* Manual Links - pokazywane ZAWSZE gdy mamy instrukcję do modelu */}
-                  {msg.role === 'assistant' &&
-                   msg.manualLinks &&
-                   msg.manualLinks.length > 0 && (
-                    <div className="flex flex-wrap items-center gap-2 px-3 py-2 bg-emerald-50 rounded-xl border border-emerald-100 mt-2">
-                      <span className="text-xs font-medium text-emerald-700">📖</span>
-                      {msg.manualLinks.map((link, idx) => (
-                        <a
-                          key={idx}
-                          href={link.url}
-                          className="text-xs text-emerald-600 hover:text-emerald-800 underline underline-offset-2 hover:no-underline transition-colors"
-                        >
-                          {link.title}
-                        </a>
-                      ))}
-                    </div>
-                  )}
-
-                  {/* Citations z manuali - UKRYTE - używane tylko wewnętrznie przez AI */}
+                  {/* Linki do instrukcji/bloga USUNIĘTE — ChatAI ma rozwiązać problem sam, bez odsyłania */}
 
                   {renderFeedback(msg, idx)}
                 </div>
