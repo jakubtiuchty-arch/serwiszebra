@@ -25,14 +25,18 @@ const PROD_THRESHOLD = 0.4   // próg produkcyjny (jak w chacie)
 const LOW_THRESHOLD = 0.2    // próg diagnostyczny — czy treść w ogóle istnieje
 
 // --- detectPrinterModel: kopia 1:1 z route.ts ---
+// Synchronizowane z detectPrinterModel w app/api/chat/route.ts
 const PRINTER_MODELS = [
   'zt411','zt421','zt410','zt420','zt510','zt610','zt620','zt230','zt231','zt200','zt111',
   'zd421','zd621','zd420','zd620','zd410','zd610','zd888','zd500','zd510','zd220','zd230',
-  'gk420d','gk420t','gk420','gx420d','gx420t','gx420','gc420d','gc420t','gc420',
-  'zq510','zq520','zq511','zq521','zq610','zq620','zq630','tlp2844','lp2844',
-  'zc100','zc300','zxp1','zxp3','zxp7','zxp8','zxp9',
-  'tc21','tc26','tc22','tc27','tc51','tc52','tc53','tc56','tc57','tc72','tc73','tc77','tc78',
+  'gk420d','gk420t','gk420','gx430d','gx430t','gx430','gx420d','gx420t','gx420','gc420d','gc420t','gc420',
+  'zq510','zq520','zq511','zq521','zq610','zq620','zq630','tlp2844','lp2844','lp2824','tlp2824',
+  'zc100','zc300','zc350','zxp1','zxp3','zxp7','zxp8','zxp9',
+  'tc21','tc26','tc22','tc27','tc51','tc52','tc53','tc56','tc57','tc58','tc72','tc73','tc77','tc78',
   'mc33','mc93','mc94','mc2200','mc2700','mc3300','mc3400','mc9300',
+  'ds2278','ds2208','ds4608dpe','ds4608xd','ds4608','ds4678dpe','ds4678xd','ds4678',
+  'ds8108','ds8208','ds8178','ds8288','ds9908r','ds9908','ds9308',
+  'ds3608','ds3678','li4278','li2208','ls1203hd','ls1203','ls2208','cs4070','cs6080','cs3000',
 ]
 function detectPrinterModel(query) {
   const ql = query.toLowerCase()
@@ -110,9 +114,18 @@ async function run() {
     const tQuery = (await translateToEnglish(q)) + (detected.length ? ' ' + detected.join(' ') : '')
     const emb = await embed(tQuery)
 
-    // próg produkcyjny: z filtrem modelu, fallback globalny (jak chat)
-    let prod = await match(emb, PROD_THRESHOLD, filterFirst)
-    if (prod.length === 0 && filterFirst) prod = await match(emb, PROD_THRESHOLD, null)
+    // próg produkcyjny: dokładny filtr → @0.3 na tym modelu → global z GUARDEM (jak chat)
+    let prod = []
+    if (filterFirst) {
+      prod = await match(emb, PROD_THRESHOLD, filterFirst)
+      if (prod.length === 0) prod = await match(emb, LOW_THRESHOLD, filterFirst)
+      if (prod.length === 0) {
+        const g = await match(emb, PROD_THRESHOLD, null)
+        prod = g.filter((r) => detected.some((m) => (r.manual_name || '').toUpperCase().includes(m)))
+      }
+    } else {
+      prod = await match(emb, PROD_THRESHOLD, null)
+    }
     // próg niski: globalnie (czy treść w ogóle istnieje)
     const low = await match(emb, LOW_THRESHOLD, null)
 

@@ -208,19 +208,24 @@ function detectPrinterModel(query: string): string[] {
     // ZD Series (desktop)
     'zd421', 'zd621', 'zd420', 'zd620', 'zd410', 'zd610',
     'zd888', 'zd500', 'zd510', 'zd220', 'zd230',
-    // GK/GX Series (starsze desktop)
-    'gk420d', 'gk420t', 'gk420', 'gx420d', 'gx420t', 'gx420',
-    'gc420d', 'gc420t', 'gc420',
+    // GK/GX Series (starsze desktop) — warianty dłuższe PRZED bazowymi (kolejność = priorytet)
+    'gk420d', 'gk420t', 'gk420', 'gx430d', 'gx430t', 'gx430',
+    'gx420d', 'gx420t', 'gx420', 'gc420d', 'gc420t', 'gc420',
     // Mobilne
     'zq510', 'zq520', 'zq511', 'zq521', 'zq610', 'zq620', 'zq630',
     // Starsze
-    'tlp2844', 'lp2844',
+    'tlp2844', 'lp2844', 'lp2824', 'tlp2824',
     // Karty
-    'zc100', 'zc300', 'zxp1', 'zxp3', 'zxp7', 'zxp8', 'zxp9',
+    'zc100', 'zc300', 'zc350', 'zxp1', 'zxp3', 'zxp7', 'zxp8', 'zxp9',
     // Terminale
     'tc21', 'tc26', 'tc22', 'tc27', 'tc51', 'tc52', 'tc53', 'tc56', 'tc57',
-    'tc72', 'tc73', 'tc77', 'tc78',
+    'tc58', 'tc72', 'tc73', 'tc77', 'tc78',
     'mc33', 'mc93', 'mc94', 'mc2200', 'mc2700', 'mc3300', 'mc3400', 'mc9300',
+    // Skanery (DS/LS/LI/CS) — warianty dłuższe przed bazowymi
+    'ds2278', 'ds2208', 'ds4608dpe', 'ds4608xd', 'ds4608', 'ds4678dpe', 'ds4678xd', 'ds4678',
+    'ds8108', 'ds8208', 'ds8178', 'ds8288', 'ds9908r', 'ds9908', 'ds9308',
+    'ds3608', 'ds3678', 'li4278', 'li2208', 'ls1203hd', 'ls1203', 'ls2208',
+    'cs4070', 'cs6080', 'cs3000',
   ]
 
   // Check for each model
@@ -276,27 +281,42 @@ async function searchManuals(query: string): Promise<{
     })
     const queryEmbedding = embeddingResponse.data[0].embedding
 
-    // Szukaj w Supabase vector search (manuals_documents)
-    const filterManual = detectedModels.length > 0 ? detectedModels[0] : null
-    // Próbuj z filtrem modelu, jeśli brak wyników — szukaj globalnie
-    let { data, error } = await supabase.rpc('match_documents', {
-      query_embedding: queryEmbedding,
-      match_threshold: 0.4,
-      match_count: 5,
-      filter_manual: filterManual ? `${filterManual}_Manual` : null,
-    })
-
-    // Fallback: jeśli brak wyników z filtrem, szukaj globalnie
-    if ((!data || data.length === 0) && filterManual) {
-      console.log('🔄 Brak wyników z filtrem, szukam globalnie...')
-      const fallback = await supabase.rpc('match_documents', {
+    // Szukaj w Supabase vector search (manuals_documents) — z GUARDEM na zły model
+    const rpcMatch = (threshold: number, filter: string | null) =>
+      supabase.rpc('match_documents', {
         query_embedding: queryEmbedding,
-        match_threshold: 0.4,
+        match_threshold: threshold,
         match_count: 5,
-        filter_manual: null,
+        filter_manual: filter,
       })
-      data = fallback.data
-      error = fallback.error
+
+    let data: any = null
+    let error: any = null
+    const filterModel = detectedModels.length > 0 ? detectedModels[0] : null
+
+    if (filterModel) {
+      // 1. Dokładny filtr modelu @0.4
+      let r = await rpcMatch(0.4, `${filterModel}_Manual`)
+      error = r.error; data = r.data
+      // 2. Brak? Ten sam manual przy niższym progu 0.3 (bezpieczne — wciąż TYLKO ten model)
+      if (!error && (!data || data.length === 0)) {
+        console.log('🔽 Brak @0.4 — próbuję @0.3 na tym samym manualu...')
+        r = await rpcMatch(0.3, `${filterModel}_Manual`); error = r.error; data = r.data
+      }
+      // 3. Wciąż brak? Global, ale ZOSTAW tylko manuale pasujące do wykrytego modelu
+      //    (GUARD: nie podawaj instrukcji innego urządzenia jako pewnego źródła)
+      if (!error && (!data || data.length === 0)) {
+        r = await rpcMatch(0.4, null); error = r.error
+        data = (r.data || []).filter((d: any) =>
+          detectedModels.some((m) => (d.manual_name || '').toUpperCase().includes(m.toUpperCase()))
+        )
+        if (data.length === 0) {
+          console.log(`🛡️ Guard: brak manuala dla ${detectedModels.join('/')} — NIE używam cudzego manuala`)
+        }
+      }
+    } else {
+      // Brak wykrytego modelu — pytanie ogólne, szukaj globalnie
+      const r = await rpcMatch(0.4, null); error = r.error; data = r.data
     }
 
     if (error) {

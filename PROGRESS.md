@@ -4,6 +4,18 @@ Checkpoint postępu prac. Najnowszy wpis na górze. Po każdym etapie/buildzie d
 
 ---
 
+## 2026-06-14 — ChatAI: KROK 5 — rozszerzony detectPrinterModel + guard → trafność 87% → 100%
+
+- **`app/api/chat/route.ts`**:
+  - `detectPrinterModel`: dodane LP2824/TLP2824, GX430(D/T), ZC350, TC58 oraz cała rodzina skanerów DS/LS/LI/CS (warianty dłuższe przed bazowymi = priorytet).
+  - `searchManuals` przebudowany na bezpieczny: (1) dokładny filtr `${model}_Manual` @0.4 → (2) ten sam manual @0.3 (odzyskuje borderline z WŁAŚCIWEGO manuala) → (3) global @0.4 z **GUARDEM**: zostaw tylko manuale pasujące do wykrytego modelu; jeśli żaden → found=false (NIE podawaj cudzego manuala). Brak modelu = global jak dawniej.
+- **Egzamin v3: 100% (30/30)**, 0 zły_manual, 0 brak_manuala. DS2208/MC3300 reset, GX430T, LP2824 — naprawione. 4× serwis poprawnie poza zakresem.
+- `scripts/chat-exam.mjs` zsynchronizowany z produkcją (lista modeli + guard), results.md = baseline 100%.
+- Postęp całości: 70% → 87% (dograne manuale) → 100% (wykrywanie + guard).
+- **Stan**: tsc czysto, build EXIT=0. Do commitu+pusha. Guard chroni też na przyszłość przed „instrukcją złego urządzenia".
+
+---
+
 ## 2026-06-14 — ChatAI: dograne 7 brakujących manuali → trafność 70% → 87%
 
 - **Pliki od usera** (Desktop/serwiszebra): GK420d, GK420t, GX420T+GX430T, lp2824, tc52(en), tc57(en), zxp3. Wgrane do bucketa Storage `manuals` + zaindeksowane.
