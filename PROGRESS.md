@@ -4,6 +4,19 @@ Checkpoint postępu prac. Najnowszy wpis na górze. Po każdym etapie/buildzie d
 
 ---
 
+## 2026-06-14 — ChatAI: KROK 6 — HEARTBEAT (cotygodniowy automat na mail)
+
+- **Cel**: zautomatyzować część WYKRYWANIA pętli (decyzje/naprawy zostają ręczne). Cron raz w tygodniu → mail.
+- **`lib/chat-exam.ts`**: współdzielona logika egzaminu — importuje `scripts/chat-exam-questions.json` (jedno źródło pytań), `runExam()` z guardem + pulą współbieżności 4 (mieści się w limicie cron). Eksport `loadManualNames`.
+- **`app/api/cron/chat-heartbeat/route.ts`** (`maxDuration=300`): auth CRON_SECRET (Bearer); okno 7 dni; statystyki (rozmowy, 👍/👎, złe oceny admina, RAG-miss); **luki pokrycia** (modele z `detected_model` bez manuala → lista do dograniania); najgorsze odpowiedzi tygodnia; egzamin RAG + **flaga regresji** (próg 90%); mail HTML przez Resend. `?dry=1` = podgląd JSON bez wysyłki. Jeśli egzamin padnie (timeout) → mail i tak wychodzi ze statystykami (graceful).
+- **`vercel.json`**: cron `/api/cron/chat-heartbeat` w `0 7 * * 1` (pon. 7:00).
+- **Mail**: `HEARTBEAT_EMAIL` env, fallback `jakub.tiuchty@takma.com.pl` (jak dzienny chat-report).
+- **Test lokalny (`?dry=1`)**: 100% egz., 31 rozmów/7d, 22 RAG-miss, 0 luk, regresja=nie. Mail lokalnie 403 (klucz Resend nieautoryzowany dla domeny — na PROD OK, jak chat-report).
+- **Uwaga PROD**: `maxDuration=300` wymaga planu Pro (są już crony długie → prawdopodobnie OK). detected_model dopiero od dziś → luki pokrycia zaczną się pojawiać dla NOWYCH rozmów.
+- **Stan**: tsc czysto. Do build+commit+push.
+
+---
+
 ## 2026-06-14 — ChatAI: KROK 5 — rozszerzony detectPrinterModel + guard → trafność 87% → 100%
 
 - **`app/api/chat/route.ts`**:
