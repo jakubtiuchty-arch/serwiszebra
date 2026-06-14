@@ -4,6 +4,16 @@ Checkpoint postępu prac. Najnowszy wpis na górze. Po każdym etapie/buildzie d
 
 ---
 
+## 2026-06-14 — ChatAI: dograne 7 brakujących manuali → trafność 70% → 87%
+
+- **Pliki od usera** (Desktop/serwiszebra): GK420d, GK420t, GX420T+GX430T, lp2824, tc52(en), tc57(en), zxp3. Wgrane do bucketa Storage `manuals` + zaindeksowane.
+- **UWAGA**: oryginalny `scripts/ingest-manuals.mjs` (bucket→DB) przy ponownym uruchomieniu re-procesuje pliki uznane za „częściowe" (ryzyko re-embed 38k/duplikaty) — NIE używać do dokładania pojedynczych. Zamiast tego nowy `scripts/ingest-new-manuals.mjs` = celowany, delete-by-manual_name + insert, dokładne strony (result.pages), pdf-parse v2 API (`new PDFParse({data}).getText()`). Bezpieczny, nie dotyka 144 istniejących.
+- **Nazwy**: GK420D_Manual, GK420T_Manual, GX420T_Manual, GX430T_Manual, LP2824_Manual, TC52_Manual, TC57_Manual, ZXP3_Manual (171–373 chunków każdy). Poszły do PROD DB → chat już z nich korzysta bez deployu.
+- **Egzamin v2: 87% (26/30)**, BRAK MANUALA 7→0. Zostały 4 „zły manual" = mylenie bliźniaków przez braki w `detectPrinterModel`: LP2824 (lista ma lp2844), GX430T (brak), DS2208/skanery (brak DS/LS/LI), MC3300 (jest, ale filtr 0.4 pusty→fallback).
+- **Następne**: KROK 5 = rozszerzyć `detectPrinterModel` (LP2824, GX430T, DS/LS/LI/CS…) → naprawi 3/4; guard „nie podawaj cudzego manuala gdy fallback zwraca inny model" → naprawi MC3300 + bezpieczeństwo.
+
+---
+
 ## 2026-06-14 — ChatAI samodoskonalenie: KROK 4 — egzamin RAG (golden set) + KLUCZOWE wnioski
 
 - **Co**: `scripts/chat-exam.mjs` + `scripts/chat-exam-questions.json` (34 pytania) + `scripts/chat-exam-results.md`. Replikuje ścieżkę RAG chatu (detectPrinterModel→tłumaczenie→embedding→match_documents próg 0.4 z filtrem+fallback), dodatkowo próg 0.2. Klasyfikuje: ok / luka_wyszukiwania / temat_nieznaleziony / zly_manual / brak_manuala / serwis.
