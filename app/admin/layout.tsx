@@ -18,7 +18,8 @@ import {
   ExternalLink,
   Menu,
   X,
-  BookOpen
+  BookOpen,
+  AlertTriangle
 } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
@@ -115,6 +116,13 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       href: '/admin/chat-analytics',
       icon: Sparkles,
       current: pathname === '/admin/chat-analytics',
+      superAdminOnly: true,
+    },
+    {
+      name: 'Złe odpowiedzi',
+      href: '/admin/zle-odpowiedzi',
+      icon: AlertTriangle,
+      current: pathname === '/admin/zle-odpowiedzi',
       superAdminOnly: true,
     },
     // Analiza - tylko dla superadminów
