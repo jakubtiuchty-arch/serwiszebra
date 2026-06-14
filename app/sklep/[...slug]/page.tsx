@@ -509,6 +509,34 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
       }
     }
     // Zasilacze: cena "od X zł" z realnego minimum DOSTĘPNEGO produktu
+    if (productType.slug === 'konwertery') {
+      const konwertery = await getProductsForCategory({ productType: 'konwerter' })
+      const availablePrices = konwertery.filter(p => (p.stock ?? 0) > 0).map(p => p.price)
+      const minPrice = availablePrices.length > 0 ? Math.floor(Math.min(...availablePrices)) : 1398
+      const kTitle = `Konwertery DPI do drukarek Zebra ZT, ZE od ${minPrice} zł | TAKMA`
+      const kDescription = `Oryginalne zestawy konwersji rozdzielczości DPI do drukarek przemysłowych Zebra: ZT111/211/231, ZT411/421, ZE511, ZE521, ZT210/220/230. Zmiana 203↔300↔600 DPI bez wymiany drukarki. Ceny od ${minPrice} zł netto, wysyłka 24h.`
+      return {
+        title: kTitle,
+        description: kDescription,
+        openGraph: {
+          title: kTitle,
+          description: kDescription,
+          url: 'https://www.serwis-zebry.pl/sklep/konwertery',
+          type: 'website',
+          siteName: 'TAKMA - Autoryzowany Serwis Zebra',
+          locale: 'pl_PL',
+          images: [{
+            url: 'https://www.serwis-zebry.pl/sklep_photo/konwerter.jpg',
+            width: 800,
+            height: 800,
+            alt: 'Zestaw konwersji DPI do drukarki przemysłowej Zebra'
+          }]
+        },
+        alternates: {
+          canonical: 'https://www.serwis-zebry.pl/sklep/konwertery'
+        }
+      }
+    }
     if (productType.slug === 'zasilacze') {
       const zasilacze = await getProductsForCategory({ productType: 'zasilacz' })
       const availablePrices = zasilacze.filter(p => (p.stock ?? 0) > 0).map(p => p.price)
@@ -760,7 +788,7 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
   if (slugPath.length === 3 && printerCategory) {
     const model = getModelBySlug(slugPath[0], slugPath[1], slugPath[2])
     if (model) {
-      const typeLabel = productType.id === 'glowica' ? 'Głowice drukujące' : productType.id === 'walek' ? 'Wałki dociskowe' : productType.id === 'zasilacz' ? 'Zasilacze' : 'Akumulatory'
+      const typeLabel = productType.id === 'glowica' ? 'Głowice drukujące' : productType.id === 'walek' ? 'Wałki dociskowe' : productType.id === 'zasilacz' ? 'Zasilacze' : productType.id === 'konwerter' ? 'Konwertery DPI' : 'Akumulatory'
       return {
         title: `${typeLabel} do ${model.name} — oryginalne | TAKMA`,
         description: `Oryginalne ${productType.namePlural.toLowerCase()} do drukarki ${model.name}. Gwarancja producenta, wysyłka 24h. Sprawdź cenę i dostępność.`,
@@ -1746,6 +1774,10 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
     akumulator: {
       src: '/sklep_photo/hero/akumulatory-v2.jpeg',
       alt: 'Akumulatory do terminali i drukarek mobilnych Zebra — oryginalne części zamienne',
+    },
+    konwerter: {
+      src: '/sklep_photo/hero/glowice-v4.jpeg',
+      alt: 'Konwertery DPI do drukarek przemysłowych Zebra — zmiana rozdzielczości głowicy',
     },
   }
   const heroImage = HERO_IMAGES[productType.id]

@@ -4,6 +4,26 @@ Checkpoint postępu prac. Najnowszy wpis na górze. Po każdym etapie/buildzie d
 
 ---
 
+## 2026-06-14 — Sklep: KONWERTERY jako osobna kategoria + zdjęcia
+
+- **Zdjęcie konwertera**: `konwerter.jpg` → `public/sklep_photo/`, ustawione jako `image_url` dla wszystkich 13 konwerterów. **Alt per-konwerter** automatyczny — front renderuje alt z `product.name` (brak kolumny `image_alt`; nazwy są unikalne), linie 1044/235/243.
+- **Nowe głowice (14: 13 + swap)**: `image_url` ustawione na obraz generyczny `glowica-203dpi-...-zd421t.png` (fallback per-model generował ścieżki bez pliku dla ZE/multi-model/300-600dpi → puste). Teraz spójne z istniejącymi.
+- **Osobna kategoria `/sklep/konwertery`**: `product_type` konwerterów zmieniony glowica→**konwerter** (13). Nowy blok w `lib/shop-categories.ts` (id:'konwerter', slug:'konwertery', drzewko: przemysłowe ZT + print engine ZE). `[...slug]/page.tsx`: HERO_IMAGES['konwerter'] (reużyte hero głowic), branch metadanych `/sklep/konwertery` (od minPrice), typeLabel. Render przez ShopCategoryClient (grid). heroImage warunkowy = brak crasha.
+- **Stan**: tsc czysto, build EXIT=0. /sklep/konwertery→200 (treść), konwertery zniknęły z /sklep/glowice, /sklep listuje „Konwertery". **DB już na PROD** → kod MUSI być wypchnięty (inaczej konwertery osierocone na prodzie). Hero konwerterów = na razie reużyte z głowic (TODO: dedykowane jeśli trzeba).
+
+---
+
+## 2026-06-14 — Sklep: brakujące głowice przemysłowe + konwertery DPI (z print-head-guide)
+
+- **Źródło**: `print-head-guide-accessories-en-us.pdf` (katalog Zebra, 2 tabele: aktualne + EOL). Porównane z bazą (było 41 głowic, 0 konwerterów).
+- **Live-check dystrybucji** przez `/api/admin/parts-catalog/check-stock` (Ingram/BlueStar/Jarltech): wszystkie 27 PN istnieją w dystrybucji (18 od ręki, 9 na zamówienie).
+- **`scripts/seed-glowice-konwertery.mjs`** (NOWY, lokalny): pobiera live ceny/stany, purchase=Ingram (źródło crona) lub najtańszy BS/Jarltech (+stock_source), price=×1,10. Wgrał **13 głowic + 13 konwerterów** (product_type='glowica', konwertery resolution_dpi=null, nazwa „Zestaw konwersji DPI"). Głowice dodane: ZE511/ZE521 (203/300/600+rotated), 140Xi4/170Xi4 300, 105SLPlus, 110Xi4, ZE500-4. Konwertery: ZT111/211/231, ZT411/421 (5 kierunków), ZE511/ZE521, ZT210/220/230.
+- **SWAP**: ZT111 203 `P1123335-012` (0 szt, przestarzały PN) → `P1123335-056` (105 szt) — PATCH istniejącego wiersza, **slug zachowany** (`glowica-203-dpi-zebra-zt111`), nazwa→ZT111/211/231.
+- **Stan**: 67 aktywnych głowic, /sklep/glowice→200. Wszystko w PROD DB (live). Na zamówienie (stock 0, pokażą „Niedostępny", cron podbije): głowice P1112750-011, P1053360-018/-019; konwertery P1123335-054, P1112750-014/-015/-017/-018, P1037974-006.
+- **TODO/uwaga**: konwertery siedzą w kategorii głowic — do rozważenia osobna pod-kategoria „Konwertery DPI" (drzewko+hero) jeśli ma być wyróżniona. Seed script niezacommitowany (czeka na decyzję).
+
+---
+
 ## 2026-06-14 — ChatAI: KROK 6 — HEARTBEAT (cotygodniowy automat na mail)
 
 - **Cel**: zautomatyzować część WYKRYWANIA pętli (decyzje/naprawy zostają ręczne). Cron raz w tygodniu → mail.

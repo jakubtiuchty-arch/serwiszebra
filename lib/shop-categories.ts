@@ -227,6 +227,34 @@ export const SHOP_CATEGORIES: ProductTypeCategory[] = [
         ]
       },
     ]
+  },
+  {
+    id: 'konwerter',
+    name: 'Konwerter DPI',
+    namePlural: 'Konwertery DPI',
+    slug: 'konwertery',
+    enabled: true,
+    printerCategories: [
+      {
+        id: 'industrial',
+        name: 'Drukarki przemysłowe',
+        slug: 'drukarki-przemyslowe',
+        models: [
+          { id: 'zt111', name: 'Zebra ZT111/ZT211/ZT231', slug: 'zebra-zt111-zt211-zt231', resolutions: [] },
+          { id: 'zt210', name: 'Zebra ZT210/ZT220/ZT230', slug: 'zebra-zt210-zt220-zt230', resolutions: [] },
+          { id: 'zt411', name: 'Zebra ZT410/ZT411/ZT420/ZT421', slug: 'zebra-zt411-zt421', resolutions: [] },
+        ]
+      },
+      {
+        id: 'printengine',
+        name: 'Print engine (ZE)',
+        slug: 'print-engine',
+        models: [
+          { id: 'ze511', name: 'Zebra ZE511', slug: 'zebra-ze511', resolutions: [] },
+          { id: 'ze521', name: 'Zebra ZE521', slug: 'zebra-ze521', resolutions: [] },
+        ]
+      },
+    ]
   }
 ]
 
