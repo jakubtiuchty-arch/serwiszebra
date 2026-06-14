@@ -112,6 +112,15 @@ const PAGES: PageConfig[] = [
     useSeoDataPhrases: false,
   },
   {
+    path: '/sklep/konwertery/drukarki-przemyslowe',
+    canonical: 'https://www.serwis-zebry.pl/sklep/konwertery/drukarki-przemyslowe',
+    productType: 'konwerter',
+    mainPhrase: 'konwertery dpi do drukarek przemysłowych',
+    phrases: ['zmiana rozdzielczości', 'konwersja 203 na 300', 'zt411', 'zt421', '300 dpi', 'wymiana głowicy'],
+    requireClaimInMeta: false,
+    useSeoDataPhrases: false,
+  },
+  {
     path: '/sklep/akumulatory/terminale',
     canonical: 'https://www.serwis-zebry.pl/sklep/akumulatory/terminale',
     productType: 'akumulator',

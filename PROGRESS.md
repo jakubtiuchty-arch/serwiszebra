@@ -10,7 +10,8 @@ Checkpoint postępu prac. Najnowszy wpis na górze. Po każdym etapie/buildzie d
 - **Kontent kategorii** `/sklep/konwertery` (blok w `[...slug]/page.tsx`, slugPath===1): intro + „203 czy 300 DPI" + tabela PN (z bazy: Urządzenie/Kierunek/PN/Cena/Dostępność) + lista modeli + 5×FAQ + FAQPage schema + CollectionPage (collectionPagesMap + warunek). Zmienne `konwerterMin/MaxPrice`. Metadata branch skrócony do 140–160 zn.
 - **Karty produktów**: `PRODUCT_TYPE_FAQ['konwerter']` (4 Q&A na stronach produktów) + przepisane 13 opisów (description/description_long/meta) z frazami zmiana rozdzielczości/kierunek/kalibracja (live w PROD DB).
 - **Audyt**: `/sklep/konwertery` dodane do `seo-audit-category.ts` (mainPhrase „konwertery dpi do drukarek zebra", frazy zmiana rozdzielczości/konwersja 203 na 300/zestaw konwersji dpi/203 dpi/300 dpi/zt411, requireClaimInMeta). **Wynik: 21/21, łącznie 214/214 PASS — 100%**, bez regresji.
-- **Stan**: tsc czysto, build EXIT=0. Do commitu+pusha. **TODO**: podkategoria `/sklep/konwertery/drukarki-przemyslowe` (slugPath===2) nie ma jeszcze własnego bloku kontentu — główna kategoria pokrywa temat; do dorobienia jako kolejny increment.
+- **Stan**: tsc czysto, build EXIT=0. Wypchnięte.
+- **Domknięcie (drugi increment)**: `/sklep/konwertery/drukarki-przemyslowe` (slugPath===2) — dedykowany branch metadanych (title/meta/OG+image) + blok kontentu (intro + tabela PN zawężona do ZT + lista „kiedy zmienić DPI" + 3×FAQ + FAQPage). Tabela używa prefiltrowanego `products` (tylko ZT, ZE pod /print-engine). Dodane do audytu. **Wynik: 21/21, łącznie 235/235 PASS — 100%**.
 
 ---
 
