@@ -119,6 +119,64 @@ export const SHOP_CATEGORIES: ProductTypeCategory[] = [
     ]
   },
   {
+    id: 'zasilacz',
+    name: 'Zasilacz',
+    namePlural: 'Zasilacze',
+    slug: 'zasilacze',
+    enabled: true,
+    printerCategories: [
+      {
+        id: 'desktop',
+        name: 'Drukarki biurkowe',
+        slug: 'drukarki-biurkowe',
+        models: [
+          { id: 'gk420', name: 'Zebra GK420/GT800/ZD410', slug: 'zebra-gk420-gt800-zd410', resolutions: [] },
+          { id: 'zd220', name: 'Zebra ZD220/ZD230', slug: 'zebra-zd220-zd230', resolutions: [] },
+          { id: 'zd411', name: 'Zebra ZD411/ZD421/ZD621', slug: 'zebra-zd411-zd421-zd621', resolutions: [] },
+        ]
+      },
+      {
+        id: 'mobile',
+        name: 'Drukarki mobilne',
+        slug: 'drukarki-mobilne',
+        models: [
+          { id: 'zq511', name: 'Zebra ZQ511/ZQ521/ZQ610/ZQ630', slug: 'zebra-zq511-zq630', resolutions: [] },
+        ]
+      },
+      {
+        id: 'terminals',
+        name: 'Stacje dokujące terminali',
+        slug: 'terminale',
+        models: [
+          { id: 'tc2x', name: 'Stacje TC22/TC27, MC3xxx, MC9xxx', slug: 'stacje-tc-mc', resolutions: [] },
+        ]
+      },
+      {
+        id: 'tablets',
+        name: 'Tablety',
+        slug: 'tablety',
+        models: [
+          { id: 'et60', name: 'Zebra ET60/ET65', slug: 'zebra-et60-et65', resolutions: [] },
+        ]
+      },
+      {
+        id: 'industrial',
+        name: 'Drukarki przemysłowe',
+        slug: 'drukarki-przemyslowe',
+        models: [
+          { id: 'zt111', name: 'Zebra ZT111/ZT211', slug: 'zebra-zt111-zt211', resolutions: [] },
+          { id: 'zt231', name: 'Zebra ZT231', slug: 'zebra-zt231', resolutions: [] },
+          { id: 'zt220', name: 'Zebra ZT210/ZT220/ZT230', slug: 'zebra-zt210-zt220-zt230', resolutions: [] },
+          { id: 'zt410', name: 'Zebra ZT410/ZT420', slug: 'zebra-zt410-zt420', resolutions: [] },
+          { id: 'zt411', name: 'Zebra ZT411', slug: 'zebra-zt411', resolutions: [] },
+          { id: 'zt421', name: 'Zebra ZT421', slug: 'zebra-zt421', resolutions: [] },
+          { id: 'zt510', name: 'Zebra ZT510/ZT610/ZT620', slug: 'zebra-zt510-zt610-zt620', resolutions: [] },
+          { id: '140xi4', name: 'Zebra Xi4', slug: 'zebra-xi4', resolutions: [] },
+        ]
+      },
+    ]
+  },
+  {
     id: 'akumulator',
     name: 'Akumulator',
     namePlural: 'Akumulatory',

@@ -85,6 +85,15 @@ const PAGES: PageConfig[] = [
     useSeoDataPhrases: false,
   },
   {
+    path: '/sklep/zasilacze',
+    canonical: 'https://www.serwis-zebry.pl/sklep/zasilacze',
+    productType: 'zasilacz',
+    mainPhrase: 'zasilacze do drukarek zebra',
+    phrases: ['zasilacz do drukarki zebra', 'zasilacz zewnętrzny', 'wyłącznik zasilania', 'restarty pod obciążeniem'],
+    requireClaimInMeta: true,
+    useSeoDataPhrases: false,
+  },
+  {
     path: '/sklep/akumulatory',
     canonical: 'https://www.serwis-zebry.pl/sklep/akumulatory',
     productType: 'akumulator',

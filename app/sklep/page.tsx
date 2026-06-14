@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import ShopSubheader from '@/components/shop/ShopSubheader'
@@ -61,32 +62,41 @@ export default function SklepPage() {
       <ShopSubheader breadcrumbs={[{ label: 'Sklep', href: '/sklep' }]} />
 
       <div className="min-h-screen bg-gray-50">
-        {/* Hero - SSR */}
-        <section className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-6 sm:py-8 md:py-10">
-          <div className="max-w-6xl mx-auto px-4">
+        {/* Hero - SSR; pełnowymiarowa grafika (full-bleed) jak w kategoriach */}
+        <section className="relative overflow-hidden bg-slate-900">
+          <Image
+            src="/sklep_photo/hero/sklep-v4.jpeg"
+            alt="Oryginalne części zamienne do drukarek i terminali Zebra — głowice, wałki, akumulatory, zasilacze"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-right"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-950 from-22% via-slate-950/70 via-52% to-transparent to-80%" />
+          <div className="relative max-w-6xl mx-auto px-4 py-8 sm:py-10 md:py-12 min-h-[200px] md:min-h-[240px] flex flex-col justify-center">
             <div className="flex items-center gap-2 mb-2">
-              <ShoppingCart className="w-4 h-4 text-blue-600" />
-              <span className="text-blue-600 font-medium text-xs sm:text-sm">Sklep z częściami</span>
+              <ShoppingCart className="w-4 h-4 text-blue-300" />
+              <span className="text-blue-300 font-medium text-xs sm:text-sm">Sklep z częściami</span>
             </div>
 
-            <h1 className="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-900 mb-2">
+            <h1 className="text-xl sm:text-2xl md:text-3xl font-semibold text-white mb-2">
               Części Zamienne Zebra
             </h1>
 
-            <p className="text-sm text-gray-600 mb-4 max-w-xl">
+            <p className="text-sm text-gray-200 mb-4 max-w-xl">
               Oryginalne głowice drukujące 203/300/600 DPI, wałki dociskowe i akumulatory.
               Wysyłka 24h, gwarancja producenta.
             </p>
 
             <div className="flex gap-2 overflow-x-auto pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 sm:overflow-visible">
-              <div className="bg-white/80 border border-gray-200 px-2.5 py-1 rounded-full text-xs whitespace-nowrap">
-                <span className="text-gray-700">Oryginalne części</span>
+              <div className="bg-white/10 border border-white/25 backdrop-blur-sm px-2.5 py-1 rounded-full text-xs whitespace-nowrap">
+                <span className="text-gray-100">Oryginalne części</span>
               </div>
-              <div className="bg-white/80 border border-gray-200 px-2.5 py-1 rounded-full text-xs whitespace-nowrap">
-                <span className="text-gray-700">Wysyłka 24h</span>
+              <div className="bg-white/10 border border-white/25 backdrop-blur-sm px-2.5 py-1 rounded-full text-xs whitespace-nowrap">
+                <span className="text-gray-100">Wysyłka 24h</span>
               </div>
-              <div className="bg-white/80 border border-gray-200 px-2.5 py-1 rounded-full text-xs whitespace-nowrap">
-                <span className="text-gray-700">Gwarancja</span>
+              <div className="bg-white/10 border border-white/25 backdrop-blur-sm px-2.5 py-1 rounded-full text-xs whitespace-nowrap">
+                <span className="text-gray-100">Gwarancja</span>
               </div>
             </div>
           </div>

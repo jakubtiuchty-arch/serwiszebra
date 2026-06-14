@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { 
+  Zap,
   ChevronRight, 
   ChevronDown,
   Package, 
@@ -55,6 +56,7 @@ const PRODUCT_TYPE_ICONS: Record<string, any> = {
   glowica: Printer,
   walek: Package,
   akumulator: Battery,
+  zasilacz: Zap,
   kabel: Cable
 }
 
@@ -302,7 +304,8 @@ function generateSeoDescription(product: Product): string {
   const genderPrefix: Record<string, string> = {
     glowica: 'Oryginalna',
     walek: 'Oryginalny',
-    akumulator: 'Oryginalny'
+    akumulator: 'Oryginalny',
+    zasilacz: 'Oryginalny'
   }
   const prefix = genderPrefix[product.product_type] || 'Oryginalny'
   const productName = product.name.charAt(0).toLowerCase() + product.name.slice(1)
@@ -502,6 +505,35 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
         },
         alternates: {
           canonical: 'https://www.serwis-zebry.pl/sklep/walki-dociskowe'
+        }
+      }
+    }
+    // Zasilacze: cena "od X zł" z realnego minimum DOSTĘPNEGO produktu
+    if (productType.slug === 'zasilacze') {
+      const zasilacze = await getProductsForCategory({ productType: 'zasilacz' })
+      const availablePrices = zasilacze.filter(p => (p.stock ?? 0) > 0).map(p => p.price)
+      const minPrice = availablePrices.length > 0 ? Math.floor(Math.min(...availablePrices)) : 553
+      const zasTitle = `Zasilacze do drukarek Zebra ZD, ZT i Xi4 od ${minPrice} zł | TAKMA`
+      const zasDescription = `Oryginalne zasilacze do drukarek Zebra: GK420, ZD411, ZT230, ZT411, ZT421, ZT510, Xi4. Ceny od ${minPrice} zł netto. Wysyłka 24h, gwarancja 12 miesięcy.`
+      return {
+        title: zasTitle,
+        description: zasDescription,
+        openGraph: {
+          title: zasTitle,
+          description: zasDescription,
+          url: 'https://www.serwis-zebry.pl/sklep/zasilacze',
+          type: 'website',
+          siteName: 'TAKMA - Autoryzowany Serwis Zebra',
+          locale: 'pl_PL',
+          images: [{
+            url: 'https://www.serwis-zebry.pl/sklep_photo/P1117258-012.png',
+            width: 800,
+            height: 800,
+            alt: 'Oryginalny zasilacz do drukarki Zebra ZD411'
+          }]
+        },
+        alternates: {
+          canonical: 'https://www.serwis-zebry.pl/sklep/zasilacze'
         }
       }
     }
@@ -728,7 +760,7 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
   if (slugPath.length === 3 && printerCategory) {
     const model = getModelBySlug(slugPath[0], slugPath[1], slugPath[2])
     if (model) {
-      const typeLabel = productType.id === 'glowica' ? 'Głowice drukujące' : productType.id === 'walek' ? 'Wałki dociskowe' : 'Akumulatory'
+      const typeLabel = productType.id === 'glowica' ? 'Głowice drukujące' : productType.id === 'walek' ? 'Wałki dociskowe' : productType.id === 'zasilacz' ? 'Zasilacze' : 'Akumulatory'
       return {
         title: `${typeLabel} do ${model.name} — oryginalne | TAKMA`,
         description: `Oryginalne ${productType.namePlural.toLowerCase()} do drukarki ${model.name}. Gwarancja producenta, wysyłka 24h. Sprawdź cenę i dostępność.`,
@@ -858,6 +890,7 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
       "category": product.product_type === 'glowica' ? 'Głowice drukujące > Drukarki Zebra'
         : product.product_type === 'walek' ? 'Wałki dociskowe > Drukarki Zebra'
         : product.product_type === 'akumulator' ? 'Akumulatory > Urządzenia Zebra'
+        : product.product_type === 'zasilacz' ? 'Zasilacze > Drukarki Zebra'
         : 'Części zamienne Zebra',
       "model": product.device_model || undefined,
       "dateModified": new Date().toISOString(),
@@ -1500,7 +1533,14 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
       notFound()
     }
     pageTitle = `${productType.namePlural} - ${printerCategory.name}`
-    const categoryGenitive: Record<string, string> = { 'Terminale': 'terminali', 'Drukarki mobilne': 'drukarek mobilnych' }
+    const categoryGenitive: Record<string, string> = {
+      'Terminale': 'terminali',
+      'Drukarki mobilne': 'drukarek mobilnych',
+      'Drukarki biurkowe': 'drukarek biurkowych',
+      'Drukarki przemysłowe': 'drukarek przemysłowych',
+      'Stacje dokujące terminali': 'stacji dokujących terminali',
+      'Tablety': 'tabletów',
+    }
     pageSubtitle = `${productType.namePlural} do ${categoryGenitive[printerCategory.name] || printerCategory.name.toLowerCase()} Zebra`
     filters.printerCategory = printerCategory.id
   }
@@ -1598,6 +1638,10 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
       url: 'https://www.serwis-zebry.pl/sklep/walki-dociskowe/drukarki-przemyslowe',
       description: 'Oryginalne wałki dociskowe do drukarek przemysłowych Zebra serii ZT230, ZT411, ZT421, ZT510, ZT610 i ZT620.'
     },
+    'zasilacze': {
+      url: 'https://www.serwis-zebry.pl/sklep/zasilacze',
+      description: 'Oryginalne zasilacze i moduły zasilania do drukarek etykiet Zebra — biurkowych ZD/GK i przemysłowych ZT oraz Xi4.'
+    },
     'akumulatory': {
       url: 'https://www.serwis-zebry.pl/sklep/akumulatory',
       description: 'Oryginalne akumulatory Li-Ion do urządzeń Zebra — terminali TC i MC, drukarek mobilnych ZQ i tabletów ET.'
@@ -1611,7 +1655,7 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
       description: 'Oryginalne akumulatory do drukarek mobilnych Zebra serii ZQ — od ZQ220 Plus do ZQ630 Plus.'
     }
   }
-  const glowiceCollection = (productType.id === 'glowica' || productType.id === 'walek' || productType.id === 'akumulator')
+  const glowiceCollection = (productType.id === 'glowica' || productType.id === 'walek' || productType.id === 'akumulator' || productType.id === 'zasilacz')
     ? collectionPagesMap[slugPath.join('/')]
     : undefined
   const collectionPageSchema = glowiceCollection ? {
@@ -1652,6 +1696,14 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
   const akumMaxPrice = productType.id === 'akumulator' && products.length > 0
     ? Math.ceil(Math.max(...products.map(p => p.price)))
     : 629
+  // Analogicznie dla zasilaczy
+  const zasilaczAvailablePrices = productType.id === 'zasilacz'
+    ? products.filter(p => (p.stock ?? 0) > 0).map(p => p.price)
+    : []
+  const zasilaczMinPrice = zasilaczAvailablePrices.length > 0 ? Math.floor(Math.min(...zasilaczAvailablePrices)) : 553
+  const zasilaczMaxPrice = productType.id === 'zasilacz' && products.length > 0
+    ? Math.ceil(Math.max(...products.map(p => p.price)))
+    : 2086
   // Specyfikacje baterii (typ + pojemność) — dane stałe producenta, klucz = SKU;
   // wiersze tabel pochodzą z bazy, więc nieistniejące produkty nie mają jak się pojawić
   const BATTERY_SPECS: Record<string, string> = {
@@ -1675,6 +1727,28 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
   const batteryGroup = (model: string) =>
     model.startsWith('ZQ') ? 'Drukarki mobilne' : model.startsWith('ET') ? 'Tablety' : 'Terminale mobilne'
   const formatPln = (v: number) => v.toLocaleString('pl-PL')
+
+  // Obraz hero per typ części (styl spójny z blogiem — komiksowy split z błyskawicami).
+  // Reużywany na stronie głównej kategorii i wszystkich podkategoriach danego typu.
+  const HERO_IMAGES: Record<string, { src: string; alt: string }> = {
+    zasilacz: {
+      src: '/sklep_photo/hero/zasilacze-v3.jpeg',
+      alt: 'Zasilacze do drukarek i terminali Zebra — oryginalne części zamienne',
+    },
+    glowica: {
+      src: '/sklep_photo/hero/glowice-v4.jpeg',
+      alt: 'Głowice drukujące do drukarek etykiet Zebra — oryginalne części zamienne',
+    },
+    walek: {
+      src: '/sklep_photo/hero/walki-v5.jpeg',
+      alt: 'Wałki dociskowe do drukarek etykiet Zebra — oryginalne części zamienne',
+    },
+    akumulator: {
+      src: '/sklep_photo/hero/akumulatory-v2.jpeg',
+      alt: 'Akumulatory do terminali i drukarek mobilnych Zebra — oryginalne części zamienne',
+    },
+  }
+  const heroImage = HERO_IMAGES[productType.id]
 
   // BreadcrumbList Schema dla kategorii
   const categoryBreadcrumbSchema = {
@@ -1729,31 +1803,45 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
       <ShopSubheader breadcrumbs={breadcrumbs} />
       
       <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-        {/* Hero - spójne z /sklep */}
-        <section className="relative bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-8 sm:py-10 md:py-12 overflow-hidden">
-          <div className="relative max-w-6xl mx-auto px-3 sm:px-4">
+        {/* Hero - spójne z /sklep; pełnowymiarowa grafika (full-bleed) gdy typ ma heroImage,
+            render po prawej + gradient od lewej pod tekst */}
+        <section className={`relative overflow-hidden ${heroImage ? 'bg-slate-900' : 'bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50'}`}>
+          {heroImage && (
+            <>
+              <Image
+                src={heroImage.src}
+                alt={heroImage.alt}
+                fill
+                priority
+                sizes="100vw"
+                className="object-cover object-right"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-slate-950 from-22% via-slate-950/70 via-52% to-transparent to-80%" />
+            </>
+          )}
+          <div className="relative max-w-6xl mx-auto px-3 sm:px-4 py-8 sm:py-10 md:py-12 min-h-[240px] md:min-h-[280px] flex flex-col justify-center">
             <div className="flex items-center justify-center md:justify-start gap-1.5 sm:gap-2 mb-3">
-              <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
-              <span className="text-blue-600 font-medium text-sm">Sklep z częściami</span>
+              <ShoppingCart className={`w-4 h-4 sm:w-5 sm:h-5 ${heroImage ? 'text-blue-300' : 'text-blue-600'}`} />
+              <span className={`font-medium text-sm ${heroImage ? 'text-blue-300' : 'text-blue-600'}`}>Sklep z częściami</span>
             </div>
-            
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-gray-900 mb-3 sm:mb-4 text-center md:text-left">
+
+            <h1 className={`text-2xl sm:text-3xl md:text-4xl font-semibold mb-3 sm:mb-4 text-center md:text-left ${heroImage ? 'text-white' : 'text-gray-900'}`}>
               {pageTitle}
             </h1>
-            
-            <p className="text-sm sm:text-base text-gray-600 mb-5 sm:mb-6 max-w-2xl text-center md:text-left md:mx-0">
+
+            <p className={`text-sm sm:text-base mb-5 sm:mb-6 max-w-2xl text-center md:text-left md:mx-0 ${heroImage ? 'text-gray-200' : 'text-gray-600'}`}>
               {pageSubtitle}. Wysyłka 24h, gwarancja producenta.
             </p>
 
             <div className="flex flex-wrap justify-center md:justify-start gap-2 sm:gap-3">
-              <div className="bg-white/80 backdrop-blur-sm border border-gray-200 px-3 py-1.5 rounded-full text-xs sm:text-sm shadow-sm">
-                <span className="text-gray-700">Oryginalne części</span>
+              <div className={`backdrop-blur-sm border px-3 py-1.5 rounded-full text-xs sm:text-sm shadow-sm ${heroImage ? 'bg-white/10 border-white/25' : 'bg-white/80 border-gray-200'}`}>
+                <span className={heroImage ? 'text-gray-100' : 'text-gray-700'}>Oryginalne części</span>
               </div>
-              <div className="bg-white/80 backdrop-blur-sm border border-gray-200 px-3 py-1.5 rounded-full text-xs sm:text-sm shadow-sm">
-                <span className="text-gray-700">Wysyłka 24h</span>
+              <div className={`backdrop-blur-sm border px-3 py-1.5 rounded-full text-xs sm:text-sm shadow-sm ${heroImage ? 'bg-white/10 border-white/25' : 'bg-white/80 border-gray-200'}`}>
+                <span className={heroImage ? 'text-gray-100' : 'text-gray-700'}>Wysyłka 24h</span>
               </div>
-              <div className="bg-white/80 backdrop-blur-sm border border-gray-200 px-3 py-1.5 rounded-full text-xs sm:text-sm shadow-sm">
-                <span className="text-gray-700">Gwarancja</span>
+              <div className={`backdrop-blur-sm border px-3 py-1.5 rounded-full text-xs sm:text-sm shadow-sm ${heroImage ? 'bg-white/10 border-white/25' : 'bg-white/80 border-gray-200'}`}>
+                <span className={heroImage ? 'text-gray-100' : 'text-gray-700'}>Gwarancja</span>
               </div>
             </div>
           </div>
@@ -2111,6 +2199,135 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
                 { "@type": "Question", "name": "Jak czyścić wałek dociskowy?", "acceptedAnswer": { "@type": "Answer", "text": "Czyść alkoholem izopropylowym (IPA 99%) co 5 000-10 000 etykiet. Nigdy nie używaj rozpuszczalników." }},
                 { "@type": "Question", "name": "Jaka jest żywotność wałka dociskowego?", "acceptedAnswer": { "@type": "Answer", "text": "500 000 - 1 000 000 etykiet (150-300 km), ok. 2-3 lata przy normalnym użytkowaniu." }},
                 { "@type": "Question", "name": "Jak wymienić wałek — krok po kroku?", "acceptedAnswer": { "@type": "Answer", "text": "Wyłącz drukarkę, otwórz pokrywę, zwolnij mechanizm blokujący, wyjmij stary wałek, włóż nowy i zablokuj. Po wymianie wykonaj kalibrację czujników. 2-5 minut." }}
+              ]
+            }) }}
+          />
+          </>
+        )}
+
+        {/* SEO Content Section - Zasilacze */}
+        {productType.id === 'zasilacz' && slugPath.length === 1 && (
+          <>
+          <section className="py-8 sm:py-12 bg-white border-t border-gray-100">
+            <div className="max-w-4xl mx-auto px-4">
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">
+                Zasilacze do drukarek Zebra — przewodnik
+              </h2>
+
+              <div className="prose prose-sm sm:prose-base prose-gray max-w-none">
+                <p className="text-gray-600 leading-relaxed mb-4">
+                  <strong>Zasilacz</strong> to po głowicy najczęstsza przyczyna awarii drukarki etykiet.
+                  Typowe objawy uszkodzenia: drukarka nie włącza się mimo sprawnego gniazdka, samoczynnie
+                  restartuje się pod obciążeniem albo gaśnie w momencie startu druku, gdy głowica pobiera
+                  najwięcej prądu. Dobrze dobrany zasilacz do drukarki Zebra musi zgadzać się z pełnym
+                  symbolem modelu — w naszym sklepie każdy zasilacz ma przypisany Part Number i listę
+                  zgodnych urządzeń. Ceny zaczynają się od {formatPln(zasilaczMinPrice)} zł netto.
+                </p>
+
+                <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
+                  Zasilacz zewnętrzny czy wewnętrzny?
+                </h3>
+                <p className="text-gray-600 leading-relaxed mb-4">
+                  W drukarkach <strong>biurkowych</strong> (GK420, GX420, ZD410, ZD411) zasilacz jest
+                  <strong> zewnętrzny</strong> — to kostka z przewodem, którą wymienisz bez otwierania
+                  urządzenia: odłącz starą, podłącz nową i drukuj. W drukarkach <strong>przemysłowych
+                  serii ZT i Xi4</strong> zasilacz jest <strong>wewnętrzny</strong> — wymiana wymaga
+                  zdjęcia pokrywy bocznej i odłączenia wiązek, ale nadal jest wykonalna we własnym
+                  zakresie przez dział utrzymania ruchu. Jeśli wolisz, wymienimy zasilacz w naszym
+                  serwisie wraz z pełną diagnostyką układu zasilania.
+                </p>
+
+                <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
+                  Tabela Part Numbers — zasilacze Zebra
+                </h3>
+                <div className="overflow-x-auto mb-6">
+                  {/* Tabela generowana z bazy produktów — PN, ceny i dostępność zawsze aktualne */}
+                  <table className="w-full text-sm">
+                    <thead className="bg-gray-50">
+                      <tr>
+                        <th className="px-3 py-2 text-left font-semibold">Urządzenie</th>
+                        <th className="px-3 py-2 text-left font-semibold">Rodzaj</th>
+                        <th className="px-3 py-2 text-left font-semibold">Part Number</th>
+                        <th className="px-3 py-2 text-left font-semibold">Cena (netto)</th>
+                        <th className="px-3 py-2 text-left font-semibold">Dostępność</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-gray-100">
+                      {[...products]
+                        .filter(p => p.device_model)
+                        .sort((a, b) => a.device_model.localeCompare(b.device_model, 'pl') || a.sku.localeCompare(b.sku))
+                        .map(p => (
+                          <tr key={p.sku}>
+                            <td className="px-3 py-2 font-medium">{p.device_model}</td>
+                            <td className="px-3 py-2">{p.name.split(' do ')[0]}</td>
+                            <td className="px-3 py-2 font-mono text-xs">{p.sku}</td>
+                            <td className="px-3 py-2">{formatPln(Math.round(p.price))} zł</td>
+                            <td className="px-3 py-2">{(p.stock ?? 0) > 0 ? 'Dostępny' : 'Chwilowo niedostępny'}</td>
+                          </tr>
+                        ))}
+                    </tbody>
+                  </table>
+                </div>
+
+                <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
+                  Jak rozpoznać uszkodzony zasilacz?
+                </h3>
+                <ul className="text-gray-600 space-y-2 mb-4">
+                  <li><strong>Drukarka nie daje znaku życia</strong> — żadna dioda się nie świeci mimo sprawnego gniazdka i kabla. W biurkowych sprawdź najpierw diodę na kostce zasilacza.</li>
+                  <li><strong>Restarty pod obciążeniem</strong> — drukarka uruchamia się, ale gaśnie lub restartuje w momencie startu druku. Zużyty zasilacz nie dostarcza prądu szczytowego dla głowicy.</li>
+                  <li><strong>Drukarka działa „raz tak, raz nie"</strong> — przerywane działanie wskazuje na wysychające kondensatory w zasilaczu albo uszkodzony wyłącznik zasilania.</li>
+                  <li><strong>Blade wydruki przy poprawnej głowicy</strong> — spadek napięcia z zasilacza obniża energię grzewczą głowicy.</li>
+                </ul>
+
+                <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
+                  Najczęściej zadawane pytania
+                </h3>
+                <div className="space-y-4 mb-6">
+                  <div className="border border-slate-200 rounded-xl p-4">
+                    <p className="font-semibold text-gray-900">Jak dobrać zasilacz do drukarki Zebra?</p>
+                    <p className="text-gray-600 text-sm mt-1">Sprawdź model drukarki na tabliczce znamionowej i znajdź odpowiedni Part Number w tabeli powyżej. Zasilacze nie są wymienne między seriami — zasilacz ZT411 nie zadziała w ZT421, mimo podobnej konstrukcji drukarek.</p>
+                  </div>
+                  <div className="border border-slate-200 rounded-xl p-4">
+                    <p className="font-semibold text-gray-900">Ile kosztuje zasilacz do drukarki Zebra?</p>
+                    <p className="text-gray-600 text-sm mt-1">Oryginalne zasilacze Zebra kosztują od {formatPln(zasilaczMinPrice)} zł do {formatPln(zasilaczMaxPrice)} zł netto. Najtańsze są zasilacze zewnętrzne do drukarek biurkowych, najdroższe — wewnętrzne moduły do maszyn przemysłowych Xi4.</p>
+                  </div>
+                  <div className="border border-slate-200 rounded-xl p-4">
+                    <p className="font-semibold text-gray-900">Czy mogę użyć zamiennika zasilacza?</p>
+                    <p className="text-gray-600 text-sm mt-1">Odradzamy. Drukarki termiczne pobierają wysokie prądy szczytowe przy nagrzewaniu głowicy — zamiennik o zaniżonych parametrach powoduje restarty, blade wydruki i może uszkodzić elektronikę. Oryginalny zasilacz ma dokładnie wyprofilowaną charakterystykę prądową.</p>
+                  </div>
+                  <div className="border border-slate-200 rounded-xl p-4">
+                    <p className="font-semibold text-gray-900">Drukarka nie włącza się — zasilacz czy coś innego?</p>
+                    <p className="text-gray-600 text-sm mt-1">Kolejność diagnozy: gniazdko i kabel zasilający → dioda na kostce (biurkowe) → wyłącznik zasilania (częsta usterka w ZT210/ZT220/ZT230) → zasilacz → płyta główna. Jeśli po wymianie zasilacza drukarka nadal nie działa, prześlij ją do naszego serwisu — zdiagnozujemy elektronikę.</p>
+                  </div>
+                  <div className="border border-slate-200 rounded-xl p-4">
+                    <p className="font-semibold text-gray-900">Czy wymiana zasilacza wymaga serwisu?</p>
+                    <p className="text-gray-600 text-sm mt-1">W drukarkach biurkowych nie — zasilacz jest zewnętrzny, wymiana to podłączenie nowej kostki. W przemysłowych ZT/Xi4 zasilacz jest wewnętrzny: wymiana wymaga zdjęcia pokrywy i odłączenia wiązek (15-30 minut). Oferujemy też wymianę w serwisie z diagnostyką całego układu zasilania.</p>
+                  </div>
+                </div>
+
+                <div className="bg-blue-50 border border-blue-100 rounded-lg p-4 mt-6">
+                  <p className="text-blue-800 text-sm">
+                    <strong>Drukarka nie włącza się?</strong> Diagnozujemy układy zasilania drukarek Zebra —
+                    od zasilacza, przez wyłącznik, po płytę główną. Odbiór kurierem z całej Polski.
+                    <a href="/#formularz" className="underline ml-1">Zgłoś do serwisu →</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* FAQPage Schema — /sklep/zasilacze */}
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": [
+                { "@type": "Question", "name": "Jak dobrać zasilacz do drukarki Zebra?", "acceptedAnswer": { "@type": "Answer", "text": "Sprawdź model drukarki na tabliczce znamionowej i znajdź Part Number w tabeli. Zasilacze nie są wymienne między seriami — zasilacz ZT411 nie zadziała w ZT421." }},
+                { "@type": "Question", "name": "Ile kosztuje zasilacz do drukarki Zebra?", "acceptedAnswer": { "@type": "Answer", "text": `Oryginalne zasilacze Zebra kosztują od ${formatPln(zasilaczMinPrice)} zł do ${formatPln(zasilaczMaxPrice)} zł netto. Najtańsze są zewnętrzne do drukarek biurkowych, najdroższe — wewnętrzne do maszyn Xi4.` }},
+                { "@type": "Question", "name": "Czy mogę użyć zamiennika zasilacza?", "acceptedAnswer": { "@type": "Answer", "text": "Odradzamy. Drukarki termiczne pobierają wysokie prądy szczytowe przy nagrzewaniu głowicy — zamiennik o zaniżonych parametrach powoduje restarty, blade wydruki i może uszkodzić elektronikę." }},
+                { "@type": "Question", "name": "Drukarka nie włącza się — zasilacz czy coś innego?", "acceptedAnswer": { "@type": "Answer", "text": "Kolejność diagnozy: gniazdko i kabel → dioda na kostce (biurkowe) → wyłącznik zasilania → zasilacz → płyta główna." }},
+                { "@type": "Question", "name": "Czy wymiana zasilacza wymaga serwisu?", "acceptedAnswer": { "@type": "Answer", "text": "W drukarkach biurkowych nie — zasilacz jest zewnętrzny. W przemysłowych ZT/Xi4 wymiana wewnętrznego modułu zajmuje 15-30 minut; oferujemy też wymianę w serwisie." }}
               ]
             }) }}
           />
