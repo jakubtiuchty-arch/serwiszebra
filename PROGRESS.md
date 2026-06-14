@@ -4,6 +4,17 @@ Checkpoint postępu prac. Najnowszy wpis na górze. Po każdym etapie/buildzie d
 
 ---
 
+## 2026-06-14 — ChatAI samodoskonalenie: KROK 3 — widok „Złe odpowiedzi" + auto-diagnoza
+
+- **Cel**: jedno miejsce na cotygodniowy przegląd wpadek; każda z automatyczną diagnozą wg 3 powodów + czarną skrzynką.
+- **Endpoint** `app/api/chat-logs/problems/route.ts`: logi z ostatnich N dni gdzie 👎 użytkownika LUB ocena admina ≤2 LUB brak RAG (pomija `pre-filter-rejected`). Auto-diagnoza: `brak_wiedzy` (RAG pusty), `slabe_dopasowanie` (top sim <0.5), `zla_odpowiedz` (dobry kontekst, zła odpowiedź). Sort: siła sygnału (👎>admin>RAG-miss) → najsłabsze dopasowanie. Param `signal`=all|rated|norag, `days`=1..90. Zwraca też summary (liczniki per powód).
+- **Strona** `app/admin/zle-odpowiedzi/page.tsx`: karty podsumowania (łapki w dół + 3 powody), zakładki czasu (7/30/90) i sygnału (Wszystkie/Ocenione źle/Brak instrukcji), lista z modelem, sygnałem, diagnozą, „💡 co naprawić", rozmową i czarną skrzynką (manual·sim%). `/admin/*` ma middleware (307 do logowania) — spójne z resztą.
+- **Uwaga**: historyczne logi sprzed czarnej skrzynki nie mają `rag_sources` → lądują jako `brak_wiedzy`. Dla NOWYCH odpowiedzi 3 powody się rozróżnią. Zakładka `rated`=0 teraz (👎 dopiero zaczęły płynąć), `norag`=100 (braki widać od razu).
+- **Stan**: tsc czysto, build EXIT=0, route'y zarejestrowane. BEZ migracji SQL. Do commitu+pusha.
+- **Następne**: KROK 4 = egzamin dla chata (golden set realnych Q&A z 👎) + sędzia → potem tuning retrievalu (naiwny chunking 1000/200 = największa słabość) i dograć brakujące manuale z zakładki „Brak instrukcji".
+
+---
+
 ## 2026-06-14 — ChatAI samodoskonalenie: KROK 2 — „czarna skrzynka" (diagnoza RAG)
 
 - **Cel**: przy 👎 wiedzieć DLACZEGO (3 powody: brak instrukcji / złe wyszukiwanie / zły styl). Dotąd log miał tylko `rag_context_found` (boolean).
