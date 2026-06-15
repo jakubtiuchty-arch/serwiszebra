@@ -35456,6 +35456,178 @@ Wyłącznie **70% IPA** lub łagodnym mydłem z wodą. Bez acetonu, amoniaku i �
 `
       }
     ]
+  },
+  'ds4678': {
+    model: 'DS4678',
+    title: 'Zebra DS4678 – Instrukcja obsługi po polsku',
+    lastUpdated: '2026-06-15',
+    sourceDocument: 'DS4678 Series Product Reference Guide + Quick Start Guide',
+    keywords: [
+      'zebra ds4678 instrukcja',
+      'ds4678 instrukcja po polsku',
+      'ds4678 instrukcja obsługi',
+      'ds4678 parowanie',
+      'ds4678 bluetooth',
+      'ds4678 ładowanie',
+      'ds4678 cr4600',
+      'ds4678 ustawienia fabryczne',
+      'ds4678 reset',
+      'skaner bezprzewodowy zebra ds4678'
+    ],
+    sections: [
+      {
+        title: '1. Podstawowe informacje',
+        content: `
+### O skanerze Zebra DS4678
+
+Zebra **DS4678** to ręczny, **bezprzewodowy** skaner obrazowy klasy premium, czytający kody **1D i 2D** oraz przechwytujący obrazy. To bezprzewodowy odpowiednik DS4608 — łączy się przez **Bluetooth** i współpracuje z bazą ładująco-komunikacyjną **CR4600**. Szybki, do handlu, ochrony zdrowia i lekkiego przemysłu. Kolory: Nova White, Twilight Black.
+
+### Kluczowe cechy
+
+| Cecha | Wartość |
+|-------|---------|
+| **Typ** | Bezprzewodowy imager 1D/2D z przechwytywaniem obrazu |
+| **Łączność** | Bluetooth (Class 2, zasięg do ~10 m) |
+| **Bateria** | PowerPrecision Li-Ion (wymienna) |
+| **Baza** | CR4600 (ładowanie + komunikacja) |
+| **Sensor** | 1280 × 800 px |
+| **EAS** | Zgodny z systemem Checkpoint |
+| **Temperatura pracy** | od 0°C do +50°C |
+
+> **Uwaga:** przed pierwszym użyciem naładuj baterię do pełna (na bazie CR4600 lub przez kabel).
+`
+      },
+      {
+        title: '2. Bateria i ładowanie',
+        content: `
+1. Włóż baterię do skanera i umieść skaner w bazie **CR4600**.
+2. Skaner uruchomi się, a dioda bazy **mignie na zielono** — to początek ładowania.
+3. Zaleca się pełne naładowanie przed pierwszym użyciem.
+
+> **Ważne:** bateria nie ładuje się w wysokiej temperaturze (powyżej ok. 40°C). W trybie prezentacji intensywne skanowanie wydłuża ładowanie.
+
+Twardy restart: wyjmij baterię na ~10 s i włóż ponownie.
+`
+      },
+      {
+        title: '3. Parowanie z bazą',
+        content: `
+Skaner i baza muszą być **sparowane**:
+
+- **Przez włożenie do bazy** — domyślnie włączone (pairing on contacts).
+- **Przez zeskanowanie kodu parowania** — kod jest **unikalny dla każdej bazy**.
+
+> Po zeskanowaniu kodu parowania poczekaj na potwierdzenie połączenia, zanim zeskanujesz dane.
+
+### Gdy dane nie docierają do hosta
+
+1. Odłącz zasilanie i kabel interfejsu od bazy. 2. Odczekaj 3 s. 3. Podłącz kabel i zasilanie z powrotem. 4. Sparuj ponownie (wsuń skaner do bazy lub zeskanuj kod parowania).
+`
+      },
+      {
+        title: '4. Wskaźniki LED i sygnały dźwiękowe',
+        content: `
+Po poprawnym odczycie skaner **bipnie**, a dioda mignie.
+
+| Sygnał | Znaczenie |
+|--------|-----------|
+| Rosnąca seria tonów przy włączeniu | Poprawne uruchomienie |
+| 1 bip + mignięcie diody | Kod odczytany poprawnie |
+| Dioda bazy miga na zielono | Trwa ładowanie |
+| Seria tonów parowania | Połączenie z bazą nawiązane / utracone |
+| Niski ton / brak reakcji | Kod nieodczytany |
+
+Głośność i ton sygnału są regulowane kodami konfiguracyjnymi.
+`
+      },
+      {
+        title: '5. Skanowanie kodów',
+        content: `
+1. Skieruj skaner na kod i naciśnij spust — pojawi się celownik.
+2. Ustaw celownik na kodzie (odczyt wielokierunkowy).
+3. Po odczycie skaner bipnie i mignie diodą.
+
+W **trybie prezentacji** (na bazie) skaner skanuje automatycznie po zbliżeniu kodu. Czyta kody **1D** (Code 39/128, UPC/EAN, GS1 DataBar) i **2D** (PDF417, Data Matrix, QR Code, Aztec, MaxiCode); przechwytuje też obrazy.
+`
+      },
+      {
+        title: '6. Konfiguracja kodami kreskowymi',
+        content: `
+### Przywrócenie ustawień fabrycznych
+
+1. Zeskanuj kod **„Set Defaults"** z Product Reference Guide.
+2. Alternatywnie użyj programu **Zebra 123Scan**.
+
+> **Uwaga:** reset kasuje ustawienia, w tym **parowanie** — po resecie sparuj skaner ponownie.
+
+### Najczęstsze ustawienia
+
+- **Enter (CR/LF) po skanie**, **Tab po skanie**, **prefiks/sufiks**.
+- **Out of Range Batch Mode** — zapis skanów poza zasięgiem bazy.
+- **Głośność i ton beepera** — Low / Medium / High.
+`
+      },
+      {
+        title: '7. Konserwacja i czyszczenie',
+        content: `
+- Czyść **70% IPA** lub łagodnym mydłem z wodą (zalecane chusteczki Zebra).
+- Nie używaj acetonu, amoniaku (na szybę), środków ściernych ani rozpuszczalników.
+
+**Procedura:** wyjmij skaner z bazy → przetrzyj **okno skanujące** i obudowę ściereczką z 70% IPA → wyczyść **styki ładowania** skanera i bazy → pozostaw do wyschnięcia.
+`
+      },
+      {
+        title: '8. Rozwiązywanie problemów',
+        content: `
+| Problem | Możliwa przyczyna | Rozwiązanie |
+|---------|-------------------|-------------|
+| Brak komunikacji z bazą | Skaner niesparowany | Wsuń skaner do bazy lub zeskanuj kod parowania |
+| Dane nie docierają do hosta | Utracone połączenie bazy z hostem | Wykonaj procedurę ponownego połączenia (sekcja „Parowanie") |
+| Skaner nie ładuje się | Temperatura powyżej 40°C lub brudne styki | Ładuj w niższej temperaturze; wyczyść styki 70% IPA |
+| Nie czyta kodu | Brudne okno / zła odległość | Wyczyść okno, dostosuj odległość |
+| Bipa, ale brak danych | Zły interfejs hosta na bazie | Zeskanuj kod właściwego interfejsu (USB HID / USB COM / RS-232) |
+| Traci łączność poza halą | Poza zasięgiem Bluetooth | Włącz Out of Range Batch Mode lub pozostań w zasięgu |
+
+Jeśli problem nie ustępuje, zaktualizuj firmware (zebra.com/support lub 123Scan) i sparuj skaner ponownie.
+`
+      },
+      {
+        title: '9. Specyfikacja techniczna',
+        content: `
+| Parametr | DS4678 |
+|----------|--------|
+| **Typ** | Bezprzewodowy imager 1D/2D z przechwytywaniem obrazu |
+| **Łączność** | Bluetooth Class 2 (do ~10 m) |
+| **Bateria** | PowerPrecision Li-Ion, wymienna |
+| **Baza** | CR4600 (ładowanie + komunikacja) |
+| **Sensor** | 1280 × 800 px |
+| **Temperatura pracy** | od 0°C do +50°C |
+| **Ładowanie** | poniżej ok. 40°C |
+| **EAS** | zgodny z Checkpoint |
+| **Tryby** | ręczny, prezentacji, Out of Range Batch |
+`
+      },
+      {
+        title: 'FAQ – Najczęściej zadawane pytania',
+        content: `
+### Jak sparować DS4678 z bazą?
+
+Wsuń skaner do bazy **CR4600** (parowanie przez kontakt jest domyślne) lub zeskanuj **kod parowania** danej bazy.
+
+### Skaner nie ładuje się — dlaczego?
+
+Najczęściej z powodu **zbyt wysokiej temperatury** (>40°C) lub brudnych styków ładowania. Wyczyść styki 70% IPA.
+
+### Po resecie nie łączy się z bazą?
+
+Reset **kasuje parowanie** — sparuj skaner ponownie (wsuń do bazy lub zeskanuj kod parowania).
+
+### Czym różni się DS4678 od DS4608?
+
+DS4678 jest **bezprzewodowy** (bateria + Bluetooth + baza CR4600), DS4608 **przewodowy**. Optyka i funkcje (1D/2D, obrazy, EAS) są takie same.
+`
+      }
+    ]
   }
 }
 
