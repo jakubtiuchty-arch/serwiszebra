@@ -35274,6 +35274,188 @@ DS2278 jest **bezprzewodowy** (bateria + Bluetooth + baza CR2278-PC), a DS2208 *
 `
       }
     ]
+  },
+  'ds4608': {
+    model: 'DS4608',
+    title: 'Zebra DS4608 – Instrukcja obsługi po polsku',
+    lastUpdated: '2026-06-15',
+    sourceDocument: 'DS4608 Series Product Reference Guide + Quick Start Guide',
+    keywords: [
+      'zebra ds4608 instrukcja',
+      'ds4608 instrukcja po polsku',
+      'ds4608 instrukcja obsługi',
+      'ds4608 konfiguracja',
+      'ds4608 ustawienia fabryczne',
+      'ds4608 reset',
+      'ds4608 usb',
+      'ds4608 enter po skanie',
+      'ds4608 nie skanuje',
+      'ds4608 dpe xd',
+      'skaner zebra ds4608'
+    ],
+    sections: [
+      {
+        title: '1. Podstawowe informacje',
+        content: `
+### O skanerze Zebra DS4608
+
+Zebra **DS4608** to ręczny, **przewodowy** skaner obrazowy klasy premium, czytający kody **1D i 2D** oraz przechwytujący obrazy i dokumenty. Szybki i precyzyjny — sprawdza się w handlu, ochronie zdrowia, biurze i lekkim przemyśle. Dostępny w kolorach **Nova White** i **Twilight Black**.
+
+### Warianty
+
+| Wariant | Przeznaczenie |
+|---------|---------------|
+| **SR** (Standard Range) | Uniwersalny — większość kodów 1D/2D |
+| **HD** (High Density) | Bardzo małe, gęste kody |
+| **DL** | Optymalizacja pod prawa jazdy / dokumenty |
+| **HL / XD** | Rozszerzona głębia ostrości i wydajność |
+| **DPE** | Direct Part Marking (znakowania bezpośrednie) |
+
+### Kluczowe cechy
+
+| Cecha | Wartość |
+|-------|---------|
+| **Typ** | Przewodowy imager 1D/2D z przechwytywaniem obrazu |
+| **Interfejsy** | USB, RS-232, IBM 46XX (RS-485) |
+| **Sensor** | 1280 × 800 px |
+| **EAS** | Zgodny z systemem dezaktywacji Checkpoint |
+| **Obrazy** | Eksport Bitmap, JPEG, TIFF |
+| **Temperatura pracy** | od 0°C do +50°C |
+| **Kolory** | Nova White, Twilight Black |
+
+> **Uwaga:** DS4608 jest skanerem przewodowym — zasilanie pobiera z portu USB hosta (4,5–5,5 V).
+`
+      },
+      {
+        title: '2. Wskaźniki LED i sygnały dźwiękowe',
+        content: `
+Po poprawnym zeskanowaniu kodu skaner **bipnie**, a dioda mignie (good decode). DS4608 ma wskaźniki: Direct Decode Indicator, diody Good Decode oraz diody Rear View (widoczne od tyłu).
+
+| Sygnał | Znaczenie |
+|--------|-----------|
+| Rosnąca seria tonów przy włączeniu | Poprawne uruchomienie |
+| 1 bip + mignięcie diody | Kod odczytany poprawnie |
+| Niski ton / brak reakcji | Kod nieodczytany |
+| Seria tonów programowania | Wejście/wyjście z trybu konfiguracji |
+
+Głośność i ton sygnału są regulowane kodami konfiguracyjnymi.
+`
+      },
+      {
+        title: '3. Podłączenie do komputera',
+        content: `
+DS4608 **automatycznie wykrywa typ interfejsu** i używa ustawienia domyślnego. Jeśli domyślne nie pasuje, zeskanuj kod właściwego interfejsu z Product Reference Guide.
+
+| Interfejs | Uwagi |
+|-----------|-------|
+| **USB Keyboard HID** | Domyślny — skaner działa jak klawiatura (ponad 90 układów) |
+| **USB SNAPI** | Tryb z przesyłaniem obrazu |
+| **USB CDC (port COM)** | Wirtualny port szeregowy |
+| **RS-232** | Standard i warianty handlowe |
+| **IBM 46XX (RS-485)** | Terminale handlowe IBM |
+
+### Pierwsze uruchomienie (USB)
+
+1. Podłącz kabel USB do skanera i komputera.
+2. Skaner wyda rosnący ton — jest gotowy.
+3. W trybie USB HID zeskanuj kod w Notatniku, aby sprawdzić działanie.
+`
+      },
+      {
+        title: '4. Skanowanie kodów',
+        content: `
+1. Skieruj skaner na kod i naciśnij spust — pojawi się celownik.
+2. Ustaw celownik na kodzie (odczyt wielokierunkowy).
+3. Po odczycie skaner bipnie i mignie diodą.
+
+Tolerancja położenia: pochylenie ±60°, przechylenie ±60°, obrót 360°. Małe, gęste kody skanuj bliżej; duże — z większej odległości.
+
+### Obsługiwane symbologie
+
+Wszystkie popularne kody **1D** (Code 39, Code 128, UPC/EAN, GS1 DataBar) i **2D** (PDF417, Data Matrix, QR Code, Aztec, MaxiCode). Skaner przechwytuje też obrazy i dokumenty (eksport Bitmap/JPEG/TIFF).
+`
+      },
+      {
+        title: '5. Konfiguracja kodami kreskowymi',
+        content: `
+### Przywrócenie ustawień fabrycznych
+
+1. Zeskanuj kod **„Set Defaults"** z Product Reference Guide.
+2. Alternatywnie użyj programu **Zebra 123Scan** (USB → „Restore Defaults").
+
+> **Uwaga:** reset kasuje wszystkie ustawienia użytkownika (interfejs, symbologie, prefiksy/sufiksy, beeper).
+
+### Najczęstsze ustawienia
+
+- **Enter (CR/LF) po skanie** — kursor przechodzi do nowej linii.
+- **Tab po skanie** — przejście do kolejnej kolumny.
+- **Prefiks / sufiks** — stały tekst przed/po danych.
+- **Głośność i ton beepera** — Low / Medium / High.
+`
+      },
+      {
+        title: '6. Konserwacja i czyszczenie',
+        content: `
+- Czyść **70% alkoholem izopropylowym (IPA)** lub łagodnym mydłem z wodą (zalecane chusteczki Zebra).
+- Nie używaj acetonu, amoniaku (na szybę), środków ściernych ani rozpuszczalników ropopochodnych.
+
+**Procedura:** odłącz skaner → zwilż miękką ściereczkę 70% IPA → przetrzyj **okno skanujące** i obudowę → pozostaw do wyschnięcia. Brudne okno to najczęstsza przyczyna gorszego odczytu.
+`
+      },
+      {
+        title: '7. Rozwiązywanie problemów',
+        content: `
+| Problem | Możliwa przyczyna | Rozwiązanie |
+|---------|-------------------|-------------|
+| Brak reakcji | Luźny kabel / brak zasilania | Dociśnij kabel USB; spróbuj innego portu |
+| Nie czyta kodu | Brudne okno skanujące | Wyczyść okno 70% IPA |
+| Nie czyta kodu | Symbologia wyłączona | Włącz odpowiedni typ kodu |
+| Nie czyta kodu | Zła odległość | Przybliż/oddal skaner |
+| Bipa, ale brak danych w systemie | Zły interfejs hosta | Zeskanuj kod właściwego interfejsu (USB HID / USB COM / RS-232) |
+| Dane podwojone / błędne | Prefiks/sufiks lub układ klawiatury | Sprawdź sufiks i układ klawiatury |
+
+Jeśli problem nie ustępuje, zaktualizuj firmware (zebra.com/support lub 123Scan) i zresetuj skaner.
+`
+      },
+      {
+        title: '8. Specyfikacja techniczna',
+        content: `
+| Parametr | DS4608 |
+|----------|--------|
+| **Wymiary** | 16,5 × 6,7 × 9,8 cm (wys. × szer. × głęb.) |
+| **Waga** | 161,9 g (5,7 oz) |
+| **Zasilanie** | 4,5–5,5 VDC; 340 mA typ. |
+| **Sensor** | 1280 × 800 px |
+| **Pole widzenia** | 36,1° H × 22,6° V |
+| **Źródło światła** | celownik 617 nm (amber), doświetlenie 2× 660 nm (red) |
+| **Min. kontrast druku** | 15% |
+| **Tolerancja** | skew ±60°, pitch ±60°, roll 360° |
+| **Temperatura pracy** | od 0°C do +50°C |
+| **Interfejsy** | USB, RS-232, IBM 46XX (RS-485) |
+| **EAS** | zgodny z Checkpoint |
+`
+      },
+      {
+        title: 'FAQ – Najczęściej zadawane pytania',
+        content: `
+### Jak ustawić Enter po skanie?
+
+Zeskanuj kod dodający **sufiks Enter (CR/LF)** z Product Reference Guide lub wygeneruj go w 123Scan.
+
+### Skaner bipa, ale nic nie wpisuje?
+
+Najczęściej ma zły interfejs — zeskanuj kod **USB HID (klawiaturowy)** i sprawdź, czy kursor jest w aktywnym polu.
+
+### Jak przywrócić ustawienia fabryczne?
+
+Zeskanuj kod **„Set Defaults"** z Product Reference Guide.
+
+### Czym czyścić okno skanujące?
+
+Wyłącznie **70% IPA** lub łagodnym mydłem z wodą. Bez acetonu, amoniaku i środków ściernych.
+`
+      }
+    ]
   }
 }
 
