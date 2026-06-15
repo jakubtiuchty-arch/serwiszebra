@@ -107,7 +107,7 @@ export default function FunnelBanners({ model }: { model: string }) {
               className="flex-shrink-0 w-[42px] h-[42px] rounded-xl shadow-md shadow-blue-500/30"
             />
             <p className="text-sm text-slate-100 flex-1 min-w-[200px] font-medium drop-shadow-sm">
-              Twój {model} wymaga części lub naprawy?
+              Potrzebujesz oryginalnych części do {model}?
             </p>
             <Link
               href={cfg.partsHref}
