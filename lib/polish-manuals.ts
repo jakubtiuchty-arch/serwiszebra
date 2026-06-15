@@ -34547,6 +34547,289 @@ Do typowego magazynu — **SR**. Do bardzo małych, gęstych kodów (elektronika
 `
       }
     ]
+  },
+  'ds3678': {
+    model: 'DS3678',
+    title: 'Zebra DS3678 – Instrukcja obsługi po polsku',
+    lastUpdated: '2026-06-15',
+    sourceDocument: 'DS36X8 Product Reference Guide (MN-002689-22EN) + DS3678 Quick Start Guide + STB3678 Cradle QRG',
+    keywords: [
+      'zebra ds3678 instrukcja',
+      'ds3678 instrukcja po polsku',
+      'ds3678 instrukcja obsługi',
+      'ds3678 parowanie',
+      'ds3678 parowanie z bazą',
+      'ds3678 bluetooth',
+      'ds3678 ustawienia fabryczne',
+      'ds3678 reset',
+      'ds3678 bateria',
+      'ds3678 ładowanie',
+      'ds3678 niebieska dioda',
+      'ds3678 nie łączy się z bazą',
+      'ds3678 stb3678',
+      'skaner bezprzewodowy zebra ds3678'
+    ],
+    sections: [
+      {
+        title: '1. Podstawowe informacje',
+        content: `
+### O skanerze Zebra DS3678
+
+Zebra **DS3678** to ręczny, **bezprzewodowy** skaner obrazowy klasy **ultra-rugged**, czytający kody **1D i 2D**. To bezprzewodowy odpowiednik modelu DS3608 — ma wymienną baterię, łączność **Bluetooth** i współpracuje z bazą ładująco-komunikacyjną **STB3678**. Przeznaczony do najcięższych warunków: magazynów, produkcji, chłodni.
+
+### Warianty optyki
+
+| Wariant | Przeznaczenie |
+|---------|---------------|
+| **SR** (Standard Range) | Najpopularniejszy — ogólne zastosowania, zasięg do ~1,5 m |
+| **HP** (High Performance) | Wiele typów kodów, OCR, dokumenty, do ~2,1 m |
+| **HD** (High Density) | Bardzo małe, gęste kody (od 3 mil) |
+| **ER** (Extended Range) | Daleki zasięg do ~21 m |
+| **XR** (Extended Range+) | Szersze pole widzenia w dalekim zasięgu |
+| **KD** (Keyboard Display) | Z klawiaturą i wyświetlaczem (potwierdzanie ilości, picking) |
+| **DP / DPA** (Direct Part Marking) | Znakowania bezpośrednie — automotive, lotnictwo |
+
+### Kluczowe cechy
+
+| Cecha | Wartość |
+|-------|---------|
+| **Typ** | Bezprzewodowy imager 1D/2D, ultra-rugged |
+| **Łączność** | Bluetooth 4.0 (Classic + Low Energy), Class 1 |
+| **Zasięg Bluetooth** | do 100 m (Classic) |
+| **Bateria** | PowerPrecision+ Li-Ion 3100 mAh, wymienna |
+| **Klasa szczelności** | IP65 i IP67 (ER/DP: IP65 i IP68) |
+| **Odporność na upadki** | 2,4 m na beton (ER/DP: 3,0 m) |
+| **Temperatura pracy** | od -20°C do +50°C |
+| **Gwarancja** | 36 mies. (skaner i baza), 12 mies. (bateria) |
+
+### Zawartość opakowania
+
+W zestawie znajduje się skaner DS3678 z baterią. Baza **STB3678**, zasilacz i kabel komunikacyjny bywają sprzedawane osobno — sprawdź konfigurację zamówienia. Po rozpakowaniu sprawdź kompletność i brak uszkodzeń.
+
+> **Uwaga:** przed pierwszym użyciem naładuj baterię do pełna (na bazie STB3678 lub przez USB).
+`
+      },
+      {
+        title: '2. Bateria i ładowanie',
+        content: `
+### Bateria
+
+| Parametr | Wartość |
+|----------|---------|
+| **Typ** | PowerPrecision+ Li-Ion, wymienna |
+| **Pojemność** | 3100 mAh (nowsza wersja: 3150 mAh) |
+| **Nr części** | BTRY-36IAB0E-00 |
+| **Skany na ładowanie (SR)** | ponad 100 000 |
+| **Czas ładowania (zasilacz/baza)** | ok. 3 godziny (0–90%) |
+| **Czas ładowania (USB)** | do 10 godzin |
+| **Gwarancja baterii** | 12 miesięcy |
+
+### Jak ładować
+
+- **Na bazie STB3678** (zalecane) — włóż skaner do bazy; bursztynowa dioda bazy oznacza ładowanie, zielona — pełne naładowanie.
+- **Przez USB** — wolniejsze (do 10 h) ze względu na ograniczenie prądu.
+- **W ładowarce 4-slotowej** (SAC3600-4001CR) — do ładowania samych baterii.
+
+> **Bateria krytycznie niska:** skaner wyda 6 szybkich wysokich tonów, błyśnie niebiesko i zawibruje. Natychmiast nałóż go na bazę lub wymień baterię.
+
+### Wymiana baterii (hard reset)
+
+Wyjęcie baterii na ok. 10 sekund i ponowne włożenie to także sposób na twardy restart skanera, gdy przestał reagować.
+`
+      },
+      {
+        title: '3. Parowanie Bluetooth',
+        content: `
+### Parowanie z bazą STB3678 (najczęstszy scenariusz)
+
+1. Upewnij się, że baza STB3678 jest zasilona (dioda bazy świeci).
+2. Znajdź **kod kreskowy parowania** na spodzie bazy.
+3. Zeskanuj ten kod skanerem DS3678.
+4. Poprawne parowanie potwierdzi seria tonów (wysoki–niski–wysoki–niski + niski–wysoki), a dioda skanera zmieni się na **ciągłą zieloną**.
+5. Alternatywnie, jeśli włączone jest parowanie przez kontakt, wystarczy włożyć skaner do bazy.
+
+### Tryb wielu skanerów (Multipoint-to-Point)
+
+Jedna baza STB3678 może obsłużyć **do 7 skanerów** — każdy skanuje ten sam kod parowania bazy. Baza zarządza kolejką przesyłania danych.
+
+### Parowanie bezpośrednie z komputerem/tabletem (HID/SPP)
+
+1. Zeskanuj kod trybu **discoverable** z Product Reference Guide (dioda zacznie migać niebiesko).
+2. W urządzeniu hosta włącz Bluetooth i wyszukaj urządzenia.
+3. Wybierz z listy **DS3678-xxxx**.
+4. Jeśli host poprosi o PIN, wpisz **0000**.
+5. Po połączeniu dioda skanera świeci ciągłym zielonym.
+
+> **Wskazówka:** w środowiskach z gęstym Wi-Fi włącz **Wi-Fi Friendly Mode**, aby ograniczyć zakłócenia w paśmie 2,4 GHz.
+`
+      },
+      {
+        title: '4. Wskaźniki LED i sygnały dźwiękowe',
+        content: `
+### Dioda LED skanera
+
+| Stan diody | Kolor | Znaczenie |
+|------------|-------|-----------|
+| Ciągłe świecenie | Zielony | Połączony i gotowy |
+| Miganie | Bursztynowy | Szukanie połączenia / parowanie |
+| Miganie | Niebieski | Tryb discoverable (parowanie BT) |
+| Miganie | Czerwony | Niski poziom baterii lub błąd komunikacji |
+| Pojedynczy błysk | Zielony | Poprawny odczyt kodu |
+| 6 szybkich błysków + wibracje | Niebieski | Bateria krytycznie niska |
+
+### Sygnały dźwiękowe (dodatkowe wobec DS3608)
+
+| Zdarzenie | Sygnał |
+|-----------|--------|
+| Sparowano poprawnie | wysoki–niski–wysoki–niski + niski–wysoki |
+| Parowanie nieudane | długi niski, długi wysoki |
+| Połączono | średni–wysoki |
+| Poza zasięgiem bazy | ton ciągły |
+| Niski poziom baterii | niski ton (seria) |
+
+### Dioda bazy STB3678
+
+| Stan | Kolor | Znaczenie |
+|------|-------|-----------|
+| Ciągłe świecenie | Zielony | Praca normalna / bateria pełna |
+| Świecenie | Bursztynowy | Ładowanie w toku |
+| Świecenie | Czerwony | Błąd ładowania / usterka |
+| Brak | — | Brak zasilania bazy |
+`
+      },
+      {
+        title: '5. Skanowanie kodów',
+        content: `
+### Jak skanować
+
+1. Skieruj skaner w stronę kodu i naciśnij **spust (trigger)**.
+2. Ustaw czerwony celownik na środku kodu.
+3. Po poprawnym odczycie skaner błyśnie zielono i bipnie.
+
+Skaner toleruje duże odchylenia: pochylenie ±60°, przechylenie ±60°, obrót ±360°.
+
+### Zasięgi (orientacyjnie)
+
+| Wariant | Zasięg roboczy |
+|---------|----------------|
+| **SR** | od kontaktu do ~1,5 m |
+| **HP** | od ~7 cm do ~2,1 m |
+| **HD** | od ~3 cm do ~18 cm |
+| **ER** | od ~7,6 cm do ~21 m |
+
+### Obsługiwane symbologie
+
+- **Kody 1D:** Code 39, Code 128, Code 93, Codabar, UPC/EAN, Interleaved 2 of 5, GS1 DataBar i inne.
+- **Kody 2D:** PDF417, Data Matrix, QR Code, MicroQR, Aztec, MaxiCode, Han Xin, kody pocztowe.
+`
+      },
+      {
+        title: '6. Konfiguracja kodami kreskowymi',
+        content: `
+### Przywrócenie ustawień fabrycznych
+
+1. Zeskanuj kod **„Set Factory Defaults"** z Product Reference Guide — skaner potwierdzi serią tonów.
+2. Alternatywnie użyj programu **Zebra 123Scan** (USB → „Restore Defaults").
+3. Twardy reset sprzętowy: wyjmij baterię na ~10 s i włóż ponownie.
+
+> **Uwaga:** reset kasuje wszystkie ustawienia — w tym **parowanie Bluetooth**. Po resecie ponownie sparuj skaner z bazą (zeskanuj kod parowania na spodzie STB3678).
+
+### Najczęstsze ustawienia
+
+- **Enter (CR/LF) po skanie** — sufiks Enter przenosi kursor do nowej linii.
+- **Tab po skanie** — przejście do kolejnej kolumny.
+- **Prefiks / sufiks** — stały tekst przed/po danych.
+- **Wi-Fi Friendly Mode** — ogranicza zakłócenia z sieci 2,4 GHz.
+- **Głośność i ton beepera** — Low / Medium / High.
+`
+      },
+      {
+        title: '7. Konserwacja i czyszczenie',
+        content: `
+### Dopuszczone środki
+
+- **Alkohol izopropylowy (IPA) 70%** — podstawowy środek.
+- Łagodny roztwór mydła z wodą; gotowe chusteczki do skanerów.
+
+### Zabronione
+
+- Aceton, rozpuszczalniki ropopochodne, środki ścierne, amoniak (na szybę).
+- **Nie zanurzaj** skanera w cieczy mimo IP67.
+- **Nie używaj wybielacza (podchlorynu) na bazie STB3678** — wolno nim czyścić tylko sam skaner.
+
+### Procedura
+
+1. Wyłącz/odłącz skaner.
+2. Zwilż miękką ściereczkę środkiem 70% IPA.
+3. Przetrzyj **okno skanujące** i obudowę.
+4. Wyczyść **styki ładowania** skanera i bazy (IPA na ściereczce) — skorodowane styki to częsta przyczyna problemów z ładowaniem.
+5. Pozostaw do wyschnięcia.
+`
+      },
+      {
+        title: '8. Rozwiązywanie problemów',
+        content: `
+| Problem | Możliwa przyczyna | Rozwiązanie |
+|---------|-------------------|-------------|
+| Brak połączenia z bazą | Skaner niesparowany | Zeskanuj kod parowania ze spodu bazy STB3678 |
+| Utrata połączenia | Skaner poza zasięgiem BT | Przybliż skaner do bazy, usuń przeszkody |
+| Niebieska dioda + 6 tonów + wibracje | Bateria krytycznie niska | Natychmiast nałóż na bazę lub wymień baterię |
+| Skaner nie ładuje się | Brudne/skorodowane styki | Wyczyść styki skanera i bazy 70% IPA |
+| Skaner nie ładuje się | Problem z zasilaniem bazy | Sprawdź zasilacz (PWR-BGA12V50W0WW) i kabel |
+| Skaner się nie włącza | Rozładowana bateria | Naładuj; sprawdź/​wymień baterię |
+| Bipa, ale brak danych w systemie | Źle ustawiony interfejs hosta | Zeskanuj kod właściwego interfejsu (USB HID / USB COM / RS-232) |
+| Zakłócenia / zrywanie łączności | Gęste Wi-Fi 2,4 GHz | Włącz Wi-Fi Friendly Mode |
+| Nie czyta kodu | Brudne okno / kod poza zasięgiem | Wyczyść okno, dostosuj odległość |
+
+Jeśli problem nie ustępuje, zaktualizuj firmware (zebra.com/support lub 123Scan) i ponownie sparuj skaner z bazą.
+`
+      },
+      {
+        title: '9. Specyfikacja techniczna',
+        content: `
+| Parametr | DS3678 |
+|----------|--------|
+| **Wymiary** | 18,5 × 7,6 × 14,2 cm |
+| **Waga (z baterią)** | ok. 411–436 g (zależnie od wersji) |
+| **Łączność** | Bluetooth 4.0 Classic + LE, Class 1, do 100 m |
+| **Bateria** | PowerPrecision+ Li-Ion 3100 mAh |
+| **Klasa IP** | IP65 i IP67 (ER/DP: IP65 i IP68) |
+| **Upadki** | 2,4 m na beton (ER/DP: 3,0 m) |
+| **Temperatura pracy** | od -20°C do +50°C |
+| **Temperatura przechowywania** | od -40°C do +70°C |
+| **Celownik / iluminacja** | Laser 655 nm / LED 660 nm |
+| **Gwarancja** | 36 mies. (skaner/baza), 12 mies. (bateria) |
+`
+      },
+      {
+        title: 'FAQ – Najczęściej zadawane pytania',
+        content: `
+### Jak sparować skaner z bazą?
+
+Zeskanuj **kod kreskowy parowania znajdujący się na spodzie bazy STB3678**. Poprawne sparowanie potwierdzi seria tonów, a dioda skanera zaświeci się na ciągły zielony.
+
+### Skaner miga na niebiesko i wibruje — co to znaczy?
+
+To sygnał **krytycznie niskiej baterii** (6 szybkich tonów + niebieska dioda + wibracje). Natychmiast nałóż skaner na bazę lub wymień baterię.
+
+### Po resecie skaner przestał łączyć się z bazą — dlaczego?
+
+Przywrócenie ustawień fabrycznych **kasuje także parowanie Bluetooth**. Ponownie zeskanuj kod parowania ze spodu bazy.
+
+### Skaner gubi połączenie w hali z Wi-Fi — co zrobić?
+
+Włącz **Wi-Fi Friendly Mode** — funkcję, która minimalizuje zakłócenia między Bluetooth a sieciami Wi-Fi w paśmie 2,4 GHz.
+
+### Ile skanów wytrzymuje bateria?
+
+Wersja SR wykonuje **ponad 100 000 skanów** na jednym ładowaniu. Pełne ładowanie na bazie trwa ok. 3 godzin.
+
+### Czym różni się DS3678 od DS3608?
+
+DS3678 jest **bezprzewodowy** (bateria + Bluetooth + baza STB3678), a DS3608 **przewodowy** (zasilany z kabla). Optyka (SR/ER/HP/HD/DP) jest identyczna.
+`
+      }
+    ]
   }
 }
 
