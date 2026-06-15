@@ -20,6 +20,10 @@ interface PolishManualContentProps {
 }
 
 export default function PolishManualContent({ polishManual, modelSlug, modelName }: PolishManualContentProps) {
+  // Baner lejka po sekcji „Rozwiązywanie problemów"; gdy jej brak — po ostatniej sekcji (zawsze widoczny).
+  const troubleshootingIndex = polishManual.sections.findIndex((s) => /rozwiązywanie problemów/i.test(s.title))
+  const bannerAfterIndex = troubleshootingIndex >= 0 ? troubleshootingIndex : polishManual.sections.length - 1
+
   return (
     <>
       {/* Table of Contents */}
@@ -157,7 +161,7 @@ export default function PolishManualContent({ polishManual, modelSlug, modelName
               </ReactMarkdown>
             </div>
           </article>
-          {/rozwiązywanie problemów/i.test(section.title) && (
+          {index === bannerAfterIndex && (
             <FunnelBanners model={modelName} />
           )}
           </Fragment>
