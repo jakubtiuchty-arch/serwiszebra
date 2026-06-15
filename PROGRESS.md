@@ -4,6 +4,16 @@ Checkpoint postępu prac. Najnowszy wpis na górze. Po każdym etapie/buildzie d
 
 ---
 
+## 2026-06-15 — Polskie instrukcje SKANERÓW (w toku, autonomicznie)
+
+- **Cel**: skanery nie miały instrukcji PL (były tylko drukarki/terminale/tablet). Generujemy 1 instrukcję na **rodzinę**, warianty SKU (DS3608SR/HD/ER…) routowane do rodziny.
+- **Źródło faktów (zero zmyślania)**: RAG `manuals_documents` (`metadata.source_file` = oficjalne PDF Zebry, quickstart+userguide na rodzinę) + `DS3608_DS3678_dane_techniczne_serwisowe.md` na dysku. Helper: `_rag-extract.mjs` (untracked) — `node _rag-extract.mjs "<source_file_prefix>" "kw1|kw2" N`.
+- **Routing**: `lib/polish-manuals.ts` → `resolvePolishKey()` w `getPolishManual`/`hasPolishManual`: alias map (ds8288→ds8208, ds9908r→ds9908, ls1203hd→ls1203) + odcięcie sufiksu optyki (sr|hp|hd|xr|er|dpa|dpx|dpe|dp|kd|xd).
+- **Zrobione (6/18 rodzin)**: DS3608, DS3678, DS2208, DS2278, DS4608, DS4678. Każda: tsc EXIT=0, strona 200, osobny commit.
+- **TODO (12 rodzin)**: DS8108, DS8178, DS8208(+DS8288), DS9308, DS9908(+DS9908R), LI2208, LI4278, LS2208, LS1203(+LS1203HD), CS6080, CS4070, CS3000. Wzorzec sekcji: 1 Podstawowe / (bateria+parowanie dla cordless) / LED+beeper / podłączenie host / skanowanie / konfiguracja (Set Defaults, Enter suffix) / czyszczenie 70% IPA / troubleshooting / specyfikacja / FAQ. Po wszystkich: usunąć `_rag-extract.mjs`.
+
+---
+
 ## 2026-06-15 — Lejek (TOFU→MOFU/BOFU): mosty z instrukcji do części + cross-domain do takma
 
 - **Strategia**: blog/instrukcje/sterowniki = najmocniejszy ruch (TOFU). serwis-zebry rankuje na „Zebra TC22" (poz. 5), takma.com.pl (sprzedaż) na 2. stronie → przekierowujemy złapany ruch do konwersji. Dwa wyważone banery pod instrukcją.

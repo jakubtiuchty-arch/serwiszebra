@@ -35628,6 +35628,177 @@ DS4678 jest **bezprzewodowy** (bateria + Bluetooth + baza CR4600), DS4608 **prze
 `
       }
     ]
+  },
+  'ds8108': {
+    model: 'DS8108',
+    title: 'Zebra DS8108 – Instrukcja obsługi po polsku',
+    lastUpdated: '2026-06-15',
+    sourceDocument: 'DS8108 Digital Scanner Product Reference Guide + Quick Start Guide',
+    keywords: [
+      'zebra ds8108 instrukcja',
+      'ds8108 instrukcja po polsku',
+      'ds8108 instrukcja obsługi',
+      'ds8108 konfiguracja',
+      'ds8108 ustawienia fabryczne',
+      'ds8108 reset',
+      'ds8108 tryb prezentacji',
+      'ds8108 nie skanuje',
+      'skaner zebra ds8108'
+    ],
+    sections: [
+      {
+        title: '1. Podstawowe informacje',
+        content: `
+### O skanerze Zebra DS8108
+
+Zebra **DS8108** to ręczny, **przewodowy** skaner obrazowy klasy premium, czytający kody **1D i 2D**, z przechwytywaniem obrazów i dokumentów. To wydajny skaner handlowy (POS), który radzi sobie też z kodami z ekranów telefonów. Bardzo odporny — wytrzymuje **upadki z 1,8 m**. Kolory: Nova White, Twilight Black.
+
+### Kluczowe cechy
+
+| Cecha | Wartość |
+|-------|---------|
+| **Typ** | Przewodowy imager 1D/2D z przechwytywaniem obrazu |
+| **Interfejsy** | USB, RS-232, Keyboard Wedge, IBM 46XX (RS-485) |
+| **Tryby pracy** | Ręczny i prezentacji (na podstawce Intellistand) |
+| **Odporność na upadki** | wielokrotne z 1,8 m na beton |
+| **Tumble** | 2000 przewrotów z 0,5 m |
+| **Kody z ekranów** | tak (telefony, monitory) |
+| **Temperatura pracy** | od 0°C do +50°C |
+
+> **Uwaga:** DS8108 jest skanerem przewodowym — zasilanie pobiera z portu USB hosta.
+`
+      },
+      {
+        title: '2. Tryby pracy i wskaźniki',
+        content: `
+### Tryb ręczny i prezentacji
+
+- **Ręczny** — trzymasz skaner i naciskasz spust.
+- **Prezentacji (hands-free)** — po umieszczeniu w podstawce Intellistand skaner przechodzi w tryb ciągły i **skanuje automatycznie** kody zbliżone do okna. Po okresie bezczynności wchodzi w tryb oszczędzania energii (diody gasną/iluminacja miga), aż wykryje ruch.
+
+### Sygnalizacja
+
+Po poprawnym odczycie skaner **bipnie**, a dioda mignie.
+
+| Sygnał | Znaczenie |
+|--------|-----------|
+| Rosnąca seria tonów przy włączeniu | Poprawne uruchomienie |
+| 1 bip + mignięcie diody | Kod odczytany poprawnie |
+| Niski ton / brak reakcji | Kod nieodczytany |
+
+Głośność i ton sygnału regulują kody konfiguracyjne.
+`
+      },
+      {
+        title: '3. Podłączenie do komputera',
+        content: `
+DS8108 **automatycznie wykrywa interfejs** i używa ustawienia domyślnego. Aby zmienić, zeskanuj kod właściwego interfejsu z Product Reference Guide.
+
+| Interfejs | Uwagi |
+|-----------|-------|
+| **USB Keyboard HID** | Domyślny — skaner działa jak klawiatura |
+| **USB SNAPI / CDC** | Z obrazem / wirtualny port COM |
+| **RS-232** | Standard i warianty handlowe |
+| **Keyboard Wedge** | Wpięcie między klawiaturę a komputer |
+| **IBM 46XX (RS-485)** | Terminale handlowe IBM |
+
+Po podłączeniu USB skaner wyda rosnący ton — zeskanuj kod w Notatniku, aby sprawdzić działanie.
+`
+      },
+      {
+        title: '4. Skanowanie kodów',
+        content: `
+1. Skieruj skaner na kod i naciśnij spust — pojawi się celownik.
+2. Ustaw celownik na kodzie (odczyt wielokierunkowy).
+3. Po odczycie skaner bipnie i mignie diodą.
+
+Tolerancja: pochylenie ±60°, przechylenie ±60°, obrót 360°. Czyta kody **1D** (Code 39/128, UPC/EAN, GS1 DataBar) i **2D** (PDF417, Data Matrix, QR Code, Aztec, MaxiCode) — także z ekranów telefonów. Minimalna gęstość: Code 39/128 od 3 mil, Data Matrix/QR od 6 mil.
+`
+      },
+      {
+        title: '5. Konfiguracja kodami kreskowymi',
+        content: `
+### Przywrócenie ustawień fabrycznych
+
+1. Zeskanuj kod **„Set Defaults"** z Product Reference Guide.
+2. Alternatywnie użyj programu **Zebra 123Scan**.
+
+> **Uwaga:** reset kasuje wszystkie ustawienia użytkownika.
+
+### Najczęstsze ustawienia
+
+- **Enter (CR/LF) po skanie**, **Tab po skanie**, **prefiks/sufiks**.
+- **Mobile Phone/Display Mode** — optymalizacja odczytu z ekranów.
+- **Głośność i ton beepera** — Low / Medium / High.
+`
+      },
+      {
+        title: '6. Konserwacja i czyszczenie',
+        content: `
+- Czyść **70% IPA** lub łagodnym mydłem z wodą (zalecane chusteczki Zebra).
+- Nie używaj acetonu, amoniaku (na szybę), środków ściernych ani rozpuszczalników.
+
+**Procedura:** odłącz skaner → przetrzyj **okno skanujące** i obudowę ściereczką z 70% IPA → pozostaw do wyschnięcia. Brudne okno to najczęstsza przyczyna gorszego odczytu.
+`
+      },
+      {
+        title: '7. Rozwiązywanie problemów',
+        content: `
+| Problem | Możliwa przyczyna | Rozwiązanie |
+|---------|-------------------|-------------|
+| Brak reakcji | Luźny kabel / brak zasilania | Dociśnij kabel USB; spróbuj innego portu |
+| Nie czyta kodu | Brudne okno skanujące | Wyczyść okno 70% IPA |
+| Nie czyta kodu | Symbologia wyłączona / zła odległość | Włącz typ kodu; dostosuj odległość |
+| Słabo czyta kody z telefonu | Wyłączony tryb ekranowy | Włącz Mobile Phone/Display Mode |
+| Bipa, ale brak danych | Zły interfejs hosta | Zeskanuj kod właściwego interfejsu (USB HID / USB COM / RS-232) |
+| W podstawce nie skanuje sam | Wyłączony tryb prezentacji | Sprawdź ustawienie trybu prezentacji |
+
+Jeśli problem nie ustępuje, zaktualizuj firmware (zebra.com/support lub 123Scan) i zresetuj skaner.
+`
+      },
+      {
+        title: '8. Specyfikacja techniczna',
+        content: `
+| Parametr | DS8108 |
+|----------|--------|
+| **Typ** | Przewodowy imager 1D/2D z przechwytywaniem obrazu |
+| **Interfejsy** | USB, RS-232, Keyboard Wedge, IBM 46XX (RS-485) |
+| **Upadki** | wielokrotne z 1,8 m na beton |
+| **Tumble** | 2000 z 0,5 m |
+| **Min. gęstość kodu** | Code 39/128 od 3 mil; Data Matrix/QR od 6 mil |
+| **Obrazy** | eksport Bitmap/JPEG/TIFF, 109 PPI (A4) |
+| **Tolerancja** | skew ±60°, pitch ±60°, roll 360° |
+| **Temperatura pracy** | od 0°C do +50°C |
+| **Temperatura przechowywania** | od -40°C do +70°C |
+| **Wilgotność** | 5–95% bez kondensacji |
+| **Kolory** | Nova White, Twilight Black |
+`
+      },
+      {
+        title: 'FAQ – Najczęściej zadawane pytania',
+        content: `
+### Jak ustawić Enter po skanie?
+
+Zeskanuj kod dodający **sufiks Enter (CR/LF)** z Product Reference Guide lub wygeneruj go w 123Scan.
+
+### Skaner słabo czyta kody z telefonu — co zrobić?
+
+Włącz **Mobile Phone/Display Mode** — tryb zoptymalizowany pod odczyt z ekranów.
+
+### Jak włączyć skanowanie bez spustu?
+
+Umieść skaner w podstawce **Intellistand** — przejdzie w tryb prezentacji i będzie skanował automatycznie.
+
+### Jak przywrócić ustawienia fabryczne?
+
+Zeskanuj kod **„Set Defaults"** z Product Reference Guide.
+
+### Czym różni się DS8108 od DS8178?
+
+DS8108 jest **przewodowy**, a DS8178 to wersja **bezprzewodowa** (Bluetooth + bateria + baza). Optyka i funkcje są takie same.
+`
+      }
+    ]
   }
 }
 
