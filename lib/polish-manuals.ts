@@ -35799,6 +35799,182 @@ DS8108 jest **przewodowy**, a DS8178 to wersja **bezprzewodowa** (Bluetooth + ba
 `
       }
     ]
+  },
+  'ds8178': {
+    model: 'DS8178',
+    title: 'Zebra DS8178 – Instrukcja obsługi po polsku',
+    lastUpdated: '2026-06-15',
+    sourceDocument: 'DS8178 Digital Scanner Product Reference Guide + Quick Start Guide',
+    keywords: [
+      'zebra ds8178 instrukcja',
+      'ds8178 instrukcja po polsku',
+      'ds8178 instrukcja obsługi',
+      'ds8178 parowanie',
+      'ds8178 bluetooth',
+      'ds8178 ładowanie',
+      'ds8178 cr8178',
+      'ds8178 ustawienia fabryczne',
+      'ds8178 reset',
+      'skaner bezprzewodowy zebra ds8178'
+    ],
+    sections: [
+      {
+        title: '1. Podstawowe informacje',
+        content: `
+### O skanerze Zebra DS8178
+
+Zebra **DS8178** to ręczny, **bezprzewodowy** skaner obrazowy klasy premium, czytający kody **1D i 2D** (także z ekranów telefonów) oraz przechwytujący obrazy. To bezprzewodowy odpowiednik DS8108 — łączy się przez **Bluetooth** i współpracuje z bazą prezentacyjno-ładującą **CR8178**. Bardzo wydajny skaner handlowy (POS). Kolory: Nova White, Twilight Black.
+
+### Kluczowe cechy
+
+| Cecha | Wartość |
+|-------|---------|
+| **Typ** | Bezprzewodowy imager 1D/2D z przechwytywaniem obrazu |
+| **Łączność** | Bluetooth (Class 2, zasięg do ~10 m) |
+| **Bateria** | PowerPrecision Li-Ion (wymienna) |
+| **Baza** | CR8178 (prezentacja + ładowanie + komunikacja) |
+| **Kody z ekranów** | tak (telefony, monitory) |
+| **Temperatura pracy** | od 0°C do +50°C |
+
+> **Uwaga:** przed pierwszym użyciem naładuj baterię do pełna (na bazie CR8178 lub przez kabel).
+`
+      },
+      {
+        title: '2. Bateria i ładowanie',
+        content: `
+1. Włóż baterię do skanera i umieść skaner w bazie **CR8178**.
+2. Skaner uruchomi się, a dioda bazy **mignie na zielono** — to początek ładowania.
+3. Zaleca się pełne naładowanie przed pierwszym użyciem.
+
+> **Ważne:** bateria nie ładuje się w wysokiej temperaturze (powyżej ok. 40°C).
+
+Twardy restart: wyjmij baterię na ~10 s i włóż ponownie.
+`
+      },
+      {
+        title: '3. Parowanie z bazą',
+        content: `
+Skaner i baza muszą być **sparowane**:
+
+- **Przez włożenie do bazy** — domyślnie włączone (pairing on contacts).
+- **Przez zeskanowanie kodu parowania** — kod jest **unikalny dla każdej bazy**.
+
+> Po zeskanowaniu kodu parowania poczekaj na potwierdzenie połączenia.
+
+### Gdy dane nie docierają do hosta
+
+Odłącz zasilanie i kabel interfejsu od bazy → odczekaj 3 s → podłącz z powrotem → sparuj ponownie (wsuń skaner do bazy lub zeskanuj kod parowania).
+`
+      },
+      {
+        title: '4. Wskaźniki LED i sygnały dźwiękowe',
+        content: `
+Po poprawnym odczycie skaner **bipnie**, a dioda mignie.
+
+| Sygnał | Znaczenie |
+|--------|-----------|
+| Rosnąca seria tonów przy włączeniu | Poprawne uruchomienie |
+| 1 bip + mignięcie diody | Kod odczytany poprawnie |
+| Dioda bazy miga na zielono | Trwa ładowanie |
+| Seria tonów parowania | Połączenie z bazą nawiązane / utracone |
+| Niski ton / brak reakcji | Kod nieodczytany |
+
+Głośność i ton sygnału regulują kody konfiguracyjne.
+`
+      },
+      {
+        title: '5. Skanowanie kodów',
+        content: `
+1. Skieruj skaner na kod i naciśnij spust — pojawi się celownik.
+2. Ustaw celownik na kodzie (odczyt wielokierunkowy).
+3. Po odczycie skaner bipnie i mignie diodą.
+
+W **trybie prezentacji** (na bazie CR8178) skaner skanuje automatycznie po zbliżeniu kodu. Czyta kody **1D** i **2D** — także z ekranów telefonów. Przechwytuje też obrazy i dokumenty.
+`
+      },
+      {
+        title: '6. Konfiguracja kodami kreskowymi',
+        content: `
+### Przywrócenie ustawień fabrycznych
+
+1. Zeskanuj kod **„Set Defaults"** z Product Reference Guide.
+2. Alternatywnie użyj programu **Zebra 123Scan**.
+
+> **Uwaga:** reset kasuje ustawienia, w tym **parowanie** — po resecie sparuj skaner ponownie.
+
+### Najczęstsze ustawienia
+
+- **Enter (CR/LF) po skanie**, **Tab po skanie**, **prefiks/sufiks**.
+- **Mobile Phone/Display Mode** — odczyt z ekranów.
+- **Out of Range Batch Mode** — zapis skanów poza zasięgiem bazy.
+- **Głośność i ton beepera** — Low / Medium / High.
+`
+      },
+      {
+        title: '7. Konserwacja i czyszczenie',
+        content: `
+- Czyść **70% IPA** lub łagodnym mydłem z wodą (zalecane chusteczki Zebra).
+- Nie używaj acetonu, amoniaku (na szybę), środków ściernych ani rozpuszczalników.
+
+**Procedura:** wyjmij skaner z bazy → przetrzyj **okno skanujące** i obudowę 70% IPA → wyczyść **styki ładowania** skanera i bazy → pozostaw do wyschnięcia.
+`
+      },
+      {
+        title: '8. Rozwiązywanie problemów',
+        content: `
+| Problem | Możliwa przyczyna | Rozwiązanie |
+|---------|-------------------|-------------|
+| Brak komunikacji z bazą | Skaner niesparowany | Wsuń skaner do bazy lub zeskanuj kod parowania |
+| Dane nie docierają do hosta | Utracone połączenie bazy z hostem | Procedura ponownego połączenia (sekcja „Parowanie") |
+| Skaner nie ładuje się | Temperatura >40°C lub brudne styki | Ładuj w niższej temperaturze; wyczyść styki 70% IPA |
+| Nie czyta kodu | Brudne okno / zła odległość | Wyczyść okno, dostosuj odległość |
+| Słabo czyta kody z telefonu | Wyłączony tryb ekranowy | Włącz Mobile Phone/Display Mode |
+| Bipa, ale brak danych | Zły interfejs hosta na bazie | Zeskanuj kod właściwego interfejsu |
+
+Jeśli problem nie ustępuje, zaktualizuj firmware (zebra.com/support lub 123Scan) i sparuj skaner ponownie.
+`
+      },
+      {
+        title: '9. Specyfikacja techniczna',
+        content: `
+| Parametr | DS8178 |
+|----------|--------|
+| **Typ** | Bezprzewodowy imager 1D/2D z przechwytywaniem obrazu |
+| **Łączność** | Bluetooth Class 2 (do ~10 m) |
+| **Bateria** | PowerPrecision Li-Ion, wymienna |
+| **Baza** | CR8178 (prezentacja + ładowanie + komunikacja) |
+| **Kody z ekranów** | tak |
+| **Temperatura pracy** | od 0°C do +50°C |
+| **Ładowanie** | poniżej ok. 40°C |
+| **Tryby** | ręczny, prezentacji, Out of Range Batch |
+| **Kolory** | Nova White, Twilight Black |
+`
+      },
+      {
+        title: 'FAQ – Najczęściej zadawane pytania',
+        content: `
+### Jak sparować DS8178 z bazą?
+
+Wsuń skaner do bazy **CR8178** (parowanie przez kontakt jest domyślne) lub zeskanuj **kod parowania** danej bazy.
+
+### Skaner nie ładuje się — dlaczego?
+
+Najczęściej z powodu temperatury powyżej 40°C lub brudnych styków. Wyczyść styki 70% IPA.
+
+### Po resecie nie łączy się z bazą?
+
+Reset **kasuje parowanie** — sparuj skaner ponownie.
+
+### Słabo czyta kody z telefonu?
+
+Włącz **Mobile Phone/Display Mode**.
+
+### Czym różni się DS8178 od DS8108?
+
+DS8178 jest **bezprzewodowy** (Bluetooth + bateria + baza CR8178), DS8108 **przewodowy**. Funkcje są identyczne.
+`
+      }
+    ]
   }
 }
 
