@@ -36300,6 +36300,322 @@ Zeskanuj kod **„Set Defaults"** z Product Reference Guide.
 `
       }
     ]
+  },
+  'li2208': {
+    model: 'LI2208',
+    title: 'Zebra LI2208 – Instrukcja obsługi po polsku',
+    lastUpdated: '2026-06-15',
+    sourceDocument: 'LI2208 Product Reference Guide + Quick Start Guide',
+    keywords: [
+      'zebra li2208 instrukcja',
+      'li2208 instrukcja po polsku',
+      'li2208 instrukcja obsługi',
+      'li2208 konfiguracja',
+      'li2208 ustawienia fabryczne',
+      'li2208 reset',
+      'li2208 nie skanuje',
+      'skaner liniowy zebra li2208'
+    ],
+    sections: [
+      {
+        title: '1. Podstawowe informacje',
+        content: `
+### O skanerze Zebra LI2208
+
+Zebra **LI2208** to **przewodowy** skaner **liniowy (linear imager)** czytający **kody jednowymiarowe (1D)**. W odróżnieniu od skanera laserowego nie ma ruchomych części — dzięki temu jest trwalszy i lepiej radzi sobie z **uszkodzonymi, słabo wydrukowanymi oraz wyświetlanymi na ekranie** kodami 1D. Ma też dłuższy zasięg odczytu. Idealny do handlu, magazynu i biura.
+
+> **Ważne:** LI2208 czyta tylko kody **1D**. Kody 2D (QR, Data Matrix) odczyta skaner obrazowy 2D (np. DS2208).
+
+### Kluczowe cechy
+
+| Cecha | Wartość |
+|-------|---------|
+| **Typ** | Przewodowy linear imager (1D) |
+| **Zalety** | brak ruchomych części, odczyt kodów uszkodzonych i z ekranu, długi zasięg |
+| **Interfejsy** | USB, RS-232, Keyboard Wedge, IBM 46XX |
+| **Tryby pracy** | Ręczny i hands-free (w podstawce) |
+| **Zasilanie** | z portu USB hosta |
+
+### Zawartość opakowania
+
+W zestawie skaner LI2208 i kabel interfejsu. Zachowaj opakowanie na wypadek serwisu; sprawdź brak uszkodzeń.
+`
+      },
+      {
+        title: '2. Podłączenie do komputera',
+        content: `
+LI2208 **automatycznie wykrywa typ hosta** i używa ustawienia domyślnego.
+
+| Interfejs | Uwagi |
+|-----------|-------|
+| **USB** | Domyślnie HID klawiaturowy — skaner działa jak klawiatura |
+| **RS-232** | Standard i warianty handlowe |
+| **Keyboard Wedge** | Wpięcie między klawiaturę a komputer |
+| **IBM 46XX** | Terminale handlowe IBM |
+
+Po podłączeniu USB skaner wyda sygnał startowy — zeskanuj kod w Notatniku, aby sprawdzić działanie.
+`
+      },
+      {
+        title: '3. Skanowanie kodów',
+        content: `
+1. Skieruj skaner na kod i naciśnij spust — pojawi się celownik (linia/kreska).
+2. Ustaw celownik na kodzie.
+3. Po odczycie skaner bipnie, a dioda mignie na zielono.
+
+Linear imager dobrze radzi sobie z kodami **uszkodzonymi, zniszczonymi i wyświetlanymi na ekranie**. Czyta kody **1D**: EAN/UPC, Code 39, Code 128, Code 93, Codabar, Interleaved 2 of 5, GS1 DataBar.
+`
+      },
+      {
+        title: '4. Wskaźniki LED i sygnały dźwiękowe',
+        content: `
+| Sygnał | Znaczenie |
+|--------|-----------|
+| Sygnał startowy | Skaner gotowy |
+| 1 bip + zielona dioda | Kod odczytany poprawnie |
+| Brak reakcji | Kod nieodczytany — popraw celowanie |
+| Seria tonów programowania | Tryb konfiguracji kodami |
+
+Głośność i ton sygnału ustawia się kodami konfiguracyjnymi.
+`
+      },
+      {
+        title: '5. Konfiguracja kodami kreskowymi',
+        content: `
+### Przywrócenie ustawień fabrycznych
+
+1. Zeskanuj kod **„Set Defaults"** z Product Reference Guide.
+2. Alternatywnie użyj programu **Zebra 123Scan**.
+
+> **Uwaga:** reset kasuje wszystkie ustawienia użytkownika.
+
+### Najczęstsze ustawienia
+
+- **Enter (CR/LF) po skanie**, **Tab po skanie**, **prefiks/sufiks**.
+- **Picklist Mode** — odczyt tylko kodu wskazanego celownikiem (przydatne przy gęsto ułożonych kodach).
+- **Głośność i ton beepera** — Low / Medium / High.
+`
+      },
+      {
+        title: '6. Konserwacja i czyszczenie',
+        content: `
+- Czyść **70% IPA** lub łagodnym mydłem z wodą.
+- Nie używaj acetonu, amoniaku (na okienko), środków ściernych ani rozpuszczalników.
+
+**Procedura:** odłącz skaner → przetrzyj **okienko** i obudowę ściereczką z 70% IPA → pozostaw do wyschnięcia.
+`
+      },
+      {
+        title: '7. Rozwiązywanie problemów',
+        content: `
+| Problem | Możliwa przyczyna | Rozwiązanie |
+|---------|-------------------|-------------|
+| Brak reakcji | Luźny kabel / brak zasilania | Dociśnij kabel USB; spróbuj innego portu |
+| Nie czyta kodu | Brudne okienko / złe celowanie | Wyczyść okienko 70% IPA; ustaw celownik na kodzie |
+| Odczytuje sąsiedni kod | Gęsto ułożone kody | Włącz Picklist Mode |
+| Nie czyta kodów 2D (QR) | To skaner 1D | Użyj skanera obrazowego 2D (np. DS2208) |
+| Bipa, ale brak danych | Zły interfejs hosta | Zeskanuj kod właściwego interfejsu (USB HID / USB COM / RS-232) |
+
+Jeśli problem nie ustępuje, zaktualizuj firmware (zebra.com/support lub 123Scan) i zresetuj skaner.
+`
+      },
+      {
+        title: '8. Specyfikacja techniczna',
+        content: `
+| Parametr | LI2208 |
+|----------|--------|
+| **Typ** | Przewodowy linear imager 1D |
+| **Odczytywane kody** | tylko 1D (kreskowe) |
+| **Interfejsy** | USB, RS-232, Keyboard Wedge, IBM 46XX |
+| **Tryby pracy** | ręczny, hands-free (w podstawce) |
+| **Zasilanie** | z portu USB hosta |
+`
+      },
+      {
+        title: 'FAQ – Najczęściej zadawane pytania',
+        content: `
+### Czym linear imager różni się od lasera?
+
+Linear imager (jak LI2208) nie ma ruchomych części — jest trwalszy, lepiej czyta kody **uszkodzone i z ekranu** i ma dłuższy zasięg. Oba czytają tylko kody 1D.
+
+### Dlaczego nie czyta kodu QR?
+
+LI2208 czyta tylko kody **1D**. Do kodów 2D użyj skanera obrazowego 2D (np. DS2208).
+
+### Skaner odczytuje sąsiedni kod zamiast wskazanego?
+
+Włącz **Picklist Mode** — wtedy skaner odczyta tylko kod, na którym ustawisz celownik.
+
+### Jak przywrócić ustawienia fabryczne?
+
+Zeskanuj kod **„Set Defaults"** z Product Reference Guide.
+`
+      }
+    ]
+  },
+  'li4278': {
+    model: 'LI4278',
+    title: 'Zebra LI4278 – Instrukcja obsługi po polsku',
+    lastUpdated: '2026-06-15',
+    sourceDocument: 'LI4278 Product Reference Guide + Quick Start Guide (cradle STB4278)',
+    keywords: [
+      'zebra li4278 instrukcja',
+      'li4278 instrukcja po polsku',
+      'li4278 instrukcja obsługi',
+      'li4278 parowanie',
+      'li4278 bluetooth',
+      'li4278 ładowanie',
+      'li4278 stb4278',
+      'li4278 ustawienia fabryczne',
+      'li4278 reset',
+      'skaner bezprzewodowy zebra li4278'
+    ],
+    sections: [
+      {
+        title: '1. Podstawowe informacje',
+        content: `
+### O skanerze Zebra LI4278
+
+Zebra **LI4278** to **bezprzewodowy** skaner **liniowy (linear imager)** czytający **kody 1D**. To bezprzewodowy odpowiednik LI2208 — łączy się przez **Bluetooth** i współpracuje z bazą ładująco-komunikacyjną **STB4278**. Dobrze czyta kody uszkodzone i wyświetlane na ekranie, ma duży zasięg odczytu i baterię na całą zmianę.
+
+> **Ważne:** LI4278 czyta tylko kody **1D**. Kody 2D (QR) odczyta skaner obrazowy 2D (np. DS2278).
+
+### Kluczowe cechy
+
+| Cecha | Wartość |
+|-------|---------|
+| **Typ** | Bezprzewodowy linear imager (1D) |
+| **Łączność** | Bluetooth (zasięg do ~100 m, Class 1) |
+| **Bateria** | Li-Ion, wymienna |
+| **Baza** | STB4278 (ładowanie + komunikacja) |
+| **Tryby pracy** | Ręczny i prezentacji (na bazie) |
+
+> **Uwaga:** przed pierwszym użyciem naładuj baterię do pełna na bazie STB4278.
+`
+      },
+      {
+        title: '2. Bateria i ładowanie',
+        content: `
+1. Włóż baterię do skanera i umieść skaner w bazie **STB4278**.
+2. Dioda bazy zasygnalizuje **ładowanie**, a po naładowaniu — gotowość.
+3. Zaleca się pełne naładowanie przed pierwszym użyciem.
+
+Twardy restart: wyjmij baterię na ~10 s i włóż ponownie.
+`
+      },
+      {
+        title: '3. Parowanie z bazą',
+        content: `
+Skaner i baza muszą być **sparowane**:
+
+- **Przez włożenie do bazy** (parowanie przez kontakt) lub
+- **Przez zeskanowanie kodu parowania** znajdującego się **na bazie STB4278**.
+
+Poprawne parowanie potwierdzi seria tonów. W trybie **batch (poza zasięgiem)** skaner zapisuje skany w pamięci i przesyła je po powrocie w zasięg bazy.
+
+### Gdy dane nie docierają do hosta
+
+Odłącz zasilanie i kabel od bazy → odczekaj 3 s → podłącz z powrotem → sparuj ponownie (wsuń skaner do bazy lub zeskanuj kod parowania).
+`
+      },
+      {
+        title: '4. Wskaźniki LED i sygnały dźwiękowe',
+        content: `
+| Sygnał | Znaczenie |
+|--------|-----------|
+| Sygnał startowy | Skaner gotowy |
+| 1 bip + zielona dioda | Kod odczytany poprawnie |
+| Seria tonów parowania | Połączenie z bazą nawiązane / utracone |
+| Niski ton / brak reakcji | Kod nieodczytany lub niski poziom baterii |
+
+Głośność i ton sygnału ustawia się kodami konfiguracyjnymi.
+`
+      },
+      {
+        title: '5. Skanowanie kodów',
+        content: `
+1. Skieruj skaner na kod i naciśnij spust — pojawi się celownik.
+2. Ustaw celownik na kodzie.
+3. Po odczycie skaner bipnie i mignie diodą.
+
+W **trybie prezentacji** (na bazie) skaner skanuje automatycznie po zbliżeniu kodu. Czyta kody **1D**, w tym uszkodzone i z ekranu.
+`
+      },
+      {
+        title: '6. Konfiguracja kodami kreskowymi',
+        content: `
+### Przywrócenie ustawień fabrycznych
+
+1. Zeskanuj kod **„Set Defaults"** z Product Reference Guide.
+2. Alternatywnie użyj programu **Zebra 123Scan**.
+
+> **Uwaga:** reset kasuje ustawienia, w tym **parowanie** — po resecie sparuj skaner ponownie.
+
+### Najczęstsze ustawienia
+
+- **Enter (CR/LF) po skanie**, **Tab po skanie**, **prefiks/sufiks**.
+- **Out of Range Batch Mode** — zapis skanów poza zasięgiem bazy.
+- **Picklist Mode**, **głośność i ton beepera**.
+`
+      },
+      {
+        title: '7. Konserwacja i czyszczenie',
+        content: `
+- Czyść **70% IPA** lub łagodnym mydłem z wodą.
+- Nie używaj acetonu, amoniaku (na okienko), środków ściernych ani rozpuszczalników.
+
+**Procedura:** wyjmij skaner z bazy → przetrzyj **okienko** i obudowę 70% IPA → wyczyść **styki ładowania** skanera i bazy → pozostaw do wyschnięcia.
+`
+      },
+      {
+        title: '8. Rozwiązywanie problemów',
+        content: `
+| Problem | Możliwa przyczyna | Rozwiązanie |
+|---------|-------------------|-------------|
+| Brak komunikacji z bazą | Skaner niesparowany | Wsuń skaner do bazy lub zeskanuj kod parowania |
+| Dane nie docierają do hosta | Utracone połączenie bazy z hostem | Procedura ponownego połączenia (sekcja „Parowanie") |
+| Skaner nie ładuje się | Brudne styki ładowania | Wyczyść styki skanera i bazy 70% IPA |
+| Nie czyta kodu | Brudne okienko / złe celowanie | Wyczyść okienko; ustaw celownik na kodzie |
+| Nie czyta kodów 2D | To skaner 1D | Użyj skanera obrazowego 2D (np. DS2278) |
+| Traci łączność poza halą | Poza zasięgiem Bluetooth | Włącz Out of Range Batch Mode |
+
+Jeśli problem nie ustępuje, zaktualizuj firmware (zebra.com/support lub 123Scan) i sparuj skaner ponownie.
+`
+      },
+      {
+        title: '9. Specyfikacja techniczna',
+        content: `
+| Parametr | LI4278 |
+|----------|--------|
+| **Typ** | Bezprzewodowy linear imager 1D |
+| **Odczytywane kody** | tylko 1D (kreskowe) |
+| **Łączność** | Bluetooth Class 1 (do ~100 m) |
+| **Bateria** | Li-Ion, wymienna |
+| **Baza** | STB4278 (ładowanie + komunikacja) |
+| **Tryby** | ręczny, prezentacji, Out of Range Batch |
+`
+      },
+      {
+        title: 'FAQ – Najczęściej zadawane pytania',
+        content: `
+### Jak sparować LI4278 z bazą?
+
+Wsuń skaner do bazy **STB4278** lub zeskanuj **kod parowania** umieszczony na bazie.
+
+### Po resecie skaner nie łączy się z bazą?
+
+Reset **kasuje parowanie** — sparuj skaner ponownie.
+
+### Czy mogę skanować poza zasięgiem bazy?
+
+Tak — włącz **Out of Range Batch Mode**; skaner zapisze skany i prześle je po powrocie w zasięg.
+
+### Czym różni się LI4278 od LI2208?
+
+LI4278 jest **bezprzewodowy** (Bluetooth + bateria + baza STB4278), LI2208 **przewodowy**. Oba to imagery liniowe 1D.
+`
+      }
+    ]
   }
 }
 
