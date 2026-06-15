@@ -4,6 +4,15 @@ Checkpoint postępu prac. Najnowszy wpis na górze. Po każdym etapie/buildzie d
 
 ---
 
+## 2026-06-15 — Lejek (TOFU→MOFU/BOFU): mosty z instrukcji do części + cross-domain do takma
+
+- **Strategia**: blog/instrukcje/sterowniki = najmocniejszy ruch (TOFU). serwis-zebry rankuje na „Zebra TC22" (poz. 5), takma.com.pl (sprzedaż) na 2. stronie → przekierowujemy złapany ruch do konwersji. Dwa wyważone banery pod instrukcją.
+- **`components/FunnelBanners.tsx`** (nowy): per-model config `MODELS`. Baner 1 (główny, biała karta): „Twój {model} wymaga części lub naprawy?" → części (serwis-zebry /sklep) + formularz serwisowy. Baner 2 (drugorzędny, slate-50, jeden link): zakup nowego na takma — deep-link `takma.com.pl/produkt/{slug}?utm_source=serwis-zebry&utm_medium=instrukcja&utm_campaign={model}`, **dofollow** (`rel="noopener"`, ten sam właściciel → przekazuje moc). EOL → linkuj do następcy.
+- **Wpięte** w `app/instrukcje/[model]/instrukcja-po-polsku/page.tsx` po treści. Gated configiem — **start: TC22** (`zebra-tc22`, inProduction, części→/sklep/akumulatory/terminale). Inne modele bez banerów do czasu dodania do MODELS.
+- **Stan**: tsc czysto, build EXIT=0. TC22 renderuje banery (link części→200, takma z UTM), ZD421 nie. Do commitu+pusha. **TODO**: rozszerzać `MODELS` o kolejne popularne modele (ZT411, ZD421, TC52…) + EOL z następcami; rozważyć ten sam most na `[model]/page.tsx` i blogu.
+
+---
+
 ## 2026-06-14 — SEO: kontent kategorii Konwertery DPI + karty produktów (pętla, audyt 214/214)
 
 - **Research (Ahrefs+GSC, projekt serwis-zebry 9640672)**: „konwerter dpi" (vol 150, KD 0) = PUŁAPKA intencji (darmowe online konwertery DPI zdjęć — related: online/za darmo/zdjęć). Realna intencja z GSC = **model+DPI**: „zt410 300 dpi", „zebra zt411 dpi settings" (poz. 3.6), „zebra 600 dpi". Target konwerterów = „zmiana rozdzielczości drukarki Zebra", „konwersja 203 na 300 DPI", model-specific — NIE generyczne „konwerter dpi".

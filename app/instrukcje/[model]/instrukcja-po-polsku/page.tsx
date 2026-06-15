@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { createClient } from '@supabase/supabase-js'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import FunnelBanners from '@/components/FunnelBanners'
 import { 
   ChevronRight, 
   ArrowLeft,
@@ -162,11 +163,14 @@ export default async function PolishManualPage({ params }: { params: { model: st
           </div>
 
           {/* Kliencki komponent z treścią i przyciskiem PDF */}
-          <PolishManualContent 
+          <PolishManualContent
             polishManual={polishManual}
             modelSlug={modelSlug}
             modelName={manual.model}
           />
+
+          {/* Most lejka: części/serwis (serwis-zebry) + zakup nowego/następcy (takma) — per model */}
+          <FunnelBanners model={manual.model} />
         </div>
       </main>
 
