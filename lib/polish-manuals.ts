@@ -37063,6 +37063,366 @@ Zeskanuj kod **„Set Defaults"** z Product Reference Guide (w DS8288 po resecie
 `
       }
     ]
+  },
+  'cs6080': {
+    model: 'CS6080',
+    title: 'Zebra CS6080 – Instrukcja obsługi po polsku',
+    lastUpdated: '2026-06-15',
+    sourceDocument: 'CS6080 Companion Scanner Product Reference Guide (MN-003827-10EN) + Quick Start Guide',
+    keywords: [
+      'zebra cs6080 instrukcja',
+      'cs6080 instrukcja po polsku',
+      'cs6080 instrukcja obsługi',
+      'cs6080 parowanie',
+      'cs6080 bluetooth',
+      'cs6080 ładowanie',
+      'cs6080 ustawienia fabryczne',
+      'cs6080 reset',
+      'companion scanner zebra cs6080'
+    ],
+    sections: [
+      {
+        title: '1. Podstawowe informacje',
+        content: `
+### O skanerze Zebra CS6080
+
+Zebra **CS6080** to **kompaktowy skaner towarzyszący (companion scanner)**, który mieści się w dłoni lub kieszeni i czyta kody **1D i 2D**, także z ekranów. Dostępny jest w wersji **przewodowej (USB)** oraz **bezprzewodowej (Bluetooth)** — w tej drugiej skaner pracuje bez kabla i ładuje się w kolebce/po USB. Idealny do handlu, ochrony zdrowia i magazynu, gdzie liczy się mały rozmiar.
+
+### Kluczowe cechy
+
+| Cecha | Wartość |
+|-------|---------|
+| **Typ** | Kompaktowy companion scanner 1D/2D |
+| **Wersje** | przewodowa (USB) i bezprzewodowa (Bluetooth) |
+| **Kody z ekranów** | tak |
+| **Obsługa** | przycisk skanowania (bez pistoletowego spustu) |
+
+> **Uwaga:** w wersji bezprzewodowej naładuj skaner do pełna przed pierwszym użyciem.
+`
+      },
+      {
+        title: '2. Ładowanie i parowanie (wersja bezprzewodowa)',
+        content: `
+### Ładowanie
+
+Umieść skaner w kolebce ładującej lub podłącz kablem USB. Dioda zasygnalizuje ładowanie; naładuj do pełna przed pierwszym użyciem.
+
+### Parowanie Bluetooth
+
+1. Zeskanuj **kod parowania** (z kolebki lub z Product Reference Guide) albo połącz przez ustawienia Bluetooth hosta.
+2. W trybie **Bluetooth HID** skaner działa jak klawiatura.
+3. Poprawne połączenie potwierdzi sygnał dźwiękowy i dioda.
+
+> W wersji **przewodowej** wystarczy podłączyć kabel USB — skaner działa od razu.
+`
+      },
+      {
+        title: '3. Skanowanie kodów',
+        content: `
+1. Skieruj skaner na kod i naciśnij **przycisk skanowania**.
+2. Ustaw celownik na kodzie.
+3. Po odczycie skaner bipnie i mignie diodą.
+
+Czyta kody **1D** (EAN/UPC, Code 39/128, GS1 DataBar) i **2D** (PDF417, Data Matrix, QR Code) — także z ekranów telefonów.
+`
+      },
+      {
+        title: '4. Wskaźniki i konfiguracja',
+        content: `
+### Sygnalizacja
+
+| Sygnał | Znaczenie |
+|--------|-----------|
+| Sygnał startowy | Skaner gotowy |
+| 1 bip + mignięcie diody | Kod odczytany poprawnie |
+| Sygnał parowania | Połączenie Bluetooth nawiązane / utracone |
+| Niski ton | Niski poziom baterii (wersja bezprzewodowa) |
+
+### Konfiguracja kodami kreskowymi
+
+- **Przywrócenie ustawień fabrycznych:** zeskanuj kod **„Set Defaults"** z Product Reference Guide (lub użyj **123Scan**). W wersji bezprzewodowej reset kasuje też parowanie.
+- **Enter (CR/LF) po skanie**, **prefiks/sufiks**, **głośność i ton beepera**.
+`
+      },
+      {
+        title: '5. Konserwacja i czyszczenie',
+        content: `
+- Czyść **70% IPA** lub łagodnym mydłem z wodą.
+- Nie używaj acetonu, amoniaku (na okno), środków ściernych ani rozpuszczalników.
+
+**Procedura:** odłącz/wyjmij skaner z kolebki → przetrzyj **okno skanujące** i obudowę 70% IPA → w wersji bezprzewodowej wyczyść **styki ładowania** → pozostaw do wyschnięcia.
+`
+      },
+      {
+        title: '6. Rozwiązywanie problemów',
+        content: `
+| Problem | Możliwa przyczyna | Rozwiązanie |
+|---------|-------------------|-------------|
+| Nie łączy się przez Bluetooth | Niesparowany / poza zasięgiem | Zeskanuj kod parowania; pozostań w zasięgu |
+| Nie ładuje się | Brudne styki / zła kolebka | Wyczyść styki 70% IPA; sprawdź zasilanie kolebki |
+| Nie czyta kodu | Brudne okno / zła odległość | Wyczyść okno; dostosuj odległość |
+| Bipa, ale brak danych | Zły interfejs / brak połączenia | Sprawdź połączenie (USB HID / Bluetooth HID) |
+
+Jeśli problem nie ustępuje, zaktualizuj firmware (zebra.com/support lub 123Scan) i sparuj/zresetuj skaner.
+`
+      },
+      {
+        title: '7. Specyfikacja i FAQ',
+        content: `
+| Parametr | CS6080 |
+|----------|--------|
+| **Typ** | Kompaktowy companion scanner 1D/2D |
+| **Wersje** | przewodowa (USB) i bezprzewodowa (Bluetooth) |
+| **Kody z ekranów** | tak |
+
+### FAQ
+
+**Jak sparować wersję bezprzewodową?** Zeskanuj kod parowania (z kolebki lub PRG) albo połącz przez ustawienia Bluetooth hosta.
+
+**Jak przywrócić ustawienia fabryczne?** Zeskanuj kod **„Set Defaults"** z Product Reference Guide.
+
+**Czym czyścić okno?** Wyłącznie 70% IPA lub łagodnym mydłem z wodą.
+`
+      }
+    ]
+  },
+  'cs4070': {
+    model: 'CS4070',
+    title: 'Zebra CS4070 – Instrukcja obsługi po polsku',
+    lastUpdated: '2026-06-15',
+    sourceDocument: 'CS4070 Companion Scanner Product Reference Guide + Quick Start Guide',
+    keywords: [
+      'zebra cs4070 instrukcja',
+      'cs4070 instrukcja po polsku',
+      'cs4070 instrukcja obsługi',
+      'cs4070 parowanie',
+      'cs4070 bluetooth',
+      'cs4070 tryb batch',
+      'cs4070 pamięć',
+      'cs4070 ustawienia fabryczne',
+      'companion scanner zebra cs4070'
+    ],
+    sections: [
+      {
+        title: '1. Podstawowe informacje',
+        content: `
+### O skanerze Zebra CS4070
+
+Zebra **CS4070** to **kompaktowy skaner towarzyszący (companion scanner)** z **Bluetooth** i **pamięcią wewnętrzną (tryb batch)**. Czyta kody **1D i 2D** i może pracować na dwa sposoby: na żywo (połączony przez Bluetooth lub USB) albo **samodzielnie, zapisując skany w pamięci** i przesyłając je później. Mały i lekki — sprawdza się w inwentaryzacji i mobilnym kompletowaniu.
+
+### Kluczowe cechy
+
+| Cecha | Wartość |
+|-------|---------|
+| **Typ** | Companion scanner 1D/2D z pamięcią batch |
+| **Łączność** | Bluetooth (HID) oraz USB |
+| **Tryb batch** | zapisuje skany offline, przesyła później |
+| **Obsługa** | przycisk skanowania |
+
+> **Uwaga:** naładuj skaner do pełna przed pierwszym użyciem.
+`
+      },
+      {
+        title: '2. Tryby pracy',
+        content: `
+### Tryb na żywo (Bluetooth / USB)
+
+Skaner połączony z hostem przesyła zeskanowane dane na bieżąco. W trybie **Bluetooth HID** działa jak klawiatura.
+
+### Tryb batch (pamięć)
+
+Gdy skaner nie jest połączony, **zapisuje skany w pamięci wewnętrznej**. Po podłączeniu (USB lub Bluetooth) prześle zgromadzone dane do systemu. Idealne do inwentaryzacji, gdzie nie ma stałego połączenia.
+
+### Parowanie Bluetooth
+
+Zeskanuj **kod parowania** z Product Reference Guide lub połącz przez ustawienia Bluetooth hosta. Połączenie potwierdzi sygnał i dioda.
+`
+      },
+      {
+        title: '3. Skanowanie kodów',
+        content: `
+1. Skieruj skaner na kod i naciśnij **przycisk skanowania**.
+2. Ustaw celownik na kodzie.
+3. Po odczycie skaner bipnie i mignie diodą (a w trybie batch zapisze odczyt w pamięci).
+
+Czyta kody **1D** (EAN/UPC, Code 39/128, GS1 DataBar) i **2D** (PDF417, Data Matrix, QR Code).
+`
+      },
+      {
+        title: '4. Wskaźniki i konfiguracja',
+        content: `
+### Sygnalizacja
+
+| Sygnał | Znaczenie |
+|--------|-----------|
+| 1 bip + mignięcie diody | Kod odczytany poprawnie |
+| Sygnał parowania | Połączenie Bluetooth nawiązane / utracone |
+| Niski ton | Niski poziom baterii |
+
+### Konfiguracja kodami kreskowymi
+
+- **Przywrócenie ustawień fabrycznych:** zeskanuj kod **„Set Defaults"** z Product Reference Guide (lub **123Scan**). Reset kasuje też parowanie.
+- **Enter (CR/LF) po skanie**, **prefiks/sufiks**, **głośność i ton beepera**.
+- Ustawienia trybu **batch** (pamięci) i przesyłania danych.
+`
+      },
+      {
+        title: '5. Konserwacja i czyszczenie',
+        content: `
+- Czyść **70% IPA** lub łagodnym mydłem z wodą.
+- Nie używaj acetonu, amoniaku (na okno), środków ściernych ani rozpuszczalników.
+
+**Procedura:** odłącz skaner → przetrzyj **okno skanujące** i obudowę 70% IPA → pozostaw do wyschnięcia.
+`
+      },
+      {
+        title: '6. Rozwiązywanie problemów',
+        content: `
+| Problem | Możliwa przyczyna | Rozwiązanie |
+|---------|-------------------|-------------|
+| Nie łączy się przez Bluetooth | Niesparowany / poza zasięgiem | Zeskanuj kod parowania; pozostań w zasięgu |
+| Skany nie przesyłają się | Skaner w trybie batch | Podłącz skaner (USB/Bluetooth), aby przesłać dane z pamięci |
+| Nie ładuje się | Brudne styki / złe zasilanie | Wyczyść styki 70% IPA; sprawdź zasilanie |
+| Nie czyta kodu | Brudne okno / zła odległość | Wyczyść okno; dostosuj odległość |
+
+Jeśli problem nie ustępuje, zaktualizuj firmware (zebra.com/support lub 123Scan).
+`
+      },
+      {
+        title: '7. Specyfikacja i FAQ',
+        content: `
+| Parametr | CS4070 |
+|----------|--------|
+| **Typ** | Companion scanner 1D/2D z pamięcią batch |
+| **Łączność** | Bluetooth (HID), USB |
+| **Tryb batch** | tak (zapis offline) |
+
+### FAQ
+
+**Czy CS4070 może pracować bez połączenia z komputerem?** Tak — w **trybie batch** zapisuje skany w pamięci i przesyła je po podłączeniu.
+
+**Jak przesłać zapisane skany?** Podłącz skaner przez USB lub Bluetooth — dane z pamięci zostaną wysłane do systemu.
+
+**Jak przywrócić ustawienia fabryczne?** Zeskanuj kod **„Set Defaults"** z Product Reference Guide.
+`
+      }
+    ]
+  },
+  'cs3000': {
+    model: 'CS3000',
+    title: 'Zebra CS3000 – Instrukcja obsługi po polsku',
+    lastUpdated: '2026-06-15',
+    sourceDocument: 'CS3000 Series Companion Scanner Product Reference Guide + Quick Start Guide',
+    keywords: [
+      'zebra cs3000 instrukcja',
+      'cs3000 instrukcja po polsku',
+      'cs3000 instrukcja obsługi',
+      'cs3000 tryb batch',
+      'cs3000 pamięć',
+      'cs3000 usb',
+      'cs3000 ustawienia fabryczne',
+      'cs3000 reset',
+      'companion scanner zebra cs3000'
+    ],
+    sections: [
+      {
+        title: '1. Podstawowe informacje',
+        content: `
+### O skanerze Zebra CS3000
+
+Zebra **CS3000** to **miniaturowy skaner towarzyszący (companion scanner)** z **pamięcią wewnętrzną (tryb batch)**, czytający kody **1D i 2D**. Zbiera skany do pamięci, a następnie przesyła je do komputera przez **USB** (po włożeniu do kolebki/podłączeniu kablem). Maleńki i lekki — idealny do inwentaryzacji i mobilnego zbierania danych tam, gdzie nie ma stałego połączenia.
+
+### Kluczowe cechy
+
+| Cecha | Wartość |
+|-------|---------|
+| **Typ** | Miniaturowy companion scanner 1D/2D |
+| **Tryb batch** | zapisuje skany w pamięci, przesyła przez USB |
+| **Łączność/ładowanie** | USB (kabel/kolebka) |
+| **Obsługa** | przycisk skanowania |
+
+> **Uwaga:** naładuj skaner do pełna przed pierwszym użyciem.
+`
+      },
+      {
+        title: '2. Praca w trybie batch',
+        content: `
+1. Naładuj skaner (USB/kolebka).
+2. Skanuj kody — każdy odczyt zostaje **zapisany w pamięci** (skaner bipnie i mignie diodą).
+3. Po zakończeniu podłącz skaner do komputera przez **USB** — zapisane skany zostaną przesłane do systemu.
+
+Dzięki trybowi batch skaner pracuje **samodzielnie**, bez stałego połączenia z hostem.
+`
+      },
+      {
+        title: '3. Skanowanie kodów',
+        content: `
+1. Skieruj skaner na kod i naciśnij **przycisk skanowania**.
+2. Ustaw celownik na kodzie.
+3. Po odczycie skaner bipnie i mignie diodą.
+
+Czyta kody **1D** (EAN/UPC, Code 39/128, GS1 DataBar) i **2D** (PDF417, Data Matrix, QR Code).
+`
+      },
+      {
+        title: '4. Wskaźniki i konfiguracja',
+        content: `
+### Sygnalizacja
+
+| Sygnał | Znaczenie |
+|--------|-----------|
+| Sygnał startowy | Skaner gotowy |
+| 1 bip + mignięcie diody | Kod odczytany i zapisany |
+| Niski ton | Niski poziom baterii |
+
+### Konfiguracja kodami kreskowymi
+
+- **Przywrócenie ustawień fabrycznych:** zeskanuj kod **„Set Defaults"** z Product Reference Guide (lub **123Scan**).
+- **Enter (CR/LF) po skanie**, **prefiks/sufiks**, **głośność i ton beepera**.
+- Ustawienia trybu **batch** i przesyłania danych.
+`
+      },
+      {
+        title: '5. Konserwacja i czyszczenie',
+        content: `
+- Czyść **70% IPA** lub łagodnym mydłem z wodą.
+- Nie używaj acetonu, amoniaku (na okno), środków ściernych ani rozpuszczalników.
+
+**Procedura:** odłącz skaner → przetrzyj **okno skanujące** i obudowę 70% IPA → wyczyść **styki ładowania** → pozostaw do wyschnięcia.
+`
+      },
+      {
+        title: '6. Rozwiązywanie problemów',
+        content: `
+| Problem | Możliwa przyczyna | Rozwiązanie |
+|---------|-------------------|-------------|
+| Skany nie pojawiają się w systemie | Skaner nie został podłączony | Podłącz skaner przez USB, aby przesłać dane z pamięci |
+| Nie ładuje się | Brudne styki / złe zasilanie | Wyczyść styki 70% IPA; sprawdź kabel/kolebkę |
+| Nie czyta kodu | Brudne okno / zła odległość | Wyczyść okno; dostosuj odległość |
+| Pamięć pełna | Za dużo zapisanych skanów | Prześlij dane do komputera, aby zwolnić pamięć |
+
+Jeśli problem nie ustępuje, zaktualizuj firmware (zebra.com/support lub 123Scan).
+`
+      },
+      {
+        title: '7. Specyfikacja i FAQ',
+        content: `
+| Parametr | CS3000 |
+|----------|--------|
+| **Typ** | Miniaturowy companion scanner 1D/2D |
+| **Tryb batch** | tak (zapis offline, przesył przez USB) |
+| **Łączność/ładowanie** | USB |
+
+### FAQ
+
+**Jak przesłać zebrane skany?** Podłącz skaner do komputera przez **USB** — dane z pamięci zostaną wysłane.
+
+**Skaner przestał zapisywać skany?** Prawdopodobnie **pamięć jest pełna** — prześlij dane do komputera, aby ją zwolnić.
+
+**Jak przywrócić ustawienia fabryczne?** Zeskanuj kod **„Set Defaults"** z Product Reference Guide.
+`
+      }
+    ]
   }
 }
 
