@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Regulamin świadczenia usług serwisowych',
-  description: 'Regulamin świadczenia usług serwisowych przez TAKMA - autoryzowany serwis urządzeń Zebra. Zasady napraw, gwarancje, reklamacje.',
+  description: 'Regulamin TAKMA Tadeusz Tiuchty — usługi serwisowe i sprzedaż produktów Zebra. Zasady napraw, gwarancje, reklamacje, dostawa, odstąpienie od umowy.',
   alternates: {
     canonical: 'https://www.serwis-zebry.pl/regulamin',
     languages: {
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Regulamin - Serwis Zebra',
-    description: 'Regulamin świadczenia usług serwisowych przez TAKMA.',
+    description: 'Regulamin usług serwisowych i sklepu TAKMA Tadeusz Tiuchty.',
     url: 'https://www.serwis-zebry.pl/regulamin',
     type: 'website',
     siteName: 'TAKMA - Autoryzowany Serwis Zebra',

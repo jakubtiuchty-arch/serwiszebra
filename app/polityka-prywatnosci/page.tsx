@@ -64,7 +64,7 @@ export default function PolitykaPrywatnosciPage() {
             <p className="text-sm text-gray-600 m-0">
               Niniejsza Polityka Prywatności określa zasady przetwarzania i ochrony danych osobowych 
               przekazanych przez Użytkowników w związku z korzystaniem z usług serwisu <strong>serwis-zebry.pl</strong>, 
-              prowadzonego przez firmę TAKMA. Dbamy o Twoją prywatność i bezpieczeństwo danych zgodnie 
+              prowadzonego przez TAKMA Tadeusz Tiuchty. Dbamy o Twoją prywatność i bezpieczeństwo danych zgodnie
               z Rozporządzeniem RODO.
             </p>
           </div>
@@ -80,10 +80,10 @@ export default function PolitykaPrywatnosciPage() {
             <div className="space-y-3 text-gray-600 text-sm leading-relaxed">
               <p>1.1. Administratorem danych osobowych jest:</p>
               <div className="bg-gray-50 rounded-lg p-4 ml-4">
-                <p className="font-semibold text-gray-900 mb-1">TAKMA</p>
+                <p className="font-semibold text-gray-900 mb-1">TAKMA Tadeusz Tiuchty</p>
                 <p className="text-gray-600">ul. Poświęcka 1a</p>
                 <p className="text-gray-600">51-128 Wrocław</p>
-                <p className="text-gray-600">NIP: 915-100-43-77</p>
+                <p className="text-gray-600">NIP: 9151004377</p>
                 <p className="text-gray-600">REGON: 932677161</p>
               </div>
               <p>1.2. Kontakt w sprawach dotyczących danych osobowych:</p>
