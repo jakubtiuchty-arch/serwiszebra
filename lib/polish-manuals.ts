@@ -34254,17 +34254,326 @@ Przy korzystaniu z urządzenia należy przestrzegać poniższych zaleceń dotycz
 `
       }
     ]
+  },
+  'ds3608': {
+    model: 'DS3608',
+    title: 'Zebra DS3608 – Instrukcja obsługi po polsku',
+    lastUpdated: '2026-06-15',
+    sourceDocument: 'DS36X8 Product Reference Guide (MN-002689-22EN) + Quick Start Guide + spec sheets SR/ER/HP/HD/DP',
+    keywords: [
+      'zebra ds3608 instrukcja',
+      'ds3608 instrukcja po polsku',
+      'ds3608 instrukcja obsługi',
+      'zebra ds3608 konfiguracja',
+      'ds3608 ustawienia fabryczne',
+      'ds3608 reset',
+      'ds3608 usb hid',
+      'ds3608 enter po skanie',
+      'ds3608 sufiks',
+      'ds3608 nie skanuje',
+      'ds3608 sr hp hd er dp',
+      'ds3608 czyszczenie',
+      'ds3608 symbologie',
+      'skaner zebra ds3608'
+    ],
+    sections: [
+      {
+        title: '1. Podstawowe informacje',
+        content: `
+### O skanerze Zebra DS3608
+
+Zebra **DS3608** to ręczny, **przewodowy** skaner obrazowy (imager) klasy **ultra-rugged**, czytający kody **1D i 2D**. Jest przeznaczony do najtrudniejszych warunków — magazynów, produkcji, chłodni i hal przemysłowych. Wersja bezprzewodowa tej samej rodziny to **DS3678** (z baterią i Bluetooth).
+
+### Warianty optyki
+
+Pod nazwą DS3608 kryje się kilka wersji różniących się silnikiem skanującym i zastosowaniem:
+
+| Wariant | Przeznaczenie |
+|---------|---------------|
+| **SR** (Standard Range) | Najpopularniejszy — ogólne zastosowania magazynowe, zasięg do ~1,5 m |
+| **HP** (High Performance) | Wiele typów kodów, OCR, dokumenty i zdjęcia, zasięg do ~2,1 m |
+| **HD** (High Density) | Bardzo małe, gęste kody (od 3 mil) — elektronika, farmacja, laboratoria |
+| **ER** (Extended Range) | Daleki zasięg do ~21 m — wysokie składowanie, skanowanie z wózka |
+| **XR** (Extended Range+) | Szersze pole widzenia w dalekim zasięgu |
+| **DP / DPA / DPX** (Direct Part Marking) | Znakowania bezpośrednie (dot peen, laser etch) — automotive, lotnictwo |
+
+### Kluczowe cechy
+
+| Cecha | Wartość |
+|-------|---------|
+| **Typ** | Przewodowy imager 1D/2D, ultra-rugged |
+| **Klasa szczelności** | IP65 i IP67 (ER/DP: IP65 i IP68) |
+| **Odporność na upadki** | 2,4 m na beton (ER/DP: 3,0 m) |
+| **Tumble test** | 5000 upadków z 1 m (ER/DP: 7500) |
+| **Temperatura pracy** | od -30°C do +50°C |
+| **Interfejsy** | USB (HID/CDC), RS-232, Keyboard Wedge, Industrial Ethernet |
+| **Celownik** | Laser 655 nm, iluminacja LED 660 nm |
+| **Kolor** | Industrial Green |
+| **Gwarancja** | 36 miesięcy (3 lata) |
+
+### Zawartość opakowania
+
+W zestawie znajduje się skaner DS3608 oraz kabel interfejsu (w zależności od zamówionej konfiguracji — USB lub RS-232). Sprawdź, czy nic nie jest uszkodzone; jeśli czegoś brakuje, skontaktuj się z dostawcą.
+
+> **Uwaga:** DS3608 jest skanerem przewodowym — nie ma baterii ani modułu Bluetooth. Zasilanie pobiera z portu hosta (USB) lub z zewnętrznego zasilacza (RS-232/Ethernet).
+`
+      },
+      {
+        title: '2. Którą wersję wybrać',
+        content: `
+### Porównanie wariantów
+
+| Cecha | SR | ER | HP | HD | DP |
+|-------|----|----|----|----|----|
+| **Silnik** | SE4750-SR | SE4850-ER | SE4750-HP | SE4750-HD | SE4750-DL |
+| **Zasięg maks.** | ~1,5 m | ~21,4 m | ~2,1 m | ~18 cm | bliski kontakt |
+| **Min. rozdzielczość** | 3 mil | 10 mil | 3 mil | 3 mil | 3 mil DPM |
+| **OCR / dokumenty** | nie | nie | tak | nie | nie |
+| **Znakowania DPM** | ograniczone | ograniczone | ograniczone | nie | pełne |
+| **Ethernet przemysłowy** | nie | tak | nie | nie | tak |
+
+### Kiedy którą
+
+- **SR** — domyślny wybór do magazynu, linii pakujących, przyjęć i wydań towaru (kody do ~1,5 m).
+- **ER** — wysokie składowanie i skanowanie palet z wózka widłowego (od 8 cm do nawet 21 m).
+- **HP** — linie produkcyjne z różnymi typami kodów, odczyt OCR (numery seryjne, daty), zdjęcia i dokumenty.
+- **HD** — miniaturowe, gęste kody: elektronika (PCB), farmacja (3 mil), laboratoria (probówki).
+- **DP/DPA** — znakowania nanoszone bezpośrednio na metalowe części (automotive, lotnictwo, obronność/IUID).
+`
+      },
+      {
+        title: '3. Wskaźniki LED i sygnały dźwiękowe',
+        content: `
+### Dioda LED skanera
+
+DS3608 ma dwukolorową diodę (zielona/czerwona, z mieszanki bursztynowa):
+
+| Stan diody | Kolor | Znaczenie |
+|------------|-------|-----------|
+| Pojedynczy błysk przy włączeniu | Zielony | Skaner uruchomił się poprawnie |
+| Pojedynczy błysk przy skanowaniu | Zielony | Kod odczytany poprawnie (good decode) |
+| Ciągłe świecenie | Zielony | Skaner gotowy / połączony |
+| Miganie | Bursztynowy | Aktywny tryb programowania (konfiguracja kodami) |
+| Miganie | Czerwony | Błąd transmisji lub błąd skanowania |
+| Świecenie | Czerwony | Awaria / błąd krytyczny |
+| Brak świecenia | — | Brak zasilania lub uśpienie |
+
+### Sygnały dźwiękowe (beeper)
+
+| Zdarzenie | Sygnał | Znaczenie |
+|-----------|--------|-----------|
+| Włączenie | Niski–średni–wysoki (rosnący) | Poprawne uruchomienie |
+| Poprawny odczyt | 1 średni ton | Kod odczytany |
+| Błąd transmisji | 4 długie niskie tony | Dane nie dotarły do hosta |
+| Wejście w programowanie | Wysoki–niski–wysoki–niski | Tryb konfiguracji |
+| Parametr zaakceptowany | Wysoki–niski | Kod konfiguracyjny przyjęty |
+| Błąd parametru | Długi niski–długi wysoki | Niepoprawny kod lub anulowanie |
+
+Głośność, ton i czas trwania sygnału można zmienić kodami konfiguracyjnymi (patrz sekcja „Konfiguracja kodami kreskowymi").
+`
+      },
+      {
+        title: '4. Podłączenie do komputera',
+        content: `
+### Obsługiwane interfejsy
+
+| Interfejs | Uwagi |
+|-----------|-------|
+| **USB HID (klawiaturowy)** | Domyślny — skaner działa jak klawiatura, dane trafiają do aktywnego pola |
+| **USB CDC (port COM)** | Wirtualny port szeregowy (wymaga sterownika Zebra) |
+| **RS-232** | Klasyczny port szeregowy (wymaga zasilacza zewnętrznego) |
+| **Keyboard Wedge (PS/2)** | Wpięcie między klawiaturę a komputer |
+| **Industrial Ethernet** | Wersje ER/DP — EtherNet/IP, Profinet, Modbus TCP (integracja z PLC) |
+
+### Pierwsze uruchomienie (USB)
+
+1. Podłącz kabel USB do skanera, a drugą końcówkę do portu USB komputera.
+2. Skaner wyda rosnący trójton i błyśnie zielono — jest gotowy.
+3. W trybie **USB HID** skaner działa od razu jak klawiatura — otwórz np. Notatnik i zeskanuj kod, aby sprawdzić.
+4. Aby zmienić interfejs (np. na USB COM lub RS-232), zeskanuj odpowiedni kod konfiguracyjny z Product Reference Guide.
+
+> **Wskazówka:** jeśli skaner bipnie poprawnie, ale dane nie pojawiają się w systemie, najczęściej jest źle ustawiony interfejs — zeskanuj kod właściwego interfejsu (USB HID / USB COM / RS-232).
+
+### Zasilanie
+
+- Z portu USB hosta: 4,5–5,5 VDC.
+- Z zasilacza zewnętrznego (RS-232/Ethernet): 11,4–12,6 VDC.
+- Prąd roboczy typowy: ok. 450 mA.
+`
+      },
+      {
+        title: '5. Skanowanie kodów',
+        content: `
+### Jak skanować
+
+1. Skieruj skaner w stronę kodu i naciśnij **spust (trigger)**.
+2. Pojawi się czerwony celownik — ustaw go na środku kodu (kod nie musi wypełniać całego pola).
+3. Po poprawnym odczycie skaner błyśnie zielono i bipnie.
+
+Skaner toleruje duże odchylenia położenia: pochylenie (skew) ±60°, przechylenie (pitch) ±60°, obrót (roll) ±360° — nie trzeba trzymać go idealnie prostopadle.
+
+### Zasięgi (orientacyjnie)
+
+| Wariant | Zasięg roboczy |
+|---------|----------------|
+| **SR** | od kontaktu do ~1,5 m |
+| **HP** | od ~7 cm do ~2,1 m |
+| **HD** | od ~3 cm do ~18 cm (małe, gęste kody) |
+| **ER** | od ~7,6 cm do ~21 m (zależnie od rozmiaru kodu) |
+
+### Obsługiwane symbologie
+
+- **Kody 1D:** Code 39, Code 128, Code 93, Codabar, Code 11, MSI, UPC/EAN, Interleaved 2 of 5, GS1 DataBar.
+- **Kody 2D:** PDF417, MicroPDF417, Data Matrix, QR Code, MicroQR, Aztec, MaxiCode, Han Xin, kody pocztowe.
+- **Dodatkowo:** Digimarc, OCR (wersja HP), IUID.
+`
+      },
+      {
+        title: '6. Konfiguracja kodami kreskowymi',
+        content: `
+### Przywrócenie ustawień fabrycznych (factory reset)
+
+Najprostszy sposób, gdy skaner zachowuje się nieprawidłowo lub był wcześniej przekonfigurowany:
+
+1. Otwórz Product Reference Guide skanera (rozdział o ustawieniach użytkownika).
+2. Zeskanuj kod **„Set Factory Defaults"** (Przywróć ustawienia fabryczne).
+3. Skaner wyda serię tonów potwierdzających — wszystkie parametry wrócą do stanu fabrycznego.
+
+Alternatywnie można użyć darmowego programu **Zebra 123Scan** (podłącz skaner przez USB → opcja „Restore Defaults").
+
+> **Uwaga:** reset kasuje wszystkie ustawienia: typ interfejsu, reguły ADF, włączone symbologie, ustawienia beepera i diody. Po resecie skonfiguruj skaner ponownie.
+
+### Najczęstsze ustawienia
+
+- **Enter (CR/LF) po każdym skanie** — zeskanuj kod dodający sufiks Enter, aby po odczycie kursor przechodził do nowej linii (przydatne w arkuszach i WMS).
+- **Tab po skanie** — analogicznie, sufiks Tab przechodzi do kolejnej kolumny.
+- **Prefiks / sufiks** — możesz dodać stały znak lub tekst przed/po danych z kodu.
+- **Głośność i ton beepera** — Low / Medium / High.
+
+Wszystkie te ustawienia wykonuje się przez zeskanowanie odpowiednich kodów z Product Reference Guide lub wygenerowanie ich w programie 123Scan.
+`
+      },
+      {
+        title: '7. Konserwacja i czyszczenie',
+        content: `
+### Dopuszczone środki
+
+- **Alkohol izopropylowy (IPA) 70%** — podstawowy środek.
+- Łagodny roztwór mydła z wodą.
+- Gotowe chusteczki czyszczące do skanerów.
+
+### Środki zabronione
+
+- Aceton, rozpuszczalniki na bazie ropy naftowej, środki ścierne, środki z amoniakiem (do szyby).
+- **Nie zanurzaj** skanera w cieczy mimo klasy IP67 — szczelność dotyczy ochrony przed wodą, nie czyszczenia przez zanurzanie.
+
+### Procedura
+
+1. Odłącz skaner od zasilania.
+2. Zwilż miękką, niepylącą ściereczkę środkiem 70% IPA.
+3. Delikatnie przetrzyj **okno skanujące** (przez nie wychodzi wiązka — to najważniejszy element).
+4. Przetrzyj obudowę.
+5. Pozostaw do całkowitego wyschnięcia.
+6. Nie używaj sprężonego powietrza bezpośrednio na okno skanujące.
+
+Brudne okno skanujące to najczęstsza przyczyna pogorszenia jakości odczytu — czyść je regularnie w zapylonych środowiskach.
+`
+      },
+      {
+        title: '8. Rozwiązywanie problemów',
+        content: `
+| Problem | Możliwa przyczyna | Rozwiązanie |
+|---------|-------------------|-------------|
+| Skaner nie działa (brak reakcji) | Brak zasilania | Sprawdź kabel USB / zasilacz i port hosta |
+| Skaner nie działa | Skaner wyłączony (disabled) | Zeskanuj kod aktywujący z Product Reference Guide |
+| Skaner nie działa | Luźny kabel | Dociśnij wtyk USB/RS-232 po obu stronach |
+| Nie czyta kodu | Brudne okno skanujące | Wyczyść okno ściereczką z 70% IPA |
+| Nie czyta kodu | Symbologia wyłączona | Włącz odpowiedni typ kodu w konfiguracji |
+| Nie czyta kodu | Kod poza zasięgiem | Przybliż/oddal skaner — sprawdź zasięg dla danej wersji |
+| Nie czyta kodu | Kod uszkodzony/zamazany | Przetestuj na innym, czytelnym kodzie |
+| Bipa, ale dane nie trafiają do systemu | Źle ustawiony interfejs | Zeskanuj kod właściwego interfejsu (USB HID / USB COM / RS-232) |
+| 4 długie niskie tony | Błąd transmisji | Sprawdź kabel i sterownik USB, ponów połączenie |
+| Dane są błędne / podwójne znaki | Reguły ADF lub prefiks/sufiks | Zresetuj do ustawień fabrycznych i skonfiguruj ponownie |
+
+Jeśli problem nie ustępuje, zaktualizuj firmware (zebra.com/support, program 123Scan) i ponownie zresetuj skaner.
+`
+      },
+      {
+        title: '9. Specyfikacja techniczna',
+        content: `
+| Parametr | DS3608 |
+|----------|--------|
+| **Wymiary** | 18,5 × 7,6 × 13,2 cm (wys. × szer. × głęb.) |
+| **Waga** | ok. 305–335 g (zależnie od wersji) |
+| **Klasa IP** | IP65 i IP67 (ER/DP: IP65 i IP68) |
+| **Upadki** | 2,4 m na beton (ER/DP: 3,0 m) |
+| **Tumble** | 5000 z 1 m (ER/DP: 7500) |
+| **Temperatura pracy** | od -30°C do +50°C |
+| **Temperatura przechowywania** | od -40°C do +70°C |
+| **Wilgotność** | 5–95% bez kondensacji |
+| **Odporność na światło** | 0–108 000 luksów (pełne słońce) |
+| **ESD** | ±25 kV (powietrze), ±10 kV (kontakt) |
+| **Celownik / iluminacja** | Laser 655 nm / LED 660 nm |
+| **Zasilanie (USB)** | 4,5–5,5 VDC, typ. 450 mA |
+| **Gwarancja** | 36 miesięcy |
+`
+      },
+      {
+        title: 'FAQ – Najczęściej zadawane pytania',
+        content: `
+### Jak zrobić, żeby po zeskanowaniu kursor przechodził do nowej linii?
+
+Zeskanuj kod dodający **sufiks Enter (CR/LF)** z Product Reference Guide lub wygeneruj go w programie 123Scan. Od tej pory po każdym odczycie skaner automatycznie „wciśnie Enter".
+
+### Skaner bipa, ale nic nie wpisuje do programu — dlaczego?
+
+Najczęściej ma ustawiony zły interfejs. Zeskanuj kod **USB HID (klawiaturowy)**, jeśli chcesz, by działał jak klawiatura. Sprawdź też, czy kursor jest w aktywnym polu tekstowym.
+
+### Jak przywrócić ustawienia fabryczne?
+
+Zeskanuj kod **„Set Factory Defaults"** z Product Reference Guide. Skaner wróci do stanu fabrycznego (skasuje interfejs, symbologie, prefiksy/sufiksy).
+
+### Czym wolno czyścić okno skanujące?
+
+Wyłącznie alkoholem izopropylowym **70% IPA** lub łagodnym mydłem z wodą. Nie używaj acetonu, amoniaku ani środków ściernych.
+
+### Czym różni się DS3608 od DS3678?
+
+DS3608 jest **przewodowy** (zasilany z kabla), DS3678 to wersja **bezprzewodowa** z baterią i Bluetooth oraz bazą ładująco-komunikacyjną STB3678. Optyka (SR/ER/HP/HD/DP) jest taka sama.
+
+### Który wariant do magazynu, a który do drobnych kodów?
+
+Do typowego magazynu — **SR**. Do bardzo małych, gęstych kodów (elektronika, farmacja) — **HD**. Do skanowania z dużej odległości (wysokie regały, palety z wózka) — **ER**.
+`
+      }
+    ]
   }
+}
+
+// Aliasy: warianty skanerów bez prostego sufiksu optyki → bazowy wpis rodziny.
+const SCANNER_ALIASES: Record<string, string> = {
+  ds8288: 'ds8208',
+  ds9908r: 'ds9908',
+  ls1203hd: 'ls1203',
+}
+
+// Sprowadza dowolny model/SKU do klucza wpisu w polishManuals (1 instrukcja na rodzinę skanerów).
+function resolvePolishKey(model: string): string {
+  const n = model.toLowerCase().replace(/^zebra-/, '').replace(/-/g, '')
+  if (polishManuals[n]) return n
+  if (SCANNER_ALIASES[n] && polishManuals[SCANNER_ALIASES[n]]) return SCANNER_ALIASES[n]
+  // Odetnij sufiks wariantu optyki/łączności (DS3608SR → DS3608, DS4608DPE → DS4608, DS3678KD → DS3678)
+  const stripped = n.replace(/(sr|hp|hd|xr|er|dpa|dpx|dpe|dp|kd|xd)$/, '')
+  if (stripped !== n && polishManuals[stripped]) return stripped
+  return n
 }
 
 // Funkcja pomocnicza do pobierania polskiej instrukcji
 export function getPolishManual(model: string): PolishManual | null {
-  const normalizedModel = model.toLowerCase().replace(/^zebra-/, '').replace(/-/g, '')
-  return polishManuals[normalizedModel] || null
+  return polishManuals[resolvePolishKey(model)] || null
 }
 
 // Sprawdź czy model ma polską instrukcję
 export function hasPolishManual(model: string): boolean {
-  const normalizedModel = model.toLowerCase().replace(/^zebra-/, '').replace(/-/g, '')
-  return normalizedModel in polishManuals
+  return resolvePolishKey(model) in polishManuals
 }
