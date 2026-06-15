@@ -91,7 +91,7 @@ export default function FunnelBanners({ model }: { model: string }) {
 
       {/* Baner 2 — zakup nowego na TAKMA (aurora fiolet/magenta, drugorzędny) */}
       {showTakma && (
-        <div className="relative overflow-hidden rounded-2xl shadow-lg ring-1 ring-white/10 min-h-[92px]">
+        <div className="relative overflow-hidden rounded-2xl shadow-lg ring-1 ring-white/10 min-h-[92px] flex items-center">
           <Image
             src="/sklep_photo/banners/funnel-buy.jpeg"
             alt={`Nowy ${model} w sklepie TAKMA`}
@@ -100,13 +100,13 @@ export default function FunnelBanners({ model }: { model: string }) {
             className="object-cover object-right"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/88 to-slate-950/10" />
-          <div className="relative px-5 py-4 sm:px-6 flex items-center gap-3 flex-wrap">
+          <div className="relative w-full px-5 py-4 sm:px-6 flex items-center gap-3 flex-wrap">
             <Image
               src="/sklep_photo/banners/icon-buy.jpeg"
               alt=""
-              width={40}
-              height={40}
-              className="flex-shrink-0 w-10 h-10 rounded-xl shadow-md shadow-fuchsia-500/30"
+              width={42}
+              height={42}
+              className="flex-shrink-0 w-[42px] h-[42px] rounded-xl shadow-md shadow-fuchsia-500/30"
             />
             <p className="text-sm text-slate-100 flex-1 min-w-[200px] font-medium drop-shadow-sm">
               {inProd
@@ -117,7 +117,7 @@ export default function FunnelBanners({ model }: { model: string }) {
               href={buyHref}
               target="_blank"
               rel="noopener"
-              className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-violet-500 text-white text-sm font-semibold hover:bg-violet-400 transition-colors shadow-lg shadow-violet-500/30"
+              className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-white text-violet-700 text-sm font-bold hover:bg-violet-50 transition-colors shadow-lg shadow-black/25"
             >
               {inProd ? `Zobacz ${model} w TAKMA` : `Zobacz następcę${cfg.successorName ? ` — ${cfg.successorName}` : ''} w TAKMA`}
               <ArrowRight className="w-4 h-4" />
