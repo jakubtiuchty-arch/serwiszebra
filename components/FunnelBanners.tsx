@@ -1,19 +1,20 @@
 import Link from 'next/link'
-import { Wrench, ShoppingCart, ArrowRight, PackageSearch } from 'lucide-react'
+import Image from 'next/image'
+import { Wrench, ShoppingCart, ArrowRight } from 'lucide-react'
 
 /**
- * Most lejka (TOFU → MOFU/BOFU) pod instrukcją modelu.
- * Baner 1 (główny, dark premium): części + serwis na serwis-zebry.pl.
- * Baner 2 (drugorzędny, jasny): zakup nowego/następcy na takma.com.pl (deep-link + UTM, dofollow).
+ * Most lejka (TOFU → MOFU/BOFU) pod instrukcją modelu — MEGA banery z generowanym tłem.
+ * Baner 1 (główny): części + serwis na serwis-zebry.pl.
+ * Baner 2 (drugorzędny): zakup nowego/następcy na takma.com.pl (deep-link + UTM, dofollow).
  * Włączane per model w MODELS — start: TC22. Dla EOL → następca.
  */
 
 interface ModelFunnel {
-  takmaSlug?: string          // → takma.com.pl/produkt/{takmaSlug}
-  inProduction?: boolean      // false = EOL (linkuj do następcy)
+  takmaSlug?: string
+  inProduction?: boolean
   successorName?: string
   successorTakmaSlug?: string
-  partsHref?: string          // kategoria części na serwis-zebry.pl
+  partsHref?: string
   partsLabel?: string
 }
 
@@ -34,26 +35,32 @@ export default function FunnelBanners({ model }: { model: string }) {
   const cfg = MODELS[model.toUpperCase()]
   if (!cfg) return null
 
-  const showTakma = (cfg.inProduction !== false && cfg.takmaSlug) || (cfg.inProduction === false && cfg.successorTakmaSlug)
+  const inProd = cfg.inProduction !== false
+  const showTakma = (inProd && cfg.takmaSlug) || (!inProd && cfg.successorTakmaSlug)
+  const buyHref = takmaUrl((inProd ? cfg.takmaSlug : cfg.successorTakmaSlug) || '', model)
 
   return (
     <div className="mt-8 space-y-3">
-      {/* Baner 1 — części + serwis (DARK PREMIUM z poświatą) */}
+      {/* Baner 1 — części + serwis (MEGA, generowane tło) */}
       {cfg.partsHref && (
-        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-slate-900 via-slate-900 to-blue-950 p-6 sm:p-7 shadow-xl ring-1 ring-white/10">
-          {/* artefakty: poświata + dekoracyjna ikona */}
-          <div className="pointer-events-none absolute -top-16 -right-10 w-72 h-72 bg-blue-500/20 blur-3xl rounded-full" aria-hidden="true" />
-          <div className="pointer-events-none absolute -bottom-24 left-1/4 w-72 h-72 bg-indigo-500/10 blur-3xl rounded-full" aria-hidden="true" />
-          <Wrench className="pointer-events-none absolute -right-6 -top-6 w-36 h-36 text-white/[0.04] rotate-12" aria-hidden="true" />
-          <div className="relative flex items-start gap-4">
+        <div className="relative overflow-hidden rounded-2xl shadow-xl ring-1 ring-white/10 min-h-[200px]">
+          <Image
+            src="/sklep_photo/banners/funnel-parts.jpeg"
+            alt={`Serwis i części do ${model} Zebra`}
+            fill
+            sizes="(max-width: 1024px) 100vw, 1024px"
+            className="object-cover object-right"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/92 to-slate-950/20" />
+          <div className="relative p-6 sm:p-7 flex items-start gap-4">
             <div className="flex-shrink-0 w-12 h-12 rounded-2xl bg-blue-500 flex items-center justify-center shadow-lg shadow-blue-500/40 ring-1 ring-white/20">
               <Wrench className="w-6 h-6 text-white" />
             </div>
-            <div className="flex-1">
-              <p className="text-lg sm:text-xl font-bold text-white">
+            <div className="flex-1 max-w-2xl">
+              <p className="text-lg sm:text-xl font-bold text-white drop-shadow-sm">
                 Twój {model} wymaga części lub naprawy?
               </p>
-              <p className="text-sm text-slate-300 mt-1.5 max-w-2xl">
+              <p className="text-sm text-slate-200 mt-1.5 drop-shadow-sm">
                 Oryginalne części Zebra z wysyłką w 24h, a przy poważniejszej usterce — diagnoza i naprawa
                 w autoryzowanym serwisie. Odbiór kurierem z całej Polski.
               </p>
@@ -67,7 +74,7 @@ export default function FunnelBanners({ model }: { model: string }) {
                 </Link>
                 <Link
                   href="/#formularz"
-                  className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-white/10 text-white text-sm font-medium border border-white/20 hover:bg-white/20 transition-colors backdrop-blur-sm"
+                  className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-white/10 text-white text-sm font-medium border border-white/25 hover:bg-white/20 transition-colors backdrop-blur-sm"
                 >
                   Wyślij do serwisu
                   <ArrowRight className="w-4 h-4" />
@@ -78,47 +85,35 @@ export default function FunnelBanners({ model }: { model: string }) {
         </div>
       )}
 
-      {/* Baner 2 — zakup nowego sprzętu na TAKMA (jasny, drugorzędny, ale dopracowany) */}
+      {/* Baner 2 — zakup nowego sprzętu na TAKMA (MEGA, generowane tło, drugorzędny) */}
       {showTakma && (
-        <div className="relative overflow-hidden rounded-2xl border border-indigo-100 bg-gradient-to-br from-indigo-50 via-white to-white px-5 py-4 sm:px-6">
-          <ShoppingCart className="pointer-events-none absolute -right-4 -bottom-6 w-28 h-28 text-indigo-100 -rotate-12" aria-hidden="true" />
-          <div className="relative flex items-center gap-3 flex-wrap">
-            <div className="flex-shrink-0 w-9 h-9 rounded-xl bg-indigo-600 flex items-center justify-center shadow-sm shadow-indigo-600/30">
-              {cfg.inProduction !== false
-                ? <ShoppingCart className="w-4 h-4 text-white" />
-                : <PackageSearch className="w-4 h-4 text-white" />}
+        <div className="relative overflow-hidden rounded-2xl shadow-lg ring-1 ring-white/10 min-h-[92px]">
+          <Image
+            src="/sklep_photo/banners/funnel-buy.jpeg"
+            alt={`Nowy ${model} w sklepie TAKMA`}
+            fill
+            sizes="(max-width: 1024px) 100vw, 1024px"
+            className="object-cover object-right"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/90 to-slate-950/20" />
+          <div className="relative px-5 py-4 sm:px-6 flex items-center gap-3 flex-wrap">
+            <div className="flex-shrink-0 w-9 h-9 rounded-xl bg-indigo-500 flex items-center justify-center ring-1 ring-white/20">
+              <ShoppingCart className="w-4 h-4 text-white" />
             </div>
-            {cfg.inProduction !== false ? (
-              <>
-                <p className="text-sm text-gray-700 flex-1 min-w-[200px] font-medium">
-                  Rozbudowujesz flotę albo potrzebujesz nowego {model}?
-                </p>
-                <a
-                  href={takmaUrl(cfg.takmaSlug!, model)}
-                  target="_blank"
-                  rel="noopener"
-                  className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-indigo-600 text-white text-sm font-semibold hover:bg-indigo-700 transition-colors shadow-md shadow-indigo-600/20"
-                >
-                  Zobacz {model} w TAKMA
-                  <ArrowRight className="w-4 h-4" />
-                </a>
-              </>
-            ) : (
-              <>
-                <p className="text-sm text-gray-700 flex-1 min-w-[200px] font-medium">
-                  Model {model} nie jest już produkowany.
-                </p>
-                <a
-                  href={takmaUrl(cfg.successorTakmaSlug!, model)}
-                  target="_blank"
-                  rel="noopener"
-                  className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-indigo-600 text-white text-sm font-semibold hover:bg-indigo-700 transition-colors shadow-md shadow-indigo-600/20"
-                >
-                  Zobacz następcę{cfg.successorName ? ` — ${cfg.successorName}` : ''} w TAKMA
-                  <ArrowRight className="w-4 h-4" />
-                </a>
-              </>
-            )}
+            <p className="text-sm text-slate-100 flex-1 min-w-[200px] font-medium drop-shadow-sm">
+              {inProd
+                ? `Rozbudowujesz flotę albo potrzebujesz nowego ${model}?`
+                : `Model ${model} nie jest już produkowany.`}
+            </p>
+            <a
+              href={buyHref}
+              target="_blank"
+              rel="noopener"
+              className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-indigo-500 text-white text-sm font-semibold hover:bg-indigo-400 transition-colors shadow-lg shadow-indigo-500/30"
+            >
+              {inProd ? `Zobacz ${model} w TAKMA` : `Zobacz następcę${cfg.successorName ? ` — ${cfg.successorName}` : ''} w TAKMA`}
+              <ArrowRight className="w-4 h-4" />
+            </a>
           </div>
         </div>
       )}
