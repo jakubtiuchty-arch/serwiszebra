@@ -36616,6 +36616,453 @@ LI4278 jest **bezprzewodowy** (Bluetooth + bateria + baza STB4278), LI2208 **prz
 `
       }
     ]
+  },
+  'ds9308': {
+    model: 'DS9308',
+    title: 'Zebra DS9308 – Instrukcja obsługi po polsku',
+    lastUpdated: '2026-06-15',
+    sourceDocument: 'DS9308 Product Reference Guide + Quick Start Guide',
+    keywords: [
+      'zebra ds9308 instrukcja',
+      'ds9308 instrukcja po polsku',
+      'ds9308 instrukcja obsługi',
+      'ds9308 tryb prezentacji',
+      'ds9308 konfiguracja',
+      'ds9308 ustawienia fabryczne',
+      'ds9308 reset',
+      'skaner prezentacyjny zebra ds9308'
+    ],
+    sections: [
+      {
+        title: '1. Podstawowe informacje',
+        content: `
+### O skanerze Zebra DS9308
+
+Zebra **DS9308** to **przewodowy** skaner obrazowy do pracy **na blacie (hands-free / prezentacyjny)**, czytający kody **1D i 2D**, także z ekranów telefonów. Stoi na ladzie i **skanuje automatycznie** zbliżone kody — idealny do kas i punktów obsługi. W razie potrzeby można go podnieść i użyć jak skanera ręcznego (do dużych lub ciężkich towarów).
+
+### Kluczowe cechy
+
+| Cecha | Wartość |
+|-------|---------|
+| **Typ** | Przewodowy imager 1D/2D (prezentacyjny + ręczny) |
+| **Interfejsy** | USB, RS-232, Keyboard Wedge, IBM 46XX |
+| **Kody z ekranów** | tak (telefony, kupony, bilety) |
+| **Zasilanie** | z portu USB hosta |
+
+> **Uwaga:** DS9308 jest skanerem przewodowym — zasilanie pobiera z hosta.
+`
+      },
+      {
+        title: '2. Praca i wskaźniki',
+        content: `
+### Tryb prezentacji i ręczny
+
+- **Prezentacyjny (hands-free)** — skaner stoi na blacie i skanuje automatycznie zbliżone kody.
+- **Ręczny** — podnieś skaner i naciśnij spust, aby zeskanować duży lub trudno dostępny kod.
+
+### Sygnalizacja
+
+| Sygnał | Znaczenie |
+|--------|-----------|
+| Sygnał startowy | Skaner gotowy |
+| 1 bip + mignięcie diody | Kod odczytany poprawnie |
+| Brak reakcji | Kod nieodczytany |
+
+Głośność i ton sygnału regulują kody konfiguracyjne.
+`
+      },
+      {
+        title: '3. Podłączenie do komputera',
+        content: `
+DS9308 **automatycznie wykrywa interfejs**.
+
+| Interfejs | Uwagi |
+|-----------|-------|
+| **USB Keyboard HID** | Domyślny — skaner działa jak klawiatura |
+| **USB SNAPI / CDC** | Z obrazem / wirtualny port COM |
+| **RS-232** | Standard i warianty handlowe |
+| **Keyboard Wedge / IBM 46XX** | Wpięcie klawiaturowe / terminale IBM |
+
+Po podłączeniu USB zeskanuj kod w Notatniku, aby sprawdzić działanie.
+`
+      },
+      {
+        title: '4. Skanowanie kodów',
+        content: `
+- **Na blacie:** zbliż kod do okna skanera — odczyt nastąpi automatycznie.
+- **W dłoni:** skieruj skaner na kod i naciśnij spust.
+
+Czyta kody **1D** (EAN/UPC, Code 39/128, GS1 DataBar) i **2D** (PDF417, Data Matrix, QR Code) — także z ekranów telefonów. Funkcja **Picklist Mode** pozwala odczytać tylko wskazany kod, gdy kody są blisko siebie.
+`
+      },
+      {
+        title: '5. Konfiguracja kodami kreskowymi',
+        content: `
+### Przywrócenie ustawień fabrycznych
+
+1. Zeskanuj kod **„Set Defaults"** z Product Reference Guide.
+2. Alternatywnie użyj programu **Zebra 123Scan**.
+
+### Najczęstsze ustawienia
+
+- **Enter (CR/LF) po skanie**, **Tab po skanie**, **prefiks/sufiks**.
+- **Picklist Mode** — odczyt tylko wskazanego kodu.
+- **Głośność i ton beepera** — Low / Medium / High.
+`
+      },
+      {
+        title: '6. Konserwacja i czyszczenie',
+        content: `
+- Czyść **70% IPA** lub łagodnym mydłem z wodą.
+- Nie używaj acetonu, amoniaku (na szybę), środków ściernych ani rozpuszczalników.
+
+**Procedura:** odłącz skaner → przetrzyj **okno skanujące** i obudowę 70% IPA → pozostaw do wyschnięcia.
+`
+      },
+      {
+        title: '7. Rozwiązywanie problemów',
+        content: `
+| Problem | Możliwa przyczyna | Rozwiązanie |
+|---------|-------------------|-------------|
+| Brak reakcji | Luźny kabel / brak zasilania | Dociśnij kabel USB; spróbuj innego portu |
+| Nie skanuje sam na blacie | Wyłączony tryb prezentacji | Sprawdź ustawienie trybu prezentacji |
+| Nie czyta kodu | Brudne okno / zła odległość | Wyczyść okno; dostosuj odległość |
+| Odczytuje sąsiedni kod | Kody blisko siebie | Włącz Picklist Mode |
+| Bipa, ale brak danych | Zły interfejs hosta | Zeskanuj kod właściwego interfejsu |
+
+Jeśli problem nie ustępuje, zaktualizuj firmware (zebra.com/support lub 123Scan) i zresetuj skaner.
+`
+      },
+      {
+        title: '8. Specyfikacja techniczna',
+        content: `
+| Parametr | DS9308 |
+|----------|--------|
+| **Typ** | Przewodowy imager 1D/2D (prezentacyjny + ręczny) |
+| **Kody z ekranów** | tak |
+| **Interfejsy** | USB, RS-232, Keyboard Wedge, IBM 46XX |
+| **Zasilanie** | z portu USB hosta |
+`
+      },
+      {
+        title: 'FAQ – Najczęściej zadawane pytania',
+        content: `
+### Skaner nie skanuje sam na blacie?
+
+Sprawdź, czy włączony jest **tryb prezentacji** (hands-free). W razie potrzeby zeskanuj kod aktywujący ten tryb z Product Reference Guide.
+
+### Czy DS9308 czyta kody z telefonu?
+
+Tak — czyta kody 1D i 2D, w tym wyświetlane na ekranach (kupony, bilety, kody lojalnościowe).
+
+### Jak ustawić Enter po skanie?
+
+Zeskanuj kod **sufiksu Enter (CR/LF)** z Product Reference Guide.
+
+### Jak przywrócić ustawienia fabryczne?
+
+Zeskanuj kod **„Set Defaults"** z Product Reference Guide.
+`
+      }
+    ]
+  },
+  'ds9908': {
+    model: 'DS9908',
+    title: 'Zebra DS9908 – Instrukcja obsługi po polsku',
+    lastUpdated: '2026-06-15',
+    sourceDocument: 'DS9908 Product Reference Guide (MN-003185-09EN) + Quick Start Guide',
+    keywords: [
+      'zebra ds9908 instrukcja',
+      'ds9908 instrukcja po polsku',
+      'ds9908 instrukcja obsługi',
+      'ds9908 tryb prezentacji',
+      'ds9908r rfid',
+      'ds9908 konfiguracja',
+      'ds9908 ustawienia fabryczne',
+      'ds9908 reset',
+      'skaner hybrydowy zebra ds9908'
+    ],
+    sections: [
+      {
+        title: '1. Podstawowe informacje',
+        content: `
+### O skanerze Zebra DS9908
+
+Zebra **DS9908** to **przewodowy** skaner **hybrydowy** do handlu (POS), który łączy w jednym urządzeniu pracę **na blacie (hands-free)** i **w dłoni (ręczną)** — bez potrzeby osobnej podstawki. Czyta kody **1D i 2D**, także z ekranów telefonów, oraz przechwytuje obrazy. Wariant **DS9908R** ma dodatkowo wbudowany **czytnik RFID UHF**.
+
+### Kluczowe cechy
+
+| Cecha | Wartość |
+|-------|---------|
+| **Typ** | Przewodowy imager hybrydowy 1D/2D |
+| **Wariant RFID** | DS9908R — wbudowany czytnik RFID UHF |
+| **Interfejsy** | USB, RS-232, Keyboard Wedge, IBM 46XX |
+| **Kody z ekranów** | tak |
+| **Zasilanie** | z portu USB hosta |
+
+> **Uwaga:** DS9908 jest skanerem przewodowym.
+`
+      },
+      {
+        title: '2. Praca hybrydowa i wskaźniki',
+        content: `
+### Tryb prezentacji i ręczny w jednym
+
+DS9908 ma ruchomą głowicę, dzięki czemu działa **bez osobnego stojaka**:
+
+- Postaw na blacie — skaner skanuje **automatycznie** zbliżone kody.
+- Weź do ręki i naciśnij spust — zeskanujesz duży lub trudno dostępny kod.
+
+### Sygnalizacja
+
+| Sygnał | Znaczenie |
+|--------|-----------|
+| Sygnał startowy | Skaner gotowy |
+| 1 bip + mignięcie diody | Kod odczytany poprawnie |
+| Brak reakcji | Kod nieodczytany |
+
+Głośność i ton sygnału regulują kody konfiguracyjne.
+`
+      },
+      {
+        title: '3. Podłączenie do komputera',
+        content: `
+DS9908 **automatycznie wykrywa interfejs**.
+
+| Interfejs | Uwagi |
+|-----------|-------|
+| **USB Keyboard HID** | Domyślny — skaner działa jak klawiatura |
+| **USB SNAPI / CDC** | Z obrazem / wirtualny port COM |
+| **RS-232** | Standard i warianty handlowe |
+| **Keyboard Wedge / IBM 46XX** | Wpięcie klawiaturowe / terminale IBM |
+
+Po podłączeniu USB zeskanuj kod w Notatniku, aby sprawdzić działanie.
+`
+      },
+      {
+        title: '4. Skanowanie kodów (i RFID w DS9908R)',
+        content: `
+- **Na blacie:** zbliż kod — odczyt automatyczny.
+- **W dłoni:** naciśnij spust.
+
+Czyta kody **1D** (EAN/UPC, Code 39/128, GS1 DataBar) i **2D** (PDF417, Data Matrix, QR Code) — także z ekranów. **Picklist Mode** ogranicza odczyt do wskazanego kodu.
+
+W modelu **DS9908R** to samo urządzenie odczytuje również **tagi RFID UHF** — przydatne tam, gdzie część towaru ma kody kreskowe, a część metki RFID.
+`
+      },
+      {
+        title: '5. Konfiguracja kodami kreskowymi',
+        content: `
+### Przywrócenie ustawień fabrycznych
+
+1. Zeskanuj kod **„Set Defaults"** z Product Reference Guide.
+2. Alternatywnie użyj programu **Zebra 123Scan**.
+
+### Najczęstsze ustawienia
+
+- **Enter (CR/LF) po skanie**, **Tab po skanie**, **prefiks/sufiks**.
+- **Picklist Mode**, **głośność i ton beepera**.
+`
+      },
+      {
+        title: '6. Konserwacja i czyszczenie',
+        content: `
+- Czyść **70% IPA** lub łagodnym mydłem z wodą.
+- Nie używaj acetonu, amoniaku (na szybę), środków ściernych ani rozpuszczalników.
+
+**Procedura:** odłącz skaner → przetrzyj **okno skanujące** i obudowę 70% IPA → pozostaw do wyschnięcia.
+`
+      },
+      {
+        title: '7. Rozwiązywanie problemów',
+        content: `
+| Problem | Możliwa przyczyna | Rozwiązanie |
+|---------|-------------------|-------------|
+| Brak reakcji | Luźny kabel / brak zasilania | Dociśnij kabel USB; spróbuj innego portu |
+| Nie skanuje sam na blacie | Wyłączony tryb prezentacji | Sprawdź ustawienie trybu prezentacji |
+| Nie czyta kodu | Brudne okno / zła odległość | Wyczyść okno; dostosuj odległość |
+| Odczytuje sąsiedni kod | Kody blisko siebie | Włącz Picklist Mode |
+| Bipa, ale brak danych | Zły interfejs hosta | Zeskanuj kod właściwego interfejsu |
+
+Jeśli problem nie ustępuje, zaktualizuj firmware (zebra.com/support lub 123Scan) i zresetuj skaner.
+`
+      },
+      {
+        title: '8. Specyfikacja techniczna',
+        content: `
+| Parametr | DS9908 |
+|----------|--------|
+| **Typ** | Przewodowy imager hybrydowy 1D/2D |
+| **Wariant** | DS9908R — z czytnikiem RFID UHF |
+| **Kody z ekranów** | tak |
+| **Interfejsy** | USB, RS-232, Keyboard Wedge, IBM 46XX |
+| **Zasilanie** | z portu USB hosta |
+`
+      },
+      {
+        title: 'FAQ – Najczęściej zadawane pytania',
+        content: `
+### Czy DS9908 wymaga osobnej podstawki?
+
+Nie — to skaner **hybrydowy**: działa na blacie (hands-free) i w dłoni bez dodatkowego stojaka.
+
+### Czym jest DS9908R?
+
+To wariant DS9908 z wbudowanym **czytnikiem RFID UHF** — czyta zarówno kody kreskowe, jak i tagi RFID.
+
+### Jak ustawić Enter po skanie?
+
+Zeskanuj kod **sufiksu Enter (CR/LF)** z Product Reference Guide.
+
+### Jak przywrócić ustawienia fabryczne?
+
+Zeskanuj kod **„Set Defaults"** z Product Reference Guide.
+`
+      }
+    ]
+  },
+  'ds8208': {
+    model: 'DS8208',
+    title: 'Zebra DS8208 / DS8288 – Instrukcja obsługi po polsku',
+    lastUpdated: '2026-06-15',
+    sourceDocument: 'DS8208/DS8288 Product Reference Guide + Quick Start Guide (cradle CR8288-PC)',
+    keywords: [
+      'zebra ds8208 instrukcja',
+      'ds8208 instrukcja po polsku',
+      'ds8288 instrukcja',
+      'ds8208 konfiguracja',
+      'ds8208 ustawienia fabryczne',
+      'ds8208 reset',
+      'ds8288 ładowanie',
+      'ds8288 cr8288',
+      'skaner zebra ds8208'
+    ],
+    sections: [
+      {
+        title: '1. Podstawowe informacje',
+        content: `
+### O skanerach Zebra DS8208 i DS8288
+
+To rodzina wydajnych skanerów obrazowych do handlu (POS), czytających kody **1D i 2D**, także z ekranów telefonów, oraz przechwytujących obrazy:
+
+- **DS8208** — wersja **przewodowa**, ręczna (zasilana z hosta).
+- **DS8288** — wersja z **baterią** i bazą prezentacyjną **CR8288-PC** (praca na blacie i w dłoni).
+
+### Kluczowe cechy
+
+| Cecha | Wartość |
+|-------|---------|
+| **Typ** | Imager 1D/2D z przechwytywaniem obrazu |
+| **DS8208** | przewodowy, ręczny |
+| **DS8288** | z baterią + baza prezentacyjna CR8288-PC |
+| **Interfejsy** | USB, RS-232, Keyboard Wedge, IBM 46XX |
+| **Kody z ekranów** | tak |
+`
+      },
+      {
+        title: '2. Ładowanie i bateria (DS8288)',
+        content: `
+Dotyczy wersji **DS8288** (z baterią):
+
+1. Umieść skaner w bazie prezentacyjnej **CR8288-PC** lub w standardowej bazie ładującej.
+2. Dioda zasygnalizuje ładowanie; naładuj do pełna przed pierwszym użyciem.
+3. Skaner ma też funkcję wyłączenia baterii (Shutting Off the Battery) na czas transportu/przechowywania.
+
+> **Uwaga:** wersja **DS8208** jest przewodowa i nie ma baterii — zasilanie pobiera z hosta.
+`
+      },
+      {
+        title: '3. Podłączenie do komputera',
+        content: `
+Skaner **automatycznie wykrywa interfejs**.
+
+| Interfejs | Uwagi |
+|-----------|-------|
+| **USB Keyboard HID** | Domyślny — skaner działa jak klawiatura |
+| **USB SNAPI / CDC** | Z obrazem / wirtualny port COM |
+| **RS-232** | Standard i warianty handlowe |
+| **Keyboard Wedge / IBM 46XX** | Wpięcie klawiaturowe / terminale IBM |
+
+Po podłączeniu USB zeskanuj kod w Notatniku, aby sprawdzić działanie.
+`
+      },
+      {
+        title: '4. Skanowanie kodów',
+        content: `
+- **DS8208 / w dłoni:** skieruj na kod i naciśnij spust.
+- **DS8288 na bazie:** zbliż kod do okna — odczyt automatyczny.
+
+Czyta kody **1D** (EAN/UPC, Code 39/128, GS1 DataBar) i **2D** (PDF417, Data Matrix, QR Code) — także z ekranów. **Picklist Mode** ogranicza odczyt do wskazanego kodu.
+`
+      },
+      {
+        title: '5. Konfiguracja kodami kreskowymi',
+        content: `
+### Przywrócenie ustawień fabrycznych
+
+1. Zeskanuj kod **„Set Defaults"** z Product Reference Guide.
+2. Alternatywnie użyj programu **Zebra 123Scan**.
+
+> **Uwaga:** w DS8288 reset kasuje też parowanie z bazą — po resecie sparuj ponownie.
+
+### Najczęstsze ustawienia
+
+- **Enter (CR/LF) po skanie**, **Tab po skanie**, **prefiks/sufiks**.
+- **Picklist Mode**, **głośność i ton beepera**.
+`
+      },
+      {
+        title: '6. Konserwacja i czyszczenie',
+        content: `
+- Czyść **70% IPA** lub łagodnym mydłem z wodą.
+- Nie używaj acetonu, amoniaku (na szybę), środków ściernych ani rozpuszczalników.
+
+**Procedura:** odłącz/wyjmij skaner z bazy → przetrzyj **okno skanujące** i obudowę 70% IPA → w DS8288 wyczyść też **styki ładowania** → pozostaw do wyschnięcia.
+`
+      },
+      {
+        title: '7. Rozwiązywanie problemów',
+        content: `
+| Problem | Możliwa przyczyna | Rozwiązanie |
+|---------|-------------------|-------------|
+| Brak reakcji (DS8208) | Luźny kabel / brak zasilania | Dociśnij kabel USB; spróbuj innego portu |
+| DS8288 nie ładuje się | Brudne styki ładowania | Wyczyść styki skanera i bazy 70% IPA |
+| Nie czyta kodu | Brudne okno / zła odległość | Wyczyść okno; dostosuj odległość |
+| Odczytuje sąsiedni kod | Kody blisko siebie | Włącz Picklist Mode |
+| Bipa, ale brak danych | Zły interfejs hosta | Zeskanuj kod właściwego interfejsu |
+
+Jeśli problem nie ustępuje, zaktualizuj firmware (zebra.com/support lub 123Scan) i zresetuj skaner.
+`
+      },
+      {
+        title: '8. Specyfikacja techniczna',
+        content: `
+| Parametr | DS8208 / DS8288 |
+|----------|-----------------|
+| **Typ** | Imager 1D/2D z przechwytywaniem obrazu |
+| **DS8208** | przewodowy, ręczny |
+| **DS8288** | z baterią + baza prezentacyjna CR8288-PC |
+| **Kody z ekranów** | tak |
+| **Interfejsy** | USB, RS-232, Keyboard Wedge, IBM 46XX |
+`
+      },
+      {
+        title: 'FAQ – Najczęściej zadawane pytania',
+        content: `
+### Czym różni się DS8208 od DS8288?
+
+**DS8208** jest przewodowy i ręczny. **DS8288** ma **baterię** oraz **bazę prezentacyjną CR8288-PC** — może pracować na blacie (hands-free) i w dłoni.
+
+### DS8288 nie ładuje się — co sprawdzić?
+
+Wyczyść **styki ładowania** skanera i bazy 70% IPA; upewnij się, że baza jest zasilona.
+
+### Jak przywrócić ustawienia fabryczne?
+
+Zeskanuj kod **„Set Defaults"** z Product Reference Guide (w DS8288 po resecie sparuj ponownie z bazą).
+`
+      }
+    ]
   }
 }
 
