@@ -1,8 +1,9 @@
 'use client'
 
+import { Fragment } from 'react'
 import Link from 'next/link'
-import { 
-  ChevronRight, 
+import {
+  ChevronRight,
   BookOpen,
   Info,
 } from 'lucide-react'
@@ -10,6 +11,7 @@ import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import type { PolishManual } from '@/lib/polish-manuals'
 import PolishManualPdfButton from './PolishManualPdfButton'
+import FunnelBanners from './FunnelBanners'
 
 interface PolishManualContentProps {
   polishManual: PolishManual
@@ -48,8 +50,8 @@ export default function PolishManualContent({ polishManual, modelSlug, modelName
       {/* Content Sections */}
       <div className="space-y-4 sm:space-y-8">
         {polishManual.sections.map((section, index) => (
+          <Fragment key={index}>
           <article
-            key={index}
             id={`section-${index}`}
             className="bg-white rounded-lg sm:rounded-xl border border-gray-200 overflow-hidden scroll-mt-20 sm:scroll-mt-24"
           >
@@ -155,6 +157,10 @@ export default function PolishManualContent({ polishManual, modelSlug, modelName
               </ReactMarkdown>
             </div>
           </article>
+          {/rozwiązywanie problemów/i.test(section.title) && (
+            <FunnelBanners model={modelName} />
+          )}
+          </Fragment>
         ))}
       </div>
 
