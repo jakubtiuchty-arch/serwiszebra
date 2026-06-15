@@ -35055,6 +35055,225 @@ Wyłącznie **70% alkoholem izopropylowym (IPA)** lub łagodnym mydłem z wodą.
 `
       }
     ]
+  },
+  'ds2278': {
+    model: 'DS2278',
+    title: 'Zebra DS2278 – Instrukcja obsługi po polsku',
+    lastUpdated: '2026-06-15',
+    sourceDocument: 'DS2278 Digital Scanner Product Reference Guide (MN-002915-09EN) + Quick Start Guide',
+    keywords: [
+      'zebra ds2278 instrukcja',
+      'ds2278 instrukcja po polsku',
+      'ds2278 instrukcja obsługi',
+      'ds2278 parowanie',
+      'ds2278 parowanie z bazą',
+      'ds2278 bluetooth',
+      'ds2278 ładowanie',
+      'ds2278 cr2278',
+      'ds2278 ustawienia fabryczne',
+      'ds2278 reset',
+      'ds2278 nie łączy się',
+      'skaner bezprzewodowy zebra ds2278'
+    ],
+    sections: [
+      {
+        title: '1. Podstawowe informacje',
+        content: `
+### O skanerze Zebra DS2278
+
+Zebra **DS2278** to ręczny, **bezprzewodowy** skaner obrazowy czytający kody **1D i 2D**. To bezprzewodowy odpowiednik modelu DS2208 — łączy się przez **Bluetooth** i współpracuje z bazą ładująco-komunikacyjną **CR2278-PC**. Uniwersalny skaner do handlu, apteki, biura i lekkiego magazynu, który można też ustawić na bazie i używać jak skaner prezentacyjny (hands-free).
+
+### Kluczowe cechy
+
+| Cecha | Wartość |
+|-------|---------|
+| **Typ** | Bezprzewodowy imager 1D/2D |
+| **Łączność** | Bluetooth Class 2 (zasięg do ~10 m) |
+| **Bateria** | PowerPrecision Li-Ion (wymienna) |
+| **Baza** | CR2278-PC (ładowanie + komunikacja) |
+| **Tryby pracy** | Ręczny i prezentacji (na bazie) |
+| **Temperatura pracy** | od 0°C do +50°C |
+
+### Zawartość opakowania
+
+W zestawie znajduje się skaner DS2278 z baterią. Baza **CR2278-PC**, zasilacz i kabel bywają sprzedawane osobno — sprawdź konfigurację zamówienia.
+
+> **Uwaga:** przed pierwszym użyciem naładuj baterię do pełna (na bazie CR2278-PC lub przez kabel).
+`
+      },
+      {
+        title: '2. Bateria i ładowanie',
+        content: `
+### Ładowanie na bazie CR2278-PC
+
+1. Włóż baterię do skanera i umieść skaner w bazie CR2278-PC.
+2. Skaner uruchomi się, a dioda bazy zacznie **migać na zielono** — to początek normalnego ładowania.
+3. Zaleca się pełne naładowanie baterii przed pierwszym użyciem.
+
+Baza dostarcza do skanera napięcie 5 V i ładuje baterię możliwie największym prądem, jaki pozwala źródło zasilania, aby skrócić czas ładowania.
+
+> **Ważne (temperatura):** bateria **nie ładuje się powyżej 40°C**. Przy pracy w trybie prezentacji w wysokiej temperaturze bateria może się rozładowywać — gdy temperatura spadnie, ładowanie wznawia się automatycznie.
+
+> **Uwaga:** czas ładowania zależy od typu hosta i źródła zasilania. W trybie prezentacji intensywne skanowanie wydłuża ładowanie — ustaw skaner tak, by unikać przypadkowych skanów.
+`
+      },
+      {
+        title: '3. Parowanie z bazą',
+        content: `
+### Parowanie skanera z bazą
+
+Skaner i baza muszą być **sparowane**, aby komunikować się bezprzewodowo. Są dwa sposoby:
+
+- **Przez włożenie do bazy** — domyślnie włączone (pairing on contacts). Wystarczy wsunąć skaner do bazy.
+- **Przez zeskanowanie kodu parowania** — kod parowania jest **unikalny dla każdej bazy** (znajdziesz go na bazie/w jej dokumentacji).
+
+> **Uwaga:** kod parowania łączy skaner z konkretną bazą. Po zeskanowaniu kodu parowania nie skanuj od razu danych ani parametrów — poczekaj na potwierdzenie połączenia.
+
+### Tryb pracy poza zasięgiem (Out of Range Batch)
+
+DS2278 może **zapisywać skany w pamięci, gdy znajdzie się poza zasięgiem bazy**, a po powrocie w zasięg automatycznie połączyć się ponownie (Auto-Reconnect) i przesłać zebrane dane.
+
+### Gdy dane nie docierają do hosta
+
+1. Odłącz zasilanie od bazy.
+2. Odłącz kabel interfejsu od bazy.
+3. Odczekaj 3 sekundy.
+4. Podłącz kabel interfejsu z powrotem.
+5. Podłącz zasilanie.
+6. Sparuj ponownie (wsuń skaner do bazy lub zeskanuj kod parowania).
+`
+      },
+      {
+        title: '4. Wskaźniki LED i sygnały dźwiękowe',
+        content: `
+### Sygnalizacja odczytu
+
+Po poprawnym zeskanowaniu skaner **bipnie**, a dioda mignie (good decode).
+
+| Sygnał | Znaczenie |
+|--------|-----------|
+| Rosnąca seria tonów przy włączeniu | Skaner uruchomił się poprawnie |
+| 1 bip + mignięcie diody | Kod odczytany poprawnie |
+| Dioda bazy miga na zielono | Trwa ładowanie skanera |
+| Seria tonów parowania | Połączenie z bazą nawiązane / utracone |
+| Niski ton / brak reakcji | Kod nieodczytany — popraw celowanie lub odległość |
+
+Głośność, ton i czas trwania sygnału ustawia się kodami konfiguracyjnymi.
+`
+      },
+      {
+        title: '5. Skanowanie kodów',
+        content: `
+### Jak skanować
+
+1. Skieruj skaner na kod i naciśnij spust — pojawi się czerwona linia celująca.
+2. Ustaw linię na kodzie (odczyt wielokierunkowy).
+3. Po odczycie skaner bipnie i mignie diodą.
+
+W **trybie prezentacji** (skaner na bazie) urządzenie skanuje automatycznie po zbliżeniu kodu — bez naciskania spustu.
+
+### Obsługiwane symbologie
+
+Wszystkie popularne kody **1D** (Code 39, Code 128, UPC/EAN, Codabar, Interleaved 2 of 5, GS1 DataBar) oraz **2D** (PDF417, Data Matrix, QR Code, Aztec, MaxiCode i inne).
+`
+      },
+      {
+        title: '6. Konfiguracja kodami kreskowymi',
+        content: `
+### Przywrócenie ustawień fabrycznych
+
+1. Zeskanuj kod **„Set Defaults"** z Product Reference Guide.
+2. Alternatywnie użyj programu **Zebra 123Scan** (USB → „Restore Defaults").
+
+> **Uwaga:** reset kasuje ustawienia użytkownika, w tym **parowanie**. Po resecie ponownie sparuj skaner z bazą.
+
+### Najczęstsze ustawienia
+
+- **Enter (CR/LF) po skanie** — sufiks Enter przenosi kursor do nowej linii.
+- **Tab po skanie** — przejście do kolejnej kolumny.
+- **Prefiks / sufiks** — stały tekst przed/po danych.
+- **Out of Range Batch Mode** — zapisywanie skanów poza zasięgiem.
+- **Głośność i ton beepera** — Low / Medium / High.
+`
+      },
+      {
+        title: '7. Konserwacja i czyszczenie',
+        content: `
+### Dopuszczone środki
+
+- **Alkohol izopropylowy (IPA) 70%** — podstawowy środek (zalecane gotowe chusteczki Zebra).
+- Łagodny roztwór mydła z wodą.
+
+### Zabronione
+
+- Aceton, amoniak (na szybę), środki ścierne, rozpuszczalniki ropopochodne.
+
+### Procedura
+
+1. Odłącz/wyjmij skaner z bazy.
+2. Zwilż miękką ściereczkę środkiem 70% IPA.
+3. Przetrzyj **okno skanujące** i obudowę.
+4. Wyczyść **styki ładowania** skanera i bazy (skorodowane styki utrudniają ładowanie).
+5. Pozostaw do wyschnięcia.
+`
+      },
+      {
+        title: '8. Rozwiązywanie problemów',
+        content: `
+| Problem | Możliwa przyczyna | Rozwiązanie |
+|---------|-------------------|-------------|
+| Brak komunikacji z bazą | Skaner niesparowany | Wsuń skaner do bazy lub zeskanuj kod parowania bazy |
+| Dane nie docierają do hosta | Utracone połączenie bazy z hostem | Wykonaj procedurę ponownego połączenia (sekcja „Parowanie") |
+| Skaner nie ładuje się | Temperatura powyżej 40°C | Ładuj w niższej temperaturze — powyżej 40°C bateria nie ładuje |
+| Skaner nie ładuje się | Brudne styki ładowania | Wyczyść styki skanera i bazy 70% IPA |
+| Nie czyta kodu | Brudne okno / zła odległość | Wyczyść okno, dostosuj odległość |
+| Bipa, ale brak danych w systemie | Zły interfejs hosta na bazie | Zeskanuj kod właściwego interfejsu (USB HID / USB COM / RS-232) |
+| Skaner traci łączność poza halą | Poza zasięgiem Bluetooth | Włącz Out of Range Batch Mode lub pozostań w zasięgu ~10 m |
+
+Jeśli problem nie ustępuje, zaktualizuj firmware (zebra.com/support lub 123Scan) i ponownie sparuj skaner z bazą.
+`
+      },
+      {
+        title: '9. Specyfikacja techniczna',
+        content: `
+| Parametr | DS2278 |
+|----------|--------|
+| **Typ** | Bezprzewodowy imager 1D/2D |
+| **Łączność** | Bluetooth Class 2 (zasięg do ~10 m) |
+| **Bateria** | PowerPrecision Li-Ion, wymienna |
+| **Baza** | CR2278-PC (ładowanie + komunikacja) |
+| **Napięcie z bazy** | 5 V |
+| **Temperatura pracy** | od 0°C do +50°C |
+| **Ładowanie** | tylko poniżej 40°C |
+| **Interfejsy (baza)** | USB, RS-232, Keyboard Wedge |
+| **Tryby** | ręczny, prezentacji, Out of Range Batch |
+`
+      },
+      {
+        title: 'FAQ – Najczęściej zadawane pytania',
+        content: `
+### Jak sparować DS2278 z bazą?
+
+Najprościej — **wsuń skaner do bazy** (parowanie przez kontakt jest domyślnie włączone). Możesz też zeskanować **kod parowania** danej bazy (jest unikalny dla każdej bazy).
+
+### Skaner nie ładuje się — dlaczego?
+
+Najczęstsza przyczyna to **temperatura powyżej 40°C** — w takich warunkach bateria nie ładuje się. Sprawdź też, czy styki ładowania skanera i bazy są czyste.
+
+### Po resecie skaner nie łączy się z bazą — co zrobić?
+
+Reset fabryczny **kasuje parowanie**. Wsuń skaner do bazy lub zeskanuj kod parowania, aby połączyć go ponownie.
+
+### Czy mogę skanować, gdy oddalę się od bazy?
+
+Tak — włącz **Out of Range Batch Mode**. Skaner zapisze skany w pamięci, a po powrocie w zasięg automatycznie prześle je do hosta.
+
+### Czym różni się DS2278 od DS2208?
+
+DS2278 jest **bezprzewodowy** (bateria + Bluetooth + baza CR2278-PC), a DS2208 **przewodowy**. Oba czytają te same kody 1D/2D.
+`
+      }
+    ]
   }
 }
 
