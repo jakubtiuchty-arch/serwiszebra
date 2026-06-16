@@ -36091,8 +36091,8 @@ DS8178 jest **bezprzewodowy** (Bluetooth + bateria + baza CR8178), DS8108 **prze
   'ls2208': {
     model: 'LS2208',
     title: 'Zebra LS2208 – Instrukcja obsługi po polsku',
-    lastUpdated: '2026-06-15',
-    sourceDocument: 'LS2208 Product Reference Guide + Quick Start Guide',
+    lastUpdated: '2026-06-16',
+    sourceDocument: 'LS2208 Product Reference Guide (72E-58808) + Quick Start Guide',
     keywords: [
       'zebra ls2208 instrukcja',
       'ls2208 instrukcja po polsku',
@@ -36102,16 +36102,17 @@ DS8178 jest **bezprzewodowy** (Bluetooth + bateria + baza CR8178), DS8108 **prze
       'ls2208 reset',
       'ls2208 usb',
       'ls2208 enter po skanie',
+      'ls2208 czyszczenie okna',
       'ls2208 nie skanuje',
       'skaner laserowy zebra ls2208'
     ],
     sections: [
       {
-        title: '1. Podstawowe informacje',
+        title: '1. Wprowadzenie',
         content: `
 ### O skanerze Zebra LS2208
 
-Zebra **LS2208** to lekki, **przewodowy** skaner **laserowy** czytający **kody jednowymiarowe (1D)**. To jeden z najpopularniejszych skanerów na świecie — niezawodny, wygodny i tani, idealny do handlu, magazynu, biura i recepcji. Można go trzymać w dłoni lub ustawić w podstawce do pracy bez rąk (hands-free).
+Zebra **LS2208** to lekki, **przewodowy** skaner **laserowy** czytający **kody jednowymiarowe (1D)**. To jeden z najpopularniejszych skanerów na świecie — niezawodny, wygodny i tani, do handlu, magazynu, biura i recepcji. Można go trzymać w dłoni lub ustawić w podstawce do pracy bez rąk (hands-free).
 
 > **Ważne:** LS2208 to skaner **laserowy 1D** — czyta kody kreskowe (np. EAN, Code 128), ale **nie czyta kodów 2D** (QR, Data Matrix). Do kodów 2D potrzebny jest skaner obrazowy (imager), np. DS2208.
 
@@ -36119,14 +36120,15 @@ Zebra **LS2208** to lekki, **przewodowy** skaner **laserowy** czytający **kody 
 
 | Cecha | Wartość |
 |-------|---------|
-| **Typ** | Przewodowy skaner laserowy 1D |
+| **Typ** | Przewodowy skaner laserowy 1D (laser 650 nm) |
 | **Interfejsy** | USB, RS-232, Keyboard Wedge, IBM 468X/469X |
-| **Tryby pracy** | Ręczny i hands-free (w podstawce) |
+| **Tryby pracy** | ręczny i hands-free (w podstawce) |
+| **Waga** | 146 g (bez kabla) |
 | **Zasilanie** | z portu USB hosta |
 
 ### Zawartość opakowania
 
-W zestawie znajduje się skaner LS2208 i kabel interfejsu. **Zachowaj opakowanie** — to zatwierdzony karton wysyłkowy, przydatny przy ewentualnym serwisie. Sprawdź, czy nic nie jest uszkodzone.
+W zestawie skaner LS2208 i kabel interfejsu. **Zachowaj opakowanie** — to zatwierdzony karton wysyłkowy, przydatny przy ewentualnym serwisie.
 `
       },
       {
@@ -36144,7 +36146,7 @@ LS2208 **automatycznie wykrywa typ hosta** i używa ustawienia domyślnego.
 ### Pierwsze uruchomienie (USB)
 
 1. Podłącz kabel USB do skanera i do komputera.
-2. Skaner wyda sygnał startowy — jest gotowy.
+2. Skaner wyda rosnący trójton (low/medium/high) — jest gotowy.
 3. Otwórz np. Notatnik i zeskanuj kod, aby sprawdzić działanie.
 `
       },
@@ -36153,24 +36155,30 @@ LS2208 **automatycznie wykrywa typ hosta** i używa ustawienia domyślnego.
         content: `
 1. Skieruj skaner na kod i naciśnij spust — pojawi się **czerwona linia lasera**.
 2. Ustaw linię tak, aby przecinała **cały kod** od lewej do prawej krawędzi.
-3. Po poprawnym odczycie skaner bipnie, a dioda mignie na zielono.
+3. Po poprawnym odczycie skaner wyda krótki wysoki bip, a dioda mignie na zielono.
 
-> **Wskazówka:** linia lasera musi obejmować całą szerokość kodu. Jeśli kod jest szeroki, odsuń skaner; jeśli wąski — przybliż.
+> **Wskazówka:** **nie trzymaj skanera idealnie prostopadle nad kodem** — światło lasera odbite wprost do skanera (lustrzane odbicie) może utrudnić odczyt. Skanuj pod lekkim kątem.
 
-Skaner czyta wszystkie popularne kody **1D**: EAN/UPC, Code 39, Code 128, Code 93, Codabar, Interleaved 2 of 5, GS1 DataBar i inne.
+Linia lasera musi obejmować całą szerokość kodu. Szeroki kod — odsuń skaner; wąski — przybliż. Tolerancja: pochylenie ±65°, obrót ±60°. Czyta kody **1D**: EAN/UPC, Code 39, Code 128, Code 93, Codabar, Interleaved 2 of 5, GS1 DataBar.
 `
       },
       {
-        title: '4. Wskaźniki LED i sygnały dźwiękowe',
+        title: '4. Wskaźniki dźwiękowe i LED',
         content: `
-| Sygnał | Znaczenie |
-|--------|-----------|
-| Sygnał startowy przy włączeniu | Skaner gotowy |
-| 1 bip + zielona dioda | Kod odczytany poprawnie |
-| Brak reakcji / brak bipa | Kod nieodczytany — popraw ustawienie linii lasera |
-| Seria tonów programowania | Wejście/wyjście z trybu konfiguracji kodami |
+| Sygnał dźwiękowy | Znaczenie |
+|------------------|-----------|
+| Low / medium / high (rosnący) | Włączenie zasilania (skaner gotowy) |
+| Krótki wysoki bip | Kod odczytany poprawnie |
+| **4 długie niskie tony** | **Błąd transmisji** — dane zignorowane (zwykle zła konfiguracja) |
+| Tony błędu konwersji/formatu | Błąd konwersji lub formatu danych |
+| Lo / hi / lo | Błąd transmisji ADF |
+| Hi / hi / hi / lo | Błąd odbioru RS-232 |
+| Lo / hi (w trybie konfiguracji) | Błąd wprowadzania / anulowanie |
+| Hi / lo / hi / lo | Pomyślny zapis zmiany parametru |
 
-Głośność i ton sygnału ustawia się kodami konfiguracyjnymi.
+Dioda świeci zielono przy poprawnym odczycie. Głośność i ton sygnału ustawia się kodami konfiguracyjnymi.
+
+> **Do zapamiętania:** **4 długie niskie tony** = dane nie dotarły do systemu (sprawdź konfigurację interfejsu).
 `
       },
       {
@@ -36185,8 +36193,7 @@ Głośność i ton sygnału ustawia się kodami konfiguracyjnymi.
 
 ### Najczęstsze ustawienia
 
-- **Enter (CR/LF) po skanie** — kursor przechodzi do nowej linii (arkusze, WMS).
-- **Tab po skanie** — przejście do kolejnej kolumny.
+- **Enter (CR/LF) po skanie** lub **Tab po skanie** — sufiks przenoszący kursor.
 - **Prefiks / sufiks** — stały tekst przed/po danych.
 - **Głośność i ton beepera** — Low / Medium / High.
 `
@@ -36194,10 +36201,15 @@ Głośność i ton sygnału ustawia się kodami konfiguracyjnymi.
       {
         title: '6. Konserwacja i czyszczenie',
         content: `
-- Czyść **70% alkoholem izopropylowym (IPA)** lub łagodnym mydłem z wodą.
-- Nie używaj acetonu, amoniaku (na okienko), środków ściernych ani rozpuszczalników.
+> **Uwaga — LS2208 czyści się INACZEJ niż skanery obrazowe.** Jedyną wymaganą konserwacją jest czyszczenie **okienka wyjścia lasera**. To skaner laserowy z innym okienkiem niż imagery, więc producent dopuszcza tu **roztwór amoniaku z wodą** (którego NIE wolno używać do skanerów obrazowych jak DS2208).
 
-**Procedura:** odłącz skaner → zwilż miękką ściereczkę 70% IPA → delikatnie przetrzyj **okienko wyjścia lasera** i obudowę → pozostaw do wyschnięcia. Zarysowane lub brudne okienko pogarsza odczyt.
+### Procedura (wg dokumentacji LS2208)
+
+1. Usuń cząstki brudu **wilgotną ściereczką**.
+2. Przetrzyj okienko **chusteczką zwilżoną roztworem amoniaku z wodą**.
+3. **Nie rozpylaj** wody ani płynów bezpośrednio na okienko.
+
+Brudne okienko pogarsza dokładność skanowania — czyść je regularnie. Nie dopuszczaj do kontaktu okienka z materiałami ściernymi.
 `
       },
       {
@@ -36205,13 +36217,14 @@ Głośność i ton sygnału ustawia się kodami konfiguracyjnymi.
         content: `
 | Problem | Możliwa przyczyna | Rozwiązanie |
 |---------|-------------------|-------------|
-| Brak reakcji | Luźny kabel / brak zasilania | Dociśnij kabel USB; spróbuj innego portu |
-| Nie czyta kodu | Linia lasera nie obejmuje całego kodu | Odsuń/przybliż skaner, aby linia przecięła cały kod |
-| Nie czyta kodu | Brudne okienko | Wyczyść okienko 70% IPA |
-| Nie czyta kodu | Symbologia wyłączona | Włącz odpowiedni typ kodu |
-| Nie czyta kodów 2D (QR) | To skaner laserowy 1D | LS2208 nie czyta kodów 2D — użyj skanera obrazowego (np. DS2208) |
-| Bipa, ale brak danych w systemie | Zły interfejs hosta | Zeskanuj kod właściwego interfejsu (USB HID / USB COM / RS-232) |
-| Dane podwojone / błędne | Prefiks/sufiks lub układ klawiatury | Sprawdź sufiks i układ klawiatury |
+| Laser nie zapala się / skaner bipa chaotycznie | Brak zasilania | Sprawdź zasilanie systemu / podłącz zasilacz, jeśli wymagany |
+| Laser nie zapala się | Luźne kable | Dociśnij kable interfejsu/zasilania |
+| Laser świeci, ale nie dekoduje | Zły typ kodu w konfiguracji | Zaprogramuj skaner pod właściwy typ kodu |
+| Laser świeci, ale nie dekoduje | Kod uszkodzony | Przetestuj na czytelnym kodzie tego samego typu |
+| Laser świeci, ale nie dekoduje | Zła odległość | Przybliż/oddal skaner, aby linia objęła cały kod |
+| Nie czyta kodów 2D (QR) | To skaner laserowy 1D | Użyj skanera obrazowego (np. DS2208) |
+| Dekoduje, ale nie wysyła danych | Zły typ hosta | Zeskanuj kod właściwego hosta (USB HID / USB COM / RS-232) |
+| **4 długie niskie tony** | Błąd transmisji | Sprawdź konfigurację interfejsu i kabel |
 
 Jeśli problem nie ustępuje, zaktualizuj firmware (zebra.com/support lub 123Scan) i zresetuj skaner.
 `
@@ -36222,34 +36235,47 @@ Jeśli problem nie ustępuje, zaktualizuj firmware (zebra.com/support lub 123Sca
 | Parametr | LS2208 |
 |----------|--------|
 | **Typ** | Przewodowy skaner laserowy 1D |
+| **Źródło światła** | dioda laserowa 650 nm |
 | **Odczytywane kody** | tylko 1D (kreskowe) |
 | **Interfejsy** | USB, RS-232, Keyboard Wedge, IBM 468X/469X |
 | **Tryby pracy** | ręczny, hands-free (w podstawce) |
-| **Zasilanie** | z portu USB hosta |
+| **Min. kontrast druku** | 25% (przy 650 nm) |
+| **Tolerancja** | pochylenie ±65°, obrót ±60° |
+| **Waga** | 146 g (bez kabla) |
+| **Wysokość** | 15,2 cm |
+| **Temperatura pracy** | 0°C do +50°C |
+| **Temperatura przechowywania** | -40°C do +60°C |
+| **Wilgotność** | 5–95% bez kondensacji |
+| **Upadki** | wielokrotne z 1,5 m na beton |
+| **Odporność na światło** | do 86 111 luksów (pełne słońce) |
 `
       },
       {
         title: 'FAQ – Najczęściej zadawane pytania',
         content: `
+### Czym czyścić okienko LS2208?
+
+Wilgotną ściereczką do usunięcia brudu, a okienko — chusteczką zwilżoną **roztworem amoniaku z wodą** (zgodnie z dokumentacją LS2208). **Nie przenoś tej zasady na skanery obrazowe** (np. DS2208), gdzie amoniak jest szkodliwy.
+
 ### Dlaczego LS2208 nie czyta kodu QR?
 
-Bo to skaner **laserowy 1D** — czyta tylko kody kreskowe (jednowymiarowe). Kody QR i Data Matrix odczyta skaner **obrazowy (imager)**, np. DS2208.
+Bo to skaner **laserowy 1D** — czyta tylko kody kreskowe. Kody QR i Data Matrix odczyta skaner **obrazowy (imager)**, np. DS2208.
+
+### Skaner świeci, ale nie czyta — co sprawdzić?
+
+Czy **linia lasera obejmuje cały kod** i czy nie trzymasz skanera prostopadle nad kodem (odbicie lustrzane). Sprawdź też czystość okienka.
 
 ### Jak ustawić Enter po skanie?
 
-Zeskanuj kod dodający **sufiks Enter (CR/LF)** z Product Reference Guide lub wygeneruj go w 123Scan.
+Zeskanuj kod dodający **sufiks Enter (CR/LF)** z Product Reference Guide.
 
-### Skaner bipa, ale nic nie wpisuje?
+### Skaner wydaje 4 długie niskie tony — co to znaczy?
 
-Najczęściej ma zły interfejs — zeskanuj kod **USB HID (klawiaturowy)** i sprawdź, czy kursor jest w aktywnym polu.
+To **błąd transmisji** — sprawdź konfigurację interfejsu (USB HID / USB COM / RS-232) i kabel.
 
 ### Jak przywrócić ustawienia fabryczne?
 
 Zeskanuj kod **„Set Defaults"** z Product Reference Guide.
-
-### Skaner nie czyta — co sprawdzić najpierw?
-
-Czy **linia lasera obejmuje cały kod** (od krawędzi do krawędzi) i czy okienko jest czyste. To dwie najczęstsze przyczyny.
 `
       }
     ]
