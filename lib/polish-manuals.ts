@@ -36283,8 +36283,8 @@ Zeskanuj kod **„Set Defaults"** z Product Reference Guide.
   'ls1203': {
     model: 'LS1203',
     title: 'Zebra LS1203 – Instrukcja obsługi po polsku',
-    lastUpdated: '2026-06-15',
-    sourceDocument: 'LS1203 Product Reference Guide + Quick Start Guide',
+    lastUpdated: '2026-06-16',
+    sourceDocument: 'LS1203 Product Reference Guide (72E-73954) + Quick Start Guide',
     keywords: [
       'zebra ls1203 instrukcja',
       'ls1203 instrukcja po polsku',
@@ -36293,16 +36293,18 @@ Zeskanuj kod **„Set Defaults"** z Product Reference Guide.
       'ls1203 ustawienia fabryczne',
       'ls1203 reset',
       'ls1203hd',
+      'ls1203 auto-scan',
+      'ls1203 czyszczenie okna',
       'ls1203 nie skanuje',
       'skaner laserowy zebra ls1203'
     ],
     sections: [
       {
-        title: '1. Podstawowe informacje',
+        title: '1. Wprowadzenie i warianty',
         content: `
 ### O skanerze Zebra LS1203
 
-Zebra **LS1203** to niedrogi, **przewodowy** skaner **laserowy** czytający **kody jednowymiarowe (1D)**. To prosty, trwały skaner do handlu, biura i lekkiego magazynu. Dostępny jest też wariant **LS1203-HD** zoptymalizowany pod **gęste kody o wysokiej rozdzielczości** (np. drobne etykiety). Skaner można trzymać w dłoni lub ustawić w podstawce do pracy bez rąk.
+Zebra **LS1203** to niedrogi, **przewodowy** skaner **laserowy** czytający **kody jednowymiarowe (1D)**. Prosty i trwały skaner do handlu, biura i lekkiego magazynu. Można nim skanować po naciśnięciu spustu lub w trybie **Auto-Scan** (ciągłym), a także ustawić w podstawce do pracy bez rąk. Dostępny jest wariant **LS1203-HD** zoptymalizowany pod **gęste kody o wysokiej rozdzielczości**.
 
 > **Ważne:** LS1203 to skaner **laserowy 1D** — **nie czyta kodów 2D** (QR, Data Matrix). Do kodów 2D użyj skanera obrazowego (np. DS2208).
 
@@ -36310,15 +36312,15 @@ Zebra **LS1203** to niedrogi, **przewodowy** skaner **laserowy** czytający **ko
 
 | Cecha | Wartość |
 |-------|---------|
-| **Typ** | Przewodowy skaner laserowy 1D |
+| **Typ** | Przewodowy skaner laserowy 1D (laser 650 nm) |
 | **Wariant HD** | LS1203-HD — gęste kody o wysokiej rozdzielczości |
+| **Tryby** | wyzwalany (spust) i Auto-Scan (ciągły), hands-free w podstawce |
 | **Interfejsy** | USB (HID), RS-232, Keyboard Wedge |
-| **Tryby pracy** | Ręczny i hands-free (w podstawce) |
-| **Zasilanie** | z portu USB hosta |
+| **Waga** | 122 g (bez kabla) |
 
 ### Zawartość opakowania
 
-W zestawie znajduje się skaner LS1203 i kabel interfejsu. **Zachowaj opakowanie** na wypadek serwisu. Sprawdź, czy nic nie jest uszkodzone.
+W zestawie skaner LS1203 i kabel interfejsu. Zachowaj opakowanie na wypadek serwisu; sprawdź brak uszkodzeń.
 `
       },
       {
@@ -36335,31 +36337,32 @@ LS1203 **automatycznie wykrywa typ hosta**.
 ### Pierwsze uruchomienie (USB)
 
 1. Podłącz kabel USB do skanera i do komputera.
-2. Skaner wyda sygnał startowy.
+2. Skaner wyda sygnał startowy (rosnący trójton).
 3. Otwórz Notatnik i zeskanuj kod, aby sprawdzić działanie.
 `
       },
       {
         title: '3. Skanowanie kodów',
         content: `
-1. Skieruj skaner na kod i naciśnij spust — pojawi się **czerwona linia lasera**.
+1. Skieruj skaner na kod i naciśnij spust — pojawi się **czerwona linia lasera** (w trybie Auto-Scan skaner skanuje automatycznie).
 2. Ustaw linię tak, aby przecinała **cały kod** od krawędzi do krawędzi.
 3. Po odczycie skaner bipnie, a dioda mignie na zielono.
 
-> **Wskazówka:** wąskie, gęste kody skanuj bliżej (w wersji HD — z mniejszej odległości); szerokie kody — z większego dystansu, by linia objęła całość.
+> **Wskazówka:** wąskie, gęste kody skanuj bliżej (w wersji HD — z mniejszej odległości); szerokie kody — z większego dystansu. Nie trzymaj skanera idealnie prostopadle nad kodem (odbicie lustrzane).
 
 Skaner czyta kody **1D**: EAN/UPC, Code 39, Code 128, Code 93, Codabar, Interleaved 2 of 5, GS1 DataBar.
 `
       },
       {
-        title: '4. Wskaźniki LED i sygnały dźwiękowe',
+        title: '4. Wskaźniki dźwiękowe i LED',
         content: `
-| Sygnał | Znaczenie |
-|--------|-----------|
-| Sygnał startowy | Skaner gotowy |
-| 1 bip + zielona dioda | Kod odczytany poprawnie |
-| Brak reakcji | Kod nieodczytany — popraw ustawienie linii lasera |
-| Seria tonów programowania | Tryb konfiguracji kodami |
+| Sygnał dźwiękowy | Znaczenie |
+|------------------|-----------|
+| Sygnał startowy (rosnący) | Włączenie zasilania (skaner gotowy) |
+| Krótki bip + zielona dioda | Kod odczytany poprawnie |
+| **4 długie niskie tony** | **Błąd transmisji** — dane zignorowane |
+| Tony błędu (konwersja/format) | Błąd konwersji lub formatu danych |
+| Tony trybu konfiguracji | Wejście/wyjście z trybu programowania kodami |
 
 Głośność i ton sygnału ustawia się kodami konfiguracyjnymi.
 `
@@ -36376,17 +36379,23 @@ Głośność i ton sygnału ustawia się kodami konfiguracyjnymi.
 
 ### Najczęstsze ustawienia
 
-- **Enter (CR/LF) po skanie**, **Tab po skanie**, **prefiks/sufiks**.
+- **Enter (CR/LF) po skanie** lub **Tab po skanie**, **prefiks/sufiks**.
+- **Tryb Auto-Scan** (skanowanie ciągłe) lub wyzwalany.
 - **Głośność i ton beepera** — Low / Medium / High.
 `
       },
       {
         title: '6. Konserwacja i czyszczenie',
         content: `
-- Czyść **70% IPA** lub łagodnym mydłem z wodą.
-- Nie używaj acetonu, amoniaku (na okienko), środków ściernych ani rozpuszczalników.
+> **Uwaga — LS1203 (laser) czyści się inaczej niż skanery obrazowe.** Jedyną wymaganą konserwacją jest czyszczenie **okienka wyjścia lasera**. Producent dopuszcza tu **roztwór amoniaku z wodą** (którego NIE wolno używać do skanerów obrazowych jak DS2208).
 
-**Procedura:** odłącz skaner → przetrzyj **okienko wyjścia lasera** i obudowę ściereczką z 70% IPA → pozostaw do wyschnięcia.
+### Procedura (wg dokumentacji LS1203)
+
+1. Usuń cząstki brudu **wilgotną ściereczką**.
+2. Przetrzyj okienko **chusteczką zwilżoną roztworem amoniaku z wodą**.
+3. **Nie rozpylaj** wody ani płynów bezpośrednio na okienko.
+
+Brudne okienko pogarsza zdolność skanowania — czyść je regularnie.
 `
       },
       {
@@ -36394,12 +36403,13 @@ Głośność i ton sygnału ustawia się kodami konfiguracyjnymi.
         content: `
 | Problem | Możliwa przyczyna | Rozwiązanie |
 |---------|-------------------|-------------|
-| Brak reakcji | Luźny kabel / brak zasilania | Dociśnij kabel USB; spróbuj innego portu |
-| Nie czyta kodu | Linia lasera nie obejmuje całego kodu | Odsuń/przybliż skaner |
+| Laser nie zapala się | Brak zasilania / luźne kable | Dociśnij kabel USB; spróbuj innego portu |
+| Laser świeci, ale nie dekoduje | Zły typ kodu w konfiguracji | Włącz odpowiedni typ kodu |
+| Laser świeci, ale nie dekoduje | Zła odległość | Odsuń/przybliż skaner, aby linia objęła cały kod |
 | Nie czyta gęstego kodu | Zwykła wersja zamiast HD | Do drobnych, gęstych kodów użyj wariantu LS1203-HD |
 | Nie czyta kodów 2D (QR) | To skaner laserowy 1D | Użyj skanera obrazowego (np. DS2208) |
-| Nie czyta kodu | Brudne okienko | Wyczyść okienko 70% IPA |
-| Bipa, ale brak danych | Zły interfejs hosta | Zeskanuj kod właściwego interfejsu (USB HID / USB COM / RS-232) |
+| Dekoduje, ale nie wysyła danych | Zły typ hosta | Zeskanuj kod właściwego hosta |
+| **4 długie niskie tony** | Błąd transmisji | Sprawdź konfigurację interfejsu i kabel |
 
 Jeśli problem nie ustępuje, zaktualizuj firmware (zebra.com/support lub 123Scan) i zresetuj skaner.
 `
@@ -36410,27 +36420,35 @@ Jeśli problem nie ustępuje, zaktualizuj firmware (zebra.com/support lub 123Sca
 | Parametr | LS1203 |
 |----------|--------|
 | **Typ** | Przewodowy skaner laserowy 1D |
+| **Źródło światła** | dioda laserowa 650 nm |
 | **Odczytywane kody** | tylko 1D (kreskowe) |
 | **Wariant** | LS1203-HD (gęste kody o wysokiej rozdzielczości) |
+| **Tryby** | wyzwalany, Auto-Scan, hands-free (w podstawce) |
 | **Interfejsy** | USB (HID), RS-232, Keyboard Wedge |
-| **Tryby pracy** | ręczny, hands-free (w podstawce) |
-| **Zasilanie** | z portu USB hosta |
+| **Waga** | 122 g (bez kabla) |
+| **Temperatura pracy** | 0°C do +50°C |
+| **Wilgotność** | 5–95% bez kondensacji |
+| **Upadki** | wielokrotne z 1,5 m na beton |
 `
       },
       {
         title: 'FAQ – Najczęściej zadawane pytania',
         content: `
+### Czym czyścić okienko LS1203?
+
+Wilgotną ściereczką, a okienko — chusteczką zwilżoną **roztworem amoniaku z wodą** (zgodnie z dokumentacją LS1203). Nie przenoś tej zasady na skanery obrazowe (np. DS2208), gdzie amoniak jest szkodliwy.
+
 ### Czym różni się LS1203 od LS1203-HD?
 
 Wersja **HD** ma optykę zoptymalizowaną pod **gęste kody o wysokiej rozdzielczości** (drobne etykiety). Zwykły LS1203 wystarcza do typowych kodów handlowych.
 
+### Czym jest tryb Auto-Scan?
+
+To tryb **skanowania ciągłego** — skaner sam emituje linię i odczytuje zbliżane kody, bez naciskania spustu.
+
 ### Dlaczego LS1203 nie czyta kodu QR?
 
 To skaner **laserowy 1D** — czyta tylko kody kreskowe. Kody QR/Data Matrix odczyta skaner obrazowy (np. DS2208).
-
-### Jak ustawić Enter po skanie?
-
-Zeskanuj kod dodający **sufiks Enter (CR/LF)** z Product Reference Guide.
 
 ### Jak przywrócić ustawienia fabryczne?
 
