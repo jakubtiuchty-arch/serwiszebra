@@ -34834,8 +34834,8 @@ DS3678 jest **bezprzewodowy** (bateria + Bluetooth + baza STB3678), a DS3608 **p
   'ds2208': {
     model: 'DS2208',
     title: 'Zebra DS2208 – Instrukcja obsługi po polsku',
-    lastUpdated: '2026-06-15',
-    sourceDocument: 'DS2208 Digital Scanner Product Reference Guide + Quick Start Guide (MN-002873-01EN)',
+    lastUpdated: '2026-06-16',
+    sourceDocument: 'DS2208 Digital Scanner Product Reference Guide (MN-002873) + Quick Start Guide',
     keywords: [
       'zebra ds2208 instrukcja',
       'ds2208 instrukcja po polsku',
@@ -34843,77 +34843,37 @@ DS3678 jest **bezprzewodowy** (bateria + Bluetooth + baza STB3678), a DS3608 **p
       'ds2208 konfiguracja',
       'ds2208 ustawienia fabryczne',
       'ds2208 reset',
-      'ds2208 usb',
+      'ds2208 usb hid',
       'ds2208 enter po skanie',
       'ds2208 tryb prezentacji',
-      'ds2208 nie skanuje',
+      'ds2208 cztery długie tony',
+      'ds2208 zasięg dekodowania',
       'ds2208 czyszczenie',
+      'ds2208 nie skanuje',
       'skaner zebra ds2208'
     ],
     sections: [
       {
-        title: '1. Podstawowe informacje',
+        title: '1. Wprowadzenie i warianty',
         content: `
 ### O skanerze Zebra DS2208
 
-Zebra **DS2208** to ręczny, **przewodowy** skaner obrazowy (imager) czytający kody **1D i 2D**. To uniwersalny, niedrogi skaner ogólnego przeznaczenia — sprawdza się w handlu, biurze, aptece, magazynie i lekkim przemyśle. Dostępny w dwóch kolorach: **Nova White** (biały) i **Twilight Black** (czarny).
+Zebra **DS2208** to ręczny, **przewodowy** skaner obrazowy (imager) czytający kody **1D i 2D**. To uniwersalny, niedrogi skaner ogólnego przeznaczenia — sprawdza się w handlu, aptece, biurze, magazynie i lekkim przemyśle. Można nim skanować w dłoni lub ustawić w podstawce do pracy bez rąk (tryb prezentacji).
 
-### Kluczowe cechy
+### Konfiguracje
 
 | Cecha | Wartość |
 |-------|---------|
 | **Typ** | Przewodowy imager 1D/2D |
+| **Kolory** | Nova White (biały), Twilight Black (czarny) |
+| **Tryby** | ręczny i prezentacji (hands-free w podstawce) |
 | **Interfejsy** | USB, RS-232, Keyboard Wedge, IBM 46XX (RS-485) |
-| **Tryby pracy** | Ręczny (spust) i prezentacji (hands-free na podstawce) |
-| **Odporność na upadki** | wielokrotne upadki z 1,5 m na beton |
-| **Temperatura pracy** | od 0°C do +50°C |
-| **Celownik / iluminacja** | linia celująca 624 nm (amber), doświetlenie 645 nm (super-red) |
-| **Kolory** | Nova White, Twilight Black |
 
-### Zawartość opakowania
-
-W zestawie znajduje się skaner DS2208 oraz kabel interfejsu (zwykle USB). Sprawdź kompletność i brak uszkodzeń; w razie braków skontaktuj się z dostawcą.
-
-> **Uwaga:** DS2208 jest skanerem przewodowym — nie ma baterii ani Bluetooth. Zasilanie pobiera z portu USB hosta (4,5–5,5 V).
+> **Uwaga:** DS2208 jest skanerem przewodowym — nie ma baterii ani Bluetooth. Zasilanie pobiera z portu USB hosta (4,5–5,5 V). Wersja bezprzewodowa tej rodziny to **DS2278**.
 `
       },
       {
-        title: '2. Tryby pracy: ręczny i prezentacji',
-        content: `
-### Tryb ręczny (hand-held)
-
-Trzymasz skaner w dłoni i naciskasz spust, aby zeskanować kod. Domyślny tryb pracy.
-
-### Tryb prezentacji (hands-free)
-
-Skaner stoi na podstawce (np. gęsiej szyi / Intellistand) i **skanuje automatycznie**, gdy zbliżysz kod do okna — bez naciskania spustu. Idealny do kasy i stanowisk z dużą liczbą drobnych skanów.
-
-1. Umieść skaner w podstawce (wsuń przód skanera w „kołyskę").
-2. Wyreguluj kąt, wyginając elastyczną szyję podstawki.
-3. Zbliż kod do okna — po odczycie skaner bipnie, a dioda mignie.
-
-> **Wskazówka:** w trybie prezentacji można ustawić czas, po którym skaner przechodzi w stan oszczędzania energii (Hands-Free Decode Session Timeout).
-`
-      },
-      {
-        title: '3. Wskaźniki LED i sygnały dźwiękowe',
-        content: `
-### Sygnalizacja odczytu
-
-Po poprawnym zeskanowaniu kodu skaner **bipnie**, a zielona dioda **na chwilę mignie** (good decode). DS2208 ma wskaźniki: Direct Decode Indicator, diody Good Decode oraz diodę Rear View (widoczną od tyłu — wygodną w trybie prezentacji).
-
-| Sygnał | Znaczenie |
-|--------|-----------|
-| Rosnąca seria tonów przy włączeniu | Skaner uruchomił się poprawnie |
-| 1 bip + mignięcie diody | Kod odczytany poprawnie |
-| Niski ton / brak reakcji | Kod nieodczytany — popraw celowanie lub odległość |
-| Seria tonów programowania | Wejście/wyjście z trybu konfiguracji kodami |
-
-Głośność, ton i czas trwania sygnału ustawia się kodami konfiguracyjnymi (Beeper Volume / Tone / Duration). Można też wyłączyć sygnał przy włączeniu (Suppress Power Up Beeps) oraz mignięcie diody na good decode.
-`
-      },
-      {
-        title: '4. Podłączenie do komputera',
+        title: '2. Podłączenie do komputera',
         content: `
 ### Automatyczne wykrywanie interfejsu
 
@@ -34921,34 +34881,85 @@ DS2208 **sam wykrywa typ interfejsu** i używa ustawienia domyślnego. Jeśli do
 
 | Interfejs | Uwagi |
 |-----------|-------|
-| **USB Keyboard HID** | Domyślny — skaner działa jak klawiatura (dane do aktywnego pola). Obsługuje ponad 90 układów klawiatury |
+| **USB Keyboard HID** | Domyślny — skaner działa jak klawiatura (ponad 90 układów klawiatury) |
 | **USB SNAPI (z obrazem)** | Tryb z przesyłaniem obrazu |
 | **USB CDC (port COM)** | Wirtualny port szeregowy |
 | **RS-232** | Standard oraz warianty (ICL, Wincor-Nixdorf, OPOS/JPOS, Fujitsu) |
-| **Keyboard Wedge** | Wpięcie między klawiaturę a komputer (IBM PC/AT) |
+| **Keyboard Wedge** | Wpięcie między klawiaturę a komputer |
 | **IBM 46XX (RS-485)** | Terminale handlowe IBM |
 
 ### Pierwsze uruchomienie (USB)
 
 1. Podłącz kabel USB do skanera i do portu komputera.
-2. Skaner wyda rosnący ton — jest gotowy.
+2. Skaner wyda rosnący trójton (low/medium/high) — jest gotowy.
 3. W trybie USB HID otwórz np. Notatnik i zeskanuj kod, aby sprawdzić działanie.
 `
       },
       {
-        title: '5. Skanowanie kodów',
+        title: '3. Tryby pracy: ręczny i prezentacji',
+        content: `
+### Tryb ręczny (hand-held)
+
+Trzymasz skaner w dłoni i naciskasz spust, aby zeskanować kod. Domyślny tryb pracy.
+
+### Tryb prezentacji (hands-free)
+
+Skaner stoi w podstawce i **skanuje automatycznie**, gdy zbliżysz kod do okna — bez naciskania spustu. Idealny do kasy i stanowisk z dużą liczbą drobnych skanów.
+
+1. Umieść skaner w podstawce.
+2. Wyreguluj kąt.
+3. Zbliż kod do okna — po odczycie skaner bipnie, a dioda mignie.
+
+> **Wskazówka:** w trybie prezentacji można ustawić czas, po którym skaner przechodzi w stan oszczędzania energii (Hands-Free Decode Session Timeout).
+`
+      },
+      {
+        title: '4. Wskaźniki dźwiękowe i LED',
+        content: `
+Skaner sygnalizuje stan tonami i dwukolorową diodą. Najważniejsze sekwencje (Beeper Definitions):
+
+| Sygnał dźwiękowy | Znaczenie |
+|------------------|-----------|
+| Low / medium / high (rosnący) | Włączenie zasilania (power up) |
+| Krótki bip (ton konfigurowalny) | Kod odczytany poprawnie |
+| **4 długie niskie tony** | **Błąd transmisji** — dane zignorowane (zwykle zły interfejs) |
+| 5 niskich tonów | Błąd konwersji lub formatu danych |
+| Low / low / low / extra low | Błąd odbioru RS-232 |
+| Wysoki bip | Wykryto znak BEL przez RS-232 |
+| Low / high | Błąd wprowadzania (zły kod / anulowanie) podczas konfiguracji |
+| High / low / high / low | Pomyślny zapis zmiany parametru |
+
+Po poprawnym odczycie skaner ma też wskaźniki: **Direct Decode Indicator**, diody **Good Decode** i diodę **Rear View** (widoczną od tyłu — wygodną w trybie prezentacji).
+
+> **Do zapamiętania:** **4 długie niskie tony** = dane nie dotarły do systemu. Zeskanuj kod właściwego interfejsu (USB HID / USB COM / RS-232).
+`
+      },
+      {
+        title: '5. Skanowanie kodów i zasięgi',
         content: `
 ### Jak skanować
 
 1. Skieruj skaner na kod i naciśnij spust — pojawi się czerwona linia celująca.
-2. Ustaw linię na kodzie (odczyt jest **wielokierunkowy** — kod nie musi być idealnie poziomo).
+2. Ustaw linię na kodzie (odczyt jest **wielokierunkowy**).
 3. Po odczycie skaner bipnie i mignie diodą.
 
-Linia celująca jest **mniejsza z bliska, większa z daleka**. Małe, gęste kody skanuj bliżej, duże — z większej odległości. Tolerancja położenia: pochylenie ±65°, przechylenie ±65°, obrót 360°.
+Linia celująca jest **mniejsza z bliska, większa z daleka**. Tolerancja położenia: pochylenie ±65°, przechylenie ±65°, obrót 360°.
+
+### Zasięgi dekodowania (typowe)
+
+| Typ kodu | Gęstość | Zasięg (od – do) |
+|----------|---------|------------------|
+| Code 39 | 5 mil | 0,5 – 15,2 cm |
+| Code 39 | 10 mil | 0 – 33,0 cm |
+| Code 128 | 5 mil | 1,5 – 10,2 cm |
+| Code 128 | 7,5 mil | 0 – 17,8 cm |
+| PDF417 | 6,7 mil | 2,0 – 14,5 cm |
+| UPC | 13 mil (100%) | 1,3 – 36,8 cm |
+| Data Matrix | 10 mil | 0,8 – 15,7 cm |
 
 ### Obsługiwane symbologie
 
-Skaner czyta wszystkie popularne kody **1D** (Code 39, Code 128, Code 93, UPC/EAN, Codabar, Interleaved 2 of 5, GS1 DataBar) oraz **2D** (PDF417, Data Matrix, QR Code, Aztec, MaxiCode i inne).
+Czyta wszystkie popularne kody **1D** (Code 39, Code 128, Code 93, UPC/EAN, Codabar, Interleaved 2 of 5, GS1 DataBar) oraz **2D** (PDF417, Data Matrix, QR Code, Aztec, MaxiCode).
 `
       },
       {
@@ -34956,42 +34967,41 @@ Skaner czyta wszystkie popularne kody **1D** (Code 39, Code 128, Code 93, UPC/EA
         content: `
 ### Przywrócenie ustawień fabrycznych
 
-1. Zeskanuj kod **„Set Defaults"** (Przywróć ustawienia domyślne) z Product Reference Guide.
+1. Zeskanuj kod **„Set Defaults"** z Product Reference Guide.
 2. Alternatywnie użyj darmowego programu **Zebra 123Scan** (USB → „Restore Defaults").
 
-> **Uwaga:** reset kasuje wszystkie ustawienia użytkownika (interfejs, symbologie, prefiksy/sufiksy, beeper). Po resecie skonfiguruj skaner ponownie.
+> **Uwaga:** reset kasuje wszystkie ustawienia użytkownika (interfejs, symbologie, prefiksy/sufiksy, beeper).
 
 ### Najczęstsze ustawienia
 
-- **Enter (CR/LF) po skanie** — sufiks Enter przenosi kursor do nowej linii (przydatne w arkuszach, WMS).
-- **Tab po skanie** — przejście do kolejnej kolumny.
-- **Prefiks / sufiks** — stały tekst przed/po danych z kodu.
-- **Głośność i ton beepera** — Low / Medium / High.
-- **Tryb prezentacji / spustu** — przełączenie sposobu pracy.
-
-Wszystkie ustawienia wykonuje się przez zeskanowanie kodów z PRG lub wygenerowanie ich w 123Scan.
+- **Enter (CR/LF) po skanie** lub **Tab po skanie** — sufiks przenoszący kursor.
+- **Prefiks / sufiks** — stały tekst przed/po danych.
+- **Beeper Volume / Tone** — głośność i ton sygnału; **Suppress Power Up Beeps** — wyciszenie sygnału startowego.
+- **Picklist Mode** — odczyt tylko kodu wskazanego celownikiem.
+- **Tryb prezentacji / spustu** oraz **Hands-Free Decode Session Timeout**.
 `
       },
       {
         title: '7. Konserwacja i czyszczenie',
         content: `
-### Dopuszczone środki
+> **Ważne — DS2208 ma inną listę środków niż starsze skanery.** Dla obudowy DS2208 dopuszczone są **woda utleniona (nadtlenek wodoru)** oraz **łagodne mydło do naczyń**. **Alkohol izopropylowy (IPA) 70% NIE jest dopuszczony** dla DS2208 — figuruje na liście środków szkodliwych dla jego tworzywa.
 
-- **Alkohol izopropylowy (IPA) 70%** — podstawowy środek (zalecane gotowe chusteczki Zebra).
-- Łagodny roztwór mydła z wodą.
+### Środki dopuszczone
 
-### Zabronione
+- **Nadtlenek wodoru (woda utleniona)**
+- **Łagodne mydło do naczyń** (z wodą)
 
-- Aceton, amoniak (na szybę), środki ścierne, rozpuszczalniki ropopochodne.
+### Środki szkodliwe (NIE stosować)
+
+Aceton, roztwory amoniaku, roztwory alkaliczne (wodne i alkoholowe), węglowodory aromatyczne i chlorowane, benzen, kwas karbolowy (fenol), związki amin/amoniaku, etanoloamina, etery, **alkohol izopropylowy 70%**, ketony, TB-lysoform, toluen, trichloroetylen.
 
 ### Procedura
 
-1. Odłącz skaner.
-2. Zwilż miękką ściereczkę środkiem 70% IPA.
-3. Delikatnie przetrzyj **okno skanujące** (najważniejszy element) i obudowę.
-4. Pozostaw do wyschnięcia przed ponownym użyciem.
+1. Zwilż miękką ściereczkę dopuszczonym środkiem.
+2. Delikatnie przetrzyj **okno skanujące** (najważniejszy element) i obudowę. Nie nanoś płynu bezpośrednio na skaner.
+3. Pozostaw do wyschnięcia przed użyciem.
 
-Brudne okno skanujące to najczęstsza przyczyna pogorszenia odczytu — czyść je regularnie.
+Regularne czyszczenie okna jest konieczne — brudne okno pogarsza odczyt. Nie dopuszczaj do kontaktu okna z materiałami ściernymi.
 `
       },
       {
@@ -34999,15 +35009,18 @@ Brudne okno skanujące to najczęstsza przyczyna pogorszenia odczytu — czyść
         content: `
 | Problem | Możliwa przyczyna | Rozwiązanie |
 |---------|-------------------|-------------|
-| Brak reakcji po podłączeniu | Brak zasilania / luźny kabel | Sprawdź i dociśnij kabel USB; spróbuj innego portu |
-| Nie czyta kodu | Brudne okno skanujące | Wyczyść okno ściereczką z 70% IPA |
-| Nie czyta kodu | Symbologia wyłączona | Włącz odpowiedni typ kodu w konfiguracji |
-| Nie czyta kodu | Zła odległość | Przybliż/oddal skaner; małe kody skanuj bliżej |
-| Bipa, ale dane nie trafiają do systemu | Zły interfejs hosta | Zeskanuj kod właściwego interfejsu (USB HID / USB COM / RS-232) |
-| Dane błędne / podwojone znaki | Prefiks/sufiks lub układ klawiatury | Sprawdź ustawienia sufiksu i wybrany układ klawiatury |
-| W trybie prezentacji nie skanuje sam | Wyłączony tryb prezentacji | Zeskanuj kod trybu prezentacji |
+| Brak celownika po naciśnięciu spustu | Brak zasilania | Podłącz zasilacz, jeśli konfiguracja go wymaga |
+| Brak celownika | Zły kabel interfejsu / luźne kable | Podłącz właściwy kabel; dociśnij wtyki |
+| Brak celownika | Skaner wyłączony | W trybach IBM/OPOS włącz skaner przez interfejs hosta |
+| Brak celownika | Celownik wyłączony | Włącz celownik (Hand-Held Decode Aiming Pattern) |
+| Celuje, ale nie dekoduje | Zły typ kodu w konfiguracji | Włącz odpowiednią symbologię |
+| Celuje, ale nie dekoduje | Kod uszkodzony | Przetestuj na czytelnym kodzie tego samego typu |
+| Celuje, ale nie dekoduje | Kod poza polem / zasięgiem | Umieść kod w polu widzenia; dostosuj odległość (patrz zasięgi) |
+| Dekoduje, ale nie wysyła danych | Zły interfejs hosta | Zeskanuj kod właściwego hosta (USB HID / USB COM / RS-232) |
+| Dekoduje, ale nie wysyła danych | Luźny kabel | Dociśnij kabel |
+| **4 długie niskie tony** | Błąd transmisji | Sprawdź konfigurację interfejsu i kabel |
 
-Jeśli problem nie ustępuje, zaktualizuj firmware (zebra.com/support lub 123Scan) i ponownie zresetuj skaner.
+Jeśli problem nie ustępuje, zaktualizuj firmware (zebra.com/support lub 123Scan) i zresetuj skaner.
 `
       },
       {
@@ -35017,41 +35030,48 @@ Jeśli problem nie ustępuje, zaktualizuj firmware (zebra.com/support lub 123Sca
 |----------|--------|
 | **Wymiary** | 16,5 × 6,6 × 9,8 cm (wys. × szer. × głęb.) |
 | **Waga** | 161,6 g (5,7 oz) |
-| **Zasilanie** | 4,5–5,5 VDC (z hosta lub zasilacza); 250 mA typ. |
-| **Sensor** | 640 × 480 px |
+| **Kolory** | Nova White, Twilight Black |
+| **Interfejsy** | USB, RS-232, Keyboard Wedge, IBM 46XX (RS-485) |
+| **Zasilanie** | 4,5–5,5 VDC; 250 mA typ. (spoczynek 150 mA) |
+| **Celownik / doświetlenie** | linia 624 nm (amber) / 2× 645 nm (super-red) |
 | **Pole widzenia** | 32,8° H × 24,8° V |
-| **Źródło światła** | celownik 624 nm (amber), doświetlenie 2× 645 nm (super-red) |
+| **Sensor** | 640 × 480 px |
 | **Min. kontrast druku** | 25% |
 | **Tolerancja** | skew ±65°, pitch ±65°, roll 360° |
-| **Temperatura pracy** | od 0°C do +50°C |
-| **Temperatura przechowywania** | od -40°C do +70°C |
+| **Szybkość (hands-free)** | do 76,2 cm/s (kod 13 mil) |
+| **Temperatura pracy** | 0°C do +50°C |
+| **Temperatura przechowywania** | -40°C do +70°C |
 | **Wilgotność** | 5–95% bez kondensacji |
 | **Upadki** | wielokrotne z 1,5 m na beton |
-| **Interfejsy** | USB, RS-232, Keyboard Wedge, IBM 46XX (RS-485) |
+| **Tumble** | 250 przewrotów z 0,5 m |
 `
       },
       {
         title: 'FAQ – Najczęściej zadawane pytania',
         content: `
-### Jak ustawić Enter po każdym zeskanowaniu?
+### Czym czyścić DS2208? Mogę użyć spirytusu / IPA?
 
-Zeskanuj kod dodający **sufiks Enter (CR/LF)** z Product Reference Guide lub wygeneruj go w 123Scan. Po każdym odczycie kursor przejdzie do nowej linii.
+**Nie do DS2208.** Producent dopuszcza tylko **wodę utlenioną (nadtlenek wodoru)** i **łagodne mydło do naczyń**. Alkohol izopropylowy 70% jest na liście środków **szkodliwych** dla obudowy DS2208 (inaczej niż w starszych modelach).
 
-### Skaner bipa, ale nic nie wpisuje — dlaczego?
+### Skaner wydaje 4 długie niskie tony — co to znaczy?
+
+To **błąd transmisji** — dane nie trafiły do komputera, bo skaner ma źle ustawiony interfejs. Zeskanuj kod właściwego hosta (USB HID / USB COM / RS-232).
+
+### Jak ustawić Enter po każdym skanie?
+
+Zeskanuj kod dodający **sufiks Enter (CR/LF)** z Product Reference Guide lub wygeneruj go w 123Scan.
+
+### Skaner bipa, ale nic nie wpisuje?
 
 Najczęściej ma zły interfejs. Zeskanuj kod **USB HID (klawiaturowy)** i upewnij się, że kursor jest w aktywnym polu.
 
 ### Jak włączyć skanowanie bez naciskania spustu?
 
-Postaw skaner na podstawce i włącz **tryb prezentacji** — skaner będzie skanował automatycznie po zbliżeniu kodu.
+Postaw skaner w podstawce i włącz **tryb prezentacji** — będzie skanował automatycznie po zbliżeniu kodu.
 
-### Jak przywrócić ustawienia fabryczne?
+### Jaki jest zasięg odczytu?
 
-Zeskanuj kod **„Set Defaults"** z Product Reference Guide. Skaner wróci do stanu fabrycznego.
-
-### Czym czyścić okno skanujące?
-
-Wyłącznie **70% alkoholem izopropylowym (IPA)** lub łagodnym mydłem z wodą. Bez acetonu, amoniaku i środków ściernych.
+Zależy od gęstości kodu — np. kod UPC do ok. 36,8 cm, Code 39 10 mil do ok. 33 cm (pełna tabela w sekcji „Skanowanie kodów i zasięgi").
 `
       }
     ]
