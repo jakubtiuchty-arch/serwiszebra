@@ -2696,6 +2696,81 @@ ${getEmailHeader()}
 }
 
 // ============================================
+// Email: Płatność potwierdzona (P24) — sklep
+// ============================================
+
+interface ShopPaymentConfirmedEmailData {
+  to: string
+  orderNumber: string
+  contactName: string
+  totalBrutto: number
+}
+
+export async function sendShopPaymentConfirmedEmail(data: ShopPaymentConfirmedEmailData) {
+  try {
+    const email = await resend.emails.send({
+      from: 'Sklep TAKMA <sklep@serwis-zebry.pl>',
+      to: data.to,
+      subject: `Płatność potwierdzona — zamówienie ${data.orderNumber}`,
+      html: `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        ${getEmailStyles()}
+      </head>
+      <body style="margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;background-color:#f3f4f6;">
+        <div style="max-width:600px;margin:0 auto;background-color:#ffffff;border-radius:8px;overflow:hidden;">
+${getEmailHeader()}
+          <div class="email-content" style="padding:32px 24px;">
+            <div style="text-align:center;margin-bottom:28px;">
+              <div style="display:inline-block;background-color:#10b981;width:56px;height:56px;border-radius:50%;margin-bottom:14px;">
+                <div style="color:#ffffff;font-size:30px;line-height:56px;">&#10003;</div>
+              </div>
+              <h2 style="margin:0 0 6px;font-size:22px;color:#111827;">Płatność potwierdzona!</h2>
+              <p style="margin:0;color:#6b7280;font-size:14px;">Zamówienie <strong>${data.orderNumber}</strong> jest w realizacji</p>
+            </div>
+
+            <p style="margin:0 0 20px;color:#374151;font-size:15px;">Cześć <strong>${data.contactName}</strong>, dziękujemy — Twoja płatność została zaksięgowana.</p>
+
+            <div class="email-box" style="background-color:#f9fafb;border-radius:8px;padding:18px;margin-bottom:20px;">
+              <table style="width:100%;font-size:14px;color:#374151;">
+                <tr><td style="padding:4px 0;color:#6b7280;">Numer zamówienia:</td><td style="padding:4px 0;text-align:right;font-weight:600;">${data.orderNumber}</td></tr>
+                <tr><td style="padding:4px 0;color:#6b7280;">Zapłacono (brutto):</td><td style="padding:4px 0;text-align:right;font-weight:700;color:#16a34a;">${(data.totalBrutto || 0).toFixed(2).replace('.', ',')} zł</td></tr>
+                <tr><td style="padding:4px 0;color:#6b7280;">Status:</td><td style="padding:4px 0;text-align:right;font-weight:600;">Opłacone — w realizacji</td></tr>
+              </table>
+            </div>
+
+            <div class="email-box" style="background-color:#eff6ff;border-radius:8px;padding:18px;margin-bottom:24px;">
+              <h3 style="margin:0 0 8px;color:#1e40af;font-size:14px;">Co dalej?</h3>
+              <p style="margin:0;color:#1e3a8a;font-size:14px;line-height:1.6;">Kompletujemy zamówienie i przygotowujemy je do wysyłki (dostawa kurierem 1–2 dni robocze). O nadaniu paczki poinformujemy osobnym e-mailem.</p>
+            </div>
+
+            <div style="text-align:center;color:#6b7280;font-size:14px;">
+              <p style="margin:0 0 6px;">Masz pytania? Skontaktuj się z nami:</p>
+              <p style="margin:0;"><strong>Tel:</strong> +48 607 819 688 &nbsp;|&nbsp; <strong>Email:</strong> serwis@takma.com.pl</p>
+            </div>
+          </div>
+
+          <div style="background-color:#f9fafb;padding:20px 24px;text-align:center;color:#9ca3af;font-size:12px;">
+            <p style="margin:0 0 4px;">TAKMA Tadeusz Tiuchty &middot; ul. Poświęcka 1a, 51-128 Wrocław</p>
+            <p style="margin:0;">NIP: 9151004377 &nbsp;|&nbsp; www.serwis-zebry.pl</p>
+          </div>
+        </div>
+      </body>
+      </html>
+      `
+    })
+    console.log('[Email] Shop payment confirmed email sent:', data.orderNumber)
+    return email
+  } catch (error) {
+    console.error('[Email] Error sending shop payment confirmed email:', error)
+    throw error
+  }
+}
+
+// ============================================
 // Email: Zamówienie wysłane (sklep)
 // ============================================
 

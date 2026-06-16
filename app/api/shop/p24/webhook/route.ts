@@ -9,6 +9,7 @@ import {
   parseP24Notification,
   type P24Notification,
 } from '@/lib/p24'
+import { sendShopPaymentConfirmedEmail } from '@/lib/email'
 
 /**
  * Notyfikacja Przelewy24 (urlStatus, klasyczne API 3.2 — form-urlencoded p24_*).
@@ -92,5 +93,22 @@ export async function POST(request: NextRequest) {
   }
 
   console.log(`[P24 webhook] Order ${order.order_number} PAID (p24OrderId=${n.orderId})`)
+
+  // Mail do klienta: płatność potwierdzona — zamówienie w realizacji.
+  // W try/catch — błąd maila nie może zwrócić 500 (P24 ponowiłby notyfikację,
+  // a zamówienie jest już 'succeeded' → idempotencja i tak by maila nie wysłała).
+  if (order.email) {
+    try {
+      await sendShopPaymentConfirmedEmail({
+        to: order.email,
+        orderNumber: order.order_number,
+        contactName: order.contact_name || '',
+        totalBrutto: Number(order.total_brutto) || 0,
+      })
+    } catch (err: any) {
+      console.error(`[P24 webhook] payment-confirmed email failed for ${order.order_number}:`, err?.message || err)
+    }
+  }
+
   return NextResponse.json({ received: true })
 }
