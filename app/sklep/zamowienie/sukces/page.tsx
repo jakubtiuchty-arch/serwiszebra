@@ -4,6 +4,7 @@ import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import { useCartStore } from '@/lib/cart-store';
 import { 
   CheckCircle, 
   Loader2, 
@@ -28,35 +29,41 @@ function ShopSuccessPageContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const sessionId = searchParams.get('session_id');
+  // Przelewy24 wraca z ?order=&sid= (Stripe: ?session_id=)
+  const p24Order = searchParams.get('order');
+  const p24Sid = searchParams.get('sid');
   
   const [loading, setLoading] = useState(true);
   const [orderData, setOrderData] = useState<OrderData | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!sessionId) {
+    const isP24 = !!(p24Order && p24Sid);
+    if (!sessionId && !isP24) {
       setError('Brak identyfikatora sesji');
       setLoading(false);
       return;
     }
 
-    const verifyPayment = async () => {
-      try {
-        // Używamy endpoint dla shop_orders
-        const response = await fetch(`/api/shop/verify/${sessionId}`);
-        const data = await response.json();
+    const apply = (data: any) => {
+      // Płatność potwierdzona → dopiero teraz czyścimy koszyk
+      try { useCartStore.getState().clearCart(); } catch {}
+      setOrderData({
+        order_id: data.order_id,
+        order_number: data.order_number,
+        total_brutto: data.total_brutto || 0,
+        customer_email: data.customer_email || '',
+        items_count: data.items_count || 1,
+      });
+    };
 
-        if (data.success) {
-          setOrderData({
-            order_id: data.order_id,
-            order_number: data.order_number,
-            total_brutto: data.total_brutto || 0,
-            customer_email: data.customer_email || '',
-            items_count: data.items_count || 1
-          });
-        } else {
-          setError('Płatność nie została jeszcze potwierdzona. Odśwież stronę za chwilę.');
-        }
+    // Stripe — jednorazowa weryfikacja po session_id (kompatybilność wsteczna)
+    const verifyStripe = async () => {
+      try {
+        const res = await fetch(`/api/shop/verify/${sessionId}`);
+        const data = await res.json();
+        if (data.success) apply(data);
+        else setError('Płatność nie została jeszcze potwierdzona. Odśwież stronę za chwilę.');
       } catch (err) {
         console.error('Error verifying payment:', err);
         setError('Wystąpił błąd podczas weryfikacji płatności');
@@ -65,8 +72,35 @@ function ShopSuccessPageContent() {
       }
     };
 
-    verifyPayment();
-  }, [sessionId]);
+    // Przelewy24 — polling statusu (webhook może dotrzeć po powrocie klienta)
+    let cancelled = false;
+    const pollP24 = async (attempt = 0) => {
+      try {
+        const res = await fetch(`/api/shop/p24/status?order=${encodeURIComponent(p24Order!)}&sid=${encodeURIComponent(p24Sid!)}`);
+        const data = await res.json();
+        if (cancelled) return;
+        if (data.paid) {
+          apply(data);
+          setLoading(false);
+        } else if (attempt < 20) {
+          setTimeout(() => pollP24(attempt + 1), 1500); // do ~30 s
+        } else {
+          setError('Płatność jest jeszcze przetwarzana. Potwierdzenie wyślemy mailem. Możesz odświeżyć stronę za chwilę.');
+          setLoading(false);
+        }
+      } catch (err) {
+        if (cancelled) return;
+        console.error('Error polling P24 status:', err);
+        setError('Wystąpił błąd podczas weryfikacji płatności');
+        setLoading(false);
+      }
+    };
+
+    if (isP24) pollP24();
+    else verifyStripe();
+
+    return () => { cancelled = true; };
+  }, [sessionId, p24Order, p24Sid]);
 
   if (loading) {
     return (
