@@ -9,8 +9,11 @@ Checkpoint postępu prac. Najnowszy wpis na górze. Po każdym etapie/buildzie d
 - **Powód**: pierwsza wersja (z RAG) bywała zbyt płytka. User dał **pełne PDF (PRG + User Guide)** w `/Users/jakubtiuchty/Desktop/Manuale /Skanery/`. Wzorzec = DS9308 (9 sekcji, pełne tabele).
 - **Metoda**: `pdftotext "<pdf>" /tmp/prg/<m>.txt` → `awk 'NR>250'` (pomiń TOC) → grep rozdziałów: Configurations, Beeper Definitions, Decode Ranges, Known Harmful/Approved Cleaners, Troubleshooting, Technical Specifications. Pisz wpis → splice Pythonem (replace zakres linii) → tsc → curl 200 → commit.
 - **⚠️ KLUCZOWE ODKRYCIE**: lista środków czyszczących **różni się per model**! DS2208 PRG: dopuszczone = **woda utleniona + mydło**, a **70% IPA jest SZKODLIWY**. DS9308: dopuszczony 70% IPA. **Zawsze czytaj „Approved Cleaners" z PRG danego modelu — nie zakładaj IPA!** (Wcześniejsze wersje DS2208/2278/4608/8108 z IPA = do poprawy.)
-- **Gold standard zrobione (2/18)**: DS9308, DS2208.
-- **TODO (16)**: DS3608, DS3678, DS2278, DS4608, DS4678, DS8108, DS8178, DS8208(RAG), DS9908(+R), LI2208, LI4278, LS2208, LS1203, CS6080, CS4070, CS3000. Źródła PDF zmapowane (ds36x8, ds2278, ds4608, ds8108, ds8178, ds9908(+ds9908r-supp), li2208, li4278, ls2208, ls1203, cs6080, cs4070, cs3070; DS8208/DS4678 z RAG/ds4608). Na końcu: weryfikacja każdej z dokumentacją.
+- **Środki per model (potwierdzone z PRG)**: DS2208/DS2278 = woda utleniona + mydło (IPA 70% SZKODLIWY); DS4608/DS4678 = IPA 70% OK + wersja healthcare (wybielacz 10%/H₂O₂ 3%/chusteczki Clorox); DS9308 = IPA 70% OK. **Każdy kolejny model: czytaj „Approved Cleaners" z jego PRG.**
+- **Gold standard zrobione (5/18)**: DS9308, DS2208, DS2278, DS4608, DS4678.
+- **TODO (13)**: DS3608, DS3678, DS8108, DS8178, DS8208(RAG), DS9908(+R), LI2208, LI4278, LS2208, LS1203, CS6080, CS4070, CS3000.
+- **Procedura splice**: `python3` replace zakresu linii (znajdź `grep -n "'<key>': {"` start i start następnego wpisu = koniec). Wpis pisany do `/tmp/<key>_new.txt` heredokiem 'ENTRY' (backticki literalne). Po każdym: tsc EXIT=0 + curl 200 + commit.
+- **Na końcu**: weryfikacja każdej z dokumentacją (czy sekcje/dane się zgadzają).
 
 ---
 
