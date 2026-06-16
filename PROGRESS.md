@@ -10,10 +10,10 @@ Checkpoint postępu prac. Najnowszy wpis na górze. Po każdym etapie/buildzie d
 - **Metoda**: `pdftotext "<pdf>" /tmp/prg/<m>.txt` → `awk 'NR>250'` (pomiń TOC) → grep rozdziałów: Configurations, Beeper Definitions, Decode Ranges, Known Harmful/Approved Cleaners, Troubleshooting, Technical Specifications. Pisz wpis → splice Pythonem (replace zakres linii) → tsc → curl 200 → commit.
 - **⚠️ KLUCZOWE ODKRYCIE**: lista środków czyszczących **różni się per model**! DS2208 PRG: dopuszczone = **woda utleniona + mydło**, a **70% IPA jest SZKODLIWY**. DS9308: dopuszczony 70% IPA. **Zawsze czytaj „Approved Cleaners" z PRG danego modelu — nie zakładaj IPA!** (Wcześniejsze wersje DS2208/2278/4608/8108 z IPA = do poprawy.)
 - **Środki per model (potwierdzone z PRG)**: DS2208/DS2278 = woda utleniona + mydło (IPA 70% SZKODLIWY); DS4608/DS4678 = IPA 70% OK + wersja healthcare (wybielacz 10%/H₂O₂ 3%/chusteczki Clorox); DS9308 = IPA 70% OK. **Każdy kolejny model: czytaj „Approved Cleaners" z jego PRG.**
-- **Gold standard zrobione (5/18)**: DS9308, DS2208, DS2278, DS4608, DS4678.
-- **TODO (13)**: DS3608, DS3678, DS8108, DS8178, DS8208(RAG), DS9908(+R), LI2208, LI4278, LS2208, LS1203, CS6080, CS4070, CS3000.
-- **Procedura splice**: `python3` replace zakresu linii (znajdź `grep -n "'<key>': {"` start i start następnego wpisu = koniec). Wpis pisany do `/tmp/<key>_new.txt` heredokiem 'ENTRY' (backticki literalne). Po każdym: tsc EXIT=0 + curl 200 + commit.
-- **Na końcu**: weryfikacja każdej z dokumentacją (czy sekcje/dane się zgadzają).
+- **UKOŃCZONE 18/18** ✅. Z pełnych PRG (Desktop): DS9308, DS2208, DS2278, DS4608, DS4678, DS8108, DS8178, DS3608, DS3678, LS2208, LS1203, LI2208, LI4278, DS9908. Z RAG + weryfikacja środków z PRG: CS3000, CS4070, CS6080. Bez PRG na dysku (wersja z RAG, czyszczenie generyczne 70% IPA — do ewentualnej weryfikacji gdy pojawi się PRG): **DS8208/DS8288**.
+- **Macierz czyszczenia (zweryfikowana per model)**: DS2208/2278 = woda utleniona+mydło (IPA szkodliwy); DS3608/3678 = IPA+chusteczki (bleach szkodliwy, toleruje płyny przemysłowe DOT4/ATF); DS4608/4678/DS8108/8178/CS6080 = IPA + healthcare (wybielacz 10%/H₂O₂ 3%); DS9308/DS9908/LI2208/LI4278 = IPA; LS2208/LS1203/CS3000/CS4070 = **amoniak/woda na okno** (lasery + stare companiony).
+- **Weryfikacja końcowa**: 39/39 SKU → strona 200; macierz czyszczenia spójna (skrypt Python sprawdzający per wpis).
+- **Procedura splice** (gdyby wracać): `python3` replace zakresu linii (start `grep -n "'<key>': {"`, koniec = start następnego wpisu). Źródła PDF: `/Users/jakubtiuchty/Desktop/Manuale /Skanery/`, ekstrakcja `pdftotext`.
 
 ---
 
