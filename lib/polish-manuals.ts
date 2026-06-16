@@ -35305,7 +35305,7 @@ Tak — włącz **Out of Range Batch Mode**. Skaner zapisze skany i prześle je 
   'ds4608': {
     model: 'DS4608',
     title: 'Zebra DS4608 – Instrukcja obsługi po polsku',
-    lastUpdated: '2026-06-15',
+    lastUpdated: '2026-06-16',
     sourceDocument: 'DS4608 Series Product Reference Guide + Quick Start Guide',
     keywords: [
       'zebra ds4608 instrukcja',
@@ -35316,17 +35316,20 @@ Tak — włącz **Out of Range Batch Mode**. Skaner zapisze skany i prześle je 
       'ds4608 reset',
       'ds4608 usb',
       'ds4608 enter po skanie',
+      'ds4608 cztery długie tony',
+      'ds4608 healthcare dezynfekcja',
+      'ds4608 eas checkpoint',
       'ds4608 nie skanuje',
       'ds4608 dpe xd',
       'skaner zebra ds4608'
     ],
     sections: [
       {
-        title: '1. Podstawowe informacje',
+        title: '1. Wprowadzenie i warianty',
         content: `
 ### O skanerze Zebra DS4608
 
-Zebra **DS4608** to ręczny, **przewodowy** skaner obrazowy klasy premium, czytający kody **1D i 2D** oraz przechwytujący obrazy i dokumenty. Szybki i precyzyjny — sprawdza się w handlu, ochronie zdrowia, biurze i lekkim przemyśle. Dostępny w kolorach **Nova White** i **Twilight Black**.
+Zebra **DS4608** to ręczny, **przewodowy** skaner obrazowy klasy premium, czytający kody **1D i 2D** oraz przechwytujący obrazy i dokumenty. Szybki i precyzyjny — do handlu, ochrony zdrowia, biura i lekkiego przemysłu. Dostępny w kolorach **Nova White** i **Twilight Black**, a w wybranych konfiguracjach z anteną **EAS Checkpoint** (dezaktywacja zabezpieczeń) oraz w wersji **healthcare** (odpornej na dezynfekcję).
 
 ### Warianty
 
@@ -35334,58 +35337,48 @@ Zebra **DS4608** to ręczny, **przewodowy** skaner obrazowy klasy premium, czyta
 |---------|---------------|
 | **SR** (Standard Range) | Uniwersalny — większość kodów 1D/2D |
 | **HD** (High Density) | Bardzo małe, gęste kody |
-| **DL** | Optymalizacja pod prawa jazdy / dokumenty |
+| **DL** | Optymalizacja pod prawa jazdy / dokumenty (parsowanie) |
 | **HL / XD** | Rozszerzona głębia ostrości i wydajność |
 | **DPE** | Direct Part Marking (znakowania bezpośrednie) |
+| **HC** | Healthcare — odporny na dezynfekcję |
 
-### Kluczowe cechy
-
-| Cecha | Wartość |
-|-------|---------|
-| **Typ** | Przewodowy imager 1D/2D z przechwytywaniem obrazu |
-| **Interfejsy** | USB, RS-232, IBM 46XX (RS-485) |
-| **Sensor** | 1280 × 800 px |
-| **EAS** | Zgodny z systemem dezaktywacji Checkpoint |
-| **Obrazy** | Eksport Bitmap, JPEG, TIFF |
-| **Temperatura pracy** | od 0°C do +50°C |
-| **Kolory** | Nova White, Twilight Black |
-
-> **Uwaga:** DS4608 jest skanerem przewodowym — zasilanie pobiera z portu USB hosta (4,5–5,5 V).
+> **Uwaga:** DS4608 jest skanerem przewodowym — zasilanie pobiera z portu USB hosta. Wersja bezprzewodowa to **DS4678**.
 `
       },
       {
-        title: '2. Wskaźniki LED i sygnały dźwiękowe',
+        title: '2. Podłączenie do komputera',
         content: `
-Po poprawnym zeskanowaniu kodu skaner **bipnie**, a dioda mignie (good decode). DS4608 ma wskaźniki: Direct Decode Indicator, diody Good Decode oraz diody Rear View (widoczne od tyłu).
-
-| Sygnał | Znaczenie |
-|--------|-----------|
-| Rosnąca seria tonów przy włączeniu | Poprawne uruchomienie |
-| 1 bip + mignięcie diody | Kod odczytany poprawnie |
-| Niski ton / brak reakcji | Kod nieodczytany |
-| Seria tonów programowania | Wejście/wyjście z trybu konfiguracji |
-
-Głośność i ton sygnału są regulowane kodami konfiguracyjnymi.
-`
-      },
-      {
-        title: '3. Podłączenie do komputera',
-        content: `
-DS4608 **automatycznie wykrywa typ interfejsu** i używa ustawienia domyślnego. Jeśli domyślne nie pasuje, zeskanuj kod właściwego interfejsu z Product Reference Guide.
+DS4608 **automatycznie wykrywa typ interfejsu** i używa ustawienia domyślnego. Aby zmienić, zeskanuj kod właściwego interfejsu z Product Reference Guide.
 
 | Interfejs | Uwagi |
 |-----------|-------|
 | **USB Keyboard HID** | Domyślny — skaner działa jak klawiatura (ponad 90 układów) |
-| **USB SNAPI** | Tryb z przesyłaniem obrazu |
-| **USB CDC (port COM)** | Wirtualny port szeregowy |
+| **USB SNAPI / CDC** | Z obrazem / wirtualny port COM |
 | **RS-232** | Standard i warianty handlowe |
 | **IBM 46XX (RS-485)** | Terminale handlowe IBM |
 
-### Pierwsze uruchomienie (USB)
+### Pierwsze uruchomienie
 
 1. Podłącz kabel USB do skanera i komputera.
-2. Skaner wyda rosnący ton — jest gotowy.
+2. Skaner wyda rosnący trójton (low/medium/high) — jest gotowy.
 3. W trybie USB HID zeskanuj kod w Notatniku, aby sprawdzić działanie.
+
+> **EAS Checkpoint:** w modelach z anteną EAS do dezaktywacji zabezpieczeń wymagany jest specjalny **kabel Y (EAS)** łączący port hosta skanera z systemem EAS.
+`
+      },
+      {
+        title: '3. Wskaźniki dźwiękowe i LED',
+        content: `
+Po włączeniu skaner wydaje rosnący trójton (low/medium/high), a po poprawnym odczycie **bipnie i mignie diodą**. DS4608 ma wskaźniki: **Direct Decode Indicator**, diody **Good Decode** oraz diody **Rear View** (widoczne od tyłu).
+
+| Sygnał dźwiękowy | Znaczenie |
+|------------------|-----------|
+| Low / medium / high (rosnący) | Włączenie zasilania |
+| Krótki bip (ton konfigurowalny) | Kod odczytany poprawnie |
+| **4 długie niskie tony** | **Błąd transmisji** — dane zignorowane (zły interfejs) |
+| Seria tonów programowania | Wejście/wyjście z trybu konfiguracji |
+
+> **Do zapamiętania:** **4 długie niskie tony** = dane nie dotarły do systemu. Zeskanuj kod właściwego interfejsu (USB HID / USB COM / RS-232).
 `
       },
       {
@@ -35395,11 +35388,11 @@ DS4608 **automatycznie wykrywa typ interfejsu** i używa ustawienia domyślnego.
 2. Ustaw celownik na kodzie (odczyt wielokierunkowy).
 3. Po odczycie skaner bipnie i mignie diodą.
 
-Tolerancja położenia: pochylenie ±60°, przechylenie ±60°, obrót 360°. Małe, gęste kody skanuj bliżej; duże — z większej odległości.
+Tolerancja położenia: pochylenie ±60°, przechylenie ±60°, obrót 360°. Pole widzenia **36,1° × 22,6°**. Zasięg odczytu zależy od **wariantu** (SR/HD/DL) i gęstości kodu — wersja HD czyta bardzo drobne kody z bliska, SR obejmuje typowy zakres handlowy.
 
-### Obsługiwane symbologie
+### Obsługiwane symbologie i obraz
 
-Wszystkie popularne kody **1D** (Code 39, Code 128, UPC/EAN, GS1 DataBar) i **2D** (PDF417, Data Matrix, QR Code, Aztec, MaxiCode). Skaner przechwytuje też obrazy i dokumenty (eksport Bitmap/JPEG/TIFF).
+Wszystkie popularne kody **1D** (Code 39, Code 128, UPC/EAN, GS1 DataBar) i **2D** (PDF417, Data Matrix, QR Code, Aztec, MaxiCode). Skaner przechwytuje też obrazy i dokumenty (eksport Bitmap/JPEG/TIFF). **Picklist Mode** ogranicza odczyt do kodu wskazanego celownikiem.
 `
       },
       {
@@ -35414,19 +35407,32 @@ Wszystkie popularne kody **1D** (Code 39, Code 128, UPC/EAN, GS1 DataBar) i **2D
 
 ### Najczęstsze ustawienia
 
-- **Enter (CR/LF) po skanie** — kursor przechodzi do nowej linii.
-- **Tab po skanie** — przejście do kolejnej kolumny.
+- **Enter (CR/LF) po skanie** lub **Tab po skanie** — sufiks przenoszący kursor.
 - **Prefiks / sufiks** — stały tekst przed/po danych.
-- **Głośność i ton beepera** — Low / Medium / High.
+- **Beeper Volume / Tone**, **Suppress Power Up Beeps**.
+- **Picklist Mode** — odczyt tylko wskazanego kodu.
 `
       },
       {
         title: '6. Konserwacja i czyszczenie',
         content: `
-- Czyść **70% alkoholem izopropylowym (IPA)** lub łagodnym mydłem z wodą (zalecane chusteczki Zebra).
-- Nie używaj acetonu, amoniaku (na szybę), środków ściernych ani rozpuszczalników ropopochodnych.
+Regularne czyszczenie **okna skanującego** jest konieczne — brudne okno pogarsza odczyt.
 
-**Procedura:** odłącz skaner → zwilż miękką ściereczkę 70% IPA → przetrzyj **okno skanujące** i obudowę → pozostaw do wyschnięcia. Brudne okno to najczęstsza przyczyna gorszego odczytu.
+### Środek dopuszczony (standard)
+
+- **Alkohol izopropylowy (IPA) 70%** (w tym gotowe nasączone chusteczki).
+
+### Wersja healthcare (DS4608-HC) — dezynfekcja
+
+Konfiguracja healthcare jest **odporna na dezynfekcję**. Dopuszczone środki to m.in.: **roztwór wybielacza 10% (podchloryn sodu 0,55%) z wodą 90%**, **nadtlenek wodoru 3% z wodą 97%**, **łagodne mydło do naczyń**, a także gotowe chusteczki marek (np. Clorox Healthcare, Dispatch, 409 Glass & Surface Cleaner). Stosuj wyłącznie środki z listy dopuszczonej dla wersji healthcare i postępuj zgodnie z instrukcją producenta środka.
+
+### Środki szkodliwe (NIE stosować)
+
+Aceton, roztwory amoniaku, roztwory alkaliczne, węglowodory aromatyczne i chlorowane, benzen, kwas karbolowy, związki amin/amoniaku, etanoloamina, etery, ketony, TB-lysoform, toluen, trichloroetylen.
+
+### Procedura
+
+Zwilż miękką ściereczkę dopuszczonym środkiem → przetrzyj okno i obudowę (nie nanoś płynu bezpośrednio) → pozostaw do wyschnięcia.
 `
       },
       {
@@ -35434,12 +35440,13 @@ Wszystkie popularne kody **1D** (Code 39, Code 128, UPC/EAN, GS1 DataBar) i **2D
         content: `
 | Problem | Możliwa przyczyna | Rozwiązanie |
 |---------|-------------------|-------------|
-| Brak reakcji | Luźny kabel / brak zasilania | Dociśnij kabel USB; spróbuj innego portu |
-| Nie czyta kodu | Brudne okno skanujące | Wyczyść okno 70% IPA |
-| Nie czyta kodu | Symbologia wyłączona | Włącz odpowiedni typ kodu |
-| Nie czyta kodu | Zła odległość | Przybliż/oddal skaner |
-| Bipa, ale brak danych w systemie | Zły interfejs hosta | Zeskanuj kod właściwego interfejsu (USB HID / USB COM / RS-232) |
-| Dane podwojone / błędne | Prefiks/sufiks lub układ klawiatury | Sprawdź sufiks i układ klawiatury |
+| Brak celownika po naciśnięciu spustu | Brak zasilania / luźny kabel | Dociśnij kabel USB; spróbuj innego portu |
+| Brak celownika | Skaner wyłączony | W trybach IBM/OPOS włącz skaner przez interfejs hosta |
+| Celuje, ale nie dekoduje | Zły typ kodu w konfiguracji | Włącz odpowiednią symbologię |
+| Celuje, ale nie dekoduje | Kod poza polem / zasięgiem | Umieść kod w polu widzenia; dostosuj odległość |
+| Celuje, ale nie dekoduje | Kod uszkodzony | Przetestuj na czytelnym kodzie |
+| Dekoduje, ale nie wysyła danych | Zły interfejs hosta | Zeskanuj kod właściwego hosta (USB HID / USB COM / RS-232) |
+| **4 długie niskie tony** | Błąd transmisji | Sprawdź konfigurację interfejsu i kabel |
 
 Jeśli problem nie ustępuje, zaktualizuj firmware (zebra.com/support lub 123Scan) i zresetuj skaner.
 `
@@ -35451,20 +35458,34 @@ Jeśli problem nie ustępuje, zaktualizuj firmware (zebra.com/support lub 123Sca
 |----------|--------|
 | **Wymiary** | 16,5 × 6,7 × 9,8 cm (wys. × szer. × głęb.) |
 | **Waga** | 161,9 g (5,7 oz) |
+| **Kolory** | Nova White, Twilight Black |
+| **Interfejsy** | USB, RS-232, IBM 46XX (RS-485) |
 | **Zasilanie** | 4,5–5,5 VDC; 340 mA typ. |
 | **Sensor** | 1280 × 800 px |
 | **Pole widzenia** | 36,1° H × 22,6° V |
-| **Źródło światła** | celownik 617 nm (amber), doświetlenie 2× 660 nm (red) |
+| **Celownik / doświetlenie** | 617 nm (amber) / 660 nm (red) |
 | **Min. kontrast druku** | 15% |
 | **Tolerancja** | skew ±60°, pitch ±60°, roll 360° |
-| **Temperatura pracy** | od 0°C do +50°C |
-| **Interfejsy** | USB, RS-232, IBM 46XX (RS-485) |
-| **EAS** | zgodny z Checkpoint |
+| **Temperatura pracy** | 0°C do +50°C |
+| **Upadki** | wielokrotne z 1,8 m na beton |
+| **Tumble** | 2000 przewrotów z 0,5 m |
+| **Klasa szczelności** | IP52 |
+| **ESD** | ±15 kV (powietrze), ±8 kV (kontakt/pośrednio) |
+| **EAS** | wersje z anteną Checkpoint |
+| **Healthcare** | wersja odporna na dezynfekcję |
 `
       },
       {
         title: 'FAQ – Najczęściej zadawane pytania',
         content: `
+### Czym czyścić DS4608?
+
+Standardowo **70% alkoholem izopropylowym (IPA)**. Wersja **healthcare** dodatkowo znosi środki dezynfekujące (wybielacz 10%, nadtlenek wodoru 3%, gotowe chusteczki medyczne) — stosuj tylko środki z listy dla wersji healthcare.
+
+### Skaner wydaje 4 długie niskie tony — co to znaczy?
+
+To **błąd transmisji** — dane nie trafiły do komputera (zły interfejs). Zeskanuj kod właściwego hosta (USB HID / USB COM / RS-232).
+
 ### Jak ustawić Enter po skanie?
 
 Zeskanuj kod dodający **sufiks Enter (CR/LF)** z Product Reference Guide lub wygeneruj go w 123Scan.
@@ -35473,13 +35494,13 @@ Zeskanuj kod dodający **sufiks Enter (CR/LF)** z Product Reference Guide lub wy
 
 Najczęściej ma zły interfejs — zeskanuj kod **USB HID (klawiaturowy)** i sprawdź, czy kursor jest w aktywnym polu.
 
+### Czym jest wersja z EAS?
+
+To model z wbudowaną anteną **Checkpoint** do dezaktywacji zabezpieczeń towaru — wymaga specjalnego kabla Y (EAS).
+
 ### Jak przywrócić ustawienia fabryczne?
 
 Zeskanuj kod **„Set Defaults"** z Product Reference Guide.
-
-### Czym czyścić okno skanujące?
-
-Wyłącznie **70% IPA** lub łagodnym mydłem z wodą. Bez acetonu, amoniaku i środków ściernych.
 `
       }
     ]
