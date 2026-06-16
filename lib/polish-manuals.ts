@@ -37075,8 +37075,8 @@ Zeskanuj kod **„Set Defaults"** z Product Reference Guide.
   'ds9908': {
     model: 'DS9908',
     title: 'Zebra DS9908 – Instrukcja obsługi po polsku',
-    lastUpdated: '2026-06-15',
-    sourceDocument: 'DS9908 Product Reference Guide (MN-003185-09EN) + Quick Start Guide',
+    lastUpdated: '2026-06-16',
+    sourceDocument: 'DS9908 Hybrid Imaging Scanner Product Reference Guide (MN-003185) + DS9908R RFID Supplement',
     keywords: [
       'zebra ds9908 instrukcja',
       'ds9908 instrukcja po polsku',
@@ -37085,55 +37085,43 @@ Zeskanuj kod **„Set Defaults"** z Product Reference Guide.
       'ds9908r rfid',
       'ds9908 konfiguracja',
       'ds9908 ustawienia fabryczne',
+      'ds9908 cztery długie tony',
       'ds9908 reset',
       'skaner hybrydowy zebra ds9908'
     ],
     sections: [
       {
-        title: '1. Podstawowe informacje',
+        title: '1. Wprowadzenie i warianty',
         content: `
 ### O skanerze Zebra DS9908
 
-Zebra **DS9908** to **przewodowy** skaner **hybrydowy** do handlu (POS), który łączy w jednym urządzeniu pracę **na blacie (hands-free)** i **w dłoni (ręczną)** — bez potrzeby osobnej podstawki. Czyta kody **1D i 2D**, także z ekranów telefonów, oraz przechwytuje obrazy. Wariant **DS9908R** ma dodatkowo wbudowany **czytnik RFID UHF**.
+Zebra **DS9908** to **przewodowy** skaner **hybrydowy** do handlu (POS), który łączy w jednym urządzeniu pracę **na blacie (hands-free)** i **w dłoni (ręczną)** — dzięki **wbudowanej podstawce** nie wymaga osobnego stojaka. Czyta kody **1D i 2D**, także z ekranów telefonów, oraz przechwytuje obrazy. Wariant **DS9908R** ma dodatkowo wbudowany **czytnik RFID UHF**.
 
-### Kluczowe cechy
+### Warianty i kolory
 
 | Cecha | Wartość |
 |-------|---------|
-| **Typ** | Przewodowy imager hybrydowy 1D/2D |
+| **Typ** | Przewodowy imager hybrydowy 1D/2D (wbudowana podstawka) |
+| **Optyka** | SR / DL / HD / HL |
+| **Kolory** | Midnight Black (SR/DL), Alpine White (HD/HL) |
 | **Wariant RFID** | DS9908R — wbudowany czytnik RFID UHF |
-| **Interfejsy** | USB, RS-232, Keyboard Wedge, IBM 46XX |
-| **Kody z ekranów** | tak |
-| **Zasilanie** | z portu USB hosta |
+| **Interfejsy** | USB, RS-232, Keyboard Wedge, IBM 46XX (RS-485) |
+| **Waga** | ok. 329 g |
 
-> **Uwaga:** DS9908 jest skanerem przewodowym.
+> **Uwaga:** DS9908 jest skanerem przewodowym — zasilanie pobiera z hosta.
 `
       },
       {
-        title: '2. Praca hybrydowa i wskaźniki',
+        title: '2. Praca hybrydowa i podłączenie',
         content: `
 ### Tryb prezentacji i ręczny w jednym
 
-DS9908 ma ruchomą głowicę, dzięki czemu działa **bez osobnego stojaka**:
+DS9908 ma **wbudowaną podstawkę**, więc działa bez osobnego stojaka:
 
-- Postaw na blacie — skaner skanuje **automatycznie** zbliżone kody.
-- Weź do ręki i naciśnij spust — zeskanujesz duży lub trudno dostępny kod.
+- Stoi na blacie (lub na ścianie) → tryb **prezentacji**: skaner skanuje **automatycznie** zbliżone kody.
+- Weź do ręki i naciśnij spust → zeskanujesz duży lub trudno dostępny kod.
 
-### Sygnalizacja
-
-| Sygnał | Znaczenie |
-|--------|-----------|
-| Sygnał startowy | Skaner gotowy |
-| 1 bip + mignięcie diody | Kod odczytany poprawnie |
-| Brak reakcji | Kod nieodczytany |
-
-Głośność i ton sygnału regulują kody konfiguracyjne.
-`
-      },
-      {
-        title: '3. Podłączenie do komputera',
-        content: `
-DS9908 **automatycznie wykrywa interfejs**.
+### Interfejsy (auto-detekcja)
 
 | Interfejs | Uwagi |
 |-----------|-------|
@@ -37146,14 +37134,30 @@ Po podłączeniu USB zeskanuj kod w Notatniku, aby sprawdzić działanie.
 `
       },
       {
+        title: '3. Wskaźniki dźwiękowe i LED',
+        content: `
+| Sygnał dźwiękowy | Dioda LED | Znaczenie |
+|------------------|-----------|-----------|
+| Low / medium / high (rosnący) | Zielona | Włączenie zasilania |
+| Średni bip | Zielona | Kod odczytany poprawnie |
+| Brak | Zielona (stała) | Tryb prezentacji włączony |
+| Brak | Brak (zielona zgaszona) | Tryb prezentacji wyłączony |
+| **Cztery długie niskie tony** | Czerwona | **Błąd transmisji** — dane zignorowane (zły interfejs) |
+| Pięć długich niskich tonów | Czerwona | Błąd konwersji lub formatu danych |
+| Brak | Czerwona (miganie przy naciśnięciu spustu) | Skaner wyłączony komendą hosta |
+
+> **Do zapamiętania:** **4 długie niskie tony + czerwona dioda** = dane nie dotarły do systemu. Zeskanuj kod właściwego interfejsu (USB HID / USB COM / RS-232).
+`
+      },
+      {
         title: '4. Skanowanie kodów (i RFID w DS9908R)',
         content: `
-- **Na blacie:** zbliż kod — odczyt automatyczny.
-- **W dłoni:** naciśnij spust.
+- **Na blacie:** zbliż kod do okna — odczyt automatyczny.
+- **W dłoni:** podnieś skaner i naciśnij spust.
 
-Czyta kody **1D** (EAN/UPC, Code 39/128, GS1 DataBar) i **2D** (PDF417, Data Matrix, QR Code) — także z ekranów. **Picklist Mode** ogranicza odczyt do wskazanego kodu.
+Czyta kody **1D** (EAN/UPC, Code 39/128, GS1 DataBar) i **2D** (PDF417, Data Matrix, QR Code) — także z ekranów telefonów. **Picklist Mode** ogranicza odczyt do kodu wskazanego celownikiem. Przechwytuje też obrazy.
 
-W modelu **DS9908R** to samo urządzenie odczytuje również **tagi RFID UHF** — przydatne tam, gdzie część towaru ma kody kreskowe, a część metki RFID.
+W modelu **DS9908R** to samo urządzenie odczytuje również **tagi RFID UHF** — przydatne tam, gdzie część towaru ma kody kreskowe, a część metki RFID. Konfiguracja RFID odbywa się zgodnie z dołączonym suplementem RFID.
 `
       },
       {
@@ -37164,19 +37168,30 @@ W modelu **DS9908R** to samo urządzenie odczytuje również **tagi RFID UHF** �
 1. Zeskanuj kod **„Set Defaults"** z Product Reference Guide.
 2. Alternatywnie użyj programu **Zebra 123Scan**.
 
+> **Uwaga:** reset kasuje wszystkie ustawienia użytkownika.
+
 ### Najczęstsze ustawienia
 
-- **Enter (CR/LF) po skanie**, **Tab po skanie**, **prefiks/sufiks**.
-- **Picklist Mode**, **głośność i ton beepera**.
+- **Enter (CR/LF) po skanie** lub **Tab po skanie**, **prefiks/sufiks**.
+- **Beeper Volume / Tone**, **Suppress Power Up Beeps**, **Picklist Mode**.
 `
       },
       {
         title: '6. Konserwacja i czyszczenie',
         content: `
-- Czyść **70% IPA** lub łagodnym mydłem z wodą.
-- Nie używaj acetonu, amoniaku (na szybę), środków ściernych ani rozpuszczalników.
+Regularne czyszczenie **okna skanującego** jest konieczne — brudne okno pogarsza odczyt.
 
-**Procedura:** odłącz skaner → przetrzyj **okno skanujące** i obudowę 70% IPA → pozostaw do wyschnięcia.
+### Środek dopuszczony
+
+- **Alkohol izopropylowy (IPA) 70%** (w tym gotowe nasączone chusteczki).
+
+### Środki szkodliwe (NIE stosować)
+
+Aceton, roztwory amoniaku, roztwory alkaliczne, węglowodory aromatyczne i chlorowane, benzen, kwas karbolowy, związki amin/amoniaku, etanoloamina, etery, ketony, TB-lysoform, toluen, trichloroetylen.
+
+### Procedura
+
+Zwilż miękką ściereczkę 70% IPA (lub użyj chusteczek) → przetrzyj wszystkie powierzchnie (nie nanoś płynu bezpośrednio, nie dopuść do zalania okna i spustu) → osusz okno → pozostaw do wyschnięcia.
 `
       },
       {
@@ -37188,7 +37203,8 @@ W modelu **DS9908R** to samo urządzenie odczytuje również **tagi RFID UHF** �
 | Nie skanuje sam na blacie | Wyłączony tryb prezentacji | Sprawdź ustawienie trybu prezentacji |
 | Nie czyta kodu | Brudne okno / zła odległość | Wyczyść okno; dostosuj odległość |
 | Odczytuje sąsiedni kod | Kody blisko siebie | Włącz Picklist Mode |
-| Bipa, ale brak danych | Zły interfejs hosta | Zeskanuj kod właściwego interfejsu |
+| Dekoduje, ale nie wysyła danych | Zły interfejs hosta | Zeskanuj kod właściwego interfejsu |
+| **4 długie niskie tony** | Błąd transmisji | Sprawdź konfigurację interfejsu i kabel |
 
 Jeśli problem nie ustępuje, zaktualizuj firmware (zebra.com/support lub 123Scan) i zresetuj skaner.
 `
@@ -37198,11 +37214,15 @@ Jeśli problem nie ustępuje, zaktualizuj firmware (zebra.com/support lub 123Sca
         content: `
 | Parametr | DS9908 |
 |----------|--------|
-| **Typ** | Przewodowy imager hybrydowy 1D/2D |
+| **Typ** | Przewodowy imager hybrydowy 1D/2D (wbudowana podstawka) |
 | **Wariant** | DS9908R — z czytnikiem RFID UHF |
+| **Optyka** | SR / DL / HD / HL |
+| **Kolory** | Midnight Black (SR/DL), Alpine White (HD/HL) |
+| **Interfejsy** | USB, RS-232, Keyboard Wedge, IBM 46XX (RS-485) |
+| **Waga** | ok. 329 g |
 | **Kody z ekranów** | tak |
-| **Interfejsy** | USB, RS-232, Keyboard Wedge, IBM 46XX |
 | **Zasilanie** | z portu USB hosta |
+| **Środek czyszczący** | 70% IPA |
 `
       },
       {
@@ -37210,15 +37230,19 @@ Jeśli problem nie ustępuje, zaktualizuj firmware (zebra.com/support lub 123Sca
         content: `
 ### Czy DS9908 wymaga osobnej podstawki?
 
-Nie — to skaner **hybrydowy**: działa na blacie (hands-free) i w dłoni bez dodatkowego stojaka.
+Nie — ma **wbudowaną podstawkę** i działa na blacie (hands-free) oraz w dłoni bez dodatkowego stojaka.
 
 ### Czym jest DS9908R?
 
 To wariant DS9908 z wbudowanym **czytnikiem RFID UHF** — czyta zarówno kody kreskowe, jak i tagi RFID.
 
-### Jak ustawić Enter po skanie?
+### Skaner wydaje 4 długie niskie tony — co to znaczy?
 
-Zeskanuj kod **sufiksu Enter (CR/LF)** z Product Reference Guide.
+To **błąd transmisji** — dane nie trafiły do komputera (zły interfejs). Zeskanuj kod właściwego hosta.
+
+### Czym czyścić DS9908?
+
+**70% alkoholem izopropylowym (IPA)** lub gotowymi chusteczkami. Nie używaj acetonu, amoniaku, benzenu ani toluenu.
 
 ### Jak przywrócić ustawienia fabryczne?
 
