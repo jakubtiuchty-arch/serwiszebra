@@ -34,7 +34,7 @@ interface OrderFormData {
   postalCode: string
   city: string
   // Płatność
-  paymentMethod: 'stripe' | 'bankTransfer'
+  paymentMethod: 'p24' | 'bankTransfer'
   // Dodatkowe
   notes: string
   acceptTerms: boolean
@@ -60,14 +60,20 @@ export default function ZamowieniePage() {
     apartmentNumber: '',
     postalCode: '',
     city: '',
-    paymentMethod: 'stripe',
+    paymentMethod: 'p24',
     notes: '',
     acceptTerms: false
   })
 
   const subtotalNetto = items.reduce((sum, item) => sum + item.price * item.quantity, 0)
   const subtotalBrutto = items.reduce((sum, item) => sum + item.price_brutto * item.quantity, 0)
-  const vatAmount = subtotalBrutto - subtotalNetto
+
+  // Koszt dostawy — stała kwota doliczana automatycznie do każdego zamówienia
+  const SHIPPING_BRUTTO = 25
+  const shippingNetto = SHIPPING_BRUTTO / 1.23
+  const totalNetto = subtotalNetto + shippingNetto
+  const totalBrutto = subtotalBrutto + SHIPPING_BRUTTO
+  const vatAmount = totalBrutto - totalNetto
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value, type } = e.target
@@ -97,8 +103,10 @@ export default function ZamowieniePage() {
             priceNetto: item.price,
             priceBrutto: item.price_brutto
           })),
-          totalNetto: subtotalNetto,
-          totalBrutto: subtotalBrutto
+          totalNetto: totalNetto,
+          totalBrutto: totalBrutto,
+          shippingNetto: shippingNetto,
+          shippingBrutto: SHIPPING_BRUTTO
         })
       })
 
@@ -109,9 +117,9 @@ export default function ZamowieniePage() {
 
       const orderData = await response.json()
 
-      // 2. Jeśli płatność online - przekieruj do Stripe
-      if (formData.paymentMethod === 'stripe') {
-        const checkoutResponse = await fetch('/api/shop/create-checkout', {
+      // 2. Płatność online — rejestracja w Przelewy24 i redirect
+      if (formData.paymentMethod === 'p24') {
+        const checkoutResponse = await fetch('/api/shop/p24/create', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ orderId: orderData.orderId })
@@ -124,11 +132,9 @@ export default function ZamowieniePage() {
         }
 
         const { url } = await checkoutResponse.json()
-        
-        // Wyczyść koszyk przed przekierowaniem
-        clearCart()
-        
-        // Przekieruj do Stripe Checkout
+
+        // Koszyk czyścimy DOPIERO po udanej płatności (na stronie sukcesu) —
+        // dzięki temu porzucony koszyk zostaje zachowany, a nie miga „koszyk pusty".
         window.location.href = url
         return
       }
@@ -331,8 +337,12 @@ export default function ZamowieniePage() {
                   {/* Sumy */}
                   <div className="border-t border-gray-100 pt-3 sm:pt-4 space-y-1.5 sm:space-y-2">
                     <div className="flex justify-between text-xs sm:text-sm">
-                      <span className="text-gray-500">Suma netto</span>
+                      <span className="text-gray-500">Suma netto (produkty)</span>
                       <span className="font-medium">{subtotalNetto.toFixed(2).replace('.', ',')} zł</span>
+                    </div>
+                    <div className="flex justify-between text-xs sm:text-sm">
+                      <span className="text-gray-500 flex items-center gap-1.5"><Truck className="w-3.5 h-3.5" /> Dostawa kurierem</span>
+                      <span className="font-medium">{SHIPPING_BRUTTO.toFixed(2).replace('.', ',')} zł</span>
                     </div>
                     <div className="flex justify-between text-xs sm:text-sm">
                       <span className="text-gray-500">VAT 23%</span>
@@ -340,14 +350,8 @@ export default function ZamowieniePage() {
                     </div>
                     <div className="flex justify-between text-base sm:text-lg font-bold pt-2 border-t border-gray-100">
                       <span>Razem brutto</span>
-                      <span>{subtotalBrutto.toFixed(2).replace('.', ',')} zł</span>
+                      <span>{totalBrutto.toFixed(2).replace('.', ',')} zł</span>
                     </div>
-                  </div>
-
-                  {/* Dostawa */}
-                  <div className="mt-3 sm:mt-4 p-2.5 sm:p-3 bg-green-50 rounded-lg flex items-center gap-2 text-xs sm:text-sm text-green-700">
-                    <Truck className="w-4 h-4 flex-shrink-0" />
-                    <span>Darmowa dostawa kurierem</span>
                   </div>
 
                   {/* Tylko na desktop: checkbox i submit */}
@@ -391,7 +395,7 @@ export default function ZamowieniePage() {
                           <Loader2 className="w-5 h-5 animate-spin" />
                           Przetwarzanie...
                         </>
-                      ) : formData.paymentMethod === 'stripe' ? (
+                      ) : formData.paymentMethod === 'p24' ? (
                         <>
                           <CreditCard className="w-5 h-5" />
                           Przejdź do płatności
@@ -402,7 +406,7 @@ export default function ZamowieniePage() {
                     </button>
 
                     <p className="mt-3 text-xs text-gray-500 text-center">
-                      {formData.paymentMethod === 'stripe' 
+                      {formData.paymentMethod === 'p24' 
                         ? 'Zostaniesz przekierowany do bezpiecznej strony płatności'
                         : 'Po złożeniu zamówienia pobierzesz fakturę pro forma (PDF)'
                       }
@@ -605,7 +609,7 @@ export default function ZamowieniePage() {
                     {/* Płatność online */}
                     <label 
                       className={`flex items-start gap-3 p-4 rounded-xl border-2 cursor-pointer transition-all ${
-                        formData.paymentMethod === 'stripe' 
+                        formData.paymentMethod === 'p24' 
                           ? 'border-green-500 bg-green-50' 
                           : 'border-gray-200 hover:border-gray-300'
                       }`}
@@ -613,8 +617,8 @@ export default function ZamowieniePage() {
                       <input
                         type="radio"
                         name="paymentMethod"
-                        value="stripe"
-                        checked={formData.paymentMethod === 'stripe'}
+                        value="p24"
+                        checked={formData.paymentMethod === 'p24'}
                         onChange={handleChange}
                         className="mt-1 w-4 h-4 text-green-600"
                       />
@@ -627,7 +631,7 @@ export default function ZamowieniePage() {
                           </span>
                         </div>
                         <p className="text-sm text-gray-500 mt-1">
-                          Karta płatnicza, BLIK, przelewy24. Szybka i bezpieczna płatność przez Stripe.
+                          Karta płatnicza, BLIK, przelewy24. Szybka i bezpieczna płatność przez Przelewy24 (P24).
                         </p>
                       </div>
                     </label>
@@ -715,22 +719,22 @@ export default function ZamowieniePage() {
                         <Loader2 className="w-5 h-5 animate-spin" />
                         Przetwarzanie...
                       </>
-                    ) : formData.paymentMethod === 'stripe' ? (
+                    ) : formData.paymentMethod === 'p24' ? (
                       <>
                         <CreditCard className="w-5 h-5" />
-                        Zapłać {subtotalBrutto.toFixed(2).replace('.', ',')} zł
+                        Zapłać {totalBrutto.toFixed(2).replace('.', ',')} zł
                       </>
                     ) : (
                       <>
                         Złóż zamówienie
-                        <span className="font-bold">({subtotalBrutto.toFixed(2).replace('.', ',')} zł)</span>
+                        <span className="font-bold">({totalBrutto.toFixed(2).replace('.', ',')} zł)</span>
                       </>
                     )}
                   </button>
 
                   <p className="mt-3 text-xs text-gray-500 text-center">
-                    {formData.paymentMethod === 'stripe' 
-                      ? 'Bezpieczna płatność przez Stripe'
+                    {formData.paymentMethod === 'p24' 
+                      ? 'Bezpieczna płatność przez Przelewy24'
                       : 'Pobierzesz fakturę pro forma (PDF)'
                     }
                   </p>

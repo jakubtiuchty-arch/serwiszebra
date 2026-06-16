@@ -19,6 +19,31 @@ export const ADMIN_EMAILS = [
   'wojcik@takma.com.pl',
   'zuchnicki@takma.com.pl',
   'serwis@takma.com.pl',
+  'handlowy@takma.com.pl',
+]
+
+/**
+ * Administratorzy handlowi - oprócz uprawnień zwykłego admina mają też
+ * dostęp do Sklepu (Produkty, Zamówienia). Nie mają dostępu do AI/RAG ani analityki.
+ */
+export const SHOP_ADMIN_EMAILS = [
+  'handlowy@takma.com.pl',
+]
+
+/**
+ * Czy email ma dostęp do sekcji Sklepu (Produkty, Zamówienia).
+ * Superadmin ma zawsze, dodatkowo administratorzy handlowi.
+ */
+export function hasShopAccess(email: string | undefined | null): boolean {
+  if (!email) return false
+  const e = email.toLowerCase()
+  return SUPERADMIN_EMAILS.includes(e) || SHOP_ADMIN_EMAILS.includes(e)
+}
+
+/** Ścieżki Sklepu dostępne dla administratorów handlowych */
+export const SHOP_ADMIN_ALLOWED_SECTIONS = [
+  '/admin/zamowienia',
+  '/admin/produkty',
 ]
 
 /**

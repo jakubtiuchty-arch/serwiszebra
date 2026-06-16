@@ -21,7 +21,9 @@ export async function POST(request: Request) {
       notes,
       items,
       totalNetto,
-      totalBrutto
+      totalBrutto,
+      shippingNetto,
+      shippingBrutto
     } = body
 
     // Walidacja
@@ -81,7 +83,7 @@ export async function POST(request: Request) {
         total_brutto: totalBrutto,
         // Płatność
         payment_method: paymentMethod || 'bankTransfer',
-        payment_status: paymentMethod === 'stripe' ? 'pending' : null,
+        payment_status: paymentMethod === 'p24' ? 'pending' : null,
         // Dodatkowe
         notes: notes || null,
         items: items
@@ -106,6 +108,8 @@ export async function POST(request: Request) {
         items: items,
         totalNetto: totalNetto,
         totalBrutto: totalBrutto,
+        shippingNetto: shippingNetto ?? 0,
+        shippingBrutto: shippingBrutto ?? 0,
         shippingAddress: {
           street,
           houseNumber,
@@ -127,7 +131,14 @@ export async function POST(request: Request) {
         contactName: contactName,
         email: email,
         phone: phone,
+        street: street,
+        houseNumber: houseNumber,
+        apartmentNumber: apartmentNumber,
+        postalCode: postalCode,
+        city: city,
+        paymentMethod: paymentMethod || 'bankTransfer',
         items: items,
+        shippingBrutto: shippingBrutto ?? 0,
         totalBrutto: totalBrutto
       })
     } catch (emailError) {

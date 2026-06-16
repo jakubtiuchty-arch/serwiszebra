@@ -2466,6 +2466,8 @@ interface OrderConfirmationEmailData {
   items: ShopOrderItem[]
   totalNetto: number
   totalBrutto: number
+  shippingNetto?: number
+  shippingBrutto?: number
   shippingAddress: {
     street: string
     houseNumber: string
@@ -2475,19 +2477,21 @@ interface OrderConfirmationEmailData {
   }
 }
 
+const money = (n: number) => (n || 0).toFixed(2).replace('.', ',') + ' zł'
+
 export async function sendOrderConfirmationEmail(data: OrderConfirmationEmailData) {
+  const shippingBrutto = data.shippingBrutto ?? 0
+  const productsNetto = data.totalNetto - (data.shippingNetto ?? 0)
+  const vat = data.totalBrutto - data.totalNetto
+
   const itemsHtml = data.items.map(item => `
     <tr>
-      <td style="padding: 12px 0; border-bottom: 1px solid #e5e7eb;">
-        <strong style="color: #111827;">${item.name}</strong><br>
-        <span style="color: #6b7280; font-size: 12px;">PN: ${item.sku}</span>
+      <td style="padding:12px 0;border-bottom:1px solid #f3f4f6;">
+        <strong style="color:#111827;font-size:14px;">${item.name}</strong><br>
+        <span style="color:#6b7280;font-size:12px;">PN: ${item.sku}</span>
       </td>
-      <td style="padding: 12px 0; border-bottom: 1px solid #e5e7eb; text-align: center; color: #6b7280;">
-        ${item.quantity} szt.
-      </td>
-      <td style="padding: 12px 0; border-bottom: 1px solid #e5e7eb; text-align: right; color: #111827; font-weight: 500;">
-        ${(item.priceNetto * item.quantity).toFixed(2).replace('.', ',')} zł
-      </td>
+      <td style="padding:12px 0;border-bottom:1px solid #f3f4f6;text-align:center;color:#6b7280;font-size:14px;">${item.quantity} szt.</td>
+      <td style="padding:12px 0;border-bottom:1px solid #f3f4f6;text-align:right;color:#111827;font-weight:600;font-size:14px;white-space:nowrap;">${money(item.priceBrutto * item.quantity)}</td>
     </tr>
   `).join('')
 
@@ -2507,88 +2511,72 @@ export async function sendOrderConfirmationEmail(data: OrderConfirmationEmailDat
     <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      ${getEmailStyles()}
     </head>
-    <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #f3f4f6;">
-      <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff;">
-        
-        <!-- Header -->
-        <div style="background: linear-gradient(135deg, #16a34a 0%, #15803d 100%); padding: 32px; text-align: center;">
-          <h1 style="margin: 0; color: #ffffff; font-size: 24px;">Zamówienie przyjęte</h1>
-          <p style="margin: 8px 0 0 0; color: rgba(255,255,255,0.9); font-size: 14px;">
-            Nr ${data.orderNumber}
-          </p>
-        </div>
+    <body style="margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;background-color:#f3f4f6;">
+      <div style="max-width:600px;margin:0 auto;background-color:#ffffff;border-radius:8px;overflow:hidden;">
+${getEmailHeader()}
+        <div class="email-content" style="padding:32px 24px;">
+          <div style="text-align:center;margin-bottom:28px;">
+            <div style="display:inline-block;background-color:#10b981;width:56px;height:56px;border-radius:50%;margin-bottom:14px;">
+              <div style="color:#ffffff;font-size:30px;line-height:56px;">&#10003;</div>
+            </div>
+            <h2 style="margin:0 0 6px;font-size:22px;color:#111827;">Dziękujemy za zamówienie!</h2>
+            <p style="margin:0;color:#6b7280;font-size:14px;">Nr <strong>${data.orderNumber}</strong> &middot; ${new Date().toLocaleDateString('pl-PL')}</p>
+          </div>
 
-        <!-- Content -->
-        <div style="padding: 32px;">
-          <p style="margin: 0 0 24px 0; color: #374151; font-size: 16px;">
-            Cześć <strong>${data.contactName}</strong>,
-          </p>
-          <p style="margin: 0 0 24px 0; color: #4b5563; font-size: 14px; line-height: 1.6;">
-            Dziękujemy za złożenie zamówienia w sklepie TAKMA. Poniżej znajdziesz szczegóły zamówienia.
-          </p>
+          <p style="margin:0 0 20px;color:#374151;font-size:15px;">Cześć <strong>${data.contactName}</strong>, przyjęliśmy Twoje zamówienie. Poniżej szczegóły:</p>
 
-          <!-- Products -->
-          <table style="width: 100%; border-collapse: collapse; margin-bottom: 24px;">
+          <table class="email-box" style="width:100%;border-collapse:collapse;margin-bottom:8px;">
             <thead>
-              <tr style="border-bottom: 2px solid #e5e7eb;">
-                <th style="padding: 12px 0; text-align: left; color: #6b7280; font-size: 12px; text-transform: uppercase;">Produkt</th>
-                <th style="padding: 12px 0; text-align: center; color: #6b7280; font-size: 12px; text-transform: uppercase;">Ilość</th>
-                <th style="padding: 12px 0; text-align: right; color: #6b7280; font-size: 12px; text-transform: uppercase;">Cena netto</th>
+              <tr style="border-bottom:2px solid #e5e7eb;">
+                <th style="padding:10px 0;text-align:left;color:#6b7280;font-size:11px;text-transform:uppercase;letter-spacing:.5px;">Produkt</th>
+                <th style="padding:10px 0;text-align:center;color:#6b7280;font-size:11px;text-transform:uppercase;">Ilość</th>
+                <th style="padding:10px 0;text-align:right;color:#6b7280;font-size:11px;text-transform:uppercase;">Wartość brutto</th>
               </tr>
             </thead>
-            <tbody>
-              ${itemsHtml}
-            </tbody>
-            <tfoot>
-              <tr>
-                <td colspan="2" style="padding: 12px 0; text-align: right; color: #6b7280;">Suma netto:</td>
-                <td style="padding: 12px 0; text-align: right; color: #111827; font-weight: 500;">${data.totalNetto.toFixed(2).replace('.', ',')} zł</td>
-              </tr>
-              <tr>
-                <td colspan="2" style="padding: 8px 0; text-align: right; color: #6b7280;">VAT 23%:</td>
-                <td style="padding: 8px 0; text-align: right; color: #6b7280;">${(data.totalBrutto - data.totalNetto).toFixed(2).replace('.', ',')} zł</td>
-              </tr>
-              <tr>
-                <td colspan="2" style="padding: 12px 0; text-align: right; font-size: 18px; font-weight: bold; color: #111827;">Razem brutto:</td>
-                <td style="padding: 12px 0; text-align: right; font-size: 18px; font-weight: bold; color: #16a34a;">${data.totalBrutto.toFixed(2).replace('.', ',')} zł</td>
-              </tr>
-            </tfoot>
+            <tbody>${itemsHtml}</tbody>
           </table>
 
-          <!-- Shipping address -->
-          <div style="background-color: #f9fafb; border-radius: 8px; padding: 20px; margin-bottom: 24px;">
-            <h3 style="margin: 0 0 12px 0; color: #374151; font-size: 14px; text-transform: uppercase;">Adres dostawy</h3>
-            <p style="margin: 0; color: #4b5563; font-size: 14px; line-height: 1.6;">
-              ${addressParts.join('<br>')}
-            </p>
+          <table style="width:100%;border-collapse:collapse;margin-bottom:24px;">
+            <tr>
+              <td style="padding:6px 0;text-align:right;color:#6b7280;font-size:14px;">Wartość produktów (netto):</td>
+              <td style="padding:6px 0;text-align:right;color:#111827;font-size:14px;width:130px;">${money(productsNetto)}</td>
+            </tr>
+            <tr>
+              <td style="padding:6px 0;text-align:right;color:#6b7280;font-size:14px;">Dostawa kurierem:</td>
+              <td style="padding:6px 0;text-align:right;color:#111827;font-size:14px;">${money(shippingBrutto)}</td>
+            </tr>
+            <tr>
+              <td style="padding:6px 0;text-align:right;color:#6b7280;font-size:14px;">VAT 23%:</td>
+              <td style="padding:6px 0;text-align:right;color:#6b7280;font-size:14px;">${money(vat)}</td>
+            </tr>
+            <tr>
+              <td style="padding:12px 0 0;text-align:right;font-size:18px;font-weight:700;color:#111827;border-top:1px solid #e5e7eb;">Razem brutto:</td>
+              <td style="padding:12px 0 0;text-align:right;font-size:18px;font-weight:700;color:#16a34a;border-top:1px solid #e5e7eb;">${money(data.totalBrutto)}</td>
+            </tr>
+          </table>
+
+          <div class="email-box" style="background-color:#f9fafb;border-radius:8px;padding:18px;margin-bottom:20px;">
+            <h3 style="margin:0 0 8px;color:#374151;font-size:12px;text-transform:uppercase;letter-spacing:.5px;">Adres dostawy</h3>
+            <p style="margin:0;color:#4b5563;font-size:14px;line-height:1.6;">${addressParts.join('<br>')}</p>
           </div>
 
-          <!-- Next steps -->
-          <div style="background-color: #fef3c7; border-radius: 8px; padding: 20px; margin-bottom: 24px; border: 1px solid #fcd34d;">
-            <h3 style="margin: 0 0 12px 0; color: #92400e; font-size: 14px;">Co dalej?</h3>
-            <p style="margin: 0; color: #78350f; font-size: 14px; line-height: 1.6;">
-              Skontaktujemy się z Tobą telefonicznie lub mailowo w celu potwierdzenia zamówienia i ustalenia płatności. 
-              Zamówienie zostanie wysłane po zaksięgowaniu wpłaty.
-            </p>
+          <div class="email-box" style="background-color:#eff6ff;border-radius:8px;padding:18px;margin-bottom:24px;">
+            <h3 style="margin:0 0 8px;color:#1e40af;font-size:14px;">Co dalej?</h3>
+            <p style="margin:0;color:#1e3a8a;font-size:14px;line-height:1.6;">Skontaktujemy się z Tobą w celu potwierdzenia zamówienia i ustalenia płatności. Zamówienie wysyłamy po zaksięgowaniu wpłaty (dostawa kurierem 1–2 dni robocze).</p>
           </div>
 
-          <!-- Contact -->
-          <div style="text-align: center; color: #6b7280; font-size: 14px;">
-            <p style="margin: 0 0 8px 0;">Masz pytania? Skontaktuj się z nami:</p>
-            <p style="margin: 0;">
-              <strong>Tel:</strong> +48 601 619 898<br>
-              <strong>Email:</strong> serwis@takma.com.pl
-            </p>
+          <div style="text-align:center;color:#6b7280;font-size:14px;">
+            <p style="margin:0 0 6px;">Masz pytania? Skontaktuj się z nami:</p>
+            <p style="margin:0;"><strong>Tel:</strong> +48 607 819 688 &nbsp;|&nbsp; <strong>Email:</strong> serwis@takma.com.pl</p>
           </div>
         </div>
 
-        <!-- Footer -->
-        <div style="background-color: #f9fafb; padding: 24px; text-align: center; color: #6b7280; font-size: 12px;">
-          <p style="margin: 0 0 4px 0;">TAKMA Tadeusz Tiuchty | ul. Poświęcka 1a, 51-128 Wrocław</p>
-          <p style="margin: 0;">NIP: 9151004377 | www.serwis-zebry.pl</p>
+        <div style="background-color:#f9fafb;padding:20px 24px;text-align:center;color:#9ca3af;font-size:12px;">
+          <p style="margin:0 0 4px;">TAKMA Tadeusz Tiuchty &middot; ul. Poświęcka 1a, 51-128 Wrocław</p>
+          <p style="margin:0;">NIP: 9151004377 &nbsp;|&nbsp; www.serwis-zebry.pl</p>
         </div>
-
       </div>
     </body>
     </html>
@@ -2602,14 +2590,35 @@ interface NewOrderNotificationEmailData {
   contactName: string
   email: string
   phone: string
+  street?: string
+  houseNumber?: string
+  apartmentNumber?: string
+  postalCode?: string
+  city?: string
+  paymentMethod?: string
   items: ShopOrderItem[]
+  shippingBrutto?: number
   totalBrutto: number
 }
 
 export async function sendNewOrderNotificationEmail(data: NewOrderNotificationEmailData) {
-  const itemsList = data.items.map(item => 
-    `• ${item.name} (${item.sku}) x${item.quantity} - ${(item.priceNetto * item.quantity).toFixed(2)} zł netto`
-  ).join('\n')
+  const shippingBrutto = data.shippingBrutto ?? 0
+  const paymentLabel = data.paymentMethod === 'p24' ? 'Online (Przelewy24)' : data.paymentMethod === 'proforma' ? 'Pro forma' : 'Przelew bankowy'
+  const addr = [
+    data.street ? `ul. ${data.street} ${data.houseNumber || ''}${data.apartmentNumber ? '/' + data.apartmentNumber : ''}` : '',
+    (data.postalCode || data.city) ? `${data.postalCode || ''} ${data.city || ''}`.trim() : ''
+  ].filter(Boolean).join(', ')
+
+  const itemsHtml = data.items.map(item => `
+    <tr>
+      <td style="padding:10px 0;border-bottom:1px solid #f3f4f6;">
+        <strong style="color:#111827;font-size:14px;">${item.name}</strong><br>
+        <span style="color:#6b7280;font-size:12px;">PN: ${item.sku}</span>
+      </td>
+      <td style="padding:10px 0;border-bottom:1px solid #f3f4f6;text-align:center;color:#6b7280;font-size:14px;">${item.quantity} szt.</td>
+      <td style="padding:10px 0;border-bottom:1px solid #f3f4f6;text-align:right;color:#111827;font-weight:600;font-size:14px;white-space:nowrap;">${money(item.priceNetto * item.quantity)}</td>
+    </tr>
+  `).join('')
 
   await resend.emails.send({
     from: 'Sklep TAKMA <sklep@serwis-zebry.pl>',
@@ -2618,30 +2627,57 @@ export async function sendNewOrderNotificationEmail(data: NewOrderNotificationEm
     html: `
     <!DOCTYPE html>
     <html>
-    <head><meta charset="utf-8"></head>
-    <body style="font-family: sans-serif; padding: 20px;">
-      <h2 style="color: #16a34a;">Nowe zamówienie ze sklepu</h2>
-      
-      <p><strong>Nr zamówienia:</strong> ${data.orderNumber}</p>
-      
-      <h3>Dane klienta:</h3>
-      <p>
-        <strong>Firma:</strong> ${data.companyName}<br>
-        <strong>Osoba:</strong> ${data.contactName}<br>
-        <strong>Email:</strong> ${data.email}<br>
-        <strong>Tel:</strong> ${data.phone}
-      </p>
-      
-      <h3>Produkty:</h3>
-      <pre style="background: #f5f5f5; padding: 15px; border-radius: 8px;">${itemsList}</pre>
-      
-      <h3>Suma: ${data.totalBrutto.toFixed(2)} zł brutto</h3>
-      
-      <p style="margin-top: 30px;">
-        <a href="https://www.serwis-zebry.pl/admin/zamowienia" style="background: #16a34a; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px;">
-          Zobacz w panelu admina
-        </a>
-      </p>
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      ${getEmailStyles()}
+    </head>
+    <body style="margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;background-color:#f3f4f6;">
+      <div style="max-width:600px;margin:0 auto;background-color:#ffffff;border-radius:8px;overflow:hidden;">
+${getEmailHeader()}
+        <div class="email-content" style="padding:28px 24px;">
+          <div style="background-color:#111827;border-radius:8px;padding:18px 20px;margin-bottom:22px;">
+            <p style="margin:0;color:#9ca3af;font-size:12px;text-transform:uppercase;letter-spacing:.5px;">Nowe zamówienie ze sklepu</p>
+            <p style="margin:4px 0 0;color:#ffffff;font-size:20px;font-weight:700;">${data.orderNumber}</p>
+          </div>
+
+          <div class="email-box" style="background-color:#f9fafb;border-radius:8px;padding:18px;margin-bottom:18px;">
+            <h3 style="margin:0 0 12px;color:#374151;font-size:13px;text-transform:uppercase;letter-spacing:.5px;">Dane klienta</h3>
+            <table style="width:100%;border-collapse:collapse;font-size:14px;color:#374151;">
+              <tr><td style="padding:4px 0;width:90px;color:#6b7280;">Firma:</td><td style="padding:4px 0;font-weight:600;">${data.companyName}</td></tr>
+              <tr><td style="padding:4px 0;color:#6b7280;">Osoba:</td><td style="padding:4px 0;">${data.contactName}</td></tr>
+              <tr><td style="padding:4px 0;color:#6b7280;">E-mail:</td><td style="padding:4px 0;"><a href="mailto:${data.email}" style="color:#2563eb;text-decoration:none;">${data.email}</a></td></tr>
+              <tr><td style="padding:4px 0;color:#6b7280;">Telefon:</td><td style="padding:4px 0;"><a href="tel:${data.phone}" style="color:#2563eb;text-decoration:none;">${data.phone}</a></td></tr>
+              ${addr ? `<tr><td style="padding:4px 0;color:#6b7280;vertical-align:top;">Adres:</td><td style="padding:4px 0;">${addr}</td></tr>` : ''}
+              <tr><td style="padding:4px 0;color:#6b7280;">Płatność:</td><td style="padding:4px 0;">${paymentLabel}</td></tr>
+            </table>
+          </div>
+
+          <h3 style="margin:0 0 4px;color:#374151;font-size:13px;text-transform:uppercase;letter-spacing:.5px;">Produkty</h3>
+          <table style="width:100%;border-collapse:collapse;margin-bottom:6px;">
+            <thead>
+              <tr style="border-bottom:2px solid #e5e7eb;">
+                <th style="padding:8px 0;text-align:left;color:#6b7280;font-size:11px;text-transform:uppercase;">Produkt</th>
+                <th style="padding:8px 0;text-align:center;color:#6b7280;font-size:11px;text-transform:uppercase;">Ilość</th>
+                <th style="padding:8px 0;text-align:right;color:#6b7280;font-size:11px;text-transform:uppercase;">Netto</th>
+              </tr>
+            </thead>
+            <tbody>${itemsHtml}</tbody>
+          </table>
+          <table style="width:100%;border-collapse:collapse;margin-bottom:22px;">
+            <tr><td style="padding:6px 0;text-align:right;color:#6b7280;font-size:14px;">Dostawa kurierem:</td><td style="padding:6px 0;text-align:right;color:#111827;font-size:14px;width:130px;">${money(shippingBrutto)}</td></tr>
+            <tr><td style="padding:10px 0 0;text-align:right;font-size:17px;font-weight:700;color:#111827;border-top:1px solid #e5e7eb;">Razem brutto:</td><td style="padding:10px 0 0;text-align:right;font-size:17px;font-weight:700;color:#16a34a;border-top:1px solid #e5e7eb;">${money(data.totalBrutto)}</td></tr>
+          </table>
+
+          <div style="text-align:center;">
+            <a href="https://www.serwis-zebry.pl/admin/zamowienia" style="display:inline-block;background-color:#111827;color:#ffffff;padding:13px 30px;text-decoration:none;border-radius:8px;font-weight:600;font-size:15px;">Zobacz w panelu admina</a>
+          </div>
+        </div>
+
+        <div style="background-color:#f9fafb;padding:18px 24px;text-align:center;color:#9ca3af;font-size:12px;">
+          <p style="margin:0;">Powiadomienie systemowe &middot; Sklep TAKMA / serwis-zebry.pl</p>
+        </div>
+      </div>
     </body>
     </html>
     `

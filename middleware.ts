@@ -22,19 +22,37 @@ const REGULAR_ADMIN_ALLOWED_PATHS = [
   '/admin/katalog',     // Katalog części zamiennych
 ]
 
+// Administratorzy handlowi - dodatkowo dostęp do Sklepu
+const SHOP_ADMIN_EMAILS = [
+  'handlowy@takma.com.pl',
+]
+const SHOP_ADMIN_ALLOWED_PATHS = [
+  '/admin/zamowienia',
+  '/admin/produkty',
+]
+
 function isSuperAdminEmail(email: string | undefined): boolean {
   if (!email) return false
   return SUPERADMIN_EMAILS.includes(email.toLowerCase())
 }
 
+function isShopAdminEmail(email: string | undefined): boolean {
+  if (!email) return false
+  return SHOP_ADMIN_EMAILS.includes(email.toLowerCase())
+}
+
 function isPathAllowedForRegularAdmin(pathname: string): boolean {
   // Exact match dla /admin
   if (pathname === '/admin') return true
-  
+
   // Prefix match dla pozostałych
-  return REGULAR_ADMIN_ALLOWED_PATHS.some(path => 
+  return REGULAR_ADMIN_ALLOWED_PATHS.some(path =>
     path !== '/admin' && pathname.startsWith(path)
   )
+}
+
+function isShopPath(pathname: string): boolean {
+  return SHOP_ADMIN_ALLOWED_PATHS.some(path => pathname.startsWith(path))
 }
 
 // Uproszczona mapa kategorii dla middleware (Edge runtime)
@@ -160,8 +178,10 @@ export async function middleware(request: NextRequest) {
     const isSuperAdmin = isSuperAdminEmail(userEmail)
 
     // Jeśli NIE jest superadminem, sprawdź czy ma dostęp do tej ścieżki
-    if (!isSuperAdmin && !isPathAllowedForRegularAdmin(pathname)) {
-      // Zwykły admin próbuje wejść na stronę tylko dla superadminów
+    // (zwykłe sekcje admina LUB sekcje Sklepu dla administratorów handlowych)
+    const shopAdminCanAccess = isShopAdminEmail(userEmail) && isShopPath(pathname)
+    if (!isSuperAdmin && !isPathAllowedForRegularAdmin(pathname) && !shopAdminCanAccess) {
+      // Zwykły admin próbuje wejść na stronę bez uprawnień
       url.pathname = '/admin'
       url.searchParams.set('error', 'superadmin_access_required')
       return NextResponse.redirect(url)

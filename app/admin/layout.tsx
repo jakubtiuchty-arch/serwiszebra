@@ -23,7 +23,7 @@ import {
 } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
-import { isSuperAdmin } from '@/lib/admin-config'
+import { isSuperAdmin, hasShopAccess } from '@/lib/admin-config'
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
@@ -32,14 +32,16 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [userEmail, setUserEmail] = useState<string | null>(null)
   const [isSuperAdminUser, setIsSuperAdminUser] = useState(false)
+  const [hasShopAccessUser, setHasShopAccessUser] = useState(false)
 
-  // Pobierz email użytkownika i sprawdź czy jest superadminem
+  // Pobierz email użytkownika i sprawdź uprawnienia
   useEffect(() => {
     const checkUser = async () => {
       const { data: { session } } = await supabase.auth.getSession()
       if (session?.user?.email) {
         setUserEmail(session.user.email)
         setIsSuperAdminUser(isSuperAdmin(session.user.email))
+        setHasShopAccessUser(hasShopAccess(session.user.email))
       }
     }
     checkUser()
@@ -67,21 +69,21 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       current: pathname === '/admin/katalog',
     },
 
-    // Sklep - tylko dla superadminów
-    { type: 'header', name: 'Sklep', superAdminOnly: true },
+    // Sklep - dla superadminów i administratorów handlowych
+    { type: 'header', name: 'Sklep', shopAccess: true },
     {
       name: 'Produkty',
       href: '/admin/produkty',
       icon: Package,
       current: pathname.startsWith('/admin/produkty'),
-      superAdminOnly: true,
+      shopAccess: true,
     },
     {
       name: 'Zamówienia',
       href: '/admin/zamowienia',
       icon: ShoppingCart,
       current: pathname.startsWith('/admin/zamowienia'),
-      superAdminOnly: true,
+      shopAccess: true,
     },
     
     // Ustawienia
@@ -144,9 +146,13 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     },
   ]
 
-  // Filtruj nawigację - ukryj elementy superAdminOnly dla zwykłych adminów
-  const navigation = fullNavigation.filter(item => {
+  // Filtruj nawigację - ukryj elementy superAdminOnly dla zwykłych adminów,
+  // a sekcje Sklepu (shopAccess) pokaż superadminom i administratorom handlowym
+  const navigation = fullNavigation.filter((item: any) => {
     if (item.superAdminOnly && !isSuperAdminUser) {
+      return false
+    }
+    if (item.shopAccess && !isSuperAdminUser && !hasShopAccessUser) {
       return false
     }
     return true
