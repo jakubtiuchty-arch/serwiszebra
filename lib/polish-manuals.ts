@@ -36620,79 +36620,127 @@ LI4278 jest **bezprzewodowy** (Bluetooth + bateria + baza STB4278), LI2208 **prz
   'ds9308': {
     model: 'DS9308',
     title: 'Zebra DS9308 – Instrukcja obsługi po polsku',
-    lastUpdated: '2026-06-15',
-    sourceDocument: 'DS9308 Product Reference Guide + Quick Start Guide',
+    lastUpdated: '2026-06-16',
+    sourceDocument: 'DS9308 Imaging Scanner Product Reference Guide (MN-003532-08EN)',
     keywords: [
       'zebra ds9308 instrukcja',
       'ds9308 instrukcja po polsku',
       'ds9308 instrukcja obsługi',
       'ds9308 tryb prezentacji',
+      'ds9308 hands-free',
       'ds9308 konfiguracja',
       'ds9308 ustawienia fabryczne',
       'ds9308 reset',
+      'ds9308 zasięg dekodowania',
+      'ds9308 dioda led',
+      'ds9308 cztery długie tony',
+      'ds9308 dane techniczne',
+      'ds9308 checkpoint eas',
       'skaner prezentacyjny zebra ds9308'
     ],
     sections: [
       {
-        title: '1. Podstawowe informacje',
+        title: '1. Wprowadzenie i warianty',
         content: `
 ### O skanerze Zebra DS9308
 
-Zebra **DS9308** to **przewodowy** skaner obrazowy do pracy **na blacie (hands-free / prezentacyjny)**, czytający kody **1D i 2D**, także z ekranów telefonów. Stoi na ladzie i **skanuje automatycznie** zbliżone kody — idealny do kas i punktów obsługi. W razie potrzeby można go podnieść i użyć jak skanera ręcznego (do dużych lub ciężkich towarów).
+Zebra **DS9308** to **przewodowy skaner obrazowy o polu prezentacji (Presentation Area Imager)**, czytający kody **1D i 2D**, w tym wyświetlane na ekranach telefonów. Stoi na ladzie i **skanuje automatycznie** kody zbliżone do okna (tryb hands-free), a w razie potrzeby można go podnieść i użyć **w dłoni** (np. do dużych lub ciężkich towarów). To skaner do kas i punktów obsługi w handlu.
 
-### Kluczowe cechy
+### Dostępne konfiguracje
 
 | Cecha | Wartość |
 |-------|---------|
-| **Typ** | Przewodowy imager 1D/2D (prezentacyjny + ręczny) |
-| **Interfejsy** | USB, RS-232, Keyboard Wedge, IBM 46XX |
-| **Kody z ekranów** | tak (telefony, kupony, bilety) |
-| **Zasilanie** | z portu USB hosta |
+| **Typ optyki** | Presentation Area Imager, Standard Range, przewodowy |
+| **Kolory** | Midnight Black, Alpine White |
+| **EAS** | wersja zgodna z systemem dezaktywacji **Checkpoint** |
+| **DL Parsing** | wersja do odczytu i parsowania praw jazdy |
+| **Digimarc** | wersja z obsługą znaków wodnych Digimarc |
+| **Toshiba TEC / TAA** | warianty pod wybrane systemy i wymogi zakupowe |
 
-> **Uwaga:** DS9308 jest skanerem przewodowym — zasilanie pobiera z hosta.
+### Kluczowe cechy
+
+- Czyta kody **1D i 2D**, także z ekranów.
+- Tryb **prezentacji (hands-free)** i **ręczny** w jednym urządzeniu.
+- Przechwytywanie obrazów (eksport Bitmap/JPEG/TIFF).
+- Szerokie pole widzenia **52° × 33°** i szybkość do **305 cm/s** (kod 13 mil).
+- Klasa szczelności **IP52**, odporność na upadki **1,5 m** na beton.
+
+> **Uwaga:** DS9308 jest skanerem przewodowym — w zależności od konfiguracji zasilanie pobiera z portu hosta lub z zewnętrznego zasilacza.
 `
       },
       {
-        title: '2. Praca i wskaźniki',
+        title: '2. Podłączenie i pierwsze uruchomienie',
         content: `
-### Tryb prezentacji i ręczny
+### Obsługiwane interfejsy
 
-- **Prezentacyjny (hands-free)** — skaner stoi na blacie i skanuje automatycznie zbliżone kody.
-- **Ręczny** — podnieś skaner i naciśnij spust, aby zeskanować duży lub trudno dostępny kod.
-
-### Sygnalizacja
-
-| Sygnał | Znaczenie |
-|--------|-----------|
-| Sygnał startowy | Skaner gotowy |
-| 1 bip + mignięcie diody | Kod odczytany poprawnie |
-| Brak reakcji | Kod nieodczytany |
-
-Głośność i ton sygnału regulują kody konfiguracyjne.
-`
-      },
-      {
-        title: '3. Podłączenie do komputera',
-        content: `
-DS9308 **automatycznie wykrywa interfejs**.
+DS9308 **automatycznie wykrywa typ hosta** i używa ustawienia domyślnego. Aby zmienić interfejs, zeskanuj odpowiedni kod z Product Reference Guide.
 
 | Interfejs | Uwagi |
 |-----------|-------|
-| **USB Keyboard HID** | Domyślny — skaner działa jak klawiatura |
-| **USB SNAPI / CDC** | Z obrazem / wirtualny port COM |
-| **RS-232** | Standard i warianty handlowe |
-| **Keyboard Wedge / IBM 46XX** | Wpięcie klawiaturowe / terminale IBM |
+| **USB** | Domyślnie HID klawiaturowy (ponad 90 układów klawiatury); USB 2.0 Full Speed |
+| **RS-232** | Standard i warianty handlowe (m.in. Nixdorf) |
+| **Keyboard Wedge** | Wpięcie między klawiaturę a komputer |
+| **TGCS (IBM) 46XX przez RS-485** | Terminale handlowe IBM |
 
-Po podłączeniu USB zeskanuj kod w Notatniku, aby sprawdzić działanie.
+### Kroki
+
+1. Podłącz kabel interfejsu do skanera i do komputera (oraz zasilacz, jeśli konfiguracja tego wymaga).
+2. Skaner wyda rosnący trójton (low/medium/high) i zaświeci zielono — jest gotowy.
+3. W trybie USB HID otwórz np. Notatnik i zeskanuj kod, aby sprawdzić działanie.
+
+### Wdrażanie wielu skanerów (staging)
+
+Można skonfigurować **do 10 skanerów jednocześnie** (zalecany zasilany hub USB, min. 0,5 A na port), skanując kolejno kody konfiguracyjne lub plik konfiguracji.
 `
       },
       {
-        title: '4. Skanowanie kodów',
+        title: '3. Wskaźniki dźwiękowe i LED',
         content: `
-- **Na blacie:** zbliż kod do okna skanera — odczyt nastąpi automatycznie.
-- **W dłoni:** skieruj skaner na kod i naciśnij spust.
+DS9308 ma jedną **dwukolorową diodę** (zielona/czerwona) oraz sygnały dźwiękowe. Pełna tabela:
 
-Czyta kody **1D** (EAN/UPC, Code 39/128, GS1 DataBar) i **2D** (PDF417, Data Matrix, QR Code) — także z ekranów telefonów. Funkcja **Picklist Mode** pozwala odczytać tylko wskazany kod, gdy kody są blisko siebie.
+| Sygnał dźwiękowy | Dioda LED | Znaczenie |
+|------------------|-----------|-----------|
+| Low / medium / high (rosnący) | Zielona | Włączenie zasilania (power up) |
+| Średni bip | hands-free: stała zielona, gaśnie po odczycie · ręczny: zgaszona, zielona przy odczycie | Kod odczytany poprawnie |
+| Brak | Zielona (stała) | Tryb prezentacji włączony |
+| Brak | Brak (zielona zgaszona) | Tryb prezentacji wyłączony |
+| **Cztery długie niskie tony** | Czerwona | **Błąd transmisji** — dane zignorowane (zwykle zła konfiguracja interfejsu) |
+| Pięć długich niskich tonów | Czerwona | Błąd konwersji lub formatowania danych |
+| Brak | Czerwona (miganie przy naciśnięciu spustu) | Skaner wyłączony komendą hosta |
+| Brak | Zielona (miganie) | Tryb przechwytywania obrazu (snapshot) |
+
+> **Najważniejsze do zapamiętania:** **4 długie niskie tony + czerwona dioda** = dane nie dotarły do systemu z powodu złego interfejsu. Zeskanuj kod właściwego hosta (USB HID / USB COM / RS-232).
+
+Głośność i ton sygnału ustawia się kodami konfiguracyjnymi (Beeper Volume / Tone).
+`
+      },
+      {
+        title: '4. Skanowanie kodów i zasięgi',
+        content: `
+### Tryb prezentacji i ręczny
+
+- **Na blacie (hands-free):** zbliż kod do okna — skaner odczyta go automatycznie.
+- **W dłoni:** podnieś skaner, skieruj na kod i naciśnij spust.
+
+### Zasięgi dekodowania (Decode Ranges)
+
+Odległość odczytu zależy od gęstości kodu:
+
+| Gęstość | Typ kodu | Zasięg (od – do) |
+|---------|----------|------------------|
+| 3 mil | Code 39 | 0 – 6,35 cm |
+| 4 mil | Code 39 | 0 – 10,2 cm |
+| 5 mil | Code 39 | 0 – 12,7 cm |
+| 7,5 mil | Code 39 | 0 – 16,5 cm |
+| 20 mil | Code 39 | 0 – 27,9 cm |
+| 3 mil | Code 128 | 0 – 5,1 cm |
+| 5 mil | Code 128 | 0 – 10,2 cm |
+
+Pole widzenia: **52° H × 33° V**. Tolerancja położenia: pochylenie ±60°, przechylenie ±60°, obrót 360°.
+
+### Obsługiwane symbologie i obraz
+
+Czyta kody **1D** (EAN/UPC, Code 39, Code 128, GS1 DataBar i inne) oraz **2D** (PDF417, Data Matrix, QR Code, Aztec, MaxiCode). Przechwytuje też obrazy i dokumenty (eksport Bitmap/JPEG/TIFF, rozdzielczość 109 PPI dla dokumentu A-formatu). Funkcja **Picklist Mode** pozwala odczytać tylko kod wskazany celownikiem, gdy kody są blisko siebie.
 `
       },
       {
@@ -36701,22 +36749,45 @@ Czyta kody **1D** (EAN/UPC, Code 39/128, GS1 DataBar) i **2D** (PDF417, Data Mat
 ### Przywrócenie ustawień fabrycznych
 
 1. Zeskanuj kod **„Set Defaults"** z Product Reference Guide.
-2. Alternatywnie użyj programu **Zebra 123Scan**.
+2. Alternatywnie użyj darmowego programu **Zebra 123Scan** (USB → „Restore Defaults").
+
+> **Uwaga:** reset kasuje wszystkie ustawienia użytkownika (interfejs, symbologie, prefiksy/sufiksy, beeper).
 
 ### Najczęstsze ustawienia
 
-- **Enter (CR/LF) po skanie**, **Tab po skanie**, **prefiks/sufiks**.
+- **Wybór interfejsu** — USB HID, USB COM (CDC), RS-232, Keyboard Wedge, IBM 46XX.
+- **Enter (CR/LF) po skanie** lub **Tab po skanie** — sufiks przenoszący kursor.
+- **Prefiks / sufiks** — stały tekst przed/po danych.
+- **Beeper Volume / Tone** — głośność i ton sygnału; **Suppress Power Up Beeps** — wyciszenie sygnału startowego.
 - **Picklist Mode** — odczyt tylko wskazanego kodu.
-- **Głośność i ton beepera** — Low / Medium / High.
+- **Low Power Mode** — tryb oszczędzania energii z konfigurowalnym czasem bezczynności.
+
+Wszystkie ustawienia wykonuje się przez zeskanowanie kodów z Product Reference Guide lub wygenerowanie ich w programie 123Scan.
 `
       },
       {
         title: '6. Konserwacja i czyszczenie',
         content: `
-- Czyść **70% IPA** lub łagodnym mydłem z wodą.
-- Nie używaj acetonu, amoniaku (na szybę), środków ściernych ani rozpuszczalników.
+Regularne czyszczenie **okna wyjścia wiązki** jest konieczne — brudne okno pogarsza skuteczność odczytu.
 
-**Procedura:** odłącz skaner → przetrzyj **okno skanujące** i obudowę 70% IPA → pozostaw do wyschnięcia.
+### Środki dopuszczone
+
+- **Alkohol izopropylowy 70%** (w tym gotowe nasączone chusteczki).
+
+### Środki szkodliwe (NIE stosować)
+
+Następujące substancje uszkadzają tworzywo skanera: **aceton, roztwory amoniaku, roztwory alkaliczne (wodne i alkoholowe), węglowodory aromatyczne i chlorowane, benzen, kwas karbolowy (fenol), związki amin/amoniaku, etanoloamina, etery, ketony, TB-lysoform, toluen, trichloroetylen**.
+
+### Procedura czyszczenia
+
+1. Zwilż miękką ściereczkę dopuszczonym środkiem (70% IPA) lub użyj gotowych chusteczek.
+2. Delikatnie przetrzyj wszystkie powierzchnie (przód, tył, boki, górę, dół). **Nigdy nie nanoś płynu bezpośrednio** na skaner i nie dopuść do zalania okna, spustu ani złącza.
+3. Wyczyść spust i szczelinę między spustem a obudową (patyczkiem z bawełną).
+4. Nie rozpylaj wody ani płynów bezpośrednio na okno wyjścia.
+5. Okno przetrzyj chusteczką do optyki (jak do okularów).
+6. Po czyszczeniu **natychmiast osusz** okno miękką ściereczką, aby uniknąć smug.
+7. Pozostaw skaner do wyschnięcia przed użyciem.
+8. **Złącza:** przetrzyj patyczkiem z bawełną nasączonym IPA (kilka ruchów tam i z powrotem), nie zostawiając resztek bawełny; na koniec przetrzyj suchym patyczkiem.
 `
       },
       {
@@ -36724,11 +36795,17 @@ Czyta kody **1D** (EAN/UPC, Code 39/128, GS1 DataBar) i **2D** (PDF417, Data Mat
         content: `
 | Problem | Możliwa przyczyna | Rozwiązanie |
 |---------|-------------------|-------------|
-| Brak reakcji | Luźny kabel / brak zasilania | Dociśnij kabel USB; spróbuj innego portu |
-| Nie skanuje sam na blacie | Wyłączony tryb prezentacji | Sprawdź ustawienie trybu prezentacji |
-| Nie czyta kodu | Brudne okno / zła odległość | Wyczyść okno; dostosuj odległość |
-| Odczytuje sąsiedni kod | Kody blisko siebie | Włącz Picklist Mode |
-| Bipa, ale brak danych | Zły interfejs hosta | Zeskanuj kod właściwego interfejsu |
+| Brak doświetlenia po naciśnięciu spustu | Brak zasilania | Podłącz zasilacz, jeśli konfiguracja go wymaga |
+| Brak doświetlenia | Zły kabel interfejsu | Podłącz właściwy kabel hosta |
+| Brak doświetlenia | Luźne kable | Dociśnij kable |
+| Brak doświetlenia | Skaner wyłączony | W trybach IBM/OPOS włącz skaner przez interfejs hosta |
+| Doświetla, ale nie dekoduje | Doświetlenie wyłączone | Włącz doświetlenie (Decoding Illumination) |
+| Doświetla, ale nie dekoduje | Zły typ kodu w konfiguracji | Włącz odpowiednią symbologię |
+| Doświetla, ale nie dekoduje | Kod uszkodzony | Przetestuj na czytelnym kodzie tego samego typu |
+| Doświetla, ale nie dekoduje | Kod poza polem/zasięgiem | Umieść kod w polu widzenia; dostosuj odległość (patrz zasięgi) |
+| Dekoduje, ale nie wysyła danych | Zły typ hosta | Zeskanuj kod właściwego hosta |
+| Dekoduje, ale nie wysyła danych | Luźny kabel | Dociśnij kabel |
+| **4 długie niskie tony** | Błąd transmisji | Sprawdź konfigurację interfejsu i kabel; zeskanuj właściwy host |
 
 Jeśli problem nie ustępuje, zaktualizuj firmware (zebra.com/support lub 123Scan) i zresetuj skaner.
 `
@@ -36738,26 +36815,55 @@ Jeśli problem nie ustępuje, zaktualizuj firmware (zebra.com/support lub 123Sca
         content: `
 | Parametr | DS9308 |
 |----------|--------|
-| **Typ** | Przewodowy imager 1D/2D (prezentacyjny + ręczny) |
-| **Kody z ekranów** | tak |
-| **Interfejsy** | USB, RS-232, Keyboard Wedge, IBM 46XX |
-| **Zasilanie** | z portu USB hosta |
+| **Wymiary** | 14,5 × 8,6 × 8,3 cm (wys. × szer. × głęb.) |
+| **Waga** | 318 g (11,2 oz) |
+| **Kolory** | Midnight Black, Alpine White |
+| **Interfejsy** | USB, RS-232, Keyboard Wedge, IBM 46XX (RS-485) |
+| **Zasilanie** | 4,5–5,5 VDC (nom. 5,0 V) |
+| **Prąd (skanowanie, hands-free)** | 335 mA · ręczny: 350 mA |
+| **Celownik / doświetlenie** | dioda 617 nm (amber) / 660 nm (red) |
+| **Pole widzenia** | 52° H × 33° V |
+| **Sensor** | 1280 × 800 px |
+| **Min. kontrast druku** | 15% |
+| **Tolerancja** | skew ±60°, pitch ±60°, roll 360° |
+| **Szybkość przeciągania** | do 305 cm/s (kod 13 mil) |
+| **Temperatura pracy** | 0°C do +50°C |
+| **Temperatura przechowywania** | -40°C do +70°C |
+| **Wilgotność** | 5–95% bez kondensacji |
+| **Upadki** | wielokrotne z 1,5 m na beton |
+| **Tumble** | 1000 przewrotów z 0,5 m |
+| **Odporność na światło** | 0–107 700 luksów |
+| **Klasa szczelności** | IP52 |
+| **ESD** | ±15 kV (powietrze), ±8 kV (pośrednio) |
+| **EAS** | zgodny z Checkpoint |
 `
       },
       {
         title: 'FAQ – Najczęściej zadawane pytania',
         content: `
+### Skaner wydaje 4 długie niskie tony i miga na czerwono — co to znaczy?
+
+To **błąd transmisji** — dane nie zostały wysłane do komputera, bo skaner ma źle ustawiony interfejs. Zeskanuj kod właściwego hosta (USB HID / USB COM / RS-232) z Product Reference Guide.
+
 ### Skaner nie skanuje sam na blacie?
 
-Sprawdź, czy włączony jest **tryb prezentacji** (hands-free). W razie potrzeby zeskanuj kod aktywujący ten tryb z Product Reference Guide.
+Sprawdź, czy włączony jest **tryb prezentacji (hands-free)**. Gdy jest aktywny, dioda świeci stałym zielonym, a skaner czyta zbliżone kody automatycznie.
 
 ### Czy DS9308 czyta kody z telefonu?
 
-Tak — czyta kody 1D i 2D, w tym wyświetlane na ekranach (kupony, bilety, kody lojalnościowe).
+Tak — odczytuje kody 1D i 2D, w tym wyświetlane na ekranach (kupony, bilety, kody lojalnościowe).
 
-### Jak ustawić Enter po skanie?
+### Jaki jest zasięg odczytu?
 
-Zeskanuj kod **sufiksu Enter (CR/LF)** z Product Reference Guide.
+Zależy od gęstości kodu — np. Code 39 o gęstości 5 mil do ok. 12,7 cm, a 20 mil do ok. 27,9 cm (pełna tabela w sekcji „Skanowanie kodów i zasięgi").
+
+### Jak ustawić Enter po każdym skanie?
+
+Zeskanuj kod dodający **sufiks Enter (CR/LF)** z Product Reference Guide lub wygeneruj go w 123Scan.
+
+### Czym czyścić okno skanera?
+
+Wyłącznie **70% alkoholem izopropylowym (IPA)**. Nie używaj acetonu, amoniaku, benzenu ani toluenu — uszkadzają obudowę.
 
 ### Jak przywrócić ustawienia fabryczne?
 
