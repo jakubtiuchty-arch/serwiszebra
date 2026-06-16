@@ -34456,25 +34456,27 @@ Wszystkie te ustawienia wykonuje się przez zeskanowanie odpowiednich kodów z P
       {
         title: '7. Konserwacja i czyszczenie',
         content: `
-### Dopuszczone środki
+### Środki dopuszczone
 
-- **Alkohol izopropylowy (IPA) 70%** — podstawowy środek.
-- Łagodny roztwór mydła z wodą.
-- Gotowe chusteczki czyszczące do skanerów.
+- **Gotowe nasączone chusteczki**
+- **Alkohol izopropylowy (IPA) 70%**
 
-### Środki zabronione
+### Środki szkodliwe (NIE stosować)
 
-- Aceton, rozpuszczalniki na bazie ropy naftowej, środki ścierne, środki z amoniakiem (do szyby).
-- **Nie zanurzaj** skanera w cieczy mimo klasy IP67 — szczelność dotyczy ochrony przed wodą, nie czyszczenia przez zanurzanie.
+Aceton, roztwory amoniaku, roztwory alkaliczne, węglowodory aromatyczne i chlorowane, benzen, **wybielacz (bleach)**, kwas karbolowy, związki amin/amoniaku, etanoloamina, etery, ketony, TB-lysoform, toluen, trichloroetylen. **Nie zanurzaj** skanera w cieczy mimo klasy IP67 — szczelność chroni przed wodą, nie służy czyszczeniu przez zanurzanie.
+
+> **Uwaga:** w odróżnieniu od skanerów handlowych (np. DS8108) **wybielacz jest dla DS3608 środkiem szkodliwym** — nie używaj go.
+
+### Tolerowane płyny przemysłowe
+
+DS3608 (jako skaner ultra-rugged do hal i warsztatów) przetestowano pod kątem kontaktu z typowymi płynami przemysłowymi i uznano za **tolerujący**: olej silnikowy, **płyn do automatycznej skrzyni biegów (ATF)**, płyn CVT, przemysłowy odtłuszczacz (Engine Brite Heavy Duty), **płyn hamulcowy (DOT4)**. Mimo to zaleca się **codzienne czyszczenie obudowy** środkiem dopuszczonym.
 
 ### Procedura
 
 1. Odłącz skaner od zasilania.
-2. Zwilż miękką, niepylącą ściereczkę środkiem 70% IPA.
-3. Delikatnie przetrzyj **okno skanujące** (przez nie wychodzi wiązka — to najważniejszy element).
-4. Przetrzyj obudowę.
-5. Pozostaw do całkowitego wyschnięcia.
-6. Nie używaj sprężonego powietrza bezpośrednio na okno skanujące.
+2. Zwilż miękką, niepylącą ściereczkę środkiem 70% IPA (lub użyj gotowych chusteczek).
+3. Delikatnie przetrzyj **okno skanujące** (przez nie wychodzi wiązka — to najważniejszy element) i obudowę.
+4. Pozostaw do całkowitego wyschnięcia. Nie używaj sprężonego powietrza bezpośrednio na okno.
 
 Brudne okno skanujące to najczęstsza przyczyna pogorszenia jakości odczytu — czyść je regularnie w zapylonych środowiskach.
 `
@@ -34746,23 +34748,27 @@ Skaner toleruje duże odchylenia: pochylenie ±60°, przechylenie ±60°, obrót
       {
         title: '7. Konserwacja i czyszczenie',
         content: `
-### Dopuszczone środki
+### Środki dopuszczone
 
-- **Alkohol izopropylowy (IPA) 70%** — podstawowy środek.
-- Łagodny roztwór mydła z wodą; gotowe chusteczki do skanerów.
+- **Gotowe nasączone chusteczki**
+- **Alkohol izopropylowy (IPA) 70%**
 
-### Zabronione
+### Środki szkodliwe (NIE stosować)
 
-- Aceton, rozpuszczalniki ropopochodne, środki ścierne, amoniak (na szybę).
-- **Nie zanurzaj** skanera w cieczy mimo IP67.
-- **Nie używaj wybielacza (podchlorynu) na bazie STB3678** — wolno nim czyścić tylko sam skaner.
+Aceton, roztwory amoniaku, roztwory alkaliczne, węglowodory aromatyczne i chlorowane, benzen, **wybielacz (bleach)**, kwas karbolowy, związki amin/amoniaku, etanoloamina, etery, ketony, TB-lysoform, toluen, trichloroetylen. **Nie zanurzaj** skanera ani bazy w cieczy mimo IP67.
+
+> **Uwaga:** w odróżnieniu od skanerów handlowych **wybielacz jest dla DS3678 środkiem szkodliwym** — nie używaj go ani na skanerze, ani na bazie STB3678.
+
+### Tolerowane płyny przemysłowe
+
+DS3678 (skaner ultra-rugged) uznano za **tolerujący** kontakt z typowymi płynami przemysłowymi: olej silnikowy, płyn ATF, płyn CVT, przemysłowy odtłuszczacz (Engine Brite Heavy Duty), płyn hamulcowy DOT4. Mimo to zaleca się codzienne czyszczenie obudowy środkiem dopuszczonym.
 
 ### Procedura
 
 1. Wyłącz/odłącz skaner.
-2. Zwilż miękką ściereczkę środkiem 70% IPA.
+2. Zwilż miękką ściereczkę środkiem 70% IPA (lub użyj gotowych chusteczek).
 3. Przetrzyj **okno skanujące** i obudowę.
-4. Wyczyść **styki ładowania** skanera i bazy (IPA na ściereczce) — skorodowane styki to częsta przyczyna problemów z ładowaniem.
+4. Wyczyść **styki ładowania** skanera i bazy STB3678 — skorodowane styki to częsta przyczyna problemów z ładowaniem.
 5. Pozostaw do wyschnięcia.
 `
       },
