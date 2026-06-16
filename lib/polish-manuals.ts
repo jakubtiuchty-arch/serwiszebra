@@ -35508,7 +35508,7 @@ Zeskanuj kod **„Set Defaults"** z Product Reference Guide.
   'ds4678': {
     model: 'DS4678',
     title: 'Zebra DS4678 – Instrukcja obsługi po polsku',
-    lastUpdated: '2026-06-15',
+    lastUpdated: '2026-06-16',
     sourceDocument: 'DS4678 Series Product Reference Guide + Quick Start Guide',
     keywords: [
       'zebra ds4678 instrukcja',
@@ -35520,27 +35520,28 @@ Zeskanuj kod **„Set Defaults"** z Product Reference Guide.
       'ds4678 cr4600',
       'ds4678 ustawienia fabryczne',
       'ds4678 reset',
+      'ds4678 cztery długie tony',
+      'ds4678 healthcare',
       'skaner bezprzewodowy zebra ds4678'
     ],
     sections: [
       {
-        title: '1. Podstawowe informacje',
+        title: '1. Wprowadzenie i warianty',
         content: `
 ### O skanerze Zebra DS4678
 
-Zebra **DS4678** to ręczny, **bezprzewodowy** skaner obrazowy klasy premium, czytający kody **1D i 2D** oraz przechwytujący obrazy. To bezprzewodowy odpowiednik DS4608 — łączy się przez **Bluetooth** i współpracuje z bazą ładująco-komunikacyjną **CR4600**. Szybki, do handlu, ochrony zdrowia i lekkiego przemysłu. Kolory: Nova White, Twilight Black.
+Zebra **DS4678** to ręczny, **bezprzewodowy** skaner obrazowy klasy premium, czytający kody **1D i 2D** oraz przechwytujący obrazy. To bezprzewodowy odpowiednik DS4608 — łączy się przez **Bluetooth** i współpracuje z bazą ładująco-komunikacyjną **CR4600**. Szybki, do handlu, ochrony zdrowia i lekkiego przemysłu. Dostępne warianty optyki (SR/HD/DL/HL/DPE/XD), wersja z **EAS Checkpoint** oraz **healthcare** (odporna na dezynfekcję). Kolory: Nova White, Twilight Black.
 
 ### Kluczowe cechy
 
 | Cecha | Wartość |
 |-------|---------|
 | **Typ** | Bezprzewodowy imager 1D/2D z przechwytywaniem obrazu |
-| **Łączność** | Bluetooth (Class 2, zasięg do ~10 m) |
+| **Łączność** | Bluetooth Class 2 (zasięg do ~10 m) |
 | **Bateria** | PowerPrecision Li-Ion (wymienna) |
 | **Baza** | CR4600 (ładowanie + komunikacja) |
-| **Sensor** | 1280 × 800 px |
-| **EAS** | Zgodny z systemem Checkpoint |
-| **Temperatura pracy** | od 0°C do +50°C |
+| **Sensor** | 1280 × 800 px, pole widzenia 36,1° × 22,6° |
+| **EAS / Healthcare** | wersje z anteną Checkpoint / odporne na dezynfekcję |
 
 > **Uwaga:** przed pierwszym użyciem naładuj baterię do pełna (na bazie CR4600 lub przez kabel).
 `
@@ -35569,23 +35570,23 @@ Skaner i baza muszą być **sparowane**:
 
 ### Gdy dane nie docierają do hosta
 
-1. Odłącz zasilanie i kabel interfejsu od bazy. 2. Odczekaj 3 s. 3. Podłącz kabel i zasilanie z powrotem. 4. Sparuj ponownie (wsuń skaner do bazy lub zeskanuj kod parowania).
+Odłącz zasilanie i kabel interfejsu od bazy → odczekaj 3 s → podłącz z powrotem → sparuj ponownie (wsuń skaner do bazy lub zeskanuj kod parowania).
 `
       },
       {
-        title: '4. Wskaźniki LED i sygnały dźwiękowe',
+        title: '4. Wskaźniki dźwiękowe i LED',
         content: `
-Po poprawnym odczycie skaner **bipnie**, a dioda mignie.
+Po włączeniu skaner wydaje rosnący trójton, a po poprawnym odczycie **bipnie i mignie diodą**.
 
 | Sygnał | Znaczenie |
 |--------|-----------|
-| Rosnąca seria tonów przy włączeniu | Poprawne uruchomienie |
-| 1 bip + mignięcie diody | Kod odczytany poprawnie |
+| Low / medium / high (rosnący) | Włączenie zasilania |
+| Krótki bip + mignięcie diody | Kod odczytany poprawnie |
+| **4 długie niskie tony** | **Błąd transmisji** — dane zignorowane (zły interfejs hosta na bazie) |
 | Dioda bazy miga na zielono | Trwa ładowanie |
 | Seria tonów parowania | Połączenie z bazą nawiązane / utracone |
-| Niski ton / brak reakcji | Kod nieodczytany |
 
-Głośność i ton sygnału są regulowane kodami konfiguracyjnymi.
+> **Do zapamiętania:** **4 długie niskie tony** = dane nie dotarły do systemu (zły interfejs na bazie).
 `
       },
       {
@@ -35595,7 +35596,7 @@ Głośność i ton sygnału są regulowane kodami konfiguracyjnymi.
 2. Ustaw celownik na kodzie (odczyt wielokierunkowy).
 3. Po odczycie skaner bipnie i mignie diodą.
 
-W **trybie prezentacji** (na bazie) skaner skanuje automatycznie po zbliżeniu kodu. Czyta kody **1D** (Code 39/128, UPC/EAN, GS1 DataBar) i **2D** (PDF417, Data Matrix, QR Code, Aztec, MaxiCode); przechwytuje też obrazy.
+W **trybie prezentacji** (na bazie) skaner skanuje automatycznie po zbliżeniu kodu. Tolerancja: pochylenie ±60°, przechylenie ±60°, obrót 360°. Czyta kody **1D** (Code 39/128, UPC/EAN, GS1 DataBar) i **2D** (PDF417, Data Matrix, QR Code); przechwytuje też obrazy. Zasięg zależy od wariantu (SR/HD/DL) i gęstości kodu. **Picklist Mode** ogranicza odczyt do wskazanego kodu.
 `
       },
       {
@@ -35610,18 +35611,29 @@ W **trybie prezentacji** (na bazie) skaner skanuje automatycznie po zbliżeniu k
 
 ### Najczęstsze ustawienia
 
-- **Enter (CR/LF) po skanie**, **Tab po skanie**, **prefiks/sufiks**.
+- **Enter (CR/LF) po skanie** lub **Tab po skanie**, **prefiks/sufiks**.
 - **Out of Range Batch Mode** — zapis skanów poza zasięgiem bazy.
-- **Głośność i ton beepera** — Low / Medium / High.
+- **Beeper Volume / Tone**, **Picklist Mode**.
 `
       },
       {
         title: '7. Konserwacja i czyszczenie',
         content: `
-- Czyść **70% IPA** lub łagodnym mydłem z wodą (zalecane chusteczki Zebra).
-- Nie używaj acetonu, amoniaku (na szybę), środków ściernych ani rozpuszczalników.
+### Środek dopuszczony (standard)
 
-**Procedura:** wyjmij skaner z bazy → przetrzyj **okno skanujące** i obudowę ściereczką z 70% IPA → wyczyść **styki ładowania** skanera i bazy → pozostaw do wyschnięcia.
+- **Alkohol izopropylowy (IPA) 70%** (w tym gotowe chusteczki).
+
+### Wersja healthcare — dezynfekcja
+
+Konfiguracja healthcare jest **odporna na dezynfekcję**: dopuszczone m.in. **wybielacz 10% (podchloryn sodu 0,55%) z wodą**, **nadtlenek wodoru 3% z wodą**, **łagodne mydło do naczyń** oraz gotowe chusteczki medyczne (np. Clorox Healthcare, Dispatch). Stosuj wyłącznie środki z listy dla wersji healthcare.
+
+### Środki szkodliwe (NIE stosować)
+
+Aceton, amoniak, roztwory alkaliczne, węglowodory aromatyczne i chlorowane, benzen, kwas karbolowy, związki amin/amoniaku, etanoloamina, etery, ketony, TB-lysoform, toluen, trichloroetylen.
+
+### Procedura
+
+Zwilż ściereczkę dopuszczonym środkiem → przetrzyj okno i obudowę → wyczyść **styki ładowania** skanera i bazy → pozostaw do wyschnięcia.
 `
       },
       {
@@ -35630,11 +35642,11 @@ W **trybie prezentacji** (na bazie) skaner skanuje automatycznie po zbliżeniu k
 | Problem | Możliwa przyczyna | Rozwiązanie |
 |---------|-------------------|-------------|
 | Brak komunikacji z bazą | Skaner niesparowany | Wsuń skaner do bazy lub zeskanuj kod parowania |
-| Dane nie docierają do hosta | Utracone połączenie bazy z hostem | Wykonaj procedurę ponownego połączenia (sekcja „Parowanie") |
-| Skaner nie ładuje się | Temperatura powyżej 40°C lub brudne styki | Ładuj w niższej temperaturze; wyczyść styki 70% IPA |
+| Dane nie docierają do hosta | Utracone połączenie bazy z hostem | Procedura ponownego połączenia (sekcja „Parowanie") |
+| **4 długie niskie tony** | Błąd transmisji | Zeskanuj kod właściwego interfejsu na bazie |
+| Skaner nie ładuje się | Temperatura >40°C lub brudne styki | Ładuj w niższej temperaturze; wyczyść styki |
 | Nie czyta kodu | Brudne okno / zła odległość | Wyczyść okno, dostosuj odległość |
-| Bipa, ale brak danych | Zły interfejs hosta na bazie | Zeskanuj kod właściwego interfejsu (USB HID / USB COM / RS-232) |
-| Traci łączność poza halą | Poza zasięgiem Bluetooth | Włącz Out of Range Batch Mode lub pozostań w zasięgu |
+| Traci łączność poza halą | Poza zasięgiem Bluetooth | Włącz Out of Range Batch Mode |
 
 Jeśli problem nie ustępuje, zaktualizuj firmware (zebra.com/support lub 123Scan) i sparuj skaner ponownie.
 `
@@ -35649,30 +35661,36 @@ Jeśli problem nie ustępuje, zaktualizuj firmware (zebra.com/support lub 123Sca
 | **Bateria** | PowerPrecision Li-Ion, wymienna |
 | **Baza** | CR4600 (ładowanie + komunikacja) |
 | **Sensor** | 1280 × 800 px |
-| **Temperatura pracy** | od 0°C do +50°C |
+| **Pole widzenia** | 36,1° H × 22,6° V |
+| **Celownik / doświetlenie** | 617 nm (amber) / 660 nm (red) |
+| **Temperatura pracy** | 0°C do +50°C |
 | **Ładowanie** | poniżej ok. 40°C |
-| **EAS** | zgodny z Checkpoint |
+| **EAS / Healthcare** | wersje z Checkpoint / odporne na dezynfekcję |
 | **Tryby** | ręczny, prezentacji, Out of Range Batch |
 `
       },
       {
         title: 'FAQ – Najczęściej zadawane pytania',
         content: `
+### Czym czyścić DS4678?
+
+Standardowo **70% IPA**. Wersja **healthcare** znosi środki dezynfekujące (wybielacz 10%, nadtlenek wodoru 3%, chusteczki medyczne) — stosuj tylko środki z listy dla wersji healthcare.
+
 ### Jak sparować DS4678 z bazą?
 
 Wsuń skaner do bazy **CR4600** (parowanie przez kontakt jest domyślne) lub zeskanuj **kod parowania** danej bazy.
 
-### Skaner nie ładuje się — dlaczego?
+### Skaner wydaje 4 długie niskie tony — co to znaczy?
 
-Najczęściej z powodu **zbyt wysokiej temperatury** (>40°C) lub brudnych styków ładowania. Wyczyść styki 70% IPA.
+To **błąd transmisji** — zeskanuj kod właściwego interfejsu hosta na bazie.
 
 ### Po resecie nie łączy się z bazą?
 
-Reset **kasuje parowanie** — sparuj skaner ponownie (wsuń do bazy lub zeskanuj kod parowania).
+Reset **kasuje parowanie** — sparuj skaner ponownie.
 
 ### Czym różni się DS4678 od DS4608?
 
-DS4678 jest **bezprzewodowy** (bateria + Bluetooth + baza CR4600), DS4608 **przewodowy**. Optyka i funkcje (1D/2D, obrazy, EAS) są takie same.
+DS4678 jest **bezprzewodowy** (bateria + Bluetooth + baza CR4600), DS4608 **przewodowy**. Optyka i funkcje (1D/2D, obrazy, EAS, healthcare) są takie same.
 `
       }
     ]
