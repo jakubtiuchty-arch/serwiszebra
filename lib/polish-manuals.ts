@@ -35887,8 +35887,8 @@ DS8108 jest **przewodowy**, a DS8178 to wersja **bezprzewodowa** (Bluetooth + ba
   'ds8178': {
     model: 'DS8178',
     title: 'Zebra DS8178 – Instrukcja obsługi po polsku',
-    lastUpdated: '2026-06-15',
-    sourceDocument: 'DS8178 Digital Scanner Product Reference Guide + Quick Start Guide',
+    lastUpdated: '2026-06-16',
+    sourceDocument: 'DS8178 Digital Scanner Product Reference Guide (MN-002926) + Quick Start Guide',
     keywords: [
       'zebra ds8178 instrukcja',
       'ds8178 instrukcja po polsku',
@@ -35899,26 +35899,28 @@ DS8108 jest **przewodowy**, a DS8178 to wersja **bezprzewodowa** (Bluetooth + ba
       'ds8178 cr8178',
       'ds8178 ustawienia fabryczne',
       'ds8178 reset',
+      'ds8178 cztery długie tony',
+      'ds8178 healthcare',
       'skaner bezprzewodowy zebra ds8178'
     ],
     sections: [
       {
-        title: '1. Podstawowe informacje',
+        title: '1. Wprowadzenie i warianty',
         content: `
 ### O skanerze Zebra DS8178
 
-Zebra **DS8178** to ręczny, **bezprzewodowy** skaner obrazowy klasy premium, czytający kody **1D i 2D** (także z ekranów telefonów) oraz przechwytujący obrazy. To bezprzewodowy odpowiednik DS8108 — łączy się przez **Bluetooth** i współpracuje z bazą prezentacyjno-ładującą **CR8178**. Bardzo wydajny skaner handlowy (POS). Kolory: Nova White, Twilight Black.
+Zebra **DS8178** to ręczny, **bezprzewodowy** skaner obrazowy klasy premium, czytający kody **1D i 2D** (także z ekranów telefonów) oraz przechwytujący obrazy. To bezprzewodowy odpowiednik DS8108 — łączy się przez **Bluetooth** i współpracuje z bazą prezentacyjno-ładującą **CR8178**. Bardzo wydajny skaner handlowy (POS). Dostępne warianty optyki **SR/DL/HD**, wersja **healthcare (HC)** odporna na dezynfekcję; kolory Nova White, Twilight Black.
 
 ### Kluczowe cechy
 
 | Cecha | Wartość |
 |-------|---------|
 | **Typ** | Bezprzewodowy imager 1D/2D z przechwytywaniem obrazu |
-| **Łączność** | Bluetooth (Class 2, zasięg do ~10 m) |
+| **Łączność** | Bluetooth Class 1 (do ~100 m), zgodny też z Class 2 |
 | **Bateria** | PowerPrecision Li-Ion (wymienna) |
 | **Baza** | CR8178 (prezentacja + ładowanie + komunikacja) |
-| **Kody z ekranów** | tak (telefony, monitory) |
-| **Temperatura pracy** | od 0°C do +50°C |
+| **Min. gęstość kodu** | od 3 mil (Code 39/128) |
+| **Kody z ekranów** | tak |
 
 > **Uwaga:** przed pierwszym użyciem naładuj baterię do pełna (na bazie CR8178 lub przez kabel).
 `
@@ -35943,7 +35945,7 @@ Skaner i baza muszą być **sparowane**:
 - **Przez włożenie do bazy** — domyślnie włączone (pairing on contacts).
 - **Przez zeskanowanie kodu parowania** — kod jest **unikalny dla każdej bazy**.
 
-> Po zeskanowaniu kodu parowania poczekaj na potwierdzenie połączenia.
+DS8178 ma radio **Bluetooth Classic** (zasięg, Class 1 do ~100 m) oraz **Low Energy**. Po nawiązaniu połączenia dioda Bluetooth sygnalizuje status; **wskaźnik poza zasięgiem (Out of Range)** ostrzega o utracie łączności.
 
 ### Gdy dane nie docierają do hosta
 
@@ -35951,19 +35953,19 @@ Odłącz zasilanie i kabel interfejsu od bazy → odczekaj 3 s → podłącz z p
 `
       },
       {
-        title: '4. Wskaźniki LED i sygnały dźwiękowe',
+        title: '4. Wskaźniki dźwiękowe i LED',
         content: `
-Po poprawnym odczycie skaner **bipnie**, a dioda mignie.
+| Sygnał dźwiękowy | Dioda LED | Znaczenie |
+|------------------|-----------|-----------|
+| Low / medium / high (rosnący) | Zielona | Włączenie zasilania |
+| Średni bip (ton konfigurowalny) | Zielona (mignięcie) | Kod odczytany poprawnie |
+| Brak | Zielona (stała) | Tryb prezentacji włączony |
+| Low / low / low / extra low | Czerwona | Błąd parzystości |
+| **4 długie niskie tony** | Czerwona | **Błąd transmisji** — dane zignorowane (zły interfejs hosta na bazie) |
+| Dioda bazy miga na zielono | — | Trwa ładowanie skanera |
+| Wskaźnik Out of Range | — | Skaner poza zasięgiem bazy |
 
-| Sygnał | Znaczenie |
-|--------|-----------|
-| Rosnąca seria tonów przy włączeniu | Poprawne uruchomienie |
-| 1 bip + mignięcie diody | Kod odczytany poprawnie |
-| Dioda bazy miga na zielono | Trwa ładowanie |
-| Seria tonów parowania | Połączenie z bazą nawiązane / utracone |
-| Niski ton / brak reakcji | Kod nieodczytany |
-
-Głośność i ton sygnału regulują kody konfiguracyjne.
+> **Do zapamiętania:** **4 długie niskie tony** = dane nie dotarły do systemu (zły interfejs na bazie).
 `
       },
       {
@@ -35973,7 +35975,7 @@ Głośność i ton sygnału regulują kody konfiguracyjne.
 2. Ustaw celownik na kodzie (odczyt wielokierunkowy).
 3. Po odczycie skaner bipnie i mignie diodą.
 
-W **trybie prezentacji** (na bazie CR8178) skaner skanuje automatycznie po zbliżeniu kodu. Czyta kody **1D** i **2D** — także z ekranów telefonów. Przechwytuje też obrazy i dokumenty.
+W **trybie prezentacji** (na bazie CR8178) skaner skanuje automatycznie po zbliżeniu kodu. Tolerancja: pochylenie ±60°, przechylenie ±60°, obrót 360°. Czyta kody **1D** i **2D** — także z ekranów telefonów (włącz **Mobile Phone/Display Mode**). Minimalna gęstość: Code 39/128 od **3 mil**. **Picklist Mode** ogranicza odczyt do wskazanego kodu.
 `
       },
       {
@@ -35988,19 +35990,33 @@ W **trybie prezentacji** (na bazie CR8178) skaner skanuje automatycznie po zbli�
 
 ### Najczęstsze ustawienia
 
-- **Enter (CR/LF) po skanie**, **Tab po skanie**, **prefiks/sufiks**.
+- **Enter (CR/LF) po skanie** lub **Tab po skanie**, **prefiks/sufiks**.
 - **Mobile Phone/Display Mode** — odczyt z ekranów.
 - **Out of Range Batch Mode** — zapis skanów poza zasięgiem bazy.
-- **Głośność i ton beepera** — Low / Medium / High.
+- **Beeper Volume / Tone**, **Picklist Mode**.
 `
       },
       {
         title: '7. Konserwacja i czyszczenie',
         content: `
-- Czyść **70% IPA** lub łagodnym mydłem z wodą (zalecane chusteczki Zebra).
-- Nie używaj acetonu, amoniaku (na szybę), środków ściernych ani rozpuszczalników.
+### Środki dopuszczone (skaner i baza CR8178)
 
-**Procedura:** wyjmij skaner z bazy → przetrzyj **okno skanujące** i obudowę 70% IPA → wyczyść **styki ładowania** skanera i bazy → pozostaw do wyschnięcia.
+- **Alkohol izopropylowy (IPA) 70%** (w tym chusteczki)
+- **Roztwór wybielacza 10% (podchloryn sodu 0,55%) z wodą 90%**
+- **Nadtlenek wodoru 3% z wodą 97%**
+- **Łagodne mydło do naczyń**
+
+### Wersja healthcare (DS8178-HC)
+
+Dodatkowo odporna na medyczne środki dezynfekujące. Stosuj wyłącznie środki z listy dla wersji healthcare.
+
+### Środki szkodliwe (NIE stosować)
+
+Aceton, amoniak, roztwory alkaliczne, węglowodory aromatyczne i chlorowane, benzen, kwas karbolowy, związki amin/amoniaku, etanoloamina, etery, ketony, TB-lysoform, toluen, trichloroetylen.
+
+### Procedura
+
+Zwilż ściereczkę dopuszczonym środkiem → przetrzyj okno i obudowę → wyczyść **styki ładowania** skanera i bazy → pozostaw do wyschnięcia.
 `
       },
       {
@@ -36010,10 +36026,10 @@ W **trybie prezentacji** (na bazie CR8178) skaner skanuje automatycznie po zbli�
 |---------|-------------------|-------------|
 | Brak komunikacji z bazą | Skaner niesparowany | Wsuń skaner do bazy lub zeskanuj kod parowania |
 | Dane nie docierają do hosta | Utracone połączenie bazy z hostem | Procedura ponownego połączenia (sekcja „Parowanie") |
-| Skaner nie ładuje się | Temperatura >40°C lub brudne styki | Ładuj w niższej temperaturze; wyczyść styki 70% IPA |
-| Nie czyta kodu | Brudne okno / zła odległość | Wyczyść okno, dostosuj odległość |
+| **4 długie niskie tony** | Błąd transmisji | Zeskanuj kod właściwego interfejsu na bazie |
+| Skaner nie ładuje się | Temperatura >40°C lub brudne styki | Ładuj w niższej temperaturze; wyczyść styki |
 | Słabo czyta kody z telefonu | Wyłączony tryb ekranowy | Włącz Mobile Phone/Display Mode |
-| Bipa, ale brak danych | Zły interfejs hosta na bazie | Zeskanuj kod właściwego interfejsu |
+| Traci łączność poza halą | Poza zasięgiem Bluetooth | Włącz Out of Range Batch Mode |
 
 Jeśli problem nie ustępuje, zaktualizuj firmware (zebra.com/support lub 123Scan) i sparuj skaner ponownie.
 `
@@ -36024,34 +36040,40 @@ Jeśli problem nie ustępuje, zaktualizuj firmware (zebra.com/support lub 123Sca
 | Parametr | DS8178 |
 |----------|--------|
 | **Typ** | Bezprzewodowy imager 1D/2D z przechwytywaniem obrazu |
-| **Łączność** | Bluetooth Class 2 (do ~10 m) |
+| **Łączność** | Bluetooth Class 1 (do ~100 m), zgodny z Class 2 |
 | **Bateria** | PowerPrecision Li-Ion, wymienna |
 | **Baza** | CR8178 (prezentacja + ładowanie + komunikacja) |
+| **Min. gęstość kodu** | Code 39/128 od 3 mil |
+| **Obrazy** | eksport Bitmap/JPEG/TIFF |
 | **Kody z ekranów** | tak |
-| **Temperatura pracy** | od 0°C do +50°C |
+| **Temperatura pracy** | 0°C do +50°C |
 | **Ładowanie** | poniżej ok. 40°C |
+| **Healthcare** | wersja HC odporna na dezynfekcję |
 | **Tryby** | ręczny, prezentacji, Out of Range Batch |
-| **Kolory** | Nova White, Twilight Black |
 `
       },
       {
         title: 'FAQ – Najczęściej zadawane pytania',
         content: `
+### Czym czyścić DS8178?
+
+Dopuszczone: **70% IPA**, **wybielacz 10%**, **nadtlenek wodoru 3%**, **łagodne mydło** — dla skanera i bazy. Wersja **healthcare** znosi dodatkowo chusteczki dezynfekujące.
+
 ### Jak sparować DS8178 z bazą?
 
 Wsuń skaner do bazy **CR8178** (parowanie przez kontakt jest domyślne) lub zeskanuj **kod parowania** danej bazy.
 
-### Skaner nie ładuje się — dlaczego?
+### Skaner wydaje 4 długie niskie tony — co to znaczy?
 
-Najczęściej z powodu temperatury powyżej 40°C lub brudnych styków. Wyczyść styki 70% IPA.
-
-### Po resecie nie łączy się z bazą?
-
-Reset **kasuje parowanie** — sparuj skaner ponownie.
+To **błąd transmisji** — zeskanuj kod właściwego interfejsu hosta na bazie.
 
 ### Słabo czyta kody z telefonu?
 
 Włącz **Mobile Phone/Display Mode**.
+
+### Po resecie nie łączy się z bazą?
+
+Reset **kasuje parowanie** — sparuj skaner ponownie.
 
 ### Czym różni się DS8178 od DS8108?
 
