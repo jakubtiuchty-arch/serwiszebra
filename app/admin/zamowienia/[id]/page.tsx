@@ -223,13 +223,28 @@ export default function OrderDetailPage() {
       }
 
       const data = await response.json()
-      
+
+      // Etykieta gotowa (przesyłka zamówiona) → otwórz PDF. W przeciwnym razie poinformuj.
+      if (data.labelBase64) {
+        try {
+          const bin = atob(data.labelBase64)
+          const bytes = new Uint8Array(bin.length)
+          for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i)
+          const url = URL.createObjectURL(new Blob([bytes], { type: 'application/pdf' }))
+          window.open(url, '_blank')
+        } catch {
+          /* nie udało się otworzyć — etykieta dostępna z przycisku „Pobierz etykietę" */
+        }
+      } else {
+        setShipmentError('Przesyłka utworzona w Furgonetka. Etykieta będzie dostępna po zamówieniu przesyłki (panel Furgonetka lub automatyczne zamawianie). Potem użyj „Pobierz etykietę".')
+      }
+
       // Odśwież dane zamówienia
       await fetchOrder()
-      
+
       setShowSuccessToast(true)
-      setTimeout(() => setShowSuccessToast(false), 3000)
-      
+      setTimeout(() => setShowSuccessToast(false), 4000)
+
     } catch (err) {
       console.error('Error creating shipment:', err)
       setShipmentError(err instanceof Error ? err.message : 'Wystąpił błąd')
@@ -717,15 +732,27 @@ export default function OrderDetailPage() {
                 </div>
               )}
 
-              {/* ZAMÓW KURIERA - tylko jeśli nie wysłano jeszcze */}
-              {!order.tracking_number && (
+              {/* ZAMÓW PRZESYŁKĘ FURGONETKA - tylko jeśli nie utworzono jeszcze */}
+              {!String((order as any).stripe_session_id || '').startsWith('FURG-') ? (
                 <button
-                  onClick={() => setShowCourierModal(true)}
-                  className="w-full px-4 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg hover:from-blue-700 hover:to-indigo-700 transition-all text-sm font-semibold flex items-center justify-center gap-2 shadow-lg"
+                  onClick={handleCreateShipment}
+                  disabled={isCreatingShipment}
+                  className="w-full px-4 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg hover:from-blue-700 hover:to-indigo-700 transition-all text-sm font-semibold flex items-center justify-center gap-2 shadow-lg disabled:opacity-60"
                 >
                   <PackageCheck className="w-4 h-4" />
-                  Zamów kuriera (BL Paczka)
+                  {isCreatingShipment ? 'Tworzę przesyłkę…' : 'Zamów przesyłkę (Furgonetka)'}
                 </button>
+              ) : (
+                <button
+                  onClick={() => window.open(`/api/admin/orders/${order.id}/label`, '_blank')}
+                  className="w-full px-4 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-all text-sm font-semibold flex items-center justify-center gap-2 shadow-lg"
+                >
+                  <PackageCheck className="w-4 h-4" />
+                  Pobierz etykietę (Furgonetka)
+                </button>
+              )}
+              {shipmentError && (
+                <p className="text-xs text-red-600 mt-1">{shipmentError}</p>
               )}
               
               {/* ZAMÓW W INGRAM MICRO */}
