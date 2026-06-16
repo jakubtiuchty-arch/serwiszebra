@@ -37253,58 +37253,44 @@ Zeskanuj kod **„Set Defaults"** z Product Reference Guide.
   },
   'ds8208': {
     model: 'DS8208',
-    title: 'Zebra DS8208 / DS8288 – Instrukcja obsługi po polsku',
-    lastUpdated: '2026-06-15',
-    sourceDocument: 'DS8208/DS8288 Product Reference Guide + Quick Start Guide (cradle CR8288-PC)',
+    title: 'Zebra DS8208 – Instrukcja obsługi po polsku',
+    lastUpdated: '2026-06-16',
+    sourceDocument: 'DS8208 Product Reference Guide + Quick Start Guide',
     keywords: [
       'zebra ds8208 instrukcja',
       'ds8208 instrukcja po polsku',
-      'ds8288 instrukcja',
+      'ds8208 instrukcja obsługi',
       'ds8208 konfiguracja',
       'ds8208 ustawienia fabryczne',
       'ds8208 reset',
-      'ds8288 ładowanie',
-      'ds8288 cr8288',
+      'ds8208 kody z telefonu',
+      'ds8208 nie skanuje',
       'skaner zebra ds8208'
     ],
     sections: [
       {
-        title: '1. Podstawowe informacje',
+        title: '1. Wprowadzenie',
         content: `
-### O skanerach Zebra DS8208 i DS8288
+### O skanerze Zebra DS8208
 
-To rodzina wydajnych skanerów obrazowych do handlu (POS), czytających kody **1D i 2D**, także z ekranów telefonów, oraz przechwytujących obrazy:
-
-- **DS8208** — wersja **przewodowa**, ręczna (zasilana z hosta).
-- **DS8288** — wersja z **baterią** i bazą prezentacyjną **CR8288-PC** (praca na blacie i w dłoni).
+Zebra **DS8208** to ręczny, **przewodowy** skaner obrazowy klasy premium do handlu (POS), czytający kody **1D i 2D**, także z ekranów telefonów, oraz przechwytujący obrazy. Szybki i wygodny, zasilany z portu hosta. Bezprzewodowym odpowiednikiem tej rodziny jest **DS8288** (z baterią i bazą).
 
 ### Kluczowe cechy
 
 | Cecha | Wartość |
 |-------|---------|
-| **Typ** | Imager 1D/2D z przechwytywaniem obrazu |
-| **DS8208** | przewodowy, ręczny |
-| **DS8288** | z baterią + baza prezentacyjna CR8288-PC |
-| **Interfejsy** | USB, RS-232, Keyboard Wedge, IBM 46XX |
+| **Typ** | Przewodowy imager 1D/2D z przechwytywaniem obrazu |
+| **Interfejsy** | USB, RS-232, Keyboard Wedge, IBM 46XX (RS-485) |
 | **Kody z ekranów** | tak |
+| **Zasilanie** | z portu USB hosta |
+
+> **Uwaga:** DS8208 jest skanerem przewodowym — nie ma baterii ani Bluetooth.
 `
       },
       {
-        title: '2. Ładowanie i bateria (DS8288)',
+        title: '2. Podłączenie do komputera',
         content: `
-Dotyczy wersji **DS8288** (z baterią):
-
-1. Umieść skaner w bazie prezentacyjnej **CR8288-PC** lub w standardowej bazie ładującej.
-2. Dioda zasygnalizuje ładowanie; naładuj do pełna przed pierwszym użyciem.
-3. Skaner ma też funkcję wyłączenia baterii (Shutting Off the Battery) na czas transportu/przechowywania.
-
-> **Uwaga:** wersja **DS8208** jest przewodowa i nie ma baterii — zasilanie pobiera z hosta.
-`
-      },
-      {
-        title: '3. Podłączenie do komputera',
-        content: `
-Skaner **automatycznie wykrywa interfejs**.
+DS8208 **automatycznie wykrywa interfejs**. Aby zmienić, zeskanuj kod właściwego interfejsu z Product Reference Guide.
 
 | Interfejs | Uwagi |
 |-----------|-------|
@@ -37317,12 +37303,27 @@ Po podłączeniu USB zeskanuj kod w Notatniku, aby sprawdzić działanie.
 `
       },
       {
-        title: '4. Skanowanie kodów',
+        title: '3. Skanowanie kodów',
         content: `
-- **DS8208 / w dłoni:** skieruj na kod i naciśnij spust.
-- **DS8288 na bazie:** zbliż kod do okna — odczyt automatyczny.
+1. Skieruj skaner na kod i naciśnij spust — pojawi się celownik.
+2. Ustaw celownik na kodzie (odczyt wielokierunkowy).
+3. Po odczycie skaner bipnie i mignie diodą.
 
-Czyta kody **1D** (EAN/UPC, Code 39/128, GS1 DataBar) i **2D** (PDF417, Data Matrix, QR Code) — także z ekranów. **Picklist Mode** ogranicza odczyt do wskazanego kodu.
+Czyta kody **1D** (EAN/UPC, Code 39/128, GS1 DataBar) i **2D** (PDF417, Data Matrix, QR Code) — także z ekranów telefonów. **Picklist Mode** ogranicza odczyt do kodu wskazanego celownikiem. Przechwytuje też obrazy.
+`
+      },
+      {
+        title: '4. Wskaźniki dźwiękowe i LED',
+        content: `
+Po włączeniu skaner wydaje rosnący trójton, a po poprawnym odczycie **bipnie i mignie diodą**.
+
+| Sygnał | Znaczenie |
+|--------|-----------|
+| Low / medium / high (rosnący) | Włączenie zasilania |
+| Krótki bip + mignięcie diody | Kod odczytany poprawnie |
+| **4 długie niskie tony** | **Błąd transmisji** — dane zignorowane (zły interfejs) |
+
+> **Do zapamiętania:** **4 długie niskie tony** = dane nie dotarły do systemu. Zeskanuj kod właściwego interfejsu (USB HID / USB COM / RS-232).
 `
       },
       {
@@ -37333,21 +37334,21 @@ Czyta kody **1D** (EAN/UPC, Code 39/128, GS1 DataBar) i **2D** (PDF417, Data Mat
 1. Zeskanuj kod **„Set Defaults"** z Product Reference Guide.
 2. Alternatywnie użyj programu **Zebra 123Scan**.
 
-> **Uwaga:** w DS8288 reset kasuje też parowanie z bazą — po resecie sparuj ponownie.
+> **Uwaga:** reset kasuje wszystkie ustawienia użytkownika.
 
 ### Najczęstsze ustawienia
 
-- **Enter (CR/LF) po skanie**, **Tab po skanie**, **prefiks/sufiks**.
+- **Enter (CR/LF) po skanie** lub **Tab po skanie**, **prefiks/sufiks**.
 - **Picklist Mode**, **głośność i ton beepera**.
 `
       },
       {
         title: '6. Konserwacja i czyszczenie',
         content: `
-- Czyść **70% IPA** lub łagodnym mydłem z wodą.
+- Czyść **70% alkoholem izopropylowym (IPA)** lub gotowymi chusteczkami.
 - Nie używaj acetonu, amoniaku (na szybę), środków ściernych ani rozpuszczalników.
 
-**Procedura:** odłącz/wyjmij skaner z bazy → przetrzyj **okno skanujące** i obudowę 70% IPA → w DS8288 wyczyść też **styki ładowania** → pozostaw do wyschnięcia.
+**Procedura:** odłącz skaner → przetrzyj **okno skanujące** i obudowę ściereczką z 70% IPA → pozostaw do wyschnięcia. Brudne okno to najczęstsza przyczyna gorszego odczytu.
 `
       },
       {
@@ -37355,11 +37356,11 @@ Czyta kody **1D** (EAN/UPC, Code 39/128, GS1 DataBar) i **2D** (PDF417, Data Mat
         content: `
 | Problem | Możliwa przyczyna | Rozwiązanie |
 |---------|-------------------|-------------|
-| Brak reakcji (DS8208) | Luźny kabel / brak zasilania | Dociśnij kabel USB; spróbuj innego portu |
-| DS8288 nie ładuje się | Brudne styki ładowania | Wyczyść styki skanera i bazy 70% IPA |
+| Brak reakcji | Luźny kabel / brak zasilania | Dociśnij kabel USB; spróbuj innego portu |
 | Nie czyta kodu | Brudne okno / zła odległość | Wyczyść okno; dostosuj odległość |
 | Odczytuje sąsiedni kod | Kody blisko siebie | Włącz Picklist Mode |
 | Bipa, ale brak danych | Zły interfejs hosta | Zeskanuj kod właściwego interfejsu |
+| **4 długie niskie tony** | Błąd transmisji | Sprawdź konfigurację interfejsu i kabel |
 
 Jeśli problem nie ustępuje, zaktualizuj firmware (zebra.com/support lub 123Scan) i zresetuj skaner.
 `
@@ -37367,29 +37368,200 @@ Jeśli problem nie ustępuje, zaktualizuj firmware (zebra.com/support lub 123Sca
       {
         title: '8. Specyfikacja techniczna',
         content: `
-| Parametr | DS8208 / DS8288 |
-|----------|-----------------|
-| **Typ** | Imager 1D/2D z przechwytywaniem obrazu |
-| **DS8208** | przewodowy, ręczny |
-| **DS8288** | z baterią + baza prezentacyjna CR8288-PC |
+| Parametr | DS8208 |
+|----------|--------|
+| **Typ** | Przewodowy imager 1D/2D z przechwytywaniem obrazu |
+| **Interfejsy** | USB, RS-232, Keyboard Wedge, IBM 46XX (RS-485) |
 | **Kody z ekranów** | tak |
-| **Interfejsy** | USB, RS-232, Keyboard Wedge, IBM 46XX |
+| **Zasilanie** | z portu USB hosta |
+| **Środek czyszczący** | 70% IPA, gotowe chusteczki |
 `
       },
       {
         title: 'FAQ – Najczęściej zadawane pytania',
         content: `
-### Czym różni się DS8208 od DS8288?
+### Skaner wydaje 4 długie niskie tony — co to znaczy?
 
-**DS8208** jest przewodowy i ręczny. **DS8288** ma **baterię** oraz **bazę prezentacyjną CR8288-PC** — może pracować na blacie (hands-free) i w dłoni.
+To **błąd transmisji** — dane nie trafiły do komputera (zły interfejs). Zeskanuj kod właściwego hosta (USB HID / USB COM / RS-232).
+
+### Jak ustawić Enter po skanie?
+
+Zeskanuj kod dodający **sufiks Enter (CR/LF)** z Product Reference Guide lub wygeneruj go w 123Scan.
+
+### Skaner odczytuje sąsiedni kod zamiast wskazanego?
+
+Włącz **Picklist Mode** — odczyta tylko kod, na którym ustawisz celownik.
+
+### Jaki jest bezprzewodowy odpowiednik DS8208?
+
+To **DS8288** — z baterią i bazą prezentacyjną. DS8208 jest przewodowy.
+
+### Jak przywrócić ustawienia fabryczne?
+
+Zeskanuj kod **„Set Defaults"** z Product Reference Guide.
+`
+      }
+    ]
+  },
+  'ds8288': {
+    model: 'DS8288',
+    title: 'Zebra DS8288 – Instrukcja obsługi po polsku',
+    lastUpdated: '2026-06-16',
+    sourceDocument: 'DS8288 Product Reference Guide + Quick Start Guide (baza CR8288-PC)',
+    keywords: [
+      'zebra ds8288 instrukcja',
+      'ds8288 instrukcja po polsku',
+      'ds8288 instrukcja obsługi',
+      'ds8288 parowanie',
+      'ds8288 ładowanie',
+      'ds8288 cr8288',
+      'ds8288 bateria',
+      'ds8288 ustawienia fabryczne',
+      'skaner bezprzewodowy zebra ds8288'
+    ],
+    sections: [
+      {
+        title: '1. Wprowadzenie',
+        content: `
+### O skanerze Zebra DS8288
+
+Zebra **DS8288** to ręczny, **bezprzewodowy** skaner obrazowy klasy premium do handlu (POS), czytający kody **1D i 2D**, także z ekranów telefonów, oraz przechwytujący obrazy. Ma **wymienną baterię** i współpracuje z **bazą prezentacyjną CR8288-PC** — dzięki czemu pracuje na blacie (hands-free) i w dłoni. Wersją przewodową tej rodziny jest **DS8208**.
+
+### Kluczowe cechy
+
+| Cecha | Wartość |
+|-------|---------|
+| **Typ** | Bezprzewodowy imager 1D/2D z przechwytywaniem obrazu |
+| **Bateria** | wymienna (z funkcją wyłączenia na czas transportu) |
+| **Baza** | CR8288-PC (prezentacja + ładowanie + komunikacja) |
+| **Interfejsy (baza)** | USB, RS-232, Keyboard Wedge, IBM 46XX (RS-485) |
+| **Kody z ekranów** | tak |
+
+> **Uwaga:** przed pierwszym użyciem naładuj baterię do pełna na bazie CR8288-PC.
+`
+      },
+      {
+        title: '2. Bateria i ładowanie',
+        content: `
+1. Umieść skaner w bazie prezentacyjnej **CR8288-PC** lub w standardowej bazie ładującej.
+2. Dioda zasygnalizuje ładowanie; naładuj do pełna przed pierwszym użyciem.
+3. Na czas transportu/przechowywania możesz użyć funkcji **wyłączenia baterii (Shutting Off the Battery)**.
+
+Twardy restart: wyjmij baterię na ~10 s i włóż ponownie.
+`
+      },
+      {
+        title: '3. Parowanie z bazą',
+        content: `
+Skaner i baza muszą być **sparowane**:
+
+- **Przez włożenie do bazy** (parowanie przez kontakt) lub
+- **Przez zeskanowanie kodu parowania** umieszczonego na bazie CR8288-PC.
+
+> Po zeskanowaniu kodu parowania poczekaj na potwierdzenie połączenia.
+
+### Gdy dane nie docierają do hosta
+
+Odłącz zasilanie i kabel interfejsu od bazy → odczekaj 3 s → podłącz z powrotem → sparuj ponownie (wsuń skaner do bazy lub zeskanuj kod parowania).
+`
+      },
+      {
+        title: '4. Skanowanie kodów',
+        content: `
+- **W dłoni:** skieruj skaner na kod i naciśnij spust.
+- **Na bazie (prezentacja):** zbliż kod do okna — odczyt automatyczny.
+
+Czyta kody **1D** (EAN/UPC, Code 39/128, GS1 DataBar) i **2D** (PDF417, Data Matrix, QR Code) — także z ekranów telefonów. **Picklist Mode** ogranicza odczyt do kodu wskazanego celownikiem. Przechwytuje też obrazy.
+`
+      },
+      {
+        title: '5. Wskaźniki dźwiękowe i LED',
+        content: `
+| Sygnał | Znaczenie |
+|--------|-----------|
+| Low / medium / high (rosnący) | Włączenie zasilania |
+| Krótki bip + mignięcie diody | Kod odczytany poprawnie |
+| Dioda bazy sygnalizuje ładowanie | Trwa ładowanie skanera |
+| Seria tonów parowania | Połączenie z bazą nawiązane / utracone |
+| **4 długie niskie tony** | **Błąd transmisji** — dane zignorowane (zły interfejs hosta na bazie) |
+
+> **Do zapamiętania:** **4 długie niskie tony** = dane nie dotarły do systemu.
+`
+      },
+      {
+        title: '6. Konfiguracja kodami kreskowymi',
+        content: `
+### Przywrócenie ustawień fabrycznych
+
+1. Zeskanuj kod **„Set Defaults"** z Product Reference Guide.
+2. Alternatywnie użyj programu **Zebra 123Scan**.
+
+> **Uwaga:** reset kasuje też **parowanie** z bazą — po resecie sparuj skaner ponownie.
+
+### Najczęstsze ustawienia
+
+- **Enter (CR/LF) po skanie** lub **Tab po skanie**, **prefiks/sufiks**.
+- **Picklist Mode**, **głośność i ton beepera**.
+`
+      },
+      {
+        title: '7. Konserwacja i czyszczenie',
+        content: `
+- Czyść **70% alkoholem izopropylowym (IPA)** lub gotowymi chusteczkami.
+- Nie używaj acetonu, amoniaku (na szybę), środków ściernych ani rozpuszczalników.
+
+**Procedura:** wyjmij skaner z bazy → przetrzyj **okno skanujące** i obudowę 70% IPA → wyczyść **styki ładowania** skanera i bazy → pozostaw do wyschnięcia.
+`
+      },
+      {
+        title: '8. Rozwiązywanie problemów',
+        content: `
+| Problem | Możliwa przyczyna | Rozwiązanie |
+|---------|-------------------|-------------|
+| Brak komunikacji z bazą | Skaner niesparowany | Wsuń skaner do bazy lub zeskanuj kod parowania |
+| Nie ładuje się | Brudne styki ładowania | Wyczyść styki skanera i bazy 70% IPA; sprawdź zasilanie bazy |
+| **4 długie niskie tony** | Błąd transmisji | Zeskanuj kod właściwego interfejsu na bazie |
+| Nie czyta kodu | Brudne okno / zła odległość | Wyczyść okno; dostosuj odległość |
+| Odczytuje sąsiedni kod | Kody blisko siebie | Włącz Picklist Mode |
+
+Jeśli problem nie ustępuje, zaktualizuj firmware (zebra.com/support lub 123Scan) i sparuj skaner ponownie.
+`
+      },
+      {
+        title: '9. Specyfikacja techniczna',
+        content: `
+| Parametr | DS8288 |
+|----------|--------|
+| **Typ** | Bezprzewodowy imager 1D/2D z przechwytywaniem obrazu |
+| **Bateria** | wymienna |
+| **Baza** | CR8288-PC (prezentacja + ładowanie + komunikacja) |
+| **Interfejsy (baza)** | USB, RS-232, Keyboard Wedge, IBM 46XX (RS-485) |
+| **Kody z ekranów** | tak |
+| **Środek czyszczący** | 70% IPA, gotowe chusteczki |
+`
+      },
+      {
+        title: 'FAQ – Najczęściej zadawane pytania',
+        content: `
+### Jak sparować DS8288 z bazą?
+
+Wsuń skaner do bazy **CR8288-PC** (parowanie przez kontakt) lub zeskanuj **kod parowania** umieszczony na bazie.
 
 ### DS8288 nie ładuje się — co sprawdzić?
 
 Wyczyść **styki ładowania** skanera i bazy 70% IPA; upewnij się, że baza jest zasilona.
 
-### Jak przywrócić ustawienia fabryczne?
+### Skaner wydaje 4 długie niskie tony — co to znaczy?
 
-Zeskanuj kod **„Set Defaults"** z Product Reference Guide (w DS8288 po resecie sparuj ponownie z bazą).
+To **błąd transmisji** — zeskanuj kod właściwego interfejsu hosta na bazie.
+
+### Po resecie nie łączy się z bazą?
+
+Reset **kasuje parowanie** — sparuj skaner ponownie.
+
+### Jaki jest przewodowy odpowiednik DS8288?
+
+To **DS8208** — bez baterii, zasilany z kabla.
 `
       }
     ]
@@ -37757,14 +37929,13 @@ Jeśli problem nie ustępuje, zaktualizuj firmware (zebra.com/support lub 123Sca
   },
   'cs3000': {
     model: 'CS3000',
-    title: 'Zebra CS3000 / CS3070 – Instrukcja obsługi po polsku',
+    title: 'Zebra CS3000 – Instrukcja obsługi po polsku',
     lastUpdated: '2026-06-16',
     sourceDocument: 'CS3000 Series Scanner Product Reference Guide (MN-002424)',
     keywords: [
       'zebra cs3000 instrukcja',
       'cs3000 instrukcja po polsku',
       'cs3000 instrukcja obsługi',
-      'cs3070 bluetooth',
       'cs3000 tryb batch',
       'cs3000 pamięć barcodefile',
       'cs3000 przesyłanie danych usb',
@@ -37776,34 +37947,31 @@ Jeśli problem nie ustępuje, zaktualizuj firmware (zebra.com/support lub 123Sca
     ],
     sections: [
       {
-        title: '1. Podstawowe informacje',
+        title: '1. Wprowadzenie',
         content: `
 ### O skanerze Zebra CS3000
 
-Zebra **CS3000** to kieszonkowy skaner towarzyszący (companion scanner), który **odczytuje kody i zapisuje je w pamięci wewnętrznej (0,5 GB Flash)**, a następnie przekazuje do komputera. Mieści się w dłoni i nie ma pistoletowego spustu — obsługuje się go niewielkimi przyciskami. Idealny do inwentaryzacji i mobilnego zbierania danych.
+Zebra **CS3000** to kieszonkowy skaner towarzyszący (companion scanner), który **odczytuje kody i zapisuje je w pamięci wewnętrznej (0,5 GB Flash)**, a następnie przekazuje do komputera przez **USB**. Mieści się w dłoni i nie ma pistoletowego spustu — obsługuje się go niewielkimi przyciskami. Idealny do inwentaryzacji i mobilnego zbierania danych, gdzie nie ma stałego połączenia z komputerem.
 
-Seria występuje w dwóch wersjach:
+| Cecha | Wartość |
+|-------|---------|
+| **Typ** | Kieszonkowy companion scanner z pamięcią |
+| **Łączność** | USB (tryb **batch** – zapis offline) |
+| **Pamięć** | 0,5 GB Flash |
+| **Obsługa** | przyciski: skanowanie (+), kasowanie (–), Reset |
 
-| Model | Łączność | Pamięć |
-|-------|----------|--------|
-| **CS3000** | USB (tryb **batch** – zapis offline) | 0,5 GB Flash |
-| **CS3070** | USB (batch) **oraz Bluetooth** (przesył na żywo) | 0,5 GB Flash |
+> **Kluczowe:** po podłączeniu do komputera CS3000 widoczny jest jako **dysk wymienny (pamięć masowa USB)** — dane przegrywa się jako plik, a nie „wpisuje" do aktywnego okna.
 
-Do każdego skanera dołączony jest **kabel USB**. Opcjonalnie dostępna jest **kolebka (cradle)**, która służy jako podstawka, ładowarka i łącze USB do komputera.
-
-> **Kluczowa różnica wobec zwykłego skanera:** CS3000 po podłączeniu do komputera widoczny jest jako **dysk wymienny (pamięć masowa USB)** — dane przegrywa się jako plik, a nie „wpisuje" do aktywnego okna. Szczegóły w sekcji „Tryb batch".
+> Jeśli potrzebujesz tej samej funkcji, ale z **łącznością Bluetooth** (przesył na żywo), odpowiednikiem jest osobny model **CS3070**.
 `
       },
       {
         title: '2. Elementy skanera',
         content: `
-Na obudowie znajdują się:
-
 | Element | Funkcja |
 |---------|---------|
-| **Przycisk skanowania (+)** | Skanowanie kodu |
-| **Przycisk kasowania (–)** | Usunięcie kodu z pamięci (tylko w trybie batch) |
-| **Przycisk / dioda Bluetooth** | Parowanie i status łączności (CS3070) |
+| **Przycisk skanowania (+)** | Skanowanie kodu (zapis do pamięci) |
+| **Przycisk kasowania (–)** | Usunięcie kodu z pamięci (korekta) |
 | **Dioda LED** | Sygnalizacja odczytu i stanu |
 | **Przycisk Reset** | Restart skanera |
 | **Port Mini-USB** | Ładowanie i połączenie z komputerem |
@@ -37813,14 +37981,9 @@ Na obudowie znajdują się:
       {
         title: '3. Ładowanie i bateria',
         content: `
-Skaner ładuje się na dwa sposoby:
+Skaner ładuje się **kablem USB** (podłączony do portu USB komputera lub zasilacza USB) albo **w kolebce ładującej**. O stanie ładowania informuje **dioda ładowania**. Przed pierwszym użyciem naładuj skaner do pełna.
 
-- **Kablem USB** — podłączony do portu USB komputera lub zasilacza USB.
-- **W kolebce ładującej** — wystarczy umieścić w niej skaner.
-
-O stanie ładowania informuje **dioda ładowania (Scanner Charging LED)**. Przed pierwszym użyciem naładuj skaner do pełna.
-
-> **Niski poziom baterii** sygnalizowany jest dźwiękowo/diodą (zachowanie można ustawić w pliku konfiguracyjnym – patrz „Konfiguracja"). Bateria jest wymienna.
+> **Niski poziom baterii** sygnalizowany jest dźwiękowo/diodą (zachowanie można ustawić w pliku konfiguracyjnym). Bateria jest wymienna.
 `
       },
       {
@@ -37831,22 +37994,17 @@ O stanie ładowania informuje **dioda ładowania (Scanner Charging LED)**. Przed
 1. Skieruj skaner na kod.
 2. Naciśnij **przycisk skanowania (+)**.
 3. Upewnij się, że linia celująca przecina **wszystkie kreski i odstępy** kodu.
-4. Po poprawnym odczycie skaner **bipnie, a dioda zaświeci na zielono** — kod został zapisany.
+4. Po poprawnym odczycie skaner **bipnie, a dioda zaświeci na zielono** — kod został zapisany w pamięci.
 
-### Kasowanie kodu (korekta) — tylko tryb batch
+### Kasowanie kodu (korekta)
 
-Jeśli zeskanujesz coś przez pomyłkę:
-
-1. Skieruj skaner na ten sam kod.
-2. Naciśnij **przycisk kasowania (–)** — kod zostanie usunięty z pamięci.
-
-> **Uwaga:** w trybie **Bluetooth (CS3070) kodów nie można kasować** przyciskiem (–) — dane są wysyłane na bieżąco i nie są przechowywane na skanerze.
+Jeśli zeskanujesz coś przez pomyłkę: skieruj skaner na ten sam kod i naciśnij **przycisk kasowania (–)** — kod zostanie usunięty z pamięci.
 `
       },
       {
-        title: '5. Tryb batch – przesyłanie danych do komputera',
+        title: '5. Przesyłanie danych do komputera',
         content: `
-W trybie batch skaner **zapisuje wszystkie odczyty w pamięci** i pracuje samodzielnie, bez połączenia. Aby przenieść dane:
+CS3000 **zapisuje wszystkie odczyty w pamięci** i pracuje samodzielnie, bez połączenia. Aby przenieść dane:
 
 1. Podłącz skaner do komputera **kablem USB** lub umieść go w **kolebce**.
 2. Skaner pojawi się w systemie jako **dysk wymienny** (jak pendrive).
@@ -37865,31 +38023,11 @@ Skaner obsługuje funkcję **autorun** — przygotowując plik **autorun.inf**, 
 `
       },
       {
-        title: '6. Tryb Bluetooth (CS3070)',
-        content: `
-Wersja **CS3070** łączy się z komputerem, tabletem lub telefonem przez **Bluetooth** i przesyła dane **po każdym skanie na żywo** (nie zapisuje ich w pamięci).
-
-### Profile połączenia
-
-- **HID** — skaner zachowuje się jak **klawiatura** (dane trafiają do aktywnego pola).
-- **SPP (Serial Port Profile)** — skaner działa jak połączenie szeregowe.
-
-### Parowanie
-
-Sparuj skaner z urządzeniem przez ustawienia Bluetooth hosta. Jeśli host poprosi o **PIN**, wprowadza się go **skanując kody numeryczne** z Product Reference Guide. Stałe, wolne miganie diody Bluetooth oznacza aktywne połączenie.
-
-> **Ważne — utrata danych poza zasięgiem:** jeśli skaner oddali się od hosta i **nie połączy ponownie w wyznaczonym czasie, zeskanowane dane są tracone**, a skaner wydaje **potrójny sygnał błędu (3 bipy)**. Przy zerwaniu łączności dioda Bluetooth przestaje równomiernie migać, a skaner emituje krótki sygnał wysoki–niski.
-`
-      },
-      {
-        title: '7. Wskaźniki LED i sygnały dźwiękowe',
+        title: '6. Wskaźniki LED i sygnały dźwiękowe',
         content: `
 | Sygnał | Znaczenie |
 |--------|-----------|
 | **Bip + zielona dioda** | Kod odczytany i zapisany poprawnie (good decode) |
-| **Dioda Bluetooth – wolne, równe miganie** | Połączenie Bluetooth aktywne (CS3070) |
-| **Krótki sygnał wysoki–niski** | Zerwane połączenie Bluetooth |
-| **3 bipy (ton błędu)** | Utrata danych — skaner poza zasięgiem hosta |
 | **Dioda ładowania** | Stan ładowania baterii |
 | Sygnał niskiej baterii | Bateria bliska rozładowania |
 
@@ -37897,7 +38035,7 @@ Domyślna głośność beepera to **High (wysoka)**; można ją zmienić w pliku
 `
       },
       {
-        title: '8. Konfiguracja (config.ini)',
+        title: '7. Konfiguracja (config.ini)',
         content: `
 CS3000 konfiguruje się przede wszystkim przez **plik konfiguracyjny config.ini** zapisany na skanerze (skaner jest widoczny jako dysk) oraz kody kreskowe z Product Reference Guide / program **123Scan**.
 
@@ -37920,7 +38058,7 @@ Ten sam plik konfiguracyjny można **skopiować na wiele skanerów**, aby szybko
 `
       },
       {
-        title: '9. Konserwacja i czyszczenie',
+        title: '8. Konserwacja i czyszczenie',
         content: `
 > **Uwaga — CS3000 czyści się jak skaner z okienkiem laserowym.** Zgodnie z dokumentacją serii CS3000 **okienko** przeciera się chusteczką zwilżoną **roztworem amoniaku z wodą** (NIE 70% IPA, którym czyści się skanery obrazowe DS).
 
@@ -37928,30 +38066,29 @@ Ten sam plik konfiguracyjny można **skopiować na wiele skanerów**, aby szybko
 `
       },
       {
-        title: '10. Rozwiązywanie problemów',
+        title: '9. Rozwiązywanie problemów',
         content: `
 | Problem | Możliwa przyczyna | Rozwiązanie |
 |---------|-------------------|-------------|
 | Nie widzę zeskanowanych kodów na komputerze | To skaner batch — dane są w pliku | Podłącz skaner przez USB, otwórz go jak dysk i skopiuj **BarcodeFile.txt** |
 | Skaner ciągle pokazuje stare skany | Pamięć nie została wyczyszczona | Usuń **BarcodeFile.txt** lub zeskanuj kod **„Clear Data"** |
-| CS3070: zniknęły zeskanowane dane | Skaner był poza zasięgiem Bluetooth (3 bipy) | W trudnym zasięgu używaj trybu batch (USB); pozostań w zasięgu hosta |
-| Nie ładuje się | Brudne styki / złe zasilanie | Wyczyść styki 70% IPA; sprawdź kabel/kolebkę |
-| Nie czyta kodu | Linia nie przecina całego kodu / brudne okno | Ustaw linię na całym kodzie; wyczyść okno |
+| Pamięć pełna | Za dużo zapisanych skanów | Prześlij dane do komputera, aby zwolnić pamięć |
+| Nie ładuje się | Brudne styki / złe zasilanie | Wyczyść styki patyczkiem z alkoholem; sprawdź kabel/kolebkę |
+| Nie czyta kodu | Linia nie przecina całego kodu / brudne okienko | Ustaw linię na całym kodzie; wyczyść okienko |
 | Skaner nie reaguje | Zawieszenie | Naciśnij **przycisk Reset** |
 
 Jeśli problem nie ustępuje, zaktualizuj firmware (zebra.com/support lub 123Scan).
 `
       },
       {
-        title: '11. Specyfikacja i FAQ',
+        title: '10. Specyfikacja i FAQ',
         content: `
-| Parametr | CS3000 / CS3070 |
-|----------|-----------------|
+| Parametr | CS3000 |
+|----------|--------|
 | **Typ** | Kieszonkowy companion scanner z pamięcią |
 | **Pamięć** | 0,5 GB Flash |
-| **CS3000** | USB (tryb batch) |
-| **CS3070** | USB (batch) + Bluetooth (HID/SPP) |
-| **Przyciski** | skanowanie (+), kasowanie (–), Bluetooth, Reset |
+| **Łączność** | USB (tryb batch) |
+| **Przyciski** | skanowanie (+), kasowanie (–), Reset |
 | **Ładowanie** | kabel USB lub kolebka |
 
 ### FAQ
@@ -37960,11 +38097,11 @@ Jeśli problem nie ustępuje, zaktualizuj firmware (zebra.com/support lub 123Sca
 
 **Jak wyczyścić pamięć?** Usuń plik **BarcodeFile.txt** ze skanera lub zeskanuj kod **„Clear Data"**.
 
-**Pomyłkowo zeskanowałem kod — jak go usunąć?** W trybie batch skieruj skaner na ten kod i naciśnij **przycisk kasowania (–)**. (W trybie Bluetooth nie da się kasować.)
+**Pomyłkowo zeskanowałem kod — jak go usunąć?** Skieruj skaner na ten kod i naciśnij **przycisk kasowania (–)**.
 
-**Czym różni się CS3000 od CS3070?** CS3070 ma dodatkowo **Bluetooth** (przesył na żywo, profile HID/SPP). CS3000 działa tylko w trybie batch przez USB.
+**Skaner nie reaguje — co zrobić?** Naciśnij **przycisk Reset** na obudowie.
 
-**Dlaczego CS3070 „zgubił" dane?** Bo wyszedł **poza zasięg** hosta i nie połączył się ponownie w wyznaczonym czasie (3 bipy). Tam, gdzie zasięg bywa słaby, pewniejszy jest tryb batch (USB).
+**Potrzebuję wersji bezprzewodowej — co wybrać?** Odpowiednikiem CS3000 z **Bluetooth** jest osobny model **CS3070**.
 `
       }
     ]
@@ -37973,7 +38110,6 @@ Jeśli problem nie ustępuje, zaktualizuj firmware (zebra.com/support lub 123Sca
 
 // Aliasy: warianty skanerów bez prostego sufiksu optyki → bazowy wpis rodziny.
 const SCANNER_ALIASES: Record<string, string> = {
-  ds8288: 'ds8208',
   ds9908r: 'ds9908',
   ls1203hd: 'ls1203',
 }
