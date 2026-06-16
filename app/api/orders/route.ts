@@ -105,6 +105,7 @@ export async function POST(request: Request) {
         to: email,
         orderNumber: orderNumber,
         contactName: contactName,
+        paymentMethod: paymentMethod || 'bankTransfer',
         items: items,
         totalNetto: totalNetto,
         totalBrutto: totalBrutto,

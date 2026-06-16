@@ -2463,6 +2463,7 @@ interface OrderConfirmationEmailData {
   to: string
   orderNumber: string
   contactName: string
+  paymentMethod?: string
   items: ShopOrderItem[]
   totalNetto: number
   totalBrutto: number
@@ -2483,6 +2484,19 @@ export async function sendOrderConfirmationEmail(data: OrderConfirmationEmailDat
   const shippingBrutto = data.shippingBrutto ?? 0
   const productsNetto = data.totalNetto - (data.shippingNetto ?? 0)
   const vat = data.totalBrutto - data.totalNetto
+
+  // „Co dalej?" zależne od metody płatności — dla P24 NIE piszemy o ustalaniu płatności,
+  // bo klient płaci online sam, a w chwili wysyłki maila nie wiemy jeszcze, czy zapłacił.
+  const isP24 = data.paymentMethod === 'p24'
+  const nextStepsHtml = isP24
+    ? `<div class="email-box" style="background-color:#eff6ff;border-radius:8px;padding:18px;margin-bottom:24px;">
+            <h3 style="margin:0 0 8px;color:#1e40af;font-size:14px;">Status zamówienia</h3>
+            <p style="margin:0;color:#1e3a8a;font-size:14px;line-height:1.6;">Zamówienie zostało zarejestrowane i oczekuje na <strong>płatność online (Przelewy24)</strong>. Po zaksięgowaniu płatności potwierdzimy zamówienie i przygotujemy wysyłkę (dostawa kurierem 1–2 dni robocze). Jeśli płatność nie została dokończona, zamówienie nie zostanie zrealizowane.</p>
+          </div>`
+    : `<div class="email-box" style="background-color:#eff6ff;border-radius:8px;padding:18px;margin-bottom:24px;">
+            <h3 style="margin:0 0 8px;color:#1e40af;font-size:14px;">Co dalej?</h3>
+            <p style="margin:0;color:#1e3a8a;font-size:14px;line-height:1.6;">Skontaktujemy się z Tobą w celu potwierdzenia zamówienia i ustalenia płatności. Zamówienie wysyłamy po zaksięgowaniu wpłaty (dostawa kurierem 1–2 dni robocze).</p>
+          </div>`
 
   const itemsHtml = data.items.map(item => `
     <tr>
@@ -2562,10 +2576,7 @@ ${getEmailHeader()}
             <p style="margin:0;color:#4b5563;font-size:14px;line-height:1.6;">${addressParts.join('<br>')}</p>
           </div>
 
-          <div class="email-box" style="background-color:#eff6ff;border-radius:8px;padding:18px;margin-bottom:24px;">
-            <h3 style="margin:0 0 8px;color:#1e40af;font-size:14px;">Co dalej?</h3>
-            <p style="margin:0;color:#1e3a8a;font-size:14px;line-height:1.6;">Skontaktujemy się z Tobą w celu potwierdzenia zamówienia i ustalenia płatności. Zamówienie wysyłamy po zaksięgowaniu wpłaty (dostawa kurierem 1–2 dni robocze).</p>
-          </div>
+          ${nextStepsHtml}
 
           <div style="text-align:center;color:#6b7280;font-size:14px;">
             <p style="margin:0 0 6px;">Masz pytania? Skontaktuj się z nami:</p>
