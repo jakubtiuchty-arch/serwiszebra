@@ -37709,10 +37709,9 @@ W pliku **config.ini** ustawisz m.in.:
       {
         title: '9. Konserwacja i czyszczenie',
         content: `
-- Czyść **70% alkoholem izopropylowym (IPA)** lub łagodnym mydłem z wodą.
-- Nie używaj acetonu, amoniaku (na okno), środków ściernych ani rozpuszczalników.
+> **Uwaga — CS4070 czyści się jak skaner z okienkiem laserowym.** Zgodnie z dokumentacją **okienko** przeciera się chusteczką zwilżoną **roztworem amoniaku z wodą** (NIE 70% IPA, którym czyści się skanery obrazowe DS).
 
-**Procedura:** odłącz skaner → przetrzyj **okno skanera** i obudowę ściereczką z 70% IPA → wyczyść styki baterii → pozostaw do wyschnięcia.
+**Procedura:** odłącz skaner → usuń brud z obudowy **wilgotną ściereczką** → przetrzyj **okienko** chusteczką zwilżoną **roztworem amoniaku z wodą** → **styki baterii** czyść patyczkiem z bawełną zwilżonym alkoholem → nie rozpylaj płynów bezpośrednio na okienko → pozostaw do wyschnięcia.
 `
       },
       {
@@ -37923,10 +37922,9 @@ Ten sam plik konfiguracyjny można **skopiować na wiele skanerów**, aby szybko
       {
         title: '9. Konserwacja i czyszczenie',
         content: `
-- Czyść **70% alkoholem izopropylowym (IPA)** lub łagodnym mydłem z wodą.
-- Nie używaj acetonu, amoniaku (na okno), środków ściernych ani rozpuszczalników.
+> **Uwaga — CS3000 czyści się jak skaner z okienkiem laserowym.** Zgodnie z dokumentacją serii CS3000 **okienko** przeciera się chusteczką zwilżoną **roztworem amoniaku z wodą** (NIE 70% IPA, którym czyści się skanery obrazowe DS).
 
-**Procedura:** odłącz skaner → przetrzyj **okno skanujące** i obudowę ściereczką z 70% IPA → wyczyść **styki ładowania** → pozostaw do wyschnięcia.
+**Procedura:** odłącz skaner → usuń brud z obudowy **wilgotną ściereczką** → przetrzyj **okienko** chusteczką zwilżoną **roztworem amoniaku z wodą** → **styki ładowania** czyść patyczkiem z bawełną zwilżonym alkoholem → nie rozpylaj płynów bezpośrednio na okienko → pozostaw do wyschnięcia.
 `
       },
       {
