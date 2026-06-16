@@ -13,19 +13,45 @@ import type { PolishManual } from '@/lib/polish-manuals'
 import PolishManualPdfButton from './PolishManualPdfButton'
 import FunnelBanners from './FunnelBanners'
 
+interface ScannerVariant {
+  variantName: string
+  rows: { label: string; value: string }[]
+}
+
 interface PolishManualContentProps {
   polishManual: PolishManual
   modelSlug: string
   modelName: string
+  variant?: ScannerVariant | null
 }
 
-export default function PolishManualContent({ polishManual, modelSlug, modelName }: PolishManualContentProps) {
+export default function PolishManualContent({ polishManual, modelSlug, modelName, variant }: PolishManualContentProps) {
   // Baner lejka po sekcji „Rozwiązywanie problemów"; gdy jej brak — po ostatniej sekcji (zawsze widoczny).
   const troubleshootingIndex = polishManual.sections.findIndex((s) => /rozwiązywanie problemów/i.test(s.title))
   const bannerAfterIndex = troubleshootingIndex >= 0 ? troubleshootingIndex : polishManual.sections.length - 1
 
   return (
     <>
+      {/* Dane wariantu — indywidualne dla dokładnego modelu (np. DS3608ER) */}
+      {variant && (
+        <div className="bg-white rounded-lg sm:rounded-xl border border-gray-200 p-4 sm:p-6 mb-6 sm:mb-8">
+          <h2 className="font-bold text-gray-900 text-sm sm:text-base mb-1">
+            {modelName} — wariant {variant.variantName}
+          </h2>
+          <p className="text-xs sm:text-sm text-gray-500 mb-3 sm:mb-4">
+            Dane specyficzne dla tego modelu. Obsługa, konfiguracja i konserwacja — jak w sekcjach poniżej.
+          </p>
+          <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2">
+            {variant.rows.map((row, i) => (
+              <div key={i} className="flex justify-between gap-3 border-b border-gray-100 py-1.5 last:border-0">
+                <dt className="text-xs sm:text-sm text-gray-500 flex-shrink-0">{row.label}</dt>
+                <dd className="text-xs sm:text-sm font-medium text-gray-900 text-right">{row.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      )}
+
       {/* Table of Contents */}
       <div className="bg-white rounded-lg sm:rounded-xl border border-gray-200 p-4 sm:p-6 mb-6 sm:mb-8">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-0 mb-4">

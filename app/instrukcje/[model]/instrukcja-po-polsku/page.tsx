@@ -10,7 +10,7 @@ import {
   BookOpen,
   Clock,
 } from 'lucide-react'
-import { getPolishManual } from '@/lib/polish-manuals'
+import { getPolishManual, getScannerVariant } from '@/lib/polish-manuals'
 import PolishManualContent from '@/components/PolishManualContent'
 
 // Supabase client
@@ -56,12 +56,15 @@ export async function generateMetadata({ params }: { params: { model: string } }
     `${manual.model} instrukcja pdf pobierz`,
   ]
 
+  // Tytuł indywidualny dla dokładnego modelu (DS3608SR, DS3608ER…), nie tylko bazowego
+  const displayTitle = `Zebra ${manual.model} – Instrukcja obsługi po polsku`
+
   return {
-    title: `${polishManual.title} | Serwis Zebra`,
-    description: `Instrukcja obsługi ${manual.model} po polsku. Kalibracja, błędy LED, czyszczenie głowicy, reset fabryczny. Pobierz PDF.`,
+    title: `${displayTitle} | Serwis Zebra`,
+    description: `Instrukcja obsługi ${manual.model} po polsku. Skanowanie kodów, konfiguracja, błędy/LED, reset fabryczny, konserwacja.`,
     keywords: allKeywords,
     openGraph: {
-      title: polishManual.title,
+      title: displayTitle,
       description: `Instrukcja obsługi ${manual.model} po polsku. Kalibracja, błędy, konserwacja. Pobierz PDF.`,
       url: `https://www.serwis-zebry.pl/instrukcje/zebra-${manual.model.toLowerCase()}/instrukcja-po-polsku`,
       type: 'article',
@@ -89,6 +92,9 @@ export default async function PolishManualPage({ params }: { params: { model: st
   }
 
   const modelSlug = `zebra-${manual.model.toLowerCase()}`
+  // Indywidualny tytuł + dane wariantu dla dokładnego modelu (np. DS3608SR)
+  const displayTitle = `Zebra ${manual.model} – Instrukcja obsługi po polsku`
+  const variant = getScannerVariant(manual.model)
 
   return (
     <>
@@ -136,7 +142,7 @@ export default async function PolishManualPage({ params }: { params: { model: st
                 <span className="text-xs sm:text-sm font-bold drop-shadow-sm">INSTRUKCJA PO POLSKU</span>
               </div>
               <h1 className="text-xl sm:text-3xl md:text-4xl font-bold mb-2 sm:mb-3 text-gray-900 drop-shadow-sm leading-tight">
-                {polishManual.title}
+                {displayTitle}
               </h1>
               <p className="text-gray-800 max-w-2xl font-medium drop-shadow-sm text-sm sm:text-base">
                 Skrócona instrukcja z najważniejszymi informacjami po polsku. 
@@ -166,6 +172,7 @@ export default async function PolishManualPage({ params }: { params: { model: st
             polishManual={polishManual}
             modelSlug={modelSlug}
             modelName={manual.model}
+            variant={variant}
           />
         </div>
       </main>

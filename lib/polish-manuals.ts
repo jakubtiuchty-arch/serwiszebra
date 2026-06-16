@@ -38114,6 +38114,70 @@ const SCANNER_ALIASES: Record<string, string> = {
   ls1203hd: 'ls1203',
 }
 
+// ============================================================
+// DANE WARIANTÓW SKANERÓW — indywidualne per dokładny SKU (SR/ER/HD/DP…).
+// Treść obsługi jest wspólna (skaner działa tak samo), ale dane różnicujące
+// (silnik skanujący, zasięg, odporność, zastosowanie) są inne dla każdego wariantu.
+// ============================================================
+type VariantRow = [string, string]
+interface VariantInfo { name: string; rows: VariantRow[] }
+
+const VARIANT_DATA: Record<string, Record<string, VariantInfo>> = {
+  // Ultra-rugged DS3608 (przewodowy) i DS3678 (bezprzewodowy) — ta sama optyka
+  ds3608: {
+    sr: { name: 'Standard Range (SR)', rows: [['Silnik skanujący', 'SE4750-SR'], ['Typowy zasięg', 'od kontaktu do ~1,5 m'], ['Odporność', 'IP65/IP67, upadki z 2,4 m'], ['Zastosowanie', 'ogólne magazynowe, linie pakujące, przyjęcia/wydania']] },
+    hp: { name: 'High Performance (HP)', rows: [['Silnik skanujący', 'SE4750-HP'], ['Typowy zasięg', 'od ~7 cm do ~2,1 m'], ['Dodatkowo', 'odczyt OCR, przechwytywanie dokumentów i zdjęć'], ['Zastosowanie', 'produkcja, wiele typów kodów, mieszane środowiska']] },
+    hd: { name: 'High Density (HD)', rows: [['Silnik skanujący', 'SE4750-HD'], ['Typowy zasięg', 'od ~3 cm do ~18 cm'], ['Specjalizacja', 'bardzo gęste, drobne kody od 3 mil'], ['Zastosowanie', 'elektronika (PCB), farmacja, laboratoria']] },
+    er: { name: 'Extended Range (ER)', rows: [['Silnik skanujący', 'SE4850-ER'], ['Typowy zasięg', 'od ~7,6 cm do ~21 m'], ['Odporność', 'IP65/IP68, upadki z 3,0 m'], ['Zastosowanie', 'wysokie składowanie, skanowanie palet z wózka']] },
+    xr: { name: 'Extended Range+ (XR)', rows: [['Silnik skanujący', 'SE4850 (XR)'], ['Typowy zasięg', 'daleki, szersze pole widzenia niż ER'], ['Odporność', 'IP65/IP68, upadki z 3,0 m'], ['Zastosowanie', 'duże magazyny, daleki zasięg z szerszym kadrem']] },
+    dp: { name: 'Direct Part Marking (DP)', rows: [['Silnik skanujący', 'SE4750-DL (DPM)'], ['Specjalizacja', 'znakowania bezpośrednie: dot peen, laser etch, ink'], ['Odporność', 'IP65/IP68, upadki z 3,0 m'], ['Zastosowanie', 'automotive, lotnictwo, obronność (IUID)']] },
+    dpa: { name: 'Direct Part Marking (DPA)', rows: [['Silnik skanujący', 'SE4750-DL (DPM)'], ['Specjalizacja', 'znakowania bezpośrednie na metalu i tworzywach'], ['Odporność', 'IP65/IP68, upadki z 3,0 m'], ['Zastosowanie', 'automotive, lotnictwo']] },
+    dpx: { name: 'Direct Part Marking (DPX)', rows: [['Silnik skanujący', 'SE4750-DL (DPM, rozszerzony)'], ['Specjalizacja', 'trudne znakowania bezpośrednie i powierzchnie'], ['Odporność', 'IP65/IP68, upadki z 3,0 m'], ['Zastosowanie', 'automotive, lotnictwo, ciężki przemysł']] },
+  },
+  ds3678: {} as Record<string, VariantInfo>,
+  ds4608: {
+    dpe: { name: 'Direct Part Enhanced (DPE)', rows: [['Specjalizacja', 'odczyt znakowań bezpośrednich (DPM)'], ['Zastosowanie', 'produkcja, części z grawerem/dot peen']] },
+    xd: { name: 'Extended Depth (XD)', rows: [['Specjalizacja', 'zwiększona głębia ostrości — odczyt z różnych odległości bez zmiany pozycji'], ['Zastosowanie', 'kasy i stanowiska z mieszanymi odległościami kodów']] },
+  },
+  ds4678: {
+    dpe: { name: 'Direct Part Enhanced (DPE)', rows: [['Specjalizacja', 'odczyt znakowań bezpośrednich (DPM)'], ['Zastosowanie', 'produkcja, części z grawerem/dot peen']] },
+    xd: { name: 'Extended Depth (XD)', rows: [['Specjalizacja', 'zwiększona głębia ostrości'], ['Zastosowanie', 'mieszane odległości kodów']] },
+  },
+  ds9908: {
+    r: { name: 'DS9908R (z RFID UHF)', rows: [['Dodatkowo', 'wbudowany czytnik RFID UHF — czyta kody i tagi RFID'], ['Zastosowanie', 'handel z metkami RFID i kodami kreskowymi w jednym urządzeniu']] },
+  },
+  ls1203: {
+    hd: { name: 'LS1203-HD (High Density)', rows: [['Specjalizacja', 'gęste kody o wysokiej rozdzielczości (drobne etykiety)'], ['Zastosowanie', 'elektronika, farmacja, drobny detal']] },
+  },
+}
+// DS3678 współdzieli optykę z DS3608, dodaje wariant KD
+VARIANT_DATA.ds3678 = {
+  ...VARIANT_DATA.ds3608,
+  kd: { name: 'Keypad Display (KD)', rows: [['Wyróżnik', 'wbudowana klawiatura i wyświetlacz'], ['Zastosowanie', 'picking, potwierdzanie ilości, praca bez osobnego terminala']] },
+}
+
+/** Zwraca dane konkretnego wariantu (np. DS3608ER) lub null, gdy model nie ma wariantów. */
+export function getScannerVariant(model: string): { variantName: string; rows: { label: string; value: string }[] } | null {
+  const n = model.toLowerCase().replace(/^zebra-/, '').replace(/-/g, '')
+  let base = n
+  let suffix = ''
+  if (SCANNER_ALIASES[n]) {
+    base = SCANNER_ALIASES[n]
+    suffix = n.slice(base.length)
+  } else {
+    const m = n.match(/(sr|hp|hd|xr|er|dpa|dpx|dpe|dp|kd|xd)$/)
+    if (m) {
+      suffix = m[1]
+      base = n.slice(0, n.length - suffix.length)
+    }
+  }
+  const fam = VARIANT_DATA[base]
+  if (!fam || !suffix) return null
+  const v = fam[suffix]
+  if (!v) return null
+  return { variantName: v.name, rows: v.rows.map(([label, value]) => ({ label, value })) }
+}
+
 // Sprowadza dowolny model/SKU do klucza wpisu w polishManuals (1 instrukcja na rodzinę skanerów).
 function resolvePolishKey(model: string): string {
   const n = model.toLowerCase().replace(/^zebra-/, '').replace(/-/g, '')
