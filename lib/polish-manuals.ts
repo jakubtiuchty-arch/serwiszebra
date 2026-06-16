@@ -35698,8 +35698,8 @@ DS4678 jest **bezprzewodowy** (bateria + Bluetooth + baza CR4600), DS4608 **prze
   'ds8108': {
     model: 'DS8108',
     title: 'Zebra DS8108 – Instrukcja obsługi po polsku',
-    lastUpdated: '2026-06-15',
-    sourceDocument: 'DS8108 Digital Scanner Product Reference Guide + Quick Start Guide',
+    lastUpdated: '2026-06-16',
+    sourceDocument: 'DS8108 Digital Scanner Product Reference Guide (MN-002916) + Quick Start Guide',
     keywords: [
       'zebra ds8108 instrukcja',
       'ds8108 instrukcja po polsku',
@@ -35708,16 +35708,19 @@ DS4678 jest **bezprzewodowy** (bateria + Bluetooth + baza CR4600), DS4608 **prze
       'ds8108 ustawienia fabryczne',
       'ds8108 reset',
       'ds8108 tryb prezentacji',
+      'ds8108 cztery długie tony',
+      'ds8108 healthcare dezynfekcja',
+      'ds8108 kody z telefonu',
       'ds8108 nie skanuje',
       'skaner zebra ds8108'
     ],
     sections: [
       {
-        title: '1. Podstawowe informacje',
+        title: '1. Wprowadzenie i warianty',
         content: `
 ### O skanerze Zebra DS8108
 
-Zebra **DS8108** to ręczny, **przewodowy** skaner obrazowy klasy premium, czytający kody **1D i 2D**, z przechwytywaniem obrazów i dokumentów. To wydajny skaner handlowy (POS), który radzi sobie też z kodami z ekranów telefonów. Bardzo odporny — wytrzymuje **upadki z 1,8 m**. Kolory: Nova White, Twilight Black.
+Zebra **DS8108** to ręczny, **przewodowy** skaner obrazowy klasy premium, czytający kody **1D i 2D**, z przechwytywaniem obrazów i dokumentów. To wydajny skaner handlowy (POS), który dobrze radzi sobie z kodami z **ekranów telefonów**. Bardzo odporny — wytrzymuje **upadki z 1,8 m**. Dostępne warianty optyki **SR/DL/HD**, wersja **healthcare (HC)** odporna na dezynfekcję oraz kolory Nova White i Twilight Black.
 
 ### Kluczowe cechy
 
@@ -35725,50 +35728,47 @@ Zebra **DS8108** to ręczny, **przewodowy** skaner obrazowy klasy premium, czyta
 |-------|---------|
 | **Typ** | Przewodowy imager 1D/2D z przechwytywaniem obrazu |
 | **Interfejsy** | USB, RS-232, Keyboard Wedge, IBM 46XX (RS-485) |
-| **Tryby pracy** | Ręczny i prezentacji (na podstawce Intellistand) |
-| **Odporność na upadki** | wielokrotne z 1,8 m na beton |
-| **Tumble** | 2000 przewrotów z 0,5 m |
-| **Kody z ekranów** | tak (telefony, monitory) |
-| **Temperatura pracy** | od 0°C do +50°C |
+| **Tryby pracy** | ręczny i prezentacji (na podstawce Intellistand) |
+| **Min. gęstość kodu** | od 3 mil (Code 39/128) |
+| **Odporność na upadki** | 1,8 m na beton; 2000 przewrotów (tumble) |
+| **Kody z ekranów** | tak |
 
-> **Uwaga:** DS8108 jest skanerem przewodowym — zasilanie pobiera z portu USB hosta.
+> **Uwaga:** DS8108 jest skanerem przewodowym — zasilanie pobiera z portu USB hosta. Wersja bezprzewodowa to **DS8178**.
 `
       },
       {
-        title: '2. Tryby pracy i wskaźniki',
+        title: '2. Podłączenie i tryby pracy',
         content: `
-### Tryb ręczny i prezentacji
+### Interfejsy (auto-detekcja)
 
-- **Ręczny** — trzymasz skaner i naciskasz spust.
-- **Prezentacji (hands-free)** — po umieszczeniu w podstawce Intellistand skaner przechodzi w tryb ciągły i **skanuje automatycznie** kody zbliżone do okna. Po okresie bezczynności wchodzi w tryb oszczędzania energii (diody gasną/iluminacja miga), aż wykryje ruch.
-
-### Sygnalizacja
-
-Po poprawnym odczycie skaner **bipnie**, a dioda mignie.
-
-| Sygnał | Znaczenie |
-|--------|-----------|
-| Rosnąca seria tonów przy włączeniu | Poprawne uruchomienie |
-| 1 bip + mignięcie diody | Kod odczytany poprawnie |
-| Niski ton / brak reakcji | Kod nieodczytany |
-
-Głośność i ton sygnału regulują kody konfiguracyjne.
-`
-      },
-      {
-        title: '3. Podłączenie do komputera',
-        content: `
-DS8108 **automatycznie wykrywa interfejs** i używa ustawienia domyślnego. Aby zmienić, zeskanuj kod właściwego interfejsu z Product Reference Guide.
+DS8108 **automatycznie wykrywa interfejs**. Aby zmienić, zeskanuj kod właściwego interfejsu z Product Reference Guide.
 
 | Interfejs | Uwagi |
 |-----------|-------|
-| **USB Keyboard HID** | Domyślny — skaner działa jak klawiatura |
+| **USB Keyboard HID** | Domyślny — skaner działa jak klawiatura (90+ układów) |
 | **USB SNAPI / CDC** | Z obrazem / wirtualny port COM |
 | **RS-232** | Standard i warianty handlowe |
-| **Keyboard Wedge** | Wpięcie między klawiaturę a komputer |
-| **IBM 46XX (RS-485)** | Terminale handlowe IBM |
+| **Keyboard Wedge / IBM 46XX** | Wpięcie klawiaturowe / terminale IBM |
 
-Po podłączeniu USB skaner wyda rosnący ton — zeskanuj kod w Notatniku, aby sprawdzić działanie.
+### Tryb ręczny i prezentacji
+
+- **Ręczny** — trzymasz skaner i naciskasz spust.
+- **Prezentacji (hands-free)** — po umieszczeniu w podstawce Intellistand skaner przechodzi w tryb ciągły i **skanuje automatycznie** kody zbliżone do okna. Po okresie bezczynności wchodzi w tryb oszczędzania energii.
+`
+      },
+      {
+        title: '3. Wskaźniki dźwiękowe i LED',
+        content: `
+| Sygnał dźwiękowy | Dioda LED | Znaczenie |
+|------------------|-----------|-----------|
+| Low / medium / high (rosnący) | Zielona | Włączenie zasilania |
+| Średni bip (ton konfigurowalny) | Zielona (mignięcie) | Kod odczytany poprawnie |
+| Brak | Zielona (stała) | Tryb prezentacji włączony |
+| Brak | Brak (zielona zgaszona) | Tryb prezentacji wyłączony |
+| Low / low / low / extra low | Czerwona | Błąd parzystości |
+| **4 długie niskie tony** | Czerwona | **Błąd transmisji** — dane zignorowane (zły interfejs) |
+
+> **Do zapamiętania:** **4 długie niskie tony** = dane nie dotarły do systemu. Zeskanuj kod właściwego interfejsu (USB HID / USB COM / RS-232).
 `
       },
       {
@@ -35778,7 +35778,7 @@ Po podłączeniu USB skaner wyda rosnący ton — zeskanuj kod w Notatniku, aby 
 2. Ustaw celownik na kodzie (odczyt wielokierunkowy).
 3. Po odczycie skaner bipnie i mignie diodą.
 
-Tolerancja: pochylenie ±60°, przechylenie ±60°, obrót 360°. Czyta kody **1D** (Code 39/128, UPC/EAN, GS1 DataBar) i **2D** (PDF417, Data Matrix, QR Code, Aztec, MaxiCode) — także z ekranów telefonów. Minimalna gęstość: Code 39/128 od 3 mil, Data Matrix/QR od 6 mil.
+Tolerancja: pochylenie ±60°, przechylenie ±60°, obrót 360°. Czyta kody **1D** (Code 39/128, UPC/EAN, GS1 DataBar) i **2D** (PDF417, Data Matrix, QR Code, Aztec, MaxiCode) — także z ekranów telefonów. Minimalna gęstość: Code 39/128 od **3 mil**, Data Matrix/QR od **6 mil**. Przechwytuje obrazy i dokumenty (eksport Bitmap/JPEG/TIFF, 109 PPI). **Picklist Mode** ogranicza odczyt do wskazanego kodu.
 `
       },
       {
@@ -35793,18 +35793,34 @@ Tolerancja: pochylenie ±60°, przechylenie ±60°, obrót 360°. Czyta kody **1
 
 ### Najczęstsze ustawienia
 
-- **Enter (CR/LF) po skanie**, **Tab po skanie**, **prefiks/sufiks**.
+- **Enter (CR/LF) po skanie** lub **Tab po skanie**, **prefiks/sufiks**.
 - **Mobile Phone/Display Mode** — optymalizacja odczytu z ekranów.
-- **Głośność i ton beepera** — Low / Medium / High.
+- **Beeper Volume / Tone**, **Suppress Power Up Beeps**, **Picklist Mode**.
 `
       },
       {
         title: '6. Konserwacja i czyszczenie',
         content: `
-- Czyść **70% IPA** lub łagodnym mydłem z wodą (zalecane chusteczki Zebra).
-- Nie używaj acetonu, amoniaku (na szybę), środków ściernych ani rozpuszczalników.
+Regularne czyszczenie **okna skanującego** jest konieczne — brudne okno pogarsza odczyt.
 
-**Procedura:** odłącz skaner → przetrzyj **okno skanujące** i obudowę ściereczką z 70% IPA → pozostaw do wyschnięcia. Brudne okno to najczęstsza przyczyna gorszego odczytu.
+### Środki dopuszczone (standardowy DS8108)
+
+- **Alkohol izopropylowy (IPA) 70%** (w tym chusteczki)
+- **Roztwór wybielacza 10% (podchloryn sodu 0,55%) z wodą 90%**
+- **Nadtlenek wodoru 3% z wodą 97%**
+- **Łagodne mydło do naczyń**
+
+### Wersja healthcare (DS8108-HC)
+
+Dodatkowo odporna na **medyczne środki dezynfekujące** (m.in. chusteczki Clorox Healthcare, Dispatch). Stosuj wyłącznie środki z listy dla wersji healthcare i zgodnie z instrukcją producenta środka.
+
+### Środki szkodliwe (NIE stosować)
+
+Aceton, amoniak, roztwory alkaliczne, węglowodory aromatyczne i chlorowane, benzen, kwas karbolowy, związki amin/amoniaku, etanoloamina, etery, ketony, TB-lysoform, toluen, trichloroetylen.
+
+### Procedura
+
+Zwilż miękką ściereczkę dopuszczonym środkiem → przetrzyj okno i obudowę (nie nanoś płynu bezpośrednio) → pozostaw do wyschnięcia.
 `
       },
       {
@@ -35812,11 +35828,12 @@ Tolerancja: pochylenie ±60°, przechylenie ±60°, obrót 360°. Czyta kody **1
         content: `
 | Problem | Możliwa przyczyna | Rozwiązanie |
 |---------|-------------------|-------------|
-| Brak reakcji | Luźny kabel / brak zasilania | Dociśnij kabel USB; spróbuj innego portu |
-| Nie czyta kodu | Brudne okno skanujące | Wyczyść okno 70% IPA |
-| Nie czyta kodu | Symbologia wyłączona / zła odległość | Włącz typ kodu; dostosuj odległość |
+| Brak celownika po naciśnięciu spustu | Brak zasilania / luźny kabel | Dociśnij kabel USB; spróbuj innego portu |
+| Brak celownika | Skaner wyłączony | W trybach IBM/OPOS włącz skaner przez interfejs hosta |
+| Celuje, ale nie dekoduje | Zły typ kodu / kod poza zasięgiem | Włącz symbologię; dostosuj odległość |
 | Słabo czyta kody z telefonu | Wyłączony tryb ekranowy | Włącz Mobile Phone/Display Mode |
-| Bipa, ale brak danych | Zły interfejs hosta | Zeskanuj kod właściwego interfejsu (USB HID / USB COM / RS-232) |
+| Dekoduje, ale nie wysyła danych | Zły interfejs hosta | Zeskanuj kod właściwego interfejsu |
+| **4 długie niskie tony** | Błąd transmisji | Sprawdź konfigurację interfejsu i kabel |
 | W podstawce nie skanuje sam | Wyłączony tryb prezentacji | Sprawdź ustawienie trybu prezentacji |
 
 Jeśli problem nie ustępuje, zaktualizuj firmware (zebra.com/support lub 123Scan) i zresetuj skaner.
@@ -35829,39 +35846,40 @@ Jeśli problem nie ustępuje, zaktualizuj firmware (zebra.com/support lub 123Sca
 |----------|--------|
 | **Typ** | Przewodowy imager 1D/2D z przechwytywaniem obrazu |
 | **Interfejsy** | USB, RS-232, Keyboard Wedge, IBM 46XX (RS-485) |
-| **Upadki** | wielokrotne z 1,8 m na beton |
-| **Tumble** | 2000 z 0,5 m |
 | **Min. gęstość kodu** | Code 39/128 od 3 mil; Data Matrix/QR od 6 mil |
 | **Obrazy** | eksport Bitmap/JPEG/TIFF, 109 PPI (A4) |
 | **Tolerancja** | skew ±60°, pitch ±60°, roll 360° |
-| **Temperatura pracy** | od 0°C do +50°C |
-| **Temperatura przechowywania** | od -40°C do +70°C |
+| **Temperatura pracy** | 0°C do +50°C |
+| **Temperatura przechowywania** | -40°C do +70°C |
 | **Wilgotność** | 5–95% bez kondensacji |
+| **Upadki** | wielokrotne z 1,8 m na beton |
+| **Tumble** | 2000 z 0,5 m |
+| **Healthcare** | wersja HC odporna na dezynfekcję |
 | **Kolory** | Nova White, Twilight Black |
 `
       },
       {
         title: 'FAQ – Najczęściej zadawane pytania',
         content: `
-### Jak ustawić Enter po skanie?
+### Czym czyścić DS8108?
 
-Zeskanuj kod dodający **sufiks Enter (CR/LF)** z Product Reference Guide lub wygeneruj go w 123Scan.
+Dopuszczone są: **70% IPA**, **wybielacz 10%**, **nadtlenek wodoru 3%** oraz **łagodne mydło**. Wersja **healthcare** znosi dodatkowo chusteczki dezynfekujące. Nie używaj acetonu, amoniaku, benzenu ani toluenu.
 
 ### Skaner słabo czyta kody z telefonu — co zrobić?
 
 Włącz **Mobile Phone/Display Mode** — tryb zoptymalizowany pod odczyt z ekranów.
 
+### Skaner wydaje 4 długie niskie tony — co to znaczy?
+
+To **błąd transmisji** — dane nie trafiły do komputera (zły interfejs). Zeskanuj kod właściwego hosta.
+
 ### Jak włączyć skanowanie bez spustu?
 
 Umieść skaner w podstawce **Intellistand** — przejdzie w tryb prezentacji i będzie skanował automatycznie.
 
-### Jak przywrócić ustawienia fabryczne?
-
-Zeskanuj kod **„Set Defaults"** z Product Reference Guide.
-
 ### Czym różni się DS8108 od DS8178?
 
-DS8108 jest **przewodowy**, a DS8178 to wersja **bezprzewodowa** (Bluetooth + bateria + baza). Optyka i funkcje są takie same.
+DS8108 jest **przewodowy**, a DS8178 to wersja **bezprzewodowa** (Bluetooth + bateria + baza CR8178). Optyka i funkcje są takie same.
 `
       }
     ]
