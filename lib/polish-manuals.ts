@@ -37310,18 +37310,21 @@ Jeśli problem nie ustępuje, zaktualizuj firmware (zebra.com/support lub 123Sca
   },
   'cs3000': {
     model: 'CS3000',
-    title: 'Zebra CS3000 – Instrukcja obsługi po polsku',
-    lastUpdated: '2026-06-15',
-    sourceDocument: 'CS3000 Series Companion Scanner Product Reference Guide + Quick Start Guide',
+    title: 'Zebra CS3000 / CS3070 – Instrukcja obsługi po polsku',
+    lastUpdated: '2026-06-16',
+    sourceDocument: 'CS3000 Series Scanner Product Reference Guide (MN-002424)',
     keywords: [
       'zebra cs3000 instrukcja',
       'cs3000 instrukcja po polsku',
       'cs3000 instrukcja obsługi',
+      'cs3070 bluetooth',
       'cs3000 tryb batch',
-      'cs3000 pamięć',
-      'cs3000 usb',
-      'cs3000 ustawienia fabryczne',
+      'cs3000 pamięć barcodefile',
+      'cs3000 przesyłanie danych usb',
+      'cs3000 kasowanie kodu',
+      'cs3000 clear data',
       'cs3000 reset',
+      'cs3000 config.ini',
       'companion scanner zebra cs3000'
     ],
     sections: [
@@ -37330,96 +37333,192 @@ Jeśli problem nie ustępuje, zaktualizuj firmware (zebra.com/support lub 123Sca
         content: `
 ### O skanerze Zebra CS3000
 
-Zebra **CS3000** to **miniaturowy skaner towarzyszący (companion scanner)** z **pamięcią wewnętrzną (tryb batch)**, czytający kody **1D i 2D**. Zbiera skany do pamięci, a następnie przesyła je do komputera przez **USB** (po włożeniu do kolebki/podłączeniu kablem). Maleńki i lekki — idealny do inwentaryzacji i mobilnego zbierania danych tam, gdzie nie ma stałego połączenia.
+Zebra **CS3000** to kieszonkowy skaner towarzyszący (companion scanner), który **odczytuje kody i zapisuje je w pamięci wewnętrznej (0,5 GB Flash)**, a następnie przekazuje do komputera. Mieści się w dłoni i nie ma pistoletowego spustu — obsługuje się go niewielkimi przyciskami. Idealny do inwentaryzacji i mobilnego zbierania danych.
 
-### Kluczowe cechy
+Seria występuje w dwóch wersjach:
 
-| Cecha | Wartość |
-|-------|---------|
-| **Typ** | Miniaturowy companion scanner 1D/2D |
-| **Tryb batch** | zapisuje skany w pamięci, przesyła przez USB |
-| **Łączność/ładowanie** | USB (kabel/kolebka) |
-| **Obsługa** | przycisk skanowania |
+| Model | Łączność | Pamięć |
+|-------|----------|--------|
+| **CS3000** | USB (tryb **batch** – zapis offline) | 0,5 GB Flash |
+| **CS3070** | USB (batch) **oraz Bluetooth** (przesył na żywo) | 0,5 GB Flash |
 
-> **Uwaga:** naładuj skaner do pełna przed pierwszym użyciem.
+Do każdego skanera dołączony jest **kabel USB**. Opcjonalnie dostępna jest **kolebka (cradle)**, która służy jako podstawka, ładowarka i łącze USB do komputera.
+
+> **Kluczowa różnica wobec zwykłego skanera:** CS3000 po podłączeniu do komputera widoczny jest jako **dysk wymienny (pamięć masowa USB)** — dane przegrywa się jako plik, a nie „wpisuje" do aktywnego okna. Szczegóły w sekcji „Tryb batch".
 `
       },
       {
-        title: '2. Praca w trybie batch',
+        title: '2. Elementy skanera',
         content: `
-1. Naładuj skaner (USB/kolebka).
-2. Skanuj kody — każdy odczyt zostaje **zapisany w pamięci** (skaner bipnie i mignie diodą).
-3. Po zakończeniu podłącz skaner do komputera przez **USB** — zapisane skany zostaną przesłane do systemu.
+Na obudowie znajdują się:
 
-Dzięki trybowi batch skaner pracuje **samodzielnie**, bez stałego połączenia z hostem.
+| Element | Funkcja |
+|---------|---------|
+| **Przycisk skanowania (+)** | Skanowanie kodu |
+| **Przycisk kasowania (–)** | Usunięcie kodu z pamięci (tylko w trybie batch) |
+| **Przycisk / dioda Bluetooth** | Parowanie i status łączności (CS3070) |
+| **Dioda LED** | Sygnalizacja odczytu i stanu |
+| **Przycisk Reset** | Restart skanera |
+| **Port Mini-USB** | Ładowanie i połączenie z komputerem |
+| **Pokrywa ochronna** | Osłona portu/elementów |
 `
       },
       {
-        title: '3. Skanowanie kodów',
+        title: '3. Ładowanie i bateria',
         content: `
-1. Skieruj skaner na kod i naciśnij **przycisk skanowania**.
-2. Ustaw celownik na kodzie.
-3. Po odczycie skaner bipnie i mignie diodą.
+Skaner ładuje się na dwa sposoby:
 
-Czyta kody **1D** (EAN/UPC, Code 39/128, GS1 DataBar) i **2D** (PDF417, Data Matrix, QR Code).
+- **Kablem USB** — podłączony do portu USB komputera lub zasilacza USB.
+- **W kolebce ładującej** — wystarczy umieścić w niej skaner.
+
+O stanie ładowania informuje **dioda ładowania (Scanner Charging LED)**. Przed pierwszym użyciem naładuj skaner do pełna.
+
+> **Niski poziom baterii** sygnalizowany jest dźwiękowo/diodą (zachowanie można ustawić w pliku konfiguracyjnym – patrz „Konfiguracja"). Bateria jest wymienna.
 `
       },
       {
-        title: '4. Wskaźniki i konfiguracja',
+        title: '4. Skanowanie i kasowanie kodów',
         content: `
-### Sygnalizacja
+### Skanowanie
 
+1. Skieruj skaner na kod.
+2. Naciśnij **przycisk skanowania (+)**.
+3. Upewnij się, że linia celująca przecina **wszystkie kreski i odstępy** kodu.
+4. Po poprawnym odczycie skaner **bipnie, a dioda zaświeci na zielono** — kod został zapisany.
+
+### Kasowanie kodu (korekta) — tylko tryb batch
+
+Jeśli zeskanujesz coś przez pomyłkę:
+
+1. Skieruj skaner na ten sam kod.
+2. Naciśnij **przycisk kasowania (–)** — kod zostanie usunięty z pamięci.
+
+> **Uwaga:** w trybie **Bluetooth (CS3070) kodów nie można kasować** przyciskiem (–) — dane są wysyłane na bieżąco i nie są przechowywane na skanerze.
+`
+      },
+      {
+        title: '5. Tryb batch – przesyłanie danych do komputera',
+        content: `
+W trybie batch skaner **zapisuje wszystkie odczyty w pamięci** i pracuje samodzielnie, bez połączenia. Aby przenieść dane:
+
+1. Podłącz skaner do komputera **kablem USB** lub umieść go w **kolebce**.
+2. Skaner pojawi się w systemie jako **dysk wymienny** (jak pendrive).
+3. Otwórz go w Eksploratorze plików i **skopiuj plik **BarcodeFile.txt**** na komputer — to on zawiera wszystkie zeskanowane kody.
+
+### Czyszczenie pamięci
+
+Po przegraniu danych wyczyść pamięć, aby zwolnić miejsce na kolejną sesję:
+
+- **usuń plik BarcodeFile.txt** ze skanera, **lub**
+- zeskanuj kod **„Clear Data"** z Product Reference Guide.
+
+### Automatyczny przesył (autorun)
+
+Skaner obsługuje funkcję **autorun** — przygotowując plik **autorun.inf**, można sprawić, że po podłączeniu skanera dane skopiują się automatycznie lub uruchomi się wskazana aplikacja.
+`
+      },
+      {
+        title: '6. Tryb Bluetooth (CS3070)',
+        content: `
+Wersja **CS3070** łączy się z komputerem, tabletem lub telefonem przez **Bluetooth** i przesyła dane **po każdym skanie na żywo** (nie zapisuje ich w pamięci).
+
+### Profile połączenia
+
+- **HID** — skaner zachowuje się jak **klawiatura** (dane trafiają do aktywnego pola).
+- **SPP (Serial Port Profile)** — skaner działa jak połączenie szeregowe.
+
+### Parowanie
+
+Sparuj skaner z urządzeniem przez ustawienia Bluetooth hosta. Jeśli host poprosi o **PIN**, wprowadza się go **skanując kody numeryczne** z Product Reference Guide. Stałe, wolne miganie diody Bluetooth oznacza aktywne połączenie.
+
+> **Ważne — utrata danych poza zasięgiem:** jeśli skaner oddali się od hosta i **nie połączy ponownie w wyznaczonym czasie, zeskanowane dane są tracone**, a skaner wydaje **potrójny sygnał błędu (3 bipy)**. Przy zerwaniu łączności dioda Bluetooth przestaje równomiernie migać, a skaner emituje krótki sygnał wysoki–niski.
+`
+      },
+      {
+        title: '7. Wskaźniki LED i sygnały dźwiękowe',
+        content: `
 | Sygnał | Znaczenie |
 |--------|-----------|
-| Sygnał startowy | Skaner gotowy |
-| 1 bip + mignięcie diody | Kod odczytany i zapisany |
-| Niski ton | Niski poziom baterii |
+| **Bip + zielona dioda** | Kod odczytany i zapisany poprawnie (good decode) |
+| **Dioda Bluetooth – wolne, równe miganie** | Połączenie Bluetooth aktywne (CS3070) |
+| **Krótki sygnał wysoki–niski** | Zerwane połączenie Bluetooth |
+| **3 bipy (ton błędu)** | Utrata danych — skaner poza zasięgiem hosta |
+| **Dioda ładowania** | Stan ładowania baterii |
+| Sygnał niskiej baterii | Bateria bliska rozładowania |
 
-### Konfiguracja kodami kreskowymi
-
-- **Przywrócenie ustawień fabrycznych:** zeskanuj kod **„Set Defaults"** z Product Reference Guide (lub **123Scan**).
-- **Enter (CR/LF) po skanie**, **prefiks/sufiks**, **głośność i ton beepera**.
-- Ustawienia trybu **batch** i przesyłania danych.
+Domyślna głośność beepera to **High (wysoka)**; można ją zmienić w pliku konfiguracyjnym.
 `
       },
       {
-        title: '5. Konserwacja i czyszczenie',
+        title: '8. Konfiguracja (config.ini)',
         content: `
-- Czyść **70% IPA** lub łagodnym mydłem z wodą.
+CS3000 konfiguruje się przede wszystkim przez **plik konfiguracyjny config.ini** zapisany na skanerze (skaner jest widoczny jako dysk) oraz kody kreskowe z Product Reference Guide / program **123Scan**.
+
+W pliku **config.ini** można ustawić m.in.:
+
+- **Beeper Volume** — głośność sygnału (domyślnie High),
+- **Low Battery Indication** — sposób sygnalizacji niskiej baterii,
+- **Maximum Bar Code Length** — maksymalną długość kodu,
+- **Enable/Disable All Code Types** — włączanie/wyłączanie typów kodów,
+- prefiks/sufiks danych.
+
+### Wdrażanie wielu skanerów (staging)
+
+Ten sam plik konfiguracyjny można **skopiować na wiele skanerów**, aby szybko ustawić całą flotę identycznie.
+
+### Reset
+
+- **Przywrócenie ustawień fabrycznych / czyszczenie danych** — zeskanuj odpowiedni kod („Set Defaults" / „Clear Data") z Product Reference Guide.
+- **Restart sprzętowy** — naciśnij **przycisk Reset** na obudowie.
+`
+      },
+      {
+        title: '9. Konserwacja i czyszczenie',
+        content: `
+- Czyść **70% alkoholem izopropylowym (IPA)** lub łagodnym mydłem z wodą.
 - Nie używaj acetonu, amoniaku (na okno), środków ściernych ani rozpuszczalników.
 
-**Procedura:** odłącz skaner → przetrzyj **okno skanujące** i obudowę 70% IPA → wyczyść **styki ładowania** → pozostaw do wyschnięcia.
+**Procedura:** odłącz skaner → przetrzyj **okno skanujące** i obudowę ściereczką z 70% IPA → wyczyść **styki ładowania** → pozostaw do wyschnięcia.
 `
       },
       {
-        title: '6. Rozwiązywanie problemów',
+        title: '10. Rozwiązywanie problemów',
         content: `
 | Problem | Możliwa przyczyna | Rozwiązanie |
 |---------|-------------------|-------------|
-| Skany nie pojawiają się w systemie | Skaner nie został podłączony | Podłącz skaner przez USB, aby przesłać dane z pamięci |
+| Nie widzę zeskanowanych kodów na komputerze | To skaner batch — dane są w pliku | Podłącz skaner przez USB, otwórz go jak dysk i skopiuj **BarcodeFile.txt** |
+| Skaner ciągle pokazuje stare skany | Pamięć nie została wyczyszczona | Usuń **BarcodeFile.txt** lub zeskanuj kod **„Clear Data"** |
+| CS3070: zniknęły zeskanowane dane | Skaner był poza zasięgiem Bluetooth (3 bipy) | W trudnym zasięgu używaj trybu batch (USB); pozostań w zasięgu hosta |
 | Nie ładuje się | Brudne styki / złe zasilanie | Wyczyść styki 70% IPA; sprawdź kabel/kolebkę |
-| Nie czyta kodu | Brudne okno / zła odległość | Wyczyść okno; dostosuj odległość |
-| Pamięć pełna | Za dużo zapisanych skanów | Prześlij dane do komputera, aby zwolnić pamięć |
+| Nie czyta kodu | Linia nie przecina całego kodu / brudne okno | Ustaw linię na całym kodzie; wyczyść okno |
+| Skaner nie reaguje | Zawieszenie | Naciśnij **przycisk Reset** |
 
 Jeśli problem nie ustępuje, zaktualizuj firmware (zebra.com/support lub 123Scan).
 `
       },
       {
-        title: '7. Specyfikacja i FAQ',
+        title: '11. Specyfikacja i FAQ',
         content: `
-| Parametr | CS3000 |
-|----------|--------|
-| **Typ** | Miniaturowy companion scanner 1D/2D |
-| **Tryb batch** | tak (zapis offline, przesył przez USB) |
-| **Łączność/ładowanie** | USB |
+| Parametr | CS3000 / CS3070 |
+|----------|-----------------|
+| **Typ** | Kieszonkowy companion scanner z pamięcią |
+| **Pamięć** | 0,5 GB Flash |
+| **CS3000** | USB (tryb batch) |
+| **CS3070** | USB (batch) + Bluetooth (HID/SPP) |
+| **Przyciski** | skanowanie (+), kasowanie (–), Bluetooth, Reset |
+| **Ładowanie** | kabel USB lub kolebka |
 
 ### FAQ
 
-**Jak przesłać zebrane skany?** Podłącz skaner do komputera przez **USB** — dane z pamięci zostaną wysłane.
+**Jak przegrać zebrane kody do komputera?** Podłącz skaner kablem USB (lub włóż do kolebki) — pojawi się jako **dysk wymienny**. Skopiuj z niego plik **BarcodeFile.txt**.
 
-**Skaner przestał zapisywać skany?** Prawdopodobnie **pamięć jest pełna** — prześlij dane do komputera, aby ją zwolnić.
+**Jak wyczyścić pamięć?** Usuń plik **BarcodeFile.txt** ze skanera lub zeskanuj kod **„Clear Data"**.
 
-**Jak przywrócić ustawienia fabryczne?** Zeskanuj kod **„Set Defaults"** z Product Reference Guide.
+**Pomyłkowo zeskanowałem kod — jak go usunąć?** W trybie batch skieruj skaner na ten kod i naciśnij **przycisk kasowania (–)**. (W trybie Bluetooth nie da się kasować.)
+
+**Czym różni się CS3000 od CS3070?** CS3070 ma dodatkowo **Bluetooth** (przesył na żywo, profile HID/SPP). CS3000 działa tylko w trybie batch przez USB.
+
+**Dlaczego CS3070 „zgubił" dane?** Bo wyszedł **poza zasięg** hosta i nie połączył się ponownie w wyznaczonym czasie (3 bipy). Tam, gdzie zasięg bywa słaby, pewniejszy jest tryb batch (USB).
 `
       }
     ]
