@@ -3,6 +3,22 @@ const nextConfig = {
   // Zwiększony timeout dla dużych stron (default: 60s)
   staticPageGenerationTimeout: 180,
   
+  // Furgonetka „własna integracja" dokleja /orders i /orders/{id}/tracking_number
+  // do „Adresu sklepu". Gdy bazą jest goła domena (https://serwis-zebry.pl),
+  // przepisujemy te ścieżki na faktyczne endpointy pod /api/furgonetka.
+  async rewrites() {
+    return [
+      {
+        source: '/orders',
+        destination: '/api/furgonetka/orders',
+      },
+      {
+        source: '/orders/:id/tracking_number',
+        destination: '/api/furgonetka/orders/:id/tracking_number',
+      },
+    ]
+  },
+
   // Redirecty 301 dla zmienionych URL-i
   async redirects() {
     return [

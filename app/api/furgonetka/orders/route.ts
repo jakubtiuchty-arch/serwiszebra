@@ -1,194 +1,140 @@
 // app/api/furgonetka/orders/route.ts
+// „Własna integracja" Furgonetki — Furgonetka cyklicznie odpytuje ten endpoint,
+// pobiera opłacone, jeszcze niewysłane zamówienia sklepu (shop_orders) i — przy
+// włączonym auto-zamawianiu w panelu integracji — sama tworzy i zamawia przesyłkę,
+// po czym oddzwania z numerem listu na /api/furgonetka/orders/{order_number}/tracking_number.
 
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 
-// Supabase admin client
+export const runtime = 'nodejs'
+export const dynamic = 'force-dynamic'
+
 const supabaseAdmin = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.SUPABASE_SERVICE_ROLE_KEY!
 )
 
-export async function GET(request: NextRequest) {
+// Token z różnych miejsc (Furgonetka bywa wysyła w nagłówku albo w query) — jak w takma.
+function verifyToken(request: NextRequest): boolean {
+  const expected = process.env.FURGONETKA_WEBHOOK_TOKEN
+  if (!expected) return false
+  const url = new URL(request.url)
+  const candidates = [
+    request.headers.get('x-auth-token'),
+    request.headers.get('x-token'),
+    request.headers.get('authorization')?.replace(/^Bearer\s+/i, ''),
+    url.searchParams.get('token'),
+  ].filter(Boolean) as string[]
+  return candidates.some((t) => t.trim() === expected)
+}
+
+function iso(d?: string | null): string {
+  if (!d) return ''
   try {
-    // Weryfikacja tokenu
-    const authHeader = request.headers.get('authorization')
-    const expectedToken = process.env.FURGONETKA_WEBHOOK_TOKEN
+    return new Date(d).toISOString().replace(/\.\d{3}Z$/, '')
+  } catch {
+    return ''
+  }
+}
 
-    if (!authHeader || !expectedToken) {
-      return NextResponse.json(
-        { error: 'Unauthorized - missing token' },
-        { status: 401 }
-      )
-    }
+export async function GET(request: NextRequest) {
+  if (!verifyToken(request)) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  }
 
-    // Token może być w formacie "Bearer TOKEN" lub samo "TOKEN"
-    const token = authHeader.replace('Bearer ', '').trim()
-
-    if (token !== expectedToken) {
-      console.error('❌ Invalid Furgonetka token')
-      return NextResponse.json(
-        { error: 'Unauthorized - invalid token' },
-        { status: 401 }
-      )
-    }
-
-    // Pobierz tylko zamówienia ze statusem "confirmed" (potwierdzone)
-    // które jeszcze nie mają utworzonej przesyłki
+  try {
+    // Opłacone (P24 ustawia status='confirmed' + payment_status='succeeded'),
+    // jeszcze niewysłane. Po nadaniu status zmienia się na 'shipped' → wypada z feedu.
     const { data: orders, error } = await supabaseAdmin
-      .from('orders')
-      .select(`
-        id,
-        order_number,
-        order_status,
-        contact_person,
-        customer_company_name,
-        customer_nip,
-        customer_email,
-        customer_phone,
-        delivery_street,
-        delivery_city,
-        delivery_postal_code,
-        delivery_method,
-        delivery_cost_brutto,
-        customer_notes,
-        total_brutto,
-        payment_method,
-        created_at,
-        updated_at,
-        tracking_number,
-        order_items (
-          product_name,
-          product_sku,
-          quantity,
-          unit_price_brutto,
-          unit_price_netto
-        )
-      `)
-      .eq('order_status', 'confirmed')
-      .is('tracking_number', null)
+      .from('shop_orders')
+      .select('*')
+      .eq('status', 'confirmed')
       .order('created_at', { ascending: false })
 
     if (error) {
-      console.error('❌ Error fetching orders:', error)
-      return NextResponse.json(
-        { error: 'Database error' },
-        { status: 500 }
-      )
+      console.error('[furgonetka/orders] DB error:', error)
+      return NextResponse.json({ error: 'Database error' }, { status: 500 })
     }
 
-    // Format zamówień dla Furgonetka - zgodny z oficjalną dokumentacją
-    const formattedOrders = orders.map(order => {
-      // Rozdziel imię i nazwisko
-      const nameParts = order.contact_person.split(' ')
-      const name = nameParts[0] || ''
-      const surname = nameParts.slice(1).join(' ') || ''
-      
-      // Oblicz całkowitą wagę (szacunkowo 0.5kg na produkt)
-      const totalWeight = order.order_items.reduce((sum, item) => sum + (item.quantity * 0.5), 0)
-      
+    const formatted = (orders || []).map((o: any) => {
+      const items = (typeof o.items === 'string' ? JSON.parse(o.items) : o.items) || []
+      const itemsBrutto = items.reduce(
+        (s: number, it: any) => s + (Number(it.priceBrutto) || 0) * (Number(it.quantity) || 1),
+        0,
+      )
+      const totalBrutto = Number(o.total_brutto) || 0
+      // Koszt dostawy = różnica między sumą zamówienia a sumą pozycji (sklep dolicza 25 zł brutto).
+      const shippingBrutto = Math.max(0, Number((totalBrutto - itemsBrutto).toFixed(2)))
+      const totalWeight = Math.max(
+        0.5,
+        items.reduce((s: number, it: any) => s + (Number(it.quantity) || 1) * 0.5, 0),
+      )
+
+      const parts = String(o.contact_name || '').trim().split(/\s+/)
+      const name = parts[0] || ''
+      const surname = parts.slice(1).join(' ') || ''
+
+      const street = (
+        [o.street, o.house_number].filter(Boolean).join(' ') +
+        (o.apartment_number ? `/${o.apartment_number}` : '')
+      ).replace(/\s+/g, ' ').trim()
+
+      const address = {
+        company: o.company_name || '',
+        name,
+        surname,
+        street: street.trim(),
+        city: o.city || '',
+        postcode: o.postal_code || '',
+        countryCode: 'PL',
+        phone: String(o.phone || '').replace(/\s+/g, ''),
+        email: o.email || '',
+      }
+
       return {
-        // ID zamówienia z systemu (wymagane, unikalne)
-        sourceOrderId: order.order_number,
-        
-        // ID klienta (można użyć hash email)
-        sourceClientId: order.customer_email.split('@')[0].length,
-        
-        // Data utworzenia zamówienia (format bez mikrosekund)
-        datetimeOrder: new Date(order.created_at).toISOString().replace(/\.\d{3}Z$/, ''),
-        
-        // Data ostatniej zmiany
-        sourceDatetimeChange: new Date(order.updated_at || order.created_at).toISOString().replace(/\.\d{3}Z$/, ''),
-        
-        // Usługa kurierska
+        sourceOrderId: o.order_number,
+        sourceClientId: Number(String(o.email || '').replace(/\D/g, '').slice(0, 9)) || 0,
+        datetimeOrder: iso(o.paid_at || o.created_at),
+        sourceDatetimeChange: iso(o.updated_at || o.created_at),
         service: 'dpd',
         serviceDescription: 'Kurier DPD',
-        
-        // Status zamówienia
-        status: order.payment_method === 'stripe' ? 'paid' : 'new',
-        
-        // Ceny
-        totalPrice: parseFloat(order.total_brutto),
-        shippingCost: parseFloat(order.delivery_cost_brutto || '0'),
-        totalPaid: parseFloat(order.total_brutto),
-        
-        // Pobranie (COD)
-        codAmount: order.payment_method === 'cod' ? parseFloat(order.total_brutto) : null,
-        
-        // Waga całkowita (kg)
-        totalWeight: totalWeight,
-        
-        // Metoda dostawy
-        shippingMethodId: order.delivery_method === 'courier' ? 1 : 2,
+        status: 'paid',
+        totalPrice: totalBrutto,
+        shippingCost: shippingBrutto,
         shippingTaxRate: 23,
-        
-        // Punkt odbioru (dla paczkomatu)
+        totalPaid: totalBrutto,
+        codAmount: null,
+        totalWeight,
         point: null,
-        
-        // Uwagi
-        comment: order.customer_notes || '',
-        
-        // Adres dostawy
-        shippingAddress: {
-          company: order.customer_company_name || '',
-          name: name,
-          surname: surname,
-          street: order.delivery_street,
-          city: order.delivery_city,
-          postcode: order.delivery_postal_code,
-          countryCode: 'PL',
-          phone: order.customer_phone,
-          email: order.customer_email
-        },
-        
-        // Adres do faktury
-        invoiceAddress: {
-          company: order.customer_company_name || '',
-          name: name,
-          surname: surname,
-          street: order.delivery_street,
-          city: order.delivery_city,
-          postcode: order.delivery_postal_code,
-          countryCode: 'PL',
-          phone: order.customer_phone,
-          email: order.customer_email,
-          nip: order.customer_nip || ''
-        },
-        
-        // Produkty w zamówieniu
-        products: order.order_items.map((item, index) => ({
-          sourceProductId: index + 1,
-          name: item.product_name,
-          priceGross: parseFloat(item.unit_price_brutto),
-          priceNet: parseFloat(item.unit_price_netto || item.unit_price_brutto),
+        comment: o.notes || '',
+        shippingAddress: address,
+        invoiceAddress: { ...address, nip: o.nip || '' },
+        products: items.map((it: any, i: number) => ({
+          sourceProductId: i + 1,
+          name: it.name || '',
+          priceGross: Number(it.priceBrutto) || 0,
+          priceNet: Number(it.priceNetto ?? it.priceBrutto) || 0,
           vat: 23,
           taxRate: 23,
-          weight: 0.5, // kg - domyślna waga
-          quantity: item.quantity,
-          width: 20,   // cm - domyślne wymiary
-          height: 10,  // cm
-          depth: 30,   // cm
-          sku: item.product_sku || `PROD-${index + 1}`,
+          weight: 0.5,
+          quantity: Number(it.quantity) || 1,
+          width: 20,
+          height: 15,
+          depth: 10,
+          sku: it.sku || `PROD-${i + 1}`,
           gtin: '',
           imageUrl: '',
-          unit: 'szt.'
+          unit: 'szt.',
         })),
-        
-        // Data płatności
-        paymentDatetime: order.payment_method === 'stripe' ? new Date(order.created_at).toISOString().replace(/\.\d{3}Z$/, '') : null
+        paymentDatetime: iso(o.paid_at || o.created_at),
       }
     })
 
-    console.log(`✅ Furgonetka orders export: ${formattedOrders.length} orders`)
-
-    // Zwróć array zamówień
-    return NextResponse.json(formattedOrders)
-
+    console.log(`[furgonetka/orders] eksport: ${formatted.length} zamówień`)
+    return NextResponse.json(formatted)
   } catch (error: any) {
-    console.error('❌ Error in Furgonetka orders export:', error)
-    return NextResponse.json(
-      { error: 'Internal server error', details: error.message },
-      { status: 500 }
-    )
+    console.error('[furgonetka/orders] error:', error?.message || error)
+    return NextResponse.json({ error: 'Internal server error', details: error?.message }, { status: 500 })
   }
 }
