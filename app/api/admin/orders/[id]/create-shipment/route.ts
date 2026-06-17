@@ -1,6 +1,8 @@
 // app/api/admin/orders/[id]/create-shipment/route.ts
 // Tworzenie przesyłki Furgonetka dla zamówienia sklepu (shop_orders).
 
+export const maxDuration = 60
+
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import {
@@ -108,7 +110,7 @@ export async function POST(
     const courierName = (services.find((s) => s.id === serviceId)?.name) || 'Kurier'
     // Etykieta jest dostępna dopiero gdy przesyłka jest ZAMÓWIONA (nie tylko w koszyku).
     // Krótki retry — jeśli włączone auto-zamawianie, etykieta przyjdzie; inaczej null.
-    const labelBase64 = await getLabelRetry(pkg.id, 2, 1500)
+    const labelBase64 = await getLabelRetry(pkg.id, 7, 3000)
 
     // Zapis: package_id w stripe_session_id (reużycie kolumny po Stripe) = marker „utworzono".
     // status 'shipped' ustawiamy tylko, gdy mamy już numer listu (przesyłka zamówiona).
