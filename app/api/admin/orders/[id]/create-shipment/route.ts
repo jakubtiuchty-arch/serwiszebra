@@ -108,9 +108,11 @@ export async function POST(
 
     const tracking = pkg.tracking || (await getPackageTracking(pkg.id)) || ''
     const courierName = (services.find((s) => s.id === serviceId)?.name) || 'Kurier'
-    // Etykieta jest dostępna dopiero gdy przesyłka jest ZAMÓWIONA (nie tylko w koszyku).
-    // Krótki retry — jeśli włączone auto-zamawianie, etykieta przyjdzie; inaczej null.
-    const labelBase64 = await getLabelRetry(pkg.id, 7, 3000)
+    // Link do panelu Furgonetka — tu pracownik zamawia przesyłkę (1 klik, dane wypełnione).
+    const panelUrl = `https://furgonetka.pl/konto/edycja-paczki/${pkg.id}`
+    // Etykieta jest dostępna dopiero PO zamówieniu przesyłki w panelu. Krótki check na wypadek
+    // konta z natychmiastowym zamawianiem; inaczej null → etykieta z „Pobierz etykietę" po zamówieniu.
+    const labelBase64 = await getLabelRetry(pkg.id, 2, 1500)
 
     // Zapis: package_id w stripe_session_id (reużycie kolumny po Stripe) = marker „utworzono".
     // status 'shipped' ustawiamy tylko, gdy mamy już numer listu (przesyłka zamówiona).
@@ -146,6 +148,7 @@ export async function POST(
       ordered,
       tracking,
       courier: courierName,
+      panelUrl,
       labelBase64: labelBase64 || null,
     })
   } catch (error: any) {

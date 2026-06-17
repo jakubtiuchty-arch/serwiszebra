@@ -224,8 +224,8 @@ export default function OrderDetailPage() {
 
       const data = await response.json()
 
-      // Etykieta gotowa (przesyłka zamówiona) → otwórz PDF. W przeciwnym razie poinformuj.
       if (data.labelBase64) {
+        // Konto z natychmiastowym zamawianiem — etykieta od razu, otwórz PDF do druku
         try {
           const bin = atob(data.labelBase64)
           const bytes = new Uint8Array(bin.length)
@@ -233,17 +233,19 @@ export default function OrderDetailPage() {
           const url = URL.createObjectURL(new Blob([bytes], { type: 'application/pdf' }))
           window.open(url, '_blank')
         } catch {
-          /* nie udało się otworzyć — etykieta dostępna z przycisku „Pobierz etykietę" */
+          if (data.panelUrl) window.open(data.panelUrl, '_blank')
         }
-      } else {
-        setShipmentError('Przesyłka utworzona w Furgonetka. Etykieta będzie dostępna po zamówieniu przesyłki (panel Furgonetka lub automatyczne zamawianie). Potem użyj „Pobierz etykietę".')
+      } else if (data.panelUrl) {
+        // Standard: paczka utworzona z danymi → otwórz panel Furgonetka, by ją zamówić (1 klik)
+        window.open(data.panelUrl, '_blank')
+        setShipmentError('Przesyłka utworzona z danymi zamówienia. W otwartym panelu Furgonetka kliknij „Zamów", a potem tutaj „Pobierz etykietę" — wydrukujesz ją na Zebrze.')
       }
 
       // Odśwież dane zamówienia
       await fetchOrder()
 
       setShowSuccessToast(true)
-      setTimeout(() => setShowSuccessToast(false), 4000)
+      setTimeout(() => setShowSuccessToast(false), 5000)
 
     } catch (err) {
       console.error('Error creating shipment:', err)
