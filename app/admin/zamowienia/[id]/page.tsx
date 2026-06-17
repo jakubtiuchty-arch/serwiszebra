@@ -219,7 +219,8 @@ export default function OrderDetailPage() {
 
       if (!response.ok) {
         const error = await response.json()
-        throw new Error(error.error || 'Nie udało się utworzyć przesyłki')
+        // Pokaż konkretną przyczynę z Furgonetki (np. zły adres), nie tylko generyk
+        throw new Error(error.details || error.error || 'Nie udało się utworzyć przesyłki')
       }
 
       const data = await response.json()
