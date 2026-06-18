@@ -180,7 +180,7 @@ export const blogPosts: BlogPost[] = [
       'porównanie tabletów Zebra'
     ],
     seo: {
-      metaTitle: 'Zebra ET401 — tablet przemysłowy Zebra: specyfikacja i funkcje [2026]',
+      metaTitle: 'Zebra ET401 — tablet przemysłowy Zebra [2026]',
       metaDescription: 'Zebra ET401 — nowy wzmocniony tablet przemysłowy Zebra (8" i 10"). Procesor Dragonwing Q-6690, Wi-Fi 7, wbudowany RFID UHF, IP68, ekran WUXGA, 8 lat eksploatacji. Pełna specyfikacja, funkcje, zastosowania i różnice względem ET40/ET45. Autoryzowany serwis Zebra — TAKMA Wrocław.',
       keywords: [
         // Główne frazy

@@ -206,6 +206,7 @@ export default function BlogPostPage({
     const priceOverrides: Record<string, { low: string; high: string; count: number }> = {
       'zebra-tc501-specyfikacja-cena-gdzie-kupic': { low: '5000', high: '10500', count: 5 },
       'zebra-tc701-specyfikacja-cena-gdzie-kupic': { low: '8000', high: '15000', count: 5 },
+      'zebra-et401-nowy-tablet-przemyslowy': { low: '2500', high: '5500', count: 6 },
     }
     
     if (priceOverrides[post.slug]) {
