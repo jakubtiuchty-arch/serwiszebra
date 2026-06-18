@@ -21,6 +21,7 @@ interface ModelFunnel {
 // Jawne nadpisania — deep-link do konkretnej karty produktu lub obsługa EOL → następca.
 const MODELS: Record<string, ModelFunnel> = {
   TC22: { takmaSlug: 'zebra-tc22', inProduction: true },
+  ET401: { takmaSlug: 'zebra-et401', inProduction: true },
 }
 
 // Typ urządzenia po prefiksie modelu → kategoria Zebra na takma.com.pl (każda istnieje).
@@ -43,7 +44,18 @@ function categoryPath(model: string): string {
   return hit ? `/${hit[1]}` : '/zebra'
 }
 
-export default function FunnelBanners({ model }: { model: string }) {
+export default function FunnelBanners({
+  model,
+  headline,
+  sub,
+  ctaLabel,
+}: {
+  model: string
+  /** Nadpisania treści (np. baner produktowy we wpisie blogowym) — gdy puste, używana jest domyślna treść instrukcji. */
+  headline?: string
+  sub?: string
+  ctaLabel?: string
+}) {
   if (!model) return null
   const cfg: ModelFunnel = MODELS[model.toUpperCase()] || {}
   const inProd = cfg.inProduction !== false
@@ -86,14 +98,14 @@ export default function FunnelBanners({ model }: { model: string }) {
         />
         <div className="flex-1 max-w-2xl">
           <p className="text-lg sm:text-xl font-bold text-white drop-shadow-sm">
-            {inProd
+            {headline ?? (inProd
               ? `Potrzebujesz nowego ${model} albo powiększasz flotę?`
-              : `Model ${model} nie jest już produkowany?`}
+              : `Model ${model} nie jest już produkowany?`)}
           </p>
           <p className="text-sm text-slate-200 mt-1.5 drop-shadow-sm max-w-lg text-pretty">
-            {inProd
+            {sub ?? (inProd
               ? `Ten sam zespół, który serwisuje Twój sprzęt, dobierze konfigurację ${model} pod Twoje wdrożenie i wyśle urządzenie gotowe do pracy.`
-              : `Ten sam zespół, który serwisuje Twój sprzęt, dobierze następcę${cfg.successorName ? ` — ${cfg.successorName}` : ''} o równoważnych funkcjach i przygotuje go do pracy.`}
+              : `Ten sam zespół, który serwisuje Twój sprzęt, dobierze następcę${cfg.successorName ? ` — ${cfg.successorName}` : ''} o równoważnych funkcjach i przygotuje go do pracy.`)}
           </p>
           <div className="flex flex-wrap gap-2.5 mt-4">
             <a
@@ -102,11 +114,11 @@ export default function FunnelBanners({ model }: { model: string }) {
               rel="noopener"
               className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-[#A8F000] text-slate-950 text-sm font-bold hover:bg-[#bcff33] transition-colors shadow-lg shadow-[#A8F000]/30"
             >
-              {!inProd
+              {ctaLabel ?? (!inProd
                 ? `Dobierz następcę${cfg.successorName ? ` — ${cfg.successorName}` : ''}`
                 : isProductLink
                   ? `Sprawdź cenę i dostępność ${model}`
-                  : `Zobacz ${model} w ofercie TAKMA`}
+                  : `Zobacz ${model} w ofercie TAKMA`)}
               <ArrowRight className="w-4 h-4" />
             </a>
           </div>

@@ -19,6 +19,7 @@ import {
   Package
 } from 'lucide-react'
 import BlogReactions from '@/components/BlogReactions'
+import FunnelBanners from '@/components/FunnelBanners'
 
 // ISR - strony rewalidowane co 60 sekund (szybsze odświeżanie po deployu)
 export const revalidate = 60
@@ -483,6 +484,18 @@ export default function BlogPostPage({
               className="prose prose-sm sm:prose-lg max-w-none prose-headings:font-bold prose-headings:text-gray-900 prose-p:text-gray-700 prose-a:text-blue-600 prose-strong:text-gray-900 prose-code:bg-gray-100 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-pre:bg-gray-900 prose-blockquote:border-blue-500 prose-blockquote:bg-blue-50 prose-blockquote:py-1 prose-blockquote:not-italic prose-img:rounded-xl"
               dangerouslySetInnerHTML={{ __html: parseMarkdown(post.content) }}
             />
+
+            {/* Baner lejka → karta produktu TAKMA (most do zakupu) */}
+            {post.funnel && (
+              <div className="mt-10">
+                <FunnelBanners
+                  model={post.funnel.model}
+                  headline={post.funnel.headline}
+                  sub={post.funnel.sub}
+                  ctaLabel={post.funnel.ctaLabel}
+                />
+              </div>
+            )}
 
             {/* Tags */}
             <div className="mt-12 pt-8 border-t border-gray-200">

@@ -16,6 +16,7 @@ export interface BlogPost {
   readingTime: number // w minutach
   deviceType: 'drukarki' | 'terminale' | 'skanery' | 'tablety' | 'inne'
   subDeviceType?: string // Podkategoria urządzenia (np. 'etykiet', 'kart', 'opasek', 'mobilne')
+  funnel?: { model: string; headline: string; sub: string; ctaLabel: string } // Baner lejka (most do karty produktu TAKMA) wstawiany na końcu wpisu
   category: 'poradniki' | 'troubleshooting' | 'porownania' | 'aktualnosci' | 'nowosci-produktowe'
   tags: string[]
   seo: {
@@ -140,6 +141,311 @@ export const BLOG_CATEGORIES = {
 
 // Wszystkie artykuły bloga
 export const blogPosts: BlogPost[] = [
+  {
+    slug: 'zebra-et401-nowy-tablet-przemyslowy',
+    title: 'Zebra ET401 — nowy wzmocniony tablet przemysłowy Zebra [2026]',
+    excerpt: 'Zebra ET401 to nowy 8- i 10-calowy wzmocniony tablet przemysłowy Zebra: procesor Dragonwing Q-6690, Wi-Fi 7, opcjonalny wbudowany RFID UHF, klasa IP68, ekran WUXGA i 8-letni cykl eksploatacji. Pełna specyfikacja, funkcje i zastosowania — oraz czym różni się od ET40/ET45.',
+    coverImage: '/blog/zebra-et401-nowy-tablet-przemyslowy.jpeg',
+    coverImageAlt: 'Zebra ET401 — nowy wzmocniony tablet przemysłowy Zebra w wersji 8 i 10 cali, dynamiczna komiksowa ilustracja z efektem energii',
+    author: {
+      name: 'Krzysztof Wójcik',
+      role: 'Kierownik Serwisu TAKMA'
+    },
+    publishedAt: '2026-06-17',
+    readingTime: 13,
+    deviceType: 'tablety',
+    category: 'nowosci-produktowe',
+    funnel: {
+      model: 'ET401',
+      headline: 'Zebra ET401 — nowa generacja tabletów przemysłowych Zebra',
+      sub: 'Dobierzemy konfigurację (RFID, 5G, skaner kodów, pamięć) pod Twoje wdrożenie i wyślemy urządzenie gotowe do pracy — bez konfiguracji po Twojej stronie.',
+      ctaLabel: 'Sprawdź cenę i dostępność ET401',
+    },
+    tags: [
+      'Zebra ET401',
+      'Zebra ET40',
+      'Zebra ET45',
+      'tablet Zebra',
+      'tablet przemysłowy',
+      'tablet przemysłowy Zebra',
+      'nowość Zebra',
+      'następca ET40',
+      'następca ET45',
+      'Dragonwing Q-6690',
+      'Wi-Fi 7',
+      'RFID UHF',
+      'tablet do magazynu',
+      'tablet 8 cali',
+      'tablet 10 cali',
+      'porównanie tabletów Zebra'
+    ],
+    seo: {
+      metaTitle: 'Zebra ET401 — tablet przemysłowy Zebra: specyfikacja i funkcje [2026]',
+      metaDescription: 'Zebra ET401 — nowy wzmocniony tablet przemysłowy Zebra (8" i 10"). Procesor Dragonwing Q-6690, Wi-Fi 7, wbudowany RFID UHF, IP68, ekran WUXGA, 8 lat eksploatacji. Pełna specyfikacja, funkcje, zastosowania i różnice względem ET40/ET45. Autoryzowany serwis Zebra — TAKMA Wrocław.',
+      keywords: [
+        // Główne frazy
+        'zebra et401',
+        'zebra et401 specyfikacja',
+        'zebra et401 cena',
+        'zebra et401 dane techniczne',
+        'tablet zebra',
+        'tablet zebra et401',
+        'tablet przemysłowy zebra et401',
+        'zebra et401 premiera',
+        'zebra et401 8 cali',
+        'zebra et401 10 cali',
+        // Porównawcze
+        'zebra et401 vs et40',
+        'zebra et401 vs et45',
+        'et40 vs et401',
+        'et45 vs et401',
+        'porównanie zebra et401 et40',
+        'różnice et401 et40',
+        'następca et40',
+        'następca et45',
+        'zamiennik et40',
+        'nowy tablet zebra 2026',
+        // Techniczne
+        'dragonwing q-6690',
+        'qualcomm dragonwing q6690',
+        'tablet zebra wi-fi 7',
+        'tablet zebra rfid uhf',
+        'tablet zebra ip68',
+        'tablet zebra wuxga',
+        'zebra et401 rfid',
+        'zebra et401 procesor',
+        'zebra et401 bateria',
+        'zebra et401 android',
+        // Intencja zakupowa
+        'jaki tablet zebra wybrać 2026',
+        'tablet przemysłowy do magazynu',
+        'tablet przemysłowy zebra',
+        'wzmocniony tablet android',
+        'tablet zebra do handlu',
+        'tablet zebra do logistyki',
+        // Kompatybilność / migracja
+        'akcesoria et40 do et401',
+        'czy akcesoria et40 pasują do et401',
+        'migracja et40 et401',
+        'migracja et45 et401',
+        // Serwisowe / GEO
+        'serwis tabletów zebra',
+        'serwis zebra et401',
+        'naprawa tabletu zebra',
+        'tablet zebra wrocław',
+        'tablet zebra polska',
+        'autoryzowany serwis zebra'
+      ],
+      faqSchema: [
+        {
+          question: 'Czym jest Zebra ET401 i kogo zastępuje?',
+          answer: 'Zebra ET401 to wzmocniony tablet przemysłowy Zebra z systemem Android, dostępny w wersji 8" i 10". To bezpośredni następca bestsellerowych tabletów ET40 i ET45. Zachowuje tę samą cienką i lekką konstrukcję oraz kompatybilność z większością akcesoriów ET40/ET45, ale wprowadza nowy procesor Qualcomm Dragonwing Q-6690, Wi-Fi 7, opcjonalny wbudowany RFID UHF, wyższą klasę szczelności IP68 i jaśniejszy ekran WUXGA.'
+        },
+        {
+          question: 'Czym różni się ET401 od ET40/ET45?',
+          answer: 'Najważniejsze różnice: procesor Dragonwing Q-6690 (o 3 generacje nowszy od SM6375, +42% wydajności), pamięć LPDDR5 zamiast LPDDR4X, ekran WUXGA 1920×1200 z Gorilla Glass 5 i optycznym łączeniem (zamiast WXGA), Wi-Fi 7 zamiast Wi-Fi 6, Bluetooth 6.0 zamiast 5.1, klasa IP68 zamiast IP65, dwie karty SIM (Nano + eSIM), opcjonalny wbudowany RFID UHF oraz aparaty 16 MP (tył) i 8 MP (przód). Cykl eksploatacji wydłużono z 6 do 8 lat.'
+        },
+        {
+          question: 'Czy akcesoria ET40 i ET45 pasują do ET401?',
+          answer: 'Tak. Zebra zaprojektowała ET401 z myślą o zgodności wstecznej — prawie wszystkie istniejące akcesoria do ET40/ET45 (stacje ładujące, uchwyty, akcesoria ochronne) działają z ET401. Modernizacja floty polega więc głównie na wymianie samych urządzeń, bez ponownego zakupu osprzętu.'
+        },
+        {
+          question: 'Co daje wbudowany RFID UHF w ET401?',
+          answer: 'Dragonwing Q-6690 to pierwszy mobilny procesor klasy enterprise z w pełni wbudowaną funkcją RFID. ET401 z tą opcją odczytuje do 90 znaczników RFID na sekundę z odległości do 1,2 m, bez konieczności kupowania i zarządzania osobnym czytnikiem RFID. Sprzedawca może w kilka sekund policzyć towar na półce, a technik sprawdzić kompletność narzędzi w aucie.'
+        },
+        {
+          question: 'Jaki ekran ma Zebra ET401?',
+          answer: 'ET401 ma ekran 8" lub 10,1" w rozdzielczości WUXGA 1920×1200 o jasności 600 nitów, z optycznym łączeniem z panelem dotykowym i szkłem Corning Gorilla Glass 5. Wspomagany przez AI, wielotrybowy panel dotykowy obsługuje wprowadzanie danych palcem, palcem w rękawiczce lub rysikiem oraz ignoruje fałszywe sygnały dotyku od kropli wody — bez przełączania trybów.'
+        },
+        {
+          question: 'Jak długo Zebra będzie wspierać ET401?',
+          answer: 'ET401 ma niezrównany, ośmioletni oczekiwany cykl eksploatacji: cztery lata dostępności w sprzedaży plus możliwość przedłużenia serwisowania o kolejne cztery lata. Procesor Dragonwing Q-6690 jest objęty programem Qualcomm Product Longevity z obsługą do 2034 roku, co oznacza wieloletni dostęp do aktualizacji Androida przez LifeGuard.'
+        },
+        {
+          question: 'Czy warto migrować z ET40/ET45 na ET401?',
+          answer: 'Jeśli Twoje ET40/ET45 działają i nie potrzebujesz nowych funkcji — używaj ich dalej, są wspierane jeszcze przez lata. Migracja na ET401 ma sens, gdy potrzebujesz: wbudowanego RFID, Wi-Fi 7, wyższej szczelności IP68, jaśniejszego ekranu WUXGA, logowania twarzą (Identity Guardian) lub dłuższego, 8-letniego cyklu wsparcia. Dzięki zgodności akcesoriów migracja jest tania — wymieniasz tylko urządzenia.'
+        }
+      ]
+    },
+    content: `
+> **W skrócie:** **Zebra ET401** to nowy, wzmocniony **tablet przemysłowy Zebra** firmy Zebra, dostępny w wersji **8" i 10,1"** z systemem Android. Napędza go procesor **Qualcomm Dragonwing Q-6690**, oferuje **Wi-Fi 7**, **Bluetooth 6.0**, ekran **WUXGA 1920×1200 (600 nitów, Gorilla Glass 5)**, klasę szczelności **IP68**, dwie karty SIM (**Nano-SIM + eSIM**), opcjonalny **wbudowany RFID UHF** oraz aparaty **16 MP / 8 MP**. Oczekiwany cykl eksploatacji to **do 8 lat**. ET401 to kolejna generacja po popularnych tabletach **ET40/ET45**.
+
+---
+
+## Zebra ET401 — co to za tablet?
+
+**Zebra ET401 to 8- i 10-calowy wzmocniony tablet przemysłowy Zebra z systemem Android**, przeznaczony do pracy w handlu detalicznym, gastronomii i hotelarstwie, transporcie i logistyce oraz w magazynie i produkcji. To kolejna generacja doskonale sprzedających się tabletów ET40 i ET45 — filozofia pozostała ta sama (cienka, lekka konstrukcja przypominająca urządzenie konsumenckie, ale wytrzymałość i cykl życia odpowiednie dla firmy), natomiast to, co w środku — procesor, łączność, rejestracja danych i zabezpieczenia — przeskoczyło o kilka generacji do przodu.
+
+ET401 łączy **elegancki wygląd, którego oczekuje personel, z mocą i niezawodnością, których potrzebuje przedsiębiorstwo**. Pozostaje w sprzedaży przez cztery lata, a serwisowanie można przedłużyć o kolejne cztery — co daje **do ośmiu lat** obsługi technicznej i eliminuje koszty utrzymywania floty z różnych modeli.
+
+## Zebra ET401 — pełna specyfikacja techniczna
+
+| Parametr | Zebra ET401 |
+|----------|-------------|
+| **Typ** | Wzmocniony tablet przemysłowy Zebra, Android |
+| **Przekątne** | 8" oraz 10,1" |
+| **Ekran** | WUXGA 1920×1200, 600 nitów, optyczne łączenie, Gorilla Glass 5 |
+| **Panel dotykowy** | Wielotrybowy, wspomagany AI (palec / rękawiczka / rysik), ignoruje krople wody |
+| **Procesor** | Qualcomm Dragonwing Q-6690, do 2,0 GHz |
+| **Pamięć** | 6 GB LPDDR5 / 64 GB UFS 2.2; opcja 8 GB / 128 GB UFS 3.1 |
+| **microSD** | do 2 TB |
+| **System** | Android z aktualizacjami LifeGuard (procesor wspierany do 2034) |
+| **Bateria** | 8": 6100 mAh (23,46 Wh); 10": 7600 mAh (29,71 Wh); wymienna; opcja hot-swap 3400 mAh; praca bez baterii |
+| **Wi-Fi** | Wi-Fi 7 (802.11be), tri-band, 2×2 MU-MIMO, MLO |
+| **Sieć komórkowa** | opcja 5G 2. generacji (Rel-17); dwie karty SIM: Nano-SIM + eSIM |
+| **Bluetooth** | 6.0, BLE Audio |
+| **NFC** | Tak (Apple VAS, Google Smart Tap, płatności zbliżeniowe) |
+| **RFID** | Opcjonalny, wbudowany UHF — 90 tagów/s, zasięg do 1,2 m, EPC Gen2 v2 |
+| **Skanowanie** | Aparat tylny lub moduł SE4100 / SR500 (żółty celownik LED) |
+| **Aparaty** | tył 16 MP (PDAF), przód 8 MP, opcja ultraszerokokątny 13 MP |
+| **Szczelność** | IP68 (pyłoszczelność + zanurzenie w wodzie) |
+| **Odporność** | upadek 1,2 m (1,5 m z oprawą), MIL-STD-810H, wstrząs termiczny -40°C do 70°C |
+| **Temperatura pracy** | -20°C do 50°C |
+| **Bezpieczeństwo** | Secure Element, Android Strongbox, opcja chipu HID, Identity Guardian, Device Guardian |
+| **Audio** | Głośniki stereo, 2 mikrofony, redukcja szumów Qualcomm Fluence AI |
+| **Porty** | USB-C 3.1 (USB PD), dolne i tylne wejście/wyjście |
+| **Wymiary** | 8": 212,7 × 134,4 × 11,4 mm; 10": 256,1 × 162,7 × 11,4 mm |
+| **Waga** | 8": 480 g; 10": 680 g |
+| **Cykl eksploatacji** | do 8 lat (4 lata dostępności + 4 lata przedłużonego serwisu) |
+| **Gwarancja** | 1 rok (z możliwością rozszerzenia w ramach Zebra OneCare) |
+
+---
+
+## Co zmieniło się względem ET40/ET45?
+
+| Cecha | Zebra ET40 / ET45 | [Zebra ET401](/serwis-tabletow-zebra) (nowość) |
+|-------|-------------------|------------------------------------------------|
+| **Klasa** | Tablet dla firm | Tablet przemysłowy |
+| **Ekran 8"** | WXGA 1280×800, 600 nitów | **WUXGA 1920×1200, 600 nitów** |
+| **Ekran 10,1"** | WXGA 1920×1200, 500 nitów | **WUXGA 1920×1200, 600 nitów** |
+| **Szkło / panel** | Gorilla Glass | **Gorilla Glass 5 + optyczne łączenie, AI-touch** |
+| **Tryby dotyku** | Pojemnościowy wielodotyk | **Wielotryb: rękawiczka, rysik, mokry ekran** |
+| **Procesor** | Qualcomm Snapdragon SM6375 (2,2 GHz) | **Qualcomm Dragonwing Q-6690 (do 2,0 GHz)** |
+| **Wydajność** | Punkt odniesienia | **+42% (GeekBench 6), 3 generacje nowszy** |
+| **RAM** | 4 GB LPDDR4X (Premium 8 GB) | **6 GB LPDDR5 (opcja 8 GB)** |
+| **Pamięć** | 64 GB UFS (Premium 128 GB) | **64 GB UFS 2.2 (opcja 128 GB UFS 3.1)** |
+| **microSD** | Tak | **Tak — do 2 TB** |
+| **Wi-Fi** | Wi-Fi 6 (802.11ax) | **Wi-Fi 7 (802.11be), MLO, tri-band** |
+| **Bluetooth** | 5.1 | **6.0 + BLE Audio** |
+| **Sieć komórkowa** | 5G/LTE (tylko ET45) | **5G 2. generacji (Rel-17), opcja** |
+| **SIM** | 1 × nano-SIM | **2 SIM: Nano-SIM + eSIM** |
+| **RFID UHF** | Brak | **Opcjonalny, wbudowany — 90 tagów/s, do 1,2 m** |
+| **Aparat tylny** | 13 MP | **16 MP (PDAF) + opcja 13 MP ultraszerokokątny** |
+| **Aparat przedni** | 5 MP | **8 MP** |
+| **Skaner** | SE4100 / SE4710 / SE55 | **SE4100 lub SR500 (żółty celownik LED)** |
+| **Klasa szczelności** | IP65 | **IP68 (zanurzenie w wodzie)** |
+| **Odporność na upadek** | 1,2 m (1,55 m z oprawą) | **1,2 m (1,5 m z oprawą), MIL-STD-810H** |
+| **Bateria 8"** | 6100 mAh (23,61 Wh) | **6100 mAh (23,46 Wh)** |
+| **Bateria 10"** | 7600 mAh (29,41 Wh) | **7600 mAh (29,71 Wh)** |
+| **Bateria dodatkowa (hot-swap)** | 3400 mAh | **3400 mAh + praca bez baterii** |
+| **Logowanie twarzą** | Brak natywnego | **Identity Guardian (twarz + SSO)** |
+| **Zabezpieczenia sprzętowe** | Standard | **Secure Element, Strongbox, opcja chipu HID** |
+| **Audio AI** | Standard | **Qualcomm Fluence AI (redukcja echa i szumów)** |
+| **Dostępność w sprzedaży** | 3 lata | **4 lata** |
+| **Cykl eksploatacji** | ~6 lat wsparcia | **do 8 lat (4 + 4), procesor wspierany do 2034** |
+| **Waga 8" / 10"** | 485 g / 690 g | **480 g / 680 g** |
+
+> ET401 to nie kosmetyczny lifting — to przeskok o kilka generacji w procesorze, łączności i rejestracji danych, przy zachowaniu znajomej obudowy i osprzętu.
+
+---
+
+## Co realnie zyskujesz względem ET40/ET45?
+
+### 1. Wydajność i pamięć nowej generacji
+
+Sercem ET401 jest **Qualcomm Dragonwing Q-6690** — procesor o **trzy generacje nowszy** niż Snapdragon SM6375 z ET40/ET45, dający **ponad 42% wzrostu wydajności** (test wielowątkowy GeekBench 6). Do tego **pamięć LPDDR5** (zamiast LPDDR4X) i opcjonalnie **UFS 3.1**. W praktyce to płynniejsza obsługa rozbudowanych aplikacji magazynowych, szybsze przełączanie zadań i zapas mocy pod aplikacje AI — także te działające na urządzeniu, bez chmury.
+
+Bonus, którego nie widać w specyfikacji: procesor objęty jest programem **Qualcomm Product Longevity z obsługą do 2034 roku**. To fundament pod 8-letni cykl życia tabletu.
+
+### 2. Lepszy ekran — szczególnie w wersji 8"
+
+Tu jest jedna z największych różnic. W ET40/ET45 model 8-calowy miał ekran **WXGA 1280×800**. ET401 podnosi go do **WUXGA 1920×1200** — czyli wyraźnie wyższa rozdzielczość i więcej miejsca na treść. Wersja 10" zyskuje z kolei na jasności (**600 zamiast 500 nitów**). Całość chroni **Gorilla Glass 5** z optycznym łączeniem oraz powłoką odporną na odciski palców.
+
+Nowy, **wspomagany przez AI panel dotykowy** działa wielotrybowo — palcem, w rękawiczce albo rysikiem, i ignoruje fałszywe dotknięcia od kropli wody. Bez ręcznego przełączania trybu dotyku.
+
+### 3. Najszybsza łączność bezprzewodowa
+
+| Łączność | ET40/ET45 | ET401 |
+|----------|-----------|-------|
+| Wi-Fi | Wi-Fi 6 | **Wi-Fi 7 (ponad 2× szybsze), MLO** |
+| Bluetooth | 5.1 | **6.0 + BLE Audio** |
+| Sieć komórkowa | 5G/LTE (ET45) | **5G 2. gen. (Rel-17), prywatne sieci 5G** |
+| Karty SIM | 1 × nano-SIM | **Nano-SIM + eSIM** |
+
+Wi-Fi 7 z technologią **MLO (Multi-Link Operation)** łączy pasma jednocześnie — to realna różnica w gęsto obciążonych magazynach i halach z wieloma urządzeniami w sieci.
+
+### 4. Wbudowany RFID UHF — pierwszy taki tablet
+
+To funkcja, której ET40/ET45 w ogóle nie miały. Dragonwing Q-6690 to **pierwszy mobilny procesor klasy enterprise z w pełni wbudowanym RFID**. ET401 z tą opcją:
+
+- odczytuje **do 90 znaczników RFID na sekundę**,
+- z odległości **do 1,2 m**,
+- standard **EPC klasa 1 gen. 2 (v2)**, pasma EU 865–868 MHz / US 902–928 MHz.
+
+Efekt: inwentaryzacja RFID **bez kupowania i zarządzania osobnym czytnikiem**. Sprzedawca liczy towar na półce w kilka sekund, technik sprawdza kompletność narzędzi w aucie. Tam, gdzie wcześniej trzeba było dokupić czytnik RFID, teraz wystarczy sam tablet.
+
+### 5. Wyższa odporność — IP68 zamiast IP65
+
+ET40/ET45 miały klasę **IP65** (odporność na pył i strumień wody). ET401 podnosi poprzeczkę do **IP68** — pełna pyłoszczelność i **odporność na zanurzenie w wodzie**. Można go używać w deszczu, upuścić do kałuży, a nawet spłukać wodą z węża. Do tego testy **wstrząsu termicznego (-40°C do 70°C)** i zgodność z **MIL-STD-810H**.
+
+### 6. Lepsza rejestracja obrazu i nowe skanery
+
+- Aparat tylny **16 MP** z autofokusem PDAF (zamiast 13 MP), przedni **8 MP** (zamiast 5 MP).
+- Opcjonalny **ultraszerokokątny aparat 13 MP** — do dokumentacji całej sekcji półki albo stanu pojazdu.
+- Skaner do wyboru: **SE4100** (standard) lub **SR500** z pierwszym w swoim rodzaju **żółtym celownikiem LED** z czerwonym podświetleniem — większy kontrast i celność, także w ostrym słońcu.
+
+### 7. Więcej warstw bezpieczeństwa
+
+ET401 dokłada **Secure Element** i **Android Strongbox**, opcjonalny **chip HID** do dostępu kartą/identyfikatorem, **Identity Guardian** (logowanie twarzą + SSO) oraz **Device Guardian** (odnajdywanie zagubionych urządzeń, nawet wyłączonych). Aktualizacje bezpieczeństwa zapewnia **LifeGuard for Android**.
+
+---
+
+## Co zostało takie samo?
+
+Zebra świadomie nie zmieniła rzeczy, które działały dobrze — i to jest dobra wiadomość dla obecnych użytkowników ET40/ET45:
+
+- **Obudowa** — wciąż cienka i lekka (480 g / 680 g, czyli nawet odrobinę mniej).
+- **Baterie** — te same pojemności 6100 mAh (8") i 7600 mAh (10"), nadal wymienialne przez użytkownika, z opcją dodatkowej baterii hot-swap 3400 mAh.
+- **Akcesoria** — **prawie wszystkie akcesoria ET40/ET45 działają z ET401** (stacje ładujące, uchwyty, osprzęt ochronny).
+- **Zakres temperatur roboczych** — od -20°C do 50°C.
+- **Ekosystem Zebra DNA** — te same narzędzia do konfiguracji, zarządzania i zabezpieczania floty.
+
+Nowość warta podkreślenia: **praca bez baterii** — ET401 zamontowany na stałe w pojeździe, kiosku lub na stanowisku roboczym może być zasilany z zewnętrznego źródła, bez baterii i bez ryzyka jej pęcznienia.
+
+---
+
+## Czy warto migrować z ET40/ET45 na ET401?
+
+Krótko: **nie ma przymusu**. ET40/ET45 są nadal wspierane i będą działać latami. Decyzję o ET401 warto podjąć, gdy potrzebujesz konkretnych nowości:
+
+| Potrzebujesz... | ET40/ET45 | ET401 |
+|-----------------|-----------|-------|
+| Wbudowanego RFID (inwentaryzacja bez czytnika) | ❌ | ✅ |
+| Wi-Fi 7 w gęstej sieci | ❌ | ✅ |
+| Odporności na zanurzenie (IP68) | ❌ (IP65) | ✅ |
+| Wyższej rozdzielczości ekranu 8" | ❌ (WXGA) | ✅ (WUXGA) |
+| Logowania twarzą (Identity Guardian) | ❌ | ✅ |
+| Najdłuższego wsparcia (do 8 lat / 2034) | ❌ (~6 lat) | ✅ |
+| Niskiego kosztu — bez wymiany floty | ✅ | — |
+
+**Najważniejszy argument za migracją: koszt.** Dzięki zgodności akcesoriów modernizacja sprowadza się do wymiany samych tabletów — stacje ładujące, uchwyty i osprzęt zostają. To radykalnie obniża próg wejścia w nową generację.
+
+---
+
+## Serwis i wsparcie ET401, ET40 i ET45 w TAKMA
+
+Jako **autoryzowany serwis Zebra z Wrocławia** obsługujemy w całej Polsce zarówno nową generację ET401, jak i wciąż popularne ET40/ET45:
+
+- **diagnostyka i naprawa** tabletów (ekrany, baterie, złącza ładowania, skanery),
+- **wymiana baterii** — także profilaktyczna, zanim spuchnie,
+- **doradztwo przy doborze i migracji** floty ET40/ET45 → ET401,
+- **konfiguracja masowa** przez Zebra DNA / StageNow.
+
+Masz flotę tabletów Zebra albo planujesz zakup ET401? [Skontaktuj się z nami](/kontakt) — pomożemy dobrać konfigurację i policzyć opłacalność migracji. Sprawdź też nasz [serwis tabletów Zebra](/serwis-tabletow-zebra).
+
+> **Uwaga:** Parametry mogą ulec zmianie bez powiadomienia. Część funkcji (RFID, 5G 2. gen., pasmo 6 GHz, wybrane certyfikaty) jest opcjonalna lub wdrażana etapami przez aktualizacje oprogramowania — dostępność potwierdzaj przy konkretnej konfiguracji.
+`,
+  },
   {
     slug: 'najczestsze-awarie-terminali-zebra-top10',
     title: 'Najczęstsze awarie terminali Zebra — TOP 10 problemów i rozwiązań [2026]',
