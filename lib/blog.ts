@@ -16,7 +16,7 @@ export interface BlogPost {
   readingTime: number // w minutach
   deviceType: 'drukarki' | 'terminale' | 'skanery' | 'tablety' | 'inne'
   subDeviceType?: string // Podkategoria urządzenia (np. 'etykiet', 'kart', 'opasek', 'mobilne')
-  funnel?: { model: string; headline: string; sub: string; ctaLabel: string } // Baner lejka (most do karty produktu TAKMA) wstawiany na końcu wpisu
+  funnel?: { model: string; headline: string; sub: string; ctaLabel: string; href?: string } // Baner lejka (most do karty produktu/przewodnika TAKMA) wstawiany na końcu wpisu
   category: 'poradniki' | 'troubleshooting' | 'porownania' | 'aktualnosci' | 'nowosci-produktowe'
   tags: string[]
   seo: {
@@ -141,6 +141,164 @@ export const BLOG_CATEGORIES = {
 
 // Wszystkie artykuły bloga
 export const blogPosts: BlogPost[] = [
+  {
+    slug: 'zebra-tc201-premiera-niezawodnosc-serwis',
+    title: 'Zebra TC201 — premiera nowego terminala mobilnego. Co zmienia dla niezawodności floty? [2026]',
+    excerpt: 'Zebra TC201 to nowy terminal mobilny Zebra — premiera 21 lipca 2026, następca bestsellerowego TC22. Patrzymy na niego okiem serwisu: co najczęściej psuje się w terminalach mobilnych Zebra, dlaczego TC22 był u nas wyjątkowo bezawaryjny i jak TC201 wzmacnia dokładnie te słabe punkty (Gorilla Glass na ekranie i oknie skanera, IP68, wymienna bateria + hot swap).',
+    coverImage: '/blog/zebra-tc201-premiera-niezawodnosc-serwis.jpeg',
+    coverImageAlt: 'Zebra TC201 — nowy wzmocniony terminal mobilny Zebra, dynamiczna komiksowa ilustracja z efektem energii',
+    author: {
+      name: 'Krzysztof Wójcik',
+      role: 'Kierownik Serwisu TAKMA'
+    },
+    publishedAt: '2026-06-19',
+    readingTime: 12,
+    deviceType: 'terminale',
+    category: 'nowosci-produktowe',
+    tags: [
+      'Zebra TC201',
+      'Zebra TC22',
+      'terminal Zebra',
+      'terminal mobilny Zebra',
+      'nowość Zebra',
+      'premiera TC201',
+      'niezawodność terminala',
+      'serwis terminali Zebra',
+      'awarie terminali Zebra',
+      'Dragonwing Q-6690',
+      'następca TC22'
+    ],
+    seo: {
+      metaTitle: 'Zebra TC201 — premiera, niezawodność i serwis terminala [2026]',
+      metaDescription: 'Zebra TC201 — nowy terminal mobilny Zebra (premiera 21 lipca 2026, następca TC22). Okiem serwisu: co psuje się w terminalach mobilnych Zebra, dlaczego TC22 był bezawaryjny i jak TC201 wzmacnia te słabe punkty. Autoryzowany serwis Zebra — TAKMA Wrocław.',
+      keywords: [
+        'zebra tc201',
+        'tc201',
+        'zebra tc201 premiera',
+        'zebra tc201 kiedy premiera',
+        'tc201 data premiery',
+        'zebra tc201 specyfikacja',
+        'zebra tc201 cena',
+        'terminal zebra tc201',
+        'nowy terminal zebra 2026',
+        'terminal mobilny zebra',
+        'następca tc22',
+        'zebra tc22 następca',
+        'tc201 vs tc22',
+        'zebra tc22 niezawodność',
+        'zebra tc22 awarie',
+        'awarie terminala zebra',
+        'co psuje się w terminalu zebra',
+        'serwis terminala zebra tc22',
+        'serwis terminali zebra',
+        'naprawa terminala zebra',
+        'wymiana ekranu terminal zebra',
+        'wymiana baterii terminal zebra',
+        'terminal zebra wytrzymałość',
+        'terminal zebra ip68',
+        'dragonwing q-6690',
+        'serwis zebra wrocław',
+        'terminal zebra polska',
+        'autoryzowany serwis zebra'
+      ],
+      faqSchema: [
+        {
+          question: 'Kiedy premiera Zebra TC201?',
+          answer: 'Zebra TC201 wchodzi na rynek 21 lipca 2026. Warianty z wbudowanym RFID pojawią się później — w regionie EMEA planowo w IV kwartale 2026. TC201 to następca terminali TC21/TC26/TC22/TC27.'
+        },
+        {
+          question: 'Czy mój Zebra TC22 nadal się opłaca, skoro wchodzi TC201?',
+          answer: 'Tak. TC22 pozostaje w sprzedaży i jest jednym z najbardziej bezawaryjnych terminali, jakie obsługujemy w serwisie — rzadko trafia do nas na naprawę. Jeśli Twoja flota TC22 działa, nie ma powodu jej wymieniać tylko z powodu premiery TC201. TC201 warto rozważyć przy nowych wdrożeniach albo gdy potrzebujesz Wi-Fi 7, 5G, skanera dalekiego zasięgu lub wbudowanego RFID.'
+        },
+        {
+          question: 'Co najczęściej psuje się w terminalach mobilnych Zebra?',
+          answer: 'Z naszego warsztatu: najczęstsze naprawy to pęknięty ekran dotykowy i porysowane lub pęknięte okno skanera (dwa najbardziej narażone elementy), zużyta bateria, która nie trzyma na całą zmianę, oraz uszkodzone złącze ładowania. TC201 celowo wzmacnia właśnie te miejsca.'
+        },
+        {
+          question: 'Czy TC201 jest bardziej wytrzymały od TC22?',
+          answer: 'Tak. TC201 to najbardziej wytrzymały terminal w tej serii — wytrzymuje wyższe upadki i o 50% więcej obrotów (tumble) niż jego poprzednicy, ma klasę szczelności IP68 oraz IP65, pracuje od -20°C, a ekran i okno skanera chroni szkło Corning Gorilla Glass. To dokładnie te elementy, które najczęściej ulegają uszkodzeniu.'
+        },
+        {
+          question: 'Czy akcesoria i baterie z TC22/TC27 zadziałają w TC201?',
+          answer: 'Tak — TC201 jest wstecznie zgodny z większością akcesoriów poprzedniej generacji, w tym z bateriami i stacjami ładującymi TC22/TC27. To realnie obniża koszt migracji: wymieniasz urządzenia, a ładowarki i osprzęt zostają. Nowe są tylko boot ochronny i folia, bo poprawiono wytrzymałość.'
+        },
+        {
+          question: 'Czy serwisujecie Zebra TC201 i TC22?',
+          answer: 'Tak. Jako autoryzowany serwis Zebra naprawiamy zarówno bestsellerowe TC22/TC27, jak i nową generację TC201 — wymiana ekranów, okna skanera, baterii, złączy ładowania, diagnostyka. Kurier odbiera sprzęt bezpłatnie.'
+        }
+      ]
+    },
+    content: `
+> **W skrócie:** **Zebra TC201** to nowy terminal mobilny Zebra — premiera **21 lipca 2026**, następca bestsellerowego **TC22**. Patrzymy na niego okiem serwisu: **TC22 jest u nas jednym z najrzadziej naprawianych terminali**, a TC201 wzmacnia dokładnie te elementy, które najczęściej ulegają uszkodzeniu — **ekran i okno skanera ze szkła Gorilla Glass**, klasa **IP68**, wyższa odporność na upadki i o **50% więcej obrotów**, **wymienna bateria z hot swap** oraz **wsteczna zgodność akcesoriów** TC22/TC27. Mniej awarii, krótsze przestoje, niższy koszt utrzymania floty.
+
+---
+
+## Zebra TC201 — co to za terminal i kiedy premiera
+
+Zebra TC201 to **kolejna generacja popularnej rodziny terminali Zebra** — ergonomicznych, kompaktowych terminali mobilnych do handlu, logistyki, magazynu i pracy w terenie. Zastępuje modele **TC21/TC26/TC22/TC27**, zachowując znajomą formę i obsługę, ale podnosząc wydajność (procesor **Qualcomm Dragonwing Q-6690**, do **+150%** względem poprzednich modeli), łączność (**Wi-Fi 7, 5G, Bluetooth 6.0**) i bezpieczeństwo (**FIPS 140-3, Common Criteria**).
+
+**Premiera: 21 lipca 2026.** Warianty z wbudowanym **RFID UHF** trafią na rynek EMEA później — planowo w IV kwartale 2026.
+
+To, co dla nas — autoryzowanego serwisu Zebra — najważniejsze, to nie sama lista parametrów (pełne porównanie parametr po parametrze znajdziesz niżej, z linkiem). Najważniejsze jest pytanie: **czy TC201 będzie się psuł rzadziej i będzie tańszy w utrzymaniu** niż sprzęt, który naprawiamy na co dzień. I tu jest dobra wiadomość.
+
+## TC22 — jeden z najbardziej bezawaryjnych terminali, jakie obsługujemy
+
+Zanim o nowości — słowo o poprzedniku, bo to ważny kontekst. **Zebra TC22 (wciąż w sprzedaży) to w naszym warsztacie jeden z najrzadziej naprawianych terminali, jakie trafiają do naszego serwisu.** Solidna, wzmocniona konstrukcja, dojrzała platforma, sprawdzone akcesoria — w praktyce flota TC22 potrafi pracować latami bez wizyty w serwisie, a gdy już trafia, to najczęściej z typowymi, drobnymi usterkami eksploatacyjnymi, nie z wadami konstrukcji.
+
+Dlatego mówimy klientom wprost: **jeśli masz działającą flotę TC22, premiera TC201 nie jest powodem do wymiany.** TC22 zostaje w sprzedaży i dalej jest świetnym wyborem. A skoro TC22 ustawił poprzeczkę niezawodności tak wysoko, kibicujemy, żeby **TC201 był pod tym względem jeszcze lepszy** — i patrząc na to, co Zebra zmieniła, są ku temu solidne podstawy.
+
+## Co najczęściej psuje się w terminalach mobilnych Zebra — z naszego warsztatu
+
+Żeby ocenić, czy nowy model będzie trwalszy, trzeba wiedzieć, co realnie się psuje. Z naszego doświadczenia serwisowego najczęstsze naprawy terminali mobilnych Zebra to:
+
+| Co się psuje | Skąd się bierze | Jak częste |
+|---|---|---|
+| **Pęknięty ekran dotykowy** | upadki na twarde podłoże, praca w rękawicach, nacisk w kaburze | bardzo częste |
+| **Porysowane / pęknięte okno skanera** | otarcia o regały, blaty, palety; upadki „na skaner" | częste |
+| **Zużyta bateria** | setki cykli ładowania, praca na wiele zmian | częste (eksploatacyjne) |
+| **Uszkodzone złącze ładowania** | wielokrotne wpinanie kabla, zanieczyszczenia | umiarkowane |
+| **Wnikanie pyłu/wilgoci** | mycie, deszcz, zapylone magazyny | umiarkowane |
+
+Dwa pierwsze — **ekran i okno skanera** — to zdecydowanie najczęstsze i najdroższe naprawy. I to właśnie one są w TC201 wzmocnione w pierwszej kolejności.
+
+## Jak TC201 wzmacnia właśnie te słabe punkty
+
+Patrząc na zmiany w TC201 przez pryzmat tego, co naprawiamy, widać, że Zebra wzięła na cel konkretne, kosztowne usterki:
+
+- **Ekran i okno skanera ze szkła Corning Gorilla Glass.** Dwa najbardziej narażone elementy dostały odporne na zarysowania i pęknięcia szkło. To bezpośrednio ogranicza naszą najczęstszą naprawę.
+- **Najbardziej wytrzymały terminal w tej serii.** Wytrzymuje upadki z większej wysokości (do **1,83 m**, a w oprawie ochronnej do **2,13 m** na beton) i o **50% więcej obrotów (tumble)** niż poprzednie modele — mniej uszkodzeń po upuszczeniu.
+- **Klasa szczelności IP68 oraz IP65.** Pełna pyło- i wodoszczelność (z zanurzeniem) ogranicza najtrudniejsze do zdiagnozowania awarie po wniknięciu wilgoci.
+- **Praca od -20°C.** Konstrukcja przygotowana na mróz — istotne w chłodniach i pracy na zewnątrz zimą.
+- **Wymienna bateria z analityką PowerPrecision.** Użytkownik sam wymienia ogniwo, a system pokazuje realny stan baterii — łatwiej wykryć zużyte ogniwo, zanim zacznie skracać zmianę.
+
+Innymi słowy: **TC201 wzmacnia te elementy, które psują się najczęściej.** Jeśli te zmiany przełożą się na praktykę, awarii powinno być jeszcze mniej niż w i tak bezawaryjnym TC22.
+
+## Mniej przestojów i niższy koszt utrzymania floty
+
+Niezawodność to jedno, ale dla floty równie ważne jest, **ile kosztuje jej utrzymanie i ile czasu urządzenia stoją bezczynnie.** Tu TC201 też pomaga:
+
+- **Hot swap baterii (wybrane wersje).** Wymiana ogniwa bez wyłączania urządzenia — zero przestoju na ładowanie w trakcie zmiany.
+- **Wsteczna zgodność akcesoriów.** Większość akcesoriów TC22/TC27 — w tym **baterie i stacje ładujące** — działa z TC201. Przy migracji wymieniasz urządzenia, a osprzęt zostaje. To realna oszczędność, nie hasło.
+- **Złącze USB-C.** Powszechny, tani standard kabli i ładowarek.
+- **Długie wsparcie.** Procesor Dragonwing i aktualizacje **LifeGuard for Android** oznaczają wieloletni dostęp do łatek bezpieczeństwa — flota nie starzeje się przedwcześnie.
+
+## Co to znaczy dla Twojego serwisu i floty
+
+Praktyczne wnioski z perspektywy serwisu:
+
+- **Masz flotę TC22?** Pracuj na niej dalej — to sprawdzony, bezawaryjny model. Naprawy (bateria, ekran, okno skanera) wykonujemy na bieżąco, a kurier odbiera sprzęt bezpłatnie.
+- **Planujesz nowe wdrożenie albo rozbudowę?** TC201 to naturalny kierunek — trwalszy, szybszy, z Wi-Fi 7 i 5G, a dzięki zgodności akcesoriów tańszy na starcie, niż się wydaje.
+- **Migrujesz stopniowo?** Możesz mieszać TC22 i TC201 na tych samych ładowarkach i bateriach, wymieniając urządzenia partiami.
+
+Jako **autoryzowany serwis Zebra z Wrocławia** obsługujemy w całej Polsce zarówno TC22/TC27, jak i nową generację TC201 — diagnostyka, wymiana ekranów, okna skanera, baterii i złączy ładowania. [Skontaktuj się z nami](/kontakt) albo sprawdź [serwis terminali Zebra](/serwis-terminali-zebra).
+
+## TC201 vs TC22 — gdzie pełne porównanie parametrów
+
+Tu skupiliśmy się na niezawodności i serwisie. Jeśli szukasz **szczegółowego porównania parametr po parametrze** (procesor, ekran, skanery SR500/AC670/SR560, RFID, łączność, bateria, akcesoria) oraz scenariuszy „kupić teraz czy poczekać", zajrzyj do pełnego przewodnika po TC201 na takma.com.pl: [Zebra TC201 — nowy terminal mobilny](https://www.takma.com.pl/poradnik/zebra-tc201).
+
+> **Uwaga:** Część funkcji (RFID UHF, wybrane certyfikaty bezpieczeństwa, hot swap, skaner SR560) jest opcjonalna lub zależna od wersji i regionu, a dostępność bywa rozłożona w czasie. Parametry mogą ulec zmianie — przy konkretnej konfiguracji potwierdzaj dostępność.
+`,
+  },
   {
     slug: 'zebra-et401-nowy-tablet-przemyslowy',
     title: 'Zebra ET401 — nowy wzmocniony tablet przemysłowy Zebra [2026]',

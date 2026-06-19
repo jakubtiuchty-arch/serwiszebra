@@ -22,6 +22,7 @@ interface ModelFunnel {
 const MODELS: Record<string, ModelFunnel> = {
   TC22: { takmaSlug: 'zebra-tc22', inProduction: true },
   ET401: { takmaSlug: 'zebra-et401', inProduction: true },
+  TC201: { takmaSlug: 'zebra-tc201', inProduction: true },
 }
 
 // Typ urządzenia po prefiksie modelu → kategoria Zebra na takma.com.pl (każda istnieje).
@@ -49,21 +50,27 @@ export default function FunnelBanners({
   headline,
   sub,
   ctaLabel,
+  href,
 }: {
   model: string
   /** Nadpisania treści (np. baner produktowy we wpisie blogowym) — gdy puste, używana jest domyślna treść instrukcji. */
   headline?: string
   sub?: string
   ctaLabel?: string
+  /** Nadpisanie celu linku (np. przewodnik na takma) — gdy puste, link liczony z modelu. */
+  href?: string
 }) {
   if (!model) return null
   const cfg: ModelFunnel = MODELS[model.toUpperCase()] || {}
   const inProd = cfg.inProduction !== false
 
-  // Wybór celu linku: jawny produkt → następca (EOL) → kategoria/marka.
+  // Wybór celu linku: jawne href → jawny produkt → następca (EOL) → kategoria/marka.
   let buyHref: string
   let isProductLink = false
-  if (inProd && cfg.takmaSlug) {
+  if (href) {
+    buyHref = href
+    isProductLink = true
+  } else if (inProd && cfg.takmaSlug) {
     buyHref = withUtm(`/produkt/${cfg.takmaSlug}`, model)
     isProductLink = true
   } else if (!inProd && cfg.successorTakmaSlug) {

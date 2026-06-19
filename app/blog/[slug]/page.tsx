@@ -494,6 +494,7 @@ export default function BlogPostPage({
                   headline={post.funnel.headline}
                   sub={post.funnel.sub}
                   ctaLabel={post.funnel.ctaLabel}
+                  href={post.funnel.href}
                 />
               </div>
             )}
