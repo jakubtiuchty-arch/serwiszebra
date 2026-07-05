@@ -338,10 +338,25 @@ export default function DriversPage() {
             Pobierz oficjalne sterowniki ZDesigner do drukarek Zebra dla Windows 10/11.
           </p>
           <div className="flex flex-wrap justify-center gap-2 sm:gap-3 text-xs sm:text-sm">
-            <span className="px-3 py-1.5 bg-white/10 rounded-full text-gray-300">ZDesigner v10</span>
-            <span className="px-3 py-1.5 bg-white/10 rounded-full text-gray-300">Firmware Link-OS</span>
-            <span className="px-3 py-1.5 bg-white/10 rounded-full text-gray-300">Zebra Setup Utilities</span>
-            <span className="px-3 py-1.5 bg-white/10 rounded-full text-gray-300">ZebraDesigner 3</span>
+            {/* Klikalne skróty — heatmapa Clarity pokazała, że użytkownicy próbują w nie klikać */}
+            {([
+              { label: 'ZDesigner v10', cat: 'drivers' },
+              { label: 'Firmware Link-OS', cat: 'firmware' },
+              { label: 'Zebra Setup Utilities', cat: 'utilities' },
+              { label: 'ZebraDesigner 3', cat: 'utilities' },
+            ] as const).map((p) => (
+              <button
+                key={p.label}
+                type="button"
+                onClick={() => {
+                  setActiveCategory(p.cat)
+                  document.getElementById('kategorie-oprogramowania')?.scrollIntoView({ behavior: 'smooth' })
+                }}
+                className="px-3 py-1.5 bg-white/10 rounded-full text-gray-300 hover:bg-white/20 hover:text-white transition-colors cursor-pointer"
+              >
+                {p.label}
+              </button>
+            ))}
           </div>
         </div>
       </section>
@@ -385,7 +400,7 @@ export default function DriversPage() {
       </section>
 
       {/* Kategorie - tabs */}
-      <section className="border-b border-gray-200 bg-gray-50 sticky top-0 z-20">
+      <section id="kategorie-oprogramowania" className="border-b border-gray-200 bg-gray-50 sticky top-0 z-20">
         <div className="max-w-5xl mx-auto px-2 sm:px-6 lg:px-8">
           <div className="flex overflow-x-auto -mb-px scrollbar-hide">
             {softwareCategories.map((cat) => {
