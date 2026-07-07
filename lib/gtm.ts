@@ -12,12 +12,11 @@ type GTMEventParams = Record<string, string | number | boolean | undefined>
  * Wysyła zdarzenie do Google Tag Manager
  */
 export function trackEvent(eventName: string, params?: GTMEventParams) {
-  if (typeof window !== 'undefined' && window.dataLayer) {
-    window.dataLayer.push({
-      event: eventName,
-      ...params,
-    })
-    console.log(`[GTM] Event: ${eventName}`, params)
+  if (typeof window === 'undefined') return
+  // GA4 bezpośrednio przez gtag (funkcję definiuje snippet consent w layout)
+  const w = window as unknown as { gtag?: (...args: unknown[]) => void }
+  if (typeof w.gtag === 'function') {
+    w.gtag('event', eventName, params || {})
   }
 }
 
@@ -156,6 +155,7 @@ export function trackPurchase(data: {
   trackEvent('purchase', {
     transaction_id: data.transactionId,
     value: data.totalValue,
+    currency: 'PLN',
     item_count: data.itemCount,
   })
 }
