@@ -376,7 +376,7 @@ Przemysłowe ZT mają rząd diod: **STATUS, PAUSE, DATA, SUPPLIES, NETWORK** —
 
 **Mobilne ZQ (ZQ210/220, ZQ310/320, ZQ510/520, ZQ610/620/630) — ikony zamiast diod**
 
-Mobilne Zebry pokazują stan ikonami na małym wyświetlaczu — i to o nie pytacie najczęściej („folder", „kwadrat z trapezem"):
+Mobilne drukarki Zebra pokazują stan za pomocą ikon na małym wyświetlaczu — i to właśnie one budzą najwięcej pytań (potocznie opisywane jako „folder" czy „kwadrat z trapezem"):
 
 | Ikona | Co to jest | Znaczenie |
 |---|---|---|
