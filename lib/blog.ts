@@ -296,6 +296,164 @@ Do kurierek wystarczą **etykiety termiczne ekonomiczne 100×150 mm** — trwał
     }
   },
   {
+    slug: 'diody-drukarki-zebra-wzory-migania-wszystkie-serie',
+    title: 'Diody w drukarkach Zebra — dekoder wzorów migania dla wszystkich serii [2026]',
+    excerpt: 'Status i Pause migają naprzemian na czerwono? Dioda mruga co trzeci raz? Kompletny dekoder świateł drukarek Zebra: ZD220/230, ZD421, GK420, seria ZT i mobilne ZQ — co oznacza każdy wzór i co zrobić.',
+    content: `
+**Diody w drukarkach Zebra — jak rozszyfrować, co drukarka próbuje powiedzieć?**
+
+> **🔴 „Status i pauza migają naprzemian na czerwono", „mruga co trzeci raz", „świeci pauza i media"** — tak najczęściej opisywane są problemy zgłaszane przez czat i telefon. Drukarki Zebra bez wyświetlacza komunikują się wyłącznie światłem — a każda seria posługuje się nieco innym systemem sygnalizacji. Ten poradnik zbiera znaczenie świateł dla wszystkich serii.
+
+---
+
+**Zasada nr 1: kolor mówi więcej niż miganie**
+
+Niezależnie od serii, Zebra trzyma się jednej konwencji kolorów:
+
+| Kolor | Znaczenie ogólne |
+|---|---|
+| 🟢 **Zielony ciągły** | wszystko OK, drukarka gotowa |
+| 🟢 **Zielony migający** | pracuje / odbiera dane |
+| 🟡 **Pomarańczowy/żółty** | ostrzeżenie — najczęściej temperatura albo pauza |
+| 🔴 **Czerwony** | błąd wymagający Twojej reakcji: nośnik, taśma, głowica |
+
+Zanim zaczniesz szukać wzoru migania: **otwórz i zamknij pokrywę, sprawdź etykiety i taśmę, naciśnij FEED**. Rozwiązuje to około połowy zgłaszanych przypadków.
+
+---
+
+**ZD220 / ZD230 — jedna dioda, cała komunikacja**
+
+Najprostszy panel sterowania: jedna wielokolorowa dioda STATUS.
+
+| Wzór | Znaczenie | Co zrobić |
+|---|---|---|
+| Zielona ciągła | gotowa | — |
+| Zielona miga | odbiera dane / drukuje | — |
+| Czerwona ciągła | brak nośnika ALBO otwarta głowica | załóż rolkę, dociśnij pokrywę do kliknięcia |
+| Czerwona miga | błąd nośnika po kalibracji | skalibruj ponownie (FEED ×2 przy gotowej drukarce) |
+| Pomarańczowa | głowica przegrzana — drukarka czeka | odczekaj 2–3 min, wznowi sama |
+
+---
+
+**ZD420 / ZD421 / ZD621 — pięć ikon**
+
+Panel z ikonami: STATUS, PAUSE, DATA, SUPPLIES (materiały), NETWORK. Najczęstsze kombinacje:
+
+| Wzór | Znaczenie |
+|---|---|
+| STATUS czerwony + SUPPLIES czerwony | brak etykiet albo taśmy (w wersji „t") |
+| STATUS czerwony ciągły | otwarta głowica — dociśnij pokrywę |
+| PAUSE żółty | drukarka wstrzymana — naciśnij PAUSE |
+| STATUS żółty migający | głowica poza temperaturą — odczekaj |
+
+Pełną tabelę wszystkich kombinacji dla tej serii (z manuala serwisowego) rozpisaliśmy w osobnym wpisie: **Kody błędów Zebra ZD420/ZD421 — co oznaczają diody LED**.
+
+---
+
+**GK420 / GC420 — klasyka z jedną diodą**
+
+Wysłużone modele wciąż powszechne w polskich magazynach. Jedna dioda, wiele wzorów — w tym słynne „miganie seriami" (np. dwa mrugnięcia — przerwa — dwa mrugnięcia), gdzie liczba mrugnięć w serii wskazuje konkretny błąd. Kompletny dekoder tej serii: **Zebra GK420 — czerwona dioda, diagnostyka krok po kroku**.
+
+---
+
+**Seria ZT (ZT111, ZT230, ZT231, ZT411, ZT421) — pięć diod + wyświetlacz**
+
+Przemysłowe ZT mają rząd diod: **STATUS, PAUSE, DATA, SUPPLIES, NETWORK** — oraz wyświetlacz, który zwykle podaje błąd tekstem. Diody umożliwiają szybką ocenę stanu z drugiego końca hali:
+
+| Wzór | Znaczenie | Co zrobić |
+|---|---|---|
+| STATUS zielony | gotowa | — |
+| PAUSE żółty | pauza | przycisk PAUSE |
+| STATUS czerwony + SUPPLIES czerwony | koniec etykiet / taśmy | wymień rolkę, skalibruj |
+| STATUS czerwony + SUPPLIES miga | taśma założona przy trybie termicznym (albo odwrotnie) | sprawdź tryb druku w ustawieniach |
+| STATUS żółty migający | temperatura poza zakresem: głowica za zimna, zasilacz lub płyta główna za gorące (tak podaje manual serwisowy ZT230, s. 139) | odczekaj; jeśli wraca — serwis |
+| NETWORK czerwony | błąd sieci Ethernet | sprawdź kabel/łącze |
+| Wszystkie migają jednocześnie | błąd krytyczny płyty głównej | restart; jeśli wraca — serwis |
+
+> **⚠️ „Status i pauza naprzemian na czerwono"** po włączeniu najczęściej wskazuje błąd inicjalizacji — wyłącz drukarkę, odłącz zasilanie na 30 sekund, włącz ponownie. Jeśli wzór wraca, zanotuj go i opisz w zgłoszeniu — stanowi to istotną wskazówkę dla technika.
+
+---
+
+**Mobilne ZQ (ZQ210/220, ZQ310/320, ZQ510/520, ZQ610/620/630) — ikony zamiast diod**
+
+Mobilne Zebry pokazują stan ikonami na małym wyświetlaczu — i to o nie pytacie najczęściej („folder", „kwadrat z trapezem"):
+
+| Ikona | Co to jest | Znaczenie |
+|---|---|---|
+| „Kartka/folder" (ikona nośnika) | MEDIA | świeci stale = etykiety są; miga/pusta = **brak etykiet** |
+| „Kwadrat z klapką" (ikona zatrzasku) | HEAD LATCH | miga = **pokrywa/głowica niedomknięta** — dociśnij do kliknięcia |
+| Trójkąt z wykrzyknikiem | ERROR/WARNING | błąd — sprawdź media i zatrzask, potem restart |
+| Antena + nawiasy | Wi-Fi | nawiasy migają = łączy się; stałe = połączona |
+| Słupki baterii | bateria | poziom naładowania |
+
+(Znaczenia ikon za instrukcjami użytkownika ZQ610/620 i ZQ220.)
+
+---
+
+**Bonus: dioda na skanerze też mówi**
+
+Skanery i podstawki ładujące Zebra stosują tę samą konwencję kolorów. Przykład z manuala DS8288: **czerwone miganie na podstawce = bateria ładuje się, ale jest u kresu życia** — czas na nową, nie na serwis skanera.
+
+---
+
+**Nie możesz dopasować wzoru? Wyślij zdjęcie**
+
+Każda seria ma dziesiątki kombinacji, których nie sposób wyczerpać w jednym artykule. Dostępne są dwie szybkie ścieżki:
+
+1. **Opisz wzór asystentowi AI** (okno czatu na tej stronie) — zna instrukcje serwisowe wszystkich serii i przyjmuje również zdjęcie panelu.
+2. **Wydrukuj raport konfiguracji** (na większości modeli: przytrzymaj FEED przy włączaniu) — poprawny wydruk raportu oznacza, że mechanika działa, a przyczyna leży po stronie danych lub ustawień.
+`,
+    coverImage: '/blog/diody-drukarki-zebra-dekoder.jpeg',
+    coverImageAlt: 'Migające na czerwono diody na panelu drukarki Zebra pod lupą — dekoder wzorów migania',
+    author: {
+      name: 'Krzysztof Wójcik',
+      role: 'Certyfikowany technik Zebra'
+    },
+    publishedAt: '2026-07-08',
+    readingTime: 8,
+    deviceType: 'drukarki',
+    subDeviceType: 'etykiet',
+    category: 'troubleshooting',
+    tags: ['diody LED', 'kody błędów', 'ZD230', 'ZD421', 'GK420', 'ZT231', 'ZT411', 'ZQ520', 'troubleshooting'],
+    seo: {
+      metaTitle: 'Diody drukarki Zebra — co oznacza miganie? Dekoder wszystkich serii [2026]',
+      metaDescription: 'Status i Pause migają na czerwono? Dekoder diod drukarek Zebra: ZD220/230, ZD420/421, GK420, seria ZT i mobilne ZQ. Tabele wzorów migania, znaczenia ikon i rozwiązania.',
+      keywords: [
+        'zebra dioda miga na czerwono',
+        'zebra status pause czerwone',
+        'drukarka zebra miga',
+        'zebra zt231 diody',
+        'zebra zt411 status czerwony',
+        'zebra zq520 ikony',
+        'zebra ikona folder miga',
+        'zd230 czerwona dioda',
+        'zebra miga co trzeci raz',
+        'zebra wzory migania led',
+        'zebra media out dioda',
+        'zebra head open dioda',
+        'zebra kody błędów led'
+      ],
+      faqSchema: [
+        {
+          question: 'Co oznacza czerwona dioda w drukarce Zebra?',
+          answer: 'Czerwony kolor to zawsze błąd wymagający reakcji — najczęściej brak etykiet, brak taśmy albo niedomknięta głowica. Otwórz i zamknij pokrywę do kliknięcia, sprawdź rolki i naciśnij FEED — to rozwiązuje większość przypadków.'
+        },
+        {
+          question: 'Dlaczego Status i Pause migają naprzemian na czerwono?',
+          answer: 'Naprzemienne czerwone miganie po włączeniu wskazuje zwykle błąd inicjalizacji. Odłącz zasilanie na 30 sekund i włącz ponownie. Jeśli wzór wraca — drukarka wymaga diagnostyki serwisowej, a wzór migania warto podać w zgłoszeniu.'
+        },
+        {
+          question: 'Co oznacza migająca ikona folderu/kartki w drukarce mobilnej ZQ?',
+          answer: 'To ikona nośnika (media): migająca lub pusta oznacza brak etykiet w komorze. Druga często mylona ikona — „kwadrat z klapką" — to zatrzask głowicy; jej miganie oznacza niedomkniętą pokrywę.'
+        },
+        {
+          question: 'Co zrobić, gdy nie mogę dopasować wzoru migania do tabeli?',
+          answer: 'Wydrukuj raport konfiguracji (przytrzymaj FEED przy włączaniu drukarki) — poprawny wydruk raportu oznacza, że mechanika działa. Możesz też opisać wzór lub wysłać zdjęcie panelu asystentowi AI na serwis-zebry.pl.'
+        }
+      ]
+    }
+  },
+  {
     slug: 'zebra-tc201-premiera-niezawodnosc-serwis',
     title: 'Zebra TC201 — premiera nowego terminala mobilnego. Co zmienia dla niezawodności floty? [2026]',
     excerpt: 'Zebra TC201 to nowy terminal mobilny Zebra — premiera 21 lipca 2026, następca bestsellerowego TC22. Patrzymy na niego okiem serwisu: co najczęściej psuje się w terminalach mobilnych Zebra, dlaczego TC22 był u nas wyjątkowo bezawaryjny i jak TC201 wzmacnia dokładnie te słabe punkty (Gorilla Glass na ekranie i oknie skanera, IP68, wymienna bateria + hot swap).',
