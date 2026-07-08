@@ -142,6 +142,160 @@ export const BLOG_CATEGORIES = {
 // Wszystkie artykuły bloga
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'drukowanie-etykiet-kurierskich-allegro-inpost-dpd-zebra',
+    title: 'Jak drukować etykiety kurierskie (Allegro, InPost, DPD) na drukarce Zebra? Poradnik [2026]',
+    excerpt: 'Etykiety kurierskie 100×150 mm na Zebrze ZD220/ZD421: jaki program wybrać, jak ustawić sterownik ZDesigner, co zrobić, gdy wydruk jest pomniejszony albo dzieli się między dwie etykiety. Krok po kroku dla Allegro, InPost i DPD.',
+    content: `
+**Jak drukować etykiety kurierskie na drukarce Zebra?**
+
+> **📦 Masz drukarkę Zebra i sklep na Allegro albo własny e-commerce?** Ten poradnik przeprowadzi Cię od rozpakowania drukarki do pierwszej poprawnie wydrukowanej etykiety kurierskiej 100×150 mm — bez uciętych wydruków, bez podziału treści między dwie etykiety i bez ręcznej obróbki formatu A4.
+
+---
+
+**Dlaczego Zebra do etykiet kurierskich?**
+
+Etykieta kurierska w Polsce to standardowo format **100×150 mm (4×6 cala)**. Drukarki termiczne Zebra (ZD220d, ZD230d, ZD421d) drukują go bezpośrednio na rolce:
+
+| | Drukarka laserowa (A4) | Zebra termiczna (100×150) |
+|---|---|---|
+| Koszt wydruku | toner + papier + folia/koszulka | sama etykieta (brak tuszu!) |
+| Wycinanie/składanie | tak — nożyczki albo perforacja | nie — gotowa naklejka |
+| Szybkość przy 30 paczkach | ~15–20 min | ~3 min |
+| Rozmazywanie na deszczu | tak (toner na papierze) | nie (druk termiczny) |
+
+Druk termiczny nie używa tuszu ani taśmy — głowica termiczna wywołuje obraz bezpośrednio na powłoce etykiety. Jedynym materiałem eksploatacyjnym są rolki etykiet.
+
+---
+
+**Krok 1: Ustaw format etykiety u przewoźnika**
+
+Zanim przejdziesz do konfiguracji drukarki, ustaw właściwy format pliku z etykietą:
+
+- **Allegro** (Przesyłki Allegro): Ustawienia sprzedaży → Ustawienia przesyłek → **format etykiety: 100×150 mm (A6)** zamiast A4. Od teraz każdy PDF z etykietą będzie miał dokładnie wymiar etykiety.
+- **InPost (Menedżer Paczek)**: przy generowaniu etykiety wybierz **format A6**.
+- **DPD, DHL, GLS (panele nadawcy)**: w ustawieniach wydruku wybierz format **A6 / 100×150 / „termiczna"** — każdy panel ma taką opcję, zwykle w sekcji ustawień domyślnych wydruku.
+- **BaseLinker**: obsługuje drukowanie etykiet bezpośrednio na Zebrę — szczegóły w naszym osobnym poradniku (link na dole).
+
+> **💡 To najważniejszy krok całego poradnika.** 90% problemów z pomniejszonym wydrukiem na środku etykiety wynika z pliku PDF w formacie A4 drukowanego na etykiecie 100×150.
+
+---
+
+**Krok 2: Sterownik ZDesigner i rozmiar strony**
+
+1. Pobierz sterownik **ZDesigner** ze strony Zebry (masz go też na płycie/QR w pudełku) i zainstaluj.
+2. Wejdź w **Ustawienia → Drukarki → Zebra → Preferencje drukowania**.
+3. W zakładce **Opcje** ustaw rozmiar: **szerokość 100 mm, wysokość 150 mm**.
+4. Prędkość: 102 mm/s, ciemność (darkness): 20–25 na start.
+5. Zapisz jako domyślne.
+
+Problemy z instalacją sterownika na Windows 11? Mamy o tym osobny wpis: *Sterowniki Zebra w Windows 11 — instalacja i problemy*.
+
+---
+
+**Krok 3: Załaduj rolkę i skalibruj**
+
+Po każdej zmianie rolki na inną szerokość/wysokość etykiety drukarka musi zmierzyć nośnik:
+
+1. Załaduj rolkę etykiet 100×150 (prowadnice dosunięte do krawędzi, ale bez wyginania).
+2. Zamknij pokrywę, poczekaj aż drukarka będzie gotowa.
+3. **ZD421/ZD220**: przytrzymaj jednocześnie **PAUSE + CANCEL przez 2 sekundy** — drukarka wysunie kilka etykiet, mierząc przerwy między nimi.
+4. Naciśnij raz **FEED** — powinna wysunąć się dokładnie **jedna** etykieta. Jeśli tak — kalibracja zakończona.
+
+Pełny poradnik kalibracji (w tym z poziomu sterownika): *Kalibracja drukarki Zebra krok po kroku*.
+
+---
+
+**Krok 4: Drukuj PDF „w rzeczywistym rozmiarze"**
+
+Otwierasz PDF z etykietą (z Allegro/InPost) i drukujesz — ale z jednym krytycznym ustawieniem:
+
+- **Adobe Acrobat / przeglądarka**: w oknie drukowania wybierz **„Rzeczywisty rozmiar" (Actual size)** — NIE „Dopasuj do strony" (Fit to page).
+- Drukarka docelowa: **ZDesigner ZD421** (Twoja Zebra), nie „Microsoft Print to PDF".
+- Orientacja: pionowa (etykieta kurierska jest pionowa).
+
+---
+
+**Najczęstsze problemy i szybkie rozwiązania**
+
+| Objaw | Przyczyna | Rozwiązanie |
+|---|---|---|
+| Pomniejszony wydruk na środku etykiety | PDF w formacie A4 | Krok 1 — zmień format u przewoźnika na A6/100×150 |
+| Wydruk dzieli się między dwie etykiety | zły rozmiar strony w sterowniku albo brak kalibracji | Krok 2 (100×150 w Opcjach) + Krok 3 (kalibracja) |
+| Co druga etykieta pusta | rozmiar strony 2× wyższy niż etykieta | ustaw dokładnie 150 mm wysokości |
+| Wydruk ucięty z boku | skalowanie „Fit to page" albo marginesy | drukuj „Rzeczywisty rozmiar", marginesy 0 |
+| Blady kod kreskowy | za niska ciemność (darkness) | podnieś darkness do 25–28; jeśli nie pomaga — zobacz wpis o bladym wydruku |
+| Etykieta zatrzymuje się w złym miejscu | brak kalibracji po zmianie rolki | Krok 3 |
+
+---
+
+**Które etykiety kupować?**
+
+Do kurierek wystarczą **etykiety termiczne ekonomiczne 100×150 mm** — trwałość wydruku 6–12 miesięcy z zapasem pokrywa okres doręczenia przesyłki. Zwróć uwagę na:
+
+- **gilzę** (średnicę tulejki): 25 mm do drukarek biurkowych ZD,
+- **nawój**: im większy nawój, tym rzadsza wymiana rolki (typowo 250–500 szt. przy gilzie 25 mm),
+- klej: standardowy akrylowy — zapewnia trwałe przyleganie do kartonu i foliopaku.
+
+> **🧠 Problem z drukarką wykracza poza ten poradnik?** Asystent AI na tej stronie zna instrukcje serwisowe Zebry — opisz mu objawy lub wyślij zdjęcie, a przeprowadzi Cię przez diagnostykę krok po kroku.
+`,
+    coverImage: '/blog/drukowanie-etykiet-kurierskich-zebra.jpeg',
+    coverImageAlt: 'Drukarka Zebra ZD421d drukująca etykietę kurierską z kodem kreskowym na stanowisku pakowania e-commerce',
+    author: {
+      name: 'Krzysztof Wójcik',
+      role: 'Certyfikowany technik Zebra'
+    },
+    publishedAt: '2026-07-08',
+    readingTime: 9,
+    deviceType: 'drukarki',
+    subDeviceType: 'etykiet',
+    funnel: {
+      model: 'Etykiety kurierskie 100×150',
+      headline: 'Kończą Ci się etykiety kurierskie?',
+      sub: 'Etykiety termiczne 100×150 mm z magazynu w Polsce — dobierzemy nawój i gilzę do Twojej drukarki.',
+      ctaLabel: 'Zobacz etykiety 100×150 w TAKMA',
+      href: 'https://www.takma.com.pl/etykiety-termiczne-zebra'
+    },
+    category: 'poradniki',
+    tags: ['etykiety kurierskie', 'Allegro', 'InPost', 'DPD', '100x150', 'ZD421', 'ZD220', 'ZDesigner', 'e-commerce'],
+    seo: {
+      metaTitle: 'Jak drukować etykiety kurierskie na Zebrze? Allegro, InPost, DPD [2026]',
+      metaDescription: 'Etykiety kurierskie 100×150 na drukarce Zebra ZD220/ZD421: format A6 w Allegro i InPost, ustawienia sterownika ZDesigner, kalibracja, druk PDF bez skalowania. Rozwiązania typowych problemów.',
+      keywords: [
+        'etykiety kurierskie zebra',
+        'drukowanie etykiet allegro zebra',
+        'zebra zd421 etykiety kurierskie',
+        'jak drukować etykiety inpost',
+        'drukarka do etykiet kurierskich',
+        'etykieta 100x150 zebra',
+        'zdesigner rozmiar etykiety',
+        'allegro format etykiety a6',
+        'wydruk etykiety na pół',
+        'mały wydruk na etykiecie',
+        'program do drukowania etykiet kurierskich',
+        'zebra zd220 allegro',
+        'baselinker drukarka zebra'
+      ],
+      faqSchema: [
+        {
+          question: 'Jaki program do drukowania etykiet kurierskich na drukarce Zebra?',
+          answer: 'Do pojedynczych etykiet wystarczy przeglądarka albo Adobe Acrobat z opcją „Rzeczywisty rozmiar" i sterownikiem ZDesigner. Przy większej skali najlepiej sprawdza się BaseLinker, który drukuje etykiety bezpośrednio na Zebrę, bez otwierania PDF-ów.'
+        },
+        {
+          question: 'Dlaczego etykieta z Allegro drukuje się mała na środku?',
+          answer: 'Bo PDF jest w formacie A4, a drukarka drukuje go na etykiecie 100×150 mm. W ustawieniach przesyłek Allegro zmień format etykiety na 100×150 (A6) — wydruk wypełni całą etykietę.'
+        },
+        {
+          question: 'Dlaczego wydruk rozjeżdża się na dwie etykiety?',
+          answer: 'Najczęściej rozmiar strony w sterowniku nie odpowiada etykiecie (ustaw 100×150 mm w ZDesigner → Opcje) albo drukarka nie została skalibrowana po zmianie rolki (przytrzymaj PAUSE + CANCEL 2 sekundy na ZD421/ZD220).'
+        },
+        {
+          question: 'Czy do etykiet kurierskich potrzebna jest taśma barwiąca (ribbon)?',
+          answer: 'Nie. Etykiety kurierskie drukuje się termicznie (bezpośrednio) na drukarkach ZD220d, ZD230d czy ZD421d — jedynym materiałem są rolki etykiet termicznych 100×150 mm.'
+        }
+      ]
+    }
+  },
+  {
     slug: 'zebra-tc201-premiera-niezawodnosc-serwis',
     title: 'Zebra TC201 — premiera nowego terminala mobilnego. Co zmienia dla niezawodności floty? [2026]',
     excerpt: 'Zebra TC201 to nowy terminal mobilny Zebra — premiera 21 lipca 2026, następca bestsellerowego TC22. Patrzymy na niego okiem serwisu: co najczęściej psuje się w terminalach mobilnych Zebra, dlaczego TC22 był u nas wyjątkowo bezawaryjny i jak TC201 wzmacnia dokładnie te słabe punkty (Gorilla Glass na ekranie i oknie skanera, IP68, wymienna bateria + hot swap).',
