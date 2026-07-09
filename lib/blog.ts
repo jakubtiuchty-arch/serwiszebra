@@ -142,6 +142,103 @@ export const BLOG_CATEGORIES = {
 // Wszystkie artykuły bloga
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'zebra-kc401-kiosk-samoobslugowy-okiem-serwisu',
+    title: 'Zebra KC401 — nowy kiosk samoobsługowy okiem serwisu. Co psuje się w kioskach i jak KC401 to wzmacnia [2026]',
+    excerpt: 'Zebra KC401 to nowy 10-calowy kiosk samoobsługowy (następca CC6000). Patrzymy na niego okiem serwisu: co najczęściej ulega uszkodzeniu w kioskach pracujących w miejscach publicznych — ekran od tysięcy dotknięć, wnętrze od zalań i dezynfekcji, okno skanera, kable zasilania — i jak KC401 wzmacnia dokładnie te słabe punkty (szkło o twardości 9H, szczelność IP65, testy udarności, zasilanie PoE i montaż VESA).',
+    content: `
+> **W skrócie:** **Zebra KC401** to nowy kiosk samoobsługowy Zebra — 10-calowy ekran z Androidem, następca modelu **CC6000**. Patrzymy na niego okiem serwisu: kiosk w miejscu publicznym pracuje w najtrudniejszych warunkach, jakie zna sprzęt AutoID — **tysiące dotknięć dziennie, zalania, dezynfekcja, kurz, szarpane kable**. KC401 wzmacnia dokładnie te punkty, które najczęściej trafiają do naprawy: **ekran o twardości 9H odporny na zarysowania i uderzenia**, szczelność **IP65** (mycie i dezynfekcja bez ryzyka), zasilanie **PoE** (jeden kabel zamiast plątaniny) i montaż **VESA**. Mniej awarii, krótsze przestoje stanowiska, niższy koszt utrzymania.
+
+---
+
+## Zebra KC401 — co to za urządzenie
+
+Zebra KC401 to **kiosk samoobsługowy nowej generacji** z 10-calowym ekranem dotykowym i systemem Android. Montuje się go na ścianie, słupku, ladzie lub w istniejącej szafce — w orientacji pionowej lub poziomej — i przenosi część obsługi na samych klientów: sprawdzenie ceny i dostępności towaru, meldowanie gości, płatności zbliżeniowe, kontrola dostępu na identyfikator czy samodzielna rejestracja pacjenta.
+
+Dla nas — autoryzowanego serwisu Zebra — najważniejsze jest jednak jedno pytanie: **czy KC401 będzie się psuł rzadziej i będzie tańszy w utrzymaniu** niż kioski, które naprawiamy na co dzień. Bo kiosk to nie jest zwykły tablet postawiony na blacie. To urządzenie, które przez lata dotyka kilkaset obcych rąk dziennie, stoi w przeciągu, bywa zalewane napojem i codziennie przecierane środkiem dezynfekującym.
+
+## Co najczęściej psuje się w kioskach samoobsługowych — z naszego warsztatu
+
+Żeby ocenić, czy nowy model będzie trwalszy, trzeba wiedzieć, co realnie ulega uszkodzeniu. Z perspektywy serwisu kioski psują się inaczej niż terminale noszone w dłoni — awarie biorą się nie z upadków, lecz z **nieustannej, intensywnej eksploatacji w jednym miejscu**:
+
+- **Ekran dotykowy** — pierwsze i najczęstsze. Tysiące dotknięć dziennie, często brudnym lub mokrym palcem, do tego przypadkowe uderzenia. Efekt to zarysowania pogarszające czytelność, martwe strefy dotyku, a w skrajnych przypadkach pęknięcia.
+- **Wnętrze zalane cieczą** — kiosk w sklepie, restauracji czy poczekalni prędzej czy później zostaje oblany. Jeśli obudowa nie jest szczelna, ciecz trafia do elektroniki.
+- **Uszkodzenia od dezynfekcji** — w placówkach medycznych i gastronomii kiosk jest wielokrotnie dziennie przecierany środkami chemicznymi. Nieszczelna obudowa oznacza wnikanie płynu i korozję styków.
+- **Okno skanera** — porysowane okno pogarsza odczyt kodów, skutkując komunikatem „nie skanuje" mimo sprawnego skanera.
+- **Zasilanie i okablowanie** — kable zasilaczy przy kioskach bywają wyrywane, potrącane i przecierane. To jedna z częstszych przyczyn zgłoszeń „kiosk się nie włącza".
+- **Mocowanie** — źle dobrany uchwyt i obciążenie dziesiątkami dotknięć na godzinę prowadzą do luzów i uszkodzeń mocowania.
+
+## Jak KC401 wzmacnia dokładnie te słabe punkty
+
+Patrząc na to, co Zebra zmieniła w KC401, widać, że projektanci celowali w te same miejsca, które my najczęściej naprawiamy:
+
+- **Ekran o twardości 9H, odporny na zarysowania i uderzenia.** To bezpośrednia odpowiedź na awarię numer jeden. Utwardzone szkło utrzymuje czytelność i estetykę mimo setek dotknięć dziennie — a im rzadziej wymieniamy ekran, tym niższy koszt utrzymania kiosku.
+- **Szczelność IP65.** Obudowa jest odporna na kurz i zalanie, a co równie ważne — **pozwala na częste mycie i dezynfekcję** bez ryzyka, że płyn trafi do środka. To kluczowe w ochronie zdrowia, gastronomii i wszędzie tam, gdzie obowiązują rygory higieny.
+- **Konstrukcja przetestowana na udary.** Kiosk zaprojektowano z myślą o ciągłej pracy w miejscach o dużym natężeniu ruchu — od sklepu, przez placówkę medyczną, po magazyn i produkcję.
+- **Zasilanie Power over Ethernet (PoE).** Jeden kabel doprowadza prąd i sieć, co eliminuje plątaninę zasilaczy — a więc również jedną z częstszych przyczyn awarii i uszkodzenia zasilania. Mniej kabli to mniej rzeczy, które można wyrwać czy przetrzeć.
+- **Montaż VESA.** Standardowe, solidne uchwyty w kilku rozmiarach pozwalają dobrać mocowanie do obciążenia i miejsca, zamiast improwizować.
+- **Programowalne paski LED.** Świecąc dowolnym kolorem, prowadzą użytkownika i sygnalizują stan — mniej nieporozumień przy stanowisku to mniej nerwowego szarpania sprzętu przez zniecierpliwionych użytkowników.
+
+## Migracja z CC6000 bez przestoju
+
+Jeśli masz dziś kioski **Zebra CC6000**, przejście na KC401 jest bezbolesne — to **zamiennik montowany w istniejącej obudowie i na tych samych uchwytach**. Wymieniasz samo urządzenie, bez przebudowy stanowiska i z minimalnym przestojem. Z perspektywy serwisu to duża zaleta: modernizacja floty nie oznacza kosztownego remontu ani długiej przerwy w obsłudze klientów.
+
+Dlatego mówimy wprost: **jeśli masz działającą flotę CC6000, to sprawny sprzęt, a sama premiera KC401 nie jest powodem do wymiany.** Ale gdy kiosk CC6000 zacznie wymagać coraz częstszych napraw albo planujesz rozbudowę o nowe stanowiska, KC401 jest naturalnym następcą, który wzmacnia najsłabsze punkty poprzedniej generacji.
+
+## Serwis kiosków Zebra — jesteśmy autoryzowanym serwisem
+
+Kioski samoobsługowe naprawiamy tak samo, jak drukarki, terminale i skanery Zebra — jako **autoryzowany serwis Zebra**. Wymiana ekranu, diagnostyka po zalaniu, naprawa skanera, uszkodzenia zasilania i mocowania, konfiguracja i przywracanie oprogramowania. Zgłoszenie serwisowe złożysz online, a my zamówimy kuriera po sprzęt i przekażemy wycenę przed naprawą.
+
+Masz kiosk KC401, CC6000 lub inne urządzenie Zebra, które sprawia problemy? Opisz objawy naszemu asystentowi AI na tej stronie albo wypełnij formularz zgłoszenia — pomożemy ocenić, czy to naprawa, czy czas na następcę.
+`,
+    coverImage: '/blog/zebra-kc401-kiosk-serwis.jpeg',
+    coverImageAlt: 'Zebra KC401 — nowy kiosk samoobsługowy, dynamiczna komiksowa ilustracja z efektem energii i błyskawic',
+    author: {
+      name: 'Krzysztof Wójcik',
+      role: 'Kierownik Serwisu TAKMA'
+    },
+    publishedAt: '2026-07-09',
+    readingTime: 9,
+    deviceType: 'inne',
+    category: 'nowosci-produktowe',
+    tags: ['Zebra KC401', 'kiosk samoobsługowy', 'CC6000', 'nowość Zebra', 'serwis kiosków Zebra', 'naprawa kiosku', 'IP65', 'kiosk Android', 'samoobsługa', 'awarie kiosków'],
+    seo: {
+      metaTitle: 'Zebra KC401 — nowy kiosk samoobsługowy okiem serwisu [2026]',
+      metaDescription: 'Zebra KC401 — nowy kiosk samoobsługowy Android 10" (następca CC6000). Okiem serwisu: co najczęściej psuje się w kioskach (ekran, zalania, dezynfekcja, kable) i jak KC401 to wzmacnia — szkło 9H, IP65, PoE, VESA. Autoryzowany serwis Zebra.',
+      keywords: [
+        'zebra kc401',
+        'kiosk samoobsługowy zebra',
+        'zebra kc401 serwis',
+        'naprawa kiosku zebra',
+        'zebra cc6000 następca',
+        'kiosk android zebra',
+        'serwis kiosków samoobsługowych',
+        'kc401 specyfikacja',
+        'kiosk zebra ip65',
+        'awarie kiosków samoobsługowych',
+        'wymiana ekranu kiosku',
+        'zebra kc401 cena'
+      ],
+      faqSchema: [
+        {
+          question: 'Czym różni się Zebra KC401 od kiosku CC6000?',
+          answer: 'KC401 to następca CC6000 montowany w tej samej obudowie i na tych samych uchwytach. Wprowadza nowszą platformę Android, Wi-Fi 7, płatności zbliżeniowe NFC, zasilanie PoE oraz wzmocniony ekran o twardości 9H i szczelność IP65. Wymiana urządzenia odbywa się bez przebudowy stanowiska.'
+        },
+        {
+          question: 'Co najczęściej psuje się w kioskach samoobsługowych?',
+          answer: 'Z perspektywy serwisu to przede wszystkim ekran dotykowy (zarysowania i martwe strefy od tysięcy dotknięć), zalania i uszkodzenia od dezynfekcji przy nieszczelnej obudowie, porysowane okno skanera oraz uszkodzenia zasilania i okablowania. KC401 wzmacnia każdy z tych punktów.'
+        },
+        {
+          question: 'Czy naprawiacie kioski samoobsługowe Zebra?',
+          answer: 'Tak. Jako autoryzowany serwis Zebra naprawiamy kioski KC401 i CC6000 — wymiana ekranu, diagnostyka po zalaniu, naprawa skanera, uszkodzenia zasilania i mocowania oraz konfiguracja oprogramowania. Zgłoszenie złożysz online, zamawiamy kuriera i podajemy wycenę przed naprawą.'
+        },
+        {
+          question: 'Czy warto wymieniać działający kiosk CC6000 na KC401?',
+          answer: 'Jeśli flota CC6000 działa bez częstych napraw, sama premiera KC401 nie jest powodem do wymiany. KC401 warto rozważyć, gdy CC6000 zaczyna wymagać coraz częstszych napraw albo planujesz rozbudowę o nowe stanowiska — jako następca wzmacnia najsłabsze punkty poprzedniej generacji.'
+        }
+      ]
+    }
+  },
+  {
     slug: 'drukowanie-etykiet-kurierskich-allegro-inpost-dpd-zebra',
     title: 'Jak drukować etykiety kurierskie (Allegro, InPost, DPD) na drukarce Zebra? Poradnik [2026]',
     excerpt: 'Etykiety kurierskie 100×150 mm na Zebrze ZD220/ZD421: jaki program wybrać, jak ustawić sterownik ZDesigner, co zrobić, gdy wydruk jest pomniejszony albo dzieli się między dwie etykiety. Krok po kroku dla Allegro, InPost i DPD.',
