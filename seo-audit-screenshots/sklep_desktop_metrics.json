@@ -1,0 +1,167 @@
+{
+  "fontSizes": {
+    "16px": 109,
+    "12px": 64,
+    "14px": 96,
+    "30px": 1,
+    "256px": 1,
+    "10px": 4,
+    "9px": 2,
+    "18px": 1
+  },
+  "smallTouchTargets": [
+    {
+      "tag": "A",
+      "text": "Przejdź do treści",
+      "width": 1,
+      "height": 1,
+      "top": -1
+    },
+    {
+      "tag": "A",
+      "text": "Co naprawiamy",
+      "width": 87,
+      "height": 40,
+      "top": 41
+    },
+    {
+      "tag": "A",
+      "text": "Cennik",
+      "width": 46,
+      "height": 20,
+      "top": 51
+    },
+    {
+      "tag": "A",
+      "text": "Jak to działa",
+      "width": 70,
+      "height": 40,
+      "top": 41
+    },
+    {
+      "tag": "A",
+      "text": "Blog",
+      "width": 30,
+      "height": 20,
+      "top": 51
+    },
+    {
+      "tag": "A",
+      "text": "Instrukcje",
+      "width": 64,
+      "height": 20,
+      "top": 51
+    },
+    {
+      "tag": "A",
+      "text": "Poradniki wideo",
+      "width": 90,
+      "height": 40,
+      "top": 41
+    },
+    {
+      "tag": "A",
+      "text": "O nas",
+      "width": 32,
+      "height": 40,
+      "top": 41
+    },
+    {
+      "tag": "A",
+      "text": "Kontakt",
+      "width": 50,
+      "height": 20,
+      "top": 51
+    },
+    {
+      "tag": "A",
+      "text": "Formularz",
+      "width": 66,
+      "height": 20,
+      "top": 51
+    },
+    {
+      "tag": "A",
+      "text": "Panel serwisowy",
+      "width": 94,
+      "height": 40,
+      "top": 41
+    },
+    {
+      "tag": "A",
+      "text": "Sklep",
+      "width": 64,
+      "height": 38,
+      "top": 42
+    },
+    {
+      "tag": "A",
+      "text": "Zaloguj",
+      "width": 50,
+      "height": 20,
+      "top": 51
+    },
+    {
+      "tag": "A",
+      "text": "Start",
+      "width": 32,
+      "height": 20,
+      "top": 108
+    },
+    {
+      "tag": "A",
+      "text": "Koszyk",
+      "width": 46,
+      "height": 34,
+      "top": 101
+    },
+    {
+      "tag": "INPUT",
+      "text": "",
+      "width": 230,
+      "height": 38,
+      "top": 402
+    },
+    {
+      "tag": "A",
+      "text": "Głowice drukujące",
+      "width": 170,
+      "height": 20,
+      "top": 526
+    },
+    {
+      "tag": "BUTTON",
+      "text": "",
+      "width": 36,
+      "height": 36,
+      "top": 518
+    },
+    {
+      "tag": "A",
+      "text": "Drukarki biurkowe",
+      "width": 156,
+      "height": 20,
+      "top": 570
+    },
+    {
+      "tag": "BUTTON",
+      "text": "",
+      "width": 32,
+      "height": 32,
+      "top": 564
+    }
+  ],
+  "totalSmallTargets": 87,
+  "totalInteractives": 134,
+  "imagesWithoutDimensions": [],
+  "totalImages": 50,
+  "h1": {
+    "text": "Części Zamienne Zebra",
+    "top": 211,
+    "visible": true
+  },
+  "bodyScrollWidth": 1280,
+  "viewportWidth": 1280,
+  "hasHorizontalScroll": false,
+  "pageHeight": 5898
+}

@@ -1,560 +1,322 @@
-'use client'
-
 import Image from 'next/image'
 import Link from 'next/link'
 import Header from '@/components/Header'
-import { useEffect, useRef, useState } from 'react'
-import { 
-  Calendar, 
-  Award, 
-  Users, 
-  Truck,
-  Shield,
-  Wrench,
-  Clock,
-  CheckCircle2,
-  ArrowRight,
-  Building2,
-  History,
-  Heart,
-  Sparkles,
-  ChevronRight
-} from 'lucide-react'
+import { ShieldCheck, ArrowRight, Phone, ChevronRight } from 'lucide-react'
 
-// Timeline - prosty, 4 elementy
-function CompactTimeline({ 
-  milestones 
-}: { 
-  milestones: { year: string; title: string; description: string; icon: any }[]
-}) {
-  const [activeIdx, setActiveIdx] = useState(milestones.length - 1)
+const stats = [
+  { number: '25 lat', label: 'na rynku AutoID' },
+  { number: '50 000+', label: 'dostarczonych urządzeń' },
+  { number: '15 000+', label: 'wykonanych napraw' },
+  { number: '500+', label: 'klientów B2B' },
+]
 
-  return (
-    <div className="relative">
-      {/* Linia łącząca */}
-      <div className="absolute top-8 left-8 right-8 h-0.5 bg-gradient-to-r from-blue-200 via-blue-300 to-green-300 hidden sm:block"></div>
-      
-      {/* 4 etapy */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
-        {milestones.map((milestone, idx) => {
-          const Icon = milestone.icon
-          const isLast = idx === milestones.length - 1
-          const isActive = activeIdx === idx
-          
-          return (
-            <button
-              key={idx}
-              onClick={() => setActiveIdx(idx)}
-              className={`relative flex flex-col items-center p-4 rounded-xl transition-all duration-300 ${
-                isActive 
-                  ? isLast
-                    ? 'bg-green-50 border-2 border-green-400 shadow-lg'
-                    : 'bg-blue-50 border-2 border-blue-400 shadow-lg'
-                  : 'bg-white border border-gray-200 hover:border-gray-300 hover:shadow-md'
-              }`}
-            >
-              {/* Icon */}
-              <div className={`relative z-10 w-14 h-14 rounded-full flex items-center justify-center mb-3 transition-all ${
-                isActive 
-                  ? isLast
-                    ? 'bg-gradient-to-br from-green-500 to-emerald-600 shadow-lg'
-                    : 'bg-gradient-to-br from-blue-500 to-indigo-600 shadow-lg'
-                  : 'bg-gray-100'
-              }`}>
-                <Icon className={`w-6 h-6 ${isActive ? 'text-white' : 'text-gray-500'}`} />
-              </div>
-              
-              {/* Year */}
-              <span className={`text-sm font-bold mb-1 ${
-                isActive ? (isLast ? 'text-green-700' : 'text-blue-700') : 'text-gray-700'
-              }`}>
-                {milestone.year}
-              </span>
-              
-              {/* Title */}
-              <span className={`text-xs text-center leading-tight ${
-                isActive ? (isLast ? 'text-green-600' : 'text-blue-600') : 'text-gray-500'
-              }`}>
-                {milestone.title}
-              </span>
-              
-              {/* Pulse for last */}
-              {isLast && (
-                <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-              )}
-            </button>
-          )
-        })}
-      </div>
-      
-      {/* Detail card */}
-      <div className={`rounded-xl p-6 transition-all duration-300 ${
-        activeIdx === milestones.length - 1 
-          ? 'bg-gradient-to-r from-green-600 to-emerald-600 text-white' 
-          : 'bg-gradient-to-r from-slate-700 to-slate-800 text-white'
-      }`}>
-        <div className="flex items-start gap-4">
-          <div className={`w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 ${
-            activeIdx === milestones.length - 1 ? 'bg-white/20' : 'bg-white/10'
-          }`}>
-            {(() => {
-              const Icon = milestones[activeIdx].icon
-              return <Icon className="w-6 h-6 text-white" />
-            })()}
-          </div>
-          <div>
-            <div className="flex items-center gap-2 mb-1">
-              <span className="text-sm font-bold opacity-80">{milestones[activeIdx].year}</span>
-              {activeIdx === milestones.length - 1 && (
-                <span className="flex items-center gap-1 text-xs bg-white/20 px-2 py-0.5 rounded-full">
-                  <Sparkles className="w-3 h-3" /> Aktualnie
-                </span>
-              )}
-            </div>
-            <h3 className="text-lg font-bold mb-1">{milestones[activeIdx].title}</h3>
-            <p className="text-sm opacity-90">{milestones[activeIdx].description}</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
+const milestones = [
+  {
+    year: '1999',
+    title: 'Początek z Psion',
+    description:
+      'Zaczynamy od sprzedaży i serwisu terminali Psion — pionierów mobilnych komputerów przemysłowych w Polsce.',
+  },
+  {
+    year: '2007–2014',
+    title: 'Psion → Symbol → Motorola → Zebra',
+    description:
+      'Przy każdej zmianie właściciela marki rozwijamy kompetencje i utrzymujemy ciągłość serwisu tych samych urządzeń.',
+  },
+  {
+    year: '2018',
+    title: 'Premier Solution Partner',
+    description:
+      'Najwyższy status partnerstwa handlowego Zebra w Polsce — bezpośredni dostęp do oferty i wsparcia producenta.',
+  },
+  {
+    year: '2023',
+    title: 'Printer Repair Specialist',
+    description:
+      'Oficjalny status serwisowy Zebra. Naprawy na oryginalnych częściach, z gwarancją producenta.',
+  },
+]
 
-// Animowany licznik
-function AnimatedCounter({ target, suffix = '' }: { target: string; suffix?: string }) {
-  const [count, setCount] = useState(0)
-  const ref = useRef<HTMLDivElement>(null)
-  const [hasAnimated, setHasAnimated] = useState(false)
-  
-  // Extract number from target string
-  const numericValue = parseInt(target.replace(/\D/g, '')) || 0
-  
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !hasAnimated) {
-          setHasAnimated(true)
-          
-          // Animate counter
-          const duration = 2000
-          const steps = 60
-          const increment = numericValue / steps
-          let current = 0
-          
-          const timer = setInterval(() => {
-            current += increment
-            if (current >= numericValue) {
-              setCount(numericValue)
-              clearInterval(timer)
-            } else {
-              setCount(Math.floor(current))
-            }
-          }, duration / steps)
-        }
-      },
-      { threshold: 0.5 }
-    )
+const values = [
+  {
+    title: 'Współpraca zaczyna się po wystawieniu faktury',
+    description:
+      'Sprzedaż to dopiero początek relacji. Prawdziwa wartość partnera ujawnia się, gdy coś przestaje działać — i wtedy jesteśmy przy Tobie.',
+    iconSrc: '/o-nas-ic-partner.jpeg',
+  },
+  {
+    title: 'Serwis to serce firmy, nie dodatek',
+    description:
+      'Każdy w zespole wie, że awaria u klienta to realna strata pieniędzy i czasu. Dlatego serwis traktujemy priorytetowo, nie jak usługę „przy okazji”.',
+    iconSrc: '/o-nas-ic-serwis.jpeg',
+  },
+  {
+    title: 'Wiedza zbierana od czasów Psion Workabout',
+    description:
+      'Nasze archiwum serwisowe pamięta sprzęt, którego inni już nie znają. Ta ciągłość pozwala diagnozować usterki, z którymi nowsze serwisy sobie nie radzą.',
+    iconSrc: '/o-nas-ic-wiedza.jpeg',
+  },
+  {
+    title: 'Rozmawiasz z technikiem, nie z numerem zgłoszenia',
+    description:
+      'Gdy dzwonisz, po drugiej stronie jest osoba, która zna Twoje urządzenie — często lepiej niż instrukcja producenta.',
+    iconSrc: '/o-nas-ic-technik.jpeg',
+  },
+]
 
-    if (ref.current) {
-      observer.observe(ref.current)
-    }
-
-    return () => observer.disconnect()
-  }, [numericValue, hasAnimated])
-
-  // Format number with spaces
-  const formatNumber = (n: number) => {
-    return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
-  }
-
-  return (
-    <div ref={ref} className="text-xl sm:text-2xl md:text-3xl font-semibold text-white mb-1">
-      {formatNumber(count)}{target.includes('+') ? '+' : ''}{suffix}
-    </div>
-  )
-}
+const authBenefits = [
+  { title: 'Oryginalne części', desc: 'Bezpośrednio od Zebra Technologies' },
+  { title: 'Gwarancja producenta', desc: 'Na każdą wykonaną naprawę' },
+  { title: 'Certyfikowani technicy', desc: 'Szkoleni przez Zebra' },
+  { title: 'Priorytetowe wsparcie', desc: 'Bezpośrednia linia do producenta' },
+]
 
 export default function AboutPage() {
-  const milestones = [
-    {
-      year: '1999',
-      title: 'Początek z Psion',
-      description: 'Założenie firmy TAKMA. Rozpoczynamy sprzedaż i serwis terminali Psion - pionierów rynku mobilnych komputerów przemysłowych w Polsce.',
-      icon: Building2
-    },
-    {
-      year: '2007-2014',
-      title: 'Rozwój i transformacje',
-      description: 'Przejścia Psion → Symbol → Motorola → Zebra. Przy każdej zmianie rozwijamy kompetencje, zdobywamy certyfikaty i budujemy zespół ekspertów.',
-      icon: History
-    },
-    {
-      year: '2018',
-      title: 'Premier Partner',
-      description: 'Uzyskujemy najwyższy status partnerstwa handlowego Zebra w Polsce. Bezpośredni dostęp do pełnej oferty i wsparcia producenta.',
-      icon: Shield
-    },
-    {
-      year: '2023',
-      title: 'Printer Repair Specialist',
-      description: 'Oficjalny status Zebra Authorized Repair Center. Naprawy na oryginalnych częściach z gwarancją producenta.',
-      icon: CheckCircle2
-    }
-  ]
-
-  const stats = [
-    { number: '25+', label: 'Lat doświadczenia', icon: Calendar },
-    { number: '50000+', label: 'Dostarczonych urządzeń', icon: Truck },
-    { number: '15000+', label: 'Wykonanych napraw', icon: Wrench },
-    { number: '500+', label: 'Zadowolonych klientów B2B', icon: Users }
-  ]
-
-  const values = [
-    {
-      title: 'Współpraca zaczyna się po wystawionej fakturze',
-      description: 'Wierzymy, że sprzedaż to dopiero początek relacji. Prawdziwa wartość partnera ujawnia się, gdy coś pójdzie nie tak - i wtedy my jesteśmy przy Tobie.',
-      icon: Heart
-    },
-    {
-      title: 'Serwis jako DNA firmy',
-      description: 'Dział serwisu to nie dodatek - to serce TAKMA. Każdy członek zespołu rozumie, że awaria u klienta oznacza realną stratę pieniędzy i czasu.',
-      icon: Wrench
-    },
-    {
-      title: 'Wiedza zbierana przez pokolenia',
-      description: 'Nasze archiwum serwisowe pamięta jeszcze czasy Psion Workabout. Ta wiedza pozwala nam diagnozować problemy, których inni nawet nie rozumieją.',
-      icon: History
-    },
-    {
-      title: 'Człowiek, nie ticket',
-      description: 'Nie jesteś dla nas numerem zgłoszenia. Gdy dzwonisz, rozmawiasz z technikiem, który zna Twoje urządzenie - często lepiej niż Ty sam.',
-      icon: Users
-    }
-  ]
-
+  const orgSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'TAKMA — Serwis Zebra',
+    url: 'https://www.serwis-zebry.pl',
+    logo: 'https://www.serwis-zebry.pl/takma_logo_1.png',
+    foundingDate: '1999',
+    description:
+      'Autoryzowany serwis i partner handlowy Zebra Technologies w Polsce. Sprzedaż, serwis i naprawa terminali, drukarek i skanerów Zebra od 1999 roku.',
+    sameAs: ['https://www.takma.com.pl'],
+    award: ['Zebra Premier Solution Partner', 'Zebra Printer Repair Specialist'],
+  }
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Strona główna', item: 'https://www.serwis-zebry.pl/' },
+      { '@type': 'ListItem', position: 2, name: 'O nas', item: 'https://www.serwis-zebry.pl/o-nas' },
+    ],
+  }
 
   return (
     <div className="min-h-screen bg-white">
       <Header currentPage="other" hidePartnerLogos />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
       {/* Breadcrumb */}
-      <div className="bg-white border-b border-gray-200">
+      <div className="border-b border-slate-200">
         <div className="max-w-6xl mx-auto px-4 py-3">
-          <nav className="flex items-center gap-2 text-sm text-gray-600">
-            <Link href="/" className="hover:text-blue-600">Strona główna</Link>
-            <ChevronRight className="w-4 h-4 text-gray-400" />
-            <span className="text-gray-900 font-medium">O nas</span>
+          <nav className="flex items-center gap-2 text-sm text-slate-500">
+            <Link href="/" className="hover:text-slate-900 transition-colors">Strona główna</Link>
+            <ChevronRight className="w-4 h-4 text-slate-300" />
+            <span className="text-slate-900 font-medium">O nas</span>
           </nav>
         </div>
       </div>
 
-      {/* Hero */}
-      <section className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 py-12 sm:py-20 md:py-28 overflow-hidden">
-        {/* Tekstura tła - ukryta na mobile */}
-        <div className="absolute inset-0 opacity-10 hidden sm:block">
-          <div className="absolute top-0 left-[15%] w-px h-full bg-gradient-to-b from-white via-white to-transparent"></div>
-          <div className="absolute top-0 left-[35%] w-px h-full bg-gradient-to-b from-transparent via-white to-transparent"></div>
-          <div className="absolute top-0 right-[25%] w-px h-full bg-gradient-to-b from-white via-white to-transparent"></div>
-          <div className="absolute top-0 right-[10%] w-px h-full bg-gradient-to-b from-transparent via-white to-transparent"></div>
-        </div>
-
-        {/* Akcentujące kształty - mniejsze na mobile */}
-        <div className="absolute top-10 sm:top-20 left-0 sm:left-10 w-48 sm:w-72 h-48 sm:h-72 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-5 sm:bottom-10 right-0 sm:right-10 w-64 sm:w-96 h-64 sm:h-96 bg-indigo-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
-
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 mb-4 sm:mb-6 animate-fade-in-down">
-            <Calendar className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-blue-400" />
-            <span className="text-xs sm:text-sm font-medium text-white/90">Od 1999 roku</span>
-          </div>
-          
-          <h1 className="text-xl sm:text-3xl md:text-5xl lg:text-6xl font-semibold text-white mb-4 sm:mb-6 leading-tight animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-            25 lat z urządzeniami,<br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">
-              które napędzają biznes
-            </span>
-          </h1>
-          
-          <p className="text-xs sm:text-base md:text-lg text-slate-300 max-w-3xl mx-auto mb-6 sm:mb-10 leading-relaxed animate-fade-in-up px-2" style={{ animationDelay: '0.4s' }}>
-            Kiedy zakładaliśmy TAKMA, terminale mobilne były nowinką. Dziś automatyczna identyfikacja 
-            to standard - a my wciąż jesteśmy tu, gdzie byliśmy od początku: przy naszych klientach.
-          </p>
-
-          {/* Logo TAKMA - wyśrodkowane i powiększone */}
-          <div className="flex items-center justify-center animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
-            <div className="relative w-40 sm:w-64 md:w-80 h-16 sm:h-24 md:h-28 hover:scale-105 transition-transform duration-300">
-              <Image
-                src="/takma_logo_1.png"
-                alt="TAKMA Logo"
-                fill
-                className="object-contain brightness-0 invert"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Statystyki z animowanymi licznikami */}
-      <section className="py-8 sm:py-12 bg-gradient-to-r from-blue-600 to-indigo-600">
-        <div className="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8">
-            {stats.map((stat, idx) => (
-              <div key={idx} className="text-center group">
-                <div className="inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 bg-white/20 rounded-lg sm:rounded-xl mb-2 sm:mb-3 group-hover:scale-110 group-hover:bg-white/30 transition-all duration-300">
-                  <stat.icon className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
-                </div>
-                <AnimatedCounter target={stat.number} />
-                <div className="text-xs sm:text-sm text-blue-100">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Historia - timeline */}
-      <section className="py-12 sm:py-16 md:py-20 bg-gradient-to-b from-gray-50 to-white">
-        <div className="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8">
-          <div className="text-center mb-8 sm:mb-10">
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-900 mb-2">
-              Nasza podróż z marką Zebra
-            </h2>
-            <p className="text-sm sm:text-base text-gray-600 max-w-2xl mx-auto">
-              Od 1999 roku towarzyszymy zmianom na rynku AutoID. Kliknij w etap, aby poznać szczegóły.
+      {/* Hero — dzielony: tekst na ciemnym panelu, zdjęcie warsztatu w pełni widoczne */}
+      <section className="bg-slate-950">
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-2">
+          {/* Tekst */}
+          <div className="order-2 lg:order-1 px-4 sm:px-6 lg:px-12 xl:px-16 py-12 sm:py-16 lg:py-24 flex flex-col justify-center">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight">
+              Naprawiamy Zebrę, odkąd nazywała się jeszcze Psion
+            </h1>
+            <p className="mt-5 text-base sm:text-lg text-slate-300 leading-relaxed max-w-xl">
+              Zaczynaliśmy w 1999 roku od terminali Psion. Przez zmiany Psion → Symbol → Motorola → Zebra
+              nie zmieniło się jedno: ten sam zespół, ten sam warsztat i ta sama wiedza o urządzeniach,
+              na których pracuje Twoja firma.
             </p>
-          </div>
-
-          <CompactTimeline milestones={milestones} />
-        </div>
-      </section>
-
-      {/* Filozofia firmy */}
-      <section className="py-10 sm:py-16 md:py-24 bg-white">
-        <div className="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8">
-          <div className="text-center mb-8 sm:mb-12 md:mb-16">
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-900 mb-2 sm:mb-3">
-              Dlaczego TAKMA?
-            </h2>
-            <p className="text-xs sm:text-sm text-gray-600 max-w-2xl mx-auto px-2">
-              Bo wiemy, że za każdym urządzeniem stoi człowiek, którego praca zależy od jego sprawności.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
-            {values.map((value, idx) => (
-              <div 
-                key={idx}
-                className="bg-gradient-to-br from-gray-50 to-white rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 border border-gray-100 hover:border-blue-200 transition-all duration-300 group hover:-translate-y-1 hover:shadow-xl"
+            <div className="mt-7 flex flex-col sm:flex-row gap-3">
+              <Link
+                href="/#formularz"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[#A8F000] text-slate-950 font-semibold hover:bg-[#bcff33] transition-colors"
               >
-                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 rounded-lg sm:rounded-xl flex items-center justify-center mb-3 sm:mb-4 group-hover:bg-blue-500 group-hover:scale-110 transition-all duration-300">
-                  <value.icon className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600 group-hover:text-white transition-colors duration-300" />
-                </div>
-                <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-1.5 sm:mb-2 group-hover:text-blue-600 transition-colors">{value.title}</h3>
-                <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">{value.description}</p>
+                Zgłoś naprawę
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+              <Link
+                href="/serwis-drukarek-zebra"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-white/10 text-white font-semibold ring-1 ring-white/25 hover:bg-white/15 transition-colors"
+              >
+                Zobacz zakres serwisu
+              </Link>
+            </div>
+          </div>
+          {/* Zdjęcie */}
+          <div className="order-1 lg:order-2 relative min-h-[240px] sm:min-h-[340px] lg:min-h-[560px]">
+            <Image
+              src="/o-nas-hero.jpeg"
+              alt="Warsztat serwisowy TAKMA — technik naprawia terminal Zebra pod lupą, w tle drukarka Zebra"
+              fill
+              priority
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              className="object-cover"
+            />
+            {/* miękkie zlanie z ciemnym panelem (desktop) */}
+            <div className="hidden lg:block absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-slate-950 to-transparent" />
+          </div>
+        </div>
+      </section>
+
+      {/* Statystyki — czysty pasek */}
+      <section className="border-b border-slate-200">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
+            {stats.map((stat) => (
+              <div key={stat.label} className="text-center md:text-left">
+                <div className="text-3xl sm:text-4xl font-bold text-slate-900">{stat.number}</div>
+                <div className="mt-1 text-sm text-slate-500">{stat.label}</div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* AUTORYZACJA - WOW SECTION */}
-      <section className="relative py-12 sm:py-20 md:py-32 overflow-hidden">
-        {/* Animated gradient background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900"></div>
-        
-        {/* Animated orbs - mniejsze na mobile */}
-        <div className="absolute top-0 left-0 sm:left-1/4 w-[250px] sm:w-[500px] h-[250px] sm:h-[500px] bg-blue-500/20 rounded-full blur-[80px] sm:blur-[120px] animate-pulse"></div>
-        <div className="absolute bottom-0 right-0 sm:right-1/4 w-[300px] sm:w-[600px] h-[300px] sm:h-[600px] bg-indigo-500/20 rounded-full blur-[100px] sm:blur-[150px] animate-pulse" style={{ animationDelay: '1s' }}></div>
-        
-        {/* Grid pattern - ukryty na mobile */}
-        <div className="absolute inset-0 opacity-[0.03] hidden sm:block" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")' }}></div>
-        
-        {/* Vertical lines - ukryte na mobile */}
-        <div className="absolute inset-0 opacity-10 hidden md:block">
-          <div className="absolute top-0 left-[10%] w-px h-full bg-gradient-to-b from-transparent via-white to-transparent"></div>
-          <div className="absolute top-0 left-[30%] w-px h-full bg-gradient-to-b from-white via-transparent to-white"></div>
-          <div className="absolute top-0 right-[30%] w-px h-full bg-gradient-to-b from-transparent via-white to-transparent"></div>
-          <div className="absolute top-0 right-[10%] w-px h-full bg-gradient-to-b from-white via-transparent to-white"></div>
+      {/* Tak wygląda nasz serwis — prawdziwe zdjęcia warsztatu */}
+      <section className="py-14 sm:py-20">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-2xl sm:text-3xl font-bold text-slate-900">Tak wygląda nasz warsztat</h2>
+          <p className="mt-3 text-slate-600 max-w-2xl">
+            Bez stockowych zdjęć. To nasze stanowiska serwisowe — terminali i drukarek Zebra —
+            z oryginalnymi częściami, stacjami lutowniczymi i sprzętem pomiarowym.
+          </p>
+          <div className="mt-8 grid sm:grid-cols-2 gap-5 sm:gap-6">
+            <figure>
+              <div className="relative aspect-[16/9] rounded-2xl overflow-hidden ring-1 ring-slate-200">
+                <Image src="/serwis_terminale.jpeg" alt="Stanowisko serwisowe terminali mobilnych Zebra" fill sizes="(max-width:640px) 100vw, 50vw" className="object-cover" />
+              </div>
+              <figcaption className="mt-2.5 text-sm text-slate-500">Serwis terminali mobilnych i skanerów</figcaption>
+            </figure>
+            <figure>
+              <div className="relative aspect-[16/9] rounded-2xl overflow-hidden ring-1 ring-slate-200">
+                <Image src="/serwis_drukarki.jpeg" alt="Stanowisko serwisowe drukarek etykiet Zebra" fill sizes="(max-width:640px) 100vw, 50vw" className="object-cover" />
+              </div>
+              <figcaption className="mt-2.5 text-sm text-slate-500">Serwis drukarek etykiet i kart</figcaption>
+            </figure>
+          </div>
         </div>
+      </section>
 
-        <div className="relative z-10 max-w-6xl mx-auto px-3 sm:px-6 lg:px-8">
-          {/* Top badge */}
-          <div className="text-center mb-8 sm:mb-12">
-            <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2 sm:py-2.5 bg-gradient-to-r from-amber-500/20 to-yellow-500/20 backdrop-blur-sm rounded-full border border-amber-500/30 mb-4 sm:mb-8">
-              <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-amber-400 rounded-full animate-pulse"></div>
-              <span className="text-xs sm:text-sm font-semibold text-amber-300 uppercase tracking-wider">Najwyższe statusy w Polsce</span>
-              <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-amber-400 rounded-full animate-pulse"></div>
-            </div>
-            
-            <h2 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 leading-tight px-2">
-              Oficjalnie<br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400">
-                autoryzowani przez Zebra
-              </span>
-            </h2>
-            
-            <p className="text-sm sm:text-lg md:text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed px-2">
-              Posiadamy <strong className="text-white">oba najwyższe statusy</strong> przyznawane przez Zebra Technologies 
-              w Polsce – jako partner handlowy i jako centrum serwisowe.
-            </p>
-          </div>
+      {/* Historia — czysta oś czasu */}
+      <section className="py-14 sm:py-20 bg-slate-50 border-y border-slate-200">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-2xl sm:text-3xl font-bold text-slate-900">Nasza droga z marką Zebra</h2>
+          <p className="mt-3 text-slate-600 max-w-2xl">
+            Od 1999 roku towarzyszymy każdej zmianie na rynku AutoID — i serwisujemy sprzęt, którego inni już nie znają.
+          </p>
+          <ol className="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
+            {milestones.map((m, i) => (
+              <li key={m.year} className="relative bg-white rounded-2xl border border-slate-200 p-6">
+                <div className="text-sm font-semibold text-slate-400">{`0${i + 1}`}</div>
+                <div className="mt-3 text-lg font-bold text-slate-900">{m.year}</div>
+                <div className="mt-1 font-semibold text-slate-800">{m.title}</div>
+                <p className="mt-2 text-sm text-slate-600 leading-relaxed">{m.description}</p>
+                {i === milestones.length - 1 && (
+                  <span className="absolute top-5 right-5 inline-block w-2.5 h-2.5 rounded-full bg-[#A8F000]" aria-hidden="true" />
+                )}
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
 
-          {/* Logos showcase */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8 mb-8 sm:mb-16">
-            {/* Premier Partner */}
-            <div className="group relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl sm:rounded-3xl blur-xl opacity-50 group-hover:opacity-75 transition-opacity duration-500"></div>
-              <div className="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl sm:rounded-3xl border border-white/20 p-5 sm:p-8 md:p-10 hover:border-white/40 transition-all duration-500 hover:-translate-y-2">
-                <div className="flex flex-col items-center text-center">
-                  <div className="relative w-24 h-24 sm:w-36 sm:h-36 md:w-44 md:h-44 mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-500">
-                    <Image
-                      src="/premier-partner-1.png"
-                      alt="Zebra Premier Partner"
-                      fill
-                      className="object-contain drop-shadow-2xl"
-                    />
-                  </div>
-                  <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2 sm:mb-3">Premier Partner</h3>
-                  <p className="text-slate-300 text-xs sm:text-sm md:text-base leading-relaxed mb-4 sm:mb-6">
-                    Najwyższy poziom partnerstwa handlowego Zebra w Polsce. 
-                    Bezpośredni dostęp do pełnej oferty produktowej i wsparcia technicznego.
-                  </p>
-                  <div className="flex flex-wrap justify-center gap-1.5 sm:gap-2">
-                    {['Pełna oferta', 'Najlepsze ceny', 'Priorytetowe dostawy'].map((tag, i) => (
-                      <span key={i} className="px-2 sm:px-3 py-0.5 sm:py-1 bg-blue-500/20 text-blue-300 rounded-full text-[10px] sm:text-xs font-medium">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Authorized Service Center */}
-            <div className="group relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-green-600 to-emerald-600 rounded-2xl sm:rounded-3xl blur-xl opacity-50 group-hover:opacity-75 transition-opacity duration-500"></div>
-              <div className="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl sm:rounded-3xl border border-white/20 p-5 sm:p-8 md:p-10 hover:border-white/40 transition-all duration-500 hover:-translate-y-2">
-                <div className="flex flex-col items-center text-center">
-                  <div className="relative w-24 h-24 sm:w-36 sm:h-36 md:w-44 md:h-44 mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-500">
-                    <Image
-                      src="/repair_specialist.png"
-                      alt="Zebra Authorized Service Center"
-                      fill
-                      className="object-contain drop-shadow-2xl"
-                    />
-                  </div>
-                  <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2 sm:mb-3">Authorized Service Center</h3>
-                  <p className="text-slate-300 text-xs sm:text-sm md:text-base leading-relaxed mb-4 sm:mb-6">
-                    Oficjalne centrum serwisowe z certyfikacją Zebra. 
-                    Naprawy na oryginalnych częściach z pełną gwarancją producenta.
-                  </p>
-                  <div className="flex flex-wrap justify-center gap-1.5 sm:gap-2">
-                    {['Oryginalne części', 'Gwarancja Zebra', 'Certyfikowani technicy'].map((tag, i) => (
-                      <span key={i} className="px-2 sm:px-3 py-0.5 sm:py-1 bg-green-500/20 text-green-300 rounded-full text-[10px] sm:text-xs font-medium">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Benefits grid */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
-            {[
-              { icon: Shield, title: 'Oryginalne części', desc: 'Bezpośrednio od producenta' },
-              { icon: Award, title: 'Gwarancja Zebra', desc: 'Na każdą naprawę' },
-              { icon: Users, title: 'Certyfikowani technicy', desc: 'Szkoleni przez Zebra' },
-              { icon: Clock, title: 'Priorytetowe wsparcie', desc: 'Bezpośrednia linia do Zebra' }
-            ].map((item, idx) => (
-              <div key={idx} className="group bg-white/5 backdrop-blur-sm rounded-xl sm:rounded-2xl p-3 sm:p-5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300 hover:-translate-y-1">
-                <div className="w-9 h-9 sm:w-12 sm:h-12 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg sm:rounded-xl flex items-center justify-center mb-2 sm:mb-4 group-hover:scale-110 transition-transform">
-                  <item.icon className="w-4 h-4 sm:w-6 sm:h-6 text-white" />
-                </div>
-                <h4 className="text-white font-semibold text-sm sm:text-base mb-0.5 sm:mb-1">{item.title}</h4>
-                <p className="text-slate-400 text-[10px] sm:text-sm">{item.desc}</p>
+      {/* Dlaczego TAKMA — wartości */}
+      <section className="py-14 sm:py-20">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-2xl sm:text-3xl font-bold text-slate-900">Dlaczego TAKMA</h2>
+          <p className="mt-3 text-slate-600 max-w-2xl">
+            Za każdym urządzeniem stoi człowiek, którego praca zależy od jego sprawności. Tak pracujemy.
+          </p>
+          <div className="mt-8 grid sm:grid-cols-2 gap-5 sm:gap-6">
+            {values.map((v) => (
+              <div key={v.title} className="rounded-2xl border border-slate-200 p-6 sm:p-7">
+                <Image
+                  src={v.iconSrc}
+                  alt=""
+                  width={48}
+                  height={48}
+                  className="w-12 h-12 rounded-xl object-cover ring-1 ring-slate-200"
+                />
+                <h3 className="mt-4 text-lg font-semibold text-slate-900">{v.title}</h3>
+                <p className="mt-2 text-sm text-slate-600 leading-relaxed">{v.description}</p>
               </div>
             ))}
           </div>
+        </div>
+      </section>
 
-          {/* Bottom text */}
-          <div className="text-center mt-8 sm:mt-12 md:mt-16">
-            <p className="text-slate-400 text-xs sm:text-sm">
-              Jeden z niewielu serwisów w Polsce z podwójną autoryzacją Zebra
-            </p>
+      {/* Autoryzacja Zebra — czysto, na oficjalnym lockupie */}
+      <section className="py-14 sm:py-20 bg-slate-950">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+            <div>
+              <h2 className="text-2xl sm:text-3xl font-bold text-white">Oficjalnie autoryzowani przez Zebra</h2>
+              <p className="mt-4 text-slate-300 leading-relaxed">
+                Mamy oba najwyższe statusy Zebra Technologies w Polsce naraz — jako partner handlowy
+                (<strong className="text-white">Premier Solution Partner</strong>) i jako serwis
+                (<strong className="text-white">Printer Repair Specialist</strong>). To oznacza dostęp do
+                oryginalnych części, gwarancję producenta na naprawy i bezpośrednie wsparcie techniczne.
+              </p>
+              <div className="mt-7 grid grid-cols-2 gap-4">
+                {authBenefits.map((b) => (
+                  <div key={b.title} className="rounded-xl border border-white/10 bg-white/[0.04] p-4">
+                    <div className="flex items-center gap-2">
+                      <ShieldCheck className="w-4 h-4 text-[#A8F000]" />
+                      <span className="text-sm font-semibold text-white">{b.title}</span>
+                    </div>
+                    <p className="mt-1 text-xs text-slate-400">{b.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="rounded-2xl bg-white p-8 sm:p-12 flex items-center justify-center">
+              <div className="relative w-full max-w-md aspect-[3/1]">
+                <Image
+                  src="/zebra-premier-repair-specialist.jpeg"
+                  alt="Zebra Premier Solution Partner i Printer Repair Specialist"
+                  fill
+                  sizes="(max-width:1024px) 100vw, 480px"
+                  className="object-contain"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="py-10 sm:py-16 bg-gradient-to-r from-blue-600 to-indigo-600">
-        <div className="max-w-4xl mx-auto px-3 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-white mb-2 sm:mb-3">
-            Masz pytania? Chcesz nawiązać współpracę?
-          </h2>
-          <p className="text-xs sm:text-sm text-blue-100 mb-6 sm:mb-8 max-w-2xl mx-auto px-2">
-            Zadzwoń, napisz lub odwiedź nas osobiście. Nasi eksperci są do Twojej dyspozycji.
+      <section className="py-14 sm:py-20 border-t border-slate-200">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-2xl sm:text-3xl font-bold text-slate-900">Masz urządzenie Zebra do naprawy?</h2>
+          <p className="mt-3 text-slate-600">
+            Zgłoś naprawę albo zadzwoń — odbierze ją od Ciebie kurier, a diagnozę robimy ten sam zespół,
+            który serwisuje Zebrę od 1999 roku.
           </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
-            <Link
-              href="/"
-              className="w-full sm:w-auto px-6 sm:px-8 py-2.5 sm:py-3 bg-white text-blue-600 rounded-full font-semibold hover:bg-blue-50 hover:scale-105 transition-all flex items-center justify-center gap-2 group text-sm sm:text-base"
-            >
-              Strona główna
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
+          <div className="mt-7 flex flex-col sm:flex-row items-center justify-center gap-3">
             <Link
               href="/#formularz"
-              className="w-full sm:w-auto px-6 sm:px-8 py-2.5 sm:py-3 bg-blue-500 text-white rounded-full font-semibold hover:bg-blue-400 hover:scale-105 transition-all text-sm sm:text-base"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3 rounded-xl bg-slate-900 text-white font-semibold hover:bg-slate-800 transition-colors"
             >
               Zgłoś naprawę
+              <ArrowRight className="w-4 h-4" />
             </Link>
+            <a
+              href="tel:+48601619898"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3 rounded-xl border border-slate-300 text-slate-900 font-semibold hover:bg-slate-50 transition-colors"
+            >
+              <Phone className="w-4 h-4" />
+              Zadzwoń
+            </a>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-6 sm:py-8">
-        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 text-center">
-          <p className="text-gray-400 text-xs sm:text-sm">
-            © 2025-2026 TAKMA - Serwis Zebra. Wszystkie prawa zastrzeżone.
-          </p>
+      <footer className="bg-slate-900 text-white py-8">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-sm">
+          <p className="text-slate-400">© 2025–2026 TAKMA — Serwis Zebra. Wszystkie prawa zastrzeżone.</p>
+          <a href="https://www.takma.com.pl" target="_blank" rel="noopener" className="text-slate-300 hover:text-white transition-colors">
+            takma.com.pl
+          </a>
         </div>
       </footer>
-
-      {/* Global CSS animations */}
-      <style jsx global>{`
-        @keyframes fade-in-down {
-          from {
-            opacity: 0;
-            transform: translateY(-20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        
-        @keyframes fade-in-up {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        
-        .animate-fade-in-down {
-          animation: fade-in-down 0.6s ease-out forwards;
-        }
-        
-        .animate-fade-in-up {
-          animation: fade-in-up 0.6s ease-out forwards;
-          opacity: 0;
-        }
-      `}</style>
     </div>
   )
 }

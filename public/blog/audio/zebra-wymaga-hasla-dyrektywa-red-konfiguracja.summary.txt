@@ -1,0 +1,7 @@
+Artykuł wyjaśnia, dlaczego nowe drukarki Zebra z modułami bezprzewodowymi wymagają ustawienia hasła przed pierwszym użyciem i jak ten proces przeprowadzić.
+
+Od 1 sierpnia 2025 roku wszystkie drukarki biurkowe, przemysłowe i mobilne Zebry wyposażone w WiFi lub Bluetooth, sprzedawane na rynku europejskim, muszą spełniać wymogi dyrektywy EU RED dotyczącej cyberbezpieczeństwa urządzeń radiowych. W praktyce oznacza to, że przy pierwszym uruchomieniu drukarka wejdzie w tryb chroniony i nie pozwoli na pełną pracę, dopóki nie skonfigurujesz hasła administratora.
+
+Konfigurację przeprowadza się przez USB — nie przez sieć — przy użyciu bezpłatnego programu Printer Setup Utilities i wbudowanego kreatora Security Setup Wizard. Hasło musi mieć minimum 14 znaków, a Zebra nigdzie go nie przechowuje, więc jego utrata oznacza konieczność resetu fabrycznego. Cały proces przy jednej drukarce zajmuje od 5 do 10 minut, a wygenerowany skrypt konfiguracyjny możesz później wysłać do kolejnych urządzeń bez potrzeby przechodzenia przez kreator od nowa.
+
+Szczegółowy opis każdego kroku, rozwiązania typowych problemów oraz instrukcję wideo znajdziesz w pełnym artykule poniżej.

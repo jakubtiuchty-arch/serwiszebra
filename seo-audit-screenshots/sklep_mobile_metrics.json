@@ -1,0 +1,167 @@
+{
+  "fontSizes": {
+    "16px": 109,
+    "12px": 88,
+    "14px": 25,
+    "20px": 1,
+    "10px": 51,
+    "64px": 1,
+    "9px": 2,
+    "18px": 1
+  },
+  "smallTouchTargets": [
+    {
+      "tag": "A",
+      "text": "Przejdź do treści",
+      "width": 1,
+      "height": 1,
+      "top": -1
+    },
+    {
+      "tag": "A",
+      "text": "",
+      "width": 218,
+      "height": 46,
+      "top": 5
+    },
+    {
+      "tag": "BUTTON",
+      "text": "",
+      "width": 38,
+      "height": 38,
+      "top": 9
+    },
+    {
+      "tag": "A",
+      "text": "Start",
+      "width": 16,
+      "height": 16,
+      "top": 71
+    },
+    {
+      "tag": "A",
+      "text": "Koszyk",
+      "width": 34,
+      "height": 30,
+      "top": 64
+    },
+    {
+      "tag": "INPUT",
+      "text": "",
+      "width": 285,
+      "height": 42,
+      "top": 316
+    },
+    {
+      "tag": "BUTTON",
+      "text": "Filtry",
+      "width": 50,
+      "height": 42,
+      "top": 316
+    },
+    {
+      "tag": "SELECT",
+      "text": "NazwaCena ↑Cena ↓",
+      "width": 87,
+      "height": 17,
+      "top": 385
+    },
+    {
+      "tag": "BUTTON",
+      "text": "",
+      "width": 32,
+      "height": 32,
+      "top": 664
+    },
+    {
+      "tag": "BUTTON",
+      "text": "",
+      "width": 32,
+      "height": 32,
+      "top": 664
+    },
+    {
+      "tag": "BUTTON",
+      "text": "",
+      "width": 32,
+      "height": 32,
+      "top": 952
+    },
+    {
+      "tag": "BUTTON",
+      "text": "",
+      "width": 32,
+      "height": 32,
+      "top": 952
+    },
+    {
+      "tag": "BUTTON",
+      "text": "",
+      "width": 32,
+      "height": 32,
+      "top": 1240
+    },
+    {
+      "tag": "BUTTON",
+      "text": "",
+      "width": 32,
+      "height": 32,
+      "top": 1240
+    },
+    {
+      "tag": "BUTTON",
+      "text": "",
+      "width": 32,
+      "height": 32,
+      "top": 1528
+    },
+    {
+      "tag": "BUTTON",
+      "text": "",
+      "width": 32,
+      "height": 32,
+      "top": 1528
+    },
+    {
+      "tag": "BUTTON",
+      "text": "",
+      "width": 32,
+      "height": 32,
+      "top": 1816
+    },
+    {
+      "tag": "BUTTON",
+      "text": "",
+      "width": 32,
+      "height": 32,
+      "top": 1816
+    },
+    {
+      "tag": "BUTTON",
+      "text": "",
+      "width": 32,
+      "height": 32,
+      "top": 2104
+    },
+    {
+      "tag": "BUTTON",
+      "text": "",
+      "width": 32,
+      "height": 32,
+      "top": 2104
+    }
+  ],
+  "totalSmallTargets": 70,
+  "totalInteractives": 134,
+  "imagesWithoutDimensions": [],
+  "totalImages": 50,
+  "h1": {
+    "text": "Części Zamienne Zebra",
+    "top": 150,
+    "visible": true
+  },
+  "bodyScrollWidth": 375,
+  "viewportWidth": 375,
+  "hasHorizontalScroll": false,
+  "pageHeight": 7551
+}

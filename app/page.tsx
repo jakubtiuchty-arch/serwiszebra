@@ -533,14 +533,22 @@ export default function HomePage() {
 
       {/* HERO - DESKTOP VERSION (floating chat box) */}
       <section className="hidden md:flex min-h-[60vh] lg:min-h-[70vh] items-center justify-center px-4 lg:px-6 py-12 relative overflow-hidden">
-        {/* Pionowe paski */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-0 left-[10%] w-1 h-full bg-gradient-to-b from-gray-200/20 via-gray-300/25 to-transparent"></div>
-          <div className="absolute top-0 left-[25%] w-0.5 h-full bg-gradient-to-b from-gray-200/15 via-gray-300/20 to-transparent"></div>
-          <div className="absolute top-0 left-[40%] w-1 h-full bg-gradient-to-b from-gray-200/20 via-gray-300/25 to-transparent"></div>
-          <div className="absolute top-0 right-[35%] w-0.5 h-full bg-gradient-to-b from-gray-200/15 via-gray-300/20 to-transparent"></div>
-          <div className="absolute top-0 right-[20%] w-1 h-full bg-gradient-to-b from-gray-200/20 via-gray-300/25 to-transparent"></div>
-          <div className="absolute top-0 right-[8%] w-0.5 h-full bg-gradient-to-b from-gray-200/15 via-gray-300/20 to-transparent"></div>
+        {/* Animowane abstrakcyjne tło AI (pętla wideo, bez dźwięku) */}
+        <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+          <video
+            className="absolute inset-0 w-full h-full object-cover motion-reduce:hidden"
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="metadata"
+            poster="/hero-bg.jpg"
+          >
+            <source src="/hero-bg.mp4" type="video/mp4" />
+          </video>
+          {/* zmiękczenie pod kartę i tekst (kolor zostaje na brzegach, środek czysty) */}
+          <div className="absolute inset-0 bg-gradient-to-b from-white/35 via-white/55 to-white/35" />
+          <div className="absolute inset-0 [background:radial-gradient(58%_60%_at_50%_46%,rgba(255,255,255,0.75),rgba(255,255,255,0)_70%)]" />
         </div>
 
         <div className="max-w-7xl mx-auto w-full relative z-10">

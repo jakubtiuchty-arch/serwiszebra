@@ -1,0 +1,7 @@
+Artykuł dotyczy Zebra TC701 — nowego terminala mobilnego klasy ultra-rugged, przeznaczonego przede wszystkim do pracy w logistyce, chłodniach i centrach dystrybucyjnych.
+
+TC701 to następca poprzedniej generacji urządzeń z tej linii, zaprojektowany z myślą o najtrudniejszych warunkach. Urządzenie wytrzymuje upadki z wysokości ponad 3 metrów, pracuje w temperaturach od minus 20 do plus 50 stopni Celsjusza i przeszło testy szoku termicznego — co oznacza, że bez problemów radzi sobie z wielokrotnym przechodzeniem między chłodnią a halą magazynową. Posiada certyfikaty IP68 i IP65 oraz spełnia wojskowy standard MIL-STD-810H.
+
+Pod względem funkcjonalności TC701 oferuje procesor z obsługą sztucznej inteligencji, łączność Wi-Fi 7 i 5G, wbudowany czytnik RFID UHF oraz skaner zdolny do odczytu kodów z odległości do 30 metrów — co szczególnie przydaje się przy wysokich regałach. Waga urządzenia to 284 gramy, a ceny zaczynają się od około 6 tysięcy złotych netto.
+
+Jeśli szukasz szczegółowej specyfikacji, porównania z innymi modelami lub wskazówek jak dobrać właściwą konfigurację, pełny artykuł poniżej zawiera wszystkie potrzebne informacje.

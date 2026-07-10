@@ -1,0 +1,168 @@
+{
+  "fontSizes": {
+    "16px": 31,
+    "12px": 101,
+    "14px": 40,
+    "18px": 2,
+    "24px": 1,
+    "13px": 19,
+    "64px": 1,
+    "10px": 10,
+    "9px": 2
+  },
+  "smallTouchTargets": [
+    {
+      "tag": "A",
+      "text": "Przejdź do treści",
+      "width": 1,
+      "height": 1,
+      "top": -1
+    },
+    {
+      "tag": "A",
+      "text": "",
+      "width": 218,
+      "height": 46,
+      "top": 5
+    },
+    {
+      "tag": "BUTTON",
+      "text": "",
+      "width": 38,
+      "height": 38,
+      "top": 9
+    },
+    {
+      "tag": "A",
+      "text": "Start",
+      "width": 16,
+      "height": 16,
+      "top": 71
+    },
+    {
+      "tag": "A",
+      "text": "Zebra ZD421t",
+      "width": 77,
+      "height": 16,
+      "top": 71
+    },
+    {
+      "tag": "A",
+      "text": "Koszyk",
+      "width": 34,
+      "height": 30,
+      "top": 64
+    },
+    {
+      "tag": "BUTTON",
+      "text": "",
+      "width": 32,
+      "height": 32,
+      "top": 861
+    },
+    {
+      "tag": "BUTTON",
+      "text": "",
+      "width": 32,
+      "height": 32,
+      "top": 861
+    },
+    {
+      "tag": "BUTTON",
+      "text": "Do koszyka",
+      "width": 195,
+      "height": 40,
+      "top": 857
+    },
+    {
+      "tag": "A",
+      "text": "czyszczenie głowicy",
+      "width": 118,
+      "height": 15,
+      "top": 3031
+    },
+    {
+      "tag": "A",
+      "text": "Jak wyczyścić głowicę drukarki Zebra",
+      "width": 216,
+      "height": 15,
+      "top": 3169
+    },
+    {
+      "tag": "A",
+      "text": "Wymiana głowicy – kiedy i ile kosztuje?",
+      "width": 222,
+      "height": 15,
+      "top": 3191
+    },
+    {
+      "tag": "A",
+      "text": "TOP 10 awarii drukarek Zebra",
+      "width": 167,
+      "height": 15,
+      "top": 3213
+    },
+    {
+      "tag": "A",
+      "text": "Cennik napraw drukarek Zebra",
+      "width": 175,
+      "height": 15,
+      "top": 3235
+    },
+    {
+      "tag": "A",
+      "text": "Serwis drukarki Zebra ZD420/ZD421",
+      "width": 207,
+      "height": 15,
+      "top": 3257
+    },
+    {
+      "tag": "A",
+      "text": "Wymiana głowicy krok po kroku",
+      "width": 180,
+      "height": 15,
+      "top": 3309
+    },
+    {
+      "tag": "A",
+      "text": "Blady wydruk – rozwiązanie problemu",
+      "width": 215,
+      "height": 15,
+      "top": 3331
+    },
+    {
+      "tag": "A",
+      "text": "Self-test i kalibracja drukarki",
+      "width": 162,
+      "height": 15,
+      "top": 3353
+    },
+    {
+      "tag": "A",
+      "text": "Zebra ZD421t – Support & Downloads",
+      "width": 304,
+      "height": 31,
+      "top": 3398
+    },
+    {
+      "tag": "A",
+      "text": "Centrum wsparcia Zebra",
+      "width": 140,
+      "height": 15,
+      "top": 3414
+    }
+  ],
+  "totalSmallTargets": 44,
+  "totalInteractives": 63,
+  "imagesWithoutDimensions": [],
+  "totalImages": 10,
+  "h1": {
+    "text": "Głowica 203 dpi do drukarki Zebra ZD421t",
+    "top": 633,
+    "visible": true
+  },
+  "bodyScrollWidth": 375,
+  "viewportWidth": 375,
+  "hasHorizontalScroll": false,
+  "pageHeight": 4988
+}

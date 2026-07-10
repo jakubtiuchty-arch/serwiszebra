@@ -122,7 +122,7 @@ export async function POST(
 
       // Wyślij email do admina + dyk@takma.com.pl o wyborze pro formy
       await sendProFormaAdminEmail({
-        to: [process.env.ADMIN_EMAIL || 'jakub.tiuchty@gmail.com', 'dyk@takma.com.pl'],
+        to: ['jakub.tiuchty@takma.com.pl', 'handlowy@takma.com.pl'],
         repairId: repairId,
         repairNumber: repair.repair_number,
         customerName: `${repair.first_name} ${repair.last_name}`,

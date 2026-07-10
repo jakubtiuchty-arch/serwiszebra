@@ -1,0 +1,5 @@
+Zebra DS8208 i DS8288 to najnowsza generacja ręcznych skanerów kodów kreskowych, która wyznacza nowe standardy w branży.
+
+Najważniejszą innowacją jest czujnik 2 megapikseli — pierwszy w tej klasie urządzeń — który w połączeniu z technologią PRZM zapewnia zasięg skanowania do 71 centymetrów i błyskawiczne odczytywanie nawet uszkodzonych lub zabrudzonych kodów. DS8208 to model przewodowy z 5-letnią gwarancją, natomiast DS8288 to wersja bezprzewodowa z ładowaniem indukcyjnym i wyborem między tradycyjną baterią a superkondensatorem — ten ostatni pozwala uzyskać 100 skanów już po 35 sekundach ładowania, co idealnie sprawdza się przy kasach, gdzie skaner regularnie wraca do podstawki. Modele z oznaczeniem R dodają wbudowany odczyt RFID, co otwiera możliwości weryfikacji towarów i skutecznego zapobiegania kradzieżom przy kasach samoobsługowych. Oba skanery są gotowe na kody GS1 Digital Link i współpracują z systemem zarządzania Zebra DNA, umożliwiając zdalne konfigurowanie całej floty urządzeń. Pasują do handlu detalicznego, logistyki i produkcji.
+
+Szczegółowy opis każdego rozwiązania i porównanie specyfikacji znajdziesz w pełnym artykule poniżej.

@@ -380,7 +380,7 @@ export async function GET(
     try {
       await resend.emails.send({
         from: 'System Serwisowy <system@serwis-zebry.pl>',
-        to: 'dyk@takma.com.pl',
+        to: ['jakub.tiuchty@takma.com.pl', 'handlowy@takma.com.pl'],
         subject: `Pro Forma - zamówienie sklepowe #${shortId}`,
         html: `
           <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">

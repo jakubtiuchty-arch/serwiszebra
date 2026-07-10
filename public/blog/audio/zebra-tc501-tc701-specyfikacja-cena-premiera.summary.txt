@@ -1,0 +1,7 @@
+Artykuł przedstawia dwa nowe terminale mobilne Zebry — TC501 i TC701 — zaprojektowane z myślą o zastosowaniach sztucznej inteligencji, których premiera odbyła się w styczniu 2026 roku.
+
+Oba urządzenia napędza procesor Qualcomm Dragonwing z dedykowanym silnikiem AI, który oferuje trzysta procent więcej mocy obliczeniowej niż poprzednia generacja, a przy tym obsługuje do 12 GB RAM i do 256 GB pamięci wewnętrznej. To oznacza, że zaawansowane algorytmy — rozpoznawanie produktów, wykrywanie uszkodzeń opakowań czy automatyczna inwentaryzacja — mogą działać bezpośrednio na urządzeniu, bez połączenia z chmurą. Po raz pierwszy w tej serii wbudowano czytnik RFID UHF o zasięgu do 2 metrów, odczytujący ponad 200 tagów na sekundę, co eliminuje potrzebę dokupowania osobnych czytników. Łączność obejmuje Wi-Fi 7, 5G i Bluetooth 6.0, a wyświetlacz AMOLED o jasności 1500 nitów zapewnia czytelność nawet w pełnym słońcu.
+
+TC501 to wybór dla handlu detalicznego — lżejszy i bardziej ekonomiczny. TC701 jest zbudowany z myślą o logistyce i pracy w chłodniach, z odpornością na upadki z wysokości 3,66 metra. Obydwa modele działają w zakresie temperatur od minus 20 do plus 50 stopni Celsjusza.
+
+Szczegółowy opis każdego kroku i pełne specyfikacje znajdziesz w artykule poniżej.
