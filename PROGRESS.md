@@ -4,6 +4,12 @@ Checkpoint postępu prac. Najnowszy wpis na górze. Po każdym etapie/buildzie d
 
 ---
 
+## 2026-07-22 (po południu) — Dostawa na wydruku/proformie + wymagany S/N z opcją „nieczytelny"
+
+- **Fix rozbieżności kwot (ZAM-20260722083114: lista 215,70 vs wydruk 190,70)**: dostawa (25 zł brutto) siedzi w `total_netto/total_brutto`, ale nie jest pozycją w `items` — wydruk zamówienia i **proforma sklepu** liczyły sumy z samych pozycji. Teraz sumy z bazy + wiersz „Dostawa (kurier)" wyliczany jako różnica (`print/route.ts`, `shop/orders/[id]/proforma/route.ts`). Odbiór osobisty (różnica 0) = bez zmian.
+- **S/N wymagany w obu formularzach zgłoszenia** (serwis-zebry `components/RepairForm.tsx` + takma `RepairForm.tsx`, commit w repo takma): pole obowiązkowe + checkbox „nieczytelny lub zatarty" → zapisuje `NIECZYTELNY` (zamiast „Brak" w adminie). Walidacja też w API obu repo (zod min(1)). Powód: zgłoszenie #202607221020 bez S/N przez formularz takmy (pole było opcjonalne).
+- TODO: —
+
 ## 2026-07-22 — Odrzucenie wyceny przez webhook Stripe + nr płatności dla księgowości
 
 - **Nowy flow odrzucenia wyceny** (panel klienta): klik „Opłać diagnostykę 166,05 zł" → NAJPIERW anulowanie (`cancel` z flagą `rejectQuote`: status `anulowane`, `final_price=166.05`, `price_notes` z odrzuconą wyceną) → potem płatność Stripe → potwierdzenie WYŁĄCZNIE webhookiem (`handleDiagnosticFeePayment`: `payment_status=succeeded`+`paid_at`, status zostaje `anulowane`, historia, mail do admina „odeślij urządzenie"). Box Wycena w adminie: 166,05 po odrzuceniu → zielone ZAPŁACONO z datą po webhoosku.

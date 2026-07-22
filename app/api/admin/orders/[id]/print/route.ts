@@ -36,7 +36,14 @@ export async function GET(
 
     const subtotalNetto = items.reduce((sum: number, item: any) => sum + ((item.priceNetto || item.price) * item.quantity), 0)
     const subtotalBrutto = items.reduce((sum: number, item: any) => sum + ((item.priceBrutto || item.price_brutto) * item.quantity), 0)
-    const vatAmount = subtotalBrutto - subtotalNetto
+
+    // Sumy zamówienia z bazy zawierają dostawę, która nie jest pozycją w items —
+    // różnica między total_* a sumą pozycji to koszt dostawy (pokazywany jako osobny wiersz)
+    const totalNetto = order.total_netto ?? subtotalNetto
+    const totalBrutto = order.total_brutto ?? subtotalBrutto
+    const shippingNetto = Math.max(0, Math.round((totalNetto - subtotalNetto) * 100) / 100)
+    const shippingBrutto = Math.max(0, Math.round((totalBrutto - subtotalBrutto) * 100) / 100)
+    const vatAmount = totalBrutto - totalNetto
 
     const shortId = order.order_number || orderId.split('-')[0].toUpperCase()
     const orderDate = new Date(order.created_at).toLocaleDateString('pl-PL')
@@ -314,14 +321,35 @@ export async function GET(
       </thead>
       <tbody>
         ${itemsRows}
+        ${shippingBrutto > 0 ? `
+        <tr>
+          <td>${items.length + 1}</td>
+          <td><div class="service-name">Dostawa (kurier)</div></td>
+          <td>1 szt.</td>
+          <td class="amount">${shippingNetto.toFixed(2)} zł</td>
+          <td style="text-align: center;">23%</td>
+          <td class="amount">${shippingNetto.toFixed(2)} zł</td>
+          <td class="amount">${shippingBrutto.toFixed(2)} zł</td>
+        </tr>
+        ` : ''}
       </tbody>
     </table>
 
     <div class="summary">
       <div class="summary-box">
+        ${shippingBrutto > 0 ? `
+        <div class="summary-row">
+          <span>Produkty netto:</span>
+          <span>${subtotalNetto.toFixed(2)} zł</span>
+        </div>
+        <div class="summary-row">
+          <span>Dostawa netto:</span>
+          <span>${shippingNetto.toFixed(2)} zł</span>
+        </div>
+        ` : ''}
         <div class="summary-row">
           <span>Wartość netto:</span>
-          <span>${subtotalNetto.toFixed(2)} zł</span>
+          <span>${totalNetto.toFixed(2)} zł</span>
         </div>
         <div class="summary-row">
           <span>VAT 23%:</span>
@@ -329,7 +357,7 @@ export async function GET(
         </div>
         <div class="summary-total">
           <span>Razem brutto:</span>
-          <span>${subtotalBrutto.toFixed(2)} zł</span>
+          <span>${totalBrutto.toFixed(2)} zł</span>
         </div>
       </div>
     </div>

@@ -93,7 +93,7 @@ const repairFormSchema = z.object({
       (val) => isZebraDevice(val),
       'Serwisujemy tylko urządzenia marki Zebra Technologies. Wpisz model Zebra (np. ZD421, TC52, DS3608).'
     ),
-  serialNumber: z.string().min(1, 'Numer seryjny jest wymagany'),
+  serialNumber: z.string().min(1, 'Podaj numer seryjny lub zaznacz, że jest nieczytelny'),
   purchaseDate: z.string().optional(),
   isWarranty: z.enum(['tak', 'nie', 'nie_wiem']),
   
@@ -175,12 +175,15 @@ export default function RepairForm() {
   const [submittedLastName, setSubmittedLastName] = useState<string>('')
   const [submittedPhone, setSubmittedPhone] = useState<string>('')
 
+  const [serialUnreadable, setSerialUnreadable] = useState(false)
+
   const {
     register,
     handleSubmit,
     formState: { errors },
     watch,
     trigger,
+    setValue,
   } = useForm<RepairFormData>({
     resolver: zodResolver(repairFormSchema),
     defaultValues: {
@@ -591,10 +594,22 @@ export default function RepairForm() {
                     {...register('serialNumber')}
                     id="serialNumber"
                     type="text"
-                    required
-                    className={`w-full px-3 py-2 border rounded-full focus:ring-2 focus:ring-blue-500 focus:border-transparent ${errors.serialNumber ? 'border-red-500' : 'border-gray-300'}`}
+                    disabled={serialUnreadable}
+                    className={`w-full px-3 py-2 border rounded-full focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100 disabled:text-gray-500 ${errors.serialNumber ? 'border-red-500' : 'border-gray-300'}`}
                     placeholder="S/N: XXXXXXXXXXXX"
                   />
+                  <label className="mt-2 flex items-center gap-2 text-sm text-gray-600 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={serialUnreadable}
+                      onChange={(e) => {
+                        setSerialUnreadable(e.target.checked)
+                        setValue('serialNumber', e.target.checked ? 'NIECZYTELNY' : '', { shouldValidate: true })
+                      }}
+                      className="w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                    />
+                    Numer seryjny jest nieczytelny lub zatarty
+                  </label>
                   {errors.serialNumber && (
                     <p className="mt-1 text-sm text-red-600">{errors.serialNumber.message}</p>
                   )}

@@ -34,7 +34,7 @@ const repairRequestSchema = z.object({
   nip: z.string().optional(),
   deviceType: z.enum(['drukarka', 'terminal', 'skaner', 'tablet', 'akcesoria', 'inne']),
   deviceModel: z.string().min(1),
-  serialNumber: z.string().optional(),
+  serialNumber: z.string().min(1, 'Numer seryjny jest wymagany (lub „NIECZYTELNY")'),
   purchaseDate: z.string().optional(),
   isWarranty: z.enum(['tak', 'nie', 'nie_wiem']),
   issueDescription: z.string().min(20),

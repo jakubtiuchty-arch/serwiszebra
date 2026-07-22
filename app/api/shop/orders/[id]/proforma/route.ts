@@ -42,9 +42,14 @@ export async function GET(
       notes: order.notes
     }
 
-    // Obliczenia
-    const subtotalNetto = items.reduce((sum: number, item: any) => sum + ((item.priceNetto || item.price) * item.quantity), 0)
-    const subtotalBrutto = items.reduce((sum: number, item: any) => sum + ((item.priceBrutto || item.price_brutto) * item.quantity), 0)
+    // Obliczenia — sumy zamówienia z bazy zawierają dostawę, która nie jest pozycją w items;
+    // różnica między total_* a sumą pozycji to koszt dostawy (osobny wiersz w tabeli)
+    const itemsNetto = items.reduce((sum: number, item: any) => sum + ((item.priceNetto || item.price) * item.quantity), 0)
+    const itemsBrutto = items.reduce((sum: number, item: any) => sum + ((item.priceBrutto || item.price_brutto) * item.quantity), 0)
+    const subtotalNetto = order.total_netto ?? itemsNetto
+    const subtotalBrutto = order.total_brutto ?? itemsBrutto
+    const shippingNetto = Math.max(0, Math.round((subtotalNetto - itemsNetto) * 100) / 100)
+    const shippingBrutto = Math.max(0, Math.round((subtotalBrutto - itemsBrutto) * 100) / 100)
     const vatAmount = subtotalBrutto - subtotalNetto
 
     const shortId = order.order_number || orderId.split('-')[0].toUpperCase()
@@ -75,7 +80,16 @@ export async function GET(
           <td class="amount">${totalBrutto.toFixed(2)} zł</td>
         </tr>
       `
-    }).join('')
+    }).join('') + (shippingBrutto > 0 ? `
+        <tr>
+          <td>${items.length + 1}</td>
+          <td><div class="service-name">Dostawa (kurier)</div></td>
+          <td>1 szt.</td>
+          <td class="amount">${shippingNetto.toFixed(2)} zł</td>
+          <td style="text-align: center;">23%</td>
+          <td class="amount">${shippingBrutto.toFixed(2)} zł</td>
+        </tr>
+      ` : '')
 
     // Generuj HTML
     const html = `
