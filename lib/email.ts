@@ -2896,3 +2896,61 @@ ${getEmailHeader()}
     </html>
   `
 }
+// ===== Opłata za diagnostykę po odrzuceniu wyceny =====
+
+interface DiagnosticFeePaidAdminEmailData {
+  to: string
+  repairId: string
+  repairNumber?: string
+  customerName: string
+  customerEmail: string
+  customerPhone: string
+  deviceModel: string
+}
+
+export async function sendDiagnosticFeePaidAdminEmail(data: DiagnosticFeePaidAdminEmailData) {
+  try {
+    const shortId = getRepairNumber(data.repairId, data.repairNumber)
+
+    const email = await resend.emails.send({
+      from: 'System Serwisowy <system@serwis-zebry.pl>',
+      to: data.to,
+      subject: `Odrzucona wycena, diagnostyka opłacona - odeślij urządzenie #${shortId}`,
+      html: `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="utf-8">
+    </head>
+    <body style="margin: 0; padding: 0; background-color: #f3f4f6; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+      <div style="max-width: 600px; margin: 0 auto; padding: 24px;">
+        <div style="background-color: #ffffff; border-radius: 12px; padding: 32px;">
+          <h2 style="margin: 0 0 16px 0; color: #111827; font-size: 20px;">
+            Klient odrzucił wycenę i opłacił diagnostykę
+          </h2>
+          <p style="margin: 0 0 16px 0; color: #374151; font-size: 14px; line-height: 1.6;">
+            Zgłoszenie <strong>#${shortId}</strong> zostało anulowane, a klient opłacił
+            diagnostykę i przesyłkę (<strong>166,05 zł brutto</strong>).
+            <strong>Odeślij urządzenie do klienta.</strong>
+          </p>
+          <table style="width: 100%; border-collapse: collapse; font-size: 14px; color: #374151;">
+            <tr><td style="padding: 6px 0; color: #6b7280;">Klient:</td><td style="text-align: right; font-weight: 600;">${data.customerName}</td></tr>
+            <tr><td style="padding: 6px 0; color: #6b7280;">Email:</td><td style="text-align: right; font-weight: 600;">${data.customerEmail}</td></tr>
+            <tr><td style="padding: 6px 0; color: #6b7280;">Telefon:</td><td style="text-align: right; font-weight: 600;">${data.customerPhone}</td></tr>
+            <tr><td style="padding: 6px 0; color: #6b7280;">Urządzenie:</td><td style="text-align: right; font-weight: 600;">${data.deviceModel}</td></tr>
+          </table>
+          <a href="https://www.serwis-zebry.pl/admin/zgloszenie/${data.repairId}" style="display: inline-block; margin-top: 20px; padding: 10px 20px; background: #2563eb; color: white; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 14px;">Otwórz zgłoszenie</a>
+        </div>
+      </div>
+    </body>
+    </html>
+  `
+    })
+
+    console.log('[Email] Diagnostic fee paid notification sent to admin:', email)
+    return email
+  } catch (error) {
+    console.error('[Email] Error sending diagnostic fee paid email to admin:', error)
+    throw error
+  }
+}

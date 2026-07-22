@@ -3,7 +3,7 @@ import { stripe } from '@/lib/stripe/server';
 import { createClient } from '@/lib/supabase/server';
 import { createClient as createSupabaseClient } from '@supabase/supabase-js';
 import Stripe from 'stripe';
-import { sendRepairPaidEmail, sendRepairPaidAdminEmail } from '@/lib/email';
+import { sendRepairPaidEmail, sendRepairPaidAdminEmail, sendDiagnosticFeePaidAdminEmail } from '@/lib/email';
 
 // Funkcja pomocnicza - wysyłka do Baselinker
 async function sendToBaselinker(orderId: string) {
@@ -39,6 +39,13 @@ async function handleRepairPayment(repairId: string, supabase: any) {
 
     if (repairError || !repair) {
       console.error('❌ Repair not found:', repairId, repairError);
+      return;
+    }
+
+    // Anulowane zgłoszenie nie może wrócić do naprawy — płatność diagnostyki
+    // obsługuje handleDiagnosticFeePayment (rozpoznawana po metadata.is_diagnostic_fee)
+    if (repair.status === 'anulowane') {
+      console.warn(`⚠️ [Webhook] Repair ${repairId} is cancelled - skipping repair payment handling`);
       return;
     }
 
@@ -101,6 +108,71 @@ async function handleRepairPayment(repairId: string, supabase: any) {
 
   } catch (error) {
     console.error('❌ Error handling repair payment:', error);
+  }
+}
+
+// Funkcja pomocnicza - opłata za diagnostykę po odrzuceniu wyceny (166,05 zł brutto).
+// Zgłoszenie jest już anulowane — oznaczamy tylko płatność, statusu nie zmieniamy.
+async function handleDiagnosticFeePayment(repairId: string, supabase: any) {
+  try {
+    const { data: repair, error: repairError } = await supabase
+      .from('repair_requests')
+      .select('*')
+      .eq('id', repairId)
+      .single();
+
+    if (repairError || !repair) {
+      console.error('❌ [Webhook] Repair not found for diagnostic fee:', repairId, repairError);
+      return;
+    }
+
+    // Idempotencja - Stripe może dostarczyć event kilka razy
+    if (repair.payment_status === 'succeeded') {
+      console.log(`✅ [Webhook] Diagnostic fee for ${repairId} already marked as paid`);
+      return;
+    }
+
+    const { error: updateError } = await supabase
+      .from('repair_requests')
+      .update({
+        payment_status: 'succeeded',
+        paid_at: new Date().toISOString(),
+        status: 'anulowane',
+        updated_at: new Date().toISOString(),
+      })
+      .eq('id', repairId);
+
+    if (updateError) {
+      console.error('❌ [Webhook] Error updating diagnostic fee payment:', updateError);
+      return;
+    }
+
+    await supabase
+      .from('repair_status_history')
+      .insert({
+        repair_request_id: repairId,
+        status: 'anulowane',
+        notes: 'Klient odrzucił wycenę i opłacił diagnostykę 166,05 zł brutto - odesłać urządzenie',
+        changed_by: 'system',
+      });
+
+    console.log(`✅ [Webhook] Diagnostic fee paid for repair ${repairId}`);
+
+    try {
+      await sendDiagnosticFeePaidAdminEmail({
+        to: process.env.ADMIN_EMAIL || 'jakub.tiuchty@gmail.com',
+        repairId: repairId,
+        repairNumber: repair.repair_number,
+        customerName: `${repair.first_name} ${repair.last_name}`,
+        customerEmail: repair.email,
+        customerPhone: repair.phone || repair.contact_phone || 'brak',
+        deviceModel: repair.device_model,
+      });
+    } catch (emailError) {
+      console.error('❌ [Webhook] Error sending diagnostic fee email:', emailError);
+    }
+  } catch (error) {
+    console.error('❌ Error handling diagnostic fee payment:', error);
   }
 }
 
@@ -209,7 +281,17 @@ export async function POST(request: NextRequest) {
 
     case 'payment_intent.succeeded': {
       const paymentIntent = event.data.object as Stripe.PaymentIntent;
-      
+
+      // Naprawy mają repair_id w metadanych — rozróżnij diagnostykę od płatności za naprawę
+      if (paymentIntent.metadata?.repair_id) {
+        if (paymentIntent.metadata.is_diagnostic_fee === 'true') {
+          await handleDiagnosticFeePayment(paymentIntent.metadata.repair_id, supabase);
+        } else {
+          await handleRepairPayment(paymentIntent.metadata.repair_id, supabase);
+        }
+        break;
+      }
+
       // Znajdź zamówienie SKLEP
       const { data: order } = await supabase
         .from('orders')
@@ -251,7 +333,7 @@ export async function POST(request: NextRequest) {
       if (charge.metadata?.repair_id) {
         const repairId = charge.metadata.repair_id;
         const paymentIntentId = charge.payment_intent as string;
-        
+
         // Zaktualizuj repair z payment_intent_id
         await supabase
           .from('repair_requests')
@@ -260,9 +342,13 @@ export async function POST(request: NextRequest) {
             updated_at: new Date().toISOString(),
           })
           .eq('id', repairId);
-        
+
         // Wywołaj funkcję obsługi płatności
-        await handleRepairPayment(repairId, supabase);
+        if (charge.metadata.is_diagnostic_fee === 'true') {
+          await handleDiagnosticFeePayment(repairId, supabase);
+        } else {
+          await handleRepairPayment(repairId, supabase);
+        }
       }
       break;
     }

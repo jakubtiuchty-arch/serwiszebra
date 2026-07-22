@@ -18,9 +18,10 @@ export async function POST(
 
     const { id } = params
     
-    // Pobierz body z reason i flagą diagnosticFeePaid
+    // Pobierz body z reason i flagami diagnosticFeePaid / rejectQuote
     const body = await request.json().catch(() => ({}))
     const diagnosticFeePaid = body.diagnosticFeePaid === true
+    const rejectQuote = body.rejectQuote === true
 
     // Pobierz zgłoszenie
     const { data: repair, error: fetchError } = await supabase
@@ -60,14 +61,35 @@ export async function POST(
       )
     }
 
+    // Odrzucić wycenę można tylko gdy czeka na akceptację
+    if (rejectQuote && (repair.status !== 'wycena' || repair.price_accepted_at)) {
+      return NextResponse.json(
+        { error: 'Wycenę można odrzucić tylko gdy oczekuje na akceptację' },
+        { status: 400 }
+      )
+    }
+
+    const updatePayload: Record<string, any> = {
+      status: 'anulowane',
+      updated_at: new Date().toISOString()
+      // Note: reason jest przekazany ale nie zapisywany (brak kolumny w bazie)
+    }
+
+    // Odrzucenie wyceny: klient rezygnuje z naprawy i płaci za diagnostykę.
+    // Wycena zmienia się na opłatę 166,05 zł brutto — panel admina pokazuje ją w boxie Wycena,
+    // a webhook Stripe po opłaceniu ustawi payment_status=succeeded (box zmieni się na ZAPŁACONO).
+    if (rejectQuote) {
+      const rejectedPrice = repair.final_price || repair.estimated_price
+      updatePayload.final_price = 166.05
+      updatePayload.price_notes =
+        `Rezygnacja z naprawy — diagnostyka 99 zł netto + przesyłka 36 zł netto = 166,05 zł brutto.` +
+        (rejectedPrice ? ` Odrzucona wycena: ${rejectedPrice} zł${repair.price_notes ? ` (${repair.price_notes})` : ''}` : '')
+    }
+
     // Aktualizuj zgłoszenie (usunięto cancellation_reason - kolumna nie istnieje)
     const { data: updatedData, error: updateError } = await supabase
       .from('repair_requests')
-      .update({
-        status: 'anulowane',
-        updated_at: new Date().toISOString()
-        // Note: reason jest przekazany ale nie zapisywany (brak kolumny w bazie)
-      })
+      .update(updatePayload)
       .eq('id', id)
       .select()
 

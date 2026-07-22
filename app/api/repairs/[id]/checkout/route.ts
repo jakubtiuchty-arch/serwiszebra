@@ -67,6 +67,8 @@ if (['zakonczone', 'wyslane', 'anulowane'].includes(repair.status)) {
 
     // Przygotuj skrócone ID dla wyświetlenia
     const shortId = repair.id.split('-')[0].toUpperCase();
+    // Numer zgłoszenia widoczny dla klienta/admina — dla księgowości w Stripe
+    const repairNumber = repair.repair_number || shortId;
 
     // Utwórz Stripe Checkout Session
     const session = await stripe.checkout.sessions.create({
@@ -76,7 +78,7 @@ if (['zakonczone', 'wyslane', 'anulowane'].includes(repair.status)) {
             currency: 'pln',
             product_data: {
               name: `Naprawa urządzenia ${repair.device_model}`,
-              description: `Zgłoszenie #${shortId}${repair.serial_number ? ` | S/N: ${repair.serial_number}` : ''}`,
+              description: `Zgłoszenie #${repairNumber}${repair.serial_number ? ` | S/N: ${repair.serial_number}` : ''}`,
             },
             unit_amount: Math.round(amountToPay * 100),
           },
@@ -91,6 +93,7 @@ if (['zakonczone', 'wyslane', 'anulowane'].includes(repair.status)) {
       customer_email: repair.email,
       metadata: {
         repair_id: repairId,
+        repair_number: repairNumber,
         repair_short_id: shortId,
         device_model: repair.device_model,
       },

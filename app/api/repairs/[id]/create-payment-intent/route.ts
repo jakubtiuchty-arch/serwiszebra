@@ -44,6 +44,13 @@ export async function POST(
           { status: 400 }
         );
       }
+
+      if (repair.payment_status === 'succeeded') {
+        return NextResponse.json(
+          { error: 'Diagnostyka została już opłacona' },
+          { status: 400 }
+        );
+      }
     } else {
       // Standardowa płatność za naprawę
       // Sprawdź czy wycena została zaakceptowana
@@ -84,6 +91,9 @@ export async function POST(
     }
 
     const shortId = repair.id.split('-')[0].toUpperCase();
+    // Numer zgłoszenia (np. 202607150954) — ten sam, który widzi klient i admin;
+    // w opisie płatności Stripe pozwala księgowości powiązać wpłatę ze zgłoszeniem
+    const repairNumber = repair.repair_number || shortId;
 
     // Utwórz Payment Intent z automatycznymi metodami płatności
     const paymentIntent = await stripe.paymentIntents.create({
@@ -91,11 +101,12 @@ export async function POST(
       currency: 'pln',
       automatic_payment_methods: { enabled: true },
       receipt_email: repair.email,
-      description: isDiagnosticFee 
-        ? `Opłata za diagnostykę - Zgłoszenie #${shortId}`
-        : `Naprawa ${repair.device_model} - Zgłoszenie #${shortId}`,
+      description: isDiagnosticFee
+        ? `Opłata za diagnostykę - Zgłoszenie #${repairNumber}`
+        : `Naprawa ${repair.device_model} - Zgłoszenie #${repairNumber}`,
       metadata: {
         repair_id: repairId,
+        repair_number: repairNumber,
         repair_short_id: shortId,
         device_model: repair.device_model,
         customer_email: repair.email,
@@ -104,17 +115,15 @@ export async function POST(
       },
     });
 
-    // Zapisz payment intent ID w bazie (tylko dla płatności za naprawę)
-    if (!isDiagnosticFee) {
-      await supabase
-        .from('repair_requests')
-        .update({
-          stripe_payment_id: paymentIntent.id,
-          payment_status: 'processing',
-          updated_at: new Date().toISOString(),
-        })
-        .eq('id', repairId);
-    }
+    // Zapisz payment intent ID w bazie (także dla diagnostyki — webhook szuka po stripe_payment_id)
+    await supabase
+      .from('repair_requests')
+      .update({
+        stripe_payment_id: paymentIntent.id,
+        payment_status: 'processing',
+        updated_at: new Date().toISOString(),
+      })
+      .eq('id', repairId);
 
     return NextResponse.json({
       clientSecret: paymentIntent.client_secret,

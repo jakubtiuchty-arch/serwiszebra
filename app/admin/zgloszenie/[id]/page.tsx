@@ -39,6 +39,7 @@ interface RepairRequest {
   price_accepted_at: string | null
   payment_status: string | null
   paid_at: string | null
+  stripe_payment_id: string | null
   courier_tracking_number: string | null
   courier_name: string | null
   pickup_tracking_number: string | null
@@ -692,6 +693,20 @@ export default function AdminRepairDetailPage() {
                     <p className="text-sm font-medium text-green-700">
                       {format(new Date(repair.paid_at), 'dd.MM.yyyy HH:mm', { locale: pl })}
                     </p>
+                  </div>
+                )}
+                {repair.stripe_payment_id && (
+                  <div>
+                    <p className="text-xs text-gray-500">Nr płatności Stripe</p>
+                    <p className="text-xs font-mono text-gray-700 break-all">{repair.stripe_payment_id}</p>
+                    <a
+                      href={`https://dashboard.stripe.com/payments/${repair.stripe_payment_id}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs text-blue-600 hover:text-blue-800 font-medium"
+                    >
+                      Zobacz w Stripe →
+                    </a>
                   </div>
                 )}
                 {repair.payment_status === 'proforma' && (

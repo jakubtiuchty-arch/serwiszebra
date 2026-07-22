@@ -4,6 +4,17 @@ Checkpoint postępu prac. Najnowszy wpis na górze. Po każdym etapie/buildzie d
 
 ---
 
+## 2026-07-22 — Odrzucenie wyceny przez webhook Stripe + nr płatności dla księgowości
+
+- **Nowy flow odrzucenia wyceny** (panel klienta): klik „Opłać diagnostykę 166,05 zł" → NAJPIERW anulowanie (`cancel` z flagą `rejectQuote`: status `anulowane`, `final_price=166.05`, `price_notes` z odrzuconą wyceną) → potem płatność Stripe → potwierdzenie WYŁĄCZNIE webhookiem (`handleDiagnosticFeePayment`: `payment_status=succeeded`+`paid_at`, status zostaje `anulowane`, historia, mail do admina „odeślij urządzenie"). Box Wycena w adminie: 166,05 po odrzuceniu → zielone ZAPŁACONO z datą po webhoosku.
+- **Bugfix**: webhook `charge.succeeded` traktował diagnostykę jak płatność za naprawę (ustawiłby `w_naprawie` + maile „rozpoczynamy naprawę") — teraz rozgałęzienie po `metadata.is_diagnostic_fee` + bezpiecznik w `handleRepairPayment` (nie rusza anulowanych). `stripe_payment_id` zapisywany też dla diagnostyki; przerwana płatność do dokończenia z widoku anulowanego zgłoszenia.
+- **Księgowość**: box Wycena/Płatność w adminie pokazuje „Nr płatności Stripe" (`pi_…`) z linkiem do dashboardu; opis płatności w Stripe z numerem zgłoszenia `#202607…` (zamiast prefiksu UUID) + `repair_number` w metadata (create-payment-intent i checkout).
+- Pliki: `app/api/repairs/[id]/{cancel,create-payment-intent,checkout}/route.ts`, `app/api/webhooks/stripe/route.ts`, `app/panel/naprawa/[id]/page.tsx`, `app/admin/zgloszenie/[id]/page.tsx`, `lib/email.ts` (`sendDiagnosticFeePaidAdminEmail`). tsc czysty.
+- Kontekst: zgłoszenie #202607150954 (klient bez konta — naprawione ręcznie 21.07 + port auto-rejestracji do repo takma, osobny commit tam).
+- TODO: test na prodzie z prawdziwym webhookiem; ew. mail do klienta po opłaceniu diagnostyki; darmowe anulowanie nadal bez przycisku w UI (martwy modal).
+
+---
+
 ## 2026-06-16 — Skanery: PRZEBUDOWA do „bazy wiedzy" z pełnych PDF (w toku)
 
 - **Powód**: pierwsza wersja (z RAG) bywała zbyt płytka. User dał **pełne PDF (PRG + User Guide)** w `/Users/jakubtiuchty/Desktop/Manuale /Skanery/`. Wzorzec = DS9308 (9 sekcji, pełne tabele).
