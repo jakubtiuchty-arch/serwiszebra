@@ -2954,3 +2954,176 @@ export async function sendDiagnosticFeePaidAdminEmail(data: DiagnosticFeePaidAdm
     throw error
   }
 }
+
+// ===== WYPOŻYCZENIA SPRZĘTU =====
+
+interface RentalEmailData {
+  rentalNumber: string
+  customerName: string
+  company?: string | null
+  email?: string | null
+  phone?: string | null
+  deviceModel: string
+  serialNumber: string
+  rentedAt: string // ISO
+}
+
+// Email do klienta: prośba o odesłanie wypożyczonego sprzętu (po 14 dniach)
+export async function sendRentalReturnRequestEmail(data: RentalEmailData & { to: string }) {
+  const rentedDate = new Date(data.rentedAt).toLocaleDateString('pl-PL')
+
+  const html = `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      ${getEmailStyles()}
+    </head>
+    <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #ffffff;">
+      <div style="max-width: 600px; margin: 0 auto; background-color: white; border-radius: 8px; overflow: hidden;">
+
+${getEmailHeader()}
+
+        <!-- Content -->
+        <div style="padding: 32px 24px;">
+
+          <div style="text-align: center; margin-bottom: 32px;">
+            <div style="display: inline-block; background-color: #2563eb; width: 64px; height: 64px; border-radius: 50%; margin-bottom: 16px;">
+              <div style="color: white; font-size: 32px; line-height: 64px;">&#8634;</div>
+            </div>
+            <h2 style="margin: 0 0 8px 0; font-size: 24px; color: #111827;">
+              Czas na zwrot wypożyczonego sprzętu
+            </h2>
+            <p style="margin: 0; color: #6b7280;">
+              Minęło 14 dni od wypożyczenia urządzenia zastępczego
+            </p>
+          </div>
+
+          <p style="margin: 0 0 24px 0; color: #374151; font-size: 15px; line-height: 1.6;">
+            Dzień dobry${data.customerName ? `, <strong>${data.customerName}</strong>` : ''}!<br><br>
+            Uprzejmie prosimy o odesłanie wypożyczonego od nas urządzenia. Poniżej szczegóły wypożyczenia:
+          </p>
+
+          <!-- Device info -->
+          <div style="background-color: #f9fafb; border-radius: 8px; padding: 20px; margin-bottom: 24px;">
+            <table style="width: 100%;">
+              <tr>
+                <td style="color: #6b7280; font-size: 14px;">Nr wypożyczenia:</td>
+                <td style="text-align: right; font-weight: 600; color: #111827; font-family: monospace;">${data.rentalNumber}</td>
+              </tr>
+              <tr>
+                <td style="color: #6b7280; font-size: 14px; padding-top: 8px;">Urządzenie:</td>
+                <td style="text-align: right; font-weight: 600; color: #111827; padding-top: 8px;">${data.deviceModel}</td>
+              </tr>
+              <tr>
+                <td style="color: #6b7280; font-size: 14px; padding-top: 8px;">Numer seryjny:</td>
+                <td style="text-align: right; font-weight: 600; color: #111827; padding-top: 8px; font-family: monospace;">${data.serialNumber}</td>
+              </tr>
+              <tr>
+                <td style="color: #6b7280; font-size: 14px; padding-top: 8px;">Data wypożyczenia:</td>
+                <td style="text-align: right; font-weight: 600; color: #111827; padding-top: 8px;">${rentedDate}</td>
+              </tr>
+            </table>
+          </div>
+
+          <!-- Return instructions -->
+          <div style="background-color: #dbeafe; border-radius: 8px; padding: 20px; margin-bottom: 24px;">
+            <h4 style="margin: 0 0 12px 0; font-size: 16px; color: #1e40af;">
+              Jak odesłać urządzenie?
+            </h4>
+            <ol style="margin: 0; padding-left: 20px; color: #1e3a8a; font-size: 14px; line-height: 1.8;">
+              <li>Zapakuj urządzenie wraz z akcesoriami (zasilacz, kable, bateria)</li>
+              <li>Wyślij na adres poniżej lub skontaktuj się z nami &mdash; zamówimy kuriera</li>
+            </ol>
+            <div style="background-color: white; border-radius: 8px; padding: 14px; margin-top: 14px; text-align: center;">
+              <p style="margin: 0; color: #111827; font-weight: 600; font-size: 14px;">
+                TAKMA Tadeusz Tiuchty<br>
+                ul. Poświęcka 1a, 51-128 Wrocław
+              </p>
+            </div>
+          </div>
+
+          <!-- Contact -->
+          <div style="text-align: center; color: #6b7280; font-size: 14px;">
+            <p style="margin: 0 0 8px 0;">Pytania? Chętnie pomożemy:</p>
+            <p style="margin: 0;">
+              <strong>Tel:</strong> +48 607 819 688<br>
+              <strong>Email:</strong> serwis@takma.com.pl
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </body>
+    </html>
+  `
+
+  try {
+    const email = await resend.emails.send({
+      from: 'Serwis Zebra <serwis@serwis-zebry.pl>',
+      to: data.to,
+      subject: `Prośba o zwrot wypożyczonego sprzętu — ${data.deviceModel} (${data.rentalNumber})`,
+      html
+    })
+    console.log('[Email] Rental return request sent to customer:', email)
+    return email
+  } catch (error) {
+    console.error('[Email] Error sending rental return request:', error)
+    throw error
+  }
+}
+
+// Email do serwisu: odbierz sprzęt od klienta (po 14 dniach) lub przypomnienie (co 7 dni)
+export async function sendRentalPickupAdminEmail(data: RentalEmailData & { to: string; isReminder?: boolean }) {
+  const rentedDate = new Date(data.rentedAt).toLocaleDateString('pl-PL')
+  const daysOut = Math.floor((Date.now() - new Date(data.rentedAt).getTime()) / (1000 * 60 * 60 * 24))
+
+  const subject = data.isReminder
+    ? `PRZYPOMNIENIE: wypożyczenie ${data.rentalNumber} nadal nieodebrane (${daysOut} dni)`
+    : `Wypożyczenie ${data.rentalNumber} — odbierz sprzęt od klienta (14 dni minęło)`
+
+  const html = `
+    <!DOCTYPE html>
+    <html>
+    <head><meta charset="utf-8"></head>
+    <body style="margin: 0; padding: 0; background-color: #f3f4f6; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+      <div style="max-width: 600px; margin: 0 auto; padding: 24px;">
+        <div style="background-color: #ffffff; border-radius: 12px; padding: 32px;">
+          <h2 style="margin: 0 0 16px 0; color: ${data.isReminder ? '#dc2626' : '#111827'}; font-size: 20px;">
+            ${data.isReminder ? '&#9888; PRZYPOMNIENIE: sprzęt nadal u klienta' : 'Odbierz wypożyczony sprzęt od klienta'}
+          </h2>
+          <p style="margin: 0 0 16px 0; color: #374151; font-size: 14px; line-height: 1.6;">
+            Wypożyczenie <strong>${data.rentalNumber}</strong> trwa już <strong>${daysOut} dni</strong>
+            (od ${rentedDate}). ${data.isReminder ? 'Sprzęt wciąż nie został odznaczony jako odebrany.' : 'Klient dostał email z prośbą o odesłanie.'}
+            Skontaktuj się z klientem i po odbiorze odznacz wypożyczenie w panelu.
+          </p>
+          <table style="width: 100%; border-collapse: collapse; font-size: 14px; color: #374151;">
+            <tr><td style="padding: 6px 0; color: #6b7280;">Klient:</td><td style="text-align: right; font-weight: 600;">${data.customerName}${data.company ? ` (${data.company})` : ''}</td></tr>
+            ${data.email ? `<tr><td style="padding: 6px 0; color: #6b7280;">Email:</td><td style="text-align: right; font-weight: 600;">${data.email}</td></tr>` : ''}
+            ${data.phone ? `<tr><td style="padding: 6px 0; color: #6b7280;">Telefon:</td><td style="text-align: right; font-weight: 600;">${data.phone}</td></tr>` : ''}
+            <tr><td style="padding: 6px 0; color: #6b7280;">Urządzenie:</td><td style="text-align: right; font-weight: 600;">${data.deviceModel}</td></tr>
+            <tr><td style="padding: 6px 0; color: #6b7280;">S/N:</td><td style="text-align: right; font-weight: 600; font-family: monospace;">${data.serialNumber}</td></tr>
+          </table>
+          <a href="https://www.serwis-zebry.pl/admin/wypozyczenia" style="display: inline-block; margin-top: 20px; padding: 10px 20px; background: #2563eb; color: white; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 14px;">Otwórz wypożyczenia</a>
+        </div>
+      </div>
+    </body>
+    </html>
+  `
+
+  try {
+    const email = await resend.emails.send({
+      from: 'System Serwisowy <system@serwis-zebry.pl>',
+      to: data.to,
+      subject,
+      html
+    })
+    console.log('[Email] Rental pickup notification sent to admin:', email)
+    return email
+  } catch (error) {
+    console.error('[Email] Error sending rental pickup email:', error)
+    throw error
+  }
+}

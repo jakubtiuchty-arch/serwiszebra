@@ -4,6 +4,16 @@ Checkpoint postępu prac. Najnowszy wpis na górze. Po każdym etapie/buildzie d
 
 ---
 
+## 2026-07-23 — Moduł WYPOŻYCZENIA (koniec papierowych kartek serwisantów)
+
+- **Zakładka /admin/wypozyczenia** (sidebar → Serwis): lista (nr WYP-YYYYMMDDHHmm, klient+kontakt, sprzęt, S/N, termin zwrotu +14 dni, status, podpisany protokół), filtry/szukajka, modal dodawania (S/N z „nieczytelny"), modal potwierdzenia zwrotu/usunięcia (bez systemowego confirm), przycisk „Zwrócono".
+- **Protokół wypożyczenia**: auto-otwiera się po dodaniu (`/api/admin/rentals/[id]/print`), logo TAKMA, warunki+podpisy+stopka przyklejone do dołu A4 (`position:fixed` w @media print), `@page margin:0` usuwa nagłówki przeglądarki. Podpisany skan → spinacz → prywatny bucket `rental-docs` (podgląd przez signed URL).
+- **Automaty (cron rentals-check, 6:00 UTC)**: po 14 dniach mail „odbierz sprzęt" na serwis@takma.com.pl + ładny mail do klienta o zwrot; bez odznaczenia „Zwrócono" — przypomnienie na serwis@ po 7 dniach od wezwania i dalej co 7 dni. Statusy: active → return_requested → returned.
+- **WAŻNE — RLS pułapka**: `createServiceClient()` (lib/supabase/server) z cookies wysyła token ZALOGOWANEGO usera, nie service role → „new row violates RLS". Dodany `createPureServiceClient()` (bez cookies, bez generyka Database — typy sprzed tabeli rentals). 
+- **Lokalny klucz Resend NIE wysyła z serwis-zebry.pl** (403 not authorized) — maile testować na produkcji; kod zweryfikowany (cron 1 returnRequest, 0 errors).
+- Tabela: `supabase-rentals.sql` (uruchomione w Supabase 23.07). Sidebar zagęszczony (bez scrolla).
+- TODO: test maili na prodzie (backdate rekord + cron z CRON_SECRET), potem usunąć rekord testowy.
+
 ## 2026-07-22 (po południu) — Dostawa na wydruku/proformie + wymagany S/N z opcją „nieczytelny"
 
 - **Fix rozbieżności kwot (ZAM-20260722083114: lista 215,70 vs wydruk 190,70)**: dostawa (25 zł brutto) siedzi w `total_netto/total_brutto`, ale nie jest pozycją w `items` — wydruk zamówienia i **proforma sklepu** liczyły sumy z samych pozycji. Teraz sumy z bazy + wiersz „Dostawa (kurier)" wyliczany jako różnica (`print/route.ts`, `shop/orders/[id]/proforma/route.ts`). Odbiór osobisty (różnica 0) = bez zmian.

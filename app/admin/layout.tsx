@@ -19,7 +19,8 @@ import {
   Menu,
   X,
   BookOpen,
-  AlertTriangle
+  AlertTriangle,
+  PackageOpen
 } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
@@ -67,6 +68,12 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       href: '/admin/katalog',
       icon: ClipboardList,
       current: pathname === '/admin/katalog',
+    },
+    {
+      name: 'Wypożyczenia',
+      href: '/admin/wypozyczenia',
+      icon: PackageOpen,
+      current: pathname.startsWith('/admin/wypozyczenia'),
     },
 
     // Sklep - dla superadminów i administratorów handlowych
@@ -193,11 +200,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         </div>
 
         {/* Navigation */}
-        <nav className="p-2 space-y-0.5 overflow-y-auto max-h-[calc(100vh-140px)]">
+        <nav className="p-2 space-y-0 overflow-y-auto max-h-[calc(100vh-120px)]">
           {navigation.map((item, index) => {
             if (item.type === 'header') {
               return (
-                <div key={index} className="pt-3 pb-1.5 px-3 first:pt-0">
+                <div key={index} className="pt-2 pb-0.5 px-3 first:pt-0">
                   <p className="text-[10px] font-bold text-blue-300 uppercase tracking-wider">
                     {item.name}
                   </p>
@@ -211,7 +218,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               <Link
                 key={item.name}
                 href={item.href || '#'}
-                className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-colors text-sm ${
+                className={`flex items-center gap-2 px-3 py-[5px] rounded-lg transition-colors text-[13px] ${
                   item.disabled
                     ? 'text-blue-400 cursor-not-allowed opacity-50'
                     : item.current
@@ -237,7 +244,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         <div className="absolute bottom-0 left-0 right-0 p-2 border-t border-blue-700 space-y-1">
           <Link
             href="/"
-            className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-blue-100 hover:bg-blue-700 hover:text-white transition-colors text-sm"
+            className="w-full flex items-center gap-2 px-3 py-1.5 rounded-lg text-blue-100 hover:bg-blue-700 hover:text-white transition-colors text-[13px]"
             onClick={() => setSidebarOpen(false)}
           >
             <Home className="w-4 h-4" />
@@ -245,7 +252,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           </Link>
           <button
             onClick={handleLogout}
-            className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-blue-100 hover:bg-blue-700 hover:text-white transition-colors text-sm"
+            className="w-full flex items-center gap-2 px-3 py-1.5 rounded-lg text-blue-100 hover:bg-blue-700 hover:text-white transition-colors text-[13px]"
           >
             <LogOut className="w-4 h-4" />
             <span>Wyloguj</span>

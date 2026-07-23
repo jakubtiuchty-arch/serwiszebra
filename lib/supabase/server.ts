@@ -1,4 +1,5 @@
 import { createServerClient } from '@supabase/ssr'
+import { createClient as createSupabaseJsClient } from '@supabase/supabase-js'
 import { cookies } from 'next/headers'
 import type { Database } from './types'
 
@@ -50,6 +51,22 @@ export async function createServiceClient() {
             // Ignore
           }
         },
+      },
+    }
+  )
+}
+// Czysty klient service role - BEZ cookies sesji użytkownika.
+// createServiceClient z cookies wysyła token zalogowanego usera (RLS działa jak dla usera);
+// ten klient zawsze używa klucza service role i omija RLS. Używaj w API po weryfikacji admina.
+export function createPureServiceClient() {
+  // Bez generyka Database — typy wygenerowane przed dodaniem tabeli rentals
+  return createSupabaseJsClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!,
+    {
+      auth: {
+        autoRefreshToken: false,
+        persistSession: false,
       },
     }
   )
