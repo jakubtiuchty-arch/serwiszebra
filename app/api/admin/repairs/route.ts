@@ -51,7 +51,7 @@ export async function GET(request: NextRequest) {
         const searchFields = [
           r.id,
           r.device_model,
-          r.device_serial_number,
+          r.serial_number,
           r.email,
           r.first_name,
           r.last_name,

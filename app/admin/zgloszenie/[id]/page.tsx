@@ -30,7 +30,7 @@ interface RepairRequest {
   repair_number: string
   user_id: string
   device_model: string
-  device_serial_number: string | null
+  serial_number: string | null
   issue_description: string
   status: string
   priority: string
@@ -576,10 +576,10 @@ export default function AdminRepairDetailPage() {
                   <p className="text-xs text-gray-500">Model</p>
                   <p className="font-semibold text-gray-900 text-sm">{repair.device_model}</p>
                 </div>
-                {repair.device_serial_number && (
+                {repair.serial_number && (
                   <div>
                     <p className="text-xs text-gray-500">Numer seryjny</p>
-                    <p className="font-mono text-xs text-gray-900">{repair.device_serial_number}</p>
+                    <p className="font-mono text-xs text-gray-900">{repair.serial_number}</p>
                   </div>
                 )}
               </div>
