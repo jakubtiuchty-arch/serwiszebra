@@ -695,7 +695,9 @@ export default function AdminRepairDetailPage() {
                     </p>
                   </div>
                 )}
-                {repair.stripe_payment_id && (
+                {/* Nr Stripe tylko gdy faktycznie opłacono przez Stripe — intent powstaje
+                    już przy otwarciu okna płatności, więc bywa zapisany też przy pro formie */}
+                {repair.payment_status === 'succeeded' && repair.stripe_payment_id && (
                   <div>
                     <p className="text-xs text-gray-500">Nr płatności Stripe</p>
                     <p className="text-xs font-mono text-gray-700 break-all">{repair.stripe_payment_id}</p>
