@@ -20,6 +20,7 @@ const REGULAR_ADMIN_ALLOWED_PATHS = [
   '/admin/uzytkownicy', // Użytkownicy
   '/admin/instrukcje',  // Instrukcje PDF
   '/admin/katalog',     // Katalog części zamiennych
+  '/admin/wypozyczenia', // Wypożyczenia sprzętu (serwisanci odznaczają zwroty)
 ]
 
 // Administratorzy handlowi - dodatkowo dostęp do Sklepu
