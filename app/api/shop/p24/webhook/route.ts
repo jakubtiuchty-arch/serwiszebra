@@ -9,7 +9,7 @@ import {
   parseP24Notification,
   type P24Notification,
 } from '@/lib/p24'
-import { sendShopPaymentConfirmedEmail } from '@/lib/email'
+import { sendShopPaymentConfirmedEmail, sendShopPaymentAdminEmail } from '@/lib/email'
 
 /**
  * Notyfikacja Przelewy24 (urlStatus, klasyczne API 3.2 — form-urlencoded p24_*).
@@ -108,6 +108,20 @@ export async function POST(request: NextRequest) {
     } catch (err: any) {
       console.error(`[P24 webhook] payment-confirmed email failed for ${order.order_number}:`, err?.message || err)
     }
+  }
+
+  // Mail do obsługi o opłaceniu zamówienia (też w try/catch — nie może zwrócić 500).
+  try {
+    await sendShopPaymentAdminEmail({
+      to: ['jakub.tiuchty@takma.com.pl', 'handlowy@takma.com.pl'],
+      orderId: order.id,
+      orderNumber: order.order_number,
+      contactName: order.contact_name || '',
+      customerEmail: order.email || '',
+      totalBrutto: Number(order.total_brutto) || 0,
+    })
+  } catch (err: any) {
+    console.error(`[P24 webhook] payment admin email failed for ${order.order_number}:`, err?.message || err)
   }
 
   return NextResponse.json({ received: true })

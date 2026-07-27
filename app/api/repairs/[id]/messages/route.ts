@@ -171,7 +171,12 @@ export async function POST(
         ? (message.length > 200 ? message.substring(0, 200) + '...' : message)
         : '(załącznik)'
 
-      const adminEmail = process.env.ADMIN_EMAIL || 'jakub.tiuchty@gmail.com'
+      const adminEmail = [
+        process.env.ADMIN_EMAIL || 'jakub.tiuchty@gmail.com',
+        'serwis@takma.com.pl',
+        'wojcik@takma.com.pl',
+        'zuchnicki@takma.com.pl',
+      ]
 
       console.log('📧 Preparing chat notification email:', {
         isAdmin,

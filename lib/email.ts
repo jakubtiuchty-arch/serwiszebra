@@ -1131,7 +1131,7 @@ ${getEmailHeader()}
 // ========== EMAIL O OPŁACONEJ NAPRAWIE - ADMIN ==========
 
 interface RepairPaidAdminEmailData {
-  to: string
+  to: string | string[]
   repairId: string
   repairNumber?: string
   customerName: string
@@ -2063,7 +2063,7 @@ export async function sendProFormaEmail(data: ProFormaEmailData) {
 // ========== EMAIL O NOWEJ WIADOMOŚCI NA CZACIE ==========
 
 interface NewChatMessageEmailData {
-  to: string
+  to: string | string[]
   customerName: string
   repairId: string
   repairNumber?: string
@@ -2766,6 +2766,48 @@ ${getEmailHeader()}
     return email
   } catch (error) {
     console.error('[Email] Error sending shop payment confirmed email:', error)
+    throw error
+  }
+}
+
+// ========== EMAIL O OPŁACONYM ZAMÓWIENIU SKLEPOWYM - OBSŁUGA ==========
+
+interface ShopPaymentAdminEmailData {
+  to: string | string[]
+  orderId: string
+  orderNumber: string
+  contactName: string
+  customerEmail: string
+  totalBrutto: number
+}
+
+export async function sendShopPaymentAdminEmail(data: ShopPaymentAdminEmailData) {
+  try {
+    const email = await resend.emails.send({
+      from: 'System Serwisowy <system@serwis-zebry.pl>',
+      to: data.to,
+      subject: `Płatność otrzymana - zamówienie sklepowe ${data.orderNumber}`,
+      html: `
+        <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+          <div style="background: #10b981; color: white; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+            <h2 style="margin: 0;">Płatność otrzymana — sklep</h2>
+          </div>
+          <table style="width:100%;font-size:14px;color:#374151;">
+            <tr><td style="padding:4px 0;color:#6b7280;">Zamówienie:</td><td style="padding:4px 0;text-align:right;font-weight:600;">${data.orderNumber}</td></tr>
+            <tr><td style="padding:4px 0;color:#6b7280;">Klient:</td><td style="padding:4px 0;text-align:right;font-weight:600;">${data.contactName || '—'}</td></tr>
+            <tr><td style="padding:4px 0;color:#6b7280;">Email klienta:</td><td style="padding:4px 0;text-align:right;">${data.customerEmail || '—'}</td></tr>
+            <tr><td style="padding:4px 0;color:#6b7280;">Kwota (brutto):</td><td style="padding:4px 0;text-align:right;font-weight:700;color:#16a34a;">${(data.totalBrutto || 0).toFixed(2).replace('.', ',')} zł</td></tr>
+          </table>
+          <p style="margin:20px 0 0;">
+            <a href="https://www.serwis-zebry.pl/admin/zamowienia" style="display:inline-block;background:#2563eb;color:#fff;padding:10px 18px;border-radius:6px;text-decoration:none;font-weight:600;">Otwórz panel zamówień</a>
+          </p>
+        </div>
+      `
+    })
+    console.log('[Email] Shop payment admin email sent:', data.orderNumber)
+    return email
+  } catch (error) {
+    console.error('[Email] Error sending shop payment admin email:', error)
     throw error
   }
 }

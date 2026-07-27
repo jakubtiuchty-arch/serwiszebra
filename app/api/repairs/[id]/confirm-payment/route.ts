@@ -152,7 +152,12 @@ export async function POST(
     // Wyślij email do admina o opłaceniu
     try {
       await sendRepairPaidAdminEmail({
-        to: process.env.ADMIN_EMAIL || 'jakub.tiuchty@gmail.com',
+        to: [
+          process.env.ADMIN_EMAIL || 'jakub.tiuchty@gmail.com',
+          'serwis@takma.com.pl',
+          'wojcik@takma.com.pl',
+          'zuchnicki@takma.com.pl',
+        ],
         repairId: repairId,
         repairNumber: repair.repair_number,
         customerName: `${repair.first_name} ${repair.last_name}`,
