@@ -38,6 +38,7 @@ interface RepairRequest {
   final_price: number | null
   price_accepted_at: string | null
   payment_status: string | null
+  payment_method: string | null
   paid_at: string | null
   stripe_payment_id: string | null
   courier_tracking_number: string | null
