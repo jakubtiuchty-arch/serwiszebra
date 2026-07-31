@@ -116,6 +116,8 @@ export async function POST(
     });
 
     // Zapisz payment intent ID w bazie (także dla diagnostyki — webhook szuka po stripe_payment_id)
+    // UWAGA: samo otwarcie modala płatności odpala ten endpoint — nie wolno
+    // nadpisywać 'proforma' (klient wybrał przelew i czekamy na niego).
     await supabase
       .from('repair_requests')
       .update({
@@ -123,7 +125,8 @@ export async function POST(
         payment_status: 'processing',
         updated_at: new Date().toISOString(),
       })
-      .eq('id', repairId);
+      .eq('id', repairId)
+      .or('payment_status.is.null,payment_status.neq.proforma');
 
     return NextResponse.json({
       clientSecret: paymentIntent.client_secret,

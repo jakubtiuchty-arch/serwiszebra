@@ -3,6 +3,16 @@ import { createClient as createSupabaseJsClient } from '@supabase/supabase-js'
 import { cookies } from 'next/headers'
 import type { Database } from './types'
 
+/**
+ * KRYTYCZNE (2026-07-31): Next.js Data Cache na Vercelu cache'uje GET-y REST-a
+ * Supabase po URL-u zapytania — route potrafi przeczytać NIEAKTUALNY rekord.
+ * Udowodnione dwukrotnie: cron poczty czytał zamrożone last_uid, a route
+ * proformy odczytał zgłoszenie sprzed akceptacji wyceny i odrzucił klienta.
+ * Dlatego KAŻDY klient z tego pliku wymusza fetch cache:'no-store'.
+ */
+const noStoreFetch = (input: RequestInfo | URL, init?: RequestInit) =>
+  fetch(input, { ...init, cache: 'no-store' })
+
 export async function createClient() {
   const cookieStore = await cookies()
 
@@ -10,6 +20,7 @@ export async function createClient() {
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
+      global: { fetch: noStoreFetch },
       cookies: {
         getAll() {
           return cookieStore.getAll()
@@ -38,6 +49,7 @@ export async function createServiceClient() {
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.SUPABASE_SERVICE_ROLE_KEY!,
     {
+      global: { fetch: noStoreFetch },
       cookies: {
         getAll() {
           return cookieStore.getAll()
@@ -64,6 +76,7 @@ export function createPureServiceClient() {
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.SUPABASE_SERVICE_ROLE_KEY!,
     {
+      global: { fetch: noStoreFetch },
       auth: {
         autoRefreshToken: false,
         persistSession: false,

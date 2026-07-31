@@ -34,6 +34,8 @@ export interface DraftResult {
 /** Statusy techniczne napraw → opis zrozumiały dla AI */
 const REPAIR_STATUS_PL: Record<string, string> = {
   nowe: 'zgłoszenie przyjęte, czeka na urządzenie',
+  odbior_od_klienta: 'kurier zamówiony po odbiór urządzenia od klienta',
+  odebrane: 'urządzenie dotarło do serwisu',
   przyjete: 'urządzenie przyjęte do serwisu',
   diagnoza: 'trwa diagnoza',
   wycena: 'wycena wysłana do klienta, czeka na akceptację',
@@ -74,7 +76,7 @@ export async function generateMailDraft(
   // Kontekst: naprawy i zamówienia klienta po adresie email
   const [{ data: repairs }, { data: orders }] = await Promise.all([
     supabaseAdmin
-      .from('repairs')
+      .from('repair_requests')
       .select('repair_number, status, device_model, estimated_price, final_price, created_at')
       .eq('email', customerEmail)
       .order('created_at', { ascending: false })

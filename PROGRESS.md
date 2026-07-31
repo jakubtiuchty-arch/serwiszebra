@@ -295,3 +295,16 @@ Checkpoint postępu prac. Najnowszy wpis na górze. Po każdym etapie/buildzie d
 - Dostęp: admin + superadmin (`REGULAR_ADMIN_ALLOWED_SECTIONS` + nav „Poczta").
 - TODO użytkownika: (1) uruchomić `supabase-poczta.sql` w Supabase SQL Editor, (2) dodać env `MAIL_PASSWORD` w Vercel (nie widzę go w serwiszebra_prod!) i `.env.local`, (3) commit+push po potwierdzeniu.
 - tsc czysty; dev na :3002.
+
+## 2026-07-31 — Moduł POCZTA: podpis + powiadomienia (LIVE)
+- Moduł działa na prodzie (test przeszedł: mail → wątek → szkic AI → panel).
+- Podpis firmowy 1:1 (K. Wójcik, Dział Techniczny, logo TAKMA inline CID) doklejany przy wysyłce — commit `232ef8b`.
+- Powiadomienia: badge licznika w nav admina + mail Resend do jakub.tiuchty@/wojcik@/zuchnicki@takma.com.pl — commit `12f1d20`.
+- Env: MAIL_IMAP_PASSWORD w serwiszebra_prod (Preview+Production). Zbędna kopia w starym projekcie `serwiszebra` do usunięcia.
+
+## 2026-07-31 — Poczta: awaria duplikatów NAPRAWIONA (root cause: Next Data Cache)
+- Objaw: dziesiątki pustych wątków-duplikatów (nowy co przebieg crona, 5 min).
+- Root cause: Vercel/Next Data Cache cache'ował GET-y REST-a Supabase po URL-u — cron czytał zamrożone last_uid=7748 (baza: 7752) i re-fetchował stare maile, a dedupe po Message-ID dostawał zakeszowaną pustą odpowiedź → insert padał na 23505, pusty wątek zostawał.
+- Fix: `lib/mail/supabase.ts` — getMailSupabase() z fetch `cache:'no-store'` we wszystkich route'ach poczty (commit `8d6f2a6`) + hardening: błąd dedupe = pomiń, samonaprawa pustych wątków (commit `9dbd2a2`).
+- Sprzątnięte 91 pustych wątków; po fixie 2× trigger = fetched:0, baza stabilna (4 wątki / 6 wiadomości).
+- UWAGA na przyszłość: ten sam hazard może dotyczyć INNYCH cronów czytających Supabase na Vercelu (stałe URL-e zapytań!).
