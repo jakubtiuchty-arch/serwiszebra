@@ -70,6 +70,7 @@ export const REGULAR_ADMIN_ALLOWED_SECTIONS = [
   '/admin/zgloszenie', // Szczegóły zgłoszeń (część Dashboard)
   '/admin/uzytkownicy', // Użytkownicy
   '/admin/instrukcje',  // Instrukcje PDF
+  '/admin/poczta',     // Poczta serwis@takma.com.pl + szkice odpowiedzi AI
 ]
 
 /**

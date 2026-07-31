@@ -20,7 +20,8 @@ import {
   X,
   BookOpen,
   AlertTriangle,
-  PackageOpen
+  PackageOpen,
+  Mail
 } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
@@ -74,6 +75,12 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       href: '/admin/wypozyczenia',
       icon: PackageOpen,
       current: pathname.startsWith('/admin/wypozyczenia'),
+    },
+    {
+      name: 'Poczta',
+      href: '/admin/poczta',
+      icon: Mail,
+      current: pathname.startsWith('/admin/poczta'),
     },
 
     // Sklep - dla superadminów i administratorów handlowych

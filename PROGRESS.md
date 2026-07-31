@@ -286,3 +286,12 @@ Checkpoint postępu prac. Najnowszy wpis na górze. Po każdym etapie/buildzie d
 - Kontekst: ChatAI + RAG działa (gpt-5.5 + pgvector, 144 PDF zaingestowane 2026-06-10).
 - TODO znane: endpointy `upload-manual` i `test-rag` nadal bez auth.
 - Brak zadania w toku — czekam na następne polecenie.
+
+## 2026-07-31 — Moduł POCZTA (Faza 1) — zbudowany, czeka na SQL + env
+- Skrzynka serwis@takma.com.pl (cyber_folks, mail.takma.com.pl) w panelu admina: `/admin/poczta`.
+- IMAP pull co 5 min (cron `/api/cron/mail-sync`, baseline bez importu historii), wątkowanie po Message-ID/References + fallback email+temat, heurystyka spamu/automatów.
+- Szkice AI (gpt-5.5) z kontekstem napraw i zamówień klienta (lookup po email); człowiek zatwierdza — wysyłka SMTP z serwis@takma.com.pl + kopia do Wysłanych (IMAP APPEND).
+- Nowe pliki: `supabase-poczta.sql`, `lib/mail/{imap,smtp,draft}.ts`, `app/api/cron/mail-sync/`, `app/api/admin/poczta/**`, `app/admin/poczta/page.tsx`; deps: imapflow, mailparser, nodemailer.
+- Dostęp: admin + superadmin (`REGULAR_ADMIN_ALLOWED_SECTIONS` + nav „Poczta").
+- TODO użytkownika: (1) uruchomić `supabase-poczta.sql` w Supabase SQL Editor, (2) dodać env `MAIL_PASSWORD` w Vercel (nie widzę go w serwiszebra_prod!) i `.env.local`, (3) commit+push po potwierdzeniu.
+- tsc czysty; dev na :3002.
