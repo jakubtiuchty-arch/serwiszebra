@@ -5,6 +5,17 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createClient as createSupabaseAdmin } from '@supabase/supabase-js'
 import { createImapClient, fetchNewMail, type InboundMail } from '@/lib/mail/imap'
 import { generateMailDraft } from '@/lib/mail/draft'
+import { sendNewInboxMailNotification } from '@/lib/email'
+
+/**
+ * Powiadomienie o nowym mailu klienta — zespół dostaje link do panelu z gotowym
+ * szkicem. Bez serwis@takma.com.pl (to skrzynka źródłowa — mail już tam jest).
+ */
+const NOTIFY_EMAILS = [
+  'jakub.tiuchty@takma.com.pl',
+  'wojcik@takma.com.pl',
+  'zuchnicki@takma.com.pl',
+]
 
 /**
  * Moduł POCZTA — cron co 5 minut: pobiera nowe maile z serwis@takma.com.pl
@@ -82,13 +93,31 @@ export async function GET(request: NextRequest) {
       stats.saved++
 
       // Szkic AI tylko dla prawdziwych maili od klientów (limit kosztów per run)
+      let hasDraft = false
       if (!mail.isAutomated && draftsGenerated < MAX_DRAFTS_PER_RUN) {
         try {
           await draftForThread(supabase, saved.threadId, saved.messageDbId)
           draftsGenerated++
           stats.drafted++
+          hasDraft = true
         } catch (err) {
           console.error(`[mail-sync] Szkic AI dla wątku ${saved.threadId} nieudany:`, err)
+        }
+      }
+
+      // Powiadomienie zespołu (nie może przerwać synchronizacji)
+      if (!mail.isAutomated) {
+        try {
+          await sendNewInboxMailNotification({
+            to: NOTIFY_EMAILS,
+            customerName: mail.fromName,
+            customerEmail: mail.fromEmail,
+            subject: mail.subject,
+            preview: (mail.bodyText || '').trim().slice(0, 200),
+            hasDraft,
+          })
+        } catch (err) {
+          console.error('[mail-sync] Powiadomienie o nowym mailu nieudane:', err)
         }
       }
     }

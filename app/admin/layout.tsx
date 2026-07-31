@@ -35,6 +35,25 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const [userEmail, setUserEmail] = useState<string | null>(null)
   const [isSuperAdminUser, setIsSuperAdminUser] = useState(false)
   const [hasShopAccessUser, setHasShopAccessUser] = useState(false)
+  const [mailCount, setMailCount] = useState(0)
+
+  // Licznik nowych maili do badge'a „Poczta" (odświeżanie co 2 min)
+  useEffect(() => {
+    const fetchMailCount = async () => {
+      try {
+        const res = await fetch('/api/admin/poczta/count')
+        if (res.ok) {
+          const data = await res.json()
+          setMailCount(data.count || 0)
+        }
+      } catch {
+        // cicho — badge nie jest krytyczny
+      }
+    }
+    fetchMailCount()
+    const interval = setInterval(fetchMailCount, 120000)
+    return () => clearInterval(interval)
+  }, [pathname])
 
   // Pobierz email użytkownika i sprawdź uprawnienia
   useEffect(() => {
@@ -242,6 +261,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               >
                 {Icon && <Icon className="w-4 h-4" />}
                 <span>{item.name}</span>
+                {item.href === '/admin/poczta' && mailCount > 0 && (
+                  <span className="ml-auto min-w-[20px] h-5 px-1.5 rounded-full bg-red-500 text-white text-[11px] font-bold flex items-center justify-center">
+                    {mailCount > 99 ? '99+' : mailCount}
+                  </span>
+                )}
               </Link>
             )
           })}

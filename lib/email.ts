@@ -2770,6 +2770,49 @@ ${getEmailHeader()}
   }
 }
 
+// ========== EMAIL O NOWEJ WIADOMOŚCI W MODULE POCZTA - OBSŁUGA ==========
+
+interface NewInboxMailNotificationData {
+  to: string | string[]
+  customerName: string
+  customerEmail: string
+  subject: string
+  preview: string
+  hasDraft: boolean
+}
+
+export async function sendNewInboxMailNotification(data: NewInboxMailNotificationData) {
+  try {
+    const email = await resend.emails.send({
+      from: 'System Serwisowy <system@serwis-zebry.pl>',
+      to: data.to,
+      subject: `📬 Nowy mail od klienta: ${data.subject || '(bez tematu)'}`,
+      html: `
+        <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+          <div style="background: #2563eb; color: white; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+            <h2 style="margin: 0;">Nowa wiadomość na serwis@takma.com.pl</h2>
+          </div>
+          <table style="width:100%;font-size:14px;color:#374151;">
+            <tr><td style="padding:4px 0;color:#6b7280;">Od:</td><td style="padding:4px 0;text-align:right;font-weight:600;">${data.customerName ? `${data.customerName} ` : ''}&lt;${data.customerEmail}&gt;</td></tr>
+            <tr><td style="padding:4px 0;color:#6b7280;">Temat:</td><td style="padding:4px 0;text-align:right;font-weight:600;">${data.subject || '(bez tematu)'}</td></tr>
+            <tr><td style="padding:4px 0;color:#6b7280;">Szkic AI:</td><td style="padding:4px 0;text-align:right;">${data.hasDraft ? '✅ gotowy do zatwierdzenia' : '— (wygeneruj w panelu)'}</td></tr>
+          </table>
+          ${data.preview ? `<div style="margin:16px 0;padding:14px;background:#f9fafb;border-radius:8px;font-size:14px;color:#4b5563;">${data.preview}${data.preview.length >= 200 ? '…' : ''}</div>` : ''}
+          <p style="margin:20px 0 0;">
+            <a href="https://www.serwis-zebry.pl/admin/poczta" style="display:inline-block;background:#2563eb;color:#fff;padding:10px 18px;border-radius:6px;text-decoration:none;font-weight:600;">Otwórz Pocztę w panelu</a>
+          </p>
+          <p style="margin:14px 0 0;font-size:12px;color:#9ca3af;">Odpowiedz z panelu — szkic AI z danymi naprawy klienta czeka na Twoją akceptację. Podpis firmowy dokleja się automatycznie.</p>
+        </div>
+      `
+    })
+    console.log('[Email] New inbox mail notification sent:', data.customerEmail)
+    return email
+  } catch (error) {
+    console.error('[Email] Error sending new inbox mail notification:', error)
+    throw error
+  }
+}
+
 // ========== EMAIL O OPŁACONYM ZAMÓWIENIU SKLEPOWYM - OBSŁUGA ==========
 
 interface ShopPaymentAdminEmailData {
