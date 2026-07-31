@@ -61,14 +61,9 @@ ZASADY:
 7. Nowe zgłoszenie naprawy: https://www.serwis-zebry.pl (formularz na stronie głównej, bezpłatny odbiór kurierem w całej Polsce).
 8. NIE wymyślaj faktów o firmie ani o urządzeniach. Gdy nie znasz odpowiedzi technicznej — napisz, że przekazujesz pytanie technikowi i wrócimy z odpowiedzią.
 9. Zwięźle: maksymalnie kilka krótkich akapitów. Bez markdown — czysty tekst maila.
-10. Zakończ podpisem dokładnie w tej formie:
+10. NIE dodawaj podpisu, stopki ani "Pozdrawiam" na końcu — firmowy podpis (Krzysztof Wójcik, Dział Techniczny + stopka TAKMA) system dokleja automatycznie przy wysyłce. Zakończ na ostatnim zdaniu merytorycznym.
 
-Pozdrawiamy,
-Zespół Serwisu Zebra — TAKMA
-tel. +48 601 619 898
-www.serwis-zebry.pl
-
-Zwróć WYŁĄCZNIE treść maila (od powitania do podpisu), bez tematu i bez komentarzy.`
+Zwróć WYŁĄCZNIE treść maila (od powitania do ostatniego zdania), bez tematu i bez komentarzy.`
 
 export async function generateMailDraft(
   supabaseAdmin: SupabaseClient,

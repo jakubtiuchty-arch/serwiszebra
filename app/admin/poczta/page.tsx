@@ -381,6 +381,10 @@ export default function PocztaPage() {
                     }
                     className="w-full flex-1 border border-slate-200 rounded-xl p-3.5 text-sm text-gray-800 leading-relaxed focus:outline-none focus:ring-2 focus:ring-gray-900/10 resize-y"
                   />
+                  <div className="mt-2 text-xs text-gray-400">
+                    Podpis firmowy (Krzysztof Wójcik, Dział Techniczny + stopka TAKMA z logo)
+                    zostanie doklejony automatycznie — nie dopisuj go w treści.
+                  </div>
                   {notice && (
                     <div className="mt-3 text-sm text-gray-600">{notice}</div>
                   )}

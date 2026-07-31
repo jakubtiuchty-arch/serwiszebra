@@ -2,6 +2,13 @@ import nodemailer from 'nodemailer'
 import MailComposer from 'nodemailer/lib/mail-composer'
 import { randomUUID } from 'crypto'
 import { MAIL_HOST, MAIL_USER, MAIL_PASSWORD, createImapClient, appendToSent } from './imap'
+import {
+  SIGNATURE_TEXT,
+  SIGNATURE_HTML,
+  TAKMA_LOGO_BASE64,
+  TAKMA_LOGO_CID,
+  bodyTextToHtml,
+} from './signature'
 
 /**
  * Moduł POCZTA — wysyłka odpowiedzi przez SMTP cyber_folks z adresu
@@ -28,11 +35,23 @@ function buildRaw(params: SendReplyParams, messageId: string): Promise<Buffer> {
   if (params.inReplyTo && !references.includes(params.inReplyTo)) {
     references.push(params.inReplyTo)
   }
+  // Firmowy podpis (Krzysztof Wójcik / Dział Techniczny + stopka TAKMA z logo)
+  // doklejany automatycznie — treść z panelu to sama merytoryka
   const composer = new MailComposer({
     from: `Serwis Zebra | TAKMA <${MAIL_USER}>`,
     to: params.to,
     subject: params.subject,
-    text: params.text,
+    text: `${params.text}\n\n${SIGNATURE_TEXT}`,
+    html: `${bodyTextToHtml(params.text)}${SIGNATURE_HTML}`,
+    attachments: [
+      {
+        filename: 'takma-logo.png',
+        content: TAKMA_LOGO_BASE64,
+        encoding: 'base64',
+        cid: TAKMA_LOGO_CID,
+        contentDisposition: 'inline',
+      },
+    ],
     messageId,
     inReplyTo: params.inReplyTo || undefined,
     references: references.length ? references : undefined,
