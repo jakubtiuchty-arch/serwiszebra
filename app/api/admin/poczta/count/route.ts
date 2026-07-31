@@ -1,7 +1,7 @@
 export const dynamic = 'force-dynamic'
 
 import { NextResponse } from 'next/server'
-import { createClient as createSupabaseAdmin } from '@supabase/supabase-js'
+import { getMailSupabase } from '@/lib/mail/supabase'
 import { requireAdminServer } from '@/lib/auth-server'
 
 /**
@@ -14,10 +14,7 @@ export async function GET() {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
-  const supabase = createSupabaseAdmin(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!
-  )
+  const supabase = getMailSupabase()
 
   const { count } = await supabase
     .from('mail_threads')

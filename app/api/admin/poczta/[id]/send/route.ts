@@ -2,7 +2,7 @@ export const dynamic = 'force-dynamic'
 export const maxDuration = 60
 
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient as createSupabaseAdmin } from '@supabase/supabase-js'
+import { getMailSupabase } from '@/lib/mail/supabase'
 import { requireAdminServer } from '@/lib/auth-server'
 import { sendReply } from '@/lib/mail/smtp'
 import { MAIL_USER } from '@/lib/mail/imap'
@@ -13,12 +13,6 @@ import { MAIL_USER } from '@/lib/mail/imap'
  * kopia trafia do Wysłanych. Człowiek zawsze zatwierdza — brak auto-wysyłki.
  */
 
-function getSupabaseAdmin() {
-  return createSupabaseAdmin(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!
-  )
-}
 
 export async function POST(
   request: NextRequest,
@@ -35,7 +29,7 @@ export async function POST(
       return NextResponse.json({ error: 'Treść odpowiedzi jest pusta' }, { status: 400 })
     }
 
-    const supabase = getSupabaseAdmin()
+    const supabase = getMailSupabase()
     const [{ data: thread }, { data: lastInbound }] = await Promise.all([
       supabase.from('mail_threads').select('*').eq('id', params.id).single(),
       supabase

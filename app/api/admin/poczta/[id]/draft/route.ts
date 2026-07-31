@@ -2,7 +2,7 @@ export const dynamic = 'force-dynamic'
 export const maxDuration = 60
 
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient as createSupabaseAdmin } from '@supabase/supabase-js'
+import { getMailSupabase } from '@/lib/mail/supabase'
 import { requireAdminServer } from '@/lib/auth-server'
 import { generateMailDraft } from '@/lib/mail/draft'
 
@@ -10,12 +10,6 @@ import { generateMailDraft } from '@/lib/mail/draft'
  * Moduł POCZTA — ponowne wygenerowanie szkicu AI dla wątku (przycisk w panelu).
  */
 
-function getSupabaseAdmin() {
-  return createSupabaseAdmin(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!
-  )
-}
 
 export async function POST(
   _request: NextRequest,
@@ -27,7 +21,7 @@ export async function POST(
   }
 
   try {
-    const supabase = getSupabaseAdmin()
+    const supabase = getMailSupabase()
     const [{ data: thread }, { data: messages }] = await Promise.all([
       supabase.from('mail_threads').select('*').eq('id', params.id).single(),
       supabase

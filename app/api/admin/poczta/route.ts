@@ -1,7 +1,7 @@
 export const dynamic = 'force-dynamic'
 
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient as createSupabaseAdmin } from '@supabase/supabase-js'
+import { getMailSupabase } from '@/lib/mail/supabase'
 import { requireAdminServer } from '@/lib/auth-server'
 
 /**
@@ -9,12 +9,6 @@ import { requireAdminServer } from '@/lib/auth-server'
  * Dostęp: admin i superadmin (requireAdminServer + sekcja w admin-config).
  */
 
-function getSupabaseAdmin() {
-  return createSupabaseAdmin(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!
-  )
-}
 
 export async function GET(request: NextRequest) {
   const adminCheck = await requireAdminServer()
@@ -22,7 +16,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
-  const supabase = getSupabaseAdmin()
+  const supabase = getMailSupabase()
   const view = request.nextUrl.searchParams.get('view') || 'inbox'
 
   let query = supabase

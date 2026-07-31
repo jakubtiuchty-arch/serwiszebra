@@ -2,7 +2,7 @@ export const dynamic = 'force-dynamic'
 export const maxDuration = 120
 
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient as createSupabaseAdmin } from '@supabase/supabase-js'
+import { getMailSupabase } from '@/lib/mail/supabase'
 import { createImapClient, fetchNewMail, type InboundMail } from '@/lib/mail/imap'
 import { generateMailDraft } from '@/lib/mail/draft'
 import { sendNewInboxMailNotification } from '@/lib/email'
@@ -23,12 +23,6 @@ const NOTIFY_EMAILS = [
  * Pierwsze uruchomienie tylko ustawia baseline UID (bez importu historii).
  */
 
-function getSupabaseAdmin() {
-  return createSupabaseAdmin(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!
-  )
-}
 
 /** Normalizacja tematu do dopasowania wątku: zdejmij Re:/Fwd:/Odp: */
 function normalizeSubject(subject: string): string {
@@ -53,7 +47,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ ok: false, warning: 'MAIL_PASSWORD nie ustawione' })
   }
 
-  const supabase = getSupabaseAdmin()
+  const supabase = getMailSupabase()
   const stats = { fetched: 0, saved: 0, drafted: 0, skipped: 0 }
 
   try {
@@ -144,7 +138,7 @@ export async function GET(request: NextRequest) {
 
 /** Zapis wiadomości + dowiązanie/utworzenie wątku. Zwraca null przy duplikacie. */
 async function saveInbound(
-  supabase: ReturnType<typeof getSupabaseAdmin>,
+  supabase: ReturnType<typeof getMailSupabase>,
   mail: InboundMail
 ): Promise<{ threadId: string; messageDbId: string } | null> {
   // Dedupe po Message-ID. Błąd selecta NIE może przepuścić duplikatu dalej —
@@ -259,7 +253,7 @@ async function saveInbound(
 
 /** Generuje szkic AI dla wątku i zapisuje w mail_drafts */
 async function draftForThread(
-  supabase: ReturnType<typeof getSupabaseAdmin>,
+  supabase: ReturnType<typeof getMailSupabase>,
   threadId: string,
   messageDbId: string
 ): Promise<void> {

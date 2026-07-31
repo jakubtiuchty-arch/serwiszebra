@@ -1,19 +1,13 @@
 export const dynamic = 'force-dynamic'
 
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient as createSupabaseAdmin } from '@supabase/supabase-js'
+import { getMailSupabase } from '@/lib/mail/supabase'
 import { requireAdminServer } from '@/lib/auth-server'
 
 /**
  * Moduł POCZTA — szczegóły wątku (GET) i aktualizacja szkicu/statusu (PATCH).
  */
 
-function getSupabaseAdmin() {
-  return createSupabaseAdmin(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!
-  )
-}
 
 export async function GET(
   _request: NextRequest,
@@ -24,7 +18,7 @@ export async function GET(
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
-  const supabase = getSupabaseAdmin()
+  const supabase = getMailSupabase()
   const [{ data: thread }, { data: messages }, { data: drafts }] = await Promise.all([
     supabase.from('mail_threads').select('*').eq('id', params.id).single(),
     supabase
@@ -56,7 +50,7 @@ export async function PATCH(
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
-  const supabase = getSupabaseAdmin()
+  const supabase = getMailSupabase()
   const body = await request.json()
   const { editedDraft, status } = body as { editedDraft?: string; status?: string }
 
