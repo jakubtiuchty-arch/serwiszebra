@@ -72,7 +72,11 @@ export async function GET(request: NextRequest) {
       // Zmiana UIDVALIDITY (reset skrzynki na serwerze) → nowy baseline bez importu
       const lastUid =
         state && state.uidvalidity ? Number(state.last_uid || 0) : 0
+      console.log(`[mail-sync] state: lastUid=${lastUid}, uidvalidity=${state?.uidvalidity}`)
       result = await fetchNewMail(client, lastUid)
+      console.log(
+        `[mail-sync] fetch: uidValidity=${result.uidValidity}, maxUid=${result.maxUid}, uids=[${result.messages.map((m) => m.uid).join(',')}]`
+      )
       if (state?.uidvalidity && Number(state.uidvalidity) !== result.uidValidity) {
         console.warn('[mail-sync] UIDVALIDITY się zmieniło — reset baseline')
         result = await fetchNewMail(client, 0)
@@ -143,13 +147,18 @@ async function saveInbound(
   supabase: ReturnType<typeof getSupabaseAdmin>,
   mail: InboundMail
 ): Promise<{ threadId: string; messageDbId: string } | null> {
-  // Dedupe po Message-ID
+  // Dedupe po Message-ID. Błąd selecta NIE może przepuścić duplikatu dalej —
+  // wcześniej ignorowany error powodował pusty wątek przy każdym przebiegu.
   if (mail.messageId) {
-    const { data: existing } = await supabase
+    const { data: existing, error: dedupeError } = await supabase
       .from('mail_messages')
       .select('id')
       .eq('message_id', mail.messageId)
       .maybeSingle()
+    if (dedupeError) {
+      console.error('[mail-sync] Dedupe select błąd:', dedupeError, 'dla', mail.messageId)
+      return null // bezpieczniej pominąć niż zdublować
+    }
     if (existing) return null
   }
 
@@ -222,8 +231,16 @@ async function saveInbound(
     .single()
 
   if (msgError || !message) {
-    // Wyścig na unique message_id (dwa crony) — potraktuj jak duplikat
+    // Wyścig na unique message_id (dwa crony) — potraktuj jak duplikat.
+    // Samonaprawa: nie zostawiaj pustego wątku po nieudanym insercie.
     console.error('[mail-sync] Insert wiadomości nieudany:', msgError)
+    const { count } = await supabase
+      .from('mail_messages')
+      .select('id', { count: 'exact', head: true })
+      .eq('thread_id', threadId)
+    if (!count) {
+      await supabase.from('mail_threads').delete().eq('id', threadId)
+    }
     return null
   }
 
