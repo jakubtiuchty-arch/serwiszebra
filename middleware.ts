@@ -14,6 +14,7 @@ const SUPERADMIN_EMAILS = [
 ]
 
 // Sekcje dozwolone dla zwykłych adminów
+// UWAGA: trzymać w synchronizacji z REGULAR_ADMIN_ALLOWED_SECTIONS w lib/admin-config.ts
 const REGULAR_ADMIN_ALLOWED_PATHS = [
   '/admin',           // Dashboard (exact match)
   '/admin/zgloszenie', // Szczegóły zgłoszeń
@@ -21,6 +22,7 @@ const REGULAR_ADMIN_ALLOWED_PATHS = [
   '/admin/instrukcje',  // Instrukcje PDF
   '/admin/katalog',     // Katalog części zamiennych
   '/admin/wypozyczenia', // Wypożyczenia sprzętu (serwisanci odznaczają zwroty)
+  '/admin/poczta',      // Poczta serwis@takma.com.pl + szkice odpowiedzi AI
 ]
 
 // Administratorzy handlowi - dodatkowo dostęp do Sklepu
