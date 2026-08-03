@@ -217,7 +217,8 @@ function detectPrinterModel(query: string): string[] {
     'tlp2844', 'lp2844', 'lp2824', 'tlp2824',
     // Karty
     'zc100', 'zc300', 'zc350', 'zxp1', 'zxp3', 'zxp7', 'zxp8', 'zxp9',
-    // Terminale
+    // Terminale — nowe serie z zerem w środku (tc201/tc501/tc701) przed starszymi
+    'tc201', 'tc501', 'tc701',
     'tc21', 'tc26', 'tc22', 'tc27', 'tc51', 'tc52', 'tc53', 'tc56', 'tc57',
     'tc58', 'tc72', 'tc73', 'tc77', 'tc78',
     'mc33', 'mc93', 'mc94', 'mc2200', 'mc2700', 'mc3300', 'mc3400', 'mc9300',
