@@ -3081,7 +3081,7 @@ ${getEmailHeader()}
               Czas na zwrot wypożyczonego sprzętu
             </h2>
             <p style="margin: 0; color: #6b7280;">
-              Minęło 14 dni od wypożyczenia urządzenia zastępczego
+              Minęło 14 dni od wypożyczenia urządzenia
             </p>
           </div>
 
@@ -3301,7 +3301,7 @@ export async function sendRentalProtocolReminderEmail(data: RentalEmailData & { 
 
           <p style="margin: 0 0 20px 0; color: #374151; font-size: 15px; line-height: 1.6;">
             Dzień dobry${data.customerName ? `, <strong>${data.customerName}</strong>` : ''},<br><br>
-            <strong>${rentedDate}</strong> wypożyczyliśmy Państwu urządzenie zastępcze, ale do tej pory
+            <strong>${rentedDate}</strong> wypożyczyliśmy Państwu urządzenie, ale do tej pory
             <strong style="color: #dc2626;">nie otrzymaliśmy podpisanego protokołu wypożyczenia</strong>.
             Protokół jest warunkiem wypożyczenia — bez niego nie możemy formalnie potwierdzić
             przekazania sprzętu.
