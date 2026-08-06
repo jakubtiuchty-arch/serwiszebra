@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import { createClient } from '@/lib/supabase/client'
 import { Mail, AlertCircle, CheckCircle, ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
 
@@ -17,14 +16,18 @@ export default function ResetPasswordPage() {
     setError(null)
 
     try {
-      const supabase = createClient()
-      
-      const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: `${window.location.origin}/nowe-haslo`,
+      // Własny endpoint zamiast supabase.auth.resetPasswordForEmail —
+      // link z maila działa na dowolnym urządzeniu i nie zużywają go
+      // skanery linków (szczegóły w /api/auth/reset-password)
+      const res = await fetch('/api/auth/reset-password', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
       })
 
-      if (error) {
-        throw error
+      if (!res.ok) {
+        const data = await res.json().catch(() => null)
+        throw new Error(data?.error || 'Wystąpił błąd. Spróbuj ponownie.')
       }
 
       setSuccess(true)

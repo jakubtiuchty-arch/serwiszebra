@@ -3212,3 +3212,169 @@ export async function sendRentalPickupAdminEmail(data: RentalEmailData & { to: s
     throw error
   }
 }
+
+// Email z linkiem do ustawienia nowego hasła (własny flow token_hash — patrz /api/auth/reset-password)
+export async function sendPasswordResetEmail(data: { to: string; resetUrl: string }) {
+  const html = `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="utf-8">
+      ${getEmailStyles()}
+    </head>
+    <body style="margin: 0; padding: 0; background-color: #f3f4f6; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+      <div style="max-width: 600px; margin: 0 auto;">
+        ${getEmailHeader()}
+        <div class="email-content" style="background-color: #ffffff; padding: 32px 24px;">
+          <h2 style="margin: 0 0 16px 0; color: #111827; font-size: 20px;">Ustaw nowe hasło</h2>
+          <p style="margin: 0 0 16px 0; color: #374151; font-size: 14px; line-height: 1.6;">
+            Otrzymaliśmy prośbę o zmianę hasła do Twojego konta w panelu klienta serwis-zebry.pl.
+            Kliknij poniższy przycisk, aby ustawić nowe hasło:
+          </p>
+          <div style="text-align: center; margin: 28px 0;">
+            <a href="${data.resetUrl}" style="display: inline-block; padding: 12px 32px; background: #2563eb; color: #ffffff; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 15px;">Ustaw nowe hasło</a>
+          </div>
+          <p style="margin: 0 0 8px 0; color: #6b7280; font-size: 13px; line-height: 1.6;">
+            Link jest ważny przez 1 godzinę. Możesz go otworzyć na dowolnym urządzeniu.
+          </p>
+          <p style="margin: 0; color: #6b7280; font-size: 13px; line-height: 1.6;">
+            Jeśli to nie Ty prosiłeś o zmianę hasła, zignoruj tę wiadomość — Twoje hasło pozostanie bez zmian.
+          </p>
+        </div>
+        <div style="padding: 20px 24px; text-align: center;">
+          <p style="margin: 0; color: #9ca3af; font-size: 12px;">
+            Serwis Zebra — TAKMA | <a href="https://www.serwis-zebry.pl" style="color: #6b7280;">www.serwis-zebry.pl</a>
+          </p>
+        </div>
+      </div>
+    </body>
+    </html>
+  `
+
+  try {
+    const email = await resend.emails.send({
+      from: 'Serwis Zebra <serwis@serwis-zebry.pl>',
+      to: data.to,
+      subject: 'Ustaw nowe hasło — panel klienta serwis-zebry.pl',
+      html
+    })
+    console.log('[Email] Password reset sent:', email)
+    return email
+  } catch (error) {
+    console.error('[Email] Error sending password reset:', error)
+    throw error
+  }
+}
+
+// Email do klienta: przypomnienie o przesłaniu podpisanego protokołu wypożyczenia (po 3 dniach)
+export async function sendRentalProtocolReminderEmail(data: RentalEmailData & { to: string }) {
+  const rentedDate = new Date(data.rentedAt).toLocaleDateString('pl-PL')
+
+  const html = `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      ${getEmailStyles()}
+    </head>
+    <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #ffffff;">
+      <div style="max-width: 600px; margin: 0 auto; background-color: white; border-radius: 8px; overflow: hidden;">
+
+        <!-- Header: samo logo TAKMA — wypożyczenia dotyczą wszystkich urządzeń, nie tylko Zebry -->
+        <div style="background-color: #1f2937; padding: 24px; text-align: center;">
+          <img src="${EMAIL_ASSETS_URL}/takma_logo_white.png" alt="TAKMA" style="height: 50px; width: auto;">
+        </div>
+
+        <!-- Czerwony pasek alertu -->
+        <div style="background-color: #dc2626; padding: 24px;">
+          <p style="margin: 0 0 6px 0; color: #fecaca; font-size: 13px; font-weight: 600; letter-spacing: 1px; text-align: center;">
+            WYMAGANE DZIAŁANIE
+          </p>
+          <h2 style="margin: 0; color: #ffffff; font-size: 21px; font-weight: 800; text-align: center; line-height: 1.4;">
+            PROSZĘ O PRZESŁANIE PODPISANEGO<br>PROTOKOŁU WYPOŻYCZENIA
+          </h2>
+        </div>
+
+        <!-- Content -->
+        <div style="padding: 32px 24px; border-left: 1px solid #fecaca; border-right: 1px solid #fecaca; border-bottom: 1px solid #fecaca; border-radius: 0 0 8px 8px;">
+
+          <p style="margin: 0 0 20px 0; color: #374151; font-size: 15px; line-height: 1.6;">
+            Dzień dobry${data.customerName ? `, <strong>${data.customerName}</strong>` : ''},<br><br>
+            <strong>${rentedDate}</strong> wypożyczyliśmy Państwu urządzenie zastępcze, ale do tej pory
+            <strong style="color: #dc2626;">nie otrzymaliśmy podpisanego protokołu wypożyczenia</strong>.
+            Protokół jest warunkiem wypożyczenia — bez niego nie możemy formalnie potwierdzić
+            przekazania sprzętu.
+          </p>
+
+          <!-- Device info -->
+          <div style="background-color: #f9fafb; border-radius: 8px; padding: 20px; margin-bottom: 24px;">
+            <table style="width: 100%;">
+              <tr>
+                <td style="color: #6b7280; font-size: 14px;">Nr wypożyczenia:</td>
+                <td style="text-align: right; font-weight: 600; color: #111827; font-family: monospace;">${data.rentalNumber}</td>
+              </tr>
+              <tr>
+                <td style="color: #6b7280; font-size: 14px; padding-top: 8px;">Urządzenie:</td>
+                <td style="text-align: right; font-weight: 600; color: #111827; padding-top: 8px;">${data.deviceModel}</td>
+              </tr>
+              <tr>
+                <td style="color: #6b7280; font-size: 14px; padding-top: 8px;">Numer seryjny:</td>
+                <td style="text-align: right; font-weight: 600; color: #111827; padding-top: 8px; font-family: monospace;">${data.serialNumber}</td>
+              </tr>
+              <tr>
+                <td style="color: #6b7280; font-size: 14px; padding-top: 8px;">Data wypożyczenia:</td>
+                <td style="text-align: right; font-weight: 600; color: #111827; padding-top: 8px;">${rentedDate}</td>
+              </tr>
+            </table>
+          </div>
+
+          <!-- Jak przesłać -->
+          <div style="background-color: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 20px; margin-bottom: 24px;">
+            <h4 style="margin: 0 0 12px 0; font-size: 16px; color: #991b1b;">
+              Jak przesłać protokół? To 2 minuty:
+            </h4>
+            <ol style="margin: 0; padding-left: 20px; color: #7f1d1d; font-size: 14px; line-height: 1.8;">
+              <li>Podpisz protokół, który otrzymali Państwo wraz z urządzeniem</li>
+              <li>Zrób zdjęcie telefonem lub zeskanuj</li>
+              <li><strong>Odpowiedz na tę wiadomość</strong>, załączając zdjęcie lub skan</li>
+            </ol>
+          </div>
+
+          <p style="margin: 0 0 24px 0; color: #6b7280; font-size: 13px; line-height: 1.6;">
+            Jeśli protokół został już wysłany — prosimy zignorować tę wiadomość. Jeśli dokument
+            zaginął, prosimy o kontakt, wyślemy nowy egzemplarz.
+          </p>
+
+          <!-- Contact -->
+          <div style="text-align: center; color: #6b7280; font-size: 14px;">
+            <p style="margin: 0 0 8px 0;">Pytania? Chętnie pomożemy:</p>
+            <p style="margin: 0;">
+              <strong>Tel:</strong> +48 607 819 688<br>
+              <strong>Email:</strong> serwis@takma.com.pl
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </body>
+    </html>
+  `
+
+  try {
+    const email = await resend.emails.send({
+      from: 'TAKMA <serwis@serwis-zebry.pl>',
+      to: data.to,
+      bcc: ['jakub.tiuchty@takma.com.pl', 'serwis@takma.com.pl'],
+      replyTo: 'serwis@takma.com.pl',
+      subject: `WAŻNE: brak podpisanego protokołu wypożyczenia ${data.rentalNumber}`,
+      html
+    })
+    console.log('[Email] Rental protocol reminder sent:', email)
+    return email
+  } catch (error) {
+    console.error('[Email] Error sending rental protocol reminder:', error)
+    throw error
+  }
+}

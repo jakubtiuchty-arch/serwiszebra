@@ -1,12 +1,13 @@
 import { NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
-import { sendRentalReturnRequestEmail, sendRentalPickupAdminEmail } from '@/lib/email'
+import { sendRentalReturnRequestEmail, sendRentalPickupAdminEmail, sendRentalProtocolReminderEmail } from '@/lib/email'
 
 export const dynamic = 'force-dynamic'
 
 const SERWIS_EMAIL = 'serwis@takma.com.pl'
 const RETURN_AFTER_DAYS = 14 // po ilu dniach wysyłamy wezwanie do zwrotu
 const REMINDER_AFTER_DAYS = 7 // po ilu dniach od wezwania idzie przypomnienie (powtarzane co 7 dni)
+const PROTOCOL_REMINDER_AFTER_DAYS = 3 // po ilu dniach bez podpisanego protokołu idzie przypomnienie (jednorazowo)
 
 function getSupabaseAdmin() {
   return createClient(
@@ -33,7 +34,50 @@ export async function GET(request: Request) {
     }
 
     const supabase = getSupabaseAdmin()
-    const results = { returnRequests: 0, reminders: 0, errors: [] as string[] }
+    const results = { protocolReminders: 0, returnRequests: 0, reminders: 0, errors: [] as string[] }
+
+    // 0. Wypożyczone >= 3 dni temu bez podpisanego protokołu → przypomnienie do klienta (jednorazowo)
+    const { data: noProtocol, error: noProtocolError } = await supabase
+      .from('rentals')
+      .select('*')
+      .in('status', ['active', 'return_requested'])
+      .is('signed_document_path', null)
+      .is('protocol_reminder_sent_at', null)
+      .not('email', 'is', null)
+      .lte('rented_at', daysAgo(PROTOCOL_REMINDER_AFTER_DAYS))
+
+    if (noProtocolError) {
+      console.error('❌ [CRON] Error fetching rentals without protocol:', noProtocolError)
+      results.errors.push(noProtocolError.message)
+    }
+
+    for (const rental of noProtocol || []) {
+      try {
+        await sendRentalProtocolReminderEmail({
+          to: rental.email,
+          rentalNumber: rental.rental_number,
+          customerName: rental.customer_name,
+          company: rental.company,
+          deviceModel: rental.device_model,
+          serialNumber: rental.serial_number,
+          rentedAt: rental.rented_at,
+        })
+
+        await supabase
+          .from('rentals')
+          .update({
+            protocol_reminder_sent_at: new Date().toISOString(),
+            updated_at: new Date().toISOString(),
+          })
+          .eq('id', rental.id)
+
+        results.protocolReminders++
+        console.log(`✅ [CRON] Protocol reminder sent for rental ${rental.rental_number}`)
+      } catch (err: any) {
+        console.error(`❌ [CRON] Error sending protocol reminder for ${rental.rental_number}:`, err)
+        results.errors.push(`${rental.rental_number}: ${err.message}`)
+      }
+    }
 
     // 1. Wypożyczenia aktywne od >= 14 dni → wezwanie do zwrotu (serwis + klient)
     const { data: overdue, error: overdueError } = await supabase
@@ -140,7 +184,7 @@ export async function GET(request: Request) {
       }
     }
 
-    console.log(`📦 [CRON] Rentals check done: ${results.returnRequests} return requests, ${results.reminders} reminders`)
+    console.log(`📦 [CRON] Rentals check done: ${results.protocolReminders} protocol reminders, ${results.returnRequests} return requests, ${results.reminders} reminders`)
     return NextResponse.json({ success: true, ...results })
   } catch (error: any) {
     console.error('❌ [CRON] Rentals check failed:', error)

@@ -308,3 +308,18 @@ Checkpoint postępu prac. Najnowszy wpis na górze. Po każdym etapie/buildzie d
 - Fix: `lib/mail/supabase.ts` — getMailSupabase() z fetch `cache:'no-store'` we wszystkich route'ach poczty (commit `8d6f2a6`) + hardening: błąd dedupe = pomiń, samonaprawa pustych wątków (commit `9dbd2a2`).
 - Sprzątnięte 91 pustych wątków; po fixie 2× trigger = fetched:0, baza stabilna (4 wątki / 6 wiadomości).
 - UWAGA na przyszłość: ten sam hazard może dotyczyć INNYCH cronów czytających Supabase na Vercelu (stałe URL-e zapytań!).
+
+## 2026-08-04 — Reset hasła NAPRAWIONY (własny flow token_hash)
+- Zgłoszenie: klient #202607031226 (S. Czerw, MC330L, status wycena) nie mógł się zalogować; `recovery_sent_at` 23.07 dowodzi, że próbował resetu i utknął.
+- Root cause: `resetPasswordForEmail` + PKCE (`@supabase/ssr`) — link z maila działa TYLKO w przeglądarce, w której proszono o reset (code_verifier w cookies); dodatkowo jednorazowy token potrafi zużyć firmowy skaner linków (klient ma pocztę firmową pw-hmp.pl). `/nowe-haslo` nie pokazywała błędu do momentu submitu.
+- Fix: własny flow — `/api/auth/reset-password` (generateLink recovery server-side, mail przez Resend serwis@serwis-zebry.pl, zawsze success=true — bez enumeracji kont) → link `/nowe-haslo?token_hash=...` → token zużywany dopiero przy zapisie hasła (`verifyOtp` na submit): działa na dowolnym urządzeniu, odporny na skanery. `/nowe-haslo` bez tokenu i sesji od razu pokazuje „Link nieprawidłowy" + CTA nowego linku. Nowa funkcja `sendPasswordResetEmail` w lib/email.ts.
+- Test e2e na koncie jednorazowym: generateLink → verifyOtp czystym klientem anon → updateUser → login nowym hasłem OK → reuse tokenu odrzucony. tsc EXIT=0, build EXIT=0, dev na :3002.
+- TODO: commit+push po potwierdzeniu; po deployu poprosić klienta o ponowny reset (albo zadzwonić: 600 469 724).
+
+## 2026-08-06 — Wypożyczenia: przypomnienie o podpisanym protokole (do sprawdzenia)
+- Problem: klienci nie odsyłają podpisanego protokołu wypożyczenia (spinacz w /admin/wypozyczenia pusty).
+- Fix: cron `rentals-check` (codziennie 6:00) krok 0 — wypożyczenia `active`/`return_requested` z `signed_document_path IS NULL` i wiekiem >= 3 dni dostają JEDNORAZOWY mail przypomnienia (`protocol_reminder_sent_at` blokuje powtórki).
+- Mail `sendRentalProtocolReminderEmail`: czerwony pasek alertu „WYMAGANE DZIAŁANIE / PROSZĘ O PRZESŁANIE PODPISANEGO PROTOKOŁU WYPOŻYCZENIA", czerwona ramka, instrukcja 3 kroków (podpisz→zdjęcie→odpowiedz na maila); `replyTo: serwis@takma.com.pl` → odpowiedź klienta z załącznikiem ląduje w module Poczta (/admin/poczta).
+- Podgląd wysłany na jakub.tiuchty@gmail.com (dane przykładowe WYP-2026-0042; prod key Resend z Vercela, lokalny nie ma domeny serwis-zebry.pl).
+- SQL do uruchomienia przez usera: `alter table rentals add column if not exists protocol_reminder_sent_at timestamptz;` (dopisane w supabase-rentals.sql).
+- tsc EXIT=0, build EXIT=0, dev na :3002. NIEZACOMMITOWANE — czeka na akceptację designu maila.

@@ -30,3 +30,6 @@ alter table rentals enable row level security;
 -- Podpisany protokół wypożyczenia (ścieżka w prywatnym buckecie rental-docs)
 -- (osobne ALTER, żeby zadziałało też na już utworzonej tabeli)
 alter table rentals add column if not exists signed_document_path text;
+
+-- Przypomnienie o podpisanym protokole (cron rentals-check, jednorazowo po 3 dniach)
+alter table rentals add column if not exists protocol_reminder_sent_at timestamptz;
