@@ -328,3 +328,7 @@ Checkpoint postępu prac. Najnowszy wpis na górze. Po każdym etapie/buildzie d
 - Design maila zaakceptowany (header samo logo TAKMA, nadawca „TAKMA", bcc: jakub.tiuchty@takma.com.pl + serwis@takma.com.pl). Commit `c085f6f` (razem z naprawą resetu hasła), push na main.
 - Wysłane ręcznie (prod key Resend): WYP-202607290824 (Boyarski, TC501G) i WYP-202607281409 (Stachurski, TC27).
 - CZEKA NA USERA: SQL w Supabase (ALTER + backfill dwóch wysłanych — bez tego cron 6:00 wyśle im duplikaty). Ciesielski (WYP-202607290903) celowo pominięty — po dodaniu kolumny cron wyśle mu automatycznie następnego dnia o 6:00.
+
+## 2026-08-06 — Protokoły wypożyczeń: LIVE
+- User uruchomił SQL (kolumna + backfill zweryfikowane przez REST: Boyarski i Stachurski oznaczeni 11:22). Fix nadawcy „TAKMA", Reply-To serwis@takma.com.pl (odpowiedzi → moduł Poczta), „urządzenie" zamiast „urządzenie zastępcze" (commit `7734807`).
+- Cron aktywny: jutro 6:00 przypomnienie dostanie Ciesielski (WYP-202607290903); Ceranowski po 3 dniach od wypożyczenia.
