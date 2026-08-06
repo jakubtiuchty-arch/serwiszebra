@@ -323,3 +323,8 @@ Checkpoint postępu prac. Najnowszy wpis na górze. Po każdym etapie/buildzie d
 - Podgląd wysłany na jakub.tiuchty@gmail.com (dane przykładowe WYP-2026-0042; prod key Resend z Vercela, lokalny nie ma domeny serwis-zebry.pl).
 - SQL do uruchomienia przez usera: `alter table rentals add column if not exists protocol_reminder_sent_at timestamptz;` (dopisane w supabase-rentals.sql).
 - tsc EXIT=0, build EXIT=0, dev na :3002. NIEZACOMMITOWANE — czeka na akceptację designu maila.
+
+## 2026-08-06 — Protokoły wypożyczeń: zaakceptowane + pierwsza wysyłka
+- Design maila zaakceptowany (header samo logo TAKMA, nadawca „TAKMA", bcc: jakub.tiuchty@takma.com.pl + serwis@takma.com.pl). Commit `c085f6f` (razem z naprawą resetu hasła), push na main.
+- Wysłane ręcznie (prod key Resend): WYP-202607290824 (Boyarski, TC501G) i WYP-202607281409 (Stachurski, TC27).
+- CZEKA NA USERA: SQL w Supabase (ALTER + backfill dwóch wysłanych — bez tego cron 6:00 wyśle im duplikaty). Ciesielski (WYP-202607290903) celowo pominięty — po dodaniu kolumny cron wyśle mu automatycznie następnego dnia o 6:00.
