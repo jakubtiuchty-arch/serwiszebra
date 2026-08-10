@@ -6,6 +6,7 @@
 
 import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
+import { getProductUrl } from '@/lib/shop-categories'
 
 // Lista superadminów (muszą być lowercase)
 const SUPERADMIN_EMAILS = [
@@ -100,18 +101,23 @@ const MODEL_TO_CATEGORY: Record<string, { printerCategory: string; modelSlug: st
 
 function getProductUrlFromData(product: { slug: string; product_type: string; device_model: string }): string | null {
   const productTypeSlug = PRODUCT_TYPE_SLUGS[product.product_type]
-  if (!productTypeSlug) return null
-
   const deviceModelLower = product.device_model?.toLowerCase() || ''
-  
-  // Znajdź model w mapie
-  for (const [modelKey, categoryInfo] of Object.entries(MODEL_TO_CATEGORY)) {
-    if (deviceModelLower.includes(modelKey.toLowerCase())) {
-      return `/sklep/${productTypeSlug}/${categoryInfo.printerCategory}/${categoryInfo.modelSlug}/${product.slug}`
+
+  // Znajdź model w skróconej mapie (tylko typy, które ta mapa obsługuje)
+  if (productTypeSlug) {
+    for (const [modelKey, categoryInfo] of Object.entries(MODEL_TO_CATEGORY)) {
+      if (deviceModelLower.includes(modelKey.toLowerCase())) {
+        return `/sklep/${productTypeSlug}/${categoryInfo.printerCategory}/${categoryInfo.modelSlug}/${product.slug}`
+      }
     }
   }
 
-  return null
+  // Model spoza powyższej (skróconej) mapy — sięgamy po pełną z lib/shop-categories,
+  // tę samą, z której korzysta feed Merchant Center. Bez tego stary URL kończył się 404
+  // (dotyczyło m.in. głowic do ZE511/ZE521 i akumulatorów do TC22/TC27).
+  // Mapa wyżej ma pierwszeństwo, żeby nie ruszać adresów już zaindeksowanych.
+  const fromCatalog = getProductUrl(product)
+  return fromCatalog === `/sklep/${product.slug}` ? null : fromCatalog
 }
 
 export async function middleware(request: NextRequest) {

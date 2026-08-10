@@ -83,6 +83,18 @@ export const SHOP_CATEGORIES: ProductTypeCategory[] = [
           { id: '170xi4', name: 'Zebra 170Xi4', slug: 'zebra-170xi4', resolutions: [203] },
         ]
       },
+      {
+        // MUSI zostać na końcu: dopasowanie modelu idzie po kolejności kategorii,
+        // a "140Xi4 / ZE500-6" ma trafiać do 140Xi4 powyżej, nie do ZE500.
+        id: 'printengine',
+        name: 'Print engine (ZE)',
+        slug: 'print-engine',
+        models: [
+          { id: 'ze511', name: 'Zebra ZE511', slug: 'zebra-ze511', resolutions: [203, 300, 600] },
+          { id: 'ze521', name: 'Zebra ZE521', slug: 'zebra-ze521', resolutions: [203, 300] },
+          { id: 'ze500', name: 'Zebra ZE500', slug: 'zebra-ze500', resolutions: [203] },
+        ]
+      },
     ]
   },
   {
