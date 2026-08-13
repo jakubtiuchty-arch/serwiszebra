@@ -332,3 +332,44 @@ Checkpoint postępu prac. Najnowszy wpis na górze. Po każdym etapie/buildzie d
 ## 2026-08-06 — Protokoły wypożyczeń: LIVE
 - User uruchomił SQL (kolumna + backfill zweryfikowane przez REST: Boyarski i Stachurski oznaczeni 11:22). Fix nadawcy „TAKMA", Reply-To serwis@takma.com.pl (odpowiedzi → moduł Poczta), „urządzenie" zamiast „urządzenie zastępcze" (commit `7734807`).
 - Cron aktywny: jutro 6:00 przypomnienie dostanie Ciesielski (WYP-202607290903); Ceranowski po 3 dniach od wypożyczenia.
+
+## 2026-08-07 — Banner Printhead Protection Program na kartach głowic
+- Nowy `components/shop/PrintheadProgramBanner.tsx` (ciemny box, akcent Zebra #A8F000, rozwijane „Na jakich warunkach" przez `<details>` — bez 'use client'). Pokazuje realną cenę brutto tej głowicy jako kontrast dla „za kolejną możesz nie płacić".
+- Podpięty w `app/sklep/[...slug]/page.tsx` tylko dla `product_type === 'glowica'`, między boksem z ceną a Specyfikacją. CTA → `takma.com.pl/promocje/zebra-glowice-bez-kosztow`.
+- Zweryfikowane na :3002 — renderuje się raz w DOM (drugie trafienie w HTML to payload RSC), na kartach wałków się nie pojawia. tsc EXIT=0.
+- NIEZACOMMITOWANE — czeka na ocenę wizualną usera.
+- Kontekst z bulletinu resellerskiego (Zebra Confidential): program trwa 1.01–31.12.2026, wymaga numeru seryjnego drukarki i utylizacji starych głowic, Zebra ma prawo audytu (kara 2000 USD/voucher). Poufne dane NIE trafiają na strony.
+
+## 2026-08-08 — Ikony topbara wygenerowane w Higgsfield + porządki na karcie produktu
+- 4 ikony 3D (gpt_image_2, jednolity styl navy+stal): `public/icons/icon-{doswiadczenie,naprawy,szybkosc,gwarancja}.png` — 96×96 PNG z alfą (tło zdjęte floodfillem z 4 rogów, `-trim`), wyświetlane w 16 px (było 12 px lucide w 3 różnych kolorach = slop).
+- Podmienione w DWÓCH miejscach: `components/Header.tsx` (podstrony: medal/klucz+check/stoper) i `app/page.tsx` (strona główna ma własną kopię topbara: medal/klucz+check/tarcza). Usunięte martwe importy lucide (Calendar, ThumbsUp, Zap, Shield).
+- Box „W skrócie" (AEO/Speakable): zdjęty `border-l-4 border-blue-500 bg-blue-50` → biała karta `border-gray-200 rounded-xl`; PRZENIESIONY z góry strony (był przed H1!) pod Specyfikację, przed Opis. Klasa `.quick-answer` zachowana — wskazuje na nią schema Speakable.
+- Z banera głowic usunięta nota „Program prowadzi TAKMA — właściciel tego serwisu".
+- tsc EXIT=0, zweryfikowane na :3002. NIEZACOMMITOWANE.
+- ZOSTAJE: 7 innych boksów z `border-l-4` (3 strony serwisowe, /sterowniki, /sklep, blockquote bloga, PolishManualContent) — czeka na decyzję usera.
+
+## 2026-08-09 — Ikony topbara: przejście na SVG (poprawka)
+- Wersja rastrowa 3D była nieczytelna w małym rozmiarze (ciemne plamy). Nowa seria w Higgsfield: płaskie jednobarwne glify → wektoryzacja `potrace` (brew install potrace, librsvg do podglądu) → `components/TrustIcons.tsx` z inline SVG i `fill="currentColor"`.
+- Zalety: ostre w każdej skali, jeden kolor `#1e3a5f` zamiast 3 różnych, zero requestów HTTP (~8 KB w bundlu), rozmiar 14 px (`w-3.5`).
+- Stare PNG-i i katalog `public/icons/` usunięte jako martwe.
+- Podmienione w `components/Header.tsx` (3 ikony) i `app/page.tsx` (3, w tym tarcza). tsc EXIT=0, zweryfikowane renderem w docelowych 14 px.
+
+## 2026-08-09 — Pasek zaufania: rezygnacja z ikon na rzecz typografii
+- Decyzja usera po dwóch nieudanych podejściach graficznych (3D raster → SVG z potrace): w pasku 24 px z tekstem 12 px KAŻDA ikona jest plamką. Rozwiązanie: zero grafiki.
+- Nowy układ: blok wyśrodkowany (`justify-center`, było `justify-between` z `absolute left-1/2` na środkowym), kropki `·` w gray-300 jako separatory, kluczowe frazy `font-semibold text-[#1e3a5f]` („25 lat", „Tysiące", „Maksymalnie skrócony" / „gwarancyjny i pogwarancyjny"), reszta gray-600.
+- Treść trzech punktów bez zmian. Zmienione w `components/Header.tsx` i `app/page.tsx`.
+- Usunięte jako martwe: `components/TrustIcons.tsx`, `public/icons/`, importy lucide. tsc EXIT=0.
+
+## 2026-08-10 — GMC: naprawa 404 (49 produktów) + włączenie konwersji w Ads
+- **404 / feed GMC**: 7 odrzuconych ofert (głowice ZE511/ZE521/ZE500-4) to był bug routingu, nie danych. Dwie przyczyny:
+  1. `lib/shop-categories.ts` — brak kategorii `print-engine` w sekcji głowic. Dodana NA KOŃCU (kolejność decyduje o dopasowaniu: „140Xi4 / ZE500-6" ma dalej trafiać do 140Xi4).
+  2. `middleware.ts` — ma WŁASNĄ, skróconą mapę `MODEL_TO_CATEGORY` (26 modeli); dla nieznanych zwracał null → 404. Dodany fallback do `getProductUrl()` (mapa skrócona ma pierwszeństwo, żeby nie ruszyć zaindeksowanych URL-i) + usunięty przedwczesny `return null` blokujący typy `zasilacz`/`konwerter`.
+- Efekt: feed = 88 ofert, **0 linków fallbackowych**; **49/49** wcześniej martwych URL-i → 200. Regresji brak (ZT410 nadal na starej ścieżce `…/zt411/…`).
+- **Konwersje w Ads**: akcje importu GA4 dla serwis-zebry JUŻ istniały (8 szt.), ale wszystkie **HIDDEN** = nic nie zbierały. Włączone 4: purchase, repair_form_submit, phone_click, email_click. Świadomie jako WTÓRNE (`includeInConversionsMetric=false`) — inaczej zaburzyłyby kolumnę „Konwersje" w kampaniach takma.com.pl.
+- Kampania Shopping `24115745022` nadal WSTRZYMANA — czeka na decyzję o starcie.
+- NIEZACOMMITOWANE (user prosił, by nie pushować).
+
+## 2026-08-13 — Poczta: auto-archiwizacja o 17:00
+- Nowy cron `/api/cron/mail-archive`: o 17:00 czasu polskiego wątki `new`/`drafted` → `archived`; rano zakładka Odebrane czysta. Harmonogram Vercel `0 15,16 * * *` (UTC) + guard godziny Europe/Warsaw w kodzie (DST-proof); `?force=1` do ręcznego testu.
+- Bezpieczne: mail-sync przywraca zarchiwizowany wątek do skrzynki przy nowym mailu klienta (status wraca na `new`, potwierdzone w kodzie linia ~247).
+- Guard przetestowany lokalnie (skipped poza 17:00). Build EXIT=0, dev :3002. Czeka na commit+push.

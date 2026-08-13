@@ -9,6 +9,10 @@
       "schedule": "*/5 * * * *"
     },
     {
+      "path": "/api/cron/mail-archive",
+      "schedule": "0 15,16 * * *"
+    },
+    {
       "path": "/api/cron/chat-report",
       "schedule": "0 19 * * *"
     },

@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Calendar, ThumbsUp, Zap, Menu, X, User, LogIn, BookOpen, Download, HelpCircle, Info, Phone, Home, Video, ShoppingBag } from 'lucide-react'
+import { Menu, X, User, LogIn, BookOpen, Download, HelpCircle, Info, Phone, Home, Video, ShoppingBag } from 'lucide-react'
 import { trackCTAClick, trackInternalLink } from '@/lib/analytics'
 
 interface HeaderProps {
@@ -19,18 +19,17 @@ export default function Header({ currentPage = 'other', hidePartnerLogos = false
       {/* TOP BAR - UKRYTE NA MOBILE */}
       <div className="hidden md:block py-1.5 px-3 sm:px-4 bg-gray-50 border-b border-gray-200 shadow-[inset_0_2px_4px_0_rgba(0,0,0,0.06)]">
         <div className="max-w-7xl mx-auto">
-          <div className="flex items-center justify-between text-xs text-gray-700 relative">
-            <span className="flex items-center gap-1.5">
-              <Calendar className="w-3 h-3 text-blue-600 flex-shrink-0" />
-              <span className="whitespace-nowrap">Od 25 lat na rynku</span>
+          <div className="flex items-center justify-center gap-x-3 lg:gap-x-5 text-xs text-gray-600">
+            <span className="whitespace-nowrap">
+              Od <strong className="font-semibold text-[#1e3a5f]">25 lat</strong> na rynku
             </span>
-            <span className="flex items-center gap-1.5 absolute left-1/2 -translate-x-1/2">
-              <ThumbsUp className="w-3 h-3 text-green-600 flex-shrink-0" />
-              <span className="whitespace-nowrap">Tysiące skutecznych napraw</span>
+            <span aria-hidden className="text-gray-300">·</span>
+            <span className="whitespace-nowrap">
+              <strong className="font-semibold text-[#1e3a5f]">Tysiące</strong> skutecznych napraw
             </span>
-            <span className="flex items-center gap-1.5">
-              <Zap className="w-3 h-3 text-orange-500 flex-shrink-0" />
-              <span className="whitespace-nowrap">Maksymalnie skrócony proces napraw</span>
+            <span aria-hidden className="text-gray-300">·</span>
+            <span className="whitespace-nowrap">
+              <strong className="font-semibold text-[#1e3a5f]">Maksymalnie skrócony</strong> proces napraw
             </span>
           </div>
         </div>

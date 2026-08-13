@@ -23,6 +23,7 @@ import {
   Info
 } from 'lucide-react'
 import StickyAddToCart from '@/components/shop/StickyAddToCart'
+import PrintheadProgramBanner from '@/components/shop/PrintheadProgramBanner'
 import ProductPurchasePanel from '@/components/shop/ProductPurchasePanel'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
@@ -1089,15 +1090,6 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
         <main id="main-content" className="min-h-screen bg-gray-50">
           <article className="max-w-5xl mx-auto px-4 py-4 sm:py-6">
             
-            {/* Szybka odpowiedź (Paragraph 0 dla AEO + Speakable) */}
-            {quickAnswer && (
-              <div className="quick-answer bg-blue-50 border-l-4 border-blue-500 rounded-r-xl p-4 mb-4 sm:mb-6">
-                <p className="text-sm text-gray-800 leading-relaxed">
-                  <strong className="text-blue-700">W skrócie:</strong> {quickAnswer}
-                </p>
-              </div>
-            )}
-
             {/* Main content - Mobile First */}
             <div className="flex flex-col md:flex-row gap-4 sm:gap-6 mb-4 sm:mb-6 md:items-start">
               {/* Image - wrapped in <figure> for semantic SEO */}
@@ -1152,6 +1144,14 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
               </div>
             </div>
 
+            {/* Program Zebry: głowice zamienne bez kosztów — tylko karty głowic */}
+            {product.product_type === 'glowica' && (
+              <PrintheadProgramBanner
+                priceBrutto={product.price_brutto}
+                deviceModel={product.device_model}
+              />
+            )}
+
             {/* Specyfikacja techniczna */}
             <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6 mb-4 sm:mb-6">
               <h2 className="text-sm sm:text-base font-semibold text-gray-900 mb-3 sm:mb-4 flex items-center gap-2">
@@ -1203,6 +1203,15 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
                 </tbody>
               </table>
             </div>
+
+            {/* Szybka odpowiedź (Paragraph 0 dla AEO + Speakable) — podsumowanie po specyfikacji */}
+            {quickAnswer && (
+              <div className="quick-answer bg-white rounded-xl border border-gray-200 p-4 sm:p-5 mb-4 sm:mb-6">
+                <p className="text-sm text-gray-700 leading-relaxed">
+                  <strong className="font-semibold text-gray-900">W skrócie:</strong> {quickAnswer}
+                </p>
+              </div>
+            )}
 
             {/* Opis produktu */}
             <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6 mb-4 sm:mb-6">
