@@ -28829,28 +28829,29 @@ Jako **autoryzowany serwis Zebra** pomożemy Ci:
   {
     slug: 'zebra-wymaga-hasla-dyrektywa-red-konfiguracja',
     title: 'Twoja Zebra wymaga hasła? Konfiguracja trybu chronionego i dyrektywy EU RED',
-    excerpt: 'Nowa drukarka Zebra wymaga hasła przy pierwszym uruchomieniu? Od 1 sierpnia 2025 wszystkie drukarki Zebra z WiFi/Bluetooth w regionie EMEA wymagają konfiguracji zabezpieczeń zgodnie z dyrektywą EU RED. Dowiedz się, jak skonfigurować hasło i dlaczego jest to wymagane.',
+    excerpt: 'Nowa drukarka Zebra wymaga hasła przy pierwszym uruchomieniu, a 1234 nie działa? Od 1 sierpnia 2025 drukarki wprowadzane na rynek EMEA startują w trybie chronionym wymaganym przez dyrektywę EU RED. Pokazujemy pełną konfigurację, kody odpowiedzi drukarki i co zrobić, gdy hasło nie jest przyjmowane.',
     coverImage: '/drukarki-zebra-dyrektywa-red.jpeg',
     author: {
       name: 'Zespół TAKMA',
       role: 'Autoryzowany serwis Zebra'
     },
     publishedAt: '2026-01-08',
-    readingTime: 10,
+    updatedAt: '2026-08-17', // Poprawiona ścieżka konfiguracji (zebra.com/asr + Nucleus Connector), pełna lista modeli z ZE511/ZE521, kody odpowiedzi 0/100/101, tryb wycofania z eksploatacji, ostrzeżenie o portach 9100
+    readingTime: 13,
     deviceType: 'drukarki',
     subDeviceType: 'etykiet',
     category: 'aktualnosci',
-    tags: ['dyrektywa RED', 'EU RED', 'hasło drukarki', 'cyberbezpieczeństwo', 'Link-OS', 'konfiguracja zabezpieczeń', 'Security Setup Wizard', 'Printer Setup Utilities', 'ZD421', 'ZD621', 'ZT411', 'ZT421', 'EMEA'],
+    tags: ['dyrektywa RED', 'EU RED', 'hasło drukarki', 'cyberbezpieczeństwo', 'Link-OS', 'konfiguracja zabezpieczeń', 'Nucleus Connector', 'tryb wycofania z eksploatacji', 'ZE511', 'Printer Setup Utilities', 'ZD421', 'ZD621', 'ZT411', 'ZT421', 'EMEA'],
     seo: {
       metaTitle: 'Drukarka Zebra wymaga hasła? Dyrektywa EU RED – konfiguracja krok po kroku [2026]',
-      metaDescription: 'Nowa drukarka Zebra wymaga hasła? Od 1.08.2025 wszystkie drukarki Zebra z WiFi/Bluetooth wymagają konfiguracji zabezpieczeń (dyrektywa EU RED). Poradnik krok po kroku.',
+      metaDescription: 'Nowa drukarka Zebra wymaga hasła i 1234 nie działa? Od 1.08.2025 drukarki w regionie EMEA startują w trybie chronionym (dyrektywa EU RED). Konfiguracja krok po kroku.',
       keywords: [
         'drukarka zebra wymaga hasła',
         'zebra password required',
         'dyrektywa RED drukarki',
         'EU RED Zebra',
         'konfiguracja zabezpieczeń zebra',
-        'security setup wizard zebra',
+        'zebra nucleus connector',
         'hasło administratora zebra',
         'printer setup utilities',
         'zebra cybersecurity',
@@ -28858,234 +28859,257 @@ Jako **autoryzowany serwis Zebra** pomożemy Ci:
         'zebra protected mode',
         'tryb chroniony zebra',
         'nowa drukarka zebra nie działa',
-        'zebra hasło 14 znaków',
+        'zebra tryb wycofania z eksploatacji',
         'zebra security configuration',
         'zebra EMEA regulations',
         'jak skonfigurować hasło zebra',
-        'zebra first time setup password',
+        'zebra status 100 101 hasło',
         'zebra wifi hasło',
         'zebra bluetooth security'
       ]
     },
     content: `
-> **⚠️ Nowa drukarka Zebra wymaga hasła i nie chce drukować?** Od **1 sierpnia 2025 roku** wszystkie drukarki Zebra z modułami radiowymi (WiFi, Bluetooth) wprowadzane na rynek EMEA wymagają obowiązkowej konfiguracji zabezpieczeń. Dowiedz się, jak szybko skonfigurować hasło i uruchomić drukarkę.
+> **⚠️ Nowa drukarka Zebra prosi o hasło i nie chce pracować?** Od **1 sierpnia 2025** drukarki wprowadzane na rynek EMEA wychodzą z fabryki w trybie chronionym. Zanim zaczniesz konfigurację, przeczytaj sekcję **„Zanim zaczniesz"** — pominięcie jednego przełącznika kończy się telefonem „skonfigurowałem i teraz nie drukuje z systemu".
 
 ---
 
-## Co to jest dyrektywa EU RED?
+## Skąd się wzięło hasło
 
-**EU RED** (Radio Equipment Directive) to europejska dyrektywa dotycząca urządzeń radiowych, która od **1 sierpnia 2025** nakłada nowe wymagania cyberbezpieczeństwa na wszystkie urządzenia z modułami bezprzewodowymi sprzedawane w Unii Europejskiej.
+**EU RED** (Radio Equipment Directive) to europejska dyrektywa o urządzeniach radiowych. Jej wymagania dotyczące cyberbezpieczeństwa sprawiły, że Zebra zmieniła sposób pierwszego uruchomienia drukarek sprzedawanych w regionie EMEA.
 
-### Dlaczego to ważne?
-
-| Aspekt | Wyjaśnienie |
-|--------|-------------|
-| **Cel** | Ochrona danych osobowych i sieci firmowych |
-| **Dotyczy** | Drukarki z WiFi, Bluetooth, RFID |
+| Aspekt | Jak jest |
+|--------|----------|
 | **Obowiązuje od** | 1 sierpnia 2025 |
 | **Region** | EMEA (Europa, Bliski Wschód, Afryka) |
-| **Firmware** | Link-OS 7.4.2 i nowsze |
+| **Firmware** | Link-OS 7.4.2 lub nowszy |
+| **Co się zmienia** | drukarka startuje w trybie chronionym i czeka na plik konfiguracyjny |
+| **Czego nie zmienia** | egzemplarze kupione wcześniej pracują bez zmian |
 
-> **💡 W praktyce:** Jeśli kupiłeś drukarkę Zebra po sierpniu 2025, przy pierwszym uruchomieniu zostaniesz poproszony o ustawienie hasła administratora. **Bez tego hasła drukarka nie pozwoli na pełną konfigurację.**
+Kryterium jest proste: **drukarka sprzedana w regionie EMEA po 1 sierpnia 2025, z systemem Link-OS 7.4.2 lub nowszym**. Nie chodzi o to, czy egzemplarz ma moduł WiFi — chodzi o datę wprowadzenia na rynek i wersję oprogramowania.
 
----
-
-## Które drukarki są objęte dyrektywą RED?
-
-Nowe wymagania dotyczą **wszystkich drukarek Zebra z modułami radiowymi**, w tym:
-
-### Drukarki biurkowe (Desktop)
-- **Seria ZD200** – ZD220, ZD230 (z opcją WiFi/BT)
-- **Seria ZD400** – ZD411, ZD421, ZD411d, ZD421t
-- **Seria ZD600** – ZD611, ZD621, ZD611t, ZD621t
-
-### Drukarki przemysłowe (Industrial)
-- **Seria ZT400** – ZT411, ZT421
-- **Seria ZT600** – ZT610, ZT620
-- **Seria ZT200** – ZT220, ZT230
-
-### Drukarki mobilne
-- **Seria ZQ600** – ZQ630, ZQ620, ZQ610
-- **Seria ZQ500** – ZQ520, ZQ521
-- **Seria ZQ300** – ZQ320, ZQ310
-
-> **📌 Uwaga:** Drukarki **bez** modułów WiFi/Bluetooth (tylko USB/Ethernet) **nie wymagają** tej konfiguracji.
+> **💡 Najczęstsze zaskoczenie:** domyślne hasło **1234**, znane ze starszych modeli, w tych drukarkach nie działa. To nie jest usterka i nie ma sensu szukać innego hasła — urządzenie czeka na konfigurację, a nie na logowanie.
 
 ---
 
-## Objawy – jak rozpoznać problem?
+## Które modele są objęte
 
-Jeśli Twoja nowa drukarka Zebra nie chce działać normalnie, sprawdź te objawy:
+**Drukarki biurkowe:** ZD220, ZD230, ZD888, ZD411, ZD421, ZD611, ZD621
 
-| Objaw | Znaczenie |
-|-------|-----------|
-| **Komunikat o haśle** na wyświetlaczu | Drukarka w trybie chronionym |
-| **Ulotka z kodem QR** w pudełku | Instrukcja konfiguracji RED |
-| **Brak dostępu do menu** | Wymaga odblokowania hasłem |
-| **Drukarka "zawiesza się"** po włączeniu | Czeka na konfigurację zabezpieczeń |
-| **Nie łączy się z WiFi** | Interfejsy radiowe zablokowane |
+**Drukarki mobilne:** ZQ310 Plus, ZQ320 Plus, ZQ511, ZQ521, ZQ610 Plus, ZQ620 Plus, ZQ630 Plus
 
----
+**Drukarki przemysłowe:** ZT111, ZT211, ZT231, ZT411, ZT421, ZT510, ZT610, ZT620
 
-## Jak skonfigurować hasło – instrukcja krok po kroku
+**Moduły drukujące (print engine):** ZE511, ZE521
 
-### Co znajdziesz w pudełku?
-
-Nowe drukarki Zebra objęte dyrektywą RED zawierają **specjalną ulotkę** z:
-- **Kodem QR** kierującym na stronę konfiguracji
-- **Adresem URL** do kreatora zabezpieczeń
-- **Potwierdzeniem zgodności** z przepisami UE
-
-### Krok 1: Pobierz Printer Setup Utilities
-
-1. Wejdź na [naszą stronę ze sterownikami i oprogramowaniem](/sterowniki)
-2. Pobierz program **Printer Setup Utilities** (Windows)
-3. Zainstaluj program na komputerze
-
-> **💡 Wskazówka:** Program jest dostępny bezpłatnie na stronie Zebra. Obsługuje Windows 10/11.
-
-### Krok 2: Podłącz drukarkę przez USB
-
-1. Podłącz drukarkę do komputera **kablem USB**
-2. Włącz zasilanie drukarki
-3. Poczekaj aż komputer wykryje urządzenie
-
-> **⚠️ WAŻNE:** Konfiguracja zabezpieczeń wymaga połączenia USB. Nie można jej wykonać przez WiFi ani Ethernet!
-
-### Krok 3: Uruchom Security Setup Wizard
-
-1. Otwórz **Printer Setup Utilities**
-2. Wybierz kreator **Security Setup Wizard**
-3. Postępuj zgodnie z instrukcjami na ekranie
-
-### Krok 4: Utwórz hasło administratora
-
-To **najważniejszy krok**. Wymagania dla hasła:
-
-- **Minimalna długość:** 14 znaków
-- **Dozwolone znaki:** litery, cyfry, znaki specjalne
-- **Unikalność:** może być wspólne dla wielu drukarek
-- **Przechowywanie:** Zebra NIE zapisuje hasła w chmurze
-
-> **🔒 Bezpieczeństwo:** Hasło jest osadzane w skrypcie konfiguracyjnym. Firma Zebra **nie ma dostępu** do Twojego hasła – jeśli je zapomnisz, konieczny będzie reset fabryczny.
-
-**Przykład silnego hasła:** MojeFirma2026!ZebraDruk
-
-### Krok 5: Dodatkowe ustawienia zabezpieczeń
-
-Kreator umożliwia konfigurację:
-
-- **PIN do panelu przedniego** – 4-cyfrowy kod do menu drukarki
-- **Blokada interfejsów** – WiFi, Bluetooth, USB
-- **Szyfrowanie danych** – ochrona przesyłanych danych
-
-### Krok 6: Wygeneruj i wyślij skrypt
-
-1. Kliknij **"Copy Script"** (Kopiuj skrypt)
-2. W Printer Setup Utilities otwórz **Open Communication With Printer**
-3. Wklej skopiowany skrypt
-4. Wyślij skrypt do drukarki
-
-### Krok 7: Restart i gotowe!
-
-Po otrzymaniu skryptu drukarka:
-1. **Automatycznie zrestartuje** ustawienia sieciowe
-2. **Zastosuje nowe zabezpieczenia**
-3. **Będzie gotowa do normalnej pracy**
+> **📌 Uwaga dla integratorów:** moduły ZE511 i ZE521 też są na tej liście. Przy wymianie modułu w linii pakującej trzeba doliczyć czas na konfigurację zabezpieczeń — inaczej maszyna stoi.
 
 ---
 
-## Mam więcej drukarek – co zrobić?
+## Objawy — czy to na pewno to?
 
-**Dobra wiadomość:** Nie musisz przechodzić przez kreator dla każdej drukarki osobno!
-
-### Metoda masowej konfiguracji:
-
-1. Skonfiguruj **jedną drukarkę** przez Security Setup Wizard
-2. Zapisz wygenerowany **skrypt konfiguracyjny**
-3. Użyj **Printer Setup Utilities** do wysłania skryptu do pozostałych drukarek
-
-> **💡 Wskazówka dla firm:** Przy flotach 10+ drukarek warto użyć **Printer Profile Manager Enterprise** lub **Zebra Device Manager** do masowego wdrażania konfiguracji.
+| Objaw | Co oznacza |
+|-------|------------|
+| Drukarka nie przyjmuje hasła **1234** | tryb chroniony, czeka na plik konfiguracyjny |
+| Karta z instrukcją i kodem QR w pudełku | egzemplarz objęty nowymi wymaganiami |
+| Brak dostępu do części menu | interfejsy zablokowane do czasu konfiguracji |
+| Nie wchodzi na WiFi mimo poprawnych ustawień | radio wyłączone w trybie chronionym |
+| Nie drukuje z systemu po porcie 9100 **po konfiguracji** | port surowy nie został włączony (patrz niżej) |
 
 ---
 
-## FAQ – Najczęściej zadawane pytania
+## Zanim zaczniesz — dwie decyzje, o których łatwo zapomnieć
 
-### Dlaczego moja nowa drukarka Zebra wymaga hasła?
+Konfigurację przechodzi się raz, a dwa ustawienia decydują o tym, czy drukarka będzie działać w Twoim środowisku. **Ustal je, zanim wyślesz plik do drukarki.**
 
-Od 1 sierpnia 2025 wszystkie drukarki Zebra z modułami WiFi lub Bluetooth sprzedawane w regionie EMEA muszą spełniać wymogi dyrektywy EU RED dotyczące cyberbezpieczeństwa. Hasło administratora jest wymagane do ochrony urządzenia przed nieautoryzowanym dostępem.
+### 1. Porty TCP/IP Raw: 9100, 9200, 9300
 
-### Czy mogę pominąć konfigurację hasła?
+Jeśli drukujesz z systemu ERP, WMS, z serwera wydruku albo przez kolejkę systemową kierowaną na surowy port — **musisz włączyć porty TCP/IP Raw w konfiguracji zabezpieczeń**. W trybie chronionym są domyślnie zamknięte.
 
-Nie. Drukarka w trybie chronionym nie pozwoli na pełne korzystanie z funkcji sieciowych bez konfiguracji zabezpieczeń. Jest to wymóg prawny UE.
+To najczęstsza przyczyna zgłoszeń po wdrożeniu: drukarka jest skonfigurowana, świeci na zielono, drukuje stronę testową z panelu — ale system magazynowy nie może się do niej dobić.
 
-### Jakie hasło ustawić?
+### 2. Aktualizacje firmware przez EMM/MDM
 
-Hasło musi mieć **minimum 14 znaków**. Zalecamy kombinację wielkich i małych liter, cyfr oraz znaków specjalnych. Możesz użyć tego samego hasła dla wszystkich drukarek w firmie.
+Osobny przełącznik. Jeśli zarządzasz flotą przez system MDM i planujesz zdalne aktualizacje oprogramowania drukarek, włącz go od razu. Do samego połączenia z EMM/MDM skonfiguruj na drukarce protokół **MQTT**.
 
-### Co jeśli zapomnę hasła?
+> **🔧 Z naszej praktyki:** przed konfiguracją zapytaj w firmie o dwie rzeczy — czy cokolwiek drukuje po porcie 9100 i czy drukarki są w MDM. Dwie minuty rozmowy oszczędzają ponownego przechodzenia procedury na każdym urządzeniu.
 
-Jeśli zapomnisz hasła administratora, konieczny będzie **reset fabryczny** drukarki, który usunie wszystkie ustawienia. Zebra nie przechowuje haseł i nie może ich odzyskać.
+---
 
-### Czy moja stara drukarka też wymaga hasła?
+## Konfiguracja krok po kroku
 
-Nie. Dyrektywa RED dotyczy drukarek **wprowadzonych na rynek od 1 sierpnia 2025**. Starsze drukarki (kupione wcześniej) działają bez zmian.
+### Krok 1: Wejdź na stronę konfiguracji zabezpieczeń
 
-### Czy mogę skonfigurować hasło przez WiFi?
+Kreator konfiguracji znajduje się pod adresem **zebra.com/asr**. To tam powstaje plik z ustawieniami — nie szukaj kreatora wewnątrz Printer Setup Utilities, tam go nie ma.
 
-Nie. Pierwsza konfiguracja zabezpieczeń wymaga **połączenia USB**. Po skonfigurowaniu możesz zarządzać drukarką przez sieć.
+Wybierz metodę odpowiadającą Twojemu środowisku (Windows, dublowanie USB, macOS/Linux).
 
-### Gdzie znajdę kod QR do konfiguracji?
+### Krok 2: Pobierz Nucleus Connector (metoda Windows)
 
-Kod QR znajduje się na **ulotce w pudełku** drukarki. Jeśli go zgubiłeś, pobierz oprogramowanie z [naszej strony ze sterownikami](/sterowniki).
+Dla metody windowsowej potrzebny jest **Zebra Nucleus Connector w wersji dla regionu EMEA**. Zwykły instalator z innego regionu nie obsłuży tej konfiguracji.
 
-### Ile trwa konfiguracja?
+### Krok 3: Podłącz drukarkę kablem USB
 
-Przy pojedynczej drukarce cały proces zajmuje **5-10 minut**. Przy większej liczbie drukarek z użyciem skryptu – około **2 minuty na drukarkę**.
+Pierwsza konfiguracja idzie **wyłącznie przez USB** — nie przez sieć. Włącz drukarkę i poczekaj, aż zostanie wykryta przez komputer.
+
+### Krok 4: Ustaw hasło i przełączniki
+
+W kreatorze ustawiasz hasło administratora oraz opcje z sekcji „Zanim zaczniesz": porty TCP/IP Raw i zgodę na aktualizacje firmware.
+
+**Hasło ustalasz sam** — kreator pilnuje wymagań co do długości i złożoności. Zapisz je w firmowym menedżerze haseł. Zebra go nie przechowuje i wsparcie producenta nie jest w stanie go odzyskać.
+
+Jedno hasło może obsługiwać wiele drukarek w firmie — to wygodne przy wdrożeniach i nie łamie wymagań.
+
+### Krok 5: Wyślij plik do drukarki
+
+Plik konfiguracyjny można dostarczyć na kilka sposobów — wybierz ten, który pasuje do Twojego stanowiska:
+
+| Metoda | Kiedy jej użyć |
+|--------|----------------|
+| **Nucleus Connector** | pojedyncza drukarka na stanowisku z Windows |
+| **Sterownik ZDesigner** | drukarka już zainstalowana w systemie |
+| **ZDownloader** | kilka drukarek, jedna po drugiej |
+| **Toolbox / Zebra Setup Utilities** | gdy chcesz od razu widzieć odpowiedź drukarki |
+| **Wysyłka polecenia z terminala** | stanowiska macOS i Linux |
+
+### Krok 6: Sprawdź odpowiedź drukarki
+
+To jest krok, który najczęściej się pomija — a bez niego nie wiesz, czy konfiguracja weszła.
+
+---
+
+## Jak sprawdzić, czy się udało
+
+Po wysłaniu pliku drukarka odsyła status. W Toolboksie lub Zebra Setup Utilities zobaczysz odpowiedź w postaci JSON:
+
+| Status | Znaczenie | Co zrobić |
+|--------|-----------|-----------|
+| **status: 0** | polecenie wykonane poprawnie | gotowe, drukarka pracuje normalnie |
+| **status: 100** | brak lub nieprawidłowa nazwa użytkownika albo hasło | przejdź do sekcji poniżej |
+| **status: 101** | nieprawidłowa nazwa użytkownika lub hasło | przejdź do sekcji poniżej |
+
+Pełna odpowiedź wygląda tak: **{"protect":{"status":0,"operation":"setup"}}** — liczy się wartość przy status.
+
+> **💡 Wskazówka:** jeśli konfigurujesz metodą, która nie pokazuje odpowiedzi, wyślij plik jeszcze raz przez Toolbox. Dwie minuty pewności są warte więcej niż telefon od klienta za tydzień.
+
+---
+
+## Status 100 albo 101 — co dalej
+
+Nie, nie trzeba robić resetu fabrycznego i nie trzeba wysyłać drukarki do serwisu.
+
+Urządzenie ma **tryb wycofania z eksploatacji** (decommission), który zdejmuje tryb chroniony i pozwala przejść konfigurację od nowa:
+
+**Polecenie:** ~PMa — gdzie **a** zastępujesz numerem seryjnym swojej drukarki.
+
+Ten sam efekt osiągniesz w Toolboksie: w profilu drukarki kliknij dwukrotnie **Tryb chroniony**, a następnie wybierz **Tryb wycofywania z eksploatacji**.
+
+Po wycofaniu wróć do kroku 1 i przejdź konfigurację jeszcze raz — tym razem z pewnym hasłem.
+
+---
+
+## Kilka albo kilkadziesiąt drukarek
+
+### Dublowanie USB (Link-OS 7.6 i nowsze)
+
+Najszybsza droga przy wdrożeniu: zaufane kopiowanie lustrzane z nośnika USB. Przygotowujesz jeden nośnik i obsługujesz nim kolejne drukarki, bez podłączania każdej do komputera. Wymaga Link-OS w wersji 7.6 lub nowszej.
+
+### Ten sam plik do wielu drukarek
+
+Plik konfiguracyjny wygenerowany raz można wysłać do kolejnych urządzeń przez ZDownloader albo Toolbox. Przy jednym wspólnym haśle dla floty to kwestia około dwóch minut na drukarkę.
+
+### Zarządzanie flotą
+
+Przy większych instalacjach warto oprzeć się o system zarządzania i MQTT — wtedy konfiguracja zabezpieczeń staje się częścią standardowego wdrożenia urządzenia, a nie osobną czynnością.
+
+Więcej o zabezpieczaniu drukarek w firmie: [PrintSecure – przewodnik administratora IT](/blog/zebra-printsecure-przewodnik-administratora-it)
+
+---
+
+## FAQ
+
+### Dlaczego nowa drukarka Zebra prosi o hasło?
+
+Bo została wprowadzona na rynek EMEA po 1 sierpnia 2025 i pracuje w trybie chronionym wymaganym przez dyrektywę EU RED. To nie jest usterka ani blokada handlowa — urządzenie czeka na plik konfiguracyjny.
+
+### Czy hasło 1234 gdzieś zadziała?
+
+Nie. W drukarkach objętych nowymi wymaganiami domyślne hasło nie istnieje. Hasło powstaje dopiero w trakcie konfiguracji i ustalasz je sam.
+
+### Czy mogę pominąć konfigurację?
+
+Nie. Bez niej drukarka nie udostępni pełnej funkcjonalności sieciowej.
+
+### Co, jeśli zapomnę hasła?
+
+Użyj trybu wycofania z eksploatacji (polecenie ~PMa z numerem seryjnym) i przejdź konfigurację od nowa. Reset fabryczny nie jest do tego potrzebny.
+
+### Czy mogę ustawić jedno hasło dla wszystkich drukarek w firmie?
+
+Tak. Przy flocie to wręcz zalecane — upraszcza późniejszą obsługę i nie stoi w sprzeczności z wymaganiami.
+
+### Czy konfigurację da się zrobić przez WiFi albo Ethernet?
+
+Nie, pierwsza konfiguracja wymaga połączenia USB. Po jej zakończeniu drukarką zarządzasz normalnie przez sieć.
+
+### Skonfigurowałem drukarkę i przestała drukować z systemu. Dlaczego?
+
+Najprawdopodobniej Twój system wysyła wydruki na surowy port TCP/IP (9100, 9200 lub 9300), a ten nie został włączony podczas konfiguracji. Trzeba przejść konfigurację ponownie z włączonym przełącznikiem portów.
+
+### Czy stare drukarki też wymagają konfiguracji?
+
+Nie. Egzemplarze wprowadzone na rynek przed 1 sierpnia 2025 pracują bez zmian.
+
+### Mam macOS albo Linux — jestem odcięty?
+
+Nie. Plik konfiguracyjny wysyła się poleceniem z terminala; metoda windowsowa z Nucleus Connectorem jest tylko jedną z dostępnych dróg.
+
+### Ile to trwa?
+
+Pierwsza drukarka: 10–15 minut razem z pobraniem narzędzi. Każda kolejna z gotowym plikiem: około dwóch minut.
 
 ---
 
 ## Rozwiązywanie problemów
 
-### Problem: Drukarka nie reaguje na skrypt
+### Drukarka nie odpowiada na wysłany plik
 
-**Rozwiązanie:**
-1. Sprawdź czy używasz **kabla USB** (nie sieciowego)
-2. Upewnij się, że Printer Setup Utilities widzi drukarkę
-3. Zrestartuj drukarkę i komputer
-4. Spróbuj z innym portem USB
+1. Sprawdź, czy połączenie idzie **kablem USB**, nie przez sieć
+2. Upewnij się, że narzędzie widzi drukarkę na liście urządzeń
+3. Spróbuj innego portu USB, najlepiej bezpośrednio w komputerze, bez koncentratora
+4. Wyłącz drukarkę na 30 sekund i podłącz ponownie
 
-### Problem: Komunikat "Invalid Password"
+### Odpowiedź status 100 lub 101
 
-**Rozwiązanie:**
-1. Upewnij się, że hasło ma **minimum 14 znaków**
-2. Unikaj znaków specjalnych, które mogą być źle interpretowane
-3. Skopiuj hasło ponownie – nie przepisuj ręcznie
+Nazwa użytkownika albo hasło nie zgadzają się z tym, co jest w drukarce. Wycofaj urządzenie z eksploatacji poleceniem **~PMa** i przejdź konfigurację od nowa.
 
-### Problem: Drukarka nadal blokuje WiFi po konfiguracji
+### Po konfiguracji nie drukuje z systemu magazynowego
 
-**Rozwiązanie:**
-1. Wykonaj **pełny restart** drukarki (wyłącz zasilanie na 30 sekund)
-2. Sprawdź czy konfiguracja WiFi jest włączona w sterowniku
-3. Skonfiguruj sieć WiFi ponownie przez Zebra Setup Utilities
+Porty TCP/IP Raw nie zostały włączone. Powtórz konfigurację z włączonym przełącznikiem portów surowych.
+
+### Nie mogę zaktualizować oprogramowania drukarki
+
+Sprawdź, czy podczas konfiguracji włączono zgodę na aktualizacje firmware. Bez niej tryb chroniony blokuje wgranie nowej wersji.
+
+### Radio dalej wyłączone po konfiguracji
+
+Wykonaj pełny restart drukarki (zasilanie odłączone na 30 sekund) i skonfiguruj sieć bezprzewodową normalną drogą.
 
 ---
 
-## Podsumowanie – co musisz wiedzieć
+## Podsumowanie
 
-- **Co:** obowiązkowa konfiguracja zabezpieczeń
-- **Kiedy:** od 1 sierpnia 2025
-- **Które drukarki:** wszystkie z WiFi/Bluetooth (EMEA)
-- **Hasło:** minimum 14 znaków
-- **Narzędzie:** Printer Setup Utilities + Security Setup Wizard
-- **Połączenie:** wymagane USB (nie WiFi)
-- **Czas:** 5-10 minut
+- **Kogo dotyczy:** drukarki sprzedane w EMEA po 1 sierpnia 2025 z Link-OS 7.4.2 lub nowszym
+- **Objaw:** hasło 1234 nie działa, drukarka czeka na konfigurację
+- **Kreator:** zebra.com/asr, dla Windows dodatkowo Nucleus Connector w wersji EMEA
+- **Połączenie:** pierwsza konfiguracja wyłącznie przez USB
+- **Ustaw od razu:** porty TCP/IP Raw i zgodę na aktualizacje firmware
+- **Sprawdź wynik:** status 0 znaczy gotowe, 100 i 101 to złe hasło
+- **Złe hasło:** tryb wycofania z eksploatacji (~PMa), nie reset fabryczny
+- **Flota:** dublowanie USB od Link-OS 7.6 albo jeden plik wysyłany po kolei
 
 ---
 
 ## Obejrzyj poradnik wideo
-
-Przygotowaliśmy **film instruktażowy** pokazujący krok po kroku jak skonfigurować drukarkę zgodnie z dyrektywą RED:
 
 > 🎬 **[Dyrektywa RED – co oznacza dla drukarek Zebra? →](/poradniki-wideo)** — obejrzyj na naszym kanale poradników wideo
 
@@ -29093,7 +29117,7 @@ Przygotowaliśmy **film instruktażowy** pokazujący krok po kroku jak skonfigur
 
 ## Potrzebujesz pomocy?
 
-Jeśli masz problemy z konfiguracją lub Twoja drukarka nadal nie działa:
+Konfigurujemy drukarki objęte trybem chronionym na co dzień — także zdalnie, razem z ustawieniem portów pod system klienta.
 
 > 📞 **Zadzwoń:** +48 601 619 898 — pomożemy skonfigurować drukarkę zdalnie
 
@@ -29101,10 +29125,7 @@ Jeśli masz problemy z konfiguracją lub Twoja drukarka nadal nie działa:
 
 > 💬 **Szybka pomoc:** [Czat z AI →](/#czat) — diagnostyka 24/7
 
-Jako **autoryzowany serwis Zebra** pomagamy w konfiguracji drukarek zgodnie z dyrektywą EU RED. Oferujemy:
-- Zdalne wsparcie konfiguracyjne
-- Masowe wdrożenia dla firm
-- Szkolenia z zakresu cyberbezpieczeństwa
+Jako **autoryzowany serwis Zebra** prowadzimy też wdrożenia flotowe: przygotowanie pliku konfiguracyjnego pod środowisko klienta, konfigurację partii drukarek i przekazanie procedury działowi IT.
 `
   }
 ,
