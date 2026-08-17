@@ -66,7 +66,7 @@ async function translateToEnglish(text: string): Promise<string> {
     const response = await getOpenAI().chat.completions.create({
       model: 'gpt-4o-mini',
       temperature: 0.3,
-      max_tokens: 200,
+      max_tokens: 400,  // zapytanie do RAG to teraz kilka ostatnich wiadomości, nie jedna
       messages: [
         { role: 'system', content: 'Translate the following Polish text to English. Return ONLY the translation, nothing else.' },
         { role: 'user', content: text }
@@ -195,43 +195,74 @@ function aiConfirmsResolved(aiResponse: string): boolean {
   )
 }
 
+// Lista modeli zsynchronizowana z instrukcjami w bazie RAG (manuals_documents, 120 manuali),
+// żeby `${model}_Manual` trafiał w filtr dokładny. Doklejone modele bez manuala (ZP, GK888,
+// starsze GX/ZD) — RAG ich nie znajdzie, ale mamy je w statystykach i w logu `detected_model`.
+// KOLEJNOŚĆ = PRIORYTET: warianty dłuższe PRZED bazowymi (pierwszy trafiony ląduje w filtrze).
+const ZEBRA_MODELS = [
+  // Drukarki przemysłowe ZT
+  'zt111', 'zt220', 'zt230', 'zt231', 'zt410', 'zt411', 'zt420', 'zt421',
+  'zt510', 'zt610', 'zt620',
+  // Drukarki desktop ZD
+  'zd611d', 'zd611r', 'zd611t', 'zd611', 'zd220', 'zd230', 'zd410', 'zd411',
+  'zd420', 'zd421', 'zd500', 'zd510', 'zd620', 'zd621', 'zd888',
+  // Starsze desktop (bez manuala w bazie)
+  'zp450', 'zp500', 'zp505', 'zp550',
+  'gk420d', 'gk420t', 'gk420', 'gk888',
+  'gx420t', 'gx430t', 'gx420', 'gx430',
+  'gc420d', 'gc420t', 'gc420',
+  'tlp2824', 'tlp2844', 'lp2824', 'lp2844',
+  // Mobilne ZQ / QLN
+  'zq220plus', 'zq310plus', 'zq320plus', 'zq210', 'zq220', 'zq510', 'zq511', 'zq520',
+  'zq521', 'zq610', 'zq620', 'zq630',
+  'qln220', 'qln230', 'qln420',
+  // Drukarki kart
+  'zc100', 'zc10l', 'zc300', 'zc350', 'zc510',
+  'zxp1', 'zxp3', 'zxp7', 'zxp8', 'zxp9',
+  // Terminale — serie z zerem w środku (tc201/tc501/tc701) przed starszymi
+  'tc201', 'tc501', 'tc701', 'tc21', 'tc22', 'tc26', 'tc27', 'tc51',
+  'tc52', 'tc53', 'tc56', 'tc57', 'tc58', 'tc72', 'tc73', 'tc77',
+  'tc78',
+  'mc2200', 'mc2700', 'mc3300', 'mc3390', 'mc3400', 'mc3450', 'mc9200', 'mc9300',
+  'mc33', 'mc93', 'mc94',
+  // Tablety / healthcare / wearable
+  'et401', 'et60w', 'et65w', 'et40', 'et45', 'et60', 'et65', 'et80',
+  'et85',
+  'em45rfid', 'em45',
+  'hc20', 'hc25', 'hc50', 'hc55',
+  'fr55', 'l10axw', 'l10w', 'l10',
+  // Skanery DS/LI/LS/CS — warianty dłuższe przed bazowymi
+  'ds3608dpa', 'ds3608dpx', 'ds3678dpa', 'ds4608dpe', 'ds4678dpe', 'ds3608dp', 'ds3608er', 'ds3608hd',
+  'ds3608hp', 'ds3608sr', 'ds3608xr', 'ds3678dp', 'ds3678kd', 'ds3678xr', 'ds4608xd', 'ds4678xd',
+  'ds9908r', 'ds2208', 'ds2278', 'ds3608', 'ds3678', 'ds4608', 'ds4678', 'ds8108',
+  'ds8178', 'ds8208', 'ds8288', 'ds9308', 'ds9908',
+  'li2208', 'li4278', 'ls1203hd', 'ls1203', 'ls2208',
+  'cs3000', 'cs4070', 'cs6080',
+]
+
+// Klienci zapisują model inaczej niż katalog: „tc-27", „TC 27", „ZD.421", „zebra 411 zt".
+// Przed porównaniem z listą sklejamy serię z numerem i prostujemy odwróconą kolejność.
+const MODEL_PREFIXES = 'zxp|tlp|qln|zt|zd|zp|zq|zc|gk|gx|gc|lp|tc|mc|et|em|hc|fr|ds|li|ls|cs'
+const REVERSED_MODEL_RE = new RegExp(`\\b(\\d{2,4})\\s*(${MODEL_PREFIXES})\\b`, 'g')
+const SPLIT_MODEL_RE = new RegExp(`\\b(${MODEL_PREFIXES})[\\s\\-.]+(\\d)`, 'g')
+
+function normalizeModelText(query: string): string {
+  return (query || '')
+    .toLowerCase()
+    .replace(REVERSED_MODEL_RE, '$2$1')   // „411 zt" → „zt411"
+    .replace(SPLIT_MODEL_RE, '$1$2')      // „tc-27", „tc 27" → „tc27"
+}
+
 // Helper function to detect printer model from query
 function detectPrinterModel(query: string): string[] {
   const models: string[] = []
-  const queryLower = query.toLowerCase()
+  const normalized = normalizeModelText(query)
 
-  // Common Zebra printer models - pełna lista
-  const printerModels = [
-    // ZT Series (przemysłowe)
-    'zt411', 'zt421', 'zt410', 'zt420', 'zt510', 'zt610', 'zt620',
-    'zt230', 'zt231', 'zt200', 'zt111',
-    // ZD Series (desktop)
-    'zd421', 'zd621', 'zd420', 'zd620', 'zd410', 'zd610',
-    'zd888', 'zd500', 'zd510', 'zd220', 'zd230',
-    // GK/GX Series (starsze desktop) — warianty dłuższe PRZED bazowymi (kolejność = priorytet)
-    'gk420d', 'gk420t', 'gk420', 'gx430d', 'gx430t', 'gx430',
-    'gx420d', 'gx420t', 'gx420', 'gc420d', 'gc420t', 'gc420',
-    // Mobilne
-    'zq510', 'zq520', 'zq511', 'zq521', 'zq610', 'zq620', 'zq630',
-    // Starsze
-    'tlp2844', 'lp2844', 'lp2824', 'tlp2824',
-    // Karty
-    'zc100', 'zc300', 'zc350', 'zxp1', 'zxp3', 'zxp7', 'zxp8', 'zxp9',
-    // Terminale — nowe serie z zerem w środku (tc201/tc501/tc701) przed starszymi
-    'tc201', 'tc501', 'tc701',
-    'tc21', 'tc26', 'tc22', 'tc27', 'tc51', 'tc52', 'tc53', 'tc56', 'tc57',
-    'tc58', 'tc72', 'tc73', 'tc77', 'tc78',
-    'mc33', 'mc93', 'mc94', 'mc2200', 'mc2700', 'mc3300', 'mc3400', 'mc9300',
-    // Skanery (DS/LS/LI/CS) — warianty dłuższe przed bazowymi
-    'ds2278', 'ds2208', 'ds4608dpe', 'ds4608xd', 'ds4608', 'ds4678dpe', 'ds4678xd', 'ds4678',
-    'ds8108', 'ds8208', 'ds8178', 'ds8288', 'ds9908r', 'ds9908', 'ds9308',
-    'ds3608', 'ds3678', 'li4278', 'li2208', 'ls1203hd', 'ls1203', 'ls2208',
-    'cs4070', 'cs6080', 'cs3000',
-  ]
-
-  // Check for each model
-  for (const model of printerModels) {
-    if (queryLower.includes(model)) {
+  for (const model of ZEBRA_MODELS) {
+    // Granice: model nie może być końcówką innego słowa („zpl100" ≠ L10) ani urwanym
+    // prefiksem dłuższego numeru („mc3300" to MC3300, nie MC33).
+    const re = new RegExp(`(?<![a-z0-9])${model}(?![0-9])`)
+    if (re.test(normalized)) {
       models.push(model.toUpperCase())
     }
   }
@@ -256,7 +287,166 @@ function citationMatchesModel(citation: { title: string; uri: string }, detected
 }
 
 // Funkcja do wyszukiwania w Supabase manuals (vector search)
-async function searchManuals(query: string): Promise<{
+// Wyciąga treść wiadomości użytkownika z historii rozmowy (najstarsze → najnowsze)
+function userMessagesFrom(messages: any[]): string[] {
+  return (Array.isArray(messages) ? messages : [])
+    .filter((m: any) => m?.role === 'user' && typeof m.content === 'string')
+    .map((m: any) => m.content.trim())
+    .filter(Boolean)
+}
+
+// Zapytanie do RAG budujemy z kontekstu rozmowy, nie z jednej wiadomości.
+// W trakcie diagnozy klient odpisuje „nadal", „nie", „dalej nic" — samo to nigdy nie trafi
+// w instrukcję, więc 81% odpowiedzi powstawało bez ani jednego fragmentu manuala.
+// Kotwicą jest PIERWSZA wiadomość (opis problemu); dokładamy ostatnie konkretne wypowiedzi
+// (≥ MIN_SUBSTANTIVE znaków — krótkie potwierdzenia to sam szum) i zawsze wiadomość bieżącą.
+const MIN_SUBSTANTIVE = 15
+
+function buildRagQuery(messages: any[], maxUserTurns = 3, maxChars = 600): string {
+  const users = userMessagesFrom(messages)
+  if (users.length === 0) return ''
+
+  const current = users[users.length - 1]
+  const problem = users[0]
+  const substantive = users.slice(0, -1).filter((m) => m.length >= MIN_SUBSTANTIVE)
+
+  const picked: string[] = []
+  for (const m of [problem, ...substantive.slice(-maxUserTurns), current]) {
+    const trimmed = m.length > 300 ? m.slice(0, 300) : m
+    if (!picked.includes(trimmed)) picked.push(trimmed)
+  }
+
+  const query = picked.join(' ')
+  return query.length > maxChars ? query.slice(-maxChars) : query
+}
+
+// Czy wykryte nazwy to jedno urządzenie (np. ['ZD611T','ZD611']), czy wyliczanka kilku
+// (np. ['TC52','TC58','ZD421'] z pytania AI „podaj model, np. …")?
+function isSingleDevice(models: string[]): boolean {
+  if (models.length <= 1) return true
+  const longest = models.reduce((a, b) => (b.length > a.length ? b : a))
+  return models.every((m) => longest.startsWith(m))
+}
+
+// Model urządzenia zapamiętany z CAŁEJ rozmowy — klient podaje go raz, zwykle w 1–2 wiadomości.
+// Wygrywa najświeższa wzmianka (klient może w trakcie przejść na inne urządzenie).
+function detectModelsInConversation(messages: any[]): string[] {
+  const userMsgs = userMessagesFrom(messages)
+  for (let i = userMsgs.length - 1; i >= 0; i--) {
+    const found = detectPrinterModel(userMsgs[i])
+    if (found.length > 0) return found
+  }
+
+  // Awaryjnie: model bywa tylko w wypowiedzi AI — klient odpisał „D" na pytanie „ZD421d czy t?",
+  // albo podał model w turze, która nie zapisała się do logów. Bierzemy TYLKO wiadomości
+  // wskazujące jedno urządzenie — inaczej złapalibyśmy wyliczankę z „podaj model, np. TC52 / ZD421 / …".
+  const aiMsgs = (Array.isArray(messages) ? messages : [])
+    .filter((m: any) => m?.role === 'assistant' && typeof m.content === 'string')
+    .map((m: any) => m.content)
+  for (let i = aiMsgs.length - 1; i >= 0; i--) {
+    const found = detectPrinterModel(aiMsgs[i])
+    if (found.length > 0 && isSingleDevice(found)) {
+      console.log(`🧠 Model odzyskany z wypowiedzi AI: ${found.join(', ')}`)
+      return found
+    }
+  }
+
+  return []
+}
+
+// === PREFILL FORMULARZA ZGŁOSZENIA ===
+// Gdy diagnoza kończy się skierowaniem do serwisu, wyciągamy z rozmowy to, co AI wie lepiej
+// od klienta: urządzenie, numer seryjny, gwarancję i opis usterki z listą prób.
+// Danych kontaktowych i adresu NIE dotykamy — tam liczy się walidacja i autouzupełnianie
+// przeglądarki, a klient w środku awarii pisze „niewidzi", „atykieta pustawyszla".
+export interface RepairPrefill {
+  deviceType: 'drukarka' | 'terminal' | 'skaner' | 'tablet' | 'akcesoria' | 'inne'
+  deviceModel: string
+  serialNumber: string
+  isWarranty: 'tak' | 'nie' | 'nie_wiem'
+  urgency: 'standard' | 'express'
+  issueDescription: string
+}
+
+const DEVICE_TYPES = ['drukarka', 'terminal', 'skaner', 'tablet', 'akcesoria', 'inne']
+
+async function buildRepairPrefill(
+  messages: any[],
+  aiResponse: string,
+  conversationModels: string[]
+): Promise<RepairPrefill | null> {
+  try {
+    const transcript = (Array.isArray(messages) ? messages : [])
+      .filter((m: any) => (m?.role === 'user' || m?.role === 'assistant') && typeof m.content === 'string')
+      .slice(-14)
+      .map((m: any) => `${m.role === 'user' ? 'KLIENT' : 'SERWISANT'}: ${m.content.slice(0, 900)}`)
+      .join('\n')
+
+    const completion = await getOpenAI().chat.completions.create({
+      model: 'gpt-4o-mini',
+      temperature: 0.2,
+      max_tokens: 500,
+      response_format: { type: 'json_object' },
+      messages: [
+        {
+          role: 'system',
+          content: `Na podstawie rozmowy serwisowej wypełnij zgłoszenie naprawy. Zwróć WYŁĄCZNIE JSON:
+{
+  "deviceType": "drukarka|terminal|skaner|tablet|akcesoria|inne",
+  "deviceModel": "dokładny model, np. ZD421d, ZT411, TC27 — pusty string jeśli nie padł",
+  "serialNumber": "numer seryjny jeśli klient go podał, inaczej pusty string",
+  "isWarranty": "tak|nie|nie_wiem",
+  "urgency": "standard|express",
+  "issueDescription": "opis usterki po polsku"
+}
+
+Zasady dla issueDescription:
+- 3-6 zdań, minimum 100 znaków, rzeczowo, językiem zgłoszenia serwisowego
+- objaw + co już sprawdzono i z jakim skutkiem (to najcenniejsza część dla technika)
+- pisz z perspektywy klienta („drukarka nie jest wykrywana przez komputer"), nie „klient mówi że"
+- żadnych pozdrowień, marketingu, cen ani obietnic naprawy
+- nie zmyślaj: jeśli czegoś nie było w rozmowie, pomiń
+
+isWarranty: "tak"/"nie" tylko gdy klient wprost powiedział; w przeciwnym razie "nie_wiem".
+urgency: "express" tylko gdy klient wprost mówił o pilności/przestoju produkcji; inaczej "standard".`,
+        },
+        { role: 'user', content: `${transcript}\n\nOSTATNIA ODPOWIEDŹ SERWISANTA:\n${aiResponse.slice(0, 1200)}` },
+      ],
+    })
+
+    const raw = completion.choices[0]?.message?.content
+    if (!raw) return null
+    const parsed = JSON.parse(raw)
+
+    // Model bierzemy z naszej detekcji (pewniejsza), a z ekstrakcji tylko gdy przechodzi tę
+    // samą weryfikację — inaczej do formularza trafiłby śmieć, który on i tak odrzuci.
+    let deviceModel = ''
+    const extracted = typeof parsed.deviceModel === 'string' ? parsed.deviceModel.trim() : ''
+    if (extracted && detectPrinterModel(extracted).length > 0) {
+      deviceModel = extracted
+    } else if (conversationModels.length > 0) {
+      deviceModel = conversationModels[0]
+    }
+
+    const issueDescription = typeof parsed.issueDescription === 'string' ? parsed.issueDescription.trim() : ''
+    // Formularz wymaga min. 20 znaków — krótszy opis jest bezużyteczny, lepiej nie podstawiać nic
+    if (issueDescription.length < 20) return null
+
+    return {
+      deviceType: DEVICE_TYPES.includes(parsed.deviceType) ? parsed.deviceType : 'inne',
+      deviceModel,
+      serialNumber: typeof parsed.serialNumber === 'string' ? parsed.serialNumber.trim().slice(0, 60) : '',
+      isWarranty: ['tak', 'nie', 'nie_wiem'].includes(parsed.isWarranty) ? parsed.isWarranty : 'nie_wiem',
+      urgency: parsed.urgency === 'express' ? 'express' : 'standard',
+      issueDescription: issueDescription.slice(0, 1500),
+    } as RepairPrefill
+  } catch (error: any) {
+    console.error('❌ Błąd budowania prefilla formularza:', error?.message || error)
+    return null
+  }
+}
+
+async function searchManuals(query: string, modelsHint: string[] = []): Promise<{
   context: string
   found: boolean
   sources: Array<{ manual: string; page: number | null; sim: number }>
@@ -264,8 +454,8 @@ async function searchManuals(query: string): Promise<{
   try {
     console.log('🔍 Supabase manuals search dla:', query)
 
-    // Detect printer model from query
-    const detectedModels = detectPrinterModel(query)
+    // Model z bieżącego zapytania, a gdy go tam nie ma — zapamiętany z wcześniejszych wiadomości
+    const detectedModels = modelsHint.length > 0 ? modelsHint : detectPrinterModel(query)
 
     // Tłumacz polskie zapytanie na angielski (manuali są po angielsku)
     let translatedQuery = await translateToEnglish(query)
@@ -937,9 +1127,42 @@ BAZA WIEDZY - MANUELE ZEBRA:
 Jeśli użytkownik pyta o konkretny problem techniczny, ZAWSZE sprawdź czy w dostarczonym kontekście z bazy wiedzy (poniżej) znajdują się relevantne informacje. Jeśli tak, użyj ich aby udzielić precyzyjnej odpowiedzi, cytując manual.`
 
 // Pre-filtr: sprawdza czy wiadomość jest potencjalnie związana z Zebra/drukarkami/skanerami
+// Anty-manipulacja: próby wyciągnięcia chata poza temat (jailbreak, spam).
+// Sprawdzana przy KAŻDEJ wiadomości — także w trakcie diagnozy — więc wzorce muszą być
+// jednoznaczne. Słowa, które normalnie padają przy naprawie drukarki, zostały zawężone:
+//   'prawo'   → „przesuń nadruk w prawo"
+//   'losow'   → „drukarka losowo się zawiesza"
+//   'kuchni'  → „drukarka w kuchni nie drukuje" (gastronomia to nasz klient)
+//   'przepis' → „przepisałem ustawienia ze starej drukarki"
+function isManipulationAttempt(message: string): boolean {
+  const msgLower = (message || '').toLowerCase()
+
+  const manipulationPatterns = [
+    'przepis na', 'przepis kulinarn', 'gotowanie', 'pieczenie', 'ciasto', 'kucharz',
+    'napisz wiersz', 'napisz opowiadanie', 'napisz historię', 'napisz bajkę', 'napisz list',
+    'wymyśl', 'wyobraź sobie', 'stwórz opowieść', 'stwórz historię',
+    'w kontekście', 'jak wykorzystać zebra w',
+    'opowiedz żart', 'opowiedz dowcip', 'zagadka',
+    'quiz', 'zabawa', 'losowanie', 'wylosuj',
+    'medycyn', 'prawnik', 'kancelari', 'prawo pracy', 'prawo cywiln', 'porad prawn',
+    'finans', 'polityk', 'religia',
+    'bitcoin', 'crypto', 'kryptowalut',
+    'sex', 'porn', 'viagra', 'casino',
+  ]
+
+  for (const pattern of manipulationPatterns) {
+    if (msgLower.includes(pattern)) {
+      console.log(`🚫 Manipulation detected: "${pattern}" in message`)
+      return true
+    }
+  }
+
+  return false
+}
+
 function isZebraRelated(message: string): boolean {
   const msgLower = message.toLowerCase()
-  
+
   // Słowa kluczowe związane z Zebra i urządzeniami
   const zebraKeywords = [
     // Marka
@@ -1009,23 +1232,7 @@ function isZebraRelated(message: string): boolean {
   ]
   
   // Anty-manipulacja: odrzuć nawet jeśli zawiera słowa Zebra
-  const manipulationPatterns = [
-    'przepis', 'gotowanie', 'pieczenie', 'ciasto', 'kuchni', 'kucharz',
-    'napisz wiersz', 'napisz opowiadanie', 'napisz historię', 'napisz bajkę', 'napisz list',
-    'wymyśl', 'wyobraź sobie', 'stwórz opowieść', 'stwórz historię',
-    'w kontekście', 'jak wykorzystać zebra w',
-    'opowiedz żart', 'opowiedz dowcip', 'zagadka',
-    'quiz', 'zabawa', 'losow',
-    'medycyn', 'prawo', 'finans', 'polityk', 'religia',
-    'bitcoin', 'crypto', 'kryptowalut',
-    'sex', 'porn', 'viagra', 'casino',
-  ]
-  for (const pattern of manipulationPatterns) {
-    if (msgLower.includes(pattern)) {
-      console.log(`🚫 Manipulation detected: "${pattern}" in message`)
-      return false
-    }
-  }
+  if (isManipulationAttempt(message)) return false
 
   // Sprawdź czy zawiera słowa kluczowe
   for (const keyword of zebraKeywords) {
@@ -1085,9 +1292,19 @@ export async function POST(req: NextRequest) {
 
     // 🚫 PRE-FILTR: Odrzuć oczywiste off-topic ZANIM wywołamy drogie modele AI
     // ALE: jeśli są załączniki (zdjęcia/wideo), przepuść - użytkownik może pokazywać urządzenie Zebra
-    const isRelated = isZebraRelated(lastUserMessage)
-    console.log(`🔍 Pre-filter check: "${lastUserMessage.substring(0, 60)}..." | messages: ${messages.length} | isRelated: ${isRelated} | hasAttachments: ${hasAttachments}`)
-    
+    //
+    // ⚠️ Filtr TEMATYCZNY działa TYLKO na pierwszą wiadomość klienta. W trakcie diagnozy klient
+    // odpisuje krótko i bez słów-kluczy („robiłem to i nie przesuwało w ogóle", „nadal to samo")
+    // — takie wiadomości były wyrzucane jako off-topic i ucinały rozmowę w połowie
+    // (realny przypadek 10.08.2026). Anty-manipulacja leci dalej przy każdej wiadomości.
+    const userTurns = Array.isArray(messages)
+      ? messages.filter((m: any) => m?.role === 'user').length
+      : 1
+    const isFirstUserMessage = userTurns <= 1
+    const isManipulation = isManipulationAttempt(lastUserMessage)
+    const isRelated = isFirstUserMessage ? isZebraRelated(lastUserMessage) : !isManipulation
+    console.log(`🔍 Pre-filter check: "${lastUserMessage.substring(0, 60)}..." | messages: ${messages.length} | tury usera: ${userTurns} | pierwsza: ${isFirstUserMessage} | isRelated: ${isRelated} | hasAttachments: ${hasAttachments}`)
+
     if (lastUserMessage && !isRelated && !hasAttachments) {
       console.log('🚫 Off-topic message rejected:', lastUserMessage.substring(0, 50))
       
@@ -1190,11 +1407,20 @@ export async function POST(req: NextRequest) {
     let ragSources: Array<{ manual: string; page: number | null; sim: number }> = []
     let citations: Array<{ title: string; uri: string; pageNumber?: number }> = []
 
-    const needsRAG = !blogFound || lastUserMessage.match(/zt\d|zd\d|gc\d|gk\d|gx\d|tc\d|mc\d|ds\d|zq\d|zc\d|zxp\d|li\d|ls\d|cs\d|et\d|wt\d/i)
+    // Kontekst rozmowy zamiast pojedynczej wiadomości — patrz buildRagQuery/detectModelsInConversation
+    const ragQuery = buildRagQuery(messages) || lastUserMessage
+    const conversationModels = detectModelsInConversation(messages)
+    if (conversationModels.length > 0) {
+      console.log(`🧠 Model zapamiętany z rozmowy: ${conversationModels.join(', ')}`)
+    }
 
-    if (lastUserMessage && needsRAG) {
-      console.log('🔍 Szukam w Supabase manuals dla:', lastUserMessage)
-      const searchResult = await searchManuals(lastUserMessage)
+    // Gdy znamy model, instrukcja bije blog — wcześniej stał tu regex na surowym tekście,
+    // który przepuszczał „tc-27" (myślnik) i rozmowa szła na nietrafiony wpis blogowy.
+    const needsRAG = !blogFound || conversationModels.length > 0
+
+    if (ragQuery && needsRAG) {
+      console.log('🔍 Szukam w Supabase manuals dla:', ragQuery)
+      const searchResult = await searchManuals(ragQuery, conversationModels)
 
       knowledgeContext = searchResult.context
       ragContextFound = searchResult.found
@@ -1360,9 +1586,30 @@ ZRÓB DOKŁADNIE TAK - WKLEJ [BARCODE:...] W ODPOWIEDŹ!`
           const uiManualLinks = !isTroubleshooting ? manualLinks : []
 
           // Zawsze odsyłamy metadane (z logId), nawet bez citations — front potrzebuje logId do oceny 👍/👎
+          // Czy front pokaże CTA „Wyślij do serwisu"? Warunek lustrzany do AIChatBox
+          // (shouldShowFormButton) — liczymy go tu, żeby (a) nie płacić za ekstrakcję
+          // prefilla przy każdej wiadomości, (b) móc zalogować wyświetlenie CTA.
+          const ctaWillShow =
+            !fullAiResponse.includes('?') &&
+            !fullAiResponse.includes('[INFO_ONLY]') &&
+            !problemResolved &&
+            (fullAiResponse.includes('[SERIOUS_ISSUE]') ||
+              /wysłać do serwisu|wysłanie do serwisu|wysłać drukarkę|wysłać urządzenie/i.test(fullAiResponse) ||
+              messages.length + 1 >= 6)
+
+          const repairPrefill = ctaWillShow
+            ? await buildRepairPrefill(messages, fullAiResponse, conversationModels)
+            : null
+
+          if (repairPrefill) {
+            console.log(`📋 Prefill formularza: ${repairPrefill.deviceType} ${repairPrefill.deviceModel} (opis ${repairPrefill.issueDescription.length} zn.)`)
+          }
+
           const dataJson = JSON.stringify({
             logId,
             resolved: problemResolved, // gdy true → front NIE pokazuje CTA „Wyślij do serwisu"
+            ctaWillShow,
+            repairPrefill,
             citations: finalCitations,
             blogLinks: uiBlogLinks,
             manualLinks: uiManualLinks,
@@ -1388,7 +1635,7 @@ ZRÓB DOKŁADNIE TAK - WKLEJ [BARCODE:...] W ODPOWIEDŹ!`
             responseTimeMs: responseTime,
             modelUsed: `gpt-5.5${hasAttachments ? ' (vision)' : ''} + supabase-rag`,
             userIp,
-            detectedModel: detectPrinterModel(lastUserMessage).join(',') || null,
+            detectedModel: conversationModels.join(',') || null,  // model z całej rozmowy — tak jak widzi go RAG
             ragSources,
           }).catch((err: any) => console.error('Błąd zapisywania logu czatu:', err))
 

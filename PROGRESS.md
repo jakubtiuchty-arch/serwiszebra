@@ -373,3 +373,72 @@ Checkpoint postępu prac. Najnowszy wpis na górze. Po każdym etapie/buildzie d
 - Nowy cron `/api/cron/mail-archive`: o 17:00 czasu polskiego wątki `new`/`drafted` → `archived`; rano zakładka Odebrane czysta. Harmonogram Vercel `0 15,16 * * *` (UTC) + guard godziny Europe/Warsaw w kodzie (DST-proof); `?force=1` do ręcznego testu.
 - Bezpieczne: mail-sync przywraca zarchiwizowany wątek do skrzynki przy nowym mailu klienta (status wraca na `new`, potwierdzone w kodzie linia ~247).
 - Guard przetestowany lokalnie (skipped poza 17:00). Build EXIT=0, dev :3002. Czeka na commit+push.
+
+## 2026-08-17 — ChatAI: analiza tygodnia + naprawa pre-filtra i RAG
+- **Analiza logów 10–17.08** (37 par pytanie/odpowiedź, 13 sesji, 11 IP): CTA „Wyślij do serwisu" pokazało się **3×** (23% sesji, zawsze przez `[SERIOUS_ISSUE]`), RAG sięgnął do instrukcji **7/37 = 19%** (33 fragmenty: ZD421 20, ZT411 5, ZC300 5, MC3300 3). Śr. odpowiedź 8,7 s. Zero ocen 👍/👎. Dominujący temat: czujnik nośnika / kalibracja (4 z 13 sesji).
+- **Konwersje**: 2 zgłoszenia w `repair_requests` pochodzą z chatu (ZT411 12.08, ZD421 13.08 — Zamorski, wycena 648,55 zł). Obie **bez wyświetlonego CTA** — klienci sami znaleźli formularz. Wszystkie 3 sesje z CTA dały zero zgłoszeń.
+- **FIX 1 — pre-filtr off-topic ucinał rozmowy w połowie.** `isZebraRelated()` patrzył tylko na ostatnią wiadomość i przepuszczał wyłącznie teksty <50 zn. lub ze słowem-kluczem; 10.08 realny klient dostał „jestem asystentem wyłącznie od Zebra" w 1 ms na „robiłem to i nie przesuwało w ogóle". Teraz filtr **tematyczny** działa tylko na PIERWSZĄ wiadomość klienta (`userTurns <= 1`); anty-manipulacja (`isManipulationAttempt`, wydzielona funkcja) leci przy każdej.
+- Przy okazji zawężone wzorce, które kasowały normalne rozmowy serwisowe: `prawo` (→ „przesuń w prawo") na prawnik/kancelari/prawo pracy, `losow` (→ „losowo się zawiesza") na losowanie/wylosuj, `przepis` (→ „przepisałem ustawienia") na „przepis na", usunięte `kuchni` (gastronomia to klient).
+- **FIX 2 — RAG był ślepy na kontekst rozmowy.** `searchManuals(lastUserMessage)` dostawał samo „Nadal" / „nie" → 0 trafień; wszystkie 7 trafień tygodnia to dokładnie te wiadomości, w których nazwa modelu padła w bieżącej frazie. Dodane: `buildRagQuery()` (kotwica = pierwsza wiadomość z opisem problemu + ostatnie wypowiedzi ≥15 zn. + bieżąca, max 600 zn.) i `detectModelsInConversation()` (model zapamiętany z całej rozmowy, wygrywa najświeższa wzmianka) przekazywany do `searchManuals(query, modelsHint)`. `saveChatLog.detected_model` zapisuje teraz model z rozmowy, nie z jednej frazy. `translateToEnglish` max_tokens 200→400.
+- **Test na żywym :3002, 6 przypadków — wszystkie OK**: 2× follow-up bez słowa-klucza przepuszczony (i od razu RAG: ZD421_Manual sim 0,59; ZT411_Manual 0,56), 2× off-topic/jailbreak nadal odrzucany w ~20 ms, 2× „Nadal"/„dalej nic" z modelem podanym 4 i 8 wiadomości wcześniej → MC3300_Manual (0,57) i ZT411_Manual (0,60). Wiersze testowe skasowane z `chat_logs`.
+- **Pomiar na realnym ruchu tygodnia**: kontekst modelu dostępny dla **22% → 43%** wiadomości (8/37 → 16/37).
+- ZNANE OGRANICZENIE (nietknięte): `detectPrinterModel` nie zna serii **ZP** (ZP450 — 9-turowa rozmowa 17.08 bez ani jednego fragmentu), gubi zapis z myślnikiem („tc-27") i odwrócony („zebra 411 zt"). To sufit dla FIX 2.
+- FIX 4 (gubione wpisy w `chat_logs` — ≥3 sesje zaczynają się w środku rozmowy) — czeka na pomysł usera.
+- tsc EXIT=0, build EXIT=0, dev :3002. NIEZACOMMITOWANE.
+
+## 2026-08-17 — ChatAI cd.: rozpoznawanie modeli zsynchronizowane z bazą RAG
+- **Lista modeli przepisana pod 120 manuali z `manuals_documents`** (`ZEBRA_MODELS`, 152 wpisy). Doszły całe rodziny, których wykrywanie nie znało mimo instrukcji w bazie: **ET40/45/60/65/80/85, EM45, HC20/25/50/55, L10, FR55, QLN220/230/420, MC3450, MC9200, ZC510, ZC10L, ZD411, ZD611D/R/T, ZQ210/220/310PLUS/320PLUS, ZXP-y, warianty DS3608/DS3678**. Poprawione błędy: `zt200`→`zt220`, `zd610`→`zd611`. Dołożone modele bez manuala (dla statystyk i `detected_model`): **seria ZP (450/500/505/550)**, GK888, starsze GX/ZD.
+- **Normalizacja zapisu** (`normalizeModelText`): „tc-27", „TC 27", „ZD.421" → sklejane; „zebra 411 zt" → „zt411" (odwrócona kolejność). Obie formy padły w realnym ruchu tygodnia i przechodziły bez wykrycia.
+- **Granice dopasowania**: zamiast `includes` regex `(?<![a-z0-9])model(?![0-9])` — „zpl100" nie jest już tabletem L10, a „mc3300" nie jest MC33.
+- **Odzyskiwanie modelu z wypowiedzi AI**: gdy klient nie napisał modelu w żadnej swojej wiadomości (odpisał „D" na „ZD421d czy t?", albo jego tura zaginęła w logach), bierzemy model z wiadomości asystenta — ale TYLKO gdy wskazuje jedno urządzenie (`isSingleDevice`), żeby nie złapać wyliczanki z „podaj model, np. TC52 / ZD421 / …".
+- **Bug przy okazji**: `needsRAG` sprawdzał regex `/tc\d|zd\d|…/` na SUROWYM tekście — „tc-27" nie pasowało, więc RAG był pomijany („blog wystarczy") na rzecz nietrafionego wpisu o KC401. Teraz `needsRAG = !blogFound || conversationModels.length > 0`.
+- **Testy**: 17/17 przypadków jednostkowych na `detectPrinterModel` (wyciągniętym żywcem ze źródła) + 9/9 end-to-end na :3002 — w tym „Zebra tc-27" → `TC27_Manual` 0,56 i „D" → `ZD421_Manual` 0,64 (model z wypowiedzi AI), a wyliczanka modeli w pytaniu AI poprawnie NIE staje się podpowiedzią. Wiersze testowe skasowane z `chat_logs`.
+- **Efekt na realnym ruchu 10–17.08**: model rozpoznany dla **22% → 78%** wiadomości (8/37 → 29/37). Z tego realnie z manualem w bazie ~54% — **ZT410 i ZP450 nie mają instrukcji w RAG** (do rozważenia ingestia; ZT410 to częsty model w zgłoszeniach).
+- tsc EXIT=0, build EXIT=0, dev :3002. NIEZACOMMITOWANE.
+
+## 2026-08-17 — Prefill formularza z rozmowy AI + lejek CTA (3 etapy)
+**Etap 1 — odblokowanie formularza (`components/RepairForm.tsx`, `app/api/repair-request/route.ts`)**
+- `isZebraDevice` odrzucał **własne modele Zebry**: ZP450/ZP505, HC20/25/50/55, EM45, FR55 (brak prefiksów `zp`, `hc`, `em`, `fr`, `ws` na liście). Klient z ZP450 — ten sam, który 17.08 przeszedł 9 tur diagnostyki — dostałby „Serwisujemy tylko urządzenia marki Zebra". Prefiksy dodane.
+- `company` i `nip` (wymagane) sprawdzane teraz w kroku 1, a nie dopiero przy wysyłce w kroku 5.
+- Zgody RODO i regulaminu były walidowane WYŁĄCZNIE w przeglądarce i nigdzie nie zapisywane → lecą w `FormData`, są w zod API i w bazie (`privacy_consent`, `terms_consent`, `consents_at`).
+- `repair_number` dostał 2-cyfrowy sufiks (było `YYYYMMDDHHmm` — dwa zgłoszenia z tej samej minuty miały ten sam numer). Kolumna to `varchar(12)`, więc **do czasu migracji kod sam wraca do 12-znakowego numeru** (fallback na błąd `22001`, w obu endpointach).
+
+**Etap 2 — prefill (`buildRepairPrefill` w `app/api/chat/route.ts`, `lib/repair-prefill.ts`)**
+- Gdy odpowiedź kończy się skierowaniem do serwisu (`ctaWillShow`, warunek lustrzany do `shouldShowFormButton`), gpt-4o-mini wyciąga z rozmowy: `deviceType`, `deviceModel`, `serialNumber`, `isWarranty`, `urgency` i **opis usterki z listą tego, co już sprawdzono**. Leci w bloku `__CITATIONS__` jako `repairPrefill`.
+- Danych kontaktowych i adresu ŚWIADOMIE nie ruszamy — tam wygrywa autouzupełnianie przeglądarki i walidacja (kod `^\d{2}-\d{3}$`, NIP 10 cyfr), a klient w środku awarii pisze „niewidzi", „atykieta pustawyszla".
+- `deviceModel` bierzemy z własnej detekcji albo z ekstrakcji, ale tylko gdy przechodzi `detectPrinterModel` — do formularza nie trafi śmieć, który on odrzuci. Opis <20 zn. → brak prefilla (formularz wymaga min. 20).
+- Przekazanie: `CustomEvent('serwis:repair-prefill')` przez `lib/repair-prefill.ts` (czat i formularz są na tej samej stronie, ale bez wspólnego kontekstu). Formularz pokazuje baner „Uzupełniliśmy N pól…" i znacznik „z rozmowy" przy każdym podstawionym polu.
+
+**Etap 3 — pomiar (`app/api/chat-logs/cta/route.ts`, `supabase-chat-cta-events.sql`)**
+- Lejek `shown → clicked → prefill_applied → form_submitted` w tabeli `chat_cta_events` + widok `chat_cta_funnel`. Do tej pory liczbę wyświetleń CTA trzeba było odtwarzać z logiki komponentu. `form_submitted` niesie `repairId` i listę podstawionych pól. Telemetria nigdy nie blokuje UI — brak tabeli = HTTP 200 `skipped`.
+
+**Testy (zapisane w `scripts/test-chat-prefill-{unit,contract,e2e}.mjs`) — 89/89**
+- Jednostkowe 48/48: `isZebraDevice` (21 modeli przyjętych, 6 marek konkurencji odrzuconych), regresja `detectPrinterModel` 17/17, `buildRagQuery`. Kluczowy: **wszystkie 154 modele z listy czatu przechodzą walidację formularza** — prefill nie może zostać odrzucony.
+- Kontrakt 16/16 (literały, których tsc nie sprawdza): pola prefilla backend ↔ biblioteka ↔ formularz, znaczniki przy wszystkich polach, zgodność enumów, nazwa zdarzenia w jednym miejscu, zdarzenia CTA ↔ lista endpointu, walidacja kroków.
+- E2E 25/25 na żywym :3002: prefill z rozmowy o ZP450 (opis 355 zn., model przechodzi walidację), pytanie o specyfikację BEZ prefilla, 4 zdarzenia CTA + odrzucenie nieznanego, zgłoszenie z ZP450 przyjęte (przed zmianą niemożliwe), zły kod pocztowy i za krótki opis nadal odrzucane. Dane testowe posprzątane (2 zgłoszenia, 2 konta auth, profile, logi).
+- E2E wyłapał realny błąd w trakcie: sufiks numeru przepełniał `varchar(12)` → stąd fallback.
+
+**DO URUCHOMIENIA PRZEZ USERA (bez tego działają fallbacki, nic się nie psuje):**
+1. `supabase-repair-consents.sql` — kolumny zgód + `repair_number` na `VARCHAR(20)`
+2. `supabase-chat-cta-events.sql` — tabela lejka + widok
+Po migracji warto puścić `node scripts/test-chat-prefill-e2e.mjs` — testy same wykryją, że fallbacki już nie są potrzebne.
+
+- tsc EXIT=0, build EXIT=0, dev :3002. NIEZACOMMITOWANE.
+
+## 2026-08-17 — Migracje uruchomione, testy po migracji: 92/92
+- User wykonał `supabase-repair-consents.sql` i `supabase-chat-cta-events.sql` (RLS włączone przy tworzeniu tabeli — service role je omija, więc zapis telemetrii działa).
+- **Bug wyłapany przez e2e po migracji**: zgody wchodziły jako `false` mimo wysłania `'true'` — dodałem je do zod i do bazy, ale NIE do wyciągania z `FormData` w `app/api/repair-request/route.ts` (obiekt `data` budowany polami `formData.get(...)`). Dopisane `privacyConsent`/`termsConsent` → `privacy=true terms=true` potwierdzone w bazie.
+- Potwierdzone po migracji: numery zgłoszeń RÓŻNE mimo tej samej minuty (`20260817133764` vs `20260817133792`), format 14 znaków, zdarzenia CTA faktycznie zapisywane (nie `skipped`), `consents_at` ustawiany.
+- **Sonda RLS**: odczyt `chat_cta_events` kluczem anon → 0 wierszy, zapis → 401 `42501`. ALE widok `chat_cta_funnel` jest czytelny dla anon (widoki działają z uprawnieniami właściciela, RLS tabeli ich nie ogranicza). DO WYKONANIA: `REVOKE ALL ON chat_cta_funnel FROM anon, authenticated;` — same liczniki dzienne, ale to metryki biznesowe.
+- Wyniki: jednostkowe 48/48, kontrakt 16/16, e2e 28/28. tsc EXIT=0, build EXIT=0, dev :3002. NIEZACOMMITOWANE.
+
+## 2026-08-17 — Test przeglądarkowy (Playwright) + jedna komenda na wszystko
+- User poprosił, żeby test klikany zastąpić automatem: „ja bym miał tylko wynik". Playwright był już w `node_modules`.
+- **`scripts/test-chat-prefill-browser.mjs`** — headless Chrome, pełna droga klienta: 3 tury rozmowy o ZP450 → pojawia się CTA → klik → baner „Uzupełniliśmy 5 pól" → przejście kreatora (walidacja kroku 1 z NIP-em) → sprawdzenie podstawionych wartości NA WŁAŚCIWYCH KROKACH → adres, zgody, wysyłka → weryfikacja wiersza w Supabase i kompletu 4 zdarzeń w `chat_cta_events`. **25/25.**
+- Pułapka przy pisaniu testu: formularz to kreator — pola kroków 2 i 3 NIE ISTNIEJĄ w DOM, dopóki się na nie nie przejdzie. Pierwszy przebieg dał 7 fałszywych błędów (puste wartości), choć aplikacja działała poprawnie.
+- Potwierdzone w przeglądarce: opis od AI (393 zn.) trafia do bazy bez zmian, `isWarranty='nie'` wyciągnięte z „gwarancja juz minela", numer z sufiksem, zgody `true`, `form_submitted` wiąże `repairId` z sesją czatu.
+- **Bezpiecznik**: test odmawia startu poza localhost bez `--i-know-its-production` — na produkcji wysłałby maile do klienta i na jakub.tiuchty@takma.com.pl + handlowy@takma.com.pl. Lokalnie Resend odrzuca wysyłkę (403, klucz deweloperski nie ma domeny serwis-zebry.pl) — potwierdzone w logach.
+- **`scripts/test-chat.mjs`** — jedna komenda odpalająca 4 zestawy i drukująca werdykt: **117 sprawdzeń, ~70 s**. `--fast` pomija przeglądarkę (~30 s). Sam sprawdza, czy dev server stoi na :3002.
+- Wszystkie zestawy sprzątają po sobie: zgłoszenia, konta auth, profile, logi czatu, zdarzenia CTA.
+- DO WYKONANIA (z poprzedniego wpisu, wciąż otwarte): `REVOKE ALL ON chat_cta_funnel FROM anon, authenticated;`
+- NIEZACOMMITOWANE.

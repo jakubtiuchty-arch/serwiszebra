@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -17,11 +17,12 @@ import {
   Loader2
 } from 'lucide-react'
 import { trackRepairFormSubmit, trackRepairFormStart } from '@/lib/gtm'
+import { onRepairPrefill, trackCtaEvent, type RepairPrefill } from '@/lib/repair-prefill'
 
 // Lista wzorców modeli Zebra (case-insensitive)
 const ZEBRA_MODEL_PATTERNS = [
   // Drukarki biurkowe
-  /^zd/i, /^zt/i, /^zc/i, /^zq/i, /^zxp/i, 
+  /^zd/i, /^zt/i, /^zc/i, /^zq/i, /^zxp/i, /^zp/i,
   /^gk/i, /^gc/i, /^gx/i, /^gt/i,
   /^lp/i, /^tlp/i,
   // Drukarki przemysłowe
@@ -32,6 +33,8 @@ const ZEBRA_MODEL_PATTERNS = [
   /^rw/i, /^ql/i, /^p4t/i, /^rp/i, /^imz/i, /^ez/i,
   // Terminale mobilne
   /^tc/i, /^mc/i, /^wt/i, /^ec/i, /^ps/i, /^cc/i,
+  // Healthcare (HC20/HC25/HC50/HC55), wearable (WS/EM) i skanery pierścieniowe (FR)
+  /^hc/i, /^em/i, /^fr/i, /^ws/i,
   // Skanery
   /^ds/i, /^li/i, /^ls/i, /^cs/i, /^mt/i, /^mp/i,
   // Tablety
@@ -177,6 +180,10 @@ export default function RepairForm() {
 
   const [serialUnreadable, setSerialUnreadable] = useState(false)
 
+  // Pola uzupełnione z rozmowy z asystentem (etap 2: prefill zamiast przepisywania opisu)
+  const [prefilled, setPrefilled] = useState<string[]>([])
+  const [chatSessionId, setChatSessionId] = useState<string | null>(null)
+
   const {
     register,
     handleSubmit,
@@ -196,6 +203,38 @@ export default function RepairForm() {
 
   const formData = watch()
 
+  // Odbiór danych z czatu AI. Wypełniamy TYLKO to, co asystent ustalił w rozmowie —
+  // dane kontaktowe i adres zostawiamy przeglądarce (autouzupełnianie) i walidacji.
+  useEffect(() => {
+    return onRepairPrefill((prefill: RepairPrefill) => {
+      const applied: string[] = []
+
+      const apply = (field: keyof RepairFormData, value?: string) => {
+        if (!value) return
+        setValue(field, value as any, { shouldValidate: true, shouldDirty: true })
+        applied.push(field as string)
+      }
+
+      apply('deviceType', prefill.deviceType)
+      apply('deviceModel', prefill.deviceModel)
+      apply('serialNumber', prefill.serialNumber)
+      apply('isWarranty', prefill.isWarranty)
+      apply('urgency', prefill.urgency)
+      apply('issueDescription', prefill.issueDescription)
+
+      setPrefilled(applied)
+      setChatSessionId(prefill.chatSessionId || null)
+    })
+  }, [setValue])
+
+  // Znacznik „z rozmowy" przy etykiecie pola
+  const PrefillBadge = ({ field }: { field: string }) =>
+    prefilled.includes(field) ? (
+      <span className="ml-2 align-middle text-[11px] font-medium text-blue-700 bg-blue-50 border border-blue-200 rounded-full px-2 py-0.5">
+        z rozmowy
+      </span>
+    ) : null
+
   const steps = [
     { number: 1, title: 'Dane kontaktowe' },
     { number: 2, title: 'Szczegóły urządzenia' },
@@ -208,7 +247,9 @@ export default function RepairForm() {
     let fieldsToValidate: any[] = []
     
     if (currentStep === 1) {
-      fieldsToValidate = ['firstName', 'lastName', 'email', 'phone']
+      // company i nip też są wymagane — bez tego klient dowiadywał się o braku NIP-u
+      // dopiero przy wysyłce w kroku 5, po wypełnieniu całej reszty
+      fieldsToValidate = ['firstName', 'lastName', 'email', 'phone', 'company', 'nip']
     } else if (currentStep === 2) {
       fieldsToValidate = ['deviceType', 'deviceModel', 'serialNumber', 'isWarranty']
     } else if (currentStep === 3) {
@@ -315,6 +356,11 @@ export default function RepairForm() {
       formDataToSend.append('pickupDate', data.pickupDate)
       if (data.courierNotes) formDataToSend.append('courierNotes', data.courierNotes)
 
+      // Zgody — do tej pory sprawdzane tylko w przeglądarce i nigdzie nie zapisywane,
+      // więc w razie sporu nie było dowodu, że klient je zaznaczył
+      formDataToSend.append('privacyConsent', String(data.privacyConsent))
+      formDataToSend.append('termsConsent', String(data.termsConsent))
+
       // Dodaj zdjęcia (skompresowane)
       for (let i = 0; i < uploadedFiles.length; i++) {
         const compressed = await compressImage(uploadedFiles[i])
@@ -342,6 +388,14 @@ export default function RepairForm() {
 
       if (!response.ok) {
         throw new Error(result.error || 'Błąd podczas wysyłania zgłoszenia')
+      }
+
+      // Domknięcie lejka: zgłoszenie wysłane po rozmowie z asystentem
+      if (chatSessionId || prefilled.length > 0) {
+        trackCtaEvent('form_submitted', {
+          sessionId: chatSessionId || undefined,
+          meta: { repairId: result.requestId, prefilledFields: prefilled },
+        })
       }
 
       // ✨ ZMIANA: Zamiast redirect → pokaż lightbox
@@ -379,6 +433,23 @@ export default function RepairForm() {
             Wypełnij formularz, a kurier odbierze urządzenie z Twojego adresu - za darmo!
           </p>
         </div>
+
+        {/* Dane przeniesione z rozmowy z asystentem */}
+        {prefilled.length > 0 && (
+          <div className="mb-6 bg-white border border-gray-200 rounded-xl p-4 flex items-start gap-3">
+            <Check className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+            <div className="text-sm">
+              <p className="font-semibold text-gray-900 mb-1">
+                Uzupełniliśmy {prefilled.length}{' '}
+                {prefilled.length === 1 ? 'pole' : prefilled.length < 5 ? 'pola' : 'pól'} na podstawie Twojej rozmowy z asystentem
+              </p>
+              <p className="text-gray-600">
+                Opis usterki, urządzenie i to, co już sprawdziliśmy — nie musisz pisać tego drugi raz.
+                Przejrzyj kroki 2 i 3 i popraw, jeśli coś się nie zgadza.
+              </p>
+            </div>
+          </div>
+        )}
 
         {/* Progress Bar */}
         <div className="mb-10">
@@ -551,6 +622,7 @@ export default function RepairForm() {
                 <div>
                   <label htmlFor="deviceType" className="block text-sm font-medium text-gray-700 mb-2">
                     Typ urządzenia *
+                    <PrefillBadge field="deviceType" />
                   </label>
                   <select
                     {...register('deviceType')}
@@ -573,6 +645,7 @@ export default function RepairForm() {
                 <div>
                   <label htmlFor="deviceModel" className="block text-sm font-medium text-gray-700 mb-2">
                     Model urządzenia *
+                    <PrefillBadge field="deviceModel" />
                   </label>
                   <input
                     {...register('deviceModel')}
@@ -589,6 +662,7 @@ export default function RepairForm() {
                 <div>
                   <label htmlFor="serialNumber" className="block text-sm font-medium text-gray-700 mb-2">
                     Numer seryjny *
+                    <PrefillBadge field="serialNumber" />
                   </label>
                   <input
                     {...register('serialNumber')}
@@ -630,6 +704,7 @@ export default function RepairForm() {
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Czy urządzenie jest w gwarancji? *
+                    <PrefillBadge field="isWarranty" />
                   </label>
                   <div className="space-y-2">
                     {[
@@ -675,6 +750,7 @@ export default function RepairForm() {
                 <div>
                   <label htmlFor="issueDescription" className="block text-sm font-medium text-gray-700 mb-2">
                     Opisz problem z urządzeniem *
+                    <PrefillBadge field="issueDescription" />
                   </label>
                   <textarea
                     {...register('issueDescription')}
@@ -739,6 +815,7 @@ export default function RepairForm() {
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Priorytet naprawy *
+                    <PrefillBadge field="urgency" />
                   </label>
                   <div className="grid md:grid-cols-2 gap-3">
                     <label

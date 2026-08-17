@@ -19,7 +19,9 @@ function generateRepairNumber(): string {
   const parts = formatter.formatToParts(now)
   const get = (type: string) => parts.find(p => p.type === type)?.value || ''
   
-  return `${get('year')}${get('month')}${get('day')}${get('hour')}${get('minute')}`
+  // Sufiks: dwa zgłoszenia z tej samej minuty nie mogą dostać tego samego numeru
+  const suffix = String(Math.floor(Math.random() * 100)).padStart(2, '0')
+  return `${get('year')}${get('month')}${get('day')}${get('hour')}${get('minute')}${suffix}`
 }
 
 export async function GET() {
@@ -118,11 +120,21 @@ export async function POST(request: NextRequest) {
 
     console.log('📝 Dane do zapisu:', JSON.stringify(repairData, null, 2))
 
-    const { data, error } = await supabase
+    let { data, error } = await supabase
       .from('repair_requests')
       .insert(repairData)
       .select()
       .single()
+
+    // repair_number nie mieści się w kolumnie (varchar(12) sprzed rozszerzenia) → numer bez sufiksu
+    if (error && error.code === '22001') {
+      console.warn('⚠️ Kolumna repair_number za wąska — uruchom supabase-repair-consents.sql. Numer bez sufiksu antykolizyjnego.')
+      ;({ data, error } = await supabase
+        .from('repair_requests')
+        .insert({ ...repairData, repair_number: repairNumber.slice(0, 12) })
+        .select()
+        .single())
+    }
 
     if (error) {
       console.error('❌ BŁĄD:', error)

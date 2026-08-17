@@ -19,6 +19,7 @@ import {
 } from 'lucide-react'
 import { trackChatOpen, trackChatMessage } from '@/lib/gtm'
 import { trackAIChatOpen, trackAIChatMessage } from '@/lib/analytics'
+import { emitRepairPrefill, trackCtaEvent, prefilledFields, type RepairPrefill } from '@/lib/repair-prefill'
 
 interface Citation {
   title: string
@@ -53,6 +54,7 @@ interface Message {
   logId?: string            // ID logu w bazie — potrzebne do oceny 👍/👎
   feedback?: 'up' | 'down'  // ocena wystawiona przez użytkownika
   resolved?: boolean        // backend wykrył, że problem rozwiązany → nie pokazuj CTA „Wyślij do serwisu"
+  repairPrefill?: RepairPrefill | null  // dane do wstępnego wypełnienia formularza zgłoszenia
 }
 
 const placeholders = [
@@ -180,6 +182,20 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
     !problemResolved &&  // ❌ NIE pokazuj CTA gdy problem już rozwiązany (bez sensu wysyłać sprawny sprzęt)
     (isSeriousIssue || suggestsRepair || messageCount >= 6)  // ✨ Pokaż wcześniej dla poważnych usterek lub sugestii naprawy
 
+  // Zaloguj wyświetlenie CTA — raz na odpowiedź (klucz: logId), żeby przerysowania nie liczyły się kilka razy
+  const ctaLoggedForRef = useRef<string | null>(null)
+  useEffect(() => {
+    if (!shouldShowFormButton) return
+    const key = lastMessage?.logId || `idx_${messageCount}`
+    if (ctaLoggedForRef.current === key) return
+    ctaLoggedForRef.current = key
+    trackCtaEvent('shown', {
+      sessionId,
+      logId: lastMessage?.logId,
+      meta: { messageCount, hasPrefill: !!lastMessage?.repairPrefill },
+    })
+  }, [shouldShowFormButton, lastMessage?.logId, messageCount, sessionId, lastMessage?.repairPrefill])
+
   // Scroll do dołu - płynnie
   const scrollToBottom = (smooth = true) => {
     if (messagesContainerRef.current) {
@@ -218,6 +234,24 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
   }, [loading, messages.length])
 
   const scrollToForm = () => {
+    // Przekaż formularzowi to, co AI ustaliło w rozmowie — klient nie musi przepisywać
+    // opisu usterki, który przed chwilą przeszedł z asystentem
+    const prefill = lastMessage?.repairPrefill
+    trackCtaEvent('clicked', {
+      sessionId,
+      logId: lastMessage?.logId,
+      meta: { hasPrefill: !!prefill },
+    })
+
+    if (prefill) {
+      emitRepairPrefill({ ...prefill, chatSessionId: sessionId })
+      trackCtaEvent('prefill_applied', {
+        sessionId,
+        logId: lastMessage?.logId,
+        meta: { fields: prefilledFields(prefill) },
+      })
+    }
+
     const formElement = document.getElementById('repair-form')
     if (formElement) {
       formElement.scrollIntoView({ behavior: 'smooth', block: 'start' })
@@ -457,6 +491,7 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
           let scannerBarcodes: ScannerBarcode[] | undefined = undefined
           let logId: string | undefined = undefined
           let resolved: boolean | undefined = undefined
+          let repairPrefill: RepairPrefill | null = null
 
           if (citationsMatch) {
             content = assistantMessage.substring(0, citationsMatch.index)
@@ -468,6 +503,7 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
               scannerBarcodes = data.scannerBarcodes
               logId = data.logId
               resolved = data.resolved
+              repairPrefill = data.repairPrefill ?? null
             } catch (e) {
               console.error('Błąd parsowania citations/blogLinks/manualLinks/scannerBarcodes:', e)
             }
@@ -475,7 +511,7 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
 
           setMessages(prev => [
             ...prev.slice(0, -1),
-            { role: 'assistant', content, citations, blogLinks, manualLinks, scannerBarcodes, logId, resolved }
+            { role: 'assistant', content, citations, blogLinks, manualLinks, scannerBarcodes, logId, resolved, repairPrefill }
           ])
         }
       }

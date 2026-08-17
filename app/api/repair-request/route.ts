@@ -4,7 +4,8 @@ import { uploadRepairPhotos, validateFileSize, validateFileType } from '@/lib/su
 import { sendRepairSubmittedEmail, sendRepairSubmittedAdminEmail } from '@/lib/email'
 import { z } from 'zod'
 
-// Generuj numer zgłoszenia w formacie YYYYMMDDHHmm
+// Generuj numer zgłoszenia w formacie YYYYMMDDHHmm + 2 cyfry.
+// Sufiks jest po to, żeby dwa zgłoszenia z tej samej minuty nie dostały tego samego numeru.
 function generateRepairNumber(): string {
   // Użyj polskiej strefy czasowej (Europe/Warsaw)
   const now = new Date()
@@ -21,7 +22,8 @@ function generateRepairNumber(): string {
   const parts = formatter.formatToParts(now)
   const get = (type: string) => parts.find(p => p.type === type)?.value || ''
   
-  return `${get('year')}${get('month')}${get('day')}${get('hour')}${get('minute')}`
+  const suffix = String(Math.floor(Math.random() * 100)).padStart(2, '0')
+  return `${get('year')}${get('month')}${get('day')}${get('hour')}${get('minute')}${suffix}`
 }
 
 // Zod schema
@@ -45,6 +47,9 @@ const repairRequestSchema = z.object({
   contactPhone: z.string().min(9),
   pickupDate: z.string().min(1),
   courierNotes: z.string().optional(),
+  // Zgody z kroku 5 — przychodzą z FormData jako 'true'/'false'
+  privacyConsent: z.string().optional(),
+  termsConsent: z.string().optional(),
 })
 
 // TEST endpoint GET
@@ -86,6 +91,8 @@ export async function POST(request: NextRequest) {
       contactPhone: formData.get('contactPhone') as string,
       pickupDate: formData.get('pickupDate') as string,
       courierNotes: (formData.get('courierNotes') as string) || undefined,
+      privacyConsent: (formData.get('privacyConsent') as string) || undefined,
+      termsConsent: (formData.get('termsConsent') as string) || undefined,
     }
 
     console.log('🔵 Data extracted:', data.email)
@@ -124,13 +131,12 @@ export async function POST(request: NextRequest) {
     console.log('🔵 Creating repair request in database...')
     console.log('🔵 Repair type:', repairType)
     
-    // Generuj numer zgłoszenia
+    // Generuj numer zgłoszenia (z sufiksem przeciw kolizjom w tej samej minucie)
     const repairNumber = generateRepairNumber()
+    const repairNumberLegacy = repairNumber.slice(0, 12) // format sprzed sufiksu — mieści się w varchar(12)
     console.log('🔵 Generated repair number:', repairNumber)
-    
-    const { data: newRequest, error: insertError } = await supabase
-      .from('repair_requests')
-      .insert({
+
+    const basePayload = {
         repair_number: repairNumber,
         first_name: validatedData.firstName,
         last_name: validatedData.lastName,
@@ -155,9 +161,36 @@ export async function POST(request: NextRequest) {
         courier_notes: validatedData.courierNotes || null,
         status: 'nowe',
         source: 'serwis-zebry',
-      })
-      .select()
-      .single()
+    }
+
+    // Zgody zapisujemy w osobnych kolumnach (supabase-repair-consents.sql). Gdyby migracja
+    // nie była jeszcze uruchomiona na danym środowisku, ponawiamy insert bez nich —
+    // brak kolumny nie może wywalić zgłoszenia klientowi.
+    const consentPayload = {
+      privacy_consent: validatedData.privacyConsent === 'true',
+      terms_consent: validatedData.termsConsent === 'true',
+      consents_at: new Date().toISOString(),
+    }
+
+    const insertRepair = (payload: Record<string, any>) =>
+      supabase.from('repair_requests').insert(payload).select().single()
+
+    let payload: Record<string, any> = { ...basePayload, ...consentPayload }
+    let { data: newRequest, error: insertError } = await insertRepair(payload)
+
+    // Brak kolumn zgód → zapisz bez nich (migracja jeszcze nieuruchomiona)
+    if (insertError && (insertError.code === '42703' || insertError.code === 'PGRST204')) {
+      console.warn('⚠️ Brak kolumn zgód w repair_requests — uruchom supabase-repair-consents.sql. Zapisuję bez zgód.')
+      payload = { ...basePayload }
+      ;({ data: newRequest, error: insertError } = await insertRepair(payload))
+    }
+
+    // repair_number nie mieści się w kolumnie (varchar(12) sprzed rozszerzenia) → numer bez sufiksu
+    if (insertError && insertError.code === '22001') {
+      console.warn('⚠️ Kolumna repair_number za wąska — uruchom supabase-repair-consents.sql. Numer bez sufiksu antykolizyjnego.')
+      payload = { ...payload, repair_number: repairNumberLegacy }
+      ;({ data: newRequest, error: insertError } = await insertRepair(payload))
+    }
 
     if (insertError) {
       console.error('❌ Database insert error:', insertError)
