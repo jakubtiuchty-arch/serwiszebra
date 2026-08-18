@@ -28827,6 +28827,201 @@ Jako **autoryzowany serwis Zebra** pomożemy Ci:
 `
   },
   {
+    slug: 'zebra-nucleus-zarzadzanie-flota-urzadzen',
+    title: 'Zebra Nucleus – jedna konsola do całej floty urządzeń',
+    coverImageAlt: 'Chmurowa konsola Zebra Nucleus połączona z drukarkami etykiet, skanerem kodów kreskowych i terminalem mobilnym',
+    excerpt: 'Drukarki, skanery i terminale Zebry w jednej konsoli w chmurze zamiast trzech osobnych narzędzi. Co Zebra Nucleus realnie daje, które funkcje są bezpłatne, jak platforma łączy się z konfiguracją trybu chronionego EU RED i od jakiej wielkości floty ma to sens.',
+    coverImage: '/zebra-nucleus-jedna-konsola.jpeg',
+    author: {
+      name: 'Zespół TAKMA',
+      role: 'Autoryzowany serwis Zebra'
+    },
+    publishedAt: '2026-08-17',
+    readingTime: 9,
+    deviceType: 'inne',
+    category: 'poradniki',
+    tags: ['Zebra Nucleus', 'UEM', 'zarządzanie flotą', 'MDM', 'drukarki etykiet', 'terminale Android', 'skanery', 'EU RED', 'IT'],
+    seo: {
+      metaTitle: 'Zebra Nucleus – zarządzanie flotą drukarek, skanerów i terminali',
+      metaDescription: 'Czym jest Zebra Nucleus? Chmurowa konsola do całej floty Zebry – drukarek, skanerów i terminali Android. Funkcje, model freemium, związek z dyrektywą EU RED i kiedy się opłaca.',
+      keywords: [
+        'zebra nucleus',
+        'zebra nucleus po polsku',
+        'zarządzanie flotą zebra',
+        'uem zebra',
+        'mdm drukarki zebra',
+        'zdalna konfiguracja drukarek zebra',
+        'zebra nucleus connector',
+        'zarządzanie drukarkami etykiet',
+        'inwentaryzacja urządzeń zebra',
+        'zebra nucleus licencja'
+      ]
+    },
+    content: `
+> **Masz w firmie drukarki, skanery i terminale Zebry — i każde z nich konfigurujesz osobno?** Zebra Nucleus to jedna konsola w chmurze do całej floty. Co realnie daje, co jest za darmo, a za co się płaci — i kiedy nie warto się w to bawić.
+
+---
+
+## Problem, który to rozwiązuje
+
+W typowej firmie z kilkudziesięcioma urządzeniami Zebry wygląda to tak: drukarki ustawia się pojedynczo przez narzędzie na komputerze, skanery programuje kodami kreskowymi, a terminale z Androidem żyją własnym życiem albo w osobnym systemie MDM. Każda kategoria ma inne narzędzie, inny portal i innego człowieka, który „się na tym zna".
+
+Efekt jest zawsze ten sam. Nikt nie wie, ile urządzeń firma faktycznie ma i w jakim są stanie. Nowe urządzenie trzeba fizycznie przynieść do biurka informatyka. Aktualizacja oprogramowania na dwudziestu drukarkach to dzień pracy.
+
+**Zebra Nucleus** to odpowiedź producenta na ten bałagan: jedna platforma chmurowa, w której widzisz i konfigurujesz cały sprzęt Zebry naraz.
+
+---
+
+## Co to jest Zebra Nucleus
+
+To platforma klasy **UEM** (Unified Endpoint Management) — zunifikowane zarządzanie urządzeniami końcowymi. W jednej konsoli obsługujesz trzy grupy sprzętu, które do tej pory były zarządzane osobno:
+
+- **drukarki etykiet** — biurkowe, przemysłowe i mobilne
+- **skanery kodów kreskowych**
+- **terminale mobilne z systemem Android**
+
+Konsola działa w przeglądarce, urządzenia łączą się z nią przez sieć. Nie musisz stawiać serwera ani utrzymywać infrastruktury.
+
+> **📌 Ważne rozróżnienie:** *Nucleus Connector* to niewielki program na Windows, używany między innymi przy konfiguracji trybu chronionego zgodnego z dyrektywą EU RED. Sama platforma Nucleus to co innego — i jedno nie wymaga drugiego. Jeśli szukasz wyłącznie konfiguracji nowej drukarki, która prosi o hasło, zajrzyj do wpisu [Twoja Zebra wymaga hasła? Tryb chroniony i dyrektywa EU RED](/blog/zebra-wymaga-hasla-dyrektywa-red-konfiguracja).
+
+---
+
+## Co widzisz po zalogowaniu
+
+Pulpit pokazuje flotę w trzech przekrojach, z podziałem na terminale, drukarki i skanery:
+
+| Widok | Co mówi |
+|-------|---------|
+| **Zarejestrowane urządzenia** | ile sprzętu każdego typu jest w systemie |
+| **Obecność** | które urządzenia są online, a które offline |
+| **Stan urządzeń** | gdzie są błędy, a gdzie ostrzeżenia wymagające reakcji |
+
+To jest ta różnica, o którą chodzi: zamiast telefonu od magazyniera „drukarka nie działa", widzisz na ekranie, że konkretne urządzenie zgłasza błąd — i wiesz o tym, zanim ktokolwiek zadzwoni.
+
+---
+
+## Funkcje, które mają znaczenie w praktyce
+
+| Funkcja | Co daje |
+|---------|---------|
+| **Wspólny inwentarz** | cała flota w jednym zestawieniu, bez arkusza kalkulacyjnego prowadzonego ręcznie |
+| **Uproszczone wdrażanie** | dodawanie, konfiguracja i aktualizacja urządzeń w zautomatyzowanym procesie |
+| **Ustawienia wzorcowe** | wspólne profile, na przykład konfiguracja Wi-Fi i tagi porządkujące flotę |
+| **Aktualizacje bezpieczeństwa** | powiadomienia i wgrywanie poprawek oraz firmware bez chodzenia po zakładzie |
+| **Zarządzanie licencjami** | licencje wszystkich urządzeń Zebry w jednym miejscu |
+| **Elastyczna integracja** | działa samodzielnie albo obok systemu zarządzania, który już masz |
+
+Najbardziej niedoceniana z tej listy jest przedostatnia. Firmy, które mają kilkadziesiąt urządzeń kupowanych przez lata, zwykle nie potrafią odpowiedzieć na pytanie, które licencje jeszcze obowiązują — a to potrafi zablokować wdrożenie w najgorszym momencie.
+
+---
+
+## Model freemium — co dostajesz bez opłat
+
+To jest rzecz, która najbardziej zaskakuje klientów: **podstawowa funkcjonalność jest bezpłatna**.
+
+- **Bez opłat:** rejestracja urządzeń, wspólny inwentarz, podgląd stanu i obecności floty, podstawowe zarządzanie
+- **W płatnej licencji:** zdalna konfiguracja bez dotykania urządzenia, zdalne aktualizacje i rozszerzona kontrola nad sprzętem
+
+W praktyce oznacza to, że możesz założyć konto, zarejestrować flotę i przez kilka tygodni patrzeć, co się dzieje z Twoimi urządzeniami — zanim zdecydujesz, czy zdalna konfiguracja jest warta licencji. Dla większości firm samo zobaczenie stanu floty jest już wartością.
+
+---
+
+## Kto w firmie na tym skorzysta
+
+**Dział IT** — wdrażanie urządzeń „przez powietrze", bez zwożenia sprzętu do biurka, oraz aktualizacje oprogramowania i poprawki bezpieczeństwa na całej flocie.
+
+**Kierownik operacyjny** — ujednolicone ustawienia na wszystkich urządzeniach, zdalna konfiguracja i podgląd kondycji sprzętu. Jeśli w trzech oddziałach drukarki mają trzy różne konfiguracje, to jest miejsce, w którym się to prostuje.
+
+**Pracownik na hali** — spójny interfejs na każdym urządzeniu, gotowe profile użytkownika i dostęp do aplikacji bez proszenia informatyka o pomoc.
+
+---
+
+## Nucleus a dyrektywa EU RED
+
+Te dwa tematy się zazębiają i warto wiedzieć jak.
+
+Drukarki wprowadzone na rynek EMEA po 1 sierpnia 2025 startują w trybie chronionym i wymagają konfiguracji zabezpieczeń. Jeśli planujesz zdalnie aktualizować ich oprogramowanie przez system zarządzania, **musisz o tym zdecydować w trakcie tej konfiguracji** — jest tam osobny przełącznik zezwalający na aktualizacje firmware, a do połączenia z systemem zarządzania konfiguruje się na drukarce protokół MQTT.
+
+Kolejność ma znaczenie: najpierw konfiguracja zabezpieczeń z właściwymi zgodami, potem rejestracja w platformie. Odwrotnie skończy się ponownym przechodzeniem procedury na każdym urządzeniu.
+
+---
+
+## Kiedy Nucleus się nie opłaca
+
+Nie każdemu jest potrzebny i nie ma sensu udawać inaczej.
+
+- **Dwie, trzy drukarki w jednej lokalizacji** — narzut na wdrożenie przewyższy oszczędność czasu
+- **Urządzenia bez stałego dostępu do sieci** — platforma chmurowa wymaga łączności
+- **Sprzęt innych producentów obok Zebry** — Nucleus obsługuje urządzenia Zebry; przy mieszanej flocie i tak potrzebujesz nadrzędnego systemu
+- **Sprzęt sprzed lat** — starsze modele nie zawsze wspierają rejestrację
+
+Granica opłacalności zaczyna się mniej więcej tam, gdzie masz kilkanaście urządzeń albo więcej niż jedną lokalizację.
+
+---
+
+## Jak zacząć
+
+1. Załóż konto na platformie Zebry i zaloguj się do konsoli
+2. Zarejestruj pierwsze urządzenie — drukarki dodaje się szybko z poziomu aplikacji mobilnej, po zakończeniu rejestracji urządzenie pojawia się na liście w konsoli
+3. Ustaw wzorce dla floty: profile Wi-Fi i tagi, po których będziesz porządkować sprzęt (lokalizacja, dział, typ)
+4. Zarejestruj resztę urządzeń już według przygotowanego wzorca
+
+Najwięcej czasu zajmuje krok trzeci i warto go przemyśleć na początku. Tagi nadane bez planu przy pięćdziesięciu urządzeniach robią się bezużyteczne.
+
+---
+
+## FAQ
+
+### Czy Nucleus obsługuje drukarki, skanery i terminale jednocześnie?
+
+Tak, to jest sedno tej platformy — jedna konsola zamiast osobnych narzędzi do każdej kategorii sprzętu.
+
+### Czy muszę mieć Nucleusa, żeby skonfigurować nową drukarkę wymagającą hasła?
+
+Nie. Konfiguracja trybu chronionego to osobna procedura, opisana we wpisie o [dyrektywie EU RED](/blog/zebra-wymaga-hasla-dyrektywa-red-konfiguracja). Nucleus przydaje się później, do zarządzania flotą.
+
+### Czy platforma zastąpi mój obecny system zarządzania urządzeniami?
+
+Może działać samodzielnie albo obok istniejącego systemu. Przy mieszanej flocie, gdzie oprócz Zebry są urządzenia innych producentów, zwykle sensowniejsze jest to drugie.
+
+### Czy da się z tego korzystać bez opłat?
+
+Tak, podstawowe funkcje są w modelu freemium. Płaci się za funkcje zaawansowane, przede wszystkim za zdalną konfigurację i aktualizacje bez dotykania urządzenia.
+
+### Czy stare drukarki też można zarejestrować?
+
+Zależy od modelu i wersji oprogramowania. Przy sprzęcie sprzed kilku lat warto to sprawdzić przed planowaniem wdrożenia — chętnie zweryfikujemy listę Twoich urządzeń.
+
+### Czy dane firmy są bezpieczne w chmurze?
+
+Rejestracja urządzeń odbywa się z użyciem certyfikatów, a komunikacja jest szyfrowana. W praktyce największym ryzykiem nie jest sama platforma, tylko drukarki wystawione w sieci firmowej bez żadnej kontroli — a to problem, który Nucleus akurat ogranicza.
+
+---
+
+## Podsumowanie
+
+- **Co to jest:** chmurowa konsola do zarządzania całą flotą Zebry — drukarki, skanery, terminale Android
+- **Główna korzyść:** widzisz stan sprzętu i konfigurujesz go zdalnie, zamiast obchodzić zakład
+- **Koszt wejścia:** podstawowe funkcje bez opłat, licencja za zdalną konfigurację i aktualizacje
+- **Dla kogo:** od kilkunastu urządzeń w górę albo więcej niż jedna lokalizacja
+- **Czego nie zastąpi:** konfiguracji trybu chronionego przy nowych drukarkach — to robi się wcześniej
+
+---
+
+## Pomożemy to poukładać
+
+Wdrażamy i serwisujemy sprzęt Zebry na co dzień, więc wiemy, gdzie takie projekty się wykładają — najczęściej na nieprzemyślanym nazewnictwie floty i na drukarkach, które nie przeszły poprawnie konfiguracji zabezpieczeń.
+
+> 📞 **Zadzwoń:** +48 601 619 898 — powiemy, czy przy Twojej flocie to się opłaca
+
+> 🔧 **Zgłoś naprawę:** [Formularz serwisowy →](/#formularz) — bezpłatna wycena
+
+> 💬 **Szybka pomoc:** [Czat z AI →](/#czat) — diagnostyka 24/7
+
+Jako **autoryzowany serwis Zebra** pomagamy w inwentaryzacji floty, przygotowaniu wzorców konfiguracji i rejestracji urządzeń — również dla firm, które mają sprzęt kupowany przez lata u różnych dostawców.
+`
+  },
+  {
     slug: 'zebra-wymaga-hasla-dyrektywa-red-konfiguracja',
     title: 'Twoja Zebra wymaga hasła? Konfiguracja trybu chronionego i dyrektywy EU RED',
     excerpt: 'Nowa drukarka Zebra wymaga hasła przy pierwszym uruchomieniu, a 1234 nie działa? Od 1 sierpnia 2025 drukarki wprowadzane na rynek EMEA startują w trybie chronionym wymaganym przez dyrektywę EU RED. Pokazujemy pełną konfigurację, kody odpowiedzi drukarki i co zrobić, gdy hasło nie jest przyjmowane.',
@@ -29019,7 +29214,7 @@ Plik konfiguracyjny wygenerowany raz można wysłać do kolejnych urządzeń prz
 
 ### Zarządzanie flotą
 
-Przy większych instalacjach warto oprzeć się o system zarządzania i MQTT — wtedy konfiguracja zabezpieczeń staje się częścią standardowego wdrożenia urządzenia, a nie osobną czynnością.
+Przy większych instalacjach warto oprzeć się o system zarządzania i MQTT — wtedy konfiguracja zabezpieczeń staje się częścią standardowego wdrożenia urządzenia, a nie osobną czynnością. Zebra ma do tego własną platformę chmurową obsługującą drukarki, skanery i terminale w jednej konsoli: [Zebra Nucleus – jedna konsola do całej floty urządzeń](/blog/zebra-nucleus-zarzadzanie-flota-urzadzen).
 
 Więcej o zabezpieczaniu drukarek w firmie: [PrintSecure – przewodnik administratora IT](/blog/zebra-printsecure-przewodnik-administratora-it)
 

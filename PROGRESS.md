@@ -451,3 +451,61 @@ Po migracji warto puścić `node scripts/test-chat-prefill-e2e.mjs` — testy sa
 - Fakty przepisane własnymi słowami jako wiedza serwisowa — bez powoływania się na dokumenty producenta.
 - Weryfikacja renderu na :3002: HTTP 200, 4 tabele, 16 nagłówków H2; obecne `zebra.com/asr`, Nucleus Connector, ZE511/ZE521, 9100, ~PMa, status 100; zero trafień na „Security Setup Wizard", „14 znaków", ZT220, ZQ520, „bez modułów WiFi". tsc EXIT=0.
 - NIEZACOMMITOWANE — wpis blogowy czeka na akceptację usera przed pushem.
+
+## 2026-08-17 — Nowy wpis: Zebra Nucleus (materiał do rozmowy z klientem, nie pod SEO)
+- **Decyzja świadomie wbrew danym SEO.** Ahrefs: „zebra nucleus" i „zebra nucleus connector" = 0 wyszukań w PL (40 globalnie); słowo „nucleus" w polskim Google to anatomia, implanty Cochlear, Roon i Revit. User: wpis ma być linkiem, który handlowiec podaje klientowi w rozmowie — po polsku, bo nie ma takiego materiału.
+- **Korekta wcześniejszej diagnozy**: Nucleus to nie narzędzie do konfiguracji RED, tylko platforma **UEM w chmurze** — jedna konsola do drukarek, skanerów i terminali Android. „Nucleus Connector" to tylko łącznik windowsowy używany przy trybie chronionym. Wpis to rozróżnienie tłumaczy, bo sami się na tym potknęliśmy.
+- Nowy wpis `/blog/zebra-nucleus-zarzadzanie-flota-urzadzen` (9257 zn., 15 sekcji, 2 tabele): problem trzech osobnych narzędzi, czym jest platforma, co widać na pulpicie (zarejestrowane/obecność/stan), funkcje, **model freemium** (podstawa za darmo, płatne: zdalna konfiguracja „no touch", aktualizacje, rozszerzona kontrola), kto skorzysta (IT / kierownik operacyjny / pracownik), związek z EU RED i **kolejność wdrożenia** (najpierw zabezpieczenia z przełącznikiem firmware, potem rejestracja), sekcja „kiedy się NIE opłaca", jak zacząć, FAQ, CTA.
+- Cross-linking wpięty w obie strony: RED → Nucleus (1 link), Nucleus → RED (2 linki).
+- Fakty przepisane własnymi słowami, bez powoływania się na materiały producenta. Bez zmyślonych cen (model licencyjny opisany jakościowo).
+- **HERO DO ZROBIENIA**: tymczasowo `coverImage: '/drukarki-zebra-dyrektywa-red.jpeg'` (pożyczony z wpisu o RED). Docelowo własny, w stylu komiksowo-wektorowym jak reszta bloga serwis-zebry.
+- Render :3002 sprawdzony Playwrightem: oba wpisy 200, tytuły poprawne, listing bloga 200. tsc EXIT=0.
+- NIEZACOMMITOWANE — czeka na akceptację usera (wpisy blogowe nie idą na prod bez zgody).
+
+## 2026-08-17 — Nucleus: poprawki tekstu + własny hero
+- Usunięte „Wyjaśniamy po polsku" (excerpt), „Poniżej po polsku:" (lead) i „po polsku" z metaTitle — wypełniacz, który nic nie wnosi czytelnikowi. W treści 0 wystąpień.
+- **Hero wygenerowany w Higgsfield, model `gpt_image_2`, 2 warianty 16:9.** Wybrany wariant 1 (wariant 2 odrzucony — zaśmiecony pseudo-tekst na pulpicie). Prompt w stylu bloga serwis-zebry: komiksowo-wektorowy splash, halftone, fiolet/magenta + pomarańczowe chmury + cyjanowe błyskawice, akcenty limonkowe #A8F000 (kolor Zebry), chmurowa konsola w środku, wiązki do drukarki przemysłowej, biurkowej, skanera z czerwoną wiązką i terminala Android. ZERO tekstu w obrazie.
+- Upscale `bytedance_image_upscale` do 2K → 3856×2160, przeskalowane do **2752×1541** (jak inne okładki bloga), zapis `public/zebra-nucleus-zarzadzanie-flota.jpeg`, 1,3 MB. Dodany `coverImageAlt`.
+- Render sprawdzony Playwrightem: HTTP 200, hero na stronie, tytuł i lead poprawne. tsc EXIT=0. NIEZACOMMITOWANE.
+
+## 2026-08-17 — Hero Nucleus PRZEROBIONY: urządzenia 1:1 z prawdziwych renderów
+- **BŁĄD, który popełniłem**: pierwszy hero wygenerowałem z samego opisu tekstowego → model ZMYŚLIŁ urządzenia. Dla autoryzowanego serwisu Zebry to kompromitacja. Zasada zapisana w pamięci: `feedback_never-invent-device-images` — każde urządzenie na grafice MUSI być 1:1 z prawdziwego renderu, tylko technika rysunku jest komiksowo-wektorowa.
+- Poprawny workflow (do powtarzania): znajdź prawdziwe rendery → `media_upload` + `media_confirm` do Higgsfield → `generate_image` z `medias[{role:'image'}]` i promptem, który KAŻE zachować sylwetkę, proporcje, panel sterowania i podział kolorów → porównaj wynik z referencją.
+- Użyte rendery: `takma/public/images/products/zt411_1_s.png`, `zd421t_1.png`, `zebra-ds3608-xr.png` + `serwiszebra/public/TC501/Zebra TC501_1.jpeg`.
+- `gpt_image_2`, 16:9, resolution 2k, quality high, 2 warianty. Wybrany wariant B (lepsze rozstawienie, wszystkie 4 urządzenia czytelne, większa czytelna chmura-pulpit). Zapis 2752×1556, 1,4 MB.
+- Weryfikacja: ZT411 ma poprawną bryłę, ekran dotykowy z niebieskim kafelkiem i przyciski PAUSE/FEED/CANCEL; ZD421t żółty zatrzask po lewej i panel górny; DS3608-XR limonkowa górna obudowa z okienkiem skanera; TC501 czarna bryła z zielonymi przyciskami bocznymi i tą samą tapetą. Render :3002 OK.
+- NIEZACOMMITOWANE.
+
+## 2026-08-17 — Hero Nucleus v3: dopasowany do poziomu reszty bloga
+- User: pierwsza wersja z referencjami była wierna, ale „bardzo słaba" — statyczny diagram zamiast okładki. Po obejrzeniu listingu bloga widać wzorzec, którego wcześniej nie odtworzyłem.
+- **Cechy stylu okładek serwis-zebry (do powtarzania)**: urządzenia jako bohater, duże, w dynamicznych przechyłach, wychodzące poza kadr; wir/tunel energii z liniami zbieżnymi; ŚWIATŁO DZIELONE — ognisty pomarańcz z jednej strony, lodowaty cyjan z drugiej; błyskawice oplatające sprzęt; lecące odłamki: śruby, zębatki, fragmenty płytek PCB, odpryski szkła; półprzezroczyste niebieskie szkice wireframe urządzeń w tle; halftone i gruby tusz, ale z realną głębią i 3D.
+- Wygenerowane 2 warianty `gpt_image_2` 2k/high z tymi samymi 4 referencjami. Wybrany B (głębszy tunel, większe urządzenia, mocniejsze światło dzielone). Zapis `public/zebra-nucleus-flota-urzadzen-v3.jpeg`, 2752×1556, 1,5 MB.
+- Zmiana nazwy pliku przy każdej wersji (v2 → v3) jako cache-busting — podmiana pod tą samą nazwą zostawiała userowi starą grafikę w przeglądarce; wyczyszczony też `.next/cache/images`.
+- NIEZACOMMITOWANE.
+
+## 2026-08-17 — Hero Nucleus FINAL: treść obrazu dopasowana do tematu
+- User: wersja „wybuchowa" była efektowna, ale „co to ma wspólnego z Nucleusem?". Słusznie — pogoniłem za stylem i zgubiłem przekaz. Odłamki, pęknięte szkło i rozpad to język wpisów o USTERKACH; Nucleus to dokładnie odwrotność: porządek i kontrola.
+- **Wniosek na przyszłość**: styl okładek serwis-zebry ma dwa warianty. (a) TROUBLESHOOTING — wir, rozpad, lecące części, iskry. (b) ZARZĄDZANIE/PORADNIK — ten sam poziom energii i to samo światło dzielone, ale kompozycja uporządkowana: element centralny + urządzenia wokół + widoczne połączenia. Dobierać wariant do KATEGORII wpisu.
+- Finalna grafika: wielka chmura-konsola w centrum z czytelnym pulpitem (kafelki statusu, wykresy słupkowe, donuty, paski postępu — kształty abstrakcyjne, bez tekstu), cztery urządzenia wokół, każde z węzłem połączenia i wiązką do chmury, pierścienie orbit na podłożu, siatka heksagonalna, niebieskie widma wireframe w tle, światło dzielone pomarańcz/cyjan.
+- `public/zebra-nucleus-konsola-flota.jpeg`, 2752×1556, 1,2 MB. Poprzednie wersje (v2, v3) usunięte. Urządzenia nadal 1:1 z renderów ZT411/ZD421t/DS3608-XR/TC501.
+- NIEZACOMMITOWANE.
+
+## 2026-08-17 — Hero Nucleus: czyszczenie tła i wiązki skanera
+- Uwagi usera: (1) niebieskie szkice wireframe urządzeń w tle są niepotrzebne — i dodatkowo były ZMYŚLONE, więc łamały zasadę o urządzeniach 1:1; (2) czerwona wiązka skanera do usunięcia.
+- Zamiast losować kompozycję od nowa: wgrałem zatwierdzoną grafikę jako referencję do `gpt_image_2` i zleciłem EDYCJĘ z jawnym „zachowaj wszystko poza tymi dwoma elementami". Kompozycja, urządzenia, chmura-pulpit, wiązki, pierścienie i światło dzielone zachowane 1:1.
+- Finalny plik `public/zebra-nucleus-konsola-floty.jpeg`, 2752×1556, 1,0 MB. Poprzednie wersje usunięte.
+- **Wniosek**: przy drobnych poprawkach grafiki edytować istniejący obraz jako referencję, nie generować od zera — inaczej traci się zaakceptowaną kompozycję i zaczyna od nowa cały cykl uwag.
+- NIEZACOMMITOWANE.
+
+## 2026-08-17 — Hero Nucleus: ZŁAPANY właściwy styl bloga (wersja finalna)
+- User pokazał okładkę ZT510 jako wzorzec „mega". Kluczowa różnica, której wcześniej nie widziałem: te grafiki są **RYSOWANE** (kreska, cel-shading, halftone, cross-hatching), a moje były fotorealistycznymi renderami wklejonymi na tło. To zdradzało wszystko.
+- **Pełna receptura stylu okładek serwis-zebry** (do powtarzania):
+  1. technika: ilustracja komiksowa, widoczna kreska, płaskie cieniowanie, gruby halftone — NIE fotorealizm, NIE render 3D
+  2. paleta: oszczędna — czerń i szarości + DWA akcenty (tu limonka #A8F000 i cyjan); bez fioletu/magenty
+  3. kompozycja: tunel z koncentrycznych pierścieni rysowanych kreską, bohater w centrum
+  4. dwie duże błyskawice ramujące kadr po skosie z górnych rogów, każda w innym akcencie
+  5. wokół unoszą się elementy tematyczne: przy usterkach zębatki/śruby/odłamki, przy zarządzaniu świecące panele schematów i kafelki pulpitu
+  6. urządzenia 1:1 z renderów, ale przerysowane w tej samej technice
+- Prompt musi JAWNIE zakazywać fotorealizmu, inaczej gpt_image_2 przy referencjach fotograficznych domyślnie robi render.
+- Finalny plik `public/zebra-nucleus-jedna-konsola.jpeg`, 2752×1556, 1,5 MB. Poprzednie wersje usunięte.
+- NIEZACOMMITOWANE.
