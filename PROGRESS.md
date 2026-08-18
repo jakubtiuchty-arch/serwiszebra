@@ -536,3 +536,14 @@ Po migracji warto puścić `node scripts/test-chat-prefill-e2e.mjs` — testy sa
 - Test e2e w przeglądarce: karta głowicy 140Xi4 → CTA (`/kontakt?temat=glowice`) → formularz z tematem „Program bezpłatnych wymian głowic" i wiadomością 205 zn. Przejście działa.
 - Formularz wysyła przez `mailto:` na serwis@takma.com.pl, więc zgłoszenie ląduje w module Poczta.
 - DO ZROBIENIA PÓŹNIEJ: po wdrożeniu gałęzi takmy przywrócić `PROGRAM_URL` na `https://www.takma.com.pl/promocje/zebra-glowice-bez-kosztow`.
+
+## 2026-08-18 — Baner głowic: CTA otwiera modal zamiast przenosić na kontakt
+- Uwaga usera (UX): klient jest na karcie, na której właśnie widzi cenę głowicy — wyrywanie go na `/kontakt` gubi kontekst. Formularz ma się otwierać na miejscu.
+- **`components/shop/PrintheadProgramCta.tsx`** (nowy, `'use client'`): przycisk + modal z formularzem. Escape i klik w tło zamykają, `overflow:hidden` na body, focus na pierwszym polu, `role="dialog"` + `aria-modal` + `aria-labelledby`, animacja framer-motion jak w `RegistrationLightbox`. Nagłówek modala w stylu banera (czerń + limonkowa pigułka), formularz na białym tle.
+- Pola: firma, osoba, e-mail, telefon, modele i numery seryjne drukarek, roczne zużycie. Do zgłoszenia doklejany jest **kontekst karty** — nazwa produktu, model drukarki, cena brutto i adres strony — więc handlowiec wie, na co klient patrzył.
+- **`app/api/program-glowice/route.ts`** (nowy): walidacja zod, mail przez Resend na serwis@takma.com.pl z `replyTo` klienta (odpowiedź wraca do niego, wątek działa w module Poczta).
+- **Błąd wyłapany w testach**: Resend NIE rzuca wyjątkiem przy odrzuceniu — błąd siedzi w polu `error` odpowiedzi. Pierwsza wersja zwracała 200 mimo nieudanej wysyłki, czyli klient widziałby „wysłane", a zgłoszenie by przepadło (ten sam typ błędu co martwe CTA). Teraz sprawdzamy `error` i zwracamy 502 z numerem telefonu w komunikacie.
+- `PrintheadProgramBanner` zostaje komponentem serwerowym, dostał nowy prop `productName`; kliencki jest tylko CTA.
+- Testy w przeglądarce: przycisk otwiera modal bez zmiany strony, Escape zamyka, payload niesie `140Xi4 / 2674.16 zł / adres karty`, ekran sukcesu po wysyłce, a przy odrzuceniu wysyłki modal pokazuje czerwony komunikat z numerem telefonu. API: 400 przy złych danych, 502 przy nieudanej wysyłce.
+- Prefill `/kontakt?temat=glowice` z poprzedniego kroku zostaje w kodzie jako alternatywna droga (temat jest też w liście formularza), ale baner już z niego nie korzysta.
+- tsc EXIT=0, build EXIT=0, dev :3002.

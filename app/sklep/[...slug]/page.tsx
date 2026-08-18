@@ -1149,6 +1149,7 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
               <PrintheadProgramBanner
                 priceBrutto={product.price_brutto}
                 deviceModel={product.device_model}
+                productName={product.name}
               />
             )}
 
