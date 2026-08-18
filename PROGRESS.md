@@ -514,3 +514,15 @@ Po migracji warto puścić `node scripts/test-chat-prefill-e2e.mjs` — testy sa
 - Dodany link do konsoli w kroku 1. **Linkujemy na `https://www.nucleus.zebra.com`, NIE na `/login`** — `/login` zwraca serwerowo 404 (SPA renderuje się dopiero po stronie klienta), a korzeń oddaje 200 i sam przekierowuje na ekran logowania.
 - Znalezione przy weryfikacji i dopisane do wpisu: ekran logowania ma opcję **„Continue As Guest"** — konfiguracja urządzeń bez zakładania konta. Tego nie było w materiałach źródłowych.
 - tsc EXIT=0, link zweryfikowany na renderze :3002.
+
+## 2026-08-18 — Nucleus: uzupełnienie z battle card (bez treści poufnych)
+- Źródło: `nucleus-software-battle-card-rgb-en-us.pdf` — **Zebra Confidential, do użytku wewnętrznego partnerów PartnerConnect**. Zgodnie z zasadą z KC401 do wpisu NIE trafiły: tabela porównawcza z konkurencją (SATO, Honeywell, Samsung Knox, Datalogic), skrypty obsługi obiekcji ani persony sprzedażowe. Test na renderze potwierdza brak tych nazw w treści.
+- Dodane fakty produktowe (publiczne, wysokiej wartości dla czytelnika):
+  - **nowa sekcja „Co Nucleus zastępuje"** z tabelą: PPME (drukarki), DNA Cloud (terminale Android), 123Scan (skanery) → jedna konsola. To najmocniejszy punkt dla naszych klientów, bo dziś realnie używają PPME i 123Scan.
+  - inwentarz na poziomie **całej firmy i pojedynczej lokalizacji** (wcześniej tylko „cała flota")
+  - aktualizacje **OTA** wprost nazwane
+  - ramka o rozwoju platformy w cyklu miesięcznym — uczciwe zastrzeżenie, żeby opis się nie zestarzał
+  - FAQ: doprecyzowanie roli obok MDM (systemy MDM ogarniają terminale, słabo drukarki i skanery) + nowe pytanie „Używamy PPME i 123Scan — co z tym?"
+  - uwaga o skanerach: dotąd konfigurowane pojedynczo, firmy nie miały ich ewidencji
+- Poprawka redakcyjna: „przedostatnia z listy" → wprost „zarządzanie licencjami" (po dodaniu wiersza do tabeli odwołanie pozycyjne przestało się zgadzać).
+- Treść 12 110 zn., 3 tabele, 16 sekcji. tsc EXIT=0, render :3002 OK.

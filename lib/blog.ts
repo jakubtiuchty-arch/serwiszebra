@@ -28904,14 +28904,30 @@ To jest ta różnica, o którą chodzi: zamiast telefonu od magazyniera „druka
 
 | Funkcja | Co daje |
 |---------|---------|
-| **Wspólny inwentarz** | cała flota w jednym zestawieniu, bez arkusza kalkulacyjnego prowadzonego ręcznie |
+| **Wspólny inwentarz** | cała flota w jednym zestawieniu, na poziomie całej firmy i pojedynczej lokalizacji, bez arkusza kalkulacyjnego prowadzonego ręcznie |
 | **Uproszczone wdrażanie** | dodawanie, konfiguracja i aktualizacja urządzeń w zautomatyzowanym procesie |
 | **Ustawienia wzorcowe** | wspólne profile, na przykład konfiguracja Wi-Fi i tagi porządkujące flotę |
-| **Aktualizacje bezpieczeństwa** | powiadomienia i wgrywanie poprawek oraz firmware bez chodzenia po zakładzie |
+| **Aktualizacje bezpieczeństwa** | powiadomienia oraz zdalne wgrywanie poprawek i firmware'u przez sieć (OTA), bez chodzenia po zakładzie |
 | **Zarządzanie licencjami** | licencje wszystkich urządzeń Zebry w jednym miejscu |
 | **Elastyczna integracja** | działa samodzielnie albo obok systemu zarządzania, który już masz |
 
-Najbardziej niedoceniana z tej listy jest przedostatnia. Firmy, które mają kilkadziesiąt urządzeń kupowanych przez lata, zwykle nie potrafią odpowiedzieć na pytanie, które licencje jeszcze obowiązują — a to potrafi zablokować wdrożenie w najgorszym momencie.
+Najbardziej niedoceniana z tej listy jest zarządzanie licencjami. Firmy, które mają kilkadziesiąt urządzeń kupowanych przez lata, zwykle nie potrafią odpowiedzieć na pytanie, które licencje jeszcze obowiązują — a to potrafi zablokować wdrożenie w najgorszym momencie.
+
+---
+
+## Co Nucleus zastępuje
+
+Jeśli obsługujesz sprzęt Zebry od dłuższego czasu, prawdopodobnie masz na komputerze kilka osobnych narzędzi tego samego producenta. Nucleus scala ich funkcje w jednej konsoli:
+
+| Dotychczasowe narzędzie | Do czego służyło |
+|-------------------------|------------------|
+| **Printer Profile Manager Enterprise (PPME)** | zarządzanie drukarkami etykiet i ich profilami |
+| **DNA Cloud** | zarządzanie terminalami z Androidem |
+| **123Scan** | konfiguracja skanerów kodów kreskowych |
+
+To jest praktyczne sedno zmiany: zamiast trzech aplikacji, trzech logowań i trzech sposobów robienia tego samego, masz jedno miejsce i jeden zestaw nawyków. Osobno warto odnotować skanery — dotąd konfigurowało się je pojedynczo, kodami kreskowymi lub przez 123Scan przy podłączonym urządzeniu, a firmy praktycznie nie miały ich pełnej ewidencji.
+
+> **📌 Platforma w rozwoju:** Zebra dokłada funkcje w cyklu miesięcznym, więc zakres możliwości rośnie. Przy planowaniu wdrożenia warto sprawdzić bieżący stan, zamiast opierać się na opisie sprzed pół roku.
 
 ---
 
@@ -28982,7 +28998,11 @@ Nie. Konfiguracja trybu chronionego to osobna procedura, opisana we wpisie o [dy
 
 ### Czy platforma zastąpi mój obecny system zarządzania urządzeniami?
 
-Może działać samodzielnie albo obok istniejącego systemu. Przy mieszanej flocie, gdzie oprócz Zebry są urządzenia innych producentów, zwykle sensowniejsze jest to drugie.
+Może działać samodzielnie albo obok istniejącego systemu. Przy mieszanej flocie, gdzie oprócz Zebry są urządzenia innych producentów, zwykle sensowniejsze jest to drugie. Systemy MDM dobrze radzą sobie z terminalami, ale przy drukarkach i skanerach zwykle kończą się na podstawach — i to jest luka, którą Nucleus wypełnia.
+
+### Używamy PPME do drukarek, a skanery konfigurujemy przez 123Scan. Co z tym?
+
+Nucleus scala funkcje PPME, DNA Cloud i 123Scan w jednej konsoli. W praktyce oznacza to jedno logowanie zamiast trzech i wspólną ewidencję sprzętu, którego dotąd nie dało się oglądać razem. Jeśli macie już dopracowane profile w PPME, przejście warto zaplanować, a nie robić z dnia na dzień.
 
 ### Czy da się z tego korzystać bez opłat?
 
