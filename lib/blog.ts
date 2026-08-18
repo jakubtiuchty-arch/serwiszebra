@@ -28961,7 +28961,7 @@ Granica opłacalności zaczyna się mniej więcej tam, gdzie masz kilkanaście u
 
 ## Jak zacząć
 
-1. Załóż konto na platformie Zebry i zaloguj się do konsoli
+1. Wejdź na [nucleus.zebra.com](https://www.nucleus.zebra.com) i załóż konto albo zaloguj się do konsoli. Jeśli chcesz tylko skonfigurować urządzenia, bez zakładania konta, ten sam ekran daje opcję **Continue As Guest**
 2. Zarejestruj pierwsze urządzenie — drukarki dodaje się szybko z poziomu aplikacji mobilnej, po zakończeniu rejestracji urządzenie pojawia się na liście w konsoli
 3. Ustaw wzorce dla floty: profile Wi-Fi i tagi, po których będziesz porządkować sprzęt (lokalizacja, dział, typ)
 4. Zarejestruj resztę urządzeń już według przygotowanego wzorca

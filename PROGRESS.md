@@ -509,3 +509,8 @@ Po migracji warto puścić `node scripts/test-chat-prefill-e2e.mjs` — testy sa
 - Prompt musi JAWNIE zakazywać fotorealizmu, inaczej gpt_image_2 przy referencjach fotograficznych domyślnie robi render.
 - Finalny plik `public/zebra-nucleus-jedna-konsola.jpeg`, 2752×1556, 1,5 MB. Poprzednie wersje usunięte.
 - NIEZACOMMITOWANE.
+
+## 2026-08-18 — Nucleus: adres konsoli w sekcji „Jak zacząć"
+- Dodany link do konsoli w kroku 1. **Linkujemy na `https://www.nucleus.zebra.com`, NIE na `/login`** — `/login` zwraca serwerowo 404 (SPA renderuje się dopiero po stronie klienta), a korzeń oddaje 200 i sam przekierowuje na ekran logowania.
+- Znalezione przy weryfikacji i dopisane do wpisu: ekran logowania ma opcję **„Continue As Guest"** — konfiguracja urządzeń bez zakładania konta. Tego nie było w materiałach źródłowych.
+- tsc EXIT=0, link zweryfikowany na renderze :3002.
