@@ -1,6 +1,10 @@
+import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 
-const PROGRAM_URL = 'https://www.takma.com.pl/promocje/zebra-glowice-bez-kosztow'
+// Docelowo strona programu na takma.com.pl (/promocje/zebra-glowice-bez-kosztow), ale ta
+// nie jest jeszcze wdrożona na produkcję — link prowadził na 404 i gubił każdy lead.
+// Do czasu wdrożenia kierujemy na własny formularz z gotowym tematem i szkieletem pytań.
+const PROGRAM_URL = '/kontakt?temat=glowice'
 const LIME = '#A8F000'
 
 interface PrintheadProgramBannerProps {
@@ -64,14 +68,14 @@ export default function PrintheadProgramBanner({ priceBrutto, deviceModel }: Pri
         </div>
 
         <div className="mt-5 sm:mt-0 sm:w-56 sm:shrink-0">
-          <a
+          <Link
             href={PROGRAM_URL}
             className="inline-flex w-full items-center justify-center gap-2 rounded-xl px-5 py-3.5 text-sm font-bold text-gray-950 transition-all duration-200 hover:brightness-95 active:scale-[0.98]"
             style={{ background: LIME }}
           >
             Sprawdź kwalifikację
             <ArrowRight className="w-4 h-4" />
-          </a>
+          </Link>
         </div>
       </div>
     </section>

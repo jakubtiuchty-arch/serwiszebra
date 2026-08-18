@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Header from '@/components/Header'
 import { 
@@ -19,6 +19,18 @@ import {
 } from 'lucide-react'
 import { trackPhoneClick, trackEmailClick, trackFormSubmit } from '@/lib/analytics'
 
+// Tematy, z którymi można wejść na formularz z zewnątrz przez ?temat=
+const CONTACT_TOPICS = {
+  glowice: {
+    subject: 'Program bezpłatnych wymian głowic',
+    message:
+      'Dzień dobry,\n\nchcę sprawdzić, czy moja firma kwalifikuje się do programu bezpłatnych wymian głowic Zebra.\n\n' +
+      'Modele i numery seryjne drukarek:\n' +
+      'Używane etykiety i taśmy:\n' +
+      'Szacunkowe roczne zużycie materiałów:\n',
+  },
+} as const
+
 export default function ContactPage() {
   const [formData, setFormData] = useState({
     name: '',
@@ -29,6 +41,20 @@ export default function ContactPage() {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
+
+  // Wejście z konkretnym tematem, np. z banera programu głowic na kartach produktów:
+  // /kontakt?temat=glowice — od razu ustawiamy temat i szkielet wiadomości, żeby klient
+  // nie musiał się zastanawiać, co napisać, a my dostali komplet danych do kwalifikacji.
+  // Czytamy z window zamiast useSearchParams, żeby nie wymuszać granicy Suspense.
+  useEffect(() => {
+    const topic = new URLSearchParams(window.location.search).get('temat')
+    if (topic !== 'glowice') return
+    setFormData((prev) => ({
+      ...prev,
+      subject: CONTACT_TOPICS.glowice.subject,
+      message: prev.message || CONTACT_TOPICS.glowice.message,
+    }))
+  }, [])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -243,6 +269,7 @@ export default function ContactPage() {
                         <option value="Wycena naprawy">Wycena naprawy</option>
                         <option value="Status naprawy">Status naprawy</option>
                         <option value="Współpraca B2B">Współpraca B2B</option>
+                        <option value="Program bezpłatnych wymian głowic">Program bezpłatnych wymian głowic</option>
                         <option value="Reklamacja">Reklamacja</option>
                         <option value="Inne">Inne</option>
                       </select>

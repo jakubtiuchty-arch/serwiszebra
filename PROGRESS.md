@@ -526,3 +526,13 @@ Po migracji warto puścić `node scripts/test-chat-prefill-e2e.mjs` — testy sa
   - uwaga o skanerach: dotąd konfigurowane pojedynczo, firmy nie miały ich ewidencji
 - Poprawka redakcyjna: „przedostatnia z listy" → wprost „zarządzanie licencjami" (po dodaniu wiersza do tabeli odwołanie pozycyjne przestało się zgadzać).
 - Treść 12 110 zn., 3 tabele, 16 sekcji. tsc EXIT=0, render :3002 OK.
+
+## 2026-08-18 — Baner głowic: naprawione martwe CTA
+- **Diagnoza**: przycisk „Sprawdź kwalifikację" prowadził na `takma.com.pl/promocje/zebra-glowice-bez-kosztow` → **404**. Strona istnieje tylko w repo takma na gałęzi `claude/takma-frontend-build-RrM9E` (51 commitów przed main); na `origin/main` nie ma katalogu `app/promocje`, preview `takma-neon.vercel.app` też 404. Baner wisiał na produkcji od 7.08 i każdy lead z niego przepadał. Sam markup banera był poprawny.
+- **Poprawka (bez ruszania repo takma)**: CTA kieruje na własny formularz `/kontakt?temat=glowice`, w tej samej domenie.
+  - `app/kontakt/page.tsx`: stała `CONTACT_TOPICS` + `useEffect` czytający `?temat=` z `window.location.search` (celowo nie `useSearchParams` — nie wymusza granicy Suspense). Ustawia temat i szkielet wiadomości: modele i numery seryjne drukarek, używane etykiety i taśmy, szacunkowe roczne zużycie — czyli dokładnie to, czego potrzeba do kwalifikacji.
+  - nowa opcja w liście tematów: „Program bezpłatnych wymian głowic" (trafia też do `trackFormSubmit`, więc będzie widać w analityce)
+  - `PrintheadProgramBanner.tsx`: `<a>` → `<Link>` (nawigacja po stronie klienta), komentarz z powodem i docelowym adresem
+- Test e2e w przeglądarce: karta głowicy 140Xi4 → CTA (`/kontakt?temat=glowice`) → formularz z tematem „Program bezpłatnych wymian głowic" i wiadomością 205 zn. Przejście działa.
+- Formularz wysyła przez `mailto:` na serwis@takma.com.pl, więc zgłoszenie ląduje w module Poczta.
+- DO ZROBIENIA PÓŹNIEJ: po wdrożeniu gałęzi takmy przywrócić `PROGRAM_URL` na `https://www.takma.com.pl/promocje/zebra-glowice-bez-kosztow`.
