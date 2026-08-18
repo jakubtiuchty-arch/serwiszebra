@@ -555,3 +555,14 @@ Po migracji warto puścić `node scripts/test-chat-prefill-e2e.mjs` — testy sa
 - Baner (rozwijane warunki): usunięte „więc niczym nie ryzykujesz" — pusta obietnica, która przemilczała zobowiązanie opisane punkt wyżej. Jest: „kwalifikację sprawdzamy, zanim zgłosimy firmę u producenta".
 - **Zasada na przyszłość**: w treściach sprzedażowych obiecywać wyłącznie czynność, którą naprawdę wykonujemy. „Sprawdzimy X" zamiast „policzymy, czy Ci się opłaca".
 - tsc EXIT=0, treść zweryfikowana na renderze.
+
+## 2026-08-18 — Dzienny raport ChatAI: nowy szablon maila z pełnymi rozmowami
+- Uwagi usera: mail był nieczytelny i nie zawierał tego, co najważniejsze — treści rozmów.
+- **Przyczyna rozjazdu**: poprzedni szablon używał CSS grid i klas w `<style>`. Klienty pocztowe (Gmail) tego nie renderują, więc siatka statystyk rozpadała się na listę. Nowy szablon: układ na tabelach, style inline, zero klas.
+- **Nowy plik `lib/email/chat-report.ts`** — szablon wydzielony z routingu. Nagłówek w firmowym navy `#1e3a5f` (bez gradientu), pasek 4 liczb (rozmów / pytań / z instrukcją / do serwisu), potem KAŻDA ROZMOWA osobno.
+- Rozmowy grupowane po `session_id`, w kolejności chronologicznej. Każda tura: wiadomość klienta w niebieskiej bańce i pełna odpowiedź asystenta w białej karcie. Markdown z odpowiedzi (pogrubienia, akapity) zamieniany na HTML, znaczniki `[SERIOUS_ISSUE]`/`[INFO_ONLY]` i blok `__CITATIONS__` wycinane — klient ich nie widział, więc w raporcie też nie powinny być.
+- Etykiety przy turach: użyta instrukcja (nazwa manuala), skierowanie do serwisu, ocena 👍/👎. W nagłówku rozmowy godzina, liczba pytań i wykryte modele.
+- `?data=YYYY-MM-DD` odtwarza raport z dowolnego dnia, `?dry=1` zwraca HTML zamiast wysyłać — podgląd bez zaśmiecania skrzynki.
+- Wersja „brak rozmów" też przerobiona: zamiast „Żaden użytkownik nie skorzystał" jest informacja, co to znaczy i kiedy warto się zaniepokoić.
+- Stopka mówi „każdego wieczoru", a nie konkretną godzinę — cron chodzi w UTC (`0 19 * * *`), więc zimą to 20:00, latem 21:00.
+- Podgląd zweryfikowany zrzutami dla dnia z rozmowami (2 rozmowy, 10 pytań) i dnia pustego. tsc EXIT=0, build EXIT=0.
