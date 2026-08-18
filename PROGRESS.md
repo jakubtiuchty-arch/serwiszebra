@@ -547,3 +547,11 @@ Po migracji warto puścić `node scripts/test-chat-prefill-e2e.mjs` — testy sa
 - Testy w przeglądarce: przycisk otwiera modal bez zmiany strony, Escape zamyka, payload niesie `140Xi4 / 2674.16 zł / adres karty`, ekran sukcesu po wysyłce, a przy odrzuceniu wysyłki modal pokazuje czerwony komunikat z numerem telefonu. API: 400 przy złych danych, 502 przy nieudanej wysyłce.
 - Prefill `/kontakt?temat=glowice` z poprzedniego kroku zostaje w kodzie jako alternatywna droga (temat jest też w liście formularza), ale baner już z niego nie korzysta.
 - tsc EXIT=0, build EXIT=0, dev :3002.
+
+## 2026-08-18 — Baner głowic: poprawiona obietnica w treści
+- User zakwestionował zdanie „Najpierw liczymy, czy program Ci się opłaca". Słusznie — my sprawdzamy KWALIFIKACJĘ (czy roczne zużycie sięga progu Zebry, ok. równowartości 5 000 EUR w cenach katalogowych), a nie opłacalność u klienta; do tego trzeba by znać jego obecne ceny i to, czym drukuje.
+- Ryzyko było realne: program wymaga drukowania wyłącznie na oryginalnych materiałach Zebry kupowanych u nas, więc firma używająca tańszych zamienników po przejściu zapłaci za materiały WIĘCEJ. Obietnica „policzymy, czy Ci się opłaca" mogła wrócić do nas z rachunkiem.
+- Modal: „Sprawdzamy, czy Twoje zużycie materiałów sięga progu wymaganego przez Zebrę, i wracamy z odpowiedzią."
+- Baner (rozwijane warunki): usunięte „więc niczym nie ryzykujesz" — pusta obietnica, która przemilczała zobowiązanie opisane punkt wyżej. Jest: „kwalifikację sprawdzamy, zanim zgłosimy firmę u producenta".
+- **Zasada na przyszłość**: w treściach sprzedażowych obiecywać wyłącznie czynność, którą naprawdę wykonujemy. „Sprawdzimy X" zamiast „policzymy, czy Ci się opłaca".
+- tsc EXIT=0, treść zweryfikowana na renderze.

@@ -122,7 +122,7 @@ export default function PrintheadProgramCta({ productName, deviceModel, priceBru
                   Sprawdzimy, czy Twoja firma się kwalifikuje
                 </h2>
                 <p className="mt-1.5 text-sm text-white/60 leading-relaxed">
-                  Zgłoszenie nie jest zobowiązaniem. Najpierw liczymy, czy program Ci się opłaca, i wracamy z odpowiedzią.
+                  Zgłoszenie nie jest zobowiązaniem. Sprawdzamy, czy Twoje zużycie materiałów sięga progu wymaganego przez Zebrę, i wracamy z odpowiedzią.
                 </p>
               </div>
 

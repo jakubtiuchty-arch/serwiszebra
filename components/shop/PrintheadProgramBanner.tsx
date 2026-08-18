@@ -52,8 +52,8 @@ export default function PrintheadProgramBanner({ priceBrutto, deviceModel, produ
                 głowice trafiają do utylizacji.
               </li>
               <li>
-                Program zakłada regularne, większe zużycie etykiet i taśm — kwalifikację sprawdzamy
-                przed zgłoszeniem, więc niczym nie ryzykujesz.
+                Program zakłada regularne, większe zużycie etykiet i taśm — kwalifikację sprawdzamy,
+                zanim zgłosimy firmę u producenta.
               </li>
               <li>
                 Zgłaszamy firmę u producenta, podając model i numer seryjny każdej drukarki. Zebra
