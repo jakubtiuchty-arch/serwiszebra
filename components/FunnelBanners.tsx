@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import { ArrowRight } from 'lucide-react'
+import { TAKMA_PRODUCT_BY_MODEL } from '@/lib/takma-product-links'
 
 /**
  * Most lejka (TOFU → MOFU) wstawiany w treść instrukcji (po sekcji „Rozwiązywanie problemów").
@@ -7,8 +8,13 @@ import { ArrowRight } from 'lucide-react'
  *
  * Renderuje się dla KAŻDEGO modelu. Cel linku (zawsze 200, zero 404):
  *   1. MODELS[model] z jawnym slugiem → deep-link do karty produktu (np. TC22),
- *   2. inaczej typ urządzenia po prefiksie modelu → strona kategorii Zebra,
- *   3. inaczej → landing marki /zebra.
+ *   2. TAKMA_PRODUCT_BY_MODEL → karta produktu dla modelu, jeśli takma ją ma,
+ *   3. inaczej typ urządzenia po prefiksie modelu → strona kategorii Zebra,
+ *   4. inaczej → landing marki /zebra.
+ *
+ * Punkt 2 dodany 20.08.2026: wcześniej 42 modele z instrukcją miały kartę produktu
+ * w katalogu, a mimo to baner prowadził do kategorii — moc linku szła w rozsypkę
+ * zamiast wzmacniać stronę, która walczy o pozycję na nazwę modelu.
  */
 
 interface ModelFunnel {
@@ -75,6 +81,9 @@ export default function FunnelBanners({
     isProductLink = true
   } else if (!inProd && cfg.successorTakmaSlug) {
     buyHref = withUtm(`/produkt/${cfg.successorTakmaSlug}`, model)
+    isProductLink = true
+  } else if (inProd && TAKMA_PRODUCT_BY_MODEL[model.toUpperCase()]) {
+    buyHref = withUtm(`/produkt/${TAKMA_PRODUCT_BY_MODEL[model.toUpperCase()]}`, model)
     isProductLink = true
   } else {
     buyHref = withUtm(categoryPath(model), model)
