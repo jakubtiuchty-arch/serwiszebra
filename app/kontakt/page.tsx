@@ -29,6 +29,32 @@ const CONTACT_TOPICS = {
       'Używane etykiety i taśmy:\n' +
       'Szacunkowe roczne zużycie materiałów:\n',
   },
+  kontrakt: {
+    subject: 'Kontrakt serwisowy na 3 lata',
+    message:
+      'Dzień dobry,\n\nproszę o szczegóły kontraktu serwisowego na 3 lata.\n\n' +
+      'Model drukarki:\n' +
+      'Numer seryjny:\n' +
+      'Liczba urządzeń do objęcia kontraktem:\n',
+  },
+  etykiety: {
+    subject: 'Bezpłatna rolka etykiet do testu',
+    message:
+      'Dzień dobry,\n\nproszę o bezpłatną rolkę etykiet do testu.\n\n' +
+      'Model drukarki:\n' +
+      'Rozmiar etykiety (szer. × wys. w mm):\n' +
+      'Średnica gilzy (25 lub 76 mm):\n' +
+      'Adres do wysyłki:\n',
+  },
+  materialy: {
+    subject: 'Rabat na oryginalne etykiety i taśmy Zebra',
+    message:
+      'Dzień dobry,\n\nproszę o wycenę materiałów w promocji.\n\n' +
+      'Model drukarki:\n' +
+      'Numer seryjny:\n' +
+      'Rozmiar etykiety (szer. × wys. w mm):\n' +
+      'Liczba kartonów:\n',
+  },
 } as const
 
 export default function ContactPage() {
@@ -47,12 +73,22 @@ export default function ContactPage() {
   // nie musiał się zastanawiać, co napisać, a my dostali komplet danych do kwalifikacji.
   // Czytamy z window zamiast useSearchParams, żeby nie wymuszać granicy Suspense.
   useEffect(() => {
-    const topic = new URLSearchParams(window.location.search).get('temat')
-    if (topic !== 'glowice') return
+    const params = new URLSearchParams(window.location.search)
+    const topic = params.get('temat')
+    const preset = topic ? CONTACT_TOPICS[topic as keyof typeof CONTACT_TOPICS] : undefined
+    if (!preset) return
+
+    // ?seria=Z-Perform 1000D — wybór z newslettera wraca do formularza, żeby klient
+    // nie przepisywał nazwy z maila. Wpuszczamy tylko znaki z nazw serii Zebry.
+    const series = (params.get('seria') || '')
+      .replace(/[^A-Za-z0-9ąćęłńóśźżĄĆĘŁŃÓŚŹŻ +\-–.]/g, '')
+      .trim()
+      .slice(0, 60)
+
     setFormData((prev) => ({
       ...prev,
-      subject: CONTACT_TOPICS.glowice.subject,
-      message: prev.message || CONTACT_TOPICS.glowice.message,
+      subject: preset.subject,
+      message: prev.message || (series ? `${preset.message}Wybrana seria: ${series}\n` : preset.message),
     }))
   }, [])
 
@@ -270,6 +306,8 @@ export default function ContactPage() {
                         <option value="Status naprawy">Status naprawy</option>
                         <option value="Współpraca B2B">Współpraca B2B</option>
                         <option value="Program bezpłatnych wymian głowic">Program bezpłatnych wymian głowic</option>
+                        <option value="Bezpłatna rolka etykiet do testu">Bezpłatna rolka etykiet do testu</option>
+                        <option value="Kontrakt serwisowy na 3 lata">Kontrakt serwisowy na 3 lata</option>
                         <option value="Reklamacja">Reklamacja</option>
                         <option value="Inne">Inne</option>
                       </select>
