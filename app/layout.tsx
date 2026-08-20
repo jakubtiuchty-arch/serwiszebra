@@ -62,37 +62,39 @@ export default function RootLayout({
   return (
     <html lang="pl" className={inter.className}>
       <head>
-        {/* Google Consent Mode - domyślnie denied przed zgodą użytkownika */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('consent', 'default', {
-                'analytics_storage': 'denied',
-                'ad_storage': 'denied',
-                'ad_user_data': 'denied',
-                'ad_personalization': 'denied',
-                'functionality_storage': 'granted',
-                'personalization_storage': 'denied',
-                'security_storage': 'granted',
-                'wait_for_update': 500
-              });
-            `
-          }}
-        />
+        {/* Google Consent Mode — MUSI wykonać się przed gtag.js.
+            Zwykły <script> w <head> Next.js przenosi za loader tagu (sprawdzone:
+            loader na pozycji 938, zgody dopiero na 10664), przez co tryb zgody
+            potrafi nie zadziałać. strategy="beforeInteractive" wymusza właściwą kolejność. */}
+        <Script id="consent-default" strategy="beforeInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('consent', 'default', {
+              'analytics_storage': 'denied',
+              'ad_storage': 'denied',
+              'ad_user_data': 'denied',
+              'ad_personalization': 'denied',
+              'functionality_storage': 'granted',
+              'personalization_storage': 'denied',
+              'security_storage': 'granted',
+              'wait_for_update': 500
+            });
+
+            // Przy 'ad_storage: denied' identyfikator kliknięcia reklamy (gclid) nie trafia
+            // do cookie, więc Ads nie wiąże zgłoszenia z reklamą. Sprawdzone 20.08.2026:
+            // akcje repair_form_submit / phone_click / email_click miały przez 12 miesięcy
+            // ZERO konwersji, mimo że GA4 rejestrował zdarzenia (takma.com.pl, bez trybu
+            // zgody, liczy je normalnie). url_passthrough przenosi gclid w adresie URL
+            // zamiast w cookie — atrybucja częściowo wraca, zgoda pozostaje uszanowana.
+            gtag('set', 'url_passthrough', true);
+          `}
+        </Script>
         
-        {/* GA4 bezpośrednio (gtag.js) — kontener GTM należał do Verseo, wypięty 2026-07-07 */}
-        <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`} />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              gtag('js', new Date());
-              gtag('config', '${GA_MEASUREMENT_ID}');
-            `
-          }}
-        />
-        
+        {/* GA4 ładowany JEDEN raz, niżej przez <Script strategy="afterInteractive">.
+            Był tu drugi, zwykły <script async> z tym samym identyfikatorem — Next wypychał
+            go na początek <head> (pozycja 972), czyli PRZED zgodami, przez co tryb zgody
+            nie obejmował pierwszego wywołania tagu. Usunięty 20.08.2026. */}
         {/* Microsoft Clarity */}
         <script
           dangerouslySetInnerHTML={{
