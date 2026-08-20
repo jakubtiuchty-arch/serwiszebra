@@ -3,6 +3,7 @@ import { requireAdminServer } from '@/lib/auth-server'
 import { createClient } from '@/lib/supabase/server'
 import { sendRepairStatusChangedEmail, sendPackageReceivedEmail } from '@/lib/email'
 import { generateReceiptPDF } from '@/lib/receipt-pdf-generator'
+import { canReceiveEmail } from '@/lib/email-utils'
 
 export async function PATCH(
   request: NextRequest,
@@ -150,8 +151,10 @@ export async function PATCH(
         console.log('Skipping duplicate history entry for status:', status)
       }
 
-      // Wyślij email o zmianie statusu
-      if (currentRepair) {
+      // Wyślij email o zmianie statusu.
+      // Zgłoszenia przyjęte w biurze bez adresu mają zaślepkę w domenie .invalid —
+      // nie ma tam do kogo wysyłać, a próba tylko zaśmiecałaby logi.
+      if (currentRepair && canReceiveEmail(currentRepair.email)) {
         try {
           // Specjalny email dla statusu "odebrane" - Potwierdzenie przyjęcia urządzenia z PDF
           if (status === 'odebrane') {

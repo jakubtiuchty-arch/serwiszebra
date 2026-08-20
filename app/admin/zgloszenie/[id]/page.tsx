@@ -6,6 +6,7 @@ import ChatBox from '@/components/chat/ChatBox'
 import { format } from 'date-fns'
 import { pl } from 'date-fns/locale'
 import { CourierModal } from '@/components/ui/courier-modal'
+import { canReceiveEmail } from '@/lib/email-utils'
 import {
   Package,
   User,
@@ -626,13 +627,21 @@ export default function AdminRepairDetailPage() {
                 )}
                 <div>
                   <p className="text-xs text-gray-500">Email</p>
-                  <a
-                    href={`mailto:${repair.email}`}
-                    className="text-blue-600 hover:text-blue-800 flex items-center text-sm font-medium"
-                  >
-                    <Mail className="w-3 h-3 mr-1" />
-                    {repair.email}
-                  </a>
+                  {canReceiveEmail(repair.email) ? (
+                    <a
+                      href={`mailto:${repair.email}`}
+                      className="text-blue-600 hover:text-blue-800 flex items-center text-sm font-medium"
+                    >
+                      <Mail className="w-3 h-3 mr-1" />
+                      {repair.email}
+                    </a>
+                  ) : (
+                    /* Przyjęcie w biurze bez adresu — kontakt wyłącznie telefoniczny */
+                    <span className="flex items-center text-sm font-medium text-gray-400">
+                      <Mail className="w-3 h-3 mr-1" />
+                      brak adresu — kontakt telefoniczny
+                    </span>
+                  )}
                 </div>
                 <div>
                   <p className="text-xs text-gray-500">Telefon</p>

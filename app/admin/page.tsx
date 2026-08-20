@@ -2,10 +2,11 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { ClipboardList, Search, AlertCircle, Clock, CheckCircle, XCircle, MessageCircle } from 'lucide-react'
+import { ClipboardList, Search, AlertCircle, Clock, CheckCircle, XCircle, MessageCircle, Plus } from 'lucide-react'
 import { format } from 'date-fns'
 import { pl } from 'date-fns/locale'
 import { createClient } from '@/lib/supabase/client'
+import WalkInRepairModal from '@/components/admin/WalkInRepairModal'
 
 interface RepairRequest {
   id: string
@@ -50,6 +51,7 @@ export default function AdminDashboard() {
   const [loading, setLoading] = useState(true)
   const [unreadCounts, setUnreadCounts] = useState<Record<string, number>>({})
   const [lastMessageAt, setLastMessageAt] = useState<Record<string, string>>({})
+  const [showWalkIn, setShowWalkIn] = useState(false)
   
   // Filtry
   const [statusFilter, setStatusFilter] = useState<string>('all')
@@ -188,13 +190,33 @@ export default function AdminDashboard() {
           <h1 className="text-xl sm:text-2xl font-bold text-gray-900 mb-0.5">Dashboard</h1>
           <p className="text-xs text-gray-500">Zarządzaj wszystkimi zgłoszeniami serwisowymi</p>
         </div>
-        <div className="text-right hidden sm:block">
-          <p className="text-xs text-gray-600">Dzisiaj</p>
-          <p className="text-sm font-semibold text-gray-900">
-            {new Date().toLocaleDateString('pl-PL', { day: 'numeric', month: 'short', year: 'numeric' })}
-          </p>
+        <div className="flex items-center gap-3">
+          <div className="text-right hidden sm:block">
+            <p className="text-xs text-gray-600">Dzisiaj</p>
+            <p className="text-sm font-semibold text-gray-900">
+              {new Date().toLocaleDateString('pl-PL', { day: 'numeric', month: 'short', year: 'numeric' })}
+            </p>
+          </div>
+          {/* Klient przyszedł z urządzeniem do biura — zgłoszenie wpisujemy sami */}
+          <button
+            onClick={() => setShowWalkIn(true)}
+            className="flex items-center gap-1.5 px-3 py-2 bg-blue-600 text-white rounded-lg text-xs sm:text-sm font-semibold hover:bg-blue-700 transition-colors"
+          >
+            <Plus className="w-4 h-4" />
+            Przyjęcie w biurze
+          </button>
         </div>
       </div>
+
+      {showWalkIn && (
+        <WalkInRepairModal
+          onClose={() => setShowWalkIn(false)}
+          onCreated={(repairId) => {
+            setShowWalkIn(false)
+            router.push(`/admin/zgloszenie/${repairId}`)
+          }}
+        />
+      )}
 
       {/* Statystyki - KOMPAKTOWE */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3">
