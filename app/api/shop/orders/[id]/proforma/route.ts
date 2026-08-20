@@ -73,6 +73,7 @@ export async function GET(
           <td>
             <div class="service-name">${item.name}</div>
             ${item.sku ? `<div class="service-notes">PN: ${item.sku}</div>` : ''}
+            ${item.serialNumber ? `<div class="service-notes">Urządzenie: ${item.deviceModel || ''} · S/N ${item.serialNumber}</div>` : ''}
           </td>
           <td>${item.quantity} szt.</td>
           <td class="amount">${priceNetto.toFixed(2)} zł</td>

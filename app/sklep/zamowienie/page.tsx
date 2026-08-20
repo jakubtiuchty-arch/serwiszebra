@@ -68,8 +68,10 @@ export default function ZamowieniePage() {
   const subtotalNetto = items.reduce((sum, item) => sum + item.price * item.quantity, 0)
   const subtotalBrutto = items.reduce((sum, item) => sum + item.price_brutto * item.quantity, 0)
 
-  // Koszt dostawy — stała kwota doliczana automatycznie do każdego zamówienia
-  const SHIPPING_BRUTTO = 25
+  // Koszt dostawy — stała kwota, ale tylko gdy jest co wysłać. Zamówienie
+  // złożone wyłącznie z usług (kontrakt serwisowy) nie generuje przesyłki.
+  const hasPhysicalItems = items.some((item) => !item.is_service)
+  const SHIPPING_BRUTTO = hasPhysicalItems ? 25 : 0
   const shippingNetto = SHIPPING_BRUTTO / 1.23
   const totalNetto = subtotalNetto + shippingNetto
   const totalBrutto = subtotalBrutto + SHIPPING_BRUTTO
@@ -96,12 +98,16 @@ export default function ZamowieniePage() {
         body: JSON.stringify({
           ...formData,
           items: items.map(item => ({
-            productId: item.id,
+            productId: item.productId || item.id,
             name: item.name,
             sku: item.sku,
             quantity: item.quantity,
             priceNetto: item.price,
-            priceBrutto: item.price_brutto
+            priceBrutto: item.price_brutto,
+            // Kontrakt serwisowy — urządzenie, którego dotyczy
+            ...(item.serial_number
+              ? { serialNumber: item.serial_number, deviceModel: item.contract_device_model, isService: true }
+              : {})
           })),
           totalNetto: totalNetto,
           totalBrutto: totalBrutto,
@@ -326,6 +332,11 @@ export default function ZamowieniePage() {
                           <p className="text-[10px] sm:text-xs text-gray-500">
                             {item.quantity} × {item.price.toFixed(2).replace('.', ',')} zł
                           </p>
+                          {item.serial_number && (
+                            <p className="text-[10px] sm:text-xs text-gray-400 font-mono">
+                              S/N {item.serial_number}
+                            </p>
+                          )}
                         </div>
                         <div className="text-xs sm:text-sm font-semibold text-gray-900">
                           {(item.price * item.quantity).toFixed(2).replace('.', ',')} zł
@@ -342,7 +353,9 @@ export default function ZamowieniePage() {
                     </div>
                     <div className="flex justify-between text-xs sm:text-sm">
                       <span className="text-gray-500 flex items-center gap-1.5"><Truck className="w-3.5 h-3.5" /> Dostawa kurierem</span>
-                      <span className="font-medium">{SHIPPING_BRUTTO.toFixed(2).replace('.', ',')} zł</span>
+                      <span className="font-medium">
+                        {hasPhysicalItems ? `${SHIPPING_BRUTTO.toFixed(2).replace('.', ',')} zł` : 'nie dotyczy'}
+                      </span>
                     </div>
                     <div className="flex justify-between text-xs sm:text-sm">
                       <span className="text-gray-500">VAT 23%</span>
@@ -512,8 +525,13 @@ export default function ZamowieniePage() {
                 {/* Adres dostawy */}
                 <div className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-5 shadow-sm">
                   <h2 className="text-base sm:text-lg font-semibold text-gray-900 mb-3 sm:mb-4">
-                    Adres dostawy
+                    {hasPhysicalItems ? 'Adres dostawy' : 'Adres firmy'}
                   </h2>
+                  {!hasPhysicalItems && (
+                    <p className="-mt-2 mb-3 text-xs sm:text-sm text-gray-500">
+                      Nic nie wysyłamy — adres potrzebujemy wyłącznie na fakturę.
+                    </p>
+                  )}
                   
                   <div className="space-y-3 sm:space-y-4">
                     {/* Ulica i numer */}

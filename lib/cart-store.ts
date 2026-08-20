@@ -2,7 +2,14 @@ import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
 export interface CartItem {
+  /**
+   * Klucz pozycji w koszyku. Dla części to id produktu, ale kontrakt serwisowy
+   * kupuje się na konkretne urządzenie, więc dwie sztuki tego samego produktu
+   * z różnymi numerami seryjnymi muszą być osobnymi wierszami — stąd sufiks
+   * z numerem seryjnym. Prawdziwe id produktu trzymamy w `productId`.
+   */
   id: string
+  productId?: string
   name: string
   slug: string
   sku: string
@@ -14,6 +21,13 @@ export interface CartItem {
   image?: string
   device_model?: string | null
   resolution_dpi?: number | null
+  /** Usługa — nie ma czego wysyłać, więc nie naliczamy dostawy */
+  is_service?: boolean
+  /** Urządzenie objęte kontraktem */
+  serial_number?: string
+  contract_device_model?: string
+  /** Blokuje stepper ilości — kontrakt jest zawsze na jedno urządzenie */
+  fixed_quantity?: boolean
 }
 
 interface CartStore {
@@ -35,7 +49,13 @@ export const useCartStore = create<CartStore>()(
       addItem: (item) => {
         set((state) => {
           const existingItem = state.items.find((i) => i.id === item.id)
-          
+
+          // Kontrakt jest przypisany do jednego numeru seryjnego — ponowne dodanie
+          // tego samego urządzenia nie ma zwiększać ilości, tylko nic nie zmieniać
+          if (existingItem && item.fixed_quantity) {
+            return state
+          }
+
           if (existingItem) {
             // Zwiększ ilość jeśli produkt już w koszyku
             return {
@@ -63,7 +83,7 @@ export const useCartStore = create<CartStore>()(
       updateQuantity: (id, quantity) => {
         set((state) => ({
           items: state.items.map((item) =>
-            item.id === id
+            item.id === id && !item.fixed_quantity
               ? { ...item, quantity: Math.min(Math.max(1, quantity), item.stock) }
               : item
           ),

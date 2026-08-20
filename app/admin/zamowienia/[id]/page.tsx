@@ -37,6 +37,10 @@ interface OrderItem {
   quantity: number
   priceNetto: number
   priceBrutto: number
+  /** Kontrakt serwisowy — urządzenie, którego dotyczy */
+  serialNumber?: string
+  deviceModel?: string
+  isService?: boolean
 }
 
 interface Order {
@@ -566,6 +570,12 @@ export default function OrderDetailPage() {
                             <div>
                               <p className="text-sm font-semibold text-gray-900">{item.name}</p>
                               <p className="text-xs text-gray-500">PN: {item.sku}</p>
+                              {item.serialNumber && (
+                                <p className="text-xs font-semibold text-gray-700 mt-0.5">
+                                  Kontrakt: {item.deviceModel || 'model nieznany'}
+                                  <span className="ml-2 font-mono">S/N {item.serialNumber}</span>
+                                </p>
+                              )}
                             </div>
                           </div>
                         </td>

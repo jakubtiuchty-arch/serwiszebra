@@ -148,8 +148,8 @@ export default function KoszykPage() {
 
                     {/* Info */}
                     <div className="flex-1 min-w-0">
-                      <Link 
-                        href={`/sklep/${item.slug}`}
+                      <Link
+                        href={item.is_service ? '/kontrakt-serwisowy' : `/sklep/${item.slug}`}
                         className="text-xs sm:text-sm font-semibold text-gray-900 hover:text-blue-600 line-clamp-2 mb-0.5 sm:mb-1"
                       >
                         {item.name}
@@ -158,9 +158,17 @@ export default function KoszykPage() {
                         {item.sku}
                       </p>
 
+                      {/* Kontrakt jest przypisany do urządzenia — numer seryjny musi być widoczny */}
+                      {item.serial_number && (
+                        <p className="text-[10px] sm:text-xs text-gray-500 -mt-1 mb-2 sm:mb-3">
+                          Urządzenie: <strong className="text-gray-700">{item.contract_device_model}</strong>
+                          <span className="ml-2 font-mono">S/N {item.serial_number}</span>
+                        </p>
+                      )}
+
                       <div className="flex items-center justify-between gap-2">
                         {/* Ilość */}
-                        <div className="flex items-center gap-0.5 sm:gap-1 bg-gray-100 rounded-lg p-0.5 sm:p-1">
+                        <div className={`flex items-center gap-0.5 sm:gap-1 bg-gray-100 rounded-lg p-0.5 sm:p-1 ${item.fixed_quantity ? 'hidden' : ''}`}>
                           <button
                             onClick={() => updateQuantity(item.id, Math.max(1, item.quantity - 1))}
                             disabled={item.quantity <= 1}
@@ -179,6 +187,10 @@ export default function KoszykPage() {
                             <Plus className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                           </button>
                         </div>
+
+                        {item.fixed_quantity && (
+                          <span className="text-[10px] sm:text-xs text-gray-400">1 urządzenie</span>
+                        )}
 
                         {/* Cena */}
                         <div className="text-right">

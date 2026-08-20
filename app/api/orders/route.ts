@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { sendOrderConfirmationEmail, sendNewOrderNotificationEmail } from '@/lib/email'
+import { createPendingContracts } from '@/lib/service-contracts'
 
 export async function POST(request: Request) {
   try {
@@ -97,6 +98,14 @@ export async function POST(request: Request) {
         { error: 'Błąd tworzenia zamówienia' },
         { status: 500 }
       )
+    }
+
+    // Kontrakty serwisowe — zapisujemy numery seryjne od razu, żeby nie zginęły,
+    // gdy klient porzuci płatność. Ochrona rusza dopiero po zaksięgowaniu wpłaty.
+    try {
+      await createPendingContracts(supabase, order)
+    } catch (contractError) {
+      console.error('Error creating service contracts:', contractError)
     }
 
     // Wyślij e-mail do klienta

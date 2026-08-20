@@ -57,7 +57,15 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: 'Database error' }, { status: 500 })
     }
 
-    const formatted = (orders || []).map((o: any) => {
+    // Zamówienia złożone wyłącznie z usług (kontrakt serwisowy) nie mają czego
+    // wysłać — bez tego filtra Furgonetka zamówiłaby kuriera po pustą paczkę.
+    const shippable = (orders || []).filter((o: any) => {
+      const items = (typeof o.items === 'string' ? JSON.parse(o.items) : o.items) || []
+      if (items.length === 0) return true
+      return items.some((it: any) => !it?.isService && !it?.serialNumber)
+    })
+
+    const formatted = shippable.map((o: any) => {
       const items = (typeof o.items === 'string' ? JSON.parse(o.items) : o.items) || []
       const itemsBrutto = items.reduce(
         (s: number, it: any) => s + (Number(it.priceBrutto) || 0) * (Number(it.quantity) || 1),

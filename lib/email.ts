@@ -2457,6 +2457,9 @@ interface ShopOrderItem {
   quantity: number
   priceNetto: number
   priceBrutto: number
+  /** Kontrakt serwisowy — urządzenie, którego dotyczy */
+  serialNumber?: string
+  deviceModel?: string
 }
 
 interface OrderConfirmationEmailData {
@@ -2502,7 +2505,7 @@ export async function sendOrderConfirmationEmail(data: OrderConfirmationEmailDat
     <tr>
       <td style="padding:12px 0;border-bottom:1px solid #f3f4f6;">
         <strong style="color:#111827;font-size:14px;">${item.name}</strong><br>
-        <span style="color:#6b7280;font-size:12px;">PN: ${item.sku}</span>
+        <span style="color:#6b7280;font-size:12px;">PN: ${item.sku}</span>${item.serialNumber ? `<br><span style="color:#374151;font-size:12px;">Urządzenie: ${item.deviceModel || ''} · S/N ${item.serialNumber}</span>` : ''}
       </td>
       <td style="padding:12px 0;border-bottom:1px solid #f3f4f6;text-align:center;color:#6b7280;font-size:14px;">${item.quantity} szt.</td>
       <td style="padding:12px 0;border-bottom:1px solid #f3f4f6;text-align:right;color:#111827;font-weight:600;font-size:14px;white-space:nowrap;">${money(item.priceBrutto * item.quantity)}</td>
@@ -2624,7 +2627,7 @@ export async function sendNewOrderNotificationEmail(data: NewOrderNotificationEm
     <tr>
       <td style="padding:10px 0;border-bottom:1px solid #f3f4f6;">
         <strong style="color:#111827;font-size:14px;">${item.name}</strong><br>
-        <span style="color:#6b7280;font-size:12px;">PN: ${item.sku}</span>
+        <span style="color:#6b7280;font-size:12px;">PN: ${item.sku}</span>${item.serialNumber ? `<br><span style="color:#374151;font-size:12px;">Urządzenie: ${item.deviceModel || ''} · S/N ${item.serialNumber}</span>` : ''}
       </td>
       <td style="padding:10px 0;border-bottom:1px solid #f3f4f6;text-align:center;color:#6b7280;font-size:14px;">${item.quantity} szt.</td>
       <td style="padding:10px 0;border-bottom:1px solid #f3f4f6;text-align:right;color:#111827;font-weight:600;font-size:14px;white-space:nowrap;">${money(item.priceNetto * item.quantity)}</td>

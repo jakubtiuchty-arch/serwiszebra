@@ -330,6 +330,11 @@ export function getProductUrl(product: {
   product_type: string
   device_model: string
 }): string {
+  // Usługi mają własne strony poza katalogiem części
+  if (product.product_type === 'kontrakt') {
+    return '/kontrakt-serwisowy'
+  }
+
   const categoryPath = getCategoryPathForProduct(product)
   
   if (categoryPath) {

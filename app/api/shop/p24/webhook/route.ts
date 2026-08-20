@@ -10,6 +10,7 @@ import {
   type P24Notification,
 } from '@/lib/p24'
 import { sendShopPaymentConfirmedEmail, sendShopPaymentAdminEmail } from '@/lib/email'
+import { activateContractsForOrder } from '@/lib/service-contracts'
 
 /**
  * Notyfikacja Przelewy24 (urlStatus, klasyczne API 3.2 — form-urlencoded p24_*).
@@ -93,6 +94,18 @@ export async function POST(request: NextRequest) {
   }
 
   console.log(`[P24 webhook] Order ${order.order_number} PAID (p24OrderId=${n.orderId})`)
+
+  // Kontrakty serwisowe z tego zamówienia zaczynają obowiązywać w dniu wpłaty.
+  // W try/catch — błąd nie może zwrócić 500, bo zamówienie jest już 'succeeded'
+  // i przy ponowionej notyfikacji idempotencja wyjdzie wcześniej.
+  try {
+    const activated = await activateContractsForOrder(supabase, order.id)
+    if (activated > 0) {
+      console.log(`[P24 webhook] Aktywowano kontraktów serwisowych: ${activated} (${order.order_number})`)
+    }
+  } catch (err: any) {
+    console.error(`[P24 webhook] contract activation failed for ${order.order_number}:`, err?.message || err)
+  }
 
   // Mail do klienta: płatność potwierdzona — zamówienie w realizacji.
   // W try/catch — błąd maila nie może zwrócić 500 (P24 ponowiłby notyfikację,
