@@ -84,10 +84,41 @@ export async function GET(request: NextRequest) {
       }
     }
 
-    // Dołącz profile do zgłoszeń
+    // Nieprzeczytane wiadomości od klientów — jednym zapytaniem dla całej listy.
+    // Serwisanci chcą, żeby zgłoszenie z nową wiadomością wskakiwało na górę,
+    // więc lista musi znać licznik i czas ostatniej wiadomości od klienta.
+    const repairIds = repairs.map(r => r.id)
+    const unreadMap: Record<string, { count: number; lastAt: string }> = {}
+
+    if (repairIds.length > 0) {
+      const { data: unreadMessages, error: unreadError } = await supabase
+        .from('repair_messages')
+        .select('repair_request_id, created_at')
+        .eq('sender_type', 'user')
+        .eq('is_read', false)
+        .in('repair_request_id', repairIds)
+
+      if (unreadError) {
+        console.error('Error fetching unread messages:', unreadError)
+      } else {
+        for (const m of unreadMessages || []) {
+          const entry = unreadMap[m.repair_request_id]
+          if (entry) {
+            entry.count += 1
+            if (m.created_at > entry.lastAt) entry.lastAt = m.created_at
+          } else {
+            unreadMap[m.repair_request_id] = { count: 1, lastAt: m.created_at }
+          }
+        }
+      }
+    }
+
+    // Dołącz profile i licznik nieprzeczytanych do zgłoszeń
     const repairsWithProfiles = repairs?.map(r => ({
       ...r,
-      profiles: profilesMap[r.user_id] || null
+      profiles: profilesMap[r.user_id] || null,
+      unread_count: unreadMap[r.id]?.count || 0,
+      last_customer_message_at: unreadMap[r.id]?.lastAt || null
     })) || []
 
     // Pobierz wszystkie zgłoszenia do statystyk (bez filtrów)

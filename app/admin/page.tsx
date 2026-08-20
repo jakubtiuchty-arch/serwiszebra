@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { ClipboardList, Search, AlertCircle, Clock, CheckCircle, XCircle, MessageCircle } from 'lucide-react'
 import { format } from 'date-fns'
@@ -19,6 +19,9 @@ interface RepairRequest {
   final_price: number | null
   created_at: string
   user_id: string
+  /** Nieprzeczytane wiadomości od klienta — liczone przez /api/admin/repairs */
+  unread_count?: number
+  last_customer_message_at?: string | null
   // Dane bezpośrednio w zgłoszeniu (dla gości)
   first_name: string | null
   last_name: string | null
@@ -46,6 +49,7 @@ export default function AdminDashboard() {
   const [stats, setStats] = useState<Stats>({ total: 0, active: 0, completed: 0, users: 0 })
   const [loading, setLoading] = useState(true)
   const [unreadCounts, setUnreadCounts] = useState<Record<string, number>>({})
+  const [lastMessageAt, setLastMessageAt] = useState<Record<string, string>>({})
   
   // Filtry
   const [statusFilter, setStatusFilter] = useState<string>('all')
@@ -79,7 +83,21 @@ export default function AdminDashboard() {
       if (!response.ok) throw new Error('Błąd pobierania zgłoszeń')
 
       const data = await response.json()
-      setRepairs(data.repairs || [])
+      const list: RepairRequest[] = data.repairs || []
+      setRepairs(list)
+      // Liczniki przychodzą razem z listą — jedno zapytanie zamiast jednego na zgłoszenie
+      setUnreadCounts(
+        list.reduce((acc, r) => {
+          acc[r.id] = r.unread_count || 0
+          return acc
+        }, {} as Record<string, number>)
+      )
+      setLastMessageAt(
+        list.reduce((acc, r) => {
+          if (r.last_customer_message_at) acc[r.id] = r.last_customer_message_at
+          return acc
+        }, {} as Record<string, string>)
+      )
       setStats(data.stats || { total: 0, active: 0, completed: 0, users: 0 })
     } catch (error) {
       console.error('Błąd:', error)
@@ -93,14 +111,12 @@ export default function AdminDashboard() {
     fetchRepairs()
   }, [statusFilter, searchQuery])
 
-  // Pobieranie unread counts dla wszystkich napraw
+  // Nasłuch nowych wiadomości. Liczniki startowe przychodzą razem z listą,
+  // więc tutaj odświeżamy tylko to zgłoszenie, którego dotyczy zmiana —
+  // dzięki temu karta wskakuje na górę (nowa wiadomość) albo z niej znika
+  // (serwisant przeczytał i is_read zmienia się na true).
   useEffect(() => {
     if (repairs.length > 0) {
-      repairs.forEach(repair => {
-        fetchUnreadCount(repair.id)
-      })
-
-      // Realtime subscription dla nowych wiadomości
       const channel = supabase
         .channel('admin_repair_messages')
         .on(
@@ -111,9 +127,13 @@ export default function AdminDashboard() {
             table: 'repair_messages',
           },
           (payload: any) => {
-            if (payload.new?.repair_request_id) {
-              fetchUnreadCount(payload.new.repair_request_id)
+            const repairId = payload.new?.repair_request_id
+            if (!repairId) return
+            // Świeża wiadomość od klienta wyznacza pozycję na górze listy
+            if (payload.new?.sender_type === 'user' && payload.new?.is_read === false) {
+              setLastMessageAt(prev => ({ ...prev, [repairId]: payload.new.created_at }))
             }
+            fetchUnreadCount(repairId)
           }
         )
         .subscribe()
@@ -123,6 +143,26 @@ export default function AdminDashboard() {
       }
     }
   }, [repairs])
+
+  /**
+   * Kolejność listy: zgłoszenia z nieprzeczytaną wiadomością od klienta idą na
+   * samą górę (najnowsza wiadomość pierwsza), reszta zostaje w normalnym
+   * porządku od najnowszego zgłoszenia. Gdy serwisant otworzy kartę, ChatBox
+   * oznacza wiadomości jako przeczytane, licznik spada do zera i zgłoszenie
+   * wraca na swoje miejsce.
+   */
+  const sortedRepairs = useMemo(() => {
+    const stamp = (r: RepairRequest) =>
+      lastMessageAt[r.id] || r.last_customer_message_at || r.created_at
+
+    return [...repairs].sort((a, b) => {
+      const aUnread = (unreadCounts[a.id] || 0) > 0
+      const bUnread = (unreadCounts[b.id] || 0) > 0
+      if (aUnread !== bUnread) return aUnread ? -1 : 1
+      if (aUnread && bUnread) return stamp(b).localeCompare(stamp(a))
+      return b.created_at.localeCompare(a.created_at)
+    })
+  }, [repairs, unreadCounts, lastMessageAt])
 
   // Mapowanie statusów na kolory i polskie nazwy
   const getStatusInfo = (status: string) => {
@@ -240,7 +280,7 @@ export default function AdminDashboard() {
         <>
           {/* Mobile: karty */}
           <div className="md:hidden space-y-2">
-            {repairs.map((repair) => {
+            {sortedRepairs.map((repair) => {
               const statusInfo = getStatusInfo(repair.status)
               const displayPrice = repair.final_price || repair.estimated_price
 
@@ -248,7 +288,9 @@ export default function AdminDashboard() {
                 <div 
                   key={repair.id} 
                   onClick={() => router.push(`/admin/zgloszenie/${repair.id}`)}
-                  className="bg-white border border-gray-200 rounded-xl p-3 shadow-sm active:bg-gray-50 cursor-pointer"
+                  className={`bg-white border rounded-xl p-3 shadow-sm active:bg-gray-50 cursor-pointer ${
+                    unreadCounts[repair.id] > 0 ? 'border-blue-300 bg-blue-50/60' : 'border-gray-200'
+                  }`}
                 >
                   <div className="flex items-start justify-between mb-2">
                     <div>
@@ -317,12 +359,17 @@ export default function AdminDashboard() {
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-100">
-                  {repairs.map((repair) => {
+                  {sortedRepairs.map((repair) => {
                     const statusInfo = getStatusInfo(repair.status)
                     const displayPrice = repair.final_price || repair.estimated_price
 
                     return (
-                      <tr key={repair.id} className="hover:bg-gray-50 transition-colors">
+                      <tr
+                        key={repair.id}
+                        className={`transition-colors ${
+                          unreadCounts[repair.id] > 0 ? 'bg-blue-50 hover:bg-blue-100' : 'hover:bg-gray-50'
+                        }`}
+                      >
                         <td className="px-4 py-2.5 whitespace-nowrap">
                           <div className="flex items-center gap-2">
                             <div className="text-xs font-semibold text-gray-900">
