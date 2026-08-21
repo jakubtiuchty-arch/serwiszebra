@@ -109,21 +109,41 @@ export default function ChatBox({ repairId, currentUserType }: ChatBoxProps) {
     }
   }, [messages])
 
+  /**
+   * Oznaczanie jako przeczytane.
+   *
+   * Warunek widoczności jest tu kluczowy: czat nasłuchuje zmian przez realtime,
+   * więc karta naprawy zostawiona w tle (np. serwisant robił wycenę i przeszedł
+   * do innej zakładki) „przeczytałaby" wiadomość w sekundzie, w której ta
+   * przyszła. Na liście zgłoszeń wyglądało to tak, że karta wskakiwała na górę
+   * i po chwili znikała, choć nikt jej nie widział.
+   *
+   * Dlatego wysyłamy PATCH tylko wtedy, gdy zakładka jest na wierzchu i ma
+   * fokus, a gdy serwisant do niej wróci — oznaczamy przy powrocie.
+   */
   useEffect(() => {
+    const hasIncomingUnread = messages.some(
+      (msg) => msg.sender_type !== currentUserType && !msg.is_read
+    )
+    if (!hasIncomingUnread) return
+
     const markAsRead = async () => {
+      if (document.visibilityState !== 'visible' || !document.hasFocus()) return
       try {
-        await fetch(`/api/repairs/${repairId}/messages/read`, {
-          method: 'PATCH',
-        })
+        await fetch(`/api/repairs/${repairId}/messages/read`, { method: 'PATCH' })
       } catch (error) {
         console.error('Błąd oznaczania jako przeczytane:', error)
       }
     }
 
-    if (messages.length > 0) {
-      markAsRead()
+    markAsRead()
+    document.addEventListener('visibilitychange', markAsRead)
+    window.addEventListener('focus', markAsRead)
+    return () => {
+      document.removeEventListener('visibilitychange', markAsRead)
+      window.removeEventListener('focus', markAsRead)
     }
-  }, [messages, repairId])
+  }, [messages, repairId, currentUserType])
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(e.target.files || [])
