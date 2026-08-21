@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { format } from 'date-fns'
 import { pl } from 'date-fns/locale'
-import { Rocket, Loader2, Plus, X, CheckCircle2, RotateCcw, ExternalLink } from 'lucide-react'
+import { Rocket, Loader2, Plus, X, CheckCircle2, RotateCcw } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 import { isSuperAdmin } from '@/lib/admin-config'
 
@@ -28,7 +28,7 @@ export default function DeploymentChannelPage() {
   const [canClose, setCanClose] = useState(false)
 
   const [showForm, setShowForm] = useState(false)
-  const [form, setForm] = useState({ title: '', description: '', pageUrl: '' })
+  const [text, setText] = useState('')
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [busyId, setBusyId] = useState<string | null>(null)
@@ -64,12 +64,12 @@ export default function DeploymentChannelPage() {
       const res = await fetch('/api/admin/wdrozenia', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ title: text }),
       })
       const data = await res.json()
       if (!res.ok) throw new Error(data.error || 'Nie udało się zapisać zgłoszenia')
 
-      setForm({ title: '', description: '', pageUrl: '' })
+      setText('')
       setShowForm(false)
       if (tab === 'open') fetchItems('open')
       else setTab('open')
@@ -188,26 +188,12 @@ export default function DeploymentChannelPage() {
 
                 <div className="flex-1 min-w-0">
                   <p
-                    className={`text-sm font-semibold ${
-                      item.status === 'done' ? 'text-gray-500 line-through' : 'text-gray-900'
+                    className={`text-sm whitespace-pre-line ${
+                      item.status === 'done' ? 'text-gray-500 line-through' : 'text-gray-900 font-medium'
                     }`}
                   >
                     {item.title}
                   </p>
-                  {item.description && (
-                    <p className="mt-1 text-sm text-gray-600 whitespace-pre-line">{item.description}</p>
-                  )}
-                  {item.page_url && (
-                    <a
-                      href={item.page_url}
-                      target="_blank"
-                      rel="noopener"
-                      className="mt-1.5 inline-flex items-center gap-1 text-xs font-medium text-blue-600 hover:text-blue-800"
-                    >
-                      <ExternalLink className="w-3 h-3" />
-                      {item.page_url}
-                    </a>
-                  )}
                   <p className="mt-2 text-[11px] text-gray-400">
                     {item.author_name || 'Zespół serwisu'} ·{' '}
                     {format(new Date(item.created_at), 'd MMM yyyy, HH:mm', { locale: pl })}
@@ -256,34 +242,13 @@ export default function DeploymentChannelPage() {
 
               <div>
                 <label className="block text-xs font-medium text-gray-700 mb-1">Co ma się zmienić? *</label>
-                <input
-                  required
-                  value={form.title}
-                  onChange={(e) => setForm({ ...form, title: e.target.value })}
-                  placeholder="np. Dodać cennik wymiany głowic ZD421"
-                  className={inputClass}
-                />
-              </div>
-
-              <div>
-                <label className="block text-xs font-medium text-gray-700 mb-1">Szczegóły</label>
                 <textarea
-                  rows={4}
-                  value={form.description}
-                  onChange={(e) => setForm({ ...form, description: e.target.value })}
-                  placeholder="Konkrety: jakie kwoty, jaki tekst, co poprawić"
-                  className={inputClass}
-                />
-              </div>
-
-              <div>
-                <label className="block text-xs font-medium text-gray-700 mb-1">
-                  Adres strony <span className="text-gray-400">(jeśli dotyczy konkretnej)</span>
-                </label>
-                <input
-                  value={form.pageUrl}
-                  onChange={(e) => setForm({ ...form, pageUrl: e.target.value })}
-                  placeholder="https://www.serwis-zebry.pl/..."
+                  required
+                  autoFocus
+                  rows={5}
+                  value={text}
+                  onChange={(e) => setText(e.target.value)}
+                  placeholder="np. Dodać cennik wymiany głowic ZD421 — 597 zł brutto za 203 dpi, 1269 zł za 300 dpi"
                   className={inputClass}
                 />
               </div>

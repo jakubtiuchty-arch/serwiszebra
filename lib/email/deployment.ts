@@ -20,6 +20,12 @@ const esc = (s: string) =>
 
 const nl2br = (s: string) => esc(s).replace(/\n/g, '<br>')
 
+/** Treść zgłoszenia bywa wielolinijkowa — do tematu bierzemy pierwszą linię */
+function subjectLine(text: string): string {
+  const first = (text || '').split('\n')[0].trim()
+  return first.length > 70 ? `${first.slice(0, 70)}…` : first
+}
+
 function shell(headline: string, accent: string, rows: string, body: string, cta: string): string {
   return `
   <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;max-width:600px;margin:0 auto;padding:20px">
@@ -52,17 +58,17 @@ export async function sendDeploymentRequestEmail(data: NewRequestData) {
     row('Zgłasza', data.authorName) + (data.pageUrl ? row('Strona', data.pageUrl) : '')
 
   const body = `
-    <p style="margin:16px 0 6px;font-size:15px;font-weight:700;color:#111827">${esc(data.title)}</p>
+    <p style="margin:16px 0 0;font-size:15px;line-height:1.65;color:#111827">${nl2br(data.title)}</p>
     ${
       data.description
-        ? `<p style="margin:0;font-size:14px;line-height:1.65;color:#374151">${nl2br(data.description)}</p>`
+        ? `<p style="margin:10px 0 0;font-size:14px;line-height:1.65;color:#374151">${nl2br(data.description)}</p>`
         : ''
     }`
 
   return resend.emails.send({
     from: FROM,
     to: DEPLOYMENT_INBOX,
-    subject: `Kanał wdrożeniowy: ${data.title}`,
+    subject: `Kanał wdrożeniowy: ${subjectLine(data.title)}`,
     html: shell('Nowe zgłoszenie zmiany na stronie', '#1e3a5f', rows, body, 'Otwórz kanał wdrożeniowy'),
   })
 }
@@ -80,10 +86,10 @@ export async function sendDeploymentDoneEmail(data: DoneData) {
   const rows = row('Zgłaszał', data.authorName) + row('Wdrożył', data.doneByName)
 
   const body = `
-    <p style="margin:16px 0 6px;font-size:15px;font-weight:700;color:#111827">${esc(data.title)}</p>
+    <p style="margin:16px 0 0;font-size:15px;line-height:1.65;color:#111827">${nl2br(data.title)}</p>
     ${
       data.description
-        ? `<p style="margin:0;font-size:14px;line-height:1.65;color:#6b7280">${nl2br(data.description)}</p>`
+        ? `<p style="margin:10px 0 0;font-size:14px;line-height:1.65;color:#6b7280">${nl2br(data.description)}</p>`
         : ''
     }
     ${
@@ -95,7 +101,7 @@ export async function sendDeploymentDoneEmail(data: DoneData) {
   return resend.emails.send({
     from: FROM,
     to: SERVICE_INBOX,
-    subject: `Wdrożone: ${data.title}`,
+    subject: `Wdrożone: ${subjectLine(data.title)}`,
     html: shell('Zgłoszona zmiana jest już na stronie', '#15803d', rows, body, 'Zobacz archiwum'),
   })
 }
