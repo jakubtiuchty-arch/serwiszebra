@@ -120,8 +120,8 @@ export default function FunnelBanners({
           </p>
           <p className="text-sm text-slate-200 mt-1.5 drop-shadow-sm max-w-lg text-pretty">
             {sub ?? (inProd
-              ? `Ten sam zespół, który serwisuje Twój sprzęt, dobierze konfigurację ${model} pod Twoje wdrożenie i wyśle urządzenie gotowe do pracy.`
-              : `Ten sam zespół, który serwisuje Twój sprzęt, dobierze następcę${cfg.successorName ? ` — ${cfg.successorName}` : ''} o równoważnych funkcjach i przygotuje go do pracy.`)}
+              ? `W karcie produktu zobaczysz aktualną cenę i stan magazynowy. Naprawy gwarancyjne robimy u siebie, bez odsyłania sprzętu do producenta.`
+              : `Dobierzemy model o równoważnych funkcjach${cfg.successorName ? ` — zwykle ${cfg.successorName}` : ''} i sprawdzimy, które akcesoria i materiały zostają w użyciu.`)}
           </p>
           <div className="flex flex-wrap gap-2.5 mt-4">
             <a
