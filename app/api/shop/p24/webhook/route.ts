@@ -99,7 +99,7 @@ export async function POST(request: NextRequest) {
   // W try/catch — błąd nie może zwrócić 500, bo zamówienie jest już 'succeeded'
   // i przy ponowionej notyfikacji idempotencja wyjdzie wcześniej.
   try {
-    const activated = await activateContractsForOrder(supabase, order.id)
+    const activated = await activateContractsForOrder(order.id)
     if (activated > 0) {
       console.log(`[P24 webhook] Aktywowano kontraktów serwisowych: ${activated} (${order.order_number})`)
     }

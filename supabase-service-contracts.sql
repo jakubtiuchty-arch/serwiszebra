@@ -8,12 +8,16 @@
 --    product_type = 'kontrakt' trzyma go poza listingami części (te filtrują po
 --    typach: glowica, walek, akumulator, zasilacz, konwerter), a jednocześnie
 --    pozwala pobrać go po slugu i włożyć do zwykłego koszyka.
+--    UWAGA: na produkcji ten wiersz jest już wstawiony (20.08.2026). Zapytanie
+--    jest idempotentne — na istniejącej bazie nic nie zrobi. Świadomie bez
+--    `on conflict (slug)`, bo kolumna slug nie ma unikalnego indeksu i taka
+--    składnia wywaliłaby cały skrypt.
 insert into products (
   name, slug, category, product_type, sku,
   price, price_brutto, vat_rate,
   description, stock, is_active, manufacturer, meta_title, meta_description
 )
-values (
+select
   'Kontrakt serwisowy Zebra — 3 lata opieki',
   'kontrakt-serwisowy-3-lata',
   'uslugi',
@@ -28,8 +32,9 @@ values (
   'TAKMA',
   'Kontrakt serwisowy Zebra na 3 lata — 599 zł netto',
   'Trzy lata opieki nad drukarką Zebra bez rachunków za robociznę. Odbiór kurierem, naprawa w 48 h, części 40% taniej. Kupujesz online, podajesz numer seryjny.'
-)
-on conflict (slug) do nothing;
+where not exists (
+  select 1 from products where slug = 'kontrakt-serwisowy-3-lata'
+);
 
 -- 2. Rejestr wykupionych kontraktów — jeden wiersz na jedno urządzenie.
 create table if not exists service_contracts (

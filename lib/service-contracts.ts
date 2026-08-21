@@ -7,6 +7,8 @@
  * seryjnego, gdy klient porzuci płatność, a ochrona rusza dopiero po zaksięgowaniu.
  */
 
+import { createPureServiceClient } from '@/lib/supabase/server'
+
 interface OrderItemLike {
   name?: string
   sku?: string
@@ -40,10 +42,18 @@ function contractNumber(index: number): string {
   return `KTR-${stamp}-${rand}${index}`
 }
 
-/** Zapisuje kontrakty ze statusem `pending`. Nie rzuca — zamówienie ma się udać mimo wszystko. */
-export async function createPendingContracts(supabase: any, order: OrderLike): Promise<number> {
+/**
+ * Zapisuje kontrakty ze statusem `pending`. Nie rzuca — zamówienie ma się udać mimo wszystko.
+ *
+ * Klient tworzymy tutaj, a nie przyjmujemy z zewnątrz: zamówienie w sklepie składa
+ * niezalogowany klient, więc trasa `/api/orders` pracuje na kluczu anon. Tabela
+ * `service_contracts` ma RLS bez polityk, czyli anon nie zapisze do niej nic.
+ */
+export async function createPendingContracts(order: OrderLike): Promise<number> {
   const contracts = contractItemsOf(order.items)
   if (contracts.length === 0) return 0
+
+  const supabase = createPureServiceClient()
 
   const rows = contracts.map((item, i) => ({
     contract_number: contractNumber(i + 1),
@@ -73,7 +83,8 @@ export async function createPendingContracts(supabase: any, order: OrderLike): P
  * Uruchamia ochronę po zaksięgowaniu wpłaty: status `active`, data startu dziś,
  * koniec za trzy lata. Wywoływane z webhooka P24 i z ręcznego potwierdzenia wpłaty.
  */
-export async function activateContractsForOrder(supabase: any, orderId: string): Promise<number> {
+export async function activateContractsForOrder(orderId: string): Promise<number> {
+  const supabase = createPureServiceClient()
   const startsAt = new Date()
   const endsAt = new Date(startsAt)
   endsAt.setFullYear(endsAt.getFullYear() + 3)

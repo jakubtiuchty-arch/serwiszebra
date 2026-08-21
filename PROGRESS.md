@@ -683,3 +683,11 @@ Po migracji warto puścić `node scripts/test-chat-prefill-e2e.mjs` — testy sa
 - UI: zakładki „Do zrobienia" / „Archiwum", modal zgłoszenia, w archiwum przycisk cofnięcia (bez maila). Wpis w sidebarze pod Pocztą.
 - Maile w `lib/email/deployment.ts`, nadawca `system@serwis-zebry.pl` (ta sama domena co reszta powiadomień systemowych).
 - Build ✓, tsc EXIT=0, API bez sesji zwraca 401, `/admin/wdrozenia` przekierowuje na logowanie. **PENDING: wykonać `supabase-wdrozenia.sql`** — bez tabeli strona pokaże pustą listę, a zapis zwróci błąd.
+
+## 2026-08-21 — SQL wykonany, testy obu tabel na produkcji
+- User uruchomił `supabase-service-contracts.sql` i `supabase-wdrozenia.sql`.
+- **Bug złapany od razu przy pierwszym teście**: `createPendingContracts` dostawał klienta Supabase z trasy `/api/orders`, a tę wywołuje NIEZALOGOWANY klient sklepu — czyli klucz anon. `service_contracts` ma RLS bez polityk, więc zapis leciał w `new row violates row-level security policy`. Zamówienie przechodziło (błąd łapany), ale kontrakt nie powstawał — czyli po opłaceniu nie byłoby wiadomo, jakie urządzenie jest objęte.
+- Fix: `lib/service-contracts.ts` tworzy własnego klienta service-role zamiast przyjmować go z zewnątrz (obie funkcje). Parametr `supabase` usunięty z sygnatur, poprawione wywołania w `/api/orders` i w webhooku P24. Dzięki temu ta klasa błędu nie wróci przy kolejnym wywołaniu z kontekstu anonimowego.
+- **Test e2e kontraktów** (prawdziwe `POST /api/orders` na localhost, dwa kontrakty w jednym zamówieniu): 2 wiersze `pending` z numerami `KTR-20260821-...`, poprawne modele i numery seryjne ✓; symulacja webhooka → `active`, od 2026-08-21 do **2029-08-21** ✓; zamówienie i kontrakty testowe usunięte ✓.
+- **Test kanału wdrożeniowego**: zapis zgłoszenia (treść wielolinijkowa), zamknięcie z `done_by_name` i `done_at`, podział na zakładki po statusie ✓, wiersz testowy usunięty ✓.
+- Build ✓, tsc EXIT=0.

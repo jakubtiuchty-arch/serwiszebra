@@ -103,7 +103,7 @@ export async function POST(request: Request) {
     // Kontrakty serwisowe — zapisujemy numery seryjne od razu, żeby nie zginęły,
     // gdy klient porzuci płatność. Ochrona rusza dopiero po zaksięgowaniu wpłaty.
     try {
-      await createPendingContracts(supabase, order)
+      await createPendingContracts(order)
     } catch (contractError) {
       console.error('Error creating service contracts:', contractError)
     }
