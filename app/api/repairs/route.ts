@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
+import { stripInternalNotesFromList } from '@/lib/repair-internal'
 import { sendRepairSubmittedEmail, sendRepairSubmittedAdminEmail } from '@/lib/email'
 
 // Generuj numer zgłoszenia w formacie YYYYMMDDHHmm
@@ -47,7 +48,8 @@ export async function GET() {
       )
     }
 
-    return NextResponse.json({ repairs: repairs || [] })
+    // Lista klienta — bez notatek wewnętrznych serwisu
+    return NextResponse.json({ repairs: stripInternalNotesFromList(repairs || []) })
   } catch (error: any) {
     return NextResponse.json(
       { error: 'Internal server error', details: error.message },

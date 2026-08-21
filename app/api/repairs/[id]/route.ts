@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { stripInternalNotes } from '@/lib/repair-internal'
 import { createClient } from '@/lib/supabase/server'
 
 export async function GET(
@@ -62,8 +63,10 @@ export async function GET(
       )
     }
 
-    return NextResponse.json({ 
-      repair,
+    return NextResponse.json({
+      // Notatka wewnętrzna serwisu nie może opuścić panelu — dla klienta
+      // i tak byłaby w payloadzie, mimo że nigdzie jej nie renderujemy
+      repair: isAdmin ? repair : stripInternalNotes(repair),
       statusHistory: []
     })
   } catch (error: any) {

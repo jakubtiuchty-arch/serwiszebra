@@ -691,3 +691,10 @@ Po migracji warto puścić `node scripts/test-chat-prefill-e2e.mjs` — testy sa
 - **Test e2e kontraktów** (prawdziwe `POST /api/orders` na localhost, dwa kontrakty w jednym zamówieniu): 2 wiersze `pending` z numerami `KTR-20260821-...`, poprawne modele i numery seryjne ✓; symulacja webhooka → `active`, od 2026-08-21 do **2029-08-21** ✓; zamówienie i kontrakty testowe usunięte ✓.
 - **Test kanału wdrożeniowego**: zapis zgłoszenia (treść wielolinijkowa), zamknięcie z `done_by_name` i `done_at`, podział na zakładki po statusie ✓, wiersz testowy usunięty ✓.
 - Build ✓, tsc EXIT=0.
+
+## 2026-08-21 — Notatka wewnętrzna serwisu na karcie zgłoszenia
+- Serwisanci chcieli miejsce na „wykonane prace" widoczne tylko dla nich — klient nie zawsze musi wiedzieć, co było robione, a dla warsztatu to wiedza, która przydaje się przy kolejnej naprawie tego samego modelu.
+- Nowa kolumna `repair_requests.internal_notes` (`supabase-internal-notes.sql`), osobna trasa `PATCH /api/admin/repairs/[id]/internal-notes`, box na dole LEWEJ kolumny karty zgłoszenia (bursztynowa ramka z kłódką, żeby nie mylić się z „Diagnoza i wykonane prace", które klient widzi).
+- **Kluczowe zabezpieczenie**: samo nierenderowanie pola u klienta nic by nie dało. Trasy `GET /api/repairs/[id]` i `GET /api/repairs` pobierają zgłoszenie przez `select('*')` i odsyłają cały wiersz — notatka byłaby w payloadzie JSON i do odczytania w narzędziach przeglądarki. `lib/repair-internal.ts` (`stripInternalNotes`, `stripInternalNotesFromList`) wycina pole wszędzie, gdzie odbiorcą nie jest admin.
+- Sprawdzone pozostałe drogi wycieku: raport serwisowy PDF składa się z jawnie wypisanych pól (`issue_description`, `service_notes`) — notatka tam nie wejdzie; maile też używają konkretnych pól. Świadomie NIE dopisujemy wpisu do `repair_status_history` przy zapisie notatki, bo historię klient ogląda u siebie.
+- Testy: kolumna zapisuje i czyta ✓, `stripInternalNotes` usuwa pole, zostawia `service_notes` i nie mutuje oryginału ✓, lista też czysta ✓, notatka testowa wyczyszczona z bazy ✓. Build ✓, tsc EXIT=0.

@@ -23,7 +23,8 @@ import {
   ChevronLeft,
   Loader2,
   Save,
-  Image as ImageIcon
+  Image as ImageIcon,
+  Lock
 } from 'lucide-react'
 
 interface RepairRequest {
@@ -65,6 +66,8 @@ interface RepairRequest {
   service_notes: string | null
   // Szczegóły wyceny (widoczne dla klienta i admina)
   price_notes: string | null
+  // Notatka warsztatowa — API wycina ją z odpowiedzi dla wszystkich poza adminem
+  internal_notes: string | null
 }
 
 interface StatusHistory {
@@ -202,6 +205,7 @@ export default function AdminRepairDetailPage() {
   const [serviceNotesForm, setServiceNotesForm] = useState({
     service_notes: ''
   })
+  const [internalNotes, setInternalNotes] = useState('')
 
   const [submitting, setSubmitting] = useState<string | null>(null)
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
@@ -259,6 +263,7 @@ export default function AdminRepairDetailPage() {
         setServiceNotesForm({
           service_notes: data.repair.service_notes || ''
         })
+        setInternalNotes(data.repair.internal_notes || '')
         // Auto-default kierunku: status 'nowe' lub 'odbior_od_klienta' (kurier nie odebrał) → pickup, inne → delivery
         const defaultDirection: 'pickup' | 'delivery' =
           data.repair.status === 'nowe' || data.repair.status === 'odbior_od_klienta'
@@ -343,6 +348,40 @@ export default function AdminRepairDetailPage() {
         type: 'error',
         title: 'Błąd',
         message: err instanceof Error ? err.message : 'Nie udało się zaktualizować wyceny'
+      })
+    } finally {
+      setSubmitting(null)
+    }
+  }
+
+  const handleInternalNotesUpdate = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setSubmitting('internal_notes')
+
+    try {
+      const response = await fetch(`/api/admin/repairs/${repairId}/internal-notes`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ internal_notes: internalNotes })
+      })
+
+      if (!response.ok) {
+        throw new Error('Nie udało się zapisać notatki wewnętrznej')
+      }
+
+      await fetchRepairDetails()
+      setModal({
+        isOpen: true,
+        type: 'success',
+        title: 'Notatka zapisana',
+        message: 'Notatka wewnętrzna została zapisana. Klient jej nie widzi.'
+      })
+    } catch (err) {
+      setModal({
+        isOpen: true,
+        type: 'error',
+        title: 'Błąd',
+        message: err instanceof Error ? err.message : 'Nie udało się zapisać notatki'
       })
     } finally {
       setSubmitting(null)
@@ -798,6 +837,48 @@ export default function AdminRepairDetailPage() {
                 </div>
               </div>
             )}
+
+            {/* Notatka wewnętrzna — wiedza warsztatowa, poza zasięgiem klienta */}
+            <div className="bg-amber-50/70 backdrop-blur-sm rounded-xl shadow border border-amber-200 p-4">
+              <div className="flex items-center mb-1">
+                <div className="bg-amber-100 p-1.5 rounded-lg">
+                  <Lock className="w-4 h-4 text-amber-700" />
+                </div>
+                <h3 className="text-sm font-semibold text-gray-900 ml-2">Wykonane prace — tylko dla serwisu</h3>
+              </div>
+              <p className="text-xs text-gray-500 mb-3">
+                Nie trafia do panelu klienta, na raport ani do maili. Zapisuj tu, co naprawdę było
+                robione i na co uważać przy tym modelu.
+              </p>
+
+              <form onSubmit={handleInternalNotesUpdate} className="space-y-3">
+                <textarea
+                  value={internalNotes}
+                  onChange={(e) => setInternalNotes(e.target.value)}
+                  rows={5}
+                  className="w-full px-3 py-2 text-sm border border-amber-200 bg-white rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-all"
+                  placeholder="np. Głowica po wymianie, ale płyta ma ślad po zalaniu przy złączu — jeśli wróci z tym samym objawem, wymieniać płytę, nie głowicę. Śruba obudowy dokręcana na siłę przez klienta, gwint do sprawdzenia."
+                />
+
+                <button
+                  type="submit"
+                  disabled={submitting === 'internal_notes'}
+                  className="w-full bg-amber-600 text-white px-3 py-2 text-sm rounded-lg hover:bg-amber-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center font-semibold transition-all"
+                >
+                  {submitting === 'internal_notes' ? (
+                    <>
+                      <Loader2 className="w-3 h-3 mr-2 animate-spin" />
+                      Zapisywanie...
+                    </>
+                  ) : (
+                    <>
+                      <Save className="w-3 h-3 mr-2" />
+                      Zapisz notatkę wewnętrzną
+                    </>
+                  )}
+                </button>
+              </form>
+            </div>
           </div>
 
           {/* PRAWA KOLUMNA - Akcje */}
