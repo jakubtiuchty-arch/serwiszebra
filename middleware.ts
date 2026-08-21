@@ -24,6 +24,7 @@ const REGULAR_ADMIN_ALLOWED_PATHS = [
   '/admin/katalog',     // Katalog części zamiennych
   '/admin/wypozyczenia', // Wypożyczenia sprzętu (serwisanci odznaczają zwroty)
   '/admin/poczta',      // Poczta serwis@takma.com.pl + szkice odpowiedzi AI
+  '/admin/wdrozenia',   // Kanał wdrożeniowy — zgłoszenia zmian na stronie
 ]
 
 // Administratorzy handlowi - dodatkowo dostęp do Sklepu

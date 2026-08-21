@@ -667,3 +667,19 @@ Po migracji warto puścić `node scripts/test-chat-prefill-e2e.mjs` — testy sa
 - UI: `components/admin/WalkInRepairModal.tsx` — jeden ekran zamiast kreatora (klient stoi przy ladzie), sekcje Klient / Urządzenie / Usterka, checkbox „Nieczytelny" przy numerze seryjnym, notatka wewnętrzna, wymagane potwierdzenie zgód klienta. Przycisk „Przyjęcie w biurze" w nagłówku `/admin`, po zapisie przenosi na kartę zgłoszenia.
 - Bez zmian w `middleware.ts` — modal siedzi na `/admin`, a ta ścieżka jest już dozwolona dla zwykłych adminów.
 - Testy: pełny payload wstawiony i usunięty z produkcyjnej bazy (schemat przyjmuje komplet pól, `source='biuro'`, zgody, zaślepka maila) ✓, endpoint bez sesji admina zwraca 401 ✓, build ✓, tsc EXIT=0. Nie klikałem w panelu — brak konta admina. NIEZACOMMITOWANE.
+
+## 2026-08-21 — Naprawa: zgłoszenie wskakiwało na górę i po sekundzie znikało
+- Zgłoszenie #20260818101261 (Przewoźny, West Trading): dwie wiadomości od klienta, obie `is_read=true`, choć nikt nie odpisał. Karta pokazała się na górze listy na sekundę i spadła.
+- **Przyczyna, potwierdzona osią czasu z bazy, nie hipotezą**: historia statusów pokazuje pracę serwisanta nad tym zgłoszeniem o 06:35 i 06:52 (dwa razy „wycena"), klient zaakceptował cenę o 06:51:30, a wiadomości przyszły o 06:58:06 i 06:58:53. Karta naprawy była więc wciąż otwarta w zakładce serwisanta. `ChatBox` ma subskrypcję realtime i po każdym INSERT bezwarunkowo wołał `PATCH /messages/read` — zakładka w tle „przeczytała" wiadomość w sekundzie, w której ta przyszła.
+- **Fix w `components/chat/ChatBox.tsx`**: PATCH tylko gdy `document.visibilityState === 'visible'` i `document.hasFocus()`, plus nasłuch `visibilitychange` i `focus`, żeby oznaczyć przy powrocie do zakładki. Dodatkowo warunek `hasIncomingUnread` — wcześniej PATCH leciał przy każdej zmianie tablicy wiadomości, także gdy nie było czego oznaczać.
+- Dwie wiadomości z tego zgłoszenia przywrócone w bazie jako nieprzeczytane, żeby wróciło na górę listy.
+- Build ✓, tsc EXIT=0. Nie klikane w panelu (brak konta admina) — do sprawdzenia po deployu: karta otwarta w tle nie powinna już kasować powiadomienia.
+
+## 2026-08-21 — Kanał wdrożeniowy w panelu
+- Zespół serwisu potrzebuje miejsca, w którym zapisuje zmiany do wprowadzenia na serwis-zebry.pl. Przebieg: serwisant pisze → mail na jakub.tiuchty@takma.com.pl; wdrażający zaznacza checkbox → mail na serwis@takma.com.pl i zgłoszenie ląduje w archiwum.
+- **Tabela `deployment_requests`** (`supabase-wdrozenia.sql`): tytuł, szczegóły, opcjonalny adres strony, dane zgłaszającego kopiowane z profilu, `status` open/done, `done_at`/`done_by_name`/`done_note`. RLS bez polityk — dostęp tylko przez service role.
+- **API**: `GET/POST /api/admin/wdrozenia` (lista wg statusu + nowe zgłoszenie z mailem), `PATCH /api/admin/wdrozenia/[id]` (zamknięcie/cofnięcie). Mail o wdrożeniu leci **tylko przy przejściu open → done**, żeby ponowne kliknięcie nie zasypywało skrzynki serwisu tym samym powiadomieniem. Błąd wysyłki nie wywraca zapisu.
+- **Uprawnienia**: strona widoczna dla zwykłych adminów i superadminów (dopisana do `REGULAR_ADMIN_ALLOWED_PATHS` w `middleware.ts` **oraz** `REGULAR_ADMIN_ALLOWED_SECTIONS` w `lib/admin-config.ts` — obie listy trzeba trzymać zsynchronizowane). **Checkbox „wykonano" zarezerwowany dla superadmina** — zespół zgłasza i widzi status, ale nie odhacza cudzej pracy. Do zmiany jednym warunkiem, gdyby serwisanci mieli sami zamykać.
+- UI: zakładki „Do zrobienia" / „Archiwum", modal zgłoszenia, w archiwum przycisk cofnięcia (bez maila). Wpis w sidebarze pod Pocztą.
+- Maile w `lib/email/deployment.ts`, nadawca `system@serwis-zebry.pl` (ta sama domena co reszta powiadomień systemowych).
+- Build ✓, tsc EXIT=0, API bez sesji zwraca 401, `/admin/wdrozenia` przekierowuje na logowanie. **PENDING: wykonać `supabase-wdrozenia.sql`** — bez tabeli strona pokaże pustą listę, a zapis zwróci błąd.

@@ -21,7 +21,8 @@ import {
   BookOpen,
   AlertTriangle,
   PackageOpen,
-  Mail
+  Mail,
+  Rocket
 } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
@@ -100,6 +101,12 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       href: '/admin/poczta',
       icon: Mail,
       current: pathname.startsWith('/admin/poczta'),
+    },
+    {
+      name: 'Kanał wdrożeniowy',
+      href: '/admin/wdrozenia',
+      icon: Rocket,
+      current: pathname.startsWith('/admin/wdrozenia'),
     },
 
     // Sklep - dla superadminów i administratorów handlowych
