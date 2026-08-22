@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
+import { requireAdmin } from '@/lib/admin-auth'
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -7,6 +8,9 @@ const supabase = createClient(
 )
 
 export async function GET() {
+  const denied = await requireAdmin()
+  if (denied) return denied
+
   try {
     // Pobierz unikalne modele
     const { data: modelsData, error: modelsError } = await supabase

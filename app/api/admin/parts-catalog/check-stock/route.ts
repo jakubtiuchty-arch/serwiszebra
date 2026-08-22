@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { checkPriceAndAvailability } from '@/lib/ingram-micro'
 import { lookupStock } from '@/lib/bluestar'
 import { lookupStock as lookupJarltechStock } from '@/lib/jarltech'
+import { requireAdmin } from '@/lib/admin-auth'
 
 // Cache kursu NBP (12h)
 let cachedEurRate: { rate: number; fetchedAt: number } | null = null
@@ -34,6 +35,9 @@ async function getEurPlnRate(): Promise<number> {
 }
 
 export async function GET(req: NextRequest) {
+  const denied = await requireAdmin()
+  if (denied) return denied
+
   try {
     const { searchParams } = new URL(req.url)
     const skusParam = searchParams.get('skus')

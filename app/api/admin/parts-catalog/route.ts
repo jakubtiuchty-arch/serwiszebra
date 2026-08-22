@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
+import { requireAdmin } from '@/lib/admin-auth'
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -7,6 +8,9 @@ const supabase = createClient(
 )
 
 export async function GET(req: NextRequest) {
+  const denied = await requireAdmin()
+  if (denied) return denied
+
   try {
     const { searchParams } = new URL(req.url)
     const model = searchParams.get('model')

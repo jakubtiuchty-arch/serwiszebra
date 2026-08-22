@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 import Anthropic from '@anthropic-ai/sdk'
+import { requireAdmin } from '@/lib/admin-auth'
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -9,6 +10,9 @@ const supabase = createClient(
 
 // --- GET: statystyki napraw ---
 export async function GET(req: NextRequest) {
+  const denied = await requireAdmin()
+  if (denied) return denied
+
   try {
     const { searchParams } = new URL(req.url)
     const period = searchParams.get('period') || '30d'
@@ -180,6 +184,9 @@ export async function GET(req: NextRequest) {
 
 // --- POST: AI analiza trudnych rozmów ---
 export async function POST(req: NextRequest) {
+  const denied = await requireAdmin()
+  if (denied) return denied
+
   try {
     const { action, period } = await req.json()
 

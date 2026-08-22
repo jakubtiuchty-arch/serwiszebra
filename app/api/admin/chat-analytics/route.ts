@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 import OpenAI from 'openai'
+import { requireAdmin } from '@/lib/admin-auth'
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -126,6 +127,9 @@ Odpowiedz TYLKO JSON, bez markdown.`
 }
 
 export async function GET(req: NextRequest) {
+  const denied = await requireAdmin()
+  if (denied) return denied
+
   try {
     const { searchParams } = new URL(req.url)
     const period = searchParams.get('period') || '7d' // 7d, 30d, all
@@ -247,6 +251,9 @@ export async function GET(req: NextRequest) {
 
 // POST - kategoryzuj i oceń niekategoryzowane logi
 export async function POST(req: NextRequest) {
+  const denied = await requireAdmin()
+  if (denied) return denied
+
   try {
     const { action, logIds } = await req.json()
 
