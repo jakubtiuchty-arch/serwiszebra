@@ -599,7 +599,14 @@ const handlePaymentSuccess = async () => {
               <span className="text-lg font-bold text-gray-900">{formatPrice(repair.final_price || repair.estimated_price)} zł</span>
             </div>
             {repair.price_notes && (
-              <p className="text-[10px] text-gray-500 mt-1 line-clamp-2">{repair.price_notes}</p>
+              <div className="mt-2 pt-2 border-t border-gray-100">
+                <p className="text-[10px] text-gray-500 mb-0.5">Szczegóły wyceny</p>
+                {/* Bez przycinania — klient ma podjąć decyzję o kwocie, więc musi
+                    widzieć całe uzasadnienie, a nie dwie pierwsze linijki */}
+                <p className="text-[11px] text-gray-700 whitespace-pre-wrap leading-relaxed">
+                  {repair.price_notes}
+                </p>
+              </div>
             )}
           </div>
 
@@ -1002,6 +1009,25 @@ const handlePaymentSuccess = async () => {
                   <CreditCard className="w-4 h-4 text-white" />
                 </div>
                 <h2 className="text-xs md:text-sm font-bold text-amber-900">Wymagana akcja</h2>
+              </div>
+
+              {/* Podsumowanie wyceny — karta „Wycena" jest w tym momencie ukryta,
+                  a to właśnie teraz klient decyduje, czy zaakceptować kwotę */}
+              <div className="bg-white rounded-lg p-3 mb-3 border border-amber-200">
+                <div className="flex justify-between items-center">
+                  <span className="text-xs text-gray-600">Do zapłaty:</span>
+                  <span className="text-lg font-bold text-gray-900">
+                    {formatPrice(repair.final_price || repair.estimated_price)} zł
+                  </span>
+                </div>
+                {repair.price_notes && (
+                  <div className="mt-2 pt-2 border-t border-gray-100">
+                    <p className="text-[10px] text-gray-500 mb-1">Szczegóły wyceny</p>
+                    <p className="text-xs text-gray-700 whitespace-pre-wrap leading-relaxed">
+                      {repair.price_notes}
+                    </p>
+                  </div>
+                )}
               </div>
 
               <div className="space-y-2">

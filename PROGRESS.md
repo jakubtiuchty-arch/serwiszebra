@@ -698,3 +698,9 @@ Po migracji warto puścić `node scripts/test-chat-prefill-e2e.mjs` — testy sa
 - **Kluczowe zabezpieczenie**: samo nierenderowanie pola u klienta nic by nie dało. Trasy `GET /api/repairs/[id]` i `GET /api/repairs` pobierają zgłoszenie przez `select('*')` i odsyłają cały wiersz — notatka byłaby w payloadzie JSON i do odczytania w narzędziach przeglądarki. `lib/repair-internal.ts` (`stripInternalNotes`, `stripInternalNotesFromList`) wycina pole wszędzie, gdzie odbiorcą nie jest admin.
 - Sprawdzone pozostałe drogi wycieku: raport serwisowy PDF składa się z jawnie wypisanych pól (`issue_description`, `service_notes`) — notatka tam nie wejdzie; maile też używają konkretnych pól. Świadomie NIE dopisujemy wpisu do `repair_status_history` przy zapisie notatki, bo historię klient ogląda u siebie.
 - Testy: kolumna zapisuje i czyta ✓, `stripInternalNotes` usuwa pole, zostawia `service_notes` i nie mutuje oryginału ✓, lista też czysta ✓, notatka testowa wyczyszczona z bazy ✓. Build ✓, tsc EXIT=0.
+
+## 2026-08-24 — Klient nie widział szczegółów wyceny (#20260819130124)
+- Dane w bazie były poprawne: `final_price` 3680, `price_notes` z opisem uszkodzeń. Problem był wyłącznie w renderowaniu panelu klienta.
+- **Przyczyna**: karta „Wycena" (jedyne miejsce na desktopie renderujące `price_notes`) ma warunek `!(status === 'wycena' && !price_accepted_at)` — jest **celowo ukrywana dokładnie wtedy, gdy wycena czeka na akceptację**, z komentarzem „wtedy jest w box Akcje". Tyle że desktopowy box „Wymagana akcja" pokazywał samą kwotę w przycisku i nigdy nie renderował `price_notes`. Efekt: klient przy decyzji o 3680 zł widział kwotę bez uzasadnienia. Wersja mobilna pokazywała opis, ale przycięty `line-clamp-2`.
+- Fix: desktopowy box „Wymagana akcja" dostał podsumowanie wyceny (kwota + pełne szczegóły) nad przyciskami; na mobile zdjęty `line-clamp-2` — przy decyzji o kwocie klient ma widzieć całe uzasadnienie, nie dwie linijki.
+- Build ✓, tsc EXIT=0.
