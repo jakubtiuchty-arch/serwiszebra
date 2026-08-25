@@ -354,6 +354,39 @@ export default function AdminRepairDetailPage() {
     }
   }
 
+  const handleCancelCourier = async (direction: 'pickup' | 'delivery') => {
+    const label = direction === 'pickup' ? 'odbiór od klienta' : 'wysyłkę do klienta'
+    if (!confirm(`Anulować kuriera (${label})? Zlecenie zostanie odwołane w BL Paczce.`)) return
+
+    setSubmitting(`cancel_courier_${direction}`)
+    try {
+      const response = await fetch(`/api/admin/repairs/${repairId}/cancel-courier`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ direction })
+      })
+      const data = await response.json()
+      if (!response.ok) throw new Error(data.error || 'Nie udało się anulować kuriera')
+
+      await fetchRepairDetails()
+      setModal({
+        isOpen: true,
+        type: 'success',
+        title: data.alreadyCancelled ? 'Zlecenie było już anulowane' : 'Kurier anulowany',
+        message: `Zlecenie ${data.waybill} zostało odwołane w BL Paczce. Kurier nie przyjedzie.`
+      })
+    } catch (err) {
+      setModal({
+        isOpen: true,
+        type: 'error',
+        title: 'Nie anulowano',
+        message: err instanceof Error ? err.message : 'Nie udało się anulować kuriera'
+      })
+    } finally {
+      setSubmitting(null)
+    }
+  }
+
   const handleInternalNotesUpdate = async (e: React.FormEvent) => {
     e.preventDefault()
     setSubmitting('internal_notes')
@@ -813,6 +846,18 @@ export default function AdminRepairDetailPage() {
                         <Truck className="w-3 h-3 mr-1" />
                         Śledź
                       </a>
+                      <button
+                        onClick={() => handleCancelCourier('pickup')}
+                        disabled={submitting === 'cancel_courier_pickup'}
+                        className="inline-flex items-center px-3 py-1.5 ml-2 bg-white text-purple-700 border border-purple-300 text-xs font-medium rounded-lg hover:bg-purple-100 disabled:opacity-50 transition-colors"
+                      >
+                        {submitting === 'cancel_courier_pickup' ? (
+                          <Loader2 className="w-3 h-3 mr-1 animate-spin" />
+                        ) : (
+                          <XCircle className="w-3 h-3 mr-1" />
+                        )}
+                        Anuluj kuriera
+                      </button>
                     </div>
                   )}
 
@@ -832,6 +877,18 @@ export default function AdminRepairDetailPage() {
                         <Truck className="w-3 h-3 mr-1" />
                         Śledź
                       </a>
+                      <button
+                        onClick={() => handleCancelCourier('delivery')}
+                        disabled={submitting === 'cancel_courier_delivery'}
+                        className="inline-flex items-center px-3 py-1.5 ml-2 bg-white text-green-700 border border-green-300 text-xs font-medium rounded-lg hover:bg-green-100 disabled:opacity-50 transition-colors"
+                      >
+                        {submitting === 'cancel_courier_delivery' ? (
+                          <Loader2 className="w-3 h-3 mr-1 animate-spin" />
+                        ) : (
+                          <XCircle className="w-3 h-3 mr-1" />
+                        )}
+                        Anuluj kuriera
+                      </button>
                     </div>
                   )}
                 </div>

@@ -704,3 +704,12 @@ Po migracji warto puścić `node scripts/test-chat-prefill-e2e.mjs` — testy sa
 - **Przyczyna**: karta „Wycena" (jedyne miejsce na desktopie renderujące `price_notes`) ma warunek `!(status === 'wycena' && !price_accepted_at)` — jest **celowo ukrywana dokładnie wtedy, gdy wycena czeka na akceptację**, z komentarzem „wtedy jest w box Akcje". Tyle że desktopowy box „Wymagana akcja" pokazywał samą kwotę w przycisku i nigdy nie renderował `price_notes`. Efekt: klient przy decyzji o 3680 zł widział kwotę bez uzasadnienia. Wersja mobilna pokazywała opis, ale przycięty `line-clamp-2`.
 - Fix: desktopowy box „Wymagana akcja" dostał podsumowanie wyceny (kwota + pełne szczegóły) nad przyciskami; na mobile zdjęty `line-clamp-2` — przy decyzji o kwocie klient ma widzieć całe uzasadnienie, nie dwie linijki.
 - Build ✓, tsc EXIT=0.
+
+## 2026-08-25 — Anulowanie kuriera z panelu (BL Paczka)
+- Klient wycofał zgłoszenie #20260825102017 po zamówieniu kuriera. W panelu nie było jak tego odwołać — integracja wołała tylko `createOrderV2.json`, `getOrders.json` i `getWaybillTracking.json`.
+- **Rozpoznanie API bez dokumentacji** (jest za logowaniem): próba endpointów z fikcyjnym numerem wykazała, że `cancelOrder.json` istnieje (zwraca JSON), a reszta kandydatów oddaje HTML. Formatu zapytania nie dało się odgadnąć — komunikat „Brak paczki w systemie z podanym id" jest ten sam dla każdego wariantu, także dla pustego. Rozwiązanie: pobrana wtyczka WooCommerce BL Paczki z wordpress.org, `OrderApiRepository::cancelOrder` pokazuje, że **id musi siedzieć w obiekcie `Order`** — płaskie `id` endpoint ignoruje.
+- Drugie odkrycie: `cancelled` to flaga tekstowa, po anulowaniu przyjmuje **'2'**, nie '1'. Pierwsza wersja weryfikacji sprawdzała '1' i zgłosiłaby porażkę mimo udanego anulowania.
+- **`POST /api/admin/repairs/[id]/cancel-courier`**: szuka zlecenia po numerze listu w oknie 60 dni (bo w bazie mamy list, a BL Paczka anuluje po swoim `Order.id`), anuluje, po czym **weryfikuje stan u przewoźnika** — samo `success` nie wystarcza, bo pusty przejazd kuriera bywa płatny i nie wolno fałszywie zameldować anulowania. Dane kuriera w zgłoszeniu czyścimy dopiero po potwierdzeniu.
+- Przyciski „Anuluj kuriera" przy obu blokach przesyłek (odbiór od klienta i wysyłka do klienta) w karcie zgłoszenia, z potwierdzeniem przed wysłaniem.
+- Zlecenie 23188695 (list 1049692365133U, podjazd 27.08) **anulowane i potwierdzone**, dane w zgłoszeniu wyczyszczone, wpis w historii dodany.
+- Build ✓, tsc EXIT=0.
