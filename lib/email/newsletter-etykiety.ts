@@ -32,6 +32,8 @@ export interface LabelOfferConfig {
   offerUrl: string
   shopUrl: string
   unsubscribeUrl: string
+  /** Grafika w pasie nagłówkowym — 220×136, krawędzie wtopione w granat */
+  heroImageUrl: string
   /** Blok reklamowy na dole — urządzenie z naszej oferty */
   promo: {
     eyebrow: string
@@ -228,6 +230,7 @@ export function labelOfferSubject(model: string): string {
 
 export function generateLabelOfferEmail(r: LabelOfferRecipient, c: LabelOfferConfig): string {
   const model = esc(r.printerModel)
+  const heroImageUrl = c.heroImageUrl
   const rec = recommendMaterials(r.printerModel)
   const greeting = r.firstName ? `Dzień dobry, ${esc(r.firstName)},` : 'Dzień dobry,'
   const repairLine = r.repairWhen
@@ -315,11 +318,20 @@ export function generateLabelOfferEmail(r: LabelOfferRecipient, c: LabelOfferCon
           </tr></table>
         </td></tr>
 
-        <!-- Pas nagłówkowy -->
-        <tr><td style="background:${NAVY};padding:26px 28px 24px">
-          <div style="color:${LIME};font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase">Oferta dla klientów serwisu</div>
-          <h1 style="margin:10px 0 0;color:#ffffff;font-size:28px;line-height:1.25;font-weight:700">Rabat na etykiety i taśmy</h1>
-          <div style="color:rgba(255,255,255,.72);font-size:16px;margin-top:8px">Twoja drukarka: ${model}</div>
+        <!-- Pas nagłówkowy. Grafika w prawej komórce ma wysokość równą pasowi,
+             więc nie zmienia jego wymiarów; krawędzie wtopione w ${NAVY}, żeby
+             nie było widać styku ze zdjęciem. -->
+        <tr><td style="background:${NAVY};padding:0">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+            <td valign="middle" style="padding:26px 12px 24px 28px">
+              <div style="color:${LIME};font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase">Oferta dla klientów serwisu</div>
+              <h1 style="margin:10px 0 0;color:#ffffff;font-size:28px;line-height:1.25;font-weight:700">Rabat na etykiety i taśmy</h1>
+              <div style="color:rgba(255,255,255,.72);font-size:16px;margin-top:8px">Twoja drukarka: ${model}</div>
+            </td>
+            <td width="220" valign="middle" style="width:220px;font-size:0;line-height:0;background:${NAVY}">
+              <img src="${heroImageUrl}" width="220" height="136" alt="" style="display:block;width:220px;height:136px;border:0">
+            </td>
+          </tr></table>
         </td></tr>
 
         <!-- Pasek akcentowy zamyka kartę hero -->
