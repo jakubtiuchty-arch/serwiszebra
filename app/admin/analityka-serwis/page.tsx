@@ -33,6 +33,8 @@ interface MonthlyData {
 }
 
 interface DeviceStat {
+  /** ile różnych zapisów tego samego modelu złączono w jedną pozycję */
+  spellings?: number
   model: string
   count: number
 }
@@ -64,6 +66,24 @@ interface AIResult {
   issues: string[]
 }
 
+interface FaultStat {
+  name: string
+  count: number
+}
+
+interface CustomerStat {
+  label: string
+  count: number
+  revenue: number
+}
+
+interface Intake {
+  perDay: number
+  perMonth: number
+  days: number
+  since: string
+}
+
 interface AnalyticsData {
   stats: Stats
   monthlyRevenue: MonthlyData[]
@@ -71,6 +91,10 @@ interface AnalyticsData {
   statusBreakdown: StatusItem[]
   repairTypes: RepairType[]
   difficultChats: DifficultChat[]
+  faults: FaultStat[]
+  devicesMeta?: { groups: number; covered: number }
+  topCustomers: CustomerStat[]
+  intake: Intake
 }
 
 const STATUS_LABELS: Record<string, string> = {
@@ -193,7 +217,6 @@ export default function RepairAnalyticsPage() {
     )
   }
 
-  const maxMonthly = Math.max(...data.monthlyRevenue.map(d => d.revenue), 1)
   const maxDevice = Math.max(...data.devices.map(d => d.count), 1)
 
   return (
@@ -312,59 +335,145 @@ export default function RepairAnalyticsPage() {
             {/* Tab 1: Przegląd */}
             {activeTab === 'overview' && (
               <div>
-                <h3 className="text-sm font-semibold text-gray-900 mb-3">Obrót miesięczny (ostatnie 12 miesięcy)</h3>
-                <div className="flex items-end gap-1 h-48">
-                  {data.monthlyRevenue.map((m) => (
-                    <div key={m.month} className="flex-1 flex flex-col items-center">
-                      <div className="text-[9px] text-gray-500 mb-1 font-medium">
-                        {m.revenue > 0 ? formatPLN(m.revenue) : ''}
-                      </div>
-                      <div
-                        className="w-full bg-blue-500 rounded-t transition-all hover:bg-blue-600 cursor-default"
-                        style={{
-                          height: `${(m.revenue / maxMonthly) * 100}%`,
-                          minHeight: m.revenue > 0 ? '4px' : '0',
-                        }}
-                        title={`${m.month}: ${formatPLN(m.revenue)} (${m.count} napraw)`}
-                      />
-                      <span className="text-[9px] text-gray-400 mt-1">
-                        {formatMonth(m.month)}
+                {/* Napływ zgłoszeń i klienci — dwie rzeczy, o które pytali serwisanci */}
+                <div className="grid gap-4 lg:grid-cols-3 mb-6">
+                  <div className="rounded-xl border border-gray-200 p-4">
+                    <p className="text-xs font-semibold uppercase tracking-wide text-gray-400">
+                      Napływ zgłoszeń
+                    </p>
+                    <div className="mt-3 flex items-baseline gap-2">
+                      <span className="text-3xl font-bold text-gray-900">
+                        {data.intake?.perDay ?? 0}
                       </span>
+                      <span className="text-sm text-gray-500">urządzeń dziennie</span>
                     </div>
-                  ))}
-                </div>
-                <div className="mt-4 flex items-end gap-1 h-24">
-                  <div className="w-full">
-                    <h4 className="text-xs font-medium text-gray-600 mb-2">Liczba napraw / miesiąc</h4>
-                    <div className="flex items-end gap-1 h-16">
-                      {data.monthlyRevenue.map((m) => {
-                        const maxCount = Math.max(...data.monthlyRevenue.map(d => d.count), 1)
-                        return (
-                          <div key={m.month} className="flex-1 flex flex-col items-center">
-                            <div
-                              className="w-full bg-purple-400 rounded-t transition-all hover:bg-purple-500"
-                              style={{
-                                height: `${(m.count / maxCount) * 100}%`,
-                                minHeight: m.count > 0 ? '4px' : '0',
-                              }}
-                              title={`${m.month}: ${m.count} napraw`}
-                            />
-                            <span className="text-[8px] text-gray-400 mt-0.5">{m.count}</span>
-                          </div>
-                        )
-                      })}
+                    <div className="mt-2 flex items-baseline gap-2">
+                      <span className="text-xl font-bold text-gray-900">
+                        {data.intake?.perMonth ?? 0}
+                      </span>
+                      <span className="text-sm text-gray-500">miesięcznie</span>
                     </div>
+                    {/* Bez tej informacji nie wiadomo, czy średnia liczona jest
+                        z pełnego okresu, czy z krótszej historii */}
+                    <p className="mt-3 text-[11px] leading-relaxed text-gray-500">
+                      Średnia z {data.stats.totalRepairs} zgłoszeń w {data.intake?.days ?? 0} dniach,
+                      licząc dni kalendarzowe od {data.intake?.since ?? '—'}.
+                    </p>
+                  </div>
+
+                  <div className="rounded-xl border border-gray-200 p-4 lg:col-span-2">
+                    <p className="text-xs font-semibold uppercase tracking-wide text-gray-400">
+                      Klienci z największą liczbą napraw
+                    </p>
+                    {(data.topCustomers || []).length === 0 ? (
+                      <p className="mt-3 text-sm text-gray-500">Brak danych</p>
+                    ) : (
+                      <table className="mt-3 w-full text-sm">
+                        <tbody>
+                          {data.topCustomers.map((c, idx) => (
+                            <tr key={c.label} className="border-b border-gray-100 last:border-0">
+                              <td className="py-2 pr-2 text-xs text-gray-400 w-6">{idx + 1}.</td>
+                              <td className="py-2 pr-3 font-medium text-gray-900">
+                                <span className="block truncate max-w-[22rem]" title={c.label}>
+                                  {c.label}
+                                </span>
+                              </td>
+                              <td className="py-2 pr-3 whitespace-nowrap text-right text-gray-700">
+                                {c.count} {c.count === 1 ? 'naprawa' : c.count < 5 ? 'naprawy' : 'napraw'}
+                              </td>
+                              <td className="py-2 whitespace-nowrap text-right text-xs text-gray-500">
+                                {c.revenue > 0 ? formatPLN(c.revenue) : '—'}
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    )}
+                    <p className="mt-3 text-[11px] leading-relaxed text-gray-500">
+                      Kwota to obrót z zamkniętych napraw tego klienta. Firmy wpisane różnie
+                      (wielkość liter, spacje) łączone są w jedną pozycję.
+                    </p>
                   </div>
                 </div>
+
               </div>
             )}
 
             {/* Tab 2: Usterki */}
             {activeTab === 'issues' && (
               <div className="space-y-6">
+                {/* Najczęściej serwisowane — pięć modeli, o które pytali serwisanci */}
+                <div>
+                  <h3 className="text-sm font-semibold text-gray-900 mb-1">Najczęściej serwisowane urządzenia</h3>
+                  <p className="text-xs text-gray-500 mb-3">Pięć modeli, które wracają do nas najczęściej</p>
+                  <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
+                    {(data.devices || []).slice(0, 5).map((d, idx) => (
+                      <div key={d.model} className="rounded-xl border border-gray-200 bg-white p-3">
+                        <p className="text-[10px] font-semibold uppercase tracking-wide text-gray-400">
+                          {idx + 1} miejsce
+                        </p>
+                        <p className="mt-1 text-sm font-bold text-gray-900 truncate" title={d.model}>
+                          {d.model}
+                        </p>
+                        <p className="text-xs text-gray-500">
+                          {d.count} {d.count === 1 ? 'naprawa' : d.count < 5 ? 'naprawy' : 'napraw'}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Co najczęściej się psuje */}
+                <div>
+                  <h3 className="text-sm font-semibold text-gray-900 mb-1">Co najczęściej naprawiamy</h3>
+                  <p className="text-xs text-gray-500 mb-3">
+                    Kategorie rozpoznawane z opisu usterki podanego przez klienta. Każde zgłoszenie
+                    liczone raz, więc kategorie sumują się do liczby zgłoszeń
+                    {data.devicesMeta
+                      ? ` — te same ${data.stats.totalRepairs} napraw rozkłada się niżej na ${data.devicesMeta.groups} różnych modeli, dlatego przy pojedynczym urządzeniu liczby są dużo mniejsze`
+                      : ''}
+                    .
+                  </p>
+                  {(data.faults || []).length === 0 ? (
+                    <p className="text-gray-500 text-sm">Brak danych</p>
+                  ) : (
+                    <div className="space-y-2">
+                      {data.faults.map((f) => {
+                        const maxFault = Math.max(...data.faults.map((x) => x.count), 1)
+                        const total = data.faults.reduce((s, x) => s + x.count, 0) || 1
+                        return (
+                          <div key={f.name} className="flex items-center gap-3">
+                            <span className="text-sm font-medium text-gray-900 w-56 truncate" title={f.name}>
+                              {f.name}
+                            </span>
+                            <div className="flex-1 h-6 bg-gray-100 rounded-full overflow-hidden">
+                              <div
+                                className={`h-full rounded-full transition-all flex items-center justify-end pr-2 ${
+                                  f.name === 'Inne' ? 'bg-gray-400' : 'bg-amber-500'
+                                }`}
+                                style={{ width: `${(f.count / maxFault) * 100}%`, minWidth: '2.5rem' }}
+                              >
+                                <span className="text-[10px] font-bold text-white">{f.count}</span>
+                              </div>
+                            </div>
+                            <span className="text-xs text-gray-500 w-10 text-right">
+                              {Math.round((f.count / total) * 100)}%
+                            </span>
+                          </div>
+                        )
+                      })}
+                    </div>
+                  )}
+                </div>
+
                 {/* Top 10 modeli */}
                 <div>
-                  <h3 className="text-sm font-semibold text-gray-900 mb-3">Top 10 modeli urządzeń</h3>
+                  <h3 className="text-sm font-semibold text-gray-900 mb-1">Top 10 modeli urządzeń</h3>
+                  <p className="text-xs text-gray-500 mb-3">
+                    Model wpisuje klient, więc ten sam sprzęt bywa zapisany na kilka sposobów
+                    („Gk420t", „ZEBRA GK 420T"). Takie zapisy są złączone w jedną pozycję; warianty
+                    „d" i „t" zostają osobno, bo to inne urządzenia.
+                  </p>
                   {data.devices.length === 0 ? (
                     <p className="text-gray-500 text-sm">Brak danych</p>
                   ) : (
@@ -372,7 +481,14 @@ export default function RepairAnalyticsPage() {
                       {data.devices.map((d, idx) => (
                         <div key={d.model} className="flex items-center gap-3">
                           <span className="text-xs font-medium text-gray-500 w-5 text-right">{idx + 1}.</span>
-                          <span className="text-sm font-medium text-gray-900 w-40 truncate">{d.model}</span>
+                          <span className="text-sm font-medium text-gray-900 w-40 truncate" title={d.model}>
+                            {d.model}
+                            {!!d.spellings && d.spellings > 1 && (
+                              <span className="ml-1 text-[10px] font-normal text-gray-400">
+                                +{d.spellings - 1} zapisu
+                              </span>
+                            )}
+                          </span>
                           <div className="flex-1 h-6 bg-gray-100 rounded-full overflow-hidden">
                             <div
                               className="h-full bg-blue-500 rounded-full transition-all flex items-center justify-end pr-2"

@@ -30,7 +30,7 @@ export async function GET(req: NextRequest) {
     // Pobierz naprawy z okresu
     const { data: repairs, error } = await supabase
       .from('repair_requests')
-      .select('id, created_at, status, final_price, estimated_price, payment_status, device_model, device_type, repair_type, repair_number, is_warranty')
+      .select('id, created_at, status, final_price, estimated_price, payment_status, device_model, device_type, repair_type, repair_number, is_warranty, issue_description, company, first_name, last_name, email')
       .gte('created_at', startDate.toISOString())
       .order('created_at', { ascending: false })
 
@@ -77,16 +77,40 @@ export async function GET(req: NextRequest) {
       .map(([month, data]) => ({ month, ...data }))
 
     // 3. Usterki
-    // Top 10 modeli urządzeń
-    const deviceCount: Record<string, number> = {}
+    // Top 10 modeli urządzeń.
+    //
+    // Model wpisuje klient, więc ten sam sprzęt trafia do bazy na kilka sposobów:
+    // „GK420t", „Gk420t", „ZEBRA GK 420T", „zd421 zebra 300 dpi zpl termotransferowa".
+    // Zliczanie surowych napisów dawało ranking PISOWNI, nie urządzeń — GK420
+    // rozpadało się na cztery pozycje i wypadało z czołówki. Grupujemy więc po
+    // tokenie modelu (litery + cyfry + ewentualna końcówka), a wyświetlamy
+    // najczęstszy zapis w grupie. Warianty „d" i „t" zostają osobno, bo to
+    // realnie inne urządzenia.
+    const tokenModelu = (raw: string): string | null => {
+      const s = (raw || '').split(',')[0].toUpperCase()
+      const m = s.match(/[A-Z]{1,4}\s?-?\s?\d{2,4}\s?[A-Z]{0,3}/)
+      return m ? m[0].replace(/[\s-]/g, '') : null
+    }
+
+    const grupyModeli: Record<string, { count: number; zapisy: Record<string, number> }> = {}
     allRepairs.forEach(r => {
-      const model = r.device_model || 'Nieznany'
-      deviceCount[model] = (deviceCount[model] || 0) + 1
+      const raw = (r.device_model || '').trim()
+      const key = tokenModelu(raw) || raw.toUpperCase() || 'NIEZNANY'
+      if (!grupyModeli[key]) grupyModeli[key] = { count: 0, zapisy: {} }
+      grupyModeli[key].count += 1
+      const etykieta = raw || 'Nieznany'
+      grupyModeli[key].zapisy[etykieta] = (grupyModeli[key].zapisy[etykieta] || 0) + 1
     })
-    const devices = Object.entries(deviceCount)
-      .sort((a, b) => b[1] - a[1])
+
+    const devices = Object.values(grupyModeli)
+      .map(g => ({
+        model: Object.entries(g.zapisy).sort((a, b) => b[1] - a[1])[0][0],
+        count: g.count,
+        /** ile różnych zapisów tego samego modelu złączyliśmy */
+        spellings: Object.keys(g.zapisy).length,
+      }))
+      .sort((a, b) => b.count - a.count)
       .slice(0, 10)
-      .map(([model, count]) => ({ model, count }))
 
     // Podział statusów
     const statusCount: Record<string, number> = {}
@@ -161,7 +185,84 @@ export async function GET(req: NextRequest) {
       }))
     }
 
+    // 4. Najczęstsze usterki — kategorie wyprowadzone ze słownictwa, które
+    // realnie występuje w opisach klientów (przeanalizowane 255 ostatnich
+    // zgłoszeń), a nie z wymyślonej listy. Zgłoszenie wpada do PIERWSZEJ
+    // pasującej kategorii, więc suma kategorii równa się liczbie zgłoszeń
+    // i nikt nie liczy tej samej naprawy dwa razy.
+    const KATEGORIE_USTEREK: { nazwa: string; wzorzec: RegExp }[] = [
+      { nazwa: 'Głowica i jakość wydruku', wzorzec: /g[łl]owic|blad[ye]|nie drukuje|przesta[łl]\S* drukow|pas(ek|ka|ki|y)?\s*(na|w)?\s*(wydruk|etykie)|bia[łl][ye] pas|czarn\S* pas|jako[śs][ćc] (druku|wydruku)|smug|niewyra[źz]n|s[łl]ab\S* (druk|wydruk)|po[łl]ow[ęe] etykiet|krzyw|przesuni[ęe]t|nie nadrukowuje/i },
+      { nazwa: 'Nośnik, kalibracja, zacięcia', wzorzec: /kal.?bracj|czujnik|zacina|zaci[ęe]|papier|no[śs]nik|ta[śs]m[ay]|kalk|toner|etykiet\S* nie|nie pobiera|przesuw|podaje|gilz/i },
+      { nazwa: 'Zasilanie i akumulator', wzorzec: /nie w[łl][ąa]cza|nie uruchamia|nie odpala|nie startuje|nie [łl]aduje|[łl]adowani|bateri|akumulator|zasilacz|zasilani|roz[łl]adow|przycisk|on\/off|ga[śs]nie|wy[łl][ąa]cza si[ęe]/i },
+      { nazwa: 'Ekran i dotyk', wzorzec: /ekran|wy[śs]wietlacz|dotyk|p[ęe]kni[ęe]t|lcd|matryc/i },
+      { nazwa: 'Skanowanie i czytnik', wzorzec: /skan|czytnik|nie czyta|kod(u|y|ów)? kreskow|wi[ąa]zk|laser|celownik/i },
+      { nazwa: 'Łączność', wzorzec: /wifi|wi-fi|bluetooth|sie[ćc]|ethernet|usb|nie widzi|po[łl][ąa]czen|parowani/i },
+      { nazwa: 'Mechanika i obudowa', wzorzec: /obudow|zawias|wa[łl]ek|rolk|gumk|klapa|z[łl][ąa]cz|zatrzask|pokrywa|wentylator|ha[łl]as|trzeszcz|luz/i },
+      { nazwa: 'Sygnalizacja i błędy', wzorzec: /dioda|diody|miga|[śs]wieci|czerwon|zielon|komunikat|b[łl][ąa]d|error|reset|restart|zawiesz|oprogramowani|firmware|aktualizac/i },
+    ]
+
+    const usterkiCount: Record<string, number> = {}
+    KATEGORIE_USTEREK.forEach(k => { usterkiCount[k.nazwa] = 0 })
+    usterkiCount['Inne'] = 0
+    allRepairs.forEach(r => {
+      const opis = r.issue_description || ''
+      const trafienie = KATEGORIE_USTEREK.find(k => k.wzorzec.test(opis))
+      usterkiCount[trafienie ? trafienie.nazwa : 'Inne'] += 1
+    })
+    const faults = Object.entries(usterkiCount)
+      .filter(([, count]) => count > 0)
+      .map(([name, count]) => ({ name, count }))
+      .sort((a, b) => b.count - a.count)
+
+    // 5. Klienci z największą liczbą zgłoszeń. Nazwy firm bywają wpisywane
+    // różnie (wielkość liter, podwójne spacje), więc grupujemy po znormalizowanej
+    // postaci, a pokazujemy zapis z ostatniego zgłoszenia.
+    const normalizuj = (s: string) => s.trim().toUpperCase().replace(/\s+/g, ' ')
+    const klienci: Record<string, { label: string; count: number; revenue: number }> = {}
+    allRepairs.forEach(r => {
+      const firma = (r.company || '').trim()
+      const osoba = [r.first_name, r.last_name].filter(Boolean).join(' ').trim()
+      const label = firma || osoba || r.email || 'Nieznany'
+      const key = normalizuj(label)
+      if (!klienci[key]) klienci[key] = { label, count: 0, revenue: 0 }
+      klienci[key].count += 1
+      if (completedStatuses.includes(r.status) && r.final_price) {
+        klienci[key].revenue += Number(r.final_price)
+      }
+    })
+    const topCustomers = Object.values(klienci)
+      .sort((a, b) => b.count - a.count || b.revenue - a.revenue)
+      .slice(0, 5)
+      .map(k => ({ ...k, revenue: Math.round(k.revenue) }))
+
+    // 6. Napływ zgłoszeń. Dzielimy przez dni, które realnie minęły od pierwszego
+    // zgłoszenia w okresie — przy krótszej historii dzielenie przez pełne 365 dni
+    // zaniżałoby średnią.
+    const najstarsze = allRepairs.length
+      ? new Date(Math.min(...allRepairs.map(r => new Date(r.created_at).getTime())))
+      : new Date()
+    const poczatek = najstarsze > startDate ? najstarsze : startDate
+    const dni = Math.max(1, Math.round((Date.now() - poczatek.getTime()) / 86400000))
+    const intake = {
+      perDay: Math.round((totalRepairs / dni) * 10) / 10,
+      perMonth: Math.round((totalRepairs / dni) * 30.44 * 10) / 10,
+      days: dni,
+      since: poczatek.toISOString().slice(0, 10),
+    }
+
+    // Kontekst do wykresów: kategorie usterek sumują się do WSZYSTKICH zgłoszeń,
+    // a modele rozkładają się na dziesiątki pozycji — bez tej liczby zestawienie
+    // obu wykresów wygląda na sprzeczne.
+    const devicesMeta = {
+      groups: Object.keys(grupyModeli).length,
+      covered: devices.reduce((sum, d) => sum + d.count, 0),
+    }
+
     return NextResponse.json({
+      faults,
+      devicesMeta,
+      topCustomers,
+      intake,
       stats: {
         totalRevenue: Math.round(totalRevenue),
         totalRepairs,

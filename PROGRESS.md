@@ -713,3 +713,17 @@ Po migracji warto puścić `node scripts/test-chat-prefill-e2e.mjs` — testy sa
 - Przyciski „Anuluj kuriera" przy obu blokach przesyłek (odbiór od klienta i wysyłka do klienta) w karcie zgłoszenia, z potwierdzeniem przed wysłaniem.
 - Zlecenie 23188695 (list 1049692365133U, podjazd 27.08) **anulowane i potwierdzone**, dane w zgłoszeniu wyczyszczone, wpis w historii dodany.
 - Build ✓, tsc EXIT=0.
+
+## 2026-08-25 — Analityka serwisu: urządzenia, usterki, klienci, napływ
+- Prośba: (1) 5 najczęściej serwisowanych urządzeń, (2) co najczęściej naprawiamy, (3) który klient serwisuje najwięcej, (4) średnia dzienna i miesięczna liczba zgłoszeń.
+- Punkt 1 był już częściowo w panelu („Top 10 modeli") — dołożone wyróżnione pięć pierwszych miejsc jako kafelki, bo o to pytali serwisanci; pełna dziesiątka zostaje niżej.
+- **Kategorie usterek wyprowadzone z prawdziwych opisów, nie wymyślone.** Najpierw policzone najczęstsze słowa w 255 opisach klientów, potem na tej podstawie osiem kategorii i iteracyjne dopracowanie wzorców: 23% → 16% → **11% w „Inne"**. Wyłapane po drodze realne przypadki: literówka „KALBRACJI", „brak wiązki lasera", „nie odpala", „po wymianie kalki", hałasujący wentylator, „drukuje połowę etykiety". Reszta w „Inne" to opisy typu „proszę o przegląd" albo wpisy-śmieci — dalej nie da się uczciwie.
+- Zgłoszenie wpada do PIERWSZEJ pasującej kategorii, więc kategorie sumują się do liczby zgłoszeń i żadna naprawa nie jest liczona dwa razy.
+- Rozkład na dziś: zasilanie i akumulator 24%, głowica i jakość wydruku 21%, nośnik/kalibracja 15%, ekran i dotyk 13%, skanowanie 7%.
+- Klienci grupowani po znormalizowanej nazwie firmy (wielkość liter, podwójne spacje), z obrotem z zamkniętych napraw. Czoło: Zadbano S.A. (10), Spinel Trade (5).
+- Napływ liczony przez dni, które realnie minęły od najstarszego zgłoszenia w okresie — dzielenie przez pełne 365 dni zaniżałoby średnią przy krótszej historii. Dziś: 255 zgłoszeń przez 232 dni → **1,1 dziennie, 33,5 miesięcznie**. Podstawa wyliczenia widoczna pod liczbą.
+- Build ✓, tsc EXIT=0.
+- **Ranking modeli pokazywał pisownię, nie urządzenia.** User zauważył, że „Zasilanie i akumulator 30" nie ma odpowiednika w top 10 modeli. Liczby były spójne (kategorie sumują się do wszystkich zgłoszeń, modele rozsypują się na długi ogon), ale przy okazji wyszedł prawdziwy błąd: 142 zgłoszenia miały **100 różnych zapisów modelu**, 80 z nich jednorazowych. GK420 rozpadało się na cztery pozycje („GK420t", „Gk420t", „ZEBRA GK 420T", „ZEBRA GK420t") i wypadało z czołówki.
+- Fix: grupowanie po tokenie modelu (litery + cyfry + końcówka, z pierwszego członu przed przecinkiem), wyświetlany najczęstszy zapis w grupie plus licznik „+N zapisu". Warianty „d" i „t" zostają osobno — to realnie inne urządzenia. Po złączeniu: 78 grup zamiast 100 zapisów, na czele **GK420t 9** (było 6) i ZD421 8 (było 7), top 10 pokrywa 52 zamiast 41 zgłoszeń.
+- Pod wykresem usterek dopisane wyjaśnienie, dlaczego obu wykresów nie da się zestawiać wprost.
+- Usunięty wykres „Obrót miesięczny" z zakładki Przegląd — słupki renderowały się jako płaskie kreski niezależnie od kwoty (1771 zł wyglądało jak 32 744 zł). Te same dane zostają w czytelnej tabeli w zakładce Obrót szczegółowy.
