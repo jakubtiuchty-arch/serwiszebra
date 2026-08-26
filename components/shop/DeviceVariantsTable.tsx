@@ -268,7 +268,7 @@ export default function DeviceVariantsTable({
               {...(wyrozniony ? { [ZNACZNIK]: 'true' } : {})}
               onClick={() => onWybierz?.(v.pn)}
               className={`cursor-pointer rounded-xl border p-3 ${
-                wyrozniony ? 'border-blue-600 bg-blue-50 ring-1 ring-blue-600' : 'border-gray-200'
+                wyrozniony ? 'border-blue-300 bg-blue-50/70' : 'border-gray-200'
               }`}
             >
               <div className="flex flex-wrap items-center gap-2">
@@ -358,7 +358,7 @@ export default function DeviceVariantsTable({
                   {...(wyrozniony ? { [ZNACZNIK]: 'true' } : {})}
                   onClick={() => onWybierz?.(v.pn)}
                   className={`cursor-pointer border-b border-gray-100 last:border-0 hover:bg-gray-50 ${
-                    wyrozniony ? 'bg-blue-50 outline outline-2 -outline-offset-2 outline-blue-600' : ''
+                    wyrozniony ? 'bg-blue-50/70' : ''
                   }`}
                 >
                   <td className="px-3 py-3">
