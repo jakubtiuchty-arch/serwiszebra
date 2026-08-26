@@ -168,19 +168,23 @@ export default async function DesktopPrintersPage() {
                     href={`/sklep/drukarki-etykiet/${d.slug}`}
                     className="group overflow-hidden rounded-xl border border-gray-200 bg-white transition hover:border-gray-400 hover:shadow-sm"
                   >
-                    <div className="relative aspect-[10/7] bg-white">
+                    <div className="relative aspect-[5/4] bg-white">
                       {d.image_urls?.[0] && (
                         <Image
                           src={d.image_urls[0]}
                           alt={d.name}
                           fill
                           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                          className="object-contain p-5 transition-transform duration-200 group-hover:scale-[1.03]"
+                          className="object-contain p-7 transition-transform duration-200 group-hover:scale-[1.03]"
                         />
                       )}
                     </div>
                     <div className="border-t border-gray-100 p-4">
-                      <h2 className="text-sm font-bold text-gray-900">{d.name}</h2>
+                      {/* Na kafelku sam model — kontekst „drukarka etykiet" niesie
+                          cała strona, a przedrostek tylko wydłużał nazwę */}
+                      <h2 className="text-sm font-bold text-gray-900">
+                        {d.name.replace(/^Drukarka etykiet\s+/i, '')}
+                      </h2>
                       <div className="mt-2">
                         <span className="block text-sm font-bold text-gray-900">
                           od {zl(k.najtansza)} zł{' '}
