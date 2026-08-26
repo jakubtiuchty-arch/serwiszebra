@@ -46,7 +46,7 @@ export const KLASY_DRUKAREK: KlasaDrukarek[] = [
     slug: 'polprzemyslowe',
     nazwa: 'Drukarki półprzemysłowe',
     zajawka: 'Między biurkiem a halą — do ok. 2–3 tys. etykiet dziennie.',
-    serie: 'Serie ZT111, ZT211, ZT231',
+    serie: 'Serie ZT111, ZT231',
     ikona: '/ikona-przemyslowe.png',
     metaTitle: 'Półprzemysłowe drukarki etykiet Zebra — ZT111, ZT231 | Serwis Zebra',
     metaDescription:
@@ -57,7 +57,10 @@ export const KLASY_DRUKAREK: KlasaDrukarek[] = [
     nazwa: 'Drukarki przemysłowe',
     zajawka: 'Do pracy ciągłej na produkcji i w magazynie wysokiego składowania.',
     serie: 'Serie ZT411, ZT421, ZT510, ZT610, ZT620',
-    ikona: '/ikona-przemyslowe.png',
+    // Ikona ZT411 wygenerowana w Higgsfield (gpt_image_2) z prawdziwego renderu,
+    // w stylu istniejącego arkusza — dotychczasowa /ikona-przemyslowe.png to
+    // render ZT231 i została przy klasie półprzemysłowej
+    ikona: '/ikona-przemyslowe-zt411.png',
     metaTitle: 'Przemysłowe drukarki etykiet Zebra — seria ZT | Serwis Zebra',
     metaDescription:
       'Przemysłowe drukarki etykiet Zebra ZT411–ZT620 — praca ciągła, głowice o dużym resursie, druk do 600 dpi. Sprzedaje i serwisuje autoryzowany serwis Zebry.',
