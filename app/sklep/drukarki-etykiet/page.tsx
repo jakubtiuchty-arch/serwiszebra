@@ -163,7 +163,7 @@ export default async function DevicesCategoryPage() {
           <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl">Drukarki etykiet Zebra</h1>
 
           {/* Lead nad kafelkami — krótki, żeby wybór klasy został nad zgięciem */}
-          <p className="mt-3 max-w-3xl text-base leading-relaxed text-gray-700">
+          <p className="mt-3 text-base leading-relaxed text-gray-700">
             Drukarki etykiet Zebra w czterech klasach — od biurkowych po przemysłowe, termiczne
             i termotransferowe. Sprzedajemy sprzęt, który sami naprawiamy: ceny i stany
             magazynowe pobieramy na żywo, a gwarancję realizujemy we własnym autoryzowanym
@@ -207,7 +207,7 @@ export default async function DevicesCategoryPage() {
             ))}
           </div>
 
-          <p className="mt-6 max-w-3xl text-sm leading-relaxed text-gray-600">
+          <p className="mt-6  text-sm leading-relaxed text-gray-600">
             W katalogu pokazujemy modele, które znamy z warsztatu najlepiej. Sprowadzamy każdą
             drukarkę z oferty Zebry — jeśli szukasz konkretnego modelu, napisz na{' '}
             <a href="mailto:serwis@takma.com.pl" className="font-semibold text-gray-900 underline">
@@ -217,7 +217,7 @@ export default async function DevicesCategoryPage() {
           </p>
 
           {/* Treść kategorii POD kafelkami — tu wygrywa się frazę, nie leadem */}
-          <section className="mt-12 max-w-3xl">
+          <section className="mt-12 ">
             <h2 className="text-xl font-bold text-gray-900">
               Jak wybrać drukarkę etykiet Zebra
             </h2>
@@ -285,7 +285,7 @@ export default async function DevicesCategoryPage() {
             </p>
           </section>
 
-          <section className="mt-10 max-w-3xl">
+          <section className="mt-10 ">
             <h2 className="text-xl font-bold text-gray-900">
               Najczęstsze pytania o drukarki etykiet Zebra
             </h2>
