@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import DevicePurchasePanel, {
   type DeviceVariant,
   type StanWariantu,
@@ -48,6 +48,50 @@ export default function DeviceBuyBlock({
 }: Props) {
   const [wybranyPn, setWybranyPn] = useState<string | undefined>(wybranyPnStart)
 
+  // JEDEN fetch na stronę. Wcześniej panel i tabela pytały o te same numery
+  // osobno — dwa równoległe zapytania potrafiły zwrócić dwie różne migawki
+  // (np. przy czkawce jednego z dystrybutorów w ścieżce awaryjnej) i klient
+  // widział u góry „EU: 1338", a w tabeli „PL: 12" dla tej samej wersji.
+  // Teraz oba komponenty dostają dokładnie ten sam snapshot.
+  const [stany, setStany] = useState<Record<string, StanWariantu>>(stanyPoczatkowe)
+  const [zaladowane, setZaladowane] = useState(false)
+
+  useEffect(() => {
+    let anulowane = false
+    Promise.all(
+      variants.map((v) =>
+        fetch(`/api/shop/product-stock?sku=${encodeURIComponent(v.pn)}`)
+          .then((r) => r.json())
+          .then((d) => ({
+            pn: v.pn,
+            stan: {
+              netto: d.live_price > 0 ? d.live_price : fallbackNetto,
+              brutto: d.live_price_brutto > 0 ? d.live_price_brutto : fallbackBrutto,
+              stockPL: d.stock_pl ?? 0,
+              stockEU: d.stock_de ?? 0,
+              total: d.total_stock ?? 0,
+              deliveryText: d.delivery_text ?? null,
+            } as StanWariantu,
+          }))
+          .catch(() => null)
+      )
+    ).then((wyniki) => {
+      if (anulowane) return
+      setStany((poprzednie) => {
+        const mapa = { ...poprzednie }
+        wyniki.forEach((w) => {
+          if (w) mapa[w.pn] = w.stan
+        })
+        return mapa
+      })
+      setZaladowane(true)
+    })
+    return () => {
+      anulowane = true
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   const wybierz = useCallback(
     (pn: string) => {
       // Ponowne kliknięcie w wybrany wiersz zdejmuje wybór — inaczej nie dało by
@@ -73,7 +117,8 @@ export default function DeviceBuyBlock({
         fallbackNetto={fallbackNetto}
         fallbackBrutto={fallbackBrutto}
         variants={variants}
-        stanyPoczatkowe={stanyPoczatkowe}
+        stany={stany}
+        zaladowane={zaladowane}
         wybranyPn={wybranyPn}
         rekomendowanyPn={rekomendowanyPn}
       />
@@ -85,7 +130,8 @@ export default function DeviceBuyBlock({
         variants={variants}
         fallbackNetto={fallbackNetto}
         fallbackBrutto={fallbackBrutto}
-        stanyPoczatkowe={stanyPoczatkowe}
+        stany={stany}
+        zaladowane={zaladowane}
         wybranyPn={wybranyPn}
         przewinDoWybranego={!!wybranyPnStart}
         onWybierz={wybierz}

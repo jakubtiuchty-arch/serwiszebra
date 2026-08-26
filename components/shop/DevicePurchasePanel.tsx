@@ -35,20 +35,15 @@ interface DevicePurchasePanelProps {
   fallbackNetto: number
   fallbackBrutto: number
   variants: DeviceVariant[]
-  /** Ceny i stany z serwera — dzięki nim cena jest w pierwszym renderze */
-  stanyPoczatkowe?: Record<string, StanWariantu>
-  /** Numer katalogowy z adresu (`?pn=`) — panel pokazuje od razu jego cenę */
+  /** Wspólny snapshot cen i stanów — pobiera go raz DeviceBuyBlock,
+   *  ten sam trafia do tabeli wariantów, więc liczby nigdy się nie rozjadą */
+  stany?: Record<string, StanWariantu>
+  /** Czy wspólny fetch już wrócił */
+  zaladowane?: boolean
+  /** Aktualnie wybrany numer katalogowy */
   wybranyPn?: string
   /** Numer, który kupuje większość — kotwica dla klienta bez wiedzy o wariantach */
   rekomendowanyPn?: string
-}
-
-interface LiveData {
-  live_price: number
-  live_price_brutto: number
-  stock_pl: number
-  stock_de: number
-  total_stock: number
 }
 
 const zl = (v: number) =>
@@ -73,7 +68,8 @@ export default function DevicePurchasePanel({
   fallbackNetto,
   fallbackBrutto,
   variants,
-  stanyPoczatkowe = {},
+  stany = {},
+  zaladowane = false,
   wybranyPn,
   rekomendowanyPn,
 }: DevicePurchasePanelProps) {
@@ -83,62 +79,23 @@ export default function DevicePurchasePanel({
   const pn = wybrany || variants[0]?.pn || ''
   const wariant = variants.find((v) => v.pn === pn)
 
-  const stanSerwera = stanyPoczatkowe[pn]
   const [foto, setFoto] = useState(0)
-  // Dane z przeglądarki trzymamy RAZEM z numerem, którego dotyczą. Wcześniej
-  // stan przeżywał zmianę wariantu i panel pokazywał numer jednej wersji z ceną
-  // i stanem poprzedniej — np. ZD4A042-30EM00EZ z ceną 2229,65 zł i 3 szt.
-  // należącymi do wersji Wi-Fi. Chroni to też przed odpowiedziami wracającymi
-  // w innej kolejności, niż zostały wysłane.
-  const [live, setLive] = useState<{ pn: string; dane: LiveData } | null>(null)
-  const [loading, setLoading] = useState(!stanSerwera)
   const [mounted, setMounted] = useState(false)
-
   useEffect(() => setMounted(true), [])
 
-  useEffect(() => {
-    if (!pn) return
-    let anulowane = false
-    setLoading(!stanyPoczatkowe[pn])
-    fetch(`/api/shop/product-stock?sku=${encodeURIComponent(pn)}`)
-      .then((r) => r.json())
-      .then((d) => {
-        if (!anulowane) setLive({ pn, dane: d })
-      })
-      .catch(() => {})
-      .finally(() => {
-        if (!anulowane) setLoading(false)
-      })
-    return () => {
-      anulowane = true
-    }
-  }, [pn, stanyPoczatkowe])
-
-  /** Dane live tylko wtedy, gdy dotyczą numeru, który właśnie pokazujemy */
-  const liveDane = live && live.pn === pn ? live.dane : null
-
-  // Kolejność źródeł: dane z przeglądarki, potem serwerowe, na końcu cena z bazy
-  const stockPL = liveDane?.stock_pl ?? stanSerwera?.stockPL ?? 0
-  const stockEU = liveDane?.stock_de ?? stanSerwera?.stockEU ?? 0
-  const maDane = !!liveDane || !!stanSerwera
+  const s = stany[pn]
+  const stockPL = s?.stockPL ?? 0
+  const stockEU = s?.stockEU ?? 0
+  const maDane = !!s
+  const loading = !maDane && !zaladowane
 
   const termin = maDane ? terminDostawy(stockPL, stockEU) : null
-  const netto =
-    liveDane?.live_price && liveDane.live_price > 0
-      ? liveDane.live_price
-      : stanSerwera?.netto && stanSerwera.netto > 0
-        ? stanSerwera.netto
-        : fallbackNetto
-  const brutto =
-    liveDane?.live_price_brutto && liveDane.live_price_brutto > 0
-      ? liveDane.live_price_brutto
-      : stanSerwera?.brutto && stanSerwera.brutto > 0
-        ? stanSerwera.brutto
-        : fallbackBrutto
+  const netto = s?.netto && s.netto > 0 ? s.netto : fallbackNetto
+  const brutto = s?.brutto && s.brutto > 0 ? s.brutto : fallbackBrutto
 
   // Cena „od" bez kontekstu myli kupującego, który potrzebuje Ethernetu albo
   // Wi-Fi — pokazujemy obok nią cenę wersji, którą wybiera większość
-  const rek = !wybrany && rekomendowanyPn ? stanyPoczatkowe[rekomendowanyPn] : undefined
+  const rek = !wybrany && rekomendowanyPn ? stany[rekomendowanyPn] : undefined
   const wariantRek = variants.find((v) => v.pn === rekomendowanyPn)
 
   return (
@@ -186,7 +143,7 @@ export default function DevicePurchasePanel({
 
         {/* Cena */}
         <div className="mb-1">
-          {!maDane && loading ? (
+          {loading ? (
             <div className="flex items-center gap-2 py-1 text-sm text-gray-500">
               <Loader2 className="h-4 w-4 animate-spin" />
               Sprawdzam cenę…

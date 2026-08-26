@@ -17,8 +17,10 @@ interface Props {
   variants: DeviceVariant[]
   fallbackNetto: number
   fallbackBrutto: number
-  /** Ceny i stany policzone serwerowo — są już w pierwszym HTML-u */
-  stanyPoczatkowe?: Record<string, StanWariantu>
+  /** Wspólny snapshot cen i stanów z DeviceBuyBlock — ten sam co w panelu */
+  stany?: Record<string, StanWariantu>
+  /** Czy wspólny fetch już wrócił */
+  zaladowane?: boolean
   /** Aktualnie wybrany numer katalogowy */
   wybranyPn?: string
   /** Przewiń do wybranego po wejściu — tylko gdy przyszedł z adresu, nie po kliknięciu */
@@ -52,55 +54,20 @@ export default function DeviceVariantsTable({
   variants,
   fallbackNetto,
   fallbackBrutto,
-  stanyPoczatkowe = {},
+  stany = {},
+  zaladowane = false,
   wybranyPn,
   przewinDoWybranego,
   onWybierz,
 }: Props) {
   const addItem = useCartStore((s) => s.addItem)
-  const [stany, setStany] = useState<Record<string, StanWariantu>>(stanyPoczatkowe)
-  const [loading, setLoading] = useState(Object.keys(stanyPoczatkowe).length === 0)
+  const loading = !zaladowane && Object.keys(stany).length === 0
   const [pokazNiedostepne, setPokazNiedostepne] = useState(false)
   const [dodane, setDodane] = useState<string | null>(null)
   // Znacznik zamiast refa: wyróżniony wariant istnieje w obu układach naraz
   // (karta na telefonie, wiersz na desktopie), a jeden z nich jest ukryty przez
   // CSS. Atrybut, nie `id` — dwa elementy z tym samym `id` to niepoprawny HTML.
   const ZNACZNIK = 'data-wariant-wybrany'
-
-  useEffect(() => {
-    let anulowane = false
-    Promise.all(
-      variants.map((v) =>
-        fetch(`/api/shop/product-stock?sku=${encodeURIComponent(v.pn)}`)
-          .then((r) => r.json())
-          .then((d) => ({
-            pn: v.pn,
-            stan: {
-              netto: d.live_price > 0 ? d.live_price : fallbackNetto,
-              brutto: d.live_price_brutto > 0 ? d.live_price_brutto : fallbackBrutto,
-              stockPL: d.stock_pl ?? 0,
-              stockEU: d.stock_de ?? 0,
-              total: d.total_stock ?? 0,
-              deliveryText: d.delivery_text ?? null,
-            } as StanWariantu,
-          }))
-          .catch(() => null)
-      )
-    ).then((wyniki) => {
-      if (anulowane) return
-      setStany((poprzednie) => {
-        const mapa = { ...poprzednie }
-        wyniki.forEach((w) => {
-          if (w) mapa[w.pn] = w.stan
-        })
-        return mapa
-      })
-      setLoading(false)
-    })
-    return () => {
-      anulowane = true
-    }
-  }, [variants, fallbackNetto, fallbackBrutto])
 
   const dostepne = variants.filter((v) => (stany[v.pn]?.total ?? 0) > 0)
   const niedostepne = variants.filter((v) => (stany[v.pn]?.total ?? 0) === 0)

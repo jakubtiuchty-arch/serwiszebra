@@ -75,12 +75,21 @@ interface WierszCache {
 
 async function odczytajZCache(sku: string, pn: string) {
   const supabase = await createServiceClient()
-  const { data } = await supabase
+  const { data, error } = await supabase
     .from('stock_cache')
     .select('*')
     .in('part_number', Array.from(new Set([sku, pn])))
     .order('last_sync', { ascending: false })
     .limit(1)
+
+  // Błąd odczytu spycha zapytanie na ścieżkę live — to zamierzone (strona ma
+  // działać mimo czkawki bazy), ale MUSI zostawić ślad. Bez tego logu dwa
+  // równoległe zapytania z jednej strony potrafiły po cichu pójść na żywo
+  // i pokazać klientowi dwie różne migawki stanów.
+  if (error) {
+    console.error(`[Product Stock] Odczyt stock_cache dla ${sku} nieudany — idę na żywo:`, error.message)
+    return null
+  }
 
   const row = (data?.[0] as WierszCache | undefined) || undefined
   if (!row) return null
