@@ -180,15 +180,6 @@ export default async function DevicesCategoryPage() {
             ))}
           </div>
 
-          <p className="mt-6  text-sm leading-relaxed text-gray-600">
-            W katalogu pokazujemy modele, które znamy z warsztatu najlepiej. Sprowadzamy każdą
-            drukarkę z oferty Zebry — jeśli szukasz konkretnego modelu, napisz na{' '}
-            <a href="mailto:serwis@takma.com.pl" className="font-semibold text-gray-900 underline">
-              serwis@takma.com.pl
-            </a>
-            , sprawdzimy cenę i termin u dystrybutorów.
-          </p>
-
           {/* Treść kategorii POD kafelkami — tu wygrywa się frazę, nie leadem */}
           <section className="mt-12 ">
             <h2 className="text-xl font-bold text-gray-900">
