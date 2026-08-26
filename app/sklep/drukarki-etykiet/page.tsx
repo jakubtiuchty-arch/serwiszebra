@@ -152,29 +152,35 @@ export default async function DevicesCategoryPage() {
       />
 
       <main className="bg-gray-50">
+        {/* Hero w ciemnym pasie — jak nagłówki stron instrukcji; kafelki i treść
+            zostają na jasnym tle, więc sekcje wyraźnie się rozdzielają */}
+        <section className="bg-gradient-to-br from-gray-800 via-gray-900 to-gray-900 text-white">
+          <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-12">
+            <nav className="mb-4 text-xs text-gray-400">
+              <Link href="/sklep" className="hover:text-white">
+                Sklep
+              </Link>
+              <span className="mx-1.5">/</span>
+              <span className="text-gray-300">Drukarki etykiet</span>
+            </nav>
+
+            <h1 className="text-2xl font-bold sm:text-3xl">Drukarki etykiet Zebra</h1>
+
+            <p className="mt-3 max-w-3xl text-base leading-relaxed text-gray-300">
+              Drukarki etykiet Zebra w czterech klasach — od biurkowych po przemysłowe,
+              termiczne i termotransferowe. Sprzedajemy sprzęt, który sami naprawiamy: ceny
+              i stany magazynowe pobieramy na żywo, a gwarancję realizujemy we własnym
+              autoryzowanym serwisie, bez odsyłania drukarki do producenta.
+            </p>
+          </div>
+          <div className="h-1 bg-[#A8F000]" />
+        </section>
+
         <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
-          <nav className="mb-4 text-xs text-gray-500">
-            <Link href="/sklep" className="hover:text-gray-700">
-              Sklep
-            </Link>
-            <span className="mx-1.5">/</span>
-            <span className="text-gray-700">Drukarki etykiet</span>
-          </nav>
-
-          <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl">Drukarki etykiet Zebra</h1>
-
-          {/* Lead nad kafelkami — krótki, żeby wybór klasy został nad zgięciem */}
-          <p className="mt-3 text-base leading-relaxed text-gray-700">
-            Drukarki etykiet Zebra w czterech klasach — od biurkowych po przemysłowe, termiczne
-            i termotransferowe. Sprzedajemy sprzęt, który sami naprawiamy: ceny i stany
-            magazynowe pobieramy na żywo, a gwarancję realizujemy we własnym autoryzowanym
-            serwisie, bez odsyłania drukarki do producenta.
-          </p>
-
           {/* Cztery klasy jako MAŁE karty w stylu bloga — każda grafika to inna
               scena zastosowania (biuro / teren / zaplecze / hala), bo klient
               rozróżnia klasy tłem, zanim przeczyta nagłówek */}
-          <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {KLASY_DRUKAREK.map((k) => (
               <KafelekKlasy key={k.slug} klasa={k} liczbaModeli={liczby[k.slug] || 0} />
             ))}
