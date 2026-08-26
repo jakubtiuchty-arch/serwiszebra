@@ -4,6 +4,7 @@ import type { Metadata } from 'next'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import { KLASY_DRUKAREK } from '@/lib/printer-classes'
+import KafelekKlasy from '@/components/shop/KafelekKlasy'
 
 /**
  * HUB kategorii — najważniejsza strona sklepu pod frazę „drukarki etykiet
@@ -175,35 +176,7 @@ export default async function DevicesCategoryPage() {
               rozróżnia klasy tłem, zanim przeczyta nagłówek */}
           <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {KLASY_DRUKAREK.map((k) => (
-              <Link
-                key={k.slug}
-                href={`/sklep/drukarki-etykiet/${k.slug}`}
-                className="group overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
-              >
-                <span className="relative block aspect-[16/9] overflow-hidden">
-                  <Image
-                    src={k.grafika}
-                    alt={`${k.nazwa} Zebra`}
-                    fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                    className="object-cover transition-transform duration-300 group-hover:scale-[1.04]"
-                  />
-                </span>
-                <span className="block p-4">
-                  <span className="flex flex-wrap items-baseline gap-x-1.5">
-                    <h2 className="text-sm font-bold text-gray-900">{k.nazwa}</h2>
-                    {(liczby[k.slug] || 0) > 0 && (
-                      <span className="text-[11px] text-gray-500">
-                        {liczby[k.slug]} {liczby[k.slug] === 1 ? 'model' : 'modele'}
-                      </span>
-                    )}
-                  </span>
-                  <span className="mt-1 block text-xs leading-relaxed text-gray-600">
-                    {k.zajawka}
-                  </span>
-                  <span className="mt-1.5 block text-[11px] text-gray-400">{k.serie}</span>
-                </span>
-              </Link>
+              <KafelekKlasy key={k.slug} klasa={k} liczbaModeli={liczby[k.slug] || 0} />
             ))}
           </div>
 
