@@ -374,13 +374,6 @@ export default async function DevicePage({
                   gdy nie ma jak doprowadzić kabla.
                 </li>
               </ul>
-              <p className="mt-4 text-sm leading-relaxed text-gray-600">
-                Nie wiesz, co wybrać? Napisz na{' '}
-                <a href="mailto:serwis@takma.com.pl" className="font-semibold underline">
-                  serwis@takma.com.pl
-                </a>{' '}
-                — dobierzemy wersję pod to, co drukujesz.
-              </p>
           </section>
 
           {/* Akcesoria dopiero PO rozstrzygnięciu, którą wersję kupić —
