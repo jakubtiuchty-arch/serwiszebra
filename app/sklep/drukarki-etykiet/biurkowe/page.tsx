@@ -159,7 +159,7 @@ export default async function DesktopPrintersPage() {
               , dobierzemy model i przygotujemy wycenę.
             </p>
           ) : (
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {devices.map((d) => {
                 const k = daneKafelka(d)
                 return (
@@ -168,45 +168,39 @@ export default async function DesktopPrintersPage() {
                     href={`/sklep/drukarki-etykiet/${d.slug}`}
                     className="group overflow-hidden rounded-xl border border-gray-200 bg-white transition hover:border-gray-400 hover:shadow-sm"
                   >
-                    <div className="relative aspect-[4/3] bg-white">
+                    <div className="relative aspect-square bg-white">
                       {d.image_urls?.[0] && (
                         <Image
                           src={d.image_urls[0]}
                           alt={d.name}
                           fill
-                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                          className="object-contain p-6 transition-transform duration-200 group-hover:scale-[1.03]"
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                          className="object-contain p-4 transition-transform duration-200 group-hover:scale-[1.03]"
                         />
                       )}
                     </div>
-                    <div className="border-t border-gray-100 p-5">
-                      <h2 className="font-bold text-gray-900">{d.name}</h2>
-                      {d.description && (
-                        <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-gray-600">
-                          {d.description}
-                        </p>
-                      )}
-                      <div className="mt-3 flex items-end justify-between gap-3">
-                        <span>
-                          <span className="block text-base font-bold text-gray-900">
-                            od {zl(k.najtansza)} zł{' '}
-                            <span className="text-xs font-normal text-gray-500">netto</span>
-                          </span>
-                          {k.liczbaWersji > 1 && (
-                            <span className="block text-xs text-gray-500">
-                              {k.liczbaWersji} wersji do wyboru
+                    <div className="border-t border-gray-100 p-4">
+                      <h2 className="text-sm font-bold text-gray-900">{d.name}</h2>
+                      <div className="mt-2">
+                        <span className="block text-sm font-bold text-gray-900">
+                          od {zl(k.najtansza)} zł{' '}
+                          <span className="text-xs font-normal text-gray-500">netto</span>
+                        </span>
+                        <span className="mt-0.5 flex items-center justify-between text-xs text-gray-500">
+                          {k.liczbaWersji > 1 ? `${k.liczbaWersji} wersji do wyboru` : '\u00a0'}
+                          {k.dostepny && (
+                            <span className="flex items-center gap-1.5 whitespace-nowrap text-gray-600">
+                              <span
+                                className={`h-2 w-2 rounded-full ${k.magazynPL ? 'bg-green-500' : 'bg-yellow-500'}`}
+                              />
+                              {k.magazynPL ? 'wysyłka 24h' : 'wysyłka 2-3 dni'}
                             </span>
                           )}
                         </span>
-                        {k.dostepny && (
-                          <span className="flex items-center gap-1.5 whitespace-nowrap text-xs text-gray-600">
-                            <span
-                              className={`h-2 w-2 rounded-full ${k.magazynPL ? 'bg-green-500' : 'bg-yellow-500'}`}
-                            />
-                            {k.magazynPL ? 'wysyłka 24h' : 'wysyłka 2-3 dni'}
-                          </span>
-                        )}
                       </div>
+                      <span className="mt-3 flex min-h-[40px] items-center justify-center rounded-lg bg-[#A8F000] px-4 text-sm font-semibold text-gray-900 transition group-hover:brightness-95">
+                        Zobacz więcej
+                      </span>
                     </div>
                   </Link>
                 )
