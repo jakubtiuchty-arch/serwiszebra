@@ -353,10 +353,10 @@ export default async function DevicePage({
               drukarka sama je kalibruje, więc obsługi nie trzeba nikogo uczyć — wystarczy
               pokazać, gdzie wkłada się rolkę i taśmę.
             </p>
-          </section>
 
-          <section className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6 mb-4 sm:mb-6">
-            <h2 className="text-sm sm:text-base font-semibold text-gray-900 mb-3">Którą wersję wybrać</h2>
+            <h3 className="mt-5 border-t border-gray-100 pt-5 text-sm font-semibold text-gray-900">
+              Którą wersję wybrać
+            </h3>
               <ul className="mt-3 space-y-3 text-sm leading-relaxed text-gray-700">
                 <li>
                   <strong className="text-gray-900">203 dpi</strong> wystarczy do etykiet
