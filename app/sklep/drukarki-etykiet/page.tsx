@@ -170,37 +170,38 @@ export default async function DevicesCategoryPage() {
             serwisie, bez odsyłania drukarki do producenta.
           </p>
 
-          {/* Cztery klasy jako karty w stylu bloga — komiksowa grafika u góry,
-              treść pod spodem; kupujący wybiera po tym, gdzie drukarka stoi */}
-          <div className="mt-8 grid gap-5 sm:grid-cols-2">
+          {/* Cztery klasy jako MAŁE karty w stylu bloga — każda grafika to inna
+              scena zastosowania (biuro / teren / zaplecze / hala), bo klient
+              rozróżnia klasy tłem, zanim przeczyta nagłówek */}
+          <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {KLASY_DRUKAREK.map((k) => (
               <Link
                 key={k.slug}
                 href={`/sklep/drukarki-etykiet/${k.slug}`}
-                className="group overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+                className="group overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
               >
                 <span className="relative block aspect-[16/9] overflow-hidden">
                   <Image
                     src={k.grafika}
                     alt={`${k.nazwa} Zebra`}
                     fill
-                    sizes="(max-width: 640px) 100vw, 50vw"
-                    className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                    className="object-cover transition-transform duration-300 group-hover:scale-[1.04]"
                   />
                 </span>
-                <span className="block p-5">
-                  <span className="flex flex-wrap items-baseline gap-x-2">
-                    <h2 className="text-lg font-bold text-gray-900">{k.nazwa}</h2>
+                <span className="block p-4">
+                  <span className="flex flex-wrap items-baseline gap-x-1.5">
+                    <h2 className="text-sm font-bold text-gray-900">{k.nazwa}</h2>
                     {(liczby[k.slug] || 0) > 0 && (
-                      <span className="text-xs text-gray-500">
+                      <span className="text-[11px] text-gray-500">
                         {liczby[k.slug]} {liczby[k.slug] === 1 ? 'model' : 'modele'}
                       </span>
                     )}
                   </span>
-                  <span className="mt-1.5 block text-sm leading-relaxed text-gray-600">
+                  <span className="mt-1 block text-xs leading-relaxed text-gray-600">
                     {k.zajawka}
                   </span>
-                  <span className="mt-2 block text-xs text-gray-400">{k.serie}</span>
+                  <span className="mt-1.5 block text-[11px] text-gray-400">{k.serie}</span>
                 </span>
               </Link>
             ))}
