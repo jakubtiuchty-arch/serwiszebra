@@ -275,14 +275,14 @@ export default async function DesktopPrintersPage() {
               203 lub 300 dpi, druk do 104 mm, a łączność dokłada się modułem bez narzędzi —
               zamiast kupować nową drukarkę, gdy firma przechodzi z USB na sieć. Wersja
               termotransferowa przyjmuje taśmy o nawoju 300 m, więc wymienia się je cztery
-              razy rzadziej niż 74-metrowe z tańszych serii.{' '}
+              razy rzadziej niż 74-metrowe z tańszych serii. Zobacz{' '}
               <Link
                 href="/sklep/drukarki-etykiet/zebra-zd421t"
                 className="font-medium text-gray-900 underline"
               >
-                ZD421t ma u nas kartę z żywą ceną
-              </Link>{' '}
-              — od około 1 650 zł netto.
+                Zebra ZD421t
+              </Link>
+              .
             </p>
 
             <h3 className="mt-5 text-base font-semibold text-gray-900">
