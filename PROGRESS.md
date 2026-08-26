@@ -727,3 +727,211 @@ Po migracji warto puścić `node scripts/test-chat-prefill-e2e.mjs` — testy sa
 - Fix: grupowanie po tokenie modelu (litery + cyfry + końcówka, z pierwszego członu przed przecinkiem), wyświetlany najczęstszy zapis w grupie plus licznik „+N zapisu". Warianty „d" i „t" zostają osobno — to realnie inne urządzenia. Po złączeniu: 78 grup zamiast 100 zapisów, na czele **GK420t 9** (było 6) i ZD421 8 (było 7), top 10 pokrywa 52 zamiast 41 zgłoszeń.
 - Pod wykresem usterek dopisane wyjaśnienie, dlaczego obu wykresów nie da się zestawiać wprost.
 - Usunięty wykres „Obrót miesięczny" z zakładki Przegląd — słupki renderowały się jako płaskie kreski niezależnie od kwoty (1771 zł wyglądało jak 32 744 zł). Te same dane zostają w czytelnej tabeli w zakładce Obrót szczegółowy.
+- **Sprawdzenie mobile (nie na oko, tylko pomiarem).** Tymczasowa strona z tym samym markupem i danymi, screenshoty przez Playwright przy 360/390/430/768/1280 px. Wyszły dwa realne błędy: tabela klientów rozpychała dokument do **581 px przy oknie 390** (poziomy scroll — winna długa nazwa firmy w komórce), a etykiety wykresów ucinały się („Zasilanie i aku…", „+3 za…"), czego na telefonie nie da się podejrzeć, bo nie ma kursora.
+- Fix: tabela klientów zamieniona na listę z zawijaniem nazwy; etykiety wykresów lądują NAD paskiem poniżej breakpointu `sm`, a od `sm` wracają do układu w jednym wierszu. Po poprawce: brak poziomego scrolla i zero uciętych etykiet na wszystkich pięciu szerokościach. Strona testowa usunięta.
+
+## 2026-08-25 — Sprzedaż urządzeń na serwis-zebry.pl: karta ZD421t + kategoria
+- Pytanie usera: czy robić kartę na każdy numer katalogowy, jak zebrasklep. **Analiza z Ahrefs rozstrzygnęła to danymi:**
+  - zebrasklep.pl: DR 6, 153 frazy, **2287 ruchu/mies.** vs serwis-zebry.pl: DR 17, 74 frazy, 509 ruchu. Nisza nie jest bramkowana autorytetem.
+  - Ich trzy karty ZD421 zachowują się różnie: jedna 130 ruchu na „zebra zd421" (800 wol.), druga 127 na SAM numer katalogowy (100 wol., poz. 1), trzecia **zero**. Karty PN to loteria.
+  - SERP na `zd4a042-30em00ez`: dziesięć sklepów z PN w URL-u, ruch mają pozycje 1–3 (Ceneo 112), a **od czwartej w dół zero — łącznie z morele.net (DR 75)**.
+  - **Kluczowe odkrycie: `/instrukcje/zebra-zd421t` już jest na 9. pozycji na „zebra zd421t"** — wyżej niż karta zebrasklepu (7). Mamy gotowy przyczółek.
+- Decyzja: **jedna karta na wariant modelu**, numery katalogowe jako wybór wewnątrz karty + w danych strukturalnych (`ProductGroup` / `hasVariant` z `mpn`), żeby łapać long tail bez rozdrabniania mocy na dziewięć słabych adresów.
+- Skorygowane wcześniejsze ostrzeżenie o kanibalizacji z takmą: między RÓŻNYMI domenami to dużo słabszy efekt niż w obrębie jednej. Realne ryzyko to zduplikowana treść — dlatego opis na serwis-zebry pisany z pozycji serwisu („co wiemy o tym modelu z warsztatu", z medianą naprawy 455 zł netto z naszych danych), a nie kopia z takmy.
+- Utrzymanie okazało się tańsze, niż zakładałem: `/api/shop/product-stock` w serwis-zebry ciągnie **live ceny i stany z Ingrama, Jarltecha i BlueStara** — ta sama maszyneria co w takmie, działa po SKU, więc urządzenia obsługuje bez zmian.
+- **Nowa gałąź `/sklep/drukarki-etykiet`** jako statyczny segment — ma pierwszeństwo przed `[...slug]` obsługującym części, więc czterosegmentowy routing katalogu części zostaje nietknięty (zweryfikowane: `/sklep/glowice` dalej 200).
+- `DevicePurchasePanel`: wybór PN → osobne zapytanie o cenę i stan dla tego numeru, osobna pozycja w koszyku (`variant_pn`).
+- Link z instrukcji do karty (mapa `SPRZEDAWANE_MODELE`, żeby nie linkować w pustkę) — to strona z pozycją 9 przekazuje moc nowej karcie.
+- Testy: karta 200, cena live **1678,19 zł netto** pobrana z Ingrama (baza miała 1648,81 — potwierdza, że live ma sens), „Dostępny", sześć wariantów PN, link do instrukcji obecny, mobile 390 px bez poziomego scrolla, katalog części nietknięty. Build ✓, tsc EXIT=0.
+- Produkt w bazie: `zebra-zd421t`, id `00d64652-ff55-4aa7-9b78-5c50c93da8f6`, `product_type='drukarka'`.
+- **Poprawki po przeglądzie karty ZD421t:**
+  - Zdjęcia z repo takma (`zd421t_1/2/3`), przekonwertowane PNG → WebP: **1,1 MB → 100 KB**. Galeria z miniaturami, pierwsze zdjęcie ładowane priorytetowo.
+  - Usunięta sekcja „Numery katalogowe" pod opisem — te same PN-y są w wyborze wersji obok, dublowanie bez wartości.
+  - **Przepisany opis.** Poprzednia wersja otwierała się zdaniem „ZD421t jest jednym z najczęściej serwisowanych przez nas urządzeń", czyli na karcie sprzedażowej informowała, że sprzęt często się psuje — argument PRZECIW zakupowi. Teraz: „Do czego się nadaje" (gdzie stoi, dlaczego druk z taśmą trwalszy, wymiana rolki bez narzędzi) i „Którą wersję wybrać" (203 vs 300 dpi, USB vs Ethernet vs Wi-Fi) — językiem klienta, bez żargonu.
+- **Karta przebudowana na wzorzec kart części** (uwaga usera). Wcześniej miała własny układ — duża galeria po lewej i przyklejony panel po prawej — czyli wyglądała jak wklejka z innego sklepu. Teraz 1:1 wzorzec z `/sklep/[...slug]`: `ShopSubheader` z okruszkami i koszykiem, `max-w-5xl`, zdjęcie w białej ramce `md:w-80 lg:w-96` z miniaturami pod spodem, po prawej biała karta z nazwą, linią „PN:", ceną netto i brutto, stanem magazynowym z kolorową kropką („Magazyn EU: 1456 szt. — wysyłka 2-3 dni") i **limonkowym przyciskiem `#A8F000` „Do koszyka"** ze stepperem ilości. Sekcje niżej w tej samej stylistyce, ze „Specyfikacją" z ikoną i tabelą wiersz-po-wierszu.
+- Wybór wersji wpięty w panel jako siatka 2×3 kafelków (nie lista radiobuttonów), więc mieści się nad ceną i nie rozpycha karty. Po zmianie wersji zmienia się PN w nagłówku, cena i stan.
+- Osobny `DeviceGallery` usunięty — zdjęcia obsługuje panel, tak jak `figure` na kartach części.
+- „Dostępne wersje" wróciły na dół jako tabela w stylu specyfikacji — tym razem świadomie, dla łapania zapytań o konkretny PN w treści strony (wcześniej dublowały listę radiobuttonów tuż obok, teraz są w innym miejscu i innej formie).
+- **Wybór wariantu przeniesiony z panelu do tabeli „Dostępne warianty"** (wzorzec z takma.com.pl). Kafelki w panelu ukrywały to, co przy tym produkcie jest najważniejsze — różnice CEN między wersjami sięgają 700 zł, a widać było tylko jedną naraz. Tabela: Part Number, Rozdzielczość, Ethernet, Wi-Fi, Cena netto, Magazyn (z kropką PL/EU), Status (pigułka) i „+ Koszyk" w każdym wierszu, plus rozwijacz „Pokaż niedostępne warianty (N)".
+- Ceny i stany pobierane per PN równolegle dla wszystkich wariantów; niedostępne schowane pod rozwijaczem. Panel na górze pokazuje teraz „od {najtańsza} zł netto" i kieruje kotwicą do tabeli.
+- Zweryfikowane na żywych danych: 5 z 6 wariantów dostępnych, ceny od 1678,19 do 2365,72 zł netto — potwierdza sens rozbicia cen per wariant zamiast jednej ceny „od".
+
+## 2026-08-25 — Karta ZD421t dopracowana na podstawie badań UX
+- Research: Baymard (25 rund testów, 4400 sesji, 30 tys. ocenionych kart), Stanford Web Credibility (Fogg, 2684 uczestników), Gartner B2B, metaanaliza porzuceń koszyka (50 badań), EAA/WCAG 2.1 AA, badania o paraliżu wyboru (Iyengar & Lepper + metaanaliza Scheibehenne).
+- **Wdrożone luki, każda z podpartą liczbą:**
+  - **Termin dostawy jako DATA** („u Ciebie do piątku 28 sierpnia") zamiast „wysyłka 2-3 dni" — 41% sklepów podaje szybkość zamiast daty. `lib/delivery-date.ts` liczy w dniach roboczych: magazyn PL → następny dzień roboczy (po 14:00 kolejny), EU → 3 dni robocze.
+  - **Koszt dostawy na karcie** — szuka go 64% użytkowników, 43% sklepów nie pokazuje. Extra koszty to przyczyna nr 1 porzuceń (39%).
+  - **Polityka zwrotów** z linkiem do §16 — 60% szuka jej na karcie, 15% porzuca zamówienie przez jej brak. Sformułowanie ZGODNE Z REGULAMINEM: prawo odstąpienia dotyczy konsumentów i przedsiębiorców na prawach konsumenta, więc nie obiecujemy zwrotu każdej firmie.
+  - **Gwarancja realizowana u nas** — trust seals działają najmocniej przy drogich koszykach i mniej doświadczonych kupujących, a to nasz przypadek.
+  - **„Najczęściej wybierana"** przy najtańszym wariancie — przeciwwaga dla paraliżu wyboru. Metaanaliza Scheibehenne pokazuje, że efekt jest silny dokładnie tam, gdzie opcje są porównywalne, stawka wysoka, a kupujący bez wiedzy eksperckiej — czyli sześć wariantów ZD421t różniących się o ~700 zł.
+  - **Wymiary 206 × 280 × 179 mm** i prędkość druku w specyfikacji — 42% użytkowników próbuje ocenić rozmiar ze zdjęcia.
+- **Dostępność (EAA obowiązuje od 28.06.2025)**: `scope="col"` na wszystkich 8 nagłówkach tabeli, `aria-live` przy dodaniu do koszyka, wszystkie obrazy z alt, jeden H1, zero przycisków bez nazwy. Zweryfikowane automatem.
+- **Świadomie NIE wdrożone**: sztuczna presja („ostatnie sztuki") — przy stanie 1456 szt. byłaby kłamstwem, a UOKiK w 2025 nałożył ponad 1,15 mld zł kar i buduje narzędzia AI do wykrywania dark patterns (75,7% badanych polskich stron ma co najmniej jeden). Wishlisty — 21% jej używa, ale nie przy jednorazowym zakupie drukarki. Opinii produktowych — nie mamy prawdziwych.
+
+## 2026-08-26 — SEO karty ZD421t vs konkurencja z czołówki SERP
+- **Analiza pozycji 1–7 dla „zebra zd421t"**: bcmarket (DR 28, poz. 1) — nisza „dla szkół", opis ~350 słów, schema, brak FAQ; strefadrukarek (DR 36, poz. 3) — **~2100 słów**, H2/H3, 7 zdjęć, opinie, linki do własnych poradników, raty; ceneo (DR 82, poz. 4); gento (DR **0**, poz. 6) jedną kartą „opcje do wyboru"; zebrasklep (DR 6, poz. 7). Autorytet domeny nie decyduje — decyduje dopasowanie strony do zapytania.
+- **Najważniejsze odkrycie: SERP na „zebra zd421t" ma MIESZANĄ intencję.** Na pozycji 2 stoi strona wsparcia technicznego zebra.com, a Google pokazuje pytania „Jakie sterowniki są potrzebne", „Jak skonfigurować", „Jak skalibrować". To tłumaczy, dlaczego nasza `/instrukcje/zebra-zd421t` jest tam na 9. miejscu, a większość sklepów wypada niżej — one odpowiadają tylko na połowę zapytania.
+- Wdrożone: **sekcja FAQ odpowiadająca dokładnie na te pytania** (sterowniki, kalibracja, diody, różnica t vs d, projektowanie etykiet), każda z linkiem do NASZEGO poradnika — mamy je wszystkie napisane, czego nie ma żaden sklep w czołówce. Do tego **FAQPage schema** i **BreadcrumbList schema**.
+- Treść urosła z **479 do 703 słów** bez lania wody (konkurent z poz. 3 ma ~2100 — jest zapas na dalszą rozbudowę).
+- Title przepisany na język SERP-u: „Zebra ZD421t 203/300 dpi — drukarka etykiet od 1 678 zł netto" (61 zn.). Meta description bez zdania o awaryjności, z wysyłką 24 h i autoryzowanym serwisem.
+- Pięć nowych linków wewnętrznych do poradników — działają w obie strony: wzmacniają kartę i poradniki.
+
+## 2026-08-26 — Faza 1 katalogu akcesoriów: rodzina ZD411 / ZD421 / ZD621
+- **Punkt wyjścia z analizy danych**: żadna strona `/sklep/` nie jest w top 20 serwisu wg ruchu — cały ruch (~500 wizyt/mies.) idzie na `/sterowniki`, `/instrukcje/*` i poradniki. Frazy typu „części do drukarek zebra", „głowica drukująca zebra", „wałek dociskowy zebra" mają w Ahrefs **0 wyszukiwań w PL**. Wniosek: katalogu nie rozbudowujemy pod SEO, tylko podpinamy pod ruch, który już mamy.
+- **Luka wobec takmy**: 314 pozycji akcesoriów u nich vs 122 u nas; kategorie, w których mieliśmy **zero**: gilotyny (16), dyspensery (18), moduły łączności (18), nawijaki (4).
+- **Dodane 11 produktów** (skrypt `scripts/dodaj-akcesoria-zd4xx.mjs`, idempotentny — ponowne uruchomienie aktualizuje zamiast dublować): gilotyny ZD421t/ZD621t, dyspensery ZD421t/ZD621t/ZD421d+ZD621d, moduły Ethernet/RS-232/Wi-Fi+BT, moduły baterii t i d oraz samo ogniwo. Opisy pisane z perspektywy warsztatu (kiedy się opłaca, co się psuje), nie przepisane z takmy — inna intencja, brak kanibalizacji.
+- **Trzy nowe typy w `lib/shop-categories.ts`**: `gilotyna` → `/sklep/gilotyny`, `dyspenser` → `/sklep/dyspensery`, `modul` → `/sklep/moduly-lacznosci`; do `akumulator` doszła kategoria „drukarki biurkowe" (ZD421/ZD621). Sitemap i `/sklep` biorą je automatycznie. Poprawka przy okazji: `typeLabel` w metadanych brał się z drabinki ifów i dla nieznanego typu wypisywał „Akumulatory" — teraz `productType.namePlural`.
+- **Cena z magazynu EU (`app/api/shop/product-stock`)**: gdy Ingram nie zwraca ceny, karta pokazywała **0 zł**. Dołożony fallback — cena z BlueStara/Jarltecha w euro × kurs NBP × marża, z pominięciem Jarltecha, gdy `priceQuantity > 1` (jego `unit_price` bywa ceną pakietu). Kurs wyjęty do `lib/nbp.ts`. Odpowiedź niesie teraz `price_source: ingram | eu | none`.
+- **Zabezpieczenie, które wyszło z testów**: fallback zaczął zapisywać do bazy ceny przeliczone z euro (o ~3% wyższe) w miejsce cen Ingrama. Zapis z ceny EU jest teraz blokowany dla towarów, które Ingram kiedykolwiek wycenił (`attributes.ingram_price_with_margin`). 12 rozjechanych rekordów przywrócone.
+- **Ingram był 26.08 niedostępny przez większość prac** (`429`, potem `Internal Server Error`, na końcu `HTTP 503 — IM24portal`). Po jego powrocie sprawdzone: **Ingram ma w katalogu WSZYSTKIE 11 akcesoriów**, indeksowane własnym numerem z prefiksem ZB (`ZBP1112640-230` itd.). Wcześniejszy wniosek „Ingram ich nie ma" był błędny — brał się z odpytywania przy leżącym API, a potem z sondy pytającej surowym numerem producenta, bez rozwinięcia formatów.
+- **Ceny mimo to zostają bez zmian** — BlueStar jest przy każdym z tych 11 numerów minimalnie tańszy od Ingrama (np. gilotyna: 545,05 zł vs 555,53 zł; bateria: 1 297,72 zł vs 1 312,34 zł), więc `selectPurchasePrice` i tak wybiera jego. Zmienia się tylko uzasadnienie fallbacku: to nie łatka na brak w katalogu Ingrama, lecz zabezpieczenie na czas jego awarii.
+- **Cross-sell `components/shop/DeviceAccessories.tsx`** w dwóch miejscach:
+  - **karta drukarki** — „Do tej drukarki": wyposażenie dodatkowe + części eksploatacyjne;
+  - **`/instrukcje/{model}`** — „Części i akcesoria do Zebry X" z odnośnikiem do zgłoszenia naprawy. To najlepiej rankujące strony w serwisie (ZD421t poz. 2, ZT230 poz. 1), a czyta je ktoś, kto ma to urządzenie w ręku.
+- **Dopasowanie po `device_model`, nie po `compatible_models`** (`lib/device-accessories.ts`) — to drugie pole bywa w bazie wpisane szeroko (głowica ZD421d ma na liście ZD421t), a pomyłka termik/termotransfer kończy się zwrotem. Token bez litery („ZD421" w zasilaczu „ZD411 / ZD421 / ZD621") = część wspólna dla obu wersji. Zweryfikowane: ZD421t dostaje warianty t, ZD421d warianty d.
+- **Przełącznik 203/300 dpi** przy częściach eksploatacyjnych — do wersji 300 dpi pasuje wyłącznie głowica 300 dpi, a różnica w cenie to dwukrotność (485 vs 988 zł).
+- **Feed Google Merchant** rozszerzony o trzy nowe typy: 88 → 99 pozycji.
+- Poprawione dane: zasilacze P1079903-026 i P1117258-012 miały w bazie zdjęcie **innego** produktu (P1080383-704). **Zostaje do zrobienia**: P1025950-042 (GK420/GT800/ZD410) nadal ma cudze zdjęcie — nie ma poprawnego pliku ani u nas, ani na takmie.
+
+## 2026-08-26 — Ceny i stany z crona zamiast na żywo (wzorzec z takmy)
+- **Powód**: sklep pytał API trzech dystrybutorów przy KAŻDYM renderze. Karta ZD421t to 1 panel + 6 wariantów + 11 akcesoriów = **18 zapytań na odsłonę**, każde do Ingrama (rozwijany w 3 formaty), BlueStara i Jarltecha. Lista kategorii z 54 głowicami — jeszcze więcej. Stąd `429 Too Many Requests` od Ingrama, a przy jego awarii (`503 IM24portal`) karty pokazywały zera.
+- **Sprawdzone, jak działa takma** (repo tylko do odczytu, nic tam nie zmieniane): crony `jarltech-sync` 5:00 i `stock-sync` 6:00 **i 13:00**, paczki po 10 PN z przerwą 2 s, `Promise.allSettled`, wynik scalany do tabeli `StockCache`, front czyta wyłącznie cache z limitem 24 h.
+- **Przeniesione do serwis-zebry:**
+  - `supabase-stock-cache.sql` — tabele `stock_cache` i `stock_sync_log`, RLS bez polityk (tylko service role). **DO URUCHOMIENIA w Supabase.**
+  - `app/api/cron/stock-sync/route.ts` — trzej dystrybutorzy, paczki po 10, `allSettled`, kolejka „najpierw bez ceny, potem najdawniej odświeżane", przerwanie 20 s przed `maxDuration` z zapisem logu, `?limit=N` do ręcznego testu. Zbiera SKU produktów **oraz** numery wariantów urządzeń z `attributes.variants`.
+  - `lib/price-selection.ts` — bezpiecznik cenowy.
+  - `vercel.json` — cron 6:00 i 13:00.
+  - `/api/shop/product-stock` czyta `stock_cache` (ważność 24 h); do dystrybutorów schodzi tylko przy braku wpisu lub przeterminowaniu i **zapisuje wynik z powrotem** (write-through). Kształt odpowiedzi bez zmian, więc 8 komponentów działa bez przeróbek; doszły pola `cached`, `availability`, `delivery_text`, a `price_source` nazywa teraz konkretnego dystrybutora zamiast ogólnego „eu".
+- **Poprawka wobec oryginału z takmy** (u nich zostaje jak było): stara reguła porównywała Ingrama z **najtańszym** źródłem, więc jedno źródło z ceną pakietu przegłosowywało dwa zgodne — przy 24 / 2 / 23,10 zł uznawała za błędnego Ingrama i wybierała **2 zł, czyli 1/12 kosztu**. Teraz przy trzech źródłach odnosimy każde do **mediany** (odporna na jednego wariata), przy dwóch bierzemy tańsze i zgłaszamy do przejrzenia, bo orzec się nie da.
+- **Drugi bezpiecznik, historyczny**: spadek ceny zakupu o ponad 60% wobec poprzedniego przebiegu jest odrzucany, zostaje poprzednia cena, numer trafia do `stock_sync_log.suspect_prices`. To dokładnie scenariusz taśm z czerwca (03300GS08407: 0,85 zł przy koszcie 2 EUR).
+- **Testy**: `npx tsx scripts/test-price-selection.ts` — 9 przypadków z realnych wpadek (błąd pakietowy w obie strony, tablet Ingrama za 164 922 zł, sam magazyn EU, brak cen), wszystkie przechodzą.
+- Sprawdzone, że **kolejność wdrożenia nie ma znaczenia**: bez tabeli `stock_cache` odczyt zwraca pustkę i strona po cichu schodzi na ścieżkę live, tak jak dotąd.
+- `sync-ingram` (katalog CSV, co 6 h) zostaje bez zmian — pisze do `products.price`, czyli do wartości pokazywanej w SSR zanim dojdą dane z cache. Po ustabilizowaniu `stock-sync` można go wygasić.
+
+## 2026-08-26 — Wdrożenie audytu SEO/UX karty ZD421t
+Źródło: `~/Documents/Codex/2026-08-26/ma/outputs/zd421t-audyt-seo-ux-ui.md`. Wdrożone P0 w całości + trzy pozycje z P1.
+
+**P0 — naprawy zgodności, bez testów A/B**
+- **Ceny i stany podawane serwerowo** (`lib/stock-server.ts`, czyta `stock_cache`). Wcześniej karta dociągała je dopiero JavaScriptem, więc w początkowym HTML-u i w danych strukturalnych nie było ani ceny, ani dostępności. To jest bezpośredni zysk z przeniesienia crona ze stock-sync.
+- **`ProductGroup` przepisany**: każdy wariant ma `url` (`?pn=`), `additionalProperty` z rozdzielczością i łącznością, `image`, a `Offer` — realną `price`, `availability` liczoną ze stanu, `priceValidUntil`, `shippingDetails` (25 zł) i `hasMerchantReturnPolicy` (14 dni, §16). **Gdy ceny nie znamy, oferta jest pomijana** zamiast deklarować puste `InStock` — rozjazd z tym, co widzi klient, jest gorszy niż brak rich resultu.
+- **`variesBy` usunięte.** Realne osie różnicy to DPI i łączność, a Google obsługuje w tym polu zamkniętą listę właściwości, w której ich nie ma. Poprzednia wartość `model` niczego nie opisywała.
+- **Adresowalne stany wariantów**: `?pn=ZD4A043-30EW02EZ` otwiera kartę z tym numerem w panelu zakupu, wyróżnionym wierszem tabeli i CTA „Przejdź do zakupu". Canonical zawsze wskazuje czysty adres karty, więc indeks się nie mnoży.
+  - **Poprawka po zgłoszeniu**: wariant wskazany w adresie wpadał do grupy „na zamówienie" i był chowany pod rozwijaczem, więc wyróżnienia nie było widać. Teraz pokazujemy go ZAWSZE, niezależnie od stanu, z etykietą „wybrana wersja" i niebieską obwódką. Rozwijacz liczy tylko pozostałe niedostępne, żeby po rozwinięciu dało się listę zwinąć z powrotem.
+  - Wyróżnienie oznaczamy atrybutem `data-wariant-wybrany`, nie `id` — ten sam wariant istnieje jednocześnie w karcie mobilnej i w wierszu tabeli, a dwa elementy z tym samym `id` to niepoprawny HTML (zweryfikowane: 0 duplikatów `id` na stronie). Przewijanie do wariantu wybiera ten z dwóch, który jest w danym momencie widoczny.
+  - **Druga poprawka po zgłoszeniu — brakowało czym ten stan wywołać.** Parametr `?pn=` był adresowalny dla Google, ale człowiek musiałby wpisać go ręcznie w pasku adresu; na stronie nie było żadnego elementu, który by taki link tworzył. Nowy `components/shop/DeviceBuyBlock.tsx` spina panel zakupu z tabelą wokół wspólnego wyboru: **kliknięcie wiersza (lub karty na telefonie) wybiera wersję**, panel od razu pokazuje jej cenę, termin i PN, a adres dopisuje się sam przez `history.replaceState` — bez przeładowania, bo dane wszystkich wariantów są już na stronie. Ponowne kliknięcie zdejmuje wybór i wraca do widoku „od X zł".
+  - Dostępność: w każdym wierszu radio z `aria-label`, więc wybór działa też z klawiatury; `stopPropagation` na przycisku koszyka, żeby zakup nie zmieniał wyboru.
+  - Zweryfikowane w przeglądarce: klik → `?pn=ZD4A043-30EE00EZ`, panel 1 643,63 zł → 2 316,96 zł, etykieta „wybrana wersja", radio zaznaczone, CTA „Przejdź do zakupu"; drugi klik czyści adres; klik w „Koszyk" nie rusza wyboru. Mobile tak samo, dokument nadal 390 px.
+- **`og:image` i `twitter:card`**; meta description skrócony 195 → 164 zn.
+- **Cele dotykowe 44 px** we wszystkich przyciskach sekcji wariantów (zmierzone: 6× 44 px). WCAG wymaga 24 px, ale to za mało na kciuk.
+
+**P1 — największy wpływ na decyzję**
+- **Osobny układ mobilny wariantów.** Tabela miała ~929 px przy ekranie 390 px; teraz poniżej `sm` każdy wariant to karta z kompletem danych (PN, dpi, Ethernet, Wi-Fi, magazyn, cena, status) i pełnym przyciskiem. Zmierzone: dokument 390 px, zero przewijania w bok, tabela ukryta, 5 kart. Benchmark Baymarda: przeciętne lub gorsze doświadczenia rosną z 52% na desktopie do 62% na mobile, więc samo zwężenie tabeli nie wystarcza.
+- **Akcesoria przeniesione POD poradnik doboru.** Kolejność sekcji: wybór PN → do czego się nadaje → którą wersję wybrać → akcesoria → FAQ → specyfikacja.
+- **Druga kotwica cenowa**: obok ceny „od" pokazujemy cenę wersji najczęściej wybieranej. Sama najniższa cena myli kupującego, który potrzebuje Ethernetu albo Wi-Fi — najtańsza wersja ich nie ma.
+- **Wariant na zamówienie nie kończy ścieżki** — po rozwinięciu dochodzi zdanie z linkiem do kontaktu i obietnicą sprawdzenia terminu u dystrybutora.
+
+**ZALEŻNOŚĆ**: oferty w schema pojawią się dopiero po uruchomieniu `supabase-stock-cache.sql` i pierwszym przebiegu `/api/cron/stock-sync`. Do tego czasu karta działa normalnie (ceny dociągane w przeglądarce), ale `Offer` jest świadomie pomijana.
+
+**Z audytu NIE wdrożone, świadomie**
+- Dodanie urządzeń do feedu Merchant Center — dziś feed obejmuje tylko części, więc rozjazdu nie ma; osobne konto GMC dla serwis-zebry i tak jest pending.
+- Sekcja „co jest w pudełku" i karta katalogowa — wymagają potwierdzonych danych o zawartości zestawu, a tych nie zmyślam.
+- Galeria portów, skali i zakładania taśmy — potrzebne nowe zdjęcia.
+- Zweryfikowane opinie i wdrożenia — nie mamy jeszcze materiału.
+
+## 2026-08-26 — Poziome przewijanie: trzy osobne przyczyny
+Zgłoszenie dotyczyło paska przewijania pod tabelą wariantów. Pomiary wykazały trzy niezależne źródła, w tym dwa istniejące od dawna na KAŻDEJ stronie serwisu.
+
+1. **Tabela wariantów** miała 1011 px przy kontenerze 990 px — niezależnie od szerokości okna, bo artykuł jest `max-w-5xl`. Największym winowajcą była pierwsza kolumna (319 px), rozepchana plakietką stojącą w jednej linii z numerem katalogowym. Naprawione: plakietka pod numerem, osiem kolumn zredukowane do sześciu (Ethernet + Wi-Fi → „Łączność", Magazyn + Status → „Dostępność", „Rozdzielczość" → „DPI"), nagłówki bez `uppercase tracking-wider`. Wynik: **990 px w kontenerze 990 px, bez przewijania**.
+2. **Nagłówek** — dwanaście linków nawigacji ma łącznie 821 px, a z logo (368 px) nie mieszczą się w wierszu poniżej 1280 px. Efekt: poziomy pasek na całym serwisie w zakresie 768–1180 px. Naprawione: pełna nawigacja od `xl`, poniżej hamburger (wcześniej `md`). Zmiana w `components/Header.tsx` **i** w zdublowanym nagłówku wewnątrz `app/page.tsx`.
+3. **Paginacja bloga** — „← Poprzednia" + pięć numerów + „Następna →" to 415 px przy telefonie 390 px. Naprawione: `flex-wrap`.
+Przy okazji: ozdobny napis „SERWIS ZEBRA" (1798 px) w stopce i na stronie głównej dostał `overflow-hidden` na kontenerze.
+
+**Wniosek metodyczny, ważniejszy od samych poprawek**: pomiary Playwrightem na serwerze deweloperskim są niewiarygodne. Next generuje CSS na żądanie — po zimnym starcie serwowany arkusz miał 40 KB i **nie zawierał nawet reguły `.hidden`**, więc oba układy tabeli renderowały się naraz, a wideo na stronie głównej wystawało poza ekran. Ten sam zestaw testów dawał raz 0 błędów, raz 10. Arkusz produkcyjny ma 125 KB. **Pomiary layoutu robić wyłącznie na `next build` + `next start`** (u nas na porcie 3003, żeby nie ruszać deva).
+
+Weryfikacja na buildzie produkcyjnym: 7 stron × 7 szerokości (360–1440) → **0 przypadków poziomego przewijania**. Karta ZD421t: przy 390 px tabela ukryta i 5 kart wariantów, przy 1280 px tabela 990 px i karty ukryte.
+
+## 2026-08-26 — stock_cache uruchomiony na produkcyjnych danych
+SQL wykonany przez użytkownika, cron przepuszczony.
+
+- **Pełny przebieg: 135/135 numerów, 135 z danymi, 0 błędów, 142 s** (mieści się w `maxDuration 300`). Ceny: BlueStar 111, Ingram 22, Jarltech 2. Dostępność: 101 dostępnych, 4 w dostawie, 31 niedostępnych. Magazyn PL ma 24 pozycje, w drodze 90.
+- **Odczyt karty schodzi do bazy** — `/api/shop/product-stock` odpowiada w ~0,09-0,13 s z `cached: true`, zamiast czekać na trzech dystrybutorów.
+- **Dane strukturalne kompletne**: sześć wariantów ZD421t ma realne ceny brutto, `url`, dostawę i politykę zwrotów, a wariant bez stanu (`ZD4A043-30EW02EZ`) dostaje **`OutOfStock`** zamiast doklejonego `InStock` — dokładnie to, czego wymagał audyt.
+
+**Dwie poprawki wymuszone pierwszym przebiegiem:**
+1. **Ingram zwracał `429` na obie paczki** i wypadał z zestawienia. To on jest JEDYNYM źródłem stanu magazynu PL, więc bez niego cały sklep pokazywałby „wysyłka 2-3 dni" zamiast 24 h. Dodane ponawianie (3 próby, odczekanie 8 s × numer próby) i odstęp między paczkami podniesiony z 2 s na 5 s. Po zmianie: 20/20 znalezionych, zero błędów dystrybutorów.
+2. **Kontrakt serwisowy (`KTR-3Y`) trafiał do synchronizacji** — usługa nie ma numeru u żadnego dystrybutora, więc zawsze kończyła się wpisem „Brak danych". Typy `kontrakt` i `usluga` wykluczone z puli.
+
+**Nowy parametr `?pn=A,B,C`** — punktowe odświeżenie wskazanych numerów (np. po zmianie ceny u dystrybutora) bez przepuszczania całej puli. Obok istniejącego `?limit=N`.
+
+## 2026-08-26 — Przyciski kontaktu pod panelem zakupu (karta urządzenia)
+- Pod ramką panelu (nie w niej — zakup to jedna ścieżka, pytanie druga) doszły: **„Zapytaj o produkt"** zawsze oraz **„Zadzwoń: 601 619 898"** tylko poniżej `sm`, bo na desktopie `tel:` przeważnie nic nie robi. Oba 48 px wysokości, oba z zdarzeniami do GA (`trackCTAClick`, `trackPhoneClick`).
+- **Zapytanie niesie kontekst**: `/kontakt?temat=urzadzenie&model=…&pn=…`, gdzie `pn` to **aktualnie wybrany wariant**, nie domyślny. Formularz wypełnia się sam, handlowiec dostaje model i numer katalogowy bez przepisywania przez klienta. Nowy temat `Pytanie o urządzenie` dodany do presetów i do listy `<select>`.
+- **Dwa błędy złapane w trakcie weryfikacji, oba moje:**
+  1. Ustawiałem temat na `„Pytanie o urządzenie — <model>"`, a temat to `<select>` z zamkniętą listą — wartość spoza niej zostawiała pole PUSTE, a jest `required`, więc formularz nie dałby się wysłać. Model przeniesiony do treści, temat trzyma się listy opcji.
+  2. Dane urządzenia doklejały się na końcu wiadomości, czyli pod „Pytanie:", przez co linia na pytanie klienta wisiała w powietrzu. Wstawione zaraz po powitaniu rozbijały z kolei zdanie „Dzień dobry, mam pytanie o…". Ostatecznie idą osobnym akapitem między zdaniem wprowadzającym a listą pytań (`wstawKontekst`).
+- Sprawdzone na buildzie produkcyjnym: telefon widoczny tylko na 390 px, „Zapytaj" na wszystkich; stary temat `?temat=glowice` bez regresji; 4 strony × 6 szerokości → 0 poziomego przewijania.
+
+## 2026-08-26 — „Zapytaj o produkt" jako modal na karcie
+Zamiast przenoszenia na `/kontakt`: klient pyta w chwili wahania, patrząc na cenę i wybrany wariant. Przerzucenie na osobną stronę kosztuje ten kontekst i część ludzi nie wraca.
+
+- `components/shop/DeviceEnquiryModal.tsx` + `app/api/device-enquiry/route.ts` (Resend, wzorzec z `program-glowice`). Mail idzie na serwis@takma.com.pl z `replyTo` klienta i **wybranym numerem katalogowym w temacie** — handlowiec wie, o którą z sześciu wersji chodzi, bez dopytywania.
+- **Mobile potraktowany jako osobny układ, nie zwężony desktop:**
+  - arkusz wysuwany od dołu (`items-end`) z uchwytem — kciuk sięga dołu ekranu, nie środka;
+  - `max-h-[92dvh]`, nie `vh` — przy `vh` klawiatura zasłania dół formularza bez możliwości dojścia;
+  - **przycisk wysyłki przyklejony do dołu arkusza** (`sticky bottom-0`, na desktopie `static`). Zmierzone przed zmianą: treść 747 px w oknie 611 px na iPhonie 13, więc „Wyślij pytanie" wypadał poza ekran. Po zmianie widoczny od razu na iPhone SE (568 px), iPhone 13 (664 px) i Pixel 7 (839 px);
+  - pola 16 px czcionki — przy mniejszej iOS sam przybliża stronę przy wejściu w input;
+  - link „Wolisz zadzwonić?" w środku modala, tylko poniżej `sm`.
+- **Dostępność**: `role="dialog"`, `aria-modal`, `aria-labelledby`, Escape, blokada scrolla tła, fokus na pierwsze pole przy otwarciu i powrót na przycisk przy zamknięciu, pułapka fokusu w obie strony.
+- **Błąd złapany pomiarem**: pułapka fokusu nie działała — `querySelectorAll` zwracał też link „zadzwoń", ukryty na desktopie przez `sm:hidden`, i to on był „ostatni w kolejce". Warunek zawinięcia nigdy nie zachodził, fokus uciekał poza modal **8 razy na 12 Tabów**. Po filtrze `offsetParent !== null`: 0/14 Tabów i 0/8 Shift+Tabów poza modalem, na desktopie i na telefonie.
+- Walidacja endpointu po polsku również dla pustego żądania (Zod dla brakującego pola daje komunikat angielski — ciało domykane pustymi ciągami przed `parse`).
+- Preset `?temat=urzadzenie` w `/kontakt` zostaje — działa jako zapasowa droga i dla linków z zewnątrz.
+
+## 2026-08-26 — BŁĄD: panel pokazywał numer jednego wariantu z ceną innego
+Zgłoszone przez użytkownika: karta pokazywała `ZD4A042-30EM00EZ` za 2229,65 zł i 3 szt., podczas gdy to dane wersji Wi-Fi `ZD4A042-30EW02EZ`. Prawidłowo EM00EZ to 1642,41 zł i 1536 szt.
+
+**Przyczyna**: `DevicePurchasePanel` trzymał odpowiedź z `/api/shop/product-stock` w stanie `live` bez informacji, KTÓREGO numeru dotyczy. Po kliknięciu innego wariantu `pn` się zmieniał, ale stary `live` przeżywał i miał pierwszeństwo przed danymi serwerowymi — do czasu, aż wróci nowa odpowiedź. Gdyby zapytanie padło, rozjazd zostawałby na stałe. To samo dotyczyło odpowiedzi wracających w innej kolejności, niż zostały wysłane.
+
+**Poprawka**: dane live trzymane razem z numerem (`{ pn, dane }`) i używane tylko wtedy, gdy `live.pn === pn`. Tabela wariantów była odporna, bo trzyma mapę kluczowaną numerem.
+
+**Weryfikacja** — szybkie przełączanie tam i z powrotem, cena w panelu vs cena w tabeli: 4/4 ZGODNE (2229,65 / 1642,41 / 2315,24 / 1642,41).
+
+**Przy okazji rozbicie stanu EU dla ZD4A042-30EM00EZ**, bo pytanie brzmiało „czemu 3 szt., skoro Jarltech ma 441": BlueStar 906 + Jarltech 441 + Ingram DE 189 = **1536**. Karta sumuje trzech dystrybutorów, więc pokazuje więcej niż każdy z osobna — 441 z Jarltecha jest w środku.
+
+## 2026-08-26 — Porządki na karcie ZD421t (uwagi użytkownika)
+- **Usunięta sekcja „Do czego się nadaje"**.
+- **Nowa sekcja „Dokumentacja i wsparcie"** zamiast luźnego przycisku doklejonego do opisu: instrukcja po polsku, sterowniki, poradnik pierwszego uruchomienia, telefon do technika. Kupujący sprzęt techniczny sprawdza przed zakupem, czy dostanie wsparcie, a instrukcje i sterowniki to nasze najlepiej rankujące strony — link stąd wzmacnia je w obie strony.
+- **„Do tej drukarki" → „Akcesoria"**, bez zdania wprowadzającego. Przy „Częściach eksploatacyjnych" został sam nagłówek.
+- **Kafelek akcesorium**: przycisk „Do koszyka" dosunięty do prawej krawędzi (`justify-between`, 13 px od krawędzi na każdej szerokości), powiększony do `px-3 py-2`.
+- **Naprawione brakujące zdjęcia**: 64 ze 131 produktów nie ma `image_url` w bazie. Karty części od dawna wyliczają ścieżkę z modelu i rozdzielczości (`getProductFallbackImage`), ale blok akcesoriów brał `image_url` wprost z zapytania i zostawiał pustą ramkę. Teraz stosuje ten sam fallback; gdy i on nie trafi, zamiast pustego pola jest ikona — pusta ramka wygląda jak błąd ładowania.
+- **Kolejność sekcji zależna od kontekstu** (to była otwarta wątpliwość użytkownika):
+  - **karta produktu → Akcesoria, potem Części eksploatacyjne.** Klient kupuje NOWĄ drukarkę; istotne jest wyposażenie dobierane przy zakupie (gilotyna, odklejak, moduł sieciowy), a głowica będzie potrzebna dopiero za rok. Nagłówek sekcji brzmi „Akcesoria", więc lista części nad nim byłaby niespójna.
+  - **strona instrukcji → Części eksploatacyjne, potem Akcesoria.** Ten czytelnik ma urządzenie od dawna i zwykle coś w nim nie działa.
+- **Ostrzeżenie o rozdzielczości wróciło** (decyzja użytkownika): „Głowica i wałek muszą mieć tę samą rozdzielczość co drukarka — części 203 i 300 dpi nie są wymienne". Jako jedna linia `text-xs` pod przełącznikiem dpi, wyłącznie gdy model ma obie rozdzielczości. Przełącznik pokazuje, ŻE wybór istnieje, ale nie mówi, czym grozi pomyłka — głowica 300 dpi to 988 zł i do drukarki 203 dpi nie pasuje.
+
+## 2026-08-26 — Drugie przypomnienie o opinii (gotowe, WYŁĄCZONE)
+`app/api/cron/review-reminder/route.ts` + `lib/review-notes.ts` + `supabase-review-reminder.sql` (SQL wykonany). **Cron celowo NIE dodany do `vercel.json`** — nic nie wysyła do decyzji użytkownika.
+
+**Założenie**: drugi mail nie powtarza prośby, tylko pyta „Czy {model} pracuje bez zarzutu?". Powody: powtórzona prośba czyta się jak spam; pytanie o stan sprzętu łapie niezadowolonych ZANIM napiszą publicznie; konkret (model + zakres prac z notatki serwisowej) przypomina sprawę, której po dwóch tygodniach nikt nie kojarzy. Dwoje drzwi w treści — „coś nie tak → odpisz" / „działa → jedno zdanie". Podpis imienny, bez gradientów i emoji, zakończone „to ostatnia wiadomość w tej sprawie".
+
+**Okno**: 10–35 dni od pierwszego maila. Jedno przypomnienie na zgłoszenie.
+
+**Zakres prac** bierzemy z `service_notes`, ale tylko gdy po oczyszczeniu (usunięcie „+kurier", „, części") ma ≥12 znaków I zawiera nazwę czynności. „Drobny element" i „wg ustaleń" są pomijane — notatki są pisane dla nas, nie dla klienta. Notatki i tak są klientowi pokazywane w panelu (`/panel/naprawa/[id]`), więc cytat w mailu niczego nowego nie ujawnia.
+
+**Trzy błędy złapane podglądem `?dry=1` — wszystkie w tym samym filtrze, wszystkie CICHE:**
+1. `sender_type = 'customer'` — w tej tabeli klient to `user` (411 wiadomości `user`, 325 `admin`, zero `customer`).
+2. Kolumna to `repair_request_id`, nie `repair_id`. Zapytanie zwracało błąd 400, a ja destrukturyzowałem tylko `data` → `null` → filtr nie wykluczał NIKOGO. Teraz sprawdzamy `error` i **przerywamy przebieg**: filtr, który milcząco nie działa, jest gorszy niż jego brak.
+3. Po naprawieniu dwóch powyższych filtr wykluczał 20 z 41 — za ostro. Pisanie na czacie w trakcie naprawy to norma (pytanie o wycenę). Liczy się wyłącznie rozmowa **po** pierwszym mailu. Po zawężeniu: 1 pominięty, 40 do wysyłki.
+
+**Znalezione przy okazji, do osobnej poprawki**: kolumna `shipped_at` nie jest wypełniana ani razu (0 na 195 napraw). Pierwszy cron liczy „3 dni po wysyłce" od `updated_at`, czyli od ostatniej edycji rekordu — każde dopisanie notatki przesuwa okno.
+
+## 2026-08-26 — Przypomnienie o opinii: iteracje po uwagach użytkownika
+1. **Szablon przeprojektowany na podstawie researchu**, nie skopiowany z newslettera (uwaga użytkownika: newsletter 1:1 nie pasuje do prośby o opinię). Zebrane badania: Bazaarvoice (jedna kolumna wygrywa, konkurujące sekcje zabijają konwersję), WordStream (jedno CTA ≈ +371% kliknięć), odwrotna zależność długości i konwersji, rama „pomagasz innym firmom" > „pomagasz nam", wzorzec gwiazdek Trustpilot/Yotpo, temat <41 znaków, dosyłka daje ~+50% opinii, okno 7–14 dni po odbiorze (nasze ~13. dnia — w punkt; pierwszy mail po 2–3 dniach jest wg badań ZA wcześnie). Efekt: `lib/email/przypomnienie-opinia.ts` — belka z logo i odznakami + limonkowa linia, list ~114 słów, klikalne 5 gwiazdek (złoto Google) + limonkowy przycisk do TEGO SAMEGO celu, zero innych linków, przechwycenie niezadowolonych PRZED gwiazdkami, stopka jednolinijkowa.
+2. **Imiona usunięte** („Dzień dobry, Dominik" za poufałe — decyzja użytkownika). Pole `imie` wycięte z interfejsu szablonu, nie tylko z wywołań.
+3. **Literówka „Wymian wentylatora"** — poszła do testówki żywcem z notatki serwisowej. Rozwiązanie u źródła: `lib/review-notes.ts` NIE cytuje wolnego tekstu; rozpoznaje czynności (~38 wzorców odpornych na odmiany i literówki) i składa opis z kanonicznych nazw. Nie rozpoznane → akapit pomijany. Wykluczenia: „rezygnacja", „nie stwierdzono", „odesłano bez naprawy", wyceny. Test na 161 realnych notatkach: 72% rozpoznanych, nierozpoznane to głównie wpisy, które NIE powinny iść do klienta. „Wymian wentylatora" → „wymiana wentylatora".
+- Testówki [TEST 4–6] wysłane na jakub.tiuchty@gmail.com (lokalny klucz Resend jest deweloperski — nadaje tylko z onboarding@resend.dev na adres właściciela; produkcyjny w Vercelu nada z serwis@serwis-zebry.pl). Cron nadal NIE dodany do vercel.json — czeka na akceptację.
+
+## 2026-08-26 — Przypomnienie o opinii: dopięcie przed wysyłką
+- Kolejne poprawki z akceptacji użytkownika: pełna nazwa urządzenia (`lib/device-name.ts`: typ+marka+model, „tablet Zebra L10"; marka tylko dla rozpoznanych serii — CipherLab/Brother/Godex/… nie dostają „Zebra"); zdanie o gwarancji USUNIĘTE (nie dajemy 12 mies. gwarancji na naprawę — UWAGA: `/jak-to-dziala` linia 246 nadal ją obiecuje, zgłoszone, czeka na decyzję); podpis w trzech linijkach (Krzysztof Wójcik / Serwis Takma / tel.); nadawca „Krzysztof Wójcik — Serwis Takma".
+- **Deduplikacja po adresie**: trzech klientów miało po dwa zgłoszenia w oknie (Konieczny/INPROX ×2, Gołębiewski ×2, Jakubczak ×2) i dostałoby dwa identyczne maile tego samego dnia. Jeden adres = jedna wiadomość; wszystkie zgłoszenia adresu oznaczane jako obsłużone. 41 wierszy → 38 adresatów.
+- **Wykluczenie tych, co już ocenili**: automatycznie się NIE DA — Places API zwraca maks. 5 opinii „wg trafności". Przy okazji ustalone, że link w mailu (g.page) prowadzi na wizytówkę „TAKMA — Autoryzowany Serwis Zebra" (4,6★, 11 opinii), INNĄ niż GBP_PLACE_ID w panelu takmy (3,7★, 13 opinii) — czyli opinie klientów serwisu lądują na właściwej wizytówce serwisowej. Żadne z 5 widocznych nazwisk nie pasuje do listy adresatów. Wykluczenia ręczne: user poda nazwiska → `review_reminder_sent=true` przed pierwszym przebiegiem.
+- **Cron dodany do vercel.json: codziennie 10:00.** Zacznie wysyłać po deployu — pierwszego dnia pójdzie cała zaległa pula (38 minus wykluczenia), potem pojedynczo, gdy kolejne naprawy wejdą w okno 10–35 dni.
