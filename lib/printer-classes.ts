@@ -16,6 +16,8 @@ export interface KlasaDrukarek {
   zajawka: string
   /** Serie Zebry należące do klasy — pokazywane na kafelku i podstronie */
   serie: string
+  /** Komiksowa grafika klasy (Higgsfield, urządzenie 1:1 z renderu) — kafelki i nagłówki */
+  grafika: string
   ikona: string
   metaTitle: string
   metaDescription: string
@@ -24,6 +26,7 @@ export interface KlasaDrukarek {
 export const KLASY_DRUKAREK: KlasaDrukarek[] = [
   {
     slug: 'biurkowe',
+    grafika: '/klasy/biurkowe.jpg',
     nazwa: 'Drukarki biurkowe',
     zajawka: 'Na stanowisko pakowania i do biura — do kilkuset etykiet dziennie.',
     serie: 'Serie ZD220, ZD230, ZD411, ZD421, ZD621',
@@ -34,6 +37,7 @@ export const KLASY_DRUKAREK: KlasaDrukarek[] = [
   },
   {
     slug: 'mobilne',
+    grafika: '/klasy/mobilne.jpg',
     nazwa: 'Drukarki mobilne',
     zajawka: 'Do druku w terenie i na hali — przy pasku albo w wózku.',
     serie: 'Serie ZQ310, ZQ320, ZQ511, ZQ521, ZQ610, ZQ630',
@@ -44,6 +48,7 @@ export const KLASY_DRUKAREK: KlasaDrukarek[] = [
   },
   {
     slug: 'polprzemyslowe',
+    grafika: '/klasy/polprzemyslowe.jpg',
     nazwa: 'Drukarki półprzemysłowe',
     zajawka: 'Między biurkiem a halą — do ok. 2–3 tys. etykiet dziennie.',
     serie: 'Serie ZT111, ZT231',
@@ -54,6 +59,7 @@ export const KLASY_DRUKAREK: KlasaDrukarek[] = [
   },
   {
     slug: 'przemyslowe',
+    grafika: '/klasy/przemyslowe.jpg',
     nazwa: 'Drukarki przemysłowe',
     zajawka: 'Do pracy ciągłej na produkcji i w magazynie wysokiego składowania.',
     serie: 'Serie ZT411, ZT421, ZT510, ZT610, ZT620',

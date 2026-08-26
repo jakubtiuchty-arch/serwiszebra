@@ -60,15 +60,20 @@ export default function KlasaNaZamowienie({ klasa, naglowek, akapity }: Props) {
             <span className="text-gray-700">{klasa.nazwa}</span>
           </nav>
 
-          <div className="flex items-start gap-5">
-            <span className="relative hidden h-16 w-16 flex-shrink-0 sm:block">
-              <Image src={klasa.ikona} alt="" fill sizes="64px" className="object-contain" />
-            </span>
-            <div>
-              <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl">{naglowek}</h1>
-              <p className="mt-1 text-sm text-gray-500">{klasa.serie}</p>
-            </div>
+          {/* Komiksowa grafika klasy jako hero — spójnie z blogiem i hubem */}
+          <div className="relative mb-6 aspect-[21/9] max-w-3xl overflow-hidden rounded-2xl border border-gray-200">
+            <Image
+              src={klasa.grafika}
+              alt={`${klasa.nazwa} Zebra`}
+              fill
+              sizes="(max-width: 768px) 100vw, 768px"
+              priority
+              className="object-cover"
+            />
           </div>
+
+          <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl">{naglowek}</h1>
+          <p className="mt-1 text-sm text-gray-500">{klasa.serie}</p>
 
           <div className="mt-6 max-w-3xl space-y-3">
             {akapity.map((a, i) => (
