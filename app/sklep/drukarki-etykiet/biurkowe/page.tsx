@@ -97,7 +97,6 @@ export default async function DesktopPrintersPage() {
       slug: d.slug,
       nazwa: d.name.replace(/^Drukarka etykiet\s+/i, ''),
       zdjecie: d.image_urls?.[0] || null,
-      wideo: d.image_urls?.[0] ? d.image_urls[0].replace(/_1\.(webp|png|jpg)$/, '_hover.mp4') : null,
       cechy,
       netto: najtanszy ? najtanszy.netto : Number(d.price),
       brutto: najtanszy ? najtanszy.brutto : Math.round(Number(d.price) * 1.23 * 100) / 100,

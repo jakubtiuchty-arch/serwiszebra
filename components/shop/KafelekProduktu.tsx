@@ -1,6 +1,3 @@
-'use client'
-
-import { useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight } from 'lucide-react'
@@ -9,8 +6,6 @@ export interface KafelekProduktuDane {
   slug: string
   nazwa: string
   zdjecie: string | null
-  /** Animacja hover — urządzenie drukuje etykietę; pierwsza klatka = zdjęcie */
-  wideo?: string | null
   /** Chipy z cechami wyliczonymi z wariantów, np. „203 / 300 dpi" */
   cechy: string[]
   netto: number
@@ -24,31 +19,14 @@ const zl = (v: number) =>
   v.toLocaleString('pl-PL', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
 
 /**
- * Kafelek produktu na stronie klasy — ten sam język co kafelki klas na hubie:
- * hover ożywia zdjęcie (drukarka drukuje etykietę), a dół karty mówi konkretami
- * (dpi, łączność, cena z brutto, dostępność) zamiast gołego „6 wersji".
+ * Kafelek produktu na stronie klasy — dół karty mówi konkretami (dpi, łączność,
+ * cena z brutto, dostępność) zamiast gołego „6 wersji". Zdjęcie statyczne —
+ * animacje zostają przy kafelkach klas na hubie.
  */
 export default function KafelekProduktu({ p }: { p: KafelekProduktuDane }) {
-  const video = useRef<HTMLVideoElement>(null)
-
-  const start = () => {
-    const v = video.current
-    if (!v) return
-    v.currentTime = 0
-    void v.play().catch(() => {})
-  }
-  const stop = () => {
-    const v = video.current
-    if (!v) return
-    v.pause()
-    v.currentTime = 0
-  }
-
   return (
     <Link
       href={`/sklep/drukarki-etykiet/${p.slug}`}
-      onMouseEnter={start}
-      onMouseLeave={stop}
       className="group flex flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
     >
       <span className="relative block aspect-[5/4] overflow-hidden bg-white">
@@ -59,16 +37,6 @@ export default function KafelekProduktu({ p }: { p: KafelekProduktuDane }) {
             fill
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
             className="object-contain p-6"
-          />
-        )}
-        {p.wideo && (
-          <video
-            ref={video}
-            muted
-            playsInline
-            preload="none"
-            src={p.wideo}
-            className="absolute inset-0 h-full w-full object-contain p-6 opacity-0 transition-opacity duration-200 group-hover:opacity-100"
           />
         )}
       </span>
