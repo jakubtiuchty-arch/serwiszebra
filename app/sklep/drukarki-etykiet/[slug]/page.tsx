@@ -357,15 +357,28 @@ export default async function DevicePage({
           <section className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6 mb-4 sm:mb-6">
             <h2 className="text-sm sm:text-base font-semibold text-gray-900 mb-3">Opis produktu</h2>
             <p className="text-sm leading-relaxed text-gray-700">
-              Biurkowa drukarka do etykiet, która staje przy stanowisku pakowania, w magazynie
-              albo w recepcji i drukuje przez cały dzień. Nadruk powstaje z taśmy, więc etykieta
-              nie blaknie i nie ściera się jak przy druku termicznym — sprawdza się tam, gdzie
-              oznaczenie ma przetrwać miesiące, a nie tydzień.
+              Zebra ZD421t to biurkowa drukarka termotransferowa przeznaczona do codziennego
+              druku etykiet w handlu, logistyce i lekkiej produkcji — na stanowiskach
+              pakowania, w magazynach i punktach obsługi. Nadruk nanoszony z taśmy barwiącej
+              jest odporny na ścieranie i wilgoć, dzięki czemu urządzenie sprawdza się przy
+              oznaczeniach produktowych, magazynowych i technicznych, które muszą pozostać
+              czytelne przez cały okres użytkowania.
             </p>
             <p className="mt-3 text-sm leading-relaxed text-gray-700">
-              Rolkę wymienia się bez narzędzi, po podniesieniu pokrywy. Etykiety zakładasz raz i
-              drukarka sama je kalibruje, więc obsługi nie trzeba nikogo uczyć — wystarczy
-              pokazać, gdzie wkłada się rolkę i taśmę.
+              Drukarka pracuje w rozdzielczości 203 lub 300 dpi z prędkością do 152 mm/s,
+              a szerokość druku 104 mm obejmuje pełny format etykiety kurierskiej 100 × 150 mm.
+              Obsługa taśm o nawoju do 300 m ogranicza częstotliwość wymiany materiałów przy
+              druku seryjnym, a wymiana mediów odbywa się bez użycia narzędzi — po zamknięciu
+              pokrywy urządzenie samoczynnie kalibruje etykiety, co skraca wdrożenie nowego
+              operatora do minimum.
+            </p>
+            <p className="mt-3 text-sm leading-relaxed text-gray-700">
+              W standardzie dostępne są złącza USB i USB Host oraz Bluetooth Low Energy;
+              łączność sieciową — Ethernet, Wi-Fi lub port szeregowy RS-232 — dodaje się
+              modułem montowanym przez użytkownika, bez wymiany urządzenia przy zmianie
+              infrastruktury. Obsługa języków ZPL II i EPL zapewnia zgodność z istniejącymi
+              systemami magazynowymi oraz szablonami etykiet przygotowanymi dla starszych
+              drukarek Zebry, w tym serii GK420, której ZD421 jest bezpośrednim następcą.
             </p>
 
             <h3 className="mt-5 border-t border-gray-100 pt-5 text-sm font-semibold text-gray-900">
