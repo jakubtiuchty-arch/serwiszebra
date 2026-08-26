@@ -122,29 +122,34 @@ export default async function DesktopPrintersPage() {
       />
 
       <main className="bg-gray-50">
+        {/* Ciemne hero z limonkową linią — ten sam wzorzec co hub kategorii */}
+        <section className="bg-gradient-to-br from-gray-800 via-gray-900 to-gray-900 text-white">
+          <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-12">
+            <nav className="mb-4 text-xs text-gray-400">
+              <Link href="/sklep" className="hover:text-white">
+                Sklep
+              </Link>
+              <span className="mx-1.5">/</span>
+              <Link href="/sklep/drukarki-etykiet" className="hover:text-white">
+                Drukarki etykiet
+              </Link>
+              <span className="mx-1.5">/</span>
+              <span className="text-gray-300">Drukarki biurkowe</span>
+            </nav>
+
+            <h1 className="text-2xl font-bold sm:text-3xl">Biurkowe drukarki etykiet Zebra</h1>
+
+            <p className="mt-3 max-w-3xl text-base leading-relaxed text-gray-300">
+              Kompaktowe drukarki serii ZD na stanowisko pakowania, do biura i sklepu —
+              spokojnie obsługują do kilkuset etykiet dziennie. Ceny i stany magazynowe
+              pobieramy na żywo, a gwarancję realizujemy we własnym autoryzowanym serwisie
+              Zebry.
+            </p>
+          </div>
+          <div className="h-1 bg-[#A8F000]" />
+        </section>
+
         <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
-          <nav className="mb-4 text-xs text-gray-500">
-            <Link href="/sklep" className="hover:text-gray-700">
-              Sklep
-            </Link>
-            <span className="mx-1.5">/</span>
-            <Link href="/sklep/drukarki-etykiet" className="hover:text-gray-700">
-              Drukarki etykiet
-            </Link>
-            <span className="mx-1.5">/</span>
-            <span className="text-gray-700">Drukarki biurkowe</span>
-          </nav>
-
-          <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl">
-            Biurkowe drukarki etykiet Zebra
-          </h1>
-
-          <p className="mt-3 max-w-3xl text-base leading-relaxed text-gray-700">
-            Kompaktowe drukarki serii ZD na stanowisko pakowania, do biura i sklepu — spokojnie
-            obsługują do kilkuset etykiet dziennie. Ceny i stany magazynowe pobieramy na żywo,
-            a gwarancję realizujemy we własnym autoryzowanym serwisie Zebry.
-          </p>
-
           {devices.length === 0 ? (
             <p className="mt-10 text-sm text-gray-500">
               Trwa uzupełnianie oferty. Napisz na{' '}
@@ -154,7 +159,7 @@ export default async function DesktopPrintersPage() {
               , dobierzemy model i przygotujemy wycenę.
             </p>
           ) : (
-            <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {devices.map((d) => {
                 const k = daneKafelka(d)
                 return (
