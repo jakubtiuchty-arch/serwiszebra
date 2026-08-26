@@ -139,14 +139,14 @@ export default function DeviceAccessories({
       <li className="flex gap-3 rounded-lg border border-gray-200 p-3">
         <Link
           href={p.url}
-          className="relative h-16 w-16 flex-shrink-0 overflow-hidden rounded-md bg-white"
+          className="relative h-24 w-24 flex-shrink-0 self-center overflow-hidden rounded-md bg-white sm:h-28 sm:w-28"
         >
           {p.image_url ? (
-            <Image src={p.image_url} alt={p.name} fill sizes="64px" className="object-contain p-1" />
+            <Image src={p.image_url} alt={p.name} fill sizes="112px" className="object-contain p-1" />
           ) : (
             /* Pusta ramka wygląda jak błąd ładowania — lepiej pokazać, czym to jest */
             <span className="flex h-full w-full items-center justify-center rounded-md bg-gray-50 text-gray-300">
-              <Package className="h-6 w-6" />
+              <Package className="h-8 w-8" />
             </span>
           )}
         </Link>
