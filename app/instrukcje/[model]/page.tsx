@@ -24,6 +24,8 @@ import {
   Languages
 } from 'lucide-react'
 import { hasPolishManual } from '@/lib/polish-manuals'
+import DeviceAccessories from '@/components/shop/DeviceAccessories'
+import { getAkcesoriaDlaModelu } from '@/lib/device-accessories'
 
 // ISR — odświeżaj dane co 60 sekund
 export const revalidate = 60
@@ -251,6 +253,14 @@ export async function generateMetadata({ params }: { params: { model: string } }
   }
 }
 
+/**
+ * Modele, dla których mamy kartę produktu w sklepie. Trzymane jawnie, żeby
+ * strona instrukcji nie linkowała w pustkę, gdy karty jeszcze nie ma.
+ */
+const SPRZEDAWANE_MODELE: Record<string, string> = {
+  ZD421T: 'zebra-zd421t',
+}
+
 export default async function ModelPage({ params }: { params: { model: string } }) {
   // Usuń prefix "zebra-" z URL
   const modelName = params.model.replace(/^zebra-/i, '')
@@ -264,6 +274,10 @@ export default async function ModelPage({ params }: { params: { model: string } 
   const CategoryIcon = category.icon
   const rawDocuments = manual.documents || {}
   const modelSlug = `zebra-${manual.model.toLowerCase()}`
+
+  // Instrukcje to najlepiej rankujące strony w serwisie, a czyta je ktoś, kto
+  // ma to urządzenie w ręku — najkrótsza droga od problemu do części zamiennej
+  const akcesoria = await getAkcesoriaDlaModelu(manual.model)
   
   // Pobierz dokumenty (obsługa camelCase i lowercase)
   const getDoc = (camelKey: string, lowerKey: string) => 
@@ -391,6 +405,28 @@ export default async function ModelPage({ params }: { params: { model: string } 
             <ArrowLeft className="w-4 h-4" />
             Wróć do wszystkich instrukcji
           </Link>
+
+          {/* Most do karty produktu — ta strona rankuje już na zapytanie o model,
+              więc przekazuje najwięcej mocy nowej karcie w sklepie. Pokazujemy
+              tylko wtedy, gdy dla tego modelu istnieje karta. */}
+          {SPRZEDAWANE_MODELE[manual.model.toUpperCase()] && (
+            <Link
+              href={`/sklep/drukarki-etykiet/${SPRZEDAWANE_MODELE[manual.model.toUpperCase()]}`}
+              className="mb-6 flex items-center justify-between gap-4 rounded-xl border border-gray-200 bg-white p-4 transition hover:border-gray-400"
+            >
+              <span>
+                <span className="block text-sm font-semibold text-gray-900">
+                  Potrzebujesz nowej Zebry {manual.model}?
+                </span>
+                <span className="block text-xs text-gray-600">
+                  Cena i dostępność na żywo, naprawy gwarancyjne u nas
+                </span>
+              </span>
+              <span className="whitespace-nowrap rounded-lg bg-gray-900 px-4 py-2 text-sm font-semibold text-white">
+                Zobacz w sklepie
+              </span>
+            </Link>
+          )}
 
           {/* Documents Section */}
           <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden mb-8">
@@ -531,6 +567,10 @@ export default async function ModelPage({ params }: { params: { model: string } 
                 </p>
               )}
             </div>
+          </div>
+
+          <div className="mb-8">
+            <DeviceAccessories items={akcesoria} kontekst="instrukcja" model={manual.model} />
           </div>
 
           {/* SEO Content - dopasowane do typu urządzenia */}

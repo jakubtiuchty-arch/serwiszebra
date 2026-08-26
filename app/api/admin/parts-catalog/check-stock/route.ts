@@ -3,36 +3,7 @@ import { checkPriceAndAvailability } from '@/lib/ingram-micro'
 import { lookupStock } from '@/lib/bluestar'
 import { lookupStock as lookupJarltechStock } from '@/lib/jarltech'
 import { requireAdmin } from '@/lib/admin-auth'
-
-// Cache kursu NBP (12h)
-let cachedEurRate: { rate: number; fetchedAt: number } | null = null
-const RATE_CACHE_TTL = 12 * 60 * 60 * 1000
-
-async function getEurPlnRate(): Promise<number> {
-  if (cachedEurRate && (Date.now() - cachedEurRate.fetchedAt) < RATE_CACHE_TTL) {
-    return cachedEurRate.rate
-  }
-
-  try {
-    const res = await fetch('https://api.nbp.pl/api/exchangerates/rates/a/eur/?format=json', {
-      signal: AbortSignal.timeout(5000),
-    })
-    if (res.ok) {
-      const data = await res.json()
-      const rate = data.rates?.[0]?.mid
-      if (rate) {
-        cachedEurRate = { rate, fetchedAt: Date.now() }
-        console.log(`[NBP] Kurs EUR/PLN: ${rate}`)
-        return rate
-      }
-    }
-  } catch (e) {
-    console.error('[NBP] Błąd pobierania kursu:', e)
-  }
-
-  // Fallback
-  return cachedEurRate?.rate ?? 4.30
-}
+import { getEurPlnRate } from '@/lib/nbp'
 
 export async function GET(req: NextRequest) {
   const denied = await requireAdmin()

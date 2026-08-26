@@ -9,19 +9,35 @@ export const maxDuration = 60
 const SITE_URL = 'https://www.serwis-zebry.pl'
 
 // Kategorie sklepu publikowane w Google Merchant Center
-const FEED_PRODUCT_TYPES = ['glowica', 'walek', 'akumulator'] as const
+const FEED_PRODUCT_TYPES = [
+  'glowica',
+  'walek',
+  'akumulator',
+  'gilotyna',
+  'dyspenser',
+  'modul',
+] as const
 
 const PRODUCT_TYPE_LABELS: Record<string, string> = {
   glowica: 'Części do drukarek Zebra > Głowice drukujące',
   walek: 'Części do drukarek Zebra > Wałki dociskowe',
   akumulator: 'Akcesoria Zebra > Akumulatory',
+  gilotyna: 'Akcesoria Zebra > Gilotyny',
+  dyspenser: 'Akcesoria Zebra > Dyspensery',
+  modul: 'Akcesoria Zebra > Moduły łączności',
 }
 
 // Google product taxonomy (pełne ścieżki tekstowe)
+const AKCESORIA_DRUKAREK =
+  'Electronics > Print, Copy, Scan & Fax > Printer, Copier & Fax Machine Accessories'
+
 const GOOGLE_CATEGORIES: Record<string, string> = {
-  glowica: 'Electronics > Print, Copy, Scan & Fax > Printer, Copier & Fax Machine Accessories',
-  walek: 'Electronics > Print, Copy, Scan & Fax > Printer, Copier & Fax Machine Accessories',
+  glowica: AKCESORIA_DRUKAREK,
+  walek: AKCESORIA_DRUKAREK,
   akumulator: 'Electronics > Electronics Accessories > Power > Batteries',
+  gilotyna: AKCESORIA_DRUKAREK,
+  dyspenser: AKCESORIA_DRUKAREK,
+  modul: AKCESORIA_DRUKAREK,
 }
 
 interface DbProduct {

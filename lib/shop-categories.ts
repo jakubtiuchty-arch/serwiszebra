@@ -196,6 +196,16 @@ export const SHOP_CATEGORIES: ProductTypeCategory[] = [
     enabled: true,
     printerCategories: [
       {
+        // ZD421/ZD621 da się zasilić z baterii — potrzebny moduł montowany pod
+        // drukarkę plus sama bateria; sprzedajemy oba osobno, tak jak Zebra
+        id: 'desktop',
+        name: 'Drukarki biurkowe',
+        slug: 'drukarki-biurkowe',
+        models: [
+          { id: 'zd421', name: 'Zebra ZD421/ZD621', slug: 'zebra-zd421-zd621', resolutions: [] },
+        ]
+      },
+      {
         id: 'terminals',
         name: 'Terminale',
         slug: 'terminale',
@@ -264,6 +274,60 @@ export const SHOP_CATEGORIES: ProductTypeCategory[] = [
         models: [
           { id: 'ze511', name: 'Zebra ZE511', slug: 'zebra-ze511', resolutions: [] },
           { id: 'ze521', name: 'Zebra ZE521', slug: 'zebra-ze521', resolutions: [] },
+        ]
+      },
+    ]
+  },
+  {
+    id: 'gilotyna',
+    name: 'Gilotyna',
+    namePlural: 'Gilotyny',
+    slug: 'gilotyny',
+    enabled: true,
+    printerCategories: [
+      {
+        id: 'desktop',
+        name: 'Drukarki biurkowe',
+        slug: 'drukarki-biurkowe',
+        models: [
+          { id: 'zd421t', name: 'Zebra ZD421t', slug: 'zebra-zd421t', resolutions: [] },
+          { id: 'zd621t', name: 'Zebra ZD621t', slug: 'zebra-zd621t', resolutions: [] },
+        ]
+      },
+    ]
+  },
+  {
+    id: 'dyspenser',
+    name: 'Dyspenser',
+    namePlural: 'Dyspensery (odklejaki)',
+    slug: 'dyspensery',
+    enabled: true,
+    printerCategories: [
+      {
+        id: 'desktop',
+        name: 'Drukarki biurkowe',
+        slug: 'drukarki-biurkowe',
+        models: [
+          { id: 'zd421t', name: 'Zebra ZD421t', slug: 'zebra-zd421t', resolutions: [] },
+          { id: 'zd421d', name: 'Zebra ZD421d/ZD621d', slug: 'zebra-zd421d-zd621d', resolutions: [] },
+          { id: 'zd621t', name: 'Zebra ZD621t', slug: 'zebra-zd621t', resolutions: [] },
+        ]
+      },
+    ]
+  },
+  {
+    id: 'modul',
+    name: 'Moduł łączności',
+    namePlural: 'Moduły łączności',
+    slug: 'moduly-lacznosci',
+    enabled: true,
+    printerCategories: [
+      {
+        id: 'desktop',
+        name: 'Drukarki biurkowe',
+        slug: 'drukarki-biurkowe',
+        models: [
+          { id: 'zd411', name: 'Zebra ZD411/ZD421/ZD621', slug: 'zebra-zd411-zd421-zd621', resolutions: [] },
         ]
       },
     ]

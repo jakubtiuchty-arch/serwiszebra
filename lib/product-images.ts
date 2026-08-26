@@ -45,6 +45,23 @@ const BATTERY_IMAGES: Record<string, string> = {
   'BTRY-ET6X-0AH-01': '/sklep_photo/BTRY-ET6X-0AH-01.png',
   'BTRY-ET6XA-9AH-01': '/sklep_photo/BTRY-ET6XA-9AH-01.png',
   'BTRY-ET6XA-18AH-01': '/sklep_photo/BTRY-ET6XA-18AH-01.png',
+  // Zasilanie bateryjne drukarek biurkowych ZD421/ZD621 — bateria i moduł,
+  // w który się ją wkłada; oba są w typie „akumulator"
+  'P1080383-603': '/sklep_photo/P1080383-603.png',
+  'P1080383-600': '/sklep_photo/P1080383-600.png',
+  'P1080383-601': '/sklep_photo/P1080383-601.png',
+}
+
+// Akcesoria montowane w drukarce — zdjęcie zawsze po numerze katalogowym
+const ACCESSORY_IMAGES: Record<string, string> = {
+  'P1112640-230': '/sklep_photo/P1112640-230.png',
+  'P1112640-232': '/sklep_photo/P1112640-232.png',
+  'P1112640-231': '/sklep_photo/P1112640-231.png',
+  'P1112640-233': '/sklep_photo/P1112640-233.png',
+  'P1112640-031': '/sklep_photo/P1112640-031.png',
+  'P1112640-015': '/sklep_photo/P1112640-015.png',
+  'P1112640-016': '/sklep_photo/P1112640-016.png',
+  'P1112640-017C': '/sklep_photo/P1112640-017C.png',
 }
 
 export function getRollerImageBySku(sku: string): string | null {
@@ -63,6 +80,11 @@ export function getProductFallbackImage(
 ): string | null {
   if (productType === 'walek') return sku ? (ROLLER_IMAGES[sku] || GENERIC_ROLLER_IMAGE) : GENERIC_ROLLER_IMAGE
   if (productType === 'akumulator') return sku ? (BATTERY_IMAGES[sku] || GENERIC_BATTERY_IMAGE) : GENERIC_BATTERY_IMAGE
+  // Gilotyna, dyspenser i moduł łączności wyglądają zupełnie inaczej w każdej
+  // serii — bez trafienia po PN lepiej nie podstawiać niczego niż cudze zdjęcie
+  if (productType === 'gilotyna' || productType === 'dyspenser' || productType === 'modul') {
+    return sku ? ACCESSORY_IMAGES[sku] || null : null
+  }
   if (productType !== 'glowica') return null
   if (!deviceModel) return GENERIC_PRINTHEAD_IMAGE
   const modelSlug = deviceModel.toLowerCase().replace(/[^a-z0-9]/g, '-')

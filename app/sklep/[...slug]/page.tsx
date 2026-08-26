@@ -20,7 +20,10 @@ import {
   Clock,
   HelpCircle,
   Wrench,
-  Info
+  Info,
+  Scissors,
+  Layers,
+  Wifi
 } from 'lucide-react'
 import StickyAddToCart from '@/components/shop/StickyAddToCart'
 import PrintheadProgramBanner from '@/components/shop/PrintheadProgramBanner'
@@ -58,7 +61,10 @@ const PRODUCT_TYPE_ICONS: Record<string, any> = {
   walek: Package,
   akumulator: Battery,
   zasilacz: Zap,
-  kabel: Cable
+  kabel: Cable,
+  gilotyna: Scissors,
+  dyspenser: Layers,
+  modul: Wifi
 }
 
 // Helper: Pobierz URL zdjęcia dla produktu (z unikalną nazwą per model/DPI)
@@ -154,6 +160,60 @@ const PRODUCT_TYPE_FAQ: Record<string, Array<{ question: string; answer: string 
     {
       question: 'Czy konwersja jest odwracalna?',
       answer: 'Tak — odpowiednim zestawem możesz wrócić do poprzedniej rozdzielczości (np. z 300 z powrotem na 203 DPI). Drukarka pozostaje ta sama, zmienia się tylko głowica i ustawienia gęstości druku.'
+    }
+  ],
+  gilotyna: [
+    {
+      question: 'Czy gilotynę zamontuję sam?',
+      answer: 'Tak. W drukarkach biurkowych Zebry gilotyna to moduł przedniej pokrywy — zdejmujesz fabryczną pokrywę i wpinasz moduł z nożem. Zajmuje to kilka minut i nie wymaga narzędzi. Po montażu włącz tryb cięcia w ustawieniach drukarki albo w sterowniku, inaczej drukarka dalej będzie podawać etykiety do oderwania.'
+    },
+    {
+      question: 'Kiedy gilotyna ma sens, a kiedy wystarczy odrywanie?',
+      answer: 'Gilotyna przydaje się, gdy drukujesz etykiety o różnej długości, wydruki ciągłe albo gdy operator ma zajęte ręce i nie ma czasu odrywać. Przy typowych rolkach z etykietami samoprzylepnymi tej samej wielkości fabryczna listwa do odrywania w zupełności wystarcza.'
+    },
+    {
+      question: 'Co się psuje w gilotynie?',
+      answer: 'Najczęściej nóż tępi się od kleju, który zbiera się na ostrzu przy cięciu etykiet samoprzylepnych — objawia się to poszarpaną krawędzią i zacinaniem. Regularne przetarcie ostrza alkoholem IPA załatwia sprawę. Jeśli gilotyna zacina się mimo czystego noża, zwykle winny jest materiał grubszy niż przewiduje moduł.'
+    },
+    {
+      question: 'Czy gilotyna zmieści się do mojej drukarki?',
+      answer: 'Moduły gilotyn nie są uniwersalne — pasują do konkretnej serii i wersji drukarki. Gilotyna do ZD421t nie wejdzie do ZD621t ani do wersji termicznej. Jeśli nie masz pewności, podaj nam numer seryjny drukarki, sprawdzimy w konfiguracji fabrycznej.'
+    }
+  ],
+  dyspenser: [
+    {
+      question: 'Co robi dyspenser (odklejak)?',
+      answer: 'Dyspenser odkleja wydrukowaną etykietę od podkładu i podaje ją gotową do naklejenia. Czujnik wykrywa, że etykieta wisi na wyjściu, i wstrzymuje druk kolejnej, dopóki jej nie zdejmiesz. Podkład odwija się osobno.'
+    },
+    {
+      question: 'Kiedy odklejak realnie przyspiesza pracę?',
+      answer: 'Wtedy, gdy ktoś nakleja etykiety ręcznie — pakowanie, oznaczanie towaru, przyjęcie magazynowe. Odpada dłubanie paznokciem w rogu etykiety, a to przy kilkuset sztukach dziennie robi różnicę. Jeśli etykiety trafiają prosto do teczki albo są naklejane maszynowo, odklejak nic nie da.'
+    },
+    {
+      question: 'Czy odklejak działa z każdymi etykietami?',
+      answer: 'Nie. Potrzebne są etykiety na podkładzie — materiały bezpodkładowe (linerless) odpadają. Bardzo małe i bardzo wąskie etykiety potrafią odklejać się nierówno albo zawijać, bo mają za mało powierzchni, żeby czujnik je wykrył.'
+    },
+    {
+      question: 'Czy montaż wymaga serwisu?',
+      answer: 'Nie. Tak jak gilotyna, odklejak w drukarkach biurkowych to wymiana przedniej pokrywy — kilka minut bez narzędzi. Po montażu trzeba jeszcze włączyć w drukarce tryb odklejania (peel-off) i skalibrować materiał.'
+    }
+  ],
+  modul: [
+    {
+      question: 'Kupiłem drukarkę z USB — czy dołożę Ethernet albo Wi-Fi?',
+      answer: 'Tak, i to jest zwykle tańsze niż wymiana drukarki. Drukarki serii ZD411, ZD421 i ZD621 mają z tyłu gniazdo na moduł łączności — moduł wsuwa się w nie bez narzędzi, a drukarka wykrywa go po włączeniu. Zostaje skonfigurować adres IP albo sieć Wi-Fi.'
+    },
+    {
+      question: 'Ethernet czy Wi-Fi?',
+      answer: 'Ethernet, jeśli drukarka stoi w jednym miejscu i masz gniazdo sieciowe w pobliżu — jest stabilniejszy, nie gubi połączenia i nie wymaga hasła do sieci. Wi-Fi, jeśli drukarka zmienia miejsce albo doprowadzenie kabla to zrywanie ścian. W magazynach z gęstą siecią regałów Wi-Fi bywa kapryśne, więc przy stanowisku stałym wybieramy kabel.'
+    },
+    {
+      question: 'Czy moduł Wi-Fi obsługuje też Bluetooth?',
+      answer: 'Moduły bezprzewodowe do serii ZD41x/ZD42x/ZD62x łączą Wi-Fi i Bluetooth w jednej karcie — nie musisz kupować dwóch. Bluetooth przydaje się do parowania z telefonem albo tabletem, gdy drukujesz z aplikacji mobilnej.'
+    },
+    {
+      question: 'Czy stracę gwarancję, montując moduł samodzielnie?',
+      answer: 'Nie. Moduły łączności są przewidziane do montażu przez użytkownika i nie wymagają otwierania obudowy drukarki. Jeśli mimo to wolisz nie ryzykować, przy zakupie drukarki u nas zamontujemy i skonfigurujemy moduł przed wysyłką.'
     }
   ]
 }
@@ -324,7 +384,10 @@ function generateSeoDescription(product: Product): string {
     glowica: 'Oryginalna',
     walek: 'Oryginalny',
     akumulator: 'Oryginalny',
-    zasilacz: 'Oryginalny'
+    zasilacz: 'Oryginalny',
+    gilotyna: 'Oryginalna',
+    dyspenser: 'Oryginalny',
+    modul: 'Oryginalny'
   }
   const prefix = genderPrefix[product.product_type] || 'Oryginalny'
   const productName = product.name.charAt(0).toLowerCase() + product.name.slice(1)
@@ -826,7 +889,7 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
   if (slugPath.length === 3 && printerCategory) {
     const model = getModelBySlug(slugPath[0], slugPath[1], slugPath[2])
     if (model) {
-      const typeLabel = productType.id === 'glowica' ? 'Głowice drukujące' : productType.id === 'walek' ? 'Wałki dociskowe' : productType.id === 'zasilacz' ? 'Zasilacze' : productType.id === 'konwerter' ? 'Konwertery DPI' : 'Akumulatory'
+      const typeLabel = productType.namePlural
       return {
         title: `${typeLabel} do ${model.name} — oryginalne | TAKMA`,
         description: `Oryginalne ${productType.namePlural.toLowerCase()} do drukarki ${model.name}. Gwarancja producenta, wysyłka 24h. Sprawdź cenę i dostępność.`,
