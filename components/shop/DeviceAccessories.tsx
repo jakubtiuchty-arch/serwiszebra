@@ -162,10 +162,15 @@ export default function DeviceAccessories({
             {p.name.replace(/\s*-\s*[A-Z0-9-]+$/, '')}
           </Link>
           <p className="mt-0.5 font-mono text-[11px] text-gray-500">{p.sku}</p>
-          <div className="mt-2 flex flex-wrap items-center justify-between gap-x-3 gap-y-1.5">
-            <span className="text-sm font-semibold text-gray-900">
-              {s ? `${zl(s.netto)} zł` : '…'}
-              <span className="ml-1 text-xs font-normal text-gray-500">netto</span>
+          <div className="mt-2 flex flex-wrap items-end justify-between gap-x-3 gap-y-1.5">
+            <span className="leading-tight">
+              <span className="block text-sm font-semibold text-gray-900">
+                {s ? `${zl(s.netto)} zł` : '…'}
+                <span className="ml-1 text-xs font-normal text-gray-500">netto</span>
+              </span>
+              {s && s.brutto > 0 && (
+                <span className="block text-xs text-gray-500">{zl(s.brutto)} zł brutto</span>
+              )}
             </span>
             <button
               type="button"
