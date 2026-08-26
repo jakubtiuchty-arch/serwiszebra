@@ -8,6 +8,7 @@ import DeviceBuyBlock from '@/components/shop/DeviceBuyBlock'
 import DeviceAccessories from '@/components/shop/DeviceAccessories'
 import { getAkcesoriaDlaModelu } from '@/lib/device-accessories'
 import { pobierzStany, stanDlaPN } from '@/lib/stock-server'
+import { klasaBySlug } from '@/lib/printer-classes'
 import ShopSubheader from '@/components/shop/ShopSubheader'
 import { Info, FileText, Download, Wrench, Phone } from 'lucide-react'
 
@@ -93,7 +94,7 @@ interface DeviceProduct {
   meta_title: string | null
   meta_description: string | null
   image_urls: string[] | null
-  attributes: { variants?: DeviceVariant[] } | null
+  attributes: { variants?: DeviceVariant[]; klasa?: string } | null
 }
 
 async function getDevice(slug: string): Promise<DeviceProduct | null> {
@@ -291,15 +292,25 @@ export default async function DevicePage({
     })),
   }
 
+  const klasa = klasaBySlug(product.attributes?.klasa || 'biurkowe')
+
   const breadcrumbSchema = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Sklep', item: `${SITE}/sklep` },
       { '@type': 'ListItem', position: 2, name: 'Drukarki etykiet', item: `${SITE}/sklep/drukarki-etykiet` },
+      ...(klasa
+        ? [{
+            '@type': 'ListItem',
+            position: 3,
+            name: klasa.nazwa,
+            item: `${SITE}/sklep/drukarki-etykiet/${klasa.slug}`,
+          }]
+        : []),
       {
         '@type': 'ListItem',
-        position: 3,
+        position: klasa ? 4 : 3,
         name: product.name,
         item: `${SITE}/sklep/drukarki-etykiet/${product.slug}`,
       },
@@ -321,6 +332,9 @@ export default async function DevicePage({
         breadcrumbs={[
           { label: 'Sklep', href: '/sklep' },
           { label: 'Drukarki etykiet', href: '/sklep/drukarki-etykiet' },
+          ...(klasa
+            ? [{ label: klasa.nazwa, href: `/sklep/drukarki-etykiet/${klasa.slug}` }]
+            : []),
           { label: product.name, href: `/sklep/drukarki-etykiet/${product.slug}` },
         ]}
       />

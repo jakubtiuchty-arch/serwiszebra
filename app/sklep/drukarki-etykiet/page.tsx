@@ -3,19 +3,18 @@ import Image from 'next/image'
 import type { Metadata } from 'next'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
-import { pobierzStany, stanDlaPN } from '@/lib/stock-server'
-import type { DeviceVariant } from '@/components/shop/DevicePurchasePanel'
+import { KLASY_DRUKAREK } from '@/lib/printer-classes'
 
 /**
- * Kategoria urządzeń — najważniejsza strona sklepu pod frazę „drukarki etykiet
+ * HUB kategorii — najważniejsza strona sklepu pod frazę „drukarki etykiet
  * Zebra" (klaster ~1,7 tys. wyszukań/mies. z „drukarka zebra" włącznie).
+ * Rozprowadza na cztery klasy: biurkowe, mobilne, półprzemysłowe, przemysłowe
+ * — bo tak kupujący myśli o sprzęcie (gdzie stoi i ile drukuje).
  *
- * Konstrukcja pod SERP, nie pod szablon: krótki lead nad siatką (badania 2026:
- * 80–100 słów, żeby nie spychać produktów pod zgięcie), właściwa treść POD
- * produktami (konkurent z poz. 2 trzyma tam ~1200 słów z sekcjami i FAQ),
- * FAQ z pytań, które Google sam pokazuje przy tej frazie („Ile kosztuje…",
- * „Jaki darmowy program…"). Zebrasklep z DR 6 stoi na poz. 3 — fraza jest
- * do wygrania bez wielkiego autorytetu, treścią i danymi na żywo.
+ * Konstrukcja pod SERP: krótki lead nad kafelkami (badania 2026: 80–100 słów),
+ * właściwa treść POD nimi (konkurent z poz. 2 trzyma tam ~1200 słów z sekcjami
+ * i FAQ), FAQ z pytań, które Google sam pokazuje przy tej frazie. Zebrasklep
+ * z DR 6 stoi na poz. 3 — fraza jest do wygrania treścią, nie autorytetem.
  */
 
 const SITE = 'https://www.serwis-zebry.pl'
@@ -44,30 +43,28 @@ export const metadata: Metadata = {
 
 interface DeviceRow {
   slug: string
-  name: string
-  device_model: string | null
-  description: string | null
-  price: number
-  price_brutto: number
-  image_urls: string[] | null
-  attributes: { variants?: DeviceVariant[] } | null
+  attributes: { klasa?: string } | null
 }
 
-async function getDevices(): Promise<DeviceRow[]> {
+/** Ile urządzeń jest w każdej klasie — do kafelków huba */
+async function policzKlasy(): Promise<Record<string, number>> {
   try {
     const res = await fetch(
-      `${supabaseUrl}/rest/v1/products?product_type=eq.drukarka&is_active=eq.true&select=slug,name,device_model,description,price,price_brutto,image_urls,attributes&order=name.asc`,
+      `${supabaseUrl}/rest/v1/products?product_type=eq.drukarka&is_active=eq.true&select=slug,attributes`,
       { headers: { apikey: supabaseKey, Authorization: `Bearer ${supabaseKey}` }, cache: 'no-store' }
     )
-    if (!res.ok) return []
-    return await res.json()
+    if (!res.ok) return {}
+    const rows: DeviceRow[] = await res.json()
+    const liczby: Record<string, number> = {}
+    for (const r of rows) {
+      const k = r.attributes?.klasa || 'biurkowe'
+      liczby[k] = (liczby[k] || 0) + 1
+    }
+    return liczby
   } catch {
-    return []
+    return {}
   }
 }
-
-const zl = (v: number) =>
-  v.toLocaleString('pl-PL', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
 
 /**
  * Pytania, które Google pokazuje w „Podobne pytania" przy frazie
@@ -102,23 +99,7 @@ const FAQ = [
 ]
 
 export default async function DevicesCategoryPage() {
-  const devices = await getDevices()
-
-  // Żywa cena „od" i dostępność z tego samego cache, z którego korzysta karta
-  // produktu — kategoria nie może obiecywać innej ceny niż karta po kliknięciu
-  const wszystkiePny = devices.flatMap((d) => (d.attributes?.variants || []).map((v) => v.pn))
-  const stany = await pobierzStany(wszystkiePny)
-
-  const daneKafelka = (d: DeviceRow) => {
-    const warianty = d.attributes?.variants || []
-    const zCache = warianty
-      .map((v) => stanDlaPN(stany, v.pn))
-      .filter((s): s is NonNullable<typeof s> => !!s && s.netto > 0)
-    const najtansza = zCache.length ? Math.min(...zCache.map((s) => s.netto)) : Number(d.price)
-    const dostepny = zCache.some((s) => s.totalStock > 0)
-    const magazynPL = zCache.some((s) => s.stockPL > 0)
-    return { najtansza, dostepny, magazynPL, liczbaWersji: warianty.length }
-  }
+  const liczby = await policzKlasy()
 
   const breadcrumbSchema = {
     '@context': 'https://schema.org',
@@ -133,12 +114,12 @@ export default async function DevicesCategoryPage() {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
     name: 'Drukarki etykiet Zebra',
-    numberOfItems: devices.length,
-    itemListElement: devices.map((d, i) => ({
+    numberOfItems: KLASY_DRUKAREK.length,
+    itemListElement: KLASY_DRUKAREK.map((k, i) => ({
       '@type': 'ListItem',
       position: i + 1,
-      url: `${URL_KAT}/${d.slug}`,
-      name: d.name,
+      url: `${URL_KAT}/${k.slug}`,
+      name: `${k.nazwa} Zebra`,
     })),
   }
 
@@ -181,77 +162,48 @@ export default async function DevicesCategoryPage() {
 
           <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl">Drukarki etykiet Zebra</h1>
 
-          {/* Lead nad siatką — krótki, żeby produkty zostały nad zgięciem */}
+          {/* Lead nad kafelkami — krótki, żeby wybór klasy został nad zgięciem */}
           <p className="mt-3 max-w-3xl text-base leading-relaxed text-gray-700">
-            Biurkowe i przemysłowe drukarki etykiet Zebra — termiczne do wysyłek kurierskich
-            i termotransferowe do trwałych oznaczeń. Sprzedajemy sprzęt, który sami naprawiamy:
-            ceny i stany magazynowe pobieramy na żywo, a gwarancję realizujemy we własnym
-            autoryzowanym serwisie, bez odsyłania drukarki do producenta.
+            Drukarki etykiet Zebra w czterech klasach — od biurkowych po przemysłowe, termiczne
+            i termotransferowe. Sprzedajemy sprzęt, który sami naprawiamy: ceny i stany
+            magazynowe pobieramy na żywo, a gwarancję realizujemy we własnym autoryzowanym
+            serwisie, bez odsyłania drukarki do producenta.
           </p>
 
-          {devices.length === 0 ? (
-            <p className="mt-10 text-sm text-gray-500">
-              Trwa uzupełnianie oferty. Napisz na{' '}
-              <a href="mailto:serwis@takma.com.pl" className="font-semibold underline">
-                serwis@takma.com.pl
-              </a>
-              , dobierzemy model i przygotujemy wycenę.
-            </p>
-          ) : (
-            <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {devices.map((d) => {
-                const k = daneKafelka(d)
-                return (
-                  <Link
-                    key={d.slug}
-                    href={`/sklep/drukarki-etykiet/${d.slug}`}
-                    className="group overflow-hidden rounded-xl border border-gray-200 bg-white transition hover:border-gray-400 hover:shadow-sm"
-                  >
-                    <div className="relative aspect-[4/3] bg-white">
-                      {d.image_urls?.[0] && (
-                        <Image
-                          src={d.image_urls[0]}
-                          alt={d.name}
-                          fill
-                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                          className="object-contain p-6 transition-transform duration-200 group-hover:scale-[1.03]"
-                        />
-                      )}
-                    </div>
-                    <div className="border-t border-gray-100 p-5">
-                      <h2 className="font-bold text-gray-900">{d.name}</h2>
-                      {d.description && (
-                        <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-gray-600">
-                          {d.description}
-                        </p>
-                      )}
-                      <div className="mt-3 flex items-end justify-between gap-3">
-                        <span>
-                          <span className="block text-base font-bold text-gray-900">
-                            od {zl(k.najtansza)} zł{' '}
-                            <span className="text-xs font-normal text-gray-500">netto</span>
-                          </span>
-                          {k.liczbaWersji > 1 && (
-                            <span className="block text-xs text-gray-500">
-                              {k.liczbaWersji} wersji do wyboru
-                            </span>
-                          )}
-                        </span>
-                        {k.dostepny && (
-                          <span className="flex items-center gap-1.5 whitespace-nowrap text-xs text-gray-600">
-                            <span
-                              className={`h-2 w-2 rounded-full ${k.magazynPL ? 'bg-green-500' : 'bg-yellow-500'}`}
-                            />
-                            {k.magazynPL ? 'wysyłka 24h' : 'wysyłka 2-3 dni'}
-                          </span>
-                        )}
-                      </div>
-                    </div>
-                  </Link>
-                )
-              })}
-            </div>
-          )}
+          {/* Cztery klasy — kupujący wybiera po tym, gdzie drukarka stoi i ile drukuje */}
+          <div className="mt-8 grid gap-4 sm:grid-cols-2">
+            {KLASY_DRUKAREK.map((k) => (
+              <Link
+                key={k.slug}
+                href={`${'/sklep/drukarki-etykiet'}/${k.slug}`}
+                className="group flex gap-5 rounded-xl border border-gray-200 bg-white p-5 transition hover:border-gray-400 hover:shadow-sm"
+              >
+                <span className="relative h-16 w-16 flex-shrink-0 self-center sm:h-20 sm:w-20">
+                  <Image
+                    src={k.ikona}
+                    alt=""
+                    fill
+                    sizes="80px"
+                    className="object-contain transition-transform duration-200 group-hover:scale-105"
+                  />
+                </span>
+                <span className="min-w-0">
+                  <span className="flex flex-wrap items-baseline gap-x-2">
+                    <h2 className="text-base font-bold text-gray-900">{k.nazwa}</h2>
+                    {(liczby[k.slug] || 0) > 0 && (
+                      <span className="text-xs text-gray-500">
+                        {liczby[k.slug]} {liczby[k.slug] === 1 ? 'model' : 'modele'}
+                      </span>
+                    )}
+                  </span>
+                  <span className="mt-1 block text-sm leading-relaxed text-gray-600">
+                    {k.zajawka}
+                  </span>
+                  <span className="mt-1.5 block text-xs text-gray-400">{k.serie}</span>
+                </span>
+              </Link>
+            ))}
+          </div>
 
           <p className="mt-6 max-w-3xl text-sm leading-relaxed text-gray-600">
             W katalogu pokazujemy modele, które znamy z warsztatu najlepiej. Sprowadzamy każdą
@@ -262,7 +214,7 @@ export default async function DevicesCategoryPage() {
             , sprawdzimy cenę i termin u dystrybutorów.
           </p>
 
-          {/* Treść kategorii POD produktami — tu wygrywa się frazę, nie leadem */}
+          {/* Treść kategorii POD kafelkami — tu wygrywa się frazę, nie leadem */}
           <section className="mt-12 max-w-3xl">
             <h2 className="text-xl font-bold text-gray-900">
               Jak wybrać drukarkę etykiet Zebra
