@@ -168,14 +168,14 @@ export default async function DesktopPrintersPage() {
                     href={`/sklep/drukarki-etykiet/${d.slug}`}
                     className="group overflow-hidden rounded-xl border border-gray-200 bg-white transition hover:border-gray-400 hover:shadow-sm"
                   >
-                    <div className="relative aspect-square bg-white">
+                    <div className="relative aspect-[10/7] bg-white">
                       {d.image_urls?.[0] && (
                         <Image
                           src={d.image_urls[0]}
                           alt={d.name}
                           fill
                           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                          className="object-contain p-4 transition-transform duration-200 group-hover:scale-[1.03]"
+                          className="object-contain p-5 transition-transform duration-200 group-hover:scale-[1.03]"
                         />
                       )}
                     </div>
