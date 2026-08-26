@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { Search, ChevronDown, X } from 'lucide-react'
 import { getEnabledCategories } from '@/lib/shop-categories'
+import { KLASY_DRUKAREK } from '@/lib/printer-classes'
 
 interface ShopSidebarProps {
   currentProductType?: string
@@ -90,6 +91,51 @@ export default function ShopSidebar({
       <div className="bg-white rounded-xl border border-gray-200 p-4">
         <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">Kategorie</h3>
         <div className="space-y-1">
+          {/* Urządzenia nad częściami — rozwijane do czterech klas drukarek */}
+          <div>
+            <div
+              className={`w-full text-sm font-medium flex items-center justify-between gap-2 py-2 px-2 rounded-lg hover:bg-gray-50 active:bg-gray-100 ${
+                currentProductType === 'drukarka' ? 'text-blue-600 bg-blue-50/50' : 'text-gray-800'
+              }`}
+            >
+              <Link
+                href="/sklep/drukarki-etykiet"
+                onClick={handleLinkClick}
+                className="hover:text-blue-600 flex-1"
+              >
+                Drukarki etykiet
+              </Link>
+              <button
+                onClick={(e) => {
+                  e.preventDefault()
+                  toggleProductType('drukarka')
+                }}
+                className="p-2 -m-1 hover:bg-gray-200 rounded"
+              >
+                <ChevronDown
+                  className={`w-5 h-5 text-gray-500 transition-transform ${
+                    expandedProductTypes.includes('drukarka') ? 'rotate-180' : ''
+                  }`}
+                />
+              </button>
+            </div>
+
+            {expandedProductTypes.includes('drukarka') && (
+              <div className="space-y-1 ml-3 mt-1 border-l-2 border-gray-100 pl-3">
+                {KLASY_DRUKAREK.map((k) => (
+                  <Link
+                    key={k.slug}
+                    href={`/sklep/drukarki-etykiet/${k.slug}`}
+                    onClick={handleLinkClick}
+                    className="block px-2 py-1.5 text-sm rounded-lg text-gray-600 hover:bg-gray-50 hover:text-blue-600"
+                  >
+                    {k.nazwa}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+
           {getEnabledCategories().map((productType) => {
             const isExpanded = expandedProductTypes.includes(productType.id)
             const isCurrent = currentProductType === productType.id

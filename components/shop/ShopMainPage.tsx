@@ -15,6 +15,7 @@ import {
   SlidersHorizontal
 } from 'lucide-react'
 import { getEnabledCategories, getProductUrl } from '@/lib/shop-categories'
+import { KLASY_DRUKAREK } from '@/lib/printer-classes'
 import { getProductFallbackImage } from '@/lib/product-images'
 import SearchAutocomplete from '@/components/shop/SearchAutocomplete'
 
@@ -176,6 +177,47 @@ export default function ShopMainPage() {
   const SidebarContent = () => (
     <>
       <div className="space-y-1">
+        {/* Urządzenia nad częściami — rozwijane do czterech klas drukarek */}
+        <div>
+          <div className="w-full text-sm font-medium text-gray-800 flex items-center justify-between gap-2 py-2 px-2 rounded-lg hover:bg-gray-50 active:bg-gray-100">
+            <Link
+              href="/sklep/drukarki-etykiet"
+              className="hover:text-blue-600 flex-1"
+              onClick={() => setShowMobileFilters(false)}
+            >
+              Drukarki etykiet
+            </Link>
+            <button
+              onClick={(e) => {
+                e.preventDefault()
+                toggleProductType('drukarka')
+              }}
+              className="p-2 -m-1 hover:bg-gray-200 rounded"
+            >
+              <ChevronDown
+                className={`w-5 h-5 text-gray-500 transition-transform ${
+                  expandedProductTypes.includes('drukarka') ? 'rotate-180' : ''
+                }`}
+              />
+            </button>
+          </div>
+
+          {expandedProductTypes.includes('drukarka') && (
+            <div className="space-y-1 ml-3 mt-1 border-l-2 border-gray-100 pl-3">
+              {KLASY_DRUKAREK.map((k) => (
+                <Link
+                  key={k.slug}
+                  href={`/sklep/drukarki-etykiet/${k.slug}`}
+                  className="block px-2 py-1.5 text-sm rounded-lg text-gray-600 hover:bg-gray-50 hover:text-blue-600"
+                  onClick={() => setShowMobileFilters(false)}
+                >
+                  {k.nazwa}
+                </Link>
+              ))}
+            </div>
+          )}
+        </div>
+
         {getEnabledCategories().map((productType) => {
           const isProductTypeExpanded = expandedProductTypes.includes(productType.id)
 
