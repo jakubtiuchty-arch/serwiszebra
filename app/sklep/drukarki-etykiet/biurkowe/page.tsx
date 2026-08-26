@@ -5,6 +5,7 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import { pobierzStany, stanDlaPN } from '@/lib/stock-server'
 import { klasaBySlug } from '@/lib/printer-classes'
+import KafelekProduktu from '@/components/shop/KafelekProduktu'
 import type { DeviceVariant } from '@/components/shop/DevicePurchasePanel'
 
 /**
@@ -74,10 +75,36 @@ export default async function DesktopPrintersPage() {
     const zCache = warianty
       .map((v) => stanDlaPN(stany, v.pn))
       .filter((s): s is NonNullable<typeof s> => !!s && s.netto > 0)
-    const najtansza = zCache.length ? Math.min(...zCache.map((s) => s.netto)) : Number(d.price)
-    const dostepny = zCache.some((s) => s.totalStock > 0)
-    const magazynPL = zCache.some((s) => s.stockPL > 0)
-    return { najtansza, dostepny, magazynPL, liczbaWersji: warianty.length }
+    const najtanszy = zCache.length
+      ? zCache.reduce((a, b) => (b.netto < a.netto ? b : a))
+      : null
+
+    // Chipy z konkretami zamiast gołego „6 wersji": rozdzielczości i łączność
+    // wyliczone z wariantów, więc same się zaktualizują przy nowych modelach
+    const dpi = Array.from(new Set(warianty.map((v) => v.dpi).filter(Boolean))).sort()
+    const laczn = new Set<string>(['USB'])
+    for (const v of warianty) {
+      if ((v.lacznosc || '').includes('Ethernet')) laczn.add('LAN')
+      if ((v.lacznosc || '').includes('Wi-Fi')) laczn.add('Wi-Fi')
+    }
+    const cechy = [
+      dpi.length ? `${dpi.join(' / ')} dpi` : null,
+      Array.from(laczn).join(' · '),
+      'druk 104 mm',
+    ].filter((x): x is string => !!x)
+
+    return {
+      slug: d.slug,
+      nazwa: d.name.replace(/^Drukarka etykiet\s+/i, ''),
+      zdjecie: d.image_urls?.[0] || null,
+      wideo: d.image_urls?.[0] ? d.image_urls[0].replace(/_1\.(webp|png|jpg)$/, '_hover.mp4') : null,
+      cechy,
+      netto: najtanszy ? najtanszy.netto : Number(d.price),
+      brutto: najtanszy ? najtanszy.brutto : Math.round(Number(d.price) * 1.23 * 100) / 100,
+      liczbaWersji: warianty.length,
+      dostepny: zCache.some((x) => x.totalStock > 0),
+      magazynPL: zCache.some((x) => x.stockPL > 0),
+    }
   }
 
   const breadcrumbSchema = {
@@ -160,55 +187,9 @@ export default async function DesktopPrintersPage() {
             </p>
           ) : (
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              {devices.map((d) => {
-                const k = daneKafelka(d)
-                return (
-                  <Link
-                    key={d.slug}
-                    href={`/sklep/drukarki-etykiet/${d.slug}`}
-                    className="group overflow-hidden rounded-xl border border-gray-200 bg-white transition hover:border-gray-400 hover:shadow-sm"
-                  >
-                    <div className="relative aspect-[5/4] bg-white">
-                      {d.image_urls?.[0] && (
-                        <Image
-                          src={d.image_urls[0]}
-                          alt={d.name}
-                          fill
-                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                          className="object-contain p-7 transition-transform duration-200 group-hover:scale-[1.03]"
-                        />
-                      )}
-                    </div>
-                    <div className="border-t border-gray-100 p-4">
-                      {/* Na kafelku sam model — kontekst „drukarka etykiet" niesie
-                          cała strona, a przedrostek tylko wydłużał nazwę */}
-                      <h2 className="text-base font-bold tracking-tight text-gray-900">
-                        {d.name.replace(/^Drukarka etykiet\s+/i, '')}
-                      </h2>
-                      <div className="mt-2 border-t border-gray-100 pt-2">
-                        <span className="block text-sm font-bold text-gray-900">
-                          od {zl(k.najtansza)} zł{' '}
-                          <span className="text-xs font-normal text-gray-500">netto</span>
-                        </span>
-                        <span className="mt-0.5 flex items-center justify-between text-xs text-gray-500">
-                          {k.liczbaWersji > 1 ? `${k.liczbaWersji} wersji do wyboru` : '\u00a0'}
-                          {k.dostepny && (
-                            <span className="flex items-center gap-1.5 whitespace-nowrap text-gray-600">
-                              <span
-                                className={`h-2 w-2 rounded-full ${k.magazynPL ? 'bg-green-500' : 'bg-yellow-500'}`}
-                              />
-                              {k.magazynPL ? 'wysyłka 24h' : 'wysyłka 2-3 dni'}
-                            </span>
-                          )}
-                        </span>
-                      </div>
-                      <span className="mt-3 flex min-h-[40px] items-center justify-center rounded-lg bg-[#A8F000] px-4 text-sm font-semibold text-gray-900 transition group-hover:brightness-95">
-                        Zobacz więcej
-                      </span>
-                    </div>
-                  </Link>
-                )
-              })}
+              {devices.map((d) => (
+                <KafelekProduktu key={d.slug} p={daneKafelka(d)} />
+              ))}
             </div>
           )}
 
