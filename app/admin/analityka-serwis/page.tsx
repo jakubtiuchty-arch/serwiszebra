@@ -368,26 +368,26 @@ export default function RepairAnalyticsPage() {
                     {(data.topCustomers || []).length === 0 ? (
                       <p className="mt-3 text-sm text-gray-500">Brak danych</p>
                     ) : (
-                      <table className="mt-3 w-full text-sm">
-                        <tbody>
-                          {data.topCustomers.map((c, idx) => (
-                            <tr key={c.label} className="border-b border-gray-100 last:border-0">
-                              <td className="py-2 pr-2 text-xs text-gray-400 w-6">{idx + 1}.</td>
-                              <td className="py-2 pr-3 font-medium text-gray-900">
-                                <span className="block truncate max-w-[22rem]" title={c.label}>
-                                  {c.label}
-                                </span>
-                              </td>
-                              <td className="py-2 pr-3 whitespace-nowrap text-right text-gray-700">
+                      /* Lista, nie tabela — długa nazwa firmy w komórce tabeli
+                         rozpychała stronę i na telefonie robił się poziomy scroll */
+                      <ul className="mt-3 divide-y divide-gray-100">
+                        {data.topCustomers.map((c, idx) => (
+                          <li key={c.label} className="flex items-start justify-between gap-3 py-2">
+                            <span className="min-w-0 flex-1 text-sm font-medium text-gray-900">
+                              <span className="mr-1 text-xs text-gray-400">{idx + 1}.</span>
+                              <span className="break-words">{c.label}</span>
+                            </span>
+                            <span className="flex-shrink-0 text-right">
+                              <span className="block whitespace-nowrap text-sm text-gray-700">
                                 {c.count} {c.count === 1 ? 'naprawa' : c.count < 5 ? 'naprawy' : 'napraw'}
-                              </td>
-                              <td className="py-2 whitespace-nowrap text-right text-xs text-gray-500">
+                              </span>
+                              <span className="block whitespace-nowrap text-xs text-gray-500">
                                 {c.revenue > 0 ? formatPLN(c.revenue) : '—'}
-                              </td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
+                              </span>
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
                     )}
                     <p className="mt-3 text-[11px] leading-relaxed text-gray-500">
                       Kwota to obrót z zamkniętych napraw tego klienta. Firmy wpisane różnie
@@ -442,23 +442,28 @@ export default function RepairAnalyticsPage() {
                         const maxFault = Math.max(...data.faults.map((x) => x.count), 1)
                         const total = data.faults.reduce((s, x) => s + x.count, 0) || 1
                         return (
-                          <div key={f.name} className="flex items-center gap-3">
-                            <span className="text-sm font-medium text-gray-900 w-56 truncate" title={f.name}>
+                          // Na telefonie etykieta ląduje NAD paskiem — w jednym wierszu
+                          // nazwy kategorii ucinały się, a bez kursora nie ma jak
+                          // podejrzeć pełnej treści
+                          <div key={f.name} className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-3">
+                            <span className="text-sm font-medium text-gray-900 sm:w-56 sm:shrink-0 sm:truncate" title={f.name}>
                               {f.name}
                             </span>
-                            <div className="flex-1 h-6 bg-gray-100 rounded-full overflow-hidden">
-                              <div
-                                className={`h-full rounded-full transition-all flex items-center justify-end pr-2 ${
-                                  f.name === 'Inne' ? 'bg-gray-400' : 'bg-amber-500'
-                                }`}
-                                style={{ width: `${(f.count / maxFault) * 100}%`, minWidth: '2.5rem' }}
-                              >
-                                <span className="text-[10px] font-bold text-white">{f.count}</span>
+                            <div className="flex flex-1 items-center gap-3">
+                              <div className="flex-1 h-6 bg-gray-100 rounded-full overflow-hidden">
+                                <div
+                                  className={`h-full rounded-full transition-all flex items-center justify-end pr-2 ${
+                                    f.name === 'Inne' ? 'bg-gray-400' : 'bg-amber-500'
+                                  }`}
+                                  style={{ width: `${(f.count / maxFault) * 100}%`, minWidth: '2.5rem' }}
+                                >
+                                  <span className="text-[10px] font-bold text-white">{f.count}</span>
+                                </div>
                               </div>
+                              <span className="text-xs text-gray-500 w-10 text-right">
+                                {Math.round((f.count / total) * 100)}%
+                              </span>
                             </div>
-                            <span className="text-xs text-gray-500 w-10 text-right">
-                              {Math.round((f.count / total) * 100)}%
-                            </span>
                           </div>
                         )
                       })}
@@ -479,15 +484,17 @@ export default function RepairAnalyticsPage() {
                   ) : (
                     <div className="space-y-2">
                       {data.devices.map((d, idx) => (
-                        <div key={d.model} className="flex items-center gap-3">
-                          <span className="text-xs font-medium text-gray-500 w-5 text-right">{idx + 1}.</span>
-                          <span className="text-sm font-medium text-gray-900 w-40 truncate" title={d.model}>
+                        <div key={d.model} className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-3">
+                          <span className="flex items-baseline gap-2 sm:contents">
+                          <span className="text-xs font-medium text-gray-500 sm:w-5 sm:text-right">{idx + 1}.</span>
+                          <span className="text-sm font-medium text-gray-900 sm:w-40 sm:shrink-0 sm:truncate" title={d.model}>
                             {d.model}
                             {!!d.spellings && d.spellings > 1 && (
                               <span className="ml-1 text-[10px] font-normal text-gray-400">
                                 +{d.spellings - 1} zapisu
                               </span>
                             )}
+                          </span>
                           </span>
                           <div className="flex-1 h-6 bg-gray-100 rounded-full overflow-hidden">
                             <div

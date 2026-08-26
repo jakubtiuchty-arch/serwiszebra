@@ -76,62 +76,65 @@ export default function Header({ currentPage = 'other', hidePartnerLogos = false
             </Link>
 
             <div className="ml-auto flex items-center gap-1.5 sm:gap-3 md:gap-4 mr-0">
-              {/* MOBILE - hamburger button */}
+              {/* Hamburger do xl, nie do md: dwanaście linków nawigacji ma łącznie
+                  821 px, a razem z logo (368 px) nie mieszczą się w wierszu poniżej
+                  1280 px — poprzednio wychodziły poza ekran i robiły poziomy pasek
+                  przewijania na KAŻDEJ stronie serwisu */}
               <button
                 onClick={() => setMobileMenuOpen(true)}
-                className="md:hidden p-2 bg-white rounded-lg border border-gray-200 shadow-sm hover:bg-gray-50 transition-colors"
+                className="xl:hidden p-2 bg-white rounded-lg border border-gray-200 shadow-sm hover:bg-gray-50 transition-colors"
                 aria-label="Otwórz menu"
               >
                 <Menu className="w-5 h-5 text-gray-700" />
               </button>
 
               {/* DESKTOP - wszystkie linki */}
-              <Link href="/#co-naprawiamy" className="hidden md:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
+              <Link href="/#co-naprawiamy" className="hidden xl:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
                 Co naprawiamy
               </Link>
-              <Link href="/#cennik" className="hidden md:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
+              <Link href="/#cennik" className="hidden xl:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
                 Cennik
               </Link>
-              <Link href="/jak-to-dziala" className="hidden md:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
+              <Link href="/jak-to-dziala" className="hidden xl:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
                 Jak to działa
               </Link>
               
-              <Link href="/blog" className="hidden md:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
+              <Link href="/blog" className="hidden xl:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
                 Blog
               </Link>
               
-              <Link href="/instrukcje" className="hidden md:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
+              <Link href="/instrukcje" className="hidden xl:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
                 Instrukcje
               </Link>
               
-              <Link href="/poradniki-wideo" className="hidden md:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
+              <Link href="/poradniki-wideo" className="hidden xl:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
                 Poradniki wideo
               </Link>
               
-              <Link href="/o-nas" className="hidden md:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
+              <Link href="/o-nas" className="hidden xl:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
                 O nas
               </Link>
               
-              <Link href="/kontakt" className="hidden md:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
+              <Link href="/kontakt" className="hidden xl:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
                 Kontakt
               </Link>
 
-              <Link href="/#formularz" className="hidden md:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
+              <Link href="/#formularz" className="hidden xl:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
                 Formularz
               </Link>
-              <Link href="/panel" className="hidden md:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
+              <Link href="/panel" className="hidden xl:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
                 Panel serwisowy
               </Link>
               
               {/* Sklep */}
               <Link 
                 href="/sklep" 
-                className="hidden md:block px-3 py-1.5 bg-gradient-to-r from-blue-50 via-indigo-50 to-purple-50 rounded-full border border-gray-200 shadow-sm hover:shadow-md hover:border-blue-300 transition-all"
+                className="hidden xl:block px-3 py-1.5 bg-gradient-to-r from-blue-50 via-indigo-50 to-purple-50 rounded-full border border-gray-200 shadow-sm hover:shadow-md hover:border-blue-300 transition-all"
               >
                 <span className="text-sm font-semibold text-gray-900">Sklep</span>
               </Link>
 
-              <Link href="/logowanie" className="hidden md:block text-sm text-gray-700 hover:text-gray-900 transition-colors font-medium">
+              <Link href="/logowanie" className="hidden xl:block text-sm text-gray-700 hover:text-gray-900 transition-colors font-medium">
                 Zaloguj
               </Link>
             </div>
@@ -141,7 +144,7 @@ export default function Header({ currentPage = 'other', hidePartnerLogos = false
 
       {/* MOBILE MENU - slide from right */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-50 md:hidden">
+        <div className="fixed inset-0 z-50 xl:hidden">
           {/* Overlay */}
           <div 
             className="absolute inset-0 bg-black/50 backdrop-blur-sm"

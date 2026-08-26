@@ -19,7 +19,9 @@ export default function Footer() {
       <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")' }}></div>
 
       {/* Duży napis SERWIS ZEBRA w tle */}
-      <div className="absolute left-0 right-0 bottom-0 flex items-end justify-center pointer-events-none" style={{ transform: 'translateY(20%)' }}>
+      {/* overflow-hidden: napis jest ozdobą szerszą od ekranu — bez przycięcia
+          tworzy poziomy pasek przewijania na całej stronie */}
+      <div className="absolute left-0 right-0 bottom-0 flex items-end justify-center overflow-hidden pointer-events-none" style={{ transform: 'translateY(20%)' }}>
         <h2 className="text-[4rem] sm:text-[7rem] md:text-[12rem] lg:text-[16rem] font-black tracking-tighter whitespace-nowrap leading-none bg-gradient-to-t from-white/[0.07] via-white/[0.02] to-transparent bg-clip-text text-transparent select-none">
           SERWIS ZEBRA
         </h2>

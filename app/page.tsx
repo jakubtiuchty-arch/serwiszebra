@@ -311,46 +311,46 @@ export default function HomePage() {
                   {/* MOBILE - hamburger menu */}
                   <button
                     onClick={() => setMobileMenuOpen(true)}
-                    className="md:hidden p-2 bg-white rounded-lg border border-gray-200 shadow-sm hover:bg-gray-50 transition-colors"
+                    className="xl:hidden p-2 bg-white rounded-lg border border-gray-200 shadow-sm hover:bg-gray-50 transition-colors"
                     aria-label="Otwórz menu"
                   >
                     <Menu className="w-5 h-5 text-gray-700" />
                   </button>
 
                   {/* DESKTOP - wszystkie linki */}
-                  <a href="#co-naprawiamy" className="hidden md:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
+                  <a href="#co-naprawiamy" className="hidden xl:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
                     Co naprawiamy
                   </a>
-                  <a href="#cennik" className="hidden md:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
+                  <a href="#cennik" className="hidden xl:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
                     Cennik
                   </a>
-                  <a href="#jak-to-dziala" className="hidden md:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
+                  <a href="#jak-to-dziala" className="hidden xl:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
                     Jak to działa
                   </a>
-                  <a href="/blog" className="hidden md:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
+                  <a href="/blog" className="hidden xl:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
                     Blog
                   </a>
-                  <a href="/instrukcje" className="hidden md:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
+                  <a href="/instrukcje" className="hidden xl:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
                     Instrukcje
                   </a>
-                  <a href="/poradniki-wideo" className="hidden md:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
+                  <a href="/poradniki-wideo" className="hidden xl:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
                     Poradniki wideo
                   </a>
-                  <a href="/o-nas" className="hidden md:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
+                  <a href="/o-nas" className="hidden xl:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
                     O nas
                   </a>
-                  <a href="/kontakt" className="hidden md:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
+                  <a href="/kontakt" className="hidden xl:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
                     Kontakt
                   </a>
-                  <a href="#formularz" className="hidden md:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
+                  <a href="#formularz" className="hidden xl:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
                     Formularz
                   </a>
-                  <a href="/panel" className="hidden md:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
+                  <a href="/panel" className="hidden xl:block text-sm text-gray-700 hover:text-gray-900 transition-colors">
                     Panel serwisowy
                   </a>
                   <a 
                     href="/sklep" 
-                    className="hidden md:block px-3 py-1.5 bg-gradient-to-r from-blue-50 via-indigo-50 to-purple-50 rounded-full border border-gray-200 shadow-sm hover:shadow-md hover:border-blue-300 transition-all"
+                    className="hidden xl:block px-3 py-1.5 bg-gradient-to-r from-blue-50 via-indigo-50 to-purple-50 rounded-full border border-gray-200 shadow-sm hover:shadow-md hover:border-blue-300 transition-all"
                   >
                     <span className="text-sm font-semibold text-gray-900">Sklep</span>
                   </a>
@@ -364,7 +364,7 @@ export default function HomePage() {
                         Wyloguj
                       </button>
                     ) : (
-                      <a href="/logowanie" className="hidden md:block text-sm text-gray-700 hover:text-gray-900 transition-colors font-medium">
+                      <a href="/logowanie" className="hidden xl:block text-sm text-gray-700 hover:text-gray-900 transition-colors font-medium">
                         Zaloguj
                       </a>
                     )
@@ -377,7 +377,7 @@ export default function HomePage() {
 
       {/* MOBILE MENU - slide from right */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-50 md:hidden">
+        <div className="fixed inset-0 z-50 xl:hidden">
           {/* Overlay */}
           <div 
             className="absolute inset-0 bg-black/50 backdrop-blur-sm"
@@ -1548,7 +1548,9 @@ export default function HomePage() {
         <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")' }}></div>
 
         {/* Duży napis SERWIS ZEBRA w tle */}
-        <div className="absolute left-0 right-0 bottom-0 flex items-end justify-center pointer-events-none" style={{ transform: 'translateY(20%)' }}>
+        {/* overflow-hidden: napis jest ozdobą szerszą od ekranu — bez przycięcia
+          tworzy poziomy pasek przewijania na całej stronie */}
+      <div className="absolute left-0 right-0 bottom-0 flex items-end justify-center overflow-hidden pointer-events-none" style={{ transform: 'translateY(20%)' }}>
           <h2 className="text-[4rem] sm:text-[7rem] md:text-[12rem] lg:text-[16rem] font-black tracking-tighter whitespace-nowrap leading-none bg-gradient-to-t from-white/[0.07] via-white/[0.02] to-transparent bg-clip-text text-transparent select-none">
             SERWIS ZEBRA
           </h2>

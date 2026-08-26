@@ -19,6 +19,24 @@ import {
 } from 'lucide-react'
 import { trackPhoneClick, trackEmailClick, trackFormSubmit } from '@/lib/analytics'
 
+/**
+ * Wstawia dane o urządzeniu między zdanie wprowadzające a listę pytań.
+ *
+ * Doklejone na końcu lądowały pod „Pytanie:", przez co linia na pytanie klienta
+ * wisiała w powietrzu. Wstawione zaraz po powitaniu rozbijały z kolei zdanie
+ * „Dzień dobry, mam pytanie o…". Właściwe miejsce to akapit przed pytaniami.
+ */
+function wstawKontekst(szablon: string, kontekst: string[]): string {
+  if (kontekst.length === 0) return szablon
+  const blok = kontekst.join('\n')
+
+  const powitanie = szablon.indexOf('\n\n')
+  const przedPytaniami = powitanie === -1 ? -1 : szablon.indexOf('\n\n', powitanie + 2)
+  if (przedPytaniami === -1) return `${szablon}\n${blok}\n`
+
+  return `${szablon.slice(0, przedPytaniami + 2)}${blok}\n\n${szablon.slice(przedPytaniami + 2)}`
+}
+
 // Tematy, z którymi można wejść na formularz z zewnątrz przez ?temat=
 const CONTACT_TOPICS = {
   glowice: {
@@ -45,6 +63,14 @@ const CONTACT_TOPICS = {
       'Rozmiar etykiety (szer. × wys. w mm):\n' +
       'Średnica gilzy (25 lub 76 mm):\n' +
       'Adres do wysyłki:\n',
+  },
+  urzadzenie: {
+    subject: 'Pytanie o urządzenie',
+    message:
+      'Dzień dobry,\n\nmam pytanie o urządzenie z Państwa oferty.\n\n' +
+      'Do czego ma służyć (rodzaj etykiet, ilość dziennie):\n' +
+      'Jak ma się łączyć (USB, sieć, Wi-Fi):\n' +
+      'Pytanie:\n',
   },
   materialy: {
     subject: 'Rabat na oryginalne etykiety i taśmy Zebra',
@@ -85,10 +111,25 @@ export default function ContactPage() {
       .trim()
       .slice(0, 60)
 
+    // ?model=ZD421t&pn=ZD4A042-30EM00EZ — z karty urządzenia, żeby handlowiec
+    // od razu wiedział, o czym mowa, a klient nie przepisywał numeru katalogowego
+    const oczysc = (v: string, ile: number) =>
+      v.replace(/[^A-Za-z0-9ąćęłńóśźżĄĆĘŁŃÓŚŹŻ +\-–.\/]/g, '').trim().slice(0, ile)
+    const model = oczysc(params.get('model') || '', 40)
+    const pn = oczysc(params.get('pn') || '', 30)
+
+    const kontekst = [
+      model ? `Model: ${model}` : '',
+      pn ? `Numer katalogowy: ${pn}` : '',
+      series ? `Wybrana seria: ${series}` : '',
+    ].filter(Boolean)
+
     setFormData((prev) => ({
       ...prev,
+      // Temat to <select> z zamkniętą listą — wartość spoza niej zostawia pole
+      // puste, a jest wymagane. Model trafia więc do treści, nie do tematu.
       subject: preset.subject,
-      message: prev.message || (series ? `${preset.message}Wybrana seria: ${series}\n` : preset.message),
+      message: prev.message || wstawKontekst(preset.message, kontekst),
     }))
   }, [])
 
@@ -308,6 +349,7 @@ export default function ContactPage() {
                         <option value="Program bezpłatnych wymian głowic">Program bezpłatnych wymian głowic</option>
                         <option value="Bezpłatna rolka etykiet do testu">Bezpłatna rolka etykiet do testu</option>
                         <option value="Kontrakt serwisowy na 3 lata">Kontrakt serwisowy na 3 lata</option>
+                        <option value="Pytanie o urządzenie">Pytanie o urządzenie</option>
                         <option value="Reklamacja">Reklamacja</option>
                         <option value="Inne">Inne</option>
                       </select>

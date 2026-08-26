@@ -28,6 +28,8 @@ export interface CartItem {
   contract_device_model?: string
   /** Blokuje stepper ilości — kontrakt jest zawsze na jedno urządzenie */
   fixed_quantity?: boolean
+  /** Numer katalogowy wybranego wariantu urządzenia */
+  variant_pn?: string
 }
 
 interface CartStore {

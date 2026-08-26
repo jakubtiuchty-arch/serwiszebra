@@ -769,7 +769,13 @@ export default function BlogPage() {
 
               {/* Paginacja */}
               {totalPages > 1 && (
-                <nav className="mt-12 flex items-center justify-center gap-2" aria-label="Paginacja bloga">
+                <nav
+                  /* flex-wrap: „← Poprzednia" + pięć numerów + „Następna →" to ~415 px,
+                     czyli więcej niż telefon 390 px — bez zawijania robił się poziomy
+                     pasek przewijania na całej stronie bloga */
+                  className="mt-12 flex flex-wrap items-center justify-center gap-2"
+                  aria-label="Paginacja bloga"
+                >
                   <button
                     onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
                     disabled={currentPage === 1}

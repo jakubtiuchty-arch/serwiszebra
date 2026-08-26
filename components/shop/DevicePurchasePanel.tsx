@@ -1,0 +1,317 @@
+'use client'
+
+import { useEffect, useState } from 'react'
+import Image from 'next/image'
+import { Loader2, ShoppingCart, Truck, RotateCcw, ShieldCheck, Phone } from 'lucide-react'
+import { terminDostawy } from '@/lib/delivery-date'
+import { trackPhoneClick } from '@/lib/analytics'
+import DeviceEnquiryModal from './DeviceEnquiryModal'
+
+const TELEFON = '+48601619898'
+
+export interface DeviceVariant {
+  pn: string
+  label: string
+  dpi?: number
+  lacznosc?: string
+}
+
+/** Cena i stan jednego numeru katalogowego, policzone serwerowo */
+export interface StanWariantu {
+  netto: number
+  brutto: number
+  stockPL: number
+  stockEU: number
+  total: number
+  deliveryText?: string | null
+}
+
+interface DevicePurchasePanelProps {
+  productId: string
+  name: string
+  slug: string
+  images: string[]
+  /** Cena z bazy — używana tylko dopóki nie wróci cena live */
+  fallbackNetto: number
+  fallbackBrutto: number
+  variants: DeviceVariant[]
+  /** Ceny i stany z serwera — dzięki nim cena jest w pierwszym renderze */
+  stanyPoczatkowe?: Record<string, StanWariantu>
+  /** Numer katalogowy z adresu (`?pn=`) — panel pokazuje od razu jego cenę */
+  wybranyPn?: string
+  /** Numer, który kupuje większość — kotwica dla klienta bez wiedzy o wariantach */
+  rekomendowanyPn?: string
+}
+
+interface LiveData {
+  live_price: number
+  live_price_brutto: number
+  stock_pl: number
+  stock_de: number
+  total_stock: number
+}
+
+const zl = (v: number) =>
+  v.toLocaleString('pl-PL', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+
+/**
+ * Górna część karty urządzenia — zdjęcie i panel zakupu, w układzie i stylistyce
+ * kart części (`/sklep/[...slug]`): zdjęcie w białej ramce po lewej, po prawej
+ * nazwa, PN, cena netto z brutto pod spodem, stan magazynowy z kropką i limonkowy
+ * przycisk „Do koszyka" ze stepperem ilości.
+ *
+ * Urządzenie ma kilka numerów katalogowych o różnych cenach, więc panel pokazuje
+ * cenę najtańszej wersji i kieruje do tabeli wariantów, gdzie wszystkie stoją
+ * obok siebie. Wcześniej był tu przełącznik wersji — ukrywał różnice cen,
+ * bo widać było tylko jedną naraz.
+ */
+export default function DevicePurchasePanel({
+  productId,
+  name,
+  slug,
+  images,
+  fallbackNetto,
+  fallbackBrutto,
+  variants,
+  stanyPoczatkowe = {},
+  wybranyPn,
+  rekomendowanyPn,
+}: DevicePurchasePanelProps) {
+  // Wejście z adresu wariantu (`?pn=`) ma od razu pokazywać JEGO cenę i stan,
+  // a nie najtańszą wersję, której klient wcale nie wybierał
+  const wybrany = wybranyPn && variants.some((v) => v.pn === wybranyPn) ? wybranyPn : null
+  const pn = wybrany || variants[0]?.pn || ''
+  const wariant = variants.find((v) => v.pn === pn)
+
+  const stanSerwera = stanyPoczatkowe[pn]
+  const [foto, setFoto] = useState(0)
+  // Dane z przeglądarki trzymamy RAZEM z numerem, którego dotyczą. Wcześniej
+  // stan przeżywał zmianę wariantu i panel pokazywał numer jednej wersji z ceną
+  // i stanem poprzedniej — np. ZD4A042-30EM00EZ z ceną 2229,65 zł i 3 szt.
+  // należącymi do wersji Wi-Fi. Chroni to też przed odpowiedziami wracającymi
+  // w innej kolejności, niż zostały wysłane.
+  const [live, setLive] = useState<{ pn: string; dane: LiveData } | null>(null)
+  const [loading, setLoading] = useState(!stanSerwera)
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => setMounted(true), [])
+
+  useEffect(() => {
+    if (!pn) return
+    let anulowane = false
+    setLoading(!stanyPoczatkowe[pn])
+    fetch(`/api/shop/product-stock?sku=${encodeURIComponent(pn)}`)
+      .then((r) => r.json())
+      .then((d) => {
+        if (!anulowane) setLive({ pn, dane: d })
+      })
+      .catch(() => {})
+      .finally(() => {
+        if (!anulowane) setLoading(false)
+      })
+    return () => {
+      anulowane = true
+    }
+  }, [pn, stanyPoczatkowe])
+
+  /** Dane live tylko wtedy, gdy dotyczą numeru, który właśnie pokazujemy */
+  const liveDane = live && live.pn === pn ? live.dane : null
+
+  // Kolejność źródeł: dane z przeglądarki, potem serwerowe, na końcu cena z bazy
+  const stockPL = liveDane?.stock_pl ?? stanSerwera?.stockPL ?? 0
+  const stockEU = liveDane?.stock_de ?? stanSerwera?.stockEU ?? 0
+  const maDane = !!liveDane || !!stanSerwera
+
+  const termin = maDane ? terminDostawy(stockPL, stockEU) : null
+  const netto =
+    liveDane?.live_price && liveDane.live_price > 0
+      ? liveDane.live_price
+      : stanSerwera?.netto && stanSerwera.netto > 0
+        ? stanSerwera.netto
+        : fallbackNetto
+  const brutto =
+    liveDane?.live_price_brutto && liveDane.live_price_brutto > 0
+      ? liveDane.live_price_brutto
+      : stanSerwera?.brutto && stanSerwera.brutto > 0
+        ? stanSerwera.brutto
+        : fallbackBrutto
+
+  // Cena „od" bez kontekstu myli kupującego, który potrzebuje Ethernetu albo
+  // Wi-Fi — pokazujemy obok nią cenę wersji, którą wybiera większość
+  const rek = !wybrany && rekomendowanyPn ? stanyPoczatkowe[rekomendowanyPn] : undefined
+  const wariantRek = variants.find((v) => v.pn === rekomendowanyPn)
+
+  return (
+    <div className="flex flex-col md:flex-row gap-4 sm:gap-6 mb-4 sm:mb-6 md:items-start">
+      {/* Zdjęcie */}
+      <figure className="bg-white rounded-xl border border-gray-200 overflow-hidden md:w-80 lg:w-96 flex-shrink-0 m-0">
+        <div className="relative aspect-square bg-white">
+          {images[foto] && (
+            <Image
+              src={images[foto]}
+              alt={`${name} ${pn}`}
+              fill
+              className="object-contain p-3 sm:p-4"
+              priority
+              sizes="(max-width: 768px) 100vw, 320px"
+            />
+          )}
+        </div>
+        {images.length > 1 && (
+          <div className="flex gap-2 border-t border-gray-100 p-2">
+            {images.map((src, i) => (
+              <button
+                key={src}
+                type="button"
+                onClick={() => setFoto(i)}
+                aria-label={`Zdjęcie ${i + 1}`}
+                className={`relative h-14 w-14 overflow-hidden rounded-lg border bg-white transition ${
+                  i === foto ? 'border-gray-900' : 'border-gray-200 hover:border-gray-400'
+                }`}
+              >
+                <Image src={src} alt="" fill sizes="56px" className="object-contain p-1" />
+              </button>
+            ))}
+          </div>
+        )}
+      </figure>
+
+      {/* Szczegóły i zakup */}
+      <div className="flex-1">
+        <div className="rounded-xl border border-gray-200 bg-white p-4 sm:p-6">
+        <h1 className="text-lg sm:text-xl font-semibold text-gray-900 mb-1 sm:mb-1.5">{name}</h1>
+        <p className="text-xs text-gray-500 mb-4">
+          PN: <span className="font-mono font-medium text-gray-600">{pn}</span>
+        </p>
+
+        {/* Cena */}
+        <div className="mb-1">
+          {!maDane && loading ? (
+            <div className="flex items-center gap-2 py-1 text-sm text-gray-500">
+              <Loader2 className="h-4 w-4 animate-spin" />
+              Sprawdzam cenę…
+            </div>
+          ) : (
+            <>
+              <div className="flex items-baseline gap-2">
+                {!wybrany && <span className="text-sm text-gray-500">od</span>}
+                <span className="text-2xl font-bold text-gray-900 sm:text-3xl">{zl(netto)} zł</span>
+                <span className="text-sm text-gray-500">netto</span>
+              </div>
+              <p className="text-sm text-gray-500">
+                {zl(brutto)} zł brutto
+                {wybrany
+                  ? ` — wersja ${wariant?.label ?? pn}`
+                  : ' — cena najtańszej wersji'}
+              </p>
+
+              {/* Sama cena „od" myli kogoś, kto potrzebuje Ethernetu albo Wi-Fi:
+                  najtańsza wersja ich nie ma. Obok dajemy więc drugą kotwicę —
+                  konfigurację, którą realnie wybiera większość. */}
+              {rek && rek.netto > 0 && rek.netto !== netto && wariantRek && (
+                <p className="mt-1.5 text-sm text-gray-600">
+                  Najczęściej wybierana ({wariantRek.label}):{' '}
+                  <a href="#warianty" className="font-semibold text-gray-900 underline">
+                    {zl(rek.netto)} zł netto
+                  </a>
+                </p>
+              )}
+            </>
+          )}
+        </div>
+
+        {/* Dostępność — ta sama konwencja co na kartach części */}
+        <div className="my-3 space-y-1.5">
+          {!maDane ? null : stockPL > 0 ? (
+            <div className="flex items-center gap-2 text-sm">
+              <div className="h-2 w-2 flex-shrink-0 rounded-full bg-green-500" />
+              <span className="text-gray-600">
+                Magazyn PL: <strong className="text-gray-900">{stockPL} szt.</strong>
+                <span className="ml-1 text-gray-400">— wysyłka 24h</span>
+              </span>
+            </div>
+          ) : stockEU > 0 ? (
+            <div className="flex items-center gap-2 text-sm">
+              <div className="h-2 w-2 flex-shrink-0 rounded-full bg-yellow-500" />
+              <span className="text-gray-600">
+                Magazyn EU: <strong className="text-gray-900">{stockEU} szt.</strong>
+                <span className="ml-1 text-gray-400">— wysyłka 2-3 dni</span>
+              </span>
+            </div>
+          ) : (
+            <div className="flex items-center gap-2 text-sm text-gray-500">
+              <div className="h-2 w-2 flex-shrink-0 rounded-full bg-gray-300" />
+              Niedostępny — napisz, sprawdzimy termin
+            </div>
+          )}
+        </div>
+
+        {/* Termin dostawy jako DATA, nie „czas wysyłki" — 41% sklepów podaje
+            szybkość zamiast daty, a klient i tak musi ją sobie przeliczyć */}
+        {mounted && maDane && termin && (
+          <p className="mb-3 flex items-start gap-2 text-sm text-gray-700">
+            <Truck className="mt-0.5 h-4 w-4 flex-shrink-0 text-gray-400" />
+            <span>
+              Zamawiasz dziś — u Ciebie do <strong className="text-gray-900">{termin}</strong>
+            </span>
+          </p>
+        )}
+
+        {/* Cel dotykowy 44 px — WCAG wymaga minimum 24 px, ale kciuk potrzebuje więcej */}
+        <a
+          href="#warianty"
+          className="flex min-h-[48px] items-center justify-center gap-2 rounded-lg bg-[#A8F000] px-4 font-semibold text-gray-900 transition hover:bg-[#96D800]"
+        >
+          <ShoppingCart className="h-4 w-4" />
+          <span>{wybrany ? 'Przejdź do zakupu' : 'Wybierz wersję'}</span>
+        </a>
+
+        {/* 64% użytkowników szuka kosztu dostawy na karcie produktu, 60% polityki
+            zwrotów, a 15% porzuca zamówienie, gdy jej nie znajdzie (Baymard) */}
+        <ul className="mt-4 space-y-2 border-t border-gray-100 pt-4 text-xs text-gray-600">
+          <li className="flex items-start gap-2">
+            <Truck className="mt-0.5 h-3.5 w-3.5 flex-shrink-0 text-gray-400" />
+            <span>
+              Dostawa kurierem <strong className="text-gray-900">25 zł</strong> — jedna stawka,
+              niezależnie od liczby sztuk
+            </span>
+          </li>
+          <li className="flex items-start gap-2">
+            <RotateCcw className="mt-0.5 h-3.5 w-3.5 flex-shrink-0 text-gray-400" />
+            <span>
+              Zwrot w 14 dni dla konsumentów i przedsiębiorców na prawach konsumenta —{' '}
+              <a href="/regulamin#odstapienie" className="underline hover:text-gray-900">
+                §16 regulaminu
+              </a>
+            </span>
+          </li>
+          <li className="flex items-start gap-2">
+            <ShieldCheck className="mt-0.5 h-3.5 w-3.5 flex-shrink-0 text-gray-400" />
+            <span>
+              24 miesiące gwarancji. Naprawy gwarancyjne robimy u siebie — jesteśmy autoryzowanym
+              serwisem Zebry, sprzęt nie jedzie do producenta
+            </span>
+          </li>
+        </ul>
+        </div>
+
+        {/* Pod ramką, nie w niej: zakup to jedna ścieżka, pytanie to druga.
+            Klient, który nie wie, którą wersję wybrać, potrzebuje człowieka —
+            a przy sprzęcie za kilka tysięcy to częsty przypadek. Telefon tylko
+            na telefonie, bo na desktopie `tel:` przeważnie nic nie robi. */}
+        <div className="mt-3 space-y-2">
+          <DeviceEnquiryModal productName={name} variantPn={pn} priceNetto={netto} />
+
+          <a
+            href={`tel:${TELEFON}`}
+            onClick={() => trackPhoneClick('karta_urzadzenia')}
+            className="flex min-h-[48px] items-center justify-center gap-2 rounded-lg border border-gray-900 bg-gray-900 px-4 text-sm font-semibold text-white transition hover:bg-gray-800 sm:hidden"
+          >
+            <Phone className="h-4 w-4" />
+            Zadzwoń: 601 619 898
+          </a>
+        </div>
+      </div>
+    </div>
+  )
+}
