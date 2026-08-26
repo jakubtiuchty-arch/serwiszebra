@@ -935,3 +935,13 @@ Zgłoszone przez użytkownika: karta pokazywała `ZD4A042-30EM00EZ` za 2229,65 z
 - **Deduplikacja po adresie**: trzech klientów miało po dwa zgłoszenia w oknie (Konieczny/INPROX ×2, Gołębiewski ×2, Jakubczak ×2) i dostałoby dwa identyczne maile tego samego dnia. Jeden adres = jedna wiadomość; wszystkie zgłoszenia adresu oznaczane jako obsłużone. 41 wierszy → 38 adresatów.
 - **Wykluczenie tych, co już ocenili**: automatycznie się NIE DA — Places API zwraca maks. 5 opinii „wg trafności". Przy okazji ustalone, że link w mailu (g.page) prowadzi na wizytówkę „TAKMA — Autoryzowany Serwis Zebra" (4,6★, 11 opinii), INNĄ niż GBP_PLACE_ID w panelu takmy (3,7★, 13 opinii) — czyli opinie klientów serwisu lądują na właściwej wizytówce serwisowej. Żadne z 5 widocznych nazwisk nie pasuje do listy adresatów. Wykluczenia ręczne: user poda nazwiska → `review_reminder_sent=true` przed pierwszym przebiegiem.
 - **Cron dodany do vercel.json: codziennie 10:00.** Zacznie wysyłać po deployu — pierwszego dnia pójdzie cała zaległa pula (38 minus wykluczenia), potem pojedynczo, gdy kolejne naprawy wejdą w okno 10–35 dni.
+
+## 2026-08-26 wieczór — deploy całości + weryfikacja produkcji przed jutrzejszymi cronami
+Wypchnięte na main i zweryfikowane na żywo (wszystko zielone):
+- 16 kluczowych tras → 200 (hub, 4 klasy, karta z ?pn=, części, instrukcje, sitemap).
+- `product-stock` odpowiada z cache (1610,73 zł, PL 12), merchant-feed 200.
+- Oba nowe crony zarejestrowane w Vercelu i zabezpieczone (401 bez sekretu).
+- Logi runtime bez błędów; JSON-LD parsuje się, ProductGroup 6/6 ofert.
+- Grafiki i wideo klas na produkcji (200).
+- **Dry-run z produkcyjnym CRON_SECRET**: review-reminder → 38 kandydatów, 38 do wysłania, 0 pominiętych; stock-sync (limit=3) → 3 zapisane, zero błędów dystrybutorów.
+Jutro: 6:00 stock-sync (pełna pula), 10:00 review-reminder (38 maili z serwis@serwis-zebry.pl) + request-review (pierwsze prośby) równolegle — zbiory rozłączne. Ostatni deploy: serwiszebraprod-ojznjttp2.
