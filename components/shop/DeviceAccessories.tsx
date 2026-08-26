@@ -268,7 +268,10 @@ export default function DeviceAccessories({
     )
 
   return (
-    <section className="mb-4 rounded-xl border border-gray-200 bg-white p-4 sm:mb-6 sm:p-6">
+    <section
+      id="akcesoria"
+      className="mb-4 scroll-mt-24 rounded-xl border border-gray-200 bg-white p-4 sm:mb-6 sm:p-6"
+    >
       <h2 className="mb-3 text-sm font-semibold text-gray-900 sm:text-base">
         {kontekst === 'instrukcja'
           ? `Części i akcesoria do ${model ? `Zebry ${model}` : 'tego modelu'}`

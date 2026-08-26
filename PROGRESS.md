@@ -945,3 +945,12 @@ Wypchnięte na main i zweryfikowane na żywo (wszystko zielone):
 - Grafiki i wideo klas na produkcji (200).
 - **Dry-run z produkcyjnym CRON_SECRET**: review-reminder → 38 kandydatów, 38 do wysłania, 0 pominiętych; stock-sync (limit=3) → 3 zapisane, zero błędów dystrybutorów.
 Jutro: 6:00 stock-sync (pełna pula), 10:00 review-reminder (38 maili z serwis@serwis-zebry.pl) + request-review (pierwsze prośby) równolegle — zbiory rozłączne. Ostatni deploy: serwiszebraprod-ojznjttp2.
+
+## 2026-08-26 (wieczór) — karta ZD421t: dymki, formularz, kotwice
+- Tabela wariantów: dymki „?" przy DPI i Łączności (desktop + karty mobilne), wyjaśnienia po ludzku.
+- Modal „Zapytaj o produkt": pola Firma i NIP (opcjonalne, zgodnie z wytycznymi formularzy B2B — wymagany NIP odstrasza), mikrocopy „Z NIP-em od razu przygotujemy ofertę"; API device-enquiry przyjmuje i pokazuje oba pola w mailu.
+- Pasek kotwic sekcji (#warianty/#opis/#akcesoria/#faq/#specyfikacja/#dokumentacja) pod okruszkami + scroll-mt na sekcjach — pod skróty „Przejdź do sekcji" w Google.
+- Panel zakupu: „Dostawa kurierem 25 zł" bez dopisku o stawce; usunięte „sprzęt nie jedzie do producenta".
+- meta_title ZD421t w bazie: „Drukarka etykiet Zebra ZD421t — ceny 6 wersji | Serwis Zebra" (bez sztywnej ceny, fraza z przodu, 60 znaków).
+- Opis produktu przepisany do rejestru formalnego (wcześniejszy commit 406a8f2).
+- TODO jutro: pierwsze żywe crony — stock-sync 6:00, review-reminder 10:00.

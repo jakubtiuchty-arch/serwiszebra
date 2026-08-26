@@ -229,8 +229,7 @@ export default function DevicePurchasePanel({
           <li className="flex items-start gap-2">
             <Truck className="mt-0.5 h-3.5 w-3.5 flex-shrink-0 text-gray-400" />
             <span>
-              Dostawa kurierem <strong className="text-gray-900">25 zł</strong> — jedna stawka,
-              niezależnie od liczby sztuk
+              Dostawa kurierem <strong className="text-gray-900">25 zł</strong>
             </span>
           </li>
           <li className="flex items-start gap-2">
@@ -246,7 +245,7 @@ export default function DevicePurchasePanel({
             <ShieldCheck className="mt-0.5 h-3.5 w-3.5 flex-shrink-0 text-gray-400" />
             <span>
               24 miesiące gwarancji. Naprawy gwarancyjne robimy u siebie — jesteśmy autoryzowanym
-              serwisem Zebry, sprzęt nie jedzie do producenta
+              serwisem Zebry
             </span>
           </li>
         </ul>

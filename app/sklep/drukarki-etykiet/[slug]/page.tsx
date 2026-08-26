@@ -339,6 +339,29 @@ export default async function DevicePage({
         ]}
       />
 
+      {/* Pasek kotwic do sekcji — z takich linków Google buduje w wynikach
+          skróty „Przejdź do sekcji", a klient skacze bez przewijania */}
+      <nav aria-label="Sekcje strony" className="border-b border-gray-200 bg-white">
+        <div className="mx-auto flex max-w-5xl items-center gap-1 overflow-x-auto px-4 py-2">
+          {[
+            ['#warianty', 'Wersje i ceny'],
+            ['#opis', 'Opis produktu'],
+            ['#akcesoria', 'Akcesoria'],
+            ['#faq', 'Pytania'],
+            ['#specyfikacja', 'Specyfikacja'],
+            ['#dokumentacja', 'Dokumentacja'],
+          ].map(([href, label]) => (
+            <a
+              key={href}
+              href={href}
+              className="whitespace-nowrap rounded-full px-3 py-1.5 text-xs font-medium text-gray-600 transition hover:bg-gray-100 hover:text-gray-900"
+            >
+              {label}
+            </a>
+          ))}
+        </div>
+      </nav>
+
       <main id="main-content" className="min-h-screen bg-gray-50">
         <article className="max-w-5xl mx-auto px-4 py-4 sm:py-6">
           <DeviceBuyBlock
@@ -354,7 +377,10 @@ export default async function DevicePage({
             rekomendowanyPn={REKOMENDOWANY_PN}
           />
 
-          <section className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6 mb-4 sm:mb-6">
+          <section
+            id="opis"
+            className="scroll-mt-24 bg-white rounded-xl border border-gray-200 p-4 sm:p-6 mb-4 sm:mb-6"
+          >
             <h2 className="text-sm sm:text-base font-semibold text-gray-900 mb-3">Opis produktu</h2>
             <p className="text-sm leading-relaxed text-gray-700">
               Zebra ZD421t to biurkowa drukarka termotransferowa przeznaczona do codziennego
@@ -407,7 +433,10 @@ export default async function DevicePage({
               wcześniej wydłużały drogę do odpowiedzi „który wariant wybrać?" */}
           <DeviceAccessories items={akcesoria} />
 
-          <section className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6 mb-4 sm:mb-6">
+          <section
+            id="faq"
+            className="scroll-mt-24 bg-white rounded-xl border border-gray-200 p-4 sm:p-6 mb-4 sm:mb-6"
+          >
             <h2 className="text-sm sm:text-base font-semibold text-gray-900 mb-4">
               Najczęstsze pytania o ZD421t
             </h2>
@@ -427,7 +456,10 @@ export default async function DevicePage({
             </div>
           </section>
 
-          <section className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6 mb-4 sm:mb-6">
+          <section
+            id="specyfikacja"
+            className="scroll-mt-24 bg-white rounded-xl border border-gray-200 p-4 sm:p-6 mb-4 sm:mb-6"
+          >
             <h2 className="text-sm sm:text-base font-semibold text-gray-900 mb-3 sm:mb-4 flex items-center gap-2">
               <Info className="w-4 h-4 sm:w-5 sm:h-5 text-blue-500" />
               Specyfikacja
@@ -466,7 +498,10 @@ export default async function DevicePage({
               Kupujący sprzęt techniczny sprawdza przed zakupem, czy dostanie
               wsparcie — a instrukcje i sterowniki to nasze najlepiej rankujące
               strony, więc link stąd wzmacnia je w obie strony. */}
-          <section className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6 mb-4 sm:mb-6">
+          <section
+            id="dokumentacja"
+            className="scroll-mt-24 bg-white rounded-xl border border-gray-200 p-4 sm:p-6 mb-4 sm:mb-6"
+          >
             <h2 className="text-sm sm:text-base font-semibold text-gray-900 mb-3">
               Dokumentacja i wsparcie
             </h2>

@@ -16,6 +16,8 @@ const schema = z.object({
   name: z.string().min(3, 'Podaj imię i nazwisko'),
   email: z.string().email('Nieprawidłowy adres e-mail'),
   phone: z.string().optional(),
+  company: z.string().optional(),
+  nip: z.string().optional(),
   message: z.string().min(3, 'Napisz, o co chcesz zapytać'),
   // kontekst karty
   productName: z.string().optional(),
@@ -53,6 +55,8 @@ export async function POST(req: NextRequest) {
             ${row('Osoba', data.name)}
             ${row('E-mail', data.email)}
             ${row('Telefon', data.phone)}
+            ${row('Firma', data.company)}
+            ${row('NIP', data.nip)}
             ${row('Pytanie', data.message)}
           </table>
           <div style="margin-top:18px;padding-top:14px;border-top:1px solid #e5e7eb;font-size:13px;color:#6b7280">

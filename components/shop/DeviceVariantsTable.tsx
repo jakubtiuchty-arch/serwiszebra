@@ -33,6 +33,47 @@ const zl = (v: number) =>
 
 const ma = (v: DeviceVariant, czego: string) => (v.lacznosc || '').includes(czego)
 
+const WYJASNIENIE_DPI =
+  'Rozdzielczość druku w punktach na cal. 203 dpi wystarcza do typowych etykiet z tekstem i kodem kreskowym; 300 dpi wybierz do małych etykiet, drobnego tekstu i kodów 2D.'
+const WYJASNIENIE_LACZNOSC =
+  'Sposób podłączenia drukarki. USB — kabel do jednego komputera. Ethernet — kabel sieciowy, drukarka widoczna dla wielu stanowisk. Wi-Fi — sieć bezprzewodowa, bez ciągnięcia kabli.'
+
+/**
+ * Znak zapytania z dymkiem przy nagłówku kolumny. Dymek otwiera się z hovera
+ * i z fokusu — na ekranie dotykowym tapnięcie w przycisk daje fokus, więc
+ * działa też bez myszy. `stopPropagation`, bo przodkowie (wiersz, karta)
+ * wybierają wariant po kliknięciu.
+ */
+const Podpowiedz = ({
+  label,
+  tekst,
+  odLewej,
+}: {
+  label: string
+  tekst: string
+  /** Dymek doklejony do lewej krawędzi zamiast wyśrodkowania — przy lewym brzegu karty */
+  odLewej?: boolean
+}) => (
+  <span className="group/tip relative inline-flex align-middle">
+    <button
+      type="button"
+      aria-label={label}
+      onClick={(e) => e.stopPropagation()}
+      className="flex h-4 w-4 items-center justify-center rounded-full border border-gray-400 text-[10px] font-semibold leading-none text-gray-500 transition hover:border-gray-600 hover:text-gray-700"
+    >
+      ?
+    </button>
+    <span
+      role="tooltip"
+      className={`pointer-events-none absolute top-full z-20 mt-1.5 w-64 rounded-lg bg-gray-900 px-3 py-2 text-left text-xs font-normal normal-case leading-relaxed text-white opacity-0 shadow-lg transition-opacity duration-150 group-focus-within/tip:opacity-100 group-hover/tip:opacity-100 ${
+        odLewej ? 'left-0' : 'left-1/2 -translate-x-1/2'
+      }`}
+    >
+      {tekst}
+    </span>
+  </span>
+)
+
 /**
  * Wybór numeru katalogowego — DWA układy, nie jeden zwężony.
  *
@@ -206,7 +247,7 @@ export default function DeviceVariantsTable({
   return (
     <section
       id="warianty"
-      className="mb-4 overflow-hidden rounded-xl border border-gray-200 bg-white sm:mb-6"
+      className="mb-4 scroll-mt-24 overflow-hidden rounded-xl border border-gray-200 bg-white sm:mb-6"
     >
       <div className="p-4 pb-3 sm:p-6">
         <h2 className="text-sm font-semibold text-gray-900 sm:text-base">
@@ -262,9 +303,15 @@ export default function DeviceVariantsTable({
               </div>
 
               <dl className="mt-2 grid grid-cols-2 gap-x-3 gap-y-1 text-sm">
-                <dt className="text-gray-500">Rozdzielczość</dt>
+                <dt className="flex items-center gap-1 text-gray-500">
+                  Rozdzielczość
+                  <Podpowiedz label="Co oznacza rozdzielczość?" tekst={WYJASNIENIE_DPI} odLewej />
+                </dt>
                 <dd className="text-right text-gray-900">{v.dpi ? `${v.dpi} dpi` : '—'}</dd>
-                <dt className="text-gray-500">Ethernet</dt>
+                <dt className="flex items-center gap-1 text-gray-500">
+                  Ethernet
+                  <Podpowiedz label="Co oznacza łączność?" tekst={WYJASNIENIE_LACZNOSC} odLewej />
+                </dt>
                 <dd className="text-right text-gray-900">{ma(v, 'Ethernet') ? 'Tak' : '—'}</dd>
                 <dt className="text-gray-500">Wi-Fi</dt>
                 <dd className="text-right text-gray-900">{ma(v, 'Wi-Fi') ? 'Tak' : '—'}</dd>
@@ -299,10 +346,16 @@ export default function DeviceVariantsTable({
                 Part Number
               </th>
               <th scope="col" className="px-2 py-2.5 text-center text-xs font-semibold text-gray-600">
-                DPI
+                <span className="inline-flex items-center gap-1">
+                  DPI
+                  <Podpowiedz label="Co oznacza DPI?" tekst={WYJASNIENIE_DPI} />
+                </span>
               </th>
               <th scope="col" className="px-2 py-2.5 text-left text-xs font-semibold text-gray-600">
-                Łączność
+                <span className="inline-flex items-center gap-1">
+                  Łączność
+                  <Podpowiedz label="Co oznacza łączność?" tekst={WYJASNIENIE_LACZNOSC} />
+                </span>
               </th>
               <th scope="col" className="px-2 py-2.5 text-right text-xs font-semibold text-gray-600">
                 Cena netto

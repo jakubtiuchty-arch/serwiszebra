@@ -29,7 +29,18 @@ export default function DeviceEnquiryModal({ productName, variantPn, priceNetto 
   const [sending, setSending] = useState(false)
   const [done, setDone] = useState(false)
   const [error, setError] = useState<string | null>(null)
-  const [form, setForm] = useState({ name: '', email: '', phone: '', message: '' })
+  // Firma i NIP są OPCJONALNE — wytyczne formularzy B2B: wymagany NIP odstrasza
+  // klientów indywidualnych i podnosi porzucenia, a zweryfikować go można po
+  // otrzymaniu zapytania. Pole jest, bo z NIP-em handlowiec od razu odpowiada
+  // ofertą na dane firmy, bez dopytywania.
+  const [form, setForm] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    company: '',
+    nip: '',
+    message: '',
+  })
 
   const pierwszePole = useRef<HTMLInputElement>(null)
   const przyciskOtwierajacy = useRef<HTMLButtonElement>(null)
@@ -224,7 +235,7 @@ export default function DeviceEnquiryModal({ productName, variantPn, priceNetto 
                     </div>
                     <div>
                       <label htmlFor="pyt-tel" className={etykieta}>
-                        Telefon
+                        Telefon (opcjonalnie)
                       </label>
                       <input
                         id="pyt-tel"
@@ -236,6 +247,40 @@ export default function DeviceEnquiryModal({ productName, variantPn, priceNetto 
                         className={pole}
                       />
                     </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                    <div>
+                      <label htmlFor="pyt-firma" className={etykieta}>
+                        Firma (opcjonalnie)
+                      </label>
+                      <input
+                        id="pyt-firma"
+                        autoComplete="organization"
+                        value={form.company}
+                        onChange={(e) => setForm({ ...form, company: e.target.value })}
+                        className={pole}
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="pyt-nip" className={etykieta}>
+                        NIP (opcjonalnie)
+                      </label>
+                      <input
+                        id="pyt-nip"
+                        inputMode="numeric"
+                        maxLength={13}
+                        value={form.nip}
+                        onChange={(e) => setForm({ ...form, nip: e.target.value })}
+                        className={pole}
+                        aria-describedby="pyt-nip-hint"
+                      />
+                    </div>
+                    {/* Powód prośby o dane — wytyczne: pole opcjonalne wypełnia się
+                        chętniej, gdy widać, co klient z tego ma */}
+                    <p id="pyt-nip-hint" className="-mt-1 text-xs text-gray-500 sm:col-span-2">
+                      Z NIP-em od razu przygotujemy ofertę na dane firmy.
+                    </p>
                   </div>
 
                   <div>
