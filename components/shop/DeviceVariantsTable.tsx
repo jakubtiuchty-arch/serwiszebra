@@ -37,6 +37,8 @@ const WYJASNIENIE_DPI =
   'Rozdzielczość druku w punktach na cal. 203 dpi wystarcza do typowych etykiet z tekstem i kodem kreskowym; 300 dpi wybierz do małych etykiet, drobnego tekstu i kodów 2D.'
 const WYJASNIENIE_LACZNOSC =
   'Sposób podłączenia drukarki. USB — kabel do jednego komputera. Ethernet — kabel sieciowy, drukarka widoczna dla wielu stanowisk. Wi-Fi — sieć bezprzewodowa, bez ciągnięcia kabli.'
+const WYJASNIENIE_DOSTEPNOSC =
+  'Liczba sztuk gotowych do wysyłki. PL — magazyn w Polsce, wysyłka w 24 h. EU — magazyn europejski dystrybutora, dostawa zwykle 2–3 dni robocze.'
 
 /**
  * Znak zapytania z dymkiem przy nagłówku kolumny. Dymek otwiera się z hovera
@@ -315,7 +317,14 @@ export default function DeviceVariantsTable({
                 <dd className="text-right text-gray-900">{ma(v, 'Ethernet') ? 'Tak' : '—'}</dd>
                 <dt className="text-gray-500">Wi-Fi</dt>
                 <dd className="text-right text-gray-900">{ma(v, 'Wi-Fi') ? 'Tak' : '—'}</dd>
-                <dt className="text-gray-500">Magazyn</dt>
+                <dt className="flex items-center gap-1 text-gray-500">
+                  Magazyn
+                  <Podpowiedz
+                    label="Co oznaczają PL i EU?"
+                    tekst={WYJASNIENIE_DOSTEPNOSC}
+                    odLewej
+                  />
+                </dt>
                 <dd className="flex justify-end text-gray-600">
                   <Magazyn s={s} />
                 </dd>
@@ -340,30 +349,57 @@ export default function DeviceVariantsTable({
       {/* DESKTOP — tabela porównawcza */}
       <div className="hidden overflow-x-auto sm:block">
         <table className="w-full text-sm">
+          {/* Stałe proporcje kolumn — bez nich przeglądarka oddaje cały luz
+              najszerszej kolumnie i między Łącznością a ceną rośnie pusty pas,
+              a Dostępność klei się do ceny */}
           <thead>
             <tr className="border-y border-gray-200 bg-gray-100">
-              <th scope="col" className="px-3 py-2.5 text-left text-xs font-semibold text-gray-600">
+              <th
+                scope="col"
+                className="w-[27%] px-3 py-2.5 text-left text-xs font-semibold text-gray-600"
+              >
                 Part Number
               </th>
-              <th scope="col" className="px-2 py-2.5 text-center text-xs font-semibold text-gray-600">
+              <th
+                scope="col"
+                className="w-[9%] px-2 py-2.5 text-center text-xs font-semibold text-gray-600"
+              >
                 <span className="inline-flex items-center gap-1">
                   DPI
                   <Podpowiedz label="Co oznacza DPI?" tekst={WYJASNIENIE_DPI} />
                 </span>
               </th>
-              <th scope="col" className="px-2 py-2.5 text-left text-xs font-semibold text-gray-600">
+              <th
+                scope="col"
+                className="w-[17%] px-2 py-2.5 text-left text-xs font-semibold text-gray-600"
+              >
                 <span className="inline-flex items-center gap-1">
                   Łączność
                   <Podpowiedz label="Co oznacza łączność?" tekst={WYJASNIENIE_LACZNOSC} />
                 </span>
               </th>
-              <th scope="col" className="px-2 py-2.5 text-right text-xs font-semibold text-gray-600">
+              <th
+                scope="col"
+                className="w-[15%] px-2 py-2.5 text-right text-xs font-semibold text-gray-600"
+              >
                 Cena netto
               </th>
-              <th scope="col" className="px-2 py-2.5 text-left text-xs font-semibold text-gray-600">
-                Dostępność
+              <th
+                scope="col"
+                className="w-[18%] px-2 py-2.5 text-left text-xs font-semibold text-gray-600"
+              >
+                <span className="inline-flex items-center gap-1">
+                  Dostępność
+                  <Podpowiedz
+                    label="Co oznaczają PL i EU?"
+                    tekst={WYJASNIENIE_DOSTEPNOSC}
+                  />
+                </span>
               </th>
-              <th scope="col" className="px-3 py-2.5 text-center text-xs font-semibold text-gray-600">
+              <th
+                scope="col"
+                className="w-[14%] px-3 py-2.5 text-center text-xs font-semibold text-gray-600"
+              >
                 Akcja
               </th>
             </tr>
