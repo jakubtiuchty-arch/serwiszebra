@@ -139,7 +139,7 @@ export default async function DesktopPrintersPage() {
 
             <h1 className="text-2xl font-bold sm:text-3xl">Biurkowe drukarki etykiet Zebra</h1>
 
-            <p className="mt-3 max-w-3xl text-base leading-relaxed text-gray-300">
+            <p className="mt-3 text-base leading-relaxed text-gray-300">
               Kompaktowe drukarki serii ZD na stanowisko pakowania, do biura i sklepu —
               spokojnie obsługują do kilkuset etykiet dziennie. Ceny i stany magazynowe
               pobieramy na żywo, a gwarancję realizujemy we własnym autoryzowanym serwisie
@@ -208,16 +208,7 @@ export default async function DesktopPrintersPage() {
             </div>
           )}
 
-          <p className="mt-6 max-w-3xl text-sm leading-relaxed text-gray-600">
-            Sprowadzamy każdy biurkowy model Zebry — także ZD220, ZD230 i termiczne wersje „d".
-            Napisz na{' '}
-            <a href="mailto:serwis@takma.com.pl" className="font-semibold text-gray-900 underline">
-              serwis@takma.com.pl
-            </a>
-            , sprawdzimy cenę i termin u dystrybutorów.
-          </p>
-
-          <section className="mt-12 max-w-3xl">
+          <section className="mt-12">
             <h2 className="text-xl font-bold text-gray-900">
               Dla kogo jest drukarka biurkowa
             </h2>
