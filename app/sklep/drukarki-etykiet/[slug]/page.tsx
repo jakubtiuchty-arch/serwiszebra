@@ -341,6 +341,21 @@ export default async function DevicePage({
           />
 
           <section className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6 mb-4 sm:mb-6">
+            <h2 className="text-sm sm:text-base font-semibold text-gray-900 mb-3">Opis produktu</h2>
+            <p className="text-sm leading-relaxed text-gray-700">
+              Biurkowa drukarka do etykiet, która staje przy stanowisku pakowania, w magazynie
+              albo w recepcji i drukuje przez cały dzień. Nadruk powstaje z taśmy, więc etykieta
+              nie blaknie i nie ściera się jak przy druku termicznym — sprawdza się tam, gdzie
+              oznaczenie ma przetrwać miesiące, a nie tydzień.
+            </p>
+            <p className="mt-3 text-sm leading-relaxed text-gray-700">
+              Rolkę wymienia się bez narzędzi, po podniesieniu pokrywy. Etykiety zakładasz raz i
+              drukarka sama je kalibruje, więc obsługi nie trzeba nikogo uczyć — wystarczy
+              pokazać, gdzie wkłada się rolkę i taśmę.
+            </p>
+          </section>
+
+          <section className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6 mb-4 sm:mb-6">
             <h2 className="text-sm sm:text-base font-semibold text-gray-900 mb-3">Którą wersję wybrać</h2>
               <ul className="mt-3 space-y-3 text-sm leading-relaxed text-gray-700">
                 <li>
