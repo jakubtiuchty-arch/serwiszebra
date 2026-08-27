@@ -427,7 +427,7 @@ export default function DeviceVariantsTable({
               </th>
               <th
                 scope="col"
-                className="w-[9%] px-2 py-2.5 text-center text-xs font-semibold text-gray-600"
+                className="w-[9%] px-2 py-2.5 text-left text-xs font-semibold text-gray-600"
               >
                 <span className="inline-flex items-center gap-1">
                   DPI
@@ -436,7 +436,7 @@ export default function DeviceVariantsTable({
               </th>
               <th
                 scope="col"
-                className="w-[17%] px-2 py-2.5 text-left text-xs font-semibold text-gray-600"
+                className="w-[13%] px-2 py-2.5 text-left text-xs font-semibold text-gray-600"
               >
                 <span className="inline-flex items-center gap-1">
                   Łączność
@@ -445,13 +445,13 @@ export default function DeviceVariantsTable({
               </th>
               <th
                 scope="col"
-                className="w-[15%] px-2 py-2.5 text-right text-xs font-semibold text-gray-600"
+                className="w-[15%] py-2.5 pl-6 pr-2 text-left text-xs font-semibold text-gray-600"
               >
                 Cena netto
               </th>
               <th
                 scope="col"
-                className="w-[18%] py-2.5 pl-8 pr-2 text-left text-xs font-semibold text-gray-600"
+                className="w-[14%] py-2.5 pl-6 pr-2 text-left text-xs font-semibold text-gray-600"
               >
                 <span className="inline-flex items-center gap-1">
                   Dostępność
@@ -463,7 +463,7 @@ export default function DeviceVariantsTable({
               </th>
               <th
                 scope="col"
-                className="w-[14%] px-3 py-2.5 text-center text-xs font-semibold text-gray-600"
+                className="w-[22%] px-3 py-2.5 text-center text-xs font-semibold text-gray-600"
               >
                 Akcja
               </th>
@@ -508,9 +508,7 @@ export default function DeviceVariantsTable({
                       </span>
                     ) : null}
                   </td>
-                  <td className="whitespace-nowrap px-2 py-3 text-center text-gray-700">
-                    {v.dpi ?? '—'}
-                  </td>
+                  <td className="whitespace-nowrap px-2 py-3 text-gray-700">{v.dpi ?? '—'}</td>
                   {/* Ethernet i Wi-Fi w jednej kolumnie: dwie kolumny z myślnikami
                       zajmowały więcej miejsca, niż wnosiły informacji */}
                   <td className="whitespace-nowrap px-2 py-3 text-gray-700">
@@ -518,13 +516,11 @@ export default function DeviceVariantsTable({
                       .filter(Boolean)
                       .join(' + ') || 'USB'}
                   </td>
-                  <td className="whitespace-nowrap px-2 py-3 text-right font-semibold text-gray-900">
+                  <td className="whitespace-nowrap py-3 pl-6 pr-2 font-semibold text-gray-900">
                     {s ? `${zl(s.netto)} zł` : <span className="text-gray-400">…</span>}
                   </td>
                   {/* Stan i status to była ta sama informacja w dwóch kolumnach */}
-                  {/* pl-8 odsuwa lewą kolumnę od prawostronnie wyrównanej ceny —
-                      bez tego stykały się na granicy kolumn */}
-                  <td className="whitespace-nowrap py-3 pl-8 pr-2 text-gray-600">
+                  <td className="whitespace-nowrap py-3 pl-6 pr-2 text-gray-600">
                     <Magazyn s={s} />
                   </td>
                   <td className="whitespace-nowrap px-3 py-3 text-center">
