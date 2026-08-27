@@ -451,7 +451,7 @@ export default function DeviceVariantsTable({
               </th>
               <th
                 scope="col"
-                className="w-[18%] px-2 py-2.5 text-left text-xs font-semibold text-gray-600"
+                className="w-[18%] py-2.5 pl-8 pr-2 text-left text-xs font-semibold text-gray-600"
               >
                 <span className="inline-flex items-center gap-1">
                   Dostępność
@@ -522,7 +522,9 @@ export default function DeviceVariantsTable({
                     {s ? `${zl(s.netto)} zł` : <span className="text-gray-400">…</span>}
                   </td>
                   {/* Stan i status to była ta sama informacja w dwóch kolumnach */}
-                  <td className="whitespace-nowrap px-2 py-3 text-gray-600">
+                  {/* pl-8 odsuwa lewą kolumnę od prawostronnie wyrównanej ceny —
+                      bez tego stykały się na granicy kolumn */}
+                  <td className="whitespace-nowrap py-3 pl-8 pr-2 text-gray-600">
                     <Magazyn s={s} />
                   </td>
                   <td className="whitespace-nowrap px-3 py-3 text-center">
