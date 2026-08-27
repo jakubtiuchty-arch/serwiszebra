@@ -62,11 +62,11 @@ export async function POST(req: NextRequest) {
         subject: `Damy znać, gdy ${nazwa} będzie dostępny`,
         html: budujMailSklepu({
           tytul: 'Powiadomienie zapisane',
-          preheader: `Gdy ${nazwa} wróci na magazyn, dostaniesz od nas jedną wiadomość.`,
+          preheader: `Gdy ${nazwa} wróci na magazyn, damy znać.`,
           tresc:
             akapit('Dzień dobry,') +
             akapit(
-              `zapisaliśmy prośbę o powiadomienie. Gdy <strong>${esc(nazwa)}</strong> (${esc(sku)}) pojawi się na magazynie, wyślemy wiadomość na ten adres — jednorazowo, bez żadnych innych maili.`
+              `zapisaliśmy prośbę o powiadomienie. Gdy <strong>${esc(nazwa)}</strong> (${esc(sku)}) pojawi się na magazynie, wyślemy wiadomość na ten adres.`
             ),
           stopka: 'Wiadomość wysłana po zapisie na powiadomienie o dostępności produktu',
         }),
@@ -81,7 +81,7 @@ export async function POST(req: NextRequest) {
             akapit(`Klient <strong>${esc(email)}</strong> czeka na dostępność:`) +
             akapit(`<strong>${esc(nazwa)}</strong> (${esc(sku)})`) +
             akapit(
-              'Mail „znowu dostępny" wyśle się automatycznie po powrocie towaru na stan — nic nie trzeba robić.'
+              'Mail „znowu dostępny" wyśle się automatycznie po powrocie towaru na stan.'
             ),
           stopka: 'Powiadomienie wewnętrzne sklepu',
         }),

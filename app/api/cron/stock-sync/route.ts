@@ -397,8 +397,7 @@ async function wyslijPowiadomieniaDostepnosci(supabase: SupabaseClient) {
             'Stany magazynowe zmieniają się na bieżąco — przy mniejszych ilościach warto nie zwlekać.'
           ),
         cta: { tekst: 'Przejdź do produktu', href: link },
-        stopka:
-          'Wiadomość jednorazowa — ten adres poprosił o powiadomienie o dostępności produktu',
+        stopka: 'Ten adres poprosił o powiadomienie o dostępności produktu',
       }),
     })
 
