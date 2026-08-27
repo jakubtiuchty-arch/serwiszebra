@@ -223,30 +223,30 @@ export default function DevicePurchasePanel({
           <span>{wybrany ? 'Przejdź do zakupu' : 'Wybierz wersję'}</span>
         </a>
 
-        {/* 64% użytkowników szuka kosztu dostawy na karcie produktu, 60% polityki
-            zwrotów, a 15% porzuca zamówienie, gdy jej nie znajdzie (Baymard) */}
-        <ul className="mt-4 space-y-2 border-t border-gray-100 pt-4 text-xs text-gray-600">
-          <li className="flex items-start gap-2">
-            <Truck className="mt-0.5 h-3.5 w-3.5 flex-shrink-0 text-gray-400" />
-            <span>
-              Dostawa kurierem <strong className="text-gray-900">25 zł</strong>
-            </span>
+        {/* Te trzy fakty MUSZĄ być przy przycisku (Baymard: 64% szuka kosztu
+            dostawy na karcie, 60% polityki zwrotów, 15% porzuca bez niej) —
+            ale jako skanowalne sygnały, nie zdania. Hasło + drobny dopisek,
+            szczegóły prawne w regulaminie, nie na karcie. */}
+        <ul className="mt-4 grid grid-cols-3 gap-2 border-t border-gray-100 pt-4 text-center">
+          <li>
+            <Truck className="mx-auto h-4 w-4 text-gray-400" />
+            <span className="mt-1 block text-xs font-semibold text-gray-900">Dostawa 25 zł</span>
+            <span className="block text-[11px] text-gray-500">kurierem</span>
           </li>
-          <li className="flex items-start gap-2">
-            <RotateCcw className="mt-0.5 h-3.5 w-3.5 flex-shrink-0 text-gray-400" />
-            <span>
-              Zwrot w 14 dni dla konsumentów i przedsiębiorców na prawach konsumenta —{' '}
-              <a href="/regulamin#odstapienie" className="underline hover:text-gray-900">
-                §16 regulaminu
-              </a>
-            </span>
+          <li>
+            <RotateCcw className="mx-auto h-4 w-4 text-gray-400" />
+            <span className="mt-1 block text-xs font-semibold text-gray-900">Zwrot 14 dni</span>
+            <a
+              href="/regulamin#odstapienie"
+              className="block text-[11px] text-gray-500 underline hover:text-gray-700"
+            >
+              zasady zwrotu
+            </a>
           </li>
-          <li className="flex items-start gap-2">
-            <ShieldCheck className="mt-0.5 h-3.5 w-3.5 flex-shrink-0 text-gray-400" />
-            <span>
-              24 miesiące gwarancji. Naprawy gwarancyjne robimy u siebie — jesteśmy autoryzowanym
-              serwisem Zebry
-            </span>
+          <li>
+            <ShieldCheck className="mx-auto h-4 w-4 text-gray-400" />
+            <span className="mt-1 block text-xs font-semibold text-gray-900">Gwarancja 24 mies.</span>
+            <span className="block text-[11px] text-gray-500">autoryzowany serwis</span>
           </li>
         </ul>
         </div>
