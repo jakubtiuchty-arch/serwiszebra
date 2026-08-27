@@ -159,10 +159,19 @@ export default function DevicePurchasePanel({
                 <span className="text-sm text-gray-500">netto</span>
               </div>
               {/* pl-[3px] — wyrównanie optyczne: cyfry w text-3xl mają większe
-                  światło z lewej niż w text-sm, bez korekty brutto wystaje */}
-              <p className="pl-[3px] text-sm text-gray-500">
-                {zl(brutto)} zł brutto
-                {!wybrany && ' — cena najtańszej wersji'}
+                  światło z lewej niż w text-sm, bez korekty brutto wystaje.
+                  Niewidzialny „od" trzyma brutto równo pod KWOTĄ netto, nie pod
+                  przedrostkiem — dokładnie taka sama szerokość i odstęp jak wyżej */}
+              <p className="flex items-baseline gap-2 pl-[3px] text-sm text-gray-500">
+                {!wybrany && (
+                  <span aria-hidden className="invisible">
+                    od
+                  </span>
+                )}
+                <span>
+                  {zl(brutto)} zł brutto
+                  {!wybrany && ' — cena najtańszej wersji'}
+                </span>
               </p>
 
               {/* Sama cena „od" myli kogoś, kto potrzebuje Ethernetu albo Wi-Fi:
