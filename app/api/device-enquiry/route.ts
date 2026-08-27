@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
 import { z } from 'zod'
+import { budujMailSklepu } from '@/lib/email/szablon-sklep'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
@@ -44,13 +45,9 @@ export async function POST(req: NextRequest) {
         ? `${data.priceNetto.toFixed(2).replace('.', ',')} zł netto`
         : undefined
 
-    const html = `
-      <div style="font-family:-apple-system,Segoe UI,Roboto,sans-serif;max-width:640px">
-        <div style="background:#0a0a0a;padding:20px 24px;border-radius:12px 12px 0 0">
-          <div style="display:inline-block;background:#A8F000;color:#0a0a0a;font-weight:700;font-size:11px;letter-spacing:.5px;padding:4px 10px;border-radius:999px">SKLEP</div>
-          <h1 style="color:#fff;font-size:20px;margin:12px 0 0">Pytanie o urządzenie</h1>
-        </div>
-        <div style="border:1px solid #e5e7eb;border-top:none;border-radius:0 0 12px 12px;padding:20px 24px">
+    const html = budujMailSklepu({
+      tytul: 'Pytanie o urządzenie',
+      tresc: `
           <table style="width:100%;border-collapse:collapse;font-size:14px">
             ${row('Osoba', data.name)}
             ${row('E-mail', data.email)}
@@ -66,9 +63,9 @@ export async function POST(req: NextRequest) {
               ${row('Cena na karcie', cena)}
               ${row('Adres strony', data.pageUrl)}
             </table>
-          </div>
-        </div>
-      </div>`
+          </div>`,
+      stopka: 'Powiadomienie wewnętrzne sklepu',
+    })
 
     // Resend NIE rzuca wyjątkiem przy odrzuceniu — błąd siedzi w polu `error`.
     // Bez tego sprawdzenia klient zobaczyłby „wysłane", a pytanie by przepadło.

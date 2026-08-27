@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { createClient, type SupabaseClient } from '@supabase/supabase-js'
 import { Resend } from 'resend'
+import { budujMailSklepu, akapit, esc } from '@/lib/email/szablon-sklep'
 import { checkPriceAndAvailability } from '@/lib/ingram-micro'
 import { lookupStock as lookupBluestar } from '@/lib/bluestar'
 import { lookupStock as lookupJarltech } from '@/lib/jarltech'
@@ -379,24 +380,26 @@ async function wyslijPowiadomieniaDostepnosci(supabase: SupabaseClient) {
       to: [alert.email],
       replyTo: 'serwis@takma.com.pl',
       subject: `${nazwa} — znowu dostępny`,
-      html: `
-        <div style="font-family:-apple-system,Segoe UI,Roboto,sans-serif;max-width:560px">
-          <div style="background:#0a0a0a;padding:20px 24px;border-radius:12px 12px 0 0">
-            <div style="display:inline-block;background:#A8F000;color:#0a0a0a;font-weight:700;font-size:11px;letter-spacing:.5px;padding:4px 10px;border-radius:999px">SKLEP</div>
-            <h1 style="color:#fff;font-size:19px;margin:12px 0 0">Produkt znowu dostępny</h1>
-          </div>
-          <div style="border:1px solid #e5e7eb;border-top:none;border-radius:0 0 12px 12px;padding:20px 24px;font-size:14px;color:#111827;line-height:1.6">
-            <p style="margin:0">Dzień dobry,</p>
-            <p style="margin:12px 0 0"><strong>${nazwa}</strong> (${alert.sku}) wrócił na magazyn.</p>
-            <p style="margin:12px 0 0">Cena: <strong>${zlote(Number(stan.price))} zł netto</strong>${
-              Number(stan.price_brutto) > 0 ? ` (${zlote(Number(stan.price_brutto))} zł brutto)` : ''
-            }${stan.delivery_text ? `<br>${stan.delivery_text}` : ''}</p>
-            <p style="margin:18px 0 0">
-              <a href="${link}" style="display:inline-block;background:#A8F000;color:#0a0a0a;font-weight:700;font-size:14px;padding:12px 22px;border-radius:10px;text-decoration:none">Przejdź do produktu</a>
-            </p>
-            <p style="margin:18px 0 0;color:#6b7280;font-size:12px">Stany magazynowe zmieniają się na bieżąco — przy mniejszych ilościach warto nie zwlekać. Tę wiadomość wysłaliśmy jednorazowo, bo ten adres poprosił o powiadomienie o dostępności produktu.</p>
-          </div>
-        </div>`,
+      html: budujMailSklepu({
+        tytul: 'Produkt znowu dostępny',
+        preheader: `${nazwa} wrócił na magazyn — ${zlote(Number(stan.price))} zł netto.`,
+        tresc:
+          akapit('Dzień dobry,') +
+          akapit(`<strong>${esc(nazwa)}</strong> (${esc(alert.sku)}) wrócił na magazyn.`) +
+          akapit(
+            `Cena: <strong>${zlote(Number(stan.price))} zł netto</strong>${
+              Number(stan.price_brutto) > 0
+                ? ` (${zlote(Number(stan.price_brutto))} zł brutto)`
+                : ''
+            }${stan.delivery_text ? `<br>${esc(stan.delivery_text)}` : ''}`
+          ) +
+          akapit(
+            'Stany magazynowe zmieniają się na bieżąco — przy mniejszych ilościach warto nie zwlekać.'
+          ),
+        cta: { tekst: 'Przejdź do produktu', href: link },
+        stopka:
+          'Wiadomość jednorazowa — ten adres poprosił o powiadomienie o dostępności produktu',
+      }),
     })
 
     if (sendError) {
