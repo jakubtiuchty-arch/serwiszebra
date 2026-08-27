@@ -359,7 +359,9 @@ export default async function DevicePage({
       {/* Pasek kotwic do sekcji — z takich linków Google buduje w wynikach
           skróty „Przejdź do sekcji", a klient skacze bez przewijania */}
       <nav aria-label="Sekcje strony" className="border-b border-gray-200 bg-white">
-        <div className="mx-auto flex max-w-5xl items-center gap-1 overflow-x-auto px-4 py-2">
+        {/* justify-center dopiero od sm — przy przepełnieniu na telefonie
+            wyśrodkowanie ucina lewą krawędź przewijanej listy */}
+        <div className="mx-auto flex max-w-5xl items-center gap-1 overflow-x-auto px-4 py-2 sm:justify-center">
           {[
             ['#warianty', 'Wersje i ceny'],
             ['#opis', 'Opis produktu'],
