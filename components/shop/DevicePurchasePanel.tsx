@@ -246,7 +246,7 @@ export default function DevicePurchasePanel({
           <li>
             <ShieldCheck className="mx-auto h-4 w-4 text-gray-400" />
             <span className="mt-1 block text-xs font-semibold text-gray-900">Gwarancja 24 mies.</span>
-            <span className="block text-[11px] text-gray-500">autoryzowany serwis</span>
+            <span className="block text-[11px] text-gray-500">naprawy robimy u siebie</span>
           </li>
         </ul>
         </div>
