@@ -236,30 +236,30 @@ export default function DevicePurchasePanel({
             dostawy na karcie, 60% polityki zwrotów, 15% porzuca bez niej) —
             ale jako skanowalne sygnały, nie zdania. Hasło + drobny dopisek,
             szczegóły prawne w regulaminie, nie na karcie. */}
-        <ul className="mt-4 grid grid-cols-3 gap-2 border-t border-gray-100 pt-4 text-center">
+        <ul className="mt-3 grid grid-cols-3 gap-2 border-t border-gray-100 pt-3 text-center">
           <li>
             <Image
               src="/icons/line/dostawa.png"
               alt=""
-              width={32}
-              height={32}
-              className="mx-auto h-8 w-8"
+              width={24}
+              height={24}
+              className="mx-auto h-6 w-6"
             />
-            <span className="mt-1 block text-xs font-semibold text-gray-900">Dostawa 25 zł</span>
-            <span className="block text-[11px] text-gray-500">kurierem</span>
+            <span className="mt-1 block text-[11px] font-semibold text-gray-900">Dostawa 25 zł</span>
+            <span className="block text-[10px] text-gray-500">kurierem</span>
           </li>
           <li>
             <Image
               src="/icons/line/zwrot.png"
               alt=""
-              width={32}
-              height={32}
-              className="mx-auto h-8 w-8"
+              width={24}
+              height={24}
+              className="mx-auto h-6 w-6"
             />
-            <span className="mt-1 block text-xs font-semibold text-gray-900">Zwrot 14 dni</span>
+            <span className="mt-1 block text-[11px] font-semibold text-gray-900">Zwrot 14 dni</span>
             <a
               href="/regulamin#odstapienie"
-              className="block text-[11px] text-gray-500 underline hover:text-gray-700"
+              className="block text-[10px] text-gray-500 underline hover:text-gray-700"
             >
               zasady zwrotu
             </a>
@@ -268,12 +268,12 @@ export default function DevicePurchasePanel({
             <Image
               src="/icons/line/gwarancja.png"
               alt=""
-              width={32}
-              height={32}
-              className="mx-auto h-8 w-8"
+              width={24}
+              height={24}
+              className="mx-auto h-6 w-6"
             />
-            <span className="mt-1 block text-xs font-semibold text-gray-900">Gwarancja 24 mies.</span>
-            <span className="block text-[11px] text-gray-500">naprawy w naszym serwisie</span>
+            <span className="mt-1 block text-[11px] font-semibold text-gray-900">Gwarancja 24 mies.</span>
+            <span className="block text-[10px] text-gray-500">naprawy w naszym serwisie</span>
           </li>
         </ul>
         </div>
