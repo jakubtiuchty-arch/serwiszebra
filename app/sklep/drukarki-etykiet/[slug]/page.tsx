@@ -425,23 +425,49 @@ export default async function DevicePage({
             <h3 className="mt-5 border-t border-gray-100 pt-5 text-sm font-semibold text-gray-900">
               Którą wersję wybrać
             </h3>
-              <ul className="mt-3 space-y-3 text-sm leading-relaxed text-gray-700">
-                <li>
-                  <strong className="text-gray-900">203 dpi</strong> wystarczy do etykiet
-                  wysyłkowych, magazynowych i kodów kreskowych w normalnym rozmiarze. To wersja,
-                  którą kupuje się najczęściej.
-                </li>
-                <li>
-                  <strong className="text-gray-900">300 dpi</strong> bierz, gdy na etykiecie ma się
-                  zmieścić drobny druk, mały kod albo kod QR na kilkunastu milimetrach.
-                </li>
-                <li>
-                  <strong className="text-gray-900">USB</strong> to jedna drukarka przy jednym
-                  komputerze. <strong className="text-gray-900">Ethernet</strong> — gdy ma z niej
-                  korzystać kilka osób w sieci. <strong className="text-gray-900">Wi-Fi</strong> —
-                  gdy nie ma jak doprowadzić kabla.
-                </li>
-              </ul>
+            {/* Dwie osie wyboru w osobnych kartach, termin po lewej — do
+                skanowania wzrokiem, nie do czytania zdaniami */}
+            <div className="mt-3 grid gap-3 sm:grid-cols-2">
+              <div className="rounded-xl border border-gray-200 p-4">
+                <p className="text-[11px] font-semibold uppercase tracking-wide text-gray-400">
+                  Rozdzielczość
+                </p>
+                <dl className="mt-2.5 space-y-2.5 text-sm leading-relaxed">
+                  <div className="flex gap-3">
+                    <dt className="w-16 flex-shrink-0 font-semibold text-gray-900">203 dpi</dt>
+                    <dd className="text-gray-700">
+                      etykiety wysyłkowe, magazynowe i kody kreskowe w typowym rozmiarze —
+                      wersja kupowana najczęściej
+                    </dd>
+                  </div>
+                  <div className="flex gap-3">
+                    <dt className="w-16 flex-shrink-0 font-semibold text-gray-900">300 dpi</dt>
+                    <dd className="text-gray-700">
+                      drobny druk, małe kody i kody QR na kilkunastu milimetrach
+                    </dd>
+                  </div>
+                </dl>
+              </div>
+              <div className="rounded-xl border border-gray-200 p-4">
+                <p className="text-[11px] font-semibold uppercase tracking-wide text-gray-400">
+                  Łączność
+                </p>
+                <dl className="mt-2.5 space-y-2.5 text-sm leading-relaxed">
+                  <div className="flex gap-3">
+                    <dt className="w-16 flex-shrink-0 font-semibold text-gray-900">USB</dt>
+                    <dd className="text-gray-700">jedna drukarka przy jednym komputerze</dd>
+                  </div>
+                  <div className="flex gap-3">
+                    <dt className="w-16 flex-shrink-0 font-semibold text-gray-900">Ethernet</dt>
+                    <dd className="text-gray-700">gdy ma z niej korzystać kilka osób w sieci</dd>
+                  </div>
+                  <div className="flex gap-3">
+                    <dt className="w-16 flex-shrink-0 font-semibold text-gray-900">Wi-Fi</dt>
+                    <dd className="text-gray-700">gdy nie ma jak doprowadzić kabla</dd>
+                  </div>
+                </dl>
+              </div>
+            </div>
           </section>
 
           {/* Akcesoria dopiero PO rozstrzygnięciu, którą wersję kupić —
