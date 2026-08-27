@@ -44,6 +44,7 @@ export default function Header({ currentPage = 'other', hidePartnerLogos = false
               <div className="w-[110px] sm:w-[160px] md:w-[180px] h-[46px] sm:h-[62px] md:h-[68px] relative">
                 <Image
                   src="/takma_logo_1.png"
+                  sizes="180px"
                   alt="TAKMA Logo"
                   fill
                   className="object-contain"
@@ -56,6 +57,7 @@ export default function Header({ currentPage = 'other', hidePartnerLogos = false
                   <div className="w-12 sm:w-16 md:w-20 h-8 sm:h-11 md:h-[53px] relative">
                     <Image
                       src="/premier-partner-1.png"
+                  sizes="80px"
                       alt="Premier Partner"
                       fill
                       className="object-contain transition-transform duration-300 md:hover:scale-[2.5] relative md:hover:z-50"
@@ -66,6 +68,7 @@ export default function Header({ currentPage = 'other', hidePartnerLogos = false
                   <div className="w-[52px] sm:w-[70px] md:w-[84px] h-8 sm:h-11 md:h-[53px] relative">
                     <Image
                       src="/repair_specialist.png"
+                  sizes="84px"
                       alt="Repair Specialist"
                       fill
                       className="object-contain transition-transform duration-300 md:hover:scale-[2.5] relative md:hover:z-50"

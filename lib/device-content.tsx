@@ -17,6 +17,9 @@ export interface PozycjaWersji {
 }
 
 export interface TrescKarty {
+  /** Jedno zdanie pod H1 — czym TEN model różni się od bliźniaczego, zanim
+   *  klient wejdzie w warianty (audyt: ryzyko kupna „d" zamiast „t") */
+  wyroznik: string
   /** Wersja, którą kupuje większość — kotwica cenowa i plakietka w tabeli */
   rekomendowanyPn: string
   /** Render urządzenia na sztywno — og:image, schema, primaryImageOfPage */
@@ -34,6 +37,7 @@ export interface TrescKarty {
 
 export const TRESC_KART: Record<string, TrescKarty> = {
   'zebra-zd421t': {
+    wyroznik: 'Druk termotransferowy z taśmą — trwały nadruk odporny na ścieranie, do etykiet produktowych i technicznych',
     rekomendowanyPn: 'ZD4A042-30EM00EZ',
     zdjecieGlowne: '/sklep_photo/urzadzenia/zd421t_1.webp',
     opis: [
@@ -46,12 +50,13 @@ export const TRESC_KART: Record<string, TrescKarty> = {
         okres użytkowania.
       </>,
       <>
-        Drukarka pracuje w rozdzielczości 203 lub 300 dpi z prędkością do 152 mm/s,
+        Drukarka pracuje w rozdzielczości 203 lub 300 dpi z prędkością odpowiednio do
+        152 mm/s i 102 mm/s,
         a szerokość druku 104 mm obejmuje pełny format etykiety kurierskiej 100 × 150 mm.
         Obsługa taśm o nawoju do 300 m ogranicza częstotliwość wymiany materiałów przy druku
-        seryjnym, a wymiana mediów odbywa się bez użycia narzędzi — po zamknięciu pokrywy
-        urządzenie samoczynnie kalibruje etykiety, co skraca wdrożenie nowego operatora do
-        minimum.
+        seryjnym, a wymiana mediów odbywa się bez użycia narzędzi. Drukarkę można
+        skonfigurować tak, by po zamknięciu pokrywy sama kalibrowała etykiety — wdrożenie
+        nowego operatora ogranicza się wtedy do minimum.
       </>,
       <>
         W standardzie dostępne są złącza USB i USB Host oraz Bluetooth Low Energy; łączność
@@ -69,7 +74,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
       },
       {
         termin: '300 dpi',
-        opis: 'drobny druk, małe kody i kody QR na kilkunastu milimetrach',
+        opis: 'drobny druk, małe kody i kody QR na kilkunastu milimetrach; wydruk wolniejszy — do 102 mm/s',
       },
     ],
     lacznosci: [
@@ -87,7 +92,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
       },
       {
         q: 'Jak skalibrować drukarkę Zebra ZD421t?',
-        a: 'Kalibrację uruchamia się przytrzymaniem przycisku pauzy i podania etykiety albo z poziomu Zebra Setup Utilities. Drukarka przepuszcza wtedy kilka etykiet i zapamiętuje ich długość oraz położenie przerwy.',
+        a: 'Szybką kalibrację SmartCal uruchamia się przytrzymaniem przycisków PAUSE i CANCEL przez dwie sekundy, a pełną kalibrację ręczną — kombinacją PAUSE + FEED + CANCEL; obie można też wykonać z poziomu Zebra Setup Utilities. Drukarka przepuszcza wtedy kilka etykiet i zapamiętuje ich długość oraz położenie przerwy.',
         href: '/blog/kalibracja-drukarki-zebra-poradnik-krok-po-kroku',
         link: 'Kalibracja drukarki Zebra — poradnik krok po kroku',
       },
@@ -116,7 +121,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
       ['Technologia druku', 'Termotransferowa, z taśmą'],
       ['Rozdzielczość', '203 lub 300 DPI, zależnie od wersji'],
       ['Szerokość druku', '104 mm'],
-      ['Prędkość druku', 'do 152 mm/s'],
+      ['Prędkość druku', 'do 152 mm/s (203 dpi), do 102 mm/s (300 dpi)'],
       ['Szerokość etykiet', '25,4–112 mm'],
       ['Wymiary (S×G×W)', '206 × 280 × 179 mm'],
       ['Łączność', 'USB, USB Host, opcjonalnie Ethernet, Bluetooth i Wi-Fi'],
@@ -126,23 +131,26 @@ export const TRESC_KART: Record<string, TrescKarty> = {
   },
 
   'zebra-zd421d': {
+    wyroznik: 'Druk termiczny bez taśmy — etykiety kurierskie 100 × 150 mm i oznaczenia o krótkiej lub średniej trwałości',
     rekomendowanyPn: 'ZD4A042-D0EM00EZ',
     zdjecieGlowne: '/sklep_photo/urzadzenia/zd421d_1.webp',
     opis: [
       <>
         Zebra ZD421d to biurkowa drukarka etykiet pracująca w technologii termicznej
-        bezpośredniej — druk powstaje bez taśmy barwiącej, co daje najniższy koszt
-        pojedynczej etykiety i najprostszą możliwą obsługę: uzupełnia się wyłącznie rolkę
-        etykiet. Urządzenie zaprojektowano do oznaczeń o krótkim i średnim cyklu życia —
+        bezpośredniej — druk powstaje bez taśmy barwiącej, więc jedynym materiałem
+        eksploatacyjnym jest rolka etykiet, a obsługa pozostaje najprostsza
+        z możliwych. Urządzenie zaprojektowano do oznaczeń o krótkim i średnim cyklu życia —
         etykiet wysyłkowych, cenowych i magazynowych — w sklepach internetowych, magazynach
         i punktach nadań. To bezpośredni następca popularnych modeli GK420d i ZD420d.
       </>,
       <>
-        Drukarka pracuje w rozdzielczości 203 lub 300 dpi z prędkością do 152 mm/s,
+        Drukarka pracuje w rozdzielczości 203 lub 300 dpi z prędkością odpowiednio do
+        152 mm/s i 102 mm/s,
         a szerokość druku 104 mm obejmuje pełny format etykiety kurierskiej 100 × 150 mm —
         jedno urządzenie obsłuży nadania InPost, DPD i Allegro bez skalowania wydruku.
         Nośniki o szerokości 15–108 mm i rolki o średnicy do 127 mm wymienia się bez
-        narzędzi, a po zamknięciu pokrywy drukarka samoczynnie kalibruje etykiety. Nadruk
+        narzędzi, a drukarkę można skonfigurować tak, by po zamknięciu pokrywy sama
+        kalibrowała etykiety. Nadruk
         termiczny z czasem blaknie — jeżeli oznaczenie ma pozostać czytelne przez lata,
         właściwszym wyborem będzie termotransferowa{' '}
         <Link href="/sklep/drukarki-etykiet/zebra-zd421t" className="font-medium text-gray-900 underline">
@@ -167,7 +175,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
       },
       {
         termin: '300 dpi',
-        opis: 'drobny druk, małe kody i kody QR na kilkunastu milimetrach',
+        opis: 'drobny druk, małe kody i kody QR na kilkunastu milimetrach; wydruk wolniejszy — do 102 mm/s',
       },
     ],
     lacznosci: [
@@ -197,7 +205,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
       },
       {
         q: 'Jak skalibrować drukarkę Zebra ZD421d?',
-        a: 'Kalibrację uruchamia się przytrzymaniem przycisku pauzy i podania etykiety albo z poziomu Zebra Setup Utilities. Drukarka przepuszcza wtedy kilka etykiet i zapamiętuje ich długość oraz położenie przerwy.',
+        a: 'Szybką kalibrację SmartCal uruchamia się przytrzymaniem przycisków PAUSE i CANCEL przez dwie sekundy, a pełną kalibrację ręczną — kombinacją PAUSE + FEED + CANCEL; obie można też wykonać z poziomu Zebra Setup Utilities. Drukarka przepuszcza wtedy kilka etykiet i zapamiętuje ich długość oraz położenie przerwy.',
         href: '/blog/kalibracja-drukarki-zebra-poradnik-krok-po-kroku',
         link: 'Kalibracja drukarki Zebra — poradnik krok po kroku',
       },
@@ -214,7 +222,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
       ['Technologia druku', 'Termiczna bezpośrednia — bez taśmy'],
       ['Rozdzielczość', '203 lub 300 DPI, zależnie od wersji'],
       ['Szerokość druku', '104 mm'],
-      ['Prędkość druku', 'do 152 mm/s'],
+      ['Prędkość druku', 'do 152 mm/s (203 dpi), do 102 mm/s (300 dpi)'],
       ['Szerokość etykiet', '15–108 mm'],
       ['Wymiary (D×S×W)', '220,8 × 177,5 × 150,7 mm'],
       ['Łączność', 'USB, USB Host, Bluetooth LE, opcjonalnie Ethernet, RS-232 i Wi-Fi'],

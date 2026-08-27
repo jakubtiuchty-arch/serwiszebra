@@ -394,6 +394,7 @@ export default async function DevicePage({
             stanyPoczatkowe={stanyDlaKomponentow}
             wybranyPnStart={wybranyPn}
             rekomendowanyPn={tresc?.rekomendowanyPn}
+            wyroznik={tresc?.wyroznik}
           />
 
           {tresc && (

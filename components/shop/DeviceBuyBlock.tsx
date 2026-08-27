@@ -19,6 +19,7 @@ interface Props {
   /** Wariant z adresu (`?pn=`) — stan początkowy wyboru */
   wybranyPnStart?: string
   rekomendowanyPn?: string
+  wyroznik?: string
 }
 
 /**
@@ -45,6 +46,7 @@ export default function DeviceBuyBlock({
   stanyPoczatkowe,
   wybranyPnStart,
   rekomendowanyPn,
+  wyroznik,
 }: Props) {
   const [wybranyPn, setWybranyPn] = useState<string | undefined>(wybranyPnStart)
 
@@ -120,6 +122,7 @@ export default function DeviceBuyBlock({
         zaladowane={zaladowane}
         wybranyPn={wybranyPn}
         rekomendowanyPn={rekomendowanyPn}
+        wyroznik={wyroznik}
       />
 
       <DeviceVariantsTable
