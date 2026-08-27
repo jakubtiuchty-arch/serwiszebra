@@ -9,6 +9,7 @@ import DeviceAccessories from '@/components/shop/DeviceAccessories'
 import { getAkcesoriaDlaModelu } from '@/lib/device-accessories'
 import { pobierzStany, stanDlaPN } from '@/lib/stock-server'
 import { klasaBySlug } from '@/lib/printer-classes'
+import { trescKarty } from '@/lib/device-content'
 import ShopSubheader from '@/components/shop/ShopSubheader'
 import { Info, FileText, Download, Wrench, Phone } from 'lucide-react'
 
@@ -33,43 +34,7 @@ import { Info, FileText, Download, Wrench, Phone } from 'lucide-react'
  * i kalibrację. Odpowiadamy u siebie i linkujemy do własnych poradników,
  * bo w odróżnieniu od innych sklepów mamy je napisane.
  */
-const FAQ_ZD421T = [
-  {
-    q: 'Jakie sterowniki są potrzebne do drukarki Zebra ZD421t?',
-    a: 'Wystarczy sterownik Zebra Designer Driver dla Windows — obsługuje ZD421t po USB i po sieci. W Windows 11 instalacja bywa blokowana przez podpis cyfrowy i trzeba ją przeprowadzić w określonej kolejności.',
-    href: '/blog/sterowniki-zebra-windows-11-instalacja-problemy',
-    link: 'Instalacja sterowników w Windows 11 krok po kroku',
-  },
-  {
-    q: 'Jak skalibrować drukarkę Zebra ZD421t?',
-    a: 'Kalibrację uruchamia się przytrzymaniem przycisku pauzy i podania etykiety albo z poziomu Zebra Setup Utilities. Drukarka przepuszcza wtedy kilka etykiet i zapamiętuje ich długość oraz położenie przerwy.',
-    href: '/blog/kalibracja-drukarki-zebra-poradnik-krok-po-kroku',
-    link: 'Kalibracja drukarki Zebra — poradnik krok po kroku',
-  },
-  {
-    q: 'Co oznaczają migające diody na ZD421t?',
-    a: 'Kolor i rytm migania wskazują konkretną przyczynę: brak nośnika, otwartą głowicę, koniec taśmy albo błąd druku. Ten sam schemat obowiązuje w całej serii ZD420 i ZD421.',
-    href: '/blog/kody-bledow-zebra-zd420-zd421-diody-led',
-    link: 'Kody błędów ZD420 i ZD421 — co oznaczają diody',
-  },
-  {
-    q: 'Czym ZD421t różni się od ZD421d?',
-    a: 'ZD421t drukuje termotransferowo, czyli z taśmą barwiącą, i nadruk jest trwały. ZD421d drukuje termicznie, bez taśmy — taniej w eksploatacji, ale wydruk z czasem blaknie. Jeśli etykieta ma przetrwać miesiące, wybierz wersję „t".',
-    href: '/blog/zebra-zd220-vs-zd421-vs-zt411-porownanie',
-    link: 'Porównanie ZD220, ZD421 i ZT411',
-  },
-  {
-    q: 'W czym projektować etykiety na ZD421t?',
-    a: 'Najprościej w bezpłatnym Zebra Designer 3 — pozwala rozstawić tekst, kody kreskowe i grafiki, a potem zapisać wzór i drukować go seryjnie z pliku albo z bazy.',
-    href: '/blog/zebra-designer-3-poradnik-projektowanie-etykiet',
-    link: 'Zebra Designer 3 — poradnik projektowania etykiet',
-  },
-]
-
 const SITE = 'https://www.serwis-zebry.pl'
-
-/** Wersja, którą kupuje większość — kotwica cenowa obok ceny „od" */
-const REKOMENDOWANY_PN = 'ZD4A042-30EM00EZ'
 
 /** Ceny odświeża cron dwa razy dziennie — deklarujemy ważność do jutra */
 function waznoscCeny(): string {
@@ -111,18 +76,11 @@ async function getDevice(slug: string): Promise<DeviceProduct | null> {
   }
 }
 
-/**
- * Zdjęcie główne karty ustawione NA SZTYWNO per slug. Google raz wybrał sobie
- * na miniaturę w wynikach zdjęcie modułów łączności z sekcji akcesoriów zamiast
- * drukarki — sztywny wpis gwarantuje, że OG i schema zawsze wskazują render
- * urządzenia, niezależnie od kolejności `image_urls` w bazie.
- */
-const ZDJECIE_GLOWNE: Record<string, string> = {
-  'zebra-zd421t': '/sklep_photo/urzadzenia/zd421t_1.webp',
-}
-
+/** Zdjęcie główne na sztywno z konfiguracji treści — og:image, schema i
+ * primaryImageOfPage zawsze wskazują render urządzenia, niezależnie od
+ * kolejności `image_urls` w bazie (Google raz wziął na miniaturę akcesorium). */
 const zdjecieGlowne = (slug: string, imageUrls: string[] | null) => {
-  const sciezka = ZDJECIE_GLOWNE[slug] || imageUrls?.[0]
+  const sciezka = trescKarty(slug)?.zdjecieGlowne || imageUrls?.[0]
   return sciezka ? `${SITE}${sciezka}` : undefined
 }
 
@@ -321,15 +279,19 @@ export default async function DevicePage({
     }),
   }
 
-  const faqSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: FAQ_ZD421T.map((f) => ({
-      '@type': 'Question',
-      name: f.q,
-      acceptedAnswer: { '@type': 'Answer', text: f.a },
-    })),
-  }
+  const tresc = trescKarty(product.slug)
+
+  const faqSchema = tresc
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: tresc.faq.map((f) => ({
+          '@type': 'Question',
+          name: f.q,
+          acceptedAnswer: { '@type': 'Answer', text: f.a },
+        })),
+      }
+    : null
 
   const klasa = klasaBySlug(product.attributes?.klasa || 'biurkowe')
 
@@ -382,7 +344,9 @@ export default async function DevicePage({
         />
       )}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      {faqSchema && (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      )}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
@@ -434,113 +398,84 @@ export default async function DevicePage({
             variants={variants}
             stanyPoczatkowe={stanyDlaKomponentow}
             wybranyPnStart={wybranyPn}
-            rekomendowanyPn={REKOMENDOWANY_PN}
+            rekomendowanyPn={tresc?.rekomendowanyPn}
           />
 
-          <section
-            id="opis"
-            className="scroll-mt-24 bg-white rounded-xl border border-gray-200 p-4 sm:p-6 mb-4 sm:mb-6"
-          >
-            <h2 className="text-sm sm:text-base font-semibold text-gray-900 mb-3">Opis produktu</h2>
-            <p className="text-sm leading-relaxed text-gray-700">
-              Zebra ZD421t to biurkowa drukarka termotransferowa przeznaczona do codziennego
-              druku etykiet w handlu, logistyce i lekkiej produkcji — na stanowiskach
-              pakowania, w magazynach i punktach obsługi. Nadruk nanoszony z taśmy barwiącej
-              jest odporny na ścieranie i wilgoć, dzięki czemu urządzenie sprawdza się przy
-              oznaczeniach produktowych, magazynowych i technicznych, które muszą pozostać
-              czytelne przez cały okres użytkowania.
-            </p>
-            <p className="mt-3 text-sm leading-relaxed text-gray-700">
-              Drukarka pracuje w rozdzielczości 203 lub 300 dpi z prędkością do 152 mm/s,
-              a szerokość druku 104 mm obejmuje pełny format etykiety kurierskiej 100 × 150 mm.
-              Obsługa taśm o nawoju do 300 m ogranicza częstotliwość wymiany materiałów przy
-              druku seryjnym, a wymiana mediów odbywa się bez użycia narzędzi — po zamknięciu
-              pokrywy urządzenie samoczynnie kalibruje etykiety, co skraca wdrożenie nowego
-              operatora do minimum.
-            </p>
-            <p className="mt-3 text-sm leading-relaxed text-gray-700">
-              W standardzie dostępne są złącza USB i USB Host oraz Bluetooth Low Energy;
-              łączność sieciową — Ethernet, Wi-Fi lub port szeregowy RS-232 — dodaje się
-              modułem montowanym przez użytkownika, bez wymiany urządzenia przy zmianie
-              infrastruktury. Obsługa języków ZPL II i EPL zapewnia zgodność z istniejącymi
-              systemami magazynowymi oraz szablonami etykiet przygotowanymi dla starszych
-              drukarek Zebry, w tym serii GK420, której ZD421 jest bezpośrednim następcą.
-            </p>
+          {tresc && (
+            <section
+              id="opis"
+              className="scroll-mt-24 bg-white rounded-xl border border-gray-200 p-4 sm:p-6 mb-4 sm:mb-6"
+            >
+              <h2 className="text-sm sm:text-base font-semibold text-gray-900 mb-3">
+                Opis produktu
+              </h2>
+              {tresc.opis.map((akapit, i) => (
+                <p
+                  key={i}
+                  className={`text-sm leading-relaxed text-gray-700 ${i > 0 ? 'mt-3' : ''}`}
+                >
+                  {akapit}
+                </p>
+              ))}
 
-            <h3 className="mt-5 border-t border-gray-100 pt-5 text-sm font-semibold text-gray-900">
-              Którą wersję wybrać
-            </h3>
-            {/* Dwie osie wyboru w osobnych kartach, termin po lewej — do
-                skanowania wzrokiem, nie do czytania zdaniami */}
-            <div className="mt-3 grid gap-3 sm:grid-cols-2">
-              <div className="rounded-xl border border-gray-200 p-4">
-                <p className="text-[11px] font-semibold uppercase tracking-wide text-gray-400">
-                  Rozdzielczość
-                </p>
-                <dl className="mt-2.5 space-y-2.5 text-sm leading-relaxed">
-                  <div className="flex gap-3">
-                    <dt className="w-16 flex-shrink-0 font-semibold text-gray-900">203 dpi</dt>
-                    <dd className="text-gray-700">
-                      etykiety wysyłkowe, magazynowe i kody kreskowe w typowym rozmiarze —
-                      wersja kupowana najczęściej
-                    </dd>
+              <h3 className="mt-5 border-t border-gray-100 pt-5 text-sm font-semibold text-gray-900">
+                Którą wersję wybrać
+              </h3>
+              {/* Dwie osie wyboru w osobnych kartach, termin po lewej — do
+                  skanowania wzrokiem, nie do czytania zdaniami */}
+              <div className="mt-3 grid gap-3 sm:grid-cols-2">
+                {[
+                  ['Rozdzielczość', tresc.rozdzielczosci],
+                  ['Łączność', tresc.lacznosci],
+                ].map(([tytul, pozycje]) => (
+                  <div key={tytul as string} className="rounded-xl border border-gray-200 p-4">
+                    <p className="text-[11px] font-semibold uppercase tracking-wide text-gray-400">
+                      {tytul as string}
+                    </p>
+                    <dl className="mt-2.5 space-y-2.5 text-sm leading-relaxed">
+                      {(pozycje as { termin: string; opis: string }[]).map((poz) => (
+                        <div key={poz.termin} className="flex gap-3">
+                          <dt className="w-16 flex-shrink-0 font-semibold text-gray-900">
+                            {poz.termin}
+                          </dt>
+                          <dd className="text-gray-700">{poz.opis}</dd>
+                        </div>
+                      ))}
+                    </dl>
                   </div>
-                  <div className="flex gap-3">
-                    <dt className="w-16 flex-shrink-0 font-semibold text-gray-900">300 dpi</dt>
-                    <dd className="text-gray-700">
-                      drobny druk, małe kody i kody QR na kilkunastu milimetrach
-                    </dd>
-                  </div>
-                </dl>
+                ))}
               </div>
-              <div className="rounded-xl border border-gray-200 p-4">
-                <p className="text-[11px] font-semibold uppercase tracking-wide text-gray-400">
-                  Łączność
-                </p>
-                <dl className="mt-2.5 space-y-2.5 text-sm leading-relaxed">
-                  <div className="flex gap-3">
-                    <dt className="w-16 flex-shrink-0 font-semibold text-gray-900">USB</dt>
-                    <dd className="text-gray-700">jedna drukarka przy jednym komputerze</dd>
-                  </div>
-                  <div className="flex gap-3">
-                    <dt className="w-16 flex-shrink-0 font-semibold text-gray-900">Ethernet</dt>
-                    <dd className="text-gray-700">gdy ma z niej korzystać kilka osób w sieci</dd>
-                  </div>
-                  <div className="flex gap-3">
-                    <dt className="w-16 flex-shrink-0 font-semibold text-gray-900">Wi-Fi</dt>
-                    <dd className="text-gray-700">gdy nie ma jak doprowadzić kabla</dd>
-                  </div>
-                </dl>
-              </div>
-            </div>
-          </section>
+            </section>
+          )}
 
           {/* Akcesoria dopiero PO rozstrzygnięciu, którą wersję kupić —
               wcześniej wydłużały drogę do odpowiedzi „który wariant wybrać?" */}
           <DeviceAccessories items={akcesoria} />
 
-          <section
-            id="faq"
-            className="scroll-mt-24 bg-white rounded-xl border border-gray-200 p-4 sm:p-6 mb-4 sm:mb-6"
-          >
-            <h2 className="text-sm sm:text-base font-semibold text-gray-900 mb-4">
-              Najczęstsze pytania o ZD421t
-            </h2>
-            <div className="divide-y divide-gray-100">
-              {FAQ_ZD421T.map((f) => (
-                <div key={f.q} className="py-3 first:pt-0 last:pb-0">
-                  <h3 className="text-sm font-semibold text-gray-900">{f.q}</h3>
-                  <p className="mt-1.5 text-sm leading-relaxed text-gray-700">{f.a}</p>
-                  <Link
-                    href={f.href}
-                    className="mt-1.5 inline-block text-sm font-medium text-blue-600 hover:text-blue-800"
-                  >
-                    {f.link} &rarr;
-                  </Link>
-                </div>
-              ))}
-            </div>
-          </section>
+          {tresc && (
+            <section
+              id="faq"
+              className="scroll-mt-24 bg-white rounded-xl border border-gray-200 p-4 sm:p-6 mb-4 sm:mb-6"
+            >
+              <h2 className="text-sm sm:text-base font-semibold text-gray-900 mb-4">
+                {tresc.faqNaglowek}
+              </h2>
+              <div className="divide-y divide-gray-100">
+                {tresc.faq.map((f) => (
+                  <div key={f.q} className="py-3 first:pt-0 last:pb-0">
+                    <h3 className="text-sm font-semibold text-gray-900">{f.q}</h3>
+                    <p className="mt-1.5 text-sm leading-relaxed text-gray-700">{f.a}</p>
+                    <Link
+                      href={f.href}
+                      className="mt-1.5 inline-block text-sm font-medium text-blue-600 hover:text-blue-800"
+                    >
+                      {f.link} &rarr;
+                    </Link>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
 
           <section
             id="specyfikacja"
@@ -552,19 +487,14 @@ export default async function DevicePage({
             </h2>
             <table className="w-full text-xs sm:text-sm">
               <tbody>
-                {[
-                  ['Producent', 'Zebra'],
-                  ['Model', product.device_model || 'ZD421t'],
-                  ['Technologia druku', 'Termotransferowa, z taśmą'],
-                  ['Rozdzielczość', '203 lub 300 DPI, zależnie od wersji'],
-                  ['Szerokość druku', '104 mm'],
-                  ['Prędkość druku', 'do 152 mm/s'],
-                  ['Szerokość etykiet', '25,4–112 mm'],
-                  ['Wymiary (S×G×W)', '206 × 280 × 179 mm'],
-                  ['Łączność', 'USB, USB Host, opcjonalnie Ethernet, Bluetooth i Wi-Fi'],
-                  ['Stan', 'Nowy, oryginalny'],
-                  ['Gwarancja', '24 miesiące'],
-                ].map(([k, v]) => (
+                {(
+                  tresc?.spec ?? [
+                    ['Producent', 'Zebra'],
+                    ['Model', product.device_model || ''],
+                    ['Stan', 'Nowy, oryginalny'],
+                    ['Gwarancja', '24 miesiące'],
+                  ]
+                ).map(([k, v]) => (
                   <tr key={k} className="border-b border-gray-100 last:border-0">
                     <td className="py-2 pr-4 text-gray-500">{k}</td>
                     <td

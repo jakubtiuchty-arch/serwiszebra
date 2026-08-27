@@ -6,9 +6,6 @@ import { useCartStore } from '@/lib/cart-store'
 import type { DeviceVariant } from './DevicePurchasePanel'
 import type { StanWariantu } from './DevicePurchasePanel'
 
-/** Wariant, który kupuje większość — etykieta ogranicza paraliż wyboru przy
- *  sześciu porównywalnych opcjach różniących się o kilkaset złotych */
-const NAJCZESCIEJ_WYBIERANY = 'ZD4A042-30EM00EZ'
 
 interface Props {
   productId: string
@@ -23,6 +20,9 @@ interface Props {
   zaladowane?: boolean
   /** Aktualnie wybrany numer katalogowy */
   wybranyPn?: string
+  /** Wariant, który kupuje większość — etykieta ogranicza paraliż wyboru przy
+   *  sześciu porównywalnych opcjach różniących się o kilkaset złotych */
+  najczesciejWybierany?: string
   /** Przewiń do wybranego po wejściu — tylko gdy przyszedł z adresu, nie po kliknięciu */
   przewinDoWybranego?: boolean
   onWybierz?: (pn: string) => void
@@ -100,6 +100,7 @@ export default function DeviceVariantsTable({
   stany = {},
   zaladowane = false,
   wybranyPn,
+  najczesciejWybierany,
   przewinDoWybranego,
   onWybierz,
 }: Props) {
@@ -297,7 +298,7 @@ export default function DeviceVariantsTable({
                     wybrana wersja
                   </span>
                 )}
-                {!wyrozniony && v.pn === NAJCZESCIEJ_WYBIERANY && (
+                {!wyrozniony && v.pn === najczesciejWybierany && (
                   <span className="rounded-full bg-blue-50 px-2 py-0.5 text-[10px] font-semibold text-blue-700">
                     najczęściej wybierana
                   </span>
@@ -437,7 +438,7 @@ export default function DeviceVariantsTable({
                       <span className="ml-[26px] mt-1 inline-block rounded-full bg-blue-600 px-2 py-0.5 text-[10px] font-semibold text-white">
                         wybrana wersja
                       </span>
-                    ) : v.pn === NAJCZESCIEJ_WYBIERANY ? (
+                    ) : v.pn === najczesciejWybierany ? (
                       <span className="ml-[26px] mt-1 inline-block rounded-full bg-blue-50 px-2 py-0.5 text-[10px] font-semibold text-blue-700">
                         najczęściej wybierana
                       </span>

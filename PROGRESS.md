@@ -954,3 +954,9 @@ Jutro: 6:00 stock-sync (pełna pula), 10:00 review-reminder (38 maili z serwis@s
 - meta_title ZD421t w bazie: „Drukarka etykiet Zebra ZD421t — ceny 6 wersji | Serwis Zebra" (bez sztywnej ceny, fraza z przodu, 60 znaków).
 - Opis produktu przepisany do rejestru formalnego (wcześniejszy commit 406a8f2).
 - TODO jutro: pierwsze żywe crony — stock-sync 6:00, review-reminder 10:00.
+
+## 2026-08-27 (wieczór) — skill karty produktu + karta ZD421d
+- `.claude/skills/karta-produktu/SKILL.md` — pełna checklista budowy karty (dane, treść, schema, sitemapy, weryfikacja).
+- Treść kart wydzielona do `lib/device-content.tsx` (TRESC_KART per slug): opis, wersje, FAQ, spec, zdjęcie główne, rekomendowany PN; page.tsx renderuje z konfiguracji.
+- Karta ZD421d: 6 wariantów (ZD4A042/43-D0…), opis formalny (3 akapity, link do ZD421t), FAQ 5 pytań (kurierskie/bez taśmy/sterowniki/kalibracja/diody), spec z danych takmy, zdjęcia zd421d_{1,2,3}.webp; wpis w bazie; sitemap + sitemap-images. Konkurencja z 1. strony (strefadrukarek, 123drukuj, bcmarket…) to spec-dumpy — różnicowanie głosem serwisu.
+- Plakietka „najczęściej wybierana" w tabeli przepięta ze sztywnego PN na prop.

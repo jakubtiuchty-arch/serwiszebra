@@ -133,6 +133,7 @@ export default function DeviceBuyBlock({
         stany={stany}
         zaladowane={zaladowane}
         wybranyPn={wybranyPn}
+        najczesciejWybierany={rekomendowanyPn}
         przewinDoWybranego={!!wybranyPnStart}
         onWybierz={wybierz}
       />
