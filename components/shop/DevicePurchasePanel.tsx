@@ -158,7 +158,9 @@ export default function DevicePurchasePanel({
                 <span className="text-2xl font-bold text-gray-900 sm:text-3xl">{zl(netto)} zł</span>
                 <span className="text-sm text-gray-500">netto</span>
               </div>
-              <p className="text-sm text-gray-500">
+              {/* pl-[3px] — wyrównanie optyczne: cyfry w text-3xl mają większe
+                  światło z lewej niż w text-sm, bez korekty brutto wystaje */}
+              <p className="pl-[3px] text-sm text-gray-500">
                 {zl(brutto)} zł brutto
                 {!wybrany && ' — cena najtańszej wersji'}
               </p>
