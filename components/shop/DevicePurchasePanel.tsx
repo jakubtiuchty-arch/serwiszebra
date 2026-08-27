@@ -44,8 +44,6 @@ interface DevicePurchasePanelProps {
   wybranyPn?: string
   /** Numer, który kupuje większość — kotwica dla klienta bez wiedzy o wariantach */
   rekomendowanyPn?: string
-  /** Jedno zdanie pod H1 — czym ten model różni się od bliźniaczego */
-  wyroznik?: string
 }
 
 const zl = (v: number) =>
@@ -74,7 +72,6 @@ export default function DevicePurchasePanel({
   zaladowane = false,
   wybranyPn,
   rekomendowanyPn,
-  wyroznik,
 }: DevicePurchasePanelProps) {
   // Wejście z adresu wariantu (`?pn=`) ma od razu pokazywać JEGO cenę i stan,
   // a nie najtańszą wersję, której klient wcale nie wybierał
@@ -140,7 +137,6 @@ export default function DevicePurchasePanel({
       <div className="flex-1">
         <div className="rounded-xl border border-gray-200 bg-white p-4 sm:p-6">
         <h1 className="text-lg sm:text-xl font-semibold text-gray-900 mb-1 sm:mb-1.5">{name}</h1>
-        {wyroznik && <p className="mb-1.5 text-xs leading-relaxed text-gray-600">{wyroznik}</p>}
         {/* Wersja przy PN, nie przy cenie brutto — to numer katalogowy niesie
             konfigurację (dpi, łączność), cena jest tylko jej skutkiem */}
         <p className="text-xs text-gray-500 mb-4">

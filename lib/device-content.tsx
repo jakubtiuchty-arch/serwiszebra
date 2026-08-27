@@ -17,9 +17,6 @@ export interface PozycjaWersji {
 }
 
 export interface TrescKarty {
-  /** Jedno zdanie pod H1 — czym TEN model różni się od bliźniaczego, zanim
-   *  klient wejdzie w warianty (audyt: ryzyko kupna „d" zamiast „t") */
-  wyroznik: string
   /** Wersja, którą kupuje większość — kotwica cenowa i plakietka w tabeli */
   rekomendowanyPn: string
   /** Render urządzenia na sztywno — og:image, schema, primaryImageOfPage */
@@ -37,7 +34,6 @@ export interface TrescKarty {
 
 export const TRESC_KART: Record<string, TrescKarty> = {
   'zebra-zd421t': {
-    wyroznik: 'Druk termotransferowy z taśmą — trwały nadruk odporny na ścieranie, do etykiet produktowych i technicznych',
     rekomendowanyPn: 'ZD4A042-30EM00EZ',
     zdjecieGlowne: '/sklep_photo/urzadzenia/zd421t_1.webp',
     opis: [
@@ -131,7 +127,6 @@ export const TRESC_KART: Record<string, TrescKarty> = {
   },
 
   'zebra-zd421d': {
-    wyroznik: 'Druk termiczny bez taśmy — etykiety kurierskie 100 × 150 mm i oznaczenia o krótkiej lub średniej trwałości',
     rekomendowanyPn: 'ZD4A042-D0EM00EZ',
     zdjecieGlowne: '/sklep_photo/urzadzenia/zd421d_1.webp',
     opis: [
