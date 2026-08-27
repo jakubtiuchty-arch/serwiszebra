@@ -111,6 +111,21 @@ async function getDevice(slug: string): Promise<DeviceProduct | null> {
   }
 }
 
+/**
+ * Zdjęcie główne karty ustawione NA SZTYWNO per slug. Google raz wybrał sobie
+ * na miniaturę w wynikach zdjęcie modułów łączności z sekcji akcesoriów zamiast
+ * drukarki — sztywny wpis gwarantuje, że OG i schema zawsze wskazują render
+ * urządzenia, niezależnie od kolejności `image_urls` w bazie.
+ */
+const ZDJECIE_GLOWNE: Record<string, string> = {
+  'zebra-zd421t': '/sklep_photo/urzadzenia/zd421t_1.webp',
+}
+
+const zdjecieGlowne = (slug: string, imageUrls: string[] | null) => {
+  const sciezka = ZDJECIE_GLOWNE[slug] || imageUrls?.[0]
+  return sciezka ? `${SITE}${sciezka}` : undefined
+}
+
 export async function generateMetadata({
   params,
 }: {
@@ -122,7 +137,7 @@ export async function generateMetadata({
 
   const url = `${SITE}/sklep/drukarki-etykiet/${p.slug}`
   const opis = p.meta_description || p.description || undefined
-  const zdjecie = p.image_urls?.[0] ? `${SITE}${p.image_urls[0]}` : undefined
+  const zdjecie = zdjecieGlowne(p.slug, p.image_urls)
 
   return {
     title: p.meta_title || p.name,
@@ -195,7 +210,7 @@ export default async function DevicePage({
   const wybranyPn = variants.some((v) => v.pn === pnZAdresu) ? pnZAdresu : undefined
 
   const kartaUrl = `${SITE}/sklep/drukarki-etykiet/${product.slug}`
-  const zdjecie = product.image_urls?.[0] ? `${SITE}${product.image_urls[0]}` : undefined
+  const zdjecie = zdjecieGlowne(product.slug, product.image_urls)
 
   /** Każdy wariant ma własny adres, pod którym karta otwiera się z nim wybranym */
   const urlWariantu = (pn: string) => `${kartaUrl}?pn=${encodeURIComponent(pn)}`
