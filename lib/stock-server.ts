@@ -1,4 +1,4 @@
-import { createServiceClient } from '@/lib/supabase/server'
+import { createPureServiceClient } from '@/lib/supabase/server'
 
 /**
  * Ceny i stany podane serwerowo, jeszcze przed renderem.
@@ -35,7 +35,11 @@ export async function pobierzStany(pns: string[]): Promise<Map<string, StanSerwe
   if (pns.length === 0) return wynik
 
   try {
-    const supabase = await createServiceClient()
+    // PURE service role — createServiceClient z cookies wysyła token
+    // ZALOGOWANEGO użytkownika i RLS na stock_cache zwraca mu pustkę:
+    // każdy zalogowany widział „Sprawdzam cenę…" i 3-8 s czekania,
+    // podczas gdy anonimowi dostawali ceny z serwera od razu
+    const supabase = createPureServiceClient()
     const warianty = Array.from(new Set(pns.flatMap((pn) => [pn, pn.replace(/^ZB/i, '')])))
     const zapytanie = () =>
       supabase

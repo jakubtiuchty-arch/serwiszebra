@@ -60,8 +60,16 @@ export default function DeviceBuyBlock({
 
   useEffect(() => {
     let anulowane = false
+    // Stany są ZAMROŻONE między przebiegami crona — jeśli serwer podał komplet,
+    // nie odpytujemy niczego. Dociągamy wyłącznie numery, których w cache
+    // zabrakło (pierwszy klient po dodaniu karty „zamraża" je zapisem zwrotnym).
+    const brakujace = variants.filter((v) => !stanyPoczatkowe[v.pn])
+    if (brakujace.length === 0) {
+      setZaladowane(true)
+      return
+    }
     Promise.all(
-      variants.map((v) =>
+      brakujace.map((v) =>
         fetch(`/api/shop/product-stock?sku=${encodeURIComponent(v.pn)}`)
           .then((r) => r.json())
           .then((d) => ({
