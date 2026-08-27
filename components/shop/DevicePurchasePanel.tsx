@@ -137,8 +137,11 @@ export default function DevicePurchasePanel({
       <div className="flex-1">
         <div className="rounded-xl border border-gray-200 bg-white p-4 sm:p-6">
         <h1 className="text-lg sm:text-xl font-semibold text-gray-900 mb-1 sm:mb-1.5">{name}</h1>
+        {/* Wersja przy PN, nie przy cenie brutto — to numer katalogowy niesie
+            konfigurację (dpi, łączność), cena jest tylko jej skutkiem */}
         <p className="text-xs text-gray-500 mb-4">
           PN: <span className="font-mono font-medium text-gray-600">{pn}</span>
+          {wybrany && wariant?.label ? ` — wersja ${wariant.label}` : ''}
         </p>
 
         {/* Cena */}
@@ -157,9 +160,7 @@ export default function DevicePurchasePanel({
               </div>
               <p className="text-sm text-gray-500">
                 {zl(brutto)} zł brutto
-                {wybrany
-                  ? ` — wersja ${wariant?.label ?? pn}`
-                  : ' — cena najtańszej wersji'}
+                {!wybrany && ' — cena najtańszej wersji'}
               </p>
 
               {/* Sama cena „od" myli kogoś, kto potrzebuje Ethernetu albo Wi-Fi:
