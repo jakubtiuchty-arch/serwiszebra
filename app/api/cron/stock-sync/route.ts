@@ -117,6 +117,7 @@ export async function GET(request: Request) {
   let synced = 0
   let found = 0
   let errors = 0
+  let zachowane = 0
   const bledyDystrybutorow = { ingram: 0, bluestar: 0, jarltech: 0 }
   const podejrzaneCeny: string[] = []
 
@@ -153,12 +154,29 @@ export async function GET(request: Request) {
       (jtRes.status === 'fulfilled' ? jtRes.value : []).filter((x) => x.found).map((x) => [x.partNumber, x])
     )
 
-    const wiersze = paczka.map((pn) => {
+    // Paczka jest wiarygodna tylko, gdy WSZYSCY dystrybutorzy odpowiedzieli.
+    // 27.08 przebieg 8:00 trafił na padnięcie źródeł (Ingram 10× po
+    // ponowieniach) i nadpisał 100 wycenionych numerów wpisem „Brak danych"
+    // — karty przez kilka minut pokazywały wszystko jako niedostępne, aż
+    // naprawił to kolejny przebieg. Przy niewiarygodnej paczce zachowujemy
+    // poprzedni wiersz: jego last_sync się starzeje, więc po 24 h karta i tak
+    // przejdzie na ścieżkę live zamiast wiecznie ufać staremu wpisowi.
+    const paczkaWiarygodna =
+      ingRes.status === 'fulfilled' &&
+      ingRes.value.success &&
+      bsRes.status === 'fulfilled' &&
+      jtRes.status === 'fulfilled'
+
+    const wiersze = paczka.flatMap((pn) => {
       const ing = ingramMapa.get(klucz(pn))
       const bs = bsMapa.get(pn)
       const jt = jtMapa.get(pn)
 
       if (!ing && !bs && !jt) {
+        if (!paczkaWiarygodna && cache.get(pn)?.price != null) {
+          zachowane++
+          return []
+        }
         return {
           part_number: pn,
           found: false,
@@ -299,7 +317,7 @@ export async function GET(request: Request) {
 
   const czas = Math.round((Date.now() - start) / 1000)
   console.log(
-    `[stock-sync] Koniec w ${czas}s: ${synced}/${kolejka.length} zapisanych, ${found} z danymi, ${errors} błędów, powiadomienia ${powiadomienia.wyslane}/${powiadomienia.sprawdzone}`
+    `[stock-sync] Koniec w ${czas}s: ${synced}/${kolejka.length} zapisanych, ${found} z danymi, ${zachowane} zachowanych (padnięte źródła), ${errors} błędów, powiadomienia ${powiadomienia.wyslane}/${powiadomienia.sprawdzone}`
   )
 
   await supabase.from('stock_sync_log').insert({
@@ -320,6 +338,7 @@ export async function GET(request: Request) {
     errors,
     distributorErrors: bledyDystrybutorow,
     suspectPrices: podejrzaneCeny,
+    preserved: zachowane,
     stockAlerts: powiadomienia,
     elapsedSeconds: czas,
   })
