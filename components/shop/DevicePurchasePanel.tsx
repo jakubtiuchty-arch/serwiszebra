@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
-import { Loader2, ShoppingCart, Truck, RotateCcw, ShieldCheck, Phone } from 'lucide-react'
+import { Loader2, ShoppingCart, Phone } from 'lucide-react'
 import { terminDostawy } from '@/lib/delivery-date'
 import { trackPhoneClick } from '@/lib/analytics'
 import DeviceEnquiryModal from './DeviceEnquiryModal'
@@ -207,7 +207,13 @@ export default function DevicePurchasePanel({
             szybkość zamiast daty, a klient i tak musi ją sobie przeliczyć */}
         {mounted && maDane && termin && (
           <p className="mb-3 flex items-start gap-2 text-sm text-gray-700">
-            <Truck className="mt-0.5 h-4 w-4 flex-shrink-0 text-gray-400" />
+            <Image
+              src="/icons/line/dostawa.png"
+              alt=""
+              width={20}
+              height={20}
+              className="mt-0.5 h-5 w-5 flex-shrink-0"
+            />
             <span>
               Zamawiasz dziś — u Ciebie do <strong className="text-gray-900">{termin}</strong>
             </span>
@@ -229,12 +235,24 @@ export default function DevicePurchasePanel({
             szczegóły prawne w regulaminie, nie na karcie. */}
         <ul className="mt-4 grid grid-cols-3 gap-2 border-t border-gray-100 pt-4 text-center">
           <li>
-            <Truck className="mx-auto h-4 w-4 text-gray-400" />
+            <Image
+              src="/icons/line/dostawa.png"
+              alt=""
+              width={32}
+              height={32}
+              className="mx-auto h-8 w-8"
+            />
             <span className="mt-1 block text-xs font-semibold text-gray-900">Dostawa 25 zł</span>
             <span className="block text-[11px] text-gray-500">kurierem</span>
           </li>
           <li>
-            <RotateCcw className="mx-auto h-4 w-4 text-gray-400" />
+            <Image
+              src="/icons/line/zwrot.png"
+              alt=""
+              width={32}
+              height={32}
+              className="mx-auto h-8 w-8"
+            />
             <span className="mt-1 block text-xs font-semibold text-gray-900">Zwrot 14 dni</span>
             <a
               href="/regulamin#odstapienie"
@@ -244,9 +262,15 @@ export default function DevicePurchasePanel({
             </a>
           </li>
           <li>
-            <ShieldCheck className="mx-auto h-4 w-4 text-gray-400" />
+            <Image
+              src="/icons/line/gwarancja.png"
+              alt=""
+              width={32}
+              height={32}
+              className="mx-auto h-8 w-8"
+            />
             <span className="mt-1 block text-xs font-semibold text-gray-900">Gwarancja 24 mies.</span>
-            <span className="block text-[11px] text-gray-500">naprawy robimy u siebie</span>
+            <span className="block text-[11px] text-gray-500">naprawy w naszym serwisie</span>
           </li>
         </ul>
         </div>
