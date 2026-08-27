@@ -281,6 +281,23 @@ export default async function DevicePage({
                     '@type': 'DefinedRegion',
                     addressCountry: 'PL',
                   },
+                  // Termin spójny z tym, co widzi klient: magazyn PL = wysyłka
+                  // 24 h, magazyn europejski = 2-3 dni robocze w drodze
+                  deliveryTime: {
+                    '@type': 'ShippingDeliveryTime',
+                    handlingTime: {
+                      '@type': 'QuantitativeValue',
+                      minValue: 0,
+                      maxValue: 1,
+                      unitCode: 'DAY',
+                    },
+                    transitTime: {
+                      '@type': 'QuantitativeValue',
+                      minValue: stan.stockPL > 0 ? 1 : 2,
+                      maxValue: stan.stockPL > 0 ? 2 : 3,
+                      unitCode: 'DAY',
+                    },
+                  },
                 },
                 hasMerchantReturnPolicy: {
                   '@type': 'MerchantReturnPolicy',
@@ -289,6 +306,13 @@ export default async function DevicePage({
                   merchantReturnDays: 14,
                   returnMethod: 'https://schema.org/ReturnByMail',
                   returnFees: 'https://schema.org/ReturnShippingFees',
+                  // Zwrot odsyła klient na własny koszt — deklarujemy stawkę
+                  // kurierską jak przy dostawie
+                  returnShippingFeesAmount: {
+                    '@type': 'MonetaryAmount',
+                    value: '25.00',
+                    currency: 'PLN',
+                  },
                 },
               },
             }
