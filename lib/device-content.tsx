@@ -343,6 +343,106 @@ export const TRESC_KART: Record<string, TrescKarty> = {
       ['Gwarancja', '24 miesiące'],
     ],
   },
+
+  'zebra-zd220t': {
+    rekomendowanyPn: 'ZD22042-T0EG00EZ',
+    zdjecieGlowne: '/sklep_photo/urzadzenia/zd220t_1.webp',
+    opis: [
+      <>
+        Zebra ZD220t to najtańsza drukarka termotransferowa w ofercie producenta — drukuje
+        z taśmy barwiącej, więc nadruk jest odporny na ścieranie i wilgoć i nie blaknie
+        z upływem czasu. Sprawdza się przy oznaczeniach, które muszą pozostać czytelne dłużej
+        niż kilka tygodni: etykietach produktowych, magazynowych, oznaczeniach środków
+        trwałych i opisach opakowań zbiorczych. Urządzenie obsługuje również druk termiczny
+        bezpośredni, więc jednym sprzętem wydrukujesz także etykiety wysyłkowe bez taśmy.
+      </>,
+      <>
+        Drukarka pracuje w rozdzielczości 203 dpi z prędkością do 102 mm/s, a szerokość druku
+        104 mm obejmuje pełny format etykiety kurierskiej 100 × 150 mm. Obsługuje nośniki
+        o szerokości 25,4–112 mm oraz rolki o średnicy do 127 mm. Konstrukcja OpenACCESS
+        sprowadza wymianę materiału do podniesienia pokrywy, a obsługa języków ZPL II i EPL 2
+        zapewnia zgodność z szablonami etykiet przygotowanymi dla starszych drukarek Zebry.
+        Wersja z odklejakiem oddziela etykietę od podłoża automatycznie, co przyspiesza
+        ręczne naklejanie przy pakowaniu.
+      </>,
+      <>
+        Warto znać granice tego modelu, zanim trafi na stanowisko. ZD220t przyjmuje taśmy
+        o długości do 74 m na wałku pół cala — przy druku seryjnym oznacza to znacznie
+        częstszą wymianę materiału niż w drukarkach na taśmy 300-metrowe. Urządzenie
+        komunikuje się wyłącznie przez USB i nie ma gniazda na moduł sieciowy, więc Ethernetu
+        ani Wi-Fi nie da się dołożyć później. Jeżeli drukarka ma pracować w sieci, drukować
+        szybciej albo obsługiwać większe nakłady bez ciągłej wymiany taśmy, właściwszym
+        wyborem jest{' '}
+        <Link
+          href="/sklep/drukarki-etykiet/zebra-zd421t"
+          className="font-medium text-gray-900 underline"
+        >
+          Zebra ZD421t
+        </Link>
+        .
+      </>,
+    ],
+    osie: [
+      {
+        tytul: 'Wyposażenie',
+        pozycje: [
+          { termin: 'Bez odklejaka', opis: 'etykiety wychodzą na podłożu w całości' },
+          {
+            termin: 'Z odklejakiem',
+            opis: 'drukarka sama oddziela etykietę od podłoża; wygodne przy ręcznym naklejaniu na paczki',
+          },
+        ],
+      },
+    ],
+    faqNaglowek: 'Najczęstsze pytania o ZD220t',
+    faq: [
+      {
+        q: 'Czym ZD220t różni się od ZD220d?',
+        a: 'ZD220t drukuje z taśmy barwiącej, więc nadruk jest trwały i odporny na ścieranie; obsługuje przy tym również druk termiczny bez taśmy. ZD220d drukuje wyłącznie termicznie — taniej w eksploatacji, ale wydruk z czasem blaknie. Do etykiet produktowych i oznaczeń wieloletnich wybiera się wersję „t", do wysyłkowych wystarczy „d".',
+        href: '/blog/zebra-zd220-vs-zd421-vs-zt411-porownanie',
+        link: 'Porównanie ZD220, ZD421 i ZT411',
+      },
+      {
+        q: 'Jakie taśmy pasują do drukarki Zebra ZD220t?',
+        a: 'ZD220t przyjmuje taśmy na wałku pół cala o długości do 74 m i szerokości 33,8–109,2 mm — woskowe, woskowo-żywiczne i żywiczne. Taśma powinna być co najmniej tak szeroka jak etykieta, inaczej krawędzie nadruku będą niedodrukowane, a głowica pracuje wtedy bezpośrednio na etykiecie i szybciej się zużywa.',
+        href: '/blog/zebra-zd220-vs-zd421-vs-zt411-porownanie',
+        link: 'Kiedy wybrać druk termotransferowy',
+      },
+      {
+        q: 'Czy ZD220t wydrukuje etykiety kurierskie InPost, DPD i Allegro?',
+        a: 'Tak — szerokość druku 104 mm obejmuje pełny format etykiety kurierskiej 100 × 150 mm, więc nadania drukują się w skali 1:1. Do etykiet kurierskich zwykle nie zakłada się taśmy: ZD220t drukuje wtedy termicznie na etykietach termoczułych.',
+        href: '/blog/drukowanie-etykiet-kurierskich-allegro-inpost-dpd-zebra',
+        link: 'Jak drukować etykiety kurierskie na Zebrze — poradnik',
+      },
+      {
+        q: 'Jak skalibrować drukarkę Zebra ZD220t?',
+        a: 'ZD220t ma jeden przycisk FEED, więc kalibrację uruchamia się inaczej niż w serii ZD421: przy wyłączonej drukarce przytrzymaj FEED, włącz zasilanie i puść przycisk, gdy dioda STATUS mignie dwa razy. Drukarka przepuści kilka etykiet i zapamięta ich długość oraz położenie przerwy.',
+        href: '/blog/kalibracja-drukarki-zebra-poradnik-krok-po-kroku',
+        link: 'Kalibracja drukarki Zebra — poradnik krok po kroku',
+      },
+      {
+        q: 'Co oznacza kolor diody STATUS na ZD220t?',
+        a: 'ZD220t sygnalizuje stan jedną trójkolorową diodą: zielone światło ciągłe to gotowość, czerwone najczęściej brak nośnika, koniec taśmy albo otwartą pokrywę, a bursztynowe — trwającą procedurę, na przykład kalibrację.',
+        href: '/blog/diody-drukarki-zebra-wzory-migania-wszystkie-serie',
+        link: 'Diody drukarek Zebra — wzory migania wszystkich serii',
+      },
+    ],
+    spec: [
+      ['Producent', 'Zebra'],
+      ['Model', 'ZD220t'],
+      ['Technologia druku', 'Termotransferowa i termiczna bezpośrednia'],
+      ['Rozdzielczość', '203 DPI'],
+      ['Szerokość druku', '104 mm'],
+      ['Prędkość druku', 'do 102 mm/s'],
+      ['Szerokość etykiet', '25,4–112 mm'],
+      ['Taśma', 'do 74 m, szerokość 33,8–109,2 mm, wałek 0,5 cala'],
+      ['Wymiary (D×S×W)', '267 × 197 × 191 mm'],
+      ['Waga', '1,7 kg'],
+      ['Łączność', 'USB 2.0 — bez opcji rozbudowy o sieć'],
+      ['Stan', 'Nowy, oryginalny'],
+      ['Gwarancja', '24 miesiące'],
+    ],
+  },
 }
 
 export const trescKarty = (slug: string): TrescKarty | undefined => TRESC_KART[slug]

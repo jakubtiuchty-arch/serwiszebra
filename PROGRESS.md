@@ -966,3 +966,9 @@ Jutro: 6:00 stock-sync (pełna pula), 10:00 review-reminder (38 maili z serwis@s
 - `lib/device-content.tsx`: `rozdzielczosci`/`lacznosci` → elastyczne `osie[]` (ZD220d ma jedną oś: wyposażenie).
 - `DeviceVariantsTable`: kolumny adaptacyjne — pokazywane tylko te, które faktycznie różnicują warianty; gdy to za mało, dochodzi kolumna „Wersja". Szerokości liczone z wag. Analogicznie karty mobilne.
 - Sitemap + sitemap-images + SPRZEDAWANE_MODELE (most z instrukcji).
+
+## 2026-08-27 (noc, cd.) — karta ZD220t
+- Karta ZD220t: 2 warianty (ZD22042-T0EG00EZ / T1EG00EZ), najtańsza termotransferowa Zebry; opis z granicami modelu (taśma tylko 74 m na wałku 0,5" → częsta wymiana, USB bez rozbudowy) i linkiem do ZD421t.
+- FAQ pod AEO: różnica t/d, jakie taśmy pasują (74 m, 33,8–109,2 mm, wax/wax-resin/resin), kurierskie, kalibracja FEED przy starcie, diody.
+- Dane zweryfikowane u producenta i w SERP: 267 × 197 × 191 mm, 1,7 kg (inne niż ZD220d — wersja z taśmą jest większa).
+- Kafelek produktu: CTA dosunięte do dołu (mt-auto) — kafelek z jednym rzędem chipów miał przycisk wyżej.
