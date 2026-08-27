@@ -22,4 +22,13 @@
       <image:loc>https://www.serwis-zebry.pl/sklep_photo/urzadzenia/zd421d_2.webp</image:loc>
     </image:image>
   </url>
+  <url>
+    <loc>https://www.serwis-zebry.pl/sklep/drukarki-etykiet/zebra-zd220d</loc>
+    <image:image>
+      <image:loc>https://www.serwis-zebry.pl/sklep_photo/urzadzenia/zd220d_1.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.serwis-zebry.pl/sklep_photo/urzadzenia/zd220d_2.webp</image:loc>
+    </image:image>
+  </url>
 </urlset>

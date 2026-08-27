@@ -260,6 +260,7 @@ export async function generateMetadata({ params }: { params: { model: string } }
 const SPRZEDAWANE_MODELE: Record<string, string> = {
   ZD421T: 'zebra-zd421t',
   ZD421D: 'zebra-zd421d',
+  ZD220D: 'zebra-zd220d',
 }
 
 export default async function ModelPage({ params }: { params: { model: string } }) {

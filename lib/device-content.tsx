@@ -23,10 +23,10 @@ export interface TrescKarty {
   zdjecieGlowne: string
   /** Akapity „Opisu produktu" */
   opis: ReactNode[]
-  /** Karta „Rozdzielczość" w sekcji „Którą wersję wybrać" */
-  rozdzielczosci: PozycjaWersji[]
-  /** Karta „Łączność" */
-  lacznosci: PozycjaWersji[]
+  /** Osie wyboru w sekcji „Którą wersję wybrać" — zależą od modelu:
+   *  ZD421 różnicuje rozdzielczość i łączność, ZD220d tylko wyposażenie.
+   *  Każda oś to osobna karta; jedna oś zajmuje pełną szerokość. */
+  osie: { tytul: string; pozycje: PozycjaWersji[] }[]
   faqNaglowek: string
   faq: { q: string; a: string; href: string; link: string }[]
   spec: [string, string][]
@@ -63,20 +63,28 @@ export const TRESC_KART: Record<string, TrescKarty> = {
         której ZD421 jest bezpośrednim następcą.
       </>,
     ],
-    rozdzielczosci: [
+    osie: [
       {
-        termin: '203 dpi',
-        opis: 'etykiety wysyłkowe, magazynowe i kody kreskowe w typowym rozmiarze — wersja kupowana najczęściej',
+        tytul: 'Rozdzielczość',
+        pozycje: [
+          {
+            termin: '203 dpi',
+            opis: 'etykiety wysyłkowe, magazynowe i kody kreskowe w typowym rozmiarze — wersja kupowana najczęściej',
+          },
+          {
+            termin: '300 dpi',
+            opis: 'drobny druk, małe kody i kody QR na kilkunastu milimetrach; wydruk wolniejszy — do 102 mm/s',
+          },
+        ],
       },
       {
-        termin: '300 dpi',
-        opis: 'drobny druk, małe kody i kody QR na kilkunastu milimetrach; wydruk wolniejszy — do 102 mm/s',
+        tytul: 'Łączność',
+        pozycje: [
+          { termin: 'USB', opis: 'jedna drukarka przy jednym komputerze' },
+          { termin: 'Ethernet', opis: 'gdy ma z niej korzystać kilka osób w sieci' },
+          { termin: 'Wi-Fi', opis: 'gdy nie ma jak doprowadzić kabla' },
+        ],
       },
-    ],
-    lacznosci: [
-      { termin: 'USB', opis: 'jedna drukarka przy jednym komputerze' },
-      { termin: 'Ethernet', opis: 'gdy ma z niej korzystać kilka osób w sieci' },
-      { termin: 'Wi-Fi', opis: 'gdy nie ma jak doprowadzić kabla' },
     ],
     faqNaglowek: 'Najczęstsze pytania o ZD421t',
     faq: [
@@ -163,20 +171,28 @@ export const TRESC_KART: Record<string, TrescKarty> = {
         serwisu, montuje się również obcinacz i odklejak.
       </>,
     ],
-    rozdzielczosci: [
+    osie: [
       {
-        termin: '203 dpi',
-        opis: 'etykiety wysyłkowe, cenowe i kody kreskowe w typowym rozmiarze — wersja kupowana najczęściej',
+        tytul: 'Rozdzielczość',
+        pozycje: [
+          {
+            termin: '203 dpi',
+            opis: 'etykiety wysyłkowe, cenowe i kody kreskowe w typowym rozmiarze — wersja kupowana najczęściej',
+          },
+          {
+            termin: '300 dpi',
+            opis: 'drobny druk, małe kody i kody QR na kilkunastu milimetrach; wydruk wolniejszy — do 102 mm/s',
+          },
+        ],
       },
       {
-        termin: '300 dpi',
-        opis: 'drobny druk, małe kody i kody QR na kilkunastu milimetrach; wydruk wolniejszy — do 102 mm/s',
+        tytul: 'Łączność',
+        pozycje: [
+          { termin: 'USB', opis: 'jedna drukarka przy jednym komputerze' },
+          { termin: 'Ethernet', opis: 'gdy ma z niej korzystać kilka osób w sieci' },
+          { termin: 'Wi-Fi', opis: 'gdy nie ma jak doprowadzić kabla' },
+        ],
       },
-    ],
-    lacznosci: [
-      { termin: 'USB', opis: 'jedna drukarka przy jednym komputerze' },
-      { termin: 'Ethernet', opis: 'gdy ma z niej korzystać kilka osób w sieci' },
-      { termin: 'Wi-Fi', opis: 'gdy nie ma jak doprowadzić kabla' },
     ],
     faqNaglowek: 'Najczęstsze pytania o ZD421d',
     faq: [
@@ -221,6 +237,108 @@ export const TRESC_KART: Record<string, TrescKarty> = {
       ['Szerokość etykiet', '15–108 mm'],
       ['Wymiary (D×S×W)', '220,8 × 177,5 × 150,7 mm'],
       ['Łączność', 'USB, USB Host, Bluetooth LE, opcjonalnie Ethernet, RS-232 i Wi-Fi'],
+      ['Stan', 'Nowy, oryginalny'],
+      ['Gwarancja', '24 miesiące'],
+    ],
+  },
+
+  'zebra-zd220d': {
+    rekomendowanyPn: 'ZD22042-D0EG00EZ',
+    zdjecieGlowne: '/sklep_photo/urzadzenia/zd220d_1.webp',
+    opis: [
+      <>
+        Zebra ZD220d to najprostsza i najtańsza czterocalowa drukarka etykiet w ofercie Zebry,
+        pracująca wyłącznie w technologii termicznej bezpośredniej — bez taśmy barwiącej.
+        Powstała z myślą o sklepach internetowych, punktach nadań, niewielkich magazynach
+        i handlu detalicznym, gdzie liczy się jedno: wydrukować etykietę wysyłkową, kurierską
+        albo cenową, taniej i bez zbędnej konfiguracji. Jedynym materiałem eksploatacyjnym
+        jest rolka etykiet termicznych.
+      </>,
+      <>
+        Drukarka pracuje w rozdzielczości 203 dpi z prędkością do 102 mm/s, a szerokość druku
+        104 mm obejmuje pełny format etykiety kurierskiej 100 × 150 mm — nadania InPost, DPD
+        czy Allegro drukują się w skali 1:1. Obsługuje nośniki o szerokości 25,4–112 mm
+        i rolki o średnicy do 127 mm. Konstrukcja OpenACCESS sprowadza wymianę materiału do
+        podniesienia pokrywy i włożenia rolki, bez narzędzi i prowadnic. Obsługa języków
+        ZPL II i EPL 2 zapewnia zgodność z szablonami etykiet przygotowanymi dla starszych
+        drukarek Zebry, w tym GC420d i GK420d. Wersja z odklejakiem oddziela etykietę od
+        podłoża automatycznie, co przyspiesza ręczne naklejanie przy pakowaniu.
+      </>,
+      <>
+        Warto znać granice tego modelu, zanim trafi na stanowisko. ZD220d komunikuje się
+        wyłącznie przez USB — nie ma gniazda na moduł sieciowy, więc Ethernetu ani Wi-Fi nie
+        da się dołożyć później; pracuje przy jednym komputerze. Nie obsługuje też druku
+        termotransferowego, a nadruk termiczny z czasem blaknie pod wpływem światła i ciepła.
+        Jeżeli drukarka ma być współdzielona w sieci, pracować szybciej albo znakować sprzęt
+        i produkty na lata, właściwszym wyborem jest{' '}
+        <Link
+          href="/sklep/drukarki-etykiet/zebra-zd421d"
+          className="font-medium text-gray-900 underline"
+        >
+          Zebra ZD421d
+        </Link>{' '}
+        z modułami łączności lub termotransferowa ZD421t.
+      </>,
+    ],
+    osie: [
+      {
+        tytul: 'Wyposażenie',
+        pozycje: [
+          {
+            termin: 'Bez odklejaka',
+            opis: 'etykiety wychodzą na podłożu w całości — wersja kupowana najczęściej',
+          },
+          {
+            termin: 'Z odklejakiem',
+            opis: 'drukarka sama oddziela etykietę od podłoża; wygodne przy ręcznym naklejaniu na paczki',
+          },
+        ],
+      },
+    ],
+    faqNaglowek: 'Najczęstsze pytania o ZD220d',
+    faq: [
+      {
+        q: 'Czy Zebra ZD220d wydrukuje etykiety kurierskie InPost, DPD i Allegro?',
+        a: 'Tak — szerokość druku 104 mm obejmuje pełny format etykiety kurierskiej 100 × 150 mm, więc nadania drukują się w skali 1:1, bez pomniejszania. Wystarczy poprawnie ustawić rozmiar nośnika w sterowniku.',
+        href: '/blog/drukowanie-etykiet-kurierskich-allegro-inpost-dpd-zebra',
+        link: 'Jak drukować etykiety kurierskie na Zebrze — poradnik',
+      },
+      {
+        q: 'Czym ZD220d różni się od ZD421d?',
+        a: 'ZD220d ma wyłącznie USB i nie przyjmuje modułów sieciowych, drukuje do 102 mm/s i ma mniej pamięci. ZD421d osiąga 152 mm/s, pozwala dołożyć Ethernet, Wi-Fi lub RS-232 i przyjmuje więcej opcji montowanych na miejscu. ZD220d wybiera się do jednego stanowiska i niedużych nakładów, ZD421d — gdy drukarka ma pracować w sieci.',
+        href: '/blog/zebra-zd220-vs-zd421-vs-zt411-porownanie',
+        link: 'Porównanie ZD220, ZD421 i ZT411',
+      },
+      {
+        q: 'Czy ZD220d wymaga taśmy barwiącej?',
+        a: 'Nie. ZD220d drukuje termicznie bezpośrednio na etykietach termoczułych — kupuje się wyłącznie etykiety. Nadruk termiczny z czasem blaknie, więc do oznaczeń wieloletnich potrzebna jest drukarka termotransferowa.',
+        href: '/blog/zebra-zd220-vs-zd421-vs-zt411-porownanie',
+        link: 'Kiedy wybrać druk termotransferowy',
+      },
+      {
+        q: 'Jak skalibrować drukarkę Zebra ZD220d?',
+        a: 'ZD220d ma jeden przycisk FEED, więc kalibrację uruchamia się inaczej niż w serii ZD421: przy wyłączonej drukarce przytrzymaj FEED, włącz zasilanie i puść przycisk, gdy dioda STATUS mignie dwa razy. Drukarka przepuści kilka etykiet i zapamięta ich długość oraz położenie przerwy.',
+        href: '/blog/kalibracja-drukarki-zebra-poradnik-krok-po-kroku',
+        link: 'Kalibracja drukarki Zebra — poradnik krok po kroku',
+      },
+      {
+        q: 'Co oznacza kolor diody STATUS na ZD220d?',
+        a: 'ZD220d sygnalizuje stan jedną trójkolorową diodą: zielone światło ciągłe to gotowość, czerwone najczęściej brak nośnika lub otwarta pokrywa, a bursztynowe — trwającą procedurę, na przykład kalibrację.',
+        href: '/blog/diody-drukarki-zebra-wzory-migania-wszystkie-serie',
+        link: 'Diody drukarek Zebra — wzory migania wszystkich serii',
+      },
+    ],
+    spec: [
+      ['Producent', 'Zebra'],
+      ['Model', 'ZD220d'],
+      ['Technologia druku', 'Termiczna bezpośrednia — bez taśmy'],
+      ['Rozdzielczość', '203 DPI'],
+      ['Szerokość druku', '104 mm'],
+      ['Prędkość druku', 'do 102 mm/s'],
+      ['Szerokość etykiet', '25,4–112 mm'],
+      ['Wymiary (D×S×W)', '220 × 176 × 151 mm'],
+      ['Waga', '1,1 kg'],
+      ['Łączność', 'USB 2.0 — bez opcji rozbudowy o sieć'],
       ['Stan', 'Nowy, oryginalny'],
       ['Gwarancja', '24 miesiące'],
     ],

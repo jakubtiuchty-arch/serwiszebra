@@ -418,17 +418,16 @@ export default async function DevicePage({
               </h3>
               {/* Dwie osie wyboru w osobnych kartach, termin po lewej — do
                   skanowania wzrokiem, nie do czytania zdaniami */}
-              <div className="mt-3 grid gap-3 sm:grid-cols-2">
-                {[
-                  ['Rozdzielczość', tresc.rozdzielczosci],
-                  ['Łączność', tresc.lacznosci],
-                ].map(([tytul, pozycje]) => (
-                  <div key={tytul as string} className="rounded-xl border border-gray-200 p-4">
+              <div
+                className={`mt-3 grid gap-3 ${tresc.osie.length > 1 ? 'sm:grid-cols-2' : ''}`}
+              >
+                {tresc.osie.map((os) => (
+                  <div key={os.tytul} className="rounded-xl border border-gray-200 p-4">
                     <p className="text-[11px] font-semibold uppercase tracking-wide text-gray-400">
-                      {tytul as string}
+                      {os.tytul}
                     </p>
                     <dl className="mt-2.5 space-y-2.5 text-sm leading-relaxed">
-                      {(pozycje as { termin: string; opis: string }[]).map((poz) => (
+                      {os.pozycje.map((poz) => (
                         <div key={poz.termin} className="flex gap-3">
                           <dt className="w-16 flex-shrink-0 font-semibold text-gray-900">
                             {poz.termin}

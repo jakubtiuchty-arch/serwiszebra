@@ -178,6 +178,29 @@ export default function DeviceVariantsTable({
   // CSS. Atrybut, nie `id` — dwa elementy z tym samym `id` to niepoprawny HTML.
   const ZNACZNIK = 'data-wariant-wybrany'
 
+  // Kolumny zależą od modelu: ZD421 różnicuje warianty rozdzielczością
+  // i łącznością, ZD220d ma jedną rozdzielczość i samo USB — kolumna
+  // z identyczną wartością w każdym wierszu nic nie wnosi, a ukrywa
+  // prawdziwą różnicę (odklejak). Pokazujemy tylko osie, które faktycznie
+  // różnicują, a gdy to za mało do rozróżnienia — dokładamy „Wersję".
+  const roznicujeDpi = new Set(variants.map((v) => v.dpi ?? '')).size > 1
+  const roznicujeLacznosc = new Set(variants.map((v) => v.lacznosc ?? '')).size > 1
+  const paryOsi = new Set(variants.map((v) => `${v.dpi ?? ''}|${v.lacznosc ?? ''}`))
+  const pokazWersje = paryOsi.size < variants.length
+
+  /** Szerokości kolumn liczone z wag — zestaw kolumn bywa różny per model */
+  const wagi: Record<string, number> = {
+    pn: 27,
+    dpi: roznicujeDpi ? 9 : 0,
+    lacznosc: roznicujeLacznosc ? 13 : 0,
+    wersja: pokazWersje ? 20 : 0,
+    cena: 15,
+    dostepnosc: 14,
+    akcja: 22,
+  }
+  const sumaWag = Object.values(wagi).reduce((a, b) => a + b, 0)
+  const szer = (klucz: string) => `${((wagi[klucz] / sumaWag) * 100).toFixed(1)}%`
+
   const dostepne = variants.filter((v) => (stany[v.pn]?.total ?? 0) > 0)
   const niedostepne = variants.filter((v) => (stany[v.pn]?.total ?? 0) === 0)
 
@@ -370,19 +393,35 @@ export default function DeviceVariantsTable({
                 )}
               </div>
 
+              {/* Ten sam dobór wierszy co w kolumnach tabeli — bez sensu pokazywać
+                  „Ethernet: —" w modelu, który ma wyłącznie USB */}
               <dl className="mt-2 grid grid-cols-2 gap-x-3 gap-y-1 text-sm">
-                <dt className="flex items-center gap-1 text-gray-500">
-                  Rozdzielczość
-                  <Podpowiedz label="Co oznacza rozdzielczość?" tekst={WYJASNIENIE_DPI} />
-                </dt>
-                <dd className="text-right text-gray-900">{v.dpi ? `${v.dpi} dpi` : '—'}</dd>
-                <dt className="flex items-center gap-1 text-gray-500">
-                  Ethernet
-                  <Podpowiedz label="Co oznacza łączność?" tekst={WYJASNIENIE_LACZNOSC} />
-                </dt>
-                <dd className="text-right text-gray-900">{ma(v, 'Ethernet') ? 'Tak' : '—'}</dd>
-                <dt className="text-gray-500">Wi-Fi</dt>
-                <dd className="text-right text-gray-900">{ma(v, 'Wi-Fi') ? 'Tak' : '—'}</dd>
+                {roznicujeDpi && (
+                  <>
+                    <dt className="flex items-center gap-1 text-gray-500">
+                      Rozdzielczość
+                      <Podpowiedz label="Co oznacza rozdzielczość?" tekst={WYJASNIENIE_DPI} />
+                    </dt>
+                    <dd className="text-right text-gray-900">{v.dpi ? `${v.dpi} dpi` : '—'}</dd>
+                  </>
+                )}
+                {roznicujeLacznosc && (
+                  <>
+                    <dt className="flex items-center gap-1 text-gray-500">
+                      Ethernet
+                      <Podpowiedz label="Co oznacza łączność?" tekst={WYJASNIENIE_LACZNOSC} />
+                    </dt>
+                    <dd className="text-right text-gray-900">{ma(v, 'Ethernet') ? 'Tak' : '—'}</dd>
+                    <dt className="text-gray-500">Wi-Fi</dt>
+                    <dd className="text-right text-gray-900">{ma(v, 'Wi-Fi') ? 'Tak' : '—'}</dd>
+                  </>
+                )}
+                {pokazWersje && (
+                  <>
+                    <dt className="text-gray-500">Wersja</dt>
+                    <dd className="text-right text-gray-900">{v.label}</dd>
+                  </>
+                )}
                 <dt className="flex items-center gap-1 text-gray-500">
                   Magazyn
                   <Podpowiedz
@@ -421,37 +460,55 @@ export default function DeviceVariantsTable({
             <tr className="border-y border-gray-200 bg-gray-100">
               <th
                 scope="col"
-                className="w-[27%] px-3 py-2.5 text-left text-xs font-semibold text-gray-600"
+                style={{ width: szer('pn') }}
+                className="px-3 py-2.5 text-left text-xs font-semibold text-gray-600"
               >
                 Part Number
               </th>
+              {roznicujeDpi && (
+                <th
+                  scope="col"
+                  style={{ width: szer('dpi') }}
+                  className="px-2 py-2.5 text-left text-xs font-semibold text-gray-600"
+                >
+                  <span className="inline-flex items-center gap-1">
+                    DPI
+                    <Podpowiedz label="Co oznacza DPI?" tekst={WYJASNIENIE_DPI} />
+                  </span>
+                </th>
+              )}
+              {roznicujeLacznosc && (
+                <th
+                  scope="col"
+                  style={{ width: szer('lacznosc') }}
+                  className="px-2 py-2.5 text-left text-xs font-semibold text-gray-600"
+                >
+                  <span className="inline-flex items-center gap-1">
+                    Łączność
+                    <Podpowiedz label="Co oznacza łączność?" tekst={WYJASNIENIE_LACZNOSC} />
+                  </span>
+                </th>
+              )}
+              {pokazWersje && (
+                <th
+                  scope="col"
+                  style={{ width: szer('wersja') }}
+                  className="px-2 py-2.5 text-left text-xs font-semibold text-gray-600"
+                >
+                  Wersja
+                </th>
+              )}
               <th
                 scope="col"
-                className="w-[9%] px-2 py-2.5 text-left text-xs font-semibold text-gray-600"
-              >
-                <span className="inline-flex items-center gap-1">
-                  DPI
-                  <Podpowiedz label="Co oznacza DPI?" tekst={WYJASNIENIE_DPI} />
-                </span>
-              </th>
-              <th
-                scope="col"
-                className="w-[13%] px-2 py-2.5 text-left text-xs font-semibold text-gray-600"
-              >
-                <span className="inline-flex items-center gap-1">
-                  Łączność
-                  <Podpowiedz label="Co oznacza łączność?" tekst={WYJASNIENIE_LACZNOSC} />
-                </span>
-              </th>
-              <th
-                scope="col"
-                className="w-[15%] py-2.5 pl-6 pr-2 text-left text-xs font-semibold text-gray-600"
+                style={{ width: szer('cena') }}
+                className="py-2.5 pl-6 pr-2 text-left text-xs font-semibold text-gray-600"
               >
                 Cena netto
               </th>
               <th
                 scope="col"
-                className="w-[14%] py-2.5 pl-6 pr-2 text-left text-xs font-semibold text-gray-600"
+                style={{ width: szer('dostepnosc') }}
+                className="py-2.5 pl-6 pr-2 text-left text-xs font-semibold text-gray-600"
               >
                 <span className="inline-flex items-center gap-1">
                   Dostępność
@@ -463,7 +520,8 @@ export default function DeviceVariantsTable({
               </th>
               <th
                 scope="col"
-                className="w-[22%] px-3 py-2.5 text-center text-xs font-semibold text-gray-600"
+                style={{ width: szer('akcja') }}
+                className="px-3 py-2.5 text-center text-xs font-semibold text-gray-600"
               >
                 Akcja
               </th>
@@ -508,14 +566,21 @@ export default function DeviceVariantsTable({
                       </span>
                     ) : null}
                   </td>
-                  <td className="whitespace-nowrap px-2 py-3 text-gray-700">{v.dpi ?? '—'}</td>
+                  {roznicujeDpi && (
+                    <td className="whitespace-nowrap px-2 py-3 text-gray-700">{v.dpi ?? '—'}</td>
+                  )}
                   {/* Ethernet i Wi-Fi w jednej kolumnie: dwie kolumny z myślnikami
                       zajmowały więcej miejsca, niż wnosiły informacji */}
-                  <td className="whitespace-nowrap px-2 py-3 text-gray-700">
-                    {[ma(v, 'Ethernet') && 'Ethernet', ma(v, 'Wi-Fi') && 'Wi-Fi']
-                      .filter(Boolean)
-                      .join(' + ') || 'USB'}
-                  </td>
+                  {roznicujeLacznosc && (
+                    <td className="whitespace-nowrap px-2 py-3 text-gray-700">
+                      {[ma(v, 'Ethernet') && 'Ethernet', ma(v, 'Wi-Fi') && 'Wi-Fi']
+                        .filter(Boolean)
+                        .join(' + ') || 'USB'}
+                    </td>
+                  )}
+                  {pokazWersje && (
+                    <td className="px-2 py-3 text-gray-700">{v.label}</td>
+                  )}
                   <td className="whitespace-nowrap py-3 pl-6 pr-2 font-semibold text-gray-900">
                     {s ? `${zl(s.netto)} zł` : <span className="text-gray-400">…</span>}
                   </td>

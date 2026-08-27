@@ -960,3 +960,9 @@ Jutro: 6:00 stock-sync (pełna pula), 10:00 review-reminder (38 maili z serwis@s
 - Treść kart wydzielona do `lib/device-content.tsx` (TRESC_KART per slug): opis, wersje, FAQ, spec, zdjęcie główne, rekomendowany PN; page.tsx renderuje z konfiguracji.
 - Karta ZD421d: 6 wariantów (ZD4A042/43-D0…), opis formalny (3 akapity, link do ZD421t), FAQ 5 pytań (kurierskie/bez taśmy/sterowniki/kalibracja/diody), spec z danych takmy, zdjęcia zd421d_{1,2,3}.webp; wpis w bazie; sitemap + sitemap-images. Konkurencja z 1. strony (strefadrukarek, 123drukuj, bcmarket…) to spec-dumpy — różnicowanie głosem serwisu.
 - Plakietka „najczęściej wybierana" w tabeli przepięta ze sztywnego PN na prop.
+
+## 2026-08-27 (noc) — karta ZD220d + adaptacyjne kolumny wariantów
+- Karta ZD220d: 2 warianty (ZD22042-D0EG00EZ / D1EG00EZ — z odklejakiem i bez), opis z uczciwymi granicami modelu (tylko USB, brak MCS → link do ZD421d), FAQ 5 pytań (kalibracja przez FEED przy starcie — INNA niż ZD421!), spec z danych zweryfikowanych u producenta (220×176×151 mm, 1,1 kg — opis w takmie miał błędne wymiary).
+- `lib/device-content.tsx`: `rozdzielczosci`/`lacznosci` → elastyczne `osie[]` (ZD220d ma jedną oś: wyposażenie).
+- `DeviceVariantsTable`: kolumny adaptacyjne — pokazywane tylko te, które faktycznie różnicują warianty; gdy to za mało, dochodzi kolumna „Wersja". Szerokości liczone z wag. Analogicznie karty mobilne.
+- Sitemap + sitemap-images + SPRZEDAWANE_MODELE (most z instrukcji).
