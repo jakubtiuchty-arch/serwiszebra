@@ -37,12 +37,28 @@ export async function pobierzStany(pns: string[]): Promise<Map<string, StanSerwe
   try {
     const supabase = await createServiceClient()
     const warianty = Array.from(new Set(pns.flatMap((pn) => [pn, pn.replace(/^ZB/i, '')])))
-    const { data } = await supabase
-      .from('stock_cache')
-      .select(
-        'part_number, price, price_brutto, stock_pl, stock_eu, in_delivery, total_stock, availability, delivery_text, last_sync'
-      )
-      .in('part_number', warianty)
+    const zapytanie = () =>
+      supabase
+        .from('stock_cache')
+        .select(
+          'part_number, price, price_brutto, stock_pl, stock_eu, in_delivery, total_stock, availability, delivery_text, last_sync'
+        )
+        .in('part_number', warianty)
+
+    // Supabase zwraca błąd w polu `error`, nie wyjątkiem — bez tej kontroli
+    // chwilowa czkawka REST-a dawała cichą pustkę i karta rodziła się bez cen
+    // („Sprawdzam cenę…" do czasu dociągnięcia z przeglądarki). Jedno
+    // ponowienie łata pojedynczy timeout; drugi błąd z rzędu logujemy i
+    // oddajemy pustkę — klient dociągnie dane sam.
+    let { data, error } = await zapytanie()
+    if (error) {
+      console.error('[stock-server] Odczyt stock_cache nieudany, ponawiam:', error.message)
+      await new Promise((r) => setTimeout(r, 300))
+      ;({ data, error } = await zapytanie())
+      if (error) {
+        console.error('[stock-server] Ponowienie odczytu stock_cache nieudane:', error.message)
+      }
+    }
 
     for (const row of data || []) {
       if (Date.now() - Date.parse(row.last_sync) > WAZNOSC_MS) continue
