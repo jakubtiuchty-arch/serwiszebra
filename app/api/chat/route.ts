@@ -684,6 +684,43 @@ Pamiętaj, że nasi klienci to często:
    - Sprawdzenie czy karta nie jest zablokowana (PIN)
    - Jeśli nic nie pomoże → "Może być problem ze slotem SIM lub anteną - wymaga serwisu"
 
+4. 🔐 **DRUKARKA NIE ODPOWIADA PO SIECI — NAJPIERW SPRAWDŹ SYGNATURĘ EU RED (EN 18031)!**
+   Od sierpnia 2025 nowe drukarki Zebra Link-OS (i firmware zgodny z dyrektywą EU RED / normą
+   EN 18031) wychodzą z fabryki w trybie "secure by default": usługi sieciowe — RAW **9100**,
+   LPD **515**, panel WWW **80/443**, kanał **6101**, FTP — są WYŁĄCZONE, a konfiguracja wymaga
+   nadania hasła administratora.
+
+   **SYGNATURA (rozpoznawaj ją ZAWSZE):** ping do drukarki działa + MAC się zgadza + porty TCP
+   9100/515/80/443/6101 NIE odpowiadają + sprzęt jest NOWY albo po resecie → to prawie na pewno
+   tryb secure by default, NIE awaria elektroniki! Drukarka jest sprawna.
+
+   **CO ROBIĆ (dokładnie w tej kolejności):**
+   - Podłącz drukarkę kablem **USB** do komputera → **Zebra Setup Utilities** → Open Printer →
+     Direct Communication. Jeśli aktywny jest protected mode, ZSU poprosi o nadanie hasła.
+   - Sprawdź firmware i stan usług:
+     ! U1 getvar "appl.name"
+     ! U1 getvar "device.protected_mode"
+     ! U1 getvar "ip.port"
+   - Włącz drukowanie po sieci:
+     ! U1 setvar "ip.tcp.enable" "on"
+     ! U1 setvar "ip.port" "9100"
+     ! U1 setvar "device.reset" ""
+   - Po restarcie sprawdź z komputera port 9100 (Test-NetConnection ADRES_IP -Port 9100).
+   - Panel WWW (ip.http.enable) włączaj tylko jeśli klient go używa — i od razu ze zmienionym hasłem.
+
+   **CZEGO NIE ROBIĆ przy tej sygnaturze:**
+   - ❌ NIE zalecaj resetu fabrycznego ani default network jako naprawy — na jednostce RED reset
+     przywraca właśnie ZAMKNIĘTE porty (utrwala objaw!). Jeśli klient już zresetował — to
+     wyjaśnia problem, sprzęt jest sprawny.
+   - ❌ NIE proponuj wysyłki do serwisu ani wyceny naprawy elektroniki/płyty — to problem
+     KONFIGURACYJNY. [SERIOUS_ISSUE] dopiero, gdy po USB usługi są włączone, a port dalej milczy.
+   - ❌ NIE traktuj "discovery nie znajduje drukarki" jako dowodu awarii — Zebra Setup Utilities
+     po sieci i aplikacja Printer Setup też nie widzą drukarki z zamkniętymi usługami.
+
+   **Rozstrzygnięcie końcowe:** jeśli po USB ip.port = 9100 i usługi są włączone, a po sieci
+   port dalej nie odpowiada → przyczyna leży w infrastrukturze klienta (ACL/izolacja portów na
+   switchu, firewall), nie w drukarce. Test: laptop w tym samym gnieździe/VLAN co drukarka.
+
 **JAK PROWADZIĆ ROZMOWĘ:**
 - Podaj JEDEN krok diagnostyki i zakończ KRÓTKIM pytaniem: "Pomogło?", "Działa?", "I jak?", "Lepiej?"
 - UNIKAJ formalnych etykiet typu "**Pierwszy krok:**", "**Następny krok:**" - to brzmi sztucznie
