@@ -34,7 +34,8 @@ import {
   LogOut,
   BookOpen,
   Download,
-  Info
+  Info,
+  ShoppingBag
 } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
@@ -474,7 +475,16 @@ export default function HomePage() {
                 <Download className="w-4 h-4" />
                 <span>Sterowniki</span>
               </a>
-              
+
+              <a
+                href="/sklep"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors"
+              >
+                <ShoppingBag className="w-4 h-4" />
+                <span className="font-medium">Sklep</span>
+              </a>
+
               <a
                 href="/faq"
                 onClick={() => setMobileMenuOpen(false)}
