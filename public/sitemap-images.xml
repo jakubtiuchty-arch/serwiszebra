@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Mapa obrazów: jawne przypisanie zdjęcia głównego do karty produktu.
+     Google brał na miniaturę SERP zdjęcia akcesoriów (moduły, głowica),
+     bo ich nazwy zawierają „ZD421t" — ten plik wskazuje drukarkę. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://www.serwis-zebry.pl/sklep/drukarki-etykiet/zebra-zd421t</loc>
+    <image:image>
+      <image:loc>https://www.serwis-zebry.pl/sklep_photo/urzadzenia/zd421t_1.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.serwis-zebry.pl/sklep_photo/urzadzenia/zd421t_2.webp</image:loc>
+    </image:image>
+  </url>
+</urlset>

@@ -360,6 +360,27 @@ export default async function DevicePage({
     <>
       <Header currentPage="other" />
 
+      {/* Jawne zdjęcie główne strony — na karcie jest kilkanaście zdjęć
+          akcesoriów z „ZD421t" w nazwie i Google raz wybrał na miniaturę SERP
+          głowicę; primaryImageOfPage jednoznacznie wskazuje drukarkę */}
+      {zdjecie && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'WebPage',
+              '@id': kartaUrl,
+              url: kartaUrl,
+              primaryImageOfPage: {
+                '@type': 'ImageObject',
+                contentUrl: zdjecie,
+                url: zdjecie,
+              },
+            }),
+          }}
+        />
+      )}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <script

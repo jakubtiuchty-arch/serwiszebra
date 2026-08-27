@@ -62,3 +62,4 @@ Allow: /
 
 # Sitemap
 Sitemap: https://www.serwis-zebry.pl/sitemap.xml
+Sitemap: https://www.serwis-zebry.pl/sitemap-images.xml
