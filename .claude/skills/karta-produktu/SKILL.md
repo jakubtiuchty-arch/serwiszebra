@@ -77,6 +77,9 @@ oryginalny" na zielono, „Gwarancja: 24 miesiące".
 ## 5. Po dodaniu karty — checklist
 
 1. `app/sitemap.ts` — wpis karty (priority 0.9)
+1a. `app/instrukcje/[model]/page.tsx` → `SPRZEDAWANE_MODELE` — dopisać model,
+   inaczej strona instrukcji nie pokaże banera „Zobacz w sklepie" (most mocy
+   SEO z rankującej instrukcji do nowej karty!)
 2. `public/sitemap-images.xml` — zdjęcia urządzenia przypisane do adresu karty
 3. Strona klasy (biurkowe itd.) czyta produkty z bazy — kafelek pojawi się sam;
    sprawdzić chipy i cenę na kafelku
