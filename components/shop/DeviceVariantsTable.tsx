@@ -57,13 +57,16 @@ const Podpowiedz = ({
   odLewej?: boolean
 }) => (
   <span className="group/tip relative inline-flex align-middle">
+    {/* Cel dotykowy 24×24 px (WCAG 2.2 target size), kółko wizualnie zostaje 16 px */}
     <button
       type="button"
       aria-label={label}
       onClick={(e) => e.stopPropagation()}
-      className="flex h-4 w-4 items-center justify-center rounded-full border border-gray-400 text-[10px] font-semibold leading-none text-gray-500 transition hover:border-gray-600 hover:text-gray-700"
+      className="group/przycisk -m-1 flex h-6 w-6 items-center justify-center"
     >
-      ?
+      <span className="flex h-4 w-4 items-center justify-center rounded-full border border-gray-400 text-[10px] font-semibold leading-none text-gray-500 transition group-hover/przycisk:border-gray-600 group-hover/przycisk:text-gray-700">
+        ?
+      </span>
     </button>
     <span
       role="tooltip"

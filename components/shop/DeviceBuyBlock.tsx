@@ -94,17 +94,16 @@ export default function DeviceBuyBlock({
 
   const wybierz = useCallback(
     (pn: string) => {
-      // Ponowne kliknięcie w wybrany wiersz zdejmuje wybór — inaczej nie dało by
-      // się wrócić do widoku „od X zł" bez przeładowania strony
-      const nowy = pn === wybranyPn ? undefined : pn
-      setWybranyPn(nowy)
+      // Ponowne kliknięcie NIE zdejmuje wyboru — radio zmienia się przez wybór
+      // innej opcji, nie przez odznaczenie tej samej (model mentalny radia;
+      // audyt 2026-08-26). Powrót do ceny „od" daje przeładowanie bez ?pn.
+      setWybranyPn(pn)
 
       const url = new URL(window.location.href)
-      if (nowy) url.searchParams.set('pn', nowy)
-      else url.searchParams.delete('pn')
+      url.searchParams.set('pn', pn)
       window.history.replaceState(null, '', url)
     },
-    [wybranyPn]
+    []
   )
 
   return (

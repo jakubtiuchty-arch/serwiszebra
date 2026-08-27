@@ -36,12 +36,6 @@ import { Info, FileText, Download, Wrench, Phone } from 'lucide-react'
  */
 const SITE = 'https://www.serwis-zebry.pl'
 
-/** Ceny odświeża cron dwa razy dziennie — deklarujemy ważność do jutra */
-function waznoscCeny(): string {
-  const d = new Date()
-  d.setDate(d.getDate() + 1)
-  return d.toISOString().slice(0, 10)
-}
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 
@@ -227,7 +221,6 @@ export default async function DevicePage({
                 itemCondition: 'https://schema.org/NewCondition',
                 url: urlWariantu(v.pn),
                 seller: { '@type': 'Organization', name: 'TAKMA' },
-                priceValidUntil: waznoscCeny(),
                 shippingDetails: {
                   '@type': 'OfferShippingDetails',
                   shippingRate: {
