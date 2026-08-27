@@ -57,7 +57,7 @@ export default function KafelekProduktu({ p }: { p: KafelekProduktuDane }) {
           </span>
         )}
 
-        <span className="mt-3 flex items-end justify-between gap-2">
+        <span className="mb-3 mt-3 flex items-end justify-between gap-2">
           <span>
             <span className="block text-lg font-bold leading-tight text-gray-900">
               od {zl(p.netto)} zł
@@ -74,7 +74,9 @@ export default function KafelekProduktu({ p }: { p: KafelekProduktuDane }) {
           )}
         </span>
 
-        <span className="mt-3 flex min-h-[42px] items-center justify-center gap-1.5 rounded-lg bg-[#A8F000] px-4 text-sm font-semibold text-gray-900 transition group-hover:brightness-95">
+        {/* mt-auto — CTA zawsze przy dolnej krawędzi kafelka, niezależnie od
+            tego, ile rzędów zajęły chipy (ZD220d ma jeden, ZD421 dwa) */}
+        <span className="mt-auto flex min-h-[42px] items-center justify-center gap-1.5 rounded-lg bg-[#A8F000] px-4 text-sm font-semibold text-gray-900 transition group-hover:brightness-95">
           {p.liczbaWersji > 1 ? `Wybierz z ${p.liczbaWersji} wersji` : 'Zobacz więcej'}
           <ArrowRight className="h-4 w-4" />
         </span>
