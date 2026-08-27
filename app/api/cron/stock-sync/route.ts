@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
-import { createClient, type SupabaseClient } from '@supabase/supabase-js'
+import { createCronClient } from '@/lib/supabase/cron-client'
+import type { SupabaseClient } from '@supabase/supabase-js'
 import { Resend } from 'resend'
 import { budujMailSklepu, akapit, esc } from '@/lib/email/szablon-sklep'
 import { checkPriceAndAvailability } from '@/lib/ingram-micro'
@@ -62,10 +63,7 @@ export async function GET(request: Request) {
   }
 
   const start = Date.now()
-  const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!
-  )
+  const supabase = createCronClient()
 
   const wszystkiePNs = await zbierzNumeryKatalogowe(supabase)
   if (wszystkiePNs.length === 0) {

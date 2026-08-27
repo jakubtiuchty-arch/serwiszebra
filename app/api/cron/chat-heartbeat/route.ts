@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@supabase/supabase-js'
+import { createCronClient } from '@/lib/supabase/cron-client'
 import { sendEmail } from '@/lib/email/resend'
 import { runExam, loadManualNames } from '@/lib/chat-exam'
 
@@ -10,7 +10,7 @@ const HEARTBEAT_EMAIL = process.env.HEARTBEAT_EMAIL || 'jakub.tiuchty@takma.com.
 const REGRESSION_THRESHOLD = 90 // alarm gdy trafność egzaminu spadnie poniżej
 
 function getSupabase() {
-  return createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!)
+  return createCronClient()
 }
 
 function esc(t: string) {

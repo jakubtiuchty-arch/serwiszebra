@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { createCronClient } from '@/lib/supabase/cron-client'
 import { createClient as createSupabaseAdmin } from '@supabase/supabase-js'
 import { Resend } from 'resend'
 import { generateShippingNotificationEmail } from '@/lib/email/templates/shipping-notification'

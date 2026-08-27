@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { createClient } from '@supabase/supabase-js'
+import { createCronClient } from '@/lib/supabase/cron-client'
 import { Resend } from 'resend'
 import { canReceiveEmail } from '@/lib/email-utils'
 import { opisPrac } from '@/lib/review-notes'
@@ -45,10 +45,7 @@ export async function GET(request: Request) {
 
   const naSucho = new URL(request.url).searchParams.get('dry') === '1'
 
-  const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!
-  )
+  const supabase = createCronClient()
 
   const od = new Date(Date.now() - NIE_STARSZE_NIZ_DNI * 86400_000).toISOString()
   const do_ = new Date(Date.now() - PO_DNIACH * 86400_000).toISOString()

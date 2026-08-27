@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { createCronClient } from '@/lib/supabase/cron-client'
 import { createClient } from '@supabase/supabase-js'
 import { sendRentalReturnRequestEmail, sendRentalPickupAdminEmail, sendRentalProtocolReminderEmail } from '@/lib/email'
 
@@ -10,11 +11,7 @@ const REMINDER_AFTER_DAYS = 7 // po ilu dniach od wezwania idzie przypomnienie (
 const PROTOCOL_REMINDER_AFTER_DAYS = 3 // po ilu dniach bez podpisanego protokołu idzie przypomnienie (jednorazowo)
 
 function getSupabaseAdmin() {
-  return createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!,
-    { auth: { autoRefreshToken: false, persistSession: false } }
-  )
+  return createCronClient()
 }
 
 function daysAgo(days: number): string {

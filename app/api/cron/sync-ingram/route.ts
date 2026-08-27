@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { createCronClient } from '@/lib/supabase/cron-client'
 import { createClient } from '@supabase/supabase-js'
 import { syncProductsWithIngram } from '@/lib/ingram-micro'
 
@@ -27,10 +28,7 @@ export async function GET(request: Request) {
     const startTime = Date.now()
 
     // Utwórz klienta Supabase z service role key (dla cron)
-    const supabase = createClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-    )
+    const supabase = createCronClient()
 
     // Uruchom synchronizację
     const result = await syncProductsWithIngram(supabase)

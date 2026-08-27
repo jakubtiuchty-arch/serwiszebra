@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { createClient } from '@supabase/supabase-js'
+import { createCronClient } from '@/lib/supabase/cron-client'
 import { Resend } from 'resend'
 
 export const dynamic = 'force-dynamic'
@@ -18,7 +18,7 @@ function getSupabaseAdmin() {
     throw new Error('Missing Supabase environment variables')
   }
   
-  return createClient(supabaseUrl, supabaseServiceKey)
+  return createCronClient()
 }
 
 export async function GET(request: Request) {

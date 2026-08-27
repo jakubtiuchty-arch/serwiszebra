@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { createClient } from '@supabase/supabase-js'
+import { createCronClient } from '@/lib/supabase/cron-client'
 import { checkPriceAndAvailability } from '@/lib/ingram-micro'
 import { sendEmail } from '@/lib/email/resend'
 
@@ -19,10 +19,7 @@ export async function GET(request: Request) {
       }
     }
 
-    const supabase = createClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.SUPABASE_SERVICE_ROLE_KEY!
-    )
+    const supabase = createCronClient()
 
     // Pobierz wszystkie oczekujące powiadomienia
     const { data: notifications, error: fetchError } = await supabase

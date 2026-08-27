@@ -3,7 +3,7 @@
 // Uruchamiany przez Vercel CRON co 30 minut
 
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@supabase/supabase-js'
+import { createCronClient } from '@/lib/supabase/cron-client'
 import { sendPackageReceivedEmail } from '@/lib/email'
 import { generateReceiptPDF } from '@/lib/receipt-pdf-generator'
 
@@ -16,10 +16,7 @@ const BLPACZKA_API_KEY = process.env.BLPACZKA_API_KEY || ''
 
 // Funkcja do tworzenia Supabase admin client (wywoływana w runtime)
 function getSupabaseAdmin() {
-  return createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!
-  )
+  return createCronClient()
 }
 
 // Statusy BL Paczka oznaczające dostarczenie do odbiorcy
