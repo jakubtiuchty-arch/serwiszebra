@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { createClient, type SupabaseClient } from '@supabase/supabase-js'
+import { Resend } from 'resend'
 import { checkPriceAndAvailability } from '@/lib/ingram-micro'
 import { lookupStock as lookupBluestar } from '@/lib/bluestar'
 import { lookupStock as lookupJarltech } from '@/lib/jarltech'
@@ -289,9 +290,15 @@ export async function GET(request: Request) {
     }
   }
 
+  // Po zapisaniu świeżych stanów: maile „znowu dostępny" do czekających klientów
+  const powiadomienia = await wyslijPowiadomieniaDostepnosci(supabase).catch((e) => {
+    console.error('[stock-sync] Powiadomienia o dostępności nie wyszły:', e?.message || e)
+    return { sprawdzone: 0, wyslane: 0 }
+  })
+
   const czas = Math.round((Date.now() - start) / 1000)
   console.log(
-    `[stock-sync] Koniec w ${czas}s: ${synced}/${kolejka.length} zapisanych, ${found} z danymi, ${errors} błędów`
+    `[stock-sync] Koniec w ${czas}s: ${synced}/${kolejka.length} zapisanych, ${found} z danymi, ${errors} błędów, powiadomienia ${powiadomienia.wyslane}/${powiadomienia.sprawdzone}`
   )
 
   await supabase.from('stock_sync_log').insert({
@@ -312,8 +319,100 @@ export async function GET(request: Request) {
     errors,
     distributorErrors: bledyDystrybutorow,
     suspectPrices: podejrzaneCeny,
+    stockAlerts: powiadomienia,
     elapsedSeconds: czas,
   })
+}
+
+const SITE = 'https://www.serwis-zebry.pl'
+
+const zlote = (v: number) =>
+  v.toLocaleString('pl-PL', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+
+/**
+ * Maile „produkt znowu dostępny" dla zapisów z `stock_alerts`.
+ *
+ * Wpis kwalifikuje się do wysyłki, gdy jego numer ma w `stock_cache` świeży
+ * wiersz (do 24 h) z niezerowym stanem i ceną. `notified_at` znaczymy dopiero
+ * po udanej wysyłce, więc chwilowy błąd Resend nie gubi klienta — spróbujemy
+ * w następnym przebiegu.
+ */
+async function wyslijPowiadomieniaDostepnosci(supabase: SupabaseClient) {
+  const { data: alerty, error } = await supabase
+    .from('stock_alerts')
+    .select('id, email, sku, product_name, product_url')
+    .is('notified_at', null)
+
+  if (error) {
+    // Najpewniej tabela jeszcze nie istnieje — nie blokujemy synchronizacji
+    console.warn('[stock-sync] stock_alerts niedostępne:', error.message)
+    return { sprawdzone: 0, wyslane: 0 }
+  }
+  if (!alerty || alerty.length === 0) return { sprawdzone: 0, wyslane: 0 }
+
+  const warianty = Array.from(
+    new Set(alerty.flatMap((a) => [a.sku, a.sku.replace(/^ZB/i, '')]))
+  )
+  const { data: stany } = await supabase
+    .from('stock_cache')
+    .select('part_number, price, price_brutto, total_stock, delivery_text, last_sync')
+    .in('part_number', warianty)
+
+  const wgKlucza = new Map((stany || []).map((s) => [klucz(s.part_number), s]))
+  const resend = new Resend(process.env.RESEND_API_KEY)
+  let wyslane = 0
+
+  for (const alert of alerty) {
+    const stan = wgKlucza.get(klucz(alert.sku))
+    const swiezy = stan && Date.now() - Date.parse(stan.last_sync) < 24 * 60 * 60 * 1000
+    if (!swiezy || (stan.total_stock ?? 0) <= 0 || !(Number(stan.price) > 0)) continue
+
+    const nazwa = alert.product_name || alert.sku
+    const link = alert.product_url
+      ? alert.product_url.startsWith('http')
+        ? alert.product_url
+        : `${SITE}${alert.product_url}`
+      : `${SITE}/sklep`
+
+    const { error: sendError } = await resend.emails.send({
+      from: 'Sklep serwis-zebry.pl <sklep@serwis-zebry.pl>',
+      to: [alert.email],
+      replyTo: 'serwis@takma.com.pl',
+      subject: `${nazwa} — znowu dostępny`,
+      html: `
+        <div style="font-family:-apple-system,Segoe UI,Roboto,sans-serif;max-width:560px">
+          <div style="background:#0a0a0a;padding:20px 24px;border-radius:12px 12px 0 0">
+            <div style="display:inline-block;background:#A8F000;color:#0a0a0a;font-weight:700;font-size:11px;letter-spacing:.5px;padding:4px 10px;border-radius:999px">SKLEP</div>
+            <h1 style="color:#fff;font-size:19px;margin:12px 0 0">Produkt znowu dostępny</h1>
+          </div>
+          <div style="border:1px solid #e5e7eb;border-top:none;border-radius:0 0 12px 12px;padding:20px 24px;font-size:14px;color:#111827;line-height:1.6">
+            <p style="margin:0">Dzień dobry,</p>
+            <p style="margin:12px 0 0"><strong>${nazwa}</strong> (${alert.sku}) wrócił na magazyn.</p>
+            <p style="margin:12px 0 0">Cena: <strong>${zlote(Number(stan.price))} zł netto</strong>${
+              Number(stan.price_brutto) > 0 ? ` (${zlote(Number(stan.price_brutto))} zł brutto)` : ''
+            }${stan.delivery_text ? `<br>${stan.delivery_text}` : ''}</p>
+            <p style="margin:18px 0 0">
+              <a href="${link}" style="display:inline-block;background:#A8F000;color:#0a0a0a;font-weight:700;font-size:14px;padding:12px 22px;border-radius:10px;text-decoration:none">Przejdź do produktu</a>
+            </p>
+            <p style="margin:18px 0 0;color:#6b7280;font-size:12px">Stany magazynowe zmieniają się na bieżąco — przy mniejszych ilościach warto nie zwlekać. Tę wiadomość wysłaliśmy jednorazowo, bo ten adres poprosił o powiadomienie o dostępności produktu.</p>
+          </div>
+        </div>`,
+    })
+
+    if (sendError) {
+      console.error(`[stock-sync] Mail o dostępności ${alert.sku} → ${alert.email} odrzucony:`, sendError)
+      continue
+    }
+
+    await supabase
+      .from('stock_alerts')
+      .update({ notified_at: new Date().toISOString() })
+      .eq('id', alert.id)
+    wyslane++
+    console.log(`[stock-sync] Powiadomiony ${alert.email} o ${alert.sku}`)
+  }
+
+  return { sprawdzone: alerty.length, wyslane }
 }
 
 interface IngramWarehouse {
