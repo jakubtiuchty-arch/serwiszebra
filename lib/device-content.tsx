@@ -69,7 +69,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
         pozycje: [
           {
             termin: '203 dpi',
-            opis: 'etykiety wysyłkowe, magazynowe i kody kreskowe w typowym rozmiarze — wersja kupowana najczęściej',
+            opis: 'etykiety wysyłkowe, magazynowe i kody kreskowe w typowym rozmiarze',
           },
           {
             termin: '300 dpi',
@@ -177,7 +177,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
         pozycje: [
           {
             termin: '203 dpi',
-            opis: 'etykiety wysyłkowe, cenowe i kody kreskowe w typowym rozmiarze — wersja kupowana najczęściej',
+            opis: 'etykiety wysyłkowe, cenowe i kody kreskowe w typowym rozmiarze',
           },
           {
             termin: '300 dpi',
@@ -286,7 +286,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
         pozycje: [
           {
             termin: 'Bez odklejaka',
-            opis: 'etykiety wychodzą na podłożu w całości — wersja kupowana najczęściej',
+            opis: 'etykiety wychodzą na podłożu w całości',
           },
           {
             termin: 'Z odklejakiem',

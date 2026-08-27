@@ -426,10 +426,14 @@ export default async function DevicePage({
                     <p className="text-[11px] font-semibold uppercase tracking-wide text-gray-400">
                       {os.tytul}
                     </p>
-                    <dl className="mt-2.5 space-y-2.5 text-sm leading-relaxed">
+                    {/* Siatka zamiast sztywnej szerokości terminu: kolumna
+                        dopasowuje się do najdłuższego hasła w TEJ osi (dla ZD421
+                        „203 dpi", dla ZD220d „Bez odklejaka"), a wiersze i tak
+                        zostają wyrównane w pionie */}
+                    <dl className="mt-2.5 grid grid-cols-[auto_1fr] gap-x-4 gap-y-2.5 text-sm leading-relaxed">
                       {os.pozycje.map((poz) => (
-                        <div key={poz.termin} className="flex gap-3">
-                          <dt className="w-16 flex-shrink-0 font-semibold text-gray-900">
+                        <div key={poz.termin} className="contents">
+                          <dt className="self-start whitespace-nowrap font-semibold text-gray-900">
                             {poz.termin}
                           </dt>
                           <dd className="text-gray-700">{poz.opis}</dd>
