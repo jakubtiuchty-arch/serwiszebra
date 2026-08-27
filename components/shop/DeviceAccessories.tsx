@@ -206,6 +206,16 @@ export default function DeviceAccessories({
   const opcje = items.filter((p) => OPCJE.includes(p.product_type))
   const czesci = items.filter((p) => !OPCJE.includes(p.product_type)).filter(pasujeDoDpi)
 
+  // Nagłówek sekcji mówi to, co w niej naprawdę jest: ZD220d nie ma gilotyn,
+  // dyspenserów ani modułów, więc „Akcesoria" nad samymi głowicami i wałkami
+  // było myleniem klienta (i pustym nagłówkiem nad drugim nagłówkiem)
+  const naglowekSekcji =
+    opcje.length > 0 && czesci.length > 0
+      ? 'Akcesoria i części'
+      : opcje.length > 0
+        ? 'Akcesoria'
+        : 'Części eksploatacyjne'
+
   const dodaj = (p: AkcesoriumProduktu) => {
     const s = stany[p.sku]
     addItem({
@@ -323,7 +333,11 @@ export default function DeviceAccessories({
             pierwszy ? '' : 'mt-6 border-t border-gray-100 pt-5'
           }`}
         >
-          <h3 className="text-sm font-semibold text-gray-900">Części eksploatacyjne</h3>
+          {/* Nagłówek bloku tylko wtedy, gdy nie jest jedynym w sekcji —
+              inaczej powtarzałby to, co mówi już nagłówek sekcji */}
+          {!pierwszy && (
+            <h3 className="text-sm font-semibold text-gray-900">Części eksploatacyjne</h3>
+          )}
 
           {dostepneDpi.length > 1 && (
             <div
@@ -372,7 +386,7 @@ export default function DeviceAccessories({
       <h2 className="mb-3 text-sm font-semibold text-gray-900 sm:text-base">
         {kontekst === 'instrukcja'
           ? `Części i akcesoria do ${model ? `Zebry ${model}` : 'tego modelu'}`
-          : 'Akcesoria'}
+          : naglowekSekcji}
       </h2>
 
       <p aria-live="polite" className="sr-only">
@@ -396,9 +410,20 @@ export default function DeviceAccessories({
           części zużywalne będą potrzebne dopiero za rok. Na stronie instrukcji
           ma to urządzenie od dawna i zwykle coś w nim nie działa, więc głowica
           i wałek idą pierwsze. Nagłówek sekcji podąża za tą samą logiką. */}
-      {(kontekst === 'instrukcja' ? [Czesci, Akcesoria] : [Akcesoria, Czesci]).map((Blok, i) => (
-        <Blok key={i} pierwszy={i === 0} />
-      ))}
+      {(kontekst === 'instrukcja'
+        ? [
+            { Blok: Czesci, ma: czesci.length > 0 },
+            { Blok: Akcesoria, ma: opcje.length > 0 },
+          ]
+        : [
+            { Blok: Akcesoria, ma: opcje.length > 0 },
+            { Blok: Czesci, ma: czesci.length > 0 },
+          ]
+      )
+        .filter((b) => b.ma)
+        .map(({ Blok }, i) => (
+          <Blok key={i} pierwszy={i === 0} />
+        ))}
     </section>
   )
 }

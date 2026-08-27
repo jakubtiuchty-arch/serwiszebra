@@ -365,7 +365,7 @@ export default async function DevicePage({
           {[
             ['#warianty', 'Wersje i ceny'],
             ['#opis', 'Opis produktu'],
-            ['#akcesoria', 'Akcesoria'],
+            ['#akcesoria', 'Akcesoria i części'],
             ['#faq', 'Pytania'],
             ['#specyfikacja', 'Specyfikacja'],
             ['#dokumentacja', 'Dokumentacja'],
