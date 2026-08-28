@@ -185,26 +185,27 @@ export default function ContactPage() {
       </div>
 
       {/* Hero na komiksowo-wektorowej scenie warsztatu — ta sama stylistyka
-          co kafelki klas drukarek i grafiki na blogu. Scena jest ciemna, więc
-          tekst siedzi na przyciemnionym lewym pasie; prawa strona z lampą
-          i stanowiskiem zostaje czytelna. */}
-      {/* Grafika jest przycięta do pasa 3.55:1 — dokładnie tyle, ile zajmuje
+          co kafelki klas drukarek i grafiki na blogu. */}
+      {/* Grafika jest przycięta do pasa 3.4:1 — dokładnie tyle, ile zajmuje
           hero na desktopie, więc object-cover nie musi obcinać boków i cała
           scena serwisowa mieści się w niskim pasku */}
       <section className="relative flex min-h-[280px] items-center overflow-hidden bg-gray-950 sm:min-h-[340px]">
         <Image
           src="/kontakt/warsztat-hero.webp"
-          alt="Stanowisko serwisowe: otwarta drukarka etykiet, terminal mobilny ze zdjętą klapką baterii i skaner kodów w stacji, obok narzędzia precyzyjne"
+          alt="Stanowisko serwisowe: otwarta drukarka etykiet Zebra z widocznym mechanizmem, głowica termiczna w dłoniach serwisanta i narzędzia precyzyjne na macie antystatycznej"
           width={1344}
-          height={576}
+          height={395}
           priority
           className="absolute inset-0 h-full w-full object-cover object-center"
         />
-        {/* Przyciemnienie mocne tylko pod kolumną tekstu; dalej szybko puszcza,
-              żeby stanowisko serwisowe i drukarki zostały widoczne */}
-          {/* Słabsze przyciemnienie niż zwykle — scena ma być widoczna. Czytelność
-              tekstu domyka cień rzucany przez sam napis, nie ciemna płachta. */}
-          <div className="absolute inset-0 bg-gradient-to-r from-gray-950/95 via-gray-950/60 to-transparent" />
+        {/* Na desktopie przyciemnienie kończy się na 70% szerokości, czyli tuż
+              za kolumną tekstu — drukarka i stanowisko po prawej zostają w pełnym
+              świetle. Na telefonie tekst zajmuje całą szerokość, więc pas boczny
+              by nie wystarczył i przyciemniamy równomiernie.
+              Krycie i pozycje stopów tylko ze skali Tailwinda (co 5%) — wartości
+              spoza niej, np. /92 albo via-42%, nie generują klasy i gradient
+              wychodzi pusty. */}
+          <div className="absolute inset-0 bg-gray-950/60 sm:bg-transparent sm:bg-gradient-to-r sm:from-gray-950/80 sm:via-gray-950/60 sm:via-45% sm:to-transparent sm:to-70%" />
         <div className="relative mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
           <h1 className="max-w-lg text-2xl font-bold leading-tight text-white [text-shadow:0_2px_12px_rgba(0,0,0,.6)] sm:text-3xl">
             Serwis urządzeń Zebra we Wrocławiu
