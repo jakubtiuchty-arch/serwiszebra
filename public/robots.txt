@@ -8,6 +8,8 @@ Crawl-delay: 1
 
 # Zablokuj prywatne obszary
 Disallow: /api/
+Allow: /api/llm-feed
+Allow: /api/merchant-feed
 Disallow: /admin/
 Disallow: /panel/
 Disallow: /_next/
@@ -59,6 +61,9 @@ Allow: /
 
 User-agent: Applebot-Extended
 Allow: /
+
+# Feed produktowy dla modeli językowych (format OpenAI Product Feed)
+# https://www.serwis-zebry.pl/api/llm-feed
 
 # Sitemap
 Sitemap: https://www.serwis-zebry.pl/sitemap.xml

@@ -285,6 +285,17 @@ export default function DevicePurchasePanel({
             <span className="block text-[10px] text-gray-500">naprawy w naszym serwisie</span>
           </li>
         </ul>
+
+        {/* Uzasadnienie ceny. Część sprzedawców sprowadza Zebry od brokerów —
+            sprzęt z projektów wycenionych na inne rynki, tańszy, ale bez
+            wsparcia gwarancyjnego producenta w Polsce. Klient widzi wyłącznie
+            dwie liczby i nie wie, że porównuje różne rzeczy; to zdanie nazywa
+            różnicę, nie atakując nikogo. */}
+        <p className="mt-3 border-t border-gray-100 pt-3 text-[11px] leading-relaxed text-gray-500">
+          Sprzedajemy sprzęt z oficjalnej dystrybucji Zebry na rynek polski. Jako autoryzowany
+          serwis realizujemy gwarancję producenta na miejscu i na oryginalnych częściach —
+          tym samym zespołem, który zajmie się drukarką po jej zakończeniu.
+        </p>
         </div>
 
         {/* Pod ramką, nie w niej: zakup to jedna ścieżka, pytanie to druga.
