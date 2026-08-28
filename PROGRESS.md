@@ -972,3 +972,9 @@ Jutro: 6:00 stock-sync (pełna pula), 10:00 review-reminder (38 maili z serwis@s
 - FAQ pod AEO: różnica t/d, jakie taśmy pasują (74 m, 33,8–109,2 mm, wax/wax-resin/resin), kurierskie, kalibracja FEED przy starcie, diody.
 - Dane zweryfikowane u producenta i w SERP: 267 × 197 × 191 mm, 1,7 kg (inne niż ZD220d — wersja z taśmą jest większa).
 - Kafelek produktu: CTA dosunięte do dołu (mt-auto) — kafelek z jednym rzędem chipów miał przycisk wyżej.
+
+## 2026-08-28 — karta ZD230d
+- Piąta karta urządzenia: 6 wariantów na trzech osiach (łączność USB/Ethernet/Wi-Fi, wyposażenie standard/odklejak/gilotyna, obudowa czarna/biała). Tabela adaptacyjna sama dobrała kolumny: Łączność + Wersja (bez DPI — jednolite 203).
+- Dane zweryfikowane u źródła: szerokość druku 104 mm (opis w takmie mówił 108), etykiety 25,4–112 mm; wymiary POMINIĘTE — takma podaje wymiary ZD220d, sklepy inne, brak pewnego źródła.
+- Głowica P1115689: device_model poprawiony na „ZD220d / ZD230d" (potwierdzone u dystrybutorów) — wcześniej karta ZD230d nie pokazywała głowicy.
+- Link z /sterowniki podmieniony na ZD230d (zamiast ZD220t) — strona ma poz. 2 na „zebra zd421 sterowniki".

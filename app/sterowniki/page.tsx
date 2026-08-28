@@ -833,7 +833,7 @@ export default function DriversPage() {
             {[
               { slug: 'zebra-zd421t', nazwa: 'Zebra ZD421t', opis: 'termotransferowa, 203/300 dpi' },
               { slug: 'zebra-zd421d', nazwa: 'Zebra ZD421d', opis: 'termiczna, 203/300 dpi' },
-              { slug: 'zebra-zd220t', nazwa: 'Zebra ZD220t', opis: 'termotransferowa, budżetowa' },
+              { slug: 'zebra-zd230d', nazwa: 'Zebra ZD230d', opis: 'termiczna, 152 mm/s, Ethernet' },
               { slug: 'zebra-zd220d', nazwa: 'Zebra ZD220d', opis: 'termiczna, budżetowa' },
             ].map((d) => (
               <li key={d.slug}>

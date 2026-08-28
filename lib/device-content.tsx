@@ -443,6 +443,118 @@ export const TRESC_KART: Record<string, TrescKarty> = {
       ['Gwarancja', '24 miesiące'],
     ],
   },
+
+  'zebra-zd230d': {
+    rekomendowanyPn: 'ZD23042-D0EG00EZ',
+    zdjecieGlowne: '/sklep_photo/urzadzenia/zd230d_1.webp',
+    opis: [
+      <>
+        Zebra ZD230d to biurkowa drukarka etykiet pracująca w technologii termicznej
+        bezpośredniej — bez taśmy barwiącej. Jest następcą modelu ZD220d i różni się od niego
+        w dwóch rzeczach, które widać w codziennej pracy: drukuje o połowę szybciej
+        i można ją podłączyć do sieci. Sprawdza się tam, gdzie etykiet wysyłkowych,
+        kurierskich i cenowych przybywa w rytmie zamówień — w sklepach internetowych,
+        punktach nadań i magazynach.
+      </>,
+      <>
+        Drukarka pracuje w rozdzielczości 203 dpi z prędkością do 152 mm/s, więc etykieta
+        kurierska 100 × 150 mm wychodzi w niespełna sekundę. Szerokość druku 104 mm obejmuje
+        pełny format takiej etykiety, a obsługiwane nośniki mają od 25,4 do 112 mm szerokości
+        przy rolkach o średnicy do 127 mm. Konstrukcja OpenACCESS sprowadza wymianę materiału
+        do podniesienia pokrywy i włożenia rolki. Obsługa języków ZPL II i EPL 2 zapewnia
+        zgodność z szablonami etykiet przygotowanymi dla ZD220d, GK420d i GC420d, więc
+        wymiana starszej drukarki nie wymaga zmian w oprogramowaniu.
+      </>,
+      <>
+        Wyposażenie wybiera się przy zakupie, bo montuje się je fabrycznie: wersja
+        z odklejakiem sama oddziela etykietę od podłoża, a wersja z gilotyną odcina wydruk —
+        przydaje się przy przywieszkach i etykietach o zmiennej długości. Obudowa jest
+        dostępna w czerni i w bieli. Warto znać granicę modelu: łączność jest wybierana raz,
+        na etapie zamówienia, i nie da się jej później rozbudować modułem. Jeżeli
+        infrastruktura może się zmienić albo potrzebna będzie rozdzielczość 300 dpi,
+        właściwszym wyborem jest{' '}
+        <Link
+          href="/sklep/drukarki-etykiet/zebra-zd421d"
+          className="font-medium text-gray-900 underline"
+        >
+          Zebra ZD421d
+        </Link>{' '}
+        z wymiennymi modułami łączności.
+      </>,
+    ],
+    osie: [
+      {
+        tytul: 'Łączność',
+        pozycje: [
+          { termin: 'USB', opis: 'jedna drukarka przy jednym komputerze' },
+          { termin: 'Ethernet', opis: 'gdy ma z niej korzystać kilka osób w sieci' },
+          { termin: 'Wi-Fi', opis: 'z Bluetoothem, gdy nie ma jak doprowadzić kabla' },
+        ],
+      },
+      {
+        tytul: 'Wyposażenie',
+        pozycje: [
+          { termin: 'Standard', opis: 'etykiety wychodzą na podłożu w całości' },
+          {
+            termin: 'Odklejak',
+            opis: 'drukarka sama oddziela etykietę od podłoża — szybsze naklejanie na paczki',
+          },
+          {
+            termin: 'Gilotyna',
+            opis: 'odcina wydruk; do przywieszek, biletów i etykiet o zmiennej długości',
+          },
+        ],
+      },
+    ],
+    faqNaglowek: 'Najczęstsze pytania o ZD230d',
+    faq: [
+      {
+        q: 'Czym ZD230d różni się od ZD220d?',
+        a: 'ZD230d drukuje do 152 mm/s zamiast 102 mm/s, czyli o połowę szybciej, i można ją zamówić z Ethernetem albo Wi-Fi — ZD220d ma wyłącznie USB. Dochodzą też fabryczne opcje odklejaka i gilotyny, których w ZD220d nie ma. Reszta parametrów, w tym rozdzielczość 203 dpi i szerokość druku 104 mm, jest taka sama.',
+        href: '/blog/zebra-zd220-vs-zd421-vs-zt411-porownanie',
+        link: 'Porównanie biurkowych drukarek Zebra',
+      },
+      {
+        q: 'Czy Zebra ZD230d wydrukuje etykiety kurierskie InPost, DPD i Allegro?',
+        a: 'Tak — szerokość druku 104 mm obejmuje pełny format etykiety kurierskiej 100 × 150 mm, więc nadania drukują się w skali 1:1. Przy prędkości 152 mm/s pojedyncza etykieta wychodzi w niespełna sekundę.',
+        href: '/blog/drukowanie-etykiet-kurierskich-allegro-inpost-dpd-zebra',
+        link: 'Jak drukować etykiety kurierskie na Zebrze — poradnik',
+      },
+      {
+        q: 'Czym ZD230d różni się od ZD421d?',
+        a: 'Obie drukują termicznie z tą samą prędkością 152 mm/s. ZD421d pozwala jednak dołożyć moduł łączności po zakupie, ma więcej pamięci i występuje także w rozdzielczości 300 dpi. W ZD230d łączność wybiera się raz, przy zamówieniu. ZD230d jest tańsza i wystarcza, gdy potrzeby nie będą się zmieniać.',
+        href: '/sklep/drukarki-etykiet/zebra-zd421d',
+        link: 'Zobacz Zebra ZD421d',
+      },
+      {
+        q: 'Jak skalibrować drukarkę Zebra ZD230d?',
+        a: 'ZD230d ma jeden przycisk FEED, więc kalibrację uruchamia się inaczej niż w serii ZD421: przy wyłączonej drukarce przytrzymaj FEED, włącz zasilanie i puść przycisk, gdy dioda STATUS mignie dwa razy. Drukarka przepuści kilka etykiet i zapamięta ich długość oraz położenie przerwy.',
+        href: '/blog/kalibracja-drukarki-zebra-poradnik-krok-po-kroku',
+        link: 'Kalibracja drukarki Zebra — poradnik krok po kroku',
+      },
+      {
+        q: 'Czy ZD230d wymaga taśmy barwiącej?',
+        a: 'Nie. ZD230d drukuje termicznie bezpośrednio na etykietach termoczułych — kupuje się wyłącznie etykiety. Nadruk termiczny z czasem blaknie, więc do oznaczeń wieloletnich potrzebna jest drukarka termotransferowa.',
+        href: '/sklep/drukarki-etykiet/zebra-zd220t',
+        link: 'Zobacz termotransferową Zebra ZD220t',
+      },
+    ],
+    spec: [
+      ['Producent', 'Zebra'],
+      ['Model', 'ZD230d'],
+      ['Technologia druku', 'Termiczna bezpośrednia — bez taśmy'],
+      ['Rozdzielczość', '203 DPI'],
+      ['Szerokość druku', '104 mm'],
+      ['Prędkość druku', 'do 152 mm/s'],
+      ['Szerokość etykiet', '25,4–112 mm'],
+      ['Maksymalna długość etykiety', '991 mm'],
+      ['Maksymalna średnica rolki', '127 mm'],
+      ['Łączność', 'USB; opcjonalnie Ethernet albo Bluetooth z Wi-Fi'],
+      ['Opcje fabryczne', 'Odklejak, gilotyna, obudowa biała'],
+      ['Stan', 'Nowy, oryginalny'],
+      ['Gwarancja', '24 miesiące'],
+    ],
+  },
 }
 
 export const trescKarty = (slug: string): TrescKarty | undefined => TRESC_KART[slug]
