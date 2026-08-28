@@ -1,7 +1,8 @@
 'use client'
 
 import { useEffect, useId, useRef, useState } from 'react'
-import { ShoppingCart, Check, ChevronDown, ChevronUp } from 'lucide-react'
+import { ShoppingCart, Check } from 'lucide-react'
+import PowiadomODostepnosci from './PowiadomODostepnosci'
 import { useCartStore } from '@/lib/cart-store'
 import type { DeviceVariant } from './DevicePurchasePanel'
 import type { StanWariantu } from './DevicePurchasePanel'
@@ -171,7 +172,6 @@ export default function DeviceVariantsTable({
 }: Props) {
   const addItem = useCartStore((s) => s.addItem)
   const loading = !zaladowane && Object.keys(stany).length === 0
-  const [pokazNiedostepne, setPokazNiedostepne] = useState(false)
   const [dodane, setDodane] = useState<string | null>(null)
   // Znacznik zamiast refa: wyróżniony wariant istnieje w obu układach naraz
   // (karta na telefonie, wiersz na desktopie), a jeden z nich jest ukryty przez
@@ -201,22 +201,15 @@ export default function DeviceVariantsTable({
   const sumaWag = Object.values(wagi).reduce((a, b) => a + b, 0)
   const szer = (klucz: string) => `${((wagi[klucz] / sumaWag) * 100).toFixed(1)}%`
 
-  const dostepne = variants.filter((v) => (stany[v.pn]?.total ?? 0) > 0)
-  const niedostepne = variants.filter((v) => (stany[v.pn]?.total ?? 0) === 0)
-
-  // Wariant wskazany w adresie pokazujemy ZAWSZE, także gdy nie ma go na stanie.
-  // Klient wszedł po konkretny numer katalogowy — schowanie go pod rozwijaczem
-  // „pokaż wersje na zamówienie" wygląda jak brak takiej wersji w ofercie.
-  const wybranyWariant = variants.find((v) => v.pn === wybranyPn)
-  const podstawa = loading ? variants : [...dostepne, ...(pokazNiedostepne ? niedostepne : [])]
-  const doPokazania =
-    wybranyWariant && !podstawa.includes(wybranyWariant)
-      ? [wybranyWariant, ...podstawa]
-      : podstawa
-
-  // Rozwijacz dotyczy niedostępnych POZA tym przypiętym z adresu — inaczej po
-  // rozwinięciu znikałby przycisk i nie dało się listy zwinąć z powrotem
-  const niedostepneDoRozwiniecia = niedostepne.filter((v) => v !== wybranyWariant)
+  // WSZYSTKIE warianty są widoczne — także te bez stanu magazynowego.
+  // Wcześniej wersje bez stanu chowaliśmy pod rozwijaczem „pokaż wersje na
+  // zamówienie" i wychodziło z tego najgorsze możliwe zachowanie: u nas bez
+  // stanu są akurat WSZYSTKIE wersje Wi-Fi, więc klient szukający Wi-Fi nie
+  // widział jej na liście. Baymard: przy niedostępnym wariancie bez widocznej
+  // alternatywy 30% użytkowników porzuca sklep — niedostępne pokazuje się
+  // wyszarzone, nigdy nie ukrywa, bo ukrycie nie pozwala odróżnić „nie ma
+  // w ofercie" od „nie znalazłem".
+  const doPokazania = variants
 
   // Wejście z adresu wariantu ma od razu pokazać, o który numer chodzi.
   // Po kliknięciu nie przewijamy — klient sam wie, gdzie kliknął.
@@ -264,9 +257,16 @@ export default function DeviceVariantsTable({
           EU: {s.stockEU}
         </span>
       )
-    // Po scaleniu kolumn „Magazyn" i „Status" to jedno miejsce musi powiedzieć
-    // też, że wersji nie ma na stanie — sam myślnik tego nie mówi
-    return <span className="text-gray-500">Na zamówienie</span>
+    // Wariant istnieje w ofercie, tylko nie ma go teraz w magazynach
+    // dystrybutorów — mówimy to wprost i różnicujemy od wersji dostępnych.
+    // (Gdyby kiedyś doszła kombinacja NIEISTNIEJĄCA w danym modelu, jej miejsce
+    // jest w osobnym komunikacie, nie tutaj.)
+    return (
+      <span className="flex items-center gap-1.5 text-gray-500">
+        <span className="h-2 w-2 rounded-full border border-gray-400" />
+        Na zamówienie
+      </span>
+    )
   }
 
   const Status = ({ s }: { s?: StanWariantu }) =>
@@ -282,10 +282,20 @@ export default function DeviceVariantsTable({
       </span>
     )
 
-  /** Cel dotykowy 44 px — minimum WCAG to 24 px, ale to za mało na wygodę kciuka */
-  const PrzyciskKoszyka = ({ v, pelny }: { v: DeviceVariant; pelny?: boolean }) => {
+  /** Cel dotykowy 44 px — minimum WCAG to 24 px, ale to za mało na wygodę kciuka.
+   *  Wariant bez stanu NIE dostaje wyłączonego koszyka (ślepy zaułek), tylko
+   *  zapis na powiadomienie — to samo rozwiązanie co przy akcesoriach. */
+  const PrzyciskWariantu = ({ v, pelny }: { v: DeviceVariant; pelny?: boolean }) => {
     const s = stany[v.pn]
-    const jest = (s?.total ?? 0) > 0
+    if (s && s.total === 0) {
+      return (
+        <PowiadomODostepnosci
+          sku={v.pn}
+          nazwa={`${name} — ${v.label}`}
+          url={`/sklep/drukarki-etykiet/${slug}?pn=${encodeURIComponent(v.pn)}`}
+        />
+      )
+    }
     return (
       <button
         type="button"
@@ -293,7 +303,7 @@ export default function DeviceVariantsTable({
           e.stopPropagation()
           dodaj(v)
         }}
-        disabled={!s || !jest}
+        disabled={!s}
         aria-label={`Dodaj ${name} ${v.pn} do koszyka`}
         className={`inline-flex min-h-[44px] items-center justify-center gap-1.5 rounded-lg bg-[#A8F000] px-4 text-sm font-semibold text-gray-900 transition hover:bg-[#96D800] disabled:cursor-not-allowed disabled:opacity-40 ${
           pelny ? 'w-full' : ''
@@ -314,27 +324,6 @@ export default function DeviceVariantsTable({
     )
   }
 
-  const RozwinNiedostepne = () =>
-    !loading && niedostepneDoRozwiniecia.length > 0 ? (
-      <button
-        type="button"
-        onClick={() => setPokazNiedostepne((v) => !v)}
-        className="flex min-h-[44px] w-full items-center justify-center gap-2 border-t border-gray-100 bg-gray-50 text-sm text-gray-600 transition hover:bg-gray-100"
-      >
-        {pokazNiedostepne ? (
-          <>
-            <ChevronUp className="h-4 w-4" />
-            Ukryj wersje na zamówienie
-          </>
-        ) : (
-          <>
-            <ChevronDown className="h-4 w-4" />
-            Pokaż wersje na zamówienie ({niedostepneDoRozwiniecia.length})
-          </>
-        )}
-      </button>
-    ) : null
-
   return (
     <section
       id="warianty"
@@ -346,7 +335,9 @@ export default function DeviceVariantsTable({
         </h2>
         {onWybierz && (
           <p className="mt-1 text-sm text-gray-600">
-            Kliknij wersję, żeby zobaczyć jej cenę i termin na górze strony.
+            Kliknij wersję, żeby zobaczyć jej cenę i termin na górze strony. Wersje bez
+            stanu magazynowego sprowadzamy na zamówienie — zostaw adres, a napiszemy,
+            gdy wrócą.
           </p>
         )}
       </div>
@@ -367,7 +358,7 @@ export default function DeviceVariantsTable({
               onClick={() => onWybierz?.(v.pn)}
               className={`cursor-pointer rounded-xl border p-3 ${
                 wyrozniony ? 'border-blue-300 bg-blue-50/70' : 'border-gray-200'
-              }`}
+              } ${s && s.total === 0 ? 'bg-gray-50/70' : ''}`}
             >
               <div className="flex flex-wrap items-center gap-2">
                 <input
@@ -435,14 +426,22 @@ export default function DeviceVariantsTable({
 
               <div className="mt-3 flex items-baseline justify-between border-t border-gray-100 pt-3">
                 <span className="text-lg font-bold text-gray-900">
-                  {s ? `${zl(s.netto)} zł` : '…'}
-                  <span className="ml-1 text-xs font-normal text-gray-500">netto</span>
+                  {!s ? (
+                    '…'
+                  ) : s.netto > 0 ? (
+                    <>
+                      {zl(s.netto)} zł
+                      <span className="ml-1 text-xs font-normal text-gray-500">netto</span>
+                    </>
+                  ) : (
+                    <span className="text-sm font-normal text-gray-500">wycena indywidualna</span>
+                  )}
                 </span>
                 <Status s={s} />
               </div>
 
               <div className="mt-3">
-                <PrzyciskKoszyka v={v} pelny />
+                <PrzyciskWariantu v={v} pelny />
               </div>
             </li>
           )
@@ -537,7 +536,7 @@ export default function DeviceVariantsTable({
                   onClick={() => onWybierz?.(v.pn)}
                   className={`cursor-pointer border-b border-gray-100 last:border-0 hover:bg-gray-50 ${
                     wyrozniony ? 'bg-blue-50/70' : ''
-                  }`}
+                  } ${s && s.total === 0 ? 'text-gray-500' : ''}`}
                 >
                   <td className="px-3 py-3">
                     <span className="flex items-center whitespace-nowrap font-mono text-sm font-semibold text-gray-900">
@@ -580,15 +579,24 @@ export default function DeviceVariantsTable({
                   {pokazWersje && (
                     <td className="px-2 py-3 text-gray-700">{v.label}</td>
                   )}
+                  {/* Brak ceny ≠ cena zero: numer, którego nie zna żaden
+                      dystrybutor, ma w cache price=null — „0,00 zł" wyglądało
+                      jak darmowa drukarka */}
                   <td className="whitespace-nowrap py-3 pl-6 pr-2 font-semibold text-gray-900">
-                    {s ? `${zl(s.netto)} zł` : <span className="text-gray-400">…</span>}
+                    {!s ? (
+                      <span className="text-gray-400">…</span>
+                    ) : s.netto > 0 ? (
+                      `${zl(s.netto)} zł`
+                    ) : (
+                      <span className="font-normal text-gray-500">wycena indywidualna</span>
+                    )}
                   </td>
                   {/* Stan i status to była ta sama informacja w dwóch kolumnach */}
                   <td className="whitespace-nowrap py-3 pl-6 pr-2 text-gray-600">
                     <Magazyn s={s} />
                   </td>
                   <td className="whitespace-nowrap px-3 py-3 text-center">
-                    <PrzyciskKoszyka v={v} />
+                    <PrzyciskWariantu v={v} />
                   </td>
                 </tr>
               )
@@ -597,18 +605,6 @@ export default function DeviceVariantsTable({
         </table>
       </div>
 
-      <RozwinNiedostepne />
-
-      {/* Wariant na zamówienie nie może kończyć ścieżki — dajemy dalszy krok */}
-      {!loading && niedostepne.length > 0 && pokazNiedostepne && (
-        <p className="border-t border-gray-100 bg-gray-50 px-4 py-3 text-sm text-gray-600">
-          Wersje bez stanu magazynowego sprowadzamy na zamówienie.{' '}
-          <a href="/kontakt" className="font-medium text-gray-900 underline">
-            Napisz do nas
-          </a>{' '}
-          — sprawdzimy u dystrybutora termin i potwierdzimy cenę.
-        </p>
-      )}
     </section>
   )
 }
