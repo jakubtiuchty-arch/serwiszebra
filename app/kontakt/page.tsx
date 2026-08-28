@@ -184,28 +184,26 @@ export default function ContactPage() {
         </div>
       </div>
 
-      {/* Hero: zdjęcie warsztatu zamiast gradientu i rozmytych kul. Scena jest
-          prawdziwą treścią — pokazuje, kto odbierze sprzęt: technik przy
-          głowicy drukującej, nie stockowy „konsultant z headsetem". */}
-      <section className="relative overflow-hidden bg-gray-900">
+      {/* Hero na zdjęciu warsztatu. Scena jest jasna, więc tekst jest ciemny
+          na rozjaśnionym lewym pasie — odwrotnie niż typowy ciemny hero,
+          i bez przyciemniania obrazu do nieczytelności. */}
+      <section className="relative overflow-hidden bg-gray-100">
         <Image
           src="/kontakt/warsztat-hero.webp"
-          alt="Stanowisko serwisowe: technik ogląda głowicę drukującą przy otwartej drukarce etykiet"
+          alt="Warsztat serwisowy: drukarki etykiet na stanowiskach, regały z częściami, technicy przy pracy"
           width={1344}
           height={576}
           priority
           className="absolute inset-0 h-full w-full object-cover"
         />
-        {/* Przyciemnienie tylko po lewej, pod tekstem — reszta sceny zostaje
-              czytelna, bo to ona niesie treść */}
-          <div className="absolute inset-0 bg-gradient-to-r from-gray-950 via-gray-950/75 to-gray-950/10" />
-        <div className="relative mx-auto max-w-5xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8">
-          <h1 className="max-w-xl text-2xl font-bold leading-tight text-white sm:text-4xl">
-            Piszesz do techników, nie do infolinii
+        <div className="absolute inset-0 bg-gradient-to-r from-white via-white/92 to-white/10 sm:to-transparent" />
+        <div className="relative mx-auto max-w-5xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
+          <h1 className="max-w-lg text-2xl font-bold leading-tight text-gray-900 sm:text-4xl">
+            Serwis urządzeń Zebra we Wrocławiu
           </h1>
-          <p className="mt-4 max-w-lg text-sm leading-relaxed text-gray-300 sm:text-base">
-            Zgłoszenia czyta ten sam zespół, który potem otwiera sprzęt na stole. Napisz, co
-            się dzieje z urządzeniem — odpiszemy, co da się zrobić i ile to potrwa.
+          <p className="mt-4 max-w-md text-sm leading-relaxed text-gray-700 sm:text-base">
+            Kurier odbiera sprzęt z dowolnego adresu w Polsce. Diagnozę wykonujemy w 24–48
+            godzin i podajemy koszt przed rozpoczęciem naprawy.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <a
@@ -217,9 +215,9 @@ export default function ContactPage() {
             </a>
             <a
               href="#formularz"
-              className="inline-flex min-h-[48px] items-center gap-2 rounded-lg border border-white/25 px-5 text-sm font-semibold text-white transition hover:bg-white/10"
+              className="inline-flex min-h-[48px] items-center gap-2 rounded-lg border border-gray-400 bg-white/80 px-5 text-sm font-semibold text-gray-900 transition hover:border-gray-600"
             >
-              Opisz problem
+              Zgłoś sprzęt
             </a>
           </div>
         </div>
