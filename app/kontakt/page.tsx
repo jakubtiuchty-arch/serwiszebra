@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import Header from '@/components/Header'
 import { 
   Phone, 
@@ -14,7 +15,6 @@ import {
   CheckCircle2,
   AlertCircle,
   ExternalLink,
-  MessageSquare,
   ChevronRight
 } from 'lucide-react'
 import { trackPhoneClick, trackEmailClick, trackFormSubmit } from '@/lib/analytics'
@@ -184,34 +184,44 @@ export default function ContactPage() {
         </div>
       </div>
 
-      {/* Hero - jak w O nas */}
-      <section className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 py-10 sm:py-16 md:py-20 overflow-hidden">
-        {/* Tekstura tła - ukryta na mobile */}
-        <div className="absolute inset-0 opacity-10 hidden sm:block">
-          <div className="absolute top-0 left-[15%] w-px h-full bg-gradient-to-b from-white via-white to-transparent"></div>
-          <div className="absolute top-0 left-[35%] w-px h-full bg-gradient-to-b from-transparent via-white to-transparent"></div>
-          <div className="absolute top-0 right-[25%] w-px h-full bg-gradient-to-b from-white via-white to-transparent"></div>
-          <div className="absolute top-0 right-[10%] w-px h-full bg-gradient-to-b from-transparent via-white to-transparent"></div>
-        </div>
-
-        {/* Akcentujące kształty */}
-        <div className="absolute top-10 left-0 sm:left-10 w-48 sm:w-72 h-48 sm:h-72 bg-blue-500/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-5 right-0 sm:right-10 w-64 sm:w-96 h-64 sm:h-96 bg-indigo-500/10 rounded-full blur-3xl"></div>
-
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 mb-4 sm:mb-6">
-            <MessageSquare className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-blue-400" />
-            <span className="text-xs sm:text-sm font-medium text-white/90">Jesteśmy do Twojej dyspozycji</span>
-          </div>
-          
-          <h1 className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-white mb-3 sm:mb-4 leading-tight">
-            Skontaktuj się z nami
+      {/* Hero: zdjęcie warsztatu zamiast gradientu i rozmytych kul. Scena jest
+          prawdziwą treścią — pokazuje, kto odbierze sprzęt: technik przy
+          głowicy drukującej, nie stockowy „konsultant z headsetem". */}
+      <section className="relative overflow-hidden bg-gray-900">
+        <Image
+          src="/kontakt/warsztat-hero.webp"
+          alt="Stanowisko serwisowe: technik ogląda głowicę drukującą przy otwartej drukarce etykiet"
+          width={1344}
+          height={576}
+          priority
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        {/* Przyciemnienie tylko po lewej, pod tekstem — reszta sceny zostaje
+              czytelna, bo to ona niesie treść */}
+          <div className="absolute inset-0 bg-gradient-to-r from-gray-950 via-gray-950/75 to-gray-950/10" />
+        <div className="relative mx-auto max-w-5xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8">
+          <h1 className="max-w-xl text-2xl font-bold leading-tight text-white sm:text-4xl">
+            Piszesz do techników, nie do infolinii
           </h1>
-          
-          <p className="text-xs sm:text-base md:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed px-2">
-            Masz pytania dotyczące serwisu, naprawy lub współpracy?<br className="hidden sm:block" />
-            Zadzwoń, napisz lub odwiedź nas osobiście.
+          <p className="mt-4 max-w-lg text-sm leading-relaxed text-gray-300 sm:text-base">
+            Zgłoszenia czyta ten sam zespół, który potem otwiera sprzęt na stole. Napisz, co
+            się dzieje z urządzeniem — odpiszemy, co da się zrobić i ile to potrwa.
           </p>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <a
+              href="tel:+48601619898"
+              onClick={() => trackPhoneClick('kontakt_hero')}
+              className="inline-flex min-h-[48px] items-center gap-2 rounded-lg bg-[#A8F000] px-5 text-sm font-bold text-gray-950 transition hover:brightness-95"
+            >
+              601 619 898
+            </a>
+            <a
+              href="#formularz"
+              className="inline-flex min-h-[48px] items-center gap-2 rounded-lg border border-white/25 px-5 text-sm font-semibold text-white transition hover:bg-white/10"
+            >
+              Opisz problem
+            </a>
+          </div>
         </div>
       </section>
 
@@ -219,44 +229,55 @@ export default function ContactPage() {
       <section className="py-6 sm:py-10">
         <div className="max-w-5xl mx-auto px-4">
           
-          {/* Szybki kontakt - karty na mobile w rzędzie */}
-          <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-6">
-            <a
-              href="tel:+48601619898"
-              onClick={() => trackPhoneClick('kontakt_page')}
-              className="bg-white rounded-xl p-3 sm:p-4 shadow-sm border border-gray-200 hover:border-green-300 hover:shadow-md transition-all text-center group"
-            >
-              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-green-100 rounded-xl flex items-center justify-center mx-auto mb-2 group-hover:bg-green-200 transition-colors">
-                <Phone className="w-5 h-5 sm:w-6 sm:h-6 text-green-600" />
-              </div>
-              <div className="text-xs sm:text-sm font-semibold text-gray-900">Zadzwoń</div>
-              <div className="text-[10px] sm:text-xs text-gray-500 mt-0.5 hidden sm:block">+48 601 619 898</div>
-            </a>
-
-            <a
-              href="mailto:serwis@takma.com.pl"
-              onClick={() => trackEmailClick('kontakt_page')}
-              className="bg-white rounded-xl p-3 sm:p-4 shadow-sm border border-gray-200 hover:border-blue-300 hover:shadow-md transition-all text-center group"
-            >
-              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 rounded-xl flex items-center justify-center mx-auto mb-2 group-hover:bg-blue-200 transition-colors">
-                <Mail className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
-              </div>
-              <div className="text-xs sm:text-sm font-semibold text-gray-900">Email</div>
-              <div className="text-[10px] sm:text-xs text-gray-500 mt-0.5 hidden sm:block">serwis@takma.com.pl</div>
-            </a>
-
-            <a
-              href="https://maps.google.com/?q=Poświęcka+1a+51-128+Wrocław"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-white rounded-xl p-3 sm:p-4 shadow-sm border border-gray-200 hover:border-orange-300 hover:shadow-md transition-all text-center group"
-            >
-              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-orange-100 rounded-xl flex items-center justify-center mx-auto mb-2 group-hover:bg-orange-200 transition-colors">
-                <MapPin className="w-5 h-5 sm:w-6 sm:h-6 text-orange-600" />
-              </div>
-              <div className="text-xs sm:text-sm font-semibold text-gray-900">Adres</div>
-              <div className="text-[10px] sm:text-xs text-gray-500 mt-0.5 hidden sm:block">Wrocław</div>
-            </a>
+          {/* Trzy drogi kontaktu. Bez zielono-niebiesko-pomarańczowej tęczy
+              ikon — jedna stylistyka, a różnicę niesie treść: przy każdej
+              drodze stoi konkret (numer, adres, godziny), nie sama nazwa. */}
+          <div className="mb-6 grid gap-3 sm:grid-cols-3">
+            {[
+              {
+                ikona: '/icons/line/telefon.png',
+                tytul: 'Telefon',
+                wartosc: '601 619 898',
+                pod: 'poniedziałek–piątek, 7:30–15:30',
+                href: 'tel:+48601619898',
+                onClick: () => trackPhoneClick('kontakt_karty'),
+              },
+              {
+                ikona: '/icons/line/mail.png',
+                tytul: 'E-mail',
+                wartosc: 'serwis@takma.com.pl',
+                pod: 'odpisujemy zwykle tego samego dnia',
+                href: 'mailto:serwis@takma.com.pl',
+                onClick: () => trackEmailClick('kontakt_karty'),
+              },
+              {
+                ikona: '/icons/line/adres.png',
+                tytul: 'Serwis',
+                wartosc: 'Poświęcka 1a, Wrocław',
+                pod: 'sprzęt odbiera kurier z całej Polski',
+                href: 'https://maps.google.com/?q=Poświęcka+1a+51-128+Wrocław',
+                zewnetrzny: true,
+              },
+            ].map((k) => (
+              <a
+                key={k.tytul}
+                href={k.href}
+                onClick={k.onClick}
+                {...(k.zewnetrzny ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                className="flex items-start gap-3 rounded-xl border border-gray-200 bg-white p-4 transition hover:border-gray-400"
+              >
+                <Image src={k.ikona} alt="" width={28} height={28} className="mt-0.5 h-7 w-7 flex-shrink-0" />
+                <span className="min-w-0">
+                  <span className="block text-[11px] font-semibold uppercase tracking-wide text-gray-400">
+                    {k.tytul}
+                  </span>
+                  <span className="mt-0.5 block truncate text-sm font-semibold text-gray-900">
+                    {k.wartosc}
+                  </span>
+                  <span className="mt-0.5 block text-xs leading-relaxed text-gray-500">{k.pod}</span>
+                </span>
+              </a>
+            ))}
           </div>
 
           {/* Formularz + Sidebar */}
@@ -266,7 +287,7 @@ export default function ContactPage() {
             <div className="lg:col-span-2">
               <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-4 sm:p-6">
                 <div className="flex items-center gap-2 mb-4 sm:mb-5">
-                  <Mail className="w-5 h-5 text-blue-600" />
+                  <Image src="/icons/line/mail.png" alt="" width={22} height={22} className="h-[22px] w-[22px]" />
                   <h2 className="text-base sm:text-lg font-bold text-gray-900">Napisz do nas</h2>
                 </div>
 
@@ -374,7 +395,7 @@ export default function ContactPage() {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full sm:w-auto px-6 py-2.5 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 disabled:opacity-50 transition-all flex items-center justify-center gap-2 text-sm"
+                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#A8F000] px-6 py-3 text-sm font-bold text-gray-950 transition hover:brightness-95 disabled:opacity-50 sm:w-auto"
                   >
                     {isSubmitting ? (
                       <>
@@ -406,7 +427,7 @@ export default function ContactPage() {
                       key={idx}
                       className={`px-2 py-1 rounded-lg text-xs ${
                         idx === dayIndex 
-                          ? 'bg-blue-100 text-blue-700 font-semibold' 
+                          ? 'bg-[#A8F000]/25 text-gray-900 font-semibold' 
                           : item.hours === '—'
                             ? 'bg-gray-100 text-gray-400'
                             : 'bg-gray-50 text-gray-600'
@@ -435,34 +456,65 @@ export default function ContactPage() {
             </div>
           </div>
 
-          {/* Sekcja informacyjna - SEO content */}
-          <div className="mt-6 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 sm:p-8 border border-blue-100">
-            <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-4">
-              Autoryzowany serwis urządzeń Zebra – dlaczego warto się z nami skontaktować?
-            </h2>
-            <div className="prose prose-sm max-w-none text-gray-700 space-y-4">
-              <p>
-                <strong>TAKMA</strong> to <strong>autoryzowany serwis Zebra Technologies</strong> z ponad 25-letnim doświadczeniem 
-                w naprawie drukarek etykiet, terminali mobilnych, skanerów kodów kreskowych i tabletów przemysłowych. 
-                Jako <strong>Premier Partner Zebra</strong> posiadamy bezpośredni dostęp do oryginalnych części zamiennych, 
-                dokumentacji technicznej i szkoleń producenta.
+          {/* Zamiast „dlaczego warto się z nami skontaktować" i akapitów
+              z pogrubieniem co drugie słowo — to, czego klient naprawdę nie
+              wie: co się stanie po wysłaniu wiadomości i ile to potrwa.
+              Usunięte stąd: obietnica 12 miesięcy gwarancji na naprawę (nie
+              dajemy takiej) i zdanie o fakturach VAT (oczywiste w B2B). */}
+          <div className="mt-6 rounded-2xl border border-gray-200 bg-white p-5 sm:p-7">
+            <h2 className="text-lg font-bold text-gray-900 sm:text-xl">Co się dzieje po zgłoszeniu</h2>
+            <ol className="mt-4 grid list-none gap-4 p-0 sm:grid-cols-3">
+              {[
+                {
+                  krok: 'Zgłoszenie',
+                  tresc:
+                    'Opisujesz objaw i model. Odpisujemy z pytaniami, jeśli czegoś brakuje, albo od razu z terminem odbioru.',
+                },
+                {
+                  krok: 'Odbiór i diagnoza',
+                  tresc:
+                    'Kurier odbiera sprzęt spod wskazanego adresu w całej Polsce. Diagnozę robimy w 24–48 godzin i podajemy koszt przed naprawą.',
+                },
+                {
+                  krok: 'Naprawa',
+                  tresc:
+                    'Po akceptacji wyceny naprawa trwa zwykle 3–5 dni roboczych. Pracujemy na oryginalnych częściach Zebry.',
+                },
+              ].map((k, i) => (
+                <li key={k.krok}>
+                  <span className="font-mono text-xs font-semibold text-gray-400">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <h3 className="mt-1 text-sm font-bold text-gray-900">{k.krok}</h3>
+                  <p className="mt-1 text-sm leading-relaxed text-gray-600">{k.tresc}</p>
+                </li>
+              ))}
+            </ol>
+
+            <div className="mt-6 border-t border-gray-100 pt-5">
+              <p className="text-sm leading-relaxed text-gray-700">
+                Naprawiamy drukarki etykiet, terminale, skanery i tablety Zebry — od biurkowych
+                ZD220 i GK420, przez przemysłowe ZT411 i ZT610, po terminale serii TC i MC oraz
+                skanery DS. Jako autoryzowany serwis producenta mamy dostęp do oryginalnych
+                części i dokumentacji technicznej, więc naprawa nie kończy się na wymianie
+                całego modułu, gdy wystarczy jeden element.
               </p>
-              <p>
-                Nasz <strong>profesjonalny serwis drukarek Zebra</strong> obejmuje wszystkie modele: od popularnych 
-                drukarek desktop ZD420 i GK420, przez przemysłowe ZT410 i ZT610, po mobilne ZQ520. 
-                Naprawiamy również <strong>terminale mobilne Zebra</strong> serii TC (TC21, TC52, TC72), MC (MC3300, MC9300) 
-                oraz <strong>skanery kodów kreskowych</strong> DS2208, DS4608, DS8178 i wiele innych.
+              <p className="mt-3 text-sm leading-relaxed text-gray-700">
+                Jeśli nie wiesz, czy naprawa się opłaca — napisz. Przy starszych modelach
+                potrafimy powiedzieć wprost, że taniej wyjdzie wymiana sprzętu, i wtedy
+                podpowiadamy, który model będzie następcą.
               </p>
-              <p>
-                Oferujemy <strong>bezpłatny odbiór kurierem w ciągu 24 godzin</strong> z dowolnego miejsca w Polsce. 
-                Standardowy czas naprawy to 2-5 dni roboczych, a na wszystkie wykonane prace udzielamy 
-                <strong> 12 miesięcy gwarancji</strong>. Diagnostyka jest bezpłatna przy akceptacji naprawy.
-              </p>
-              <p>
-                Skontaktuj się z nami telefonicznie, mailowo lub przez formularz. Nasi specjaliści pomogą 
-                zdiagnozować problem i zaproponują optymalne rozwiązanie. Obsługujemy zarówno klientów 
-                indywidualnych, jak i firmy – wystawiamy faktury VAT z możliwością odroczonego terminu płatności.
-              </p>
+              <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm">
+                <Link href="/jak-to-dziala" className="font-medium text-gray-900 underline">
+                  Jak wygląda naprawa krok po kroku
+                </Link>
+                <Link href="/#cennik" className="font-medium text-gray-900 underline">
+                  Cennik napraw
+                </Link>
+                <Link href="/sklep/drukarki-etykiet" className="font-medium text-gray-900 underline">
+                  Nowe drukarki etykiet
+                </Link>
+              </div>
             </div>
           </div>
 
