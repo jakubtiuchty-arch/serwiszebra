@@ -87,7 +87,14 @@ export function getProductFallbackImage(
   }
   if (productType !== 'glowica') return null
   if (!deviceModel) return GENERIC_PRINTHEAD_IMAGE
-  const modelSlug = deviceModel.toLowerCase().replace(/[^a-z0-9]/g, '-')
+  // Część głowic pasuje do kilku modeli („ZD220d / ZD230d") — pliki zdjęć są
+  // nazwane pojedynczym modelem, więc bierzemy pierwszy z listy. Bez tego
+  // slug wychodził jako `zd220d---zd230d` i zdjęcie się nie ładowało.
+  const modelSlug = deviceModel
+    .split(/[/,+]/)[0]
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]/g, '-')
   const dpi = resolutionDpi || 203
   return `/sklep_photo/glowica-${dpi}dpi-do-drukarki-zebra-${modelSlug}.png`
 }
