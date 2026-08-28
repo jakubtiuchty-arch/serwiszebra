@@ -380,6 +380,11 @@ export default function DeviceVariantsTable({
                     najczęściej wybierana
                   </span>
                 )}
+                {v.kolor && (
+                  <span className="rounded-full bg-gray-100 px-2 py-0.5 text-[10px] font-medium text-gray-600">
+                    {v.kolor}
+                  </span>
+                )}
               </div>
 
               {/* Ten sam dobór wierszy co w kolumnach tabeli — bez sensu pokazywać
@@ -553,15 +558,22 @@ export default function DeviceVariantsTable({
                     {/* Plakietka pod numerem, nie obok — w jednej linii rozpychała
                         pierwszą kolumnę do 319 px i cała tabela nie mieściła się
                         w kontenerze o szerokości 990 px */}
-                    {wyrozniony ? (
-                      <span className="ml-[26px] mt-1 inline-block rounded-full bg-blue-600 px-2 py-0.5 text-[10px] font-semibold text-white">
-                        wybrana wersja
-                      </span>
-                    ) : v.pn === najczesciejWybierany ? (
-                      <span className="ml-[26px] mt-1 inline-block rounded-full bg-blue-50 px-2 py-0.5 text-[10px] font-semibold text-blue-700">
-                        najczęściej wybierana
-                      </span>
-                    ) : null}
+                    <span className="ml-[26px] mt-1 flex flex-wrap items-center gap-1.5">
+                      {wyrozniony ? (
+                        <span className="inline-block rounded-full bg-blue-600 px-2 py-0.5 text-[10px] font-semibold text-white">
+                          wybrana wersja
+                        </span>
+                      ) : v.pn === najczesciejWybierany ? (
+                        <span className="inline-block rounded-full bg-blue-50 px-2 py-0.5 text-[10px] font-semibold text-blue-700">
+                          najczęściej wybierana
+                        </span>
+                      ) : null}
+                      {v.kolor && (
+                        <span className="inline-block rounded-full bg-gray-100 px-2 py-0.5 text-[10px] font-medium text-gray-600">
+                          {v.kolor}
+                        </span>
+                      )}
+                    </span>
                   </td>
                   {roznicujeDpi && (
                     <td className="whitespace-nowrap px-2 py-3 text-gray-700">{v.dpi ?? '—'}</td>
