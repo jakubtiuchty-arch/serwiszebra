@@ -346,8 +346,7 @@ export default function DeviceVariantsTable({
         </h2>
         {onWybierz && (
           <p className="mt-1 text-sm text-gray-600">
-            Kliknij wersję, żeby zobaczyć jej cenę i termin na górze strony. Adres zapamięta
-            wybór, więc link można wysłać dalej.
+            Kliknij wersję, żeby zobaczyć jej cenę i termin na górze strony.
           </p>
         )}
       </div>
