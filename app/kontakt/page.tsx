@@ -188,7 +188,9 @@ export default function ContactPage() {
           co kafelki klas drukarek i grafiki na blogu. Scena jest ciemna, więc
           tekst siedzi na przyciemnionym lewym pasie; prawa strona z lampą
           i stanowiskiem zostaje czytelna. */}
-      <section className="relative overflow-hidden bg-gray-950">
+      {/* min-h dobrane pod proporcje grafiki: przy niższej sekcji object-cover
+          przycinał boki tak mocno, że z warsztatu zostawał sam środek kadru */}
+      <section className="relative flex min-h-[400px] items-center overflow-hidden bg-gray-950 sm:min-h-[480px]">
         <Image
           src="/kontakt/warsztat-hero.webp"
           alt="Stanowisko serwisowe: otwarta drukarka etykiet Zebra, dłonie serwisanta w rękawiczkach wyjmujące głowicę drukującą"
@@ -200,7 +202,7 @@ export default function ContactPage() {
         {/* Przyciemnienie mocne tylko pod kolumną tekstu; dalej szybko puszcza,
               żeby stanowisko serwisowe i drukarki zostały widoczne */}
           <div className="absolute inset-0 bg-gradient-to-r from-gray-950 via-gray-950/70 to-transparent" />
-        <div className="relative mx-auto max-w-5xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
+        <div className="relative mx-auto w-full max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
           <h1 className="max-w-lg text-2xl font-bold leading-tight text-white sm:text-4xl">
             Serwis urządzeń Zebra we Wrocławiu
           </h1>
