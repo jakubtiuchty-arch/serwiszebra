@@ -14,13 +14,10 @@ export interface DeviceVariant {
   label: string
   dpi?: number
   lacznosc?: string
-  /** To, co dochodzi POZA rozdzielczością i łącznością — odklejak, gilotyna.
-   *  Osobne pole, bo kolumna wyliczana z `label` powtarzała łączność
-   *  („Ethernet | USB + Ethernet"). */
-  wyposazenie?: string
-  /** Kolor obudowy — cecha jednostkowa, nie oś wyboru, więc nie zajmuje
-   *  własnej kolumny, tylko stoi jako dopisek przy numerze katalogowym */
-  kolor?: string
+  /** Opcje wybierane przy zamówieniu, których nie widać w pozostałych
+   *  kolumnach: odklejak, gilotyna, kolor obudowy. Osobne pole, bo kolumna
+   *  wyliczana z `label` powtarzała łączność („Ethernet | USB + Ethernet"). */
+  opcje?: string
 }
 
 /** Cena i stan jednego numeru katalogowego, policzone serwerowo */

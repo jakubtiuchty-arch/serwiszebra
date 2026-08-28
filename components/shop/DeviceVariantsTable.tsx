@@ -185,14 +185,14 @@ export default function DeviceVariantsTable({
   // różnicują, a gdy to za mało do rozróżnienia — dokładamy „Wersję".
   const roznicujeDpi = new Set(variants.map((v) => v.dpi ?? '')).size > 1
   const roznicujeLacznosc = new Set(variants.map((v) => v.lacznosc ?? '')).size > 1
-  const pokazWyposazenie = variants.some((v) => v.wyposazenie)
+  const pokazOpcje = variants.some((v) => v.opcje)
 
   /** Szerokości kolumn liczone z wag — zestaw kolumn bywa różny per model */
   const wagi: Record<string, number> = {
     pn: 27,
     dpi: roznicujeDpi ? 9 : 0,
     lacznosc: roznicujeLacznosc ? 13 : 0,
-    wyposazenie: pokazWyposazenie ? 20 : 0,
+    opcje: pokazOpcje ? 20 : 0,
     cena: 15,
     dostepnosc: 14,
     akcja: 22,
@@ -380,11 +380,7 @@ export default function DeviceVariantsTable({
                     najczęściej wybierana
                   </span>
                 )}
-                {v.kolor && (
-                  <span className="rounded-full bg-gray-100 px-2 py-0.5 text-[10px] font-medium text-gray-600">
-                    {v.kolor}
-                  </span>
-                )}
+
               </div>
 
               {/* Ten sam dobór wierszy co w kolumnach tabeli — bez sensu pokazywać
@@ -410,10 +406,10 @@ export default function DeviceVariantsTable({
                     <dd className="text-right text-gray-900">{ma(v, 'Wi-Fi') ? 'Tak' : '—'}</dd>
                   </>
                 )}
-                {pokazWyposazenie && (
+                {pokazOpcje && (
                   <>
-                    <dt className="text-gray-500">Wyposażenie</dt>
-                    <dd className="text-right text-gray-900">{v.wyposazenie || '—'}</dd>
+                    <dt className="text-gray-500">Opcje</dt>
+                    <dd className="text-right text-gray-900">{v.opcje || '—'}</dd>
                   </>
                 )}
                 <dt className="flex items-center gap-1 text-gray-500">
@@ -491,13 +487,13 @@ export default function DeviceVariantsTable({
                   </span>
                 </th>
               )}
-              {pokazWyposazenie && (
+              {pokazOpcje && (
                 <th
                   scope="col"
-                  style={{ width: szer('wyposazenie') }}
+                  style={{ width: szer('opcje') }}
                   className="px-2 py-2.5 text-left text-xs font-semibold text-gray-600"
                 >
-                  Wyposażenie
+                  Opcje
                 </th>
               )}
               <th
@@ -558,22 +554,15 @@ export default function DeviceVariantsTable({
                     {/* Plakietka pod numerem, nie obok — w jednej linii rozpychała
                         pierwszą kolumnę do 319 px i cała tabela nie mieściła się
                         w kontenerze o szerokości 990 px */}
-                    <span className="ml-[26px] mt-1 flex flex-wrap items-center gap-1.5">
-                      {wyrozniony ? (
-                        <span className="inline-block rounded-full bg-blue-600 px-2 py-0.5 text-[10px] font-semibold text-white">
-                          wybrana wersja
-                        </span>
-                      ) : v.pn === najczesciejWybierany ? (
-                        <span className="inline-block rounded-full bg-blue-50 px-2 py-0.5 text-[10px] font-semibold text-blue-700">
-                          najczęściej wybierana
-                        </span>
-                      ) : null}
-                      {v.kolor && (
-                        <span className="inline-block rounded-full bg-gray-100 px-2 py-0.5 text-[10px] font-medium text-gray-600">
-                          {v.kolor}
-                        </span>
-                      )}
-                    </span>
+                    {wyrozniony ? (
+                      <span className="ml-[26px] mt-1 inline-block rounded-full bg-blue-600 px-2 py-0.5 text-[10px] font-semibold text-white">
+                        wybrana wersja
+                      </span>
+                    ) : v.pn === najczesciejWybierany ? (
+                      <span className="ml-[26px] mt-1 inline-block rounded-full bg-blue-50 px-2 py-0.5 text-[10px] font-semibold text-blue-700">
+                        najczęściej wybierana
+                      </span>
+                    ) : null}
                   </td>
                   {roznicujeDpi && (
                     <td className="whitespace-nowrap px-2 py-3 text-gray-700">{v.dpi ?? '—'}</td>
@@ -587,9 +576,9 @@ export default function DeviceVariantsTable({
                         .join(' + ') || 'USB'}
                     </td>
                   )}
-                  {pokazWyposazenie && (
+                  {pokazOpcje && (
                     <td className="px-2 py-3 text-gray-700">
-                      {v.wyposazenie || <span className="text-gray-400">—</span>}
+                      {v.opcje || <span className="text-gray-400">—</span>}
                     </td>
                   )}
                   {/* Brak ceny ≠ cena zero: numer, którego nie zna żaden
