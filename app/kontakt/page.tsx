@@ -194,7 +194,7 @@ export default function ContactPage() {
       <section className="relative flex min-h-[280px] items-center overflow-hidden bg-gray-950 sm:min-h-[340px]">
         <Image
           src="/kontakt/warsztat-hero.webp"
-          alt="Stanowisko serwisowe: otwarta drukarka etykiet Zebra, dłonie serwisanta w rękawiczkach wyjmujące głowicę drukującą"
+          alt="Stanowisko serwisowe: otwarta drukarka etykiet, terminal mobilny ze zdjętą klapką baterii i skaner kodów w stacji, obok narzędzia precyzyjne"
           width={1344}
           height={576}
           priority
@@ -202,12 +202,14 @@ export default function ContactPage() {
         />
         {/* Przyciemnienie mocne tylko pod kolumną tekstu; dalej szybko puszcza,
               żeby stanowisko serwisowe i drukarki zostały widoczne */}
-          <div className="absolute inset-0 bg-gradient-to-r from-gray-950 via-gray-950/70 to-transparent" />
+          {/* Słabsze przyciemnienie niż zwykle — scena ma być widoczna. Czytelność
+              tekstu domyka cień rzucany przez sam napis, nie ciemna płachta. */}
+          <div className="absolute inset-0 bg-gradient-to-r from-gray-950/95 via-gray-950/60 to-transparent" />
         <div className="relative mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
-          <h1 className="max-w-lg text-2xl font-bold leading-tight text-white sm:text-3xl">
+          <h1 className="max-w-lg text-2xl font-bold leading-tight text-white [text-shadow:0_2px_12px_rgba(0,0,0,.6)] sm:text-3xl">
             Serwis urządzeń Zebra we Wrocławiu
           </h1>
-          <p className="mt-3 max-w-md text-sm leading-relaxed text-gray-300">
+          <p className="mt-3 max-w-md text-sm leading-relaxed text-gray-200 [text-shadow:0_1px_8px_rgba(0,0,0,.7)]">
             Kurier odbiera sprzęt z dowolnego adresu w Polsce. Diagnozę wykonujemy w 24–48
             godzin i podajemy koszt przed rozpoczęciem naprawy.
           </p>
