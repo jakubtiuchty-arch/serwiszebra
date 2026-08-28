@@ -184,10 +184,11 @@ export default function ContactPage() {
         </div>
       </div>
 
-      {/* Hero na zdjęciu warsztatu. Scena jest jasna, więc tekst jest ciemny
-          na rozjaśnionym lewym pasie — odwrotnie niż typowy ciemny hero,
-          i bez przyciemniania obrazu do nieczytelności. */}
-      <section className="relative overflow-hidden bg-gray-100">
+      {/* Hero na komiksowo-wektorowej scenie warsztatu — ta sama stylistyka
+          co kafelki klas drukarek i grafiki na blogu. Scena jest ciemna, więc
+          tekst siedzi na przyciemnionym lewym pasie; prawa strona z lampą
+          i stanowiskiem zostaje czytelna. */}
+      <section className="relative overflow-hidden bg-gray-950">
         <Image
           src="/kontakt/warsztat-hero.webp"
           alt="Warsztat serwisowy: drukarki etykiet na stanowiskach, regały z częściami, technicy przy pracy"
@@ -196,12 +197,12 @@ export default function ContactPage() {
           priority
           className="absolute inset-0 h-full w-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-white via-white/92 to-white/10 sm:to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-gray-950 via-gray-950/85 to-gray-950/20 sm:to-transparent" />
         <div className="relative mx-auto max-w-5xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
-          <h1 className="max-w-lg text-2xl font-bold leading-tight text-gray-900 sm:text-4xl">
+          <h1 className="max-w-lg text-2xl font-bold leading-tight text-white sm:text-4xl">
             Serwis urządzeń Zebra we Wrocławiu
           </h1>
-          <p className="mt-4 max-w-md text-sm leading-relaxed text-gray-700 sm:text-base">
+          <p className="mt-4 max-w-md text-sm leading-relaxed text-gray-300 sm:text-base">
             Kurier odbiera sprzęt z dowolnego adresu w Polsce. Diagnozę wykonujemy w 24–48
             godzin i podajemy koszt przed rozpoczęciem naprawy.
           </p>
@@ -215,7 +216,7 @@ export default function ContactPage() {
             </a>
             <a
               href="#formularz"
-              className="inline-flex min-h-[48px] items-center gap-2 rounded-lg border border-gray-400 bg-white/80 px-5 text-sm font-semibold text-gray-900 transition hover:border-gray-600"
+              className="inline-flex min-h-[48px] items-center gap-2 rounded-lg border border-white/30 px-5 text-sm font-semibold text-white transition hover:bg-white/10"
             >
               Zgłoś sprzęt
             </a>
