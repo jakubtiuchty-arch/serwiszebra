@@ -2020,7 +2020,7 @@ export async function syncProductsWithIngram(supabase: SupabaseClient): Promise<
     // 2. Pobierz produkty z bazy (głowice - SKU zaczyna się od P1)
     const { data: products, error: fetchError } = await supabase
       .from('products')
-      .select('id, sku, name, price, price_brutto, stock')
+      .select('id, sku, name, price, price_brutto, stock, attributes')
       .eq('is_active', true)
 
     if (fetchError) {
@@ -2101,7 +2101,11 @@ export async function syncProductsWithIngram(supabase: SupabaseClient): Promise<
         price_brutto: priceBrutto,
         stock: totalStock,
         lead_time_days: leadTime,
-        attributes: stockInfo,
+        // SCALANIE, nie nadpisanie: `attributes` trzyma też konfigurację karty
+        // produktu (`variants`, `klasa`). Nadpisanie samym stanem skasowało
+        // 28.08 o północy warianty WSZYSTKICH kart urządzeń — karty straciły
+        // tabelę PN-ów, stan i numer katalogowy, a cena spadła do fallbacku.
+        attributes: { ...((product as { attributes?: Record<string, unknown> }).attributes || {}), ...stockInfo },
         updated_at: new Date().toISOString(),
       }
       // Zapisz EAN jeśli dostępny z Ingram (pole gtin13 w Product schema)

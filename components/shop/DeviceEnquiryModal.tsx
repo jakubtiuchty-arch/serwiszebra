@@ -43,15 +43,20 @@ export default function DeviceEnquiryModal({ productName, variantPn, priceNetto 
   })
 
   const pierwszePole = useRef<HTMLInputElement>(null)
+  /** Czy modal był już otwierany — bez tego fokus wracał na przycisk przy
+   *  pierwszym renderze (open=false) i po wejściu na kartę „Zapytaj o produkt"
+   *  miał niebieską obwódkę fokusu, choć nikt go nie dotknął */
+  const bylOtwarty = useRef(false)
   const przyciskOtwierajacy = useRef<HTMLButtonElement>(null)
   const okno = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     if (!open) {
-      // Fokus wraca tam, skąd przyszedł — inaczej po zamknięciu ląduje na <body>
-      przyciskOtwierajacy.current?.focus()
+      // Fokus wraca tam, skąd przyszedł — ale TYLKO po faktycznym zamknięciu
+      if (bylOtwarty.current) przyciskOtwierajacy.current?.focus()
       return
     }
+    bylOtwarty.current = true
 
     const naKlawisz = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
