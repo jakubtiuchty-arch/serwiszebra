@@ -84,8 +84,9 @@ export default async function DesktopPrintersPage() {
     const dpi = Array.from(new Set(warianty.map((v) => v.dpi).filter(Boolean))).sort()
     const laczn = new Set<string>(['USB'])
     for (const v of warianty) {
-      if ((v.lacznosc || '').includes('Ethernet')) laczn.add('LAN')
-      if ((v.lacznosc || '').includes('Wi-Fi')) laczn.add('Wi-Fi')
+      const l = v.cechy?.['Łączność'] || ''
+      if (l.includes('Ethernet')) laczn.add('LAN')
+      if (l.includes('Wi-Fi')) laczn.add('Wi-Fi')
     }
     const cechy = [
       dpi.length ? `${dpi.join(' / ')} dpi` : null,

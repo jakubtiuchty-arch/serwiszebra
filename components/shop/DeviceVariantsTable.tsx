@@ -32,12 +32,34 @@ interface Props {
 const zl = (v: number) =>
   v.toLocaleString('pl-PL', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
 
-const ma = (v: DeviceVariant, czego: string) => (v.lacznosc || '').includes(czego)
+/**
+ * Podpowiedzi do cech — po NAZWIE cechy, nie po sztywnym polu. Cecha bez
+ * wpisu po prostu nie dostaje dymka, więc dodanie nowej osi (np. „Pamięć"
+ * przy terminalach) nie wymaga zmian w kodzie.
+ */
+const OPISY_CECH: Record<string, string> = {
+  Rozdzielczość:
+    'Rozdzielczość druku w punktach na cal. 203 dpi wystarcza do typowych etykiet z tekstem i kodem kreskowym; 300 dpi wybierz do małych etykiet, drobnego tekstu i kodów 2D.',
+  Łączność:
+    'Sposób podłączenia drukarki. USB — kabel do jednego komputera. Ethernet — kabel sieciowy, drukarka widoczna dla wielu stanowisk. Wi-Fi — sieć bezprzewodowa, bez ciągnięcia kabli.',
+}
+/**
+ * Kolejność kolumn z cechami. Baza trzyma cechy w JSON-ie, a ten nie
+ * gwarantuje kolejności kluczy — bez tej listy „Rozdzielczość" potrafiła
+ * wylądować za „Łącznością". Cechy spoza listy trafiają na koniec,
+ * alfabetycznie, więc nowa oś (np. „Pamięć") od razu ma stabilne miejsce.
+ */
+const KOLEJNOSC_CECH = [
+  'Rozdzielczość',
+  'Łączność',
+  'Pamięć',
+  'System',
+  'Skaner',
+  'Klawiatura',
+  'Wyposażenie',
+  'Kolor',
+]
 
-const WYJASNIENIE_DPI =
-  'Rozdzielczość druku w punktach na cal. 203 dpi wystarcza do typowych etykiet z tekstem i kodem kreskowym; 300 dpi wybierz do małych etykiet, drobnego tekstu i kodów 2D.'
-const WYJASNIENIE_LACZNOSC =
-  'Sposób podłączenia drukarki. USB — kabel do jednego komputera. Ethernet — kabel sieciowy, drukarka widoczna dla wielu stanowisk. Wi-Fi — sieć bezprzewodowa, bez ciągnięcia kabli.'
 const WYJASNIENIE_DOSTEPNOSC =
   'Liczba sztuk gotowych do wysyłki. PL — magazyn w Polsce, wysyłka w 24 h. EU — magazyn europejski dystrybutora, dostawa zwykle 2–3 dni robocze.'
 
@@ -178,24 +200,35 @@ export default function DeviceVariantsTable({
   // CSS. Atrybut, nie `id` — dwa elementy z tym samym `id` to niepoprawny HTML.
   const ZNACZNIK = 'data-wariant-wybrany'
 
-  // Kolumny zależą od modelu: ZD421 różnicuje warianty rozdzielczością
-  // i łącznością, ZD220d ma jedną rozdzielczość i samo USB — kolumna
-  // z identyczną wartością w każdym wierszu nic nie wnosi, a ukrywa
-  // prawdziwą różnicę (odklejak). Pokazujemy tylko osie, które faktycznie
-  // różnicują, a gdy to za mało do rozróżnienia — dokładamy „Wersję".
-  const roznicujeDpi = new Set(variants.map((v) => v.dpi ?? '')).size > 1
-  const roznicujeLacznosc = new Set(variants.map((v) => v.lacznosc ?? '')).size > 1
-  const pokazOpcje = variants.some((v) => v.opcje)
+  // Kolumny powstają z CECH wariantów, nie ze sztywnej listy pól. Pokazujemy
+  // tylko te, które realnie różnicują: cecha o jednej wartości we wszystkich
+  // wariantach nic nie wnosi, a zabiera szerokość cenie i dostępności.
+  // Dzięki temu ta sama tabela obsłuży drukarkę o dwóch osiach i terminal
+  // o sześciu, bez żadnej zmiany w kodzie.
+  const nazwyCech: string[] = []
+  for (const v of variants) {
+    for (const nazwa of Object.keys(v.cechy || {})) {
+      if (!nazwyCech.includes(nazwa)) nazwyCech.push(nazwa)
+    }
+  }
+  const kolumnyCech = nazwyCech
+    .filter((nazwa) => new Set(variants.map((v) => v.cechy?.[nazwa] ?? '')).size > 1)
+    .sort((a, b) => {
+      const ia = KOLEJNOSC_CECH.indexOf(a)
+      const ib = KOLEJNOSC_CECH.indexOf(b)
+      if (ia !== -1 && ib !== -1) return ia - ib
+      if (ia !== -1) return -1
+      if (ib !== -1) return 1
+      return a.localeCompare(b, 'pl')
+    })
 
   /** Szerokości kolumn liczone z wag — zestaw kolumn bywa różny per model */
   const wagi: Record<string, number> = {
-    pn: 27,
-    dpi: roznicujeDpi ? 9 : 0,
-    lacznosc: roznicujeLacznosc ? 13 : 0,
-    opcje: pokazOpcje ? 20 : 0,
+    pn: 26,
     cena: 15,
     dostepnosc: 14,
-    akcja: 22,
+    akcja: 20,
+    ...Object.fromEntries(kolumnyCech.map((n) => [`cecha:${n}`, 14])),
   }
   const sumaWag = Object.values(wagi).reduce((a, b) => a + b, 0)
   const szer = (klucz: string) => `${((wagi[klucz] / sumaWag) * 100).toFixed(1)}%`
@@ -383,35 +416,20 @@ export default function DeviceVariantsTable({
 
               </div>
 
-              {/* Ten sam dobór wierszy co w kolumnach tabeli — bez sensu pokazywać
+              {/* Te same cechy co w kolumnach tabeli — bez sensu pokazywać
                   „Ethernet: —" w modelu, który ma wyłącznie USB */}
               <dl className="mt-2 grid grid-cols-2 gap-x-3 gap-y-1 text-sm">
-                {roznicujeDpi && (
-                  <>
+                {kolumnyCech.map((nazwa) => (
+                  <div key={nazwa} className="contents">
                     <dt className="flex items-center gap-1 text-gray-500">
-                      Rozdzielczość
-                      <Podpowiedz label="Co oznacza rozdzielczość?" tekst={WYJASNIENIE_DPI} />
+                      {nazwa}
+                      {OPISY_CECH[nazwa] && (
+                        <Podpowiedz label={`Co oznacza: ${nazwa}?`} tekst={OPISY_CECH[nazwa]} />
+                      )}
                     </dt>
-                    <dd className="text-right text-gray-900">{v.dpi ? `${v.dpi} dpi` : '—'}</dd>
-                  </>
-                )}
-                {roznicujeLacznosc && (
-                  <>
-                    <dt className="flex items-center gap-1 text-gray-500">
-                      Ethernet
-                      <Podpowiedz label="Co oznacza łączność?" tekst={WYJASNIENIE_LACZNOSC} />
-                    </dt>
-                    <dd className="text-right text-gray-900">{ma(v, 'Ethernet') ? 'Tak' : '—'}</dd>
-                    <dt className="text-gray-500">Wi-Fi</dt>
-                    <dd className="text-right text-gray-900">{ma(v, 'Wi-Fi') ? 'Tak' : '—'}</dd>
-                  </>
-                )}
-                {pokazOpcje && (
-                  <>
-                    <dt className="text-gray-500">Opcje</dt>
-                    <dd className="text-right text-gray-900">{v.opcje || '—'}</dd>
-                  </>
-                )}
+                    <dd className="text-right text-gray-900">{v.cechy?.[nazwa] || '—'}</dd>
+                  </div>
+                ))}
                 <dt className="flex items-center gap-1 text-gray-500">
                   Magazyn
                   <Podpowiedz
@@ -463,39 +481,21 @@ export default function DeviceVariantsTable({
               >
                 Part Number
               </th>
-              {roznicujeDpi && (
+              {kolumnyCech.map((nazwa) => (
                 <th
+                  key={nazwa}
                   scope="col"
-                  style={{ width: szer('dpi') }}
+                  style={{ width: szer(`cecha:${nazwa}`) }}
                   className="px-2 py-2.5 text-left text-xs font-semibold text-gray-600"
                 >
                   <span className="inline-flex items-center gap-1">
-                    DPI
-                    <Podpowiedz label="Co oznacza DPI?" tekst={WYJASNIENIE_DPI} />
+                    {nazwa}
+                    {OPISY_CECH[nazwa] && (
+                      <Podpowiedz label={`Co oznacza: ${nazwa}?`} tekst={OPISY_CECH[nazwa]} />
+                    )}
                   </span>
                 </th>
-              )}
-              {roznicujeLacznosc && (
-                <th
-                  scope="col"
-                  style={{ width: szer('lacznosc') }}
-                  className="px-2 py-2.5 text-left text-xs font-semibold text-gray-600"
-                >
-                  <span className="inline-flex items-center gap-1">
-                    Łączność
-                    <Podpowiedz label="Co oznacza łączność?" tekst={WYJASNIENIE_LACZNOSC} />
-                  </span>
-                </th>
-              )}
-              {pokazOpcje && (
-                <th
-                  scope="col"
-                  style={{ width: szer('opcje') }}
-                  className="px-2 py-2.5 text-left text-xs font-semibold text-gray-600"
-                >
-                  Opcje
-                </th>
-              )}
+              ))}
               <th
                 scope="col"
                 style={{ width: szer('cena') }}
@@ -564,23 +564,11 @@ export default function DeviceVariantsTable({
                       </span>
                     ) : null}
                   </td>
-                  {roznicujeDpi && (
-                    <td className="whitespace-nowrap px-2 py-3 text-gray-700">{v.dpi ?? '—'}</td>
-                  )}
-                  {/* Ethernet i Wi-Fi w jednej kolumnie: dwie kolumny z myślnikami
-                      zajmowały więcej miejsca, niż wnosiły informacji */}
-                  {roznicujeLacznosc && (
-                    <td className="whitespace-nowrap px-2 py-3 text-gray-700">
-                      {[ma(v, 'Ethernet') && 'Ethernet', ma(v, 'Wi-Fi') && 'Wi-Fi']
-                        .filter(Boolean)
-                        .join(' + ') || 'USB'}
+                  {kolumnyCech.map((nazwa) => (
+                    <td key={nazwa} className="px-2 py-3 text-gray-700">
+                      {v.cechy?.[nazwa] || <span className="text-gray-400">—</span>}
                     </td>
-                  )}
-                  {pokazOpcje && (
-                    <td className="px-2 py-3 text-gray-700">
-                      {v.opcje || <span className="text-gray-400">—</span>}
-                    </td>
-                  )}
+                  ))}
                   {/* Brak ceny ≠ cena zero: numer, którego nie zna żaden
                       dystrybutor, ma w cache price=null — „0,00 zł" wyglądało
                       jak darmowa drukarka */}

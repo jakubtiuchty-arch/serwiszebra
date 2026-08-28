@@ -12,12 +12,21 @@ const TELEFON = '+48601619898'
 export interface DeviceVariant {
   pn: string
   label: string
+  /** Rozdzielczość jako LICZBA — poza tabelą steruje doborem części
+   *  eksploatacyjnych (głowica 300 dpi nie pasuje do drukarki 203 dpi) */
   dpi?: number
-  lacznosc?: string
-  /** Opcje wybierane przy zamówieniu, których nie widać w pozostałych
-   *  kolumnach: odklejak, gilotyna, kolor obudowy. Osobne pole, bo kolumna
-   *  wyliczana z `label` powtarzała łączność („Ethernet | USB + Ethernet"). */
-  opcje?: string
+  /**
+   * Cechy odróżniające ten numer katalogowy od pozostałych — dowolne pary
+   * nazwa→wartość, np. `{ Rozdzielczość: '203 dpi', Łączność: 'USB',
+   * Kolor: 'Biała obudowa' }`.
+   *
+   * Mapa, nie sztywne pola, bo każda rodzina sprzętu różnicuje się czym
+   * innym: drukarki biurkowe rozdzielczością i łącznością, ZD230d dodatkowo
+   * odklejakiem i kolorem, a terminale pamięcią, skanerem, systemem czy
+   * klawiaturą. Tabela sama robi z tego kolumny i pokazuje wyłącznie te
+   * cechy, które realnie różnicują warianty.
+   */
+  cechy?: Record<string, string>
 }
 
 /** Cena i stan jednego numeru katalogowego, policzone serwerowo */

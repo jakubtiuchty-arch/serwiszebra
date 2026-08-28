@@ -200,14 +200,12 @@ export default async function DevicePage({
         brand: { '@type': 'Brand', name: 'Zebra' },
         url: urlWariantu(v.pn),
         ...(zdjecie ? { image: [zdjecie] } : {}),
-        additionalProperty: [
-          ...(v.dpi
-            ? [{ '@type': 'PropertyValue', name: 'Rozdzielczość', value: `${v.dpi} dpi` }]
-            : []),
-          ...(v.lacznosc
-            ? [{ '@type': 'PropertyValue', name: 'Łączność', value: v.lacznosc }]
-            : []),
-        ],
+        // Cechy wariantu 1:1 z tego, co widzi klient w tabeli
+        additionalProperty: Object.entries(v.cechy || {}).map(([name, value]) => ({
+          '@type': 'PropertyValue',
+          name,
+          value,
+        })),
         // Ofertę podajemy tylko z prawdziwą ceną. Pusta `Offer` albo `InStock`
         // przyklejone do niedostępnego wariantu to rozjazd z tym, co widzi
         // klient — a takiego Merchant Center i Search nie wybaczają.

@@ -28,7 +28,7 @@ interface WariantDb {
   pn: string
   label: string
   dpi?: number
-  lacznosc?: string
+  cechy?: Record<string, string>
 }
 
 interface DrukarkaDb {
@@ -70,11 +70,9 @@ export async function GET() {
       const cena = stan?.brutto && stan.brutto > 0 ? stan.brutto : null
       const naStanie = (stan?.totalStock ?? 0) > 0
 
-      // Osie różnicujące jako mapa — model językowy dostaje wprost, CZYM
+      // Cechy różnicujące jako mapa — model językowy dostaje wprost, CZYM
       // ta wersja różni się od pozostałych w grupie
-      const variant_dict: Record<string, string> = {}
-      if (v.dpi) variant_dict.rozdzielczosc = `${v.dpi} dpi`
-      if (v.lacznosc) variant_dict.lacznosc = v.lacznosc
+      const variant_dict: Record<string, string> = { ...(v.cechy || {}) }
 
       return {
         item_id: v.pn,
