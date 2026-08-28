@@ -195,9 +195,11 @@ export default function ContactPage() {
           width={1344}
           height={576}
           priority
-          className="absolute inset-0 h-full w-full object-cover"
+          className="absolute inset-0 h-full w-full object-cover object-[62%_center]"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-gray-950 via-gray-950/85 to-gray-950/20 sm:to-transparent" />
+        {/* Przyciemnienie mocne tylko pod kolumną tekstu; dalej szybko puszcza,
+              żeby stanowisko serwisowe i drukarki zostały widoczne */}
+          <div className="absolute inset-0 bg-gradient-to-r from-gray-950 via-gray-950/70 to-transparent" />
         <div className="relative mx-auto max-w-5xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
           <h1 className="max-w-lg text-2xl font-bold leading-tight text-white sm:text-4xl">
             Serwis urządzeń Zebra we Wrocławiu
