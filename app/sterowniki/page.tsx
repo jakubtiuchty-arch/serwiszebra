@@ -816,6 +816,46 @@ export default function DriversPage() {
         </section>
       )}
 
+      {/* Most do kart produktów. Ta strona stoi na drugiej pozycji na „zebra
+          zd421 sterowniki" (250 wyszukiwań miesięcznie) i nie miała ani jednego
+          linku do sklepu — a nowe karty urządzeń nie mają jeszcze żadnej
+          historii w wyszukiwarce i potrzebują mocy z wewnątrz serwisu. */}
+      <section className="border-t border-gray-200 bg-white py-8">
+        <div className="mx-auto max-w-5xl px-3 sm:px-6 lg:px-8">
+          <h2 className="text-lg font-semibold text-gray-900 sm:text-xl">
+            Kupujesz nową drukarkę?
+          </h2>
+          <p className="mt-1.5 max-w-2xl text-sm text-gray-600">
+            Sprzedajemy sprzęt z oficjalnej dystrybucji Zebry i serwisujemy go u siebie. Ceny
+            i dostępność aktualizujemy codziennie.
+          </p>
+          <ul className="mt-4 grid list-none grid-cols-1 gap-3 p-0 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              { slug: 'zebra-zd421t', nazwa: 'Zebra ZD421t', opis: 'termotransferowa, 203/300 dpi' },
+              { slug: 'zebra-zd421d', nazwa: 'Zebra ZD421d', opis: 'termiczna, 203/300 dpi' },
+              { slug: 'zebra-zd220t', nazwa: 'Zebra ZD220t', opis: 'termotransferowa, budżetowa' },
+              { slug: 'zebra-zd220d', nazwa: 'Zebra ZD220d', opis: 'termiczna, budżetowa' },
+            ].map((d) => (
+              <li key={d.slug}>
+                <Link
+                  href={`/sklep/drukarki-etykiet/${d.slug}`}
+                  className="flex h-full flex-col rounded-xl border border-gray-200 bg-white p-4 transition-all hover:border-gray-400 hover:shadow-sm"
+                >
+                  <span className="text-sm font-semibold text-gray-900">{d.nazwa}</span>
+                  <span className="mt-0.5 text-xs text-gray-500">{d.opis}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <Link
+            href="/sklep/drukarki-etykiet"
+            className="mt-4 inline-block text-sm font-medium text-gray-900 underline"
+          >
+            Zobacz wszystkie drukarki etykiet
+          </Link>
+        </div>
+      </section>
+
       {/* Przydatne zasoby - linki wewnętrzne */}
       <section className="py-6 sm:py-10 bg-gray-50 border-t border-gray-200">
         <div className="max-w-5xl mx-auto px-3 sm:px-6 lg:px-8">
