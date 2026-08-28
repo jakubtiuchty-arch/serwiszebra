@@ -185,15 +185,14 @@ export default function DeviceVariantsTable({
   // różnicują, a gdy to za mało do rozróżnienia — dokładamy „Wersję".
   const roznicujeDpi = new Set(variants.map((v) => v.dpi ?? '')).size > 1
   const roznicujeLacznosc = new Set(variants.map((v) => v.lacznosc ?? '')).size > 1
-  const paryOsi = new Set(variants.map((v) => `${v.dpi ?? ''}|${v.lacznosc ?? ''}`))
-  const pokazWersje = paryOsi.size < variants.length
+  const pokazWyposazenie = variants.some((v) => v.wyposazenie)
 
   /** Szerokości kolumn liczone z wag — zestaw kolumn bywa różny per model */
   const wagi: Record<string, number> = {
     pn: 27,
     dpi: roznicujeDpi ? 9 : 0,
     lacznosc: roznicujeLacznosc ? 13 : 0,
-    wersja: pokazWersje ? 20 : 0,
+    wyposazenie: pokazWyposazenie ? 20 : 0,
     cena: 15,
     dostepnosc: 14,
     akcja: 22,
@@ -406,10 +405,10 @@ export default function DeviceVariantsTable({
                     <dd className="text-right text-gray-900">{ma(v, 'Wi-Fi') ? 'Tak' : '—'}</dd>
                   </>
                 )}
-                {pokazWersje && (
+                {pokazWyposazenie && (
                   <>
-                    <dt className="text-gray-500">Wersja</dt>
-                    <dd className="text-right text-gray-900">{v.label}</dd>
+                    <dt className="text-gray-500">Wyposażenie</dt>
+                    <dd className="text-right text-gray-900">{v.wyposazenie || '—'}</dd>
                   </>
                 )}
                 <dt className="flex items-center gap-1 text-gray-500">
@@ -487,13 +486,13 @@ export default function DeviceVariantsTable({
                   </span>
                 </th>
               )}
-              {pokazWersje && (
+              {pokazWyposazenie && (
                 <th
                   scope="col"
-                  style={{ width: szer('wersja') }}
+                  style={{ width: szer('wyposazenie') }}
                   className="px-2 py-2.5 text-left text-xs font-semibold text-gray-600"
                 >
-                  Wersja
+                  Wyposażenie
                 </th>
               )}
               <th
@@ -576,8 +575,10 @@ export default function DeviceVariantsTable({
                         .join(' + ') || 'USB'}
                     </td>
                   )}
-                  {pokazWersje && (
-                    <td className="px-2 py-3 text-gray-700">{v.label}</td>
+                  {pokazWyposazenie && (
+                    <td className="px-2 py-3 text-gray-700">
+                      {v.wyposazenie || <span className="text-gray-400">—</span>}
+                    </td>
                   )}
                   {/* Brak ceny ≠ cena zero: numer, którego nie zna żaden
                       dystrybutor, ma w cache price=null — „0,00 zł" wyglądało
