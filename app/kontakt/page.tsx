@@ -191,11 +191,11 @@ export default function ContactPage() {
       <section className="relative overflow-hidden bg-gray-950">
         <Image
           src="/kontakt/warsztat-hero.webp"
-          alt="Warsztat serwisowy: drukarki etykiet na stanowiskach, regały z częściami, technicy przy pracy"
+          alt="Stanowisko serwisowe: otwarta drukarka etykiet Zebra, dłonie serwisanta w rękawiczkach wyjmujące głowicę drukującą"
           width={1344}
           height={576}
           priority
-          className="absolute inset-0 h-full w-full object-cover object-[62%_center]"
+          className="absolute inset-0 h-full w-full object-cover object-center"
         />
         {/* Przyciemnienie mocne tylko pod kolumną tekstu; dalej szybko puszcza,
               żeby stanowisko serwisowe i drukarki zostały widoczne */}
