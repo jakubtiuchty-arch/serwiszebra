@@ -555,6 +555,130 @@ export const TRESC_KART: Record<string, TrescKarty> = {
       ['Gwarancja', '24 miesiące'],
     ],
   },
+  'zebra-zd230t': {
+    rekomendowanyPn: 'ZD23042-30EC00EZ',
+    zdjecieGlowne: '/sklep_photo/urzadzenia/zd230t_1.webp',
+    opis: [
+      <>
+        Zebra ZD230t to biurkowa drukarka etykiet drukująca termotransferowo, czyli z taśmy
+        barwiącej. Nadruk powstaje wtedy z żywicy lub wosku przeniesionego na etykietę i nie
+        blaknie ani nie ściera się z upływem miesięcy, dlatego model trafia tam, gdzie
+        oznaczenie musi przetrwać dłużej niż wysyłka: na etykiety produktowe i magazynowe,
+        opisy opakowań zbiorczych, oznaczenia środków trwałych i regałów. Urządzenie drukuje
+        również termicznie bezpośrednio, bez taśmy, więc jedno stanowisko obsłuży także
+        etykiety kurierskie.
+      </>,
+      <>
+        Drukarka pracuje w rozdzielczości 203 dpi z prędkością do 152 mm/s, a szerokość druku
+        104 mm obejmuje pełny format etykiety kurierskiej 100 × 150 mm. Przyjmuje nośniki
+        o szerokości 25,4–112 mm i rolki o średnicy do 127 mm. Najważniejsza różnica wobec
+        tańszej{' '}
+        <Link
+          href="/sklep/drukarki-etykiet/zebra-zd220t"
+          className="font-medium text-gray-900 underline"
+        >
+          Zebry ZD220t
+        </Link>{' '}
+        dotyczy taśmy: ZD230t obsługuje nie tylko krótkie 74-metrowe rolki na wałku pół cala,
+        ale też 300-metrowe na wałku calowym. Przy proporcji jeden do czterech taka taśma
+        wystarcza na cztery pełne rolki etykiet, więc wymienia się ją czterokrotnie rzadziej,
+        a przestoje przy dużych nakładach maleją.
+      </>,
+      <>
+        W standardzie urządzenie komunikuje się przez USB, a fabrycznie można je zamówić
+        z Ethernetem albo z Wi-Fi i Bluetoothem — łączność wybiera się jednak raz, przy
+        zamówieniu, i nie da się jej później rozbudować modułem. Wyposażenie również montuje
+        się fabrycznie: odklejak oddziela etykietę od podłoża, gilotyna odcina wydruk przy
+        przywieszkach i etykietach o zmiennej długości, obudowa występuje w czerni i w bieli.
+        Obsługa języków ZPL II i EPL 2 zachowuje zgodność z szablonami przygotowanymi dla
+        ZD220t, GK420t i GC420t, więc wymiana starszej drukarki nie wymusza zmian w systemie.
+        Gdy potrzebna jest rozdzielczość 300 dpi albo możliwość dołożenia sieci po zakupie,
+        właściwszym wyborem jest{' '}
+        <Link
+          href="/sklep/drukarki-etykiet/zebra-zd421t"
+          className="font-medium text-gray-900 underline"
+        >
+          Zebra ZD421t
+        </Link>
+        .
+      </>,
+    ],
+    osie: [
+      {
+        tytul: 'Łączność',
+        pozycje: [
+          { termin: 'USB', opis: 'jedna drukarka przy jednym komputerze' },
+          { termin: 'Ethernet', opis: 'gdy ma z niej korzystać kilka osób w sieci' },
+          { termin: 'Wi-Fi', opis: 'z Bluetoothem, gdy nie ma jak doprowadzić kabla' },
+        ],
+      },
+      {
+        tytul: 'Wyposażenie',
+        pozycje: [
+          { termin: 'Standard', opis: 'etykiety wychodzą na podłożu w całości' },
+          {
+            termin: 'Odklejak',
+            opis: 'drukarka sama oddziela etykietę od podłoża — szybsze naklejanie na paczki',
+          },
+          {
+            termin: 'Gilotyna',
+            opis: 'odcina wydruk; do przywieszek, biletów i etykiet o zmiennej długości',
+          },
+        ],
+      },
+    ],
+    faqNaglowek: 'Najczęstsze pytania o ZD230t',
+    faq: [
+      {
+        q: 'Czym ZD230t różni się od ZD220t?',
+        a: 'ZD230t drukuje do 152 mm/s zamiast 102 mm/s i przyjmuje taśmy 300-metrowe, podczas gdy ZD220t obsługuje wyłącznie 74-metrowe. Dochodzą fabryczne wersje z Ethernetem i Wi-Fi oraz opcje odklejaka i gilotyny — ZD220t ma tylko USB. Rozdzielczość 203 dpi i szerokość druku 104 mm są w obu modelach takie same.',
+        href: '/blog/zebra-zd220-vs-zd421-vs-zt411-porownanie',
+        link: 'Porównanie biurkowych drukarek Zebra',
+      },
+      {
+        q: 'Jakie taśmy pasują do drukarki Zebra ZD230t?',
+        a: 'ZD230t przyjmuje taśmy 300-metrowe na wałku calowym oraz 74-metrowe na wałku pół cala, o szerokości 33,8–109,2 mm — woskowe, woskowo-żywiczne i żywiczne. Taśma musi być co najmniej tak szeroka jak etykieta: gdy jest węższa, krawędzie nadruku wychodzą niedodrukowane, a głowica pracuje wtedy wprost na etykiecie i zużywa się szybciej.',
+        href: '/blog/wymiana-glowicy-drukarki-zebra-kiedy-konieczna-ile-kosztuje',
+        link: 'Wymiana głowicy — kiedy jest konieczna i ile kosztuje',
+      },
+      {
+        q: 'Ile etykiet wystarczy z jednej taśmy 300 m?',
+        a: 'Taśma zużywa się w tym samym tempie co etykiety, więc 300 m wystarcza na około dwa tysiące etykiet o długości 150 mm albo cztery tysiące etykiet 75-milimetrowych. Rolka 74-metrowa daje przy tych samych rozmiarach odpowiednio około 490 i 980 sztuk.',
+        href: '/blog/zebra-zd220-vs-zd421-vs-zt411-porownanie',
+        link: 'Kiedy wybrać druk termotransferowy',
+      },
+      {
+        q: 'Czym ZD230t różni się od ZD230d?',
+        a: 'To ta sama konstrukcja w dwóch technologiach druku. ZD230t drukuje z taśmy barwiącej i daje nadruk odporny na ścieranie oraz światło; ZD230d drukuje wyłącznie termicznie na etykietach termoczułych — taniej w eksploatacji, ale wydruk z czasem blaknie. Do oznaczeń wieloletnich wybiera się wersję „t", do etykiet wysyłkowych wystarcza „d".',
+        href: '/sklep/drukarki-etykiet/zebra-zd230d',
+        link: 'Zobacz termiczną Zebra ZD230d',
+      },
+      {
+        q: 'Jak skalibrować drukarkę Zebra ZD230t?',
+        a: 'ZD230t ma jeden przycisk FEED, więc kalibrację uruchamia się inaczej niż w serii ZD421: przy wyłączonej drukarce przytrzymaj FEED, włącz zasilanie i puść przycisk, gdy dioda STATUS mignie dwa razy. Drukarka przepuści kilka etykiet i zapamięta ich długość oraz położenie przerwy.',
+        href: '/blog/kalibracja-drukarki-zebra-poradnik-krok-po-kroku',
+        link: 'Kalibracja drukarki Zebra — poradnik krok po kroku',
+      },
+    ],
+    spec: [
+      ['Producent', 'Zebra'],
+      ['Model', 'ZD230t'],
+      ['Technologia druku', 'Termotransferowa i termiczna bezpośrednia'],
+      ['Rozdzielczość', '203 DPI'],
+      ['Szerokość druku', '104 mm'],
+      ['Prędkość druku', 'do 152 mm/s'],
+      ['Szerokość etykiet', '25,4–112 mm'],
+      ['Maksymalna długość etykiety', '991 mm'],
+      ['Maksymalna średnica rolki', '127 mm'],
+      ['Taśma', '300 m na wałku calowym lub 74 m na wałku 0,5 cala, szerokość 33,8–109,2 mm'],
+      ['Pamięć', '128 MB Flash, 128 MB SDRAM'],
+      ['Wymiary (D×S×W)', '267 × 197 × 191 mm'],
+      ['Łączność', 'USB; opcjonalnie Ethernet albo Bluetooth z Wi-Fi'],
+      ['Opcje fabryczne', 'Odklejak, gilotyna, obudowa biała'],
+      ['Stan', 'Nowy, oryginalny'],
+      ['Gwarancja', '24 miesiące'],
+    ],
+  },
 }
 
 export const trescKarty = (slug: string): TrescKarty | undefined => TRESC_KART[slug]
