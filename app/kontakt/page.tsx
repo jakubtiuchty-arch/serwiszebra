@@ -192,7 +192,7 @@ export default function ContactPage() {
       <section className="relative flex min-h-[280px] items-center overflow-hidden bg-gray-950 sm:min-h-[340px]">
         <Image
           src="/kontakt/warsztat-hero.webp"
-          alt="Stanowisko serwisowe: dwie drukarki etykiet Zebra ZD421 na blacie, głowica termiczna w dłoniach serwisanta i narzędzia precyzyjne na macie antystatycznej"
+          alt="Stanowisko serwisowe: drukarka etykiet Zebra ZD421 na macie antystatycznej, głowica termiczna w dłoni serwisanta, rolka etykiet i ściana narzędzi w tle"
           width={1344}
           height={395}
           priority
