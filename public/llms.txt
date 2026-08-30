@@ -74,6 +74,38 @@ Adres sklepu: https://www.serwis-zebry.pl/sklep
 - BTRY-MPP-34MA1-01 — Akumulator ZQ630 Extended
 - BTRY-ET6x-2IN1-01 — Akumulator ET60/ET65 Standard
 
+## Sklep — Drukarki etykiet Zebra (sprzedaż nowych urządzeń)
+
+Adres kategorii: https://www.serwis-zebry.pl/sklep/drukarki-etykiet/biurkowe
+Ceny i stany magazynowe pobierane na żywo od dystrybutorów; gwarancję realizuje nasz autoryzowany serwis.
+
+### Drukarki biurkowe — karty produktów
+
+- **Zebra ZD220d** — https://www.serwis-zebry.pl/sklep/drukarki-etykiet/zebra-zd220d
+  Druk termiczny bez taśmy, 203 dpi, do 102 mm/s, szerokość druku 104 mm, wyłącznie USB. Najtańsze wejście w druk etykiet.
+- **Zebra ZD220t** — https://www.serwis-zebry.pl/sklep/drukarki-etykiet/zebra-zd220t
+  Druk termotransferowy z taśmy i termiczny, 203 dpi, do 102 mm/s, taśmy do 74 m na wałku 0,5 cala, wyłącznie USB.
+- **Zebra ZD230d** — https://www.serwis-zebry.pl/sklep/drukarki-etykiet/zebra-zd230d
+  Druk termiczny bez taśmy, 203 dpi, do 152 mm/s, wersje z USB, Ethernetem albo Wi-Fi, fabryczny odklejak lub gilotyna.
+- **Zebra ZD230t** — https://www.serwis-zebry.pl/sklep/drukarki-etykiet/zebra-zd230t
+  Druk termotransferowy i termiczny, 203 dpi, do 152 mm/s, taśmy 300 m na wałku calowym lub 74 m na 0,5 cala.
+- **Zebra ZD421d** — https://www.serwis-zebry.pl/sklep/drukarki-etykiet/zebra-zd421d
+  Druk termiczny bez taśmy, 203 lub 300 dpi, do 152 mm/s, wymienne moduły łączności (Ethernet, RS-232, Wi-Fi). Następczyni GK420d.
+- **Zebra ZD421t** — https://www.serwis-zebry.pl/sklep/drukarki-etykiet/zebra-zd421t
+  Druk termotransferowy i termiczny, 203 lub 300 dpi, do 152 mm/s, taśmy o nawoju 300 m, wymienne moduły łączności. Następczyni GK420t.
+- **Zebra ZD621d** — https://www.serwis-zebry.pl/sklep/drukarki-etykiet/zebra-zd621d
+  Najszybsza biurkowa: druk termiczny do 203 mm/s, 203 lub 300 dpi, Ethernet i RS-232 w standardzie, opcjonalny ekran dotykowy 4,3 cala, gilotyna i odklejak montowane także po zakupie.
+
+Pełny wykaz wariantów z numerami katalogowymi, cenami i stanami: https://www.serwis-zebry.pl/api/llm-feed
+
+### Jak dobrać drukarkę biurkową Zebra
+
+- Litera „d" w nazwie oznacza druk termiczny bez taśmy — tańszy w eksploatacji, ale nadruk z czasem blaknie. Litera „t" to druk termotransferowy z taśmą barwiącą — nadruk trwały, odporny na ścieranie.
+- 203 dpi wystarcza do typowych kodów kreskowych i etykiet kurierskich; 300 dpi bierze się do drobnego tekstu i małych kodów QR.
+- Szerokość druku 104 mm we wszystkich modelach biurkowych obejmuje pełny format etykiety kurierskiej 100 × 150 mm.
+- ZD220 i ZD230 mają łączność wybieraną fabrycznie; w ZD421 i ZD621 moduł sieciowy wymienia się bez wymiany drukarki.
+- Przy druku liczonym w tysiącach etykiet dziennie zamiast biurkowej właściwsza jest klasa półprzemysłowa lub przemysłowa.
+
 ## Usługi serwisowe
 
 - **Serwis drukarek Zebra** — https://www.serwis-zebry.pl/serwis-drukarek-zebra
@@ -103,7 +135,7 @@ Tablety: ET60, ET65
 ## Kluczowe fakty
 
 - 100% oryginalne części Zebra Technologies
-- Gwarancja producenta 12 miesięcy
+- Gwarancja: 24 miesiące na nowe drukarki, 12 miesięcy na części zamienne
 - Wysyłka 24h z magazynu w Polsce
 - Faktury VAT dla firm (B2B)
 - Profesjonalny serwis z odbiorem kurierskim

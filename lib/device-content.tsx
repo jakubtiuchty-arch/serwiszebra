@@ -21,6 +21,21 @@ export interface TrescKarty {
   rekomendowanyPn: string
   /** Render urządzenia na sztywno — og:image, schema, primaryImageOfPage */
   zdjecieGlowne: string
+  /**
+   * Blok „W skrócie" — 5–6 twardych faktów o modelu, każdy zdaniem, które
+   * broni się bez kontekstu strony. Modele językowe cytują całe, samodzielne
+   * fragmenty, a nie prozę rozbitą na przypisy: pytany o ZD421t asystent ma
+   * mieć gotową odpowiedź w jednym miejscu, z liczbami i nazwą modelu.
+   * Fakty nie powtarzają zdań z `opis` — to skrót, nie streszczenie.
+   */
+  wSkrocie: string[]
+  /**
+   * Kiedy dane techniczne były ostatnio sprawdzone u producenta (ISO).
+   * Widoczna data i `dateModified` w schemacie to dla modeli sygnał, że karta
+   * jest aktualna — przy sprzęcie, którego parametry sklepy przepisują od
+   * siebie z błędami, to jeden z niewielu sposobów odróżnienia źródła.
+   */
+  zweryfikowano: string
   /** Akapity „Opisu produktu" */
   opis: ReactNode[]
   /** Osie wyboru w sekcji „Którą wersję wybrać" — zależą od modelu:
@@ -36,6 +51,15 @@ export const TRESC_KART: Record<string, TrescKarty> = {
   'zebra-zd421t': {
     rekomendowanyPn: 'ZD4A042-30EM00EZ',
     zdjecieGlowne: '/sklep_photo/urzadzenia/zd421t_1.webp',
+    wSkrocie: [
+      'Zebra ZD421t to biurkowa drukarka etykiet, która drukuje termotransferowo — z taśmy barwiącej — a w razie potrzeby także termicznie, bez taśmy.',
+      'Drukuje w rozdzielczości 203 lub 300 dpi z prędkością do 152 mm/s, przy szerokości druku 104 mm, czyli pełnym formacie etykiety kurierskiej 100 × 150 mm.',
+      'Przyjmuje taśmy o nawoju 300 m — cztery razy dłuższe niż 74-metrowe rolki serii ZD220, więc przy dużych nakładach materiał wymienia się rzadziej.',
+      'Łączność dokłada się modułem bez narzędzi: Ethernet, RS-232 albo Wi-Fi z Bluetoothem, bez wymiany drukarki na nową.',
+      'Jest następczynią GK420t i przyjmuje jej szablony etykiet, bo obsługuje języki ZPL II oraz EPL 2.',
+      'Nadruk z taśmy nie blaknie i jest odporny na ścieranie, dlatego nadaje się do etykiet produktowych i oznaczeń wieloletnich.',
+    ],
+    zweryfikowano: '2026-08-26',
     opis: [
       <>
         Zebra ZD421t to biurkowa drukarka termotransferowa przeznaczona do codziennego druku
@@ -137,6 +161,14 @@ export const TRESC_KART: Record<string, TrescKarty> = {
   'zebra-zd421d': {
     rekomendowanyPn: 'ZD4A042-D0EM00EZ',
     zdjecieGlowne: '/sklep_photo/urzadzenia/zd421d_1.webp',
+    wSkrocie: [
+      'Zebra ZD421d to biurkowa drukarka etykiet drukująca termicznie bezpośrednio — bez taśmy barwiącej, wyłącznie na etykietach termoczułych.',
+      'Drukuje w rozdzielczości 203 lub 300 dpi z prędkością do 152 mm/s, przy szerokości druku 104 mm, czyli pełnym formacie etykiety kurierskiej 100 × 150 mm.',
+      'Moduł łączności wymienia się bez narzędzi, więc przejście z USB na Ethernet albo Wi-Fi nie wymaga kupowania nowej drukarki.',
+      'Jest następczynią GK420d i przyjmuje jej szablony etykiet dzięki obsłudze języków ZPL II oraz EPL 2.',
+      'Nadruk termiczny z czasem blaknie — do oznaczeń wieloletnich służy termotransferowa Zebra ZD421t z taśmą barwiącą.',
+    ],
+    zweryfikowano: '2026-08-26',
     opis: [
       <>
         Zebra ZD421d to biurkowa drukarka etykiet pracująca w technologii termicznej
@@ -245,6 +277,14 @@ export const TRESC_KART: Record<string, TrescKarty> = {
   'zebra-zd220d': {
     rekomendowanyPn: 'ZD22042-D0EG00EZ',
     zdjecieGlowne: '/sklep_photo/urzadzenia/zd220d_1.webp',
+    wSkrocie: [
+      'Zebra ZD220d to najtańsza drukarka etykiet w ofercie Zebry: druk termiczny bez taśmy, 203 dpi, prędkość do 102 mm/s.',
+      'Szerokość druku 104 mm obejmuje pełny format etykiety kurierskiej 100 × 150 mm; obsługiwane nośniki mają 25,4–112 mm szerokości.',
+      'Ma wyłącznie złącze USB i nie przyjmuje modułu sieciowego — Ethernetu ani Wi-Fi nie da się dołożyć po zakupie.',
+      'Waży 1,1 kg i mierzy 220 × 176 × 151 mm, więc mieści się na ciasnym stanowisku pakowania.',
+      'Sprawdza się przy kilkuset etykietach dziennie; przy większych nakładach właściwszym wyborem są ZD230d albo ZD421d.',
+    ],
+    zweryfikowano: '2026-08-27',
     opis: [
       <>
         Zebra ZD220d to najprostsza i najtańsza czterocalowa drukarka etykiet w ofercie Zebry,
@@ -347,6 +387,14 @@ export const TRESC_KART: Record<string, TrescKarty> = {
   'zebra-zd220t': {
     rekomendowanyPn: 'ZD22042-T0EG00EZ',
     zdjecieGlowne: '/sklep_photo/urzadzenia/zd220t_1.webp',
+    wSkrocie: [
+      'Zebra ZD220t to najtańsza drukarka termotransferowa Zebry — drukuje z taśmy barwiącej, a także termicznie bez taśmy.',
+      'Pracuje w rozdzielczości 203 dpi z prędkością do 102 mm/s, przy szerokości druku 104 mm.',
+      'Przyjmuje wyłącznie taśmy o długości do 74 m na wałku pół cala, o szerokości 33,8–109,2 mm, więc przy druku seryjnym wymienia się je często.',
+      'Łączy się tylko przez USB — konstrukcja nie przewiduje modułu z Ethernetem ani Wi-Fi.',
+      'Nadruk z taśmy jest odporny na ścieranie i wilgoć, dlatego nadaje się do etykiet produktowych i oznaczeń wieloletnich.',
+    ],
+    zweryfikowano: '2026-08-27',
     opis: [
       <>
         Zebra ZD220t to najtańsza drukarka termotransferowa w ofercie producenta — drukuje
@@ -447,6 +495,14 @@ export const TRESC_KART: Record<string, TrescKarty> = {
   'zebra-zd230d': {
     rekomendowanyPn: 'ZD23042-D0EG00EZ',
     zdjecieGlowne: '/sklep_photo/urzadzenia/zd230d_1.webp',
+    wSkrocie: [
+      'Zebra ZD230d to biurkowa drukarka etykiet drukująca termicznie bezpośrednio, w rozdzielczości 203 dpi, z prędkością do 152 mm/s.',
+      'Drukuje o połowę szybciej niż ZD220d i w odróżnieniu od niej występuje w wersjach z Ethernetem albo Wi-Fi.',
+      'Szerokość druku 104 mm; obsługuje nośniki 25,4–112 mm, rolki do 127 mm średnicy i etykiety do 991 mm długości.',
+      'Odklejak, gilotynę i białą obudowę montuje fabryka — wersję wybiera się przy zamówieniu i nie da się jej zmienić później.',
+      'Nadruk termiczny z czasem blaknie; do oznaczeń trwałych służy termotransferowa Zebra ZD230t.',
+    ],
+    zweryfikowano: '2026-08-28',
     opis: [
       <>
         Zebra ZD230d to biurkowa drukarka etykiet pracująca w technologii termicznej
@@ -558,6 +614,14 @@ export const TRESC_KART: Record<string, TrescKarty> = {
   'zebra-zd230t': {
     rekomendowanyPn: 'ZD23042-30EC00EZ',
     zdjecieGlowne: '/sklep_photo/urzadzenia/zd230t_1.webp',
+    wSkrocie: [
+      'Zebra ZD230t to biurkowa drukarka termotransferowa: drukuje z taśmy barwiącej, a w razie potrzeby także termicznie, bez taśmy.',
+      'Pracuje w rozdzielczości 203 dpi z prędkością do 152 mm/s, przy szerokości druku 104 mm.',
+      'Przyjmuje taśmy 300-metrowe na wałku calowym oraz 74-metrowe na wałku pół cala, o szerokości 33,8–109,2 mm.',
+      'Jedna taśma 300 m wystarcza na około 2000 etykiet o długości 150 mm — cztery razy dłużej niż rolka 74-metrowa z serii ZD220.',
+      'Wersje z Ethernetem albo Wi-Fi oraz opcje odklejaka, gilotyny i białej obudowy wybiera się przy zamówieniu, bo montuje je fabryka.',
+    ],
+    zweryfikowano: '2026-08-30',
     opis: [
       <>
         Zebra ZD230t to biurkowa drukarka etykiet drukująca termotransferowo, czyli z taśmy
@@ -682,6 +746,14 @@ export const TRESC_KART: Record<string, TrescKarty> = {
   'zebra-zd621d': {
     rekomendowanyPn: 'ZD6A042-D0EF00EZ',
     zdjecieGlowne: '/sklep_photo/urzadzenia/zd621d_1.webp',
+    wSkrocie: [
+      'Zebra ZD621d to najszybsza biurkowa drukarka etykiet Zebry — drukuje termicznie, bez taśmy, z prędkością do 203 mm/s.',
+      'Występuje w rozdzielczości 203 dpi (do 203 mm/s) oraz 300 dpi (do 152 mm/s), przy szerokości druku 104 mm.',
+      'Ethernet 10/100, RS-232, USB i USB Host ma w standardzie; Wi-Fi 6 z Bluetooth 5.3 montuje się fabrycznie albo po zakupie.',
+      'Gilotynę i odklejak można dołożyć również po zakupie — w seriach ZD220 i ZD230 wyposażenie wybiera się raz, przy zamówieniu.',
+      'Ma 512 MB pamięci Flash, zegar czasu rzeczywistego do druku daty bez udziału komputera i opcjonalny kolorowy ekran dotykowy 4,3 cala.',
+    ],
+    zweryfikowano: '2026-08-30',
     opis: [
       <>
         Zebra ZD621d to najwyższy model biurkowej serii ZD w wersji termicznej bezpośredniej —

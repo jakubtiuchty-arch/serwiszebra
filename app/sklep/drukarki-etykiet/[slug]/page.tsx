@@ -112,6 +112,16 @@ export async function generateMetadata({
   }
 }
 
+/** „2026-08-30" → „w sierpniu 2026" — miejscownik, bo data stoi w zdaniu. */
+const MIESIACE_MIEJSCOWNIK = [
+  'styczniu', 'lutym', 'marcu', 'kwietniu', 'maju', 'czerwcu',
+  'lipcu', 'sierpniu', 'wrześniu', 'październiku', 'listopadzie', 'grudniu',
+]
+const miesiacRok = (iso: string) => {
+  const d = new Date(iso)
+  return `w ${MIESIACE_MIEJSCOWNIK[d.getMonth()]} ${d.getFullYear()}`
+}
+
 export default async function DevicePage({
   params,
   searchParams,
@@ -162,6 +172,7 @@ export default async function DevicePage({
   const wybranyPn = variants.some((v) => v.pn === pnZAdresu) ? pnZAdresu : undefined
 
   const kartaUrl = `${SITE}/sklep/drukarki-etykiet/${product.slug}`
+  const tresc = trescKarty(product.slug)
   const zdjecie = zdjecieGlowne(product.slug, product.image_urls)
 
   /** Każdy wariant ma własny adres, pod którym karta otwiera się z nim wybranym */
@@ -190,6 +201,15 @@ export default async function DevicePage({
     url: kartaUrl,
     ...(zdjecie ? { image: [zdjecie] } : {}),
     productGroupID: product.device_model || product.slug,
+    // Tabela specyfikacji podana też maszynowo — model pytany o prędkość druku
+    // albo szerokość nośnika ma fakt z atrybutem, a nie zdanie do parsowania.
+    ...(tresc?.spec?.length
+      ? {
+          additionalProperty: tresc.spec
+            .filter(([nazwa]) => nazwa !== 'Stan')
+            .map(([name, value]) => ({ '@type': 'PropertyValue', name, value })),
+        }
+      : {}),
     hasVariant: variants.map((v) => {
       const stan = stanDlaPN(stany, v.pn)
       return {
@@ -270,7 +290,6 @@ export default async function DevicePage({
     }),
   }
 
-  const tresc = trescKarty(product.slug)
 
   const faqSchema = tresc
     ? {
@@ -325,6 +344,7 @@ export default async function DevicePage({
               '@type': 'WebPage',
               '@id': kartaUrl,
               url: kartaUrl,
+              ...(tresc?.zweryfikowano ? { dateModified: tresc.zweryfikowano } : {}),
               primaryImageOfPage: {
                 '@type': 'ImageObject',
                 contentUrl: zdjecie,
@@ -402,6 +422,22 @@ export default async function DevicePage({
               <h2 className="text-sm sm:text-base font-semibold text-gray-900 mb-3">
                 Opis produktu
               </h2>
+
+              {/* Skrót faktów przed prozą: każdy punkt broni się bez reszty
+                  strony, więc asystent AI pytany o ten model ma co zacytować,
+                  a człowiek dostaje odpowiedź bez czytania trzech akapitów. */}
+              <div className="mb-4 rounded-xl border border-gray-200 bg-gray-50 p-4">
+                <h3 className="text-sm font-semibold text-gray-900">W skrócie</h3>
+                <ul className="mt-2 space-y-1.5">
+                  {tresc.wSkrocie.map((fakt) => (
+                    <li key={fakt} className="flex gap-2 text-sm leading-relaxed text-gray-700">
+                      <span aria-hidden className="mt-2 h-1 w-1 shrink-0 rounded-full bg-gray-400" />
+                      <span>{fakt}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
               {tresc.opis.map((akapit, i) => (
                 <p
                   key={i}
@@ -504,6 +540,17 @@ export default async function DevicePage({
                 ))}
               </tbody>
             </table>
+
+            {/* Kto sprawdził dane i kiedy. Przy sprzęcie, którego parametry
+                sklepy przepisują od siebie z błędami, źródło i data są tym,
+                co odróżnia kartę wartą zacytowania od reszty wyników. */}
+            {tresc?.zweryfikowano && (
+              <p className="mt-4 border-t border-gray-100 pt-3 text-xs text-gray-500">
+                Dane techniczne sprawdzone u producenta{' '}
+                <time dateTime={tresc.zweryfikowano}>{miesiacRok(tresc.zweryfikowano)}</time>{' '}
+                przez TAKMA — autoryzowany serwis Zebra Technologies.
+              </p>
+            )}
           </section>
 
           {/* Dokumentacja osobno, nie luźnym przyciskiem doklejonym do opisu.
