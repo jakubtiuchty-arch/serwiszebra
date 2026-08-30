@@ -978,3 +978,13 @@ Jutro: 6:00 stock-sync (pełna pula), 10:00 review-reminder (38 maili z serwis@s
 - Dane zweryfikowane u źródła: szerokość druku 104 mm (opis w takmie mówił 108), etykiety 25,4–112 mm; wymiary POMINIĘTE — takma podaje wymiary ZD220d, sklepy inne, brak pewnego źródła.
 - Głowica P1115689: device_model poprawiony na „ZD220d / ZD230d" (potwierdzone u dystrybutorów) — wcześniej karta ZD230d nie pokazywała głowicy.
 - Link z /sterowniki podmieniony na ZD230d (zamiast ZD220t) — strona ma poz. 2 na „zebra zd421 sterowniki".
+
+## 2026-08-30 — filtr wariantów na /sklep/drukarki-etykiet/biurkowe
+- Diagnoza przed kodem: kategoria ma **5 modeli, ale 22 warianty** (PN-y), a pozostałe klasy są w bazie puste. Filtr nad pięcioma kafelkami nic nie daje — filtrujemy więc WARIANTY, a kafelek modelu pokazuje, ile jego wersji przeszło („pasują 3 z 6 wersji").
+- `components/shop/KatalogDrukarek.tsx` (client): grupy Rodzaj druku / Rozdzielczość / Łączność / Wyposażenie / Dostępność. Wewnątrz grupy „albo", między grupami „i". Przy każdym chipie licznik trafień; kombinacja bez wyników → chip wygaszony i nieklikalny (bez ślepych zaułków). Stan pusty ma własny komunikat i przycisk powrotu.
+- Rodzaj druku bierzemy z ostatniej litery modelu (ZD421t/ZD421d) — warianty jej nie powtarzają. Ceny i dostępność per wariant z cache stanów, z fallbackiem do ceny modelu.
+- Gdy filtr zawęzi model do jednej wersji, kafelek linkuje prosto do niej (`?pn=`), a CTA zmienia się na „Zobacz tę wersję".
+- SEO: `generateMetadata` daje `noindex, follow` każdej kombinacji z filtrem, canonical zawsze na czysty adres kategorii. Stan filtra zapisujemy przez `history.replaceState`, nie `router.replace` — strona jest force-dynamic, więc nawigacja oznaczałaby ponowne odpytanie serwera o te same dane.
+- Mobile: panel startuje zwinięty (pięć rzędów chipów spychało produkty pod ekran), na desktopie zawsze otwarty.
+- Przy okazji usunięte „Parametry z kart katalogowych Zebry" pod tabelą — nie powołujemy się na dokumenty producenta.
+- Test: `node scripts/test-filtr-wariantow.mjs` (na buildzie, port 3003) — 13 sprawdzeń, wszystkie zielone; osobno zweryfikowane wejście z gotowego adresu `?dpi=300&lacznosc=Wi-Fi` i nagłówki robots/canonical.

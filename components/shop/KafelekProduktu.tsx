@@ -10,9 +10,14 @@ export interface KafelekProduktuDane {
   cechy: string[]
   netto: number
   brutto: number
+  /** Ile wersji pokazuje kafelek — przy aktywnym filtrze tylko te, które przeszły */
   liczbaWersji: number
+  /** Podane tylko przy aktywnym filtrze: ile wersji ma model w całości */
+  wszystkichWersji?: number
   dostepny: boolean
   magazynPL: boolean
+  /** Nadpisuje domyślny adres karty, np. o `?pn=` przy jednej pasującej wersji */
+  href?: string
 }
 
 const zl = (v: number) =>
@@ -26,7 +31,7 @@ const zl = (v: number) =>
 export default function KafelekProduktu({ p }: { p: KafelekProduktuDane }) {
   return (
     <Link
-      href={`/sklep/drukarki-etykiet/${p.slug}`}
+      href={p.href || `/sklep/drukarki-etykiet/${p.slug}`}
       className="group flex flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
     >
       <span className="relative block aspect-[5/4] overflow-hidden bg-white">
@@ -57,6 +62,13 @@ export default function KafelekProduktu({ p }: { p: KafelekProduktuDane }) {
           </span>
         )}
 
+        {typeof p.wszystkichWersji === 'number' && p.wszystkichWersji > p.liczbaWersji && (
+          <span className="mt-2 block text-[11px] font-medium text-gray-500">
+            {p.liczbaWersji >= 2 && p.liczbaWersji <= 4 ? 'pasują' : 'pasuje'} {p.liczbaWersji} z{' '}
+            {p.wszystkichWersji} wersji
+          </span>
+        )}
+
         <span className="mb-3 mt-3 flex items-end justify-between gap-2">
           <span>
             <span className="block text-lg font-bold leading-tight text-gray-900">
@@ -77,7 +89,11 @@ export default function KafelekProduktu({ p }: { p: KafelekProduktuDane }) {
         {/* mt-auto — CTA zawsze przy dolnej krawędzi kafelka, niezależnie od
             tego, ile rzędów zajęły chipy (ZD220d ma jeden, ZD421 dwa) */}
         <span className="mt-auto flex min-h-[42px] items-center justify-center gap-1.5 rounded-lg bg-[#A8F000] px-4 text-sm font-semibold text-gray-900 transition group-hover:brightness-95">
-          {p.liczbaWersji > 1 ? `Wybierz z ${p.liczbaWersji} wersji` : 'Zobacz więcej'}
+          {p.liczbaWersji > 1
+            ? `Wybierz z ${p.liczbaWersji} wersji`
+            : p.href
+              ? 'Zobacz tę wersję'
+              : 'Zobacz więcej'}
           <ArrowRight className="h-4 w-4" />
         </span>
       </span>

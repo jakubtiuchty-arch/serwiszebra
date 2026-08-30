@@ -1,11 +1,12 @@
 import Link from 'next/link'
-import Image from 'next/image'
+import { Suspense } from 'react'
 import type { Metadata } from 'next'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import { pobierzStany, stanDlaPN } from '@/lib/stock-server'
 import { klasaBySlug } from '@/lib/printer-classes'
-import KafelekProduktu from '@/components/shop/KafelekProduktu'
+import KatalogDrukarek from '@/components/shop/KatalogDrukarek'
+import type { ModelDoFiltra } from '@/components/shop/KatalogDrukarek'
 import type { DeviceVariant } from '@/components/shop/DevicePurchasePanel'
 
 /**
@@ -23,18 +24,38 @@ export const dynamic = 'force-dynamic'
 const KLASA = klasaBySlug('biurkowe')!
 const URL_KAT = `${SITE}/sklep/drukarki-etykiet/biurkowe`
 
-export const metadata: Metadata = {
-  title: KLASA.metaTitle,
-  description: KLASA.metaDescription,
-  alternates: { canonical: URL_KAT, languages: { pl: URL_KAT, 'x-default': URL_KAT } },
-  openGraph: {
+/** Klucze filtra wariantów — te same, które czyta `KatalogDrukarek`. */
+const KLUCZE_FILTRA = ['druk', 'dpi', 'lacznosc', 'wyposazenie', 'dostepne'] as const
+
+type SearchParams = Promise<Record<string, string | string[] | undefined>>
+
+/**
+ * Kanoniczny zostaje czysty adres kategorii, a kombinacje filtra dostają
+ * `noindex, follow`: fasety potrafią wygenerować dziesiątki adresów z tą samą
+ * treścią, a rankować ma jedna strona.
+ */
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: SearchParams
+}): Promise<Metadata> {
+  const sp = await searchParams
+  const zFiltrem = KLUCZE_FILTRA.some((k) => !!sp[k])
+
+  return {
     title: KLASA.metaTitle,
     description: KLASA.metaDescription,
-    url: URL_KAT,
-    type: 'website',
-    siteName: 'TAKMA — Autoryzowany Serwis Zebra',
-    locale: 'pl_PL',
-  },
+    alternates: { canonical: URL_KAT, languages: { pl: URL_KAT, 'x-default': URL_KAT } },
+    ...(zFiltrem ? { robots: { index: false, follow: true } } : {}),
+    openGraph: {
+      title: KLASA.metaTitle,
+      description: KLASA.metaDescription,
+      url: URL_KAT,
+      type: 'website',
+      siteName: 'TAKMA — Autoryzowany Serwis Zebra',
+      locale: 'pl_PL',
+    },
+  }
 }
 
 interface DeviceRow {
@@ -61,51 +82,48 @@ async function getDevices(): Promise<DeviceRow[]> {
   }
 }
 
-const zl = (v: number) =>
-  v.toLocaleString('pl-PL', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
-
 export default async function DesktopPrintersPage() {
   const devices = await getDevices()
 
   const wszystkiePny = devices.flatMap((d) => (d.attributes?.variants || []).map((v) => v.pn))
   const stany = await pobierzStany(wszystkiePny)
 
-  const daneKafelka = (d: DeviceRow) => {
+  /**
+   * Model rozłożony na warianty — filtr działa na numerach katalogowych, więc
+   * każdy wariant niesie własną rozdzielczość, łączność, wyposażenie, cenę
+   * i stan. Rodzaj druku bierzemy z ostatniej litery modelu (ZD421t / ZD421d),
+   * bo warianty jej nie powtarzają.
+   */
+  const doFiltra = (d: DeviceRow): ModelDoFiltra => {
     const warianty = d.attributes?.variants || []
-    const zCache = warianty
-      .map((v) => stanDlaPN(stany, v.pn))
-      .filter((s): s is NonNullable<typeof s> => !!s && s.netto > 0)
-    const najtanszy = zCache.length
-      ? zCache.reduce((a, b) => (b.netto < a.netto ? b : a))
-      : null
-
-    // Chipy z konkretami zamiast gołego „6 wersji": rozdzielczości i łączność
-    // wyliczone z wariantów, więc same się zaktualizują przy nowych modelach
-    const dpi = Array.from(new Set(warianty.map((v) => v.dpi).filter(Boolean))).sort()
-    const laczn = new Set<string>(['USB'])
-    for (const v of warianty) {
-      const l = v.cechy?.['Łączność'] || ''
-      if (l.includes('Ethernet')) laczn.add('LAN')
-      if (l.includes('Wi-Fi')) laczn.add('Wi-Fi')
-    }
-    const cechy = [
-      dpi.length ? `${dpi.join(' / ')} dpi` : null,
-      Array.from(laczn).join(' · '),
-      'druk 104 mm',
-    ].filter((x): x is string => !!x)
+    const model = d.device_model || d.slug
+    const druk = /t$/i.test(model.trim()) ? 'termotransfer' : 'termiczny'
 
     return {
       slug: d.slug,
       nazwa: d.name.replace(/^Drukarka etykiet\s+/i, ''),
       zdjecie: d.image_urls?.[0] || null,
-      cechy,
-      netto: najtanszy ? najtanszy.netto : Number(d.price),
-      brutto: najtanszy ? najtanszy.brutto : Math.round(Number(d.price) * 1.23 * 100) / 100,
-      liczbaWersji: warianty.length,
-      dostepny: zCache.some((x) => x.totalStock > 0),
-      magazynPL: zCache.some((x) => x.stockPL > 0),
+      druk,
+      netto: Number(d.price),
+      brutto: Math.round(Number(d.price) * 1.23 * 100) / 100,
+      warianty: warianty.map((v) => {
+        const st = stanDlaPN(stany, v.pn)
+        const cena = st && st.netto > 0 ? st : null
+        return {
+          pn: v.pn,
+          dpi: String(v.dpi || v.cechy?.['Rozdzielczość'] || '').replace(/\D+/g, ''),
+          lacznosc: v.cechy?.['Łączność'] || 'USB',
+          wyposazenie: v.cechy?.['Wyposażenie'] || 'Standard',
+          netto: cena ? cena.netto : Number(d.price),
+          brutto: cena ? cena.brutto : Math.round(Number(d.price) * 1.23 * 100) / 100,
+          dostepny: !!st && st.totalStock > 0,
+          magazynPL: !!st && st.stockPL > 0,
+        }
+      }),
     }
   }
+
+  const modele = devices.map(doFiltra)
 
   const breadcrumbSchema = {
     '@context': 'https://schema.org',
@@ -186,11 +204,9 @@ export default async function DesktopPrintersPage() {
               , dobierzemy model i przygotujemy wycenę.
             </p>
           ) : (
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              {devices.map((d) => (
-                <KafelekProduktu key={d.slug} p={daneKafelka(d)} />
-              ))}
-            </div>
+            <Suspense fallback={null}>
+              <KatalogDrukarek modele={modele} />
+            </Suspense>
           )}
 
           <section className="mt-12">
@@ -340,8 +356,8 @@ export default async function DesktopPrintersPage() {
               </table>
             </div>
             <p className="mt-2 text-xs text-gray-500">
-              Parametry z kart katalogowych Zebry; szybkości podane dla 203 dpi. Wszystkie serie
-              przyjmują rolki do 127 mm średnicy i etykiety do 991 mm długości.
+              Szybkości podane dla 203 dpi. Wszystkie serie przyjmują rolki do 127 mm średnicy
+              i etykiety do 991 mm długości.
             </p>
 
             <p className="mt-6 text-sm leading-relaxed text-gray-700">
