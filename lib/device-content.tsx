@@ -876,6 +876,142 @@ export const TRESC_KART: Record<string, TrescKarty> = {
       ['Gwarancja', '24 miesiące'],
     ],
   },
+  'zebra-zd621t': {
+    rekomendowanyPn: 'ZD6A042-30EF00EZ',
+    zdjecieGlowne: '/sklep_photo/urzadzenia/zd621t_1.webp',
+    wSkrocie: [
+      'Zebra ZD621t to najszybsza biurkowa drukarka termotransferowa Zebry — drukuje z taśmy barwiącej z prędkością do 203 mm/s, a w razie potrzeby także termicznie, bez taśmy.',
+      'Występuje w rozdzielczości 203 dpi (do 203 mm/s) oraz 300 dpi (do 152 mm/s), przy szerokości druku 104 mm.',
+      'Przyjmuje taśmy 300-metrowe na wałku calowym i 74-metrowe na wałku pół cala, o szerokości 33,8–109,2 mm.',
+      'Obsługuje nośniki do 118 mm szerokości — najszersze w całej biurkowej serii ZD.',
+      'Ethernet 10/100, RS-232, USB i USB Host ma w standardzie; Wi-Fi 6 z Bluetooth 5.3 montuje się fabrycznie albo po zakupie.',
+      'Gilotynę i odklejak można dołożyć również po zakupie, a wersje z kolorowym ekranem dotykowym 4,3 cala pokazują stan drukarki bez podłączania komputera.',
+    ],
+    zweryfikowano: '2026-08-30',
+    opis: [
+      <>
+        Zebra ZD621t to najwyższy model biurkowej serii ZD w wersji termotransferowej —
+        drukuje z taśmy barwiącej, więc nadruk jest odporny na ścieranie, wilgoć i światło,
+        a przy tym radzi sobie z tempem, którego pozostałe drukarki tej klasy nie osiągają.
+        Trafia tam, gdzie trwałe oznaczenia powstają seriami przez całą zmianę: na produkcji,
+        w magazynach wysokiego składowania, w laboratoriach i przy znakowaniu środków
+        trwałych. Urządzenie drukuje również termicznie bezpośrednio, bez taśmy, więc obsłuży
+        także etykiety wysyłkowe.
+      </>,
+      <>
+        W rozdzielczości 203 dpi drukarka osiąga 203 mm/s, czyli o jedną trzecią więcej niż{' '}
+        <Link
+          href="/sklep/drukarki-etykiet/zebra-zd421t"
+          className="font-medium text-gray-900 underline"
+        >
+          Zebra ZD421t
+        </Link>
+        ; wersja 300 dpi pracuje do 152 mm/s i służy do drobnego tekstu oraz małych kodów.
+        Szerokość druku wynosi 104 mm, a obsługiwane nośniki sięgają 118 mm szerokości —
+        najwięcej w całej biurkowej serii ZD, co pozwala drukować na etykietach z szerszym
+        marginesem podłoża. Taśmy mieszczą się w dwóch nawojach: 300 m na wałku calowym
+        i 74 m na wałku pół cala; przy proporcji jeden do czterech rolka 300-metrowa
+        wystarcza na cztery pełne rolki etykiet, więc przestoje na wymianę materiału są
+        rzadsze.
+      </>,
+      <>
+        Ethernet, RS-232, USB i USB Host są w standardzie, więc drukarka wchodzi do sieci bez
+        dokupywania modułu; Wi-Fi 6 z Bluetoothem zamawia się fabrycznie albo dokłada
+        później. Gilotynę i odklejak również montuje się po zakupie — w tańszych seriach
+        wyposażenie wybiera się raz, przy zamówieniu. Pamięć 512 MB Flash z 256 MB SDRAM
+        mieści rozbudowane szablony z grafiką, a zegar czasu rzeczywistego pozwala drukować
+        datę bez pytania komputera. Obsługa ZPL II i EPL 2 zachowuje zgodność z szablonami
+        przygotowanymi dla GK420t i ZD620. Gdy nadruk nie musi być trwały, taniej wypada
+        wersja termiczna{' '}
+        <Link
+          href="/sklep/drukarki-etykiet/zebra-zd621d"
+          className="font-medium text-gray-900 underline"
+        >
+          Zebra ZD621d
+        </Link>
+        .
+      </>,
+    ],
+    osie: [
+      {
+        tytul: 'Rozdzielczość',
+        pozycje: [
+          { termin: '203 dpi', opis: 'kody kreskowe i typowe etykiety, druk do 203 mm/s' },
+          { termin: '300 dpi', opis: 'drobny tekst i małe kody QR, druk do 152 mm/s' },
+        ],
+      },
+      {
+        tytul: 'Panel',
+        pozycje: [
+          { termin: 'Diody', opis: 'stan drukarki sygnalizują kontrolki i trzy przyciski' },
+          {
+            termin: 'Ekran dotykowy',
+            opis: 'kolorowy wyświetlacz 4,3 cala — stan i konfiguracja bez komputera',
+          },
+        ],
+      },
+      {
+        tytul: 'Łączność',
+        pozycje: [
+          { termin: 'Ethernet', opis: 'sieć przewodowa, RS-232 i USB w każdej wersji' },
+          { termin: 'Wi-Fi', opis: 'z Bluetoothem, gdy nie ma jak doprowadzić kabla' },
+        ],
+      },
+    ],
+    faqNaglowek: 'Najczęstsze pytania o ZD621t',
+    faq: [
+      {
+        q: 'Czym ZD621t różni się od ZD421t?',
+        a: 'ZD621t drukuje do 203 mm/s zamiast 152 mm/s, ma Ethernet i RS-232 w standardzie zamiast modułu do dokupienia, cztery razy więcej pamięci Flash, zegar czasu rzeczywistego i opcjonalny ekran dotykowy. Przyjmuje też nośniki do 118 mm zamiast 112 mm. ZD421t jest tańsza i wystarcza, gdy etykiety drukuje jedno stanowisko.',
+        href: '/sklep/drukarki-etykiet/zebra-zd421t',
+        link: 'Zobacz Zebra ZD421t',
+      },
+      {
+        q: 'Jakie taśmy pasują do drukarki Zebra ZD621t?',
+        a: 'ZD621t przyjmuje taśmy 300-metrowe na wałku calowym oraz 74-metrowe na wałku pół cala, o szerokości 33,8–109,2 mm — woskowe, woskowo-żywiczne i żywiczne. Taśma musi być co najmniej tak szeroka jak etykieta: gdy jest węższa, krawędzie nadruku wychodzą niedodrukowane, a głowica pracuje wprost na etykiecie i zużywa się szybciej.',
+        href: '/blog/wymiana-glowicy-drukarki-zebra-kiedy-konieczna-ile-kosztuje',
+        link: 'Wymiana głowicy — kiedy jest konieczna i ile kosztuje',
+      },
+      {
+        q: 'Czym ZD621t różni się od ZD621d?',
+        a: 'To ta sama konstrukcja w dwóch technologiach druku. ZD621t drukuje z taśmy barwiącej i daje nadruk odporny na ścieranie oraz światło; ZD621d drukuje wyłącznie termicznie na etykietach termoczułych — taniej w eksploatacji, ale wydruk z czasem blaknie. Wersja termotransferowa jest też większa: 267 × 202 × 192 mm wobec 220 × 177 × 151 mm.',
+        href: '/sklep/drukarki-etykiet/zebra-zd621d',
+        link: 'Zobacz termiczną Zebra ZD621d',
+      },
+      {
+        q: 'Jak szerokie etykiety wydrukuje ZD621t?',
+        a: 'Drukarka przyjmuje nośniki o szerokości do 118 mm, ale szerokość samego druku wynosi 104 mm — pozostałe milimetry to margines podłoża. Do etykiety kurierskiej 100 × 150 mm zapas jest więc wystarczający, a etykiety szersze niż 104 mm zostaną zadrukowane tylko na tej szerokości.',
+        href: '/blog/drukowanie-etykiet-kurierskich-allegro-inpost-dpd-zebra',
+        link: 'Jak drukować etykiety kurierskie na Zebrze — poradnik',
+      },
+      {
+        q: 'Czy gilotynę albo odklejak można dołożyć po zakupie?',
+        a: 'Tak — w serii ZD621 obie przystawki montuje się serwisowo także po zakupie, więc decyzja nie musi zapaść przy zamówieniu. W seriach ZD220 i ZD230 wyposażenie instaluje fabryka i późniejsza zmiana oznacza wymianę drukarki.',
+        href: '/kontakt',
+        link: 'Napisz do serwisu po wycenę montażu',
+      },
+    ],
+    spec: [
+      ['Producent', 'Zebra'],
+      ['Model', 'ZD621t'],
+      ['Technologia druku', 'Termotransferowa i termiczna bezpośrednia'],
+      ['Rozdzielczość', '203 lub 300 DPI'],
+      ['Szerokość druku', '104 mm'],
+      ['Prędkość druku', 'do 203 mm/s (203 dpi), do 152 mm/s (300 dpi)'],
+      ['Szerokość etykiet', '15–118 mm'],
+      ['Maksymalna długość etykiety', '991 mm'],
+      ['Maksymalna średnica rolki', '127 mm'],
+      ['Taśma', '300 m na wałku calowym lub 74 m na wałku 0,5 cala, szerokość 33,8–109,2 mm'],
+      ['Pamięć', '512 MB Flash, 256 MB SDRAM'],
+      ['Wyświetlacz', 'diody albo kolorowy ekran dotykowy 4,3 cala'],
+      ['Łączność', 'USB, USB Host, Ethernet 10/100, RS-232; opcjonalnie Wi-Fi 6 z Bluetooth 5.3'],
+      ['Wyposażenie dodatkowe', 'Odklejak i gilotyna — montowane także po zakupie'],
+      ['Wymiary (D×S×W)', '267 × 202 × 192 mm'],
+      ['Waga', '2,5 kg'],
+      ['Stan', 'Nowy, oryginalny'],
+      ['Gwarancja', '24 miesiące'],
+    ],
+  },
 }
 
 export const trescKarty = (slug: string): TrescKarty | undefined => TRESC_KART[slug]

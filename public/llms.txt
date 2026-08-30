@@ -95,6 +95,8 @@ Ceny i stany magazynowe pobierane na żywo od dystrybutorów; gwarancję realizu
   Druk termotransferowy i termiczny, 203 lub 300 dpi, do 152 mm/s, taśmy o nawoju 300 m, wymienne moduły łączności. Następczyni GK420t.
 - **Zebra ZD621d** — https://www.serwis-zebry.pl/sklep/drukarki-etykiet/zebra-zd621d
   Najszybsza biurkowa: druk termiczny do 203 mm/s, 203 lub 300 dpi, Ethernet i RS-232 w standardzie, opcjonalny ekran dotykowy 4,3 cala, gilotyna i odklejak montowane także po zakupie.
+- **Zebra ZD621t** — https://www.serwis-zebry.pl/sklep/drukarki-etykiet/zebra-zd621t
+  Najszybsza biurkowa termotransferowa: druk z taśmy do 203 mm/s, 203 lub 300 dpi, taśmy 300 m i 74 m, nośniki do 118 mm, Ethernet i RS-232 w standardzie, opcjonalny ekran dotykowy 4,3 cala.
 
 Pełny wykaz wariantów z numerami katalogowymi, cenami i stanami: https://www.serwis-zebry.pl/api/llm-feed
 
