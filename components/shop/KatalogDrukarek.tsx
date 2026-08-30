@@ -237,138 +237,180 @@ export default function KatalogDrukarek({
     return n;
   };
 
+  /** Etykieta opcji do pigułek nad wynikami — chip nazywa wybór, nie kod. */
+  const etykietaOpcji = (klucz: Klucz, wartoscOpcji: string) =>
+    GRUPY.find((g) => g.klucz === klucz)?.opcje.find(
+      (o) => o.wartosc === wartoscOpcji,
+    )?.etykieta || wartoscOpcji;
+
+  const wybrane: { klucz: Klucz; wartosc: string }[] = GRUPY.flatMap((g) =>
+    stan[g.klucz].map((w) => ({ klucz: g.klucz, wartosc: w })),
+  );
+
   return (
-    <>
-      <div className="mb-6 rounded-xl border border-gray-200 bg-white p-4">
-        <div className="flex flex-wrap items-baseline justify-between gap-2">
-          {/* Na telefonie panel startuje zwinięty — pięć rzędów chipów zepchnęłoby
-              produkty poniżej pierwszego ekranu */}
-          <h2 className="text-sm font-semibold text-gray-900">
+    <div className="flex flex-col gap-6 lg:flex-row lg:items-start">
+      {/* Filtry po lewej — tak, jak klient zna to ze sklepów. Na telefonie
+          kolumna wskakuje nad listę i startuje zwinięta, żeby pięć grup nie
+          spychało produktów poniżej pierwszego ekranu. */}
+      <aside className="lg:sticky lg:top-6 lg:w-60 lg:shrink-0">
+        <div className="rounded-xl border border-gray-200 bg-white">
+          <h2 className="border-b border-gray-100 px-4 py-3 text-sm font-semibold text-gray-900">
             <button
               type="button"
               onClick={() => setRozwiniety((x) => !x)}
               aria-expanded={rozwiniety}
-              className="flex items-center gap-1.5 sm:pointer-events-none"
+              className="flex w-full items-center gap-1.5 lg:pointer-events-none"
             >
               Dobierz wersję
               {aktywne > 0 && (
-                <span className="rounded-md bg-gray-900 px-1.5 py-0.5 text-[11px] font-semibold text-white sm:hidden">
+                <span className="rounded-md bg-gray-900 px-1.5 py-0.5 text-[11px] font-semibold text-white lg:hidden">
                   {aktywne}
                 </span>
               )}
               <ChevronDown
-                className={`h-4 w-4 text-gray-400 transition sm:hidden ${rozwiniety ? "rotate-180" : ""}`}
+                className={`ml-auto h-4 w-4 text-gray-400 transition lg:hidden ${
+                  rozwiniety ? "rotate-180" : ""
+                }`}
               />
             </button>
           </h2>
+
+          <div className={rozwiniety ? "block" : "hidden lg:block"}>
+            {GRUPY.map((g) => (
+              <fieldset
+                key={g.klucz}
+                className="border-b border-gray-100 px-4 py-3 last:border-0"
+              >
+                <legend className="text-[11px] font-medium uppercase tracking-wide text-gray-400">
+                  {g.etykieta}
+                </legend>
+                <div className="mt-2 space-y-1">
+                  {g.opcje.map((o) => {
+                    const zaznaczony = stan[g.klucz].includes(o.wartosc);
+                    const ile = licznoscOpcji(g, o.wartosc);
+                    const martwy = ile === 0 && !zaznaczony;
+                    return (
+                      <label
+                        key={o.wartosc}
+                        className={`flex min-h-[32px] items-center gap-2 text-sm ${
+                          martwy
+                            ? "cursor-not-allowed text-gray-300"
+                            : "cursor-pointer text-gray-700"
+                        }`}
+                      >
+                        <input
+                          type="checkbox"
+                          checked={zaznaczony}
+                          disabled={martwy}
+                          onChange={() => przelacz(g.klucz, o.wartosc)}
+                          className="h-4 w-4 rounded border-gray-300 text-gray-900 accent-gray-900 disabled:opacity-40"
+                        />
+                        <span
+                          className={
+                            zaznaczony ? "font-medium text-gray-900" : ""
+                          }
+                        >
+                          {o.etykieta}
+                        </span>
+                        <span className="ml-auto text-xs text-gray-400">
+                          {ile}
+                        </span>
+                      </label>
+                    );
+                  })}
+                </div>
+              </fieldset>
+            ))}
+
+            {aktywne > 0 && (
+              <div className="px-4 py-3">
+                <button
+                  type="button"
+                  onClick={wyczysc}
+                  className="inline-flex items-center gap-1 text-xs font-medium text-gray-600 underline hover:text-gray-900"
+                >
+                  <X className="h-3.5 w-3.5" />
+                  Wyczyść filtry
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      </aside>
+
+      <div className="min-w-0 flex-1">
+        <div className="mb-4 flex flex-wrap items-center gap-2">
           <p className="text-xs text-gray-500">
             {aktywne === 0
               ? `${wszystkichWariantow} ${odmianaWersji(wszystkichWariantow)} w ${modele.length} modelach`
-              : `${czasownikPasuje(pasujacychWariantow)} ${pasujacychWariantow} z ${wszystkichWariantow} wersji w ${widoczne.length} ${widoczne.length === 1 ? "modelu" : "modelach"}`}
+              : `${czasownikPasuje(pasujacychWariantow)} ${pasujacychWariantow} z ${wszystkichWariantow} wersji w ${widoczne.length} ${
+                  widoczne.length === 1 ? "modelu" : "modelach"
+                }`}
           </p>
-        </div>
-
-        <div
-          className={`mt-3 space-y-3 ${rozwiniety ? "" : "hidden sm:block"}`}
-        >
-          {GRUPY.map((g) => (
-            <div key={g.klucz} className="flex flex-wrap items-center gap-2">
-              <span className="w-full text-[11px] font-medium uppercase tracking-wide text-gray-400 sm:w-28">
-                {g.etykieta}
-              </span>
-              {g.opcje.map((o) => {
-                const wybrany = stan[g.klucz].includes(o.wartosc);
-                const ile = licznoscOpcji(g, o.wartosc);
-                const martwy = ile === 0 && !wybrany;
-                return (
-                  <button
-                    key={o.wartosc}
-                    type="button"
-                    onClick={() => przelacz(g.klucz, o.wartosc)}
-                    disabled={martwy}
-                    aria-pressed={wybrany}
-                    className={`min-h-[36px] rounded-lg border px-3 text-sm font-medium transition ${
-                      wybrany
-                        ? "border-gray-900 bg-gray-900 text-white"
-                        : martwy
-                          ? "cursor-not-allowed border-gray-100 bg-gray-50 text-gray-300"
-                          : "border-gray-200 bg-white text-gray-700 hover:border-gray-400"
-                    }`}
-                  >
-                    {o.etykieta}
-                    <span
-                      className={`ml-1.5 text-xs ${wybrany ? "text-gray-300" : "text-gray-400"}`}
-                    >
-                      {ile}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
+          {/* Pigułki wybranych filtrów — na telefonie kolumna bywa zwinięta,
+              więc to jedyne miejsce, gdzie widać i można cofnąć wybór */}
+          {wybrane.map(({ klucz, wartosc: w }) => (
+            <button
+              key={`${klucz}-${w}`}
+              type="button"
+              onClick={() => przelacz(klucz, w)}
+              className="inline-flex items-center gap-1 rounded-full bg-gray-900 py-1 pl-3 pr-2 text-xs font-medium text-white"
+            >
+              {etykietaOpcji(klucz, w)}
+              <X className="h-3 w-3" />
+            </button>
           ))}
         </div>
 
-        {aktywne > 0 && (
-          <button
-            type="button"
-            onClick={wyczysc}
-            className={`mt-3 inline-flex items-center gap-1 text-xs font-medium text-gray-600 underline hover:text-gray-900 ${
-              rozwiniety ? "" : "hidden sm:inline-flex"
-            }`}
-          >
-            <X className="h-3.5 w-3.5" />
-            Wyczyść filtry
-          </button>
+        {widoczne.length === 0 ? (
+          <div className="rounded-xl border border-gray-200 bg-white p-6 text-center">
+            <p className="text-sm text-gray-700">
+              Żadna wersja z magazynu nie spełnia wszystkich warunków naraz.
+            </p>
+            <button
+              type="button"
+              onClick={wyczysc}
+              className="mt-3 inline-flex min-h-[40px] items-center rounded-lg bg-[#A8F000] px-4 text-sm font-semibold text-gray-900"
+            >
+              Pokaż wszystkie wersje
+            </button>
+          </div>
+        ) : (
+          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+            {widoczne.map(({ m, warianty }) => {
+              const najtanszy = warianty.reduce((a, b) =>
+                b.netto < a.netto ? b : a,
+              );
+              // Gdy filtr zawęził model do jednej wersji, kafelek prowadzi prosto
+              // do niej — karta produktu honoruje `?pn=`.
+              const href =
+                aktywne > 0 && warianty.length === 1
+                  ? `/sklep/drukarki-etykiet/${m.slug}?pn=${encodeURIComponent(warianty[0].pn)}`
+                  : undefined;
+              return (
+                <KafelekProduktu
+                  key={m.slug}
+                  p={{
+                    slug: m.slug,
+                    nazwa: m.nazwa,
+                    zdjecie: m.zdjecie,
+                    cechy: chipy(m, warianty),
+                    netto: najtanszy.netto > 0 ? najtanszy.netto : m.netto,
+                    brutto: najtanszy.brutto > 0 ? najtanszy.brutto : m.brutto,
+                    liczbaWersji: warianty.length,
+                    wszystkichWersji:
+                      aktywne > 0 ? m.warianty.length : undefined,
+                    dostepny: warianty.some((v) => v.dostepny),
+                    magazynPL: warianty.some((v) => v.magazynPL),
+                    href,
+                  }}
+                />
+              );
+            })}
+          </div>
         )}
       </div>
-
-      {widoczne.length === 0 ? (
-        <div className="rounded-xl border border-gray-200 bg-white p-6 text-center">
-          <p className="text-sm text-gray-700">
-            Żadna wersja z magazynu nie spełnia wszystkich warunków naraz.
-          </p>
-          <button
-            type="button"
-            onClick={wyczysc}
-            className="mt-3 inline-flex min-h-[40px] items-center rounded-lg bg-[#A8F000] px-4 text-sm font-semibold text-gray-900"
-          >
-            Pokaż wszystkie wersje
-          </button>
-        </div>
-      ) : (
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {widoczne.map(({ m, warianty }) => {
-            const najtanszy = warianty.reduce((a, b) =>
-              b.netto < a.netto ? b : a,
-            );
-            // Gdy filtr zawęził model do jednej wersji, kafelek prowadzi prosto
-            // do niej — karta produktu honoruje `?pn=`.
-            const href =
-              aktywne > 0 && warianty.length === 1
-                ? `/sklep/drukarki-etykiet/${m.slug}?pn=${encodeURIComponent(warianty[0].pn)}`
-                : undefined;
-            return (
-              <KafelekProduktu
-                key={m.slug}
-                p={{
-                  slug: m.slug,
-                  nazwa: m.nazwa,
-                  zdjecie: m.zdjecie,
-                  cechy: chipy(m, warianty),
-                  netto: najtanszy.netto > 0 ? najtanszy.netto : m.netto,
-                  brutto: najtanszy.brutto > 0 ? najtanszy.brutto : m.brutto,
-                  liczbaWersji: warianty.length,
-                  wszystkichWersji: aktywne > 0 ? m.warianty.length : undefined,
-                  dostepny: warianty.some((v) => v.dostepny),
-                  magazynPL: warianty.some((v) => v.magazynPL),
-                  href,
-                }}
-              />
-            );
-          })}
-        </div>
-      )}
-    </>
+    </div>
   );
 }
 
