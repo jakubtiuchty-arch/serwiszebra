@@ -679,6 +679,131 @@ export const TRESC_KART: Record<string, TrescKarty> = {
       ['Gwarancja', '24 miesiące'],
     ],
   },
+  'zebra-zd621d': {
+    rekomendowanyPn: 'ZD6A042-D0EF00EZ',
+    zdjecieGlowne: '/sklep_photo/urzadzenia/zd621d_1.webp',
+    opis: [
+      <>
+        Zebra ZD621d to najwyższy model biurkowej serii ZD w wersji termicznej bezpośredniej —
+        drukuje bez taśmy barwiącej, za to szybciej i z lepszym wyposażeniem niż pozostałe
+        drukarki tej klasy. Bierze się ją tam, gdzie etykiety wychodzą całą zmianę i gdzie
+        z jednego urządzenia korzysta kilka stanowisk: przy pakowaniu w sklepie internetowym,
+        w punkcie nadań, w aptece i w magazynie na przyjęciu towaru. Jest następczynią GK420d
+        oraz ZD620 i zachowuje z nimi zgodność na poziomie języka etykiet.
+      </>,
+      <>
+        W rozdzielczości 203 dpi drukarka osiąga 203 mm/s, czyli o jedną trzecią więcej niż
+        ZD421d; wersja 300 dpi pracuje do 152 mm/s i jest wyborem do drobnego tekstu oraz
+        małych kodów. Szerokość druku 104 mm obejmuje pełny format etykiety kurierskiej
+        100 × 150 mm, a obsługiwane nośniki mają od 15 do 108 mm szerokości przy rolkach do
+        127 mm średnicy. Pamięć 512 MB Flash i 256 MB SDRAM mieści rozbudowane szablony
+        z grafiką, a zegar czasu rzeczywistego pozwala drukować datę i godzinę bez pytania
+        komputera — przydaje się na etykietach z terminem przydatności.
+      </>,
+      <>
+        Ethernet, RS-232 i USB są tu w standardzie, więc drukarka wchodzi do sieci firmowej
+        bez dokupywania modułu; Wi-Fi 6 z Bluetoothem można zamówić fabrycznie albo
+        doinstalować później. Tak samo działają gilotyna i odklejak — montuje się je również
+        po zakupie, czego nie da się zrobić w{' '}
+        <Link
+          href="/sklep/drukarki-etykiet/zebra-zd230d"
+          className="font-medium text-gray-900 underline"
+        >
+          Zebrze ZD230d
+        </Link>
+        , gdzie wyposażenie wybiera się raz, przy zamówieniu. Wersje z kolorowym ekranem
+        dotykowym 4,3 cala pokazują stan urządzenia i prowadzą przez konfigurację bez
+        podłączania komputera. Obsługa ZPL II i EPL 2 zachowuje zgodność z szablonami
+        przygotowanymi dla starszych drukarek Zebry. Jeżeli tempo i sieć nie są konieczne,
+        taniej wypada{' '}
+        <Link
+          href="/sklep/drukarki-etykiet/zebra-zd421d"
+          className="font-medium text-gray-900 underline"
+        >
+          Zebra ZD421d
+        </Link>
+        .
+      </>,
+    ],
+    osie: [
+      {
+        tytul: 'Rozdzielczość',
+        pozycje: [
+          { termin: '203 dpi', opis: 'kody kreskowe i typowe etykiety, druk do 203 mm/s' },
+          { termin: '300 dpi', opis: 'drobny tekst i małe kody QR, druk do 152 mm/s' },
+        ],
+      },
+      {
+        tytul: 'Panel',
+        pozycje: [
+          { termin: 'Diody', opis: 'stan drukarki sygnalizują kontrolki i trzy przyciski' },
+          {
+            termin: 'Ekran dotykowy',
+            opis: 'kolorowy wyświetlacz 4,3 cala — stan i konfiguracja bez komputera',
+          },
+        ],
+      },
+      {
+        tytul: 'Łączność',
+        pozycje: [
+          { termin: 'Ethernet', opis: 'sieć przewodowa, RS-232 i USB w każdej wersji' },
+          { termin: 'Wi-Fi', opis: 'z Bluetoothem, gdy nie ma jak doprowadzić kabla' },
+        ],
+      },
+    ],
+    faqNaglowek: 'Najczęstsze pytania o ZD621d',
+    faq: [
+      {
+        q: 'Czym ZD621d różni się od ZD421d?',
+        a: 'ZD621d drukuje do 203 mm/s zamiast 152 mm/s, ma Ethernet i RS-232 w standardzie zamiast modułu do dokupienia, cztery razy więcej pamięci Flash (512 MB), zegar czasu rzeczywistego oraz opcjonalny kolorowy ekran dotykowy. ZD421d jest tańsza i wystarcza przy kilkuset etykietach dziennie z jednego stanowiska.',
+        href: '/sklep/drukarki-etykiet/zebra-zd421d',
+        link: 'Zobacz Zebra ZD421d',
+      },
+      {
+        q: 'Czy ZD621d wymaga taśmy barwiącej?',
+        a: 'Nie. ZD621d drukuje termicznie bezpośrednio na etykietach termoczułych, więc kupuje się wyłącznie etykiety. Nadruk termiczny blaknie z czasem pod wpływem światła i ciepła, dlatego do oznaczeń wieloletnich potrzebna jest drukarka termotransferowa z taśmą.',
+        href: '/sklep/drukarki-etykiet/zebra-zd230t',
+        link: 'Zobacz termotransferową Zebra ZD230t',
+      },
+      {
+        q: 'Czy gilotynę albo odklejak można dołożyć po zakupie?',
+        a: 'Tak — w ZD621 obie przystawki są instalowane serwisowo także po zakupie, więc decyzja nie musi zapaść przy zamówieniu. To różnica wobec serii ZD220 i ZD230, gdzie wyposażenie montuje się fabrycznie i późniejsza zmiana oznacza wymianę drukarki.',
+        href: '/kontakt',
+        link: 'Napisz do serwisu po wycenę montażu',
+      },
+      {
+        q: 'Co daje kolorowy ekran dotykowy w ZD621d?',
+        a: 'Wyświetlacz 4,3 cala pokazuje stan urządzenia — brak etykiet, otwartą pokrywę, zacięcie — z drugiego końca pomieszczenia, zamiast kodować go migotaniem diod. Przez ekran ustawia się też sieć i kalibrację bez podłączania komputera, co skraca uruchomienie drukarki na nowym stanowisku.',
+        href: '/blog/diody-drukarki-zebra-wzory-migania-wszystkie-serie',
+        link: 'Diody drukarek Zebra — wzory migania wszystkich serii',
+      },
+      {
+        q: 'Jak podłączyć ZD621d do sieci firmowej?',
+        a: 'Każda wersja ma gniazdo Ethernet 10/100 — po podłączeniu kabla drukarka pobiera adres z DHCP i jest widoczna dla stacji roboczych. Wersje radiowe łączą się z Wi-Fi, a konfigurację ułatwia aplikacja Zebra Printer Setup łącząca się z drukarką przez Bluetooth Low Energy.',
+        href: '/sterowniki',
+        link: 'Sterowniki i narzędzia Zebry',
+      },
+    ],
+    spec: [
+      ['Producent', 'Zebra'],
+      ['Model', 'ZD621d'],
+      ['Technologia druku', 'Termiczna bezpośrednia — bez taśmy'],
+      ['Rozdzielczość', '203 lub 300 DPI'],
+      ['Szerokość druku', '104 mm'],
+      ['Prędkość druku', 'do 203 mm/s (203 dpi), do 152 mm/s (300 dpi)'],
+      ['Szerokość etykiet', '15–108 mm'],
+      ['Maksymalna długość etykiety', '991 mm'],
+      ['Maksymalna średnica rolki', '127 mm'],
+      ['Pamięć', '512 MB Flash, 256 MB SDRAM'],
+      ['Wyświetlacz', 'diody albo kolorowy ekran dotykowy 4,3 cala'],
+      ['Łączność', 'USB, USB Host, Ethernet 10/100, RS-232; opcjonalnie Wi-Fi 6 z Bluetooth 5.3'],
+      ['Wyposażenie dodatkowe', 'Odklejak i gilotyna — montowane także po zakupie'],
+      ['Wymiary (D×S×W)', '220 × 177 × 151 mm'],
+      ['Waga', '1,6 kg'],
+      ['Stan', 'Nowy, oryginalny'],
+      ['Gwarancja', '24 miesiące'],
+    ],
+  },
 }
 
 export const trescKarty = (slug: string): TrescKarty | undefined => TRESC_KART[slug]
