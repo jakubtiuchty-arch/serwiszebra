@@ -1428,7 +1428,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
   },
   'zebra-zq620-plus': {
     rekomendowanyPn: 'ZQ62-AUXAE14-00',
-    zdjecieGlowne: '/sklep_photo/urzadzenia/zq620plus_3.webp',
+    zdjecieGlowne: '/sklep_photo/urzadzenia/zq620plus_1.webp',
     wSkrocie: [
       'Zebra ZQ620 Plus to trzycalowa mobilna drukarka etykiet: pas druku 72 mm, waga 730 gramów z akumulatorem.',
       'Rozdzielczość 203 dpi, prędkość do 115 mm/s, nośniki o szerokości od 25,4 do 79,4 mm i długości do 813 mm.',
