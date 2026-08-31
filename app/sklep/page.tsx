@@ -65,14 +65,17 @@ export default function SklepPage() {
         {/* Hero - SSR; pełnowymiarowa grafika (full-bleed) jak w kategoriach */}
         <section className="relative overflow-hidden bg-slate-900">
           <Image
-            src="/sklep_photo/hero/sklep-v6.jpeg"
+            src="/sklep_photo/hero/sklep-v7.jpeg"
             alt="Stanowisko wysyłkowe sklepu: drukarka etykiet Zebra w otwartym kartonie, zapakowana paczka, rolki etykiet i części zamienne"
             fill
             priority
             sizes="100vw"
-            className="object-cover object-right"
+            className="object-cover object-[62%_center] sm:object-right"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-slate-950 from-22% via-slate-950/70 via-52% to-transparent to-80%" />
+          {/* Na telefonie tekst zajmuje całą szerokość, więc pas gradientu po lewej
+              nie wystarcza — tam przyciemniamy równomiernie. Krycie tylko ze skali
+              Tailwinda (co 5%), bo wartości spoza niej nie generują klasy. */}
+          <div className="absolute inset-0 bg-slate-950/75 sm:bg-transparent sm:bg-gradient-to-r sm:from-slate-950 sm:from-22% sm:via-slate-950/70 sm:via-52% sm:to-transparent sm:to-80%" />
           <div className="relative max-w-6xl mx-auto px-4 py-8 sm:py-10 md:py-12 min-h-[200px] md:min-h-[240px] flex flex-col justify-center">
             <div className="flex items-center gap-2 mb-2">
               <ShoppingCart className="w-4 h-4 text-blue-300" />
