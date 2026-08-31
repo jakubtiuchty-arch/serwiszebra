@@ -4,6 +4,7 @@ import './globals.css'
 import { metadata as seoMetadata, viewport as seoViewport } from './metadata'
 import { Analytics } from '@vercel/analytics/next'
 import CookieBanner from '@/components/CookieBanner'
+import CzyszczenieAdresu from '@/components/CzyszczenieAdresu'
 import GaClickTracker from '@/components/GaClickTracker'
 
 const GA_MEASUREMENT_ID = 'G-JVWERC1N4J'
@@ -165,6 +166,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
         />
         <CookieBanner />
+        <CzyszczenieAdresu />
         <GaClickTracker />
         <Analytics />
       </body>

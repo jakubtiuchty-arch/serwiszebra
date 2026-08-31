@@ -1074,3 +1074,8 @@ Fraza „biurkowe drukarki etykiet Zebra" jest głównym wejściem do tej katego
 - **Hero jest animowany**: 5-sekundowy najazd kamery (seedance_2_0, start frame = ta sama grafika, więc początek jest niewidoczny). Film gra RAZ i po zakończeniu wygasza się, odsłaniając statyczną grafikę — najazd kończy się na zbliżeniu jednej części, a hero ma docelowo pokazywać całą kompozycję. Zapętlenie odpadło, bo skok z ostatniej klatki na pierwszą widać jak cięcie.
 - `components/shop/HeroWideo.tsx` — komponent kliencki tylko dla wideo, reszta hero zostaje serwerowa. `motion-reduce:hidden` wyłącza film tym, którzy proszą system o ograniczenie animacji; pod spodem i tak leży pełna grafika.
 - Wideo skompresowane do 1280 px i 643 kB (ffmpeg, CRF 30, bez ścieżki audio) — hero ładuje się przy wejściu, więc nie może ciągnąć 4 MB jak plik z generatora.
+
+## 2026-08-31 — parametry `_gl` w adresie /sklep
+- Zgłoszenie: wejście na /sklep dawało adres `…/sklep?_gl=1*1tw249p*_up*MQ..*_ga*NDgz…`. **To nie usterka, tylko koszt `url_passthrough`** włączonego 20.08.2026: przy odmowie zgody na cookies analityczne identyfikatory nie mogą trafić do cookie, więc gtag przenosi je w adresie — dzięki temu Ads w ogóle wiąże konwersje. Sprawdzone eksperymentalnie: bez zgody adres dostaje parametry, po akceptacji bannera jest czysty.
+- Rozwiązanie bez oddawania atrybucji: `components/CzyszczenieAdresu.tsx` kasuje `_gl`, `_ga`, `_ga_*` i `_up` z paska adresu **2 sekundy po wejściu** — gtag odczytuje je przy starcie strony i musi zdążyć pierwszy. Czyścimy tylko zapis w pasku, nie samo przekazanie; pomiar działa dalej (dataLayer rośnie normalnie).
+- Własne parametry zostają nietknięte — sprawdzone na `?pn=`, po którym otwiera się wybrany wariant na karcie produktu.
