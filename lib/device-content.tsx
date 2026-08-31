@@ -36,6 +36,14 @@ export interface TrescKarty {
    * siebie z błędami, to jeden z niewielu sposobów odróżnienia źródła.
    */
   zweryfikowano: string
+  /**
+   * Poradniki serwisowe z bloga — „gdy coś nie działa". Trzy linki na model,
+   * dobrane do serii: dedykowana diagnostyka, jeśli mamy ją napisaną, plus
+   * dwa problemy, z którymi klienci dzwonią najczęściej. Karta produktu jest
+   * miejscem, w którym te teksty realnie ratują zakup — a przy okazji
+   * przekazują moc stronom, które już rankują.
+   */
+  poradniki: { href: string; tytul: string }[]
   /** Akapity „Opisu produktu" */
   opis: ReactNode[]
   /** Osie wyboru w sekcji „Którą wersję wybrać" — zależą od modelu:
@@ -49,6 +57,11 @@ export interface TrescKarty {
 
 export const TRESC_KART: Record<string, TrescKarty> = {
   'zebra-zd421t': {
+    poradniki: [
+      { href: '/blog/serwis-drukarki-zebra-zd420-zd421-diagnostyka-naprawa', tytul: 'Diagnostyka i naprawa ZD420 i ZD421' },
+      { href: '/blog/blady-wydruk-drukarka-zebra-przyczyny-rozwiazania', tytul: 'Blady wydruk — przyczyny i naprawa' },
+      { href: '/blog/jak-wyczyscic-glowice-drukarki-zebra', tytul: 'Czyszczenie głowicy krok po kroku' },
+    ],
     rekomendowanyPn: 'ZD4A042-30EM00EZ',
     zdjecieGlowne: '/sklep_photo/urzadzenia/zd421t_1.webp',
     wSkrocie: [
@@ -159,6 +172,11 @@ export const TRESC_KART: Record<string, TrescKarty> = {
   },
 
   'zebra-zd421d': {
+    poradniki: [
+      { href: '/blog/serwis-drukarki-zebra-zd420-zd421-diagnostyka-naprawa', tytul: 'Diagnostyka i naprawa ZD420 i ZD421' },
+      { href: '/blog/blady-wydruk-drukarka-zebra-przyczyny-rozwiazania', tytul: 'Blady wydruk — przyczyny i naprawa' },
+      { href: '/blog/jak-wyczyscic-glowice-drukarki-zebra', tytul: 'Czyszczenie głowicy krok po kroku' },
+    ],
     rekomendowanyPn: 'ZD4A042-D0EM00EZ',
     zdjecieGlowne: '/sklep_photo/urzadzenia/zd421d_1.webp',
     wSkrocie: [
@@ -275,6 +293,11 @@ export const TRESC_KART: Record<string, TrescKarty> = {
   },
 
   'zebra-zd220d': {
+    poradniki: [
+      { href: '/blog/serwis-drukarki-zebra-zd220-diagnostyka-naprawa', tytul: 'Diagnostyka i naprawa ZD220' },
+      { href: '/blog/blady-wydruk-drukarka-zebra-przyczyny-rozwiazania', tytul: 'Blady wydruk — przyczyny i naprawa' },
+      { href: '/blog/jak-wyczyscic-glowice-drukarki-zebra', tytul: 'Czyszczenie głowicy krok po kroku' },
+    ],
     rekomendowanyPn: 'ZD22042-D0EG00EZ',
     zdjecieGlowne: '/sklep_photo/urzadzenia/zd220d_1.webp',
     wSkrocie: [
@@ -385,6 +408,11 @@ export const TRESC_KART: Record<string, TrescKarty> = {
   },
 
   'zebra-zd220t': {
+    poradniki: [
+      { href: '/blog/serwis-drukarki-zebra-zd220-diagnostyka-naprawa', tytul: 'Diagnostyka i naprawa ZD220' },
+      { href: '/blog/blady-wydruk-drukarka-zebra-przyczyny-rozwiazania', tytul: 'Blady wydruk — przyczyny i naprawa' },
+      { href: '/blog/jak-wyczyscic-glowice-drukarki-zebra', tytul: 'Czyszczenie głowicy krok po kroku' },
+    ],
     rekomendowanyPn: 'ZD22042-T0EG00EZ',
     zdjecieGlowne: '/sklep_photo/urzadzenia/zd220t_1.webp',
     wSkrocie: [
@@ -493,6 +521,11 @@ export const TRESC_KART: Record<string, TrescKarty> = {
   },
 
   'zebra-zd230d': {
+    poradniki: [
+      { href: '/blog/serwis-drukarki-zebra-zd220-diagnostyka-naprawa', tytul: 'Diagnostyka i naprawa ZD220' },
+      { href: '/blog/blady-wydruk-drukarka-zebra-przyczyny-rozwiazania', tytul: 'Blady wydruk — przyczyny i naprawa' },
+      { href: '/blog/jak-wyczyscic-glowice-drukarki-zebra', tytul: 'Czyszczenie głowicy krok po kroku' },
+    ],
     rekomendowanyPn: 'ZD23042-D0EG00EZ',
     zdjecieGlowne: '/sklep_photo/urzadzenia/zd230d_1.webp',
     wSkrocie: [
@@ -612,6 +645,11 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     ],
   },
   'zebra-zd230t': {
+    poradniki: [
+      { href: '/blog/serwis-drukarki-zebra-zd220-diagnostyka-naprawa', tytul: 'Diagnostyka i naprawa ZD220' },
+      { href: '/blog/blady-wydruk-drukarka-zebra-przyczyny-rozwiazania', tytul: 'Blady wydruk — przyczyny i naprawa' },
+      { href: '/blog/jak-wyczyscic-glowice-drukarki-zebra', tytul: 'Czyszczenie głowicy krok po kroku' },
+    ],
     rekomendowanyPn: 'ZD23042-30EC00EZ',
     zdjecieGlowne: '/sklep_photo/urzadzenia/zd230t_1.webp',
     wSkrocie: [
@@ -744,6 +782,11 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     ],
   },
   'zebra-zd621d': {
+    poradniki: [
+      { href: '/blog/serwis-drukarki-zebra-zd620-zd621-diagnostyka-naprawa', tytul: 'Diagnostyka i naprawa ZD620 i ZD621' },
+      { href: '/blog/blady-wydruk-drukarka-zebra-przyczyny-rozwiazania', tytul: 'Blady wydruk — przyczyny i naprawa' },
+      { href: '/blog/jak-wyczyscic-glowice-drukarki-zebra', tytul: 'Czyszczenie głowicy krok po kroku' },
+    ],
     rekomendowanyPn: 'ZD6A042-D0EF00EZ',
     zdjecieGlowne: '/sklep_photo/urzadzenia/zd621d_2.webp',
     wSkrocie: [
@@ -877,6 +920,11 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     ],
   },
   'zebra-zd621t': {
+    poradniki: [
+      { href: '/blog/serwis-drukarki-zebra-zd620-zd621-diagnostyka-naprawa', tytul: 'Diagnostyka i naprawa ZD620 i ZD621' },
+      { href: '/blog/blady-wydruk-drukarka-zebra-przyczyny-rozwiazania', tytul: 'Blady wydruk — przyczyny i naprawa' },
+      { href: '/blog/jak-wyczyscic-glowice-drukarki-zebra', tytul: 'Czyszczenie głowicy krok po kroku' },
+    ],
     rekomendowanyPn: 'ZD6A042-30EF00EZ',
     zdjecieGlowne: '/sklep_photo/urzadzenia/zd621t_2.webp',
     wSkrocie: [
@@ -1013,6 +1061,11 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     ],
   },
   'zebra-zd411d': {
+    poradniki: [
+      { href: '/blog/najczestsze-awarie-drukarek-zebra-top10', tytul: 'Dziesięć najczęstszych awarii drukarek Zebra' },
+      { href: '/blog/blady-wydruk-drukarka-zebra-przyczyny-rozwiazania', tytul: 'Blady wydruk — przyczyny i naprawa' },
+      { href: '/blog/jak-wyczyscic-glowice-drukarki-zebra', tytul: 'Czyszczenie głowicy krok po kroku' },
+    ],
     rekomendowanyPn: 'ZD4A022-D0EM00EZ',
     zdjecieGlowne: '/sklep_photo/urzadzenia/zd411d_1.webp',
     wSkrocie: [
@@ -1126,6 +1179,11 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     ],
   },
   'zebra-zd411t': {
+    poradniki: [
+      { href: '/blog/najczestsze-awarie-drukarek-zebra-top10', tytul: 'Dziesięć najczęstszych awarii drukarek Zebra' },
+      { href: '/blog/blady-wydruk-drukarka-zebra-przyczyny-rozwiazania', tytul: 'Blady wydruk — przyczyny i naprawa' },
+      { href: '/blog/jak-wyczyscic-glowice-drukarki-zebra', tytul: 'Czyszczenie głowicy krok po kroku' },
+    ],
     rekomendowanyPn: 'ZD4A022-T0EM00EZ',
     zdjecieGlowne: '/sklep_photo/urzadzenia/zd411t_1.webp',
     wSkrocie: [

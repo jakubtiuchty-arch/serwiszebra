@@ -12,7 +12,7 @@ import { pobierzStany, stanDlaPN } from '@/lib/stock-server'
 import { klasaBySlug } from '@/lib/printer-classes'
 import { trescKarty } from '@/lib/device-content'
 import ShopSubheader from '@/components/shop/ShopSubheader'
-import { Info, FileText, Download, Wrench, Phone } from 'lucide-react'
+import { Info, FileText, Download, Wrench, Phone, LifeBuoy } from 'lucide-react'
 
 /**
  * Karta urządzenia. Świadomie JEDNA karta na wariant modelu (ZD421t osobno od
@@ -624,6 +624,31 @@ export default async function DevicePage({
                 </a>
               </li>
             </ul>
+
+            {/* Poradniki serwisowe: klient szukający „dlaczego drukarka drukuje
+                blado" trafia dziś na blog z zewnątrz, a powinien mieć te teksty
+                pod ręką także wtedy, gdy sprzęt dopiero kupuje. Dobór per model
+                — dedykowana diagnostyka serii, jeśli ją napisaliśmy. */}
+            {tresc?.poradniki?.length ? (
+              <>
+                <h3 className="mt-5 border-t border-gray-100 pt-5 text-sm font-semibold text-gray-900">
+                  Gdy coś nie działa
+                </h3>
+                <ul className="mt-3 grid list-none grid-cols-1 gap-2 p-0 sm:grid-cols-2">
+                  {tresc.poradniki.map((p) => (
+                    <li key={p.href}>
+                      <Link
+                        href={p.href}
+                        className="flex min-h-[48px] items-center gap-3 rounded-lg border border-gray-200 px-4 text-sm font-medium text-gray-900 transition hover:border-gray-400"
+                      >
+                        <LifeBuoy className="h-4 w-4 flex-shrink-0 text-gray-400" />
+                        {p.tytul}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            ) : null}
           </section>
 
 
