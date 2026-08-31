@@ -26,7 +26,18 @@ const KLASA = klasaBySlug('mobilne')!
 const URL_KAT = `${SITE}/sklep/drukarki-etykiet/mobilne`
 
 /** Klucze filtra wariantów — te same, które czyta `KatalogDrukarek`. */
-const KLUCZE_FILTRA = ['druk', 'dpi', 'lacznosc', 'wyposazenie', 'dostepne'] as const
+const KLUCZE_FILTRA = [
+  'druk',
+  'dpi',
+  'rozdzielczosc',
+  'lacznosc',
+  'nosnik',
+  'akumulator',
+  'wyposazenie',
+  'panel',
+  'kolor',
+  'dostepne',
+] as const
 
 type SearchParams = Promise<Record<string, string | string[] | undefined>>
 
@@ -90,13 +101,14 @@ async function getDevices(): Promise<DeviceRow[]> {
  * trafiają tu najczęściej.
  */
 const FAKTY_KLASY = [
-  'Mobilne drukarki etykiet Zebra to seria ZQ600 Plus: trzy modele różniące się wyłącznie szerokością druku — ZQ610 Plus (48 mm), ZQ620 Plus (72 mm) i ZQ630 Plus (104 mm).',
-  'Wszystkie drukują termicznie, bez taśmy barwiącej, w rozdzielczości 203 dpi i z prędkością do 115 mm/s.',
-  'Pełną etykietę kurierską 100 × 150 mm wydrukuje tylko ZQ630 Plus — pozostałe dwa modele mają węższy pas i służą do etykiet magazynowych, metek i pokwitowań.',
-  'Waga rośnie razem z szerokością: 600 g, 730 g i 1,11 kg z akumulatorem. Pierwsze dwa modele nosi się przy pasku, największy raczej w futerale naramiennym albo na wózku.',
-  'Akumulator ma 3250 mAh w ZQ610 Plus i ZQ620 Plus oraz 6600 mAh w ZQ630 Plus, czyli dwa razy więcej — do pracy wielozmianowej.',
-  'Każdy model występuje w trzech wersjach łączności: sam Bluetooth z portem RS-232, Wi-Fi 5 z Bluetooth 4.2 albo Wi-Fi 6 z Bluetooth 5.3.',
-  'Obudowy mają klasę szczelności IP54 i pracują od −20 do 50°C, a języki CPCL, ZPL i EPL pozwalają wstawić je w miejsce starszych drukarek mobilnych Zebry.',
+  'Mobilne drukarki etykiet Zebra dzielą się na dwie serie: ZQ600 Plus do pracy w magazynie i sklepie oraz wzmocnioną ZQ500 (ZQ511, ZQ521) do pracy w terenie.',
+  'Seria ZQ600 Plus to trzy modele różniące się szerokością druku: ZQ610 Plus (48 mm), ZQ620 Plus (72 mm) i ZQ630 Plus (104 mm), wszystkie do 115 mm/s.',
+  'Seria ZQ500 to dwa modele — ZQ511 (72 mm) i ZQ521 (104 mm) — z certyfikatem MIL-STD 810G, odpornością na upadki z 2 metrów na beton i prędkością do 127 mm/s.',
+  'Wszystkie modele drukują termicznie, bez taśmy barwiącej, w rozdzielczości 203 dpi.',
+  'Pełną etykietę kurierską 100 × 150 mm wydrukują tylko ZQ630 Plus i ZQ521 — pozostałe modele mają węższy pas i służą do etykiet magazynowych, metek i pokwitowań.',
+  'Przy tym samym pasie 104 mm ZQ521 waży 790 g, a ZQ630 Plus 1,11 kg; ZQ630 Plus odzyskuje przewagę akumulatorem 6600 mAh zamiast 3250 mAh.',
+  'Obudowy mają klasę szczelności IP54; w serii ZQ500 egzoszkielet podnosi ją do IP65 i zwiększa wysokość upadku do 3 metrów.',
+  'Komora mieści rolkę na gilzie 19 mm o średnicy do 51–66,8 mm zależnie od modelu — rolka biurkowa na gilzie 40 mm do drukarki mobilnej nie wejdzie.',
 ]
 
 /** Wiersze tabeli porównawczej — jeden na model, z linkiem do karty. */
@@ -109,6 +121,7 @@ const POROWNANIE = [
     waga: '0,6 kg',
     bateria: '3250 mAh',
     kurierska: 'nie',
+    odpornosc: 'IP54',
   },
   {
     model: 'ZQ620 Plus',
@@ -118,6 +131,7 @@ const POROWNANIE = [
     waga: '0,73 kg',
     bateria: '3250 mAh',
     kurierska: 'nie',
+    odpornosc: 'IP54',
     wyroznik: true,
   },
   {
@@ -128,6 +142,27 @@ const POROWNANIE = [
     waga: '1,11 kg',
     bateria: '6600 mAh',
     kurierska: 'tak',
+    odpornosc: 'IP54',
+  },
+  {
+    model: 'ZQ511',
+    href: '/sklep/drukarki-etykiet/zebra-zq511',
+    szerokosc: '72 mm',
+    nosnik: '35–80 mm',
+    waga: '0,63 kg',
+    bateria: '3250 mAh',
+    kurierska: 'nie',
+    odpornosc: 'IP54, MIL-STD 810G',
+  },
+  {
+    model: 'ZQ521',
+    href: '/sklep/drukarki-etykiet/zebra-zq521',
+    szerokosc: '104 mm',
+    nosnik: '50,8–113 mm',
+    waga: '0,79 kg',
+    bateria: '3250 mAh',
+    kurierska: 'tak',
+    odpornosc: 'IP54, MIL-STD 810G',
   },
 ]
 
@@ -138,23 +173,27 @@ const POROWNANIE = [
 const FAQ_KATEGORII = [
   {
     q: 'Która mobilna drukarka Zebra wydrukuje etykietę kurierską?',
-    a: 'Tylko ZQ630 Plus. Etykieta kurierska ma 100 mm szerokości, a pas druku ZQ630 Plus to 104 mm. ZQ620 Plus drukuje 72 mm, ZQ610 Plus 48 mm — oba nadają się do etykiet magazynowych, metek i pokwitowań, ale nie do nadań przesyłek.',
+    a: 'ZQ630 Plus i ZQ521 — obie mają pas druku 104 mm, a etykieta kurierska ma 100 mm szerokości. ZQ620 Plus i ZQ511 drukują 72 mm, ZQ610 Plus 48 mm; nadają się do etykiet magazynowych, metek i pokwitowań, ale nie do nadań przesyłek. Między ZQ630 Plus a ZQ521 decyduje waga: 1,11 kg wobec 790 gramów.',
   },
   {
     q: 'Jak długo pracuje drukarka mobilna na jednym ładowaniu?',
-    a: 'Akumulator 3250 mAh w ZQ610 Plus i ZQ620 Plus przy typowym druku wystarcza na zmianę; ZQ630 Plus ma 6600 mAh, czyli dwa razy więcej, i pracuje wielozmianowo. Z serwisu: akumulator zużywa się w tych drukarkach najszybciej i po dwóch–trzech latach codziennej pracy zwykle wymaga wymiany, więc zapasowy warto policzyć razem z drukarką.',
+    a: 'Akumulator 3250 mAh — w ZQ610 Plus, ZQ620 Plus, ZQ511 i ZQ521 — przy typowym druku wystarcza na zmianę; ZQ630 Plus ma 6600 mAh, czyli dwa razy więcej, i pracuje wielozmianowo. W serii ZQ500 dostępne jest ogniwo powiększone 6500 mAh. Z serwisu: akumulator zużywa się w tych drukarkach najszybciej i po dwóch–trzech latach codziennej pracy zwykle wymaga wymiany, więc zapasowy warto policzyć razem z drukarką.',
   },
   {
     q: 'Co daje wersja linerless?',
     a: 'Etykiety bez podkładu: na rolce mieści się ich więcej, więc materiał wymienia się rzadziej, a przy stanowisku nie zostaje odpad z papieru nośnego. Wymagają etykiet z powłoką silikonową i częstszego czyszczenia wałka, bo klej zbiera się szybciej niż przy zwykłych etykietach.',
   },
   {
+    q: 'Czym różni się seria ZQ500 od ZQ600 Plus?',
+    a: 'Odpornością, prędkością i wagą. ZQ511 i ZQ521 mają certyfikat MIL-STD 810G, znoszą upadki z 2 metrów na beton i 1300 upadków obrotowych z metra, drukują do 127 mm/s i są lżejsze — ZQ521 waży 790 gramów wobec 1,11 kg ZQ630 Plus przy tym samym pasie 104 mm. Seria ZQ600 Plus nadrabia większą rolką, akumulatorem 6600 mAh w modelu ZQ630 Plus i radiem Wi-Fi 6.',
+  },
+  {
     q: 'Bluetooth, Wi-Fi 5 czy Wi-Fi 6?',
-    a: 'Sam Bluetooth z portem RS-232 wystarcza, gdy drukarka pracuje z jednym terminalem i starszym systemem. Wi-Fi 5 (802.11ac) to standard w magazynach z działającą siecią. Wi-Fi 6 (802.11ax z Bluetooth 5.3) wybiera się tam, gdzie w jednej hali pracuje wiele urządzeń naraz i sieć bywa zatłoczona.',
+    a: 'Sam Bluetooth wystarcza, gdy drukarka pracuje z jednym terminalem i starszym systemem. Wi-Fi 5 (802.11ac) to standard w magazynach z działającą siecią i jedyna opcja radiowa w serii ZQ500. Wi-Fi 6 (802.11ax z Bluetooth 5.3) występuje w serii ZQ600 Plus i wybiera się je tam, gdzie w jednej hali pracuje wiele urządzeń naraz.',
   },
   {
     q: 'Czy te drukarki wytrzymają chłodnię i pracę na zewnątrz?',
-    a: 'Tak. Cała seria ZQ600 Plus ma klasę szczelności IP54 — odporność na kurz i bryzgi wody — oraz zakres pracy od −20 do 50°C. Przy przenoszeniu z mrozu do ciepłego pomieszczenia trzeba dać drukarce dojść do temperatury otoczenia przed ładowaniem, żeby uniknąć kondensacji.',
+    a: 'Tak. Wszystkie modele mają klasę szczelności IP54 — odporność na kurz i bryzgi wody. Seria ZQ600 Plus pracuje od −20 do 50°C, seria ZQ500 od −20 do 55°C, a egzoszkielet podnosi jej szczelność do IP65. Przy przenoszeniu z mrozu do ciepłego pomieszczenia trzeba dać drukarce dojść do temperatury otoczenia przed ładowaniem, żeby uniknąć kondensacji.',
   },
 ]
 
@@ -280,10 +319,10 @@ export default async function MobilePrintersPage() {
             <h1 className="text-2xl font-bold sm:text-3xl">Mobilne drukarki etykiet Zebra</h1>
 
             <p className="mt-3 text-base leading-relaxed text-gray-300">
-              Drukarki noszone przy pasku i na wózku — seria ZQ600 Plus drukuje etykiety
-              i pokwitowania w miejscu pracy, bez wracania do stanowiska. Ceny i stany
-              magazynowe pobieramy na żywo, a gwarancję realizujemy we własnym autoryzowanym
-              serwisie Zebry.
+              Drukarki noszone przy pasku, na ramieniu i w aucie — seria ZQ600 Plus do
+              magazynu i sklepu, wzmocniona ZQ500 do pracy w terenie. Etykieta powstaje
+              w miejscu pracy, bez wracania do stanowiska. Ceny i stany magazynowe pobieramy
+              na żywo, a gwarancję realizujemy we własnym autoryzowanym serwisie Zebry.
             </p>
           </div>
           <div className="h-1 bg-[#A8F000]" />
@@ -337,15 +376,16 @@ export default async function MobilePrintersPage() {
               .
             </p>
             <p className="mt-3 text-sm leading-relaxed text-gray-700">
-              Wybór wewnątrz serii sprowadza się do jednej liczby: szerokości druku.
-              Reszta — rozdzielczość 203 dpi, prędkość 115 mm/s, odporność IP54, opcje
-              radiowe i języki CPCL, ZPL, EPL — jest w trzech modelach taka sama. Im szerszy
-              pas, tym cięższa drukarka, więc pytanie brzmi: co najszerszego trzeba
-              wydrukować i jak długo urządzenie ma wisieć na ramieniu.
+              Wybór zaczyna się od jednej liczby: szerokości druku. Im szerszy pas, tym
+              cięższa drukarka, więc pierwsze pytanie brzmi — co najszerszego trzeba
+              wydrukować i jak długo urządzenie ma wisieć na ramieniu. Drugie pytanie
+              dotyczy warunków: seria ZQ600 Plus jest przewidziana do magazynu i sklepu,
+              wzmocniona ZQ500 do pracy w aucie i w terenie, gdzie drukarka spada z burty,
+              a nie z blatu.
             </p>
 
             <h2 className="mt-10 text-xl font-bold text-gray-900">
-              Seria ZQ600 Plus — który model wybrać
+              Który model wybrać
             </h2>
 
             <h3 className="mt-5 text-base font-semibold text-gray-900">
@@ -381,17 +421,51 @@ export default async function MobilePrintersPage() {
             </p>
 
             <h3 className="mt-5 text-base font-semibold text-gray-900">
-              ZQ630 Plus — jedyna do etykiet kurierskich
+              ZQ630 Plus — etykieta kurierska i praca wielozmianowa
             </h3>
             <p className="mt-2 text-sm leading-relaxed text-gray-700">
               Pas 104 mm mieści pełną etykietę kurierską 100 × 150 mm, a akumulator 6600 mAh
-              starcza na pracę wielozmianową. Kosztem jest waga: 1,11 kg, czyli raczej futerał
+              starcza na dwie zmiany. Kosztem jest waga: 1,11 kg, czyli raczej futerał
               naramienny albo uchwyt na wózku niż pasek. Zobacz{' '}
               <Link
                 href="/sklep/drukarki-etykiet/zebra-zq630-plus"
                 className="font-medium text-gray-900 underline"
               >
                 Zebra ZQ630 Plus
+              </Link>
+              .
+            </p>
+
+            <h3 className="mt-5 text-base font-semibold text-gray-900">
+              ZQ511 — wzmocniona, do pracy w terenie
+            </h3>
+            <p className="mt-2 text-sm leading-relaxed text-gray-700">
+              Ten sam pas 72 mm co w ZQ620 Plus, ale w obudowie z certyfikatem MIL-STD 810G,
+              znoszącej upadki z 2 metrów na beton, przy 630 gramach wagi i prędkości do
+              127 mm/s. Wybierana tam, gdzie drukarka jeździ w aucie i pracuje na zewnątrz.
+              Zobacz{' '}
+              <Link
+                href="/sklep/drukarki-etykiet/zebra-zq511"
+                className="font-medium text-gray-900 underline"
+              >
+                Zebra ZQ511
+              </Link>
+              .
+            </p>
+
+            <h3 className="mt-5 text-base font-semibold text-gray-900">
+              ZQ521 — najlżejsza czterocalowa
+            </h3>
+            <p className="mt-2 text-sm leading-relaxed text-gray-700">
+              Pełna etykieta kurierska 100 × 150 mm przy 790 gramach, czyli o 320 gramów mniej
+              niż ZQ630 Plus o tym samym pasie druku — do kuriera noszącego drukarkę przez całą
+              trasę. Do tego MIL-STD 810G i upadki z 2 metrów. Ustępuje ZQ630 Plus akumulatorem:
+              3250 mAh zamiast 6600 mAh. Zobacz{' '}
+              <Link
+                href="/sklep/drukarki-etykiet/zebra-zq521"
+                className="font-medium text-gray-900 underline"
+              >
+                Zebra ZQ521
               </Link>
               .
             </p>
@@ -409,6 +483,7 @@ export default async function MobilePrintersPage() {
                     <th scope="col" className="px-4 py-3">Waga</th>
                     <th scope="col" className="px-4 py-3">Akumulator</th>
                     <th scope="col" className="px-4 py-3">Etykieta kurierska</th>
+                    <th scope="col" className="px-4 py-3">Odporność</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-100 text-gray-700">
@@ -424,14 +499,16 @@ export default async function MobilePrintersPage() {
                       <td className="px-4 py-3">{w.waga}</td>
                       <td className="px-4 py-3">{w.bateria}</td>
                       <td className="px-4 py-3">{w.kurierska}</td>
+                      <td className="px-4 py-3">{w.odpornosc}</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
             <p className="mt-2 text-xs text-gray-500">
-              Wszystkie modele: 203 dpi, do 115 mm/s, IP54, praca od −20 do 50°C, 512 MB Flash
-              i 256 MB RAM. Dane sprawdzone u producenta w sierpniu 2026 przez TAKMA —
+              Wszystkie modele: 203 dpi, IP54, 512 MB Flash i 256 MB RAM. Seria ZQ600 Plus
+              drukuje do 115 mm/s i pracuje od −20 do 50°C, seria ZQ500 do 127 mm/s i od −20
+              do 55°C. Dane sprawdzone u producenta w sierpniu 2026 przez TAKMA —
               autoryzowany serwis Zebra Technologies.
             </p>
 

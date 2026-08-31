@@ -114,8 +114,14 @@ Pełny wykaz wariantów z numerami katalogowymi, cenami i stanami: https://www.s
 - **Zebra ZQ630 Plus** — https://www.serwis-zebry.pl/sklep/drukarki-etykiet/zebra-zq630-plus
   Czterocalowa, druk 104 mm — jedyna w serii drukuje pełną etykietę kurierską 100 × 150 mm. Akumulator 6600 mAh, waga 1,11 kg, IP54.
 
-Każdy model występuje w wersjach: sam Bluetooth z RS-232, Wi-Fi 5 z Bluetooth 4.2, Wi-Fi 6 z Bluetooth 5.3 oraz wersja linerless (etykiety bez podkładu).
-Porównanie trzech modeli w jednej tabeli: https://www.serwis-zebry.pl/sklep/drukarki-etykiet/mobilne
+- **Zebra ZQ511** — https://www.serwis-zebry.pl/sklep/drukarki-etykiet/zebra-zq511
+  Wzmocniona trzycalowa, druk 72 mm, 203 dpi, do 127 mm/s, waga 630 g. MIL-STD 810G, upadki z 2 m na beton, IP54 (IP65 z egzoszkieletem). Nie wydrukuje etykiety kurierskiej.
+- **Zebra ZQ521** — https://www.serwis-zebry.pl/sklep/drukarki-etykiet/zebra-zq521
+  Wzmocniona czterocalowa, druk 104 mm — pełna etykieta kurierska 100 × 150 mm przy wadze 790 g, czyli o 320 g mniej niż ZQ630 Plus. MIL-STD 810G, upadki z 2 m, IP54.
+
+Seria ZQ600 Plus występuje w wersjach: sam Bluetooth z RS-232, Wi-Fi 5 z Bluetooth 4.2, Wi-Fi 6 z Bluetooth 5.3 oraz linerless (etykiety bez podkładu).
+Seria ZQ500 (ZQ511, ZQ521) występuje w wersjach: sam Bluetooth 4.1 albo 802.11ac z Bluetooth 5.2, z akumulatorem 3250 mAh lub bez niego, oraz linerless.
+Porównanie pięciu modeli w jednej tabeli: https://www.serwis-zebry.pl/sklep/drukarki-etykiet/mobilne
 
 ### Jak dobrać drukarkę biurkową Zebra
 

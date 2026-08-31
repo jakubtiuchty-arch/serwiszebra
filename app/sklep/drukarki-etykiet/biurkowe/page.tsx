@@ -25,7 +25,18 @@ const KLASA = klasaBySlug('biurkowe')!
 const URL_KAT = `${SITE}/sklep/drukarki-etykiet/biurkowe`
 
 /** Klucze filtra wariantów — te same, które czyta `KatalogDrukarek`. */
-const KLUCZE_FILTRA = ['druk', 'dpi', 'lacznosc', 'wyposazenie', 'dostepne'] as const
+const KLUCZE_FILTRA = [
+  'druk',
+  'dpi',
+  'rozdzielczosc',
+  'lacznosc',
+  'nosnik',
+  'akumulator',
+  'wyposazenie',
+  'panel',
+  'kolor',
+  'dostepne',
+] as const
 
 type SearchParams = Promise<Record<string, string | string[] | undefined>>
 

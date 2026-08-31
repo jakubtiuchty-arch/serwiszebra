@@ -1679,6 +1679,284 @@ export const TRESC_KART: Record<string, TrescKarty> = {
       ['Gwarancja', '24 miesiące'],
     ],
   },
+  'zebra-zq511': {
+    rekomendowanyPn: 'ZQ51-BUW000E-00',
+    zdjecieGlowne: '/sklep_photo/urzadzenia/zq511_1.webp',
+    wSkrocie: [
+      'Zebra ZQ511 to wzmocniona mobilna drukarka etykiet o pasie druku 72 mm, ważąca 630 gramów z akumulatorem.',
+      'Drukuje termicznie w rozdzielczości 203 dpi z prędkością do 127 mm/s, na nośnikach o szerokości od 35 do 80 mm.',
+      'Obudowa ma certyfikat MIL-STD 810G, znosi upadki z 2 metrów na beton i 1300 upadków obrotowych z 1 metra według normy IEC68-2-32.',
+      'Klasa szczelności wynosi IP54, a egzoszkielet podnosi ją do IP65 i zwiększa wysokość upadku do 3 metrów.',
+      'Komora przyjmuje rolkę o średnicy do 51 mm na gilzie 19 mm, więc etykieta kurierska 100 × 150 mm wymaga czterocalowej ZQ521.',
+      'Wersja ZQ51-BUE001E-00 jest sprzedawana bez akumulatora — do pracy potrzebuje ogniwa PowerPrecision+ 3250 mAh dokupionego osobno.',
+    ],
+    zweryfikowano: '2026-08-31',
+    poradniki: [
+      'serwis-drukarki-mobilnej-zebra-zq610-zq620-zq630',
+      'problemy-bateria-drukarka-zebra-mobilna',
+      'drukarka-zebra-wifi-rozlacza-sie-offline',
+      'biale-linie-etykiety-drukarka-mobilna-zebra',
+      'falszywy-blad-media-out-drukarka-zebra-mobilna',
+      'drukarka-zebra-nie-drukuje-zimno-head-cold',
+    ],
+    opis: [
+      <>
+        Zebra ZQ511 to trzycalowa drukarka mobilna z serii ZQ500 — linii, którą Zebra
+        buduje pod pracę w terenie, a nie w magazynie z równą podłogą. Certyfikat
+        MIL-STD 810G, upadki z 2 metrów na beton i 1300 upadków obrotowych z metra to
+        parametry, które odróżniają ją od zwykłej drukarki noszonej przy pasku. Trafia
+        do kurierów, serwisu terenowego, obsługi rozładunku i wszędzie tam, gdzie
+        urządzenie spada z burty auta, a nie z blatu.
+      </>,
+      <>
+        Pas druku ma 72 mm przy nośnikach 35–80 mm, rozdzielczość 203 dpi, prędkość do
+        127 mm/s. To o 12 mm/s szybciej niż w serii ZQ600 Plus, przy niższej wadze:
+        630 gramów wobec 730 gramów{' '}
+        <Link
+          href="/sklep/drukarki-etykiet/zebra-zq620-plus"
+          className="font-medium text-gray-900 underline"
+        >
+          ZQ620 Plus
+        </Link>{' '}
+        o tym samym pasie druku. Ceną za lekkość jest rolka: komora mieści krążek do
+        51 mm średnicy, czyli krótszy nawój niż w drukarce biurkowej.
+      </>,
+      <>
+        Do wyboru są dwa radia: sam Bluetooth 4.1 EDR z BLE albo moduł 802.11ac
+        z Bluetooth 5.2, pracujące jednocześnie — drukarka trzyma wtedy sesję z
+        terminalem i z siecią zakładową naraz. Wersje linerless drukują etykiety bez
+        podkładu na silikonowym wałku. Uwaga przy zamówieniu: część numerów
+        katalogowych jest fabrycznie bez akumulatora, bo firmy z flotą ZQ500 mają już
+        własne ogniwa i ładowarki. Języki CPCL, ZPL i ZBI 2.x pozwalają wstawić ZQ511
+        w miejsce starszej ZQ510 bez przepisywania szablonów.
+      </>,
+    ],
+    osie: [
+      {
+        tytul: 'Łączność',
+        pozycje: [
+          { termin: 'Bluetooth', opis: 'Bluetooth 4.1 EDR z BLE — praca z jednym terminalem' },
+          {
+            termin: 'Wi-Fi 5',
+            opis: 'radio 802.11ac z Bluetooth 5.2, oba interfejsy jednocześnie',
+          },
+        ],
+      },
+      {
+        tytul: 'Nośnik',
+        pozycje: [
+          { termin: 'Z podkładem', opis: 'zwykłe etykiety i papier paragonowy na rolce' },
+          {
+            termin: 'Linerless',
+            opis: 'etykiety bez podkładu na silikonowym wałku — bez odpadu z papieru nośnego',
+          },
+        ],
+      },
+      {
+        tytul: 'Akumulator',
+        pozycje: [
+          { termin: 'W zestawie', opis: 'ogniwo PowerPrecision+ 3250 mAh w komplecie' },
+          {
+            termin: 'Bez akumulatora',
+            opis: 'wersja dla firm, które mają już ogniwa i ładowarki ZQ500',
+          },
+        ],
+      },
+    ],
+    faqNaglowek: 'Najczęstsze pytania o ZQ511',
+    faq: [
+      {
+        q: 'Czy ZQ511 wydrukuje etykietę kurierską 100 × 150 mm?',
+        a: 'Nie. Pas druku ZQ511 ma 72 mm, a nośnik maksymalnie 80 mm — etykieta kurierska ma 100 mm szerokości. Do nadań przesyłek w terenie służy czterocalowa ZQ521 z pasem 104 mm. ZQ511 drukuje etykiety magazynowe, metki, oznaczenia lokalizacji i pokwitowania.',
+        href: '/sklep/drukarki-etykiet/zebra-zq521',
+        link: 'Zobacz Zebra ZQ521',
+      },
+      {
+        q: 'Czym ZQ511 różni się od ZQ620 Plus?',
+        a: 'Odpornością i wagą. Oba modele drukują pas 72 mm w 203 dpi, ale ZQ511 ma certyfikat MIL-STD 810G, znosi upadki z 2 metrów na beton, drukuje do 127 mm/s i waży 630 gramów. ZQ620 Plus jest o 100 gramów cięższa, wolniejsza o 12 mm/s i nie ma certyfikatu wojskowego, za to przyjmuje rolkę o większej średnicy.',
+        href: '/sklep/drukarki-etykiet/zebra-zq620-plus',
+        link: 'Zobacz Zebra ZQ620 Plus',
+      },
+      {
+        q: 'Dlaczego niektóre wersje ZQ511 są tańsze?',
+        a: 'Bo są sprzedawane bez akumulatora. Numery kończące się na 001E to sam korpus, przewidziany dla firm, które mają już ogniwa PowerPrecision+ i ładowarki z poprzednich drukarek ZQ500. Przy pierwszym zakupie trzeba wybrać wersję z akumulatorem 3250 mAh albo dokupić ogniwo osobno — bez niego drukarka nie zadziała.',
+        href: '/sklep/akumulatory/drukarki-mobilne',
+        link: 'Akumulatory do drukarek mobilnych',
+      },
+      {
+        q: 'Jakie etykiety pasują do ZQ511?',
+        a: 'Termoczułe etykiety i papier paragonowy o szerokości 35–80 mm, na gilzie 19 mm, w rolce o średnicy do 51 mm. Gilza 12,5 mm jest możliwa po wymianie dysków prowadzących. Rolka biurkowa na gilzie 40 mm do komory nie wejdzie. Taśma barwiąca nie jest potrzebna — to drukarka termiczna.',
+        href: '/sklep/drukarki-etykiet/mobilne',
+        link: 'Porównaj mobilne drukarki Zebra',
+      },
+      {
+        q: 'Czy ZQ511 wytrzyma mróz i deszcz?',
+        a: 'Tak, w zakresie od −20 do 55°C i przy klasie szczelności IP54, czyli z odpornością na kurz i bryzgi wody. Tryb Cold Temperature Compensation dobiera prędkość druku do temperatury, żeby wydruk nie bladł na mrozie. Egzoszkielet podnosi szczelność do IP65 i wysokość upadku do 3 metrów.',
+        href: '/blog/drukarka-zebra-nie-drukuje-zimno-head-cold',
+        link: 'Druk na mrozie — komunikat Head Cold',
+      },
+    ],
+    spec: [
+      ['Producent', 'Zebra'],
+      ['Model', 'ZQ511'],
+      ['Technologia druku', 'Termiczna bezpośrednia — bez taśmy'],
+      ['Rozdzielczość', '203 DPI'],
+      ['Szerokość druku', '72 mm'],
+      ['Prędkość druku', 'do 127 mm/s'],
+      ['Szerokość nośnika', '35–80 mm'],
+      ['Maks. średnica rolki', '51 mm'],
+      ['Gilza', '19 mm; opcjonalnie 12,5 mm'],
+      ['Pamięć', '512 MB Flash, 256 MB RAM'],
+      ['Akumulator', 'PowerPrecision+ 3250 mAh, 7,4 V; opcjonalnie 6500 mAh'],
+      ['Łączność', 'Bluetooth 4.1 EDR + LE albo 802.11ac z Bluetooth 5.2; USB OTG, NFC'],
+      ['Odporność', 'IP54, MIL-STD 810G, upadki z 2 m na beton'],
+      ['Temperatura pracy', 'od −20 do 55°C'],
+      ['Wymiary (D×S×W)', '150 × 120 × 62 mm'],
+      ['Waga z akumulatorem', '0,63 kg'],
+      ['Języki', 'CPCL, ZPL, ZBI 2.x, XML'],
+      ['Stan', 'Nowy, oryginalny'],
+      ['Gwarancja', '24 miesiące'],
+    ],
+  },
+  'zebra-zq521': {
+    rekomendowanyPn: 'ZQ52-BUE000E-00',
+    zdjecieGlowne: '/sklep_photo/urzadzenia/zq521_1.webp',
+    wSkrocie: [
+      'Zebra ZQ521 to wzmocniona mobilna drukarka etykiet o pasie druku 104 mm — drukuje pełną etykietę kurierską 100 × 150 mm w terenie.',
+      'Waży 790 gramów z akumulatorem, czyli o 320 gramów mniej niż ZQ630 Plus o tym samym pasie druku.',
+      'Drukuje termicznie w rozdzielczości 203 dpi z prędkością do 127 mm/s, na nośnikach o szerokości od 50,8 do 113 mm.',
+      'Obudowa ma certyfikat MIL-STD 810G, znosi upadki z 2 metrów na beton i 1300 upadków obrotowych z 1 metra według normy IEC68-2-32.',
+      'Klasa szczelności wynosi IP54, a egzoszkielet podnosi ją do IP65 i zwiększa wysokość upadku do 3 metrów.',
+      'Komora przyjmuje rolkę o średnicy do 57 mm na gilzie 19 mm, więc etykiet kurierskich mieści się na niej około stu.',
+    ],
+    zweryfikowano: '2026-08-31',
+    poradniki: [
+      'serwis-drukarki-mobilnej-zebra-zq610-zq620-zq630',
+      'problemy-bateria-drukarka-zebra-mobilna',
+      'drukarka-zebra-wifi-rozlacza-sie-offline',
+      'biale-linie-etykiety-drukarka-mobilna-zebra',
+      'falszywy-blad-media-out-drukarka-zebra-mobilna',
+      'drukarka-zebra-nie-drukuje-zimno-head-cold',
+    ],
+    opis: [
+      <>
+        Zebra ZQ521 to czterocalowa drukarka mobilna z serii ZQ500 — jedna z dwóch
+        w naszej ofercie, które drukują pełną etykietę kurierską bezpośrednio w aucie
+        albo na rampie. Certyfikat MIL-STD 810G, upadki z 2 metrów na beton i 1300
+        upadków obrotowych z metra to parametry pisane pod pracę w dostawie, gdzie
+        drukarka zderza się z burtą, klamką i asfaltem, a nie stoi na blacie.
+      </>,
+      <>
+        Pas druku ma 104 mm przy nośnikach 50,8–113 mm, rozdzielczość 203 dpi
+        i prędkość do 127 mm/s. Najważniejsza liczba to jednak waga: 790 gramów
+        z akumulatorem wobec 1,11 kg{' '}
+        <Link
+          href="/sklep/drukarki-etykiet/zebra-zq630-plus"
+          className="font-medium text-gray-900 underline"
+        >
+          ZQ630 Plus
+        </Link>{' '}
+        o tym samym pasie. Przy pracy na ramieniu przez całą zmianę te 320 gramów
+        rozstrzyga wybór; ZQ630 Plus odzyskuje przewagę tam, gdzie liczy się dłuższa
+        praca na jednym ładowaniu i większa rolka.
+      </>,
+      <>
+        Do wyboru są dwa radia: sam Bluetooth 4.1 EDR z BLE albo moduł 802.11ac
+        z Bluetooth 5.2, pracujące jednocześnie — drukarka trzyma wtedy sesję
+        z terminalem kuriera i z siecią zakładową naraz. Wersje linerless drukują
+        etykiety bez podkładu na silikonowym wałku, co przy pełnowymiarowych
+        etykietach wysyłkowych wydłuża rolkę o kilkadziesiąt sztuk. Języki CPCL, ZPL
+        i ZBI 2.x pozwalają wstawić ZQ521 w miejsce starszej ZQ520 bez zmian
+        w oprogramowaniu.
+      </>,
+    ],
+    osie: [
+      {
+        tytul: 'Łączność',
+        pozycje: [
+          { termin: 'Bluetooth', opis: 'Bluetooth 4.1 EDR z BLE — praca z jednym terminalem' },
+          {
+            termin: 'Wi-Fi 5',
+            opis: 'radio 802.11ac z Bluetooth 5.2, oba interfejsy jednocześnie',
+          },
+        ],
+      },
+      {
+        tytul: 'Nośnik',
+        pozycje: [
+          { termin: 'Z podkładem', opis: 'zwykłe etykiety wysyłkowe i papier paragonowy' },
+          {
+            termin: 'Linerless',
+            opis: 'etykiety bez podkładu — więcej sztuk na rolce, zero odpadu w aucie',
+          },
+        ],
+      },
+      {
+        tytul: 'Akumulator',
+        pozycje: [
+          { termin: 'W zestawie', opis: 'ogniwo PowerPrecision+ 3250 mAh w komplecie' },
+          {
+            termin: 'Bez akumulatora',
+            opis: 'wersja dla firm, które mają już ogniwa i ładowarki ZQ500',
+          },
+        ],
+      },
+    ],
+    faqNaglowek: 'Najczęstsze pytania o ZQ521',
+    faq: [
+      {
+        q: 'Czy ZQ521 wydrukuje etykietę kurierską 100 × 150 mm?',
+        a: 'Tak. Pas druku ma 104 mm, a nośnik mieści się w zakresie 50,8–113 mm, więc pełnowymiarowa etykieta wysyłkowa wychodzi bez skalowania i obcinania. To jedna z dwóch drukarek mobilnych w naszej ofercie, które to potrafią — druga to ZQ630 Plus.',
+        href: '/sklep/drukarki-etykiet/zebra-zq630-plus',
+        link: 'Zobacz Zebra ZQ630 Plus',
+      },
+      {
+        q: 'Czym ZQ521 różni się od ZQ630 Plus?',
+        a: 'Wagą i akumulatorem. Oba modele drukują pas 104 mm w 203 dpi, ale ZQ521 waży 790 gramów, drukuje do 127 mm/s i ma certyfikat MIL-STD 810G. ZQ630 Plus waży 1,11 kg i drukuje do 115 mm/s, za to ma akumulator 6600 mAh zamiast 3250 mAh — starcza na dwie zmiany zamiast jednej.',
+        href: '/sklep/drukarki-etykiet/zebra-zq630-plus',
+        link: 'Zobacz Zebra ZQ630 Plus',
+      },
+      {
+        q: 'Ile etykiet kurierskich zmieści się na jednej rolce?',
+        a: 'Komora przyjmuje rolkę o średnicy do 57 mm na gilzie 19 mm, co przy etykiecie 100 × 150 mm daje około stu sztuk. Kurier obsługujący więcej przesyłek na trasie powinien liczyć zapasową rolkę albo wersję linerless, w której na tej samej średnicy mieści się ich więcej.',
+        href: '/sklep/drukarki-etykiet/mobilne',
+        link: 'Porównaj mobilne drukarki Zebra',
+      },
+      {
+        q: 'Dlaczego niektóre wersje ZQ521 są tańsze?',
+        a: 'Bo są sprzedawane bez akumulatora. Numer ZQ52-BUE001E-00 to sam korpus, przewidziany dla firm, które mają już ogniwa PowerPrecision+ i ładowarki z poprzednich drukarek ZQ500. Przy pierwszym zakupie trzeba wybrać wersję z akumulatorem 3250 mAh albo dokupić ogniwo osobno.',
+        href: '/sklep/akumulatory/drukarki-mobilne',
+        link: 'Akumulatory do drukarek mobilnych',
+      },
+      {
+        q: 'Czy ZQ521 nadaje się do pracy w aucie zimą?',
+        a: 'Tak. Zakres pracy to od −20 do 55°C, klasa szczelności IP54, a tryb Cold Temperature Compensation dobiera prędkość druku do temperatury, żeby wydruk nie bladł na mrozie. Po wjeździe z mrozu do ciepłego magazynu trzeba dać drukarce dojść do temperatury otoczenia przed ładowaniem — inaczej na głowicy skrapla się woda.',
+        href: '/blog/drukarka-zebra-nie-drukuje-zimno-head-cold',
+        link: 'Druk na mrozie — komunikat Head Cold',
+      },
+    ],
+    spec: [
+      ['Producent', 'Zebra'],
+      ['Model', 'ZQ521'],
+      ['Technologia druku', 'Termiczna bezpośrednia — bez taśmy'],
+      ['Rozdzielczość', '203 DPI'],
+      ['Szerokość druku', '104 mm'],
+      ['Prędkość druku', 'do 127 mm/s'],
+      ['Szerokość nośnika', '50,8–113 mm'],
+      ['Maks. średnica rolki', '57 mm'],
+      ['Gilza', '19 mm; opcjonalnie 12,5 mm'],
+      ['Pamięć', '512 MB Flash, 256 MB RAM'],
+      ['Akumulator', 'PowerPrecision+ 3250 mAh, 7,4 V; opcjonalnie 6500 mAh'],
+      ['Łączność', 'Bluetooth 4.1 EDR + LE albo 802.11ac z Bluetooth 5.2; USB OTG, NFC'],
+      ['Odporność', 'IP54, MIL-STD 810G, upadki z 2 m na beton'],
+      ['Temperatura pracy', 'od −20 do 55°C'],
+      ['Wymiary (D×S×W)', '158 × 155 × 67 mm'],
+      ['Waga z akumulatorem', '0,79 kg'],
+      ['Języki', 'CPCL, ZPL, ZBI 2.x, XML'],
+      ['Stan', 'Nowy, oryginalny'],
+      ['Gwarancja', '24 miesiące'],
+    ],
+  },
 }
 
 export const trescKarty = (slug: string): TrescKarty | undefined => TRESC_KART[slug]
