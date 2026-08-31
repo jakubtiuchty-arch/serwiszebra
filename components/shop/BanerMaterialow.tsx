@@ -32,15 +32,14 @@ const ETYKIETY_TERMICZNE: Kafel = {
   cta: 'Zobacz etykiety termiczne',
 }
 
-/* Drukarka mobilna ma komorę na małą rolkę i uchwyt na gilzę 19 mm — rolka
-   biurkowa (gilza 25,4 lub 40 mm, średnica do 127 mm) nie wejdzie do niej
-   ani wymiarem gilzy, ani nawojem. */
+/* Komora drukarki mobilnej mieści wyłącznie małą rolkę na gilzie 19 mm
+   albo rolkę bezgilzową — stąd osobna treść kafla dla klasy mobilnej. */
 const ETYKIETY_MOBILNE: Kafel = {
   href: 'https://www.takma.com.pl/etykiety-termiczne-zebra',
   obraz: '/materialy/etykiety-termiczne.webp',
   alt: 'Rolki białych etykiet termicznych na blacie stanowiska pakowania',
   tytul: 'Etykiety termiczne',
-  opis: 'Jedyny materiał, jakiego potrzebuje ta drukarka — bez taśmy. Do drukarki mobilnej idą rolki na gilzie 19 mm albo bezgilzowe; rolka z gilzą 40 mm do komory nie wejdzie.',
+  opis: 'Jedyny materiał, jakiego potrzebuje ta drukarka — bez taśmy. Rolki mobilne na gilzie 19 mm oraz bezgilzowe, w formatach paragonowych i wysyłkowych.',
   cta: 'Zobacz etykiety termiczne',
 }
 
