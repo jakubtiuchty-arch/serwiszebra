@@ -1549,7 +1549,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
   },
   'zebra-zq630-plus': {
     rekomendowanyPn: 'ZQ63-AUXAE14-00',
-    zdjecieGlowne: '/sklep_photo/urzadzenia/zq630plus_1.webp',
+    zdjecieGlowne: '/sklep_photo/urzadzenia/zq630plus_2.webp',
     wSkrocie: [
       'Zebra ZQ630 Plus to czterocalowa mobilna drukarka etykiet — jako jedyna w serii ZQ600 Plus drukuje pas 104 mm, czyli pełną etykietę kurierską 100 × 150 mm.',
       'Rozdzielczość 203 dpi, prędkość do 115 mm/s, nośniki 50,8–111 mm z podkładem lub 50,8–109 mm bez podkładu.',
