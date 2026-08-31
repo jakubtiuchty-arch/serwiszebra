@@ -50,6 +50,16 @@ oddaje dziś HTML zamiast XML.
 - `image_urls` = 2–3 zdjęcia z repo takma (`public/images/products`, TYLKO odczyt),
   przekonwertowane `cwebp -q 90` do `public/sklep_photo/urzadzenia/<model>_N.webp`.
   Pierwsze zdjęcie = główne (galeria otwiera się na nim)
+- **Jeden obrót w całym katalogu**: urządzenie ustawione frontem w prawo, bokiem
+  lewym do widza — czyli żółty zatrzask (ZD) albo zatrzask komory (ZQ) po LEWEJ
+  stronie kadru. Zebra publikuje też ujęcia lustrzane; jeśli `_1` jest odbite,
+  na pierwsze miejsce idzie to ujęcie, które trzyma konwencję (tak trafiło `_3`
+  na czoło ZQ610 i ZQ620). Zmiana zdjęcia głównego to TRZY miejsca: `zdjecieGlowne`,
+  `image_urls` w bazie i kolejność w `public/sitemap-images.xml`
+- **PNG z przezroczystością spłaszczyć na biel PRZED `cwebp`** — konwersja wprost
+  zapisuje w kanale alfa śmieci i przy podglądzie bez alfy tło wychodzi zielone
+  (tak wyszło pięć plików ZD411). Spłaszczenie: `Image.new('RGB', im.size, 'white')`
+  + `paste(im, mask=im.split()[3])`
 - `meta_title` ≤ 64 zn.: „Drukarka etykiet Zebra <MODEL> — cena i dostępność | Serwis Zebra"
 - `meta_description` 160–185 zn., bez sztywnych cen
 
