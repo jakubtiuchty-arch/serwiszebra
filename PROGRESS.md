@@ -1057,3 +1057,10 @@ Fraza „biurkowe drukarki etykiet Zebra" jest głównym wejściem do tej katego
 - Sekcje serii zaktualizowane o wersje „t" i różnice, które wyszły przy budowie kart: taśma 74 vs 300 m w ZD220t/ZD230t, wąskie taśmy 33–58 mm w ZD411t, nośniki do 118 mm w ZD621t, montaż gilotyny po zakupie w ZD621.
 - llms.txt: informacja, że oferta obejmuje KOMPLET biurkowych Zebry, oraz link do tabeli porównawczej jako punktu wejścia.
 - Weryfikacja: ItemList 10 pozycji, FAQPage 5 pytań, BreadcrumbList, dziesięć kart linkowanych z treści, zero poziomego scrolla na 1440 i 390 px, test filtra zielony.
+
+## 2026-08-31 — baner materiałów eksploatacyjnych na kartach urządzeń
+- Nowy `components/shop/BanerMaterialow.tsx` między częściami zamiennymi a FAQ: klient, który wybrał już wersję, następnym pytaniem pyta o etykiety.
+- Wariant zależy od technologii druku, czytanej z ostatniej litery modelu: **„d" → jeden szeroki kafel** z etykietami termicznymi (takma.com.pl/etykiety-termiczne-zebra), **„t" → dwa kafle** — taśmy (/tasmy-termotransferowe) i etykiety termotransferowe (/etykiety-termotransferowe-zebra), bo druk z taśmy zużywa dwa materiały naraz.
+- Grafiki wygenerowane w Higgsfieldzie (gpt_image_2) z kafelkiem klasy `/klasy/biurkowe.jpg` jako referencją stylu — ten sam komiksowo-wektorowy rysunek z halftone, ciepłym światłem i limonkowym akcentem. Bohaterem kadru są materiały, nie urządzenie: żadnej drukarki w kadrze, więc nie ma ryzyka zmyślonego sprzętu. Pliki w `public/materialy/` (1200 px, webp).
+- Linki wychodzą na takma.com.pl w nowej karcie — klient jest w trakcie wyboru numeru katalogowego i nie ma go z niego wyrzucać. Wszystkie trzy adresy sprawdzone (200).
+- Opisy mówią, co realnie różnicuje wybór (rodzaj taśmy decyduje o odporności nadruku; etykieta musi pasować do taśmy, nie tylko do drukarki), zamiast ogólników o jakości.

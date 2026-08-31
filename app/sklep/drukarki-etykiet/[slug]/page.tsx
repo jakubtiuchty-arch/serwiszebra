@@ -6,6 +6,7 @@ import Footer from '@/components/Footer'
 import { type DeviceVariant } from '@/components/shop/DevicePurchasePanel'
 import DeviceBuyBlock from '@/components/shop/DeviceBuyBlock'
 import DeviceAccessories from '@/components/shop/DeviceAccessories'
+import BanerMaterialow from '@/components/shop/BanerMaterialow'
 import { getAkcesoriaDlaModelu } from '@/lib/device-accessories'
 import { pobierzStany, stanDlaPN } from '@/lib/stock-server'
 import { klasaBySlug } from '@/lib/printer-classes'
@@ -496,6 +497,12 @@ export default async function DevicePage({
           {/* Akcesoria dopiero PO rozstrzygnięciu, którą wersję kupić —
               wcześniej wydłużały drogę do odpowiedzi „który wariant wybrać?" */}
           <DeviceAccessories items={akcesoria} />
+
+          {/* Materiały eksploatacyjne zaraz po częściach: klient, który wybrał
+              już wersję, następnym pytaniem pyta o etykiety. Rodzaj druku
+              czytamy z ostatniej litery modelu — „t" zużywa taśmę i etykiety,
+              „d" wyłącznie etykiety. */}
+          <BanerMaterialow termotransfer={/t$/i.test((product.device_model || '').trim())} />
 
           {tresc && (
             <section
