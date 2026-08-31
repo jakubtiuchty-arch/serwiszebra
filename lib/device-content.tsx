@@ -745,7 +745,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
   },
   'zebra-zd621d': {
     rekomendowanyPn: 'ZD6A042-D0EF00EZ',
-    zdjecieGlowne: '/sklep_photo/urzadzenia/zd621d_1.webp',
+    zdjecieGlowne: '/sklep_photo/urzadzenia/zd621d_2.webp',
     wSkrocie: [
       'Zebra ZD621d to najszybsza biurkowa drukarka etykiet Zebry — drukuje termicznie, bez taśmy, z prędkością do 203 mm/s.',
       'Występuje w rozdzielczości 203 dpi (do 203 mm/s) oraz 300 dpi (do 152 mm/s), przy szerokości druku 104 mm.',
@@ -878,7 +878,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
   },
   'zebra-zd621t': {
     rekomendowanyPn: 'ZD6A042-30EF00EZ',
-    zdjecieGlowne: '/sklep_photo/urzadzenia/zd621t_1.webp',
+    zdjecieGlowne: '/sklep_photo/urzadzenia/zd621t_2.webp',
     wSkrocie: [
       'Zebra ZD621t to najszybsza biurkowa drukarka termotransferowa Zebry — drukuje z taśmy barwiącej z prędkością do 203 mm/s, a w razie potrzeby także termicznie, bez taśmy.',
       'Występuje w rozdzielczości 203 dpi (do 203 mm/s) oraz 300 dpi (do 152 mm/s), przy szerokości druku 104 mm.',
