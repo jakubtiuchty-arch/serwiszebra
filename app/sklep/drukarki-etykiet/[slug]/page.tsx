@@ -160,6 +160,7 @@ export default async function DevicePage({
               brutto: st.brutto,
               stockPL: st.stockPL,
               stockEU: st.stockEU,
+              wDostawie: st.inDelivery,
               total: st.totalStock,
               deliveryText: st.deliveryText,
             },
@@ -178,10 +179,22 @@ export default async function DevicePage({
   /** Każdy wariant ma własny adres, pod którym karta otwiera się z nim wybranym */
   const urlWariantu = (pn: string) => `${kartaUrl}?pn=${encodeURIComponent(pn)}`
 
-  const dostepnoscSchema = (stan?: { totalStock: number; stockPL: number }) => {
+  /**
+   * `totalStock` obejmuje towar w drodze, więc opieranie na nim `InStock`
+   * obiecywało wysyłkę wersji, której u dystrybutora fizycznie nie ma —
+   * a rozjazd deklarowanej dostępności z faktyczną to prosta droga do
+   * zawieszenia oferty w Merchant Center. Towar zamówiony i jadący do
+   * dystrybutora to `BackOrder`, nie `InStock`.
+   */
+  const dostepnoscSchema = (stan?: {
+    totalStock: number
+    stockPL: number
+    stockEU: number
+    inDelivery: number
+  }) => {
     if (!stan) return 'https://schema.org/BackOrder'
-    if (stan.stockPL > 0) return 'https://schema.org/InStock'
-    if (stan.totalStock > 0) return 'https://schema.org/InStock'
+    if (stan.stockPL > 0 || stan.stockEU > 0) return 'https://schema.org/InStock'
+    if (stan.inDelivery > 0) return 'https://schema.org/BackOrder'
     return 'https://schema.org/OutOfStock'
   }
 

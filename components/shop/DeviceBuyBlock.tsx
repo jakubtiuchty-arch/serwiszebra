@@ -77,6 +77,7 @@ export default function DeviceBuyBlock({
               brutto: d.live_price_brutto > 0 ? d.live_price_brutto : fallbackBrutto,
               stockPL: d.stock_pl ?? 0,
               stockEU: d.stock_de ?? 0,
+              wDostawie: d.in_delivery ?? 0,
               total: d.total_stock ?? 0,
               deliveryText: d.delivery_text ?? null,
             } as StanWariantu,

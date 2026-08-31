@@ -245,6 +245,11 @@ export default function DeviceVariantsTable({
   // tabeli, żeby wzrok trafiał najpierw na to, co wyjedzie dziś. W obrębie obu
   // grup zostaje kolejność z bazy, bo ta niesie logikę modelu (rosnąca
   // rozdzielczość, potem wyposażenie), a sortowanie po cenie by ją rozbiło.
+  /** Czy wersja leży na półce u dystrybutora — jedyne kryterium „wysyłamy dziś".
+   *  Świadomie NIE `total`: ten obejmuje też towar w drodze, przez co karta
+   *  potrafiła pokazać „Na zamówienie" obok przycisku „Koszyk". */
+  const naStanie = (s?: StanWariantu) => !!s && (s.stockPL > 0 || s.stockEU > 0)
+
   const doPokazania = useMemo(() => {
     // Trzy poziomy, nie dwa: `total` obejmuje także towar w drodze, więc sam
     // w sobie nie odróżnia wersji leżącej w magazynie od takiej, która dopiero
@@ -253,8 +258,8 @@ export default function DeviceVariantsTable({
     const ranga = (pn: string) => {
       const s = stany[pn]
       if (!s) return 0
-      if (s.stockPL > 0 || s.stockEU > 0) return 2
-      return s.total > 0 ? 1 : 0
+      if (naStanie(s)) return 2
+      return (s.wDostawie ?? 0) > 0 ? 1 : 0
     }
     return [...variants].sort((a, b) => ranga(b.pn) - ranga(a.pn))
   }, [variants, stany])
@@ -305,6 +310,16 @@ export default function DeviceVariantsTable({
           EU: {s.stockEU}
         </span>
       )
+    // Pusty magazyn, ale towar jedzie do dystrybutora — to inna sytuacja niż
+    // „nie ma nigdzie" i klient ma prawo ją znać, bo czeka tygodnie, nie
+    // miesiące. Liczba sztuk z pola `in_delivery` w danych dystrybutora.
+    if ((s.wDostawie ?? 0) > 0)
+      return (
+        <span className="flex items-center gap-1.5 text-gray-600">
+          <span className="h-2 w-2 rounded-full bg-blue-400" />
+          W dostawie: {s.wDostawie}
+        </span>
+      )
     // Wariant istnieje w ofercie, tylko nie ma go teraz w magazynach
     // dystrybutorów — mówimy to wprost i różnicujemy od wersji dostępnych.
     // (Gdyby kiedyś doszła kombinacja NIEISTNIEJĄCA w danym modelu, jej miejsce
@@ -317,12 +332,17 @@ export default function DeviceVariantsTable({
     )
   }
 
+
   const Status = ({ s }: { s?: StanWariantu }) =>
     !s ? (
       <span className="text-gray-400">…</span>
-    ) : s.total > 0 ? (
+    ) : naStanie(s) ? (
       <span className="rounded-full bg-green-50 px-2.5 py-1 text-xs font-medium text-green-700">
         Dostępny
+      </span>
+    ) : (s.wDostawie ?? 0) > 0 ? (
+      <span className="rounded-full bg-blue-50 px-2.5 py-1 text-xs font-medium text-blue-700">
+        W dostawie
       </span>
     ) : (
       <span className="rounded-full bg-gray-100 px-2.5 py-1 text-xs font-medium text-gray-500">
@@ -335,7 +355,7 @@ export default function DeviceVariantsTable({
    *  zapis na powiadomienie — to samo rozwiązanie co przy akcesoriach. */
   const PrzyciskWariantu = ({ v, pelny }: { v: DeviceVariant; pelny?: boolean }) => {
     const s = stany[v.pn]
-    if (s && s.total === 0) {
+    if (s && !naStanie(s)) {
       return (
         <PowiadomODostepnosci
           sku={v.pn}

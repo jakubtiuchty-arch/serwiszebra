@@ -35,6 +35,10 @@ export interface StanWariantu {
   brutto: number
   stockPL: number
   stockEU: number
+  /** Sztuki w drodze do dystrybutora — towar zamówiony, jeszcze nie na półce */
+  wDostawie?: number
+  /** Suma stanów; UWAGA: obejmuje także `wDostawie`, więc sama nie mówi,
+   *  czy paczka wyjedzie dziś. Do decyzji „wysyłamy czy nie" służą stockPL/stockEU. */
   total: number
   deliveryText?: string | null
 }
@@ -99,6 +103,7 @@ export default function DevicePurchasePanel({
   const s = stany[pn]
   const stockPL = s?.stockPL ?? 0
   const stockEU = s?.stockEU ?? 0
+  const wDostawie = s?.wDostawie ?? 0
   const maDane = !!s
   const loading = !maDane && !zaladowane
 
@@ -218,6 +223,17 @@ export default function DevicePurchasePanel({
               <span className="text-gray-600">
                 Magazyn EU: <strong className="text-gray-900">{stockEU} szt.</strong>
                 <span className="ml-1 text-gray-500">— wysyłka 2-3 dni</span>
+              </span>
+            </div>
+          ) : wDostawie > 0 ? (
+            /* Magazyn pusty, ale towar jedzie do dystrybutora — klient czeka
+               tygodnie, nie miesiące, i ma prawo to wiedzieć przed pytaniem
+               o termin. Sztuki z pola `in_delivery` danych dystrybutora. */
+            <div className="flex items-center gap-2 text-sm">
+              <div className="h-2 w-2 flex-shrink-0 rounded-full bg-blue-400" />
+              <span className="text-gray-600">
+                W dostawie: <strong className="text-gray-900">{wDostawie} szt.</strong>
+                <span className="ml-1 text-gray-500">— napisz, potwierdzimy termin</span>
               </span>
             </div>
           ) : (
