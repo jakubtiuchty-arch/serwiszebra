@@ -91,6 +91,8 @@ Ceny i stany magazynowe pobierane na żywo od dystrybutorów; gwarancję realizu
   Druk termotransferowy i termiczny, 203 dpi, do 152 mm/s, taśmy 300 m na wałku calowym lub 74 m na 0,5 cala.
 - **Zebra ZD411d** — https://www.serwis-zebry.pl/sklep/drukarki-etykiet/zebra-zd411d
   Jedyna dwucalowa w serii: druk termiczny bez taśmy, szerokość druku 56 mm (203 dpi) lub 54 mm (300 dpi), nośniki 6,4–60 mm. Do etykiet aptecznych, laboratoryjnych, jubilerskich i oznaczeń kabli — nie wydrukuje etykiety kurierskiej 100 × 150 mm.
+- **Zebra ZD411t** — https://www.serwis-zebry.pl/sklep/drukarki-etykiet/zebra-zd411t
+  Dwucalowa termotransferowa: druk z taśmy, szerokość druku 56 mm (203 dpi) lub 54 mm (300 dpi), nośniki 6,4–60 mm, taśmy wyłącznie 74 m. Trwałe oznaczenia kabli, próbek i metek — nie wydrukuje etykiety kurierskiej 100 × 150 mm.
 - **Zebra ZD421d** — https://www.serwis-zebry.pl/sklep/drukarki-etykiet/zebra-zd421d
   Druk termiczny bez taśmy, 203 lub 300 dpi, do 152 mm/s, wymienne moduły łączności (Ethernet, RS-232, Wi-Fi). Następczyni GK420d.
 - **Zebra ZD421t** — https://www.serwis-zebry.pl/sklep/drukarki-etykiet/zebra-zd421t

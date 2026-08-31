@@ -1125,6 +1125,127 @@ export const TRESC_KART: Record<string, TrescKarty> = {
       ['Gwarancja', '24 miesiące'],
     ],
   },
+  'zebra-zd411t': {
+    rekomendowanyPn: 'ZD4A022-T0EM00EZ',
+    zdjecieGlowne: '/sklep_photo/urzadzenia/zd411t_2.webp',
+    wSkrocie: [
+      'Zebra ZD411t to dwucalowa biurkowa drukarka etykiet drukująca termotransferowo — z taśmy barwiącej — a w razie potrzeby także termicznie, bez taśmy.',
+      'Szerokość druku wynosi 56 mm przy 203 dpi i 54 mm przy 300 dpi, przy nośnikach o szerokości od 6,4 do 60 mm.',
+      'Przyjmuje wyłącznie taśmy 74-metrowe na wałku pół cala, o szerokości 33–58 mm — wąskie rolki pod wąskie etykiety.',
+      'W rozdzielczości 203 dpi drukuje do 152 mm/s, w 300 dpi do 102 mm/s.',
+      'W standardzie ma USB, USB Host i Bluetooth Low Energy; Ethernet, RS-232 oraz Wi-Fi 6 z Bluetoothem dokłada się modułem także po zakupie.',
+      'Nadruk z taśmy nie ściera się ani nie blaknie, dlatego model trafia na oznaczenia kabli, próbek laboratoryjnych i metki jubilerskie, które mają przetrwać lata.',
+    ],
+    zweryfikowano: '2026-08-31',
+    opis: [
+      <>
+        Zebra ZD411t to dwucalowa drukarka etykiet w wersji termotransferowej — nanosi nadruk
+        z taśmy barwiącej, więc oznaczenie jest odporne na ścieranie, wilgoć i światło.
+        Sprawdza się tam, gdzie etykieta jest mała, a musi przetrwać lata: przy znakowaniu
+        kabli i podzespołów, próbek laboratoryjnych, narzędzi, metek jubilerskich i opisów
+        środków trwałych. Urządzenie drukuje również termicznie bezpośrednio, bez taśmy,
+        więc jednym sprzętem obsłużysz też etykiety tymczasowe.
+      </>,
+      <>
+        Szerokość druku wynosi 56 mm przy 203 dpi i 54 mm przy 300 dpi, a nośniki mieszczą
+        się w zakresie od 6,4 do 60 mm — etykiety kurierskiej 100 × 150 mm ta drukarka nie
+        wydrukuje i do nadań przesyłek służy model czterocalowy, na przykład{' '}
+        <Link
+          href="/sklep/drukarki-etykiet/zebra-zd421t"
+          className="font-medium text-gray-900 underline"
+        >
+          Zebra ZD421t
+        </Link>
+        . Prędkość sięga 152 mm/s przy 203 dpi i 102 mm/s przy 300 dpi. Taśmy są tu wyłącznie
+        74-metrowe, na wałku pół cala, o szerokości 33–58 mm; przy proporcji jeden do jednego
+        taśma kończy się razem z rolką etykiet, więc oba materiały wymienia się jednocześnie.
+      </>,
+      <>
+        W standardzie urządzenie komunikuje się przez USB, USB Host i Bluetooth Low Energy,
+        a Ethernet, RS-232 albo Wi-Fi 6 z Bluetoothem dokłada się modułem — również po
+        zakupie, bez wymiany drukarki. Pamięć 512 MB Flash z 256 MB SDRAM mieści rozbudowane
+        szablony, a zegar czasu rzeczywistego drukuje datę bez pytania komputera, co ma
+        znaczenie przy oznaczeniach próbek i terminach ważności. Obsługa ZPL II i EPL 2
+        zachowuje zgodność z szablonami dwucalowych GC420 i GX420. Jeżeli nadruk nie musi
+        być trwały, taniej w eksploatacji wypada wersja termiczna{' '}
+        <Link
+          href="/sklep/drukarki-etykiet/zebra-zd411d"
+          className="font-medium text-gray-900 underline"
+        >
+          Zebra ZD411d
+        </Link>
+        .
+      </>,
+    ],
+    osie: [
+      {
+        tytul: 'Rozdzielczość',
+        pozycje: [
+          { termin: '203 dpi', opis: 'kody kreskowe i typowy tekst, druk 56 mm, do 152 mm/s' },
+          { termin: '300 dpi', opis: 'drobny tekst i małe kody 2D, druk 54 mm, do 102 mm/s' },
+        ],
+      },
+      {
+        tytul: 'Łączność',
+        pozycje: [
+          { termin: 'USB', opis: 'jedna drukarka przy jednym komputerze' },
+          { termin: 'Ethernet', opis: 'gdy ma z niej korzystać kilka osób w sieci' },
+          { termin: 'Wi-Fi', opis: 'z Bluetoothem, gdy nie ma jak doprowadzić kabla' },
+        ],
+      },
+    ],
+    faqNaglowek: 'Najczęstsze pytania o ZD411t',
+    faq: [
+      {
+        q: 'Czym ZD411t różni się od ZD411d?',
+        a: 'To ta sama dwucalowa konstrukcja w dwóch technologiach druku. ZD411t drukuje z taśmy barwiącej i daje nadruk odporny na ścieranie oraz światło; ZD411d drukuje wyłącznie termicznie — taniej w eksploatacji, ale wydruk z czasem blaknie. Wersja z taśmą jest też większa i cięższa: 243 × 139 × 169 mm i 1,6 kg wobec 220 × 115 × 151 mm i 1,0 kg.',
+        href: '/sklep/drukarki-etykiet/zebra-zd411d',
+        link: 'Zobacz termiczną Zebra ZD411d',
+      },
+      {
+        q: 'Jakie taśmy pasują do drukarki Zebra ZD411t?',
+        a: 'Wyłącznie taśmy 74-metrowe na wałku pół cala, o szerokości 33–58 mm — woskowe, woskowo-żywiczne i żywiczne. Dłuższe rolki 300-metrowe, znane z ZD421t, nie mieszczą się w tej obudowie. Taśma musi być co najmniej tak szeroka jak etykieta: gdy jest węższa, krawędzie nadruku wychodzą niedodrukowane, a głowica pracuje wprost na etykiecie i zużywa się szybciej.',
+        href: '/blog/wymiana-glowicy-drukarki-zebra-kiedy-konieczna-ile-kosztuje',
+        link: 'Wymiana głowicy — kiedy jest konieczna i ile kosztuje',
+      },
+      {
+        q: 'Czy ZD411t wydrukuje etykietę kurierską 100 × 150 mm?',
+        a: 'Nie. To drukarka dwucalowa — szerokość druku wynosi 56 mm przy 203 dpi, a etykieta kurierska ma 100 mm szerokości. Do nadań przesyłek potrzebny jest model czterocalowy, na przykład ZD421t albo ZD230t.',
+        href: '/blog/drukowanie-etykiet-kurierskich-allegro-inpost-dpd-zebra',
+        link: 'Jak drukować etykiety kurierskie na Zebrze — poradnik',
+      },
+      {
+        q: 'Ile etykiet wystarczy z jednej taśmy w ZD411t?',
+        a: 'Taśma zużywa się w tym samym tempie co etykiety, więc 74 m wystarcza na około 1480 etykiet o długości 50 mm albo 2960 etykiet 25-milimetrowych — a przy takich rozmiarach zwykle pracuje drukarka dwucalowa. Rolkę taśmy i rolkę etykiet wymienia się w praktyce razem.',
+        href: '/sklep/drukarki-etykiet/biurkowe',
+        link: 'Porównaj biurkowe drukarki Zebra',
+      },
+      {
+        q: 'Czy Ethernet można dołożyć do ZD411t po zakupie?',
+        a: 'Tak. Ethernet 10/100, RS-232 oraz Wi-Fi 6 z Bluetoothem są modułami montowanymi w gnieździe drukarki, więc przejście z USB na sieć nie wymaga kupowania nowego urządzenia. Moduł wymienia się bez narzędzi.',
+        href: '/kontakt',
+        link: 'Zapytaj serwis o właściwy moduł',
+      },
+    ],
+    spec: [
+      ['Producent', 'Zebra'],
+      ['Model', 'ZD411t'],
+      ['Technologia druku', 'Termotransferowa i termiczna bezpośrednia'],
+      ['Rozdzielczość', '203 lub 300 DPI'],
+      ['Szerokość druku', '56 mm (203 dpi), 54 mm (300 dpi)'],
+      ['Prędkość druku', 'do 152 mm/s (203 dpi), do 102 mm/s (300 dpi)'],
+      ['Szerokość etykiet', '6,4–60 mm'],
+      ['Maksymalna długość etykiety', '991 mm'],
+      ['Maksymalna średnica rolki', '127 mm'],
+      ['Taśma', '74 m na wałku 0,5 cala, szerokość 33–58 mm'],
+      ['Pamięć', '512 MB Flash, 256 MB SDRAM'],
+      ['Łączność', 'USB, USB Host, Bluetooth LE; moduły Ethernet, RS-232, Wi-Fi 6 z Bluetooth 5.3'],
+      ['Wymiary (D×S×W)', '243 × 139 × 169 mm'],
+      ['Waga', '1,6 kg'],
+      ['Stan', 'Nowy, oryginalny'],
+      ['Gwarancja', '24 miesiące'],
+    ],
+  },
 }
 
 export const trescKarty = (slug: string): TrescKarty | undefined => TRESC_KART[slug]
