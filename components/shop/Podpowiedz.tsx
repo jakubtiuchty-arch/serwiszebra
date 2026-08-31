@@ -17,6 +17,18 @@ export interface Wyjasnienie {
 }
 
 /**
+ * Dymek pokazuje TYLKO te wartości, które faktycznie występują w tym miejscu.
+ * Bez tego karta drukarki mobilnej tłumaczyła Ethernet i USB, których ta
+ * drukarka nie ma — słownik jest wspólny dla całego sklepu, a kontekst nie.
+ * Gdy żadna wartość nie pasuje (nietypowa cecha), zostaje pełna lista.
+ */
+export const zawezWyjasnienie = (w: Wyjasnienie, obecne: string[]): Wyjasnienie => {
+  const zbior = new Set(obecne.filter(Boolean))
+  const pozycje = w.pozycje.filter(([termin]) => zbior.has(termin))
+  return pozycje.length > 0 ? { ...w, pozycje } : w
+}
+
+/**
  * Treść dymka: zdanie wprowadzające i wiersz na każdą wartość. Elementy
  * blokowe zrobione spanami, bo dymek renderuje się wewnątrz `span`
  * i `div` łamałby poprawność HTML.

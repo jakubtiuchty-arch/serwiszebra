@@ -6,7 +6,7 @@ import PowiadomODostepnosci from './PowiadomODostepnosci'
 import { useCartStore } from '@/lib/cart-store'
 import type { DeviceVariant } from './DevicePurchasePanel'
 import type { StanWariantu } from './DevicePurchasePanel'
-import { Podpowiedz, type Wyjasnienie } from './Podpowiedz'
+import { Podpowiedz, zawezWyjasnienie, type Wyjasnienie } from './Podpowiedz'
 
 
 interface Props {
@@ -50,7 +50,7 @@ const OPISY_CECH: Record<string, Wyjasnienie> = {
     wstep: 'Jak drukarka łączy się z komputerem lub telefonem:',
     pozycje: [
       ['USB', 'kabel do jednego stanowiska'],
-      ['Ethernet', 'kabel sieciowy — drukarka widoczna dla wielu komputerów'],
+      ['Ethernet', 'kabel sieciowy, drukarka widoczna dla wielu komputerów'],
       ['Bluetooth', 'łączy się z telefonem albo terminalem w zasięgu kilku metrów'],
       ['Wi-Fi 5', 'sieć bezprzewodowa; standard spotykany najczęściej'],
       ['Wi-Fi 6', 'nowsza sieć — lepsza tam, gdzie naraz pracuje wiele urządzeń'],
@@ -168,6 +168,10 @@ export default function DeviceVariantsTable({
       if (!nazwyCech.includes(nazwa)) nazwyCech.push(nazwa)
     }
   }
+  /** Wartości danej cechy obecne w TYM urządzeniu — do zawężenia dymka */
+  const wartosciCechy = (nazwa: string) =>
+    variants.map((v) => v.cechy?.[nazwa] ?? '').filter(Boolean)
+
   const kolumnyCech = nazwyCech
     .filter((nazwa) => new Set(variants.map((v) => v.cechy?.[nazwa] ?? '')).size > 1)
     .sort((a, b) => {
@@ -417,7 +421,10 @@ export default function DeviceVariantsTable({
                     <dt className="flex items-center gap-1 text-gray-500">
                       {nazwa}
                       {OPISY_CECH[nazwa] && (
-                        <Podpowiedz label={`Co oznacza: ${nazwa}?`} wyjasnienie={OPISY_CECH[nazwa]} />
+                        <Podpowiedz
+                          label={`Co oznacza: ${nazwa}?`}
+                          wyjasnienie={zawezWyjasnienie(OPISY_CECH[nazwa], wartosciCechy(nazwa))}
+                        />
                       )}
                     </dt>
                     <dd className="text-right text-gray-900">{v.cechy?.[nazwa] || '—'}</dd>
@@ -484,7 +491,10 @@ export default function DeviceVariantsTable({
                   <span className="inline-flex items-center gap-1">
                     {nazwa}
                     {OPISY_CECH[nazwa] && (
-                      <Podpowiedz label={`Co oznacza: ${nazwa}?`} wyjasnienie={OPISY_CECH[nazwa]} />
+                      <Podpowiedz
+                          label={`Co oznacza: ${nazwa}?`}
+                          wyjasnienie={zawezWyjasnienie(OPISY_CECH[nazwa], wartosciCechy(nazwa))}
+                        />
                     )}
                   </span>
                 </th>

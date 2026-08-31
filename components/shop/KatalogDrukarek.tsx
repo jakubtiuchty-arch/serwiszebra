@@ -4,7 +4,7 @@ import { useId, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { ChevronDown, SlidersHorizontal, X } from "lucide-react";
 import KafelekProduktu from "./KafelekProduktu";
-import { Podpowiedz, type Wyjasnienie } from "./Podpowiedz";
+import { Podpowiedz, zawezWyjasnienie, type Wyjasnienie } from "./Podpowiedz";
 
 /**
  * Katalog drukarek z filtrowaniem po WARIANTACH, nie po modelach. Modeli jest
@@ -73,7 +73,7 @@ const OPISY_FILTRA: Record<string, Wyjasnienie> = {
     wstep: "Jak drukarka łączy się z komputerem lub telefonem:",
     pozycje: [
       ["USB", "kabel do jednego stanowiska"],
-      ["Ethernet", "kabel sieciowy — drukarka widoczna dla wielu komputerów"],
+      ["Ethernet", "kabel sieciowy, drukarka widoczna dla wielu komputerów"],
       ["Bluetooth", "łączy się z telefonem albo terminalem w zasięgu kilku metrów"],
       ["Wi-Fi 5", "sieć bezprzewodowa; standard spotykany najczęściej"],
       ["Wi-Fi 6", "nowsza sieć — lepsza tam, gdzie naraz pracuje wiele urządzeń"],
@@ -433,7 +433,10 @@ export default function KatalogDrukarek({
                   {OPISY_FILTRA[g.etykieta] && (
                     <Podpowiedz
                       label={`Co oznacza: ${g.etykieta}?`}
-                      wyjasnienie={OPISY_FILTRA[g.etykieta]}
+                      wyjasnienie={zawezWyjasnienie(
+                        OPISY_FILTRA[g.etykieta],
+                        g.opcje.map((o) => o.etykieta),
+                      )}
                     />
                   )}
                 </p>
