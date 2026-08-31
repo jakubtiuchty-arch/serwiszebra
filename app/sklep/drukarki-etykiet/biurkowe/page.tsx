@@ -210,9 +210,8 @@ export default async function DesktopPrintersPage() {
         const cena = st && st.netto > 0 ? st : null
         return {
           pn: v.pn,
-          dpi: String(v.dpi || v.cechy?.['Rozdzielczość'] || '').replace(/\D+/g, ''),
-          lacznosc: v.cechy?.['Łączność'] || 'USB',
-          wyposazenie: v.cechy?.['Wyposażenie'] || 'Standard',
+          // Cechy 1:1 z bazy — filtr sam zbuduje z nich kolumny
+          cechy: v.cechy || {},
           netto: cena ? cena.netto : Number(d.price),
           brutto: cena ? cena.brutto : Math.round(Number(d.price) * 1.23 * 100) / 100,
           dostepny: !!st && st.totalStock > 0,

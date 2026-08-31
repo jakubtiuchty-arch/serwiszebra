@@ -1,6 +1,8 @@
 // Test filtra wariantów na /sklep/drukarki-etykiet/biurkowe.
 // Uruchamiać na buildzie: npx next start -p 3003, potem node scripts/test-filtr-wariantow.mjs
 //
+// Klucze w adresie to slugi nazw cech (rozdzielczosc, lacznosc, nosnik) — filtr
+// buduje kolumny z danych, więc każda klasa ma własny zestaw.
 // Asercje są policzone z tego, co strona sama pokazuje (licznik przy chipie mówi,
 // ile wariantów pasuje), więc dorzucenie kolejnego modelu do katalogu nie wymaga
 // poprawiania liczb w teście.
@@ -36,7 +38,9 @@ sprawdz('start: licznik zgadza się z liczbą kafelków', startModele === startK
   `licznik ${startModele}, kafelków ${startKafelki}`)
 sprawdz('start: katalog niepusty', startKafelki >= 5 && startWersje >= startKafelki,
   `${startWersje} wersji w ${startModele} modelach`)
-sprawdz('start: filtry w lewej kolumnie', (await p.locator('aside [role="group"]').count()) === 5)
+// Liczba grup zależy od klasy — filtr buduje kolumny z cech, które faktycznie
+// różnicują warianty, więc sprawdzamy tylko, że kolumna nie jest pusta
+sprawdz('start: filtry w lewej kolumnie', (await p.locator('aside [role="group"]').count()) >= 4)
 
 // Licznik przy chipie zapowiada, ile wariantów zostanie po jego kliknięciu
 const zapowiedz300 = await licznikPrzyFiltrze('300 dpi')
@@ -48,7 +52,7 @@ sprawdz('300 dpi: tyle wersji, ile zapowiadał licznik przy chipie',
 sprawdz('300 dpi: liczba kafelków zgodna z licznikiem',
   (await kafelki().count()) === modele300 && modele300 < startKafelki,
   `kafelków ${await kafelki().count()}, licznik ${modele300}`)
-sprawdz('300 dpi: adres z filtrem', p.url().includes('dpi=300'), p.url())
+sprawdz('300 dpi: adres z filtrem', p.url().includes('rozdzielczosc=300'), p.url())
 sprawdz('300 dpi: suma z kafelków równa licznikowi',
   (await p.locator('main div.grid > a').allInnerTexts())
     .map((t) => Number(t.match(/pasuj\S+ (\d+) z \d+ wersji/)?.[1] || 1))
@@ -70,7 +74,7 @@ sprawdz('300 dpi + Wi-Fi: kafelki z jedną wersją linkują do ?pn=',
 // pigułka nad wynikami cofa wybór
 await p.locator('main button:has-text("Wi-Fi")').first().click()
 await p.waitForTimeout(150)
-sprawdz('pigułka zdejmuje filtr', p.url().includes('dpi=300') && !p.url().includes('lacznosc'), p.url())
+sprawdz('pigułka zdejmuje filtr', p.url().includes('rozdzielczosc=300') && !p.url().includes('lacznosc'), p.url())
 
 await p.locator('aside button:has-text("Wyczyść filtry")').click()
 await p.waitForTimeout(150)
@@ -89,7 +93,7 @@ sprawdz('termotransfer: licznik i chipy kafelków zgodne',
 
 // wejście z gotowego adresu odtwarza stan filtra
 const p2 = await b.newPage({ viewport: { width: 1440, height: 1100 } })
-await p2.goto(`${BASE}?dpi=300&lacznosc=Wi-Fi`, { waitUntil: 'networkidle' })
+await p2.goto(`${BASE}?rozdzielczosc=300+dpi&lacznosc=Wi-Fi`, { waitUntil: 'networkidle' })
 const zaznaczone = await p2.locator('aside input:checked').count()
 const kafelkiZAdresu = await p2
   .locator('main div.grid > a[href*="/sklep/drukarki-etykiet/zebra-"]')

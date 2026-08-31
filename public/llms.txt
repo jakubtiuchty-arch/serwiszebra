@@ -105,6 +105,18 @@ Ceny i stany magazynowe pobierane na żywo od dystrybutorów; gwarancję realizu
 
 Pełny wykaz wariantów z numerami katalogowymi, cenami i stanami: https://www.serwis-zebry.pl/api/llm-feed
 
+### Drukarki mobilne — karty produktów
+
+- **Zebra ZQ610 Plus** — https://www.serwis-zebry.pl/sklep/drukarki-etykiet/zebra-zq610-plus
+  Dwucalowa, druk termiczny 48 mm, 203 dpi, do 115 mm/s, waga 600 g, akumulator 3250 mAh, IP54. Do metek, oznaczeń lokalizacji i pokwitowań — nie wydrukuje etykiety kurierskiej.
+- **Zebra ZQ620 Plus** — https://www.serwis-zebry.pl/sklep/drukarki-etykiet/zebra-zq620-plus
+  Trzycalowa, druk 72 mm, 203 dpi, waga 730 g, akumulator 3250 mAh, IP54. Najczęstszy wybór do kompletacji i przyjęcia towaru.
+- **Zebra ZQ630 Plus** — https://www.serwis-zebry.pl/sklep/drukarki-etykiet/zebra-zq630-plus
+  Czterocalowa, druk 104 mm — jedyna w serii drukuje pełną etykietę kurierską 100 × 150 mm. Akumulator 6600 mAh, waga 1,11 kg, IP54.
+
+Każdy model występuje w wersjach: sam Bluetooth z RS-232, Wi-Fi 5 z Bluetooth 4.2, Wi-Fi 6 z Bluetooth 5.3 oraz wersja linerless (etykiety bez podkładu).
+Porównanie trzech modeli w jednej tabeli: https://www.serwis-zebry.pl/sklep/drukarki-etykiet/mobilne
+
 ### Jak dobrać drukarkę biurkową Zebra
 
 Porównanie wszystkich dziesięciu modeli w jednej tabeli (szybkość, szerokość druku, rozdzielczość, łączność, taśma) wraz z odpowiedziami na najczęstsze pytania: https://www.serwis-zebry.pl/sklep/drukarki-etykiet/biurkowe

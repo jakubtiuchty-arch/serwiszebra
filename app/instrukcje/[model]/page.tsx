@@ -268,6 +268,9 @@ const SPRZEDAWANE_MODELE: Record<string, string> = {
   ZD621T: 'zebra-zd621t',
   ZD411D: 'zebra-zd411d',
   ZD411T: 'zebra-zd411t',
+  'ZQ610 PLUS': 'zebra-zq610-plus',
+  'ZQ620 PLUS': 'zebra-zq620-plus',
+  'ZQ630 PLUS': 'zebra-zq630-plus',
 }
 
 export default async function ModelPage({ params }: { params: { model: string } }) {

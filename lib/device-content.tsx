@@ -1304,6 +1304,372 @@ export const TRESC_KART: Record<string, TrescKarty> = {
       ['Gwarancja', '24 miesiące'],
     ],
   },
+  'zebra-zq610-plus': {
+    rekomendowanyPn: 'ZQ61-AUXAE14-00',
+    zdjecieGlowne: '/sklep_photo/urzadzenia/zq610plus_1.webp',
+    wSkrocie: [
+      'Zebra ZQ610 Plus to najmniejsza mobilna drukarka etykiet z serii ZQ600 Plus — drukuje pas szerokości 48 mm i waży 600 gramów z akumulatorem.',
+      'Rozdzielczość 203 dpi, prędkość do 115 mm/s, nośniki o szerokości od 25,4 do 55,4 mm.',
+      'Akumulator 3250 mAh (7,4 V) wystarcza na zmianę; do wersji z dłuższą pracą dostępny jest akumulator powiększony.',
+      'Obudowa ma klasę szczelności IP54 i pracuje od −20 do 50°C, więc znosi chłodnię i pracę na zewnątrz.',
+      'Do wyboru radio Wi-Fi 6 z Bluetooth 5.3, Wi-Fi 5 z Bluetooth 4.2 albo wersja z samym Bluetoothem i portem RS-232.',
+      'Obsługuje języki CPCL, ZPL i EPL, więc wchodzi w miejsce starszych drukarek mobilnych Zebry bez przepisywania szablonów.',
+    ],
+    zweryfikowano: '2026-08-31',
+    poradniki: [
+      'najczestsze-awarie-drukarek-zebra-top10',
+      'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',
+      'jak-wyczyscic-glowice-drukarki-zebra',
+    ],
+    opis: [
+      <>
+        Zebra ZQ610 Plus to dwucalowa drukarka mobilna noszona przy pasku — drukuje tam,
+        gdzie odbywa się praca, bez wracania do stanowiska z komputerem. Trafia do
+        kompletacji zamówień, inwentaryzacji, obsługi zwrotów w sklepie i do serwisantów
+        w terenie: wszędzie tam, gdzie etykieta albo pokwitowanie ma powstać na miejscu.
+        Przy wadze 600 gramów z akumulatorem i wysokości 72 mm nie przeszkadza w ruchu
+        przez całą zmianę.
+      </>,
+      <>
+        Drukarka nanosi obraz termicznie, bez taśmy barwiącej, w rozdzielczości 203 dpi
+        i z prędkością do 115 mm/s. Szerokość druku wynosi 48 mm, a obsługiwane nośniki
+        mieszczą się w zakresie 25,4–55,4 mm — to format etykiet półkowych, oznaczeń
+        lokalizacji i pokwitowań, nie etykiet kurierskich. Do nadań przesyłek potrzebna jest
+        szersza{' '}
+        <Link
+          href="/sklep/drukarki-etykiet/zebra-zq630-plus"
+          className="font-medium text-gray-900 underline"
+        >
+          Zebra ZQ630 Plus
+        </Link>{' '}
+        z pasem 104 mm.
+      </>,
+      <>
+        Łączność wybiera się przy zamówieniu: Wi-Fi 6 z Bluetooth 5.3, Wi-Fi 5 z Bluetooth
+        4.2 albo sam Bluetooth z portem RS-232 do starszych systemów. Kolorowy wyświetlacz
+        pokazuje stan drukarki i pozwala zmienić ustawienia bez komputera, a obudowa o klasie
+        IP54, pracująca od −20 do 50°C, znosi kurz, wilgoć i chłodnię. Pamięć 512 MB Flash
+        z 256 MB RAM mieści szablony z grafiką, a obsługa CPCL, ZPL i EPL pozwala wstawić tę
+        drukarkę w miejsce starszej Zebry mobilnej bez zmian w oprogramowaniu.
+      </>,
+    ],
+    osie: [
+      {
+        tytul: 'Łączność',
+        pozycje: [
+          { termin: 'Bluetooth', opis: 'z portem RS-232, gdy w firmie działa starszy system' },
+          { termin: 'Wi-Fi 5', opis: 'radio 802.11ac z Bluetooth 4.2 — standard w magazynach' },
+          { termin: 'Wi-Fi 6', opis: 'radio 802.11ax z Bluetooth 5.3, do gęstych sieci' },
+        ],
+      },
+      {
+        tytul: 'Nośnik',
+        pozycje: [
+          { termin: 'Z podkładem', opis: 'zwykłe etykiety na rolce z papierem nośnym' },
+          {
+            termin: 'Linerless',
+            opis: 'etykiety bez podkładu — więcej metrów na rolce i zero odpadu',
+          },
+        ],
+      },
+    ],
+    faqNaglowek: 'Najczęstsze pytania o ZQ610 Plus',
+    faq: [
+      {
+        q: 'Czy ZQ610 Plus wydrukuje etykietę kurierską?',
+        a: 'Nie. Szerokość druku to 48 mm, a etykieta kurierska ma 100 mm szerokości. ZQ610 Plus drukuje etykiety półkowe, oznaczenia lokalizacji, metki i pokwitowania. Do nadań przesyłek w terenie służy czterocalowa ZQ630 Plus.',
+        href: '/sklep/drukarki-etykiet/zebra-zq630-plus',
+        link: 'Zobacz Zebra ZQ630 Plus',
+      },
+      {
+        q: 'Jak długo działa akumulator w ZQ610 Plus?',
+        a: 'Standardowy akumulator ma 3250 mAh przy napięciu 7,4 V, co przy typowym druku wystarcza na całą zmianę. Do pracy dwuzmianowej Zebra przewiduje akumulator powiększony. Z warsztatu dodamy, że to właśnie akumulator zużywa się w drukarkach mobilnych najszybciej — zapasowy warto policzyć od razu, a nie dokupować, gdy pierwszy siada w sezonie.',
+        href: '/sklep/akumulatory/drukarki-mobilne',
+        link: 'Akumulatory do drukarek mobilnych',
+      },
+      {
+        q: 'Czym ZQ610 Plus różni się od ZQ620 Plus?',
+        a: 'Szerokością. ZQ610 Plus drukuje pas 48 mm i przyjmuje nośniki do 55,4 mm, ZQ620 Plus drukuje 72 mm na nośnikach do 79,4 mm. Reszta — rozdzielczość 203 dpi, prędkość 115 mm/s, akumulator 3250 mAh i opcje radiowe — jest taka sama. ZQ610 Plus jest o 130 gramów lżejsza i węższa o 26 mm.',
+        href: '/sklep/drukarki-etykiet/zebra-zq620-plus',
+        link: 'Zobacz Zebra ZQ620 Plus',
+      },
+      {
+        q: 'Czy ZQ610 Plus wytrzyma pracę w chłodni?',
+        a: 'Tak. Zakres pracy to od −20 do 50°C, a obudowa ma klasę szczelności IP54, czyli jest odporna na kurz i bryzgi wody. W chłodni trzeba pamiętać o kondensacji: po wyjściu z zimna drukarce należy dać dojść do temperatury pomieszczenia przed ładowaniem.',
+        href: '/blog/najczestsze-awarie-drukarek-zebra-top10',
+        link: 'Dziesięć najczęstszych awarii drukarek Zebra',
+      },
+      {
+        q: 'Jakie etykiety pasują do ZQ610 Plus?',
+        a: 'Termoczułe etykiety i papier paragonowy o szerokości od 25,4 do 55,4 mm. Wersja linerless przyjmuje etykiety bez podkładu, których na rolce mieści się więcej i które nie zostawiają odpadu. Taśma barwiąca nie jest potrzebna — to drukarka termiczna.',
+        href: '/sklep/drukarki-etykiet/mobilne',
+        link: 'Porównaj mobilne drukarki Zebra',
+      },
+    ],
+    spec: [
+      ['Producent', 'Zebra'],
+      ['Model', 'ZQ610 Plus'],
+      ['Technologia druku', 'Termiczna bezpośrednia — bez taśmy'],
+      ['Rozdzielczość', '203 DPI'],
+      ['Szerokość druku', '48 mm'],
+      ['Prędkość druku', 'do 115 mm/s'],
+      ['Szerokość nośnika', '25,4–55,4 mm'],
+      ['Pamięć', '512 MB Flash, 256 MB RAM'],
+      ['Akumulator', '3250 mAh, 7,4 V; opcjonalnie powiększony'],
+      ['Łączność', 'Bluetooth i RS-232; opcjonalnie Wi-Fi 5 lub Wi-Fi 6'],
+      ['Wyświetlacz', 'Kolorowy, z klawiaturą nawigacyjną'],
+      ['Odporność', 'IP54, praca od −20 do 50°C'],
+      ['Wymiary (W×S×G)', '72,4 × 91,4 × 170,9 mm'],
+      ['Waga z akumulatorem', '0,6 kg'],
+      ['Języki', 'CPCL, ZPL, EPL'],
+      ['Stan', 'Nowy, oryginalny'],
+      ['Gwarancja', '24 miesiące'],
+    ],
+  },
+  'zebra-zq620-plus': {
+    rekomendowanyPn: 'ZQ62-AUXAE14-00',
+    zdjecieGlowne: '/sklep_photo/urzadzenia/zq620plus_1.webp',
+    wSkrocie: [
+      'Zebra ZQ620 Plus to trzycalowa mobilna drukarka etykiet: pas druku 72 mm, waga 730 gramów z akumulatorem.',
+      'Rozdzielczość 203 dpi, prędkość do 115 mm/s, nośniki o szerokości od 25,4 do 79,4 mm i długości do 813 mm.',
+      'Akumulator 3250 mAh wystarcza na zmianę, a wersja z akumulatorem powiększonym na pracę dwuzmianową.',
+      'Klasa szczelności IP54 i zakres pracy od −20 do 50°C — drukarka znosi kurz, bryzgi i chłodnię.',
+      'Do wyboru Wi-Fi 6 z Bluetooth 5.3, Wi-Fi 5 z Bluetooth 4.2 albo sam Bluetooth z portem RS-232.',
+      'To najczęściej wybierana wielkość w serii ZQ600 Plus: mieści etykiety paletowe i pokwitowania, a nadal nosi się przy pasku.',
+    ],
+    zweryfikowano: '2026-08-31',
+    poradniki: [
+      'najczestsze-awarie-drukarek-zebra-top10',
+      'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',
+      'jak-wyczyscic-glowice-drukarki-zebra',
+    ],
+    opis: [
+      <>
+        Zebra ZQ620 Plus to trzycalowa drukarka mobilna — środkowy rozmiar serii ZQ600 Plus
+        i najczęstszy wybór tam, gdzie dwucalowy pas jest już za wąski, a czterocalowa
+        drukarka za ciężka do noszenia. Pracuje przy kompletacji zamówień, przy przyjęciu
+        towaru, w obsłudze zwrotów i przy wydawaniu pokwitowań w terenie. Z akumulatorem
+        waży 730 gramów i mieści się w futerale przy pasku.
+      </>,
+      <>
+        Druk jest termiczny, bez taśmy, w rozdzielczości 203 dpi i z prędkością do 115 mm/s.
+        Szerokość druku wynosi 72 mm, a nośniki mieszczą się w zakresie 25,4–79,4 mm przy
+        długości etykiety do 813 mm. To format etykiet magazynowych, oznaczeń palet
+        i paragonów; etykieta kurierska 100 × 150 mm wymaga szerszej{' '}
+        <Link
+          href="/sklep/drukarki-etykiet/zebra-zq630-plus"
+          className="font-medium text-gray-900 underline"
+        >
+          Zebry ZQ630 Plus
+        </Link>
+        .
+      </>,
+      <>
+        Łączność wybiera się przy zamówieniu: Wi-Fi 6 z Bluetooth 5.3, Wi-Fi 5 z Bluetooth
+        4.2 albo sam Bluetooth z portem RS-232 do starszych systemów. Kolorowy wyświetlacz
+        z klawiaturą pozwala sprawdzić stan i zmienić ustawienia bez komputera. Obudowa
+        o klasie IP54 pracuje od −20 do 50°C, a pamięć 512 MB Flash z 256 MB RAM mieści
+        rozbudowane szablony. Obsługa CPCL, ZPL i EPL zachowuje zgodność ze starszymi
+        drukarkami mobilnymi Zebry, w tym serią QLn.
+      </>,
+    ],
+    osie: [
+      {
+        tytul: 'Łączność',
+        pozycje: [
+          { termin: 'Bluetooth', opis: 'z portem RS-232, gdy w firmie działa starszy system' },
+          { termin: 'Wi-Fi 5', opis: 'radio 802.11ac z Bluetooth 4.2 — standard w magazynach' },
+          { termin: 'Wi-Fi 6', opis: 'radio 802.11ax z Bluetooth 5.3, do gęstych sieci' },
+        ],
+      },
+      {
+        tytul: 'Nośnik',
+        pozycje: [
+          { termin: 'Z podkładem', opis: 'zwykłe etykiety na rolce z papierem nośnym' },
+          {
+            termin: 'Linerless',
+            opis: 'etykiety bez podkładu — więcej metrów na rolce i zero odpadu',
+          },
+        ],
+      },
+    ],
+    faqNaglowek: 'Najczęstsze pytania o ZQ620 Plus',
+    faq: [
+      {
+        q: 'Czym ZQ620 Plus różni się od ZQ610 Plus i ZQ630 Plus?',
+        a: 'Wyłącznie szerokością i wagą. ZQ610 Plus drukuje pas 48 mm i waży 600 g, ZQ620 Plus — 72 mm przy 730 g, ZQ630 Plus — 104 mm przy 1,11 kg. Rozdzielczość 203 dpi, prędkość 115 mm/s i opcje radiowe są w całej serii takie same; ZQ630 Plus ma dodatkowo mocniejszy akumulator 6600 mAh.',
+        href: '/sklep/drukarki-etykiet/mobilne',
+        link: 'Porównaj mobilne drukarki Zebra',
+      },
+      {
+        q: 'Czy ZQ620 Plus wydrukuje etykietę kurierską 100 × 150 mm?',
+        a: 'Nie. Pas druku ma 72 mm, więc etykieta kurierska się nie zmieści. ZQ620 Plus drukuje etykiety magazynowe, oznaczenia palet, metki i paragony. Do nadań przesyłek w terenie służy ZQ630 Plus z pasem 104 mm.',
+        href: '/blog/drukowanie-etykiet-kurierskich-allegro-inpost-dpd-zebra',
+        link: 'Jak drukować etykiety kurierskie na Zebrze — poradnik',
+      },
+      {
+        q: 'Co daje wersja linerless?',
+        a: 'Etykiety bez podkładu: na rolce mieści się ich znacznie więcej, więc materiał wymienia się rzadziej, a przy stanowisku nie zostaje odpad z papieru nośnego. Wymagają jednak etykiet z powłoką silikonową i regularnego czyszczenia wałka, bo klej zbiera się szybciej niż przy zwykłych etykietach.',
+        href: '/blog/jak-wyczyscic-glowice-drukarki-zebra',
+        link: 'Czyszczenie głowicy krok po kroku',
+      },
+      {
+        q: 'Jak długo pracuje ZQ620 Plus na jednym ładowaniu?',
+        a: 'Standardowy akumulator ma 3250 mAh przy 7,4 V i przy typowym druku wystarcza na zmianę. Do pracy dwuzmianowej Zebra przewiduje akumulator powiększony. W serwisie widzimy, że to akumulatory zużywają się w drukarkach mobilnych najszybciej — po dwóch–trzech latach codziennej pracy zwykle wymagają wymiany.',
+        href: '/sklep/akumulatory/drukarki-mobilne',
+        link: 'Akumulatory do drukarek mobilnych',
+      },
+      {
+        q: 'Czy ZQ620 Plus współpracuje ze starszymi szablonami z drukarek QLn?',
+        a: 'Tak. Drukarka obsługuje języki CPCL, ZPL i EPL, więc szablony przygotowane dla QLn220 i QLn320 działają bez przepisywania. Zmienić trzeba zwykle tylko konfigurację połączenia, bo radia w serii Plus są nowsze.',
+        href: '/sterowniki',
+        link: 'Sterowniki i narzędzia Zebry',
+      },
+    ],
+    spec: [
+      ['Producent', 'Zebra'],
+      ['Model', 'ZQ620 Plus'],
+      ['Technologia druku', 'Termiczna bezpośrednia — bez taśmy'],
+      ['Rozdzielczość', '203 DPI'],
+      ['Szerokość druku', '72 mm'],
+      ['Prędkość druku', 'do 115 mm/s'],
+      ['Szerokość nośnika', '25,4–79,4 mm'],
+      ['Długość etykiety', '12,7–813 mm'],
+      ['Pamięć', '512 MB Flash, 256 MB RAM'],
+      ['Akumulator', '3250 mAh, 7,4 V; opcjonalnie powiększony'],
+      ['Łączność', 'Bluetooth i RS-232; opcjonalnie Wi-Fi 5 lub Wi-Fi 6'],
+      ['Wyświetlacz', 'Kolorowy, z klawiaturą nawigacyjną'],
+      ['Odporność', 'IP54, praca od −20 do 50°C'],
+      ['Wymiary (W×S×G)', '76,9 × 117,9 × 173,7 mm'],
+      ['Waga z akumulatorem', '0,73 kg'],
+      ['Języki', 'CPCL, ZPL, EPL'],
+      ['Stan', 'Nowy, oryginalny'],
+      ['Gwarancja', '24 miesiące'],
+    ],
+  },
+  'zebra-zq630-plus': {
+    rekomendowanyPn: 'ZQ63-AUXAE14-00',
+    zdjecieGlowne: '/sklep_photo/urzadzenia/zq630plus_1.webp',
+    wSkrocie: [
+      'Zebra ZQ630 Plus to czterocalowa mobilna drukarka etykiet — jako jedyna w serii ZQ600 Plus drukuje pas 104 mm, czyli pełną etykietę kurierską 100 × 150 mm.',
+      'Rozdzielczość 203 dpi, prędkość do 115 mm/s, nośniki 50,8–111 mm z podkładem lub 50,8–109 mm bez podkładu.',
+      'Akumulator 6600 mAh, czyli dwukrotnie pojemniejszy niż w ZQ610 Plus i ZQ620 Plus — do pracy wielozmianowej.',
+      'Waży 1,11 kg z akumulatorem, więc pracuje raczej na wózku i w futerale naramiennym niż przy pasku.',
+      'Klasa szczelności IP54, zakres pracy od −20 do 50°C, do wyboru Wi-Fi 6 z Bluetooth 5.3, Wi-Fi 5 z Bluetooth 4.2 albo sam Bluetooth z RS-232.',
+      'Obsługuje CPCL, ZPL i EPL, więc wchodzi w miejsce starszych drukarek mobilnych bez przepisywania szablonów.',
+    ],
+    zweryfikowano: '2026-08-31',
+    poradniki: [
+      'najczestsze-awarie-drukarek-zebra-top10',
+      'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',
+      'jak-wyczyscic-glowice-drukarki-zebra',
+    ],
+    opis: [
+      <>
+        Zebra ZQ630 Plus to największa drukarka mobilna serii ZQ600 Plus i jedyna, która
+        drukuje pas szerokości 104 mm — czyli pełną etykietę kurierską 100 × 150 mm. Bierze
+        się ją tam, gdzie przesyłki nadaje się poza biurem: w dostawie bezpośredniej,
+        w logistyce zwrotów, przy załadunku i na wózkach kompletacyjnych. Z akumulatorem
+        waży 1,11 kg, więc pracuje raczej w futerale naramiennym albo na uchwycie wózka niż
+        przy pasku.
+      </>,
+      <>
+        Druk jest termiczny, bez taśmy, w rozdzielczości 203 dpi i z prędkością do 115 mm/s.
+        Nośniki z podkładem mieszczą się w zakresie 50,8–111 mm, a etykiety bez podkładu —
+        50,8–109 mm, przy długości do 813 mm. Akumulator ma 6600 mAh, dwa razy więcej niż
+        w mniejszych modelach serii, co przekłada się na pracę wielozmianową bez wymiany
+        ogniwa w połowie dnia. Jeśli pas 104 mm nie jest potrzebny, lżejsza i tańsza będzie{' '}
+        <Link
+          href="/sklep/drukarki-etykiet/zebra-zq620-plus"
+          className="font-medium text-gray-900 underline"
+        >
+          Zebra ZQ620 Plus
+        </Link>
+        .
+      </>,
+      <>
+        Łączność wybiera się przy zamówieniu: Wi-Fi 6 z Bluetooth 5.3, Wi-Fi 5 z Bluetooth
+        4.2 albo sam Bluetooth z portem RS-232. Kolorowy wyświetlacz z klawiaturą pokazuje
+        stan drukarki i pozwala zmienić ustawienia bez komputera, a obudowa o klasie IP54
+        pracuje od −20 do 50°C. Pamięć 512 MB Flash z 256 MB RAM mieści szablony z grafiką,
+        a obsługa CPCL, ZPL i EPL pozwala wstawić drukarkę w miejsce starszego modelu
+        mobilnego bez zmian po stronie systemu.
+      </>,
+    ],
+    osie: [
+      {
+        tytul: 'Łączność',
+        pozycje: [
+          { termin: 'Bluetooth', opis: 'z portem RS-232, gdy w firmie działa starszy system' },
+          { termin: 'Wi-Fi 5', opis: 'radio 802.11ac z Bluetooth 4.2 — standard w magazynach' },
+          { termin: 'Wi-Fi 6', opis: 'radio 802.11ax z Bluetooth 5.3, do gęstych sieci' },
+        ],
+      },
+      {
+        tytul: 'Nośnik',
+        pozycje: [
+          { termin: 'Z podkładem', opis: 'zwykłe etykiety na rolce z papierem nośnym' },
+          {
+            termin: 'Linerless',
+            opis: 'etykiety bez podkładu — więcej metrów na rolce i zero odpadu',
+          },
+        ],
+      },
+    ],
+    faqNaglowek: 'Najczęstsze pytania o ZQ630 Plus',
+    faq: [
+      {
+        q: 'Czy ZQ630 Plus wydrukuje etykietę kurierską 100 × 150 mm?',
+        a: 'Tak. Pas druku ma 104 mm, więc etykieta kurierska mieści się w całości — to jedyna drukarka w serii ZQ600 Plus, która to potrafi. Mniejsze ZQ610 Plus i ZQ620 Plus drukują odpowiednio 48 i 72 mm.',
+        href: '/blog/drukowanie-etykiet-kurierskich-allegro-inpost-dpd-zebra',
+        link: 'Jak drukować etykiety kurierskie na Zebrze — poradnik',
+      },
+      {
+        q: 'Na jak długo starcza akumulator w ZQ630 Plus?',
+        a: 'Akumulator ma 6600 mAh przy 7,4 V, czyli dwa razy więcej niż w ZQ610 Plus i ZQ620 Plus — przy typowym druku wystarcza na pracę wielozmianową. W serwisie widzimy, że akumulator jest częścią zużywającą się najszybciej, więc przy pracy ciągłej warto mieć drugi w ładowarce.',
+        href: '/sklep/akumulatory/drukarki-mobilne',
+        link: 'Akumulatory do drukarek mobilnych',
+      },
+      {
+        q: 'Czy ZQ630 Plus nadaje się do noszenia przy pasku?',
+        a: 'Z akumulatorem waży 1,11 kg i mierzy 165 mm szerokości, więc na dłuższą zmianę wygodniejszy jest futerał naramienny albo uchwyt na wózku. Do pracy przy pasku lepsza jest ZQ620 Plus — 730 g przy pasie druku 72 mm.',
+        href: '/sklep/drukarki-etykiet/zebra-zq620-plus',
+        link: 'Zobacz Zebra ZQ620 Plus',
+      },
+      {
+        q: 'Jakie etykiety pasują do ZQ630 Plus?',
+        a: 'Termoczułe etykiety o szerokości 50,8–111 mm z podkładem albo 50,8–109 mm w wersji linerless, przy długości do 813 mm. Taśma barwiąca nie jest potrzebna — to druk termiczny. Wersja linerless wymaga etykiet z powłoką silikonową i częstszego czyszczenia wałka.',
+        href: '/sklep/drukarki-etykiet/mobilne',
+        link: 'Porównaj mobilne drukarki Zebra',
+      },
+      {
+        q: 'Czy ZQ630 Plus wytrzyma pracę na zewnątrz?',
+        a: 'Tak. Obudowa ma klasę szczelności IP54 — odporność na kurz i bryzgi wody — a zakres pracy sięga od −20 do 50°C. Przy przenoszeniu z mrozu do ciepłego pomieszczenia trzeba dać drukarce dojść do temperatury otoczenia przed ładowaniem, żeby uniknąć kondensacji.',
+        href: '/blog/najczestsze-awarie-drukarek-zebra-top10',
+        link: 'Dziesięć najczęstszych awarii drukarek Zebra',
+      },
+    ],
+    spec: [
+      ['Producent', 'Zebra'],
+      ['Model', 'ZQ630 Plus'],
+      ['Technologia druku', 'Termiczna bezpośrednia — bez taśmy'],
+      ['Rozdzielczość', '203 DPI'],
+      ['Szerokość druku', '104 mm'],
+      ['Prędkość druku', 'do 115 mm/s'],
+      ['Szerokość nośnika', '50,8–111 mm; linerless 50,8–109 mm'],
+      ['Długość etykiety', '12,7–813 mm'],
+      ['Pamięć', '512 MB Flash, 256 MB RAM'],
+      ['Akumulator', '6600 mAh, 7,4 V'],
+      ['Łączność', 'Bluetooth i RS-232; opcjonalnie Wi-Fi 5 lub Wi-Fi 6'],
+      ['Wyświetlacz', 'Kolorowy, z klawiaturą nawigacyjną'],
+      ['Odporność', 'IP54, praca od −20 do 50°C'],
+      ['Wymiary (W×S×G)', '82,5 × 165,1 × 186,7 mm'],
+      ['Waga z akumulatorem', '1,11 kg'],
+      ['Języki', 'CPCL, ZPL, EPL'],
+      ['Stan', 'Nowy, oryginalny'],
+      ['Gwarancja', '24 miesiące'],
+    ],
+  },
 }
 
 export const trescKarty = (slug: string): TrescKarty | undefined => TRESC_KART[slug]
