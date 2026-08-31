@@ -44,7 +44,7 @@ const TASMY: Kafel = {
 const ETYKIETY_TT: Kafel = {
   href: 'https://www.takma.com.pl/etykiety-termotransferowe-zebra',
   obraz: '/materialy/etykiety-termotransferowe.webp',
-  alt: 'Kartony i pojemniki magazynowe z naklejonymi etykietami, obok rolki etykiet',
+  alt: 'Rolki etykiet termotransferowych na warsztatowym blacie, jedna rozwinięta w pas etykiet',
   tytul: 'Etykiety termotransferowe',
   opis: 'Papierowe do magazynu, foliowe tam, gdzie etykieta moknie albo się ociera. Muszą pasować do taśmy, nie tylko do drukarki.',
   cta: 'Zobacz etykiety',
