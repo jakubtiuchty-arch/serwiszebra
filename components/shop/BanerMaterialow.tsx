@@ -28,7 +28,19 @@ const ETYKIETY_TERMICZNE: Kafel = {
   obraz: '/materialy/etykiety-termiczne.webp',
   alt: 'Rolki białych etykiet termicznych na blacie stanowiska pakowania',
   tytul: 'Etykiety termiczne',
-  opis: 'Jedyny materiał, jakiego potrzebuje ta drukarka — bez taśmy. Rolki w formatach kurierskich i magazynowych, na wałku 25 i 40 mm.',
+  opis: 'Jedyny materiał, jakiego potrzebuje ta drukarka — bez taśmy. Rolki w formatach kurierskich i magazynowych, na gilzie 12,7 i 25,4 mm.',
+  cta: 'Zobacz etykiety termiczne',
+}
+
+/* Drukarka mobilna ma komorę na małą rolkę i uchwyt na gilzę 19 mm — rolka
+   biurkowa (gilza 25,4 lub 40 mm, średnica do 127 mm) nie wejdzie do niej
+   ani wymiarem gilzy, ani nawojem. */
+const ETYKIETY_MOBILNE: Kafel = {
+  href: 'https://www.takma.com.pl/etykiety-termiczne-zebra',
+  obraz: '/materialy/etykiety-termiczne.webp',
+  alt: 'Rolki białych etykiet termicznych na blacie stanowiska pakowania',
+  tytul: 'Etykiety termiczne',
+  opis: 'Jedyny materiał, jakiego potrzebuje ta drukarka — bez taśmy. Do drukarki mobilnej idą rolki na gilzie 19 mm albo bezgilzowe; rolka z gilzą 40 mm do komory nie wejdzie.',
   cta: 'Zobacz etykiety termiczne',
 }
 
@@ -85,7 +97,13 @@ function KafelMaterialu({ k, szeroki }: { k: Kafel; szeroki?: boolean }) {
   )
 }
 
-export default function BanerMaterialow({ termotransfer }: { termotransfer: boolean }) {
+export default function BanerMaterialow({
+  termotransfer,
+  mobilna = false,
+}: {
+  termotransfer: boolean
+  mobilna?: boolean
+}) {
   return (
     <section className="mb-4 rounded-xl border border-gray-200 bg-white p-4 sm:mb-6 sm:p-6">
       <h2 className="text-sm font-semibold text-gray-900 sm:text-base">
@@ -107,7 +125,7 @@ export default function BanerMaterialow({ termotransfer }: { termotransfer: bool
             <KafelMaterialu k={ETYKIETY_TT} szeroki />
           </>
         ) : (
-          <KafelMaterialu k={ETYKIETY_TERMICZNE} szeroki />
+          <KafelMaterialu k={mobilna ? ETYKIETY_MOBILNE : ETYKIETY_TERMICZNE} szeroki />
         )}
       </div>
     </section>

@@ -520,7 +520,10 @@ export default async function DevicePage({
               już wersję, następnym pytaniem pyta o etykiety. Rodzaj druku
               czytamy z ostatniej litery modelu — „t" zużywa taśmę i etykiety,
               „d" wyłącznie etykiety. */}
-          <BanerMaterialow termotransfer={/t$/i.test((product.device_model || '').trim())} />
+          <BanerMaterialow
+            termotransfer={/t$/i.test((product.device_model || '').trim())}
+            mobilna={product.attributes?.klasa === 'mobilne'}
+          />
 
           {tresc && (
             <section
