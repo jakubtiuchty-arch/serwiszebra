@@ -2213,6 +2213,245 @@ export const TRESC_KART: Record<string, TrescKarty> = {
       ['Gwarancja', '24 miesiące'],
     ],
   },
+  'zebra-zq210': {
+    rekomendowanyPn: 'ZQ21-A0E01KE-00',
+    zdjecieGlowne: '/sklep_photo/urzadzenia/zq210_1.webp',
+    wSkrocie: [
+      'Zebra ZQ210 to najlżejsza drukarka mobilna Zebry — waży 265 gramów z akumulatorem i mieści się w dłoni.',
+      'Drukuje termicznie pas 48 mm w rozdzielczości 203 dpi z prędkością do 60 mm/s; etykiety bez podkładu wychodzą z prędkością 50 mm/s.',
+      'Obsługuje nośniki o szerokości 58 mm, a z przekładkami także 50,8, 40 i 30 mm — rolka ma do 40 mm średnicy i gilzę 12,7 mm.',
+      'ZQ210 rozumie języki CPCL i ESC/POS, ale NIE obsługuje ZPL — szablony pisane pod drukarki ZD i ZT trzeba na niej napisać od nowa.',
+      'Akumulator 1500 mAh (7,4 V) starcza na co najmniej 500 etykiet o długości 216 mm, a drukarka ładuje się przez USB-C.',
+      'Klasa szczelności to IP43, czyli ochrona przed kurzem i kroplami padającymi pod kątem; futerał podnosi ją do IP54.',
+    ],
+    zweryfikowano: '2026-08-31',
+    poradniki: [
+      'serwis-drukarki-mobilnej-zebra-zq610-zq620-zq630',
+      'problemy-bateria-drukarka-zebra-mobilna',
+      'falszywy-blad-media-out-drukarka-zebra-mobilna',
+      'biale-linie-etykiety-drukarka-mobilna-zebra',
+      'drukarka-zebra-nie-drukuje-zimno-head-cold',
+      'drukarka-zebra-wifi-rozlacza-sie-offline',
+    ],
+    opis: [
+      <>
+        Zebra ZQ210 to najmniejsza drukarka mobilna, jaką Zebra ma w ofercie: 265 gramów,
+        118 × 85,5 × 44,5 mm i pas druku 48 mm. Powstała do paragonów, pokwitowań i metek
+        w handlu, gastronomii oraz na eventach — tam, gdzie drukarka wisi na pasku obok
+        telefonu i ma po prostu wydrukować dowód transakcji. Ładuje się przez USB-C,
+        więc obok kasy nie stoi kolejna stacja dokująca.
+      </>,
+      <>
+        Sercem wyboru jest język. ZQ210 obsługuje CPCL i podzbiór ESC/POS, ale nie zna
+        ZPL — a to właśnie w ZPL napisane są szablony z drukarek biurkowych{' '}
+        <Link
+          href="/sklep/drukarki-etykiet/biurkowe"
+          className="font-medium text-gray-900 underline"
+        >
+          serii ZD
+        </Link>{' '}
+        i przemysłowych ZT. Jeśli w firmie działa system, który wysyła ZPL, ta drukarka go
+        nie wydrukuje; wtedy właściwym wyborem jest ZQ310 Plus albo seria ZQ600 Plus.
+        Pamięć 16 MB Flash i 16 MB RAM wystarcza na proste paragony, nie na katalog
+        szablonów z grafiką.
+      </>,
+      <>
+        Drukarka rozpoznaje przerwę, czarny znacznik i koniec nośnika, więc drukuje
+        zarówno rolkę ciągłą, jak i etykiety. Wersja linerless przyjmuje etykiety bez
+        podkładu. Wyświetlacz OLED pokazuje stan Bluetootha, materiału i przyciemnienia
+        druku. Obudowa ma klasę IP43 — to najsłabsza szczelność w całej rodzinie ZQ,
+        przewidziana do pracy pod dachem; do pracy na zewnątrz Zebra przewiduje futerał
+        podnoszący ochronę do IP54.
+      </>,
+    ],
+    osie: [
+      {
+        tytul: 'Nośnik',
+        pozycje: [
+          {
+            termin: 'Z podkładem',
+            opis: 'paragony i zwykłe etykiety na rolce z papierem nośnym',
+          },
+          {
+            termin: 'Linerless',
+            opis: 'etykiety bez podkładu — więcej sztuk na rolce i zero odpadu przy kasie',
+          },
+        ],
+      },
+    ],
+    faqNaglowek: 'Najczęstsze pytania o ZQ210',
+    faq: [
+      {
+        q: 'Czy ZQ210 obsługuje ZPL?',
+        a: 'Nie. ZQ210 rozumie CPCL i podzbiór ESC/POS. Szablony napisane w ZPL — czyli wszystko, co działa na drukarkach ZD i ZT — nie wydrukują się na tej drukarce bez przepisania. Jeśli system wysyła ZPL, trzeba wybrać ZQ310 Plus albo model z serii ZQ600 Plus.',
+        href: '/sklep/drukarki-etykiet/zebra-zq310-plus',
+        link: 'Zobacz Zebra ZQ310 Plus',
+      },
+      {
+        q: 'Jakie rolki pasują do ZQ210?',
+        a: 'Termoczułe rolki o szerokości 58 mm, a z przekładkami także 50,8, 40 i 30 mm. Średnica zewnętrzna do 40 mm, gilza 12,7 mm. To najmniejsza rolka w rodzinie ZQ, więc materiał wymienia się częściej niż w większych drukarkach mobilnych. Taśma barwiąca nie jest potrzebna.',
+        href: '/sklep/drukarki-etykiet/mobilne',
+        link: 'Porównaj mobilne drukarki Zebra',
+      },
+      {
+        q: 'Czy ZQ210 wytrzyma pracę na zewnątrz?',
+        a: 'Warunkowo. Klasa szczelności to IP43, czyli ochrona przed kurzem i kroplami padającymi pod kątem do 60 stopni — nie przed deszczem czy zalaniem. Futerał podnosi ochronę do IP54. Zakres pracy to od −10 do 50°C. Do stałej pracy w terenie właściwsza jest seria ZQ500 z klasą IP54 w standardzie.',
+        href: '/sklep/drukarki-etykiet/zebra-zq511',
+        link: 'Zobacz Zebra ZQ511',
+      },
+      {
+        q: 'Na ile wydruków starcza akumulator w ZQ210?',
+        a: 'Producent podaje co najmniej 500 etykiet o długości 216 mm na jednym ładowaniu, przy zadruku 13 procent i temperaturze pokojowej. Akumulator ma 1500 mAh przy 7,4 V i ładuje się przez USB-C, więc do naładowania wystarczy ta sama ładowarka co do telefonu.',
+        href: '/blog/problemy-bateria-drukarka-zebra-mobilna',
+        link: 'Problemy z baterią w drukarce mobilnej',
+      },
+      {
+        q: 'Czym ZQ210 różni się od ZQ310 Plus?',
+        a: 'Wagą, językiem i szybkością. ZQ210 waży 265 gramów i drukuje do 60 mm/s w CPCL i ESC/POS. ZQ310 Plus waży 370 gramów, drukuje do 101,6 mm/s, rozumie także ZPL, ma większą pamięć i klasę IP54 zamiast IP43. ZQ210 to wybór do kasy i paragonów, ZQ310 Plus do pracy z systemem magazynowym.',
+        href: '/sklep/drukarki-etykiet/zebra-zq310-plus',
+        link: 'Zobacz Zebra ZQ310 Plus',
+      },
+    ],
+    spec: [
+      ['Producent', 'Zebra'],
+      ['Model', 'ZQ210'],
+      ['Technologia druku', 'Termiczna bezpośrednia — bez taśmy'],
+      ['Rozdzielczość', '203 DPI'],
+      ['Szerokość druku', '48 mm'],
+      ['Prędkość druku', 'do 60 mm/s; linerless 50 mm/s'],
+      ['Szerokość nośnika', '58 mm; 50,8, 40 i 30 mm z przekładkami'],
+      ['Maks. średnica rolki', '40 mm'],
+      ['Gilza', '12,7 mm'],
+      ['Pamięć', '16 MB Flash, 16 MB SDRAM'],
+      ['Akumulator', '1500 mAh, 7,4 V; ładowanie przez USB-C'],
+      ['Łączność', 'Bluetooth 2.1 EDR i 4.1 LE, USB-C, NFC; certyfikat MFi'],
+      ['Panel', 'Wyświetlacz OLED i trzy przyciski'],
+      ['Odporność', 'IP43; IP54 z futerałem'],
+      ['Temperatura pracy', 'od −10 do 50°C'],
+      ['Wymiary (D×S×W)', '118 × 85,5 × 44,5 mm'],
+      ['Waga z akumulatorem', '0,265 kg'],
+      ['Języki', 'CPCL i ESC/POS — bez ZPL'],
+      ['Stan', 'Nowy, oryginalny'],
+      ['Gwarancja', '12 miesięcy'],
+    ],
+  },
+  'zebra-zq220-plus': {
+    rekomendowanyPn: 'ZQ22-B16B1KE-00',
+    zdjecieGlowne: '/sklep_photo/urzadzenia/zq220plus_1.webp',
+    wSkrocie: [
+      'Zebra ZQ220 Plus to najtańsza trzycalowa drukarka mobilna Zebry — pas druku 72 mm przy wadze 390 gramów.',
+      'Drukuje termicznie w rozdzielczości 203 dpi z prędkością do 50 mm/s, czyli wolniej niż pozostałe drukarki mobilne w ofercie.',
+      'Obsługuje nośniki o szerokości 80 mm, a z przekładkami także 76,2, 58 i 50,8 mm — rolka ma do 50 mm średnicy i gilzę 12,7 mm.',
+      'ZQ220 Plus rozumie CPCL i podzbiór ESC/POS, ale NIE obsługuje ZPL — szablony z drukarek ZD i ZT trzeba napisać od nowa.',
+      'Ma klasę szczelności IP54 bez futerału i znosi upadki z 1,5 metra na beton, a akumulator 2500 mAh ładuje się w niecałe cztery godziny.',
+      'Łączność to Bluetooth 5.0 z Low Energy oraz USB-C; radia Wi-Fi w tym modelu nie ma.',
+    ],
+    zweryfikowano: '2026-08-31',
+    poradniki: [
+      'serwis-drukarki-mobilnej-zebra-zq610-zq620-zq630',
+      'problemy-bateria-drukarka-zebra-mobilna',
+      'falszywy-blad-media-out-drukarka-zebra-mobilna',
+      'biale-linie-etykiety-drukarka-mobilna-zebra',
+      'drukarka-zebra-nie-drukuje-zimno-head-cold',
+      'drukarka-zebra-wifi-rozlacza-sie-offline',
+    ],
+    opis: [
+      <>
+        Zebra ZQ220 Plus to najtańsze wejście w trzycalowy druk mobilny. Przy 390 gramach
+        drukuje pas 72 mm — tyle samo co ZQ320 Plus i ZQ620 Plus, tyle że wolniej i bez
+        radia Wi-Fi. Kupuje się ją do paragonów i pokwitowań w dostawie, w handlu obwoźnym
+        i przy stoisku: wszędzie tam, gdzie liczy się koszt urządzenia, a nie liczba
+        wydruków na godzinę.
+      </>,
+      <>
+        Rozdzielczość wynosi 203 dpi, prędkość do 50 mm/s, a nośnik może mieć 80 mm
+        szerokości; przekładki zwężają go do 76,2, 58 albo 50,8 mm, więc jedna drukarka
+        obsługuje kilka formatów paragonu. Rolka mieści się do 50 mm średnicy na gilzie
+        12,7 mm. Obudowa ma klasę IP54 bez żadnego futerału i znosi upadki z 1,5 metra na
+        beton — jak na tę półkę cenową to więcej, niż daje konkurencja.
+      </>,
+      <>
+        Ograniczeń są dwa i oba trzeba znać przed zakupem. Po pierwsze: język. ZQ220 Plus
+        obsługuje CPCL i podzbiór ESC/POS, ale nie ZPL — szablony z drukarek biurkowych
+        i przemysłowych na niej nie zadziałają. Po drugie: łączność. Jest tylko Bluetooth
+        5.0 z Low Energy i USB-C, więc drukarka pracuje z telefonem albo terminalem, a nie
+        z siecią zakładową. Wersję trzycalową z radiem 802.11ac ma dopiero{' '}
+        <Link
+          href="/sklep/drukarki-etykiet/zebra-zq320-plus"
+          className="font-medium text-gray-900 underline"
+        >
+          Zebra ZQ320 Plus
+        </Link>
+        .
+      </>,
+    ],
+    osie: [
+      {
+        tytul: 'Wersja',
+        pozycje: [
+          {
+            termin: 'ZQ22-B16B1KE-00',
+            opis: 'jedyna wersja w dystrybucji: Bluetooth 5.0, wyświetlacz OLED, nośnik do 80 mm',
+          },
+        ],
+      },
+    ],
+    faqNaglowek: 'Najczęstsze pytania o ZQ220 Plus',
+    faq: [
+      {
+        q: 'Czy ZQ220 Plus obsługuje ZPL?',
+        a: 'Nie. ZQ220 Plus rozumie CPCL i podzbiór ESC/POS. Szablony napisane w ZPL, czyli standardzie drukarek ZD i ZT, wymagają przepisania. Jeśli system w firmie wysyła ZPL, trzycalowym odpowiednikiem z obsługą tego języka jest ZQ320 Plus albo ZQ620 Plus.',
+        href: '/sklep/drukarki-etykiet/zebra-zq320-plus',
+        link: 'Zobacz Zebra ZQ320 Plus',
+      },
+      {
+        q: 'Czy ZQ220 Plus ma Wi-Fi?',
+        a: 'Nie. Model łączy się przez Bluetooth 5.0 z Low Energy i przez USB-C. Do druku z terminala albo telefonu to wystarcza, do druku z systemu magazynowego przez sieć — nie. Radio 802.11ac ma ZQ320 Plus w wersjach z literą W w numerze katalogowym.',
+        href: '/sklep/drukarki-etykiet/zebra-zq320-plus',
+        link: 'Zobacz Zebra ZQ320 Plus',
+      },
+      {
+        q: 'Jakie rolki pasują do ZQ220 Plus?',
+        a: 'Termoczułe rolki o szerokości 80 mm, a z przekładkami także 76,2, 58 i 50,8 mm. Średnica zewnętrzna do 50 mm, gilza 12,7 mm. Drukarka rozpoznaje rolkę ciągłą, czarny znacznik i etykiety z przerwą. Etykiet bez podkładu ten model nie obsługuje.',
+        href: '/sklep/drukarki-etykiet/mobilne',
+        link: 'Porównaj mobilne drukarki Zebra',
+      },
+      {
+        q: 'Czym ZQ220 Plus różni się od ZQ320 Plus?',
+        a: 'Prędkością, łącznością i pamięcią. ZQ220 Plus drukuje do 50 mm/s, ma Bluetooth 5.0 i 16 MB Flash. ZQ320 Plus drukuje do 101,6 mm/s, obsługuje ZPL, ma 256 MB Flash i wersje z Wi-Fi 802.11ac. Oba mają ten sam pas 72 mm i klasę IP54; ZQ220 Plus jest wyraźnie tańsza i o 40 gramów lżejsza.',
+        href: '/sklep/drukarki-etykiet/zebra-zq320-plus',
+        link: 'Zobacz Zebra ZQ320 Plus',
+      },
+      {
+        q: 'Ile trwa ładowanie akumulatora w ZQ220 Plus?',
+        a: 'Poniżej czterech godzin w temperaturze pokojowej, a akumulator ma 2500 mAh przy 7,4 V. Ładowanie idzie przez USB-C, więc w aucie wystarczy zwykła ładowarka. Producent podaje co najmniej 500 wydruków o długości 216 mm na jednym ładowaniu.',
+        href: '/blog/problemy-bateria-drukarka-zebra-mobilna',
+        link: 'Problemy z baterią w drukarce mobilnej',
+      },
+    ],
+    spec: [
+      ['Producent', 'Zebra'],
+      ['Model', 'ZQ220 Plus'],
+      ['Technologia druku', 'Termiczna bezpośrednia — bez taśmy'],
+      ['Rozdzielczość', '203 DPI'],
+      ['Szerokość druku', '72 mm'],
+      ['Prędkość druku', 'do 50 mm/s'],
+      ['Szerokość nośnika', '80 mm; 76,2, 58 i 50,8 mm z przekładkami'],
+      ['Maks. średnica rolki', '50 mm'],
+      ['Gilza', '12,7 mm'],
+      ['Pamięć', '16 MB Flash, 8 MB SDRAM'],
+      ['Akumulator', '2500 mAh, 7,4 V; ładowanie poniżej 4 h przez USB-C'],
+      ['Łączność', 'Bluetooth 5.0 z Low Energy, USB-C, NFC'],
+      ['Panel', 'Wyświetlacz OLED i trzy przyciski'],
+      ['Odporność', 'IP54 bez futerału, upadki z 1,5 m na beton'],
+      ['Temperatura pracy', 'od −5 do 50°C'],
+      ['Wymiary (D×S×W)', '129,8 × 114,4 × 58,9 mm'],
+      ['Waga z akumulatorem', '0,39 kg'],
+      ['Języki', 'CPCL i podzbiór ESC/POS — bez ZPL'],
+      ['Stan', 'Nowy, oryginalny'],
+      ['Gwarancja', '12 miesięcy'],
+    ],
+  },
 }
 
 export const trescKarty = (slug: string): TrescKarty | undefined => TRESC_KART[slug]

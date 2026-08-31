@@ -101,11 +101,12 @@ async function getDevices(): Promise<DeviceRow[]> {
  * trafiają tu najczęściej.
  */
 const FAKTY_KLASY = [
-  'Mobilne drukarki etykiet Zebra dzielą się na trzy serie: lekką ZQ300 Plus, magazynową ZQ600 Plus i wzmocnioną ZQ500 do pracy w terenie.',
+  'Mobilne drukarki etykiet Zebra dzielą się na cztery rodziny: budżetową ZQ200, lekką ZQ300 Plus, magazynową ZQ600 Plus i wzmocnioną ZQ500 do pracy w terenie.',
+  'Seria ZQ200 to ZQ210 (druk 48 mm, 265 g) i ZQ220 Plus (72 mm, 390 g) — najtańsze drukarki mobilne Zebry, ale rozumiejące wyłącznie CPCL i ESC/POS, bez ZPL.',
   'Seria ZQ300 Plus to ZQ310 Plus (druk 48 mm, 370 g) i ZQ320 Plus (72 mm, 430 g) — najlżejsze i najtańsze drukarki mobilne Zebry, do paragonów i pokwitowań.',
   'Seria ZQ600 Plus to ZQ610 Plus (48 mm), ZQ620 Plus (72 mm) i ZQ630 Plus (104 mm), wszystkie z wyświetlaczem, akumulatorem od 3250 mAh i prędkością do 115 mm/s.',
   'Seria ZQ500 to ZQ511 (72 mm) i ZQ521 (104 mm) — z certyfikatem MIL-STD 810G, odpornością na upadki z 2 metrów na beton i prędkością do 127 mm/s.',
-  'Wszystkie modele drukują termicznie, bez taśmy barwiącej, w rozdzielczości 203 dpi.',
+  'Wszystkie modele drukują termicznie, bez taśmy barwiącej, w rozdzielczości 203 dpi. Prędkość rośnie z ceną: od 50 mm/s w ZQ220 Plus do 127 mm/s w serii ZQ500.',
   'Pełną etykietę kurierską 100 × 150 mm wydrukują tylko ZQ630 Plus i ZQ521 — pozostałe modele mają węższy pas i służą do paragonów, metek i etykiet magazynowych.',
   'Przy tym samym pasie 104 mm ZQ521 waży 790 g, a ZQ630 Plus 1,11 kg; ZQ630 Plus odzyskuje przewagę akumulatorem 6600 mAh zamiast 3250 mAh.',
   'Rolka jest tym większa, im wyższa seria: do 40 mm średnicy w ZQ300 Plus, do 51–57 mm w ZQ500 i do 66,8 mm w ZQ600 Plus. Rolka biurkowa na gilzie 40 mm nie wejdzie do żadnej z nich.',
@@ -114,6 +115,26 @@ const FAKTY_KLASY = [
 
 /** Wiersze tabeli porównawczej — jeden na model, z linkiem do karty. */
 const POROWNANIE = [
+  {
+    model: 'ZQ210',
+    href: '/sklep/drukarki-etykiet/zebra-zq210',
+    szerokosc: '48 mm',
+    nosnik: 'do 58 mm',
+    waga: '0,265 kg',
+    bateria: '1500 mAh',
+    kurierska: 'nie',
+    odpornosc: 'IP43',
+  },
+  {
+    model: 'ZQ220 Plus',
+    href: '/sklep/drukarki-etykiet/zebra-zq220-plus',
+    szerokosc: '72 mm',
+    nosnik: 'do 80 mm',
+    waga: '0,39 kg',
+    bateria: '2500 mAh',
+    kurierska: 'nie',
+    odpornosc: 'IP54',
+  },
   {
     model: 'ZQ310 Plus',
     href: '/sklep/drukarki-etykiet/zebra-zq310-plus',
@@ -203,6 +224,10 @@ const FAQ_KATEGORII = [
   {
     q: 'Co daje wersja linerless?',
     a: 'Etykiety bez podkładu: na rolce mieści się ich więcej, więc materiał wymienia się rzadziej, a przy stanowisku nie zostaje odpad z papieru nośnego. Wymagają etykiet z powłoką silikonową i częstszego czyszczenia wałka, bo klej zbiera się szybciej niż przy zwykłych etykietach.',
+  },
+  {
+    q: 'Czy każda drukarka mobilna Zebry wydrukuje moje etykiety z systemu?',
+    a: 'Nie. ZQ210 i ZQ220 Plus rozumieją wyłącznie CPCL i podzbiór ESC/POS — szablony napisane w ZPL, czyli standardzie drukarek biurkowych ZD i przemysłowych ZT, wymagają na nich przepisania. Języki CPCL i ZPL naraz obsługują dopiero serie ZQ300 Plus, ZQ500 i ZQ600 Plus. To pierwsza rzecz do sprawdzenia, zanim cena zdecyduje o wyborze.',
   },
   {
     q: 'Kiedy wystarczy lekka seria ZQ300 Plus?',
@@ -404,8 +429,9 @@ export default async function MobilePrintersPage() {
               Wybór zaczyna się od jednej liczby: szerokości druku. Im szerszy pas, tym
               cięższa drukarka, więc pierwsze pytanie brzmi — co najszerszego trzeba
               wydrukować i jak długo urządzenie ma wisieć na ramieniu. Drugie pytanie
-              dotyczy warunków i tego, ile drukarka ma pracować: lekka ZQ300 Plus do
-              paragonów przy stoisku i w dostawie, ZQ600 Plus do magazynu i sklepu przy
+              dotyczy warunków, obciążenia i języka: budżetowa ZQ200 do paragonów przy kasie,
+              ale wyłącznie w CPCL i ESC/POS, lekka ZQ300 Plus do paragonów i etykiet
+              w dostawie, ZQ600 Plus do magazynu i sklepu przy
               większym wolumenie, wzmocniona ZQ500 do pracy w aucie i w terenie, gdzie
               drukarka spada z burty, a nie z blatu.
             </p>
@@ -415,7 +441,39 @@ export default async function MobilePrintersPage() {
             </h2>
 
             <h3 className="mt-5 text-base font-semibold text-gray-900">
-              ZQ310 Plus — najlżejsza i najtańsza, do paragonów
+              ZQ210 — najmniejsza i najtańsza, do paragonów
+            </h3>
+            <p className="mt-2 text-sm leading-relaxed text-gray-700">
+              265 gramów i pas 48 mm — mniejszej drukarki mobilnej Zebra nie ma w ofercie.
+              Kupowana do kasy, stoiska i eventów. Zna wyłącznie CPCL i ESC/POS, więc
+              szablony pisane w ZPL na niej nie zadziałają. Zobacz{' '}
+              <Link
+                href="/sklep/drukarki-etykiet/zebra-zq210"
+                className="font-medium text-gray-900 underline"
+              >
+                Zebra ZQ210
+              </Link>
+              .
+            </p>
+
+            <h3 className="mt-5 text-base font-semibold text-gray-900">
+              ZQ220 Plus — najtańszy druk trzycalowy
+            </h3>
+            <p className="mt-2 text-sm leading-relaxed text-gray-700">
+              Pas 72 mm w cenie, w jakiej nikt inny go nie daje, przy 390 gramach i klasie
+              IP54 bez futerału. Kosztem jest prędkość — 50 mm/s, czyli połowa tego, co
+              w serii ZQ300 Plus — brak Wi-Fi i brak ZPL. Zobacz{' '}
+              <Link
+                href="/sklep/drukarki-etykiet/zebra-zq220-plus"
+                className="font-medium text-gray-900 underline"
+              >
+                Zebra ZQ220 Plus
+              </Link>
+              .
+            </p>
+
+            <h3 className="mt-5 text-base font-semibold text-gray-900">
+              ZQ310 Plus — lekka, z obsługą ZPL
             </h3>
             <p className="mt-2 text-sm leading-relaxed text-gray-700">
               Pas 48 mm przy 370 gramach — mniejszej i tańszej drukarki mobilnej Zebra nie
@@ -565,9 +623,9 @@ export default async function MobilePrintersPage() {
               </table>
             </div>
             <p className="mt-2 text-xs text-gray-500">
-              Wszystkie modele: 203 dpi, druk termiczny, IP54. Seria ZQ300 Plus drukuje do
-              101,6 mm/s i pracuje od −15 do 50°C, ZQ600 Plus do 115 mm/s od −20 do 50°C,
-              ZQ500 do 127 mm/s od −20 do 55°C. Dane sprawdzone u producenta w sierpniu 2026
+              Wszystkie modele: 203 dpi, druk termiczny. Seria ZQ200 drukuje do 50–60 mm/s
+              w językach CPCL i ESC/POS, ZQ300 Plus do 101,6 mm/s od −15 do 50°C, ZQ600 Plus
+              do 115 mm/s od −20 do 50°C, ZQ500 do 127 mm/s od −20 do 55°C. Dane sprawdzone u producenta w sierpniu 2026
               przez TAKMA — autoryzowany serwis Zebra Technologies.
             </p>
 

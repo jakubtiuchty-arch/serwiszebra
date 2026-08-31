@@ -124,10 +124,16 @@ Pełny wykaz wariantów z numerami katalogowymi, cenami i stanami: https://www.s
 - **Zebra ZQ320 Plus** — https://www.serwis-zebry.pl/sklep/drukarki-etykiet/zebra-zq320-plus
   Trzycalowa, 430 g, druk 72 mm, 203 dpi, do 101,6 mm/s, IP54. Najlżejsza drukarka mobilna Zebry z radiem Wi-Fi 802.11ac. Rolka do 40 mm średnicy.
 
+- **Zebra ZQ210** — https://www.serwis-zebry.pl/sklep/drukarki-etykiet/zebra-zq210
+  Najlżejsza drukarka mobilna Zebry: 265 g, druk 48 mm, 203 dpi, do 60 mm/s, akumulator 1500 mAh, USB-C, IP43. Języki CPCL i ESC/POS — NIE obsługuje ZPL.
+- **Zebra ZQ220 Plus** — https://www.serwis-zebry.pl/sklep/drukarki-etykiet/zebra-zq220-plus
+  Najtańsza trzycalowa: 390 g, druk 72 mm, 203 dpi, do 50 mm/s, akumulator 2500 mAh, Bluetooth 5.0, IP54, upadki z 1,5 m. Bez ZPL i bez Wi-Fi.
+
+Seria ZQ200 (ZQ210, ZQ220 Plus) drukuje wyłącznie w językach CPCL i ESC/POS — szablony ZPL z drukarek ZD i ZT wymagają przepisania.
 Seria ZQ300 Plus (ZQ310 Plus, ZQ320 Plus) występuje w wersjach: do paragonów (czujnik czarnego znacznika), do etykiet i paragonów (dodatkowy czujnik przerwy) oraz linerless; ZQ320 Plus dodatkowo z radiem 802.11ac.
 Seria ZQ600 Plus występuje w wersjach: sam Bluetooth z RS-232, Wi-Fi 5 z Bluetooth 4.2, Wi-Fi 6 z Bluetooth 5.3 oraz linerless (etykiety bez podkładu).
 Seria ZQ500 (ZQ511, ZQ521) występuje w wersjach: sam Bluetooth 4.1 albo 802.11ac z Bluetooth 5.2, z akumulatorem 3250 mAh lub bez niego, oraz linerless.
-Porównanie siedmiu modeli w jednej tabeli: https://www.serwis-zebry.pl/sklep/drukarki-etykiet/mobilne
+Porównanie dziewięciu modeli w jednej tabeli: https://www.serwis-zebry.pl/sklep/drukarki-etykiet/mobilne
 
 ### Jak dobrać drukarkę biurkową Zebra
 

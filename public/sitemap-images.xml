@@ -187,4 +187,16 @@
       <image:loc>https://www.serwis-zebry.pl/sklep_photo/urzadzenia/zq320plus_3.webp</image:loc>
     </image:image>
   </url>
+  <url>
+    <loc>https://www.serwis-zebry.pl/sklep/drukarki-etykiet/zebra-zq210</loc>
+    <image:image>
+      <image:loc>https://www.serwis-zebry.pl/sklep_photo/urzadzenia/zq210_1.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.serwis-zebry.pl/sklep/drukarki-etykiet/zebra-zq220-plus</loc>
+    <image:image>
+      <image:loc>https://www.serwis-zebry.pl/sklep_photo/urzadzenia/zq220plus_1.webp</image:loc>
+    </image:image>
+  </url>
 </urlset>
