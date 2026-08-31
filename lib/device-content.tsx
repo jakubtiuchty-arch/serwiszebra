@@ -1317,9 +1317,12 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     ],
     zweryfikowano: '2026-08-31',
     poradniki: [
-      'najczestsze-awarie-drukarek-zebra-top10',
-      'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',
-      'jak-wyczyscic-glowice-drukarki-zebra',
+      'serwis-drukarki-mobilnej-zebra-zq610-zq620-zq630',
+      'problemy-bateria-drukarka-zebra-mobilna',
+      'drukarka-zebra-wifi-rozlacza-sie-offline',
+      'biale-linie-etykiety-drukarka-mobilna-zebra',
+      'falszywy-blad-media-out-drukarka-zebra-mobilna',
+      'drukarka-zebra-nie-drukuje-zimno-head-cold',
     ],
     opis: [
       <>
@@ -1439,9 +1442,12 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     ],
     zweryfikowano: '2026-08-31',
     poradniki: [
-      'najczestsze-awarie-drukarek-zebra-top10',
-      'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',
-      'jak-wyczyscic-glowice-drukarki-zebra',
+      'serwis-drukarki-mobilnej-zebra-zq610-zq620-zq630',
+      'problemy-bateria-drukarka-zebra-mobilna',
+      'drukarka-zebra-wifi-rozlacza-sie-offline',
+      'biale-linie-etykiety-drukarka-mobilna-zebra',
+      'falszywy-blad-media-out-drukarka-zebra-mobilna',
+      'drukarka-zebra-nie-drukuje-zimno-head-cold',
     ],
     opis: [
       <>
@@ -1560,9 +1566,12 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     ],
     zweryfikowano: '2026-08-31',
     poradniki: [
-      'najczestsze-awarie-drukarek-zebra-top10',
-      'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',
-      'jak-wyczyscic-glowice-drukarki-zebra',
+      'serwis-drukarki-mobilnej-zebra-zq610-zq620-zq630',
+      'problemy-bateria-drukarka-zebra-mobilna',
+      'drukarka-zebra-wifi-rozlacza-sie-offline',
+      'biale-linie-etykiety-drukarka-mobilna-zebra',
+      'falszywy-blad-media-out-drukarka-zebra-mobilna',
+      'drukarka-zebra-nie-drukuje-zimno-head-cold',
     ],
     opis: [
       <>

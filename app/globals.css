@@ -329,3 +329,13 @@
   .aurora-blob-a,
   .aurora-blob-b { animation: none; }
 }
+
+/* Karuzela poradników na kartach urządzeń — pasek przewijania tylko przeszkadza,
+   bo od przewijania są strzałki i gest na ekranie dotykowym */
+.karuzela-poradnikow {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.karuzela-poradnikow::-webkit-scrollbar {
+  display: none;
+}

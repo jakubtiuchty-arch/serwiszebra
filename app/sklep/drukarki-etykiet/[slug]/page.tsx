@@ -7,14 +7,14 @@ import { type DeviceVariant } from '@/components/shop/DevicePurchasePanel'
 import DeviceBuyBlock from '@/components/shop/DeviceBuyBlock'
 import DeviceAccessories from '@/components/shop/DeviceAccessories'
 import BanerMaterialow from '@/components/shop/BanerMaterialow'
+import PoradnikiKaruzela from '@/components/shop/PoradnikiKaruzela'
 import { getAkcesoriaDlaModelu } from '@/lib/device-accessories'
 import { pobierzStany, stanDlaPN } from '@/lib/stock-server'
 import { klasaBySlug } from '@/lib/printer-classes'
 import { trescKarty } from '@/lib/device-content'
 import { getPostBySlug } from '@/lib/blog'
 import ShopSubheader from '@/components/shop/ShopSubheader'
-import { Info, FileText, Download, Wrench, Phone, Clock } from 'lucide-react'
-import Image from 'next/image'
+import { Info, FileText, Download, Wrench, Phone } from 'lucide-react'
 
 /**
  * Karta urządzenia. Świadomie JEDNA karta na wariant modelu (ZD421t osobno od
@@ -661,35 +661,15 @@ export default async function DevicePage({
                 Gdy coś nie działa
               </h2>
               <p className="mt-1 text-sm text-gray-600">Poradniki z naszego warsztatu.</p>
-              <ul className="mt-4 grid list-none grid-cols-1 gap-3 p-0 sm:grid-cols-3">
-                {poradniki.map((wpis) => (
-                  <li key={wpis.slug}>
-                    <Link
-                      href={`/blog/${wpis.slug}`}
-                      className="group flex h-full flex-col overflow-hidden rounded-xl border border-gray-200 transition hover:border-gray-400"
-                    >
-                      <span className="relative block aspect-[16/9] overflow-hidden bg-gray-100">
-                        <Image
-                          src={wpis.coverImage}
-                          alt={wpis.coverImageAlt || wpis.title}
-                          fill
-                          sizes="(max-width: 640px) 100vw, 33vw"
-                          className="object-cover"
-                        />
-                      </span>
-                      <span className="flex flex-1 flex-col p-3">
-                        <span className="text-sm font-semibold leading-snug text-gray-900">
-                          {wpis.tytulSkrocony}
-                        </span>
-                        <span className="mt-auto flex items-center gap-1.5 pt-2 text-xs text-gray-500">
-                          <Clock className="h-3.5 w-3.5" />
-                          {wpis.readingTime} min czytania
-                        </span>
-                      </span>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+              <PoradnikiKaruzela
+                wpisy={poradniki.map((wpis) => ({
+                  slug: wpis.slug,
+                  tytul: wpis.tytulSkrocony,
+                  obraz: wpis.coverImage,
+                  alt: wpis.coverImageAlt || wpis.title,
+                  minuty: wpis.readingTime,
+                }))}
+              />
             </section>
           )}
 
