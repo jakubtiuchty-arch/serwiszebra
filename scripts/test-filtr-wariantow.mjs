@@ -36,7 +36,7 @@ sprawdz('start: licznik zgadza się z liczbą kafelków', startModele === startK
   `licznik ${startModele}, kafelków ${startKafelki}`)
 sprawdz('start: katalog niepusty', startKafelki >= 5 && startWersje >= startKafelki,
   `${startWersje} wersji w ${startModele} modelach`)
-sprawdz('start: filtry w lewej kolumnie', (await p.locator('aside fieldset').count()) === 5)
+sprawdz('start: filtry w lewej kolumnie', (await p.locator('aside [role="group"]').count()) === 5)
 
 // Licznik przy chipie zapowiada, ile wariantów zostanie po jego kliknięciu
 const zapowiedz300 = await licznikPrzyFiltrze('300 dpi')
@@ -102,10 +102,10 @@ await p2.close()
 // telefon: kolumna filtrów startuje zwinięta
 const m = await b.newPage({ viewport: { width: 390, height: 844 } })
 await m.goto(BASE, { waitUntil: 'networkidle' })
-sprawdz('mobile: filtry zwinięte', !(await m.locator('aside fieldset').first().isVisible()))
+sprawdz('mobile: filtry zwinięte', !(await m.locator('aside [role="group"]').first().isVisible()))
 await m.locator('aside button[aria-label="Filtry"]').click()
 await m.waitForTimeout(150)
-sprawdz('mobile: rozwijają się po kliknięciu', await m.locator('aside fieldset').first().isVisible())
+sprawdz('mobile: rozwijają się po kliknięciu', await m.locator('aside [role="group"]').first().isVisible())
 await m.close()
 
 await b.close()

@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useId, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { ChevronDown, SlidersHorizontal, X } from "lucide-react";
 import KafelekProduktu from "./KafelekProduktu";
@@ -171,6 +171,7 @@ export default function KatalogDrukarek({
     stanZAdresu(new URLSearchParams(searchParams)),
   );
   const [rozwiniety, setRozwiniety] = useState(false);
+  const idFiltra = useId();
 
   const aktywne = GRUPY.reduce((n, g) => n + stan[g.klucz].length, 0);
 
@@ -279,16 +280,25 @@ export default function KatalogDrukarek({
             />
           </button>
 
+          {/* `role="group"` z `aria-labelledby` zamiast fieldset/legend:
+              legendy nie da się odsunąć od krawędzi, bo przeglądarka
+              pozycjonuje ją poza flow paddingu, a `float` rozbijał układ
+              opcji. Dla czytnika ekranu grupa nazywa się tak samo. */}
           <div className={rozwiniety ? "block" : "hidden lg:block"}>
             {GRUPY.map((g) => (
-              <fieldset
+              <div
                 key={g.klucz}
-                className="border-b border-gray-100 px-4 py-3 last:border-0"
+                role="group"
+                aria-labelledby={`${idFiltra}-${g.klucz}`}
+                className="border-b border-gray-100 px-4 pb-3 pt-4 last:border-0"
               >
-                <legend className="text-[11px] font-medium uppercase tracking-wide text-gray-400">
+                <p
+                  id={`${idFiltra}-${g.klucz}`}
+                  className="mb-2 text-[11px] font-medium uppercase tracking-wide text-gray-400"
+                >
                   {g.etykieta}
-                </legend>
-                <div className="mt-2 space-y-1">
+                </p>
+                <div className="space-y-1">
                   {g.opcje.map((o) => {
                     const zaznaczony = stan[g.klucz].includes(o.wartosc);
                     const ile = licznoscOpcji(g, o.wartosc);
@@ -323,7 +333,7 @@ export default function KatalogDrukarek({
                     );
                   })}
                 </div>
-              </fieldset>
+              </div>
             ))}
 
             {aktywne > 0 && (
