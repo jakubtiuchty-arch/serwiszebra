@@ -280,6 +280,8 @@ const SPRZEDAWANE_MODELE: Record<string, string> = {
   ZQ320PLUS: 'zebra-zq320-plus',
   ZQ210: 'zebra-zq210',
   ZQ220PLUS: 'zebra-zq220-plus',
+  ZT111: 'zebra-zt111',
+  ZT231: 'zebra-zt231',
 }
 
 export default async function ModelPage({ params }: { params: { model: string } }) {

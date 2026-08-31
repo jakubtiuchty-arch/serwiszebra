@@ -135,6 +135,16 @@ Seria ZQ600 Plus występuje w wersjach: sam Bluetooth z RS-232, Wi-Fi 5 z Blueto
 Seria ZQ500 (ZQ511, ZQ521) występuje w wersjach: sam Bluetooth 4.1 albo 802.11ac z Bluetooth 5.2, z akumulatorem 3250 mAh lub bez niego, oraz linerless.
 Porównanie dziewięciu modeli w jednej tabeli: https://www.serwis-zebry.pl/sklep/drukarki-etykiet/mobilne
 
+### Drukarki półprzemysłowe — karty produktów
+
+- **Zebra ZT111** — https://www.serwis-zebry.pl/sklep/drukarki-etykiet/zebra-zt111
+  Metalowa rama, druk 104 mm, 203 lub 300 dpi, do 254 mm/s, rolka do 203 mm średnicy, taśma 450 m. Trzy przyciski zamiast ekranu, bez Wi-Fi, bez odklejaka i gilotyny.
+- **Zebra ZT231** — https://www.serwis-zebry.pl/sklep/drukarki-etykiet/zebra-zt231
+  Metalowa obudowa, ekran dotykowy 4,3", druk 104 mm, 203 lub 300 dpi, do 305 mm/s. Wersje z odklejakiem, nawijakiem podkładu, gilotyną i Wi-Fi.
+
+Obie występują w wersji termicznej i termotransferowej; rodzaj druku, jakość głowicy i wyposażenie są wbudowane w numer katalogowy i nie da się ich zmienić po zakupie.
+Porównanie obu modeli: https://www.serwis-zebry.pl/sklep/drukarki-etykiet/polprzemyslowe
+
 ### Jak dobrać drukarkę biurkową Zebra
 
 Porównanie wszystkich dziesięciu modeli w jednej tabeli (szybkość, szerokość druku, rozdzielczość, łączność, taśma) wraz z odpowiedziami na najczęstsze pytania: https://www.serwis-zebry.pl/sklep/drukarki-etykiet/biurkowe

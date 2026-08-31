@@ -39,6 +39,13 @@ const zl = (v: number) =>
  * przy terminalach) nie wymaga zmian w kodzie.
  */
 const OPISY_CECH: Record<string, Wyjasnienie> = {
+  'Rodzaj druku': {
+    wstep: 'Skąd na etykiecie bierze się obraz:',
+    pozycje: [
+      ['Termiczny', 'ciepło głowicy ciemni papier — bez taśmy, ale wydruk blaknie'],
+      ['Termotransferowy', 'obraz przenosi taśma barwiąca — wydruk trwały latami'],
+    ],
+  },
   Rozdzielczość: {
     wstep: 'Gęstość druku w punktach na cal:',
     pozycje: [
@@ -84,6 +91,7 @@ const OPISY_CECH: Record<string, Wyjasnienie> = {
     pozycje: [
       ['Standard', 'etykiety wychodzą na podłożu w całości'],
       ['Odklejak', 'oddziela etykietę od podłoża, szybsze naklejanie'],
+      ['Odklejak z nawijakiem', 'dodatkowo zwija zużyty podkład na szpulę'],
       ['Gilotyna', 'odcina wydruk; do przywieszek i etykiet o zmiennej długości'],
     ],
   },
@@ -95,6 +103,7 @@ const OPISY_CECH: Record<string, Wyjasnienie> = {
  * alfabetycznie, więc nowa oś (np. „Pamięć") od razu ma stabilne miejsce.
  */
 const KOLEJNOSC_CECH = [
+  'Rodzaj druku',
   'Rozdzielczość',
   'Łączność',
   'Nośnik',

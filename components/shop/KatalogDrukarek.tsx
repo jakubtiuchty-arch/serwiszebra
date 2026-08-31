@@ -59,6 +59,8 @@ const OPISY_FILTRA: Record<string, Wyjasnienie> = {
     pozycje: [
       ["Termiczna", "ciepło głowicy ciemni papier — bez taśmy, ale wydruk blaknie na słońcu"],
       ["Termotransferowa", "obraz przenosi taśma barwiąca — trwalszy, ale taśmę trzeba dokupić"],
+      ["Termiczny", "ciepło głowicy ciemni papier — bez taśmy, ale wydruk blaknie na słońcu"],
+      ["Termotransferowy", "obraz przenosi taśma barwiąca — trwalszy, ale taśmę trzeba dokupić"],
     ],
   },
   "Rozdzielczość": {
@@ -100,6 +102,7 @@ const OPISY_FILTRA: Record<string, Wyjasnienie> = {
     pozycje: [
       ["Standard", "etykiety wychodzą na wstędze w całości"],
       ["Odklejak", "oddziela etykietę od wstęgi — szybsze naklejanie"],
+      ["Odklejak z nawijakiem", "dodatkowo zwija zużyty podkład na szpulę"],
       ["Gilotyna", "odcina wydruk; do przywieszek i wydruków o zmiennej długości"],
     ],
   },
@@ -126,6 +129,7 @@ const OPISY_FILTRA: Record<string, Wyjasnienie> = {
 };
 
 const KOLEJNOSC_CECH = [
+  "Rodzaj druku",
   "Rozdzielczość",
   "Łączność",
   "Nośnik",
@@ -137,11 +141,12 @@ const KOLEJNOSC_CECH = [
 
 /** Kolejność wartości w obrębie cechy — od najprostszej opcji do najbogatszej. */
 const KOLEJNOSC_WARTOSCI: Record<string, string[]> = {
+  "Rodzaj druku": ["Termiczny", "Termotransferowy"],
   "Rozdzielczość": ["203 dpi", "300 dpi", "600 dpi"],
   "Łączność": ["USB", "Bluetooth", "Ethernet", "Wi-Fi", "Wi-Fi 5", "Wi-Fi 6"],
   "Nośnik": ["Paragony", "Etykiety i paragony", "Z podkładem", "Linerless"],
   "Akumulator": ["W zestawie", "Bez akumulatora"],
-  "Wyposażenie": ["Standard", "Odklejak", "Gilotyna"],
+  "Wyposażenie": ["Standard", "Odklejak", "Odklejak z nawijakiem", "Gilotyna"],
   "Panel": ["Diody", "Ekran dotykowy"],
   "Kolor": ["Czarna", "Biała"],
 };
