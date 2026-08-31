@@ -90,8 +90,36 @@ export default function DevicePurchasePanel({
   // Wejście z adresu wariantu (`?pn=`) ma od razu pokazywać JEGO cenę i stan,
   // a nie najtańszą wersję, której klient wcale nie wybierał
   const wybrany = wybranyPn && variants.some((v) => v.pn === wybranyPn) ? wybranyPn : null
-  const pn = wybrany || variants[0]?.pn || ''
+
+  /**
+   * Bez wyboru wersji panel pokazuje NAJTAŃSZĄ DOSTĘPNĄ, nie najtańszą w ogóle.
+   * Powód z ZQ511: najtańszy numer to korpus bez akumulatora, którego
+   * dystrybutor nie ma na stanie — panel meldował więc „Niedostępny" przy
+   * modelu, którego cztery inne wersje leżą w magazynie. Kolejność szukania:
+   * półka, potem towar w drodze, na końcu pierwszy z brzegu.
+   */
+  const ceny = (pn: string) => stany[pn]?.netto || 0
+  const naStanie = (pn: string) => {
+    const s = stany[pn]
+    return !!s && (s.stockPL > 0 || s.stockEU > 0)
+  }
+  const najtanszySpelniajacy = (warunek: (pn: string) => boolean) =>
+    variants
+      .map((v) => v.pn)
+      .filter(warunek)
+      .sort((a, b) => (ceny(a) || Infinity) - (ceny(b) || Infinity))[0]
+
+  const pn =
+    wybrany ||
+    najtanszySpelniajacy(naStanie) ||
+    najtanszySpelniajacy((p) => (stany[p]?.wDostawie ?? 0) > 0) ||
+    variants[0]?.pn ||
+    ''
   const wariant = variants.find((v) => v.pn === pn)
+  /** Czy pokazana cena to naprawdę cena najtańszej wersji modelu */
+  const najtanszaWogole = variants
+    .map((v) => v.pn)
+    .sort((a, b) => (ceny(a) || Infinity) - (ceny(b) || Infinity))[0]
 
   const [foto, setFoto] = useState(0)
   const [mounted, setMounted] = useState(false)
@@ -180,7 +208,10 @@ export default function DevicePurchasePanel({
                 )}
                 <span>
                   {zl(brutto)} zł brutto
-                  {!wybrany && ' — cena najtańszej wersji'}
+                  {!wybrany &&
+                    (pn === najtanszaWogole
+                      ? ' — cena najtańszej wersji'
+                      : ' — cena najtańszej dostępnej wersji')}
                 </span>
               </p>
             </>
