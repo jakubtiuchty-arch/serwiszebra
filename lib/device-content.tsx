@@ -1127,7 +1127,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
   },
   'zebra-zd411t': {
     rekomendowanyPn: 'ZD4A022-T0EM00EZ',
-    zdjecieGlowne: '/sklep_photo/urzadzenia/zd411t_2.webp',
+    zdjecieGlowne: '/sklep_photo/urzadzenia/zd411t_1.webp',
     wSkrocie: [
       'Zebra ZD411t to dwucalowa biurkowa drukarka etykiet drukująca termotransferowo — z taśmy barwiącej — a w razie potrzeby także termicznie, bez taśmy.',
       'Szerokość druku wynosi 56 mm przy 203 dpi i 54 mm przy 300 dpi, przy nośnikach o szerokości od 6,4 do 60 mm.',
