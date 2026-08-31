@@ -61,7 +61,7 @@ const KOLEJNOSC_CECH = [
 ]
 
 const WYJASNIENIE_DOSTEPNOSC =
-  'Liczba sztuk gotowych do wysyłki. PL — magazyn w Polsce, wysyłka w 24 h. EU — magazyn europejski dystrybutora, dostawa zwykle 2–3 dni robocze.'
+  'Liczba sztuk gotowych do wysyłki. PL — magazyn w Polsce, wysyłka w 24 h. EU — magazyn europejski dystrybutora, dostawa zwykle 2–3 dni robocze. W dostawie — magazyny są puste, ale towar jedzie już do dystrybutora; termin potwierdzamy po zapytaniu. Na zamówienie — wersji nie ma w żadnym magazynie, sprowadzamy ją pod zamówienie.'
 
 /**
  * Znak zapytania z dymkiem — dostępny popover, nie czysty CSS-owy tooltip.
