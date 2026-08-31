@@ -654,10 +654,7 @@ export default async function DevicePage({
               <h2 className="text-sm sm:text-base font-semibold text-gray-900">
                 Gdy coś nie działa
               </h2>
-              <p className="mt-1 text-sm text-gray-600">
-                Poradniki z naszego warsztatu — te same problemy, z którymi klienci dzwonią
-                do serwisu.
-              </p>
+              <p className="mt-1 text-sm text-gray-600">Poradniki z naszego warsztatu.</p>
               <ul className="mt-4 grid list-none grid-cols-1 gap-3 p-0 sm:grid-cols-3">
                 {poradniki.map((wpis) => (
                   <li key={wpis.slug}>
