@@ -96,11 +96,15 @@ export default function BanerMaterialow({ termotransfer }: { termotransfer: bool
           ? 'Druk termotransferowy zużywa dwa materiały naraz: taśmę i etykiety. Kupisz je w naszym sklepie z materiałami.'
           : 'Druk termiczny nie wymaga taśmy — kupujesz wyłącznie etykiety. Znajdziesz je w naszym sklepie z materiałami.'}
       </p>
-      <div className={`mt-4 grid gap-3 ${termotransfer ? 'sm:grid-cols-2' : ''}`}>
+      {/* Oba materiały w tym samym, niskim układzie co baner etykiet termicznych:
+          obraz z boku, tekst obok. Kafle jeden pod drugim, nie obok siebie —
+          w dwóch kolumnach obraz rósł do proporcji 16:9 i sekcja puchła
+          dwukrotnie względem wersji „d". */}
+      <div className="mt-4 grid gap-3">
         {termotransfer ? (
           <>
-            <KafelMaterialu k={TASMY} />
-            <KafelMaterialu k={ETYKIETY_TT} />
+            <KafelMaterialu k={TASMY} szeroki />
+            <KafelMaterialu k={ETYKIETY_TT} szeroki />
           </>
         ) : (
           <KafelMaterialu k={ETYKIETY_TERMICZNE} szeroki />
