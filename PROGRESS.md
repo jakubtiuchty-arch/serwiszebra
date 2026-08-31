@@ -1048,3 +1048,12 @@ Punkt wyjścia z wytycznych GEO: modele cytują **samodzielne fragmenty** (optym
 - Sześć wariantów (203/300 dpi × USB/Ethernet/Wi-Fi), PN-y sprawdzone u dystrybutorów: ZD4A022/023-T0EM00EZ, -T0EE00EZ, -T0EW02EZ.
 - Dane od producenta: druk 56 mm (203 dpi) i 54 mm (300 dpi), nośniki 6,4–60 mm, **taśmy WYŁĄCZNIE 74-metrowe na wałku 0,5 cala, szerokość 33–58 mm** (300-metrowe rolki z ZD421t się tu nie mieszczą), proporcja 1:1, wymiary 243 × 139 × 169 mm, 1,6 kg — o 600 g więcej i wyraźnie większa od termicznej ZD411d.
 - FAQ zawiera policzalne „ile etykiet z taśmy" (74 m ≈ 1480 etykiet 50 mm) i to samo ostrzeżenie co przy ZD411d: nie wydrukuje etykiety kurierskiej 100 × 150 mm.
+
+## 2026-08-31 — strona kategorii /sklep/drukarki-etykiet/biurkowe pod LLM-y
+Fraza „biurkowe drukarki etykiet Zebra" jest głównym wejściem do tej kategorii, a treść opisywała stan sprzed pięciu kart — mówiła o „jedynej dwucalowej ZD411" i nie linkowała do wersji „t" większości serii.
+- **Blok „Biurkowe drukarki etykiet Zebra — w skrócie"** na czele treści: siedem zdań, każde samodzielne i z liczbą (ile modeli i serii, co znaczy „d" i „t", które drukują 104 mm a które 56, prędkości per seria, kiedy 300 dpi, łączność per seria, wspólne parametry i gwarancja). To materiał wprost do zacytowania przez asystenta pytanego „jaką biurkową drukarkę Zebra wybrać".
+- **Tabela porównawcza przepisana na dane** (`POROWNANIE`) — pięć serii, każda z linkami do obu kart (d/t), doszły kolumny szerokości druku i taśmy. Wcześniej była wpisana ręcznie w JSX i nie dało się jej utrzymać przy dziesięciu modelach.
+- **FAQ kategorii + FAQPage schema** — pięć pytań, które padają na infolinii: która nadaje się do etykiet kurierskich (każda poza ZD411), czym różni się „d" od „t", kiedy 300 dpi, która ma Ethernet w standardzie (ZD621), ile etykiet dziennie wytrzyma klasa biurkowa. Odpowiedź zaczyna się od rozstrzygnięcia, nie od wstępu.
+- Sekcje serii zaktualizowane o wersje „t" i różnice, które wyszły przy budowie kart: taśma 74 vs 300 m w ZD220t/ZD230t, wąskie taśmy 33–58 mm w ZD411t, nośniki do 118 mm w ZD621t, montaż gilotyny po zakupie w ZD621.
+- llms.txt: informacja, że oferta obejmuje KOMPLET biurkowych Zebry, oraz link do tabeli porównawczej jako punktu wejścia.
+- Weryfikacja: ItemList 10 pozycji, FAQPage 5 pytań, BreadcrumbList, dziesięć kart linkowanych z treści, zero poziomego scrolla na 1440 i 390 px, test filtra zielony.

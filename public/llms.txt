@@ -77,6 +77,7 @@ Adres sklepu: https://www.serwis-zebry.pl/sklep
 ## Sklep — Drukarki etykiet Zebra (sprzedaż nowych urządzeń)
 
 Adres kategorii: https://www.serwis-zebry.pl/sklep/drukarki-etykiet/biurkowe
+Oferta obejmuje KOMPLET biurkowych drukarek Zebry: dziesięć modeli w pięciu seriach (ZD220, ZD230, ZD411, ZD421, ZD621), każda w wersji termicznej „d" i termotransferowej „t".
 Ceny i stany magazynowe pobierane na żywo od dystrybutorów; gwarancję realizuje nasz autoryzowany serwis.
 
 ### Drukarki biurkowe — karty produktów
@@ -105,6 +106,8 @@ Ceny i stany magazynowe pobierane na żywo od dystrybutorów; gwarancję realizu
 Pełny wykaz wariantów z numerami katalogowymi, cenami i stanami: https://www.serwis-zebry.pl/api/llm-feed
 
 ### Jak dobrać drukarkę biurkową Zebra
+
+Porównanie wszystkich dziesięciu modeli w jednej tabeli (szybkość, szerokość druku, rozdzielczość, łączność, taśma) wraz z odpowiedziami na najczęstsze pytania: https://www.serwis-zebry.pl/sklep/drukarki-etykiet/biurkowe
 
 - Litera „d" w nazwie oznacza druk termiczny bez taśmy — tańszy w eksploatacji, ale nadruk z czasem blaknie. Litera „t" to druk termotransferowy z taśmą barwiącą — nadruk trwały, odporny na ścieranie.
 - 203 dpi wystarcza do typowych kodów kreskowych i etykiet kurierskich; 300 dpi bierze się do drobnego tekstu i małych kodów QR.

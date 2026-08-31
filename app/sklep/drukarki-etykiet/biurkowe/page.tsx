@@ -82,6 +82,105 @@ async function getDevices(): Promise<DeviceRow[]> {
   }
 }
 
+/**
+ * Fakty o całej klasie — blok „w skrócie" nad opisem. Każde zdanie broni się
+ * bez reszty strony i niesie liczbę, bo modele językowe cytują całe, samodzielne
+ * fragmenty, a „biurkowe drukarki etykiet Zebra" to fraza, po której klienci
+ * trafiają tu najczęściej.
+ */
+const FAKTY_KLASY = [
+  'Biurkowe drukarki etykiet Zebra to seria ZD: dziesięć modeli w pięciu seriach — ZD220, ZD230, ZD411, ZD421 i ZD621 — każda w wersji termicznej („d") i termotransferowej („t").',
+  'Wersja „d" drukuje bez taśmy na etykietach termoczułych — taniej w eksploatacji, ale nadruk z czasem blaknie. Wersja „t" nanosi nadruk z taśmy barwiącej i jest odporna na ścieranie oraz światło.',
+  'Osiem z dziesięciu modeli drukuje pas szerokości 104 mm, czyli pełną etykietę kurierską 100 × 150 mm. Wyjątkiem jest dwucalowa seria ZD411 z drukiem 56 mm — do etykiet aptecznych, laboratoryjnych i oznaczeń kabli.',
+  'Prędkość rośnie wraz z serią: 102 mm/s w ZD220, 152 mm/s w ZD230, ZD411 i ZD421, 203 mm/s w ZD621.',
+  'Rozdzielczość 203 dpi wystarcza do kodów kreskowych i typowych etykiet; 300 dpi (ZD411, ZD421, ZD621) bierze się do drobnego tekstu i małych kodów 2D.',
+  'Łączność: ZD220 ma wyłącznie USB, ZD230 wybiera się fabrycznie, w ZD411 i ZD421 moduł Ethernet, RS-232 albo Wi-Fi wymienia się bez narzędzi, a ZD621 ma Ethernet i RS-232 w standardzie.',
+  'Wszystkie modele przyjmują rolki do 127 mm średnicy i etykiety do 991 mm długości, obsługują języki ZPL II oraz EPL 2 i mają 24 miesiące gwarancji.',
+]
+
+/** Wiersze tabeli porównawczej — jeden na serię, z linkami do obu kart. */
+const POROWNANIE = [
+  {
+    seria: 'ZD220',
+    hrefD: '/sklep/drukarki-etykiet/zebra-zd220d',
+    hrefT: '/sklep/drukarki-etykiet/zebra-zd220t',
+    szybkosc: '102 mm/s',
+    szerokosc: '104 mm',
+    dpi: '203 dpi',
+    lacznosc: 'USB',
+    tasma: '74 m',
+  },
+  {
+    seria: 'ZD230',
+    hrefD: '/sklep/drukarki-etykiet/zebra-zd230d',
+    hrefT: '/sklep/drukarki-etykiet/zebra-zd230t',
+    szybkosc: '152 mm/s',
+    szerokosc: '104 mm',
+    dpi: '203 dpi',
+    lacznosc: 'USB, fabrycznie LAN albo Wi-Fi',
+    tasma: '74 lub 300 m',
+  },
+  {
+    seria: 'ZD411',
+    hrefD: '/sklep/drukarki-etykiet/zebra-zd411d',
+    hrefT: '/sklep/drukarki-etykiet/zebra-zd411t',
+    szybkosc: '152 mm/s',
+    szerokosc: '56 mm',
+    dpi: '203 / 300 dpi',
+    lacznosc: 'USB, moduły LAN / RS-232 / Wi-Fi',
+    tasma: '74 m, szer. 33–58 mm',
+  },
+  {
+    seria: 'ZD421',
+    hrefD: '/sklep/drukarki-etykiet/zebra-zd421d',
+    hrefT: '/sklep/drukarki-etykiet/zebra-zd421t',
+    szybkosc: '152 mm/s',
+    szerokosc: '104 mm',
+    dpi: '203 / 300 dpi',
+    lacznosc: 'USB, moduły LAN / RS-232 / Wi-Fi',
+    tasma: '300 m',
+    wyroznik: true,
+  },
+  {
+    seria: 'ZD621',
+    hrefD: '/sklep/drukarki-etykiet/zebra-zd621d',
+    hrefT: '/sklep/drukarki-etykiet/zebra-zd621t',
+    szybkosc: '203 mm/s',
+    szerokosc: '104 mm',
+    dpi: '203 / 300 dpi',
+    lacznosc: 'LAN i RS-232 w standardzie, opcja Wi-Fi 6',
+    tasma: '74 lub 300 m',
+  },
+]
+
+/**
+ * Pytania zadawane przy wyborze modelu — te same, które padają na infolinii
+ * serwisu. Odpowiedź zaczyna się od rozstrzygnięcia, nie od wstępu, bo tak
+ * cytują ją zarówno wyniki wyszukiwania, jak i asystenci AI.
+ */
+const FAQ_KATEGORII = [
+  {
+    q: 'Która biurkowa drukarka Zebra nadaje się do etykiet kurierskich?',
+    a: 'Każda poza serią ZD411. Etykieta kurierska ma 100 mm szerokości, a ZD220, ZD230, ZD421 i ZD621 drukują pas 104 mm. ZD411 jest dwucalowa i drukuje 56 mm, więc nadania się na niej nie zmieszczą. Do samych etykiet kurierskich wystarcza wersja termiczna „d" — taśma jest tu zbędna, bo przewoźnik czyta etykietę w ciągu kilku dni.',
+  },
+  {
+    q: 'Czym różni się model „d" od „t" w drukarkach Zebra?',
+    a: 'Litera „d" oznacza druk termiczny bezpośredni: nadruk powstaje przez podgrzanie etykiety termoczułej, bez taśmy barwiącej. Litera „t" to druk termotransferowy — nadruk przenoszony z taśmy, odporny na ścieranie, wilgoć i światło. Wersje „t" drukują również termicznie, więc obsłużą oba rodzaje etykiet; wersje „d" taśmy nie przyjmą.',
+  },
+  {
+    q: 'Kiedy wybrać 300 dpi zamiast 203 dpi?',
+    a: 'Gdy na etykiecie ma się zmieścić drobny tekst albo kod 2D na kilkunastu milimetrach — na przykład na etykietach aptecznych, jubilerskich i laboratoryjnych. Do kodów kreskowych i typowych opisów magazynowych 203 dpi wystarcza, a drukuje szybciej: 152 zamiast 102 mm/s w seriach ZD411 i ZD421.',
+  },
+  {
+    q: 'Która biurkowa Zebra ma Ethernet w standardzie?',
+    a: 'ZD621 — ma Ethernet 10/100 i RS-232 w każdej wersji. W ZD411 i ZD421 sieć dokłada się modułem, także po zakupie. ZD230 występuje w fabrycznych wersjach z Ethernetem albo Wi-Fi, ale wyboru dokonuje się przy zamówieniu. ZD220 ma wyłącznie USB i rozbudować jej nie można.',
+  },
+  {
+    q: 'Ile etykiet dziennie wytrzyma drukarka biurkowa?',
+    a: 'Kilkaset sztuk dziennie to zakres, w którym seria ZD pracuje latami. Przy tysiącach etykiet dziennie albo pracy na zmiany głowica zużywa się szybko i taniej wypada klasa półprzemysłowa — widzimy to w serwisie po drukarkach przyjmowanych do naprawy.',
+  },
+]
+
 export default async function DesktopPrintersPage() {
   const devices = await getDevices()
 
@@ -140,6 +239,22 @@ export default async function DesktopPrintersPage() {
     ],
   }
 
+  /**
+   * FAQPage z tych samych pytań, które widać na stronie — Google od 2023 pokazuje
+   * ten format tylko wybranym serwisom, ale asystenci AI czytają go nadal
+   * i cytują odpowiedzi wprost, a strona kategorii jest tu naturalnym wejściem
+   * na pytanie „jaką biurkową drukarkę Zebra wybrać".
+   */
+  const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: FAQ_KATEGORII.map((p) => ({
+      '@type': 'Question',
+      name: p.q,
+      acceptedAnswer: { '@type': 'Answer', text: p.a },
+    })),
+  }
+
   const itemListSchema = {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
@@ -164,6 +279,10 @@ export default async function DesktopPrintersPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
 
       <main className="bg-gray-50">
@@ -210,15 +329,35 @@ export default async function DesktopPrintersPage() {
           )}
 
           <section className="mt-12">
-            <h2 className="text-xl font-bold text-gray-900">
+            {/* Blok cytowalny: dziesięć zdań-faktów o całej klasie, każde
+                samodzielne i z liczbą. Asystent AI pytany „jaką biurkową
+                drukarkę Zebra wybrać" ma tu gotową odpowiedź, a człowiek
+                dostaje mapę oferty bez czytania czterech akapitów. */}
+            <div className="rounded-xl border border-gray-200 bg-white p-4 sm:p-6">
+              <h2 className="text-base font-semibold text-gray-900">
+                Biurkowe drukarki etykiet Zebra — w skrócie
+              </h2>
+              <ul className="mt-3 space-y-2">
+                {FAKTY_KLASY.map((f) => (
+                  <li key={f} className="flex gap-2 text-sm leading-relaxed text-gray-700">
+                    <span aria-hidden className="mt-2 h-1 w-1 shrink-0 rounded-full bg-gray-400" />
+                    <span>{f}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <h2 className="mt-10 text-xl font-bold text-gray-900">
               Dla kogo jest drukarka biurkowa
             </h2>
             <p className="mt-3 text-sm leading-relaxed text-gray-700">
-              Seria ZD to najczęściej kupowane drukarki etykiet w Polsce — stoją przy
+              Biurkowa drukarka etykiet Zebra to urządzenie na stanowisko pracy: waży od
+              jednego do dwóch i pół kilograma, drukuje pas szerokości 56 albo 104 mm
+              i obsługuje od kilkudziesięciu do kilkuset etykiet dziennie. Seria ZD stoi przy
               stanowiskach pakowania w sklepach internetowych, w magazynach przy przyjęciu
-              towaru i w recepcjach. Granicą jest wolumen: przy kilkuset etykietach dziennie
-              biurkowa drukarka pracuje latami, ale gdy druk idzie tysiącami sztuk albo na
-              zmiany, głowica zużywa się szybko i taniej wychodzi{' '}
+              towaru, w aptekach i w recepcjach. Granicą jest wolumen: przy kilkuset
+              etykietach dziennie taka drukarka pracuje latami, ale gdy druk idzie tysiącami
+              sztuk albo na zmiany, głowica zużywa się szybko i taniej wychodzi{' '}
               <Link
                 href="/sklep/drukarki-etykiet/polprzemyslowe"
                 className="font-medium text-gray-900 underline"
@@ -245,23 +384,46 @@ export default async function DesktopPrintersPage() {
               ZD220 i ZD230 — najtańsze wejście w druk etykiet
             </h3>
             <p className="mt-2 text-sm leading-relaxed text-gray-700">
-              Obie drukują w 203 dpi na etykietach do 104 mm szerokości i obie występują w
-              wersji termicznej oraz termotransferowej. Różnica siedzi w silniku: ZD220 drukuje
-              do 102 mm/s i ma tylko USB, ZD230 dokłada 152 mm/s oraz warianty z Ethernetem
-              i Wi-Fi. To sensowny wybór, gdy etykiety drukuje się od czasu do czasu — przy
-              codziennym druku warto od razu spojrzeć wyżej, bo ZD220/230 mają skromniejszą
-              konstrukcję i pamięć niż serie czterysetne.
+              Obie drukują w 203 dpi na etykietach do 104 mm szerokości i obie występują
+              w wersji termicznej ({' '}
+              <Link href="/sklep/drukarki-etykiet/zebra-zd220d" className="font-medium text-gray-900 underline">
+                ZD220d
+              </Link>
+              ,{' '}
+              <Link href="/sklep/drukarki-etykiet/zebra-zd230d" className="font-medium text-gray-900 underline">
+                ZD230d
+              </Link>
+              ) oraz termotransferowej ({' '}
+              <Link href="/sklep/drukarki-etykiet/zebra-zd220t" className="font-medium text-gray-900 underline">
+                ZD220t
+              </Link>
+              ,{' '}
+              <Link href="/sklep/drukarki-etykiet/zebra-zd230t" className="font-medium text-gray-900 underline">
+                ZD230t
+              </Link>
+              ). Różnica siedzi w silniku: ZD220 drukuje do 102 mm/s i ma tylko USB, ZD230
+              dokłada 152 mm/s oraz fabryczne warianty z Ethernetem i Wi-Fi, a także odklejak
+              i gilotynę. Druga różnica dotyczy taśmy: ZD220t przyjmuje wyłącznie rolki 74 m,
+              ZD230t także 300-metrowe, czyli wymieniane cztery razy rzadziej.
             </p>
 
             <h3 className="mt-5 text-base font-semibold text-gray-900">
-              ZD411 — do małych etykiet
+              ZD411 — jedyna dwucalowa, do małych etykiet
             </h3>
             <p className="mt-2 text-sm leading-relaxed text-gray-700">
-              Jedyna w tym zestawieniu drukarka dwucalowa: maksymalna szerokość druku to
-              56 mm. Bierze się ją tam, gdzie etykieta jest drobna — oznaczenia kabli,
-              etykiety apteczne, jubilerskie, laboratoryjne. Technicznie to ta sama półka co
-              ZD421: 152 mm/s, 203 lub 300 dpi, wymienne moduły łączności (Ethernet, RS-232,
-              Wi-Fi z Bluetoothem), NFC do parowania z telefonem.
+              Maksymalna szerokość druku to 56 mm, więc etykiety kurierskiej 100 × 150 mm ta
+              drukarka nie wydrukuje — bierze się ją tam, gdzie etykieta jest drobna:
+              oznaczenia kabli, etykiety apteczne, jubilerskie, laboratoryjne. Technicznie to
+              ta sama półka co ZD421: 152 mm/s, 203 lub 300 dpi, wymienne moduły łączności
+              (Ethernet, RS-232, Wi-Fi z Bluetoothem). Dostępna jako termiczna{' '}
+              <Link href="/sklep/drukarki-etykiet/zebra-zd411d" className="font-medium text-gray-900 underline">
+                ZD411d
+              </Link>{' '}
+              i termotransferowa{' '}
+              <Link href="/sklep/drukarki-etykiet/zebra-zd411t" className="font-medium text-gray-900 underline">
+                ZD411t
+              </Link>{' '}
+              — ta druga przyjmuje wąskie taśmy 74 m o szerokości 33–58 mm.
             </p>
 
             <h3 className="mt-5 text-base font-semibold text-gray-900">
@@ -270,16 +432,16 @@ export default async function DesktopPrintersPage() {
             <p className="mt-2 text-sm leading-relaxed text-gray-700">
               Następczyni legendarnej GK420 i domyślny wybór do stanowiska pakowania: 152 mm/s,
               203 lub 300 dpi, druk do 104 mm, a łączność dokłada się modułem bez narzędzi —
-              zamiast kupować nową drukarkę, gdy firma przechodzi z USB na sieć. Wersja
-              termotransferowa przyjmuje taśmy o nawoju 300 m, więc wymienia się je cztery
-              razy rzadziej niż 74-metrowe z tańszych serii. Zobacz{' '}
-              <Link
-                href="/sklep/drukarki-etykiet/zebra-zd421t"
-                className="font-medium text-gray-900 underline"
-              >
-                Zebra ZD421t
-              </Link>
-              .
+              zamiast kupować nową drukarkę, gdy firma przechodzi z USB na sieć.{' '}
+              <Link href="/sklep/drukarki-etykiet/zebra-zd421t" className="font-medium text-gray-900 underline">
+                Wersja termotransferowa
+              </Link>{' '}
+              przyjmuje taśmy o nawoju 300 m, więc wymienia się je cztery razy rzadziej niż
+              74-metrowe z tańszych serii;{' '}
+              <Link href="/sklep/drukarki-etykiet/zebra-zd421d" className="font-medium text-gray-900 underline">
+                wersja termiczna
+              </Link>{' '}
+              obywa się bez taśmy w ogóle.
             </p>
 
             <h3 className="mt-5 text-base font-semibold text-gray-900">
@@ -289,78 +451,77 @@ export default async function DesktopPrintersPage() {
               Najszybsza drukarka biurkowa Zebry: 203 mm/s, czyli o jedną trzecią szybciej niż
               ZD421. Ethernet i RS-232 są w standardzie, a zamiast diod można mieć kolorowy
               dotykowy ekran 4,3", na którym stan drukarki widać z drugiego końca
-              pomieszczenia. Wybierana tam, gdzie biurkowy rozmiar musi się spotkać z prawie
-              przemysłowym tempem — zanim zapadnie decyzja o przejściu na serię ZT.
+              pomieszczenia. Gilotynę i odklejak montuje się także po zakupie — w tańszych
+              seriach wyposażenie wybiera się raz, przy zamówieniu. Dostępna jako{' '}
+              <Link href="/sklep/drukarki-etykiet/zebra-zd621d" className="font-medium text-gray-900 underline">
+                ZD621d
+              </Link>{' '}
+              i{' '}
+              <Link href="/sklep/drukarki-etykiet/zebra-zd621t" className="font-medium text-gray-900 underline">
+                ZD621t
+              </Link>
+              , która jako jedyna w klasie przyjmuje nośniki do 118 mm szerokości.
             </p>
 
-            {/* Tabela porównawcza — parametry z kart katalogowych, bez cen,
-                bo ceny żyją; kwotę pokazujemy tylko przy naszej karcie ZD421t */}
+            {/* Tabela porównawcza bez cen, bo ceny żyją — kwoty są przy kafelkach
+                i w tabeli wariantów na karcie każdego modelu */}
             <div className="mt-6 overflow-x-auto rounded-xl border border-gray-200 bg-white">
               <table className="w-full text-sm">
+                <caption className="sr-only">
+                  Porównanie biurkowych drukarek etykiet Zebra: szybkość, szerokość druku,
+                  rozdzielczość, łączność i taśma
+                </caption>
                 <thead>
                   <tr className="border-b border-gray-200 bg-gray-50 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">
                     <th scope="col" className="px-4 py-3">Seria</th>
-                    <th scope="col" className="px-4 py-3">Druk</th>
                     <th scope="col" className="px-4 py-3">Szybkość</th>
                     <th scope="col" className="px-4 py-3">Szer. druku</th>
                     <th scope="col" className="px-4 py-3">Rozdzielczość</th>
                     <th scope="col" className="px-4 py-3">Łączność</th>
+                    <th scope="col" className="px-4 py-3">Taśma (wersja „t")</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-100 text-gray-700">
-                  <tr>
-                    <td className="px-4 py-3 font-semibold text-gray-900">ZD220</td>
-                    <td className="px-4 py-3">termiczny / termotransfer</td>
-                    <td className="px-4 py-3">102 mm/s</td>
-                    <td className="px-4 py-3">104 mm</td>
-                    <td className="px-4 py-3">203 dpi</td>
-                    <td className="px-4 py-3">USB</td>
-                  </tr>
-                  <tr>
-                    <td className="px-4 py-3 font-semibold text-gray-900">ZD230</td>
-                    <td className="px-4 py-3">termiczny / termotransfer</td>
-                    <td className="px-4 py-3">152 mm/s</td>
-                    <td className="px-4 py-3">104 mm</td>
-                    <td className="px-4 py-3">203 dpi</td>
-                    <td className="px-4 py-3">USB, opcje LAN / Wi-Fi</td>
-                  </tr>
-                  <tr>
-                    <td className="px-4 py-3 font-semibold text-gray-900">ZD411</td>
-                    <td className="px-4 py-3">termiczny / termotransfer</td>
-                    <td className="px-4 py-3">152 mm/s</td>
-                    <td className="px-4 py-3">56 mm</td>
-                    <td className="px-4 py-3">203 / 300 dpi</td>
-                    <td className="px-4 py-3">USB, BT, moduły LAN / Wi-Fi</td>
-                  </tr>
-                  <tr className="bg-[#A8F000]/10">
-                    <td className="px-4 py-3 font-semibold text-gray-900">
-                      <Link href="/sklep/drukarki-etykiet/zebra-zd421t" className="underline">
-                        ZD421
-                      </Link>
-                    </td>
-                    <td className="px-4 py-3">termiczny / termotransfer</td>
-                    <td className="px-4 py-3">152 mm/s</td>
-                    <td className="px-4 py-3">104 mm</td>
-                    <td className="px-4 py-3">203 / 300 dpi</td>
-                    <td className="px-4 py-3">USB, BT, moduły LAN / Wi-Fi</td>
-                  </tr>
-                  <tr>
-                    <td className="px-4 py-3 font-semibold text-gray-900">ZD621</td>
-                    <td className="px-4 py-3">termiczny / termotransfer</td>
-                    <td className="px-4 py-3">203 mm/s</td>
-                    <td className="px-4 py-3">104–108 mm</td>
-                    <td className="px-4 py-3">203 / 300 dpi</td>
-                    <td className="px-4 py-3">USB, LAN i RS-232 w standardzie, opcja Wi-Fi</td>
-                  </tr>
+                  {POROWNANIE.map((w) => (
+                    <tr key={w.seria} className={w.wyroznik ? 'bg-[#A8F000]/10' : undefined}>
+                      <th scope="row" className="px-4 py-3 text-left font-semibold text-gray-900">
+                        <Link href={w.hrefD} className="underline">
+                          {w.seria}d
+                        </Link>
+                        {' / '}
+                        <Link href={w.hrefT} className="underline">
+                          {w.seria}t
+                        </Link>
+                      </th>
+                      <td className="px-4 py-3">{w.szybkosc}</td>
+                      <td className="px-4 py-3">{w.szerokosc}</td>
+                      <td className="px-4 py-3">{w.dpi}</td>
+                      <td className="px-4 py-3">{w.lacznosc}</td>
+                      <td className="px-4 py-3">{w.tasma}</td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
             <p className="mt-2 text-xs text-gray-500">
-              Szybkości podane dla 203 dpi. Wszystkie serie przyjmują rolki do 127 mm średnicy
-              i etykiety do 991 mm długości.
+              Szybkości podane dla 203 dpi; wersje 300 dpi drukują wolniej. Wszystkie serie
+              przyjmują rolki do 127 mm średnicy i etykiety do 991 mm długości. Dane sprawdzone
+              u producenta w sierpniu 2026 przez TAKMA — autoryzowany serwis Zebra Technologies.
             </p>
 
-            <p className="mt-6 text-sm leading-relaxed text-gray-700">
+            <h2 className="mt-10 text-xl font-bold text-gray-900">
+              Najczęstsze pytania o biurkowe drukarki Zebra
+            </h2>
+            <div className="mt-4 divide-y divide-gray-100">
+              {FAQ_KATEGORII.map((p) => (
+                <div key={p.q} className="py-4 first:pt-0">
+                  <h3 className="text-sm font-semibold text-gray-900">{p.q}</h3>
+                  <p className="mt-1.5 text-sm leading-relaxed text-gray-700">{p.a}</p>
+                </div>
+              ))}
+            </div>
+
+            <p className="mt-8 text-sm leading-relaxed text-gray-700">
               Każdą z tych drukarek serwisujemy na co dzień jako autoryzowany serwis Zebry —
               stąd praktyczna rada z warsztatu: jeśli waha się między ZD230 a ZD421, prawie
               zawsze lepiej dopłacić do ZD421. Mocniejsza mechanika i wymienne moduły łączności
