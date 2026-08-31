@@ -268,13 +268,16 @@ const SPRZEDAWANE_MODELE: Record<string, string> = {
   ZD621T: 'zebra-zd621t',
   ZD411D: 'zebra-zd411d',
   ZD411T: 'zebra-zd411t',
-  'ZQ610 PLUS': 'zebra-zq610-plus',
-  'ZQ620 PLUS': 'zebra-zq620-plus',
-  'ZQ630 PLUS': 'zebra-zq630-plus',
+  // Klucz musi być modelem z tabeli `manuals` pisanym wielkimi literami —
+  // a te nie mają spacji („ZQ610Plus"). Wersje ze spacją nie trafiały w nic
+  // i most z instrukcji do sklepu przez trzy tygodnie się nie pokazywał.
+  ZQ610PLUS: 'zebra-zq610-plus',
+  ZQ620PLUS: 'zebra-zq620-plus',
+  ZQ630PLUS: 'zebra-zq630-plus',
   ZQ511: 'zebra-zq511',
   ZQ521: 'zebra-zq521',
-  'ZQ310 PLUS': 'zebra-zq310-plus',
-  'ZQ320 PLUS': 'zebra-zq320-plus',
+  ZQ310PLUS: 'zebra-zq310-plus',
+  ZQ320PLUS: 'zebra-zq320-plus',
 }
 
 export default async function ModelPage({ params }: { params: { model: string } }) {
