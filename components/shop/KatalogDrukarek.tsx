@@ -4,6 +4,7 @@ import { useId, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { ChevronDown, SlidersHorizontal, X } from "lucide-react";
 import KafelekProduktu from "./KafelekProduktu";
+import { Podpowiedz, type Wyjasnienie } from "./Podpowiedz";
 
 /**
  * Katalog drukarek z filtrowaniem po WARIANTACH, nie po modelach. Modeli jest
@@ -47,6 +48,83 @@ const KLUCZ_DRUK = "druk";
 const KLUCZ_DOSTEPNE = "dostepne";
 
 /** Kolejność kolumn filtra — cechy spoza listy trafiają na koniec, alfabetycznie. */
+/**
+ * Wyjaśnienia do nagłówków filtra. Nazwy cech są branżowe („Nośnik",
+ * „Akumulator"), a filtr jest pierwszą rzeczą, którą klient klika — dymek
+ * tłumaczy termin w miejscu, w którym pada pytanie, zamiast odsyłać do karty.
+ */
+const OPISY_FILTRA: Record<string, Wyjasnienie> = {
+  "Rodzaj druku": {
+    wstep: "Skąd na etykiecie bierze się obraz:",
+    pozycje: [
+      ["Termiczna", "ciepło głowicy ciemni papier — bez taśmy, ale wydruk blaknie na słońcu"],
+      ["Termotransferowa", "obraz przenosi taśma barwiąca — trwalszy, ale taśmę trzeba dokupić"],
+    ],
+  },
+  "Rozdzielczość": {
+    wstep: "Gęstość druku w punktach na cal:",
+    pozycje: [
+      ["203 dpi", "etykiety z tekstem i kodem kreskowym w typowym rozmiarze"],
+      ["300 dpi", "drobny tekst, małe kody 2D i QR, kosztem prędkości"],
+      ["600 dpi", "etykiety miniaturowe, np. elektronika i biżuteria"],
+    ],
+  },
+  "Łączność": {
+    wstep: "Jak drukarka łączy się z komputerem lub telefonem:",
+    pozycje: [
+      ["USB", "kabel do jednego stanowiska"],
+      ["Ethernet", "kabel sieciowy — drukarka widoczna dla wielu komputerów"],
+      ["Bluetooth", "łączy się z telefonem albo terminalem w zasięgu kilku metrów"],
+      ["Wi-Fi 5", "sieć bezprzewodowa; standard spotykany najczęściej"],
+      ["Wi-Fi 6", "nowsza sieć — lepsza tam, gdzie naraz pracuje wiele urządzeń"],
+    ],
+  },
+  "Nośnik": {
+    wstep: "Co drukarka przyjmuje na rolce:",
+    pozycje: [
+      ["Z podkładem", "zwykłe etykiety naklejone na papierowej wstędze"],
+      ["Linerless", "etykiety bez podkładu — odrywa się gotową, nie zostaje śmieć"],
+      ["Paragony", "rolka ciągła; etykiet samoprzylepnych ta wersja nie odmierzy"],
+      ["Etykiety i paragony", "dodatkowy czujnik odstępu, więc drukuje też etykiety"],
+    ],
+  },
+  "Akumulator": {
+    wstep: "Czy bateria jest w zestawie:",
+    pozycje: [
+      ["W zestawie", "drukarka gotowa do pracy zaraz po rozpakowaniu"],
+      ["Bez akumulatora", "sam korpus — dla firm, które mają już baterie i ładowarki"],
+    ],
+  },
+  "Wyposażenie": {
+    wstep: "Co drukarka robi z gotowym wydrukiem:",
+    pozycje: [
+      ["Standard", "etykiety wychodzą na wstędze w całości"],
+      ["Odklejak", "oddziela etykietę od wstęgi — szybsze naklejanie"],
+      ["Gilotyna", "odcina wydruk; do przywieszek i wydruków o zmiennej długości"],
+    ],
+  },
+  "Panel": {
+    wstep: "Jak drukarka pokazuje, co się z nią dzieje:",
+    pozycje: [
+      ["Diody", "kontrolki i przyciski; kolor i rytm migania mówią o stanie"],
+      ["Ekran dotykowy", "kolorowy wyświetlacz, ustawienia bez komputera"],
+    ],
+  },
+  "Kolor": {
+    wstep: "Kolor obudowy:",
+    pozycje: [
+      ["Czarna", "wersja standardowa"],
+      ["Biała", "do recepcji, aptek i placówek medycznych"],
+    ],
+  },
+  "Dostępność": {
+    wstep: "Zawężenie listy do sprzętu gotowego do wysyłki:",
+    pozycje: [
+      ["Tylko dostępne", "ukrywa modele, których w tej chwili nie ma w magazynach dystrybutora"],
+    ],
+  },
+};
+
 const KOLEJNOSC_CECH = [
   "Rozdzielczość",
   "Łączność",
@@ -349,9 +427,15 @@ export default function KatalogDrukarek({
               >
                 <p
                   id={`${idFiltra}-${g.klucz}`}
-                  className="mb-2 text-[11px] font-medium uppercase tracking-wide text-gray-400"
+                  className="mb-2 flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-wide text-gray-400"
                 >
                   {g.etykieta}
+                  {OPISY_FILTRA[g.etykieta] && (
+                    <Podpowiedz
+                      label={`Co oznacza: ${g.etykieta}?`}
+                      wyjasnienie={OPISY_FILTRA[g.etykieta]}
+                    />
+                  )}
                 </p>
                 <div className="space-y-1">
                   {g.opcje.map((o) => {

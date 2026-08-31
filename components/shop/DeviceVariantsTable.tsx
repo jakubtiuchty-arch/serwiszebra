@@ -1,11 +1,12 @@
 'use client'
 
-import { useEffect, useId, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { ShoppingCart, Check } from 'lucide-react'
 import PowiadomODostepnosci from './PowiadomODostepnosci'
 import { useCartStore } from '@/lib/cart-store'
 import type { DeviceVariant } from './DevicePurchasePanel'
 import type { StanWariantu } from './DevicePurchasePanel'
+import { Podpowiedz, type Wyjasnienie } from './Podpowiedz'
 
 
 interface Props {
@@ -37,13 +38,6 @@ const zl = (v: number) =>
  * wpisu po prostu nie dostaje dymka, więc dodanie nowej osi (np. „Pamięć"
  * przy terminalach) nie wymaga zmian w kodzie.
  */
-interface Wyjasnienie {
-  /** Zdanie wprowadzające — mówi, CZEGO dotyczy kolumna */
-  wstep: string
-  /** Wartości, które klient widzi w tabeli, z jednolinijkowym znaczeniem */
-  pozycje: [string, string][]
-}
-
 const OPISY_CECH: Record<string, Wyjasnienie> = {
   Rozdzielczość: {
     wstep: 'Gęstość druku w punktach na cal:',
@@ -53,11 +47,13 @@ const OPISY_CECH: Record<string, Wyjasnienie> = {
     ],
   },
   Łączność: {
-    wstep: 'Sposób podłączenia drukarki:',
+    wstep: 'Jak drukarka łączy się z komputerem lub telefonem:',
     pozycje: [
-      ['USB', 'kabel do jednego komputera'],
-      ['Ethernet', 'kabel sieciowy, drukarka widoczna dla wielu stanowisk'],
-      ['Wi-Fi', 'sieć bezprzewodowa, bez ciągnięcia kabla'],
+      ['USB', 'kabel do jednego stanowiska'],
+      ['Ethernet', 'kabel sieciowy — drukarka widoczna dla wielu komputerów'],
+      ['Bluetooth', 'łączy się z telefonem albo terminalem w zasięgu kilku metrów'],
+      ['Wi-Fi 5', 'sieć bezprzewodowa; standard spotykany najczęściej'],
+      ['Wi-Fi 6', 'nowsza sieć — lepsza tam, gdzie naraz pracuje wiele urządzeń'],
     ],
   },
   Panel: {
@@ -65,6 +61,22 @@ const OPISY_CECH: Record<string, Wyjasnienie> = {
     pozycje: [
       ['Diody', 'kontrolki i trzy przyciski; kolor i rytm migania mówią, co się dzieje'],
       ['Ekran dotykowy', 'kolorowy wyświetlacz 4,3 cala, konfiguracja bez komputera'],
+    ],
+  },
+  Nośnik: {
+    wstep: 'Co drukarka przyjmuje na rolce:',
+    pozycje: [
+      ['Z podkładem', 'zwykłe etykiety naklejone na papierowej wstędze'],
+      ['Linerless', 'etykiety bez podkładu — odrywa się gotową, nie zostaje śmieć'],
+      ['Paragony', 'rolka ciągła; etykiet samoprzylepnych ta wersja nie odmierzy'],
+      ['Etykiety i paragony', 'dodatkowy czujnik odstępu, więc drukuje też etykiety'],
+    ],
+  },
+  Akumulator: {
+    wstep: 'Czy bateria jest w zestawie:',
+    pozycje: [
+      ['W zestawie', 'drukarka gotowa do pracy zaraz po rozpakowaniu'],
+      ['Bez akumulatora', 'sam korpus — dla firm, które mają już baterie i ładowarki'],
     ],
   },
   Wyposażenie: {
@@ -85,6 +97,8 @@ const OPISY_CECH: Record<string, Wyjasnienie> = {
 const KOLEJNOSC_CECH = [
   'Rozdzielczość',
   'Łączność',
+  'Nośnik',
+  'Akumulator',
   'Pamięć',
   'System',
   'Skaner',
@@ -105,125 +119,6 @@ const WYJASNIENIE_DOSTEPNOSC: Wyjasnienie = {
     ['W dostawie', 'magazyny puste, towar jedzie do dystrybutora; termin potwierdzamy'],
     ['Na zamówienie', 'nie ma go w żadnym magazynie, sprowadzamy pod zamówienie'],
   ],
-}
-
-/**
- * Treść dymka: zdanie wprowadzające i wiersz na każdą wartość. Elementy
- * blokowe zrobione spanami, bo dymek renderuje się wewnątrz `span`
- * i `div` łamałby poprawność HTML.
- */
-const TrescPodpowiedzi = ({ w }: { w: Wyjasnienie }) => (
-  <>
-    <span className="block font-medium">{w.wstep}</span>
-    <span className="mt-1.5 block space-y-1">
-      {w.pozycje.map(([termin, opis]) => (
-        <span key={termin} className="block">
-          <span className="font-semibold">{termin}</span> — {opis}
-        </span>
-      ))}
-    </span>
-  </>
-)
-
-/**
- * Znak zapytania z dymkiem — dostępny popover, nie czysty CSS-owy tooltip.
- *
- * Wymogi z audytu (WCAG 1.4.13): dymek da się zamknąć Escape, można najechać
- * na jego treść (zamknięcie z małym opóźnieniem, żeby przejść nad przerwą),
- * jest powiązany z przyciskiem przez aria-describedby i renderuje się
- * warunkowo (ukryty nie zaśmieca drzewa dostępności). Pozycja liczona
- * z geometrii przycisku i DOCIĘTA do viewportu — na telefonie treść nie
- * wystaje poza ekran ani nie zasłania stałych elementów po przewinięciu
- * (scroll zamyka). `stopPropagation`, bo przodkowie wybierają wariant.
- */
-const Podpowiedz = ({ label, wyjasnienie }: { label: string; wyjasnienie: Wyjasnienie }) => {
-  const [otwarty, setOtwarty] = useState(false)
-  const [pozycja, setPozycja] = useState<{ top: number; left: number; szer: number } | null>(null)
-  const przycisk = useRef<HTMLButtonElement>(null)
-  const korzen = useRef<HTMLSpanElement>(null)
-  const zamykacz = useRef<ReturnType<typeof setTimeout> | null>(null)
-  const id = useId()
-
-  const pokaz = () => {
-    if (zamykacz.current) clearTimeout(zamykacz.current)
-    const r = przycisk.current?.getBoundingClientRect()
-    if (!r) return
-    const szer = Math.min(300, window.innerWidth - 24)
-    const left = Math.min(
-      Math.max(r.left + r.width / 2 - szer / 2, 12),
-      window.innerWidth - szer - 12
-    )
-    setPozycja({ top: r.bottom + 6, left, szer })
-    setOtwarty(true)
-  }
-  const ukryj = () => {
-    if (zamykacz.current) clearTimeout(zamykacz.current)
-    setOtwarty(false)
-  }
-  /** Opóźnienie pozwala przejechać kursorem z przycisku na treść dymka */
-  const ukryjZwloka = () => {
-    if (zamykacz.current) clearTimeout(zamykacz.current)
-    zamykacz.current = setTimeout(() => setOtwarty(false), 150)
-  }
-
-  useEffect(() => {
-    if (!otwarty) return
-    const naKlawisz = (e: KeyboardEvent) => e.key === 'Escape' && ukryj()
-    const naScroll = () => ukryj()
-    // Tapnięcie/klik poza dymkiem zamyka — na dotyku nie ma mouseleave
-    const pozaObszarem = (e: PointerEvent) => {
-      if (!korzen.current?.contains(e.target as Node)) ukryj()
-    }
-    document.addEventListener('keydown', naKlawisz)
-    document.addEventListener('pointerdown', pozaObszarem)
-    // Nasłuch scrolla dopiero po chwili — samo kliknięcie potrafi wywołać
-    // mikro-przewinięcie (fokus dociąga element) i zamykało dymek od razu
-    const opoznienie = setTimeout(() => window.addEventListener('scroll', naScroll, true), 250)
-    return () => {
-      clearTimeout(opoznienie)
-      document.removeEventListener('keydown', naKlawisz)
-      document.removeEventListener('pointerdown', pozaObszarem)
-      window.removeEventListener('scroll', naScroll, true)
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [otwarty])
-
-  return (
-    <span ref={korzen} className="inline-flex align-middle" onMouseEnter={pokaz} onMouseLeave={ukryjZwloka}>
-      {/* Cel dotykowy 24×24 px (WCAG 2.2 target size), kółko wizualnie zostaje 16 px */}
-      <button
-        ref={przycisk}
-        type="button"
-        aria-label={label}
-        aria-expanded={otwarty}
-        aria-describedby={otwarty ? id : undefined}
-        onClick={(e) => {
-          e.stopPropagation()
-          pokaz()
-        }}
-        onFocus={pokaz}
-        onBlur={ukryjZwloka}
-        className="group/przycisk -m-1 flex h-6 w-6 items-center justify-center"
-      >
-        <span className="flex h-4 w-4 items-center justify-center rounded-full border border-gray-400 text-[10px] font-semibold leading-none text-gray-500 transition group-hover/przycisk:border-gray-600 group-hover/przycisk:text-gray-700">
-          ?
-        </span>
-      </button>
-      {otwarty && pozycja && (
-        <span
-          id={id}
-          role="tooltip"
-          onMouseEnter={pokaz}
-          onMouseLeave={ukryjZwloka}
-          onClick={(e) => e.stopPropagation()}
-          style={{ top: pozycja.top, left: pozycja.left, width: pozycja.szer }}
-          className="fixed z-50 rounded-lg bg-gray-900 px-3 py-2 text-left text-xs font-normal normal-case leading-relaxed text-white shadow-lg"
-        >
-          <TrescPodpowiedzi w={wyjasnienie} />
-        </span>
-      )}
-    </span>
-  )
 }
 
 /**
