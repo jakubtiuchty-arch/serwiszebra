@@ -1012,6 +1012,119 @@ export const TRESC_KART: Record<string, TrescKarty> = {
       ['Gwarancja', '24 miesiące'],
     ],
   },
+  'zebra-zd411d': {
+    rekomendowanyPn: 'ZD4A022-D0EM00EZ',
+    zdjecieGlowne: '/sklep_photo/urzadzenia/zd411d_2.webp',
+    wSkrocie: [
+      'Zebra ZD411d to dwucalowa biurkowa drukarka etykiet — drukuje termicznie, bez taśmy barwiącej, na nośnikach o szerokości od 6,4 do 60 mm.',
+      'Szerokość druku wynosi 56 mm przy 203 dpi i 54 mm przy 300 dpi, więc etykieta kurierska 100 × 150 mm się na niej nie zmieści.',
+      'W rozdzielczości 203 dpi drukuje do 152 mm/s, w 300 dpi do 102 mm/s.',
+      'W standardzie ma USB, USB Host i Bluetooth Low Energy; Ethernet, RS-232 oraz Wi-Fi 6 z Bluetoothem dokłada się modułem także po zakupie.',
+      'Ma 512 MB pamięci Flash, 256 MB SDRAM i zegar czasu rzeczywistego, który drukuje datę bez udziału komputera.',
+      'Sprawdza się tam, gdzie etykieta jest mała: przy oznaczeniach kabli, próbek laboratoryjnych, etykietach aptecznych i jubilerskich.',
+    ],
+    zweryfikowano: '2026-08-31',
+    opis: [
+      <>
+        Zebra ZD411d to jedyna dwucalowa drukarka w biurkowej serii ZD — drukuje termicznie
+        bezpośrednio, bez taśmy barwiącej, na wąskich nośnikach o szerokości od 6,4 do 60 mm.
+        Bierze się ją tam, gdzie etykieta jest drobna, a miejsca na stanowisku niewiele:
+        do oznaczeń kabli i podzespołów, etykiet aptecznych i laboratoryjnych, metek
+        jubilerskich oraz opisów próbek. Przy szerokości 115 mm i wadze jednego kilograma
+        mieści się na blacie tam, gdzie czterocalowa drukarka już nie wchodzi.
+      </>,
+      <>
+        Kluczowa jest tu szerokość druku: 56 mm w wersji 203 dpi i 54 mm w wersji 300 dpi.
+        To rozstrzyga o zastosowaniu — etykiety kurierskiej 100 × 150 mm ta drukarka nie
+        wydrukuje i do nadań przesyłek trzeba wziąć model czterocalowy, na przykład{' '}
+        <Link
+          href="/sklep/drukarki-etykiet/zebra-zd421d"
+          className="font-medium text-gray-900 underline"
+        >
+          Zebrę ZD421d
+        </Link>
+        . Prędkość sięga 152 mm/s przy 203 dpi i 102 mm/s przy 300 dpi; wyższa rozdzielczość
+        ma sens przy kodach 2D na kilkunastu milimetrach i przy drobnym tekście, którego na
+        małej etykiecie zwykle jest sporo.
+      </>,
+      <>
+        W standardzie urządzenie komunikuje się przez USB, USB Host i Bluetooth Low Energy,
+        a Ethernet, port szeregowy RS-232 albo Wi-Fi 6 z Bluetoothem dokłada się modułem —
+        również po zakupie, bez wymiany drukarki. Pamięć 512 MB Flash z 256 MB SDRAM mieści
+        rozbudowane szablony, a zegar czasu rzeczywistego pozwala drukować datę i godzinę
+        bez pytania komputera, co ma znaczenie przy oznaczeniach próbek i terminach
+        ważności. Obsługa ZPL II i EPL 2 zachowuje zgodność z szablonami przygotowanymi dla
+        starszych drukarek Zebry, w tym dwucalowych GC420 i GX420.
+      </>,
+    ],
+    osie: [
+      {
+        tytul: 'Rozdzielczość',
+        pozycje: [
+          { termin: '203 dpi', opis: 'kody kreskowe i typowy tekst, druk 56 mm, do 152 mm/s' },
+          { termin: '300 dpi', opis: 'drobny tekst i małe kody 2D, druk 54 mm, do 102 mm/s' },
+        ],
+      },
+      {
+        tytul: 'Łączność',
+        pozycje: [
+          { termin: 'USB', opis: 'jedna drukarka przy jednym komputerze' },
+          { termin: 'Ethernet', opis: 'gdy ma z niej korzystać kilka osób w sieci' },
+          { termin: 'Wi-Fi', opis: 'z Bluetoothem, gdy nie ma jak doprowadzić kabla' },
+        ],
+      },
+    ],
+    faqNaglowek: 'Najczęstsze pytania o ZD411d',
+    faq: [
+      {
+        q: 'Czy ZD411d wydrukuje etykietę kurierską 100 × 150 mm?',
+        a: 'Nie. ZD411d jest drukarką dwucalową — szerokość druku to 56 mm przy 203 dpi, a etykieta kurierska ma 100 mm szerokości. Do nadań przesyłek potrzebny jest model czterocalowy, na przykład ZD421d albo ZD230d.',
+        href: '/blog/drukowanie-etykiet-kurierskich-allegro-inpost-dpd-zebra',
+        link: 'Jak drukować etykiety kurierskie na Zebrze — poradnik',
+      },
+      {
+        q: 'Czym ZD411d różni się od ZD421d?',
+        a: 'Różnicą jest szerokość: ZD411d drukuje pas 56 mm i przyjmuje nośniki do 60 mm, a ZD421d drukuje 104 mm na nośnikach do 108 mm. Elektronika, prędkość 152 mm/s przy 203 dpi i wymienne moduły łączności są w obu takie same. ZD411d wybiera się do małych etykiet i ciasnych stanowisk.',
+        href: '/sklep/drukarki-etykiet/zebra-zd421d',
+        link: 'Zobacz Zebra ZD421d',
+      },
+      {
+        q: 'Jakie etykiety pasują do drukarki Zebra ZD411d?',
+        a: 'Nośniki o szerokości od 6,4 do 60 mm i długości od 6,4 do 991 mm, w rolkach o średnicy zewnętrznej do 127 mm, na wałku 12,7 lub 25,4 mm. Etykiety muszą być termoczułe, bo drukarka pracuje bez taśmy barwiącej.',
+        href: '/sklep/drukarki-etykiet/biurkowe',
+        link: 'Zobacz pozostałe drukarki biurkowe',
+      },
+      {
+        q: 'Czy Ethernet można dołożyć do ZD411d po zakupie?',
+        a: 'Tak. Ethernet 10/100, RS-232 oraz Wi-Fi 6 z Bluetoothem są modułami montowanymi w gnieździe drukarki, więc przejście z USB na sieć nie wymaga kupowania nowego urządzenia. Moduł wymienia się bez narzędzi.',
+        href: '/kontakt',
+        link: 'Zapytaj serwis o właściwy moduł',
+      },
+      {
+        q: 'Czy ZD411d wymaga taśmy barwiącej?',
+        a: 'Nie. ZD411d drukuje termicznie bezpośrednio na etykietach termoczułych, więc kupuje się wyłącznie etykiety. Nadruk termiczny blaknie z czasem pod wpływem światła i ciepła — do oznaczeń, które mają przetrwać lata, potrzebna jest drukarka termotransferowa.',
+        href: '/sklep/drukarki-etykiet/zebra-zd230t',
+        link: 'Zobacz termotransferową Zebra ZD230t',
+      },
+    ],
+    spec: [
+      ['Producent', 'Zebra'],
+      ['Model', 'ZD411d'],
+      ['Technologia druku', 'Termiczna bezpośrednia — bez taśmy'],
+      ['Rozdzielczość', '203 lub 300 DPI'],
+      ['Szerokość druku', '56 mm (203 dpi), 54 mm (300 dpi)'],
+      ['Prędkość druku', 'do 152 mm/s (203 dpi), do 102 mm/s (300 dpi)'],
+      ['Szerokość etykiet', '6,4–60 mm'],
+      ['Maksymalna długość etykiety', '991 mm'],
+      ['Maksymalna średnica rolki', '127 mm'],
+      ['Pamięć', '512 MB Flash, 256 MB SDRAM'],
+      ['Łączność', 'USB, USB Host, Bluetooth LE; moduły Ethernet, RS-232, Wi-Fi 6 z Bluetooth 5.3'],
+      ['Wymiary (D×S×W)', '220 × 115 × 151 mm'],
+      ['Waga', '1,0 kg'],
+      ['Stan', 'Nowy, oryginalny'],
+      ['Gwarancja', '24 miesiące'],
+    ],
+  },
 }
 
 export const trescKarty = (slug: string): TrescKarty | undefined => TRESC_KART[slug]

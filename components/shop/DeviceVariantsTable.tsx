@@ -246,10 +246,17 @@ export default function DeviceVariantsTable({
   // grup zostaje kolejność z bazy, bo ta niesie logikę modelu (rosnąca
   // rozdzielczość, potem wyposażenie), a sortowanie po cenie by ją rozbiło.
   const doPokazania = useMemo(() => {
-    const dostepny = (pn: string) => (stany[pn]?.total ?? 0) > 0
-    return [...variants].sort(
-      (a, b) => Number(dostepny(b.pn)) - Number(dostepny(a.pn))
-    )
+    // Trzy poziomy, nie dwa: `total` obejmuje także towar w drodze, więc sam
+    // w sobie nie odróżnia wersji leżącej w magazynie od takiej, która dopiero
+    // jedzie do dystrybutora. Kolejno: jest na półce (PL albo EU) → jest
+    // w dostawie → nie ma nigdzie.
+    const ranga = (pn: string) => {
+      const s = stany[pn]
+      if (!s) return 0
+      if (s.stockPL > 0 || s.stockEU > 0) return 2
+      return s.total > 0 ? 1 : 0
+    }
+    return [...variants].sort((a, b) => ranga(b.pn) - ranga(a.pn))
   }, [variants, stany])
 
   // Wejście z adresu wariantu ma od razu pokazać, o który numer chodzi.
