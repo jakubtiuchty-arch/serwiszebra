@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useId, useRef, useState } from 'react'
+import { useEffect, useId, useMemo, useRef, useState } from 'react'
 import { ShoppingCart, Check } from 'lucide-react'
 import PowiadomODostepnosci from './PowiadomODostepnosci'
 import { useCartStore } from '@/lib/cart-store'
@@ -241,7 +241,16 @@ export default function DeviceVariantsTable({
   // alternatywy 30% użytkowników porzuca sklep — niedostępne pokazuje się
   // wyszarzone, nigdy nie ukrywa, bo ukrycie nie pozwala odróżnić „nie ma
   // w ofercie" od „nie znalazłem".
-  const doPokazania = variants
+  // …ale kolejność już nie jest obojętna: wersje bez stanu wypadają na koniec
+  // tabeli, żeby wzrok trafiał najpierw na to, co wyjedzie dziś. W obrębie obu
+  // grup zostaje kolejność z bazy, bo ta niesie logikę modelu (rosnąca
+  // rozdzielczość, potem wyposażenie), a sortowanie po cenie by ją rozbiło.
+  const doPokazania = useMemo(() => {
+    const dostepny = (pn: string) => (stany[pn]?.total ?? 0) > 0
+    return [...variants].sort(
+      (a, b) => Number(dostepny(b.pn)) - Number(dostepny(a.pn))
+    )
+  }, [variants, stany])
 
   // Wejście z adresu wariantu ma od razu pokazać, o który numer chodzi.
   // Po kliknięciu nie przewijamy — klient sam wie, gdzie kliknął.
