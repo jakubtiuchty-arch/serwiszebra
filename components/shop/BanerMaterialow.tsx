@@ -89,7 +89,7 @@ export default function BanerMaterialow({ termotransfer }: { termotransfer: bool
   return (
     <section className="mb-4 rounded-xl border border-gray-200 bg-white p-4 sm:mb-6 sm:p-6">
       <h2 className="text-sm font-semibold text-gray-900 sm:text-base">
-        Materiały do tej drukarki
+        Materiały eksploatacyjne
       </h2>
       <p className="mt-1 text-sm text-gray-600">
         {termotransfer
