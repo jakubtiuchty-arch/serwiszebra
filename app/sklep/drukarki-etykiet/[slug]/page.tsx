@@ -416,6 +416,9 @@ export default async function DevicePage({
             ['#faq', 'Pytania'],
             ['#specyfikacja', 'Specyfikacja'],
             ['#dokumentacja', 'Dokumentacja'],
+            // Kotwica tylko wtedy, gdy model ma dobrane poradniki — pusty odnośnik
+            // w pasku prowadziłby donikąd
+            ...(poradniki.length > 0 ? [['#poradniki', 'Poradniki']] : []),
           ].map(([href, label]) => (
             <a
               key={href}
