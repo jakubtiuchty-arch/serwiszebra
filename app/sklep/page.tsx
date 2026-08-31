@@ -65,7 +65,7 @@ export default function SklepPage() {
         {/* Hero - SSR; pełnowymiarowa grafika (full-bleed) jak w kategoriach */}
         <section className="relative overflow-hidden bg-slate-900">
           <Image
-            src="/sklep_photo/hero/sklep-v7.jpeg"
+            src="/sklep_photo/hero/sklep-v8.jpeg"
             alt="Stanowisko wysyłkowe sklepu: drukarka etykiet Zebra w otwartym kartonie, zapakowana paczka, rolki etykiet i części zamienne"
             fill
             priority
