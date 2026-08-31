@@ -128,7 +128,6 @@ export default function DeviceBuyBlock({
         stany={stany}
         zaladowane={zaladowane}
         wybranyPn={wybranyPn}
-        rekomendowanyPn={rekomendowanyPn}
       />
 
       <DeviceVariantsTable

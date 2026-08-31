@@ -59,8 +59,6 @@ interface DevicePurchasePanelProps {
   zaladowane?: boolean
   /** Aktualnie wybrany numer katalogowy */
   wybranyPn?: string
-  /** Numer, który kupuje większość — kotwica dla klienta bez wiedzy o wariantach */
-  rekomendowanyPn?: string
 }
 
 const zl = (v: number) =>
@@ -88,7 +86,6 @@ export default function DevicePurchasePanel({
   stany = {},
   zaladowane = false,
   wybranyPn,
-  rekomendowanyPn,
 }: DevicePurchasePanelProps) {
   // Wejście z adresu wariantu (`?pn=`) ma od razu pokazywać JEGO cenę i stan,
   // a nie najtańszą wersję, której klient wcale nie wybierał
@@ -110,11 +107,6 @@ export default function DevicePurchasePanel({
   const termin = maDane ? terminDostawy(stockPL, stockEU) : null
   const netto = s?.netto && s.netto > 0 ? s.netto : fallbackNetto
   const brutto = s?.brutto && s.brutto > 0 ? s.brutto : fallbackBrutto
-
-  // Cena „od" bez kontekstu myli kupującego, który potrzebuje Ethernetu albo
-  // Wi-Fi — pokazujemy obok nią cenę wersji, którą wybiera większość
-  const rek = !wybrany && rekomendowanyPn ? stany[rekomendowanyPn] : undefined
-  const wariantRek = variants.find((v) => v.pn === rekomendowanyPn)
 
   return (
     <div className="flex flex-col md:flex-row gap-4 sm:gap-6 mb-4 sm:mb-6 md:items-start">
@@ -191,18 +183,6 @@ export default function DevicePurchasePanel({
                   {!wybrany && ' — cena najtańszej wersji'}
                 </span>
               </p>
-
-              {/* Sama cena „od" myli kogoś, kto potrzebuje Ethernetu albo Wi-Fi:
-                  najtańsza wersja ich nie ma. Obok dajemy więc drugą kotwicę —
-                  konfigurację, którą realnie wybiera większość. */}
-              {rek && rek.netto > 0 && rek.netto !== netto && wariantRek && (
-                <p className="mt-1.5 text-sm text-gray-600">
-                  Najczęściej wybierana ({wariantRek.label}):{' '}
-                  <a href="#warianty" className="font-semibold text-gray-900 underline">
-                    {zl(rek.netto)} zł netto
-                  </a>
-                </p>
-              )}
             </>
           )}
         </div>
