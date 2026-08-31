@@ -114,133 +114,121 @@ const FAKTY_KLASY = [
 ]
 
 /**
- * Tabela porównawcza pogrupowana rodzinami — przy dziewięciu modelach płaska
- * lista niczego już nie tłumaczy, a to właśnie rodzina niesie decyzję: język,
- * odporność i wielkość rolki są w niej wspólne. Kolumna „Języki" stoi w tabeli,
- * bo brak ZPL w serii ZQ200 unieważnia wybór zrobiony po cenie.
+ * Tabela porównawcza pogrupowana rodzinami.
+ *
+ * Języki wydruku i odporność są cechą CAŁEJ rodziny, więc stoją w nagłówku
+ * grupy, a nie w kolumnach — inaczej „IP54 — kurz i bryzgi" powtarzało się
+ * w siedmiu wierszach i tabela robiła się nieczytelna. W kolumnach zostaje
+ * tylko to, co różni modele w obrębie rodziny: szerokość, waga i bateria.
  */
 const RODZINY = [
   {
-    seria: 'ZQ200 — najtańsze, bez języka ZPL',
-    opis: 'Paragony przy kasie i w dostawie. Nie wydrukują etykiet zapisanych w ZPL.',
+    seria: 'ZQ200',
+    opis: 'Najtańsze — paragony przy kasie i w dostawie',
+    cechyRodziny: 'Języki CPCL i ESC/POS, bez ZPL · odporność IP43 (ZQ210) i IP54 (ZQ220 Plus)',
     modele: [
       {
         model: 'ZQ210',
         href: '/sklep/drukarki-etykiet/zebra-zq210',
         szerokosc: '48 mm',
-        nosnik: 'do 58 mm',
-        waga: '0,265 kg',
+        papier: 'do 58 mm',
+        waga: '265 g',
         bateria: '1500 mAh',
-        kurierska: 'nie',
-        jezyki: 'CPCL, ESC/POS',
-        odpornosc: 'IP43 — kurz',
+        kurierska: false,
       },
       {
         model: 'ZQ220 Plus',
         href: '/sklep/drukarki-etykiet/zebra-zq220-plus',
         szerokosc: '72 mm',
-        nosnik: 'do 80 mm',
-        waga: '0,39 kg',
+        papier: 'do 80 mm',
+        waga: '390 g',
         bateria: '2500 mAh',
-        kurierska: 'nie',
-        jezyki: 'CPCL, ESC/POS',
-        odpornosc: 'IP54 — kurz i bryzgi',
+        kurierska: false,
       },
     ],
   },
   {
-    seria: 'ZQ300 Plus — lekkie, z językiem ZPL',
-    opis: 'Paragony i etykiety w dostawie, przy niewielkiej liczbie wydruków dziennie.',
+    seria: 'ZQ300 Plus',
+    opis: 'Lekkie — paragony i etykiety w dostawie',
+    cechyRodziny: 'Języki CPCL i ZPL · odporność IP54 · ładowanie przewodem USB-C',
     modele: [
       {
         model: 'ZQ310 Plus',
         href: '/sklep/drukarki-etykiet/zebra-zq310-plus',
         szerokosc: '48 mm',
-        nosnik: 'do 58 mm',
-        waga: '0,37 kg',
+        papier: 'do 58 mm',
+        waga: '370 g',
         bateria: '2280 mAh',
-        kurierska: 'nie',
-        jezyki: 'CPCL, ZPL',
-        odpornosc: 'IP54 — kurz i bryzgi',
+        kurierska: false,
       },
       {
         model: 'ZQ320 Plus',
         href: '/sklep/drukarki-etykiet/zebra-zq320-plus',
         szerokosc: '72 mm',
-        nosnik: 'do 80 mm',
-        waga: '0,43 kg',
+        papier: 'do 80 mm',
+        waga: '430 g',
         bateria: '2280 mAh',
-        kurierska: 'nie',
-        jezyki: 'CPCL, ZPL',
-        odpornosc: 'IP54 — kurz i bryzgi',
+        kurierska: false,
       },
     ],
   },
   {
-    seria: 'ZQ600 Plus — do magazynu i sklepu',
-    opis: 'Największe rolki, ekran, Wi-Fi 6 i bateria na dwie zmiany.',
+    seria: 'ZQ600 Plus',
+    opis: 'Do magazynu i sklepu — największe rolki i ekran',
+    cechyRodziny: 'Języki CPCL, ZPL i EPL · odporność IP54 · wersje z Wi-Fi 6',
     modele: [
       {
         model: 'ZQ610 Plus',
         href: '/sklep/drukarki-etykiet/zebra-zq610-plus',
         szerokosc: '48 mm',
-        nosnik: '25,4–55,4 mm',
-        waga: '0,6 kg',
+        papier: 'do 55 mm',
+        waga: '600 g',
         bateria: '3250 mAh',
-        kurierska: 'nie',
-        jezyki: 'CPCL, ZPL, EPL',
-        odpornosc: 'IP54 — kurz i bryzgi',
+        kurierska: false,
       },
       {
         model: 'ZQ620 Plus',
         href: '/sklep/drukarki-etykiet/zebra-zq620-plus',
         szerokosc: '72 mm',
-        nosnik: '25,4–79,4 mm',
-        waga: '0,73 kg',
+        papier: 'do 79 mm',
+        waga: '730 g',
         bateria: '3250 mAh',
-        kurierska: 'nie',
-        jezyki: 'CPCL, ZPL, EPL',
-        odpornosc: 'IP54 — kurz i bryzgi',
-        wyroznik: true,
+        kurierska: false,
+        etykieta: 'najczęściej wybierana',
       },
       {
         model: 'ZQ630 Plus',
         href: '/sklep/drukarki-etykiet/zebra-zq630-plus',
         szerokosc: '104 mm',
-        nosnik: '50,8–111 mm',
-        waga: '1,11 kg',
+        papier: 'do 111 mm',
+        waga: '1110 g',
         bateria: '6600 mAh',
-        kurierska: 'tak',
-        jezyki: 'CPCL, ZPL, EPL',
-        odpornosc: 'IP54 — kurz i bryzgi',
+        kurierska: true,
       },
     ],
   },
   {
-    seria: 'ZQ500 — wzmocnione, do pracy w terenie',
-    opis: 'Wytrzymują upadek z 2 metrów na beton i drukują najszybciej z całej klasy.',
+    seria: 'ZQ500',
+    opis: 'Wzmocnione — do pracy w aucie i w terenie',
+    cechyRodziny: 'Języki CPCL, ZPL i ZBI · odporność IP54 i upadek z 2 m na beton · najszybszy druk',
     modele: [
       {
         model: 'ZQ511',
         href: '/sklep/drukarki-etykiet/zebra-zq511',
         szerokosc: '72 mm',
-        nosnik: '35–80 mm',
-        waga: '0,63 kg',
+        papier: 'do 80 mm',
+        waga: '630 g',
         bateria: '3250 mAh',
-        kurierska: 'nie',
-        jezyki: 'CPCL, ZPL, ZBI',
-        odpornosc: 'IP54 + upadek z 2 m',
+        kurierska: false,
       },
       {
         model: 'ZQ521',
         href: '/sklep/drukarki-etykiet/zebra-zq521',
         szerokosc: '104 mm',
-        nosnik: '50,8–113 mm',
-        waga: '0,79 kg',
+        papier: 'do 113 mm',
+        waga: '790 g',
         bateria: '3250 mAh',
-        kurierska: 'tak',
-        jezyki: 'CPCL, ZPL, ZBI',
-        odpornosc: 'IP54 + upadek z 2 m',
+        kurierska: true,
       },
     ],
   },
@@ -624,60 +612,105 @@ export default async function MobilePrintersPage() {
               w zamian mieści mniejszą rolkę i ma słabszą baterię.
             </p>
 
-            <div className="mt-6 overflow-x-auto rounded-xl border border-gray-200 bg-white">
-              <table className="w-full text-sm">
+            {/* contain:paint — bez tego szeroka tabela wypycha CAŁĄ stronę w bok
+                na telefonie: sam `overflow-x-auto` przycina przewijanie, ale nie
+                zasięg malowania, więc szerokość tabeli lądowała w scrollWidth
+                dokumentu. Zmierzone: 701 px zamiast 390 px na ekranie 390 px. */}
+            <div className="mt-6 overflow-x-auto rounded-xl border border-gray-200 bg-white [contain:paint]">
+              <table className="w-full min-w-[580px] table-fixed text-sm">
                 <caption className="sr-only">
                   Porównanie dziewięciu mobilnych drukarek etykiet Zebra w czterech rodzinach
                 </caption>
+                {/* Sztywne szerokości kolumn: bez nich nagłówek rodziny (scalony
+                    przez wszystkie kolumny) rozpychał kolumnę „Model" na pół tabeli */}
+                <colgroup>
+                  <col className="w-[30%]" />
+                  <col className="w-[15%]" />
+                  <col className="w-[15%]" />
+                  <col className="w-[11%]" />
+                  <col className="w-[14%]" />
+                  <col className="w-[15%]" />
+                </colgroup>
                 <thead>
-                  <tr className="border-b border-gray-200 bg-gray-50 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">
+                  <tr className="border-b border-gray-200 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">
                     <th scope="col" className="px-4 py-3">Model</th>
-                    <th scope="col" className="px-4 py-3">Szerokość wydruku</th>
-                    <th scope="col" className="px-4 py-3">Szerokość rolki</th>
-                    <th scope="col" className="px-4 py-3">Waga</th>
-                    <th scope="col" className="px-4 py-3">Bateria</th>
-                    <th scope="col" className="whitespace-nowrap px-4 py-3">Etykieta kurierska</th>
-                    <th scope="col" className="px-4 py-3">Języki wydruku</th>
-                    <th scope="col" className="px-4 py-3">Odporność</th>
+                    <th scope="col" className="px-4 py-3 text-right">Szerokość wydruku</th>
+                    <th scope="col" className="px-4 py-3 text-right">Szerokość papieru</th>
+                    <th scope="col" className="px-4 py-3 text-right">Waga</th>
+                    <th scope="col" className="px-4 py-3 text-right">Bateria</th>
+                    <th scope="col" className="px-4 py-3">Etykieta kurierska</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-100 text-gray-700">
+                <tbody>
                   {RODZINY.map((r) => (
                     <Fragment key={r.seria}>
-                      <tr className="bg-gray-50/70">
-                        <th
-                          scope="colgroup"
-                          colSpan={8}
-                          className="px-4 py-2 text-left text-xs font-semibold text-gray-900"
-                        >
+                    <tr className="border-t border-gray-200">
+                      <th
+                        scope="colgroup"
+                        colSpan={6}
+                        className="bg-gray-50 px-4 pb-2 pt-3 text-left align-bottom"
+                      >
+                        <span className="block text-sm font-bold text-gray-900">
                           {r.seria}
-                          <span className="ml-2 font-normal text-gray-500">{r.opis}</span>
+                          <span className="ml-2 font-medium text-gray-600">{r.opis}</span>
+                        </span>
+                        <span className="mt-0.5 block text-xs font-normal text-gray-500">
+                          {r.cechyRodziny}
+                        </span>
+                      </th>
+                    </tr>
+                    {r.modele.map((w) => (
+                      <tr key={w.model} className="border-t border-gray-100">
+                        <th
+                          scope="row"
+                          className="px-4 py-3 text-left align-top font-semibold text-gray-900"
+                        >
+                          <Link href={w.href} className="underline">
+                            {w.model}
+                          </Link>
+                          {/* Na wąskim ekranie pigułka schodzi pod nazwę — w jednej
+                              linii nachodziła na sąsiednią kolumnę */}
+                          {w.etykieta && (
+                            <span className="mt-1 block w-fit rounded-full bg-[#A8F000]/25 px-2 py-0.5 text-[11px] font-semibold text-gray-700 sm:mt-0.5">
+                              {w.etykieta}
+                            </span>
+                          )}
                         </th>
+                        <td className="whitespace-nowrap px-4 py-3 text-right tabular-nums">
+                          {w.szerokosc}
+                        </td>
+                        <td className="whitespace-nowrap px-4 py-3 text-right tabular-nums text-gray-600">
+                          {w.papier}
+                        </td>
+                        <td className="whitespace-nowrap px-4 py-3 text-right tabular-nums">
+                          {w.waga}
+                        </td>
+                        <td className="whitespace-nowrap px-4 py-3 text-right tabular-nums text-gray-600">
+                          {w.bateria}
+                        </td>
+                        {/* Siedem razy „nie" w kolumnie to szum — liczy się to,
+                            które dwa modele etykietę kurierską wydrukują */}
+                        <td className="px-4 py-3">
+                          {w.kurierska ? (
+                            <span className="font-semibold text-gray-900">tak</span>
+                          ) : (
+                            <span aria-hidden className="text-gray-300">
+                              —
+                            </span>
+                          )}
+                          {!w.kurierska && <span className="sr-only">nie</span>}
+                        </td>
                       </tr>
-                      {r.modele.map((w) => (
-                        <tr key={w.model} className={w.wyroznik ? 'bg-[#A8F000]/10' : undefined}>
-                          <th
-                            scope="row"
-                            className="whitespace-nowrap px-4 py-3 text-left font-semibold text-gray-900"
-                          >
-                            <Link href={w.href} className="underline">
-                              {w.model}
-                            </Link>
-                          </th>
-                          <td className="whitespace-nowrap px-4 py-3">{w.szerokosc}</td>
-                          <td className="whitespace-nowrap px-4 py-3">{w.nosnik}</td>
-                          <td className="whitespace-nowrap px-4 py-3">{w.waga}</td>
-                          <td className="whitespace-nowrap px-4 py-3">{w.bateria}</td>
-                          <td className="px-4 py-3">{w.kurierska}</td>
-                          <td className="whitespace-nowrap px-4 py-3">{w.jezyki}</td>
-                          <td className="whitespace-nowrap px-4 py-3">{w.odpornosc}</td>
-                        </tr>
-                      ))}
+                    ))}
                     </Fragment>
                   ))}
                 </tbody>
               </table>
             </div>
+            <p className="mt-2 text-xs text-gray-500 sm:hidden">
+              Tabelę przesuwa się palcem w bok — po prawej stronie są jeszcze waga, bateria
+              i informacja o etykiecie kurierskiej.
+            </p>
             <p className="mt-2 text-xs text-gray-500">
               Wszystkie modele drukują ciepłem, w tej samej jakości 203 punktów na cal.
               Szybkość: ZQ200 do 50–60 mm na sekundę, ZQ300 Plus do 101,6, ZQ600 Plus do 115,
