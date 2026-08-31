@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import ShopSubheader from '@/components/shop/ShopSubheader'
+import HeroWideo from '@/components/shop/HeroWideo'
 import ShopMainPage from '@/components/shop/ShopMainPage'
 import {
   ShoppingCart,
@@ -65,12 +66,18 @@ export default function SklepPage() {
         {/* Hero - SSR; pełnowymiarowa grafika (full-bleed) jak w kategoriach */}
         <section className="relative overflow-hidden bg-slate-900">
           <Image
-            src="/sklep_photo/hero/sklep-v4.jpeg"
-            alt="Oryginalne części zamienne do drukarek i terminali Zebra — głowice, wałki, akumulatory, zasilacze"
+            src="/sklep_photo/hero/sklep-v5.jpeg"
+            alt="Oryginalne części zamienne do drukarek Zebra na blacie serwisowym — głowica drukująca, wałek dociskowy, akumulator i zasilacz"
             fill
             priority
             sizes="100vw"
             className="object-cover object-right"
+          />
+          {/* Powolny najazd kamery na części, grany raz po wejściu; po
+              zakończeniu film wygasza się i wraca pełna kompozycja. */}
+          <HeroWideo
+            src="/sklep_photo/hero/sklep-v5.mp4"
+            poster="/sklep_photo/hero/sklep-v5.jpeg"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-slate-950 from-22% via-slate-950/70 via-52% to-transparent to-80%" />
           <div className="relative max-w-6xl mx-auto px-4 py-8 sm:py-10 md:py-12 min-h-[200px] md:min-h-[240px] flex flex-col justify-center">
