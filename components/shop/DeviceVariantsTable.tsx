@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useId, useMemo, useRef, useState } from 'react'
+import { useEffect, useId, useMemo, useRef, useState, type ReactNode } from 'react'
 import { ShoppingCart, Check } from 'lucide-react'
 import PowiadomODostepnosci from './PowiadomODostepnosci'
 import { useCartStore } from '@/lib/cart-store'
@@ -60,8 +60,31 @@ const KOLEJNOSC_CECH = [
   'Kolor',
 ]
 
-const WYJASNIENIE_DOSTEPNOSC =
-  'Liczba sztuk gotowych do wysyłki. PL — magazyn w Polsce, wysyłka w 24 h. EU — magazyn europejski dystrybutora, dostawa zwykle 2–3 dni robocze. W dostawie — magazyny są puste, ale towar jedzie już do dystrybutora; termin potwierdzamy po zapytaniu. Na zamówienie — wersji nie ma w żadnym magazynie, sprowadzamy ją pod zamówienie.'
+/**
+ * Cztery stany magazynowe. Świadomie lista, nie akapit: jednym ciągiem robiła
+ * się z tego ściana tekstu, w której klient szukał wzrokiem swojego przypadku.
+ * Elementy blokowe zrobione spanami, bo dymek renderuje się wewnątrz `span`
+ * i `div` łamałby poprawność HTML.
+ */
+const STANY_MAGAZYNOWE: [string, string][] = [
+  ['PL', 'magazyn w Polsce — wysyłka w 24 h'],
+  ['EU', 'magazyn europejski dystrybutora — zwykle 2–3 dni robocze'],
+  ['W dostawie', 'magazyny puste, towar jedzie do dystrybutora — termin potwierdzamy'],
+  ['Na zamówienie', 'nie ma go w żadnym magazynie — sprowadzamy pod zamówienie'],
+]
+
+const WYJASNIENIE_DOSTEPNOSC = (
+  <>
+    <span className="block font-medium">Liczba sztuk gotowych do wysyłki:</span>
+    <span className="mt-1.5 block space-y-1">
+      {STANY_MAGAZYNOWE.map(([termin, opis]) => (
+        <span key={termin} className="block">
+          <span className="font-semibold">{termin}</span> — {opis}
+        </span>
+      ))}
+    </span>
+  </>
+)
 
 /**
  * Znak zapytania z dymkiem — dostępny popover, nie czysty CSS-owy tooltip.
@@ -74,7 +97,7 @@ const WYJASNIENIE_DOSTEPNOSC =
  * wystaje poza ekran ani nie zasłania stałych elementów po przewinięciu
  * (scroll zamyka). `stopPropagation`, bo przodkowie wybierają wariant.
  */
-const Podpowiedz = ({ label, tekst }: { label: string; tekst: string }) => {
+const Podpowiedz = ({ label, tekst }: { label: string; tekst: ReactNode }) => {
   const [otwarty, setOtwarty] = useState(false)
   const [pozycja, setPozycja] = useState<{ top: number; left: number; szer: number } | null>(null)
   const przycisk = useRef<HTMLButtonElement>(null)
@@ -86,7 +109,7 @@ const Podpowiedz = ({ label, tekst }: { label: string; tekst: string }) => {
     if (zamykacz.current) clearTimeout(zamykacz.current)
     const r = przycisk.current?.getBoundingClientRect()
     if (!r) return
-    const szer = Math.min(256, window.innerWidth - 24)
+    const szer = Math.min(300, window.innerWidth - 24)
     const left = Math.min(
       Math.max(r.left + r.width / 2 - szer / 2, 12),
       window.innerWidth - szer - 12
@@ -469,7 +492,7 @@ export default function DeviceVariantsTable({
                 <dt className="flex items-center gap-1 text-gray-500">
                   Magazyn
                   <Podpowiedz
-                    label="Co oznaczają PL i EU?"
+                    label="Co oznaczają stany dostępności?"
                     tekst={WYJASNIENIE_DOSTEPNOSC}
                   />
                 </dt>
@@ -547,7 +570,7 @@ export default function DeviceVariantsTable({
                 <span className="inline-flex items-center gap-1">
                   Dostępność
                   <Podpowiedz
-                    label="Co oznaczają PL i EU?"
+                    label="Co oznaczają stany dostępności?"
                     tekst={WYJASNIENIE_DOSTEPNOSC}
                   />
                 </span>
