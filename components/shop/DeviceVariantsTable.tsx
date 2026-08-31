@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useId, useMemo, useRef, useState, type ReactNode } from 'react'
+import { useEffect, useId, useMemo, useRef, useState } from 'react'
 import { ShoppingCart, Check } from 'lucide-react'
 import PowiadomODostepnosci from './PowiadomODostepnosci'
 import { useCartStore } from '@/lib/cart-store'
@@ -37,11 +37,44 @@ const zl = (v: number) =>
  * wpisu po prostu nie dostaje dymka, więc dodanie nowej osi (np. „Pamięć"
  * przy terminalach) nie wymaga zmian w kodzie.
  */
-const OPISY_CECH: Record<string, string> = {
-  Rozdzielczość:
-    'Rozdzielczość druku w punktach na cal. 203 dpi wystarcza do typowych etykiet z tekstem i kodem kreskowym; 300 dpi wybierz do małych etykiet, drobnego tekstu i kodów 2D.',
-  Łączność:
-    'Sposób podłączenia drukarki. USB — kabel do jednego komputera. Ethernet — kabel sieciowy, drukarka widoczna dla wielu stanowisk. Wi-Fi — sieć bezprzewodowa, bez ciągnięcia kabli.',
+interface Wyjasnienie {
+  /** Zdanie wprowadzające — mówi, CZEGO dotyczy kolumna */
+  wstep: string
+  /** Wartości, które klient widzi w tabeli, z jednolinijkowym znaczeniem */
+  pozycje: [string, string][]
+}
+
+const OPISY_CECH: Record<string, Wyjasnienie> = {
+  Rozdzielczość: {
+    wstep: 'Gęstość druku w punktach na cal:',
+    pozycje: [
+      ['203 dpi', 'etykiety z tekstem i kodem kreskowym w typowym rozmiarze'],
+      ['300 dpi', 'drobny tekst, małe kody 2D i QR, kosztem prędkości'],
+    ],
+  },
+  Łączność: {
+    wstep: 'Sposób podłączenia drukarki:',
+    pozycje: [
+      ['USB', 'kabel do jednego komputera'],
+      ['Ethernet', 'kabel sieciowy, drukarka widoczna dla wielu stanowisk'],
+      ['Wi-Fi', 'sieć bezprzewodowa, bez ciągnięcia kabla'],
+    ],
+  },
+  Panel: {
+    wstep: 'Jak drukarka pokazuje swój stan:',
+    pozycje: [
+      ['Diody', 'kontrolki i trzy przyciski; kolor i rytm migania mówią, co się dzieje'],
+      ['Ekran dotykowy', 'kolorowy wyświetlacz 4,3 cala, konfiguracja bez komputera'],
+    ],
+  },
+  Wyposażenie: {
+    wstep: 'Co drukarka robi z wydrukiem:',
+    pozycje: [
+      ['Standard', 'etykiety wychodzą na podłożu w całości'],
+      ['Odklejak', 'oddziela etykietę od podłoża, szybsze naklejanie'],
+      ['Gilotyna', 'odcina wydruk; do przywieszek i etykiet o zmiennej długości'],
+    ],
+  },
 }
 /**
  * Kolejność kolumn z cechami. Baza trzyma cechy w JSON-ie, a ten nie
@@ -63,21 +96,27 @@ const KOLEJNOSC_CECH = [
 /**
  * Cztery stany magazynowe. Świadomie lista, nie akapit: jednym ciągiem robiła
  * się z tego ściana tekstu, w której klient szukał wzrokiem swojego przypadku.
- * Elementy blokowe zrobione spanami, bo dymek renderuje się wewnątrz `span`
+ */
+const WYJASNIENIE_DOSTEPNOSC: Wyjasnienie = {
+  wstep: 'Liczba sztuk gotowych do wysyłki:',
+  pozycje: [
+    ['PL', 'magazyn w Polsce, wysyłka w 24 h'],
+    ['EU', 'magazyn europejski dystrybutora, zwykle 2–3 dni robocze'],
+    ['W dostawie', 'magazyny puste, towar jedzie do dystrybutora; termin potwierdzamy'],
+    ['Na zamówienie', 'nie ma go w żadnym magazynie, sprowadzamy pod zamówienie'],
+  ],
+}
+
+/**
+ * Treść dymka: zdanie wprowadzające i wiersz na każdą wartość. Elementy
+ * blokowe zrobione spanami, bo dymek renderuje się wewnątrz `span`
  * i `div` łamałby poprawność HTML.
  */
-const STANY_MAGAZYNOWE: [string, string][] = [
-  ['PL', 'magazyn w Polsce — wysyłka w 24 h'],
-  ['EU', 'magazyn europejski dystrybutora — zwykle 2–3 dni robocze'],
-  ['W dostawie', 'magazyny puste, towar jedzie do dystrybutora — termin potwierdzamy'],
-  ['Na zamówienie', 'nie ma go w żadnym magazynie — sprowadzamy pod zamówienie'],
-]
-
-const WYJASNIENIE_DOSTEPNOSC = (
+const TrescPodpowiedzi = ({ w }: { w: Wyjasnienie }) => (
   <>
-    <span className="block font-medium">Liczba sztuk gotowych do wysyłki:</span>
+    <span className="block font-medium">{w.wstep}</span>
     <span className="mt-1.5 block space-y-1">
-      {STANY_MAGAZYNOWE.map(([termin, opis]) => (
+      {w.pozycje.map(([termin, opis]) => (
         <span key={termin} className="block">
           <span className="font-semibold">{termin}</span> — {opis}
         </span>
@@ -97,7 +136,7 @@ const WYJASNIENIE_DOSTEPNOSC = (
  * wystaje poza ekran ani nie zasłania stałych elementów po przewinięciu
  * (scroll zamyka). `stopPropagation`, bo przodkowie wybierają wariant.
  */
-const Podpowiedz = ({ label, tekst }: { label: string; tekst: ReactNode }) => {
+const Podpowiedz = ({ label, wyjasnienie }: { label: string; wyjasnienie: Wyjasnienie }) => {
   const [otwarty, setOtwarty] = useState(false)
   const [pozycja, setPozycja] = useState<{ top: number; left: number; szer: number } | null>(null)
   const przycisk = useRef<HTMLButtonElement>(null)
@@ -180,7 +219,7 @@ const Podpowiedz = ({ label, tekst }: { label: string; tekst: ReactNode }) => {
           style={{ top: pozycja.top, left: pozycja.left, width: pozycja.szer }}
           className="fixed z-50 rounded-lg bg-gray-900 px-3 py-2 text-left text-xs font-normal normal-case leading-relaxed text-white shadow-lg"
         >
-          {tekst}
+          <TrescPodpowiedzi w={wyjasnienie} />
         </span>
       )}
     </span>
@@ -483,7 +522,7 @@ export default function DeviceVariantsTable({
                     <dt className="flex items-center gap-1 text-gray-500">
                       {nazwa}
                       {OPISY_CECH[nazwa] && (
-                        <Podpowiedz label={`Co oznacza: ${nazwa}?`} tekst={OPISY_CECH[nazwa]} />
+                        <Podpowiedz label={`Co oznacza: ${nazwa}?`} wyjasnienie={OPISY_CECH[nazwa]} />
                       )}
                     </dt>
                     <dd className="text-right text-gray-900">{v.cechy?.[nazwa] || '—'}</dd>
@@ -493,7 +532,7 @@ export default function DeviceVariantsTable({
                   Magazyn
                   <Podpowiedz
                     label="Co oznaczają stany dostępności?"
-                    tekst={WYJASNIENIE_DOSTEPNOSC}
+                    wyjasnienie={WYJASNIENIE_DOSTEPNOSC}
                   />
                 </dt>
                 <dd className="flex justify-end text-gray-600">
@@ -550,7 +589,7 @@ export default function DeviceVariantsTable({
                   <span className="inline-flex items-center gap-1">
                     {nazwa}
                     {OPISY_CECH[nazwa] && (
-                      <Podpowiedz label={`Co oznacza: ${nazwa}?`} tekst={OPISY_CECH[nazwa]} />
+                      <Podpowiedz label={`Co oznacza: ${nazwa}?`} wyjasnienie={OPISY_CECH[nazwa]} />
                     )}
                   </span>
                 </th>
@@ -571,7 +610,7 @@ export default function DeviceVariantsTable({
                   Dostępność
                   <Podpowiedz
                     label="Co oznaczają stany dostępności?"
-                    tekst={WYJASNIENIE_DOSTEPNOSC}
+                    wyjasnienie={WYJASNIENIE_DOSTEPNOSC}
                   />
                 </span>
               </th>
