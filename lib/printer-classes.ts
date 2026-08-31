@@ -42,7 +42,7 @@ export const KLASY_DRUKAREK: KlasaDrukarek[] = [
     wideo: '/klasy/mobilne.mp4',
     nazwa: 'Drukarki mobilne',
     zajawka: 'Do druku w terenie i na hali — przy pasku albo w wózku.',
-    serie: 'Serie ZQ310, ZQ320, ZQ511, ZQ521, ZQ610, ZQ630',
+    serie: 'Serie ZQ200, ZQ300 Plus, ZQ500 i ZQ600 Plus',
     metaTitle: 'Mobilne drukarki etykiet Zebra — seria ZQ | Serwis Zebra',
     metaDescription:
       'Mobilne drukarki etykiet i paragonów Zebra serii ZQ — druk przy pasku, w wózku widłowym i w terenie. Doradzamy i serwisujemy jako autoryzowany serwis Zebry.',
