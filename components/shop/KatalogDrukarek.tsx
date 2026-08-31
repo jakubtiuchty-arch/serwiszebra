@@ -46,8 +46,8 @@ const GRUPY: Grupa[] = [
     klucz: "druk",
     etykieta: "Rodzaj druku",
     opcje: [
-      { wartosc: "termiczny", etykieta: "Bez taśmy" },
-      { wartosc: "termotransfer", etykieta: "Z taśmą" },
+      { wartosc: "termiczny", etykieta: "Termiczna" },
+      { wartosc: "termotransfer", etykieta: "Termotransferowa" },
     ],
   },
   {
