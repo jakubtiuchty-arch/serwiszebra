@@ -1014,7 +1014,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
   },
   'zebra-zd411d': {
     rekomendowanyPn: 'ZD4A022-D0EM00EZ',
-    zdjecieGlowne: '/sklep_photo/urzadzenia/zd411d_2.webp',
+    zdjecieGlowne: '/sklep_photo/urzadzenia/zd411d_1.webp',
     wSkrocie: [
       'Zebra ZD411d to dwucalowa biurkowa drukarka etykiet — drukuje termicznie, bez taśmy barwiącej, na nośnikach o szerokości od 6,4 do 60 mm.',
       'Szerokość druku wynosi 56 mm przy 203 dpi i 54 mm przy 300 dpi, więc etykieta kurierska 100 × 150 mm się na niej nie zmieści.',
