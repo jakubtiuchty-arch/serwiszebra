@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { ChevronDown, X } from "lucide-react";
+import { ChevronDown, SlidersHorizontal, X } from "lucide-react";
 import KafelekProduktu from "./KafelekProduktu";
 
 /**
@@ -254,26 +254,30 @@ export default function KatalogDrukarek({
           spychało produktów poniżej pierwszego ekranu. */}
       <aside className="lg:sticky lg:top-6 lg:w-60 lg:shrink-0">
         <div className="rounded-xl border border-gray-200 bg-white">
-          <h2 className="border-b border-gray-100 px-4 py-3 text-sm font-semibold text-gray-900">
-            <button
-              type="button"
-              onClick={() => setRozwiniety((x) => !x)}
-              aria-expanded={rozwiniety}
-              className="flex w-full items-center gap-1.5 lg:pointer-events-none"
-            >
-              Dobierz wersję
-              {aktywne > 0 && (
-                <span className="rounded-md bg-gray-900 px-1.5 py-0.5 text-[11px] font-semibold text-white lg:hidden">
-                  {aktywne}
-                </span>
-              )}
-              <ChevronDown
-                className={`ml-auto h-4 w-4 text-gray-400 transition lg:hidden ${
-                  rozwiniety ? "rotate-180" : ""
-                }`}
-              />
-            </button>
-          </h2>
+          {/* Bez nagłówka: na desktopie kolumna filtrów mówi sama za siebie
+              nazwami grup. Na telefonie zostaje pasek rozwijający — z ikoną
+              suwaków i licznikiem wybranych, bo tam panel startuje zwinięty
+              i musi być za co kliknąć. */}
+          <button
+            type="button"
+            onClick={() => setRozwiniety((x) => !x)}
+            aria-expanded={rozwiniety}
+            aria-label="Filtry"
+            className="flex w-full items-center gap-2 border-b border-gray-100 px-4 py-3 text-sm font-semibold text-gray-900 lg:hidden"
+          >
+            <SlidersHorizontal className="h-4 w-4 text-gray-400" />
+            Filtry
+            {aktywne > 0 && (
+              <span className="rounded-md bg-gray-900 px-1.5 py-0.5 text-[11px] font-semibold text-white">
+                {aktywne}
+              </span>
+            )}
+            <ChevronDown
+              className={`ml-auto h-4 w-4 text-gray-400 transition ${
+                rozwiniety ? "rotate-180" : ""
+              }`}
+            />
+          </button>
 
           <div className={rozwiniety ? "block" : "hidden lg:block"}>
             {GRUPY.map((g) => (

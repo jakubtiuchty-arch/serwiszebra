@@ -11,8 +11,10 @@ import { getAkcesoriaDlaModelu } from '@/lib/device-accessories'
 import { pobierzStany, stanDlaPN } from '@/lib/stock-server'
 import { klasaBySlug } from '@/lib/printer-classes'
 import { trescKarty } from '@/lib/device-content'
+import { getPostBySlug } from '@/lib/blog'
 import ShopSubheader from '@/components/shop/ShopSubheader'
-import { Info, FileText, Download, Wrench, Phone, LifeBuoy } from 'lucide-react'
+import { Info, FileText, Download, Wrench, Phone, Clock } from 'lucide-react'
+import Image from 'next/image'
 
 /**
  * Karta urządzenia. Świadomie JEDNA karta na wariant modelu (ZD421t osobno od
@@ -175,6 +177,19 @@ export default async function DevicePage({
 
   const kartaUrl = `${SITE}/sklep/drukarki-etykiet/${product.slug}`
   const tresc = trescKarty(product.slug)
+  /**
+   * Wpisy do sekcji „Gdy coś nie działa". Tytuł na kafelku skracamy: pełne
+   * brzmienie („Serwis drukarki Zebra ZD220 - diagnostyka i naprawa [2026]")
+   * jest pisane pod wyniki wyszukiwania i w kaflu zajmowałoby cztery linijki.
+   */
+  const poradniki = (tresc?.poradniki || [])
+    .map((slug) => getPostBySlug(slug))
+    .filter((w): w is NonNullable<typeof w> => !!w)
+    .map((w) => ({
+      ...w,
+      tytulSkrocony: w.title.replace(/\s*\[\d{4}\]\s*$/, '').replace(/^Serwis drukarki Zebra /, 'Serwis '),
+    }))
+
   const zdjecie = zdjecieGlowne(product.slug, product.image_urls)
 
   /** Każdy wariant ma własny adres, pod którym karta otwiera się z nim wybranym */
@@ -625,31 +640,55 @@ export default async function DevicePage({
               </li>
             </ul>
 
-            {/* Poradniki serwisowe: klient szukający „dlaczego drukarka drukuje
-                blado" trafia dziś na blog z zewnątrz, a powinien mieć te teksty
-                pod ręką także wtedy, gdy sprzęt dopiero kupuje. Dobór per model
-                — dedykowana diagnostyka serii, jeśli ją napisaliśmy. */}
-            {tresc?.poradniki?.length ? (
-              <>
-                <h3 className="mt-5 border-t border-gray-100 pt-5 text-sm font-semibold text-gray-900">
-                  Gdy coś nie działa
-                </h3>
-                <ul className="mt-3 grid list-none grid-cols-1 gap-2 p-0 sm:grid-cols-2">
-                  {tresc.poradniki.map((p) => (
-                    <li key={p.href}>
-                      <Link
-                        href={p.href}
-                        className="flex min-h-[48px] items-center gap-3 rounded-lg border border-gray-200 px-4 text-sm font-medium text-gray-900 transition hover:border-gray-400"
-                      >
-                        <LifeBuoy className="h-4 w-4 flex-shrink-0 text-gray-400" />
-                        {p.tytul}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </>
-            ) : null}
           </section>
+
+          {/* Poradniki serwisowe jako osobna sekcja z kafelkami wpisów — te
+              same okładki i tytuły co na blogu, tylko w mniejszym formacie.
+              Dane bierzemy z `lib/blog`, więc karta nie ma własnej kopii
+              tytułu, która rozjechałaby się po redakcji wpisu. */}
+          {poradniki.length > 0 && (
+            <section
+              id="poradniki"
+              className="scroll-mt-24 bg-white rounded-xl border border-gray-200 p-4 sm:p-6 mb-4 sm:mb-6"
+            >
+              <h2 className="text-sm sm:text-base font-semibold text-gray-900">
+                Gdy coś nie działa
+              </h2>
+              <p className="mt-1 text-sm text-gray-600">
+                Poradniki z naszego warsztatu — te same problemy, z którymi klienci dzwonią
+                do serwisu.
+              </p>
+              <ul className="mt-4 grid list-none grid-cols-1 gap-3 p-0 sm:grid-cols-3">
+                {poradniki.map((wpis) => (
+                  <li key={wpis.slug}>
+                    <Link
+                      href={`/blog/${wpis.slug}`}
+                      className="group flex h-full flex-col overflow-hidden rounded-xl border border-gray-200 transition hover:border-gray-400"
+                    >
+                      <span className="relative block aspect-[16/9] overflow-hidden bg-gray-100">
+                        <Image
+                          src={wpis.coverImage}
+                          alt={wpis.coverImageAlt || wpis.title}
+                          fill
+                          sizes="(max-width: 640px) 100vw, 33vw"
+                          className="object-cover"
+                        />
+                      </span>
+                      <span className="flex flex-1 flex-col p-3">
+                        <span className="text-sm font-semibold leading-snug text-gray-900">
+                          {wpis.tytulSkrocony}
+                        </span>
+                        <span className="mt-auto flex items-center gap-1.5 pt-2 text-xs text-gray-500">
+                          <Clock className="h-3.5 w-3.5" />
+                          {wpis.readingTime} min czytania
+                        </span>
+                      </span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
 
 
         </article>
