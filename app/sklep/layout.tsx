@@ -1,8 +1,8 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Sklep Zebra – Głowice, wałki, akumulatory | TAKMA',
-  description: 'Oryginalne części do drukarek Zebra: głowice 203/300/600 DPI, wałki, akumulatory. Wysyłka 24h, gwarancja producenta.',
+  title: 'Sklep Zebra – drukarki, terminale, skanery i części | TAKMA',
+  description: 'Drukarki etykiet, terminale, skanery i tablety Zebra oraz oryginalne części: głowice 203/300/600 DPI, wałki, akumulatory. Ceny na żywo, wysyłka 24h.',
   keywords: [
     'głowica zebra',
     'głowica drukująca zebra',
@@ -20,8 +20,8 @@ export const metadata: Metadata = {
     'zebra thermal printhead',
   ],
   openGraph: {
-    title: 'Sklep Zebra – Głowice, wałki, akumulatory | TAKMA',
-    description: 'Oryginalne części do drukarek Zebra 203/300/600 DPI. Wysyłka 24h, gwarancja producenta.',
+    title: 'Sklep Zebra – drukarki, terminale, skanery i części | TAKMA',
+    description: 'Urządzenia Zebra i oryginalne części: głowice 203/300/600 DPI, wałki, akumulatory. Ceny na żywo, wysyłka 24h.',
     url: 'https://www.serwis-zebry.pl/sklep',
     type: 'website',
     siteName: 'TAKMA - Autoryzowany Serwis Zebra',
@@ -30,8 +30,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Sklep z częściami Zebra – Głowice drukujące | TAKMA',
-    description: 'Oryginalne głowice drukujące do drukarek Zebra 203/300/600 DPI. Wysyłka 24h, gwarancja producenta. Autoryzowany partner Zebra.',
+    title: 'Sklep Zebra – urządzenia i części zamienne | TAKMA',
+    description: 'Drukarki etykiet, terminale i skanery Zebra oraz oryginalne części zamienne. Wysyłka 24h, gwarancja w autoryzowanym serwisie.',
   },
   alternates: {
     canonical: 'https://www.serwis-zebry.pl/sklep',
