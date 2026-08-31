@@ -163,4 +163,28 @@
       <image:loc>https://www.serwis-zebry.pl/sklep_photo/urzadzenia/zq521_3.webp</image:loc>
     </image:image>
   </url>
+  <url>
+    <loc>https://www.serwis-zebry.pl/sklep/drukarki-etykiet/zebra-zq310-plus</loc>
+    <image:image>
+      <image:loc>https://www.serwis-zebry.pl/sklep_photo/urzadzenia/zq310plus_1.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.serwis-zebry.pl/sklep_photo/urzadzenia/zq310plus_2.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.serwis-zebry.pl/sklep_photo/urzadzenia/zq310plus_3.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.serwis-zebry.pl/sklep/drukarki-etykiet/zebra-zq320-plus</loc>
+    <image:image>
+      <image:loc>https://www.serwis-zebry.pl/sklep_photo/urzadzenia/zq320plus_1.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.serwis-zebry.pl/sklep_photo/urzadzenia/zq320plus_2.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.serwis-zebry.pl/sklep_photo/urzadzenia/zq320plus_3.webp</image:loc>
+    </image:image>
+  </url>
 </urlset>

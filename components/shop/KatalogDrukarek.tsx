@@ -61,7 +61,7 @@ const KOLEJNOSC_CECH = [
 const KOLEJNOSC_WARTOSCI: Record<string, string[]> = {
   "Rozdzielczość": ["203 dpi", "300 dpi", "600 dpi"],
   "Łączność": ["USB", "Bluetooth", "Ethernet", "Wi-Fi", "Wi-Fi 5", "Wi-Fi 6"],
-  "Nośnik": ["Z podkładem", "Linerless"],
+  "Nośnik": ["Paragony", "Etykiety i paragony", "Z podkładem", "Linerless"],
   "Akumulator": ["W zestawie", "Bez akumulatora"],
   "Wyposażenie": ["Standard", "Odklejak", "Gilotyna"],
   "Panel": ["Diody", "Ekran dotykowy"],
