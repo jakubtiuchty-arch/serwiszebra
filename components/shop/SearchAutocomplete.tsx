@@ -30,6 +30,55 @@ interface AutocompleteResult {
   powod?: string | null
 }
 
+/**
+ * Nazwa w podpowiedzi bez numeru katalogowego i bez powtórzonej listy modeli.
+ * W bazie nazwy brzmią „Zasilacz do drukarki Zebra ZT111 / ZT211 - P1123335-023
+ * ZT111 / ZT211", a numer i tak stoi wierszem niżej.
+ */
+function nazwaDoPodpowiedzi(result: AutocompleteResult): string {
+  let nazwa = result.name
+  if (result.sku) {
+    const i = nazwa.indexOf(result.sku)
+    if (i > 0) nazwa = nazwa.slice(0, i).replace(/[\s\-–—]+$/, '')
+  }
+  // Po odcięciu numeru zostaje czasem powtórzona lista modeli
+  // („… ZT111 / ZT211 ZT111 / ZT211") — usuwamy drugie wystąpienie
+  for (let dl = 30; dl >= 5; dl--) {
+    const ogon = nazwa.slice(-dl).trim()
+    if (ogon.length < 5) continue
+    if (nazwa.slice(0, -dl).includes(ogon)) {
+      nazwa = nazwa.slice(0, -dl)
+      break
+    }
+  }
+  return nazwa.replace(/[\s\-–—/]+$/, '').trim()
+}
+
+/**
+ * Pełna etykieta wyniku. Do skróconych nazw części dokładamy rozdzielczość
+ * i model, ale tylko wtedy, gdy nazwa jeszcze ich nie zawiera — inaczej
+ * powstawało „… ZT111 / ZT211 ZT111 / ZT211".
+ */
+function etykietaWyniku(result: AutocompleteResult): string {
+  if (result.product_type === 'drukarka') return nazwaDoPodpowiedzi(result)
+
+  const bazowa =
+    result.product_type === 'glowica'
+      ? 'Głowica'
+      : result.product_type === 'walek'
+        ? 'Wałek'
+        : nazwaDoPodpowiedzi(result)
+
+  const czesci = [bazowa]
+  if (result.resolution_dpi && !bazowa.includes(String(result.resolution_dpi))) {
+    czesci.push(`${result.resolution_dpi} DPI`)
+  }
+  if (result.device_model && !bazowa.includes(result.device_model)) {
+    czesci.push(result.device_model)
+  }
+  return czesci.join(' ')
+}
+
 function isProductAvailable(result: AutocompleteResult): boolean {
   if (result.stock > 0) return true
   if ((result.attributes?.stock_pl ?? 0) > 0) return true
@@ -391,10 +440,10 @@ export default function SearchAutocomplete({
               <div className="px-3 py-1.5 bg-gray-50 border-b border-gray-100">
                 <span className="text-[10px] font-semibold text-gray-500 uppercase tracking-wider">
                   {matchType === 'urzadzenie' && 'Urządzenia'}
-                  {matchType === 'sku' && 'Part Number'}
-                  {matchType === 'model' && 'Modele'}
-                  {matchType === 'name' && 'Części'}
-                  {matchType === 'other' && 'Wyniki'}
+                  {matchType === 'sku' && 'Numer katalogowy'}
+                  {matchType === 'model' && 'Części i akcesoria'}
+                  {matchType === 'name' && 'Części i akcesoria'}
+                  {matchType === 'other' && 'Pozostałe'}
                 </span>
               </div>
               {items.map((result) => {
@@ -407,7 +456,7 @@ export default function SearchAutocomplete({
                   <button
                     key={result.id}
                     onClick={() => navigateToProduct(result)}
-                    className={`w-full flex items-center gap-3 px-3 py-2.5 text-left transition-colors ${
+                    className={`flex w-full items-start gap-3 px-3 py-2.5 text-left transition-colors ${
                       isActive ? 'bg-blue-50' : 'hover:bg-gray-50'
                     }`}
                     role="option"
@@ -429,40 +478,36 @@ export default function SearchAutocomplete({
                     </div>
 
                     {/* Info */}
-                    <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium text-gray-900 line-clamp-2 leading-tight">
-                        {result.product_type === 'drukarka'
-                          ? result.name
-                          : result.product_type === 'glowica'
-                            ? 'Głowica'
-                            : result.product_type === 'walek'
-                              ? 'Wałek'
-                              : result.name}
-                        {result.product_type !== 'drukarka' && result.resolution_dpi
-                          ? ` ${result.resolution_dpi} DPI`
-                          : ''}
-                        {result.product_type !== 'drukarka' && result.device_model
-                          ? ` ${result.device_model}`
-                          : ''}
+                    <div className="min-w-0 flex-1">
+                      <p className="text-sm font-medium leading-tight text-gray-900 line-clamp-2 break-words">
+                        {etykietaWyniku(result)}
                       </p>
                       {result.powod && (
                         <p className="mt-0.5 text-[11px] text-gray-500 line-clamp-1">
                           {result.powod}
                         </p>
                       )}
-                      <div className="flex items-center gap-1 mt-0.5">
-                        <span className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${
-                          (liveStock[result.sku] !== undefined ? liveStock[result.sku] : isProductAvailable(result))
-                            ? 'bg-green-500' : 'bg-red-500'
-                        }`} />
-                        <span className="text-[11px] text-gray-400 truncate">{result.sku}</span>
+                      {/* Numer katalogowy i cena w jednym wierszu pod nazwą:
+                          cena ustawiona obok nazwy zabierała na telefonie połowę
+                          szerokości i nazwa łamała się w środku wyrazu */}
+                      <div className="mt-1 flex items-center gap-1.5">
+                        <span
+                          className={`h-1.5 w-1.5 flex-shrink-0 rounded-full ${
+                            (liveStock[result.sku] !== undefined
+                              ? liveStock[result.sku]
+                              : isProductAvailable(result))
+                              ? 'bg-green-500'
+                              : 'bg-red-500'
+                          }`}
+                        />
+                        <span className="min-w-0 flex-1 truncate font-mono text-[11px] text-gray-400">
+                          {result.sku}
+                        </span>
+                        <span className="flex-shrink-0 whitespace-nowrap text-sm font-semibold text-gray-900">
+                          {result.price.toFixed(2).replace('.', ',')} zł
+                        </span>
                       </div>
                     </div>
-
-                    {/* Cena */}
-                    <p className="text-sm font-semibold text-gray-900 whitespace-nowrap flex-shrink-0 pl-2">
-                      {result.price.toFixed(2).replace('.', ',')} zł
-                    </p>
                   </button>
                 )
               })}
