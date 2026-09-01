@@ -94,6 +94,44 @@ export async function GET(request: Request) {
       czesciDokladne = trafione || []
     }
 
+    /**
+     * Urządzenia z wyszukiwania tekstowego nie mają miniatury: kolumna
+     * `image_url` obsługuje części, a drukarki trzymają zdjęcia w tablicy
+     * `image_urls`. Bez tego uzupełnienia wynik „ZT111" pokazywał pustą
+     * ramkę zamiast zdjęcia. Przy okazji poprawiamy grupę — drukarka trafiona
+     * po numerze katalogowym ma stać w „Urządzeniach", nie w „Numerze
+     * katalogowym".
+     */
+    const uzupelnijZdjeciaUrzadzen = async <
+      T extends { id: string; product_type?: string; image_url?: string | null; match_type?: string },
+    >(
+      wiersze: T[]
+    ): Promise<T[]> => {
+      const doUzupelnienia = wiersze.filter(
+        (r) => r.product_type === 'drukarka' && !r.image_url
+      )
+      if (doUzupelnienia.length === 0) {
+        return wiersze.map((r) =>
+          r.product_type === 'drukarka' ? { ...r, match_type: 'urzadzenie' } : r
+        )
+      }
+      const { data: zdjecia } = await supabase
+        .from('products')
+        .select('id,image_urls')
+        .in('id', doUzupelnienia.map((r) => r.id))
+      const mapa = new Map(
+        (zdjecia || []).map((z: { id: string; image_urls: string[] | null }) => [
+          z.id,
+          z.image_urls?.[0] || null,
+        ])
+      )
+      return wiersze.map((r) =>
+        r.product_type === 'drukarka'
+          ? { ...r, image_url: r.image_url || mapa.get(r.id) || null, match_type: 'urzadzenie' }
+          : r
+      )
+    }
+
     /** Wspólny opis tego, jak zrozumieliśmy pytanie — pokazujemy go w podpowiedziach */
     const zrozumiano = {
       productType: parsed.productType,
@@ -161,7 +199,10 @@ export async function GET(request: Request) {
           ? czesciFinalne.slice(0, Math.min(limit, 8))
           : bezDrukarek
 
-      return NextResponse.json({ results: wyniki, parsed: zrozumiano })
+      return NextResponse.json({
+        results: await uzupelnijZdjeciaUrzadzen(wyniki),
+        parsed: zrozumiano,
+      })
     }
 
     // Full search z relevance scoring
@@ -186,14 +227,16 @@ export async function GET(request: Request) {
       (r: { product_type?: string }) => r.product_type !== 'drukarka'
     )
 
+    const produkty = intencja.urzadzenie
+      ? [...urzadzenia, ...(czesciDokladne.length > 0 ? czesciDokladne : czesci)]
+      : parsed.productType
+        ? czesciDokladne.length > 0
+          ? czesciDokladne
+          : czesci
+        : data || []
+
     return NextResponse.json({
-      products: intencja.urzadzenie
-        ? [...urzadzenia, ...(czesciDokladne.length > 0 ? czesciDokladne : czesci)]
-        : parsed.productType
-          ? czesciDokladne.length > 0
-            ? czesciDokladne
-            : czesci
-          : data || [],
+      products: await uzupelnijZdjeciaUrzadzen(produkty),
       parsed: {
         ...zrozumiano,
         productType: parsed.productType,
