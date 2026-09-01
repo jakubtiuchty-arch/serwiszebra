@@ -14,6 +14,7 @@ interface ProductPurchasePanelProps {
     price: number
     price_brutto: number
     product_type: string
+    image?: string
     stock: number
   }
   fallbackStockPL: number

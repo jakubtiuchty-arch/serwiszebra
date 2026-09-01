@@ -16,6 +16,8 @@ interface Props {
   variants: DeviceVariant[]
   fallbackNetto: number
   fallbackBrutto: number
+  /** Zdjęcie główne urządzenia — trafia do koszyka razem z wariantem */
+  zdjecie?: string
   /** Wspólny snapshot cen i stanów z DeviceBuyBlock — ten sam co w panelu */
   stany?: Record<string, StanWariantu>
   /** Czy wspólny fetch już wrócił */
@@ -151,6 +153,7 @@ export default function DeviceVariantsTable({
   variants,
   fallbackNetto,
   fallbackBrutto,
+  zdjecie,
   stany = {},
   zaladowane = false,
   wybranyPn,
@@ -257,6 +260,7 @@ export default function DeviceVariantsTable({
       product_type: 'drukarka',
       stock: s?.total ?? 1,
       variant_pn: v.pn,
+      image: zdjecie,
     })
     setDodane(v.pn)
     setTimeout(() => setDodane(null), 2000)

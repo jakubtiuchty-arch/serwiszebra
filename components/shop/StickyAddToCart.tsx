@@ -16,6 +16,7 @@ interface StickyAddToCartProps {
     price_brutto: number
     product_type: string
     stock: number
+    image?: string
   }
 }
 
@@ -71,6 +72,7 @@ export default function StickyAddToCart({ product }: StickyAddToCartProps) {
       price_brutto: effectivePriceBrutto,
       product_type: product.product_type,
       stock: effectiveStock,
+      image: product.image,
     })
     setIsAdded(true)
     setTimeout(() => setIsAdded(false), 2000)

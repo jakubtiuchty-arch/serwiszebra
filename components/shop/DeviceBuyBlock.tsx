@@ -134,6 +134,7 @@ export default function DeviceBuyBlock({
         productId={productId}
         name={name}
         slug={slug}
+        zdjecie={images[0]}
         variants={variants}
         fallbackNetto={fallbackNetto}
         fallbackBrutto={fallbackBrutto}

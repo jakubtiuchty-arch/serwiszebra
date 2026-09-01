@@ -15,6 +15,7 @@ interface AddToCartButtonProps {
     price_brutto: number
     product_type: string
     stock: number
+    image?: string
   }
 }
 
@@ -37,6 +38,7 @@ export default function AddToCartButton({ product }: AddToCartButtonProps) {
         price_brutto: product.price_brutto,
         product_type: product.product_type,
         stock: product.stock,
+        image: product.image,
       })
     }
 

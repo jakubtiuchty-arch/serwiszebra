@@ -1199,6 +1199,7 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
                     price_brutto: product.price_brutto,
                     product_type: product.product_type,
                     stock: product.stock,
+                    image: getProductImageUrl(product) || undefined,
                   }}
                   fallbackStockPL={product.attributes?.stock_pl ?? 0}
                   fallbackStockDE={product.attributes?.stock_de ?? 0}
@@ -1533,6 +1534,7 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
             price_brutto: product.price_brutto,
             product_type: product.product_type,
             stock: product.stock,
+            image: getProductImageUrl(product) || undefined,
           }}
         />
 
