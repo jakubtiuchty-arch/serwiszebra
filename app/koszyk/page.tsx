@@ -165,7 +165,7 @@ export default function KoszykPage() {
                             </div>
                             <div className="flex-1 min-w-0">
                               <Link
-                                href={`/sklep/${item.slug}`}
+                                href={item.product_type === 'drukarka' ? `/sklep/drukarki-etykiet/${item.slug}` : `/sklep/${item.slug}`}
                                 className="text-sm font-semibold text-gray-900 hover:text-gray-700 transition-colors line-clamp-2"
                               >
                                 {item.name}
@@ -247,7 +247,7 @@ export default function KoszykPage() {
                             </div>
                             <div className="flex-1 min-w-0">
                               <Link
-                                href={`/sklep/${item.slug}`}
+                                href={item.product_type === 'drukarka' ? `/sklep/drukarki-etykiet/${item.slug}` : `/sklep/${item.slug}`}
                                 className="text-sm font-semibold text-gray-900 hover:text-gray-700 transition-colors line-clamp-2"
                               >
                                 {item.name}

@@ -181,11 +181,15 @@ export default function SearchAutocomplete({
   // Navigate to product page
   const navigateToProduct = useCallback((product: AutocompleteResult) => {
     setIsOpen(false)
-    // Build URL based on product data
+    // Urządzenia mają inną ścieżkę niż części — bez tego rozróżnienia
+    // wybór drukarki z podpowiedzi kończył się stroną 404
     const slug = product.slug
-    if (slug) {
-      router.push(`/sklep/${slug}`)
-    }
+    if (!slug) return
+    router.push(
+      product.product_type === 'drukarka'
+        ? `/sklep/drukarki-etykiet/${slug}`
+        : `/sklep/${slug}`
+    )
   }, [router])
 
   // Keyboard navigation

@@ -399,6 +399,12 @@ export function getProductUrl(product: {
     return '/kontrakt-serwisowy'
   }
 
+  // Urządzenia stoją poza drzewem części: karta drukarki to
+  // /sklep/drukarki-etykiet/<slug>, nie /sklep/<slug>
+  if (product.product_type === 'drukarka') {
+    return `/sklep/drukarki-etykiet/${product.slug}`
+  }
+
   const categoryPath = getCategoryPathForProduct(product)
   
   if (categoryPath) {
