@@ -125,6 +125,10 @@ export default function DeviceAccessories({
         ? 'Akcesoria'
         : 'Części eksploatacyjne'
 
+  /** Czy blok części renderuje się jako pierwszy — decyduje o miejscu przełącznika dpi. */
+  const czesciPierwsze =
+    czesci.length > 0 && (kontekst === 'instrukcja' || opcje.length === 0)
+
   const dodaj = (p: AkcesoriumProduktu) => {
     const s = stany[p.sku]
     addItem({
@@ -143,6 +147,29 @@ export default function DeviceAccessories({
     setDodane(p.sku)
     setTimeout(() => setDodane(null), 2000)
   }
+
+  /** Wybór rozdzielczości części — ten sam element przy nagłówku sekcji i bloku. */
+  const PrzelacznikDpi = () => (
+    <div
+      role="group"
+      aria-label="Rozdzielczość drukarki"
+      className="inline-flex shrink-0 rounded-lg border border-gray-200 p-0.5"
+    >
+      {dostepneDpi.map((d) => (
+        <button
+          key={d}
+          type="button"
+          onClick={() => setDpi(d)}
+          aria-pressed={dpi === d}
+          className={`rounded-md px-3 py-1.5 text-xs font-semibold transition ${
+            dpi === d ? 'bg-gray-900 text-white' : 'text-gray-600 hover:bg-gray-50'
+          }`}
+        >
+          {d} dpi
+        </button>
+      ))}
+    </div>
+  )
 
   const Kafelek = ({ p }: { p: AkcesoriumProduktu }) => {
     const s = stany[p.sku]
@@ -237,47 +264,24 @@ export default function DeviceAccessories({
   const Czesci = ({ pierwszy }: { pierwszy: boolean }) =>
     czesci.length === 0 ? null : (
       <>
-        <div
-          className={`flex flex-wrap items-center justify-between gap-3 ${
-            pierwszy ? '' : 'mt-6 border-t border-gray-100 pt-5'
-          }`}
-        >
-          {/* Nagłówek bloku tylko wtedy, gdy nie jest jedynym w sekcji —
-              inaczej powtarzałby to, co mówi już nagłówek sekcji */}
-          {!pierwszy && (
+        {/* Gdy blok części jest pierwszy, nie ma własnego nagłówka — przełącznik
+            stoi wtedy przy nagłówku SEKCJI, więc tutaj cały ten rząd odpada.
+            Bez tego zostawał sam po lewej i wyglądał jak zgubiony element. */}
+        {!pierwszy && (
+          <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-gray-100 pt-5">
             <h3 className="text-sm font-semibold text-gray-900">Części eksploatacyjne</h3>
-          )}
-
-          {dostepneDpi.length > 1 && (
-            <div
-              role="group"
-              aria-label="Rozdzielczość drukarki"
-              className="inline-flex rounded-lg border border-gray-200 p-0.5"
-            >
-              {dostepneDpi.map((d) => (
-                <button
-                  key={d}
-                  type="button"
-                  onClick={() => setDpi(d)}
-                  aria-pressed={dpi === d}
-                  className={`rounded-md px-3 py-1.5 text-xs font-semibold transition ${
-                    dpi === d ? 'bg-gray-900 text-white' : 'text-gray-600 hover:bg-gray-50'
-                  }`}
-                >
-                  {d} dpi
-                </button>
-              ))}
-            </div>
-          )}
-        </div>
+            {dostepneDpi.length > 1 && <PrzelacznikDpi />}
+          </div>
+        )}
 
         {/* Wraca po usunięciu opisów: przełącznik pokazuje, ŻE wybór istnieje,
             ale nie mówi, czym grozi pomyłka. Głowica 300 dpi to 988 zł, a do
             drukarki 203 dpi nie pasuje — to jest zwrot, nie drobiazg. */}
         {dostepneDpi.length > 1 && (
           <p className="mt-2 text-xs text-gray-500">
-            Głowica i wałek muszą mieć tę samą rozdzielczość co drukarka — części 203 i 300 dpi nie
-            są wymienne.
+            Głowica i wałek muszą mieć tę samą rozdzielczość co drukarka — części{' '}
+            {/* wyliczenie z realnych rozdzielczości modelu: ZT411 ma trzy, nie dwie */}
+            {dostepneDpi.slice(0, -1).join(', ')} i {dostepneDpi.at(-1)} dpi nie są wymienne.
           </p>
         )}
 
@@ -292,11 +296,17 @@ export default function DeviceAccessories({
       id="akcesoria"
       className="mb-4 scroll-mt-24 rounded-xl border border-gray-200 bg-white p-4 sm:mb-6 sm:p-6"
     >
-      <h2 className="mb-3 text-sm font-semibold text-gray-900 sm:text-base">
-        {kontekst === 'instrukcja'
-          ? `Części i akcesoria do ${model ? `Zebry ${model}` : 'tego modelu'}`
-          : naglowekSekcji}
-      </h2>
+      {/* Przełącznik rozdzielczości stoi w rzędzie nagłówka, gdy części są
+          pierwszym blokiem: nie mają wtedy własnego nagłówka, przy którym
+          mógłby stanąć (tak jest np. w ZT411, gdzie nie ma osobnych akcesoriów). */}
+      <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
+        <h2 className="text-sm font-semibold text-gray-900 sm:text-base">
+          {kontekst === 'instrukcja'
+            ? `Części i akcesoria do ${model ? `Zebry ${model}` : 'tego modelu'}`
+            : naglowekSekcji}
+        </h2>
+        {czesciPierwsze && dostepneDpi.length > 1 && <PrzelacznikDpi />}
+      </div>
 
       <p aria-live="polite" className="sr-only">
         {dodane ? `Dodano ${dodane} do koszyka` : ''}
