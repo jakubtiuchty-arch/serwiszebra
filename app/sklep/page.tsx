@@ -51,7 +51,7 @@ const faqItems = [
   },
   {
     question: 'Jaka jest różnica między głowicą 203 DPI a 300 DPI?',
-    answer: '203 DPI (8 punktów/mm) to standardowa rozdzielczość wystarczająca dla etykiet logistycznych, kodów kreskowych 1D i etykiet wysyłkowych. 300 DPI (12 punktów/mm) oferuje wyższą jakość — idealna dla małych kodów 2D (QR, DataMatrix), drobnego tekstu i etykiet farmaceutycznych. Głowica 300 DPI jest droższa (zwykle o 50-100%) i ma krótszą żywotność niż 203 DPI. Głowice nie są zamienne między rozdzielczościami — drukarka rozpoznaje zainstalowaną rozdzielczość automatycznie.'
+    answer: '203 DPI (8 punktów/mm) to standardowa rozdzielczość wystarczająca dla etykiet logistycznych, kodów kreskowych 1D i etykiet wysyłkowych. 300 DPI (12 punktów/mm) oferuje wyższą jakość — idealna dla małych kodów 2D (QR, DataMatrix), drobnego tekstu i etykiet farmaceutycznych. Głowica 300 dpi kosztuje więcej i ma krótszą żywotność niż 203 dpi. Głowice nie są zamienne między rozdzielczościami — drukarka rozpoznaje zainstalowaną rozdzielczość automatycznie.'
   }
 ]
 
@@ -77,81 +77,43 @@ export default function SklepPage() {
               Tailwinda (co 5%), bo wartości spoza niej nie generują klasy. */}
           <div className="absolute inset-0 bg-slate-950/75 sm:bg-transparent sm:bg-gradient-to-r sm:from-slate-950 sm:from-22% sm:via-slate-950/70 sm:via-52% sm:to-transparent sm:to-80%" />
           <div className="relative max-w-6xl mx-auto px-4 py-8 sm:py-10 md:py-12 min-h-[200px] md:min-h-[240px] flex flex-col justify-center">
-            <div className="flex items-center gap-2 mb-2">
-              <ShoppingCart className="w-4 h-4 text-blue-300" />
-              <span className="text-blue-300 font-medium text-xs sm:text-sm">Sklep Zebra</span>
-            </div>
-
             <h1 className="text-xl sm:text-2xl md:text-3xl font-semibold text-white mb-2">
               Urządzenia i części zamienne Zebra
             </h1>
 
             <p className="text-sm text-gray-200 mb-4 max-w-xl">
-              Drukarki etykiet, terminale, skanery i tablety Zebra oraz oryginalne części:
-              głowice 203/300/600 DPI, wałki dociskowe i akumulatory. Ceny i stany na żywo,
-              gwarancję realizujemy we własnym autoryzowanym serwisie.
+              Drukarki etykiet, terminale, skanery i tablety Zebra oraz części zamienne:
+              głowice 203, 300 i 600 dpi, wałki dociskowe, akumulatory i moduły łączności.
+              Ceny i stany magazynowe pobieramy na żywo od dystrybutorów, a naprawy
+              gwarancyjne prowadzimy we własnym autoryzowanym serwisie Zebry.
             </p>
 
-            <div className="flex gap-2 overflow-x-auto pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 sm:overflow-visible">
-              <div className="bg-white/10 border border-white/25 backdrop-blur-sm px-2.5 py-1 rounded-full text-xs whitespace-nowrap">
-                <span className="text-gray-100">Oryginalny sprzęt i części</span>
-              </div>
-              <div className="bg-white/10 border border-white/25 backdrop-blur-sm px-2.5 py-1 rounded-full text-xs whitespace-nowrap">
-                <span className="text-gray-100">Wysyłka 24h</span>
-              </div>
-              <div className="bg-white/10 border border-white/25 backdrop-blur-sm px-2.5 py-1 rounded-full text-xs whitespace-nowrap">
-                <span className="text-gray-100">Gwarancja w naszym serwisie</span>
-              </div>
-            </div>
           </div>
         </section>
 
         {/* Interactive Shop - Client Component */}
         <ShopMainPage />
 
-        {/* === SEKCJA SEO 0: Key Facts Box === */}
-        <section className="py-6 sm:py-8 bg-blue-50 border-t border-blue-100">
-          <div className="max-w-4xl mx-auto px-4">
-            <div className="bg-white rounded-xl border border-blue-200 p-5 sm:p-6 shadow-sm">
-              <h2 className="text-base sm:text-lg font-bold text-gray-900 mb-3">
-                Sklep TAKMA — oryginalne części zamienne Zebra
-              </h2>
-              <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
-                <strong>TAKMA</strong> to autoryzowany partner serwisowy <strong>Zebra Technologies</strong> w Polsce.
-                Oferujemy wyłącznie <strong>100% oryginalne części zamienne</strong> do drukarek etykiet Zebra:
-                głowice drukujące w rozdzielczościach <strong>203, 300 i 600 DPI</strong>, wałki dociskowe (platen roller)
-                oraz akumulatory do urządzeń mobilnych. Wszystkie komponenty pochodzą z oficjalnego kanału dystrybucji
-                i objęte są <strong>12-miesięczną gwarancją producenta</strong>. Wysyłka z magazynu w Polsce
-                w ciągu <strong>24 godzin</strong>. Obsługujemy klientów biznesowych (B2B) na fakturę z odroczonym terminem płatności.
-                Oprócz sprzedaży części oferujemy <strong>profesjonalną wymianę w serwisie</strong> — z odbiorem kurierskim
-                i kalibracją po montażu.
-              </p>
-            </div>
-          </div>
-        </section>
-
         {/* === SEKCJA SEO 1: Rozszerzony przewodnik kupującego (~800 słów) === */}
         <section className="py-8 sm:py-12 bg-white border-t border-gray-100">
           <div className="max-w-4xl mx-auto px-4">
             <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">
-              Części zamienne Zebra — kompletny przewodnik kupującego
+              Jak dobrać część zamienną do drukarki Zebra
             </h2>
             <div className="prose prose-sm sm:prose-base prose-gray max-w-none">
               <p className="text-gray-600 leading-relaxed mb-4">
-                W naszym sklepie znajdziesz <strong>oryginalne części zamienne do drukarek etykiet Zebra</strong> —
-                głowice drukujące, wałki dociskowe, akumulatory i akcesoria. Jako autoryzowany partner serwisowy Zebra
-                Technologies oferujemy wyłącznie komponenty z gwarancją producenta, zapewniające pełną kompatybilność
-                i niezawodność. Każda część w naszym sklepie jest fabrycznie nowa i pochodzi z oficjalnego kanału
-                dystrybucji Zebra Technologies. Dostarczamy do firm w całej Polsce — od małych biur po duże centra
-                logistyczne i zakłady produkcyjne.
+                Części zamienne dobiera się do konkretnego modelu drukarki i jego rozdzielczości — ten sam
+                element w wersji 203 i 300 dpi ma inny numer katalogowy i nie jest zamienny. Poniżej zebraliśmy
+                dane, które rozstrzygają wybór: co robi każdy z podzespołów, ile realnie wytrzymuje i po czym
+                poznać, że nadchodzi wymiana.
               </p>
 
-              <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">Głowice drukujące Zebra — serce drukarki etykiet</h3>
+              <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">Głowica drukująca</h3>
               <p className="text-gray-600 leading-relaxed mb-4">
-                <strong>Głowica drukująca (printhead)</strong> to kluczowy element drukarki etykiet — odpowiada za
-                przenoszenie obrazu na materiał metodą termiczną. Zawiera setki mikro-elementów grzewczych, które
-                kontrolowanym nagrzewaniem aktywują papier termiczny lub topią taśmę barwiącą (ribbon). Od stanu głowicy
-                zależy jakość wydruku, czytelność kodów kreskowych i ogólna niezawodność procesu etykietowania.
+                Głowica zawiera rząd mikroskopijnych elementów grzewczych: nagrzewają one papier termoczuły albo
+                topią taśmę barwiącą. Zużyta głowica daje białe pasy wzdłuż wydruku i kody kreskowe, których czytnik
+                nie odczyta — pojedynczy przepalony element grzewczy widać jako cienką, niezadrukowaną linię biegnącą
+                przez całą etykietę.
               </p>
               <p className="text-gray-600 leading-relaxed mb-4">
                 Oferujemy głowice w rozdzielczościach <strong>203, 300 i 600 DPI</strong> do drukarek biurkowych
@@ -175,8 +137,8 @@ export default function SklepPage() {
                 Porównanie rozdzielczości: 203 DPI vs 300 DPI vs 600 DPI
               </h3>
               <p className="text-gray-600 leading-relaxed mb-3">
-                Wybór rozdzielczości głowicy zależy od wymagań aplikacji. Poniższa tabela pomoże dobrać
-                optymalną rozdzielczość do Twoich potrzeb:
+                Rozdzielczości nie da się zmienić w tej samej drukarce — głowica 203 dpi i 300 dpi to dwa
+                różne numery katalogowe. Poniżej różnice, które rozstrzygają wybór:
               </p>
               <div className="overflow-x-auto mb-6">
                 <table className="w-full text-sm border-collapse">
@@ -202,12 +164,6 @@ export default function SklepPage() {
                       <td className="px-4 py-2 text-gray-600">Jubilerstwo, mikro-kody, etykiety precyzyjne</td>
                     </tr>
                     <tr className="hover:bg-gray-50">
-                      <td className="px-4 py-2 font-medium text-gray-900">Cena głowicy (od)</td>
-                      <td className="px-4 py-2 text-gray-600">~400 zł netto</td>
-                      <td className="px-4 py-2 text-gray-600">~800 zł netto</td>
-                      <td className="px-4 py-2 text-gray-600">~2 000 zł netto</td>
-                    </tr>
-                    <tr className="hover:bg-gray-50">
                       <td className="px-4 py-2 font-medium text-gray-900">Żywotność</td>
                       <td className="px-4 py-2 text-gray-600">50-150 km</td>
                       <td className="px-4 py-2 text-gray-600">30-100 km</td>
@@ -225,11 +181,11 @@ export default function SklepPage() {
 
               <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">Wałki dociskowe (platen roller)</h3>
               <p className="text-gray-600 leading-relaxed mb-4">
-                <strong>Wałek dociskowy (platen roller)</strong> to gumowy cylinder zapewniający równomierny transport
-                etykiety pod głowicą drukującą. Współpracuje z głowicą, zapewniając stały docisk materiału na całej
-                szerokości druku. Zużyty wałek powoduje paski, nierówny wydruk i przyspieszony wear głowicy —
-                Zebra zaleca wymianę wałka przy każdej wymianie głowicy. Średnia żywotność to <strong>150-300 km
-                wydruku</strong> (500 000 - 1 000 000 etykiet). Popularne Part Numbers:{' '}
+                Gumowy wałek przesuwa etykietę pod głowicą i dociska ją na całej szerokości. Zużyty — spłaszczony
+                w miejscach największego nacisku albo pokryty klejem — przesuwa materiał nierówno i zwiększa tarcie,
+                przez co głowica zużywa się szybciej. Z tego powodu producent zaleca wymianę wałka przy każdej
+                wymianie głowicy. Typowa żywotność to <strong>150–300 km wydruku</strong>. Najczęściej zamawiane
+                numery katalogowe:{' '}
                 <strong>P1058930-080</strong> (ZT411), <strong>P1083347-005</strong> (ZT610),{' '}
                 <strong>P1112640-016</strong> (ZD421/ZD621).{' '}
                 <Link href="/sklep/walki-dociskowe" className="text-blue-600 hover:text-blue-800 font-medium">
@@ -239,10 +195,10 @@ export default function SklepPage() {
 
               <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">Akumulatory do urządzeń mobilnych Zebra</h3>
               <p className="text-gray-600 leading-relaxed mb-4">
-                Oryginalne <strong>akumulatory litowo-jonowe (Li-Ion)</strong> do drukarek mobilnych (ZQ520, ZQ630),
-                terminali (TC21, TC52, TC72) i skanerów Zebra. Pojemności od 2500 mAh do 6400 mAh, zapewniające
-                4-14 godzin pracy na jednym ładowaniu. Żywotność: 300-500 pełnych cykli ładowania (2-3 lata).
-                Certyfikowane ogniwa z zabezpieczeniami przed przegrzaniem, przeładowaniem i zwarciem.{' '}
+                Akumulatory do drukarek mobilnych, terminali i skanerów. Pojemności od 2500 do 6400 mAh, co przy
+                typowym obciążeniu daje od czterech do czternastu godzin pracy. Ogniwo wytrzymuje 300–500 pełnych
+                cykli ładowania, czyli zwykle dwa do trzech lat codziennej pracy — po tym czasie czas pracy skraca
+                się na tyle, że urządzenie nie dociąga do końca zmiany.{' '}
                 <Link href="/sklep/akumulatory" className="text-blue-600 hover:text-blue-800 font-medium">
                   Zobacz akumulatory Zebra →
                 </Link>
@@ -271,15 +227,6 @@ export default function SklepPage() {
                 </li>
               </ol>
 
-              <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">Dlaczego kupować u nas?</h3>
-              <ul className="list-disc list-inside space-y-2 text-gray-600 mb-4">
-                <li><strong>Autoryzowany partner serwisowy Zebra</strong> — certyfikowane kompetencje i bezpośredni dostęp do oryginalnych części</li>
-                <li><strong>100% oryginalne części</strong> z gwarancją producenta 12 miesięcy — żadnych zamienników ani refabrykowanych komponentów</li>
-                <li><strong>Magazyn w Polsce</strong> — wysyłka w 24h dla produktów na stanie, 3-7 dni dla części z magazynu centralnego Zebra</li>
-                <li><strong>Profesjonalny serwis wymiany</strong> — jeśli nie chcesz wymieniać samodzielnie, zrobimy to za Ciebie z odbiorem kurierskim</li>
-                <li><strong>Wsparcie techniczne</strong> — pomoc w doborze części, diagnostyce problemów i kalibracji po wymianie</li>
-                <li><strong>Faktury VAT z odroczonym terminem</strong> — obsługujemy klientów biznesowych (B2B) z elastycznymi warunkami płatności</li>
-              </ul>
             </div>
           </div>
         </section>
@@ -473,9 +420,9 @@ export default function SklepPage() {
             </h2>
             <div className="space-y-4">
               {faqItems.map((item, index) => (
-                <div key={index} className="border-l-4 border-blue-500 pl-4">
+                <div key={index} className="border-b border-gray-100 pb-4 last:border-0">
                   <p className="font-semibold text-gray-900">{item.question}</p>
-                  <p className="text-gray-600 text-sm mt-1">{item.answer}</p>
+                  <p className="mt-1.5 text-sm leading-relaxed text-gray-600">{item.answer}</p>
                 </div>
               ))}
             </div>
@@ -485,13 +432,13 @@ export default function SklepPage() {
         {/* === SEKCJA SEO 4: CTA Box === */}
         <section className="py-8 sm:py-12 bg-gray-50 border-t border-gray-100">
           <div className="max-w-4xl mx-auto px-4">
-            <div className="bg-blue-50 border border-blue-100 rounded-xl p-6 sm:p-8 text-center">
-              <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-3">
-                Nie wiesz jaką część wybrać?
+            <div className="rounded-xl border border-gray-200 bg-white p-6 text-center sm:p-8">
+              <h2 className="mb-3 text-lg font-bold text-gray-900 sm:text-xl">
+                Nie masz pewności, która część pasuje?
               </h2>
-              <p className="text-gray-600 text-sm sm:text-base mb-5 max-w-xl mx-auto">
-                Zadzwoń lub napisz — pomożemy dobrać odpowiedni komponent do Twojej drukarki Zebra.
-                Nasi technicy znają każdy model i doradzą najlepsze rozwiązanie.
+              <p className="mx-auto mb-5 max-w-xl text-sm leading-relaxed text-gray-600 sm:text-base">
+                Podaj model drukarki z tabliczki znamionowej albo numer katalogowy ze starej części —
+                sprawdzimy zgodność i odpiszemy z konkretnym numerem do zamówienia.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
                 <a

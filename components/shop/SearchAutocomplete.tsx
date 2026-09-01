@@ -26,6 +26,8 @@ interface AutocompleteResult {
   } | null
   match_type: string
   relevance: number
+  /** Uzasadnienie dopasowania przy wynikach urządzeń */
+  powod?: string | null
 }
 
 function isProductAvailable(result: AutocompleteResult): boolean {
@@ -43,6 +45,12 @@ interface ParsedInfo {
   sortIntent: string | null
   suggestedModels: string[]
   isPartNumber: boolean
+  /** Czy pytanie zrozumieliśmy jako pytanie o sprzęt, nie o część */
+  urzadzenie?: boolean
+  klasa?: string | null
+  cechy?: string[]
+  zastosowanie?: string | null
+  budzet?: number | null
 }
 
 interface SearchAutocompleteProps {
@@ -378,9 +386,10 @@ export default function SearchAutocomplete({
             <div key={matchType}>
               <div className="px-3 py-1.5 bg-gray-50 border-b border-gray-100">
                 <span className="text-[10px] font-semibold text-gray-500 uppercase tracking-wider">
+                  {matchType === 'urzadzenie' && 'Urządzenia'}
                   {matchType === 'sku' && 'Part Number'}
                   {matchType === 'model' && 'Modele'}
-                  {matchType === 'name' && 'Produkty'}
+                  {matchType === 'name' && 'Części'}
                   {matchType === 'other' && 'Wyniki'}
                 </span>
               </div>
@@ -418,10 +427,25 @@ export default function SearchAutocomplete({
                     {/* Info */}
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-medium text-gray-900 line-clamp-2 leading-tight">
-                        {result.product_type === 'glowica' ? 'Głowica' : result.product_type === 'walek' ? 'Wałek' : result.name}
-                        {result.resolution_dpi ? ` ${result.resolution_dpi} DPI` : ''}
-                        {result.device_model ? ` ${result.device_model}` : ''}
+                        {result.product_type === 'drukarka'
+                          ? result.name
+                          : result.product_type === 'glowica'
+                            ? 'Głowica'
+                            : result.product_type === 'walek'
+                              ? 'Wałek'
+                              : result.name}
+                        {result.product_type !== 'drukarka' && result.resolution_dpi
+                          ? ` ${result.resolution_dpi} DPI`
+                          : ''}
+                        {result.product_type !== 'drukarka' && result.device_model
+                          ? ` ${result.device_model}`
+                          : ''}
                       </p>
+                      {result.powod && (
+                        <p className="mt-0.5 text-[11px] text-gray-500 line-clamp-1">
+                          {result.powod}
+                        </p>
+                      )}
                       <div className="flex items-center gap-1 mt-0.5">
                         <span className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${
                           (liveStock[result.sku] !== undefined ? liveStock[result.sku] : isProductAvailable(result))

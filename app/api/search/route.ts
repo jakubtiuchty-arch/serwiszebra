@@ -1,6 +1,12 @@
 import { NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { parseSearchQuery } from '@/lib/search'
+import {
+  ocenModel,
+  rozpoznajIntencjeUrzadzenia,
+  type WierszUrzadzenia,
+  type WynikUrzadzenia,
+} from '@/lib/search/devices'
 
 export async function GET(request: Request) {
   try {
@@ -13,6 +19,95 @@ export async function GET(request: Request) {
 
     // Parsuj zapytanie
     const parsed = parseSearchQuery(q)
+
+    /**
+     * Ścieżka urządzeń. Uruchamia się, gdy pytanie dotyczy sprzętu, a nie
+     * części — wtedy dopasowanie liczymy z klasy, wyposażenia i szerokości
+     * wydruku, zamiast szukać frazy w nazwach części. Bez tego „najtańsza
+     * drukarka biurkowa" zwracała wałki dociskowe do drukarek biurkowych.
+     */
+    const intencja = rozpoznajIntencjeUrzadzenia(q, parsed.deviceModel)
+    const urzadzenia: WynikUrzadzenia[] = []
+
+    if (intencja.urzadzenie && q.length >= 2) {
+      const { data: sprzet } = await supabase
+        .from('products')
+        .select('id,name,slug,device_model,price,price_brutto,sku,image_urls,attributes')
+        .eq('product_type', 'drukarka')
+        .eq('is_active', true)
+
+      for (const d of (sprzet || []) as WierszUrzadzenia[]) {
+        const wynik = ocenModel(d, intencja, q, !!parsed.deviceModel)
+        if (wynik) urzadzenia.push(wynik)
+      }
+
+      // Skoro klient nazwał model, lista ma pokazać właśnie jego, a nie
+      // wszystkie drukarki spełniające dodatkowy warunek z zapytania
+      if (parsed.deviceModel) {
+        const nazwa = parsed.deviceModel.toLowerCase().replace(/\s+/g, '')
+        const trafione = urzadzenia.filter((u) =>
+          u.device_model.toLowerCase().replace(/\s+/g, '').includes(nazwa)
+        )
+        if (trafione.length > 0) {
+          urzadzenia.length = 0
+          urzadzenia.push(...trafione)
+        }
+      }
+
+      urzadzenia.sort((a, b) =>
+        parsed.sortIntent === 'price_asc'
+          ? a.price - b.price
+          : parsed.sortIntent === 'price_desc'
+            ? b.price - a.price
+            : b.relevance - a.relevance || a.price - b.price
+      )
+    }
+
+    /**
+     * Ścieżka części z twardym filtrem. RPC rankuje po podobieństwie tekstu
+     * i przy ośmiu wynikach potrafi w ogóle nie zwrócić właściwej pozycji —
+     * „głowica 300 dpi ZD621" gubiła głowicę 300 dpi, bo w pierwszej ósemce
+     * były gilotyna i wałek do tego samego modelu. Gdy parser rozpoznał typ
+     * części, pytamy bazę wprost o ten typ, rozdzielczość i model.
+     */
+    let czesciDokladne: unknown[] = []
+    if (parsed.productType) {
+      let zapytanie = supabase
+        .from('products')
+        .select('*')
+        .eq('is_active', true)
+        .eq('product_type', parsed.productType)
+      if (parsed.resolution) zapytanie = zapytanie.eq('resolution_dpi', parsed.resolution)
+      // Parser zna modele drukarek z katalogu głowic; przy urządzeniach spoza
+      // tej listy (ZQ630, ZT231) model trzeba wyłuskać z samego zapytania,
+      // inaczej „akumulator ZQ630" oddaje akumulator do przypadkowego modelu
+      const modelZTekstu =
+        parsed.deviceModel || q.match(/\b(z[dqt]\d{3}[a-z]*)\b/i)?.[1] || null
+      if (modelZTekstu) {
+        zapytanie = zapytanie.or(
+          `device_model.ilike.%${modelZTekstu}%,name.ilike.%${modelZTekstu}%`
+        )
+      }
+      const { data: trafione } = await zapytanie
+        .order('price', { ascending: parsed.sortIntent !== 'price_desc' })
+        .limit(limit)
+      czesciDokladne = trafione || []
+    }
+
+    /** Wspólny opis tego, jak zrozumieliśmy pytanie — pokazujemy go w podpowiedziach */
+    const zrozumiano = {
+      productType: parsed.productType,
+      resolution: parsed.resolution,
+      deviceModel: parsed.deviceModel,
+      sortIntent: parsed.sortIntent,
+      suggestedModels: parsed.suggestedModels,
+      isPartNumber: parsed.isPartNumber,
+      urzadzenie: intencja.urzadzenie,
+      klasa: intencja.klasa,
+      cechy: intencja.cechy,
+      zastosowanie: intencja.zastosowanie,
+      budzet: intencja.budzet,
+    }
 
     if (mode === 'autocomplete') {
       // Lekki autocomplete — szybkie wyniki do dropdown
@@ -38,17 +133,35 @@ export async function GET(request: Request) {
         return await fallbackSearch(supabase, q, limit, parsed)
       }
 
-      return NextResponse.json({
-        results: data || [],
-        parsed: {
-          productType: parsed.productType,
-          resolution: parsed.resolution,
-          deviceModel: parsed.deviceModel,
-          sortIntent: parsed.sortIntent,
-          suggestedModels: parsed.suggestedModels,
-          isPartNumber: parsed.isPartNumber,
-        },
+      // Urządzenia idą przed częściami: pytanie o sprzęt ma dostać sprzęt,
+      // a nie część pasującą do sprzętu o tej samej nazwie
+      // Pytanie o część nie może zwracać drukarek: „głowica 300 dpi ZD621"
+      // to prośba o głowicę, a nie o drukarkę, w której ona siedzi
+      const czesci = (data || []).filter(
+        (r: { product_type?: string }) => r.product_type !== 'drukarka'
+      )
+      // RPC rankuje po samym tekście, więc „wałek zd621" potrafiło zwrócić
+      // gilotynę do ZD621 przed wałkiem. Typ i rozdzielczość z parsera są
+      // twardym filtrem, nie podpowiedzią.
+      const czesciDopasowane = czesci.filter((r: { product_type?: string; resolution_dpi?: number | null }) => {
+        if (parsed.productType && r.product_type !== parsed.productType) return false
+        if (parsed.resolution && r.resolution_dpi && r.resolution_dpi !== parsed.resolution) return false
+        return true
       })
+
+      // Pytanie o część nie może otwierać listy drukarką, nawet jeśli RPC
+      // uzna ją za najlepsze dopasowanie tekstowe („gilotyna ZD421")
+      const bezDrukarek = intencja.czesc
+        ? (data || []).filter((r: { product_type?: string }) => r.product_type !== 'drukarka')
+        : data || []
+      const czesciFinalne = czesciDokladne.length > 0 ? czesciDokladne : czesciDopasowane
+      const wyniki = intencja.urzadzenie
+        ? [...urzadzenia.slice(0, 6), ...czesciFinalne].slice(0, Math.min(limit, 8))
+        : parsed.productType
+          ? czesciFinalne.slice(0, Math.min(limit, 8))
+          : bezDrukarek
+
+      return NextResponse.json({ results: wyniki, parsed: zrozumiano })
     }
 
     // Full search z relevance scoring
@@ -69,9 +182,20 @@ export async function GET(request: Request) {
       return await fallbackSearch(supabase, q, limit, parsed)
     }
 
+    const czesci = (data || []).filter(
+      (r: { product_type?: string }) => r.product_type !== 'drukarka'
+    )
+
     return NextResponse.json({
-      products: data || [],
+      products: intencja.urzadzenie
+        ? [...urzadzenia, ...(czesciDokladne.length > 0 ? czesciDokladne : czesci)]
+        : parsed.productType
+          ? czesciDokladne.length > 0
+            ? czesciDokladne
+            : czesci
+          : data || [],
       parsed: {
+        ...zrozumiano,
         productType: parsed.productType,
         resolution: parsed.resolution,
         deviceModel: parsed.deviceModel,
