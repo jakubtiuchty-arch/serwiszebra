@@ -9,6 +9,12 @@
  * i która go dotyczy.
  */
 
+/** Tyle o zgłoszeniu musi wiedzieć reguła wyboru oferty */
+export interface NaprawaDlaOfert {
+  device_type?: string | null
+  status: string
+}
+
 export interface OfertaPanelu {
   /** Klucz w localStorage. Zmiana id sprawia, że odrzucona wcześniej oferta wraca. */
   id: string
@@ -27,7 +33,23 @@ export interface OfertaPanelu {
   obrazAlt: string
   /** Nie pokazuj klientowi, który ma już kontrakt na którekolwiek urządzenie */
   ukryjGdyMaKontrakt?: boolean
+  /**
+   * Komu ofertę pokazać — reguła liczona z listy zgłoszeń klienta.
+   * Bez pola oferta dotyczy każdego zalogowanego.
+   */
+  pokazGdy?: (naprawy: NaprawaDlaOfert[]) => boolean
 }
+
+/**
+ * Statusy, w których klient ma już wycenę od serwisanta: od jej wystawienia
+ * aż do wysyłki. Przed wyceną (nowe, odbiór, odebrane, diagnoza) nie ma jeszcze
+ * do czego dopiąć argumentu „następnym razem bez rachunku".
+ */
+const STATUSY_Z_WYCENA = ['wycena', 'w_naprawie', 'zakonczone']
+
+/** Klient ma w toku naprawę drukarki, dla której serwisant wystawił wycenę */
+export const drukarkaZWycena = (naprawy: NaprawaDlaOfert[]) =>
+  naprawy.some((n) => n.device_type === 'drukarka' && STATUSY_Z_WYCENA.includes(n.status))
 
 export const OFERTY_PANELU: OfertaPanelu[] = [
   {
@@ -44,5 +66,7 @@ export const OFERTY_PANELU: OfertaPanelu[] = [
     wideo: '/oferty/kontrakt-serwisowy.mp4',
     obrazAlt: '',
     ukryjGdyMaKontrakt: true,
+    // Kontrakt sprzedaje się w momencie, gdy klient patrzy na rachunek za naprawę drukarki
+    pokazGdy: drukarkaZWycena,
   },
 ]

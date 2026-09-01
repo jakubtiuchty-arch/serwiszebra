@@ -23,6 +23,7 @@ interface Repair {
   serial_number: string | null
   issue_description: string
   status: string
+  device_type: string | null
   created_at: string
   urgency: 'niska' | 'srednia' | 'wysoka' | 'krytyczna' | null
 }
@@ -227,7 +228,7 @@ export default function DashboardPage() {
       </div>
 
       {/* OFERTA DLA KLIENTA SERWISU */}
-      <PasOfertowy />
+      <PasOfertowy naprawy={repairs} />
 
       {/* WYKRES + WYMAGAJĄ AKCJI - KOMPAKTOWE */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">

@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { X, ArrowRight } from 'lucide-react'
-import { OFERTY_PANELU, type OfertaPanelu } from '@/lib/panel-offers'
+import { OFERTY_PANELU, type NaprawaDlaOfert, type OfertaPanelu } from '@/lib/panel-offers'
 
 /**
  * „×" ukrywa ofertę na 30 dni, nie na zawsze — kontrakt jest ofertą stałą, a klient
@@ -27,15 +27,28 @@ function ukryta(id: string): boolean {
   }
 }
 
-export default function PasOfertowy() {
+/**
+ * `naprawy` — zgłoszenia klienta, z których reguły ofert wybierają odbiorców.
+ * Dashboard podaje całą listę, strona zgłoszenia jedno zgłoszenie. Dopóki lista
+ * jest pusta (jeszcze się ładuje), pas nie wyskakuje i nie znika po chwili.
+ */
+export default function PasOfertowy({ naprawy }: { naprawy: NaprawaDlaOfert[] }) {
   const [oferta, setOferta] = useState<OfertaPanelu | null>(null)
+  // Rodzic bywa renderowany często (czat, odświeżanie); wybór oferty ma się
+  // przeliczać tylko, gdy zmieni się to, co reguły faktycznie czytają
+  const kluczNapraw = naprawy.map((n) => `${n.device_type ?? ''}:${n.status}`).join('|')
 
   useEffect(() => {
     let anulowane = false
 
     async function wybierzOferte() {
-      const widoczne = OFERTY_PANELU.filter((o) => !ukryta(o.id))
-      if (widoczne.length === 0) return
+      const widoczne = OFERTY_PANELU.filter(
+        (o) => !ukryta(o.id) && (!o.pokazGdy || o.pokazGdy(naprawy))
+      )
+      if (widoczne.length === 0) {
+        setOferta(null)
+        return
+      }
 
       // Klientowi, który kontrakt już ma, nie sprzedajemy go drugi raz
       let maKontrakt = false
@@ -52,14 +65,15 @@ export default function PasOfertowy() {
       }
 
       const wybrana = widoczne.find((o) => !(o.ukryjGdyMaKontrakt && maKontrakt))
-      if (!anulowane && wybrana) setOferta(wybrana)
+      if (!anulowane) setOferta(wybrana ?? null)
     }
 
     wybierzOferte()
     return () => {
       anulowane = true
     }
-  }, [])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [kluczNapraw])
 
   if (!oferta) return null
 

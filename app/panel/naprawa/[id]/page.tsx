@@ -33,6 +33,7 @@ import { format } from 'date-fns'
 import { pl } from 'date-fns/locale'
 import PhotoGallery from '@/components/PhotoGallery'
 import MiniTimeline from '@/components/MiniTimeline'
+import PasOfertowy from '@/components/panel/PasOfertowy'
 import Link from 'next/link'
 
 // Formatowanie ceny z miejscami po przecinku (555,00 zł)
@@ -73,6 +74,7 @@ interface Repair {
   updated_at: string
   // Nowe pola dla gwarancji
   repair_type: 'paid' | 'warranty' | 'warranty_rejected'
+  device_type?: string | null
   is_warranty: boolean
   // Notatki serwisowe
   service_notes: string | null
@@ -651,6 +653,11 @@ const handlePaymentSuccess = async () => {
   }
   return null
 })()}
+
+{/* Oferta przy wycenie: klient patrzy na rachunek za naprawę, więc to jest moment na kontrakt */}
+<div className="max-w-[1800px] 2xl:max-w-[2200px] mx-auto px-2 mt-3 empty:hidden">
+  <PasOfertowy naprawy={[repair]} />
+</div>
 
 {/* Content */}
 <div className="max-w-[1800px] 2xl:max-w-[2200px] mx-auto px-2 py-3 md:py-6">
