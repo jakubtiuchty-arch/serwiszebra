@@ -25,7 +25,7 @@ const PRODUCT_TYPE_ICONS: Record<string, any> = {
   kabel: Cable
 }
 
-import { getProductFallbackImage } from '@/lib/product-images'
+import { zdjecieWKoszyku } from '@/lib/product-images'
 
 export default function KoszykPage() {
   const [mounted, setMounted] = useState(false)
@@ -151,9 +151,9 @@ export default function KoszykPage() {
                           {/* PRODUCT INFO - KOMPAKTOWY */}
                           <div className="col-span-5 flex items-center gap-3">
                             <div className="w-14 h-14 bg-white rounded-lg flex items-center justify-center flex-shrink-0 border border-gray-100 overflow-hidden">
-                              {getProductFallbackImage(item.product_type, item.device_model, item.resolution_dpi, item.sku) ? (
+                              {zdjecieWKoszyku(item) ? (
                                 <Image
-                                  src={getProductFallbackImage(item.product_type, item.device_model, item.resolution_dpi, item.sku)!}
+                                  src={zdjecieWKoszyku(item)!}
                                   alt={item.name}
                                   width={48}
                                   height={48}
@@ -233,9 +233,9 @@ export default function KoszykPage() {
                         <div className="md:hidden space-y-2">
                           <div className="flex gap-3">
                             <div className="w-14 h-14 bg-white rounded-lg flex items-center justify-center flex-shrink-0 border border-gray-100 overflow-hidden">
-                              {getProductFallbackImage(item.product_type, item.device_model, item.resolution_dpi, item.sku) ? (
+                              {zdjecieWKoszyku(item) ? (
                                 <Image
-                                  src={getProductFallbackImage(item.product_type, item.device_model, item.resolution_dpi, item.sku)!}
+                                  src={zdjecieWKoszyku(item)!}
                                   alt={item.name}
                                   width={48}
                                   height={48}

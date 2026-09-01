@@ -18,7 +18,7 @@ import {
   FileText
 } from 'lucide-react'
 
-import { getProductFallbackImage } from '@/lib/product-images'
+import { zdjecieWKoszyku } from '@/lib/product-images'
 
 interface OrderFormData {
   // Dane kontaktowe
@@ -313,9 +313,9 @@ export default function ZamowieniePage() {
                     {items.map((item) => (
                       <div key={item.id} className="flex gap-2 sm:gap-3">
                         <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gray-50 rounded-lg flex items-center justify-center flex-shrink-0">
-                          {getProductFallbackImage(item.product_type, item.device_model, item.resolution_dpi, item.sku) ? (
+                          {zdjecieWKoszyku(item) ? (
                             <Image
-                              src={getProductFallbackImage(item.product_type, item.device_model, item.resolution_dpi, item.sku)!}
+                              src={zdjecieWKoszyku(item)!}
                               alt={item.name}
                               width={40}
                               height={40}

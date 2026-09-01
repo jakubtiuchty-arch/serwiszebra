@@ -98,3 +98,24 @@ export function getProductFallbackImage(
   const dpi = resolutionDpi || 203
   return `/sklep_photo/glowica-${dpi}dpi-do-drukarki-zebra-${modelSlug}.png`
 }
+
+/**
+ * Miniatura pozycji w koszyku i w zamówieniu.
+ *
+ * Najpierw zdjęcie zapisane przy dodaniu do koszyka (urządzenia i akcesoria
+ * mają własne), dopiero potem podstawienie po typie i numerze katalogowym.
+ * Bez tego pierwszeństwa drukarki dostawały ikonę paczki, bo dla typu
+ * „drukarka" fallback z definicji nic nie zwraca.
+ */
+export function zdjecieWKoszyku(item: {
+  image?: string | null
+  product_type: string
+  device_model?: string | null
+  resolution_dpi?: number | null
+  sku?: string | null
+}): string | null {
+  return (
+    item.image ||
+    getProductFallbackImage(item.product_type, item.device_model, item.resolution_dpi, item.sku)
+  )
+}
