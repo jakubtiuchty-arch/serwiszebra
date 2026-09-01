@@ -2463,9 +2463,9 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     ],
     zweryfikowano: '2026-08-31',
     poradniki: [
-      'najczestsze-awarie-drukarek-zebra-top10',
-      'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',
-      'jak-wyczyscic-glowice-drukarki-zebra',
+      'serwis-drukarki-zebra-zt111-diagnostyka-naprawa',
+      'drukarka-zebra-nie-drukuje-przyczyny-rozwiazania',
+      'zebra-wymaga-hasla-dyrektywa-red-konfiguracja',
     ],
     opis: [
       <>
@@ -2597,9 +2597,9 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     ],
     zweryfikowano: '2026-08-31',
     poradniki: [
-      'najczestsze-awarie-drukarek-zebra-top10',
-      'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',
-      'jak-wyczyscic-glowice-drukarki-zebra',
+      'serwis-drukarki-zebra-zt231-zt231r-diagnostyka-naprawa',
+      'drukarka-zebra-nie-drukuje-przyczyny-rozwiazania',
+      'zebra-wymaga-hasla-dyrektywa-red-konfiguracja',
     ],
     opis: [
       <>
