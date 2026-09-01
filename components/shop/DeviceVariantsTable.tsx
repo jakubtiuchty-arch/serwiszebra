@@ -94,6 +94,9 @@ const OPISY_CECH: Record<string, Wyjasnienie> = {
       ['Standard', 'etykiety wychodzą na podłożu w całości'],
       ['Odklejak', 'oddziela etykietę od podłoża, szybsze naklejanie'],
       ['Odklejak z nawijakiem', 'dodatkowo zwija zużyty podkład na szpulę'],
+      // ZT411 rozdziela to, co ZT231 ma w jednej wersji — stąd dwa osobne wpisy
+      ['Nawijak podkładu', 'odklejak, który zwija zużyty podkład na szpulę'],
+      ['Nawijak etykiet', 'odklejak, który nawija zadrukowane etykiety z powrotem na pełną rolkę'],
       ['Gilotyna', 'odcina wydruk; do przywieszek i etykiet o zmiennej długości'],
     ],
   },

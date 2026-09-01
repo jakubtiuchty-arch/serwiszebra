@@ -59,17 +59,17 @@ const PRODUKT = {
   attributes: {
     klasa: 'polprzemyslowe',
     variants: [
-      w('ZT41142-T0E0000Z', 'Termotransferowa, 203 dpi', 203, 'Odrywanie'),
+      w('ZT41142-T0E0000Z', 'Termotransferowa, 203 dpi', 203, 'Standard'),
       w('ZT41142-T1E0000Z', 'Termotransferowa, 203 dpi, odklejak', 203, 'Odklejak'),
-      w('ZT41142-T3E0000Z', 'Termotransferowa, 203 dpi, odklejak z nawijakiem podkładu', 203, 'Odklejak z nawijakiem podkładu'),
-      w('ZT41142-T4E0000Z', 'Termotransferowa, 203 dpi, odklejak z nawijakiem pełnej rolki', 203, 'Odklejak z nawijakiem pełnej rolki'),
+      w('ZT41142-T3E0000Z', 'Termotransferowa, 203 dpi, odklejak z nawijakiem podkładu', 203, 'Nawijak podkładu'),
+      w('ZT41142-T4E0000Z', 'Termotransferowa, 203 dpi, odklejak z nawijakiem pełnej rolki', 203, 'Nawijak etykiet'),
       w('ZT41142-T2E0000Z', 'Termotransferowa, 203 dpi, gilotyna', 203, 'Gilotyna'),
-      w('ZT41143-T0E0000Z', 'Termotransferowa, 300 dpi', 300, 'Odrywanie'),
+      w('ZT41143-T0E0000Z', 'Termotransferowa, 300 dpi', 300, 'Standard'),
       w('ZT41143-T1E0000Z', 'Termotransferowa, 300 dpi, odklejak', 300, 'Odklejak'),
-      w('ZT41143-T3E0000Z', 'Termotransferowa, 300 dpi, odklejak z nawijakiem podkładu', 300, 'Odklejak z nawijakiem podkładu'),
-      w('ZT41143-T4E0000Z', 'Termotransferowa, 300 dpi, odklejak z nawijakiem pełnej rolki', 300, 'Odklejak z nawijakiem pełnej rolki'),
+      w('ZT41143-T3E0000Z', 'Termotransferowa, 300 dpi, odklejak z nawijakiem podkładu', 300, 'Nawijak podkładu'),
+      w('ZT41143-T4E0000Z', 'Termotransferowa, 300 dpi, odklejak z nawijakiem pełnej rolki', 300, 'Nawijak etykiet'),
       w('ZT41143-T2E0000Z', 'Termotransferowa, 300 dpi, gilotyna', 300, 'Gilotyna'),
-      w('ZT41146-T0E0000Z', 'Termotransferowa, 600 dpi', 600, 'Odrywanie'),
+      w('ZT41146-T0E0000Z', 'Termotransferowa, 600 dpi', 600, 'Standard'),
     ],
   },
 }
@@ -78,7 +78,12 @@ const istnieje = await fetch(`${URL_BAZY}/rest/v1/products?slug=eq.${PRODUKT.slu
   headers: naglowki,
 }).then((r) => r.json())
 
-const wiersz = { ...PRODUKT, product_type: 'drukarka', is_active: false }
+// Przy pierwszym wpisie produkt jest nieaktywny (zdjęć nie ma jeszcze na
+// serwerze), ale ponowne uruchomienie skryptu nie może zdjąć żywej karty
+// z produkcji — dlatego przy aktualizacji `is_active` zostaje nietknięte.
+const wiersz = istnieje.length
+  ? { ...PRODUKT, product_type: 'drukarka' }
+  : { ...PRODUKT, product_type: 'drukarka', is_active: false }
 
 const odp = istnieje.length
   ? await fetch(`${URL_BAZY}/rest/v1/products?slug=eq.${PRODUKT.slug}`, {

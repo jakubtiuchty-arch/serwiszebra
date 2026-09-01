@@ -2802,15 +2802,15 @@ export const TRESC_KART: Record<string, TrescKarty> = {
       {
         tytul: 'Wyposażenie',
         pozycje: [
-          { termin: 'Odrywanie', opis: 'etykiety wychodzą na wstędze i są odrywane ręcznie' },
+          { termin: 'Standard', opis: 'etykiety wychodzą na wstędze i są odrywane ręcznie' },
           { termin: 'Odklejak', opis: 'oddziela etykietę od podkładu, co przyspiesza naklejanie' },
           {
-            termin: 'Odklejak z nawijakiem podkładu',
-            opis: 'zwija zużyty podkład na szpulę, eliminując odpad przy stanowisku',
+            termin: 'Nawijak podkładu',
+            opis: 'odklejak, który zwija zużyty podkład na szpulę i usuwa odpad ze stanowiska',
           },
           {
-            termin: 'Odklejak z nawijakiem pełnej rolki',
-            opis: 'nawija zadrukowane etykiety z powrotem na rolkę — do aplikatorów i druku na zapas',
+            termin: 'Nawijak etykiet',
+            opis: 'odklejak, który nawija zadrukowane etykiety z powrotem na rolkę — do aplikatorów i druku na zapas',
           },
           { termin: 'Gilotyna', opis: 'odcina wydruk; stosowana do przywieszek i wydruków o zmiennej długości' },
         ],
