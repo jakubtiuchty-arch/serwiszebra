@@ -15,6 +15,7 @@ import {
   Wrench
 } from 'lucide-react'
 import RepairCard from '@/components/RepairCard'
+import PasOfertowy from '@/components/panel/PasOfertowy'
 
 interface Repair {
   id: string
@@ -224,6 +225,9 @@ export default function DashboardPage() {
           <p className="text-[10px] text-gray-600">Odrzucone zgłoszenia</p>
         </div>
       </div>
+
+      {/* OFERTA DLA KLIENTA SERWISU */}
+      <PasOfertowy />
 
       {/* WYKRES + WYMAGAJĄ AKCJI - KOMPAKTOWE */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">

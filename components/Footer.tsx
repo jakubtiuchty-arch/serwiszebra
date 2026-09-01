@@ -100,6 +100,7 @@ export default function Footer() {
                   { href: '/serwis-terminali-zebra', label: 'Serwis terminali' },
                   { href: '/serwis-skanerow-zebra', label: 'Serwis skanerów' },
                   { href: '/serwis-tabletow-zebra', label: 'Serwis tabletów' },
+                  { href: '/kontrakt-serwisowy', label: 'Kontrakt serwisowy' },
                 ].map((link) => (
                   <li key={link.href}>
                     <Link href={link.href} className="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors duration-200">
