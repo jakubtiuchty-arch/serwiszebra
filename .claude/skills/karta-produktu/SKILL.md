@@ -81,6 +81,12 @@ specyfikacją i jako `dateModified` w schemacie.
 diagnostyka serii, jeśli istnieje, plus blady wydruk i czyszczenie głowicy. Slugi, nie
 gotowe linki — tytuł i okładkę bierze `getPostBySlug`. Sprawdzić, czy nie dublują FAQ.
 
+**Rejestr — rzeczowy i zrozumiały, nigdy potoczny.** Żargon producenta tłumaczymy
+(„pas druku" → „szerokość wydruku", „nośnik" → „etykiety", „gilza" → „tulejka rolki",
+„IP54" → „odporna na kurz i bryzgi wody"), ale nie schodzimy do mowy warsztatowej:
+żadnego „nie wyrabia", „wąskiego gardła", „odmówi posłuszeństwa", „siada", „śmiecia".
+Test przed publikacją: czy zdanie mogłoby stać w ofercie handlowej dla firmy.
+
 **`opis` (3 akapity, rejestr formalny)**: pozycjonowanie i technologia → parametry
 przełożone na korzyści → integracja i GRANICE modelu z linkiem do właściwszego sprzętu.
 Fakty przepisane własnymi słowami (anty-duplikacja z takma.com.pl), nigdy „karta

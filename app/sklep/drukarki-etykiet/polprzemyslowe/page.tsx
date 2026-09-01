@@ -107,13 +107,13 @@ async function getDevices(): Promise<DeviceRow[]> {
 const FAKTY_KLASY = [
   'Półprzemysłowe drukarki etykiet Zebra to dwa modele z metalową ramą: tańsza ZT111 i wyposażona w ekran dotykowy ZT231.',
   'Obie drukują pasek o szerokości 104 mm na etykietach od 19,4 do 114 mm i przyjmują rolkę o średnicy do 203 mm.',
-  'Rolka jest tu kilka razy większa niż w drukarce biurkowej, a taśma barwiąca ma 450 metrów nawoju — materiał wymienia się znacznie rzadziej.',
+  'Rolka jest kilkukrotnie większa niż w drukarce biurkowej, a taśma barwiąca ma 450 metrów nawoju, co znacząco ogranicza liczbę wymian materiału.',
   'Do wyboru są dwie jakości druku: 203 dpi do etykiet wysyłkowych i magazynowych albo 300 dpi do drobnego tekstu i małych kodów.',
   'ZT231 drukuje szybciej: do 305 mm na sekundę wobec 254 mm w ZT111, a w wersji dokładniejszej 203 wobec 152 mm na sekundę.',
-  'Każda drukarka występuje w wersji termicznej — bez taśmy, ale z wydrukiem, który blaknie — oraz termotransferowej, z wydrukiem trwałym latami.',
-  'Odklejak, nawijak zużytego podkładu i gilotynę montuje producent tylko w ZT231; po zakupie nie da się ich dołożyć.',
+  'Każdy model występuje w wersji termicznej, drukującej bez taśmy, oraz termotransferowej, w której wydruk pozostaje czytelny latami.',
+  'Odklejak, nawijak zużytego podkładu i gilotynę montuje producent wyłącznie w modelu ZT231; po zakupie nie można ich dołożyć.',
   'Sieć Wi-Fi jest dostępna wyłącznie w ZT231, w wersjach oznaczonych literą C w numerze katalogowym; ZT111 ma USB, Ethernet i RS-232.',
-  'To klasa kupowana wtedy, gdy dzienny druk przekracza mniej więcej dwa tysiące etykiet i drukarka biurkowa zaczyna się zużywać szybciej, niż powinna.',
+  'Klasa przeznaczona dla firm, w których dzienny wolumen przekracza około dwóch tysięcy etykiet, a drukarka biurkowa zużywa się przedwcześnie.',
 ]
 
 /** Wiersze tabeli porównawczej — dwa modele tej klasy obok siebie. */
@@ -148,31 +148,31 @@ const POROWNANIE = [
 const FAQ_KATEGORII = [
   {
     q: 'Kiedy przejść z drukarki biurkowej na półprzemysłową?',
-    a: 'Gdy dzienny druk przekracza mniej więcej dwa tysiące etykiet albo gdy wymiana rolki zaczyna przeszkadzać w pracy. Drukarka półprzemysłowa mieści rolkę o średnicy do 203 mm i taśmę o nawoju 450 metrów, czyli kilka razy więcej materiału. Ma też metalową ramę i mocniejszy mechanizm. Z naszego warsztatu: przeciążone drukarki biurkowe, które powinny być ZT-kami, to najczęstszy powód wymiany głowicy.',
+    a: 'Gdy dzienny wolumen przekracza około dwóch tysięcy etykiet albo gdy częste wymiany rolki ograniczają pracę stanowiska. Drukarka półprzemysłowa mieści rolkę o średnicy do 203 mm i taśmę o nawoju 450 metrów, czyli kilkukrotnie więcej materiału, a jej metalowa rama i mocniejszy mechanizm są przewidziane na takie obciążenie. Z obserwacji naszego serwisu wynika, że przeciążone drukarki biurkowe są najczęstszą przyczyną przedwczesnej wymiany głowicy.',
   },
   {
     q: 'ZT111 czy ZT231?',
-    a: 'ZT111 jest tańsza i ma tylko wersje podstawowe: trzy przyciski zamiast ekranu, obudowę z tworzywa na metalowej ramie, bez Wi-Fi, bez odklejaka i gilotyny. ZT231 dokłada kolorowy ekran dotykowy, całą obudowę z metalu, szybszy druk i możliwość zamówienia odklejaka, nawijaka podkładu, gilotyny albo sieci bezprzewodowej. Sam mechanizm druku i wielkość materiału są w obu takie same.',
+    a: 'ZT111 jest tańsza i dostępna wyłącznie w wersjach podstawowych: trzy przyciski zamiast wyświetlacza, obudowa z tworzywa na metalowej ramie, bez sieci bezprzewodowej, odklejaka i gilotyny. ZT231 ma kolorowy wyświetlacz dotykowy, obudowę w całości metalową, wyższą prędkość druku oraz wersje z odklejakiem, nawijakiem podkładu, gilotyną i Wi-Fi. Mechanizm druku i pojemność materiału są w obu modelach identyczne.',
   },
   {
     q: 'Termiczna czy termotransferowa?',
-    a: 'Termiczna drukuje samym ciepłem głowicy, bez taśmy — jest tańsza w eksploatacji, ale wydruk po kilku miesiącach blaknie, a na słońcu i w cieple znacznie szybciej. Termotransferowa przenosi obraz z taśmy barwiącej i wydruk zostaje czytelny latami. Do etykiet wysyłkowych wystarcza termiczna; do oznaczeń majątku, magazynu i produkcji wybiera się termotransferową.',
+    a: 'Wersja termiczna drukuje ciepłem głowicy, bez taśmy — jest tańsza w eksploatacji, ale wydruk stopniowo blaknie: po kilku miesiącach, a w słońcu i cieple znacznie szybciej. Wersja termotransferowa przenosi obraz z taśmy barwiącej i pozostaje czytelna latami. Do etykiet wysyłkowych wystarcza wersja termiczna; do oznaczeń majątku, magazynu i produkcji stosuje się termotransferową.',
   },
   {
     q: '203 czy 300 dpi?',
-    a: '203 dpi to standard: etykiety wysyłkowe, magazynowe i typowe kody kreskowe, przy tym szybszy druk. 300 dpi wybiera się do drobnego tekstu, małych kodów dwuwymiarowych i etykiet, na których trzeba zmieścić dużo treści. Jakości nie da się zmienić po zakupie — to inny model głowicy, więc decyzja zapada przy zamówieniu.',
+    a: 'Rozdzielczość 203 dpi obsługuje etykiety wysyłkowe, magazynowe i typowe kody kreskowe, a przy tym pozwala drukować szybciej. Rozdzielczość 300 dpi stosuje się do drobnego tekstu, małych kodów dwuwymiarowych i etykiet o dużym zagęszczeniu treści. Rozdzielczości nie można zmienić po zakupie — to inny model głowicy, więc decyzja zapada przy zamówieniu.',
   },
   {
     q: 'Czy odklejak albo gilotynę można dołożyć później?',
-    a: 'Nie. Montuje je producent, więc wybiera się je przy zamówieniu i tylko w modelu ZT231. Odklejak oddziela etykietę od podkładu, wersja z nawijakiem dodatkowo zwija zużyty podkład na szpulę, a gilotyna odcina wydruk. Zmiana po zakupie oznacza wymianę drukarki.',
+    a: 'Nie. Moduły te montuje producent, więc wybiera się je przy zamówieniu i wyłącznie w modelu ZT231. Odklejak oddziela etykietę od podkładu, wersja z nawijakiem dodatkowo zwija zużyty podkład na szpulę, a gilotyna odcina wydruk. Zmiana po zakupie oznacza wymianę całego urządzenia.',
   },
   {
     q: 'Jakie etykiety i taśmy pasują do tej klasy?',
-    a: 'Etykiety o szerokości od 19,4 do 114 mm, w rolce o średnicy do 203 mm nawiniętej na tulejkę 76 mm albo do 152 mm na tulejce 25 mm. Taśma barwiąca ma 450 metrów nawoju, szerokość od 51 do 110 mm i tulejkę 25,4 mm. Taśma musi być szersza od etykiety — inaczej brzegi zostaną niezadrukowane, a głowica pracuje wtedy na sucho i szybciej się zużywa.',
+    a: 'Etykiety o szerokości od 19,4 do 114 mm, w rolce o średnicy do 203 mm nawiniętej na tulejkę 76 mm albo do 152 mm na tulejce 25 mm. Taśma barwiąca ma 450 metrów nawoju, szerokość od 51 do 110 mm i tulejkę 25,4 mm. Taśma musi być szersza od etykiety — w przeciwnym razie brzegi pozostają niezadrukowane, a głowica pracuje bez ochrony i szybciej się zużywa.',
   },
   {
     q: 'Czy te drukarki wytrzymają pracę w chłodni?',
-    a: 'Nie. Zakres pracy to od 5 do 40°C przy druku z taśmą i od 0°C przy druku termicznym — to sprzęt na halę i stanowisko pakowania, nie na chłodnię ani na zewnątrz. Do pracy w niskich temperaturach służą drukarki mobilne serii ZQ500, które pracują do −20°C.',
+    a: 'Nie. Zakres pracy wynosi od 5 do 40°C przy druku termotransferowym i od 0°C przy termicznym — to urządzenia przeznaczone do hali i stanowiska pakowania, nie do chłodni ani pracy na zewnątrz. W niskich temperaturach stosuje się drukarki mobilne serii ZQ500, pracujące do −20°C.',
   },
 ]
 
@@ -298,10 +298,11 @@ export default async function SemiIndustrialPrintersPage() {
             <h1 className="text-2xl font-bold sm:text-3xl">Półprzemysłowe drukarki etykiet Zebra</h1>
 
             <p className="mt-3 text-base leading-relaxed text-gray-300">
-              Drukarki z metalową ramą, do pracy między biurkiem a halą. Mieszczą kilka razy
-              większą rolkę niż drukarka biurkowa i znoszą kilka tysięcy etykiet dziennie,
-              a nadal stoją na stanowisku pakowania. Ceny i stany magazynowe pobieramy na
-              żywo, a naprawy gwarancyjne robimy we własnym autoryzowanym serwisie Zebry.
+              Drukarki z metalową ramą, przeznaczone do pracy pomiędzy stanowiskiem biurowym
+              a halą. Mieszczą kilkukrotnie większą rolkę niż drukarki biurkowe i są
+              przewidziane na kilka tysięcy etykiet dziennie, a rozmiarem nadal mieszczą się
+              na stanowisku pakowania. Ceny i stany magazynowe pobieramy na żywo, a naprawy
+              gwarancyjne prowadzimy we własnym autoryzowanym serwisie Zebry.
             </p>
           </div>
           <div className="h-1 bg-[#A8F000]" />
@@ -341,11 +342,12 @@ export default async function SemiIndustrialPrintersPage() {
               Dla kogo jest drukarka półprzemysłowa
             </h2>
             <p className="mt-3 text-sm leading-relaxed text-gray-700">
-              To klasa pomiędzy biurkiem a halą produkcyjną. Kupuje się ją wtedy, gdy
-              drukarka biurkowa przestaje wyrabiać: albo dlatego, że etykiet jest po prostu
-              dużo, albo dlatego, że wymiana małej rolki co godzinę zabiera więcej czasu niż
-              sam druk. Metalowa rama i mocniejszy mechanizm znoszą kilka tysięcy etykiet
-              dziennie; jeśli tyle nie drukujesz, taniej i wygodniej wypadnie{' '}
+              To klasa pomiędzy stanowiskiem biurowym a halą produkcyjną. Stosuje się ją
+              wtedy, gdy drukarka biurkowa przestaje wystarczać: albo z powodu samej liczby
+              etykiet, albo dlatego, że wymiana niewielkiej rolki co godzinę zajmuje więcej
+              czasu niż sam druk. Metalowa rama i mocniejszy mechanizm są przewidziane na
+              kilka tysięcy etykiet dziennie; przy mniejszym wolumenie tańszym
+              i wygodniejszym rozwiązaniem pozostaje{' '}
               <Link
                 href="/sklep/drukarki-etykiet/biurkowe"
                 className="font-medium text-gray-900 underline"
@@ -355,10 +357,10 @@ export default async function SemiIndustrialPrintersPage() {
               .
             </p>
             <p className="mt-3 text-sm leading-relaxed text-gray-700">
-              Najważniejsza różnica w codziennej pracy nie leży w prędkości, tylko
-              w wielkości materiału. Rolka o średnicy do 203 mm i taśma o nawoju 450 metrów
-              starczają na wielokrotnie dłużej niż materiały do drukarki biurkowej, więc
-              stanowisko rzadziej stoi. Powyżej tej klasy są jeszcze{' '}
+              Najważniejsza różnica w codziennej pracy dotyczy nie prędkości, lecz
+              pojemności materiału. Rolka o średnicy do 203 mm i taśma o nawoju 450 metrów
+              wystarczają na wielokrotnie dłużej niż materiały do drukarki biurkowej, co
+              ogranicza przestoje stanowiska. Powyżej tej klasy znajdują się{' '}
               <Link
                 href="/sklep/drukarki-etykiet/przemyslowe"
                 className="font-medium text-gray-900 underline"
@@ -380,11 +382,11 @@ export default async function SemiIndustrialPrintersPage() {
                   1. Jak długo wydruk ma być czytelny
                 </h3>
                 <p className="mt-1.5 text-sm leading-relaxed text-gray-700">
-                  Wersja termiczna drukuje samym ciepłem, bez taśmy: taniej, ale wydruk
-                  blaknie — na słońcu i w cieple w kilka tygodni. Wersja termotransferowa
-                  przenosi obraz z taśmy barwiącej i zostaje czytelna latami. Etykieta
-                  wysyłkowa może być termiczna; oznaczenie regału, majątku albo wyrobu
-                  gotowego — nie.
+                  Wersja termiczna drukuje ciepłem głowicy, bez taśmy: koszt eksploatacji
+                  jest niższy, ale wydruk blaknie — w słońcu i cieple w ciągu kilku tygodni.
+                  Wersja termotransferowa przenosi obraz z taśmy barwiącej i pozostaje
+                  czytelna latami. Etykieta wysyłkowa może być termiczna; oznaczenie regału,
+                  majątku albo wyrobu gotowego wymaga druku termotransferowego.
                 </p>
               </li>
               <li className="rounded-xl border border-gray-200 bg-white p-4">
@@ -392,10 +394,11 @@ export default async function SemiIndustrialPrintersPage() {
                   2. Co ma się zmieścić na etykiecie
                 </h3>
                 <p className="mt-1.5 text-sm leading-relaxed text-gray-700">
-                  203 dpi wystarcza na tekst, kod kreskowy i logo w typowej wielkości —
-                  i drukuje szybciej. 300 dpi wybiera się do drobnego tekstu, małych kodów
-                  dwuwymiarowych i etykiet gęsto zapełnionych treścią. Głowicy nie da się
-                  wymienić na inną jakość po zakupie.
+                  Rozdzielczość 203 dpi wystarcza na tekst, kod kreskowy i logo w typowej
+                  wielkości, a przy tym pozwala drukować szybciej. Rozdzielczość 300 dpi
+                  stosuje się do drobnego tekstu, małych kodów dwuwymiarowych i etykiet
+                  gęsto zapełnionych treścią. Głowicy nie można wymienić na inną
+                  rozdzielczość po zakupie.
                 </p>
               </li>
               <li className="rounded-xl border border-gray-200 bg-white p-4">
@@ -403,11 +406,11 @@ export default async function SemiIndustrialPrintersPage() {
                   3. Jak etykieta ma wychodzić z drukarki
                 </h3>
                 <p className="mt-1.5 text-sm leading-relaxed text-gray-700">
-                  W wersji podstawowej wychodzi na wstędze i odrywa się ją ręcznie.
-                  Odklejak oddziela etykietę od podkładu, wersja z nawijakiem zwija zużyty
-                  podkład na szpulę, a gilotyna odcina wydruk — to rozwiązanie do
-                  przywieszek i wydruków o zmiennej długości. Wszystkie trzy montuje
-                  producent i tylko w modelu ZT231.
+                  W wersji podstawowej etykieta wychodzi na wstędze i jest odrywana
+                  ręcznie. Odklejak oddziela ją od podkładu, wersja z nawijakiem zwija
+                  zużyty podkład na szpulę, a gilotyna odcina wydruk — to rozwiązanie do
+                  przywieszek i wydruków o zmiennej długości. Wszystkie trzy moduły montuje
+                  producent i wyłącznie w modelu ZT231.
                 </p>
               </li>
             </ol>
@@ -415,13 +418,14 @@ export default async function SemiIndustrialPrintersPage() {
             <h2 className="mt-10 text-xl font-bold text-gray-900">Dwa modele w tej klasie</h2>
 
             <h3 className="mt-5 text-base font-semibold text-gray-900">
-              ZT111 — najtaniej, jak się da w metalu
+              ZT111 — wersja podstawowa w metalowej ramie
             </h3>
             <p className="mt-2 text-sm leading-relaxed text-gray-700">
-              Metalowa rama, obudowa z tworzywa, trzy przyciski zamiast ekranu i tylko
-              wersje podstawowe: bez odklejaka, gilotyny i sieci bezprzewodowej. Drukuje do
-              254 mm na sekundę. Wybór wtedy, gdy potrzebna jest wytrzymałość i duża rolka,
-              a nie wyposażenie. Zobacz{' '}
+              Metalowa rama, obudowa z tworzywa, trzy przyciski zamiast wyświetlacza
+              i wyłącznie wersje podstawowe: bez odklejaka, gilotyny i sieci bezprzewodowej.
+              Drukuje z prędkością do 254 mm na sekundę. Rozwiązanie dla firm, którym
+              zależy na wytrzymałości i pojemnej rolce, a nie na dodatkowym wyposażeniu.
+              Zobacz{' '}
               <Link
                 href="/sklep/drukarki-etykiet/zebra-zt111"
                 className="font-medium text-gray-900 underline"
@@ -435,10 +439,10 @@ export default async function SemiIndustrialPrintersPage() {
               ZT231 — z ekranem i pełnym wyborem wyposażenia
             </h3>
             <p className="mt-2 text-sm leading-relaxed text-gray-700">
-              Cała obudowa z metalu, kolorowy ekran dotykowy po polsku, druk do 305 mm na
-              sekundę i wersje z odklejakiem, nawijakiem podkładu, gilotyną albo siecią
-              bezprzewodową. Kosztuje więcej, ale to jedyny model tej klasy, w którym da się
-              dobrać sposób wydawania etykiety. Zobacz{' '}
+              Obudowa w całości metalowa, kolorowy wyświetlacz dotykowy po polsku, druk
+              z prędkością do 305 mm na sekundę oraz wersje z odklejakiem, nawijakiem
+              podkładu, gilotyną albo siecią bezprzewodową. Kosztuje więcej, ale jako jedyny
+              model tej klasy pozwala dobrać sposób wydawania etykiety. Zobacz{' '}
               <Link
                 href="/sklep/drukarki-etykiet/zebra-zt231"
                 className="font-medium text-gray-900 underline"
@@ -512,10 +516,11 @@ export default async function SemiIndustrialPrintersPage() {
             </div>
 
             <p className="mt-8 text-sm leading-relaxed text-gray-700">
-              Drukarki tej klasy serwisujemy na co dzień jako autoryzowany serwis Zebry — stąd
-              rada z warsztatu: najszybciej zużywa się w nich głowica i wałek dociskowy,
-              a największym wrogiem obu jest brud z etykiet i taśma węższa od materiału.
-              Regularne czyszczenie głowicy potrafi wydłużyć jej życie dwukrotnie. Przy starcie pomagamy ze{' '}
+              Drukarki tej klasy serwisujemy na co dzień jako autoryzowany serwis Zebry.
+              Z naszych obserwacji wynika, że najszybciej zużywają się w nich głowica
+              i wałek dociskowy, a odpowiadają za to przede wszystkim zanieczyszczenia
+              z etykiet oraz taśma węższa od materiału. Regularne czyszczenie głowicy
+              potrafi dwukrotnie wydłużyć jej żywotność. Przy starcie pomagamy ze{' '}
               <Link href="/sterowniki" className="font-medium text-gray-900 underline">
                 sterownikami
               </Link>{' '}

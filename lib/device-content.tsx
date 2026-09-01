@@ -2454,12 +2454,12 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     rekomendowanyPn: 'ZT11142-T0E000FZ',
     zdjecieGlowne: '/sklep_photo/urzadzenia/zt111_1.webp',
     wSkrocie: [
-      'Zebra ZT111 to najtańsza drukarka etykiet z metalową ramą — klasa pomiędzy drukarką biurkową a przemysłową.',
+      'Zebra ZT111 to podstawowy model klasy półprzemysłowej: metalowa rama i mechanizm konstrukcyjnie bliższy drukarkom przemysłowym niż biurkowym.',
       'Drukuje pasek o szerokości 104 mm, w jakości 203 dpi z szybkością do 254 mm na sekundę albo w dokładniejszej 300 dpi z szybkością do 152 mm na sekundę.',
-      'Mieści rolkę o średnicy do 203 mm — kilka razy większą niż drukarka biurkowa — więc papier wymienia się rzadziej.',
-      'W wersji z taśmą barwiącą przyjmuje nawój 450 metrów, czyli mniej więcej sześć razy dłuższy niż w drukarkach biurkowych.',
-      'Ma trzy przyciski i kontrolki zamiast ekranu; ustawienia zmienia się z komputera albo przez przeglądarkę.',
-      'W standardzie ma gniazda USB, Ethernet i RS-232 oraz Bluetooth do konfiguracji z telefonu; sieci Wi-Fi ten model nie obsługuje.',
+      'Mieści rolkę etykiet o średnicy do 203 mm, czyli kilkukrotnie większą niż drukarka biurkowa, co ogranicza liczbę przerw na wymianę materiału.',
+      'W wersji termotransferowej przyjmuje taśmę barwiącą o nawoju 450 metrów — wielokrotnie dłuższym niż w drukarkach biurkowych.',
+      'Zamiast wyświetlacza ma trzy przyciski i kontrolki stanu; konfiguracja odbywa się z komputera lub przez przeglądarkę.',
+      'Standardowe złącza to USB, Ethernet i RS-232 oraz Bluetooth do konfiguracji z telefonu; wersji z Wi-Fi producent dla tego modelu nie oferuje.',
     ],
     zweryfikowano: '2026-08-31',
     poradniki: [
@@ -2469,11 +2469,11 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     ],
     opis: [
       <>
-        Zebra ZT111 to najprostsza drukarka z metalową ramą i najtańsze wejście w klasę,
-        którą kupuje się wtedy, gdy drukarka biurkowa przestaje wyrabiać. Metalowa rama
-        i mechanizm z serii przemysłowej przenoszą kilka tysięcy etykiet dziennie —
-        a to właśnie przeciążone drukarki biurkowe są u nas w serwisie najczęstszym
-        powodem wymiany głowicy.
+        Zebra ZT111 to podstawowy model klasy półprzemysłowej — rozwiązanie dla firm,
+        którym przestaje wystarczać drukarka biurkowa. Metalowa rama i mechanizm oparty
+        na konstrukcji przemysłowej są przewidziane na kilka tysięcy etykiet dziennie.
+        Z obserwacji naszego serwisu wynika, że drukarki biurkowe pracujące przy takim
+        obciążeniu wymagają wymiany głowicy wyraźnie wcześniej, niż przewiduje producent.
       </>,
       <>
         Drukuje pasek o szerokości 104 mm na etykietach od 19,4 do 114 mm szerokości.
@@ -2487,22 +2487,24 @@ export const TRESC_KART: Record<string, TrescKarty> = {
         >
           drukarek biurkowych
         </Link>{' '}
-        jest wielkość materiału: rolka do 203 mm średnicy i taśma o nawoju 450 metrów
-        oznaczają kilka razy rzadsze przerwy na wymianę.
+        jest pojemność materiału: rolka o średnicy do 203 mm i taśma o nawoju 450 metrów
+        ograniczają liczbę przerw na wymianę do minimum.
       </>,
       <>
-        Panel to trzy przyciski i kontrolki — ustawienia zmienia się z komputera albo
-        przez przeglądarkę, bo ekranu ten model nie ma. W standardzie są gniazda USB,
-        Ethernet i RS-232 oraz Bluetooth do konfiguracji z telefonu; wersji z Wi-Fi
-        producent w tym modelu nie przewiduje — wtedy właściwym wyborem jest{' '}
+        Panel sterowania to trzy przyciski i kontrolki stanu; konfiguracja odbywa się
+        z komputera lub przez przeglądarkę, ponieważ model nie ma wyświetlacza.
+        Standardowe złącza to USB, Ethernet i RS-232, uzupełnione o Bluetooth służący
+        do konfiguracji z telefonu. Wersji z siecią bezprzewodową producent dla tego
+        modelu nie oferuje — w takim przypadku właściwym wyborem jest{' '}
         <Link
           href="/sklep/drukarki-etykiet/zebra-zt231"
           className="font-medium text-gray-900 underline"
         >
           Zebra ZT231
         </Link>
-        . Drukarka rozumie języki ZPL i EPL, w których wzory etykiet zapisują starsze
-        Zebry, więc wchodzi w miejsce wysłużonej drukarki bez przerabiania szablonów.
+        . Drukarka obsługuje języki ZPL i EPL, w których wzory etykiet zapisują starsze
+        urządzenia Zebry, więc zastępuje wysłużony sprzęt bez przygotowywania szablonów
+        od nowa.
       </>,
     ],
     osie: [
@@ -2511,19 +2513,19 @@ export const TRESC_KART: Record<string, TrescKarty> = {
         pozycje: [
           {
             termin: 'Termiczny',
-            opis: 'ciepło głowicy ciemni papier — bez taśmy, ale wydruk blaknie na słońcu i po kilku miesiącach',
+            opis: 'obraz powstaje z ciepła głowicy, bez taśmy; wydruk stopniowo blaknie, najszybciej w słońcu i cieple',
           },
           {
             termin: 'Termotransferowy',
-            opis: 'obraz przenosi taśma barwiąca — wydruk trwały latami, ale taśmę trzeba dokupić',
+            opis: 'obraz przenosi taśma barwiąca; wydruk pozostaje czytelny latami, ale taśma to dodatkowy koszt',
           },
         ],
       },
       {
         tytul: 'Jakość druku',
         pozycje: [
-          { termin: '203 dpi', opis: 'standard: etykiety wysyłkowe, magazynowe i kody kreskowe' },
-          { termin: '300 dpi', opis: 'drobny tekst i małe kody 2D, kosztem szybkości druku' },
+          { termin: '203 dpi', opis: 'etykiety wysyłkowe, magazynowe i typowe kody kreskowe' },
+          { termin: '300 dpi', opis: 'drobny tekst i małe kody dwuwymiarowe, kosztem prędkości druku' },
         ],
       },
     ],
@@ -2531,31 +2533,31 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     faq: [
       {
         q: 'Kiedy ZT111 jest lepsza od drukarki biurkowej?',
-        a: 'Gdy dzienny druk przekracza mniej więcej dwa tysiące etykiet albo gdy przerwy na wymianę materiału zaczynają przeszkadzać. ZT111 mieści rolkę o średnicy do 203 mm i taśmę o nawoju 450 metrów, czyli kilka razy więcej niż drukarka biurkowa. Ma też metalową ramę i mechanizm z serii przemysłowej, więc znosi obciążenie, przy którym biurkowa zużywa głowicę.',
+        a: 'Gdy dzienny wolumen przekracza około dwóch tysięcy etykiet albo gdy częste wymiany materiału zaczynają ograniczać pracę stanowiska. ZT111 mieści rolkę o średnicy do 203 mm i taśmę o nawoju 450 metrów, czyli kilkukrotnie więcej niż drukarka biurkowa. Metalowa rama i mechanizm oparty na konstrukcji przemysłowej są przewidziane na obciążenie, przy którym drukarka biurkowa zużywa głowicę przedwcześnie.',
         href: '/sklep/drukarki-etykiet/biurkowe',
         link: 'Zobacz drukarki biurkowe',
       },
       {
         q: 'Czym ZT111 różni się od ZT231?',
-        a: 'Wyposażeniem, nie mechanizmem druku. ZT111 ma trzy przyciski i kontrolki, obudowę z tworzywa na metalowej ramie i tylko wersje podstawowe. ZT231 ma kolorowy ekran dotykowy, całą obudowę z metalu, drukuje szybciej i jest dostępna także z odklejakiem, gilotyną i siecią Wi-Fi. Szerokość wydruku i wielkość materiału są w obu takie same.',
+        a: 'Wyposażeniem, nie mechanizmem druku. ZT111 ma trzy przyciski i kontrolki stanu, obudowę z tworzywa na metalowej ramie oraz wyłącznie wersje podstawowe. ZT231 ma kolorowy wyświetlacz dotykowy, obudowę w całości metalową, wyższą prędkość druku i dostępne wersje z odklejakiem, gilotyną oraz siecią bezprzewodową. Szerokość wydruku i pojemność materiału są w obu modelach identyczne.',
         href: '/sklep/drukarki-etykiet/zebra-zt231',
         link: 'Zobacz Zebra ZT231',
       },
       {
         q: 'Termiczna czy termotransferowa?',
-        a: 'Termiczna drukuje samym ciepłem głowicy, bez taśmy — wydruk jest tańszy, ale po kilku miesiącach, a na słońcu i w cieple znacznie szybciej, zaczyna blaknąć. Termotransferowa przenosi obraz z taśmy barwiącej i wydruk zostaje czytelny latami. Do etykiet wysyłkowych wystarcza termiczna, do oznaczeń majątku, magazynu i produkcji wybiera się termotransferową.',
+        a: 'Wersja termiczna drukuje ciepłem głowicy, bez taśmy — koszt wydruku jest niższy, ale obraz stopniowo blaknie: po kilku miesiącach, a w słońcu i cieple znacznie szybciej. Wersja termotransferowa przenosi obraz z taśmy barwiącej i pozostaje czytelna latami. Do etykiet wysyłkowych wystarcza wersja termiczna; do oznaczeń majątku, magazynu i produkcji stosuje się termotransferową.',
         href: '/blog/blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',
         link: 'Dlaczego wydruk blednie',
       },
       {
         q: '203 czy 300 dpi?',
-        a: '203 dpi wystarcza do etykiet wysyłkowych, magazynowych i typowych kodów kreskowych — drukuje przy tym szybciej. 300 dpi wybiera się do drobnego tekstu, małych kodów dwuwymiarowych i etykiet, które muszą zmieścić dużo treści na małej powierzchni. Zmiany jakości nie da się dokupić później: to inny model głowicy.',
+        a: 'Rozdzielczość 203 dpi wystarcza do etykiet wysyłkowych, magazynowych i typowych kodów kreskowych, a przy tym pozwala drukować szybciej. Rozdzielczość 300 dpi stosuje się do drobnego tekstu, małych kodów dwuwymiarowych i etykiet o dużym zagęszczeniu treści. Rozdzielczości nie można zmienić po zakupie — to inny model głowicy.',
         href: '/sklep/drukarki-etykiet/polprzemyslowe',
         link: 'Porównaj drukarki półprzemysłowe',
       },
       {
         q: 'Czy ZT111 ma Wi-Fi?',
-        a: 'Nie. W standardzie są USB, Ethernet i RS-232 oraz Bluetooth do konfiguracji z telefonu; wersji z Wi-Fi producent dla tego modelu nie przewiduje. Jeśli drukarka ma pracować bezprzewodowo, trzeba wybrać ZT231 w wersji z Wi-Fi.',
+        a: 'Nie. Standardowe złącza to USB, Ethernet i RS-232, uzupełnione o Bluetooth służący do konfiguracji z telefonu; wersji z siecią bezprzewodową producent dla tego modelu nie oferuje. Do pracy bezprzewodowej przeznaczona jest ZT231 w wersji z Wi-Fi.',
         href: '/sklep/drukarki-etykiet/zebra-zt231',
         link: 'Zobacz Zebra ZT231',
       },
@@ -2588,9 +2590,9 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     wSkrocie: [
       'Zebra ZT231 to półprzemysłowa drukarka etykiet w całej obudowie z metalu, z kolorowym ekranem dotykowym 4,3 cala.',
       'Drukuje pasek o szerokości 104 mm, w jakości 203 dpi z szybkością do 305 mm na sekundę albo w dokładniejszej 300 dpi z szybkością do 203 mm na sekundę.',
-      'Mieści rolkę o średnicy do 203 mm i taśmę barwiącą o nawoju 450 metrów, czyli kilka razy więcej materiału niż drukarka biurkowa.',
-      'Do wyboru są wersje z odklejakiem, z odklejakiem i nawijakiem podkładu oraz z gilotyną — fabrycznie, bo dołożyć ich później się nie da.',
-      'W standardzie ma USB, Ethernet i RS-232; wersje oznaczone literą C w numerze katalogowym mają dodatkowo sieć Wi-Fi.',
+      'Mieści rolkę etykiet o średnicy do 203 mm i taśmę barwiącą o nawoju 450 metrów — kilkukrotnie więcej materiału niż drukarka biurkowa.',
+      'Dostępne są wersje z odklejakiem, z odklejakiem i nawijakiem podkładu oraz z gilotyną; moduły te montuje producent i nie można ich dołożyć po zakupie.',
+      'Standardowe złącza to USB, Ethernet i RS-232; wersje oznaczone literą C w numerze katalogowym mają dodatkowo kartę sieci bezprzewodowej.',
       'Waży 9,1 kg i pracuje w temperaturze od 5 do 40°C przy druku z taśmą, od 0°C przy druku termicznym.',
     ],
     zweryfikowano: '2026-08-31',
@@ -2601,33 +2603,34 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     ],
     opis: [
       <>
-        Zebra ZT231 to drukarka na pogranicze biura i hali: metalowa rama, metalowa
-        obudowa i mechanizm z serii przemysłowej w rozmiarze, który jeszcze mieści się
-        na stanowisku pakowania. Kupują ją firmy drukujące kilka tysięcy etykiet dziennie —
-        tam, gdzie drukarka biurkowa robi się wąskim gardłem i zaczyna się zużywać
-        szybciej, niż wynika z jej ceny.
+        Zebra ZT231 to drukarka klasy półprzemysłowej: metalowa rama, metalowa obudowa
+        i mechanizm oparty na konstrukcji przemysłowej, w rozmiarze mieszczącym się na
+        stanowisku pakowania. Jest przeznaczona dla firm drukujących kilka tysięcy etykiet
+        dziennie — tam, gdzie drukarka biurkowa ogranicza przepustowość stanowiska
+        i zużywa się szybciej, niż zakładano przy zakupie.
       </>,
       <>
         Drukuje pasek o szerokości 104 mm na etykietach od 19,4 do 114 mm. Do wyboru są
         dwie jakości: 203 dpi z szybkością do 305 mm na sekundę albo dokładniejsza 300 dpi
-        z szybkością do 203 mm na sekundę. Rolka może mieć do 203 mm średnicy, a taśma
-        barwiąca 450 metrów nawoju — przy dwóch tysiącach etykiet dziennie to różnica
-        między wymianą materiału raz na tydzień a kilka razy dziennie w drukarce biurkowej.
+        z prędkością do 203 mm na sekundę. Rolka może mieć do 203 mm średnicy, a taśma
+        barwiąca 450 metrów nawoju — przy dwóch tysiącach etykiet dziennie oznacza to
+        wymianę materiału raz na tydzień zamiast kilku wymian dziennie w drukarce
+        biurkowej.
       </>,
       <>
-        Kolorowy ekran dotykowy pokazuje stan drukarki po polsku i pozwala zmienić
-        ustawienia bez komputera — to główna różnica wobec tańszej{' '}
+        Kolorowy wyświetlacz dotykowy prezentuje stan urządzenia po polsku i pozwala
+        zmienić ustawienia bez komputera — to podstawowa różnica wobec tańszej{' '}
         <Link
           href="/sklep/drukarki-etykiet/zebra-zt111"
           className="font-medium text-gray-900 underline"
         >
           Zebry ZT111
         </Link>
-        , która ma tylko przyciski. Wyposażenie wybiera się przy zamówieniu: odklejak
-        oddziela etykietę od podkładu, wersja z nawijakiem zwija zużyty podkład na
-        szpulę, a gilotyna odcina wydruk. Żadnego z tych elementów nie da się dołożyć
-        później — montuje je producent. Drukarka rozumie języki ZPL i EPL, więc przyjmie
-        wzory etykiet ze starszych Zeber.
+        , wyposażonej wyłącznie w przyciski. Konfigurację wybiera się przy zamówieniu:
+        odklejak oddziela etykietę od podkładu, wersja z nawijakiem zwija zużyty podkład
+        na szpulę, a gilotyna odcina wydruk. Wszystkie trzy moduły montuje producent
+        i nie można ich dołożyć po zakupie. Drukarka obsługuje języki ZPL i EPL, więc
+        przyjmuje wzory etykiet ze starszych urządzeń Zebry.
       </>,
     ],
     osie: [
@@ -2636,38 +2639,38 @@ export const TRESC_KART: Record<string, TrescKarty> = {
         pozycje: [
           {
             termin: 'Termiczny',
-            opis: 'ciepło głowicy ciemni papier — bez taśmy, ale wydruk blaknie na słońcu i po kilku miesiącach',
+            opis: 'obraz powstaje z ciepła głowicy, bez taśmy; wydruk stopniowo blaknie, najszybciej w słońcu i cieple',
           },
           {
             termin: 'Termotransferowy',
-            opis: 'obraz przenosi taśma barwiąca — wydruk trwały latami, ale taśmę trzeba dokupić',
+            opis: 'obraz przenosi taśma barwiąca; wydruk pozostaje czytelny latami, ale taśma to dodatkowy koszt',
           },
         ],
       },
       {
         tytul: 'Jakość druku',
         pozycje: [
-          { termin: '203 dpi', opis: 'standard: etykiety wysyłkowe, magazynowe i kody kreskowe' },
-          { termin: '300 dpi', opis: 'drobny tekst i małe kody 2D, kosztem szybkości druku' },
+          { termin: '203 dpi', opis: 'etykiety wysyłkowe, magazynowe i typowe kody kreskowe' },
+          { termin: '300 dpi', opis: 'drobny tekst i małe kody dwuwymiarowe, kosztem prędkości druku' },
         ],
       },
       {
         tytul: 'Wyposażenie',
         pozycje: [
-          { termin: 'Standard', opis: 'etykiety wychodzą na wstędze, odrywa się je ręcznie' },
-          { termin: 'Odklejak', opis: 'oddziela etykietę od podkładu — szybsze naklejanie' },
+          { termin: 'Standard', opis: 'etykiety wychodzą na wstędze i są odrywane ręcznie' },
+          { termin: 'Odklejak', opis: 'oddziela etykietę od podkładu, co przyspiesza naklejanie' },
           {
             termin: 'Odklejak z nawijakiem',
-            opis: 'dodatkowo zwija zużyty podkład na szpulę, więc nie zbiera się przy stanowisku',
+            opis: 'dodatkowo zwija zużyty podkład na szpulę, eliminując odpad przy stanowisku',
           },
-          { termin: 'Gilotyna', opis: 'odcina wydruk — do przywieszek i wydruków o zmiennej długości' },
+          { termin: 'Gilotyna', opis: 'odcina wydruk; stosowana do przywieszek i wydruków o zmiennej długości' },
         ],
       },
       {
         tytul: 'Łączność',
         pozycje: [
-          { termin: 'Ethernet', opis: 'kabel sieciowy, USB i RS-232 — wyposażenie standardowe' },
-          { termin: 'Wi-Fi', opis: 'dodatkowa karta sieci bezprzewodowej, montowana fabrycznie' },
+          { termin: 'Ethernet', opis: 'złącze sieciowe, USB i RS-232 — wyposażenie standardowe' },
+          { termin: 'Wi-Fi', opis: 'dodatkowa karta sieci bezprzewodowej, montowana przez producenta' },
         ],
       },
     ],
@@ -2675,31 +2678,31 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     faq: [
       {
         q: 'Kiedy ZT231 jest lepsza od drukarki biurkowej?',
-        a: 'Gdy dzienny druk przekracza mniej więcej dwa tysiące etykiet albo gdy przerwy na wymianę materiału zaczynają przeszkadzać. ZT231 mieści rolkę o średnicy do 203 mm i taśmę o nawoju 450 metrów, ma metalową obudowę i mechanizm z serii przemysłowej. Przeciążone drukarki biurkowe to u nas w serwisie najczęstszy powód wymiany głowicy.',
+        a: 'Gdy dzienny wolumen przekracza około dwóch tysięcy etykiet albo gdy częste wymiany materiału ograniczają pracę stanowiska. ZT231 mieści rolkę o średnicy do 203 mm i taśmę o nawoju 450 metrów, ma metalową obudowę i mechanizm oparty na konstrukcji przemysłowej. Z obserwacji naszego serwisu wynika, że przeciążone drukarki biurkowe są najczęstszą przyczyną przedwczesnej wymiany głowicy.',
         href: '/sklep/drukarki-etykiet/biurkowe',
         link: 'Zobacz drukarki biurkowe',
       },
       {
         q: 'Czym ZT231 różni się od ZT111?',
-        a: 'Ekranem, obudową i wyborem wyposażenia. ZT231 ma kolorowy ekran dotykowy, całą obudowę z metalu, drukuje szybciej i jest dostępna z odklejakiem, nawijakiem podkładu, gilotyną oraz z siecią Wi-Fi. ZT111 ma trzy przyciski, obudowę z tworzywa na metalowej ramie i tylko wersje podstawowe. Szerokość wydruku i wielkość materiału są takie same.',
+        a: 'Wyświetlaczem, obudową i zakresem wyposażenia. ZT231 ma kolorowy wyświetlacz dotykowy, obudowę w całości metalową, wyższą prędkość druku oraz wersje z odklejakiem, nawijakiem podkładu, gilotyną i siecią bezprzewodową. ZT111 ma trzy przyciski, obudowę z tworzywa na metalowej ramie i wyłącznie wersje podstawowe. Szerokość wydruku i pojemność materiału są identyczne.',
         href: '/sklep/drukarki-etykiet/zebra-zt111',
         link: 'Zobacz Zebra ZT111',
       },
       {
         q: 'Czy odklejak albo gilotynę można dołożyć później?',
-        a: 'Nie. Odklejak, wersję z nawijakiem podkładu i gilotynę montuje producent, więc trzeba wybrać je przy zamówieniu. Zmiana po zakupie oznacza wymianę drukarki, a nie dokupienie modułu — dlatego warto od razu przemyśleć, czy etykiety mają wychodzić na wstędze, oddzielone, czy odcięte.',
+        a: 'Nie. Odklejak, wersję z nawijakiem podkładu i gilotynę montuje producent, więc wybiera się je przy zamówieniu. Zmiana po zakupie oznacza wymianę całego urządzenia, a nie dokupienie modułu — dlatego przed złożeniem zamówienia trzeba rozstrzygnąć, czy etykiety mają wychodzić na wstędze, oddzielone od podkładu, czy odcięte.',
         href: '/sklep/drukarki-etykiet/polprzemyslowe',
         link: 'Porównaj drukarki półprzemysłowe',
       },
       {
         q: 'Termiczna czy termotransferowa?',
-        a: 'Termiczna drukuje samym ciepłem głowicy, bez taśmy — wydruk jest tańszy, ale po kilku miesiącach zaczyna blaknąć, a na słońcu i w cieple znacznie szybciej. Termotransferowa przenosi obraz z taśmy i wydruk zostaje czytelny latami. Do etykiet wysyłkowych wystarcza termiczna, do oznaczeń majątku, magazynu i produkcji wybiera się termotransferową.',
+        a: 'Wersja termiczna drukuje ciepłem głowicy, bez taśmy — koszt wydruku jest niższy, ale obraz stopniowo blaknie: po kilku miesiącach, a w słońcu i cieple znacznie szybciej. Wersja termotransferowa przenosi obraz z taśmy barwiącej i pozostaje czytelna latami. Do etykiet wysyłkowych wystarcza wersja termiczna; do oznaczeń majątku, magazynu i produkcji stosuje się termotransferową.',
         href: '/blog/blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',
         link: 'Dlaczego wydruk blednie',
       },
       {
         q: 'Jakie etykiety i taśmy pasują do ZT231?',
-        a: 'Etykiety o szerokości od 19,4 do 114 mm, w rolce o średnicy do 203 mm nawiniętej na tulejkę 76 mm (albo do 152 mm na tulejce 25 mm). Taśma barwiąca ma 450 metrów nawoju, szerokość od 51 do 110 mm i tulejkę 25,4 mm. Taśma musi być szersza od etykiety, inaczej brzegi wydruku zostaną niezadrukowane.',
+        a: 'Etykiety o szerokości od 19,4 do 114 mm, w rolce o średnicy do 203 mm nawiniętej na tulejkę 76 mm albo do 152 mm na tulejce 25 mm. Taśma barwiąca ma 450 metrów nawoju, szerokość od 51 do 110 mm i tulejkę 25,4 mm. Taśma musi być szersza od etykiety — w przeciwnym razie brzegi pozostają niezadrukowane, a głowica pracuje bez ochrony i szybciej się zużywa.',
         href: '/sklep/drukarki-etykiet/polprzemyslowe',
         link: 'Porównaj drukarki półprzemysłowe',
       },
