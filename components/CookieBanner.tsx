@@ -12,6 +12,30 @@ type CookieConsent = {
   timestamp: number
 }
 
+/**
+ * Przekazuje wybór użytkownika do trybu zgody Google.
+ *
+ * Layout ustawia wszystkie zgody na „denied", więc dopóki nie wyślemy tu
+ * „granted", Analytics nie zapisze wizyty, a Google Ads nie zobaczy konwersji.
+ * Kluczowe są ad_user_data i ad_personalization z trybu zgody v2: bez nich
+ * GA4 mierzy zdarzenia u siebie, ale nie ma prawa wyeksportować ich do Ads —
+ * i dokładnie dlatego kampania serwisowa pokazywała zero konwersji, choć
+ * formularze naprawy z reklam wpływały.
+ */
+function przekazZgodeDoGtag(zgoda: CookieConsent) {
+  if (typeof window === 'undefined') return
+  const gtag = (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag
+  if (!gtag) return
+  const marketing = zgoda.marketing ? 'granted' : 'denied'
+  gtag('consent', 'update', {
+    analytics_storage: zgoda.analytics ? 'granted' : 'denied',
+    ad_storage: marketing,
+    ad_user_data: marketing,
+    ad_personalization: marketing,
+    personalization_storage: marketing,
+  })
+}
+
 export default function CookieBanner() {
   const [showBanner, setShowBanner] = useState(false)
   const [showSettings, setShowSettings] = useState(false)
@@ -28,6 +52,11 @@ export default function CookieBanner() {
     if (savedConsent) {
       const parsed = JSON.parse(savedConsent) as CookieConsent
       setConsent(parsed)
+      // Zgoda z poprzedniej wizyty musi zostać przekazana do gtag przy KAŻDYM
+      // wejściu. Bez tego powracający użytkownik zostaje na domyślnym „denied"
+      // z layoutu, mimo że wcześniej kliknął „Akceptuję" — a wtedy Analytics
+      // nie mierzy jego wizyty, a Google Ads nie dostaje konwersji.
+      przekazZgodeDoGtag(parsed)
       // Jeśli zgoda była dawniej niż 365 dni, pokaż banner ponownie
       const daysSinceConsent = (Date.now() - parsed.timestamp) / (1000 * 60 * 60 * 24)
       if (daysSinceConsent > 365) {
@@ -47,14 +76,7 @@ export default function CookieBanner() {
     setShowBanner(false)
     setShowSettings(false)
 
-    // Aktualizuj GTM consent mode
-    if (typeof window !== 'undefined' && (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag) {
-      const gtag = (window as unknown as { gtag: (...args: unknown[]) => void }).gtag
-      gtag('consent', 'update', {
-        'analytics_storage': newConsent.analytics ? 'granted' : 'denied',
-        'ad_storage': newConsent.marketing ? 'granted' : 'denied',
-      })
-    }
+    przekazZgodeDoGtag(consentWithTimestamp)
   }
 
   const acceptAll = () => {
