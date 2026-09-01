@@ -25,7 +25,7 @@ export default function Page() {
           wystarcza klasa półprzemysłowa, w której najmocniejszym modelem jest ZT411.
         </>,
         <>
-          ZT421 drukuje pasek o szerokości 168 mm — najszerszy w ofercie, do etykiet
+          ZT421 drukuje etykiety o szerokości do 168 mm — najszerszy w ofercie, do etykiet
           paletowych i oznaczeń zbiorczych. ZT610 i ZT620 osiągają rozdzielczość 600 dpi,
           potrzebną przy najdrobniejszych oznaczeniach elektroniki, a ZT510 jest wariantem
           prostszym, do dużego wolumenu bez rozbudowanych opcji. Wszystkie przyjmują

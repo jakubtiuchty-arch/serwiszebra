@@ -1308,7 +1308,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     rekomendowanyPn: 'ZQ61-AUXAE14-00',
     zdjecieGlowne: '/sklep_photo/urzadzenia/zq610plus_3.webp',
     wSkrocie: [
-      'Zebra ZQ610 Plus to najmniejsza drukarka mobilna z serii ZQ600 Plus — drukuje pasek o szerokości 48 mm i waży 600 gramów z baterią.',
+      'Zebra ZQ610 Plus to najmniejsza drukarka mobilna z serii ZQ600 Plus — drukuje etykiety o szerokości do 48 mm i waży 600 gramów z baterią.',
       'Drukuje ciepłem na papierze termoczułym, bez tuszu i taśmy, w standardowej jakości 203 dpi, z szybkością do 115 mm na sekundę.',
       'Przyjmuje rolki o szerokości od 25,4 do 55,4 mm — to metki, oznaczenia regałów i pokwitowania, a nie etykiety kurierskie.',
       'Bateria 3250 mAh wystarcza na jedną zmianę; do dłuższej pracy producent przewiduje ogniwo o większej pojemności.',
@@ -1335,7 +1335,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
       </>,
       <>
         Obraz powstaje z ciepła głowicy na papierze termoczułym, więc nie kupuje się do
-        niej tuszu ani taśmy. Drukuje pasek o szerokości 48 mm na rolkach od 25,4 do
+        niej tuszu ani taśmy. Drukuje etykiety o szerokości do 48 mm na rolkach od 25,4 do
         55,4 mm — tyle, ile trzeba na metkę, oznaczenie regału i pokwitowanie. Etykieta
         kurierska ma 100 mm szerokości, więc do nadawania przesyłek potrzebna jest{' '}
         <Link
@@ -1379,7 +1379,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     faq: [
       {
         q: 'Czy ZQ610 Plus wydrukuje etykietę kurierską?',
-        a: 'Nie. Drukuje pasek o szerokości 48 mm, a etykieta kurierska ma 100 mm. ZQ610 Plus nadaje się do metek, oznaczeń regałów i pokwitowań. Do nadawania przesyłek w terenie służy ZQ630 Plus, która drukuje 104 mm.',
+        a: 'Nie. Drukuje etykiety o szerokości do 48 mm, a etykieta kurierska ma 100 mm. ZQ610 Plus nadaje się do metek, oznaczeń regałów i pokwitowań. Do nadawania przesyłek w terenie służy ZQ630 Plus, która drukuje 104 mm.',
         href: '/sklep/drukarki-etykiet/zebra-zq630-plus',
         link: 'Zobacz Zebra ZQ630 Plus',
       },
@@ -1432,7 +1432,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     rekomendowanyPn: 'ZQ62-AUXAE14-00',
     zdjecieGlowne: '/sklep_photo/urzadzenia/zq620plus_1.webp',
     wSkrocie: [
-      'Zebra ZQ620 Plus to średni model serii ZQ600 Plus — drukuje pasek o szerokości 72 mm i waży 730 gramów z baterią.',
+      'Zebra ZQ620 Plus to średni model serii ZQ600 Plus — drukuje etykiety o szerokości do 72 mm i waży 730 gramów z baterią.',
       'Drukuje ciepłem na papierze termoczułym, bez tuszu i taśmy, w standardowej jakości 203 dpi, z szybkością do 115 mm na sekundę.',
       'Przyjmuje rolki o szerokości od 25,4 do 79,4 mm, a pojedynczy wydruk może mieć nawet 813 mm długości.',
       'Bateria 3250 mAh wystarcza na jedną zmianę; do dłuższej pracy producent przewiduje ogniwo o większej pojemności.',
@@ -1458,7 +1458,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
       </>,
       <>
         Obraz powstaje z ciepła głowicy na papierze termoczułym, więc nie kupuje się do
-        niej tuszu ani taśmy. Drukuje pasek o szerokości 72 mm na rolkach od 25,4 do
+        niej tuszu ani taśmy. Drukuje etykiety o szerokości do 72 mm na rolkach od 25,4 do
         79,4 mm, a pojedynczy wydruk może mieć do 813 mm długości — tyle wystarczy na
         etykiety magazynowe, oznaczenia palet i paragony. Etykieta kurierska ma 100 mm
         szerokości, więc do nadawania przesyłek potrzebna jest szersza{' '}
@@ -1509,7 +1509,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
       },
       {
         q: 'Czy ZQ620 Plus wydrukuje etykietę kurierską 100 × 150 mm?',
-        a: 'Nie. Drukuje pasek o szerokości 72 mm, więc etykieta kurierska się nie zmieści. Nadaje się do etykiet magazynowych, oznaczeń palet, metek i paragonów. Do nadawania przesyłek służy ZQ630 Plus albo lżejsza ZQ521.',
+        a: 'Nie. Drukuje etykiety o szerokości do 72 mm, więc etykieta kurierska się nie zmieści. Nadaje się do etykiet magazynowych, oznaczeń palet, metek i paragonów. Do nadawania przesyłek służy ZQ630 Plus albo lżejsza ZQ521.',
         href: '/sklep/drukarki-etykiet/zebra-zq630-plus',
         link: 'Zobacz Zebra ZQ630 Plus',
       },
@@ -1557,7 +1557,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     rekomendowanyPn: 'ZQ63-AUXAE14-00',
     zdjecieGlowne: '/sklep_photo/urzadzenia/zq630plus_2.webp',
     wSkrocie: [
-      'Zebra ZQ630 Plus to największy model serii ZQ600 Plus — drukuje pasek o szerokości 104 mm, czyli mieści pełną etykietę kurierską 100 × 150 mm.',
+      'Zebra ZQ630 Plus to największy model serii ZQ600 Plus — drukuje etykiety o szerokości do 104 mm, czyli mieści pełną etykietę kurierską 100 × 150 mm.',
       'Waży 1,11 kg z baterią, więc nosi się ją raczej w futerale na ramię albo w uchwycie na wózku niż przy pasku.',
       'Drukuje ciepłem na papierze termoczułym, w standardowej jakości 203 dpi, z szybkością do 115 mm na sekundę.',
       'Bateria 6600 mAh ma dwa razy większą pojemność niż w mniejszych modelach serii i starcza na dwie zmiany.',
@@ -1583,7 +1583,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
       </>,
       <>
         Obraz powstaje z ciepła głowicy na papierze termoczułym, bez tuszu i taśmy.
-        Drukarka kładzie pasek o szerokości 104 mm na rolkach od 50,8 do 111 mm, w jakości
+        Drukarka drukuje etykiety o szerokości do 104 mm na rolkach od 50,8 do 111 mm, w jakości
         203 dpi i z szybkością do 115 mm na sekundę. Jeśli te same etykiety mają powstawać
         przy stanowisku, taniej i szybciej zrobi to{' '}
         <Link
@@ -1627,7 +1627,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     faq: [
       {
         q: 'Czy ZQ630 Plus wydrukuje etykietę kurierską 100 × 150 mm?',
-        a: 'Tak. Drukuje pasek o szerokości 104 mm i przyjmuje rolki do 111 mm, więc etykieta wychodzi w całości, bez zmniejszania i obcinania. W całym sklepie potrafią to jeszcze tylko ZQ521 — o 320 gramów lżejsza, ale z mniejszą baterią.',
+        a: 'Tak. Drukuje etykiety o szerokości do 104 mm i przyjmuje rolki do 111 mm, więc etykieta wychodzi w całości, bez zmniejszania i obcinania. W całym sklepie potrafią to jeszcze tylko ZQ521 — o 320 gramów lżejsza, ale z mniejszą baterią.',
         href: '/sklep/drukarki-etykiet/zebra-zq521',
         link: 'Zobacz Zebra ZQ521',
       },
@@ -1681,7 +1681,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     rekomendowanyPn: 'ZQ51-BUW000E-00',
     zdjecieGlowne: '/sklep_photo/urzadzenia/zq511_1.webp',
     wSkrocie: [
-      'Zebra ZQ511 to wzmocniona drukarka mobilna: drukuje pasek o szerokości 72 mm i waży 630 gramów z baterią.',
+      'Zebra ZQ511 to wzmocniona drukarka mobilna: drukuje etykiety o szerokości do 72 mm i waży 630 gramów z baterią.',
       'Drukuje ciepłem na papierze termoczułym, w standardowej jakości 203 dpi, z szybkością do 127 mm na sekundę — najszybciej w całej klasie.',
       'Przechodzi wojskowe testy wytrzymałości: upadek z 2 metrów na beton i 1300 obrotowych upadków z metra.',
       'Jest odporna na kurz i bryzgi wody; twarda osłona podnosi ochronę do poziomu strugi wody i upadku z 3 metrów.',
@@ -1706,7 +1706,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
         tam, gdzie sprzęt spada z burty auta, a nie z blatu.
       </>,
       <>
-        Drukuje pasek o szerokości 72 mm na rolkach od 35 do 80 mm, w jakości 203 dpi
+        Drukuje etykiety o szerokości do 72 mm na rolkach od 35 do 80 mm, w jakości 203 dpi
         i z szybkością do 127 mm na sekundę — o kilkanaście procent szybciej niż seria
         ZQ600 Plus, przy niższej wadze: 630 gramów wobec 730 gramów{' '}
         <Link
@@ -1765,13 +1765,13 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     faq: [
       {
         q: 'Czy ZQ511 wydrukuje etykietę kurierską 100 × 150 mm?',
-        a: 'Nie. Drukuje pasek o szerokości 72 mm i przyjmuje rolki do 80 mm, a etykieta kurierska ma 100 mm szerokości. Do nadawania przesyłek w terenie służy ZQ521, która drukuje 104 mm. ZQ511 nadaje się do etykiet magazynowych, metek, oznaczeń i pokwitowań.',
+        a: 'Nie. Drukuje etykiety o szerokości do 72 mm i przyjmuje rolki do 80 mm, a etykieta kurierska ma 100 mm szerokości. Do nadawania przesyłek w terenie służy ZQ521, która drukuje 104 mm. ZQ511 nadaje się do etykiet magazynowych, metek, oznaczeń i pokwitowań.',
         href: '/sklep/drukarki-etykiet/zebra-zq521',
         link: 'Zobacz Zebra ZQ521',
       },
       {
         q: 'Czym ZQ511 różni się od ZQ620 Plus?',
-        a: 'Wytrzymałością i wagą. Oba modele drukują pasek 72 mm w tej samej jakości, ale ZQ511 przechodzi wojskowe testy wytrzymałości, znosi upadek z 2 metrów na beton, drukuje szybciej i waży 630 gramów. ZQ620 Plus jest o 100 gramów cięższa i wolniejsza, za to mieści większą rolkę.',
+        a: 'Wytrzymałością i wagą. Oba modele drukują etykiety o szerokości do 72 mm w tej samej jakości, ale ZQ511 przechodzi wojskowe testy wytrzymałości, znosi upadek z 2 metrów na beton, drukuje szybciej i waży 630 gramów. ZQ620 Plus jest o 100 gramów cięższa i wolniejsza, za to mieści większą rolkę.',
         href: '/sklep/drukarki-etykiet/zebra-zq620-plus',
         link: 'Zobacz Zebra ZQ620 Plus',
       },
@@ -1820,7 +1820,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     rekomendowanyPn: 'ZQ52-BUE000E-00',
     zdjecieGlowne: '/sklep_photo/urzadzenia/zq521_1.webp',
     wSkrocie: [
-      'Zebra ZQ521 to wzmocniona drukarka mobilna, która drukuje pasek o szerokości 104 mm — mieści pełną etykietę kurierską 100 × 150 mm.',
+      'Zebra ZQ521 to wzmocniona drukarka mobilna, która drukuje etykiety o szerokości do 104 mm — mieści pełną etykietę kurierską 100 × 150 mm.',
       'Waży 790 gramów z baterią, czyli o 320 gramów mniej niż ZQ630 Plus drukująca tej samej szerokości.',
       'Drukuje ciepłem na papierze termoczułym, w standardowej jakości 203 dpi, z szybkością do 127 mm na sekundę.',
       'Przechodzi wojskowe testy wytrzymałości: upadek z 2 metrów na beton i 1300 obrotowych upadków z metra.',
@@ -1845,7 +1845,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
         klamkę i asfalt, zamiast stać na blacie.
       </>,
       <>
-        Drukuje pasek o szerokości 104 mm na rolkach od 50,8 do 113 mm, w jakości 203 dpi
+        Drukuje etykiety o szerokości do 104 mm na rolkach od 50,8 do 113 mm, w jakości 203 dpi
         i z szybkością do 127 mm na sekundę. Najważniejsza liczba to jednak waga:
         790 gramów wobec 1,11 kg{' '}
         <Link
@@ -1903,13 +1903,13 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     faq: [
       {
         q: 'Czy ZQ521 wydrukuje etykietę kurierską 100 × 150 mm?',
-        a: 'Tak. Drukuje pasek o szerokości 104 mm i przyjmuje rolki od 50,8 do 113 mm, więc etykieta wychodzi w całości, bez zmniejszania i obcinania. To jedna z dwóch drukarek mobilnych w naszej ofercie, które to potrafią — druga to ZQ630 Plus.',
+        a: 'Tak. Drukuje etykiety o szerokości do 104 mm i przyjmuje rolki od 50,8 do 113 mm, więc etykieta wychodzi w całości, bez zmniejszania i obcinania. To jedna z dwóch drukarek mobilnych w naszej ofercie, które to potrafią — druga to ZQ630 Plus.',
         href: '/sklep/drukarki-etykiet/zebra-zq630-plus',
         link: 'Zobacz Zebra ZQ630 Plus',
       },
       {
         q: 'Czym ZQ521 różni się od ZQ630 Plus?',
-        a: 'Wagą i baterią. Oba modele drukują pasek 104 mm w tej samej jakości, ale ZQ521 waży 790 gramów, drukuje szybciej i przechodzi wojskowe testy wytrzymałości. ZQ630 Plus waży 1,11 kg, za to ma baterię 6600 mAh zamiast 3250 mAh — starcza na dwie zmiany zamiast jednej.',
+        a: 'Wagą i baterią. Oba modele drukują etykiety o szerokości do 104 mm w tej samej jakości, ale ZQ521 waży 790 gramów, drukuje szybciej i przechodzi wojskowe testy wytrzymałości. ZQ630 Plus waży 1,11 kg, za to ma baterię 6600 mAh zamiast 3250 mAh — starcza na dwie zmiany zamiast jednej.',
         href: '/sklep/drukarki-etykiet/zebra-zq630-plus',
         link: 'Zobacz Zebra ZQ630 Plus',
       },
@@ -1958,7 +1958,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     rekomendowanyPn: 'ZQ31-A0E04TE-00',
     zdjecieGlowne: '/sklep_photo/urzadzenia/zq310plus_1.webp',
     wSkrocie: [
-      'Zebra ZQ310 Plus to najlżejsza drukarka mobilna w ofercie producenta — waży 370 gramów z baterią i drukuje pasek o szerokości 48 mm.',
+      'Zebra ZQ310 Plus to najlżejsza drukarka mobilna w ofercie producenta — waży 370 gramów z baterią i drukuje etykiety o szerokości do 48 mm.',
       'Drukuje ciepłem na papierze termoczułym, w standardowej jakości 203 dpi, z szybkością do 101,6 mm na sekundę.',
       'Powstała do paragonów: podstawowa wersja odmierza wydruk po czarnym znaczniku, a etykiety samoprzylepne drukuje dopiero wersja z czujnikiem odstępu.',
       'Jest odporna na kurz i bryzgi wody, znosi upadek z 1,5 metra i pracuje od −15 do 50°C.',
@@ -1983,7 +1983,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
         osiem godzin.
       </>,
       <>
-        Drukuje pasek o szerokości 48 mm na rolkach o szerokości 58 mm, z szybkością do
+        Drukuje etykiety o szerokości do 48 mm na rolkach o szerokości 58 mm, z szybkością do
         101,6 mm na sekundę; etykiety bez podkładu wychodzą wolniej. Podstawowa wersja
         odmierza wydruk po czarnym znaczniku nadrukowanym na rolce i jest przewidziana do
         paragonów — do etykiet samoprzylepnych potrzebna jest wersja z czujnikiem odstępu
@@ -2046,7 +2046,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
       },
       {
         q: 'Czym ZQ310 Plus różni się od ZQ610 Plus?',
-        a: 'Ceną, wagą i przeznaczeniem. Oba drukują pasek 48 mm, ale ZQ310 Plus waży 370 gramów i jest drukarką do paragonów z samym Bluetoothem, a ZQ610 Plus waży 600 gramów, ma mocniejszą baterię, ekran i wersje z siecią bezprzewodową. ZQ310 Plus to wybór do handlu, ZQ610 Plus do magazynu.',
+        a: 'Ceną, wagą i przeznaczeniem. Oba drukują etykiety o szerokości do 48 mm, ale ZQ310 Plus waży 370 gramów i jest drukarką do paragonów z samym Bluetoothem, a ZQ610 Plus waży 600 gramów, ma mocniejszą baterię, ekran i wersje z siecią bezprzewodową. ZQ310 Plus to wybór do handlu, ZQ610 Plus do magazynu.',
         href: '/sklep/drukarki-etykiet/zebra-zq610-plus',
         link: 'Zobacz Zebra ZQ610 Plus',
       },
@@ -2084,7 +2084,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     rekomendowanyPn: 'ZQ32-A0E04TE-00',
     zdjecieGlowne: '/sklep_photo/urzadzenia/zq320plus_1.webp',
     wSkrocie: [
-      'Zebra ZQ320 Plus drukuje pasek o szerokości 72 mm, ważąc 430 gramów z baterią — to najlżejsza drukarka mobilna Zebry z siecią bezprzewodową.',
+      'Zebra ZQ320 Plus drukuje etykiety o szerokości do 72 mm, ważąc 430 gramów z baterią — to najlżejsza drukarka mobilna Zebry z siecią bezprzewodową.',
       'Drukuje ciepłem na papierze termoczułym, w standardowej jakości 203 dpi, z szybkością do 101,6 mm na sekundę.',
       'Wersje z literą W w numerze katalogowym łączą się z siecią bezprzewodową i Bluetoothem naraz; wersje z literą E mają sam Bluetooth.',
       'Jest odporna na kurz i bryzgi wody, znosi upadek z 1,5 metra i pracuje od −15 do 50°C.',
@@ -2103,7 +2103,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     opis: [
       <>
         Zebra ZQ320 Plus to szersza siostra ZQ310 Plus w tej samej lekkiej obudowie. Przy
-        430 gramach drukuje pasek o szerokości 72 mm — tyle, co ZQ620 Plus ważąca
+        430 gramach drukuje etykiety o szerokości do 72 mm — tyle, co ZQ620 Plus ważąca
         730 gramów. Trafia do dostaw, serwisu w terenie i handlu obwoźnego: wszędzie tam,
         gdzie potrzebny jest szerszy paragon albo etykieta, a drukarka wisi na pasku przez
         całą zmianę.
@@ -2165,13 +2165,13 @@ export const TRESC_KART: Record<string, TrescKarty> = {
       },
       {
         q: 'Czym ZQ320 Plus różni się od ZQ620 Plus?',
-        a: 'Wagą i wielkością rolki. Oba modele drukują pasek 72 mm w tej samej jakości, ale ZQ320 Plus waży 430 gramów wobec 730 gramów ZQ620 Plus. W drugą stronę: ZQ620 Plus mieści rolkę o średnicy 66,8 mm zamiast 40 mm, ma mocniejszą baterię, ekran i wersje z nowszą siecią Wi-Fi 6.',
+        a: 'Wagą i wielkością rolki. Oba modele drukują etykiety o szerokości do 72 mm w tej samej jakości, ale ZQ320 Plus waży 430 gramów wobec 730 gramów ZQ620 Plus. W drugą stronę: ZQ620 Plus mieści rolkę o średnicy 66,8 mm zamiast 40 mm, ma mocniejszą baterię, ekran i wersje z nowszą siecią Wi-Fi 6.',
         href: '/sklep/drukarki-etykiet/zebra-zq620-plus',
         link: 'Zobacz Zebra ZQ620 Plus',
       },
       {
         q: 'Czy ZQ320 Plus wydrukuje etykietę kurierską?',
-        a: 'Nie. Drukuje pasek o szerokości 72 mm, a etykieta kurierska ma 100 mm. Do nadawania przesyłek w terenie służą ZQ521 i ZQ630 Plus. ZQ320 Plus drukuje paragony, pokwitowania dostawy, raporty serwisowe i etykiety magazynowe.',
+        a: 'Nie. Drukuje etykiety o szerokości do 72 mm, a etykieta kurierska ma 100 mm. Do nadawania przesyłek w terenie służą ZQ521 i ZQ630 Plus. ZQ320 Plus drukuje paragony, pokwitowania dostawy, raporty serwisowe i etykiety magazynowe.',
         href: '/sklep/drukarki-etykiet/zebra-zq521',
         link: 'Zobacz Zebra ZQ521',
       },
@@ -2216,7 +2216,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     zdjecieGlowne: '/sklep_photo/urzadzenia/zq210_1.webp',
     wSkrocie: [
       'Zebra ZQ210 to najmniejsza drukarka mobilna Zebry — waży 265 gramów z baterią i mieści się w dłoni.',
-      'Drukuje ciepłem na papierze termoczułym pasek o szerokości 48 mm, w standardowej jakości 203 dpi, z szybkością do 60 mm na sekundę.',
+      'Drukuje ciepłem na papierze termoczułym wydruk o szerokości 48 mm, w standardowej jakości 203 dpi, z szybkością do 60 mm na sekundę.',
       'Przyjmuje rolki o szerokości 58 mm, a po założeniu przekładek także 50,8, 40 i 30 mm; rolka może mieć do 40 mm średnicy.',
       'Nie rozumie języka ZPL, w którym wzory etykiet zapisują drukarki biurkowe i przemysłowe — zna tylko CPCL i ESC/POS.',
       'Bateria 1500 mAh starcza na co najmniej 500 wydruków po 216 mm, a drukarka ładuje się przewodem USB-C.',
@@ -2336,7 +2336,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     rekomendowanyPn: 'ZQ22-B16B1KE-00',
     zdjecieGlowne: '/sklep_photo/urzadzenia/zq220plus_1.webp',
     wSkrocie: [
-      'Zebra ZQ220 Plus to najtańsza drukarka mobilna, która drukuje pasek o szerokości 72 mm — waży 390 gramów z baterią.',
+      'Zebra ZQ220 Plus to najtańsza drukarka mobilna, która drukuje etykiety o szerokości do 72 mm — waży 390 gramów z baterią.',
       'Drukuje ciepłem na papierze termoczułym, w standardowej jakości 203 dpi, z szybkością do 50 mm na sekundę, czyli wolniej niż pozostałe modele w ofercie.',
       'Przyjmuje rolki o szerokości 80 mm, a po założeniu przekładek także 76,2, 58 i 50,8 mm; rolka może mieć do 50 mm średnicy.',
       'Nie rozumie języka ZPL, w którym wzory etykiet zapisują drukarki biurkowe i przemysłowe — zna tylko CPCL i ESC/POS.',
@@ -2455,7 +2455,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     zdjecieGlowne: '/sklep_photo/urzadzenia/zt111_1.webp',
     wSkrocie: [
       'Zebra ZT111 to podstawowy model klasy półprzemysłowej: metalowa rama i mechanizm konstrukcyjnie bliższy drukarkom przemysłowym niż biurkowym.',
-      'Drukuje pasek o szerokości 104 mm, w jakości 203 dpi z szybkością do 254 mm na sekundę albo w dokładniejszej 300 dpi z szybkością do 152 mm na sekundę.',
+      'Drukuje etykiety o szerokości do 104 mm, w jakości 203 dpi z szybkością do 254 mm na sekundę albo w dokładniejszej 300 dpi z szybkością do 152 mm na sekundę.',
       'Mieści rolkę etykiet o średnicy do 203 mm, czyli kilkukrotnie większą niż drukarka biurkowa, co ogranicza liczbę przerw na wymianę materiału.',
       'W wersji termotransferowej przyjmuje taśmę barwiącą o nawoju 450 metrów — wielokrotnie dłuższym niż w drukarkach biurkowych.',
       'Zamiast wyświetlacza ma trzy przyciski i kontrolki stanu; konfiguracja odbywa się z komputera lub przez przeglądarkę.',
@@ -2476,7 +2476,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
         obciążeniu wymagają wymiany głowicy wyraźnie wcześniej, niż przewiduje producent.
       </>,
       <>
-        Drukuje pasek o szerokości 104 mm na etykietach od 19,4 do 114 mm szerokości.
+        Drukuje etykiety o szerokości do 104 mm na etykietach od 19,4 do 114 mm szerokości.
         Do wyboru są dwie jakości: 203 dpi z szybkością do 254 mm na sekundę — do etykiet
         wysyłkowych i magazynowych — albo dokładniejsza 300 dpi z szybkością do 152 mm
         na sekundę, do drobnego tekstu i małych kodów. Największą praktyczną różnicą
@@ -2589,7 +2589,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     zdjecieGlowne: '/sklep_photo/urzadzenia/zt231_1.webp',
     wSkrocie: [
       'Zebra ZT231 to półprzemysłowa drukarka etykiet w całej obudowie z metalu, z kolorowym ekranem dotykowym 4,3 cala.',
-      'Drukuje pasek o szerokości 104 mm, w jakości 203 dpi z szybkością do 305 mm na sekundę albo w dokładniejszej 300 dpi z szybkością do 203 mm na sekundę.',
+      'Drukuje etykiety o szerokości do 104 mm, w jakości 203 dpi z szybkością do 305 mm na sekundę albo w dokładniejszej 300 dpi z szybkością do 203 mm na sekundę.',
       'Mieści rolkę etykiet o średnicy do 203 mm i taśmę barwiącą o nawoju 450 metrów — kilkukrotnie więcej materiału niż drukarka biurkowa.',
       'Dostępne są wersje z odklejakiem, z odklejakiem i nawijakiem podkładu oraz z gilotyną; moduły te montuje producent i nie można ich dołożyć po zakupie.',
       'Standardowe złącza to USB, Ethernet i RS-232; wersje oznaczone literą C w numerze katalogowym mają dodatkowo kartę sieci bezprzewodowej.',
@@ -2610,7 +2610,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
         i zużywa się szybciej, niż zakładano przy zakupie.
       </>,
       <>
-        Drukuje pasek o szerokości 104 mm na etykietach od 19,4 do 114 mm. Do wyboru są
+        Drukuje etykiety o szerokości do 104 mm na etykietach od 19,4 do 114 mm. Do wyboru są
         dwie jakości: 203 dpi z szybkością do 305 mm na sekundę albo dokładniejsza 300 dpi
         z prędkością do 203 mm na sekundę. Rolka może mieć do 203 mm średnicy, a taśma
         barwiąca 450 metrów nawoju — przy dwóch tysiącach etykiet dziennie oznacza to
@@ -2736,7 +2736,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     zdjecieGlowne: '/sklep_photo/urzadzenia/zt411_1.webp',
     wSkrocie: [
       'Zebra ZT411 to najmocniejsza drukarka klasy półprzemysłowej: metalowa rama, składana metalowa pokrywa komory materiałów i kolorowy ekran dotykowy 4,3 cala.',
-      'Drukuje pasek o szerokości 104 mm z szybkością do 356 mm na sekundę — o jedną szóstą szybciej niż ZT231 i ponad dwukrotnie szybciej niż drukarka biurkowa.',
+      'Drukuje etykiety o szerokości do 104 mm z szybkością do 356 mm na sekundę — o jedną szóstą szybciej niż ZT231 i ponad dwukrotnie szybciej niż drukarka biurkowa.',
       'Jako jedyna w tej klasie występuje w rozdzielczości 600 dpi, obok standardowych 203 i 300 dpi; wersji 600 dpi nie łączy się z modułem RFID do powierzchni metalowych.',
       'Mieści rolkę etykiet o średnicy do 203 mm i taśmę barwiącą o nawoju 450 metrów, a materiał ładuje się z boku, bez wyjmowania drukarki ze stanowiska.',
       'Moduł RFID UHF i zestaw aplikatora montuje się u użytkownika, więc drukarkę można rozbudować po zakupie — inaczej niż odklejak, nawijak i gilotynę, które wybiera się przy zamówieniu.',
@@ -2782,7 +2782,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
           href="/sklep/drukarki-etykiet/przemyslowe"
           className="font-medium text-gray-900 underline"
         >
-          drukarka przemysłowa z paskiem 168 mm
+          drukarka przemysłowa o szerokości wydruku 168 mm
         </Link>
         .
       </>,

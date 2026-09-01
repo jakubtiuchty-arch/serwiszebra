@@ -106,7 +106,7 @@ async function getDevices(): Promise<DeviceRow[]> {
  */
 const FAKTY_KLASY = [
   'Półprzemysłowe drukarki etykiet Zebra to trzy modele z metalową ramą: tańsza ZT111, wyposażona w ekran dotykowy ZT231 i najmocniejsza ZT411.',
-  'Wszystkie trzy drukują pasek o szerokości 104 mm i przyjmują rolkę o średnicy do 203 mm; ZT111 i ZT231 na etykietach od 19,4 mm, ZT411 od 25,4 mm.',
+  'Wszystkie trzy drukują etykiety o szerokości do 104 mm i przyjmują rolkę o średnicy do 203 mm; ZT111 i ZT231 na etykietach od 19,4 mm, ZT411 od 25,4 mm.',
   'Rolka jest kilkukrotnie większa niż w drukarce biurkowej, a taśma barwiąca ma 450 metrów nawoju, co znacząco ogranicza liczbę wymian materiału.',
   'Do wyboru są dwie jakości druku: 203 dpi do etykiet wysyłkowych i magazynowych albo 300 dpi do drobnego tekstu i małych kodów; ZT411 dokłada trzecią, 600 dpi.',
   'ZT231 drukuje szybciej: do 305 mm na sekundę wobec 254 mm w ZT111, a w wersji dokładniejszej 203 wobec 152 mm na sekundę.',

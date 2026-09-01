@@ -172,7 +172,7 @@ const POROWNANIE = [
 const FAQ_KATEGORII = [
   {
     q: 'Która biurkowa drukarka Zebra nadaje się do etykiet kurierskich?',
-    a: 'Każda poza serią ZD411. Etykieta kurierska ma 100 mm szerokości, a ZD220, ZD230, ZD421 i ZD621 drukują pas 104 mm. ZD411 jest dwucalowa i drukuje 56 mm, więc nadania się na niej nie zmieszczą. Do samych etykiet kurierskich wystarcza wersja termiczna „d" — taśma jest tu zbędna, bo przewoźnik czyta etykietę w ciągu kilku dni.',
+    a: 'Każda poza serią ZD411. Etykieta kurierska ma 100 mm szerokości, a ZD220, ZD230, ZD421 i ZD621 drukują szerokość wydruku 104 mm. ZD411 jest dwucalowa i drukuje 56 mm, więc nadania się na niej nie zmieszczą. Do samych etykiet kurierskich wystarcza wersja termiczna „d" — taśma jest tu zbędna, bo przewoźnik czyta etykietę w ciągu kilku dni.',
   },
   {
     q: 'Czym różni się model „d" od „t" w drukarkach Zebra?',

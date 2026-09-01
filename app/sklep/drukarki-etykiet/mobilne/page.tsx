@@ -241,7 +241,7 @@ const RODZINY = [
 const FAQ_KATEGORII = [
   {
     q: 'Która mobilna drukarka Zebra wydrukuje etykietę kurierską?',
-    a: 'ZQ630 Plus i ZQ521. Etykieta kurierska ma 100 mm szerokości, a te dwa modele drukują wydruk o szerokości 104 mm — jako jedyne mieszczą ją w całości. ZQ620 Plus i ZQ511 drukują 72 mm, ZQ610 Plus 48 mm; wystarczy to na etykiety magazynowe, metki i pokwitowania, ale nie na list przewozowy. Między ZQ630 Plus a ZQ521 decyduje waga: 1,11 kg wobec 790 gramów, czyli różnica jak między dużym a małym telefonem w kieszeni.',
+    a: 'ZQ630 Plus i ZQ521. Etykieta kurierska ma 100 mm szerokości, a te dwa modele drukują etykiety o szerokości do 104 mm — jako jedyne mieszczą ją w całości. ZQ620 Plus i ZQ511 drukują 72 mm, ZQ610 Plus 48 mm; wystarczy to na etykiety magazynowe, metki i pokwitowania, ale nie na list przewozowy. Między ZQ630 Plus a ZQ521 decyduje waga: 1,11 kg wobec 790 gramów, czyli różnica jak między dużym a małym telefonem w kieszeni.',
   },
   {
     q: 'Czy każda drukarka mobilna Zebry wydrukuje moje etykiety z systemu?',
