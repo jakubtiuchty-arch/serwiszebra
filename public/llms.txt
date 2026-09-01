@@ -141,9 +141,11 @@ Porównanie dziewięciu modeli w jednej tabeli: https://www.serwis-zebry.pl/skle
   Metalowa rama, druk 104 mm, 203 lub 300 dpi, do 254 mm/s, rolka do 203 mm średnicy, taśma 450 m. Trzy przyciski zamiast ekranu, bez Wi-Fi, bez odklejaka i gilotyny.
 - **Zebra ZT231** — https://www.serwis-zebry.pl/sklep/drukarki-etykiet/zebra-zt231
   Metalowa obudowa, ekran dotykowy 4,3", druk 104 mm, 203 lub 300 dpi, do 305 mm/s. Wersje z odklejakiem, nawijakiem podkładu, gilotyną i Wi-Fi.
+- **Zebra ZT411** — https://www.serwis-zebry.pl/sklep/drukarki-etykiet/zebra-zt411
+  Metalowa obudowa, ekran dotykowy 4,3", druk 104 mm, 203, 300 albo 600 dpi, do 356 mm/s, waga 16,33 kg. Jedyna w tej klasie z 600 dpi; moduł RFID UHF, Wi-Fi i zestaw aplikatora instaluje się po zakupie.
 
-Obie występują w wersji termicznej i termotransferowej; rodzaj druku, jakość głowicy i wyposażenie są wbudowane w numer katalogowy i nie da się ich zmienić po zakupie.
-Porównanie obu modeli: https://www.serwis-zebry.pl/sklep/drukarki-etykiet/polprzemyslowe
+ZT111 i ZT231 występują w wersji termicznej i termotransferowej, ZT411 dostępna jest w wersjach termotransferowych. Rodzaj druku, jakość głowicy i wyposażenie są wbudowane w numer katalogowy i nie da się ich zmienić po zakupie.
+Porównanie trzech modeli: https://www.serwis-zebry.pl/sklep/drukarki-etykiet/polprzemyslowe
 
 ### Jak dobrać drukarkę biurkową Zebra
 

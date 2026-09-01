@@ -106,18 +106,18 @@ async function getDevices(): Promise<DeviceRow[]> {
  */
 const FAKTY_KLASY = [
   'Półprzemysłowe drukarki etykiet Zebra to trzy modele z metalową ramą: tańsza ZT111, wyposażona w ekran dotykowy ZT231 i najmocniejsza ZT411.',
-  'Obie drukują pasek o szerokości 104 mm na etykietach od 19,4 do 114 mm i przyjmują rolkę o średnicy do 203 mm.',
+  'Wszystkie trzy drukują pasek o szerokości 104 mm i przyjmują rolkę o średnicy do 203 mm; ZT111 i ZT231 na etykietach od 19,4 mm, ZT411 od 25,4 mm.',
   'Rolka jest kilkukrotnie większa niż w drukarce biurkowej, a taśma barwiąca ma 450 metrów nawoju, co znacząco ogranicza liczbę wymian materiału.',
-  'Do wyboru są dwie jakości druku: 203 dpi do etykiet wysyłkowych i magazynowych albo 300 dpi do drobnego tekstu i małych kodów.',
+  'Do wyboru są dwie jakości druku: 203 dpi do etykiet wysyłkowych i magazynowych albo 300 dpi do drobnego tekstu i małych kodów; ZT411 dokłada trzecią, 600 dpi.',
   'ZT231 drukuje szybciej: do 305 mm na sekundę wobec 254 mm w ZT111, a w wersji dokładniejszej 203 wobec 152 mm na sekundę.',
-  'Każdy model występuje w wersji termicznej, drukującej bez taśmy, oraz termotransferowej, w której wydruk pozostaje czytelny latami.',
-  'Odklejak, nawijak zużytego podkładu i gilotynę montuje producent wyłącznie w modelu ZT231; po zakupie nie można ich dołożyć.',
-  'Sieć Wi-Fi jest dostępna wyłącznie w ZT231, w wersjach oznaczonych literą C w numerze katalogowym; ZT111 ma USB, Ethernet i RS-232.',
+  'ZT111 i ZT231 występują w wersji termicznej, drukującej bez taśmy, oraz termotransferowej, w której wydruk pozostaje czytelny latami; ZT411 prowadzimy w wersjach termotransferowych.',
+  'Odklejak, nawijak zużytego podkładu i gilotynę montuje producent w modelach ZT231 i ZT411; po zakupie nie można ich dołożyć.',
+  'Sieci bezprzewodowej nie ma ZT111; w ZT231 wybiera się ją przy zamówieniu, a w ZT411 kartę Wi-Fi wkłada się w jedno z dwóch wolnych gniazd także po zakupie.',
   'Klasa przeznaczona dla firm, w których dzienny wolumen przekracza około dwóch tysięcy etykiet, a drukarka biurkowa zużywa się przedwcześnie.',
-  'ZT411 zamyka tę półkę od góry: ta sama szerokość wydruku i rolka co w ZT231, ale cięższa konstrukcja, druk do 356 mm na sekundę, opcjonalne 600 dpi oraz moduły RFID i aplikatora.',
+  'ZT411 zamyka tę półkę od góry: ta sama szerokość wydruku i rolka co w ZT231, ale konstrukcja o wadze 16,33 kg, druk do 356 mm na sekundę, opcjonalne 600 dpi oraz moduły RFID i aplikatora montowane u użytkownika.',
 ]
 
-/** Wiersze tabeli porównawczej — dwa modele tej klasy obok siebie. */
+/** Wiersze tabeli porównawczej — trzy modele tej klasy obok siebie. */
 const POROWNANIE = [
   {
     model: 'ZT111',
@@ -142,13 +142,13 @@ const POROWNANIE = [
   },
   {
     model: 'ZT411',
-    href: '/kontakt',
-    obudowa: 'całometalowa, 16,3 kg',
-    panel: 'kolorowy ekran dotykowy',
+    href: '/sklep/drukarki-etykiet/zebra-zt411',
+    obudowa: 'metalowa rama i metalowa obudowa',
+    panel: 'kolorowy ekran dotykowy 4,3"',
     szybkosc: 'do 356 mm/s',
-    wyposazenie: 'odklejak, nawijak, gilotyna, RFID',
-    siec: 'USB, Ethernet, RS-232, opcja Wi-Fi',
-    waga: 'na zamówienie',
+    wyposazenie: 'odklejak, dwa nawijaki, gilotyna',
+    siec: 'USB, Ethernet, RS-232, Bluetooth; dwa wolne gniazda',
+    waga: '16,33 kg',
   },
 ]
 
@@ -166,6 +166,10 @@ const FAQ_KATEGORII = [
     a: 'ZT111 jest tańsza i dostępna wyłącznie w wersjach podstawowych: trzy przyciski zamiast wyświetlacza, obudowa z tworzywa na metalowej ramie, bez sieci bezprzewodowej, odklejaka i gilotyny. ZT231 ma kolorowy wyświetlacz dotykowy, obudowę w całości metalową, wyższą prędkość druku oraz wersje z odklejakiem, nawijakiem podkładu, gilotyną i Wi-Fi. Mechanizm druku i pojemność materiału są w obu modelach identyczne.',
   },
   {
+    q: 'ZT231 czy ZT411?',
+    a: 'ZT231 wystarcza w większości zastosowań: ma tę samą szerokość wydruku 104 mm, tę samą rolkę do 203 mm i ten sam ekran dotykowy. ZT411 wybiera się dla trzech rzeczy, których ZT231 nie ma: rozdzielczości 600 dpi, modułu RFID oraz zestawu aplikatora do automatycznego etykietowania — a przy okazji dostaje się druk do 356 mm na sekundę i cięższą, w całości metalową konstrukcję o wadze 16,33 kg. Warto pamiętać, że RFID i Wi-Fi w ZT411 montuje się już po zakupie, więc decyzja nie musi zapaść przy zamówieniu.',
+  },
+  {
     q: 'Termiczna czy termotransferowa?',
     a: 'Wersja termiczna drukuje ciepłem głowicy, bez taśmy — jest tańsza w eksploatacji, ale wydruk stopniowo blaknie: po kilku miesiącach, a w słońcu i cieple znacznie szybciej. Wersja termotransferowa przenosi obraz z taśmy barwiącej i pozostaje czytelna latami. Do etykiet wysyłkowych wystarcza wersja termiczna; do oznaczeń majątku, magazynu i produkcji stosuje się termotransferową.',
   },
@@ -175,7 +179,7 @@ const FAQ_KATEGORII = [
   },
   {
     q: 'Czy odklejak albo gilotynę można dołożyć później?',
-    a: 'Nie. Moduły te montuje producent, więc wybiera się je przy zamówieniu i wyłącznie w modelu ZT231. Odklejak oddziela etykietę od podkładu, wersja z nawijakiem dodatkowo zwija zużyty podkład na szpulę, a gilotyna odcina wydruk. Zmiana po zakupie oznacza wymianę całego urządzenia.',
+    a: 'Nie. Moduły te montuje producent, więc wybiera się je przy zamówieniu — i wyłącznie w modelach ZT231 oraz ZT411, bo ZT111 występuje tylko w wersji z odrywaniem. Odklejak oddziela etykietę od podkładu, wersja z nawijakiem dodatkowo zwija zużyty podkład na szpulę, a nawijak pełnej rolki w ZT411 nawija zadrukowane etykiety z powrotem na szpulę; gilotyna odcina wydruk. Zmiana po zakupie oznacza wymianę całego urządzenia.',
   },
   {
     q: 'Jakie etykiety i taśmy pasują do tej klasy?',
@@ -408,8 +412,9 @@ export default async function SemiIndustrialPrintersPage() {
                   Rozdzielczość 203 dpi wystarcza na tekst, kod kreskowy i logo w typowej
                   wielkości, a przy tym pozwala drukować szybciej. Rozdzielczość 300 dpi
                   stosuje się do drobnego tekstu, małych kodów dwuwymiarowych i etykiet
-                  gęsto zapełnionych treścią. Głowicy nie można wymienić na inną
-                  rozdzielczość po zakupie.
+                  gęsto zapełnionych treścią. Sam ZT411 ma jeszcze wersję 600 dpi — do
+                  oznaczeń miniaturowych, kosztem prędkości i maksymalnej długości
+                  etykiety. Głowicy nie można wymienić na inną rozdzielczość po zakupie.
                 </p>
               </li>
               <li className="rounded-xl border border-gray-200 bg-white p-4">
@@ -420,13 +425,15 @@ export default async function SemiIndustrialPrintersPage() {
                   W wersji podstawowej etykieta wychodzi na wstędze i jest odrywana
                   ręcznie. Odklejak oddziela ją od podkładu, wersja z nawijakiem zwija
                   zużyty podkład na szpulę, a gilotyna odcina wydruk — to rozwiązanie do
-                  przywieszek i wydruków o zmiennej długości. Wszystkie trzy moduły montuje
-                  producent i wyłącznie w modelu ZT231.
+                  przywieszek i wydruków o zmiennej długości. ZT411 ma dodatkowo nawijak
+                  pełnej rolki, który nawija zadrukowane etykiety z powrotem na szpulę.
+                  Moduły te montuje producent, w modelach ZT231 i ZT411; ZT111 występuje
+                  wyłącznie w wersji z odrywaniem.
                 </p>
               </li>
             </ol>
 
-            <h2 className="mt-10 text-xl font-bold text-gray-900">Dwa modele w tej klasie</h2>
+            <h2 className="mt-10 text-xl font-bold text-gray-900">Trzy modele w tej klasie</h2>
 
             <h3 className="mt-5 text-base font-semibold text-gray-900">
               ZT111 — wersja podstawowa w metalowej ramie
@@ -452,8 +459,9 @@ export default async function SemiIndustrialPrintersPage() {
             <p className="mt-2 text-sm leading-relaxed text-gray-700">
               Obudowa w całości metalowa, kolorowy wyświetlacz dotykowy po polsku, druk
               z prędkością do 305 mm na sekundę oraz wersje z odklejakiem, nawijakiem
-              podkładu, gilotyną albo siecią bezprzewodową. Kosztuje więcej, ale jako jedyny
-              model tej klasy pozwala dobrać sposób wydawania etykiety. Zobacz{' '}
+              podkładu, gilotyną albo siecią bezprzewodową. Kosztuje więcej niż ZT111, ale
+              pozwala dobrać sposób wydawania etykiety i obsłużyć drukarkę bez komputera.
+              Zobacz{' '}
               <Link
                 href="/sklep/drukarki-etykiet/zebra-zt231"
                 className="font-medium text-gray-900 underline"
@@ -467,17 +475,25 @@ export default async function SemiIndustrialPrintersPage() {
               ZT411 — najmocniejszy model tej klasy
             </h3>
             <p className="mt-2 text-sm leading-relaxed text-gray-700">
-              Ta sama szerokość wydruku i rolka co w ZT231, ale konstrukcja o wadze 16 kg,
-              druk do 356 mm na sekundę i opcje niedostępne niżej: rozdzielczość 600 dpi,
-              moduł RFID i aplikator. Wybierana tam, gdzie drukarka pracuje bez przerwy,
-              a etykiety schodzą z linii produkcyjnej. Prowadzimy ją na zamówienie — napisz,
-              a przygotujemy wycenę z konfiguracją dobraną do materiału.
+              Ta sama szerokość wydruku i rolka co w ZT231, ale konstrukcja o wadze
+              16,33 kg, druk do 356 mm na sekundę i trzy rzeczy niedostępne niżej:
+              rozdzielczość 600 dpi, moduł RFID oraz zestaw aplikatora do systemów
+              automatycznego etykietowania. RFID, kartę Wi-Fi i aplikator montuje się
+              u użytkownika, więc drukarkę można rozbudować po zakupie. Wybierana tam,
+              gdzie druk trwa cały dzień, a etykiety schodzą z linii produkcyjnej. Zobacz{' '}
+              <Link
+                href="/sklep/drukarki-etykiet/zebra-zt411"
+                className="font-medium text-gray-900 underline"
+              >
+                Zebra ZT411
+              </Link>
+              .
             </p>
 
             <div className="mt-6 overflow-x-auto rounded-xl border border-gray-200 bg-white [contain:paint]">
               <table className="w-full min-w-[620px] table-fixed text-sm">
                 <caption className="sr-only">
-                  Porównanie półprzemysłowych drukarek etykiet Zebra ZT111 i ZT231
+                  Porównanie półprzemysłowych drukarek etykiet Zebra ZT111, ZT231 i ZT411
                 </caption>
                 <colgroup>
                   <col className="w-[14%]" />

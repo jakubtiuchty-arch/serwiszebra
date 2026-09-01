@@ -499,7 +499,11 @@ export default async function DevicePage({
                     <dl className="mt-2.5 grid grid-cols-[auto_1fr] gap-x-4 gap-y-2.5 text-sm leading-relaxed">
                       {os.pozycje.map((poz) => (
                         <div key={poz.termin} className="contents">
-                          <dt className="self-start whitespace-nowrap font-semibold text-gray-900">
+                          {/* `whitespace-nowrap` dopiero od sm: na telefonie długie
+                              hasło („Odklejak z nawijakiem pełnej rolki" w ZT411)
+                              rozpychało stronę o kilkanaście pikseli, bo kolumna
+                              terminu nie miała jak się zwęzić */}
+                          <dt className="self-start font-semibold text-gray-900 sm:whitespace-nowrap">
                             {poz.termin}
                           </dt>
                           <dd className="text-gray-700">{poz.opis}</dd>

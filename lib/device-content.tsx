@@ -2730,6 +2730,160 @@ export const TRESC_KART: Record<string, TrescKarty> = {
       ['Gwarancja', '24 miesiące'],
     ],
   },
+
+  'zebra-zt411': {
+    rekomendowanyPn: 'ZT41142-T0E0000Z',
+    zdjecieGlowne: '/sklep_photo/urzadzenia/zt411_1.webp',
+    wSkrocie: [
+      'Zebra ZT411 to najmocniejsza drukarka klasy półprzemysłowej: metalowa rama, składana metalowa pokrywa komory materiałów i kolorowy ekran dotykowy 4,3 cala.',
+      'Drukuje pasek o szerokości 104 mm z szybkością do 356 mm na sekundę — o jedną szóstą szybciej niż ZT231 i ponad dwukrotnie szybciej niż drukarka biurkowa.',
+      'Jako jedyna w tej klasie występuje w rozdzielczości 600 dpi, obok standardowych 203 i 300 dpi; wersji 600 dpi nie łączy się z modułem RFID do powierzchni metalowych.',
+      'Mieści rolkę etykiet o średnicy do 203 mm i taśmę barwiącą o nawoju 450 metrów, a materiał ładuje się z boku, bez wyjmowania drukarki ze stanowiska.',
+      'Moduł RFID UHF i zestaw aplikatora montuje się u użytkownika, więc drukarkę można rozbudować po zakupie — inaczej niż odklejak, nawijak i gilotynę, które wybiera się przy zamówieniu.',
+      'Waży 16,33 kg, a w wersji z nawijakiem pełnej rolki 22,09 kg, i pracuje w temperaturze od 5 do 40°C przy druku z taśmą, od 0°C przy termicznym.',
+    ],
+    zweryfikowano: '2026-09-01',
+    poradniki: [
+      'serwis-drukarki-zebra-zt411-zt421-diagnostyka-naprawa',
+      'drukarka-zebra-nie-drukuje-przyczyny-rozwiazania',
+      'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',
+    ],
+    opis: [
+      <>
+        Zebra ZT411 domyka półkę półprzemysłową od góry. Ma tę samą szerokość wydruku
+        104 mm i tę samą rolkę do 203 mm co ZT231, ale cięższą, w całości metalową
+        konstrukcję i mechanizm przewidziany na pracę wielozmianową. To urządzenie dla
+        zakładów, w których druk etykiet trwa cały dzień, a przestój linii kosztuje
+        więcej niż sama drukarka.
+      </>,
+      <>
+        Drukuje z szybkością do 356 mm na sekundę i jako jedyna w tej klasie występuje
+        w rozdzielczości 600 dpi — obok standardowych 203 i 300 dpi. Sześćset dpi
+        stosuje się tam, gdzie na małej etykiecie trzeba zmieścić drobny tekst,
+        miniaturowy kod dwuwymiarowy albo oznaczenie zgodne z wymaganiami branży
+        farmaceutycznej czy elektronicznej. Rolka o średnicy do 203 mm i taśma
+        o nawoju 450 metrów oznaczają rzadkie przerwy na wymianę materiału, a boczny
+        załadunek pozwala uzupełnić etykiety bez wyciągania drukarki ze stanowiska.
+      </>,
+      <>
+        Odklejak, nawijak i gilotynę montuje producent, więc wybiera się je przy
+        zamówieniu. Rozbudowa jest natomiast możliwa tam, gdzie w{' '}
+        <Link
+          href="/sklep/drukarki-etykiet/zebra-zt231"
+          className="font-medium text-gray-900 underline"
+        >
+          Zebrze ZT231
+        </Link>{' '}
+        jej nie ma: moduł RFID UHF, kartę sieci bezprzewodowej i zestaw aplikatora do
+        systemów automatycznego etykietowania instaluje się u użytkownika. Dwa wolne
+        gniazda komunikacyjne przyjmują Wi-Fi, drugi Ethernet albo interfejs równoległy.
+        Jeśli etykiety mają być szersze niż 114 mm, właściwym urządzeniem jest{' '}
+        <Link
+          href="/sklep/drukarki-etykiet/przemyslowe"
+          className="font-medium text-gray-900 underline"
+        >
+          drukarka przemysłowa z paskiem 168 mm
+        </Link>
+        .
+      </>,
+    ],
+    osie: [
+      {
+        tytul: 'Jakość druku',
+        pozycje: [
+          { termin: '203 dpi', opis: 'etykiety wysyłkowe, magazynowe i typowe kody kreskowe, najwyższa prędkość' },
+          { termin: '300 dpi', opis: 'drobny tekst i małe kody dwuwymiarowe, kosztem prędkości druku' },
+          {
+            termin: '600 dpi',
+            opis: 'oznaczenia miniaturowe i etykiety o dużym zagęszczeniu treści; wyłącznie w ZT411',
+          },
+        ],
+      },
+      {
+        tytul: 'Wyposażenie',
+        pozycje: [
+          { termin: 'Odrywanie', opis: 'etykiety wychodzą na wstędze i są odrywane ręcznie' },
+          { termin: 'Odklejak', opis: 'oddziela etykietę od podkładu, co przyspiesza naklejanie' },
+          {
+            termin: 'Odklejak z nawijakiem podkładu',
+            opis: 'zwija zużyty podkład na szpulę, eliminując odpad przy stanowisku',
+          },
+          {
+            termin: 'Odklejak z nawijakiem pełnej rolki',
+            opis: 'nawija zadrukowane etykiety z powrotem na rolkę — do aplikatorów i druku na zapas',
+          },
+          { termin: 'Gilotyna', opis: 'odcina wydruk; stosowana do przywieszek i wydruków o zmiennej długości' },
+        ],
+      },
+      {
+        tytul: 'Rozbudowa po zakupie',
+        pozycje: [
+          { termin: 'RFID UHF', opis: 'moduł kodujący znaczniki, instalowany u użytkownika' },
+          { termin: 'Wi-Fi', opis: 'karta sieci bezprzewodowej do jednego z dwóch wolnych gniazd' },
+          { termin: 'Aplikator', opis: 'zestaw do systemów automatycznego etykietowania' },
+        ],
+      },
+    ],
+    faqNaglowek: 'Najczęstsze pytania o ZT411',
+    faq: [
+      {
+        q: 'Czym ZT411 różni się od ZT231?',
+        a: 'Konstrukcją, prędkością i możliwościami rozbudowy. ZT411 drukuje do 356 mm na sekundę wobec 305 mm w ZT231, waży 16,33 kg zamiast 9,1 kg i jako jedyna w tej klasie ma wersję 600 dpi. Przyjmuje też moduł RFID, kartę sieci bezprzewodowej i zestaw aplikatora, które instaluje się już po zakupie. Szerokość wydruku 104 mm, rolka do 203 mm i taśma 450 metrów są w obu modelach takie same, więc przy kilku tysiącach etykiet dziennie ZT231 zwykle wystarcza.',
+        href: '/sklep/drukarki-etykiet/zebra-zt231',
+        link: 'Zobacz Zebra ZT231',
+      },
+      {
+        q: 'Kiedy wybrać 600 dpi?',
+        a: 'Gdy na etykiecie ma się zmieścić drobny tekst albo miniaturowy kod dwuwymiarowy — typowo w farmacji, elektronice i przy oznaczaniu małych elementów. Wyższa rozdzielczość zmniejsza prędkość druku i skraca maksymalną długość etykiety do 991 mm wobec 3988 mm przy 203 dpi. Do etykiet wysyłkowych i magazynowych 600 dpi nie daje nic poza niższą wydajnością.',
+        href: '/sklep/drukarki-etykiet/polprzemyslowe',
+        link: 'Porównaj drukarki półprzemysłowe',
+      },
+      {
+        q: 'Czy ZT411 obsługuje RFID?',
+        a: 'Tak, i jest to rozbudowa możliwa po zakupie — moduł RFID UHF instaluje się u użytkownika, bez odsyłania drukarki do producenta. Obsługuje znaczniki zgodne z UHF EPC generacji 2 wersji 2.1, ISO/IEC 18000-63 oraz RAIN. Dostępny jest też osobny zestaw do znaczników na powierzchniach metalowych, którego nie łączy się z wersją 600 dpi.',
+        href: '/blog/serwis-drukarki-zebra-zt411-zt421-diagnostyka-naprawa',
+        link: 'Diagnostyka ZT411 i ZT421',
+      },
+      {
+        q: 'Czy odklejak albo gilotynę można dołożyć później?',
+        a: 'Nie. Odklejak, obie wersje nawijaka i gilotynę montuje producent, więc wybiera się je przy zamówieniu — zmiana po zakupie oznacza wymianę urządzenia. Po zakupie rozbudowuje się natomiast łączność, RFID i zestaw aplikatora. Warto rozstrzygnąć przed zamówieniem, czy etykiety mają wychodzić na wstędze, oddzielone od podkładu, nawinięte z powrotem na rolkę czy odcięte.',
+        href: '/sklep/drukarki-etykiet/polprzemyslowe',
+        link: 'Porównaj drukarki półprzemysłowe',
+      },
+      {
+        q: 'Jakie etykiety i taśmy pasują do ZT411?',
+        a: 'Etykiety o szerokości od 25,4 do 114 mm przy odrywaniu i gilotynie, a od 25,4 do 108 mm w wersjach z odklejakiem i nawijakiem. Rolka może mieć do 203 mm średnicy na tulejce 76 mm, a grubość materiału mieści się w zakresie od 0,058 do 0,25 mm. Taśma barwiąca ma 450 metrów nawoju, szerokość od 51 do 110 mm i tulejkę 25 mm — i musi być szersza od etykiety, inaczej brzegi pozostają niezadrukowane, a głowica pracuje bez ochrony.',
+        href: '/blog/blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',
+        link: 'Dlaczego wydruk blednie',
+      },
+    ],
+    spec: [
+      ['Producent', 'Zebra'],
+      ['Model', 'ZT411'],
+      ['Klasa', 'Półprzemysłowa'],
+      ['Technologia druku', 'Termotransferowa i termiczna'],
+      ['Rozdzielczość', '203, 300 albo 600 DPI'],
+      ['Szerokość druku', '104 mm'],
+      ['Prędkość druku', 'do 356 mm/s'],
+      ['Maks. długość etykiety', '3988 mm (203 dpi); 1854 mm (300 dpi); 991 mm (600 dpi)'],
+      ['Szerokość etykiet', '25,4–114 mm (odrywanie, gilotyna); 25,4–108 mm (odklejak, nawijak)'],
+      ['Grubość materiału', '0,058–0,25 mm'],
+      ['Maks. średnica rolki', '203 mm na gilzie 76 mm'],
+      ['Taśma barwiąca', 'nawój 450 m, szerokość 51–110 mm, gilza 25 mm'],
+      ['Pamięć', '512 MB Flash, 256 MB SDRAM'],
+      ['Panel', 'Kolorowy ekran dotykowy 4,3 cala'],
+      ['Łączność', 'USB, dwa porty USB Host, Ethernet 10/100, RS-232, Bluetooth 4.2'],
+      ['Łączność opcjonalna', 'Wi-Fi 802.11ac, drugi Ethernet, interfejs równoległy, interfejs aplikatora'],
+      ['Wyposażenie', 'Odrywanie, odklejak, nawijak podkładu, nawijak pełnej rolki albo gilotyna'],
+      ['RFID', 'UHF EPC gen. 2 wersja 2.1, ISO/IEC 18000-63, RAIN — montaż u użytkownika'],
+      ['Temperatura pracy', '5–40°C (termotransfer); 0–40°C (termiczna)'],
+      ['Wymiary (D×S×W)', '495 × 269 × 324 mm'],
+      ['Waga', '16,33 kg; 22,09 kg z nawijakiem pełnej rolki'],
+      ['Języki', 'ZPL, ZPL II, EPL (wersje 203 dpi)'],
+      ['Stan', 'Nowy, oryginalny'],
+      ['Gwarancja', '24 miesiące'],
+    ],
+  },
 }
 
 export const trescKarty = (slug: string): TrescKarty | undefined => TRESC_KART[slug]
