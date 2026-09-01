@@ -105,7 +105,7 @@ async function getDevices(): Promise<DeviceRow[]> {
  * samodzielne fragmenty.
  */
 const FAKTY_KLASY = [
-  'Półprzemysłowe drukarki etykiet Zebra to dwa modele z metalową ramą: tańsza ZT111 i wyposażona w ekran dotykowy ZT231.',
+  'Półprzemysłowe drukarki etykiet Zebra to trzy modele z metalową ramą: tańsza ZT111, wyposażona w ekran dotykowy ZT231 i najmocniejsza ZT411.',
   'Obie drukują pasek o szerokości 104 mm na etykietach od 19,4 do 114 mm i przyjmują rolkę o średnicy do 203 mm.',
   'Rolka jest kilkukrotnie większa niż w drukarce biurkowej, a taśma barwiąca ma 450 metrów nawoju, co znacząco ogranicza liczbę wymian materiału.',
   'Do wyboru są dwie jakości druku: 203 dpi do etykiet wysyłkowych i magazynowych albo 300 dpi do drobnego tekstu i małych kodów.',
@@ -114,6 +114,7 @@ const FAKTY_KLASY = [
   'Odklejak, nawijak zużytego podkładu i gilotynę montuje producent wyłącznie w modelu ZT231; po zakupie nie można ich dołożyć.',
   'Sieć Wi-Fi jest dostępna wyłącznie w ZT231, w wersjach oznaczonych literą C w numerze katalogowym; ZT111 ma USB, Ethernet i RS-232.',
   'Klasa przeznaczona dla firm, w których dzienny wolumen przekracza około dwóch tysięcy etykiet, a drukarka biurkowa zużywa się przedwcześnie.',
+  'ZT411 zamyka tę półkę od góry: ta sama szerokość wydruku i rolka co w ZT231, ale cięższa konstrukcja, druk do 356 mm na sekundę, opcjonalne 600 dpi oraz moduły RFID i aplikatora.',
 ]
 
 /** Wiersze tabeli porównawczej — dwa modele tej klasy obok siebie. */
@@ -138,6 +139,16 @@ const POROWNANIE = [
     siec: 'USB, Ethernet, RS-232, opcja Wi-Fi',
     waga: '9,1 kg',
     wyroznik: true,
+  },
+  {
+    model: 'ZT411',
+    href: '/kontakt',
+    obudowa: 'całometalowa, 16,3 kg',
+    panel: 'kolorowy ekran dotykowy',
+    szybkosc: 'do 356 mm/s',
+    wyposazenie: 'odklejak, nawijak, gilotyna, RFID',
+    siec: 'USB, Ethernet, RS-232, opcja Wi-Fi',
+    waga: 'na zamówienie',
   },
 ]
 
@@ -450,6 +461,17 @@ export default async function SemiIndustrialPrintersPage() {
                 Zebra ZT231
               </Link>
               .
+            </p>
+
+            <h3 className="mt-5 text-base font-semibold text-gray-900">
+              ZT411 — najmocniejszy model tej klasy
+            </h3>
+            <p className="mt-2 text-sm leading-relaxed text-gray-700">
+              Ta sama szerokość wydruku i rolka co w ZT231, ale konstrukcja o wadze 16 kg,
+              druk do 356 mm na sekundę i opcje niedostępne niżej: rozdzielczość 600 dpi,
+              moduł RFID i aplikator. Wybierana tam, gdzie drukarka pracuje bez przerwy,
+              a etykiety schodzą z linii produkcyjnej. Prowadzimy ją na zamówienie — napisz,
+              a przygotujemy wycenę z konfiguracją dobraną do materiału.
             </p>
 
             <div className="mt-6 overflow-x-auto rounded-xl border border-gray-200 bg-white [contain:paint]">

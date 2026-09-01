@@ -21,13 +21,15 @@ export default function Page() {
           Przemysłowa drukarka etykiet jest budowana do pracy ciągłej — całometalowa
           konstrukcja, głowice o dużym resursie i mechanizmy, które znoszą pył, wahania
           temperatury i druk na trzy zmiany. To sprzęt na produkcję, do centrów
-          logistycznych i magazynów wysokiego składowania.
+          logistycznych i magazynów wysokiego składowania. Przy mniejszym obciążeniu
+          wystarcza klasa półprzemysłowa, w której najmocniejszym modelem jest ZT411.
         </>,
         <>
-          ZT411 (szerokość druku 104 mm) i ZT421 (168 mm) to konie robocze tej klasy —
-          rozbudowywalne o gilotynę, nawijak i RFID. ZT610 i ZT620 drukują w rozdzielczości
-          do 600 dpi, potrzebnej przy najdrobniejszych oznaczeniach elektroniki. ZT510 to
-          wariant oszczędnościowy do prostszych zadań o dużym wolumenie.
+          ZT421 drukuje pasek o szerokości 168 mm — najszerszy w ofercie, do etykiet
+          paletowych i oznaczeń zbiorczych. ZT610 i ZT620 osiągają rozdzielczość 600 dpi,
+          potrzebną przy najdrobniejszych oznaczeniach elektroniki, a ZT510 jest wariantem
+          prostszym, do dużego wolumenu bez rozbudowanych opcji. Wszystkie przyjmują
+          gilotynę, nawijak podkładu i moduł RFID.
         </>,
         <>
           Serwisujemy te maszyny na co dzień jako autoryzowany serwis Zebry — dobierając

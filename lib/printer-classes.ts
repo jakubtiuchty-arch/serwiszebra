@@ -52,11 +52,11 @@ export const KLASY_DRUKAREK: KlasaDrukarek[] = [
     grafika: '/klasy/polprzemyslowe.jpg',
     wideo: '/klasy/polprzemyslowe.mp4',
     nazwa: 'Drukarki półprzemysłowe',
-    zajawka: 'Między biurkiem a halą — do ok. 2–3 tys. etykiet dziennie.',
-    serie: 'Serie ZT111, ZT231',
-    metaTitle: 'Półprzemysłowe drukarki etykiet Zebra — ZT111, ZT231 | Serwis Zebra',
+    zajawka: 'Między biurkiem a halą — do kilku tysięcy etykiet dziennie.',
+    serie: 'Serie ZT111, ZT231, ZT411',
+    metaTitle: 'Półprzemysłowe drukarki etykiet Zebra — ZT111–ZT411 | Serwis Zebra',
     metaDescription:
-      'Półprzemysłowe drukarki etykiet Zebra ZT111 i ZT231 — metalowa konstrukcja, wydajność do kilku tysięcy etykiet dziennie. Dobór, sprzedaż i serwis w jednym miejscu.',
+      'Półprzemysłowe drukarki etykiet Zebra ZT111, ZT231 i ZT411 — metalowa rama, rolka do 203 mm, wydajność do kilku tysięcy etykiet dziennie. Sprzedaż i serwis w jednym miejscu.',
   },
   {
     slug: 'przemyslowe',
@@ -64,10 +64,10 @@ export const KLASY_DRUKAREK: KlasaDrukarek[] = [
     wideo: '/klasy/przemyslowe.mp4',
     nazwa: 'Drukarki przemysłowe',
     zajawka: 'Do pracy ciągłej na produkcji i w magazynie wysokiego składowania.',
-    serie: 'Serie ZT411, ZT421, ZT510, ZT610, ZT620',
+    serie: 'Serie ZT421, ZT510, ZT610, ZT620',
     metaTitle: 'Przemysłowe drukarki etykiet Zebra — seria ZT | Serwis Zebra',
     metaDescription:
-      'Przemysłowe drukarki etykiet Zebra ZT411–ZT620 — praca ciągła, głowice o dużym resursie, druk do 600 dpi. Sprzedaje i serwisuje autoryzowany serwis Zebry.',
+      'Przemysłowe drukarki etykiet Zebra ZT421–ZT620 — praca ciągła, druk do 168 mm szerokości i do 600 dpi, głowice o dużym resursie. Sprzedaje i serwisuje autoryzowany serwis Zebry.',
   },
 ]
 
