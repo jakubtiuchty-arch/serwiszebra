@@ -3035,9 +3035,9 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     ],
     zweryfikowano: '2026-09-02',
     poradniki: [
+      'serwis-drukarki-zebra-zt510-diagnostyka-naprawa',
       'drukarka-zebra-nie-drukuje-przyczyny-rozwiazania',
       'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',
-      'serwis-drukarki-zebra-zt411-zt421-diagnostyka-naprawa',
     ],
     opis: [
       <>
