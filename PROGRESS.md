@@ -1215,6 +1215,10 @@ Fraza „biurkowe drukarki etykiet Zebra" jest głównym wejściem do tej katego
 - Miniatury galerii z `alt=""` zostają — siedzą w `<button aria-label="Zdjęcie N">`, więc są dostępne.
 - Nie zrobione: opinie/`aggregateRating` (brak prawdziwych opinii w systemie), `gtin` (brak EAN w danych).
 
+## 2026-09-02 — ZT411: materiały pokazywały same etykiety termiczne
+- `BanerMaterialow` dostaje `termotransfer` z reguły: sufiks „t" w modelu ALBO cecha wariantu „Rodzaj druku = Termotransferowy". ZT411 nie ma sufiksu, a jego 11 wariantów nie miało tej cechy (ZT111 i ZT231 mają — tam działało). Efekt: karta przemysłowej drukarki termotransferowej proponowała etykiety termiczne bez taśm.
+- Naprawa w dwóch miejscach: (1) baza — cecha `Rodzaj druku: Termotransferowy` dopisana do 11 wariantów ZT411 (PATCH `attributes`), produkcja pokazuje taśmy i etykiety TT od razu, bo karta jest dynamiczna; (2) kod — zabezpieczenie po rodzinie `/^(zt|zm|ze|105sl)/i`, żeby kolejny model bez cechy nie powtórzył błędu.
+
 ## 2026-09-02 — powiadomienia na @takma.com.pl przez SMTP cyber_folks (obejście HostKarma)
 - **Problem**: serwer poczty takma.com.pl (cyber_folks) odrzuca ~10% maili z Resenda kodem `550 Email blocked by hostkarma.junkemailfilter.com` — pula IP Amazon SES okresowo ląduje na tej liście, Resend takich odbić nie ponawia. cyber_folks odmówił białej listy (18.08.2026). Ginęły m.in. „Nowa wiadomość — naprawa” do serwis@/wojcik@/zuchnicki@ i „Kurier zamówiony”.
 - **Rozwiązanie po stronie nadawcy**: `lib/mail/transport.ts` — `sendMail()` o sygnaturze `resend.emails.send`. Adresaci @takma.com.pl idą uwierzytelnionym SMTP z serwera cyber_folks (skrzynka serwis@takma.com.pl, jak moduł POCZTA; From = nazwa nadawcy + serwis@takma.com.pl, Reply-To = pierwotny nadawca), pozostali przez Resend. Bez MAIL_PASSWORD albo po błędzie SMTP wszystko wraca na Resend.
