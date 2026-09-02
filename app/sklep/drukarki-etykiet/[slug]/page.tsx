@@ -522,11 +522,14 @@ export default async function DevicePage({
 
           {/* Materiały eksploatacyjne zaraz po częściach: klient, który wybrał
               już wersję, następnym pytaniem pyta o etykiety. Rodzaj druku
-              czytamy z ostatniej litery modelu — „t" zużywa taśmę i etykiety,
-              „d" wyłącznie etykiety. */}
+              czytamy z ostatniej litery modelu („t" zużywa taśmę i etykiety,
+              „d" wyłącznie etykiety), z cechy wariantu albo z rodziny: serie
+              przemysłowe ZT, ZM, ZE i 105SL drukują termotransferowo bez
+              sufiksu w nazwie — ZT411 pokazywał przez to same etykiety termiczne. */}
           <BanerMaterialow
             termotransfer={
               /t$/i.test((product.device_model || '').trim()) ||
+              /^(zt|zm|ze|105sl)/i.test((product.device_model || '').trim()) ||
               variants.some((v) => v.cechy?.['Rodzaj druku'] === 'Termotransferowy')
             }
             mobilna={product.attributes?.klasa === 'mobilne'}
