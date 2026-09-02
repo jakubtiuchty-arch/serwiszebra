@@ -189,7 +189,7 @@ export default function DeviceAccessories({
           )}
         </Link>
         <div className="min-w-0 flex-1">
-          <p className="text-[11px] uppercase tracking-wide text-gray-400">
+          <p className="text-[11px] uppercase tracking-wide text-gray-500">
             {NAZWY_TYPOW[p.product_type] || p.product_type}
             {p.resolution_dpi ? ` · ${p.resolution_dpi} dpi` : ''}
           </p>

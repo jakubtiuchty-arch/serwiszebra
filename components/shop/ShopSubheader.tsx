@@ -28,8 +28,8 @@ export default function ShopSubheader({ breadcrumbs }: ShopSubheaderProps) {
           {/* Breadcrumbs - Mobile optimized */}
           <nav aria-label="Breadcrumb" className="flex items-center gap-1 sm:gap-1.5 text-xs sm:text-sm overflow-hidden">
             {/* Home icon on mobile, text on desktop */}
-            <Link href="/" className="text-gray-500 hover:text-blue-600 transition-colors flex-shrink-0">
-              <Home className="w-4 h-4 sm:hidden" />
+            <Link href="/" aria-label="Strona główna" className="text-gray-500 hover:text-blue-600 transition-colors flex-shrink-0">
+              <Home className="w-4 h-4 sm:hidden" aria-hidden="true" />
               <span className="hidden sm:inline">Start</span>
             </Link>
             
@@ -62,8 +62,9 @@ export default function ShopSubheader({ breadcrumbs }: ShopSubheaderProps) {
           </nav>
 
           {/* Koszyk - Compact on mobile */}
-          <Link 
-            href="/sklep/koszyk" 
+          <Link
+            href="/sklep/koszyk"
+            aria-label={cartCount > 0 ? `Koszyk, ${cartCount} szt.` : 'Koszyk'}
             className="flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1.5 bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-lg transition-colors ml-2 flex-shrink-0"
           >
             <div className="relative">

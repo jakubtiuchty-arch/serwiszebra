@@ -116,13 +116,8 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
         
-        {/* Preload critical fonts and images */}
-        <link
-          rel="preload"
-          as="image"
-          href="/takma_logo_1.png"
-          fetchPriority="high"
-        />
+        {/* Bez preloadu logo (3 kB): z fetchPriority=high wyprzedzało zdjęcie
+            produktu, czyli element LCP na kartach urządzeń (Lighthouse: Load Delay 1,7 s) */}
       </head>
       <body className="antialiased">
         {/* Google Tag Manager (noscript) */}

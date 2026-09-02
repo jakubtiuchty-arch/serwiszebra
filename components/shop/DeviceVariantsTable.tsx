@@ -322,7 +322,7 @@ export default function DeviceVariantsTable({
         W dostawie
       </span>
     ) : (
-      <span className="rounded-full bg-gray-100 px-2.5 py-1 text-xs font-medium text-gray-500">
+      <span className="rounded-full bg-gray-100 px-2.5 py-1 text-xs font-medium text-gray-600">
         Na zamówienie
       </span>
     )
@@ -349,7 +349,8 @@ export default function DeviceVariantsTable({
           dodaj(v)
         }}
         disabled={!s}
-        aria-label={`Dodaj ${name} ${v.pn} do koszyka`}
+        // Nazwa dostępna musi zawierać widoczny tekst przycisku (WCAG 2.5.3)
+        aria-label={`${pelny ? 'Dodaj do koszyka' : 'Koszyk'}: ${name} ${v.pn}`}
         className={`inline-flex min-h-[44px] items-center justify-center gap-1.5 rounded-lg bg-[#A8F000] px-4 text-sm font-semibold text-gray-900 transition hover:bg-[#96D800] disabled:cursor-not-allowed disabled:opacity-40 ${
           pelny ? 'w-full' : ''
         }`}

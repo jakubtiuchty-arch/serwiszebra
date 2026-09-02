@@ -1259,7 +1259,7 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
                   )}
                   <tr className="border-b border-gray-100">
                     <td className="py-2 text-gray-500 pr-4">Stan</td>
-                    <td className="py-2 font-medium text-green-600 text-right">Nowy, oryginalny</td>
+                    <td className="py-2 font-medium text-green-700 text-right">Nowy, oryginalny</td>
                   </tr>
                   <tr>
                     <td className="py-2 text-gray-500 pr-4">Gwarancja</td>

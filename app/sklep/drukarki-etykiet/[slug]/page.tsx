@@ -489,7 +489,7 @@ export default async function DevicePage({
               >
                 {tresc.osie.map((os) => (
                   <div key={os.tytul} className="rounded-xl border border-gray-200 p-4">
-                    <p className="text-[11px] font-semibold uppercase tracking-wide text-gray-400">
+                    <p className="text-[11px] font-semibold uppercase tracking-wide text-gray-500">
                       {os.tytul}
                     </p>
                     {/* Siatka zamiast sztywnej szerokości terminu: kolumna
@@ -579,7 +579,7 @@ export default async function DevicePage({
                     <td className="py-2 pr-4 text-gray-500">{k}</td>
                     <td
                       className={`py-2 text-right font-medium ${
-                        k === 'Stan' ? 'text-green-600' : 'text-gray-900'
+                        k === 'Stan' ? 'text-green-700' : 'text-gray-900'
                       }`}
                     >
                       {v}

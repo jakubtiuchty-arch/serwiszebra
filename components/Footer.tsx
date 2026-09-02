@@ -22,9 +22,10 @@ export default function Footer() {
       {/* overflow-hidden: napis jest ozdobą szerszą od ekranu — bez przycięcia
           tworzy poziomy pasek przewijania na całej stronie */}
       <div className="absolute left-0 right-0 bottom-0 flex items-end justify-center overflow-hidden pointer-events-none" style={{ transform: 'translateY(20%)' }}>
-        <h2 className="text-[4rem] sm:text-[7rem] md:text-[12rem] lg:text-[16rem] font-black tracking-tighter whitespace-nowrap leading-none bg-gradient-to-t from-white/[0.07] via-white/[0.02] to-transparent bg-clip-text text-transparent select-none">
+        {/* Napis dekoracyjny, nie nagłówek — jako h2 wchodził do konspektu każdej strony */}
+        <div aria-hidden="true" className="text-[4rem] sm:text-[7rem] md:text-[12rem] lg:text-[16rem] font-black tracking-tighter whitespace-nowrap leading-none bg-gradient-to-t from-white/[0.07] via-white/[0.02] to-transparent bg-clip-text text-transparent select-none">
           SERWIS ZEBRA
-        </h2>
+        </div>
       </div>
 
       {/* Main content */}
@@ -92,7 +93,7 @@ export default function Footer() {
           <div className="grid grid-cols-2 md:grid-cols-6 gap-6 sm:gap-8 lg:gap-10">
             {/* Nawigacja */}
             <div className="text-center">
-              <h4 className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-gray-500 mb-3 sm:mb-5">Serwis</h4>
+              <h3 className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-gray-500 mb-3 sm:mb-5">Serwis</h3>
               <ul className="space-y-2 sm:space-y-3">
                 {[
                   { href: '/#formularz', label: 'Zgłoś naprawę' },
@@ -113,7 +114,7 @@ export default function Footer() {
 
             {/* Miasta */}
             <div className="text-center">
-              <h4 className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-gray-500 mb-3 sm:mb-5">Miasta</h4>
+              <h3 className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-gray-500 mb-3 sm:mb-5">Miasta</h3>
               <ul className="space-y-2 sm:space-y-3">
                 {[
                   { href: '/serwis-zebra/warszawa', label: 'Warszawa' },
@@ -134,7 +135,7 @@ export default function Footer() {
 
             {/* Informacje */}
             <div className="text-center">
-              <h4 className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-gray-500 mb-3 sm:mb-5">Informacje</h4>
+              <h3 className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-gray-500 mb-3 sm:mb-5">Informacje</h3>
               <ul className="space-y-2 sm:space-y-3">
                 {[
                   { href: '/blog', label: 'Blog', external: false },
@@ -162,7 +163,7 @@ export default function Footer() {
 
             {/* TAKMA - sklep B2B */}
             <div className="text-center">
-              <h4 className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-gray-500 mb-3 sm:mb-5">TAKMA</h4>
+              <h3 className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-gray-500 mb-3 sm:mb-5">TAKMA</h3>
               <ul className="space-y-2 sm:space-y-3">
                 {[
                   { href: 'https://www.takma.com.pl/terminale-mobilne-zebra', label: 'Terminale mobilne Zebra' },
@@ -182,7 +183,7 @@ export default function Footer() {
 
             {/* Godziny & AI */}
             <div className="text-center flex flex-col items-center">
-              <h4 className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-gray-500 mb-3 sm:mb-5">Dostępność</h4>
+              <h3 className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-gray-500 mb-3 sm:mb-5">Dostępność</h3>
               <div className="space-y-3 sm:space-y-4">
                 <div className="flex items-center gap-2 sm:gap-3">
                   <div className="w-7 sm:w-8 h-7 sm:h-8 bg-white/5 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -208,7 +209,7 @@ export default function Footer() {
 
             {/* Płatności */}
             <div className="text-center flex flex-col items-center">
-              <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-gray-500 mb-4 sm:mb-5">Płatności</h4>
+              <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-gray-500 mb-4 sm:mb-5">Płatności</h3>
               <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 mb-4 sm:mb-6">
                 {[
                   // Stripe zastąpiony Przelewy24 (06.2026) — logo z obcego CDN mylilo i dokładało host

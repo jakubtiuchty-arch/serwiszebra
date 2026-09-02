@@ -120,7 +120,7 @@ export default function CookieBanner() {
                   <p className="text-sm text-gray-600 mb-3 sm:mb-4">
                     <span className="hidden sm:inline">Używamy plików cookies, aby zapewnić najlepsze doświadczenia na naszej stronie. </span>
                     Cookies niezbędne są wymagane do działania strony.{' '}
-                    <Link href="/polityka-prywatnosci" className="text-blue-600 hover:underline">
+                    <Link href="/polityka-prywatnosci" className="text-blue-600 underline hover:no-underline">
                       Polityka prywatności
                     </Link>
                   </p>
