@@ -39,7 +39,8 @@ export default function Header({ currentPage = 'other', hidePartnerLogos = false
       <nav className="pr-3 md:pr-0 pl-3 sm:pl-4">
         <div className="max-w-[1400px] mx-auto">
           <div className="flex items-center h-14 sm:h-16">
-            <Link href="/" className="flex items-center gap-1 sm:gap-3 -ml-2 sm:-ml-3 md:-ml-6">
+            {/* Bez prefetchu: chunk strony głównej (26 KiB) dociągał się na każdej karcie produktu */}
+            <Link href="/" prefetch={false} className="flex items-center gap-1 sm:gap-3 -ml-2 sm:-ml-3 md:-ml-6">
               {/* TAKMA Logo */}
               <div className="w-[110px] sm:w-[160px] md:w-[180px] h-[46px] sm:h-[62px] md:h-[68px] relative">
                 <Image

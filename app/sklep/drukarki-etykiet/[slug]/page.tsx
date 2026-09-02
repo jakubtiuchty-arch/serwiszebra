@@ -142,13 +142,14 @@ export default async function DevicePage({
     ? `/instrukcje/zebra-${product.device_model.toLowerCase()}`
     : null
 
-  const akcesoria = product.device_model
-    ? await getAkcesoriaDlaModelu(product.device_model)
-    : []
-
   // Ceny i stany serwerowo — muszą być w początkowym HTML-u i w danych
-  // strukturalnych, a nie dopiero po dociągnięciu ich JavaScriptem
-  const stany = await pobierzStany(variants.map((v) => v.pn))
+  // strukturalnych, a nie dopiero po dociągnięciu ich JavaScriptem.
+  // Akcesoria i stany nie zależą od siebie, więc idą równolegle — po kolei
+  // dokładały się do TTFB (audyt ZT421: 625–706 ms).
+  const [akcesoria, stany] = await Promise.all([
+    product.device_model ? getAkcesoriaDlaModelu(product.device_model) : Promise.resolve([]),
+    pobierzStany(variants.map((v) => v.pn)),
+  ])
 
   // Kształt, którego oczekują komponenty klienckie — bez tego cena pojawiałaby
   // się dopiero po dociągnięciu danych z przeglądarki

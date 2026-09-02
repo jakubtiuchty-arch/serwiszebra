@@ -80,7 +80,9 @@ function KafelMaterialu({ k, szeroki }: { k: Kafel; szeroki?: boolean }) {
           src={k.obraz}
           alt={k.alt}
           fill
-          sizes={szeroki ? '(max-width: 640px) 100vw, 256px' : '(max-width: 640px) 100vw, 50vw'}
+          // Bez jednostki vw: gdy `sizes` zawiera vw, next/image buduje srcset tylko
+          // z deviceSizes (od 640 px) i kafel 256 px dostawał obraz 640 px (audyt ZT421)
+          sizes={szeroki ? '(max-width: 640px) 640px, 256px' : '(max-width: 640px) 640px, 384px'}
           className="object-cover"
         />
       </span>

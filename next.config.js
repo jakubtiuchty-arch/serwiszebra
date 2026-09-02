@@ -6,6 +6,24 @@ const nextConfig = {
   // Furgonetka „własna integracja" dokleja /orders i /orders/{id}/tracking_number
   // do „Adresu sklepu". Gdy bazą jest goła domena (https://serwis-zebry.pl),
   // przepisujemy te ścieżki na faktyczne endpointy pod /api/furgonetka.
+  /**
+   * Nagłówki bezpieczeństwa dla całego serwisu (audyt ZT421 2026-09-02: poza HSTS
+   * od Vercela nie było żadnego). Bez CSP — inline skrypty zgód, GTM i Clarity
+   * wymagałyby nonce'ów; frame-ancestors załatwia X-Frame-Options.
+   */
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          { key: 'X-Content-Type-Options', value: 'nosniff' },
+          { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
+          { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+          { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=(), payment=(self)' },
+        ],
+      },
+    ]
+  },
   async rewrites() {
     return [
       {
