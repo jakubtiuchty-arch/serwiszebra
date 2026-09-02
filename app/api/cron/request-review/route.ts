@@ -1,10 +1,9 @@
 import { NextResponse } from 'next/server'
+import { sendMail } from '@/lib/mail/transport'
 import { createCronClient } from '@/lib/supabase/cron-client'
-import { Resend } from 'resend'
 
 export const dynamic = 'force-dynamic'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
 
 // Link do opinii Google
 const GOOGLE_REVIEW_LINK = 'https://g.page/r/CWWwiewE2ri8EAE/review'
@@ -150,7 +149,7 @@ interface ReviewRequestEmailData {
 }
 
 async function sendReviewRequestEmail(data: ReviewRequestEmailData) {
-  const email = await resend.emails.send({
+  const email = await sendMail({
     from: 'Serwis Zebra <serwis@serwis-zebry.pl>',
     to: data.to,
     subject: `Jak oceniasz naszą naprawę? ⭐ - ${data.deviceModel}`,

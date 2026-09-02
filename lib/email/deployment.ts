@@ -1,11 +1,10 @@
-import { Resend } from 'resend'
+import { sendMail } from '@/lib/mail/transport'
 
 /**
  * Maile kanału wdrożeniowego. Zgłoszenie zmiany idzie do wdrażającego,
  * a potwierdzenie wdrożenia wraca do zespołu serwisu.
  */
 
-const resend = new Resend(process.env.RESEND_API_KEY)
 
 const FROM = 'System Serwisowy <system@serwis-zebry.pl>'
 const PANEL_URL = 'https://www.serwis-zebry.pl/admin/wdrozenia'
@@ -65,7 +64,7 @@ export async function sendDeploymentRequestEmail(data: NewRequestData) {
         : ''
     }`
 
-  return resend.emails.send({
+  return sendMail({
     from: FROM,
     to: DEPLOYMENT_INBOX,
     subject: `Kanał wdrożeniowy: ${subjectLine(data.title)}`,
@@ -98,7 +97,7 @@ export async function sendDeploymentDoneEmail(data: DoneData) {
         : ''
     }`
 
-  return resend.emails.send({
+  return sendMail({
     from: FROM,
     to: SERVICE_INBOX,
     subject: `Wdrożone: ${subjectLine(data.title)}`,

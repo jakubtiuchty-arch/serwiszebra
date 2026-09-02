@@ -1,8 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { sendMail } from '@/lib/mail/transport'
 import { createClient } from '@/lib/supabase/server'
-import { Resend } from 'resend'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
 
 export async function GET(
   request: NextRequest,
@@ -393,7 +392,7 @@ export async function GET(
 
     // Wyślij powiadomienie email na dyk@takma.com.pl
     try {
-      await resend.emails.send({
+      await sendMail({
         from: 'System Serwisowy <system@serwis-zebry.pl>',
         to: ['jakub.tiuchty@takma.com.pl', 'handlowy@takma.com.pl', 'serwis@takma.com.pl', 'wojcik@takma.com.pl', 'zuchnicki@takma.com.pl'],
         subject: `Pro Forma - zamówienie sklepowe #${shortId}`,

@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
+import { sendMail } from '@/lib/mail/transport'
 import { createCronClient } from '@/lib/supabase/cron-client'
-import { Resend } from 'resend'
 import { canReceiveEmail } from '@/lib/email-utils'
 import { opisPrac } from '@/lib/review-notes'
 import { generujPrzypomnienieOpinia, tematPrzypomnienia } from '@/lib/email/przypomnienie-opinia'
@@ -9,7 +9,6 @@ import { nazwaUrzadzenia } from '@/lib/device-name'
 export const dynamic = 'force-dynamic'
 export const runtime = 'nodejs'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
 const GOOGLE_REVIEW_LINK = 'https://g.page/r/CWWwiewE2ri8EAE/review'
 const TELEFON = '601 619 898'
 
@@ -167,7 +166,7 @@ export async function GET(request: Request) {
       return NextResponse.json({ error: 'Brak kandydata, na którym można pokazać treść' })
     }
 
-    const { error: bladTestu } = await resend.emails.send({
+    const { error: bladTestu } = await sendMail({
       from: 'Krzysztof Wójcik — Serwis Takma <serwis@serwis-zebry.pl>',
       to: adresTestowy,
       replyTo: 'serwis@takma.com.pl',
@@ -198,7 +197,7 @@ export async function GET(request: Request) {
 
   for (const r of doWyslania) {
     try {
-      const { error: sendError } = await resend.emails.send({
+      const { error: sendError } = await sendMail({
         from: 'Krzysztof Wójcik — Serwis Takma <serwis@serwis-zebry.pl>',
         to: r.email,
         replyTo: 'serwis@takma.com.pl',

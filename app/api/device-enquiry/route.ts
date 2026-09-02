@@ -1,9 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { Resend } from 'resend'
+import { sendMail } from '@/lib/mail/transport'
 import { z } from 'zod'
 import { budujMailSklepu } from '@/lib/email/szablon-sklep'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
 
 /**
  * Pytanie o urządzenie z karty produktu.
@@ -69,7 +68,7 @@ export async function POST(req: NextRequest) {
 
     // Resend NIE rzuca wyjątkiem przy odrzuceniu — błąd siedzi w polu `error`.
     // Bez tego sprawdzenia klient zobaczyłby „wysłane", a pytanie by przepadło.
-    const { error: sendError } = await resend.emails.send({
+    const { error: sendError } = await sendMail({
       from: 'Sklep serwis-zebry <system@serwis-zebry.pl>',
       to: ['serwis@takma.com.pl'],
       replyTo: data.email,

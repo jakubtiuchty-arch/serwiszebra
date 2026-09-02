@@ -1,10 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { sendMail } from '@/lib/mail/transport'
 import { createClient } from '@supabase/supabase-js'
-import { Resend } from 'resend'
 import { z } from 'zod'
 import { budujMailSklepu, akapit, esc } from '@/lib/email/szablon-sklep'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
 
 /**
  * Zapis na powiadomienie o dostępności produktu.
@@ -55,7 +54,7 @@ export async function POST(req: NextRequest) {
     // Potwierdzenie do klienta i notka do serwisu — ich niepowodzenie nie
     // unieważnia zapisu, więc tylko logujemy
     const [potwierdzenie, notka] = await Promise.allSettled([
-      resend.emails.send({
+      sendMail({
         from: 'Sklep serwis-zebry.pl <sklep@serwis-zebry.pl>',
         to: [email],
         replyTo: 'serwis@takma.com.pl',
@@ -71,7 +70,7 @@ export async function POST(req: NextRequest) {
           stopka: 'Wiadomość wysłana po zapisie na powiadomienie o dostępności produktu',
         }),
       }),
-      resend.emails.send({
+      sendMail({
         from: 'Sklep serwis-zebry <system@serwis-zebry.pl>',
         to: ['serwis@takma.com.pl'],
         subject: `[Powiadomienia] ${email} czeka na ${sku}`,

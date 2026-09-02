@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
+import { sendMail } from '@/lib/mail/transport'
 import { createCronClient } from '@/lib/supabase/cron-client'
 import type { SupabaseClient } from '@supabase/supabase-js'
-import { Resend } from 'resend'
 import { budujMailSklepu, akapit, esc } from '@/lib/email/szablon-sklep'
 import { checkPriceAndAvailability } from '@/lib/ingram-micro'
 import { lookupStock as lookupBluestar } from '@/lib/bluestar'
@@ -377,8 +377,7 @@ async function wyslijPowiadomieniaDostepnosci(supabase: SupabaseClient) {
     .in('part_number', warianty)
 
   const wgKlucza = new Map((stany || []).map((s) => [klucz(s.part_number), s]))
-  const resend = new Resend(process.env.RESEND_API_KEY)
-  let wyslane = 0
+    let wyslane = 0
 
   for (const alert of alerty) {
     const stan = wgKlucza.get(klucz(alert.sku))
@@ -392,7 +391,7 @@ async function wyslijPowiadomieniaDostepnosci(supabase: SupabaseClient) {
         : `${SITE}${alert.product_url}`
       : `${SITE}/sklep`
 
-    const { error: sendError } = await resend.emails.send({
+    const { error: sendError } = await sendMail({
       from: 'Sklep serwis-zebry.pl <sklep@serwis-zebry.pl>',
       to: [alert.email],
       replyTo: 'serwis@takma.com.pl',

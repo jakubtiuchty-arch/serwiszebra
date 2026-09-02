@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { sendMail } from '@/lib/mail/transport'
 import { createCronClient } from '@/lib/supabase/cron-client'
 import { createClient as createSupabaseAdmin } from '@supabase/supabase-js'
-import { Resend } from 'resend'
 import { generateShippingNotificationEmail } from '@/lib/email/templates/shipping-notification'
 
 // Wymuś dynamiczne renderowanie
@@ -12,10 +12,6 @@ function getSupabaseAdmin() {
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.SUPABASE_SERVICE_ROLE_KEY!
   )
-}
-
-function getResend() {
-  return new Resend(process.env.RESEND_API_KEY)
 }
 
 export async function GET(request: NextRequest) {
@@ -29,7 +25,6 @@ export async function GET(request: NextRequest) {
     }
 
     const supabaseAdmin = getSupabaseAdmin()
-    const resend = getResend()
 
     console.log('🔄 [CRON] Starting automated Baselinker tracking sync...')
 
@@ -127,7 +122,7 @@ export async function GET(request: NextRequest) {
           customerName: blOrder.delivery_fullname || 'Kliencie'
         })
 
-        await resend.emails.send({
+        await sendMail({
           from: 'Sklep serwis-zebry.pl <sklep@serwis-zebry.pl>',
           to: [blOrder.email],
           subject: `📦 Przesyłka wysłana - zamówienie #${blOrder.order_id}`,

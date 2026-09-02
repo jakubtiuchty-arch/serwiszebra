@@ -1,6 +1,5 @@
-import { Resend } from 'resend'
+import { sendMail } from '@/lib/mail/transport'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
 
 // URL bazowy dla obrazków w emailach (hostowane na Vercel)
 const EMAIL_ASSETS_URL = 'https://www.serwis-zebry.pl'
@@ -85,7 +84,7 @@ interface OrderEmailData {
 export async function sendOrderConfirmation(data: OrderEmailData) {
   try {
     // Email do klienta
-    const customerEmail = await resend.emails.send({
+    const customerEmail = await sendMail({
       from: 'SERWIS ZEBRA <zamowienia@serwis-zebry.pl>',
       to: data.customerEmail,
       subject: `Potwierdzenie zamówienia ${data.orderNumber}`,
@@ -97,7 +96,7 @@ export async function sendOrderConfirmation(data: OrderEmailData) {
     })
     
     // Email powiadomienia dla firmy
-    const notificationEmail = await resend.emails.send({
+    const notificationEmail = await sendMail({
       from: 'System Zamówień <system@serwis-zebry.pl>',
       to: 'zamowienia@serwis-zebry.pl', // Twój email
       subject: `Nowe zamówienie ${data.orderNumber} - ${data.companyName}`,
@@ -368,7 +367,7 @@ interface RepairShippedEmailData {
 
 export async function sendRepairShippedEmail(data: RepairShippedEmailData) {
   try {
-    const email = await resend.emails.send({
+    const email = await sendMail({
       from: 'Serwis Zebra <serwis@serwis-zebry.pl>',
       to: data.customerEmail,
       subject: `Twoje urządzenie zostało wysłane! - ${data.deviceModel}`,
@@ -497,7 +496,7 @@ export async function sendRepairPickupScheduledEmail(data: RepairPickupScheduled
   try {
     const shortId = getRepairNumber(data.repairId, data.repairNumber)
     
-    const email = await resend.emails.send({
+    const email = await sendMail({
       from: 'Serwis Zebra <serwis@serwis-zebry.pl>',
       to: data.customerEmail,
       subject: `Kurier przyjedzie po Twoje urządzenie - ${data.deviceModel} #${shortId}`,
@@ -659,7 +658,7 @@ export async function sendCourierOrderedAdminEmail(data: CourierOrderedAdminEmai
       ? `🚚 Kurier zamówiony - odbiór od klienta #${shortId}`
       : `📦 Kurier zamówiony - wysyłka do klienta #${shortId}`
     
-    const email = await resend.emails.send({
+    const email = await sendMail({
       from: 'System Serwisowy <system@serwis-zebry.pl>',
       to: data.to,
       subject: subject,
@@ -806,7 +805,7 @@ export async function sendQuoteReadyEmail(data: QuoteReadyEmailData) {
   try {
     const shortId = getRepairNumber(data.repairId, data.repairNumber)
     
-    const email = await resend.emails.send({
+    const email = await sendMail({
       from: 'Serwis Zebra <serwis@serwis-zebry.pl>',
       to: data.to,
       subject: `Wycena naprawy gotowa - ${data.deviceModel} #${shortId}`,
@@ -941,7 +940,7 @@ export async function sendProFormaAdminEmail(data: ProFormaAdminEmailData) {
   try {
     const shortId = getRepairNumber(data.repairId, data.repairNumber)
     
-    const email = await resend.emails.send({
+    const email = await sendMail({
       from: 'System Serwisowy <system@serwis-zebry.pl>',
       to: data.to,
       subject: `📄 Pro Forma wybrana - naprawa #${shortId}`,
@@ -1029,7 +1028,7 @@ export async function sendRepairPaidEmail(data: RepairPaidEmailData) {
   try {
     const shortId = getRepairNumber(data.repairId, data.repairNumber)
     
-    const email = await resend.emails.send({
+    const email = await sendMail({
       from: 'Serwis Zebra <serwis@serwis-zebry.pl>',
       to: data.to,
       subject: `Płatność potwierdzona - naprawa ${data.deviceModel}`,
@@ -1145,7 +1144,7 @@ export async function sendRepairPaidAdminEmail(data: RepairPaidAdminEmailData) {
   try {
     const shortId = getRepairNumber(data.repairId, data.repairNumber)
     
-    const email = await resend.emails.send({
+    const email = await sendMail({
       from: 'System Serwisowy <system@serwis-zebry.pl>',
       to: data.to,
       subject: `Płatność otrzymana - naprawa #${shortId}`,
@@ -1248,7 +1247,7 @@ export async function sendRepairSubmittedEmail(data: RepairSubmittedEmailData) {
   try {
     const displayNumber = getRepairNumber(data.repairId, data.repairNumber)
     
-    const email = await resend.emails.send({
+    const email = await sendMail({
       from: 'Serwis Zebra <serwis@serwis-zebry.pl>',
       to: data.to,
       subject: `Zgłoszenie naprawy przyjęte - ${data.deviceModel} #${displayNumber}`,
@@ -1437,7 +1436,7 @@ export async function sendRepairSubmittedAdminEmail(data: RepairSubmittedAdminEm
   try {
     const displayNumber = getRepairNumber(data.repairId, data.repairNumber)
     
-    const email = await resend.emails.send({
+    const email = await sendMail({
       from: 'System Serwisowy <system@serwis-zebry.pl>',
       to: data.to,
       subject: `Nowe zgłoszenie naprawy #${displayNumber} - ${data.deviceModel}`,
@@ -1553,7 +1552,7 @@ interface WelcomeEmailData {
 
 export async function sendWelcomeEmail(data: WelcomeEmailData) {
   try {
-    const email = await resend.emails.send({
+    const email = await sendMail({
       from: 'Serwis Zebra <serwis@serwis-zebry.pl>',
       to: data.to,
       subject: `Witamy w Serwis Zebra!`,
@@ -1673,7 +1672,7 @@ export async function sendQuoteAcceptedEmail(data: QuoteAcceptedEmailData) {
   try {
     const shortId = getRepairNumber(data.repairId, data.repairNumber)
     
-    const email = await resend.emails.send({
+    const email = await sendMail({
       from: 'Serwis Zebra <serwis@serwis-zebry.pl>',
       to: data.to,
       subject: `Wycena zaakceptowana - ${data.deviceModel} #${shortId}`,
@@ -1811,7 +1810,7 @@ export async function sendQuoteAcceptedAdminEmail(data: QuoteAcceptedAdminEmailD
   try {
     const shortId = getRepairNumber(data.repairId, data.repairNumber)
     
-    const email = await resend.emails.send({
+    const email = await sendMail({
       from: 'System Serwisowy <system@serwis-zebry.pl>',
       to: data.to,
       subject: `✅ Wycena zaakceptowana - #${shortId}`,
@@ -1898,7 +1897,7 @@ export async function sendRepairStatusChangedEmail(data: RepairStatusChangedEmai
   try {
     const shortId = getRepairNumber(data.repairId, data.repairNumber)
     
-    const email = await resend.emails.send({
+    const email = await sendMail({
       from: 'Serwis Zebra <serwis@serwis-zebry.pl>',
       to: data.to,
       subject: `Status naprawy zmieniony - ${data.deviceModel} #${shortId}`,
@@ -2044,7 +2043,7 @@ export async function sendProFormaEmail(data: ProFormaEmailData) {
   try {
     const shortId = getRepairNumber(data.repairId, data.repairNumber)
     
-    const email = await resend.emails.send({
+    const email = await sendMail({
       from: 'Serwis Zebra <serwis@serwis-zebry.pl>',
       to: data.to,
       subject: `Faktura Pro Forma - naprawa #${shortId}`,
@@ -2077,7 +2076,7 @@ export async function sendNewChatMessageEmail(data: NewChatMessageEmailData) {
   try {
     const shortId = getRepairNumber(data.repairId, data.repairNumber)
     
-    const email = await resend.emails.send({
+    const email = await sendMail({
       from: 'Serwis Zebra <serwis@serwis-zebry.pl>',
       to: data.to,
       subject: `Nowa wiadomość - naprawa #${shortId}`,
@@ -2338,7 +2337,7 @@ export async function sendPackageReceivedEmail(data: PackageReceivedEmailData) {
   try {
     const shortId = getRepairNumber(data.repairId, data.repairNumber)
     
-    const email = await resend.emails.send({
+    const email = await sendMail({
       from: 'Serwis Zebra <serwis@serwis-zebry.pl>',
       to: data.to,
       subject: `Potwierdzenie przyjęcia urządzenia do serwisu - ${data.deviceModel} #${shortId}`,
@@ -2518,7 +2517,7 @@ export async function sendOrderConfirmationEmail(data: OrderConfirmationEmailDat
     `${data.shippingAddress.postalCode} ${data.shippingAddress.city}`
   ].filter(Boolean)
 
-  await resend.emails.send({
+  await sendMail({
     from: 'Sklep TAKMA <sklep@serwis-zebry.pl>',
     to: data.to,
     subject: `Potwierdzenie zamówienia ${data.orderNumber}`,
@@ -2634,7 +2633,7 @@ export async function sendNewOrderNotificationEmail(data: NewOrderNotificationEm
     </tr>
   `).join('')
 
-  await resend.emails.send({
+  await sendMail({
     from: 'Sklep TAKMA <sklep@serwis-zebry.pl>',
     to: ['jakub.tiuchty@takma.com.pl', 'handlowy@takma.com.pl'],
     subject: `🛒 Nowe zamówienie ${data.orderNumber} - ${data.companyName}`,
@@ -2711,7 +2710,7 @@ interface ShopPaymentConfirmedEmailData {
 
 export async function sendShopPaymentConfirmedEmail(data: ShopPaymentConfirmedEmailData) {
   try {
-    const email = await resend.emails.send({
+    const email = await sendMail({
       from: 'Sklep TAKMA <sklep@serwis-zebry.pl>',
       to: data.to,
       subject: `Płatność potwierdzona — zamówienie ${data.orderNumber}`,
@@ -2786,7 +2785,7 @@ interface NewInboxMailNotificationData {
 
 export async function sendNewInboxMailNotification(data: NewInboxMailNotificationData) {
   try {
-    const email = await resend.emails.send({
+    const email = await sendMail({
       from: 'System Serwisowy <system@serwis-zebry.pl>',
       to: data.to,
       subject: `📬 Nowy mail od klienta: ${data.subject || '(bez tematu)'}`,
@@ -2829,7 +2828,7 @@ interface ShopPaymentAdminEmailData {
 
 export async function sendShopPaymentAdminEmail(data: ShopPaymentAdminEmailData) {
   try {
-    const email = await resend.emails.send({
+    const email = await sendMail({
       from: 'System Serwisowy <system@serwis-zebry.pl>',
       to: data.to,
       subject: `Płatność otrzymana - zamówienie sklepowe ${data.orderNumber}`,
@@ -2873,7 +2872,7 @@ interface OrderShippedEmailData {
 
 export async function sendOrderShippedEmail(data: OrderShippedEmailData) {
   try {
-    const email = await resend.emails.send({
+    const email = await sendMail({
       from: 'Sklep TAKMA <sklep@serwis-zebry.pl>',
       to: data.customerEmail,
       subject: `Twoje zamówienie ${data.orderNumber} zostało wysłane!`,
@@ -3000,7 +2999,7 @@ export async function sendDiagnosticFeePaidAdminEmail(data: DiagnosticFeePaidAdm
   try {
     const shortId = getRepairNumber(data.repairId, data.repairNumber)
 
-    const email = await resend.emails.send({
+    const email = await sendMail({
       from: 'System Serwisowy <system@serwis-zebry.pl>',
       to: data.to,
       subject: `Odrzucona wycena, diagnostyka opłacona - odeślij urządzenie #${shortId}`,
@@ -3149,7 +3148,7 @@ ${getEmailHeader()}
   `
 
   try {
-    const email = await resend.emails.send({
+    const email = await sendMail({
       from: 'Serwis Zebra <serwis@serwis-zebry.pl>',
       to: data.to,
       subject: `Prośba o zwrot wypożyczonego sprzętu — ${data.deviceModel} (${data.rentalNumber})`,
@@ -3202,7 +3201,7 @@ export async function sendRentalPickupAdminEmail(data: RentalEmailData & { to: s
   `
 
   try {
-    const email = await resend.emails.send({
+    const email = await sendMail({
       from: 'System Serwisowy <system@serwis-zebry.pl>',
       to: data.to,
       subject,
@@ -3255,7 +3254,7 @@ export async function sendPasswordResetEmail(data: { to: string; resetUrl: strin
   `
 
   try {
-    const email = await resend.emails.send({
+    const email = await sendMail({
       from: 'Serwis Zebra <serwis@serwis-zebry.pl>',
       to: data.to,
       subject: 'Ustaw nowe hasło — panel klienta serwis-zebry.pl',
@@ -3366,7 +3365,7 @@ export async function sendRentalProtocolReminderEmail(data: RentalEmailData & { 
   `
 
   try {
-    const email = await resend.emails.send({
+    const email = await sendMail({
       from: 'TAKMA <serwis@serwis-zebry.pl>',
       to: data.to,
       bcc: ['jakub.tiuchty@takma.com.pl', 'serwis@takma.com.pl'],

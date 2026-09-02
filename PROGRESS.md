@@ -1214,3 +1214,10 @@ Fraza „biurkowe drukarki etykiet Zebra" jest głównym wejściem do tej katego
 - **Preload logo usunięty z `app/layout.tsx`**: `takma_logo_1.png` (3 kB) z `fetchPriority=high` konkurował ze zdjęciem produktu (LCP Load Delay 1,7 s). Efekt na LCP do sprawdzenia na produkcji.
 - Miniatury galerii z `alt=""` zostają — siedzą w `<button aria-label="Zdjęcie N">`, więc są dostępne.
 - Nie zrobione: opinie/`aggregateRating` (brak prawdziwych opinii w systemie), `gtin` (brak EAN w danych).
+
+## 2026-09-02 — powiadomienia na @takma.com.pl przez SMTP cyber_folks (obejście HostKarma)
+- **Problem**: serwer poczty takma.com.pl (cyber_folks) odrzuca ~10% maili z Resenda kodem `550 Email blocked by hostkarma.junkemailfilter.com` — pula IP Amazon SES okresowo ląduje na tej liście, Resend takich odbić nie ponawia. cyber_folks odmówił białej listy (18.08.2026). Ginęły m.in. „Nowa wiadomość — naprawa” do serwis@/wojcik@/zuchnicki@ i „Kurier zamówiony”.
+- **Rozwiązanie po stronie nadawcy**: `lib/mail/transport.ts` — `sendMail()` o sygnaturze `resend.emails.send`. Adresaci @takma.com.pl idą uwierzytelnionym SMTP z serwera cyber_folks (skrzynka serwis@takma.com.pl, jak moduł POCZTA; From = nazwa nadawcy + serwis@takma.com.pl, Reply-To = pierwotny nadawca), pozostali przez Resend. Bez MAIL_PASSWORD albo po błędzie SMTP wszystko wraca na Resend.
+- Podmienione 42 wywołania w 11 plikach (lib/email.ts, deployment, program-glowice, proforma, device-enquiry, stock-alert, crony). Lokalne instancje `new Resend` usunięte.
+- Testu lokalnego nie ma: MAIL_IMAP_PASSWORD na Vercelu jest poufne (pull zwraca pusty string). Weryfikacja na produkcji: log `[mail] SMTP cyber_folks → …` w Vercel Runtime Logs przy najbliższym powiadomieniu.
+- W repo takma powiadomienia wewnętrzne przełączone na jakub.tiuchty@gmail.com (commit 50d3a94) — bez wspólnego transportu.

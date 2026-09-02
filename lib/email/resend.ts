@@ -1,4 +1,5 @@
 import { Resend } from 'resend'
+import { sendMail } from '@/lib/mail/transport'
 
 if (!process.env.RESEND_API_KEY) {
   throw new Error('RESEND_API_KEY is not defined')
@@ -16,7 +17,7 @@ export const sendEmail = async ({
   html: string
 }) => {
   try {
-    const { data, error } = await resend.emails.send({
+    const { data, error } = await sendMail({
       from: 'Sklep serwis-zebry.pl <sklep@serwis-zebry.pl>',
       to: [to],
       subject: subject,

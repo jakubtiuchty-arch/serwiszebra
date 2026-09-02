@@ -1,8 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { Resend } from 'resend'
+import { sendMail } from '@/lib/mail/transport'
 import { z } from 'zod'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
 
 /**
  * Zgłoszenie do programu bezpłatnych wymian głowic Zebry.
@@ -63,7 +62,7 @@ export async function POST(req: NextRequest) {
 
     // Resend NIE rzuca wyjątkiem przy odrzuceniu — błąd siedzi w polu `error`.
     // Bez tego sprawdzenia klient zobaczyłby „wysłane", a zgłoszenie by przepadło.
-    const { error: sendError } = await resend.emails.send({
+    const { error: sendError } = await sendMail({
       from: 'System Serwisowy <system@serwis-zebry.pl>',
       to: ['serwis@takma.com.pl'],
       replyTo: data.email,
