@@ -235,4 +235,16 @@
       <image:loc>https://www.serwis-zebry.pl/sklep_photo/urzadzenia/zt411_3.webp</image:loc>
     </image:image>
   </url>
+  <url>
+    <loc>https://www.serwis-zebry.pl/sklep/drukarki-etykiet/zebra-zt421</loc>
+    <image:image>
+      <image:loc>https://www.serwis-zebry.pl/sklep_photo/urzadzenia/zt421_1.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.serwis-zebry.pl/sklep_photo/urzadzenia/zt421_2.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.serwis-zebry.pl/sklep_photo/urzadzenia/zt421_3.webp</image:loc>
+    </image:image>
+  </url>
 </urlset>

@@ -2779,10 +2779,10 @@ export const TRESC_KART: Record<string, TrescKarty> = {
         gniazda komunikacyjne przyjmują Wi-Fi, drugi Ethernet albo interfejs równoległy.
         Jeśli etykiety mają być szersze niż 114 mm, właściwym urządzeniem jest{' '}
         <Link
-          href="/sklep/drukarki-etykiet/przemyslowe"
+          href="/sklep/drukarki-etykiet/zebra-zt421"
           className="font-medium text-gray-900 underline"
         >
-          drukarka przemysłowa o szerokości wydruku 168 mm
+          Zebra ZT421 o szerokości wydruku 168 mm
         </Link>
         .
       </>,
@@ -2879,6 +2879,144 @@ export const TRESC_KART: Record<string, TrescKarty> = {
       ['Temperatura pracy', '5–40°C (termotransfer); 0–40°C (termiczna)'],
       ['Wymiary (D×S×W)', '495 × 269 × 324 mm'],
       ['Waga', '16,33 kg; 22,09 kg z nawijakiem pełnej rolki'],
+      ['Języki', 'ZPL, ZPL II, EPL (wersje 203 dpi)'],
+      ['Stan', 'Nowy, oryginalny'],
+      ['Gwarancja', '24 miesiące'],
+    ],
+  },
+  'zebra-zt421': {
+    rekomendowanyPn: 'ZT42162-T0E0000Z',
+    zdjecieGlowne: '/sklep_photo/urzadzenia/zt421_1.webp',
+    wSkrocie: [
+      'Zebra ZT421 to przemysłowa drukarka etykiet o szerokości wydruku 168 mm — szersza wersja ZT411 i następczyni ZT420, w metalowej ramie ze składaną metalową pokrywą i kolorowym ekranem dotykowym 4,3 cala.',
+      'Drukuje etykiety o szerokości od 51 do 178 mm z szybkością do 305 mm na sekundę, w rozdzielczości 203 albo 300 dpi; wersji 600 dpi nie ma — tę oferuje wyłącznie ZT411.',
+      'Etykieta logistyczna w formacie A5 (148 × 210 mm) mieści się na niej w całości; na drukarce o szerokości wydruku 104 mm trzeba ją dzielić albo drukować na papierze A6.',
+      'Mieści rolkę etykiet o średnicy do 203 mm na tulejce 76 mm i taśmę barwiącą o nawoju 450 metrów i szerokości do 174 mm, a materiał ładuje się z boku, bez wyjmowania drukarki ze stanowiska.',
+      'Gilotynę i nawijak pełnej rolki montuje producent, więc wybiera się je przy zamówieniu; moduł RFID UHF, kartę Wi-Fi, drugi Ethernet i interfejs aplikatora instaluje się u użytkownika także po zakupie.',
+      'Waży 18,14 kg, a z nawijakiem pełnej rolki 25,08 kg, mierzy 495 × 336 × 324 mm i pracuje od 5 do 40°C przy druku z taśmą, od 0°C przy termicznym.',
+    ],
+    zweryfikowano: '2026-09-02',
+    poradniki: [
+      'serwis-drukarki-zebra-zt411-zt421-diagnostyka-naprawa',
+      'drukarka-zebra-nie-drukuje-przyczyny-rozwiazania',
+      'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',
+    ],
+    opis: [
+      <>
+        Zebra ZT421 to ten sam mechanizm, panel i pojemność materiału co w{' '}
+        <Link
+          href="/sklep/drukarki-etykiet/zebra-zt411"
+          className="font-medium text-gray-900 underline"
+        >
+          Zebrze ZT411
+        </Link>
+        , ale w obudowie szerszej o 67 mm i z głowicą o szerokości wydruku 168 mm zamiast
+        104 mm. Kupuje się ją z jednego powodu: gdy etykieta jest szersza niż 114 mm.
+        Dotyczy to etykiet paletowych i logistycznych w formacie A5, oznaczeń opakowań
+        zbiorczych, etykiet regałowych i wszędzie tam, gdzie na jednym wydruku ma się
+        zmieścić kilka kodów kreskowych obok siebie.
+      </>,
+      <>
+        Drukuje z szybkością do 305 mm na sekundę w obu rozdzielczościach — 203 dpi do
+        etykiet wysyłkowych i paletowych, 300 dpi do drobnego tekstu i małych kodów
+        dwuwymiarowych. Maksymalna długość etykiety to 2591 mm przy 203 dpi i 1143 mm
+        przy 300 dpi, więc obsłuży także długie oznaczenia dźwigarów i profili. Rolka
+        o średnicy do 203 mm i taśma o nawoju 450 metrów oznaczają rzadkie przerwy na
+        wymianę materiału; taśma musi być szersza od etykiety, a przy pełnej szerokości
+        wydruku oznacza to taśmę 174 mm.
+      </>,
+      <>
+        Gilotynę i nawijak pełnej rolki montuje producent, więc wybiera się je przy
+        zamówieniu — wersja z nawijakiem nawija zadrukowane etykiety z powrotem na
+        szpulę, co przydaje się przy aplikatorach i druku na zapas. Po zakupie
+        rozbudowuje się natomiast łączność i RFID: dwa wolne gniazda przyjmują kartę
+        Wi-Fi, drugi Ethernet albo interfejs aplikatora, a moduł RFID UHF koduje
+        znaczniki także na szerokich etykietach. Jeśli etykiety nie przekraczają 104 mm,
+        tańszym i lżejszym wyborem pozostaje ZT411 — z tą samą prędkością, tym samym
+        ekranem i dodatkową wersją 600 dpi.
+      </>,
+    ],
+    osie: [
+      {
+        tytul: 'Jakość druku',
+        pozycje: [
+          { termin: '203 dpi', opis: 'etykiety paletowe, wysyłkowe i magazynowe, typowe kody kreskowe' },
+          { termin: '300 dpi', opis: 'drobny tekst i małe kody dwuwymiarowe na szerokiej etykiecie' },
+        ],
+      },
+      {
+        tytul: 'Wyposażenie',
+        pozycje: [
+          { termin: 'Standard', opis: 'etykiety wychodzą na wstędze i są odrywane ręcznie' },
+          {
+            termin: 'Nawijak etykiet',
+            opis: 'odklejak z nawijakiem, który zwija zadrukowane etykiety z powrotem na rolkę — do aplikatorów i druku na zapas',
+          },
+          { termin: 'Gilotyna', opis: 'odcina wydruk; do przywieszek i wydruków o zmiennej długości' },
+        ],
+      },
+      {
+        tytul: 'Łączność',
+        pozycje: [
+          { termin: 'Ethernet', opis: 'USB, Ethernet 10/100, RS-232 i Bluetooth w każdej wersji' },
+          { termin: 'Wi-Fi', opis: 'wersja z fabryczną kartą sieci bezprzewodowej; kartę można też dołożyć po zakupie' },
+        ],
+      },
+    ],
+    faqNaglowek: 'Najczęstsze pytania o ZT421',
+    faq: [
+      {
+        q: 'Czym ZT421 różni się od ZT411?',
+        a: 'Szerokością wydruku: 168 mm wobec 104 mm. Mechanizm, ekran dotykowy 4,3 cala, rolka do 203 mm, taśma 450 metrów i możliwości rozbudowy są takie same. ZT421 jest szersza o 67 mm i cięższa o niecałe 2 kg, drukuje do 305 mm na sekundę zamiast 356 i nie ma wersji 600 dpi. Jeśli etykiety mieszczą się w 104 mm, ZT411 jest tańszym wyborem.',
+        href: '/sklep/drukarki-etykiet/zebra-zt411',
+        link: 'Zobacz Zebra ZT411',
+      },
+      {
+        q: 'Czy ZT421 wydrukuje etykietę logistyczną A5?',
+        a: 'Tak, w całości. Format A5 ma 148 mm szerokości, a ZT421 drukuje do 168 mm na etykietach o szerokości do 178 mm. Na drukarce o szerokości wydruku 104 mm etykietę A5 trzeba obrócić i podzielić albo zejść do formatu A6. To najczęstszy powód wyboru ZT421 w centrach dystrybucyjnych, gdzie etykiety paletowe niosą kod SSCC, adres i listę zawartości.',
+        href: '/sklep/drukarki-etykiet/przemyslowe',
+        link: 'Drukarki przemysłowe',
+      },
+      {
+        q: 'Jakie etykiety i taśmy pasują do ZT421?',
+        a: 'Etykiety o szerokości od 51 do 178 mm przy odrywaniu i gilotynie, a od 51 do 171 mm w wersji z nawijakiem. Rolka może mieć do 203 mm średnicy na tulejce 76 mm. Taśma barwiąca ma 450 metrów nawoju, szerokość od 51 do 174 mm i tulejkę 25 mm — musi być szersza od etykiety, inaczej brzegi pozostają niezadrukowane, a głowica pracuje bez ochrony.',
+        href: '/blog/blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',
+        link: 'Dlaczego wydruk blednie',
+      },
+      {
+        q: 'Czy ZT421 obsługuje RFID?',
+        a: 'Tak. Moduł RFID UHF instaluje się u użytkownika, także po zakupie, i koduje znaczniki zgodne z UHF EPC generacji 2 wersji 2.1, ISO/IEC 18000-63 oraz RAIN. Zebra przewidziała go dla obu szerokości serii ZT400, więc szerokie etykiety paletowe ze znacznikiem RFID drukuje się i koduje w jednym przebiegu.',
+        href: '/blog/serwis-drukarki-zebra-zt411-zt421-diagnostyka-naprawa',
+        link: 'Diagnostyka ZT411 i ZT421',
+      },
+      {
+        q: 'Czy gilotynę albo nawijak można dołożyć później?',
+        a: 'Nie. Gilotynę i nawijak pełnej rolki montuje producent, więc wybiera się je przy zamówieniu — zmiana po zakupie oznacza wymianę urządzenia. Po zakupie rozbudowuje się łączność, RFID i interfejs aplikatora. Przed zamówieniem trzeba rozstrzygnąć, czy etykiety mają wychodzić na wstędze, nawinięte z powrotem na rolkę czy odcięte.',
+        href: '/sklep/drukarki-etykiet/przemyslowe',
+        link: 'Drukarki przemysłowe',
+      },
+    ],
+    spec: [
+      ['Producent', 'Zebra'],
+      ['Model', 'ZT421'],
+      ['Klasa', 'Przemysłowa'],
+      ['Technologia druku', 'Termotransferowa i termiczna'],
+      ['Rozdzielczość', '203 albo 300 DPI'],
+      ['Szerokość druku', '168 mm'],
+      ['Prędkość druku', 'do 305 mm/s'],
+      ['Maks. długość etykiety', '2591 mm (203 dpi); 1143 mm (300 dpi)'],
+      ['Szerokość etykiet', '51–178 mm (odrywanie, gilotyna); 51–171 mm (nawijak)'],
+      ['Maks. średnica rolki', '203 mm na gilzie 76 mm'],
+      ['Taśma barwiąca', 'nawój 450 m, szerokość 51–174 mm, gilza 25 mm'],
+      ['Pamięć', '512 MB Flash, 256 MB SDRAM'],
+      ['Panel', 'Kolorowy ekran dotykowy 4,3 cala'],
+      ['Łączność', 'USB 2.0, dwa porty USB Host, Ethernet 10/100, RS-232, Bluetooth 4.1'],
+      ['Łączność opcjonalna', 'Wi-Fi 802.11ac albo 802.11ax, drugi Ethernet, interfejs równoległy, interfejs aplikatora'],
+      ['Wyposażenie', 'Odrywanie, nawijak pełnej rolki albo gilotyna'],
+      ['RFID', 'UHF EPC gen. 2 wersja 2.1, ISO/IEC 18000-63, RAIN — montaż u użytkownika'],
+      ['Temperatura pracy', '5–40°C (termotransfer); 0–40°C (termiczna)'],
+      ['Wymiary (D×S×W)', '495 × 336 × 324 mm; 500 × 338 × 425 mm z nawijakiem pełnej rolki'],
+      ['Waga', '18,14 kg; 25,08 kg z nawijakiem pełnej rolki'],
       ['Języki', 'ZPL, ZPL II, EPL (wersje 203 dpi)'],
       ['Stan', 'Nowy, oryginalny'],
       ['Gwarancja', '24 miesiące'],

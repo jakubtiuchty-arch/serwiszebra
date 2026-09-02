@@ -147,6 +147,13 @@ Porównanie dziewięciu modeli w jednej tabeli: https://www.serwis-zebry.pl/skle
 ZT111 i ZT231 występują w wersji termicznej i termotransferowej, ZT411 dostępna jest w wersjach termotransferowych. Rodzaj druku, jakość głowicy i wyposażenie są wbudowane w numer katalogowy i nie da się ich zmienić po zakupie.
 Porównanie trzech modeli: https://www.serwis-zebry.pl/sklep/drukarki-etykiet/polprzemyslowe
 
+### Drukarki przemysłowe — karty produktów
+
+- **Zebra ZT421** — https://www.serwis-zebry.pl/sklep/drukarki-etykiet/zebra-zt421
+  Przemysłowa drukarka o szerokości wydruku 168 mm (etykiety 51–178 mm, mieści etykietę logistyczną A5), 203 lub 300 dpi, do 305 mm/s, rolka do 203 mm, taśma 450 m do 174 mm szerokości, ekran dotykowy 4,3", waga 18,14 kg. Wersje z gilotyną, nawijakiem pełnej rolki i Wi-Fi; RFID UHF i interfejs aplikatora montowane u użytkownika. Ten sam mechanizm co ZT411, tylko szerszy.
+
+ZT510, ZT610 i ZT620 sprowadzamy na zamówienie. Klasa przemysłowa: https://www.serwis-zebry.pl/sklep/drukarki-etykiet/przemyslowe
+
 ### Jak dobrać drukarkę biurkową Zebra
 
 Porównanie wszystkich dziesięciu modeli w jednej tabeli (szybkość, szerokość druku, rozdzielczość, łączność, taśma) wraz z odpowiedziami na najczęstsze pytania: https://www.serwis-zebry.pl/sklep/drukarki-etykiet/biurkowe
