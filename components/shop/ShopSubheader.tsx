@@ -28,9 +28,11 @@ export default function ShopSubheader({ breadcrumbs }: ShopSubheaderProps) {
           {/* Breadcrumbs - Mobile optimized */}
           <nav aria-label="Breadcrumb" className="flex items-center gap-1 sm:gap-1.5 text-xs sm:text-sm overflow-hidden">
             {/* Home icon on mobile, text on desktop */}
-            <Link href="/" aria-label="Strona główna" className="text-gray-500 hover:text-blue-600 transition-colors flex-shrink-0">
+            {/* Tekst „Start" zawsze w drzewie dostępności (na telefonie tylko dla czytnika),
+                bez aria-label — inaczej nazwa dostępna nie zawierała widocznego tekstu */}
+            <Link href="/" className="text-gray-500 hover:text-blue-600 transition-colors flex-shrink-0">
               <Home className="w-4 h-4 sm:hidden" aria-hidden="true" />
-              <span className="hidden sm:inline">Start</span>
+              <span className="sr-only sm:not-sr-only">Start</span>
             </Link>
             
             {/* On mobile, show only last 2 breadcrumbs */}
