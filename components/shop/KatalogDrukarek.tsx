@@ -538,7 +538,7 @@ export default function KatalogDrukarek({
           </div>
         ) : (
           <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-            {widoczne.map(({ m, warianty }) => {
+            {widoczne.map(({ m, warianty }, i) => {
               const najtanszy = warianty.reduce((a, b) =>
                 b.netto < a.netto ? b : a,
               );
@@ -564,6 +564,8 @@ export default function KatalogDrukarek({
                     dostepny: warianty.some((v) => v.dostepny),
                     magazynPL: warianty.some((v) => v.magazynPL),
                     href,
+                    // Dwa kafle na telefonie i cztery na desktopie mieszczą się w pierwszym oknie
+                    priorytet: i < 4,
                   }}
                 />
               );

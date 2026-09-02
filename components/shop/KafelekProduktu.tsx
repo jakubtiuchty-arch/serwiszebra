@@ -18,6 +18,11 @@ export interface KafelekProduktuDane {
   magazynPL: boolean
   /** Nadpisuje domyślny adres karty, np. o `?pn=` przy jednej pasującej wersji */
   href?: string
+  /**
+   * Kafle nad zgięciem ładują zdjęcie od razu. Domyślne `loading="lazy"` na
+   * pierwszym kaflu opóźniało odkrycie obrazu LCP o 3,3 s (Lighthouse mobile).
+   */
+  priorytet?: boolean
 }
 
 const zl = (v: number) =>
@@ -42,6 +47,7 @@ export default function KafelekProduktu({ p }: { p: KafelekProduktuDane }) {
             fill
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
             className="object-contain p-6"
+            priority={p.priorytet}
           />
         )}
       </span>

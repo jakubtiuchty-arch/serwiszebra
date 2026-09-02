@@ -23,6 +23,8 @@ export const dynamic = 'force-dynamic'
 
 const KLASA = klasaBySlug('biurkowe')!
 const URL_KAT = `${SITE}/sklep/drukarki-etykiet/biurkowe`
+/** Kafelek klasy z huba — ta sama scena, którą klient widzi przed wejściem tutaj */
+const OG_IMAGE = `${SITE}/klasy/biurkowe.jpg`
 
 /** Klucze filtra wariantów — te same, które czyta `KatalogDrukarek`. */
 const KLUCZE_FILTRA = [
@@ -65,6 +67,14 @@ export async function generateMetadata({
       type: 'website',
       siteName: 'TAKMA — Autoryzowany Serwis Zebra',
       locale: 'pl_PL',
+      images: [{ url: OG_IMAGE, width: 1024, height: 576, alt: 'Biurkowe drukarki etykiet Zebra' }],
+    },
+    // Bez własnej sekcji karta Twittera dziedziczyła tytuł i opis z /sklep
+    twitter: {
+      card: 'summary_large_image',
+      title: KLASA.metaTitle,
+      description: KLASA.metaDescription,
+      images: [OG_IMAGE],
     },
   }
 }
@@ -265,17 +275,57 @@ export default async function DesktopPrintersPage() {
     })),
   }
 
+  /**
+   * ItemList z pełnym Product + Offer: ceny i tak są w HTML, więc schema ma je
+   * nieść — bez tego Google widzi listę nazw, a nie listing z cenami. Cena to
+   * najtańszy dostępny wariant (jak na kaflu), brutto jako `price`, netto obok.
+   */
+  const absolutny = (src: string | null | undefined) =>
+    !src ? undefined : src.startsWith('http') ? src : `${SITE}${src.startsWith('/') ? '' : '/'}${src}`
+
   const itemListSchema = {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
     name: 'Biurkowe drukarki etykiet Zebra',
     numberOfItems: devices.length,
-    itemListElement: devices.map((d, i) => ({
-      '@type': 'ListItem',
-      position: i + 1,
-      url: `${SITE}/sklep/drukarki-etykiet/${d.slug}`,
-      name: d.name,
-    })),
+    itemListElement: devices.map((d, i) => {
+      const m = modele[i]
+      const dostepne = m.warianty.filter((v) => v.dostepny && v.netto > 0)
+      const zrodlo = (dostepne.length > 0 ? dostepne : m.warianty).reduce(
+        (a, b) => (b.netto > 0 && (a.netto <= 0 || b.netto < a.netto) ? b : a),
+        { netto: m.netto, brutto: m.brutto, dostepny: false } as { netto: number; brutto: number; dostepny: boolean }
+      )
+      const url = `${SITE}/sklep/drukarki-etykiet/${d.slug}`
+      return {
+        '@type': 'ListItem',
+        position: i + 1,
+        url,
+        name: d.name,
+        item: {
+          '@type': 'Product',
+          name: d.name,
+          url,
+          image: absolutny(d.image_urls?.[0]),
+          brand: { '@type': 'Brand', name: 'Zebra' },
+          category: 'Biurkowe drukarki etykiet',
+          offers: {
+            '@type': 'Offer',
+            url,
+            priceCurrency: 'PLN',
+            price: zrodlo.brutto.toFixed(2),
+            priceSpecification: {
+              '@type': 'UnitPriceSpecification',
+              price: zrodlo.netto.toFixed(2),
+              priceCurrency: 'PLN',
+              valueAddedTaxIncluded: false,
+            },
+            availability: dostepne.length > 0 ? 'https://schema.org/InStock' : 'https://schema.org/BackOrder',
+            itemCondition: 'https://schema.org/NewCondition',
+            seller: { '@type': 'Organization', name: 'TAKMA - Autoryzowany Serwis Zebra' },
+          },
+        },
+      }
+    }),
   }
 
   return (

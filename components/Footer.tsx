@@ -211,7 +211,7 @@ export default function Footer() {
               <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-gray-500 mb-4 sm:mb-5">Płatności</h4>
               <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 mb-4 sm:mb-6">
                 {[
-                  { src: 'https://cdn.worldvectorlogo.com/logos/stripe-4.svg', alt: 'Stripe', w: 50, h: 20, cls: 'h-4 sm:h-5' },
+                  // Stripe zastąpiony Przelewy24 (06.2026) — logo z obcego CDN mylilo i dokładało host
                   { src: '/P24_logo.png', alt: 'Przelewy24', w: 70, h: 20, cls: 'h-4 sm:h-5' },
                   { src: '/blik_logo.png', alt: 'Płatność BLIK', w: 80, h: 32, cls: 'h-7 sm:h-9' },
                 ].map((pay) => (

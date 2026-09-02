@@ -1198,3 +1198,11 @@ Fraza „biurkowe drukarki etykiet Zebra" jest głównym wejściem do tej katego
 - Test na bazie (wiersze tymczasowe, usunięte): aktywny → znaleziony, wygasły → null, `pending` → null, obcy numer → null. Tabela `service_contracts` jest dziś pusta (0 kontraktów sprzedanych).
 - Oferta etykiet wyjęta z `OFERTY_PANELU` do osobnego eksportu `OFERTA_ETYKIETY_ZIPSHIP` — grafika i wideo zostają w repo, pas jej nie pokazuje.
 - NIE ZROBIONE (do decyzji): lista zgłoszeń w adminie nie ma znacznika kontraktu (tylko szczegóły); wycena kontraktowa nadal wymaga ręcznego wpisania 0 zł robocizny przez serwisanta.
+
+## 2026-09-02 — audyt /sklep/drukarki-etykiet/biurkowe (84/100) i poprawki
+- Skan trzema narzędziami: claude-seo v2.2.5 (parse_html, content_quality 90/100), iannuttall/seo `audit-page` (PASS), Lighthouse 12 mobile lokalnie (PSI bez klucza: limit 240 QPM). Pełny raport w pamięci `seo-audit-biurkowe.md`.
+- **LCP**: element = zdjęcie pierwszego kafla z `loading="lazy"`; faza Load Delay 3,3 s z 4,9 s. `KafelekProduktu` dostał `priorytet` (→ `priority` w next/image), `KatalogDrukarek` daje go czterem pierwszym kaflom (2 na telefonie, 4 na desktopie nad zgięciem). Po zmianie audyt `lcp-lazy-loaded` przechodzi, Load Delay 2,2 s → 0,6 s (pomiar prod przed vs build lokalny po; lokalny Load Time 3,3 s to optymalizacja obrazów w locie na laptopie, na Vercelu ~0,2 s z cache). Spodziewane LCP na produkcji ~1,6 s — sprawdzić po deployu.
+- **og:image + twitter** dla kategorii: `/klasy/biurkowe.jpg` (1024×576, ten sam kafel co na hubie). Wcześniej karta Twittera dziedziczyła tytuł ze `/sklep`.
+- **ItemList → Product + Offer**: cena z najtańszego dostępnego wariantu (jak na kaflu), brutto jako `price`, netto w `UnitPriceSpecification`, availability InStock/BackOrder, obraz absolutny, brand Zebra. Sprawdzone na buildzie: 10 pozycji, wszystkie z ceną.
+- **Stopka**: usunięte logo Stripe z cdn.worldvectorlogo.com (płatności przez P24 od 06.2026) — na wszystkich stronach.
+- Nie ruszone: FAQPage zostaje (rich results wycofane, ale AI czyta); skip-link i kolejność nagłówków (a11y 93) — globalne, osobne zadanie.
