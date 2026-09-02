@@ -177,6 +177,8 @@ export default function DeviceAccessories({
       <li className="flex gap-3 rounded-lg border border-gray-200 p-3">
         <Link
           href={p.url}
+          // Bez zdjęcia link miałby pustą nazwę dostępną (ikona jest dekoracyjna)
+          aria-label={p.name}
           className="relative h-24 w-24 flex-shrink-0 self-center overflow-hidden rounded-md bg-white sm:h-28 sm:w-28"
         >
           {p.image_url ? (

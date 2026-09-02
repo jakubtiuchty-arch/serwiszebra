@@ -30,7 +30,7 @@ export default function ShopSubheader({ breadcrumbs }: ShopSubheaderProps) {
             {/* Home icon on mobile, text on desktop */}
             {/* Tekst „Start" zawsze w drzewie dostępności (na telefonie tylko dla czytnika),
                 bez aria-label — inaczej nazwa dostępna nie zawierała widocznego tekstu */}
-            <Link href="/" className="text-gray-500 hover:text-blue-600 transition-colors flex-shrink-0">
+            <Link href="/" prefetch={false} className="text-gray-500 hover:text-blue-600 transition-colors flex-shrink-0">
               <Home className="w-4 h-4 sm:hidden" aria-hidden="true" />
               <span className="sr-only sm:not-sr-only">Start</span>
             </Link>
