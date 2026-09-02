@@ -1248,6 +1248,14 @@ Fraza „biurkowe drukarki etykiet Zebra" jest głównym wejściem do tej katego
 - Strona klasy: fakt o ZT510, wiersz w tabeli (3 modele), notka tylko o ZT610/620, sekcja H2 ZT510, FAQ „ZT411 czy ZT510?", przypis pod tabelą przepisany (ekran dotykowy i RFID tylko ZT411/ZT421). sitemap, sitemap-images, llms.txt, `SPRZEDAWANE_MODELE`.
 - Weryfikacja na buildzie (produkt włączony na ~2 min): 27/27 OK — 8 PN z cenami SSR, JSON-LD 5/5 i 4/4, ProductGroup 8 wariantów, kafelki ZT421 + ZT510, zero scrolla poziomego, zero zepsutych obrazów.
 - PO DEPLOYU: `is_active:true`, sprawdzenie produkcji, `/seo-audit` karty.
+- Wdrożone 22:00: deploy potwierdzony, produkt włączony, karta i klasa 200 z 8 cenami.
+
+## 2026-09-02 — audyt SEO karty ZT510 (91/100) i regresje z tego samego dnia
+- Ta sama metoda co ZT421. Wobec porannego audytu: nagłówki bezpieczeństwa na produkcji, TTFB dokumentu 160/90 ms (było 625–706), desktop Performance 74 → 91 (LCP 1,4 s). Mobile LCP dalej 3,8 s: Load Delay 1,8 s + obraz w=1080 (~90 kB) na slow-4G.
+- **Regresja: Clarity przez `next/script lazyOnload` rzuca w konsoli `a[c] is not a function`** (best practices 100 → 96). Cofnięte do inline w `<head>`; przeniesienie nic nie dało na LCP. NIE powtarzać.
+- **Regresja: link akcesorium bez zdjęcia bez nazwy dostępnej** (a11y 97) — `aria-label={p.name}` w `DeviceAccessories`.
+- `prefetch={false}` na logo nie usunął chunku strony głównej — drugi link do `/` to „Start" w `ShopSubheader`; wyłączony. Wszystko w 554ba83.
+- Do zrobienia z planu: `sizes`/`quality` zdjęcia głównego na telefonie, `additionalProperty` raz na ProductGroup (23 × 8 wpisów w JSON-LD), lista zastosowań, wpis o ZT510/ZT610, gtin13.
 
 ## 2026-09-02 — powiadomienia na @takma.com.pl przez SMTP cyber_folks (obejście HostKarma)
 - **Problem**: serwer poczty takma.com.pl (cyber_folks) odrzuca ~10% maili z Resenda kodem `550 Email blocked by hostkarma.junkemailfilter.com` — pula IP Amazon SES okresowo ląduje na tej liście, Resend takich odbić nie ponawia. cyber_folks odmówił białej listy (18.08.2026). Ginęły m.in. „Nowa wiadomość — naprawa” do serwis@/wojcik@/zuchnicki@ i „Kurier zamówiony”.
