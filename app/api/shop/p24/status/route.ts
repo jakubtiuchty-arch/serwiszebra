@@ -2,6 +2,7 @@ export const dynamic = 'force-dynamic'
 
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
+import { contractItemsOf } from '@/lib/service-contracts'
 
 /**
  * Status płatności P24 dla strony sukcesu (polling, gdy klient wrócił z P24
@@ -33,5 +34,8 @@ export async function GET(request: NextRequest) {
     total_brutto: order.total_brutto,
     customer_email: order.email,
     items_count: items.reduce((sum: number, it: any) => sum + (it.quantity || 0), 0),
+    // Kontrakty w zamówieniu — strona sukcesu wysyła z tego konwersję do GA4
+    kontrakty_count: contractItemsOf(items).length,
+    kontrakty_netto: contractItemsOf(items).reduce((sum: number, it: any) => sum + (Number(it.priceNetto) || 0), 0),
   })
 }

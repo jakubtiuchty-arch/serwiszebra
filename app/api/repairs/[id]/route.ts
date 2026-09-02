@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { stripInternalNotes } from '@/lib/repair-internal'
 import { createClient } from '@/lib/supabase/server'
+import { kontraktDlaSerialu } from '@/lib/service-contracts'
 
 export async function GET(
   request: Request,
@@ -63,10 +64,14 @@ export async function GET(
       )
     }
 
+    // Kontrakt dopinamy po numerze seryjnym przy odczycie, nie przy zapisie —
+    // dzięki temu zgłoszenie sprzed zakupu kontraktu też go pokaże, a wygasły zniknie sam
+    const kontrakt = await kontraktDlaSerialu(repair.serial_number)
+
     return NextResponse.json({
       // Notatka wewnętrzna serwisu nie może opuścić panelu — dla klienta
       // i tak byłaby w payloadzie, mimo że nigdzie jej nie renderujemy
-      repair: isAdmin ? repair : stripInternalNotes(repair),
+      repair: { ...(isAdmin ? repair : stripInternalNotes(repair)), kontrakt },
       statusHistory: []
     })
   } catch (error: any) {

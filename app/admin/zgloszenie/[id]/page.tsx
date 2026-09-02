@@ -62,6 +62,8 @@ interface RepairRequest {
   // Nowe pola dla gwarancji
   repair_type: 'paid' | 'warranty' | 'warranty_rejected'
   is_warranty: boolean
+  /** Aktywny kontrakt serwisowy dopięty po numerze seryjnym (API dokleja przy odczycie) */
+  kontrakt?: { contract_number: string; device_model: string; starts_at: string; ends_at: string } | null
   // Notatki serwisowe (diagnoza i wykonane prace)
   service_notes: string | null
   // Szczegóły wyceny (widoczne dla klienta i admina)
@@ -654,6 +656,22 @@ export default function AdminRepairDetailPage() {
                   <div>
                     <p className="text-xs text-gray-500">Numer seryjny</p>
                     <p className="font-mono text-xs text-gray-900">{repair.serial_number}</p>
+                  </div>
+                )}
+                {/* Serwisant musi to zobaczyć PRZED wyceną: robocizna i transport są w cenie kontraktu */}
+                {repair.kontrakt && (
+                  <div className="rounded-lg border-2 border-emerald-400 bg-emerald-50 px-3 py-2">
+                    <p className="text-xs font-bold uppercase tracking-wide text-emerald-800">
+                      Kontrakt serwisowy
+                    </p>
+                    <p className="mt-0.5 text-sm font-semibold text-emerald-900">
+                      {repair.kontrakt.contract_number}
+                    </p>
+                    <p className="text-xs text-emerald-800">
+                      Ochrona od {new Date(repair.kontrakt.starts_at).toLocaleDateString('pl-PL')} do{' '}
+                      {new Date(repair.kontrakt.ends_at).toLocaleDateString('pl-PL')}. Bez opłat za
+                      robociznę, diagnostykę i transport; części 40% taniej.
+                    </p>
                   </div>
                 )}
               </div>

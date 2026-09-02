@@ -75,6 +75,8 @@ interface Repair {
   // Nowe pola dla gwarancji
   repair_type: 'paid' | 'warranty' | 'warranty_rejected'
   device_type?: string | null
+  /** Aktywny kontrakt serwisowy dopięty po numerze seryjnym (API dokleja przy odczycie) */
+  kontrakt?: { contract_number: string; ends_at: string } | null
   is_warranty: boolean
   // Notatki serwisowe
   service_notes: string | null
@@ -485,6 +487,12 @@ const handlePaymentSuccess = async () => {
           {format(new Date(repair.created_at), "d MMM", { locale: pl })}
         </p>
       </div>
+      {repair.kontrakt && (
+        <p className="mt-2 rounded-lg border border-emerald-200 bg-emerald-50 px-2.5 py-1.5 text-[11px] font-semibold text-emerald-900">
+          Objęta kontraktem serwisowym {repair.kontrakt.contract_number} do{' '}
+          {format(new Date(repair.kontrakt.ends_at), 'd MMMM yyyy', { locale: pl })}
+        </p>
+      )}
     </div>
 
     {/* Opis problemu - MOBILE */}
@@ -700,6 +708,16 @@ const handlePaymentSuccess = async () => {
             <div>
               <p className="text-xs text-gray-500">Gwarancja</p>
               <p className="text-sm font-semibold text-gray-900 capitalize">{repair.warranty_status}</p>
+            </div>
+          )}
+
+          {repair.kontrakt && (
+            <div className="rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-2">
+              <p className="text-xs text-emerald-700">Kontrakt serwisowy</p>
+              <p className="text-sm font-semibold text-emerald-900">
+                {repair.kontrakt.contract_number} — ochrona do{' '}
+                {format(new Date(repair.kontrakt.ends_at), 'd MMMM yyyy', { locale: pl })}
+              </p>
             </div>
           )}
         </div>

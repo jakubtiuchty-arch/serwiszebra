@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { requireAdminServer } from '@/lib/auth-server'
 import { createClient } from '@/lib/supabase/server'
+import { kontraktDlaSerialu } from '@/lib/service-contracts'
 
 export async function GET(
   request: NextRequest,
@@ -41,8 +42,11 @@ export async function GET(
       console.error('Error fetching history:', historyError)
     }
 
+    // Serwisant musi widzieć, że drukarka jest na kontrakcie, zanim wystawi wycenę
+    const kontrakt = await kontraktDlaSerialu(repair.serial_number)
+
     return NextResponse.json({
-      repair,
+      repair: { ...repair, kontrakt },
       history: history || []
     })
 

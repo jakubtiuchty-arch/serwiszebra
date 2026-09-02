@@ -1,7 +1,8 @@
 'use client'
 
-import { useState, useRef } from 'react'
-import { X, Upload, Package, AlertCircle, Loader2 } from 'lucide-react'
+import { useState, useRef, useEffect } from 'react'
+import { X, Upload, Package, AlertCircle, Loader2, ShieldCheck } from 'lucide-react'
+import type { KontraktUrzadzenia } from '@/lib/service-contracts'
 
 interface NewRepairModalProps {
   isOpen: boolean
@@ -32,6 +33,13 @@ export default function NewRepairModal({ isOpen, onClose, onSuccess }: NewRepair
   const [error, setError] = useState<string | null>(null)
   const [photos, setPhotos] = useState<File[]>([])
   const [differentAddress, setDifferentAddress] = useState(false)
+
+  /**
+   * Kontrakt serwisowy dla wpisanego numeru seryjnego. Sprawdzamy w trakcie
+   * wpisywania (z opóźnieniem), żeby klient zobaczył ochronę od razu, a nie
+   * dopiero po wysłaniu zgłoszenia.
+   */
+  const [kontrakt, setKontrakt] = useState<KontraktUrzadzenia | null>(null)
   const formRef = useRef<HTMLDivElement>(null)
 
   const [formData, setFormData] = useState({
@@ -77,6 +85,32 @@ export default function NewRepairModal({ isOpen, onClose, onSuccess }: NewRepair
   const removePhoto = (index: number) => {
     setPhotos(prev => prev.filter((_, i) => i !== index))
   }
+
+  /**
+   * Kontrakt sprawdzamy w trakcie wpisywania numeru (z opóźnieniem), żeby klient
+   * zobaczył ochronę od razu, a nie dopiero po wysłaniu zgłoszenia.
+   */
+  useEffect(() => {
+    const serial = formData.serial_number.replace(/\s+/g, '').trim()
+    if (serial.length < 5) {
+      setKontrakt(null)
+      return
+    }
+    let anulowane = false
+    const t = setTimeout(async () => {
+      try {
+        const res = await fetch(`/api/service-contracts/check?serial=${encodeURIComponent(serial)}`)
+        const dane = res.ok ? await res.json() : { kontrakt: null }
+        if (!anulowane) setKontrakt(dane.kontrakt || null)
+      } catch {
+        if (!anulowane) setKontrakt(null)
+      }
+    }, 500)
+    return () => {
+      anulowane = true
+      clearTimeout(t)
+    }
+  }, [formData.serial_number])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -290,6 +324,17 @@ export default function NewRepairModal({ isOpen, onClose, onSuccess }: NewRepair
                         placeholder="np. 23028928982"
                         className="w-full px-2.5 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       />
+                      {kontrakt && (
+                        <div className="mt-2 flex items-start gap-2 rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-2 text-xs text-emerald-900">
+                          <ShieldCheck className="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-600" />
+                          <span>
+                            Ta drukarka jest objęta kontraktem serwisowym{' '}
+                            <strong>{kontrakt.contract_number}</strong> do{' '}
+                            {new Date(kontrakt.ends_at).toLocaleDateString('pl-PL')}. Transport i praca
+                            serwisu są w cenie kontraktu.
+                          </span>
+                        </div>
+                      )}
                     </div>
 
                     <div className="min-w-0">

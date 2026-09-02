@@ -4,7 +4,13 @@ import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { X, ArrowRight } from 'lucide-react'
-import { OFERTY_PANELU, type NaprawaDlaOfert, type OfertaPanelu } from '@/lib/panel-offers'
+import { trackEvent } from '@/lib/gtm'
+import {
+  OFERTY_PANELU,
+  ofertaAktywna,
+  type NaprawaDlaOfert,
+  type OfertaPanelu,
+} from '@/lib/panel-offers'
 
 /**
  * „×" ukrywa ofertę na 30 dni, nie na zawsze — kontrakt jest ofertą stałą, a klient
@@ -43,7 +49,7 @@ export default function PasOfertowy({ naprawy }: { naprawy: NaprawaDlaOfert[] })
 
     async function wybierzOferte() {
       const widoczne = OFERTY_PANELU.filter(
-        (o) => !ukryta(o.id) && (!o.pokazGdy || o.pokazGdy(naprawy))
+        (o) => ofertaAktywna(o) && !ukryta(o.id) && (!o.pokazGdy || o.pokazGdy(naprawy))
       )
       if (widoczne.length === 0) {
         setOferta(null)
@@ -75,7 +81,14 @@ export default function PasOfertowy({ naprawy }: { naprawy: NaprawaDlaOfert[] })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [kluczNapraw])
 
+  // Wyświetlenie liczymy raz na wejście do panelu — GA4 zestawia je z kliknięciami
+  useEffect(() => {
+    if (oferta) trackEvent('oferta_panel_wyswietlenie', { oferta_id: oferta.id })
+  }, [oferta])
+
   if (!oferta) return null
+
+  const klik = () => trackEvent('oferta_panel_klik', { oferta_id: oferta.id, cel: oferta.ctaHref })
 
   const ukryj = () => {
     try {
@@ -91,6 +104,7 @@ export default function PasOfertowy({ naprawy }: { naprawy: NaprawaDlaOfert[] })
     <section className="relative">
       <Link
         href={oferta.ctaHref}
+        onClick={klik}
         className="group relative block overflow-hidden rounded-xl border border-gray-200 bg-black shadow-sm"
       >
         {/* Grafika idzie przez CAŁY pas i jest przycięta u góry i u dołu — artefakty mają

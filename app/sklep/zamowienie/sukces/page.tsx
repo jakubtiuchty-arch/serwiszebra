@@ -5,6 +5,7 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { useCartStore } from '@/lib/cart-store';
+import { trackEvent } from '@/lib/gtm';
 import { 
   CheckCircle, 
   Loader2, 
@@ -48,6 +49,29 @@ function ShopSuccessPageContent() {
     const apply = (data: any) => {
       // Płatność potwierdzona → dopiero teraz czyścimy koszyk
       try { useCartStore.getState().clearCart(); } catch {}
+
+      // Konwersje do GA4 — raz na zamówienie, bo klient potrafi odświeżyć stronę sukcesu
+      try {
+        const klucz = `ga4-zakup:${data.order_number}`;
+        if (data.order_number && !sessionStorage.getItem(klucz)) {
+          sessionStorage.setItem(klucz, '1');
+          trackEvent('purchase', {
+            transaction_id: data.order_number,
+            value: Number(data.total_brutto) || 0,
+            currency: 'PLN',
+            items_count: data.items_count || 1,
+          });
+          if (data.kontrakty_count > 0) {
+            trackEvent('kontrakt_zakup', {
+              transaction_id: data.order_number,
+              value: Number(data.kontrakty_netto) || 0,
+              currency: 'PLN',
+              liczba_kontraktow: data.kontrakty_count,
+            });
+          }
+        }
+      } catch {}
+
       setOrderData({
         order_id: data.order_id,
         order_number: data.order_number,

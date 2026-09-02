@@ -38,6 +38,14 @@ export interface OfertaPanelu {
    * Bez pola oferta dotyczy każdego zalogowanego.
    */
   pokazGdy?: (naprawy: NaprawaDlaOfert[]) => boolean
+  /** Ostatni dzień promocji (RRRR-MM-DD). Po tej dacie pas znika sam — bez pola oferta jest stała. */
+  koniec?: string
+}
+
+/** Czy oferta jeszcze trwa. Program stały (bez `koniec`) trwa zawsze. */
+export function ofertaAktywna(o: OfertaPanelu, teraz = new Date()): boolean {
+  if (!o.koniec) return true
+  return teraz <= new Date(`${o.koniec}T23:59:59+01:00`)
 }
 
 /**

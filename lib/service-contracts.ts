@@ -108,3 +108,47 @@ export async function activateContractsForOrder(orderId: string): Promise<number
   }
   return data?.length || 0
 }
+
+/** Tyle o kontrakcie widzi klient w formularzu i na zgłoszeniu, a serwisant w panelu admina */
+export interface KontraktUrzadzenia {
+  contract_number: string
+  device_model: string
+  serial_number: string
+  starts_at: string
+  ends_at: string
+}
+
+/** Numer seryjny w bazie jest zawsze bez spacji i wielkimi literami — porównujemy w tej samej postaci */
+export function normalizujSerial(serial: string): string {
+  return serial.replace(/\s+/g, '').trim().toUpperCase()
+}
+
+/**
+ * Aktywny kontrakt dla urządzenia o danym numerze seryjnym albo null.
+ *
+ * Szukamy po samym numerze, nie po kliencie: kontrakt kupił ktoś z firmy przez
+ * sklep, a naprawę zgłasza konto w panelu — to często dwa różne adresy e-mail,
+ * a drukarka jest ta sama. Liczy się tylko `active` z datą końca w przyszłości;
+ * `pending` (nieopłacony) ochrony nie daje.
+ */
+export async function kontraktDlaSerialu(serial: string | null | undefined): Promise<KontraktUrzadzenia | null> {
+  const s = normalizujSerial(serial || '')
+  if (s.length < 5) return null
+
+  const supabase = createPureServiceClient()
+  const dzis = new Date().toISOString().slice(0, 10)
+  const { data, error } = await supabase
+    .from('service_contracts')
+    .select('contract_number,device_model,serial_number,starts_at,ends_at')
+    .eq('serial_number', s)
+    .eq('status', 'active')
+    .gte('ends_at', dzis)
+    .order('ends_at', { ascending: false })
+    .limit(1)
+
+  if (error) {
+    console.error('Nie udało się sprawdzić kontraktu dla numeru seryjnego:', error)
+    return null
+  }
+  return (data?.[0] as KontraktUrzadzenia | undefined) || null
+}
