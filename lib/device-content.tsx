@@ -3022,6 +3022,148 @@ export const TRESC_KART: Record<string, TrescKarty> = {
       ['Gwarancja', '24 miesiące'],
     ],
   },
+  'zebra-zt510': {
+    rekomendowanyPn: 'ZT51042-T0E0000Z',
+    zdjecieGlowne: '/sklep_photo/urzadzenia/zt510_1.webp',
+    wSkrocie: [
+      'Zebra ZT510 to przemysłowa drukarka etykiet o szerokości wydruku 104 mm, zbudowana do pracy ciągłej: całometalowa rama i obudowa o wadze 22,7 kg, następczyni modelu 105SLPlus.',
+      'Drukuje do 305 mm na sekundę w rozdzielczości 203 dpi i do 254 mm na sekundę w 300 dpi; etykieta może mieć do 991 mm długości, a wydruk ciągły do 3810 mm.',
+      'Mieści rolkę etykiet o średnicy do 203 mm na tulejce 76 mm i taśmę barwiącą o nawoju 450 metrów i szerokości od 20 do 110 mm; etykiety od 20 do 114 mm szerokości.',
+      'Zamiast ekranu dotykowego ma podświetlany wyświetlacz LCD z klawiaturą i hasłem dostępu, a w standardzie Gigabit Ethernet, USB, RS-232, Bluetooth LE i znacznik NFC do konfiguracji telefonem.',
+      'Gilotynę albo nawijak — pełnej rolki lub odklejak z nawijakiem podkładu — montuje producent i wybiera się je przy zamówieniu; gilotyna i nawijak wykluczają się.',
+      'Nie ma modułu RFID ani interfejsu aplikatora — te funkcje oferuje ZT411; ZT510 wybiera się dla mechaniki na trzy zmiany, nie dla dodatków.',
+    ],
+    zweryfikowano: '2026-09-02',
+    poradniki: [
+      'drukarka-zebra-nie-drukuje-przyczyny-rozwiazania',
+      'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',
+      'serwis-drukarki-zebra-zt411-zt421-diagnostyka-naprawa',
+    ],
+    opis: [
+      <>
+        Zebra ZT510 zamyka lukę między półprzemysłową{' '}
+        <Link
+          href="/sklep/drukarki-etykiet/zebra-zt411"
+          className="font-medium text-gray-900 underline"
+        >
+          Zebrą ZT411
+        </Link>{' '}
+        a serią ZT600. Ma tę samą szerokość wydruku 104 mm i tę samą rolkę do 203 mm,
+        ale konstrukcję o wadze 22,7 kg, przewidzianą na druk bez przerw przez całą
+        dobę — na linii produkcyjnej, w sortowni i w magazynie, gdzie drukarka stoi
+        w kurzu i pracuje na trzy zmiany. To bezpośrednia następczyni modelu 105SLPlus,
+        którego użytkownicy dostają tu tę samą klasę mechaniki z nowszą elektroniką.
+      </>,
+      <>
+        Drukuje do 305 mm na sekundę przy 203 dpi i do 254 mm na sekundę przy 300 dpi,
+        z pamięcią 2 GB Flash i 512 MB RAM, która mieści duże szablony i fonty. W miejsce
+        ekranu dotykowego jest podświetlany wyświetlacz LCD z klawiaturą i hasłem —
+        rozwiązanie celowo prostsze, odporne na rękawice i brud. W standardzie Gigabit
+        Ethernet, USB, RS-232, Bluetooth LE oraz znacznik NFC, przez który telefon z
+        aplikacją Zebry odczytuje konfigurację drukarki; kartę Wi-Fi, port równoległy,
+        USB Host albo drugi Ethernet wkłada się w dwa wolne gniazda.
+      </>,
+      <>
+        Sposób wydawania etykiety wybiera się przy zamówieniu: gilotyna odcina wydruk,
+        a nawijak zwija pełną rolkę zadrukowanych etykiet na tulejkę 76 mm albo pracuje
+        jako odklejak z nawijakiem podkładu. Obu opcji nie da się połączyć. Jeśli
+        etykiety są szersze niż 114 mm, właściwym modelem jest{' '}
+        <Link
+          href="/sklep/drukarki-etykiet/zebra-zt421"
+          className="font-medium text-gray-900 underline"
+        >
+          Zebra ZT421
+        </Link>
+        , a jeśli potrzebny jest moduł RFID, ekran dotykowy albo 600 dpi — ZT411.
+      </>,
+    ],
+    osie: [
+      {
+        tytul: 'Jakość druku',
+        pozycje: [
+          { termin: '203 dpi', opis: 'etykiety wysyłkowe, magazynowe i typowe kody kreskowe; do 305 mm/s' },
+          { termin: '300 dpi', opis: 'drobny tekst i małe kody dwuwymiarowe; do 254 mm/s' },
+        ],
+      },
+      {
+        tytul: 'Wyposażenie',
+        pozycje: [
+          { termin: 'Standard', opis: 'etykiety wychodzą na wstędze i są odrywane ręcznie' },
+          { termin: 'Gilotyna', opis: 'odcina wydruk pojedynczo albo w paskach; do przywieszek i wydruków o zmiennej długości' },
+          {
+            termin: 'Nawijak',
+            opis: 'zwija pełną rolkę zadrukowanych etykiet na tulejkę 76 mm albo pracuje jako odklejak z nawijakiem podkładu',
+          },
+        ],
+      },
+      {
+        tytul: 'Łączność',
+        pozycje: [
+          { termin: 'Ethernet', opis: 'Gigabit Ethernet, USB, RS-232 i Bluetooth LE w każdej wersji' },
+          { termin: 'Wi-Fi', opis: 'wersja z fabryczną kartą 802.11ac; kartę można też dołożyć po zakupie' },
+        ],
+      },
+    ],
+    faqNaglowek: 'Najczęstsze pytania o ZT510',
+    faq: [
+      {
+        q: 'Czym ZT510 różni się od ZT411?',
+        a: 'Przeznaczeniem. ZT510 ma cięższą konstrukcję (22,7 kg wobec 16,33 kg), większą pamięć i Gigabit Ethernet, ale prostszy panel — wyświetlacz LCD z klawiaturą zamiast ekranu dotykowego — oraz mniej rozbudowy: bez modułu RFID, interfejsu aplikatora i wersji 600 dpi. Wybiera się ją tam, gdzie druk trwa całą dobę, a drukarka ma pracować bez obsługi. ZT411 pozostaje wyborem, gdy potrzebne są dodatki.',
+        href: '/sklep/drukarki-etykiet/zebra-zt411',
+        link: 'Zobacz Zebra ZT411',
+      },
+      {
+        q: 'Czy ZT510 ma ekran dotykowy?',
+        a: 'Nie. Ma podświetlany wielowierszowy wyświetlacz LCD z klawiaturą i menu, które można zabezpieczyć hasłem. To celowe: taki panel obsługuje się w rękawicach, nie boi się kurzu i nie kusi do zmian ustawień na linii. Konfigurację można też odczytać telefonem przez znacznik NFC albo zdalnie przez wbudowany serwer wydruku z interfejsem WWW i alertami e-mail.',
+        href: '/instrukcje/zebra-zt510',
+        link: 'Instrukcja ZT510 po polsku',
+      },
+      {
+        q: 'Jakie etykiety i taśmy pasują do ZT510?',
+        a: 'Etykiety o szerokości od 20 do 114 mm i grubości od 0,076 do 0,305 mm (z gilotyną do 0,23 mm), w rolce o średnicy do 203 mm na tulejce 76 mm. Taśma barwiąca ma 450 metrów nawoju, szerokość od 20 do 110 mm, tulejkę 25,4 mm i jest nawinięta stroną barwiącą na zewnątrz. Taśma musi być szersza od etykiety, inaczej brzegi pozostają niezadrukowane, a głowica pracuje bez ochrony.',
+        href: '/blog/blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',
+        link: 'Dlaczego wydruk blednie',
+      },
+      {
+        q: 'Czy gilotynę i nawijak można mieć razem?',
+        a: 'Nie. Gilotyna nie współpracuje z nawijakiem ani odklejakiem — wybiera się jedno. Obie opcje montuje producent, więc decyzja zapada przy zamówieniu, a zmiana po zakupie oznacza wymianę urządzenia. Nawijak jest bardziej uniwersalny: zwija pełną rolkę wydruków na tulejkę 76 mm albo pracuje jako odklejak, nawijając zużyty podkład.',
+        href: '/sklep/drukarki-etykiet/przemyslowe',
+        link: 'Drukarki przemysłowe',
+      },
+      {
+        q: 'Ile etykiet dziennie wytrzyma ZT510?',
+        a: 'Została zbudowana do pracy ciągłej, więc granicą jest raczej materiał niż mechanizm: rolka 203 mm i taśma 450 metrów w proporcji 3:1 wystarczają na kilka godzin druku bez przerwy przy pełnej prędkości. Przy dziennym wolumenie rzędu kilku tysięcy etykiet ZT510 pracuje z dużym zapasem; poniżej tysiąca etykiet dziennie tańszym i lżejszym wyborem jest klasa półprzemysłowa.',
+        href: '/sklep/drukarki-etykiet/polprzemyslowe',
+        link: 'Drukarki półprzemysłowe',
+      },
+    ],
+    spec: [
+      ['Producent', 'Zebra'],
+      ['Model', 'ZT510'],
+      ['Klasa', 'Przemysłowa'],
+      ['Technologia druku', 'Termotransferowa i termiczna'],
+      ['Rozdzielczość', '203 albo 300 DPI'],
+      ['Szerokość druku', '104 mm'],
+      ['Prędkość druku', 'do 305 mm/s (203 dpi); do 254 mm/s (300 dpi)'],
+      ['Maks. długość etykiety', '991 mm; wydruk ciągły 3810 mm (203 dpi), 2540 mm (300 dpi)'],
+      ['Szerokość etykiet', '20–114 mm'],
+      ['Grubość materiału', '0,076–0,305 mm; z gilotyną do 0,23 mm'],
+      ['Maks. średnica rolki', '203 mm na gilzie 76 mm'],
+      ['Taśma barwiąca', 'nawój 450 m, szerokość 20–110 mm, gilza 25,4 mm'],
+      ['Pamięć', '2 GB Flash, 512 MB SDRAM'],
+      ['Panel', 'Podświetlany wielowierszowy LCD z klawiaturą, hasło dostępu'],
+      ['Łączność', 'Gigabit Ethernet, USB 2.0, RS-232, Bluetooth LE, znacznik NFC'],
+      ['Łączność opcjonalna', 'Wi-Fi 802.11ac z Bluetooth 4.0, port równoległy, USB Host, drugi Ethernet'],
+      ['Wyposażenie', 'Odrywanie, gilotyna albo nawijak (pełna rolka lub odklejak z nawijakiem podkładu)'],
+      ['Temperatura pracy', '5–40°C (termotransfer); 0–40°C (termiczna)'],
+      ['Zasilanie', '90–265 V, 250 W'],
+      ['Wymiary (D×S×W)', '512 × 268 × 396 mm'],
+      ['Waga', '22,7 kg'],
+      ['Języki', 'ZPL, ZPL II, XML'],
+      ['Stan', 'Nowy, oryginalny'],
+      ['Gwarancja', '24 miesiące'],
+    ],
+  },
 }
 
 export const trescKarty = (slug: string): TrescKarty | undefined => TRESC_KART[slug]

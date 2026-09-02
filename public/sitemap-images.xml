@@ -247,4 +247,16 @@
       <image:loc>https://www.serwis-zebry.pl/sklep_photo/urzadzenia/zt421_3.webp</image:loc>
     </image:image>
   </url>
+  <url>
+    <loc>https://www.serwis-zebry.pl/sklep/drukarki-etykiet/zebra-zt510</loc>
+    <image:image>
+      <image:loc>https://www.serwis-zebry.pl/sklep_photo/urzadzenia/zt510_1.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.serwis-zebry.pl/sklep_photo/urzadzenia/zt510_2.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.serwis-zebry.pl/sklep_photo/urzadzenia/zt510_3.webp</image:loc>
+    </image:image>
+  </url>
 </urlset>

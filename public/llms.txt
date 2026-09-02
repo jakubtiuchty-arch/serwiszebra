@@ -152,7 +152,10 @@ Porównanie trzech modeli: https://www.serwis-zebry.pl/sklep/drukarki-etykiet/po
 - **Zebra ZT421** — https://www.serwis-zebry.pl/sklep/drukarki-etykiet/zebra-zt421
   Przemysłowa drukarka o szerokości wydruku 168 mm (etykiety 51–178 mm, mieści etykietę logistyczną A5), 203 lub 300 dpi, do 305 mm/s, rolka do 203 mm, taśma 450 m do 174 mm szerokości, ekran dotykowy 4,3", waga 18,14 kg. Wersje z gilotyną, nawijakiem pełnej rolki i Wi-Fi; RFID UHF i interfejs aplikatora montowane u użytkownika. Ten sam mechanizm co ZT411, tylko szerszy.
 
-ZT510, ZT610 i ZT620 sprowadzamy na zamówienie. Klasa przemysłowa: https://www.serwis-zebry.pl/sklep/drukarki-etykiet/przemyslowe
+- **Zebra ZT510** — https://www.serwis-zebry.pl/sklep/drukarki-etykiet/zebra-zt510
+  Przemysłowa drukarka do pracy ciągłej, następczyni 105SLPlus: druk 104 mm, 203 lub 300 dpi, do 305 mm/s (254 mm/s przy 300 dpi), etykiety 20–114 mm, rolka do 203 mm, taśma 450 m, pamięć 2 GB, Gigabit Ethernet, Bluetooth LE i NFC, podświetlany LCD z klawiaturą zamiast ekranu dotykowego, waga 22,7 kg. Wersje z gilotyną, nawijakiem (pełna rolka lub odklejak z nawijakiem podkładu) i Wi-Fi. Bez RFID i interfejsu aplikatora.
+
+ZT610 i ZT620 sprowadzamy na zamówienie. Klasa przemysłowa: https://www.serwis-zebry.pl/sklep/drukarki-etykiet/przemyslowe
 
 ### Jak dobrać drukarkę biurkową Zebra
 
