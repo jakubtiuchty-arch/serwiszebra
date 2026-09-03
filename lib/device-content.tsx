@@ -530,46 +530,42 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     rekomendowanyPn: 'ZD23042-D0EG00EZ',
     zdjecieGlowne: '/sklep_photo/urzadzenia/zd230d_1.webp',
     wSkrocie: [
-      'Zebra ZD230d to biurkowa drukarka etykiet drukująca termicznie bezpośrednio, w rozdzielczości 203 dpi, z prędkością do 152 mm/s.',
-      'Drukuje o połowę szybciej niż ZD220d i w odróżnieniu od niej występuje w wersjach z Ethernetem albo Wi-Fi.',
-      'Szerokość druku 104 mm; obsługuje nośniki 25,4–112 mm, rolki do 127 mm średnicy i etykiety do 991 mm długości.',
-      'Odklejak, gilotynę i białą obudowę montuje fabryka — wersję wybiera się przy zamówieniu i nie da się jej zmienić później.',
-      'Nadruk termiczny z czasem blaknie; do oznaczeń trwałych służy termotransferowa Zebra ZD230t.',
+      'Zebra ZD230d to biurkowa drukarka etykiet z drukiem termicznym bezpośrednim: 203 dpi, do 152 mm/s, bez taśmy barwiącej.',
+      'Drukuje o połowę szybciej niż ZD220d i, w przeciwieństwie do niej, ma wersje z Ethernetem albo Wi-Fi.',
+      'Szerokość druku 104 mm; etykiety od 25,4 do 112 mm szerokości i do 991 mm długości, rolki do 127 mm średnicy.',
+      'Odklejak, gilotynę i białą obudowę montuje fabryka, więc wersję wybiera się przy zamówieniu i później nie da się jej zmienić.',
+      'Druk termiczny z czasem blaknie. Do etykiet, które mają być czytelne latami, jest termotransferowa Zebra ZD230t.',
     ],
     zweryfikowano: '2026-08-28',
     opis: [
       <>
-        Zebra ZD230d to biurkowa drukarka etykiet pracująca w technologii termicznej
-        bezpośredniej — bez taśmy barwiącej. Jest następcą modelu ZD220d i różni się od niego
-        w dwóch rzeczach, które widać w codziennej pracy: drukuje o połowę szybciej
-        i można ją podłączyć do sieci. Sprawdza się tam, gdzie etykiet wysyłkowych,
-        kurierskich i cenowych przybywa w rytmie zamówień — w sklepach internetowych,
-        punktach nadań i magazynach.
+        Zebra ZD230d to biurkowa drukarka etykiet z drukiem termicznym bezpośrednim, czyli
+        bez taśmy barwiącej. Zastąpiła model ZD220d. Od poprzedniczki różni się dwiema
+        rzeczami: drukuje o połowę szybciej i można ją podłączyć do sieci. Kupuje się ją
+        głównie do etykiet kurierskich i cenowych, do sklepu internetowego albo punktu nadań.
       </>,
       <>
-        Drukarka pracuje w rozdzielczości 203 dpi z prędkością do 152 mm/s, więc etykieta
-        kurierska 100 × 150 mm wychodzi w niespełna sekundę. Szerokość druku 104 mm obejmuje
-        pełny format takiej etykiety, a obsługiwane nośniki mają od 25,4 do 112 mm szerokości
-        przy rolkach o średnicy do 127 mm. Konstrukcja OpenACCESS sprowadza wymianę materiału
-        do podniesienia pokrywy i włożenia rolki. Obsługa języków ZPL II i EPL 2 zapewnia
-        zgodność z szablonami etykiet przygotowanymi dla ZD220d, GK420d i GC420d, więc
-        wymiana starszej drukarki nie wymaga zmian w oprogramowaniu.
+        Rozdzielczość to 203 dpi, prędkość do 152 mm/s. Etykieta kurierska 100 × 150 mm
+        wychodzi w niecałą sekundę i mieści się w całości, bo szerokość druku wynosi 104 mm.
+        Drukarka przyjmuje etykiety od 25,4 do 112 mm szerokości na rolkach do 127 mm
+        średnicy. Wymiana rolki to podniesienie pokrywy i włożenie nowej, bez żadnej
+        regulacji. Rozumie języki ZPL II i EPL 2, więc szablony etykiet z ZD220d, GK420d
+        albo GC420d działają na niej bez zmian w oprogramowaniu.
       </>,
       <>
-        Wyposażenie wybiera się przy zakupie, bo montuje się je fabrycznie: wersja
-        z odklejakiem sama oddziela etykietę od podłoża, a wersja z gilotyną odcina wydruk —
-        przydaje się przy przywieszkach i etykietach o zmiennej długości. Obudowa jest
-        dostępna w czerni i w bieli. Warto znać granicę modelu: łączność jest wybierana raz,
-        na etapie zamówienia, i nie da się jej później rozbudować modułem. Jeżeli
-        infrastruktura może się zmienić albo potrzebna będzie rozdzielczość 300 dpi,
-        właściwszym wyborem jest{' '}
+        Odklejak i gilotynę montuje fabryka, dlatego wersję trzeba wybrać przy zakupie.
+        Odklejak oddziela etykietę od podłoża i przyspiesza naklejanie na paczki. Gilotyna
+        odcina wydruk, co przydaje się przy przywieszkach i etykietach o zmiennej długości.
+        Obudowa jest czarna albo biała. To samo dotyczy łączności: USB, Ethernet albo Wi-Fi
+        wybiera się raz i nie da się później dołożyć modułu. Jeśli sieć w firmie może się
+        zmienić albo będzie potrzebne 300 dpi, lepiej wybrać{' '}
         <Link
           href="/sklep/drukarki-etykiet/zebra-zd421d"
           className="font-medium text-gray-900 underline"
         >
           Zebra ZD421d
-        </Link>{' '}
-        z wymiennymi modułami łączności.
+        </Link>
+        , która ma wymienne moduły łączności.
       </>,
     ],
     osie: [
