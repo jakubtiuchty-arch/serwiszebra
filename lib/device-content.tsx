@@ -2750,7 +2750,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     ],
     opis: [
       <>
-        Zebra ZT411 domyka półkę półprzemysłową od góry. Ma tę samą szerokość wydruku
+        Zebra ZT411 to najmocniejsza drukarka klasy półprzemysłowej. Ma tę samą szerokość wydruku
         104 mm i tę samą rolkę do 203 mm co ZT231, ale cięższą, w całości metalową
         konstrukcję i mechanizm przewidziany na pracę wielozmianową. To urządzenie dla
         zakładów, w których druk etykiet trwa cały dzień, a przestój linii kosztuje
@@ -3183,7 +3183,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     ],
     opis: [
       <>
-        Zebra ZT610 zamyka ofertę drukarek o szerokości wydruku 104 mm od góry. Ma tę samą
+        Zebra ZT610 to najmocniejsza drukarka o szerokości wydruku 104 mm w naszej ofercie. Ma tę samą
         całometalową konstrukcję o wadze 22,7 kg co{' '}
         <Link
           href="/sklep/drukarki-etykiet/zebra-zt510"

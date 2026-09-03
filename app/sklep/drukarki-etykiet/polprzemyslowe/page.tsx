@@ -114,7 +114,7 @@ const FAKTY_KLASY = [
   'Odklejak, nawijak zużytego podkładu i gilotynę montuje producent w modelach ZT231 i ZT411; po zakupie nie można ich dołożyć.',
   'Sieci bezprzewodowej nie ma ZT111; w ZT231 wybiera się ją przy zamówieniu, a w ZT411 kartę Wi-Fi wkłada się w jedno z dwóch wolnych gniazd także po zakupie.',
   'Klasa przeznaczona dla firm, w których dzienny wolumen przekracza około dwóch tysięcy etykiet, a drukarka biurkowa zużywa się przedwcześnie.',
-  'ZT411 zamyka tę półkę od góry: ta sama szerokość wydruku i rolka co w ZT231, ale konstrukcja o wadze 16,33 kg, druk do 356 mm na sekundę, opcjonalne 600 dpi oraz moduły RFID i aplikatora montowane u użytkownika.',
+  'ZT411 jest najmocniejszym modelem tej klasy: ta sama szerokość wydruku i rolka co w ZT231, ale konstrukcja o wadze 16,33 kg, druk do 356 mm na sekundę, opcjonalne 600 dpi oraz moduły RFID i aplikatora montowane u użytkownika.',
 ]
 
 /** Wiersze tabeli porównawczej — trzy modele tej klasy obok siebie. */
