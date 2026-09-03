@@ -2903,37 +2903,39 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     ],
     opis: [
       <>
-        Zebra ZT421 to ten sam mechanizm, panel i pojemność materiału co w{' '}
+        Zebra ZT421 ma ten sam mechanizm i panel co{' '}
         <Link
           href="/sklep/drukarki-etykiet/zebra-zt411"
           className="font-medium text-gray-900 underline"
         >
-          Zebrze ZT411
+          Zebra ZT411
         </Link>
-        , ale w obudowie szerszej o 67 mm i z głowicą o szerokości wydruku 168 mm zamiast
-        104 mm. Kupuje się ją z jednego powodu: gdy etykieta jest szersza niż 114 mm.
-        Dotyczy to etykiet paletowych i logistycznych w formacie A5, oznaczeń opakowań
-        zbiorczych, etykiet regałowych i wszędzie tam, gdzie na jednym wydruku ma się
+        , a także obsługuje takie same rolki materiału. Różnica jest w szerokości:
+        obudowa jest większa o 67 mm, a głowica drukuje na 168 mm zamiast 104 mm. Ten
+        model ma sens, gdy etykieta jest szersza niż 114 mm — na przykład przy etykietach
+        paletowych i logistycznych w formacie A5, oznaczeniach opakowań zbiorczych czy
+        etykietach regałowych. Przydaje się też wtedy, gdy na jednym wydruku trzeba
         zmieścić kilka kodów kreskowych obok siebie.
       </>,
       <>
-        Drukuje z szybkością do 305 mm na sekundę w obu rozdzielczościach — 203 dpi do
-        etykiet wysyłkowych i paletowych, 300 dpi do drobnego tekstu i małych kodów
-        dwuwymiarowych. Maksymalna długość etykiety to 2591 mm przy 203 dpi i 1143 mm
-        przy 300 dpi, więc obsłuży także długie oznaczenia dźwigarów i profili. Rolka
-        o średnicy do 203 mm i taśma o nawoju 450 metrów oznaczają rzadkie przerwy na
-        wymianę materiału; taśma musi być szersza od etykiety, a przy pełnej szerokości
-        wydruku oznacza to taśmę 174 mm.
+        Prędkość dochodzi do 305 mm na sekundę zarówno przy 203, jak i 300 dpi. Pierwsza
+        rozdzielczość wystarcza do etykiet wysyłkowych i paletowych, druga lepiej radzi
+        sobie z drobnym tekstem oraz małymi kodami dwuwymiarowymi. Przy 203 dpi etykieta
+        może mieć do 2591 mm długości, a przy 300 dpi — do 1143 mm, więc drukarka
+        obsłuży również długie oznaczenia dźwigarów i profili. Rolka o średnicy do
+        203 mm i taśma o nawoju 450 metrów ograniczają przerwy na wymianę materiału.
+        Taśma musi być szersza od etykiety, dlatego przy druku na pełną szerokość
+        potrzebny jest wariant 174 mm.
       </>,
       <>
-        Gilotynę i nawijak pełnej rolki montuje producent, więc wybiera się je przy
-        zamówieniu — wersja z nawijakiem nawija zadrukowane etykiety z powrotem na
-        szpulę, co przydaje się przy aplikatorach i druku na zapas. Po zakupie
-        rozbudowuje się natomiast łączność i RFID: dwa wolne gniazda przyjmują kartę
-        Wi-Fi, drugi Ethernet albo interfejs aplikatora, a moduł RFID UHF koduje
-        znaczniki także na szerokich etykietach. Jeśli etykiety nie przekraczają 104 mm,
-        tańszym i lżejszym wyborem pozostaje ZT411 — z tą samą prędkością, tym samym
-        ekranem i dodatkową wersją 600 dpi.
+        Gilotynę lub nawijak pełnej rolki trzeba wybrać przy zamówieniu, ponieważ montuje
+        je producent. Nawijak zbiera zadrukowane etykiety z powrotem na szpulę, co jest
+        przydatne przy aplikatorach albo podczas drukowania na zapas. Po zakupie można
+        natomiast rozbudować łączność i dodać RFID. Dwa wolne gniazda pozwalają dołożyć
+        kartę Wi-Fi, drugi port Ethernet lub interfejs aplikatora, a moduł RFID UHF
+        koduje znaczniki również na szerokich etykietach. Jeśli etykiety nie przekraczają
+        104 mm, ZT411 będzie tańsza i lżejsza. Oferuje tę samą prędkość i ten sam ekran,
+        a dodatkowo jest dostępna w wersji 600 dpi.
       </>,
     ],
     osie: [
