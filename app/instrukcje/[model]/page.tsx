@@ -285,6 +285,7 @@ const SPRZEDAWANE_MODELE: Record<string, string> = {
   ZT411: 'zebra-zt411',
   ZT421: 'zebra-zt421',
   ZT510: 'zebra-zt510',
+  ZT610: 'zebra-zt610',
 }
 
 export default async function ModelPage({ params }: { params: { model: string } }) {

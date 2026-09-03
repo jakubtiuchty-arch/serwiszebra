@@ -1256,6 +1256,16 @@ Fraza „biurkowe drukarki etykiet Zebra" jest głównym wejściem do tej katego
 - **Regresja: link akcesorium bez zdjęcia bez nazwy dostępnej** (a11y 97) — `aria-label={p.name}` w `DeviceAccessories`.
 - `prefetch={false}` na logo nie usunął chunku strony głównej — drugi link do `/` to „Start" w `ShopSubheader`; wyłączony. Wszystko w 554ba83.
 - Do zrobienia z planu: `sizes`/`quality` zdjęcia głównego na telefonie, `additionalProperty` raz na ProductGroup (23 × 8 wpisów w JSON-LD), lista zastosowań, wpis o ZT510/ZT610, gtin13.
+- ZT510: poradnik `serwis-drukarki-zebra-zt510-diagnostyka-naprawa` jako pierwszy w „Gdy coś nie działa", wpis ZT411/ZT421 usunięty z tej karty (polecenie użytkownika, ee71031).
+
+## 2026-09-03 — karta Zebra ZT610 (trzecia w klasie przemysłowej)
+- Dane z `zt600-series-technical-specs-en-us.pdf` (WebSearch): **aktualny ZT610 ma ekran dotykowy 4,3"** (nie LCD — takma nazywa warianty „LCD" mylnie), 1 GB SDRAM / 2 GB Flash, Cortex A9, Gigabit Ethernet + USB 2.0 + RS-232 + BT 4.1 + 2×USB Host + NFC; opcje: gilotyna (wyklucza nawijak), nawijak, trzpień taśmy coated-in, interfejs aplikatora, RFID UHF, Wi-Fi 802.11ax/BT 5.3, drugi Ethernet, równoległy. 203/300/600 dpi: **356 / 305 / 152 mm/s**, ciągły 3810 / 2540 / 762 mm, etykiety 20–114 mm, 0,076–0,305 mm, rolka 203/76, taśma 450 m 20–110 mm, **505 × 262 × 396 mm** (takma: 268), 22,7 kg, 5–40°C. Następczyni 110Xi4. Wersja 600 dpi: bez gilotyny i RFID (Micro Label).
+- **PN-y**: 10 z 24 kandydatów — wyłącznie sufiks `0100Z` (ekran dotykowy); `0000Z` nie istnieje. 42/43 × T0E, T0EC, T1E (gilotyna), T2E (nawijak); 46 × T0E, T2E. Najtańszy ZT61042-T0E0100Z 10 170,78 netto (DE 70). Zgodne 1:1 z listą takmy.
+- Baza: id `bce4a449…`, 10 wariantów, klasa `przemyslowe`, meta_title 56, description 155 (drugi z dwóch kandydatów mieścił się w limicie). Zdjęcia 68–124 kB, `_1` front w prawo.
+- Treść: pozycjonowanie „ZT510 + szybkość, dotyk, 600 dpi, RFID i aplikator", linki do ZT510 i ZT421, osie jakość/wyposażenie/rozbudowa po zakupie, 5 FAQ (ZT510 vs ZT610, 600 dpi, RFID, materiały, gilotyna+nawijak), spec 25 wierszy, poradniki z wpisem ZT610/ZT620 (istnieje, 200) na czele.
+- Klasa: fakt o ZT610, wiersz w tabeli (4 modele), sekcja H2, FAQ „ZT510 czy ZT610?", notka tylko o ZT620 („ZT610 w wersji 168 mm"), przypis pod tabelą. sitemap, sitemap-images, llms.txt (ZT610 + ZT620 na zamówienie), `SPRZEDAWANE_MODELE`.
+- Weryfikacja na buildzie (produkt włączony na ~2 min): 29/29 OK.
+- PO DEPLOYU: `is_active:true`, sprawdzenie produkcji, `/seo-audit`.
 
 ## 2026-09-02 — powiadomienia na @takma.com.pl przez SMTP cyber_folks (obejście HostKarma)
 - **Problem**: serwer poczty takma.com.pl (cyber_folks) odrzuca ~10% maili z Resenda kodem `550 Email blocked by hostkarma.junkemailfilter.com` — pula IP Amazon SES okresowo ląduje na tej liście, Resend takich odbić nie ponawia. cyber_folks odmówił białej listy (18.08.2026). Ginęły m.in. „Nowa wiadomość — naprawa” do serwis@/wojcik@/zuchnicki@ i „Kurier zamówiony”.

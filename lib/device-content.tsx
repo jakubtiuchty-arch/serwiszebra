@@ -3164,6 +3164,155 @@ export const TRESC_KART: Record<string, TrescKarty> = {
       ['Gwarancja', '24 miesiące'],
     ],
   },
+  'zebra-zt610': {
+    rekomendowanyPn: 'ZT61042-T0E0100Z',
+    zdjecieGlowne: '/sklep_photo/urzadzenia/zt610_1.webp',
+    wSkrocie: [
+      'Zebra ZT610 to najmocniejsza przemysłowa drukarka etykiet o szerokości wydruku 104 mm w ofercie: całometalowa konstrukcja o wadze 22,7 kg, następczyni serii 110Xi4, przewidziana na druk całą dobę.',
+      'Drukuje do 356 mm na sekundę w 203 dpi, do 305 mm na sekundę w 300 dpi i do 152 mm na sekundę w 600 dpi — wersja 600 dpi służy do miniaturowych oznaczeń elektroniki i farmacji.',
+      'Mieści rolkę etykiet o średnicy do 203 mm na tulejce 76 mm i taśmę barwiącą o nawoju 450 metrów i szerokości od 20 do 110 mm; etykiety od 20 do 114 mm szerokości.',
+      'Ma kolorowy ekran dotykowy 4,3 cala, 1 GB pamięci RAM i 2 GB Flash, a w standardzie Gigabit Ethernet, USB, RS-232, Bluetooth 4.1, dwa porty USB Host i znacznik NFC.',
+      'Gilotynę albo nawijak — pełnej rolki lub odklejak z nawijakiem podkładu — montuje producent i wybiera się je przy zamówieniu; gilotyna i nawijak wykluczają się.',
+      'Moduł RFID UHF, interfejs aplikatora, kartę Wi-Fi 802.11ax z Bluetooth 5.3, drugi Ethernet i port równoległy instaluje się u użytkownika także po zakupie.',
+    ],
+    zweryfikowano: '2026-09-03',
+    poradniki: [
+      'serwis-drukarki-zebra-zt610-zt620-diagnostyka-naprawa',
+      'drukarka-zebra-nie-drukuje-przyczyny-rozwiazania',
+      'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',
+    ],
+    opis: [
+      <>
+        Zebra ZT610 zamyka ofertę drukarek o szerokości wydruku 104 mm od góry. Ma tę samą
+        całometalową konstrukcję o wadze 22,7 kg co{' '}
+        <Link
+          href="/sklep/drukarki-etykiet/zebra-zt510"
+          className="font-medium text-gray-900 underline"
+        >
+          Zebra ZT510
+        </Link>
+        , ale szybszy mechanizm, kolorowy ekran dotykowy zamiast wyświetlacza z klawiaturą,
+        trzecią rozdzielczość 600 dpi i pełną rozbudowę: moduł RFID, interfejs aplikatora
+        i Wi-Fi. To urządzenie dla linii produkcyjnych i centrów logistycznych, w których
+        drukarka pracuje na trzy zmiany, a etykiety schodzą wprost do aplikatora albo
+        zawierają znacznik RFID.
+      </>,
+      <>
+        Drukuje do 356 mm na sekundę w 203 dpi — o jedną szóstą szybciej niż ZT510 — do
+        305 mm na sekundę w 300 dpi i do 152 mm na sekundę w 600 dpi. Wersja 600 dpi
+        drukuje kody dwuwymiarowe i tekst na etykietach o kilku milimetrach szerokości,
+        stosowanych na płytkach elektroniki, w laboratoriach i farmacji; maksymalna długość
+        wydruku ciągłego spada wtedy do 762 mm wobec 3810 mm przy 203 dpi. Rolka o średnicy
+        do 203 mm i taśma o nawoju 450 metrów ograniczają przerwy na wymianę materiału,
+        a przezroczyste drzwi komory pozwalają sprawdzić zapas bez otwierania drukarki.
+      </>,
+      <>
+        Gilotynę albo nawijak montuje producent, więc wybiera się je przy zamówieniu;
+        nawijak zwija pełną rolkę wydruków na tulejkę 76 mm albo pracuje jako odklejak
+        z nawijakiem podkładu. Po zakupie rozbudowuje się resztę: moduł RFID UHF koduje
+        znaczniki w trakcie druku, interfejs aplikatora daje sygnały sterujące dla
+        systemów automatycznego etykietowania, a dwa wolne gniazda przyjmują kartę
+        Wi-Fi, drugi Ethernet albo port równoległy. Jeśli etykiety są szersze niż
+        114 mm, właściwym modelem jest{' '}
+        <Link
+          href="/sklep/drukarki-etykiet/zebra-zt421"
+          className="font-medium text-gray-900 underline"
+        >
+          Zebra ZT421
+        </Link>
+        ; jeśli dodatki nie są potrzebne, a liczy się sama mechanika — ZT510.
+      </>,
+    ],
+    osie: [
+      {
+        tytul: 'Jakość druku',
+        pozycje: [
+          { termin: '203 dpi', opis: 'etykiety wysyłkowe, magazynowe i typowe kody kreskowe; do 356 mm/s' },
+          { termin: '300 dpi', opis: 'drobny tekst i małe kody dwuwymiarowe; do 305 mm/s' },
+          { termin: '600 dpi', opis: 'oznaczenia miniaturowe elektroniki i farmacji; do 152 mm/s, bez wersji z gilotyną' },
+        ],
+      },
+      {
+        tytul: 'Wyposażenie',
+        pozycje: [
+          { termin: 'Standard', opis: 'etykiety wychodzą na wstędze i są odrywane ręcznie' },
+          { termin: 'Gilotyna', opis: 'odcina wydruk pojedynczo albo w paskach; niedostępna w 600 dpi' },
+          {
+            termin: 'Nawijak',
+            opis: 'zwija pełną rolkę zadrukowanych etykiet na tulejkę 76 mm albo pracuje jako odklejak z nawijakiem podkładu',
+          },
+        ],
+      },
+      {
+        tytul: 'Rozbudowa po zakupie',
+        pozycje: [
+          { termin: 'RFID UHF', opis: 'moduł kodujący znaczniki EPC gen. 2 wersja 2.1 / ISO 18000-63, instalowany u użytkownika' },
+          { termin: 'Aplikator', opis: 'interfejs sygnałów statusu i sterowania dla systemów automatycznego etykietowania' },
+          { termin: 'Wi-Fi', opis: 'karta 802.11ax z Bluetooth 5.3 do jednego z dwóch wolnych gniazd; wersja z fabryczną kartą też w ofercie' },
+        ],
+      },
+    ],
+    faqNaglowek: 'Najczęstsze pytania o ZT610',
+    faq: [
+      {
+        q: 'Czym ZT610 różni się od ZT510?',
+        a: 'Szybkością, panelem i rozbudową. ZT610 drukuje do 356 mm na sekundę wobec 305 w ZT510, ma kolorowy ekran dotykowy zamiast wyświetlacza z klawiaturą, wersję 600 dpi oraz przyjmuje moduł RFID i interfejs aplikatora. Konstrukcja, waga 22,7 kg, szerokość wydruku 104 mm, rolka do 203 mm i taśma 450 metrów są takie same. ZT510 wystarcza, gdy liczy się mechanika bez dodatków.',
+        href: '/sklep/drukarki-etykiet/zebra-zt510',
+        link: 'Zobacz Zebra ZT510',
+      },
+      {
+        q: 'Kiedy wybrać ZT610 w 600 dpi?',
+        a: 'Gdy na etykiecie o kilku milimetrach ma się zmieścić czytelny kod dwuwymiarowy albo tekst — na płytkach elektroniki, w laboratoriach i farmacji. Rozdzielczość 600 dpi zmniejsza prędkość do 152 mm na sekundę i skraca wydruk ciągły do 762 mm. Wersja 600 dpi nie występuje z gilotyną, a najmniejsza etykieta w trybie nawijania ma 3 mm długości.',
+        href: '/sklep/drukarki-etykiet/przemyslowe',
+        link: 'Drukarki przemysłowe',
+      },
+      {
+        q: 'Czy ZT610 obsługuje RFID?',
+        a: 'Tak. Moduł RFID UHF instaluje się u użytkownika, także po zakupie, i koduje znaczniki zgodne z UHF EPC generacji 2 wersji 2.1 oraz ISO/IEC 18000-63 w trakcie druku. To najczęstszy powód wyboru ZT610 zamiast ZT510, która modułu RFID nie przyjmuje.',
+        href: '/blog/serwis-drukarki-zebra-zt610-zt620-diagnostyka-naprawa',
+        link: 'Diagnostyka ZT610 i ZT620',
+      },
+      {
+        q: 'Jakie etykiety i taśmy pasują do ZT610?',
+        a: 'Etykiety o szerokości od 20 do 114 mm i grubości od 0,076 do 0,305 mm, w rolce o średnicy do 203 mm na tulejce 76 mm. Taśma barwiąca ma 450 metrów nawoju, szerokość od 20 do 110 mm i tulejkę 25,4 mm; opcjonalny trzpień przyjmuje też taśmy nawinięte stroną barwiącą do wewnątrz. Taśma musi być szersza od etykiety, inaczej brzegi pozostają niezadrukowane, a głowica pracuje bez ochrony.',
+        href: '/blog/blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',
+        link: 'Dlaczego wydruk blednie',
+      },
+      {
+        q: 'Czy gilotynę i nawijak można mieć razem?',
+        a: 'Nie. Gilotyna nie współpracuje z nawijakiem ani odklejakiem — wybiera się jedno przy zamówieniu, bo obie opcje montuje producent. Po zakupie rozbudowuje się natomiast RFID, interfejs aplikatora i łączność. Nawijak jest bardziej uniwersalny: zwija pełną rolkę na tulejkę 76 mm albo pracuje jako odklejak z nawijakiem podkładu.',
+        href: '/instrukcje/zebra-zt610',
+        link: 'Instrukcja ZT610 po polsku',
+      },
+    ],
+    spec: [
+      ['Producent', 'Zebra'],
+      ['Model', 'ZT610'],
+      ['Klasa', 'Przemysłowa'],
+      ['Technologia druku', 'Termotransferowa i termiczna'],
+      ['Rozdzielczość', '203, 300 albo 600 DPI'],
+      ['Szerokość druku', '104 mm'],
+      ['Prędkość druku', 'do 356 mm/s (203 dpi); do 305 mm/s (300 dpi); do 152 mm/s (600 dpi)'],
+      ['Maks. długość etykiety', '991 mm; wydruk ciągły 3810 mm (203 dpi), 2540 mm (300 dpi), 762 mm (600 dpi)'],
+      ['Szerokość etykiet', '20–114 mm'],
+      ['Grubość materiału', '0,076–0,305 mm'],
+      ['Maks. średnica rolki', '203 mm na gilzie 76 mm'],
+      ['Taśma barwiąca', 'nawój 450 m, szerokość 20–110 mm, gilza 25,4 mm'],
+      ['Pamięć', '2 GB Flash, 1 GB SDRAM'],
+      ['Panel', 'Kolorowy ekran dotykowy 4,3 cala'],
+      ['Łączność', 'Gigabit Ethernet, USB 2.0, RS-232, Bluetooth 4.1, dwa porty USB Host, znacznik NFC'],
+      ['Łączność opcjonalna', 'Wi-Fi 802.11ax z Bluetooth 5.3, drugi Ethernet, port równoległy, interfejs aplikatora'],
+      ['Wyposażenie', 'Odrywanie, gilotyna albo nawijak (pełna rolka lub odklejak z nawijakiem podkładu)'],
+      ['RFID', 'UHF EPC gen. 2 wersja 2.1, ISO/IEC 18000-63 — montaż u użytkownika'],
+      ['Temperatura pracy', '5–40°C (termotransfer); 0–40°C (termiczna)'],
+      ['Zasilanie', '90–265 V, 250 W'],
+      ['Wymiary (D×S×W)', '505 × 262 × 396 mm'],
+      ['Waga', '22,7 kg'],
+      ['Języki', 'ZPL, ZPL II'],
+      ['Stan', 'Nowy, oryginalny'],
+      ['Gwarancja', '24 miesiące'],
+    ],
+  },
 }
 
 export const trescKarty = (slug: string): TrescKarty | undefined => TRESC_KART[slug]
