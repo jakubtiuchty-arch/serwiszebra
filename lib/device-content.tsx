@@ -301,46 +301,47 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     rekomendowanyPn: 'ZD22042-D0EG00EZ',
     zdjecieGlowne: '/sklep_photo/urzadzenia/zd220d_1.webp',
     wSkrocie: [
-      'Zebra ZD220d to najtańsza drukarka etykiet w ofercie Zebry: druk termiczny bez taśmy, 203 dpi, prędkość do 102 mm/s.',
-      'Szerokość druku 104 mm obejmuje pełny format etykiety kurierskiej 100 × 150 mm; obsługiwane nośniki mają 25,4–112 mm szerokości.',
-      'Ma wyłącznie złącze USB i nie przyjmuje modułu sieciowego — Ethernetu ani Wi-Fi nie da się dołożyć po zakupie.',
-      'Waży 1,1 kg i mierzy 220 × 176 × 151 mm, więc mieści się na ciasnym stanowisku pakowania.',
-      'Sprawdza się przy kilkuset etykietach dziennie; przy większych nakładach właściwszym wyborem są ZD230d albo ZD421d.',
+      'Zebra ZD220d to najtańsza drukarka etykiet w ofercie Zebry. Drukuje termicznie bez taśmy, w rozdzielczości 203 dpi, z prędkością do 102 mm/s.',
+      'Szerokość druku 104 mm wystarcza na pełną etykietę kurierską 100 × 150 mm. Drukarka obsługuje materiały o szerokości od 25,4 do 112 mm.',
+      'Łączy się wyłącznie przez USB. Nie ma miejsca na moduł sieciowy, dlatego po zakupie nie można dołożyć Ethernetu ani Wi-Fi.',
+      'Waży 1,1 kg i mierzy 220 × 176 × 151 mm, dzięki czemu mieści się na niewielkim stanowisku pakowania.',
+      'Jest przeznaczona do kilkuset etykiet dziennie. Przy większych nakładach lepszym wyborem będzie ZD230d albo ZD421d.',
     ],
     zweryfikowano: '2026-08-27',
     opis: [
       <>
-        Zebra ZD220d to najprostsza i najtańsza czterocalowa drukarka etykiet w ofercie Zebry,
-        pracująca wyłącznie w technologii termicznej bezpośredniej — bez taśmy barwiącej.
-        Powstała z myślą o sklepach internetowych, punktach nadań, niewielkich magazynach
-        i handlu detalicznym, gdzie liczy się jedno: wydrukować etykietę wysyłkową, kurierską
-        albo cenową, taniej i bez zbędnej konfiguracji. Jedynym materiałem eksploatacyjnym
-        jest rolka etykiet termicznych.
+        Zebra ZD220d to najprostsza i najtańsza czterocalowa drukarka etykiet w ofercie
+        Zebry. Drukuje wyłącznie termicznie, bez taśmy barwiącej. Jest przeznaczona do
+        sklepów internetowych, punktów nadań, niewielkich magazynów i handlu detalicznego,
+        gdzie potrzebny jest prosty sposób na drukowanie etykiet wysyłkowych, kurierskich
+        lub cenowych. Jedynym materiałem eksploatacyjnym pozostaje rolka etykiet
+        termicznych.
       </>,
       <>
-        Drukarka pracuje w rozdzielczości 203 dpi z prędkością do 102 mm/s, a szerokość druku
-        104 mm obejmuje pełny format etykiety kurierskiej 100 × 150 mm — nadania InPost, DPD
-        czy Allegro drukują się w skali 1:1. Obsługuje nośniki o szerokości 25,4–112 mm
-        i rolki o średnicy do 127 mm. Konstrukcja OpenACCESS sprowadza wymianę materiału do
-        podniesienia pokrywy i włożenia rolki, bez narzędzi i prowadnic. Obsługa języków
-        ZPL II i EPL 2 zapewnia zgodność z szablonami etykiet przygotowanymi dla starszych
-        drukarek Zebry, w tym GC420d i GK420d. Wersja z odklejakiem oddziela etykietę od
-        podłoża automatycznie, co przyspiesza ręczne naklejanie przy pakowaniu.
+        Drukarka pracuje w rozdzielczości 203 dpi z prędkością do 102 mm/s. Szerokość
+        druku 104 mm mieści pełny format etykiety kurierskiej 100 × 150 mm, więc nadania
+        InPost, DPD czy Allegro drukują się w skali 1:1. Obsługuje materiały o szerokości
+        od 25,4 do 112 mm oraz rolki o średnicy do 127 mm. Dzięki konstrukcji OpenACCESS
+        wystarczy podnieść pokrywę i włożyć rolkę, bez użycia narzędzi ani dodatkowych
+        prowadnic.
+        Języki ZPL II i EPL 2 zapewniają zgodność z szablonami przygotowanymi dla starszych
+        drukarek Zebry, w tym GC420d i GK420d. Wersja z odklejakiem automatycznie oddziela
+        etykietę od podłoża, co ułatwia ręczne naklejanie podczas pakowania.
       </>,
       <>
-        Warto znać granice tego modelu, zanim trafi na stanowisko. ZD220d komunikuje się
-        wyłącznie przez USB — nie ma gniazda na moduł sieciowy, więc Ethernetu ani Wi-Fi nie
-        da się dołożyć później; pracuje przy jednym komputerze. Nie obsługuje też druku
-        termotransferowego, a nadruk termiczny z czasem blaknie pod wpływem światła i ciepła.
-        Jeżeli drukarka ma być współdzielona w sieci, pracować szybciej albo znakować sprzęt
-        i produkty na lata, właściwszym wyborem jest{' '}
+        Przed zakupem warto uwzględnić ograniczenia tego modelu. ZD220d łączy się wyłącznie
+        przez USB i nie ma gniazda na moduł sieciowy, dlatego Ethernetu ani Wi-Fi nie da
+        się dołożyć później. Drukarka pracuje przy jednym komputerze. Nie obsługuje też
+        druku termotransferowego, a nadruk termiczny z czasem blaknie pod wpływem światła
+        i ciepła. Jeżeli urządzenie ma być współdzielone w sieci, drukować szybciej albo
+        tworzyć wieloletnie oznaczenia sprzętu i produktów, lepszym wyborem będzie{' '}
         <Link
           href="/sklep/drukarki-etykiet/zebra-zd421d"
           className="font-medium text-gray-900 underline"
         >
           Zebra ZD421d
         </Link>{' '}
-        z modułami łączności lub termotransferowa ZD421t.
+        z modułami łączności albo termotransferowa ZD421t.
       </>,
     ],
     osie: [
