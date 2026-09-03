@@ -2587,12 +2587,12 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     rekomendowanyPn: 'ZT23142-T0E000FZ',
     zdjecieGlowne: '/sklep_photo/urzadzenia/zt231_1.webp',
     wSkrocie: [
-      'Zebra ZT231 to półprzemysłowa drukarka etykiet w całej obudowie z metalu, z kolorowym ekranem dotykowym 4,3 cala.',
-      'Drukuje etykiety o szerokości do 104 mm, w jakości 203 dpi z szybkością do 305 mm na sekundę albo w dokładniejszej 300 dpi z szybkością do 203 mm na sekundę.',
-      'Mieści rolkę etykiet o średnicy do 203 mm i taśmę barwiącą o nawoju 450 metrów — kilkukrotnie więcej materiału niż drukarka biurkowa.',
-      'Dostępne są wersje z odklejakiem, z odklejakiem i nawijakiem podkładu oraz z gilotyną; moduły te montuje producent i nie można ich dołożyć po zakupie.',
-      'Standardowe złącza to USB, Ethernet i RS-232; wersje oznaczone literą C w numerze katalogowym mają dodatkowo kartę sieci bezprzewodowej.',
-      'Waży 9,1 kg i pracuje w temperaturze od 5 do 40°C przy druku z taśmą, od 0°C przy druku termicznym.',
+      'Zebra ZT231 to półprzemysłowa drukarka do etykiet z metalową obudową i kolorowym ekranem dotykowym 4,3 cala.',
+      'Drukuje na szerokość do 104 mm. W wersji 203 dpi osiąga prędkość do 305 mm/s, a w dokładniejszej 300 dpi — do 203 mm/s.',
+      'Obsługuje rolki etykiet o średnicy do 203 mm oraz taśmy barwiące o nawoju 450 metrów. To kilkukrotnie więcej materiału niż mieści drukarka biurkowa.',
+      'Przy zamówieniu można wybrać odklejak, odklejak z nawijakiem podkładu lub gilotynę. Moduły montuje producent, dlatego nie można ich dołożyć po zakupie.',
+      'Standardowo ma USB, Ethernet i RS-232. Wersje oznaczone literą C w numerze katalogowym są dodatkowo wyposażone w kartę sieci bezprzewodowej.',
+      'Drukarka waży 9,1 kg. Przy druku z taśmą pracuje w temperaturze od 5 do 40°C, a przy druku termicznym — od 0°C.',
     ],
     zweryfikowano: '2026-08-31',
     poradniki: [
@@ -2602,34 +2602,34 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     ],
     opis: [
       <>
-        Zebra ZT231 to drukarka klasy półprzemysłowej: metalowa rama, metalowa obudowa
-        i mechanizm oparty na konstrukcji przemysłowej, w rozmiarze mieszczącym się na
-        stanowisku pakowania. Jest przeznaczona dla firm drukujących kilka tysięcy etykiet
-        dziennie — tam, gdzie drukarka biurkowa ogranicza przepustowość stanowiska
-        i zużywa się szybciej, niż zakładano przy zakupie.
+        Zebra ZT231 to półprzemysłowa drukarka z metalową ramą i obudową oraz mechanizmem
+        opartym na konstrukcji przemysłowej. Mimo to mieści się na typowym stanowisku
+        pakowania. Jest przeznaczona dla firm drukujących kilka tysięcy etykiet dziennie,
+        dla których model biurkowy staje się ograniczeniem i zużywa się szybciej, niż
+        zakładano przy zakupie.
       </>,
       <>
-        Drukuje etykiety o szerokości do 104 mm na etykietach od 19,4 do 114 mm. Do wyboru są
-        dwie jakości: 203 dpi z szybkością do 305 mm na sekundę albo dokładniejsza 300 dpi
-        z prędkością do 203 mm na sekundę. Rolka może mieć do 203 mm średnicy, a taśma
-        barwiąca 450 metrów nawoju — przy dwóch tysiącach etykiet dziennie oznacza to
-        wymianę materiału raz na tydzień zamiast kilku wymian dziennie w drukarce
-        biurkowej.
+        Drukuje na szerokość do 104 mm i obsługuje etykiety od 19,4 do 114 mm. Wersja
+        203 dpi osiąga prędkość do 305 mm na sekundę, a dokładniejsza 300 dpi — do
+        203 mm na sekundę. Rolka może mieć do 203 mm średnicy, a taśma barwiąca —
+        450 metrów nawoju. Przy dwóch tysiącach etykiet dziennie taki zapas pozwala
+        wymieniać materiał raz w tygodniu zamiast robić to kilka razy dziennie, jak
+        w drukarce biurkowej.
       </>,
       <>
-        Kolorowy wyświetlacz dotykowy prezentuje stan urządzenia po polsku i pozwala
-        zmienić ustawienia bez komputera — to podstawowa różnica wobec tańszej{' '}
+        Kolorowy ekran dotykowy pokazuje stan urządzenia po polsku i pozwala zmieniać
+        ustawienia bez komputera. To jedna z najważniejszych różnic w porównaniu z tańszą{' '}
         <Link
           href="/sklep/drukarki-etykiet/zebra-zt111"
           className="font-medium text-gray-900 underline"
         >
-          Zebry ZT111
+          Zebrą ZT111
         </Link>
-        , wyposażonej wyłącznie w przyciski. Konfigurację wybiera się przy zamówieniu:
-        odklejak oddziela etykietę od podkładu, wersja z nawijakiem zwija zużyty podkład
-        na szpulę, a gilotyna odcina wydruk. Wszystkie trzy moduły montuje producent
-        i nie można ich dołożyć po zakupie. Drukarka obsługuje języki ZPL i EPL, więc
-        przyjmuje wzory etykiet ze starszych urządzeń Zebry.
+        , która ma wyłącznie przyciski. Sposób wydawania etykiet trzeba wybrać przy
+        zamówieniu. Odklejak oddziela etykietę od podkładu, wersja z nawijakiem zwija
+        zużyty podkład na szpulę, a gilotyna odcina wydruk. Wszystkie trzy moduły montuje
+        producent i nie można ich dołożyć później. Drukarka obsługuje języki ZPL i EPL,
+        dlatego przyjmuje wzory etykiet przygotowane dla starszych urządzeń Zebry.
       </>,
     ],
     osie: [
