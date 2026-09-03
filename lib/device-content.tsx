@@ -540,7 +540,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     opis: [
       <>
         Zebra ZD230d to biurkowa drukarka etykiet z drukiem termicznym bezpośrednim, czyli
-        bez taśmy barwiącej. Zastąpiła model ZD220d. Od poprzedniczki różni się dwiema
+        bez taśmy barwiącej. W serii ZD200 stoi obok ZD220d i różni się od niej dwiema
         rzeczami: drukuje o połowę szybciej i można ją podłączyć do sieci. Kupuje się ją
         głównie do etykiet kurierskich i cenowych, do sklepu internetowego albo punktu nadań.
       </>,
