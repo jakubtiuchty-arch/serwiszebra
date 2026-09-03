@@ -102,7 +102,8 @@ async function getDevices(): Promise<DeviceRow[]> {
  * Liczby wyłącznie z danych producenta potwierdzonych 2 września 2026.
  */
 const FAKTY_KLASY = [
-  'Przemysłowe drukarki etykiet Zebra to seria ZT400 w wersji 168 mm (ZT421), serie ZT510 i ZT610 o szerokości wydruku 104 mm oraz ZT620 — urządzenia do pracy ciągłej, na trzy zmiany, w metalowej ramie z metalową pokrywą.',
+  'Przemysłowe drukarki etykiet Zebra to cztery modele: ZT510 i ZT610 o szerokości wydruku 104 mm oraz ZT421 i ZT620 o szerokości 168 mm — urządzenia do pracy ciągłej, na trzy zmiany, w metalowej ramie z metalową pokrywą.',
+  'ZT620 to ZT610 w wersji 168 mm: etykiety od 51 do 180 mm, druk do 305 mm na sekundę w 203 albo 300 dpi, waga 26 kg, ekran dotykowy, RFID i interfejs aplikatora montowane u użytkownika — następczyni serii 170Xi4.',
   'ZT510 to następczyni modelu 105SLPlus: druk 104 mm do 305 mm na sekundę, waga 22,7 kg, Gigabit Ethernet i podświetlany wyświetlacz LCD z klawiaturą zamiast ekranu dotykowego; bez modułu RFID i interfejsu aplikatora.',
   'ZT610 to następczyni serii 110Xi4 w tej samej konstrukcji co ZT510, ale z drukiem do 356 mm na sekundę, ekranem dotykowym 4,3 cala, rozdzielczością 203, 300 albo 600 dpi oraz modułem RFID i interfejsem aplikatora montowanymi u użytkownika.',
   'ZT421 drukuje etykiety o szerokości od 51 do 178 mm, czyli mieści w całości etykietę logistyczną A5 (148 × 210 mm); drukarka o szerokości wydruku 104 mm wymaga formatu A6.',
@@ -161,12 +162,23 @@ const POROWNANIE = [
     tasma: '450 m, 20–110 mm',
     waga: '22,7 kg',
   },
+  {
+    model: 'ZT620',
+    href: '/sklep/drukarki-etykiet/zebra-zt620',
+    klasa: 'przemysłowa',
+    szerokosc: '168 mm',
+    etykiety: '51–180 mm',
+    szybkosc: 'do 305 mm/s',
+    dpi: '203 albo 300 dpi',
+    tasma: '450 m, 51–170 mm',
+    waga: '26 kg',
+  },
 ]
 
 const FAQ_KATEGORII = [
   {
     q: 'Kiedy potrzebna jest drukarka przemysłowa zamiast półprzemysłowej?',
-    a: 'W dwóch sytuacjach: gdy etykieta jest szersza niż 114 mm albo gdy druk trwa na trzy zmiany i drukarka nie ma przerw na ostygnięcie. Szerokość rozstrzyga ZT421 — 168 mm wydruku wobec 104 mm w ZT411 i ZT231. Wolumen rozstrzygają ZT510 i ZT610, zbudowane do pracy ciągłej w konstrukcji o wadze 22,7 kg; ZT610 dokłada 600 dpi do najdrobniejszych oznaczeń, RFID i aplikator. ZT620, czyli ZT610 w wersji 168 mm, sprowadzamy na zamówienie.',
+    a: 'W dwóch sytuacjach: gdy etykieta jest szersza niż 114 mm albo gdy druk trwa na trzy zmiany i drukarka nie ma przerw na ostygnięcie. Szerokość rozstrzyga ZT421 — 168 mm wydruku wobec 104 mm w ZT411 i ZT231. Wolumen rozstrzygają ZT510 i ZT610, zbudowane do pracy ciągłej w konstrukcji o wadze 22,7 kg; ZT610 dokłada 600 dpi do najdrobniejszych oznaczeń, RFID i aplikator. Gdy potrzebne są obie rzeczy naraz — szerokość 168 mm i praca ciągła — właściwym modelem jest ZT620.',
   },
   {
     q: 'ZT510 czy ZT610?',
@@ -367,20 +379,6 @@ export default async function IndustrialPrintersPage() {
             </Suspense>
           )}
 
-          {/* ZT620 nie ma jeszcze karty — sprowadzamy ją na zamówienie */}
-          <div className="mt-6 rounded-xl border border-gray-200 bg-white p-4 text-sm leading-relaxed text-gray-700 sm:p-5">
-            <p>
-              <strong className="text-gray-900">ZT620 sprowadzamy na zamówienie.</strong>{' '}
-              To ZT610 w wersji o szerokości wydruku 168 mm — do etykiet paletowych z tą samą
-              mechaniką na trzy zmiany, ekranem dotykowym i opcją RFID. Napisz na{' '}
-              <a href="mailto:serwis@takma.com.pl" className="font-semibold text-gray-900 underline">
-                serwis@takma.com.pl
-              </a>
-              , podając szerokość i dzienny wolumen etykiet — odpowiemy z wyceną w jeden dzień
-              roboczy.
-            </p>
-          </div>
-
           <section className="mt-12">
             <div className="rounded-xl border border-gray-200 bg-white p-4 sm:p-6">
               <h2 className="text-base font-semibold text-gray-900">
@@ -479,11 +477,29 @@ export default async function IndustrialPrintersPage() {
               .
             </p>
 
+            <h2 className="mt-10 text-xl font-bold text-gray-900">
+              ZT620 — 168 mm do pracy ciągłej
+            </h2>
+            <p className="mt-3 text-sm leading-relaxed text-gray-700">
+              ZT610 w wersji o szerokości wydruku 168 mm: etykiety od 51 do 180 mm, czyli
+              etykieta logistyczna A5 w całości, druk do 305 mm na sekundę w 203 albo 300 dpi,
+              konstrukcja o wadze 26 kg. Ten sam ekran dotykowy, pamięć i rozbudowa o RFID
+              i aplikator co w ZT610. Wobec ZT421 o tej samej szerokości wydruku ma cięższą
+              mechanikę na trzy zmiany i Gigabit Ethernet. Następczyni serii 170Xi4. Zobacz{' '}
+              <Link
+                href="/sklep/drukarki-etykiet/zebra-zt620"
+                className="font-medium text-gray-900 underline"
+              >
+                Zebra ZT620
+              </Link>
+              .
+            </p>
+
             <div className="mt-6 overflow-x-auto rounded-xl border border-gray-200 bg-white [contain:paint]">
               <table className="w-full min-w-[640px] table-fixed text-sm">
                 <caption className="sr-only">
-                  Porównanie drukarek Zebra ZT411, ZT421, ZT510 i ZT610: klasa, szerokość
-                  wydruku, etykiety, szybkość, rozdzielczość, taśma
+                  Porównanie drukarek Zebra ZT411, ZT421, ZT510, ZT610 i ZT620: klasa,
+                  szerokość wydruku, etykiety, szybkość, rozdzielczość, taśma
                 </caption>
                 <colgroup>
                   <col className="w-[13%]" />
@@ -528,10 +544,10 @@ export default async function IndustrialPrintersPage() {
               </table>
             </div>
             <p className="mt-2 text-xs text-gray-500">
-              Wspólne dla czterech modeli: rolka do 203 mm średnicy na tulejce 76 mm, taśma
+              Wspólne dla pięciu modeli: rolka do 203 mm średnicy na tulejce 76 mm, taśma
               450 m, USB, Ethernet, RS-232 i Bluetooth w standardzie, dwa wolne gniazda na
-              Wi-Fi, praca od 5 do 40°C. Ekran dotykowy 4,3 cala i moduł RFID mają ZT411,
-              ZT421 i ZT610; ZT510 ma wyświetlacz LCD z klawiaturą. ZT510 i ZT610 mają
+              Wi-Fi, praca od 5 do 40°C. Ekran dotykowy 4,3 cala i moduł RFID mają wszystkie
+              poza ZT510, która ma wyświetlacz LCD z klawiaturą. ZT510, ZT610 i ZT620 mają
               Gigabit Ethernet. Dane sprawdzone u producenta we wrześniu 2026 przez TAKMA —
               autoryzowany serwis Zebra Technologies.
             </p>

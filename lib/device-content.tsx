@@ -3325,6 +3325,153 @@ export const TRESC_KART: Record<string, TrescKarty> = {
       ['Gwarancja', '24 miesiące'],
     ],
   },
+  'zebra-zt620': {
+    rekomendowanyPn: 'ZT62062-T0E0100Z',
+    zdjecieGlowne: '/sklep_photo/urzadzenia/zt620_1.webp',
+    wSkrocie: [
+      'Zebra ZT620 to najszersza przemysłowa drukarka etykiet w ofercie: szerokość wydruku 168 mm, etykiety od 51 do 180 mm, całometalowa konstrukcja o wadze 26 kg — następczyni serii 170Xi4.',
+      'Drukuje do 305 mm na sekundę w rozdzielczości 203 albo 300 dpi; etykieta może mieć do 991 mm długości, a wydruk ciągły do 2032 mm. Wersji 600 dpi nie ma — w tej szerokości nie występuje.',
+      'Etykieta logistyczna w formacie A5 (148 × 210 mm) mieści się na niej w całości, a szerokość 168 mm pozwala drukować dwie etykiety 80 mm obok siebie.',
+      'Mieści rolkę etykiet o średnicy do 203 mm na tulejce 76 mm i taśmę barwiącą o nawoju 450 metrów i szerokości od 51 do 170 mm.',
+      'Ma kolorowy ekran dotykowy 4,3 cala, 1 GB pamięci RAM i 2 GB Flash, a w standardzie Gigabit Ethernet, USB, RS-232, Bluetooth 4.1, dwa porty USB Host i znacznik NFC.',
+      'Gilotynę albo nawijak montuje producent i wybiera się je przy zamówieniu; moduł RFID UHF, interfejs aplikatora i kartę Wi-Fi instaluje się u użytkownika także po zakupie.',
+    ],
+    zweryfikowano: '2026-09-03',
+    poradniki: [
+      'serwis-drukarki-zebra-zt610-zt620-diagnostyka-naprawa',
+      'drukarka-zebra-nie-drukuje-przyczyny-rozwiazania',
+      'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',
+    ],
+    opis: [
+      <>
+        Zebra ZT620 to{' '}
+        <Link
+          href="/sklep/drukarki-etykiet/zebra-zt610"
+          className="font-medium text-gray-900 underline"
+        >
+          Zebra ZT610
+        </Link>{' '}
+        w wersji o szerokości wydruku 168 mm: ta sama całometalowa konstrukcja do pracy
+        ciągłej, ten sam ekran dotykowy, ta sama pamięć i rozbudowa o RFID i aplikator, ale
+        obudowa szersza o 79 mm i głowica na etykiety do 180 mm. Kupuje się ją z jednego
+        powodu: gdy etykieta nie mieści się w 114 mm — na paletach z etykietą logistyczną A5,
+        na opakowaniach zbiorczych, przy oznaczeniach dźwigarów i profili — a drukarka ma
+        pracować na trzy zmiany.
+      </>,
+      <>
+        Drukuje do 305 mm na sekundę w 203 i 300 dpi. Wydruk ciągły sięga 2032 mm, więc
+        obsłuży także długie oznaczenia, a rolka o średnicy do 203 mm i taśma o nawoju
+        450 metrów ograniczają przerwy na wymianę materiału. Przy pełnej szerokości wydruku
+        taśma musi mieć 170 mm — węższa zostawia niezadrukowane brzegi i odsłania głowicę.
+        Wobec{' '}
+        <Link
+          href="/sklep/drukarki-etykiet/zebra-zt421"
+          className="font-medium text-gray-900 underline"
+        >
+          Zebry ZT421
+        </Link>{' '}
+        o tej samej szerokości wydruku ZT620 ma cięższą konstrukcję (26 kg wobec 18,14 kg),
+        Gigabit Ethernet, większą pamięć i mechanizm przewidziany na druk całą dobę.
+      </>,
+      <>
+        Gilotynę albo nawijak montuje producent, więc wybiera się je przy zamówieniu;
+        nawijak zwija pełną rolkę wydruków na tulejkę 76 mm albo pracuje jako odklejak
+        z nawijakiem podkładu, a z gilotyną grubość materiału ogranicza się do 0,18 mm. Po
+        zakupie rozbudowuje się resztę: moduł RFID UHF koduje znaczniki w trakcie druku,
+        także na szerokich etykietach paletowych, interfejs aplikatora daje sygnały
+        sterujące dla systemów automatycznego etykietowania, a dwa wolne gniazda
+        przyjmują kartę Wi-Fi, drugi Ethernet albo port równoległy.
+      </>,
+    ],
+    osie: [
+      {
+        tytul: 'Jakość druku',
+        pozycje: [
+          { termin: '203 dpi', opis: 'etykiety paletowe, wysyłkowe i magazynowe, typowe kody kreskowe' },
+          { termin: '300 dpi', opis: 'drobny tekst i małe kody dwuwymiarowe na szerokiej etykiecie' },
+        ],
+      },
+      {
+        tytul: 'Wyposażenie',
+        pozycje: [
+          { termin: 'Standard', opis: 'etykiety wychodzą na wstędze i są odrywane ręcznie' },
+          { termin: 'Gilotyna', opis: 'odcina wydruk pojedynczo albo w paskach; materiał do 0,18 mm grubości' },
+          {
+            termin: 'Nawijak',
+            opis: 'zwija pełną rolkę zadrukowanych etykiet na tulejkę 76 mm albo pracuje jako odklejak z nawijakiem podkładu',
+          },
+        ],
+      },
+      {
+        tytul: 'Rozbudowa po zakupie',
+        pozycje: [
+          { termin: 'RFID UHF', opis: 'moduł kodujący znaczniki EPC gen. 2 wersja 2.1 / ISO 18000-63, instalowany u użytkownika' },
+          { termin: 'Aplikator', opis: 'interfejs sygnałów statusu i sterowania dla systemów automatycznego etykietowania' },
+          { termin: 'Wi-Fi', opis: 'karta 802.11ax z Bluetooth 5.3 do jednego z dwóch wolnych gniazd; wersja z fabryczną kartą też w ofercie' },
+        ],
+      },
+    ],
+    faqNaglowek: 'Najczęstsze pytania o ZT620',
+    faq: [
+      {
+        q: 'Czym ZT620 różni się od ZT610?',
+        a: 'Wyłącznie szerokością wydruku i jej konsekwencjami: 168 mm zamiast 104 mm, etykiety do 180 mm, obudowa szersza o 79 mm, waga 26 kg zamiast 22,7 kg, druk do 305 zamiast 356 mm na sekundę i brak wersji 600 dpi. Ekran dotykowy, pamięć, Gigabit Ethernet, rolka do 203 mm, taśma 450 metrów oraz rozbudowa o RFID i aplikator są takie same.',
+        href: '/sklep/drukarki-etykiet/zebra-zt610',
+        link: 'Zobacz Zebra ZT610',
+      },
+      {
+        q: 'ZT620 czy ZT421 — obie drukują 168 mm?',
+        a: 'Tak, szerokość wydruku jest ta sama. ZT620 ma cięższą, całometalową konstrukcję (26 kg wobec 18,14 kg), Gigabit Ethernet, 1 GB pamięci RAM i mechanizm przewidziany na pracę ciągłą, na trzy zmiany. ZT421 wystarcza, gdy szerokie etykiety drukuje się w cyklu dziennym, z przerwami. Rolka, taśma, ekran dotykowy i rozbudowa o RFID są w obu podobne.',
+        href: '/sklep/drukarki-etykiet/zebra-zt421',
+        link: 'Zobacz Zebra ZT421',
+      },
+      {
+        q: 'Jakie etykiety i taśmy pasują do ZT620?',
+        a: 'Etykiety o szerokości od 51 do 180 mm i grubości od 0,076 do 0,305 mm (z gilotyną do 0,18 mm), w rolce o średnicy do 203 mm na tulejce 76 mm. Taśma barwiąca ma 450 metrów nawoju, szerokość od 51 do 170 mm i tulejkę 25,4 mm. Taśma musi być szersza od etykiety, inaczej brzegi pozostają niezadrukowane, a głowica pracuje bez ochrony.',
+        href: '/blog/blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',
+        link: 'Dlaczego wydruk blednie',
+      },
+      {
+        q: 'Czy ZT620 obsługuje RFID?',
+        a: 'Tak. Moduł RFID UHF instaluje się u użytkownika, także po zakupie, i koduje znaczniki zgodne z UHF EPC generacji 2 wersji 2.1 oraz ISO/IEC 18000-63 w trakcie druku. Na etykietach paletowych A5 znacznik ma dużo miejsca, więc kodowanie nie wymaga specjalnego układu etykiety.',
+        href: '/blog/serwis-drukarki-zebra-zt610-zt620-diagnostyka-naprawa',
+        link: 'Diagnostyka ZT610 i ZT620',
+      },
+      {
+        q: 'Czy gilotynę i nawijak można mieć razem?',
+        a: 'Nie. Gilotyna nie współpracuje z nawijakiem ani odklejakiem — wybiera się jedno przy zamówieniu, bo obie opcje montuje producent. Po zakupie rozbudowuje się RFID, interfejs aplikatora i łączność. Przy etykietach paletowych schodzących do aplikatora wybiera się nawijak podkładu; gilotynę tam, gdzie wydruki mają zmienną długość.',
+        href: '/instrukcje/zebra-zt620',
+        link: 'Instrukcja ZT620 po polsku',
+      },
+    ],
+    spec: [
+      ['Producent', 'Zebra'],
+      ['Model', 'ZT620'],
+      ['Klasa', 'Przemysłowa'],
+      ['Technologia druku', 'Termotransferowa i termiczna'],
+      ['Rozdzielczość', '203 albo 300 DPI'],
+      ['Szerokość druku', '168 mm'],
+      ['Prędkość druku', 'do 305 mm/s'],
+      ['Maks. długość etykiety', '991 mm; wydruk ciągły 2032 mm'],
+      ['Szerokość etykiet', '51–180 mm'],
+      ['Grubość materiału', '0,076–0,305 mm; z gilotyną do 0,18 mm'],
+      ['Maks. średnica rolki', '203 mm na gilzie 76 mm'],
+      ['Taśma barwiąca', 'nawój 450 m, szerokość 51–170 mm, gilza 25,4 mm'],
+      ['Pamięć', '2 GB Flash, 1 GB SDRAM'],
+      ['Panel', 'Kolorowy ekran dotykowy 4,3 cala'],
+      ['Łączność', 'Gigabit Ethernet, USB 2.0, RS-232, Bluetooth 4.1, dwa porty USB Host, znacznik NFC'],
+      ['Łączność opcjonalna', 'Wi-Fi 802.11ax z Bluetooth 5.3, drugi Ethernet, port równoległy, interfejs aplikatora'],
+      ['Wyposażenie', 'Odrywanie, gilotyna albo nawijak (pełna rolka lub odklejak z nawijakiem podkładu)'],
+      ['RFID', 'UHF EPC gen. 2 wersja 2.1, ISO/IEC 18000-63 — montaż u użytkownika'],
+      ['Temperatura pracy', '5–40°C (termotransfer); 0–40°C (termiczna)'],
+      ['Zasilanie', '90–265 V, 250 W'],
+      ['Wymiary (D×S×W)', '505 × 342 × 396 mm'],
+      ['Waga', '26 kg'],
+      ['Języki', 'ZPL, ZPL II'],
+      ['Stan', 'Nowy, oryginalny'],
+      ['Gwarancja', '24 miesiące'],
+    ],
+  },
 }
 
 export const trescKarty = (slug: string): TrescKarty | undefined => TRESC_KART[slug]

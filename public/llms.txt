@@ -158,7 +158,10 @@ Porównanie trzech modeli: https://www.serwis-zebry.pl/sklep/drukarki-etykiet/po
 - **Zebra ZT610** — https://www.serwis-zebry.pl/sklep/drukarki-etykiet/zebra-zt610
   Najmocniejsza przemysłowa drukarka 104 mm, następczyni 110Xi4: 203, 300 lub 600 dpi, do 356 mm/s (305 przy 300 dpi, 152 przy 600 dpi), etykiety 20–114 mm, rolka do 203 mm, taśma 450 m, ekran dotykowy 4,3", 1 GB RAM / 2 GB Flash, Gigabit Ethernet, waga 22,7 kg. Wersje z gilotyną, nawijakiem i Wi-Fi; moduł RFID UHF, interfejs aplikatora i Wi-Fi 802.11ax montowane u użytkownika. Ta sama konstrukcja co ZT510, ale szybsza i z pełną rozbudową.
 
-ZT620 (ZT610 w wersji 168 mm) sprowadzamy na zamówienie. Klasa przemysłowa: https://www.serwis-zebry.pl/sklep/drukarki-etykiet/przemyslowe
+- **Zebra ZT620** — https://www.serwis-zebry.pl/sklep/drukarki-etykiet/zebra-zt620
+  ZT610 w wersji 168 mm, następczyni 170Xi4: etykiety 51–180 mm (mieści etykietę logistyczną A5), 203 lub 300 dpi, do 305 mm/s, wydruk ciągły do 2032 mm, rolka do 203 mm, taśma 450 m 51–170 mm, ekran dotykowy 4,3", 1 GB RAM / 2 GB Flash, Gigabit Ethernet, waga 26 kg. Wersje z gilotyną, nawijakiem i Wi-Fi; RFID UHF i interfejs aplikatora montowane u użytkownika. Wobec ZT421 (też 168 mm): cięższa konstrukcja na pracę ciągłą.
+
+Klasa przemysłowa (cztery modele, porównanie): https://www.serwis-zebry.pl/sklep/drukarki-etykiet/przemyslowe
 
 ### Jak dobrać drukarkę biurkową Zebra
 

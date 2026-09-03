@@ -1272,6 +1272,16 @@ Fraza „biurkowe drukarki etykiet Zebra" jest głównym wejściem do tej katego
 - Lighthouse mobile 88/100/100/100, desktop 96/100/100/100 — po cofnięciu Clarity i aria-label akcesoriów zero uchybień a11y/BP/SEO; zero błędów konsoli; TTFB dokumentu 70/60 ms. LCP mobile 3,4 s (najlepszy z trzech kart, ale nadal > 2,5 s).
 - Problemy wspólne dla szablonu `[slug]` (nie karty): (1) zdjęcie LCP w=1080 na telefonie → `sizes` 90vw + `quality` 60 w `DevicePurchasePanel`; (2) `additionalProperty` × każdy wariant — na ZT610 240 wpisów, HTML 275 kB → raz na ProductGroup; (3) chunk `app/page` nadal na desktopie mimo prefetch off na logo i „Start" — trzeci link do `/`.
 - Raport i PDF (HTML → Chromium) w scratchpadzie, PDF u użytkownika; notatka `seo-audit-zt610.md` w pamięci.
+- Poprawka języka (uwaga użytkownika „co to znaczy od góry?"): „zamyka ofertę od góry" / „domyka półkę" → „najmocniejsza drukarka … w ofercie/klasie" w ZT610, ZT411 i na stronie klasy półprzemysłowej (4403fbf). Zasada w pamięci: bez skrótów myślowych.
+
+## 2026-09-03 — karta Zebra ZT620 (czwarta i ostatnia w klasie przemysłowej)
+- Dane z tej samej karty ZT600 (sekcja ZT620): druk 168 mm, do 305 mm/s w 203 i 300 dpi (bez 600 dpi), etykieta 991 mm, ciągły 2032 mm, **etykiety 51–180 mm**, grubość 0,076–0,305 (0,18 z gilotyną), rolka 203/76, **taśma 450 m 51–170 mm** (takma: 174 — błędnie), 505 × 341,5 × 395,7 mm, **26 kg**. Reszta jak ZT610 (dotyk 4,3", 1 GB/2 GB, Gigabit, RFID i aplikator jako opcje). Następczyni 170Xi4.
+- **PN-y**: 8/8 istnieje — 62/63 × T0E, T0EC (Wi-Fi), T1E (gilotyna), T2E (nawijak), sufiks `0100Z`. Najtańszy ZT62062-T0E0100Z 12 078,24 netto (DE 15, w drodze 36).
+- Baza: id `c27a6c58…`, 8 wariantów, meta_title 56, description 149. Zdjęcia z plików `zt620_1_D_s.png`, `zt620_2_ND_s.png`, `zt620_3_ND_s.png` (nietypowe nazwy w takmie) → `zt620_1..3.webp`, 105–156 kB.
+- Treść: pozycjonowanie „ZT610 w wersji 168 mm", porównanie z ZT421 (ta sama szerokość, 26 vs 18,14 kg, Gigabit, praca ciągła), A5 i dwie etykiety 80 mm obok siebie, 5 FAQ (w tym „ZT620 czy ZT421"), spec 25 wierszy.
+- **Klasa przemysłowa kompletna**: cztery kafle, tabela pięciu modeli (z ZT411), notka „na zamówienie" usunięta, FAQ 1 kończy się na ZT620, przypis pod tabelą przepisany. sitemap, sitemap-images, llms.txt (ZT620 + link do klasy), `SPRZEDAWANE_MODELE`.
+- **Pułapka**: po buildzie `.next` był bez `BUILD_ID` i `next start` padł („Could not find a production build") — prawdopodobnie dev na 3002 wystartował z kolejki w trakcie i nadpisał katalog. Rozwiązanie: zabić 3002 i 3003, `rm -rf .next`, build, od razu `next start`. Weryfikacja 27/27 OK.
+- PO DEPLOYU: `is_active:true`, sprawdzenie produkcji.
 
 ## 2026-09-02 — powiadomienia na @takma.com.pl przez SMTP cyber_folks (obejście HostKarma)
 - **Problem**: serwer poczty takma.com.pl (cyber_folks) odrzuca ~10% maili z Resenda kodem `550 Email blocked by hostkarma.junkemailfilter.com` — pula IP Amazon SES okresowo ląduje na tej liście, Resend takich odbić nie ponawia. cyber_folks odmówił białej listy (18.08.2026). Ginęły m.in. „Nowa wiadomość — naprawa” do serwis@/wojcik@/zuchnicki@ i „Kurier zamówiony”.
