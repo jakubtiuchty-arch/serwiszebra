@@ -3422,7 +3422,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
       },
       {
         q: 'ZT620 czy ZT421 — obie drukują 168 mm?',
-        a: 'Tak, szerokość wydruku jest ta sama. ZT620 ma cięższą, całometalową konstrukcję (26 kg wobec 18,14 kg), Gigabit Ethernet, 1 GB pamięci RAM i mechanizm przewidziany na pracę ciągłą, na trzy zmiany. ZT421 wystarcza, gdy szerokie etykiety drukuje się w cyklu dziennym, z przerwami. Rolka, taśma, ekran dotykowy i rozbudowa o RFID są w obu podobne.',
+        a: 'Tak, szerokość wydruku jest ta sama. ZT620 jest cięższa (26 kg wobec 18,14 kg), ma metalową ramę i obudowę, Gigabit Ethernet, 1 GB pamięci RAM oraz mechanizm przewidziany na pracę ciągłą, na trzy zmiany. ZT421 wystarcza, gdy szerokie etykiety drukuje się w cyklu dziennym, z przerwami. Rolka, taśma, ekran dotykowy i rozbudowa o RFID są w obu podobne.',
         href: '/sklep/drukarki-etykiet/zebra-zt421',
         link: 'Zobacz Zebra ZT421',
       },
