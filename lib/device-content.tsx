@@ -3180,12 +3180,12 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     rekomendowanyPn: 'ZT61042-T0E0100Z',
     zdjecieGlowne: '/sklep_photo/urzadzenia/zt610_1.webp',
     wSkrocie: [
-      'Zebra ZT610 to najmocniejsza przemysłowa drukarka etykiet o szerokości wydruku 104 mm w ofercie: całometalowa konstrukcja o wadze 22,7 kg, następczyni serii 110Xi4, przewidziana na druk całą dobę.',
-      'Drukuje do 356 mm na sekundę w 203 dpi, do 305 mm na sekundę w 300 dpi i do 152 mm na sekundę w 600 dpi — wersja 600 dpi służy do miniaturowych oznaczeń elektroniki i farmacji.',
-      'Mieści rolkę etykiet o średnicy do 203 mm na tulejce 76 mm i taśmę barwiącą o nawoju 450 metrów i szerokości od 20 do 110 mm; etykiety od 20 do 114 mm szerokości.',
-      'Ma kolorowy ekran dotykowy 4,3 cala, 1 GB pamięci RAM i 2 GB Flash, a w standardzie Gigabit Ethernet, USB, RS-232, Bluetooth 4.1, dwa porty USB Host i znacznik NFC.',
-      'Gilotynę albo nawijak — pełnej rolki lub odklejak z nawijakiem podkładu — montuje producent i wybiera się je przy zamówieniu; gilotyna i nawijak wykluczają się.',
-      'Moduł RFID UHF, interfejs aplikatora, kartę Wi-Fi 802.11ax z Bluetooth 5.3, drugi Ethernet i port równoległy instaluje się u użytkownika także po zakupie.',
+      'Zebra ZT610 to najmocniejsza przemysłowa drukarka do etykiet o szerokości do 104 mm w naszej ofercie. Ma metalową konstrukcję, waży 22,7 kg i jest przygotowana do pracy przez całą dobę. Zastąpiła serię 110Xi4.',
+      'W wersji 203 dpi drukuje z prędkością do 356 mm/s, w 300 dpi — do 305 mm/s, a w 600 dpi — do 152 mm/s. Najwyższa rozdzielczość jest przeznaczona do miniaturowych oznaczeń stosowanych w elektronice i farmacji.',
+      'Obsługuje rolki etykiet o średnicy do 203 mm na tulejce 76 mm oraz taśmy barwiące o nawoju 450 metrów i szerokości od 20 do 110 mm. Szerokość etykiet wynosi od 20 do 114 mm.',
+      'Ma kolorowy ekran dotykowy 4,3 cala, 1 GB pamięci RAM oraz 2 GB Flash. Standardowe wyposażenie obejmuje Gigabit Ethernet, USB, RS-232, Bluetooth 4.1, dwa porty USB Host i znacznik NFC.',
+      'Gilotynę albo nawijak trzeba wybrać przy zamówieniu, ponieważ montuje je producent. Nawijak może zwijać pełną rolkę lub pracować jako odklejak z nawijaniem podkładu; nie można go połączyć z gilotyną.',
+      'Po zakupie można dołożyć moduł RFID UHF, interfejs aplikatora, kartę Wi-Fi 802.11ax z Bluetooth 5.3, drugi port Ethernet oraz port równoległy.',
     ],
     zweryfikowano: '2026-09-03',
     poradniki: [
@@ -3195,44 +3195,48 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     ],
     opis: [
       <>
-        Zebra ZT610 to najmocniejsza drukarka o szerokości wydruku 104 mm w naszej ofercie. Ma tę samą
-        całometalową konstrukcję o wadze 22,7 kg co{' '}
+        Zebra ZT610 to najmocniejsza drukarka o szerokości wydruku 104 mm w naszej
+        ofercie. Pod względem konstrukcji przypomina model{' '}
         <Link
           href="/sklep/drukarki-etykiet/zebra-zt510"
           className="font-medium text-gray-900 underline"
         >
           Zebra ZT510
         </Link>
-        , ale szybszy mechanizm, kolorowy ekran dotykowy zamiast wyświetlacza z klawiaturą,
-        trzecią rozdzielczość 600 dpi i pełną rozbudowę: moduł RFID, interfejs aplikatora
-        i Wi-Fi. To urządzenie dla linii produkcyjnych i centrów logistycznych, w których
-        drukarka pracuje na trzy zmiany, a etykiety schodzą wprost do aplikatora albo
-        zawierają znacznik RFID.
+        : również ma metalową obudowę i waży 22,7 kg. Drukuje jednak szybciej, ma kolorowy
+        ekran dotykowy zamiast wyświetlacza z klawiaturą i występuje dodatkowo w wersji
+        600 dpi. Można ją też rozbudować o moduł RFID, interfejs aplikatora oraz Wi-Fi.
+        Jest przeznaczona do linii produkcyjnych i centrów logistycznych, w których
+        drukarka pracuje na trzy zmiany, a gotowe etykiety trafiają bezpośrednio do
+        aplikatora albo zawierają znacznik RFID.
       </>,
       <>
-        Drukuje do 356 mm na sekundę w 203 dpi — o jedną szóstą szybciej niż ZT510 — do
-        305 mm na sekundę w 300 dpi i do 152 mm na sekundę w 600 dpi. Wersja 600 dpi
-        drukuje kody dwuwymiarowe i tekst na etykietach o kilku milimetrach szerokości,
-        stosowanych na płytkach elektroniki, w laboratoriach i farmacji; maksymalna długość
-        wydruku ciągłego spada wtedy do 762 mm wobec 3810 mm przy 203 dpi. Rolka o średnicy
-        do 203 mm i taśma o nawoju 450 metrów ograniczają przerwy na wymianę materiału,
-        a przezroczyste drzwi komory pozwalają sprawdzić zapas bez otwierania drukarki.
+        Przy 203 dpi osiąga prędkość do 356 mm na sekundę, czyli około jednej szóstej
+        więcej niż ZT510. W wersji 300 dpi drukuje do 305 mm na sekundę, a w 600 dpi —
+        do 152 mm na sekundę. Najwyższa rozdzielczość pozwala drukować kody dwuwymiarowe
+        i tekst na etykietach o szerokości kilku milimetrów, używanych na płytkach
+        elektroniki, w laboratoriach i farmacji. Maksymalna długość wydruku ciągłego
+        wynosi wtedy 762 mm, podczas gdy przy 203 dpi dochodzi do 3810 mm. Rolka o
+        średnicy do 203 mm i taśma o nawoju 450 metrów ograniczają przerwy na wymianę
+        materiału. Zapas można sprawdzić przez przezroczyste drzwi, bez otwierania
+        drukarki.
       </>,
       <>
-        Gilotynę albo nawijak montuje producent, więc wybiera się je przy zamówieniu;
-        nawijak zwija pełną rolkę wydruków na tulejkę 76 mm albo pracuje jako odklejak
-        z nawijakiem podkładu. Po zakupie rozbudowuje się resztę: moduł RFID UHF koduje
-        znaczniki w trakcie druku, interfejs aplikatora daje sygnały sterujące dla
-        systemów automatycznego etykietowania, a dwa wolne gniazda przyjmują kartę
-        Wi-Fi, drugi Ethernet albo port równoległy. Jeśli etykiety są szersze niż
-        114 mm, właściwym modelem jest{' '}
+        Gilotynę lub nawijak trzeba wybrać przy zamówieniu, ponieważ montuje je
+        producent. Nawijak zwija pełną rolkę wydruków na tulejkę 76 mm albo pracuje
+        jako odklejak z nawijaniem podkładu. Pozostałe elementy można dołożyć później.
+        Moduł RFID UHF koduje znaczniki podczas druku, a interfejs aplikatora przekazuje
+        sygnały sterujące do systemu automatycznego etykietowania. Dwa wolne gniazda
+        pozwalają zamontować kartę Wi-Fi, drugi port Ethernet lub port równoległy. Jeśli
+        etykiety są szersze niż 114 mm, odpowiednim modelem będzie{' '}
         <Link
           href="/sklep/drukarki-etykiet/zebra-zt421"
           className="font-medium text-gray-900 underline"
         >
           Zebra ZT421
         </Link>
-        ; jeśli dodatki nie są potrzebne, a liczy się sama mechanika — ZT510.
+        . Jeżeli dodatki nie są potrzebne, a liczy się przede wszystkim solidna
+        mechanika, wystarczy ZT510.
       </>,
     ],
     osie: [
