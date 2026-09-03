@@ -1281,7 +1281,7 @@ Fraza „biurkowe drukarki etykiet Zebra" jest głównym wejściem do tej katego
 - Treść: pozycjonowanie „ZT610 w wersji 168 mm", porównanie z ZT421 (ta sama szerokość, 26 vs 18,14 kg, Gigabit, praca ciągła), A5 i dwie etykiety 80 mm obok siebie, 5 FAQ (w tym „ZT620 czy ZT421"), spec 25 wierszy.
 - **Klasa przemysłowa kompletna**: cztery kafle, tabela pięciu modeli (z ZT411), notka „na zamówienie" usunięta, FAQ 1 kończy się na ZT620, przypis pod tabelą przepisany. sitemap, sitemap-images, llms.txt (ZT620 + link do klasy), `SPRZEDAWANE_MODELE`.
 - **Pułapka**: po buildzie `.next` był bez `BUILD_ID` i `next start` padł („Could not find a production build") — prawdopodobnie dev na 3002 wystartował z kolejki w trakcie i nadpisał katalog. Rozwiązanie: zabić 3002 i 3003, `rm -rf .next`, build, od razu `next start`. Weryfikacja 27/27 OK.
-- PO DEPLOYU: `is_active:true`, sprawdzenie produkcji.
+- Wdrożone 18:28: deploy potwierdzony, produkt włączony, karta 200 z 8 cenami, klasa pokazuje cztery kafle bez notki „na zamówienie". Klasa przemysłowa: ZT421, ZT510, ZT610, ZT620 — komplet.
 
 ## 2026-09-02 — powiadomienia na @takma.com.pl przez SMTP cyber_folks (obejście HostKarma)
 - **Problem**: serwer poczty takma.com.pl (cyber_folks) odrzuca ~10% maili z Resenda kodem `550 Email blocked by hostkarma.junkemailfilter.com` — pula IP Amazon SES okresowo ląduje na tej liście, Resend takich odbić nie ponawia. cyber_folks odmówił białej listy (18.08.2026). Ginęły m.in. „Nowa wiadomość — naprawa” do serwis@/wojcik@/zuchnicki@ i „Kurier zamówiony”.
