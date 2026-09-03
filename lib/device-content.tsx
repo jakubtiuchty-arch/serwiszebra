@@ -651,49 +651,46 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     rekomendowanyPn: 'ZD23042-30EC00EZ',
     zdjecieGlowne: '/sklep_photo/urzadzenia/zd230t_1.webp',
     wSkrocie: [
-      'Zebra ZD230t to biurkowa drukarka termotransferowa: drukuje z taśmy barwiącej, a w razie potrzeby także termicznie, bez taśmy.',
-      'Pracuje w rozdzielczości 203 dpi z prędkością do 152 mm/s, przy szerokości druku 104 mm.',
-      'Przyjmuje taśmy 300-metrowe na wałku calowym oraz 74-metrowe na wałku pół cala, o szerokości 33,8–109,2 mm.',
-      'Jedna taśma 300 m wystarcza na około 2000 etykiet o długości 150 mm — cztery razy dłużej niż rolka 74-metrowa z serii ZD220.',
-      'Wersje z Ethernetem albo Wi-Fi oraz opcje odklejaka, gilotyny i białej obudowy wybiera się przy zamówieniu, bo montuje je fabryka.',
+      'Zebra ZD230t może drukować termotransferowo z taśmą barwiącą lub bezpośrednio na etykietach termoczułych.',
+      'Ma rozdzielczość 203 dpi, osiąga do 152 mm/s i drukuje na szerokość do 104 mm.',
+      'Obsługuje taśmy o szerokości od 33,8 do 109,2 mm: 300-metrowe na wałku calowym oraz 74-metrowe na wałku pół cala.',
+      'Taśma 300 m wystarcza na około 2000 etykiet o długości 150 mm. Wymienia się ją cztery razy rzadziej niż rolkę 74-metrową używaną w serii ZD220.',
+      'Wersję z Ethernetem lub Wi-Fi oraz odklejak, gilotynę i kolor obudowy wybiera się przy zamówieniu. Później nie da się ich zmienić.',
     ],
     zweryfikowano: '2026-08-30',
     opis: [
       <>
-        Zebra ZD230t to biurkowa drukarka etykiet drukująca termotransferowo, czyli z taśmy
-        barwiącej. Nadruk powstaje wtedy z żywicy lub wosku przeniesionego na etykietę i nie
-        blaknie ani nie ściera się z upływem miesięcy, dlatego model trafia tam, gdzie
-        oznaczenie musi przetrwać dłużej niż wysyłka: na etykiety produktowe i magazynowe,
-        opisy opakowań zbiorczych, oznaczenia środków trwałych i regałów. Urządzenie drukuje
-        również termicznie bezpośrednio, bez taśmy, więc jedno stanowisko obsłuży także
-        etykiety kurierskie.
+        Zebra ZD230t obsługuje dwa rodzaje druku. W trybie termotransferowym wosk lub żywica
+        z taśmy barwiącej są przenoszone na etykietę. Taki nadruk nie blaknie ani nie ściera
+        się z upływem miesięcy, dlatego nadaje się na etykiety produktowe i magazynowe,
+        opisy opakowań zbiorczych oraz oznaczenia środków trwałych i regałów. Po wyjęciu
+        taśmy drukarka może pracować bezpośrednio na etykietach termoczułych, na przykład
+        przy drukowaniu etykiet kurierskich.
       </>,
       <>
-        Drukarka pracuje w rozdzielczości 203 dpi z prędkością do 152 mm/s, a szerokość druku
-        104 mm obejmuje pełny format etykiety kurierskiej 100 × 150 mm. Przyjmuje nośniki
-        o szerokości 25,4–112 mm i rolki o średnicy do 127 mm. Najważniejsza różnica wobec
-        tańszej{' '}
+        ZD230t drukuje w rozdzielczości 203 dpi z prędkością do 152 mm/s. Głowica o
+        szerokości 104 mm obejmuje pełny format etykiety kurierskiej 100 × 150 mm. Drukarka
+        przyjmuje materiały o szerokości od 25,4 do 112 mm oraz rolki o średnicy do 127 mm.
+        W porównaniu z tańszą{' '}
         <Link
           href="/sklep/drukarki-etykiet/zebra-zd220t"
           className="font-medium text-gray-900 underline"
         >
-          Zebry ZD220t
+          Zebrą ZD220t
         </Link>{' '}
-        dotyczy taśmy: ZD230t obsługuje nie tylko krótkie 74-metrowe rolki na wałku pół cala,
-        ale też 300-metrowe na wałku calowym. Przy proporcji jeden do czterech taka taśma
-        wystarcza na cztery pełne rolki etykiet, więc wymienia się ją czterokrotnie rzadziej,
-        a przestoje przy dużych nakładach maleją.
+        główną różnicą jest długość taśmy. ZD230t przyjmuje rolki 300-metrowe na wałku
+        calowym, a także krótsze, 74-metrowe na wałku pół cala. Dłuższą taśmę wymienia się
+        około czterech razy rzadziej, co ogranicza przerwy przy większych nakładach.
       </>,
       <>
-        W standardzie urządzenie komunikuje się przez USB, a fabrycznie można je zamówić
-        z Ethernetem albo z Wi-Fi i Bluetoothem — łączność wybiera się jednak raz, przy
-        zamówieniu, i nie da się jej później rozbudować modułem. Wyposażenie również montuje
-        się fabrycznie: odklejak oddziela etykietę od podłoża, gilotyna odcina wydruk przy
-        przywieszkach i etykietach o zmiennej długości, obudowa występuje w czerni i w bieli.
-        Obsługa języków ZPL II i EPL 2 zachowuje zgodność z szablonami przygotowanymi dla
-        ZD220t, GK420t i GC420t, więc wymiana starszej drukarki nie wymusza zmian w systemie.
-        Gdy potrzebna jest rozdzielczość 300 dpi albo możliwość dołożenia sieci po zakupie,
-        właściwszym wyborem jest{' '}
+        Podstawowa wersja łączy się przez USB. Ethernet albo Wi-Fi z Bluetoothem trzeba
+        wybrać przy zamówieniu, ponieważ później nie można dołożyć modułu łączności. To samo
+        dotyczy wyposażenia. Fabryka może zamontować odklejak, który oddziela etykietę od
+        podłoża, lub gilotynę do przywieszek i etykiet o zmiennej długości. Obudowa jest
+        dostępna w kolorze czarnym albo białym. ZD230t obsługuje języki ZPL II i EPL 2, więc
+        szablony przygotowane dla modeli ZD220t, GK420t i GC420t działają bez zmian w
+        systemie. Jeśli potrzebna jest rozdzielczość 300 dpi lub możliwość rozbudowy
+        łączności po zakupie, lepszym wyborem będzie{' '}
         <Link
           href="/sklep/drukarki-etykiet/zebra-zd421t"
           className="font-medium text-gray-900 underline"
