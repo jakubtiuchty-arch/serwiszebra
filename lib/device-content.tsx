@@ -3041,40 +3041,50 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     ],
     opis: [
       <>
-        Zebra ZT510 zamyka lukę między półprzemysłową{' '}
+        Zebra ZT510 to model pośredni między półprzemysłową{' '}
         <Link
           href="/sklep/drukarki-etykiet/zebra-zt411"
           className="font-medium text-gray-900 underline"
         >
           Zebrą ZT411
         </Link>{' '}
-        a serią ZT600. Ma tę samą szerokość wydruku 104 mm i tę samą rolkę do 203 mm,
-        ale konstrukcję o wadze 22,7 kg, przewidzianą na druk bez przerw przez całą
-        dobę — na linii produkcyjnej, w sortowni i w magazynie, gdzie drukarka stoi
-        w kurzu i pracuje na trzy zmiany. To bezpośrednia następczyni modelu 105SLPlus,
-        którego użytkownicy dostają tu tę samą klasę mechaniki z nowszą elektroniką.
+        a serią ZT600. Oferuje tę samą szerokość druku — 104 mm — i obsługuje rolki do
+        203 mm, ale waży 22,7 kg i jest zbudowana z myślą o nieprzerwanej pracy przez
+        całą dobę. Sprawdzi się na linii produkcyjnej, w sortowni czy magazynie, gdzie
+        drukarka pracuje na trzy zmiany i jest narażona na kurz. To bezpośrednia
+        następczyni modelu 105SLPlus: zachowuje jego solidną mechanikę, a jednocześnie
+        korzysta z nowszej elektroniki.
       </>,
       <>
-        Drukuje do 305 mm na sekundę przy 203 dpi i do 254 mm na sekundę przy 300 dpi,
-        z pamięcią 2 GB Flash i 512 MB RAM, która mieści duże szablony i fonty. W miejsce
-        ekranu dotykowego jest podświetlany wyświetlacz LCD z klawiaturą i hasłem —
-        rozwiązanie celowo prostsze, odporne na rękawice i brud. W standardzie Gigabit
-        Ethernet, USB, RS-232, Bluetooth LE oraz znacznik NFC, przez który telefon z
-        aplikacją Zebry odczytuje konfigurację drukarki; kartę Wi-Fi, port równoległy,
-        USB Host albo drugi Ethernet wkłada się w dwa wolne gniazda.
+        Przy rozdzielczości 203 dpi drukuje z prędkością do 305 mm na sekundę, a przy
+        300 dpi — do 254 mm na sekundę. Ma 2 GB pamięci Flash i 512 MB RAM, więc bez
+        problemu mieści rozbudowane szablony oraz fonty. Zamiast ekranu dotykowego
+        zastosowano podświetlany wyświetlacz LCD, klawiaturę i zabezpieczenie hasłem.
+        To celowo prostsze rozwiązanie, które łatwiej obsługiwać w rękawicach i w
+        zapylonym otoczeniu.
       </>,
       <>
-        Sposób wydawania etykiety wybiera się przy zamówieniu: gilotyna odcina wydruk,
-        a nawijak zwija pełną rolkę zadrukowanych etykiet na tulejkę 76 mm albo pracuje
-        jako odklejak z nawijakiem podkładu. Obu opcji nie da się połączyć. Jeśli
-        etykiety są szersze niż 114 mm, właściwym modelem jest{' '}
+        Standardowe wyposażenie obejmuje Gigabit Ethernet, USB, RS-232, Bluetooth LE
+        oraz znacznik NFC. Po zbliżeniu telefonu aplikacja Zebry może odczytać
+        konfigurację drukarki. Do dwóch wolnych gniazd można dołożyć kartę Wi-Fi, port
+        równoległy, USB Host albo drugi port Ethernet.
+      </>,
+      <>
+        Sposób wydawania etykiet trzeba wybrać przy zamówieniu. Gilotyna odcina gotowy
+        wydruk, natomiast nawijak może zwijać zadrukowane etykiety na tulejkę 76 mm lub
+        pracować jako odklejak z nawijaniem podkładu. Gilotyny i nawijaka nie można
+        zamontować jednocześnie.
+      </>,
+      <>
+        Jeżeli etykiety mają więcej niż 114 mm szerokości, odpowiednim modelem będzie{' '}
         <Link
           href="/sklep/drukarki-etykiet/zebra-zt421"
           className="font-medium text-gray-900 underline"
         >
           Zebra ZT421
         </Link>
-        , a jeśli potrzebny jest moduł RFID, ekran dotykowy albo 600 dpi — ZT411.
+        . Z kolei do zastosowań wymagających modułu RFID, ekranu dotykowego lub
+        rozdzielczości 600 dpi lepiej wybrać ZT411.
       </>,
     ],
     osie: [
