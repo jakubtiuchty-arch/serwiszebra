@@ -417,39 +417,39 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     rekomendowanyPn: 'ZD22042-T0EG00EZ',
     zdjecieGlowne: '/sklep_photo/urzadzenia/zd220t_1.webp',
     wSkrocie: [
-      'Zebra ZD220t to najtańsza drukarka termotransferowa Zebry — drukuje z taśmy barwiącej, a także termicznie bez taśmy.',
-      'Pracuje w rozdzielczości 203 dpi z prędkością do 102 mm/s, przy szerokości druku 104 mm.',
-      'Przyjmuje wyłącznie taśmy o długości do 74 m na wałku pół cala, o szerokości 33,8–109,2 mm, więc przy druku seryjnym wymienia się je często.',
-      'Łączy się tylko przez USB — konstrukcja nie przewiduje modułu z Ethernetem ani Wi-Fi.',
-      'Nadruk z taśmy jest odporny na ścieranie i wilgoć, dlatego nadaje się do etykiet produktowych i oznaczeń wieloletnich.',
+      'Zebra ZD220t to najtańsza drukarka termotransferowa w ofercie Zebry. Drukuje z taśmy barwiącej, ale może też pracować termicznie bez taśmy.',
+      'Pracuje w rozdzielczości 203 dpi z prędkością do 102 mm/s. Szerokość druku wynosi 104 mm.',
+      'Obsługuje wyłącznie taśmy o długości do 74 m na wałku pół cala i szerokości od 33,8 do 109,2 mm. Przy druku seryjnym trzeba je często wymieniać.',
+      'Łączy się wyłącznie przez USB. Konstrukcja nie pozwala dołożyć modułu z Ethernetem ani Wi-Fi.',
+      'Nadruk z taśmy jest odporny na ścieranie i wilgoć, dlatego nadaje się do etykiet produktowych oraz oznaczeń wieloletnich.',
     ],
     zweryfikowano: '2026-08-27',
     opis: [
       <>
-        Zebra ZD220t to najtańsza drukarka termotransferowa w ofercie producenta — drukuje
-        z taśmy barwiącej, więc nadruk jest odporny na ścieranie i wilgoć i nie blaknie
-        z upływem czasu. Sprawdza się przy oznaczeniach, które muszą pozostać czytelne dłużej
-        niż kilka tygodni: etykietach produktowych, magazynowych, oznaczeniach środków
-        trwałych i opisach opakowań zbiorczych. Urządzenie obsługuje również druk termiczny
-        bezpośredni, więc jednym sprzętem wydrukujesz także etykiety wysyłkowe bez taśmy.
+        Zebra ZD220t to najtańsza drukarka termotransferowa w ofercie producenta. Korzysta
+        z taśmy barwiącej, dzięki czemu nadruk jest odporny na ścieranie i wilgoć oraz
+        nie blaknie z upływem czasu. Jest przeznaczona do oznaczeń, które muszą pozostać
+        czytelne dłużej niż kilka tygodni: etykiet produktowych i magazynowych, oznaczeń
+        środków trwałych czy opisów opakowań zbiorczych. Może również drukować termicznie
+        bezpośrednio, dlatego obsłuży także etykiety wysyłkowe bez użycia taśmy.
       </>,
       <>
-        Drukarka pracuje w rozdzielczości 203 dpi z prędkością do 102 mm/s, a szerokość druku
-        104 mm obejmuje pełny format etykiety kurierskiej 100 × 150 mm. Obsługuje nośniki
-        o szerokości 25,4–112 mm oraz rolki o średnicy do 127 mm. Konstrukcja OpenACCESS
-        sprowadza wymianę materiału do podniesienia pokrywy, a obsługa języków ZPL II i EPL 2
-        zapewnia zgodność z szablonami etykiet przygotowanymi dla starszych drukarek Zebry.
-        Wersja z odklejakiem oddziela etykietę od podłoża automatycznie, co przyspiesza
-        ręczne naklejanie przy pakowaniu.
+        Drukarka pracuje w rozdzielczości 203 dpi z prędkością do 102 mm/s. Szerokość
+        druku 104 mm mieści pełny format etykiety kurierskiej 100 × 150 mm. Obsługuje
+        materiały o szerokości od 25,4 do 112 mm oraz rolki o średnicy do 127 mm. Dzięki
+        konstrukcji OpenACCESS przy wymianie materiału wystarczy podnieść pokrywę i włożyć
+        rolkę. Języki ZPL II i EPL 2 zapewniają zgodność z szablonami przygotowanymi dla
+        starszych drukarek Zebry. Wersja z odklejakiem automatycznie oddziela etykietę
+        od podłoża, co ułatwia ręczne naklejanie podczas pakowania.
       </>,
       <>
-        Warto znać granice tego modelu, zanim trafi na stanowisko. ZD220t przyjmuje taśmy
-        o długości do 74 m na wałku pół cala — przy druku seryjnym oznacza to znacznie
-        częstszą wymianę materiału niż w drukarkach na taśmy 300-metrowe. Urządzenie
-        komunikuje się wyłącznie przez USB i nie ma gniazda na moduł sieciowy, więc Ethernetu
-        ani Wi-Fi nie da się dołożyć później. Jeżeli drukarka ma pracować w sieci, drukować
-        szybciej albo obsługiwać większe nakłady bez ciągłej wymiany taśmy, właściwszym
-        wyborem jest{' '}
+        Przed zakupem warto uwzględnić ograniczenia tego modelu. ZD220t przyjmuje taśmy
+        o długości do 74 m na wałku pół cala, dlatego przy druku seryjnym materiał trzeba
+        wymieniać znacznie częściej niż w drukarkach obsługujących taśmy 300-metrowe.
+        Urządzenie łączy się wyłącznie przez USB i nie ma gniazda na moduł sieciowy, więc
+        Ethernetu ani Wi-Fi nie da się dołożyć później. Jeżeli drukarka ma pracować w
+        sieci, drukować szybciej albo obsługiwać większe nakłady bez ciągłej wymiany
+        taśmy, lepszym wyborem będzie{' '}
         <Link
           href="/sklep/drukarki-etykiet/zebra-zd421t"
           className="font-medium text-gray-900 underline"
