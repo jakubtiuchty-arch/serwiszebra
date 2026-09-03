@@ -2888,12 +2888,12 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     rekomendowanyPn: 'ZT42162-T0E0000Z',
     zdjecieGlowne: '/sklep_photo/urzadzenia/zt421_1.webp',
     wSkrocie: [
-      'Zebra ZT421 to przemysłowa drukarka etykiet o szerokości wydruku 168 mm — szersza wersja ZT411 i następczyni ZT420, w metalowej ramie ze składaną metalową pokrywą i kolorowym ekranem dotykowym 4,3 cala.',
-      'Drukuje etykiety o szerokości od 51 do 178 mm z szybkością do 305 mm na sekundę, w rozdzielczości 203 albo 300 dpi; wersji 600 dpi nie ma — tę oferuje wyłącznie ZT411.',
-      'Etykieta logistyczna w formacie A5 (148 × 210 mm) mieści się na niej w całości; na drukarce o szerokości wydruku 104 mm trzeba ją dzielić albo drukować na papierze A6.',
-      'Mieści rolkę etykiet o średnicy do 203 mm na tulejce 76 mm i taśmę barwiącą o nawoju 450 metrów i szerokości do 174 mm, a materiał ładuje się z boku, bez wyjmowania drukarki ze stanowiska.',
-      'Gilotynę i nawijak pełnej rolki montuje producent, więc wybiera się je przy zamówieniu; moduł RFID UHF, kartę Wi-Fi, drugi Ethernet i interfejs aplikatora instaluje się u użytkownika także po zakupie.',
-      'Waży 18,14 kg, a z nawijakiem pełnej rolki 25,08 kg, mierzy 495 × 336 × 324 mm i pracuje od 5 do 40°C przy druku z taśmą, od 0°C przy termicznym.',
+      'Zebra ZT421 to przemysłowa drukarka do etykiet o szerokości do 168 mm. Jest szerszą wersją ZT411 i następczynią ZT420. Ma metalową ramę, składaną metalową pokrywę oraz kolorowy ekran dotykowy 4,3 cala.',
+      'Obsługuje etykiety o szerokości od 51 do 178 mm i drukuje z prędkością do 305 mm/s w rozdzielczości 203 lub 300 dpi. Wersja 600 dpi jest dostępna tylko w ZT411.',
+      'Logistyczna etykieta A5 (148 × 210 mm) mieści się na niej w całości. Na drukarce o szerokości wydruku 104 mm taki format trzeba podzielić albo zastąpić mniejszym A6.',
+      'Obsługuje rolki etykiet o średnicy do 203 mm na tulejce 76 mm oraz taśmy barwiące o nawoju 450 metrów i szerokości do 174 mm. Materiały ładuje się z boku, więc nie trzeba wysuwać drukarki ze stanowiska.',
+      'Gilotynę i nawijak pełnej rolki trzeba wybrać przy zamówieniu, ponieważ montuje je producent. Po zakupie można dołożyć moduł RFID UHF, kartę Wi-Fi, drugi port Ethernet oraz interfejs aplikatora.',
+      'Podstawowa wersja waży 18,14 kg, a model z nawijakiem pełnej rolki — 25,08 kg. Drukarka mierzy 495 × 336 × 324 mm i pracuje w temperaturze od 5 do 40°C przy druku z taśmą oraz od 0°C przy druku termicznym.',
     ],
     zweryfikowano: '2026-09-02',
     poradniki: [
