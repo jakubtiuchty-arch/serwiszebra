@@ -3026,12 +3026,12 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     rekomendowanyPn: 'ZT51042-T0E0000Z',
     zdjecieGlowne: '/sklep_photo/urzadzenia/zt510_1.webp',
     wSkrocie: [
-      'Zebra ZT510 to przemysłowa drukarka etykiet o szerokości wydruku 104 mm, zbudowana do pracy ciągłej: całometalowa rama i obudowa o wadze 22,7 kg, następczyni modelu 105SLPlus.',
-      'Drukuje do 305 mm na sekundę w rozdzielczości 203 dpi i do 254 mm na sekundę w 300 dpi; etykieta może mieć do 991 mm długości, a wydruk ciągły do 3810 mm.',
-      'Mieści rolkę etykiet o średnicy do 203 mm na tulejce 76 mm i taśmę barwiącą o nawoju 450 metrów i szerokości od 20 do 110 mm; etykiety od 20 do 114 mm szerokości.',
-      'Zamiast ekranu dotykowego ma podświetlany wyświetlacz LCD z klawiaturą i hasłem dostępu, a w standardzie Gigabit Ethernet, USB, RS-232, Bluetooth LE i znacznik NFC do konfiguracji telefonem.',
-      'Gilotynę albo nawijak — pełnej rolki lub odklejak z nawijakiem podkładu — montuje producent i wybiera się je przy zamówieniu; gilotyna i nawijak wykluczają się.',
-      'Nie ma modułu RFID ani interfejsu aplikatora — te funkcje oferuje ZT411; ZT510 wybiera się dla mechaniki na trzy zmiany, nie dla dodatków.',
+      'Zebra ZT510 to przemysłowa drukarka do etykiet o szerokości do 104 mm. Waży 22,7 kg, ma metalową ramę i obudowę, a przy tym jest przygotowana do pracy ciągłej. To następczyni modelu 105SLPlus.',
+      'W wersji 203 dpi drukuje z prędkością do 305 mm/s, a w wersji 300 dpi — do 254 mm/s. Pojedyncza etykieta może mieć do 991 mm długości, a wydruk ciągły — do 3810 mm.',
+      'Obsługuje rolki etykiet o średnicy do 203 mm na tulejce 76 mm oraz taśmy barwiące o nawoju 450 metrów i szerokości od 20 do 110 mm. Szerokość etykiet wynosi od 20 do 114 mm.',
+      'Nie ma ekranu dotykowego. Do obsługi służy podświetlany wyświetlacz LCD z klawiaturą, a ustawienia można zabezpieczyć hasłem. Standardowo ma Gigabit Ethernet, USB, RS-232, Bluetooth LE oraz znacznik NFC do konfiguracji z telefonu.',
+      'Gilotynę albo nawijak wybiera się już przy zamówieniu, ponieważ montuje je producent. Nawijak może zwijać pełną rolkę lub działać jako odklejak z nawijaniem podkładu; nie można go połączyć z gilotyną.',
+      'ZT510 nie obsługuje RFID ani interfejsu aplikatora — te opcje są dostępne w ZT411. Ten model ma sens tam, gdzie ważniejsza od dodatków jest wytrzymała mechanika do pracy na trzy zmiany.',
     ],
     zweryfikowano: '2026-09-02',
     poradniki: [
