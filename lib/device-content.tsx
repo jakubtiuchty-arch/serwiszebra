@@ -2454,12 +2454,12 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     rekomendowanyPn: 'ZT11142-T0E000FZ',
     zdjecieGlowne: '/sklep_photo/urzadzenia/zt111_1.webp',
     wSkrocie: [
-      'Zebra ZT111 to podstawowy model klasy półprzemysłowej: metalowa rama i mechanizm konstrukcyjnie bliższy drukarkom przemysłowym niż biurkowym.',
-      'Drukuje etykiety o szerokości do 104 mm, w jakości 203 dpi z szybkością do 254 mm na sekundę albo w dokładniejszej 300 dpi z szybkością do 152 mm na sekundę.',
-      'Mieści rolkę etykiet o średnicy do 203 mm, czyli kilkukrotnie większą niż drukarka biurkowa, co ogranicza liczbę przerw na wymianę materiału.',
-      'W wersji termotransferowej przyjmuje taśmę barwiącą o nawoju 450 metrów — wielokrotnie dłuższym niż w drukarkach biurkowych.',
-      'Zamiast wyświetlacza ma trzy przyciski i kontrolki stanu; konfiguracja odbywa się z komputera lub przez przeglądarkę.',
-      'Standardowe złącza to USB, Ethernet i RS-232 oraz Bluetooth do konfiguracji z telefonu; wersji z Wi-Fi producent dla tego modelu nie oferuje.',
+      'Zebra ZT111 to podstawowa drukarka półprzemysłowa. Ma metalową ramę i mechanizm bliższy konstrukcjom przemysłowym niż biurkowym.',
+      'Drukuje na szerokość do 104 mm. W wersji 203 dpi osiąga prędkość do 254 mm/s, a w dokładniejszej 300 dpi — do 152 mm/s.',
+      'Obsługuje rolki etykiet o średnicy do 203 mm, kilkukrotnie większe niż w drukarkach biurkowych. Dzięki temu materiał wymienia się rzadziej.',
+      'Wersja termotransferowa mieści taśmę barwiącą o nawoju 450 metrów, czyli wielokrotnie dłuższą niż taśmy używane w drukarkach biurkowych.',
+      'Nie ma wyświetlacza. Do obsługi służą trzy przyciski i kontrolki stanu, a ustawienia zmienia się z komputera lub przez przeglądarkę.',
+      'Standardowo ma USB, Ethernet, RS-232 oraz Bluetooth do konfiguracji z telefonu. Producent nie oferuje modelu ZT111 z Wi-Fi.',
     ],
     zweryfikowano: '2026-08-31',
     poradniki: [
@@ -2469,42 +2469,41 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     ],
     opis: [
       <>
-        Zebra ZT111 to podstawowy model klasy półprzemysłowej — rozwiązanie dla firm,
-        którym przestaje wystarczać drukarka biurkowa. Metalowa rama i mechanizm oparty
-        na konstrukcji przemysłowej są przewidziane na kilka tysięcy etykiet dziennie.
-        Z obserwacji naszego serwisu wynika, że drukarki biurkowe pracujące przy takim
-        obciążeniu wymagają wymiany głowicy wyraźnie wcześniej, niż przewiduje producent.
+        Zebra ZT111 to podstawowy model półprzemysłowy dla firm, którym drukarka
+        biurkowa już nie wystarcza. Metalowa rama i mechanizm oparty na konstrukcji
+        przemysłowej są przygotowane na kilka tysięcy etykiet dziennie. W naszym
+        serwisie widzimy, że przy takim obciążeniu drukarki biurkowe wymagają wymiany
+        głowicy wyraźnie wcześniej, niż przewiduje producent.
       </>,
       <>
-        Drukuje etykiety o szerokości do 104 mm na etykietach od 19,4 do 114 mm szerokości.
-        Do wyboru są dwie jakości: 203 dpi z szybkością do 254 mm na sekundę — do etykiet
-        wysyłkowych i magazynowych — albo dokładniejsza 300 dpi z szybkością do 152 mm
-        na sekundę, do drobnego tekstu i małych kodów. Największą praktyczną różnicą
-        wobec{' '}
+        Drukuje na szerokość do 104 mm i obsługuje etykiety od 19,4 do 114 mm. Wersja
+        203 dpi osiąga prędkość do 254 mm na sekundę i wystarcza do etykiet wysyłkowych
+        oraz magazynowych. Dokładniejsza wersja 300 dpi drukuje do 152 mm na sekundę
+        i lepiej radzi sobie z drobnym tekstem oraz małymi kodami. Największą różnicę
+        względem{' '}
         <Link
           href="/sklep/drukarki-etykiet/biurkowe"
           className="font-medium text-gray-900 underline"
         >
           drukarek biurkowych
         </Link>{' '}
-        jest pojemność materiału: rolka o średnicy do 203 mm i taśma o nawoju 450 metrów
-        ograniczają liczbę przerw na wymianę do minimum.
+        widać jednak w pojemności materiału. Rolka o średnicy do 203 mm i taśma o
+        nawoju 450 metrów ograniczają liczbę przerw potrzebnych na ich wymianę.
       </>,
       <>
-        Panel sterowania to trzy przyciski i kontrolki stanu; konfiguracja odbywa się
-        z komputera lub przez przeglądarkę, ponieważ model nie ma wyświetlacza.
-        Standardowe złącza to USB, Ethernet i RS-232, uzupełnione o Bluetooth służący
-        do konfiguracji z telefonu. Wersji z siecią bezprzewodową producent dla tego
-        modelu nie oferuje — w takim przypadku właściwym wyborem jest{' '}
+        ZT111 nie ma wyświetlacza. Do obsługi służą trzy przyciski i kontrolki stanu,
+        a konfigurację przeprowadza się z komputera lub przez przeglądarkę. Standardowo
+        dostępne są USB, Ethernet, RS-232 oraz Bluetooth do konfiguracji z telefonu.
+        Producent nie oferuje wersji z Wi-Fi. Jeśli potrzebne jest połączenie
+        bezprzewodowe, odpowiednim wyborem będzie{' '}
         <Link
           href="/sklep/drukarki-etykiet/zebra-zt231"
           className="font-medium text-gray-900 underline"
         >
           Zebra ZT231
         </Link>
-        . Drukarka obsługuje języki ZPL i EPL, w których wzory etykiet zapisują starsze
-        urządzenia Zebry, więc zastępuje wysłużony sprzęt bez przygotowywania szablonów
-        od nowa.
+        . ZT111 obsługuje języki ZPL i EPL używane przez starsze drukarki Zebry, dlatego
+        może je zastąpić bez przygotowywania szablonów od nowa.
       </>,
     ],
     osie: [
