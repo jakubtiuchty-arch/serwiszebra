@@ -3329,7 +3329,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     rekomendowanyPn: 'ZT62062-T0E0100Z',
     zdjecieGlowne: '/sklep_photo/urzadzenia/zt620_1.webp',
     wSkrocie: [
-      'Zebra ZT620 jest przeznaczona do szerokich etykiet: drukuje na 168 mm, przyjmuje materiały od 51 do 180 mm i waży 26 kg. Ma całometalową konstrukcję, a w ofercie zastąpiła serię 170Xi4.',
+      'Zebra ZT620 jest przeznaczona do szerokich etykiet: drukuje na 168 mm, przyjmuje materiały od 51 do 180 mm i waży 26 kg. Ma metalową ramę i obudowę, a w ofercie zastąpiła serię 170Xi4.',
       'W rozdzielczości 203 lub 300 dpi osiąga do 305 mm na sekundę. Etykieta może mieć do 991 mm długości, a wydruk ciągły do 2032 mm. Wersja 600 dpi nie jest dostępna dla tej szerokości.',
       'Na ZT620 mieści się cała etykieta logistyczna A5 (148 × 210 mm). Szerokość wydruku pozwala też ułożyć obok siebie dwie etykiety po 80 mm.',
       'Do środka wchodzi rolka etykiet o średnicy do 203 mm na tulejce 76 mm oraz taśma barwiąca o długości 450 metrów i szerokości od 51 do 170 mm.',
@@ -3351,11 +3351,12 @@ export const TRESC_KART: Record<string, TrescKarty> = {
         >
           Zebry ZT610
         </Link>{' '}
-        z głowicą o szerokości 168 mm. Zachowuje całometalową konstrukcję do pracy ciągłej,
-        ekran dotykowy, pamięć oraz możliwość rozbudowy o RFID i interfejs aplikatora. Ma
-        jednak obudowę szerszą o 79 mm i obsługuje etykiety do 180 mm. To model do pracy na
-        trzy zmiany wszędzie tam, gdzie 114 mm nie wystarcza: przy etykietach logistycznych
-        A5 na palety, oznaczeniach opakowań zbiorczych, dźwigarów czy profili.
+        z głowicą o szerokości 168 mm. Zachowuje metalową ramę i obudowę przystosowane do
+        pracy ciągłej, ekran dotykowy, pamięć oraz możliwość rozbudowy o RFID i interfejs
+        aplikatora. Ma jednak obudowę szerszą o 79 mm i obsługuje etykiety do 180 mm. To
+        model do pracy na trzy zmiany wszędzie tam, gdzie 114 mm nie wystarcza: przy
+        etykietach logistycznych A5 na palety, oznaczeniach opakowań zbiorczych, dźwigarów
+        czy profili.
       </>,
       <>
         W obu dostępnych rozdzielczościach, 203 i 300 dpi, ZT620 drukuje z prędkością do
