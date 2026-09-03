@@ -1266,6 +1266,12 @@ Fraza „biurkowe drukarki etykiet Zebra" jest głównym wejściem do tej katego
 - Klasa: fakt o ZT610, wiersz w tabeli (4 modele), sekcja H2, FAQ „ZT510 czy ZT610?", notka tylko o ZT620 („ZT610 w wersji 168 mm"), przypis pod tabelą. sitemap, sitemap-images, llms.txt (ZT610 + ZT620 na zamówienie), `SPRZEDAWANE_MODELE`.
 - Weryfikacja na buildzie (produkt włączony na ~2 min): 29/29 OK.
 - PO DEPLOYU: `is_active:true`, sprawdzenie produkcji, `/seo-audit`.
+- Wdrożone 06:42: deploy potwierdzony, produkt włączony, karta i klasa 200 z 10 cenami, klasa pokazuje ZT421/ZT510/ZT610.
+
+## 2026-09-03 — audyt SEO karty ZT610 (92/100)
+- Lighthouse mobile 88/100/100/100, desktop 96/100/100/100 — po cofnięciu Clarity i aria-label akcesoriów zero uchybień a11y/BP/SEO; zero błędów konsoli; TTFB dokumentu 70/60 ms. LCP mobile 3,4 s (najlepszy z trzech kart, ale nadal > 2,5 s).
+- Problemy wspólne dla szablonu `[slug]` (nie karty): (1) zdjęcie LCP w=1080 na telefonie → `sizes` 90vw + `quality` 60 w `DevicePurchasePanel`; (2) `additionalProperty` × każdy wariant — na ZT610 240 wpisów, HTML 275 kB → raz na ProductGroup; (3) chunk `app/page` nadal na desktopie mimo prefetch off na logo i „Start" — trzeci link do `/`.
+- Raport i PDF (HTML → Chromium) w scratchpadzie, PDF u użytkownika; notatka `seo-audit-zt610.md` w pamięci.
 
 ## 2026-09-02 — powiadomienia na @takma.com.pl przez SMTP cyber_folks (obejście HostKarma)
 - **Problem**: serwer poczty takma.com.pl (cyber_folks) odrzuca ~10% maili z Resenda kodem `550 Email blocked by hostkarma.junkemailfilter.com` — pula IP Amazon SES okresowo ląduje na tej liście, Resend takich odbić nie ponawia. cyber_folks odmówił białej listy (18.08.2026). Ginęły m.in. „Nowa wiadomość — naprawa” do serwis@/wojcik@/zuchnicki@ i „Kurier zamówiony”.
