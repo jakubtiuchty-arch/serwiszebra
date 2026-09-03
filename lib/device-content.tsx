@@ -180,45 +180,42 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     rekomendowanyPn: 'ZD4A042-D0EM00EZ',
     zdjecieGlowne: '/sklep_photo/urzadzenia/zd421d_1.webp',
     wSkrocie: [
-      'Zebra ZD421d to biurkowa drukarka etykiet drukująca termicznie bezpośrednio — bez taśmy barwiącej, wyłącznie na etykietach termoczułych.',
-      'Drukuje w rozdzielczości 203 lub 300 dpi z prędkością do 152 mm/s, przy szerokości druku 104 mm, czyli pełnym formacie etykiety kurierskiej 100 × 150 mm.',
-      'Moduł łączności wymienia się bez narzędzi, więc przejście z USB na Ethernet albo Wi-Fi nie wymaga kupowania nowej drukarki.',
-      'Jest następczynią GK420d i przyjmuje jej szablony etykiet dzięki obsłudze języków ZPL II oraz EPL 2.',
-      'Nadruk termiczny z czasem blaknie — do oznaczeń wieloletnich służy termotransferowa Zebra ZD421t z taśmą barwiącą.',
+      'Zebra ZD421d drukuje bezpośrednio na etykietach termoczułych i nie wymaga taśmy barwiącej.',
+      'W wersji 203 dpi osiąga do 152 mm/s, a w 300 dpi do 102 mm/s. Szerokość druku 104 mm mieści pełną etykietę kurierską 100 × 150 mm.',
+      'Moduł łączności można wymienić bez narzędzi. Ethernet lub Wi-Fi da się więc dołożyć później, bez kupowania nowej drukarki.',
+      'ZD421d zastąpiła model GK420d. Obsługuje ZPL II i EPL 2, dlatego przygotowane dla niego szablony nadal działają.',
+      'Nadruk termiczny z czasem blaknie. Do etykiet, które mają pozostać czytelne przez lata, przeznaczona jest termotransferowa Zebra ZD421t.',
     ],
     zweryfikowano: '2026-08-26',
     opis: [
       <>
-        Zebra ZD421d to biurkowa drukarka etykiet pracująca w technologii termicznej
-        bezpośredniej — druk powstaje bez taśmy barwiącej, więc jedynym materiałem
-        eksploatacyjnym jest rolka etykiet, a obsługa pozostaje najprostsza
-        z możliwych. Urządzenie zaprojektowano do oznaczeń o krótkim i średnim cyklu życia —
-        etykiet wysyłkowych, cenowych i magazynowych — w sklepach internetowych, magazynach
-        i punktach nadań. To bezpośredni następca popularnych modeli GK420d i ZD420d.
+        Zebra ZD421d jest biurkową drukarką termiczną. Nie używa taśmy barwiącej, więc do
+        pracy wystarczy rolka etykiet termoczułych. Drukuje etykiety wysyłkowe, cenowe i
+        magazynowe, które nie muszą zachować czytelności przez wiele lat. To model do sklepu
+        internetowego, magazynu lub punktu nadań, a zarazem bezpośredni następca drukarek
+        GK420d i ZD420d.
       </>,
       <>
-        Drukarka pracuje w rozdzielczości 203 lub 300 dpi z prędkością odpowiednio do
-        152 mm/s i 102 mm/s,
-        a szerokość druku 104 mm obejmuje pełny format etykiety kurierskiej 100 × 150 mm —
-        jedno urządzenie obsłuży nadania InPost, DPD i Allegro bez skalowania wydruku.
-        Nośniki o szerokości 15–108 mm i rolki o średnicy do 127 mm wymienia się bez
-        narzędzi, a drukarkę można skonfigurować tak, by po zamknięciu pokrywy sama
-        kalibrowała etykiety. Nadruk
-        termiczny z czasem blaknie — jeżeli oznaczenie ma pozostać czytelne przez lata,
-        właściwszym wyborem będzie termotransferowa{' '}
+        Do wyboru jest rozdzielczość 203 lub 300 dpi. Pierwsza wersja drukuje z prędkością
+        do 152 mm/s, druga do 102 mm/s. Szerokość druku 104 mm obejmuje pełny format
+        etykiety kurierskiej 100 × 150 mm, dlatego wydruki InPost, DPD i Allegro nie
+        wymagają pomniejszania. ZD421d przyjmuje materiały o szerokości od 15 do 108 mm na
+        rolkach o średnicy do 127 mm. Wymienia się je bez narzędzi, a po zamknięciu pokrywy
+        drukarka może automatycznie przeprowadzić kalibrację. Nadruk termiczny z czasem
+        blaknie. Jeśli etykieta ma pozostać czytelna przez lata, lepszym wyborem będzie{' '}
         <Link href="/sklep/drukarki-etykiet/zebra-zd421t" className="font-medium text-gray-900 underline">
           Zebra ZD421t
         </Link>
         .
       </>,
       <>
-        W standardzie dostępne są złącza USB i USB Host oraz Bluetooth Low Energy; łączność
-        sieciową — Ethernet, port szeregowy RS-232 lub Wi-Fi z Bluetoothem — dodaje moduł
-        montowany w slocie z tyłu obudowy, bez wymiany urządzenia przy zmianie
-        infrastruktury. Obsługa języków ZPL II i EPL2 zapewnia zgodność z systemami
-        magazynowymi oraz szablonami etykiet przygotowanymi dla starszych drukarek Zebry,
-        dzięki czemu migracja z GK420d nie wymaga zmian w oprogramowaniu. Na miejscu, bez
-        serwisu, montuje się również obcinacz i odklejak.
+        W wyposażeniu standardowym są USB, USB Host i Bluetooth Low Energy. Ethernet,
+        RS-232 lub Wi-Fi z Bluetoothem dodaje się za pomocą modułu wsuwanego w gniazdo z
+        tyłu obudowy. Można go później wymienić bez kupowania innej drukarki. ZD421d
+        obsługuje języki ZPL II i EPL 2, dlatego współpracuje z systemami magazynowymi oraz
+        szablonami przygotowanymi dla starszych drukarek Zebry. Przejście z GK420d nie
+        wymaga zmian w oprogramowaniu. Obcinacz i odklejak również można zamontować na
+        miejscu, bez wysyłania urządzenia do serwisu.
       </>,
     ],
     osie: [
