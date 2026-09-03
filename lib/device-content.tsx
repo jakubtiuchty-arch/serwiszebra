@@ -3329,12 +3329,12 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     rekomendowanyPn: 'ZT62062-T0E0100Z',
     zdjecieGlowne: '/sklep_photo/urzadzenia/zt620_1.webp',
     wSkrocie: [
-      'Zebra ZT620 to najszersza przemysłowa drukarka etykiet w ofercie: szerokość wydruku 168 mm, etykiety od 51 do 180 mm, całometalowa konstrukcja o wadze 26 kg — następczyni serii 170Xi4.',
-      'Drukuje do 305 mm na sekundę w rozdzielczości 203 albo 300 dpi; etykieta może mieć do 991 mm długości, a wydruk ciągły do 2032 mm. Wersji 600 dpi nie ma — w tej szerokości nie występuje.',
-      'Etykieta logistyczna w formacie A5 (148 × 210 mm) mieści się na niej w całości, a szerokość 168 mm pozwala drukować dwie etykiety 80 mm obok siebie.',
-      'Mieści rolkę etykiet o średnicy do 203 mm na tulejce 76 mm i taśmę barwiącą o nawoju 450 metrów i szerokości od 51 do 170 mm.',
-      'Ma kolorowy ekran dotykowy 4,3 cala, 1 GB pamięci RAM i 2 GB Flash, a w standardzie Gigabit Ethernet, USB, RS-232, Bluetooth 4.1, dwa porty USB Host i znacznik NFC.',
-      'Gilotynę albo nawijak montuje producent i wybiera się je przy zamówieniu; moduł RFID UHF, interfejs aplikatora i kartę Wi-Fi instaluje się u użytkownika także po zakupie.',
+      'Zebra ZT620 jest przeznaczona do szerokich etykiet: drukuje na 168 mm, przyjmuje materiały od 51 do 180 mm i waży 26 kg. Ma całometalową konstrukcję, a w ofercie zastąpiła serię 170Xi4.',
+      'W rozdzielczości 203 lub 300 dpi osiąga do 305 mm na sekundę. Etykieta może mieć do 991 mm długości, a wydruk ciągły do 2032 mm. Wersja 600 dpi nie jest dostępna dla tej szerokości.',
+      'Na ZT620 mieści się cała etykieta logistyczna A5 (148 × 210 mm). Szerokość wydruku pozwala też ułożyć obok siebie dwie etykiety po 80 mm.',
+      'Do środka wchodzi rolka etykiet o średnicy do 203 mm na tulejce 76 mm oraz taśma barwiąca o długości 450 metrów i szerokości od 51 do 170 mm.',
+      'Obsługę ułatwia kolorowy ekran dotykowy 4,3 cala. Drukarka ma 1 GB RAM, 2 GB Flash, Gigabit Ethernet, USB, RS-232, Bluetooth 4.1, dwa porty USB Host i znacznik NFC.',
+      'Gilotynę lub nawijak wybiera się przy zamówieniu, ponieważ montuje je producent. RFID UHF, interfejs aplikatora i kartę Wi-Fi można dołożyć u użytkownika również po zakupie.',
     ],
     zweryfikowano: '2026-09-03',
     poradniki: [
@@ -3344,43 +3344,43 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     ],
     opis: [
       <>
-        Zebra ZT620 to{' '}
+        Zebra ZT620 jest szerszym wariantem{' '}
         <Link
           href="/sklep/drukarki-etykiet/zebra-zt610"
           className="font-medium text-gray-900 underline"
         >
-          Zebra ZT610
+          Zebry ZT610
         </Link>{' '}
-        w wersji o szerokości wydruku 168 mm: ta sama całometalowa konstrukcja do pracy
-        ciągłej, ten sam ekran dotykowy, ta sama pamięć i rozbudowa o RFID i aplikator, ale
-        obudowa szersza o 79 mm i głowica na etykiety do 180 mm. Kupuje się ją z jednego
-        powodu: gdy etykieta nie mieści się w 114 mm — na paletach z etykietą logistyczną A5,
-        na opakowaniach zbiorczych, przy oznaczeniach dźwigarów i profili — a drukarka ma
-        pracować na trzy zmiany.
+        z głowicą o szerokości 168 mm. Zachowuje całometalową konstrukcję do pracy ciągłej,
+        ekran dotykowy, pamięć oraz możliwość rozbudowy o RFID i interfejs aplikatora. Ma
+        jednak obudowę szerszą o 79 mm i obsługuje etykiety do 180 mm. To model do pracy na
+        trzy zmiany wszędzie tam, gdzie 114 mm nie wystarcza: przy etykietach logistycznych
+        A5 na palety, oznaczeniach opakowań zbiorczych, dźwigarów czy profili.
       </>,
       <>
-        Drukuje do 305 mm na sekundę w 203 i 300 dpi. Wydruk ciągły sięga 2032 mm, więc
-        obsłuży także długie oznaczenia, a rolka o średnicy do 203 mm i taśma o nawoju
-        450 metrów ograniczają przerwy na wymianę materiału. Przy pełnej szerokości wydruku
-        taśma musi mieć 170 mm — węższa zostawia niezadrukowane brzegi i odsłania głowicę.
-        Wobec{' '}
+        W obu dostępnych rozdzielczościach, 203 i 300 dpi, ZT620 drukuje z prędkością do
+        305 mm na sekundę. Wydruk ciągły może mieć 2032 mm, więc urządzenie radzi sobie
+        także z długimi oznaczeniami. Rolka o średnicy do 203 mm i taśma o nawoju 450 metrów
+        oznaczają mniej przerw na materiały. Do zadruku całych 168 mm potrzebna jest taśma
+        o szerokości 170 mm; węższa nie osłoni głowicy przy brzegach. W porównaniu z{' '}
         <Link
           href="/sklep/drukarki-etykiet/zebra-zt421"
           className="font-medium text-gray-900 underline"
         >
-          Zebry ZT421
+          Zebrą ZT421
         </Link>{' '}
-        o tej samej szerokości wydruku ZT620 ma cięższą konstrukcję (26 kg wobec 18,14 kg),
-        Gigabit Ethernet, większą pamięć i mechanizm przewidziany na druk całą dobę.
+        o tej samej szerokości wydruku ma cięższą konstrukcję (26 kg zamiast 18,14 kg),
+        Gigabit Ethernet, więcej pamięci i mechanizm przygotowany do druku przez całą dobę.
       </>,
       <>
-        Gilotynę albo nawijak montuje producent, więc wybiera się je przy zamówieniu;
-        nawijak zwija pełną rolkę wydruków na tulejkę 76 mm albo pracuje jako odklejak
-        z nawijakiem podkładu, a z gilotyną grubość materiału ogranicza się do 0,18 mm. Po
-        zakupie rozbudowuje się resztę: moduł RFID UHF koduje znaczniki w trakcie druku,
-        także na szerokich etykietach paletowych, interfejs aplikatora daje sygnały
-        sterujące dla systemów automatycznego etykietowania, a dwa wolne gniazda
-        przyjmują kartę Wi-Fi, drugi Ethernet albo port równoległy.
+        Sposób odbioru etykiet trzeba określić przy zamówieniu. Producent montuje gilotynę
+        albo nawijak, który może zwijać pełną rolkę na tulejkę 76 mm lub pracować jako
+        odklejak z nawijaniem podkładu. Przy gilotynie materiał może mieć najwyżej 0,18 mm
+        grubości. Pozostałe opcje da się zamontować później u użytkownika. Moduł RFID UHF
+        koduje znaczniki podczas druku, również na szerokich etykietach paletowych,
+        a interfejs aplikatora przekazuje sygnały do automatycznego systemu etykietowania.
+        Dwa wolne gniazda można przeznaczyć na kartę Wi-Fi, drugi Ethernet lub port
+        równoległy.
       </>,
     ],
     osie: [
