@@ -3,6 +3,20 @@ import { blogPosts } from '@/lib/blog'
 import { createClient } from '@supabase/supabase-js'
 import { getEnabledCategories, getCategoryPathForProduct } from '@/lib/shop-categories'
 import { hasPolishManual } from '@/lib/polish-manuals'
+import { MODELE_SKLEPU, modeleKlasy, type KlasaSlug } from '@/lib/modele-sklepu'
+import { TRESC_KART } from '@/lib/device-content'
+
+/**
+ * `lastmod` musi być prawdziwą datą zmiany. Do 4.09.2026 każdy z ~300 adresów
+ * dostawał datę generowania sitemapy — Google w takiej sytuacji ignoruje
+ * `lastmod` w całości, więc nowe karty drukarek (25–27.08) nie miały żadnego
+ * sygnału świeżości. Daty stron statycznych to daty ostatniej istotnej zmiany
+ * pliku (git); po większej przebudowie strony podnieś datę ręcznie.
+ *
+ * `updated_at` w tabeli `products` NIE nadaje się na `lastmod`: cron cen
+ * nadpisuje je codziennie dla wszystkich produktów. Karty drukarek biorą datę
+ * z pola `zweryfikowano` w treści karty, części — z `created_at`.
+ */
 
 // Lista miast dla Local SEO
 const cities = [
@@ -17,343 +31,119 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_ROLE_KEY!
 )
 
+const baseUrl = 'https://www.serwis-zebry.pl'
+
+type Czestosc = MetadataRoute.Sitemap[number]['changeFrequency']
+
+/** Strony statyczne: ścieżka → [data ostatniej zmiany, częstość, priorytet] */
+const STRONY_STATYCZNE: Array<[string, string, Czestosc, number]> = [
+  ['', '2026-09-04', 'weekly', 1.0],
+  ['/blog', '2026-08-26', 'daily', 0.9],
+  ['/sklep', '2026-09-01', 'weekly', 0.8],
+  ['/sklep/drukarki-etykiet', '2026-09-04', 'weekly', 0.9],
+  ['/kontrakt-serwisowy', '2026-09-01', 'monthly', 0.8],
+  ['/kontakt', '2026-08-30', 'monthly', 0.7],
+  ['/jak-to-dziala', '2025-12-27', 'monthly', 0.9],
+  ['/o-nas', '2026-07-10', 'monthly', 0.6],
+  ['/regulamin', '2026-06-15', 'yearly', 0.3],
+  ['/polityka-prywatnosci', '2026-06-15', 'yearly', 0.3],
+  ['/serwis-drukarek-zebra', '2026-05-10', 'monthly', 0.9],
+  ['/serwis-terminali-zebra', '2026-04-04', 'monthly', 0.9],
+  ['/serwis-skanerow-zebra', '2026-04-04', 'monthly', 0.9],
+  ['/serwis-tabletow-zebra', '2026-04-04', 'monthly', 0.9],
+  ['/faq', '2026-02-08', 'monthly', 0.7],
+  ['/sterowniki', '2026-08-28', 'monthly', 0.8],
+  ['/poradniki-wideo', '2026-02-02', 'monthly', 0.9],
+  ['/instrukcje', '2026-01-07', 'weekly', 0.9],
+]
+
+/** Data ostatniej zmiany treści stron klas (git) — podnoszona ręcznie */
+const KLASY_ZMIANA: Record<KlasaSlug, string> = {
+  biurkowe: '2026-09-02',
+  mobilne: '2026-09-01',
+  polprzemyslowe: '2026-09-03',
+  przemyslowe: '2026-09-03',
+}
+
+const DATA_MIAST = '2026-09-02'
+const DATA_KATEGORII_CZESCI = '2026-09-01'
+
+const najnowsza = (daty: string[]) =>
+  new Date(daty.reduce((a, b) => (a > b ? a : b)))
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://www.serwis-zebry.pl'
-  
-  // Data ostatniej aktualizacji
-  const now = new Date()
-  
   // 1. Strony statyczne
-  const staticPages: MetadataRoute.Sitemap = [
-    {
-      url: baseUrl,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 1.0,
-    },
-    {
-      url: `${baseUrl}/blog`,
-      lastModified: now,
-      changeFrequency: 'daily',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/sklep`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/sklep/drukarki-etykiet`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/sklep/drukarki-etykiet/biurkowe`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/sklep/drukarki-etykiet/mobilne`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.6,
-    },
-    {
-      url: `${baseUrl}/sklep/drukarki-etykiet/polprzemyslowe`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.6,
-    },
-    {
-      url: `${baseUrl}/sklep/drukarki-etykiet/przemyslowe`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.6,
-    },
-    {
-      url: `${baseUrl}/sklep/drukarki-etykiet/zebra-zd421t`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/sklep/drukarki-etykiet/zebra-zd421d`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/sklep/drukarki-etykiet/zebra-zd220d`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/sklep/drukarki-etykiet/zebra-zd220t`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/sklep/drukarki-etykiet/zebra-zd230d`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/sklep/drukarki-etykiet/zebra-zd230t`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/sklep/drukarki-etykiet/zebra-zd621d`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/sklep/drukarki-etykiet/zebra-zd621t`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/sklep/drukarki-etykiet/zebra-zd411d`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/sklep/drukarki-etykiet/zebra-zd411t`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/sklep/drukarki-etykiet/zebra-zq610-plus`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/sklep/drukarki-etykiet/zebra-zq620-plus`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/sklep/drukarki-etykiet/zebra-zq630-plus`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/sklep/drukarki-etykiet/zebra-zq511`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/sklep/drukarki-etykiet/zebra-zq521`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/sklep/drukarki-etykiet/zebra-zq310-plus`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/sklep/drukarki-etykiet/zebra-zq320-plus`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/sklep/drukarki-etykiet/zebra-zq210`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/sklep/drukarki-etykiet/zebra-zq220-plus`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/sklep/drukarki-etykiet/zebra-zt111`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/sklep/drukarki-etykiet/zebra-zt231`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/sklep/drukarki-etykiet/zebra-zt411`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/sklep/drukarki-etykiet/zebra-zt421`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/sklep/drukarki-etykiet/zebra-zt510`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/sklep/drukarki-etykiet/zebra-zt610`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/sklep/drukarki-etykiet/zebra-zt620`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/kontrakt-serwisowy`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/kontakt`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/jak-to-dziala`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/o-nas`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.6,
-    },
-    {
-      url: `${baseUrl}/regulamin`,
-      lastModified: now,
-      changeFrequency: 'yearly',
-      priority: 0.3,
-    },
-    {
-      url: `${baseUrl}/polityka-prywatnosci`,
-      lastModified: now,
-      changeFrequency: 'yearly',
-      priority: 0.3,
-    },
-    // Podstrony urządzeń
-    {
-      url: `${baseUrl}/serwis-drukarek-zebra`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/serwis-terminali-zebra`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/serwis-skanerow-zebra`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/serwis-tabletow-zebra`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/faq`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/sterowniki`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/poradniki-wideo`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/instrukcje`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-  ]
-  
-  // 2. Artykuły blogowe (46+)
+  const staticPages: MetadataRoute.Sitemap = STRONY_STATYCZNE.map(
+    ([sciezka, data, changeFrequency, priority]) => ({
+      url: `${baseUrl}${sciezka}`,
+      lastModified: new Date(data),
+      changeFrequency,
+      priority,
+    })
+  )
+
+  // 2. Karty drukarek — data z weryfikacji treści u producenta
+  const dataKarty = (slug: string) =>
+    TRESC_KART[slug]?.zweryfikowano ?? '2026-08-25'
+
+  const printerPages: MetadataRoute.Sitemap = MODELE_SKLEPU.map((m) => ({
+    url: `${baseUrl}/sklep/drukarki-etykiet/${m.slug}`,
+    lastModified: new Date(dataKarty(m.slug)),
+    changeFrequency: 'weekly',
+    priority: 0.9,
+  }))
+
+  // Strona klasy zmienia się, gdy zmienia się jej treść albo dochodzi karta
+  const classPages: MetadataRoute.Sitemap = (
+    Object.keys(KLASY_ZMIANA) as KlasaSlug[]
+  ).map((klasa) => ({
+    url: `${baseUrl}/sklep/drukarki-etykiet/${klasa}`,
+    lastModified: najnowsza([
+      KLASY_ZMIANA[klasa],
+      ...modeleKlasy(klasa).map((m) => dataKarty(m.slug)),
+    ]),
+    changeFrequency: 'weekly',
+    priority: 0.8,
+  }))
+
+  // 3. Artykuły blogowe
   const blogPages: MetadataRoute.Sitemap = blogPosts.map((post) => ({
     url: `${baseUrl}/blog/${post.slug}`,
     lastModified: post.updatedAt ? new Date(post.updatedAt) : new Date(post.publishedAt),
     changeFrequency: 'monthly' as const,
     priority: 0.8,
   }))
-  
-  // 3. Podstrony miast (Local SEO)
+
+  // 4. Podstrony miast (Local SEO)
   const cityPages: MetadataRoute.Sitemap = cities.map((city) => ({
     url: `${baseUrl}/serwis-zebra/${city}`,
-    lastModified: now,
+    lastModified: new Date(DATA_MIAST),
     changeFrequency: 'monthly' as const,
     priority: 0.8,
   }))
 
-  // 4. Strony instrukcji (dynamiczne z Supabase)
+  // 5. Strony instrukcji (dynamiczne z Supabase)
   let manualPages: MetadataRoute.Sitemap = []
   try {
     const { data: manuals } = await supabase
       .from('manuals')
-      .select('model, updated_at')
+      .select('model, updated_at, created_at')
       .eq('is_active', true)
-    
+
     if (manuals) {
       manualPages = manuals.flatMap((manual) => {
         const modelLower = manual.model.toLowerCase()
+        const lastModified = new Date(manual.updated_at || manual.created_at || '2026-01-07')
         const pages: MetadataRoute.Sitemap = [{
           url: `${baseUrl}/instrukcje/zebra-${modelLower}`,
-          lastModified: manual.updated_at ? new Date(manual.updated_at) : now,
+          lastModified,
           changeFrequency: 'monthly' as const,
           priority: 0.8,
         }]
-        // Dodaj stronę instrukcji po polsku jeśli istnieje
         if (hasPolishManual(modelLower)) {
           pages.push({
             url: `${baseUrl}/instrukcje/zebra-${modelLower}/instrukcja-po-polsku`,
-            lastModified: manual.updated_at ? new Date(manual.updated_at) : now,
+            lastModified,
             changeFrequency: 'monthly' as const,
             priority: 0.7,
           })
@@ -364,33 +154,30 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   } catch (error) {
     console.error('Error fetching manuals for sitemap:', error)
   }
-  
-  // 5. Strony sklepu — kategorie i produkty
-  let shopPages: MetadataRoute.Sitemap = []
+
+  // 6. Sklep części — kategorie i produkty
+  const shopPages: MetadataRoute.Sitemap = []
   try {
-    // Kategorie statyczne z hierarchii
+    const dataKategorii = new Date(DATA_KATEGORII_CZESCI)
     const enabledCategories = getEnabledCategories()
     for (const productType of enabledCategories) {
-      // Poziom 1: /sklep/glowice
       shopPages.push({
         url: `${baseUrl}/sklep/${productType.slug}`,
-        lastModified: now,
+        lastModified: dataKategorii,
         changeFrequency: 'weekly',
         priority: 0.8,
       })
       for (const printerCategory of productType.printerCategories) {
-        // Poziom 2: /sklep/glowice/drukarki-biurkowe
         shopPages.push({
           url: `${baseUrl}/sklep/${productType.slug}/${printerCategory.slug}`,
-          lastModified: now,
+          lastModified: dataKategorii,
           changeFrequency: 'weekly',
           priority: 0.8,
         })
         for (const model of printerCategory.models) {
-          // Poziom 3: /sklep/glowice/drukarki-biurkowe/zebra-zd421t
           shopPages.push({
             url: `${baseUrl}/sklep/${productType.slug}/${printerCategory.slug}/${model.slug}`,
-            lastModified: now,
+            lastModified: dataKategorii,
             changeFrequency: 'weekly',
             priority: 0.7,
           })
@@ -398,10 +185,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       }
     }
 
-    // Produkty dynamiczne z Supabase
     const { data: products } = await supabase
       .from('products')
-      .select('slug, product_type, device_model, updated_at')
+      .select('slug, product_type, device_model, created_at')
       .eq('is_active', true)
 
     if (products) {
@@ -410,7 +196,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         if (categoryPath) {
           shopPages.push({
             url: `${baseUrl}/sklep/${categoryPath.productType.slug}/${categoryPath.printerCategory.slug}/${categoryPath.model.slug}/${product.slug}`,
-            lastModified: product.updated_at ? new Date(product.updated_at) : now,
+            lastModified: new Date(product.created_at || DATA_KATEGORII_CZESCI),
             changeFrequency: 'weekly',
             priority: 0.9,
           })
@@ -421,7 +207,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     console.error('Error generating shop sitemap:', error)
   }
 
-  // Połącz wszystkie strony
-  return [...staticPages, ...blogPages, ...cityPages, ...manualPages, ...shopPages]
+  return [
+    ...staticPages,
+    ...classPages,
+    ...printerPages,
+    ...blogPages,
+    ...cityPages,
+    ...manualPages,
+    ...shopPages,
+  ]
 }
-

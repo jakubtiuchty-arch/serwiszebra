@@ -1268,6 +1268,18 @@ Fraza „biurkowe drukarki etykiet Zebra" jest głównym wejściem do tej katego
 - PO DEPLOYU: `is_active:true`, sprawdzenie produkcji, `/seo-audit`.
 - Wdrożone 06:42: deploy potwierdzony, produkt włączony, karta i klasa 200 z 10 cenami, klasa pokazuje ZT421/ZT510/ZT610.
 
+## 2026-09-04 — indeksacja kart drukarek: linkowanie, lastmod, tytuły, IndexNow
+- **Diagnoza**: żadna z 26 kart ani 4 stron klas nie jest w Google (site:, Ahrefs 0 fraz). Technicznie czysto (200, index/follow, canonical, robots, sitemap). Przyczyny: karty miały 0–1 linków wewnętrznych (strona główna 0, hub tylko klasy, blog 0, stopka → takma), `/instrukcje/[model]` rankują na frazy modelowe (zd421t poz. 9) i konkurują z kartami, sitemap dawał `lastmod` = „teraz" dla 648 adresów. Baner lejka na instrukcjach linkuje dofollow do kart takmy.
+- Diagnoza użytkownika (7 punktów) zweryfikowana: 5 potwierdzonych, „ZT111 i ZT620" za wąsko (brak wszystkich 30), „rozbudować treści" nie jest przyczyną (karty 3700–4500 słów).
+- **`lib/modele-sklepu.ts`** — rejestr 26 kart (slug, model, klucz instrukcji, klasa) + `modeleWTekscie()` (tytuł wiążący do 5 modeli; tagi tylko gdy ≤3, inaczej hub). Test na 97 wpisach: 26 z modelem, 11 z linkiem do huba, 8 pominiętych (karty/opaski).
+- Linki: strona główna (sekcja `#drukarki-etykiet`: 4 klasy z grafiką + 26 modeli), hub „Modele w sklepie", stopka wspólna (+ anchor takmy przemianowany na „Drukarki etykiet w TAKMA"), stopki inline: wpis, blog, sterowniki, poradniki-wideo, o-nas, faq. `components/blog/KupTenModel.tsx` pod nagłówkiem wpisu. Instrukcje: `SPRZEDAWANE_MODELE` → rejestr, anchor „Drukarka etykiet Zebra X — cena i dostępność w sklepie".
+- **`app/sitemap.ts`**: karty z `zweryfikowano`, klasy = max(treść, karty), statyczne z git, części z `created_at` (`updated_at` nadpisuje codziennie cron cen). Efekt: 2 adresy z dzisiejszą datą zamiast 648, 62 różne daty.
+- Tytuły 26 kart w bazie: „Drukarka etykiet|mobilna Zebra X — cena i dostępność | Serwis Zebra" (63–68 zn.); hub „| Serwis Zebra".
+- **IndexNow**: klucz `c3c45d3c17762022e6354d897a3dae07` w `public/`, `POST /api/indexnow` (Bearer CRON_SECRET, puste body = cała sitemap).
+- Pułapka: `cd` do katalogu pamięci w jednym Bashu przestawił cwd na resztę sesji — `ls .next` i `npm run build` poszły w złym katalogu; zawsze pełne ścieżki albo `cd` do repo na początku komendy.
+- Weryfikacja na buildzie: 29/29 OK (po dodaniu linku w stopce /faq).
+- PO DEPLOYU (użytkownik): GSC — sitemap ponownie + „Request indexing" 30 adresów (klasy, potem ZD421t, ZD621t/d, ZT411, ZT231...). Ocena efektu ~20.09.2026.
+
 ## 2026-09-03 — audyt SEO karty ZT610 (92/100)
 - Lighthouse mobile 88/100/100/100, desktop 96/100/100/100 — po cofnięciu Clarity i aria-label akcesoriów zero uchybień a11y/BP/SEO; zero błędów konsoli; TTFB dokumentu 70/60 ms. LCP mobile 3,4 s (najlepszy z trzech kart, ale nadal > 2,5 s).
 - Problemy wspólne dla szablonu `[slug]` (nie karty): (1) zdjęcie LCP w=1080 na telefonie → `sizes` 90vw + `quality` 60 w `DevicePurchasePanel`; (2) `additionalProperty` × każdy wariant — na ZT610 240 wpisów, HTML 275 kB → raz na ProductGroup; (3) chunk `app/page` nadal na desktopie mimo prefetch off na logo i „Start" — trzeci link do `/`.

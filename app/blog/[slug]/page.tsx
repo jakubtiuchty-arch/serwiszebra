@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getPostBySlug, getAllPosts, getRelatedPosts, BLOG_CATEGORIES, DEVICE_TYPES } from '@/lib/blog'
+import KupTenModel from '@/components/blog/KupTenModel'
 import Header from '@/components/Header'
 import BackButton from '@/components/BackButton'
 import { 
@@ -480,6 +481,9 @@ export default function BlogPostPage({
               </figure>
             )}
 
+            {/* Most do karty produktu — link z treści, która już rankuje na model */}
+            <KupTenModel post={post} />
+
             {/* Content */}
             <div
               className="prose prose-sm sm:prose-lg max-w-none prose-headings:font-bold prose-headings:text-gray-900 prose-p:text-gray-700 prose-a:text-blue-600 prose-strong:text-gray-900 prose-code:bg-gray-100 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-pre:bg-gray-900 prose-blockquote:border-blue-500 prose-blockquote:bg-blue-50 prose-blockquote:py-1 prose-blockquote:not-italic prose-img:rounded-xl"
@@ -721,6 +725,13 @@ export default function BlogPostPage({
         {/* Footer */}
         <footer className="bg-gray-900 text-white py-8">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <nav aria-label="Skróty" className="mb-4 flex flex-wrap justify-center gap-x-5 gap-y-2 text-sm">
+              <a href="/sklep/drukarki-etykiet" className="text-gray-300 hover:text-white">Drukarki etykiet Zebra</a>
+              <a href="/instrukcje" className="text-gray-300 hover:text-white">Instrukcje</a>
+              <a href="/sterowniki" className="text-gray-300 hover:text-white">Sterowniki</a>
+              <a href="/kontrakt-serwisowy" className="text-gray-300 hover:text-white">Kontrakt serwisowy</a>
+              <a href="/kontakt" className="text-gray-300 hover:text-white">Kontakt</a>
+            </nav>
             <p className="text-gray-400 text-sm">
               © 2025-2026 TAKMA - Serwis Zebra. Wszystkie prawa zastrzeżone.
             </p>

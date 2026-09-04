@@ -5,6 +5,8 @@ import AIChatBox from '@/components/AIChatBox'
 import RepairForm from '@/components/RepairForm'
 import Image from 'next/image'
 import { createClient } from '@/lib/supabase/client'
+import { KLASY_DRUKAREK } from '@/lib/printer-classes'
+import { modeleKlasy, urlKarty, type KlasaSlug } from '@/lib/modele-sklepu'
 import {
   Clock,
   Wrench,
@@ -702,6 +704,62 @@ export default function HomePage() {
                 </li>
               </ul>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SKLEP: DRUKARKI ETYKIET — linki do czterech klas i wszystkich kart modeli.
+          Strona główna jest najczęściej odwiedzaną przez Googlebota stroną serwisu,
+          a do 4.09.2026 nie miała ani jednego linku do sklepu z drukarkami. */}
+      <section id="drukarki-etykiet" className="py-12 px-3 sm:px-4 lg:px-6 bg-white border-t border-gray-100">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-8">
+            <h2 className="text-2xl md:text-3xl font-semibold text-gray-900 mb-2">
+              Drukarki etykiet Zebra w sklepie serwisu
+            </h2>
+            <p className="text-sm text-gray-600 max-w-2xl mx-auto">
+              Sprzedajemy drukarki, które sami naprawiamy: ceny i stany magazynowe pobieramy
+              na żywo, a gwarancję realizujemy we własnym serwisie.{' '}
+              <a href="/sklep/drukarki-etykiet" className="font-medium text-gray-900 underline underline-offset-2">
+                Wszystkie drukarki etykiet Zebra
+              </a>
+            </p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {KLASY_DRUKAREK.map((k) => (
+              <div key={k.slug} className="bg-white rounded-xl border border-gray-100 shadow-xl overflow-hidden">
+                <a href={`/sklep/drukarki-etykiet/${k.slug}`} className="relative block aspect-[16/9] overflow-hidden bg-gray-100">
+                  <Image
+                    src={k.grafika}
+                    alt={`${k.nazwa} Zebra`}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 280px"
+                    className="object-cover"
+                  />
+                </a>
+                <div className="p-4">
+                  <h3 className="text-base font-semibold text-gray-900">
+                    <a href={`/sklep/drukarki-etykiet/${k.slug}`} className="hover:underline">
+                      {k.nazwa}
+                    </a>
+                  </h3>
+                  <p className="mt-1 text-xs text-gray-600">{k.zajawka}</p>
+                  <ul className="mt-3 flex flex-wrap gap-x-3 gap-y-1.5">
+                    {modeleKlasy(k.slug as KlasaSlug).map((m) => (
+                      <li key={m.slug}>
+                        <a
+                          href={urlKarty(m)}
+                          className="text-sm text-gray-800 underline decoration-gray-300 underline-offset-2 hover:text-gray-900 hover:decoration-gray-900"
+                        >
+                          {m.model}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>

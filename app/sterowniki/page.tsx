@@ -922,6 +922,12 @@ export default function DriversPage() {
       {/* Footer */}
       <footer className="bg-gray-950 text-white py-4 sm:py-8">
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 text-center">
+          <nav aria-label="Skróty" className="mb-3 flex flex-wrap justify-center gap-x-5 gap-y-2 text-xs sm:text-sm">
+            <a href="/sklep/drukarki-etykiet" className="text-gray-300 hover:text-white">Drukarki etykiet Zebra</a>
+            <a href="/instrukcje" className="text-gray-300 hover:text-white">Instrukcje</a>
+            <a href="/blog" className="text-gray-300 hover:text-white">Blog</a>
+            <a href="/kontakt" className="text-gray-300 hover:text-white">Kontakt</a>
+          </nav>
           <p className="text-gray-500 text-[10px] sm:text-sm">
             © 2025-2026 TAKMA - Serwis Zebra. Wszystkie prawa zastrzeżone.
           </p>

@@ -878,6 +878,7 @@ export default function BlogPage() {
                   { href: '/serwis-drukarek-zebra', label: 'Serwis drukarek' },
                   { href: '/serwis-terminali-zebra', label: 'Serwis terminali' },
                   { href: '/serwis-skanerow-zebra', label: 'Serwis skanerów' },
+                  { href: '/sklep/drukarki-etykiet', label: 'Drukarki etykiet Zebra' },
                   { href: '/instrukcje', label: 'Instrukcje' },
                   { href: '/poradniki-wideo', label: 'Poradniki wideo' },
                 ].map((link) => (

@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { createClient } from '@supabase/supabase-js'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import { modelDlaInstrukcji, urlKarty } from '@/lib/modele-sklepu'
 import { 
   ChevronRight, 
   Download, 
@@ -253,42 +254,6 @@ export async function generateMetadata({ params }: { params: { model: string } }
   }
 }
 
-/**
- * Modele, dla których mamy kartę produktu w sklepie. Trzymane jawnie, żeby
- * strona instrukcji nie linkowała w pustkę, gdy karty jeszcze nie ma.
- */
-const SPRZEDAWANE_MODELE: Record<string, string> = {
-  ZD421T: 'zebra-zd421t',
-  ZD421D: 'zebra-zd421d',
-  ZD220D: 'zebra-zd220d',
-  ZD220T: 'zebra-zd220t',
-  ZD230D: 'zebra-zd230d',
-  ZD230T: 'zebra-zd230t',
-  ZD621D: 'zebra-zd621d',
-  ZD621T: 'zebra-zd621t',
-  ZD411D: 'zebra-zd411d',
-  ZD411T: 'zebra-zd411t',
-  // Klucz musi być modelem z tabeli `manuals` pisanym wielkimi literami —
-  // a te nie mają spacji („ZQ610Plus"). Wersje ze spacją nie trafiały w nic
-  // i most z instrukcji do sklepu przez trzy tygodnie się nie pokazywał.
-  ZQ610PLUS: 'zebra-zq610-plus',
-  ZQ620PLUS: 'zebra-zq620-plus',
-  ZQ630PLUS: 'zebra-zq630-plus',
-  ZQ511: 'zebra-zq511',
-  ZQ521: 'zebra-zq521',
-  ZQ310PLUS: 'zebra-zq310-plus',
-  ZQ320PLUS: 'zebra-zq320-plus',
-  ZQ210: 'zebra-zq210',
-  ZQ220PLUS: 'zebra-zq220-plus',
-  ZT111: 'zebra-zt111',
-  ZT231: 'zebra-zt231',
-  ZT411: 'zebra-zt411',
-  ZT421: 'zebra-zt421',
-  ZT510: 'zebra-zt510',
-  ZT610: 'zebra-zt610',
-  ZT620: 'zebra-zt620',
-}
-
 export default async function ModelPage({ params }: { params: { model: string } }) {
   // Usuń prefix "zebra-" z URL
   const modelName = params.model.replace(/^zebra-/i, '')
@@ -297,6 +262,10 @@ export default async function ModelPage({ params }: { params: { model: string } 
   if (!manual) {
     notFound()
   }
+
+  // Karta produktu w sklepie dla tego modelu (rejestr w lib/modele-sklepu).
+  // Klucz to model z tabeli `manuals` wielkimi literami, bez spacji („ZQ610PLUS").
+  const kartaSklepu = modelDlaInstrukcji(manual.model)
 
   const category = categoryConfig[manual.category] || { name: 'Urządzenie', icon: FileText }
   const CategoryIcon = category.icon
@@ -437,21 +406,21 @@ export default async function ModelPage({ params }: { params: { model: string } 
           {/* Most do karty produktu — ta strona rankuje już na zapytanie o model,
               więc przekazuje najwięcej mocy nowej karcie w sklepie. Pokazujemy
               tylko wtedy, gdy dla tego modelu istnieje karta. */}
-          {SPRZEDAWANE_MODELE[manual.model.toUpperCase()] && (
+          {kartaSklepu && (
             <Link
-              href={`/sklep/drukarki-etykiet/${SPRZEDAWANE_MODELE[manual.model.toUpperCase()]}`}
+              href={urlKarty(kartaSklepu)}
               className="mb-6 flex items-center justify-between gap-4 rounded-xl border border-gray-200 bg-white p-4 transition hover:border-gray-400"
             >
               <span>
                 <span className="block text-sm font-semibold text-gray-900">
-                  Potrzebujesz nowej Zebry {manual.model}?
+                  {`Drukarka etykiet Zebra ${kartaSklepu.model} — cena i dostępność w sklepie`}
                 </span>
                 <span className="block text-xs text-gray-600">
-                  Cena i dostępność na żywo, naprawy gwarancyjne u nas
+                  Stan magazynowy na żywo, gwarancja realizowana w naszym serwisie
                 </span>
               </span>
               <span className="whitespace-nowrap rounded-lg bg-gray-900 px-4 py-2 text-sm font-semibold text-white">
-                Zobacz w sklepie
+                Zobacz kartę
               </span>
             </Link>
           )}

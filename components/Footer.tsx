@@ -138,6 +138,7 @@ export default function Footer() {
               <h3 className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-gray-500 mb-3 sm:mb-5">Informacje</h3>
               <ul className="space-y-2 sm:space-y-3">
                 {[
+                  { href: '/sklep/drukarki-etykiet', label: 'Drukarki etykiet Zebra', external: false },
                   { href: '/blog', label: 'Blog', external: false },
                   { href: '/sterowniki', label: 'Sterowniki', external: false },
                   { href: '/faq', label: 'FAQ', external: false },
@@ -167,7 +168,7 @@ export default function Footer() {
               <ul className="space-y-2 sm:space-y-3">
                 {[
                   { href: 'https://www.takma.com.pl/terminale-mobilne-zebra', label: 'Terminale mobilne Zebra' },
-                  { href: 'https://www.takma.com.pl/drukarki-etykiet-zebra', label: 'Drukarki etykiet Zebra' },
+                  { href: 'https://www.takma.com.pl/drukarki-etykiet-zebra', label: 'Drukarki etykiet w TAKMA' },
                   { href: 'https://www.takma.com.pl/skanery-kodow-kreskowych-zebra', label: 'Skanery kodów Zebra' },
                   { href: 'https://www.takma.com.pl/tablety-przemyslowe-zebra', label: 'Tablety Zebra' },
                   { href: 'https://www.takma.com.pl/materialy-eksploatacyjne', label: 'Materiały eksploatacyjne' },

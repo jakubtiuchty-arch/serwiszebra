@@ -5,6 +5,7 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import { KLASY_DRUKAREK } from '@/lib/printer-classes'
 import KafelekKlasy from '@/components/shop/KafelekKlasy'
+import { MODELE_SKLEPU, modeleKlasy, urlKarty, type KlasaSlug } from '@/lib/modele-sklepu'
 
 /**
  * HUB kategorii — najważniejsza strona sklepu pod frazę „drukarki etykiet
@@ -27,7 +28,7 @@ export const dynamic = 'force-dynamic'
 const URL_KAT = `${SITE}/sklep/drukarki-etykiet`
 
 export const metadata: Metadata = {
-  title: 'Drukarki etykiet Zebra — ceny na żywo | sklep autoryzowanego serwisu',
+  title: 'Drukarki etykiet Zebra — ceny na żywo | Serwis Zebra',
   description:
     'Drukarki etykiet Zebra: biurkowe i przemysłowe, termiczne i termotransferowe. Ceny i stany magazynowe na żywo, gwarancja realizowana we własnym autoryzowanym serwisie Zebry.',
   alternates: { canonical: URL_KAT, languages: { pl: URL_KAT, 'x-default': URL_KAT } },
@@ -185,6 +186,43 @@ export default async function DevicesCategoryPage() {
               <KafelekKlasy key={k.slug} klasa={k} liczbaModeli={liczby[k.slug] || 0} />
             ))}
           </div>
+
+          {/* Wszystkie karty wprost z huba. Do 4.09.2026 hub linkował tylko
+              klasy, a karty modeli miały po 0–1 linków wewnętrznych i po
+              dwóch tygodniach nie było ich w indeksie Google. */}
+          <section className="mt-10" aria-labelledby="modele-w-sklepie">
+            <h2 id="modele-w-sklepie" className="text-xl font-bold text-gray-900">
+              Modele w sklepie
+            </h2>
+            <p className="mt-2 text-sm leading-relaxed text-gray-700">
+              {MODELE_SKLEPU.length} drukarek etykiet Zebra z ceną i stanem magazynowym
+              pobieranymi na żywo. Litera „d" na końcu modelu oznacza druk termiczny,
+              „t" — termotransferowy.
+            </p>
+            <div className="mt-5 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {KLASY_DRUKAREK.map((k) => (
+                <div key={k.slug}>
+                  <h3 className="text-sm font-semibold text-gray-900">
+                    <Link href={`/sklep/drukarki-etykiet/${k.slug}`} className="hover:underline">
+                      {k.nazwa}
+                    </Link>
+                  </h3>
+                  <ul className="mt-2 space-y-1.5">
+                    {modeleKlasy(k.slug as KlasaSlug).map((m) => (
+                      <li key={m.slug}>
+                        <Link
+                          href={urlKarty(m)}
+                          className="text-sm text-gray-700 underline decoration-gray-300 underline-offset-2 hover:text-gray-900 hover:decoration-gray-900"
+                        >
+                          Zebra {m.model}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </section>
 
           {/* Treść kategorii POD kafelkami — tu wygrywa się frazę, nie leadem */}
           <section className="mt-12 ">

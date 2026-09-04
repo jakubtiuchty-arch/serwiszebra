@@ -571,6 +571,8 @@ export default function FAQPage() {
               {' • '}
               <Link href="/blog" className="text-blue-600 hover:underline">Blog</Link>
               {' • '}
+              <Link href="/sklep/drukarki-etykiet" className="text-blue-600 hover:underline">Drukarki etykiet Zebra</Link>
+              {' • '}
               <Link href="/serwis-drukarek-zebra" className="text-blue-600 hover:underline">Serwis Drukarek</Link>
               {' • '}
               <Link href="/serwis-terminali-zebra" className="text-blue-600 hover:underline">Serwis Terminali</Link>

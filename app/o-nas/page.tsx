@@ -312,9 +312,14 @@ export default function AboutPage() {
       <footer className="bg-slate-900 text-white py-8">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-sm">
           <p className="text-slate-400">© 2025–2026 TAKMA — Serwis Zebra. Wszystkie prawa zastrzeżone.</p>
-          <a href="https://www.takma.com.pl" target="_blank" rel="noopener" className="text-slate-300 hover:text-white transition-colors">
-            takma.com.pl
-          </a>
+          <nav aria-label="Skróty" className="flex flex-wrap gap-x-5 gap-y-2">
+            <a href="/sklep/drukarki-etykiet" className="text-slate-300 hover:text-white transition-colors">
+              Drukarki etykiet Zebra
+            </a>
+            <a href="https://www.takma.com.pl" target="_blank" rel="noopener" className="text-slate-300 hover:text-white transition-colors">
+              takma.com.pl
+            </a>
+          </nav>
         </div>
       </footer>
     </div>
