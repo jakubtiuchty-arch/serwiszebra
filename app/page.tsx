@@ -586,7 +586,7 @@ export default function HomePage() {
             {/* Drukarki */}
             <div className="bg-white rounded-xl p-5 shadow-xl border border-gray-100 hover:shadow-2xl transition-shadow">
               <div className="w-14 h-14 bg-gray-50 rounded-xl flex items-center justify-center mb-3 border border-gray-100">
-                <Printer className="w-7 h-7 text-gray-500" strokeWidth={1.5} />
+                <Image src="/icons/line/urzadzenie-drukarka.png" alt="" width={40} height={40} className="w-10 h-10 mix-blend-multiply" />
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">
                 Drukarki etykiet
@@ -618,7 +618,7 @@ export default function HomePage() {
             {/* Terminale */}
             <div className="bg-white rounded-xl p-5 shadow-xl border border-gray-100 hover:shadow-2xl transition-shadow">
               <div className="w-14 h-14 bg-gray-50 rounded-xl flex items-center justify-center mb-3 border border-gray-100">
-                <Smartphone className="w-7 h-7 text-gray-500" strokeWidth={1.5} />
+                <Image src="/icons/line/urzadzenie-terminal.png" alt="" width={40} height={40} className="w-10 h-10 mix-blend-multiply" />
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">
                 Terminale mobilne
@@ -646,7 +646,7 @@ export default function HomePage() {
             {/* Skanery */}
             <div className="bg-white rounded-xl p-5 shadow-xl border border-gray-100 hover:shadow-2xl transition-shadow">
               <div className="w-14 h-14 bg-gray-50 rounded-xl flex items-center justify-center mb-3 border border-gray-100">
-                <ScanBarcode className="w-7 h-7 text-gray-500" strokeWidth={1.5} />
+                <Image src="/icons/line/urzadzenie-skaner.png" alt="" width={40} height={40} className="w-10 h-10 mix-blend-multiply" />
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">
                 Skanery kodów
@@ -674,7 +674,7 @@ export default function HomePage() {
             {/* Tablety */}
             <div className="bg-white rounded-xl p-5 shadow-xl border border-gray-100 hover:shadow-2xl transition-shadow">
               <div className="w-14 h-14 bg-gray-50 rounded-xl flex items-center justify-center mb-3 border border-gray-100">
-                <TabletSmartphone className="w-7 h-7 text-gray-500" strokeWidth={1.5} />
+                <Image src="/icons/line/urzadzenie-tablet.png" alt="" width={40} height={40} className="w-10 h-10 mix-blend-multiply" />
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">
                 Tablety

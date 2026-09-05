@@ -1268,6 +1268,10 @@ Fraza „biurkowe drukarki etykiet Zebra" jest głównym wejściem do tej katego
 - PO DEPLOYU: `is_active:true`, sprawdzenie produkcji, `/seo-audit`.
 - Wdrożone 06:42: deploy potwierdzony, produkt włączony, karta i klasa 200 z 10 cenami, klasa pokazuje ZT421/ZT510/ZT610.
 
+## 2026-09-05 — ikony kroków „Jak to działa" z Higgsfielda
+- Użytkownik: gradientowe kółka z glifami lucide w sekcji „Jak to działa" to AI slop. Arkusz 2×2 w gpt_image_2 (1k, prompt: kreska granatowa #1F2A44 + jeden akcent #A8F000, biel, bez wypełnień), z dwóch wariantów wybrany czystszy; cięcie ćwiartek, `-fuzz 12% -trim`, 200 px na płótnie 256, `Erode Disk:2` (przy 1k wystarcza 2, nie 3). Pliki `public/icons/line/krok-{czat,wysylka,diagnoza,naprawa}.png`.
+- JSX: białe kółko z obwódką + ikona 44 px `mix-blend-multiply`, numer kroku na czarnym; linia łącząca `bg-gray-200`, pigułki neutralne bez glifów lucide. Zrzut na buildzie OK.
+
 ## 2026-09-05 — koszyk: zdjęcie i link drukarki
 - Zgłoszenie: pozycja ZD421t w koszyku bez zdjęcia (placeholder). Przyczyna: `app/sklep/koszyk/page.tsx` brał obrazek wyłącznie z `getProductFallbackImage` (części), ignorując pole `image` pozycji, które tabela wariantów ustawia na `zdjecieGlowne`. Strona zamówienia używała już `zdjecieWKoszyku()` — koszyk nie.
 - Poprawka: koszyk przez `zdjecieWKoszyku(item)`; link pozycji drukarki do `/sklep/drukarki-etykiet/<slug>?pn=<PN>` (był `/sklep/<slug>` → 404).
