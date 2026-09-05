@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { X, Settings, Shield } from 'lucide-react'
 import { trackCookieConsent } from '@/lib/analytics'
+import { COOKIE_CONSENT_CHANGED } from '@/lib/openai-pixel'
 
 type CookieConsent = {
   necessary: boolean
@@ -72,6 +73,7 @@ export default function CookieBanner() {
   const saveConsent = (newConsent: CookieConsent) => {
     const consentWithTimestamp = { ...newConsent, timestamp: Date.now() }
     localStorage.setItem('cookie-consent', JSON.stringify(consentWithTimestamp))
+    window.dispatchEvent(new Event(COOKIE_CONSENT_CHANGED))
     setConsent(consentWithTimestamp)
     setShowBanner(false)
     setShowSettings(false)
@@ -200,7 +202,7 @@ export default function CookieBanner() {
                   <div>
                     <h4 className="font-medium text-gray-900">Marketingowe</h4>
                     <p className="text-sm text-gray-600 mt-1">
-                      Używane do personalizacji reklam (Google Ads, Facebook Pixel).
+                      Używane do personalizacji reklam i pomiaru ich skuteczności (Google Ads, Facebook Pixel, ChatGPT Ads).
                     </p>
                   </div>
                   <button
@@ -235,4 +237,3 @@ export default function CookieBanner() {
     </div>
   )
 }
-

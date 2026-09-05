@@ -1278,7 +1278,8 @@ Fraza „biurkowe drukarki etykiet Zebra" jest głównym wejściem do tej katego
 - **IndexNow**: klucz `c3c45d3c17762022e6354d897a3dae07` w `public/`, `POST /api/indexnow` (Bearer CRON_SECRET, puste body = cała sitemap).
 - Pułapka: `cd` do katalogu pamięci w jednym Bashu przestawił cwd na resztę sesji — `ls .next` i `npm run build` poszły w złym katalogu; zawsze pełne ścieżki albo `cd` do repo na początku komendy.
 - Weryfikacja na buildzie: 29/29 OK (po dodaniu linku w stopce /faq).
-- PO DEPLOYU (użytkownik): GSC — sitemap ponownie + „Request indexing" 30 adresów (klasy, potem ZD421t, ZD621t/d, ZT411, ZT231...). Ocena efektu ~20.09.2026.
+- Wdrożone (commit 5ad2725, po rebase na 5 commitów naturalizacji opisów z innej sesji): produkcja 29/29 OK, IndexNow przyjął 647 adresów (pierwsza próba 403 — plik klucza żył od kilku sekund; druga 200).
+- PO STRONIE UŻYTKOWNIKA: GSC — sitemap ponownie + „Request indexing" 30 adresów (klasy, potem ZD421t, ZD621t/d, ZT411, ZT231...). Ocena efektu ~20.09.2026.
 
 ## 2026-09-03 — audyt SEO karty ZT610 (92/100)
 - Lighthouse mobile 88/100/100/100, desktop 96/100/100/100 — po cofnięciu Clarity i aria-label akcesoriów zero uchybień a11y/BP/SEO; zero błędów konsoli; TTFB dokumentu 70/60 ms. LCP mobile 3,4 s (najlepszy z trzech kart, ale nadal > 2,5 s).

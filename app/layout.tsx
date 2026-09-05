@@ -6,6 +6,7 @@ import { Analytics } from '@vercel/analytics/next'
 import CookieBanner from '@/components/CookieBanner'
 import CzyszczenieAdresu from '@/components/CzyszczenieAdresu'
 import GaClickTracker from '@/components/GaClickTracker'
+import OpenAIPixel from '@/components/OpenAIPixel'
 
 const GA_MEASUREMENT_ID = 'G-JVWERC1N4J'
 const GTM_ID = 'GTM-55KB354V'
@@ -165,6 +166,7 @@ export default function RootLayout({
         <CookieBanner />
         <CzyszczenieAdresu />
         <GaClickTracker />
+        <OpenAIPixel />
         <Analytics />
       </body>
     </html>

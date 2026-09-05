@@ -18,6 +18,7 @@ import {
 } from 'lucide-react'
 import { trackRepairFormSubmit, trackRepairFormStart } from '@/lib/gtm'
 import { onRepairPrefill, trackCtaEvent, type RepairPrefill } from '@/lib/repair-prefill'
+import { trackOpenAIRepairLead } from '@/lib/openai-pixel'
 
 // Lista wzorców modeli Zebra (case-insensitive)
 const ZEBRA_MODEL_PATTERNS = [
@@ -401,6 +402,7 @@ export default function RepairForm() {
       // ✨ ZMIANA: Zamiast redirect → pokaż lightbox
       console.log('✅ Zgłoszenie wysłane! ID:', result.requestId)
       setSubmittedRepairId(result.requestId)
+      trackOpenAIRepairLead(result.requestId)
       setSubmittedEmail(data.email)
       setSubmittedFirstName(data.firstName)
       setSubmittedLastName(data.lastName)
