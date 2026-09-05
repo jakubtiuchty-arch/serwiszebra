@@ -5,8 +5,6 @@ import AIChatBox from '@/components/AIChatBox'
 import RepairForm from '@/components/RepairForm'
 import Image from 'next/image'
 import { createClient } from '@/lib/supabase/client'
-import { KLASY_DRUKAREK } from '@/lib/printer-classes'
-import { modeleKlasy, type KlasaSlug } from '@/lib/modele-sklepu'
 import {
   Clock,
   Wrench,
@@ -705,63 +703,6 @@ export default function HomePage() {
               </ul>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* SKLEP: DRUKARKI ETYKIET — cztery kafelki klas jak na hubie i jeden link
-          do sklepu. Decyzja użytkownika z 5.09.2026: bez listy modeli — wersje
-          z kodami w kafelkach i z indeksem pod kafelkami wyglądały źle. Linki do
-          26 kart daje hub, stopka, blog i instrukcje. */}
-      <section id="drukarki-etykiet" className="py-12 px-3 sm:px-4 lg:px-6 bg-white border-t border-gray-100">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-8">
-            <h2 className="text-2xl md:text-3xl font-semibold text-gray-900 mb-2">
-              Drukarki etykiet Zebra w sklepie serwisu
-            </h2>
-            <p className="text-sm text-gray-600 max-w-2xl mx-auto">
-              Sprzedajemy drukarki, które sami naprawiamy: ceny i stany magazynowe pobieramy
-              na żywo, a gwarancję realizujemy we własnym serwisie.
-            </p>
-          </div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {KLASY_DRUKAREK.map((k) => {
-              const liczba = modeleKlasy(k.slug as KlasaSlug).length
-              return (
-                <a
-                  key={k.slug}
-                  href={`/sklep/drukarki-etykiet/${k.slug}`}
-                  className="group overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
-                >
-                  <span className="relative block aspect-[16/9] overflow-hidden bg-gray-100">
-                    <Image
-                      src={k.grafika}
-                      alt={`${k.nazwa} Zebra`}
-                      fill
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 280px"
-                      className="object-cover"
-                    />
-                  </span>
-                  <span className="block p-4">
-                    <span className="flex flex-wrap items-baseline gap-x-1.5">
-                      <h3 className="text-sm font-bold text-gray-900">{k.nazwa}</h3>
-                      <span className="text-[11px] text-gray-500">
-                        {liczba} {liczba === 1 ? 'model' : liczba < 5 ? 'modele' : 'modeli'}
-                      </span>
-                    </span>
-                    <span className="mt-1 block text-xs leading-relaxed text-gray-600">{k.zajawka}</span>
-                    <span className="mt-1.5 block text-[11px] text-gray-400">{k.serie}</span>
-                  </span>
-                </a>
-              )
-            })}
-          </div>
-
-          <p className="mt-6 text-center text-sm">
-            <a href="/sklep/drukarki-etykiet" className="font-medium text-gray-900 underline underline-offset-2">
-              Wszystkie drukarki etykiet Zebra
-            </a>
-          </p>
         </div>
       </section>
 
