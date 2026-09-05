@@ -311,6 +311,7 @@ export default function PolitykaPrywatnosciPage() {
                 </div>
               </div>
 
+              <p className="mt-4">Po wyrażeniu zgody na cookies marketingowe korzystamy również z piksela OpenAI (ChatGPT Ads), aby mierzyć odwiedziny i skuteczne zgłoszenia napraw po reklamach. Piksel zapisuje identyfikator kliknięcia reklamy w pliku __oppref i przesyła zdarzenia do OpenAI. Jeżeli automatyczne dopasowanie jest włączone, może również wykorzystywać informacje kontaktowe wykryte na stronie, przekształcone w przeglądarce do skrótów SHA-256.</p>
               <p className="font-medium text-gray-900 mt-4">Szczegółowa lista plików cookies:</p>
               <div className="overflow-x-auto mt-3">
                 <table className="min-w-full text-xs border border-gray-200 rounded-lg overflow-hidden">
@@ -410,4 +411,3 @@ export default function PolitykaPrywatnosciPage() {
     </div>
   )
 }
-
