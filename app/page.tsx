@@ -618,7 +618,7 @@ export default function HomePage() {
             {/* Terminale */}
             <div className="bg-white rounded-xl p-5 shadow-xl border border-gray-100 hover:shadow-2xl transition-shadow">
               <div className="w-14 h-14 bg-gray-50 rounded-xl flex items-center justify-center mb-3 border border-gray-100">
-                <Image src="/icons/line/czynnosc-inwentaryzacja.png" alt="" width={44} height={44} className="w-11 h-11 mix-blend-multiply" />
+                <Image src="/icons/line/czynnosc-kompletacja.png" alt="" width={44} height={44} className="w-11 h-11 mix-blend-multiply" />
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">
                 Terminale mobilne
@@ -674,7 +674,7 @@ export default function HomePage() {
             {/* Tablety */}
             <div className="bg-white rounded-xl p-5 shadow-xl border border-gray-100 hover:shadow-2xl transition-shadow">
               <div className="w-14 h-14 bg-gray-50 rounded-xl flex items-center justify-center mb-3 border border-gray-100">
-                <Image src="/icons/line/czynnosc-teren.png" alt="" width={44} height={44} className="w-11 h-11 mix-blend-multiply" />
+                <Image src="/icons/line/czynnosc-formularz.png" alt="" width={44} height={44} className="w-11 h-11 mix-blend-multiply" />
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">
                 Tablety
