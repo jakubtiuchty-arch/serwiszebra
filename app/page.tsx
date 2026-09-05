@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { Fragment, useState, useEffect } from 'react'
 import AIChatBox from '@/components/AIChatBox'
 import RepairForm from '@/components/RepairForm'
 import Image from 'next/image'
@@ -708,9 +708,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* SKLEP: DRUKARKI ETYKIET — linki do czterech klas i wszystkich kart modeli.
-          Strona główna jest najczęściej odwiedzaną przez Googlebota stroną serwisu,
-          a do 4.09.2026 nie miała ani jednego linku do sklepu z drukarkami. */}
+      {/* SKLEP: DRUKARKI ETYKIET — cztery klasy jak na hubie, a linki do wszystkich
+          kart modeli w jednym cichym indeksie pod kafelkami. Wersja z listą
+          podkreślonych kodów w każdym kafelku (4–5.09.2026) wyglądała jak farma
+          linków i zostawiała puste kafelki przy klasach z trzema modelami. */}
       <section id="drukarki-etykiet" className="py-12 px-3 sm:px-4 lg:px-6 bg-white border-t border-gray-100">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-8">
@@ -719,48 +720,70 @@ export default function HomePage() {
             </h2>
             <p className="text-sm text-gray-600 max-w-2xl mx-auto">
               Sprzedajemy drukarki, które sami naprawiamy: ceny i stany magazynowe pobieramy
-              na żywo, a gwarancję realizujemy we własnym serwisie.{' '}
-              <a href="/sklep/drukarki-etykiet" className="font-medium text-gray-900 underline underline-offset-2">
-                Wszystkie drukarki etykiet Zebra
-              </a>
+              na żywo, a gwarancję realizujemy we własnym serwisie.
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {KLASY_DRUKAREK.map((k) => (
-              <div key={k.slug} className="bg-white rounded-xl border border-gray-100 shadow-xl overflow-hidden">
-                <a href={`/sklep/drukarki-etykiet/${k.slug}`} className="relative block aspect-[16/9] overflow-hidden bg-gray-100">
-                  <Image
-                    src={k.grafika}
-                    alt={`${k.nazwa} Zebra`}
-                    fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 280px"
-                    className="object-cover"
-                  />
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {KLASY_DRUKAREK.map((k) => {
+              const liczba = modeleKlasy(k.slug as KlasaSlug).length
+              return (
+                <a
+                  key={k.slug}
+                  href={`/sklep/drukarki-etykiet/${k.slug}`}
+                  className="group overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+                >
+                  <span className="relative block aspect-[16/9] overflow-hidden bg-gray-100">
+                    <Image
+                      src={k.grafika}
+                      alt={`${k.nazwa} Zebra`}
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 280px"
+                      className="object-cover"
+                    />
+                  </span>
+                  <span className="block p-4">
+                    <span className="flex flex-wrap items-baseline gap-x-1.5">
+                      <h3 className="text-sm font-bold text-gray-900">{k.nazwa}</h3>
+                      <span className="text-[11px] text-gray-500">
+                        {liczba} {liczba === 1 ? 'model' : liczba < 5 ? 'modele' : 'modeli'}
+                      </span>
+                    </span>
+                    <span className="mt-1 block text-xs leading-relaxed text-gray-600">{k.zajawka}</span>
+                    <span className="mt-1.5 block text-[11px] text-gray-400">{k.serie}</span>
+                  </span>
                 </a>
-                <div className="p-4">
-                  <h3 className="text-base font-semibold text-gray-900">
-                    <a href={`/sklep/drukarki-etykiet/${k.slug}`} className="hover:underline">
-                      {k.nazwa}
-                    </a>
-                  </h3>
-                  <p className="mt-1 text-xs text-gray-600">{k.zajawka}</p>
-                  <ul className="mt-3 flex flex-wrap gap-x-3 gap-y-1.5">
-                    {modeleKlasy(k.slug as KlasaSlug).map((m) => (
-                      <li key={m.slug}>
-                        <a
-                          href={urlKarty(m)}
-                          className="text-sm text-gray-800 underline decoration-gray-300 underline-offset-2 hover:text-gray-900 hover:decoration-gray-900"
-                        >
-                          {m.model}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            ))}
+              )
+            })}
           </div>
+
+          {/* Indeks modeli: nazwa klasy + modele po przecinku, jak spis treści */}
+          <dl className="mt-8 grid grid-cols-[auto_1fr] gap-x-4 gap-y-1.5 text-sm max-w-4xl mx-auto">
+            {KLASY_DRUKAREK.map((k) => (
+              <Fragment key={k.slug}>
+                <dt className="text-gray-500">
+                  <a href={`/sklep/drukarki-etykiet/${k.slug}`} className="hover:text-gray-900">
+                    {k.nazwa.replace('Drukarki ', '').replace(/^./, (c) => c.toUpperCase())}
+                  </a>
+                </dt>
+                <dd className="text-gray-700">
+                  {modeleKlasy(k.slug as KlasaSlug).map((m, i, arr) => (
+                    <Fragment key={m.slug}>
+                      <a href={urlKarty(m)} className="hover:text-gray-900 hover:underline">
+                        {m.model}
+                      </a>
+                      {i < arr.length - 1 ? ', ' : ''}
+                    </Fragment>
+                  ))}
+                </dd>
+              </Fragment>
+            ))}
+          </dl>
+          <p className="mt-4 text-center text-sm">
+            <a href="/sklep/drukarki-etykiet" className="font-medium text-gray-900 underline underline-offset-2">
+              Wszystkie drukarki etykiet Zebra
+            </a>
+          </p>
         </div>
       </section>
 
