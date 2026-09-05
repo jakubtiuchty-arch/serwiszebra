@@ -1264,17 +1264,17 @@ export default function HomePage() {
 
           <div className="grid md:grid-cols-4 gap-4 relative">
             {/* Linia łącząca */}
-            <div className="hidden md:block absolute top-12 left-0 right-0 h-0.5 bg-gradient-to-r from-indigo-200 via-blue-200 via-purple-200 to-green-200 -z-10"
+            <div className="hidden md:block absolute top-12 left-0 right-0 h-0.5 bg-gray-200 -z-10"
                  style={{ top: '3rem', left: '8%', right: '8%' }} />
 
             {/* KROK 1 - Chat AI */}
             <div className="relative">
               <div className="bg-white rounded-xl p-4 shadow-xl border border-gray-100 hover:shadow-2xl transition-all hover:-translate-y-1 h-full flex flex-col justify-between">
                 <div className="flex flex-col items-center text-center">
-                  <div className="w-16 h-16 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-full flex items-center justify-center mb-3 shadow-lg relative">
-                    <MessageSquare className="w-8 h-8 text-white" />
-                    <div className="absolute -top-1 -right-1 w-7 h-7 bg-white rounded-full flex items-center justify-center shadow-md border-2 border-indigo-500">
-                      <span className="text-sm font-bold text-indigo-600">1</span>
+                  <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mb-3 border border-gray-200 relative">
+                    <Image src="/icons/line/krok-czat.png" alt="" width={44} height={44} className="w-11 h-11 mix-blend-multiply" />
+                    <div className="absolute -top-1 -right-1 w-7 h-7 bg-gray-900 rounded-full flex items-center justify-center">
+                      <span className="text-sm font-bold text-white">1</span>
                     </div>
                   </div>
 
@@ -1287,8 +1287,7 @@ export default function HomePage() {
                   </p>
                 </div>
 
-                <div className="flex items-center justify-center gap-1.5 bg-indigo-50 text-indigo-700 px-3 rounded-full text-xs font-medium h-9 mt-4">
-                  <Sparkles className="w-3 h-3 flex-shrink-0" />
+                <div className="flex items-center justify-center bg-gray-50 text-gray-700 px-3 rounded-full text-xs font-medium h-9 mt-4">
                   <span className="whitespace-nowrap">Natychmiastowa pomoc</span>
                 </div>
               </div>
@@ -1298,10 +1297,10 @@ export default function HomePage() {
             <div className="relative">
               <div className="bg-white rounded-xl p-4 shadow-xl border border-gray-100 hover:shadow-2xl transition-all hover:-translate-y-1 h-full flex flex-col justify-between">
                 <div className="flex flex-col items-center text-center">
-                  <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mb-3 shadow-lg relative">
-                    <Package className="w-8 h-8 text-white" />
-                    <div className="absolute -top-1 -right-1 w-7 h-7 bg-white rounded-full flex items-center justify-center shadow-md border-2 border-blue-500">
-                      <span className="text-sm font-bold text-blue-600">2</span>
+                  <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mb-3 border border-gray-200 relative">
+                    <Image src="/icons/line/krok-wysylka.png" alt="" width={44} height={44} className="w-11 h-11 mix-blend-multiply" />
+                    <div className="absolute -top-1 -right-1 w-7 h-7 bg-gray-900 rounded-full flex items-center justify-center">
+                      <span className="text-sm font-bold text-white">2</span>
                     </div>
                   </div>
 
@@ -1314,8 +1313,7 @@ export default function HomePage() {
                   </p>
                 </div>
 
-                <div className="flex items-center justify-center gap-1.5 bg-blue-50 text-blue-700 px-3 rounded-full text-xs font-medium h-9 mt-4">
-                  <Clock className="w-3 h-3 flex-shrink-0" />
+                <div className="flex items-center justify-center bg-gray-50 text-gray-700 px-3 rounded-full text-xs font-medium h-9 mt-4">
                   <span className="whitespace-nowrap">Odbiór w 24h</span>
                 </div>
               </div>
@@ -1325,10 +1323,10 @@ export default function HomePage() {
             <div className="relative">
               <div className="bg-white rounded-xl p-4 shadow-xl border border-gray-100 hover:shadow-2xl transition-all hover:-translate-y-1 h-full flex flex-col justify-between">
                 <div className="flex flex-col items-center text-center">
-                  <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center mb-3 shadow-lg relative">
-                    <Wrench className="w-8 h-8 text-white" />
-                    <div className="absolute -top-1 -right-1 w-7 h-7 bg-white rounded-full flex items-center justify-center shadow-md border-2 border-purple-500">
-                      <span className="text-sm font-bold text-purple-600">3</span>
+                  <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mb-3 border border-gray-200 relative">
+                    <Image src="/icons/line/krok-diagnoza.png" alt="" width={44} height={44} className="w-11 h-11 mix-blend-multiply" />
+                    <div className="absolute -top-1 -right-1 w-7 h-7 bg-gray-900 rounded-full flex items-center justify-center">
+                      <span className="text-sm font-bold text-white">3</span>
                     </div>
                   </div>
 
@@ -1340,7 +1338,7 @@ export default function HomePage() {
                     Nasi technicy przeprowadzą dokładną diagnostykę i prześlą szczegółową wycenę. Otrzymasz dostęp do{' '}
                     <button 
                       onClick={() => setShowPanelModal(true)}
-                      className="inline-flex items-center gap-0.5 font-semibold text-purple-600 hover:text-purple-700 transition-colors"
+                      className="inline-flex items-center gap-0.5 font-semibold text-gray-900 hover:text-gray-700 transition-colors"
                     >
                       Panelu klienta
                       <HelpCircle className="w-3.5 h-3.5" />
@@ -1348,8 +1346,7 @@ export default function HomePage() {
                   </p>
                 </div>
 
-                <div className="flex items-center justify-center gap-1.5 bg-purple-50 text-purple-700 px-3 rounded-full text-xs font-medium h-9 mt-4">
-                  <Eye className="w-3 h-3 flex-shrink-0" />
+                <div className="flex items-center justify-center bg-gray-50 text-gray-700 px-3 rounded-full text-xs font-medium h-9 mt-4">
                   <span className="whitespace-nowrap">Panel klienta 24/7</span>
                 </div>
               </div>
@@ -1359,10 +1356,10 @@ export default function HomePage() {
             <div className="relative">
               <div className="bg-white rounded-xl p-4 shadow-xl border border-gray-100 hover:shadow-2xl transition-all hover:-translate-y-1 h-full flex flex-col justify-between">
                 <div className="flex flex-col items-center text-center">
-                  <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center mb-3 shadow-lg relative">
-                    <CheckCircle2 className="w-8 h-8 text-white" />
-                    <div className="absolute -top-1 -right-1 w-7 h-7 bg-white rounded-full flex items-center justify-center shadow-md border-2 border-green-500">
-                      <span className="text-sm font-bold text-green-600">4</span>
+                  <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mb-3 border border-gray-200 relative">
+                    <Image src="/icons/line/krok-naprawa.png" alt="" width={44} height={44} className="w-11 h-11 mix-blend-multiply" />
+                    <div className="absolute -top-1 -right-1 w-7 h-7 bg-gray-900 rounded-full flex items-center justify-center">
+                      <span className="text-sm font-bold text-white">4</span>
                     </div>
                   </div>
 
@@ -1375,8 +1372,7 @@ export default function HomePage() {
                   </p>
                 </div>
 
-                <div className="flex items-center justify-center gap-1.5 bg-green-50 text-green-700 px-3 rounded-full text-xs font-medium h-9 mt-4">
-                  <TrendingUp className="w-3 h-3 flex-shrink-0" />
+                <div className="flex items-center justify-center bg-gray-50 text-gray-700 px-3 rounded-full text-xs font-medium h-9 mt-4">
                   <span className="whitespace-nowrap">Naprawa 2-5 dni</span>
                 </div>
               </div>
