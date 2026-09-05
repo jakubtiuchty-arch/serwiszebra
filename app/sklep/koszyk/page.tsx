@@ -6,7 +6,7 @@ import Link from 'next/link'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import { useCartStore } from '@/lib/cart-store'
-import { getProductFallbackImage } from '@/lib/product-images'
+import { zdjecieWKoszyku } from '@/lib/product-images'
 import {
   Trash2,
   Plus,
@@ -133,9 +133,9 @@ export default function KoszykPage() {
                   <div className="flex gap-3 sm:gap-4">
                     {/* Zdjęcie */}
                     <div className="w-20 h-20 sm:w-28 sm:h-28 bg-gray-50 rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0 overflow-hidden">
-                      {getProductFallbackImage(item.product_type, item.device_model, item.resolution_dpi, item.sku) ? (
+                      {zdjecieWKoszyku(item) ? (
                         <Image
-                          src={getProductFallbackImage(item.product_type, item.device_model, item.resolution_dpi, item.sku)!}
+                          src={zdjecieWKoszyku(item)!}
                           alt={item.name}
                           width={100}
                           height={100}
@@ -149,7 +149,13 @@ export default function KoszykPage() {
                     {/* Info */}
                     <div className="flex-1 min-w-0">
                       <Link
-                        href={item.is_service ? '/kontrakt-serwisowy' : `/sklep/${item.slug}`}
+                        href={
+                          item.is_service
+                            ? '/kontrakt-serwisowy'
+                            : item.product_type === 'drukarka'
+                              ? `/sklep/drukarki-etykiet/${item.slug}${item.variant_pn ? `?pn=${encodeURIComponent(item.variant_pn)}` : ''}`
+                              : `/sklep/${item.slug}`
+                        }
                         className="text-xs sm:text-sm font-semibold text-gray-900 hover:text-blue-600 line-clamp-2 mb-0.5 sm:mb-1"
                       >
                         {item.name}

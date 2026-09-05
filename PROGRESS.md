@@ -1268,6 +1268,18 @@ Fraza „biurkowe drukarki etykiet Zebra" jest głównym wejściem do tej katego
 - PO DEPLOYU: `is_active:true`, sprawdzenie produkcji, `/seo-audit`.
 - Wdrożone 06:42: deploy potwierdzony, produkt włączony, karta i klasa 200 z 10 cenami, klasa pokazuje ZT421/ZT510/ZT610.
 
+## 2026-09-05 — koszyk: zdjęcie i link drukarki
+- Zgłoszenie: pozycja ZD421t w koszyku bez zdjęcia (placeholder). Przyczyna: `app/sklep/koszyk/page.tsx` brał obrazek wyłącznie z `getProductFallbackImage` (części), ignorując pole `image` pozycji, które tabela wariantów ustawia na `zdjecieGlowne`. Strona zamówienia używała już `zdjecieWKoszyku()` — koszyk nie.
+- Poprawka: koszyk przez `zdjecieWKoszyku(item)`; link pozycji drukarki do `/sklep/drukarki-etykiet/<slug>?pn=<PN>` (był `/sklep/<slug>` → 404).
+- Test Playwright na buildzie: dodanie ZD4A042-30EM00EZ z karty → store ma `image=/sklep_photo/urzadzenia/zd421t_1.webp`, koszyk renderuje obrazek i poprawny link.
+
+## 2026-09-05 — piksel ChatGPT Ads (commit z kopii na Desktopie)
+- Użytkownik wskazał commit `ca91fea` „do pushowania" — istniał tylko w `~/Desktop/serwiszebra` (przestarzały backup, baza z 11.06.2026, 3 miesiące za głównym repo). Push stamtąd byłby niemożliwy bez force i skasowania historii.
+- Przeniesione cherry-pickiem (`git fetch <ścieżka> HEAD` + `cherry-pick --no-commit FETCH_HEAD`; fetch po samym hashu nie działa) do głównego repo jako `e9a4cbf` z autorem oryginału. Konflikty tylko w sąsiednich importach `app/layout.tsx` i `RepairForm.tsx`.
+- Co robi: `lib/openai-pixel.ts` (pixelId `GvsvuB7RDLHWsETaF7VJT8`, SDK `bzrcdn.openai.com/sdk/oaiq.min.js`) ładuje się dopiero po zgodzie marketingowej z `cookie-consent` (≤365 dni); `page_viewed` poza `/admin` i `/panel`; `lead_created` z `event_id repair_<id>` po wysłaniu formularza. Baner cookies emituje `cookie-consent-changed`. Wpis w polityce prywatności.
+- GitHub przez SSH (22 i 443) był przez ~15 min nieosiągalny (timeout), HTTPS działał; po chwili push przeszedł.
+- Zweryfikowane na produkcji (Playwright): bez zgody 0 żądań do openai.com; po zgodzie marketingowej ładuje się `oaiq.min.js`, konfiguracja piksela i 2 zdarzenia do `bzr.openai.com/v1/sdk/events` (pid `GvsvuB7RDLHWsETaF7VJT8`); polityka prywatności ma wpis o pikselu.
+
 ## 2026-09-04 — indeksacja kart drukarek: linkowanie, lastmod, tytuły, IndexNow
 - **Diagnoza**: żadna z 26 kart ani 4 stron klas nie jest w Google (site:, Ahrefs 0 fraz). Technicznie czysto (200, index/follow, canonical, robots, sitemap). Przyczyny: karty miały 0–1 linków wewnętrznych (strona główna 0, hub tylko klasy, blog 0, stopka → takma), `/instrukcje/[model]` rankują na frazy modelowe (zd421t poz. 9) i konkurują z kartami, sitemap dawał `lastmod` = „teraz" dla 648 adresów. Baner lejka na instrukcjach linkuje dofollow do kart takmy.
 - Diagnoza użytkownika (7 punktów) zweryfikowana: 5 potwierdzonych, „ZT111 i ZT620" za wąsko (brak wszystkich 30), „rozbudować treści" nie jest przyczyną (karty 3700–4500 słów).
