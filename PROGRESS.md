@@ -1268,6 +1268,13 @@ Fraza „biurkowe drukarki etykiet Zebra" jest głównym wejściem do tej katego
 - PO DEPLOYU: `is_active:true`, sprawdzenie produkcji, `/seo-audit`.
 - Wdrożone 06:42: deploy potwierdzony, produkt włączony, karta i klasa 200 z 10 cenami, klasa pokazuje ZT421/ZT510/ZT610.
 
+## 2026-09-06 — opinie z Google na stronie głównej (przed stopką)
+- Wizytówka serwisu ≠ wizytówka takmy: link z crona `g.page/r/CWWwiewE2ri8EAE` prowadzi do „TAKMA - Autoryzowany Serwis Zebra", place id `ChIJwy-zAVnpD0cRZbCJ7ATauLw` (4,7; 13 opinii). Takma ma osobną „TAKMA - Centrum Systemów Mobilnych" (`ChIJ2fZ3X3_pD0cRz2tBiCg5N_c`, 3,7; 13).
+- `GOOGLE_API_KEY` serwiszebry nie ma włączonego Places API (New) w swoim projekcie GCP → użyty klucz `GOOGLE_PLACES_API_KEY` z takmy (ten sam limit). Zmienne `GOOGLE_PLACES_API_KEY` + `GBP_PLACE_ID` w `.env.local` i na Vercelu (Production; preview dopinane osobno).
+- `lib/google-reviews.ts`: Places API, pola `displayName,rating,userRatingCount,googleMapsUri,reviews`, `next.revalidate` 6 h, filtr: tylko opinie z treścią i ≥4★; null przy błędzie → sekcja się nie renderuje. **Limit Places API: max 5 opinii** — pełna lista dopiero przez Business Profile API (OAuth, Faza 2 z takmy).
+- `components/OpinieGoogle.tsx`: ocena 4,7 + gwiazdki (znak ★ w limonce, tekst nie glif), „13 opinii w Google", siatka 3 kolumn, zdjęcia autorów przez `<img>` (lh3.googleusercontent.com, bez remotePatterns), przyciski „Wszystkie opinie w Google" i „Dodaj swoją opinię". **Bez schematu Review/AggregateRating** — Google nie daje gwiazdek za opinie o sobie (self-serving), niezgodny znacznik szkodzi.
+- Refaktor: `app/page.tsx` ('use client', 1800 linii) → `components/HomePage.tsx`; nowy `app/page.tsx` serwerowy (`revalidate` 6 h) pobiera opinie i przekazuje propsem. Sekcja jest w HTML z serwera (grep OK).
+
 ## 2026-09-06 — „Dlaczego my?" na stronie głównej: przebudowa wizualna (teksty bez zmian)
 - Dwie ilustracje `gpt_image_2` 16:9 2k z referencjami (`media_upload` + `media_confirm`): styl `public/klasy/biurkowe.jpg`, urządzenie `zd421t_1.webp` spłaszczone na biel. „Zwykły serwis" — szarości, telefon, czekanie, papier; „Nasz serwis" — pełny kolor, laptop z paskiem postępu, drukarka z etykietą, kurier w drzwiach. Pliki `public/dlaczego/{zwykly,nasz}-serwis.jpg` (1280 px, q82).
 - Wideo na hover prawej karty: `gemini_omni_flash_1_1`, `mode: image-to-video`, 6 s, start_image = job ilustracji; pierwsza próba zwróciła rekomendację presetu „IN THE DARK" → powtórka z `declined_preset_id`. Bez audio, crf 28, `public/dlaczego/nasz-serwis.mp4`. Wzorzec jak `KafelekKlasy` (obraz pod spodem, wideo kryciem, `preload="none"`).
