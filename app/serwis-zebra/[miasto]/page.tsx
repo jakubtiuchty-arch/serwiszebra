@@ -3,6 +3,8 @@ import Link from 'next/link'
 import Image from 'next/image'
 import Header from '@/components/Header'
 import HowItWorksCity from '@/components/HowItWorksCity'
+import OpinieGoogle from '@/components/OpinieGoogle'
+import { pobierzOpinieGoogle } from '@/lib/google-reviews'
 import { 
   MapPin, 
   Truck, 
@@ -353,7 +355,9 @@ function getFAQ(cityName: string, cityNameLocative: string, region: string) {
   ]
 }
 
-export default function CityServicePage({ params }: { params: { miasto: string } }) {
+export default async function CityServicePage({ params }: { params: { miasto: string } }) {
+  // Opinie z wizytówki Google — ten sam pas, co na stronie głównej (cache 6 h)
+  const opinie = await pobierzOpinieGoogle()
   const city = citiesData[params.miasto]
   
   if (!city) {
@@ -873,6 +877,9 @@ export default function CityServicePage({ params }: { params: { miasto: string }
             </div>
           </div>
         </section>
+
+        {/* Opinie z Google — przed linkami stopki */}
+        <OpinieGoogle dane={opinie} />
 
         {/* Footer link */}
         <section className="py-6 bg-white border-t border-gray-100">
