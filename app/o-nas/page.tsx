@@ -107,57 +107,69 @@ export default function AboutPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
-      {/* Hero w ciemnym pasie — jak hub sklepu i strony instrukcji */}
-      <section className="bg-gradient-to-br from-gray-800 via-gray-900 to-gray-900 text-white">
-        <div className="mx-auto grid max-w-6xl items-center gap-8 px-4 py-12 sm:px-6 sm:py-16 lg:grid-cols-[1.1fr_1fr] lg:gap-12">
-          <div>
-          <nav className="mb-4 text-xs text-gray-400" aria-label="Okruszki">
-            <Link href="/" className="hover:text-white">
-              Strona główna
-            </Link>
-            <span className="mx-1.5">/</span>
-            <span className="text-gray-300">O nas</span>
-          </nav>
+      {/* Hero — ilustracja na całą szerokość pasa (same urządzenia 1:1 z renderów,
+          bez ludzi), tekst na ciemnej lewej połowie; limonkowa linia jak na hubie */}
+      <section className="relative overflow-hidden bg-gray-900 text-white">
+        {/* Desktop: ilustracja pod całym pasem, przyciemniona po lewej pod tekst */}
+        <div className="absolute inset-0 hidden lg:block" aria-hidden="true">
+          <Image
+            src="/o-nas/hero-urzadzenia.jpg"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-right"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-900/85 to-gray-900/10" />
+        </div>
 
-          <h1 className="max-w-3xl text-3xl font-bold leading-tight sm:text-4xl md:text-5xl">
-            Naprawiamy Zebrę, odkąd nazywała się jeszcze Psion
-          </h1>
-          <p className="mt-5 max-w-2xl text-base leading-relaxed text-gray-300 sm:text-lg">
-            Zaczynaliśmy w 1999 roku od terminali Psion. Przez zmiany Psion → Symbol → Motorola → Zebra
-            nie zmieniło się jedno: ten sam zespół, ten sam warsztat i ta sama wiedza o urządzeniach,
-            na których pracuje Twoja firma.
-          </p>
-          <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-            <Link
-              href="/#formularz"
-              className="inline-flex min-h-[48px] items-center justify-center rounded-lg bg-[#A8F000] px-6 font-semibold text-gray-900 transition hover:bg-[#96D800]"
-            >
-              Zgłoś naprawę
-            </Link>
-            <Link
-              href="/serwis-drukarek-zebra"
-              className="inline-flex min-h-[48px] items-center justify-center rounded-lg border border-white/30 px-6 font-semibold text-white transition hover:border-white hover:bg-white/10"
-            >
-              Zobacz zakres serwisu
-            </Link>
-          </div>
+        <div className="relative mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16 lg:py-28">
+          <div className="max-w-2xl">
+            <nav className="mb-4 text-xs text-gray-400" aria-label="Okruszki">
+              <Link href="/" className="hover:text-white">
+                Strona główna
+              </Link>
+              <span className="mx-1.5">/</span>
+              <span className="text-gray-300">O nas</span>
+            </nav>
+
+            <h1 className="text-3xl font-bold leading-tight sm:text-4xl md:text-5xl">
+              Naprawiamy Zebrę, odkąd nazywała się jeszcze Psion
+            </h1>
+            <p className="mt-5 max-w-xl text-base leading-relaxed text-gray-300 sm:text-lg">
+              Zaczynaliśmy w 1999 roku od terminali Psion. Przez zmiany Psion → Symbol → Motorola → Zebra
+              nie zmieniło się jedno: ten sam zespół, ten sam warsztat i ta sama wiedza o urządzeniach,
+              na których pracuje Twoja firma.
+            </p>
+            <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+              <Link
+                href="/#formularz"
+                className="inline-flex min-h-[48px] items-center justify-center rounded-lg bg-[#A8F000] px-6 font-semibold text-gray-900 transition hover:bg-[#96D800]"
+              >
+                Zgłoś naprawę
+              </Link>
+              <Link
+                href="/serwis-drukarek-zebra"
+                className="inline-flex min-h-[48px] items-center justify-center rounded-lg border border-white/30 px-6 font-semibold text-white transition hover:border-white hover:bg-white/10"
+              >
+                Zobacz zakres serwisu
+              </Link>
+            </div>
           </div>
 
-          {/* Ilustracja w stylu kafelków sklepu — technik przy otwartej ZD421t
-              (drukarka 1:1 z renderu). Tło ilustracji jest granatowe, więc
-              wtapia się w pas bez ramki. */}
-          <div className="relative aspect-[16/9] overflow-hidden rounded-xl">
+          {/* Telefon i tablet: ta sama ilustracja pod tekstem, w całości widoczna */}
+          <div className="relative mt-8 aspect-[16/9] overflow-hidden rounded-xl lg:hidden">
             <Image
-              src="/o-nas/hero-warsztat.jpg"
-              alt="Technik serwisu przy otwartej drukarce Zebra ZD421t na stanowisku z lupą i stacją lutowniczą"
+              src="/o-nas/hero-urzadzenia.jpg"
+              alt="Drukarki Zebra ZD421t, ZT411 i ZQ521 na stanowisku serwisowym"
               fill
               priority
-              sizes="(max-width: 1024px) 100vw, 560px"
+              sizes="100vw"
               className="object-cover"
             />
           </div>
         </div>
-        <div className="h-1 bg-[#A8F000]" />
+        <div className="relative h-1 bg-[#A8F000]" />
       </section>
 
       {/* Statystyki — czysty pasek */}
