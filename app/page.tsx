@@ -1377,8 +1377,11 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* DLACZEGO MY - PORÓWNANIE */}
-      <section className="py-14 px-3 sm:px-4 lg:px-6 bg-gradient-to-br from-blue-50 via-indigo-50/50 to-purple-50">
+      {/* DLACZEGO MY - PORÓWNANIE. Przebudowa wizualna 6.09.2026 (teksty bez zmian):
+          dwie ilustracje z Higgsfielda w stylu kafelków sklepu — zwykły serwis
+          w szarościach, nasz w pełnym kolorze z animacją na hover (jak kafelki
+          klas). Znaczniki listy z zestawu ikon, nie z biblioteki. */}
+      <section className="py-14 px-3 sm:px-4 lg:px-6 bg-white border-t border-gray-100">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-10">
             <h2 className="text-2xl md:text-3xl font-semibold text-gray-900 mb-2">
@@ -1391,93 +1394,75 @@ export default function HomePage() {
 
           <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
             {/* Zwykły serwis */}
-            <div className="relative">
-              <div className="absolute -top-3 left-6 z-10">
-                <span className="inline-block px-4 py-1.5 bg-gray-200 rounded-full text-xs font-semibold text-gray-600 shadow-sm">
-                  Zwykły serwis
-                </span>
+            <div className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
+              <div className="relative aspect-[16/9] bg-gray-100">
+                <Image
+                  src="/dlaczego/zwykly-serwis.jpg"
+                  alt="Zwykły serwis: telefon, czekanie i papierowe formularze"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover"
+                />
               </div>
-              <div className="bg-white rounded-2xl p-6 pt-8 border border-gray-100 shadow-xl h-full">
-                <ul className="space-y-4">
-                  <li className="flex items-start gap-3">
-                    <div className="w-6 h-6 rounded-full bg-red-100 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <X className="w-3.5 h-3.5 text-red-500" />
-                    </div>
-                    <span className="text-sm text-gray-600">Dzwonisz, czekasz na linii, tłumaczysz problem</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <div className="w-6 h-6 rounded-full bg-red-100 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <X className="w-3.5 h-3.5 text-red-500" />
-                    </div>
-                    <span className="text-sm text-gray-600">Sam organizujesz wysyłkę do serwisu</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <div className="w-6 h-6 rounded-full bg-red-100 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <X className="w-3.5 h-3.5 text-red-500" />
-                    </div>
-                    <span className="text-sm text-gray-600">Nie wiesz, co się dzieje z naprawą</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <div className="w-6 h-6 rounded-full bg-red-100 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <X className="w-3.5 h-3.5 text-red-500" />
-                    </div>
-                    <span className="text-sm text-gray-600">Wycena przez telefon lub mail</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <div className="w-6 h-6 rounded-full bg-red-100 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <X className="w-3.5 h-3.5 text-red-500" />
-                    </div>
-                    <span className="text-sm text-gray-600">Płatność gotówką lub przelewem tradycyjnym</span>
-                  </li>
+              <div className="p-6">
+                <h3 className="text-base font-semibold text-gray-500 mb-4">Zwykły serwis</h3>
+                <ul className="space-y-3.5">
+                  {[
+                    'Dzwonisz, czekasz na linii, tłumaczysz problem',
+                    'Sam organizujesz wysyłkę do serwisu',
+                    'Nie wiesz, co się dzieje z naprawą',
+                    'Wycena przez telefon lub mail',
+                    'Płatność gotówką lub przelewem tradycyjnym',
+                  ].map((t) => (
+                    <li key={t} className="flex items-start gap-3">
+                      <Image src="/icons/line/znak-nie.png" alt="" width={20} height={20} className="mt-0.5 h-5 w-5 flex-shrink-0 mix-blend-multiply opacity-60" />
+                      <span className="text-sm text-gray-600">{t}</span>
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>
 
             {/* Nasz serwis */}
-            <div className="relative">
-              <div className="absolute -top-3 left-6 z-10">
-                <span className="inline-block px-4 py-1.5 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full text-xs font-semibold text-white shadow-lg shadow-blue-500/25">
-                  Nasz serwis
-                </span>
+            <div
+              className="group overflow-hidden rounded-xl border border-gray-900 bg-white shadow-md"
+              onMouseEnter={(e) => { const v = e.currentTarget.querySelector('video'); if (v) { v.currentTime = 0; void v.play().catch(() => {}) } }}
+              onMouseLeave={(e) => { const v = e.currentTarget.querySelector('video'); if (v) { v.pause(); v.currentTime = 0 } }}
+            >
+              <div className="relative aspect-[16/9] bg-gray-100">
+                <Image
+                  src="/dlaczego/nasz-serwis.jpg"
+                  alt="Nasz serwis: status naprawy online, kurier pod drzwi, drukarka po naprawie"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover"
+                />
+                <video
+                  muted
+                  playsInline
+                  preload="none"
+                  src="/dlaczego/nasz-serwis.mp4"
+                  className="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-200 group-hover:opacity-100"
+                />
               </div>
-              <div className="relative bg-white rounded-2xl p-6 pt-8 border border-blue-200 shadow-xl h-full overflow-hidden">
-                {/* Subtle pattern */}
-                <div className="absolute inset-0 opacity-[0.03]" style={{
-                  backgroundImage: `radial-gradient(circle, #3b82f6 1px, transparent 1px)`,
-                  backgroundSize: '20px 20px'
-                }} />
-                
-                <ul className="space-y-4 relative">
-                  <li className="flex items-start gap-3">
-                    <div className="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm">
-                      <CheckCircle2 className="w-4 h-4 text-green-600" />
-                    </div>
-                    <span className="text-sm text-gray-700"><strong className="text-gray-900">Diagnoza AI 24/7</strong> — pomoc o każdej porze</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <div className="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm">
-                      <CheckCircle2 className="w-4 h-4 text-green-600" />
-                    </div>
-                    <span className="text-sm text-gray-700"><strong className="text-gray-900">Kurier door-to-door</strong> — nie ruszasz się z biura</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <div className="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm">
-                      <CheckCircle2 className="w-4 h-4 text-green-600" />
-                    </div>
-                    <span className="text-sm text-gray-700"><strong className="text-gray-900">Panel Klienta</strong> — status naprawy na żywo</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <div className="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm">
-                      <CheckCircle2 className="w-4 h-4 text-green-600" />
-                    </div>
-                    <span className="text-sm text-gray-700"><strong className="text-gray-900">Czat z serwisantem</strong> — na karcie naprawy</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <div className="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm">
-                      <CheckCircle2 className="w-4 h-4 text-green-600" />
-                    </div>
-                    <span className="text-sm text-gray-700"><strong className="text-gray-900">Płatność online</strong> — BLIK, karta, Apple Pay</span>
-                  </li>
+              <div className="p-6">
+                <h3 className="text-base font-semibold text-gray-900 mb-4">
+                  <span className="mr-2 inline-block h-2.5 w-2.5 rounded-full bg-[#A8F000] align-middle" />
+                  Nasz serwis
+                </h3>
+                <ul className="space-y-3.5">
+                  {[
+                    ['Diagnoza AI 24/7', 'pomoc o każdej porze'],
+                    ['Kurier door-to-door', 'nie ruszasz się z biura'],
+                    ['Panel Klienta', 'status naprawy na żywo'],
+                    ['Czat z serwisantem', 'na karcie naprawy'],
+                    ['Płatność online', 'BLIK, karta, Apple Pay'],
+                  ].map(([b, t]) => (
+                    <li key={b} className="flex items-start gap-3">
+                      <Image src="/icons/line/znak-tak.png" alt="" width={20} height={20} className="mt-0.5 h-5 w-5 flex-shrink-0 mix-blend-multiply" />
+                      <span className="text-sm text-gray-700"><strong className="text-gray-900">{b}</strong> — {t}</span>
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>
