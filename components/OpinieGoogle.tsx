@@ -8,9 +8,9 @@ import { LINK_DODAJ_OPINIE, type OpinieGoogleDane } from '@/lib/google-reviews'
  * Dane z Places API (max 5 opinii, ocena i liczba wszystkich) — patrz
  * lib/google-reviews.ts. Bez danych sekcja nie renderuje się wcale.
  *
- * Karta z oceną + karuzela opinii (scroll-snap, auto-przewijanie co 5 s,
- * pauza po najechaniu, strzałki i kropki). Na telefonie jedna opinia w kadrze,
- * na desktopie trzy.
+ * Kompaktowy pas (użytkownik: pełna sekcja była za duża na 13 opinii):
+ * po lewej ocena z logo i linkami, po prawej karuzela z JEDNĄ opinią naraz
+ * (scroll-snap, auto co 5 s, pauza po najechaniu, strzałki i kropki).
  *
  * Celowo BEZ schematu Review/AggregateRating: Google nie pokazuje gwiazdek
  * dla opinii, które firma sama prezentuje o sobie (self-serving reviews).
@@ -100,87 +100,94 @@ export default function OpinieGoogle({ dane }: { dane: OpinieGoogleDane | null }
   if (!dane || liczba === 0) return null
 
   return (
-    <section id="opinie" className="py-14 px-3 sm:px-4 lg:px-6 bg-white border-t border-gray-100">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-8">
-          <h2 className="text-2xl md:text-3xl font-semibold text-gray-900 mb-2">
-            Opinie klientów z Google
-          </h2>
-          <p className="text-sm text-gray-600 max-w-xl mx-auto">
-            Co piszą firmy, które oddały nam sprzęt do naprawy
+    <section id="opinie" className="py-8 px-3 sm:px-4 lg:px-6 bg-white border-t border-gray-100">
+      <div className="mx-auto grid max-w-6xl items-center gap-6 md:grid-cols-[minmax(0,17rem)_1fr] md:gap-10">
+        {/* Ocena + linki */}
+        <div>
+          <h2 className="text-base font-semibold text-gray-900">Opinie klientów z Google</h2>
+          <div className="mt-2 flex items-center gap-3">
+            <LogoGoogle className="h-7 w-7 flex-shrink-0" />
+            <span className="text-3xl font-bold leading-none text-gray-900">{OCENA_PL.format(dane.ocena)}</span>
+            <span className="flex flex-col">
+              <Gwiazdki ocena={dane.ocena} rozmiar="text-base" />
+              <span className="text-xs text-gray-600">{liczbaOpinii(dane.liczba)} w Google</span>
+            </span>
+          </div>
+          <p className="mt-2 text-xs text-gray-600">
+            {dane.mapsUrl && (
+              <>
+                <a href={dane.mapsUrl} target="_blank" rel="noopener noreferrer" className="font-medium text-gray-900 underline underline-offset-2">
+                  Wszystkie opinie
+                </a>
+                <span className="mx-1.5 text-gray-400">&middot;</span>
+              </>
+            )}
+            <a href={LINK_DODAJ_OPINIE} target="_blank" rel="noopener noreferrer" className="font-medium text-gray-900 underline underline-offset-2">
+              Dodaj swoją opinię
+            </a>
           </p>
         </div>
 
-        {/* Karta z oceną */}
-        <div className="mx-auto mb-8 flex max-w-lg flex-col items-center gap-3 rounded-xl border border-gray-200 bg-white px-6 py-5 text-center sm:flex-row sm:justify-center sm:gap-5 sm:text-left">
-          <LogoGoogle className="h-10 w-10 flex-shrink-0" />
-          <span className="text-5xl font-bold leading-none text-gray-900">{OCENA_PL.format(dane.ocena)}</span>
-          <span className="flex flex-col items-center gap-1 sm:items-start">
-            <Gwiazdki ocena={dane.ocena} rozmiar="text-2xl" />
-            <span className="text-sm text-gray-600">
-              {liczbaOpinii(dane.liczba)} w Google &middot; {dane.nazwa}
-            </span>
-          </span>
-        </div>
-
-        {/* Karuzela */}
+        {/* Karuzela — jedna opinia naraz */}
         <div
-          className="relative"
+          className="relative min-w-0"
           onMouseEnter={() => setPauza(true)}
           onMouseLeave={() => setPauza(false)}
           onTouchStart={() => setPauza(true)}
         >
           <ul
             ref={tor}
-            className="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            className="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
             aria-label="Opinie klientów"
           >
             {dane.opinie.map((o) => (
               <li
                 key={`${o.autor}-${o.data}`}
-                className="flex w-full flex-shrink-0 snap-start flex-col rounded-xl border border-gray-200 bg-white p-5 sm:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.67rem)]"
+                className="w-full flex-shrink-0 snap-start rounded-xl border border-gray-200 bg-white px-4 py-3"
               >
-                <div className="mb-3 flex items-center gap-3">
+                <div className="flex items-center gap-3">
                   {o.zdjecie ? (
                     // Zdjęcie profilowe z Google — zwykły <img>, bez remotePatterns
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
                       src={o.zdjecie}
                       alt=""
-                      width={40}
-                      height={40}
+                      width={32}
+                      height={32}
                       loading="lazy"
                       referrerPolicy="no-referrer"
-                      className="h-10 w-10 flex-shrink-0 rounded-full bg-gray-100 object-cover"
+                      className="h-8 w-8 flex-shrink-0 rounded-full bg-gray-100 object-cover"
                     />
                   ) : (
-                    <span className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-gray-900 text-sm font-semibold text-white">
+                    <span className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-gray-900 text-xs font-semibold text-white">
                       {o.autor.trim().charAt(0).toUpperCase()}
                     </span>
                   )}
                   <div className="min-w-0 flex-1">
-                    <p className="truncate text-sm font-semibold text-gray-900">{o.autor}</p>
-                    <p className="text-xs text-gray-500">{o.kiedy}</p>
+                    <p className="flex flex-wrap items-baseline gap-x-2">
+                      <span className="truncate text-sm font-semibold text-gray-900">{o.autor}</span>
+                      <Gwiazdki ocena={o.ocena} rozmiar="text-xs" />
+                      <span className="text-xs text-gray-500">{o.kiedy}</span>
+                    </p>
+                    <p className="mt-0.5 line-clamp-2 text-sm leading-snug text-gray-700">{o.tresc}</p>
                   </div>
-                  <LogoGoogle className="h-5 w-5 flex-shrink-0 opacity-80" />
+                  <LogoGoogle className="hidden h-4 w-4 flex-shrink-0 opacity-80 sm:block" />
                 </div>
-                <Gwiazdki ocena={o.ocena} rozmiar="text-sm" />
-                <p className="mt-2 text-sm leading-relaxed text-gray-700">{o.tresc}</p>
               </li>
             ))}
           </ul>
 
           {liczba > 1 && (
-            <div className="mt-4 flex items-center justify-center gap-4">
+            <div className="mt-2 flex items-center justify-center gap-3">
               <button
                 type="button"
                 onClick={() => przewin(aktywna - 1)}
                 aria-label="Poprzednia opinia"
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-gray-300 text-gray-700 transition hover:border-gray-900 hover:text-gray-900"
+                className="flex h-7 w-7 items-center justify-center rounded-full border border-gray-300 text-gray-700 transition hover:border-gray-900 hover:text-gray-900"
               >
                 <span aria-hidden="true">&lsaquo;</span>
               </button>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1.5">
                 {dane.opinie.map((o, i) => (
                   <button
                     key={`${o.autor}-${o.data}-kropka`}
@@ -188,8 +195,8 @@ export default function OpinieGoogle({ dane }: { dane: OpinieGoogleDane | null }
                     onClick={() => przewin(i)}
                     aria-label={`Opinia ${i + 1} z ${liczba}`}
                     aria-current={i === aktywna}
-                    className={`h-2.5 rounded-full transition-all ${
-                      i === aktywna ? 'w-6 bg-gray-900' : 'w-2.5 bg-gray-300 hover:bg-gray-400'
+                    className={`h-2 rounded-full transition-all ${
+                      i === aktywna ? 'w-5 bg-gray-900' : 'w-2 bg-gray-300 hover:bg-gray-400'
                     }`}
                   />
                 ))}
@@ -198,34 +205,12 @@ export default function OpinieGoogle({ dane }: { dane: OpinieGoogleDane | null }
                 type="button"
                 onClick={() => przewin(aktywna + 1)}
                 aria-label="Następna opinia"
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-gray-300 text-gray-700 transition hover:border-gray-900 hover:text-gray-900"
+                className="flex h-7 w-7 items-center justify-center rounded-full border border-gray-300 text-gray-700 transition hover:border-gray-900 hover:text-gray-900"
               >
                 <span aria-hidden="true">&rsaquo;</span>
               </button>
             </div>
           )}
-        </div>
-
-        <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          {dane.mapsUrl && (
-            <a
-              href={dane.mapsUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-lg border border-gray-300 px-5 text-sm font-semibold text-gray-900 transition hover:border-gray-900"
-            >
-              <LogoGoogle className="h-4 w-4" />
-              Wszystkie opinie w Google
-            </a>
-          )}
-          <a
-            href={LINK_DODAJ_OPINIE}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex min-h-[44px] items-center justify-center rounded-lg bg-[#A8F000] px-5 text-sm font-semibold text-gray-900 transition hover:bg-[#96D800]"
-          >
-            Dodaj swoją opinię
-          </a>
         </div>
       </div>
     </section>
