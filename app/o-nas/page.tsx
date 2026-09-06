@@ -159,6 +159,16 @@ export default function AboutPage() {
                 Zobacz zakres serwisu
               </Link>
             </div>
+
+            {/* Liczby — jeden dyskretny rząd w hero, bez osobnej sekcji */}
+            <dl className="mt-8 grid grid-cols-2 gap-y-4 border-t border-white/15 pt-6 sm:flex sm:flex-wrap sm:gap-x-8">
+              {stats.map((stat) => (
+                <div key={stat.label}>
+                  <dd className="text-xl font-bold leading-none text-white sm:text-2xl">{stat.number}</dd>
+                  <dt className="mt-1 text-xs text-gray-400">{stat.label}</dt>
+                </div>
+              ))}
+            </dl>
           </div>
 
           {/* Telefon i tablet: ta sama ilustracja pod tekstem, w całości widoczna */}
@@ -174,20 +184,6 @@ export default function AboutPage() {
           </div>
         </div>
         <div className="relative h-1 bg-[#A8F000]" />
-      </section>
-
-      {/* Statystyki — limonkowa wstęga pod hero, statyczna, bez ikon */}
-      <section className="bg-[#A8F000] text-gray-900">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <dl className="grid grid-cols-2 divide-gray-900/15 lg:grid-cols-4 lg:divide-x">
-            {stats.map((stat) => (
-              <div key={stat.label} className="py-5 sm:py-6 lg:px-6 lg:first:pl-0 lg:last:pr-0">
-                <dd className="text-3xl font-bold leading-none tracking-tight sm:text-4xl">{stat.number}</dd>
-                <dt className="mt-2 text-sm font-medium text-gray-900/70">{stat.label}</dt>
-              </div>
-            ))}
-          </dl>
-        </div>
       </section>
 
       {/* Historia — oś czasu */}
