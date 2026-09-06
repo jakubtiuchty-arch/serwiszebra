@@ -1283,7 +1283,7 @@ export default function HomePage() {
                   </p>
                 </div>
 
-                <div className="flex items-center justify-center bg-gray-50 text-gray-700 px-3 rounded-full text-xs font-medium h-9 mt-4">
+                <div className="flex items-center justify-center bg-[#EDF9C8] text-gray-900 px-3 rounded-full text-xs font-semibold h-9 mt-4">
                   <span className="whitespace-nowrap">Natychmiastowa pomoc</span>
                 </div>
               </div>
@@ -1309,7 +1309,7 @@ export default function HomePage() {
                   </p>
                 </div>
 
-                <div className="flex items-center justify-center bg-gray-50 text-gray-700 px-3 rounded-full text-xs font-medium h-9 mt-4">
+                <div className="flex items-center justify-center bg-[#EDF9C8] text-gray-900 px-3 rounded-full text-xs font-semibold h-9 mt-4">
                   <span className="whitespace-nowrap">Odbiór w 24h</span>
                 </div>
               </div>
@@ -1342,7 +1342,7 @@ export default function HomePage() {
                   </p>
                 </div>
 
-                <div className="flex items-center justify-center bg-gray-50 text-gray-700 px-3 rounded-full text-xs font-medium h-9 mt-4">
+                <div className="flex items-center justify-center bg-[#EDF9C8] text-gray-900 px-3 rounded-full text-xs font-semibold h-9 mt-4">
                   <span className="whitespace-nowrap">Panel klienta 24/7</span>
                 </div>
               </div>
@@ -1368,7 +1368,7 @@ export default function HomePage() {
                   </p>
                 </div>
 
-                <div className="flex items-center justify-center bg-gray-50 text-gray-700 px-3 rounded-full text-xs font-medium h-9 mt-4">
+                <div className="flex items-center justify-center bg-[#EDF9C8] text-gray-900 px-3 rounded-full text-xs font-semibold h-9 mt-4">
                   <span className="whitespace-nowrap">Naprawa 2-5 dni</span>
                 </div>
               </div>
