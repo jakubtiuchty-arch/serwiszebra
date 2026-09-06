@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import Header from '@/components/Header'
+import OsCzasu from '@/components/OsCzasu'
 
 /**
  * /o-nas — przebudowa wizualna 6.09.2026 (teksty bez zmian):
@@ -196,19 +197,7 @@ export default function AboutPage() {
           <p className="mt-3 max-w-2xl text-gray-600">
             Od 1999 roku towarzyszymy każdej zmianie na rynku AutoID — i serwisujemy sprzęt, którego inni już nie znają.
           </p>
-          <ol className="mt-10 grid gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
-            {milestones.map((m, i) => (
-              <li key={m.year} className="relative rounded-xl border border-gray-200 bg-white p-6">
-                <div className="text-sm font-semibold text-gray-400">{`0${i + 1}`}</div>
-                <div className="mt-3 text-lg font-bold text-gray-900">{m.year}</div>
-                <div className="mt-1 font-semibold text-gray-800">{m.title}</div>
-                <p className="mt-2 text-sm leading-relaxed text-gray-600">{m.description}</p>
-                {i === milestones.length - 1 && (
-                  <span className="absolute right-5 top-5 inline-block h-2.5 w-2.5 rounded-full bg-[#A8F000]" aria-hidden="true" />
-                )}
-              </li>
-            ))}
-          </ol>
+          <OsCzasu kroki={milestones} />
         </div>
       </section>
 
