@@ -107,13 +107,14 @@ export default function AboutPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
-      {/* Hero — ilustracja na całą szerokość pasa (same urządzenia 1:1 z renderów,
-          bez ludzi), tekst na ciemnej lewej połowie; limonkowa linia jak na hubie */}
-      <section className="relative overflow-hidden bg-[#0f172a] text-white">
+      {/* Hero — abstrakcyjna grafika „autoryzowany serwis Zebra" (tarcza, odznaka,
+          klucz, kody kreskowe, zebrowe pasy w limonce; bez urządzeń, ludzi i logo),
+          na całą szerokość pasa; tekst na ciemnej lewej połowie */}
+      <section className="relative overflow-hidden bg-[#011022] text-white">
         {/* Desktop: ilustracja pod całym pasem, przyciemniona po lewej pod tekst */}
         <div className="absolute inset-0 hidden lg:block" aria-hidden="true">
           <Image
-            src="/o-nas/hero-urzadzenia.jpg"
+            src="/o-nas/hero-abstrakcja.jpg"
             alt=""
             fill
             priority
@@ -122,7 +123,7 @@ export default function AboutPage() {
           />
           {/* Ilustracja mieści się w wysokości pasa (nic nie jest ucięte); po lewej
               zostaje tło pasa, a gradient zlewa je z ciemną ścianą na obrazie */}
-          <div className="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-900/80 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#011022] via-[#011022]/60 to-transparent" />
         </div>
 
         <div className="relative mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16 lg:py-32">
@@ -162,12 +163,12 @@ export default function AboutPage() {
           {/* Telefon i tablet: ta sama ilustracja pod tekstem, w całości widoczna */}
           <div className="relative mt-8 aspect-[16/9] overflow-hidden rounded-xl lg:hidden">
             <Image
-              src="/o-nas/hero-urzadzenia.jpg"
-              alt="Drukarki Zebra ZD421t, ZT411 i ZQ521 na stanowisku serwisowym"
+              src="/o-nas/hero-abstrakcja.jpg"
+              alt="Symbole autoryzowanego serwisu Zebra: tarcza z ptaszkiem, odznaka, klucz, kody kreskowe i zebrowe pasy"
               fill
               priority
               sizes="100vw"
-              className="object-cover"
+              className="object-cover object-right"
             />
           </div>
         </div>
