@@ -109,7 +109,7 @@ export default function AboutPage() {
 
       {/* Hero — ilustracja na całą szerokość pasa (same urządzenia 1:1 z renderów,
           bez ludzi), tekst na ciemnej lewej połowie; limonkowa linia jak na hubie */}
-      <section className="relative overflow-hidden bg-gray-900 text-white">
+      <section className="relative overflow-hidden bg-[#0f172a] text-white">
         {/* Desktop: ilustracja pod całym pasem, przyciemniona po lewej pod tekst */}
         <div className="absolute inset-0 hidden lg:block" aria-hidden="true">
           <Image
@@ -118,12 +118,14 @@ export default function AboutPage() {
             fill
             priority
             sizes="100vw"
-            className="object-cover object-right"
+            className="object-contain object-right"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-900/85 to-gray-900/10" />
+          {/* Ilustracja mieści się w wysokości pasa (nic nie jest ucięte); po lewej
+              zostaje tło pasa, a gradient zlewa je z ciemną ścianą na obrazie */}
+          <div className="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-900/80 to-transparent" />
         </div>
 
-        <div className="relative mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16 lg:py-28">
+        <div className="relative mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16 lg:py-32">
           <div className="max-w-2xl">
             <nav className="mb-4 text-xs text-gray-400" aria-label="Okruszki">
               <Link href="/" className="hover:text-white">
