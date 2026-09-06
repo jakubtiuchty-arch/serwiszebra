@@ -110,7 +110,7 @@ export default function AboutPage() {
       {/* Hero — abstrakcyjna grafika „autoryzowany serwis Zebra" (tarcza, odznaka,
           klucz, kody kreskowe, zebrowe pasy w limonce; bez urządzeń, ludzi i logo),
           na całą szerokość pasa; tekst na ciemnej lewej połowie */}
-      <section className="relative overflow-hidden bg-[#011022] text-white">
+      <section className="relative overflow-hidden bg-[#010E29] text-white">
         {/* Desktop: ilustracja pod całym pasem, przyciemniona po lewej pod tekst */}
         <div className="absolute inset-0 hidden lg:block" aria-hidden="true">
           <Image
@@ -123,10 +123,10 @@ export default function AboutPage() {
           />
           {/* Ilustracja mieści się w wysokości pasa (nic nie jest ucięte); po lewej
               zostaje tło pasa, a gradient zlewa je z ciemną ścianą na obrazie */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#011022] via-[#011022]/60 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#010E29] via-[#010E29]/60 to-transparent" />
         </div>
 
-        <div className="relative mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16 lg:py-32">
+        <div className="relative mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-12 lg:py-14">
           <div className="max-w-2xl">
             <nav className="mb-4 text-xs text-gray-400" aria-label="Okruszki">
               <Link href="/" className="hover:text-white">
@@ -136,15 +136,15 @@ export default function AboutPage() {
               <span className="text-gray-300">O nas</span>
             </nav>
 
-            <h1 className="text-3xl font-bold leading-tight sm:text-4xl md:text-5xl">
+            <h1 className="text-3xl font-bold leading-tight sm:text-4xl">
               Naprawiamy Zebrę, odkąd nazywała się jeszcze Psion
             </h1>
-            <p className="mt-5 max-w-xl text-base leading-relaxed text-gray-300 sm:text-lg">
+            <p className="mt-4 max-w-xl text-base leading-relaxed text-gray-300">
               Zaczynaliśmy w 1999 roku od terminali Psion. Przez zmiany Psion → Symbol → Motorola → Zebra
               nie zmieniło się jedno: ten sam zespół, ten sam warsztat i ta sama wiedza o urządzeniach,
               na których pracuje Twoja firma.
             </p>
-            <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
               <Link
                 href="/#formularz"
                 className="inline-flex min-h-[48px] items-center justify-center rounded-lg bg-[#A8F000] px-6 font-semibold text-gray-900 transition hover:bg-[#96D800]"
