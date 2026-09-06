@@ -2,7 +2,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 import Header from '@/components/Header'
 import OsCzasu from '@/components/OsCzasu'
-import LicznikiStat, { type Statystyka } from '@/components/LicznikiStat'
 
 /**
  * /o-nas — przebudowa wizualna 6.09.2026 (teksty bez zmian):
@@ -13,11 +12,11 @@ import LicznikiStat, { type Statystyka } from '@/components/LicznikiStat'
  *   z bibliotek.
  */
 
-const stats: Statystyka[] = [
-  { liczba: 25, sufiks: 'lat', label: 'na rynku AutoID', icon: '/icons/line/korzysc-certyfikat.png' },
-  { liczba: 50000, sufiks: '+', label: 'dostarczonych urządzeń', icon: '/icons/line/czynnosc-kompletacja.png' },
-  { liczba: 15000, sufiks: '+', label: 'wykonanych napraw', icon: '/icons/line/krok-diagnoza.png' },
-  { liczba: 500, sufiks: '+', label: 'klientów B2B', icon: '/icons/line/wartosc-partner.png' },
+const stats = [
+  { number: '25 lat', label: 'na rynku AutoID' },
+  { number: '50 000+', label: 'dostarczonych urządzeń' },
+  { number: '15 000+', label: 'wykonanych napraw' },
+  { number: '500+', label: 'klientów B2B' },
 ]
 
 const milestones = [
@@ -177,10 +176,17 @@ export default function AboutPage() {
         <div className="relative h-1 bg-[#A8F000]" />
       </section>
 
-      {/* Statystyki — ikony, liczniki od zera, hairline'y */}
-      <section className="border-b border-gray-200">
-        <div className="mx-auto max-w-6xl px-4 py-4 sm:px-6 sm:py-6 lg:px-8">
-          <LicznikiStat dane={stats} />
+      {/* Statystyki — limonkowa wstęga pod hero, statyczna, bez ikon */}
+      <section className="bg-[#A8F000] text-gray-900">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <dl className="grid grid-cols-2 divide-gray-900/15 lg:grid-cols-4 lg:divide-x">
+            {stats.map((stat) => (
+              <div key={stat.label} className="py-5 sm:py-6 lg:px-6 lg:first:pl-0 lg:last:pr-0">
+                <dd className="text-3xl font-bold leading-none tracking-tight sm:text-4xl">{stat.number}</dd>
+                <dt className="mt-2 text-sm font-medium text-gray-900/70">{stat.label}</dt>
+              </div>
+            ))}
+          </dl>
         </div>
       </section>
 
