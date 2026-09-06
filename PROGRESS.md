@@ -1268,6 +1268,12 @@ Fraza „biurkowe drukarki etykiet Zebra" jest głównym wejściem do tej katego
 - PO DEPLOYU: `is_active:true`, sprawdzenie produkcji, `/seo-audit`.
 - Wdrożone 06:42: deploy potwierdzony, produkt włączony, karta i klasa 200 z 10 cenami, klasa pokazuje ZT421/ZT510/ZT610.
 
+## 2026-09-06 — „Dlaczego my?" na stronie głównej: przebudowa wizualna (teksty bez zmian)
+- Dwie ilustracje `gpt_image_2` 16:9 2k z referencjami (`media_upload` + `media_confirm`): styl `public/klasy/biurkowe.jpg`, urządzenie `zd421t_1.webp` spłaszczone na biel. „Zwykły serwis" — szarości, telefon, czekanie, papier; „Nasz serwis" — pełny kolor, laptop z paskiem postępu, drukarka z etykietą, kurier w drzwiach. Pliki `public/dlaczego/{zwykly,nasz}-serwis.jpg` (1280 px, q82).
+- Wideo na hover prawej karty: `gemini_omni_flash_1_1`, `mode: image-to-video`, 6 s, start_image = job ilustracji; pierwsza próba zwróciła rekomendację presetu „IN THE DARK" → powtórka z `declined_preset_id`. Bez audio, crf 28, `public/dlaczego/nasz-serwis.mp4`. Wzorzec jak `KafelekKlasy` (obraz pod spodem, wideo kryciem, `preload="none"`).
+- Znaczniki listy: arkusz X/ptaszek → `public/icons/line/znak-{nie,tak}.png` (20 px, X z `opacity-60`). Lucide `X`/`CheckCircle2` w tej sekcji usunięte.
+- Sekcja na białym tle z hairline'em, karty `rounded-xl border` (prawa z `border-gray-900`), bez pigułek nad kartami. Zrzuty 1440/390 OK. Kopia sekcji na `/jak-to-dziala` (linia ~439, inny układ z emoji) NIE ruszona.
+
 ## 2026-09-05 — ikony kroków „Jak to działa" z Higgsfielda
 - Użytkownik: gradientowe kółka z glifami lucide w sekcji „Jak to działa" to AI slop. Arkusz 2×2 w gpt_image_2 (1k, prompt: kreska granatowa #1F2A44 + jeden akcent #A8F000, biel, bez wypełnień), z dwóch wariantów wybrany czystszy; cięcie ćwiartek, `-fuzz 12% -trim`, 200 px na płótnie 256, `Erode Disk:2` (przy 1k wystarcza 2, nie 3). Pliki `public/icons/line/krok-{czat,wysylka,diagnoza,naprawa}.png`.
 - JSX: białe kółko z obwódką + ikona 44 px `mix-blend-multiply`, numer kroku na czarnym; linia łącząca `bg-gray-200`, pigułki neutralne bez glifów lucide. Zrzut na buildzie OK.
