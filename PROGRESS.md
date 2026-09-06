@@ -1268,6 +1268,12 @@ Fraza „biurkowe drukarki etykiet Zebra" jest głównym wejściem do tej katego
 - PO DEPLOYU: `is_active:true`, sprawdzenie produkcji, `/seo-audit`.
 - Wdrożone 06:42: deploy potwierdzony, produkt włączony, karta i klasa 200 z 10 cenami, klasa pokazuje ZT421/ZT510/ZT610.
 
+## 2026-09-06 — /o-nas: przebudowa wizualna (teksty bez zmian)
+- Hero w ciemnym pasie `from-gray-800 via-gray-900` z okruszkami w środku i linią `h-1 bg-[#A8F000]` — ten sam wzorzec, co hub sklepu i strony instrukcji. Bez zdjęcia: `o-nas-hero.jpeg` to nie nasz warsztat.
+- Sekcja „Tak wygląda nasz warsztat" (`serwis_terminale.jpeg`, `serwis_drukarki.jpeg`) usunięta z tego samego powodu. **Pliki zostały w `public/`, bo używają ich jeszcze `/serwis-drukarek-zebra` i `/serwis-terminali-zebra`** — tam ta sama uwaga („nie nasz warsztat") czeka na decyzję.
+- Ikony wartości z Higgsfielda (arkusz 2×2: uścisk dłoni, klucz+śrubokręt z sercem, segregatory, słuchawki) → `public/icons/line/wartosc-{partner,serwis,wiedza,technik}.png` w białych kółkach 56 px; stare `o-nas-ic-*.jpeg` (kwadratowe rendery) usunięte. Korzyści autoryzacji: `gwarancja.png` na białym kółku; przycisk „Zadzwoń": `telefon.png`. Lucide (ShieldCheck, ArrowRight, Phone, ChevronRight) wyleciał z pliku.
+- Paleta ujednolicona z resztą (`gray-*` zamiast `slate-*`, `rounded-xl`, przyciski limonkowe `min-h-[48px]`). Zrzuty 1440/390 OK, bez poziomego scrolla.
+
 ## 2026-09-06 — opinie z Google na stronie głównej (przed stopką)
 - Wizytówka serwisu ≠ wizytówka takmy: link z crona `g.page/r/CWWwiewE2ri8EAE` prowadzi do „TAKMA - Autoryzowany Serwis Zebra", place id `ChIJwy-zAVnpD0cRZbCJ7ATauLw` (4,7; 13 opinii). Takma ma osobną „TAKMA - Centrum Systemów Mobilnych" (`ChIJ2fZ3X3_pD0cRz2tBiCg5N_c`, 3,7; 13).
 - `GOOGLE_API_KEY` serwiszebry nie ma włączonego Places API (New) w swoim projekcie GCP → użyty klucz `GOOGLE_PLACES_API_KEY` z takmy (ten sam limit). Zmienne `GOOGLE_PLACES_API_KEY` + `GBP_PLACE_ID` w `.env.local` i na Vercelu (Production; preview dopinane osobno).

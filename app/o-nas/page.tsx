@@ -73,10 +73,10 @@ const values = [
 ]
 
 const authBenefits = [
-  { title: 'Oryginalne części', desc: 'Bezpośrednio od Zebra Technologies' },
-  { title: 'Gwarancja producenta', desc: 'Na każdą wykonaną naprawę' },
-  { title: 'Certyfikowani technicy', desc: 'Szkoleni przez Zebra' },
-  { title: 'Priorytetowe wsparcie', desc: 'Bezpośrednia linia do producenta' },
+  { title: 'Oryginalne części', desc: 'Bezpośrednio od Zebra Technologies', icon: '/icons/line/korzysc-czesci.png' },
+  { title: 'Gwarancja producenta', desc: 'Na każdą wykonaną naprawę', icon: '/icons/line/korzysc-gwarancja.png' },
+  { title: 'Certyfikowani technicy', desc: 'Szkoleni przez Zebra', icon: '/icons/line/korzysc-certyfikat.png' },
+  { title: 'Priorytetowe wsparcie', desc: 'Bezpośrednia linia do producenta', icon: '/icons/line/korzysc-wsparcie.png' },
 ]
 
 export default function AboutPage() {
@@ -109,7 +109,8 @@ export default function AboutPage() {
 
       {/* Hero w ciemnym pasie — jak hub sklepu i strony instrukcji */}
       <section className="bg-gradient-to-br from-gray-800 via-gray-900 to-gray-900 text-white">
-        <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
+        <div className="mx-auto grid max-w-6xl items-center gap-8 px-4 py-12 sm:px-6 sm:py-16 lg:grid-cols-[1.1fr_1fr] lg:gap-12">
+          <div>
           <nav className="mb-4 text-xs text-gray-400" aria-label="Okruszki">
             <Link href="/" className="hover:text-white">
               Strona główna
@@ -139,6 +140,21 @@ export default function AboutPage() {
             >
               Zobacz zakres serwisu
             </Link>
+          </div>
+          </div>
+
+          {/* Ilustracja w stylu kafelków sklepu — technik przy otwartej ZD421t
+              (drukarka 1:1 z renderu). Tło ilustracji jest granatowe, więc
+              wtapia się w pas bez ramki. */}
+          <div className="relative aspect-[16/9] overflow-hidden rounded-xl">
+            <Image
+              src="/o-nas/hero-warsztat.jpg"
+              alt="Technik serwisu przy otwartej drukarce Zebra ZD421t na stanowisku z lupą i stacją lutowniczą"
+              fill
+              priority
+              sizes="(max-width: 1024px) 100vw, 560px"
+              className="object-cover"
+            />
           </div>
         </div>
         <div className="h-1 bg-[#A8F000]" />
@@ -218,8 +234,8 @@ export default function AboutPage() {
                 {authBenefits.map((b) => (
                   <div key={b.title} className="rounded-xl border border-white/10 bg-white/[0.04] p-4">
                     <div className="flex items-center gap-2">
-                      <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-white">
-                        <Image src="/icons/line/gwarancja.png" alt="" width={18} height={18} className="h-[18px] w-[18px]" />
+                      <span className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-white">
+                        <Image src={b.icon} alt="" width={22} height={22} className="h-[22px] w-[22px]" />
                       </span>
                       <span className="text-sm font-semibold text-white">{b.title}</span>
                     </div>
