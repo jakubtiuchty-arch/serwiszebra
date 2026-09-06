@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import Header from '@/components/Header'
 import OsCzasu from '@/components/OsCzasu'
+import LicznikiStat, { type Statystyka } from '@/components/LicznikiStat'
 
 /**
  * /o-nas — przebudowa wizualna 6.09.2026 (teksty bez zmian):
@@ -12,11 +13,11 @@ import OsCzasu from '@/components/OsCzasu'
  *   z bibliotek.
  */
 
-const stats = [
-  { number: '25 lat', label: 'na rynku AutoID' },
-  { number: '50 000+', label: 'dostarczonych urządzeń' },
-  { number: '15 000+', label: 'wykonanych napraw' },
-  { number: '500+', label: 'klientów B2B' },
+const stats: Statystyka[] = [
+  { liczba: 25, sufiks: 'lat', label: 'na rynku AutoID', icon: '/icons/line/korzysc-certyfikat.png' },
+  { liczba: 50000, sufiks: '+', label: 'dostarczonych urządzeń', icon: '/icons/line/czynnosc-kompletacja.png' },
+  { liczba: 15000, sufiks: '+', label: 'wykonanych napraw', icon: '/icons/line/krok-diagnoza.png' },
+  { liczba: 500, sufiks: '+', label: 'klientów B2B', icon: '/icons/line/wartosc-partner.png' },
 ]
 
 const milestones = [
@@ -176,17 +177,10 @@ export default function AboutPage() {
         <div className="relative h-1 bg-[#A8F000]" />
       </section>
 
-      {/* Statystyki — czysty pasek */}
+      {/* Statystyki — ikony, liczniki od zera, hairline'y */}
       <section className="border-b border-gray-200">
-        <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
-          <div className="grid grid-cols-2 gap-6 sm:gap-8 md:grid-cols-4">
-            {stats.map((stat) => (
-              <div key={stat.label} className="text-center md:text-left">
-                <div className="text-3xl font-bold text-gray-900 sm:text-4xl">{stat.number}</div>
-                <div className="mt-1 text-sm text-gray-500">{stat.label}</div>
-              </div>
-            ))}
-          </div>
+        <div className="mx-auto max-w-6xl px-4 py-4 sm:px-6 sm:py-6 lg:px-8">
+          <LicznikiStat dane={stats} />
         </div>
       </section>
 
