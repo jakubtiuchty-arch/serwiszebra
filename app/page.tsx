@@ -871,7 +871,6 @@ export default function HomePage() {
                     <div className="flex-1">
                       <h3 className="text-sm font-semibold text-gray-900 mb-1 flex items-center gap-1.5">
                         Diagnostyka i wycena
-                        <Sparkles className="w-4 h-4 text-green-600" />
                       </h3>
                       <p className="text-xs text-gray-600">
                         Gratis przy realizacji naprawy, w innym przypadku 99 zł + VAT
@@ -986,7 +985,6 @@ export default function HomePage() {
                     <div className="flex-1">
                       <h3 className="text-sm font-semibold text-gray-900 mb-1 flex items-center gap-1.5">
                         Diagnostyka i wycena
-                        <Sparkles className="w-4 h-4 text-green-600" />
                       </h3>
                       <p className="text-xs text-gray-600">
                         Gratis przy realizacji naprawy, w innym przypadku 99 zł + VAT
@@ -1101,7 +1099,6 @@ export default function HomePage() {
                     <div className="flex-1">
                       <h3 className="text-sm font-semibold text-gray-900 mb-1 flex items-center gap-1.5">
                         Diagnostyka i wycena
-                        <Sparkles className="w-4 h-4 text-green-600" />
                       </h3>
                       <p className="text-xs text-gray-600">
                         Gratis przy realizacji naprawy, w innym przypadku 99 zł + VAT
@@ -1216,7 +1213,6 @@ export default function HomePage() {
                     <div className="flex-1">
                       <h3 className="text-sm font-semibold text-gray-900 mb-1 flex items-center gap-1.5">
                         Diagnostyka i wycena
-                        <Sparkles className="w-4 h-4 text-green-600" />
                       </h3>
                       <p className="text-xs text-gray-600">
                         Gratis przy realizacji naprawy, w innym przypadku 99 zł + VAT
