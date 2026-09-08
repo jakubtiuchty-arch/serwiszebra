@@ -19,7 +19,13 @@ const SITE = 'https://www.serwis-zebry.pl'
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 
-export const dynamic = 'force-dynamic'
+/**
+ * Bez `force-dynamic`: w Next 14 wymusza ono `no-store` na KAŻDYM fetchu i strona
+ * renderowała się od zera przy każdym wejściu (TTFB 0,6–1,4 s z regionu USA).
+ * Dane z Supabase idą przez Data Cache z odświeżaniem co 5 min; strony z
+ * `searchParams` i tak są dynamiczne, ale bez czekania na bazę.
+ */
+export const revalidate = 300
 
 const KLASA = klasaBySlug('biurkowe')!
 const URL_KAT = `${SITE}/sklep/drukarki-etykiet/biurkowe`
@@ -93,7 +99,7 @@ async function getDevices(): Promise<DeviceRow[]> {
   try {
     const res = await fetch(
       `${supabaseUrl}/rest/v1/products?product_type=eq.drukarka&is_active=eq.true&select=slug,name,device_model,description,price,image_urls,attributes&order=name.asc`,
-      { headers: { apikey: supabaseKey, Authorization: `Bearer ${supabaseKey}` }, cache: 'no-store' }
+      { headers: { apikey: supabaseKey, Authorization: `Bearer ${supabaseKey}` }, next: { revalidate: 300 } }
     )
     if (!res.ok) return []
     const rows: DeviceRow[] = await res.json()

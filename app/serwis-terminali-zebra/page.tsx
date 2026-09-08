@@ -104,14 +104,11 @@ const terminalArticles = blogPosts
 const clusterArticles = [
   { title: 'Najczęstsze awarie terminali Zebra - TOP 10', slug: 'najczestsze-awarie-terminali-zebra-top10', desc: 'Problemy i rozwiązania' },
   { title: 'Serwis TC52/TC53 - diagnostyka i naprawa', slug: 'serwis-terminala-zebra-tc52-tc53-diagnostyka-naprawa', desc: 'Co się psuje, cennik' },
-  { title: 'Serwis MC3300/MC3400 - diagnostyka i naprawa', slug: 'serwis-terminala-zebra-mc3300-mc3400-diagnostyka-naprawa', desc: 'Terminal magazynowy' },
-  { title: 'Serwis TC21/TC22/TC26/TC27', slug: 'serwis-terminala-zebra-tc21-tc22-tc26-tc27-diagnostyka-naprawa', desc: 'Entry-level terminale' },
+  { title: 'Serwis MC3300/MC3400 - diagnostyka i naprawa', slug: 'serwis-terminala-zebra-mc3400-diagnostyka-naprawa', desc: 'Terminal magazynowy' },
   { title: 'Ekran dotykowy terminala nie reaguje', slug: 'ekran-dotykowy-terminal-zebra-nie-reaguje-diagnostyka', desc: 'Diagnostyka i naprawa' },
   { title: 'Bateria terminala Zebra - diagnostyka', slug: 'bateria-terminal-zebra-szybko-sie-rozladowuje-diagnostyka', desc: 'PowerPrecision, Hot Swap' },
   { title: 'Klawiatura MC3300/MC3400 nie działa', slug: 'klawiatura-terminal-zebra-mc3300-mc3400-problemy-naprawa', desc: 'Diagnostyka i naprawa' },
   { title: 'TC52 vs TC53 vs TC501 - porównanie', slug: 'zebra-tc52-vs-tc53-vs-tc501-porownanie-terminali', desc: 'Który wybrać?' },
-  { title: 'Najlepszy terminal do magazynu 2026', slug: 'najlepszy-terminal-zebra-do-magazynu-2026', desc: 'Ranking modeli' },
-  { title: 'Naprawa czy wymiana terminala?', slug: 'naprawa-czy-wymiana-terminala-zebra-poradnik-decyzyjny', desc: 'Kalkulator kosztów' },
 ]
 
 const faq: { question: string; answer: string; link: string | null; linkText: string | null }[] = [
@@ -154,20 +151,20 @@ const faq: { question: string; answer: string; link: string | null; linkText: st
   {
     question: 'Terminal Zebra TC22 / TC21 nie skanuje - jak naprawić?',
     answer: 'Zebra TC22 i TC21 nie skanują najczęściej z powodu: 1) Wyłączonego skanera w DataWedge - włącz profil skanowania, 2) Brudnego okienka skanera - wyczyść alkoholem IPA, 3) Uszkodzonego modułu SE4710 - wymaga wymiany w serwisie (500-800 zł). Sprawdź też czy aplikacja ma uprawnienia do skanera.',
-    link: '/blog/serwis-terminala-zebra-tc21-tc22-tc26-tc27-diagnostyka-naprawa',
-    linkText: 'Serwis TC21/TC22/TC26/TC27 →'
+    link: null,
+    linkText: null
   },
   {
     question: 'Ile kosztuje wymiana ekranu w Zebra TC27?',
     answer: 'Wymiana wyświetlacza w terminalu Zebra TC27 kosztuje 700-900 zł. Cena obejmuje oryginalny wyświetlacz i robociznę. Czas naprawy: 2-5 dni roboczych. TC27 ma większy ekran 6" (vs 5" w TC22), dlatego cena jest nieco wyższa. Oferujemy też naprawy ekspresowe w 24-48h.',
-    link: '/blog/zebra-tc22-vs-tc27-porownanie-roznice',
-    linkText: 'Porównanie TC22 vs TC27 →'
+    link: null,
+    linkText: null
   },
   {
     question: 'Ile kosztuje naprawa terminala Zebra MC3400?',
     answer: 'Naprawa terminala Zebra MC3400/MC3450 kosztuje od 200 zł (wymiana baterii) do 1200 zł (wymiana wyświetlacza lub płyty głównej). Najczęstsze naprawy: wymiana ekranu 800-1000 zł, naprawa skanera 500-800 zł, wymiana klawiatury 300-500 zł. Dokładna wycena po bezpłatnej diagnozie.',
-    link: '/blog/serwis-terminala-zebra-mc3300-mc3400-diagnostyka-naprawa',
-    linkText: 'Serwis MC3300/MC3400 — szczegóły →'
+    link: '/blog/serwis-terminala-zebra-mc3400-diagnostyka-naprawa',
+    linkText: 'Serwis MC3400 — szczegóły →'
   },
   {
     question: 'Terminal Zebra MC9300 / MC9400 - gdzie naprawić?',
@@ -184,8 +181,8 @@ const faq: { question: string; answer: string; link: string | null; linkText: st
   {
     question: 'Który terminal Zebra wybrać do magazynu?',
     answer: 'Wybór zależy od zastosowania: TC22 dla małych magazynów (WiFi, kompaktowy), MC3400 dla dużych magazynów (klawiatura, skaner dalekiego zasięgu SE58 do 13m), TC78 do chłodni (-30°C, IP68). Dla kurierów: TC58 z 5G/LTE i GPS. Pomożemy dobrać optymalny model do Twoich potrzeb.',
-    link: '/blog/najlepszy-terminal-zebra-do-magazynu-2026',
-    linkText: 'Ranking terminali do magazynu 2026 →'
+    link: null,
+    linkText: null
   },
   {
     question: 'TC52 kończy wsparcie - co dalej?',

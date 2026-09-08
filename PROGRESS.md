@@ -1268,6 +1268,13 @@ Fraza „biurkowe drukarki etykiet Zebra" jest głównym wejściem do tej katego
 - PO DEPLOYU: `is_active:true`, sprawdzenie produkcji, `/seo-audit`.
 - Wdrożone 06:42: deploy potwierdzony, produkt włączony, karta i klasa 200 z 10 cenami, klasa pokazuje ZT421/ZT510/ZT610.
 
+## 2026-09-08 — ulotka A6 i naklejka 70 mm z QR do opinii Google (do paczki)
+- Pliki: `~/Downloads/opinia-google/` — `ulotka-A6-opinia-google.{pdf,png}` (111×154 mm ze spadem 3 mm), `naklejka-70mm-opinia-google.{pdf,png}` (74×74 mm ze spadem 2 mm), `kod-qr-opinia-google.png` (1200 px, korekcja H). Źródła HTML w scratchpadzie sesji.
+- QR → `https://g.page/r/CWWwiewE2ri8EAE/review` (ten sam link co w cronie request-review; otwiera od razu okno opinii). Odczyt zweryfikowany jsQR z obu renderów.
+- Tło: gpt_image_2 2:3 2k z referencją stylu `klasy/biurkowe.jpg` (pięć pełnych limonkowych gwiazdek, dymek z sercem, zebrowe pasy; dół pusty pod tekst). Pierwsza generacja dała 3/5 wypełnionych gwiazdek = wygląda jak ocena 3/5 — odrzucona; druga miała wariant z 6 gwiazdkami — odrzucony. Tekst i QR w HTML (Playwright → PDF/PNG 300 dpi), nie w obrazie.
+- Research (Google policy 04.2026): prosić wolno, ale bez nagrody, bez „gatingu" (nie kierować niezadowolonych „najpierw do nas zamiast opinii"), tych samych zasad dla wszystkich klientów. Na karcie: nazwa firmy, jedno polecenie („Zeskanuj i oceń nas w Google"), QR ≥ 2 cm z ciemnymi modułami na BIAŁYM polu (ciemne tło = ryzyko), 3 kroki, droga bez skanera (wpisz nazwę w Google), kontakt, podziękowanie. Zero rabatów.
+- NIE zrobione: wcześniejsza naprawa 23 martwych linków (Ahrefs) została przerwana przez użytkownika — w drzewie roboczym zostały niezacommitowane poprawki `app/sklep/page.tsx` (8 linków „Głowice"); reszta (terminale, polish-manuals, redirecty `/cennik`, `/zgloszenie`, instrukcje ze spacją) czeka na decyzję.
+
 ## 2026-09-06 — /o-nas: przebudowa wizualna (teksty bez zmian)
 - Hero w ciemnym pasie `from-gray-800 via-gray-900` z okruszkami w środku i linią `h-1 bg-[#A8F000]` — ten sam wzorzec, co hub sklepu i strony instrukcji. Bez zdjęcia: `o-nas-hero.jpeg` to nie nasz warsztat.
 - Sekcja „Tak wygląda nasz warsztat" (`serwis_terminale.jpeg`, `serwis_drukarki.jpeg`) usunięta z tego samego powodu. **Pliki zostały w `public/`, bo używają ich jeszcze `/serwis-drukarek-zebra` i `/serwis-terminali-zebra`** — tam ta sama uwaga („nie nasz warsztat") czeka na decyzję.

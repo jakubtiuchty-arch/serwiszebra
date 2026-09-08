@@ -282,7 +282,7 @@ export default function SklepPage() {
                     <td className="px-3 py-2.5 text-gray-600">Biurkowa</td>
                     <td className="px-3 py-2.5 text-gray-600 font-mono text-xs">P1112640-019 / -020</td>
                     <td className="px-3 py-2.5">
-                      <Link href="/sklep/glowice/biurkowe/zd421" className="text-blue-600 hover:text-blue-800 text-xs font-medium">Głowice →</Link>
+                      <Link href="/sklep/glowice/drukarki-biurkowe/zebra-zd421t" className="text-blue-600 hover:text-blue-800 text-xs font-medium">Głowice →</Link>
                     </td>
                   </tr>
                   <tr className="hover:bg-gray-50">
@@ -291,7 +291,7 @@ export default function SklepPage() {
                     <td className="px-3 py-2.5 text-gray-600">Biurkowa</td>
                     <td className="px-3 py-2.5 text-gray-600 font-mono text-xs">P1112640-019 / -020</td>
                     <td className="px-3 py-2.5">
-                      <Link href="/sklep/glowice/biurkowe/zd621" className="text-blue-600 hover:text-blue-800 text-xs font-medium">Głowice →</Link>
+                      <Link href="/sklep/glowice/drukarki-biurkowe/zebra-zd621t" className="text-blue-600 hover:text-blue-800 text-xs font-medium">Głowice →</Link>
                     </td>
                   </tr>
                   <tr className="hover:bg-gray-50">
@@ -300,7 +300,7 @@ export default function SklepPage() {
                     <td className="px-3 py-2.5 text-gray-600">Biurkowa</td>
                     <td className="px-3 py-2.5 text-gray-600 font-mono text-xs">105934-037</td>
                     <td className="px-3 py-2.5">
-                      <Link href="/sklep/glowice/biurkowe/gk420" className="text-blue-600 hover:text-blue-800 text-xs font-medium">Głowice →</Link>
+                      <Link href="/sklep/glowice/drukarki-biurkowe/zebra-gk420t" className="text-blue-600 hover:text-blue-800 text-xs font-medium">Głowice →</Link>
                     </td>
                   </tr>
                   <tr className="hover:bg-gray-50">
@@ -331,7 +331,7 @@ export default function SklepPage() {
                     <td className="px-3 py-2.5 text-gray-600">Przemysłowa</td>
                     <td className="px-3 py-2.5 text-gray-600 font-mono text-xs">P1037974-010 / -011</td>
                     <td className="px-3 py-2.5">
-                      <Link href="/sklep/glowice/przemyslowe/zt230" className="text-blue-600 hover:text-blue-800 text-xs font-medium">Głowice →</Link>
+                      <Link href="/sklep/glowice/drukarki-przemyslowe/zebra-zt230" className="text-blue-600 hover:text-blue-800 text-xs font-medium">Głowice →</Link>
                     </td>
                   </tr>
                   <tr className="hover:bg-gray-50">
@@ -340,7 +340,7 @@ export default function SklepPage() {
                     <td className="px-3 py-2.5 text-gray-600">Przemysłowa</td>
                     <td className="px-3 py-2.5 text-gray-600 font-mono text-xs">P1058930-009 / -010 / -011</td>
                     <td className="px-3 py-2.5">
-                      <Link href="/sklep/glowice/przemyslowe/zt411" className="text-blue-600 hover:text-blue-800 text-xs font-medium">Głowice →</Link>
+                      <Link href="/sklep/glowice/drukarki-przemyslowe/zebra-zt411" className="text-blue-600 hover:text-blue-800 text-xs font-medium">Głowice →</Link>
                     </td>
                   </tr>
                   <tr className="hover:bg-gray-50">
@@ -349,7 +349,7 @@ export default function SklepPage() {
                     <td className="px-3 py-2.5 text-gray-600">Przemysłowa</td>
                     <td className="px-3 py-2.5 text-gray-600 font-mono text-xs">P1058930-012 / -013</td>
                     <td className="px-3 py-2.5">
-                      <Link href="/sklep/glowice/przemyslowe/zt421" className="text-blue-600 hover:text-blue-800 text-xs font-medium">Głowice →</Link>
+                      <Link href="/sklep/glowice/drukarki-przemyslowe/zebra-zt421" className="text-blue-600 hover:text-blue-800 text-xs font-medium">Głowice →</Link>
                     </td>
                   </tr>
                   <tr className="hover:bg-gray-50">
@@ -367,7 +367,7 @@ export default function SklepPage() {
                     <td className="px-3 py-2.5 text-gray-600">Przemysłowa</td>
                     <td className="px-3 py-2.5 text-gray-600 font-mono text-xs">P1083320-010 / -011 / -012</td>
                     <td className="px-3 py-2.5">
-                      <Link href="/sklep/glowice/przemyslowe/zt610" className="text-blue-600 hover:text-blue-800 text-xs font-medium">Głowice →</Link>
+                      <Link href="/sklep/glowice/drukarki-przemyslowe/zebra-zt610" className="text-blue-600 hover:text-blue-800 text-xs font-medium">Głowice →</Link>
                     </td>
                   </tr>
                   <tr className="hover:bg-gray-50">
@@ -376,7 +376,7 @@ export default function SklepPage() {
                     <td className="px-3 py-2.5 text-gray-600">Przemysłowa</td>
                     <td className="px-3 py-2.5 text-gray-600 font-mono text-xs">P1083320-015 / -016</td>
                     <td className="px-3 py-2.5">
-                      <Link href="/sklep/glowice/przemyslowe/zt620" className="text-blue-600 hover:text-blue-800 text-xs font-medium">Głowice →</Link>
+                      <Link href="/sklep/glowice/drukarki-przemyslowe/zebra-zt620" className="text-blue-600 hover:text-blue-800 text-xs font-medium">Głowice →</Link>
                     </td>
                   </tr>
                   <tr className="hover:bg-gray-50">

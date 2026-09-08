@@ -7464,7 +7464,6 @@ Drukarka ZT230 wymaga ribbonu powlekanego na zewnątrz. Test: przyklej kawałek 
 8. Zamknij drzwi
 9. Naciśnij **PAUSE** aby umożliwić drukowanie
 
-> 📘 **Szczegółowy poradnik:** [Jak załadować etykiety do drukarki Zebra](/blog/jak-zaladowac-etykiety-do-drukarki-zebra)
 `
       },
       {
@@ -7954,7 +7953,6 @@ Po standardowym ładowaniu:
 1. Przeprowadź materiał przez otwór obcinacza
 2. Zamknij głowicę i drzwi
 
-> 📘 **Szczegółowy poradnik:** [Jak załadować etykiety do drukarki Zebra](/blog/jak-zaladowac-etykiety-do-drukarki-zebra)
 `
       },
       {

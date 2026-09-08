@@ -65,6 +65,17 @@ const nextConfig = {
         destination: '/serwis-tabletow-zebra',
         statusCode: 301,
       },
+      // Martwe adresy z linków wewnętrznych (Ahrefs 2.09.2026, GSC 6.09.2026)
+      { source: '/cennik', destination: '/#cennik', statusCode: 301 },
+      { source: '/zgloszenie', destination: '/formularz', statusCode: 301 },
+      // Stare adresy instrukcji, gdy modele w bazie miały spację („ZQ310 Plus")
+      { source: '/instrukcje/zebra-zq210%20plus', destination: '/instrukcje/zebra-zq210plus', statusCode: 301 },
+      { source: '/instrukcje/zebra-zq220%20plus', destination: '/instrukcje/zebra-zq220plus', statusCode: 301 },
+      { source: '/instrukcje/zebra-zq310%20plus', destination: '/instrukcje/zebra-zq310plus', statusCode: 301 },
+      { source: '/instrukcje/zebra-zq320%20plus', destination: '/instrukcje/zebra-zq320plus', statusCode: 301 },
+      { source: '/instrukcje/zebra-zq610%20plus', destination: '/instrukcje/zebra-zq610plus', statusCode: 301 },
+      { source: '/instrukcje/zebra-zq620%20plus', destination: '/instrukcje/zebra-zq620plus', statusCode: 301 },
+      { source: '/instrukcje/zebra-zq630%20plus', destination: '/instrukcje/zebra-zq630plus', statusCode: 301 },
     ]
   },
   
