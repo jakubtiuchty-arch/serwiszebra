@@ -25714,7 +25714,7 @@ Wszystkie modele wymienione w tym artykule są dostępne w sprzedaży:
     slug: 'jezyk-zpl-poradnik-komendy-przyklady',
     title: 'Język ZPL – kompletny poradnik dla początkujących [Komendy + Przykłady 2025]',
     excerpt: 'Naucz się programować etykiety w języku ZPL! Kompletny poradnik po polsku: podstawowe komendy, kody kreskowe, czcionki, ramki i praktyczne przykłady gotowe do użycia.',
-    coverImage: '/blog/jezyk-zpl-programowanie-etykiet-zebra.jpeg',
+    coverImage: '/blog/jezyk-zpl-programowanie-etykiet-zebra-zd421t.jpeg',
     author: {
       name: 'Zespół TAKMA',
       role: 'Certyfikowani technicy Zebra'

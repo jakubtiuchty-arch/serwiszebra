@@ -1268,6 +1268,12 @@ Fraza „biurkowe drukarki etykiet Zebra" jest głównym wejściem do tej katego
 - PO DEPLOYU: `is_active:true`, sprawdzenie produkcji, `/seo-audit`.
 - Wdrożone 06:42: deploy potwierdzony, produkt włączony, karta i klasa 200 z 10 cenami, klasa pokazuje ZT421/ZT510/ZT610.
 
+## 2026-09-08 — karta ZD230t: indeks vs ranking, cache sklepu, region, martwe linki
+- Pomyłka do zapamiętania: WebSearch „site:serwis-zebry.pl zd230t" nie pokazał karty i uznałem, że nie jest zindeksowana; użytkownik pokazał `site:<pełny URL>` — JEST w indeksie (od 30.08), ale Google trzyma STARĄ wersję (tytuł „| TAKMA", sprzed poprawek z 4.09). Wniosek: brak w `site:frazie` ≠ brak w indeksie; sprawdzać `site:` z pełnym adresem. Problem to ranking + brak recrawlu, nie indeksacja.
+- Karty i strony klas miały `force-dynamic` — w Next 14 to `fetchCache: force-no-store` dla WSZYSTKICH fetchów, więc `next: { revalidate }` nic by nie dało bez usunięcia tej linii. Teraz: `export const revalidate = 300` + fetch Supabase z `next: { revalidate: 300 }`; strony z `searchParams` pozostają dynamiczne, ale bez czekania na bazę. Lokalnie TTFB 0,1–0,23 s (produkcja przed: 0,6–1,4 s, `x-vercel-id: arn1::iad1` = funkcja w USA). `vercel.json`: `"regions": ["fra1"]`.
+- Martwe linki wdrożone (commit z 8.09): `/sklep` 8 linków „Głowice" → `/sklep/glowice/drukarki-{biurkowe,przemyslowe}/zebra-<model>`; `/serwis-terminali-zebra` — 4 wpisy, których nie ma, usunięte z listy i FAQ, MC3300/MC3400 → `serwis-terminala-zebra-mc3400-diagnostyka-naprawa`; `lib/polish-manuals.ts` — link do nieistniejącego wpisu o ładowaniu etykiet usunięty; redirecty 301 `/cennik → /#cennik`, `/zgloszenie → /formularz`, 7× `/instrukcje/zebra-zqXXX%20plus → …zqXXXplus`. **Pułapka: source redirectu ze spacją musi mieć `%20`, literalna spacja nie matchuje.**
+- Po stronie użytkownika nadal: „Request indexing" w GSC dla karty ZD230t (i innych), żeby Google zobaczył nowy tytuł i linki.
+
 ## 2026-09-08 — ulotka A6 i naklejka 70 mm z QR do opinii Google (do paczki)
 - Pliki: `~/Downloads/opinia-google/` — `ulotka-A6-opinia-google.{pdf,png}` (111×154 mm ze spadem 3 mm), `naklejka-70mm-opinia-google.{pdf,png}` (74×74 mm ze spadem 2 mm), `kod-qr-opinia-google.png` (1200 px, korekcja H). Źródła HTML w scratchpadzie sesji.
 - QR → `https://g.page/r/CWWwiewE2ri8EAE/review` (ten sam link co w cronie request-review; otwiera od razu okno opinii). Odczyt zweryfikowany jsQR z obu renderów.
