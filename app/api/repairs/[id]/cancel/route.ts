@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
+import { REZYGNACJA_BRUTTO, REZYGNACJA_OPIS } from '@/lib/oplaty-serwis'
 
 export async function POST(
   request: Request,
@@ -76,13 +77,13 @@ export async function POST(
     }
 
     // Odrzucenie wyceny: klient rezygnuje z naprawy i płaci za diagnostykę.
-    // Wycena zmienia się na opłatę 166,05 zł brutto — panel admina pokazuje ją w boxie Wycena,
+    // Wycena zmienia się na opłatę REZYGNACJA_BRUTTO (lib/oplaty-serwis) — panel admina pokazuje ją w boxie Wycena,
     // a webhook Stripe po opłaceniu ustawi payment_status=succeeded (box zmieni się na ZAPŁACONO).
     if (rejectQuote) {
       const rejectedPrice = repair.final_price || repair.estimated_price
-      updatePayload.final_price = 166.05
+      updatePayload.final_price = REZYGNACJA_BRUTTO
       updatePayload.price_notes =
-        `Rezygnacja z naprawy — diagnostyka 99 zł netto + przesyłka 36 zł netto = 166,05 zł brutto.` +
+        `Rezygnacja z naprawy — ${REZYGNACJA_OPIS}.` +
         (rejectedPrice ? ` Odrzucona wycena: ${rejectedPrice} zł${repair.price_notes ? ` (${repair.price_notes})` : ''}` : '')
     }
 

@@ -4,6 +4,7 @@ import { createClient } from '@/lib/supabase/server';
 import { createClient as createSupabaseClient } from '@supabase/supabase-js';
 import Stripe from 'stripe';
 import { sendRepairPaidEmail, sendRepairPaidAdminEmail, sendDiagnosticFeePaidAdminEmail } from '@/lib/email';
+import { REZYGNACJA_BRUTTO_TEKST } from '@/lib/oplaty-serwis'
 
 // Funkcja pomocnicza - wysyłka do Baselinker
 async function sendToBaselinker(orderId: string) {
@@ -111,7 +112,7 @@ async function handleRepairPayment(repairId: string, supabase: any) {
   }
 }
 
-// Funkcja pomocnicza - opłata za diagnostykę po odrzuceniu wyceny (166,05 zł brutto).
+// Funkcja pomocnicza - opłata za diagnostykę po odrzuceniu wyceny (REZYGNACJA_BRUTTO z lib/oplaty-serwis).
 // Zgłoszenie jest już anulowane — oznaczamy tylko płatność, statusu nie zmieniamy.
 async function handleDiagnosticFeePayment(repairId: string, supabase: any) {
   try {
@@ -152,7 +153,7 @@ async function handleDiagnosticFeePayment(repairId: string, supabase: any) {
       .insert({
         repair_request_id: repairId,
         status: 'anulowane',
-        notes: 'Klient odrzucił wycenę i opłacił diagnostykę 166,05 zł brutto - odesłać urządzenie',
+        notes: `Klient odrzucił wycenę i opłacił diagnostykę ${REZYGNACJA_BRUTTO_TEKST} brutto - odesłać urządzenie`,
         changed_by: 'system',
       });
 

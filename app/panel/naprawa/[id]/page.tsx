@@ -35,6 +35,7 @@ import PhotoGallery from '@/components/PhotoGallery'
 import MiniTimeline from '@/components/MiniTimeline'
 import PasOfertowy from '@/components/panel/PasOfertowy'
 import Link from 'next/link'
+import { REZYGNACJA_BRUTTO, REZYGNACJA_BRUTTO_TEKST, REZYGNACJA_NETTO, REZYGNACJA_OPIS, KURIER_JEDNA_STRONA_NETTO, KURIER_DWIE_STRONY_NETTO } from '@/lib/oplaty-serwis'
 
 // Formatowanie ceny z miejscami po przecinku (555,00 zł)
 const formatPrice = (price: number | null | undefined): string => {
@@ -284,7 +285,7 @@ const handleAcceptPrice = async () => {
   }
 }
 
-  // Odrzucenie wyceny: anuluje zgłoszenie i zmienia wycenę na opłatę diagnostyczną 166,05 zł,
+  // Odrzucenie wyceny: anuluje zgłoszenie i zmienia wycenę na opłatę REZYGNACJA_BRUTTO (lib/oplaty-serwis),
   // potem otwiera płatność. Potwierdzenie płatności przychodzi webhookiem Stripe.
   const handleRejectQuote = async () => {
     if (!repair || !params?.id) return
@@ -295,7 +296,7 @@ const handleAcceptPrice = async () => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          reason: 'Wycena odrzucona - do opłacenia diagnostyka 99 zł + przesyłka 36 zł (135 zł netto / 166,05 zł brutto)',
+          reason: `Wycena odrzucona - do opłacenia: ${REZYGNACJA_OPIS}`,
           rejectQuote: true
         })
       })
@@ -742,7 +743,7 @@ const handlePaymentSuccess = async () => {
           {repair.price_notes?.startsWith('Rezygnacja') && repair.payment_status !== 'succeeded' && (
             <div className="mt-3 bg-amber-50 border border-amber-200 rounded-lg p-3">
               <p className="text-sm text-amber-900 mb-2">
-                Do opłacenia: <strong>diagnostyka i przesyłka 166,05 zł brutto</strong>.
+                Do opłacenia: <strong>diagnostyka i przesyłka {REZYGNACJA_BRUTTO_TEKST} brutto</strong>.
                 Po opłaceniu odeślemy urządzenie na Twój adres.
               </p>
               <button
@@ -750,7 +751,7 @@ const handlePaymentSuccess = async () => {
                 className="w-full px-4 py-2.5 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition-colors flex items-center justify-center gap-2"
               >
                 <CreditCard className="w-4 h-4" />
-                Opłać diagnostykę (166,05 zł)
+                Opłać diagnostykę ({REZYGNACJA_BRUTTO_TEKST})
               </button>
             </div>
           )}
@@ -1169,11 +1170,11 @@ const handlePaymentSuccess = async () => {
         <p className="text-sm text-amber-900 leading-relaxed mb-2">
           <strong>Opłata za diagnostykę i przesyłkę:</strong>
         </p>
-        <p className="text-2xl font-bold text-amber-700 mb-2">166,05 zł <span className="text-sm font-normal">(brutto)</span></p>
+        <p className="text-2xl font-bold text-amber-700 mb-2">{REZYGNACJA_BRUTTO_TEKST} <span className="text-sm font-normal">(brutto)</span></p>
         <div className="text-xs text-amber-700 space-y-0.5">
           <p>Diagnostyka: 99 zł netto</p>
-          <p>Przesyłka (odbiór + odesłanie): 36 zł netto</p>
-          <p className="pt-1 font-semibold">Razem: 135 zł netto (166,05 zł brutto)</p>
+          <p>Przesyłka (odbiór + odesłanie, 2 × {KURIER_JEDNA_STRONA_NETTO} zł): {KURIER_DWIE_STRONY_NETTO} zł netto</p>
+          <p className="pt-1 font-semibold">Razem: {REZYGNACJA_NETTO} zł netto ({REZYGNACJA_BRUTTO_TEKST} brutto)</p>
         </div>
       </div>
 
@@ -1192,7 +1193,7 @@ const handlePaymentSuccess = async () => {
           className="w-full px-4 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg text-sm font-semibold hover:from-blue-700 hover:to-indigo-700 transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
         >
           <CreditCard className="w-4 h-4" />
-          {actionLoading ? 'Chwila...' : 'Opłać diagnostykę (166,05 zł) i odbierz urządzenie'}
+          {actionLoading ? 'Chwila...' : `Opłać diagnostykę (${REZYGNACJA_BRUTTO_TEKST}) i odbierz urządzenie`}
         </button>
         <button
           onClick={() => setShowRejectModal(false)}
@@ -1309,7 +1310,7 @@ const handlePaymentSuccess = async () => {
     repairId={repair.id}
     repairNumber={repair.repair_number}
     deviceModel={repair.device_model}
-    totalAmount={166.05}
+    totalAmount={REZYGNACJA_BRUTTO}
     isDiagnosticFee={true}
     onPaymentSuccess={async () => {
       // Zgłoszenie jest już anulowane (handleRejectQuote), a płatność potwierdza webhook Stripe.

@@ -1,4 +1,5 @@
 import { sendMail } from '@/lib/mail/transport'
+import { REZYGNACJA_BRUTTO_TEKST } from '@/lib/oplaty-serwis'
 
 
 // URL bazowy dla obrazków w emailach (hostowane na Vercel)
@@ -3017,7 +3018,7 @@ export async function sendDiagnosticFeePaidAdminEmail(data: DiagnosticFeePaidAdm
           </h2>
           <p style="margin: 0 0 16px 0; color: #374151; font-size: 14px; line-height: 1.6;">
             Zgłoszenie <strong>#${shortId}</strong> zostało anulowane, a klient opłacił
-            diagnostykę i przesyłkę (<strong>166,05 zł brutto</strong>).
+            diagnostykę i przesyłkę (<strong>${REZYGNACJA_BRUTTO_TEKST} brutto</strong>).
             <strong>Odeślij urządzenie do klienta.</strong>
           </p>
           <table style="width: 100%; border-collapse: collapse; font-size: 14px; color: #374151;">

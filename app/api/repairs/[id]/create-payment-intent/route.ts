@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { stripe } from '@/lib/stripe/server';
 import { createClient } from '@/lib/supabase/server';
+import { REZYGNACJA_BRUTTO } from '@/lib/oplaty-serwis';
 
 export async function POST(
   request: NextRequest,
@@ -80,7 +81,7 @@ export async function POST(
 
     // Określ kwotę do zapłaty
     const amountToPay = isDiagnosticFee
-      ? 166.05 // Diagnostyka 99 zł netto + przesyłka 36 zł netto = 135 zł netto + VAT 23% = 166,05 zł brutto
+      ? REZYGNACJA_BRUTTO // diagnostyka + kurier w obie strony, patrz lib/oplaty-serwis
       : (repair.final_price || repair.estimated_price);
 
     if (!amountToPay || amountToPay <= 0) {

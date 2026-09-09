@@ -1268,6 +1268,10 @@ Fraza „biurkowe drukarki etykiet Zebra" jest głównym wejściem do tej katego
 - PO DEPLOYU: `is_active:true`, sprawdzenie produkcji, `/seo-audit`.
 - Wdrożone 06:42: deploy potwierdzony, produkt włączony, karta i klasa 200 z 10 cenami, klasa pokazuje ZT421/ZT510/ZT610.
 
+## 2026-09-08 — okładka wpisu o ZPL z ZD421t 1:1 (pierwsza generacja gpt_image_2_5)
+- Stara grafika: drukarka niepodobna do żadnego modelu z oferty. Nowa: `gpt_image_2_5` variant `sunburst`, 16:9 2k high, TRZY referencje renderu ZD421t (`zd421t_1..3.webp` spłaszczone), rola `image_references`, prompt ze słownym opisem konstrukcji (panel z 3 przyciskami, żółte zatrzaski, wordmark) + „STRICT PRODUCT PLACEMENT". Oba warianty wierne renderowi od pierwszego strzału — 2.5 trzyma urządzenie lepiej niż gpt_image_2. Wybrany wariant z rolkami etykiet.
+- Plik pod NOWĄ nazwą `jezyk-zpl-programowanie-etykiet-zebra-zd421t.jpeg` (2000 px, q85), stary usunięty; `coverImage` w `lib/blog.ts` podmieniony. Powód: `minimumCacheTTL` 30 dni w next/image — ta sama nazwa serwowałaby starą okładkę z CDN.
+
 ## 2026-09-08 — karta ZD230t: indeks vs ranking, cache sklepu, region, martwe linki
 - Pomyłka do zapamiętania: WebSearch „site:serwis-zebry.pl zd230t" nie pokazał karty i uznałem, że nie jest zindeksowana; użytkownik pokazał `site:<pełny URL>` — JEST w indeksie (od 30.08), ale Google trzyma STARĄ wersję (tytuł „| TAKMA", sprzed poprawek z 4.09). Wniosek: brak w `site:frazie` ≠ brak w indeksie; sprawdzać `site:` z pełnym adresem. Problem to ranking + brak recrawlu, nie indeksacja.
 - Karty i strony klas miały `force-dynamic` — w Next 14 to `fetchCache: force-no-store` dla WSZYSTKICH fetchów, więc `next: { revalidate }` nic by nie dało bez usunięcia tej linii. Teraz: `export const revalidate = 300` + fetch Supabase z `next: { revalidate: 300 }`; strony z `searchParams` pozostają dynamiczne, ale bez czekania na bazę. Lokalnie TTFB 0,1–0,23 s (produkcja przed: 0,6–1,4 s, `x-vercel-id: arn1::iad1` = funkcja w USA). `vercel.json`: `"regions": ["fra1"]`.
