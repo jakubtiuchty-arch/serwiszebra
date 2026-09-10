@@ -7338,7 +7338,7 @@ Skontaktuj się z nami - jako **Autoryzowany Serwis Zebra** oferujemy:
       ]
     },
     content: `
-> **🎯 Szybka odpowiedź:** Drukarki **Zebra ZD420** i **ZD421** to najpopularniejsze modele biurkowe - naprawiamy ich setki rocznie. Najczęstsze problemy: **błąd Media Out** (kalibracja), **Ribbon Out** (złe ładowanie), **blady wydruk** (głowica). **60% usterek** naprawisz sam (kalibracja, czyszczenie). Koszt naprawy: od **80 zł** (czyszczenie) do **850 zł** (głowica 300dpi). **Diagnostyka bezpłatna.**
+> **🎯 Szybka odpowiedź:** Drukarki **Zebra ZD420** i **ZD421** to najpopularniejsze modele biurkowe - naprawiamy ich setki rocznie. Najczęstsze problemy: **błąd Media Out** (kalibracja), **Ribbon Out** (złe ładowanie), **blady wydruk** (głowica). Większość zgłoszeń to kalibracja, ładowanie taśmy i czyszczenie, czyli rzeczy, które robisz sam w kilka minut. Koszt naprawy: od **80 zł** (czyszczenie) do **850 zł** (głowica 300dpi). **Diagnostyka bezpłatna.**
 
 ## TL;DR - Diagnostyka ZD420/ZD421 w pigułce
 
@@ -7365,7 +7365,7 @@ Skontaktuj się z nami - jako **Autoryzowany Serwis Zebra** oferujemy:
 | Rok wprowadzenia | 2017 | 2020 |
 | Łączność WiFi | Opcjonalnie | Wbudowane (modele -W) |
 | Bluetooth | Classic | Classic + BLE |
-| Wyświetlacz | Opcjonalnie | Standardowo |
+| Wyświetlacz | Opcjonalnie | Opcjonalnie: podstawowe ZD421t i ZD421d mają 5 diod LED, kolorowy LCD tylko w wybranych wersjach |
 | Głowice | 203/300 dpi | 203/300 dpi |
 | Kompatybilność głowic | ✅ Te same | ✅ Te same |
 | Prędkość druku 203dpi | do 152 mm/s | do 152 mm/s |
@@ -7373,7 +7373,7 @@ Skontaktuj się z nami - jako **Autoryzowany Serwis Zebra** oferujemy:
 | Szerokość druku | do 104 mm | do 104 mm |
 | Maks. średnica rolki | 127 mm | 127 mm |
 
-> **💡 Ważne:** Głowice drukujące są **wymienne między ZD420 a ZD421** - ten sam numer części!
+> **💡 Ważne:** Głowice ZD420 i ZD421 w wersjach d i t są **wymienne w obrębie tej samej rozdzielczości** (ten sam numer części dla 203 dpi i osobny dla 300 dpi). ZD421c z kartridżem ma inną konstrukcję mechanizmu, dlatego numer części sprawdź osobno.
 
 ### Wydruk testowy (raport konfiguracji)
 
@@ -7407,7 +7407,7 @@ Aby wydrukować raport konfiguracji i sprawdzić ustawienia:
 | Wzór | Błąd | Rozwiązanie |
 |------|------|-------------|
 | Ciągłe świecenie | **Brak materiału** | Załaduj nową rolkę etykiet |
-| Mruganie | **Ribbon Out** | Sprawdź ribbon (strona matowa do głowicy) lub wymień |
+| Mruganie | **Ribbon Out** | Sprawdź ribbon: strona matowa (barwiąca) ma dotykać etykiety, błyszcząca jest od strony głowicy; nawój OUT. Jeśli taśma jest prawidłowo założona, wymień ją |
 
 ### 🟠 Pomarańczowa dioda
 
@@ -7436,7 +7436,7 @@ Aby wydrukować raport konfiguracji i sprawdzić ustawienia:
 **Jeśli nie pomoże:**
 - Wyczyść czujnik gap/black mark sprężonym powietrzem lub IPA 99%
 - Sprawdź pozycję czujnika (dla etykiet z black mark przesuń nad znacznik)
-- Sprawdź ustawienia: Menu → Media Setup → Media Type (Gap/Black Mark/Continuous)
+- Sprawdź ustawienia: w wersji z LCD Menu → Media Setup → Media Type (Gap/Black Mark/Continuous); w wersji z diodami LED (podstawowe ZD421t/ZD421d) w sterowniku ZDesigner (Właściwości drukarki → Opcje) albo w Zebra Setup Utilities
 
 📖 [Kalibracja drukarki Zebra krok po kroku](/blog/kalibracja-drukarki-zebra-poradnik-krok-po-kroku)
 
@@ -7445,9 +7445,9 @@ Aby wydrukować raport konfiguracji i sprawdzić ustawienia:
 ### 2. Błąd "Ribbon Out" mimo załadowanego ribbona ⭐⭐⭐⭐
 
 **Rozwiązanie:**
-1. **Sprawdź orientację:** Strona **matowa (barwiąca) do głowicy**
+1. **Sprawdź orientację:** strona **matowa (barwiąca) do etykiety**, błyszcząca (nośnik) do głowicy. Barwnik ma przejść na etykietę, nie na głowicę. Taśmy Zebra do ZD mają nawój OUT (barwnik na zewnątrz rolki)
 2. **Wyczyść sensor:** Sprężone powietrze w obszarze szpuli
-3. **Sprawdź tryb:** Menu → Print → Print Method → **Thermal Transfer**
+3. **Sprawdź tryb:** w wersji z LCD Menu → Print → Print Method → **Thermal Transfer**; w wersji z diodami LED ustaw **Thermal Transfer** w sterowniku ZDesigner (Opcje → Metoda druku) albo w Zebra Setup Utilities
 
 📖 [Błąd Ribbon Out - rozwiązanie](/blog/blad-ribbon-out-drukarka-zebra-rozwiazanie)
 
@@ -7460,7 +7460,7 @@ Aby wydrukować raport konfiguracji i sprawdzić ustawienia:
 | Krok | Czynność | Sam zrobisz? |
 |------|----------|--------------|
 | 1 | [Wyczyść głowicę IPA 99%](/blog/jak-wyczyscic-glowice-drukarki-zebra) | ✅ Tak |
-| 2 | Zwiększ Darkness (Menu → Print → Darkness) | ✅ Tak |
+| 2 | Zwiększ Darkness (LCD: Menu → Print → Darkness; wersja LED: w sterowniku ZDesigner, zakładka Opcje → Ciemność) | ✅ Tak |
 | 3 | Sprawdź typ ribbona (wax/wax-resin/resin) | ✅ Tak |
 | 4 | Zmniejsz prędkość druku | ✅ Tak |
 | 5 | Wymień głowicę | ❌ Serwis |
@@ -7503,7 +7503,7 @@ Aby wydrukować raport konfiguracji i sprawdzić ustawienia:
 
 ## Reset do ustawień fabrycznych
 
-### Metoda 1: Z menu (ZD421 z wyświetlaczem)
+### Metoda 1: Z menu (tylko ZD421 w wersji z wyświetlaczem LCD; podstawowe ZD421t/ZD421d mają diody i używają metody 2)
 \`\`\`
 Menu → Settings → Reset Printer → Factory Defaults → Yes
 \`\`\`
@@ -7536,7 +7536,7 @@ Menu → Settings → Reset Printer → Factory Defaults → Yes
 
 ## Co naprawisz sam, a co wymaga serwisu?
 
-### ✅ Naprawisz sam (60% problemów):
+### ✅ Naprawisz sam (najczęstsze zgłoszenia):
 - Kalibracja etykiet (FEED 5 sek.)
 - Prawidłowe załadowanie ribbona
 - Czyszczenie głowicy alkoholem IPA 99%

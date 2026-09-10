@@ -265,12 +265,12 @@ Essentials pobierzesz na tej stronie w zakładce "Programy użytkowe".`
   },
   {
     question: 'Czy mogę używać drukarki Zebra na Mac/Linux?',
-    answer: `Zebra oficjalnie wspiera tylko Windows. Na Mac/Linux możesz:
-• Użyć Zebra Setup Utilities do druku przez sieć
-• Skonfigurować CUPS z driverem raw ZPL
-• Drukować bezpośrednio przez port sieciowy (np. 9100)
+    answer: `Sterownik ZDesigner i Zebra Setup Utilities działają tylko na Windows. Na macOS i Linux drukujesz inaczej:
+• CUPS z kolejką typu raw (drukarka po USB albo w sieci): system wysyła do drukarki gotowy ZPL bez sterownika
+• Bezpośrednio na port 9100 przez sieć (Ethernet lub Wi-Fi), np. z programu magazynowego albo skryptu
+• Z programów, które mają własny moduł druku ZPL
 
-Bezpośrednie USB na Mac/Linux wymaga dodatkowej konfiguracji.`
+Ustawienia drukarki (kalibracja, ciemność, tryb druku) zmienisz z panelu drukarki, przez jej stronę WWW po podłączeniu do sieci albo komendami ZPL. Projekt etykiety przygotuj na Windows w ZebraDesigner i wyeksportuj do ZPL, albo użyj edytora działającego w przeglądarce.`
   },
   {
     question: 'Jak pobrać 123Scan do konfiguracji skanerów Zebra?',
@@ -515,7 +515,7 @@ export default function DriversPage() {
                     <Info className="w-4 h-4 text-amber-600 mt-0.5 flex-shrink-0" />
                     <div>
                       <p className="text-sm font-medium text-amber-900">Masz Mac/Linux?</p>
-                      <p className="text-xs text-amber-700">Użyj Zebra Setup Utilities (druk przez sieć) lub CUPS z driverem raw ZPL.</p>
+                      <p className="text-xs text-amber-700">Sterownik i Zebra Setup Utilities działają tylko na Windows. Na macOS i Linux drukujesz przez CUPS (kolejka raw, ZPL) albo bezpośrednio na port 9100; ustawienia zmienisz przez stronę WWW drukarki lub komendy ZPL.</p>
                     </div>
                   </div>
                   <Link
