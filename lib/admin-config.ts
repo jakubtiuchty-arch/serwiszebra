@@ -20,6 +20,7 @@ export const ADMIN_EMAILS = [
   'zuchnicki@takma.com.pl',
   'serwis@takma.com.pl',
   'handlowy@takma.com.pl',
+  'maksym@takma.com.pl', // serwisant, od 17.09.2026
 ]
 
 /**

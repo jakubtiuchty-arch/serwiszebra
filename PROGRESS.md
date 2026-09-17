@@ -1268,6 +1268,12 @@ Fraza „biurkowe drukarki etykiet Zebra" jest głównym wejściem do tej katego
 - PO DEPLOYU: `is_active:true`, sprawdzenie produkcji, `/seo-audit`.
 - Wdrożone 06:42: deploy potwierdzony, produkt włączony, karta i klasa 200 z 10 cenami, klasa pokazuje ZT421/ZT510/ZT610.
 
+## 2026-09-17 — HOTFIX: formularz zgłoszenia — „new row violates row-level security policy for table repair_requests"
+- Zgłosił klient (mail ze zrzutem). Dziś rano inne zgłoszenia przechodziły → błąd warunkowy. Przyczyna: `/api/repair-request` używał `createServiceClient()` z `lib/supabase/server.ts`, który mimo klucza service role DOKLEJA ciasteczka sesji — u zalogowanego w panelu klienta insert szedł z jego JWT, RLS działał jak dla usera, a `basePayload` nie ma `user_id` (podpinany dopiero po insercie) → odrzucenie. Niezalogowani nie mają ciasteczka → service role → OK.
+- Naprawa (commit fc32d24): `createPureServiceClient()` (supabase-js, service role, bez cookies). `auth.admin.createUser` i upload zdjęć działają na tym samym kliencie.
+- **Ta sama pułapka czeka w**: `api/auth/register`, `register-with-order`, `set-password`, `shop/product-stock`, `repairs/[id]/proforma`, `admin/repairs/[id]/repair-type` — wszystkie używają `createServiceClient()`. Tam, gdzie zapis ma być niezależny od sesji, przejść na `createPureServiceClient()`; tam, gdzie sesja jest potrzebna do autoryzacji, zostawić. Do przeglądu.
+- Test na produkcji jako zalogowany klient nie był możliwy z sesji; poproszono użytkownika o powtórzenie zgłoszenia przez klienta po deployu.
+
 ## 2026-09-09 — opłata za rezygnację z naprawy: 173,43 zł brutto, jedna stała
 - Pytanie użytkownika o zgłoszenie #202608200931: skąd „przesyłka 36 zł netto"? Odpowiedź: znikąd — stała wpisana ręcznie w 5 plikach (panel klienta, `cancel/route.ts`, `create-payment-intent`, webhook Stripe, `lib/email.ts`), bez związku z kurierem Furgonetki. Decyzja użytkownika: kurier 21 zł netto w jedną stronę, przy rezygnacji obie strony = 42 zł netto.
 - `lib/oplaty-serwis.ts`: `DIAGNOSTYKA_NETTO` 99, `KURIER_JEDNA_STRONA_NETTO` 21, `REZYGNACJA_NETTO` 141, `REZYGNACJA_BRUTTO` 173,43 (zaokrąglenie raz, w stałej), `REZYGNACJA_BRUTTO_TEKST`, `REZYGNACJA_OPIS`. Wszystkie pięć miejsc czyta stałe. Zmiana stawki = jedna linijka.
