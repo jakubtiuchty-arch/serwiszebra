@@ -1268,6 +1268,11 @@ Fraza „biurkowe drukarki etykiet Zebra" jest głównym wejściem do tej katego
 - PO DEPLOYU: `is_active:true`, sprawdzenie produkcji, `/seo-audit`.
 - Wdrożone 06:42: deploy potwierdzony, produkt włączony, karta i klasa 200 z 10 cenami, klasa pokazuje ZT421/ZT510/ZT610.
 
+## 2026-09-09 — opłata za rezygnację z naprawy: 173,43 zł brutto, jedna stała
+- Pytanie użytkownika o zgłoszenie #202608200931: skąd „przesyłka 36 zł netto"? Odpowiedź: znikąd — stała wpisana ręcznie w 5 plikach (panel klienta, `cancel/route.ts`, `create-payment-intent`, webhook Stripe, `lib/email.ts`), bez związku z kurierem Furgonetki. Decyzja użytkownika: kurier 21 zł netto w jedną stronę, przy rezygnacji obie strony = 42 zł netto.
+- `lib/oplaty-serwis.ts`: `DIAGNOSTYKA_NETTO` 99, `KURIER_JEDNA_STRONA_NETTO` 21, `REZYGNACJA_NETTO` 141, `REZYGNACJA_BRUTTO` 173,43 (zaokrąglenie raz, w stałej), `REZYGNACJA_BRUTTO_TEKST`, `REZYGNACJA_OPIS`. Wszystkie pięć miejsc czyta stałe. Zmiana stawki = jedna linijka.
+- NIE ruszone: regulamin i FAQ nadal nie informują o opłacie za rezygnację (klient widzi ją dopiero w panelu) — do decyzji.
+
 ## 2026-09-08 — okładka wpisu o ZPL z ZD421t 1:1 (pierwsza generacja gpt_image_2_5)
 - Stara grafika: drukarka niepodobna do żadnego modelu z oferty. Nowa: `gpt_image_2_5` variant `sunburst`, 16:9 2k high, TRZY referencje renderu ZD421t (`zd421t_1..3.webp` spłaszczone), rola `image_references`, prompt ze słownym opisem konstrukcji (panel z 3 przyciskami, żółte zatrzaski, wordmark) + „STRICT PRODUCT PLACEMENT". Oba warianty wierne renderowi od pierwszego strzału — 2.5 trzyma urządzenie lepiej niż gpt_image_2. Wybrany wariant z rolkami etykiet.
 - Plik pod NOWĄ nazwą `jezyk-zpl-programowanie-etykiet-zebra-zd421t.jpeg` (2000 px, q85), stary usunięty; `coverImage` w `lib/blog.ts` podmieniony. Powód: `minimumCacheTTL` 30 dni w next/image — ta sama nazwa serwowałaby starą okładkę z CDN.

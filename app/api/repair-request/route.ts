@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createServiceClient } from '@/lib/supabase/server'
+import { createPureServiceClient } from '@/lib/supabase/server'
 import { uploadRepairPhotos, validateFileSize, validateFileType } from '@/lib/supabase/storage'
 import { sendRepairSubmittedEmail, sendRepairSubmittedAdminEmail } from '@/lib/email'
 import { z } from 'zod'
@@ -62,7 +62,12 @@ export async function GET() {
 }
 
 export async function POST(request: NextRequest) {
-  const supabase = await createServiceClient()
+  const supabase = createPureServiceClient()
+    // Czysty klient service role, BEZ ciasteczek. Poprzedni createServiceClient()
+    // doklejał sesję zalogowanego klienta i insert szedł z jego tokenem — RLS
+    // odrzucał zgłoszenie bez user_id ("new row violates row-level security
+    // policy for table repair_requests", zgłoszenie klienta 17.09.2026).
+    // Niezalogowani przechodzili, bo nie mieli ciasteczka.
   console.log('🔵 API /repair-request called')
 
   try {
