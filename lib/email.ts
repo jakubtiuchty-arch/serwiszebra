@@ -1,4 +1,5 @@
 import { sendMail } from '@/lib/mail/transport'
+import { czyZebra } from '@/lib/device-brand'
 import { REZYGNACJA_BRUTTO_TEKST } from '@/lib/oplaty-serwis'
 
 
@@ -31,8 +32,15 @@ function getEmailStyles(): string {
   `
 }
 
-// Wspólny header dla wszystkich maili do klientów - responsive (desktop inline, mobile stacked)
-function getEmailHeader(): string {
+/**
+ * Wspólny header dla maili do klientów - responsive (desktop inline, mobile stacked).
+ *
+ * `zebra` decyduje o wariancie: z odznakami partnerskimi Zebry dla zgłoszeń
+ * urządzeń Zebry, bez nich dla pozostałych marek serwisowanych przez TAKMA.
+ * Klient, który przysłał drukarkę Brothera, nie ma dostawać nagłówka
+ * o autoryzacji Zebry.
+ */
+export function getEmailHeader(zebra: boolean = true): string {
   return `
     <!-- Header z ciemnym tłem - responsive -->
     <div style="background-color: #1f2937; padding: 20px 24px;">
@@ -41,13 +49,15 @@ function getEmailHeader(): string {
           <!-- Lewa strona: Logo TAKMA + odznaki partnerskie -->
           <td class="email-header-left" style="text-align: left; vertical-align: middle;">
             <img class="email-logo" src="${EMAIL_ASSETS_URL}/takma_logo_white.png" alt="TAKMA" style="height: 50px; width: auto; display: inline-block; vertical-align: middle;">
+            ${zebra ? `
             <img class="email-badge" src="${EMAIL_ASSETS_URL}/premier-partner-1.png" alt="Zebra Premier Partner" style="height: 36px; width: auto; display: inline-block; vertical-align: middle; margin-left: 16px;">
             <img class="email-badge" src="${EMAIL_ASSETS_URL}/repair_specialist.png" alt="Repair Specialist" style="height: 36px; width: auto; display: inline-block; vertical-align: middle; margin-left: 12px;">
+            ` : ''}
           </td>
           <!-- Prawa strona: Serwis Zebra -->
           <td class="email-header-right" style="text-align: right; vertical-align: middle;">
             <span style="color: #ffffff; font-size: 20px; font-weight: 700; letter-spacing: 1px;">
-              SERWIS ZEBRA
+              ${zebra ? 'SERWIS ZEBRA' : 'SERWIS'}
             </span>
           </td>
         </tr>
@@ -364,6 +374,8 @@ interface RepairShippedEmailData {
   courierName: string
   trackingNumber: string
   trackingUrl: string
+  /** opcjonalna korekta marki; domyślnie rozpoznawana z modelu */
+  deviceBrand?: string | null
 }
 
 export async function sendRepairShippedEmail(data: RepairShippedEmailData) {
@@ -396,7 +408,7 @@ function generateRepairShippedHTML(data: RepairShippedEmailData): string {
     <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #ffffff;">
       <div style="max-width: 600px; margin: 0 auto; background-color: white;  border-radius: 8px; overflow: hidden;">
         
-${getEmailHeader()}
+${getEmailHeader(czyZebra(data.deviceBrand, data.deviceModel))}
 
         <!-- Content -->
         <div style="padding: 32px 24px;">
@@ -491,6 +503,8 @@ interface RepairPickupScheduledEmailData {
   trackingNumber: string
   pickupDate: string
   waybillLink?: string  // Link do etykiety
+  /** opcjonalna korekta marki; domyślnie rozpoznawana z modelu */
+  deviceBrand?: string | null
 }
 
 export async function sendRepairPickupScheduledEmail(data: RepairPickupScheduledEmailData) {
@@ -533,7 +547,7 @@ function generateRepairPickupScheduledHTML(data: RepairPickupScheduledEmailData,
     <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #ffffff;">
       <div style="max-width: 600px; margin: 0 auto; background-color: white; border-radius: 8px; overflow: hidden;">
         
-${getEmailHeader()}
+${getEmailHeader(czyZebra(data.deviceBrand, data.deviceModel))}
 
         <!-- Content -->
         <div style="padding: 32px 24px;">
@@ -800,6 +814,8 @@ interface QuoteReadyEmailData {
   deviceModel: string
   amount: number
   notes?: string
+  /** opcjonalna korekta marki; domyślnie rozpoznawana z modelu */
+  deviceBrand?: string | null
 }
 
 export async function sendQuoteReadyEmail(data: QuoteReadyEmailData) {
@@ -834,7 +850,7 @@ function generateQuoteReadyHTML(data: QuoteReadyEmailData, shortId: string): str
     <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #ffffff;">
       <div style="max-width: 600px; margin: 0 auto; background-color: white;  border-radius: 8px; overflow: hidden;">
         
-${getEmailHeader()}
+${getEmailHeader(czyZebra(data.deviceBrand, data.deviceModel))}
 
         <!-- Content -->
         <div style="padding: 32px 24px;">
@@ -1023,6 +1039,8 @@ interface RepairPaidEmailData {
   repairNumber?: string
   deviceModel: string
   amount: number
+  /** opcjonalna korekta marki; domyślnie rozpoznawana z modelu */
+  deviceBrand?: string | null
 }
 
 export async function sendRepairPaidEmail(data: RepairPaidEmailData) {
@@ -1057,7 +1075,7 @@ function generateRepairPaidClientHTML(data: RepairPaidEmailData, shortId: string
     <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #ffffff;">
       <div style="max-width: 600px; margin: 0 auto; background-color: white;  border-radius: 8px; overflow: hidden;">
         
-${getEmailHeader()}
+${getEmailHeader(czyZebra(data.deviceBrand, data.deviceModel))}
 
         <!-- Content -->
         <div style="padding: 32px 24px;">
@@ -1242,6 +1260,8 @@ interface RepairSubmittedEmailData {
   problemDescription: string
   isWarranty: boolean
   generatedPassword?: string // Hasło do auto-utworzonego konta
+  /** opcjonalna korekta marki; domyślnie rozpoznawana z modelu */
+  deviceBrand?: string | null
 }
 
 export async function sendRepairSubmittedEmail(data: RepairSubmittedEmailData) {
@@ -1282,7 +1302,7 @@ function generateRepairSubmittedHTML(data: RepairSubmittedEmailData, shortId: st
     <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #ffffff;">
       <div style="max-width: 600px; margin: 0 auto; background-color: white;  border-radius: 8px; overflow: hidden;">
         
-        ${getEmailHeader()}
+        ${getEmailHeader(czyZebra(data.deviceBrand, data.deviceModel))}
 
         <!-- Content -->
         <div style="padding: 32px 24px;">
@@ -1667,6 +1687,8 @@ interface QuoteAcceptedEmailData {
   repairNumber?: string
   deviceModel: string
   amount: number
+  /** opcjonalna korekta marki; domyślnie rozpoznawana z modelu */
+  deviceBrand?: string | null
 }
 
 export async function sendQuoteAcceptedEmail(data: QuoteAcceptedEmailData) {
@@ -1701,7 +1723,7 @@ function generateQuoteAcceptedHTML(data: QuoteAcceptedEmailData, shortId: string
     <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #ffffff;">
       <div style="max-width: 600px; margin: 0 auto; background-color: white;  border-radius: 8px; overflow: hidden;">
         
-${getEmailHeader()}
+${getEmailHeader(czyZebra(data.deviceBrand, data.deviceModel))}
 
         <!-- Content -->
         <div style="padding: 32px 24px;">
@@ -1892,6 +1914,8 @@ interface RepairStatusChangedEmailData {
   oldStatus: string
   newStatus: string
   note?: string
+  /** opcjonalna korekta marki; domyślnie rozpoznawana z modelu */
+  deviceBrand?: string | null
 }
 
 export async function sendRepairStatusChangedEmail(data: RepairStatusChangedEmailData) {
@@ -1952,7 +1976,7 @@ function generateRepairStatusChangedHTML(data: RepairStatusChangedEmailData, sho
     <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #ffffff;">
       <div style="max-width: 600px; margin: 0 auto; background-color: white;  border-radius: 8px; overflow: hidden;">
         
-${getEmailHeader()}
+${getEmailHeader(czyZebra(data.deviceBrand, data.deviceModel))}
 
         <!-- Content -->
         <div style="padding: 32px 24px;">
@@ -2038,6 +2062,8 @@ interface ProFormaEmailData {
   deviceModel: string
   amount: number
   proformaNumber: string
+  /** opcjonalna korekta marki; domyślnie rozpoznawana z modelu */
+  deviceBrand?: string | null
 }
 
 export async function sendProFormaEmail(data: ProFormaEmailData) {
@@ -2071,6 +2097,8 @@ interface NewChatMessageEmailData {
   senderName: string
   messagePreview: string
   isToAdmin: boolean
+  /** opcjonalna korekta marki; domyślnie rozpoznawana z modelu */
+  deviceBrand?: string | null
 }
 
 export async function sendNewChatMessageEmail(data: NewChatMessageEmailData) {
@@ -2112,7 +2140,7 @@ function generateNewChatMessageHTML(data: NewChatMessageEmailData, shortId: stri
     <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #ffffff;">
       <div style="max-width: 600px; margin: 0 auto; background-color: white;  border-radius: 8px; overflow: hidden;">
         
-${getEmailHeader()}
+${getEmailHeader(czyZebra(data.deviceBrand, data.deviceModel))}
 
         <!-- Content -->
         <div style="padding: 32px 24px;">
@@ -2217,7 +2245,7 @@ function generateProFormaHTML(data: ProFormaEmailData, shortId: string): string 
     <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #ffffff;">
       <div style="max-width: 600px; margin: 0 auto; background-color: white;  border-radius: 8px; overflow: hidden;">
         
-${getEmailHeader()}
+${getEmailHeader(czyZebra(data.deviceBrand, data.deviceModel))}
 
         <!-- Content -->
         <div style="padding: 32px 24px;">
@@ -2332,6 +2360,8 @@ interface PackageReceivedEmailData {
   courierStatus?: string
   // Opcjonalny załącznik PDF
   receiptPdf?: Buffer
+  /** opcjonalna korekta marki; domyślnie rozpoznawana z modelu */
+  deviceBrand?: string | null
 }
 
 export async function sendPackageReceivedEmail(data: PackageReceivedEmailData) {
@@ -2370,7 +2400,7 @@ function generatePackageReceivedHTML(data: PackageReceivedEmailData, shortId: st
     <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #ffffff;">
       <div style="max-width: 600px; margin: 0 auto; background-color: white;  border-radius: 8px; overflow: hidden;">
         
-${getEmailHeader()}
+${getEmailHeader(czyZebra(data.deviceBrand, data.deviceModel))}
 
         <!-- Content -->
         <div style="padding: 32px 24px;">
