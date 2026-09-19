@@ -56,10 +56,10 @@ const predkosc = (s: string) => {
   return m ? `do ${m[1]} mm/s` : s
 }
 
-/** Łączność w standardzie: część przed „opcjonalnie", bez wersji protokołów */
+/** Łączność w standardzie: część przed „opcjonalnie" lub „moduły", bez nawiasów i numerów norm */
 const lacznosc = (s: string) =>
   s
-    .split(/[,;]?\s*opcjonalnie/i)[0]
+    .split(/[,;]?\s*(opcjonalnie|moduły)/i)[0]
     .replace(/\s*\(.*?\)/g, '')
     .replace(/\b802\.11(ac|ax|n)?\b/g, 'Wi-Fi')
     .replace(/\bEthernet 10\/100\b/g, 'Ethernet')
