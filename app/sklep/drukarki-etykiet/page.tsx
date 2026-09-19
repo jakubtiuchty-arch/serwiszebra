@@ -6,6 +6,8 @@ import Footer from '@/components/Footer'
 import { KLASY_DRUKAREK } from '@/lib/printer-classes'
 import KafelekKlasy from '@/components/shop/KafelekKlasy'
 import { MODELE_SKLEPU, modeleKlasy, urlKarty, type KlasaSlug } from '@/lib/modele-sklepu'
+import PorownanieDrukarek from '@/components/shop/PorownanieDrukarek'
+import { pobierzStany, stanDlaPN } from '@/lib/stock-server'
 
 /**
  * HUB kategorii — najważniejsza strona sklepu pod frazę „drukarki etykiet
@@ -51,7 +53,35 @@ export const metadata: Metadata = {
 
 interface DeviceRow {
   slug: string
-  attributes: { klasa?: string } | null
+  attributes: { klasa?: string; variants?: { pn: string }[] } | null
+}
+
+/**
+ * Najniższa cena netto każdego modelu — do tabeli porównawczej. Numery
+ * wersji bierzemy z tych samych rekordów co licznik klas, stany jednym
+ * zapytaniem dla wszystkich modeli naraz.
+ */
+async function cenyOdModeli(): Promise<Map<string, number>> {
+  const ceny = new Map<string, number>()
+  try {
+    const res = await fetch(
+      `${supabaseUrl}/rest/v1/products?product_type=eq.drukarka&is_active=eq.true&select=slug,attributes`,
+      { headers: { apikey: supabaseKey, Authorization: `Bearer ${supabaseKey}` }, next: { revalidate: 300 } }
+    )
+    if (!res.ok) return ceny
+    const rows: DeviceRow[] = await res.json()
+    const pnyModelu = rows.map((r) => [r.slug, (r.attributes?.variants || []).map((v) => v.pn).filter(Boolean)] as const)
+    const stany = await pobierzStany(pnyModelu.flatMap(([, pns]) => pns))
+    for (const [slug, pns] of pnyModelu) {
+      const netto = pns
+        .map((pn) => stanDlaPN(stany, pn)?.netto ?? 0)
+        .filter((n) => n > 0)
+      if (netto.length) ceny.set(slug, Math.min(...netto))
+    }
+  } catch {
+    // Bez cen tabela pokazuje „na zapytanie" — parametry i tak są z kart
+  }
+  return ceny
 }
 
 /** Ile urządzeń jest w każdej klasie — do kafelków huba */
@@ -107,7 +137,7 @@ const FAQ = [
 ]
 
 export default async function DevicesCategoryPage() {
-  const liczby = await policzKlasy()
+  const [liczby, cenyOd] = await Promise.all([policzKlasy(), cenyOdModeli()])
 
   const breadcrumbSchema = {
     '@context': 'https://schema.org',
@@ -229,6 +259,8 @@ export default async function DevicesCategoryPage() {
               ))}
             </div>
           </section>
+
+          <PorownanieDrukarek cenyOd={cenyOd} />
 
           {/* Treść kategorii POD kafelkami — tu wygrywa się frazę, nie leadem */}
           <section className="mt-12 ">
