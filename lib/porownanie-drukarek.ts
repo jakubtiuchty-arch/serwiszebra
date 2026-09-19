@@ -4,6 +4,8 @@
  * Parametry pochodzą ze specyfikacji kart (`TRESC_KART[slug].spec`), więc tabela
  * nie ma własnych liczb do pilnowania: poprawka na karcie zmienia też tabelę.
  * Cena „od" to najniższa cena netto wśród wersji modelu z tabeli stanów.
+ * Każda komórka jest sprowadzona do jednej linii: pierwsza liczba, same nazwy
+ * portów, bez wersji norm i uwag — szczegóły zostają na karcie modelu.
  *
  * Powód: audyt konkurencji z 19.09.2026 (Jev) — kategoria biła TOP 10 we
  * wszystkim poza porównaniem modeli (0,20 wobec mediany 0,50).
@@ -36,10 +38,10 @@ export const nazwaKlasy = (klasa: KlasaSlug) => NAZWY_KLAS[klasa]
 const wartosc = (spec: [string, string][] | undefined, etykieta: string) =>
   spec?.find(([l]) => l === etykieta)?.[1] ?? ''
 
-/** „Termotransferowa, z taśmą" → „termotransferowy i termiczny"; „Termiczna bezpośrednia — bez taśmy" → „termiczny" */
+/** „Termotransferowa, z taśmą" → „termotransferowy"; „Termiczna bezpośrednia — bez taśmy" → „termiczny" */
 const druk = (s: string) => {
   const t = s.toLowerCase()
-  if (t.includes('termotransfer')) return 'termotransferowy i termiczny'
+  if (t.includes('termotransfer')) return 'termotransferowy'
   if (t.includes('termiczn')) return 'termiczny'
   return s
 }
@@ -50,22 +52,41 @@ const rozdzielczosc = (s: string) => {
   return dpi.length ? `${Array.from(new Set(dpi)).join(' / ')} dpi` : s
 }
 
-/** „do 152 mm/s (203 dpi), do 102 mm/s (300 dpi)" → „do 152 mm/s" */
-const predkosc = (s: string) => {
-  const m = s.match(/do\s+(\d+)\s*mm\/s/)
-  return m ? `do ${m[1]} mm/s` : s
+/** „56 mm (203 dpi), 54 mm (300 dpi)" → „56 mm" — pierwsza wartość, jak w podstawowej wersji */
+const szerokosc = (s: string) => {
+  const m = s.match(/(\d+(?:[.,]\d+)?)\s*mm/)
+  return m ? `${Math.round(Number(m[1].replace(',', '.')))} mm` : s
 }
 
-/** Łączność w standardzie: część przed „opcjonalnie" lub „moduły", bez nawiasów i numerów norm */
-const lacznosc = (s: string) =>
-  s
-    .split(/[,;]?\s*(opcjonalnie|moduły)/i)[0]
-    .replace(/\s*\(.*?\)/g, '')
-    .replace(/\b802\.11(ac|ax|n)?\b/g, 'Wi-Fi')
-    .replace(/\bEthernet 10\/100\b/g, 'Ethernet')
-    .replace(/\s{2,}/g, ' ')
-    .replace(/[\s,;]+$/, '')
-    .trim()
+/** „do 101,6 mm/s; linerless 50,8 mm/s" → „do 102 mm/s" — najwyższa prędkość, w najniższej rozdzielczości */
+const predkosc = (s: string) => {
+  const m = s.match(/do\s+(\d+(?:[.,]\d+)?)\s*mm\/s/)
+  return m ? `do ${Math.round(Number(m[1].replace(',', '.')))} mm/s` : s
+}
+
+/**
+ * Łączność w standardzie jako lista portów: z opisu przed „opcjonalnie" lub
+ * „moduły" zostają same nazwy — bez numerów wersji, liczby portów i uwag.
+ * „Bluetooth 4.1 EDR + LE albo 802.11ac z Bluetooth 5.2" to dwie wersje
+ * urządzenia, stąd „Bluetooth lub Wi-Fi".
+ */
+const lacznosc = (s: string) => {
+  const std = s.split(/[,;]?\s*(opcjonalnie|moduły)/i)[0]
+  const ma = (re: RegExp) => re.test(std)
+  const wersje = /albo\s+(wi-?fi|802\.11)/i.test(std)
+  const porty: string[] = []
+  if (ma(/USB-C/i)) porty.push('USB-C')
+  else if (ma(/USB/i)) porty.push('USB')
+  if (ma(/Ethernet/i)) porty.push(ma(/Gigabit/i) ? 'Gigabit Ethernet' : 'Ethernet')
+  if (ma(/RS-?232/i)) porty.push('RS-232')
+  if (wersje) porty.push('Bluetooth lub Wi-Fi')
+  else {
+    if (ma(/Bluetooth/i)) porty.push('Bluetooth')
+    if (ma(/wi-?fi|802\.11/i)) porty.push('Wi-Fi')
+  }
+  if (ma(/NFC/)) porty.push('NFC')
+  return porty.length ? porty.join(', ') : std.trim()
+}
 
 export function wierszePorownania(cenyOd: Map<string, number>): WierszPorownania[] {
   return MODELE_SKLEPU.map((m: ModelSklepu) => {
@@ -76,7 +97,7 @@ export function wierszePorownania(cenyOd: Map<string, number>): WierszPorownania
       href: urlKarty(m),
       klasa: m.klasa,
       druk: druk(wartosc(spec, 'Technologia druku')),
-      szerokosc: wartosc(spec, 'Szerokość druku'),
+      szerokosc: szerokosc(wartosc(spec, 'Szerokość druku')),
       rozdzielczosc: rozdzielczosc(wartosc(spec, 'Rozdzielczość')),
       predkosc: predkosc(wartosc(spec, 'Prędkość druku')),
       lacznosc: lacznosc(wartosc(spec, 'Łączność')),

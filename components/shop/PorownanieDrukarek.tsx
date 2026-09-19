@@ -26,16 +26,16 @@ export default function PorownanieDrukarek({ cenyOd }: { cenyOd: Map<string, num
       </p>
 
       <div className="mt-5 overflow-x-auto rounded-xl border border-gray-200 bg-white">
-        <table className="w-full min-w-[880px] border-collapse text-sm">
+        <table className="w-full min-w-[680px] border-collapse text-xs sm:text-sm">
           <thead>
             <tr className="bg-gray-800 text-left text-white">
-              <th scope="col" className="px-3 py-2.5 font-semibold">Model</th>
-              <th scope="col" className="px-3 py-2.5 font-semibold">Druk</th>
-              <th scope="col" className="px-3 py-2.5 font-semibold">Szerokość druku</th>
-              <th scope="col" className="px-3 py-2.5 font-semibold">Rozdzielczość</th>
-              <th scope="col" className="px-3 py-2.5 font-semibold">Prędkość</th>
-              <th scope="col" className="px-3 py-2.5 font-semibold">Łączność w standardzie</th>
-              <th scope="col" className="px-3 py-2.5 text-right font-semibold">Cena netto od</th>
+              <th scope="col" className="px-2.5 py-2 font-semibold">Model</th>
+              <th scope="col" className="px-2.5 py-2 font-semibold">Druk</th>
+              <th scope="col" className="px-2.5 py-2 font-semibold">Szerokość</th>
+              <th scope="col" className="px-2.5 py-2 font-semibold">Rozdzielczość</th>
+              <th scope="col" className="px-2.5 py-2 font-semibold">Prędkość</th>
+              <th scope="col" className="px-2.5 py-2 font-semibold">Łączność w standardzie</th>
+              <th scope="col" className="px-2.5 py-2 text-right font-semibold">Cena netto od</th>
             </tr>
           </thead>
           {KLASY_DRUKAREK.map((k) => {
@@ -47,7 +47,7 @@ export default function PorownanieDrukarek({ cenyOd }: { cenyOd: Map<string, num
                   <th
                     scope="rowgroup"
                     colSpan={7}
-                    className="px-3 py-2 text-left text-xs font-semibold uppercase tracking-wide text-gray-600"
+                    className="px-2.5 py-1.5 text-left text-xs font-semibold uppercase tracking-wide text-gray-600"
                   >
                     <Link href={`/sklep/drukarki-etykiet/${k.slug}`} className="hover:underline">
                       {k.nazwa}
@@ -59,17 +59,17 @@ export default function PorownanieDrukarek({ cenyOd }: { cenyOd: Map<string, num
                 </tr>
                 {grupa.map((w) => (
                   <tr key={w.slug} className="border-t border-gray-100 hover:bg-gray-50">
-                    <th scope="row" className="px-3 py-2 text-left font-semibold text-gray-900">
+                    <th scope="row" className="whitespace-nowrap px-2.5 py-1.5 text-left font-semibold text-gray-900">
                       <Link href={w.href} className="hover:underline">
                         {w.model}
                       </Link>
                     </th>
-                    <td className="px-3 py-2 text-gray-700">{w.druk}</td>
-                    <td className="whitespace-nowrap px-3 py-2 text-gray-700">{w.szerokosc}</td>
-                    <td className="whitespace-nowrap px-3 py-2 text-gray-700">{w.rozdzielczosc}</td>
-                    <td className="whitespace-nowrap px-3 py-2 text-gray-700">{w.predkosc}</td>
-                    <td className="px-3 py-2 text-gray-700">{w.lacznosc}</td>
-                    <td className="whitespace-nowrap px-3 py-2 text-right font-semibold text-gray-900">
+                    <td className="whitespace-nowrap px-2.5 py-1.5 text-gray-700">{w.druk}</td>
+                    <td className="whitespace-nowrap px-2.5 py-1.5 text-gray-700">{w.szerokosc}</td>
+                    <td className="whitespace-nowrap px-2.5 py-1.5 text-gray-700">{w.rozdzielczosc}</td>
+                    <td className="whitespace-nowrap px-2.5 py-1.5 text-gray-700">{w.predkosc}</td>
+                    <td className="whitespace-nowrap px-2.5 py-1.5 text-gray-700">{w.lacznosc}</td>
+                    <td className="whitespace-nowrap px-2.5 py-1.5 text-right font-semibold text-gray-900">
                       {w.cenaOd ? formatujCene(w.cenaOd) : <span className="font-normal text-gray-400">na zapytanie</span>}
                     </td>
                   </tr>
@@ -80,8 +80,9 @@ export default function PorownanieDrukarek({ cenyOd }: { cenyOd: Map<string, num
         </table>
       </div>
       <p className="mt-2 text-xs text-gray-500">
-        Prędkość dotyczy najniższej rozdzielczości modelu. Wi-Fi, Bluetooth i Ethernet spoza
-        standardu dokłada się modułem, opis wersji jest na karcie każdego modelu.
+        Modele termotransferowe drukują także termicznie. Prędkość i szerokość dotyczą
+        podstawowej wersji modelu, łączność spoza standardu dokłada się modułem. Szczegóły
+        wersji są na karcie każdego modelu.
       </p>
     </section>
   )
