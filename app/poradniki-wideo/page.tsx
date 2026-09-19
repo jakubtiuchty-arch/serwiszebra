@@ -35,6 +35,47 @@ interface Video {
 // Filmy poradnikowe - prawdziwe materiały serwisowe
 const videos: Video[] = [
   {
+    id: '24',
+    title: 'Zebra ZC100 / ZC300 — rozpakowanie drukarki kart krok po kroku',
+    description: 'Rozpakowanie drukarki kart Zebra ZC100 i ZC300: co znajduje się w zestawie i jak przygotować urządzenie do pierwszego uruchomienia.',
+    youtubeId: 's04iRbCzBqQ',
+    thumbnail: '/zc100-zc300-rozpakowanie.jpeg',
+    duration: '1:24',
+    category: 'drukarki',
+    tags: ['ZC100', 'ZC300', 'drukarka kart', 'rozpakowanie', 'pierwsze uruchomienie'],
+    featured: true
+  },
+  {
+    id: '25',
+    title: 'Zebra ZC100 / ZC300 — jak założyć taśmę barwiącą',
+    description: 'Zakładanie kasety z taśmą barwiącą w drukarkach kart Zebra ZC100 i ZC300 krok po kroku.',
+    youtubeId: 'sz8ixZWbPvM',
+    thumbnail: '/zc100-zc300-tasma-barwiaca.jpeg',
+    duration: '0:56',
+    category: 'drukarki',
+    tags: ['ZC100', 'ZC300', 'drukarka kart', 'taśma barwiąca', 'YMCKO', 'kaseta'],
+  },
+  {
+    id: '26',
+    title: 'Zebra ZC100 / ZC300 — jak włożyć karty do podajnika',
+    description: 'Jak poprawnie załadować karty PVC do podajnika drukarek kart Zebra ZC100 i ZC300.',
+    youtubeId: 'VRy5608Fq3Y',
+    thumbnail: '/zc100-zc300-karty-podajnik.jpeg',
+    duration: '0:45',
+    category: 'drukarki',
+    tags: ['ZC100', 'ZC300', 'drukarka kart', 'podajnik', 'karty PVC', 'CR80'],
+  },
+  {
+    id: '27',
+    title: 'Zebra ZC100 / ZC300 — czyszczenie drukarki kartą czyszczącą',
+    description: 'Przebieg cyklu czyszczenia drukarek kart Zebra ZC100 i ZC300 kartą czyszczącą — konserwacja, która zapobiega wadom wydruku.',
+    youtubeId: '3rWB7HKAySQ',
+    thumbnail: '/zc100-zc300-czyszczenie.jpeg',
+    duration: '1:33',
+    category: 'drukarki',
+    tags: ['ZC100', 'ZC300', 'drukarka kart', 'czyszczenie', 'karta czyszcząca', 'konserwacja'],
+  },
+  {
     id: '23',
     title: 'Dyrektywa RED - co oznacza dla drukarek Zebra?',
     description: 'Wyjaśnienie europejskiej dyrektywy radiowej RED (Radio Equipment Directive) i jej wpływu na drukarki etykiet Zebra z modułami WiFi i Bluetooth. Certyfikacja CE, zgodność i wymogi prawne.',

@@ -1,15 +1,16 @@
 'use client'
 
-import { Fragment } from 'react'
+import { Fragment, useState } from 'react'
 import Link from 'next/link'
 import {
   ChevronRight,
   BookOpen,
   Info,
+  Play,
 } from 'lucide-react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
-import type { PolishManual } from '@/lib/polish-manuals'
+import type { PolishManual, PolishManualVideo } from '@/lib/polish-manuals'
 import PolishManualPdfButton from './PolishManualPdfButton'
 import FunnelBanners from './FunnelBanners'
 
@@ -23,6 +24,65 @@ interface PolishManualContentProps {
   modelSlug: string
   modelName: string
   variant?: ScannerVariant | null
+}
+
+/**
+ * Poradniki wideo w rozdziale instrukcji. Odtwarzacz YouTube ładuje się dopiero
+ * po kliknięciu miniatury — instrukcje otwiera się często z wyszukiwarki, więc
+ * strona nie może ciągnąć skryptów i ciasteczek serwisu wideo przy każdym wejściu.
+ */
+function WideoRozdzialu({ videos }: { videos: PolishManualVideo[] }) {
+  const [odtwarzane, setOdtwarzane] = useState<string | null>(null)
+
+  return (
+    <div className="mt-5 border-t border-gray-200 pt-5 sm:mt-6 sm:pt-6">
+      <h3 className="mb-3 text-sm font-semibold text-gray-900 sm:text-base">
+        {videos.length > 1 ? 'Zobacz na wideo' : 'Zobacz na wideo'}
+      </h3>
+      <div className={`grid gap-3 sm:gap-4 ${videos.length > 1 ? 'sm:grid-cols-2' : ''}`}>
+        {videos.map((v) => {
+          const miniatura = v.thumbnail || `https://i.ytimg.com/vi/${v.youtubeId}/hqdefault.jpg`
+          return (
+            <figure key={v.youtubeId} className="overflow-hidden rounded-lg border border-gray-200">
+              <div className="relative aspect-video bg-gray-900">
+                {odtwarzane === v.youtubeId ? (
+                  <iframe
+                    src={`https://www.youtube-nocookie.com/embed/${v.youtubeId}?autoplay=1&rel=0&playsinline=1`}
+                    title={v.title}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="absolute inset-0 h-full w-full"
+                  />
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => setOdtwarzane(v.youtubeId)}
+                    aria-label={`Odtwórz film: ${v.title}`}
+                    className="group absolute inset-0 h-full w-full"
+                  >
+                    {/* Miniatura z repo albo kadr z YouTube — zwykły img, bez remotePatterns */}
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={miniatura}
+                      alt=""
+                      loading="lazy"
+                      className="h-full w-full object-cover opacity-90 transition group-hover:opacity-100"
+                    />
+                    <span className="absolute inset-0 flex items-center justify-center">
+                      <span className="flex h-12 w-12 items-center justify-center rounded-full bg-red-600 shadow-lg transition group-hover:scale-110 sm:h-14 sm:w-14">
+                        <Play className="ml-0.5 h-5 w-5 text-white sm:h-6 sm:w-6" fill="white" />
+                      </span>
+                    </span>
+                  </button>
+                )}
+              </div>
+              <figcaption className="px-3 py-2 text-sm text-gray-800">{v.title}</figcaption>
+            </figure>
+          )
+        })}
+      </div>
+    </div>
+  )
 }
 
 export default function PolishManualContent({ polishManual, modelSlug, modelName, variant }: PolishManualContentProps) {
@@ -185,6 +245,10 @@ export default function PolishManualContent({ polishManual, modelSlug, modelName
               >
                 {section.content}
               </ReactMarkdown>
+
+              {section.videos && section.videos.length > 0 && (
+                <WideoRozdzialu videos={section.videos} />
+              )}
             </div>
           </article>
           {index === bannerAfterIndex && (

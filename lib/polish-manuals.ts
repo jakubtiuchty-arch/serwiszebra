@@ -2,9 +2,18 @@
 // Każda instrukcja zawiera najważniejsze informacje po polsku
 // ŹRÓDŁO: Oficjalny Service Manual Zebra (P213529-02EN, March 2025)
 
+/** Poradnik wideo osadzony w rozdziale instrukcji (odtwarzacz ładuje się po kliknięciu) */
+export interface PolishManualVideo {
+  youtubeId: string
+  title: string
+  /** Miniatura z `public/`; bez niej bierzemy kadr z YouTube */
+  thumbnail?: string
+}
+
 export interface PolishManualSection {
   title: string
   content: string
+  videos?: PolishManualVideo[]
 }
 
 export interface PolishManual {
@@ -20790,6 +20799,9 @@ Zebra ZC100 to kompaktowa jednostronna drukarka kart identyfikacyjnych, zaprojek
       },
       {
         title: '2. Rozpakowanie i instalacja',
+        videos: [
+          { youtubeId: 's04iRbCzBqQ', title: 'Rozpakowanie drukarki krok po kroku', thumbnail: '/zc100-zc300-rozpakowanie.jpeg' },
+        ],
         content: `
 ### Zawartość opakowania
 
@@ -20824,6 +20836,10 @@ Zebra ZC100 to kompaktowa jednostronna drukarka kart identyfikacyjnych, zaprojek
       },
       {
         title: '3. Ładowanie materiałów eksploatacyjnych',
+        videos: [
+          { youtubeId: 'sz8ixZWbPvM', title: 'Jak założyć taśmę barwiącą', thumbnail: '/zc100-zc300-tasma-barwiaca.jpeg' },
+          { youtubeId: 'VRy5608Fq3Y', title: 'Jak włożyć karty do podajnika', thumbnail: '/zc100-zc300-karty-podajnik.jpeg' },
+        ],
         content: `
 ### Ładowanie kasety z taśmą
 
@@ -20928,6 +20944,9 @@ Aby zainstalować sterownik ręcznie:
       },
       {
         title: '6. Konserwacja i czyszczenie',
+        videos: [
+          { youtubeId: '3rWB7HKAySQ', title: 'Czyszczenie drukarki kartą czyszczącą', thumbnail: '/zc100-zc300-czyszczenie.jpeg' },
+        ],
         content: `
 ### Kiedy czyścić drukarkę
 
@@ -21173,6 +21192,9 @@ Zebra ZC300 to zaawansowana drukarka kart identyfikacyjnych z **kolorowym wyświ
       },
       {
         title: '2. Rozpakowanie i instalacja',
+        videos: [
+          { youtubeId: 's04iRbCzBqQ', title: 'Rozpakowanie drukarki krok po kroku', thumbnail: '/zc100-zc300-rozpakowanie.jpeg' },
+        ],
         content: `
 ### Zawartość opakowania
 
@@ -21208,6 +21230,10 @@ Zebra ZC300 to zaawansowana drukarka kart identyfikacyjnych z **kolorowym wyświ
       },
       {
         title: '3. Ładowanie materiałów eksploatacyjnych',
+        videos: [
+          { youtubeId: 'sz8ixZWbPvM', title: 'Jak założyć taśmę barwiącą', thumbnail: '/zc100-zc300-tasma-barwiaca.jpeg' },
+          { youtubeId: 'VRy5608Fq3Y', title: 'Jak włożyć karty do podajnika', thumbnail: '/zc100-zc300-karty-podajnik.jpeg' },
+        ],
         content: `
 ### Ładowanie kasety z taśmą
 
@@ -21393,6 +21419,9 @@ Aby zainstalować sterownik ręcznie:
       },
       {
         title: '8. Konserwacja i czyszczenie',
+        videos: [
+          { youtubeId: '3rWB7HKAySQ', title: 'Czyszczenie drukarki kartą czyszczącą', thumbnail: '/zc100-zc300-czyszczenie.jpeg' },
+        ],
         content: `
 ### Kiedy czyścić drukarkę
 
