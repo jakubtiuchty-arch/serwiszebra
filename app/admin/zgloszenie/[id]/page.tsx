@@ -94,6 +94,7 @@ const STATUS_LABELS: Record<string, string> = {
   diagnoza: 'Diagnoza',
   wycena: 'Wycena',
   proforma: 'Pro Forma',
+  oplacone: 'Opłacono',
   w_naprawie: 'W naprawie',
   zakonczone: 'Zakończone',
   wyslane: 'Wysłane',
@@ -111,6 +112,7 @@ const STATUS_COLORS: Record<string, string> = {
   diagnoza: 'bg-yellow-100 text-yellow-800 border-yellow-200',
   wycena: 'bg-cyan-100 text-cyan-800 border-cyan-200',
   proforma: 'bg-orange-100 text-orange-800 border-orange-200',
+  oplacone: 'bg-emerald-100 text-emerald-800 border-emerald-200',
   w_naprawie: 'bg-indigo-100 text-indigo-800 border-indigo-200',
   zakonczone: 'bg-green-100 text-green-800 border-green-200',
   wyslane: 'bg-teal-100 text-teal-800 border-teal-200',
@@ -122,10 +124,10 @@ const STATUS_COLORS: Record<string, string> = {
 }
 
 // Statusy dla napraw płatnych
-const PAID_STATUSES = ['nowe', 'odbior_od_klienta', 'odebrane', 'diagnoza', 'wycena', 'proforma', 'w_naprawie', 'zakonczone', 'wyslane', 'anulowane']
+const PAID_STATUSES = ['nowe', 'odbior_od_klienta', 'odebrane', 'diagnoza', 'wycena', 'proforma', 'oplacone', 'w_naprawie', 'zakonczone', 'wyslane', 'anulowane']
 
 // Statusy dla napraw gwarancyjnych
-const WARRANTY_STATUSES = ['nowe', 'odbior_od_klienta', 'odebrane', 'weryfikacja_gwarancji', 'gwarancja_potwierdzona', 'gwarancja_odrzucona', 'w_naprawie', 'zakonczone', 'wyslane', 'anulowane']
+const WARRANTY_STATUSES = ['nowe', 'odbior_od_klienta', 'odebrane', 'weryfikacja_gwarancji', 'gwarancja_potwierdzona', 'gwarancja_odrzucona', 'oplacone', 'w_naprawie', 'zakonczone', 'wyslane', 'anulowane']
 
 const REPAIR_TYPE_LABELS: Record<string, string> = {
   paid: 'Płatna',
@@ -564,6 +566,7 @@ export default function AdminRepairDetailPage() {
     'odebrane',
     'diagnoza',
     'wycena',
+    'oplacone',
     'w_naprawie',
     'zakonczone',
     'wyslane'
@@ -1265,6 +1268,22 @@ export default function AdminRepairDetailPage() {
                       </option>
                     ))}
                   </select>
+                </div>
+
+                {/* Notatka trafia do historii i — przy „W naprawie” — do maila
+                    z informacją dla klienta. API przyjmowało ją od początku,
+                    brakowało tylko pola w panelu. */}
+                <div>
+                  <label className="block text-xs font-semibold text-gray-700 mb-1">
+                    Notatka dla klienta <span className="font-normal text-gray-500">(opcjonalnie)</span>
+                  </label>
+                  <textarea
+                    value={statusForm.notes}
+                    onChange={(e) => setStatusForm({ ...statusForm, notes: e.target.value })}
+                    rows={2}
+                    placeholder="np. zakres prac albo powód zmiany statusu"
+                    className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all resize-none"
+                  />
                 </div>
 
                 <button

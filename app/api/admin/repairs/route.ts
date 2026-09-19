@@ -141,7 +141,7 @@ export async function GET(request: NextRequest) {
 
     // Oblicz statystyki
     const total = allRepairs?.length || 0
-    const activeStatuses = ['nowe', 'odebrane', 'diagnoza', 'wycena', 'w_naprawie']
+    const activeStatuses = ['nowe', 'odebrane', 'diagnoza', 'wycena', 'oplacone', 'w_naprawie']
     const completedStatuses = ['zakonczone', 'wyslane']
     
     const active = allRepairs?.filter(r => activeStatuses.includes(r.status)).length || 0

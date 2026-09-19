@@ -53,7 +53,7 @@ export function ofertaAktywna(o: OfertaPanelu, teraz = new Date()): boolean {
  * aż do wysyłki. Przed wyceną (nowe, odbiór, odebrane, diagnoza) nie ma jeszcze
  * do czego dopiąć argumentu „następnym razem bez rachunku".
  */
-const STATUSY_Z_WYCENA = ['wycena', 'w_naprawie', 'zakonczone']
+const STATUSY_Z_WYCENA = ['wycena', 'oplacone', 'w_naprawie', 'zakonczone']
 
 /** Klient ma w toku naprawę drukarki, dla której serwisant wystawił wycenę */
 export const drukarkaZWycena = (naprawy: NaprawaDlaOfert[]) =>

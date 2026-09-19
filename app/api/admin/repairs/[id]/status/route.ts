@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { requireAdminServer } from '@/lib/auth-server'
 import { createClient } from '@/lib/supabase/server'
-import { sendRepairStatusChangedEmail, sendPackageReceivedEmail } from '@/lib/email'
+import { sendRepairStatusChangedEmail, sendPackageReceivedEmail, sendRepairStartedEmail } from '@/lib/email'
 import { generateReceiptPDF } from '@/lib/receipt-pdf-generator'
 import { canReceiveEmail } from '@/lib/email-utils'
 
@@ -38,6 +38,7 @@ export async function PATCH(
       'odebrane',
       'diagnoza',
       'wycena',
+      'oplacone',
       'w_naprawie',
       'zakonczone',
       'wyslane',
@@ -82,8 +83,10 @@ export async function PATCH(
       updated_at: new Date().toISOString()
     }
 
-    // Jeśli zmieniamy na "w_naprawie" i płatność była Pro Forma - oznacz jako zapłacone
-    if (status === 'w_naprawie' && currentRepair?.payment_status === 'proforma') {
+    // Wpłatę z Pro Formy potwierdza serwisant statusem "Opłacono".
+    // Wcześniej robił to status "W naprawie", przez co klient dostawał
+    // informację o rozpoczęciu naprawy w chwili zaksięgowania przelewu.
+    if (status === 'oplacone' && currentRepair?.payment_status === 'proforma') {
       updateData.payment_status = 'succeeded'
       updateData.paid_at = new Date().toISOString()
       console.log('📄 Pro Forma payment confirmed - marking as paid')
@@ -129,10 +132,10 @@ export async function PATCH(
       if (!recentEntries || recentEntries.length === 0) {
         // Jeśli to potwierdzenie płatności Pro Forma, dodaj odpowiednią notatkę
         let historyNote = notes || null
-        if (status === 'w_naprawie' && currentRepair?.payment_status === 'proforma') {
+        if (status === 'oplacone' && currentRepair?.payment_status === 'proforma') {
           historyNote = notes 
             ? `${notes} (Pro Forma opłacona)` 
-            : 'Płatność Pro Forma potwierdzona - rozpoczęto naprawę'
+            : 'Płatność Pro Forma potwierdzona'
         }
 
         const { error: historyError } = await supabase
@@ -154,7 +157,9 @@ export async function PATCH(
       // Wyślij email o zmianie statusu.
       // Zgłoszenia przyjęte w biurze bez adresu mają zaślepkę w domenie .invalid —
       // nie ma tam do kogo wysyłać, a próba tylko zaśmiecałaby logi.
-      if (currentRepair && canReceiveEmail(currentRepair.email)) {
+      // tylko przy faktycznej zmianie — powtórny zapis tego samego statusu
+      // wysyłał klientowi kolejny mail „W naprawie → W naprawie”
+      if (statusChanged && currentRepair && canReceiveEmail(currentRepair.email)) {
         try {
           // Specjalny email dla statusu "odebrane" - Potwierdzenie przyjęcia urządzenia z PDF
           if (status === 'odebrane') {
@@ -192,9 +197,21 @@ export async function PATCH(
               receiptPdf: receiptPdf
             })
             console.log('✅ Package received confirmation email with PDF sent, result:', emailResult)
+          } else if (status === 'w_naprawie') {
+            // Urządzenie trafiło na stanowisko serwisowe — osobna wiadomość
+            await sendRepairStartedEmail({
+              to: currentRepair.email,
+              customerName: `${currentRepair.first_name} ${currentRepair.last_name}`,
+              repairId: repairId,
+              repairNumber: currentRepair.repair_number,
+              deviceModel: currentRepair.device_model,
+              serialNumber: currentRepair.serial_number,
+              note: notes || undefined
+            })
+            console.log('✅ Repair started email sent')
           } else {
             // Standardowy email o zmianie statusu dla pozostałych statusów
-            const notifyStatuses = ['diagnoza', 'wycena', 'w_naprawie', 'naprawione', 'wyslane', 'zakonczone']
+            const notifyStatuses = ['diagnoza', 'wycena', 'naprawione', 'wyslane', 'zakonczone']
             if (notifyStatuses.includes(status)) {
               await sendRepairStatusChangedEmail({
                 to: currentRepair.email,

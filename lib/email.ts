@@ -491,6 +491,146 @@ ${getEmailHeader(czyZebra(data.deviceBrand, data.deviceModel))}
   `
 }
 
+// ========== EMAIL O ROZPOCZĘCIU NAPRAWY ==========
+
+interface RepairStartedEmailData {
+  to: string
+  customerName: string
+  repairId: string
+  repairNumber?: string
+  deviceModel: string
+  serialNumber?: string | null
+  /** opcjonalna korekta marki; domyślnie rozpoznawana z modelu */
+  deviceBrand?: string | null
+  /** notatka serwisanta z formularza zmiany statusu */
+  note?: string | null
+}
+
+/**
+ * Wychodzi w chwili, gdy serwisant bierze urządzenie na stanowisko — nie przy
+ * płatności. Dzięki temu „rozpoczęliśmy naprawę” znaczy dokładnie to, co mówi,
+ * a klient nie musi dopytywać o postęp.
+ */
+export async function sendRepairStartedEmail(data: RepairStartedEmailData) {
+  try {
+    const shortId = getRepairNumber(data.repairId, data.repairNumber)
+
+    const email = await sendMail({
+      from: 'Serwis Zebra <serwis@serwis-zebry.pl>',
+      to: data.to,
+      subject: `Rozpoczęliśmy naprawę urządzenia - ${data.deviceModel} #${shortId}`,
+      html: generateRepairStartedHTML(data, shortId)
+    })
+
+    console.log('[Email] Repair started email sent:', email)
+    return email
+
+  } catch (error) {
+    console.error('[Email] Error sending repair started email:', error)
+    throw error
+  }
+}
+
+function generateRepairStartedHTML(data: RepairStartedEmailData, shortId: string): string {
+  return `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      ${getEmailStyles()}
+    </head>
+    <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #ffffff;">
+      <div style="max-width: 600px; margin: 0 auto; background-color: white;  border-radius: 8px; overflow: hidden;">
+
+${getEmailHeader(czyZebra(data.deviceBrand, data.deviceModel))}
+
+        <!-- Content -->
+        <div style="padding: 32px 24px;">
+
+          <!-- Status message -->
+          <div style="text-align: center; margin-bottom: 32px;">
+            <div style="display: inline-block; background-color: #6366f1; width: 64px; height: 64px; border-radius: 50%; margin-bottom: 16px;">
+              <div style="color: white; font-size: 32px; line-height: 64px;">🔧</div>
+            </div>
+            <h2 style="margin: 0 0 8px 0; font-size: 24px; color: #111827;">
+              Rozpoczęliśmy naprawę urządzenia
+            </h2>
+            <p style="margin: 0; color: #6b7280;">
+              Urządzenie zostało przekazane na stanowisko serwisowe
+            </p>
+          </div>
+
+          <!-- Device info -->
+          <div style="background-color: #f9fafb; border-radius: 8px; padding: 20px; margin-bottom: 24px;">
+            <table style="width: 100%;">
+              <tr>
+                <td style="color: #6b7280; font-size: 14px;">Urządzenie:</td>
+                <td style="text-align: right; font-weight: 600; color: #111827;">${data.deviceModel}</td>
+              </tr>
+              ${data.serialNumber ? `
+              <tr>
+                <td style="color: #6b7280; font-size: 14px; padding-top: 8px;">Numer seryjny:</td>
+                <td style="text-align: right; padding-top: 8px; font-weight: 600; color: #111827; font-family: monospace;">${data.serialNumber}</td>
+              </tr>
+              ` : ''}
+              <tr>
+                <td style="color: #6b7280; font-size: 14px; padding-top: 8px;">Nr zgłoszenia:</td>
+                <td style="text-align: right; padding-top: 8px; font-family: monospace;">${shortId}</td>
+              </tr>
+            </table>
+          </div>
+
+          <!-- Dalsze kroki -->
+          <div style="background-color: #eef2ff; border-radius: 8px; padding: 20px; margin-bottom: 24px;">
+            <h4 style="margin: 0 0 12px 0; font-size: 16px; color: #3730a3;">
+              Dalsze kroki
+            </h4>
+            <p style="margin: 0 0 10px 0; color: #312e81; font-size: 14px; line-height: 1.6;">
+              O zakończeniu naprawy poinformujemy Państwa odrębną wiadomością wraz z danymi przesyłki zwrotnej.
+            </p>
+            <p style="margin: 0; color: #312e81; font-size: 14px; line-height: 1.6;">
+              W przypadku stwierdzenia usterki nieobjętej zaakceptowaną wyceną skontaktujemy się w celu uzyskania Państwa decyzji co do dalszego zakresu prac.
+            </p>
+          </div>
+
+          ${data.note ? `
+          <!-- Informacja serwisu -->
+          <div style="background-color: #fef3c7; border-radius: 8px; padding: 20px; margin-bottom: 24px;">
+            <h4 style="margin: 0 0 8px 0; font-size: 16px; color: #92400e;">
+              Informacja serwisu
+            </h4>
+            <p style="margin: 0; color: #451a03; font-size: 14px; line-height: 1.6;">
+              ${data.note}
+            </p>
+          </div>
+          ` : ''}
+
+          <!-- CTA -->
+          <div style="text-align: center; margin-bottom: 24px;">
+            <a href="https://www.serwis-zebry.pl/panel"
+               style="display: inline-block; background-color: #2563eb; color: white; padding: 12px 32px; border-radius: 8px; text-decoration: none; font-weight: 600;">
+              Sprawdź szczegóły
+            </a>
+          </div>
+
+          <!-- Contact -->
+          <div style="text-align: center; color: #6b7280; font-size: 14px;">
+            <p style="margin: 0 0 8px 0;">W razie pytań prosimy o kontakt:</p>
+            <p style="margin: 0;">
+              <strong>Tel:</strong> +48 607 819 688<br>
+              <strong>Email:</strong> serwis@takma.com.pl
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </body>
+    </html>
+  `
+}
+
 // ========== EMAIL O ZAMÓWIENIU KURIERA DO ODBIORU ==========
 
 interface RepairPickupScheduledEmailData {
@@ -1945,6 +2085,7 @@ function generateRepairStatusChangedHTML(data: RepairStatusChangedEmailData, sho
     'diagnoza': 'Diagnoza',
     'wycena': 'Wycena do akceptacji',
     'oczekiwanie_na_platnosc': 'Oczekiwanie na płatność',
+    'oplacone': 'Opłacono',
     'w_naprawie': 'W naprawie',
     'naprawione': 'Naprawione',
     'wyslane': 'Wysłane',
@@ -1958,6 +2099,7 @@ function generateRepairStatusChangedHTML(data: RepairStatusChangedEmailData, sho
     'diagnoza': '#f59e0b',
     'wycena': '#f59e0b',
     'oczekiwanie_na_platnosc': '#f59e0b',
+    'oplacone': '#10b981',
     'w_naprawie': '#8b5cf6',
     'naprawione': '#10b981',
     'wyslane': '#10b981',

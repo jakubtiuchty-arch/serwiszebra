@@ -96,6 +96,7 @@ const STATUS_CONFIG: Record<string, { label: string; className: string }> = {
   diagnoza: { label: 'Diagnoza', className: 'bg-blue-100 text-blue-800' },
   wycena: { label: 'Wycena', className: 'bg-blue-100 text-blue-800' },
   proforma: { label: 'Pro Forma', className: 'bg-orange-100 text-orange-800' },
+  oplacone: { label: 'Opłacono', className: 'bg-emerald-100 text-emerald-800' },
   w_naprawie: { label: 'W naprawie', className: 'bg-indigo-100 text-indigo-800' },
   zakonczone: { label: 'Zakończone', className: 'bg-gray-800 text-white' },
   wyslane: { label: 'Wysłane', className: 'bg-gray-800 text-white' },

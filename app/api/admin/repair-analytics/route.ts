@@ -42,7 +42,7 @@ export async function GET(req: NextRequest) {
 
     // 1. Statystyki — wszystko z filtrowanego okresu
     const completedStatuses = ['zakonczone', 'wyslane']
-    const activeStatuses = ['nowe', 'odebrane', 'diagnoza', 'wycena', 'w_naprawie']
+    const activeStatuses = ['nowe', 'odebrane', 'diagnoza', 'wycena', 'oplacone', 'w_naprawie']
 
     const revenueRepairs = allRepairs.filter(
       r => completedStatuses.includes(r.status) && r.final_price

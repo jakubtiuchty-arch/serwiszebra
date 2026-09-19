@@ -1,5 +1,5 @@
 interface StatusBadgeProps {
-  status: 'nowe' | 'odebrane' | 'diagnoza' | 'wycena' | 'w_naprawie' | 'zakonczone' | 'wyslane' | 'anulowane'
+  status: 'nowe' | 'odebrane' | 'diagnoza' | 'wycena' | 'oplacone' | 'w_naprawie' | 'zakonczone' | 'wyslane' | 'anulowane'
   size?: 'sm' | 'md' | 'lg'
 }
 
@@ -19,6 +19,10 @@ const STATUS_CONFIG = {
   wycena: {
     label: 'Oczekuje na wycenę',
     className: 'bg-orange-100 text-orange-800 border-orange-200',
+  },
+  oplacone: {
+    label: 'Opłacono',
+    className: 'bg-emerald-100 text-emerald-800 border-emerald-200',
   },
   w_naprawie: {
     label: 'W naprawie',

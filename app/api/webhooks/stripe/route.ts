@@ -56,7 +56,8 @@ async function handleRepairPayment(repairId: string, supabase: any) {
       .update({
         payment_status: 'succeeded',
         paid_at: new Date().toISOString(),
-        status: 'w_naprawie',
+        // płatność ≠ rozpoczęcie naprawy; na stół bierze ją serwisant
+        status: 'oplacone',
         updated_at: new Date().toISOString(),
       })
       .eq('id', repairId);
@@ -71,12 +72,12 @@ async function handleRepairPayment(repairId: string, supabase: any) {
       .from('repair_status_history')
       .insert({
         repair_request_id: repairId,
-        status: 'w_naprawie',
+        status: 'oplacone',
         notes: 'Status zmieniony automatycznie po opłaceniu naprawy',
         changed_by: 'system',
       });
 
-    console.log(`✅ Repair ${repairId} marked as paid and status changed to w_naprawie`);
+    console.log(`✅ Repair ${repairId} marked as paid and status changed to oplacone`);
 
     // Wyślij emaile
     try {

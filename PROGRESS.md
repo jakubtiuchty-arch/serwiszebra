@@ -1268,6 +1268,12 @@ Fraza „biurkowe drukarki etykiet Zebra" jest głównym wejściem do tej katego
 - PO DEPLOYU: `is_active:true`, sprawdzenie produkcji, `/seo-audit`.
 - Wdrożone 06:42: deploy potwierdzony, produkt włączony, karta i klasa 200 z 10 cenami, klasa pokazuje ZT421/ZT510/ZT610.
 
+## 2026-09-17 — konto admina dla nowego serwisanta (maksym@takma.com.pl)
+- Auth: użytkownik przez `/auth/v1/admin/users` (email_confirm, user_metadata first_name), id `fcdb1217-…`. Trigger tworzy profil z `role: user` → upsert `profiles` z `role: admin`, `is_active: true`. Logowanie hasłem sprawdzone (access_token OK).
+- Kod: `ADMIN_EMAILS` w `lib/admin-config.ts` (zwykły admin = Dashboard, zgłoszenia, użytkownicy, instrukcje, poczta, wdrożenia; bez sklepu i AI/RAG). Middleware rozpoznaje admina po `profiles.role`, listy w middleware dotyczą tylko superadmina i sklepu.
+- Pułapka zsh: `UID=` jest zmienną specjalną tylko do odczytu — skrypt padł w połowie („bad math expression"); użyć innej nazwy.
+- NIE dodany do list powiadomień mailowych o wiadomościach/płatnościach (`repairs/[id]/messages`, `confirm-payment`, `cron/mail-sync` — tam są wojcik/zuchnicki/serwis) — do decyzji użytkownika.
+
 ## 2026-09-17 — HOTFIX: formularz zgłoszenia — „new row violates row-level security policy for table repair_requests"
 - Zgłosił klient (mail ze zrzutem). Dziś rano inne zgłoszenia przechodziły → błąd warunkowy. Przyczyna: `/api/repair-request` używał `createServiceClient()` z `lib/supabase/server.ts`, który mimo klucza service role DOKLEJA ciasteczka sesji — u zalogowanego w panelu klienta insert szedł z jego JWT, RLS działał jak dla usera, a `basePayload` nie ma `user_id` (podpinany dopiero po insercie) → odrzucenie. Niezalogowani nie mają ciasteczka → service role → OK.
 - Naprawa (commit fc32d24): `createPureServiceClient()` (supabase-js, service role, bez cookies). `auth.admin.createUser` i upload zdjęć działają na tym samym kliencie.

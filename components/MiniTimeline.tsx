@@ -23,6 +23,7 @@ const STATUS_CONFIG: Record<string, { label: string; icon: any; color: string }>
   diagnoza: { label: 'Diagnostyka', icon: Search, color: '#6366F1' },
   wycena: { label: 'Wycena', icon: FileText, color: '#0EA5E9' },
   proforma: { label: 'Pro Forma', icon: FileText, color: '#F97316' },
+  oplacone: { label: 'Opłacono', icon: CheckCircle, color: '#10B981' },
   w_naprawie: { label: 'Naprawa', icon: Wrench, color: '#8B5CF6' },
   zakonczone: { label: 'Zakończone', icon: PartyPopper, color: '#10B981' },
   wyslane: { label: 'Wysłane', icon: Truck, color: '#059669' },
@@ -32,7 +33,7 @@ const STATUS_CONFIG: Record<string, { label: string; icon: any; color: string }>
   anulowane: { label: 'Anulowane', icon: X, color: '#6B7280' }
 }
 
-const PAID_STATUS_ORDER = ['nowe', 'odebrane', 'diagnoza', 'wycena', 'w_naprawie', 'zakonczone', 'wyslane']
+const PAID_STATUS_ORDER = ['nowe', 'odebrane', 'diagnoza', 'wycena', 'oplacone', 'w_naprawie', 'zakonczone', 'wyslane']
 const WARRANTY_STATUS_ORDER = ['nowe', 'odebrane', 'weryfikacja_gwarancji', 'gwarancja_potwierdzona', 'w_naprawie', 'zakonczone', 'wyslane']
 
 export default function MiniTimeline({ currentStatus, repairType = 'paid' }: MiniTimelineProps) {

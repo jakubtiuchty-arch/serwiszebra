@@ -97,7 +97,9 @@ export async function POST(
       .update({
         payment_status: 'succeeded',
         paid_at: new Date().toISOString(),
-        status: 'w_naprawie',
+        // płatność nie jest rozpoczęciem naprawy — na stanowisko serwisowe
+        // urządzenie trafia osobno, wtedy serwisant ustawia 'w_naprawie'
+        status: 'oplacone',
         stripe_payment_id: paymentIntentId || repair.stripe_payment_id,
         updated_at: new Date().toISOString(),
       })
@@ -111,7 +113,7 @@ export async function POST(
       )
     }
 
-    console.log(`✅ Repair ${repairId} marked as paid and status changed to w_naprawie`)
+    console.log(`✅ Repair ${repairId} marked as paid and status changed to oplacone`)
 
     // Dodaj wpis do historii statusów (opcjonalne - nie blokuje sukcesu)
     // Użytkownik może nie mieć uprawnień do tej tabeli (RLS)
@@ -120,8 +122,8 @@ export async function POST(
         .from('repair_status_history')
         .insert({
           repair_request_id: repairId,
-          status: 'w_naprawie',
-          notes: 'Płatność potwierdzona - rozpoczęto naprawę',
+          status: 'oplacone',
+          notes: 'Płatność potwierdzona',
           changed_by: user.id,
         })
       
