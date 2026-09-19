@@ -1268,6 +1268,14 @@ Fraza „biurkowe drukarki etykiet Zebra" jest głównym wejściem do tej katego
 - PO DEPLOYU: `is_active:true`, sprawdzenie produkcji, `/seo-audit`.
 - Wdrożone 06:42: deploy potwierdzony, produkt włączony, karta i klasa 200 z 10 cenami, klasa pokazuje ZT421/ZT510/ZT610.
 
+## 2026-09-19 — cztery filmy ZC100/ZC300: poradniki wideo + osadzenie w instrukcjach PL
+- Filmy (tytuły i długości z YouTube oEmbed + `lengthSeconds` ze strony watch): rozpakowanie `s04iRbCzBqQ` 1:24, taśma barwiąca `sz8ixZWbPvM` 0:56, karty w podajniku `VRy5608Fq3Y` 0:45, czyszczenie kartą `3rWB7HKAySQ` 1:33. Wszystkie dotyczą OBU modeli, więc trafiły też do ZC300.
+- `/poradniki-wideo`: 4 wpisy (id 24–27, kategoria `drukarki`, rozpakowanie jako `featured`), miniatury `maxresdefault` pobrane do `public/zc100-zc300-*.jpeg` (1280×720). Schema VideoObject generuje się automatycznie z tablicy.
+- **Nowy mechanizm**: `PolishManualSection.videos?: PolishManualVideo[]` w `lib/polish-manuals.ts` + komponent `WideoRozdzialu` w `PolishManualContent.tsx`. Filmy przypisane do rozdziałów: ZC100 2/3/6, ZC300 2/3/8 (dwa filmy w rozdziale o materiałach eksploatacyjnych, siatka 2 kolumn). Wstawianie przez skrypt: `videos:` dopisane po linii `title:` sekcji, bo kolejność pól w obiekcie nie ma znaczenia, a szukanie końca backticka byłoby kruche.
+- Odtwarzacz: klik w miniaturę → iframe `youtube-nocookie.com` (bez ciasteczek przy samym wejściu na instrukcję, instrukcje są najczęstszym wejściem z Google). Miniatura zwykłym `<img>`, bez `remotePatterns`.
+- Sprawdzone na buildzie: 3 bloki wideo na stronie ZC100, klik podmienia miniaturę na iframe, 4 miniatury na ZC300.
+- NIE zrobione: kolumna `documents.videos` w tabeli `manuals` (strona `/instrukcje/[model]` w ogóle nie renderuje filmów — tylko lista `/instrukcje` liczy je do odznaki). Osobny temat.
+
 ## 2026-09-17 — konto admina dla nowego serwisanta (maksym@takma.com.pl)
 - Auth: użytkownik przez `/auth/v1/admin/users` (email_confirm, user_metadata first_name), id `fcdb1217-…`. Trigger tworzy profil z `role: user` → upsert `profiles` z `role: admin`, `is_active: true`. Logowanie hasłem sprawdzone (access_token OK).
 - Kod: `ADMIN_EMAILS` w `lib/admin-config.ts` (zwykły admin = Dashboard, zgłoszenia, użytkownicy, instrukcje, poczta, wdrożenia; bez sklepu i AI/RAG). Middleware rozpoznaje admina po `profiles.role`, listy w middleware dotyczą tylko superadmina i sklepu.

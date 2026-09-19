@@ -128,6 +128,11 @@ Zebra ZD421t to kompaktowa drukarka etykiet wykorzystująca technologię **druku
       },
       {
         title: '3. Ładowanie etykiet',
+        videos: [
+          { youtubeId: '-VtXee8Cn3k', title: 'Zakładanie etykiet w ZD421t', thumbnail: '/jak-zalozyc-etykiety-do-drukarki-zebra-zd421t.jpeg' },
+          { youtubeId: 'hzBiOxz-QbI', title: 'Montaż odklejaka etykiet w ZD421', thumbnail: '/montaż_odklejak_zd421.jpeg' },
+          { youtubeId: 'tSKUHfDkaZU', title: 'Używanie noża (cuttera) w drukarkach Zebra', thumbnail: '/używanie_noża.jpeg' },
+        ],
         content: `
 ### Obsługiwane typy materiałów
 
@@ -152,6 +157,9 @@ Zebra ZD421t to kompaktowa drukarka etykiet wykorzystująca technologię **druku
       },
       {
         title: '4. Ładowanie taśmy ribbon',
+        videos: [
+          { youtubeId: '0cU4YJuI00c', title: 'Zakładanie taśmy transferowej w ZD421t', thumbnail: '/zakładanie_taśmy_zd421t.jpeg' },
+        ],
         content: `
 > **WAŻNE:** Ribbon musi być **szerszy niż materiał**, aby chronić głowicę drukującą.
 
@@ -253,6 +261,12 @@ Naciśnij **FEED** - powinna wysunąć się **dokładnie jedna etykieta**. Jeśl
       },
       {
         title: '7. Podłączenie do komputera',
+        videos: [
+          { youtubeId: 'LCzG5DxX9Nk', title: 'Porty i złącza w ZD421t', thumbnail: '/zd421t_porty.jpeg' },
+          { youtubeId: 'PwC9AJpV-l0', title: 'Konfiguracja sieci LAN w drukarkach Zebra', thumbnail: '/lan_all.jpeg' },
+          { youtubeId: 'd-CNBSrBzGQ', title: 'Montaż modułu Ethernet w drukarkach Zebra', thumbnail: '/motaż_eth.jpeg' },
+          { youtubeId: 'lF-pJbhYeVM', title: 'Konfiguracja Wi-Fi w ZD421', thumbnail: '/wifi_zd421.jpeg' },
+        ],
         content: `
 ### Wymagane sterowniki
 
@@ -291,6 +305,10 @@ Wymaga fabrycznie zainstalowanego modułu bezprzewodowego:
       },
       {
         title: '8. Konserwacja i czyszczenie',
+        videos: [
+          { youtubeId: 'Q3Mt2LUwm6g', title: 'Wymiana głowicy drukującej w ZD421', thumbnail: '/wymiana_głowicy_zd421.jpeg' },
+          { youtubeId: 'jphduV-XSOg', title: 'Wymiana wałka dociskowego w drukarkach ZD', thumbnail: '/wymiana_wałka_zd.jpeg' },
+        ],
         content: `
 > 📘 **Szczegółowy poradnik:** [Jak wyczyścić głowicę drukarki Zebra](/blog/jak-wyczyscic-glowice-drukarki-zebra)
 
@@ -333,6 +351,10 @@ Wymaga fabrycznie zainstalowanego modułu bezprzewodowego:
       },
       {
         title: '9. Rozwiązywanie problemów',
+        videos: [
+          { youtubeId: '5NEmpFMtZx8', title: 'Self-test — wydruk konfiguracji (ZD421d / ZD421t)', thumbnail: '/seltest_zd421d_t.jpeg' },
+          { youtubeId: 'mtawoQxhYmU', title: 'Blady wydruk w ZD421t — jak rozwiązać problem', thumbnail: '/blady_wydruk_zd421t.jpeg' },
+        ],
         content: `
 > 📘 **Przeczytaj więcej:** [Drukarka Zebra nie drukuje - przyczyny i rozwiązania](/blog/drukarka-zebra-nie-drukuje-przyczyny-rozwiazania)
 
@@ -570,6 +592,11 @@ Zebra ZD421d to kompaktowa drukarka etykiet wykorzystująca technologię **druku
       },
       {
         title: '3. Ładowanie etykiet',
+        videos: [
+          { youtubeId: '-VtXee8Cn3k', title: 'Zakładanie etykiet w ZD421t', thumbnail: '/jak-zalozyc-etykiety-do-drukarki-zebra-zd421t.jpeg' },
+          { youtubeId: 'hzBiOxz-QbI', title: 'Montaż odklejaka etykiet w ZD421', thumbnail: '/montaż_odklejak_zd421.jpeg' },
+          { youtubeId: 'tSKUHfDkaZU', title: 'Używanie noża (cuttera) w drukarkach Zebra', thumbnail: '/używanie_noża.jpeg' },
+        ],
         content: `
 ### Obsługiwane typy materiałów
 
@@ -653,6 +680,11 @@ Naciśnij **FEED** - powinna wysunąć się **dokładnie jedna etykieta**. Jeśl
       },
       {
         title: '6. Podłączenie do komputera',
+        videos: [
+          { youtubeId: 'PwC9AJpV-l0', title: 'Konfiguracja sieci LAN w drukarkach Zebra', thumbnail: '/lan_all.jpeg' },
+          { youtubeId: 'd-CNBSrBzGQ', title: 'Montaż modułu Ethernet w drukarkach Zebra', thumbnail: '/motaż_eth.jpeg' },
+          { youtubeId: 'lF-pJbhYeVM', title: 'Konfiguracja Wi-Fi w ZD421', thumbnail: '/wifi_zd421.jpeg' },
+        ],
         content: `
 ### Wymagane sterowniki
 
@@ -689,6 +721,10 @@ Wymaga fabrycznie zainstalowanego modułu bezprzewodowego:
       },
       {
         title: '7. Konserwacja i czyszczenie',
+        videos: [
+          { youtubeId: 'Q3Mt2LUwm6g', title: 'Wymiana głowicy drukującej w ZD421', thumbnail: '/wymiana_głowicy_zd421.jpeg' },
+          { youtubeId: 'jphduV-XSOg', title: 'Wymiana wałka dociskowego w drukarkach ZD', thumbnail: '/wymiana_wałka_zd.jpeg' },
+        ],
         content: `
 > 📘 **Szczegółowy poradnik:** [Jak wyczyścić głowicę drukarki Zebra](/blog/jak-wyczyscic-glowice-drukarki-zebra)
 
@@ -731,6 +767,9 @@ Wymaga fabrycznie zainstalowanego modułu bezprzewodowego:
       },
       {
         title: '8. Rozwiązywanie problemów',
+        videos: [
+          { youtubeId: '5NEmpFMtZx8', title: 'Self-test — wydruk konfiguracji (ZD421d / ZD421t)', thumbnail: '/seltest_zd421d_t.jpeg' },
+        ],
         content: `
 > 📘 **Przeczytaj więcej:** [Drukarka Zebra nie drukuje - przyczyny i rozwiązania](/blog/drukarka-zebra-nie-drukuje-przyczyny-rozwiazania)
 
@@ -977,6 +1016,10 @@ Zebra ZD621t to zaawansowana drukarka etykiet z serii **Premium**, wykorzystują
       },
       {
         title: '3. Ładowanie etykiet',
+        videos: [
+          { youtubeId: '-VtXee8Cn3k', title: 'Zakładanie etykiet w ZD421t', thumbnail: '/jak-zalozyc-etykiety-do-drukarki-zebra-zd421t.jpeg' },
+          { youtubeId: 'tSKUHfDkaZU', title: 'Używanie noża (cuttera) w drukarkach Zebra', thumbnail: '/używanie_noża.jpeg' },
+        ],
         content: `
 ### Obsługiwane typy materiałów
 
@@ -1002,6 +1045,9 @@ Zebra ZD621t to zaawansowana drukarka etykiet z serii **Premium**, wykorzystują
       },
       {
         title: '4. Ładowanie taśmy ribbon',
+        videos: [
+          { youtubeId: '0cU4YJuI00c', title: 'Zakładanie taśmy transferowej w ZD421t', thumbnail: '/zakładanie_taśmy_zd421t.jpeg' },
+        ],
         content: `
 > **WAŻNE:** Ribbon musi być **szerszy niż materiał**, aby chronić głowicę drukującą.
 
@@ -1125,6 +1171,10 @@ Naciśnij **FEED** - powinna wysunąć się **dokładnie jedna etykieta**. Jeśl
       },
       {
         title: '7. Podłączenie do komputera',
+        videos: [
+          { youtubeId: 'PwC9AJpV-l0', title: 'Konfiguracja sieci LAN w drukarkach Zebra', thumbnail: '/lan_all.jpeg' },
+          { youtubeId: 'd-CNBSrBzGQ', title: 'Montaż modułu Ethernet w drukarkach Zebra', thumbnail: '/motaż_eth.jpeg' },
+        ],
         content: `
 ### Wymagane sterowniki
 
@@ -1172,6 +1222,9 @@ Wymaga fabrycznie zainstalowanego modułu bezprzewodowego:
       },
       {
         title: '8. Konserwacja i czyszczenie',
+        videos: [
+          { youtubeId: 'jphduV-XSOg', title: 'Wymiana wałka dociskowego w drukarkach ZD', thumbnail: '/wymiana_wałka_zd.jpeg' },
+        ],
         content: `
 > 📘 **Szczegółowy poradnik:** [Jak wyczyścić głowicę drukarki Zebra](/blog/jak-wyczyscic-glowice-drukarki-zebra)
 
@@ -1486,6 +1539,10 @@ Zebra ZD621d to zaawansowana drukarka etykiet z serii **Premium**, wykorzystują
       },
       {
         title: '3. Ładowanie etykiet',
+        videos: [
+          { youtubeId: '-VtXee8Cn3k', title: 'Zakładanie etykiet w ZD421t', thumbnail: '/jak-zalozyc-etykiety-do-drukarki-zebra-zd421t.jpeg' },
+          { youtubeId: 'tSKUHfDkaZU', title: 'Używanie noża (cuttera) w drukarkach Zebra', thumbnail: '/używanie_noża.jpeg' },
+        ],
         content: `
 ### Obsługiwane typy materiałów
 
@@ -1588,6 +1645,10 @@ Naciśnij **FEED** - powinna wysunąć się **dokładnie jedna etykieta**. Jeśl
       },
       {
         title: '6. Podłączenie do komputera',
+        videos: [
+          { youtubeId: 'PwC9AJpV-l0', title: 'Konfiguracja sieci LAN w drukarkach Zebra', thumbnail: '/lan_all.jpeg' },
+          { youtubeId: 'd-CNBSrBzGQ', title: 'Montaż modułu Ethernet w drukarkach Zebra', thumbnail: '/motaż_eth.jpeg' },
+        ],
         content: `
 ### Wymagane sterowniki
 
@@ -1635,6 +1696,9 @@ Wymaga fabrycznie zainstalowanego modułu bezprzewodowego:
       },
       {
         title: '7. Konserwacja i czyszczenie',
+        videos: [
+          { youtubeId: 'jphduV-XSOg', title: 'Wymiana wałka dociskowego w drukarkach ZD', thumbnail: '/wymiana_wałka_zd.jpeg' },
+        ],
         content: `
 > 📘 **Szczegółowy poradnik:** [Jak wyczyścić głowicę drukarki Zebra](/blog/jak-wyczyscic-glowice-drukarki-zebra)
 
@@ -1982,6 +2046,9 @@ Antena RFID znajduje się **między wałkiem napędowym a kanałem czujnika mate
       },
       {
         title: '4. Ładowanie taśmy ribbon',
+        videos: [
+          { youtubeId: '0cU4YJuI00c', title: 'Zakładanie taśmy transferowej w ZD421t', thumbnail: '/zakładanie_taśmy_zd421t.jpeg' },
+        ],
         content: `
 > **WAŻNE:** Ribbon musi być **szerszy niż materiał**, aby chronić głowicę drukującą.
 
@@ -2092,6 +2159,10 @@ Po załadowaniu nowego materiału RFID:
       },
       {
         title: '7. Podłączenie do komputera',
+        videos: [
+          { youtubeId: 'PwC9AJpV-l0', title: 'Konfiguracja sieci LAN w drukarkach Zebra', thumbnail: '/lan_all.jpeg' },
+          { youtubeId: 'd-CNBSrBzGQ', title: 'Montaż modułu Ethernet w drukarkach Zebra', thumbnail: '/motaż_eth.jpeg' },
+        ],
         content: `
 ### Wymagane sterowniki
 
@@ -2130,6 +2201,9 @@ Przed podłączeniem drukarki zainstaluj sterowniki ze strony [serwis-zebry.pl/s
       },
       {
         title: '8. Konserwacja i czyszczenie',
+        videos: [
+          { youtubeId: 'jphduV-XSOg', title: 'Wymiana wałka dociskowego w drukarkach ZD', thumbnail: '/wymiana_wałka_zd.jpeg' },
+        ],
         content: `
 > 📘 **Szczegółowy poradnik:** [Jak wyczyścić głowicę drukarki Zebra](/blog/jak-wyczyscic-glowice-drukarki-zebra)
 
@@ -2615,6 +2689,10 @@ Naciśnij **FEED** - powinna wysunąć się **dokładnie jedna etykieta**. Jeśl
       },
       {
         title: '7. Podłączenie do komputera',
+        videos: [
+          { youtubeId: 'PwC9AJpV-l0', title: 'Konfiguracja sieci LAN w drukarkach Zebra', thumbnail: '/lan_all.jpeg' },
+          { youtubeId: 'd-CNBSrBzGQ', title: 'Montaż modułu Ethernet w drukarkach Zebra', thumbnail: '/motaż_eth.jpeg' },
+        ],
         content: `
 ### Wymagane sterowniki
 
@@ -2663,6 +2741,9 @@ Jeśli drukarka ma port szeregowy:
       },
       {
         title: '8. Funkcje dodatkowe',
+        videos: [
+          { youtubeId: 'tSKUHfDkaZU', title: 'Używanie noża (cuttera) w drukarkach Zebra', thumbnail: '/używanie_noża.jpeg' },
+        ],
         content: `
 ### Zebra Print Touch (NFC)
 
@@ -2693,6 +2774,9 @@ Automatycznie odkleja etykietę od podkładu i prezentuje do pobrania. Czujnik w
       },
       {
         title: '9. Konserwacja i czyszczenie',
+        videos: [
+          { youtubeId: 'jphduV-XSOg', title: 'Wymiana wałka dociskowego w drukarkach ZD', thumbnail: '/wymiana_wałka_zd.jpeg' },
+        ],
         content: `
 > 📘 **Szczegółowy poradnik:** [Jak wyczyścić głowicę drukarki Zebra](/blog/jak-wyczyscic-glowice-drukarki-zebra)
 
@@ -3112,6 +3196,10 @@ Naciśnij **FEED** - powinna wysunąć się **dokładnie jedna etykieta**. Jeśl
       },
       {
         title: '6. Podłączenie do komputera',
+        videos: [
+          { youtubeId: 'PwC9AJpV-l0', title: 'Konfiguracja sieci LAN w drukarkach Zebra', thumbnail: '/lan_all.jpeg' },
+          { youtubeId: 'd-CNBSrBzGQ', title: 'Montaż modułu Ethernet w drukarkach Zebra', thumbnail: '/motaż_eth.jpeg' },
+        ],
         content: `
 ### Wymagane sterowniki
 
@@ -3165,6 +3253,9 @@ Jeśli drukarka ma port szeregowy:
       },
       {
         title: '7. Funkcje dodatkowe',
+        videos: [
+          { youtubeId: 'tSKUHfDkaZU', title: 'Używanie noża (cuttera) w drukarkach Zebra', thumbnail: '/używanie_noża.jpeg' },
+        ],
         content: `
 ### Zebra Print Touch (NFC)
 
@@ -3206,6 +3297,9 @@ Drukarka obsługuje materiał składankowy przez szczelinę z tyłu obudowy:
       },
       {
         title: '8. Konserwacja i czyszczenie',
+        videos: [
+          { youtubeId: 'jphduV-XSOg', title: 'Wymiana wałka dociskowego w drukarkach ZD', thumbnail: '/wymiana_wałka_zd.jpeg' },
+        ],
         content: `
 > 📘 **Szczegółowy poradnik:** [Jak wyczyścić głowicę drukarki Zebra](/blog/jak-wyczyscic-glowice-drukarki-zebra)
 
@@ -3642,6 +3736,10 @@ Naciśnij **FEED** - powinna wysunąć się **dokładnie jedna etykieta**. Jeśl
       },
       {
         title: '6. Podłączenie do komputera',
+        videos: [
+          { youtubeId: 'PwC9AJpV-l0', title: 'Konfiguracja sieci LAN w drukarkach Zebra', thumbnail: '/lan_all.jpeg' },
+          { youtubeId: 'd-CNBSrBzGQ', title: 'Montaż modułu Ethernet w drukarkach Zebra', thumbnail: '/motaż_eth.jpeg' },
+        ],
         content: `
 ### Wymagane sterowniki
 
@@ -3695,6 +3793,9 @@ Jeśli drukarka ma port szeregowy:
       },
       {
         title: '7. Funkcje dodatkowe',
+        videos: [
+          { youtubeId: 'tSKUHfDkaZU', title: 'Używanie noża (cuttera) w drukarkach Zebra', thumbnail: '/używanie_noża.jpeg' },
+        ],
         content: `
 ### Zebra Print Touch (NFC)
 
@@ -3743,6 +3844,9 @@ Automatycznie odkleja etykietę od podkładu i prezentuje do pobrania. Czujnik w
       },
       {
         title: '8. Konserwacja i czyszczenie',
+        videos: [
+          { youtubeId: 'jphduV-XSOg', title: 'Wymiana wałka dociskowego w drukarkach ZD', thumbnail: '/wymiana_wałka_zd.jpeg' },
+        ],
         content: `
 > 📘 **Szczegółowy poradnik:** [Jak wyczyścić głowicę drukarki Zebra](/blog/jak-wyczyscic-glowice-drukarki-zebra)
 
@@ -4222,6 +4326,10 @@ Naciśnij **FEED** - powinna wysunąć się **dokładnie jedna etykieta**. Jeśl
       },
       {
         title: '7. Podłączenie do komputera',
+        videos: [
+          { youtubeId: 'PwC9AJpV-l0', title: 'Konfiguracja sieci LAN w drukarkach Zebra', thumbnail: '/lan_all.jpeg' },
+          { youtubeId: 'd-CNBSrBzGQ', title: 'Montaż modułu Ethernet w drukarkach Zebra', thumbnail: '/motaż_eth.jpeg' },
+        ],
         content: `
 ### Wymagane sterowniki
 
@@ -4265,6 +4373,9 @@ Przyłóż telefon z włączonym NFC do logo **Zebra Print Touch** na obudowie d
       },
       {
         title: '8. Tryby druku i opcje',
+        videos: [
+          { youtubeId: 'tSKUHfDkaZU', title: 'Używanie noża (cuttera) w drukarkach Zebra', thumbnail: '/używanie_noża.jpeg' },
+        ],
         content: `
 ### Tryby druku (Collection Method)
 
@@ -4296,6 +4407,9 @@ Wersja Healthcare oferuje:
       },
       {
         title: '9. Konserwacja i czyszczenie',
+        videos: [
+          { youtubeId: 'jphduV-XSOg', title: 'Wymiana wałka dociskowego w drukarkach ZD', thumbnail: '/wymiana_wałka_zd.jpeg' },
+        ],
         content: `
 > 📘 **Szczegółowy poradnik:** [Jak wyczyścić głowicę drukarki Zebra](/blog/jak-wyczyscic-glowice-drukarki-zebra)
 
@@ -4821,6 +4935,10 @@ Resetowanie liczników: **RFID** > **RFID Valid Count** lub **RFID Void Count**
       },
       {
         title: '9. Podłączenie do komputera',
+        videos: [
+          { youtubeId: 'PwC9AJpV-l0', title: 'Konfiguracja sieci LAN w drukarkach Zebra', thumbnail: '/lan_all.jpeg' },
+          { youtubeId: 'd-CNBSrBzGQ', title: 'Montaż modułu Ethernet w drukarkach Zebra', thumbnail: '/motaż_eth.jpeg' },
+        ],
         content: `
 ### Wymagane sterowniki
 
@@ -4852,6 +4970,9 @@ Przed podłączeniem drukarki zainstaluj sterowniki ze strony [serwis-zebry.pl/s
       },
       {
         title: '10. Konserwacja i czyszczenie',
+        videos: [
+          { youtubeId: 'jphduV-XSOg', title: 'Wymiana wałka dociskowego w drukarkach ZD', thumbnail: '/wymiana_wałka_zd.jpeg' },
+        ],
         content: `
 > Szczegółowy poradnik: [Jak wyczyścić głowicę drukarki Zebra](/blog/jak-wyczyscic-glowice-drukarki-zebra)
 
@@ -5129,6 +5250,10 @@ Zebra ZD220d to kompaktowa, ekonomiczna drukarka etykiet z serii ZD200. Wykorzys
       },
       {
         title: '3. Ładowanie etykiet',
+        videos: [
+          { youtubeId: 'xhtuxOwwOyY', title: 'Zakładanie etykiet w ZD220d / ZD230d', thumbnail: '/zakładanie_etykiet_zd220d_zd230d.jpeg' },
+          { youtubeId: 'qrMRD7N49fY', title: 'Jak używać odklejaka etykiet w ZD220 / ZD230', thumbnail: '/zd220_zd230_odlejak_yt.jpeg' },
+        ],
         content: `
 ### Obsługiwane typy materiałów
 
@@ -5154,6 +5279,9 @@ Zebra ZD220d to kompaktowa, ekonomiczna drukarka etykiet z serii ZD200. Wykorzys
       },
       {
         title: '4. Panel sterowania i LED',
+        videos: [
+          { youtubeId: '6Pbi_A8fAnU', title: 'Przyciski, porty i złącza w ZD220 / ZD230', thumbnail: '/Funkcje drukarki - jak rozpoznać funkcje i możliwości urządzenia Zebra ZD220_ZD230d.jpeg' },
+        ],
         content: `
 Drukarka posiada minimalistyczny interfejs:
 
@@ -5190,6 +5318,9 @@ Naciśnij i przytrzymaj przycisk **POWER** przez 4-9 sekund.
       },
       {
         title: '5. Kalibracja SmartCal',
+        videos: [
+          { youtubeId: 'l03OFhvhWxY', title: 'Kalibracja czujnika mediów w ZD220 / ZD230', thumbnail: '/kalibracja_zd220_zd230.jpeg' },
+        ],
         content: `
 Po załadowaniu nowego typu materiału **wykonaj kalibrację**:
 
@@ -5239,6 +5370,9 @@ Przed podłączeniem drukarki zainstaluj sterowniki ze strony [serwis-zebry.pl/s
       },
       {
         title: '7. Konserwacja i czyszczenie',
+        videos: [
+          { youtubeId: 'jphduV-XSOg', title: 'Wymiana wałka dociskowego w drukarkach ZD', thumbnail: '/wymiana_wałka_zd.jpeg' },
+        ],
         content: `
 > 📘 **Szczegółowy poradnik:** [Jak wyczyścić głowicę drukarki Zebra](/blog/jak-wyczyscic-glowice-drukarki-zebra)
 
@@ -5527,6 +5661,10 @@ Zebra ZD220t to kompaktowa, ekonomiczna drukarka etykiet z serii ZD200. Wykorzys
       },
       {
         title: '3. Ładowanie etykiet',
+        videos: [
+          { youtubeId: 'xhtuxOwwOyY', title: 'Zakładanie etykiet w ZD220d / ZD230d', thumbnail: '/zakładanie_etykiet_zd220d_zd230d.jpeg' },
+          { youtubeId: 'qrMRD7N49fY', title: 'Jak używać odklejaka etykiet w ZD220 / ZD230', thumbnail: '/zd220_zd230_odlejak_yt.jpeg' },
+        ],
         content: `
 ### Obsługiwane typy materiałów
 
@@ -5591,6 +5729,9 @@ Zebra ZD220t to kompaktowa, ekonomiczna drukarka etykiet z serii ZD200. Wykorzys
       },
       {
         title: '5. Panel sterowania i LED',
+        videos: [
+          { youtubeId: '6Pbi_A8fAnU', title: 'Przyciski, porty i złącza w ZD220 / ZD230', thumbnail: '/Funkcje drukarki - jak rozpoznać funkcje i możliwości urządzenia Zebra ZD220_ZD230d.jpeg' },
+        ],
         content: `
 Drukarka posiada minimalistyczny interfejs:
 
@@ -5626,6 +5767,9 @@ Sprawdź ustawienie na raporcie konfiguracji – **PRINT METHOD** powinno wskazy
       },
       {
         title: '6. Kalibracja SmartCal',
+        videos: [
+          { youtubeId: 'l03OFhvhWxY', title: 'Kalibracja czujnika mediów w ZD220 / ZD230', thumbnail: '/kalibracja_zd220_zd230.jpeg' },
+        ],
         content: `
 Po załadowaniu nowego typu materiału lub ribbonu **wykonaj kalibrację**:
 
@@ -5676,6 +5820,9 @@ Przed podłączeniem drukarki zainstaluj sterowniki ze strony [serwis-zebry.pl/s
       },
       {
         title: '8. Konserwacja i czyszczenie',
+        videos: [
+          { youtubeId: 'jphduV-XSOg', title: 'Wymiana wałka dociskowego w drukarkach ZD', thumbnail: '/wymiana_wałka_zd.jpeg' },
+        ],
         content: `
 > 📘 **Szczegółowy poradnik:** [Jak wyczyścić głowicę drukarki Zebra](/blog/jak-wyczyscic-glowice-drukarki-zebra)
 
@@ -5959,6 +6106,10 @@ Zebra ZD230d to kompaktowa drukarka etykiet z serii ZD200. Wykorzystuje technolo
       },
       {
         title: '3. Ładowanie etykiet',
+        videos: [
+          { youtubeId: 'xhtuxOwwOyY', title: 'Zakładanie etykiet w ZD220d / ZD230d', thumbnail: '/zakładanie_etykiet_zd220d_zd230d.jpeg' },
+          { youtubeId: 'qrMRD7N49fY', title: 'Jak używać odklejaka etykiet w ZD220 / ZD230', thumbnail: '/zd220_zd230_odlejak_yt.jpeg' },
+        ],
         content: `
 ### Obsługiwane typy materiałów
 
@@ -5984,6 +6135,9 @@ Zebra ZD230d to kompaktowa drukarka etykiet z serii ZD200. Wykorzystuje technolo
       },
       {
         title: '4. Panel sterowania i LED',
+        videos: [
+          { youtubeId: '6Pbi_A8fAnU', title: 'Przyciski, porty i złącza w ZD220 / ZD230', thumbnail: '/Funkcje drukarki - jak rozpoznać funkcje i możliwości urządzenia Zebra ZD220_ZD230d.jpeg' },
+        ],
         content: `
 Drukarka posiada minimalistyczny interfejs:
 
@@ -6015,6 +6169,9 @@ Drukarka posiada minimalistyczny interfejs:
       },
       {
         title: '5. Kalibracja SmartCal',
+        videos: [
+          { youtubeId: 'l03OFhvhWxY', title: 'Kalibracja czujnika mediów w ZD220 / ZD230', thumbnail: '/kalibracja_zd220_zd230.jpeg' },
+        ],
         content: `
 Po załadowaniu nowego typu materiału **wykonaj kalibrację**:
 
@@ -6097,6 +6254,9 @@ Jeśli drukarka ma fabrycznie zainstalowany moduł Wi-Fi:
       },
       {
         title: '7. Konserwacja i czyszczenie',
+        videos: [
+          { youtubeId: 'jphduV-XSOg', title: 'Wymiana wałka dociskowego w drukarkach ZD', thumbnail: '/wymiana_wałka_zd.jpeg' },
+        ],
         content: `
 > 📘 **Szczegółowy poradnik:** [Jak wyczyścić głowicę drukarki Zebra](/blog/jak-wyczyscic-glowice-drukarki-zebra)
 
@@ -6384,6 +6544,10 @@ Zebra ZD230t to kompaktowa drukarka etykiet z serii ZD200. Wykorzystuje technolo
       },
       {
         title: '3. Ładowanie etykiet',
+        videos: [
+          { youtubeId: 'xhtuxOwwOyY', title: 'Zakładanie etykiet w ZD220d / ZD230d', thumbnail: '/zakładanie_etykiet_zd220d_zd230d.jpeg' },
+          { youtubeId: 'qrMRD7N49fY', title: 'Jak używać odklejaka etykiet w ZD220 / ZD230', thumbnail: '/zd220_zd230_odlejak_yt.jpeg' },
+        ],
         content: `
 ### Obsługiwane typy materiałów
 
@@ -6448,6 +6612,9 @@ Zebra ZD230t to kompaktowa drukarka etykiet z serii ZD200. Wykorzystuje technolo
       },
       {
         title: '5. Panel sterowania i LED',
+        videos: [
+          { youtubeId: '6Pbi_A8fAnU', title: 'Przyciski, porty i złącza w ZD220 / ZD230', thumbnail: '/Funkcje drukarki - jak rozpoznać funkcje i możliwości urządzenia Zebra ZD220_ZD230d.jpeg' },
+        ],
         content: `
 Drukarka posiada minimalistyczny interfejs:
 
@@ -6482,6 +6649,9 @@ Sprawdź ustawienie na raporcie konfiguracji – **PRINT METHOD** powinno wskazy
       },
       {
         title: '6. Kalibracja SmartCal',
+        videos: [
+          { youtubeId: 'l03OFhvhWxY', title: 'Kalibracja czujnika mediów w ZD220 / ZD230', thumbnail: '/kalibracja_zd220_zd230.jpeg' },
+        ],
         content: `
 Po załadowaniu nowego typu materiału lub ribbonu **wykonaj kalibrację**:
 
@@ -6565,6 +6735,9 @@ Jeśli drukarka ma fabrycznie zainstalowany moduł Wi-Fi:
       },
       {
         title: '8. Konserwacja i czyszczenie',
+        videos: [
+          { youtubeId: 'jphduV-XSOg', title: 'Wymiana wałka dociskowego w drukarkach ZD', thumbnail: '/wymiana_wałka_zd.jpeg' },
+        ],
         content: `
 > 📘 **Szczegółowy poradnik:** [Jak wyczyścić głowicę drukarki Zebra](/blog/jak-wyczyscic-glowice-drukarki-zebra)
 
@@ -10369,6 +10542,9 @@ Zbliż telefon z aplikacją Zebra Printer Setup Utility do logo NFC na drukarce 
       },
       {
         title: '14. Protected Mode / EU RED',
+        videos: [
+          { youtubeId: 'j0PRe-dGXBM', title: 'Dyrektywa RED — co oznacza dla drukarek Zebra', thumbnail: '/drukarki-zebra-dyrektywa-red.jpeg' },
+        ],
         content: `
 ### Dyrektywa EU RED 2025
 
