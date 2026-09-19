@@ -4994,6 +4994,8 @@ Jako **autoryzowany serwis Zebra** (Wrocław) oferujemy:
 
 **Nie wiesz którą wybrać?** Zadzwoń do nas: +48 601 619 898 – pomożemy dobrać drukarkę do Twoich potrzeb.
 
+
+Aktualne ceny netto i dostępność wszystkich trzech modeli, a także pozostałych serii ZD i ZT, znajdziesz w kategorii [drukarki etykiet Zebra](https://www.takma.com.pl/drukarki-etykiet-zebra) w sklepie TAKMA.
 *Ostatnia aktualizacja: styczeń 2026*
 `
   },
@@ -7632,6 +7634,8 @@ Jeśli masz wiele drukarek ZD420/ZD421, rozważ **kontrakt serwisowy Zebra OneCa
 - [Sterowniki Zebra Windows 11](/blog/sterowniki-zebra-windows-11-instalacja-problemy)
 
 📖 **Wszystkie usługi:** [Serwis drukarek Zebra](/serwis-drukarek-zebra)
+
+Gdy koszt naprawy zbliża się do ceny nowego urządzenia, doradzamy wymianę. Następcy ZD420, czyli modele ZD421 i ZD621, są dostępne w kategorii [drukarki etykiet Zebra](https://www.takma.com.pl/drukarki-etykiet-zebra) w sklepie TAKMA.
 `
   },
   {
@@ -8137,6 +8141,8 @@ Skontaktuj się z nami - jako **Autoryzowany Serwis Zebra** oferujemy:
 - [Kalibracja drukarki Zebra - poradnik](/blog/kalibracja-drukarki-zebra-poradnik-krok-po-kroku)
 - [Drukarka Zebra nie drukuje - 7 przyczyn](/blog/drukarka-zebra-nie-drukuje-przyczyny-rozwiazania)
 - [Kody błędów ZD420/ZD421 - diagnostyka LED](/blog/kody-bledow-zebra-zd420-zd421-diody-led)
+
+Nowe modele serii ZD i ZT z cenami netto znajdziesz w kategorii [drukarki etykiet Zebra](https://www.takma.com.pl/drukarki-etykiet-zebra) w sklepie TAKMA, a oryginalne głowice, wałki i gilotyny w [akcesoriach do drukarek etykiet](https://www.takma.com.pl/akcesoria-do-drukarek-etykiet).
 `
   },
   {
@@ -8571,6 +8577,8 @@ Skontaktuj się z nami - jako **Autoryzowany Serwis Zebra** oferujemy:
 - [Kalibracja drukarki Zebra - poradnik](/blog/kalibracja-drukarki-zebra-poradnik-krok-po-kroku)
 - [Kontrakty serwisowe Zebra OneCare](/blog/kontrakty-serwisowe-zebra-onecare-przewodnik)
 - Porównanie ZD220 vs ZD421 vs ZT411
+
+Jeśli drukarka ma za sobą kilka lat pracy na trzy zmiany i naprawa przestaje się opłacać, nowe ZT411 i ZT421 z gwarancją producenta są w kategorii [drukarki etykiet Zebra](https://www.takma.com.pl/drukarki-etykiet-zebra) w sklepie TAKMA.
 `
   },
   {
@@ -9703,6 +9711,8 @@ Standardowa wymiana trwa 1-2 dni robocze od momentu dostarczenia drukarki. W try
 - [Ile kosztuje naprawa drukarki Zebra?](/blog/cennik-naprawy-drukarki-zebra-koszty-serwisu)
 - [Jak wyczyścić głowicę drukarki Zebra](/blog/jak-wyczyscic-glowice-drukarki-zebra)
 - [Drukarka Zebra nie drukuje - 7 przyczyn](/blog/drukarka-zebra-nie-drukuje-przyczyny-rozwiazania)
+
+Oryginalne głowice 203, 300 i 600 dpi do drukarek Zebra ZD i ZT wraz z wałkami dociskowymi kupisz w [akcesoriach do drukarek etykiet](https://www.takma.com.pl/akcesoria-do-drukarek-etykiet) w sklepie TAKMA.
 `
   },
   {
