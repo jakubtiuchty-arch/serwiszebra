@@ -166,6 +166,48 @@ for (const z of [
   'napisz wiersz',
 ]) sprawdz('isZebraRelated(krotka)', isZebraRelated(z), false, z)
 
+// --- runda 3: flagi zgodne z treścią odpowiedzi (test produkcyjny 20.09.2026) ------
+// Wzorce wyciągamy ze źródła trasy, żeby test pilnował tego, co naprawdę jedzie na produkcję.
+const wzorzec = (nazwa) => {
+  const m = src.match(new RegExp(`const ${nazwa} =\\s*\\n?\\s*(/.+?/[a-z]*)\\.test`, 's'))
+  if (!m) throw new Error(`Nie znaleziono wzorca ${nazwa}`)
+  const [, ciało, flagi] = m[1].match(/^\/(.*)\/([a-z]*)$/s)
+  return new RegExp(ciało, flagi)
+}
+const RE_PROPONUJE_SERWIS = wzorzec('proponujeSerwis')
+const RE_TROUBLESHOOTING = (() => {
+  const m = src.match(/const troubleshootingPatterns = \/(.+?)\/([a-z]*)\n/)
+  return new RegExp(m[1], m[2])
+})()
+
+// Odpowiedź, która każe oddać sprzęt, nie może zarazem znaczyć „problem rozwiązany"
+for (const z of [
+  'Proponuję wysłać drukarkę do serwisu na weryfikację mechanizmu poboru kart.',
+  'Kurier odbierze urządzenie z podanego adresu.',
+  'Najlepiej wysłać terminal do serwisu, moduł skanujący wygląda na uszkodzony.',
+]) sprawdz('proponujeSerwis', RE_PROPONUJE_SERWIS.test(z), true, z)
+
+for (const z of [
+  'Podnieś zaczernienie o dwa stopnie i sprawdź wydruk.',
+  'Wyczyść głowicę alkoholem izopropylowym.',
+]) sprawdz('proponujeSerwis', RE_PROPONUJE_SERWIS.test(z), false, z)
+
+// Rozmowa o usterce kontra rozmowa czysto konfiguracyjna — liczone po wszystkich wypowiedziach
+const rozmowaUsterka = ['drukarka ZD421 nie drukuje', 'wyczyściłem głowicę', 'dalej nic']
+const rozmowaKonfiguracja = ['jak ustawić alarm w skanerze DS2278 przy oddaleniu od bazki', 'tak mam kompa w biurze', 'dzieki wielkie']
+sprawdz('rozmowaOUsterce', RE_TROUBLESHOOTING.test(rozmowaUsterka.join(' ')), true, rozmowaUsterka.join(' | '))
+sprawdz('rozmowaOUsterce', RE_TROUBLESHOOTING.test(rozmowaKonfiguracja.join(' ')), false, rozmowaKonfiguracja.join(' | '))
+
+// Prompt nie może obiecywać darmowego transportu ani podawać jego kosztu
+// tylko zdanie o kurierze, do pierwszej kropki — dalej bywa mowa o bezpłatnej diagnostyce,
+// co jest osobną i prawdziwą informacją
+const zdaniaOKurierze = src.match(/Kurier odbier[^.\n"`]*/g) || []
+for (const z of zdaniaOKurierze) {
+  sprawdz('prompt: brak kosztów transportu', /bezpłatn|za darmo|gratis|\d+\s*zł/i.test(z), false, z.slice(0, 70))
+}
+sprawdz('prompt: jest zakaz pisania o transporcie',
+  /NIGDY nie podawaj kosztu transportu/.test(src), true, 'reguła w prompcie')
+
 // --- wynik -----------------------------------------------------------------
 console.log(`\nZaliczone: ${zaliczone}/${zaliczone + bledy.length}`)
 if (bledy.length) {

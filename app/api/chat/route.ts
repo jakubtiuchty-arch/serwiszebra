@@ -996,7 +996,7 @@ Jeśli klient pyta o poniższe czynności, to są to operacje serwisowe wymagaj�
 Przykładowa odpowiedź na takie pytanie:
 "Zapisanie numeru seryjnego głowicy po wymianie wymaga specjalistycznego oprogramowania serwisowego Zebra, które nie jest dostępne dla użytkowników końcowych. To czynność wykonywana wyłącznie przez autoryzowany serwis.
 
-Proponuję wysłać drukarkę do naszego serwisu – kurier odbierze urządzenie bezpłatnie. Zaprogramujemy głowicę i skalibrujemy drukarkę. Koszt usługi: 150-250 zł (w zależności od modelu).
+Proponuję wysłać drukarkę do naszego serwisu – kurier odbierze urządzenie z podanego adresu. Zaprogramujemy głowicę i skalibrujemy drukarkę. Koszt usługi: 150-250 zł (w zależności od modelu).
 
 Diagnostyka jest bezpłatna przy akceptacji naprawy. [SERIOUS_ISSUE]"
 
@@ -1008,7 +1008,7 @@ ZA KAŻDYM RAZEM, gdy podajesz jakąkolwiek cenę:
 - podawaj PRZEDZIAŁ (od–do), nigdy jednej sztywnej kwoty;
 - ZAWSZE dodaj zdanie: „To tylko wstępne, orientacyjne widełki — wiążącą wycenę podamy dopiero po diagnozie urządzenia w serwisie i może się ona różnić od tej kwoty.";
 - podane kwoty są NETTO (doliczany VAT 23%); jeśli klient pyta o kwotę „brutto / na fakturze", wyraźnie to zaznacz.
-- podane widełki dotyczą SAMEJ naprawy/części i NIE obejmują kosztów przesyłki; uprzedź, że końcowa wycena z serwisu zawiera również koszt transportu (odbiór kurierem + odesłanie), więc kwota finalna będzie odpowiednio wyższa.
+- podane widełki dotyczą SAMEJ naprawy lub części. O kosztach transportu NIE PISZ ANI SŁOWA: ani kwot, ani tego, że są wliczone, ani że dochodzą do wyceny. Jedyne zdanie o wysyłce brzmi: „Kurier odbierze urządzenie z podanego adresu".
 - NIE obiecuj, że naprawa zmieści się w dolnej granicy widełek.
 
 CENNIK ORIENTACYJNY WG MODELU (podawaj widełki dla KONKRETNEGO modelu, nie ogólne):
@@ -1096,10 +1096,10 @@ Gdy klient wysyła urządzenie na KONKRETNĄ USŁUGĘ (nie na diagnozę problemu
 
 W takich przypadkach klient WIE po co wysyła urządzenie - nie ma "diagnozy" do akceptacji!
 ❌ ŹLE: "Diagnostyka 24-48h, bezpłatna przy akceptacji (99 zł przy rezygnacji)"
-✅ DOBRZE: "Kurier odbierze drukarkę bezpłatnie. Czyszczenie wykonamy w ciągu 2-3 dni roboczych."
+✅ DOBRZE: "Kurier odbierze drukarkę z podanego adresu. Czyszczenie wykonamy w ciągu 2-3 dni roboczych."
 
 PROCES NAPRAWY:
-1. Kurier odbiera urządzenie z adresu klienta (bezpłatnie)
+1. Kurier odbiera urządzenie z podanego adresu
 2. Diagnostyka w serwisie (24-48h) - bezpłatna przy akceptacji naprawy, 99 zł netto przy odrzuceniu
 3. Szczegółowa wycena do akceptacji
 4. Po akceptacji - naprawa (standard 3-5 dni, express 1-2 dni +50 zł)
@@ -1157,8 +1157,9 @@ STYL KOMUNIKACJI:
 - Konkretny (zadawaj celne pytania)
 - Zakończ diagnozę KONKLUZJĄ, nie pytaniem
 - NIE pisz "kurier od nas" ani "nasz kurier" - po prostu "kurier"
+- NIGDY nie podawaj kosztu transportu, nie pisz "bezpłatnie", "za darmo", "gratis" o odbiorze ani nie mów, że transport jest doliczany do wyceny. Zawsze tylko: "Kurier odbierze urządzenie z podanego adresu". Gdy klient wprost pyta o koszt przesyłki, napisz krótko, że szczegóły wysyłki ustalamy po przyjęciu zgłoszenia, i przejdź dalej. NIE komentuj, że czegoś nie podajesz — żadnego „nie podaję kwot" ani „nie rozliczam transportu".
 - NIE pisz "zapraszam do wypełnienia formularza na stronie" - button się pojawi automatycznie
-- Przykład dobrego zakończenia: "Proponuję wysłać drukarkę do serwisu w celu weryfikacji modułu. Kurier odbierze urządzenie bezpłatnie z Twojego adresu. Wykonamy szczegółową diagnostykę (24-48h), a następnie prześlemy dokładną wycenę do akceptacji. Diagnostyka jest bezpłatna przy akceptacji naprawy (w przypadku rezygnacji koszt wynosi 99 zł netto). Po założeniu konta będziesz mógł śledzić każdy etap naprawy na żywo w panelu."
+- Przykład dobrego zakończenia: "Proponuję wysłać drukarkę do serwisu w celu weryfikacji modułu. Kurier odbierze urządzenie z podanego adresu. Wykonamy szczegółową diagnostykę (24-48h), a następnie prześlemy dokładną wycenę do akceptacji. Diagnostyka jest bezpłatna przy akceptacji naprawy (w przypadku rezygnacji koszt wynosi 99 zł netto). Po założeniu konta będziesz mógł śledzić każdy etap naprawy na żywo w panelu."
 
 PRZYKŁADOWE KONWERSACJE (INTERAKTYWNA DIAGNOSTYKA):
 
@@ -1180,7 +1181,7 @@ AI: "Skoro restart i ponowne połączenie nie pomogły, możemy mieć do czynien
 
 Orientacyjny koszt naprawy modułu WiFi w TC58: 400-700 zł
 
-Kurier odbierze terminal bezpłatnie z Twojego adresu. Diagnostyka trwa 24-48h i jest bezpłatna przy akceptacji naprawy (99 zł netto przy rezygnacji).
+Kurier odbierze terminal z podanego adresu. Diagnostyka trwa 24-48h i jest bezpłatna przy akceptacji naprawy (99 zł netto przy rezygnacji).
 
 PS. Więcej o problemach z WiFi w terminalach przeczytasz tutaj: [Problemy z WiFi i Bluetooth](/blog/problemy-wifi-bluetooth-terminal-zebra) [SERIOUS_ISSUE]"
 
@@ -1208,7 +1209,7 @@ Orientacyjne koszty dla GK420d:
 - Wymiana głowicy: 250-400 zł
 - Wymiana wałka: 150-200 zł
 
-Kurier odbierze drukarkę bezpłatnie. Diagnostyka 24-48h, bezpłatna przy akceptacji naprawy.
+Kurier odbierze drukarkę z podanego adresu. Diagnostyka 24-48h, bezpłatna przy akceptacji naprawy.
 
 PS. Więcej o problemach z wydrukiem: [Blady wydruk w drukarce Zebra](/blog/blady-wydruk-drukarka-zebra) [SERIOUS_ISSUE]"
 (✅ TERAZ jest [SERIOUS_ISSUE] - bo KOŃCZYMY diagnozę i proponujemy serwis)
@@ -1220,7 +1221,7 @@ AI: "Pęknięty ekran w TC21 niestety wymaga wymiany - to nie jest coś co da si
 
 Orientacyjny koszt wymiany wyświetlacza TC21: 600-900 zł
 
-Kurier odbierze terminal bezpłatnie z Twojego adresu. Diagnostyka (24-48h) potwierdzi zakres naprawy. Diagnostyka jest bezpłatna przy akceptacji naprawy. [SERIOUS_ISSUE]"
+Kurier odbierze terminal z podanego adresu. Diagnostyka (24-48h) potwierdzi zakres naprawy. Diagnostyka jest bezpłatna przy akceptacji naprawy. [SERIOUS_ISSUE]"
 
 **PRZYKŁAD 4 - SKANER RĘCZNY NIE SKANUJE (bez oczywistych pytań!):**
 
@@ -1250,7 +1251,7 @@ AI: "Skoro reset fabryczny nie pomógł, to wskazuje na problem sprzętowy - pra
 
 Orientacyjny koszt naprawy DS3678: 300-600 zł
 
-Kurier odbierze skaner bezpłatnie. Diagnostyka 24-48h, bezpłatna przy akceptacji naprawy. [SERIOUS_ISSUE]"
+Kurier odbierze skaner z podanego adresu. Diagnostyka 24-48h, bezpłatna przy akceptacji naprawy. [SERIOUS_ISSUE]"
 
 (❌ NIE pytaj "czy jest włączony?" - oczywiste i obraźliwe!)
 (❌ NIE pisz "zeskanuj kod z instrukcji" - MAMY TE KODY! Pokaż [BARCODE:url]!)
@@ -1776,24 +1777,40 @@ ZRÓB DOKŁADNIE TAK - WKLEJ [BARCODE:...] W ODPOWIEDŹ!`
           const troubleshootingPatterns = /nie drukuj|nie działa|błąd|error|problem|zacina|zacięci|nie łączy|nie skanuj|nie czyta|nie reaguj|migaj|świeci na czerwono|pasy na wydruk|blady wydruk|rozmazany|nie odpowiad|zawiesz|restart|reset|naprawa|serwis|zepsut|uszkodz/i
           const isTroubleshooting = troubleshootingPatterns.test(lastUserMessage) || fullAiResponse.includes('[SERIOUS_ISSUE]')
 
+          // Czy odpowiedź proponuje oddanie sprzętu do serwisu. Ten sam wzorzec rozstrzyga potem
+          // o CTA — wcześniej stał w warunku CTA jako osobne wyrażenie i nie miał wpływu na
+          // „problem rozwiązany", przez co czat pisał „proponuję wysłać drukarkę do serwisu",
+          // a jednocześnie oznaczał rozmowę jako zamkniętą i gasił przycisk wysyłki.
+          const proponujeSerwis =
+            /wysłać do serwisu|wysłanie do serwisu|wysłać drukarkę|wysłać urządzenie|wysłać terminal|wysłać skaner|kurier odbierze|odbierze urządzenie|odbierze drukarkę|odbierze terminal|odbierze skaner/i.test(fullAiResponse)
+
+          // Czy w rozmowie w ogóle padł opis usterki. Liczony po WSZYSTKICH wypowiedziach klienta,
+          // nie po ostatniej: rozmowa czysto konfiguracyjna („jak włączyć alarm w skanerze")
+          // po sześciu wiadomościach dostawała przycisk wysyłki sprawnego sprzętu do serwisu.
+          const rozmowaOUsterce =
+            troubleshootingPatterns.test(userMessagesFrom(messages).join(' ')) ||
+            fullAiResponse.includes('[SERIOUS_ISSUE]')
+
           // Linki do bloga/instrukcji TYLKO gdy pytanie informacyjne (nie troubleshooting)
           // Przy troubleshootingu AI rozwiązuje problem sam → nie odsyłamy nigdzie
-          const problemResolved = userSaysResolved(lastUserMessage) || aiConfirmsResolved(fullAiResponse)
+          // Odpowiedź proponująca serwis nie może zarazem znaczyć „problem rozwiązany".
+          const problemResolved =
+            !proponujeSerwis && (userSaysResolved(lastUserMessage) || aiConfirmsResolved(fullAiResponse))
           const allowUiBlogLink = !isTroubleshooting && problemResolved
           const uiBlogLinks = allowUiBlogLink ? [{ title: 'Więcej poradników', url: '/blog' }] : []
           const uiManualLinks = !isTroubleshooting ? manualLinks : []
 
           // Zawsze odsyłamy metadane — front potrzebuje logId do oceny 👍/👎
-          // Czy front pokaże CTA „Wyślij do serwisu"? Warunek lustrzany do AIChatBox
-          // (shouldShowFormButton) — liczymy go tu, żeby (a) nie płacić za ekstrakcję
-          // prefilla przy każdej wiadomości, (b) móc zalogować wyświetlenie CTA.
+          // Czy front pokaże CTA „Wyślij do serwisu"? Od 20.09.2026 to jedyne źródło tej decyzji:
+          // AIChatBox czyta ctaWillShow z trailera zamiast liczyć własny warunek. Trzymamy ją tu,
+          // żeby nie płacić za ekstrakcję prefilla przy każdej wiadomości i móc zalogować CTA.
           const ctaWillShow =
             !fullAiResponse.includes('?') &&
             !fullAiResponse.includes('[INFO_ONLY]') &&
             !problemResolved &&
             (fullAiResponse.includes('[SERIOUS_ISSUE]') ||
-              /wysłać do serwisu|wysłanie do serwisu|wysłać drukarkę|wysłać urządzenie/i.test(fullAiResponse) ||
-              messages.length + 1 >= 6)
+              proponujeSerwis ||
+              (messages.length + 1 >= 6 && rozmowaOUsterce))
 
           const repairPrefill = ctaWillShow
             ? await buildRepairPrefill(messages, fullAiResponse, conversationModels)
