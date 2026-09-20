@@ -101,6 +101,10 @@ export async function POST(req: NextRequest) {
     // Przetwórz chunki i zapisz do bazy
     let processedCount = 0
     const batchSize = 3 // Zmniejszona batch size
+    // Ten sam akapit potrafi wystąpić w dokumencie kilka razy (nagłówki, strony przejściowe),
+    // a w bazie jest unikalny indeks na (manual_name, znormalizowana treść).
+    const widzianeChunki = new Set<string>()
+    const normalizuj = (t: string) => (t || '').replace(/\s+/g, ' ').trim()
 
     for (let i = 0; i < chunks.length; i += batchSize) {
       const batch = chunks.slice(i, Math.min(i + batchSize, chunks.length))
@@ -117,31 +121,41 @@ export async function POST(req: NextRequest) {
 
         console.log(`📊 Utworzono ${embeddings.length} embeddings`)
 
-        // Przygotuj dane do zapisu
-        const documents = batch.map((chunk, idx) => {
-          const embeddingArray = embeddings[idx]
-          console.log(`🔍 Embedding ${idx}: długość=${embeddingArray.length}, typ=${typeof embeddingArray}`)
+        // Przygotuj dane do zapisu, bez powtórzonej treści
+        const documents = batch
+          .map((chunk, idx) => ({ chunk, idx }))
+          .filter(({ chunk }) => {
+            const n = normalizuj(chunk)
+            if (widzianeChunki.has(n)) return false
+            widzianeChunki.add(n)
+            return true
+          })
+          .map(({ chunk, idx }) => {
+            const embeddingArray = embeddings[idx]
+            console.log(`🔍 Embedding ${idx}: długość=${embeddingArray.length}, typ=${typeof embeddingArray}`)
 
-          return {
-            manual_name: manualName,
-            content: chunk,
-            page_number: Math.floor((i + idx) / (chunks.length / 100)),
-            embedding: embeddingArray, // ✅ Tablica liczb - Supabase automatycznie konwertuje na vector
-            metadata: {
-              chunk_index: i + idx,
-              total_chunks: chunks.length,
-            },
-          }
-        })
+            return {
+              manual_name: manualName,
+              content: chunk,
+              page_number: Math.floor((i + idx) / (chunks.length / 100)),
+              embedding: embeddingArray, // ✅ Tablica liczb - Supabase automatycznie konwertuje na vector
+              metadata: {
+                chunk_index: i + idx,
+                total_chunks: chunks.length,
+              },
+            }
+          })
 
         // Zapisz do Supabase
-        const { error } = await supabase
-          .from('manuals_documents')
-          .insert(documents)
+        if (documents.length > 0) {
+          const { error } = await supabase
+            .from('manuals_documents')
+            .insert(documents)
 
-        if (error) {
-          console.error('❌ Błąd zapisu do Supabase:', error)
-          throw new Error(`Supabase error: ${error.message}`)
+          if (error) {
+            console.error('❌ Błąd zapisu do Supabase:', error)
+            throw new Error(`Supabase error: ${error.message}`)
+          }
         }
 
         processedCount += batch.length

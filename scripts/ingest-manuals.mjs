@@ -153,7 +153,27 @@ async function main() {
     await supabase.from('manuals_documents').delete().eq('metadata->>source_file', sf)
   }
 
-  let totalChunks = 0, totalRows = 0, skipped = 0, failed = []
+  // Treści już zapisane pod danym manualem. Jeden manual dostaje chunki z kilku PDF-ów
+  // (osobny Quick Start i User Guide, a czasem ten sam dokument pod dwiema nazwami pliku,
+  // np. DS4678_userguide i DS4678+DS4678DPE+DS4678XD_userguide). Kasowanie przed zapisem idzie
+  // po source_file, więc drugi plik dokładał te same akapity zamiast je zastąpić — stąd 8 670
+  // powtórzonych wierszy wyczyszczonych 20.09.2026. Tu pilnujemy tego przy zapisie.
+  const normalizuj = (t) => (t || '').replace(/\s+/g, ' ').trim()
+  const trescPoManualu = new Map()
+  async function znaneTresci(manualName) {
+    if (trescPoManualu.has(manualName)) return trescPoManualu.get(manualName)
+    const zbior = new Set()
+    for (let from = 0; ; from += 1000) {
+      const { data } = await supabase.from('manuals_documents').select('content').eq('manual_name', manualName).range(from, from + 999)
+      if (!data || data.length === 0) break
+      for (const r of data) zbior.add(normalizuj(r.content))
+      if (data.length < 1000) break
+    }
+    trescPoManualu.set(manualName, zbior)
+    return zbior
+  }
+
+  let totalChunks = 0, totalRows = 0, skipped = 0, failed = [], pominieteChunki = 0
 
   for (const [i, file] of files.entries()) {
     const label = `[${i + 1}/${files.length}] ${file.name}`
@@ -204,18 +224,28 @@ async function main() {
         embeddings.push(...await embedBatch(chunks.slice(b, b + 100)))
       }
 
-      // Wiersze: te same chunki+embeddingi pod każdym modelem bazowym z pliku
+      // Wiersze: te same chunki+embeddingi pod każdym modelem bazowym z pliku,
+      // z pominięciem treści, która pod tym manualem już jest
       const rows = []
       for (const model of models) {
+        const manualName = `${model}_Manual`
+        const znane = await znaneTresci(manualName)
         chunks.forEach((chunk, idx) => {
+          const n = normalizuj(chunk)
+          if (znane.has(n)) { pominieteChunki++; return }
+          znane.add(n)
           rows.push({
-            manual_name: `${model}_Manual`,
+            manual_name: manualName,
             content: chunk,
             page_number: pageForOffset(idx * 800), // chunk co (1000-200) znaków
             embedding: embeddings[idx],
             metadata: { chunk_index: idx, total_chunks: chunks.length, source_file: file.name },
           })
         })
+      }
+      if (rows.length === 0) {
+        console.log(`   ⏭️  cała treść już jest w bazie pod ${models.map((m) => m + '_Manual').join(', ')}`)
+        continue
       }
 
       // Batch 25 wierszy: 100 x ~30KB embedding JSON = ~3MB body -> "fetch failed"
