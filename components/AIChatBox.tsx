@@ -54,6 +54,7 @@ interface Message {
   logId?: string            // ID logu w bazie — potrzebne do oceny 👍/👎
   feedback?: 'up' | 'down'  // ocena wystawiona przez użytkownika
   resolved?: boolean        // backend wykrył, że problem rozwiązany → nie pokazuj CTA „Wyślij do serwisu"
+  ctaWillShow?: boolean     // decyzja backendu o CTA — front ją honoruje zamiast liczyć własną
   repairPrefill?: RepairPrefill | null  // dane do wstępnego wypełnienia formularza zgłoszenia
 }
 
@@ -174,13 +175,19 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
     lastMessage?.content?.toLowerCase().includes('wysłać urządzenie') ||
     false
 
-  const shouldShowFormButton =
-    isLastMessageAI &&
+  // Warunek liczy backend (ctaWillShow w trailerze __CITATIONS__) i tylko on decyduje o prefillu
+  // formularza, więc front go honoruje zamiast przeliczać drugi raz. Własny rachunek zostaje jako
+  // zapas dla wiadomości bez trailera: błąd sieci, przerwany strumień, historia sprzed tej zmiany.
+  const ctaFallback =
     !lastMessageIsQuestion &&
-    !loading &&
     !isInfoOnly &&  // ❌ NIE pokazuj CTA dla pytań informacyjnych (specyfikacja, waga, wymiary itp.)
     !problemResolved &&  // ❌ NIE pokazuj CTA gdy problem już rozwiązany (bez sensu wysyłać sprawny sprzęt)
     (isSeriousIssue || suggestsRepair || messageCount >= 6)  // ✨ Pokaż wcześniej dla poważnych usterek lub sugestii naprawy
+
+  const shouldShowFormButton =
+    isLastMessageAI &&
+    !loading &&
+    (typeof lastMessage?.ctaWillShow === 'boolean' ? lastMessage.ctaWillShow : ctaFallback)
 
   // Zaloguj wyświetlenie CTA — raz na odpowiedź (klucz: logId), żeby przerysowania nie liczyły się kilka razy
   const ctaLoggedForRef = useRef<string | null>(null)
@@ -491,6 +498,7 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
           let scannerBarcodes: ScannerBarcode[] | undefined = undefined
           let logId: string | undefined = undefined
           let resolved: boolean | undefined = undefined
+          let ctaWillShow: boolean | undefined = undefined
           let repairPrefill: RepairPrefill | null = null
 
           if (citationsMatch) {
@@ -503,6 +511,7 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
               scannerBarcodes = data.scannerBarcodes
               logId = data.logId
               resolved = data.resolved
+              ctaWillShow = data.ctaWillShow
               repairPrefill = data.repairPrefill ?? null
             } catch (e) {
               console.error('Błąd parsowania citations/blogLinks/manualLinks/scannerBarcodes:', e)
@@ -511,7 +520,7 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
 
           setMessages(prev => [
             ...prev.slice(0, -1),
-            { role: 'assistant', content, citations, blogLinks, manualLinks, scannerBarcodes, logId, resolved, repairPrefill }
+            { role: 'assistant', content, citations, blogLinks, manualLinks, scannerBarcodes, logId, resolved, ctaWillShow, repairPrefill }
           ])
         }
       }

@@ -122,6 +122,37 @@ const SCANNER_CONFIG_BARCODES: ScannerConfigBarcode[] = [
   }
 ]
 
+// Granice wyrazu dla polskich liter: \b w JS zna tylko [A-Za-z0-9_], więc „ok" trafiało
+// w środek „okablowanie", a „działa" w „nadal nie działa". Sprawdzamy sąsiedztwo liter.
+const PL_LETTERS = 'a-ząćęłńóśżź'
+const word = (alt: string) => new RegExp(`(?<![${PL_LETTERS}])(?:${alt})(?![${PL_LETTERS}])`, 'i')
+
+// Klient mówi, że objaw trwa — ma pierwszeństwo przed słowami pozytywnymi, bo jedna wiadomość
+// potrafi zawierać oba („nie drukuje w sieci firmowej, w domu działa"). Przy niejednoznaczności
+// celowo wychodzi „nierozwiązane": niepokazany przycisk serwisowy kosztuje więcej niż nadmiarowy.
+const RE_NOT_RESOLVED = word(
+  'nadal nie|dalej nie|wciąż nie|wciaz nie|ciągle nie|ciagle nie|' +
+  'nie pomogło|nie pomoglo|nie pomaga|nie udało się|nie udalo sie|nie zadziałało|nie zadzialalo|' +
+  'nie działa|nie dziala|nie drukuje|nie skanuje|nie czyta|nie łączy|nie laczy|nie koduje|' +
+  'nie reaguje|nie widzi|nie wykrywa|nie odpowiada|nie włącza|nie wlacza|nie startuje|nie chce|' +
+  'bez zmian|to samo|dalej pusto'
+)
+const RE_USER_RESOLVED = word(
+  'działa|dziala|pomogło|pomoglo|zadziałało|zadzialalo|udało się|udalo sie|jest ok|ok|super|naprawione|' +
+  'rozwiązan[ey]|rozwiazan[ey]|już działa|juz dziala|temat zamknięty|temat zamkniety|' +
+  // formy z prawdziwych rozmów: „już drukuje, dzięki", „na razie nie zacina się"
+  'już drukuje|juz drukuje|już skanuje|juz skanuje|już czyta|juz czyta|już się łączy|juz sie laczy|' +
+  'nie zacina|wszystko gra|jest dobrze'
+)
+// Bez gołej uprzejmości („cieszę się", „świetnie", „super!", „gratulacje") — otwierały zdania
+// w odpowiedziach na każdy temat i same zamykały rozmowę jako rozwiązaną.
+const RE_AI_RESOLVED = word(
+  'problem rozwiązany|problem rozwiazany|działa poprawnie|dziala poprawnie|wszystko w porządku|wszystko w porzadku|' +
+  'udało się|udalo sie|naprawione|to dobra wiadomość|to dobra wiadomosc'
+)
+const RE_WORD_TAB = word('tab')
+const RE_WORD_WYMYSL = word('wymyśl')
+
 // Funkcja wykrywająca pytanie o konfigurację skanera
 function detectScannerConfigQuery(query: string): ScannerConfigBarcode[] {
   const queryLower = query.toLowerCase()
@@ -137,12 +168,12 @@ function detectScannerConfigQuery(query: string): ScannerConfigBarcode[] {
   // Enter/Carriage Return
   if (queryLower.includes('enter') || queryLower.includes('carriage') ||
       queryLower.includes('nowa linia') || queryLower.includes('zatwierdzanie') ||
-      (queryLower.includes('sufiks') && !queryLower.includes('tab'))) {
+      (queryLower.includes('sufiks') && !RE_WORD_TAB.test(queryLower))) {
     matchedBarcodes.push(SCANNER_CONFIG_BARCODES.find(b => b.id === 'suffix-enter')!)
   }
   
   // Tab
-  if (queryLower.includes('tab') || queryLower.includes('tabulator') ||
+  if (RE_WORD_TAB.test(queryLower) || queryLower.includes('tabulator') ||
       queryLower.includes('przeskakiwa') || queryLower.includes('następne pole')) {
     matchedBarcodes.push(SCANNER_CONFIG_BARCODES.find(b => b.id === 'suffix-tab')!)
   }
@@ -164,7 +195,10 @@ function detectScannerConfigQuery(query: string): ScannerConfigBarcode[] {
   }
   
   // Ogólna konfiguracja skanera - pokaż wszystkie popularne
-  if ((queryLower.includes('skonfigurow') || queryLower.includes('konfigurac') ||
+  // Komplet podstawowych kodów tylko wtedy, gdy klient nie poprosił o konkretny: inaczej pytanie
+  // „ustaw sufiks tab" zwracało także reset fabryczny, który kasuje konfigurację skanera.
+  if (matchedBarcodes.length === 0 &&
+      (queryLower.includes('skonfigurow') || queryLower.includes('konfigurac') ||
        queryLower.includes('zaprogramow') || queryLower.includes('ustaw')) &&
       (queryLower.includes('skaner') || queryLower.includes('czytnik'))) {
     // Dodaj podstawowe jeśli jeszcze nie ma
@@ -182,17 +216,18 @@ function detectScannerConfigQuery(query: string): ScannerConfigBarcode[] {
 // === Linkowanie do bloga: TYLKO na koniec rozmowy i tylko /blog ===
 function userSaysResolved(message: string): boolean {
   const m = (message || '').toLowerCase()
-  return !!m.match(
-    /(działa|dziala|pomogło|pomoglo|zadziałało|zadzialalo|udało się|udalo sie|jest ok|ok|super|naprawione|rozwiązan[ey]|rozwiazan[ey]|już działa|juz dziala|temat zamknięty|temat zamkniety)/
-  )
+  if (RE_NOT_RESOLVED.test(m)) return false
+  return RE_USER_RESOLVED.test(m)
 }
 
 // Sprawdza czy AI potwierdza rozwiązanie problemu
 function aiConfirmsResolved(aiResponse: string): boolean {
   const r = (aiResponse || '').toLowerCase()
-  return !!r.match(
-    /(cieszę się|ciesze sie|świetnie|swietnie|super!|doskonale|problem rozwiązany|problem rozwiazany|działa poprawnie|dziala poprawnie|wszystko w porządku|wszystko w porzadku|udało się|udalo sie|naprawione|to dobra wiadomość|to dobra wiadomosc|gratulacje)/
-  )
+  if (RE_NOT_RESOLVED.test(r)) return false
+  // Asystent niemal każdą turę kończy pytaniem „Udało się sparować?", „Zadziałało?" — pytanie nie
+  // jest potwierdzeniem, więc zdania zakończone znakiem zapytania odpadają przed dopasowaniem.
+  const twierdzenia = r.split(/(?<=[.!?])\s+/).filter((z) => !z.trimEnd().endsWith('?'))
+  return RE_AI_RESOLVED.test(twierdzenia.join(' '))
 }
 
 // Lista modeli zsynchronizowana z instrukcjami w bazie RAG (manuals_documents, 120 manuali),
@@ -429,8 +464,9 @@ urgency: "express" tylko gdy klient wprost mówił o pilności/przestoju produkc
     }
 
     const issueDescription = typeof parsed.issueDescription === 'string' ? parsed.issueDescription.trim() : ''
-    // Formularz wymaga min. 20 znaków — krótszy opis jest bezużyteczny, lepiej nie podstawiać nic
-    if (issueDescription.length < 20) return null
+    // Krótki opis zostawiamy pusty, ale reszta pól jedzie dalej: wcześniej `return null`
+    // wyrzucał razem z nim poprawnie ustalony typ urządzenia, model, numer seryjny i gwarancję.
+    const usableIssue = issueDescription.length >= 20 ? issueDescription.slice(0, 1500) : ''
 
     return {
       deviceType: DEVICE_TYPES.includes(parsed.deviceType) ? parsed.deviceType : 'inne',
@@ -438,7 +474,7 @@ urgency: "express" tylko gdy klient wprost mówił o pilności/przestoju produkc
       serialNumber: typeof parsed.serialNumber === 'string' ? parsed.serialNumber.trim().slice(0, 60) : '',
       isWarranty: ['tak', 'nie', 'nie_wiem'].includes(parsed.isWarranty) ? parsed.isWarranty : 'nie_wiem',
       urgency: parsed.urgency === 'express' ? 'express' : 'standard',
-      issueDescription: issueDescription.slice(0, 1500),
+      issueDescription: usableIssue,
     } as RepairPrefill
   } catch (error: any) {
     console.error('❌ Błąd budowania prefilla formularza:', error?.message || error)
@@ -1177,8 +1213,8 @@ function isManipulationAttempt(message: string): boolean {
   const manipulationPatterns = [
     'przepis na', 'przepis kulinarn', 'gotowanie', 'pieczenie', 'ciasto', 'kucharz',
     'napisz wiersz', 'napisz opowiadanie', 'napisz historię', 'napisz bajkę', 'napisz list',
-    'wymyśl', 'wyobraź sobie', 'stwórz opowieść', 'stwórz historię',
-    'w kontekście', 'jak wykorzystać zebra w',
+    'wyobraź sobie', 'stwórz opowieść', 'stwórz historię',
+    'jak wykorzystać zebra w',
     'opowiedz żart', 'opowiedz dowcip', 'zagadka',
     'quiz', 'zabawa', 'losowanie', 'wylosuj',
     'medycyn', 'prawnik', 'kancelari', 'prawo pracy', 'prawo cywiln', 'porad prawn',
@@ -1192,6 +1228,13 @@ function isManipulationAttempt(message: string): boolean {
       console.log(`🚫 Manipulation detected: "${pattern}" in message`)
       return true
     }
+  }
+
+  // „wymyśl" tylko jako osobne słowo: „wymyśliłem obejście, ale nie działa" to zdanie klienta.
+  // Wzorzec „w kontekście" usunięty — łapał „nie drukuje w kontekście sieci firmowej".
+  if (RE_WORD_WYMYSL.test(msgLower)) {
+    console.log('🚫 Manipulation detected: "wymyśl" jako osobne słowo')
+    return true
   }
 
   return false
@@ -1285,12 +1328,15 @@ function isZebraRelated(message: string): boolean {
       'napisz mi', 'napisz opowiadanie', 'napisz wiersz', 'napisz historię', 'napisz bajkę',
       'jaki jest', 'kim jesteś', 'opowiedz żart', 'opowiedz dowcip',
       'pogoda', 'przepis', 'gotowanie', 'polityk', 'pieczenie', 'ciasto',
-      'wymyśl', 'wyobraź', 'stwórz opowieść', 'w kontekście']
+      'wyobraź', 'stwórz opowieść']
     for (const spam of spamKeywords) {
       if (msgLower.includes(spam)) {
         return false
       }
     }
+    // „wymyśl" jako osobne słowo, bez „w kontekście" — krótkie „ZT411 gubi się w kontekście VLAN"
+    // i „wymyśliłem obejście" to zdania klienta, nie próby wyciągnięcia asystenta z roli.
+    if (RE_WORD_WYMYSL.test(msgLower)) return false
     return true // Krótkie wiadomości przepuszczamy - AI dopyta
   }
   
