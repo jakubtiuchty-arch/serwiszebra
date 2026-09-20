@@ -14,6 +14,10 @@
       "schedule": "0 15,16 * * *"
     },
     {
+      "path": "/api/cron/chat-alerts",
+      "schedule": "*/15 * * * *"
+    },
+    {
       "path": "/api/cron/chat-report",
       "schedule": "0 19 * * *"
     },
