@@ -37,9 +37,9 @@ Manuali w bazie: **120** · pytań: **35** · pytań "instrukcja": **31**
 | ✅ | ZT411 | 66% | ZT411_Manual | Jak skalibrować media w drukarce ZT411? |
 | ✅ | ZT231 | 63% | ZT231_Manual | Zebra ZT231 z odklejakiem źle kalibruje etykiety 100x150 |
 | ✅ | ZT230 | 62% | ZT230_Manual | ZT230 drukuje rozmazane etykiety, jak zmienić prędkość i zaczernienie? |
-| ✅ | ZT610 | 56% | ZT610_Manual | ZT610 jak ustawić tryb odklejania peel-off? |
+| ✅ | ZT610 | 55% | ZT610_Manual | ZT610 jak ustawić tryb odklejania peel-off? |
 | ✅ | ZQ520 | 65% | ZQ520_Manual | ZQ520 nie drukuje po wymianie baterii, miga czerwona dioda |
-| ✅ | ZQ630 | 70% | ZQ630_Manual | ZQ630 drukuje coraz wolniej i robi przerwy w połowie etykiety |
+| ✅ | ZQ630 | 62% | ZQ630_Manual | ZQ630 drukuje coraz wolniej i robi przerwy w połowie etykiety |
 | ✅ | ZQ511 | 52% | ZQ511_Manual | Jak sparować ZQ511 przez Bluetooth z telefonem? |
 | ✅ | ZC300 | 60% | ZC300_Manual | Drukarka ZC300 zacina karty przy drukowaniu |
 | ✅ | ZXP7 | 63% | ZXP7_Manual | ZXP7 drukuje karty z pustymi miejscami i smugami |
@@ -50,13 +50,13 @@ Manuali w bazie: **120** · pytań: **35** · pytań "instrukcja": **31**
 | ✅ | MC3300 | 55% | MC3300_Manual | MC3300 jak zresetować do ustawień fabrycznych? |
 | ✅ | MC9300 | 69% | MC9300_Manual | MC9300 skaner nie czyta kodów kreskowych |
 | ✅ | TC78 | 61% | TC78_Manual | TC78 jak zrobić aktualizację systemu Android? |
-| ✅ | GK420D | 57% | GK420D_Manual | GK420d przeskakuje etykiety i drukuje w połowie etykiety |
-| ✅ | GK420T | 55% | GK420T_Manual | GK420t białe pasy na wydruku, jak wyczyścić głowicę? |
-| ✅ | GX430T | 57% | GX430T_Manual | GX430t jak skalibrować czujnik etykiet? |
-| ✅ | TC52 | 50% | TC52_Manual | Terminal TC52 nie łączy się z WiFi, sieć jest widoczna |
-| ✅ | TC57 | 59% | TC57_Manual | TC57 jak zaktualizować oprogramowanie? |
+| ✅ | GK420D | 58% | GK420D_Manual | GK420d przeskakuje etykiety i drukuje w połowie etykiety |
+| ✅ | GK420T | 54% | GK420T_Manual | GK420t białe pasy na wydruku, jak wyczyścić głowicę? |
+| ✅ | GX430T | 52% | GX430T_Manual | GX430t jak skalibrować czujnik etykiet? |
+| ✅ | TC52 | 48% | TC52_Manual | Terminal TC52 nie łączy się z WiFi, sieć jest widoczna |
+| ✅ | TC57 | 58% | TC57_Manual | TC57 jak zaktualizować oprogramowanie? |
 | ✅ | LP2824 | 48% | LP2824_Manual | Zebra LP2824 Plus dioda mruga naprzemiennie zielono-czerwono |
-| ✅ | ZXP3 | 69% | ZXP3_Manual | ZXP3 drukuje karty z pustymi miejscami |
+| ✅ | ZXP3 | 65% | ZXP3_Manual | ZXP3 drukuje karty z pustymi miejscami |
 | ➖ | MC3300 | 52% | MC3300_Manual | Terminal MC3300 ma pęknięty ekran po upadku |
 | ➖ | TC53 | 44% | TC53_Manual | TC53 wpadł do wody i nie włącza się |
 | ➖ | ZQ520 | 55% | ZQ520_Manual | ZQ520 ma wgnieciony korpus po upadku |

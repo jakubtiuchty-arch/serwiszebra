@@ -579,6 +579,19 @@ async function searchManuals(query: string, modelsHint: string[] = [], rozmowa?:
     const POBIERZ_Z_ZAPASEM = 20
     const FRAGMENTY_DO_PROMPTU = 5
 
+    // Spisy treści i indeksy: 5 603 z 33 271 fragmentów, czyli 17 procent bazy, w 68 ze 120
+    // instrukcji, najgęściej w skanerach. Dostają 57-60 procent podobieństwa, bo są zbudowane
+    // z samych nazw tematów, więc wchodziły do czołówki obok prawdziwej treści i lądowały
+    // pod odpowiedzią jako źródło. W rozmowie o DS4608 dwa z trzech pokazanych klientowi źródeł
+    // to były strony spisu treści. Pomiar na 11 rozmowach: trafienia 7 → 8 z 11, nic nie traci.
+    const czySpisTresci = (tekst: string) => {
+      const t = tekst || ''
+      if (!t) return false
+      const kropkiWiodace = (t.match(/\.{4,}/g) || []).length
+      const udzialKropek = (t.match(/\./g) || []).length / t.length
+      return kropkiWiodace >= 4 || udzialKropek > 0.2
+    }
+
     // Szukaj w Supabase vector search (manuals_documents) — z GUARDEM na zły model
     const rpcMatch = (threshold: number, filter: string | null) =>
       supabase.rpc('match_documents', {
@@ -629,18 +642,19 @@ async function searchManuals(query: string, modelsHint: string[] = [], rozmowa?:
 
     const przedOdsianiem = data.length
     const widzianeTresci = new Set<string>()
-    data = (data as any[])
-      .filter((doc: any) => {
-        const klucz = `${doc.manual_name}|${(doc.content || '').replace(/\s+/g, ' ').trim().toLowerCase()}`
-        if (widzianeTresci.has(klucz)) return false
-        widzianeTresci.add(klucz)
-        return true
-      })
-      .slice(0, FRAGMENTY_DO_PROMPTU)
+    const bezDuplikatow = (data as any[]).filter((doc: any) => {
+      const klucz = `${doc.manual_name}|${(doc.content || '').replace(/\s+/g, ' ').trim().toLowerCase()}`
+      if (widzianeTresci.has(klucz)) return false
+      widzianeTresci.add(klucz)
+      return true
+    })
+    const bezSpisu = bezDuplikatow.filter((doc: any) => !czySpisTresci(doc.content))
+    // Gdyby cała czołówka okazała się spisem treści, lepiej oddać ją niż nic.
+    data = (bezSpisu.length > 0 ? bezSpisu : bezDuplikatow).slice(0, FRAGMENTY_DO_PROMPTU)
 
     console.log(
-      `✅ Supabase zwrócił ${przedOdsianiem} wyników, po odsianiu duplikatów ${data.length}` +
-      (przedOdsianiem > data.length ? ` (odrzucono ${przedOdsianiem - data.length})` : '')
+      `✅ Supabase zwrócił ${przedOdsianiem} wyników → ${data.length} do promptu ` +
+      `(duplikaty: ${przedOdsianiem - bezDuplikatow.length}, spisy treści: ${bezDuplikatow.length - bezSpisu.length})`
     )
 
     const contextParts = data.map((doc: any, idx: number) => {

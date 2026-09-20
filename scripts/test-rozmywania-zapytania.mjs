@@ -14,7 +14,10 @@
  * Uruchomienie: node scripts/test-rozmywania-zapytania.mjs
  * Wynik z 20.09.2026, trzy przebiegi: sklejka 5/11 trafień przy średniej pozycji 1,60,
  * przepisanie 8-9/11 przy średniej pozycji około 1,5. Rozrzut bierze się z modelu układającego
- * zapytanie; kierunek jest stały. Stale nietrafione: DS4608 „suffix".
+ * zapytanie; kierunek jest stały. Stale nietrafione: DS4608 „suffix" — sprawdzone 20.09.2026,
+ * to wada tego przypadku, nie czatu: poprawną odpowiedzią na tę rozmowę jest kod konfiguracyjny
+ * z sufiksem Tab, a nie cytat z instrukcji, więc wzorcowa fraza nie musi się pojawić.
+ * Zostawione, żeby wyniki dało się porównywać z wcześniejszymi przebiegami.
  *
  * UWAGA: prompt przepisywania jest skopiowany z app/api/chat/route.ts (buildSearchQuery).
  * Next nie pozwala eksportować funkcji z pliku trasy, więc przy zmianie promptu trzeba
@@ -90,11 +93,15 @@ ${GLOSARIUSZ}` },
 }
 
 const norm = (t) => (t || '').replace(/\s+/g, ' ').trim().toLowerCase()
+// jak w route.ts: spisy treści nie wchodzą do promptu
+const czySpisTresci = (t) => !!t && ((t.match(/\.{4,}/g) || []).length >= 4 || (t.match(/\./g) || []).length / t.length > 0.2)
 async function pobierz(zapytanie, model) {
   const e = await ai.embeddings.create({ model: 'text-embedding-3-small', input: `${zapytanie} ${model}` })
   const { data } = await db.rpc('match_documents', { query_embedding: e.data[0].embedding, match_threshold: 0.4, match_count: 20, filter_manual: `${model}_Manual` })
   const widziane = new Set()
-  return (data || []).filter((d) => { const k = norm(d.content); if (widziane.has(k)) return false; widziane.add(k); return true }).slice(0, 5)
+  const bezDuplikatow = (data || []).filter((d) => { const k = norm(d.content); if (widziane.has(k)) return false; widziane.add(k); return true })
+  const bezSpisu = bezDuplikatow.filter((d) => !czySpisTresci(d.content))
+  return (bezSpisu.length > 0 ? bezSpisu : bezDuplikatow).slice(0, 5)
 }
 const pozycja = (wyniki, fraza) => { const i = wyniki.findIndex((d) => (d.content || '').toLowerCase().includes(fraza.toLowerCase())); return i < 0 ? null : i + 1 }
 

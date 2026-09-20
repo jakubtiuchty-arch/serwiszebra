@@ -75,14 +75,23 @@ async function embed(text) {
 const POBIERZ_Z_ZAPASEM = 20
 const FRAGMENTY_DO_PROMPTU = 5
 
+// Spisy treści i indeksy to 17% bazy i wchodziły do czołówki obok prawdziwej treści — jak w route.ts
+function czySpisTresci(tekst) {
+  const t = tekst || ''
+  if (!t) return false
+  return (t.match(/\.{4,}/g) || []).length >= 4 || (t.match(/\./g) || []).length / t.length > 0.2
+}
+
 function odsiejDuplikaty(rows, ile = FRAGMENTY_DO_PROMPTU) {
   const widziane = new Set()
-  return rows.filter((d) => {
+  const bezDuplikatow = rows.filter((d) => {
     const k = `${d.manual_name}|${(d.content || '').replace(/\s+/g, ' ').trim().toLowerCase()}`
     if (widziane.has(k)) return false
     widziane.add(k)
     return true
-  }).slice(0, ile)
+  })
+  const bezSpisu = bezDuplikatow.filter((d) => !czySpisTresci(d.content))
+  return (bezSpisu.length > 0 ? bezSpisu : bezDuplikatow).slice(0, ile)
 }
 
 async function match(queryEmbedding, threshold, filterManual) {
