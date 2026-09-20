@@ -60,6 +60,17 @@ async function saveChatLog(data: {
 }
 
 // Funkcja do tłumaczenia polskiego tekstu na angielski (OpenAI)
+// Słownik serwisowy Zebry. Bez niego gpt-4o-mini oddaje „taśmę" jako „tape", a instrukcje
+// producenta piszą „ribbon" — embedding trafia wtedy obok terminologii, w której napisany jest manual.
+const GLOSARIUSZ_ZEBRY = `Use Zebra manual terminology, not everyday words — the text is used to search English service manuals:
+taśma (barwiąca) = ribbon (never "tape"), kaseta taśmy = ribbon cartridge, barwnik/warstwa barwiąca = ink coating,
+nośnik/materiał/etykiety = media, wałek (dociskowy) = platen roller, głowica (drukująca) = printhead,
+przerwa między etykietami = gap/web, znacznik czarny = black mark, zaczernienie = darkness,
+podkład = liner, bez podkładu = linerless, odklejak = peeler/dispenser, gilotyna = cutter,
+nawijak = rewinder, czujnik = sensor, kalibracja = calibration/media calibration,
+trzpień = spindle, naprężenie taśmy = ribbon tension, zacięcie = jam, spust = trigger,
+kolebka/bazka skanera = cradle, parowanie = pairing, sufiks = suffix.`
+
 async function translateToEnglish(text: string): Promise<string> {
   try {
     console.log('🌐 Tłumaczę na angielski:', text)
@@ -68,15 +79,7 @@ async function translateToEnglish(text: string): Promise<string> {
       temperature: 0.3,
       max_tokens: 400,  // zapytanie do RAG to teraz kilka ostatnich wiadomości, nie jedna
       messages: [
-        { role: 'system', content: `Translate the following Polish text to English. Return ONLY the translation, nothing else.
-Use Zebra manual terminology, not everyday words — the translation is used to search English service manuals:
-taśma (barwiąca) = ribbon (never "tape"), kaseta taśmy = ribbon cartridge, barwnik/warstwa barwiąca = ink coating,
-nośnik/materiał/etykiety = media, wałek (dociskowy) = platen roller, głowica (drukująca) = printhead,
-przerwa między etykietami = gap/web, znacznik czarny = black mark, zaczernienie = darkness,
-podkład = liner, bez podkładu = linerless, odklejak = peeler/dispenser, gilotyna = cutter,
-nawijak = rewinder, czujnik = sensor, kalibracja = calibration/media calibration,
-trzpień = spindle, naprężenie taśmy = ribbon tension, zacięcie = jam, spust = trigger,
-kolebka/bazka skanera = cradle, parowanie = pairing, sufiks = suffix.` },
+        { role: 'system', content: `Translate the following Polish text to English. Return ONLY the translation, nothing else.\n${GLOSARIUSZ_ZEBRY}` },
         { role: 'user', content: text }
       ],
     })
@@ -86,6 +89,55 @@ kolebka/bazka skanera = cradle, parowanie = pairing, sufiks = suffix.` },
   } catch (error) {
     console.error('❌ Błąd tłumaczenia:', error)
     return text
+  }
+}
+
+/**
+ * Jedno zdanie, którego technik szukałby w instrukcji, ułożone z całej rozmowy.
+ *
+ * Wcześniej do wyszukiwarki szła sklejka kilku wiadomości (buildRagQuery). Sklejka ratowała
+ * sytuację, gdy klient odpisuje samo „nadal", ale im dłuższa rozmowa, tym bardziej rozmywała
+ * embedding. Pomiar na 11 rozmowach wieloturowych z wzorcowym fragmentem instrukcji:
+ * sklejka znajdowała wzorzec w 5 przypadkach, sama ostatnia wiadomość w 2, przepisanie w 9,
+ * przy średniej pozycji 1,56 wobec 1,60 dla sklejki i sześciu pierwszych miejscach wobec czterech.
+ *
+ * To NIE jest dodatkowe wywołanie modelu: zastępuje tłumaczenie, które i tak tu stało.
+ * Przy błędzie wracamy do starej ścieżki, czyli tłumaczenia sklejki.
+ */
+async function buildSearchQuery(messages: any[], fallbackQuery: string): Promise<string> {
+  const tury = (Array.isArray(messages) ? messages : [])
+    .filter((m: any) => (m?.role === 'user' || m?.role === 'assistant') && typeof m.content === 'string' && m.content.trim())
+    .slice(-10)
+    .map((m: any) => `${m.role === 'user' ? 'Klient' : 'Serwisant'}: ${m.content.trim().slice(0, 500)}`)
+  if (tury.length === 0) return translateToEnglish(fallbackQuery)
+
+  try {
+    const response = await getOpenAI().chat.completions.create({
+      model: 'gpt-4o-mini',
+      temperature: 0,
+      max_tokens: 200,
+      messages: [
+        {
+          role: 'system',
+          content: `You turn a Polish service chat into ONE English search query for a Zebra service manual.
+Write what the technician needs to look up right now, as a single noun phrase or short question, 6-16 words.
+Use the topic from the whole conversation, not only the last line — the customer's last message is often just "still the same".
+Skip pleasantries, model numbers and what was already ruled out.
+When a part or mode has more than one name in Zebra manuals, put both in the query
+(for example peel and dispenser, suffix and terminator, platen and drive roller).
+Return ONLY the query.
+${GLOSARIUSZ_ZEBRY}`,
+        },
+        { role: 'user', content: tury.join('\n') },
+      ],
+    })
+    const zapytanie = response.choices[0]?.message?.content?.trim()
+    if (!zapytanie) return translateToEnglish(fallbackQuery)
+    console.log('🧭 Zapytanie do instrukcji:', zapytanie)
+    return zapytanie
+  } catch (error) {
+    console.error('❌ Błąd budowania zapytania, wracam do tłumaczenia sklejki:', error)
+    return translateToEnglish(fallbackQuery)
   }
 }
 
@@ -492,7 +544,7 @@ urgency: "express" tylko gdy klient wprost mówił o pilności/przestoju produkc
   }
 }
 
-async function searchManuals(query: string, modelsHint: string[] = []): Promise<{
+async function searchManuals(query: string, modelsHint: string[] = [], rozmowa?: any[]): Promise<{
   context: string
   found: boolean
   sources: Array<{ manual: string; page: number | null; sim: number }>
@@ -503,8 +555,9 @@ async function searchManuals(query: string, modelsHint: string[] = []): Promise<
     // Model z bieżącego zapytania, a gdy go tam nie ma — zapamiętany z wcześniejszych wiadomości
     const detectedModels = modelsHint.length > 0 ? modelsHint : detectPrinterModel(query)
 
-    // Tłumacz polskie zapytanie na angielski (manuali są po angielsku)
-    let translatedQuery = await translateToEnglish(query)
+    // Instrukcje są po angielsku. Gdy mamy całą rozmowę, układamy z niej jedno zapytanie;
+    // bez rozmowy (np. wywołanie ze skryptu) zostaje samo tłumaczenie.
+    let translatedQuery = rozmowa ? await buildSearchQuery(rozmowa, query) : await translateToEnglish(query)
 
     if (detectedModels.length > 0) {
       translatedQuery = `${translatedQuery} ${detectedModels.join(' ')}`
@@ -1551,7 +1604,7 @@ export async function POST(req: NextRequest) {
 
     if (ragQuery && needsRAG) {
       console.log('🔍 Szukam w Supabase manuals dla:', ragQuery)
-      const searchResult = await searchManuals(ragQuery, conversationModels)
+      const searchResult = await searchManuals(ragQuery, conversationModels, messages)
 
       knowledgeContext = searchResult.context
       ragContextFound = searchResult.found
