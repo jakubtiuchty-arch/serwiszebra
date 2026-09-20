@@ -1603,7 +1603,6 @@ export async function POST(req: NextRequest) {
     let knowledgeContext = ''
     let ragContextFound = false
     let ragSources: Array<{ manual: string; page: number | null; sim: number }> = []
-    let citations: Array<{ title: string; uri: string; pageNumber?: number }> = []
 
     // Kontekst rozmowy zamiast pojedynczej wiadomości — patrz buildRagQuery/detectModelsInConversation
     const ragQuery = buildRagQuery(messages) || lastUserMessage
@@ -1626,28 +1625,6 @@ export async function POST(req: NextRequest) {
 
       if (ragContextFound) {
         console.log('✅ Znaleziono kontekst z Supabase manuals')
-
-        // Źródło odpowiedzi dla klienta: manual, strona i link do instrukcji na serwisie.
-        // Pole `citations` istniało od początku i front je parsuje, ale nikt go nie wypełniał —
-        // zawsze leciała pusta tablica, choć ragSources mamy pod ręką i logujemy do chat_logs.
-        const widzianeZrodla = new Set<string>()
-        citations = ragSources
-          .filter((s) => {
-            const k = `${s.manual}|${s.page ?? ''}`
-            if (widzianeZrodla.has(k)) return false
-            widzianeZrodla.add(k)
-            return true
-          })
-          .slice(0, 3)
-          .map((s) => {
-            const model = (s.manual || '').replace(/_(manual|instrukcja).*$/i, '')
-            const link = manualLinks.find((ml) => ml.url.toLowerCase().includes(`/zebra-${model.toLowerCase()}`))
-            return {
-              title: `Instrukcja ${model}${s.page ? `, strona ${s.page}` : ''}`,
-              uri: link?.url ?? '/instrukcje',
-              pageNumber: s.page ?? undefined,
-            }
-          })
       } else {
         console.log('❌ Nie znaleziono kontekstu w Supabase manuals')
       }
@@ -1788,12 +1765,10 @@ ZRÓB DOKŁADNIE TAK - WKLEJ [BARCODE:...] W ODPOWIEDŹ!`
             }
           }
 
-          // Na końcu dodaj citations, (opcjonalnie) /blog i scanner barcodes jako JSON (jeśli są)
-          // WAŻNE: Jeśli blog znalazł odpowiedź, NIE pokazuj citations z RAG (często nieodpowiednie)
-          // Źródła z instrukcji pokazujemy zawsze, gdy RAG dostarczył kontekst. Wcześniej stało tu
-          // `blogLinks.length > 0 ? [] : citations`, co przy trafieniu bloga (a trafia prawie
-          // zawsze) zerowało listę — nie miało to znaczenia, dopóki `citations` i tak było puste.
-          const finalCitations = citations
+          // Na końcu dodaj linki do /blog, instrukcji i kody kreskowe skanera jako JSON (jeśli są).
+          // Źródeł z instrukcji klientowi nie pokazujemy — decyzja z 20.09.2026: dla klienta liczy
+          // się odpowiedź, nie strona, z której pochodzi. Do diagnostyki służy rag_sources w chat_logs,
+          // z którego korzysta panel „złe odpowiedzi".
 
           // Wykryj czy pytanie jest informacyjne (nie troubleshooting)
           // Informacyjne: "co to jest", "jakie są parametry", "czym się różni", "jak działa"
@@ -1808,7 +1783,7 @@ ZRÓB DOKŁADNIE TAK - WKLEJ [BARCODE:...] W ODPOWIEDŹ!`
           const uiBlogLinks = allowUiBlogLink ? [{ title: 'Więcej poradników', url: '/blog' }] : []
           const uiManualLinks = !isTroubleshooting ? manualLinks : []
 
-          // Zawsze odsyłamy metadane (z logId), nawet bez citations — front potrzebuje logId do oceny 👍/👎
+          // Zawsze odsyłamy metadane — front potrzebuje logId do oceny 👍/👎
           // Czy front pokaże CTA „Wyślij do serwisu"? Warunek lustrzany do AIChatBox
           // (shouldShowFormButton) — liczymy go tu, żeby (a) nie płacić za ekstrakcję
           // prefilla przy każdej wiadomości, (b) móc zalogować wyświetlenie CTA.
@@ -1833,7 +1808,6 @@ ZRÓB DOKŁADNIE TAK - WKLEJ [BARCODE:...] W ODPOWIEDŹ!`
             resolved: problemResolved, // gdy true → front NIE pokazuje CTA „Wyślij do serwisu"
             ctaWillShow,
             repairPrefill,
-            citations: finalCitations,
             blogLinks: uiBlogLinks,
             manualLinks: uiManualLinks,
             scannerBarcodes: scannerBarcodes.map(b => ({

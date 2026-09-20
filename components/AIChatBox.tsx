@@ -21,12 +21,6 @@ import { trackChatOpen, trackChatMessage } from '@/lib/gtm'
 import { trackAIChatOpen, trackAIChatMessage } from '@/lib/analytics'
 import { emitRepairPrefill, trackCtaEvent, prefilledFields, type RepairPrefill } from '@/lib/repair-prefill'
 
-interface Citation {
-  title: string
-  uri: string
-  pageNumber?: number
-}
-
 interface BlogLink {
   title: string
   url: string
@@ -47,7 +41,6 @@ interface ManualLink {
 interface Message {
   role: 'user' | 'assistant'
   content: string
-  citations?: Citation[]
   blogLinks?: BlogLink[]
   manualLinks?: ManualLink[]
   scannerBarcodes?: ScannerBarcode[]
@@ -123,28 +116,6 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
     } catch (e) {
       console.error('Błąd wysyłania oceny:', e)
     }
-  }
-
-  // Źródło odpowiedzi: instrukcja i strona, z których pochodzi kontekst RAG.
-  // Backend wypełnia `citations` od 20.09.2026 — wcześniej pole istniało, ale zawsze było puste.
-  const renderSources = (msg: Message) => {
-    if (msg.role !== 'assistant' || !msg.citations?.length) return null
-    return (
-      <div className="mt-1.5 px-1 flex flex-wrap items-center gap-x-2 gap-y-0.5 text-[11px] text-gray-400">
-        <span>Źródło:</span>
-        {msg.citations.map((c, i) => (
-          <a
-            key={i}
-            href={c.uri}
-            target="_blank"
-            rel="noopener"
-            className="underline decoration-dotted hover:text-gray-600"
-          >
-            {c.title}
-          </a>
-        ))}
-      </div>
-    )
   }
 
   // Przyciski oceny pod odpowiedzią AI (tylko gdy mamy logId, czyli odpowiedź jest kompletna)
@@ -511,10 +482,9 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
 
           assistantMessage += decoder.decode(value)
 
-          // Sprawdź czy są citations, blogLinks i scannerBarcodes na końcu
+          // Sprawdź czy są blogLinks, manualLinks i scannerBarcodes na końcu
           const citationsMatch = assistantMessage.match(/__CITATIONS__(.+)$/)
           let content = assistantMessage
-          let citations: Citation[] | undefined = undefined
           let blogLinks: BlogLink[] | undefined = undefined
           let manualLinks: ManualLink[] | undefined = undefined
           let scannerBarcodes: ScannerBarcode[] | undefined = undefined
@@ -527,7 +497,6 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
             content = assistantMessage.substring(0, citationsMatch.index)
             try {
               const data = JSON.parse(citationsMatch[1])
-              citations = data.citations
               blogLinks = data.blogLinks
               manualLinks = data.manualLinks
               scannerBarcodes = data.scannerBarcodes
@@ -536,13 +505,13 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
               ctaWillShow = data.ctaWillShow
               repairPrefill = data.repairPrefill ?? null
             } catch (e) {
-              console.error('Błąd parsowania citations/blogLinks/manualLinks/scannerBarcodes:', e)
+              console.error('Błąd parsowania blogLinks/manualLinks/scannerBarcodes:', e)
             }
           }
 
           setMessages(prev => [
             ...prev.slice(0, -1),
-            { role: 'assistant', content, citations, blogLinks, manualLinks, scannerBarcodes, logId, resolved, ctaWillShow, repairPrefill }
+            { role: 'assistant', content, blogLinks, manualLinks, scannerBarcodes, logId, resolved, ctaWillShow, repairPrefill }
           ])
         }
       }
@@ -639,7 +608,6 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
                           })}
                       </div>
                     </div>
-                    {renderSources(msg)}
                     {renderFeedback(msg, idx)}
                   </div>
 
@@ -868,8 +836,7 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
 
                   {/* Linki do instrukcji/bloga USUNIĘTE — ChatAI ma rozwiązać problem sam, bez odsyłania */}
 
-                  {renderSources(msg)}
-                    {renderFeedback(msg, idx)}
+                  {renderFeedback(msg, idx)}
                 </div>
 
                 {msg.role === 'user' && (
