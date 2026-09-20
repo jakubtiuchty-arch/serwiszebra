@@ -125,6 +125,28 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
     }
   }
 
+  // Źródło odpowiedzi: instrukcja i strona, z których pochodzi kontekst RAG.
+  // Backend wypełnia `citations` od 20.09.2026 — wcześniej pole istniało, ale zawsze było puste.
+  const renderSources = (msg: Message) => {
+    if (msg.role !== 'assistant' || !msg.citations?.length) return null
+    return (
+      <div className="mt-1.5 px-1 flex flex-wrap items-center gap-x-2 gap-y-0.5 text-[11px] text-gray-400">
+        <span>Źródło:</span>
+        {msg.citations.map((c, i) => (
+          <a
+            key={i}
+            href={c.uri}
+            target="_blank"
+            rel="noopener"
+            className="underline decoration-dotted hover:text-gray-600"
+          >
+            {c.title}
+          </a>
+        ))}
+      </div>
+    )
+  }
+
   // Przyciski oceny pod odpowiedzią AI (tylko gdy mamy logId, czyli odpowiedź jest kompletna)
   const renderFeedback = (msg: Message, idx: number) => {
     if (msg.role !== 'assistant' || !msg.logId || !msg.content.trim()) return null
@@ -617,6 +639,7 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
                           })}
                       </div>
                     </div>
+                    {renderSources(msg)}
                     {renderFeedback(msg, idx)}
                   </div>
 
@@ -845,7 +868,8 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
 
                   {/* Linki do instrukcji/bloga USUNIĘTE — ChatAI ma rozwiązać problem sam, bez odsyłania */}
 
-                  {renderFeedback(msg, idx)}
+                  {renderSources(msg)}
+                    {renderFeedback(msg, idx)}
                 </div>
 
                 {msg.role === 'user' && (

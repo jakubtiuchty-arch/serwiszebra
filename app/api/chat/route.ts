@@ -68,7 +68,15 @@ async function translateToEnglish(text: string): Promise<string> {
       temperature: 0.3,
       max_tokens: 400,  // zapytanie do RAG to teraz kilka ostatnich wiadomości, nie jedna
       messages: [
-        { role: 'system', content: 'Translate the following Polish text to English. Return ONLY the translation, nothing else.' },
+        { role: 'system', content: `Translate the following Polish text to English. Return ONLY the translation, nothing else.
+Use Zebra manual terminology, not everyday words — the translation is used to search English service manuals:
+taśma (barwiąca) = ribbon (never "tape"), kaseta taśmy = ribbon cartridge, barwnik/warstwa barwiąca = ink coating,
+nośnik/materiał/etykiety = media, wałek (dociskowy) = platen roller, głowica (drukująca) = printhead,
+przerwa między etykietami = gap/web, znacznik czarny = black mark, zaczernienie = darkness,
+podkład = liner, bez podkładu = linerless, odklejak = peeler/dispenser, gilotyna = cutter,
+nawijak = rewinder, czujnik = sensor, kalibracja = calibration/media calibration,
+trzpień = spindle, naprężenie taśmy = ribbon tension, zacięcie = jam, spust = trigger,
+kolebka/bazka skanera = cradle, parowanie = pairing, sufiks = suffix.` },
         { role: 'user', content: text }
       ],
     })
@@ -442,6 +450,8 @@ Zasady dla issueDescription:
 - żadnych pozdrowień, marketingu, cen ani obietnic naprawy
 - nie zmyślaj: jeśli czegoś nie było w rozmowie, pomiń
 
+deviceType: TC, MC, WT i inne komputery naręczne ze skanerem to "terminal", nawet gdy klient nazywa je tabletem. "tablet" zostaw dla ET40/ET45/L10, czyli urządzeń bez wbudowanego skanera i bez uchwytu pistoletowego.
+
 isWarranty: "tak"/"nie" tylko gdy klient wprost powiedział; w przeciwnym razie "nie_wiem".
 urgency: "express" tylko gdy klient wprost mówił o pilności/przestoju produkcji; inaczej "standard".`,
         },
@@ -508,12 +518,20 @@ async function searchManuals(query: string, modelsHint: string[] = []): Promise<
     })
     const queryEmbedding = embeddingResponse.data[0].embedding
 
+    // Tabela ma powtórzone chunki: ten sam PDF zaindeksowany dwa razy albo dwa pliki o tej samej
+    // treści pod jedną nazwą manuala. Pomiar z 20.09.2026: 41 941 wierszy wobec 33 271 unikalnych
+    // par (manual, treść), najgorzej DS4608 i DS4678 (×3,9). Przy pobieraniu pięciu wyników model
+    // dostawał z takiego manuala dwa różne akapity zamiast pięciu. Pobieramy z zapasem i zostawiamy
+    // FRAGMENTY_DO_PROMPTU różnych treści, więc rozmiar promptu się nie zmienia.
+    const POBIERZ_Z_ZAPASEM = 20
+    const FRAGMENTY_DO_PROMPTU = 5
+
     // Szukaj w Supabase vector search (manuals_documents) — z GUARDEM na zły model
     const rpcMatch = (threshold: number, filter: string | null) =>
       supabase.rpc('match_documents', {
         query_embedding: queryEmbedding,
         match_threshold: threshold,
-        match_count: 5,
+        match_count: POBIERZ_Z_ZAPASEM,
         filter_manual: filter,
       })
 
@@ -556,7 +574,21 @@ async function searchManuals(query: string, modelsHint: string[] = []): Promise<
       return { context: '', found: false, sources: [] }
     }
 
-    console.log(`✅ Supabase zwrócił ${data.length} wyników`)
+    const przedOdsianiem = data.length
+    const widzianeTresci = new Set<string>()
+    data = (data as any[])
+      .filter((doc: any) => {
+        const klucz = `${doc.manual_name}|${(doc.content || '').replace(/\s+/g, ' ').trim().toLowerCase()}`
+        if (widzianeTresci.has(klucz)) return false
+        widzianeTresci.add(klucz)
+        return true
+      })
+      .slice(0, FRAGMENTY_DO_PROMPTU)
+
+    console.log(
+      `✅ Supabase zwrócił ${przedOdsianiem} wyników, po odsianiu duplikatów ${data.length}` +
+      (przedOdsianiem > data.length ? ` (odrzucono ${przedOdsianiem - data.length})` : '')
+    )
 
     const contextParts = data.map((doc: any, idx: number) => {
       console.log(`  ${idx + 1}. ${doc.manual_name} (str. ${doc.page_number}) — similarity: ${(doc.similarity * 100).toFixed(1)}%`)
@@ -790,6 +822,14 @@ Pamiętaj, że nasi klienci to często:
 - **NIE ZADAWAJ OCZYWISTYCH PYTAŃ** typu "czy jest włączony?", "czy jest naładowany?" - to robienie idioty z klienta!
   Zamiast tego: daj KONKRETNE polecenie diagnostyczne, np. "Zeskanuj kod testowy z instrukcji" lub "Sprawdź parowanie w ustawieniach Bluetooth"
 
+🚫 **NIGDY NIE TWIERDŹ, ŻE URZĄDZENIE CZEGOŚ NIE MA**
+Nie masz przed sobą całej instrukcji, tylko kilka wybranych fragmentów. Brak czegoś w kontekście
+NIE znaczy, że urządzenie tego nie obsługuje.
+- ❌ ŹLE: „DS2278 nie ma trybu antykradzieżowego", „to brzmi jak funkcja z innego urządzenia", „ktoś pomylił model"
+- ✅ DOBRZE: „W tym, co mam pod ręką, nie widzę tej funkcji opisanej. Sprawdzę w pełnej instrukcji — tu jest do pobrania: /instrukcje/zebra-<model>. Jeśli wiesz, jak nazywa się ta opcja w menu, podaj nazwę, to trafię szybciej."
+Gdy klient powołuje się na forum, kolegę albo instrukcję, traktuj to jako wskazówkę, a nie pomyłkę.
+Zaprzeczyć możesz TYLKO wtedy, gdy kontekst z instrukcji wprost mówi, że danej funkcji nie ma.
+
 WAŻNE ZASADY:
 0. **🚨 ZAWSZE USTAL WARIANT URZĄDZENIA PRZED DIAGNOZĄ!**
    - Jeśli użytkownik napisze tylko "drukarka", "terminal" lub "skaner" BEZ modelu → NAJPIERW ZAPYTAJ O MODEL!
@@ -966,6 +1006,14 @@ SKANERY:
 - Czyszczenie optyki: 89-150 zł
 
 WAŻNE: Podawaj cenę dla KONKRETNEJ serii urządzenia, nie ogólne widełki!
+
+🚫 **NIE WYCENIAJ NAPRAWY TERMINALA ANI SKANERA, ZANIM SPRAWDZISZ OPROGRAMOWANIE**
+Brak skanowania w terminalu TC/MC najczęściej wynika z konfiguracji, nie z uszkodzenia modułu.
+Zanim padnie jakakolwiek kwota, przejdź przez: DataWedge (czy profil jest włączony i przypisany do
+aplikacji, czy skaner jest włączony w profilu), przypisanie przycisku skanowania, test w aplikacji
+DataWedge Demo albo w notatniku, restart urządzenia.
+Dopiero gdy celownik nie zapala się mimo poprawnej konfiguracji, mów o module skanującym i cenie.
+Wycena 500-800 zł podana po jednym pytaniu kosztuje klienta albo zaufanie, albo niepotrzebną naprawę.
 
 WAŻNE O DIAGNOSTYCE:
 - Diagnostyka w serwisie jest bezpłatna TYLKO gdy klient zaakceptuje naprawę
@@ -1511,6 +1559,28 @@ export async function POST(req: NextRequest) {
 
       if (ragContextFound) {
         console.log('✅ Znaleziono kontekst z Supabase manuals')
+
+        // Źródło odpowiedzi dla klienta: manual, strona i link do instrukcji na serwisie.
+        // Pole `citations` istniało od początku i front je parsuje, ale nikt go nie wypełniał —
+        // zawsze leciała pusta tablica, choć ragSources mamy pod ręką i logujemy do chat_logs.
+        const widzianeZrodla = new Set<string>()
+        citations = ragSources
+          .filter((s) => {
+            const k = `${s.manual}|${s.page ?? ''}`
+            if (widzianeZrodla.has(k)) return false
+            widzianeZrodla.add(k)
+            return true
+          })
+          .slice(0, 3)
+          .map((s) => {
+            const model = (s.manual || '').replace(/_(manual|instrukcja).*$/i, '')
+            const link = manualLinks.find((ml) => ml.url.toLowerCase().includes(`/zebra-${model.toLowerCase()}`))
+            return {
+              title: `Instrukcja ${model}${s.page ? `, strona ${s.page}` : ''}`,
+              uri: link?.url ?? '/instrukcje',
+              pageNumber: s.page ?? undefined,
+            }
+          })
       } else {
         console.log('❌ Nie znaleziono kontekstu w Supabase manuals')
       }
@@ -1653,7 +1723,10 @@ ZRÓB DOKŁADNIE TAK - WKLEJ [BARCODE:...] W ODPOWIEDŹ!`
 
           // Na końcu dodaj citations, (opcjonalnie) /blog i scanner barcodes jako JSON (jeśli są)
           // WAŻNE: Jeśli blog znalazł odpowiedź, NIE pokazuj citations z RAG (często nieodpowiednie)
-          const finalCitations = blogLinks.length > 0 ? [] : citations
+          // Źródła z instrukcji pokazujemy zawsze, gdy RAG dostarczył kontekst. Wcześniej stało tu
+          // `blogLinks.length > 0 ? [] : citations`, co przy trafieniu bloga (a trafia prawie
+          // zawsze) zerowało listę — nie miało to znaczenia, dopóki `citations` i tak było puste.
+          const finalCitations = citations
 
           // Wykryj czy pytanie jest informacyjne (nie troubleshooting)
           // Informacyjne: "co to jest", "jakie są parametry", "czym się różni", "jak działa"

@@ -48,7 +48,15 @@ async function translateToEnglish(text) {
     const r = await openai.chat.completions.create({
       model: 'gpt-4o-mini', temperature: 0.3, max_tokens: 200,
       messages: [
-        { role: 'system', content: 'Translate the following Polish text to English. Return ONLY the translation, nothing else.' },
+        { role: 'system', content: `Translate the following Polish text to English. Return ONLY the translation, nothing else.
+Use Zebra manual terminology, not everyday words — the translation is used to search English service manuals:
+taśma (barwiąca) = ribbon (never "tape"), kaseta taśmy = ribbon cartridge, barwnik/warstwa barwiąca = ink coating,
+nośnik/materiał/etykiety = media, wałek (dociskowy) = platen roller, głowica (drukująca) = printhead,
+przerwa między etykietami = gap/web, znacznik czarny = black mark, zaczernienie = darkness,
+podkład = liner, bez podkładu = linerless, odklejak = peeler/dispenser, gilotyna = cutter,
+nawijak = rewinder, czujnik = sensor, kalibracja = calibration/media calibration,
+trzpień = spindle, naprężenie taśmy = ribbon tension, zacięcie = jam, spust = trigger,
+kolebka/bazka skanera = cradle, parowanie = pairing, sufiks = suffix.` },
         { role: 'user', content: text },
       ],
     })
@@ -61,13 +69,29 @@ async function embed(text) {
   return r.data[0].embedding
 }
 
+// Jak w app/api/chat/route.ts: pobieramy z zapasem i odsiewamy powtórzone treści, bo tabela ma
+// 21% duplikatów (ten sam PDF zaindeksowany dwa razy). Bez tego manual z mnożnikiem ×3,9 dawał
+// dwa różne akapity zamiast pięciu.
+const POBIERZ_Z_ZAPASEM = 20
+const FRAGMENTY_DO_PROMPTU = 5
+
+function odsiejDuplikaty(rows, ile = FRAGMENTY_DO_PROMPTU) {
+  const widziane = new Set()
+  return rows.filter((d) => {
+    const k = `${d.manual_name}|${(d.content || '').replace(/\s+/g, ' ').trim().toLowerCase()}`
+    if (widziane.has(k)) return false
+    widziane.add(k)
+    return true
+  }).slice(0, ile)
+}
+
 async function match(queryEmbedding, threshold, filterManual) {
   const { data, error } = await supabase.rpc('match_documents', {
-    query_embedding: queryEmbedding, match_threshold: threshold, match_count: 5,
+    query_embedding: queryEmbedding, match_threshold: threshold, match_count: POBIERZ_Z_ZAPASEM,
     filter_manual: filterManual,
   })
   if (error) { console.error('match_documents error:', error.message); return [] }
-  return data || []
+  return odsiejDuplikaty(data || [])
 }
 
 // --- lista manuali w bazie (paginacja, bo limit 1000) ---
