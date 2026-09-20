@@ -26145,7 +26145,7 @@ Jako **autoryzowany serwis Zebra** pomożemy Ci:
       ]
     },
     content: `
-**Krótka odpowiedź:** Aby zainstalować sterowniki Zebra w Windows 11, pobierz **ZDesigner v10** z [naszej strony](/sterowniki) i uruchom instalator jako administrator. Jeśli drukarka przestała działać po aktualizacji Windows – reinstalacja sterownika rozwiązuje problem w **95% przypadków**.
+**Krótka odpowiedź:** Aby zainstalować sterowniki Zebra w Windows 11, pobierz **ZDesigner v10** z [naszej strony](/sterowniki) i uruchom instalator jako administrator. Wyjątek: drukarki sprzed Link-OS (GK420d, GK420t, GC420d, GC420t, GT800, LP2844) wymagają **ZDesigner v5** — v10 ich nie obsługuje. Jeśli drukarka przestała działać po aktualizacji Windows – reinstalacja sterownika rozwiązuje problem w **95% przypadków**.
 
 > **⚠️ Drukarka Zebra nie działa po aktualizacji Windows 11?** To częsty problem! Aktualizacje systemu (szczególnie KB5055528) usuwają lub uszkadzają sterowniki drukarek. Ten poradnik pokaże Ci jak zainstalować sterowniki ZDesigner krok po kroku i rozwiązać najczęstsze błędy.
 
@@ -26155,7 +26155,7 @@ Jako **autoryzowany serwis Zebra** pomożemy Ci:
 
 - **95%** problemów ze sterownikami Zebra rozwiązuje reinstalacja ZDesigner v10
 - Aktualizacja **KB5055528** usunęła sterowniki u tysięcy użytkowników Windows 11
-- **ZDesigner v10** jest jedynym zalecanym sterownikiem dla Windows 11 (w tym 24H2)
+- **ZDesigner v10** to zalecany sterownik dla Windows 11 (w tym 24H2) dla drukarek Link-OS; modele sprzed Link-OS obsługuje **ZDesigner v5**
 - Instalacja trwa **2-5 minut** przy połączeniu USB
 
 ---
@@ -26179,7 +26179,7 @@ Zebra oferuje **dwa główne typy sterowników**:
 | Sterownik | Wersja | Zastosowanie | Zalecany? |
 |-----------|--------|--------------|-----------|
 | **ZDesigner v10** | 10.x | Nowe instalacje, Windows 10/11 | ✅ TAK |
-| **ZDesigner v5** | 5.x | Starsze systemy, legacy | Tylko jeśli v10 nie działa |
+| **ZDesigner v5** | 5.x | Drukarki sprzed Link-OS (GK, GC, GT800, LP/TLP 28xx) | ✅ TAK, dla tych modeli jedyny |
 
 ### ZDesigner v10 – zalecany
 
@@ -26188,13 +26188,15 @@ Zebra oferuje **dwa główne typy sterowników**:
 - Certyfikowany przez Microsoft (WHQL)
 - Automatyczne wykrywanie drukarek
 
-### ZDesigner v5 – legacy
+### ZDesigner v5 – dla drukarek sprzed Link-OS
 
-- Dla starszych aplikacji wymagających v5
-- Może być potrzebny dla niektórych programów ERP
-- Mniej funkcji konfiguracyjnych
+- **Obowiązkowy** dla GK420d, GK420t, GC420d, GC420t, GT800, LP2844 i TLP2844 — te modele powstały przed Link-OS i v10 ich nie obsługuje
+- Potrzebny też dla starszych aplikacji i niektórych programów ERP wymagających v5
+- Mniej funkcji konfiguracyjnych niż v10
 
-> **💡 Wskazówka:** Zacznij ZAWSZE od ZDesigner v10. Do v5 wracaj tylko jeśli Twoja aplikacja tego wymaga.
+> **⚠️ Uwaga:** Nie instaluj ZDesigner v10 na drukarkach serii GK i GC. Zebra na stronach wsparcia tych modeli udostępnia wyłącznie sterownik v5, a instalacja v10 potrafi sprawić, że drukarka przestanie odpowiadać. Jeśli zdążyłeś zainstalować v10 — odinstaluj go, uruchom komputer ponownie i zainstaluj v5.
+
+> **💡 Wskazówka:** Masz drukarkę z serii ZD, ZT, ZQ lub ZC? Zacznij od ZDesigner v10. Masz GK, GC, GT800 albo LP/TLP 28xx? Od razu bierz v5.
 
 ---
 
@@ -26221,7 +26223,12 @@ Zebra oferuje **dwa główne typy sterowników**:
 | **Desktop** | ZD220, ZD230, ZD420, ZD421, ZD620, ZD621 |
 | **Industrial** | ZT230, ZT410, ZT411, ZT420, ZT421, ZT510, ZT610, ZT620 |
 | **Mobile** | ZQ310, ZQ320, ZQ510, ZQ520, ZQ610, ZQ620, ZQ630 |
-| **Legacy** | GK420d, GK420t, GC420d, GC420t, GT800, LP2844 |
+
+**ZDesigner v10 NIE obsługuje** modeli sprzed Link-OS — dla nich pobierz [ZDesigner v5](/api/downloads/zdesigner-v5):
+
+| Seria | Modele |
+|-------|--------|
+| **Sprzed Link-OS** | GK420d, GK420t, GC420d, GC420t, GT800, LP2844, TLP2844 |
 
 ---
 
