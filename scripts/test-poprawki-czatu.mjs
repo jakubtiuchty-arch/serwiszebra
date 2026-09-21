@@ -208,6 +208,45 @@ for (const z of zdaniaOKurierze) {
 sprawdz('prompt: jest zakaz pisania o transporcie',
   /NIGDY nie podawaj kosztu transportu/.test(src), true, 'reguła w prompcie')
 
+// --- runda 4: czyszczenie głowicy zależne od rodzaju drukarki (alert 20.09.2026) ---
+// Czat odtworzył procedurę z artykułu o drukarkach KART (wacik z pianki, ruch lewo-prawo)
+// dla drukarki etykiet, gdzie producent wymaga wacika bawełnianego i ruchu w jednym
+// kierunku. Pilnujemy, żeby prompt trzymał obie procedury rozdzielone.
+
+sprawdz('prompt: jest reguła rozdzielająca procedury czyszczenia głowicy',
+  /RĘCZNE CZYSZCZENIE GŁOWICY - PROCEDURA ZALEŻY OD RODZAJU DRUKARKI/.test(src), true,
+  'nagłówek reguły w prompcie')
+
+for (const [nazwa, wzor] of [
+  ['etykiety: ruch w jednym kierunku', /TYLKO W JEDNYM KIERUNKU/],
+  ['etykiety: wacik bawełniany lub pisak', /NIESTRZĘPIĄCY SIĘ WACIK BAWEŁNIANY/],
+  ['karty: wacik z pianki', /WACIK Z PIANKI \(foam-tipped\)/],
+  ['zakaz mieszania procedur', /WYŁĄCZNIE dla drukarek kart/],
+  ['pytaj o model, gdy nieznany', /NAJPIERW zapytaj o model/],
+]) sprawdz('prompt: ' + nazwa, wzor.test(src), true, nazwa)
+
+// Przykład 2 dotyczy GK420d (drukarka etykiet) — nie może uczyć procedury dla kart
+const przyklad2 = (() => {
+  const a = src.indexOf('**PRZYKŁAD 2 - DRUKARKA BLADY WYDRUK:**')
+  const b = src.indexOf('**PRZYKŁAD 3', a)
+  if (a < 0 || b < 0) throw new Error('Nie znaleziono PRZYKŁADU 2 w prompcie')
+  return src.slice(a, b)
+})()
+sprawdz('przykład GK420d: bez wacika z pianki', /piank/i.test(przyklad2), false, 'PRZYKŁAD 2')
+sprawdz('przykład GK420d: bez ruchu na boki', /na boki|lewo-prawo/i.test(przyklad2), false, 'PRZYKŁAD 2')
+sprawdz('przykład GK420d: podaje kierunek ruchu', /nie tam i z powrotem/i.test(przyklad2), true, 'PRZYKŁAD 2')
+
+// Baza wiedzy: zalecenie wacika z pianki musi być przypisane do drukarek kart,
+// inaczej czat czyta je jako regułę uniwersalną i stosuje do drukarek etykiet.
+const blog = readFileSync('lib/blog.ts', 'utf-8')
+const linieBlog = blog.split('\n')
+linieBlog.forEach((linia, i) => {
+  if (!/wacik\w*\s+z\s+pianki|foam-tipped/i.test(linia)) return
+  const okno = linieBlog.slice(Math.max(0, i - 6), i + 3).join(' ')
+  sprawdz('blog: wacik z pianki tylko dla drukarek kart',
+    /ZC\d|ZXP|drukark\w*\s+kart/i.test(okno), true, `lib/blog.ts:${i + 1}`)
+})
+
 // --- wynik -----------------------------------------------------------------
 console.log(`\nZaliczone: ${zaliczone}/${zaliczone + bledy.length}`)
 if (bledy.length) {

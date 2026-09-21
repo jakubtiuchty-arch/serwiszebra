@@ -34235,7 +34235,7 @@ Gdy standardowe czyszczenie kartą nie pomaga i na kartach nadal pojawiają się
 6. Włóż kasetę i zamknij pokrywę
 7. **Włącz** drukarkę
 
-> **⚠️ UWAGA:** Używaj wyłącznie **wacików z pianki** (foam-tipped swabs). Waciki bawełniane zostawiają włókna. **Nigdy nie używaj ostrych przedmiotów** do czyszczenia głowicy — trwale ją uszkodzisz!
+> **⚠️ UWAGA:** W drukarkach kart używaj **wacików z pianki** (foam-tipped swabs) — bawełniane zostawiają włókna między elementami grzejnymi. **Ta procedura dotyczy wyłącznie drukarek kart.** W drukarkach etykiet (ZD, ZT, GK, GX, ZQ) producent przewiduje odwrotnie: pisak czyszczący Zebra lub niestrzępiący się wacik bawełniany, a głowicę przeciera się **tylko w jednym kierunku**, nie ruchem lewo-prawo — [zobacz procedurę dla drukarek etykiet](/blog/jak-wyczyscic-glowice-drukarki-zebra). **Nigdy nie używaj ostrych przedmiotów** do czyszczenia głowicy — trwale ją uszkodzisz!
 
 ---
 
