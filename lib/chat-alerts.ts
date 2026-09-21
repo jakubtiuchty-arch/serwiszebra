@@ -60,7 +60,7 @@ export const ALERTY: Record<TypAlertu, DefinicjaAlertu> = {
     waga: 'krytyczny',
   },
   obietnica: {
-    opis: 'Obiecał coś, czego serwis nie może dotrzymać: konkretną datę lub godzinę naprawy, przyjazd technika do klienta, urządzenie zastępcze, zwrot pieniędzy, bezpłatną naprawę. Zapowiedź kolejnego kroku diagnostycznego, oferta dalszej pomocy w czacie ani podanie typowego czasu diagnostyki ze słowem „zwykle" NIE są obietnicą',
+    opis: 'Obiecał coś, czego serwis nie może dotrzymać: konkretną datę lub godzinę naprawy, przyjazd technika do klienta, urządzenie zastępcze, zwrot pieniędzy, bezpłatną naprawę. Zapowiedź kolejnego kroku diagnostycznego, oferta dalszej pomocy w czacie ani podanie typowego czasu diagnostyki ze słowem „zwykle" NIE są obietnicą. UWAGA: podanie ceny naprawy albo zaproponowanie wysyłki do serwisu to NIE jest ten typ — na to jest osobny typ „wycena_przedwczesnie" i to jego użyj',
     prog: 0.9,
     waga: 'krytyczny',
   },
@@ -80,9 +80,11 @@ export const ALERTY: Record<TypAlertu, DefinicjaAlertu> = {
     waga: 'wazny',
   },
   wycena_przedwczesnie: {
-    opis: 'Podał cenę naprawy albo zaproponował wysyłkę do serwisu, zanim padł choć jeden darmowy krok do wykonania przy urządzeniu. Same widełki z zastrzeżeniem, że wiążąca wycena powstaje po diagnozie w serwisie, są poprawne i NIE są problemem — liczy się to, czy klient dostał wcześniej coś do sprawdzenia',
+    opis: 'Problem z ceną naprawy. Zgłoś, gdy zachodzi CHOĆ JEDNO z dwóch: (a) asystent podał kwotę albo zaproponował wysyłkę do serwisu, choć nie dał wcześniej ani jednego darmowego kroku do wykonania przy urządzeniu, a taki krok był możliwy; (b) asystent podał kwotę lub widełki BEZ zdania, że wiążącą wycenę serwis poda dopiero po diagnozie urządzenia — to zdanie jest obowiązkowe przy każdej kwocie. Wyjątek do (a): przy uszkodzeniu ewidentnym, jak pęknięty ekran czy zalanie, skierowanie prosto do serwisu jest poprawne i nie jest problemem — ale (b) obowiązuje także wtedy. Ten typ ma PIERWSZEŃSTWO: jeśli w grę wchodzi kwota naprawy albo propozycja wysyłki, użyj jego, a nie „obietnica"',
     // Jedyny typ poniżej 0,9: ta sama wpadka wracała raz z pewnością 1,0, raz 0,8,
     // a fałszywe alarmy trzymały się 0,7. Margines cienki, do obserwacji w praktyce.
+    // 21.09.2026: obniżony próg był martwy, bo model klasyfikował te wpadki jako
+    // „obietnica" (próg 0,9) — stąd rozstrzygnięcie o pierwszeństwie w obu opisach.
     prog: 0.8,
     waga: 'wazny',
   },
@@ -141,6 +143,10 @@ Zasady, które obowiązują asystenta:
 - O kosztach transportu asystent nie pisze nic. Jedyne dozwolone zdanie: kurier odbierze urządzenie
   z podanego adresu. Opłata 99 zł netto za diagnostykę przy rezygnacji z naprawy jest prawdziwa i dozwolona.
 - Zanim padnie cena naprawy, asystent ma wyczerpać darmowe kroki, które klient wykona przy urządzeniu.
+  Wyjątek: przy uszkodzeniu ewidentnym (pęknięty ekran, zalanie) skierowanie prosto do serwisu jest poprawne.
+- Przy KAŻDEJ podanej kwocie lub widełkach asystent ma dodać, że wiążącą wycenę serwis poda dopiero po
+  diagnozie urządzenia. Brak tego zdania jest problemem ZAWSZE, także wtedy, gdy samo skierowanie do
+  serwisu było słuszne i gdy kwotę opisano słowem „orientacyjnie".
 - Asystent nie twierdzi, że urządzenie czegoś nie ma, chyba że ma to wprost w instrukcji.
 - Asystent nie obiecuje terminów, przyjazdu technika ani sprzętu zastępczego.
 - Sterowniki: ZDesigner v10 obsługuje drukarki Link-OS (serie ZD, ZT, ZQ, ZC). Modele sprzed Link-OS —

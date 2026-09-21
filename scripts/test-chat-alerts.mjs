@@ -21,12 +21,27 @@ const ai = new OpenAI({ apiKey: env.OPENAI_API_KEY })
 
 const src = readFileSync(new URL('../lib/chat-alerts.ts', import.meta.url), 'utf8')
 
-// progi i opisy typów prosto ze źródła
+// Progi i opisy typów prosto ze źródła. Blok bierzemy w całości, a pola wyciągamy osobno,
+// bo między `opis` a `prog` bywają komentarze. Poprzednia wersja wymagała, żeby pola szły
+// bezpośrednio po sobie, i przez to po cichu gubiła `wycena_przedwczesnie` — model nie
+// dostawał tego typu na liście, więc nigdy go nie zwracał, a test i tak świecił na zielono.
 const ALERTY = {}
-for (const m of src.matchAll(/^  (\w+): \{\n\s*opis:\s*\n?\s*'([^']+)',\n\s*prog: ([\d.]+),\n\s*waga: '(\w+)',/gm)) {
-  ALERTY[m[1]] = { opis: m[2], prog: Number(m[3]), waga: m[4] }
+const NAZWY = [...src.matchAll(/^ {2}(\w+): \{\n\s*opis:/gm)].map((m) => m[1])
+for (const nazwa of NAZWY) {
+  const start = src.indexOf(`\n  ${nazwa}: {`)
+  const blok = src.slice(start, src.indexOf('\n  },', start))
+  const opis = blok.match(/opis:\s*\n?\s*'([^']+)'/)
+  const prog = blok.match(/^\s*prog: ([\d.]+),/m)
+  const waga = blok.match(/^\s*waga: '(\w+)',/m)
+  if (!opis || !prog || !waga) { console.error(`Nie wyciągnąłem definicji typu ${nazwa} ze źródła.`); process.exit(1) }
+  ALERTY[nazwa] = { opis: opis[1], prog: Number(prog[1]), waga: waga[1] }
 }
-if (Object.keys(ALERTY).length < 8) { console.error('Nie wyciągnąłem progów ze źródła:', Object.keys(ALERTY)); process.exit(1) }
+// Strażnik porównuje z liczbą typów faktycznie zadeklarowanych w źródle, a nie ze stałą —
+// stała 8 przepuszczała utratę jednego typu z dziesięciu.
+const wUnii = [...src.matchAll(/^\s*\| '(\w+)'$/gm)].map((m) => m[1])
+const brakujace = wUnii.filter((t) => !ALERTY[t])
+if (brakujace.length) { console.error('Typy z TypAlertu nieobecne w wyciągniętych progach:', brakujace.join(', ')); process.exit(1) }
+console.log(`Typy alertów wyciągnięte ze źródła: ${Object.keys(ALERTY).length}\n`)
 
 const promptSrc = src.match(/const PROMPT = `([\s\S]*?)`\n\nfunction zbudujPrompt/)[1]
 const typy = Object.entries(ALERTY).map(([k, v]) => `- ${k}: ${v.opis}`).join('\n')
