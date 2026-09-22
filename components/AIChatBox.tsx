@@ -1,8 +1,10 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
+import Image from 'next/image'
 import {
   ArrowRight,
+  ArrowUp,
   MessageSquare,
   User,
   Sparkles,
@@ -12,7 +14,6 @@ import {
   MicOff,
   Video,
   Image as ImageIcon,
-  Paperclip,
   Plus,
   ThumbsUp,
   ThumbsDown
@@ -52,9 +53,11 @@ interface Message {
 }
 
 const placeholders = [
-  "Opisz problem z drukarką...",
-  "Opisz problem z terminalem...",
-  "Opisz problem ze skanerem..."
+  "Np. Drukarka pomija etykiety…",
+  "Np. Skaner nie czyta kodów…",
+  "Np. Tablet nie reaguje na dotyk…",
+  "Np. Czytnik RFID nie widzi tagów…",
+  "Np. Terminal nie łączy się z Wi-Fi…"
 ]
 
 interface AIChatBoxProps {
@@ -539,20 +542,26 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
   // INLINE variant - dla mobile hero (bez boxów, wszystko wbudowane)
   if (variant === 'inline') {
     return (
-      <div className="flex flex-col flex-1 min-h-0 px-4 pb-safe" style={{ paddingBottom: 'max(env(safe-area-inset-bottom, 0px), 8px)' }}>
+      <div className="flex flex-col justify-center flex-1 min-h-0 px-4 pb-safe" style={{ paddingBottom: 'max(env(safe-area-inset-bottom, 0px), 8px)' }}>
         {/* Scrollowalny obszar - min-h-0 pozwala na kurczenie się */}
         <div 
           ref={messagesContainerRef}
-          className="flex-1 min-h-0 overflow-y-auto flex flex-col"
+          className={`min-h-0 overflow-y-auto flex flex-col ${messages.length > 0 ? 'flex-1' : 'flex-none'}`}
         >
-          {/* Tytuł - na górze, kompaktowy */}
-          <div className="text-center pt-3 pb-4">
-            <div className="inline-block px-2.5 py-1 bg-white/70 rounded-full border border-gray-200 mb-1.5">
-              <p className="text-[10px] font-semibold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">Autoryzowany</p>
-            </div>
-            <h2 className="text-4xl font-bold text-gray-900 tracking-tight">
-              Serwis Zebra
+          <div className="text-center px-1 pt-6 pb-4">
+            <h2 className="flex flex-col items-center justify-center gap-1 text-2xl font-medium text-gray-900 tracking-tight leading-tight">
+              <span>Autoryzowany Serwis</span>
+              <Image
+                src="/IMAGES/partners/logo_zebra.png"
+                alt="Zebra"
+                width={800}
+                height={300}
+                className="h-[1.5em] w-auto"
+              />
             </h2>
+            <p className="mt-3 text-sm leading-relaxed text-gray-600">
+              Zanim wyślesz urządzenie do serwisu, opisz problem. Być może uda nam się rozwiązać go od ręki.
+            </p>
           </div>
 
           {/* Wiadomości - mt-auto przesuwa je na dół kontenera */}
@@ -643,7 +652,7 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
         </div>
 
         {/* Input area - ChatGPT style, sticky na dole */}
-        <div className="pb-4 pt-3 flex-shrink-0 bg-gradient-to-t from-blue-50/90 via-indigo-50/60 to-transparent -mx-4 px-4">
+        <div className="pb-4 pt-3 flex-shrink-0 -mx-4 px-4">
           <input type="file" ref={fileInputRef} accept="image/*,video/*" multiple onChange={handleFileSelect} className="hidden" />
           <input type="file" ref={videoInputRef} accept="video/*" capture="environment" onChange={handleVideoCapture} className="hidden" />
 
@@ -659,21 +668,10 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
             </div>
           )}
 
-          {/* ChatGPT-style Input Box - wszystko w jednym pill */}
-          <div className={`flex items-center bg-white rounded-full px-2 py-2 border shadow-sm transition-all duration-500 ${
-            showInputGlow 
-              ? 'border-blue-400 shadow-[0_0_15px_rgba(59,130,246,0.5)] animate-pulse-glow' 
-              : 'border-gray-300'
+          {/* Pole wiadomości i dolny pasek narzędzi */}
+          <div className={`grid grid-cols-[1fr_auto] items-center gap-y-5 bg-white rounded-[26px] px-3 pb-3 pt-4 border shadow-[0_2px_12px_rgba(0,0,0,0.04)] transition-colors duration-500 ${
+            showInputGlow ? 'border-gray-300' : 'border-gray-200'
           }`}>
-            {/* Plus button - po lewej w środku inputa */}
-            <button 
-              onClick={() => fileInputRef.current?.click()} 
-              disabled={loading}
-              className="flex-shrink-0 w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-500 hover:text-gray-700 transition-colors disabled:opacity-50"
-            >
-              <Plus className="w-4 h-4" />
-            </button>
-
             <input
               ref={textInputMobileRef}
               type="text"
@@ -681,39 +679,49 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
               onChange={(e) => setInput(e.target.value)}
               onKeyPress={handleKeyPress}
               placeholder={messages.length === 0 ? currentPlaceholder : "Napisz odpowiedź..."}
-              className="flex-1 text-[16px] text-gray-700 placeholder-gray-400 focus:outline-none bg-transparent px-3 caret-blue-500"
+              aria-label="Opisz problem z urządzeniem Zebra"
+              className="col-span-2 w-full min-w-0 text-base text-gray-800 placeholder-gray-400 focus:outline-none bg-transparent px-1 py-1 caret-blue-500"
               disabled={loading}
               autoFocus
               style={{ fontSize: '16px' }}
             />
-
-            {/* Ikony po prawej */}
-            <div className="flex items-center gap-0.5">
+            <button
+              onClick={() => fileInputRef.current?.click()}
+              disabled={loading}
+              aria-label="Dodaj załącznik"
+                  title="Dodaj zdjęcie lub wideo błędu"
+              className="w-10 h-10 rounded-full hover:bg-gray-100 flex items-center justify-center text-gray-800 transition-colors disabled:opacity-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500"
+            >
+              <Plus className="w-6 h-6" strokeWidth={1.75} />
+            </button>
+            <div className="flex items-center gap-2">
               <button
                 onClick={toggleRecording}
                 disabled={loading}
-                className={`p-1.5 rounded-full transition-colors disabled:opacity-50 ${
-                  isRecording ? 'bg-red-500 text-white animate-pulse' : 'text-gray-400 hover:text-gray-600'
+                aria-label={isRecording ? 'Zatrzymaj nagrywanie' : 'Rozpocznij nagrywanie'}
+                className={`w-10 h-10 flex items-center justify-center rounded-full transition-colors disabled:opacity-50 ${
+                  isRecording ? 'bg-red-500 text-white animate-pulse' : 'text-gray-800 hover:bg-gray-100'
                 }`}
               >
-                {isRecording ? <MicOff className="w-4 h-4" /> : <Mic className="w-4 h-4" />}
+                {isRecording ? <MicOff className="w-5 h-5" /> : <Mic className="w-5 h-5" />}
               </button>
-
               {input.trim() || attachedFiles.length > 0 ? (
                 <button
                   onClick={() => handleSend()}
                   disabled={loading}
-                  className="p-1.5 rounded-full bg-gray-800 text-white transition-colors disabled:opacity-50"
+                  aria-label="Wyślij wiadomość"
+                  className="w-10 h-10 flex items-center justify-center rounded-full bg-blue-600 hover:bg-blue-700 text-white transition-colors disabled:opacity-50"
                 >
-                  {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <ArrowRight className="w-4 h-4" />}
+                  {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : <ArrowUp className="w-5 h-5" />}
                 </button>
               ) : (
                 <button
                   onClick={() => videoInputRef.current?.click()}
                   disabled={loading}
-                  className="p-1.5 rounded-full text-gray-400 hover:text-gray-600 transition-colors disabled:opacity-50"
+                  aria-label="Nagraj wideo"
+                  className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors disabled:opacity-50"
                 >
-                  <Video className="w-4 h-4" />
+                  <Video className="w-5 h-5" />
                 </button>
               )}
             </div>
@@ -742,7 +750,7 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
   // FLOATING variant - dla desktop (domyślny)
   return (
     <div className="max-w-4xl mx-auto">
-      <div className="bg-white rounded-3xl shadow-2xl overflow-hidden">
+      <div className="bg-white rounded-[28px] md:rounded-[32px] border border-gray-200 shadow-[0_2px_16px_rgba(0,0,0,0.04),0_1px_2px_rgba(0,0,0,0.03)] overflow-hidden">
         
         {/* Kontener wiadomości */}
         <div
@@ -877,7 +885,7 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
           </div>
         </div>
 
-        <div className={`p-4 sm:p-6 md:p-8 ${messages.length > 0 ? 'border-t border-gray-100' : ''}`}>
+        <div className={`p-4 sm:p-5 md:p-6 ${messages.length > 0 ? 'border-t border-gray-100' : ''}`}>
           {/* Attached Files Preview */}
           {attachedFiles.length > 0 && (
             <div className="mb-4 flex flex-wrap gap-2">
@@ -904,9 +912,7 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
             </div>
           )}
 
-          {/* Input Row */}
-          <div className="flex items-center gap-3">
-            {/* Hidden file inputs */}
+          <div className="flex flex-col gap-7 md:gap-9">
             <input
               ref={fileInputRef}
               type="file"
@@ -923,7 +929,6 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
               onChange={handleVideoCapture}
               className="hidden"
             />
-
             <input
               ref={textInputDesktopRef}
               type="text"
@@ -931,110 +936,58 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
               onChange={(e) => setInput(e.target.value)}
               onKeyPress={handleKeyPress}
               placeholder={messages.length === 0 ? currentPlaceholder : "Napisz odpowiedź..."}
-              className="flex-1 text-base text-gray-700 placeholder-gray-400 focus:outline-none bg-transparent py-3 caret-blue-500"
+              aria-label="Opisz problem z urządzeniem Zebra"
+              className="w-full min-w-0 text-base md:text-lg text-gray-800 placeholder-gray-400 focus:outline-none bg-transparent px-1 py-1 caret-blue-500"
               disabled={loading}
               autoFocus
             />
-
-            {/* Attach button - DESKTOP ONLY (mobile ma w dolnym pasku) — załącznik: zdjęcie/wideo błędu */}
-            <button
-              onClick={() => fileInputRef.current?.click()}
-              disabled={loading}
-              className="hidden md:flex flex-shrink-0 p-2 rounded-full text-gray-400 hover:text-blue-600 hover:bg-blue-50 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-              aria-label="Dodaj załącznik (zdjęcie błędu drukarki)"
-              title="Dodaj zdjęcie lub wideo błędu"
-            >
-              <Paperclip className="w-6 h-6" />
-            </button>
-
-            {/* Mic button - DESKTOP ONLY (mobile has it in bottom bar) */}
-            <button
-              onClick={toggleRecording}
-              disabled={loading}
-              className={`hidden md:flex flex-shrink-0 p-2 rounded-full transition-all disabled:opacity-50 disabled:cursor-not-allowed ${
-                isRecording
-                  ? 'bg-red-500 text-white animate-pulse'
-                  : 'text-gray-400 hover:text-blue-600 hover:bg-blue-50'
-              }`}
-              aria-label={isRecording ? 'Zatrzymaj nagrywanie' : 'Rozpocznij nagrywanie'}
-            >
-              {isRecording ? (
-                <MicOff className="w-6 h-6" />
-              ) : (
-                <Mic className="w-6 h-6" />
-              )}
-            </button>
-
-            <button
-              onClick={() => handleSend()}
-              disabled={(!input.trim() && attachedFiles.length === 0) || loading}
-              className="flex-shrink-0 text-gray-400 hover:text-blue-600 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {loading ? (
-                <Loader2 className="w-6 h-6 animate-spin" />
-              ) : (
-                <ArrowRight className="w-6 h-6" />
-              )}
-            </button>
-          </div>
-
-          <div className="pt-4 mt-4">
-            {/* MOBILE - features left, media buttons right */}
-            <div className="md:hidden flex items-center justify-between">
-              <div className="flex items-center gap-2 text-xs text-gray-600 font-medium">
-                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                <span>Wstępna diagnoza w 2 min</span>
-              </div>
-
+            <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
+                <button
+                  onClick={() => fileInputRef.current?.click()}
+                  disabled={loading}
+                  className="flex items-center justify-center w-10 h-10 rounded-full text-gray-800 hover:bg-gray-100 transition-colors disabled:opacity-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500"
+                  aria-label="Dodaj załącznik"
+                  title="Dodaj zdjęcie lub wideo błędu"
+                >
+                  <Plus className="w-6 h-6" strokeWidth={1.75} />
+                </button>
                 <button
                   onClick={() => videoInputRef.current?.click()}
                   disabled={loading}
-                  className="flex-shrink-0 p-2 rounded-full text-gray-400 hover:text-blue-600 hover:bg-blue-50 transition-all disabled:opacity-50"
+                  className="md:hidden flex items-center justify-center w-10 h-10 rounded-full text-gray-800 hover:bg-gray-100 transition-colors disabled:opacity-50"
                   aria-label="Nagraj wideo"
                 >
                   <Video className="w-5 h-5" />
                 </button>
-                <button
-                  onClick={() => fileInputRef.current?.click()}
-                  disabled={loading}
-                  className="flex-shrink-0 p-2 rounded-full text-gray-400 hover:text-blue-600 hover:bg-blue-50 transition-all disabled:opacity-50"
-                  aria-label="Dodaj załącznik"
-                >
-                  <Paperclip className="w-5 h-5" />
-                </button>
+              </div>
+              <div className="flex items-center gap-3">
                 <button
                   onClick={toggleRecording}
                   disabled={loading}
-                  className={`flex-shrink-0 p-2 rounded-full transition-all disabled:opacity-50 ${
-                    isRecording
-                      ? 'bg-red-500 text-white animate-pulse'
-                      : 'text-gray-400 hover:text-blue-600 hover:bg-blue-50'
+                  className={`flex items-center justify-center w-10 h-10 rounded-full transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${
+                    isRecording ? 'bg-red-500 text-white animate-pulse' : 'text-gray-800 hover:bg-gray-100'
                   }`}
                   aria-label={isRecording ? 'Zatrzymaj nagrywanie' : 'Rozpocznij nagrywanie'}
                 >
-                  {isRecording ? (
-                    <MicOff className="w-5 h-5" />
-                  ) : (
-                    <Mic className="w-5 h-5" />
-                  )}
+                  {isRecording ? <MicOff className="w-6 h-6" strokeWidth={1.75} /> : <Mic className="w-6 h-6" strokeWidth={1.75} />}
                 </button>
-              </div>
-            </div>
-
-            {/* DESKTOP - features centered */}
-            <div className="hidden md:flex items-center justify-center gap-8 text-sm text-gray-600 font-medium">
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                <span>Wstępna diagnoza w 2 min</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
-                <span>24/7 dostępny</span>
+                <button
+                  onClick={() => handleSend()}
+                  disabled={(!input.trim() && attachedFiles.length === 0) || loading}
+                  aria-label="Wyślij wiadomość"
+                  className="flex items-center justify-center w-11 h-11 rounded-full bg-blue-600 text-white hover:bg-blue-700 transition-colors disabled:bg-[#bed3ff] disabled:cursor-not-allowed focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
+                >
+                  {loading ? <Loader2 className="w-6 h-6 animate-spin" /> : <ArrowUp className="w-6 h-6" strokeWidth={2.25} />}
+                </button>
               </div>
             </div>
           </div>
         </div>
+      </div>
+      <div className="mx-5 rounded-b-[22px] bg-[#f3f3f3] px-5 py-3 flex flex-wrap items-center justify-center gap-x-7 gap-y-2 text-xs text-gray-500">
+        <span>Wstępna diagnoza w 2 min</span>
+        <span>Dostępny 24/7</span>
       </div>
 
       {/* Badge modelu poza oknem czatu */}

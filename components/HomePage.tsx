@@ -559,13 +559,20 @@ export default function HomePage({ opinie }: { opinie: OpinieGoogleDane | null }
         </div>
 
         <div className="max-w-7xl mx-auto w-full relative z-10">
-          <div className="text-center mb-3">
-            <div className="inline-block px-4 py-2 bg-gradient-to-r from-blue-50 via-indigo-50 to-purple-50 backdrop-blur-sm rounded-full border border-gray-200 mb-1 shadow-sm">
-              <p className="text-sm font-medium bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">Autoryzowany</p>
-            </div>
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-semibold text-gray-900 tracking-tight leading-tight">
-              Serwis Zebra
+          <div className="text-center max-w-5xl mx-auto mb-7 lg:mb-8">
+            <h1 className="flex flex-col items-center justify-center gap-1 text-[28px] lg:text-[32px] font-medium text-gray-900 tracking-tight leading-tight">
+              <span>Autoryzowany Serwis</span>
+              <Image
+                src="/IMAGES/partners/logo_zebra.png"
+                alt="Zebra"
+                width={800}
+                height={300}
+                className="h-[1.5em] w-auto"
+              />
             </h1>
+            <p className="mt-3 text-[15px] leading-relaxed text-gray-600">
+              Zanim wyślesz urządzenie do serwisu, opisz problem. Być może uda nam się rozwiązać go od ręki.
+            </p>
           </div>
 
           <div className="relative">
