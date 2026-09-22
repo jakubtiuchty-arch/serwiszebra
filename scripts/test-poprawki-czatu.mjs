@@ -247,6 +247,58 @@ linieBlog.forEach((linia, i) => {
     /ZC\d|ZXP|drukark\w*\s+kart/i.test(okno), true, `lib/blog.ts:${i + 1}`)
 })
 
+// --- runda 5: krok, którego nie było, i cena, której nie ma w cenniku (alerty 22.09.2026) ---
+
+// Rozmowa o ZD421: czat powołał się na ustawienie portu, którego nigdy nie ustawił
+// („zrestartuj, żeby ustawienie portu weszło w życie" — setvar ip.port nie padł),
+// wytłumaczył ciszę po getvar regułą dotyczącą setvar i zapytał o wartość 6101,
+// której klient nigdy nie podał. Prompt ma tego zakazywać wprost.
+sprawdz('prompt: jest zakaz powoływania się na kroki, których nie było',
+  /NIE UZNAWAJ ZA WYKONANE KROKÓW, KTÓRYCH NIE BYŁO W ROZMOWIE/.test(src), true,
+  'nagłówek reguły w prompcie')
+
+for (const [nazwa, wzor] of [
+  ['sprawdź historię przed powołaniem się na krok', /sprawdź w historii rozmowy, czy naprawdę padł/],
+  ['zakaz zmiany ustawienia, którego nikt nie ustawiał', /zmianie ustawienia, którego nikt nie ustawiał/],
+  ['wynik tylko do właściwej komendy', /wynik przypisuj tylko tej komendzie/],
+]) sprawdz('prompt: ' + nazwa, wzor.test(src), true, nazwa)
+
+// Rozmowa o tablecie L10: czat podał widełki 300-800 zł, choć cennik nie ma ani jednej
+// pozycji dla tabletów. Prompt ma zakazywać wymyślania kwot dla serii spoza cennika.
+sprawdz('prompt: jest zakaz wymyślania widełek spoza cennika',
+  /MODELU NIE MA W CENNIKU POWYŻEJ — NIE WYMYŚLAJ WIDEŁEK/.test(src), true,
+  'nagłówek reguły w prompcie')
+
+for (const [nazwa, wzor] of [
+  ['zakaz przenoszenia stawek z innej serii', /przenieść widełki\s*\n?\s*z innej serii/],
+  ['alternatywa: wycena po diagnozie', /nie podajesz żadnej kwoty/],
+]) sprawdz('prompt: ' + nazwa, wzor.test(src), true, nazwa)
+
+// Reguła i cennik muszą zostać zgodne. Gdyby ktoś dopisał tabletom stawki, a reguła dalej
+// twierdziła, że ich nie mamy, czat dostałby dwie sprzeczne instrukcje naraz.
+const cennik = (() => {
+  const a = src.indexOf('CENNIK ORIENTACYJNY WG MODELU')
+  const b = src.indexOf('WAŻNE: Podawaj cenę dla KONKRETNEJ serii', a)
+  if (a < 0 || b < 0) throw new Error('Nie znaleziono cennika w prompcie')
+  return src.slice(a, b)
+})()
+for (const model of ['L10', 'RTL10', 'ET40', 'ET45', 'ET401']) {
+  sprawdz('cennik: brak stawek dla modelu wymienionego w regule',
+    new RegExp(`\\b${model}\\b`).test(cennik), false, `${model} w CENNIKU`)
+}
+
+// Te modele czat przyjmuje do diagnozy, więc pytanie o ich naprawę na pewno padnie —
+// dlatego reguła o braku stawek jest potrzebna, a nie teoretyczna.
+const modeleZebra = (() => {
+  const a = src.indexOf('const ZEBRA_MODELS')
+  const b = src.indexOf(']', a)
+  return src.slice(a, b)
+})()
+for (const model of ['l10', 'et40', 'et45', 'et401']) {
+  sprawdz('ZEBRA_MODELS: model obsługiwany przez czat',
+    new RegExp(`'${model}'`).test(modeleZebra), true, model)
+}
+
 // --- wynik -----------------------------------------------------------------
 console.log(`\nZaliczone: ${zaliczone}/${zaliczone + bledy.length}`)
 if (bledy.length) {
