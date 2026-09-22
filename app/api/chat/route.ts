@@ -228,6 +228,12 @@ const RE_AI_RESOLVED = word(
 )
 const RE_WORD_TAB = word('tab')
 const RE_WORD_WYMYSL = word('wymyśl')
+// Anty-manipulacja: krótkie rdzenie tylko od początku wyrazu — 'porn' siedzi w „odporny" i „oporność",
+// 'sex' w „Essex". „Napisz list" jako całe słowo, bo „napisz listę kroków" to prośba klienta.
+const RE_MANIP_POCZATEK = new RegExp(`(?<![${PL_LETTERS}])(?:porn|sex|crypto)`, 'i')
+const RE_MANIP_NAPISZ_LIST = word('napisz list')
+// Porada z innej dziedziny w każdej formie: „porada prawna", „poradę finansową", „porady lekarskiej"
+const RE_MANIP_PORADA = new RegExp(`porad[${PL_LETTERS}]*\\s+(?:prawn|finansow|medyczn|lekarsk)`, 'i')
 
 // Funkcja wykrywająca pytanie o konfigurację skanera
 function detectScannerConfigQuery(query: string): ScannerConfigBarcode[] {
@@ -1494,25 +1500,42 @@ Jeśli użytkownik pyta o konkretny problem techniczny, ZAWSZE sprawdź czy w do
 //   'losow'   → „drukarka losowo się zawiesza"
 //   'kuchni'  → „drukarka w kuchni nie drukuje" (gastronomia to nasz klient)
 //   'przepis' → „przepisałem ustawienia ze starej drukarki"
+// 22.09.2026 — kolejne wzorce, które trafiały w zwykłe zdania klientów:
+//   'ciasto', 'kucharz', 'gotowanie', 'pieczenie' → etykiety w piekarni i gastronomii
+//   'medycyn' → „oddział medycyny ratunkowej, ZD510 nie drukuje opasek"
+//   'kancelari' → kancelaria to też klient
+//   'finans'  → „dział finansowy prosi o fakturę"
+//   'polityk' → „polityka haseł" (EU RED) — zostaje 'polityczn'
+//   'zagadka', 'zabawa' → „to dla mnie zagadka", „to nie zabawa, drukarka stoi"
+//   'porn', 'sex', 'crypto', 'napisz list' → z granicą wyrazu (RE_MANIP_POCZATEK, RE_MANIP_NAPISZ_LIST)
+// Tego, co tu nie wpadnie, pilnuje model: prompt ma regułę odmowy i gotową formułkę.
 function isManipulationAttempt(message: string): boolean {
   const msgLower = (message || '').toLowerCase()
 
   const manipulationPatterns = [
-    'przepis na', 'przepis kulinarn', 'gotowanie', 'pieczenie', 'ciasto', 'kucharz',
-    'napisz wiersz', 'napisz opowiadanie', 'napisz historię', 'napisz bajkę', 'napisz list',
+    'przepis na', 'przepis kulinarn',
+    'napisz wiersz', 'napisz opowiadanie', 'napisz historię', 'napisz bajkę',
     'wyobraź sobie', 'stwórz opowieść', 'stwórz historię',
     'jak wykorzystać zebra w',
-    'opowiedz żart', 'opowiedz dowcip', 'zagadka',
-    'quiz', 'zabawa', 'losowanie', 'wylosuj',
-    'medycyn', 'prawnik', 'kancelari', 'prawo pracy', 'prawo cywiln', 'porad prawn',
-    'finans', 'polityk', 'religia',
-    'bitcoin', 'crypto', 'kryptowalut',
-    'sex', 'porn', 'viagra', 'casino',
+    'opowiedz żart', 'opowiedz dowcip', 'zadaj zagadk', 'zadaj mi zagadk',
+    'quiz', 'losowanie', 'wylosuj',
+    'prawnik', 'prawo pracy', 'prawo cywiln',
+    'polityczn', 'religia',
+    'bitcoin', 'kryptowalut',
+    'viagra', 'casino',
   ]
 
   for (const pattern of manipulationPatterns) {
     if (msgLower.includes(pattern)) {
       console.log(`🚫 Manipulation detected: "${pattern}" in message`)
+      return true
+    }
+  }
+
+  for (const wzorzec of [RE_MANIP_POCZATEK, RE_MANIP_NAPISZ_LIST, RE_MANIP_PORADA]) {
+    const m = msgLower.match(wzorzec)
+    if (m) {
+      console.log(`🚫 Manipulation detected: "${m[0]}" in message`)
       return true
     }
   }
@@ -1608,26 +1631,20 @@ function isZebraRelated(message: string): boolean {
     }
   }
 
-  // Jeśli to pierwsza wiadomość i jest krótka, daj szansę (może dopytać)
-  if (message.length < 50) {
-    // Sprawdź czy nie jest to oczywisty spam
-    const spamKeywords = ['bitcoin', 'crypto', 'sex', 'porn', 'viagra', 'casino',
-      'napisz mi', 'napisz opowiadanie', 'napisz wiersz', 'napisz historię', 'napisz bajkę',
-      'jaki jest', 'kim jesteś', 'opowiedz żart', 'opowiedz dowcip',
-      'pogoda', 'przepis', 'gotowanie', 'polityk', 'pieczenie', 'ciasto',
-      'wyobraź', 'stwórz opowieść']
-    for (const spam of spamKeywords) {
-      if (msgLower.includes(spam)) {
-        return false
-      }
+  // Brak słowa z listy NIE znaczy, że wiadomość nie dotyczy urządzenia. Lista zawsze będzie dziurawa:
+  // fleksja („etykiecie", „świecą", „zebrze", „błędy") i literówki. Do 22.09.2026 każda wiadomość
+  // od 50 znaków bez słowa z listy była odrzucana — w 90 dniach 6 zgłoszeń serwisowych (ZT220 z lampkami,
+  // L10 z ekranem, pół nadruku na dwóch etykietach…) i ani jednej wiadomości spoza tematu.
+  // Odrzucamy więc tylko wyraźny sygnał spoza tematu; resztę rozstrzyga model (reguła odmowy w prompcie).
+  // Z dawnej listy „spamu" wypadły zwroty klientów: 'jaki jest' („jaki jest koszt wymiany"),
+  // 'napisz mi', 'przepis', 'polityk', 'ciasto'. Pozostałe wzorce są w isManipulationAttempt.
+  const spamKeywords = ['pogoda', 'kim jesteś', 'wyobraź']
+  for (const spam of spamKeywords) {
+    if (msgLower.includes(spam)) {
+      return false
     }
-    // „wymyśl" jako osobne słowo, bez „w kontekście" — krótkie „ZT411 gubi się w kontekście VLAN"
-    // i „wymyśliłem obejście" to zdania klienta, nie próby wyciągnięcia asystenta z roli.
-    if (RE_WORD_WYMYSL.test(msgLower)) return false
-    return true // Krótkie wiadomości przepuszczamy - AI dopyta
   }
-  
-  return false
+  return true
 }
 
 const OFF_TOPIC_RESPONSE = `Przepraszam, ale jestem asystentem specjalizującym się wyłącznie w urządzeniach Zebra Technologies (drukarki etykiet, drukarki kart, terminale mobilne, skanery kodów kreskowych).

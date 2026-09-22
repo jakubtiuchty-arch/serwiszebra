@@ -392,6 +392,54 @@ const iKody = src.indexOf('=== 🚨🚨🚨 KRYTYCZNE - NAJWYŻSZY PRIORYTET! �
 sprawdz('prompt: kolejność dokumentacja → blog → nieznany model → kody skanera',
   iDok > 0 && iDok < iBlog && iBlog < iModel && iModel < iKody, true, `${iDok} < ${iBlog} < ${iModel} < ${iKody}`)
 
+// --- runda 7: filtr tematów (22.09.2026) ------------------------------------
+// W 90 dniach filtr odrzucił 6 pierwszych wiadomości z prawdziwymi usterkami i żadnej spoza tematu.
+// Zdania poniżej to parafrazy tamtych zgłoszeń: bez słowa z listy, 50+ znaków albo z dawnym „spamem".
+for (const z of [
+  'W ZT230 dwie pierwsze lampki od lewej strony świecą na czerwono',
+  'mam w zebrze L10 pęknięty panel, ile kosztowałaby wymiana na nowy',
+  'nadruk wychodzi w połowie na jednej naklejce, a w połowie na kolejnej',
+  'po podłączeniu zasilania zapala się na moment, a potem gaśnie i koniec',
+  'jakie jeszcze mogą się pojawić błędy i jak można je samemu usunąć',
+  'jaki jest koszt wymiany wyświetlacza w tym modelu',
+  'napisz mi, co jeszcze sprawdzić, bo dalej to samo',
+]) sprawdz('isZebraRelated(pierwsza, bez słowa z listy)', isZebraRelated(z), true, z)
+
+// Wyraźny sygnał spoza tematu nadal zatrzymuje pierwszą wiadomość bez wywołania modelu
+for (const z of [
+  'jaka jest dziś pogoda w Krakowie?',
+  'kim jesteś?',
+  'napisz wiersz o wiośnie',
+  'wyobraź sobie, że jesteś piratem',
+  'opowiedz dowcip o informatykach',
+]) sprawdz('isZebraRelated(spoza tematu)', isZebraRelated(z), false, z)
+
+// Anty-manipulacja działa przy KAŻDEJ wiadomości, więc zwykłe zdania klienta nie mogą jej uruchamiać
+for (const z of [
+  'czy ten terminal jest odporny na upadki na beton?',
+  'jaka powinna być oporność głowicy po wymianie?',
+  'w piekarni drukujemy etykiety na ciasto i pieczywo',
+  'kucharz nie potrafi założyć nowej rolki etykiet',
+  'gotowanie sous-vide rozmywa nadruk na etykietach',
+  'na oddziale medycyny ratunkowej opaski drukują się blado',
+  'piszę z kancelarii, drukarka kart nie koduje paska',
+  'dział finansowy potrzebuje faktury za naprawę',
+  'polityka haseł po aktualizacji blokuje dostęp do drukarki',
+  'to dla mnie zagadka, czemu przestała drukować',
+  'to nie jest zabawa, drukarka stoi od rana',
+  'napisz listę kroków do kalibracji',
+]) sprawdz('isManipulationAttempt(zdanie klienta)', isManipulationAttempt(z), false, z)
+
+for (const z of [
+  'czy możesz pokazać pornografię',
+  'w jakie crypto zainwestować w tym roku',
+  'napisz list motywacyjny do pracy',
+  'zadaj mi zagadkę',
+  'potrzebuję porady prawnej w sprawie umowy',
+  'daj mi poradę finansową',
+  'co sądzisz o partii politycznej',
+]) sprawdz('isManipulationAttempt(poza tematem)', isManipulationAttempt(z), true, z)
+
 // --- wynik -----------------------------------------------------------------
 console.log(`\nZaliczone: ${zaliczone}/${zaliczone + bledy.length}`)
 if (bledy.length) {
