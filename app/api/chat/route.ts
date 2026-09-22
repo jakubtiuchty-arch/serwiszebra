@@ -324,7 +324,10 @@ const ZEBRA_MODELS = [
   'et401', 'et60w', 'et65w', 'et40', 'et45', 'et60', 'et65', 'et80',
   'et85',
   'em45rfid', 'em45',
-  'hc20', 'hc25', 'hc50', 'hc55',
+  // hc100 to drukarka opasek na rękę, nie tablet healthcare — trzyma się tu towarzystwa „hc".
+  // Dopisana 22.09.2026 razem z wgraniem jej maintenance manuala (179 fragmentów w HC100_Manual);
+  // bez wpisu detectPrinterModel jej nie wykrywał i filtr `HC100_Manual` nigdy się nie ustawiał.
+  'hc100', 'hc20', 'hc25', 'hc50', 'hc55',
   'fr55', 'l10axw', 'l10w', 'l10',
   // Skanery DS/LI/LS/CS — warianty dłuższe przed bazowymi
   'ds3608dpa', 'ds3608dpx', 'ds3678dpa', 'ds4608dpe', 'ds4678dpe', 'ds3608dp', 'ds3608er', 'ds3608hd',
