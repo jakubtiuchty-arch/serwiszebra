@@ -1268,6 +1268,19 @@ Fraza „biurkowe drukarki etykiet Zebra" jest głównym wejściem do tej katego
 - PO DEPLOYU: `is_active:true`, sprawdzenie produkcji, `/seo-audit`.
 - Wdrożone 06:42: deploy potwierdzony, produkt włączony, karta i klasa 200 z 10 cenami, klasa pokazuje ZT421/ZT510/ZT610.
 
+## 2026-09-22 — przegląd commita 0bea13c (redesign czatu) + H1
+- Prośba: sprawdzić, czy commit zmienia TYLKO wygląd okna czatu. Weryfikacja przez porównanie linii niosących logikę (useState/useEffect/useRef/fetch/await/set*/localStorage/handlery) między `0bea13c~1` a `0bea13c` — **zero różnic**. Ubyły dwa przypisania `onClick` (załącznik, mikrofon), bo desktop miał te przyciski dwa razy: w polu tekstowym (`hidden md:flex`) i w pasku dolnym (`md:hidden`). Nagrywanie wideo dalej tylko na telefonie.
+- Poza czatem commit rusza też `HomePage.tsx` (nagłówek), dorzuca `public/IMAGES/partners/logo_zebra.png` i zmienia teksty (5 podpowiedzi zamiast 3, nowe zdanie pod nagłówkiem, „24/7 dostępny" → „Dostępny 24/7"). Katalog `IMAGES` wielkimi literami — sprawdzone na produkcji, że taka ścieżka działa (lowercase daje 404).
+- **Znaleziony błąd SEO**: H1 miał treść tekstową „Autoryzowany Serwis", a marka była wyłącznie w `alt` logo. Poprawione (6c9a0fa): `alt=""` + `aria-hidden` na grafice, obok `<span className="sr-only">{' Zebra'}</span>`. Pułapka: bez wiodącej spacji w stringu `textContent` sklejał się w „SerwisZebra" — JSX nie wstawia spacji między sąsiednimi elementami inline.
+- Gałąź `naprawa-czatu-2026-09-21`, NIE main — wdrożenie na produkcję po decyzji użytkownika („później na produkcję"). W drzewie roboczym cudze nieśledzone `design-qa.md` i `screenshots/chat-redesign/`.
+
+## 2026-09-19 — pozostałe 17 filmów z poradników osadzone w instrukcjach PL
+- 76 osadzeń w 50 rozdziałach, 15 instrukcji: zd220d/t, zd230d/t, zd411d/t, zd421d/t, zd611d/t/r, zd621d/t/r, zt610. Skrypt mapujący (z trybem próbnym) w scratchpadzie sesji: `mapuj-wideo.py` — słownik FILMY (youtubeId, tytuł, miniatura z `public/`) + MAPA model → {dokładny tytuł rozdziału: [klucze]}; wstawia `videos:` po linii `title:` sekcji i przerywa, gdy tytuł rozdziału nie pasuje albo `videos` już jest.
+- Zasada przypisania: film idzie tam, gdzie opisana jest ta sama czynność. Etykiety/taśma → rozdziały o materiałach; LAN, Wi-Fi, montaż modułu Ethernet, porty → „Podłączenie do komputera"; głowica i wałek → „Konserwacja"; self-test i blady wydruk → „Rozwiązywanie problemów"; nóż → „Funkcje dodatkowe"/„Tryby druku i opcje", a gdzie takiej sekcji nie ma (ZD421/ZD621) → „Ładowanie etykiet"; dyrektywa RED → ZT610 „14. Protected Mode / EU RED".
+- Tytuły w instrukcji zachowują nazwę modelu z filmu (np. „Zakładanie etykiet w ZD220d / ZD230d" na stronie ZD220t), żeby czytelnik wiedział, jaki egzemplarz widzi.
+- Sprawdzone na buildzie: ZD421t 12 filmów, ZD421d 9, ZD621t 6, ZD220d 5, ZD611r 3, ZT610 1, ZQ620 0. Instrukcje bez dopasowanych filmów (ZQ, ZT2xx/4xx, skanery, terminale) zostały bez zmian — nie ma do nich materiałów.
+- Uwaga poboczna: `/instrukcje/zebra-ds3608` daje 404, bo tabela `manuals` ma tylko warianty (DS3608SR, DS3608ER…). Stan sprzed tej zmiany, nie regresja.
+
 ## 2026-09-19 — cztery filmy ZC100/ZC300: poradniki wideo + osadzenie w instrukcjach PL
 - Filmy (tytuły i długości z YouTube oEmbed + `lengthSeconds` ze strony watch): rozpakowanie `s04iRbCzBqQ` 1:24, taśma barwiąca `sz8ixZWbPvM` 0:56, karty w podajniku `VRy5608Fq3Y` 0:45, czyszczenie kartą `3rWB7HKAySQ` 1:33. Wszystkie dotyczą OBU modeli, więc trafiły też do ZC300.
 - `/poradniki-wideo`: 4 wpisy (id 24–27, kategoria `drukarki`, rozpakowanie jako `featured`), miniatury `maxresdefault` pobrane do `public/zc100-zc300-*.jpeg` (1280×720). Schema VideoObject generuje się automatycznie z tablicy.
