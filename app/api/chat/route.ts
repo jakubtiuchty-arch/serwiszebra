@@ -1978,11 +1978,15 @@ ZRÓB DOKŁADNIE TAK - WKLEJ [BARCODE:...] W ODPOWIEDŹ!`
           })
           controller.enqueue(encoder.encode(`\n\n__CITATIONS__${dataJson}`))
 
-          controller.close()
-
-          // Po zakończeniu streamu zapisz log do Supabase (asynchronicznie, nie blokuj odpowiedzi)
+          // Zapis logu MUSI się wydarzyć przed controller.close(). Wcześniej stał po nim
+          // i bez await — na Vercelu funkcja bywa zamrożona zaraz po zamknięciu streamu,
+          // więc zapis nie zdążał i tura znikała. Skutek był podwójny: rozmowa w panelu
+          // urywała się w połowie, a czujka oceniała strzęp rozmowy jak całość i stawiała
+          // zarzuty o kroki, które padły w turach, których w bazie nie było
+          // (sesja z 20.09.2026, w chat_logs została jedna tura z kilku).
+          // Klient ma już całą treść — opóźnia się wyłącznie sygnał końca streamu.
           const responseTime = Date.now() - startTime
-          saveChatLog({
+          const zapis = saveChatLog({
             id: logId,
             sessionId: sessionId || 'unknown',
             userMessage: lastUserMessage + (hasAttachments ? ` [+${attachments.length} załączników]` : ''),
@@ -1994,6 +1998,12 @@ ZRÓB DOKŁADNIE TAK - WKLEJ [BARCODE:...] W ODPOWIEDŹ!`
             detectedModel: conversationModels.join(',') || null,  // model z całej rozmowy — tak jak widzi go RAG
             ragSources,
           }).catch((err: any) => console.error('Błąd zapisywania logu czatu:', err))
+
+          // Gdyby Supabase się zaciął, nie trzymamy streamu w nieskończoność — po 5 s
+          // zamykamy mimo wszystko. Lepiej stracić log niż zawiesić klientowi okno czatu.
+          await Promise.race([zapis, new Promise((r) => setTimeout(r, 5000))])
+
+          controller.close()
 
         } catch (error: any) {
           console.error('Streaming error:', error)
