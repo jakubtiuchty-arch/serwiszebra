@@ -299,6 +299,99 @@ for (const model of ['l10', 'et40', 'et45', 'et401']) {
     new RegExp(`'${model}'`).test(modeleZebra), true, model)
 }
 
+// --- runda 6: pytanie o model, gdy go nie znamy (22.09.2026) ---------------
+//
+// 55 ze 192 rozmów w 90 dniach nie miało wykrytego modelu. Czat ma wtedy zapytać o model —
+// ale pytanie ma sens tylko, jeśli odpowiedź klienta da się wykryć, i nie może samo „wykryć"
+// modelu z przykładu, który czat podał. Wykrywanie wycinamy ze źródła i kompilujemy
+// TypeScriptem (typów jest tu za dużo na łatanie wyrażeniami regularnymi).
+const ts = (await import('typescript')).default
+const kodWykrywania = ts.transpileModule([
+  wytnij('const ZEBRA_MODELS', '// Helper function to check if citation matches detected models'),
+  wytnij('function userMessagesFrom', '// Zapytanie do RAG budujemy z kontekstu rozmowy'),
+  wytnij('// Czy wykryte nazwy to jedno urządzenie', '// === PREFILL FORMULARZA ZGŁOSZENIA ==='),
+].join('\n'), { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } }).outputText
+
+const { detectPrinterModel, detectModelsInConversation } = await import(`data:text/javascript,${encodeURIComponent(
+  kodWykrywania + '\nexport { detectPrinterModel, detectModelsInConversation }'
+)}`)
+
+// wykrywanie loguje każde wywołanie — w teście to szum
+const cicho = (fn) => { const l = console.log; console.log = () => {}; try { return fn() } finally { console.log = l } }
+const pierwszy = (q) => cicho(() => detectPrinterModel(q))[0] ?? 'BRAK'
+const wszystkie = (q) => cicho(() => detectPrinterModel(q)).join(',') || 'BRAK'
+
+// Aliasy z numerów katalogowych — tylko pary potwierdzone w katalogu TAKMA.
+// „MC27" i „mc9401" to prawdziwe wpisy klientów z rozmów bez wykrytego modelu.
+for (const [wejscie, oczekiwane] of [
+  ['mc9401', 'MC94'],
+  ['MC9401-0G1J6BSS-A6', 'MC94'],          // numer katalogowy MC9400 z katalogu TAKMA
+  ['mc 9401 nie ładuje', 'MC94'],          // najpierw sklejenie serii z numerem, potem alias
+  ['Zbity ekran skanera ZEBRA MC27', 'MC2700'],
+  ['MC27BJ-2A3S2RW', 'MC2700'],            // numer katalogowy MC2700 z katalogu TAKMA
+]) sprawdz('wykrywanie: alias z numeru katalogowego', pierwszy(wejscie), oczekiwane, wejscie)
+
+// Aliasy nie mogą rozjechać tego, co działało.
+for (const [wejscie, oczekiwane] of [
+  ['mc2700', 'MC2700'],                    // bez podwojenia MC2700,MC2700
+  ['mc94', 'MC94'],
+  ['tc-27 nie skanuje', 'TC27'],
+  ['zebra 411 zt', 'ZT411'],
+  ['hc100', 'HC100'],
+  // Świadomie BEZ aliasu: w katalogu prefiks MC330L to MC3300x, inna instrukcja niż MC3300_Manual.
+  ['mc330m', 'BRAK'],
+  // Modele spoza listy — nie mamy dla nich dokumentacji, wykrywanie ma milczeć, a nie zgadywać.
+  ['mc 3200', 'BRAK'],
+  ['TC8000 nie widzi wifi', 'BRAK'],
+]) sprawdz('wykrywanie: bez regresji', wszystkie(wejscie), oczekiwane, wejscie)
+
+for (const [wejscie, oczekiwane] of [
+  ['mc3300', 'MC3300'],
+  ['mc9300', 'MC9300'],
+]) sprawdz('wykrywanie: pełna nazwa wygrywa z krótką', pierwszy(wejscie), oczekiwane, wejscie)
+
+// Rozmowa: czat pyta o model, klient nie wie. Bez przykładowych numerów — nic nie wykryte.
+const rozmowa = (...tury) => tury.map((t, i) => ({ role: i % 2 ? 'assistant' : 'user', content: t }))
+sprawdz('rozmowa: pytanie bez przykładów + „nie wiem" nie daje modelu',
+  cicho(() => detectModelsInConversation(rozmowa(
+    'drukarka nie drukuje etykiet',
+    'Jaki to model? Znajdziesz go na naklejce z numerem seryjnym albo wyślij zdjęcie urządzenia.',
+    'nie wiem'))).join(',') || 'BRAK', 'BRAK', 'pytanie bez przykładów')
+
+// Dokładnie tego zabrania reguła w prompcie: jeden przykład w pytaniu zostaje wzięty za model
+// klienta, bo detectModelsInConversation w ostateczności czyta wypowiedzi AI wskazujące jedno
+// urządzenie. Test dokumentuje zagrożenie — gdyby kiedyś przestał przechodzić, reguła jest do przejrzenia.
+sprawdz('rozmowa: przykład „np. ZD421" w pytaniu byłby wzięty za model klienta (zagrożenie)',
+  cicho(() => detectModelsInConversation(rozmowa(
+    'drukarka nie drukuje etykiet', 'Jaki to model, np. ZD421?', 'nie wiem'))).join(','), 'ZD421',
+  'pytanie z przykładem')
+
+// Pętla się domyka: klient odpowiada numerem z naklejki i pełna dokumentacja ma się załadować.
+sprawdz('rozmowa: odpowiedź „MC9401" na pytanie o model daje MC94',
+  cicho(() => detectModelsInConversation(rozmowa(
+    'skaner nie działa', 'Jaki to model? Jest na naklejce z numerem seryjnym.', 'MC9401'))).join(','), 'MC94',
+  'odpowiedź numerem katalogowym')
+
+// Blok w prompcie: jest, ma właściwy warunek i reguły, bez których wyrządza szkody.
+sprawdz('prompt: jest blok o nieznanym modelu', /=== NIE ZNAMY MODELU URZĄDZENIA ===/.test(src), true, 'nagłówek bloku')
+sprawdz('prompt: blok tylko bez modelu i bez kodów skanera',
+  /if \(conversationModels\.length === 0 && scannerBarcodes\.length === 0\)/.test(src), true, 'warunek bloku')
+for (const [nazwa, wzor] of [
+  ['zakaz przykładowych numerów modeli', /NIE PODAWAJ PRZYKŁADOWYCH NUMERÓW MODELI/],
+  ['bez ponownego pytania, gdy klient nie zna modelu', /Już pytałeś, a klient nie zna modelu — nie powtarzaj pytania/],
+  ['bez pytania, gdy klient podał model w nietypowym zapisie', /Klient już podał model — nawet w zapisie, którego system nie rozpoznał/],
+  ['bez pytania przy sprawach ogólnych', /Pytanie nie dotyczy konkretnego egzemplarza/],
+]) sprawdz('prompt: ' + nazwa, wzor.test(src), true, nazwa)
+
+// Kolejność: pełna dokumentacja zaraz za SYSTEM_PROMPT (cache), blok o modelu za kontekstami,
+// a przed kodami skanera.
+const iDok = src.indexOf('enhancedSystemPrompt += naglowekKompletu(komplet)')
+const iBlog = src.indexOf('=== 🔥 OBOWIĄZKOWA WIEDZA Z BLOGA')
+const iModel = src.indexOf('=== NIE ZNAMY MODELU URZĄDZENIA ===')
+const iKody = src.indexOf('=== 🚨🚨🚨 KRYTYCZNE - NAJWYŻSZY PRIORYTET! 🚨🚨🚨 ===')
+sprawdz('prompt: kolejność dokumentacja → blog → nieznany model → kody skanera',
+  iDok > 0 && iDok < iBlog && iBlog < iModel && iModel < iKody, true, `${iDok} < ${iBlog} < ${iModel} < ${iKody}`)
+
 // --- wynik -----------------------------------------------------------------
 console.log(`\nZaliczone: ${zaliczone}/${zaliczone + bledy.length}`)
 if (bledy.length) {

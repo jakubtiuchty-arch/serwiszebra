@@ -360,11 +360,21 @@ const MODEL_PREFIXES = 'zxp|tlp|qln|zt|zd|zp|zq|zc|gk|gx|gc|lp|tc|mc|et|em|hc|fr
 const REVERSED_MODEL_RE = new RegExp(`\\b(\\d{2,4})\\s*(${MODEL_PREFIXES})\\b`, 'g')
 const SPLIT_MODEL_RE = new RegExp(`\\b(${MODEL_PREFIXES})[\\s\\-.]+(\\d)`, 'g')
 
+// Oznaczenia z numerów katalogowych, które klienci wpisują zamiast nazwy serii. Wpis listy 'mc94'
+// celowo odrzuca dalsze cyfry (żeby „mc3300" nie dawało MC33), więc „mc9401" nie pasowało do niczego.
+// Tylko pary POTWIERDZONE w katalogu TAKMA (takma/src/data/products.ts): MC9401-0G1J6BSS-A6 to
+// „MC9400, SE4770, 34 kl.", MC27BJ-2A3S2RW to „Zebra MC2700". Obie serie mają dokumentację
+// w manuals_full_text. Świadomie BEZ „mc330m": w katalogu prefiks MC330L to MC3300x, nowszy model
+// z inną instrukcją niż MC3300_Manual — alias mógłby podać klientowi dokumentację złego urządzenia.
+const ALIASY_MODELI: Record<string, string> = { mc9401: 'mc94', mc27: 'mc2700' }
+const ALIASY_RE = new RegExp(`(?<![a-z0-9])(${Object.keys(ALIASY_MODELI).join('|')})(?![0-9])`, 'g')
+
 function normalizeModelText(query: string): string {
   return (query || '')
     .toLowerCase()
     .replace(REVERSED_MODEL_RE, '$2$1')   // „411 zt" → „zt411"
     .replace(SPLIT_MODEL_RE, '$1$2')      // „tc-27", „tc 27" → „tc27"
+    .replace(ALIASY_RE, (m) => ALIASY_MODELI[m] ?? m) // „mc9401-0g1j…" → „mc94"
 }
 
 // Helper function to detect printer model from query
@@ -1889,6 +1899,49 @@ export async function POST(req: NextRequest) {
     // Dodaj kontekst z RAG (techniczne szczegóły z manuali)
     if (knowledgeContext) {
       enhancedSystemPrompt += `\n\n=== KONTEKST Z MANUALI TECHNICZNYCH ===\n${knowledgeContext}\n\nUżyj informacji z manuali jako uzupełnienie. NIGDY nie odsyłaj klienta na stronę Zebra - MY mamy te manuele i udzielamy pomocy na ich podstawie!`
+    }
+
+    // === NIE ZNAMY MODELU → najpierw ustal urządzenie ===
+    // 55 ze 192 rozmów w 90 dniach (do 22.09.2026) nie miało wykrytego modelu i szło najsłabszą
+    // ścieżką: wyszukiwaniem po WSZYSTKICH instrukcjach naraz. Czat pytał o model niekonsekwentnie
+    // (13 z 55). Z modelem ładuje się pełna dokumentacja urządzenia — w pomiarze 18:8 wobec wycinków.
+    //
+    // Blok dokładamy przy KAŻDEJ turze bez modelu, a nie tylko w pierwszej: rozmowy często zaczynają
+    // się od „Dzień dobry", a pytanie wyłącznie w pierwszej turze minęłoby właściwe pytanie klienta.
+    // Pętli nie ma, bo blok zabrania ponownego pytania, gdy klient model podał (także w zapisie, którego
+    // lista nie zna) albo gdy już odpowiedział, że go nie zna.
+    //
+    // Zakaz przykładowych numerów nie jest kosmetyką: detectModelsInConversation w ostateczności czyta
+    // model z wypowiedzi AI i przepuszcza te wskazujące JEDNO urządzenie. „Jaki model, np. ZD421?",
+    // a potem „nie wiem" od klienta — i następna tura ładowałaby dokumentację ZD421.
+    //
+    // Wyłączony przy kodach skanera: wtedy odpowiedzią jest gotowy kod do zeskanowania, nie pytanie.
+    if (conversationModels.length === 0 && scannerBarcodes.length === 0) {
+      enhancedSystemPrompt += `
+
+=== NIE ZNAMY MODELU URZĄDZENIA ===
+System nie rozpoznał w tej rozmowie modelu, więc NIE masz przed sobą dokumentacji tego urządzenia.
+Procedury, menu i kody błędów różnią się między modelami Zebry — odpowiedź z pamięci łatwo prowadzi
+klienta do kroku, którego jego urządzenie w ogóle nie ma.
+
+KIEDY PYTASZ O MODEL — pytanie dotyczy konkretnego urządzenia (usterka, komunikat lub kod błędu, diody,
+kalibracja, połączenie, konfiguracja, wymiana części, wycena naprawy), a model jeszcze nie padł:
+- Zacznij od pytania o model: jedno krótkie zdanie i jedno zdanie, dlaczego pytasz (od modelu zależy procedura).
+- Podpowiedz, skąd go wziąć: z naklejki z numerem seryjnym (S/N) na urządzeniu — albo niech klient
+  przyśle zdjęcie urządzenia lub tej naklejki, odczytasz je sam. Nie zgaduj, w którym miejscu jest naklejka.
+- Nie podawaj procedury z własnej pamięci. Jeśli wyżej jest wiedza z bloga TAKMA pasująca do objawu,
+  możesz ją krótko przekazać — ale o model zapytaj i tak, bo dopiero z nim załadujemy dokumentację urządzenia.
+- NIE PODAWAJ PRZYKŁADOWYCH NUMERÓW MODELI — ani jednego („np. …"), ani listy. System odczytuje model
+  także z Twoich wypowiedzi i przykład zostałby wzięty za urządzenie klienta. Możesz nazwać rodzaj
+  urządzenia: drukarka etykiet, drukarka kart, terminal, skaner, tablet.
+
+KIEDY NIE PYTASZ:
+- Klient już podał model — nawet w zapisie, którego system nie rozpoznał (inna pisownia, sam numer,
+  numer katalogowy, model spoza naszej listy). Pracuj na tym, co podał.
+- Już pytałeś, a klient nie zna modelu — nie powtarzaj pytania. Poproś o zdjęcie albo pomóż na podstawie
+  opisu, mówiąc wprost, że bez modelu to wskazówki ogólne.
+- Pytanie nie dotyczy konkretnego egzemplarza: adres wysyłki, faktura, płatność, czas naprawy, godziny,
+  program do projektowania etykiet, ogólne zasady serwisu. Odpowiedz normalnie.`
     }
 
     // === NAJWYŻSZY PRIORYTET: KODY KRESKOWE DO WYŚWIETLENIA W CZACIE ===
