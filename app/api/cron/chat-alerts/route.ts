@@ -96,21 +96,44 @@ export async function GET(req: NextRequest) {
       const ocena = await ocenRozmowe(pelna as Tura[])
       if (!ocena) continue
 
-      const doZapisu = pelna.filter((t) => t.ai_quality_score === null).map((t) => t.id)
-      if (doZapisu.length > 0) {
+      // Każdy problem dotyczy KONKRETNEJ tury i model podaje jej numer w polu `tura`
+      // (lib/chat-alerts.ts:124, parsowane w :276). Wcześniej ten numer przy zapisie ginął,
+      // a CAŁA lista zarzutów lądowała w każdej nieocenionej turze przez `.in('id', doZapisu)`.
+      // Rozmowa na 9 tur zamieniała jedną obserwację w 9 wierszy, a że cron ocenia rozmowę
+      // od nowa przy każdym kolejnym pytaniu klienta, ten sam zarzut szedł mailem kilka razy.
+      // Pomiar z 22.09.2026: 73 wiersze alertów w 9 rozmowach to było 28 odrębnych obserwacji.
+      const nowe = new Set<number>()
+      pelna.forEach((t, i) => {
+        if (t.ai_quality_score === null) nowe.add(i + 1)
+      })
+
+      // Numer spoza zakresu przycinamy, zamiast gubić zarzut.
+      const turaProblemu = (p: { tura: number }) => Math.min(Math.max(1, p.tura), pelna.length)
+
+      for (let i = 0; i < pelna.length; i++) {
+        const t = pelna[i]
+        if (t.ai_quality_score !== null) continue
+        const swoje = ocena.problemy
+          .filter((p) => turaProblemu(p) === i + 1)
+          .map((p) => `${p.typ}: ${p.dlaczego}`)
         const { error: bladZapisu } = await supabase
           .from('chat_logs')
           .update({
             category: ocena.kategoria,
             ai_quality_score: ocena.ocena,
-            ai_quality_issues: ocena.problemy.map((p) => `${p.typ}: ${p.dlaczego}`),
+            ai_quality_issues: swoje,
           })
-          .in('id', doZapisu)
+          .eq('id', t.id)
         if (bladZapisu) console.error('❌ Zapis oceny:', bladZapisu.message)
-        else ocenionychTur += doZapisu.length
+        else ocenionychTur += 1
       }
 
-      const alarmujace = doAlertu(ocena.problemy, ocena.ocena)
+      // Mailujemy tylko to, co dotyczy tur ocenianych W TYM przebiegu. Zarzut o turę ocenioną
+      // wcześniej poszedł mailem wtedy — powtórka to szum, a to ona robiła „pięć maili o jednym".
+      const alarmujace = doAlertu(
+        ocena.problemy.filter((p) => nowe.has(turaProblemu(p))),
+        ocena.ocena,
+      )
       if (alarmujace.length > 0) {
         zProblemami.push({
           sessionId,
