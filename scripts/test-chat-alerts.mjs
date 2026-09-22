@@ -43,6 +43,39 @@ const brakujace = wUnii.filter((t) => !ALERTY[t])
 if (brakujace.length) { console.error('Typy z TypAlertu nieobecne w wyciągniętych progach:', brakujace.join(', ')); process.exit(1) }
 console.log(`Typy alertów wyciągnięte ze źródła: ${Object.keys(ALERTY).length}\n`)
 
+// Bramka typu „wycena_przedwczesnie" jest w kodzie, nie w prompcie — sprawdzamy ją lokalnie,
+// bo to ona decyduje, czy odpowiedź modelu w ogóle zostanie wzięta pod uwagę.
+const { podajeKwoteZaNaprawe } = await import(`data:text/javascript,${encodeURIComponent(
+  src.slice(src.indexOf('const RE_KWOTA_ZL'), src.indexOf('export function zbudujTranskrypt'))
+    .replace('export function podajeKwoteZaNaprawe(tekstAsystenta: string): boolean {',
+             'export function podajeKwoteZaNaprawe(tekstAsystenta) {')
+)}`)
+
+let jednostkowe = 0
+const bledyJednostkowe = []
+const sprawdzKwote = (tekst, oczekiwane) => {
+  const wynik = podajeKwoteZaNaprawe(tekst)
+  if (wynik === oczekiwane) jednostkowe++
+  else bledyJednostkowe.push(`podajeKwoteZaNaprawe("${tekst.slice(0, 60)}") = ${wynik}, oczekiwano ${oczekiwane}`)
+}
+// Sama opłata za diagnostykę i zdania bez kwot to nie jest wycena naprawy
+for (const t of [
+  'Diagnostyka jest bezpłatna przy akceptacji naprawy; przy rezygnacji koszt wynosi 99 zł netto.',
+  'Wiążącą wycenę podamy dopiero po diagnozie urządzenia w serwisie.',
+  'Kurier odbierze tablet z podanego adresu. Diagnostyka trwa zwykle 24-48h.',
+  '',
+]) sprawdzKwote(t, false)
+// Każda inna kwota to już wycena naprawy
+for (const t of [
+  'Orientacyjnie wymiana wyświetlacza to około 800–1200 zł netto.',
+  'czyszczenie i kalibracja 150–250 zł netto, wymiana głowicy 330–530 zł netto',
+  'Naprawa gniazda: około 300-800 zł netto. Przy rezygnacji 99 zł netto.',
+  'Koszt usługi: 1 200 zł brutto.',
+]) sprawdzKwote(t, true)
+
+console.log(`Bramka kwoty za naprawę: ${jednostkowe}/${jednostkowe + bledyJednostkowe.length}`)
+if (bledyJednostkowe.length) { for (const b of bledyJednostkowe) console.error('  ' + b); process.exit(1) }
+
 const promptSrc = src.match(/const PROMPT = `([\s\S]*?)`\n\nfunction zbudujPrompt/)[1]
 const typy = Object.entries(ALERTY).map(([k, v]) => `- ${k}: ${v.opis}`).join('\n')
 const PROMPT = promptSrc.replace('TYPY', typy)
@@ -55,7 +88,11 @@ async function ocen(tury) {
     messages: [{ role: 'system', content: PROMPT }, { role: 'user', content: transkrypt }],
   })
   const p = JSON.parse(r.choices[0].message.content)
-  const problemy = (p.problemy || []).filter((x) => ALERTY[x.typ])
+  // te same dwa filtry co w ocenRozmowe() w lib/chat-alerts.ts
+  const bylaKwota = podajeKwoteZaNaprawe(tury.map((t) => t[1]).join('\n'))
+  const problemy = (p.problemy || [])
+    .filter((x) => ALERTY[x.typ])
+    .filter((x) => x.typ !== 'wycena_przedwczesnie' || bylaKwota)
   // ta sama reguła co doAlertu() w lib/chat-alerts.ts
   const prog = (x) => (p.ocena <= 2 ? Math.min(ALERTY[x.typ].prog, 0.6) : ALERTY[x.typ].prog)
   return { ocena: p.ocena, wszystkie: problemy, alerty: problemy.filter((x) => Number(x.waga) >= prog(x)) }
@@ -88,6 +125,28 @@ const PRZYPADKI = [
   ]},
   { nazwa: 'uczciwa odmowa wyceny bez diagnozy', oczekiwany: null, tury: [
     ['ile kosztuje naprawa ZD421 ktora nie drukuje, nie chce diagnozy podaj cene', 'Bez obejrzenia drukarki nie podam jednej kwoty, bo przyczyny są różne. Orientacyjnie: czyszczenie i kalibracja 150–250 zł netto, wymiana głowicy 330–530 zł netto. Wiążącą wycenę podamy po diagnozie w serwisie.'],
+  ]},
+
+  // --- fałszywe alarmy z 22.09.2026: czujka zgłosiła rozmowy, w których czat miał rację ---
+
+  // Oceniający uznał za błąd zdanie zgodne z instrukcją ZC100 (kaseta ZC Series ma
+  // wbudowany wałek czyszczący — ZC100_instrukcja_PL.md, lib/blog.ts). Nie ma instrukcji
+  // pod ręką, więc nie wolno mu oceniać budowy urządzenia z własnej pamięci.
+  { nazwa: 'poprawny fakt o kasecie ZC100', oczekiwany: null, tury: [
+    ['zc100 raz na środku raz z boku i zdjęcie jest rozjechane', 'Skoro nadruk raz trafia w środek, a raz ucieka w bok, najpierw podejrzewałbym prowadzenie karty — zwykle zabrudzone rolki toru karty. Uruchom czyszczenie z poziomu sterownika: Preferencje drukowania → Help & Support → Clean Now i wykonaj cykl kartą czyszczącą. Jeśli masz świeżą kasetę z taśmą, załóż ją też ponownie — w ZC100 rolka czyszcząca jest zintegrowana z kasetą taśmy. Po czyszczeniu puść 2-3 legitymacje testowe. Dalej nadruk „pływa"?'],
+  ]},
+
+  // Wyrwane gniazdo USB to uszkodzenie ewidentnie mechaniczne — zdalny krok niczego nie
+  // rozstrzygnie, więc skierowanie prosto do serwisu jest poprawne. Zdanie o wiążącej
+  // wycenie jest w odpowiedzi, a kwoty nie ma, bo cennik nie obejmuje tabletów.
+  { nazwa: 'ewidentne uszkodzenie gniazda bez wyceny', oczekiwany: null, tury: [
+    ['Zebra L10 / RTL10C1 USZKODZONE GNIAZDA USB ILE KOSZTUJE WYMIANA', 'Uszkodzone gniazda USB w Zebra L10 / RTL10C1 to naprawa sprzętowa — zdalnie nie da się tego bezpiecznie naprawić. Tego modelu nie mam w cenniku orientacyjnym, więc nie chcę rzucać kwotą na wyrost — wiążącą wycenę podamy dopiero po diagnozie urządzenia w serwisie. Kurier odbierze tablet z podanego adresu. Diagnostyka trwa zwykle 24-48h i jest bezpłatna przy akceptacji naprawy; przy rezygnacji koszt wynosi 99 zł netto.'],
+  ]},
+
+  // Ostrzeżenie „nie rób resetu fabrycznego" i uprzedzenie o haśle administratora przy
+  // trybie chronionym to treść wymagana przez prompt czatu, nie wpadka.
+  { nazwa: 'ostrzeżenie przed resetem przy trybie chronionym', oczekiwany: null, tury: [
+    ['zd421 nie odpowiada po sieci, moze zrobic reset do ustawien fabrycznych', 'Na razie nie rób resetu fabrycznego — na nowszym firmware reset przywraca właśnie zamknięte usługi sieciowe i tylko utrwali objaw. Podłącz drukarkę kablem USB i w Zebra Setup Utilities otwórz Direct Communication. Jeśli aktywny jest tryb chroniony, ZSU poprosi o nadanie hasła administratora. Wklej tylko tę jedną linię: ! U1 getvar "device.protected_mode" — co zwróciło?'],
   ]},
 ]
 
