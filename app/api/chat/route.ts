@@ -2,6 +2,22 @@ import OpenAI from 'openai'
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 import { searchBlogForAI } from '@/lib/blog'
+import { pobierzKomplet, naglowekKompletu, type KompletDokumentow } from '@/lib/manuals-full-text'
+
+/**
+ * Wpis czarnej skrzynki (chat_logs.rag_sources). Przy wyszukiwaniu wektorowym: strona i podobieństwo.
+ * Przy pełnej dokumentacji: jeden wpis na dokument, sim = 1 (model dostał wszystko, więc błędna
+ * odpowiedź to NIE jest wina doboru fragmentów — klasyfikator w panelu „złych odpowiedzi" tak ją ujmie),
+ * plus plik i typ, żeby w bazie było widać, co realnie poszło do promptu.
+ */
+type ZrodloRag = {
+  manual: string
+  page: number | null
+  sim: number
+  plik?: string
+  typ?: string | null
+  tryb?: 'pelny' | 'wyszukiwanie'
+}
 
 // Lazy init — żeby `next build` nie crashował gdy OPENAI_API_KEY brak w build env
 let _openai: OpenAI | null = null
@@ -30,7 +46,7 @@ async function saveChatLog(data: {
   modelUsed: string
   userIp?: string
   detectedModel?: string | null
-  ragSources?: Array<{ manual: string; page: number | null; sim: number }>
+  ragSources?: ZrodloRag[]
 }) {
   try {
     const sources = data.ragSources ?? []
@@ -1745,10 +1761,10 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // === KROK 2: Szukaj w Supabase manuals (vector search) ===
+    // === KROK 2: Wiedza z dokumentacji urządzenia ===
     let knowledgeContext = ''
     let ragContextFound = false
-    let ragSources: Array<{ manual: string; page: number | null; sim: number }> = []
+    let ragSources: ZrodloRag[] = []
 
     // Kontekst rozmowy zamiast pojedynczej wiadomości — patrz buildRagQuery/detectModelsInConversation
     const ragQuery = buildRagQuery(messages) || lastUserMessage
@@ -1761,20 +1777,59 @@ export async function POST(req: NextRequest) {
     // który przepuszczał „tc-27" (myślnik) i rozmowa szła na nietrafiony wpis blogowy.
     const needsRAG = !blogFound || conversationModels.length > 0
 
-    if (ragQuery && needsRAG) {
+    // KROK 2a — PEŁNA DOKUMENTACJA. Gdy znamy model i mamy jego dokumenty w manuals_full_text,
+    // do promptu idzie CAŁY komplet (katalog części, manual serwisowy, instrukcje użytkownika,
+    // także polskie), a wyszukiwanie wektorowe w ogóle się nie odpala.
+    //
+    // Dlaczego: pięć wycinków po 1000 znaków to ~1% instrukcji, dobrane podobieństwem. Pomiar
+    // 22.09.2026 na 14 prawdziwych pytaniach, ślepa ocena: cała dokumentacja bije wycinki 18:8,
+    // zawiera właściwą procedurę 10× częściej (10/28 wobec 1/28) i nie jest wolniejsza, bo odpadają
+    // buildSearchQuery, embedding i zapytanie do bazy. Konteksty do 194 tys. tokenów — bez spadku
+    // jakości. Przykład z produkcji tego samego dnia: pytanie o błąd 7036 w ZC100 dostało strony
+    // 81/1/1/81/82, a kod leżał na 83 — model zgadywał „najczęściej chodzi o mechanizm".
+    //
+    // Wyłącznik bez deployu: CHAT_PELNA_DOKUMENTACJA=0 w zmiennych Vercela wraca do wyszukiwania.
+    let komplet: KompletDokumentow | null = null
+    if (process.env.CHAT_PELNA_DOKUMENTACJA !== '0' && conversationModels.length > 0) {
+      // Pierwszy model z rozmowy, który ma dokumentację — przy „HC100 i HC20" nie przepadamy,
+      // gdy pierwszy akurat nie ma nic w tabeli.
+      for (const model of conversationModels.slice(0, 3)) {
+        komplet = await pobierzKomplet(model)
+        if (komplet) break
+      }
+      if (komplet) {
+        ragContextFound = true
+        ragSources = komplet.dokumenty.map((d) => ({
+          manual: komplet!.manualName,
+          page: null,
+          sim: 1,
+          plik: d.source_file,
+          typ: d.doc_type,
+          tryb: 'pelny' as const,
+        }))
+        console.log(
+          `📚 Pełna dokumentacja ${komplet.manualName}: ${komplet.dokumenty.length} dok., ` +
+          `${komplet.znakow.toLocaleString('pl-PL')} znaków, ~${komplet.tokenowSzac.toLocaleString('pl-PL')} tok — bez wyszukiwania`,
+        )
+      }
+    }
+
+    // KROK 2b — WYSZUKIWANIE WEKTOROWE, tylko gdy pełnej dokumentacji nie ma: model niewykryty
+    // (~28% rozmów) albo wykryty, ale bez dokumentów w manuals_full_text.
+    if (!komplet && ragQuery && needsRAG) {
       console.log('🔍 Szukam w Supabase manuals dla:', ragQuery)
       const searchResult = await searchManuals(ragQuery, conversationModels, messages)
 
       knowledgeContext = searchResult.context
       ragContextFound = searchResult.found
-      ragSources = searchResult.sources
+      ragSources = searchResult.sources.map((s) => ({ ...s, tryb: 'wyszukiwanie' as const }))
 
       if (ragContextFound) {
         console.log('✅ Znaleziono kontekst z Supabase manuals')
       } else {
         console.log('❌ Nie znaleziono kontekstu w Supabase manuals')
       }
-    } else if (blogFound) {
+    } else if (!komplet && blogFound) {
       console.log('⚡ Pominięto RAG - blog wystarczy')
     }
 
@@ -1806,6 +1861,15 @@ export async function POST(req: NextRequest) {
 
     // === KROK 3: Zbuduj kontekst dla AI ===
     let enhancedSystemPrompt = SYSTEM_PROMPT
+
+    // Pełna dokumentacja idzie ZARAZ za promptem systemowym, PRZED wszystkim, co zmienia się
+    // między turami (blog szukany po ostatniej wiadomości, części ze sklepu, kody skanera).
+    // SYSTEM_PROMPT (stała, bez interpolacji) + dokumentacja modelu tworzą stały prefiks, więc
+    // cache promptu OpenAI obejmuje go od drugiej tury rozmowy: w pomiarze 98,5-99,7% tokenów
+    // z cache przy powtórce. Postawiona za blogiem traciłaby cache przy każdej nowej wiadomości.
+    if (komplet) {
+      enhancedSystemPrompt += naglowekKompletu(komplet)
+    }
 
     // Dodaj kontekst z bloga (jako wiedza wewnętrzna — AI rozwiązuje problem, NIE odsyła na blog)
     if (blogContext) {
