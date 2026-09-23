@@ -94,7 +94,7 @@ export async function GET() {
       `&select=name,slug,price_brutto,price,vat_rate,description,image_url,stock,is_active,sku,product_type,device_model,resolution_dpi,manufacturer,ean` +
       `&order=product_type.asc,name.asc`,
     {
-      headers: { apikey: supabaseKey, Authorization: `Bearer ${supabaseKey}` },
+      headers: { apikey: supabaseKey },
       cache: 'no-store',
     }
   )

@@ -108,7 +108,6 @@ const res = await fetch(`${env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/products?on_con
   method: 'POST',
   headers: {
     apikey: env.SUPABASE_SERVICE_ROLE_KEY,
-    Authorization: `Bearer ${env.SUPABASE_SERVICE_ROLE_KEY}`,
     'Content-Type': 'application/json',
     Prefer: 'resolution=merge-duplicates,return=representation',
   },

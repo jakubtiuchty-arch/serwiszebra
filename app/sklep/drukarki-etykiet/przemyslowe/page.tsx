@@ -93,7 +93,7 @@ async function getDevices(): Promise<DeviceRow[]> {
   try {
     const res = await fetch(
       `${supabaseUrl}/rest/v1/products?product_type=eq.drukarka&is_active=eq.true&select=slug,name,device_model,description,price,image_urls,attributes&order=name.asc`,
-      { headers: { apikey: supabaseKey, Authorization: `Bearer ${supabaseKey}` }, next: { revalidate: 300 } }
+      { headers: { apikey: supabaseKey }, next: { revalidate: 300 } }
     )
     if (!res.ok) return []
     const rows: DeviceRow[] = await res.json()

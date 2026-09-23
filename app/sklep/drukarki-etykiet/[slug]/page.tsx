@@ -69,7 +69,7 @@ async function getDevice(slug: string): Promise<DeviceProduct | null> {
   try {
     const res = await fetch(
       `${supabaseUrl}/rest/v1/products?slug=eq.${slug}&product_type=eq.drukarka&is_active=eq.true&select=id,name,slug,sku,price,price_brutto,description,device_model,meta_title,meta_description,image_urls,attributes`,
-      { headers: { apikey: supabaseKey, Authorization: `Bearer ${supabaseKey}` }, next: { revalidate: 300 } }
+      { headers: { apikey: supabaseKey }, next: { revalidate: 300 } }
     )
     if (!res.ok) return null
     const data = await res.json()

@@ -29,7 +29,7 @@ const getContractProduct = cache(async (): Promise<ContractProduct | null> => {
   try {
     const res = await fetch(
       `${supabaseUrl}/rest/v1/products?slug=eq.${SLUG}&is_active=eq.true&select=id,name,slug,sku,price,price_brutto`,
-      { headers: { apikey: supabaseKey, Authorization: `Bearer ${supabaseKey}` }, cache: 'no-store' }
+      { headers: { apikey: supabaseKey }, cache: 'no-store' }
     )
     if (!res.ok) return null
     const data = await res.json()

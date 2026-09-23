@@ -66,7 +66,7 @@ async function cenyOdModeli(): Promise<Map<string, number>> {
   try {
     const res = await fetch(
       `${supabaseUrl}/rest/v1/products?product_type=eq.drukarka&is_active=eq.true&select=slug,attributes`,
-      { headers: { apikey: supabaseKey, Authorization: `Bearer ${supabaseKey}` }, next: { revalidate: 300 } }
+      { headers: { apikey: supabaseKey }, next: { revalidate: 300 } }
     )
     if (!res.ok) return ceny
     const rows: DeviceRow[] = await res.json()
@@ -89,7 +89,7 @@ async function policzKlasy(): Promise<Record<string, number>> {
   try {
     const res = await fetch(
       `${supabaseUrl}/rest/v1/products?product_type=eq.drukarka&is_active=eq.true&select=slug,attributes`,
-      { headers: { apikey: supabaseKey, Authorization: `Bearer ${supabaseKey}` }, next: { revalidate: 300 } }
+      { headers: { apikey: supabaseKey }, next: { revalidate: 300 } }
     )
     if (!res.ok) return {}
     const rows: DeviceRow[] = await res.json()

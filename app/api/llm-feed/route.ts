@@ -47,7 +47,7 @@ export async function GET() {
   const res = await fetch(
     `${supabaseUrl}/rest/v1/products?product_type=eq.drukarka&is_active=eq.true` +
       '&select=name,slug,description,device_model,image_urls,attributes',
-    { headers: { apikey: supabaseKey, Authorization: `Bearer ${supabaseKey}` }, cache: 'no-store' }
+    { headers: { apikey: supabaseKey }, cache: 'no-store' }
   )
   if (!res.ok) {
     return NextResponse.json({ error: 'Nie udało się pobrać produktów' }, { status: 502 })

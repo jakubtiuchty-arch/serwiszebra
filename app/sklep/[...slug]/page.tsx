@@ -254,7 +254,6 @@ async function getProduct(slug: string): Promise<Product | null> {
       {
         headers: {
           'apikey': supabaseKey,
-          'Authorization': `Bearer ${supabaseKey}`
         },
         cache: 'no-store'
       }
@@ -290,7 +289,6 @@ async function getRelatedProducts(currentProduct: Product): Promise<Product[]> {
       {
         headers: {
           'apikey': supabaseKey,
-          'Authorization': `Bearer ${supabaseKey}`
         },
         cache: 'no-store'
       }
@@ -355,7 +353,6 @@ async function getProductsForCategory(filters: {
     const res = await fetch(query, {
       headers: {
         'apikey': supabaseKey,
-        'Authorization': `Bearer ${supabaseKey}`
       },
       cache: 'no-store'
     })

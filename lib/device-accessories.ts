@@ -65,7 +65,7 @@ export async function getAkcesoriaDlaModelu(model: string): Promise<AkcesoriumPr
     `${supabaseUrl}/rest/v1/products?is_active=eq.true&product_type=in.(${typy.join(',')})` +
       '&select=id,sku,name,slug,image_url,product_type,device_model,resolution_dpi,price,price_brutto',
     {
-      headers: { apikey: supabaseKey, Authorization: `Bearer ${supabaseKey}` },
+      headers: { apikey: supabaseKey },
       next: { revalidate: 300 },
     }
   )

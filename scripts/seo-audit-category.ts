@@ -360,7 +360,7 @@ async function fetchProducts(productType: string): Promise<Product[]> {
   const dbRes = await fetch(
     `${env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/products?product_type=eq.${productType}&is_active=eq.true` +
     `&select=sku,name,device_model,resolution_dpi,price,price_brutto,stock,slug`,
-    { headers: { apikey: env.SUPABASE_SERVICE_ROLE_KEY, Authorization: `Bearer ${env.SUPABASE_SERVICE_ROLE_KEY}` } }
+    { headers: { apikey: env.SUPABASE_SERVICE_ROLE_KEY } }
   )
   return dbRes.json()
 }
