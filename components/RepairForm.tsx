@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -18,6 +18,8 @@ import {
 } from 'lucide-react'
 import { trackRepairFormSubmit, trackRepairFormStart } from '@/lib/gtm'
 import { onRepairPrefill, trackCtaEvent, type RepairPrefill } from '@/lib/repair-prefill'
+import { idSesjiCzatu, wyczyscRozmowe } from '@/lib/chat-session-storage'
+import { normalizujNip, nipPoprawny } from '@/lib/nip'
 import { trackOpenAIRepairLead } from '@/lib/openai-pixel'
 
 // Lista wzorców modeli Zebra (case-insensitive)
@@ -85,7 +87,10 @@ const repairFormSchema = z.object({
   email: z.string().email('Nieprawidłowy adres email'),
   phone: z.string().min(9, 'Nieprawidłowy numer telefonu'),
   company: z.string().min(1, 'Nazwa firmy jest wymagana'),
-  nip: z.string().min(10, 'NIP musi mieć 10 cyfr').max(10, 'NIP musi mieć 10 cyfr'),
+  // Kreski, spacje i prefiks PL są zdejmowane przed walidacją (lib/nip.ts) — do bazy trafiają same cyfry
+  nip: z.string()
+    .transform(normalizujNip)
+    .pipe(z.string().length(10, 'NIP musi mieć 10 cyfr').refine(nipPoprawny, 'Nieprawidłowy NIP — sprawdź cyfry')),
   
   // KROK 2: Szczegóły urządzenia
   deviceType: z.enum(['drukarka', 'terminal', 'skaner', 'tablet', 'akcesoria', 'inne'], {
@@ -192,6 +197,7 @@ export default function RepairForm() {
     watch,
     trigger,
     setValue,
+    getFieldState,
   } = useForm<RepairFormData>({
     resolver: zodResolver(repairFormSchema),
     defaultValues: {
@@ -206,25 +212,37 @@ export default function RepairForm() {
 
   // Odbiór danych z czatu AI. Wypełniamy TYLKO to, co asystent ustalił w rozmowie —
   // dane kontaktowe i adres zostawiamy przeglądarce (autouzupełnianie) i walidacji.
+  const sesjaPrefilluRef = useRef<string | null>(null)
   useEffect(() => {
     return onRepairPrefill((prefill: RepairPrefill) => {
       const applied: string[] = []
 
-      const apply = (field: keyof RepairFormData, value?: string) => {
+      // Prefill z NOWEJ rozmowy (przycisk „Nowa rozmowa" w czacie): pola urządzenia z poprzedniej rozmowy
+      // znikają, zanim nałożymy nowe — inaczej numer seryjny i opis starego urządzenia przechodziły dalej.
+      const sesja = prefill.chatSessionId || null
+      if (sesjaPrefilluRef.current && sesja && sesjaPrefilluRef.current !== sesja) {
+        for (const pole of ['deviceModel', 'serialNumber', 'issueDescription'] as const) setValue(pole, '')
+      }
+      sesjaPrefilluRef.current = sesja
+
+      const apply = (field: keyof RepairFormData, value?: string, liczDoBanera = true) => {
         if (!value) return
         setValue(field, value as any, { shouldValidate: true, shouldDirty: true })
-        applied.push(field as string)
+        if (liczDoBanera) applied.push(field as string)
       }
 
-      apply('deviceType', prefill.deviceType)
+      // Gwarancję i pilność ustawiamy zawsze (także wartość domyślną, żeby nie została z poprzedniej rozmowy),
+      // ale do banera „uzupełnione z rozmowy" liczymy tylko wartości ustalone w rozmowie — wcześniej
+      // domyślne „inne", „nie wiem", „standard" liczyły się w każdym z 12 prefilli.
+      apply('deviceType', prefill.deviceType === 'inne' ? undefined : prefill.deviceType)
       apply('deviceModel', prefill.deviceModel)
       apply('serialNumber', prefill.serialNumber)
-      apply('isWarranty', prefill.isWarranty)
-      apply('urgency', prefill.urgency)
+      apply('isWarranty', prefill.isWarranty, prefill.isWarranty !== 'nie_wiem')
+      apply('urgency', prefill.urgency, prefill.urgency !== 'standard')
       apply('issueDescription', prefill.issueDescription)
 
       setPrefilled(applied)
-      setChatSessionId(prefill.chatSessionId || null)
+      setChatSessionId(sesja)
     })
   }, [setValue])
 
@@ -244,29 +262,48 @@ export default function RepairForm() {
     { number: 5, title: 'Potwierdzenie' },
   ]
 
-  const handleNextStep = async () => {
-    let fieldsToValidate: any[] = []
-    
-    if (currentStep === 1) {
-      // company i nip też są wymagane — bez tego klient dowiadywał się o braku NIP-u
-      // dopiero przy wysyłce w kroku 5, po wypełnieniu całej reszty
-      fieldsToValidate = ['firstName', 'lastName', 'email', 'phone', 'company', 'nip']
-    } else if (currentStep === 2) {
-      fieldsToValidate = ['deviceType', 'deviceModel', 'serialNumber', 'isWarranty']
-    } else if (currentStep === 3) {
-      fieldsToValidate = ['issueDescription', 'urgency']
-    } else if (currentStep === 4) {
-      fieldsToValidate = ['street', 'zipCode', 'city', 'contactPhone', 'pickupDate']
-    }
+  // Pola wymagane na każdym kroku. company i nip też są wymagane w kroku 1 — bez tego klient
+  // dowiadywał się o braku NIP-u dopiero przy wysyłce w kroku 5, po wypełnieniu całej reszty.
+  const POLA_KROKU: Record<number, (keyof RepairFormData)[]> = {
+    1: ['firstName', 'lastName', 'email', 'phone', 'company', 'nip'],
+    2: ['deviceType', 'deviceModel', 'serialNumber', 'isWarranty'],
+    3: ['issueDescription', 'urgency'],
+    4: ['street', 'zipCode', 'city', 'contactPhone', 'pickupDate'],
+    5: ['privacyConsent', 'termsConsent'],
+  }
 
-    const isValid = await trigger(fieldsToValidate as any)
+  // Pomiar formularza po rozmowie z czatem: na którym kroku i polu klienci odpadają (w lejku
+  // 13 kliknięć → 9 zgłoszeń, a 4 odpadnięć nie dało się wyjaśnić). Tylko nazwy pól, bez wartości.
+  const idRozmowy = () => chatSessionId || idSesjiCzatu()
+  const zglosBlad = (krok: number, pola: string[]) => {
+    const sesja = idRozmowy()
+    if (sesja && pola.length) trackCtaEvent('form_error', { sessionId: sesja, meta: { step: krok, fields: pola } })
+  }
+
+  const handleNextStep = async () => {
+    const fieldsToValidate = POLA_KROKU[currentStep] || []
+
+    const isValid = await trigger(fieldsToValidate)
     if (isValid && currentStep < 5) {
       // Śledzenie GTM - rozpoczęcie formularza (przy przejściu z kroku 1 do 2)
       if (currentStep === 1) {
         trackRepairFormStart()
       }
+      const sesja = idRozmowy()
+      if (sesja) trackCtaEvent('form_step', { sessionId: sesja, meta: { from: currentStep, to: currentStep + 1 } })
       setCurrentStep(currentStep + 1)
+    } else if (!isValid) {
+      zglosBlad(currentStep, fieldsToValidate.filter((f) => getFieldState(f).invalid))
     }
+  }
+
+  // Wysyłka z błędem walidacji (np. pole z wcześniejszego kroku) — wcześniej przycisk nic nie robił,
+  // a klient nie widział błędu, bo stał na kroku 5. Przenosimy go na pierwszy krok z błędem.
+  const onInvalid = (bledyPol: Record<string, unknown>) => {
+    const pola = Object.keys(bledyPol)
+    const krok = [1, 2, 3, 4, 5].find((k) => (POLA_KROKU[k] || []).some((f) => pola.includes(f as string))) ?? currentStep
+    zglosBlad(krok, pola)
+    setCurrentStep(krok)
   }
 
   const handlePrevStep = () => {
@@ -362,6 +399,10 @@ export default function RepairForm() {
       formDataToSend.append('privacyConsent', String(data.privacyConsent))
       formDataToSend.append('termsConsent', String(data.termsConsent))
 
+      // Powiązanie z rozmową z czatem — także gdy klient wypełnił formularz sam, bez przycisku
+      const sesjaCzatu = idRozmowy()
+      if (sesjaCzatu) formDataToSend.append('chatSessionId', sesjaCzatu)
+
       // Dodaj zdjęcia (skompresowane)
       for (let i = 0; i < uploadedFiles.length; i++) {
         const compressed = await compressImage(uploadedFiles[i])
@@ -392,12 +433,14 @@ export default function RepairForm() {
       }
 
       // Domknięcie lejka: zgłoszenie wysłane po rozmowie z asystentem
-      if (chatSessionId || prefilled.length > 0) {
+      if (sesjaCzatu || prefilled.length > 0) {
         trackCtaEvent('form_submitted', {
-          sessionId: chatSessionId || undefined,
-          meta: { repairId: result.requestId, prefilledFields: prefilled },
+          sessionId: sesjaCzatu || undefined,
+          meta: { repairId: result.requestId, prefilledFields: prefilled, przezPrzycisk: !!chatSessionId },
         })
       }
+      // Rozmowa zakończona zgłoszeniem — po powrocie na stronę nie może wrócić z tym samym przyciskiem i prefillem
+      wyczyscRozmowe()
 
       // ✨ ZMIANA: Zamiast redirect → pokaż lightbox
       console.log('✅ Zgłoszenie wysłane! ID:', result.requestId)
@@ -504,7 +547,7 @@ export default function RepairForm() {
         )}
 
         {/* Form */}
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit, onInvalid)}>
           <div className="bg-white rounded-2xl shadow-2xl border border-gray-200 p-6 md:p-10">
             {/* KROK 1: Dane kontaktowe */}
             {currentStep === 1 && (
@@ -605,7 +648,7 @@ export default function RepairForm() {
                     type="text"
                     className={`w-full px-3 py-2 border rounded-full focus:ring-2 focus:ring-blue-500 focus:border-transparent ${errors.nip ? 'border-red-500' : 'border-gray-300'}`}
                     placeholder="np. 1234567890"
-                    maxLength={10}
+                    maxLength={16}
                   />
                   {errors.nip && (
                     <p className="mt-1 text-sm text-red-500">{errors.nip.message}</p>
@@ -1101,8 +1144,12 @@ export default function RepairForm() {
                 <div></div>
               )}
 
+              {/* Różne klucze: bez nich React podmieniał type="button" → "submit" w TYM SAMYM elemencie w trakcie
+                  kliknięcia „Dalej" na kroku 4, a przeglądarka wysyłała formularz (przy zaznaczonych zgodach po
+                  powrocie z kroku 5 — zgłoszenie bez kliknięcia „Wyślij zgłoszenie"). */}
               {currentStep < 5 ? (
                 <button
+                  key="dalej"
                   type="button"
                   onClick={handleNextStep}
                   className="flex items-center gap-2 px-6 py-2 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition-colors"
@@ -1112,6 +1159,7 @@ export default function RepairForm() {
                 </button>
               ) : (
                 <button
+                  key="wyslij"
                   type="submit"
                   disabled={isSubmitting}
                   className="flex items-center gap-2 px-6 py-2 bg-green-600 text-white rounded-xl font-semibold hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"

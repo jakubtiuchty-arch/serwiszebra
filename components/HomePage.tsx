@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import AIChatBox from '@/components/AIChatBox'
+import { naZajetoscCzatu } from '@/lib/chat-session-storage'
 import RepairForm from '@/components/RepairForm'
 import Image from 'next/image'
 import { createClient } from '@/lib/supabase/client'
@@ -83,6 +84,29 @@ function PriceTooltip() {
 
 export default function HomePage({ opinie }: { opinie: OpinieGoogleDane | null }) {
   const router = useRouter()
+  // Po załadowaniu zostaje jedna instancja czatu. Na serwerze renderujemy obie (na telefonie czat JEST
+  // sekcją hero — ukrycie go do hydratacji pogorszyłoby LCP), ale druga, ukryta CSS-em kopia miała własny
+  // stan, a po dodaniu zapisu rozmowy (lib/chat-session-storage) obie czytałyby i pisały ten sam zapis.
+  // Podmiana czeka, aż czat skończy odpowiadać: obrót telefonu w trakcie odpowiedzi odmontowywał instancję
+  // razem z pytaniem klienta i odpowiedzią w drodze.
+  const [czatDesktop, setCzatDesktop] = useState<boolean | null>(null)
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 768px)') // md w Tailwindzie
+    let zajety = false
+    const ustaw = () => { if (!zajety) setCzatDesktop(mq.matches) }
+    ustaw()
+    const odpnij = naZajetoscCzatu((z) => {
+      zajety = z
+      if (!z) setCzatDesktop(mq.matches) // zaległa zmiana breakpointu po zakończeniu odpowiedzi
+    })
+    // Safari < 14 nie ma addEventListener na MediaQueryList — bez zapasu cała strona główna rzucała błąd
+    if (typeof mq.addEventListener === 'function') {
+      mq.addEventListener('change', ustaw)
+      return () => { mq.removeEventListener('change', ustaw); odpnij() }
+    }
+    mq.addListener(ustaw)
+    return () => { mq.removeListener(ustaw); odpnij() }
+  }, [])
   const [activeCategory, setActiveCategory] = useState<PricingCategory>('drukarki')
   const [showPanelModal, setShowPanelModal] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -535,7 +559,7 @@ export default function HomePage({ opinie }: { opinie: OpinieGoogleDane | null }
       {/* HERO - MOBILE VERSION (inline chat) */}
       <section className="md:hidden min-h-[50vh] max-h-[70vh] h-[60vh] flex flex-col relative overflow-hidden">
         {/* Chat area - cały hero jest oknem chatu */}
-        <AIChatBox variant="inline" />
+        {czatDesktop !== true && <AIChatBox variant="inline" />}
       </section>
 
       {/* HERO - DESKTOP VERSION (floating chat box) */}
@@ -582,7 +606,7 @@ export default function HomePage({ opinie }: { opinie: OpinieGoogleDane | null }
           </div>
 
           <div className="relative">
-            <AIChatBox variant="floating" />
+            {czatDesktop !== false && <AIChatBox variant="floating" />}
           </div>
         </div>
       </section>

@@ -131,6 +131,7 @@ export default function PolitykaPrywatnosciPage() {
                 <li>Identyfikator sesji</li>
                 <li>Czas i data rozmowy</li>
               </ul>
+              <p className="mt-2">Jeśli po rozmowie z asystentem wyślesz zgłoszenie naprawy, łączymy je z tą rozmową, żeby serwisant widział przebieg wstępnej diagnozy. Rozmowa jest przechowywana w przeglądarce do zamknięcia karty (najdłużej 2 godziny).</p>
             </div>
           </section>
 

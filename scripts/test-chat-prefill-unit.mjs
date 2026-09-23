@@ -29,11 +29,12 @@ for (const m of shouldReject) check(isZebraDevice(m) === false, `odrzuca "${m}"`
 const chatLines = fs.readFileSync(`${REPO}/app/api/chat/route.ts`, 'utf8').split('\n')
 const zStart = chatLines.findIndex(l => l.startsWith('const ZEBRA_MODELS = ['))
 const dEnd = chatLines.findIndex((l, i) => i > zStart && l === '}' && chatLines[i - 1].includes('return models'))
+// Wycięty fragment kompilujemy TypeScriptem: łatanie adnotacji podmianami tekstu pękło
+// na `const ALIASY_MODELI: Record<string, string>` (22.09.2026)
+const ts = (await import('typescript')).default
 const detectPrinterModel = new Function(
-  chatLines.slice(zStart, dEnd + 1).join('\n')
-    .replace('function normalizeModelText(query: string): string', 'function normalizeModelText(query)')
-    .replace('function detectPrinterModel(query: string): string[]', 'function detectPrinterModel(query)')
-    .replace('const models: string[] = []', 'const models = []') +
+  ts.transpileModule(chatLines.slice(zStart, dEnd + 1).join('\n'),
+    { compilerOptions: { target: ts.ScriptTarget.ES2022 } }).outputText +
   '\nreturn detectPrinterModel'
 )()
 const origLog = console.log
@@ -79,6 +80,18 @@ const q = buildRagQuery(convo)
 check(q.includes('zt411'), 'kotwica: pierwsza wiadomość z opisem problemu trafia do zapytania', `"${q}"`)
 check(q.includes('dalej nic'), 'bieżąca wiadomość też trafia do zapytania')
 check(!q.includes(' nie ') || q.split('nie').length < 4, 'krótkie potwierdzenia pomijane')
+
+// ── NIP: kreski, spacje, prefiks PL i suma kontrolna (lib/nip.ts, 23.09.2026) ────────────────
+console.log('\n=== NIP ===')
+const nipJs = ts.transpileModule(fs.readFileSync(`${REPO}/lib/nip.ts`, 'utf8'),
+  { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } }).outputText
+const { normalizujNip, nipPoprawny } = await import(`data:text/javascript,${encodeURIComponent(nipJs)}`)
+for (const [wejscie, oczekiwane] of [['123-456-32-18', '1234563218'], ['PL 1234563218', '1234563218'], [' 123 456 32 18 ', '1234563218']])
+  check(normalizujNip(wejscie) === oczekiwane, `normalizuje „${wejscie}"`, normalizujNip(wejscie))
+check(nipPoprawny('1234563218') === true, 'poprawna suma kontrolna przechodzi')
+check(nipPoprawny('1234563219') === false, 'zła cyfra kontrolna odpada')
+check(nipPoprawny(normalizujNip('123-456-32')) === false, 'ucięty NIP (8 cyfr) odpada')
+check(nipPoprawny('1234567890') === false, 'suma kontrolna 10 odpada')
 
 console.log(`\n${'─'.repeat(60)}\nJEDNOSTKOWE: ${pass} OK / ${fail} FAIL`)
 process.exit(fail > 0 ? 1 : 0)

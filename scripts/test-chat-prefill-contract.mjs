@@ -52,7 +52,8 @@ check(eq(['standard', 'express'], enumFromSchema('urgency')), 'urgency: ten sam 
 
 // minimalna długość opisu: backend odrzuca <20, formularz wymaga min. 20
 const formMin = Number(form.match(/issueDescription: z\.string\(\)\.min\((\d+)/)[1])
-const backendMin = Number(chatRoute.match(/issueDescription\.length < (\d+)\) return null/)[1])
+// backend zostawia opis pusty, gdy ma mniej niż N znaków (reszta pól jedzie dalej) — wcześniej `return null`
+const backendMin = Number(chatRoute.match(/issueDescription\.length >= (\d+) \?/)[1])
 check(backendMin >= formMin, `backend nie przepuści opisu krótszego niż formularz (${backendMin} >= ${formMin})`)
 
 // ── 4. Nazwa zdarzenia i lejek ────────────────────────────────────────────────
@@ -73,7 +74,9 @@ check(eq(libType, allowed), 'typ CtaEvent zgadza się z listą endpointu', libTy
 
 // ── 5. Walidacja per krok pokrywa wymagane pola formularza ───────────────────
 console.log('\n=== 5. Walidacja kroków ===')
-const stepFields = [...form.matchAll(/fieldsToValidate = \[([^\]]+)\]/g)].map(m => m[1].split(',').map(s => s.trim().replace(/['"]/g, '')))
+// Pola kroków stoją w tabeli POLA_KROKU (od 23.09.2026, wspólna dla przejść i dla onInvalid)
+const tabelaKrokow = form.slice(form.indexOf('const POLA_KROKU'), form.indexOf('}', form.indexOf('const POLA_KROKU')))
+const stepFields = [...tabelaKrokow.matchAll(/^\s*\d+: \[([^\]]+)\]/gm)].map(m => m[1].split(',').map(s => s.trim().replace(/['"]/g, '')))
 const validatedAll = stepFields.flat()
 const optional = ['purchaseDate', 'courierNotes', 'privacyConsent', 'termsConsent']
 const missing = schemaFields.filter(f => !validatedAll.includes(f) && !optional.includes(f))

@@ -48,7 +48,7 @@ export function onRepairPrefill(handler: (prefill: RepairPrefill) => void): () =
  * Zdarzenia lejka CTA. Do tej pory nie wiedzieliśmy nawet, ile razy przycisk
  * „Wyślij do serwisu" się pokazał — trzeba to było odtwarzać z kodu.
  */
-export type CtaEvent = 'shown' | 'clicked' | 'prefill_applied' | 'form_submitted'
+export type CtaEvent = 'shown' | 'clicked' | 'prefill_applied' | 'form_submitted' | 'form_step' | 'form_error'
 
 export function trackCtaEvent(
   event: CtaEvent,

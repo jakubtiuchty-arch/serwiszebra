@@ -6,10 +6,12 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_ROLE_KEY!
 )
 
-const ALLOWED_EVENTS = ['shown', 'clicked', 'prefill_applied', 'form_submitted']
+// form_step / form_error (23.09.2026) wymagają migracji supabase-cta-formularz.sql — do jej uruchomienia
+// insert odbija się od CHECK w tabeli i endpoint po cichu zwraca 200 „skipped" (patrz niżej)
+const ALLOWED_EVENTS = ['shown', 'clicked', 'prefill_applied', 'form_submitted', 'form_step', 'form_error']
 
 /**
- * Lejek CTA „Wyślij do serwisu": shown → clicked → prefill_applied → form_submitted.
+ * Lejek CTA „Wyślij do serwisu": shown → clicked → prefill_applied → form_step/form_error → form_submitted.
  * Bez tego nie da się ocenić, czy prefill cokolwiek zmienił — do tej pory liczbę
  * wyświetleń przycisku trzeba było odtwarzać z logiki komponentu.
  */

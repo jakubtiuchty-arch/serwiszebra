@@ -312,6 +312,104 @@ function aiConfirmsResolved(aiResponse: string): boolean {
   return RE_AI_RESOLVED.test(twierdzenia.join(' '))
 }
 
+// === Przycisk „Wyślij do serwisu": klient sam chce oddać sprzęt ===
+// Trzeci wyzwalacz przycisku, obok tagu [SERIOUS_ISSUE] i propozycji wysyłki w odpowiedzi czatu.
+// Zastąpił regułę „≥6 wiadomości + słowo usterki w historii", która w 90 dniach do 22.09.2026 dała
+// 22 pokazania, z tego 19 błędnych (pod krokami diagnostyki bez „?", w rozmowach konfiguracyjnych,
+// pod „problem zniknął") i ani jednego kliknięcia. Litery zawsze przez PL_LETTERS: w JS \w obejmuje
+// tylko ASCII i gubi polskie końcówki. Wzorce przyjmują pisownię z polskimi znakami i bez nich.
+const LIT = `[${PL_LETTERS}]`
+const WYSLAC = '(?:wys[lł]a[cć]|wysy[lł]a[cćm]|wy[sś]l[eę](?:my|sz)?|prze(?:s[lł]a[cć]|[sś]l[eę]|sy[lł]a[cćm])|' +
+  'ode(?:s[lł]a[cć]|[sś]l[eę])|pode(?:s[lł]a[cć]|[sś]l[eę])|odda(?:[cćm]|wa[cć])|dostarcz(?:y[cć]|[eę]))'
+const URZADZENIE = '(?:drukar|terminal|skaner|czytnik|kolektor|urz[aą]dze|sprz[eę]t|tablet)'
+const CZESC = '(?:g[lł]owic|ekran|wy[sś]wietlacz|klawiatur|szyb|gniazd|obudow|p[lł]yt|modu[lł]|wa[lł]k|bateri|akumulator)'
+const ILE_KOSZT = `(?:(?<!${LIT})ile(?!${LIT})|koszt|cen[aęy](?!${LIT})|wycen)`
+// Mocne sygnały, ogólne: czasownik wysyłki obok „serwis/naprawa" albo „do was"
+const RE_WYSYLKA_OGOLNA = [
+  new RegExp(`${WYSLAC}[^.?!\\n]{0,40}(?:serwis|napraw)`),
+  new RegExp(`(?:serwis|napraw)[^.?!\\n]{0,40}${WYSLAC}`),
+  new RegExp(`${WYSLAC}[^.?!\\n]{0,30}do\\s+(?:was|pa[nń]stwa)`),
+]
+// Mocne sygnały, konkretne: jak/gdzie wysłać urządzenie, adres, kurier, jawna prośba o naprawę
+const RE_WYSYLKA_KONKRETNA = [
+  new RegExp(`${WYSLAC}\\s+(?:${LIT}+\\s+){0,2}${URZADZENIE}[^.?!\\n]{0,20}kurier`),
+  // urządzenie jako dopełnienie czasownika — „jak wysłać do drukarki z Worda" to transmisja, nie wysyłka sprzętu
+  new RegExp(`(?<!${LIT})(?:gdzie|jak|na\\s+jaki|pod\\s+jaki)(?:\\s+${LIT}+){0,3}\\s+${WYSLAC}\\s+` +
+    `(?:(?!(?:do|na|z|ze|w|we|przez|po)\\s)${LIT}+\\s+){0,2}${URZADZENIE}`),
+  // „…gdzie wysłać?" na końcu; końcówka [\s?.!]*$ jest liniowa (\s*[?.!]*\s*$ była kwadratowa)
+  new RegExp(`(?<!${LIT})gdzie(?:\\s+${LIT}+){0,4}\\s+${WYSLAC}[\\s?.!]*$`),
+  new RegExp(`adres(?:u)?\\s+(?:serwisu|do\\s+wysy[lł]ki|wysy[lł]ki|odbioru|gdzie)|na\\s+jaki\\s+adres|` +
+    `poda(?:j|jcie|cie)\\s+adres(?!${LIT}*\\s*(?:ip|mac|sieci|serwera|e-?mail))`),
+  new RegExp(`kurier${LIT}*(?:\\s+po\\s|[^.?!\\n]{0,25}(?:odbierze|odebra[cć]|odbior|przyjedzie|przyjecha[cć]|podjedzie))|` +
+    `zam[oó]w(?:i[cć]|cie|i[eę])\\s+kurier|odbi[oó]r\\s+kurier|(?<!${LIT})(?:odbierzcie|przyjed[zź]cie|zabierzcie)(?!${LIT})`),
+  new RegExp('serwisujecie|naprawiacie|czy\\s+(?:jest\\s+)?(?:mo[zż]liwa|da\\s+si[eę]\\s+zrobi[cć])\\s+napraw|' +
+    'pro[sś]z[eę]\\s+o\\s+napraw|zleci[cć]\\s+napraw|zlecam\\s+napraw|zg[lł]aszam\\s+(?:usterk|napraw|awari)|' +
+    `chc[eę]\\s+(?:odda[cć]|wys[lł]a[cć]|zg[lł]osi[cć])|wysy[lł]am\\s+do\\s+(?:was|serwisu)|` +
+    `(?:urz[aą]dzeni${LIT}*|sprz[eę]t${LIT}*)\\s+zast[eę]pcz|zamiennik${LIT}*\\s+na\\s+czas\\s+naprawy`),
+  new RegExp(`mo[zż]ecie\\s+(?:${LIT}+\\s+){0,2}napraw|` +
+    `chcia[lł](?:bym|abym|by[sś]my)\\s+(?:odda[cć]|wys[lł]a[cć]|zleci[cć]\\s+napraw|zg[lł]osi[cć]\\s+(?:napraw|usterk|awari|${URZADZENIE}|do\\s+serwisu))|` +
+    `(?:pro[sś]z[eę]|popro[sś]z[eę])\\s+(?:o\\s+)?(?:kurier|odbi[oó]r\\s+(?:${LIT}+\\s+){0,2}?(?:kurier|${URZADZENIE}))`),
+]
+// Słabsze sygnały: koszt naprawy albo naprawa konkretnej części. Tu działają wykluczenia „zrób to sam"
+// i materiałów eksploatacyjnych. „po wymianie głowicy…" to reklamacja, nie prośba o naprawę.
+const RE_KOSZT_LUB_CZESC = [
+  new RegExp(`${ILE_KOSZT}[^.?!\\n]{0,40}(?:napraw|serwis|wymian)`),
+  new RegExp(`(?:napraw|serwis|wymian)[^.?!\\n]{0,40}${ILE_KOSZT}`),
+  // „naprawiany", „wymieniane" opisują historię urządzenia, a nie prośbę — stąd (?!ian) i (?!an)
+  new RegExp(`(?<!po\\s)(?:napraw(?!ian)${LIT}*|wymian${LIT}*|wymieni(?!an)${LIT}*)\\s+(?:${LIT}+\\s+){0,2}${CZESC}`),
+]
+// Odmowa i zaprzeczenie: decyzje klienta („nie chcę wysyłać", „nie trzeba wysyłać do serwisu", „nie wysyłajcie").
+// Formy 3. osoby („skaner nie wysyła kodów", „drukarka nie oddaje etykiety") to objaw, nie odmowa.
+const RE_NIE_CHCE_SERWISU = new RegExp(
+  `(?<!${LIT})nie\\s+(?:chc[eę]|b[eę]d[eę]|zamierzam|musz[eę]|potrzebuj[eę]|trzeba|ma\\s+(?:potrzeby|sensu)|` +
+  `b[eę]dzie\\s+(?:trzeba|potrzeby)|op[lł]aca\\s+si[eę])(?:\\s+${LIT}+){0,2}\\s+(?:${WYSLAC}|serwis|napraw)|` +
+  `(?<!${LIT})nie\\s+(?:wysy[lł]a(?:[cć]|m|my|j|jcie|jmy)|wy[sś]l(?:[eę]|emy|esz)|wys[lł]a[cć]|` +
+  `odda(?:[cćm]|my|jemy|jcie|wa[cć]|wajcie))(?!${LIT})|bez\\s+(?:wysy[lł]ani|odsy[lł]ani|oddawani)`)
+// „Już działa, a myślałem, że trzeba będzie wysłać do serwisu" — przy działającym urządzeniu (bez zastrzeżeń)
+// ogólna wzmianka o wysyłce nie wystarcza; potrzebny konkret: adres, kurier, jawna prośba.
+const RE_DZIALA_TERAZ = word('działa|dziala|pomogło|pomoglo|zadziałało|zadzialalo|udało się|udalo sie|naprawione|' +
+  'już drukuje|juz drukuje|już skanuje|juz skanuje|już czyta|juz czyta|wszystko gra|jest dobrze')
+const RE_ZASTRZEZENIE = new RegExp(`(?<!${LIT})(?:ale|tylko|jednak|czasem|czasami|chwilami|nadal|dalej)(?!${LIT})`)
+const RE_ZROB_TO_SAM = new RegExp(`(?<!${LIT})(?:sam|sama|samemu|samodzielnie)(?!${LIT})|krok\\s+po\\s+kroku|` +
+  `(?<!${LIT})jak(?:\\s+(?:mam|mog[eę]|mo[zż]na|sam|sama))?\\s+(?:wymieni|zamontowa|wymontowa|napraw|rozebra)`)
+const RE_MATERIALY = /etykiet|ta[sś]m|ribbon|rolk|kaset|foli|papier/
+// Reklamacja NASZEJ naprawy to nie nowe (płatne) zgłoszenie — blokuje także mocne sygnały
+const RE_REKLAMACJA_NASZA = new RegExp(`(?<!${LIT})po\\s+wasz${LIT}*\\s+(?:naprawie|serwisie)|po\\s+naprawie\\s+u\\s+was`)
+// Szersze sygnały reklamacji wyłączają tylko słabe wzorce (koszt, część)
+const RE_REKLAMACJA = new RegExp(`(?<!${LIT})po\\s+(?:(?:wasz|tej|ostatni|poprzedni)${LIT}*\\s+)?napraw|reklamacj|` +
+  `(?:wr[oó]ci[lł]${LIT}*|odebra[lł]${LIT}*)\\s+z\\s+(?:serwisu|naprawy)|po\\s+serwisie`)
+const RE_WYSYLKA_PLIKU = new RegExp(`${WYSLAC}\\s+(?:${LIT}+\\s+){0,2}` +
+  '(?:plik|komend|dane|danych|zpl|firmware|etykiet|wydruk|sterownik|log|zrzut|zdj[eę]ci|screen|kod|mail|wiadomo|sms|' +
+  'szablon|konfiguracj|ustawieni|obraz|czcionk|aplikacj|apk|profil|poleceni|pdf)')
+
+function klientChceSerwis(message: string): boolean {
+  // Limit długości: heurystyki biegną synchronicznie po strumieniu, a klient może wkleić dowolnie długi tekst
+  const m = (message || '').slice(0, 4000).toLowerCase()
+  if (!m.trim() || RE_NIE_CHCE_SERWISU.test(m) || RE_REKLAMACJA_NASZA.test(m)) return false
+  if (RE_WYSYLKA_PLIKU.test(m) && !/serwis|napraw|kurier/.test(m)) return false
+  if (RE_WYSYLKA_KONKRETNA.some((re) => re.test(m))) return true
+  const dziala = RE_DZIALA_TERAZ.test(m) && !RE_NOT_RESOLVED.test(m) && !RE_ZASTRZEZENIE.test(m)
+  if (!dziala && RE_WYSYLKA_OGOLNA.some((re) => re.test(m))) return true
+  if (dziala || RE_ZROB_TO_SAM.test(m) || RE_REKLAMACJA.test(m)) return false
+  if (RE_MATERIALY.test(m) && !/serwis|napraw/.test(m)) return false
+  return RE_KOSZT_LUB_CZESC.some((re) => re.test(m))
+}
+
+// Czy odpowiedź czatu proponuje oddanie sprzętu. Zaprzeczenie tuż przed frazą W TYM SAMYM ZDANIU („nie trzeba
+// wysłać drukarki do serwisu", „zanim zdecydujesz się wysłać…") nie jest propozycją. Zdanie wcześniej już tak:
+// „Nie trzeba niczego wysyłać. Kurier odbierze urządzenie z podanego adresu." to propozycja.
+const RE_PROPONUJE_SERWIS = /wysłać do serwisu|wysłanie do serwisu|wysłać drukarkę|wysłać urządzenie|wysłać terminal|wysłać skaner|kurier odbierze|odbierze urządzenie|odbierze drukarkę|odbierze terminal|odbierze skaner/gi
+const RE_ZAPRZECZENIE_PRZED = /(?:nie\s+(?:trzeba|musi\S*|ma\s+potrzeby|warto)|bez\s+potrzeby|zanim)(?:\s+\S+){0,2}\s*$/
+
+function proponujeWysylke(odpowiedz: string): boolean {
+  const tekst = odpowiedz || ''
+  for (const m of Array.from(tekst.matchAll(RE_PROPONUJE_SERWIS))) {
+    const przed = (tekst.slice(0, m.index ?? 0).split(/[.!?\n]/).pop() || '').slice(-40).toLowerCase()
+    if (!RE_ZAPRZECZENIE_PRZED.test(przed)) return true
+  }
+  return false
+}
+
 // Lista modeli zsynchronizowana z instrukcjami w bazie RAG (manuals_documents, 120 manuali),
 // żeby `${model}_Manual` trafiał w filtr dokładny. Doklejone modele bez manuala (ZP, GK888,
 // starsze GX/ZD) — RAG ich nie znajdzie, ale mamy je w statystykach i w logu `detected_model`.
@@ -500,18 +598,50 @@ export interface RepairPrefill {
 
 const DEVICE_TYPES = ['drukarka', 'terminal', 'skaner', 'tablet', 'akcesoria', 'inne']
 
+// Typ urządzenia z serii, gdy model jest znany — ekstrakcja potrafiła zapisać terminal MC27 jako skaner.
+// Dłuższe prefiksy przed krótszymi: HC100 to drukarka opasek, HC20/HC50 to terminale.
+function typZSerii(model: string): RepairPrefill['deviceType'] | null {
+  const m = (model || '').toLowerCase().replace(/[^a-z0-9]/g, '')
+  if (!m) return null
+  if (/^hc1\d\d/.test(m)) return 'drukarka'
+  if (/^(zxp|zt|zd|zq|zc|zp|gk|gx|gc|tlp|lp|qln)\d/.test(m)) return 'drukarka'
+  if (/^(tc|mc|wt|ec|em|ws|hc)\d/.test(m)) return 'terminal'
+  if (/^(ds|li|ls|cs)\d/.test(m)) return 'skaner'
+  if (/^(et\d|l10)/.test(m)) return 'tablet'
+  return null
+}
+
+// Model spoza naszej listy (TC8000, LS3578) przyjmujemy z ekstrakcji tylko wtedy, gdy ma kształt modelu
+// Zebry i klient sam go napisał — czat potrafi podsunąć model w pytaniu, a klient mu nie przytaknąć.
+const RE_KSZTALT_MODELU = /^(?:(?:tc|mc|wt|ec|ds|li|ls|cs|zt|zd|zq|zc|zp|gk|gx|gc|et|hc|em|ws)\d{2,4}|l10)[a-z0-9-]*$/
+function modelOdKlienta(wyekstrahowany: string, wiadomosciKlienta: string[]): string {
+  const norm = (t: string) => (t || '').toLowerCase().replace(/[^a-z0-9]/g, '')
+  const model = norm(wyekstrahowany)
+  if (!model || !RE_KSZTALT_MODELU.test(model)) return ''
+  return wiadomosciKlienta.some((w) => norm(w).includes(model)) ? wyekstrahowany.trim().slice(0, 40) : ''
+}
+
 async function buildRepairPrefill(
   messages: any[],
   aiResponse: string,
   conversationModels: string[]
 ): Promise<RepairPrefill | null> {
   try {
-    const transcript = (Array.isArray(messages) ? messages : [])
+    const rozmowa = (Array.isArray(messages) ? messages : [])
       .filter((m: any) => (m?.role === 'user' || m?.role === 'assistant') && typeof m.content === 'string')
-      .slice(-14)
+    // Wszystkie wypowiedzi klienta i 8 ostatnich serwisanta, w kolejności rozmowy. Wcześniejsze
+    // slice(-14) ucinało początek długich rozmów — razem z objawem i krokami, które klient potwierdził.
+    const ostatnieSerwisanta = new Set(
+      rozmowa.map((m: any, i: number) => (m.role === 'assistant' ? i : -1)).filter((i: number) => i >= 0).slice(-8)
+    )
+    const transcript = rozmowa
+      .filter((m: any, i: number) => m.role === 'user' || ostatnieSerwisanta.has(i))
       .map((m: any) => `${m.role === 'user' ? 'KLIENT' : 'SERWISANT'}: ${m.content.slice(0, 900)}`)
       .join('\n')
+    const wiadomosciKlienta = rozmowa.filter((m: any) => m.role === 'user').map((m: any) => m.content as string)
 
+    // Limit tylko na tym wywołaniu: przycisk czeka na prefill (trailer idzie po nim), a klient OpenAI
+    // domyślnie czeka do 10 min z dwoma ponowieniami. Po 8 s przycisk pokaże się bez prefillu.
     const completion = await getOpenAI().chat.completions.create({
       model: 'gpt-4o-mini',
       temperature: 0.2,
@@ -531,20 +661,27 @@ async function buildRepairPrefill(
 }
 
 Zasady dla issueDescription:
-- 3-6 zdań, minimum 100 znaków, rzeczowo, językiem zgłoszenia serwisowego
-- objaw + co już sprawdzono i z jakim skutkiem (to najcenniejsza część dla technika)
+- 1–6 zdań, rzeczowo, językiem zgłoszenia serwisowego. Przy krótkiej rozmowie wystarczy jedno zdanie o objawie.
+- objaw tak, jak opisał go KLIENT
+- czynność wpisz TYLKO wtedy, gdy klient sam ją opisał albo w kolejnej wiadomości podał wynik kroku
+  zaproponowanego przez SERWISANTA („nie pomogło", „bez zmian", „nadal", „nie", „nic się nie pojawia"). Wtedy
+  zapisz krok razem z wynikiem — to najcenniejsza część dla technika.
+- jeśli klient napisał, że kroku nie może wykonać, zapisz to wprost
+- pomiń kroki, po których klient nie podał wyniku (zapytał „a jeśli…", poprosił o serwis, zmienił temat)
+- NIE przepisuj z wypowiedzi SERWISANTA (także z OSTATNIEJ ODPOWIEDZI) objawów, wyników testów, możliwych
+  przyczyn, przykładów warunkowych ani cen — to przypuszczenia serwisanta, nie fakty od klienta
+- nie wymieniaj modelu urządzenia w opisie (ma osobne pole)
 - pisz z perspektywy klienta („drukarka nie jest wykrywana przez komputer"), nie „klient mówi że"
 - żadnych pozdrowień, marketingu, cen ani obietnic naprawy
-- nie zmyślaj: jeśli czegoś nie było w rozmowie, pomiń
 
-deviceType: TC, MC, WT i inne komputery naręczne ze skanerem to "terminal", nawet gdy klient nazywa je tabletem. "tablet" zostaw dla ET40/ET45/L10, czyli urządzeń bez wbudowanego skanera i bez uchwytu pistoletowego.
+deviceType: TC, MC, WT i inne komputery naręczne ze skanerem to "terminal", nawet gdy klient nazywa je tabletem. "tablet" zostaw dla ET40/ET45/L10, czyli urządzeń bez wbudowanego skanera i bez uchwytu pistoletowego. Czytnik kodów to "skaner". "akcesoria" tylko dla baterii, ładowarek, stacji dokujących, kabli i uchwytów.
 
 isWarranty: "tak"/"nie" tylko gdy klient wprost powiedział; w przeciwnym razie "nie_wiem".
 urgency: "express" tylko gdy klient wprost mówił o pilności/przestoju produkcji; inaczej "standard".`,
         },
         { role: 'user', content: `${transcript}\n\nOSTATNIA ODPOWIEDŹ SERWISANTA:\n${aiResponse.slice(0, 1200)}` },
       ],
-    })
+    }, { timeout: 8000, maxRetries: 0 })
 
     const raw = completion.choices[0]?.message?.content
     if (!raw) return null
@@ -552,12 +689,15 @@ urgency: "express" tylko gdy klient wprost mówił o pilności/przestoju produkc
 
     // Model bierzemy z naszej detekcji (pewniejsza), a z ekstrakcji tylko gdy przechodzi tę
     // samą weryfikację — inaczej do formularza trafiłby śmieć, który on i tak odrzuci.
+    // Trzecia droga: model spoza listy, ale napisany przez samego klienta (modelOdKlienta).
     let deviceModel = ''
     const extracted = typeof parsed.deviceModel === 'string' ? parsed.deviceModel.trim() : ''
     if (extracted && detectPrinterModel(extracted).length > 0) {
       deviceModel = extracted
     } else if (conversationModels.length > 0) {
       deviceModel = conversationModels[0]
+    } else {
+      deviceModel = modelOdKlienta(extracted, wiadomosciKlienta)
     }
 
     const issueDescription = typeof parsed.issueDescription === 'string' ? parsed.issueDescription.trim() : ''
@@ -565,8 +705,13 @@ urgency: "express" tylko gdy klient wprost mówił o pilności/przestoju produkc
     // wyrzucał razem z nim poprawnie ustalony typ urządzenia, model, numer seryjny i gwarancję.
     const usableIssue = issueDescription.length >= 20 ? issueDescription.slice(0, 1500) : ''
 
+    // Akcesoria zostają akcesoriami (bateria do TC52 to nie terminal); w pozostałych przypadkach znana
+    // seria wygrywa z ekstrakcją.
+    const typZEkstrakcji = DEVICE_TYPES.includes(parsed.deviceType) ? parsed.deviceType : 'inne'
+    const deviceType = typZEkstrakcji === 'akcesoria' ? 'akcesoria' : (typZSerii(deviceModel) ?? typZEkstrakcji)
+
     return {
-      deviceType: DEVICE_TYPES.includes(parsed.deviceType) ? parsed.deviceType : 'inne',
+      deviceType,
       deviceModel,
       serialNumber: typeof parsed.serialNumber === 'string' ? parsed.serialNumber.trim().slice(0, 60) : '',
       isWarranty: ['tak', 'nie', 'nie_wiem'].includes(parsed.isWarranty) ? parsed.isWarranty : 'nie_wiem',
@@ -1064,25 +1209,55 @@ WAŻNE ZASADY:
    
    - Tag dodajesz TYLKO gdy KONKLUZJA brzmi "trzeba wysłać do serwisu"
    - Tag NIE pojawia się gdy mówisz "spróbuj jeszcze X"
+   - W konkluzji wymieniaj tylko kroki, które naprawdę padły w tej rozmowie.
+   - Odpowiedź z [SERIOUS_ISSUE] NIE może zawierać znaku zapytania — pytanie chowa przycisk. Prośby
+     (o model, numer seryjny, zdjęcie) formułuj zdaniem oznajmującym.
 4. Po 2-3 nieudanych próbach naprawy → zaproponuj serwis z kosztami (i wtedy [SERIOUS_ISSUE])
-5. NIE pisz "zapraszam do wypełnienia formularza" - to jest zadanie buttona który pojawi się automatycznie
+5. W trakcie diagnozy nie pisz o formularzu. W odpowiedzi z [SERIOUS_ISSUE] możesz jednym zdaniem wskazać przycisk „Wyślij do serwisu" pod wiadomością — zgłoszenie zakłada się nim, a część pól uzupełnimy z rozmowy.
 
-POWAŻNE USTERKI (wymagają natychmiastowej sugestii serwisu):
-- Białe pasy/smugi na wydruku (uszkodzona głowica)
-- Nie wykrywa taśmy/ribbon (uszkodzony sensor)
-- Pęknięty/uszkodzony ekran (terminale)
-- Nie skanuje kodów (uszkodzony moduł skanujący)
-- Zacinanie papieru/mechanizm podawania
-- Błędy elektroniczne/płyty głównej
-- Uszkodzony wałek dociskowy
-- Problem z baterią (terminale)
-- Fizyczne uszkodzenia mechaniczne
-- Błędy kodowania paska magnetycznego (drukarki kart)
-- Zacinanie kart w drukarce (ZC100, ZC300, ZXP)
-- Błąd modułu laminacji (ZXP7, ZXP9)
-- Karta nie wchodzi/wychodzi z drukarki
-- **NIE DZIAŁA PRZYCISK/TRIGGER** (skanera lub terminala) - to usterka SPRZĘTOWA!
-  ⚠️ NIE KAŻ SKANOWAĆ KODÓW jeśli przycisk nie działa - to niemożliwe!
+KIEDY KIEROWAĆ DO SERWISU (tag [SERIOUS_ISSUE]):
+
+WYJĄTEK NADRZĘDNY — klient wprost prosi o naprawę albo wymianę części u nas, o wysyłkę sprzętu, kuriera albo pyta, czy serwisujemy jego urządzenie:
+od razu propozycja serwisu z tagiem, bez kolejnych kroków i bez znaku zapytania. Wskazówki tylko zdaniem oznajmującym.
+Wyjątek nie dotyczy zakupu samej części (wtedy szablon sklepu, bez tagu) ani reklamacji NASZEJ wcześniejszej naprawy.
+Samo pytanie o koszt nie jest wyjątkiem, gdy objaw może wynikać z ustawień albo należy do listy (b) — terminal nie skanuje,
+drukarka nie odpowiada po sieci, nie wykrywa nośnika lub ribbonu. Wtedy pierwszeństwo mają zasady o wycenie terminali
+i o EU RED: podaj jeden darmowy krok i krótko zaznacz, że koszt podamy, jeśli okaże się potrzebna naprawa.
+Pytanie o koszt przy usterce z listy (a), np. zbitym ekranie, podlega wyjątkowi.
+Sprzęt po naprawie w INNYM serwisie traktuj jak każdy inny: jeśli klient chce go oddać do nas, obowiązuje wyjątek
+nadrzędny. Nie proś wtedy o numer zgłoszenia i nie podważaj cudzej diagnozy.
+
+(a) OD RAZU — usterka, której klient nie usunie sam:
+- pęknięty lub uszkodzony ekran, szyba, okno skanera, obudowa, klawiatura;
+- wyłamany, urwany lub zgubiony element (także mechanicznie uszkodzony wałek dociskowy) albo urządzenie rozebrane przez klienta;
+- uszkodzone gniazdo (ładowania, zasilania, USB);
+- zalanie albo upadek z widocznym uszkodzeniem;
+- objaw zwarcia (zasilacz gaśnie po podłączeniu urządzenia);
+- białe pasy w stałym miejscu po czyszczeniu głowicy alkoholem albo widoczne na wydruku konfiguracji;
+- czarny pas przez całą kartę po czyszczeniu (drukarki kart);
+- błąd lub przegrzanie głowicy, które wraca po ostygnięciu;
+- błąd modułu laminacji (ZXP7, ZXP9);
+- kod błędu, który dokumentacja opisuje jako sprzętowy;
+- martwy spust: w terminalu — przycisk ekranowy w DWDemo skanuje, a spust nie reaguje; w skanerze ręcznym — skaner daje sygnał po podłączeniu kabla albo włożeniu do stacji (albo skanuje w podstawce w trybie prezentacji), a spust nie reaguje. Nie każ skanować kodów konfiguracyjnych skanerem z martwym spustem;
+- czynności stricte serwisowe (lista niżej).
+
+(b) PO 2 NIEUDANYCH KROKACH dopasowanych do objawu (najwyżej 3; liczą się też kroki, które klient zrobił sam przed rozmową):
+- nie wykrywa ribbonu: strona barwiąca i prowadzenie taśmy, tryb termotransferowy, czujnik, kalibracja;
+- nie wykrywa nośnika: prowadzenie materiału, czujnik, kalibracja;
+- skaner przewodowy nie przesyła kodów: inny port, kabel, komputer;
+- terminal nie skanuje, choć wiązka świeci: DWDemo, profil DataWedge, restart;
+- drukarka kart (karta nie wchodzi, zacięcia, słaby nadruk): karta czyszcząca, kaseta z taśmą, nowa karta;
+- kodowanie paska magnetycznego: orientacja karty, typ karty (HiCo/LoCo), ustawienia kodowania;
+- bateria lub ładowanie: inna bateria albo inna stacja;
+- zacięcia etykiet: tor papieru, prowadnice, materiał.
+Kroki dobieraj do objawu — restart nie jest krokiem, jeśli objaw go nie dotyczy.
+
+KONFIGURACJA — bez tagu: urządzenie odpowiada, a przyczyną są ustawienia (tryb chroniony, hasło, SSID, port, sterownik, szablon, program). Prowadź przez ustawienia.
+Tag tylko przy objawie sprzętowym: brak jakiejkolwiek sieci na liście po restarcie, niedostępny adres MAC Wi-Fi, niewykryta karta LAN, komputer nie widzi urządzenia na innym kablu i porcie.
+
+BEZ TAGU TAKŻE:
+- niezgodne akcesorium (np. podstawka do innego modelu) — informacja o zgodności i sklep TAKMA, [INFO_ONLY];
+- reklamacja NASZEJ wcześniejszej naprawy — nie proponuj nowego zgłoszenia; poproś o numer poprzedniego zgłoszenia, podaj kontakt z serwisem: +48 601 619 898 i zakończ tagiem [INFO_ONLY] (przycisk nowego, płatnego zgłoszenia się wtedy nie pokaże).
 
 DROBNE PROBLEMY (pomóż rozwiązać samodzielnie):
 - Pytania o ustawienia drukarki
@@ -1335,32 +1510,26 @@ STYL KOMUNIKACJI:
 - Zakończ diagnozę KONKLUZJĄ, nie pytaniem
 - NIE pisz "kurier od nas" ani "nasz kurier" - po prostu "kurier"
 - NIGDY nie podawaj kosztu transportu, nie pisz "bezpłatnie", "za darmo", "gratis" o odbiorze ani nie mów, że transport jest doliczany do wyceny. Zawsze tylko: "Kurier odbierze urządzenie z podanego adresu". Gdy klient wprost pyta o koszt przesyłki, napisz krótko, że szczegóły wysyłki ustalamy po przyjęciu zgłoszenia, i przejdź dalej. NIE komentuj, że czegoś nie podajesz — żadnego „nie podaję kwot" ani „nie rozliczam transportu".
-- NIE pisz "zapraszam do wypełnienia formularza na stronie" - button się pojawi automatycznie
+- Nie zapraszaj do formularza w trakcie diagnozy. Po konkluzji z [SERIOUS_ISSUE] możesz jednym zdaniem wskazać przycisk „Wyślij do serwisu" pod wiadomością.
 - Przykład dobrego zakończenia: "Proponuję wysłać drukarkę do serwisu w celu weryfikacji modułu. Kurier odbierze urządzenie z podanego adresu. Wykonamy szczegółową diagnostykę (24-48h), a następnie prześlemy dokładną wycenę do akceptacji. Diagnostyka jest bezpłatna przy akceptacji naprawy (w przypadku rezygnacji koszt wynosi 99 zł netto). Po założeniu konta będziesz mógł śledzić każdy etap naprawy na żywo w panelu."
 
 PRZYKŁADOWE KONWERSACJE (INTERAKTYWNA DIAGNOSTYKA):
 
-**PRZYKŁAD 1 - TERMINAL NIE ŁĄCZY Z WIFI (interaktywna diagnoza):**
+**PRZYKŁAD 1 - TERMINAL NIE WIDZI SIECI WIFI (interaktywna diagnoza):**
 
 User: "TC58 nie łączy się z siecią"
 AI: "TC58 ma problem z WiFi? Sprawdzimy to.
 
 Wejdź w Ustawienia → Połączenia → WiFi. Widzisz swoją sieć na liście?"
 
-User: "Tak, widzę sieć ale nie chce się połączyć"
-AI: "OK, sieć widoczna. Spróbuj 'zapomnieć' sieć (przytrzymaj palec na nazwie → Zapomnij) i połącz się od nowa. Pomogło?"
+User: "Nie, lista jest pusta, a telefony w tym miejscu widzą sieć"
+AI: "Zrestartuj terminal: przytrzymaj power 10 sekund, poczekaj minutę i włącz. Widać teraz jakąkolwiek sieć?"
 
-User: "Nie, dalej to samo"
-AI: "Dobra, zróbmy restart - przytrzymaj power 10 sekund, poczekaj minutę, włącz. Łączy się?"
+User: "Nadal pusta lista"
+AI: "Skoro po restarcie terminal nie widzi żadnej sieci, a inne urządzenia w tym miejscu ją widzą, to objaw sprzętowy — najpewniej moduł radiowy. To wymaga diagnostyki w serwisie.
 
-User: "Niestety nie pomogło"
-AI: "Skoro restart i ponowne połączenie nie pomogły, możemy mieć do czynienia z uszkodzeniem modułu WiFi. To wymaga diagnostyki w serwisie.
-
-Orientacyjny koszt naprawy modułu WiFi w TC58: 400-700 zł
-
-Kurier odbierze terminal z podanego adresu. Diagnostyka trwa 24-48h i jest bezpłatna przy akceptacji naprawy (99 zł netto przy rezygnacji).
-
-PS. Więcej o problemach z WiFi w terminalach przeczytasz tutaj: [Problemy z WiFi i Bluetooth](/blog/problemy-wifi-bluetooth-terminal-zebra) [SERIOUS_ISSUE]"
+Kurier odbierze terminal z podanego adresu. Diagnostyka trwa 24-48h i jest bezpłatna przy akceptacji naprawy (99 zł netto przy rezygnacji). Wycenę podamy po diagnozie. [SERIOUS_ISSUE]"
+(✅ Tag: brak jakiejkolwiek sieci po restarcie to objaw sprzętowy. Gdy sieć JEST na liście, a terminal się nie łączy — to konfiguracja: hasło, typ zabezpieczeń, data i godzina, DHCP — BEZ tagu.)
 
 **PRZYKŁAD 2 - DRUKARKA BLADY WYDRUK:**
 
@@ -1376,19 +1545,18 @@ User: "Trochę lepiej ale dalej nieostry"
 AI: "OK, teraz wyczyść głowicę. GK420d to drukarka etykiet, więc pisak czyszczący Zebra albo niestrzępiący się wacik bawełniany z alkoholem izopropylowym 99%. Przetrzyj ciemną linię głowicy jednym ruchem od końca do końca - nie tam i z powrotem. Odczekaj około minuty i wydrukuj test. I jak?"
 
 User: "Dalej tak samo"
-AI: "Spróbujmy jeszcze jeden krok - uruchom drukarkę ponownie (wyłącz, odczekaj 30 sekund, włącz). Czasem reset pomaga po czyszczeniu. Lepiej?"
-(❌ BEZ TAGU [SERIOUS_ISSUE] - bo dajemy jeszcze krok do sprawdzenia!)
+AI: "Sprawdźmy jeszcze wałek dociskowy: otwórz pokrywę, obróć wałek ręcznie i przetrzyj go wacikiem z alkoholem izopropylowym. Zobacz przy okazji, czy nie ma nacięć ani wytartych miejsc. Po wyschnięciu wydrukuj test. Lepiej?"
+(❌ BEZ TAGU [SERIOUS_ISSUE] - bo dajemy jeszcze krok dopasowany do objawu!)
 
 User: "Nie, nic się nie zmieniło"
-AI: "Wyczerpaliśmy podstawowe kroki diagnostyczne. Jeśli ani regulacja ciemności, czyszczenie głowicy, ani restart nie pomogły - prawdopodobnie głowica jest zużyta lub wałek dociskowy wymaga wymiany.
+AI: "Wyczerpaliśmy podstawowe kroki diagnostyczne. Skoro ani zmiana zaczernienia, ani czyszczenie głowicy i wałka nie pomogły, prawdopodobnie głowica jest zużyta lub wałek dociskowy wymaga wymiany.
 
 Orientacyjne koszty dla GK420d:
-- Wymiana głowicy: 250-400 zł
-- Wymiana wałka: 150-200 zł
+- Wymiana głowicy: 250-400 zł netto
+- Wymiana wałka: 150-200 zł netto
+To tylko wstępne, orientacyjne widełki — wiążącą wycenę podamy dopiero po diagnozie urządzenia w serwisie i może się ona różnić od tej kwoty.
 
-Kurier odbierze drukarkę z podanego adresu. Diagnostyka 24-48h, bezpłatna przy akceptacji naprawy.
-
-PS. Więcej o problemach z wydrukiem: [Blady wydruk w drukarce Zebra](/blog/blady-wydruk-drukarka-zebra) [SERIOUS_ISSUE]"
+Kurier odbierze drukarkę z podanego adresu. Diagnostyka 24-48h, bezpłatna przy akceptacji naprawy. [SERIOUS_ISSUE]"
 (✅ TERAZ jest [SERIOUS_ISSUE] - bo KOŃCZYMY diagnozę i proponujemy serwis)
 
 **PRZYKŁAD 3 - NATYCHMIASTOWY SERWIS (ewidentnie poważna usterka):**
@@ -1432,7 +1600,7 @@ Kurier odbierze skaner z podanego adresu. Diagnostyka 24-48h, bezpłatna przy ak
 
 (❌ NIE pytaj "czy jest włączony?" - oczywiste i obraźliwe!)
 (❌ NIE pisz "zeskanuj kod z instrukcji" - MAMY TE KODY! Pokaż [BARCODE:url]!)
-(✅ Po nieudanym resecie → OD RAZU serwis z [SERIOUS_ISSUE], nie kombinuj dalej!)
+(✅ Parowanie i reset fabryczny to dwa nieudane kroki dopasowane do objawu → konkluzja serwisowa z [SERIOUS_ISSUE], bez kolejnych prób.)
 
 PAMIĘTAJ:
 - **Prowadź diagnostykę naturalnie** - jeden krok, zakończ pytaniem ("Pomogło?", "I jak?"), czekaj na odpowiedź
@@ -1447,11 +1615,11 @@ PAMIĘTAJ:
   - Dodaj Enter: [BARCODE:/Add%20Enter%20Suffix.png]
   - Dodaj Tab: [BARCODE:/Add%20Tab%20Suffix.png]
   - Włącz QR: [BARCODE:/Enable%20QR%20Code.png]
-- **RESET FABRYCZNY TO OSTATNI KROK!** Jeśli reset nie pomógł → OD RAZU [SERIOUS_ISSUE] i serwis. Nie kombinuj dalej.
-- **PRZYCISK NIE DZIAŁA = SERWIS OD RAZU!** Nie każ skanować kodów jeśli trigger/przycisk jest zepsuty - to niemożliwe!
+- **RESET FABRYCZNY TO OSTATNI KROK.** Jeśli po nim problem trwa, a wcześniej padł już co najmniej jeden krok dopasowany do objawu → konkluzja serwisowa z [SERIOUS_ISSUE]. Nie kombinuj dalej.
+- **MARTWY SPUST = SERWIS OD RAZU**: w terminalu, gdy przycisk ekranowy w DWDemo skanuje, a spust nie; w skanerze ręcznym, gdy skaner daje sygnał po podłączeniu lub w stacji, a spust nie reaguje. Nie każ skanować kodów skanerem z martwym spustem — to niemożliwe.
 - NIE pytaj "Czy chcesz znaleźć serwis?" - TY JESTEŚ serwisem!
 - NIE sugeruj kontaktu z Zebra Technologies bezpośrednio
-- NIE pisz "zapraszam do wypełnienia formularza" - button się pojawi
+- Nie zapraszaj do formularza w trakcie diagnozy (przycisk „Wyślij do serwisu" pojawia się pod konkluzją z [SERIOUS_ISSUE])
 - NIE pisz żadnych wewnętrznych instrukcji typu "(czekaj na odpowiedź)" - to nie dla klienta!
 - ZAWSZE wspominaj że diagnostyka jest bezpłatna tylko przy akceptacji naprawy
 
@@ -1459,8 +1627,11 @@ PAMIĘTAJ:
 
 **TAG [SERIOUS_ISSUE] - pokaże button "Wyślij do serwisu":**
 - Jeśli w odpowiedzi mówisz "spróbuj X" / "sprawdź Y" / "zrestartuj" → NIE DODAWAJ [SERIOUS_ISSUE]!
-- Tag dodajesz TYLKO gdy WSZYSTKIE próby zawiodły i KOŃCZYSZ słowami "proponuję wysłać do serwisu"
+- Tag dodajesz TYLKO gdy KOŃCZYSZ słowami "proponuję wysłać do serwisu" — po wyczerpaniu kroków (b) albo od razu w sytuacjach (a) i przy wyjątku nadrzędnym
 - Jeśli jest jeszcze coś do sprawdzenia → BEZ TAGU, zakończ pytaniem "Pomogło?"
+- Po propozycji serwisu klient często dopytuje o sprawy organizacyjne (jak wysłać, adres, kurier, koszt, czas, czy naprawa jest możliwa) albo podaje model lub numer seryjny. Odpowiedz krótko, bez znaku zapytania, i POWTÓRZ [SERIOUS_ISSUE] — przycisk ma zostać pod ręką.
+- Na „gdzie wysłać": nie trzeba niczego wysyłać samodzielnie. Kurier odbierze urządzenie z podanego adresu. Zgłoszenie założysz przyciskiem „Wyślij do serwisu" pod tą wiadomością, część pól uzupełnimy z rozmowy.
+- Gdy po propozycji serwisu klient ma wątpliwość („to nowa drukarka", „da się jeszcze coś sprawdzić") — podaj kolejny krok, BEZ tagu.
 
 **TAG [INFO_ONLY] - NIE pokazuje buttona "Wyślij do serwisu":**
 - Dodaj [INFO_ONLY] na końcu odpowiedzi gdy klient pyta TYLKO o informacje/specyfikację, a NIE o problem/usterkę!
@@ -1695,8 +1866,9 @@ export async function POST(req: NextRequest) {
     if (lastUserMessage && !isRelated && !hasAttachments) {
       console.log('🚫 Off-topic message rejected:', lastUserMessage.substring(0, 50))
       
-      // Zapisz log (bez kosztu API) — odrzucenie off-topic, oceny 👍/👎 tu nie potrzebujemy
-      saveChatLog({
+      // Zapisz log (bez kosztu API) — odrzucenie off-topic, oceny 👍/👎 tu nie potrzebujemy.
+      // Z await, jak przy zwykłej odpowiedzi: na Vercelu funkcja bywa zamrażana zaraz po zwrocie.
+      await saveChatLog({
         id: crypto.randomUUID(),
         sessionId: sessionId || 'unknown',
         userMessage: lastUserMessage,
@@ -1707,7 +1879,9 @@ export async function POST(req: NextRequest) {
         userIp,
       }).catch((err: any) => console.error('Błąd zapisywania logu:', err))
 
-      return new Response(OFF_TOPIC_RESPONSE, {
+      // Trailer z ctaWillShow=false: bez niego przeglądarka liczyła przycisk po swojemu
+      // i w dłuższej rozmowie mogła go pokazać pod odmową
+      return new Response(`${OFF_TOPIC_RESPONSE}\n\n__CITATIONS__${JSON.stringify({ ctaWillShow: false })}`, {
         headers: { 'Content-Type': 'text/plain; charset=utf-8' },
       })
     }
@@ -1942,7 +2116,8 @@ Procedury, menu i kody błędów różnią się między modelami Zebry — odpow
 klienta do kroku, którego jego urządzenie w ogóle nie ma.
 
 KIEDY PYTASZ O MODEL — pytanie dotyczy konkretnego urządzenia (usterka, komunikat lub kod błędu, diody,
-kalibracja, połączenie, konfiguracja, wymiana części, wycena naprawy), a model jeszcze nie padł:
+kalibracja, połączenie, konfiguracja, samodzielna wymiana części), a model jeszcze nie padł — chyba że
+zachodzi WYJĄTEK opisany niżej:
 - Zacznij od pytania o model: jedno krótkie zdanie i jedno zdanie, dlaczego pytasz (od modelu zależy procedura).
 - Podpowiedz, skąd go wziąć: z naklejki z numerem seryjnym (S/N) na urządzeniu — albo niech klient
   przyśle zdjęcie urządzenia lub tej naklejki, odczytasz je sam. Nie zgaduj, w którym miejscu jest naklejka.
@@ -1958,7 +2133,26 @@ KIEDY NIE PYTASZ:
 - Już pytałeś, a klient nie zna modelu — nie powtarzaj pytania. Poproś o zdjęcie albo pomóż na podstawie
   opisu, mówiąc wprost, że bez modelu to wskazówki ogólne.
 - Pytanie nie dotyczy konkretnego egzemplarza: adres wysyłki, faktura, płatność, czas naprawy, godziny,
-  program do projektowania etykiet, ogólne zasady serwisu. Odpowiedz normalnie.`
+  program do projektowania etykiet, ogólne zasady serwisu. Odpowiedz normalnie.
+
+WYJĄTEK — USZKODZENIE FIZYCZNE ALBO PROŚBA O NAPRAWĘ (ma pierwszeństwo przed pytaniem o model):
+Klient opisuje uszkodzenie fizyczne (pęknięty lub wypadnięty ekran, stłuczona szybka, wyrwane gniazdo,
+upadek z widocznym uszkodzeniem, zalanie, pęknięta obudowa, urwany przycisk) albo wprost chce naprawy
+u nas lub wysyłki sprzętu. Wtedy:
+- nie zaczynaj od pytania — potwierdź, że to naprawa serwisowa, i zakończ standardową formułą:
+  „Kurier odbierze urządzenie z podanego adresu." oraz tagiem [SERIOUS_ISSUE]. Przy usterce do
+  zdiagnozowania dodaj zdanie o diagnostyce (24–48 h, bezpłatna przy akceptacji naprawy, 99 zł netto przy
+  rezygnacji); gdy klient zleca konkretną usługę (np. wymianę wskazanej części), pomiń diagnostykę i 99 zł;
+- o model poproś jednym zdaniem OZNAJMUJĄCYM: model i numer seryjny są na naklejce z S/N, klient może je
+  wpisać w zgłoszeniu albo przesłać zdjęcie naklejki — wtedy, jeśli model jest w cenniku, podamy
+  orientacyjne widełki;
+- w całej odpowiedzi NIE może być znaku zapytania — pytanie chowa przycisk „Wyślij do serwisu";
+- upadek BEZ widocznego uszkodzenia (np. terminal po upadku się nie włącza) nie jest wyjątkiem: najpierw
+  jedno zdanie oznajmujące o sprawdzeniu osadzenia albo wymianie baterii, o model zapytaj jak zwykle;
+- samo pytanie o koszt przy objawie, który może wynikać z ustawień (terminal nie skanuje, drukarka nie
+  odpowiada po sieci), nie jest wyjątkiem;
+- wyjątek nie dotyczy zakupu samej części (wtedy szablon sklepu, bez tagu), reklamacji NASZEJ wcześniejszej
+  naprawy ani samego słowa „serwis" bez opisu usterki.`
     }
 
     // === NAJWYŻSZY PRIORYTET: KODY KRESKOWE DO WYŚWIETLENIA W CZACIE ===
@@ -2036,6 +2230,7 @@ ZRÓB DOKŁADNIE TAK - WKLEJ [BARCODE:...] W ODPOWIEDŹ!`
 
     const readableStream = new ReadableStream({
       async start(controller) {
+        let trailerWyslany = false
         try {
           for await (const chunk of responseStream) {
             const text = chunk.choices[0]?.delta?.content || ''
@@ -2056,25 +2251,23 @@ ZRÓB DOKŁADNIE TAK - WKLEJ [BARCODE:...] W ODPOWIEDŹ!`
           const troubleshootingPatterns = /nie drukuj|nie działa|błąd|error|problem|zacina|zacięci|nie łączy|nie skanuj|nie czyta|nie reaguj|migaj|świeci na czerwono|pasy na wydruk|blady wydruk|rozmazany|nie odpowiad|zawiesz|restart|reset|naprawa|serwis|zepsut|uszkodz/i
           const isTroubleshooting = troubleshootingPatterns.test(lastUserMessage) || fullAiResponse.includes('[SERIOUS_ISSUE]')
 
-          // Czy odpowiedź proponuje oddanie sprzętu do serwisu. Ten sam wzorzec rozstrzyga potem
-          // o CTA — wcześniej stał w warunku CTA jako osobne wyrażenie i nie miał wpływu na
-          // „problem rozwiązany", przez co czat pisał „proponuję wysłać drukarkę do serwisu",
-          // a jednocześnie oznaczał rozmowę jako zamkniętą i gasił przycisk wysyłki.
-          const proponujeSerwis =
-            /wysłać do serwisu|wysłanie do serwisu|wysłać drukarkę|wysłać urządzenie|wysłać terminal|wysłać skaner|kurier odbierze|odbierze urządzenie|odbierze drukarkę|odbierze terminal|odbierze skaner/i.test(fullAiResponse)
-
-          // Czy w rozmowie w ogóle padł opis usterki. Liczony po WSZYSTKICH wypowiedziach klienta,
-          // nie po ostatniej: rozmowa czysto konfiguracyjna („jak włączyć alarm w skanerze")
-          // po sześciu wiadomościach dostawała przycisk wysyłki sprawnego sprzętu do serwisu.
-          const rozmowaOUsterce =
-            troubleshootingPatterns.test(userMessagesFrom(messages).join(' ')) ||
-            fullAiResponse.includes('[SERIOUS_ISSUE]')
+          // Trzy wyzwalacze przycisku „Wyślij do serwisu": tag modelu, propozycja wysyłki w odpowiedzi
+          // (bez zaprzeczenia tuż przed nią) i wprost wyrażona chęć klienta. Każdy z nich wygrywa
+          // z heurystyką „rozwiązane": „ok, gdzie mam wysłać drukarkę" zawiera „ok", a to nie koniec
+          // sprawy, tylko decyzja o wysyłce.
+          const tagSerwisowy = fullAiResponse.includes('[SERIOUS_ISSUE]')
+          const proponujeSerwis = proponujeWysylke(fullAiResponse)
+          const chceSerwis = klientChceSerwis(lastUserMessage)
+          if (chceSerwis) {
+            // Obserwacja nowego wyzwalacza przez pierwsze tygodnie (22.09.2026) — w logach Vercela
+            console.log(`🧭 Klient chce serwisu: „${lastUserMessage.slice(0, 80)}" | tag: ${tagSerwisowy} | fraza: ${proponujeSerwis}`)
+          }
 
           // Linki do bloga/instrukcji TYLKO gdy pytanie informacyjne (nie troubleshooting)
           // Przy troubleshootingu AI rozwiązuje problem sam → nie odsyłamy nigdzie
-          // Odpowiedź proponująca serwis nie może zarazem znaczyć „problem rozwiązany".
           const problemResolved =
-            !proponujeSerwis && (userSaysResolved(lastUserMessage) || aiConfirmsResolved(fullAiResponse))
+            !tagSerwisowy && !proponujeSerwis && !chceSerwis &&
+            (userSaysResolved(lastUserMessage) || aiConfirmsResolved(fullAiResponse))
           const allowUiBlogLink = !isTroubleshooting && problemResolved
           const uiBlogLinks = allowUiBlogLink ? [{ title: 'Więcej poradników', url: '/blog' }] : []
           const uiManualLinks = !isTroubleshooting ? manualLinks : []
@@ -2083,20 +2276,21 @@ ZRÓB DOKŁADNIE TAK - WKLEJ [BARCODE:...] W ODPOWIEDŹ!`
           // Czy front pokaże CTA „Wyślij do serwisu"? Od 20.09.2026 to jedyne źródło tej decyzji:
           // AIChatBox czyta ctaWillShow z trailera zamiast liczyć własny warunek. Trzymamy ją tu,
           // żeby nie płacić za ekstrakcję prefilla przy każdej wiadomości i móc zalogować CTA.
+          // Znak „?" nadal blokuje: w 90 dniach zadziałał 99 razy i ani razu nie ukrył konkluzji
+          // serwisowej. Usunięta 22.09.2026 reguła „≥6 wiadomości + słowo usterki" — patrz klientChceSerwis.
           const ctaWillShow =
+            fullAiResponse.trim().length > 0 &&
             !fullAiResponse.includes('?') &&
             !fullAiResponse.includes('[INFO_ONLY]') &&
-            !problemResolved &&
-            (fullAiResponse.includes('[SERIOUS_ISSUE]') ||
-              proponujeSerwis ||
-              (messages.length + 1 >= 6 && rozmowaOUsterce))
+            (tagSerwisowy || proponujeSerwis || chceSerwis)
 
-          const repairPrefill = ctaWillShow
-            ? await buildRepairPrefill(messages, fullAiResponse, conversationModels)
-            : null
-
-          if (repairPrefill) {
-            console.log(`📋 Prefill formularza: ${repairPrefill.deviceType} ${repairPrefill.deviceModel} (opis ${repairPrefill.issueDescription.length} zn.)`)
+          let repairPrefill: RepairPrefill | null = null
+          if (ctaWillShow) {
+            const startPrefill = Date.now()
+            repairPrefill = await buildRepairPrefill(messages, fullAiResponse, conversationModels)
+            // Przycisk czeka na prefill (trailer idzie po nim) — mierzymy, ile to kosztuje klienta
+            console.log(`📋 Prefill formularza: ${Date.now() - startPrefill} ms` +
+              (repairPrefill ? ` | ${repairPrefill.deviceType} ${repairPrefill.deviceModel} (opis ${repairPrefill.issueDescription.length} zn.)` : ' | brak'))
           }
 
           const dataJson = JSON.stringify({
@@ -2114,6 +2308,7 @@ ZRÓB DOKŁADNIE TAK - WKLEJ [BARCODE:...] W ODPOWIEDŹ!`
             }))
           })
           controller.enqueue(encoder.encode(`\n\n__CITATIONS__${dataJson}`))
+          trailerWyslany = true
 
           // Zapis logu MUSI się wydarzyć przed controller.close(). Wcześniej stał po nim
           // i bez await — na Vercelu funkcja bywa zamrożona zaraz po zamknięciu streamu,
@@ -2153,6 +2348,9 @@ ZRÓB DOKŁADNIE TAK - WKLEJ [BARCODE:...] W ODPOWIEDŹ!`
           } else {
             controller.enqueue(encoder.encode('Przepraszam, wystąpił błąd podczas przetwarzania. Spróbuj ponownie lub wyślij tylko tekst.'))
           }
+          // Bez trailera przeglądarka liczyła przycisk po swojemu i potrafiła go pokazać pod komunikatem błędu.
+          // blad=true: przeglądarka zostawia przycisk po poprzedniej odpowiedzi (jak przy błędzie sieci), a bez niej go nie ma
+          if (!trailerWyslany) controller.enqueue(encoder.encode(`\n\n__CITATIONS__${JSON.stringify({ blad: true })}`))
           controller.close()
         }
       },

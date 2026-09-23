@@ -20,6 +20,22 @@ export async function GET(req: NextRequest) {
     const { searchParams } = new URL(req.url)
     const filter = searchParams.get('filter') || 'unreviewed'
 
+    // Cała rozmowa jednej sesji — do podglądu przy zgłoszeniu (repair_requests.chat_session_id)
+    const session = searchParams.get('session')
+    if (session) {
+      if (!/^[\w.-]{6,80}$/.test(session)) {
+        return NextResponse.json({ error: 'Nieprawidłowa sesja' }, { status: 400 })
+      }
+      const { data: logs, error } = await supabase
+        .from('chat_logs')
+        .select('id, created_at, user_message, ai_response, detected_model, model_used')
+        .eq('session_id', session)
+        .order('created_at', { ascending: true })
+        .limit(100)
+      if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+      return NextResponse.json({ logs })
+    }
+
     // Build query based on filter
     let query = supabase
       .from('chat_logs')

@@ -207,6 +207,20 @@ export async function POST(request: NextRequest) {
 
     console.log('✅ Request created:', newRequest.id)
 
+    // Powiązanie z rozmową z czatem (technik widzi przebieg diagnozy). Osobny update PO utworzeniu
+    // zgłoszenia, a nie pole w insercie: brak kolumny (nieuruchomiona supabase-cta-formularz.sql)
+    // albo inny błąd nie może zablokować zgłoszenia klientowi — tylko go logujemy.
+    const chatSessionId = String(formData.get('chatSessionId') || '')
+    if (/^[\w.-]{6,80}$/.test(chatSessionId)) {
+      const { error: bladPowiazania } = await supabase
+        .from('repair_requests')
+        .update({ chat_session_id: chatSessionId })
+        .eq('id', newRequest.id)
+      if (bladPowiazania) {
+        console.warn('⚠️ Nie powiązano zgłoszenia z rozmową (migracja supabase-cta-formularz.sql?):', bladPowiazania.code, bladPowiazania.message)
+      }
+    }
+
     // 1b. Auto-rejestracja — utwórz konto jeśli nie istnieje
     let generatedPassword: string | undefined
     try {

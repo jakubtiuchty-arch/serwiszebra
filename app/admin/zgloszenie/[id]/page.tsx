@@ -70,6 +70,59 @@ interface RepairRequest {
   price_notes: string | null
   // Notatka warsztatowa — API wycina ją z odpowiedzi dla wszystkich poza adminem
   internal_notes: string | null
+  /** Sesja czatu z asystentem, po której klient wysłał zgłoszenie (od 23.09.2026) */
+  chat_session_id?: string | null
+}
+
+// Przebieg rozmowy z asystentem przed zgłoszeniem — technik widzi, co klient już sprawdził i co czat
+// mu doradził. Ładowane dopiero na kliknięcie, bo większość zgłoszeń nie ma rozmowy.
+function RozmowaZAsystentem({ sessionId }: { sessionId: string }) {
+  const [tury, setTury] = useState<Array<{ id: string; created_at: string; user_message: string; ai_response: string }> | null>(null)
+  const [laduje, setLaduje] = useState(false)
+  const [blad, setBlad] = useState<string | null>(null)
+
+  const pokaz = async () => {
+    setLaduje(true)
+    setBlad(null)
+    try {
+      const res = await fetch(`/api/chat-logs?session=${encodeURIComponent(sessionId)}`)
+      const dane = await res.json()
+      if (!res.ok) throw new Error(dane.error || `HTTP ${res.status}`)
+      setTury(dane.logs || [])
+    } catch (e: any) {
+      setBlad(e?.message || 'Nie udało się pobrać rozmowy')
+    } finally {
+      setLaduje(false)
+    }
+  }
+
+  const bezTagow = (t: string) =>
+    (t || '').replace(/\[SERIOUS_ISSUE\]|\[INFO_ONLY\]/g, '').replace(/\n\n__CITATIONS__[\s\S]*$/, '').trim()
+
+  return (
+    <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow border border-gray-200 p-4">
+      <div className="flex items-center justify-between mb-2">
+        <h2 className="text-sm font-semibold text-gray-900">Rozmowa z asystentem przed zgłoszeniem</h2>
+        {tury === null && (
+          <button onClick={pokaz} disabled={laduje} className="text-xs text-blue-700 hover:underline disabled:opacity-50">
+            {laduje ? 'Ładuję…' : 'Pokaż rozmowę'}
+          </button>
+        )}
+      </div>
+      {blad && <p className="text-xs text-red-600">{blad}</p>}
+      {tury && tury.length === 0 && <p className="text-xs text-gray-500">Brak zapisu rozmowy dla tej sesji.</p>}
+      {tury && tury.length > 0 && (
+        <div className="space-y-3 max-h-96 overflow-y-auto text-sm">
+          {tury.map((t) => (
+            <div key={t.id} className="space-y-1">
+              <p className="text-gray-900"><span className="font-semibold">Klient:</span> {t.user_message}</p>
+              <p className="text-gray-600 whitespace-pre-wrap"><span className="font-semibold text-gray-700">Asystent:</span> {bezTagow(t.ai_response)}</p>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  )
 }
 
 interface StatusHistory {
@@ -690,6 +743,8 @@ export default function AdminRepairDetailPage() {
               </div>
               <p className="text-sm text-gray-700 whitespace-pre-wrap leading-relaxed">{repair.issue_description}</p>
             </div>
+
+            {repair.chat_session_id && <RozmowaZAsystentem sessionId={repair.chat_session_id} />}
 
             {/* Dane użytkownika */}
             <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow border border-gray-200 p-4">

@@ -33,9 +33,9 @@ const kod = [
   .replace(/\)\s*:\s*boolean\s*\{/g, ') {')
   .replace(/\)!/g, ')')
 
-const { userSaysResolved, aiConfirmsResolved, isManipulationAttempt, detectScannerConfigQuery, isZebraRelated } =
+const { userSaysResolved, aiConfirmsResolved, isManipulationAttempt, detectScannerConfigQuery, isZebraRelated, klientChceSerwis, proponujeWysylke } =
   await import(`data:text/javascript,${encodeURIComponent(
-    kod + '\nexport { userSaysResolved, aiConfirmsResolved, isManipulationAttempt, detectScannerConfigQuery, isZebraRelated }'
+    kod + '\nexport { userSaysResolved, aiConfirmsResolved, isManipulationAttempt, detectScannerConfigQuery, isZebraRelated, klientChceSerwis, proponujeWysylke }'
   )}`)
 
 let zaliczone = 0
@@ -167,43 +167,32 @@ for (const z of [
 ]) sprawdz('isZebraRelated(krotka)', isZebraRelated(z), false, z)
 
 // --- runda 3: flagi zgodne z treścią odpowiedzi (test produkcyjny 20.09.2026) ------
-// Wzorce wyciągamy ze źródła trasy, żeby test pilnował tego, co naprawdę jedzie na produkcję.
-const wzorzec = (nazwa) => {
-  const m = src.match(new RegExp(`const ${nazwa} =\\s*\\n?\\s*(/.+?/[a-z]*)\\.test`, 's'))
-  if (!m) throw new Error(`Nie znaleziono wzorca ${nazwa}`)
-  const [, ciało, flagi] = m[1].match(/^\/(.*)\/([a-z]*)$/s)
-  return new RegExp(ciało, flagi)
-}
-const RE_PROPONUJE_SERWIS = wzorzec('proponujeSerwis')
-const RE_TROUBLESHOOTING = (() => {
-  const m = src.match(/const troubleshootingPatterns = \/(.+?)\/([a-z]*)\n/)
-  return new RegExp(m[1], m[2])
-})()
+// Funkcje wycinamy ze źródła trasy, żeby test pilnował tego, co naprawdę jedzie na produkcję.
 
 // Odpowiedź, która każe oddać sprzęt, nie może zarazem znaczyć „problem rozwiązany"
 for (const z of [
   'Proponuję wysłać drukarkę do serwisu na weryfikację mechanizmu poboru kart.',
   'Kurier odbierze urządzenie z podanego adresu.',
   'Najlepiej wysłać terminal do serwisu, moduł skanujący wygląda na uszkodzony.',
-]) sprawdz('proponujeSerwis', RE_PROPONUJE_SERWIS.test(z), true, z)
+]) sprawdz('proponujeWysylke', proponujeWysylke(z), true, z)
 
 for (const z of [
   'Podnieś zaczernienie o dwa stopnie i sprawdź wydruk.',
   'Wyczyść głowicę alkoholem izopropylowym.',
-]) sprawdz('proponujeSerwis', RE_PROPONUJE_SERWIS.test(z), false, z)
+]) sprawdz('proponujeWysylke', proponujeWysylke(z), false, z)
 
-// Rozmowa o usterce kontra rozmowa czysto konfiguracyjna — liczone po wszystkich wypowiedziach
-const rozmowaUsterka = ['drukarka ZD421 nie drukuje', 'wyczyściłem głowicę', 'dalej nic']
-const rozmowaKonfiguracja = ['jak ustawić alarm w skanerze DS2278 przy oddaleniu od bazki', 'tak mam kompa w biurze', 'dzieki wielkie']
-sprawdz('rozmowaOUsterce', RE_TROUBLESHOOTING.test(rozmowaUsterka.join(' ')), true, rozmowaUsterka.join(' | '))
-sprawdz('rozmowaOUsterce', RE_TROUBLESHOOTING.test(rozmowaKonfiguracja.join(' ')), false, rozmowaKonfiguracja.join(' | '))
+// Reguła „≥6 wiadomości + słowo usterki w historii" usunięta 22.09.2026 (runda 8) — nie może wrócić
+sprawdz('ctaWillShow bez reguły 6 wiadomości', /messages\.length \+ 1 >= 6/.test(src) || /rozmowaOUsterce/.test(src), false, 'route.ts')
 
 // Prompt nie może obiecywać darmowego transportu ani podawać jego kosztu
 // tylko zdanie o kurierze, do pierwszej kropki — dalej bywa mowa o bezpłatnej diagnostyce,
 // co jest osobną i prawdziwą informacją
-const zdaniaOKurierze = src.match(/Kurier odbier[^.\n"`]*/g) || []
-for (const z of zdaniaOKurierze) {
-  sprawdz('prompt: brak kosztów transportu', /bezpłatn|za darmo|gratis|\d+\s*zł/i.test(z), false, z.slice(0, 70))
+for (const m of src.matchAll(/kurier odbier/gi)) {
+  const poczatek = Math.max(src.lastIndexOf('.', m.index - 1), src.lastIndexOf('\n', m.index - 1)) + 1
+  const reszta = src.slice(m.index)
+  const koniec = reszta.search(/[.\n]/)
+  const zdanie = src.slice(poczatek, m.index + (koniec < 0 ? reszta.length : koniec))
+  sprawdz('prompt: brak kosztów transportu', /bezpłatn|za darmo|gratis|\d+\s*zł/i.test(zdanie), false, zdanie.slice(0, 70))
 }
 sprawdz('prompt: jest zakaz pisania o transporcie',
   /NIGDY nie podawaj kosztu transportu/.test(src), true, 'reguła w prompcie')
@@ -439,6 +428,121 @@ for (const z of [
   'daj mi poradę finansową',
   'co sądzisz o partii politycznej',
 ]) sprawdz('isManipulationAttempt(poza tematem)', isManipulationAttempt(z), true, z)
+
+// --- runda 8: przycisk „Wyślij do serwisu" (analiza 192 rozmów, 22–23.09.2026) ---
+// Reguła „≥6 wiadomości + słowo usterki" dała 22 pokazania, 19 błędnych i zero kliknięć. Zastąpił ją
+// trzeci wyzwalacz: klient sam chce oddać sprzęt. Zdania to parafrazy — repo jest publiczne.
+for (const z of [
+  'gdzie mam wysłać drukarkę do naprawy',
+  'gdzie wyslac',
+  'podaj adres gdzie wyslac drukarke na naprawe',
+  'podajcie adres serwisu',
+  'ile kosztuje naprawa takiego terminala',
+  'koszt wymiany ekranu w tc21',
+  'zamówcie kuriera po drukarkę',
+  'chcę oddać terminal do serwisu',
+  'wysyłam do was skaner',
+  'czy serwisujecie ZT410',
+  'potrzebujemy urządzenia zastępczego na czas naprawy',
+  'przyjedzcie i zabierzcie to dzisiaj',
+  'wymiana głowicy w zd421 ile to kosztuje',
+  'naprawa gniazda ładowania',
+  'chcę zlecić naprawę',
+  'mogę przesłać drukarkę kurierem',
+  'odeślę do was sprzęt',
+  'W ZD421 nie działa, gdzie ją wysłać?',
+  'ile bedzie kosztowac naprawa',
+  'kurier moze odebrac jutro?',
+  // recenzja 23.09.2026: objaw „nie wysyła" to nie odmowa; „ok"/„super" to nie „działa"; zastrzeżenie po „działa"
+  'ok, wyślę drukarkę do serwisu',
+  'super, to wyślę do was',
+  'drukarka działa, ale drukuje pasy, chcę wysłać do serwisu',
+  'działa tylko na zasilaczu, wyślę do serwisu',
+  'skaner nie wysyła kodów do komputera, sprawdziłem inny port i kabel, chcę go oddać do serwisu',
+  'terminal nie wysyła danych do systemu, gdzie mogę go wysłać do naprawy',
+  'czy możecie naprawić moją drukarkę',
+  'chciałbym zgłosić naprawę',
+  'proszę o kuriera',
+  'na jaki adres wysłać',
+  'przesyłam drukarkę do serwisu',
+]) sprawdz('klientChceSerwis(tak)', klientChceSerwis(z), true, z)
+
+for (const z of [
+  'jak wysłać plik ZPL do drukarki',
+  'nie chcę oddawać drukarki do serwisu, pomóż',
+  'po wymianie głowicy drukarka dalej drukuje blado',
+  'etykiety się nie odklejają, ile kosztuje rolka',
+  'podaj adres IP drukarki',
+  'sam wymienię głowicę, jak to zrobić',
+  'jak wymienić wałek w zd420',
+  'drukarka wróciła z serwisu i dalej to samo',
+  'czy mogę wysłać zdjęcie błędu',
+  'jak przesłać dane z terminala do komputera',
+  'ok dzięki',
+  'wymiana taśmy ile to kosztuje',
+  'chcę kupić głowicę do zd421',
+  'kontrolki ok i etykiety testowe wyszły',
+  'nie wysyłajcie kuriera, już działa',
+  'jest możliwość wyceny bez wysyłania terminala do naprawy',
+  'terminal miał wymieniane baterie i dalej się restartuje',
+  'po waszej naprawie głowicy znowu są pasy',
+  'drukarka wróciła z serwisu, a wymiana wałka nic nie dała',
+  'reklamacja naprawy ekranu z zeszłego miesiąca',
+  // recenzja 23.09.2026: zaprzeczenia bezosobowe, wzmianka przy działającym urządzeniu, transmisja do drukarki
+  'już działa, nie trzeba wysyłać do serwisu',
+  'JUZ DZIALA, NIE TRZEBA WYSYLAC DO SERWISU',
+  'ok działa, nie ma sensu wysyłać do serwisu',
+  'super, działa. nie będzie potrzeby wysyłać do serwisu.',
+  'dzięki, już drukuje. myślałem, że trzeba będzie wysłać do serwisu',
+  'jak wysłać do drukarki z worda',
+  'jak przesłać szablon do drukarki',
+  'po waszej naprawie głowicy znowu pasy, gdzie mam ją wysłać',
+]) sprawdz('klientChceSerwis(nie)', klientChceSerwis(z), false, z)
+
+// Zaprzeczenie w POPRZEDNIM zdaniu nie gasi propozycji (recenzja 23.09.2026)
+for (const z of [
+  'Nie trzeba niczego wysyłać. Kurier odbierze urządzenie z podanego adresu.',
+  'Nie warto ryzykować. Proponuję wysłać drukarkę do serwisu.',
+]) sprawdz('proponujeWysylke(zaprzeczenie wcześniej)', proponujeWysylke(z), true, z)
+
+// Zaprzeczenie tuż przed frazą o wysyłce to nie jest propozycja serwisu
+for (const z of [
+  'Nie trzeba wysłać drukarki do serwisu, to tylko ustawienie.',
+  'Zanim zdecydujesz się wysłać drukarkę do serwisu, wyczyść głowicę.',
+  'Nie musisz od razu wysłać urządzenia, sprawdźmy kabel.',
+]) sprawdz('proponujeWysylke(zaprzeczenie)', proponujeWysylke(z), false, z)
+
+// Struktura decyzji: tag, fraza i intencja wygrywają z „rozwiązane"; „?" i [INFO_ONLY] blokują;
+// pusta odpowiedź nie dostaje przycisku
+const warunekCta = src.slice(src.indexOf('const ctaWillShow ='), src.indexOf('let repairPrefill'))
+sprawdz('ctaWillShow: trzy wyzwalacze', /\(tagSerwisowy \|\| proponujeSerwis \|\| chceSerwis\)/.test(warunekCta), true, 'warunek')
+sprawdz('ctaWillShow: pusta odpowiedź', /fullAiResponse\.trim\(\)\.length > 0/.test(warunekCta), true, 'warunek')
+sprawdz('ctaWillShow: blokada „?"', warunekCta.includes("!fullAiResponse.includes('?')"), true, 'warunek')
+sprawdz('ctaWillShow: blokada [INFO_ONLY]', warunekCta.includes("!fullAiResponse.includes('[INFO_ONLY]')"), true, 'warunek')
+sprawdz('problemResolved ustępuje wyzwalaczom',
+  /!tagSerwisowy && !proponujeSerwis && !chceSerwis/.test(src), true, 'route.ts')
+
+// Odmowa filtra i komunikat błędu mają jawne ctaWillShow=false — bez trailera przeglądarka liczyła po swojemu
+sprawdz('odmowa filtra z trailerem', /OFF_TOPIC_RESPONSE\}\\n\\n__CITATIONS__\$\{JSON\.stringify\(\{ ctaWillShow: false \}\)\}/.test(src), true, 'route.ts')
+sprawdz('błąd strumienia z trailerem', /if \(!trailerWyslany\) controller\.enqueue/.test(src), true, 'route.ts')
+// Prefill nie może wisieć: przycisk czeka na niego
+sprawdz('prefill z limitem czasu', /\}, \{ timeout: 8000, maxRetries: 0 \}\)/.test(src), true, 'buildRepairPrefill')
+
+// Przeglądarka: zapas bez reguły 6 wiadomości
+const box = readFileSync('components/AIChatBox.tsx', 'utf-8')
+const zapas = box.slice(box.indexOf('const ctaFallback ='), box.indexOf('const shouldShowFormButton'))
+sprawdz('ctaFallback bez messageCount >= 6', /messageCount\s*>=\s*6/.test(zapas), false, 'AIChatBox')
+
+// Typ urządzenia z serii i model spoza listy, ale napisany przez klienta
+const kodPrefillu = ts.transpileModule(wytnij('function typZSerii', 'async function buildRepairPrefill'),
+  { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } }).outputText
+const { typZSerii, modelOdKlienta } = await import(`data:text/javascript,${encodeURIComponent(kodPrefillu + '\nexport { typZSerii, modelOdKlienta }')}`)
+for (const [model, typ] of [['MC27', 'terminal'], ['HC100', 'drukarka'], ['HC50', 'terminal'], ['ZD421d', 'drukarka'],
+  ['DS2208', 'skaner'], ['L10', 'tablet'], ['ET45', 'tablet'], ['TC8000', 'terminal'], ['', null], ['xyz', null]])
+  sprawdz('typZSerii', typZSerii(model), typ, model)
+sprawdz('modelOdKlienta: klient napisał', modelOdKlienta('TC8000', ['terminal tc 8000 nie widzi sieci']), 'TC8000', 'TC8000')
+sprawdz('modelOdKlienta: podsunął czat', modelOdKlienta('TC27', ['terminal nie widzi sieci']), '', 'TC27')
+sprawdz('modelOdKlienta: nie kształt modelu', modelOdKlienta('Zebra', ['zebra nie drukuje']), '', 'Zebra')
 
 // --- wynik -----------------------------------------------------------------
 console.log(`\nZaliczone: ${zaliczone}/${zaliczone + bledy.length}`)

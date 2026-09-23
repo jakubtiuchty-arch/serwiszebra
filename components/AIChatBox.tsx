@@ -21,6 +21,9 @@ import {
 import { trackChatOpen, trackChatMessage } from '@/lib/gtm'
 import { trackAIChatOpen, trackAIChatMessage } from '@/lib/analytics'
 import { emitRepairPrefill, trackCtaEvent, prefilledFields, type RepairPrefill } from '@/lib/repair-prefill'
+import { odczytajRozmowe, zapiszRozmowe, wyczyscRozmowe, zglosZajetoscCzatu } from '@/lib/chat-session-storage'
+
+const nowaSesja = () => `session_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`
 
 interface BlogLink {
   title: string
@@ -52,6 +55,15 @@ interface Message {
   repairPrefill?: RepairPrefill | null  // dane do wstępnego wypełnienia formularza zgłoszenia
 }
 
+// Przycisk po błędzie (sieć, urwany strumień, za duży plik) dziedziczymy po ostatniej pełnej odpowiedzi czatu:
+// jeśli czat już skierował do serwisu, klient nie może stracić przycisku przez błąd przy dopytaniu.
+// W innym razie przycisku nie ma.
+function przyciskPoPoprzedniej(prev: Message[]): Pick<Message, 'ctaWillShow' | 'repairPrefill'> {
+  const poprzednia = [...prev].reverse().find((m) => m.role === 'assistant' && m.logId)
+  const zPrzyciskiem = poprzednia?.ctaWillShow === true
+  return { ctaWillShow: zPrzyciskiem, repairPrefill: zPrzyciskiem ? poprzednia?.repairPrefill ?? null : null }
+}
+
 const placeholders = [
   "Np. Drukarka pomija etykiety…",
   "Np. Skaner nie czyta kodów…",
@@ -71,7 +83,7 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
   const [currentPlaceholder, setCurrentPlaceholder] = useState('')
   const [placeholderIndex, setPlaceholderIndex] = useState(0)
   const [isRecording, setIsRecording] = useState(false)
-  const [sessionId] = useState(() => `session_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`)
+  const [sessionId, setSessionId] = useState(nowaSesja)
   const [detectedDevice, setDetectedDevice] = useState<{ name: string; possessive: string }>({ name: 'urządzenie', possessive: 'Twoje' })
   const [attachedFiles, setAttachedFiles] = useState<File[]>([])
   const [showInputGlow, setShowInputGlow] = useState(true) // Glow effect for mobile input
@@ -169,16 +181,19 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
     lastMessage?.content?.toLowerCase().includes('wysłanie do serwisu') ||
     lastMessage?.content?.toLowerCase().includes('wysłać drukarkę') ||
     lastMessage?.content?.toLowerCase().includes('wysłać urządzenie') ||
+    lastMessage?.content?.toLowerCase().includes('kurier odbierze') ||
     false
 
   // Warunek liczy backend (ctaWillShow w trailerze __CITATIONS__) i tylko on decyduje o prefillu
   // formularza, więc front go honoruje zamiast przeliczać drugi raz. Własny rachunek zostaje jako
-  // zapas dla wiadomości bez trailera: błąd sieci, przerwany strumień, historia sprzed tej zmiany.
+  // zapas dla wiadomości bez trailera (przerwany strumień, rozmowy sprzed 20.09.2026) — tylko tag
+  // albo propozycja wysyłki. Reguła „≥6 wiadomości" wypadła 22.09.2026: w 90 dniach 19 z 22 pokazań
+  // było błędnych, a trafiała też pod komunikat błędu i odmowę filtra.
   const ctaFallback =
     !lastMessageIsQuestion &&
     !isInfoOnly &&  // ❌ NIE pokazuj CTA dla pytań informacyjnych (specyfikacja, waga, wymiary itp.)
     !problemResolved &&  // ❌ NIE pokazuj CTA gdy problem już rozwiązany (bez sensu wysyłać sprawny sprzęt)
-    (isSeriousIssue || suggestsRepair || messageCount >= 6)  // ✨ Pokaż wcześniej dla poważnych usterek lub sugestii naprawy
+    (isSeriousIssue || suggestsRepair)
 
   const shouldShowFormButton =
     isLastMessageAI &&
@@ -198,6 +213,54 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
       meta: { messageCount, hasPrefill: !!lastMessage?.repairPrefill },
     })
   }, [shouldShowFormButton, lastMessage?.logId, messageCount, sessionId, lastMessage?.repairPrefill])
+
+  // Rozmowa przeżywa odświeżenie strony i powrót z linku w tej samej karcie (lib/chat-session-storage).
+  // Odtworzenie nie przewija strony, nie ustawia kursora w polu (na telefonie otwierałoby klawiaturę)
+  // i nie liczy drugi raz „shown" dla przycisku, który klient już widział.
+  const pominFokusRef = useRef(false)
+  useEffect(() => {
+    const zapis = odczytajRozmowe<Message>()
+    if (!zapis) return
+    let wiadomosci = zapis.messages.filter(
+      (m) => m && (m.role === 'user' || m.role === 'assistant') && typeof m.content === 'string'
+    )
+    // Odpowiedź bez logId i bez decyzji o przycisku to przerwany strumień — nie odtwarzamy jej. Komunikaty błędu
+    // i odmowy mają ctaWillShow, więc zostają (inaczej rozmowa kończyłaby się pytaniem klienta bez odpowiedzi).
+    const urwana = (m: Message) => m.role === 'assistant' && !m.logId && typeof m.ctaWillShow !== 'boolean'
+    while (wiadomosci.length > 0 && urwana(wiadomosci[wiadomosci.length - 1])) {
+      wiadomosci = wiadomosci.slice(0, -1)
+    }
+    if (wiadomosci.length === 0) return
+    pominFokusRef.current = true
+    ctaLoggedForRef.current = zapis.ctaLoggedFor
+    setSessionId(zapis.sessionId)
+    setMessages(wiadomosci)
+    const pierwsza = wiadomosci.find((m) => m.role === 'user')
+    if (pierwsza) setDetectedDevice(detectDeviceType(pierwsza.content))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  // Strona główna nie podmienia instancji czatu (zmiana breakpointu) w trakcie odpowiedzi
+  useEffect(() => {
+    zglosZajetoscCzatu(loading)
+  }, [loading])
+
+  // Zapis po każdej zakończonej odpowiedzi (nie w trakcie strumienia — urwana odpowiedź nie trafia do zapisu)
+  useEffect(() => {
+    if (loading || messages.length === 0) return
+    zapiszRozmowe(sessionId, messages, ctaLoggedForRef.current)
+  }, [loading, messages, sessionId])
+
+  const nowaRozmowa = () => {
+    if (loading) return
+    wyczyscRozmowe()
+    ctaLoggedForRef.current = null
+    setMessages([])
+    setSessionId(nowaSesja())
+    setDetectedDevice({ name: 'urządzenie', possessive: 'Twoje' })
+    setInput('')
+    setAttachedFiles([])
+  }
 
   // Scroll do dołu - płynnie
   const scrollToBottom = (smooth = true) => {
@@ -230,6 +293,10 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
   // loadingu zabiera focus i kursor znika — klient nie wie gdzie pisać)
   useEffect(() => {
     if (loading || messages.length === 0) return
+    if (pominFokusRef.current) {
+      pominFokusRef.current = false
+      return
+    }
     const visibleInput = [textInputDesktopRef, textInputMobileRef]
       .map(r => r.current)
       .find(el => el && el.offsetParent !== null)
@@ -434,7 +501,7 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
         // Pokaż błąd użytkownikowi
         setMessages(prev => [
           ...prev,
-          { role: 'assistant', content: `❌ ${e.message || 'Błąd podczas przetwarzania pliku. Spróbuj mniejszego pliku.'}` }
+          { role: 'assistant', content: `❌ ${e.message || 'Błąd podczas przetwarzania pliku. Spróbuj mniejszego pliku.'}`, ...przyciskPoPoprzedniej(prev) }
         ])
         setAttachedFiles([])
         return
@@ -486,7 +553,8 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
           assistantMessage += decoder.decode(value)
 
           // Sprawdź czy są blogLinks, manualLinks i scannerBarcodes na końcu
-          const citationsMatch = assistantMessage.match(/__CITATIONS__(.+)$/)
+          // [\s\S] zamiast . — znak U+2028 w danych formularza nie może wyrzucić surowego JSON-a do dymka
+          const citationsMatch = assistantMessage.match(/__CITATIONS__([\s\S]+)$/)
           let content = assistantMessage
           let blogLinks: BlogLink[] | undefined = undefined
           let manualLinks: ManualLink[] | undefined = undefined
@@ -495,6 +563,7 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
           let resolved: boolean | undefined = undefined
           let ctaWillShow: boolean | undefined = undefined
           let repairPrefill: RepairPrefill | null = null
+          let blad = false
 
           if (citationsMatch) {
             content = assistantMessage.substring(0, citationsMatch.index)
@@ -507,25 +576,35 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
               resolved = data.resolved
               ctaWillShow = data.ctaWillShow
               repairPrefill = data.repairPrefill ?? null
+              blad = data.blad === true  // serwer: urwany strumień — przycisk jak po błędzie sieci
             } catch (e) {
               console.error('Błąd parsowania blogLinks/manualLinks/scannerBarcodes:', e)
             }
           }
 
-          setMessages(prev => [
-            ...prev.slice(0, -1),
-            { role: 'assistant', content, blogLinks, manualLinks, scannerBarcodes, logId, resolved, ctaWillShow, repairPrefill }
-          ])
+          setMessages(prev => {
+            const bazowa = prev.slice(0, -1)
+            const poBledzie = blad ? przyciskPoPoprzedniej(bazowa) : null
+            return [
+              ...bazowa,
+              {
+                role: 'assistant', content, blogLinks, manualLinks, scannerBarcodes, logId, resolved,
+                ctaWillShow: poBledzie ? poBledzie.ctaWillShow : ctaWillShow,
+                repairPrefill: poBledzie ? poBledzie.repairPrefill : repairPrefill,
+              },
+            ]
+          })
         }
       }
     } catch (error) {
       console.error('Chat error:', error)
       setMessages(prev => [
         ...prev,
-        { 
-          role: 'assistant', 
-          content: 'Przepraszam, wystąpił błąd. Spróbuj ponownie lub wypełnij formularz zgłoszeniowy.' 
-        }
+        {
+          role: 'assistant',
+          content: 'Przepraszam, wystąpił błąd. Spróbuj ponownie lub wypełnij formularz zgłoszeniowy.',
+          ...przyciskPoPoprzedniej(prev),
+        },
       ])
     } finally {
       setLoading(false)
@@ -609,7 +688,8 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
                             }
                             const linkMatch = part.match(/\[([^\]]+)\]\(([^)]+)\)/)
                             if (linkMatch) {
-                              return <a key={partIdx} href={linkMatch[2]} className="text-blue-600 underline text-xs">📚 {linkMatch[1]}</a>
+                              // Nowa karta: rozmowa zostaje otwarta, klient nie wraca do pustego czatu
+                              return <a key={partIdx} href={linkMatch[2]} target="_blank" rel="noopener" className="text-blue-600 underline text-xs">📚 {linkMatch[1]}</a>
                             }
                             return (
                               <span key={partIdx}>
@@ -661,6 +741,19 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
         <div className="pb-4 pt-3 flex-shrink-0 -mx-4 px-4">
           <input type="file" ref={fileInputRef} accept="image/*,video/*" multiple onChange={handleFileSelect} className="hidden" />
           <input type="file" ref={videoInputRef} accept="video/*" capture="environment" onChange={handleVideoCapture} className="hidden" />
+
+          {messages.length > 0 && (
+            <div className="flex justify-end mb-2">
+              <button
+                type="button"
+                onClick={nowaRozmowa}
+                disabled={loading}
+                className="text-xs text-gray-500 hover:text-gray-800 underline underline-offset-2 disabled:opacity-50"
+              >
+                Nowa rozmowa
+              </button>
+            </div>
+          )}
 
           {/* Attached Files */}
           {attachedFiles.length > 0 && (
@@ -826,6 +919,8 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
                               <a
                                 key={partIdx}
                                 href={linkUrl}
+                                target="_blank"
+                                rel="noopener"
                                 className="inline-flex items-center gap-1 px-2 py-0.5 bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 transition-colors font-medium"
                               >
                                 📚 {linkText}
@@ -892,6 +987,19 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
         </div>
 
         <div className={`p-4 sm:p-5 md:p-6 ${messages.length > 0 ? 'border-t border-gray-100' : ''}`}>
+          {messages.length > 0 && (
+            <div className="flex justify-end -mt-1 mb-3">
+              <button
+                type="button"
+                onClick={nowaRozmowa}
+                disabled={loading}
+                className="text-xs text-gray-500 hover:text-gray-800 underline underline-offset-2 disabled:opacity-50"
+              >
+                Nowa rozmowa
+              </button>
+            </div>
+          )}
+
           {/* Attached Files Preview */}
           {attachedFiles.length > 0 && (
             <div className="mb-4 flex flex-wrap gap-2">
