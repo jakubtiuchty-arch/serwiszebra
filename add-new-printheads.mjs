@@ -5,13 +5,21 @@
  */
 
 import { createClient } from '@supabase/supabase-js'
+import { config } from 'dotenv'
 import { createReadStream } from 'fs'
 import { createUnzip } from 'zlib'
 import { Readable } from 'stream'
+import { fileURLToPath } from 'url'
 
-const SUPABASE_URL = 'https://fivrcnshzylqdquuhkeu.supabase.co'
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZpdnJjbnNoenlscWRxdXVoa2V1Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2MjM3NDYzMSwiZXhwIjoyMDc3OTUwNjMxfQ.FaTk7pzoL90ADVhl7QS1PRZgEZHYb7377KJnWf8O1V0'
-const INGRAM_API_KEY = '1/1EX51XeH5mUpAUwesTtlHCPVqF'
+config({ path: fileURLToPath(new URL('.env.local', import.meta.url)), quiet: true })
+
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL
+const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY
+const INGRAM_API_KEY = process.env.INGRAM_API_KEY
+if (!SUPABASE_URL || !SUPABASE_KEY || !INGRAM_API_KEY) {
+  throw new Error('Brak NEXT_PUBLIC_SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY lub INGRAM_API_KEY')
+}
+
 const INGRAM_CSV_URL = `https://www.ingrammicro24.com/pl/api/offer/${INGRAM_API_KEY}/`
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)

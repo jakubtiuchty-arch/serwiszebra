@@ -5,10 +5,18 @@
 
 import { createClient } from '@supabase/supabase-js'
 
-const supabase = createClient(
-  'https://fivrcnshzylqdquuhkeu.supabase.co',
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZpdnJjbnNoenlscWRxdXVoa2V1Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2MjM3NDYzMSwiZXhwIjoyMDc3OTUwNjMxfQ.FaTk7pzoL90ADVhl7QS1PRZgEZHYb7377KJnWf8O1V0'
-)
+import { config } from 'dotenv'
+import { fileURLToPath } from 'url'
+
+config({ path: fileURLToPath(new URL('.env.local', import.meta.url)), quiet: true })
+
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY
+if (!supabaseUrl || !serviceRoleKey) {
+  throw new Error('Brak NEXT_PUBLIC_SUPABASE_URL lub SUPABASE_SERVICE_ROLE_KEY')
+}
+
+const supabase = createClient(supabaseUrl, serviceRoleKey)
 
 const PRODUCTS = {
 
