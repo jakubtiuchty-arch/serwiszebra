@@ -1,13 +1,22 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
+import { requireAdminServer } from '@/lib/auth-server'
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.SUPABASE_SERVICE_ROLE_KEY!
 )
 
+// Tylko dla administratora. Do 23.09.2026 endpoint był publiczny: każdy znający adres dostawał
+// rozmowy klientów z czatu (treść, sesje), a /rate pozwalał zmieniać oceny. Wywołują go wyłącznie
+// strony /admin, które i tak wymagają zalogowania, więc sprawdzenie niczego nie psuje.
 export async function GET(req: NextRequest) {
   try {
+    const adminCheck = await requireAdminServer()
+    if (!adminCheck.isAdmin) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
     const { searchParams } = new URL(req.url)
     const filter = searchParams.get('filter') || 'unreviewed'
 
