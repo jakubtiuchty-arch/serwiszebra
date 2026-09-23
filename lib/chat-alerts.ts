@@ -236,6 +236,53 @@ export function podajeKwoteZaNaprawe(tekstAsystenta: string): boolean {
   return false
 }
 
+/**
+ * Czy zarzut dotyczy czegoś, o czym asystent w ogóle pisał.
+ *
+ * Nie da się podać złego sterownika, nie wspominając o sterowniku, ani źle opisać gwarancji,
+ * nie pisząc o gwarancji. Oceniający mimo to przypisywał takie zarzuty rozmowom, w których
+ * temat nie padł (22.09.2026: „powinien wskazać ZDesigner v5" przy uszkodzonym zasilaczu,
+ * „modele niezgodne z ZDesigner v10" przy rozmowie o programie do legitymacji, „sugeruje brak
+ * gwarancji" w rozmowie bez słowa o gwarancji). Reguła o sterownikach stoi w prompcie, więc
+ * model dopasowuje ją na siłę — sprawdzamy to w kodzie, jak kwotę za naprawę.
+ */
+const RE_ZDESIGNER_W_ZARZUCIE = /zdesigner|sterownik\w* v ?(?:5|10)\b/i
+const RE_STEROWNIK_U_ASYSTENTA = /zdesigner|\bv ?(?:5|10)\b/i
+
+// Czas diagnostyki 24–48 h to zasada serwisu, którą prompt czatu każe podawać przy każdej
+// propozycji wysyłki. Oceniający mimo wyjątku w opisie typu brał go za „obietnicę" (23.09.2026,
+// pętla restartu terminala: ocena 2/5, więc próg 0,6 i mail o zdaniu zgodnym z regulaminem).
+const RE_CZAS_DIAGNOSTYKI = /diagnost\w*[^.]{0,40}?24\s*[-–]\s*48\s*h/i
+const RE_PRAWDZIWA_OBIETNICA = /technik|zastępcz|zwrot|termin|jutro|dzisiaj|gwarantuj/i
+
+export function zarzutMaPokrycie(typ: string, dlaczego: string, tekstAsystenta: string): boolean {
+  const tekst = tekstAsystenta || ''
+  if (RE_ZDESIGNER_W_ZARZUCIE.test(dlaczego || '') && !RE_STEROWNIK_U_ASYSTENTA.test(tekst)) return false
+  if (typ === 'gwarancja' && !/gwaranc/i.test(tekst)) return false
+  if (typ === 'obietnica' && RE_CZAS_DIAGNOSTYKI.test(dlaczego || '') && !RE_PRAWDZIWA_OBIETNICA.test(dlaczego || '')) return false
+  return true
+}
+
+/**
+ * Oceniający potrafi zwrócić typ przetłumaczony na angielski („cost_transport" zamiast
+ * „koszt_transportu", 23.09.2026). Filtr po liście typów po cichu gubił wtedy prawdziwą wpadkę,
+ * a test „darmowy kurier" przestawał przechodzić. Znane warianty sprowadzamy do nazwy z listy.
+ */
+const ALIASY_TYPOW: Record<string, TypAlertu> = {
+  cost_transport: 'koszt_transportu',
+  transport_cost: 'koszt_transportu',
+  shipping_cost: 'koszt_transportu',
+  warranty: 'gwarancja',
+  promise: 'obietnica',
+  wrong_data: 'bledne_dane',
+  premature_quote: 'wycena_przedwczesnie',
+}
+
+export function normalizujTyp(typ: unknown): string {
+  const t = String(typ || '').trim().toLowerCase()
+  return ALIASY_TYPOW[t] || t
+}
+
 export function zbudujTranskrypt(tury: Tura[]): string {
   return tury
     .map((t, i) => {
@@ -265,11 +312,15 @@ export async function ocenRozmowe(tury: Tura[]): Promise<OcenaRozmowy | null> {
     const kategoria = KATEGORIE.includes(parsed.kategoria) ? parsed.kategoria : 'other'
     const ocena = Number.isFinite(parsed.ocena) ? Math.min(5, Math.max(1, Math.round(parsed.ocena))) : 3
     // Bez kwoty za naprawę w całej rozmowie typ „wycena_przedwczesnie" nie ma o czym mówić.
-    const bylaKwota = podajeKwoteZaNaprawe(tury.map((t) => t.ai_response || '').join('\n'))
+    const tekstAsystenta = tury.map((t) => t.ai_response || '').join('\n')
+    const bylaKwota = podajeKwoteZaNaprawe(tekstAsystenta)
 
     const problemy: ZnalezionyProblem[] = (Array.isArray(parsed.problemy) ? parsed.problemy : [])
-      .filter((p: any) => p && typeof p.typ === 'string' && (p.typ as TypAlertu) in ALERTY)
+      .filter((p: any) => p && typeof p.typ === 'string')
+      .map((p: any) => ({ ...p, typ: normalizujTyp(p.typ) }))
+      .filter((p: any) => (p.typ as TypAlertu) in ALERTY)
       .filter((p: any) => p.typ !== 'wycena_przedwczesnie' || bylaKwota)
+      .filter((p: any) => zarzutMaPokrycie(p.typ, `${p.dlaczego || ''} ${p.cytat || ''}`, tekstAsystenta))
       .map((p: any) => ({
         typ: p.typ as TypAlertu,
         waga: Math.min(1, Math.max(0, Number(p.waga) || 0)),
