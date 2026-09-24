@@ -178,7 +178,7 @@ export function generujMailingPodwyzki(r: OdbiorcaTerminali, c: KonfiguracjaMail
             </td></tr>
             <tr><td style="padding:18px 24px 22px;text-align:center">
               <a href="${kontakt}" style="display:inline-block;background:${NAVY};color:#ffffff;text-decoration:none;padding:14px 30px;border-radius:10px;font-size:15px;font-weight:700">Poproś o ofertę specjalną</a>
-              <div style="font-size:12px;color:#8a97a8;margin-top:10px">Ceny katalogowe podstawowej konfiguracji. Dla klientów serwisu przygotowujemy ofertę specjalną według cen sprzed zmiany.</div>
+              <div style="font-size:10px;line-height:1.5;color:#b4bec9;margin-top:10px">Ceny katalogowe podstawowej konfiguracji. Dla klientów serwisu przygotowujemy ofertę specjalną według cen sprzed zmiany.</div>
             </td></tr>
           </table>
         </td></tr>`
