@@ -19,7 +19,7 @@ import {
 import { trackRepairFormSubmit, trackRepairFormStart } from '@/lib/gtm'
 import { onRepairPrefill, trackCtaEvent, type RepairPrefill } from '@/lib/repair-prefill'
 import { idSesjiCzatu, wyczyscRozmowe } from '@/lib/chat-session-storage'
-import { normalizujNip, nipPoprawny } from '@/lib/nip'
+import { normalizujNip, bladNipu } from '@/lib/nip'
 import { trackOpenAIRepairLead } from '@/lib/openai-pixel'
 
 // Lista wzorców modeli Zebra (case-insensitive)
@@ -87,10 +87,14 @@ const repairFormSchema = z.object({
   email: z.string().email('Nieprawidłowy adres email'),
   phone: z.string().min(9, 'Nieprawidłowy numer telefonu'),
   company: z.string().min(1, 'Nazwa firmy jest wymagana'),
-  // Kreski, spacje i prefiks PL są zdejmowane przed walidacją (lib/nip.ts) — do bazy trafiają same cyfry
+  // Kreski, spacje i prefiks PL są zdejmowane przed walidacją (lib/nip.ts) — polski NIP trafia do bazy
+  // jako same cyfry, numer VAT z innego kraju UE razem z prefiksem (np. CZ64609774)
   nip: z.string()
     .transform(normalizujNip)
-    .pipe(z.string().length(10, 'NIP musi mieć 10 cyfr').refine(nipPoprawny, 'Nieprawidłowy NIP — sprawdź cyfry')),
+    .superRefine((nip, ctx) => {
+      const blad = bladNipu(nip)
+      if (blad) ctx.addIssue({ code: 'custom', message: blad })
+    }),
   
   // KROK 2: Szczegóły urządzenia
   deviceType: z.enum(['drukarka', 'terminal', 'skaner', 'tablet', 'akcesoria', 'inne'], {
@@ -647,7 +651,7 @@ export default function RepairForm() {
                     id="nip"
                     type="text"
                     className={`w-full px-3 py-2 border rounded-full focus:ring-2 focus:ring-blue-500 focus:border-transparent ${errors.nip ? 'border-red-500' : 'border-gray-300'}`}
-                    placeholder="np. 1234567890"
+                    placeholder="np. 1234567890 lub CZ12345678"
                     maxLength={16}
                   />
                   {errors.nip && (
