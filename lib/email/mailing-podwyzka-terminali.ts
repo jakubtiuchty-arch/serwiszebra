@@ -268,7 +268,7 @@ export function generujMailingPodwyzki(r: OdbiorcaTerminali, c: KonfiguracjaMail
             od 5 października <span style="white-space:nowrap">2026&nbsp;r.</span> Zebra Technologies podnosi ceny terminali mobilnych o 15%. ${zdanieOModelu}
           </p>
           <p style="margin:12px 0 0;font-size:15px;line-height:1.75;color:${BODY};text-align:justify" class="akapit">
-            Jako klientom naszego serwisu proponujemy Państwu <strong style="color:${INK};font-weight:600">zakup terminali Zebra według cen sprzed podwyżki</strong>.
+            Jako klientom naszego serwisu proponujemy Państwu <strong style="color:${INK};font-weight:600">zakup urządzeń w cenach specjalnych</strong>.
             Oferta specjalna obowiązuje przy zamówieniu złożonym do 4 października <span style="white-space:nowrap">2026&nbsp;r.</span>
             i nie jest dostępna w naszym sklepie internetowym.
           </p>
@@ -279,8 +279,7 @@ export function generujMailingPodwyzki(r: OdbiorcaTerminali, c: KonfiguracjaMail
         <tr><td style="background:#ffffff;padding:0 28px 4px">
           <p style="margin:0;font-size:15px;line-height:1.75;color:${BODY};text-align:justify" class="akapit">
             <strong style="color:${INK};font-weight:600">Aby otrzymać ofertę, wystarczy odpowiedzieć na tę wiadomość i podać liczbę urządzeń.</strong>
-            Ofertę prześlemy w ciągu jednego dnia roboczego. Urządzenia dostarczamy jako Zebra Premier Business Partner,
-            z gwarancją producenta i opieką naszego autoryzowanego serwisu.
+            Ofertę prześlemy w ciągu jednego dnia roboczego.
           </p>
         </td></tr>
 
