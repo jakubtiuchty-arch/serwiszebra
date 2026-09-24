@@ -1,0 +1,78 @@
+# Codzienny przegląd kodu serwis-zebry.pl
+# 1. Kompilacja TypeScript całego projektu.
+# 2. Agent Claude czyta commity z ostatnich 24 godzin i szuka błędów — przede
+#    wszystkim w strefie płatności. Znalezione problemy zakłada jako issue
+#    (GitHub wysyła powiadomienie mailem).
+#
+# Powód: 19.09.2026 commit opisany jako zmiana czatu zmienił obsługę płatności;
+# przez 5 dni wpłaty nie zapisywały się w bazie i nikt tego nie zauważył.
+
+name: Przegląd dzienny
+
+on:
+  schedule:
+    - cron: '0 4 * * *' # 6:00 czasu polskiego (latem)
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+  id-token: write
+
+jobs:
+  typescript:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx tsc --noEmit
+
+  przeglad-ai:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 100
+
+      - name: Commity z ostatnich 24 godzin
+        id: commity
+        run: echo "liczba=$(git log --since='24 hours ago' --oneline | wc -l | tr -d ' ')" >> "$GITHUB_OUTPUT"
+
+      - name: Przegląd przez Claude
+        if: steps.commity.outputs.liczba != '0'
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          claude_args: >-
+            --model claude-sonnet-5
+            --max-turns 40
+            --allowedTools "Read,Grep,Glob,Bash(git log:*),Bash(git show:*),Bash(git diff:*),Bash(gh issue create:*),Bash(gh issue list:*)"
+          prompt: |
+            Jesteś recenzentem kodu serwisu serwis-zebry.pl (Next.js, Supabase, Stripe).
+            Przejrzyj WSZYSTKIE commity z ostatnich 24 godzin:
+            `git log --since='24 hours ago' --format='%h %s'`, a potem `git show <hash>` dla każdego.
+
+            Szukaj prawdziwych błędów, nie uwag o stylu:
+            1. Strefa płatności (ścieżki w scripts/strefa-platnosci/sciezki.txt): czy płatność
+               może się nie zapisać, zapisać dwa razy, czy klient może zapłacić ponownie,
+               czy błąd zapisu jest połykany (Stripe dostaje 200 mimo błędu).
+            2. Statusy zgłoszeń: każdy status zapisywany do repair_requests.status musi być
+               na liście w lib/statusy-napraw.ts (baza odrzuca inne ograniczeniem CHECK).
+            3. Commit, który zmienia strefę płatności, a opis tego nie mówi — tak było
+               w 9c4ba75 („Czat: badge…” zmienił webhook Stripe).
+            4. Klucze API, hasła, dane klientów (imiona, e-maile, telefony) w kodzie — repo jest PUBLICZNE.
+            5. Błędy logiki, które wywalą stronę albo endpoint: brak await, null bez sprawdzenia,
+               złe pole w zapytaniu Supabase, literówki w nazwach tabel.
+
+            Każde podejrzenie potwierdź, czytając kod wokół zmiany. Nie zgłaszaj rzeczy niepewnych.
+
+            Jeśli znajdziesz problemy, załóż JEDNO issue:
+            `gh issue create --title "Przegląd dzienny <data>: <liczba> problemów" --body "<treść>"`.
+            Treść po polsku: dla każdego problemu commit, plik:linia, co się zepsuje i w jakiej
+            sytuacji, proponowana poprawka. Najpierw krytyczne.
+            Jeśli nie ma problemów — nie zakładaj issue.

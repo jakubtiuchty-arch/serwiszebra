@@ -1,0 +1,22 @@
+# Strefa płatności — pliki, których zmiana wymaga zgody Jakuba.
+# Jedno wyrażenie regularne (ERE) na linię, dopasowane do ścieżki względem katalogu repo.
+# Używają tego: .claude/hooks/strefa-platnosci.py (Claude Code) i vercel-ignore.sh (deploy).
+#
+# Dlaczego: 19.09.2026 zmiana statusu po płatności (w_naprawie → oplacone) trafiła do
+# commita opisanego jako zmiana czatu. Baza nie znała statusu `oplacone`, webhook Stripe
+# nie zapisywał płatności, a klient zapłacił dwa razy.
+
+^app/api/webhooks/
+^app/api/payments/
+^app/api/shop/p24/
+^app/api/shop/create-checkout/
+^app/api/shop/verify/
+^app/api/repairs/\[id\]/(accept-price|cancel|checkout|confirm-payment|create-payment-intent|proforma)/
+^app/api/admin/repairs/\[id\]/status/
+^lib/stripe/
+^lib/p24\.ts$
+^lib/oplaty-serwis\.ts$
+^components/RepairPaymentModal\.tsx$
+^components/StripePaymentModal\.tsx$
+^scripts/strefa-platnosci/
+^vercel\.json$

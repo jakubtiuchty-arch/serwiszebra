@@ -4,6 +4,17 @@ Checkpoint postępu prac. Najnowszy wpis na górze. Po każdym etapie/buildzie d
 
 ---
 
+## 2026-09-24 — wpłaty Stripe nie zapisywały się w bazie (19–24.09), podwójna płatność, strefa płatności
+
+- **Przyczyna**: commit 9c4ba75 (19.09, opis „Czat: badge…”) zmienił status po płatności z `w_naprawie` na `oplacone` w webhooku Stripe i `confirm-payment`. Ograniczenie `repair_requests_status_check` nie znało `oplacone` → UPDATE odrzucony, webhook logował błąd i odpowiadał 200, `confirm-payment` zwracał 500. Trzy zgłoszenia opłacone w Stripe zostały w bazie jako „wycena / processing”; jeden klient zapłacił drugi raz po 2,5 min (panel dalej pokazywał przycisk płatności, a `create-payment-intent` tworzył nową płatność).
+- **Naprawione ręcznie**: zwrot duplikatu w Stripe (reason `duplicate`), trzem zgłoszeniom zapisane `payment_status=succeeded`, `paid_at` z Stripe i właściwy `stripe_payment_id`. Status `oplacone` — po uruchomieniu `supabase-strefa-platnosci.sql`.
+- **Kod**: webhook przy błędzie bazy zwraca 500 (Stripe ponawia 3 dni), jest idempotentny i wykrywa drugą płatność (mail „PODWÓJNA PŁATNOŚĆ”); `create-payment-intent` sprawdza poprzednią płatność w Stripe (succeeded/processing/requires_action → 409, niedokończoną tej samej kwoty używa ponownie); `confirm-payment` nie oznacza opłacenia bez potwierdzenia ze Stripe i sprawdza, że płatność należy do zgłoszenia (wcześniej zmyślony numer płatności wystarczał do oznaczenia naprawy jako opłaconej).
+- **Statusy**: `lib/statusy-napraw.ts` — jedna lista dla kodu; `supabase-strefa-platnosci.sql` dodaje `oplacone` i trzy statusy gwarancyjne (panel ich używał, baza nie znała) + funkcję `dozwolone_statusy_napraw()`.
+- **Strefa płatności**: hook `.claude/hooks/strefa-platnosci.py` (zgoda przy edycji plików z `scripts/strefa-platnosci/sciezki.txt`, zapisach w Stripe i tabelach zgłoszeń), Vercel `ignoreCommand` pomija deploy bez linii `Zgoda-platnosci: tak`, reguły w CLAUDE.md.
+- **Kontrola**: cron `/api/cron/kontrola-platnosci` 7:30 (Stripe ↔ baza 7 dni, duplikaty, niedostarczone webhooki, statusy kod ↔ baza; mail tylko przy problemie) + `.github/workflows/przeglad-dzienny.yml` (tsc + przegląd commitów z 24 h przez Claude, problemy jako issue; sekret ANTHROPIC_API_KEY ustawiony).
+- **Pułapki**: stare klucze Supabase wyłączone 23.09 — `.env.local` nieaktualny, aktualne przez `vercel env pull`. `Prefer: tx=rollback` w PostgREST Supabase NIE wycofuje zapisu (sprawdzanie ograniczeń próbnym zapisem zmieniło status zgłoszenia — przywrócone, wpisy historii usunięte).
+- TODO: uruchomić SQL w Supabase → ustawić `oplacone` trzem zgłoszeniom; push po zgodzie.
+
 ## 2026-07-23 — Moduł WYPOŻYCZENIA (koniec papierowych kartek serwisantów)
 
 - **Zakładka /admin/wypozyczenia** (sidebar → Serwis): lista (nr WYP-YYYYMMDDHHmm, klient+kontakt, sprzęt, S/N, termin zwrotu +14 dni, status, podpisany protokół), filtry/szukajka, modal dodawania (S/N z „nieczytelny"), modal potwierdzenia zwrotu/usunięcia (bez systemowego confirm), przycisk „Zwrócono".
