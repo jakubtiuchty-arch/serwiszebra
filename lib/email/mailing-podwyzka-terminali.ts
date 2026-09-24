@@ -177,20 +177,30 @@ export function generujMailingPodwyzki(r: OdbiorcaTerminali, c: KonfiguracjaMail
         <tr><td style="background:#ffffff;padding:22px 28px 26px">
           <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #dde4ec;border-radius:12px;border-collapse:separate">
             <tr>
-              <td width="190" align="center" valign="middle" style="width:190px;background:${PANEL};border-radius:11px 0 0 11px;padding:26px 10px">
+              <td width="190" align="center" valign="middle" class="kolumna kafel" style="width:190px;background:${PANEL};border-radius:11px 0 0 11px;padding:26px 10px">
                 <img src="${oferta.imageUrl}" width="${Math.round(oferta.imgW * 1.3)}" height="${Math.round(oferta.imgH * 1.3)}" alt="Zebra ${esc(oferta.model)}" style="display:block;width:${Math.round(oferta.imgW * 1.3)}px;height:${Math.round(oferta.imgH * 1.3)}px;border:0;margin:0 auto">
               </td>
-              <td valign="middle" style="padding:24px 24px 24px 26px">
+              <td valign="middle" class="kolumna" style="padding:24px 24px 24px 26px">
                 <div style="font-size:13px;color:#6b7a8d;line-height:1.4">${etykietaKarty}</div>
                 <div style="font-size:24px;font-weight:700;color:${INK};line-height:1.25;margin-top:4px">Zebra ${esc(oferta.model)}</div>
 
-                <div style="font-size:13px;color:#6b7a8d;margin-top:18px">Cena do 4 października 2026 r.</div>
-                <div style="font-size:24px;font-weight:700;color:${NAVY};line-height:1.25;margin-top:2px">${zl(oferta.cenaNetto)} <span style="font-size:14px;font-weight:600">netto</span></div>
+                <!-- Linia oddziela model od cen; dwie ceny w osobnych polach obok siebie -->
+                <div style="height:1px;line-height:1px;font-size:0;background:#e5e9ef;margin:16px 0">&nbsp;</div>
+                <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:separate"><tr>
+                  <td width="49%" valign="top" class="cena" style="background:${PANEL};border-radius:8px;padding:12px 12px 11px">
+                    <div style="font-size:12px;color:#5b6b52;line-height:1.3">Do 4 października</div>
+                    <div style="font-size:20px;font-weight:700;color:${NAVY};line-height:1.2;margin-top:5px;white-space:nowrap">${zl(oferta.cenaNetto)}</div>
+                    <div style="font-size:12px;color:#5b6b52;margin-top:2px">netto</div>
+                  </td>
+                  <td width="2%" class="odstep" style="font-size:0;line-height:0">&nbsp;</td>
+                  <td width="49%" valign="top" class="cena" style="background:#fdf1ef;border-radius:8px;padding:12px 12px 11px">
+                    <div style="font-size:12px;color:#8f3a2e;line-height:1.3">Od 5 października</div>
+                    <div style="font-size:20px;font-weight:700;color:#b42318;line-height:1.2;margin-top:5px;white-space:nowrap">${zl(oferta.cenaNetto * (1 + PODWYZKA))}</div>
+                    <div style="font-size:12px;color:#8f3a2e;margin-top:2px">netto (szacunkowo)</div>
+                  </td>
+                </tr></table>
 
-                <div style="font-size:13px;color:#6b7a8d;margin-top:12px">Cena od 5 października 2026&nbsp;r.</div>
-                <div style="font-size:18px;font-weight:700;color:#b42318;line-height:1.35;margin-top:2px">ok. ${zl(oferta.cenaNetto * (1 + PODWYZKA))} <span style="font-size:13px;font-weight:600">netto</span></div>
-
-                <table role="presentation" cellpadding="0" cellspacing="0" style="margin-top:22px"><tr>
+                <table role="presentation" cellpadding="0" cellspacing="0" style="margin-top:18px"><tr>
                   <td style="background:${NAVY};border-radius:9px">
                     <a href="${kontakt}" style="display:inline-block;padding:13px 24px;color:#ffffff;font-size:15px;font-weight:700;text-decoration:none">Poproś o ofertę specjalną</a>
                   </td>
@@ -214,12 +224,23 @@ export function generujMailingPodwyzki(r: OdbiorcaTerminali, c: KonfiguracjaMail
 
   return bezSierotek(`<!DOCTYPE html>
 <html lang="pl">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+  @media only screen and (max-width: 600px) {
+    .kolumna { display: block !important; width: 100% !important; box-sizing: border-box; }
+    .kafel { border-radius: 11px 11px 0 0 !important; padding: 20px 10px !important; }
+    .odstep { display: none !important; }
+    .cena { display: block !important; width: 100% !important; box-sizing: border-box; margin-bottom: 8px; }
+    .procent { display: none !important; }
+    .akapit { text-align: left !important; }
+  }
+</style></head>
 <body style="margin:0;padding:0;background:#e9edf2">
   <div style="display:none;max-height:0;overflow:hidden;opacity:0">${esc(preheader)}</div>
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#e9edf2;padding:22px 10px">
     <tr><td align="center">
-      <table role="presentation" width="640" cellpadding="0" cellspacing="0" style="width:640px;max-width:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">
+      <!--[if mso]><table role="presentation" width="640" cellpadding="0" cellspacing="0"><tr><td><![endif]-->
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="width:100%;max-width:640px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">
 
         <!-- Belka z logo -->
         <tr><td style="background:#ffffff;border-radius:14px 14px 0 0;padding:20px 28px">
@@ -242,7 +263,7 @@ export function generujMailingPodwyzki(r: OdbiorcaTerminali, c: KonfiguracjaMail
               <h1 style="margin:0;color:#ffffff;font-size:24px;font-weight:700;line-height:1.3">Wzrost cen terminali mobilnych Zebra</h1>
               <div style="color:rgba(255,255,255,.72);font-size:15px;line-height:1.5;margin-top:6px">Od 5 października 2026&nbsp;r. — dotyczy m.in. modeli TC22, MC3400 i MC9400</div>
             </td>
-            <td width="150" align="right" valign="middle" style="color:${LIME};font-size:56px;font-weight:800;line-height:1;white-space:nowrap">+15%</td>
+            <td width="150" align="right" valign="middle" class="procent" style="color:${LIME};font-size:56px;font-weight:800;line-height:1;white-space:nowrap">+15%</td>
           </tr></table>
         </td></tr>
 
@@ -254,15 +275,15 @@ export function generujMailingPodwyzki(r: OdbiorcaTerminali, c: KonfiguracjaMail
 
         <!-- Treść -->
         <tr><td style="background:#ffffff;border-radius:14px 14px 0 0;padding:26px 28px 0">
-          <p style="margin:0;font-size:15px;line-height:1.75;color:${BODY};text-align:justify">
+          <p style="margin:0;font-size:15px;line-height:1.75;color:${BODY};text-align:justify" class="akapit">
             <strong style="color:${INK};font-weight:600">Szanowni Państwo,</strong><br>
             ${zdanieONaprawie} Uprzejmie informujemy o zmianie cennika terminali mobilnych Zebra.
           </p>
-          <p style="margin:12px 0 0;font-size:15px;line-height:1.75;color:${BODY};text-align:justify">
+          <p style="margin:12px 0 0;font-size:15px;line-height:1.75;color:${BODY};text-align:justify" class="akapit">
             Od 5 października 2026&nbsp;r. Zebra Technologies podnosi ceny katalogowe terminali mobilnych o 15%.
             Producent uzasadnia zmianę wzrostem kosztów komponentów.
           </p>
-          <p style="margin:12px 0 0;font-size:15px;line-height:1.75;color:${BODY};text-align:justify">
+          <p style="margin:12px 0 0;font-size:15px;line-height:1.75;color:${BODY};text-align:justify" class="akapit">
             ${zdanieOPropozycji} Dla klientów naszego serwisu przygotujemy ofertę specjalną według cen obowiązujących
             przed zmianą cennika, pod warunkiem złożenia zamówienia do 4 października 2026&nbsp;r.
           </p>
@@ -271,7 +292,7 @@ export function generujMailingPodwyzki(r: OdbiorcaTerminali, c: KonfiguracjaMail
         ${kartaCeny}
 
         ${oferta ? `        <tr><td style="background:#ffffff;padding:0 28px 4px">
-          <p style="margin:0;font-size:14px;line-height:1.7;color:${BODY};text-align:justify">
+          <p style="margin:0;font-size:14px;line-height:1.7;color:${BODY};text-align:justify" class="akapit">
             W celu otrzymania oferty prosimy o odpowiedź na niniejszą wiadomość z informacją o liczbie urządzeń
             lub o kontakt telefoniczny pod numerem +48 601 619 898.
           </p>
@@ -306,6 +327,7 @@ export function generujMailingPodwyzki(r: OdbiorcaTerminali, c: KonfiguracjaMail
         </td></tr>
 
       </table>
+      <!--[if mso]></td></tr></table><![endif]-->
     </td></tr>
   </table>
 </body></html>`)
