@@ -4,7 +4,7 @@
  *   node scripts/mailing-podwyzka-terminali.mts --test jakub.tiuchty@takma.com.pl
  *       jeden mail testowy (TC21 → TC22) na jeden adres
  *
- *   node scripts/mailing-podwyzka-terminali.mts --wyslij <lista.json> [--log <plik>]
+ *   node scripts/mailing-podwyzka-terminali.mts --wyslij <lista.json> [--log <plik>] [--zaplanuj <ISO>]
  *       wysyłka do klientów; lista trzymana POZA repo (repo jest publiczne):
  *       [{ "email": "...", "modele": ["TC26"], "zgloszen": 1, "miesiacNaprawy": "sierpniu" }]
  *
@@ -26,6 +26,8 @@ const arg = (nazwa: string) => {
 const testNa = arg('--test')
 const listaPlik = arg('--wyslij')
 const logPlik = arg('--log')
+// Zaplanowana wysyłka po stronie Resenda, np. --zaplanuj 2026-09-25T09:00:00+02:00
+const zaplanuj = arg('--zaplanuj')
 if (!testNa && !listaPlik) {
   console.error('Użycie: --test <adres>  albo  --wyslij <lista.json> [--log <plik>]')
   process.exit(1)
@@ -51,6 +53,7 @@ async function wyslij(do_: string, r: OdbiorcaTerminali, prefiks = '') {
     subject: `${prefiks}${tematMailingu(r)}`,
     html,
     headers: { 'List-Unsubscribe': `<${konfiguracja.unsubscribeUrl}>` },
+    ...(zaplanuj ? { scheduledAt: zaplanuj } : {}),
   })
 }
 
