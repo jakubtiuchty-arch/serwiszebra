@@ -176,9 +176,8 @@ export function generujMailingPodwyzki(r: OdbiorcaTerminali, c: KonfiguracjaMail
                 ${wiersz('Cena od 5 października', `ok. ${zl(oferta.cenaNetto * (1 + PODWYZKA))} netto`, true)}
               </table>
             </td></tr>
-            <tr><td style="padding:18px 24px 22px;text-align:center">
+            <tr><td style="padding:28px 24px 26px;text-align:center">
               <a href="${kontakt}" style="display:inline-block;background:${NAVY};color:#ffffff;text-decoration:none;padding:14px 30px;border-radius:10px;font-size:15px;font-weight:700">Poproś o ofertę specjalną</a>
-              <div style="font-size:10px;line-height:1.5;color:#b4bec9;margin-top:10px">Ceny katalogowe podstawowej konfiguracji. Dla klientów serwisu przygotowujemy ofertę specjalną według cen sprzed zmiany.</div>
             </td></tr>
           </table>
         </td></tr>`
