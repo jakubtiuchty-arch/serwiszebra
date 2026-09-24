@@ -120,42 +120,30 @@ const bezSierotek = (html: string) =>
 const zUtm = (url: string, utm: string) => `${url}${url.includes('?') ? '&' : '?'}${utm}`
 
 export function tematMailingu(r: OdbiorcaTerminali): string {
-  const { oferta, relacja } = dopasujOferte(r.modele[0])
-  if (oferta && relacja === 'ten_sam') return `Zmiana cennika Zebra od 5 października 2026 r. — model ${oferta.model}`
-  return 'Zmiana cennika terminali mobilnych Zebra od 5 października 2026 r.'
+  const { oferta } = dopasujOferte(r.modele[0])
+  const co = oferta ? `Zebra ${oferta.model}` : 'terminale Zebra'
+  return `Oferta specjalna na ${co} — ceny sprzed podwyżki do 4 października`
 }
 
 export function generujMailingPodwyzki(r: OdbiorcaTerminali, c: KonfiguracjaMailingu): string {
   const { oferta, relacja } = dopasujOferte(r.modele[0])
   const modelKlienta = esc(r.modele[0])
 
-  // „We wrześniu", nie „W wrześniu"
-  const wMiesiacu = (m: string) => `${/^w/i.test(m) ? 'We' : 'W'} ${esc(m)}`
-  const listaModeli = (m: string[]) =>
-    m.length > 1 ? `${m.slice(0, -1).map(esc).join(', ')} i ${esc(m[m.length - 1])}` : esc(m[0])
-  const zdanieONaprawie =
-    r.zgloszen > 1
-      ? `W tym roku realizowaliśmy dla Państwa ${r.zgloszen} ${r.zgloszen < 5 ? 'zlecenia serwisowe' : 'zleceń serwisowych'} urządzeń Zebra (${r.modele.map(esc).join(', ')}).`
-      : r.modele.length > 1
-        ? `${r.miesiacNaprawy ? `${wMiesiacu(r.miesiacNaprawy)} realizowaliśmy` : 'Realizowaliśmy'} dla Państwa naprawę urządzeń Zebra ${listaModeli(r.modele)}.`
-        : r.miesiacNaprawy
-          ? `${wMiesiacu(r.miesiacNaprawy)} realizowaliśmy dla Państwa naprawę urządzenia Zebra ${modelKlienta}.`
-          : `Realizowaliśmy dla Państwa naprawę urządzenia Zebra ${modelKlienta}.`
-
-  // Wprost, co proponujemy: serwisowany TC21 → TC22, TC26 → TC27, MC3300 → MC3400 itd.
-  const zdanieOPropozycji = !oferta
-    ? `Model ${modelKlienta} nie jest już dostępny w naszej ofercie.`
+  // Pierwsze zdanie mówi o podwyżce i o modelu klienta; historia napraw jest powodem,
+  // dla którego klient dostaje ofertę specjalną (wzajemność, ekskluzywność), a nie wstępem
+  const zdanieOModelu = !oferta
+    ? `Zmiana obejmuje również urządzenia, które zastępują serwisowany w Państwa firmie model ${modelKlienta}.`
     : relacja === 'ten_sam'
-      ? `Model ${esc(oferta.model)} pozostaje w ofercie producenta. Poniżej przedstawiamy jego cenę przed zmianą cennika i po jej wprowadzeniu.`
+      ? `Zmiana obejmuje model ${esc(oferta.model)}, który serwisowaliśmy w Państwa firmie.`
       : relacja === 'zamiennik'
-        ? `Model ${modelKlienta} jest obecnie niedostępny. W przypadku wymiany lub zakupu kolejnych urządzeń proponujemy model Zebra ${esc(oferta.model)}.`
-      : `Obecnym odpowiednikiem modelu ${modelKlienta} w ofercie Zebra Technologies jest ${esc(oferta.model)}. Proponujemy ten model w przypadku wymiany lub zakupu kolejnych urządzeń.`
+        ? `Zmiana obejmuje model ${esc(oferta.model)}, który proponujemy w miejsce niedostępnego obecnie modelu ${modelKlienta}, serwisowanego w Państwa firmie.`
+        : `Zmiana obejmuje model ${esc(oferta.model)} — obecny odpowiednik terminala ${modelKlienta}, który serwisowaliśmy w Państwa firmie.`
 
   // Wszystkie przyciski prowadzą do kontaktu, NIE do sklepu: klient dostaje ofertę specjalną
   // po cenach sprzed zmiany cennika (decyzja Jakuba 24.09.2026), a nie cenę sklepową
   const kontakt = `mailto:${c.replyTo}?subject=${encodeURIComponent(`Oferta specjalna przed zmianą cennika Zebra — ${oferta ? `Zebra ${oferta.model}` : r.modele[0]}`)}`
 
-  const preheader = 'Od 5 października 2026 r. ceny terminali mobilnych Zebra wzrosną o 15%. Przygotujemy dla Państwa ofertę specjalną według cen sprzed zmiany.'
+  const preheader = 'Jako klientom naszego serwisu proponujemy Państwu zakup terminali Zebra według cen sprzed podwyżki. Wystarczy odpowiedzieć na tę wiadomość.'
 
   const wiersz = (etykieta: string, wartosc: string, ostatni = false) => `
     <tr>
@@ -260,8 +248,8 @@ export function generujMailingPodwyzki(r: OdbiorcaTerminali, c: KonfiguracjaMail
         <tr><td style="background:#0f2238;padding:6px 28px 24px">
           <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
             <td valign="middle" style="padding-right:14px">
-              <h1 style="margin:0;color:#ffffff;font-size:24px;font-weight:700;line-height:1.3">Wzrost cen terminali mobilnych Zebra</h1>
-              <div style="color:rgba(255,255,255,.72);font-size:15px;line-height:1.5;margin-top:6px">Od 5 października <span style="white-space:nowrap">2026&nbsp;r.</span> — dotyczy m.in. modeli TC22, MC3400 i MC9400</div>
+              <h1 style="margin:0;color:#ffffff;font-size:24px;font-weight:700;line-height:1.3">Od 5 października ceny terminali Zebra wyższe o 15%</h1>
+              <div style="color:rgba(255,255,255,.72);font-size:15px;line-height:1.5;margin-top:6px">Dla klientów serwisu: oferta według cen sprzed podwyżki, ważna do 4 października <span style="white-space:nowrap">2026&nbsp;r.</span></div>
             </td>
             <td width="150" align="right" valign="middle" class="procent" style="color:${LIME};font-size:56px;font-weight:800;line-height:1;white-space:nowrap">+15%</td>
           </tr></table>
@@ -277,26 +265,24 @@ export function generujMailingPodwyzki(r: OdbiorcaTerminali, c: KonfiguracjaMail
         <tr><td style="background:#ffffff;border-radius:14px 14px 0 0;padding:26px 28px 0">
           <p style="margin:0;font-size:15px;line-height:1.75;color:${BODY};text-align:justify" class="akapit">
             <strong style="color:${INK};font-weight:600">Szanowni Państwo,</strong><br>
-            ${zdanieONaprawie} Uprzejmie informujemy o zmianie cennika terminali mobilnych Zebra.
+            od 5 października <span style="white-space:nowrap">2026&nbsp;r.</span> Zebra Technologies podnosi ceny terminali mobilnych o 15%. ${zdanieOModelu}
           </p>
           <p style="margin:12px 0 0;font-size:15px;line-height:1.75;color:${BODY};text-align:justify" class="akapit">
-            Od 5 października <span style="white-space:nowrap">2026&nbsp;r.</span> Zebra Technologies podnosi ceny katalogowe terminali mobilnych o 15%.
-            Producent uzasadnia zmianę wzrostem kosztów komponentów.
-          </p>
-          <p style="margin:12px 0 0;font-size:15px;line-height:1.75;color:${BODY};text-align:justify" class="akapit">
-            ${zdanieOPropozycji} Dla klientów naszego serwisu przygotujemy ofertę specjalną według cen obowiązujących
-            przed zmianą cennika, pod warunkiem złożenia zamówienia do 4 października <span style="white-space:nowrap">2026&nbsp;r.</span>
+            Jako klientom naszego serwisu proponujemy Państwu <strong style="color:${INK};font-weight:600">zakup terminali Zebra według cen sprzed podwyżki</strong>.
+            Oferta specjalna obowiązuje przy zamówieniu złożonym do 4 października <span style="white-space:nowrap">2026&nbsp;r.</span>
+            i nie jest dostępna w naszym sklepie internetowym.
           </p>
         </td></tr>
 
         ${kartaCeny}
 
-        ${oferta ? `        <tr><td style="background:#ffffff;padding:0 28px 4px">
-          <p style="margin:0;font-size:14px;line-height:1.7;color:${BODY};text-align:justify" class="akapit">
-            W celu otrzymania oferty prosimy o odpowiedź na niniejszą wiadomość z informacją o liczbie urządzeń
-            lub o kontakt telefoniczny pod numerem +48 601 619 898.
+        <tr><td style="background:#ffffff;padding:0 28px 4px">
+          <p style="margin:0;font-size:15px;line-height:1.75;color:${BODY};text-align:justify" class="akapit">
+            <strong style="color:${INK};font-weight:600">Aby otrzymać ofertę, wystarczy odpowiedzieć na tę wiadomość i podać liczbę urządzeń.</strong>
+            Ofertę prześlemy w ciągu jednego dnia roboczego. Urządzenia dostarczamy jako Zebra Premier Business Partner,
+            z gwarancją producenta i opieką naszego autoryzowanego serwisu.
           </p>
-        </td></tr>` : ''}
+        </td></tr>
 
         <tr><td style="background:#ffffff;padding:18px 28px 26px;border-radius:0 0 14px 14px">
           <p style="margin:0;font-size:15px;line-height:1.75;color:${BODY}">
