@@ -166,9 +166,7 @@ export function generujMailingPodwyzki(r: OdbiorcaTerminali, c: KonfiguracjaMail
             <tr><td style="padding:4px 24px 0">
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
                 ${wiersz('Cena do 4 października', `${zl(oferta.cenaNetto)} netto`)}
-                ${wiersz('Cena od 5 października', `ok. ${zl(oferta.cenaNetto * (1 + PODWYZKA))} netto`)}
-                ${wiersz('Różnica na jednej sztuce', `<span style="color:${NAVY}">${zlOkragle(doplata)} netto</span>`)}
-                ${wiersz('Różnica przy 5 sztukach', `<span style="color:${NAVY}">${zlOkragle(doplata * 5)} netto</span>`, true)}
+                ${wiersz('Cena od 5 października', `ok. ${zl(oferta.cenaNetto * (1 + PODWYZKA))} netto`, true)}
               </table>
             </td></tr>
             <tr><td style="padding:18px 24px 22px;text-align:center">
