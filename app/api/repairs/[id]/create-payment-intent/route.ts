@@ -91,6 +91,36 @@ export async function POST(
       );
     }
 
+    // Poprzednia płatność tego zgłoszenia — sprawdzamy ją w Stripe, a nie tylko w bazie.
+    // 22.09.2026 baza nie zapisała udanej płatności i klient zapłacił drugi raz,
+    // bo ten endpoint utworzył nową płatność.
+    if (repair.stripe_payment_id) {
+      const previous = await stripe.paymentIntents.retrieve(repair.stripe_payment_id);
+
+      // requires_action = klient potwierdza w banku / aplikacji (BLIK, 3-D Secure)
+      if (['succeeded', 'processing', 'requires_action'].includes(previous.status)) {
+        console.error(`❌ [Payment] Zgłoszenie ${repair.repair_number}: poprzednia płatność ${previous.id} ma status ${previous.status} — blokuję drugą`);
+        return NextResponse.json(
+          {
+            error: previous.status === 'succeeded'
+              ? 'Ta płatność została już zaksięgowana. Status zgłoszenia zaktualizuje się automatycznie.'
+              : 'Poprzednia płatność jest jeszcze przetwarzana. Proszę odczekać kilka minut.',
+          },
+          { status: 409 }
+        );
+      }
+
+      // Niedokończona płatność na tę samą kwotę — używamy jej zamiast tworzyć kolejną
+      const expectedAmount = Math.round(
+        (isDiagnosticFee ? REZYGNACJA_BRUTTO : (repair.final_price || repair.estimated_price) || 0) * 100
+      );
+      const sameKind = previous.metadata?.is_diagnostic_fee === (isDiagnosticFee ? 'true' : 'false');
+      const reusable = ['requires_payment_method', 'requires_confirmation'].includes(previous.status);
+      if (reusable && sameKind && previous.amount === expectedAmount && previous.client_secret) {
+        return NextResponse.json({ clientSecret: previous.client_secret });
+      }
+    }
+
     const shortId = repair.id.split('-')[0].toUpperCase();
     // Numer zgłoszenia (np. 202607150954) — ten sam, który widzi klient i admin;
     // w opisie płatności Stripe pozwala księgowości powiązać wpłatę ze zgłoszeniem

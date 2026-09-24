@@ -5,6 +5,27 @@ import { createClient as createSupabaseClient } from '@supabase/supabase-js';
 import Stripe from 'stripe';
 import { sendRepairPaidEmail, sendRepairPaidAdminEmail, sendDiagnosticFeePaidAdminEmail } from '@/lib/email';
 import { REZYGNACJA_BRUTTO_TEKST } from '@/lib/oplaty-serwis'
+import { sendMail } from '@/lib/mail/transport';
+
+// Błąd zapisu w bazie przerywa obsługę webhooka odpowiedzią 500 — Stripe ponawia
+// dostarczenie przez 3 dni, a nieudane zdarzenie widać w panelu Stripe.
+// Wcześniej błąd trafiał tylko do logów, a Stripe dostawał 200.
+class WebhookDbError extends Error {}
+
+async function alertDuplicatePayment(repair: any, paymentIntentId: string) {
+  const text = `Zgłoszenie #${repair.repair_number} (${repair.first_name} ${repair.last_name}, ${repair.email}) było już opłacone płatnością ${repair.stripe_payment_id}, a Stripe zaksięgował kolejną: ${paymentIntentId}. Sprawdź w panelu Stripe i zwróć duplikat.`;
+  console.error(`🚨 [Webhook] PODWÓJNA PŁATNOŚĆ: ${text}`);
+  try {
+    await sendMail({
+      from: 'System Serwisu <system@serwis-zebry.pl>',
+      to: process.env.ADMIN_EMAIL || 'jakub.tiuchty@gmail.com',
+      subject: `PODWÓJNA PŁATNOŚĆ — zgłoszenie #${repair.repair_number}`,
+      text,
+    });
+  } catch (e) {
+    console.error('❌ [Webhook] Nie udało się wysłać alertu o podwójnej płatności:', e);
+  }
+}
 
 // Funkcja pomocnicza - wysyłka do Baselinker
 async function sendToBaselinker(orderId: string) {
@@ -24,22 +45,32 @@ async function sendToBaselinker(orderId: string) {
 }
 
 // Funkcja pomocnicza - obsługa płatności za naprawę
-async function handleRepairPayment(repairId: string, supabase: any) {
-  try {
+async function handleRepairPayment(repairId: string, supabase: any, paymentIntentId: string | null) {
     console.log('🔍 [Webhook] Looking for repair:', repairId);
-    
+
     // Pobierz dane naprawy
     const { data: repair, error: repairError } = await supabase
       .from('repair_requests')
       .select('*')
       .eq('id', repairId)
-      .single();
+      .maybeSingle();
 
-    console.log('📦 [Webhook] Repair data:', repair);
-    console.log('⚠️ [Webhook] Error:', repairError);
+    if (repairError) {
+      throw new WebhookDbError(`Odczyt zgłoszenia ${repairId}: ${repairError.message}`);
+    }
+    if (!repair) {
+      console.error('❌ Repair not found:', repairId);
+      return;
+    }
 
-    if (repairError || !repair) {
-      console.error('❌ Repair not found:', repairId, repairError);
+    // Idempotencja — Stripe może dostarczyć zdarzenie kilka razy. Inna płatność
+    // przy już opłaconym zgłoszeniu oznacza, że klient zapłacił dwa razy.
+    if (repair.payment_status === 'succeeded') {
+      if (paymentIntentId && repair.stripe_payment_id && repair.stripe_payment_id !== paymentIntentId) {
+        await alertDuplicatePayment(repair, paymentIntentId);
+      } else {
+        console.log(`✅ [Webhook] Repair ${repairId} already marked as paid`);
+      }
       return;
     }
 
@@ -58,13 +89,13 @@ async function handleRepairPayment(repairId: string, supabase: any) {
         paid_at: new Date().toISOString(),
         // płatność ≠ rozpoczęcie naprawy; na stół bierze ją serwisant
         status: 'oplacone',
+        ...(paymentIntentId ? { stripe_payment_id: paymentIntentId } : {}),
         updated_at: new Date().toISOString(),
       })
       .eq('id', repairId);
 
     if (updateError) {
-      console.error('❌ Error updating repair:', updateError);
-      return;
+      throw new WebhookDbError(`Zapis płatności zgłoszenia ${repair.repair_number}: ${updateError.message}`);
     }
 
     // Dodaj wpis do historii statusów
@@ -107,24 +138,22 @@ async function handleRepairPayment(repairId: string, supabase: any) {
     } catch (emailError) {
       console.error('❌ Error sending emails:', emailError);
     }
-
-  } catch (error) {
-    console.error('❌ Error handling repair payment:', error);
-  }
 }
 
 // Funkcja pomocnicza - opłata za diagnostykę po odrzuceniu wyceny (REZYGNACJA_BRUTTO z lib/oplaty-serwis).
 // Zgłoszenie jest już anulowane — oznaczamy tylko płatność, statusu nie zmieniamy.
 async function handleDiagnosticFeePayment(repairId: string, supabase: any) {
-  try {
     const { data: repair, error: repairError } = await supabase
       .from('repair_requests')
       .select('*')
       .eq('id', repairId)
-      .single();
+      .maybeSingle();
 
-    if (repairError || !repair) {
-      console.error('❌ [Webhook] Repair not found for diagnostic fee:', repairId, repairError);
+    if (repairError) {
+      throw new WebhookDbError(`Odczyt zgłoszenia ${repairId} (diagnostyka): ${repairError.message}`);
+    }
+    if (!repair) {
+      console.error('❌ [Webhook] Repair not found for diagnostic fee:', repairId);
       return;
     }
 
@@ -145,8 +174,7 @@ async function handleDiagnosticFeePayment(repairId: string, supabase: any) {
       .eq('id', repairId);
 
     if (updateError) {
-      console.error('❌ [Webhook] Error updating diagnostic fee payment:', updateError);
-      return;
+      throw new WebhookDbError(`Zapis opłaty za diagnostykę zgłoszenia ${repair.repair_number}: ${updateError.message}`);
     }
 
     await supabase
@@ -173,9 +201,6 @@ async function handleDiagnosticFeePayment(repairId: string, supabase: any) {
     } catch (emailError) {
       console.error('❌ [Webhook] Error sending diagnostic fee email:', emailError);
     }
-  } catch (error) {
-    console.error('❌ Error handling diagnostic fee payment:', error);
-  }
 }
 
 export async function POST(request: NextRequest) {
@@ -218,6 +243,17 @@ export async function POST(request: NextRequest) {
     }
   );
 
+  try {
+    await handleEvent(event, supabase);
+  } catch (error) {
+    console.error(`❌ [Webhook] ${event.type} ${event.id} — obsługa przerwana, Stripe ponowi:`, error);
+    return NextResponse.json({ error: 'Webhook handling failed' }, { status: 500 });
+  }
+
+  return NextResponse.json({ received: true });
+}
+
+async function handleEvent(event: Stripe.Event, supabase: any) {
   // Obsługa różnych eventów
   switch (event.type) {
     case 'checkout.session.completed': {
@@ -266,16 +302,9 @@ export async function POST(request: NextRequest) {
         else if (session.metadata?.repair_id) {
           // SERWIS - naprawa
           const repairId = session.metadata.repair_id;
-          
-          await supabase
-            .from('repair_requests')
-            .update({
-              stripe_payment_id: session.payment_intent as string,
-              updated_at: new Date().toISOString(),
-            })
-            .eq('id', repairId);
-
-          await handleRepairPayment(repairId, supabase);
+          // stripe_payment_id zapisuje handleRepairPayment — wcześniejsze nadpisanie
+          // ukryłoby podwójną płatność
+          await handleRepairPayment(repairId, supabase, (session.payment_intent as string) || null);
         }
       }
       break;
@@ -289,7 +318,7 @@ export async function POST(request: NextRequest) {
         if (paymentIntent.metadata.is_diagnostic_fee === 'true') {
           await handleDiagnosticFeePayment(paymentIntent.metadata.repair_id, supabase);
         } else {
-          await handleRepairPayment(paymentIntent.metadata.repair_id, supabase);
+          await handleRepairPayment(paymentIntent.metadata.repair_id, supabase, paymentIntent.id);
         }
         break;
       }
@@ -322,7 +351,7 @@ export async function POST(request: NextRequest) {
           .single();
 
         if (repair) {
-          await handleRepairPayment(repair.id, supabase);
+          await handleRepairPayment(repair.id, supabase, paymentIntent.id);
         }
       }
       break;
@@ -336,20 +365,10 @@ export async function POST(request: NextRequest) {
         const repairId = charge.metadata.repair_id;
         const paymentIntentId = charge.payment_intent as string;
 
-        // Zaktualizuj repair z payment_intent_id
-        await supabase
-          .from('repair_requests')
-          .update({
-            stripe_payment_id: paymentIntentId,
-            updated_at: new Date().toISOString(),
-          })
-          .eq('id', repairId);
-
-        // Wywołaj funkcję obsługi płatności
         if (charge.metadata.is_diagnostic_fee === 'true') {
           await handleDiagnosticFeePayment(repairId, supabase);
         } else {
-          await handleRepairPayment(repairId, supabase);
+          await handleRepairPayment(repairId, supabase, paymentIntentId || null);
         }
       }
       break;
@@ -397,6 +416,4 @@ export async function POST(request: NextRequest) {
     default:
       console.log(`Unhandled event type: ${event.type}`);
   }
-
-  return NextResponse.json({ received: true });
 }

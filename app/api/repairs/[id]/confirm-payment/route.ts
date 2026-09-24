@@ -67,28 +67,40 @@ export async function POST(
       })
     }
 
-    // Zweryfikuj status płatności ze Stripe
+    // Zweryfikuj płatność w Stripe. Bez potwierdzenia ze Stripe NIE oznaczamy
+    // naprawy jako opłaconej — numer płatności przychodzi z przeglądarki klienta.
     const intentToCheck = paymentIntentId || repair.stripe_payment_id
-    let stripeStatus = null
-    
-    if (intentToCheck) {
-      try {
-        const paymentIntent = await stripe.paymentIntents.retrieve(intentToCheck)
-        stripeStatus = paymentIntent.status
-        console.log('📦 Stripe PaymentIntent status:', stripeStatus)
-        
-        if (stripeStatus !== 'succeeded' && stripeStatus !== 'processing') {
-          console.log('⏳ Payment not yet succeeded:', stripeStatus)
-          return NextResponse.json({
-            success: false,
-            message: `Płatność w trakcie: ${stripeStatus}`,
-            stripeStatus
-          })
-        }
-      } catch (stripeError) {
-        console.error('❌ Stripe verification error:', stripeError)
-        // Kontynuuj mimo błędu weryfikacji (może być już obsłużone przez webhook)
-      }
+    if (!intentToCheck) {
+      return NextResponse.json({ success: false, message: 'Brak płatności do potwierdzenia' })
+    }
+
+    let paymentIntent
+    try {
+      paymentIntent = await stripe.paymentIntents.retrieve(intentToCheck)
+    } catch (stripeError) {
+      console.error('❌ Stripe verification error:', stripeError)
+      // Webhook i tak potwierdzi płatność, gdy Stripe ją zaksięguje
+      return NextResponse.json({ success: false, message: 'Nie udało się zweryfikować płatności' })
+    }
+
+    if (paymentIntent.metadata?.repair_id !== repairId) {
+      console.error('❌ PaymentIntent należy do innego zgłoszenia:', intentToCheck, paymentIntent.metadata?.repair_id)
+      return NextResponse.json({ error: 'Płatność nie dotyczy tego zgłoszenia' }, { status: 400 })
+    }
+
+    // Opłatę za diagnostykę potwierdza wyłącznie webhook (zgłoszenie zostaje anulowane)
+    if (paymentIntent.metadata?.is_diagnostic_fee === 'true') {
+      return NextResponse.json({ success: true, message: 'Płatność zostanie potwierdzona automatycznie' })
+    }
+
+    const stripeStatus = paymentIntent.status
+    console.log('📦 Stripe PaymentIntent status:', stripeStatus)
+    if (stripeStatus !== 'succeeded') {
+      return NextResponse.json({
+        success: false,
+        message: `Płatność w trakcie: ${stripeStatus}`,
+        stripeStatus
+      })
     }
 
     // Zaktualizuj status płatności i naprawy
@@ -100,7 +112,7 @@ export async function POST(
         // płatność nie jest rozpoczęciem naprawy — na stanowisko serwisowe
         // urządzenie trafia osobno, wtedy serwisant ustawia 'w_naprawie'
         status: 'oplacone',
-        stripe_payment_id: paymentIntentId || repair.stripe_payment_id,
+        stripe_payment_id: paymentIntent.id,
         updated_at: new Date().toISOString(),
       })
       .eq('id', repairId)

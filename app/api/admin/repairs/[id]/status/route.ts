@@ -4,6 +4,7 @@ import { createClient } from '@/lib/supabase/server'
 import { sendRepairStatusChangedEmail, sendPackageReceivedEmail, sendRepairStartedEmail } from '@/lib/email'
 import { generateReceiptPDF } from '@/lib/receipt-pdf-generator'
 import { canReceiveEmail } from '@/lib/email-utils'
+import { STATUSY_RECZNE } from '@/lib/statusy-napraw'
 
 export async function PATCH(
   request: NextRequest,
@@ -32,20 +33,7 @@ export async function PATCH(
       )
     }
 
-    const validStatuses = [
-      'nowe',
-      'odbior_od_klienta',
-      'odebrane',
-      'diagnoza',
-      'wycena',
-      'oplacone',
-      'w_naprawie',
-      'zakonczone',
-      'wyslane',
-      'anulowane'
-    ]
-
-    if (!validStatuses.includes(status)) {
+    if (!STATUSY_RECZNE.includes(status)) {
       return NextResponse.json(
         { error: 'Nieprawidłowy status' },
         { status: 400 }
