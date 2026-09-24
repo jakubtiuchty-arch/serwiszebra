@@ -126,19 +126,25 @@ export function generujMailingPodwyzki(r: OdbiorcaTerminali, c: KonfiguracjaMail
   const modelKlienta = esc(r.modele[0])
   const doplata = oferta ? oferta.cenaNetto * PODWYZKA : 0
 
+  // „We wrześniu", nie „W wrześniu"
+  const wMiesiacu = (m: string) => `${/^w/i.test(m) ? 'We' : 'W'} ${esc(m)}`
+  const listaModeli = (m: string[]) =>
+    m.length > 1 ? `${m.slice(0, -1).map(esc).join(', ')} i ${esc(m[m.length - 1])}` : esc(m[0])
   const zdanieONaprawie =
     r.zgloszen > 1
       ? `W tym roku realizowaliśmy dla Państwa ${r.zgloszen} ${r.zgloszen < 5 ? 'zlecenia serwisowe' : 'zleceń serwisowych'} urządzeń Zebra (${r.modele.map(esc).join(', ')}).`
-      : r.miesiacNaprawy
-        ? `W ${esc(r.miesiacNaprawy)} realizowaliśmy dla Państwa naprawę urządzenia Zebra ${modelKlienta}.`
-        : `Realizowaliśmy dla Państwa naprawę urządzenia Zebra ${modelKlienta}.`
+      : r.modele.length > 1
+        ? `${r.miesiacNaprawy ? `${wMiesiacu(r.miesiacNaprawy)} realizowaliśmy` : 'Realizowaliśmy'} dla Państwa naprawę urządzeń Zebra ${listaModeli(r.modele)}.`
+        : r.miesiacNaprawy
+          ? `${wMiesiacu(r.miesiacNaprawy)} realizowaliśmy dla Państwa naprawę urządzenia Zebra ${modelKlienta}.`
+          : `Realizowaliśmy dla Państwa naprawę urządzenia Zebra ${modelKlienta}.`
 
   // Wprost, co proponujemy: serwisowany TC21 → TC22, TC26 → TC27, MC3300 → MC3400 itd.
   const zdanieOPropozycji = !oferta
     ? `Model ${modelKlienta} nie jest już dostępny w naszym sklepie. Przygotujemy ofertę na urządzenie, które go zastępuje.`
     : relacja === 'ten_sam'
       ? `Serwisowany u nas model ${esc(oferta.model)} jest nadal w ofercie producenta, dlatego jego dotyczy poniższa propozycja.`
-      : `Następcą serwisowanego u nas modelu ${modelKlienta} jest Zebra ${esc(oferta.model)} i ten model proponujemy przy wymianie lub rozbudowie floty urządzeń.`
+      : `Obecnym odpowiednikiem serwisowanego u nas modelu ${modelKlienta} w ofercie Zebry jest ${esc(oferta.model)} i ten model proponujemy przy wymianie lub rozbudowie floty urządzeń.`
 
   const preheader = oferta
     ? `Zamówienia złożone do 4 października realizujemy po obecnym cenniku. Dla ${oferta.model} to ${zlOkragle(doplata)} netto mniej na każdej sztuce.`
@@ -157,7 +163,7 @@ export function generujMailingPodwyzki(r: OdbiorcaTerminali, c: KonfiguracjaMail
             <tr><td style="padding:22px 24px 8px">
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
                 <td valign="middle">
-                  <div style="font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#5b7a2e">${relacja === 'nastepca' ? `Następca ${modelKlienta}` : 'Państwa model'}</div>
+                  <div style="font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#5b7a2e">${relacja === 'nastepca' ? `Odpowiednik ${modelKlienta}` : 'Państwa model'}</div>
                   <div style="font-size:24px;font-weight:700;color:${INK};margin-top:6px">Zebra ${esc(oferta.model)}</div>
                 </td>
                 <td width="140" align="right" valign="middle"><img src="${oferta.imageUrl}" width="${oferta.imgW}" height="${oferta.imgH}" alt="Zebra ${esc(oferta.model)}" style="display:block;width:${oferta.imgW}px;height:${oferta.imgH}px;border:0;margin-left:auto"></td>
