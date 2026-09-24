@@ -50,8 +50,6 @@ export const OFERTY: Record<string, OfertaModelu> = {
   TC58: { model: 'TC58', cenaNetto: 7433.24, url: `${SHOP}/produkt/zebra-tc58`, imageUrl: `${SITE}/newsletter/modele/tc53.png`, imgW: 69, imgH: 140 },
   TC73: { model: 'TC73', cenaNetto: 7976.86, url: `${SHOP}/produkt/zebra-tc73`, imageUrl: `${SITE}/newsletter/modele/tc73.png`, imgW: 71, imgH: 140 },
   TC78: { model: 'TC78', cenaNetto: 8469.95, url: `${SHOP}/produkt/zebra-tc78`, imageUrl: `${SITE}/newsletter/modele/tc78.png`, imgW: 71, imgH: 140 },
-  MC2200: { model: 'MC2200', cenaNetto: 2260.75, url: `${SHOP}/produkt/zebra-mc2200`, imageUrl: `${SITE}/newsletter/modele/mc2200.png`, imgW: 58, imgH: 140 },
-  MC2700: { model: 'MC2700', cenaNetto: 2680.29, url: `${SHOP}/produkt/zebra-mc2700`, imageUrl: `${SITE}/newsletter/modele/mc2700.png`, imgW: 58, imgH: 140 },
   MC3400: { model: 'MC3400', cenaNetto: 4657.88, url: `${SHOP}/produkt/zebra-mc3400`, imageUrl: `${SITE}/newsletter/modele/mc3400.png`, imgW: 53, imgH: 140 },
   MC9400: { model: 'MC9400', cenaNetto: 8540.22, url: `${SHOP}/produkt/zebra-mc9400`, imageUrl: `${SITE}/newsletter/modele/mc9400.png`, imgW: 56, imgH: 140 },
 }
@@ -61,9 +59,9 @@ export const OFERTY: Record<string, OfertaModelu> = {
  * wskazuje następcę; tablet L10 i TC8000 nie mają karty w sklepie — dla nich
  * mail kończy się prośbą o ofertę.
  */
-export function dopasujOferte(modelKlienta: string): { oferta: OfertaModelu | null; relacja: 'ten_sam' | 'nastepca' | 'zapytanie' } {
+export function dopasujOferte(modelKlienta: string): { oferta: OfertaModelu | null; relacja: 'ten_sam' | 'nastepca' | 'zamiennik' | 'zapytanie' } {
   const m = modelKlienta.toUpperCase().replace(/[\s-]|ZEBRA/g, '')
-  const reguly: [RegExp, string, 'ten_sam' | 'nastepca'][] = [
+  const reguly: [RegExp, string, 'ten_sam' | 'nastepca' | 'zamiennik'][] = [
     [/^TC22/, 'TC22', 'ten_sam'],
     [/^TC27/, 'TC27', 'ten_sam'],
     [/^TC2[01]|^TC220/, 'TC22', 'nastepca'],
@@ -76,8 +74,9 @@ export function dopasujOferte(modelKlienta: string): { oferta: OfertaModelu | nu
     [/^TC78/, 'TC78', 'ten_sam'],
     [/^TC72/, 'TC73', 'nastepca'],
     [/^TC77/, 'TC78', 'nastepca'],
-    [/^MC22/, 'MC2200', 'ten_sam'],
-    [/^MC27/, 'MC2700', 'ten_sam'],
+    // MC2200 i MC2700 są niedostępne — w zamian MC3400 (decyzja Jakuba 24.09.2026)
+    [/^MC22/, 'MC3400', 'zamiennik'],
+    [/^MC27/, 'MC3400', 'zamiennik'],
     [/^MC34/, 'MC3400', 'ten_sam'],
     [/^MC33/, 'MC3400', 'nastepca'],
     [/^MC94/, 'MC9400', 'ten_sam'],
@@ -144,6 +143,8 @@ export function generujMailingPodwyzki(r: OdbiorcaTerminali, c: KonfiguracjaMail
     ? `Model ${modelKlienta} nie jest już dostępny w naszym sklepie. Przygotujemy ofertę na urządzenie, które go zastępuje.`
     : relacja === 'ten_sam'
       ? `Serwisowany u nas model ${esc(oferta.model)} jest nadal w ofercie producenta, dlatego jego dotyczy poniższa propozycja.`
+      : relacja === 'zamiennik'
+        ? `Model ${modelKlienta} jest obecnie niedostępny, dlatego przy wymianie lub rozbudowie floty urządzeń proponujemy Zebra ${esc(oferta.model)}.`
       : `Obecnym odpowiednikiem serwisowanego u nas modelu ${modelKlienta} w ofercie Zebry jest ${esc(oferta.model)} i ten model proponujemy przy wymianie lub rozbudowie floty urządzeń.`
 
   const preheader = oferta
@@ -163,7 +164,7 @@ export function generujMailingPodwyzki(r: OdbiorcaTerminali, c: KonfiguracjaMail
             <tr><td style="padding:22px 24px 8px">
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
                 <td valign="middle">
-                  <div style="font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#5b7a2e">${relacja === 'nastepca' ? `Odpowiednik ${modelKlienta}` : 'Państwa model'}</div>
+                  <div style="font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#5b7a2e">${relacja === 'nastepca' ? `Odpowiednik ${modelKlienta}` : relacja === 'zamiennik' ? `Zamiast ${modelKlienta}` : 'Państwa model'}</div>
                   <div style="font-size:24px;font-weight:700;color:${INK};margin-top:6px">Zebra ${esc(oferta.model)}</div>
                 </td>
                 <td width="140" align="right" valign="middle"><img src="${oferta.imageUrl}" width="${oferta.imgW}" height="${oferta.imgH}" alt="Zebra ${esc(oferta.model)}" style="display:block;width:${oferta.imgW}px;height:${oferta.imgH}px;border:0;margin-left:auto"></td>

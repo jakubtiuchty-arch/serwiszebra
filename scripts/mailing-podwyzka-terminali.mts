@@ -59,6 +59,7 @@ if (testNa) {
     { nazwa: 'ten sam model', modele: ['TC27'], zgloszen: 1, miesiacNaprawy: 'sierpniu' },
     { nazwa: 'następca', modele: ['TC26', 'TC21'], zgloszen: 3 },
     { nazwa: 'następca z klawiaturą', modele: ['MC3300'], zgloszen: 1, miesiacNaprawy: 'czerwcu' },
+    { nazwa: 'zamiennik MC2200', modele: ['MC2200'], zgloszen: 1, miesiacNaprawy: 'lipcu' },
     { nazwa: 'prośba o ofertę', modele: ['TC8000'], zgloszen: 1, miesiacNaprawy: 'lipcu' },
   ]
   for (const w of WARIANTY) {
