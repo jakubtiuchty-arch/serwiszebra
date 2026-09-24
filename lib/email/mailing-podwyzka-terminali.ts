@@ -261,14 +261,14 @@ export function generujMailingPodwyzki(r: OdbiorcaTerminali, c: KonfiguracjaMail
           <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
             <td valign="middle" style="padding-right:14px">
               <h1 style="margin:0;color:#ffffff;font-size:24px;font-weight:700;line-height:1.3">Wzrost cen terminali mobilnych Zebra</h1>
-              <div style="color:rgba(255,255,255,.72);font-size:15px;line-height:1.5;margin-top:6px">Od 5 października 2026&nbsp;r. — dotyczy m.in. modeli TC22, MC3400 i MC9400</div>
+              <div style="color:rgba(255,255,255,.72);font-size:15px;line-height:1.5;margin-top:6px">Od 5 października <span style="white-space:nowrap">2026&nbsp;r.</span> — dotyczy m.in. modeli TC22, MC3400 i MC9400</div>
             </td>
             <td width="150" align="right" valign="middle" class="procent" style="color:${LIME};font-size:56px;font-weight:800;line-height:1;white-space:nowrap">+15%</td>
           </tr></table>
         </td></tr>
 
         <tr><td style="background:${LIME};padding:11px 28px;text-align:center;color:#14300a;font-size:13px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;border-radius:0 0 14px 14px">
-          Obecny cennik obowiązuje do 4 października 2026&nbsp;r.
+          Obecny cennik obowiązuje do 4 października <span style="white-space:nowrap">2026&nbsp;r.</span>
         </td></tr>
 
         <tr><td style="height:18px;line-height:18px;font-size:0">&nbsp;</td></tr>
@@ -280,12 +280,12 @@ export function generujMailingPodwyzki(r: OdbiorcaTerminali, c: KonfiguracjaMail
             ${zdanieONaprawie} Uprzejmie informujemy o zmianie cennika terminali mobilnych Zebra.
           </p>
           <p style="margin:12px 0 0;font-size:15px;line-height:1.75;color:${BODY};text-align:justify" class="akapit">
-            Od 5 października 2026&nbsp;r. Zebra Technologies podnosi ceny katalogowe terminali mobilnych o 15%.
+            Od 5 października <span style="white-space:nowrap">2026&nbsp;r.</span> Zebra Technologies podnosi ceny katalogowe terminali mobilnych o 15%.
             Producent uzasadnia zmianę wzrostem kosztów komponentów.
           </p>
           <p style="margin:12px 0 0;font-size:15px;line-height:1.75;color:${BODY};text-align:justify" class="akapit">
             ${zdanieOPropozycji} Dla klientów naszego serwisu przygotujemy ofertę specjalną według cen obowiązujących
-            przed zmianą cennika, pod warunkiem złożenia zamówienia do 4 października 2026&nbsp;r.
+            przed zmianą cennika, pod warunkiem złożenia zamówienia do 4 października <span style="white-space:nowrap">2026&nbsp;r.</span>
           </p>
         </td></tr>
 
