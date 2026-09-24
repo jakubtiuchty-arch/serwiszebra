@@ -1,6 +1,8 @@
 /**
- * Mailing do klientów serwisu, którzy oddawali do naprawy terminale i tablety Zebra:
- * od 5.10.2026 Zebra podnosi ceny cennikowe tych urządzeń o 15%.
+ * Mailing do klientów serwisu, którzy oddawali do naprawy terminale Zebra:
+ * od 5.10.2026 Zebra podnosi ceny cennikowe terminali mobilnych o 15%.
+ * Tablety (ET, L10) nie są objęte podwyżką — decyzja Jakuba 24.09.2026,
+ * dlatego nie ma ich w ofertach ani w liście odbiorców.
  *
  * Treść oparta na badaniach (szczegóły w PROGRESS.md, 24.09.2026):
  * - prawdziwy, zewnętrzny powód i termin producenta zamiast sztucznej pilności
@@ -52,9 +54,6 @@ export const OFERTY: Record<string, OfertaModelu> = {
   MC2700: { model: 'MC2700', cenaNetto: 2680.29, url: `${SHOP}/produkt/zebra-mc2700`, imageUrl: `${SITE}/newsletter/modele/mc2700.png`, imgW: 58, imgH: 140 },
   MC3400: { model: 'MC3400', cenaNetto: 4657.88, url: `${SHOP}/produkt/zebra-mc3400`, imageUrl: `${SITE}/newsletter/modele/mc3400.png`, imgW: 53, imgH: 140 },
   MC9400: { model: 'MC9400', cenaNetto: 8540.22, url: `${SHOP}/produkt/zebra-mc9400`, imageUrl: `${SITE}/newsletter/modele/mc9400.png`, imgW: 56, imgH: 140 },
-  ET40: { model: 'ET40', cenaNetto: 2732.2, url: `${SHOP}/produkt/zebra-et40`, imageUrl: `${SITE}/newsletter/modele/et40.png`, imgW: 130, imgH: 84 },
-  ET60: { model: 'ET60', cenaNetto: 7204.4, url: `${SHOP}/produkt/zebra-et60`, imageUrl: `${SITE}/newsletter/modele/et60.png`, imgW: 130, imgH: 95 },
-  ET65: { model: 'ET65', cenaNetto: 8364.71, url: `${SHOP}/produkt/zebra-et65`, imageUrl: `${SITE}/newsletter/modele/et65.png`, imgW: 130, imgH: 95 },
 }
 
 /**
@@ -83,9 +82,6 @@ export function dopasujOferte(modelKlienta: string): { oferta: OfertaModelu | nu
     [/^MC33/, 'MC3400', 'nastepca'],
     [/^MC94/, 'MC9400', 'ten_sam'],
     [/^MC93/, 'MC9400', 'nastepca'],
-    [/^ET40/, 'ET40', 'ten_sam'],
-    [/^ET65/, 'ET65', 'ten_sam'],
-    [/^ET60/, 'ET60', 'ten_sam'],
   ]
   for (const [re, klucz, relacja] of reguly) {
     if (re.test(m)) return { oferta: OFERTY[klucz], relacja }
@@ -96,7 +92,7 @@ export function dopasujOferte(modelKlienta: string): { oferta: OfertaModelu | nu
 export interface OdbiorcaTerminali {
   /** Modele z naszych zgłoszeń, najczęstszy pierwszy, np. ["TC26", "TC21"] */
   modele: string[]
-  /** Liczba zgłoszeń terminali i tabletów od tego klienta */
+  /** Liczba zgłoszeń terminali od tego klienta (bez tabletów) */
   zgloszen: number
   /** Miesiąc ostatniej naprawy w miejscowniku, np. „sierpniu" */
   miesiacNaprawy?: string | null
@@ -223,7 +219,7 @@ export function generujMailingPodwyzki(r: OdbiorcaTerminali, c: KonfiguracjaMail
             <td valign="middle" style="padding-right:14px">
               <div style="color:${LIME};font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase">Nowy cennik Zebra od 5 października</div>
               <h1 style="margin:8px 0 0;color:#ffffff;font-size:24px;font-weight:700;line-height:1.3">Ceny terminali Zebra idą w górę</h1>
-              <div style="color:rgba(255,255,255,.72);font-size:15px;line-height:1.5;margin-top:6px">TC22, MC3400, MC9400 i pozostałe terminale oraz tablety</div>
+              <div style="color:rgba(255,255,255,.72);font-size:15px;line-height:1.5;margin-top:6px">TC22, MC3400, MC9400 i pozostałe terminale mobilne</div>
               <div style="margin-top:14px">
                 <a href="${zUtm(`${SHOP}/terminale-mobilne-zebra`, c.utm)}" style="display:inline-block;background:${LIME};color:#14300a;font-size:14px;font-weight:700;text-decoration:none;padding:12px 22px;border-radius:9px">Zobacz terminale w obecnych cenach &rarr;</a>
               </div>
@@ -245,7 +241,7 @@ export function generujMailingPodwyzki(r: OdbiorcaTerminali, c: KonfiguracjaMail
             ${zdanieONaprawie} Uprzejmie informujemy o zmianie, która dotyczy tego sprzętu.
           </p>
           <p style="margin:12px 0 0;font-size:15px;line-height:1.75;color:${BODY}">
-            Od 5 października 2026 r. ceny terminali mobilnych i tabletów Zebra idą w górę o 15% —
+            Od 5 października 2026 r. ceny terminali mobilnych Zebra idą w górę o 15% —
             Zebra Technologies podnosi swój cennik. Producent uzasadnia zmianę wzrostem kosztów komponentów. Jest to zmiana
             cennika producenta, dlatego obejmie ceny u wszystkich sprzedawców.
           </p>
