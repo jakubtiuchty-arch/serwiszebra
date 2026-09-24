@@ -222,8 +222,7 @@ export function generujMailingPodwyzki(r: OdbiorcaTerminali, c: KonfiguracjaMail
         <tr><td style="background:#0f2238;padding:6px 28px 24px">
           <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
             <td valign="middle" style="padding-right:14px">
-              <div style="color:${LIME};font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase">Zmiana cennika Zebra Technologies</div>
-              <h1 style="margin:8px 0 0;color:#ffffff;font-size:24px;font-weight:700;line-height:1.3">Wzrost cen terminali mobilnych Zebra</h1>
+              <h1 style="margin:0;color:#ffffff;font-size:24px;font-weight:700;line-height:1.3">Wzrost cen terminali mobilnych Zebra</h1>
               <div style="color:rgba(255,255,255,.72);font-size:15px;line-height:1.5;margin-top:6px">Od 5 października 2026 r. — dotyczy m.in. modeli TC22, MC3400 i MC9400</div>
             </td>
             <td width="150" align="right" valign="middle" style="color:${LIME};font-size:56px;font-weight:800;line-height:1;white-space:nowrap">+15%</td>

@@ -36,7 +36,7 @@ const konfiguracja = {
   replyTo: REPLY_TO,
   unsubscribeUrl: `mailto:${REPLY_TO}?subject=${encodeURIComponent('Rezygnacja z informacji handlowych')}`,
   utm: 'utm_source=serwis-zebry&utm_medium=email&utm_campaign=podwyzka-zebra-2026-10',
-  banerUrl: 'https://www.serwis-zebry.pl/newsletter/podwyzka-terminale-zebra.jpg',
+  banerUrl: 'https://www.serwis-zebry.pl/newsletter/podwyzka-terminale-zebra-strzalki.jpg',
 }
 
 const resend = new Resend(process.env.RESEND_API_KEY)
