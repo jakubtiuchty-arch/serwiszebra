@@ -34,24 +34,27 @@ export interface OfertaModelu {
   /** Cena netto z karty produktu w dniu wysyłki */
   cenaNetto: number
   url: string
+  /** Zdjęcie z wypalonym tłem karty (#f4f8ec) — pliki z takmy mają białe, nieprzezroczyste tło */
   imageUrl: string
+  imgW: number
+  imgH: number
 }
 
 /** Ceny netto z kart takma.com.pl, sprawdzone 24.09.2026 */
 export const OFERTY: Record<string, OfertaModelu> = {
-  TC22: { model: 'TC22', cenaNetto: 2675.43, url: `${SHOP}/produkt/zebra-tc22`, imageUrl: `${SHOP}/images/products/tc22_scanner_1.png` },
-  TC27: { model: 'TC27', cenaNetto: 2934.49, url: `${SHOP}/produkt/zebra-tc27`, imageUrl: `${SHOP}/images/products/tc22_scanner_1.png` },
-  TC53: { model: 'TC53', cenaNetto: 7021.91, url: `${SHOP}/produkt/zebra-tc53`, imageUrl: `${SHOP}/images/products/zebra-tc53_1.png` },
-  TC58: { model: 'TC58', cenaNetto: 7433.24, url: `${SHOP}/produkt/zebra-tc58`, imageUrl: `${SHOP}/images/products/zebra-tc53_1.png` },
-  TC73: { model: 'TC73', cenaNetto: 7976.86, url: `${SHOP}/produkt/zebra-tc73`, imageUrl: `${SHOP}/images/products/zebra-tc73_1.png` },
-  TC78: { model: 'TC78', cenaNetto: 8469.95, url: `${SHOP}/produkt/zebra-tc78`, imageUrl: `${SHOP}/images/products/zebra-tc78_1.png` },
-  MC2200: { model: 'MC2200', cenaNetto: 2260.75, url: `${SHOP}/produkt/zebra-mc2200`, imageUrl: `${SHOP}/images/products/zebra-mc2200_1.png` },
-  MC2700: { model: 'MC2700', cenaNetto: 2680.29, url: `${SHOP}/produkt/zebra-mc2700`, imageUrl: `${SHOP}/images/products/zebra-mc2700_1.png` },
-  MC3400: { model: 'MC3400', cenaNetto: 4657.88, url: `${SHOP}/produkt/zebra-mc3400`, imageUrl: `${SHOP}/images/products/zebra-mc3400_1.png` },
-  MC9400: { model: 'MC9400', cenaNetto: 8540.22, url: `${SHOP}/produkt/zebra-mc9400`, imageUrl: `${SHOP}/images/products/zebra-mc9400_1.png` },
-  ET40: { model: 'ET40', cenaNetto: 2732.2, url: `${SHOP}/produkt/zebra-et40`, imageUrl: `${SHOP}/images/products/ET40AA-001C1B0-A6.png` },
-  ET60: { model: 'ET60', cenaNetto: 7204.4, url: `${SHOP}/produkt/zebra-et60`, imageUrl: `${SHOP}/images/products/ET60AW-0SQAGN00A0-A6.png` },
-  ET65: { model: 'ET65', cenaNetto: 8364.71, url: `${SHOP}/produkt/zebra-et65`, imageUrl: `${SHOP}/images/products/ET65AW-ESQAGS00A0-A6.png` },
+  TC22: { model: 'TC22', cenaNetto: 2675.43, url: `${SHOP}/produkt/zebra-tc22`, imageUrl: `${SITE}/newsletter/modele/tc22.png`, imgW: 70, imgH: 140 },
+  TC27: { model: 'TC27', cenaNetto: 2934.49, url: `${SHOP}/produkt/zebra-tc27`, imageUrl: `${SITE}/newsletter/modele/tc22.png`, imgW: 70, imgH: 140 },
+  TC53: { model: 'TC53', cenaNetto: 7021.91, url: `${SHOP}/produkt/zebra-tc53`, imageUrl: `${SITE}/newsletter/modele/tc53.png`, imgW: 69, imgH: 140 },
+  TC58: { model: 'TC58', cenaNetto: 7433.24, url: `${SHOP}/produkt/zebra-tc58`, imageUrl: `${SITE}/newsletter/modele/tc53.png`, imgW: 69, imgH: 140 },
+  TC73: { model: 'TC73', cenaNetto: 7976.86, url: `${SHOP}/produkt/zebra-tc73`, imageUrl: `${SITE}/newsletter/modele/tc73.png`, imgW: 71, imgH: 140 },
+  TC78: { model: 'TC78', cenaNetto: 8469.95, url: `${SHOP}/produkt/zebra-tc78`, imageUrl: `${SITE}/newsletter/modele/tc78.png`, imgW: 71, imgH: 140 },
+  MC2200: { model: 'MC2200', cenaNetto: 2260.75, url: `${SHOP}/produkt/zebra-mc2200`, imageUrl: `${SITE}/newsletter/modele/mc2200.png`, imgW: 58, imgH: 140 },
+  MC2700: { model: 'MC2700', cenaNetto: 2680.29, url: `${SHOP}/produkt/zebra-mc2700`, imageUrl: `${SITE}/newsletter/modele/mc2700.png`, imgW: 58, imgH: 140 },
+  MC3400: { model: 'MC3400', cenaNetto: 4657.88, url: `${SHOP}/produkt/zebra-mc3400`, imageUrl: `${SITE}/newsletter/modele/mc3400.png`, imgW: 53, imgH: 140 },
+  MC9400: { model: 'MC9400', cenaNetto: 8540.22, url: `${SHOP}/produkt/zebra-mc9400`, imageUrl: `${SITE}/newsletter/modele/mc9400.png`, imgW: 56, imgH: 140 },
+  ET40: { model: 'ET40', cenaNetto: 2732.2, url: `${SHOP}/produkt/zebra-et40`, imageUrl: `${SITE}/newsletter/modele/et40.png`, imgW: 130, imgH: 84 },
+  ET60: { model: 'ET60', cenaNetto: 7204.4, url: `${SHOP}/produkt/zebra-et60`, imageUrl: `${SITE}/newsletter/modele/et60.png`, imgW: 130, imgH: 95 },
+  ET65: { model: 'ET65', cenaNetto: 8364.71, url: `${SHOP}/produkt/zebra-et65`, imageUrl: `${SITE}/newsletter/modele/et65.png`, imgW: 130, imgH: 95 },
 }
 
 /**
@@ -134,11 +137,12 @@ export function generujMailingPodwyzki(r: OdbiorcaTerminali, c: KonfiguracjaMail
         ? `W ${esc(r.miesiacNaprawy)} realizowaliśmy dla Państwa naprawę urządzenia Zebra ${modelKlienta}.`
         : `Realizowaliśmy dla Państwa naprawę urządzenia Zebra ${modelKlienta}.`
 
-  const zdanieOModelu = !oferta
-    ? `Zmiana obejmuje również urządzenia, z których Państwo korzystają.`
+  // Wprost, co proponujemy: serwisowany TC21 → TC22, TC26 → TC27, MC3300 → MC3400 itd.
+  const zdanieOPropozycji = !oferta
+    ? `Model ${modelKlienta} nie jest już dostępny w naszym sklepie. Przygotujemy ofertę na urządzenie, które go zastępuje.`
     : relacja === 'ten_sam'
-      ? `Zmiana obejmuje również model ${esc(oferta.model)}, z którego Państwo korzystają.`
-      : `Zmiana obejmuje również model ${esc(oferta.model)} — urządzenie, które Zebra wskazuje jako następcę ${modelKlienta}.`
+      ? `Serwisowany u nas model ${esc(oferta.model)} jest nadal w ofercie producenta, dlatego jego dotyczy poniższa propozycja.`
+      : `Następcą serwisowanego u nas modelu ${modelKlienta} jest Zebra ${esc(oferta.model)} i ten model proponujemy przy wymianie lub rozbudowie floty urządzeń.`
 
   const preheader = oferta
     ? `Zamówienia złożone do 4 października realizujemy po obecnym cenniku. Dla ${oferta.model} to ${zlOkragle(doplata)} netto mniej na każdej sztuce.`
@@ -160,7 +164,7 @@ export function generujMailingPodwyzki(r: OdbiorcaTerminali, c: KonfiguracjaMail
                   <div style="font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#5b7a2e">${relacja === 'nastepca' ? `Następca ${modelKlienta}` : 'Państwa model'}</div>
                   <div style="font-size:24px;font-weight:700;color:${INK};margin-top:6px">Zebra ${esc(oferta.model)}</div>
                 </td>
-                <td width="120" align="right" valign="middle"><img src="${oferta.imageUrl}" width="110" alt="Zebra ${esc(oferta.model)}" style="display:block;width:110px;height:auto;border:0"></td>
+                <td width="140" align="right" valign="middle"><img src="${oferta.imageUrl}" width="${oferta.imgW}" height="${oferta.imgH}" alt="Zebra ${esc(oferta.model)}" style="display:block;width:${oferta.imgW}px;height:${oferta.imgH}px;border:0;margin-left:auto"></td>
               </tr></table>
             </td></tr>
             <tr><td style="padding:4px 24px 0">
@@ -209,11 +213,23 @@ export function generujMailingPodwyzki(r: OdbiorcaTerminali, c: KonfiguracjaMail
           </tr></table>
         </td></tr>
 
-        <!-- Pas nagłówkowy -->
-        <tr><td style="background:${NAVY};padding:26px 28px 24px">
-          <div style="color:${LIME};font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase">Zmiana cennika Zebra Technologies</div>
-          <h1 style="margin:10px 0 0;color:#ffffff;font-size:28px;line-height:1.25;font-weight:700">Terminale i tablety Zebra od 5 października droższe o 15%</h1>
-          <div style="color:rgba(255,255,255,.72);font-size:16px;margin-top:8px">Dotyczy również Państwa urządzenia: ${modelKlienta}</div>
+        <!-- Hero: baner (Higgsfield, urządzenia z prawdziwych zdjęć) i pas z napisem w HTML —
+             tekst w obrazku bywa blokowany przez klienta poczty i nieczytelny -->
+        <tr><td style="background:#0f2238;font-size:0;line-height:0">
+          <a href="${zUtm(`${SHOP}/terminale-mobilne-zebra`, c.utm)}"><img src="${c.banerUrl}" width="640" height="274" alt="Zebra TC22, MC3400 i MC9400" style="display:block;width:100%;max-width:640px;height:auto;border:0"></a>
+        </td></tr>
+        <tr><td style="background:#0f2238;padding:6px 28px 24px">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+            <td valign="middle" style="padding-right:14px">
+              <div style="color:${LIME};font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase">Nowy cennik Zebra od 5 października</div>
+              <h1 style="margin:8px 0 0;color:#ffffff;font-size:24px;font-weight:700;line-height:1.3">Ceny terminali Zebra idą w górę</h1>
+              <div style="color:rgba(255,255,255,.72);font-size:15px;line-height:1.5;margin-top:6px">TC22, MC3400, MC9400 i pozostałe terminale oraz tablety</div>
+              <div style="margin-top:14px">
+                <a href="${zUtm(`${SHOP}/terminale-mobilne-zebra`, c.utm)}" style="display:inline-block;background:${LIME};color:#14300a;font-size:14px;font-weight:700;text-decoration:none;padding:12px 22px;border-radius:9px">Zobacz terminale w obecnych cenach &rarr;</a>
+              </div>
+            </td>
+            <td width="150" align="right" valign="middle" style="color:${LIME};font-size:56px;font-weight:800;line-height:1;white-space:nowrap">+15%</td>
+          </tr></table>
         </td></tr>
 
         <tr><td style="background:${LIME};padding:11px 28px;text-align:center;color:#14300a;font-size:13px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;border-radius:0 0 14px 14px">
@@ -229,12 +245,12 @@ export function generujMailingPodwyzki(r: OdbiorcaTerminali, c: KonfiguracjaMail
             ${zdanieONaprawie} Uprzejmie informujemy o zmianie, która dotyczy tego sprzętu.
           </p>
           <p style="margin:12px 0 0;font-size:15px;line-height:1.75;color:${BODY}">
-            Od 5 października 2026 r. Zebra Technologies podnosi ceny cennikowe terminali mobilnych
-            i tabletów o 15%. Producent uzasadnia zmianę wzrostem kosztów komponentów. Jest to zmiana
-            cennika producenta, dlatego obejmie ceny u wszystkich sprzedawców. ${zdanieOModelu}
+            Od 5 października 2026 r. ceny terminali mobilnych i tabletów Zebra idą w górę o 15% —
+            Zebra Technologies podnosi swój cennik. Producent uzasadnia zmianę wzrostem kosztów komponentów. Jest to zmiana
+            cennika producenta, dlatego obejmie ceny u wszystkich sprzedawców.
           </p>
           <p style="margin:12px 0 0;font-size:15px;line-height:1.75;color:${BODY}">
-            Zamówienia złożone do 4 października realizujemy po obecnych cenach.
+            ${zdanieOPropozycji} Zamówienia złożone do 4 października realizujemy po obecnych cenach.
           </p>
         </td></tr>
 
@@ -252,26 +268,6 @@ export function generujMailingPodwyzki(r: OdbiorcaTerminali, c: KonfiguracjaMail
             Z wyrazami szacunku<br>
             <strong style="color:${INK}">Zespół Serwisu Zebra — TAKMA</strong>
           </p>
-        </td></tr>
-
-        <tr><td style="height:18px;line-height:18px;font-size:0">&nbsp;</td></tr>
-
-        <!-- Baner: grafika bez tekstu (Higgsfield, urządzenia z prawdziwych zdjęć),
-             napis i link w HTML pod nią — tekst w obrazku bywa blokowany i nieczytelny -->
-        <tr><td style="background:#0f2238;border-radius:14px 14px 0 0;font-size:0;line-height:0">
-          <a href="${zUtm(`${SHOP}/terminale-mobilne-zebra`, c.utm)}"><img src="${c.banerUrl}" width="640" height="274" alt="Zebra TC22, MC3400 i MC9400" style="display:block;width:100%;max-width:640px;height:auto;border:0;border-radius:14px 14px 0 0"></a>
-        </td></tr>
-        <tr><td style="background:#0f2238;padding:6px 28px 26px;border-radius:0 0 14px 14px">
-          <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
-            <td valign="middle" style="padding-right:14px">
-              <div style="color:${LIME};font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase">Nowy cennik Zebra od 5 października</div>
-              <div style="color:#ffffff;font-size:20px;font-weight:700;line-height:1.35;margin-top:8px">TC22, MC3400, MC9400 i pozostałe terminale Zebra</div>
-              <div style="margin-top:14px">
-                <a href="${zUtm(`${SHOP}/terminale-mobilne-zebra`, c.utm)}" style="display:inline-block;background:${LIME};color:#14300a;font-size:14px;font-weight:700;text-decoration:none;padding:12px 22px;border-radius:9px">Zobacz terminale w obecnych cenach &rarr;</a>
-              </div>
-            </td>
-            <td width="150" align="right" valign="middle" style="color:${LIME};font-size:56px;font-weight:800;line-height:1;white-space:nowrap">+15%</td>
-          </tr></table>
         </td></tr>
 
         <tr><td style="height:18px;line-height:18px;font-size:0">&nbsp;</td></tr>
