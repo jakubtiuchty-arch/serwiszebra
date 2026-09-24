@@ -2,7 +2,7 @@
  * Mailing „podwyżka terminali Zebra od 5.10.2026" do klientów serwisu.
  *
  *   node scripts/mailing-podwyzka-terminali.mts --test jakub.tiuchty@takma.com.pl
- *       trzy warianty (ten sam model, następca, prośba o ofertę) na jeden adres
+ *       jeden mail testowy (TC21 → TC22) na jeden adres
  *
  *   node scripts/mailing-podwyzka-terminali.mts --wyslij <lista.json> [--log <plik>]
  *       wysyłka do klientów; lista trzymana POZA repo (repo jest publiczne):
@@ -55,17 +55,10 @@ async function wyslij(do_: string, r: OdbiorcaTerminali, prefiks = '') {
 }
 
 if (testNa) {
-  const WARIANTY: (OdbiorcaTerminali & { nazwa: string })[] = [
-    { nazwa: 'ten sam model', modele: ['TC27'], zgloszen: 1, miesiacNaprawy: 'sierpniu' },
-    { nazwa: 'następca', modele: ['TC26', 'TC21'], zgloszen: 3 },
-    { nazwa: 'następca z klawiaturą', modele: ['MC3300'], zgloszen: 1, miesiacNaprawy: 'czerwcu' },
-    { nazwa: 'zamiennik MC2200', modele: ['MC2200'], zgloszen: 1, miesiacNaprawy: 'lipcu' },
-    { nazwa: 'prośba o ofertę', modele: ['TC8000'], zgloszen: 1, miesiacNaprawy: 'lipcu' },
-  ]
-  for (const w of WARIANTY) {
-    const { data, error } = await wyslij(testNa, w, `[TEST ${w.nazwa}] `)
-    console.log(w.nazwa, error ? `BŁĄD: ${JSON.stringify(error)}` : `wysłany, id ${data?.id}`)
-  }
+  // JEDEN mail testowy — najczęstszy przypadek na liście (TC21 → TC22)
+  const w: OdbiorcaTerminali = { modele: ['TC21'], zgloszen: 1, miesiacNaprawy: 'wrześniu' }
+  const { data, error } = await wyslij(testNa, w, '[TEST] ')
+  console.log(error ? `BŁĄD: ${JSON.stringify(error)}` : `wysłany, id ${data?.id}`)
 } else {
   const lista: (OdbiorcaTerminali & { email: string })[] = JSON.parse(readFileSync(listaPlik!, 'utf8'))
   let ok = 0
