@@ -45,10 +45,14 @@ console.log(`Typy alertów wyciągnięte ze źródła: ${Object.keys(ALERTY).len
 
 // Bramka typu „wycena_przedwczesnie" jest w kodzie, nie w prompcie — sprawdzamy ją lokalnie,
 // bo to ona decyduje, czy odpowiedź modelu w ogóle zostanie wzięta pod uwagę.
-const { podajeKwoteZaNaprawe } = await import(`data:text/javascript,${encodeURIComponent(
+const { podajeKwoteZaNaprawe, zarzutMaPokrycie, normalizujTyp } = await import(`data:text/javascript,${encodeURIComponent(
   src.slice(src.indexOf('const RE_KWOTA_ZL'), src.indexOf('export function zbudujTranskrypt'))
     .replace('export function podajeKwoteZaNaprawe(tekstAsystenta: string): boolean {',
              'export function podajeKwoteZaNaprawe(tekstAsystenta) {')
+    .replace('export function zarzutMaPokrycie(typ: string, dlaczego: string, tekstAsystenta: string): boolean {',
+             'export function zarzutMaPokrycie(typ, dlaczego, tekstAsystenta) {')
+    .replace('const ALIASY_TYPOW: Record<string, TypAlertu> = {', 'const ALIASY_TYPOW = {')
+    .replace('export function normalizujTyp(typ: unknown): string {', 'export function normalizujTyp(typ) {')
 )}`)
 
 let jednostkowe = 0
@@ -76,6 +80,36 @@ for (const t of [
 console.log(`Bramka kwoty za naprawę: ${jednostkowe}/${jednostkowe + bledyJednostkowe.length}`)
 if (bledyJednostkowe.length) { for (const b of bledyJednostkowe) console.error('  ' + b); process.exit(1) }
 
+// Bramka tematu: zarzut o sterownik albo gwarancję wymaga, żeby asystent o tym pisał (22.09.2026)
+let pokrycieOk = 0
+const bledyPokrycia = []
+const sprawdzPokrycie = (typ, dlaczego, tekst, oczekiwane) => {
+  const wynik = zarzutMaPokrycie(typ, dlaczego, tekst)
+  if (wynik === oczekiwane) pokrycieOk++
+  else bledyPokrycia.push(`zarzutMaPokrycie(${typ}, "${dlaczego.slice(0, 50)}") = ${wynik}, oczekiwano ${oczekiwane}`)
+}
+const ZASILACZ = 'Skoro dioda gaśnie nawet bez podłączonej drukarki, zasilacz jest najprawdopodobniej uszkodzony. Najpierw trzeba wymienić zasilacz o właściwych parametrach.'
+const PROGRAM = 'Skoro PDF też jest rozjechany, błąd powstaje już w programie. Ustaw rozmiar 85,6 × 54 mm i skalowanie 100%.'
+sprawdzPokrycie('bledne_dane', 'Asystent powinien wskazać, że drukarka wymaga ZDesigner v5.', ZASILACZ, false)
+sprawdzPokrycie('bledne_dane', 'Asystent podał modele niezgodne z wersją sterownika ZDesigner v10.', PROGRAM, false)
+sprawdzPokrycie('gwarancja', 'Sugestia, że problem leży w oprogramowaniu, może oznaczać brak gwarancji.', PROGRAM, false)
+sprawdzPokrycie('bledne_dane', 'Zalecił ZDesigner v10 dla GK420d, a ten model obsługuje tylko v5.',
+  'Do Windows 11 zalecany jest ZDesigner v10, obsługuje też starsze modele typu GK420d.', true)
+sprawdzPokrycie('gwarancja', 'Potwierdził domysł klienta o gwarancji.',
+  'To jest duża szansa, że głowica mieści się jeszcze w gwarancji.', true)
+sprawdzPokrycie('bledne_dane', 'Podał zły wymiar karty.', PROGRAM, true)
+// Czas diagnostyki 24–48 h to zasada serwisu, nie obietnica; przyjazd technika nadal jest
+sprawdzPokrycie('obietnica', 'Asystent obiecał konkretny czas diagnostyki. Diagnostyka trwa zwykle 24–48h', '', false)
+sprawdzPokrycie('obietnica', 'Obiecał termin. Wykonamy diagnostykę 24-48h', '', true)
+sprawdzPokrycie('obietnica', 'Obiecał przyjazd technika jutro.', '', true)
+// Typ zwrócony po angielsku nie może przepaść na filtrze listy typów
+for (const [we, wy] of [['cost_transport', 'koszt_transportu'], ['Koszt_transportu', 'koszt_transportu'], ['gwarancja', 'gwarancja']]) {
+  if (normalizujTyp(we) === wy) pokrycieOk++
+  else bledyPokrycia.push(`normalizujTyp(${we}) = ${normalizujTyp(we)}, oczekiwano ${wy}`)
+}
+console.log(`Bramka tematu zarzutu: ${pokrycieOk}/${pokrycieOk + bledyPokrycia.length}`)
+if (bledyPokrycia.length) { for (const b of bledyPokrycia) console.error('  ' + b); process.exit(1) }
+
 const promptSrc = src.match(/const PROMPT = `([\s\S]*?)`\n\nfunction zbudujPrompt/)[1]
 const typy = Object.entries(ALERTY).map(([k, v]) => `- ${k}: ${v.opis}`).join('\n')
 const PROMPT = promptSrc.replace('TYPY', typy)
@@ -91,8 +125,10 @@ async function ocen(tury) {
   // te same dwa filtry co w ocenRozmowe() w lib/chat-alerts.ts
   const bylaKwota = podajeKwoteZaNaprawe(tury.map((t) => t[1]).join('\n'))
   const problemy = (p.problemy || [])
+    .map((x) => ({ ...x, typ: normalizujTyp(x.typ) }))
     .filter((x) => ALERTY[x.typ])
     .filter((x) => x.typ !== 'wycena_przedwczesnie' || bylaKwota)
+    .filter((x) => zarzutMaPokrycie(x.typ, `${x.dlaczego || ''} ${x.cytat || ''}`, tury.map((t) => t[1]).join('\n')))
   // ta sama reguła co doAlertu() w lib/chat-alerts.ts
   const prog = (x) => (p.ocena <= 2 ? Math.min(ALERTY[x.typ].prog, 0.6) : ALERTY[x.typ].prog)
   return { ocena: p.ocena, wszystkie: problemy, alerty: problemy.filter((x) => Number(x.waga) >= prog(x)) }
@@ -147,6 +183,34 @@ const PRZYPADKI = [
   // trybie chronionym to treść wymagana przez prompt czatu, nie wpadka.
   { nazwa: 'ostrzeżenie przed resetem przy trybie chronionym', oczekiwany: null, tury: [
     ['zd421 nie odpowiada po sieci, moze zrobic reset do ustawien fabrycznych', 'Na razie nie rób resetu fabrycznego — na nowszym firmware reset przywraca właśnie zamknięte usługi sieciowe i tylko utrwali objaw. Podłącz drukarkę kablem USB i w Zebra Setup Utilities otwórz Direct Communication. Jeśli aktywny jest tryb chroniony, ZSU poprosi o nadanie hasła administratora. Wklej tylko tę jedną linię: ! U1 getvar "device.protected_mode" — co zwróciło?'],
+  ]},
+
+  // --- fałszywe alarmy z 23.09.2026 (rozmowy odtworzone, bez wypowiedzi klientów) ---
+
+  // Zasilacz gaśnie także odłączony od drukarki i na innym kablu — to uszkodzony zasilacz.
+  // Oceniający dopisywał tu zarzut o sterowniku ZDesigner, choć o sterowniku nikt nie pisał.
+  { nazwa: 'uszkodzony zasilacz GK420t bez sterownika', oczekiwany: null, tury: [
+    ['gk420t zasilacz swieci chwile na zielono i gasnie', 'Odłącz wtyk zasilacza od drukarki i zostaw zasilacz podłączony tylko do gniazdka. Dioda świeci stale czy dalej gaśnie?'],
+    ['dalej gasnie', 'Podmień kabel z gniazdka do zasilacza i podłącz do innego gniazdka. Dioda świeci stale?'],
+    ['z innym kablem tez gasnie', 'W takim układzie zasilacz jest najprawdopodobniej uszkodzony — gaśnie nawet odłączony od drukarki. Trzeba wymienić zasilacz o właściwych parametrach dla GK420t. Jeśli po podłączeniu sprawnego zasilacza drukarka nadal się nie włączy, podejrzana będzie sekcja zasilania w drukarce.'],
+  ]},
+
+  // Po dwóch krokach dopasowanych do objawu (bateria i styki, karta pamięci i akcesoria)
+  // skierowanie do serwisu jest zgodne z regułą (b) promptu czatu. Jedyna kwota to 99 zł
+  // za diagnostykę przy rezygnacji.
+  { nazwa: 'pętla restartu MC9200 po dwóch krokach', oczekiwany: null, tury: [
+    ['mc9200 restartuje sie caly czas, baterie juz wymienialem', 'Wyjmij baterię na 60 sekund, przetrzyj suche styki baterii i terminala, włóż baterię do końca i uruchom terminal poza stacją. Dalej się restartuje?'],
+    ['tak', 'Wyjmij baterię, wyjmij kartę microSD i odłącz akcesoria. Włóż samą baterię i uruchom terminal. Dalej restartuje się w pętli?'],
+    ['dalej to samo', 'To wygląda na usterkę sprzętową — styki baterii, sekcja zasilania albo płyta główna. Proponuję wysłać MC9200 do serwisu. Kurier odbierze urządzenie z podanego adresu. Diagnostyka trwa zwykle 24–48h i jest bezpłatna przy akceptacji naprawy; przy rezygnacji po diagnozie koszt wynosi 99 zł netto. Po diagnozie podamy wycenę do akceptacji. [SERIOUS_ISSUE]'],
+  ]},
+
+  // Przesunięty nadruk na ZC100 okazał się skalowaniem DPI w programie do legitymacji —
+  // czat dobrze rozdzielił drukarkę od programu wydrukiem do PDF. Oceniający dopisywał
+  // zarzuty o sterowniku ZDesigner i o gwarancji, choć żaden z tych tematów nie padł.
+  { nazwa: 'ZC100 — skalowanie DPI w programie', oczekiwany: null, tury: [
+    ['zc100 drukuje przesuniety tekst od polowy karty, uzywam programu do legitymacji', 'W programie wydrukuj kartę na drukarkę Microsoft Print to PDF i otwórz plik. Tekst w PDF też jest przesunięty?'],
+    ['tak', 'Skoro PDF też jest rozjechany, ZC100 nie przesuwa tekstu — błąd powstaje już w programie. Kliknij prawym przyciskiem skrót programu → Właściwości → Zgodność → Zmień ustawienia wysokiej rozdzielczości DPI → zaznacz „Zastąp zachowanie skalowania" i wybierz Aplikacja. PDF dalej jest rozjechany?'],
+    ['nie jest', 'Czyli przyczyną było skalowanie DPI w Windows, a nie drukarka. Zostaw to ustawienie i wydrukuj normalnie na ZC100 w skali 100%. Na karcie też jest równo?'],
   ]},
 ]
 
