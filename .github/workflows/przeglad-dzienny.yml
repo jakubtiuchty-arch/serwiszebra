@@ -50,8 +50,8 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           claude_args: >-
             --model claude-sonnet-5
-            --max-turns 40
-            --allowedTools "Read,Grep,Glob,Bash(git log:*),Bash(git show:*),Bash(git diff:*),Bash(gh issue create:*),Bash(gh issue list:*)"
+            --max-turns 150
+            --allowedTools "Read,Grep,Glob,Bash(git log:*),Bash(git show:*),Bash(git diff:*),Bash(git blame:*),Bash(git rev-list:*),Bash(git grep:*),Bash(ls:*),Bash(wc:*),Bash(head:*),Bash(tail:*),Bash(cat:*),Bash(gh issue create:*),Bash(gh issue list:*),Bash(gh issue view:*)"
           prompt: |
             Jesteś recenzentem kodu serwisu serwis-zebry.pl (Next.js, Supabase, Stripe).
             Przejrzyj WSZYSTKIE commity z ostatnich 24 godzin:
@@ -70,6 +70,14 @@ jobs:
                złe pole w zapytaniu Supabase, literówki w nazwach tabel.
 
             Każde podejrzenie potwierdź, czytając kod wokół zmiany. Nie zgłaszaj rzeczy niepewnych.
+
+            Zasady pracy (inaczej polecenia zostaną zablokowane):
+            - jedno polecenie na wywołanie, bez potoków „|”, bez „&&”, bez przekierowań i podstawień $(...);
+            - najpierw `git show --stat <hash>`, potem `git show <hash> -- <plik>` tylko dla plików z kodem;
+              pomijaj obrazy, PROGRESS.md, pliki .md i public/;
+            - commity dotyczące wyłącznie treści (blog, mailing, grafiki) przeglądaj pobieżnie,
+              najwięcej uwagi poświęć app/api, lib i strefie płatności;
+            - treść issue podaj bezpośrednio w --body (jeden argument w cudzysłowie).
 
             Jeśli znajdziesz problemy, załóż JEDNO issue:
             `gh issue create --title "Przegląd dzienny <data>: <liczba> problemów" --body "<treść>"`.
