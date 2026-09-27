@@ -35,8 +35,9 @@ export default function WideoJakToDziala() {
   const [odtwarzany, setOdtwarzany] = useState(false)
 
   return (
-    <figure className="mx-auto mt-10 max-w-4xl">
-      <div className="relative aspect-video overflow-hidden rounded-lg border border-gray-200 bg-[#0a1628]">
+    // Kadr na całą szerokość kolumny kroków i niski (3:1 od lg, 21:9 od sm), po kliknięciu 16:9, żeby film grał bez czarnych pasów
+    <figure className="mt-10">
+      <div className={`relative overflow-hidden rounded-lg border border-gray-200 bg-[#0a1628] ${odtwarzany ? 'aspect-video' : 'aspect-video sm:aspect-[21/9] lg:aspect-[3/1]'}`}>
         {odtwarzany ? (
           <iframe
             src={`https://www.youtube-nocookie.com/embed/${FILM.youtubeId}?autoplay=1&rel=0&playsinline=1`}
@@ -56,8 +57,8 @@ export default function WideoJakToDziala() {
               src={FILM.kadr}
               alt=""
               fill
-              sizes="(min-width: 896px) 896px, 100vw"
-              className="object-cover"
+              sizes="(min-width: 1152px) 1152px, 100vw"
+              className="object-cover object-[50%_42%]"
             />
             <span className="absolute inset-0 flex items-center justify-center">
               <span className="flex h-14 w-14 items-center justify-center rounded-full bg-red-600 shadow-lg transition group-hover:scale-110 sm:h-16 sm:w-16">
