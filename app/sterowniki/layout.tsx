@@ -330,7 +330,7 @@ const schemaData = {
           name: 'Drukarka Zebra drukuje puste etykiety - jak naprawić?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Sprawdź czy media są prawidłowo załadowane. Wykonaj kalibrację czujnika mediów (przytrzymaj FEED przez 5 sekund). Sprawdź ustawienia rozmiaru etykiety w sterowniku. Upewnij się że głowica drukująca jest czysta.'
+            text: 'Sprawdź czy media są prawidłowo załadowane. Wykonaj kalibrację czujnika mediów (w serii ZD przytrzymaj PAUSE + CANCEL przez 2 sekundy, w GK420 przytrzymaj FEED i puść po dwóch mignięciach). Sprawdź ustawienia rozmiaru etykiety w sterowniku. Upewnij się że głowica drukująca jest czysta.'
           }
         },
         {

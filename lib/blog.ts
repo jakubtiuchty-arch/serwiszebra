@@ -428,7 +428,7 @@ Najprostszy panel sterowania: jedna wielokolorowa dioda STATUS.
 | Zielona ciągła | gotowa | — |
 | Zielona miga | odbiera dane / drukuje | — |
 | Czerwona ciągła | brak nośnika ALBO otwarta głowica | załóż rolkę, dociśnij pokrywę do kliknięcia |
-| Czerwona miga | błąd nośnika po kalibracji | skalibruj ponownie (FEED ×2 przy gotowej drukarce) |
+| Czerwona miga | błąd nośnika po kalibracji | skalibruj ponownie: przy gotowej drukarce przytrzymaj FEED i puść po serii dwóch mignięć |
 | Pomarańczowa | głowica przegrzana — drukarka czeka | odczekaj 2–3 min, wznowi sama |
 
 ---
@@ -7482,7 +7482,7 @@ Aby wydrukować raport konfiguracji i sprawdzić ustawienia:
 **Jeśli nie pomoże:**
 - Wyczyść czujnik gap/black mark sprężonym powietrzem lub IPA 99%
 - Sprawdź pozycję czujnika (dla etykiet z black mark przesuń nad znacznik)
-- Sprawdź ustawienia: w wersji z LCD Menu → Media Setup → Media Type (Gap/Black Mark/Continuous); w wersji z diodami LED (podstawowe ZD421t/ZD421d) w sterowniku ZDesigner (Właściwości drukarki → Opcje) albo w Zebra Setup Utilities
+- Sprawdź typ nośnika (z przerwami, z czarnym znacznikiem, ciągły) w sterowniku ZDesigner (Właściwości drukarki → Opcje) albo w Zebra Setup Utilities
 
 📖 [Kalibracja drukarki Zebra krok po kroku](/blog/kalibracja-drukarki-zebra-poradnik-krok-po-kroku)
 
@@ -7583,7 +7583,7 @@ Menu → Settings → Reset Printer → Factory Defaults → Yes
 ## Co naprawisz sam, a co wymaga serwisu?
 
 ### ✅ Naprawisz sam (najczęstsze zgłoszenia):
-- Kalibracja etykiet (FEED 5 sek.)
+- Kalibracja etykiet (PAUSE + CANCEL przez 2 s)
 - Prawidłowe załadowanie ribbona
 - Czyszczenie głowicy alkoholem IPA 99%
 - Reset do ustawień fabrycznych
@@ -7830,7 +7830,7 @@ Gdy koszt naprawy zbliża się do ceny nowego urządzenia, doradzamy wymianę. N
 - ❌ Czerwona dioda statusu
 
 ### Rozwiązanie:
-1. **Wykonaj kalibrację** - przytrzymaj FEED przez 5 sekund
+1. **Wykonaj kalibrację** - w serii ZD przytrzymaj PAUSE + CANCEL przez 2 sekundy, w GK420 przytrzymaj FEED i puść po dwóch mignięciach
 2. **Wyczyść sensory** alkoholem IPA 99% (sensor gap pod etykietami)
 3. Sprawdź **typ etykiet** (gap vs black mark) w ustawieniach
 4. Użyj **Zebra Setup Utilities** → Calibrate Media
@@ -8049,7 +8049,7 @@ W tym artykule znajdziesz szczegółową diagnostykę dla: problemów z ribbonem
 
 | Problem | Narzędzia | Czas |
 |---------|-----------|------|
-| Kalibracja etykiet | Przycisk FEED | 30 sek |
+| Kalibracja etykiet | Przyciski (seria ZD: PAUSE + CANCEL) | 30 sek |
 | Czyszczenie głowicy | IPA 99%, patyczki | 5-10 min |
 | Problemy z ribbonem | Ponowne załadowanie | 2-5 min |
 | Konfiguracja sieci | Komputer | 10-30 min |
@@ -8706,7 +8706,7 @@ Jeśli drukarka ma za sobą kilka lat pracy na trzy zmiany i naprawa przestaje s
         },
         {
           question: 'Jak skalibrować drukarkę Zebra?',
-          answer: 'Aby skalibrować drukarkę Zebra, przytrzymaj przycisk FEED przez 5 sekund (auto-kalibracja) lub użyj Zebra Setup Utilities: Open Printer Tools → Action → Calibrate Media. Po kalibracji wykonaj wydruk testowy.'
+          answer: 'W drukarkach ZD420, ZD421, ZD620 i ZD621 przytrzymaj jednocześnie PAUSE i CANCEL przez 2 sekundy (kalibracja SmartCal). W GK420 przy włączonej drukarce przytrzymaj FEED i puść po dwóch mignięciach. Kalibrację uruchomisz też z Zebra Setup Utilities: Open Printer Tools → Action → Calibrate Media → Send. Po kalibracji wykonaj wydruk testowy.'
         },
         {
           question: 'Drukarka Zebra drukuje puste etykiety - co robić?',
@@ -8718,7 +8718,7 @@ Jeśli drukarka ma za sobą kilka lat pracy na trzy zmiany i naprawa przestaje s
         },
         {
           question: 'Zebra ZD421 nie drukuje - co robić?',
-          answer: 'Zebra ZD421 najczęściej nie drukuje z powodu: 1) Ribbon załadowany odwrotnie (sprawdź stronę barwiącą), 2) Brak kalibracji po wymianie etykiet (przytrzymaj FEED 5 sek.), 3) Stare sterowniki Windows. W 80% przypadków problem rozwiązuje prawidłowe załadowanie ribbonu.'
+          answer: 'Zebra ZD421 najczęściej nie drukuje z powodu: 1) Ribbon załadowany odwrotnie (sprawdź stronę barwiącą), 2) Brak kalibracji po wymianie etykiet (przytrzymaj PAUSE + CANCEL przez 2 s), 3) Stare sterowniki Windows. W 80% przypadków problem rozwiązuje prawidłowe załadowanie ribbonu.'
         },
         {
           question: 'Zebra ZD420 miga na czerwono - co oznacza?',
@@ -8735,7 +8735,7 @@ Jeśli drukarka ma za sobą kilka lat pracy na trzy zmiany i naprawa przestaje s
       ]
     },
     content: `
-> **Szybka odpowiedź:** Drukarka Zebra nie drukuje etykiet najczęściej z powodu: nieprawidłowo załadowanego ribbonu (**35%** przypadków), problemów z kalibracją sensora (**25%**), zużytej głowicy (**15%**), przestarzałych sterowników (**10%**) lub błędnych ustawień formatu (**10%**). W **60% przypadków** problem rozwiązuje prawidłowe załadowanie ribbonu lub wykonanie auto-kalibracji (przytrzymaj FEED 5 sek.).
+> **Szybka odpowiedź:** Drukarka Zebra nie drukuje etykiet najczęściej z powodu: nieprawidłowo załadowanego ribbonu (**35%** przypadków), problemów z kalibracją sensora (**25%**), zużytej głowicy (**15%**), przestarzałych sterowników (**10%**) lub błędnych ustawień formatu (**10%**). W **60% przypadków** problem rozwiązuje prawidłowe załadowanie ribbonu lub wykonanie auto-kalibracji (w serii ZD: PAUSE + CANCEL przez 2 s).
 
 ---
 
@@ -8748,7 +8748,7 @@ Jeśli drukarka ma za sobą kilka lat pracy na trzy zmiany i naprawa przestaje s
 - **3-5 dni** – standardowy czas naprawy w autoryzowanym serwisie
 - **1-3 mln cm** – żywotność głowicy drukującej
 - **IPA 99%** – alkohol izopropylowy do czyszczenia głowicy
-- **FEED 5 sek.** – sekwencja auto-kalibracji w większości modeli
+- **PAUSE + CANCEL, 2 s** – kalibracja SmartCal w drukarkach ZD420, ZD421, ZD620 i ZD621
 
 ---
 
@@ -8757,7 +8757,7 @@ Jeśli drukarka ma za sobą kilka lat pracy na trzy zmiany i naprawa przestaje s
 | # | Przyczyna | Częstość | Szybkie rozwiązanie |
 |---|-----------|----------|---------------------|
 | 1 | **Ribbon załadowany odwrotnie** | 35% | Sprawdź stronę barwiącą (do dołu) |
-| 2 | **Zła kalibracja sensora** | 25% | Przytrzymaj FEED 5 sek. |
+| 2 | **Zła kalibracja sensora** | 25% | Kalibracja (seria ZD: PAUSE + CANCEL, 2 s) |
 | 3 | **Zużyta głowica** | 15% | Wyczyść IPA 99% lub wymień |
 | 4 | **Stare sterowniki** | 10% | [Pobierz sterowniki](/sterowniki) |
 | 5 | **Błędny format etykiety** | 10% | Zmierz i ustaw wymiary |
@@ -8817,7 +8817,7 @@ Przyłóż kawałek białej kartki do ribbonu i przetrzyj palcem. Strona, która
 - Drukarka "szuka" początku etykiety
 
 ### Rozwiązanie:
-1. Wykonaj **auto-kalibrację** (przytrzymaj przycisk FEED przez 5 sekund)
+1. Wykonaj **auto-kalibrację** (w serii ZD przytrzymaj PAUSE + CANCEL przez 2 sekundy, w GK420 przytrzymaj FEED i puść po dwóch mignięciach)
 2. Wyczyść sensor gap/black mark sprężonym powietrzem
 3. Sprawdź, czy etykiety są prawidłowo załadowane
 
@@ -8911,7 +8911,7 @@ Powyższe rozwiązania dotyczą **wszystkich modeli** drukarek Zebra. Oto najcz�
 | Model | Typowy problem | Szybkie rozwiązanie |
 |-------|----------------|---------------------|
 | **Zebra ZD421** | Błąd ribbon, puste etykiety | Ribbon stroną barwiącą do dołu |
-| **Zebra ZD420** | Nie kalibruje, miga czerwono | FEED 5 sek. (auto-kalibracja) |
+| **Zebra ZD420** | Nie kalibruje, miga czerwono | PAUSE + CANCEL przez 2 s (SmartCal) |
 | **Zebra ZD621** | Nie drukuje po aktualizacji | Zainstaluj [sterowniki](/sterowniki) |
 | **Zebra ZD620** | Błąd MEDIA OUT | Prawidłowo załaduj etykiety |
 | **Zebra ZD611** | Blady wydruk | Zwiększ Darkness lub wyczyść głowicę |
@@ -8927,7 +8927,7 @@ Powyższe rozwiązania dotyczą **wszystkich modeli** drukarek Zebra. Oto najcz�
 | **Zebra GK420t** | RIBBON OUT mimo ribbonu | Sprawdź czujnik ribbonu |
 | **Zebra GC420d** | Puste etykiety | Sprawdź orientację ribbonu |
 | **Zebra GC420t** | Blady wydruk | Zwiększ Darkness lub wymień ribbon |
-| **Zebra GX420d** | Nie kalibruje | FEED + CANCEL przy włączaniu |
+| **Zebra GX420d** | Nie kalibruje | FEED przy włączonej drukarce, puść po 2 mignięciach |
 | **Zebra GX420t** | Przeskakuje etykiety | Ustaw gap/black mark sensor |
 | **Zebra GT800** | Offline | Zainstaluj sterowniki Windows |
 | **Zebra LP2844** | Nie drukuje | Sprawdź port COM/USB |
@@ -9066,7 +9066,7 @@ Standardowa naprawa drukarki Zebra trwa **3-5 dni roboczych**. Oferujemy równie
 Tak, samodzielna wymiana głowicy jest możliwa, ale wymaga odpowiednich narzędzi i wiedzy technicznej. Nieprawidłowy montaż może uszkodzić drukarkę i unieważnić gwarancję. Oryginalne głowice kupisz w [naszym sklepie](/sklep/glowice) — zalecamy też skorzystanie z profesjonalnego serwisu.
 
 ### Jak skalibrować drukarkę Zebra?
-Aby skalibrować drukarkę Zebra, **przytrzymaj przycisk FEED przez 5 sekund** (auto-kalibracja) lub użyj Zebra Setup Utilities: Open Printer Tools → Action → Calibrate Media. Po kalibracji wykonaj wydruk testowy.
+W drukarkach ZD420, ZD421, ZD620 i ZD621 **przytrzymaj jednocześnie PAUSE i CANCEL przez 2 sekundy** (kalibracja SmartCal). W GK420 przy włączonej drukarce przytrzymaj FEED i puść po dwóch mignięciach. Kalibrację uruchomisz też z Zebra Setup Utilities: Open Printer Tools → Action → Calibrate Media → Send. Po kalibracji wykonaj wydruk testowy.
 
 ### Drukarka Zebra drukuje puste etykiety - co robić?
 Puste etykiety najczęściej oznaczają: 1) **Ribbon załadowany odwrotnie** (sprawdź stroną barwiącą do dołu), 2) Używasz etykiet termicznych z ribbonem lub odwrotnie, 3) Zużyta głowica drukująca, 4) Zbyt niska temperatura druku w ustawieniach.
@@ -9075,13 +9075,13 @@ Puste etykiety najczęściej oznaczają: 1) **Ribbon załadowany odwrotnie** (sp
 Oficjalne sterowniki do drukarek Zebra pobierzesz z naszej strony [Sterowniki Zebra](/sterowniki) lub bezpośrednio od producenta. Wybierz model drukarki i system operacyjny (Windows 10/11, Mac, Linux). Przed instalacją odinstaluj stare sterowniki i zrestartuj komputer.
 
 ### Zebra ZD421 nie drukuje - co robić?
-**Zebra ZD421** najczęściej nie drukuje z powodu: 1) Ribbon załadowany odwrotnie (sprawdź stronę barwiącą), 2) Brak kalibracji po wymianie etykiet (przytrzymaj FEED 5 sek.), 3) Stare sterowniki Windows (pobierz najnowsze z /sterowniki). W 80% przypadków problem rozwiązuje prawidłowe załadowanie ribbonu.
+**Zebra ZD421** najczęściej nie drukuje z powodu: 1) Ribbon załadowany odwrotnie (sprawdź stronę barwiącą), 2) Brak kalibracji po wymianie etykiet (przytrzymaj PAUSE + CANCEL przez 2 s), 3) Stare sterowniki Windows (pobierz najnowsze z /sterowniki). W 80% przypadków problem rozwiązuje prawidłowe załadowanie ribbonu.
 
 ### Zebra ZD420 miga na czerwono - co oznacza?
 Czerwona dioda w **Zebra ZD420** oznacza: pojedyncze miganie = brak etykiet (Media Out), podwójne miganie = błąd ribbonu (Ribbon Out), ciągłe świecenie = otwarta pokrywa (Head Open). Rozwiązanie: załaduj media, sprawdź ribbon, zamknij pokrywę do kliknięcia.
 
 ### Zebra GK420 nie reaguje na polecenia - jak naprawić?
-Starsza **Zebra GK420** często przestaje reagować z powodu: 1) Przepełnionego bufora - wyłącz na 30 sek. i włącz, 2) Uszkodzonego kabla USB - wymień kabel, 3) Błędu firmware - wykonaj factory reset (przytrzymaj FEED przy włączaniu). Jeśli czerwona dioda świeci mimo zamkniętej pokrywy - uszkodzony czujnik (wymaga serwisu).
+Starsza **Zebra GK420** często przestaje reagować z powodu: 1) Przepełnionego bufora - wyłącz na 30 sek. i włącz, 2) Uszkodzonego kabla USB - wymień kabel, 3) Błędu firmware - wykonaj factory reset (przy włączonej drukarce przytrzymaj FEED i puść po czterech mignięciach). Jeśli czerwona dioda świeci mimo zamkniętej pokrywy - uszkodzony czujnik (wymaga serwisu).
 
 ### Zebra ZT410 drukuje puste etykiety - przyczyna?
 **Zebra ZT410** drukuje puste etykiety gdy: 1) Ribbon jest załadowany odwrotnie, 2) Używasz etykiet termicznych (bez ribbonu) z ustawieniem termotransfer, 3) Głowica jest zużyta. Sprawdź typ mediów w ustawieniach: Menu → Print Method → Direct Thermal lub Thermal Transfer.
@@ -10333,22 +10333,22 @@ Zależy od przyczyny: czyszczenie mechanizmu 150-360 zł, wymiana wałka 150-290
   {
     slug: 'kalibracja-drukarki-zebra-poradnik-krok-po-kroku',
     title: 'Kalibracja drukarki Zebra - kompletny poradnik krok po kroku',
-    excerpt: 'Jak skalibrować drukarkę Zebra? Przytrzymaj FEED 5 sekund (ZD420/ZD421) lub puść po 2 mignięciach (GK420). Poznaj wszystkie metody kalibracji dla różnych modeli.',
+    excerpt: 'Jak skalibrować drukarkę Zebra? W ZD421 i ZD621 przytrzymaj PAUSE + CANCEL przez 2 sekundy, w GK420 przytrzymaj FEED i puść po 2 mignięciach. Metody kalibracji drukarek biurkowych i przemysłowych.',
     coverImage: '/blog/kalibracja-drukarki-zebra-krok-po-kroku.jpeg',
     author: {
       name: 'Zespół TAKMA',
       role: 'Certyfikowani technicy Zebra z 25-letnim doświadczeniem'
     },
     publishedAt: '2026-01-20',
-    updatedAt: '2026-01-26',
+    updatedAt: '2026-09-27',
     readingTime: 12,
     deviceType: 'drukarki',
     subDeviceType: 'etykiet',
     category: 'poradniki',
-    tags: ['kalibracja', 'sensor', 'gap', 'black mark', 'etykiety', 'GK420', 'ZD420', 'ZD421', 'ZD621', 'ZT411', 'auto-kalibracja', 'Smart Calibration', 'Zebra Setup Utilities', 'FEED', 'puste etykiety'],
+    tags: ['kalibracja', 'sensor', 'gap', 'black mark', 'etykiety', 'GK420', 'ZD420', 'ZD421', 'ZD621', 'ZT411', 'auto-kalibracja', 'Smart Calibration', 'SmartCal', 'Zebra Setup Utilities', 'FEED', 'puste etykiety'],
     seo: {
       metaTitle: 'Jak skalibrować drukarkę Zebra? Instrukcja krok po kroku [2026]',
-      metaDescription: 'Kalibracja Zebra: FEED 5 sek. (ZD420/ZD421) lub 2 mignięcia (GK420). Drukuje puste etykiety? Pomija? Napraw w 2 minuty! Instrukcja + video.',
+      metaDescription: 'Kalibracja Zebra: PAUSE + CANCEL przez 2 s (ZD421, ZD621) lub FEED do 2 mignięć (GK420). Drukarka drukuje puste etykiety? Instrukcja krok po kroku.',
       keywords: [
         // Główne frazy
         'kalibracja drukarki zebra', 
@@ -10414,7 +10414,7 @@ Zależy od przyczyny: czyszczenie mechanizmu 150-360 zł, wymiana wałka 150-290
       faqSchema: [
         {
           question: 'Jak skalibrować drukarkę Zebra ZD421 krok po kroku?',
-          answer: 'Załaduj etykiety i zamknij pokrywę, przytrzymaj przycisk FEED przez 5 sekund, puść gdy drukarka zacznie wysuwać etykiety, poczekaj aż drukarka się zatrzyma. Cały proces trwa około 30 sekund.'
+          answer: 'Załaduj etykiety i zamknij pokrywę. Przy włączonej drukarce (dioda STATUS świeci na zielono) przytrzymaj jednocześnie PAUSE i CANCEL przez 2 sekundy, a potem puść. Drukarka wysunie kilka etykiet i dopasuje sensor. Gdy dioda STATUS znów świeci na zielono, naciśnij FEED: powinna wysunąć się dokładnie jedna etykieta.'
         },
         {
           question: 'Ile trwa kalibracja drukarki Zebra?',
@@ -10434,7 +10434,7 @@ Zależy od przyczyny: czyszczenie mechanizmu 150-360 zł, wymiana wałka 150-290
         },
         {
           question: 'Dlaczego Zebra drukuje co drugą etykietę?',
-          answer: 'Drukowanie co drugą etykietę oznacza nieprawidłową długość etykiety w ustawieniach. Wykonaj auto-kalibrację (FEED 5 sek.) lub ustaw ręcznie długość etykiety w sterowniku: Preferencje drukarki → Opcje → Label Length.'
+          answer: 'Drukowanie co drugą etykietę oznacza nieprawidłową długość etykiety w ustawieniach. Wykonaj kalibrację (w ZD421 i ZD621: PAUSE + CANCEL przez 2 sekundy) lub ustaw ręcznie długość etykiety w sterowniku: Preferencje drukarki → Opcje → Label Length.'
         },
         {
           question: 'Jak często trzeba kalibrować drukarkę Zebra?',
@@ -10442,24 +10442,25 @@ Zależy od przyczyny: czyszczenie mechanizmu 150-360 zł, wymiana wałka 150-290
         },
         {
           question: 'Jak skalibrować Zebra GK420d przyciskiem?',
-          answer: 'Wyłącz drukarkę, przytrzymaj przycisk FEED, włącz drukarkę trzymając FEED, obserwuj diodę i puść po 2 mignięciach. Drukarka wykona kalibrację automatycznie. Uwaga: nie trzymaj dłużej niż 5-6 mignięć - to resetuje ustawienia fabryczne.'
+          answer: 'Przy włączonej drukarce i zamkniętej pokrywie przytrzymaj przycisk FEED. Zielona dioda zacznie migać seriami: puść przycisk po drugiej serii (dwa mignięcia). Drukarka wysunie od jednej do czterech etykiet i ustawi sensor. Nie trzymaj przycisku do czterech mignięć, bo wtedy drukarka wraca do ustawień fabrycznych. Nie włączaj też drukarki z wciśniętym FEED: ta kombinacja uruchamia wgrywanie firmware albo diagnostykę komunikacji, a nie kalibrację.'
         }
       ]
     },
     content: `
-> **🎯 Szybka odpowiedź:** Aby skalibrować drukarkę Zebra, **przytrzymaj przycisk FEED przez 5 sekund** (modele ZD420, ZD421, ZD620, ZD621) lub włącz drukarkę trzymając FEED i **puść po 2 mignięciach diody** (modele GK420, GX420). Drukarka automatycznie wykryje typ i rozmiar etykiet. Cały proces trwa 30 sekund.
+> **🎯 Szybka odpowiedź:** W drukarkach ZD420, ZD421, ZD620 i ZD621 **przytrzymaj jednocześnie PAUSE i CANCEL przez 2 sekundy**. W GK420 i GX420 przy włączonej drukarce **przytrzymaj FEED i puść po dwóch mignięciach diody**. Drukarka wysunie kilka etykiet, sama rozpozna rodzaj nośnika i zmierzy długość etykiety.
 
 ---
 
 ## TL;DR - Kalibracja w pigułce
 
-| Model drukarki | Metoda kalibracji | Czas |
-|----------------|-------------------|------|
-| **ZD420, ZD421, ZD620, ZD621** | Przytrzymaj FEED **5 sekund** | 30 sek |
-| **GK420d/t, GX420d/t** | Włącz trzymając FEED, puść po **2 mignięciach** | 30 sek |
-| **ZT230, ZT411, ZT610** | Menu → Media → **Calibrate** | 1 min |
+| Model drukarki | Metoda kalibracji |
+|----------------|-------------------|
+| **ZD420, ZD421, ZD620, ZD621** | Przytrzymaj **PAUSE + CANCEL** przez **2 sekundy** (SmartCal) |
+| **GK420d/t, GX420d/t** | Przy włączonej drukarce przytrzymaj **FEED**, puść po **2 mignięciach** |
+| **ZT411, ZT421, ZT610, ZT620** (ekran dotykowy) | Menu → Print → Sensors → **Manual Calibration** → Start Calibration |
+| **ZT230** | Przytrzymaj **PAUSE + CANCEL** przez **2 sekundy** i postępuj według poleceń na wyświetlaczu |
 
-**90% problemów z kalibracją** rozwiązuje samo przytrzymanie przycisku FEED. Jeśli to nie pomoże - czytaj dalej.
+W większości przypadków wystarczy kalibracja z przycisków. Jeśli nie pomoże, czytaj dalej.
 
 ---
 
@@ -10523,45 +10524,48 @@ Auto-kalibracja to najłatwiejszy sposób kalibracji drukarki Zebra. Drukarka sa
 
 **Procedura Smart Calibration:**
 
-1. Upewnij się, że etykiety są prawidłowo załadowane
-2. **Wyłącz** drukarkę
-3. **Przytrzymaj** przycisk FEED
-4. **Włącz** drukarkę trzymając przycisk FEED
-5. Obserwuj diodę statusu:
-   - **1 mignięcie** - tryb konfiguracji (nie puszczaj!)
-   - **2 mignięcia** - Smart Calibration ✓ **PUŚĆ TERAZ**
-6. Drukarka wysunie kilka etykiet i skalibruje sensory
+1. Upewnij się, że etykiety są prawidłowo załadowane, a pokrywa zamknięta
+2. **Włącz** drukarkę i poczekaj, aż dioda zaświeci na zielono
+3. **Przytrzymaj** przycisk FEED - dioda zacznie migać seriami:
+   - **1 mignięcie** - wydruk konfiguracji (trzymaj dalej)
+   - **2 mignięcia** - automatyczna kalibracja ✓ **PUŚĆ TERAZ**
+4. Drukarka wysunie od jednej do czterech etykiet i ustawi sensor
 
-> **⚠️ Ważne:** Jeśli przytrzymasz przycisk za długo (powyżej 5-6 mignięć), drukarka wejdzie w tryb resetu do ustawień fabrycznych!
+> **⚠️ Ważne:** Nie trzymaj przycisku do **czterech mignięć** - puszczenie go wtedy przywraca ustawienia fabryczne. Nie włączaj też drukarki z wciśniętym FEED: ta kombinacja uruchamia wgrywanie firmware albo diagnostykę komunikacji, a nie kalibrację.
+
+Przy etykietach z nadrukiem wstępnym albo nietypowym podkładem puść przycisk po **siedmiu mignięciach**. Drukarka wykona wtedy pełną kalibrację ręczną i wydrukuje profil sensora.
 
 ### Seria ZD (ZD420, ZD421, ZD620, ZD621)
 
-**Procedura Auto-Calibration:**
+**Procedura SmartCal:**
 
-**Metoda 1 - Przycisk FEED:**
-1. Załaduj etykiety
-2. Zamknij pokrywę drukarki
-3. **Przytrzymaj** przycisk FEED przez **5-6 sekund**
-4. Puść przycisk gdy drukarka zacznie wysuwać etykiety
-5. Kalibracja zakończona gdy drukarka się zatrzyma
+1. Załaduj etykiety (w modelach termotransferowych także taśmę) i zamknij pokrywę
+2. Włącz drukarkę i poczekaj, aż dioda **STATUS** zaświeci na zielono
+3. **Przytrzymaj jednocześnie PAUSE i CANCEL przez 2 sekundy**, a potem puść
+4. Drukarka wysunie kilka etykiet, zmierzy je i dopasuje sensor
+5. Kalibracja jest zakończona, gdy dioda STATUS znów świeci na zielono
+6. Sprawdzenie: naciśnij **FEED** - powinna wysunąć się **dokładnie jedna etykieta**
 
-**Metoda 2 - Z poziomu menu (modele z wyświetlaczem):**
-1. Wejdź w **Menu** → **Media Setup** → **Calibrate**
-2. Wybierz **Auto Calibrate**
-3. Drukarka wykona kalibrację automatycznie
+> **💡 Wskazówka:** Po założeniu nowej rolki takich samych etykiet (ten sam producent, partia i rozmiar) kalibracja nie jest potrzebna. Wystarczy raz lub dwa razy nacisnąć FEED.
 
-### Seria przemysłowa ZT (ZT230, ZT411, ZT421, ZT610)
+**Modele z ekranem dotykowym (ZD621):** kreator kalibracji ręcznej znajdziesz w **Menu → Print → Sensors → Manual Calibration**.
 
-**Procedura z wyświetlacza:**
+### Seria przemysłowa ZT (ZT230, ZT411, ZT421, ZT610, ZT620)
 
-1. Naciśnij **Menu** (lub ikonę hamburgera ☰)
-2. Przejdź do **Media** lub **Print** → **Label Setup**
-3. Wybierz **Media Type**:
-   - \`Gap/Notch\` - dla etykiet z przerwami
-   - \`Continuous\` - dla etykiet ciągłych
-   - \`Mark\` - dla etykiet z czarną linią
-4. Wróć i wybierz **Calibrate**
-5. Potwierdź rozpoczęcie kalibracji
+**ZT411, ZT421 oraz ZT610 i ZT620 z ekranem dotykowym:**
+
+1. Dotknij **Menu → Print → Sensors → Manual Calibration**
+2. Dotknij **Start Calibration**
+3. Postępuj według poleceń na ekranie, kolejne kroki zatwierdzaj przyciskiem **Next**
+4. Po zakończeniu naciśnij **PAUSE**, żeby wyjść z pauzy i wznowić drukowanie
+
+W ZT411 i ZT421 tę samą kalibrację uruchomisz z panelu: przytrzymaj **PAUSE + FEED + CANCEL** przez 2 sekundy.
+
+**ZT610 i ZT620 z wcześniejszym wyświetlaczem (bez ekranu dotykowego):** wybierz **TOOLS → MEDIA/RIBBON CAL** albo przytrzymaj **PAUSE + CANCEL** przez 2 sekundy.
+
+**ZT230:** przytrzymaj **PAUSE + CANCEL** przez 2 sekundy i postępuj według poleceń na wyświetlaczu. Drukarka najpierw poprosi o ustawienie pod sensorem samego podkładu (bez etykiet), a potem etykiety. Na koniec naciśnij **FEED**: jeśli wysuwa się dokładnie jedna etykieta, kalibracja się udała.
+
+Drukarki ZT mogą też kalibrować się same po włączeniu albo po zamknięciu głowicy. Służą do tego ustawienia **Power Up Action** i **Head Close Action** (w ZT411 i ZT421: **Menu → System → Settings**): **CALIBRATE** to pełna kalibracja, a **SHORT CAL** ustawia progi sensora bez zmiany wzmocnienia i mierzy długość etykiety.
 
 ---
 
@@ -10601,26 +10605,24 @@ Jeśli auto-kalibracja przez narzędzie nie pomaga:
 
 ---
 
-## Kalibracja pozycji sensora (drukarki przemysłowe)
+## Pozycja sensora
 
-W drukarkach przemysłowych (ZT230, ZT411, ZT610 i starszych Xi) **sensor jest ruchomy**. Można fizycznie przesuwać jego pozycję.
+W drukarkach przemysłowych ZT411, ZT421, ZT610, ZT620 i starszych Xi **sensor jest ruchomy** i przesuwa się go w poziomie. Ruchomy sensor mają też drukarki biurkowe serii ZD (ZD420, ZD421, ZD620, ZD621). W ZT230 sensor transmisyjny jest stały.
 
 ### Kiedy regulować pozycję sensora?
 
 - Używasz **wąskich etykiet** (mniejszych niż połowa szerokości drukarki)
-- Etykiety mają **przerwę/black mark nie na środku**
-- Drukarka "nie widzi" etykiet mimo kalibracji
+- Etykiety mają **nacięcie, otwór lub black mark poza środkiem**
+- Drukarka zgłasza brak nośnika albo "nie widzi" etykiet mimo kalibracji
 
-### Jak ustawić pozycję sensora?
+### Jak ustawić pozycję sensora w ZT411 i ZT421?
 
-1. Otwórz pokrywę drukarki
-2. Znajdź sensor (zwykle żółta/zielona plastikowa część pod etykietami)
-3. Poluzuj śrubę blokującą
-4. Przesuń sensor tak, aby był **dokładnie nad przerwą** między etykietami (lub nad black mark)
-5. Zablokuj śrubę
-6. Wykonaj ponowną kalibrację
+1. Wyjmij taśmę barwiącą, żeby dobrze widzieć ścieżkę nośnika
+2. Załóż etykiety tak, żeby zielone światło sensora przechodziło przez przerwę, nacięcie lub otwór
+3. W razie potrzeby przesuń sensor w poziomie regulatorem położenia
+4. Załóż taśmę, zamknij głowicę i wykonaj ponowną kalibrację
 
-> **💡 Pro tip:** W serii ZT411/ZT421 sensor ma specjalny uchwyt ułatwiający przesuwanie. Wystarczy lekko unieść i przesunąć w lewo/prawo.
+W ZT610 i ZT620 sensor przesuwa się kółkiem regulacyjnym. W serii ZD przy etykietach z przerwami sensor zostaje na środku, a przy czarnym znaczniku lub nacięciu poza środkiem przesuwa się go tak, żeby znalazł się pod znacznikiem.
 
 ---
 
@@ -10688,7 +10690,8 @@ Dla zaawansowanych użytkowników - komendy ZPL do konfiguracji mediów:
 
 \`\`\`zpl
 ^XA
-^MNY              ; Kalibracja mediów przy włączeniu
+^MNY              ; Etykiety z przerwami (sensor przerwy)
+^MFC,C            ; Kalibracja po włączeniu i po zamknięciu głowicy
 ^LL800            ; Długość etykiety (w dots, 203dpi = 8 dots/mm)
 ^PW812            ; Szerokość druku (4 cale = 812 dots przy 203dpi)
 ^LH0,0            ; Pozycja home (0,0)
@@ -10700,6 +10703,7 @@ Dla zaawansowanych użytkowników - komendy ZPL do konfiguracji mediów:
 | Komenda | Opis | Przykład |
 |---------|------|----------|
 | \`^MN\` | Typ mediów | \`^MNY\` (Gap), \`^MNM\` (Mark), \`^MNN\` (Continuous) |
+| \`^MF\` | Akcja po włączeniu i po zamknięciu głowicy | \`^MFC,C\` (kalibracja) |
 | \`^LL\` | Długość etykiety | \`^LL800\` (800 dots) |
 | \`^PW\` | Szerokość druku | \`^PW812\` (4 cale) |
 | \`^LT\` | Top offset | \`^LT30\` (przesunięcie 30 dots w dół) |
@@ -10711,13 +10715,13 @@ Dla zaawansowanych użytkowników - komendy ZPL do konfiguracji mediów:
 
 | Model | Auto-kalibracja | Kalibracja ręczna | Ruchomy sensor |
 |-------|-----------------|-------------------|----------------|
-| GK420d/t | FEED 2x mignięcia | Zebra Setup Utilities | ❌ Nie |
-| GX420d/t | FEED 2x mignięcia | Zebra Setup Utilities | ❌ Nie |
-| ZD420/421 | FEED 5 sek. | Menu + Utilities | ❌ Nie |
-| ZD620/621 | FEED 5 sek. | Menu + Utilities | ❌ Nie |
-| ZT230 | Menu → Calibrate | Menu + Utilities | ✅ Tak |
-| ZT411/421 | Menu → Calibrate | Menu + Utilities | ✅ Tak |
-| ZT610/620 | Menu → Calibrate | Menu + Utilities | ✅ Tak |
+| GK420d/t | FEED, puść po 2 mignięciach | FEED, puść po 7 mignięciach; Zebra Setup Utilities | ❌ Nie |
+| GX420d/t | FEED, puść po 2 mignięciach | FEED, puść po 7 mignięciach; Zebra Setup Utilities | Opcja (sensor czarnej linii) |
+| ZD420/421 | PAUSE + CANCEL, 2 s | Tryb zaawansowany; Zebra Setup Utilities | ✅ Tak |
+| ZD620/621 | PAUSE + CANCEL, 2 s | Ekran dotykowy (ZD621); Zebra Setup Utilities | ✅ Tak |
+| ZT230 | Power Up / Head Close Action | PAUSE + CANCEL, 2 s | ❌ Nie |
+| ZT411/421 | Power Up / Head Close Action | Menu → Print → Sensors → Manual Calibration | ✅ Tak |
+| ZT610/620 | Power Up / Head Close Action | Menu → Print → Sensors → Manual Calibration albo TOOLS → MEDIA/RIBBON CAL | ✅ Tak |
 
 ---
 
@@ -10756,10 +10760,10 @@ Jako **autoryzowany partner serwisowy Zebra** oferujemy:
 
 ### Jak skalibrować drukarkę Zebra ZD421 krok po kroku?
 1. Załaduj etykiety i zamknij pokrywę
-2. **Przytrzymaj przycisk FEED przez 5 sekund**
-3. Puść gdy drukarka zacznie wysuwać etykiety
-4. Poczekaj aż drukarka się zatrzyma - kalibracja zakończona!
-Cały proces trwa około 30 sekund.
+2. Włącz drukarkę i poczekaj, aż dioda **STATUS** zaświeci na zielono
+3. **Przytrzymaj jednocześnie PAUSE i CANCEL przez 2 sekundy**, potem puść
+4. Drukarka wysunie kilka etykiet - gdy dioda STATUS znów świeci na zielono, kalibracja jest zakończona
+5. Naciśnij **FEED**: powinna wysunąć się dokładnie jedna etykieta
 
 ### Ile trwa kalibracja drukarki Zebra?
 **Auto-kalibracja trwa 30 sekund do 2 minut** w zależności od modelu. Drukarka wysunie 3-5 etykiet podczas procesu. Kalibracja ręczna przez Zebra Setup Utilities może zająć 5-10 minut.
@@ -10774,28 +10778,27 @@ Najczęstsze przyczyny: 1) **Ribbon załadowany odwrotnie** - sprawdź stronę b
 Błąd "Media Out" po kalibracji oznacza, że **sensor nie wykrywa etykiet**. Sprawdź: 1) Czy etykiety są prawidłowo załadowane, 2) Typ sensora (Gap vs Black Mark), 3) Czystość sensora. Dla transparentnych etykiet użyj kalibracji ręcznej.
 
 ### Dlaczego Zebra drukuje co drugą etykietę?
-Drukowanie co drugą etykietę oznacza **nieprawidłową długość etykiety** w ustawieniach. Wykonaj auto-kalibrację (FEED 5 sek.) lub ustaw ręcznie długość etykiety w sterowniku: Preferencje drukarki → Opcje → Label Length.
+Drukowanie co drugą etykietę oznacza **nieprawidłową długość etykiety** w ustawieniach. Wykonaj kalibrację (w ZD421 i ZD621: PAUSE + CANCEL przez 2 sekundy) lub ustaw ręcznie długość etykiety w sterowniku: Preferencje drukarki → Opcje → Label Length.
 
 ### Jak często trzeba kalibrować drukarkę Zebra?
 Kalibrację wykonuj: 1) Przy **każdej zmianie typu/rozmiaru** etykiet, 2) Po założeniu rolki od **nowego producenta**, 3) Po **resecie** do ustawień fabrycznych, 4) Po **wymianie głowicy** lub wałka. Przy tych samych etykietach - co 5-10 rolek.
 
 ### Jak skalibrować Zebra GK420d przyciskiem?
-1. **Wyłącz** drukarkę
-2. **Przytrzymaj** przycisk FEED
-3. **Włącz** drukarkę trzymając FEED
-4. Obserwuj diodę - **puść po 2 mignięciach**
-5. Drukarka wykona kalibrację automatycznie
-**Uwaga:** Nie trzymaj dłużej niż 5-6 mignięć - to resetuje ustawienia fabryczne!
+1. **Włącz** drukarkę i zamknij pokrywę
+2. **Przytrzymaj** przycisk FEED - zielona dioda zacznie migać seriami
+3. **Puść po drugiej serii** (dwa mignięcia)
+4. Drukarka wysunie od jednej do czterech etykiet i ustawi sensor
+**Uwaga:** Nie trzymaj przycisku do czterech mignięć - to przywraca ustawienia fabryczne. Nie włączaj drukarki z wciśniętym FEED, bo ta kombinacja nie uruchamia kalibracji.
 
 ### Co zrobić gdy Smart Calibration nie działa?
 1. **Oczyść sensor** sprężonym powietrzem lub alkoholem IPA
 2. Spróbuj **innych etykiet** (dla testu)
 3. Wykonaj kalibrację przez **Zebra Setup Utilities**
-4. Sprawdź **pozycję sensora** (w drukarkach przemysłowych)
+4. Sprawdź **pozycję sensora** (w drukarkach przemysłowych i w serii ZD)
 5. Jeśli nadal nie działa - sensor może wymagać **wymiany w serwisie** (koszt 150-550 zł)
 
 ### Gdzie jest sensor w drukarce Zebra?
-Sensor znajduje się **pod ścieżką etykiet**, zwykle jest to żółta lub zielona plastikowa część. W drukarkach biurkowych (ZD420, GK420) sensor jest stały. W drukarkach przemysłowych (ZT411, ZT610) **sensor jest ruchomy** i można go przesuwać dla wąskich etykiet.
+Sensor znajduje się **pod ścieżką etykiet**, zwykle jest to żółta lub zielona plastikowa część. W GK420 sensor jest stały, a GX420 może mieć fabryczną opcję ruchomego sensora czarnej linii. W serii ZD (ZD420, ZD421, ZD620, ZD621) i w drukarkach przemysłowych ZT411, ZT421, ZT610 i ZT620 **sensor jest ruchomy**: przesuwa się go nad nacięcie lub czarny znacznik, jeśli nie są na środku, a w drukarkach przemysłowych także przy wąskich etykietach.
 `
   },
   {
@@ -22371,44 +22374,27 @@ Po zmianie typu nośnika (np. z etykiet na paragony) czujniki muszą "nauczyć s
 
 ### Kalibracja ZQ630 / ZQ620 / ZQ610
 
-**Metoda 1 – przez menu LCD:**
+**Przez menu na wyświetlaczu:**
 
-1. Naciśnij **Home** → przejdź do **Sensors**
-2. Wybierz **Calibrate**
-3. Drukarka przesuwa kilka etykiet i automatycznie kalibruje
+1. Naciśnij **Home** i przejdź do menu **Sensors** (ta sama pozycja jest w menu **Tools**)
+2. Wybierz **Label Length Cal**
+3. Drukarka przesunie kilka etykiet i zmierzy ich długość
 
-**Metoda 2 – przez przyciski:**
-
-1. Wyłącz drukarkę
-2. Załaduj media (etykiety z linerami lub journal)
-3. **Przytrzymaj FEED** + naciśnij **POWER**
-4. Gdy druk się rozpocznie, puść FEED
+> **Uwaga:** Przytrzymanie **FEED** podczas włączania drukarki nie kalibruje jej, tylko drukuje raport konfiguracji.
 
 ### Kalibracja ZQ521 / ZQ520 / ZQ511 / ZQ510
 
-**Przez przyciski:**
+Instrukcje tych modeli nie przewidują kalibracji z przycisków. Kalibrację uruchamia się z komputera:
 
-1. Upewnij się, że media są załadowane
-2. **Przytrzymaj FEED** przez **5 sekund** aż dioda zacznie migać
-3. Puść przycisk – drukarka wykona kalibrację
+1. Połącz drukarkę przez USB lub Bluetooth
+2. W **Zebra Setup Utilities** wybierz drukarkę i kliknij **Open Printer Tools**
+3. Na zakładce **Action** wybierz **Calibrate Media** i kliknij **Send**
 
-**Przez Zebra Setup Utilities:**
-
-1. Połącz drukarkę przez USB
-2. **Open Printer Tools** → **Media Calibration** → **Auto Calibrate**
+> **Uwaga:** W ZQ511 i ZQ521 z firmware Link-OS 6 lub nowszym przytrzymanie **FEED przez 5 sekund** nie kalibruje drukarki, tylko włącza na 2 minuty tryb parowania Bluetooth.
 
 ### Kalibracja ZQ320 / ZQ310
 
-**Przez sekwencję przycisków:**
-
-1. Załaduj media
-2. **Przytrzymaj POWER** przez **6 sekund**
-3. Drukarka wykona automatyczną kalibrację
-
-**Przez Zebra Setup Utilities:**
-
-1. Połącz przez USB lub Bluetooth
-2. **Printer Settings** → **Calibration** → **Start**
+Te modele kalibruje się poleceniami wysłanymi z komputera (Zebra Setup Utilities albo sterownik ZDesigner): najpierw ustawia się rodzaj nośnika, potem uruchamia kalibrację. Drukarka wysunie kilka etykiet, a na koniec trzeba ją wyłączyć i włączyć ponownie.
 
 ---
 
@@ -26849,7 +26835,7 @@ Otwórz plik firmware (.zpl) w notatniku i wyślij całą zawartość na drukark
 | # | Krok | Opis |
 |---|------|------|
 | 1 | **Sprawdź wersję** | Wydrukuj etykietę konfiguracyjną |
-| 2 | **Skalibruj drukarkę** | Media → Kalibracja |
+| 2 | **Skalibruj drukarkę** | Sposób zależy od modelu (tabela niżej) |
 | 3 | **Przywróć ustawienia** | Jeśli zapisałeś przed aktualizacją |
 | 4 | **Testowy wydruk** | Sprawdź jakość druku |
 | 5 | **Sprawdź sieć** | Jeśli używasz Ethernet/WiFi |
@@ -26858,14 +26844,15 @@ Otwórz plik firmware (.zpl) w notatniku i wyślij całą zawartość na drukark
 
 | Model | Jak skalibrować? |
 |-------|------------------|
-| **ZD421/ZD621** | Menu → Media → Calibrate |
-| **ZD420/ZD620** | Menu → Media → Calibrate |
-| **ZD220/ZD230** | Przytrzymaj FEED przez 2 sekundy |
-| **ZT411/ZT421** | Menu → Kalibracja → Kalibruj |
-| **ZT410/ZT420** | Menu → Kalibracja → Kalibruj |
-| **ZT610/ZT620** | Menu → Kalibracja → Kalibruj |
-| **GK420/GC420** | Przytrzymaj FEED + CANCEL przez 2 sek |
-| **ZQ630/ZQ520** | Menu → Media → Calibrate |
+| **ZD421/ZD621** | Przytrzymaj PAUSE + CANCEL przez 2 sekundy |
+| **ZD420/ZD620** | Przytrzymaj PAUSE + CANCEL przez 2 sekundy |
+| **ZD220/ZD230** | Przytrzymaj FEED: po pierwszym mignięciu trzymaj dalej, puść zaraz po serii dwóch mignięć |
+| **ZT411/ZT421** | Menu → Print → Sensors → Manual Calibration → Start Calibration |
+| **ZT410/ZT420** | Przytrzymaj PAUSE + CANCEL przez 2 sekundy |
+| **ZT610/ZT620** | Ekran dotykowy: Menu → Print → Sensors → Manual Calibration; starszy wyświetlacz: PAUSE + CANCEL przez 2 sekundy |
+| **GK420/GC420** | Przy włączonej drukarce przytrzymaj FEED, puść po 2 mignięciach |
+| **ZQ630** | Menu SENSORS → LABEL LENGTH CAL |
+| **ZQ520** | Zebra Setup Utilities: Open Printer Tools → Action → Calibrate Media |
 
 ---
 
@@ -27173,7 +27160,7 @@ Jako **autoryzowany serwis Zebra** pomożemy Ci:
         },
         {
           question: 'Jak skalibrować drukarkę Zebra w Zebra Setup Utilities?',
-          answer: 'Open Printer Tools → Action → Calibrate Media. Dla etykiet z przerwami wybierz Gap/Notch, dla ciągłych Continuous. Kliknij Calibrate i poczekaj aż drukarka wydrukuje kilka etykiet testowych.'
+          answer: 'Wybierz drukarkę i kliknij Open Printer Tools, potem na zakładce Action wybierz Calibrate Media i kliknij Send. Drukarka wysunie kilka etykiet i ustawi czujnik. Rodzaj nośnika (z przerwami, ciągły, z czarnym znacznikiem) ustawisz w kreatorze Configure Printer Settings.'
         },
         {
           question: 'Czy Zebra Setup Utilities działa na Windows 11?',
@@ -27862,14 +27849,17 @@ Taśma jest **za wąska** lub **niekompatybilna** z drukarką.
 *Jak skalibrować?*
 
 **ZD621 (z wyświetlaczem):**
-1. Menu → **Media** → **Calibrate**
-2. Drukarka przepuści kilka etykiet i skalibruje czujniki
+1. Menu → **Print** → **Sensors** → **Manual Calibration**
+2. Postępuj zgodnie z poleceniami kreatora — drukarka skalibruje czujnik nośnika i taśmy
 
-**ZD220/ZD230/ZD421 (bez wyświetlacza):**
-Przytrzymaj przycisk FEED przez 2 sekundy po włączeniu lub wyślij komendę: ~JC
+**ZD421 (bez wyświetlacza):**
+Przytrzymaj **PAUSE + CANCEL** przez 2 sekundy albo wyślij komendę: ~JC
 
-**ZT411/ZT421/ZT610/ZT620:**
-1. Menu → **Calibrate** → **Start**
+**ZD220/ZD230:**
+Przy włączonej drukarce przytrzymaj **FEED**: po pierwszym mignięciu trzymaj dalej i puść zaraz po serii dwóch mignięć. Możesz też wysłać komendę: ~JC
+
+**ZT411/ZT421/ZT610/ZT620 (ekran dotykowy):**
+1. Menu → **Print** → **Sensors** → **Manual Calibration** → **Start Calibration**
 
 **Komenda ZPL (uniwersalna):**
 
@@ -27891,8 +27881,11 @@ Gdy inne metody nie pomagają – reset przywraca domyślne ustawienia czujnikó
 1. Menu → **System** → **Factory Defaults**
 2. Potwierdź
 
-**ZD220/ZD230/ZD421 (bez wyświetlacza):**
+**ZD421 (bez wyświetlacza):**
 Wyłącz drukarkę, przytrzymaj PAUSE + FEED i włącz zasilanie
+
+**ZD220/ZD230:**
+Przy włączonej drukarce przytrzymaj FEED i puść zaraz po serii trzech mignięć
 
 **Komenda ZPL:**
 
@@ -28614,7 +28607,7 @@ Drukarki ZD420 i ZD421 mają **panel 3-przyciskowy** (FEED, PAUSE, CANCEL) z dio
 |---------|---------|--------|
 | **STATUS** | Główny wskaźnik stanu drukarki | Zielona / Pomarańczowa / Czerwona |
 | **DATA** | Wskaźnik transferu danych | Zielona (miga podczas odbierania) |
-| **Przycisk FEED** | Wysunięcie etykiety / kalibracja | - |
+| **Przycisk FEED** | Wysunięcie etykiety | - |
 | **Przycisk PAUSE** | Wstrzymanie drukowania | - |
 | **Przycisk CANCEL** | Anulowanie / wydruk konfiguracji | - |
 
@@ -28709,7 +28702,7 @@ Drukarki ZD420 i ZD421 mają **panel 3-przyciskowy** (FEED, PAUSE, CANCEL) z dio
 |--------|------------|
 | **Przyciskami** | Gdy STATUS świeci zielono: przytrzymaj PAUSE + CANCEL przez 2 sek. |
 | **Przez ZPL** | Wyślij komendę: ~JC |
-| **Przez ZSU** | Open Printer Tools → Calibrate |
+| **Przez ZSU** | Open Printer Tools → Action → Calibrate Media → Send |
 
 > **💡 Wskazówka:** Po kalibracji STATUS powróci do zielonego światła ciągłego. Drukarka automatycznie wykryje typ mediów (gap, black mark, continuous).
 
@@ -29888,7 +29881,7 @@ Jako **autoryzowany serwis Zebra** oferujemy:
         },
         {
           question: 'Jak skalibrować drukarkę Zebra GK420?',
-          answer: 'Kalibracja GK420: włącz drukarkę z naciśniętym przyciskiem FEED, trzymaj aż dioda mignnie 2 razy, zwolnij. Drukarka wykona automatyczną kalibrację czujników. Alternatywnie: przytrzymaj FEED przez 7 sekwencji migania dla ręcznej kalibracji.'
+          answer: 'Kalibracja GK420: przy włączonej drukarce i zamkniętej pokrywie przytrzymaj przycisk FEED i puść go po drugiej serii mignięć (dwa mignięcia). Drukarka wysunie od jednej do czterech etykiet i skalibruje czujniki. Kalibrację ręczną uruchomisz, puszczając przycisk po siedmiu mignięciach.'
         },
         {
           question: 'Jak zresetować drukarkę Zebra GK420 do ustawień fabrycznych?',
@@ -31237,7 +31230,7 @@ Open Printer Tools → Action → Load printer defaults
         },
         {
           question: 'Jak skalibrować drukarkę Zebra ZD220 (SmartCal)?',
-          answer: 'Kalibracja SmartCal w ZD220: 1) Załaduj etykiety i zamknij pokrywę, 2) Wyłącz drukarkę, 3) Przytrzymaj FEED i włącz drukarkę, 4) Puść FEED gdy dioda miga 2x na zielono. Drukarka automatycznie wykalibruje czujniki.'
+          answer: 'Kalibracja SmartCal w ZD220: 1) Załaduj etykiety i zamknij pokrywę, 2) Włącz drukarkę i poczekaj, aż dioda STATUS świeci na zielono, 3) Przytrzymaj FEED: po pierwszym mignięciu trzymaj dalej, 4) Puść FEED zaraz po serii dwóch mignięć. Drukarka wysunie kilka etykiet i ustawi czujniki.'
         },
         {
           question: 'Dlaczego Zebra ZD220 drukuje puste etykiety?',
@@ -31249,7 +31242,7 @@ Open Printer Tools → Action → Load printer defaults
         },
         {
           question: 'Jak zresetować drukarkę Zebra ZD220 do ustawień fabrycznych?',
-          answer: 'Reset ZD220: 1) Wyłącz drukarkę, 2) Przytrzymaj FEED i włącz drukarkę, 3) Puść FEED gdy dioda STATUS miga 1x na zielono. Drukarka wydrukuje raport i przywróci domyślne ustawienia. Alternatywnie użyj Zebra Setup Utilities.'
+          answer: 'Reset ZD220: 1) Włącz drukarkę i poczekaj, aż dioda STATUS świeci na zielono, 2) Przytrzymaj FEED: dioda mignie raz, potem dwa razy, potem trzy razy, 3) Puść FEED zaraz po serii trzech mignięć. Drukarka przywróci ustawienia fabryczne. Alternatywnie użyj Zebra Setup Utilities.'
         },
         {
           question: 'Czy Zebra ZD220 nadaje się do etykiet kurierskich InPost?',
@@ -31611,11 +31604,13 @@ Zebra ZD220 nie ma wyświetlacza — komunikuje się **jedną diodą LED STATUS*
 
 **Procedura krok po kroku:**
 1. Załaduj materiał (i ribbon w ZD220t) — zamknij pokrywę
-2. **Wyłącz** drukarkę
-3. **Przytrzymaj FEED** i **włącz** drukarkę (nie puszczaj FEED)
-4. Obserwuj diodę STATUS — puść FEED gdy miga **2x na zielono**
+2. **Włącz** drukarkę i poczekaj, aż dioda STATUS zaświeci ciągłym zielonym
+3. **Przytrzymaj FEED** — po 2 sekundach dioda mignie raz; trzymaj dalej
+4. Puść FEED **zaraz po serii dwóch mignięć**
 5. Drukarka wysunie kilka etykiet, kalibrując czujniki
 6. Gdy STATUS zaświeci ciągłym zielonym — gotowe
+
+> **⚠️ Uwaga:** Nie włączaj drukarki z wciśniętym FEED — to uruchamia tryb wgrywania firmware, a nie kalibrację. Puszczenie przycisku po serii trzech mignięć przywraca ustawienia fabryczne.
 
 ### Raport konfiguracji (test wydruku)
 
@@ -31634,9 +31629,9 @@ Zebra ZD220 nie ma wyświetlacza — komunikuje się **jedną diodą LED STATUS*
 **Kiedy:** Przy problemach z ustawieniami, po przejęciu drukarki od innego użytkownika, przy trudnych do zdiagnozowania błędach.
 
 **Procedura przez przycisk FEED:**
-1. Wyłącz drukarkę
-2. Przytrzymaj **FEED** i włącz drukarkę
-3. Puść FEED gdy dioda STATUS **miga 1x na zielono**
+1. Włącz drukarkę i poczekaj, aż dioda STATUS zaświeci na zielono
+2. Przytrzymaj **FEED** — dioda mignie raz, potem dwa razy, potem trzy razy
+3. Puść FEED **zaraz po serii trzech mignięć**
 4. Drukarka przywróci ustawienia fabryczne
 
 **Procedura przez Zebra Setup Utilities:**
@@ -31683,7 +31678,7 @@ Zebra ZD220 nie ma wyświetlacza — komunikuje się **jedną diodą LED STATUS*
 
 ### ✅ Napraw sam (bezpłatnie):
 
-- **MEDIA OUT** → Kalibracja SmartCal (FEED przy włączaniu, puść na 2x zielone)
+- **MEDIA OUT** → Kalibracja SmartCal (przy gotowej drukarce przytrzymaj FEED, puść po serii dwóch mignięć)
 - **RIBBON OUT** → Sprawdź ribbon — wymień lub popraw załadowanie
 - **HEAD OPEN** → Zamknij pokrywę, dociśnij w rogach aż kliknie
 - **Przegrzanie** → Poczekaj na schłodzenie (nie wyłączaj!)
@@ -33270,7 +33265,7 @@ Tak. Zebra ZT111 zastąpiła model ZT220 w ofercie. Drukarka jest kompatybilna z
       faqSchema: [
         {
           question: 'Drukarka Zebra ZT220 nie drukuje — co zrobić?',
-          answer: 'Sprawdź 5 diod LED na panelu: STATUS (zielona=OK, czerwona=błąd), SUPPLIES (czerwona=brak mediów, bursztynowa migająca=brak taśmy). Wykonaj kalibrację czujników: przytrzymaj PAUSE + FEED przez 2 sekundy. Jeśli dioda STATUS jest czerwona — otwórz pokrywę i sprawdź czy głowica jest zamknięta, media i taśma załadowane prawidłowo. Bezpłatna diagnostyka: serwis-zebry.pl/#formularz'
+          answer: 'Sprawdź 5 diod LED na panelu: STATUS (zielona=OK, czerwona=błąd), SUPPLIES (czerwona=brak mediów, bursztynowa migająca=brak taśmy). Wykonaj kalibrację czujników: przytrzymaj PAUSE + CANCEL przez 2 sekundy i postępuj według kolejnych kroków. Jeśli dioda STATUS jest czerwona — otwórz pokrywę i sprawdź czy głowica jest zamknięta, media i taśma załadowane prawidłowo. Bezpłatna diagnostyka: serwis-zebry.pl/#formularz'
         },
         {
           question: 'Co oznaczają diody LED na drukarce Zebra ZT220?',
@@ -33282,7 +33277,7 @@ Tak. Zebra ZT111 zastąpiła model ZT220 w ofercie. Drukarka jest kompatybilna z
         },
         {
           question: 'Jak skalibrować czujniki w drukarce Zebra ZT220/ZT230?',
-          answer: 'Szybka kalibracja SmartCal: przytrzymaj PAUSE + FEED przez 2 sekundy — drukarka automatycznie skalibruje czujniki. Kalibracja ręczna (14 kroków): wyłącz drukarkę, przytrzymaj PAUSE i włącz, zwolnij gdy STATUS zmieni kolor, wybierz tryb kalibracji przyciskami PAUSE/FEED/CANCEL, podawaj media zgodnie z instrukcjami diod. Kalibracja ręczna jest wymagana przy niestandardowych mediach.'
+          answer: 'Kalibrację uruchamia się, przytrzymując PAUSE + CANCEL przez 2 sekundy przy drukarce w stanie gotowości (w ZT230 także z menu TOOLS lub SENSORS > MEDIA/RIBBON CAL). Drukarka najpierw mierzy sam podkład, potem etykietę; kolejne kroki zatwierdza się przyciskiem PAUSE. Automatyczną kalibrację po włączeniu lub zamknięciu głowicy włącza ustawienie POWER UP ACTION lub HEAD CLOSE ACTION = CALIBRATE. Kombinacja PAUSE + FEED nie kalibruje drukarki, tylko włącza tryb diagnostyczny.'
         },
         {
           question: 'Ile kosztuje naprawa drukarki Zebra ZT220/ZT230?',
@@ -33310,7 +33305,7 @@ Tak. Zebra ZT111 zastąpiła model ZT220 w ofercie. Drukarka jest kompatybilna z
         }
       ]
     },
-    content: `> **🎯 Szybka odpowiedź:** Drukarka **Zebra ZT220** lub **ZT230** nie drukuje? Sprawdź **5 diod LED** na panelu (ZT220) lub komunikat na **wyświetlaczu LCD** (ZT230). Czerwona STATUS + czerwona SUPPLIES = **brak mediów**, czerwona STATUS + migająca bursztynowa SUPPLIES = **brak taśmy**. Wykonaj kalibrację: przytrzymaj **PAUSE + FEED** przez 2 sekundy. Jeśli to nie pomoże — [wyślij drukarkę do bezpłatnej diagnostyki](https://www.serwis-zebry.pl/#formularz).
+    content: `> **🎯 Szybka odpowiedź:** Drukarka **Zebra ZT220** lub **ZT230** nie drukuje? Sprawdź **5 diod LED** na panelu (ZT220) lub komunikat na **wyświetlaczu LCD** (ZT230). Czerwona STATUS + czerwona SUPPLIES = **brak mediów**, czerwona STATUS + migająca bursztynowa SUPPLIES = **brak taśmy**. Wykonaj kalibrację: przytrzymaj **PAUSE + CANCEL** przez 2 sekundy. Jeśli to nie pomoże — [wyślij drukarkę do bezpłatnej diagnostyki](https://www.serwis-zebry.pl/#formularz).
 
 **Zebra ZT220** i **ZT230** to drukarki przemysłowe z serii ZT200 — jedne z najpopularniejszych modeli w polskich magazynach, centrach logistycznych i zakładach produkcyjnych. **ZT220** ma uproszczony panel z **3 przyciskami i 5 diodami LED** (bez wyświetlacza), natomiast **ZT230** posiada dodatkowy **wyświetlacz LCD** z komunikatami tekstowymi i menu konfiguracyjne.
 
@@ -33357,9 +33352,9 @@ Nad przyciskami znajduje się **5 diod LED**: **STATUS**, **PAUSE**, **DATA**, *
 | **PAUSE** (przytrzymaj przy włączaniu) | Włączanie drukarki | Test PAUSE (test mechanizmu druku) |
 | **FEED + PAUSE** (przytrzymaj przy włączaniu) | Włączanie drukarki | **Reset do ustawień fabrycznych** |
 | **CANCEL + PAUSE** (przytrzymaj przy włączaniu) | Włączanie drukarki | **Reset ustawień sieci** |
-| **PAUSE + FEED** (przytrzymaj 2 sek.) | Drukarka włączona | **Kalibracja SmartCal** |
-| **PAUSE + CANCEL** (przytrzymaj 2 sek.) | Drukarka włączona | Kalibracja ręczna (tryb kalibracji) |
-| **PAUSE + FEED + CANCEL** (przytrzymaj 2 sek.) | Drukarka włączona | **Kalibracja ręczna (14 kroków)** |
+| **FEED + CANCEL** (przytrzymaj przy włączaniu) | Włączanie drukarki | Wydruk profilu czujnika |
+| **PAUSE + CANCEL** (przytrzymaj 2 sek.) | Drukarka włączona | **Kalibracja czujników** (kroki opisane niżej) |
+| **PAUSE + FEED** (przytrzymaj 2 sek.) | Drukarka włączona | Tryb diagnostyczny (zrzut danych) |
 
 ---
 
@@ -33448,7 +33443,7 @@ Model **ZT230** wyświetla komunikaty tekstowe na wyświetlaczu LCD, co znacząc
 4. Wydrukuj etykietę konfiguracyjną: przytrzymaj **CANCEL** przy włączaniu drukarki
 5. Jeśli etykieta konfiguracyjna drukuje się prawidłowo → problem z komunikacją (sterownik/port/kabel)
 6. Jeśli etykieta konfiguracyjna nie drukuje się → wykonaj reset fabryczny: **FEED + PAUSE** przy włączaniu
-7. Po resecie wykonaj kalibrację: **PAUSE + FEED** przez 2 sekundy
+7. Po resecie wykonaj kalibrację: **PAUSE + CANCEL** przez 2 sekundy
 
 > Nie pomogło? → [Wyślij drukarkę do bezpłatnej diagnostyki](https://www.serwis-zebry.pl/#formularz)
 
@@ -33460,8 +33455,8 @@ Model **ZT230** wyświetla komunikaty tekstowe na wyświetlaczu LCD, co znacząc
 2. Jeśli etykiety są załadowane — sprawdź czy przechodzą **nad czujnikiem mediów** (pod głowicą)
 3. Sprawdź pozycję czujnika — suwak czujnika musi być ustawiony na **środku etykiety** (dla mediów z przerwą) lub na **pozycji czarnego znacznika** (black mark)
 4. Wyczyść czujnik mediów sprężonym powietrzem lub patyczkiem z alkoholem izopropylowym
-5. Wykonaj kalibrację: przytrzymaj **PAUSE + FEED** przez 2 sekundy
-6. Jeśli kalibracja nie pomoże — wykonaj kalibrację ręczną: **PAUSE + FEED + CANCEL** przez 2 sekundy
+5. Wykonaj kalibrację: przytrzymaj **PAUSE + CANCEL** przez 2 sekundy (kroki opisane w sekcji o kalibracji)
+6. Jeśli kalibracja nie pomoże — wydrukuj **profil czujnika** i sprawdź odczyty
 
 > Nie pomogło? → [Wyślij drukarkę do bezpłatnej diagnostyki](https://www.serwis-zebry.pl/#formularz)
 
@@ -33474,7 +33469,7 @@ Model **ZT230** wyświetla komunikaty tekstowe na wyświetlaczu LCD, co znacząc
 3. Sprawdź **czujnik taśmy** — wyczyść patyczkiem z alkoholem izopropylowym
 4. Jeśli nie używasz taśmy (tryb termiczny bezpośredni) — zmień tryb druku na **DT**: komenda ZPL **^MT,D** lub w ustawieniach drukarki
 5. Sprawdź napięcie taśmy — zbyt luźna taśma może powodować fałszywy błąd
-6. Wykonaj kalibrację: **PAUSE + FEED** przez 2 sekundy
+6. Wykonaj kalibrację: **PAUSE + CANCEL** przez 2 sekundy
 
 > Nie pomogło? → [Wyślij drukarkę do bezpłatnej diagnostyki](https://www.serwis-zebry.pl/#formularz)
 
@@ -33518,12 +33513,12 @@ Model **ZT230** wyświetla komunikaty tekstowe na wyświetlaczu LCD, co znacząc
 
 **Objawy:** Wydruk pojawia się na co drugiej etykiecie lub jest przesunięty w pionie.
 
-1. Wykonaj kalibrację: **PAUSE + FEED** przez 2 sekundy
+1. Wykonaj kalibrację: **PAUSE + CANCEL** przez 2 sekundy
 2. Sprawdź ustawienie czujnika mediów — suwak musi być na **środku przerwy między etykietami**
 3. Sprawdź **Media Type** — ustaw prawidłowy typ: Gap/Notch (z przerwą), Black Mark (czarny znacznik), Continuous (ciągłe)
 4. Sprawdź **długość etykiety** w formacie druku — musi odpowiadać rzeczywistej długości etykiety
 5. Sprawdź prowadnice mediów — nie mogą być zbyt ciasne ani zbyt luźne
-6. Wykonaj **kalibrację ręczną** jeśli SmartCal nie pomaga: **PAUSE + FEED + CANCEL** przez 2 sekundy
+6. Jeśli kalibracja nie pomaga, wydrukuj **profil czujnika** i sprawdź odczyty
 
 ### 8. Problemy z komunikacją — drukarka nie odpowiada
 
@@ -33531,7 +33526,7 @@ Model **ZT230** wyświetla komunikaty tekstowe na wyświetlaczu LCD, co znacząc
 
 1. Sprawdź diodę **NETWORK** (Ethernet): zielona=100Mbps OK, bursztynowa=10Mbps OK, czerwona=błąd, zgaszona=brak połączenia
 2. **USB:** odłącz i podłącz kabel, sprawdź port USB w menedżerze urządzeń
-3. **Ethernet:** sprawdź kabel sieciowy, zweryfikuj adres IP (wydrukuj etykietę konfiguracji sieci: **CANCEL + PAUSE** przy włączaniu)
+3. **Ethernet:** sprawdź kabel sieciowy, zweryfikuj adres IP (wydrukuj etykietę konfiguracji: przytrzymaj **CANCEL** przy włączaniu drukarki)
 4. **RS-232:** sprawdź zgodność parametrów portu szeregowego (baud rate, parity, data bits, stop bits)
 5. Jeśli etykiety drukują się jako zniekształcony tekst → **zmień język drukarki** na ZPL (komenda **^XA^JUS^XZ**)
 6. Zresetuj ustawienia sieci: **CANCEL + PAUSE** przy włączaniu drukarki
@@ -33540,46 +33535,38 @@ Model **ZT230** wyświetla komunikaty tekstowe na wyświetlaczu LCD, co znacząc
 
 ---
 
-## Kalibracja czujników — 3 metody
+## Kalibracja czujników — 2 metody
 
 Prawidłowa kalibracja czujników to **najważniejsza czynność serwisowa** dla ZT220/ZT230. Nieprawidłowa kalibracja powoduje błędy MEDIA OUT, drukowanie co drugiej etykiety i przesunięcia wydruku.
 
-### Metoda 1: SmartCal (szybka kalibracja)
-
-Najczęściej stosowana metoda. Wystarczy w większości przypadków.
-
-1. Upewnij się, że media i taśma są prawidłowo załadowane
-2. Zamknij głowicę
-3. Przytrzymaj **PAUSE + FEED** przez **2 sekundy**
-4. Drukarka automatycznie podaje media i kalibruje czujnik przerwy/czarnego znacznika
-5. Po zakończeniu drukarka jest gotowa do pracy
-
-### Metoda 2: Automatyczna kalibracja (Power Up / Head Close)
+### Metoda 1: Automatyczna kalibracja (Power Up / Head Close)
 
 Kalibracja wykonuje się automatycznie po każdym włączeniu drukarki lub zamknięciu głowicy.
 
-1. W ustawieniach drukarki ustaw **POWER UP ACTION = CALIBRATE** (komenda ZPL: **^MF,C**)
-2. Ustaw **HEAD CLOSE ACTION = CALIBRATE** (komenda ZPL: **~JS,C**)
+1. W ustawieniach drukarki ustaw **POWER UP ACTION = CALIBRATE** (komenda ZPL: **^MFC**)
+2. Ustaw **HEAD CLOSE ACTION = CALIBRATE** (komenda ZPL: **^MF,C**; obie naraz: **^MFC,C**)
 3. Od tej chwili drukarka kalibruje czujniki automatycznie
 
-### Metoda 3: Kalibracja ręczna — 14 kroków
+Zamiast CALIBRATE można wybrać **SHORT CAL** — drukarka ustawia wtedy tylko progi czujników i mierzy długość etykiety.
 
-Wymagana gdy SmartCal nie działa prawidłowo (niestandardowe media, czarne etykiety, przezroczyste podkłady).
+### Metoda 2: Kalibracja ręczna (PAUSE + CANCEL)
 
-1. **Wyłącz** drukarkę
-2. **Przytrzymaj PAUSE** i **włącz** drukarkę
-3. Gdy dioda **STATUS** zmieni kolor z zielonej na bursztynową — **zwolnij PAUSE**
-4. Dioda STATUS miga bursztynowo — drukarka jest w trybie kalibracji
-5. **Naciśnij PAUSE** aby wybrać kalibrację czujnika mediów
-6. Drukarka podaje media — **otwórz głowicę**
-7. **Wyjmij ok. 150 mm mediów** spod głowicy
-8. Jeśli to media z przerwą — **odklej etykiety** z wysuniętego fragmentu, zostaw sam podkład (liner)
-9. **Zamknij głowicę** na samym podkładzie (bez etykiet)
-10. Naciśnij **PAUSE** — drukarka mierzy pusty podkład jako punkt odniesienia
-11. Po zakończeniu pomiaru — **otwórz głowicę**
-12. **Załaduj media z etykietami** prawidłowo na czujniku, **zamknij głowicę**
-13. Naciśnij **PAUSE** — drukarka mierzy media z etykietą i oblicza różnicę
-14. Po zakończeniu naciśnij **PAUSE** aby wyjść z trybu kalibracji
+Wymagana, gdy automatyczna kalibracja nie wystarcza (niestandardowe media, czarne etykiety, przezroczyste podkłady).
+
+1. Przy drukarce w stanie gotowości przytrzymaj **PAUSE + CANCEL** przez **2 sekundy** (w ZT230 możesz też wybrać w menu **TOOLS** lub **SENSORS** pozycję **MEDIA/RIBBON CAL** i **START**)
+2. Diody STATUS i SUPPLIES mrugną raz na żółto, a dioda PAUSE zacznie migać
+3. **Otwórz głowicę** i **wysuń ok. 200 mm mediów** z drukarki
+4. Jeśli to media z przerwą — **odklej etykiety** z wysuniętego fragmentu, zostaw sam podkład (liner)
+5. Wciągnij media tak, aby **między czujnikami był sam podkład**
+6. **Wyjmij taśmę** (jeśli jest używana) i **zamknij głowicę**
+7. Naciśnij **PAUSE** — drukarka mierzy pusty podkład jako punkt odniesienia
+8. Po zakończeniu pomiaru **otwórz głowicę**
+9. Przeciągnij media tak, aby **etykieta znalazła się między czujnikami**
+10. **Załóż z powrotem taśmę** i **zamknij głowicę**
+11. Naciśnij **PAUSE**, aby wznowić drukowanie
+12. Naciśnij **FEED** — jeśli wysuwa się dokładnie jedna etykieta, kalibracja się udała
+
+> **⚠️ Uwaga:** Kombinacja **PAUSE + FEED** (2 sekundy) nie kalibruje drukarki, tylko włącza tryb diagnostyczny (zrzut danych). Przytrzymanie **PAUSE** przy włączaniu uruchamia test wydruku, a nie kalibrację.
 
 > **⚠️ Kiedy kalibracja ręczna jest niezbędna:** czarne lub kolorowe etykiety, przezroczyste podkłady, bardzo małe etykiety (poniżej 25 mm), media z czarnym znacznikiem (black mark) na nietypowej pozycji.
 
@@ -33687,17 +33674,20 @@ ZT220/ZT230 oferuje kilka wbudowanych testów diagnostycznych uruchamianych komb
 
 Wydruk profilu czujnika pokazuje graficznie odczyty czujnika mediów. Przydatny do diagnostyki problemów z wykrywaniem etykiet.
 
-1. Przytrzymaj **PAUSE + FEED** przez 2 sekundy — kalibracja SmartCal
-2. Natychmiast po kalibracji przytrzymaj **PAUSE + CANCEL** przez 2 sekundy
-3. Drukarka wydrukuje **profil czujnika** — wykres z odczytami czujnika
-4. Na wykresie powinny być widoczne **wyraźne piki** w miejscach przerw między etykietami
+1. **Wyłącz** drukarkę
+2. Przytrzymaj **FEED + CANCEL** i **włącz** drukarkę
+3. Trzymaj przyciski, aż pierwsza dioda zgaśnie
+4. Drukarka wydrukuje **profil czujnika** — wykres z odczytami czujnika (w ZT230 profil wydrukujesz też z menu SENSORS)
+5. Na wykresie powinny być widoczne **wyraźne piki** w miejscach przerw między etykietami
 
 ### Etykieta konfiguracji sieci
 
 1. **Wyłącz** drukarkę
-2. Przytrzymaj **CANCEL + PAUSE** (jednocześnie oba) i **włącz** drukarkę
-3. Trzymaj przyciski aż drukarka zacznie drukować
-4. Etykieta zawiera: **adres IP**, maskę podsieci, bramę, adres MAC, DHCP/Static, DNS
+2. Przytrzymaj **CANCEL** i **włącz** drukarkę
+3. Trzymaj CANCEL, aż pierwsza dioda zgaśnie — drukarka wydrukuje etykietę konfiguracji i etykietę sieci
+4. Etykieta sieci zawiera: **adres IP**, maskę podsieci, bramę, adres MAC, DHCP/Static, DNS
+
+> **⚠️ Uwaga:** Kombinacja **CANCEL + PAUSE** przy włączaniu nie drukuje etykiety, tylko przywraca fabryczne ustawienia sieci.
 
 ---
 
@@ -33802,7 +33792,7 @@ Wydruk profilu czujnika pokazuje graficznie odczyty czujnika mediów. Przydatny 
 
 **Drukarka Zebra ZT220 nie drukuje — co zrobić?**
 
-Sprawdź 5 diod LED na panelu: STATUS (zielona=OK, czerwona=błąd), SUPPLIES (czerwona=brak mediów, bursztynowa migająca=brak taśmy). Wykonaj kalibrację czujników: przytrzymaj PAUSE + FEED przez 2 sekundy. Jeśli dioda STATUS jest czerwona — otwórz pokrywę i sprawdź czy głowica jest zamknięta, media i taśma załadowane prawidłowo. [Bezpłatna diagnostyka →](https://www.serwis-zebry.pl/#formularz)
+Sprawdź 5 diod LED na panelu: STATUS (zielona=OK, czerwona=błąd), SUPPLIES (czerwona=brak mediów, bursztynowa migająca=brak taśmy). Wykonaj kalibrację czujników: przytrzymaj PAUSE + CANCEL przez 2 sekundy i postępuj według kolejnych kroków. Jeśli dioda STATUS jest czerwona — otwórz pokrywę i sprawdź czy głowica jest zamknięta, media i taśma załadowane prawidłowo. [Bezpłatna diagnostyka →](https://www.serwis-zebry.pl/#formularz)
 
 **Co oznaczają diody LED na drukarce Zebra ZT220?**
 
@@ -33814,7 +33804,7 @@ Najczęstsze komunikaty: PRINTER READY (gotowa), PRINTER PAUSED (wstrzymana), HE
 
 **Jak skalibrować czujniki w drukarce Zebra ZT220/ZT230?**
 
-Szybka kalibracja SmartCal: przytrzymaj PAUSE + FEED przez 2 sekundy. Kalibracja ręczna (14 kroków): wyłącz drukarkę, przytrzymaj PAUSE i włącz, zwolnij gdy STATUS zmieni kolor, podawaj media zgodnie z instrukcjami diod. Kalibracja ręczna wymagana przy niestandardowych mediach.
+Kalibrację uruchamia się, przytrzymując **PAUSE + CANCEL** przez 2 sekundy przy drukarce w stanie gotowości (w ZT230 także z menu TOOLS lub SENSORS > MEDIA/RIBBON CAL). Drukarka najpierw mierzy sam podkład, potem etykietę; kolejne kroki zatwierdza się przyciskiem PAUSE. Automatyczną kalibrację po włączeniu lub zamknięciu głowicy włącza ustawienie POWER UP ACTION lub HEAD CLOSE ACTION = CALIBRATE. Kombinacja PAUSE + FEED nie kalibruje drukarki, tylko włącza tryb diagnostyczny.
 
 **Ile kosztuje naprawa drukarki Zebra ZT220/ZT230?**
 

@@ -1151,9 +1151,10 @@ Po załadowaniu nowego typu materiału lub ribbonu **zawsze wykonaj kalibrację*
 
 ### Wyświetlacz dotykowy
 
-1. Przejdź do **Menu > Druk > Czujniki > Kalibracja ręczna**
-2. Wybierz **SmartCal**
-3. Drukarka wykona automatyczną kalibrację
+1. Przejdź do **Menu > Druk > Czujniki > Kalibracja ręczna** (Print > Sensors > Manual Calibration)
+2. Postępuj zgodnie z poleceniami kreatora kalibracji ręcznej na ekranie
+
+Kalibrację ręczną uruchomisz też przyciskami: przytrzymaj **PAUSE + FEED + CANCEL** przez 2 sekundy.
 
 ### Druk testowy (raport konfiguracji)
 
@@ -1393,7 +1394,7 @@ Wymaga fabrycznie zainstalowanego modułu bezprzewodowego:
         content: `
 ### Jak skalibrować drukarkę Zebra ZD621t?
 
-**Odpowiedź:** Naciśnij i przytrzymaj jednocześnie **PAUSE + CANCEL** przez 2 sekundy. Drukarka automatycznie wykona kalibrację SmartCal. Alternatywnie użyj wyświetlacza LCD: **MENU > Ustawienia > Kalibracja > SmartCal**.
+**Odpowiedź:** Naciśnij i przytrzymaj jednocześnie **PAUSE + CANCEL** przez 2 sekundy. Drukarka automatycznie wykona kalibrację SmartCal. Na ekranie dotykowym kreator kalibracji ręcznej znajdziesz w **Menu > Druk > Czujniki > Kalibracja ręczna**.
 
 ### Jak załadować ribbon do drukarki Zebra ZD621t?
 
@@ -1626,9 +1627,10 @@ Po załadowaniu nowego typu materiału **zawsze wykonaj kalibrację**:
 
 ### Wyświetlacz dotykowy
 
-1. Przejdź do **Menu > Druk > Czujniki > Kalibracja ręczna**
-2. Wybierz **SmartCal**
-3. Drukarka wykona automatyczną kalibrację
+1. Przejdź do **Menu > Druk > Czujniki > Kalibracja ręczna** (Print > Sensors > Manual Calibration)
+2. Postępuj zgodnie z poleceniami kreatora kalibracji ręcznej na ekranie
+
+Kalibrację ręczną uruchomisz też przyciskami: przytrzymaj **PAUSE + FEED + CANCEL** przez 2 sekundy.
 
 ### Druk testowy (raport konfiguracji)
 
@@ -1858,7 +1860,7 @@ Wymaga fabrycznie zainstalowanego modułu bezprzewodowego:
 
 ### Jak skalibrować drukarkę Zebra ZD621d?
 
-**Odpowiedź:** Przez wyświetlacz LCD: **MENU > Ustawienia > Kalibracja > SmartCal**. Lub naciśnij i przytrzymaj **PAUSE + CANCEL** przez 2 sekundy.
+**Odpowiedź:** Naciśnij i przytrzymaj jednocześnie **PAUSE + CANCEL** przez 2 sekundy (kalibracja SmartCal). Na ekranie dotykowym kreator kalibracji ręcznej znajdziesz w **Menu > Druk > Czujniki > Kalibracja ręczna**.
 
 ### Jaka jest maksymalna prędkość druku drukarki Zebra ZD621d?
 
@@ -2147,7 +2149,7 @@ Model ZD621R jest wyposażony w **kolorowy wyświetlacz dotykowy** umożliwiają
 Po załadowaniu nowego materiału RFID:
 
 1. Przytrzymaj **PAUSE + CANCEL** przez **2 sekundy**
-2. LUB: **Menu > Druk > Czujniki > Kalibracja ręczna > SmartCal**
+2. LUB (kreator kalibracji ręcznej): **Menu > Druk > Czujniki > Kalibracja ręczna**
 3. **Po SmartCal wykonaj również Kalibrację RFID**
 
 ### Druk testowy
@@ -4022,7 +4024,7 @@ Jeśli materiał skończy się podczas drukowania:
 
 ### Jak skalibrować drukarkę Zebra ZD611d?
 
-**Odpowiedź:** Przez wyświetlacz LCD: **MENU > Ustawienia > Kalibracja > SmartCal**. Lub naciśnij **PAUSE + CANCEL** przez 2 sekundy.
+**Odpowiedź:** Naciśnij i przytrzymaj jednocześnie **PAUSE + CANCEL** przez 2 sekundy (kalibracja SmartCal). Na ekranie dotykowym kreator kalibracji ręcznej znajdziesz w **Menu > Druk > Czujniki > Kalibracja ręczna**.
 
 ### Co to jest wyświetlacz LCD w drukarce Zebra ZD611d?
 
@@ -4556,7 +4558,7 @@ Wersja Healthcare oferuje:
         content: `
 ### Jak skalibrować drukarkę Zebra ZD611t?
 
-**Odpowiedź:** Przez wyświetlacz LCD: **MENU > Ustawienia > Kalibracja > SmartCal**. Lub naciśnij **PAUSE + CANCEL** przez 2 sekundy.
+**Odpowiedź:** Naciśnij i przytrzymaj jednocześnie **PAUSE + CANCEL** przez 2 sekundy (kalibracja SmartCal). Na ekranie dotykowym kreator kalibracji ręcznej znajdziesz w **Menu > Druk > Czujniki > Kalibracja ręczna**.
 
 ### Jak załadować ribbon do drukarki Zebra ZD611t?
 
@@ -5112,7 +5114,7 @@ Przed podłączeniem drukarki zainstaluj sterowniki ze strony [serwis-zebry.pl/s
 
 ### Jak skalibrować drukarkę RFID Zebra ZD611R?
 
-**Odpowiedź:** Przez LCD: **MENU > Ustawienia > Kalibracja > SmartCal** dla druku. Dla RFID: **MENU > RFID > CALIBRATE**. Drukarka wykryje pozycję transpondera automatycznie.
+**Odpowiedź:** Dla druku przytrzymaj **PAUSE + CANCEL** przez 2 sekundy (kalibracja SmartCal). Dla RFID: **Menu > RFID > RFID Calibrate**. Drukarka wykryje pozycję transpondera automatycznie.
 
 ### Jakie etykiety RFID pasują do drukarki Zebra ZD611R?
 
@@ -7167,23 +7169,21 @@ Drukarka ZT111 posiada prosty panel z **5 wskaźnikami LED** i **3 przyciskami**
         content: `
 ### Kalibracja automatyczna (Auto Calibration)
 
-Automatyczna kalibracja czujników materiału i ribbonu:
-
-1. Upewnij się, że materiał i ribbon (jeśli używany) są załadowane
-2. Zamknij głowicę
-3. Naciśnij i przytrzymaj **PAUSE + FEED** przez **2 sekundy**
-4. Drukarka przeprowadzi kalibrację i wysunie kilka etykiet
+Drukarka może kalibrować czujniki sama po włączeniu albo po zamknięciu głowicy: ustaw **POWER UP ACTION** lub **HEAD CLOSE ACTION** na **CALIBRATE** (pełna kalibracja) albo **SHORT CAL** (progi czujników i długość etykiety bez zmiany wzmocnienia).
 
 > Szczegółowy poradnik: [Kalibracja drukarki Zebra - poradnik krok po kroku](/blog/kalibracja-drukarki-zebra-poradnik-krok-po-kroku)
 
 ### Kalibracja ręczna
 
-Dla trudnych materiałów może być wymagana kalibracja ręczna:
+1. Przy drukarce w stanie gotowości naciśnij i przytrzymaj **PAUSE + CANCEL** przez **2 sekundy**
+2. Otwórz głowicę, wysuń około 15 cm materiału i zdejmij z niego etykiety, tak aby między czujnikami był sam podkład
+3. Odsuń ribbon (jeśli używany) w prawo, z dala od czujników, i zamknij głowicę
+4. Naciśnij **PAUSE**, a drukarka skalibruje czujnik na samym podkładzie
+5. Otwórz głowicę, załóż z powrotem ribbon i przeciągnij materiał tak, aby etykieta znalazła się między czujnikami
+6. Zamknij głowicę i naciśnij **PAUSE**, aby zakończyć kalibrację, a potem jeszcze raz **PAUSE**, aby wznowić drukowanie
+7. Naciśnij **FEED** i sprawdź, czy etykieta zatrzymuje się we właściwym miejscu
 
-1. Wyłącz drukarkę
-2. Naciśnij i przytrzymaj **PAUSE + CANCEL**
-3. Włącz drukarkę trzymając przyciski
-4. Postępuj zgodnie z instrukcjami na wydrukowanych etykietach
+> Kombinacja **PAUSE + FEED** (2 sekundy) nie kalibruje drukarki, tylko włącza tryb diagnostyczny (zrzut danych).
 
 ### Druk testowy (etykieta konfiguracji)
 
@@ -7435,7 +7435,7 @@ Drukarka może wydrukować serie etykiet testowych z różnymi ustawieniami ciem
 
 ### Jak skalibrować drukarkę Zebra ZT111?
 
-**Odpowiedź:** Naciśnij i przytrzymaj **PAUSE + FEED** przez 2 sekundy. Drukarka wykona automatyczną kalibrację czujników. Kalibrację wykonaj po każdej wymianie materiału.
+**Odpowiedź:** Naciśnij i przytrzymaj **PAUSE + CANCEL** przez 2 sekundy i przejdź kolejne kroki: najpierw kalibracja na samym podkładzie, potem na etykiecie (każdy krok zatwierdzasz przyciskiem PAUSE). Kalibrację wykonaj po każdej wymianie materiału.
 
 ### Jak załadować ribbon do drukarki Zebra ZT111?
 
@@ -7809,25 +7809,17 @@ Nawiguj strzałkami między ikonami. Wybrana ikona jest podświetlona (kolory od
       {
         title: '7. Kalibracja',
         content: `
-### Kalibracja automatyczna przez menu
+### Kalibracja automatyczna
 
-1. Wejdź do **TOOLS** > **CALIBRATE**
-2. Potwierdź **OK**
-3. Drukarka przeprowadzi kalibrację czujników
-
-### Kalibracja przez przyciski
-
-1. Zamknij głowicę z załadowanym materiałem
-2. Naciśnij i przytrzymaj **PAUSE + FEED** przez 2 sekundy
-3. Drukarka przeprowadzi kalibrację
+Drukarka może kalibrować czujniki sama po włączeniu albo po zamknięciu głowicy: ustaw **POWER-UP ACTION** lub **HEAD-CLOSE ACTION** na **CALIBRATE** (pełna kalibracja) albo **SHORT CAL** (progi czujników i długość etykiety bez zmiany wzmocnienia).
 
 ### Kalibracja ręczna
 
-Dla trudnych materiałów:
+1. Przy drukarce w stanie gotowości naciśnij i przytrzymaj **PAUSE + CANCEL** przez 2 sekundy albo wybierz w menu **TOOLS** (lub **SENSORS**) pozycję **MEDIA/RIBBON CAL** i **START**
+2. Postępuj zgodnie z poleceniami na wyświetlaczu: najpierw między czujnikami ma być sam podkład (bez etykiet i bez ribbonu), potem etykieta
+3. Na koniec naciśnij **PAUSE**, a potem **FEED**: jeśli wysuwa się dokładnie jedna etykieta, kalibracja się udała
 
-1. Wejdź do **TOOLS** > **MANUAL CALIBRATE**
-2. Postępuj zgodnie z instrukcjami na wyświetlaczu
-3. Drukarka prowadzi przez proces krok po kroku
+> Kombinacja **PAUSE + FEED** (2 sekundy) nie kalibruje drukarki, tylko włącza tryb diagnostyczny (zrzut danych).
 
 > 📘 **Szczegółowy poradnik:** [Kalibracja drukarki Zebra](/blog/kalibracja-drukarki-zebra-poradnik-krok-po-kroku)
 `
@@ -7910,7 +7902,7 @@ Dla trudnych materiałów:
 
 ### Jak skalibrować drukarkę Zebra ZT230?
 
-**Odpowiedź:** Przez menu LCD: **TOOLS > CALIBRATE > OK**. Lub naciśnij **PAUSE + FEED** przez 2 sekundy.
+**Odpowiedź:** Naciśnij i przytrzymaj **PAUSE + CANCEL** przez 2 sekundy albo wybierz w menu **TOOLS > MEDIA/RIBBON CAL > START** i postępuj według poleceń na wyświetlaczu.
 
 ### Co wyświetla się na ekranie LCD drukarki Zebra ZT230?
 
@@ -8229,12 +8221,15 @@ Model ZT220 nie posiada wyświetlacza, dlatego konfiguracja odbywa się przez:
 
 ### Kalibracja czujników
 
-Automatyczna kalibracja przez przyciski:
+Kalibracja ręczna przez przyciski:
 
-1. Upewnij się, że materiał i ribbon są załadowane
-2. Zamknij głowicę
-3. Naciśnij i przytrzymaj **PAUSE + FEED** przez 2 sekundy
-4. Drukarka przeprowadzi kalibrację
+1. Przy drukarce w stanie gotowości naciśnij i przytrzymaj **PAUSE + CANCEL** przez 2 sekundy
+2. Otwórz głowicę, wysuń około 20 cm materiału i zdejmij z niego etykiety, tak aby między czujnikami był sam podkład; wyjmij ribbon i zamknij głowicę
+3. Naciśnij **PAUSE** i poczekaj, aż drukarka skalibruje czujnik na podkładzie
+4. Otwórz głowicę, ustaw etykietę między czujnikami, załóż ribbon i zamknij głowicę
+5. Naciśnij **PAUSE**, aby wznowić drukowanie, a potem **FEED**: powinna wysunąć się dokładnie jedna etykieta
+
+> Kombinacja **PAUSE + FEED** (2 sekundy) nie kalibruje drukarki, tylko włącza tryb diagnostyczny (zrzut danych).
 
 > 📘 **Szczegółowy poradnik:** [Kalibracja drukarki Zebra](/blog/kalibracja-drukarki-zebra-poradnik-krok-po-kroku)
 
@@ -8344,7 +8339,7 @@ Automatyczna kalibracja przez przyciski:
 
 ### Jak skalibrować drukarkę Zebra ZT220?
 
-**Odpowiedź:** Naciśnij i przytrzymaj **PAUSE + FEED** przez 2 sekundy. Drukarka wykona automatyczną kalibrację czujników.
+**Odpowiedź:** Naciśnij i przytrzymaj **PAUSE + CANCEL** przez 2 sekundy i przejdź kolejne kroki: najpierw kalibracja na samym podkładzie, potem na etykiecie (kroki zatwierdzasz przyciskiem PAUSE). Na koniec sprawdź przyciskiem FEED, czy wysuwa się jedna etykieta.
 
 ### Jak załadować ribbon do drukarki Zebra ZT220?
 

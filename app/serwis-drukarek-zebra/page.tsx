@@ -219,7 +219,7 @@ const faq = [
   },
   {
     question: 'Drukarka Zebra ZD421 nie drukuje - co robić?',
-    answer: 'Zebra ZD421 najczęściej nie drukuje z powodu: 1) Ribbon załadowany odwrotnie (sprawdź stronę barwiącą - do dołu), 2) Brak kalibracji po wymianie etykiet (przytrzymaj FEED 5 sek.), 3) Stare sterowniki Windows. W 80% przypadków problem rozwiązuje prawidłowe załadowanie ribbonu. Jeśli nie pomaga - zgłoś do naszego serwisu.',
+    answer: 'Zebra ZD421 najczęściej nie drukuje z powodu: 1) Ribbon załadowany odwrotnie (sprawdź stronę barwiącą - do dołu), 2) Brak kalibracji po wymianie etykiet (przytrzymaj PAUSE + CANCEL przez 2 s), 3) Stare sterowniki Windows. W 80% przypadków problem rozwiązuje prawidłowe załadowanie ribbonu. Jeśli nie pomaga - zgłoś do naszego serwisu.',
     link: '/blog/serwis-drukarki-zebra-zd420-zd421-diagnostyka-naprawa',
     linkText: 'Pełna diagnostyka ZD420/ZD421 →'
   },
@@ -249,7 +249,7 @@ const faq = [
   },
   {
     question: 'Jak skalibrować drukarkę Zebra po wymianie etykiet?',
-    answer: 'Aby skalibrować drukarkę Zebra: 1) Przytrzymaj przycisk FEED przez 5 sekund (auto-kalibracja), 2) Lub użyj Zebra Setup Utilities: Open Printer Tools → Action → Calibrate Media. Dla modeli ZT/Xi: Menu → Calibration → Calibrate. Po kalibracji wydrukuj etykietę testową.',
+    answer: 'W drukarkach ZD420, ZD421, ZD620 i ZD621 przytrzymaj jednocześnie PAUSE i CANCEL przez 2 sekundy (kalibracja SmartCal). W GK420 przy włączonej drukarce przytrzymaj FEED i puść po dwóch mignięciach. W ZT411, ZT421 i ZT610 z ekranem dotykowym wybierz Menu → Print → Sensors → Manual Calibration. Kalibrację uruchomisz też z Zebra Setup Utilities: Open Printer Tools → Action → Calibrate Media → Send. Po kalibracji wydrukuj etykietę testową.',
     link: '/blog/kalibracja-drukarki-zebra-poradnik-krok-po-kroku',
     linkText: 'Szczegółowy poradnik kalibracji →'
   },
