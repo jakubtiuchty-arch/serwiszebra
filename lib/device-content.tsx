@@ -420,7 +420,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
       },
       {
         q: 'Jak skalibrować drukarkę Zebra ZD220d?',
-        a: 'ZD220d ma jeden przycisk FEED, więc kalibrację uruchamia się inaczej niż w serii ZD421: przy wyłączonej drukarce przytrzymaj FEED, włącz zasilanie i puść przycisk, gdy dioda STATUS mignie dwa razy. Drukarka przepuści kilka etykiet i zapamięta ich długość oraz położenie przerwy.',
+        a: 'ZD220d ma jeden przycisk FEED, więc kalibrację uruchamia się inaczej niż w serii ZD421: przy włączonej drukarce, gdy dioda STATUS świeci na zielono, przytrzymaj FEED i puść go, gdy dioda mignie dwa razy. Drukarka przepuści kilka etykiet i zapamięta ich długość oraz położenie przerwy. Nie trzymaj przycisku do trzech mignięć, bo to przywraca ustawienia fabryczne.',
         href: '/blog/kalibracja-drukarki-zebra-poradnik-krok-po-kroku',
         link: 'Kalibracja drukarki Zebra — poradnik krok po kroku',
       },
@@ -533,7 +533,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
       },
       {
         q: 'Jak skalibrować drukarkę Zebra ZD220t?',
-        a: 'ZD220t ma jeden przycisk FEED, więc kalibrację uruchamia się inaczej niż w serii ZD421: przy wyłączonej drukarce przytrzymaj FEED, włącz zasilanie i puść przycisk, gdy dioda STATUS mignie dwa razy. Drukarka przepuści kilka etykiet i zapamięta ich długość oraz położenie przerwy.',
+        a: 'ZD220t ma jeden przycisk FEED, więc kalibrację uruchamia się inaczej niż w serii ZD421: przy włączonej drukarce, gdy dioda STATUS świeci na zielono, przytrzymaj FEED i puść go, gdy dioda mignie dwa razy. Drukarka przepuści kilka etykiet i zapamięta ich długość oraz położenie przerwy. Nie trzymaj przycisku do trzech mignięć, bo to przywraca ustawienia fabryczne.',
         href: '/blog/kalibracja-drukarki-zebra-poradnik-krok-po-kroku',
         link: 'Kalibracja drukarki Zebra — poradnik krok po kroku',
       },
@@ -656,7 +656,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
       },
       {
         q: 'Jak skalibrować drukarkę Zebra ZD230d?',
-        a: 'ZD230d ma jeden przycisk FEED, więc kalibrację uruchamia się inaczej niż w serii ZD421: przy wyłączonej drukarce przytrzymaj FEED, włącz zasilanie i puść przycisk, gdy dioda STATUS mignie dwa razy. Drukarka przepuści kilka etykiet i zapamięta ich długość oraz położenie przerwy.',
+        a: 'ZD230d ma jeden przycisk FEED, więc kalibrację uruchamia się inaczej niż w serii ZD421: przy włączonej drukarce, gdy dioda STATUS świeci na zielono, przytrzymaj FEED i puść go, gdy dioda mignie dwa razy. Drukarka przepuści kilka etykiet i zapamięta ich długość oraz położenie przerwy. Nie trzymaj przycisku do trzech mignięć, bo to przywraca ustawienia fabryczne.',
         href: '/blog/kalibracja-drukarki-zebra-poradnik-krok-po-kroku',
         link: 'Kalibracja drukarki Zebra — poradnik krok po kroku',
       },
@@ -794,7 +794,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
       },
       {
         q: 'Jak skalibrować drukarkę Zebra ZD230t?',
-        a: 'ZD230t ma jeden przycisk FEED, więc kalibrację uruchamia się inaczej niż w serii ZD421: przy wyłączonej drukarce przytrzymaj FEED, włącz zasilanie i puść przycisk, gdy dioda STATUS mignie dwa razy. Drukarka przepuści kilka etykiet i zapamięta ich długość oraz położenie przerwy.',
+        a: 'ZD230t ma jeden przycisk FEED, więc kalibrację uruchamia się inaczej niż w serii ZD421: przy włączonej drukarce, gdy dioda STATUS świeci na zielono, przytrzymaj FEED i puść go, gdy dioda mignie dwa razy. Drukarka przepuści kilka etykiet i zapamięta ich długość oraz położenie przerwy. Nie trzymaj przycisku do trzech mignięć, bo to przywraca ustawienia fabryczne.',
         href: '/blog/kalibracja-drukarki-zebra-poradnik-krok-po-kroku',
         link: 'Kalibracja drukarki Zebra — poradnik krok po kroku',
       },

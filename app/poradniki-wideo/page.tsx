@@ -468,7 +468,7 @@ export default function VideoTutorialsPage() {
                 name: 'Jak skalibrować drukarkę Zebra ZD220 / ZD230?',
                 acceptedAnswer: {
                   '@type': 'Answer',
-                  text: 'Aby skalibrować drukarkę Zebra ZD220 lub ZD230, wyłącz drukarkę, przytrzymaj przycisk Feed i włącz zasilanie. Trzymaj przycisk aż dioda mignie 2 razy, następnie puść. Drukarka automatycznie wykryje etykiety i przeprowadzi kalibrację.'
+                  text: 'Aby skalibrować drukarkę Zebra ZD220 lub ZD230, włącz ją i poczekaj, aż dioda STATUS zaświeci na zielono. Przytrzymaj przycisk Feed i puść go, gdy dioda mignie dwa razy. Drukarka wysunie kilka etykiet i zmierzy ich długość oraz przerwę. Nie trzymaj przycisku do trzech mignięć, bo to przywraca ustawienia fabryczne.'
                 }
               },
               {
@@ -778,8 +778,9 @@ export default function VideoTutorialsPage() {
                   <ChevronRight className="w-5 h-5 text-gray-400 group-open:rotate-90 transition-transform flex-shrink-0" />
                 </summary>
                 <p className="mt-3 text-sm text-gray-600">
-                  Aby skalibrować drukarkę Zebra ZD220 lub ZD230, wyłącz drukarkę, przytrzymaj przycisk Feed i włącz zasilanie. 
-                  Trzymaj przycisk aż dioda mignie 2 razy, następnie puść. Drukarka automatycznie wykryje etykiety i przeprowadzi kalibrację.
+                  Aby skalibrować drukarkę Zebra ZD220 lub ZD230, włącz ją i poczekaj, aż dioda STATUS zaświeci na zielono.
+                  Przytrzymaj przycisk Feed i puść go, gdy dioda mignie dwa razy. Drukarka wysunie kilka etykiet i zmierzy ich długość oraz przerwę.
+                  Nie trzymaj przycisku do trzech mignięć, bo to przywraca ustawienia fabryczne.
                 </p>
               </details>
               

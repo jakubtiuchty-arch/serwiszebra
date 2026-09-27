@@ -5334,9 +5334,9 @@ Po załadowaniu nowego typu materiału **wykonaj kalibrację**:
 ### Procedura
 
 1. Upewnij się, że drukarka jest włączona i gotowa (**STATUS = zielony**)
-2. Naciśnij i przytrzymaj przycisk **FEED** przez **2 sekundy**
-3. Wskaźnik STATUS mrugnięcie raz – kontynuuj trzymanie
-4. Poczekaj na drugie i trzecie mrugnięcie, potem natychmiast zwolnij przycisk
+2. Naciśnij i przytrzymaj przycisk **FEED**
+3. Po około 2 sekundach wskaźnik STATUS mignie raz – trzymaj dalej
+4. Gdy STATUS mignie **dwa razy**, od razu puść przycisk. Nie czekaj na trzecie mignięcie – trzy mignięcia przywracają **ustawienia fabryczne**
 5. Drukarka wysunie kilka etykiet i wykona kalibrację
 6. Po zakończeniu wskaźnik STATUS zaświeci na zielono
 
@@ -5344,7 +5344,7 @@ Po załadowaniu nowego typu materiału **wykonaj kalibrację**:
 
 1. Drukarka musi być włączona i gotowa (STATUS = zielony)
 2. Naciśnij i przytrzymaj **FEED** przez około 2 sekundy
-3. Gdy wskaźnik STATUS mrugnięcie raz – natychmiast zwolnij przycisk
+3. Gdy wskaźnik STATUS mignie raz, od razu puść przycisk
 4. Drukarka wydrukuje raport konfiguracji
 
 ### Weryfikacja
@@ -5523,7 +5523,7 @@ Drukarka jest przegrzana – poczekaj aż ostygnie. Upewnij się, że wokół dr
 
 ### Jak skalibrować drukarkę Zebra ZD220d?
 
-**Odpowiedź:** Naciśnij i przytrzymaj przycisk **FEED** przez około 3 sekundy (aż dioda STATUS zamruga). Drukarka wykona auto-kalibrację.
+**Odpowiedź:** Przy włączonej drukarce, gdy dioda STATUS świeci na zielono, przytrzymaj przycisk **FEED** i puść go, gdy dioda mignie **dwa razy**. Drukarka wysunie kilka etykiet i wykona kalibrację. Jedno mignięcie drukuje raport konfiguracji, a trzy przywracają ustawienia fabryczne.
 
 ### Jaka jest maksymalna prędkość druku drukarki Zebra ZD220d?
 
@@ -5543,7 +5543,7 @@ Drukarka jest przegrzana – poczekaj aż ostygnie. Upewnij się, że wokół dr
 
 ### Jak wykonać reset fabryczny drukarki Zebra ZD220d?
 
-**Odpowiedź:** Przytrzymaj przycisk **FEED** podczas włączania drukarki. Trzymaj aż dioda STATUS zamruga dwa razy. Drukarka przywróci ustawienia fabryczne.
+**Odpowiedź:** Przy włączonej drukarce przytrzymaj przycisk **FEED** i puść go zaraz po **trzecim** mignięciu diody STATUS. Drukarka przywróci ustawienia fabryczne. Nie włączaj drukarki z wciśniętym FEED: to uruchamia tryb wgrywania firmware, a nie reset.
 
 ### Jaka jest różnica między ZD220d a ZD230d?
 
@@ -5786,9 +5786,9 @@ Po załadowaniu nowego typu materiału lub ribbonu **wykonaj kalibrację**:
 ### Procedura
 
 1. Upewnij się, że drukarka jest włączona i gotowa (**STATUS = zielony**)
-2. Naciśnij i przytrzymaj przycisk **FEED** przez **2 sekundy**
-3. Wskaźnik STATUS mrugnięcie raz – kontynuuj trzymanie
-4. Poczekaj na drugie i trzecie mrugnięcie, potem natychmiast zwolnij przycisk
+2. Naciśnij i przytrzymaj przycisk **FEED**
+3. Po około 2 sekundach wskaźnik STATUS mignie raz – trzymaj dalej
+4. Gdy STATUS mignie **dwa razy**, od razu puść przycisk. Nie czekaj na trzecie mignięcie – trzy mignięcia przywracają **ustawienia fabryczne**
 5. Drukarka wysunie kilka etykiet i wykona kalibrację
 6. Po zakończeniu wskaźnik STATUS zaświeci na zielono
 
@@ -5796,9 +5796,9 @@ Po załadowaniu nowego typu materiału lub ribbonu **wykonaj kalibrację**:
 
 1. Drukarka musi być włączona i gotowa (STATUS = zielony)
 2. Naciśnij i przytrzymaj **FEED** przez około 2 sekundy
-3. Gdy wskaźnik STATUS mrugnięcie raz – natychmiast zwolnij przycisk
+3. Gdy wskaźnik STATUS mignie raz, od razu puść przycisk
 4. Drukarka wydrukuje raport konfiguracji
-5. Sprawdź czy **PRINT METHOD = THERMAL-TRANS**
+5. Sprawdź, czy **PRINT METHOD = THERMAL-TRANS**
 
 ### Weryfikacja
 
@@ -5965,7 +5965,7 @@ Drukarka automatycznie wykrywa srebrną folię odbijającą na końcu ribbonu Ze
         content: `
 ### Jak skalibrować drukarkę Zebra ZD220t?
 
-**Odpowiedź:** Naciśnij i przytrzymaj przycisk **FEED** przez około 3 sekundy (aż dioda STATUS zamruga). Drukarka wykona auto-kalibrację.
+**Odpowiedź:** Przy włączonej drukarce, gdy dioda STATUS świeci na zielono, przytrzymaj przycisk **FEED** i puść go, gdy dioda mignie **dwa razy**. Drukarka wysunie kilka etykiet i wykona kalibrację. Jedno mignięcie drukuje raport konfiguracji, a trzy przywracają ustawienia fabryczne.
 
 ### Jak załadować ribbon do drukarki Zebra ZD220t?
 
@@ -6191,9 +6191,9 @@ Po załadowaniu nowego typu materiału **wykonaj kalibrację**:
 ### Procedura
 
 1. Upewnij się, że drukarka jest włączona i gotowa (**STATUS = zielony**)
-2. Naciśnij i przytrzymaj przycisk **FEED** przez **2 sekundy**
-3. Wskaźnik STATUS mrugnięcie raz – kontynuuj trzymanie
-4. Poczekaj na drugie i trzecie mrugnięcie, potem natychmiast zwolnij przycisk
+2. Naciśnij i przytrzymaj przycisk **FEED**
+3. Po około 2 sekundach wskaźnik STATUS mignie raz – trzymaj dalej
+4. Gdy STATUS mignie **dwa razy**, od razu puść przycisk. Nie czekaj na trzecie mignięcie – trzy mignięcia przywracają **ustawienia fabryczne**
 5. Drukarka wysunie kilka etykiet i wykona kalibrację
 6. Po zakończeniu wskaźnik STATUS zaświeci na zielono
 
@@ -6201,7 +6201,7 @@ Po załadowaniu nowego typu materiału **wykonaj kalibrację**:
 
 1. Drukarka musi być włączona i gotowa (STATUS = zielony)
 2. Naciśnij i przytrzymaj **FEED** przez około 2 sekundy
-3. Gdy wskaźnik STATUS mrugnięcie raz – natychmiast zwolnij przycisk
+3. Gdy wskaźnik STATUS mignie raz, od razu puść przycisk
 4. Drukarka wydrukuje raport konfiguracji i raport sieciowy
 
 ### Weryfikacja
@@ -6404,7 +6404,7 @@ Jeśli drukarka ma fabrycznie zainstalowany moduł Wi-Fi:
 
 ### Jak skalibrować drukarkę Zebra ZD230d?
 
-**Odpowiedź:** Naciśnij i przytrzymaj przycisk **FEED** przez około 3 sekundy (aż dioda STATUS zamruga). Drukarka wykona auto-kalibrację.
+**Odpowiedź:** Przy włączonej drukarce, gdy dioda STATUS świeci na zielono, przytrzymaj przycisk **FEED** i puść go, gdy dioda mignie **dwa razy**. Drukarka wysunie kilka etykiet i wykona kalibrację. Jedno mignięcie drukuje raport konfiguracji, a trzy przywracają ustawienia fabryczne.
 
 ### Jaka jest maksymalna prędkość druku drukarki Zebra ZD230d?
 
@@ -6428,7 +6428,7 @@ Jeśli drukarka ma fabrycznie zainstalowany moduł Wi-Fi:
 
 ### Jak wykonać reset fabryczny drukarki Zebra ZD230d?
 
-**Odpowiedź:** Przytrzymaj przycisk **FEED** podczas włączania drukarki. Trzymaj aż dioda STATUS zamruga dwa razy. Drukarka przywróci ustawienia fabryczne.
+**Odpowiedź:** Przy włączonej drukarce przytrzymaj przycisk **FEED** i puść go zaraz po **trzecim** mignięciu diody STATUS. Drukarka przywróci ustawienia fabryczne. Nie włączaj drukarki z wciśniętym FEED: to uruchamia tryb wgrywania firmware, a nie reset.
 `
       }
     ]
@@ -6674,9 +6674,9 @@ Po załadowaniu nowego typu materiału lub ribbonu **wykonaj kalibrację**:
 ### Procedura
 
 1. Upewnij się, że drukarka jest włączona i gotowa (**STATUS = zielony**)
-2. Naciśnij i przytrzymaj przycisk **FEED** przez **2 sekundy**
-3. Wskaźnik STATUS mrugnięcie raz – kontynuuj trzymanie
-4. Poczekaj na drugie i trzecie mrugnięcie, potem natychmiast zwolnij przycisk
+2. Naciśnij i przytrzymaj przycisk **FEED**
+3. Po około 2 sekundach wskaźnik STATUS mignie raz – trzymaj dalej
+4. Gdy STATUS mignie **dwa razy**, od razu puść przycisk. Nie czekaj na trzecie mignięcie – trzy mignięcia przywracają **ustawienia fabryczne**
 5. Drukarka wysunie kilka etykiet i wykona kalibrację
 6. Po zakończeniu wskaźnik STATUS zaświeci na zielono
 
@@ -6684,9 +6684,9 @@ Po załadowaniu nowego typu materiału lub ribbonu **wykonaj kalibrację**:
 
 1. Drukarka musi być włączona i gotowa (STATUS = zielony)
 2. Naciśnij i przytrzymaj **FEED** przez około 2 sekundy
-3. Gdy wskaźnik STATUS mrugnięcie raz – natychmiast zwolnij przycisk
+3. Gdy wskaźnik STATUS mignie raz, od razu puść przycisk
 4. Drukarka wydrukuje raport konfiguracji i raport sieciowy
-5. Sprawdź czy **PRINT METHOD = THERMAL-TRANS**
+5. Sprawdź, czy **PRINT METHOD = THERMAL-TRANS**
 
 ### Weryfikacja
 
@@ -6905,7 +6905,7 @@ Drukarka automatycznie wykrywa srebrną folię odbijającą na końcu ribbonu Ze
         content: `
 ### Jak skalibrować drukarkę Zebra ZD230t?
 
-**Odpowiedź:** Naciśnij i przytrzymaj przycisk **FEED** przez około 3 sekundy (aż dioda STATUS zamruga). Drukarka wykona auto-kalibrację.
+**Odpowiedź:** Przy włączonej drukarce, gdy dioda STATUS świeci na zielono, przytrzymaj przycisk **FEED** i puść go, gdy dioda mignie **dwa razy**. Drukarka wysunie kilka etykiet i wykona kalibrację. Jedno mignięcie drukuje raport konfiguracji, a trzy przywracają ustawienia fabryczne.
 
 ### Jak załadować ribbon do drukarki Zebra ZD230t?
 
