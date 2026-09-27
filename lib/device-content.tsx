@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 import Link from 'next/link'
+import type { BlogPost } from './blog'
 
 /**
  * Treść kart urządzeń — wszystko, co na karcie jest PISANE per model:
@@ -53,10 +54,28 @@ export interface TrescKarty {
   faqNaglowek: string
   faq: { q: string; a: string; href: string; link: string }[]
   spec: [string, string][]
+  /**
+   * Film instruktażowy z kanału YouTube w sekcji „Film" karty (components/blog/WideoWpisu.tsx,
+   * razem ze schematem VideoObject). Tylko na kartach modeli wymienionych w tytule filmu,
+   * nie na kartach materiałów. Kadr w public/wideo/, czas w ISO 8601, `dodano` = publikacja na YouTube.
+   */
+  film?: NonNullable<BlogPost['video']>
+}
+
+/** „Zakładanie taśmy (kalki) w Zebra ZD421t i ZD621t" — procedura jest w obu modelach taka sama */
+const FILM_TASMA_ZD421_ZD621: NonNullable<BlogPost['video']> = {
+  youtubeId: 'h6j_W7V1DGE',
+  tytul: 'Zakładanie taśmy (kalki) w Zebra ZD421t i ZD621t krok po kroku',
+  opis: 'Poradnik serwis-zebry.pl z polskim lektorem: pusta gilza na górne trzpienie, folia i pasek kleju, rolka taśmy, początek taśmy przed głowicą i nawinięcie. Do tego FEED, tryb termotransferowy, raport konfiguracji oraz taśmy 300 m z adapterami gilz.',
+  kadr: '/wideo/zakladanie-tasmy-zebra-zd421t.jpg',
+  czas: 'PT3M2S',
+  dodano: '2026-09-27T18:54:01+02:00',
+  podpis: 'Film: zakładanie taśmy termotransferowej w Zebra ZD421t i ZD621t krok po kroku (3:02).',
 }
 
 export const TRESC_KART: Record<string, TrescKarty> = {
   'zebra-zd421t': {
+    film: FILM_TASMA_ZD421_ZD621,
     poradniki: [
       'serwis-drukarki-zebra-zd420-zd421-diagnostyka-naprawa',
       'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',
@@ -912,6 +931,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     ],
   },
   'zebra-zd621t': {
+    film: FILM_TASMA_ZD421_ZD621,
     poradniki: [
       'serwis-drukarki-zebra-zd620-zd621-diagnostyka-naprawa',
       'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',

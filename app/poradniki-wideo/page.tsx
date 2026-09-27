@@ -46,6 +46,17 @@ const videos: Video[] = [
     featured: true
   },
   {
+    id: '21',
+    title: 'Zakładanie taśmy (kalki) w Zebra ZD421t i ZD621t krok po kroku',
+    description: 'Jak założyć taśmę termotransferową, potocznie kalkę, w Zebra ZD421t i ZD621t: pusta gilza na górne trzpienie, folia i pasek kleju, rolka taśmy, początek taśmy przed głowicą i nawinięcie. Do tego FEED, tryb termotransferowy, raport konfiguracji oraz taśmy 300 m z adapterami gilz.',
+    youtubeId: 'h6j_W7V1DGE',
+    thumbnail: '/wideo/zakladanie-tasmy-zebra-zd421t.jpg',
+    duration: '3:02',
+    category: 'drukarki',
+    tags: ['ZD421t', 'ZD621t', 'taśma termotransferowa', 'kalka', 'ribbon', 'zakładanie taśmy', 'gilza', 'raport konfiguracji'],
+    featured: true
+  },
+  {
     id: '24',
     title: 'Zebra ZC100 / ZC300 — rozpakowanie drukarki kart krok po kroku',
     description: 'Rozpakowanie drukarki kart Zebra ZC100 i ZC300: co znajduje się w zestawie i jak przygotować urządzenie do pierwszego uruchomienia.',
@@ -236,16 +247,6 @@ const videos: Video[] = [
     duration: '3:00',
     category: 'drukarki',
     tags: ['ZD220d', 'ZD230d', 'zakładanie etykiet', 'media loading', 'rolka etykiet'],
-  },
-  {
-    id: '21',
-    title: 'Zakładanie taśmy transferowej w Zebra ZD421t',
-    description: 'Jak prawidłowo założyć taśmę transferową (ribbon) w drukarce termotransferowej Zebra ZD421t. Instrukcja krok po kroku - prowadzenie taśmy, nawijanie i konfiguracja.',
-    youtubeId: '0cU4YJuI00c',
-    thumbnail: '/zakładanie_taśmy_zd421t.jpeg',
-    duration: '4:00',
-    category: 'drukarki',
-    tags: ['ZD421t', 'taśma transferowa', 'ribbon', 'termotransfer', 'zakładanie taśmy'],
   },
   {
     id: '22',

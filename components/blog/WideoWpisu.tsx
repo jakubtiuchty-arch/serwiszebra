@@ -6,11 +6,20 @@ import { Play } from 'lucide-react'
 import type { BlogPost } from '@/lib/blog'
 
 /**
- * Film we wpisie na blogu, w miejscu grafiki tytułowej (pole `video` wpisu).
- * Odtwarzacz YouTube ładuje się dopiero po kliknięciu kadru, żeby wpis nie pobierał skryptów
- * i ciasteczek serwisu wideo przy każdym wejściu.
+ * Film we wpisie na blogu, w miejscu grafiki tytułowej (pole `video` wpisu), i na karcie produktu (pole `film`).
+ * Odtwarzacz YouTube ładuje się dopiero po kliknięciu kadru, żeby strona nie pobierała skryptów
+ * i ciasteczek serwisu wideo przy każdym wejściu. Na karcie produktu film jest niżej na stronie,
+ * więc kadr nie dostaje `priority`, a sekcja ma własne odstępy.
  */
-export default function WideoWpisu({ film }: { film: NonNullable<BlogPost['video']> }) {
+export default function WideoWpisu({
+  film,
+  priorytet = true,
+  className = 'mb-8',
+}: {
+  film: NonNullable<BlogPost['video']>
+  priorytet?: boolean
+  className?: string
+}) {
   const [odtwarzany, setOdtwarzany] = useState(false)
 
   const schema = {
@@ -26,7 +35,7 @@ export default function WideoWpisu({ film }: { film: NonNullable<BlogPost['video
   }
 
   return (
-    <figure className="mb-8">
+    <figure className={className}>
       <div className="relative aspect-video overflow-hidden rounded-2xl border border-gray-200 bg-[#0a1628]">
         {odtwarzany ? (
           <iframe
@@ -47,7 +56,7 @@ export default function WideoWpisu({ film }: { film: NonNullable<BlogPost['video
               src={film.kadr}
               alt=""
               fill
-              priority
+              priority={priorytet}
               sizes="(min-width: 896px) 896px, 100vw"
               className="object-cover"
             />

@@ -14,6 +14,7 @@ import { klasaBySlug } from '@/lib/printer-classes'
 import { trescKarty } from '@/lib/device-content'
 import { getPostBySlug } from '@/lib/blog'
 import ShopSubheader from '@/components/shop/ShopSubheader'
+import WideoWpisu from '@/components/blog/WideoWpisu'
 import { Info, FileText, Download, Wrench, Phone } from 'lucide-react'
 
 /**
@@ -419,6 +420,8 @@ export default async function DevicePage({
           {[
             ['#warianty', 'Wersje i ceny'],
             ['#opis', 'Opis produktu'],
+            // Kotwica filmu tylko na kartach, które go mają (dziś ZD421t i ZD621t)
+            ...(tresc?.film ? [['#film', 'Film']] : []),
             ['#akcesoria', 'Akcesoria i części'],
             ['#faq', 'Pytania'],
             ['#specyfikacja', 'Specyfikacja'],
@@ -520,6 +523,20 @@ export default async function DevicePage({
                   </div>
                 ))}
               </div>
+            </section>
+          )}
+
+          {/* Film instruktażowy zaraz po opisie: klient, który już wybrał model,
+              pyta następnie „jak to się obsługuje". Odtwarzacz ładuje się po kliknięciu. */}
+          {tresc?.film && (
+            <section
+              id="film"
+              className="scroll-mt-24 bg-white rounded-xl border border-gray-200 p-4 sm:p-6 mb-4 sm:mb-6"
+            >
+              <h2 className="text-sm sm:text-base font-semibold text-gray-900 mb-3">
+                {tresc.film.tytul}
+              </h2>
+              <WideoWpisu film={tresc.film} priorytet={false} className="" />
             </section>
           )}
 

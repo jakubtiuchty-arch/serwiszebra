@@ -158,7 +158,7 @@ Zebra ZD421t to kompaktowa drukarka etykiet wykorzystująca technologię **druku
       {
         title: '4. Ładowanie taśmy ribbon',
         videos: [
-          { youtubeId: '0cU4YJuI00c', title: 'Zakładanie taśmy transferowej w ZD421t', thumbnail: '/zakładanie_taśmy_zd421t.jpeg' },
+          { youtubeId: 'h6j_W7V1DGE', title: 'Zakładanie taśmy (kalki) w ZD421t i ZD621t krok po kroku', thumbnail: '/wideo/zakladanie-tasmy-zebra-zd421t.jpg' },
         ],
         content: `
 > **WAŻNE:** Ribbon musi być **szerszy niż materiał**, aby chronić głowicę drukującą.
@@ -1046,7 +1046,7 @@ Zebra ZD621t to zaawansowana drukarka etykiet z serii **Premium**, wykorzystują
       {
         title: '4. Ładowanie taśmy ribbon',
         videos: [
-          { youtubeId: '0cU4YJuI00c', title: 'Zakładanie taśmy transferowej w ZD421t', thumbnail: '/zakładanie_taśmy_zd421t.jpeg' },
+          { youtubeId: 'h6j_W7V1DGE', title: 'Zakładanie taśmy (kalki) w ZD421t i ZD621t krok po kroku', thumbnail: '/wideo/zakladanie-tasmy-zebra-zd421t.jpg' },
         ],
         content: `
 > **WAŻNE:** Ribbon musi być **szerszy niż materiał**, aby chronić głowicę drukującą.
@@ -2049,7 +2049,7 @@ Antena RFID znajduje się **między wałkiem napędowym a kanałem czujnika mate
       {
         title: '4. Ładowanie taśmy ribbon',
         videos: [
-          { youtubeId: '0cU4YJuI00c', title: 'Zakładanie taśmy transferowej w ZD421t', thumbnail: '/zakładanie_taśmy_zd421t.jpeg' },
+          { youtubeId: 'h6j_W7V1DGE', title: 'Zakładanie taśmy (kalki) w ZD421t i ZD621t krok po kroku', thumbnail: '/wideo/zakladanie-tasmy-zebra-zd421t.jpg' },
         ],
         content: `
 > **WAŻNE:** Ribbon musi być **szerszy niż materiał**, aby chronić głowicę drukującą.
