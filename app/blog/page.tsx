@@ -22,7 +22,8 @@ import {
   CircleDot,
   Move
 } from 'lucide-react'
-import { useState, useMemo, useEffect, useRef } from 'react'
+import { Suspense, useState, useMemo, useEffect, useRef } from 'react'
+import { useSearchParams } from 'next/navigation'
 import Header from '@/components/Header'
 
 // Lista wszystkich modeli Zebra do wyszukiwania
@@ -198,15 +199,19 @@ function generateSuggestions(query: string, posts: BlogPost[]): string[] {
 
 const POSTS_PER_PAGE = 12
 
-export default function BlogPage() {
+// Stan listy (strona, filtry, szukana fraza) jest w adresie: /blog?page=3&device=drukarki&q=kalibracja.
+// Dzięki temu powrót z artykułu (strzałka wstecz, „Wróć do bloga”) wraca na tę samą stronę listy,
+// a okruszek artykułu (/blog?device=…) od razu filtruje listę.
+function BlogLista({ parametry }: { parametry: { get(nazwa: string): string | null } }) {
   const allPosts = getAllPosts()
-  const [selectedDeviceType, setSelectedDeviceType] = useState<string | null>(null)
-  const [selectedSubDeviceType, setSelectedSubDeviceType] = useState<string | null>(null)
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
-  const [searchQuery, setSearchQuery] = useState('')
+  const selectedDeviceType = parametry.get('device')
+  const selectedSubDeviceType = parametry.get('subdevice')
+  const selectedCategory = parametry.get('category')
+  const currentPage = Math.max(1, parseInt(parametry.get('page') || '1', 10) || 1)
+  // pole wyszukiwania ma własny stan (płynne pisanie), adres dostaje kopię frazy
+  const [searchQuery, setSearchQueryPole] = useState(parametry.get('q') ?? '')
   const [showSuggestions, setShowSuggestions] = useState(false)
   const [searchResults, setSearchResults] = useState<Map<string, { score: number; matchedIn: string[]; matchedModels: string[] }>>(new Map())
-  const [currentPage, setCurrentPage] = useState(1)
   const searchInputRef = useRef<HTMLInputElement>(null)
   const suggestionsRef = useRef<HTMLDivElement>(null)
   
@@ -261,10 +266,34 @@ export default function BlogPage() {
     return filteredPosts.slice(start, start + POSTS_PER_PAGE)
   }, [filteredPosts, currentPage])
 
-  // Reset strony przy zmianie filtrów
-  useEffect(() => {
-    setCurrentPage(1)
-  }, [selectedDeviceType, selectedSubDeviceType, selectedCategory, searchQuery])
+  // Zmiana listy = zmiana adresu. Nowa strona listy to nowy wpis w historii (jak zwykła paginacja),
+  // filtry i fraza podmieniają bieżący wpis, żeby nie zaśmiecać historii. Zmiana filtra wraca na stronę 1.
+  const ustawAdres = (zmiany: Record<string, string | null>, nowyWpis = false) => {
+    const p = new URLSearchParams(window.location.search)
+    for (const [klucz, wartosc] of Object.entries(zmiany)) {
+      if (wartosc) p.set(klucz, wartosc)
+      else p.delete(klucz)
+    }
+    if (p.get('page') === '1') p.delete('page')
+    const zapytanie = p.toString()
+    const adres = `${window.location.pathname}${zapytanie ? `?${zapytanie}` : ''}`
+    if (nowyWpis) window.history.pushState(null, '', adres)
+    else window.history.replaceState(null, '', adres)
+  }
+  const setSelectedDeviceType = (typ: string | null) => ustawAdres({ device: typ, subdevice: null, page: null })
+  const setSelectedSubDeviceType = (podtyp: string | null) => ustawAdres({ subdevice: podtyp, page: null })
+  const setSelectedCategory = (kategoria: string | null) => ustawAdres({ category: kategoria, page: null })
+  const setSearchQuery = (fraza: string) => {
+    setSearchQueryPole(fraza)
+    ustawAdres({ q: fraza.trim() ? fraza : null, page: null })
+  }
+  const setCurrentPage = (strona: number | ((obecna: number) => number)) => {
+    const nowa = typeof strona === 'function' ? strona(currentPage) : strona
+    if (nowa === currentPage) return
+    ustawAdres({ page: String(nowa) }, true)
+    // nowa strona listy od pierwszego artykułu, a nie od paginacji na dole
+    document.getElementById('lista-artykulow')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
   
   // Zamknij sugestie przy kliknięciu poza
   useEffect(() => {
@@ -619,7 +648,7 @@ export default function BlogPage() {
       </section>
 
       {/* Posts Grid */}
-      <section className="py-12">
+      <section id="lista-artykulow" className="py-12 scroll-mt-4">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {filteredPosts.length === 0 ? (
             <div className="text-center py-16">
@@ -972,3 +1001,19 @@ export default function BlogPage() {
   )
 }
 
+// Strona jest generowana statycznie: w HTML (dla wyszukiwarek) jest lista domyślna, czyli strona 1 bez filtrów.
+// Po stronie przeglądarki lista czyta adres (useSearchParams wymaga granicy Suspense).
+const BEZ_PARAMETROW = new URLSearchParams()
+
+function BlogListaZAdresu() {
+  const parametry = useSearchParams()
+  return <BlogLista parametry={parametry} />
+}
+
+export default function BlogPage() {
+  return (
+    <Suspense fallback={<BlogLista parametry={BEZ_PARAMETROW} />}>
+      <BlogListaZAdresu />
+    </Suspense>
+  )
+}
