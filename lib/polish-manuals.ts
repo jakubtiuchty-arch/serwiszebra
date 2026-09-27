@@ -5691,6 +5691,9 @@ Zebra ZD220t to kompaktowa, ekonomiczna drukarka etykiet z serii ZD200. Wykorzys
       },
       {
         title: '4. Ładowanie taśmy ribbon',
+        videos: [
+          { youtubeId: 'Sm-XEp75oIw', title: 'Wymiana taśmy (kalki) w ZD220t i ZD230t krok po kroku', thumbnail: '/wideo/wymiana-tasmy-zebra-zd220t.jpg' },
+        ],
         content: `
 > **WAŻNE:** Ribbon musi być **szerszy niż materiał**, aby chronić głowicę drukującą.
 
@@ -6574,6 +6577,9 @@ Zebra ZD230t to kompaktowa drukarka etykiet z serii ZD200. Wykorzystuje technolo
       },
       {
         title: '4. Ładowanie taśmy ribbon',
+        videos: [
+          { youtubeId: 'Sm-XEp75oIw', title: 'Wymiana taśmy (kalki) w ZD220t i ZD230t krok po kroku', thumbnail: '/wideo/wymiana-tasmy-zebra-zd220t.jpg' },
+        ],
         content: `
 > **WAŻNE:** Ribbon musi być **szerszy niż materiał**, aby chronić głowicę drukującą.
 

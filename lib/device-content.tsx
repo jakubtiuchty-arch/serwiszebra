@@ -73,6 +73,17 @@ const FILM_TASMA_ZD421_ZD621: NonNullable<BlogPost['video']> = {
   podpis: 'Film: zakładanie taśmy termotransferowej w Zebra ZD421t i ZD621t krok po kroku (3:02).',
 }
 
+/** „Wymiana taśmy (kalki) w Zebra ZD220t i ZD230t" — procedura jest w obu modelach taka sama */
+const FILM_TASMA_ZD220_ZD230: NonNullable<BlogPost['video']> = {
+  youtubeId: 'Sm-XEp75oIw',
+  tytul: 'Wymiana taśmy (kalki) w Zebra ZD220t i ZD230t krok po kroku',
+  opis: 'Poradnik serwis-zebry.pl z polskim lektorem: czerwona dioda i srebrny pasek na końcu taśmy, zdjęcie zużytej rolki, pusta gilza na górne trzpienie, nowa rolka, początek taśmy przed głowicą i nawinięcie. Do tego FEED, raport konfiguracji oraz taśmy 300 m z adapterami w ZD230t.',
+  kadr: '/wideo/wymiana-tasmy-zebra-zd220t.jpg',
+  czas: 'PT3M2S',
+  dodano: '2026-09-27T18:03:15+02:00',
+  podpis: 'Film: wymiana taśmy termotransferowej w Zebra ZD220t i ZD230t krok po kroku (3:02).',
+}
+
 export const TRESC_KART: Record<string, TrescKarty> = {
   'zebra-zd421t': {
     film: FILM_TASMA_ZD421_ZD621,
@@ -425,6 +436,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
   },
 
   'zebra-zd220t': {
+    film: FILM_TASMA_ZD220_ZD230,
     poradniki: [
       'serwis-drukarki-zebra-zd220-diagnostyka-naprawa',
       'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',
@@ -659,6 +671,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     ],
   },
   'zebra-zd230t': {
+    film: FILM_TASMA_ZD220_ZD230,
     poradniki: [
       'serwis-drukarki-zebra-zd220-diagnostyka-naprawa',
       'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',

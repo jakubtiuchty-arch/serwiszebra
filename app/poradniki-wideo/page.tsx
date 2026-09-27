@@ -57,6 +57,17 @@ const videos: Video[] = [
     featured: true
   },
   {
+    id: '29',
+    title: 'Wymiana taśmy (kalki) w Zebra ZD220t i ZD230t krok po kroku',
+    description: 'Jak wymienić taśmę termotransferową, potocznie kalkę, w Zebra ZD220t i ZD230t: czerwona dioda i srebrny pasek na końcu taśmy, zdjęcie zużytej rolki, pusta gilza na górne trzpienie, nowa rolka, początek taśmy przed głowicą i nawinięcie. Do tego FEED, raport konfiguracji oraz taśmy 300 m z adapterami w ZD230t.',
+    youtubeId: 'Sm-XEp75oIw',
+    thumbnail: '/wideo/wymiana-tasmy-zebra-zd220t.jpg',
+    duration: '3:02',
+    category: 'drukarki',
+    tags: ['ZD220t', 'ZD230t', 'taśma termotransferowa', 'kalka', 'ribbon', 'wymiana taśmy', 'gilza', 'raport konfiguracji'],
+    featured: true
+  },
+  {
     id: '24',
     title: 'Zebra ZC100 / ZC300 — rozpakowanie drukarki kart krok po kroku',
     description: 'Rozpakowanie drukarki kart Zebra ZC100 i ZC300: co znajduje się w zestawie i jak przygotować urządzenie do pierwszego uruchomienia.',
