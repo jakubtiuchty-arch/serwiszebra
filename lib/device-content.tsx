@@ -84,6 +84,17 @@ const FILM_TASMA_ZD220_ZD230: NonNullable<BlogPost['video']> = {
   podpis: 'Film: wymiana taśmy termotransferowej w Zebra ZD220t i ZD230t krok po kroku (3:02).',
 }
 
+/** „Pierwsze uruchomienie drukarki Zebra ZD220d i ZD230d" — procedura jest w obu modelach taka sama */
+const FILM_URUCHOMIENIE_ZD220D_ZD230D: NonNullable<BlogPost['video']> = {
+  youtubeId: 'XBd5csj_5FQ',
+  tytul: 'Pierwsze uruchomienie drukarki Zebra ZD220d i ZD230d krok po kroku',
+  opis: 'Poradnik serwis-zebry.pl z polskim lektorem: zawartość pudełka, sterownik, zasilanie i kabel USB, zakładanie etykiet, włączenie, tryb pauzy, kalibracja pod etykiety i raport konfiguracji.',
+  kadr: '/wideo/pierwsze-uruchomienie-zebra-zd220d.jpg',
+  czas: 'PT3M9S',
+  dodano: '2026-09-27T21:18:42+02:00',
+  podpis: 'Film: pierwsze uruchomienie drukarki Zebra ZD220d i ZD230d krok po kroku (3:09).',
+}
+
 export const TRESC_KART: Record<string, TrescKarty> = {
   'zebra-zd421t': {
     film: FILM_TASMA_ZD421_ZD621,
@@ -320,6 +331,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
   },
 
   'zebra-zd220d': {
+    film: FILM_URUCHOMIENIE_ZD220D_ZD230D,
     poradniki: [
       'serwis-drukarki-zebra-zd220-diagnostyka-naprawa',
       'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',
@@ -550,6 +562,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
   },
 
   'zebra-zd230d': {
+    film: FILM_URUCHOMIENIE_ZD220D_ZD230D,
     poradniki: [
       'serwis-drukarki-zebra-zd220-diagnostyka-naprawa',
       'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',
