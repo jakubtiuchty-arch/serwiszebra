@@ -28609,7 +28609,8 @@ Jako **autoryzowany serwis Zebra** pomożemy Ci:
     slug: 'kody-bledow-zebra-zd420-zd421-diody-led',
     title: 'Kody błędów Zebra ZD420/ZD421 – co oznaczają diody LED? Kompletny poradnik [2026]',
     excerpt: 'Drukarka Zebra ZD420 lub ZD421 miga na czerwono? Sprawdź znaczenie diod LED: status, pauza, dane, materiały. Tabela kodów błędów i rozwiązania problemów.',
-    coverImage: '/blog/diody-led-zebra-zd420-zd421-co-oznaczaja.jpeg',
+    coverImage: '/blog/diody-zebra-zd421-co-oznaczaja-lupa.jpeg',
+    coverImageAlt: 'Dłoń w rękawicy wskazuje czerwoną diodę drukarki Zebra ZD421t, obok lupa z panelem: czerwona ikona STATUS i pomarańczowa PAUSE',
     video: {
       youtubeId: 'Yrt2vvnlT7w',
       tytul: 'Zebra ZD421 miga na czerwono? Co oznaczają diody: 27 układów świateł',
