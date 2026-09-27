@@ -55,8 +55,8 @@ export interface TrescKarty {
   faq: { q: string; a: string; href: string; link: string }[]
   spec: [string, string][]
   /**
-   * Film instruktażowy z kanału YouTube w sekcji „Film" karty (components/blog/WideoWpisu.tsx,
-   * razem ze schematem VideoObject). Tylko na kartach modeli wymienionych w tytule filmu,
+   * Film instruktażowy z kanału YouTube w sekcji „Gdy coś nie działa" karty, nad kafelkami
+   * poradników (components/blog/WideoWpisu.tsx, razem ze schematem VideoObject). Tylko na kartach modeli wymienionych w tytule filmu,
    * nie na kartach materiałów. Kadr w public/wideo/, czas w ISO 8601, `dodano` = publikacja na YouTube.
    */
   film?: NonNullable<BlogPost['video']>

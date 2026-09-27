@@ -420,15 +420,13 @@ export default async function DevicePage({
           {[
             ['#warianty', 'Wersje i ceny'],
             ['#opis', 'Opis produktu'],
-            // Kotwica filmu tylko na kartach, które go mają (dziś ZD421t i ZD621t)
-            ...(tresc?.film ? [['#film', 'Film']] : []),
             ['#akcesoria', 'Akcesoria i części'],
             ['#faq', 'Pytania'],
             ['#specyfikacja', 'Specyfikacja'],
             ['#dokumentacja', 'Dokumentacja'],
-            // Kotwica tylko wtedy, gdy model ma dobrane poradniki — pusty odnośnik
-            // w pasku prowadziłby donikąd
-            ...(poradniki.length > 0 ? [['#poradniki', 'Poradniki']] : []),
+            // Kotwica tylko wtedy, gdy model ma dobrane poradniki albo film — pusty
+            // odnośnik w pasku prowadziłby donikąd
+            ...(poradniki.length > 0 || tresc?.film ? [['#poradniki', 'Poradniki']] : []),
           ].map(([href, label]) => (
             <a
               key={href}
@@ -523,20 +521,6 @@ export default async function DevicePage({
                   </div>
                 ))}
               </div>
-            </section>
-          )}
-
-          {/* Film instruktażowy zaraz po opisie: klient, który już wybrał model,
-              pyta następnie „jak to się obsługuje". Odtwarzacz ładuje się po kliknięciu. */}
-          {tresc?.film && (
-            <section
-              id="film"
-              className="scroll-mt-24 bg-white rounded-xl border border-gray-200 p-4 sm:p-6 mb-4 sm:mb-6"
-            >
-              <h2 className="text-sm sm:text-base font-semibold text-gray-900 mb-3">
-                {tresc.film.tytul}
-              </h2>
-              <WideoWpisu film={tresc.film} priorytet={false} className="" />
             </section>
           )}
 
@@ -686,7 +670,7 @@ export default async function DevicePage({
               same okładki i tytuły co na blogu, tylko w mniejszym formacie.
               Dane bierzemy z `lib/blog`, więc karta nie ma własnej kopii
               tytułu, która rozjechałaby się po redakcji wpisu. */}
-          {poradniki.length > 0 && (
+          {(poradniki.length > 0 || tresc?.film) && (
             <section
               id="poradniki"
               className="scroll-mt-24 bg-white rounded-xl border border-gray-200 p-4 sm:p-6 mb-4 sm:mb-6"
@@ -695,15 +679,22 @@ export default async function DevicePage({
                 Gdy coś nie działa
               </h2>
               <p className="mt-1 text-sm text-gray-600">Poradniki z naszego warsztatu.</p>
-              <PoradnikiKaruzela
-                wpisy={poradniki.map((wpis) => ({
-                  slug: wpis.slug,
-                  tytul: wpis.tytulSkrocony,
-                  obraz: wpis.coverImage,
-                  alt: wpis.coverImageAlt || wpis.title,
-                  minuty: wpis.readingTime,
-                }))}
-              />
+              {/* Film instruktażowy modelu nad kafelkami wpisów (dziś ZD421t i ZD621t);
+                  odtwarzacz YouTube ładuje się dopiero po kliknięciu kadru */}
+              {tresc?.film && (
+                <WideoWpisu film={tresc.film} priorytet={false} className="mt-4" />
+              )}
+              {poradniki.length > 0 && (
+                <PoradnikiKaruzela
+                  wpisy={poradniki.map((wpis) => ({
+                    slug: wpis.slug,
+                    tytul: wpis.tytulSkrocony,
+                    obraz: wpis.coverImage,
+                    alt: wpis.coverImageAlt || wpis.title,
+                    minuty: wpis.readingTime,
+                  }))}
+                />
+              )}
             </section>
           )}
 
