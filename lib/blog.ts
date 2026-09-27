@@ -17,6 +17,8 @@ export interface BlogPost {
   deviceType: 'drukarki' | 'terminale' | 'skanery' | 'tablety' | 'inne'
   subDeviceType?: string // Podkategoria urządzenia (np. 'etykiet', 'kart', 'opasek', 'mobilne')
   funnel?: { model: string; headline: string; sub: string; ctaLabel: string; href?: string } // Baner lejka (most do karty produktu/przewodnika TAKMA) wstawiany na końcu wpisu
+  // Film z kanału YouTube pokazywany zamiast grafiki tytułowej (components/blog/WideoWpisu.tsx); kadr w public/wideo/, czas w ISO 8601
+  video?: { youtubeId: string; tytul: string; opis: string; kadr: string; czas: string; dodano: string; podpis: string }
   category: 'poradniki' | 'troubleshooting' | 'porownania' | 'aktualnosci' | 'nowosci-produktowe'
   tags: string[]
   seo: {
@@ -28608,11 +28610,21 @@ Jako **autoryzowany serwis Zebra** pomożemy Ci:
     title: 'Kody błędów Zebra ZD420/ZD421 – co oznaczają diody LED? Kompletny poradnik [2026]',
     excerpt: 'Drukarka Zebra ZD420 lub ZD421 miga na czerwono? Sprawdź znaczenie diod LED: status, pauza, dane, materiały. Tabela kodów błędów i rozwiązania problemów.',
     coverImage: '/blog/diody-led-zebra-zd420-zd421-co-oznaczaja.jpeg',
+    video: {
+      youtubeId: 'Yrt2vvnlT7w',
+      tytul: 'Zebra ZD421 miga na czerwono? Co oznaczają diody: 27 układów świateł',
+      opis: 'Animowany poradnik serwis-zebry.pl: pięć ikon panelu Zebra ZD421 i wszystkie 27 układów świateł z dokumentacji Zebry. Praca drukarki, etykiety i taśma (także model z kasetą), głowica i pokrywa, pamięć i obcinacz, Ethernet, Wi-Fi i Bluetooth.',
+      kadr: '/wideo/diody-zebra-zd421.jpg',
+      czas: 'PT3M53S',
+      dodano: '2026-09-27T14:05:34+02:00',
+      podpis: 'Film: co oznaczają diody Zebra ZD421, wszystkie 27 układów świateł z dokumentacji Zebry (3:53).'
+    },
     author: {
       name: 'Zespół TAKMA',
       role: 'Certyfikowani technicy Zebra'
     },
     publishedAt: '2025-12-27',
+    updatedAt: '2026-09-27',
     readingTime: 10,
     deviceType: 'drukarki',
     subDeviceType: 'etykiet',
@@ -28652,15 +28664,18 @@ Jako **autoryzowany serwis Zebra** pomożemy Ci:
 
 **Przegląd panelu sterowania ZD420/ZD421**
 
-Drukarki ZD420 i ZD421 mają **panel 3-przyciskowy** (FEED, PAUSE, CANCEL) z diodami LED:
+Na panelu ZD420 i ZD421 jest przycisk zasilania, **pięć ikon stanu** (STATUS, PAUSE, DATA, SUPPLIES, NETWORK) i trzy przyciski: PAUSE, FEED i CANCEL. Znaczenie sygnału zależy od koloru, od tego, czy ikona świeci, czy miga, i od tego, które ikony zapalają się razem.
 
 | Element | Funkcja | Kolory |
 |---------|---------|--------|
 | **STATUS** | Główny wskaźnik stanu drukarki | Zielona / Pomarańczowa / Czerwona |
-| **DATA** | Wskaźnik transferu danych | Zielona (miga podczas odbierania) |
+| **PAUSE** | Pauza drukowania, alerty głowicy i pokrywy | Pomarańczowa / Czerwona |
+| **DATA** | Transmisja danych, pamięć, Bluetooth | Zielona / Pomarańczowa / Czerwona |
+| **SUPPLIES** | Etykiety i taśma | Czerwona / Pomarańczowa |
+| **NETWORK** | Połączenie Ethernet lub Wi-Fi | Zielona / Pomarańczowa / Czerwona |
+| **Przycisk PAUSE** | Wstrzymanie i wznowienie drukowania | - |
 | **Przycisk FEED** | Wysunięcie etykiety | - |
-| **Przycisk PAUSE** | Wstrzymanie drukowania | - |
-| **Przycisk CANCEL** | Anulowanie / wydruk konfiguracji | - |
+| **Przycisk CANCEL** | Anulowanie zadań, z FEED wydruk konfiguracji | - |
 
 ---
 
@@ -28680,23 +28695,23 @@ Drukarki ZD420 i ZD421 mają **panel 3-przyciskowy** (FEED, PAUSE, CANCEL) z dio
 
 **ALERTY KRYTYCZNE**
 
-| Alert | Opis | Rozwiązanie |
-|-------|------|-------------|
-| **PRINTHEAD OPEN** | Pokrywa drukarki otwarta lub niezamknięta prawidłowo | Zamknij pokrywę – powinieneś usłyszeć kliknięcie zatrzasku |
-| **PRINTHEAD OVER TEMP** | Przegrzanie głowicy drukującej | Poczekaj 5-10 minut na ostygnięcie |
-| **PRINTHEAD SHUTDOWN** | Krytyczny błąd zasilania głowicy | Wyłącz/włącz drukarkę, wymień głowicę jeśli problem się powtarza |
-| **PRINTHEAD UNDER TEMP** | Głowica poniżej temperatury roboczej | Wyłącz/włącz drukarkę, wymień głowicę |
-| **OUT OF MEMORY** | Brak pamięci na operację | Usuń nieużywane grafiki/fonty, zmniejsz obszar druku |
+| Alert | Diody | Opis | Rozwiązanie |
+|-------|-------|------|-------------|
+| **PRINTHEAD OPEN** | STATUS czerwona, PAUSE pomarańczowa | Pokrywa drukarki otwarta lub niezamknięta prawidłowo | Zamknij pokrywę – powinieneś usłyszeć kliknięcie zatrzasku |
+| **PRINTHEAD OVER TEMP** | STATUS świeci na pomarańczowo | Głowica przegrzana, drukarka wstrzymała druk | Poczekaj – druk wznowi się sam, gdy głowica ostygnie. Jeśli drukarka stoi w słońcu lub w gorącym miejscu, przestaw ją |
+| **PRINTHEAD SHUTDOWN** | STATUS i PAUSE migają na czerwono | Krytyczny błąd temperatury lub zasilania głowicy | Wyłącz drukarkę (przytrzymaj POWER 5 s), odczekaj kilka minut i włącz. Jeśli błąd wraca – zgłoś drukarkę do serwisu |
+| **PRINTHEAD UNDER TEMP** | STATUS miga na pomarańczowo | Głowica poniżej temperatury roboczej, zwykle za zimno w pomieszczeniu | Wyłącz drukarkę, przenieś ją do cieplejszego miejsca i poczekaj, aż się ogrzeje (szybkie ogrzewanie grozi skropleniem wilgoci). Jeśli błąd nie znika w cieple – uszkodzony czujnik temperatury głowicy, serwis |
+| **OUT OF MEMORY** | STATUS pomarańczowa, DATA miga na pomarańczowo | Brak pamięci na operację | Usuń nieużywane grafiki/fonty, zmniejsz obszar druku |
 
 **ALERTY MATERIAŁÓW**
 
-| Alert | Opis | Rozwiązanie |
-|-------|------|-------------|
-| **MEDIA OUT** | Brak etykiet lub czujnik nie wykrywa mediów | Włóż nową rolkę, sprawdź pozycję czujnika, skalibruj |
-| **RIBBON OUT** | Brak taśmy lub koniec taśmy (termotransfer) | Włóż nową taśmę lub zmień tryb na Direct Thermal |
-| **RIBBON IN** (tylko ZD421 Cartridge) | Taśma w drukarce ustawionej na Direct Thermal | Wyjmij taśmę lub zmień tryb na Thermal Transfer |
-| **RIBBON LOW** (tylko ZD421 Cartridge) | Niski poziom taśmy w cartridge | Przygotuj nowy cartridge |
-| **CUT ERROR** | Nóż obcinacza zablokowany | Wyłącz/włącz drukarkę, wezwij serwis jeśli problem się powtarza |
+| Alert | Diody | Opis | Rozwiązanie |
+|-------|-------|------|-------------|
+| **MEDIA OUT** | STATUS i SUPPLIES świecą na czerwono | Brak etykiet, brakująca etykieta w środku rolki lub czujnik nie wykrywa mediów | Włóż nową rolkę, sprawdź pozycję czujnika, skalibruj |
+| **RIBBON OUT** | STATUS czerwona, SUPPLIES miga na czerwono | Brak taśmy lub koniec taśmy (termotransfer) | Włóż nową taśmę lub zmień tryb na Direct Thermal |
+| **RIBBON IN** (tylko ZD421 Cartridge) | STATUS pomarańczowa, SUPPLIES miga na pomarańczowo | Taśma w drukarce ustawionej na Direct Thermal | Wyjmij taśmę lub zmień tryb na Thermal Transfer |
+| **RIBBON LOW** (tylko ZD421 Cartridge) | STATUS pomarańczowa, SUPPLIES miga na czerwono i pomarańczowo | Niski poziom taśmy w cartridge | Przygotuj nowy cartridge |
+| **CUT ERROR** | STATUS świeci na czerwono | Nóż obcinacza zablokowany | Nie wkładaj palców do mechanizmu noża. Wyłącz/włącz drukarkę, wezwij serwis jeśli problem się powtarza |
 
 **STANY DIODY DATA**
 
@@ -28735,7 +28750,7 @@ Drukarki ZD420 i ZD421 mają **panel 3-przyciskowy** (FEED, PAUSE, CANCEL) z dio
 
 ---
 
-**2. SUPPLIES miga pomarańczowo – brak etykiet**
+**2. STATUS i SUPPLIES świecą na czerwono – brak etykiet**
 
 | Krok | Czynność |
 |------|----------|
@@ -28746,6 +28761,8 @@ Drukarki ZD420 i ZD421 mają **panel 3-przyciskowy** (FEED, PAUSE, CANCEL) z dio
 | 5 | Zamknij pokrywę |
 | 6 | Naciśnij FEED aby wysunąć jedną etykietę |
 | 7 | Jeśli problem się powtarza – kalibracja |
+
+> **💡 Etykiety jeszcze są, a diody pokazują ich brak?** Ten sam sygnał pojawia się, gdy w środku rolki brakuje jednej etykiety. Przeciągnij materiał za brakującą etykietę, zamknij pokrywę i naciśnij FEED.
 
 **SmartCal – automatyczna kalibracja (ZD420/ZD421):**
 
@@ -28759,7 +28776,7 @@ Drukarki ZD420 i ZD421 mają **panel 3-przyciskowy** (FEED, PAUSE, CANCEL) z dio
 
 ---
 
-**3. SUPPLIES miga czerwono – Ribbon Out**
+**3. STATUS czerwona + SUPPLIES miga na czerwono – Ribbon Out**
 
 Ten błąd pojawia się gdy:
 - Brak taśmy (ribbon) w drukarce termotransferowej
@@ -28795,16 +28812,16 @@ Gdzie:
 
 ---
 
-**5. Przegrzanie głowicy – STATUS miga czerwono**
+**5. Przegrzanie głowicy – STATUS świeci na pomarańczowo**
 
-Głowica drukująca może się przegrzać przy:
+Drukarka sama wstrzymuje druk, a gdy głowica ostygnie, wznawia go bez Twojej pomocy. Głowica drukująca może się przegrzać przy:
 - Intensywnym drukowaniu bez przerw
 - Zbyt ciemnym ustawieniu (darkness)
-- Wysokiej temperaturze otoczenia
+- Wysokiej temperaturze otoczenia, np. gdy drukarka stoi w pełnym słońcu
 
 | Rozwiązanie | Opis |
 |-------------|------|
-| **Poczekaj** | 5-10 minut na ostygnięcie |
+| **Poczekaj** | Druk wznowi się sam po ostygnięciu głowicy, zwykle w kilka minut |
 | **Zmniejsz darkness** | Ustaw niższą wartość zaciemnienia |
 | **Popraw wentylację** | Zapewnij przepływ powietrza wokół drukarki |
 | **Sprawdź głowicę** | Uszkodzona głowica może się przegrzewać |
@@ -28854,7 +28871,7 @@ Aby wydrukować etykietę konfiguracyjną:
 | **Prędkość** | Do 152 mm/s | Do 152 mm/s |
 | **Modułowość** | Tak | Tak (ulepszona) |
 | **Wyświetlacz** | Brak | Brak |
-| **Diody LED** | 4 diody | 4 diody (takie same) |
+| **Ikony stanu** | 5 (STATUS, PAUSE, DATA, SUPPLIES, NETWORK) | 5, takie same |
 | **Dostępność** | Wycofywana | Aktualna seria |
 
 > **💡 Wskazówka:** Kody błędów LED są **identyczne** w ZD420 i ZD421.
@@ -28878,14 +28895,16 @@ Aby wydrukować etykietę konfiguracyjną:
 **Dlaczego moja ZD420 ciągle miga na czerwono?**
 
 Najczęstsze przyczyny:
-1. Otwarta pokrywa – zamknij dokładnie
-2. Brak etykiet/taśmy – uzupełnij materiały
-3. Przegrzanie – poczekaj 5-10 minut
-4. Błąd pamięci – zresetuj do ustawień fabrycznych
+1. Otwarta pokrywa (STATUS czerwona, PAUSE pomarańczowa) – zamknij dokładnie
+2. Brak etykiet (STATUS i SUPPLIES czerwone) – włóż nową rolkę i naciśnij FEED
+3. Koniec taśmy (SUPPLIES miga na czerwono) – załóż nową taśmę; jeśli drukujesz na etykietach termicznych, ustaw druk termiczny
+4. Błąd głowicy (STATUS i PAUSE migają na czerwono) – wyłącz drukarkę na kilka minut; jeśli błąd wraca, zgłoś ją do serwisu
+
+Przegrzanie głowicy i brak pamięci sygnalizuje kolor pomarańczowy, nie czerwony.
 
 **Jak sprawdzić co dokładnie jest nie tak bez wyświetlacza?**
 
-1. Wydrukuj etykietę konfiguracyjną (CANCEL 2 sek.)
+1. Wydrukuj etykietę konfiguracyjną (FEED + CANCEL przez 2 sek.)
 2. Podłącz do komputera i użyj Zebra Setup Utilities
 3. Sprawdź status w ZSU → Open Printer Tools → View Printer Status
 

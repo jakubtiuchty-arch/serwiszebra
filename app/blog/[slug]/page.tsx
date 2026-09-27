@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getPostBySlug, getAllPosts, getRelatedPosts, BLOG_CATEGORIES, DEVICE_TYPES } from '@/lib/blog'
 import KupTenModel from '@/components/blog/KupTenModel'
+import WideoWpisu from '@/components/blog/WideoWpisu'
 import Header from '@/components/Header'
 import BackButton from '@/components/BackButton'
 import { 
@@ -453,8 +454,11 @@ export default function BlogPostPage({
               </div>
             </header>
 
+            {/* Film z kanału zamiast grafiki tytułowej (grafika zostaje w og:image i schema Article) */}
+            {post.video && <WideoWpisu film={post.video} />}
+
             {/* Cover Image - wrapped in figure/figcaption for semantic SEO */}
-            {post.coverImage && (
+            {post.coverImage && !post.video && (
               <figure className="mb-8">
                 <div className="relative w-full h-64 sm:h-96 rounded-2xl overflow-hidden bg-gradient-to-br from-blue-100 to-indigo-100">
                   {post.coverImage !== '/blog/placeholder.jpg' ? (

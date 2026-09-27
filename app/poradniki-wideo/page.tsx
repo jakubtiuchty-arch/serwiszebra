@@ -35,6 +35,17 @@ interface Video {
 // Filmy poradnikowe - prawdziwe materiały serwisowe
 const videos: Video[] = [
   {
+    id: '28',
+    title: 'Zebra ZD421 miga na czerwono? Co oznaczają diody: 27 układów świateł',
+    description: 'Pięć ikon panelu Zebra ZD421 i wszystkie 27 układów świateł z dokumentacji Zebry: praca drukarki, etykiety i taśma (także model z kasetą), głowica i pokrywa, pamięć i obcinacz, Ethernet, Wi-Fi i Bluetooth. Dla ZD421t i ZD421d.',
+    youtubeId: 'Yrt2vvnlT7w',
+    thumbnail: '/wideo/diody-zebra-zd421.jpg',
+    duration: '3:53',
+    category: 'drukarki',
+    tags: ['ZD421', 'ZD421t', 'ZD421d', 'diody LED', 'kody błędów', 'czerwona dioda', 'kalibracja'],
+    featured: true
+  },
+  {
     id: '24',
     title: 'Zebra ZC100 / ZC300 — rozpakowanie drukarki kart krok po kroku',
     description: 'Rozpakowanie drukarki kart Zebra ZC100 i ZC300: co znajduje się w zestawie i jak przygotować urządzenie do pierwszego uruchomienia.',
