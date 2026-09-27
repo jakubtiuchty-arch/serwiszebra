@@ -26625,18 +26625,18 @@ Wydrukuj etykietę konfiguracyjną z drukarki:
 
 | Model | Jak wydrukować? |
 |-------|-----------------|
-| **ZD421/ZD621** | Menu → Ustawienia → Drukuj info |
-| **ZD420/ZD620** | Przytrzymaj CANCEL przez 3 sekundy |
-| **ZD220/ZD230** | Przytrzymaj FEED przez 5 sekund po włączeniu |
-| **ZT411/ZT421** | Menu → Ustawienia → Drukuj info |
-| **ZT410/ZT420** | Menu → Ustawienia → Drukuj info |
-| **ZT610/ZT620** | Menu → Ustawienia → Drukuj info |
-| **ZT510** | Menu → Ustawienia → Drukuj info |
-| **ZD611/ZD621R** | Menu → Ustawienia → Drukuj info |
-| **GK420/GC420** | Przytrzymaj FEED podczas włączania |
-| **GT800** | Przytrzymaj FEED podczas włączania |
-| **ZQ630/ZQ520** | Menu → Printer Info |
-| **ZQ320/ZQ310** | Przytrzymaj FEED przez 3 sekundy |
+| **ZD421/ZD621** | Przytrzymaj FEED + CANCEL przez 2 sekundy (ZD621 z ekranem: Menu → System → Settings → Print: System Settings) |
+| **ZD420/ZD620** | Przytrzymaj FEED + CANCEL przez 2 sekundy |
+| **ZD220/ZD230** | Przy gotowej drukarce przytrzymaj FEED i puść po pierwszym mignięciu |
+| **ZT411/ZT421** | Przytrzymaj FEED + CANCEL przez 2 sekundy albo Menu → System → Settings → Print: System Settings |
+| **ZT410/ZT420** | Przytrzymaj CANCEL podczas włączania drukarki |
+| **ZT610/ZT620** | Przytrzymaj FEED + CANCEL przez 2 sekundy albo TOOLS → PRINT INFORMATION → SETTINGS |
+| **ZT510** | Przytrzymaj FEED + CANCEL przez 2 sekundy albo TOOLS → PRINT INFORMATION → SETTINGS |
+| **ZD611/ZD621R** | Menu → System → Settings → Print: System Settings albo FEED + CANCEL przez 2 sekundy |
+| **GK420/GC420** | Przy włączonej drukarce przytrzymaj FEED i puść po pierwszym mignięciu |
+| **GT800** | Przy włączonej drukarce przytrzymaj FEED i puść po pierwszym mignięciu |
+| **ZQ630/ZQ520** | Przy wyłączonej drukarce przytrzymaj FEED i naciśnij POWER, puść FEED, gdy zacznie drukować (ZQ630 także menu Info na wyświetlaczu) |
+| **ZQ320/ZQ310** | Przytrzymaj FEED, potem POWER, aż mignie dioda zasilania; puść POWER i trzymaj FEED, aż dioda WiFi zaświeci na bursztynowo |
 
 Na etykiecie znajdziesz:
 - **Firmware:** np. V84.20.15Z
