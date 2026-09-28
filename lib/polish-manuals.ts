@@ -5742,6 +5742,7 @@ Zebra ZD220t to kompaktowa, ekonomiczna drukarka etykiet z serii ZD200. Wykorzys
         title: '5. Panel sterowania i LED',
         videos: [
           { youtubeId: '6Pbi_A8fAnU', title: 'Przyciski, porty i złącza w ZD220 / ZD230', thumbnail: '/Funkcje drukarki - jak rozpoznać funkcje i możliwości urządzenia Zebra ZD220_ZD230d.jpeg' },
+          { youtubeId: 'oU0h6IgePYE', title: 'Zmiana trybu druku w ZD220t i ZD230t', thumbnail: '/wideo/tryb-druku-zebra-zd220t.jpg' },
         ],
         content: `
 Drukarka posiada minimalistyczny interfejs:
@@ -6638,6 +6639,7 @@ Zebra ZD230t to kompaktowa drukarka etykiet z serii ZD200. Wykorzystuje technolo
         title: '5. Panel sterowania i LED',
         videos: [
           { youtubeId: '6Pbi_A8fAnU', title: 'Przyciski, porty i złącza w ZD220 / ZD230', thumbnail: '/Funkcje drukarki - jak rozpoznać funkcje i możliwości urządzenia Zebra ZD220_ZD230d.jpeg' },
+          { youtubeId: 'oU0h6IgePYE', title: 'Zmiana trybu druku w ZD220t i ZD230t', thumbnail: '/wideo/tryb-druku-zebra-zd220t.jpg' },
         ],
         content: `
 Drukarka posiada minimalistyczny interfejs:

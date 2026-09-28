@@ -111,6 +111,18 @@ const FILM_KALIBRACJA_ZD220T_ZD230T: NonNullable<BlogPost['video']> = {
   krotko: 'Kalibracja pod etykiety',
 }
 
+/** „Jak zmienić tryb druku w drukarce Zebra ZD220t i ZD230t" — sterownik i Zebra Setup Utilities są w obu modelach te same */
+const FILM_TRYB_DRUKU_ZD220T_ZD230T: NonNullable<BlogPost['video']> = {
+  youtubeId: 'oU0h6IgePYE',
+  tytul: 'Jak zmienić tryb druku w drukarce Zebra ZD220t i ZD230t: sterownik i Zebra Setup Utilities',
+  opis: 'Poradnik serwis-zebry.pl z polskim lektorem: termotransfer z taśmą i druk termiczny bezpośredni bez taśmy, test paznokciem, zmiana trybu w sterowniku ZDesigner (Printing mode) i w Zebra Setup Utilities (Print Mode), sprawdzenie PRINT METHOD na raporcie konfiguracji i kalibracja.',
+  kadr: '/wideo/tryb-druku-zebra-zd220t.jpg',
+  czas: 'PT2M43S',
+  dodano: '2026-09-28T13:12:35+02:00',
+  podpis: 'Film: zmiana trybu druku w drukarce Zebra ZD220t i ZD230t (2:43).',
+  krotko: 'Zmiana trybu druku',
+}
+
 /** „Pierwsze uruchomienie drukarki Zebra ZD220d i ZD230d" — procedura jest w obu modelach taka sama */
 const FILM_URUCHOMIENIE_ZD220D_ZD230D: NonNullable<BlogPost['video']> = {
   youtubeId: 'xdlRa8iAnfQ',
@@ -512,7 +524,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
   },
 
   'zebra-zd220t': {
-    filmy: [FILM_URUCHOMIENIE_ZD220T_ZD230T, FILM_KALIBRACJA_ZD220T_ZD230T, FILM_TASMA_ZD220_ZD230],
+    filmy: [FILM_URUCHOMIENIE_ZD220T_ZD230T, FILM_KALIBRACJA_ZD220T_ZD230T, FILM_TRYB_DRUKU_ZD220T_ZD230T, FILM_TASMA_ZD220_ZD230],
     poradniki: [
       'serwis-drukarki-zebra-zd220-diagnostyka-naprawa',
       'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',
@@ -748,7 +760,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     ],
   },
   'zebra-zd230t': {
-    filmy: [FILM_URUCHOMIENIE_ZD220T_ZD230T, FILM_KALIBRACJA_ZD220T_ZD230T, FILM_TASMA_ZD220_ZD230],
+    filmy: [FILM_URUCHOMIENIE_ZD220T_ZD230T, FILM_KALIBRACJA_ZD220T_ZD230T, FILM_TRYB_DRUKU_ZD220T_ZD230T, FILM_TASMA_ZD220_ZD230],
     poradniki: [
       'serwis-drukarki-zebra-zd220-diagnostyka-naprawa',
       'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',

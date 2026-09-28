@@ -134,6 +134,17 @@ const videos: Video[] = [
     featured: true
   },
   {
+    id: '36',
+    title: 'Jak zmienić tryb druku w drukarce Zebra ZD220t i ZD230t: sterownik i Zebra Setup Utilities',
+    description: 'Termotransfer z taśmą czy druk termiczny bezpośredni bez taśmy: jak rozpoznać etykiety testem paznokciem, jak zmienić tryb druku w sterowniku ZDesigner (Printing mode) i w Zebra Setup Utilities (Print Mode) oraz jak sprawdzić PRINT METHOD na raporcie konfiguracji Zebra ZD220t i ZD230t.',
+    youtubeId: 'oU0h6IgePYE',
+    thumbnail: '/wideo/tryb-druku-zebra-zd220t.jpg',
+    duration: '2:43',
+    category: 'drukarki',
+    tags: ['ZD220t', 'ZD230t', 'tryb druku', 'termotransfer', 'druk termiczny bezpośredni', 'sterownik ZDesigner', 'Zebra Setup Utilities', 'raport konfiguracji'],
+    featured: true
+  },
+  {
     id: '24',
     title: 'Zebra ZC100 / ZC300 — rozpakowanie drukarki kart krok po kroku',
     description: 'Rozpakowanie drukarki kart Zebra ZC100 i ZC300: co znajduje się w zestawie i jak przygotować urządzenie do pierwszego uruchomienia.',
