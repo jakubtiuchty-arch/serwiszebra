@@ -123,6 +123,18 @@ const FILM_TRYB_DRUKU_ZD220T_ZD230T: NonNullable<BlogPost['video']> = {
   krotko: 'Zmiana trybu druku',
 }
 
+/** „Jak korzystać z obcinaka w drukarce Zebra ZD230t" — obcinak (gilotyna) to opcja fabryczna tylko ZD230t; ZD220t go nie ma */
+const FILM_OBCINAK_ZD230T: NonNullable<BlogPost['video']> = {
+  youtubeId: 'iANzWP1Zw_Y',
+  tytul: 'Jak korzystać z obcinaka w drukarce Zebra ZD230t',
+  opis: 'Poradnik serwis-zebry.pl z polskim lektorem: co tnie obcinak, zakładanie etykiet przez szczelinę obcinaka i taśmy termotransferowej, kalibracja, tryb pracy z obcinakiem w sterowniku, cięcie bez drukowania komendą C i zasady bezpiecznej pracy z ostrzem.',
+  kadr: '/wideo/obcinak-zebra-zd230t.jpg',
+  czas: 'PT3M8S',
+  dodano: '2026-09-28T14:43:47+02:00',
+  podpis: 'Film: obcinak w drukarce Zebra ZD230t krok po kroku (3:08).',
+  krotko: 'Praca z obcinakiem',
+}
+
 /** „Pierwsze uruchomienie drukarki Zebra ZD220d i ZD230d" — procedura jest w obu modelach taka sama */
 const FILM_URUCHOMIENIE_ZD220D_ZD230D: NonNullable<BlogPost['video']> = {
   youtubeId: 'xdlRa8iAnfQ',
@@ -760,7 +772,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     ],
   },
   'zebra-zd230t': {
-    filmy: [FILM_URUCHOMIENIE_ZD220T_ZD230T, FILM_KALIBRACJA_ZD220T_ZD230T, FILM_TRYB_DRUKU_ZD220T_ZD230T, FILM_TASMA_ZD220_ZD230],
+    filmy: [FILM_URUCHOMIENIE_ZD220T_ZD230T, FILM_KALIBRACJA_ZD220T_ZD230T, FILM_TRYB_DRUKU_ZD220T_ZD230T, FILM_TASMA_ZD220_ZD230, FILM_OBCINAK_ZD230T],
     poradniki: [
       'serwis-drukarki-zebra-zd220-diagnostyka-naprawa',
       'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',

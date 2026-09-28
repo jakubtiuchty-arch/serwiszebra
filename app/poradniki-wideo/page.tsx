@@ -145,6 +145,17 @@ const videos: Video[] = [
     featured: true
   },
   {
+    id: '37',
+    title: 'Jak korzystać z obcinaka w drukarce Zebra ZD230t',
+    description: 'Obcinak (gilotyna) w Zebra ZD230t krok po kroku: co można nim ciąć, minimalny odcinek 25,4 mm, zakładanie etykiet przez szczelinę obcinaka i taśmy termotransferowej, kalibracja, tryb pracy z obcinakiem, cięcie bez drukowania komendą C i bezpieczna praca z ostrzem. Obcinak jest opcją fabryczną ZD230t, drukarka ZD220t go nie ma.',
+    youtubeId: 'iANzWP1Zw_Y',
+    thumbnail: '/wideo/obcinak-zebra-zd230t.jpg',
+    duration: '3:08',
+    category: 'drukarki',
+    tags: ['ZD230t', 'obcinak', 'gilotyna', 'nóż', 'cutter', 'cięcie etykiet', 'taśma termotransferowa', 'tryb obcinania'],
+    featured: true
+  },
+  {
     id: '24',
     title: 'Zebra ZC100 / ZC300 — rozpakowanie drukarki kart krok po kroku',
     description: 'Rozpakowanie drukarki kart Zebra ZC100 i ZC300: co znajduje się w zestawie i jak przygotować urządzenie do pierwszego uruchomienia.',
