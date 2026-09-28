@@ -112,12 +112,12 @@ const FILM_KALIBRACJA_ZD220D_ZD230D: NonNullable<BlogPost['video']> = {
 
 /** „Jak korzystać z obcinaka w drukarce Zebra ZD230d" — obcinak (gilotyna) to opcja fabryczna tylko ZD230d; ZD220d go nie ma */
 const FILM_OBCINAK_ZD230D: NonNullable<BlogPost['video']> = {
-  youtubeId: 'fbp9ZM4bVwo',
+  youtubeId: 'tdRmdYcLuJ4',
   tytul: 'Jak korzystać z obcinaka w drukarce Zebra ZD230d',
   opis: 'Poradnik serwis-zebry.pl z polskim lektorem: co tnie obcinak, zakładanie etykiet przez szczelinę obcinaka, kalibracja, tryb pracy z obcinakiem w sterowniku, cięcie bez drukowania i zasady bezpiecznej pracy z ostrzem.',
-  kadr: '/wideo/obcinak-zebra-zd220d.jpg',
+  kadr: '/wideo/obcinak-zebra-zd230d.jpg',
   czas: 'PT2M41S',
-  dodano: '2026-09-28T06:38:12+02:00',
+  dodano: '2026-09-28T09:32:04+02:00',
   podpis: 'Film: obcinak w drukarce Zebra ZD230d krok po kroku (2:41).',
   krotko: 'Praca z obcinakiem',
 }

@@ -6122,7 +6122,7 @@ Zebra ZD230d to kompaktowa drukarka etykiet z serii ZD200. Wykorzystuje technolo
         videos: [
           { youtubeId: 'xhtuxOwwOyY', title: 'Zakładanie etykiet w ZD220d / ZD230d', thumbnail: '/zakładanie_etykiet_zd220d_zd230d.jpeg' },
           { youtubeId: 'qrMRD7N49fY', title: 'Jak używać odklejaka etykiet w ZD220 / ZD230', thumbnail: '/zd220_zd230_odlejak_yt.jpeg' },
-          { youtubeId: 'fbp9ZM4bVwo', title: 'Obcinak w ZD230d krok po kroku', thumbnail: '/wideo/obcinak-zebra-zd220d.jpg' },
+          { youtubeId: 'tdRmdYcLuJ4', title: 'Obcinak w ZD230d krok po kroku', thumbnail: '/wideo/obcinak-zebra-zd230d.jpg' },
         ],
         content: `
 ### Obsługiwane typy materiałów
