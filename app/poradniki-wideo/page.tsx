@@ -71,9 +71,9 @@ const videos: Video[] = [
     id: '30',
     title: 'Pierwsze uruchomienie drukarki Zebra ZD220d i ZD230d krok po kroku',
     description: 'Jak przygotować do pracy nową drukarkę Zebra ZD220d i ZD230d: zawartość pudełka, sterownik z serwis-zebry.pl, zasilanie i kabel USB, zakładanie etykiet, włączenie, tryb pauzy, kalibracja pod etykiety i raport konfiguracji.',
-    youtubeId: 'uMK0WGb6SUk',
+    youtubeId: 'xdlRa8iAnfQ',
     thumbnail: '/wideo/pierwsze-uruchomienie-zebra-zd220d.jpg',
-    duration: '3:10',
+    duration: '3:13',
     category: 'drukarki',
     tags: ['ZD220d', 'ZD230d', 'pierwsze uruchomienie', 'instalacja drukarki', 'sterownik', 'zakładanie etykiet', 'kalibracja', 'raport konfiguracji'],
     featured: true

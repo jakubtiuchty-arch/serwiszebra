@@ -113,13 +113,13 @@ const FILM_KALIBRACJA_ZD220T_ZD230T: NonNullable<BlogPost['video']> = {
 
 /** „Pierwsze uruchomienie drukarki Zebra ZD220d i ZD230d" — procedura jest w obu modelach taka sama */
 const FILM_URUCHOMIENIE_ZD220D_ZD230D: NonNullable<BlogPost['video']> = {
-  youtubeId: 'uMK0WGb6SUk',
+  youtubeId: 'xdlRa8iAnfQ',
   tytul: 'Pierwsze uruchomienie drukarki Zebra ZD220d i ZD230d krok po kroku',
   opis: 'Poradnik serwis-zebry.pl z polskim lektorem: zawartość pudełka, sterownik, zasilanie i kabel USB, zakładanie etykiet, włączenie, tryb pauzy, kalibracja pod etykiety i raport konfiguracji.',
   kadr: '/wideo/pierwsze-uruchomienie-zebra-zd220d.jpg',
-  czas: 'PT3M10S',
-  dodano: '2026-09-28T02:06:37+02:00',
-  podpis: 'Film: pierwsze uruchomienie drukarki Zebra ZD220d i ZD230d krok po kroku (3:10).',
+  czas: 'PT3M13S',
+  dodano: '2026-09-28T11:21:08+02:00',
+  podpis: 'Film: pierwsze uruchomienie drukarki Zebra ZD220d i ZD230d krok po kroku (3:13).',
   krotko: 'Pierwsze uruchomienie',
 }
 
