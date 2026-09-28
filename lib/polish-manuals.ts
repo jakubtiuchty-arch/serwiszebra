@@ -5600,8 +5600,7 @@ Drukarka jest przegrzana – poczekaj aż ostygnie. Upewnij się, że wokół dr
       'zd220t usb',
       'zd220t tania drukarka etykiet',
       'zebra zd200 instrukcja',
-      'zd220t ribbon 74m',
-      'zd220t ribbon 300m'
+      'zd220t ribbon 74m'
     ],
     sections: [
       {
@@ -5621,7 +5620,7 @@ Zebra ZD220t to kompaktowa, ekonomiczna drukarka etykiet z serii ZD200. Wykorzys
 | Szerokość druku | do **104 mm** (4 cale) |
 | Maks. średnica rolki | **127 mm** (5 cali) |
 | Średnica wewnętrzna gilzy | 12,7 mm / 25,4 mm |
-| Obsługiwane rolki ribbonu | 74 m i 300 m |
+| Obsługiwane rolki ribbonu | 74 m |
 | Pamięć wewnętrzna | min. 50 MB |
 
 ### Złącza
@@ -5632,7 +5631,7 @@ Zebra ZD220t to kompaktowa, ekonomiczna drukarka etykiet z serii ZD200. Wykorzys
 
 - Konstrukcja OpenAccess – łatwe ładowanie materiałów
 - Prosty interfejs – jeden przycisk FEED i wskaźnik LED
-- Dwupojemnościowy system ribbonu (74 m i 300 m)
+- Taśmy o długości 74 m (taśmy 300 m przyjmuje dopiero ZD230t)
 - Kompatybilność z językami ZPL i EPL
 
 > 📘 **Więcej o drukarkach Zebra:** [Drukarki etykiet](/drukarki)
@@ -5650,7 +5649,6 @@ Zebra ZD220t to kompaktowa, ekonomiczna drukarka etykiet z serii ZD200. Wykorzys
 - Zasilacz sieciowy z kablem
 - Kabel USB
 - Pusta gilza do odbierania ribbonu
-- Adaptery do ribbonów 300 m (dla ribbonów innych niż Zebra)
 - Skrócona instrukcja obsługi
 
 ### Wybór lokalizacji
@@ -5948,7 +5946,7 @@ Drukarka automatycznie wykrywa srebrną folię odbijającą na końcu ribbonu Ze
 | **Max szerokość** | **110 mm (4.33")** |
 | Min szerokość | 33 mm (1.3") |
 | Rdzeń wewnętrzny | 12.7 mm (0.5") |
-| Obsługiwane rolki | 74 m i 300 m |
+| Obsługiwane rolki | 74 m |
 
 ### Łączność
 
