@@ -123,6 +123,17 @@ const videos: Video[] = [
     featured: true
   },
   {
+    id: '35',
+    title: 'Jak skalibrować drukarkę Zebra ZD220t i ZD230t pod swoje etykiety',
+    description: 'Kalibracja Zebra ZD220t i ZD230t krok po kroku: kiedy pomaga (etykieta staje w złym miejscu, pusta etykieta między wydrukami), co mierzy drukarka, taśma termotransferowa przed kalibracją, ustawienie ruchomego czujnika, przytrzymanie FEED do dwóch mignięć diody, sprawdzenie wyniku i kiedy kalibrację powtórzyć.',
+    youtubeId: 'L1ACoQzrGcM',
+    thumbnail: '/wideo/kalibracja-zebra-zd220t.jpg',
+    duration: '2:26',
+    category: 'drukarki',
+    tags: ['ZD220t', 'ZD230t', 'kalibracja', 'SmartCal', 'FEED', 'czujnik etykiet', 'taśma termotransferowa'],
+    featured: true
+  },
+  {
     id: '24',
     title: 'Zebra ZC100 / ZC300 — rozpakowanie drukarki kart krok po kroku',
     description: 'Rozpakowanie drukarki kart Zebra ZC100 i ZC300: co znajduje się w zestawie i jak przygotować urządzenie do pierwszego uruchomienia.',
