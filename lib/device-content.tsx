@@ -95,6 +95,7 @@ const FILM_URUCHOMIENIE_ZD220D_ZD230D: NonNullable<BlogPost['video']> = {
   czas: 'PT3M10S',
   dodano: '2026-09-28T02:06:37+02:00',
   podpis: 'Film: pierwsze uruchomienie drukarki Zebra ZD220d i ZD230d krok po kroku (3:10).',
+  krotko: 'Pierwsze uruchomienie',
 }
 
 /** „Jak skalibrować drukarkę Zebra ZD220d i ZD230d pod swoje etykiety" — procedura jest w obu modelach taka sama */
@@ -106,6 +107,7 @@ const FILM_KALIBRACJA_ZD220D_ZD230D: NonNullable<BlogPost['video']> = {
   czas: 'PT2M13S',
   dodano: '2026-09-28T06:35:16+02:00',
   podpis: 'Film: kalibracja drukarki Zebra ZD220d i ZD230d pod etykiety (2:13).',
+  krotko: 'Kalibracja pod etykiety',
 }
 
 /** „Jak korzystać z obcinaka w drukarce Zebra ZD220d i ZD230d" — obcinak działa w obu modelach tak samo */
@@ -117,6 +119,7 @@ const FILM_OBCINAK_ZD220D_ZD230D: NonNullable<BlogPost['video']> = {
   czas: 'PT2M41S',
   dodano: '2026-09-28T06:38:12+02:00',
   podpis: 'Film: obcinak w drukarce Zebra ZD220d i ZD230d krok po kroku (2:41).',
+  krotko: 'Praca z obcinakiem',
 }
 
 /** „Czyszczenie drukarki Zebra ZD220d i ZD230d: głowica, wałek i czujniki" — procedura jest w obu modelach taka sama */
@@ -128,6 +131,7 @@ const FILM_CZYSZCZENIE_ZD220D_ZD230D: NonNullable<BlogPost['video']> = {
   czas: 'PT4M51S',
   dodano: '2026-09-28T06:42:12+02:00',
   podpis: 'Film: czyszczenie drukarki Zebra ZD220d i ZD230d krok po kroku (4:51).',
+  krotko: 'Czyszczenie drukarki',
 }
 
 export const TRESC_KART: Record<string, TrescKarty> = {

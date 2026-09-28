@@ -681,20 +681,22 @@ export default async function DevicePage({
               </h2>
               <p className="mt-1 text-sm text-gray-600">Poradniki z naszego warsztatu.</p>
               {/* Filmy instruktażowe modelu nad kafelkami wpisów: jeden na całą szerokość,
-                  kilka w dwóch kolumnach (ZD220d i ZD230d mają cztery). Odtwarzacz YouTube
-                  ładuje się dopiero po kliknięciu kadru */}
+                  kilka jako małe kafelki (cztery w rzędzie, na telefonie dwa), bo w dwóch
+                  kolumnach zajmowały pół strony — film z kafelka otwiera się w oknie.
+                  Odtwarzacz YouTube ładuje się dopiero po kliknięciu kadru */}
               {filmy.length === 1 && (
                 <WideoWpisu film={filmy[0]} priorytet={false} className="mt-4" />
               )}
               {filmy.length > 1 && (
-                <div className="mt-4 grid gap-x-4 gap-y-5 sm:grid-cols-2">
+                <div className="mt-4 grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
                   {filmy.map((film) => (
                     <WideoWpisu
                       key={film.youtubeId}
                       film={film}
                       priorytet={false}
                       className=""
-                      rozmiary="(min-width: 896px) 440px, (min-width: 640px) 50vw, 100vw"
+                      kompakt
+                      rozmiary="(min-width: 896px) 224px, (min-width: 768px) 25vw, 50vw"
                     />
                   ))}
                 </div>

@@ -17,8 +17,9 @@ export interface BlogPost {
   deviceType: 'drukarki' | 'terminale' | 'skanery' | 'tablety' | 'inne'
   subDeviceType?: string // Podkategoria urządzenia (np. 'etykiet', 'kart', 'opasek', 'mobilne')
   funnel?: { model: string; headline: string; sub: string; ctaLabel: string; href?: string } // Baner lejka (most do karty produktu/przewodnika TAKMA) wstawiany na końcu wpisu
-  // Film z kanału YouTube pokazywany zamiast grafiki tytułowej (components/blog/WideoWpisu.tsx); kadr w public/wideo/, czas w ISO 8601
-  video?: { youtubeId: string; tytul: string; opis: string; kadr: string; czas: string; dodano: string; podpis: string }
+  // Film z kanału YouTube pokazywany zamiast grafiki tytułowej (components/blog/WideoWpisu.tsx); kadr w public/wideo/, czas w ISO 8601;
+  // `krotko` = krótki tytuł małego kafelka, gdy karta produktu ma kilka filmów
+  video?: { youtubeId: string; tytul: string; opis: string; kadr: string; czas: string; dodano: string; podpis: string; krotko?: string }
   category: 'poradniki' | 'troubleshooting' | 'porownania' | 'aktualnosci' | 'nowosci-produktowe'
   tags: string[]
   seo: {
