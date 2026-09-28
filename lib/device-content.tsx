@@ -55,9 +55,9 @@ export interface TrescKarty {
   faq: { q: string; a: string; href: string; link: string }[]
   spec: [string, string][]
   /**
-   * Filmy instruktażowe z kanału YouTube w sekcji „Gdy coś nie działa" karty, nad kafelkami
+   * Filmy instruktażowe z kanału YouTube w sekcji „Wideoporadniki" karty, nad sekcją z kafelkami
    * poradników (components/blog/WideoWpisu.tsx, każdy ze schematem VideoObject). Jeden film zajmuje
-   * całą szerokość, kilka układa się w dwie kolumny; kolejność = kolejność na karcie. Tylko na kartach
+   * całą szerokość, kilka to małe kafelki (cztery w rzędzie, `krotko` jako tytuł); kolejność = kolejność na karcie. Tylko na kartach
    * modeli wymienionych w tytule filmu, nie na kartach materiałów. Kadr w public/wideo/, czas w ISO 8601,
    * `dodano` = publikacja na YouTube.
    */

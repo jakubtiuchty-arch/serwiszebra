@@ -186,7 +186,7 @@ export default async function DevicePage({
   const kartaUrl = `${SITE}/sklep/drukarki-etykiet/${product.slug}`
   const tresc = trescKarty(product.slug)
   /**
-   * Wpisy do sekcji „Gdy coś nie działa". Tytuł na kafelku skracamy: pełne
+   * Wpisy do sekcji „Poradniki". Tytuł na kafelku skracamy: pełne
    * brzmienie („Serwis drukarki Zebra ZD220 - diagnostyka i naprawa [2026]")
    * jest pisane pod wyniki wyszukiwania i w kaflu zajmowałoby cztery linijki.
    */
@@ -425,9 +425,10 @@ export default async function DevicePage({
             ['#faq', 'Pytania'],
             ['#specyfikacja', 'Specyfikacja'],
             ['#dokumentacja', 'Dokumentacja'],
-            // Kotwica tylko wtedy, gdy model ma dobrane poradniki albo filmy — pusty
+            // Kotwice tylko wtedy, gdy model ma filmy albo dobrane poradniki — pusty
             // odnośnik w pasku prowadziłby donikąd
-            ...(poradniki.length > 0 || filmy.length > 0 ? [['#poradniki', 'Poradniki']] : []),
+            ...(filmy.length > 0 ? [['#wideoporadniki', 'Wideoporadniki']] : []),
+            ...(poradniki.length > 0 ? [['#poradniki', 'Poradniki']] : []),
           ].map(([href, label]) => (
             <a
               key={href}
@@ -667,23 +668,18 @@ export default async function DevicePage({
 
           </section>
 
-          {/* Poradniki serwisowe jako osobna sekcja z kafelkami wpisów — te
-              same okładki i tytuły co na blogu, tylko w mniejszym formacie.
-              Dane bierzemy z `lib/blog`, więc karta nie ma własnej kopii
-              tytułu, która rozjechałaby się po redakcji wpisu. */}
-          {(poradniki.length > 0 || filmy.length > 0) && (
+          {/* Wideoporadniki: filmy instruktażowe modelu z kanału YouTube. Jeden film zajmuje
+              całą szerokość, kilka to małe kafelki (cztery w rzędzie, na telefonie dwa), bo
+              w dwóch kolumnach zajmowały pół strony — film z kafelka otwiera się w oknie.
+              Odtwarzacz YouTube ładuje się dopiero po kliknięciu kadru */}
+          {filmy.length > 0 && (
             <section
-              id="poradniki"
+              id="wideoporadniki"
               className="scroll-mt-24 bg-white rounded-xl border border-gray-200 p-4 sm:p-6 mb-4 sm:mb-6"
             >
               <h2 className="text-sm sm:text-base font-semibold text-gray-900">
-                Gdy coś nie działa
+                Wideoporadniki
               </h2>
-              <p className="mt-1 text-sm text-gray-600">Poradniki z naszego warsztatu.</p>
-              {/* Filmy instruktażowe modelu nad kafelkami wpisów: jeden na całą szerokość,
-                  kilka jako małe kafelki (cztery w rzędzie, na telefonie dwa), bo w dwóch
-                  kolumnach zajmowały pół strony — film z kafelka otwiera się w oknie.
-                  Odtwarzacz YouTube ładuje się dopiero po kliknięciu kadru */}
               {filmy.length === 1 && (
                 <WideoWpisu film={filmy[0]} priorytet={false} className="mt-4" />
               )}
@@ -701,17 +697,30 @@ export default async function DevicePage({
                   ))}
                 </div>
               )}
-              {poradniki.length > 0 && (
-                <PoradnikiKaruzela
-                  wpisy={poradniki.map((wpis) => ({
-                    slug: wpis.slug,
-                    tytul: wpis.tytulSkrocony,
-                    obraz: wpis.coverImage,
-                    alt: wpis.coverImageAlt || wpis.title,
-                    minuty: wpis.readingTime,
-                  }))}
-                />
-              )}
+            </section>
+          )}
+
+          {/* Poradniki serwisowe z bloga jako kafelki wpisów — te same okładki
+              i tytuły co na blogu, tylko w mniejszym formacie. Dane bierzemy
+              z `lib/blog`, więc karta nie ma własnej kopii tytułu, która
+              rozjechałaby się po redakcji wpisu. */}
+          {poradniki.length > 0 && (
+            <section
+              id="poradniki"
+              className="scroll-mt-24 bg-white rounded-xl border border-gray-200 p-4 sm:p-6 mb-4 sm:mb-6"
+            >
+              <h2 className="text-sm sm:text-base font-semibold text-gray-900">
+                Poradniki
+              </h2>
+              <PoradnikiKaruzela
+                wpisy={poradniki.map((wpis) => ({
+                  slug: wpis.slug,
+                  tytul: wpis.tytulSkrocony,
+                  obraz: wpis.coverImage,
+                  alt: wpis.coverImageAlt || wpis.title,
+                  minuty: wpis.readingTime,
+                }))}
+              />
             </section>
           )}
 

@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { ChevronLeft, ChevronRight, Clock } from 'lucide-react'
 
 /**
- * Kafle poradników w sekcji „Gdy coś nie działa".
+ * Kafle poradników w sekcji „Poradniki" karty produktu.
  *
  * Modele mobilne mają w bazie wpisów sześć dedykowanych poradników, biurkowe
  * trzy — jedna siatka nie obsłuży obu przypadków, bo sześć kafli w trzech
