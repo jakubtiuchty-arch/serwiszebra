@@ -112,6 +112,17 @@ const videos: Video[] = [
     featured: true
   },
   {
+    id: '34',
+    title: 'Pierwsze uruchomienie drukarki Zebra ZD220t i ZD230t krok po kroku',
+    description: 'Jak przygotować do pracy nową drukarkę Zebra ZD220t i ZD230t: zawartość pudełka (w ZD230t także gilza 300 m i adaptery), sterownik z serwis-zebry.pl, zasilanie i kabel USB, zakładanie etykiet i taśmy termotransferowej, włączenie, tryb pauzy, kalibracja pod etykiety i raport konfiguracji z trybem THERMAL-TRANS.',
+    youtubeId: 'ELjvw30iWeM',
+    thumbnail: '/wideo/pierwsze-uruchomienie-zebra-zd220t.jpg',
+    duration: '5:10',
+    category: 'drukarki',
+    tags: ['ZD220t', 'ZD230t', 'pierwsze uruchomienie', 'instalacja drukarki', 'sterownik', 'zakładanie etykiet', 'taśma termotransferowa', 'kalibracja', 'raport konfiguracji'],
+    featured: true
+  },
+  {
     id: '24',
     title: 'Zebra ZC100 / ZC300 — rozpakowanie drukarki kart krok po kroku',
     description: 'Rozpakowanie drukarki kart Zebra ZC100 i ZC300: co znajduje się w zestawie i jak przygotować urządzenie do pierwszego uruchomienia.',

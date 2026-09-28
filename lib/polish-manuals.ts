@@ -5640,6 +5640,9 @@ Zebra ZD220t to kompaktowa, ekonomiczna drukarka etykiet z serii ZD200. Wykorzys
       },
       {
         title: '2. Rozpakowanie i instalacja',
+        videos: [
+          { youtubeId: 'ELjvw30iWeM', title: 'Pierwsze uruchomienie ZD220t i ZD230t krok po kroku', thumbnail: '/wideo/pierwsze-uruchomienie-zebra-zd220t.jpg' },
+        ],
         content: `
 ### Zawartość opakowania
 
@@ -6531,6 +6534,9 @@ Zebra ZD230t to kompaktowa drukarka etykiet z serii ZD200. Wykorzystuje technolo
       },
       {
         title: '2. Rozpakowanie i instalacja',
+        videos: [
+          { youtubeId: 'ELjvw30iWeM', title: 'Pierwsze uruchomienie ZD220t i ZD230t krok po kroku', thumbnail: '/wideo/pierwsze-uruchomienie-zebra-zd220t.jpg' },
+        ],
         content: `
 ### Zawartość opakowania
 
