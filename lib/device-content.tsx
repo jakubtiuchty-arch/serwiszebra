@@ -110,15 +110,15 @@ const FILM_KALIBRACJA_ZD220D_ZD230D: NonNullable<BlogPost['video']> = {
   krotko: 'Kalibracja pod etykiety',
 }
 
-/** „Jak korzystać z obcinaka w drukarce Zebra ZD220d i ZD230d" — obcinak działa w obu modelach tak samo */
-const FILM_OBCINAK_ZD220D_ZD230D: NonNullable<BlogPost['video']> = {
+/** „Jak korzystać z obcinaka w drukarce Zebra ZD230d" — obcinak (gilotyna) to opcja fabryczna tylko ZD230d; ZD220d go nie ma */
+const FILM_OBCINAK_ZD230D: NonNullable<BlogPost['video']> = {
   youtubeId: 'fbp9ZM4bVwo',
-  tytul: 'Jak korzystać z obcinaka w drukarce Zebra ZD220d i ZD230d',
+  tytul: 'Jak korzystać z obcinaka w drukarce Zebra ZD230d',
   opis: 'Poradnik serwis-zebry.pl z polskim lektorem: co tnie obcinak, zakładanie etykiet przez szczelinę obcinaka, kalibracja, tryb pracy z obcinakiem w sterowniku, cięcie bez drukowania i zasady bezpiecznej pracy z ostrzem.',
   kadr: '/wideo/obcinak-zebra-zd220d.jpg',
   czas: 'PT2M41S',
   dodano: '2026-09-28T06:38:12+02:00',
-  podpis: 'Film: obcinak w drukarce Zebra ZD220d i ZD230d krok po kroku (2:41).',
+  podpis: 'Film: obcinak w drukarce Zebra ZD230d krok po kroku (2:41).',
   krotko: 'Praca z obcinakiem',
 }
 
@@ -370,7 +370,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
   },
 
   'zebra-zd220d': {
-    filmy: [FILM_URUCHOMIENIE_ZD220D_ZD230D, FILM_KALIBRACJA_ZD220D_ZD230D, FILM_CZYSZCZENIE_ZD220D_ZD230D, FILM_OBCINAK_ZD220D_ZD230D],
+    filmy: [FILM_URUCHOMIENIE_ZD220D_ZD230D, FILM_KALIBRACJA_ZD220D_ZD230D, FILM_CZYSZCZENIE_ZD220D_ZD230D],
     poradniki: [
       'serwis-drukarki-zebra-zd220-diagnostyka-naprawa',
       'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',
@@ -601,7 +601,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
   },
 
   'zebra-zd230d': {
-    filmy: [FILM_URUCHOMIENIE_ZD220D_ZD230D, FILM_KALIBRACJA_ZD220D_ZD230D, FILM_CZYSZCZENIE_ZD220D_ZD230D, FILM_OBCINAK_ZD220D_ZD230D],
+    filmy: [FILM_URUCHOMIENIE_ZD220D_ZD230D, FILM_KALIBRACJA_ZD220D_ZD230D, FILM_CZYSZCZENIE_ZD220D_ZD230D, FILM_OBCINAK_ZD230D],
     poradniki: [
       'serwis-drukarki-zebra-zd220-diagnostyka-naprawa',
       'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',
