@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { createPortal } from 'react-dom'
 import Image from 'next/image'
 import { Play, X } from 'lucide-react'
 import type { BlogPost } from '@/lib/blog'
@@ -106,10 +107,12 @@ export default function WideoWpisu({
           {kadr}
         </div>
         <figcaption className="mt-1.5 text-xs font-medium leading-snug text-gray-900 sm:text-sm">
-          {film.krotko ?? film.tytul}
-          <span className="ml-1 font-normal text-gray-500">({dlugosc(film.czas)})</span>
+          {film.krotko ?? film.tytul}{' '}
+          <span className="font-normal text-gray-500">({dlugosc(film.czas)})</span>
         </figcaption>
-        {odtwarzany && (
+        {/* Okno idzie portalem do <body>: w karcie produktu sekcja siedzi w warstwie niższej
+            niż przyklejony pasek nawigacji, który inaczej zostawał nad przyciemnieniem */}
+        {odtwarzany && createPortal(
           <div
             role="dialog"
             aria-modal="true"
@@ -130,7 +133,8 @@ export default function WideoWpisu({
               <div className="relative aspect-video overflow-hidden rounded-xl bg-black">{odtwarzacz}</div>
               <p className="mt-2 text-center text-sm text-gray-300">{film.podpis}</p>
             </div>
-          </div>
+          </div>,
+          document.body
         )}
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
       </figure>
