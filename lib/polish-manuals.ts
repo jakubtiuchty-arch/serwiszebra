@@ -5258,6 +5258,7 @@ Zebra ZD220d to kompaktowa, ekonomiczna drukarka etykiet z serii ZD200. Wykorzys
         videos: [
           { youtubeId: 'xhtuxOwwOyY', title: 'Zakładanie etykiet w ZD220d / ZD230d', thumbnail: '/zakładanie_etykiet_zd220d_zd230d.jpeg' },
           { youtubeId: 'qrMRD7N49fY', title: 'Jak używać odklejaka etykiet w ZD220 / ZD230', thumbnail: '/zd220_zd230_odlejak_yt.jpeg' },
+          { youtubeId: 'fbp9ZM4bVwo', title: 'Obcinak w ZD220d i ZD230d krok po kroku', thumbnail: '/wideo/obcinak-zebra-zd220d.jpg' },
         ],
         content: `
 ### Obsługiwane typy materiałów
@@ -5324,6 +5325,7 @@ Naciśnij i przytrzymaj przycisk **POWER** przez 4-9 sekund.
       {
         title: '5. Kalibracja SmartCal',
         videos: [
+          { youtubeId: 'dtO2m7LP11Y', title: 'Kalibracja ZD220d i ZD230d pod swoje etykiety', thumbnail: '/wideo/kalibracja-zebra-zd220d.jpg' },
           { youtubeId: 'l03OFhvhWxY', title: 'Kalibracja czujnika mediów w ZD220 / ZD230', thumbnail: '/kalibracja_zd220_zd230.jpeg' },
         ],
         content: `
@@ -5376,6 +5378,7 @@ Przed podłączeniem drukarki zainstaluj sterowniki ze strony [serwis-zebry.pl/s
       {
         title: '7. Konserwacja i czyszczenie',
         videos: [
+          { youtubeId: 'XLqfM-dAP4o', title: 'Czyszczenie ZD220d i ZD230d: głowica, wałek i czujniki', thumbnail: '/wideo/czyszczenie-zebra-zd220d.jpg' },
           { youtubeId: 'jphduV-XSOg', title: 'Wymiana wałka dociskowego w drukarkach ZD', thumbnail: '/wymiana_wałka_zd.jpeg' },
         ],
         content: `
@@ -6120,6 +6123,7 @@ Zebra ZD230d to kompaktowa drukarka etykiet z serii ZD200. Wykorzystuje technolo
         videos: [
           { youtubeId: 'xhtuxOwwOyY', title: 'Zakładanie etykiet w ZD220d / ZD230d', thumbnail: '/zakładanie_etykiet_zd220d_zd230d.jpeg' },
           { youtubeId: 'qrMRD7N49fY', title: 'Jak używać odklejaka etykiet w ZD220 / ZD230', thumbnail: '/zd220_zd230_odlejak_yt.jpeg' },
+          { youtubeId: 'fbp9ZM4bVwo', title: 'Obcinak w ZD220d i ZD230d krok po kroku', thumbnail: '/wideo/obcinak-zebra-zd220d.jpg' },
         ],
         content: `
 ### Obsługiwane typy materiałów
@@ -6181,6 +6185,7 @@ Drukarka posiada minimalistyczny interfejs:
       {
         title: '5. Kalibracja SmartCal',
         videos: [
+          { youtubeId: 'dtO2m7LP11Y', title: 'Kalibracja ZD220d i ZD230d pod swoje etykiety', thumbnail: '/wideo/kalibracja-zebra-zd220d.jpg' },
           { youtubeId: 'l03OFhvhWxY', title: 'Kalibracja czujnika mediów w ZD220 / ZD230', thumbnail: '/kalibracja_zd220_zd230.jpeg' },
         ],
         content: `
@@ -6266,6 +6271,7 @@ Jeśli drukarka ma fabrycznie zainstalowany moduł Wi-Fi:
       {
         title: '7. Konserwacja i czyszczenie',
         videos: [
+          { youtubeId: 'XLqfM-dAP4o', title: 'Czyszczenie ZD220d i ZD230d: głowica, wałek i czujniki', thumbnail: '/wideo/czyszczenie-zebra-zd220d.jpg' },
           { youtubeId: 'jphduV-XSOg', title: 'Wymiana wałka dociskowego w drukarkach ZD', thumbnail: '/wymiana_wałka_zd.jpeg' },
         ],
         content: `

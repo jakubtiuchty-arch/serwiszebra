@@ -15,10 +15,13 @@ export default function WideoWpisu({
   film,
   priorytet = true,
   className = 'mb-8',
+  rozmiary = '(min-width: 896px) 896px, 100vw',
 }: {
   film: NonNullable<BlogPost['video']>
   priorytet?: boolean
   className?: string
+  /** `sizes` kadru — w siatce kilku filmów na karcie kadr zajmuje połowę szerokości */
+  rozmiary?: string
 }) {
   const [odtwarzany, setOdtwarzany] = useState(false)
 
@@ -57,7 +60,7 @@ export default function WideoWpisu({
               alt=""
               fill
               priority={priorytet}
-              sizes="(min-width: 896px) 896px, 100vw"
+              sizes={rozmiary}
               className="object-cover"
             />
             <span className="absolute inset-0 flex items-center justify-center">

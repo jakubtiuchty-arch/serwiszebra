@@ -197,6 +197,7 @@ export default async function DevicePage({
       ...w,
       tytulSkrocony: w.title.replace(/\s*\[\d{4}\]\s*$/, '').replace(/^Serwis drukarki Zebra /, 'Serwis '),
     }))
+  const filmy = tresc?.filmy ?? []
 
   const zdjecie = zdjecieGlowne(product.slug, product.image_urls)
 
@@ -424,9 +425,9 @@ export default async function DevicePage({
             ['#faq', 'Pytania'],
             ['#specyfikacja', 'Specyfikacja'],
             ['#dokumentacja', 'Dokumentacja'],
-            // Kotwica tylko wtedy, gdy model ma dobrane poradniki albo film — pusty
+            // Kotwica tylko wtedy, gdy model ma dobrane poradniki albo filmy — pusty
             // odnośnik w pasku prowadziłby donikąd
-            ...(poradniki.length > 0 || tresc?.film ? [['#poradniki', 'Poradniki']] : []),
+            ...(poradniki.length > 0 || filmy.length > 0 ? [['#poradniki', 'Poradniki']] : []),
           ].map(([href, label]) => (
             <a
               key={href}
@@ -670,7 +671,7 @@ export default async function DevicePage({
               same okładki i tytuły co na blogu, tylko w mniejszym formacie.
               Dane bierzemy z `lib/blog`, więc karta nie ma własnej kopii
               tytułu, która rozjechałaby się po redakcji wpisu. */}
-          {(poradniki.length > 0 || tresc?.film) && (
+          {(poradniki.length > 0 || filmy.length > 0) && (
             <section
               id="poradniki"
               className="scroll-mt-24 bg-white rounded-xl border border-gray-200 p-4 sm:p-6 mb-4 sm:mb-6"
@@ -679,10 +680,24 @@ export default async function DevicePage({
                 Gdy coś nie działa
               </h2>
               <p className="mt-1 text-sm text-gray-600">Poradniki z naszego warsztatu.</p>
-              {/* Film instruktażowy modelu nad kafelkami wpisów (dziś ZD421t i ZD621t);
-                  odtwarzacz YouTube ładuje się dopiero po kliknięciu kadru */}
-              {tresc?.film && (
-                <WideoWpisu film={tresc.film} priorytet={false} className="mt-4" />
+              {/* Filmy instruktażowe modelu nad kafelkami wpisów: jeden na całą szerokość,
+                  kilka w dwóch kolumnach (ZD220d i ZD230d mają cztery). Odtwarzacz YouTube
+                  ładuje się dopiero po kliknięciu kadru */}
+              {filmy.length === 1 && (
+                <WideoWpisu film={filmy[0]} priorytet={false} className="mt-4" />
+              )}
+              {filmy.length > 1 && (
+                <div className="mt-4 grid gap-x-4 gap-y-5 sm:grid-cols-2">
+                  {filmy.map((film) => (
+                    <WideoWpisu
+                      key={film.youtubeId}
+                      film={film}
+                      priorytet={false}
+                      className=""
+                      rozmiary="(min-width: 896px) 440px, (min-width: 640px) 50vw, 100vw"
+                    />
+                  ))}
+                </div>
               )}
               {poradniki.length > 0 && (
                 <PoradnikiKaruzela

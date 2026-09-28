@@ -55,11 +55,13 @@ export interface TrescKarty {
   faq: { q: string; a: string; href: string; link: string }[]
   spec: [string, string][]
   /**
-   * Film instruktażowy z kanału YouTube w sekcji „Gdy coś nie działa" karty, nad kafelkami
-   * poradników (components/blog/WideoWpisu.tsx, razem ze schematem VideoObject). Tylko na kartach modeli wymienionych w tytule filmu,
-   * nie na kartach materiałów. Kadr w public/wideo/, czas w ISO 8601, `dodano` = publikacja na YouTube.
+   * Filmy instruktażowe z kanału YouTube w sekcji „Gdy coś nie działa" karty, nad kafelkami
+   * poradników (components/blog/WideoWpisu.tsx, każdy ze schematem VideoObject). Jeden film zajmuje
+   * całą szerokość, kilka układa się w dwie kolumny; kolejność = kolejność na karcie. Tylko na kartach
+   * modeli wymienionych w tytule filmu, nie na kartach materiałów. Kadr w public/wideo/, czas w ISO 8601,
+   * `dodano` = publikacja na YouTube.
    */
-  film?: NonNullable<BlogPost['video']>
+  filmy?: NonNullable<BlogPost['video']>[]
 }
 
 /** „Zakładanie taśmy (kalki) w Zebra ZD421t i ZD621t" — procedura jest w obu modelach taka sama */
@@ -91,13 +93,46 @@ const FILM_URUCHOMIENIE_ZD220D_ZD230D: NonNullable<BlogPost['video']> = {
   opis: 'Poradnik serwis-zebry.pl z polskim lektorem: zawartość pudełka, sterownik, zasilanie i kabel USB, zakładanie etykiet, włączenie, tryb pauzy, kalibracja pod etykiety i raport konfiguracji.',
   kadr: '/wideo/pierwsze-uruchomienie-zebra-zd220d.jpg',
   czas: 'PT3M10S',
-  dodano: '2026-09-28T02:02:23+02:00',
+  dodano: '2026-09-28T02:06:37+02:00',
   podpis: 'Film: pierwsze uruchomienie drukarki Zebra ZD220d i ZD230d krok po kroku (3:10).',
+}
+
+/** „Jak skalibrować drukarkę Zebra ZD220d i ZD230d pod swoje etykiety" — procedura jest w obu modelach taka sama */
+const FILM_KALIBRACJA_ZD220D_ZD230D: NonNullable<BlogPost['video']> = {
+  youtubeId: 'dtO2m7LP11Y',
+  tytul: 'Jak skalibrować drukarkę Zebra ZD220d i ZD230d pod swoje etykiety',
+  opis: 'Poradnik serwis-zebry.pl z polskim lektorem: kiedy kalibracja pomaga, co mierzy drukarka, ustawienie ruchomego czujnika, kalibracja przyciskiem FEED do dwóch mignięć diody, sprawdzenie wyniku i kiedy kalibrację powtórzyć.',
+  kadr: '/wideo/kalibracja-zebra-zd220d.jpg',
+  czas: 'PT2M13S',
+  dodano: '2026-09-28T06:35:16+02:00',
+  podpis: 'Film: kalibracja drukarki Zebra ZD220d i ZD230d pod etykiety (2:13).',
+}
+
+/** „Jak korzystać z obcinaka w drukarce Zebra ZD220d i ZD230d" — obcinak działa w obu modelach tak samo */
+const FILM_OBCINAK_ZD220D_ZD230D: NonNullable<BlogPost['video']> = {
+  youtubeId: 'fbp9ZM4bVwo',
+  tytul: 'Jak korzystać z obcinaka w drukarce Zebra ZD220d i ZD230d',
+  opis: 'Poradnik serwis-zebry.pl z polskim lektorem: co tnie obcinak, zakładanie etykiet przez szczelinę obcinaka, kalibracja, tryb pracy z obcinakiem w sterowniku, cięcie bez drukowania i zasady bezpiecznej pracy z ostrzem.',
+  kadr: '/wideo/obcinak-zebra-zd220d.jpg',
+  czas: 'PT2M41S',
+  dodano: '2026-09-28T06:38:12+02:00',
+  podpis: 'Film: obcinak w drukarce Zebra ZD220d i ZD230d krok po kroku (2:41).',
+}
+
+/** „Czyszczenie drukarki Zebra ZD220d i ZD230d: głowica, wałek i czujniki" — procedura jest w obu modelach taka sama */
+const FILM_CZYSZCZENIE_ZD220D_ZD230D: NonNullable<BlogPost['video']> = {
+  youtubeId: 'XLqfM-dAP4o',
+  tytul: 'Czyszczenie drukarki Zebra ZD220d i ZD230d: głowica, wałek i czujniki',
+  opis: 'Poradnik serwis-zebry.pl z polskim lektorem: przybory, czujniki sprężonym powietrzem, wnętrze drukarki, wyjmowanie i czyszczenie wałka, odklejak, obcinak, obudowa oraz głowica pisakiem czyszczącym.',
+  kadr: '/wideo/czyszczenie-zebra-zd220d.jpg',
+  czas: 'PT4M51S',
+  dodano: '2026-09-28T06:42:12+02:00',
+  podpis: 'Film: czyszczenie drukarki Zebra ZD220d i ZD230d krok po kroku (4:51).',
 }
 
 export const TRESC_KART: Record<string, TrescKarty> = {
   'zebra-zd421t': {
-    film: FILM_TASMA_ZD421_ZD621,
+    filmy: [FILM_TASMA_ZD421_ZD621],
     poradniki: [
       'serwis-drukarki-zebra-zd420-zd421-diagnostyka-naprawa',
       'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',
@@ -331,7 +366,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
   },
 
   'zebra-zd220d': {
-    film: FILM_URUCHOMIENIE_ZD220D_ZD230D,
+    filmy: [FILM_URUCHOMIENIE_ZD220D_ZD230D, FILM_KALIBRACJA_ZD220D_ZD230D, FILM_CZYSZCZENIE_ZD220D_ZD230D, FILM_OBCINAK_ZD220D_ZD230D],
     poradniki: [
       'serwis-drukarki-zebra-zd220-diagnostyka-naprawa',
       'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',
@@ -448,7 +483,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
   },
 
   'zebra-zd220t': {
-    film: FILM_TASMA_ZD220_ZD230,
+    filmy: [FILM_TASMA_ZD220_ZD230],
     poradniki: [
       'serwis-drukarki-zebra-zd220-diagnostyka-naprawa',
       'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',
@@ -562,7 +597,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
   },
 
   'zebra-zd230d': {
-    film: FILM_URUCHOMIENIE_ZD220D_ZD230D,
+    filmy: [FILM_URUCHOMIENIE_ZD220D_ZD230D, FILM_KALIBRACJA_ZD220D_ZD230D, FILM_CZYSZCZENIE_ZD220D_ZD230D, FILM_OBCINAK_ZD220D_ZD230D],
     poradniki: [
       'serwis-drukarki-zebra-zd220-diagnostyka-naprawa',
       'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',
@@ -684,7 +719,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     ],
   },
   'zebra-zd230t': {
-    film: FILM_TASMA_ZD220_ZD230,
+    filmy: [FILM_TASMA_ZD220_ZD230],
     poradniki: [
       'serwis-drukarki-zebra-zd220-diagnostyka-naprawa',
       'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',
@@ -957,7 +992,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     ],
   },
   'zebra-zd621t': {
-    film: FILM_TASMA_ZD421_ZD621,
+    filmy: [FILM_TASMA_ZD421_ZD621],
     poradniki: [
       'serwis-drukarki-zebra-zd620-zd621-diagnostyka-naprawa',
       'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',

@@ -79,6 +79,39 @@ const videos: Video[] = [
     featured: true
   },
   {
+    id: '31',
+    title: 'Jak skalibrować drukarkę Zebra ZD220d i ZD230d pod swoje etykiety',
+    description: 'Kalibracja Zebra ZD220d i ZD230d krok po kroku: kiedy pomaga (etykieta staje w złym miejscu, pusta etykieta między wydrukami), co mierzy drukarka, ustawienie ruchomego czujnika, przytrzymanie FEED do dwóch mignięć diody, sprawdzenie wyniku i kiedy kalibrację powtórzyć.',
+    youtubeId: 'dtO2m7LP11Y',
+    thumbnail: '/wideo/kalibracja-zebra-zd220d.jpg',
+    duration: '2:13',
+    category: 'drukarki',
+    tags: ['ZD220d', 'ZD230d', 'kalibracja', 'SmartCal', 'FEED', 'czujnik etykiet', 'przerwa między etykietami'],
+    featured: true
+  },
+  {
+    id: '32',
+    title: 'Jak korzystać z obcinaka w drukarce Zebra ZD220d i ZD230d',
+    description: 'Obcinak w Zebra ZD220d i ZD230d krok po kroku: co można nim ciąć (podkład, papier do paragonów, cienki karton), minimalny odcinek 25,4 mm, zakładanie etykiet przez szczelinę obcinaka, kalibracja, tryb pracy z obcinakiem w sterowniku, cięcie bez drukowania komendą C i bezpieczna praca z ostrzem.',
+    youtubeId: 'fbp9ZM4bVwo',
+    thumbnail: '/wideo/obcinak-zebra-zd220d.jpg',
+    duration: '2:41',
+    category: 'drukarki',
+    tags: ['ZD220d', 'ZD230d', 'obcinak', 'nóż', 'cutter', 'cięcie etykiet', 'tryb obcinania'],
+    featured: true
+  },
+  {
+    id: '33',
+    title: 'Czyszczenie drukarki Zebra ZD220d i ZD230d: głowica, wałek i czujniki',
+    description: 'Czyszczenie Zebra ZD220d i ZD230d krok po kroku: przybory (alkohol izopropylowy co najmniej 90%, sprężone powietrze, pisak do głowicy), czujniki, wnętrze drukarki, wyjmowanie i czyszczenie wałka, odklejak, obcinak bez patyczków i alkoholu, obudowa oraz głowica co pięć rolek.',
+    youtubeId: 'XLqfM-dAP4o',
+    thumbnail: '/wideo/czyszczenie-zebra-zd220d.jpg',
+    duration: '4:51',
+    category: 'drukarki',
+    tags: ['ZD220d', 'ZD230d', 'czyszczenie', 'głowica', 'pisak czyszczący', 'wałek dociskowy', 'czujniki', 'konserwacja'],
+    featured: true
+  },
+  {
     id: '24',
     title: 'Zebra ZC100 / ZC300 — rozpakowanie drukarki kart krok po kroku',
     description: 'Rozpakowanie drukarki kart Zebra ZC100 i ZC300: co znajduje się w zestawie i jak przygotować urządzenie do pierwszego uruchomienia.',
