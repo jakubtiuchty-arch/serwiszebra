@@ -5834,6 +5834,7 @@ Przed podłączeniem drukarki zainstaluj sterowniki ze strony [serwis-zebry.pl/s
       {
         title: '8. Konserwacja i czyszczenie',
         videos: [
+          { youtubeId: '2VfncppErL8', title: 'Czyszczenie ZD220t i ZD230t: głowica, wałek i czujniki', thumbnail: '/wideo/czyszczenie-zebra-zd220t.jpg' },
           { youtubeId: 'jphduV-XSOg', title: 'Wymiana wałka dociskowego w drukarkach ZD', thumbnail: '/wymiana_wałka_zd.jpeg' },
         ],
         content: `
@@ -6764,6 +6765,7 @@ Jeśli drukarka ma fabrycznie zainstalowany moduł Wi-Fi:
       {
         title: '8. Konserwacja i czyszczenie',
         videos: [
+          { youtubeId: '2VfncppErL8', title: 'Czyszczenie ZD220t i ZD230t: głowica, wałek i czujniki', thumbnail: '/wideo/czyszczenie-zebra-zd220t.jpg' },
           { youtubeId: 'jphduV-XSOg', title: 'Wymiana wałka dociskowego w drukarkach ZD', thumbnail: '/wymiana_wałka_zd.jpeg' },
         ],
         content: `

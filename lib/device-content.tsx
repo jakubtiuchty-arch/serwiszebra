@@ -183,6 +183,18 @@ const FILM_CZYSZCZENIE_ZD220D_ZD230D: NonNullable<BlogPost['video']> = {
   krotko: 'Czyszczenie drukarki',
 }
 
+/** „Czyszczenie drukarki Zebra ZD220t i ZD230t" — obcinak czyści się tylko w ZD230t, ZD220t go nie ma */
+const FILM_CZYSZCZENIE_ZD220T_ZD230T: NonNullable<BlogPost['video']> = {
+  youtubeId: '2VfncppErL8',
+  tytul: 'Czyszczenie drukarki Zebra ZD220t i ZD230t: głowica, wałek i czujniki',
+  opis: 'Poradnik serwis-zebry.pl z polskim lektorem: przybory, czujniki sprężonym powietrzem, wnętrze drukarki, wyjmowanie i czyszczenie wałka, odklejak, obcinak w ZD230t, obudowa oraz głowica pisakiem czyszczącym po zdjęciu taśmy.',
+  kadr: '/wideo/czyszczenie-zebra-zd220t.jpg',
+  czas: 'PT5M39S',
+  dodano: '2026-09-29T06:28:19+02:00',
+  podpis: 'Film: czyszczenie drukarki Zebra ZD220t i ZD230t krok po kroku (5:39).',
+  krotko: 'Czyszczenie drukarki',
+}
+
 export const TRESC_KART: Record<string, TrescKarty> = {
   'zebra-zd421t': {
     filmy: [FILM_TASMA_ZD421_ZD621],
@@ -536,7 +548,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
   },
 
   'zebra-zd220t': {
-    filmy: [FILM_URUCHOMIENIE_ZD220T_ZD230T, FILM_KALIBRACJA_ZD220T_ZD230T, FILM_TRYB_DRUKU_ZD220T_ZD230T, FILM_TASMA_ZD220_ZD230],
+    filmy: [FILM_URUCHOMIENIE_ZD220T_ZD230T, FILM_KALIBRACJA_ZD220T_ZD230T, FILM_TRYB_DRUKU_ZD220T_ZD230T, FILM_TASMA_ZD220_ZD230, FILM_CZYSZCZENIE_ZD220T_ZD230T],
     poradniki: [
       'serwis-drukarki-zebra-zd220-diagnostyka-naprawa',
       'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',
@@ -772,7 +784,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     ],
   },
   'zebra-zd230t': {
-    filmy: [FILM_URUCHOMIENIE_ZD220T_ZD230T, FILM_KALIBRACJA_ZD220T_ZD230T, FILM_TRYB_DRUKU_ZD220T_ZD230T, FILM_TASMA_ZD220_ZD230, FILM_OBCINAK_ZD230T],
+    filmy: [FILM_URUCHOMIENIE_ZD220T_ZD230T, FILM_KALIBRACJA_ZD220T_ZD230T, FILM_TRYB_DRUKU_ZD220T_ZD230T, FILM_TASMA_ZD220_ZD230, FILM_CZYSZCZENIE_ZD220T_ZD230T, FILM_OBCINAK_ZD230T],
     poradniki: [
       'serwis-drukarki-zebra-zd220-diagnostyka-naprawa',
       'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',

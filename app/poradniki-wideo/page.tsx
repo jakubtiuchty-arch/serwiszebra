@@ -156,6 +156,17 @@ const videos: Video[] = [
     featured: true
   },
   {
+    id: '38',
+    title: 'Czyszczenie drukarki Zebra ZD220t i ZD230t: głowica, wałek i czujniki',
+    description: 'Czyszczenie Zebra ZD220t i ZD230t krok po kroku: przybory (alkohol izopropylowy co najmniej 90%, sprężone powietrze, pisak do głowicy), czujniki, wnętrze drukarki, wyjmowanie i czyszczenie wałka, odklejak, obcinak w ZD230t bez patyczków i alkoholu, obudowa oraz głowica po zdjęciu taśmy, co pięć rolek albo przy nowej rolce etykiet.',
+    youtubeId: '2VfncppErL8',
+    thumbnail: '/wideo/czyszczenie-zebra-zd220t.jpg',
+    duration: '5:39',
+    category: 'drukarki',
+    tags: ['ZD220t', 'ZD230t', 'czyszczenie', 'głowica', 'pisak czyszczący', 'wałek dociskowy', 'czujniki', 'konserwacja'],
+    featured: true
+  },
+  {
     id: '24',
     title: 'Zebra ZC100 / ZC300 — rozpakowanie drukarki kart krok po kroku',
     description: 'Rozpakowanie drukarki kart Zebra ZC100 i ZC300: co znajduje się w zestawie i jak przygotować urządzenie do pierwszego uruchomienia.',
