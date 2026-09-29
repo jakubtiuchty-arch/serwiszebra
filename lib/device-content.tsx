@@ -255,6 +255,18 @@ const FILM_ETYKIETY_ZD411D_ZD611D: NonNullable<BlogPost['video']> = {
   krotko: 'Wymiana etykiet',
 }
 
+/** „Ręczna kalibracja drukarki Zebra ZD411 i ZD611…" — nagranie ZD411d; instrukcja podaje tę samą procedurę dla wersji d i t */
+const FILM_KALIBRACJA_ZD411_ZD611: NonNullable<BlogPost['video']> = {
+  youtubeId: 'PqqyaVzDLF4',
+  tytul: 'Ręczna kalibracja drukarki Zebra ZD411 i ZD611, gdy SmartCal nie wykrywa etykiet',
+  opis: 'Poradnik serwis-zebry.pl z polskim lektorem: kiedy zamiast kalibracji SmartCal (PAUSE + CANCEL przez 2 sekundy) wybrać ręczną, jak wejść w tryb zaawansowany przyciskiem PAUSE, ustawić czujnik i odcinek 80 mm samego podkładu, a potem zmierzyć podkład i etykiety.',
+  kadr: '/wideo/kalibracja-zebra-zd411.jpg',
+  czas: 'PT3M50S',
+  dodano: '2026-09-29T22:42:41+02:00',
+  podpis: 'Film: ręczna kalibracja drukarki Zebra ZD411 i ZD611 (3:50).',
+  krotko: 'Ręczna kalibracja',
+}
+
 export const TRESC_KART: Record<string, TrescKarty> = {
   'zebra-zd421t': {
     filmy: [FILM_TASMA_ZD421_ZD621],
@@ -1259,7 +1271,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     ],
   },
   'zebra-zd411d': {
-    filmy: [FILM_ETYKIETY_ZD411D_ZD611D],
+    filmy: [FILM_ETYKIETY_ZD411D_ZD611D, FILM_KALIBRACJA_ZD411_ZD611],
     poradniki: [
       'najczestsze-awarie-drukarek-zebra-top10',
       'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',
@@ -1378,6 +1390,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     ],
   },
   'zebra-zd411t': {
+    filmy: [FILM_KALIBRACJA_ZD411_ZD611],
     poradniki: [
       'najczestsze-awarie-drukarek-zebra-top10',
       'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',

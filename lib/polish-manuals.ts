@@ -2660,6 +2660,9 @@ Sprawdź ustawienie na raporcie konfiguracji – **PRINT METHOD** powinno wskazy
       },
       {
         title: '6. Kalibracja SmartCal',
+        videos: [
+          { youtubeId: 'PqqyaVzDLF4', title: 'Ręczna kalibracja ZD411 i ZD611', thumbnail: '/wideo/kalibracja-zebra-zd411.jpg' },
+        ],
         content: `
 Po załadowaniu nowego typu materiału **wykonaj kalibrację**:
 
@@ -3167,6 +3170,9 @@ Krótkie naciśnięcie **POWER** (gdy drukarka jest włączona) wprowadza drukar
       },
       {
         title: '5. Kalibracja SmartCal',
+        videos: [
+          { youtubeId: 'PqqyaVzDLF4', title: 'Ręczna kalibracja ZD411 i ZD611', thumbnail: '/wideo/kalibracja-zebra-zd411.jpg' },
+        ],
         content: `
 Po załadowaniu nowego typu materiału **wykonaj kalibrację**:
 
@@ -3705,6 +3711,9 @@ Drukarki z zainstalowanym modułem łączności mogą **automatycznie uruchamia�
       },
       {
         title: '5. Kalibracja SmartCal',
+        videos: [
+          { youtubeId: 'PqqyaVzDLF4', title: 'Ręczna kalibracja ZD411 i ZD611', thumbnail: '/wideo/kalibracja-zebra-zd411.jpg' },
+        ],
         content: `
 Po załadowaniu nowego typu materiału **wykonaj kalibrację**:
 
@@ -4290,6 +4299,9 @@ Przez wyświetlacz dotykowy:
       },
       {
         title: '6. Kalibracja SmartCal',
+        videos: [
+          { youtubeId: 'PqqyaVzDLF4', title: 'Ręczna kalibracja ZD411 i ZD611', thumbnail: '/wideo/kalibracja-zebra-zd411.jpg' },
+        ],
         content: `
 Po załadowaniu nowego typu materiału **wykonaj kalibrację**:
 

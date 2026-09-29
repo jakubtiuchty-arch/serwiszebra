@@ -222,6 +222,17 @@ const videos: Video[] = [
     featured: true
   },
   {
+    id: '44',
+    title: 'Ręczna kalibracja drukarki Zebra ZD411 i ZD611, gdy SmartCal nie wykrywa etykiet',
+    description: 'Ręczna kalibracja Zebra ZD411 i ZD611 dla etykiet, których nie rozpoznaje SmartCal (PAUSE + CANCEL przez 2 sekundy): tryb zaawansowany po przytrzymaniu PAUSE przez 2 sekundy, ustawienie ruchomego czujnika, około 80 mm samego podkładu na wałku, pomiar podkładu, potem pomiar etykiet i sprawdzenie przyciskiem FEED.',
+    youtubeId: 'PqqyaVzDLF4',
+    thumbnail: '/wideo/kalibracja-zebra-zd411.jpg',
+    duration: '3:50',
+    category: 'drukarki',
+    tags: ['ZD411', 'ZD611', 'ręczna kalibracja', 'kalibracja', 'SmartCal', 'tryb zaawansowany', 'czujnik etykiet'],
+    featured: true
+  },
+  {
     id: '24',
     title: 'Zebra ZC100 / ZC300 — rozpakowanie drukarki kart krok po kroku',
     description: 'Rozpakowanie drukarki kart Zebra ZC100 i ZC300: co znajduje się w zestawie i jak przygotować urządzenie do pierwszego uruchomienia.',
