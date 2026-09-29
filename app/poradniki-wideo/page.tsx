@@ -263,16 +263,6 @@ const videos: Video[] = [
     featured: true
   },
   {
-    id: '2',
-    title: 'Przyciski, porty i złącza w Zebra ZD220 / ZD230',
-    description: 'Omówienie przycisków, portów komunikacyjnych (USB, Ethernet, Serial) oraz gniazda zasilania w drukarkach ZD220 i ZD230.',
-    youtubeId: '6Pbi_A8fAnU',
-    thumbnail: '/Funkcje drukarki - jak rozpoznać funkcje i możliwości urządzenia Zebra ZD220_ZD230d.jpeg',
-    duration: '3:00',
-    category: 'drukarki',
-    tags: ['ZD220', 'ZD230', 'przyciski', 'porty', 'USB', 'zasilanie'],
-  },
-  {
     id: '9',
     title: 'Porty i złącza w Zebra ZD421t',
     description: 'Omówienie portów komunikacyjnych w drukarce termotransferowej Zebra ZD421t: USB Host, USB Device, Ethernet, Serial. Podłączenie i konfiguracja.',
@@ -351,16 +341,6 @@ const videos: Video[] = [
     duration: '5:00',
     category: 'drukarki',
     tags: ['ZD421', 'głowica', 'wymiana głowicy', 'printhead', 'naprawa'],
-  },
-  {
-    id: '18',
-    title: 'Używanie noża (cuttera) w drukarkach Zebra',
-    description: 'Jak prawidłowo używać wbudowanego noża do cięcia etykiet w drukarkach Zebra. Konfiguracja trybu cięcia, konserwacja i rozwiązywanie problemów.',
-    youtubeId: 'tSKUHfDkaZU',
-    thumbnail: '/używanie_noża.jpeg',
-    duration: '4:30',
-    category: 'drukarki',
-    tags: ['cutter', 'nóż', 'cięcie etykiet', 'konfiguracja', 'konserwacja'],
   },
   {
     id: '19',

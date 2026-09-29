@@ -131,7 +131,6 @@ Zebra ZD421t to kompaktowa drukarka etykiet wykorzystująca technologię **druku
         videos: [
           { youtubeId: '-VtXee8Cn3k', title: 'Zakładanie etykiet w ZD421t', thumbnail: '/jak-zalozyc-etykiety-do-drukarki-zebra-zd421t.jpeg' },
           { youtubeId: 'hzBiOxz-QbI', title: 'Montaż odklejaka etykiet w ZD421', thumbnail: '/montaż_odklejak_zd421.jpeg' },
-          { youtubeId: 'tSKUHfDkaZU', title: 'Używanie noża (cuttera) w drukarkach Zebra', thumbnail: '/używanie_noża.jpeg' },
         ],
         content: `
 ### Obsługiwane typy materiałów
@@ -595,7 +594,6 @@ Zebra ZD421d to kompaktowa drukarka etykiet wykorzystująca technologię **druku
         videos: [
           { youtubeId: '-VtXee8Cn3k', title: 'Zakładanie etykiet w ZD421t', thumbnail: '/jak-zalozyc-etykiety-do-drukarki-zebra-zd421t.jpeg' },
           { youtubeId: 'hzBiOxz-QbI', title: 'Montaż odklejaka etykiet w ZD421', thumbnail: '/montaż_odklejak_zd421.jpeg' },
-          { youtubeId: 'tSKUHfDkaZU', title: 'Używanie noża (cuttera) w drukarkach Zebra', thumbnail: '/używanie_noża.jpeg' },
         ],
         content: `
 ### Obsługiwane typy materiałów
@@ -1018,7 +1016,6 @@ Zebra ZD621t to zaawansowana drukarka etykiet z serii **Premium**, wykorzystują
         title: '3. Ładowanie etykiet',
         videos: [
           { youtubeId: '-VtXee8Cn3k', title: 'Zakładanie etykiet w ZD421t', thumbnail: '/jak-zalozyc-etykiety-do-drukarki-zebra-zd421t.jpeg' },
-          { youtubeId: 'tSKUHfDkaZU', title: 'Używanie noża (cuttera) w drukarkach Zebra', thumbnail: '/używanie_noża.jpeg' },
         ],
         content: `
 ### Obsługiwane typy materiałów
@@ -1542,7 +1539,6 @@ Zebra ZD621d to zaawansowana drukarka etykiet z serii **Premium**, wykorzystują
         title: '3. Ładowanie etykiet',
         videos: [
           { youtubeId: '-VtXee8Cn3k', title: 'Zakładanie etykiet w ZD421t', thumbnail: '/jak-zalozyc-etykiety-do-drukarki-zebra-zd421t.jpeg' },
-          { youtubeId: 'tSKUHfDkaZU', title: 'Używanie noża (cuttera) w drukarkach Zebra', thumbnail: '/używanie_noża.jpeg' },
         ],
         content: `
 ### Obsługiwane typy materiałów
@@ -2743,9 +2739,6 @@ Jeśli drukarka ma port szeregowy:
       },
       {
         title: '8. Funkcje dodatkowe',
-        videos: [
-          { youtubeId: 'tSKUHfDkaZU', title: 'Używanie noża (cuttera) w drukarkach Zebra', thumbnail: '/używanie_noża.jpeg' },
-        ],
         content: `
 ### Zebra Print Touch (NFC)
 
@@ -3255,9 +3248,6 @@ Jeśli drukarka ma port szeregowy:
       },
       {
         title: '7. Funkcje dodatkowe',
-        videos: [
-          { youtubeId: 'tSKUHfDkaZU', title: 'Używanie noża (cuttera) w drukarkach Zebra', thumbnail: '/używanie_noża.jpeg' },
-        ],
         content: `
 ### Zebra Print Touch (NFC)
 
@@ -3795,9 +3785,6 @@ Jeśli drukarka ma port szeregowy:
       },
       {
         title: '7. Funkcje dodatkowe',
-        videos: [
-          { youtubeId: 'tSKUHfDkaZU', title: 'Używanie noża (cuttera) w drukarkach Zebra', thumbnail: '/używanie_noża.jpeg' },
-        ],
         content: `
 ### Zebra Print Touch (NFC)
 
@@ -4375,9 +4362,6 @@ Przyłóż telefon z włączonym NFC do logo **Zebra Print Touch** na obudowie d
       },
       {
         title: '8. Tryby druku i opcje',
-        videos: [
-          { youtubeId: 'tSKUHfDkaZU', title: 'Używanie noża (cuttera) w drukarkach Zebra', thumbnail: '/używanie_noża.jpeg' },
-        ],
         content: `
 ### Tryby druku (Collection Method)
 
@@ -5284,9 +5268,6 @@ Zebra ZD220d to kompaktowa, ekonomiczna drukarka etykiet z serii ZD200. Wykorzys
       },
       {
         title: '4. Panel sterowania i LED',
-        videos: [
-          { youtubeId: '6Pbi_A8fAnU', title: 'Przyciski, porty i złącza w ZD220 / ZD230', thumbnail: '/Funkcje drukarki - jak rozpoznać funkcje i możliwości urządzenia Zebra ZD220_ZD230d.jpeg' },
-        ],
         content: `
 Drukarka posiada minimalistyczny interfejs:
 
@@ -5672,7 +5653,6 @@ Zebra ZD220t to kompaktowa, ekonomiczna drukarka etykiet z serii ZD200. Wykorzys
       {
         title: '3. Ładowanie etykiet',
         videos: [
-          { youtubeId: 'xhtuxOwwOyY', title: 'Zakładanie etykiet w ZD220d / ZD230d', thumbnail: '/zakładanie_etykiet_zd220d_zd230d.jpeg' },
           { youtubeId: 'jgjQNMyaZXc', title: 'Odklejak w ZD220t i ZD230t krok po kroku', thumbnail: '/wideo/odklejak-zebra-zd220t.jpg' },
         ],
         content: `
@@ -5743,7 +5723,6 @@ Zebra ZD220t to kompaktowa, ekonomiczna drukarka etykiet z serii ZD200. Wykorzys
       {
         title: '5. Panel sterowania i LED',
         videos: [
-          { youtubeId: '6Pbi_A8fAnU', title: 'Przyciski, porty i złącza w ZD220 / ZD230', thumbnail: '/Funkcje drukarki - jak rozpoznać funkcje i możliwości urządzenia Zebra ZD220_ZD230d.jpeg' },
           { youtubeId: 'oU0h6IgePYE', title: 'Zmiana trybu druku w ZD220t i ZD230t', thumbnail: '/wideo/tryb-druku-zebra-zd220t.jpg' },
         ],
         content: `
@@ -6154,9 +6133,6 @@ Zebra ZD230d to kompaktowa drukarka etykiet z serii ZD200. Wykorzystuje technolo
       },
       {
         title: '4. Panel sterowania i LED',
-        videos: [
-          { youtubeId: '6Pbi_A8fAnU', title: 'Przyciski, porty i złącza w ZD220 / ZD230', thumbnail: '/Funkcje drukarki - jak rozpoznać funkcje i możliwości urządzenia Zebra ZD220_ZD230d.jpeg' },
-        ],
         content: `
 Drukarka posiada minimalistyczny interfejs:
 
@@ -6571,7 +6547,6 @@ Zebra ZD230t to kompaktowa drukarka etykiet z serii ZD200. Wykorzystuje technolo
       {
         title: '3. Ładowanie etykiet',
         videos: [
-          { youtubeId: 'xhtuxOwwOyY', title: 'Zakładanie etykiet w ZD220d / ZD230d', thumbnail: '/zakładanie_etykiet_zd220d_zd230d.jpeg' },
           { youtubeId: 'jgjQNMyaZXc', title: 'Odklejak w ZD220t i ZD230t krok po kroku', thumbnail: '/wideo/odklejak-zebra-zd220t.jpg' },
           { youtubeId: 'gcjmI65mknk', title: 'Obcinak w ZD230t krok po kroku', thumbnail: '/wideo/obcinak-zebra-zd230t.jpg' },
         ],
@@ -6643,7 +6618,6 @@ Zebra ZD230t to kompaktowa drukarka etykiet z serii ZD200. Wykorzystuje technolo
       {
         title: '5. Panel sterowania i LED',
         videos: [
-          { youtubeId: '6Pbi_A8fAnU', title: 'Przyciski, porty i złącza w ZD220 / ZD230', thumbnail: '/Funkcje drukarki - jak rozpoznać funkcje i możliwości urządzenia Zebra ZD220_ZD230d.jpeg' },
           { youtubeId: 'oU0h6IgePYE', title: 'Zmiana trybu druku w ZD220t i ZD230t', thumbnail: '/wideo/tryb-druku-zebra-zd220t.jpg' },
         ],
         content: `
