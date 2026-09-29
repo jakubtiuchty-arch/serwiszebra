@@ -5670,7 +5670,7 @@ Zebra ZD220t to kompaktowa, ekonomiczna drukarka etykiet z serii ZD200. Wykorzys
         title: '3. Ładowanie etykiet',
         videos: [
           { youtubeId: 'xhtuxOwwOyY', title: 'Zakładanie etykiet w ZD220d / ZD230d', thumbnail: '/zakładanie_etykiet_zd220d_zd230d.jpeg' },
-          { youtubeId: 'qrMRD7N49fY', title: 'Jak używać odklejaka etykiet w ZD220 / ZD230', thumbnail: '/zd220_zd230_odlejak_yt.jpeg' },
+          { youtubeId: 'jgjQNMyaZXc', title: 'Odklejak w ZD220t i ZD230t krok po kroku', thumbnail: '/wideo/odklejak-zebra-zd220t.jpg' },
         ],
         content: `
 ### Obsługiwane typy materiałów
@@ -6566,7 +6566,7 @@ Zebra ZD230t to kompaktowa drukarka etykiet z serii ZD200. Wykorzystuje technolo
         title: '3. Ładowanie etykiet',
         videos: [
           { youtubeId: 'xhtuxOwwOyY', title: 'Zakładanie etykiet w ZD220d / ZD230d', thumbnail: '/zakładanie_etykiet_zd220d_zd230d.jpeg' },
-          { youtubeId: 'qrMRD7N49fY', title: 'Jak używać odklejaka etykiet w ZD220 / ZD230', thumbnail: '/zd220_zd230_odlejak_yt.jpeg' },
+          { youtubeId: 'jgjQNMyaZXc', title: 'Odklejak w ZD220t i ZD230t krok po kroku', thumbnail: '/wideo/odklejak-zebra-zd220t.jpg' },
           { youtubeId: 'gcjmI65mknk', title: 'Obcinak w ZD230t krok po kroku', thumbnail: '/wideo/obcinak-zebra-zd230t.jpg' },
         ],
         content: `

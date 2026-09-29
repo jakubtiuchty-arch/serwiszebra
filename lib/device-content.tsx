@@ -195,6 +195,18 @@ const FILM_CZYSZCZENIE_ZD220T_ZD230T: NonNullable<BlogPost['video']> = {
   krotko: 'Czyszczenie drukarki',
 }
 
+/** „Jak korzystać z odklejaka w drukarce Zebra ZD220t i ZD230t" — odklejak jest opcją fabryczną obu modeli */
+const FILM_ODKLEJAK_ZD220T_ZD230T: NonNullable<BlogPost['video']> = {
+  youtubeId: 'jgjQNMyaZXc',
+  tytul: 'Jak korzystać z odklejaka w drukarce Zebra ZD220t i ZD230t',
+  opis: 'Poradnik serwis-zebry.pl z polskim lektorem: jak działa odklejak, zakładanie etykiet i taśmy, kalibracja, przełożenie podkładu przez drzwiczki odklejaka, tryb Peel-Off w sterowniku i Zebra Setup Utilities oraz czyszczenie listwy, rolki i czujnika pobrania etykiety.',
+  kadr: '/wideo/odklejak-zebra-zd220t.jpg',
+  czas: 'PT3M47S',
+  dodano: '2026-09-29T09:21:32+02:00',
+  podpis: 'Film: odklejak w drukarce Zebra ZD220t i ZD230t krok po kroku (3:47).',
+  krotko: 'Praca z odklejakiem',
+}
+
 export const TRESC_KART: Record<string, TrescKarty> = {
   'zebra-zd421t': {
     filmy: [FILM_TASMA_ZD421_ZD621],
@@ -548,7 +560,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
   },
 
   'zebra-zd220t': {
-    filmy: [FILM_URUCHOMIENIE_ZD220T_ZD230T, FILM_KALIBRACJA_ZD220T_ZD230T, FILM_TRYB_DRUKU_ZD220T_ZD230T, FILM_TASMA_ZD220_ZD230, FILM_CZYSZCZENIE_ZD220T_ZD230T],
+    filmy: [FILM_URUCHOMIENIE_ZD220T_ZD230T, FILM_KALIBRACJA_ZD220T_ZD230T, FILM_TRYB_DRUKU_ZD220T_ZD230T, FILM_TASMA_ZD220_ZD230, FILM_CZYSZCZENIE_ZD220T_ZD230T, FILM_ODKLEJAK_ZD220T_ZD230T],
     poradniki: [
       'serwis-drukarki-zebra-zd220-diagnostyka-naprawa',
       'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',
@@ -784,7 +796,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     ],
   },
   'zebra-zd230t': {
-    filmy: [FILM_URUCHOMIENIE_ZD220T_ZD230T, FILM_KALIBRACJA_ZD220T_ZD230T, FILM_TRYB_DRUKU_ZD220T_ZD230T, FILM_TASMA_ZD220_ZD230, FILM_CZYSZCZENIE_ZD220T_ZD230T, FILM_OBCINAK_ZD230T],
+    filmy: [FILM_URUCHOMIENIE_ZD220T_ZD230T, FILM_KALIBRACJA_ZD220T_ZD230T, FILM_TRYB_DRUKU_ZD220T_ZD230T, FILM_TASMA_ZD220_ZD230, FILM_CZYSZCZENIE_ZD220T_ZD230T, FILM_ODKLEJAK_ZD220T_ZD230T, FILM_OBCINAK_ZD230T],
     poradniki: [
       'serwis-drukarki-zebra-zd220-diagnostyka-naprawa',
       'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',
