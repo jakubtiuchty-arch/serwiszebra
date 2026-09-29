@@ -5325,7 +5325,6 @@ Naciśnij i przytrzymaj przycisk **POWER** przez 4-9 sekund.
         title: '5. Kalibracja SmartCal',
         videos: [
           { youtubeId: 'dtO2m7LP11Y', title: 'Kalibracja ZD220d i ZD230d pod swoje etykiety', thumbnail: '/wideo/kalibracja-zebra-zd220d.jpg' },
-          { youtubeId: 'l03OFhvhWxY', title: 'Kalibracja czujnika mediów w ZD220 / ZD230', thumbnail: '/kalibracja_zd220_zd230.jpeg' },
         ],
         content: `
 Po załadowaniu nowego typu materiału **wykonaj kalibrację**:
@@ -5781,7 +5780,6 @@ Sprawdź ustawienie na raporcie konfiguracji – **PRINT METHOD** powinno wskazy
         title: '6. Kalibracja SmartCal',
         videos: [
           { youtubeId: 'L1ACoQzrGcM', title: 'Kalibracja ZD220t i ZD230t pod swoje etykiety', thumbnail: '/wideo/kalibracja-zebra-zd220t.jpg' },
-          { youtubeId: 'l03OFhvhWxY', title: 'Kalibracja czujnika mediów w ZD220 / ZD230', thumbnail: '/kalibracja_zd220_zd230.jpeg' },
         ],
         content: `
 Po załadowaniu nowego typu materiału lub ribbonu **wykonaj kalibrację**:
@@ -6189,7 +6187,6 @@ Drukarka posiada minimalistyczny interfejs:
         title: '5. Kalibracja SmartCal',
         videos: [
           { youtubeId: 'dtO2m7LP11Y', title: 'Kalibracja ZD220d i ZD230d pod swoje etykiety', thumbnail: '/wideo/kalibracja-zebra-zd220d.jpg' },
-          { youtubeId: 'l03OFhvhWxY', title: 'Kalibracja czujnika mediów w ZD220 / ZD230', thumbnail: '/kalibracja_zd220_zd230.jpeg' },
         ],
         content: `
 Po załadowaniu nowego typu materiału **wykonaj kalibrację**:
@@ -6679,7 +6676,6 @@ Sprawdź ustawienie na raporcie konfiguracji – **PRINT METHOD** powinno wskazy
         title: '6. Kalibracja SmartCal',
         videos: [
           { youtubeId: 'L1ACoQzrGcM', title: 'Kalibracja ZD220t i ZD230t pod swoje etykiety', thumbnail: '/wideo/kalibracja-zebra-zd220t.jpg' },
-          { youtubeId: 'l03OFhvhWxY', title: 'Kalibracja czujnika mediów w ZD220 / ZD230', thumbnail: '/kalibracja_zd220_zd230.jpeg' },
         ],
         content: `
 Po załadowaniu nowego typu materiału lub ribbonu **wykonaj kalibrację**:

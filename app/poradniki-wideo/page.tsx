@@ -259,16 +259,6 @@ const videos: Video[] = [
     tags: ['ZD421d', 'ZD421t', 'self-test', 'konfiguracja', 'wydruk testowy'],
   },
   {
-    id: '11',
-    title: 'Kalibracja czujnika mediów w Zebra ZD220 / ZD230',
-    description: 'Jak przeprowadzić kalibrację czujnika etykiet w drukarkach Zebra ZD220 i ZD230. Rozwiązanie problemów z wykrywaniem etykiet i pustymi wydrukami.',
-    youtubeId: 'l03OFhvhWxY',
-    thumbnail: '/kalibracja_zd220_zd230.jpeg',
-    duration: '3:30',
-    category: 'drukarki',
-    tags: ['ZD220', 'ZD230', 'kalibracja', 'czujnik mediów', 'etykiety'],
-  },
-  {
     id: '12',
     title: 'Konfiguracja sieci LAN w drukarkach Zebra',
     description: 'Jak skonfigurować połączenie sieciowe Ethernet (LAN) w drukarkach Zebra. Ustawienia IP, DHCP, maska podsieci i brama domyślna.',
