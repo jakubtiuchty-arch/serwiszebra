@@ -5256,8 +5256,8 @@ Zebra ZD220d to kompaktowa, ekonomiczna drukarka etykiet z serii ZD200. Wykorzys
       {
         title: '3. Ładowanie etykiet',
         videos: [
-          { youtubeId: 'xhtuxOwwOyY', title: 'Zakładanie etykiet w ZD220d / ZD230d', thumbnail: '/zakładanie_etykiet_zd220d_zd230d.jpeg' },
-          { youtubeId: 'qrMRD7N49fY', title: 'Jak używać odklejaka etykiet w ZD220 / ZD230', thumbnail: '/zd220_zd230_odlejak_yt.jpeg' },
+          { youtubeId: '0eWE-MpNMCY', title: 'Wymiana etykiet w ZD220d i ZD230d', thumbnail: '/wideo/wymiana-etykiet-zebra-zd220d.jpg' },
+          { youtubeId: 'DN8bXpS9x-g', title: 'Odklejak w ZD220d i ZD230d krok po kroku', thumbnail: '/wideo/odklejak-zebra-zd220d.jpg' },
         ],
         content: `
 ### Obsługiwane typy materiałów
@@ -5604,6 +5604,9 @@ Drukarka jest przegrzana – poczekaj aż ostygnie. Upewnij się, że wokół dr
     sections: [
       {
         title: '1. Podstawowe informacje',
+        videos: [
+          { youtubeId: 'zGZbkyPhuhQ', title: 'Budowa ZD220t i ZD230t: przyciski, złącza i wnętrze', thumbnail: '/wideo/budowa-zebra-zd220t.jpg' },
+        ],
         content: `
 ### O drukarce Zebra ZD220t
 
@@ -6122,8 +6125,8 @@ Zebra ZD230d to kompaktowa drukarka etykiet z serii ZD200. Wykorzystuje technolo
       {
         title: '3. Ładowanie etykiet',
         videos: [
-          { youtubeId: 'xhtuxOwwOyY', title: 'Zakładanie etykiet w ZD220d / ZD230d', thumbnail: '/zakładanie_etykiet_zd220d_zd230d.jpeg' },
-          { youtubeId: 'qrMRD7N49fY', title: 'Jak używać odklejaka etykiet w ZD220 / ZD230', thumbnail: '/zd220_zd230_odlejak_yt.jpeg' },
+          { youtubeId: '0eWE-MpNMCY', title: 'Wymiana etykiet w ZD220d i ZD230d', thumbnail: '/wideo/wymiana-etykiet-zebra-zd220d.jpg' },
+          { youtubeId: 'DN8bXpS9x-g', title: 'Odklejak w ZD220d i ZD230d krok po kroku', thumbnail: '/wideo/odklejak-zebra-zd220d.jpg' },
           { youtubeId: 'tdRmdYcLuJ4', title: 'Obcinak w ZD230d krok po kroku', thumbnail: '/wideo/obcinak-zebra-zd230d.jpg' },
         ],
         content: `
@@ -6494,6 +6497,9 @@ Jeśli drukarka ma fabrycznie zainstalowany moduł Wi-Fi:
     sections: [
       {
         title: '1. Podstawowe informacje',
+        videos: [
+          { youtubeId: 'zGZbkyPhuhQ', title: 'Budowa ZD220t i ZD230t: przyciski, złącza i wnętrze', thumbnail: '/wideo/budowa-zebra-zd220t.jpg' },
+        ],
         content: `
 ### O drukarce Zebra ZD230t
 

@@ -207,6 +207,42 @@ const FILM_ODKLEJAK_ZD220T_ZD230T: NonNullable<BlogPost['video']> = {
   krotko: 'Praca z odklejakiem',
 }
 
+/** „Budowa drukarki Zebra ZD220t i ZD230t" — ta sama obudowa; Ethernet albo Wi-Fi i obcinak tylko w ZD230t */
+const FILM_BUDOWA_ZD220T_ZD230T: NonNullable<BlogPost['video']> = {
+  youtubeId: 'zGZbkyPhuhQ',
+  tytul: 'Budowa drukarki Zebra ZD220t i ZD230t: przyciski, złącza i wnętrze',
+  opis: 'Poradnik serwis-zebry.pl z polskim lektorem: panel sterowania (zasilanie, dioda stanu, FEED), złącza z tyłu (USB w obu modelach, Ethernet albo Wi-Fi i Bluetooth tylko w ZD230t), wnętrze z rolką, taśmą i czujnikami, głowica drukująca oraz odklejak i obcinak (obcinak tylko w ZD230t).',
+  kadr: '/wideo/budowa-zebra-zd220t.jpg',
+  czas: 'PT4M35S',
+  dodano: '2026-09-29T13:31:32+02:00',
+  podpis: 'Film: budowa drukarki Zebra ZD220t i ZD230t (4:35).',
+  krotko: 'Budowa drukarki',
+}
+
+/** „Jak korzystać z odklejaka w drukarce Zebra ZD220d i ZD230d" — odklejak jest opcją fabryczną obu modeli */
+const FILM_ODKLEJAK_ZD220D_ZD230D: NonNullable<BlogPost['video']> = {
+  youtubeId: 'DN8bXpS9x-g',
+  tytul: 'Jak korzystać z odklejaka w drukarce Zebra ZD220d i ZD230d',
+  opis: 'Poradnik serwis-zebry.pl z polskim lektorem: jak działa odklejak, zakładanie etykiet, kalibracja, przełożenie podkładu przez drzwiczki odklejaka, tryb Peel-Off w sterowniku, w Zebra Setup Utilities i komendą ZPL oraz czyszczenie odklejaka.',
+  kadr: '/wideo/odklejak-zebra-zd220d.jpg',
+  czas: 'PT4M19S',
+  dodano: '2026-09-29T12:56:34+02:00',
+  podpis: 'Film: odklejak w drukarce Zebra ZD220d i ZD230d krok po kroku (4:19).',
+  krotko: 'Praca z odklejakiem',
+}
+
+/** „Jak wymienić etykiety w drukarce Zebra ZD220d i ZD230d" — koniec etykiet, nowa rolka, inny materiał i kalibracja */
+const FILM_ETYKIETY_ZD220D_ZD230D: NonNullable<BlogPost['video']> = {
+  youtubeId: '0eWE-MpNMCY',
+  tytul: 'Jak wymienić etykiety w drukarce Zebra ZD220d i ZD230d',
+  opis: 'Poradnik serwis-zebry.pl z polskim lektorem: czerwona dioda przy końcu etykiet, wymiana rolki na taką samą bez kalibracji, przejście na materiał ciągły albo etykiety z czarnym znacznikiem, ustawienie czujnika i kalibracja pod nowe etykiety.',
+  kadr: '/wideo/wymiana-etykiet-zebra-zd220d.jpg',
+  czas: 'PT4M31S',
+  dodano: '2026-09-29T12:58:37+02:00',
+  podpis: 'Film: wymiana etykiet w drukarce Zebra ZD220d i ZD230d (4:31).',
+  krotko: 'Wymiana etykiet',
+}
+
 export const TRESC_KART: Record<string, TrescKarty> = {
   'zebra-zd421t': {
     filmy: [FILM_TASMA_ZD421_ZD621],
@@ -443,7 +479,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
   },
 
   'zebra-zd220d': {
-    filmy: [FILM_URUCHOMIENIE_ZD220D_ZD230D, FILM_KALIBRACJA_ZD220D_ZD230D, FILM_CZYSZCZENIE_ZD220D_ZD230D],
+    filmy: [FILM_URUCHOMIENIE_ZD220D_ZD230D, FILM_ETYKIETY_ZD220D_ZD230D, FILM_KALIBRACJA_ZD220D_ZD230D, FILM_CZYSZCZENIE_ZD220D_ZD230D, FILM_ODKLEJAK_ZD220D_ZD230D],
     poradniki: [
       'serwis-drukarki-zebra-zd220-diagnostyka-naprawa',
       'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',
@@ -560,7 +596,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
   },
 
   'zebra-zd220t': {
-    filmy: [FILM_URUCHOMIENIE_ZD220T_ZD230T, FILM_KALIBRACJA_ZD220T_ZD230T, FILM_TRYB_DRUKU_ZD220T_ZD230T, FILM_TASMA_ZD220_ZD230, FILM_CZYSZCZENIE_ZD220T_ZD230T, FILM_ODKLEJAK_ZD220T_ZD230T],
+    filmy: [FILM_BUDOWA_ZD220T_ZD230T, FILM_URUCHOMIENIE_ZD220T_ZD230T, FILM_KALIBRACJA_ZD220T_ZD230T, FILM_TRYB_DRUKU_ZD220T_ZD230T, FILM_TASMA_ZD220_ZD230, FILM_CZYSZCZENIE_ZD220T_ZD230T, FILM_ODKLEJAK_ZD220T_ZD230T],
     poradniki: [
       'serwis-drukarki-zebra-zd220-diagnostyka-naprawa',
       'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',
@@ -674,7 +710,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
   },
 
   'zebra-zd230d': {
-    filmy: [FILM_URUCHOMIENIE_ZD220D_ZD230D, FILM_KALIBRACJA_ZD220D_ZD230D, FILM_CZYSZCZENIE_ZD220D_ZD230D, FILM_OBCINAK_ZD230D],
+    filmy: [FILM_URUCHOMIENIE_ZD220D_ZD230D, FILM_ETYKIETY_ZD220D_ZD230D, FILM_KALIBRACJA_ZD220D_ZD230D, FILM_CZYSZCZENIE_ZD220D_ZD230D, FILM_ODKLEJAK_ZD220D_ZD230D, FILM_OBCINAK_ZD230D],
     poradniki: [
       'serwis-drukarki-zebra-zd220-diagnostyka-naprawa',
       'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',
@@ -796,7 +832,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     ],
   },
   'zebra-zd230t': {
-    filmy: [FILM_URUCHOMIENIE_ZD220T_ZD230T, FILM_KALIBRACJA_ZD220T_ZD230T, FILM_TRYB_DRUKU_ZD220T_ZD230T, FILM_TASMA_ZD220_ZD230, FILM_CZYSZCZENIE_ZD220T_ZD230T, FILM_ODKLEJAK_ZD220T_ZD230T, FILM_OBCINAK_ZD230T],
+    filmy: [FILM_BUDOWA_ZD220T_ZD230T, FILM_URUCHOMIENIE_ZD220T_ZD230T, FILM_KALIBRACJA_ZD220T_ZD230T, FILM_TRYB_DRUKU_ZD220T_ZD230T, FILM_TASMA_ZD220_ZD230, FILM_CZYSZCZENIE_ZD220T_ZD230T, FILM_ODKLEJAK_ZD220T_ZD230T, FILM_OBCINAK_ZD230T],
     poradniki: [
       'serwis-drukarki-zebra-zd220-diagnostyka-naprawa',
       'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',

@@ -178,6 +178,39 @@ const videos: Video[] = [
     featured: true
   },
   {
+    id: '40',
+    title: 'Budowa drukarki Zebra ZD220t i ZD230t: przyciski, złącza i wnętrze',
+    description: 'Budowa Zebra ZD220t i ZD230t: przycisk zasilania, dioda stanu i FEED (raport konfiguracji, kalibracja, ustawienia fabryczne), złącza z tyłu (USB w obu modelach, Ethernet albo Wi-Fi i Bluetooth tylko w ZD230t), wnętrze z uchwytami rolki, trzpieniami taśmy i czujnikami, głowica drukująca oraz odklejak i obcinak (obcinak tylko w ZD230t).',
+    youtubeId: 'zGZbkyPhuhQ',
+    thumbnail: '/wideo/budowa-zebra-zd220t.jpg',
+    duration: '4:35',
+    category: 'drukarki',
+    tags: ['ZD220t', 'ZD230t', 'budowa drukarki', 'panel sterowania', 'dioda stanu', 'złącza', 'głowica', 'czujnik etykiet'],
+    featured: true
+  },
+  {
+    id: '41',
+    title: 'Jak korzystać z odklejaka w drukarce Zebra ZD220d i ZD230d',
+    description: 'Odklejak (dispenser, peel-off) w Zebra ZD220d i ZD230d krok po kroku: jak oddziela etykietę od podkładu, zakładanie etykiet, kalibracja, przełożenie podkładu między drzwiczki a korpus, tryb Peel-Off w sterowniku, w Zebra Setup Utilities i komendą ZPL oraz czyszczenie listwy, rolki i czujnika pobrania etykiety.',
+    youtubeId: 'DN8bXpS9x-g',
+    thumbnail: '/wideo/odklejak-zebra-zd220d.jpg',
+    duration: '4:19',
+    category: 'drukarki',
+    tags: ['ZD220d', 'ZD230d', 'odklejak', 'dispenser', 'peel-off', 'czujnik pobrania etykiety', 'kalibracja'],
+    featured: true
+  },
+  {
+    id: '42',
+    title: 'Jak wymienić etykiety w drukarce Zebra ZD220d i ZD230d',
+    description: 'Wymiana etykiet w Zebra ZD220d i ZD230d: czerwona dioda przy końcu etykiet, nowa rolka takich samych etykiet bez kalibracji, przejście na materiał ciągły, etykiety z czarnym znacznikiem lub otworami, ustawienie ruchomego czujnika i kalibracja pod nowe etykiety.',
+    youtubeId: '0eWE-MpNMCY',
+    thumbnail: '/wideo/wymiana-etykiet-zebra-zd220d.jpg',
+    duration: '4:31',
+    category: 'drukarki',
+    tags: ['ZD220d', 'ZD230d', 'wymiana etykiet', 'zakładanie etykiet', 'czarny znacznik', 'materiał ciągły', 'kalibracja'],
+    featured: true
+  },
+  {
     id: '24',
     title: 'Zebra ZC100 / ZC300 — rozpakowanie drukarki kart krok po kroku',
     description: 'Rozpakowanie drukarki kart Zebra ZC100 i ZC300: co znajduje się w zestawie i jak przygotować urządzenie do pierwszego uruchomienia.',
@@ -228,16 +261,6 @@ const videos: Video[] = [
     category: 'drukarki',
     tags: ['RED', 'dyrektywa', 'certyfikacja', 'CE', 'WiFi', 'Bluetooth', 'regulacje'],
     featured: true
-  },
-  {
-    id: '1',
-    title: 'Jak używać odklejaka etykiet w Zebra ZD220 / ZD230',
-    description: 'Poradnik pokazujący jak prawidłowo używać odklejaka etykiet (label dispenser / peel-off) w drukarkach Zebra ZD220 i ZD230. Konfiguracja i użycie krok po kroku.',
-    youtubeId: 'qrMRD7N49fY',
-    thumbnail: '/zd220_zd230_odlejak_yt.jpeg',
-    duration: '2:30',
-    category: 'drukarki',
-    tags: ['ZD220', 'ZD230', 'odklejak', 'label dispenser', 'peel-off'],
   },
   {
     id: '2',
@@ -348,16 +371,6 @@ const videos: Video[] = [
     duration: '5:00',
     category: 'drukarki',
     tags: ['ZD', 'wałek dociskowy', 'platen roller', 'wymiana', 'jakość wydruku', 'naprawa'],
-  },
-  {
-    id: '20',
-    title: 'Zakładanie etykiet w Zebra ZD220d / ZD230d',
-    description: 'Jak prawidłowo założyć rolkę etykiet w drukarkach Zebra ZD220d i ZD230d. Instrukcja krok po kroku - prowadzenie taśmy, ustawienie prowadnic i zamknięcie pokrywy.',
-    youtubeId: 'xhtuxOwwOyY',
-    thumbnail: '/zakładanie_etykiet_zd220d_zd230d.jpeg',
-    duration: '3:00',
-    category: 'drukarki',
-    tags: ['ZD220d', 'ZD230d', 'zakładanie etykiet', 'media loading', 'rolka etykiet'],
   },
   {
     id: '22',
