@@ -211,6 +211,17 @@ const videos: Video[] = [
     featured: true
   },
   {
+    id: '43',
+    title: 'Jak wymienić etykiety w drukarce Zebra ZD411d i ZD611d',
+    description: 'Wymiana etykiet w Zebra ZD411d i ZD611d: czerwone diody STATUS i SUPPLIES przy końcu etykiet, nowa rolka stroną do druku do góry i pod obie prowadnice, ruchomy czujnik w pozycji domyślnej dla etykiet z przerwami i na środku czarnego znacznika, a na koniec FEED przy takich samych etykietach albo kalibracja SmartCal (PAUSE + CANCEL przez 2 sekundy) przy innych.',
+    youtubeId: '9rzpSqfPfIk',
+    thumbnail: '/wideo/wymiana-etykiet-zebra-zd411d.jpg',
+    duration: '3:13',
+    category: 'drukarki',
+    tags: ['ZD411d', 'ZD611d', 'wymiana etykiet', 'zakładanie etykiet', 'czujnik etykiet', 'czarny znacznik', 'kalibracja SmartCal'],
+    featured: true
+  },
+  {
     id: '24',
     title: 'Zebra ZC100 / ZC300 — rozpakowanie drukarki kart krok po kroku',
     description: 'Rozpakowanie drukarki kart Zebra ZC100 i ZC300: co znajduje się w zestawie i jak przygotować urządzenie do pierwszego uruchomienia.',

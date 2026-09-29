@@ -3086,6 +3086,9 @@ Zebra ZD411d to kompaktowa **2-calowa** drukarka etykiet z serii **Link-OS**. Wy
       },
       {
         title: '3. Ładowanie etykiet',
+        videos: [
+          { youtubeId: '9rzpSqfPfIk', title: 'Wymiana etykiet w ZD411d i ZD611d', thumbnail: '/wideo/wymiana-etykiet-zebra-zd411d.jpg' },
+        ],
         content: `
 ### Obsługiwane typy materiałów
 
@@ -3619,6 +3622,9 @@ Zebra ZD611d to kompaktowa **2-calowa** drukarka etykiet z serii **Link-OS Premi
       },
       {
         title: '3. Ładowanie etykiet',
+        videos: [
+          { youtubeId: '9rzpSqfPfIk', title: 'Wymiana etykiet w ZD411d i ZD611d', thumbnail: '/wideo/wymiana-etykiet-zebra-zd411d.jpg' },
+        ],
         content: `
 ### Obsługiwane typy materiałów
 

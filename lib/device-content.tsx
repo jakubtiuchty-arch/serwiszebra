@@ -243,6 +243,18 @@ const FILM_ETYKIETY_ZD220D_ZD230D: NonNullable<BlogPost['video']> = {
   krotko: 'Wymiana etykiet',
 }
 
+/** „Jak wymienić etykiety w drukarce Zebra ZD411d i ZD611d" — nagranie ZD411d; w ZD611d procedura jest taka sama */
+const FILM_ETYKIETY_ZD411D_ZD611D: NonNullable<BlogPost['video']> = {
+  youtubeId: '9rzpSqfPfIk',
+  tytul: 'Jak wymienić etykiety w drukarce Zebra ZD411d i ZD611d',
+  opis: 'Poradnik serwis-zebry.pl z polskim lektorem: czerwone diody STATUS i SUPPLIES przy końcu etykiet, założenie nowej rolki pod prowadnice, ustawienie ruchomego czujnika dla etykiet z przerwami i z czarnym znacznikiem oraz wybór między FEED a kalibracją SmartCal (PAUSE + CANCEL przez 2 sekundy).',
+  kadr: '/wideo/wymiana-etykiet-zebra-zd411d.jpg',
+  czas: 'PT3M13S',
+  dodano: '2026-09-29T21:55:06+02:00',
+  podpis: 'Film: wymiana etykiet w drukarce Zebra ZD411d i ZD611d (3:13).',
+  krotko: 'Wymiana etykiet',
+}
+
 export const TRESC_KART: Record<string, TrescKarty> = {
   'zebra-zd421t': {
     filmy: [FILM_TASMA_ZD421_ZD621],
@@ -1247,6 +1259,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     ],
   },
   'zebra-zd411d': {
+    filmy: [FILM_ETYKIETY_ZD411D_ZD611D],
     poradniki: [
       'najczestsze-awarie-drukarek-zebra-top10',
       'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',
