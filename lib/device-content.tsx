@@ -201,9 +201,9 @@ const FILM_ODKLEJAK_ZD220T_ZD230T: NonNullable<BlogPost['video']> = {
   tytul: 'Jak korzystać z odklejaka w drukarce Zebra ZD220t i ZD230t',
   opis: 'Poradnik serwis-zebry.pl z polskim lektorem: jak działa odklejak, zakładanie etykiet i taśmy, kalibracja, przełożenie podkładu przez drzwiczki odklejaka, tryb Peel-Off w sterowniku i Zebra Setup Utilities oraz czyszczenie listwy, rolki i czujnika pobrania etykiety.',
   kadr: '/wideo/odklejak-zebra-zd220t.jpg',
-  czas: 'PT3M47S',
+  czas: 'PT3M48S',
   dodano: '2026-09-29T09:21:32+02:00',
-  podpis: 'Film: odklejak w drukarce Zebra ZD220t i ZD230t krok po kroku (3:47).',
+  podpis: 'Film: odklejak w drukarce Zebra ZD220t i ZD230t krok po kroku (3:48).',
   krotko: 'Praca z odklejakiem',
 }
 

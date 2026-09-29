@@ -172,7 +172,7 @@ const videos: Video[] = [
     description: 'Odklejak (dispenser, peel-off) w Zebra ZD220t i ZD230t krok po kroku: jak oddziela etykietę od podkładu, zakładanie etykiet i taśmy termotransferowej, kalibracja, przełożenie podkładu między drzwiczki a korpus, tryb Peel-Off w sterowniku, w Zebra Setup Utilities i komendą ZPL oraz czyszczenie listwy, rolki i czujnika pobrania etykiety.',
     youtubeId: 'jgjQNMyaZXc',
     thumbnail: '/wideo/odklejak-zebra-zd220t.jpg',
-    duration: '3:47',
+    duration: '3:48',
     category: 'drukarki',
     tags: ['ZD220t', 'ZD230t', 'odklejak', 'dispenser', 'peel-off', 'czujnik pobrania etykiety', 'taśma termotransferowa', 'kalibracja'],
     featured: true
