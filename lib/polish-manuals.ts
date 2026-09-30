@@ -2615,6 +2615,7 @@ Zebra ZD411t to kompaktowa **2-calowa** drukarka etykiet z serii **Link-OS**. Wy
         title: '5. Panel sterowania i LED',
         videos: [
           { youtubeId: 'ejWwfGa-9NE', title: 'Szerokość druku ZD411 i ZD611', thumbnail: '/wideo/szerokosc-druku-zebra-zd411.jpg' },
+          { youtubeId: 'pq6QNk4glBk', title: 'Zaczernienie druku ZD411 i ZD611', thumbnail: '/wideo/zaczernienie-druku-zebra-zd411.jpg' },
         ],
         content: `
 Drukarka ZD411t posiada zaawansowany interfejs z **3 przyciskami** i **5 wskaźnikami LED**:
@@ -3130,6 +3131,7 @@ Zebra ZD411d to kompaktowa **2-calowa** drukarka etykiet z serii **Link-OS**. Wy
         title: '4. Panel sterowania i LED',
         videos: [
           { youtubeId: 'ejWwfGa-9NE', title: 'Szerokość druku ZD411 i ZD611', thumbnail: '/wideo/szerokosc-druku-zebra-zd411.jpg' },
+          { youtubeId: 'pq6QNk4glBk', title: 'Zaczernienie druku ZD411 i ZD611', thumbnail: '/wideo/zaczernienie-druku-zebra-zd411.jpg' },
         ],
         content: `
 Drukarka ZD411d posiada zaawansowany interfejs z **3 przyciskami** i **5 wskaźnikami LED**:

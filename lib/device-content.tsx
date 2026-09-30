@@ -291,6 +291,18 @@ const FILM_ODKLEJAK_ZD411_ZD611: NonNullable<BlogPost['video']> = {
   krotko: 'Montaż odklejaka',
 }
 
+/** „Jak ustawić zaczernienie druku w drukarce Zebra ZD411 i ZD611" — instrukcja podaje tę samą procedurę dla wersji d i t */
+const FILM_ZACZERNIENIE_ZD411_ZD611: NonNullable<BlogPost['video']> = {
+  youtubeId: 'pq6QNk4glBk',
+  tytul: 'Jak ustawić zaczernienie druku w drukarce Zebra ZD411 i ZD611',
+  opis: 'Poradnik serwis-zebry.pl z polskim lektorem: zaczernienie druku ustawiane przyciskami. Tryb zaawansowany po przytrzymaniu PAUSE przez 2 sekundy, regulacja zaczernienia po dwóch naciśnięciach FEED, wzory testowe z kolejnymi poziomami i zapis przyciskiem FEED. Objawy za niskiego i za wysokiego zaczernienia oraz ustawienie w Zebra Setup Utilities.',
+  kadr: '/wideo/zaczernienie-druku-zebra-zd411.jpg',
+  czas: 'PT3M21S',
+  dodano: '2026-09-30T09:14:16+02:00',
+  podpis: 'Film: zaczernienie druku w drukarce Zebra ZD411 i ZD611 (3:21).',
+  krotko: 'Zaczernienie druku',
+}
+
 export const TRESC_KART: Record<string, TrescKarty> = {
   'zebra-zd421t': {
     filmy: [FILM_TASMA_ZD421_ZD621],
@@ -1295,7 +1307,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     ],
   },
   'zebra-zd411d': {
-    filmy: [FILM_ETYKIETY_ZD411D_ZD611D, FILM_KALIBRACJA_ZD411_ZD611, FILM_SZEROKOSC_ZD411_ZD611, FILM_ODKLEJAK_ZD411_ZD611],
+    filmy: [FILM_ETYKIETY_ZD411D_ZD611D, FILM_KALIBRACJA_ZD411_ZD611, FILM_SZEROKOSC_ZD411_ZD611, FILM_ZACZERNIENIE_ZD411_ZD611, FILM_ODKLEJAK_ZD411_ZD611],
     poradniki: [
       'najczestsze-awarie-drukarek-zebra-top10',
       'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',
@@ -1414,7 +1426,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     ],
   },
   'zebra-zd411t': {
-    filmy: [FILM_KALIBRACJA_ZD411_ZD611, FILM_SZEROKOSC_ZD411_ZD611, FILM_ODKLEJAK_ZD411_ZD611],
+    filmy: [FILM_KALIBRACJA_ZD411_ZD611, FILM_SZEROKOSC_ZD411_ZD611, FILM_ZACZERNIENIE_ZD411_ZD611, FILM_ODKLEJAK_ZD411_ZD611],
     poradniki: [
       'najczestsze-awarie-drukarek-zebra-top10',
       'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',

@@ -255,6 +255,17 @@ const videos: Video[] = [
     featured: true
   },
   {
+    id: '47',
+    title: 'Jak ustawić zaczernienie druku w drukarce Zebra ZD411 i ZD611',
+    description: 'Zaczernienie druku w Zebra ZD411 i ZD611 ustawiane przyciskami: tryb zaawansowany po przytrzymaniu PAUSE przez 2 sekundy, dwa naciśnięcia FEED wybierają regulację zaczernienia, PAUSE drukuje wzory testowe z kolejnymi poziomami, a FEED zapisuje wzór z pełnymi, równymi czarnymi liniami. Za niskie zaczernienie daje niepełne kreski i nieczytelne drobne znaki, za wysokie grube kreski i zlane małe litery. Skala od 0 do 30, fabrycznie 10; zaczernienie zmienisz też w Zebra Setup Utilities albo komendą ZPL ~SD.',
+    youtubeId: 'pq6QNk4glBk',
+    thumbnail: '/wideo/zaczernienie-druku-zebra-zd411.jpg',
+    duration: '3:21',
+    category: 'drukarki',
+    tags: ['ZD411', 'ZD611', 'zaczernienie druku', 'print darkness', 'tryb zaawansowany', 'wzory testowe', 'blady wydruk'],
+    featured: true
+  },
+  {
     id: '24',
     title: 'Zebra ZC100 / ZC300 — rozpakowanie drukarki kart krok po kroku',
     description: 'Rozpakowanie drukarki kart Zebra ZC100 i ZC300: co znajduje się w zestawie i jak przygotować urządzenie do pierwszego uruchomienia.',
