@@ -3640,9 +3640,6 @@ Zebra ZD611d to kompaktowa **2-calowa** drukarka etykiet z serii **Link-OS Premi
       },
       {
         title: '3. Ładowanie etykiet',
-        videos: [
-          { youtubeId: '9rzpSqfPfIk', title: 'Wymiana etykiet w ZD411d i ZD611d', thumbnail: '/wideo/wymiana-etykiet-zebra-zd411d.jpg' },
-        ],
         content: `
 ### Obsługiwane typy materiałów
 
@@ -3674,9 +3671,6 @@ Zebra ZD611d to kompaktowa **2-calowa** drukarka etykiet z serii **Link-OS Premi
       },
       {
         title: '4. Panel sterowania i LED',
-        videos: [
-          { youtubeId: 'ejWwfGa-9NE', title: 'Szerokość druku ZD411 i ZD611', thumbnail: '/wideo/szerokosc-druku-zebra-zd411.jpg' },
-        ],
         content: `
 Drukarka ZD611d posiada zaawansowany interfejs z **3 przyciskami** i **5 wskaźnikami LED**:
 
@@ -3726,9 +3720,6 @@ Drukarki z zainstalowanym modułem łączności mogą **automatycznie uruchamia�
       },
       {
         title: '5. Kalibracja SmartCal',
-        videos: [
-          { youtubeId: 'PqqyaVzDLF4', title: 'Ręczna kalibracja ZD411 i ZD611', thumbnail: '/wideo/kalibracja-zebra-zd411.jpg' },
-        ],
         content: `
 Po załadowaniu nowego typu materiału **wykonaj kalibrację**:
 
@@ -3815,9 +3806,6 @@ Jeśli drukarka ma port szeregowy:
       },
       {
         title: '7. Funkcje dodatkowe',
-        videos: [
-          { youtubeId: 'JJO6-mV23ds', title: 'Montaż odklejaka ZD411 i ZD611', thumbnail: '/wideo/odklejak-zebra-zd411.jpg' },
-        ],
         content: `
 ### Zebra Print Touch (NFC)
 
@@ -4268,9 +4256,6 @@ Zebra ZD611t to kompaktowa **2-calowa** drukarka etykiet z serii **Link-OS Premi
       },
       {
         title: '5. Wyświetlacz dotykowy i panel sterowania',
-        videos: [
-          { youtubeId: 'ejWwfGa-9NE', title: 'Szerokość druku ZD411 i ZD611', thumbnail: '/wideo/szerokosc-druku-zebra-zd411.jpg' },
-        ],
         content: `
 Drukarka ZD611t posiada **intuicyjny wyświetlacz dotykowy** z menu w 19 językach.
 
@@ -4320,9 +4305,6 @@ Przez wyświetlacz dotykowy:
       },
       {
         title: '6. Kalibracja SmartCal',
-        videos: [
-          { youtubeId: 'PqqyaVzDLF4', title: 'Ręczna kalibracja ZD411 i ZD611', thumbnail: '/wideo/kalibracja-zebra-zd411.jpg' },
-        ],
         content: `
 Po załadowaniu nowego typu materiału **wykonaj kalibrację**:
 
@@ -4401,9 +4383,6 @@ Przyłóż telefon z włączonym NFC do logo **Zebra Print Touch** na obudowie d
       },
       {
         title: '8. Tryby druku i opcje',
-        videos: [
-          { youtubeId: 'JJO6-mV23ds', title: 'Montaż odklejaka ZD411 i ZD611', thumbnail: '/wideo/odklejak-zebra-zd411.jpg' },
-        ],
         content: `
 ### Tryby druku (Collection Method)
 
