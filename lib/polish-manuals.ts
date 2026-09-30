@@ -2613,6 +2613,9 @@ Zebra ZD411t to kompaktowa **2-calowa** drukarka etykiet z serii **Link-OS**. Wy
       },
       {
         title: '5. Panel sterowania i LED',
+        videos: [
+          { youtubeId: 'ejWwfGa-9NE', title: 'Szerokość druku ZD411 i ZD611', thumbnail: '/wideo/szerokosc-druku-zebra-zd411.jpg' },
+        ],
         content: `
 Drukarka ZD411t posiada zaawansowany interfejs z **3 przyciskami** i **5 wskaźnikami LED**:
 
@@ -2742,6 +2745,9 @@ Jeśli drukarka ma port szeregowy:
       },
       {
         title: '8. Funkcje dodatkowe',
+        videos: [
+          { youtubeId: 'JJO6-mV23ds', title: 'Montaż odklejaka ZD411 i ZD611', thumbnail: '/wideo/odklejak-zebra-zd411.jpg' },
+        ],
         content: `
 ### Zebra Print Touch (NFC)
 
@@ -3122,6 +3128,9 @@ Zebra ZD411d to kompaktowa **2-calowa** drukarka etykiet z serii **Link-OS**. Wy
       },
       {
         title: '4. Panel sterowania i LED',
+        videos: [
+          { youtubeId: 'ejWwfGa-9NE', title: 'Szerokość druku ZD411 i ZD611', thumbnail: '/wideo/szerokosc-druku-zebra-zd411.jpg' },
+        ],
         content: `
 Drukarka ZD411d posiada zaawansowany interfejs z **3 przyciskami** i **5 wskaźnikami LED**:
 
@@ -3257,6 +3266,9 @@ Jeśli drukarka ma port szeregowy:
       },
       {
         title: '7. Funkcje dodatkowe',
+        videos: [
+          { youtubeId: 'JJO6-mV23ds', title: 'Montaż odklejaka ZD411 i ZD611', thumbnail: '/wideo/odklejak-zebra-zd411.jpg' },
+        ],
         content: `
 ### Zebra Print Touch (NFC)
 
@@ -3662,6 +3674,9 @@ Zebra ZD611d to kompaktowa **2-calowa** drukarka etykiet z serii **Link-OS Premi
       },
       {
         title: '4. Panel sterowania i LED',
+        videos: [
+          { youtubeId: 'ejWwfGa-9NE', title: 'Szerokość druku ZD411 i ZD611', thumbnail: '/wideo/szerokosc-druku-zebra-zd411.jpg' },
+        ],
         content: `
 Drukarka ZD611d posiada zaawansowany interfejs z **3 przyciskami** i **5 wskaźnikami LED**:
 
@@ -3800,6 +3815,9 @@ Jeśli drukarka ma port szeregowy:
       },
       {
         title: '7. Funkcje dodatkowe',
+        videos: [
+          { youtubeId: 'JJO6-mV23ds', title: 'Montaż odklejaka ZD411 i ZD611', thumbnail: '/wideo/odklejak-zebra-zd411.jpg' },
+        ],
         content: `
 ### Zebra Print Touch (NFC)
 
@@ -4250,6 +4268,9 @@ Zebra ZD611t to kompaktowa **2-calowa** drukarka etykiet z serii **Link-OS Premi
       },
       {
         title: '5. Wyświetlacz dotykowy i panel sterowania',
+        videos: [
+          { youtubeId: 'ejWwfGa-9NE', title: 'Szerokość druku ZD411 i ZD611', thumbnail: '/wideo/szerokosc-druku-zebra-zd411.jpg' },
+        ],
         content: `
 Drukarka ZD611t posiada **intuicyjny wyświetlacz dotykowy** z menu w 19 językach.
 
@@ -4380,6 +4401,9 @@ Przyłóż telefon z włączonym NFC do logo **Zebra Print Touch** na obudowie d
       },
       {
         title: '8. Tryby druku i opcje',
+        videos: [
+          { youtubeId: 'JJO6-mV23ds', title: 'Montaż odklejaka ZD411 i ZD611', thumbnail: '/wideo/odklejak-zebra-zd411.jpg' },
+        ],
         content: `
 ### Tryby druku (Collection Method)
 

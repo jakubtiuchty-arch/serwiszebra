@@ -267,6 +267,30 @@ const FILM_KALIBRACJA_ZD411_ZD611: NonNullable<BlogPost['video']> = {
   krotko: 'Ręczna kalibracja',
 }
 
+/** „Jak ustawić szerokość druku w drukarce Zebra ZD411 i ZD611" — instrukcja podaje tę samą procedurę dla wersji d i t */
+const FILM_SZEROKOSC_ZD411_ZD611: NonNullable<BlogPost['video']> = {
+  youtubeId: 'ejWwfGa-9NE',
+  tytul: 'Jak ustawić szerokość druku w drukarce Zebra ZD411 i ZD611',
+  opis: 'Poradnik serwis-zebry.pl z polskim lektorem: szerokość druku ustawiana przyciskami, nie szerzej niż etykieta (najwięcej 56 mm). Tryb zaawansowany po przytrzymaniu PAUSE przez 2 sekundy, regulacja szerokości po jednym naciśnięciu FEED, coraz szersze ramki testowe i zapis przyciskiem FEED.',
+  kadr: '/wideo/szerokosc-druku-zebra-zd411.jpg',
+  czas: 'PT2M30S',
+  dodano: '2026-09-30T06:29:17+02:00',
+  podpis: 'Film: szerokość druku w drukarce Zebra ZD411 i ZD611 (2:30).',
+  krotko: 'Szerokość druku',
+}
+
+/** „Jak zamontować odklejak w drukarce Zebra ZD411 i ZD611 (Label Dispenser)" — instrukcja podaje ten sam montaż dla wersji d i t */
+const FILM_ODKLEJAK_ZD411_ZD611: NonNullable<BlogPost['video']> = {
+  youtubeId: 'JJO6-mV23ds',
+  tytul: 'Jak zamontować odklejak w drukarce Zebra ZD411 i ZD611 (Label Dispenser)',
+  opis: 'Poradnik serwis-zebry.pl z polskim lektorem: zdjęcie listwy do odrywania (dwie śruby, klucz Torx T10), montaż modułu odklejaka, aktualizacja oprogramowania drukarki, podkład przeprowadzony przez drzwiczki odklejaka i tryb Peel-Off w sterowniku.',
+  kadr: '/wideo/odklejak-zebra-zd411.jpg',
+  czas: 'PT4M5S',
+  dodano: '2026-09-30T06:30:44+02:00',
+  podpis: 'Film: montaż odklejaka w drukarce Zebra ZD411 i ZD611 (4:05).',
+  krotko: 'Montaż odklejaka',
+}
+
 export const TRESC_KART: Record<string, TrescKarty> = {
   'zebra-zd421t': {
     filmy: [FILM_TASMA_ZD421_ZD621],
@@ -1271,7 +1295,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     ],
   },
   'zebra-zd411d': {
-    filmy: [FILM_ETYKIETY_ZD411D_ZD611D, FILM_KALIBRACJA_ZD411_ZD611],
+    filmy: [FILM_ETYKIETY_ZD411D_ZD611D, FILM_KALIBRACJA_ZD411_ZD611, FILM_SZEROKOSC_ZD411_ZD611, FILM_ODKLEJAK_ZD411_ZD611],
     poradniki: [
       'najczestsze-awarie-drukarek-zebra-top10',
       'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',
@@ -1390,7 +1414,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     ],
   },
   'zebra-zd411t': {
-    filmy: [FILM_KALIBRACJA_ZD411_ZD611],
+    filmy: [FILM_KALIBRACJA_ZD411_ZD611, FILM_SZEROKOSC_ZD411_ZD611, FILM_ODKLEJAK_ZD411_ZD611],
     poradniki: [
       'najczestsze-awarie-drukarek-zebra-top10',
       'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',

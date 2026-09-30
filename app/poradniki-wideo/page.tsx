@@ -233,6 +233,28 @@ const videos: Video[] = [
     featured: true
   },
   {
+    id: '45',
+    title: 'Jak ustawić szerokość druku w drukarce Zebra ZD411 i ZD611',
+    description: 'Szerokość druku w Zebra ZD411 i ZD611 ustawiana przyciskami, nie szerzej niż etykieta (najwięcej 56 mm): tryb zaawansowany po przytrzymaniu PAUSE przez 2 sekundy, jedno naciśnięcie FEED wybiera regulację szerokości, PAUSE drukuje coraz szersze ramki testowe, a FEED zapisuje szerokość równą etykiecie.',
+    youtubeId: 'ejWwfGa-9NE',
+    thumbnail: '/wideo/szerokosc-druku-zebra-zd411.jpg',
+    duration: '2:30',
+    category: 'drukarki',
+    tags: ['ZD411', 'ZD611', 'szerokość druku', 'print width', 'tryb zaawansowany', 'ramki testowe'],
+    featured: true
+  },
+  {
+    id: '46',
+    title: 'Jak zamontować odklejak w drukarce Zebra ZD411 i ZD611 (Label Dispenser)',
+    description: 'Montaż odklejaka (Label Dispenser) w Zebra ZD411 i ZD611: zdjęcie listwy do odrywania po wykręceniu dwóch śrub kluczem Torx T10, montaż modułu na środku przodu drukarki, aktualizacja oprogramowania (firmware), podkład przeprowadzony przez drzwiczki odklejaka i tryb Peel-Off w sterowniku.',
+    youtubeId: 'JJO6-mV23ds',
+    thumbnail: '/wideo/odklejak-zebra-zd411.jpg',
+    duration: '4:05',
+    category: 'drukarki',
+    tags: ['ZD411', 'ZD611', 'odklejak', 'Label Dispenser', 'Peel-Off', 'montaż odklejaka', 'Torx T10'],
+    featured: true
+  },
+  {
     id: '24',
     title: 'Zebra ZC100 / ZC300 — rozpakowanie drukarki kart krok po kroku',
     description: 'Rozpakowanie drukarki kart Zebra ZC100 i ZC300: co znajduje się w zestawie i jak przygotować urządzenie do pierwszego uruchomienia.',
