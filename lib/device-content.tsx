@@ -303,9 +303,33 @@ const FILM_ZACZERNIENIE_ZD411_ZD611: NonNullable<BlogPost['video']> = {
   krotko: 'Zaczernienie druku',
 }
 
+/** „Jak wymienić wałek dociskowy w drukarce Zebra ZD411 i ZD611 (Platen Roller)" — instrukcja podaje tę samą procedurę dla wersji d i t */
+const FILM_WALEK_ZD411_ZD611: NonNullable<BlogPost['video']> = {
+  youtubeId: 'x4J-v5PEcow',
+  tytul: 'Jak wymienić wałek dociskowy w drukarce Zebra ZD411 i ZD611 (Platen Roller)',
+  opis: 'Poradnik serwis-zebry.pl z polskim lektorem: wymiana wałka dociskowego bez narzędzi. Zatrzaski łożysk po obu stronach, przełożenie zębatki i łożysk na nowy wałek, założenie wałka zębatką w lewo i minuta przerwy przed zamknięciem pokrywy. Czyszczenie wałka alkoholem izopropylowym o czystości co najmniej 99,7%.',
+  kadr: '/wideo/wymiana-walka-zebra-zd411.jpg',
+  czas: 'PT3M25S',
+  dodano: '2026-09-30T16:23:53+02:00',
+  podpis: 'Film: wymiana wałka dociskowego w drukarce Zebra ZD411 i ZD611 (3:25).',
+  krotko: 'Wymiana wałka',
+}
+
+/** „Jak zamontować adaptery do rolek w drukarce Zebra ZD421 i ZD621 (Media Roll Adapter)" — instrukcja podaje ten sam montaż dla wersji d i t */
+const FILM_ADAPTERY_ZD421_ZD621: NonNullable<BlogPost['video']> = {
+  youtubeId: 'RHGKzlEjXbU',
+  tytul: 'Jak zamontować adaptery do rolek w drukarce Zebra ZD421 i ZD621 (Media Roll Adapter)',
+  opis: 'Poradnik serwis-zebry.pl z polskim lektorem: adaptery do rolek z gilzą 38,1, 50,8 i 76,2 mm (w zestawie trzy pary). Śruby Torx w uchwytach rolki, adapter gładką stroną do środka drukarki, dokręcanie tylko do zniknięcia szczeliny, a po zmianie rodzaju etykiet kalibracja SmartCal.',
+  kadr: '/wideo/adaptery-rolek-zebra-zd421.jpg',
+  czas: 'PT3M13S',
+  dodano: '2026-09-30T16:25:03+02:00',
+  podpis: 'Film: montaż adapterów do rolek w drukarce Zebra ZD421 i ZD621 (3:13).',
+  krotko: 'Adaptery do rolek',
+}
+
 export const TRESC_KART: Record<string, TrescKarty> = {
   'zebra-zd421t': {
-    filmy: [FILM_TASMA_ZD421_ZD621],
+    filmy: [FILM_TASMA_ZD421_ZD621, FILM_ADAPTERY_ZD421_ZD621],
     poradniki: [
       'serwis-drukarki-zebra-zd420-zd421-diagnostyka-naprawa',
       'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',
@@ -421,6 +445,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
   },
 
   'zebra-zd421d': {
+    filmy: [FILM_ADAPTERY_ZD421_ZD621],
     poradniki: [
       'serwis-drukarki-zebra-zd420-zd421-diagnostyka-naprawa',
       'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',
@@ -1307,7 +1332,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     ],
   },
   'zebra-zd411d': {
-    filmy: [FILM_ETYKIETY_ZD411D_ZD611D, FILM_KALIBRACJA_ZD411_ZD611, FILM_SZEROKOSC_ZD411_ZD611, FILM_ZACZERNIENIE_ZD411_ZD611, FILM_ODKLEJAK_ZD411_ZD611],
+    filmy: [FILM_ETYKIETY_ZD411D_ZD611D, FILM_KALIBRACJA_ZD411_ZD611, FILM_SZEROKOSC_ZD411_ZD611, FILM_ZACZERNIENIE_ZD411_ZD611, FILM_ODKLEJAK_ZD411_ZD611, FILM_WALEK_ZD411_ZD611],
     poradniki: [
       'najczestsze-awarie-drukarek-zebra-top10',
       'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',
@@ -1426,7 +1451,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     ],
   },
   'zebra-zd411t': {
-    filmy: [FILM_KALIBRACJA_ZD411_ZD611, FILM_SZEROKOSC_ZD411_ZD611, FILM_ZACZERNIENIE_ZD411_ZD611, FILM_ODKLEJAK_ZD411_ZD611],
+    filmy: [FILM_KALIBRACJA_ZD411_ZD611, FILM_SZEROKOSC_ZD411_ZD611, FILM_ZACZERNIENIE_ZD411_ZD611, FILM_ODKLEJAK_ZD411_ZD611, FILM_WALEK_ZD411_ZD611],
     poradniki: [
       'najczestsze-awarie-drukarek-zebra-top10',
       'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',

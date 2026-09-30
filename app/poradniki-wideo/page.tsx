@@ -266,6 +266,28 @@ const videos: Video[] = [
     featured: true
   },
   {
+    id: '48',
+    title: 'Jak wymienić wałek dociskowy w drukarce Zebra ZD411 i ZD611 (Platen Roller)',
+    description: 'Wymiana wałka dociskowego w Zebra ZD411 i ZD611, w wersjach d i t, bez narzędzi: zatrzaski łożysk po obu stronach pociągasz do przodu i obracasz do góry, wyjmujesz wałek, a zębatkę i oba łożyska przekładasz na nowy wałek. Wałek zakładasz zębatką w lewo i zatrzaskujesz łożyska. Przed zamknięciem pokrywy odczekaj minutę. Wałek czyścisz niepylącym wacikiem z alkoholem izopropylowym o czystości co najmniej 99,7%, od środka do brzegów; jeśli etykiety nadal się ślizgają albo zacinają, wałek trzeba wymienić.',
+    youtubeId: 'x4J-v5PEcow',
+    thumbnail: '/wideo/wymiana-walka-zebra-zd411.jpg',
+    duration: '3:25',
+    category: 'drukarki',
+    tags: ['ZD411', 'ZD611', 'wałek dociskowy', 'platen roller', 'wymiana wałka', 'czyszczenie wałka', 'poślizg etykiet'],
+    featured: true
+  },
+  {
+    id: '49',
+    title: 'Jak zamontować adaptery do rolek w drukarce Zebra ZD421 i ZD621 (Media Roll Adapter)',
+    description: 'Bez adapterów Zebra ZD421 i ZD621 przyjmują rolki z gilzą 12,7 albo 25,4 mm, a z adapterami rolki z gilzą 38,1, 50,8 lub 76,2 mm. W zestawie są trzy pary adapterów. W żółte uchwyty rolki wkręcasz kluczem Torx samogwintujące śruby, adapter przykładasz od wewnątrz gładką stroną do środka drukarki i dokręcasz śruby tylko do zniknięcia szczeliny, bo mocniej zerwiesz gwint. Po zmianie rodzaju etykiet uruchom kalibrację SmartCal.',
+    youtubeId: 'RHGKzlEjXbU',
+    thumbnail: '/wideo/adaptery-rolek-zebra-zd421.jpg',
+    duration: '3:13',
+    category: 'drukarki',
+    tags: ['ZD421', 'ZD621', 'adapter rolki', 'Media Roll Adapter', 'gilza 76,2 mm', 'gilza 3 cale', 'Torx'],
+    featured: true
+  },
+  {
     id: '24',
     title: 'Zebra ZC100 / ZC300 — rozpakowanie drukarki kart krok po kroku',
     description: 'Rozpakowanie drukarki kart Zebra ZC100 i ZC300: co znajduje się w zestawie i jak przygotować urządzenie do pierwszego uruchomienia.',

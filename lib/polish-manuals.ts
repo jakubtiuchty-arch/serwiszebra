@@ -131,6 +131,7 @@ Zebra ZD421t to kompaktowa drukarka etykiet wykorzystująca technologię **druku
         videos: [
           { youtubeId: '-VtXee8Cn3k', title: 'Zakładanie etykiet w ZD421t', thumbnail: '/jak-zalozyc-etykiety-do-drukarki-zebra-zd421t.jpeg' },
           { youtubeId: 'hzBiOxz-QbI', title: 'Montaż odklejaka etykiet w ZD421', thumbnail: '/montaż_odklejak_zd421.jpeg' },
+          { youtubeId: 'RHGKzlEjXbU', title: 'Adaptery do rolek ZD421 i ZD621', thumbnail: '/wideo/adaptery-rolek-zebra-zd421.jpg' },
         ],
         content: `
 ### Obsługiwane typy materiałów
@@ -594,6 +595,7 @@ Zebra ZD421d to kompaktowa drukarka etykiet wykorzystująca technologię **druku
         videos: [
           { youtubeId: '-VtXee8Cn3k', title: 'Zakładanie etykiet w ZD421t', thumbnail: '/jak-zalozyc-etykiety-do-drukarki-zebra-zd421t.jpeg' },
           { youtubeId: 'hzBiOxz-QbI', title: 'Montaż odklejaka etykiet w ZD421', thumbnail: '/montaż_odklejak_zd421.jpeg' },
+          { youtubeId: 'RHGKzlEjXbU', title: 'Adaptery do rolek ZD421 i ZD621', thumbnail: '/wideo/adaptery-rolek-zebra-zd421.jpg' },
         ],
         content: `
 ### Obsługiwane typy materiałów
@@ -2780,7 +2782,7 @@ Automatycznie odkleja etykietę od podkładu i prezentuje do pobrania. Czujnik w
       {
         title: '9. Konserwacja i czyszczenie',
         videos: [
-          { youtubeId: 'jphduV-XSOg', title: 'Wymiana wałka dociskowego w drukarkach ZD', thumbnail: '/wymiana_wałka_zd.jpeg' },
+          { youtubeId: 'x4J-v5PEcow', title: 'Wymiana wałka dociskowego ZD411 i ZD611', thumbnail: '/wideo/wymiana-walka-zebra-zd411.jpg' },
         ],
         content: `
 > 📘 **Szczegółowy poradnik:** [Jak wyczyścić głowicę drukarki Zebra](/blog/jak-wyczyscic-glowice-drukarki-zebra)
@@ -3313,7 +3315,7 @@ Drukarka obsługuje materiał składankowy przez szczelinę z tyłu obudowy:
       {
         title: '8. Konserwacja i czyszczenie',
         videos: [
-          { youtubeId: 'jphduV-XSOg', title: 'Wymiana wałka dociskowego w drukarkach ZD', thumbnail: '/wymiana_wałka_zd.jpeg' },
+          { youtubeId: 'x4J-v5PEcow', title: 'Wymiana wałka dociskowego ZD411 i ZD611', thumbnail: '/wideo/wymiana-walka-zebra-zd411.jpg' },
         ],
         content: `
 > 📘 **Szczegółowy poradnik:** [Jak wyczyścić głowicę drukarki Zebra](/blog/jak-wyczyscic-glowice-drukarki-zebra)
