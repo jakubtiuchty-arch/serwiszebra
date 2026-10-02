@@ -21017,7 +21017,9 @@ Zebra ZC100 to kompaktowa jednostronna drukarka kart identyfikacyjnych, zaprojek
       {
         title: '2. Rozpakowanie i instalacja',
         videos: [
-          { youtubeId: 's04iRbCzBqQ', title: 'Rozpakowanie drukarki krok po kroku', thumbnail: '/zc100-zc300-rozpakowanie.jpeg' },
+          { youtubeId: 'ByJ3d4kjRL8', title: 'Rozpakowanie i podłączenie zasilania', thumbnail: '/wideo/rozpakowanie-zebra-zc100-zc300.jpg' },
+          { youtubeId: '9OYkAcwoBY0', title: 'Pierwsze uruchomienie: USB, Ethernet, sterownik', thumbnail: '/wideo/uruchomienie-zebra-zc100-zc300.jpg' },
+          { youtubeId: 'STPBJnAqY-k', title: 'Pakowanie drukarki do wysyłki', thumbnail: '/wideo/pakowanie-zebra-zc100-zc300.jpg' },
         ],
         content: `
 ### Zawartość opakowania
@@ -21054,8 +21056,9 @@ Zebra ZC100 to kompaktowa jednostronna drukarka kart identyfikacyjnych, zaprojek
       {
         title: '3. Ładowanie materiałów eksploatacyjnych',
         videos: [
-          { youtubeId: 'sz8ixZWbPvM', title: 'Jak założyć taśmę barwiącą', thumbnail: '/zc100-zc300-tasma-barwiaca.jpeg' },
-          { youtubeId: 'VRy5608Fq3Y', title: 'Jak włożyć karty do podajnika', thumbnail: '/zc100-zc300-karty-podajnik.jpeg' },
+          { youtubeId: 'SrsZWpj703g', title: 'Zakładanie taśmy barwiącej', thumbnail: '/wideo/tasma-zebra-zc100-zc300.jpg' },
+          { youtubeId: 'g1ryEuggfqw', title: 'Wkładanie kart PVC do podajnika', thumbnail: '/wideo/karty-zebra-zc100-zc300.jpg' },
+          { youtubeId: 'bA-non0Dj0k', title: 'Materiały eksploatacyjne: taśmy, karty PVC, czyszczenie', thumbnail: '/wideo/materialy-zebra-zc100-zc300.jpg' },
         ],
         content: `
 ### Ładowanie kasety z taśmą
@@ -21140,6 +21143,10 @@ Drukarka posiada szczelinę podawania ręcznego poniżej podajnika głównego:
       },
       {
         title: '5. Drukowanie',
+        videos: [
+          { youtubeId: '2erR1I2QAkk', title: 'Ręczne podawanie pojedynczych kart', thumbnail: '/wideo/podawanie-reczne-zebra-zc100-zc300.jpg' },
+          { youtubeId: 'RbyIzmDSPFs', title: 'Drukowanie karty testowej ze sterownika', thumbnail: '/wideo/karta-testowa-zebra-zc100-zc300.jpg' },
+        ],
         content: `
 ### Drukowanie karty testowej
 
@@ -21162,7 +21169,7 @@ Aby zainstalować sterownik ręcznie:
       {
         title: '6. Konserwacja i czyszczenie',
         videos: [
-          { youtubeId: '3rWB7HKAySQ', title: 'Czyszczenie drukarki kartą czyszczącą', thumbnail: '/zc100-zc300-czyszczenie.jpeg' },
+          { youtubeId: 'gU8xJxHorHI', title: 'Czyszczenie drukarki kartą czyszczącą', thumbnail: '/wideo/czyszczenie-zebra-zc100-zc300.jpg' },
         ],
         content: `
 ### Kiedy czyścić drukarkę
@@ -21198,6 +21205,10 @@ Do usunięcia uporczywych zabrudzeń użyj patyczków nasączonych alkoholem:
       },
       {
         title: '7. Rozwiązywanie problemów',
+        videos: [
+          { youtubeId: 'Q0nssePVFAY', title: 'Usuwanie zaciętej karty', thumbnail: '/wideo/zaciecie-karty-zebra-zc100-zc300.jpg' },
+          { youtubeId: 'OctL8hy3iQo', title: 'Wyjmowanie odrzuconej karty', thumbnail: '/wideo/karta-odrzucona-zebra-zc100-zc300.jpg' },
+        ],
         content: `
 ### Zacięcie karty
 
@@ -21357,6 +21368,9 @@ Obsługuje standardowy format ISO 7811 na 3 ścieżkach:
     sections: [
       {
         title: '1. Podstawowe informacje',
+        videos: [
+          { youtubeId: 'YnasCd-rARg', title: 'Budowa drukarki ZC300: elementy i złącza', thumbnail: '/wideo/budowa-zebra-zc300.jpg' },
+        ],
         content: `
 ### O drukarce ZC300
 
@@ -21410,7 +21424,9 @@ Zebra ZC300 to zaawansowana drukarka kart identyfikacyjnych z **kolorowym wyświ
       {
         title: '2. Rozpakowanie i instalacja',
         videos: [
-          { youtubeId: 's04iRbCzBqQ', title: 'Rozpakowanie drukarki krok po kroku', thumbnail: '/zc100-zc300-rozpakowanie.jpeg' },
+          { youtubeId: 'ByJ3d4kjRL8', title: 'Rozpakowanie i podłączenie zasilania', thumbnail: '/wideo/rozpakowanie-zebra-zc100-zc300.jpg' },
+          { youtubeId: '9OYkAcwoBY0', title: 'Pierwsze uruchomienie: USB, Ethernet, sterownik', thumbnail: '/wideo/uruchomienie-zebra-zc100-zc300.jpg' },
+          { youtubeId: 'STPBJnAqY-k', title: 'Pakowanie drukarki do wysyłki', thumbnail: '/wideo/pakowanie-zebra-zc100-zc300.jpg' },
         ],
         content: `
 ### Zawartość opakowania
@@ -21448,8 +21464,9 @@ Zebra ZC300 to zaawansowana drukarka kart identyfikacyjnych z **kolorowym wyświ
       {
         title: '3. Ładowanie materiałów eksploatacyjnych',
         videos: [
-          { youtubeId: 'sz8ixZWbPvM', title: 'Jak założyć taśmę barwiącą', thumbnail: '/zc100-zc300-tasma-barwiaca.jpeg' },
-          { youtubeId: 'VRy5608Fq3Y', title: 'Jak włożyć karty do podajnika', thumbnail: '/zc100-zc300-karty-podajnik.jpeg' },
+          { youtubeId: 'SrsZWpj703g', title: 'Zakładanie taśmy barwiącej', thumbnail: '/wideo/tasma-zebra-zc100-zc300.jpg' },
+          { youtubeId: 'g1ryEuggfqw', title: 'Wkładanie kart PVC do podajnika', thumbnail: '/wideo/karty-zebra-zc100-zc300.jpg' },
+          { youtubeId: 'bA-non0Dj0k', title: 'Materiały eksploatacyjne: taśmy, karty PVC, czyszczenie', thumbnail: '/wideo/materialy-zebra-zc100-zc300.jpg' },
         ],
         content: `
 ### Ładowanie kasety z taśmą
@@ -21487,6 +21504,9 @@ Drukarka posiada szczelinę podawania ręcznego poniżej podajnika głównego:
       },
       {
         title: '4. Obsługa wyświetlacza LCD',
+        videos: [
+          { youtubeId: 'MkprCJxSlSI', title: 'Wyświetlacz i menu ZC300', thumbnail: '/wideo/wyswietlacz-zebra-zc300.jpg' },
+        ],
         content: `
 ### Ekran główny (Printer Ready)
 
@@ -21608,6 +21628,10 @@ Model ZC300 posiada zarówno wyświetlacz LCD, jak i diody LED wskazujące statu
       },
       {
         title: '7. Drukowanie',
+        videos: [
+          { youtubeId: '2erR1I2QAkk', title: 'Ręczne podawanie pojedynczych kart', thumbnail: '/wideo/podawanie-reczne-zebra-zc100-zc300.jpg' },
+          { youtubeId: 'RbyIzmDSPFs', title: 'Drukowanie karty testowej ze sterownika', thumbnail: '/wideo/karta-testowa-zebra-zc100-zc300.jpg' },
+        ],
         content: `
 ### Drukowanie karty demonstracyjnej z LCD
 
@@ -21637,7 +21661,8 @@ Aby zainstalować sterownik ręcznie:
       {
         title: '8. Konserwacja i czyszczenie',
         videos: [
-          { youtubeId: '3rWB7HKAySQ', title: 'Czyszczenie drukarki kartą czyszczącą', thumbnail: '/zc100-zc300-czyszczenie.jpeg' },
+          { youtubeId: 'gU8xJxHorHI', title: 'Czyszczenie drukarki kartą czyszczącą', thumbnail: '/wideo/czyszczenie-zebra-zc100-zc300.jpg' },
+          { youtubeId: 'WtXUGeNWRXE', title: 'Wymiana rolki podajnika kart (ZC300)', thumbnail: '/wideo/rolka-podajnika-zebra-zc300.jpg' },
         ],
         content: `
 ### Kiedy czyścić drukarkę
@@ -21680,6 +21705,10 @@ Do usunięcia uporczywych zabrudzeń użyj patyczków nasączonych alkoholem:
       },
       {
         title: '9. Rozwiązywanie problemów',
+        videos: [
+          { youtubeId: 'Q0nssePVFAY', title: 'Usuwanie zaciętej karty', thumbnail: '/wideo/zaciecie-karty-zebra-zc100-zc300.jpg' },
+          { youtubeId: 'OctL8hy3iQo', title: 'Wyjmowanie odrzuconej karty', thumbnail: '/wideo/karta-odrzucona-zebra-zc100-zc300.jpg' },
+        ],
         content: `
 ### Komunikaty na wyświetlaczu LCD
 
