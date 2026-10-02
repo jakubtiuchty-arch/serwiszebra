@@ -288,6 +288,83 @@ const videos: Video[] = [
     featured: true
   },
   {
+    id: '50',
+    title: 'Jak zamontować obcinak w drukarce Zebra ZD411 i ZD611 (Media Cutter)',
+    description: 'Obcinak do Zebra ZD411 i ZD611, w wersjach d i t, montujesz sam: wyjmujesz rolkę, odłączasz zasilacz i kable, kluczem Torx T10 z zestawu wykręcasz dwie śruby listwy do odrywania, a w jej miejsce przykręcasz obcinak. Etykiety przeprowadzasz przez szczelinę obcinaka, a tryb cięcia włączasz w sterowniku albo komendą ZPL ^MMC. Obcinak przecina podkład między etykietami, papier do paragonów i cienki karton; nie tnij nim przez etykiety ani klej, a między cięciami zostaw co najmniej 25,4 mm. Ostrza nie czyścisz; przy błędzie cięcia ikona STATUS świeci na czerwono.',
+    youtubeId: '6GaZUlUscek',
+    thumbnail: '/wideo/obcinak-zebra-zd411.jpg',
+    duration: '4:23',
+    category: 'drukarki',
+    tags: ['ZD411', 'ZD611', 'obcinak', 'Media Cutter', 'gilotyna', 'tryb cięcia', 'Cut Error'],
+    featured: true
+  },
+  {
+    id: '51',
+    title: 'Zebra Print Touch w drukarce ZD411: jak połączyć telefon przez NFC',
+    description: 'Print Touch to znacznik NFC na panelu Zebra ZD411d i ZD411t, pod przyciskiem zasilania. Działa w drukarkach z fabrycznym modułem Bluetooth LE. Telefon albo tablet z włączonym NFC przykładasz tyłem do znacznika i odczytujesz z niego adres strony pomocy Zebry, adresy MAC drukarki, numer katalogowy i numer seryjny. Znacznik ułatwia parowanie przez Bluetooth, może uruchomić aplikację albo otworzyć stronę w przeglądarce, a z telefonu wydrukujesz etykietę z wpisanymi danymi.',
+    youtubeId: 'QR425RYvqFY',
+    thumbnail: '/wideo/print-touch-zebra-zd411.jpg',
+    duration: '1:54',
+    category: 'drukarki',
+    tags: ['ZD411', 'Print Touch', 'NFC', 'Bluetooth LE', 'parowanie z telefonem', 'drukowanie z telefonu'],
+    featured: true
+  },
+  {
+    id: '52',
+    title: 'Jak zamontować port szeregowy RS-232 w drukarce Zebra ZD411 i ZD611 (moduł Serial)',
+    description: 'Moduł RS-232 ze złączem DB-9 wkładasz w gniazdo łączności z tyłu Zebra ZD411 albo ZD611, bez narzędzi: odłączasz zasilacz i kable, zdejmujesz zaślepkę, w razie potrzeby przestawiasz zworkę AUTO, wsuwasz płytkę i zatrzaskujesz osłonę. Drukarka sama wykrywa moduł, a Zebra zaleca potem aktualizację oprogramowania. Z komputerem łączy ją kabel null-modem z męskim wtykiem DB-9, najwyżej 1,83 m. Ustawienia portu muszą być takie same po obu stronach: fabrycznie 9600 bodów, 8 bitów, bez parzystości, 1 bit stopu, XON/XOFF; zmienisz je komendą ZPL ^SC.',
+    youtubeId: 'nAVvr1W81pQ',
+    thumbnail: '/wideo/port-rs232-zebra-zd411.jpg',
+    duration: '5:17',
+    category: 'drukarki',
+    tags: ['ZD411', 'ZD611', 'RS-232', 'port szeregowy', 'moduł Serial', 'DB-9', 'null-modem'],
+    featured: true
+  },
+  {
+    id: '53',
+    title: 'Jak zamontować i ładować akumulator w drukarce Zebra ZD421 i ZD621 (Battery Option)',
+    description: 'Podstawę z akumulatorem przykręcasz pod Zebra ZD421 albo ZD621 kluczem Torx T10 z zestawu: trzy śruby w drukarce do druku termicznego, cztery w drukarce z taśmą. Akumulator wsuwasz od tyłu przy odłączonym zasilaczu. Nowy przychodzi wyłączony, więc podłączasz do niego zasilacz drukarki i ładujesz go do pełna, około dwóch godzin. Błyskawica pokazuje stan (zielona sprawny, żółta ładowanie, czerwona błąd), kreski poziom naładowania. Z podłączonym zasilaczem akumulator działa jak zasilacz awaryjny; bez zasilacza najpierw naciskasz jego przycisk, a w ciągu minuty włączasz drukarkę.',
+    youtubeId: 'D3ReRThe_Uk',
+    thumbnail: '/wideo/akumulator-zebra-zd421.jpg',
+    duration: '4:54',
+    category: 'drukarki',
+    tags: ['ZD421', 'ZD621', 'akumulator', 'Battery Option', 'podstawa z akumulatorem', 'ładowanie', 'zasilacz awaryjny'],
+    featured: true
+  },
+  {
+    id: '54',
+    title: 'Jak wymienić głowicę drukującą w drukarce Zebra ZD411d i ZD611d (Printhead)',
+    description: 'Głowicę w Zebra ZD411d i ZD611d (wersje do druku termicznego) wymieniasz bez narzędzi: wyłączasz drukarkę, czekasz, aż głowica ostygnie, odsuwasz zatrzask, wysuwasz głowicę spod pokrywy i odłączasz dwa złącza oraz przewód uziemienia. Nową głowicę podłączasz, wsuwasz lewym końcem w szczelinę, ustawiasz wycięciem na drucie sprężyny i dociskasz do zatrzaśnięcia. Potem czyścisz ją nowym pisakiem, zakładasz rolkę na pełną szerokość i drukujesz raport konfiguracji (FEED + CANCEL przez 2 sekundy). Zakładaj tylko oryginalną głowicę Zebry.',
+    youtubeId: 'E5laLKlpROY',
+    thumbnail: '/wideo/wymiana-glowicy-zebra-zd411d.jpg',
+    duration: '3:56',
+    category: 'drukarki',
+    tags: ['ZD411d', 'ZD611d', 'głowica drukująca', 'printhead', 'wymiana głowicy', 'puste miejsca na wydruku'],
+    featured: true
+  },
+  {
+    id: '55',
+    title: 'Jak wymienić taśmę (kalkę) w drukarce Zebra ZD411t i ZD611t',
+    description: 'Gdy taśma się skończy, ikona STATUS świeci na czerwono, a SUPPLIES miga na czerwono. Zebra ZD411t i ZD611t przyjmują taśmy 74 m na gilzie 12,7 mm, z nacięciami po lewej stronie; taśma musi być szersza od etykiet. Pustą gilzę zakładasz na górne trzpienie, nową rolkę na dolne, początek taśmy przyklejasz prosto do gilzy i nawijasz piastę górą do tyłu. Po zamknięciu pokrywy naciskasz FEED. Jeśli drukarka drukowała bez taśmy, przestaw tryb druku na termotransferowy, a przy nowym rodzaju etykiet uruchom kalibrację SmartCal.',
+    youtubeId: 'zERiwpSgS0A',
+    thumbnail: '/wideo/wymiana-tasmy-zebra-zd411t.jpg',
+    duration: '3:57',
+    category: 'drukarki',
+    tags: ['ZD411t', 'ZD611t', 'taśma termotransferowa', 'kalka', 'ribbon', 'wymiana taśmy', 'taśma 74 m'],
+    featured: true
+  },
+  {
+    id: '56',
+    title: 'Czyszczenie drukarki Zebra ZD411d i ZD611d: głowica, wałek i czujniki',
+    description: 'Konserwacja Zebra ZD411d i ZD611d krok po kroku. Głowicę czyścisz nowym pisakiem po każdych 5 rolkach etykiet, od środka do brzegów; ścieżkę etykiet, wałek dociskowy i czujniki w razie potrzeby, patyczkami i ściereczkami lekko zwilżonymi alkoholem izopropylowym o czystości co najmniej 99,7% oraz sprężonym powietrzem z puszki (nie ze sprężarki). Ostrza obcinaka nie czyścisz, przecierasz tylko plastikowe powierzchnie szczeliny bez alkoholu. W odklejaku czyścisz listwę, rolkę dociskową i okienko czujnika. Przed zamknięciem pokrywy odczekaj minutę, aż alkohol odparuje.',
+    youtubeId: 'RJi0zyewBGw',
+    thumbnail: '/wideo/czyszczenie-zebra-zd411d.jpg',
+    duration: '6:19',
+    category: 'drukarki',
+    tags: ['ZD411d', 'ZD611d', 'czyszczenie drukarki', 'konserwacja', 'czyszczenie głowicy', 'pisak czyszczący', 'alkohol izopropylowy'],
+    featured: true
+  },
+  {
     id: '24',
     title: 'Zebra ZC100 / ZC300 — rozpakowanie drukarki kart krok po kroku',
     description: 'Rozpakowanie drukarki kart Zebra ZC100 i ZC300: co znajduje się w zestawie i jak przygotować urządzenie do pierwszego uruchomienia.',

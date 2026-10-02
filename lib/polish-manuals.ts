@@ -100,6 +100,9 @@ Zebra ZD421t to kompaktowa drukarka etykiet wykorzystująca technologię **druku
       },
       {
         title: '2. Rozpakowanie i instalacja',
+        videos: [
+          { youtubeId: 'D3ReRThe_Uk', title: 'Akumulator ZD421 i ZD621 (Battery Option)', thumbnail: '/wideo/akumulator-zebra-zd421.jpg' },
+        ],
         content: `
 ### Zawartość opakowania
 
@@ -566,6 +569,9 @@ Zebra ZD421d to kompaktowa drukarka etykiet wykorzystująca technologię **druku
       },
       {
         title: '2. Rozpakowanie i instalacja',
+        videos: [
+          { youtubeId: 'D3ReRThe_Uk', title: 'Akumulator ZD421 i ZD621 (Battery Option)', thumbnail: '/wideo/akumulator-zebra-zd421.jpg' },
+        ],
         content: `
 ### Zawartość opakowania
 
@@ -2573,6 +2579,9 @@ Zebra ZD411t to kompaktowa **2-calowa** drukarka etykiet z serii **Link-OS**. Wy
       },
       {
         title: '4. Ładowanie taśmy ribbon',
+        videos: [
+          { youtubeId: 'zERiwpSgS0A', title: 'Wymiana taśmy w ZD411t i ZD611t', thumbnail: '/wideo/wymiana-tasmy-zebra-zd411t.jpg' },
+        ],
         content: `
 > **WAŻNE:** Ribbon musi być **szerszy niż materiał**, aby chronić głowicę drukującą. Drukarka ZD411t obsługuje rolki ribbonu **74 m**.
 
@@ -2699,6 +2708,7 @@ Naciśnij **FEED** - powinna wysunąć się **dokładnie jedna etykieta**. Jeśl
         videos: [
           { youtubeId: 'PwC9AJpV-l0', title: 'Konfiguracja sieci LAN w drukarkach Zebra', thumbnail: '/lan_all.jpeg' },
           { youtubeId: 'd-CNBSrBzGQ', title: 'Montaż modułu Ethernet w drukarkach Zebra', thumbnail: '/motaż_eth.jpeg' },
+          { youtubeId: 'nAVvr1W81pQ', title: 'Port szeregowy RS-232 w ZD411 i ZD611', thumbnail: '/wideo/port-rs232-zebra-zd411.jpg' },
         ],
         content: `
 ### Wymagane sterowniki
@@ -2750,6 +2760,8 @@ Jeśli drukarka ma port szeregowy:
         title: '8. Funkcje dodatkowe',
         videos: [
           { youtubeId: 'JJO6-mV23ds', title: 'Montaż odklejaka ZD411 i ZD611', thumbnail: '/wideo/odklejak-zebra-zd411.jpg' },
+          { youtubeId: '6GaZUlUscek', title: 'Montaż obcinaka ZD411 i ZD611', thumbnail: '/wideo/obcinak-zebra-zd411.jpg' },
+          { youtubeId: 'QR425RYvqFY', title: 'Zebra Print Touch (NFC) w ZD411', thumbnail: '/wideo/print-touch-zebra-zd411.jpg' },
         ],
         content: `
 ### Zebra Print Touch (NFC)
@@ -3216,6 +3228,7 @@ Naciśnij **FEED** - powinna wysunąć się **dokładnie jedna etykieta**. Jeśl
         videos: [
           { youtubeId: 'PwC9AJpV-l0', title: 'Konfiguracja sieci LAN w drukarkach Zebra', thumbnail: '/lan_all.jpeg' },
           { youtubeId: 'd-CNBSrBzGQ', title: 'Montaż modułu Ethernet w drukarkach Zebra', thumbnail: '/motaż_eth.jpeg' },
+          { youtubeId: 'nAVvr1W81pQ', title: 'Port szeregowy RS-232 w ZD411 i ZD611', thumbnail: '/wideo/port-rs232-zebra-zd411.jpg' },
         ],
         content: `
 ### Wymagane sterowniki
@@ -3272,6 +3285,8 @@ Jeśli drukarka ma port szeregowy:
         title: '7. Funkcje dodatkowe',
         videos: [
           { youtubeId: 'JJO6-mV23ds', title: 'Montaż odklejaka ZD411 i ZD611', thumbnail: '/wideo/odklejak-zebra-zd411.jpg' },
+          { youtubeId: '6GaZUlUscek', title: 'Montaż obcinaka ZD411 i ZD611', thumbnail: '/wideo/obcinak-zebra-zd411.jpg' },
+          { youtubeId: 'QR425RYvqFY', title: 'Zebra Print Touch (NFC) w ZD411', thumbnail: '/wideo/print-touch-zebra-zd411.jpg' },
         ],
         content: `
 ### Zebra Print Touch (NFC)
@@ -3316,6 +3331,8 @@ Drukarka obsługuje materiał składankowy przez szczelinę z tyłu obudowy:
         title: '8. Konserwacja i czyszczenie',
         videos: [
           { youtubeId: 'x4J-v5PEcow', title: 'Wymiana wałka dociskowego ZD411 i ZD611', thumbnail: '/wideo/wymiana-walka-zebra-zd411.jpg' },
+          { youtubeId: 'E5laLKlpROY', title: 'Wymiana głowicy ZD411d i ZD611d', thumbnail: '/wideo/wymiana-glowicy-zebra-zd411d.jpg' },
+          { youtubeId: 'RJi0zyewBGw', title: 'Czyszczenie drukarki ZD411d i ZD611d', thumbnail: '/wideo/czyszczenie-zebra-zd411d.jpg' },
         ],
         content: `
 > 📘 **Szczegółowy poradnik:** [Jak wyczyścić głowicę drukarki Zebra](/blog/jak-wyczyscic-glowice-drukarki-zebra)

@@ -327,9 +327,93 @@ const FILM_ADAPTERY_ZD421_ZD621: NonNullable<BlogPost['video']> = {
   krotko: 'Adaptery do rolek',
 }
 
+/** „Jak zamontować obcinak w drukarce Zebra ZD411 i ZD611 (Media Cutter)" — instrukcja podaje ten sam montaż dla wersji d i t */
+const FILM_OBCINAK_ZD411_ZD611: NonNullable<BlogPost['video']> = {
+  youtubeId: '6GaZUlUscek',
+  tytul: 'Jak zamontować obcinak w drukarce Zebra ZD411 i ZD611 (Media Cutter)',
+  opis: 'Poradnik serwis-zebry.pl z polskim lektorem: zdjęcie listwy do odrywania (dwie śruby, klucz Torx T10), montaż obcinaka, etykiety przez szczelinę obcinaka i tryb cięcia w sterowniku albo komendą ZPL ^MMC. Czego obcinakiem nie ciąć, jak czyścić szczelinę i co zrobić przy błędzie cięcia.',
+  kadr: '/wideo/obcinak-zebra-zd411.jpg',
+  czas: 'PT4M23S',
+  dodano: '2026-10-02T08:48:58+02:00',
+  podpis: 'Film: montaż obcinaka w drukarce Zebra ZD411 i ZD611 (4:23).',
+  krotko: 'Montaż obcinaka',
+}
+
+/** „Zebra Print Touch w drukarce ZD411…" — znacznik NFC pod przyciskiem zasilania w ZD411d i ZD411t; w ZD611 z wyświetlaczem jest w innym miejscu, więc film tylko dla ZD411 */
+const FILM_PRINT_TOUCH_ZD411: NonNullable<BlogPost['video']> = {
+  youtubeId: 'QR425RYvqFY',
+  tytul: 'Zebra Print Touch w drukarce ZD411: jak połączyć telefon przez NFC',
+  opis: 'Poradnik serwis-zebry.pl z polskim lektorem: znacznik NFC Print Touch pod przyciskiem zasilania, przygotowanie telefonu, przyłożenie go do znacznika i dane, które telefon odczyta (strona pomocy Zebry, adresy MAC, numer katalogowy i seryjny). Parowanie przez Bluetooth, uruchomienie aplikacji i wydruk etykiety z telefonu.',
+  kadr: '/wideo/print-touch-zebra-zd411.jpg',
+  czas: 'PT1M54S',
+  dodano: '2026-10-02T08:00:41+02:00',
+  podpis: 'Film: Zebra Print Touch (NFC) w drukarce Zebra ZD411 (1:54).',
+  krotko: 'Print Touch (NFC)',
+}
+
+/** „Jak zamontować port szeregowy RS-232 w drukarce Zebra ZD411 i ZD611 (moduł Serial)" — instrukcja podaje ten sam montaż dla wersji d i t */
+const FILM_RS232_ZD411_ZD611: NonNullable<BlogPost['video']> = {
+  youtubeId: 'nAVvr1W81pQ',
+  tytul: 'Jak zamontować port szeregowy RS-232 w drukarce Zebra ZD411 i ZD611 (moduł Serial)',
+  opis: 'Poradnik serwis-zebry.pl z polskim lektorem: montaż modułu RS-232 (DB-9) bez narzędzi w gnieździe z tyłu drukarki, zworka AUTO, aktualizacja oprogramowania po montażu, kabel null-modem i ustawienia portu (fabrycznie 9600, 8, N, 1, XON/XOFF, zmiana komendą ZPL ^SC). Co sprawdzić, gdy drukarka nie odbiera danych, i jak wyjąć moduł.',
+  kadr: '/wideo/port-rs232-zebra-zd411.jpg',
+  czas: 'PT5M17S',
+  dodano: '2026-10-02T16:16:57+02:00',
+  podpis: 'Film: montaż portu szeregowego RS-232 w drukarce Zebra ZD411 i ZD611 (5:17).',
+  krotko: 'Port RS-232',
+}
+
+/** „Jak wymienić głowicę drukującą w drukarce Zebra ZD411d i ZD611d (Printhead)" — tylko wersja d; w ZD411t głowica wymienia się inaczej (karetka taśmy) */
+const FILM_GLOWICA_ZD411D_ZD611D: NonNullable<BlogPost['video']> = {
+  youtubeId: 'E5laLKlpROY',
+  tytul: 'Jak wymienić głowicę drukującą w drukarce Zebra ZD411d i ZD611d (Printhead)',
+  opis: 'Poradnik serwis-zebry.pl z polskim lektorem: wymiana głowicy bez narzędzi w wersji do druku termicznego. Zatrzask głowicy, dwa złącza i przewód uziemienia, założenie nowej głowicy na drut sprężyny, czyszczenie pisakiem i raport konfiguracji (FEED + CANCEL przez 2 sekundy) jako wydruk próbny.',
+  kadr: '/wideo/wymiana-glowicy-zebra-zd411d.jpg',
+  czas: 'PT3M56S',
+  dodano: '2026-10-02T08:37:17+02:00',
+  podpis: 'Film: wymiana głowicy drukującej w drukarce Zebra ZD411d i ZD611d (3:56).',
+  krotko: 'Wymiana głowicy',
+}
+
+/** „Czyszczenie drukarki Zebra ZD411d i ZD611d: głowica, wałek i czujniki" — wersja d; w ZD411t przed czyszczeniem głowicy wyjmuje się taśmę */
+const FILM_CZYSZCZENIE_ZD411D_ZD611D: NonNullable<BlogPost['video']> = {
+  youtubeId: 'RJi0zyewBGw',
+  tytul: 'Czyszczenie drukarki Zebra ZD411d i ZD611d: głowica, wałek i czujniki',
+  opis: 'Poradnik serwis-zebry.pl z polskim lektorem: przybory (nowy pisak, alkohol izopropylowy co najmniej 99,7%, sprężone powietrze w puszce), czyszczenie ścieżki etykiet, obcinaka i odklejaka, głowicy pisakiem po każdych 5 rolkach, wałka dociskowego i czujników oraz minuta przerwy przed zamknięciem pokrywy.',
+  kadr: '/wideo/czyszczenie-zebra-zd411d.jpg',
+  czas: 'PT6M19S',
+  dodano: '2026-10-02T16:18:33+02:00',
+  podpis: 'Film: czyszczenie drukarki Zebra ZD411d i ZD611d (6:19).',
+  krotko: 'Czyszczenie drukarki',
+}
+
+/** „Jak wymienić taśmę (kalkę) w drukarce Zebra ZD411t i ZD611t" — taśmy 74 m; instrukcja podaje tę samą procedurę dla obu modeli */
+const FILM_TASMA_ZD411T_ZD611T: NonNullable<BlogPost['video']> = {
+  youtubeId: 'zERiwpSgS0A',
+  tytul: 'Jak wymienić taśmę (kalkę) w drukarce Zebra ZD411t i ZD611t',
+  opis: 'Poradnik serwis-zebry.pl z polskim lektorem: koniec taśmy (STATUS na czerwono, SUPPLIES miga), taśmy 74 m na gilzie 12,7 mm, pusta gilza na górne trzpienie i nowa rolka na dolne, przyklejenie i nawinięcie taśmy, FEED, tryb druku termotransferowego i kalibracja SmartCal przy nowym rodzaju etykiet.',
+  kadr: '/wideo/wymiana-tasmy-zebra-zd411t.jpg',
+  czas: 'PT3M57S',
+  dodano: '2026-10-02T08:33:01+02:00',
+  podpis: 'Film: wymiana taśmy (kalki) w drukarce Zebra ZD411t i ZD611t (3:57).',
+  krotko: 'Wymiana taśmy',
+}
+
+/** „Jak zamontować i ładować akumulator w drukarce Zebra ZD421 i ZD621 (Battery Option)" — instrukcja podaje ten sam montaż dla wersji d i t */
+const FILM_AKUMULATOR_ZD421_ZD621: NonNullable<BlogPost['video']> = {
+  youtubeId: 'D3ReRThe_Uk',
+  tytul: 'Jak zamontować i ładować akumulator w drukarce Zebra ZD421 i ZD621 (Battery Option)',
+  opis: 'Poradnik serwis-zebry.pl z polskim lektorem: montaż podstawy z akumulatorem (klucz Torx T10, trzy śruby w wersji d, cztery w wersji t), wsunięcie akumulatora i pierwsze ładowanie (około 2 godzin), znaczenie błyskawicy i kresek poziomu naładowania, praca na akumulatorze i jako zasilacz awaryjny, wyjmowanie i wyłączenie przed przechowywaniem.',
+  kadr: '/wideo/akumulator-zebra-zd421.jpg',
+  czas: 'PT4M54S',
+  dodano: '2026-10-02T16:21:24+02:00',
+  podpis: 'Film: montaż i ładowanie akumulatora w drukarce Zebra ZD421 i ZD621 (4:54).',
+  krotko: 'Akumulator',
+}
+
 export const TRESC_KART: Record<string, TrescKarty> = {
   'zebra-zd421t': {
-    filmy: [FILM_TASMA_ZD421_ZD621, FILM_ADAPTERY_ZD421_ZD621],
+    filmy: [FILM_TASMA_ZD421_ZD621, FILM_ADAPTERY_ZD421_ZD621, FILM_AKUMULATOR_ZD421_ZD621],
     poradniki: [
       'serwis-drukarki-zebra-zd420-zd421-diagnostyka-naprawa',
       'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',
@@ -445,7 +529,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
   },
 
   'zebra-zd421d': {
-    filmy: [FILM_ADAPTERY_ZD421_ZD621],
+    filmy: [FILM_ADAPTERY_ZD421_ZD621, FILM_AKUMULATOR_ZD421_ZD621],
     poradniki: [
       'serwis-drukarki-zebra-zd420-zd421-diagnostyka-naprawa',
       'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',
@@ -1332,7 +1416,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     ],
   },
   'zebra-zd411d': {
-    filmy: [FILM_ETYKIETY_ZD411D_ZD611D, FILM_KALIBRACJA_ZD411_ZD611, FILM_SZEROKOSC_ZD411_ZD611, FILM_ZACZERNIENIE_ZD411_ZD611, FILM_ODKLEJAK_ZD411_ZD611, FILM_WALEK_ZD411_ZD611],
+    filmy: [FILM_ETYKIETY_ZD411D_ZD611D, FILM_KALIBRACJA_ZD411_ZD611, FILM_SZEROKOSC_ZD411_ZD611, FILM_ZACZERNIENIE_ZD411_ZD611, FILM_ODKLEJAK_ZD411_ZD611, FILM_WALEK_ZD411_ZD611, FILM_GLOWICA_ZD411D_ZD611D, FILM_CZYSZCZENIE_ZD411D_ZD611D, FILM_OBCINAK_ZD411_ZD611, FILM_PRINT_TOUCH_ZD411, FILM_RS232_ZD411_ZD611],
     poradniki: [
       'najczestsze-awarie-drukarek-zebra-top10',
       'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',
@@ -1451,7 +1535,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     ],
   },
   'zebra-zd411t': {
-    filmy: [FILM_KALIBRACJA_ZD411_ZD611, FILM_SZEROKOSC_ZD411_ZD611, FILM_ZACZERNIENIE_ZD411_ZD611, FILM_ODKLEJAK_ZD411_ZD611, FILM_WALEK_ZD411_ZD611],
+    filmy: [FILM_KALIBRACJA_ZD411_ZD611, FILM_SZEROKOSC_ZD411_ZD611, FILM_ZACZERNIENIE_ZD411_ZD611, FILM_ODKLEJAK_ZD411_ZD611, FILM_WALEK_ZD411_ZD611, FILM_TASMA_ZD411T_ZD611T, FILM_OBCINAK_ZD411_ZD611, FILM_PRINT_TOUCH_ZD411, FILM_RS232_ZD411_ZD611],
     poradniki: [
       'najczestsze-awarie-drukarek-zebra-top10',
       'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',
