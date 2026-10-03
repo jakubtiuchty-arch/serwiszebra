@@ -650,7 +650,7 @@ export default function HomePage({ opinie }: { opinie: OpinieGoogleDane | null }
                 </li>
                 <li className="flex items-start gap-1.5">
                   <CheckCircle2 className="w-3.5 h-3.5 text-green-600 flex-shrink-0 mt-0.5" />
-                  <span>Drukarki kart</span>
+                  <Link href="/serwis-drukarek-kart-zebra" className="hover:text-blue-700 hover:underline">Drukarki kart</Link>
                 </li>
               </ul>
             </div>
@@ -1659,6 +1659,7 @@ export default function HomePage({ opinie }: { opinie: OpinieGoogleDane | null }
                   {[
                     { href: '/formularz', label: 'Zgłoś naprawę' },
                     { href: '/serwis-drukarek-zebra', label: 'Serwis drukarek' },
+                    { href: '/serwis-drukarek-kart-zebra', label: 'Serwis drukarek kart' },
                     { href: '/serwis-terminali-zebra', label: 'Serwis terminali' },
                     { href: '/serwis-skanerow-zebra', label: 'Serwis skanerów' },
                     { href: '/serwis-tabletow-zebra', label: 'Serwis tabletów' },

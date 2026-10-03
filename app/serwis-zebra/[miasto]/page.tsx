@@ -709,7 +709,7 @@ export default async function CityServicePage({ params }: { params: { miasto: st
                   </li>
                   <li className="flex items-start gap-1.5">
                     <CheckCircle2 className="w-3.5 h-3.5 text-green-600 flex-shrink-0 mt-0.5" />
-                    <span>Drukarki RFID i kart</span>
+                    <span>Drukarki RFID i <Link href="/serwis-drukarek-kart-zebra" className="hover:text-blue-700 hover:underline">drukarki kart</Link></span>
                   </li>
                 </ul>
               </div>

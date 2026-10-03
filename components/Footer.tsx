@@ -98,6 +98,7 @@ export default function Footer() {
                 {[
                   { href: '/#formularz', label: 'Zgłoś naprawę' },
                   { href: '/serwis-drukarek-zebra', label: 'Serwis drukarek' },
+                  { href: '/serwis-drukarek-kart-zebra', label: 'Serwis drukarek kart' },
                   { href: '/serwis-terminali-zebra', label: 'Serwis terminali' },
                   { href: '/serwis-skanerow-zebra', label: 'Serwis skanerów' },
                   { href: '/serwis-tabletow-zebra', label: 'Serwis tabletów' },

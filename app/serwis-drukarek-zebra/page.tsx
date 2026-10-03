@@ -543,6 +543,10 @@ export default function DrukarkiPage() {
                     <span>Moduły laminacji</span>
                   </li>
                 </ul>
+                <Link href="/serwis-drukarek-kart-zebra" className="inline-flex items-center gap-1 mt-3 text-sm font-medium text-blue-600 hover:text-blue-800">
+                  Serwis drukarek kart
+                  <ChevronRight className="w-4 h-4" />
+                </Link>
               </div>
             </div>
           </div>

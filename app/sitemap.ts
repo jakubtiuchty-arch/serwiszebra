@@ -48,6 +48,7 @@ const STRONY_STATYCZNE: Array<[string, string, Czestosc, number]> = [
   ['/regulamin', '2026-06-15', 'yearly', 0.3],
   ['/polityka-prywatnosci', '2026-06-15', 'yearly', 0.3],
   ['/serwis-drukarek-zebra', '2026-05-10', 'monthly', 0.9],
+  ['/serwis-drukarek-kart-zebra', '2026-10-03', 'monthly', 0.9],
   ['/serwis-terminali-zebra', '2026-04-04', 'monthly', 0.9],
   ['/serwis-skanerow-zebra', '2026-04-04', 'monthly', 0.9],
   ['/serwis-tabletow-zebra', '2026-04-04', 'monthly', 0.9],

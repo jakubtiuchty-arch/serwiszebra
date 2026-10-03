@@ -288,6 +288,12 @@ export default function PolishManualContent({ polishManual, modelSlug, modelName
           <div>
             <h3 className="font-bold text-base sm:text-lg mb-1">Masz problem z {modelName}?</h3>
             <p className="text-gray-400 text-xs sm:text-sm">Nasz serwis pomoże – diagnostyka AI 24/7 lub zgłoszenie naprawy</p>
+            {/^zebra-(zc|zxp)/i.test(modelSlug) && (
+              <Link href="/serwis-drukarek-kart-zebra" className="inline-flex items-center gap-1 mt-2 text-xs sm:text-sm text-[#A8F000] hover:underline">
+                Serwis drukarek kart Zebra: zakres napraw i cennik
+                <ChevronRight className="w-3.5 h-3.5" />
+              </Link>
+            )}
           </div>
           <div className="flex gap-2 sm:gap-3 w-full sm:w-auto">
             <Link

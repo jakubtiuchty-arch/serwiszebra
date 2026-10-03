@@ -34015,6 +34015,8 @@ ZT220 zastąpiono modelem ZT111 (ten sam panel LED bez wyświetlacza, szybszy �
     },
     content: `> **🎯 Szybka odpowiedź:** Drukarka kart **Zebra ZC100** lub **ZC300** nie drukuje? Sprawdź **5 diod LED** na panelu: czerwona **CARD** = brak kart, migająca czerwona **CARD** = zacięcie karty, migająca czerwona **RIBBON** = brak taśmy, czerwona ciągła **RIBBON** = niewłaściwa taśma. Na **ZC300** sprawdź komunikat na **LCD** — żółty ekran = ostrzeżenie, czerwony = błąd. Jeśli to nie pomoże — [wyślij drukarkę do bezpłatnej diagnostyki](https://www.serwis-zebry.pl/#formularz).
 
+Zakres napraw, cennik i przygotowanie drukarki do wysyłki opisujemy na stronie [serwis drukarek kart Zebra](/serwis-drukarek-kart-zebra).
+
 **<a href="https://www.takma.com.pl/produkt/zebra-zc100">Zebra ZC100</a>** i **<a href="https://www.takma.com.pl/produkt/zebra-zc300">ZC300</a>** to kompaktowe drukarki kart plastikowych wykorzystujące technologię **sublimacji barwnikowej** (full-color) i **transferu termicznego** (monochromatyczne). Drukują karty CR80 w rozdzielczości **300 dpi** — identyfikatory pracownicze, karty członkowskie, e-legitymacje szkolne, karty dostępu i karty lojalnościowe.
 
 **ZC100** ma uproszczony panel z **5 diodami LED** (bez wyświetlacza), natomiast **ZC300** posiada dodatkowy **2-calowy kolorowy LCD** z animowanymi instrukcjami pomocy i menu konfiguracyjne. Mechanizm druku obu modeli jest **identyczny** — te same głowice, kasety z taśmą i procedury serwisowe.
