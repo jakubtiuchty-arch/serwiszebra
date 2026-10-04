@@ -37,6 +37,14 @@ export interface PriceSelection {
 const OUTLIER_FACTOR = 3
 
 /**
+ * Ingram poniżej tego ułamka ceny Jarltecha → cenę zakupu liczymy z Jarltecha (decyzja 4.10.2026).
+ * Tego dnia Ingram podawał przez API (YourPrice) dla ok. 150 numerów Zebry ceny o 40–48% niższe
+ * niż Jarltech, np. ZD421t ZD4A042-30EM00EZ 902,80 zł wobec ok. 1480 zł — sklepy pokazywały ceny
+ * poniżej całego rynku. Realne różnice między dystrybutorami mieszczą się w kilkunastu procentach.
+ */
+const INGRAM_NISKO_WOBEC_JARLTECHA = 0.75
+
+/**
  * Rozstrzygnięcie zależy od tego, ilu dystrybutorów w ogóle podało cenę.
  *
  * TRZY ŹRÓDŁA — da się orzec, kto kłamie: odnosimy każde do mediany, bo mediana
@@ -58,6 +66,16 @@ export function selectPurchasePrice(prices: SourcePrices): PriceSelection {
 
   const rejected: PriceSelection['rejected'] = []
   if (wpisy.length === 0) return { rejected, ingramSuspect: false }
+
+  // Ingram odstający w DÓŁ wobec Jarltecha → podstawą ceny jest Jarltech
+  if (prices.ingram && prices.jarltech && prices.ingram < prices.jarltech * INGRAM_NISKO_WOBEC_JARLTECHA) {
+    rejected.push({
+      source: 'ingram',
+      price: prices.ingram,
+      reason: `cena ${prices.ingram.toFixed(2)} zł to ${Math.round((prices.ingram / prices.jarltech) * 100)}% ceny Jarltecha (${prices.jarltech.toFixed(2)} zł) — liczymy z Jarltecha`,
+    })
+    return { best: prices.jarltech, source: 'jarltech', rejected, ingramSuspect: true }
+  }
 
   const najtanszy = (pula: [PriceSource, number][]) => pula.reduce((a, b) => (b[1] < a[1] ? b : a))
 
