@@ -35,7 +35,7 @@ const faqItems: FAQItem[] = [
   // OGÓLNE
   {
     question: 'Ile trwa naprawa urządzenia Zebra?',
-    answer: 'Standardowy czas naprawy to 2-5 dni roboczych od momentu otrzymania urządzenia. W przypadku pilnych napraw oferujemy usługę ekspresową (24-48h) za dodatkową opłatą. Czas naprawy może się wydłużyć, jeśli wymagane są części zamienne sprowadzane z zagranicy.',
+    answer: 'Standardowa naprawa trwa 5–7 dni roboczych od otrzymania urządzenia. Tryb ekspresowy trwa 24–48 godzin, kosztuje 299 zł netto i wymaga wcześniejszego ustalenia. Czas naprawy może się wydłużyć, jeśli wymagane są części zamienne sprowadzane z zagranicy.',
     category: 'ogolne'
   },
   {
@@ -535,7 +535,7 @@ export default function FAQPage() {
                 <div className="w-10 h-10 bg-gray-100 group-hover:bg-gray-900 rounded-lg flex items-center justify-center mx-auto mb-3 transition-colors">
                   <Clock className="w-5 h-5 text-gray-600 group-hover:text-white transition-colors" />
                 </div>
-                <div className="text-xl font-semibold text-gray-900">2-5 dni</div>
+                <div className="text-xl font-semibold text-gray-900">5–7 dni</div>
                 <div className="text-xs text-gray-500">Czas naprawy</div>
               </div>
               <div className="bg-white rounded-xl p-5 text-center border border-gray-100 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all group">

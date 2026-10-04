@@ -195,7 +195,7 @@ const faq = [
   },
   {
     question: 'Jak długo trwa naprawa drukarki Zebra?',
-    answer: 'Standardowy czas naprawy to 2-5 dni roboczych. Oferujemy też naprawy ekspresowe w 24-48h (dopłata 50 zł). Kurier odbierze drukarkę bezpłatnie z Twojej firmy w całej Polsce.',
+    answer: 'Standardowa naprawa trwa 5–7 dni roboczych. Czas zależy od dostępności części. Tryb ekspresowy trwa 24–48 godzin, kosztuje 299 zł netto i wymaga wcześniejszego ustalenia. Kurier odbiera drukarkę bezpłatnie z dowolnego adresu w Polsce.',
     link: '/blog/cennik-naprawy-drukarki-zebra-koszty-serwisu',
     linkText: 'Zobacz pełny cennik →'
   },
@@ -225,7 +225,7 @@ const faq = [
   },
   {
     question: 'Ile kosztuje naprawa drukarki Zebra GK420?',
-    answer: 'Naprawa drukarki Zebra GK420 kosztuje od 150 zł (czyszczenie) do 400 zł (wymiana głowicy). Najczęstsze problemy to: czerwona dioda (uszkodzony czujnik 100-200 zł), zużyta głowica (250-400 zł), uszkodzony mechanizm (150-300 zł). Dokładna wycena po bezpłatnej diagnozie.',
+    answer: 'Naprawa drukarki Zebra GK420 kosztuje od 150 zł (czyszczenie) do 400 zł (wymiana głowicy). Najczęstsze problemy to: czerwona dioda (uszkodzony czujnik 100-200 zł), zużyta głowica (250-400 zł), uszkodzony mechanizm (150-300 zł). Dokładną cenę podajemy po diagnostyce. Diagnostyka jest bezpłatna przy zleceniu naprawy. Przy rezygnacji z naprawy diagnostyka kosztuje 99 zł netto.',
     link: '/blog/cennik-naprawy-drukarki-zebra-koszty-serwisu',
     linkText: 'Cennik napraw wszystkich modeli →'
   },
@@ -372,7 +372,7 @@ export default function DrukarkiPage() {
           </div>
           <div className="relative max-w-6xl mx-auto px-3 sm:px-4 text-center md:text-left">
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-gray-900 mb-3 sm:mb-4">
-              Serwis Drukarek Zebra
+              Serwis Drukarek Zebra{' '}
               <span className="block text-base sm:text-lg md:text-xl font-normal text-gray-600 mt-1 sm:mt-2">
                 – Etykiet, Kart Plastikowych, Mobilnych
               </span>
@@ -389,7 +389,7 @@ export default function DrukarkiPage() {
               </div>
               <div className="flex items-center gap-1.5 bg-white/80 backdrop-blur-sm border border-gray-200 px-3 py-1.5 rounded-full text-xs sm:text-sm shadow-sm">
                 <Clock className="w-4 h-4 text-amber-600" />
-                <span className="text-gray-700">2-5 dni</span>
+                <span className="text-gray-700">5–7 dni roboczych</span>
               </div>
               <div className="flex items-center gap-1.5 bg-white/80 backdrop-blur-sm border border-gray-200 px-3 py-1.5 rounded-full text-xs sm:text-sm shadow-sm">
                 <Shield className="w-4 h-4 text-blue-600" />
@@ -642,7 +642,7 @@ export default function DrukarkiPage() {
                   ))}
                 </div>
                 <div className="px-5 py-3 border-t border-gray-100">
-                  <Link href="/#formularz" className="text-sm font-medium text-blue-600 hover:text-blue-800">Zgłoś drukarkę kart do naprawy →</Link>
+                  <Link href="/serwis-drukarek-kart-zebra" className="text-sm font-medium text-blue-600 hover:text-blue-800">Serwis drukarek kart Zebra: zakres napraw i cennik →</Link>
                 </div>
               </div>
             </div>

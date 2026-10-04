@@ -3427,8 +3427,9 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
                   głowicy wykonaj kalibrację czujników i wydruk testowy (PAUSE + FEED przy starcie).
                   Kluczowy jest <strong>równomierny docisk</strong> — w ZT411 i ZT610 reguluje się go dwoma
                   pokrętłami nad głowicą; nierówny docisk to najczęstsza przyczyna bladego wydruku po jednej
-                  stronie etykiety. Jeśli wolisz powierzyć wymianę serwisowi, jako autoryzowany serwis Zebra
-                  wymienimy głowicę z pełną kalibracją w 24-48 h.
+                  stronie etykiety. Wymianę głowicy z pełną kalibracją wykonuje też nasz autoryzowany serwis
+                  Zebra. Standardowa naprawa trwa 5–7 dni roboczych. Tryb ekspresowy (24–48 h) kosztuje
+                  299 zł netto i wymaga wcześniejszego ustalenia.
                 </p>
 
                 <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">

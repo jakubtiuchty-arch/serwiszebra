@@ -754,7 +754,7 @@ export default function HomePage({ opinie }: { opinie: OpinieGoogleDane | null }
               Cennik orientacyjny
             </h2>
             <p className="text-sm text-gray-600 max-w-2xl mx-auto">
-              Ceny podane poniżej są orientacyjne. Dokładną wycenę otrzymasz po bezpłatnej diagnozie urządzenia.
+              Ceny podane poniżej są orientacyjne. Dokładną cenę podajemy po diagnostyce. Diagnostyka jest bezpłatna przy zleceniu naprawy, a przy rezygnacji z naprawy kosztuje 99 zł netto.
             </p>
           </div>
 
@@ -1278,7 +1278,7 @@ export default function HomePage({ opinie }: { opinie: OpinieGoogleDane | null }
                   <span className="text-white text-xs font-bold">!</span>
                 </div>
                 <p className="text-xs text-gray-700 leading-relaxed">
-                  <strong className="font-semibold">Ważne:</strong> Podane ceny są orientacyjne i mogą się różnić w zależności od modelu urządzenia i zakresu uszkodzeń. Dokładną wycenę otrzymasz po bezpłatnej diagnozie w naszym serwisie.
+                  <strong className="font-semibold">Ważne:</strong> Podane ceny są orientacyjne i mogą się różnić w zależności od modelu urządzenia i zakresu uszkodzeń. Dokładną cenę podajemy po diagnostyce w serwisie. Diagnostyka jest bezpłatna przy zleceniu naprawy, a przy rezygnacji z naprawy kosztuje 99 zł netto.
                 </p>
               </div>
             </div>
@@ -1409,7 +1409,7 @@ export default function HomePage({ opinie }: { opinie: OpinieGoogleDane | null }
                 </div>
 
                 <div className="flex items-center justify-center bg-[#EDF9C8] text-gray-900 px-3 rounded-full text-xs font-semibold h-9 mt-4">
-                  <span className="whitespace-nowrap">Naprawa 2-5 dni</span>
+                  <span className="whitespace-nowrap">Naprawa 5–7 dni</span>
                 </div>
               </div>
             </div>

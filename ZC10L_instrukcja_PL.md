@@ -35,8 +35,8 @@ Zebra ZC10L to wielkoformatowa drukarka kart zaprojektowana specjalnie z myślą
 |----------|-------|-------|
 | Przeznaczenie | **Branża hotelarska** | Karty ID |
 | Format kart | **Wielkoformatowe z zakładką** | CR80/CR70 |
-| Druk edge-to-edge | **Tak** | Nie |
-| Waga | 19 kg | 2,9 kg |
+| Druk edge-to-edge | **Tak** (karty wielkoformatowe) | Tak (karty CR80) |
+| Waga | 19 kg | 3,9 kg |
 | Interfejs | Diody LED | Diody LED |
 | Zasilanie | Wewnętrzny | Zewnętrzny 100W |
 

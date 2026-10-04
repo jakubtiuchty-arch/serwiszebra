@@ -19,7 +19,7 @@ const DEVICE_TYPES = [
 
 const URGENCY_LEVELS = [
   { value: 'standard', label: 'Zwykły' },
-  { value: 'express', label: 'Wysoki (+50% wartości naprawy)' },
+  { value: 'express', label: 'Wysoki (tryb ekspresowy 24–48 h, 299 zł netto)' },
 ]
 
 const WARRANTY_OPTIONS = [

@@ -8,7 +8,7 @@
 
 ### O drukarce ZC300
 
-Zebra ZC300 to zaawansowana drukarka kart identyfikacyjnych z **kolorowym wyświetlaczem LCD 2"** i trzema przyciskami funkcyjnymi, umożliwiająca pełnokolorowy druk metodą sublimacji barwników lub monochromatyczny druk termotransferowy. Obsługuje standardowe karty PVC i PVC-composite w formatach CR70 (52×84 mm) i CR80 (54×86 mm) o grubości 10-40 mil. Drukarka posiada podajnik na 100 kart, intuicyjne menu z animowaną pomocą oraz opcję druku dwustronnego. Model ZC300 oferuje lepszą diagnostykę i łatwiejszą obsługę dzięki ekranowi LCD.
+Zebra ZC300 to zaawansowana drukarka kart identyfikacyjnych z **kolorowym wyświetlaczem LCD** i trzema przyciskami funkcyjnymi, umożliwiająca pełnokolorowy druk metodą sublimacji barwników lub monochromatyczny druk termotransferowy. Obsługuje standardowe karty PVC i PVC-composite w formatach CR70 (52×84 mm) i CR80 (54×86 mm) o grubości 10-40 mil. Drukarka posiada podajnik na 100 kart, intuicyjne menu z animowaną pomocą oraz opcję druku dwustronnego. Model ZC300 oferuje lepszą diagnostykę i łatwiejszą obsługę dzięki ekranowi LCD.
 
 ### Parametry techniczne
 
@@ -19,12 +19,13 @@ Zebra ZC300 to zaawansowana drukarka kart identyfikacyjnych z **kolorowym wyświ
 | Rozdzielczość | 300 dpi (11,8 punktów/mm) |
 | Prędkość druku (YMCKO) | do 200 kart/godz. (kolor jednostronny) |
 | | do 140 kart/godz. (kolor dwustronny) |
-| Prędkość druku (K) | do 800 kart/godz. (mono jednostronny) |
+| Prędkość druku (K) | do 900 kart/godz. (mono jednostronny) |
+| | do 450 kart/godz. (mono dwustronny) |
 | Formaty kart | CR80 (54×86 mm), CR70 (52×84 mm) |
 | Grubość kart | 10-40 mil (0,25-1,02 mm) |
 | Pojemność podajnika | 100 kart (30 mil) |
 | Pojemność odbiornika | 100 kart (30 mil) |
-| Wyświetlacz | **2" kolorowy LCD** |
+| Wyświetlacz | **kolorowy LCD** |
 | Pamięć RAM | 512 MB |
 | Zasilanie | 100W zasilacz zewnętrzny |
 
@@ -32,11 +33,12 @@ Zebra ZC300 to zaawansowana drukarka kart identyfikacyjnych z **kolorowym wyświ
 
 | Parametr | ZC300 | ZC100 |
 |----------|-------|-------|
-| Interfejs użytkownika | **Kolorowy LCD 2"** | Diody LED |
+| Interfejs użytkownika | **Kolorowy LCD** | Diody LED |
 | Przyciski funkcyjne | **3 przyciski** | Brak |
 | Menu pomocy | **Animacje na LCD** | Brak |
-| Prędkość (YMCKO) | **200 kart/h** | 180 kart/h |
-| Druk dwustronny | Opcja | Opcja |
+| Prędkość (YMCKO, jednostronnie) | **200 kart/h** | 150 kart/h |
+| Prędkość (mono, jednostronnie) | **900 kart/h** | 700 kart/h |
+| Druk dwustronny | Opcja (moduł druku dwustronnego) | Brak |
 | Diagnostyka | **Rozszerzona (LCD)** | Podstawowa (LED) |
 
 ### Złącza i komunikacja
@@ -45,7 +47,7 @@ Zebra ZC300 to zaawansowana drukarka kart identyfikacyjnych z **kolorowym wyświ
 |-----------|------|
 | USB 2.0 | Połączenie bezpośrednie z PC |
 | 10/100 Ethernet | Połączenie sieciowe (RJ-45) |
-| Wi-Fi | Opcjonalne 802.11b/g |
+| Wi-Fi | Opcjonalne 802.11ac |
 | Bluetooth | Opcjonalne parowanie |
 | NFC | Zebra Print Touch |
 
@@ -54,7 +56,7 @@ Zebra ZC300 to zaawansowana drukarka kart identyfikacyjnych z **kolorowym wyświ
 - **Enkoder magnetyczny** – zapis ISO na 3 ścieżkach (HiCo/LoCo)
 - **Enkoder kart inteligentnych** – stykowy i zbliżeniowy
 - **Moduł druku dwustronnego** – flipper z pojemnikiem na karty odrzucone
-- **Wi-Fi** – łączność bezprzewodowa 802.11b/g
+- **Wi-Fi** – łączność bezprzewodowa 802.11ac
 
 ---
 
@@ -112,7 +114,7 @@ Orientacja kart zależy od ich typu:
 |-----------|------------|
 | Zwykłe karty PVC | Dowolna |
 | Karty z paskiem magnetycznym | Pasek na dole, po prawej stronie |
-| Karty kontaktowe (chip) | Chip do góry, z przodu |
+| Karty kontaktowe (chip) | Chip do góry, w stronę tyłu drukarki |
 | Karty zbliżeniowe | Dowolna |
 
 1. Otwórz pokrywę podajnika wejściowego
@@ -332,7 +334,6 @@ Do usunięcia uporczywych zabrudzeń użyj patyczków nasączonych alkoholem:
 Ostrzeżenia wymagają uwagi operatora, ale nie blokują drukowania:
 
 - **Ribbon low** – niski poziom taśmy
-- **Cards low** – mało kart w podajniku
 - **Cleaning required** – wymagane czyszczenie
 
 Naciśnij lewy przycisk, aby wyświetlić animację pomocy.
@@ -417,8 +418,7 @@ Moduł flipper umożliwia automatyczny druk dwustronny oraz przekierowywanie odr
 
 ### Wi-Fi (opcja)
 
-- Standard: IEEE 802.11b/g
-- Prędkość: do 54 Mbps (802.11g) / 11 Mbps (802.11b)
+- Standard: IEEE 802.11ac
 - Bezpieczeństwo: WEP, WPA/WPA2
 - Szyfrowanie: RC4, TKIP, CCMP (AES)
 - Konfiguracja: przez sterownik drukarki
@@ -437,10 +437,10 @@ Moduł flipper umożliwia automatyczny druk dwustronny oraz przekierowywanie odr
 
 | Parametr | Wartość |
 |----------|---------|
-| Szerokość | ok. 193 mm |
-| Głębokość | ok. 290 mm |
-| Wysokość | ok. 209 mm |
-| Waga | ok. 2,9 kg |
+| Szerokość | 157 mm |
+| Głębokość | 383 mm (druk jednostronny), 468 mm (druk dwustronny) |
+| Wysokość | 258 mm |
+| Waga | 4,0 kg (druk jednostronny), 4,4 kg (druk dwustronny) |
 
 ### Warunki pracy
 

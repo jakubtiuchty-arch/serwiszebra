@@ -40,7 +40,7 @@ const citiesData: Record<string, {
     slug: 'warszawa',
     deliveryTime: '24h',
     metaTitle: 'Serwis Zebra Warszawa – Naprawa, Kurier 24h',
-    metaDescription: 'Serwis Zebra w Warszawie. Kurier 24h, naprawa 2-5 dni, 12 mies. gwarancji, bezpłatna wycena. Drukarki, terminale, skanery.',
+    metaDescription: 'Serwis Zebra w Warszawie. Kurier 24h, naprawa 5–7 dni, 12 mies. gwarancji, bezpłatna diagnostyka przy naprawie. Drukarki, terminale, skanery.',
     heroText: 'Profesjonalny serwis urządzeń Zebra dla firm z Warszawy i okolic',
     introText: 'Obsługujemy firmy z Warszawy i całego Mazowsza. Kurier odbierze Twoje urządzenie w ciągu 24 godzin – bez wychodzenia z biura.',
     lat: 52.2297,
@@ -49,11 +49,11 @@ const citiesData: Record<string, {
   'krakow': {
     name: 'Kraków',
     nameLocative: 'Krakowie',
-    region: 'Małopolski',
+    region: 'województwa małopolskiego',
     slug: 'krakow',
     deliveryTime: '24h',
     metaTitle: 'Serwis Zebra Kraków – Naprawa, Kurier 24h',
-    metaDescription: 'Serwis Zebra w Krakowie. Kurier 24h, naprawa 2-5 dni, 12 mies. gwarancji, bezpłatna wycena. Drukarki, terminale, skanery.',
+    metaDescription: 'Serwis Zebra w Krakowie. Kurier 24h, naprawa 5–7 dni, 12 mies. gwarancji, bezpłatna diagnostyka przy naprawie. Drukarki, terminale, skanery.',
     heroText: 'Profesjonalny serwis urządzeń Zebra dla firm z Krakowa i okolic',
     introText: 'Obsługujemy firmy z Krakowa i całej Małopolski. Kurier odbierze Twoje urządzenie w ciągu 24 godzin – bez wychodzenia z biura.',
     lat: 50.0647,
@@ -66,7 +66,7 @@ const citiesData: Record<string, {
     slug: 'wroclaw',
     deliveryTime: '24-48h',
     metaTitle: 'Serwis Zebra Wrocław – Naprawa, Kurier 24-48h',
-    metaDescription: 'Serwis Zebra we Wrocławiu. Kurier 24-48h, naprawa 2-5 dni, 12 mies. gwarancji, bezpłatna wycena. Drukarki, terminale, skanery.',
+    metaDescription: 'Serwis Zebra we Wrocławiu. Kurier 24-48h, naprawa 5–7 dni, 12 mies. gwarancji, bezpłatna diagnostyka przy naprawie. Drukarki, terminale, skanery.',
     heroText: 'Profesjonalny serwis urządzeń Zebra dla firm z Wrocławia i okolic',
     introText: 'Obsługujemy firmy z Wrocławia i całego Dolnego Śląska. Kurier odbierze Twoje urządzenie w ciągu 24-48 godzin – bez wychodzenia z biura.',
     lat: 51.1079,
@@ -75,11 +75,11 @@ const citiesData: Record<string, {
   'poznan': {
     name: 'Poznań',
     nameLocative: 'Poznaniu',
-    region: 'Wielkopolski',
+    region: 'województwa wielkopolskiego',
     slug: 'poznan',
     deliveryTime: '24-48h',
     metaTitle: 'Serwis Zebra Poznań – Naprawa, Kurier 24-48h',
-    metaDescription: 'Serwis Zebra w Poznaniu. Kurier 24-48h, naprawa 2-5 dni, 12 mies. gwarancji, bezpłatna wycena. Drukarki, terminale, skanery.',
+    metaDescription: 'Serwis Zebra w Poznaniu. Kurier 24-48h, naprawa 5–7 dni, 12 mies. gwarancji, bezpłatna diagnostyka przy naprawie. Drukarki, terminale, skanery.',
     heroText: 'Profesjonalny serwis urządzeń Zebra dla firm z Poznania i okolic',
     introText: 'Obsługujemy firmy z Poznania i całej Wielkopolski. Kurier odbierze Twoje urządzenie w ciągu 24-48 godzin – bez wychodzenia z biura.',
     lat: 52.4064,
@@ -92,7 +92,7 @@ const citiesData: Record<string, {
     slug: 'gdansk',
     deliveryTime: '24-48h',
     metaTitle: 'Serwis Zebra Gdańsk – Naprawa, Kurier 24-48h',
-    metaDescription: 'Serwis Zebra w Gdańsku i Trójmieście. Kurier 24-48h, naprawa 2-5 dni, 12 mies. gwarancji. Drukarki, terminale, skanery.',
+    metaDescription: 'Serwis Zebra w Gdańsku i Trójmieście. Kurier 24-48h, naprawa 5–7 dni, 12 mies. gwarancji. Drukarki, terminale, skanery.',
     heroText: 'Profesjonalny serwis urządzeń Zebra dla firm z Trójmiasta i okolic',
     introText: 'Obsługujemy firmy z Gdańska, Gdyni, Sopotu i całego Pomorza. Kurier odbierze Twoje urządzenie w ciągu 24-48 godzin.',
     lat: 54.3520,
@@ -105,7 +105,7 @@ const citiesData: Record<string, {
     slug: 'katowice',
     deliveryTime: '24h',
     metaTitle: 'Serwis Zebra Katowice – Naprawa, Kurier 24h',
-    metaDescription: 'Serwis Zebra na Śląsku. Kurier 24h, naprawa 2-5 dni, 12 mies. gwarancji. Drukarki, terminale, skanery.',
+    metaDescription: 'Serwis Zebra na Śląsku. Kurier 24h, naprawa 5–7 dni, 12 mies. gwarancji. Drukarki, terminale, skanery.',
     heroText: 'Profesjonalny serwis urządzeń Zebra dla firm ze Śląska',
     introText: 'Obsługujemy firmy z Katowic i całego Śląska. Kurier odbierze Twoje urządzenie w ciągu 24 godzin – bez wychodzenia z biura.',
     lat: 50.2649,
@@ -118,7 +118,7 @@ const citiesData: Record<string, {
     slug: 'lodz',
     deliveryTime: '24h',
     metaTitle: 'Serwis Zebra Łódź – Naprawa, Kurier 24h',
-    metaDescription: 'Serwis Zebra w Łodzi. Kurier 24h, naprawa 2-5 dni, 12 mies. gwarancji, bezpłatna wycena. Drukarki, terminale, skanery.',
+    metaDescription: 'Serwis Zebra w Łodzi. Kurier 24h, naprawa 5–7 dni, 12 mies. gwarancji, bezpłatna diagnostyka przy naprawie. Drukarki, terminale, skanery.',
     heroText: 'Profesjonalny serwis urządzeń Zebra dla firm z Łodzi i okolic',
     introText: 'Obsługujemy firmy z Łodzi i całego województwa łódzkiego. Kurier odbierze Twoje urządzenie w ciągu 24 godzin – bez wychodzenia z biura.',
     lat: 51.7592,
@@ -131,7 +131,7 @@ const citiesData: Record<string, {
     slug: 'szczecin',
     deliveryTime: '24-48h',
     metaTitle: 'Serwis Zebra Szczecin – Naprawa, Kurier 24-48h',
-    metaDescription: 'Serwis Zebra w Szczecinie. Kurier 24-48h, naprawa 2-5 dni, 12 mies. gwarancji, bezpłatna wycena. Drukarki, terminale, skanery.',
+    metaDescription: 'Serwis Zebra w Szczecinie. Kurier 24-48h, naprawa 5–7 dni, 12 mies. gwarancji, bezpłatna diagnostyka przy naprawie. Drukarki, terminale, skanery.',
     heroText: 'Profesjonalny serwis urządzeń Zebra dla firm ze Szczecina i okolic',
     introText: 'Obsługujemy firmy ze Szczecina i całego Pomorza Zachodniego. Kurier odbierze Twoje urządzenie w ciągu 24-48 godzin – bez wychodzenia z biura.',
     lat: 53.4285,
@@ -144,7 +144,7 @@ const citiesData: Record<string, {
     slug: 'bydgoszcz',
     deliveryTime: '24-48h',
     metaTitle: 'Serwis Zebra Bydgoszcz – Naprawa, Kurier 24-48h',
-    metaDescription: 'Serwis Zebra w Bydgoszczy. Kurier 24-48h, naprawa 2-5 dni, 12 mies. gwarancji, bezpłatna wycena. Drukarki, terminale, skanery.',
+    metaDescription: 'Serwis Zebra w Bydgoszczy. Kurier 24-48h, naprawa 5–7 dni, 12 mies. gwarancji, bezpłatna diagnostyka przy naprawie. Drukarki, terminale, skanery.',
     heroText: 'Profesjonalny serwis urządzeń Zebra dla firm z Bydgoszczy i okolic',
     introText: 'Obsługujemy firmy z Bydgoszczy, Torunia i całego Kujawsko-Pomorskiego. Kurier odbierze Twoje urządzenie w ciągu 24-48 godzin.',
     lat: 53.1235,
@@ -157,7 +157,7 @@ const citiesData: Record<string, {
     slug: 'lublin',
     deliveryTime: '24-48h',
     metaTitle: 'Serwis Zebra Lublin – Naprawa, Kurier 24-48h',
-    metaDescription: 'Serwis Zebra w Lublinie. Kurier 24-48h, naprawa 2-5 dni, 12 mies. gwarancji, bezpłatna wycena. Drukarki, terminale, skanery.',
+    metaDescription: 'Serwis Zebra w Lublinie. Kurier 24-48h, naprawa 5–7 dni, 12 mies. gwarancji, bezpłatna diagnostyka przy naprawie. Drukarki, terminale, skanery.',
     heroText: 'Profesjonalny serwis urządzeń Zebra dla firm z Lublina i okolic',
     introText: 'Obsługujemy firmy z Lublina i całego województwa lubelskiego. Kurier odbierze Twoje urządzenie w ciągu 24-48 godzin – bez wychodzenia z biura.',
     lat: 51.2465,
@@ -170,7 +170,7 @@ const citiesData: Record<string, {
     slug: 'bialystok',
     deliveryTime: '24-48h',
     metaTitle: 'Serwis Zebra Białystok – Naprawa, Kurier 24-48h',
-    metaDescription: 'Serwis Zebra w Białymstoku. Kurier 24-48h, naprawa 2-5 dni, 12 mies. gwarancji, bezpłatna wycena. Drukarki, terminale, skanery.',
+    metaDescription: 'Serwis Zebra w Białymstoku. Kurier 24-48h, naprawa 5–7 dni, 12 mies. gwarancji, bezpłatna diagnostyka przy naprawie. Drukarki, terminale, skanery.',
     heroText: 'Profesjonalny serwis urządzeń Zebra dla firm z Białegostoku i okolic',
     introText: 'Obsługujemy firmy z Białegostoku i całego Podlasia. Kurier odbierze Twoje urządzenie w ciągu 24-48 godzin – bez wychodzenia z biura.',
     lat: 53.1325,
@@ -183,7 +183,7 @@ const citiesData: Record<string, {
     slug: 'rzeszow',
     deliveryTime: '24-48h',
     metaTitle: 'Serwis Zebra Rzeszów – Naprawa, Kurier 24-48h',
-    metaDescription: 'Serwis Zebra w Rzeszowie. Kurier 24-48h, naprawa 2-5 dni, 12 mies. gwarancji, bezpłatna wycena. Drukarki, terminale, skanery.',
+    metaDescription: 'Serwis Zebra w Rzeszowie. Kurier 24-48h, naprawa 5–7 dni, 12 mies. gwarancji, bezpłatna diagnostyka przy naprawie. Drukarki, terminale, skanery.',
     heroText: 'Profesjonalny serwis urządzeń Zebra dla firm z Rzeszowa i Doliny Lotniczej',
     introText: 'Obsługujemy firmy z Rzeszowa, Doliny Lotniczej i całego Podkarpacia. Kurier odbierze Twoje urządzenie w ciągu 24-48 godzin.',
     lat: 50.0412,
@@ -196,7 +196,7 @@ const citiesData: Record<string, {
     slug: 'torun',
     deliveryTime: '24-48h',
     metaTitle: 'Serwis Zebra Toruń – Naprawa, Kurier 24-48h',
-    metaDescription: 'Serwis Zebra w Toruniu. Kurier 24-48h, naprawa 2-5 dni, 12 mies. gwarancji, bezpłatna wycena. Drukarki, terminale, skanery.',
+    metaDescription: 'Serwis Zebra w Toruniu. Kurier 24-48h, naprawa 5–7 dni, 12 mies. gwarancji, bezpłatna diagnostyka przy naprawie. Drukarki, terminale, skanery.',
     heroText: 'Profesjonalny serwis urządzeń Zebra dla firm z Torunia i okolic',
     introText: 'Obsługujemy firmy z Torunia, Bydgoszczy i całego Kujawsko-Pomorskiego. Kurier odbierze Twoje urządzenie w ciągu 24-48 godzin.',
     lat: 53.0138,
@@ -209,7 +209,7 @@ const citiesData: Record<string, {
     slug: 'kielce',
     deliveryTime: '24-48h',
     metaTitle: 'Serwis Zebra Kielce – Naprawa, Kurier 24-48h',
-    metaDescription: 'Serwis Zebra w Kielcach. Kurier 24-48h, naprawa 2-5 dni, 12 mies. gwarancji, bezpłatna wycena. Drukarki, terminale, skanery.',
+    metaDescription: 'Serwis Zebra w Kielcach. Kurier 24-48h, naprawa 5–7 dni, 12 mies. gwarancji, bezpłatna diagnostyka przy naprawie. Drukarki, terminale, skanery.',
     heroText: 'Profesjonalny serwis urządzeń Zebra dla firm z Kielc i okolic',
     introText: 'Obsługujemy firmy z Kielc i całego województwa świętokrzyskiego. Kurier odbierze Twoje urządzenie w ciągu 24-48 godzin – bez wychodzenia z biura.',
     lat: 50.8661,
@@ -222,9 +222,9 @@ const citiesData: Record<string, {
     slug: 'olsztyn',
     deliveryTime: '24-48h',
     metaTitle: 'Serwis Zebra Olsztyn – Naprawa, Kurier 24-48h',
-    metaDescription: 'Serwis Zebra w Olsztynie. Kurier 24-48h, naprawa 2-5 dni, 12 mies. gwarancji, bezpłatna wycena. Drukarki, terminale, skanery.',
+    metaDescription: 'Serwis Zebra w Olsztynie. Kurier 24-48h, naprawa 5–7 dni, 12 mies. gwarancji, bezpłatna diagnostyka przy naprawie. Drukarki, terminale, skanery.',
     heroText: 'Profesjonalny serwis urządzeń Zebra dla firm z Olsztyna i okolic',
-    introText: 'Obsługujemy firmy z Olsztyna i całego Warmii i Mazur. Kurier odbierze Twoje urządzenie w ciągu 24-48 godzin – bez wychodzenia z biura.',
+    introText: 'Obsługujemy firmy z Olsztyna i całej Warmii i Mazur. Kurier odbierze Twoje urządzenie w ciągu 24-48 godzin – bez wychodzenia z biura.',
     lat: 53.7784,
     lng: 20.4801,
   },
@@ -235,7 +235,7 @@ const citiesData: Record<string, {
     slug: 'opole',
     deliveryTime: '24-48h',
     metaTitle: 'Serwis Zebra Opole – Naprawa, Kurier 24-48h',
-    metaDescription: 'Serwis Zebra w Opolu. Kurier 24-48h, naprawa 2-5 dni, 12 mies. gwarancji, bezpłatna wycena. Drukarki, terminale, skanery.',
+    metaDescription: 'Serwis Zebra w Opolu. Kurier 24-48h, naprawa 5–7 dni, 12 mies. gwarancji, bezpłatna diagnostyka przy naprawie. Drukarki, terminale, skanery.',
     heroText: 'Profesjonalny serwis urządzeń Zebra dla firm z Opola i okolic',
     introText: 'Obsługujemy firmy z Opola i całego Opolskiego. Kurier odbierze Twoje urządzenie w ciągu 24-48 godzin – bez wychodzenia z biura.',
     lat: 50.6751,
@@ -248,7 +248,7 @@ const citiesData: Record<string, {
     slug: 'zielona-gora',
     deliveryTime: '24-48h',
     metaTitle: 'Serwis Zebra Zielona Góra – Naprawa, Kurier 24-48h',
-    metaDescription: 'Serwis Zebra w Zielonej Górze. Kurier 24-48h, naprawa 2-5 dni, 12 mies. gwarancji, bezpłatna wycena. Drukarki, terminale, skanery.',
+    metaDescription: 'Serwis Zebra w Zielonej Górze. Kurier 24-48h, naprawa 5–7 dni, 12 mies. gwarancji, bezpłatna diagnostyka przy naprawie. Drukarki, terminale, skanery.',
     heroText: 'Profesjonalny serwis Zebra dla firm z Zielonej Góry i okolic',
     introText: 'Obsługujemy firmy z Zielonej Góry, Gorzowa Wielkopolskiego i całego Lubuskiego. Kurier odbierze Twoje urządzenie w ciągu 24-48 godzin.',
     lat: 51.9356,
@@ -329,16 +329,19 @@ export async function generateMetadata({ params }: { params: { miasto: string } 
 }
 
 // FAQ dla każdego miasta
-// cityName = dopełniacz (z Warszawy), cityNameLocative = miejscownik (w Warszawie)
-function getFAQ(cityName: string, cityNameLocative: string, region: string) {
+// „w Warszawie”, ale „we Wrocławiu”: przed W/F + spółgłoską przyimek „we”
+const wMiescie = (miejscownik: string) => (/^[WwFf][^aąeęioóuy]/.test(miejscownik) ? 'we ' : 'w ') + miejscownik
+
+// cityNameLocative = miejscownik (Warszawie), region = dopełniacz (z całego Mazowsza)
+function getFAQ(cityNameLocative: string, region: string) {
   return [
     {
       question: `Ile kosztuje naprawa drukarki Zebra w ${cityNameLocative}?`,
-      answer: `Ceny napraw zależą od typu usterki. Orientacyjnie: wymiana głowicy 250-900 zł, naprawa mechanizmu 150-400 zł. Diagnostyka jest bezpłatna przy akceptacji naprawy. Obsługujemy firmy z ${cityName} i całego ${region}.`
+      answer: `Ceny napraw zależą od typu usterki. Orientacyjnie: wymiana głowicy od 250 do 2499 zł, naprawa mechanizmu od 150 do 1200 zł netto, zależnie od modelu (w drukarkach kart: głowica 580–1500 zł, mechanizm 350–850 zł). Diagnostyka jest bezpłatna przy zleceniu naprawy. Przy rezygnacji z naprawy diagnostyka kosztuje 99 zł netto. Obsługujemy firmy ${wMiescie(cityNameLocative)} i z całego ${region}.`
     },
     {
       question: `Jak długo trwa naprawa urządzenia Zebra?`,
-      answer: `Standardowy czas naprawy to 2-5 dni roboczych od momentu otrzymania urządzenia. Ekspresowe naprawy realizujemy w 24-48h (dopłata). Kurier odbierze urządzenie bezpośrednio z Twojej firmy w ${cityNameLocative}.`
+      answer: `Standardowa naprawa trwa 5–7 dni roboczych od otrzymania urządzenia. Czas zależy od dostępności części. Tryb ekspresowy trwa 24–48 godzin, kosztuje 299 zł netto i wymaga wcześniejszego ustalenia. Kurier odbiera urządzenie bezpośrednio z firmy w ${cityNameLocative}.`
     },
     {
       question: `Czy mogę śledzić status naprawy online?`,
@@ -373,7 +376,7 @@ export default async function CityServicePage({ params }: { params: { miasto: st
     )
   }
 
-  const faq = getFAQ(city.name, city.nameLocative, city.region)
+  const faq = getFAQ(city.nameLocative, city.region)
 
   // Schema.org LocalBusiness
   const localBusinessSchema = {
@@ -504,7 +507,7 @@ export default async function CityServicePage({ params }: { params: { miasto: st
             </div>
             
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-gray-900 mb-3 sm:mb-4">
-              Serwis Zebra {city.name}
+              Serwis Zebra {city.name}{' '}
               <span className="block text-base sm:text-lg md:text-xl font-normal text-gray-600 mt-1 sm:mt-2">
                 – Naprawa Drukarek, Terminali i Skanerów
               </span>
@@ -521,7 +524,7 @@ export default async function CityServicePage({ params }: { params: { miasto: st
               </div>
               <div className="flex items-center gap-1.5 bg-white/80 backdrop-blur-sm border border-gray-200 px-3 py-1.5 rounded-full text-xs sm:text-sm shadow-sm">
                 <Clock className="w-4 h-4 text-amber-600" />
-                <span className="text-gray-700">2-5 dni</span>
+                <span className="text-gray-700">5–7 dni roboczych</span>
               </div>
               <div className="flex items-center gap-1.5 bg-white/80 backdrop-blur-sm border border-gray-200 px-3 py-1.5 rounded-full text-xs sm:text-sm shadow-sm">
                 <Shield className="w-4 h-4 text-blue-600" />
@@ -577,7 +580,7 @@ export default async function CityServicePage({ params }: { params: { miasto: st
               </h2>
               <p>
                 Jako <strong>autoryzowany serwis Zebra Technologies</strong> świadczymy kompleksowe usługi naprawcze dla firm 
-                z {city.name} i całego {city.region}. Nasza wieloletnia współpraca z producentem gwarantuje dostęp do 
+                {wMiescie(city.nameLocative)} i z całego {city.region}. Nasza wieloletnia współpraca z producentem gwarantuje dostęp do 
                 oryginalnych części zamiennych, aktualnej dokumentacji technicznej oraz specjalistycznych narzędzi diagnostycznych.
                 Posiadamy status <strong>Zebra Premier Partner</strong> oraz <strong>Authorized Repair Center</strong>, co potwierdza najwyższy 
                 poziom kompetencji w naprawach urządzeń tej marki.
@@ -621,7 +624,7 @@ export default async function CityServicePage({ params }: { params: { miasto: st
               <p>
                 Cały proces serwisowy jest maksymalnie uproszczony: wypełniasz <Link href="/#formularz" className="text-blue-600 hover:underline">formularz zgłoszeniowy online</Link>, 
                 kurier odbiera urządzenie z Twojego adresu w {city.nameLocative} w ciągu {city.deliveryTime}, 
-                przeprowadzamy bezpłatną diagnostykę, a po Twojej akceptacji wyceny – naprawiamy i odsyłamy sprzęt. 
+                przeprowadzamy diagnostykę (bezpłatną przy zleceniu naprawy), a po Twojej akceptacji wyceny – naprawiamy i odsyłamy sprzęt. 
                 Na wszystkie naprawy udzielamy <strong>12 miesięcy gwarancji</strong>.
               </p>
               <p className="mt-3">
@@ -635,8 +638,8 @@ export default async function CityServicePage({ params }: { params: { miasto: st
                 <li><strong>25 lat doświadczenia</strong> – działamy na rynku od 1999 roku</li>
                 <li><strong>Autoryzowany serwis</strong> – oficjalny partner Zebra Technologies</li>
                 <li><strong>Oryginalne części</strong> – gwarancja jakości i trwałości</li>
-                <li><strong>Szybka realizacja</strong> – standardowo 2-5 dni roboczych</li>
-                <li><strong>Bezpłatna diagnostyka</strong> – płacisz tylko za naprawę</li>
+                <li><strong>Szybka realizacja</strong> – standardowo 5–7 dni roboczych</li>
+                <li><strong>Bezpłatna diagnostyka przy zleceniu naprawy</strong> – przy rezygnacji z naprawy diagnostyka kosztuje 99 zł netto</li>
                 <li><strong>Darmowa wysyłka</strong> – kurier odbiera i dostarcza</li>
               </ul>
 
@@ -776,7 +779,7 @@ export default async function CityServicePage({ params }: { params: { miasto: st
               Cennik orientacyjny
             </h2>
             <p className="text-sm text-gray-600 text-center mb-6">
-              Dokładna wycena po bezpłatnej diagnostyce
+              Dokładna wycena po diagnostyce. Diagnostyka jest bezpłatna przy zleceniu naprawy, a przy rezygnacji z naprawy kosztuje 99 zł netto.
             </p>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">

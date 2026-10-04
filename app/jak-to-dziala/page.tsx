@@ -239,7 +239,7 @@ const steps = [
     number: 7,
     icon: Wrench,
     title: 'Profesjonalna naprawa',
-    description: 'Certyfikowani technicy naprawiają Twoje urządzenie w ciągu max. 7 dni roboczych.',
+    description: 'Certyfikowani technicy naprawiają Twoje urządzenie zwykle w ciągu 5–7 dni roboczych.',
     details: [
       'Oryginalne części zamienne Zebra',
       '25 lat doświadczenia',

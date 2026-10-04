@@ -51,14 +51,14 @@ Model ZXP9 dostępny jest w wersji z opcjonalnym **laminatorem jednostronnym lub
 | Parametr | ZXP9 | ZXP7 | ZC300 |
 |----------|------|------|-------|
 | Technologia druku | **Retransfer** | Sublimacja | Sublimacja |
-| Interfejs | **LCD 21×6** | LCD 21×6 + 3 przyciski | LCD 2" + 3 przyciski |
+| Interfejs | **LCD 21×6** | LCD 21×6 + 3 przyciski | kolorowy LCD + 3 przyciski |
 | Podajnik | **150 kart** | 200 kart | 100 kart |
 | Prędkość (kolor) | **190 kart/h** | 290 kart/h | 200 kart/h |
 | Rozdzielczość | **304 dpi** | 300 dpi | 300 dpi |
-| Druk na krawędzi | **Over-the-edge** | Nie | Nie |
+| Druk na krawędzi | **Over-the-edge** | Nie | Edge-to-edge (karty CR80) |
 | Laminator | **Opcja jedno/dwustronna** | Opcja jedno/dwustronna | Brak |
-| Ethernet | **Standardowy** | Standardowy | Opcjonalny |
-| Waga | **12,5 kg** | 12,2 kg | 3,2 kg |
+| Ethernet | **Standardowy** | Standardowy | Standardowy |
+| Waga | **12,5 kg** | 12,2 kg | 4,0 kg (jednostronna) |
 
 ---
 

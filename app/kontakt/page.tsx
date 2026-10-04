@@ -485,7 +485,7 @@ export default function ContactPage() {
                 {
                   krok: 'Naprawa',
                   tresc:
-                    'Po akceptacji wyceny naprawa trwa zwykle 3–5 dni roboczych. Pracujemy na oryginalnych częściach Zebry.',
+                    'Po akceptacji wyceny naprawa trwa zwykle 5–7 dni roboczych. Pracujemy na oryginalnych częściach Zebry.',
                 },
               ].map((k, i) => (
                 <li key={k.krok}>

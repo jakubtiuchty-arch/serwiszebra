@@ -147,7 +147,7 @@ export default function HowItWorksCity({ cityName, cityNameLocative, deliveryTim
                 </div>
 
                 <div className="flex items-center justify-center bg-[#EDF9C8] text-gray-900 px-3 rounded-full text-xs font-semibold h-9 mt-4">
-                  <span className="whitespace-nowrap">Naprawa 2-5 dni</span>
+                  <span className="whitespace-nowrap">Naprawa 5–7 dni</span>
                 </div>
               </div>
             </div>

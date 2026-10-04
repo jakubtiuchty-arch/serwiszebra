@@ -106,7 +106,7 @@ Typowe objawy zużycia to: pionowe białe linie na wydruku (uszkodzone elementy 
 Wymiana to prosta czynność serwisowa — zajmuje 5-10 minut. Wyłącz drukarkę, otwórz pokrywę, odłącz taśmę flat cable, odkręć śruby mocujące (2-4 szt.), zamontuj nową głowicę i podłącz kabel. Po wymianie zalecamy kalibrację czujników.
 
 **Serwis TAKMA:**
-Oferujemy profesjonalną wymianę głowicy w serwisie — odbieramy drukarkę kurierem z całej Polski, wymieniamy głowicę, kalibrujemy i odsyłamy. Czas realizacji: 2-5 dni roboczych.`
+Oferujemy profesjonalną wymianę głowicy w serwisie — odbieramy drukarkę kurierem z całej Polski, wymieniamy głowicę, kalibrujemy i odsyłamy. Standardowa naprawa trwa 5–7 dni roboczych. Tryb ekspresowy (24–48 h) kosztuje 299 zł netto i wymaga wcześniejszego ustalenia.`
 
   const priceNetto = price || (ph.category === 'industrial' ? 1200 : 600)
   const priceBrutto = Math.round(priceNetto * 1.23 * 100) / 100

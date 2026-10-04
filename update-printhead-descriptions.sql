@@ -25,7 +25,7 @@ UPDATE products SET
 <p>Typowe objawy zużycia: pionowe białe linie na wydruku, blady druk mimo wysokich ustawień ciemności, nieczytelne kody kreskowe na szerokości całej etykiety.</p>
 
 <h3>Serwis TAKMA</h3>
-<p>Jako autoryzowany serwis Zebra oferujemy profesjonalną wymianę głowicy – odbieramy drukarkę kurierem, wymieniamy, kalibrujemy i odsyłamy w 3-5 dni roboczych.</p>',
+<p>Jako autoryzowany serwis Zebra oferujemy profesjonalną wymianę głowicy – odbieramy drukarkę kurierem, wymieniamy, kalibrujemy i odsyłamy. Standardowa naprawa trwa 5–7 dni roboczych. Tryb ekspresowy (24–48 h) kosztuje 299 zł netto i wymaga wcześniejszego ustalenia.</p>',
   meta_title = 'Głowica Zebra 220Xi4 203 DPI (P1004238) – Kup | TAKMA',
   meta_description = 'Oryginalna głowica 203 DPI do Zebra 220Xi4. Szerokość 168mm, żywotność 3 mln cali. Cena 3227 zł netto. Wysyłka 24-72h. Autoryzowany serwis Zebra.'
 WHERE sku = 'P1004238';
@@ -145,7 +145,7 @@ UPDATE products SET
 <p><strong>Uwaga:</strong> GX430t to jedyna drukarka biurkowa Zebra serii GK/GX z rozdzielczością 300 DPI. Głowica 105934-039 NIE pasuje do żadnego innego modelu tej serii.</p>
 
 <h3>Serwis</h3>
-<p>Oferujemy wymianę głowicy w serwisie TAKMA – odbiór kurierem, wymiana, kalibracja i zwrot w 3-5 dni.</p>',
+<p>Oferujemy wymianę głowicy w serwisie TAKMA – odbiór kurierem, wymiana, kalibracja i zwrot. Standardowa naprawa trwa 5–7 dni roboczych.</p>',
   meta_title = 'Głowica Zebra GX430t 300 DPI (105934-039) | TAKMA',
   meta_description = 'Oryginalna głowica 300 DPI do Zebra GX430t. Wysoka jakość dla kodów 2D. Cena 940 zł netto. Wysyłka 24h. Autoryzowany serwis.'
 WHERE sku = '105934-039';

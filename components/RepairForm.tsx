@@ -876,7 +876,7 @@ export default function RepairForm() {
                     >
                       <div>
                         <div className="font-semibold text-gray-900 mb-1">Zwykły</div>
-                        <div className="text-sm text-gray-600">3-5 dni roboczych</div>
+                        <div className="text-sm text-gray-600">5–7 dni roboczych</div>
                       </div>
                       <input
                         {...register('urgency')}
@@ -895,8 +895,9 @@ export default function RepairForm() {
                     >
                       <div>
                         <div className="font-semibold text-gray-900 mb-1">Wysoki</div>
-                        <div className="text-sm text-gray-600">1-2 dni robocze</div>
-                        <div className="text-sm font-semibold text-orange-600 mt-1">+50% wartości naprawy</div>
+                        <div className="text-sm text-gray-600">Tryb ekspresowy: 24–48 h</div>
+                        <div className="text-sm font-semibold text-orange-600 mt-1">299 zł netto</div>
+                        <div className="text-xs text-gray-500 mt-1">Wymaga wcześniejszego ustalenia z serwisem.</div>
                       </div>
                       <input
                         {...register('urgency')}
@@ -1074,7 +1075,7 @@ export default function RepairForm() {
                     <p className="text-sm text-gray-700 whitespace-pre-wrap">{formData.issueDescription}</p>
                     <div className="mt-2 text-sm">
                       <span className="text-gray-600">Priorytet:</span> <span className="font-medium">
-                        {formData.urgency === 'express' ? 'Wysoki (+50% wartości)' : 'Zwykły'}
+                        {formData.urgency === 'express' ? 'Wysoki (tryb ekspresowy, 299 zł netto)' : 'Zwykły'}
                       </span>
                     </div>
                     {uploadedFiles.length > 0 && (

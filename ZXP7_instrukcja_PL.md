@@ -50,13 +50,13 @@ Model ZXP7 dostępny jest w wersji z opcjonalnym **laminatorem jednostronnym lub
 
 | Parametr | ZXP7 | ZC100 | ZC300 |
 |----------|------|-------|-------|
-| Interfejs | **LCD 21×6 + 3 przyciski** | Diody LED | LCD 2" + 3 przyciski |
+| Interfejs | **LCD 21×6 + 3 przyciski** | Diody LED | kolorowy LCD + 3 przyciski |
 | Podajnik | **200 kart** | 100 kart | 100 kart |
-| Prędkość (YMCKO) | **290 kart/h** | 180 kart/h | 200 kart/h |
+| Prędkość (YMCKO) | **290 kart/h** | 150 kart/h | 200 kart/h |
 | Prędkość (mono) | **1375 kart/h** | 700 kart/h | 900 kart/h |
 | Laminator | **Opcja jedno/dwustronna** | Brak | Brak |
-| Ethernet | **Standardowy** | Opcjonalny | Opcjonalny |
-| Waga | 12,2 kg | 2,9 kg | 3,2 kg |
+| Ethernet | **Standardowy** | Opcjonalny | Standardowy |
+| Waga | 12,2 kg | 3,9 kg | 4,0 kg (jednostronna) |
 
 ---
 

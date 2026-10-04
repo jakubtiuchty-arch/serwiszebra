@@ -671,7 +671,7 @@ export default async function ModelPage({ params }: { params: { model: string } 
               <p>
                 Jeśli Twoje urządzenie <strong>Zebra {manual.model}</strong> wymaga <strong>naprawy</strong>, 
                 <strong>kalibracji</strong> lub <strong>konfiguracji</strong>, skontaktuj się z naszym autoryzowanym serwisem. 
-                Oferujemy <strong>bezpłatną diagnostykę</strong>, oryginalne części zamienne i <strong>12 miesięcy gwarancji</strong> na naprawy.
+                Oferujemy <strong>bezpłatną diagnostykę przy zleceniu naprawy</strong>, oryginalne części zamienne i <strong>12 miesięcy gwarancji</strong> na naprawy.
               </p>
             </div>
           </div>

@@ -20952,7 +20952,7 @@ Przytrzymaj PAUSE/FEED - zwolnij po 4 pomarańczowych mignięciach
   'zc100': {
     model: 'ZC100',
     title: 'Zebra ZC100 – Instrukcja obsługi po Polsku',
-    lastUpdated: '2025-01-20',
+    lastUpdated: '2026-10-03',
     sourceDocument: 'Zebra ZC100 Card Printer User Guide',
     keywords: [
       'zebra zc100 instrukcja', 'zc100 instrukcja po polsku', 'zebra zc100 manual',
@@ -20969,31 +20969,32 @@ Przytrzymaj PAUSE/FEED - zwolnij po 4 pomarańczowych mignięciach
         content: `
 ### O drukarce ZC100
 
-Zebra ZC100 to kompaktowa jednostronna drukarka kart identyfikacyjnych, zaprojektowana do druku pełnokolorowego metodą sublimacji barwników (dye sublimation) lub monochromatycznego druku termotransferowego. Obsługuje standardowe karty PVC i PVC-composite w formatach CR70 (52x84 mm) i CR80 (54x86 mm) o grubości 10-40 mil. Drukarka wyposażona jest w podajnik na 100 kart, zintegrowany system odwracania kart (flipper) oraz kasety z taśmą ze zintegrowanym wałkiem czyszczącym. Model ZC100 posiada intuicyjny panel LED do wskazywania statusu drukarki.
+Zebra ZC100 to kompaktowa jednostronna drukarka kart identyfikacyjnych, zaprojektowana do druku pełnokolorowego metodą sublimacji barwników (dye sublimation) lub monochromatycznego druku termotransferowego. Obsługuje standardowe karty PVC i PVC-composite w formatach CR70 (52x84 mm) i CR80 (54x86 mm) o grubości 10-40 mil. Drukarka wyposażona jest w podajnik na 100 kart oraz kasety z taśmą ze zintegrowanym wałkiem czyszczącym. ZC100 drukuje wyłącznie jednostronnie. Drukarka nie ma modułu obracania kart (flipper). Model ZC100 posiada intuicyjny panel LED do wskazywania statusu drukarki.
 
 ### Parametry techniczne
 
 | Parametr | ZC100 |
 |----------|-------|
-| **Druk** | **Jednostronny** |
+| **Druk** | **Wyłącznie jednostronny** |
 | Technologia druku | Sublimacja barwników / Termotransfer |
 | Rozdzielczość | 300 dpi (11,8 punktów/mm) |
-| Prędkość druku (YMCKO) | do 180 kart/godz. (kolor jednostronny) |
+| Prędkość druku (YMCKO) | do 150 kart/godz. (kolor jednostronny) |
 | Prędkość druku (K) | do 700 kart/godz. (mono jednostronny) |
 | Formaty kart | CR80 (54x86 mm), CR70 (52x84 mm) |
 | Grubość kart | 10-40 mil (0,25-1,02 mm) |
 | Pojemność podajnika | 100 kart (30 mil) |
 | Pojemność odbiornika | 100 kart (30 mil) |
-| Pamięć RAM | 512 MB |
+| Pamięć flash | 2 GB |
 
 ### Porównanie ZC100 vs ZC300
 
 | Parametr | ZC100 | ZC300 |
 |----------|-------|-------|
-| Druk | **Jednostronny** | Jednostronny/Dwustronny |
+| Druk | **Wyłącznie jednostronny** | Jednostronny; dwustronny z modułem druku dwustronnego |
 | Interfejs użytkownika | **Diody LED** | Kolorowy wyświetlacz LCD |
-| Wyświetlacz | Brak | 2" LCD z 3 przyciskami |
-| Prędkość (YMCKO) | 180 kart/h | 200 kart/h |
+| Wyświetlacz | Brak | Kolorowy LCD z 3 przyciskami |
+| Prędkość (YMCKO, jednostronnie) | 150 kart/h | 200 kart/h |
+| Prędkość (mono, jednostronnie) | 700 kart/h | 900 kart/h |
 | Menu pomocy | Brak | Animacje na LCD |
 
 ### Złącza i komunikacja
@@ -21001,17 +21002,17 @@ Zebra ZC100 to kompaktowa jednostronna drukarka kart identyfikacyjnych, zaprojek
 | Interfejs | Opis |
 |-----------|------|
 | USB 2.0 | Połączenie bezpośrednie z PC |
-| 10/100 Ethernet | Połączenie sieciowe (RJ-45) |
-| Wi-Fi | Opcjonalne 802.11b/g |
-| Bluetooth | Opcjonalne parowanie |
+| 10/100 Ethernet | Opcjonalne połączenie sieciowe (RJ-45) |
+| Wi-Fi | Opcjonalne 802.11ac |
 | NFC | Zebra Print Touch |
 
 ### Opcje fabryczne i rozszerzenia
 
-- **Enkoder magnetyczny** – zapis ISO na 3 ścieżkach (HiCo/LoCo)
-- **Enkoder kart inteligentnych** – stykowy i zbliżeniowy
-- **Moduł druku dwustronnego** – flipper z pojemnikiem na karty odrzucone
-- **Wi-Fi** – łączność bezprzewodowa 802.11b/g
+- **Enkoder magnetyczny** – zapis ISO 7811 na 3 ścieżkach (HiCo/LoCo), tylko karty 30 mil
+- **Ethernet 10/100** – połączenie sieciowe
+- **Wi-Fi** – łączność bezprzewodowa 802.11ac
+
+ZC100 nie ma opcji druku dwustronnego ani enkodera kart inteligentnych. Te opcje są dostępne w drukarce ZC300.
 `
       },
       {
@@ -21048,6 +21049,8 @@ Zebra ZC100 to kompaktowa jednostronna drukarka kart identyfikacyjnych, zaprojek
 
 ### Podłączenie Ethernet
 
+Ethernet w ZC100 jest opcją. Ta procedura dotyczy drukarek z interfejsem Ethernet.
+
 1. Podłącz kabel Ethernet (RJ-45) do gniazda z tyłu drukarki
 2. Podłącz drugi koniec do przełącznika sieciowego lub routera
 3. Drukarka automatycznie uzyska adres IP przez DHCP
@@ -21078,7 +21081,7 @@ Orientacja kart zależy od ich typu:
 |-----------|------------|
 | Zwykłe karty PVC | Dowolna |
 | Karty z paskiem magnetycznym | Pasek na dole, po prawej stronie |
-| Karty kontaktowe (chip) | Chip do góry, z przodu |
+| Karty kontaktowe (chip) | Chip do góry, w stronę tyłu drukarki |
 | Karty zbliżeniowe | Dowolna |
 
 1. Otwórz pokrywę podajnika wejściowego
@@ -21097,6 +21100,8 @@ Drukarka posiada szczelinę podawania ręcznego poniżej podajnika głównego:
       {
         title: '4. Wskaźniki LED',
         content: `
+ZC100 ma trzy trójkolorowe wskaźniki stanu: Card (karty), Ribbon (taśma) i Clean (czyszczenie). Dioda zasilania znajduje się w przycisku zasilania. Szczelina podawania ręcznego ma podświetlenie LED.
+
 ### Dioda zasilania (Power)
 
 | Stan diody | Znaczenie |
@@ -21131,7 +21136,7 @@ Drukarka posiada szczelinę podawania ręcznego poniżej podajnika głównego:
 | Miga zielono | Czyszczenie w toku |
 | Świeci zielono | Czyszczenie zakończone |
 | Świeci bursztynowo | Wymagane czyszczenie |
-| Świeci czerwono | Błąd czyszczenia / Pełny pojemnik odrzutów |
+| Świeci czerwono | Błąd czyszczenia |
 
 ### Dioda podawania ręcznego (Manual Feed)
 
@@ -21222,6 +21227,10 @@ Zacięcie występuje, gdy karta nie dociera do czujnika lub blokuje czujnik nies
 
 **Uwaga:** Nie używaj narzędzi do usuwania zaciętych kart – unieważni to gwarancję!
 
+### Karta odrzucona
+
+Gdy podczas druku wystąpi błąd, drukarka odrzuca kartę. W ZC100 karta odrzucona trafia do odbiornika kart. Należy zdjąć kartę z wierzchu stosu w odbiorniku. ZC100 nie ma pojemnika na karty odrzucone. Ten pojemnik mają tylko drukarki ZC300 i ZC350 z modułem druku dwustronnego.
+
 ### Problemy z jakością druku
 
 | Problem | Możliwa przyczyna | Rozwiązanie |
@@ -21250,7 +21259,7 @@ Zacięcie występuje, gdy karta nie dociera do czujnika lub blokuje czujnik nies
         content: `
 ### Enkoder magnetyczny
 
-Obsługuje standardowy format ISO 7811 na 3 ścieżkach:
+Enkoder koduje tylko karty o grubości 30 mil. Karty z paskiem magnetycznym należy wkładać paskiem w dół. Enkoder obsługuje standardowy format ISO 7811 na 3 ścieżkach:
 
 | Ścieżka | Gęstość | Bitów/znak | Maks. znaków | Format |
 |---------|---------|------------|--------------|--------|
@@ -21258,15 +21267,14 @@ Obsługuje standardowy format ISO 7811 na 3 ścieżkach:
 | 2 | 75 BPI | 5 | 37 | ABA (numeryczny) |
 | 3 | 210 BPI | 5 | 104 | THRIFT (numeryczny) |
 
-### Enkoder kart inteligentnych
+### Karty inteligentne
 
-- **Karty stykowe** – programowanie przez zewnętrzny programator podłączony do złącza DB-9
-- **Karty zbliżeniowe** – kodowanie przez antenę w ścieżce transportu kart
+ZC100 nie ma opcji enkodera kart inteligentnych (stykowych ani zbliżeniowych). Kodowanie kart inteligentnych jest dostępne w drukarce ZC300.
 
 ### Wi-Fi (opcja)
 
-- Standard: IEEE 802.11b/g
-- Prędkość: do 54 Mbps (802.11g) / 11 Mbps (802.11b)
+- Standard: IEEE 802.11ac
+- Konfiguracja: w sterowniku drukarki
 - Bezpieczeństwo: WEP, WPA/WPA2
 - Szyfrowanie: RC4, TKIP, CCMP (AES)
 `
@@ -21278,10 +21286,10 @@ Obsługuje standardowy format ISO 7811 na 3 ścieżkach:
 
 | Parametr | Wartość |
 |----------|---------|
-| Szerokość | ok. 193 mm |
-| Głębokość | ok. 290 mm |
-| Wysokość | ok. 209 mm |
-| Waga | ok. 2,9 kg |
+| Szerokość | 157 mm |
+| Głębokość | 383 mm |
+| Wysokość | 258 mm |
+| Waga | 3,9 kg |
 
 ### Warunki pracy
 
@@ -21293,7 +21301,7 @@ Obsługuje standardowy format ISO 7811 na 3 ścieżkach:
 
 ### Certyfikaty
 
-- FCC Class B
+- FCC Class A
 - CE
 - IC
 - UL/cUL Listed
@@ -21308,7 +21316,7 @@ Obsługuje standardowy format ISO 7811 na 3 ścieżkach:
 
 ### Jaka jest prędkość druku ZC100?
 
-**Odpowiedź:** ZC100 drukuje do **180 kart/godz.** w trybie kolorowym (YMCKO) i do **700 kart/godz.** w trybie monochromatycznym (K).
+**Odpowiedź:** ZC100 drukuje do **150 kart/godz.** w trybie kolorowym (YMCKO) i do **700 kart/godz.** w trybie monochromatycznym (K). Obie wartości dotyczą druku jednostronnego.
 
 ### Jakie formaty kart obsługuje ZC100?
 
@@ -21332,11 +21340,11 @@ Obsługuje standardowy format ISO 7811 na 3 ścieżkach:
 
 ### Czy ZC100 drukuje dwustronnie?
 
-**Odpowiedź:** Standardowo ZC100 drukuje **jednostronnie**. Moduł druku dwustronnego jest dostępny jako **opcja fabryczna**.
+**Odpowiedź:** **Nie.** ZC100 drukuje **wyłącznie jednostronnie**. Dla ZC100 nie ma modułu druku dwustronnego. Druk dwustronny zapewnia drukarka ZC300 z modułem druku dwustronnego: YMCKOK do 140 kart/godz., mono do 450 kart/godz.
 
 ### Czy ZC100 ma enkoder magnetyczny?
 
-**Odpowiedź:** Enkoder magnetyczny jest dostępny jako **opcja fabryczna** – obsługuje format ISO 7811 na 3 ścieżkach (HiCo/LoCo).
+**Odpowiedź:** Enkoder magnetyczny jest dostępny jako **opcja**. Można go też doinstalować w drukarce. Enkoder obsługuje format ISO 7811 na 3 ścieżkach (HiCo/LoCo) i koduje tylko karty o grubości 30 mil.
 
 ### Jak drukować kartę testową?
 
@@ -21344,7 +21352,7 @@ Obsługuje standardowy format ISO 7811 na 3 ścieżkach:
 
 ### Czym różni się ZC100 od ZC300?
 
-**Odpowiedź:** ZC100 ma **diody LED**, ZC300 ma **kolorowy wyświetlacz LCD 2"** z przyciskami i animacjami pomocy. ZC300 jest też szybsza (200 vs 180 kart/h w YMCKO).
+**Odpowiedź:** ZC100 ma **diody LED**, ZC300 ma **kolorowy wyświetlacz LCD** z przyciskami i animacjami pomocy. ZC300 jest też szybsza: YMCKO jednostronnie 200 wobec 150 kart/h, mono jednostronnie 900 wobec 700 kart/h. ZC300 z modułem druku dwustronnego drukuje dwustronnie. ZC100 drukuje wyłącznie jednostronnie.
 `
       }
     ]
@@ -21353,7 +21361,7 @@ Obsługuje standardowy format ISO 7811 na 3 ścieżkach:
   'zc300': {
     model: 'ZC300',
     title: 'Zebra ZC300 – Instrukcja obsługi po Polsku',
-    lastUpdated: '2025-01-20',
+    lastUpdated: '2026-10-03',
     sourceDocument: 'Zebra ZC300 Card Printer User Guide',
     keywords: [
       'zebra zc300 instrukcja', 'zc300 instrukcja po polsku', 'zebra zc300 manual',
@@ -21374,7 +21382,7 @@ Obsługuje standardowy format ISO 7811 na 3 ścieżkach:
         content: `
 ### O drukarce ZC300
 
-Zebra ZC300 to zaawansowana drukarka kart identyfikacyjnych z **kolorowym wyświetlaczem LCD 2"** i trzema przyciskami funkcyjnymi, umożliwiająca pełnokolorowy druk metodą sublimacji barwników lub monochromatyczny druk termotransferowy. Obsługuje standardowe karty PVC i PVC-composite w formatach CR70 (52x84 mm) i CR80 (54x86 mm) o grubości 10-40 mil. Drukarka posiada podajnik na 100 kart, intuicyjne menu z animowaną pomocą oraz opcję druku dwustronnego. Model ZC300 oferuje lepszą diagnostykę i łatwiejszą obsługę dzięki ekranowi LCD.
+Zebra ZC300 to zaawansowana drukarka kart identyfikacyjnych z **kolorowym wyświetlaczem LCD** i trzema przyciskami funkcyjnymi, umożliwiająca pełnokolorowy druk metodą sublimacji barwników lub monochromatyczny druk termotransferowy. Obsługuje standardowe karty PVC i PVC-composite w formatach CR70 (52x84 mm) i CR80 (54x86 mm) o grubości 10-40 mil. Drukarka posiada podajnik na 100 kart, intuicyjne menu z animowaną pomocą oraz opcję druku dwustronnego. Model ZC300 oferuje lepszą diagnostykę i łatwiejszą obsługę dzięki ekranowi LCD.
 
 ### Parametry techniczne
 
@@ -21385,22 +21393,25 @@ Zebra ZC300 to zaawansowana drukarka kart identyfikacyjnych z **kolorowym wyświ
 | Rozdzielczość | 300 dpi (11,8 punktów/mm) |
 | Prędkość druku (YMCKO) | do 200 kart/godz. (kolor jednostronny) |
 | | do 140 kart/godz. (kolor dwustronny) |
-| Prędkość druku (K) | do 800 kart/godz. (mono jednostronny) |
+| Prędkość druku (K) | do 900 kart/godz. (mono jednostronny) |
+| | do 450 kart/godz. (mono dwustronny) |
 | Formaty kart | CR80 (54x86 mm), CR70 (52x84 mm) |
 | Grubość kart | 10-40 mil (0,25-1,02 mm) |
 | Pojemność podajnika | 100 kart (30 mil) |
 | Pojemność odbiornika | 100 kart (30 mil) |
-| Wyświetlacz | **2" kolorowy LCD** |
+| Wyświetlacz | **kolorowy LCD** |
 | Pamięć RAM | 512 MB |
 
 ### Porównanie ZC300 vs ZC100
 
 | Parametr | ZC300 | ZC100 |
 |----------|-------|-------|
-| Interfejs użytkownika | **Kolorowy LCD 2"** | Diody LED |
+| Interfejs użytkownika | **Kolorowy LCD** | Diody LED |
 | Przyciski funkcyjne | **3 przyciski** | Brak |
 | Menu pomocy | **Animacje na LCD** | Brak |
-| Prędkość (YMCKO) | **200 kart/h** | 180 kart/h |
+| Prędkość (YMCKO, jednostronnie) | **200 kart/h** | 150 kart/h |
+| Prędkość (mono, jednostronnie) | **900 kart/h** | 700 kart/h |
+| Druk dwustronny | Opcja (moduł druku dwustronnego) | Brak |
 | Diagnostyka | **Rozszerzona (LCD)** | Podstawowa (LED) |
 
 ### Złącza i komunikacja
@@ -21409,7 +21420,7 @@ Zebra ZC300 to zaawansowana drukarka kart identyfikacyjnych z **kolorowym wyświ
 |-----------|------|
 | USB 2.0 | Połączenie bezpośrednie z PC |
 | 10/100 Ethernet | Połączenie sieciowe (RJ-45) |
-| Wi-Fi | Opcjonalne 802.11b/g |
+| Wi-Fi | Opcjonalne 802.11ac |
 | Bluetooth | Opcjonalne parowanie |
 | NFC | Zebra Print Touch |
 
@@ -21418,7 +21429,7 @@ Zebra ZC300 to zaawansowana drukarka kart identyfikacyjnych z **kolorowym wyświ
 - **Enkoder magnetyczny** – zapis ISO na 3 ścieżkach (HiCo/LoCo)
 - **Enkoder kart inteligentnych** – stykowy i zbliżeniowy
 - **Moduł druku dwustronnego** – flipper z pojemnikiem na karty odrzucone
-- **Wi-Fi** – łączność bezprzewodowa 802.11b/g
+- **Wi-Fi** – łączność bezprzewodowa 802.11ac
 `
       },
       {
@@ -21486,7 +21497,7 @@ Orientacja kart zależy od ich typu:
 |-----------|------------|
 | Zwykłe karty PVC | Dowolna |
 | Karty z paskiem magnetycznym | Pasek na dole, po prawej stronie |
-| Karty kontaktowe (chip) | Chip do góry, z przodu |
+| Karty kontaktowe (chip) | Chip do góry, w stronę tyłu drukarki |
 | Karty zbliżeniowe | Dowolna |
 
 1. Otwórz pokrywę podajnika wejściowego
@@ -21717,7 +21728,6 @@ Do usunięcia uporczywych zabrudzeń użyj patyczków nasączonych alkoholem:
 Ostrzeżenia wymagają uwagi operatora, ale nie blokują drukowania:
 
 - **Ribbon low** – niski poziom taśmy
-- **Cards low** – mało kart w podajniku
 - **Cleaning required** – wymagane czyszczenie
 
 Naciśnij lewy przycisk, aby wyświetlić animację pomocy.
@@ -21783,8 +21793,7 @@ Moduł flipper umożliwia automatyczny druk dwustronny oraz przekierowywanie odr
 
 ### Wi-Fi (opcja)
 
-- Standard: IEEE 802.11b/g
-- Prędkość: do 54 Mbps (802.11g) / 11 Mbps (802.11b)
+- Standard: IEEE 802.11ac
 - Bezpieczeństwo: WEP, WPA/WPA2
 - Szyfrowanie: RC4, TKIP, CCMP (AES)
 
@@ -21802,10 +21811,10 @@ Moduł flipper umożliwia automatyczny druk dwustronny oraz przekierowywanie odr
 
 | Parametr | Wartość |
 |----------|---------|
-| Szerokość | ok. 193 mm |
-| Głębokość | ok. 290 mm |
-| Wysokość | ok. 209 mm |
-| Waga | ok. 2,9 kg |
+| Szerokość | 157 mm |
+| Głębokość | 383 mm (druk jednostronny), 468 mm (druk dwustronny) |
+| Wysokość | 258 mm |
+| Waga | 4,0 kg (druk jednostronny), 4,4 kg (druk dwustronny) |
 
 ### Warunki pracy
 
@@ -21847,15 +21856,15 @@ Moduł flipper umożliwia automatyczny druk dwustronny oraz przekierowywanie odr
         content: `
 ### Czym jest drukarka ZC300?
 
-**Odpowiedź:** Zebra ZC300 to zaawansowana drukarka kart identyfikacyjnych z **kolorowym wyświetlaczem LCD 2"** i trzema przyciskami funkcyjnymi, do druku pełnokolorowego lub monochromatycznego na kartach PVC.
+**Odpowiedź:** Zebra ZC300 to zaawansowana drukarka kart identyfikacyjnych z **kolorowym wyświetlaczem LCD** i trzema przyciskami funkcyjnymi, do druku pełnokolorowego lub monochromatycznego na kartach PVC.
 
 ### Jaka jest prędkość druku ZC300?
 
-**Odpowiedź:** ZC300 drukuje do **200 kart/godz.** (kolor jednostronny), **140 kart/godz.** (kolor dwustronny) i do **800 kart/godz.** (mono jednostronny).
+**Odpowiedź:** ZC300 drukuje do **200 kart/godz.** (kolor jednostronny), **140 kart/godz.** (kolor dwustronny), do **900 kart/godz.** (mono jednostronny) i do **450 kart/godz.** (mono dwustronny).
 
 ### Czym różni się ZC300 od ZC100?
 
-**Odpowiedź:** ZC300 ma **kolorowy wyświetlacz LCD 2"** z animacjami pomocy i 3 przyciskami, ZC100 ma tylko diody LED. ZC300 jest szybsza (200 vs 180 kart/h).
+**Odpowiedź:** ZC300 ma **kolorowy wyświetlacz LCD** z animacjami pomocy i 3 przyciskami, ZC100 ma tylko diody LED. ZC300 jest szybsza: YMCKO jednostronnie 200 wobec 150 kart/h, mono jednostronnie 900 wobec 700 kart/h. ZC300 z modułem druku dwustronnego drukuje dwustronnie. ZC100 drukuje wyłącznie jednostronnie.
 
 ### Jak drukować kartę demonstracyjną z LCD?
 
@@ -21871,7 +21880,7 @@ Moduł flipper umożliwia automatyczny druk dwustronny oraz przekierowywanie odr
 
 ### Co oznacza żółte tło na wyświetlaczu?
 
-**Odpowiedź:** Żółte tło oznacza **ostrzeżenie** (np. niski poziom taśmy, mało kart) – drukarka nadal działa, ale wymaga uwagi.
+**Odpowiedź:** Żółte tło oznacza **ostrzeżenie** (np. niski poziom taśmy, wymagane czyszczenie) – drukarka nadal działa, ale wymaga uwagi.
 
 ### Co oznacza czerwone tło na wyświetlaczu?
 
@@ -21920,7 +21929,7 @@ Moduł flipper umożliwia automatyczny druk dwustronny oraz przekierowywanie odr
         content: `
 ### O drukarce ZC350
 
-Zebra ZC350 to flagowa drukarka kart identyfikacyjnych z serii ZC, wyposażona w **kolorowy wyświetlacz LCD 2"** i trzy przyciski funkcyjne. Oferuje pełnokolorowy druk metodą sublimacji barwników lub monochromatyczny druk termotransferowy na standardowych kartach PVC i PVC-composite w formatach CR79 (53x84 mm) i CR80 (54x86 mm) o grubości 10-40 mil. Model ZC350 wyróżnia się **zaawansowanymi funkcjami bezpieczeństwa** (szyfrowanie klasy rządowej, uwierzytelnianie host-drukarka) oraz obsługą specjalnych taśm z efektami 3D, holograficznymi i długotrwałymi. Drukarka automatycznie dostosowuje się do grubości karty i posiada zmodernizowane podajniki na 100 kart.
+Zebra ZC350 to flagowa drukarka kart identyfikacyjnych z serii ZC, wyposażona w **kolorowy wyświetlacz LCD** i trzy przyciski funkcyjne. Oferuje pełnokolorowy druk metodą sublimacji barwników lub monochromatyczny druk termotransferowy na standardowych kartach PVC i PVC-composite w formatach CR79 (53x84 mm) i CR80 (54x86 mm) o grubości 10-40 mil. Model ZC350 wyróżnia się **zaawansowanymi funkcjami bezpieczeństwa** (szyfrowanie klasy rządowej, uwierzytelnianie host-drukarka) oraz obsługą specjalnych taśm z efektami 3D, holograficznymi i długotrwałymi. Drukarka automatycznie dostosowuje się do grubości karty i posiada zmodernizowane podajniki na 100 kart.
 
 ### Parametry techniczne
 
@@ -21937,7 +21946,7 @@ Zebra ZC350 to flagowa drukarka kart identyfikacyjnych z serii ZC, wyposażona w
 | Grubość kart | 10-40 mil (0,25-1,02 mm) |
 | Pojemność podajnika | 100 kart (30 mil) |
 | Pojemność odbiornika | 100 kart (30 mil) |
-| Wyświetlacz | **2" kolorowy LCD** |
+| Wyświetlacz | **kolorowy LCD** |
 | Pamięć RAM | 512 MB |
 | Gwarancja | **2 lata (drukarka i głowica)** |
 
@@ -21946,10 +21955,10 @@ Zebra ZC350 to flagowa drukarka kart identyfikacyjnych z serii ZC, wyposażona w
 | Parametr | ZC350 | ZC300 |
 |----------|-------|-------|
 | Prędkość (YMCKO jednostronny) | **225 kart/h** | 200 kart/h |
-| Prędkość (K mono dwustronny) | **500 kart/h** | 400 kart/h |
-| Specjalne taśmy | **3D, holograficzne, długotrwałe** | Standardowe |
+| Prędkość (K mono dwustronny) | **500 kart/h** | 450 kart/h |
+| Specjalne taśmy | **3D, holograficzne, długotrwałe** | YMCKLL, YMCPKO, SrDYMCKO |
 | Zabezpieczenia | **Szyfrowanie rządowe, auth.** | Standardowe |
-| Automatyczna grubość karty | **Tak** | Nie |
+| Automatyczna grubość karty | **Tak** | Tak |
 | Blokada pokrywy | **Tak (opcja)** | Nie |
 | Gwarancja | **2 lata** | 3 lata |
 
@@ -22045,7 +22054,7 @@ Orientacja kart zależy od ich typu:
 |-----------|------------|
 | Zwykłe karty PVC | Dowolna |
 | Karty z paskiem magnetycznym | Pasek na dole, po prawej stronie |
-| Karty kontaktowe (chip) | Chip do góry, z przodu |
+| Karty kontaktowe (chip) | Chip do góry, w stronę tyłu drukarki |
 | Karty zbliżeniowe / proximity | Dowolna |
 
 1. Otwórz pokrywę podajnika wejściowego
@@ -22298,7 +22307,6 @@ Dostępne dwie opcje zestawów czyszczących:
 Ostrzeżenia wymagają uwagi operatora, ale nie blokują drukowania:
 
 - **Ribbon low** – niski poziom taśmy
-- **Cards low** – mało kart w podajniku
 - **Cleaning required** – wymagane czyszczenie
 
 Naciśnij lewy przycisk, aby wyświetlić animację pomocy.
@@ -22440,7 +22448,7 @@ Aby skorzystać: zbliż telefon z NFC do oznaczenia Print Touch na drukarce.
         content: `
 ### Czym jest drukarka ZC350?
 
-**Odpowiedź:** Zebra ZC350 to **flagowa drukarka kart identyfikacyjnych** z serii ZC, z wyświetlaczem LCD 2", zaawansowanymi zabezpieczeniami i obsługą specjalnych taśm 3D/holograficznych.
+**Odpowiedź:** Zebra ZC350 to **flagowa drukarka kart identyfikacyjnych** z serii ZC, z kolorowym wyświetlaczem LCD, zaawansowanymi zabezpieczeniami i obsługą specjalnych taśm 3D/holograficznych.
 
 ### Jaka jest prędkość druku ZC350?
 
@@ -22537,8 +22545,8 @@ Zebra ZC10L to wielkoformatowa drukarka kart zaprojektowana specjalnie z myślą
 |----------|-------|-------|
 | Przeznaczenie | **Branża hotelarska** | Karty ID |
 | Format kart | **Wielkoformatowe z zakładką** | CR80/CR70 |
-| Druk edge-to-edge | **Tak** | Nie |
-| Waga | 19 kg | 2,9 kg |
+| Druk edge-to-edge | **Tak** (karty wielkoformatowe) | Tak (karty CR80) |
+| Waga | 19 kg | 3,9 kg |
 | Interfejs | Diody LED | Diody LED |
 | Zasilanie | Wewnętrzny | Zewnętrzny 100W |
 `
@@ -22793,7 +22801,7 @@ Niektóre karty mogą wymagać ponownego wydrukowania.
 
 ### Czym różni się ZC10L od ZC100?
 
-**Odpowiedź:** ZC10L drukuje **wielkoformatowe karty z zakładkami** (dla hoteli), waży **19 kg** i ma wbudowany zasilacz. ZC100 drukuje standardowe karty CR80/CR70 i waży tylko 2,9 kg.
+**Odpowiedź:** ZC10L drukuje **wielkoformatowe karty z zakładkami** (dla hoteli), waży **19 kg** i ma wbudowany zasilacz. ZC100 drukuje standardowe karty CR80/CR70 i waży 3,9 kg.
 
 ### Co to jest druk edge-to-edge?
 
@@ -22899,12 +22907,12 @@ Model ZXP7 dostępny jest w wersji z opcjonalnym **laminatorem jednostronnym lub
 
 | Parametr | ZXP7 | ZC100 | ZC300 |
 |----------|------|-------|-------|
-| Interfejs | **LCD 21x6 + 3 przyciski** | Diody LED | LCD 2" + 3 przyciski |
+| Interfejs | **LCD 21x6 + 3 przyciski** | Diody LED | kolorowy LCD + 3 przyciski |
 | Podajnik | **200 kart** | 100 kart | 100 kart |
-| Prędkość (YMCKO) | **290 kart/h** | 180 kart/h | 200 kart/h |
+| Prędkość (YMCKO) | **290 kart/h** | 150 kart/h | 200 kart/h |
 | Prędkość (mono) | **1375 kart/h** | 700 kart/h | 900 kart/h |
 | Laminator | **Opcja jedno/dwustronna** | Brak | Brak |
-| Ethernet | **Standardowy** | Opcjonalny | Opcjonalny |
+| Ethernet | **Standardowy** | Opcjonalny | Standardowy |
 `
       },
       {
@@ -23339,7 +23347,7 @@ Dwa nowe wałki czyszczące są dołączone do każdego opakowania taśm.
 
 ### Czy ZXP7 ma Ethernet standardowo?
 
-**Odpowiedź:** Tak, **Ethernet 10/100** jest standardowym wyposażeniem ZXP7, w przeciwieństwie do modeli ZC100/ZC300 gdzie jest opcjonalny.
+**Odpowiedź:** Tak, **Ethernet 10/100** jest standardowym wyposażeniem ZXP7. Drukarka ZC300 też ma Ethernet standardowo. W drukarce ZC100 Ethernet jest opcją.
 
 ### Jakie enkodery obsługuje ZXP7?
 
@@ -23435,7 +23443,7 @@ Model ZXP9 dostępny jest w wersji z opcjonalnym **laminatorem jednostronnym lub
 |----------|------|------|-------|
 | Technologia druku | **Retransfer** | Sublimacja | Sublimacja |
 | Rozdzielczość | **304 dpi** | 300 dpi | 300 dpi |
-| Druk na krawędzi | **Over-the-edge** | Nie | Nie |
+| Druk na krawędzi | **Over-the-edge** | Nie | Edge-to-edge (karty CR80) |
 | Podajnik | **150 kart** | 200 kart | 100 kart |
 | Prędkość (kolor) | **190 kart/h** | 290 kart/h | 200 kart/h |
 | Laminator | **Opcja** | Opcja | Brak |

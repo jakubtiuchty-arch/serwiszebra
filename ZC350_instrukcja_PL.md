@@ -8,7 +8,7 @@
 
 ### O drukarce ZC350
 
-Zebra ZC350 to flagowa drukarka kart identyfikacyjnych z serii ZC, wyposażona w **kolorowy wyświetlacz LCD 2"** i trzy przyciski funkcyjne. Oferuje pełnokolorowy druk metodą sublimacji barwników lub monochromatyczny druk termotransferowy na standardowych kartach PVC i PVC-composite w formatach CR79 (53×84 mm) i CR80 (54×86 mm) o grubości 10-40 mil. Model ZC350 wyróżnia się **zaawansowanymi funkcjami bezpieczeństwa** (szyfrowanie klasy rządowej, uwierzytelnianie host-drukarka) oraz obsługą specjalnych taśm z efektami 3D, holograficznymi i długotrwałymi. Drukarka automatycznie dostosowuje się do grubości karty i posiada zmodernizowane podajniki na 100 kart.
+Zebra ZC350 to flagowa drukarka kart identyfikacyjnych z serii ZC, wyposażona w **kolorowy wyświetlacz LCD** i trzy przyciski funkcyjne. Oferuje pełnokolorowy druk metodą sublimacji barwników lub monochromatyczny druk termotransferowy na standardowych kartach PVC i PVC-composite w formatach CR79 (53×84 mm) i CR80 (54×86 mm) o grubości 10-40 mil. Model ZC350 wyróżnia się **zaawansowanymi funkcjami bezpieczeństwa** (szyfrowanie klasy rządowej, uwierzytelnianie host-drukarka) oraz obsługą specjalnych taśm z efektami 3D, holograficznymi i długotrwałymi. Drukarka automatycznie dostosowuje się do grubości karty i posiada zmodernizowane podajniki na 100 kart.
 
 ### Parametry techniczne
 
@@ -25,7 +25,7 @@ Zebra ZC350 to flagowa drukarka kart identyfikacyjnych z serii ZC, wyposażona w
 | Grubość kart | 10-40 mil (0,25-1,02 mm) |
 | Pojemność podajnika | 100 kart (30 mil) |
 | Pojemność odbiornika | 100 kart (30 mil) |
-| Wyświetlacz | **2" kolorowy LCD** |
+| Wyświetlacz | **kolorowy LCD** |
 | Pamięć RAM | 512 MB |
 | Zasilanie | 100W zasilacz zewnętrzny |
 | Gwarancja | **2 lata (drukarka i głowica)** |
@@ -34,12 +34,12 @@ Zebra ZC350 to flagowa drukarka kart identyfikacyjnych z serii ZC, wyposażona w
 
 | Parametr | ZC350 | ZC300 |
 |----------|-------|-------|
-| Interfejs użytkownika | **Kolorowy LCD 2"** | Kolorowy LCD 2" |
+| Interfejs użytkownika | **Kolorowy LCD** | Kolorowy LCD |
 | Prędkość (YMCKO jednostronny) | **225 kart/h** | 200 kart/h |
-| Prędkość (K mono dwustronny) | **500 kart/h** | 400 kart/h |
-| Specjalne taśmy | **3D, holograficzne, długotrwałe** | Standardowe |
+| Prędkość (K mono dwustronny) | **500 kart/h** | 450 kart/h |
+| Specjalne taśmy | **3D, holograficzne, długotrwałe** | YMCKLL, YMCPKO, SrDYMCKO |
 | Zabezpieczenia | **Szyfrowanie rządowe, auth.** | Standardowe |
-| Automatyczna grubość karty | **Tak** | Nie |
+| Automatyczna grubość karty | **Tak** | Tak |
 | Blokada pokrywy | **Tak (opcja)** | Nie |
 | Gwarancja | **2 lata** | 3 lata |
 
@@ -401,7 +401,6 @@ Dostępne dwie opcje zestawów czyszczących:
 Ostrzeżenia wymagają uwagi operatora, ale nie blokują drukowania:
 
 - **Ribbon low** – niski poziom taśmy
-- **Cards low** – mało kart w podajniku
 - **Cleaning required** – wymagane czyszczenie
 
 Naciśnij lewy przycisk, aby wyświetlić animację pomocy.
