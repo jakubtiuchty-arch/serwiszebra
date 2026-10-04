@@ -1,17 +1,19 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
-import { ChevronRight, Phone, Truck, Search, Shield, PlayCircle, FileText } from 'lucide-react'
+import { ChevronRight, Phone, Play, PlayCircle, FileText, CheckCircle2 } from 'lucide-react'
 import { blogPosts } from '@/lib/blog'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import RepairProcessSteps from '@/components/RepairProcessSteps'
+import WideoWpisu from '@/components/blog/WideoWpisu'
+import { FILM_PAKOWANIE_ZC } from '@/lib/filmy-zc'
 
 const URL = 'https://www.serwis-zebry.pl/serwis-drukarek-kart-zebra'
 
 const TYTUL = 'Serwis drukarek kart plastikowych Zebra ZC100, ZC300 | TAKMA'
-const OPIS = 'Autoryzowany serwis drukarek kart plastikowych Zebra ZC100, ZC300, ZC350 i ZXP. Bezpłatna diagnostyka przy naprawie, odbiór kurierem, 12 mies. gwarancji.'
-const OG_OBRAZ = { url: '/og-serwis-drukarek-kart.jpg', width: 1200, height: 630, alt: 'Drukarka kart Zebra ZC300 z wkładem z taśmą i kartami PVC na stanowisku serwisowym' }
+const OPIS = 'Autoryzowany serwis i naprawa drukarek kart Zebra ZC100, ZC300, ZC350 i ZXP. Bezpłatna diagnostyka przy naprawie, odbiór kurierem, 12 mies. gwarancji.'
+const OG_OBRAZ = { url: '/og-serwis-drukarek-kart.jpg', width: 1200, height: 630, alt: 'Warsztat serwisu Zebra: otwarta drukarka kart ZC300 z komunikatem błędu na stole serwisowym' }
 
 export const metadata: Metadata = {
   title: { absolute: TYTUL },
@@ -249,37 +251,37 @@ export default function SerwisDrukarekKartPage() {
 
       <div className="min-h-screen bg-white">
         {/* Hero */}
-        <section className="relative bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-8 sm:py-10 md:py-14 overflow-hidden">
-          <div className="absolute inset-0 hidden md:block">
-            <Image src="/serwis_drukarki_kart.jpeg" alt="Drukarka kart Zebra ZC300 na stanowisku serwisowym" fill className="object-cover object-center" priority />
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-50 via-blue-50/95 via-60% to-transparent" />
+        <section className="relative bg-[#0b1020] py-10 sm:py-12 md:py-16 xl:py-20 overflow-hidden">
+          {/* Grafika zawsze w pełnej wysokości przy prawej krawędzi: na szerokich ekranach object-cover ucinałby drukarkę z góry i z dołu */}
+          <div className="absolute inset-0">
+            <div className="absolute top-0 right-0 h-full aspect-[2.8/1]">
+              <Image src="/serwis_drukarki_kart.jpeg" alt={OG_OBRAZ.alt} fill sizes="1400px" className="object-cover" priority />
+              <div className="absolute inset-y-0 left-0 w-1/5 bg-gradient-to-r from-[#0b1020] to-transparent" />
+            </div>
+            {/* Maska liczona od środka kolumny max-w-6xl: ciemna do końca tytułu (50% + 170px), wygaszona przed frontem drukarki */}
+            <div className="absolute inset-0 bg-[#0b1020]/80 lg:bg-transparent lg:bg-[linear-gradient(to_right,rgba(11,16,32,0.95)_0%,rgba(11,16,32,0.9)_calc(50%_+_170px),rgba(11,16,32,0)_calc(50%_+_330px))]" />
           </div>
           <div className="relative max-w-6xl mx-auto px-3 sm:px-4 text-center md:text-left">
-            <nav aria-label="Ścieżka" className="text-xs text-gray-500 mb-3">
-              <Link href="/serwis-drukarek-zebra" className="hover:text-gray-800">Serwis drukarek Zebra</Link>
+            <nav aria-label="Ścieżka" className="text-xs text-gray-400 mb-3">
+              <Link href="/serwis-drukarek-zebra" className="hover:text-white">Serwis drukarek Zebra</Link>
               <span className="mx-1.5">/</span>
-              <span className="text-gray-700">Drukarki kart</span>
+              <span className="text-gray-300">Drukarki kart</span>
             </nav>
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-gray-900 mb-3 sm:mb-4">
-              Serwis drukarek kart plastikowych Zebra
-              <span className="block text-base sm:text-lg md:text-xl font-normal text-gray-600 mt-1 sm:mt-2">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-white mb-3 sm:mb-4">
+              Serwis drukarek kart plastikowych Zebra{' '}
+              <span className="block text-base sm:text-lg md:text-xl font-normal text-[#A8F000] mt-1 sm:mt-2">
                 ZC100, ZC300, ZC350 i ZXP Series
               </span>
             </h1>
-            <p className="text-sm sm:text-base text-gray-700 mb-5 max-w-xl md:mx-0 mx-auto leading-relaxed">
+            <p className="text-sm sm:text-base text-gray-300 mb-6 max-w-xl md:mx-0 mx-auto leading-relaxed">
               TAKMA jest autoryzowanym partnerem serwisowym Zebra. Naprawiamy drukarki kart plastikowych w okresie gwarancji i po jej zakończeniu. Drukarkę odbiera kurier z dowolnego adresu w Polsce.
             </p>
-            <ul className="flex flex-col sm:flex-row sm:flex-wrap items-center md:items-start gap-x-5 gap-y-1.5 text-sm text-gray-700 mb-6">
-              <li className="flex items-center gap-1.5"><Truck className="w-4 h-4 text-gray-500" />Odbiór kurierem w 24 h</li>
-              <li className="flex items-center gap-1.5"><Search className="w-4 h-4 text-gray-500" />Bezpłatna diagnostyka przy zleceniu naprawy</li>
-              <li className="flex items-center gap-1.5"><Shield className="w-4 h-4 text-gray-500" />12 miesięcy gwarancji na naprawę</li>
-            </ul>
             <div className="flex flex-wrap gap-3 justify-center md:justify-start">
               <Link href="/#formularz" className="inline-flex items-center gap-2 bg-[#A8F000] text-[#0A1A2F] font-medium px-5 py-2.5 rounded-lg hover:bg-[#8dbd00] transition-colors text-sm">
                 Zgłoś naprawę
                 <ChevronRight className="w-4 h-4" />
               </Link>
-              <a href="tel:+48601619898" className="inline-flex items-center gap-2 bg-white border border-gray-300 text-gray-700 font-medium px-5 py-2.5 rounded-lg hover:bg-gray-50 transition-colors text-sm">
+              <a href="tel:+48601619898" className="inline-flex items-center gap-2 bg-white/10 border border-white/30 text-white font-medium px-5 py-2.5 rounded-lg hover:bg-white/20 transition-colors text-sm">
                 <Phone className="w-4 h-4" />
                 +48 601 619 898
               </a>
@@ -288,18 +290,18 @@ export default function SerwisDrukarekKartPage() {
         </section>
 
         {/* Modele */}
-        <section className="py-10 sm:py-12 md:py-14">
+        <section className="py-10 sm:py-12 md:py-14 bg-gray-50 border-y border-gray-200">
           <div className="max-w-6xl mx-auto px-3 sm:px-4">
             <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-2">Drukarki kart, które serwisujemy</h2>
             <p className="text-sm text-gray-600 mb-6 max-w-3xl">
               Serwisujemy drukarki kart Zebra i ich moduły dodatkowe. Drukarki kart plastikowych służą do druku legitymacji szkolnych, identyfikatorów pracowniczych i kart dostępu.
             </p>
-            <dl className="border-t border-gray-200">
+            <dl className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {modele.map((m) => (
-                <div key={m.seria} className="grid sm:grid-cols-[12rem_16rem_1fr] gap-1 sm:gap-6 py-4 border-b border-gray-200 sm:items-baseline">
-                  <dt className="text-sm text-gray-500">{m.seria}</dt>
-                  <dd className="font-semibold text-gray-900">{m.modele}</dd>
-                  <dd className="text-sm text-gray-600">{m.opis}</dd>
+                <div key={m.seria} className="bg-white rounded-xl border border-gray-200 p-5">
+                  <dt className="text-xs font-medium uppercase tracking-wide text-gray-500">{m.seria}</dt>
+                  <dd className="mt-1 text-lg font-semibold text-gray-900">{m.modele}</dd>
+                  <dd className="mt-2 text-sm text-gray-600 leading-relaxed">{m.opis}</dd>
                 </div>
               ))}
             </dl>
@@ -307,15 +309,18 @@ export default function SerwisDrukarekKartPage() {
         </section>
 
         {/* Zakres napraw */}
-        <section className="py-10 sm:py-12 md:py-14 border-t border-gray-200">
+        <section className="py-10 sm:py-12 md:py-14">
           <div className="max-w-6xl mx-auto px-3 sm:px-4">
             <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-2">Zakres napraw drukarek kart</h2>
             <p className="text-sm text-gray-600 mb-6">Do napraw używamy oryginalnych części Zebra.</p>
-            <dl className="grid md:grid-cols-2 gap-x-12 border-t border-gray-200">
+            <dl className="grid md:grid-cols-2 gap-x-12 gap-y-6">
               {uslugi.map((u) => (
-                <div key={u.nazwa} className="py-4 border-b border-gray-200">
-                  <dt className="font-semibold text-gray-900">{u.nazwa}</dt>
-                  <dd className="text-sm text-gray-600 mt-1">{u.opis}</dd>
+                <div key={u.nazwa} className="flex gap-3">
+                  <CheckCircle2 className="w-6 h-6 shrink-0 text-[#6B8A00]" aria-hidden="true" />
+                  <div>
+                    <dt className="font-semibold text-gray-900">{u.nazwa}</dt>
+                    <dd className="text-sm text-gray-600 mt-1 leading-relaxed">{u.opis}</dd>
+                  </div>
                 </div>
               ))}
             </dl>
@@ -327,7 +332,8 @@ export default function SerwisDrukarekKartPage() {
           <div className="max-w-6xl mx-auto px-3 sm:px-4">
             <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-2">Objawy usterek drukarki kart: co sprawdzić przed zgłoszeniem</h2>
             <p className="text-sm text-gray-600 mb-8 max-w-3xl">
-              Część problemów można usunąć bez serwisu. Opisy dotyczą drukarek ZC100 i ZC300. Do każdego objawu dołączamy film z polskim lektorem.
+              Część problemów można usunąć bez serwisu. Opisy dotyczą drukarek ZC100 i ZC300. Do każdego objawu dołączamy film z polskim lektorem. Znaczenie wszystkich wskaźników (diod LED) drukarek ZC100 i ZC300 oraz komunikatów LCD drukarki ZC300 opisuje poradnik{' '}
+              <Link href="/blog/serwis-drukarki-kart-zebra-zc100-zc300-diagnostyka-naprawa" className="text-blue-700 hover:text-blue-900">diody LED i komunikaty błędów drukarek kart Zebra ZC100 i ZC300</Link>.
             </p>
             <div className="md:hidden border-t border-gray-300">
               {objawy.map((o) => (
@@ -378,7 +384,7 @@ export default function SerwisDrukarekKartPage() {
         </section>
 
         {/* Cennik */}
-        <section className="py-10 sm:py-12 md:py-14">
+        <section id="cennik" className="scroll-mt-20 py-10 sm:py-12 md:py-14">
           <div className="max-w-6xl mx-auto px-3 sm:px-4 grid lg:grid-cols-[1fr_1.2fr] gap-10 lg:gap-14">
             <div>
               <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-2">Cennik naprawy drukarek kart</h2>
@@ -407,14 +413,14 @@ export default function SerwisDrukarekKartPage() {
 
         {/* Wysyłka */}
         <section className="py-10 sm:py-12 md:py-14">
-          <div className="max-w-6xl mx-auto px-3 sm:px-4 grid lg:grid-cols-[1.2fr_1fr] gap-10 lg:gap-14 items-start">
+          <div className="max-w-6xl mx-auto px-3 sm:px-4 grid lg:grid-cols-[1fr_1.4fr] gap-10 lg:gap-12 items-start">
             <div>
               <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-2">Przygotowanie drukarki kart do wysyłki</h2>
               <p className="text-sm text-gray-600 mb-6">Procedura dotyczy drukarek ZC100 i ZC300. Kroki należy wykonać w podanej kolejności.</p>
               <ol className="border-t border-gray-200">
                 {wysylka.map((k, i) => (
                   <li key={k} className="flex gap-4 py-3 border-b border-gray-200">
-                    <span className="w-6 text-right font-semibold text-gray-400 tabular-nums">{i + 1}.</span>
+                    <span className="w-6 shrink-0 text-right font-semibold text-gray-400 tabular-nums">{i + 1}.</span>
                     <span className="text-gray-900 text-sm sm:text-base">{k}</span>
                   </li>
                 ))}
@@ -423,15 +429,7 @@ export default function SerwisDrukarekKartPage() {
                 <strong>UWAGA:</strong> Drukarkę należy wysłać w oryginalnym opakowaniu. Opakowanie chroni drukarkę przed uszkodzeniem w transporcie.
               </p>
             </div>
-            <a href="https://youtu.be/STPBJnAqY-k" target="_blank" rel="noopener noreferrer" className="group block">
-              <div className="relative aspect-video overflow-hidden rounded-lg border border-gray-200">
-                <Image src="/wideo/pakowanie-zebra-zc100-zc300.jpg" alt="Pakowanie drukarki kart Zebra ZC100 i ZC300 do wysyłki" fill className="object-cover" sizes="(min-width: 1024px) 40vw, 100vw" />
-                <span className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/20 transition-colors">
-                  <PlayCircle className="w-14 h-14 text-white drop-shadow" />
-                </span>
-              </div>
-              <p className="mt-2 text-sm font-medium text-gray-900 group-hover:text-blue-700">Film: pakowanie drukarki ZC100 i ZC300 do wysyłki</p>
-            </a>
+            <WideoWpisu film={FILM_PAKOWANIE_ZC} priorytet={false} className="lg:self-center" rozmiary="(min-width: 1152px) 680px, (min-width: 1024px) 58vw, 100vw" />
           </div>
         </section>
 
@@ -453,6 +451,11 @@ export default function SerwisDrukarekKartPage() {
                 <a key={f.id} href={`https://youtu.be/${f.id}`} target="_blank" rel="noopener noreferrer" className="group block">
                   <div className="relative aspect-video overflow-hidden rounded-lg border border-gray-200 bg-gray-900">
                     <Image src={f.kadr} alt={`${f.tytul} – Zebra ${f.modele}`} fill className="object-cover" sizes="(min-width: 1024px) 33vw, 50vw" />
+                    <span className="absolute inset-0 flex items-center justify-center" aria-hidden="true">
+                      <span className="flex items-center justify-center h-11 w-11 sm:h-14 sm:w-14 rounded-full bg-red-600 shadow-lg transition group-hover:scale-110">
+                        <Play className="ml-0.5 h-5 w-5 sm:h-7 sm:w-7 text-white" fill="white" />
+                      </span>
+                    </span>
                   </div>
                   <p className="mt-2 text-sm font-medium text-gray-900 group-hover:text-blue-700">{f.tytul}</p>
                   <p className="text-xs text-gray-500">Zebra {f.modele}</p>

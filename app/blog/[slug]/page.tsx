@@ -100,6 +100,12 @@ export async function generateMetadata({
   }
 }
 
+// Film w treści wpisu: osobna linia {{film:<youtubeId>}} z pustymi liniami wokół; dane filmu z pola `filmy`.
+// Split z grupą daje na zmianę: markdown, id filmu, markdown…
+const ZNACZNIK_FILMU = /\n\{\{film:([\w-]{11})\}\}\n/
+
+const KLASY_TRESCI = 'prose prose-sm sm:prose-lg max-w-none prose-headings:font-bold prose-headings:text-gray-900 prose-p:text-gray-700 prose-a:text-blue-600 prose-strong:text-gray-900 prose-code:bg-gray-100 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-pre:bg-gray-900 prose-blockquote:border-blue-500 prose-blockquote:bg-blue-50 prose-blockquote:py-1 prose-blockquote:not-italic prose-img:rounded-xl'
+
 export default function BlogPostPage({ 
   params 
 }: { 
@@ -110,6 +116,10 @@ export default function BlogPostPage({
   if (!post) {
     notFound()
   }
+
+  const czesciTresci = post.content.split(ZNACZNIK_FILMU)
+  const filmyWTresci = new Set(czesciTresci.filter((_, i) => i % 2 === 1))
+  const filmyPodTrescia = (post.filmy ?? []).filter((f) => !filmyWTresci.has(f.youtubeId))
 
   const relatedPosts = getRelatedPosts(params.slug, 6)
 
@@ -489,10 +499,47 @@ export default function BlogPostPage({
             <KupTenModel post={post} />
 
             {/* Content */}
-            <div
-              className="prose prose-sm sm:prose-lg max-w-none prose-headings:font-bold prose-headings:text-gray-900 prose-p:text-gray-700 prose-a:text-blue-600 prose-strong:text-gray-900 prose-code:bg-gray-100 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-pre:bg-gray-900 prose-blockquote:border-blue-500 prose-blockquote:bg-blue-50 prose-blockquote:py-1 prose-blockquote:not-italic prose-img:rounded-xl"
-              dangerouslySetInnerHTML={{ __html: parseMarkdown(post.content) }}
-            />
+            {czesciTresci.length === 1 ? (
+              <div
+                className={KLASY_TRESCI}
+                dangerouslySetInnerHTML={{ __html: parseMarkdown(post.content) }}
+              />
+            ) : (
+              // Filmy w sekcjach, których dotyczą: odtwarzacz na szerokość kolumny z podpisem, jak film zamiast grafiki tytułowej
+              <div className={KLASY_TRESCI}>
+                {czesciTresci.map((czesc, i) => {
+                  if (i % 2 === 0) {
+                    return <div key={i} dangerouslySetInnerHTML={{ __html: parseMarkdown(czesc) }} />
+                  }
+                  const film = post.filmy?.find((f) => f.youtubeId === czesc)
+                  return film ? (
+                    <div key={i} className="not-prose my-8">
+                      <WideoWpisu film={film} priorytet={false} className="" />
+                    </div>
+                  ) : null
+                })}
+              </div>
+            )}
+
+            {/* Wideoporadniki: filmy z pola `filmy`, których treść nie wstawia znacznikiem w swoich
+                sekcjach — małe kafelki (cztery w rzędzie, na telefonie dwa), film otwiera się w oknie */}
+            {filmyPodTrescia.length > 0 && (
+              <section id="wideoporadniki" className="scroll-mt-24 mt-10">
+                <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Wideoporadniki</h2>
+                <div className="mt-4 grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
+                  {filmyPodTrescia.map((film) => (
+                    <WideoWpisu
+                      key={film.youtubeId}
+                      film={film}
+                      priorytet={false}
+                      className=""
+                      kompakt
+                      rozmiary="(min-width: 896px) 224px, (min-width: 768px) 25vw, 50vw"
+                    />
+                  ))}
+                </div>
+              </section>
+            )}
 
             {/* Baner lejka → karta produktu TAKMA (most do zakupu) */}
             {post.funnel && (
@@ -572,9 +619,9 @@ export default function BlogPostPage({
             <div className="flex flex-wrap gap-3">
               {post.deviceType === 'drukarki' && (
                 <>
-                  <Link href="/serwis-drukarek-zebra" className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 text-blue-700 rounded-lg hover:bg-blue-100 transition-colors text-sm font-medium">
+                  <Link href={post.subDeviceType === 'kart' ? '/serwis-drukarek-kart-zebra' : '/serwis-drukarek-zebra'} className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 text-blue-700 rounded-lg hover:bg-blue-100 transition-colors text-sm font-medium">
                     <Printer className="w-4 h-4" />
-                    Serwis drukarek Zebra
+                    {post.subDeviceType === 'kart' ? 'Serwis drukarek kart Zebra' : 'Serwis drukarek Zebra'}
                   </Link>
                   <Link href="/blog?device=drukarki" className="inline-flex items-center gap-2 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors text-sm font-medium">
                     <BookOpen className="w-4 h-4" />

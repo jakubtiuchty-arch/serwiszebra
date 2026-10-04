@@ -1,5 +1,7 @@
 // Blog data structure and utilities
 
+import { FILMY_ZC_DIAGNOSTYKA } from './filmy-zc'
+
 export interface BlogPost {
   slug: string
   title: string
@@ -20,6 +22,8 @@ export interface BlogPost {
   // Film z kanału YouTube pokazywany zamiast grafiki tytułowej (components/blog/WideoWpisu.tsx); kadr w public/wideo/, czas w ISO 8601;
   // `krotko` = krótki tytuł małego kafelka, gdy karta produktu ma kilka filmów
   video?: { youtubeId: string; tytul: string; opis: string; kadr: string; czas: string; dodano: string; podpis: string; krotko?: string }
+  // Kilka filmów pod treścią wpisu: sekcja „Wideoporadniki” (#wideoporadniki), małe kafelki otwierane w oknie
+  filmy?: NonNullable<BlogPost['video']>[]
   category: 'poradniki' | 'troubleshooting' | 'porownania' | 'aktualnosci' | 'nowosci-produktowe'
   tags: string[]
   seo: {
@@ -6895,7 +6899,7 @@ Jako autoryzowany partner Zebra oferujemy pełne wsparcie w doborze konfiguracji
   {
     slug: 'cennik-naprawy-drukarki-zebra-koszty-serwisu',
     title: 'Ile kosztuje naprawa drukarki Zebra? Cennik serwisu 2026',
-    excerpt: 'Sprawdź aktualne ceny napraw drukarek Zebra: wymiana głowicy od 250 zł, naprawa mechanizmu od 150 zł, diagnostyka bezpłatna. Cennik serwisu dla ZD420, ZD621, ZT411, GK420.',
+    excerpt: 'Sprawdź aktualne ceny napraw drukarek Zebra: wymiana głowicy od 250 zł, naprawa mechanizmu od 150 zł, diagnostyka bezpłatna przy zleceniu naprawy. Cennik serwisu dla ZD420, ZD621, ZT411, GK420.',
     coverImage: '/blog/ile-kosztuje-naprawa-drukarki-zebra-cennik-2026.jpeg',
     author: {
       name: 'Zespół TAKMA',
@@ -6909,7 +6913,7 @@ Jako autoryzowany partner Zebra oferujemy pełne wsparcie w doborze konfiguracji
     tags: ['cennik serwisu zebra', 'ile kosztuje naprawa', 'naprawa drukarki zebra', 'wymiana głowicy cena', 'serwis drukarek zebra', 'koszt naprawy', 'ZD420', 'ZD621', 'ZT411', 'GK420', 'cena serwisu'],
     seo: {
       metaTitle: 'Ile kosztuje naprawa drukarki Zebra? Cennik serwisu 2026',
-      metaDescription: 'Cennik napraw drukarek Zebra 2026: wymiana głowicy od 430 zł netto, naprawa mechanizmu 180-650 zł, diagnostyka BEZPŁATNA. ZD420, ZD621, ZT411.',
+      metaDescription: 'Cennik napraw drukarek Zebra 2026: wymiana głowicy od 430 zł netto, naprawa mechanizmu 180-650 zł, bezpłatna diagnostyka przy zleceniu naprawy. ZD420, ZT411.',
       keywords: [
         'ile kosztuje naprawa drukarki zebra',
         'cennik naprawy drukarki zebra',
@@ -6928,7 +6932,7 @@ Jako autoryzowany partner Zebra oferujemy pełne wsparcie w doborze konfiguracji
       faqSchema: [
         {
           question: 'Ile kosztuje naprawa drukarki Zebra?',
-          answer: 'Koszt naprawy drukarki Zebra zależy od typu usterki (ceny netto). Drukarki biurkowe: wymiana głowicy 430-890 zł, naprawa mechanizmu 180-320 zł, naprawa płyty głównej 350-580 zł. Drukarki przemysłowe: wymiana głowicy 1600-5020 zł, naprawa mechanizmu 300-650 zł, naprawa płyty głównej 800-1540 zł. Diagnostyka bezpłatna. Gwarancja na głowicę: 6 miesięcy.'
+          answer: 'Koszt naprawy drukarki Zebra zależy od typu usterki (ceny netto). Drukarki biurkowe: wymiana głowicy 430-890 zł, naprawa mechanizmu 180-320 zł, naprawa płyty głównej 350-580 zł. Drukarki przemysłowe: wymiana głowicy 1600-5020 zł, naprawa mechanizmu 300-650 zł, naprawa płyty głównej 800-1540 zł. Diagnostyka jest bezpłatna przy zleceniu naprawy. Przy rezygnacji z naprawy diagnostyka kosztuje 99 zł netto. Gwarancja na głowicę: 6 miesięcy.'
         },
         {
           question: 'Ile kosztuje wymiana głowicy w drukarce Zebra?',
@@ -6936,11 +6940,11 @@ Jako autoryzowany partner Zebra oferujemy pełne wsparcie w doborze konfiguracji
         },
         {
           question: 'Czy diagnostyka drukarki Zebra jest płatna?',
-          answer: 'W autoryzowanym serwisie TAKMA diagnostyka jest całkowicie bezpłatna. Po przesłaniu drukarki kurierem (odbiór również bezpłatny) otrzymasz szczegółową wycenę naprawy w ciągu 24-48h.'
+          answer: 'Diagnostyka jest bezpłatna przy zleceniu naprawy. Przy rezygnacji z naprawy diagnostyka kosztuje 99 zł netto. Po przesłaniu drukarki kurierem (odbiór również bezpłatny) otrzymasz szczegółową wycenę naprawy w ciągu 24-48h.'
         },
         {
           question: 'Ile trwa naprawa drukarki Zebra?',
-          answer: 'Standardowy czas naprawy to 2-5 dni roboczych. Proste naprawy realizujemy w 1-2 dni. Skomplikowane naprawy wymagające części zamiennych mogą trwać do 7 dni. Oferujemy również naprawy ekspresowe (24-48h) za dodatkową opłatą.'
+          answer: 'Standardowa naprawa trwa 5–7 dni roboczych. Czas zależy od dostępności części. Tryb ekspresowy trwa 24–48 godzin, kosztuje 299 zł netto i wymaga wcześniejszego ustalenia.'
         },
         {
           question: 'Czy warto naprawiać starą drukarkę Zebra?',
@@ -6948,7 +6952,7 @@ Jako autoryzowany partner Zebra oferujemy pełne wsparcie w doborze konfiguracji
         },
         {
           question: 'Jakie są koszty naprawy drukarki Zebra ZD420/ZD421?',
-          answer: 'Typowe koszty naprawy ZD420/ZD421 (netto): wymiana głowicy 203dpi - 430-480 zł, głowica 300dpi - 820-890 zł, wymiana wałka dociskowego - 120-180 zł, naprawa mechanizmu - 180-280 zł, naprawa płyty głównej - 350-520 zł. Diagnostyka bezpłatna. Gwarancja na głowicę: 6 miesięcy.'
+          answer: 'Typowe koszty naprawy ZD420/ZD421 (netto): wymiana głowicy 203dpi - 430-480 zł, głowica 300dpi - 820-890 zł, wymiana wałka dociskowego - 120-180 zł, naprawa mechanizmu - 180-280 zł, naprawa płyty głównej - 350-520 zł. Diagnostyka jest bezpłatna przy zleceniu naprawy. Przy rezygnacji z naprawy diagnostyka kosztuje 99 zł netto. Gwarancja na głowicę: 6 miesięcy.'
         },
         {
           question: 'Ile kosztuje naprawa drukarki przemysłowej Zebra ZT411?',
@@ -6960,7 +6964,7 @@ Jako autoryzowany partner Zebra oferujemy pełne wsparcie w doborze konfiguracji
         },
         {
           question: 'Jak zamówić naprawę drukarki Zebra?',
-          answer: 'Proces naprawy: 1) Wypełnij formularz online lub zadzwoń. 2) Kurier odbierze drukarkę bezpłatnie (24-48h). 3) Otrzymasz wycenę w 24-48h. 4) Po akceptacji naprawa 2-5 dni. 5) Odsyłamy naprawione urządzenie bezpłatnie.'
+          answer: 'Proces naprawy: 1) Wypełnij formularz online lub zadzwoń. 2) Kurier odbierze drukarkę bezpłatnie (24-48h). 3) Otrzymasz wycenę w 24-48h. 4) Po akceptacji wyceny naprawa trwa 5–7 dni roboczych. 5) Odsyłamy naprawione urządzenie bezpłatnie.'
         },
         {
           question: 'Gdzie naprawić drukarkę Zebra?',
@@ -6969,18 +6973,20 @@ Jako autoryzowany partner Zebra oferujemy pełne wsparcie w doborze konfiguracji
       ]
     },
     content: `
-> **🎯 Szybka odpowiedź:** Naprawa drukarki Zebra kosztuje od **180 zł netto** (drobne naprawy) do **5000+ zł** (wymiana głowicy 600dpi w modelach przemysłowych). **Diagnostyka jest bezpłatna.** Wymiana głowicy kosztuje **430-890 zł netto** dla drukarek biurkowych (ZD420/ZD621) i **1600-5020 zł netto** dla przemysłowych (ZT411/ZT610). Gwarancja na głowicę: 6 miesięcy. Czas naprawy: 2-5 dni roboczych.
+> **🎯 Szybka odpowiedź:** Naprawa drukarki Zebra kosztuje od **180 zł netto** (drobne naprawy) do **5000+ zł** (wymiana głowicy 600dpi w modelach przemysłowych). **Diagnostyka jest bezpłatna przy zleceniu naprawy.** Przy rezygnacji z naprawy diagnostyka kosztuje 99 zł netto. Wymiana głowicy kosztuje **430-890 zł netto** dla drukarek biurkowych (ZD420/ZD621) i **1600-5020 zł netto** dla przemysłowych (ZT411/ZT610). Gwarancja na głowicę: 6 miesięcy. Standardowa naprawa trwa 5–7 dni roboczych. Czas zależy od dostępności części. Tryb ekspresowy trwa 24–48 godzin, kosztuje 299 zł netto i wymaga wcześniejszego ustalenia.
 
 ## TL;DR - Cennik napraw drukarek Zebra 2026
 
-| Typ naprawy | Cena od-do | Czas naprawy |
-|-------------|------------|--------------|
-| **Diagnostyka** | BEZPŁATNA | 24-48h |
-| **Wymiana głowicy** | 430-5020 zł netto | 1-3 dni |
-| **Naprawa mechanizmu** | 150-400 zł | 2-4 dni |
-| **Wymiana wałka dociskowego** | 100-250 zł | 1-2 dni |
-| **Naprawa płyty głównej** | 300-800 zł | 3-7 dni |
-| **Czyszczenie i konserwacja** | 80-150 zł | 1 dzień |
+| Typ naprawy | Cena od-do |
+|-------------|------------|
+| **Diagnostyka** | bezpłatna przy zleceniu naprawy (99 zł netto przy rezygnacji), wycena w 24–48 h |
+| **Wymiana głowicy** | 430-5020 zł netto |
+| **Naprawa mechanizmu** | 150-400 zł |
+| **Wymiana wałka dociskowego** | 100-250 zł |
+| **Naprawa płyty głównej** | 300-800 zł |
+| **Czyszczenie i konserwacja** | 80-150 zł |
+
+Standardowa naprawa trwa 5–7 dni roboczych. Tryb ekspresowy trwa 24–48 godzin, kosztuje 299 zł netto i wymaga wcześniejszego ustalenia.
 
 *Ceny netto, zawierają części i robociznę. Gwarancja na głowicę: 6 mies., pozostałe naprawy: 12 mies.*
 
@@ -7111,12 +7117,12 @@ Jako autoryzowany partner Zebra oferujemy pełne wsparcie w doborze konfiguracji
 
 ### Krok po kroku:
 
-1. **Zgłoszenie** - wypełnij [formularz online](/#formularz) lub zadzwoń
-2. **Odbiór kurierem** - bezpłatny, w ciągu 24-48h
-3. **Diagnostyka** - bezpłatna, wycena w 24-48h
-4. **Akceptacja wyceny** - decyzja należy do Ciebie
-5. **Naprawa** - 2-5 dni roboczych
-6. **Odesłanie** - bezpłatna wysyłka z gwarancją
+1. **Zgłoszenie** — wypełnij [formularz online](/#formularz) lub zadzwoń
+2. **Odbiór kurierem** — bezpłatny, w ciągu 24-48h
+3. **Diagnostyka** — bezpłatna przy zleceniu naprawy (99 zł netto przy rezygnacji), wycena w 24–48 h
+4. **Akceptacja wyceny** — decyzja należy do Ciebie
+5. **Naprawa** — 5–7 dni roboczych
+6. **Odesłanie** — bezpłatna wysyłka z gwarancją
 
 ### Co zawiera cena naprawy?
 
@@ -7136,7 +7142,7 @@ Jeśli masz wiele drukarek lub zależy Ci na przewidywalnych kosztach, rozważ [
 | Opcja | Jednorazowa naprawa | OneCare Essential |
 |-------|---------------------|-------------------|
 | Koszt roczny | Nieznany (0-2000 zł?) | 150-600 zł/rok |
-| Czas naprawy | 2-5 dni | 3 dni gwarantowane |
+| Czas naprawy | 5–7 dni roboczych | 3 dni gwarantowane |
 | Części | W cenie naprawy | W cenie kontraktu |
 | Przewidywalność | Niska | Wysoka |
 
@@ -7152,18 +7158,15 @@ Koszt zależy od typu usterki:
 - **Naprawa mechanizmu**: 150-400 zł
 - **Naprawa elektroniki**: 300-800 zł
 
-Diagnostyka jest **bezpłatna**.
+Diagnostyka jest **bezpłatna przy zleceniu naprawy**. Przy rezygnacji z naprawy diagnostyka kosztuje 99 zł netto.
 
 ### Czy diagnostyka jest płatna?
 
-**Nie!** W serwisie TAKMA diagnostyka jest całkowicie bezpłatna. Kurier odbierze drukarkę bezpłatnie, a po diagnozie otrzymasz szczegółową wycenę.
+Diagnostyka jest bezpłatna przy zleceniu naprawy. Przy rezygnacji z naprawy diagnostyka kosztuje 99 zł netto. Kurier odbiera drukarkę bezpłatnie. Po diagnostyce przekazujemy szczegółową wycenę.
 
 ### Ile trwa naprawa drukarki Zebra?
 
-- **Proste naprawy**: 1-2 dni robocze
-- **Standardowe naprawy**: 2-5 dni roboczych
-- **Skomplikowane naprawy**: do 7 dni roboczych
-- **Ekspres (opcja)**: 24-48h za dodatkową opłatą
+Standardowa naprawa trwa 5–7 dni roboczych. Czas zależy od dostępności części. Tryb ekspresowy trwa 24–48 godzin, kosztuje 299 zł netto i wymaga wcześniejszego ustalenia.
 
 ### Czy dostanę gwarancję na naprawę?
 
@@ -7207,11 +7210,11 @@ Przy cenie nowej ZT411 (~8000 zł) naprawy są prawie zawsze opłacalne.
 
 Skontaktuj się z nami - jako **Autoryzowany Serwis Zebra** oferujemy:
 
-- ✅ **Bezpłatna diagnostyka** i wycena
+- ✅ **Bezpłatna diagnostyka przy zleceniu naprawy** (99 zł netto przy rezygnacji)
 - ✅ **Bezpłatny odbiór kurierem** w całej Polsce
 - ✅ **Gwarancja** na naprawę (głowica 6 mies., inne 12 mies.)
 - ✅ **Oryginalne części** Zebra
-- ✅ **2-5 dni** czas naprawy
+- ✅ **5–7 dni roboczych** — standardowy czas naprawy (tryb ekspresowy 24–48 h, 299 zł netto, po wcześniejszym ustaleniu)
 
 > **📞 Zadzwoń:** +48 601 619 898
 
@@ -7346,7 +7349,7 @@ Skontaktuj się z nami - jako **Autoryzowany Serwis Zebra** oferujemy:
       faqSchema: [
         {
           question: 'Ile kosztuje naprawa drukarki Zebra ZD420?',
-          answer: 'Koszt naprawy Zebra ZD420 zależy od usterki: wymiana głowicy 203dpi: 430-480 zł netto, głowicy 300dpi: 820-850 zł netto, naprawa mechanizmu: 180-350 zł, czyszczenie i kalibracja: 80-120 zł. Diagnostyka jest bezpłatna.'
+          answer: 'Koszt naprawy Zebra ZD420 zależy od usterki: wymiana głowicy 203dpi: 430-480 zł netto, głowicy 300dpi: 820-850 zł netto, naprawa mechanizmu: 180-350 zł, czyszczenie i kalibracja: 80-120 zł. Diagnostyka jest bezpłatna przy zleceniu naprawy, a przy rezygnacji z naprawy kosztuje 99 zł netto.'
         },
         {
           question: 'Co oznacza czerwona dioda w drukarce Zebra ZD420?',
@@ -7370,7 +7373,7 @@ Skontaktuj się z nami - jako **Autoryzowany Serwis Zebra** oferujemy:
         },
         {
           question: 'Jak długo trwa naprawa drukarki ZD420/ZD421?',
-          answer: 'Standardowa naprawa ZD420/ZD421 trwa 2-5 dni roboczych. Wymiana głowicy: 1-2 dni. Naprawa mechanizmu: 3-5 dni. Oferujemy tryb express za dodatkową opłatą.'
+          answer: 'Standardowa naprawa ZD420/ZD421 trwa 5–7 dni roboczych. Tryb ekspresowy trwa 24–48 godzin, kosztuje 299 zł netto i wymaga wcześniejszego ustalenia.'
         },
         {
           question: 'Zebra ZD420 pokazuje błąd HEAD OPEN mimo zamkniętej pokrywy - co robić?',
@@ -7387,7 +7390,7 @@ Skontaktuj się z nami - jako **Autoryzowany Serwis Zebra** oferujemy:
       ]
     },
     content: `
-> **🎯 Szybka odpowiedź:** Drukarki **Zebra ZD420** i **ZD421** to najpopularniejsze modele biurkowe - naprawiamy ich setki rocznie. Najczęstsze problemy: **błąd Media Out** (kalibracja), **Ribbon Out** (złe ładowanie), **blady wydruk** (głowica). Większość zgłoszeń to kalibracja, ładowanie taśmy i czyszczenie, czyli rzeczy, które robisz sam w kilka minut. Koszt naprawy: od **80 zł** (czyszczenie) do **850 zł** (głowica 300dpi). **Diagnostyka bezpłatna.**
+> **🎯 Szybka odpowiedź:** Drukarki **Zebra ZD420** i **ZD421** to najpopularniejsze modele biurkowe - naprawiamy ich setki rocznie. Najczęstsze problemy: **błąd Media Out** (kalibracja), **Ribbon Out** (złe ładowanie), **blady wydruk** (głowica). Większość zgłoszeń to kalibracja, ładowanie taśmy i czyszczenie, czyli rzeczy, które robisz sam w kilka minut. Koszt naprawy: od **80 zł** (czyszczenie) do **850 zł** (głowica 300dpi). **Diagnostyka jest bezpłatna przy zleceniu naprawy**, a przy rezygnacji z naprawy kosztuje 99 zł netto.
 
 ## TL;DR - Diagnostyka ZD420/ZD421 w pigułce
 
@@ -7569,13 +7572,15 @@ Menu → Settings → Reset Printer → Factory Defaults → Yes
 
 | Usługa | Cena netto | Gwarancja |
 |--------|------------|-----------|
-| **Diagnostyka** | Bezpłatna | - |
+| **Diagnostyka** | bezpłatna przy zleceniu naprawy* | - |
 | Czyszczenie + kalibracja | 80-120 zł | 1 miesiąc |
 | **Wymiana głowicy 203dpi** | 430-480 zł | 6 miesięcy |
 | **Wymiana głowicy 300dpi** | 820-850 zł | 6 miesięcy |
 | [Wymiana wałka dociskowego](/sklep/walki-dociskowe/drukarki-biurkowe) | 180-250 zł | 12 miesięcy |
 | Naprawa mechanizmu | 250-350 zł | 12 miesięcy |
 | Naprawa płyty głównej | 350-600 zł | 12 miesięcy |
+
+*Przy rezygnacji z naprawy diagnostyka kosztuje 99 zł netto.
 
 > **🛒 Potrzebujesz głowicę?** [Kup głowicę do ZD420/ZD421 online →](/sklep/glowice/drukarki-biurkowe/zebra-zd421t) | **Wałek?** [Wałki do drukarek biurkowych →](/sklep/walki-dociskowe/drukarki-biurkowe)
 
@@ -7604,11 +7609,11 @@ Menu → Settings → Reset Printer → Factory Defaults → Yes
 
 Jako **Autoryzowany Serwis Zebra** oferujemy:
 
-- ✅ **Bezpłatna diagnostyka** i wycena
+- ✅ **Bezpłatna diagnostyka przy zleceniu naprawy** (99 zł netto przy rezygnacji)
 - ✅ **Bezpłatny odbiór kurierem** w całej Polsce
 - ✅ **Gwarancja 6-12 miesięcy** na naprawę
 - ✅ **Oryginalne części** Zebra
-- ✅ **2-5 dni** czas naprawy
+- ✅ **5–7 dni roboczych** — standardowy czas naprawy (tryb ekspresowy 24–48 h, 299 zł netto, po wcześniejszym ustaleniu)
 
 > **📞 Zadzwoń:** +48 601 619 898
 
@@ -7762,7 +7767,7 @@ Gdy koszt naprawy zbliża się do ceny nowego urządzenia, doradzamy wymianę. N
         },
         {
           question: 'Ile kosztuje naprawa najczęstszych awarii drukarki Zebra?',
-          answer: 'Orientacyjne koszty netto: wymiana głowicy 430-5020 zł (zależnie od modelu), naprawa mechanizmu 180-650 zł, wymiana wałka 120-390 zł, naprawa płyty głównej 350-1540 zł. Diagnostyka bezpłatna. Wiele problemów rozwiążesz za darmo samodzielnie.'
+          answer: 'Orientacyjne koszty netto: wymiana głowicy 430-5020 zł (zależnie od modelu), naprawa mechanizmu 180-650 zł, wymiana wałka 120-390 zł, naprawa płyty głównej 350-1540 zł. Diagnostyka jest bezpłatna przy zleceniu naprawy, a przy rezygnacji z naprawy kosztuje 99 zł netto. Wiele problemów rozwiążesz za darmo samodzielnie.'
         },
         {
           question: 'Kiedy drukarkę Zebra oddać do serwisu?',
@@ -8122,11 +8127,11 @@ Profilaktyka:
 
 Skontaktuj się z nami - jako **Autoryzowany Serwis Zebra** oferujemy:
 
-- ✅ **Bezpłatna diagnostyka** i wycena
+- ✅ **Bezpłatna diagnostyka przy zleceniu naprawy** (99 zł netto przy rezygnacji)
 - ✅ **Bezpłatny odbiór kurierem** w całej Polsce
 - ✅ **Gwarancja** na naprawę
 - ✅ **Oryginalne części** Zebra
-- ✅ **2-5 dni** czas naprawy
+- ✅ **5–7 dni roboczych** — standardowy czas naprawy (tryb ekspresowy 24–48 h, 299 zł netto, po wcześniejszym ustaleniu)
 
 > **📞 Zadzwoń:** +48 601 619 898
 
@@ -8210,7 +8215,7 @@ Nowe modele serii ZD i ZT z cenami netto znajdziesz w kategorii [drukarki etykie
       faqSchema: [
         {
           question: 'Ile kosztuje naprawa drukarki Zebra ZT411?',
-          answer: 'Koszt naprawy Zebra ZT411 zależy od usterki (ceny netto): wymiana głowicy 203dpi: 1600-1700 zł, głowicy 300dpi: 1900-2100 zł, głowicy 600dpi: 2800-5020 zł, naprawa mechanizmu: 300-650 zł, naprawa obcinacza: 200-400 zł. Diagnostyka jest bezpłatna.'
+          answer: 'Koszt naprawy Zebra ZT411 zależy od usterki (ceny netto): wymiana głowicy 203dpi: 1600-1700 zł, głowicy 300dpi: 1900-2100 zł, głowicy 600dpi: 2800-5020 zł, naprawa mechanizmu: 300-650 zł, naprawa obcinacza: 200-400 zł. Diagnostyka jest bezpłatna przy zleceniu naprawy, a przy rezygnacji z naprawy kosztuje 99 zł netto.'
         },
         {
           question: 'Co oznacza czerwony ekran w drukarce Zebra ZT411?',
@@ -8251,7 +8256,7 @@ Nowe modele serii ZD i ZT z cenami netto znajdziesz w kategorii [drukarki etykie
       ]
     },
     content: `
-> **🎯 Szybka odpowiedź:** Drukarki **Zebra ZT411** (4") i **ZT421** (6") to przemysłowe workhorse'y - naprawiamy je w zakładach produkcyjnych i centrach logistycznych. Najczęstsze problemy: **PAPER OUT** (kalibracja), **RIBBON OUT** (ładowanie), **blady wydruk** (głowica/darkness). **Kolorowy wyświetlacz dotykowy** pokazuje dokładny błąd. Koszt naprawy: od **300 zł** (mechanizm) do **5020 zł** (głowica 600dpi). **Diagnostyka bezpłatna.**
+> **🎯 Szybka odpowiedź:** Drukarki **Zebra ZT411** (4") i **ZT421** (6") to przemysłowe workhorse'y - naprawiamy je w zakładach produkcyjnych i centrach logistycznych. Najczęstsze problemy: **PAPER OUT** (kalibracja), **RIBBON OUT** (ładowanie), **blady wydruk** (głowica/darkness). **Kolorowy wyświetlacz dotykowy** pokazuje dokładny błąd. Koszt naprawy: od **300 zł** (mechanizm) do **5020 zł** (głowica 600dpi). **Diagnostyka jest bezpłatna przy zleceniu naprawy**, a przy rezygnacji z naprawy kosztuje 99 zł netto.
 
 ## TL;DR - Diagnostyka ZT411/ZT421 w pigułce
 
@@ -8542,7 +8547,9 @@ Jeśli linie pozostają → **wymiana głowicy w serwisie**.
 | [Wymiana wałka dociskowego](/sklep/walki-dociskowe/drukarki-przemyslowe) | 200-390 zł |
 | Naprawa płyty głównej | 800-1540 zł |
 | Czyszczenie i konserwacja | 120-180 zł |
-| **Diagnostyka** | **BEZPŁATNA** |
+| **Diagnostyka** | bezpłatna przy zleceniu naprawy* |
+
+*Przy rezygnacji z naprawy diagnostyka kosztuje 99 zł netto.
 
 > **🛒 Kup wałek online:** [Wałki do drukarek przemysłowych →](/sklep/walki-dociskowe/drukarki-przemyslowe)
 
@@ -8554,11 +8561,11 @@ Jeśli linie pozostają → **wymiana głowicy w serwisie**.
 
 Skontaktuj się z nami - jako **Autoryzowany Serwis Zebra** oferujemy:
 
-- ✅ **Bezpłatna diagnostyka** i wycena
+- ✅ **Bezpłatna diagnostyka przy zleceniu naprawy** (99 zł netto przy rezygnacji)
 - ✅ **Bezpłatny odbiór kurierem** w całej Polsce
 - ✅ **Gwarancja** na naprawę
 - ✅ **Oryginalne części** Zebra
-- ✅ **2-5 dni** czas naprawy
+- ✅ **5–7 dni roboczych** — standardowy czas naprawy (tryb ekspresowy 24–48 h, 299 zł netto, po wcześniejszym ustaleniu)
 
 > **📞 Zadzwoń:** +48 601 619 898
 
@@ -8697,11 +8704,11 @@ Jeśli drukarka ma za sobą kilka lat pracy na trzy zmiany i naprawa przestaje s
         },
         {
           question: 'Ile kosztuje naprawa drukarki Zebra?',
-          answer: 'Ceny napraw drukarek Zebra zaczynają się od 150 zł za czyszczenie mechanizmu. Wymiana głowicy drukującej kosztuje 450-2400 zł w zależności od modelu. Sprawdź cennik na serwis-zebry.pl/cennik lub otrzymaj wycenę po bezpłatnej diagnozie.'
+          answer: 'Ceny napraw drukarek Zebra zaczynają się od 150 zł za czyszczenie mechanizmu. Wymiana głowicy drukującej kosztuje 450-2400 zł w zależności od modelu. Sprawdź cennik na serwis-zebry.pl/cennik. Dokładną wycenę podajemy po diagnostyce. Diagnostyka jest bezpłatna przy zleceniu naprawy, a przy rezygnacji z naprawy kosztuje 99 zł netto.'
         },
         {
           question: 'Jak długo trwa naprawa drukarki Zebra?',
-          answer: 'Standardowa naprawa drukarki Zebra trwa 3-5 dni roboczych. Oferujemy tryb express (1-2 dni) za dodatkową opłatą. Zgłoś naprawę online na serwis-zebry.pl/formularz - oddzwonimy w 24h.'
+          answer: 'Standardowa naprawa trwa 5–7 dni roboczych. Tryb ekspresowy trwa 24–48 godzin, kosztuje 299 zł netto i wymaga wcześniejszego ustalenia. Zgłoś naprawę online na serwis-zebry.pl/formularz - oddzwonimy w 24h.'
         },
         {
           question: 'Czy mogę samodzielnie wymienić głowicę w drukarce Zebra?',
@@ -8748,7 +8755,7 @@ Jeśli drukarka ma za sobą kilka lat pracy na trzy zmiany i naprawa przestaje s
 - **25%** przypadków – problemy z kalibracją sensora gap/black mark
 - **15%** przypadków – zużyta lub uszkodzona głowica drukująca
 - **150-2400 zł** – typowy koszt naprawy (czyszczenie do wymiany głowicy)
-- **3-5 dni** – standardowy czas naprawy w autoryzowanym serwisie
+- **5–7 dni roboczych** – standardowy czas naprawy w autoryzowanym serwisie
 - **1-3 mln cm** – żywotność głowicy drukującej
 - **IPA 99%** – alkohol izopropylowy do czyszczenia głowicy
 - **PAUSE + CANCEL, 2 s** – kalibracja SmartCal w drukarkach ZD420, ZD421, ZD620 i ZD621
@@ -9018,16 +9025,16 @@ Jeśli drukarka jest krytyczna dla Twojego biznesu lub często wymaga napraw, ro
 
 ---
 
-## Bezpłatna diagnoza w Serwis Zebra
+## Diagnostyka w autoryzowanym serwisie
 
 Jako **autoryzowany partner serwisowy Zebra** oferujemy:
 
-[CHECK] **Bezpłatna diagnoza** problemu*
+[CHECK] **Diagnostyka** problemu*
 [CHECK] **Odbiór kurierem** z całej Polski
 [CHECK] **Gwarancja na naprawę** 12 miesięcy
 [CHECK] **Oryginalne części** Zebra
 
-*Diagnoza jest bezpłatna w przypadku zlecenia naprawy w naszym serwisie.
+*Diagnostyka bezpłatna przy zleceniu naprawy. Bez naprawy: 99 zł netto.
 
 [**Wyślij zgłoszenie →**](/#formularz)
 
@@ -9060,10 +9067,10 @@ Sprawdź również inne artykuły i zasoby, które mogą Ci pomóc:
 Najczęstsze przyczyny to: **nieprawidłowo załadowany ribbon** (35% przypadków), **problemy z kalibracją sensora** (25%), **zużyta głowica drukująca** (15%), **problemy ze sterownikami** (10%), **błędne ustawienia formatu etykiety** (10%) oraz problemy z zasilaniem lub połączeniem (5%).
 
 ### Ile kosztuje naprawa drukarki Zebra?
-Ceny napraw drukarek Zebra zaczynają się od **150 zł** za czyszczenie mechanizmu. [Wymiana głowicy drukującej](/sklep/glowice) kosztuje **450-2400 zł** w zależności od modelu. Sprawdź nasz [pełny cennik napraw](/blog/cennik-naprawy-drukarki-zebra-koszty-serwisu) lub otrzymaj dokładną wycenę po bezpłatnej diagnozie.
+Ceny napraw drukarek Zebra zaczynają się od **150 zł** za czyszczenie mechanizmu. [Wymiana głowicy drukującej](/sklep/glowice) kosztuje **450-2400 zł** w zależności od modelu. Sprawdź nasz [pełny cennik napraw](/blog/cennik-naprawy-drukarki-zebra-koszty-serwisu). Dokładną wycenę podajemy po diagnostyce. Diagnostyka jest bezpłatna przy zleceniu naprawy, a przy rezygnacji z naprawy kosztuje 99 zł netto.
 
 ### Jak długo trwa naprawa drukarki Zebra?
-Standardowa naprawa drukarki Zebra trwa **3-5 dni roboczych**. Oferujemy również tryb express (1-2 dni) za dodatkową opłatą. [Zgłoś naprawę online](/formularz) - oddzwonimy w 24h.
+Standardowa naprawa trwa **5–7 dni roboczych**. Tryb ekspresowy trwa 24–48 godzin, kosztuje 299 zł netto i wymaga wcześniejszego ustalenia. [Zgłoś naprawę online](/formularz) - oddzwonimy w 24h.
 
 ### Czy mogę samodzielnie wymienić głowicę w drukarce Zebra?
 Tak, samodzielna wymiana głowicy jest możliwa, ale wymaga odpowiednich narzędzi i wiedzy technicznej. Nieprawidłowy montaż może uszkodzić drukarkę i unieważnić gwarancję. Oryginalne głowice kupisz w [naszym sklepie](/sklep/glowice) — zalecamy też skorzystanie z profesjonalnego serwisu.
@@ -9612,7 +9619,7 @@ Głowica składa się z tysięcy mikroskopijnych elementów grzejnych. W drukarc
 - Kompleksowy przegląd drukarki
 
 **Wady:**
-- Czas oczekiwania (2-5 dni)
+- Czas oczekiwania (standardowo 5–7 dni roboczych)
 - Koszt robocizny
 
 > **⚠️ Uwaga:** Nieprawidłowy montaż głowicy może uszkodzić płytę główną drukarki! Koszt naprawy płyty to 500-1500 zł.
@@ -9668,7 +9675,7 @@ Głowica składa się z tysięcy mikroskopijnych elementów grzejnych. W drukarc
 
 Jako **autoryzowany partner serwisowy Zebra** oferujemy:
 
-[CHECK] **Bezpłatna diagnostyka** problemu*  
+[CHECK] **Diagnostyka** problemu*  
 [CHECK] **Oryginalne głowice** Zebra
 [CHECK] **Profesjonalny montaż** + kalibracja
 [CHECK] **Gwarancja 12 miesięcy** na naprawę
@@ -9700,7 +9707,7 @@ W menu drukarki znajdziesz licznik "Head Life" lub "Odometer". Pokazuje on przeb
 W 90% przypadków tak. Białe pionowe pasy to najczęstszy objaw uszkodzonej głowicy. Przed wymianą warto jednak spróbować dokładnego czyszczenia.
 
 ### Ile trwa wymiana głowicy w serwisie?
-Standardowa wymiana trwa 1-2 dni robocze od momentu dostarczenia drukarki. W trybie express możliwa realizacja w 24h (+50 zł).
+Standardowa naprawa trwa 5–7 dni roboczych od dostarczenia drukarki. Tryb ekspresowy trwa 24–48 godzin, kosztuje 299 zł netto i wymaga wcześniejszego ustalenia.
 
 ---
 
@@ -9999,7 +10006,7 @@ Wyłącz drukarkę, przytrzymaj przycisk Feed, włącz drukarkę trzymając przy
 Nie zalecamy. Zasilacze zamienniki często mają niższą moc, co skutkuje bladym wydrukiem i przegrzewaniem. Oryginalny zasilacz Zebra to 20V/2.5A.
 
 ### Ile kosztuje naprawa GK420 z czerwoną diodą?
-Zależy od przyczyny: wymiana czujnika 100-200 zł, wymiana głowicy 250-400 zł, naprawa płyty głównej 300-500 zł. Dokładna wycena po bezpłatnej diagnozie.
+Zależy od przyczyny: wymiana czujnika 100-200 zł, wymiana głowicy 250-400 zł, naprawa płyty głównej 300-500 zł. Dokładną wycenę podajemy po diagnostyce. Diagnostyka jest bezpłatna przy zleceniu naprawy, a przy rezygnacji z naprawy kosztuje 99 zł netto.
 
 ### Czy seria GK420 jest jeszcze wspierana?
 Zebra oficjalnie zakończyła produkcję serii GK, ale jako autoryzowany serwis nadal naprawiamy te drukarki i mamy dostęp do części zamiennych.
@@ -10330,7 +10337,7 @@ Zalecamy czyszczenie po każdej wymianie rolki etykiet lub taśmy ribbon. Przy i
 Nagłe pogorszenie jakości często wskazuje na uszkodzenie głowicy lub problem z ribbon. Sprawdź najpierw czy taśma jest prawidłowo założona i nie jest zerwana.
 
 ### Ile kosztuje naprawa bladego wydruku?
-Zależy od przyczyny: czyszczenie mechanizmu 150-360 zł, wymiana wałka 150-290 zł, wymiana głowicy 450-2400 zł. Dokładną wycenę podamy po bezpłatnej diagnozie.
+Zależy od przyczyny: czyszczenie mechanizmu 150-360 zł, wymiana wałka 150-290 zł, wymiana głowicy 450-2400 zł. Dokładną wycenę podajemy po diagnostyce. Diagnostyka jest bezpłatna przy zleceniu naprawy, a przy rezygnacji z naprawy kosztuje 99 zł netto.
 `
   },
   {
@@ -10787,14 +10794,14 @@ Masz problemy z kalibracją drukarki Zebra?
 
 Jako **autoryzowany partner serwisowy Zebra** oferujemy:
 
-[CHECK] **Bezpłatna diagnostyka** problemu*
+[CHECK] **Diagnostyka** problemu*
 [CHECK] **Odbiór kurierem** z całej Polski
 [CHECK] **Gwarancja 12 miesięcy** na naprawę
 [CHECK] **Kalibracja i konfiguracja** pod Twoje etykiety
 
 **Cennik napraw sensorów:** 150-550 zł (w zależności od modelu)
 
-*Diagnostyka bezpłatna w przypadku zlecenia naprawy w naszym serwisie.
+*Diagnostyka bezpłatna przy zleceniu naprawy. Bez naprawy: 99 zł netto.
 
 [**Wyślij drukarkę do serwisu →**](/#formularz)
 
@@ -19998,7 +20005,7 @@ Znajdziesz tu błędy podzielone na kategorie:
 
 ### Error 7029: FLIPPER ROTATION ERROR
 
-**Znaczenie:** Moduł flipper przestał działać.
+**Znaczenie:** Moduł flipper (moduł obracania kart) przestał działać. W serii ZC moduł obracania kart mają tylko drukarki ZC300 i ZC350 z modułem druku dwustronnego. Drukarka ZC100 drukuje wyłącznie jednostronnie.
 
 **Rozwiązanie:** Ten błąd wymaga serwisu. Flipper może mieć uszkodzony silnik lub płytkę sterującą.
 
@@ -20008,13 +20015,14 @@ Znajdziesz tu błędy podzielone na kategorie:
 
 ### Error 7034: REJECT BIN FULL
 
-**Znaczenie:** Pojemnik na odrzucone karty jest pełny.
+**Znaczenie:** Pojemnik na odrzucone karty jest pełny. W serii ZC pojemnik na karty odrzucone mają tylko drukarki ZC300 i ZC350 z modułem druku dwustronnego. W drukarce ZC100 i w drukarkach bez modułu druku dwustronnego karta odrzucona trafia do odbiornika kart.
 
 **Rozwiązanie:**
 
-1. Wyjmij karty z pojemnika reject bin
-2. W menu drukarki: **Main Menu → Advanced Settings → Clear Reject Bin**
-3. Zresetuj licznik
+1. ZC300 i ZC350: należy otworzyć górną pokrywę i wyjąć karty z pojemnika nad modułem obracania kart
+2. Drukarki ZXP: wyjmij karty z pojemnika reject bin
+3. Drukarki ZXP: w menu drukarki **Main Menu → Advanced Settings → Clear Reject Bin**
+4. Drukarki ZXP: zresetuj licznik
 
 ---
 
@@ -20160,7 +20168,7 @@ Najczęściej: taśma nie jest prawidłowo naciągnięta lub chip RFID nie styka
 Zalecenie producenta: **co 5000 wydrukowanych kart** lub przy każdej wymianie taśmy. Regularne czyszczenie zapobiega większości błędów 4xxx i 5xxx.
 
 ### Czy mogę używać nieoryginalnych taśm?
-Nie zalecamy. Nieoryginalne taśmy często powodują Error 5002 (invalid ribbon), błędy kolorów i przyspieszają zużycie głowicy. Oszczędność ~20% na taśmie może kosztować 2000+ zł za nową głowicę.
+Nie zalecamy. Nieoryginalne taśmy często powodują Error 5002 (invalid ribbon), błędy kolorów i przyspieszają zużycie głowicy. Oszczędność ~20% na taśmie może skończyć się wymianą głowicy, która kosztuje od 580 do 1500 zł netto.
 
 ### Co oznacza mruganie wszystkich diod na czerwono?
 Błąd krytyczny (Error 8). Wyłącz drukarkę, odczekaj 60 sekund, włącz ponownie. Jeśli problem pozostaje – wymagany serwis.
@@ -20188,9 +20196,11 @@ Przed kontaktem z serwisem sprawdź:
 
 Jeśli powyższe rozwiązania nie pomogły lub błąd wymaga serwisu:
 
-> 🔧 **Zgłoś drukarkę do naprawy** — [Wypełnij formularz →](/#formularz) — bezpłatna wycena, wysyłka kurierem na nasz koszt.
+> 🔧 **Zgłoś drukarkę do naprawy** — [Wypełnij formularz →](/#formularz) — bezpłatna diagnostyka przy zleceniu naprawy (przy rezygnacji z naprawy 99 zł netto), wysyłka kurierem na nasz koszt.
 
 > 📞 **Pilna sprawa?** Zadzwoń: **+48 601 619 898** — serwis drukarek kart Zebra w całej Polsce.
+
+Zakres napraw, cennik i przygotowanie drukarki do wysyłki opisuje strona [serwis drukarek kart Zebra](/serwis-drukarek-kart-zebra).
 
 Naprawiamy: ZC100, ZC150, ZC300, ZC350, ZXP Series 1, 3, 7, 8, 9 i starsze modele P330i, P430i.
 `
@@ -20450,7 +20460,7 @@ Drukarki Zebra sygnalizują zacięcie diodą **CARD**:
 
 ## Zacięcia powtarzają się? Sprawdź te elementy:
 
-### 1. Wałek podający (Feed Roller)
+### 1. Rolka podajnika (wałek podający, Feed Roller)
 - Zużyty wałek nie chwyta kart prawidłowo
 - Wymiana co ~50,000 kart lub gdy guma "stwardnieje"
 
@@ -20474,17 +20484,13 @@ Drukarki Zebra sygnalizują zacięcie diodą **CARD**:
 Nie zalecamy. Metalowe narzędzia mogą porysować wałki i głowicę. Używaj tylko Manual Advance Wheel i delikatnie palcami.
 
 ### Drukarka zacina KAŻDĄ kartę – co robić?
-Prawdopodobnie zużyty wałek podający lub problem z sensorem. Wymiana wałka to ~100-200 zł w serwisie. Warto to zrobić przed uszkodzeniem głowicy.
+Prawdopodobnie zużyty wałek podający lub problem z sensorem. Wymianę zużytego wałka podającego wykonuje serwis. Cenę wymiany wałka podajemy po diagnostyce, przed rozpoczęciem naprawy. Wałek należy wymienić przed uszkodzeniem głowicy.
 
 ### Karta utknęła i nie widzę jej przez okienko – jak ją znaleźć?
 Karta może być głęboko w mechanizmie. Otwórz wszystkie dostępne pokrywy. Użyj latarki. Jeśli nie widać – lepiej oddać do serwisu niż ryzykować uszkodzenie.
 
 ### Ile kosztuje naprawa powtarzających się zacięć?
-Zależy od przyczyny:
-- Wymiana wałka podającego: 100-200 zł
-- Wymiana wałka czyszczącego: 50-100 zł
-- Naprawa flippera: 300-600 zł
-- Czyszczenie mechanizmu: 150-250 zł
+Zależy od przyczyny. Naprawa mechanizmu kosztuje od 350 do 850 zł netto. Konserwacja (czyszczenie głowicy, rolek i wnętrza drukarki) kosztuje 199 zł netto. Dokładną cenę podajemy po diagnostyce, przed rozpoczęciem naprawy. Ceny usług zawiera [cennik napraw drukarek kart Zebra](/serwis-drukarek-kart-zebra).
 
 ---
 
@@ -20507,9 +20513,11 @@ Zależy od przyczyny:
 
 Jeśli zacięcia powtarzają się mimo wykonania wszystkich kroków:
 
-> 🔧 **Zgłoś drukarkę do serwisu** — [Wypełnij formularz →](/#formularz) — bezpłatna wycena, naprawiamy wałki i flippery.
+> 🔧 **Zgłoś drukarkę do serwisu** — [Wypełnij formularz →](/#formularz) — bezpłatna diagnostyka przy zleceniu naprawy (przy rezygnacji z naprawy 99 zł netto), naprawiamy wałki i flippery.
 
 > 📞 **Pilna sprawa?** Zadzwoń: **+48 601 619 898** — serwis drukarek kart w całej Polsce.
+
+Naprawę toru karty po zacięciach i wymianę rolki podajnika (wałka podającego) opisuje strona [naprawa drukarki kart Zebra](/serwis-drukarek-kart-zebra).
 
 Naprawiamy wszystkie modele: ZC100, ZC150, ZC300, ZC350, ZXP Series 1, 3, 7, 8, 9.
 `
@@ -20531,7 +20539,7 @@ Naprawiamy wszystkie modele: ZC100, ZC150, ZC300, ZC350, ZXP Series 1, 3, 7, 8, 
     tags: ['głowica drukująca', 'biała linia', 'wymiana głowicy', 'ZC300', 'ZXP Series 7', 'jakość druku', 'printhead', 'czyszczenie głowicy', 'troubleshooting'],
     seo: {
       metaTitle: 'Białe linie na karcie Zebra – wymiana głowicy czy czyszczenie? [2026]',
-      metaDescription: 'Biała linia na wydrukowanej karcie Zebra ZC300/ZXP? Dowiedz się czy to brud (usuwalny) czy uszkodzona głowica (wymiana 400-1500 zł). Diagnostyka krok po kroku.',
+      metaDescription: 'Biała linia na wydrukowanej karcie Zebra ZC300/ZXP? Dowiedz się czy to brud (usuwalny) czy uszkodzona głowica (wymiana 580–1500 zł netto). Diagnostyka krok po kroku.',
       keywords: [
         'biała linia na karcie zebra',
         'wymiana głowicy zebra zc300',
@@ -20558,7 +20566,7 @@ Naprawiamy wszystkie modele: ZC100, ZC150, ZC300, ZC350, ZXP Series 1, 3, 7, 8, 
     content: `
 # Białe linie na karcie – diagnostyka i wymiana głowicy w drukarkach Zebra
 
-> **⚠️ Pionowa biała linia na karcie?** To jeden z najczęstszych problemów z jakością druku. Może oznaczać zwykłe zabrudzenie (łatwe do usunięcia) lub uszkodzoną głowicę (wymiana 400-1500 zł). Ten poradnik pomoże Ci zdiagnozować problem.
+> **⚠️ Pionowa biała linia na karcie?** To jeden z najczęstszych problemów z jakością druku. Może oznaczać zwykłe zabrudzenie (łatwe do usunięcia) lub uszkodzoną głowicę (wymiana 580–1500 zł netto). Ten poradnik pomoże Ci zdiagnozować problem.
 
 ---
 
@@ -20663,20 +20671,15 @@ Dla efektu "ghosting" (duchy poprzednich wydruków):
 
 ## Ile kosztuje głowica do drukarki kart Zebra?
 
-### Ceny głowic (orientacyjne, 2025):
+Wymiana głowicy w serwisie kosztuje od 580 do 1500 zł netto, zależnie od modelu drukarki. Cena obejmuje głowicę, robociznę i kalibrację. Dokładną cenę podajemy po diagnostyce, przed rozpoczęciem naprawy.
 
-| Model drukarki | Part Number głowicy | Cena głowicy | Cena z wymianą* |
-|----------------|---------------------|--------------|-----------------|
-| ZC100/ZC150 | P1058930-010 | ~600-800 zł | ~800-1000 zł |
-| ZC300/ZC350 | P1058930-010 | ~600-800 zł | ~800-1000 zł |
-| ZXP Series 1 | P1004237 | ~500-700 zł | ~700-900 zł |
-| ZXP Series 3 | P1031925 | ~700-900 zł | ~900-1100 zł |
-| ZXP Series 7 | P1037750-006 | ~1000-1300 zł | ~1200-1500 zł |
-| ZXP Series 8 | P1037750-006 | ~1000-1300 zł | ~1200-1500 zł |
+### Numery katalogowe głowic
 
-*Cena z wymianą obejmuje robociznę i kalibrację w serwisie.
+| Model drukarki | Numer katalogowy głowicy |
+|----------------|--------------------------|
+| ZC100, ZC150, ZC300, ZC350 | P1094879-020 (Kit, Printhead Assembly) |
 
-> **🔧 Potrzebujesz wymiany głowicy?** [Wyceń naprawę →](/#formularz) — oferujemy konkurencyjne ceny na oryginalne głowice Zebra.
+> **🔧 Potrzebujesz wymiany głowicy?** [Cennik wymiany głowicy w drukarce kart Zebra →](/serwis-drukarek-kart-zebra#cennik) — oferujemy konkurencyjne ceny na oryginalne głowice Zebra.
 
 ---
 
@@ -20775,7 +20778,7 @@ Dla efektu "ghosting" (duchy poprzednich wydruków):
 Nie! W ~60% przypadków wystarczy dokładne czyszczenie. Uszkodzona głowica daje **stałą** białą linię, która nie znika po czyszczeniu.
 
 ### Ile kosztuje wymiana głowicy w serwisie?
-Zależnie od modelu: **700-1500 zł** łącznie (głowica + robocizna + kalibracja). Samodzielny zakup głowicy to 500-1300 zł.
+Zależnie od modelu: **580–1500 zł netto** łącznie (głowica, robocizna i kalibracja). Dokładną cenę podajemy po diagnostyce, przed rozpoczęciem naprawy.
 
 ### Czy mogę używać zamienników głowic (nie-Zebra)?
 Nie zalecamy. Zamienniki mają niższą jakość i krótszą żywotność. Mogą też powodować problemy z gwarancją drukarki.
@@ -21121,9 +21124,9 @@ Dla zaawansowanych zastosowań możesz włączyć **"Use Hex format to encode tr
 
 | Typ naprawy | Orientacyjny koszt |
 |-------------|-------------------|
-| Czyszczenie + kalibracja | 150-250 zł |
-| Wymiana głowicy enkodera | 400-800 zł |
-| Wymiana całego modułu mag | 600-1200 zł |
+| Konserwacja (czyszczenie) | 199 zł netto |
+| Wymiana głowicy enkodera | wycena po diagnostyce |
+| Wymiana całego modułu mag | wycena po diagnostyce |
 
 > **🔧 Enkoder nie działa mimo czyszczenia?** [Zgłoś do serwisu →](/#formularz)
 
@@ -22266,13 +22269,13 @@ Czynniki skracające żywotność:
 Technicznie tak, ale jeśli linia przechodzi przez kod kreskowy – **kod nie będzie się skanować**. Dla tekstów i grafik problem jest kosmetyczny.
 
 ### Ile kosztuje wymiana głowicy w serwisie?
-Wymiana głowicy (części + robocizna): **450-800 zł** w zależności od modelu. Oferujemy bezpłatną wycenę.
+Wymiana głowicy (części + robocizna): **450-800 zł** w zależności od modelu. Diagnostyka jest bezpłatna przy zleceniu naprawy, a przy rezygnacji z naprawy kosztuje 99 zł netto.
 
 ### Czy mogę wymienić głowicę samodzielnie?
 Tak, w drukarkach ZQ głowica jest wymienna. Wymaga ostrożności i antystatycznych środków ochrony.
 
 ### Jak długo trwa naprawa?
-Standardowo **2-3 dni robocze** od otrzymania urządzenia.
+Standardowa naprawa trwa **5–7 dni roboczych** od otrzymania urządzenia. Tryb ekspresowy trwa 24–48 godzin, kosztuje 299 zł netto i wymaga wcześniejszego ustalenia.
 
 ---
 
@@ -22295,7 +22298,7 @@ Standardowo **2-3 dni robocze** od otrzymania urządzenia.
 
 Jeśli czyszczenie i ustawienia nie pomogły:
 
-> 🔧 **Zgłoś drukarkę do serwisu** — [Wypełnij formularz →](/#formularz) — bezpłatna diagnostyka, szybka wymiana głowicy.
+> 🔧 **Zgłoś drukarkę do serwisu** — [Wypełnij formularz →](/#formularz) — bezpłatna diagnostyka przy zleceniu naprawy (99 zł netto przy rezygnacji), szybka wymiana głowicy.
 
 > 📞 **Pilne?** Zadzwoń: **+48 601 619 898** — pomożemy zdiagnozować problem przez telefon.
 
@@ -22613,7 +22616,7 @@ Najczęściej problem z kalibracją – czujnik wykrywa "podwójną" szczelinę.
 Tak, ale musisz zmienić typ nośnika na \`continuous\` i ustawić długość etykiety ręcznie.
 
 ### Ile kosztuje wymiana czujnika?
-Wymiana czujnika w serwisie: **150-350 zł** w zależności od modelu. Oferujemy bezpłatną diagnostykę.
+Wymiana czujnika w serwisie: **150-350 zł** w zależności od modelu. Diagnostyka jest bezpłatna przy zleceniu naprawy, a przy rezygnacji z naprawy kosztuje 99 zł netto.
 
 ### Jak długo trwa kalibracja?
 Automatyczna kalibracja trwa **10-30 sekund** i zużywa 2-4 etykiety.
@@ -22639,7 +22642,7 @@ Automatyczna kalibracja trwa **10-30 sekund** i zużywa 2-4 etykiety.
 
 Jeśli czyszczenie i kalibracja nie pomogły:
 
-> 🔧 **Zgłoś drukarkę do serwisu** — [Wypełnij formularz →](/#formularz) — bezpłatna diagnostyka, profesjonalna naprawa czujników.
+> 🔧 **Zgłoś drukarkę do serwisu** — [Wypełnij formularz →](/#formularz) — bezpłatna diagnostyka przy zleceniu naprawy (99 zł netto przy rezygnacji), profesjonalna naprawa czujników.
 
 > 📞 **Pilne?** Zadzwoń: **+48 601 619 898** — pomożemy zdiagnozować problem przez telefon.
 
@@ -22998,7 +23001,7 @@ Połącz drukarkę przez USB i wydrukuj. Jeśli działa – problem z siecią. J
 
 Jeśli konfiguracja nie pomogła:
 
-> 🔧 **Zgłoś drukarkę do serwisu** — [Wypełnij formularz →](/#formularz) — bezpłatna diagnostyka, profesjonalna konfiguracja sieci.
+> 🔧 **Zgłoś drukarkę do serwisu** — [Wypełnij formularz →](/#formularz) — bezpłatna diagnostyka przy zleceniu naprawy (99 zł netto przy rezygnacji), profesjonalna konfiguracja sieci.
 
 > 📞 **Pilne?** Zadzwoń: **+48 601 619 898** — pomożemy skonfigurować drukarkę przez telefon.
 
@@ -23331,7 +23334,7 @@ Naładowaną do 40-60%, w temperaturze pokojowej – **do 1 roku** bez znaczące
 
 Jeśli diagnostyka nie pomogła:
 
-> 🔧 **Zgłoś drukarkę do serwisu** — [Wypełnij formularz →](/#formularz) — bezpłatna diagnostyka. [Oryginalne baterie Zebra w sklepie →](/sklep/akumulatory/drukarki-mobilne)
+> 🔧 **Zgłoś drukarkę do serwisu** — [Wypełnij formularz →](/#formularz) — bezpłatna diagnostyka przy zleceniu naprawy (99 zł netto przy rezygnacji). [Oryginalne baterie Zebra w sklepie →](/sklep/akumulatory/drukarki-mobilne)
 
 > 📞 **Pilne?** Zadzwoń: **+48 601 619 898** — pomożemy zdiagnozować problem przez telefon.
 
@@ -23667,7 +23670,7 @@ Zebra oferuje **Soft Case** i **Hard Case** z izolacją termiczną. Dla ekstrema
 
 Jeśli drukarka nie działa prawidłowo mimo aklimatyzacji:
 
-> 🔧 **Zgłoś drukarkę do serwisu** — [Wypełnij formularz →](/#formularz) — bezpłatna diagnostyka, media cold-chain, akcesoria zimowe.
+> 🔧 **Zgłoś drukarkę do serwisu** — [Wypełnij formularz →](/#formularz) — bezpłatna diagnostyka przy zleceniu naprawy (99 zł netto przy rezygnacji), media cold-chain, akcesoria zimowe.
 
 > 📞 **Pilne?** Zadzwoń: **+48 601 619 898** — pomożemy dobrać rozwiązanie dla Twoich warunków.
 
@@ -23757,7 +23760,7 @@ Serwisujemy wszystkie modele mobilne: ZQ630, ZQ620, ZQ610, ZQ521, ZQ520, ZQ511, 
         },
         {
           question: 'Czy mogę przedłużyć gwarancję Zebra bez OneCare?',
-          answer: 'Tak, alternatywą dla OneCare jest indywidualna umowa serwisowa z autoryzowanym serwisem Zebra w Polsce. TAKMA jako Zebra Premier Partner oferuje naprawy na oryginalnych częściach z gwarancją producenta, czas naprawy 3-5 dni (express 24-48h), bezpłatną diagnostykę i elastyczne warunki umowy.'
+          answer: 'Tak, alternatywą dla OneCare jest indywidualna umowa serwisowa z autoryzowanym serwisem Zebra w Polsce. TAKMA jako Zebra Premier Partner oferuje naprawy na oryginalnych częściach z gwarancją producenta, czas naprawy standardowo 5–7 dni roboczych (tryb ekspresowy 24–48 h, 299 zł netto, po wcześniejszym ustaleniu), bezpłatną diagnostykę przy zleceniu naprawy (99 zł netto przy rezygnacji) i elastyczne warunki umowy.'
         },
         {
           question: 'Jaki jest czas naprawy w ramach Zebra OneCare?',
@@ -23775,7 +23778,7 @@ Serwisujemy wszystkie modele mobilne: ZQ630, ZQ620, ZQ610, ZQ521, ZQ520, ZQ511, 
 | **Essential** | 3 dni | 150 zł | Małe firmy, urządzenia backup |
 | **Select** | 1-2 dni | 300 zł | Średnie firmy, ważna ciągłość |
 | **Premier** | Indywidualny SLA | Wycena | Duże firmy, operacje 24/7 |
-| **Lokalny serwis (TAKMA)** | 3-5 dni | Indywidualna | Elastyczność, kontakt po polsku |
+| **Lokalny serwis (TAKMA)** | 5–7 dni roboczych | Indywidualna | Elastyczność, kontakt po polsku |
 
 ---
 
@@ -24022,8 +24025,8 @@ Jeśli kontrakt OneCare nie jest dla Ciebie optymalny, rozważ współpracę z *
 Jako **Zebra Premier Partner** i **Authorized Repair Center** oferujemy:
 
 - Naprawy na oryginalnych częściach z gwarancją producenta
-- Czas naprawy 3-5 dni roboczych (express 24-48h)
-- Bezpłatna diagnostyka
+- Czas naprawy standardowo 5–7 dni roboczych (tryb ekspresowy 24–48 h, 299 zł netto, po wcześniejszym ustaleniu)
+- Bezpłatna diagnostyka przy zleceniu naprawy (99 zł netto przy rezygnacji)
 - Darmowy transport kurierski
 - Indywidualne umowy serwisowe dla firm
 
@@ -24048,7 +24051,7 @@ Nie wiesz, który kontrakt będzie najlepszy dla Twojej firmy? Skontaktuj się z
 
 > **Napisz do nas:** [Formularz kontaktowy](/kontakt) — przygotujemy indywidualną ofertę
 
-> **Zgłoś naprawę:** [Wypełnij formularz](/#formularz) — bezpłatna diagnostyka
+> **Zgłoś naprawę:** [Wypełnij formularz](/#formularz) — bezpłatna diagnostyka przy zleceniu naprawy (99 zł netto przy rezygnacji)
 
 Jako **Autoryzowany Partner Zebra** z 25-letnim doświadczeniem pomożemy Ci wybrać optymalne rozwiązanie serwisowe — czy to kontrakt OneCare, czy indywidualną umowę z naszym serwisem.
 
@@ -24159,8 +24162,8 @@ Tak, alternatywą jest **indywidualna umowa serwisowa** z autoryzowanym serwisem
 
 **TAKMA jako Zebra Premier Partner oferuje:**
 - Naprawy na oryginalnych częściach z gwarancją
-- Czas naprawy 3-5 dni (express 24-48h)
-- Bezpłatną diagnostykę
+- Czas naprawy standardowo 5–7 dni roboczych (tryb ekspresowy 24–48 h, 299 zł netto, po wcześniejszym ustaleniu)
+- Bezpłatną diagnostykę przy zleceniu naprawy (99 zł netto przy rezygnacji)
 - Darmowy transport kurierski
 - Elastyczne warunki umowy
 - Pełna komunikacja po polsku
@@ -28053,7 +28056,7 @@ Tak, ale upewnij się że:
 
 ### Ile kosztuje wymiana czujnika ribbona w drukarce Zebra?
 
-Orientacyjnie **200-400 zł** za część + robociznę. W autoryzowanym serwisie naprawa trwa 1-2 dni robocze.
+Orientacyjnie **200-400 zł** za część + robociznę. W autoryzowanym serwisie standardowa naprawa trwa 5–7 dni roboczych.
 
 ### Błąd Ribbon Out pojawia się po kilku etykietach – co robić?
 
@@ -29160,7 +29163,7 @@ Wdrażamy i serwisujemy sprzęt Zebry na co dzień, więc wiemy, gdzie takie pro
 
 > 📞 **Zadzwoń:** +48 601 619 898 — powiemy, czy przy Twojej flocie to się opłaca
 
-> 🔧 **Zgłoś naprawę:** [Formularz serwisowy →](/#formularz) — bezpłatna wycena
+> 🔧 **Zgłoś naprawę:** [Formularz serwisowy →](/#formularz) — bezpłatna diagnostyka przy zleceniu naprawy (99 zł netto przy rezygnacji)
 
 > 💬 **Szybka pomoc:** [Czat z AI →](/#czat) — diagnostyka 24/7
 
@@ -29462,7 +29465,7 @@ Konfigurujemy drukarki objęte trybem chronionym na co dzień — także zdalnie
 
 > 📞 **Zadzwoń:** +48 601 619 898 — pomożemy skonfigurować drukarkę zdalnie
 
-> 🔧 **Zgłoś naprawę:** [Formularz serwisowy →](/#formularz) — bezpłatna wycena
+> 🔧 **Zgłoś naprawę:** [Formularz serwisowy →](/#formularz) — bezpłatna diagnostyka przy zleceniu naprawy (99 zł netto przy rezygnacji)
 
 > 💬 **Szybka pomoc:** [Czat z AI →](/#czat) — diagnostyka 24/7
 
@@ -29945,7 +29948,7 @@ Jako **autoryzowany serwis Zebra** oferujemy:
         },
         {
           question: 'Ile kosztuje naprawa drukarki Zebra GK420?',
-          answer: 'Koszt naprawy GK420 zależy od usterki: czyszczenie i konserwacja 80-150 zł, wymiana wałka dociskowego 120-180 zł, wymiana głowicy 250-400 zł, naprawa płyty głównej 350-500 zł. Diagnostyka bezpłatna.'
+          answer: 'Koszt naprawy GK420 zależy od usterki: czyszczenie i konserwacja 80-150 zł, wymiana wałka dociskowego 120-180 zł, wymiana głowicy 250-400 zł, naprawa płyty głównej 350-500 zł. Diagnostyka jest bezpłatna przy zleceniu naprawy, a przy rezygnacji z naprawy kosztuje 99 zł netto.'
         },
         {
           question: 'Jak często czyścić głowicę w drukarce GK420?',
@@ -29994,8 +29997,10 @@ Jako **autoryzowany serwis Zebra** oferujemy:
 | **Czyszczenie głowicy** | Po każdej rolce etykiet, IPA 90% |
 | **Wymiana głowicy** | 250-400 zł (część + usługa) |
 | **[Wymiana wałka](/sklep/walki-dociskowe/drukarki-biurkowe)** | 120-180 zł |
-| **Diagnostyka** | Bezpłatna |
+| **Diagnostyka** | bezpłatna przy zleceniu naprawy* |
 | **Gwarancja naprawy** | 12 miesięcy |
+
+*Przy rezygnacji z naprawy diagnostyka kosztuje 99 zł netto.
 
 ---
 
@@ -30247,7 +30252,7 @@ Wydruk przesuwa się między etykietami.
 | Wymiana czujników | 150-250 zł | 12 mies. |
 | Wymiana zasilacza | 150-200 zł | 12 mies. |
 
-*Ceny netto. Diagnostyka bezpłatna przy zleceniu naprawy.*
+*Ceny netto. Diagnostyka bezpłatna przy zleceniu naprawy, przy rezygnacji z naprawy 99 zł netto.*
 
 ### Wymiana głowicy drukującej
 
@@ -30303,15 +30308,15 @@ Oddaj do serwisu gdy:
 
 ---
 
-## Bezpłatna diagnostyka w autoryzowanym serwisie
+## Diagnostyka w autoryzowanym serwisie
 
 Jako **autoryzowany serwis Zebra Technologies** oferujemy:
 
-- ✅ **Bezpłatna diagnostyka** i wycena
+- ✅ **Bezpłatna diagnostyka przy zleceniu naprawy** (99 zł netto przy rezygnacji)
 - ✅ **Bezpłatny odbiór kurierem** z całej Polski
 - ✅ **Oryginalne części** Zebra
 - ✅ **Gwarancja 12 miesięcy** na naprawę
-- ✅ **2-5 dni** czas naprawy
+- ✅ **5–7 dni roboczych** — standardowy czas naprawy (tryb ekspresowy 24–48 h, 299 zł netto, po wcześniejszym ustaleniu)
 
 > **📞 Zadzwoń:** +48 601 619 898
 
@@ -30473,7 +30478,7 @@ Model "d" jest prostszy, model "t" oferuje trwalsze wydruki na etykiety syntetyc
         },
         {
           question: 'Ile kosztuje naprawa drukarki mobilnej Zebra ZQ610/ZQ620/ZQ630?',
-          answer: 'Koszt naprawy drukarek mobilnych Zebra: wymiana baterii PowerPrecision+ 180-350 zł, naprawa Bluetooth/Wi-Fi 250-450 zł, wymiana głowicy 350-550 zł, naprawa LCD 300-500 zł. Diagnostyka bezpłatna przy zleceniu naprawy.'
+          answer: 'Koszt naprawy drukarek mobilnych Zebra: wymiana baterii PowerPrecision+ 180-350 zł, naprawa Bluetooth/Wi-Fi 250-450 zł, wymiana głowicy 350-550 zł, naprawa LCD 300-500 zł. Diagnostyka jest bezpłatna przy zleceniu naprawy, a przy rezygnacji z naprawy kosztuje 99 zł netto.'
         },
         {
           question: 'Jak wydrukować etykietę konfiguracyjną w ZQ610/ZQ620/ZQ630?',
@@ -30522,8 +30527,10 @@ Model "d" jest prostszy, model "t" oferuje trwalsze wydruki na etykiety syntetyc
 | **Wymiana baterii** | 180-350 zł |
 | **Wymiana głowicy** | 350-550 zł |
 | **Naprawa Bluetooth/Wi-Fi** | 250-450 zł |
-| **Diagnostyka** | Bezpłatna |
+| **Diagnostyka** | bezpłatna przy zleceniu naprawy* |
 | **Gwarancja naprawy** | 12 miesięcy |
+
+*Przy rezygnacji z naprawy diagnostyka kosztuje 99 zł netto.
 
 ---
 
@@ -30751,7 +30758,7 @@ Przydatny gdy drukarka nie reaguje na polecenia.
 | Naprawa mechanizmu druku | 250-400 zł | 12 mies. |
 | Wymiana obudowy | 200-350 zł | 12 mies. |
 
-*Ceny netto. Diagnostyka bezpłatna przy zleceniu naprawy.*
+*Ceny netto. Diagnostyka bezpłatna przy zleceniu naprawy, przy rezygnacji z naprawy 99 zł netto.*
 
 📖 Szczegóły: [Ile kosztuje naprawa drukarki Zebra?](/blog/cennik-naprawy-drukarki-zebra-koszty-serwisu)
 
@@ -30771,15 +30778,15 @@ Oddaj do serwisu gdy:
 
 ---
 
-## Bezpłatna diagnostyka w autoryzowanym serwisie
+## Diagnostyka w autoryzowanym serwisie
 
 Jako **autoryzowany serwis Zebra Technologies** oferujemy:
 
-- ✅ **Bezpłatna diagnostyka** i wycena
+- ✅ **Bezpłatna diagnostyka przy zleceniu naprawy** (99 zł netto przy rezygnacji)
 - ✅ **Bezpłatny odbiór kurierem** z całej Polski
 - ✅ **Oryginalne części** Zebra (baterie, głowice, moduły)
 - ✅ **Gwarancja 12 miesięcy** na naprawę
-- ✅ **2-5 dni** czas naprawy
+- ✅ **5–7 dni roboczych** — standardowy czas naprawy (tryb ekspresowy 24–48 h, 299 zł netto, po wcześniejszym ustaleniu)
 
 > **📞 Zadzwoń:** +48 601 619 898
 
@@ -30861,7 +30868,7 @@ Wymiana baterii PowerPrecision+ w ZQ610/ZQ620 kosztuje **180-280 zł netto**, w 
     tags: ['ZD620', 'ZD621', 'ZD620d', 'ZD620t', 'ZD621d', 'ZD621t', 'ZD621R', 'RFID', 'serwis drukarki zebra', 'naprawa ZD620', 'naprawa ZD621', 'diagnostyka', 'Link-OS', 'wyświetlacz dotykowy'],
     seo: {
       metaTitle: 'Serwis drukarki Zebra ZD620/ZD621 - diagnostyka i naprawa [2026]',
-      metaDescription: 'Drukarka Zebra ZD620 lub ZD621 nie działa? Diagnostyka wyświetlacza, alerty systemowe, SmartCal, procedury serwisowe. Cennik napraw ZD621. Bezpłatna diagnostyka.',
+      metaDescription: 'Zebra ZD620 lub ZD621 nie działa? Diagnostyka wyświetlacza, alerty, SmartCal, procedury serwisowe. Cennik napraw. Bezpłatna diagnostyka przy zleceniu naprawy.',
       keywords: [
         'serwis drukarki zebra zd620', 'serwis drukarki zebra zd621',
         'naprawa zebra zd620', 'naprawa zebra zd621',
@@ -30889,7 +30896,7 @@ Wymiana baterii PowerPrecision+ w ZQ610/ZQ620 kosztuje **180-280 zł netto**, w 
       faqSchema: [
         {
           question: 'Ile kosztuje naprawa drukarki Zebra ZD621?',
-          answer: 'Koszt naprawy Zebra ZD621 zależy od usterki: wymiana głowicy 203dpi: 480-530 zł netto, głowicy 300dpi: 850-920 zł netto, naprawa mechanizmu: 200-400 zł, czyszczenie i kalibracja: 100-150 zł. Diagnostyka jest bezpłatna.'
+          answer: 'Koszt naprawy Zebra ZD621 zależy od usterki: wymiana głowicy 203dpi: 480-530 zł netto, głowicy 300dpi: 850-920 zł netto, naprawa mechanizmu: 200-400 zł, czyszczenie i kalibracja: 100-150 zł. Diagnostyka jest bezpłatna przy zleceniu naprawy, a przy rezygnacji z naprawy kosztuje 99 zł netto.'
         },
         {
           question: 'Jaka jest różnica między Zebra ZD620 a ZD621?',
@@ -30930,7 +30937,7 @@ Wymiana baterii PowerPrecision+ w ZQ610/ZQ620 kosztuje **180-280 zł netto**, w 
       ]
     },
     content: `
-> **🎯 Szybka odpowiedź:** **Zebra ZD620** i **ZD621** to drukarki premium klasy desktop z wyświetlaczem dotykowym i Link-OS. Najczęstsze problemy: **MEDIA OUT** (kalibracja SmartCal), **PRINTHEAD OVER TEMP** (przegrzanie), **CUT ERROR** (zablokowana gilotyna). Koszt naprawy: od **100 zł** (czyszczenie) do **920 zł** (głowica 300dpi). **Diagnostyka bezpłatna.** [Zgłoś naprawę →](/zgloszenie)
+> **🎯 Szybka odpowiedź:** **Zebra ZD620** i **ZD621** to drukarki premium klasy desktop z wyświetlaczem dotykowym i Link-OS. Najczęstsze problemy: **MEDIA OUT** (kalibracja SmartCal), **PRINTHEAD OVER TEMP** (przegrzanie), **CUT ERROR** (zablokowana gilotyna). Koszt naprawy: od **100 zł** (czyszczenie) do **920 zł** (głowica 300dpi). **Diagnostyka jest bezpłatna przy zleceniu naprawy**, a przy rezygnacji z naprawy kosztuje 99 zł netto. [Zgłoś naprawę →](/zgloszenie)
 
 ## TL;DR - Serwis ZD620/ZD621 w pigułce
 
@@ -31190,7 +31197,7 @@ Open Printer Tools → Action → Load printer defaults
 
 | Usługa | Cena netto | Gwarancja |
 |--------|------------|-----------|
-| **Diagnostyka** | **BEZPŁATNA** | - |
+| **Diagnostyka** | bezpłatna przy zleceniu naprawy* | - |
 | Czyszczenie + kalibracja | 100-150 zł | 30 dni |
 | Naprawa mechanizmu podawania | 200-400 zł | 6 miesięcy |
 | Naprawa gilotyny | 250-450 zł | 6 miesięcy |
@@ -31201,6 +31208,8 @@ Open Printer Tools → Action → Load printer defaults
 | Wymiana czujnika | 120-250 zł | 6 miesięcy |
 | Naprawa modułu WiFi/BT | 200-350 zł | 6 miesięcy |
 | **Naprawa modułu RFID (ZD621R)** | 400-700 zł | 6 miesięcy |
+
+*Przy rezygnacji z naprawy diagnostyka kosztuje 99 zł netto.
 
 > **🛒 Kup głowicę online:** [Głowice do ZD620/ZD621](/sklep/glowice/drukarki-biurkowe/zebra-zd621t) | **Wałek?** [Wałki do drukarek biurkowych →](/sklep/walki-dociskowe/drukarki-biurkowe)
 
@@ -31249,7 +31258,7 @@ Open Printer Tools → Action → Load printer defaults
   {
     slug: 'serwis-drukarki-zebra-zd220-diagnostyka-naprawa',
     title: 'Serwis drukarki Zebra ZD220 - diagnostyka i naprawa [2026]',
-    excerpt: 'Kompletny przewodnik serwisowy dla drukarki Zebra ZD220 (ZD220d/ZD220t). Diagnostyka diod LED, kalibracja SmartCal, najczęstsze błędy i procedury naprawcze. Cennik napraw ZD220. Bezpłatna diagnostyka.',
+    excerpt: 'Kompletny przewodnik serwisowy dla drukarki Zebra ZD220 (ZD220d/ZD220t). Diagnostyka diod LED, kalibracja SmartCal, najczęstsze błędy i procedury naprawcze. Cennik napraw ZD220. Bezpłatna diagnostyka przy zleceniu naprawy.',
     coverImage: '/blog/serwis-drukarki-zebra-zd220-zd220d-zd220t-diagnostyka-naprawa.jpeg',
     coverImageAlt: 'Serwis drukarki Zebra ZD220 ZD220d ZD220t - profesjonalna diagnostyka i naprawa drukarki etykiet z wymianą głowicy i kalibracją',
     author: {
@@ -31264,7 +31273,7 @@ Open Printer Tools → Action → Load printer defaults
     tags: ['ZD220', 'ZD220d', 'ZD220t', 'ZD230', 'serwis drukarki zebra', 'naprawa ZD220', 'diagnostyka', 'drukarka etykiet', 'GK420', 'kalibracja', 'SmartCal', 'etykiety kurierskie', 'InPost'],
     seo: {
       metaTitle: 'Serwis drukarki Zebra ZD220 - diagnostyka i naprawa [2026]',
-      metaDescription: 'Drukarka Zebra ZD220 nie drukuje? Diagnostyka LED, kalibracja SmartCal, błędy MEDIA OUT, RIBBON OUT, puste etykiety. Cennik napraw ZD220. Bezpłatna diagnostyka.',
+      metaDescription: 'Zebra ZD220 nie drukuje? Diody LED, SmartCal, błędy MEDIA OUT, RIBBON OUT, puste etykiety. Cennik napraw ZD220. Bezpłatna diagnostyka przy zleceniu naprawy.',
       keywords: [
         'serwis drukarki zebra zd220', 'serwis drukarki zebra zd220d', 'serwis drukarki zebra zd220t',
         'naprawa zebra zd220', 'naprawa zd220', 'naprawa zd220d', 'naprawa zd220t',
@@ -31294,7 +31303,7 @@ Open Printer Tools → Action → Load printer defaults
       faqSchema: [
         {
           question: 'Ile kosztuje naprawa drukarki Zebra ZD220?',
-          answer: 'Koszt naprawy Zebra ZD220 zależy od usterki: wymiana głowicy 203dpi: 350-420 zł netto, naprawa mechanizmu podawania: 150-300 zł, czyszczenie i kalibracja: 80-120 zł, wymiana wałka platena: 120-180 zł. Diagnostyka jest bezpłatna.'
+          answer: 'Koszt naprawy Zebra ZD220 zależy od usterki: wymiana głowicy 203dpi: 350-420 zł netto, naprawa mechanizmu podawania: 150-300 zł, czyszczenie i kalibracja: 80-120 zł, wymiana wałka platena: 120-180 zł. Diagnostyka jest bezpłatna przy zleceniu naprawy, a przy rezygnacji z naprawy kosztuje 99 zł netto.'
         },
         {
           question: 'Co oznacza migająca czerwona dioda w drukarce Zebra ZD220?',
@@ -31335,7 +31344,7 @@ Open Printer Tools → Action → Load printer defaults
       ]
     },
     content: `
-> **Szybka odpowiedź:** **Zebra ZD220** to najpopularniejsza drukarka etykiet klasy entry-level — następca legendarnej GK420. Najczęstsze problemy: **MEDIA OUT** (kalibracja SmartCal), **puste etykiety** (zła strona materiału), **PRINTHEAD SHUTDOWN** (zużyta głowica). Koszt naprawy: od **80 zł** (czyszczenie) do **420 zł** (głowica 203dpi). **Diagnostyka bezpłatna.** [Zgłoś naprawę →](https://www.serwis-zebry.pl/#formularz)
+> **Szybka odpowiedź:** **Zebra ZD220** to najpopularniejsza drukarka etykiet klasy entry-level — następca legendarnej GK420. Najczęstsze problemy: **MEDIA OUT** (kalibracja SmartCal), **puste etykiety** (zła strona materiału), **PRINTHEAD SHUTDOWN** (zużyta głowica). Koszt naprawy: od **80 zł** (czyszczenie) do **420 zł** (głowica 203dpi). **Diagnostyka jest bezpłatna przy zleceniu naprawy**, a przy rezygnacji z naprawy kosztuje 99 zł netto. [Zgłoś naprawę →](https://www.serwis-zebry.pl/#formularz)
 
 ## TL;DR - Serwis ZD220 w pigułce
 
@@ -31728,7 +31737,7 @@ Zebra ZD220 nie ma wyświetlacza — komunikuje się **jedną diodą LED STATUS*
 
 | Usługa | Cena netto | Gwarancja |
 |--------|------------|-----------|
-| **Diagnostyka** | **BEZPŁATNA** | - |
+| **Diagnostyka** | bezpłatna przy zleceniu naprawy* | - |
 | Czyszczenie + kalibracja | 80-120 zł | 30 dni |
 | Naprawa mechanizmu podawania | 150-300 zł | 6 miesięcy |
 | Naprawa płyty głównej | 250-450 zł | 6 miesięcy |
@@ -31737,6 +31746,8 @@ Zebra ZD220 nie ma wyświetlacza — komunikuje się **jedną diodą LED STATUS*
 | Wymiana czujnika materiału | 100-200 zł | 6 miesięcy |
 | Naprawa portu USB | 150-250 zł | 6 miesięcy |
 | Aktualizacja firmware + konfiguracja | 50-80 zł | 30 dni |
+
+*Przy rezygnacji z naprawy diagnostyka kosztuje 99 zł netto.
 
 > **Kup głowicę online (ZD220t):** [Głowica 203dpi Zebra ZD220t](https://www.serwis-zebry.pl/sklep/glowice/drukarki-biurkowe/zebra-zd220t/glowica-203-dpi-zebra-zd220t) — oryginalna część Zebra z 6-miesięczną gwarancją
 
@@ -31825,7 +31836,7 @@ Zebra ZD220 jest najczęściej używana do druku etykiet kurierskich. Oto szybka
   {
     slug: 'serwis-drukarki-zebra-zt231-zt231r-diagnostyka-naprawa',
     title: 'Serwis drukarki Zebra ZT231/ZT231R - diagnostyka i naprawa [2026]',
-    excerpt: 'Kompletny przewodnik serwisowy dla drukarki przemysłowej Zebra ZT231 i ZT231R (RFID). Diagnostyka 5 diod LED, schematy naprawcze krok po kroku, kalibracja czujników, regulacja docisku głowicy, diagnostyka sieci. Cennik napraw ZT231. Bezpłatna diagnostyka.',
+    excerpt: 'Kompletny przewodnik serwisowy dla drukarki przemysłowej Zebra ZT231 i ZT231R (RFID). Diagnostyka 5 diod LED, schematy naprawcze krok po kroku, kalibracja czujników, regulacja docisku głowicy, diagnostyka sieci. Cennik napraw ZT231. Bezpłatna diagnostyka przy zleceniu naprawy.',
     coverImage: '/blog/serwis-drukarki-zebra-zt231-zt231r-diagnostyka-naprawa.jpeg',
     coverImageAlt: 'Serwis drukarki przemysłowej Zebra ZT231 ZT231R RFID - profesjonalna diagnostyka i naprawa z wymianą głowicy, kalibracją sensorów i naprawą sieci',
     author: {
@@ -31840,7 +31851,7 @@ Zebra ZD220 jest najczęściej używana do druku etykiet kurierskich. Oto szybka
     tags: ['ZT231', 'ZT231R', 'RFID', 'drukarka przemysłowa', 'serwis drukarki zebra', 'naprawa ZT231', 'diagnostyka', 'drukarka etykiet', 'ZT230', 'kalibracja', 'etykiety logistyczne', 'Ethernet', 'WiFi', 'ZPL'],
     seo: {
       metaTitle: 'Serwis drukarki Zebra ZT231/ZT231R - diagnostyka i naprawa [2026]',
-      metaDescription: 'Drukarka Zebra ZT231 nie drukuje? Diagnostyka 5 diod LED, schematy naprawcze krok po kroku, kalibracja czujników, błędy MEDIA OUT, RIBBON IN/OUT, HEAD OPEN. Cennik napraw ZT231. Bezpłatna diagnostyka.',
+      metaDescription: 'Zebra ZT231 nie drukuje? Diody LED, kalibracja czujników, błędy MEDIA OUT, RIBBON IN/OUT, HEAD OPEN. Cennik napraw. Bezpłatna diagnostyka przy zleceniu naprawy.',
       keywords: [
         'serwis drukarki zebra zt231', 'serwis drukarki zebra zt231r', 'serwis zebra zt231',
         'naprawa zebra zt231', 'naprawa zt231', 'naprawa zt231r', 'naprawa drukarki przemysłowej zebra',
@@ -31872,7 +31883,7 @@ Zebra ZD220 jest najczęściej używana do druku etykiet kurierskich. Oto szybka
       faqSchema: [
         {
           question: 'Drukarka Zebra ZT231 nie włącza się — co zrobić?',
-          answer: 'Sprawdź podłączenie do zasilania i pozycję włącznika. Jeśli drukarka nie reaguje: zweryfikuj kabel zasilający, sprawdź czy panel sterowania jest poprawnie podłączony, sprawdź zasilacz i kable MLB. Jeśli to nie pomoże — konieczna jest wymiana panelu sterowania, zasilacza lub płyty głównej (MLB). Bezpłatna diagnostyka w serwisie: serwis-zebry.pl/#formularz'
+          answer: 'Sprawdź podłączenie do zasilania i pozycję włącznika. Jeśli drukarka nie reaguje: zweryfikuj kabel zasilający, sprawdź czy panel sterowania jest poprawnie podłączony, sprawdź zasilacz i kable MLB. Jeśli to nie pomoże — konieczna jest wymiana panelu sterowania, zasilacza lub płyty głównej (MLB). Diagnostyka w serwisie (bezpłatna przy zleceniu naprawy, 99 zł netto przy rezygnacji): serwis-zebry.pl/#formularz'
         },
         {
           question: 'Co oznaczają diody STATUS i SUPPLIES na drukarce Zebra ZT231?',
@@ -31884,7 +31895,7 @@ Zebra ZD220 jest najczęściej używana do druku etykiet kurierskich. Oto szybka
         },
         {
           question: 'Ile kosztuje naprawa drukarki Zebra ZT231?',
-          answer: 'Cennik napraw ZT231: diagnostyka — bezpłatna, czyszczenie/konserwacja — od 200 zł, wymiana głowicy 203 dpi — od 900 zł, wymiana głowicy 300 dpi — od 1200 zł, naprawa płyty głównej — od 800 zł, naprawa gilotyny — od 400 zł, naprawa modułu RFID — od 600 zł. Czas realizacji 1-3 dni robocze. Formularz: serwis-zebry.pl/#formularz'
+          answer: 'Cennik napraw ZT231: diagnostyka — bezpłatna przy zleceniu naprawy (99 zł netto przy rezygnacji), czyszczenie/konserwacja — od 200 zł, wymiana głowicy 203 dpi — od 900 zł, wymiana głowicy 300 dpi — od 1200 zł, naprawa płyty głównej — od 800 zł, naprawa gilotyny — od 400 zł, naprawa modułu RFID — od 600 zł. Czas realizacji naprawy: standardowo 5–7 dni roboczych; tryb ekspresowy 24–48 h za 299 zł netto po wcześniejszym ustaleniu. Formularz: serwis-zebry.pl/#formularz'
         },
         {
           question: 'Jak zresetować drukarkę Zebra ZT231 do ustawień fabrycznych?',
@@ -31912,7 +31923,7 @@ Zebra ZD220 jest najczęściej używana do druku etykiet kurierskich. Oto szybka
         }
       ]
     },
-    content: `> **🎯 Szybka odpowiedź:** Drukarka **Zebra ZT231** nie drukuje? Sprawdź **5 diod LED** (STATUS, PAUSE, DATA, SUPPLIES, NETWORK) — czerwona STATUS + czerwona SUPPLIES = **brak mediów**, czerwona STATUS + migająca SUPPLIES = **brak taśmy**. Wykonaj kalibrację: przytrzymaj **PAUSE + CANCEL** przez 2s. Jeśli to nie pomoże — [wyślij drukarkę do bezpłatnej diagnostyki](https://www.serwis-zebry.pl/#formularz).
+    content: `> **🎯 Szybka odpowiedź:** Drukarka **Zebra ZT231** nie drukuje? Sprawdź **5 diod LED** (STATUS, PAUSE, DATA, SUPPLIES, NETWORK) — czerwona STATUS + czerwona SUPPLIES = **brak mediów**, czerwona STATUS + migająca SUPPLIES = **brak taśmy**. Wykonaj kalibrację: przytrzymaj **PAUSE + CANCEL** przez 2s. Jeśli to nie pomoże — [wyślij drukarkę do diagnostyki](https://www.serwis-zebry.pl/#formularz).
 
 **Zebra ZT231** to przemysłowa drukarka etykiet z kolorowym wyświetlaczem dotykowym, następca popularnego modelu ZT230. Wariant **ZT231R** oferuje dodatkowo kodowanie tagów **RFID UHF**. Ten przewodnik serwisowy — oparty na oficjalnej instrukcji serwisowej Zebra (P1127978-01EN) — pomoże Ci zdiagnozować i naprawić najczęstsze problemy.
 
@@ -32546,14 +32557,14 @@ Weryfikacja połączenia z komputerem:
 - Wymiana zębatek i pasków napędu
 - Regulacja pozycji wałka dociskowego (wymaga narzędzi)
 
-> **[Zgłoś naprawę drukarki Zebra ZT231](https://www.serwis-zebry.pl/#formularz)** — bezpłatna diagnostyka, realizacja 1-3 dni robocze, odbiór kurierem z całej Polski.
+> **[Zgłoś naprawę drukarki Zebra ZT231](https://www.serwis-zebry.pl/#formularz)** — bezpłatna diagnostyka przy zleceniu naprawy (99 zł netto przy rezygnacji), odbiór kurierem z całej Polski. Czas realizacji naprawy: standardowo 5–7 dni roboczych; tryb ekspresowy 24–48 h za 299 zł netto po wcześniejszym ustaleniu.
 
 ---
 
 ## Cennik napraw ZT231
 | Usługa | Cena od |
 |--------|---------|
-| **Diagnostyka** | **Bezpłatna** |
+| **Diagnostyka** | bezpłatna przy zleceniu naprawy* |
 | Czyszczenie i konserwacja | 200 zł |
 | Kalibracja sensorów | 150 zł |
 | Regulacja docisku głowicy | 150 zł |
@@ -32569,9 +32580,11 @@ Weryfikacja połączenia z komputerem:
 | Wymiana czujników | 300 zł |
 | Wymiana panelu sterowania | 450 zł |
 
+*Przy rezygnacji z naprawy diagnostyka kosztuje 99 zł netto.
+
 *Ceny netto. Obejmują robociznę. Części zamienne wyceniane indywidualnie.*
 
-> **[Wyślij drukarkę do bezpłatnej diagnostyki](https://www.serwis-zebry.pl/#formularz)** — wycenę otrzymasz w ciągu 24h.
+> **[Wyślij drukarkę do diagnostyki](https://www.serwis-zebry.pl/#formularz)** — wycenę otrzymasz w ciągu 24h.
 
 ---
 
@@ -32660,7 +32673,7 @@ Drukarka musi mieć kartę WiFi (P1083320-037x). Konfiguracja: **Menu** > **Netw
   {
     slug: 'serwis-drukarki-zebra-zt111-diagnostyka-naprawa',
     title: 'Serwis drukarki Zebra ZT111 — diagnostyka, naprawa i kalibracja [2026]',
-    excerpt: 'Kompletny przewodnik serwisowy drukarki przemysłowej Zebra ZT111. Diagnostyka 5 diod LED, 9 schematów naprawczych krok po kroku, kalibracja czujników, regulacja docisku głowicy, konserwacja i części zamienne. Cennik napraw ZT111. Bezpłatna diagnostyka.',
+    excerpt: 'Kompletny przewodnik serwisowy drukarki przemysłowej Zebra ZT111. Diagnostyka 5 diod LED, 9 schematów naprawczych krok po kroku, kalibracja czujników, regulacja docisku głowicy, konserwacja i części zamienne. Cennik napraw ZT111. Bezpłatna diagnostyka przy zleceniu naprawy.',
     coverImage: '/blog/serwis-drukarki-zebra-zt111-diagnostyka-naprawa.jpeg',
     coverImageAlt: 'Serwis drukarki przemysłowej Zebra ZT111 — profesjonalna diagnostyka i naprawa z wymianą głowicy, kalibracją czujników i konserwacją',
     author: {
@@ -32675,7 +32688,7 @@ Drukarka musi mieć kartę WiFi (P1083320-037x). Konfiguracja: **Menu** > **Netw
     tags: ['ZT111', 'drukarka przemysłowa', 'serwis drukarki zebra', 'naprawa ZT111', 'diagnostyka', 'drukarka etykiet', 'ZT220', 'kalibracja', 'etykiety logistyczne', 'Ethernet', 'WiFi', 'ZPL', 'ZT100 Series'],
     seo: {
       metaTitle: 'Serwis drukarki Zebra ZT111 — diagnostyka, naprawa i kalibracja [2026]',
-      metaDescription: 'Drukarka Zebra ZT111 nie drukuje? Diagnostyka 5 diod LED, 9 schematów naprawczych krok po kroku, kalibracja czujników, błędy MEDIA OUT, RIBBON OUT, HEAD OPEN. Cennik napraw ZT111. Bezpłatna diagnostyka.',
+      metaDescription: 'Zebra ZT111 nie drukuje? Diody LED, kalibracja czujników, błędy MEDIA OUT, RIBBON OUT, HEAD OPEN. Cennik napraw. Bezpłatna diagnostyka przy zleceniu naprawy.',
       keywords: [
         'serwis drukarki zebra zt111', 'serwis zebra zt111', 'naprawa zebra zt111', 'naprawa zt111',
         'naprawa drukarki przemysłowej zebra', 'serwis zt111',
@@ -32711,7 +32724,7 @@ Drukarka musi mieć kartę WiFi (P1083320-037x). Konfiguracja: **Menu** > **Netw
       faqSchema: [
         {
           question: 'Drukarka Zebra ZT111 nie włącza się — co zrobić?',
-          answer: 'Sprawdź podłączenie do zasilania i pozycję włącznika. Jeśli drukarka nie reaguje: zweryfikuj kabel zasilający, upewnij się, że panel sterowania jest poprawnie podłączony, sprawdź zasilacz (P/N P1123335-023) i kable elektroniki (P/N P1123335-028). Jeśli to nie pomoże — konieczna jest wymiana zasilacza lub płyty głównej (MLB P/N P1123335-021). Bezpłatna diagnostyka: serwis-zebry.pl/#formularz'
+          answer: 'Sprawdź podłączenie do zasilania i pozycję włącznika. Jeśli drukarka nie reaguje: zweryfikuj kabel zasilający, upewnij się, że panel sterowania jest poprawnie podłączony, sprawdź zasilacz (P/N P1123335-023) i kable elektroniki (P/N P1123335-028). Jeśli to nie pomoże — konieczna jest wymiana zasilacza lub płyty głównej (MLB P/N P1123335-021). Diagnostyka w serwisie (bezpłatna przy zleceniu naprawy, 99 zł netto przy rezygnacji): serwis-zebry.pl/#formularz'
         },
         {
           question: 'Co oznaczają diody STATUS i SUPPLIES na drukarce Zebra ZT111?',
@@ -32723,7 +32736,7 @@ Drukarka musi mieć kartę WiFi (P1083320-037x). Konfiguracja: **Menu** > **Netw
         },
         {
           question: 'Ile kosztuje naprawa drukarki Zebra ZT111?',
-          answer: 'Cennik napraw ZT111: diagnostyka — bezpłatna, czyszczenie/konserwacja — od 200 zł, wymiana głowicy 203 dpi — od 800 zł, wymiana głowicy 300 dpi — od 1100 zł, naprawa płyty głównej — od 700 zł, naprawa gilotyny — od 400 zł, wymiana wałka dociskowego — od 300 zł. Czas realizacji 1-3 dni robocze. Formularz: serwis-zebry.pl/#formularz'
+          answer: 'Cennik napraw ZT111: diagnostyka — bezpłatna przy zleceniu naprawy (99 zł netto przy rezygnacji), czyszczenie/konserwacja — od 200 zł, wymiana głowicy 203 dpi — od 800 zł, wymiana głowicy 300 dpi — od 1100 zł, naprawa płyty głównej — od 700 zł, naprawa gilotyny — od 400 zł, wymiana wałka dociskowego — od 300 zł. Czas realizacji naprawy: standardowo 5–7 dni roboczych; tryb ekspresowy 24–48 h za 299 zł netto po wcześniejszym ustaleniu. Formularz: serwis-zebry.pl/#formularz'
         },
         {
           question: 'Jak zresetować drukarkę Zebra ZT111 do ustawień fabrycznych?',
@@ -32751,7 +32764,7 @@ Drukarka musi mieć kartę WiFi (P1083320-037x). Konfiguracja: **Menu** > **Netw
         }
       ]
     },
-    content: `> **🎯 Szybka odpowiedź:** Drukarka **Zebra ZT111** nie drukuje? Sprawdź **5 diod LED** (STATUS, PAUSE, DATA, SUPPLIES, NETWORK) — czerwona STATUS + czerwona SUPPLIES = **brak mediów**, czerwona STATUS + migająca SUPPLIES = **brak taśmy**. Wykonaj kalibrację: przytrzymaj **PAUSE + CANCEL** przez 2 sekundy. Jeśli to nie pomoże — [wyślij drukarkę do bezpłatnej diagnostyki](https://www.serwis-zebry.pl/#formularz).
+    content: `> **🎯 Szybka odpowiedź:** Drukarka **Zebra ZT111** nie drukuje? Sprawdź **5 diod LED** (STATUS, PAUSE, DATA, SUPPLIES, NETWORK) — czerwona STATUS + czerwona SUPPLIES = **brak mediów**, czerwona STATUS + migająca SUPPLIES = **brak taśmy**. Wykonaj kalibrację: przytrzymaj **PAUSE + CANCEL** przez 2 sekundy. Jeśli to nie pomoże — [wyślij drukarkę do diagnostyki](https://www.serwis-zebry.pl/#formularz).
 
 **Zebra ZT111** to ekonomiczna drukarka przemysłowa z rodziny ZT100 Series — następca popularnego modelu **ZT220**. Mimo przystępnej ceny oferuje ten sam mechanizm druku co droższa ZT231, rozdzielczość **203 lub 300 dpi** i prędkość do **254 mm/s (10 cali/s)**. Panel sterowania to **3 przyciski fizyczne** (PAUSE, FEED, CANCEL) oraz **5 diod LED** — bez wyświetlacza LCD.
 
@@ -33215,7 +33228,7 @@ Komenda ZPL \`~JG\` drukuje profil odczytów czujników. Pozwala zweryfikować:
 
 | Usługa | Cena od |
 |--------|---------|
-| **Diagnostyka** | **Bezpłatna** |
+| **Diagnostyka** | bezpłatna przy zleceniu naprawy* |
 | Czyszczenie i konserwacja | 200 zł |
 | [Wymiana głowicy drukującej 203 dpi](/sklep/glowice/drukarki-przemyslowe) | 800 zł |
 | [Wymiana głowicy drukującej 300 dpi](/sklep/glowice/drukarki-przemyslowe) | 1 100 zł |
@@ -33230,7 +33243,9 @@ Komenda ZPL \`~JG\` drukuje profil odczytów czujników. Pozwala zweryfikować:
 | Wymiana czujnika taśmy | 300 zł |
 | Kalibracja i regulacja | 150 zł |
 
-> 📞 **Bezpłatna diagnostyka** — [wyślij zgłoszenie przez formularz](https://www.serwis-zebry.pl/#formularz) lub zadzwoń. Czas realizacji naprawy: **1-3 dni robocze**.
+*Przy rezygnacji z naprawy diagnostyka kosztuje 99 zł netto.
+
+> 📞 **Diagnostyka** — [wyślij zgłoszenie przez formularz](https://www.serwis-zebry.pl/#formularz) lub zadzwoń. Diagnostyka jest bezpłatna przy zleceniu naprawy, a przy rezygnacji z naprawy kosztuje 99 zł netto. Czas realizacji naprawy: standardowo 5–7 dni roboczych; tryb ekspresowy 24–48 h za 299 zł netto po wcześniejszym ustaleniu.
 
 ---
 
@@ -33279,7 +33294,7 @@ Tak. Zebra ZT111 zastąpiła model ZT220 w ofercie. Drukarka jest kompatybilna z
   {
     slug: 'serwis-drukarki-zebra-zt220-zt230-diagnostyka-naprawa',
     title: 'Serwis drukarki Zebra ZT220/ZT230 — diagnostyka, naprawa i kalibracja [2026]',
-    excerpt: 'Kompletny przewodnik serwisowy drukarek przemysłowych Zebra ZT220 i ZT230. Diagnostyka 5 diod LED (ZT220), komunikaty LCD (ZT230), 8 schematów naprawczych krok po kroku, kalibracja ręczna 14 kroków, regulacja docisku głowicy i napięcia taśmy. Koniec wsparcia 2027 — migracja do ZT111/ZT231. Cennik napraw. Bezpłatna diagnostyka.',
+    excerpt: 'Kompletny przewodnik serwisowy drukarek przemysłowych Zebra ZT220 i ZT230. Diagnostyka 5 diod LED (ZT220), komunikaty LCD (ZT230), 8 schematów naprawczych krok po kroku, kalibracja ręczna 14 kroków, regulacja docisku głowicy i napięcia taśmy. Koniec wsparcia 2027 — migracja do ZT111/ZT231. Cennik napraw. Bezpłatna diagnostyka przy zleceniu naprawy.',
     coverImage: '/blog/serwis-drukarki-zebra-zt220-zt230-diagnostyka-naprawa.jpeg',
     coverImageAlt: 'Serwis drukarek przemysłowych Zebra ZT220 i ZT230 — profesjonalna diagnostyka LED i LCD, kalibracja czujników, wymiana głowicy i konserwacja',
     author: {
@@ -33294,7 +33309,7 @@ Tak. Zebra ZT111 zastąpiła model ZT220 w ofercie. Drukarka jest kompatybilna z
     tags: ['ZT220', 'ZT230', 'ZT200 Series', 'drukarka przemysłowa', 'serwis drukarki zebra', 'naprawa ZT220', 'naprawa ZT230', 'diagnostyka', 'drukarka etykiet', 'kalibracja', 'LCD', 'LED', 'EOL', 'ZT111', 'ZT231'],
     seo: {
       metaTitle: 'Serwis drukarki Zebra ZT220/ZT230 — diagnostyka, naprawa i kalibracja [2026]',
-      metaDescription: 'Drukarka Zebra ZT220 lub ZT230 nie drukuje? Diagnostyka 5 diod LED, komunikaty LCD, 8 schematów naprawczych, kalibracja 14 kroków, błędy MEDIA OUT, RIBBON OUT, HEAD OPEN. Koniec wsparcia 2027. Cennik napraw. Bezpłatna diagnostyka.',
+      metaDescription: 'Zebra ZT220/ZT230 nie drukuje? Diody LED, błędy MEDIA OUT, RIBBON OUT, HEAD OPEN. Koniec wsparcia 2027. Bezpłatna diagnostyka przy zleceniu naprawy.',
       keywords: [
         'serwis drukarki zebra zt220', 'serwis drukarki zebra zt230', 'serwis zebra zt220', 'serwis zebra zt230',
         'naprawa zebra zt220', 'naprawa zebra zt230', 'naprawa zt220', 'naprawa zt230',
@@ -33337,7 +33352,7 @@ Tak. Zebra ZT111 zastąpiła model ZT220 w ofercie. Drukarka jest kompatybilna z
       faqSchema: [
         {
           question: 'Drukarka Zebra ZT220 nie drukuje — co zrobić?',
-          answer: 'Sprawdź 5 diod LED na panelu: STATUS (zielona=OK, czerwona=błąd), SUPPLIES (czerwona=brak mediów, bursztynowa migająca=brak taśmy). Wykonaj kalibrację czujników: przytrzymaj PAUSE + CANCEL przez 2 sekundy i postępuj według kolejnych kroków. Jeśli dioda STATUS jest czerwona — otwórz pokrywę i sprawdź czy głowica jest zamknięta, media i taśma załadowane prawidłowo. Bezpłatna diagnostyka: serwis-zebry.pl/#formularz'
+          answer: 'Sprawdź 5 diod LED na panelu: STATUS (zielona=OK, czerwona=błąd), SUPPLIES (czerwona=brak mediów, bursztynowa migająca=brak taśmy). Wykonaj kalibrację czujników: przytrzymaj PAUSE + CANCEL przez 2 sekundy i postępuj według kolejnych kroków. Jeśli dioda STATUS jest czerwona — otwórz pokrywę i sprawdź czy głowica jest zamknięta, media i taśma załadowane prawidłowo. Diagnostyka w serwisie (bezpłatna przy zleceniu naprawy, 99 zł netto przy rezygnacji): serwis-zebry.pl/#formularz'
         },
         {
           question: 'Co oznaczają diody LED na drukarce Zebra ZT220?',
@@ -33353,7 +33368,7 @@ Tak. Zebra ZT111 zastąpiła model ZT220 w ofercie. Drukarka jest kompatybilna z
         },
         {
           question: 'Ile kosztuje naprawa drukarki Zebra ZT220/ZT230?',
-          answer: 'Cennik napraw ZT220/ZT230: diagnostyka — bezpłatna, czyszczenie/konserwacja — od 200 zł, wymiana głowicy 203 dpi — od 750 zł, wymiana głowicy 300 dpi — od 1050 zł, naprawa płyty głównej — od 650 zł, naprawa gilotyny (ZT230) — od 400 zł, wymiana wałka dociskowego — od 300 zł. Czas realizacji 1-3 dni robocze. Formularz: serwis-zebry.pl/#formularz'
+          answer: 'Cennik napraw ZT220/ZT230: diagnostyka — bezpłatna przy zleceniu naprawy (99 zł netto przy rezygnacji), czyszczenie/konserwacja — od 200 zł, wymiana głowicy 203 dpi — od 750 zł, wymiana głowicy 300 dpi — od 1050 zł, naprawa płyty głównej — od 650 zł, naprawa gilotyny (ZT230) — od 400 zł, wymiana wałka dociskowego — od 300 zł. Czas realizacji naprawy: standardowo 5–7 dni roboczych; tryb ekspresowy 24–48 h za 299 zł netto po wcześniejszym ustaleniu. Formularz: serwis-zebry.pl/#formularz'
         },
         {
           question: 'Jak zresetować drukarkę Zebra ZT220/ZT230 do ustawień fabrycznych?',
@@ -33377,7 +33392,7 @@ Tak. Zebra ZT111 zastąpiła model ZT220 w ofercie. Drukarka jest kompatybilna z
         }
       ]
     },
-    content: `> **🎯 Szybka odpowiedź:** Drukarka **Zebra ZT220** lub **ZT230** nie drukuje? Sprawdź **5 diod LED** na panelu (ZT220) lub komunikat na **wyświetlaczu LCD** (ZT230). Czerwona STATUS + czerwona SUPPLIES = **brak mediów**, czerwona STATUS + migająca bursztynowa SUPPLIES = **brak taśmy**. Wykonaj kalibrację: przytrzymaj **PAUSE + CANCEL** przez 2 sekundy. Jeśli to nie pomoże — [wyślij drukarkę do bezpłatnej diagnostyki](https://www.serwis-zebry.pl/#formularz).
+    content: `> **🎯 Szybka odpowiedź:** Drukarka **Zebra ZT220** lub **ZT230** nie drukuje? Sprawdź **5 diod LED** na panelu (ZT220) lub komunikat na **wyświetlaczu LCD** (ZT230). Czerwona STATUS + czerwona SUPPLIES = **brak mediów**, czerwona STATUS + migająca bursztynowa SUPPLIES = **brak taśmy**. Wykonaj kalibrację: przytrzymaj **PAUSE + CANCEL** przez 2 sekundy. Jeśli to nie pomoże — [wyślij drukarkę do diagnostyki](https://www.serwis-zebry.pl/#formularz).
 
 **Zebra ZT220** i **ZT230** to drukarki przemysłowe z serii ZT200 — jedne z najpopularniejszych modeli w polskich magazynach, centrach logistycznych i zakładach produkcyjnych. **ZT220** ma uproszczony panel z **3 przyciskami i 5 diodami LED** (bez wyświetlacza), natomiast **ZT230** posiada dodatkowy **wyświetlacz LCD** z komunikatami tekstowymi i menu konfiguracyjne.
 
@@ -33517,7 +33532,7 @@ Model **ZT230** wyświetla komunikaty tekstowe na wyświetlaczu LCD, co znacząc
 6. Jeśli etykieta konfiguracyjna nie drukuje się → wykonaj reset fabryczny: **FEED + PAUSE** przy włączaniu
 7. Po resecie wykonaj kalibrację: **PAUSE + CANCEL** przez 2 sekundy
 
-> Nie pomogło? → [Wyślij drukarkę do bezpłatnej diagnostyki](https://www.serwis-zebry.pl/#formularz)
+> Nie pomogło? → [Wyślij drukarkę do diagnostyki](https://www.serwis-zebry.pl/#formularz)
 
 ### 2. Błąd MEDIA OUT — brak mediów
 
@@ -33530,7 +33545,7 @@ Model **ZT230** wyświetla komunikaty tekstowe na wyświetlaczu LCD, co znacząc
 5. Wykonaj kalibrację: przytrzymaj **PAUSE + CANCEL** przez 2 sekundy (kroki opisane w sekcji o kalibracji)
 6. Jeśli kalibracja nie pomoże — wydrukuj **profil czujnika** i sprawdź odczyty
 
-> Nie pomogło? → [Wyślij drukarkę do bezpłatnej diagnostyki](https://www.serwis-zebry.pl/#formularz)
+> Nie pomogło? → [Wyślij drukarkę do diagnostyki](https://www.serwis-zebry.pl/#formularz)
 
 ### 3. Błąd RIBBON OUT — brak taśmy
 
@@ -33543,7 +33558,7 @@ Model **ZT230** wyświetla komunikaty tekstowe na wyświetlaczu LCD, co znacząc
 5. Sprawdź napięcie taśmy — zbyt luźna taśma może powodować fałszywy błąd
 6. Wykonaj kalibrację: **PAUSE + CANCEL** przez 2 sekundy
 
-> Nie pomogło? → [Wyślij drukarkę do bezpłatnej diagnostyki](https://www.serwis-zebry.pl/#formularz)
+> Nie pomogło? → [Wyślij drukarkę do diagnostyki](https://www.serwis-zebry.pl/#formularz)
 
 ### 4. Błąd HEAD OPEN — głowica otwarta
 
@@ -33554,7 +33569,7 @@ Model **ZT230** wyświetla komunikaty tekstowe na wyświetlaczu LCD, co znacząc
 3. Oczyść styki zamka i sprawdź **przełącznik otwarcia głowicy** (micro switch)
 4. Jeśli przełącznik uszkodzony — **wymiana przełącznika w serwisie**
 
-> Nie pomogło? → [Wyślij drukarkę do bezpłatnej diagnostyki](https://www.serwis-zebry.pl/#formularz)
+> Nie pomogło? → [Wyślij drukarkę do diagnostyki](https://www.serwis-zebry.pl/#formularz)
 
 ### 5. Błąd HEAD OVER TEMP — przegrzanie głowicy
 
@@ -33567,7 +33582,7 @@ Model **ZT230** wyświetla komunikaty tekstowe na wyświetlaczu LCD, co znacząc
 5. Sprawdź wentylację — nie blokuj otworów wentylacyjnych drukarki
 6. Jeśli problem powtarza się często → **wymiana głowicy** (uszkodzony termistor)
 
-> Nie pomogło? → [Wyślij drukarkę do bezpłatnej diagnostyki](https://www.serwis-zebry.pl/#formularz)
+> Nie pomogło? → [Wyślij drukarkę do diagnostyki](https://www.serwis-zebry.pl/#formularz)
 
 ### 6. Blady lub nieczytelny wydruk
 
@@ -33603,7 +33618,7 @@ Model **ZT230** wyświetla komunikaty tekstowe na wyświetlaczu LCD, co znacząc
 5. Jeśli etykiety drukują się jako zniekształcony tekst → **zmień język drukarki** na ZPL (komenda **^XA^JUS^XZ**)
 6. Zresetuj ustawienia sieci: **CANCEL + PAUSE** przy włączaniu drukarki
 
-> Nie pomogło? → [Wyślij drukarkę do bezpłatnej diagnostyki](https://www.serwis-zebry.pl/#formularz)
+> Nie pomogło? → [Wyślij drukarkę do diagnostyki](https://www.serwis-zebry.pl/#formularz)
 
 ---
 
@@ -33843,20 +33858,24 @@ Wydruk profilu czujnika pokazuje graficznie odczyty czujnika mediów. Przydatny 
 
 ## Cennik napraw ZT220/ZT230
 
-| Usługa | Cena od (netto) | Czas realizacji |
-|--------|-----------------|-----------------|
-| **Diagnostyka** | **Bezpłatna** | 1 dzień roboczy |
-| **Czyszczenie i konserwacja** | 200 zł | 1 dzień roboczy |
-| **[Wymiana głowicy 203 dpi](/sklep/glowice/drukarki-przemyslowe)** | 750 zł | 1-2 dni robocze |
-| **[Wymiana głowicy 300 dpi](/sklep/glowice/drukarki-przemyslowe)** | 1 050 zł | 1-2 dni robocze |
-| **Naprawa płyty głównej (MLB)** | 650 zł | 2-3 dni robocze |
-| **[Wymiana wałka dociskowego](/sklep/walki-dociskowe/drukarki-przemyslowe)** | 300 zł | 1 dzień roboczy |
-| **Naprawa gilotyny (ZT230)** | 400 zł | 1-2 dni robocze |
-| **Naprawa zasilacza** | 350 zł | 1-2 dni robocze |
-| **Naprawa mechanizmu napędu** | 500 zł | 2-3 dni robocze |
-| **Wymiana wyświetlacza LCD (ZT230)** | 450 zł | 1-2 dni robocze |
+| Usługa | Cena od (netto) |
+|--------|-----------------|
+| **Diagnostyka** | bezpłatna przy zleceniu naprawy* |
+| **Czyszczenie i konserwacja** | 200 zł |
+| **[Wymiana głowicy 203 dpi](/sklep/glowice/drukarki-przemyslowe)** | 750 zł |
+| **[Wymiana głowicy 300 dpi](/sklep/glowice/drukarki-przemyslowe)** | 1 050 zł |
+| **Naprawa płyty głównej (MLB)** | 650 zł |
+| **[Wymiana wałka dociskowego](/sklep/walki-dociskowe/drukarki-przemyslowe)** | 300 zł |
+| **Naprawa gilotyny (ZT230)** | 400 zł |
+| **Naprawa zasilacza** | 350 zł |
+| **Naprawa mechanizmu napędu** | 500 zł |
+| **Wymiana wyświetlacza LCD (ZT230)** | 450 zł |
 
-> **📦 Jak zlecić naprawę?** Wypełnij [formularz serwisowy](https://www.serwis-zebry.pl/#formularz) — odpowiemy w ciągu 24 godzin. Wysyłka drukarki kurierem na nasz koszt. Diagnostyka zawsze bezpłatna.
+*Przy rezygnacji z naprawy diagnostyka kosztuje 99 zł netto.
+
+Standardowa naprawa trwa 5–7 dni roboczych. Tryb ekspresowy trwa 24–48 godzin, kosztuje 299 zł netto i wymaga wcześniejszego ustalenia.
+
+> **📦 Jak zlecić naprawę?** Wypełnij [formularz serwisowy](https://www.serwis-zebry.pl/#formularz) — odpowiemy w ciągu 24 godzin. Wysyłka drukarki kurierem na nasz koszt. Diagnostyka jest bezpłatna przy zleceniu naprawy, a przy rezygnacji z naprawy kosztuje 99 zł netto.
 
 ---
 
@@ -33864,7 +33883,7 @@ Wydruk profilu czujnika pokazuje graficznie odczyty czujnika mediów. Przydatny 
 
 **Drukarka Zebra ZT220 nie drukuje — co zrobić?**
 
-Sprawdź 5 diod LED na panelu: STATUS (zielona=OK, czerwona=błąd), SUPPLIES (czerwona=brak mediów, bursztynowa migająca=brak taśmy). Wykonaj kalibrację czujników: przytrzymaj PAUSE + CANCEL przez 2 sekundy i postępuj według kolejnych kroków. Jeśli dioda STATUS jest czerwona — otwórz pokrywę i sprawdź czy głowica jest zamknięta, media i taśma załadowane prawidłowo. [Bezpłatna diagnostyka →](https://www.serwis-zebry.pl/#formularz)
+Sprawdź 5 diod LED na panelu: STATUS (zielona=OK, czerwona=błąd), SUPPLIES (czerwona=brak mediów, bursztynowa migająca=brak taśmy). Wykonaj kalibrację czujników: przytrzymaj PAUSE + CANCEL przez 2 sekundy i postępuj według kolejnych kroków. Jeśli dioda STATUS jest czerwona — otwórz pokrywę i sprawdź czy głowica jest zamknięta, media i taśma załadowane prawidłowo. [Wyślij drukarkę do diagnostyki →](https://www.serwis-zebry.pl/#formularz)
 
 **Co oznaczają diody LED na drukarce Zebra ZT220?**
 
@@ -33880,7 +33899,7 @@ Kalibrację uruchamia się, przytrzymując **PAUSE + CANCEL** przez 2 sekundy pr
 
 **Ile kosztuje naprawa drukarki Zebra ZT220/ZT230?**
 
-Cennik: diagnostyka — bezpłatna, czyszczenie — od 200 zł, wymiana głowicy 203 dpi — od 750 zł, wymiana głowicy 300 dpi — od 1050 zł, naprawa płyty głównej — od 650 zł, naprawa gilotyny — od 400 zł, wymiana wałka — od 300 zł. [Formularz serwisowy →](https://www.serwis-zebry.pl/#formularz)
+Cennik: diagnostyka — bezpłatna przy zleceniu naprawy (99 zł netto przy rezygnacji), czyszczenie — od 200 zł, wymiana głowicy 203 dpi — od 750 zł, wymiana głowicy 300 dpi — od 1050 zł, naprawa płyty głównej — od 650 zł, naprawa gilotyny — od 400 zł, wymiana wałka — od 300 zł. [Formularz serwisowy →](https://www.serwis-zebry.pl/#formularz)
 
 **Jak zresetować drukarkę Zebra ZT220/ZT230 do ustawień fabrycznych?**
 
@@ -33920,27 +33939,26 @@ ZT220 zastąpiono modelem ZT111 (ten sam panel LED bez wyświetlacza, szybszy �
 
   {
     slug: 'serwis-drukarki-kart-zebra-zc100-zc300-diagnostyka-naprawa',
-    title: 'Serwis drukarki kart Zebra ZC100/ZC300 — diagnostyka, naprawa i konserwacja [2026]',
-    excerpt: 'Kompletny przewodnik serwisowy drukarek kart plastikowych Zebra ZC100 i ZC300. Diagnostyka 5 diod LED (ZC100) i komunikatów LCD (ZC300), usuwanie zacięć kart, problemy z jakością wydruku, czyszczenie głowicy, wymiana głowicy drukującej, błędy taśmy i kart. Cennik napraw. Bezpłatna diagnostyka.',
+    title: 'Drukarka kart Zebra ZC100 i ZC300: diody LED, komunikaty błędów i czyszczenie',
+    excerpt: 'Poradnik do drukarek kart Zebra ZC100 i ZC300. Znaczenie diod LED i komunikatów na wyświetlaczu LCD drukarki ZC300. Usuwanie zacięcia karty i błędów taśmy, jakość wydruku, czyszczenie drukarki i głowicy krok po kroku.',
     coverImage: '/blog/serwis-drukarki-kart-zebra-zc100-zc300-diagnostyka-naprawa.jpeg',
-    coverImageAlt: 'Serwis drukarek kart plastikowych Zebra ZC100 i ZC300 — profesjonalna diagnostyka LED i LCD, wymiana głowicy, czyszczenie i naprawa',
+    coverImageAlt: 'Ilustracja: drukarki kart Zebra ZC300 i ZC100',
+    filmy: FILMY_ZC_DIAGNOSTYKA,
     author: {
       name: 'Krzysztof Wójcik',
       role: 'Kierownik Serwisu TAKMA'
     },
     publishedAt: '2026-02-09',
+    updatedAt: '2026-10-03',
     readingTime: 20,
     deviceType: 'drukarki',
     subDeviceType: 'kart',
     category: 'troubleshooting',
-    tags: ['ZC100', 'ZC300', 'drukarka kart', 'drukarka kart plastikowych', 'serwis drukarki zebra', 'naprawa ZC100', 'naprawa ZC300', 'diagnostyka', 'LED', 'LCD', 'karty plastikowe', 'e-legitymacje', 'identyfikatory', 'sublimacja'],
+    tags: ['ZC100', 'ZC300', 'drukarka kart', 'drukarka kart plastikowych', 'zacięcie karty', 'błędy taśmy', 'czyszczenie głowicy', 'komunikaty błędów', 'LED', 'LCD', 'karty plastikowe', 'e-legitymacje', 'identyfikatory', 'sublimacja'],
     seo: {
-      metaTitle: 'Serwis drukarki kart Zebra ZC100/ZC300 — diagnostyka, naprawa i konserwacja [2026]',
-      metaDescription: 'Drukarka kart Zebra ZC100 lub ZC300 nie drukuje? Diagnostyka 5 diod LED, komunikaty LCD, usuwanie zacięć, błędy taśmy, jakość wydruku. Czyszczenie głowicy, wymiana głowicy, cennik napraw. Bezpłatna diagnostyka.',
+      metaTitle: 'Zebra ZC100 i ZC300: diody LED, błędy taśmy i czyszczenie',
+      metaDescription: 'Znaczenie diod LED w drukarkach kart Zebra ZC100 i ZC300 oraz komunikatów LCD w ZC300. Zacięcie karty, błędy taśmy, czyszczenie głowicy krok po kroku.',
       keywords: [
-        'serwis drukarki kart zebra zc100', 'serwis drukarki kart zebra zc300', 'serwis zebra zc100', 'serwis zebra zc300',
-        'naprawa zebra zc100', 'naprawa zebra zc300', 'naprawa zc100', 'naprawa zc300',
-        'naprawa drukarki kart zebra', 'serwis zc100', 'serwis zc300', 'serwis drukarki kart',
         'zebra zc100 nie drukuje', 'zebra zc300 nie drukuje', 'zebra zc100 błąd', 'zebra zc300 błąd',
         'zebra zc100 card jam', 'zebra zc300 card jam', 'zebra zc100 zacięcie karty', 'zebra zc300 zacięcie karty',
         'zebra zc100 ribbon out', 'zebra zc300 ribbon out', 'zebra zc100 brak taśmy', 'zebra zc300 brak taśmy',
@@ -33955,49 +33973,45 @@ ZT220 zastąpiono modelem ZT111 (ten sam panel LED bez wyświetlacza, szybszy �
         'zebra zc100 czyszczenie głowicy', 'zebra zc300 czyszczenie głowicy',
         'zebra zc100 wymiana głowicy', 'zebra zc300 wymiana głowicy', 'głowica zc100', 'głowica zc300',
         'zebra zc100 kalibracja taśmy', 'zebra zc300 kalibracja taśmy',
-        'ile kosztuje naprawa zc100', 'ile kosztuje naprawa zc300', 'cennik napraw zc100', 'cennik napraw zc300',
-        'zebra zc100 sterowniki', 'zebra zc300 sterowniki', 'sterowniki zc100 windows', 'sterowniki zc300 windows',
         'zebra zc100 ethernet', 'zebra zc100 wifi', 'zebra zc300 bluetooth', 'zebra zc300 sieć',
         'zebra zc100 vs zc300', 'zc100 vs zc300', 'różnice zc100 zc300',
         'zebra zc100 specyfikacja', 'zebra zc300 specyfikacja', 'zebra zc100 dane techniczne',
-        'drukarka kart zebra serwis', 'drukarka kart plastikowych zebra', 'drukarka e-legitymacje serwis',
-        'drukarka identyfikatorów zebra', 'drukarka kart id zebra serwis',
-        'zebra zc100 konserwacja', 'zebra zc300 konserwacja', 'zebra zc100 maintenance',
-        'zebra zc100 części zamienne', 'zebra zc300 części zamienne',
+        'drukarka kart plastikowych zebra',
+        'drukarka identyfikatorów zebra',
         'zebra zc100 taśma ymcko', 'zebra zc300 taśma ymcko', 'kaseta taśmy zc100', 'kaseta taśmy zc300',
         'zebra zc100 marszczenie taśmy', 'zebra zc300 ribbon wrinkle',
         'zebra zc100 enkoder magnetyczny', 'zebra zc300 smart card',
-        'zebra zc100 cena', 'zebra zc300 cena', 'drukarka kart zebra cena',
-        'zebra zc100 instrukcja', 'zebra zc300 instrukcja obsługi'
+        'zebra zc100 ribbon error', 'zebra zc100 ribbon color detection failed',
+        'zc300 cleaning', 'zebra zc100 cleaning card'
       ],
       faqSchema: [
         {
           question: 'Drukarka kart Zebra ZC100 nie drukuje — co zrobić?',
-          answer: 'Sprawdź 5 diod LED na panelu: POWER (czerwona ciągła=błąd krytyczny), CARD (czerwona ciągła=brak kart, migająca czerwona=zacięcie karty), RIBBON (migająca czerwona=brak taśmy/zacięcie taśmy, czerwona ciągła=niewłaściwa taśma). Upewnij się, że kaseta z taśmą jest prawidłowo zainstalowana, karty załadowane do podajnika i głowica zamknięta. Wykonaj czyszczenie drukarki. Bezpłatna diagnostyka: serwis-zebry.pl/#formularz'
+          answer: 'Należy sprawdzić diody POWER, CARD i RIBBON. Dioda POWER świeci na czerwono: błąd krytyczny. Dioda CARD świeci na czerwono: brak kart w podajniku. Dioda CARD miga na czerwono: zacięcie karty. Dioda RIBBON miga na czerwono: brak taśmy, zacięcie taśmy lub zerwanie taśmy. Dioda RIBBON świeci na czerwono: niewłaściwa taśma. Należy sprawdzić, czy kaseta z taśmą jest prawidłowo założona, czy karty są w podajniku i czy górna pokrywa jest zamknięta. Następnie należy wyczyścić drukarkę.'
         },
         {
           question: 'Co oznaczają diody LED na drukarce kart Zebra ZC100/ZC300?',
-          answer: 'Obie drukarki mają 5 diod LED: POWER (zielona=gotowa, czerwona=błąd krytyczny), CARD (zielona=karty dostępne, migająca zielona=drukowanie, migająca czerwona=zacięcie, czerwona=brak kart), RIBBON (zielona=taśma OK, bursztynowa=taśma się kończy, migająca czerwona=brak/zacięcie taśmy, czerwona=niewłaściwa taśma), CLEAN (bursztynowa=czyszczenie wymagane, czerwona=błąd czyszczenia/pełny kosz odrzutów), MANUAL FEED (zielona=gotowa na kartę, czerwona=błąd podawania).'
+          answer: 'Drukarki ZC100 i ZC300 mają diodę POWER w przycisku zasilania, trzy diody stanu (CARD, RIBBON i CLEAN) oraz podświetlaną szczelinę podawania ręcznego (MANUAL FEED). POWER: zielona – drukarka gotowa, czerwona – błąd krytyczny. CARD: zielona – karty dostępne, migająca zielona – drukowanie, migająca czerwona – zacięcie karty, czerwona – brak kart. RIBBON: zielona – taśma dostępna, bursztynowa – taśma się kończy, migająca czerwona – brak taśmy, zacięcie taśmy lub zerwanie taśmy, czerwona – niewłaściwa taśma. CLEAN: bursztynowa – wymagane czyszczenie, czerwona – błąd czyszczenia; w drukarce ZC300 z modułem druku dwustronnego także pełny kosz odrzutów. MANUAL FEED: zielona – drukarka czeka na kartę, czerwona – błąd podawania karty.'
         },
         {
           question: 'Jakie komunikaty wyświetla LCD na drukarce Zebra ZC300?',
-          answer: 'ZC300 wyświetla komunikaty na kolorowym LCD: ostrzeżenia na żółtym tle (Ribbon low — taśma się kończy) i błędy na czerwonym tle (Ribbon out — brak taśmy, Card jam — zacięcie karty, Ribbon color detect error — błąd detekcji taśmy, Invalid ribbon — niewłaściwa taśma). Naciśnięcie lewego przycisku pokazuje animację rozwiązania problemu. ZC100 nie ma LCD — diagnostyka wyłącznie przez diody LED.'
+          answer: 'ZC300 wyświetla komunikaty na kolorowym LCD: ostrzeżenia na żółtym tle (Ribbon low — taśma się kończy, Cleaning required — wymagane czyszczenie) i błędy na czerwonym tle (Ribbon out — brak taśmy, Card jam — zacięcie karty, Ribbon color detect error — błąd detekcji taśmy, Invalid ribbon — niewłaściwa taśma). Przy ostrzeżeniu naciśnięcie lewego przycisku pokazuje animację rozwiązania problemu. Ekran błędu nie prowadzi do animacji. Animacje usuwania zacięcia karty i taśmy są w menu Help. ZC100 nie ma LCD. Stan drukarki ZC100 pokazują diody LED, a komunikaty błędów pokazuje też sterownik drukarki.'
         },
         {
           question: 'Jak usunąć zacięcie karty w drukarce Zebra ZC100/ZC300?',
           answer: 'Otwórz górną pokrywę drukarki. Wyjmij kasetę z taśmą. Obróć kółko ręcznego przesuwu (manual advance wheel) w kierunku przodu drukarki — karta wysunie się z mechanizmu. Włóż kasetę z powrotem i zamknij pokrywę. UWAGA: nigdy nie używaj narzędzi do wyjmowania kart — to grozi uszkodzeniem mechanizmu i utratą gwarancji.'
         },
         {
-          question: 'Ile kosztuje naprawa drukarki kart Zebra ZC100/ZC300?',
-          answer: 'Cennik napraw ZC100/ZC300: diagnostyka — bezpłatna, czyszczenie i konserwacja — od 250 zł, wymiana głowicy drukującej — od 900 zł, naprawa mechanizmu transportu kart — od 500 zł, naprawa enkodera magnetycznego — od 400 zł, naprawa płyty głównej — od 700 zł. Czas realizacji 1-3 dni robocze. Formularz: serwis-zebry.pl/#formularz'
+          question: 'Co oznacza czerwona dioda POWER w drukarce kart Zebra ZC100 i ZC300?',
+          answer: 'Dioda POWER świecąca na czerwono oznacza błąd krytyczny. Należy wyłączyć drukarkę i odłączyć kabel zasilający. Po 30 sekundach należy podłączyć kabel i włączyć drukarkę. Jeśli dioda POWER świeci na zielono, drukarka jest gotowa do pracy. Jeśli dioda POWER nadal świeci na czerwono, drukarka ma usterkę sprzętową i wymaga naprawy w serwisie.'
         },
         {
           question: 'Jak wyczyścić drukarkę kart Zebra ZC100/ZC300?',
-          answer: 'Trzy metody: (1) Ze sterownika — Printing Preferences > Help & Support > Clean Now, włóż kartę czyszczącą do slotu manual feed. (2) Z LCD (tylko ZC300) — Tools > Cleaning > potwierdź prawym przyciskiem. (3) Ręczne czyszczenie głowicy — wyłącz drukarkę, otwórz pokrywę, przetrzyj głowicę wacikiem nasączonym alkoholem izopropylowym (ruch lewo-prawo), poczekaj 2-3 minuty przed włączeniem.'
+          answer: 'Trzy metody: (1) Ze sterownika — Printing Preferences > Help & Support > Clean Now, włóż kartę czyszczącą do szczeliny podawania ręcznego (manual feed). (2) Z LCD (tylko ZC300) — Tools > Cleaning > potwierdź prawym przyciskiem. (3) Ręczne czyszczenie głowicy — wyłącz drukarkę, otwórz pokrywę, przetrzyj głowicę wacikiem nasączonym alkoholem izopropylowym (ruch lewo-prawo), poczekaj 2-3 minuty przed włączeniem.'
         },
         {
           question: 'Czym różni się Zebra ZC100 od ZC300?',
-          answer: 'ZC100 ma panel z 5 diodami LED bez wyświetlacza — diagnostyka wyłącznie przez kolory diod. ZC300 ma dodatkowy 2-calowy kolorowy LCD z 3 przyciskami, animowane instrukcje pomocy, menu konfiguracyjne i wyświetlanie adresu IP. ZC300 jest szybsza (200 vs 180 kart/h kolor, 800 vs 700 kart/h mono). Mechanizm druku, głowica, kasety taśm i karty są identyczne — wymienne między modelami.'
+          answer: 'Obie drukarki pokazują stan drukarki diodami LED. Drukarka ZC300 ma dodatkowo kolorowy wyświetlacz LCD z 3 przyciskami, animowane instrukcje pomocy, menu konfiguracyjne i wyświetlanie adresu IP. Drukarka ZC100 drukuje do 150 kart/h w kolorze (YMCKO) i do 700 kart/h w druku monochromatycznym. Drukarka ZC100 drukuje tylko jednostronnie. Drukarka ZC300 drukuje do 200 kart/h w kolorze (YMCKO) i do 900 kart/h w druku monochromatycznym. Z modułem druku dwustronnego drukarka ZC300 drukuje do 140 kart/h w kolorze (YMCKOK) i do 450 kart/h w druku monochromatycznym. Mechanizm druku, głowica i karty są takie same w obu modelach. Kasety YMCKO, ½ YMCKO i monochromatyczne pasują do obu modeli. Kasety KdO, KrO i taśmy specjalne pasują tylko do drukarki ZC300. Taśmy do druku dwustronnego (YMCKOK) pasują tylko do drukarki ZC300 z modułem druku dwustronnego.'
         },
         {
           question: 'Jak wymienić głowicę drukującą w Zebra ZC100/ZC300?',
@@ -34013,13 +34027,13 @@ ZT220 zastąpiono modelem ZT111 (ten sam panel LED bez wyświetlacza, szybszy �
         }
       ]
     },
-    content: `> **🎯 Szybka odpowiedź:** Drukarka kart **Zebra ZC100** lub **ZC300** nie drukuje? Sprawdź **5 diod LED** na panelu: czerwona **CARD** = brak kart, migająca czerwona **CARD** = zacięcie karty, migająca czerwona **RIBBON** = brak taśmy, czerwona ciągła **RIBBON** = niewłaściwa taśma. Na **ZC300** sprawdź komunikat na **LCD** — żółty ekran = ostrzeżenie, czerwony = błąd. Jeśli to nie pomoże — [wyślij drukarkę do bezpłatnej diagnostyki](https://www.serwis-zebry.pl/#formularz).
+    content: `> **🎯 Szybka odpowiedź:** Jeśli drukarka kart **Zebra ZC100** lub **ZC300** nie drukuje, należy sprawdzić diody **CARD** i **RIBBON**. Dioda CARD świeci na czerwono: brak kart w podajniku. Dioda CARD miga na czerwono: zacięcie karty. Dioda RIBBON miga na czerwono: brak taśmy, zacięcie taśmy lub zerwanie taśmy. Dioda RIBBON świeci na czerwono: niewłaściwa taśma (Invalid ribbon). Drukarka **ZC300** pokazuje też komunikat na wyświetlaczu **LCD**. Żółte tło oznacza ostrzeżenie. Czerwone tło oznacza błąd.
 
-Zakres napraw, cennik i przygotowanie drukarki do wysyłki opisujemy na stronie [serwis drukarek kart Zebra](/serwis-drukarek-kart-zebra).
+Ten poradnik opisuje czynności, które użytkownik może wykonać samodzielnie. Zakres napraw, cennik, czas naprawy i przygotowanie drukarki do wysyłki opisuje strona [serwis drukarek kart Zebra](/serwis-drukarek-kart-zebra).
 
 **<a href="https://www.takma.com.pl/produkt/zebra-zc100">Zebra ZC100</a>** i **<a href="https://www.takma.com.pl/produkt/zebra-zc300">ZC300</a>** to kompaktowe drukarki kart plastikowych wykorzystujące technologię **sublimacji barwnikowej** (full-color) i **transferu termicznego** (monochromatyczne). Drukują karty CR80 w rozdzielczości **300 dpi** — identyfikatory pracownicze, karty członkowskie, e-legitymacje szkolne, karty dostępu i karty lojalnościowe.
 
-**ZC100** ma uproszczony panel z **5 diodami LED** (bez wyświetlacza), natomiast **ZC300** posiada dodatkowy **2-calowy kolorowy LCD** z animowanymi instrukcjami pomocy i menu konfiguracyjne. Mechanizm druku obu modeli jest **identyczny** — te same głowice, kasety z taśmą i procedury serwisowe.
+**ZC100** i **ZC300** pokazują stan drukarki **diodami LED**: dioda w przycisku zasilania, trzy diody stanu i podświetlana szczelina podawania ręcznego. **ZC300** ma dodatkowo **kolorowy wyświetlacz LCD** z animowanymi instrukcjami pomocy i menu konfiguracyjnym. Mechanizm druku obu modeli jest **identyczny**: te same głowice, podstawowe kasety z taśmą (wkłady z taśmą) i procedury obsługi.
 
 ---
 
@@ -34027,37 +34041,37 @@ Zakres napraw, cennik i przygotowanie drukarki do wysyłki opisujemy na stronie 
 
 | Cecha | **ZC100** | **ZC300** |
 |-------|-----------|-----------|
-| **Panel sterowania** | 5 diod LED | 5 diod LED + **2" kolorowy LCD** + 3 przyciski |
-| **Diagnostyka** | Kolory i stany diod LED | Komunikaty tekstowe na LCD + diody LED |
+| **Panel sterowania** | Diody POWER, CARD, RIBBON, CLEAN i podświetlana szczelina podawania ręcznego | Te same diody + **kolorowy wyświetlacz LCD** + 3 przyciski |
+| **Sygnalizacja błędów** | Kolory i stany diod LED | Komunikaty tekstowe na LCD + diody LED |
 | **Konfiguracja** | Tylko przez sterownik PC | Menu LCD + sterownik PC |
-| **Prędkość (kolor YMCKO)** | do 180 kart/h | do **200 kart/h** |
-| **Prędkość (mono K)** | do 700 kart/h | do **800 kart/h** |
-| **Druk dwustronny** | Opcja (moduł flipper) | Opcja (do **140 kart/h** kolor) |
+| **Prędkość (kolor YMCKO)** | do 150 kart/h | do **200 kart/h** |
+| **Prędkość (mono K)** | do 700 kart/h | do **900 kart/h** |
+| **Druk dwustronny** | Nie (tylko druk jednostronny) | Opcja (do **140 kart/h** kolor) |
 | **Czyszczenie** | Przez sterownik | Przez **LCD** lub sterownik |
 | **Wyświetlanie IP** | Tylko w sterowniku | **Bezpośrednio na LCD** |
 | **Pomoc na urządzeniu** | Brak | **Animowane instrukcje** na LCD |
 | **Rozdzielczość** | 300 dpi | 300 dpi |
 | **Podajnik kart** | 100 kart (30 mil) | 100 kart (30 mil) |
 | **Głowica drukująca** | Identyczna | Identyczna |
-| **Kasety taśm** | Identyczne (seria ZC) | Identyczne (seria ZC) |
+| **Kasety taśm** | Seria ZC: YMCKO, ½ YMCKO, monochromatyczne | Jak ZC100 oraz YMCKOK (moduł druku dwustronnego), KdO, KrO, taśmy specjalne |
 
-> **💡 Wskazówka:** Mimo różnic w panelu sterowania, **mechanizm druku ZC100 i ZC300 jest identyczny**. Wszystkie procedury serwisowe dotyczące głowicy, taśmy, kart i czyszczenia są takie same dla obu modeli.
+> **💡 Wskazówka:** Mimo różnic w panelu sterowania **mechanizm druku ZC100 i ZC300 jest identyczny**. Procedury dotyczące głowicy, taśmy, kart i czyszczenia są takie same dla obu modeli.
 
 ---
 
-## Panel sterowania — 5 diod LED
+## Panel sterowania — diody LED
 
-Oba modele (ZC100 i ZC300) mają **5 diod LED** na panelu sterowania. ZC300 dodatkowo wyposażona jest w **2-calowy kolorowy wyświetlacz LCD** z **3 przyciskami programowalnymi** (soft keys).
+Drukarki ZC100 i ZC300 pokazują stan drukarki diodami LED. Dioda POWER jest w przycisku zasilania. Trzy diody stanu to CARD (wskaźnik kart), RIBBON (wskaźnik taśmy) i CLEAN (wskaźnik czyszczenia). Szczelina podawania ręcznego (MANUAL FEED) świeci na zielono, gdy drukarka czeka na kartę. Drukarka ZC300 ma dodatkowo **kolorowy wyświetlacz LCD** z **3 przyciskami programowalnymi** (soft keys).
 
-### 5 diod LED — znaczenie stanów
+### Diody LED — znaczenie stanów
 
-**Dioda POWER (ikona zasilania)**
+**Dioda POWER (w przycisku zasilania)**
 
 | Stan | Kolor | Znaczenie |
 |------|-------|-----------|
 | Miga | 🟢 Zielona | Drukarka się **uruchamia** (bootowanie) |
 | Świeci ciągłe | 🟢 Zielona | Drukarka **gotowa** — normalny stan pracy |
-| Świeci ciągłe | 🔴 Czerwona | **Błąd krytyczny** — wymagany serwis |
+| Świeci ciągłe | 🔴 Czerwona | **Błąd krytyczny** — procedura 8 |
 
 **Dioda CARD (ikona karty)**
 
@@ -34085,28 +34099,35 @@ Oba modele (ZC100 i ZC300) mają **5 diod LED** na panelu sterowania. ZC300 doda
 | Miga | 🟢 Zielona | **Czyszczenie** w toku |
 | Świeci ciągłe | 🟢 Zielona | Czyszczenie **zakończone** (gaśnie po 30 sekundach) |
 | Świeci ciągłe | 🟡 Bursztynowa | **Czyszczenie wymagane** — uruchom cykl czyszczenia |
-| Świeci ciągłe | 🔴 Czerwona | **Błąd czyszczenia** lub **pełny kosz odrzutów** |
+| Świeci ciągłe | 🔴 Czerwona | **Błąd czyszczenia**; w ZC300 z modułem druku dwustronnego także **pełny kosz odrzutów** |
 
-**Dioda MANUAL FEED (ikona ręcznego podawania)**
+**Szczelina podawania ręcznego (MANUAL FEED)**
 
 | Stan | Kolor | Znaczenie |
 |------|-------|-----------|
 | Świeci ciągłe | 🟢 Zielona | **Gotowa** na kartę / kartę czyszczącą |
 | Świeci ciągłe | 🔴 Czerwona | **Błąd podawania karty** |
 
-> **⚠️ Najczęstsza kombinacja błędu:** czerwona POWER = **błąd krytyczny** wymagający serwisu. Migająca czerwona CARD + migająca czerwona RIBBON = jednoczesne **zacięcie karty i taśmy** — otwórz pokrywę i użyj kółka ręcznego przesuwu.
+{{film:2erR1I2QAkk}}
+
+> **⚠️ Najczęstsza kombinacja błędu:** czerwona dioda POWER = **błąd krytyczny** (procedura 8). Migająca czerwona CARD i migająca czerwona RIBBON = jednoczesne **zacięcie karty i taśmy**. Należy otworzyć pokrywę i użyć kółka ręcznego przesuwu.
 
 ---
 
 ## Komunikaty wyświetlacza LCD — ZC300
 
-Model **ZC300** wyświetla komunikaty na **2-calowym kolorowym LCD**, co znacząco ułatwia diagnostykę w porównaniu do ZC100.
+Model **ZC300** wyświetla komunikaty na **kolorowym wyświetlaczu LCD**, co znacząco ułatwia diagnostykę w porównaniu do ZC100.
+
+{{film:MkprCJxSlSI}}
 
 ### Ostrzeżenia (żółte tło) — nie blokują druku
 
 | Komunikat LCD | Znaczenie | Rozwiązanie |
 |---------------|-----------|-------------|
 | **Ribbon low** | Taśma się kończy | Przygotuj nową kasetę z taśmą — obecna wystarczy jeszcze na kilkadziesiąt kart |
+| **Cleaning required** | Wymagane czyszczenie | Uruchom cykl czyszczenia z menu Tools |
+
+Przy ostrzeżeniu lewy przycisk pod wyświetlaczem pokazuje animację, jak usunąć problem. Po animacji wyświetlacz pokazuje kod QR do strony wsparcia Zebra.
 
 ### Błędy (czerwone tło) — wymagają natychmiastowej reakcji
 
@@ -34117,8 +34138,9 @@ Model **ZC300** wyświetla komunikaty na **2-calowym kolorowym LCD**, co znaczą
 | **Cards out** | Brak kart | Załaduj karty do podajnika |
 | **Invalid ribbon** | Niewłaściwa taśma | Użyj oryginalnej kasety Zebra ZC Series |
 | **Ribbon color detect error** | Błąd detekcji koloru taśmy | Wyjmij i ponownie załaduj kasetę; sprawdź chip identyfikacyjny |
-| **Cleaning required** | Wymagane czyszczenie | Uruchom cykl czyszczenia z menu Tools |
-| **Reject bin full** | Pełny kosz odrzutów | Wyjmij karty z kosza odrzutów (nad flipperem) |
+| **Reject bin full** | Pełny kosz odrzutów (tylko ZC300 z modułem druku dwustronnego) | Wyjmij karty z kosza odrzutów nad modułem druku dwustronnego |
+
+Ekran błędu nie prowadzi do animacji. Animacje usuwania zacięcia karty i taśmy są w menu Help.
 
 > **💡 ZC100 vs ZC300 diagnostyka:** Na ZC100 błąd taśmy sygnalizowany jest przez **migającą czerwoną diodę RIBBON**. Na ZC300 zobaczysz jednoznaczny komunikat np. **"Ribbon out"** lub **"Ribbon color detect error"** na LCD — łatwiej zidentyfikować przyczynę.
 
@@ -34172,7 +34194,7 @@ Port Ethernet z tyłu drukarki ma **2 diody LED**:
 
 ---
 
-## 8 schematów naprawczych krok po kroku
+## Usuwanie błędów krok po kroku
 
 ### 1. Zacięcie karty (Card Jam)
 
@@ -34187,7 +34209,9 @@ Port Ethernet z tyłu drukarki ma **2 diody LED**:
 
 > **⚠️ UWAGA:** Nigdy nie używaj narzędzi (śrubokrętów, pincet, noży) do wyjmowania kart — grozi to uszkodzeniem mechanizmu transportu i **utratą gwarancji**!
 
-> Nie pomogło? → [Wyślij drukarkę do bezpłatnej diagnostyki](https://www.serwis-zebry.pl/#formularz)
+{{film:Q0nssePVFAY}}
+
+> Jeśli zacięcia powtarzają się mimo prawidłowych kart, drukarkę należy zgłosić do [naprawy drukarki kart Zebra](/serwis-drukarek-kart-zebra).
 
 ### 2. Brak kart (Cards Out)
 
@@ -34195,10 +34219,11 @@ Port Ethernet z tyłu drukarki ma **2 diody LED**:
 
 1. Sprawdź **podajnik kart** (input hopper) — jeśli pusty, załaduj karty
 2. Sprawdź czy karty nie są **sklejone** — rozdziel je przed załadowaniem (zgięcie talii kart w łuk pomaga rozdzielić)
-3. Sprawdź **orientację kart** dla kart z paskiem magnetycznym lub chipem kontaktowym:
-   - Pasek magnetyczny: **na dole, po prawej stronie**
-   - Chip kontaktowy: **chip do góry, z przodu**
-4. Upewnij się, że karty mają grubość **10-40 mil** (0,25-1,02 mm) — standardowe CR80
+3. Karty z paskiem magnetycznym: sprawdź, czy pasek jest **na dole, po prawej stronie**
+4. Karty z chipem kontaktowym: sprawdź, czy chip jest **u góry, w stronę tyłu drukarki**
+5. Upewnij się, że karty mają grubość **10-40 mil** (0,25-1,02 mm) — standardowe CR80
+
+{{film:g1ryEuggfqw}}
 
 ### 3. Brak taśmy / Zacięcie taśmy (Ribbon Out / Ribbon Jam)
 
@@ -34206,9 +34231,11 @@ Port Ethernet z tyłu drukarki ma **2 diody LED**:
 
 1. Otwórz górną pokrywę i sprawdź kasetę z taśmą
 2. Jeśli taśma się **skończyła** — zainstaluj nową kasetę Zebra ZC Series
-3. Jeśli taśma jest **zacięta lub zerwana** — wyjmij kasetę, ostrożnie rozplącz taśmę, nawinie ponownie na szpulę odbiorczą
+3. Jeśli taśma jest **zacięta lub zerwana**: wyjąć kasetę, ostrożnie rozplątać taśmę i nawinąć ją ponownie na szpulę odbiorczą
 4. Sprawdź czy kaseta jest **prawidłowo zainstalowana** — musi wejść z kliknięciem
 5. Jeśli problem się powtarza — **wymień kasetę** na nową (uszkodzony chip identyfikacyjny)
+
+{{film:SrsZWpj703g}}
 
 ### 4. Niewłaściwa taśma (Invalid Ribbon)
 
@@ -34220,7 +34247,7 @@ Port Ethernet z tyłu drukarki ma **2 diody LED**:
 4. Spróbuj z **inną kasetą** — jeśli działa, oryginalna kaseta jest uszkodzona
 5. Jeśli żadna kaseta nie jest akceptowana — problem z **czytnikiem chipa** w drukarce → serwis
 
-> Nie pomogło? → [Wyślij drukarkę do bezpłatnej diagnostyki](https://www.serwis-zebry.pl/#formularz)
+> Jeśli drukarka nie przyjmuje żadnej nowej, oryginalnej kasety z taśmą, problem dotyczy czytnika chipa w drukarce. Należy wtedy [zgłosić drukarkę kart do serwisu](/serwis-drukarek-kart-zebra).
 
 ### 5. Błąd detekcji koloru taśmy (Ribbon Color Detect Error)
 
@@ -34230,6 +34257,8 @@ Port Ethernet z tyłu drukarki ma **2 diody LED**:
 2. **Włóż kasetę ponownie** — upewnij się, że taśma jest naprężona (bez luzu)
 3. Sprawdź **czujnik koloru** wewnątrz drukarki — wyczyść sprężonym powietrzem
 4. Jeśli problem się powtarza z różnymi kasetami → **uszkodzony czujnik koloru** → serwis
+
+Kody błędów i pozostałe komunikaty drukarek kart opisuje wpis [kody błędów drukarek kart Zebra ZC300 i ZXP](/blog/kody-bledow-drukarki-kart-zebra-zc300-zxp).
 
 ### 6. Problemy z jakością wydruku
 
@@ -34245,14 +34274,21 @@ Port Ethernet z tyłu drukarki ma **2 diody LED**:
 | **Niedokładne kolory** | Brak kalibracji kolorów | W sterowniku: **Color Optimization** lub utwórz profil ICC |
 | **Halo kolorowe** wokół tekstu | Mis-registration paneli | Skontaktuj się z serwisem — wymaga kalibracji mechanizmu |
 
+Po każdej zmianie ustawień należy wydrukować kartę testową. Kartę testową drukuje się ze sterownika drukarki.
+
+{{film:RbyIzmDSPFs}}
+
 ### 7. Błąd czyszczenia / Pełny kosz odrzutów
 
-**Objawy:** ZC100: czerwona ciągła dioda CLEAN. ZC300: komunikat na LCD.
+**Objawy:** ZC100 i ZC300: dioda CLEAN świeci na czerwono. ZC300: komunikat na wyświetlaczu LCD.
 
-1. Sprawdź **kosz odrzutów** (reject bin) nad modułem flipper — jeśli pełny, wyjmij karty
-2. Jeśli kosz nie jest pełny — otwórz pokrywę, sprawdź czy nic nie blokuje ścieżki czyszczenia
-3. Użyj **nowej karty czyszczącej** — stara może być zbyt brudna
-4. Zrestartuj drukarkę (wyłącz, poczekaj 10 sekund, włącz)
+1. Drukarka ZC300 z modułem druku dwustronnego: należy sprawdzić **kosz odrzutów** (reject bin) nad modułem
+2. Jeśli kosz jest pełny, należy wyjąć z niego karty
+3. Jeśli kosz nie jest pełny albo drukarka nie ma modułu druku dwustronnego: należy otworzyć pokrywę i sprawdzić, czy nic nie blokuje ścieżki czyszczenia
+4. Należy użyć **nowej karty czyszczącej**, bo używana karta może być zbyt brudna
+5. Należy ponownie uruchomić drukarkę (wyłączyć, odczekać 10 sekund, włączyć)
+
+{{film:OctL8hy3iQo}}
 
 ### 8. Błąd krytyczny (Critical Error)
 
@@ -34260,9 +34296,9 @@ Port Ethernet z tyłu drukarki ma **2 diody LED**:
 
 1. **Wyłącz drukarkę** — odłącz kabel zasilający, poczekaj 30 sekund
 2. **Włącz ponownie** — jeśli dioda POWER świeci zielono, problem rozwiązany
-3. Jeśli dioda POWER nadal świeci **czerwono** → **błąd sprzętowy** wymagający serwisu (płyta główna, głowica, mechanizm)
+3. Jeśli dioda POWER nadal świeci **czerwono**, drukarka ma **usterkę sprzętową** (płyta główna, głowica lub mechanizm)
 
-> Nie pomogło? → [Wyślij drukarkę do bezpłatnej diagnostyki](https://www.serwis-zebry.pl/#formularz)
+> Zakres napraw i ceny opisuje [cennik naprawy drukarek kart Zebra](/serwis-drukarek-kart-zebra#cennik).
 
 ---
 
@@ -34273,10 +34309,12 @@ Regularne czyszczenie jest **kluczowe** dla jakości wydruku kart. Dioda CLEAN �
 ### Metoda 1: Czyszczenie ze sterownika (ZC100 i ZC300)
 
 1. Otwórz **Preferencje drukowania** (Printing Preferences) drukarki
-2. Kliknij zakładkę **Help & Support**
-3. W sekcji Cleaning kliknij **Clean Now**
-4. Gdy dioda MANUAL FEED zaświeci się na **zielono** — włóż **kartę czyszczącą** do slotu ręcznego podawania
+2. Kliknij zakładkę **Pomoc i wsparcie** (Help & Support)
+3. W sekcji czyszczenia kliknij **Czyść teraz** (Clean Now)
+4. Gdy szczelina podawania ręcznego (MANUAL FEED) zaświeci się na **zielono** — włóż do niej **kartę czyszczącą**
 5. Poczekaj aż cykl czyszczenia się zakończy (dioda CLEAN miga na zielono → świeci zielono)
+
+{{film:gU8xJxHorHI}}
 
 ### Metoda 2: Czyszczenie z menu LCD (tylko ZC300)
 
@@ -34284,7 +34322,7 @@ Regularne czyszczenie jest **kluczowe** dla jakości wydruku kart. Dioda CLEAN �
 2. Przejdź do **Cleaning** (środkowy przycisk do przewijania)
 3. Naciśnij **prawy przycisk** aby wybrać
 4. Na pytanie **"Would you like to start the cleaning process?"** naciśnij prawy przycisk
-5. Gdy slot manual feed zaświeci się na zielono — włóż kartę czyszczącą
+5. Gdy szczelina podawania ręcznego zaświeci się na zielono — włóż kartę czyszczącą
 6. Poczekaj aż drukarka zakończy cykl
 
 ### Metoda 3: Ręczne czyszczenie głowicy (ZC100 i ZC300)
@@ -34316,7 +34354,7 @@ Jeśli drukarka ma opcję kodowania paska magnetycznego i pojawiają się błęd
 
 ---
 
-## Wymiana głowicy drukującej
+## Jak wymienić głowicę drukującą
 
 Głowicę należy wymienić, gdy pojawiają się **trwałe białe linie** na wydrukach (przepalone elementy grzejne) lub gdy głowica jest fizycznie uszkodzona.
 
@@ -34345,12 +34383,12 @@ Głowicę należy wymienić, gdy pojawiają się **trwałe białe linie** na wyd
 |-----------|----------------------|
 | **Zwykłe PVC** | Dowolna orientacja |
 | **Z paskiem magnetycznym** | Pasek na dole, po prawej stronie |
-| **Z chipem kontaktowym** | Chip do góry, z przodu drukarki |
+| **Z chipem kontaktowym** | Chip do góry, w stronę tyłu drukarki |
 | **Zbliżeniowe (contactless)** | Dowolna orientacja |
 
 ---
 
-## Materiały eksploatacyjne i części zamienne
+## Materiały eksploatacyjne i moduły opcjonalne
 
 ### Kasety z taśmą (ribbon)
 
@@ -34361,13 +34399,13 @@ Drukarki ZC100/ZC300 używają **kaset Zebra ZC Series** z wbudowanym:
 | Typ taśmy | Zastosowanie | Wydajność |
 |-----------|-------------|-----------|
 | **YMCKO** | Pełny kolor + czarny + warstwa ochronna | ~200 kart (jednostronnie) |
-| **YMCKOK** | Jak YMCKO + czarny na rewersie | ~200 kart (dwustronnie) |
+| **YMCKOK** | Jak YMCKO + czarny na rewersie (tylko ZC300 z modułem druku dwustronnego) | ~200 kart (dwustronnie) |
 | **K (czarna)** | Tekst, kody kreskowe (monochromatyczne) | ~2000 kart |
-| **KdO** | Czarny + warstwa ochronna | ~500 kart |
+| **KdO** | Czarny + warstwa ochronna (tylko ZC300) | ~700 kart |
 
 Oryginalne kasety do ZC100 i ZC300 kupisz w sklepie TAKMA: <a href="https://www.takma.com.pl/produkt/zebra-tasma-ymcko-zc100-zc300">taśma YMCKO 800300-250EM na 200 kart</a> (w tej samej kategorii są taśmy K, KdO i jednokolorowe).
 
-### Części zamienne
+### Części i moduły opcjonalne
 
 | Część | Opis |
 |-------|------|
@@ -34375,30 +34413,25 @@ Oryginalne kasety do ZC100 i ZC300 kupisz w sklepie TAKMA: <a href="https://www.
 | **Wałek czyszczący** | Wbudowany w kasetę — wymienia się automatycznie |
 | **Karty czyszczące** | Jednorazowe karty do cyklu czyszczenia — <a href="https://www.takma.com.pl/produkt/zebra-zestaw-czyszczacy-2-karty-zc100-zc300">zestaw czyszczący Zebra ZC100/ZC300</a> |
 | **Zasilacz 100W** | Zewnętrzny zasilacz — używać wyłącznie oryginalnego |
-| **Moduł flipper** | Opcja druku dwustronnego + kosz odrzutów |
+| **Moduł flipper (tylko ZC300)** | Opcja druku dwustronnego + kosz odrzutów |
 | **Enkoder magnetyczny** | Opcja kodowania pasków ISO 7811 (HiCo/LoCo, 3 ścieżki) |
-| **Moduł Wi-Fi** | Opcja bezprzewodowa 802.11b/g |
-| **Enkoder smart card** | Opcja kontaktowa (DB-9) lub zbliżeniowa (antena) |
+| **Moduł Wi-Fi** | Opcja bezprzewodowa (Wi-Fi) |
+| **Enkoder smart card (tylko ZC300)** | Opcja kontaktowa (DB-9) lub zbliżeniowa (antena) |
 
 ---
 
-## Cennik napraw ZC100/ZC300
+## Kiedy procedury z poradnika nie wystarczą
 
-| Usługa | Cena od (netto) | Czas realizacji |
-|--------|-----------------|-----------------|
-| **Diagnostyka** | **Bezpłatna** | 1 dzień roboczy |
-| **Czyszczenie i konserwacja** | 250 zł | 1 dzień roboczy |
-| **Wymiana głowicy drukującej** | 900 zł | 1-2 dni robocze |
-| **Naprawa mechanizmu transportu kart** | 500 zł | 2-3 dni robocze |
-| **Naprawa enkodera magnetycznego** | 400 zł | 1-2 dni robocze |
-| **Naprawa enkodera smart card** | 500 zł | 2-3 dni robocze |
-| **Naprawa płyty głównej** | 700 zł | 2-3 dni robocze |
-| **Naprawa/wymiana zasilacza** | 350 zł | 1 dzień roboczy |
-| **Naprawa modułu flipper (duplex)** | 450 zł | 1-2 dni robocze |
-| **Naprawa modułu Wi-Fi** | 300 zł | 1-2 dni robocze |
-| **Wymiana wyświetlacza LCD (ZC300)** | 400 zł | 1-2 dni robocze |
+Drukarkę należy zgłosić do serwisu w tych przypadkach:
 
-> **📦 Jak zlecić naprawę?** Wypełnij [formularz serwisowy](https://www.serwis-zebry.pl/#formularz) — odpowiemy w ciągu 24 godzin. Wysyłka drukarki kurierem na nasz koszt. Diagnostyka zawsze bezpłatna.
+- Dioda POWER świeci na czerwono po ponownym uruchomieniu drukarki.
+- Zacięcia kart powtarzają się mimo prawidłowych kart.
+- Błąd taśmy pozostaje po założeniu nowej, oryginalnej kasety z taśmą.
+- Smugi lub białe linie pozostają po czyszczeniu.
+- Drukarka nie pobiera prawidłowych kart z podajnika.
+- Błąd kodowania paska magnetycznego powtarza się przy prawidłowo ułożonych kartach.
+
+Zakres napraw, cennik i przygotowanie drukarki do wysyłki opisuje strona [serwis drukarek kart Zebra – cennik napraw](/serwis-drukarek-kart-zebra#cennik).
 
 ---
 
@@ -34406,48 +34439,50 @@ Oryginalne kasety do ZC100 i ZC300 kupisz w sklepie TAKMA: <a href="https://www.
 
 **Drukarka kart Zebra ZC100 nie drukuje — co zrobić?**
 
-Sprawdź 5 diod LED: POWER (czerwona=błąd krytyczny), CARD (czerwona=brak kart, migająca czerwona=zacięcie), RIBBON (migająca czerwona=brak taśmy, czerwona=niewłaściwa kaseta). Upewnij się, że kaseta z taśmą jest zainstalowana, karty w podajniku i głowica zamknięta. Wykonaj czyszczenie. [Bezpłatna diagnostyka →](https://www.serwis-zebry.pl/#formularz)
+Należy sprawdzić diody POWER, CARD i RIBBON. Dioda POWER świeci na czerwono: błąd krytyczny. Dioda CARD świeci na czerwono: brak kart w podajniku. Dioda CARD miga na czerwono: zacięcie karty. Dioda RIBBON miga na czerwono: brak taśmy, zacięcie taśmy lub zerwanie taśmy. Dioda RIBBON świeci na czerwono: niewłaściwa taśma. Należy sprawdzić, czy kaseta z taśmą jest prawidłowo założona, czy karty są w podajniku i czy górna pokrywa jest zamknięta. Następnie należy wyczyścić drukarkę.
 
 **Co oznaczają diody LED na drukarce kart Zebra ZC100/ZC300?**
 
-5 diod: POWER (zielona=gotowa, czerwona=błąd krytyczny), CARD (zielona=karty OK, migająca czerwona=zacięcie, czerwona=brak kart), RIBBON (zielona=taśma OK, bursztynowa=kończy się, migająca czerwona=brak/zacięcie, czerwona=niewłaściwa), CLEAN (bursztynowa=czyszczenie wymagane, czerwona=błąd/pełny kosz), MANUAL FEED (zielona=gotowa, czerwona=błąd).
+Drukarki ZC100 i ZC300 mają diodę POWER w przycisku zasilania, trzy diody stanu (CARD, RIBBON i CLEAN) oraz podświetlaną szczelinę podawania ręcznego (MANUAL FEED). POWER: zielona – drukarka gotowa, czerwona – błąd krytyczny. CARD: zielona – karty dostępne, migająca zielona – drukowanie, migająca czerwona – zacięcie karty, czerwona – brak kart. RIBBON: zielona – taśma dostępna, bursztynowa – taśma się kończy, migająca czerwona – brak taśmy, zacięcie taśmy lub zerwanie taśmy, czerwona – niewłaściwa taśma. CLEAN: bursztynowa – wymagane czyszczenie, czerwona – błąd czyszczenia; w drukarce ZC300 z modułem druku dwustronnego także pełny kosz odrzutów. MANUAL FEED: zielona – drukarka czeka na kartę, czerwona – błąd podawania karty.
 
 **Jakie komunikaty wyświetla LCD na drukarce Zebra ZC300?**
 
-Ostrzeżenia (żółty ekran): Ribbon low. Błędy (czerwony ekran): Ribbon out, Card jam, Cards out, Invalid ribbon, Ribbon color detect error, Cleaning required, Reject bin full. Naciśnięcie lewego przycisku pokazuje animację rozwiązania problemu.
+ZC300 wyświetla komunikaty na kolorowym LCD: ostrzeżenia na żółtym tle (Ribbon low — taśma się kończy, Cleaning required — wymagane czyszczenie) i błędy na czerwonym tle (Ribbon out — brak taśmy, Card jam — zacięcie karty, Ribbon color detect error — błąd detekcji taśmy, Invalid ribbon — niewłaściwa taśma). Przy ostrzeżeniu naciśnięcie lewego przycisku pokazuje animację rozwiązania problemu. Ekran błędu nie prowadzi do animacji. Animacje usuwania zacięcia karty i taśmy są w menu Help. ZC100 nie ma LCD. Stan drukarki ZC100 pokazują diody LED, a komunikaty błędów pokazuje też sterownik drukarki.
 
-**Jak usunąć zacięcie karty w ZC100/ZC300?**
+**Jak usunąć zacięcie karty w drukarce Zebra ZC100/ZC300?**
 
-Otwórz górną pokrywę, wyjmij kasetę z taśmą, obróć kółko ręcznego przesuwu w kierunku przodu drukarki — karta wysunie się z mechanizmu. Nigdy nie używaj narzędzi do wyjmowania kart! Włóż kasetę i zamknij pokrywę.
+Otwórz górną pokrywę drukarki. Wyjmij kasetę z taśmą. Obróć kółko ręcznego przesuwu (manual advance wheel) w kierunku przodu drukarki — karta wysunie się z mechanizmu. Włóż kasetę z powrotem i zamknij pokrywę. UWAGA: nigdy nie używaj narzędzi do wyjmowania kart — to grozi uszkodzeniem mechanizmu i utratą gwarancji.
 
-**Ile kosztuje naprawa drukarki kart Zebra ZC100/ZC300?**
+**Co oznacza czerwona dioda POWER w drukarce kart Zebra ZC100 i ZC300?**
 
-Cennik: diagnostyka — bezpłatna, czyszczenie — od 250 zł, wymiana głowicy — od 900 zł, naprawa transportu kart — od 500 zł, naprawa enkodera — od 400 zł, naprawa płyty głównej — od 700 zł. [Formularz serwisowy →](https://www.serwis-zebry.pl/#formularz)
+Dioda POWER świecąca na czerwono oznacza błąd krytyczny. Należy wyłączyć drukarkę i odłączyć kabel zasilający. Po 30 sekundach należy podłączyć kabel i włączyć drukarkę. Jeśli dioda POWER świeci na zielono, drukarka jest gotowa do pracy. Jeśli dioda POWER nadal świeci na czerwono, drukarka ma usterkę sprzętową i wymaga naprawy w serwisie.
 
 **Jak wyczyścić drukarkę kart Zebra ZC100/ZC300?**
 
-Ze sterownika: Printing Preferences > Help & Support > Clean Now, włóż kartę czyszczącą. Z LCD (ZC300): Tools > Cleaning. Ręcznie: wyłącz drukarkę, otwórz pokrywę, przetrzyj głowicę wacikiem z alkoholem izopropylowym (ruch lewo-prawo), poczekaj 2-3 minuty.
+Trzy metody: (1) Ze sterownika — Printing Preferences > Help & Support > Clean Now, włóż kartę czyszczącą do szczeliny podawania ręcznego (manual feed). (2) Z LCD (tylko ZC300) — Tools > Cleaning > potwierdź prawym przyciskiem. (3) Ręczne czyszczenie głowicy — wyłącz drukarkę, otwórz pokrywę, przetrzyj głowicę wacikiem nasączonym alkoholem izopropylowym (ruch lewo-prawo), poczekaj 2-3 minuty przed włączeniem.
 
 **Czym różni się Zebra ZC100 od ZC300?**
 
-ZC100 ma 5 diod LED bez wyświetlacza. ZC300 ma dodatkowy 2-calowy kolorowy LCD z animowanymi instrukcjami i menu. ZC300 jest szybsza (200 vs 180 kart/h kolor). Mechanizm druku, głowica i kasety taśm są identyczne.
+Obie drukarki pokazują stan drukarki diodami LED. Drukarka ZC300 ma dodatkowo kolorowy wyświetlacz LCD z 3 przyciskami, animowane instrukcje pomocy, menu konfiguracyjne i wyświetlanie adresu IP. Drukarka ZC100 drukuje do 150 kart/h w kolorze (YMCKO) i do 700 kart/h w druku monochromatycznym. Drukarka ZC100 drukuje tylko jednostronnie. Drukarka ZC300 drukuje do 200 kart/h w kolorze (YMCKO) i do 900 kart/h w druku monochromatycznym. Z modułem druku dwustronnego drukarka ZC300 drukuje do 140 kart/h w kolorze (YMCKOK) i do 450 kart/h w druku monochromatycznym. Mechanizm druku, głowica i karty są takie same w obu modelach. Kasety YMCKO, ½ YMCKO i monochromatyczne pasują do obu modeli. Kasety KdO, KrO i taśmy specjalne pasują tylko do drukarki ZC300. Taśmy do druku dwustronnego (YMCKOK) pasują tylko do drukarki ZC300 z modułem druku dwustronnego.
 
-**Jak wymienić głowicę w drukarce Zebra ZC100/ZC300?**
+**Jak wymienić głowicę drukującą w Zebra ZC100/ZC300?**
 
-Otwórz pokrywę, wciśnij głowicę do góry i obróć z zaczepów, odłącz kabel. Podłącz kabel do nowej głowicy, zanotuj numer seryjny i rezystancję, zamontuj w zaczepach. W sterowniku: Advanced > Diagnostics and Calibration > Commands & Calibration > Printhead — wpisz dane nowej głowicy.
+Otwórz górną pokrywę. Wciśnij głowicę do góry i obróć, aby zwolnić ją z zaczepów. Odłącz konektor kabla. Podłącz kabel do nowej głowicy. Zanotuj numer seryjny i wartość rezystancji (na głowicy). Zamontuj głowicę w zaczepach. W sterowniku: Advanced > Diagnostics and Calibration > Commands & Calibration > Printhead — wpisz numer seryjny i rezystancję nowej głowicy.
 
-**Co oznacza błąd "Invalid ribbon"?**
+**Co oznacza błąd "Invalid ribbon" na drukarce Zebra ZC100/ZC300?**
 
-Czerwona ciągła RIBBON = niekompatybilna kaseta. Wyjmij i włóż ponownie. Sprawdź czy kaseta jest do serii ZC. Sprawdź chip identyfikacyjny. Spróbuj inną kasetę. Jeśli żadna nie działa — uszkodzony czytnik chipa w drukarce, wymagany serwis.
+Czerwona ciągła dioda RIBBON oznacza, że drukarka wykryła niekompatybilną lub nieoryginalną kasetę z taśmą. Rozwiązanie: (1) Wyjmij i włóż ponownie kasetę — upewnij się, że wskoczyła na swoje miejsce z kliknięciem. (2) Sprawdź czy kaseta jest przeznaczona do serii ZC (kasety z innych serii Zebra nie pasują). (3) Sprawdź chip identyfikacyjny na kasecie — jeśli uszkodzony, wymień kasetę na nową.
 
 **Jak podłączyć drukarkę Zebra ZC300 do sieci?**
 
-Ethernet: podłącz kabel RJ-45 — DHCP automatycznie. IP wyświetla się na LCD. Diody portu: pomarańczowa (1 mignięcie=10Mbps, 2=100Mbps), zielona (ciągła=połączenie, migająca=dane). Wi-Fi (opcja): konfiguracja w sterowniku. Ikona LCD: szara=wył., czerwona=brak, żółta=słaby, biała=OK.
+Ethernet: podłącz kabel RJ-45 — drukarka automatycznie pobiera adres IP przez DHCP. Adres IP wyświetla się na ekranie LCD. Sprawdź diody portu Ethernet: pomarańczowa (1 mignięcie=10Mbps, 2 mignięcia=100Mbps), zielona (ciągła=połączenie, migająca=transmisja). Wi-Fi (opcja): skonfiguruj przez sterownik drukarki — podaj SSID i hasło. Ikona Wi-Fi na LCD: szara=wyłączone, czerwona=brak połączenia, żółta=słaby sygnał, biała=połączono.
 
 ---
 
 ## Powiązane artykuły
 
+- [Zebra ZC100: instrukcja obsługi po polsku](/instrukcje/zebra-zc100/instrukcja-po-polsku)
+- [Zebra ZC300: instrukcja obsługi po polsku](/instrukcje/zebra-zc300/instrukcja-po-polsku)
 - [Kody błędów drukarek kart Zebra ZC300/ZXP](/blog/kody-bledow-drukarki-kart-zebra-zc300-zxp)
 - [Drukarka Zebra zacina karty — przyczyny i rozwiązania](/blog/drukarka-zebra-zacina-karty-przyczyny-rozwiazania)
 - [Biała linia na karcie — wymiana głowicy Zebra](/blog/biala-linia-na-karcie-wymiana-glowicy-zebra)
@@ -34455,14 +34490,14 @@ Ethernet: podłącz kabel RJ-45 — DHCP automatycznie. IP wyświetla się na LC
 - [Porównanie drukarek kart Zebra ZC100, ZC300, ZXP](/blog/porownanie-drukarek-kart-zebra-zc100-zc300-zxp)
 - [Drukarka Zebra nie drukuje — przyczyny i rozwiązania](/blog/drukarka-zebra-nie-drukuje-przyczyny-rozwiazania)
 
-👉 **[Serwis Drukarek Zebra — naprawy, konserwacja, części](/serwis-drukarek-zebra)**
+👉 **[Serwis drukarek kart Zebra: zakres napraw, cennik i wysyłka](/serwis-drukarek-kart-zebra)**
 `
   },
 
   {
     slug: 'serwis-drukarki-opasek-zebra-hc100-diagnostyka-naprawa',
     title: 'Serwis drukarki opasek Zebra HC100 — diagnostyka, naprawa i konserwacja [2026]',
-    excerpt: 'Kompletny przewodnik serwisowy drukarki opasek identyfikacyjnych Zebra HC100. Diagnostyka diod LED, problemy z kasetą mediów, wymiana głowicy termicznej (61330M), wymiana wałka dociskowego (61331M), czyszczenie, kody błędów. Następca ZD510-HC. Cennik napraw. Bezpłatna diagnostyka.',
+    excerpt: 'Kompletny przewodnik serwisowy drukarki opasek identyfikacyjnych Zebra HC100. Diagnostyka diod LED, problemy z kasetą mediów, wymiana głowicy termicznej (61330M), wymiana wałka dociskowego (61331M), czyszczenie, kody błędów. Następca ZD510-HC. Cennik napraw. Bezpłatna diagnostyka przy zleceniu naprawy.',
     coverImage: '/blog/serwis-drukarki-opasek-zebra-hc100-diagnostyka-naprawa.webp',
     coverImageAlt: 'Serwis drukarki opasek identyfikacyjnych Zebra HC100 — profesjonalna diagnostyka, wymiana głowicy, czyszczenie i naprawa',
     author: {
@@ -34477,7 +34512,7 @@ Ethernet: podłącz kabel RJ-45 — DHCP automatycznie. IP wyświetla się na LC
     tags: ['HC100', 'drukarka opasek', 'drukarka opaski na rękę', 'wristband printer', 'serwis drukarki zebra', 'naprawa HC100', 'diagnostyka', 'LED', 'opaski identyfikacyjne', 'szpital', 'opieka zdrowotna', 'ZD510-HC', 'Z-Band'],
     seo: {
       metaTitle: 'Serwis drukarki opasek Zebra HC100 — diagnostyka, naprawa i konserwacja [2026]',
-      metaDescription: 'Drukarka opasek Zebra HC100 nie drukuje? Diagnostyka diod LED, problemy z kasetą, wymiana głowicy i wałka, czyszczenie, kody błędów. Następca ZD510-HC. Cennik napraw. Bezpłatna diagnostyka.',
+      metaDescription: 'Drukarka opasek Zebra HC100 nie drukuje? Diody LED, kaseta, wymiana głowicy i wałka, kody błędów. Cennik napraw. Bezpłatna diagnostyka przy zleceniu naprawy.',
       keywords: [
         'serwis drukarki opasek zebra hc100', 'serwis zebra hc100', 'naprawa zebra hc100', 'naprawa hc100',
         'zebra hc100 serwis', 'zebra hc100 naprawa', 'serwis drukarki opasek', 'naprawa drukarki opasek zebra',
@@ -34517,7 +34552,7 @@ Ethernet: podłącz kabel RJ-45 — DHCP automatycznie. IP wyświetla się na LC
         },
         {
           question: 'Ile kosztuje naprawa drukarki opasek Zebra HC100?',
-          answer: 'Cennik orientacyjny: diagnostyka — bezpłatna, czyszczenie i konserwacja — od 200 zł, wymiana głowicy termicznej — od 800 zł, wymiana wałka dociskowego — od 400 zł, naprawa/wymiana płyty głównej — od 700 zł, naprawa mechanizmu kasety — od 350 zł. Ceny mogą się różnić w zależności od stanu urządzenia.'
+          answer: 'Cennik orientacyjny: diagnostyka — bezpłatna przy zleceniu naprawy (99 zł netto przy rezygnacji), czyszczenie i konserwacja — od 200 zł, wymiana głowicy termicznej — od 800 zł, wymiana wałka dociskowego — od 400 zł, naprawa/wymiana płyty głównej — od 700 zł, naprawa mechanizmu kasety — od 350 zł. Ceny mogą się różnić w zależności od stanu urządzenia.'
         },
         {
           question: 'Jakie opaski pasują do drukarki Zebra HC100?',
@@ -34533,7 +34568,7 @@ Ethernet: podłącz kabel RJ-45 — DHCP automatycznie. IP wyświetla się na LC
         }
       ]
     },
-    content: `> **🎯 Szybka odpowiedź:** Drukarka opasek **Zebra HC100** nie drukuje? Sprawdź **3 diody LED**: pomarańczowa **Media** ciągła = mało opasek (~20 szt.), migająca pomarańczowa **Media** = błąd kasety, migająca pomarańczowa **Printer** = otwarta pokrywa, czerwona **Printer** = błąd krytyczny. Kaseta nie wysuwa się? Przytrzymaj **Eject 6 sekund** (wymuszone wysunięcie). Czyszczenie głowicy: karta czyszcząca **61332M** lub wacik z 90% IPA. Następca HC100 → **ZD510-HC** (te same kasety z opaskami). [Wyślij drukarkę do bezpłatnej diagnostyki →](https://www.serwis-zebry.pl/#formularz)
+    content: `> **🎯 Szybka odpowiedź:** Drukarka opasek **Zebra HC100** nie drukuje? Sprawdź **3 diody LED**: pomarańczowa **Media** ciągła = mało opasek (~20 szt.), migająca pomarańczowa **Media** = błąd kasety, migająca pomarańczowa **Printer** = otwarta pokrywa, czerwona **Printer** = błąd krytyczny. Kaseta nie wysuwa się? Przytrzymaj **Eject 6 sekund** (wymuszone wysunięcie). Czyszczenie głowicy: karta czyszcząca **61332M** lub wacik z 90% IPA. Następca HC100 → **ZD510-HC** (te same kasety z opaskami). [Wyślij drukarkę do diagnostyki →](https://www.serwis-zebry.pl/#formularz)
 
 **Zebra HC100** to specjalistyczna drukarka opasek identyfikacyjnych na rękę (wristband printer), zaprojektowana przede wszystkim dla sektora opieki zdrowotnej — szpitali, klinik, przychodni i laboratoriów. Wykorzystuje zamknięte kasety z opaskami, druk termiczny bezpośredni o rozdzielczości **300 dpi** i wbudowany czytnik kart smart do śledzenia zużycia mediów. Choć model HC100 został oficjalnie **wycofany ze sprzedaży** (zastąpiony przez ZD510-HC), tysiące tych drukarek nadal pracują w placówkach medycznych w Polsce i Europie.
 
@@ -34834,7 +34869,7 @@ Zebra HC100 wykorzystuje zamknięte kasety z opaskami. Każda kaseta ma chip sma
 
 | Usługa | Cena od |
 |---|---|
-| **Diagnostyka** | Bezpłatna |
+| **Diagnostyka** | Bezpłatna przy zleceniu naprawy, 99 zł netto przy rezygnacji |
 | **Czyszczenie i konserwacja** | 200 zł |
 | **Wymiana głowicy termicznej** | 800 zł |
 | **Wymiana wałka dociskowego** | 400 zł |
@@ -34845,7 +34880,7 @@ Zebra HC100 wykorzystuje zamknięte kasety z opaskami. Każda kaseta ma chip sma
 | **Wymiana obudowy zewnętrznej** | 300 zł |
 | **Przegląd serwisowy (kompletny)** | 350 zł |
 
-**Bezpłatna diagnostyka** — przyślij drukarkę kurierem lub przynieś osobiście. Określimy problem i podamy dokładną wycenę przed rozpoczęciem naprawy.
+Diagnostyka jest bezpłatna przy zleceniu naprawy, a przy rezygnacji z naprawy kosztuje 99 zł netto. Drukarkę należy przysłać kurierem albo dostarczyć osobiście. Dokładną wycenę podajemy przed rozpoczęciem naprawy.
 
 > **💡 Wskazówka:** Naprawa HC100 jest opłacalna, gdy koszt nie przekracza **50%** wartości nowej drukarki ZD510-HC. Przy awarii płyty głównej + głowicy jednocześnie — rozważ migrację na ZD510-HC.
 
@@ -34933,7 +34968,7 @@ Karta czyszcząca (P/N 61332M): wyjmij kasetę, włóż kartę czyszczącą w sz
 
 **Ile kosztuje naprawa drukarki opasek Zebra HC100?**
 
-Cennik: diagnostyka — bezpłatna, czyszczenie — od 200 zł, wymiana głowicy — od 800 zł, wymiana wałka — od 400 zł, naprawa mechanizmu kasety — od 350 zł, naprawa czytnika smart card — od 400 zł, naprawa płyty głównej — od 700 zł. [Formularz serwisowy →](https://www.serwis-zebry.pl/#formularz)
+Cennik: diagnostyka — bezpłatna przy zleceniu naprawy (99 zł netto przy rezygnacji), czyszczenie — od 200 zł, wymiana głowicy — od 800 zł, wymiana wałka — od 400 zł, naprawa mechanizmu kasety — od 350 zł, naprawa czytnika smart card — od 400 zł, naprawa płyty głównej — od 700 zł. [Formularz serwisowy →](https://www.serwis-zebry.pl/#formularz)
 
 **Jakie opaski pasują do drukarki Zebra HC100?**
 
@@ -34952,7 +34987,7 @@ USB: podłącz kabel, zainstaluj sterownik Zebra Setup Utilities. RS-232: kabel 
 ## Powiązane artykuły
 
 - [Drukarka Zebra nie drukuje — przyczyny i rozwiązania](/blog/drukarka-zebra-nie-drukuje-przyczyny-rozwiazania)
-- [Serwis drukarki kart Zebra ZC100/ZC300 — diagnostyka i naprawa](/blog/serwis-drukarki-kart-zebra-zc100-zc300-diagnostyka-naprawa)
+- [Drukarka kart Zebra ZC100 i ZC300: diody LED i komunikaty błędów](/blog/serwis-drukarki-kart-zebra-zc100-zc300-diagnostyka-naprawa)
 - [Kody błędów drukarek kart Zebra ZC300/ZXP](/blog/kody-bledow-drukarki-kart-zebra-zc300-zxp)
 - [Porównanie drukarek kart Zebra ZC100, ZC300, ZXP](/blog/porownanie-drukarek-kart-zebra-zc100-zc300-zxp)
 - [Drukarka Zebra zacina karty — przyczyny i rozwiązania](/blog/drukarka-zebra-zacina-karty-przyczyny-rozwiazania)
@@ -38188,7 +38223,7 @@ Objawy hardware: skaner nie wchodzi w discoverable po resecie, LED nigdy nie mig
       faqSchema: [
         {
           question: 'Ile kosztuje naprawa drukarki Zebra ZT610?',
-          answer: 'Koszt naprawy Zebra ZT610 zależy od usterki (ceny netto): wymiana głowicy 203dpi: 1950 zł, głowicy 300dpi: 2200 zł, głowicy 600dpi: 2800 zł, naprawa mechanizmu: 350-700 zł, naprawa obcinacza: 250-450 zł, naprawa płyty głównej: 900-1600 zł. Diagnostyka jest bezpłatna.'
+          answer: 'Koszt naprawy Zebra ZT610 zależy od usterki (ceny netto): wymiana głowicy 203dpi: 1950 zł, głowicy 300dpi: 2200 zł, głowicy 600dpi: 2800 zł, naprawa mechanizmu: 350-700 zł, naprawa obcinacza: 250-450 zł, naprawa płyty głównej: 900-1600 zł. Diagnostyka jest bezpłatna przy zleceniu naprawy, a przy rezygnacji z naprawy kosztuje 99 zł netto.'
         },
         {
           question: 'Co oznaczają diody LED w drukarce Zebra ZT610?',
@@ -38229,7 +38264,7 @@ Objawy hardware: skaner nie wchodzi w discoverable po resecie, LED nigdy nie mig
       ]
     },
     content: `
-> **Szybka odpowiedź:** Drukarki **Zebra ZT610** (4") i **ZT620** (6") to przemysłowe maszyny klasy premium — następcy legendarnej serii Xi4. Metalowa konstrukcja, oświetlenie ścieżki mediów i ribbonu, 5 diod LED. Najczęstsze problemy: **PAPER OUT** (kalibracja czujników), **RIBBON OUT** (ładowanie), **blady wydruk** (głowica/Darkness), **marszczenie ribbonu** (docisk). Koszt naprawy: od **350 zł** (mechanizm) do **2800 zł** (głowica 600dpi). **Diagnostyka bezpłatna.**
+> **Szybka odpowiedź:** Drukarki **Zebra ZT610** (4") i **ZT620** (6") to przemysłowe maszyny klasy premium — następcy legendarnej serii Xi4. Metalowa konstrukcja, oświetlenie ścieżki mediów i ribbonu, 5 diod LED. Najczęstsze problemy: **PAPER OUT** (kalibracja czujników), **RIBBON OUT** (ładowanie), **blady wydruk** (głowica/Darkness), **marszczenie ribbonu** (docisk). Koszt naprawy: od **350 zł** (mechanizm) do **2800 zł** (głowica 600dpi). **Diagnostyka jest bezpłatna przy zleceniu naprawy**, a przy rezygnacji z naprawy kosztuje 99 zł netto.
 
 ## TL;DR — Diagnostyka ZT610/ZT620 w pigułce
 
@@ -38695,7 +38730,9 @@ Przesuń paznokciem po powierzchni materiału:
 | Naprawa płyty głównej | 900-1 600 zł |
 | Naprawa/wymiana zasilacza | 350-600 zł |
 | Czyszczenie i konserwacja | 150-200 zł |
-| **Diagnostyka** | **BEZPŁATNA** |
+| **Diagnostyka** | bezpłatna przy zleceniu naprawy* |
+
+*Przy rezygnacji z naprawy diagnostyka kosztuje 99 zł netto.
 
 > [Wałki do drukarek przemysłowych →](/sklep/walki-dociskowe/drukarki-przemyslowe)
 
@@ -38709,11 +38746,11 @@ Przesuń paznokciem po powierzchni materiału:
 
 Skontaktuj się z nami — jako **Autoryzowany Serwis Zebra** oferujemy:
 
-- ✅ **Bezpłatna diagnostyka** i wycena
+- ✅ **Bezpłatna diagnostyka przy zleceniu naprawy** (99 zł netto przy rezygnacji)
 - ✅ **Bezpłatny odbiór kurierem** w całej Polsce
 - ✅ **Gwarancja** na naprawę
 - ✅ **Oryginalne części** Zebra
-- ✅ **2-5 dni** czas naprawy
+- ✅ **5–7 dni roboczych** — standardowy czas naprawy (tryb ekspresowy 24–48 h, 299 zł netto, po wcześniejszym ustaleniu)
 
 > **Zadzwoń:** +48 601 619 898
 
@@ -38797,7 +38834,7 @@ Skontaktuj się z nami — jako **Autoryzowany Serwis Zebra** oferujemy:
       faqSchema: [
         {
           question: 'Ile kosztuje naprawa drukarki Zebra ZT510?',
-          answer: 'Koszt naprawy Zebra ZT510 zależy od usterki (ceny netto): wymiana głowicy 203dpi: 1400-1550 zł, głowicy 300dpi: 1700-1900 zł, naprawa mechanizmu: 300-600 zł, naprawa obcinacza: 200-400 zł, naprawa płyty głównej: 800-1400 zł. Diagnostyka jest bezpłatna.'
+          answer: 'Koszt naprawy Zebra ZT510 zależy od usterki (ceny netto): wymiana głowicy 203dpi: 1400-1550 zł, głowicy 300dpi: 1700-1900 zł, naprawa mechanizmu: 300-600 zł, naprawa obcinacza: 200-400 zł, naprawa płyty głównej: 800-1400 zł. Diagnostyka jest bezpłatna przy zleceniu naprawy, a przy rezygnacji z naprawy kosztuje 99 zł netto.'
         },
         {
           question: 'Co oznaczają diody LED w drukarce Zebra ZT510?',
@@ -38838,7 +38875,7 @@ Skontaktuj się z nami — jako **Autoryzowany Serwis Zebra** oferujemy:
       ]
     },
     content: `
-> **Szybka odpowiedź:** **Zebra ZT510** to przemysłowa drukarka 4-calowa w atrakcyjnej cenie — idealna do magazynów i produkcji. Metalowa konstrukcja, 5 diod LED, wyświetlacz LCD. Najczęstsze problemy: **fałszywy RIBBON OUT** (źle przeprowadzony materiał), **PAPER OUT** (kalibracja czujników), **blady wydruk** (głowica/Darkness). Koszt naprawy: od **300 zł** (mechanizm) do **1900 zł** (głowica 300dpi). **Diagnostyka bezpłatna.**
+> **Szybka odpowiedź:** **Zebra ZT510** to przemysłowa drukarka 4-calowa w atrakcyjnej cenie — idealna do magazynów i produkcji. Metalowa konstrukcja, 5 diod LED, wyświetlacz LCD. Najczęstsze problemy: **fałszywy RIBBON OUT** (źle przeprowadzony materiał), **PAPER OUT** (kalibracja czujników), **blady wydruk** (głowica/Darkness). Koszt naprawy: od **300 zł** (mechanizm) do **1900 zł** (głowica 300dpi). **Diagnostyka jest bezpłatna przy zleceniu naprawy**, a przy rezygnacji z naprawy kosztuje 99 zł netto.
 
 ## TL;DR — Diagnostyka ZT510 w pigułce
 
@@ -39239,7 +39276,9 @@ ZT510 obsługuje 6 trybów:
 | Naprawa płyty głównej | 800-1 400 zł |
 | Naprawa/wymiana zasilacza | 300-550 zł |
 | Czyszczenie i konserwacja | 120-180 zł |
-| **Diagnostyka** | **BEZPŁATNA** |
+| **Diagnostyka** | bezpłatna przy zleceniu naprawy* |
+
+*Przy rezygnacji z naprawy diagnostyka kosztuje 99 zł netto.
 
 > [Wałki do drukarek przemysłowych →](/sklep/walki-dociskowe/drukarki-przemyslowe)
 
@@ -39253,11 +39292,11 @@ ZT510 obsługuje 6 trybów:
 
 Skontaktuj się z nami — jako **Autoryzowany Serwis Zebra** oferujemy:
 
-- ✅ **Bezpłatna diagnostyka** i wycena
+- ✅ **Bezpłatna diagnostyka przy zleceniu naprawy** (99 zł netto przy rezygnacji)
 - ✅ **Bezpłatny odbiór kurierem** w całej Polsce
 - ✅ **Gwarancja** na naprawę
 - ✅ **Oryginalne części** Zebra
-- ✅ **2-5 dni** czas naprawy
+- ✅ **5–7 dni roboczych** — standardowy czas naprawy (tryb ekspresowy 24–48 h, 299 zł netto, po wcześniejszym ustaleniu)
 
 > **Zadzwoń:** +48 601 619 898
 
