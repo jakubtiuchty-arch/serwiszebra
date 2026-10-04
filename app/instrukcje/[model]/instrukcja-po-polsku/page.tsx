@@ -12,6 +12,17 @@ import {
 } from 'lucide-react'
 import { getPolishManual, getScannerVariant } from '@/lib/polish-manuals'
 import PolishManualContent from '@/components/PolishManualContent'
+import { modelDlaInstrukcji, urlKarty } from '@/lib/modele-sklepu'
+
+/** Zakres instrukcji wg typu urządzenia — wspólny dla opisu meta i nagłówka (wcześniej meta mówiła o skanowaniu także przy drukarkach) */
+const zakresInstrukcji = (model: string) =>
+  model.match(/^(tc|mc|wt|et)/i)
+    ? 'Skanowanie kodów, łączność bezprzewodowa, rozwiązywanie problemów i konserwacja.'
+    : model.match(/^(ds)/i)
+      ? 'Skanowanie kodów, konfiguracja, rozwiązywanie problemów i konserwacja.'
+      : model.match(/^(zc|zxp)/i)
+        ? 'Personalizacja kart, zakładanie taśm, rozwiązywanie problemów i konserwacja.'
+        : 'Kalibracja, zakładanie mediów, rozwiązywanie problemów i konserwacja.'
 
 // Supabase client
 const supabase = createClient(
@@ -61,11 +72,11 @@ export async function generateMetadata({ params }: { params: { model: string } }
 
   return {
     title: `${displayTitle} | Serwis Zebra`,
-    description: `Instrukcja obsługi ${manual.model} po polsku. Skanowanie kodów, konfiguracja, błędy/LED, reset fabryczny, konserwacja.`,
+    description: `Instrukcja obsługi Zebra ${manual.model} po polsku. ${zakresInstrukcji(manual.model)}`,
     keywords: allKeywords,
     openGraph: {
       title: displayTitle,
-      description: `Instrukcja obsługi ${manual.model} po polsku. Kalibracja, błędy, konserwacja. Pobierz PDF.`,
+      description: `Instrukcja obsługi Zebra ${manual.model} po polsku. ${zakresInstrukcji(manual.model)}`,
       url: `https://www.serwis-zebry.pl/instrukcje/zebra-${manual.model.toLowerCase()}/instrukcja-po-polsku`,
       type: 'article',
       siteName: 'TAKMA - Autoryzowany Serwis Zebra',
@@ -95,6 +106,7 @@ export default async function PolishManualPage({ params }: { params: { model: st
   // Indywidualny tytuł + dane wariantu dla dokładnego modelu (np. DS3608SR)
   const displayTitle = `Zebra ${manual.model} – Instrukcja obsługi po polsku`
   const variant = getScannerVariant(manual.model)
+  const kartaSklepu = modelDlaInstrukcji(manual.model)
 
   return (
     <>
@@ -145,14 +157,7 @@ export default async function PolishManualPage({ params }: { params: { model: st
                 {displayTitle}
               </h1>
               <p className="text-gray-800 max-w-2xl font-medium drop-shadow-sm text-sm sm:text-base">
-                Skrócona instrukcja z najważniejszymi informacjami po polsku. 
-                {manual.model.match(/^(tc|mc|wt|et)/i) 
-                  ? 'Skanowanie kodów, łączność bezprzewodowa, rozwiązywanie problemów i konserwacja.'
-                  : manual.model.match(/^(ds)/i)
-                    ? 'Skanowanie kodów, konfiguracja, rozwiązywanie problemów i konserwacja.'
-                    : manual.model.match(/^(zc|zxp)/i)
-                      ? 'Personalizacja kart, zakładanie taśm, rozwiązywanie problemów i konserwacja.'
-                      : 'Kalibracja, zakładanie mediów, rozwiązywanie problemów i konserwacja.'}
+                Skrócona instrukcja z najważniejszymi informacjami po polsku. {zakresInstrukcji(manual.model)}
               </p>
               <div className="flex flex-wrap items-center gap-2 sm:gap-4 mt-3 sm:mt-4 text-gray-800 text-xs sm:text-sm font-medium drop-shadow-sm">
                 <span className="flex items-center gap-1">
@@ -166,6 +171,27 @@ export default async function PolishManualPage({ params }: { params: { model: st
               </div>
             </div>
           </div>
+
+          {/* Most do karty w sklepie. To ta strona (a nie /instrukcje/[model]) zbiera frazy z nazwą modelu
+              — 62% wyświetleń, karty 2% (GSC 5.09–2.10.2026) — więc link z niej przekazuje karcie najwięcej. */}
+          {kartaSklepu && (
+            <Link
+              href={urlKarty(kartaSklepu)}
+              className="mb-6 sm:mb-8 flex items-center justify-between gap-4 rounded-xl border border-gray-200 bg-white p-4 transition hover:border-gray-400"
+            >
+              <span>
+                <span className="block text-sm font-semibold text-gray-900">
+                  {`Drukarka etykiet Zebra ${kartaSklepu.model} — cena i dostępność w sklepie`}
+                </span>
+                <span className="block text-xs text-gray-600">
+                  Stan magazynowy na żywo, gwarancja realizowana w naszym serwisie
+                </span>
+              </span>
+              <span className="whitespace-nowrap rounded-lg bg-gray-900 px-4 py-2 text-sm font-semibold text-white">
+                Zobacz kartę
+              </span>
+            </Link>
+          )}
 
           {/* Kliencki komponent z treścią i przyciskiem PDF */}
           <PolishManualContent
