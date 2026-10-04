@@ -1,6 +1,10 @@
 import { NextResponse } from 'next/server'
 import { getProductUrl } from '@/lib/shop-categories'
 import { getProductFallbackImage } from '@/lib/product-images'
+import { pobierzStany, stanDlaPN } from '@/lib/stock-server'
+import { trescKarty } from '@/lib/device-content'
+import { MODELE_SKLEPU, type KlasaSlug } from '@/lib/modele-sklepu'
+import type { DeviceVariant } from '@/components/shop/DevicePurchasePanel'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -81,6 +85,102 @@ function isValidGtin(ean: string | null): ean is string {
   return !!ean && /^\d{8}$|^\d{12,14}$/.test(ean)
 }
 
+/**
+ * Drukarki etykiet — jedna oferta na numer katalogowy, link `?pn=` otwiera kartę z ceną
+ * dokładnie tej wersji (cena w feedzie = cena na stronie = cena w schemacie karty).
+ *
+ * Dodane 4.10.2026: na frazy „zebra zd230” itp. pozycję 2 zajmuje blok Google Shopping,
+ * a feed miał tylko części, więc karty drukarek nie mogły się tam pokazać.
+ * Dostępność jak w `dostepnoscSchema` karty: stan PL/UE → in_stock, brak stanu →
+ * out_of_stock; wersje tylko „w dostawie” (na karcie BackOrder) pomijamy, bo
+ * `backorder` w Merchant Center wymaga daty dostępności, której nie znamy.
+ */
+const KLASA_ETYKIETA: Record<KlasaSlug, string> = {
+  biurkowe: 'Drukarki etykiet Zebra > Drukarki biurkowe',
+  mobilne: 'Drukarki etykiet Zebra > Drukarki mobilne',
+  polprzemyslowe: 'Drukarki etykiet Zebra > Drukarki półprzemysłowe',
+  przemyslowe: 'Drukarki etykiet Zebra > Drukarki przemysłowe',
+}
+
+/** 952 = Artykuły biurowe > Sprzęt biurowy > Drukarki do etykiet (ta sama kategoria co w feedzie takmy) */
+const KATEGORIA_DRUKAREK = '952'
+
+interface DbDrukarka {
+  name: string
+  slug: string
+  description: string | null
+  device_model: string | null
+  image_urls: string[] | null
+  attributes: { variants?: DeviceVariant[] } | null
+}
+
+async function ofertyDrukarek(supabaseUrl: string, supabaseKey: string) {
+  const res = await fetch(
+    `${supabaseUrl}/rest/v1/products?is_active=eq.true&product_type=eq.drukarka` +
+      `&select=name,slug,description,device_model,image_urls,attributes&order=name.asc`,
+    { headers: { apikey: supabaseKey }, cache: 'no-store' }
+  )
+  if (!res.ok) throw new Error(`Supabase ${res.status} (drukarki)`)
+  const drukarki: DbDrukarka[] = await res.json()
+
+  const wszystkiePn = drukarki.flatMap((d) => (d.attributes?.variants || []).map((v) => v.pn))
+  const stany = await pobierzStany(wszystkiePn)
+  const klasy = new Map(MODELE_SKLEPU.map((m) => [m.slug, m.klasa]))
+
+  const items: string[] = []
+  let pominiete = 0
+
+  for (const d of drukarki) {
+    const zdjecia = [trescKarty(d.slug)?.zdjecieGlowne, ...(d.image_urls || [])]
+      .filter((s): s is string => !!s)
+      .filter((s, i, a) => a.indexOf(s) === i)
+    if (zdjecia.length === 0) {
+      pominiete += d.attributes?.variants?.length || 0
+      continue
+    }
+    const klasa = klasy.get(d.slug)
+    const opisModelu = stripHtml(d.description || d.name)
+
+    for (const v of d.attributes?.variants || []) {
+      const stan = stanDlaPN(stany, v.pn)
+      const naStanie = !!stan && (stan.stockPL > 0 || stan.stockEU > 0)
+      const tylkoWDostawie = !!stan && !naStanie && stan.inDelivery > 0
+      if (!stan || !(stan.brutto > 0) || tylkoWDostawie) {
+        pominiete++
+        continue
+      }
+
+      // „Drukarka etykiet Zebra ZD230t, 203 dpi, USB, z odklejakiem (ZD23042-31EG00EZ)”
+      const dpi = v.cechy?.['Rozdzielczość']
+      const czesci = [d.name, dpi && !v.label.includes('dpi') ? dpi : null, v.label].filter(Boolean)
+      const tytul = `${czesci.join(', ')} (${v.pn})`
+      const opis = truncate(`${opisModelu} Wersja: ${v.label} (${v.pn}).`, 4900)
+      const link = `${SITE_URL}/sklep/drukarki-etykiet/${d.slug}?pn=${encodeURIComponent(v.pn)}`
+
+      const lines = [
+        '    <item>',
+        `      <g:id>${escapeXml(v.pn)}</g:id>`,
+        `      <title>${escapeXml(truncate(tytul, 150))}</title>`,
+        `      <description>${escapeXml(opis)}</description>`,
+        `      <link>${escapeXml(link)}</link>`,
+        `      <g:image_link>${escapeXml(SITE_URL + zdjecia[0])}</g:image_link>`,
+        ...zdjecia.slice(1, 11).map((z) => `      <g:additional_image_link>${escapeXml(SITE_URL + z)}</g:additional_image_link>`),
+        `      <g:price>${stan.brutto.toFixed(2)} PLN</g:price>`,
+        `      <g:availability>${naStanie ? 'in_stock' : 'out_of_stock'}</g:availability>`,
+        `      <g:brand>Zebra</g:brand>`,
+        `      <g:mpn>${escapeXml(v.pn)}</g:mpn>`,
+        `      <g:condition>new</g:condition>`,
+        `      <g:item_group_id>${escapeXml(d.device_model || d.slug)}</g:item_group_id>`,
+        `      <g:google_product_category>${KATEGORIA_DRUKAREK}</g:google_product_category>`,
+      ]
+      if (klasa) lines.push(`      <g:product_type>${escapeXml(KLASA_ETYKIETA[klasa])}</g:product_type>`)
+      lines.push('    </item>')
+      items.push(lines.join('\n'))
+    }
+  }
+  return { items, pominiete }
+}
+
 export async function GET() {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
   const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
@@ -103,8 +203,16 @@ export async function GET() {
   }
   const products: DbProduct[] = await res.json()
 
-  const items: string[] = []
-  let skipped = 0
+  let drukarki: Awaited<ReturnType<typeof ofertyDrukarek>>
+  try {
+    drukarki = await ofertyDrukarek(supabaseUrl, supabaseKey)
+  } catch (e) {
+    // Bez drukarek nie publikujemy częściowego feedu — Merchant Center usunąłby ich oferty
+    return NextResponse.json({ error: e instanceof Error ? e.message : 'Błąd drukarek' }, { status: 502 })
+  }
+
+  const items: string[] = [...drukarki.items]
+  let skipped = drukarki.pominiete
 
   for (const p of products) {
     const brutto = p.price_brutto ?? (p.price != null ? p.price * (1 + (p.vat_rate ?? 23) / 100) : null)
@@ -151,9 +259,9 @@ export async function GET() {
     '<?xml version="1.0" encoding="UTF-8"?>',
     '<rss version="2.0" xmlns:g="http://base.google.com/ns/1.0">',
     '  <channel>',
-    '    <title>serwis-zebry.pl — części do drukarek Zebra</title>',
+    '    <title>serwis-zebry.pl — drukarki etykiet i części Zebra</title>',
     `    <link>${SITE_URL}/sklep</link>`,
-    '    <description>Oryginalne głowice, wałki dociskowe i akumulatory Zebra</description>',
+    '    <description>Drukarki etykiet Zebra oraz oryginalne głowice, wałki dociskowe i akumulatory</description>',
     items.join('\n'),
     '  </channel>',
     '</rss>',
