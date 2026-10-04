@@ -5,6 +5,7 @@ import { pobierzStany, stanDlaPN } from '@/lib/stock-server'
 import { trescKarty } from '@/lib/device-content'
 import { MODELE_SKLEPU, type KlasaSlug } from '@/lib/modele-sklepu'
 import type { DeviceVariant } from '@/components/shop/DevicePurchasePanel'
+import { gtinyDlaPN } from '@/lib/gtin-drukarek'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -169,6 +170,8 @@ async function ofertyDrukarek(supabaseUrl: string, supabaseKey: string) {
         `      <g:availability>${naStanie ? 'in_stock' : 'out_of_stock'}</g:availability>`,
         `      <g:brand>Zebra</g:brand>`,
         `      <g:mpn>${escapeXml(v.pn)}</g:mpn>`,
+        // Wszystkie kody modelu (do 10) — Google łączy ofertę z produktem po dowolnym z nich
+        ...gtinyDlaPN(v.pn).filter(isValidGtin).map((g) => `      <g:gtin>${g}</g:gtin>`),
         `      <g:condition>new</g:condition>`,
         `      <g:item_group_id>${escapeXml(d.device_model || d.slug)}</g:item_group_id>`,
         `      <g:google_product_category>${KATEGORIA_DRUKAREK}</g:google_product_category>`,

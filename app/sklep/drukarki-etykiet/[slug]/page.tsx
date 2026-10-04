@@ -10,6 +10,7 @@ import BanerMaterialow from '@/components/shop/BanerMaterialow'
 import PoradnikiKaruzela from '@/components/shop/PoradnikiKaruzela'
 import { getAkcesoriaDlaModelu } from '@/lib/device-accessories'
 import { pobierzStany, stanDlaPN } from '@/lib/stock-server'
+import { gtinyDlaPN } from '@/lib/gtin-drukarek'
 import { klasaBySlug } from '@/lib/printer-classes'
 import { trescKarty } from '@/lib/device-content'
 import { getPostBySlug } from '@/lib/blog'
@@ -255,6 +256,7 @@ export default async function DevicePage({
         name: `${product.name} — ${v.label}`,
         sku: v.pn,
         mpn: v.pn,
+        ...(gtinyDlaPN(v.pn)[0] ? { gtin: gtinyDlaPN(v.pn)[0] } : {}),
         brand: { '@type': 'Brand', name: 'Zebra' },
         url: urlWariantu(v.pn),
         ...(zdjecie ? { image: [zdjecie] } : {}),
