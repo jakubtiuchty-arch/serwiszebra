@@ -26,6 +26,8 @@ export interface KrokOsi {
 const CZAS_POSTEPU = 3200
 /** Odstęp między zapaleniem punktu a wsunięciem karty */
 const ODSTEP_KARTY = 350
+/** Kolumny osi poziomej — pełne nazwy klas, żeby Tailwind je wygenerował */
+const KOLUMNY: Record<number, string> = { 3: 'lg:grid-cols-3', 4: 'lg:grid-cols-4', 5: 'lg:grid-cols-5', 6: 'lg:grid-cols-6' }
 
 export default function OsCzasu({ kroki }: { kroki: KrokOsi[] }) {
   const ref = useRef<HTMLOListElement>(null)
@@ -67,7 +69,7 @@ export default function OsCzasu({ kroki }: { kroki: KrokOsi[] }) {
   }, [widoczna, bezRuchu])
 
   return (
-    <ol ref={ref} className="relative mt-12 grid gap-10 lg:grid-cols-4 lg:gap-6" aria-label="Oś czasu">
+    <ol ref={ref} className={`relative mt-12 grid gap-10 lg:gap-6 ${KOLUMNY[n] ?? 'lg:grid-cols-4'}`} aria-label="Oś czasu">
       {/* Oś pionowa (telefon, tablet): szara podstawa + limonkowy postęp */}
       <div aria-hidden="true" className="absolute bottom-4 left-[13px] top-4 w-0.5 bg-gray-200 lg:hidden" />
       <div

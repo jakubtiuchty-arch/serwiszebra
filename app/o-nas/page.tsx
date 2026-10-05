@@ -44,6 +44,12 @@ const milestones = [
     description:
       'Oficjalny status serwisowy Zebra. Naprawy na oryginalnych częściach, z gwarancją producenta.',
   },
+  {
+    year: '2026',
+    title: 'Printer Repair Specialist – Card Printer',
+    description:
+      'Autoryzacja serwisowa Zebra dla drukarek kart plastikowych. Naprawy gwarancyjne i pogwarancyjne drukarek ZC i ZXP.',
+  },
 ]
 
 const values = [
@@ -91,7 +97,7 @@ export default function AboutPage() {
     description:
       'Autoryzowany serwis i partner handlowy Zebra Technologies w Polsce. Sprzedaż, serwis i naprawa terminali, drukarek i skanerów Zebra od 1999 roku.',
     sameAs: ['https://www.takma.com.pl'],
-    award: ['Zebra Premier Solution Partner', 'Zebra Printer Repair Specialist'],
+    award: ['Zebra Premier Solution Partner', 'Zebra Printer Repair Specialist', 'Zebra Printer Repair Specialist – Card Printer'],
   }
   const breadcrumbSchema = {
     '@context': 'https://schema.org',
@@ -225,10 +231,12 @@ export default function AboutPage() {
             <div>
               <h2 className="text-2xl font-bold sm:text-3xl">Oficjalnie autoryzowani przez Zebra</h2>
               <p className="mt-4 leading-relaxed text-gray-300">
-                Mamy oba najwyższe statusy Zebra Technologies w Polsce naraz — jako partner handlowy
-                (<strong className="text-white">Premier Solution Partner</strong>) i jako serwis
-                (<strong className="text-white">Printer Repair Specialist</strong>). To oznacza dostęp do
-                oryginalnych części, gwarancję producenta na naprawy i bezpośrednie wsparcie techniczne.
+                Mamy najwyższy status partnera handlowego Zebra Technologies w Polsce
+                (<strong className="text-white">Premier Solution Partner</strong>) i dwa statusy serwisowe:
+                dla drukarek etykiet (<strong className="text-white">Printer Repair Specialist</strong>) i dla
+                drukarek kart plastikowych (<strong className="text-white">Printer Repair Specialist – Card Printer</strong>).
+                To oznacza dostęp do oryginalnych części, gwarancję producenta na naprawy i bezpośrednie
+                wsparcie techniczne.
               </p>
               <div className="mt-7 grid grid-cols-2 gap-4">
                 {authBenefits.map((b) => (
@@ -244,8 +252,8 @@ export default function AboutPage() {
                 ))}
               </div>
             </div>
-            <div className="flex items-center justify-center rounded-xl bg-white p-8 sm:p-12">
-              <div className="relative aspect-[3/1] w-full max-w-md">
+            <div className="flex flex-col items-center justify-center gap-6 rounded-xl bg-white p-8 sm:p-12">
+              <div className="relative aspect-[3.4/1] w-full max-w-md">
                 <Image
                   src="/zebra-premier-repair-specialist.jpeg"
                   alt="Zebra Premier Solution Partner i Printer Repair Specialist"
@@ -254,6 +262,22 @@ export default function AboutPage() {
                   className="object-contain"
                 />
               </div>
+              <div className="h-px w-full max-w-md bg-gray-200" />
+              <div className="relative aspect-[3.5/1] w-full max-w-md">
+                <Image
+                  src="/zebra-repair-specialist-card-printer.png"
+                  alt="Zebra Premier Solution Partner i Printer Repair Specialist – Card Printer"
+                  fill
+                  sizes="(max-width:1024px) 100vw, 480px"
+                  className="object-contain"
+                />
+              </div>
+              <Link
+                href="/serwis-drukarek-kart-zebra#autoryzacja"
+                className="text-sm font-medium text-gray-700 underline underline-offset-4 hover:text-gray-900"
+              >
+                Certyfikat autoryzacji dla drukarek kart
+              </Link>
             </div>
           </div>
         </div>

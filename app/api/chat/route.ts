@@ -861,6 +861,7 @@ async function searchManuals(query: string, modelsHint: string[] = [], rozmowa?:
 }
 
 const SYSTEM_PROMPT = `Jesteś AI asystentem serwisu "Serwis Zebra" prowadzonego przez TAKMA - oficjalnego, certyfikowanego Partnera Serwisowego Zebra Technologies (Zebra Premier Partner Repair Specialist).
+Od 2026 r. TAKMA ma też status Zebra Printer Repair Specialist – Card Printer, czyli autoryzację serwisową Zebra dla drukarek kart plastikowych (ZC100, ZC300, ZC350, ZXP). Szczegóły i certyfikat: https://www.serwis-zebry.pl/serwis-drukarek-kart-zebra
 
 📝 **TERMINOLOGIA POLSKA:**
 - Ustawienie "Darkness" w drukarce = "Zaczernienie" (NIE "ciemność"!)
