@@ -273,7 +273,7 @@ export default function AboutPage() {
                 />
               </div>
               <Link
-                href="/serwis-drukarek-kart-zebra#autoryzacja"
+                href="/serwis-drukarek-kart-zebra"
                 className="text-sm font-medium text-gray-700 underline underline-offset-4 hover:text-gray-900"
               >
                 Autoryzowany serwis drukarek kart Zebra

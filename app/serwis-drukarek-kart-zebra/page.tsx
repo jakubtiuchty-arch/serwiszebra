@@ -13,7 +13,7 @@ const URL = 'https://www.serwis-zebry.pl/serwis-drukarek-kart-zebra'
 
 const TYTUL = 'Autoryzowany serwis drukarek kart Zebra ZC100, ZC300 | TAKMA'
 const OPIS = 'Autoryzowany serwis Zebra dla drukarek kart (Printer Repair Specialist – Card Printer). Naprawa ZC100, ZC300, ZC350 i ZXP, odbiór kurierem, 12 mies. gwarancji.'
-const OG_OBRAZ = { url: '/og-serwis-drukarek-kart.jpg', width: 1200, height: 630, alt: 'Warsztat serwisu Zebra: otwarta drukarka kart ZC300 z komunikatem błędu na stole serwisowym' }
+const OG_OBRAZ = { url: '/og-serwis-drukarek-kart.jpg', width: 1200, height: 630, alt: 'Warsztat serwisu Zebra: drukarki kart ZXP Series 7, ZC100 i otwarta ZC300 z komunikatem błędu, na ścianie szyld Zebra Printer Repair Specialist – Card Printer' }
 
 // Status serwisowy Zebra dla drukarek kart (od 2026 r.), certyfikat odnawiany co roku
 const STATUS_KART = 'Printer Repair Specialist – Card Printer'
@@ -265,15 +265,16 @@ export default function SerwisDrukarekKartPage() {
 
       <div className="min-h-screen bg-white">
         {/* Hero */}
-        <section className="relative bg-[#0b1020] py-10 sm:py-12 md:py-16 xl:py-20 overflow-hidden">
+        <section className="relative bg-[#0b1020] py-10 sm:py-12 md:py-16 lg:py-10 xl:py-20 overflow-hidden">
           {/* Grafika zawsze w pełnej wysokości przy prawej krawędzi: na szerokich ekranach object-cover ucinałby drukarkę z góry i z dołu */}
           <div className="absolute inset-0">
             <div className="absolute top-0 right-0 h-full aspect-[2.8/1]">
               <Image src="/serwis_drukarki_kart.jpeg" alt={OG_OBRAZ.alt} fill sizes="1400px" className="object-cover" priority />
               <div className="absolute inset-y-0 left-0 w-1/5 bg-gradient-to-r from-[#0b1020] to-transparent" />
             </div>
-            {/* Maska liczona od środka kolumny max-w-6xl: ciemna do końca tytułu (50% + 170px), wygaszona przed frontem drukarki */}
-            <div className="absolute inset-0 bg-[#0b1020]/80 lg:bg-transparent lg:bg-[linear-gradient(to_right,rgba(11,16,32,0.95)_0%,rgba(11,16,32,0.9)_calc(50%_+_170px),rgba(11,16,32,0)_calc(50%_+_330px))]" />
+            {/* Maska kończy się tuż za kolumną tekstu (lg: 448 px, xl: 576 px od lewej krawędzi max-w-6xl),
+                żeby szyld z logo statusu i ZXP Series 7 były odsłonięte; lewa krawędź kolumny = max(16px, 50% − 560px) */}
+            <div className="absolute inset-0 bg-[#0b1020]/[0.86] lg:bg-transparent lg:bg-[linear-gradient(to_right,rgba(11,16,32,0.95)_0%,rgba(11,16,32,0.9)_max(474px,calc(50%_-_102px)),rgba(11,16,32,0)_max(564px,calc(50%_-_12px)))] xl:bg-[linear-gradient(to_right,rgba(11,16,32,0.95)_0%,rgba(11,16,32,0.9)_calc(50%_+_30px),rgba(11,16,32,0)_calc(50%_+_140px))]" />
           </div>
           <div className="relative max-w-6xl mx-auto px-3 sm:px-4 text-center md:text-left">
             <nav aria-label="Ścieżka" className="text-xs text-gray-400 mb-3">
@@ -281,13 +282,13 @@ export default function SerwisDrukarekKartPage() {
               <span className="mx-1.5">/</span>
               <span className="text-gray-300">Drukarki kart</span>
             </nav>
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-white mb-3 sm:mb-4">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-white mb-3 sm:mb-4 md:max-w-md xl:max-w-xl">
               Serwis drukarek kart plastikowych Zebra{' '}
               <span className="block text-base sm:text-lg md:text-xl font-normal text-[#A8F000] mt-1 sm:mt-2">
                 ZC100, ZC300, ZC350 i ZXP Series
               </span>
             </h1>
-            <p className="text-sm sm:text-base text-gray-300 mb-6 max-w-xl md:mx-0 mx-auto leading-relaxed">
+            <p className="text-sm sm:text-base text-gray-300 mb-6 max-w-xl lg:max-w-md xl:max-w-xl md:mx-0 mx-auto leading-relaxed">
               TAKMA jest autoryzowanym partnerem serwisowym Zebra. Naprawiamy drukarki kart plastikowych w okresie gwarancji i po jej zakończeniu. Drukarkę odbiera kurier z dowolnego adresu w Polsce.
             </p>
             <div className="flex flex-wrap gap-3 justify-center md:justify-start">
@@ -303,8 +304,9 @@ export default function SerwisDrukarekKartPage() {
           </div>
         </section>
 
-        {/* Autoryzacja Zebra dla drukarek kart: wąski pasek pod hero, logo statusu i jedna linia tekstu */}
-        <section id="autoryzacja" className="py-3 scroll-mt-20">
+        {/* Autoryzacja Zebra dla drukarek kart: wąski pasek pod hero tylko na telefonie i tablecie —
+            od lg logo statusu widać na szyldzie w grafice hero */}
+        <section id="autoryzacja" className="py-3 scroll-mt-20 lg:hidden">
           <div className="max-w-6xl mx-auto px-3 sm:px-4 flex flex-col sm:flex-row items-center gap-2 sm:gap-5 text-center sm:text-left">
             <Image
               src="/zebra-repair-specialist-card-printer.png"
