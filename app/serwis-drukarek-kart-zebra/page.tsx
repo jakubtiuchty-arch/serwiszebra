@@ -17,12 +17,6 @@ const OG_OBRAZ = { url: '/og-serwis-drukarek-kart.jpg', width: 1200, height: 630
 
 // Status serwisowy Zebra dla drukarek kart (od 2026 r.), certyfikat odnawiany co roku
 const STATUS_KART = 'Printer Repair Specialist – Card Printer'
-const CERTYFIKAT = {
-  src: '/certyfikaty/zebra-printer-repair-specialist-card-printer-2026.png',
-  width: 1999,
-  height: 1545,
-  alt: 'Certyfikat autoryzacji Zebra na rok 2026: TAKMA, Premier Solution Partner, Printer Repair Specialist – Card Printer',
-}
 
 export const metadata: Metadata = {
   title: { absolute: TYTUL },
@@ -150,13 +144,6 @@ const wpisy = wpisySlugi
   .map((slug) => blogPosts.find((p) => p.slug === slug))
   .filter((p): p is NonNullable<typeof p> => Boolean(p))
 
-const autoryzacja = [
-  'Naprawy gwarancyjne i pogwarancyjne drukarek kart Zebra.',
-  'Oryginalne części Zebra: głowice drukujące, rolki podajnika, kodery i moduły laminacji.',
-  'Technicy przeszkoleni przez Zebra.',
-  '12 miesięcy gwarancji na wykonaną naprawę.',
-]
-
 const faq = [
   {
     question: 'Czy TAKMA jest autoryzowanym serwisem drukarek kart Zebra?',
@@ -218,7 +205,6 @@ const serviceSchema = {
       '@type': 'EducationalOccupationalCredential',
       name: `Zebra ${STATUS_KART}`,
       credentialCategory: 'Autoryzowany serwis drukarek kart',
-      image: `https://www.serwis-zebry.pl${CERTYFIKAT.src}`,
       recognizedBy: { '@type': 'Organization', name: 'Zebra Technologies', url: 'https://www.zebra.com' },
     },
   },
@@ -317,52 +303,23 @@ export default function SerwisDrukarekKartPage() {
           </div>
         </section>
 
-        {/* Autoryzacja Zebra dla drukarek kart: logo statusu, zakres i certyfikat */}
-        <section id="autoryzacja" className="py-10 sm:py-12 md:py-14 scroll-mt-20">
-          <div className="max-w-6xl mx-auto px-3 sm:px-4 grid gap-8 lg:grid-cols-[1fr_minmax(0,460px)] lg:gap-12 items-center">
-            <div>
-              <Image
-                src="/zebra-repair-specialist-card-printer.png"
-                alt={`Zebra Premier Solution Partner – ${STATUS_KART}`}
-                width={1891}
-                height={540}
-                sizes="(max-width: 640px) 90vw, 336px"
-                className="h-auto w-full max-w-[336px] mb-6"
-              />
-              <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-3">Autoryzowany serwis drukarek kart Zebra</h2>
-              <p className="text-sm sm:text-base text-gray-600 mb-6 max-w-2xl leading-relaxed">
-                TAKMA ma status Zebra {STATUS_KART}. Jest to autoryzacja serwisowa Zebra dla drukarek kart plastikowych. Status potwierdza certyfikat Zebra na rok 2026.
+        {/* Autoryzacja Zebra dla drukarek kart: mały pasek pod hero, logo statusu i dwa zdania */}
+        <section id="autoryzacja" className="py-5 sm:py-6 scroll-mt-20">
+          <div className="max-w-6xl mx-auto px-3 sm:px-4 flex flex-col sm:flex-row items-center gap-4 sm:gap-6 text-center sm:text-left">
+            <Image
+              src="/zebra-repair-specialist-card-printer.png"
+              alt={`Zebra Premier Solution Partner – ${STATUS_KART}`}
+              width={1891}
+              height={540}
+              sizes="224px"
+              className="h-auto w-56 shrink-0"
+            />
+            <div className="sm:border-l sm:border-gray-200 sm:pl-6">
+              <h2 className="text-base sm:text-lg font-semibold text-gray-900">Autoryzowany serwis drukarek kart Zebra</h2>
+              <p className="mt-1 text-sm text-gray-600 leading-relaxed">
+                TAKMA ma status Zebra {STATUS_KART}. Wykonujemy naprawy gwarancyjne i pogwarancyjne na oryginalnych częściach Zebra.
               </p>
-              <ul className="space-y-3">
-                {autoryzacja.map((punkt) => (
-                  <li key={punkt} className="flex gap-3 text-sm sm:text-base text-gray-700">
-                    <CheckCircle2 className="w-5 h-5 shrink-0 mt-0.5 text-[#6B8A00]" aria-hidden="true" />
-                    {punkt}
-                  </li>
-                ))}
-              </ul>
             </div>
-            <figure>
-              <a
-                href={CERTYFIKAT.src}
-                target="_blank"
-                rel="noopener"
-                aria-label="Certyfikat autoryzacji Zebra w pełnym rozmiarze"
-                className="block rounded-lg border border-gray-200 bg-white p-2 shadow-sm transition-shadow hover:shadow-md"
-              >
-                <Image
-                  src={CERTYFIKAT.src}
-                  alt={CERTYFIKAT.alt}
-                  width={CERTYFIKAT.width}
-                  height={CERTYFIKAT.height}
-                  sizes="(max-width: 1024px) 92vw, 460px"
-                  className="h-auto w-full"
-                />
-              </a>
-              <figcaption className="mt-2 text-xs text-gray-500 text-center">
-                Certyfikat autoryzacji Zebra na rok 2026. Kliknięcie otwiera pełny rozmiar.
-              </figcaption>
-            </figure>
           </div>
         </section>
 
