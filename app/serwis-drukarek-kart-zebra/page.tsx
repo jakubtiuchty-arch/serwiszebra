@@ -281,14 +281,14 @@ export default function SerwisDrukarekKartPage() {
               <span className="mx-1.5">/</span>
               <span className="text-gray-300">Drukarki kart</span>
             </nav>
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-white mb-3 sm:mb-4 md:max-w-2xl">
-              Autoryzowany serwis drukarek kart plastikowych Zebra{' '}
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-white mb-3 sm:mb-4">
+              Serwis drukarek kart plastikowych Zebra{' '}
               <span className="block text-base sm:text-lg md:text-xl font-normal text-[#A8F000] mt-1 sm:mt-2">
                 ZC100, ZC300, ZC350 i ZXP Series
               </span>
             </h1>
             <p className="text-sm sm:text-base text-gray-300 mb-6 max-w-xl md:mx-0 mx-auto leading-relaxed">
-              TAKMA ma autoryzację serwisową Zebra dla drukarek kart (status {STATUS_KART}). Naprawiamy drukarki kart plastikowych w okresie gwarancji i po jej zakończeniu. Drukarkę odbiera kurier z dowolnego adresu w Polsce.
+              TAKMA jest autoryzowanym partnerem serwisowym Zebra. Naprawiamy drukarki kart plastikowych w okresie gwarancji i po jej zakończeniu. Drukarkę odbiera kurier z dowolnego adresu w Polsce.
             </p>
             <div className="flex flex-wrap gap-3 justify-center md:justify-start">
               <Link href="/#formularz" className="inline-flex items-center gap-2 bg-[#A8F000] text-[#0A1A2F] font-medium px-5 py-2.5 rounded-lg hover:bg-[#8dbd00] transition-colors text-sm">
@@ -303,23 +303,20 @@ export default function SerwisDrukarekKartPage() {
           </div>
         </section>
 
-        {/* Autoryzacja Zebra dla drukarek kart: mały pasek pod hero, logo statusu i dwa zdania */}
-        <section id="autoryzacja" className="py-5 sm:py-6 scroll-mt-20">
-          <div className="max-w-6xl mx-auto px-3 sm:px-4 flex flex-col sm:flex-row items-center gap-4 sm:gap-6 text-center sm:text-left">
+        {/* Autoryzacja Zebra dla drukarek kart: wąski pasek pod hero, logo statusu i jedna linia tekstu */}
+        <section id="autoryzacja" className="py-3 scroll-mt-20">
+          <div className="max-w-6xl mx-auto px-3 sm:px-4 flex flex-col sm:flex-row items-center gap-2 sm:gap-5 text-center sm:text-left">
             <Image
               src="/zebra-repair-specialist-card-printer.png"
               alt={`Zebra Premier Solution Partner – ${STATUS_KART}`}
               width={1891}
               height={540}
-              sizes="224px"
-              className="h-auto w-56 shrink-0"
+              sizes="160px"
+              className="h-auto w-40 shrink-0"
             />
-            <div className="sm:border-l sm:border-gray-200 sm:pl-6">
-              <h2 className="text-base sm:text-lg font-semibold text-gray-900">Autoryzowany serwis drukarek kart Zebra</h2>
-              <p className="mt-1 text-sm text-gray-600 leading-relaxed">
-                TAKMA ma status Zebra {STATUS_KART}. Wykonujemy naprawy gwarancyjne i pogwarancyjne na oryginalnych częściach Zebra.
-              </p>
-            </div>
+            <p className="text-sm text-gray-600 sm:border-l sm:border-gray-200 sm:pl-5">
+              <strong className="font-semibold text-gray-900">Autoryzowany serwis drukarek kart Zebra</strong> – status {STATUS_KART}
+            </p>
           </div>
         </section>
 
