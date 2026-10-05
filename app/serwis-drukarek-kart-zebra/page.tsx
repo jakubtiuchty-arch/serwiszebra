@@ -364,9 +364,8 @@ export default function SerwisDrukarekKartPage() {
         <section className="py-10 sm:py-12 md:py-14 bg-gray-50 border-y border-gray-200">
           <div className="max-w-6xl mx-auto px-3 sm:px-4">
             <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-2">Objawy usterek drukarki kart: co sprawdzić przed zgłoszeniem</h2>
-            <p className="text-sm text-gray-600 mb-8 max-w-3xl">
-              Część problemów można usunąć bez serwisu. Opisy dotyczą drukarek ZC100 i ZC300. Do każdego objawu dołączamy film z polskim lektorem. Znaczenie wszystkich wskaźników (diod LED) drukarek ZC100 i ZC300 oraz komunikatów LCD drukarki ZC300 opisuje poradnik{' '}
-              <Link href="/blog/serwis-drukarki-kart-zebra-zc100-zc300-diagnostyka-naprawa" className="text-blue-700 hover:text-blue-900">diody LED i komunikaty błędów drukarek kart Zebra ZC100 i ZC300</Link>.
+            <p className="text-sm text-gray-600 mb-8 max-w-4xl">
+              Część usterek drukarek ZC100 i ZC300 można usunąć bez serwisu. Przy każdym objawie jest film z polskim lektorem.
             </p>
             <div className="md:hidden border-t border-gray-300">
               {objawy.map((o) => (
@@ -413,6 +412,11 @@ export default function SerwisDrukarekKartPage() {
                 </tbody>
               </table>
             </div>
+            <Link href="/blog/serwis-drukarki-kart-zebra-zc100-zc300-diagnostyka-naprawa" className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-blue-700 hover:text-blue-900">
+              <FileText className="w-4 h-4 shrink-0" />
+              Wszystkie diody LED i komunikaty błędów drukarek ZC100 i ZC300
+              <ChevronRight className="w-4 h-4 shrink-0" />
+            </Link>
           </div>
         </section>
 
