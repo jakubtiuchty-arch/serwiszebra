@@ -268,7 +268,7 @@ export default function SerwisDrukarekKartPage() {
         <section className="relative bg-[#0b1020] py-10 sm:py-12 md:py-16 lg:py-10 xl:py-20 overflow-hidden">
           {/* Grafika zawsze w pełnej wysokości przy prawej krawędzi: na szerokich ekranach object-cover ucinałby drukarkę z góry i z dołu */}
           <div className="absolute inset-0">
-            <div className="absolute top-0 right-0 h-full aspect-[2.8/1]">
+            <div className="absolute top-0 right-0 h-full aspect-[2.357/1]">
               <Image src="/serwis_drukarki_kart.jpeg" alt={OG_OBRAZ.alt} fill sizes="1400px" className="object-cover" priority />
               <div className="absolute inset-y-0 left-0 w-1/5 bg-gradient-to-r from-[#0b1020] to-transparent" />
             </div>
