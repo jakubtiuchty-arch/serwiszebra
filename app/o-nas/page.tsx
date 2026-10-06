@@ -114,23 +114,27 @@ export default function AboutPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
-      {/* Hero — abstrakcyjna grafika „autoryzowany serwis Zebra" (tarcza, odznaka,
-          klucz, kody kreskowe, zebrowe pasy w limonce; bez urządzeń, ludzi i logo),
-          na całą szerokość pasa; tekst na ciemnej lewej połowie */}
+      {/* Hero — cztery generacje terminali w stylu okładek bloga: Psion Workabout Pro 3,
+          Symbol MC3000, Motorola MC9190-G i Zebra MC9400 (zdjęcia producenta jako referencje),
+          czyli przesłanie nagłówka „odkąd nazywała się jeszcze Psion" */}
       <section className="relative overflow-hidden bg-[#010E29] text-white">
-        {/* Desktop: ilustracja pod całym pasem, przyciemniona po lewej pod tekst */}
-        <div className="absolute inset-0 hidden lg:block" aria-hidden="true">
+        {/* Od xl ilustracja stoi obok tekstu, nie pod nim: zaczyna się 32 px za kolumną
+            tekstu (lewa krawędź kolumny = max(0px, 50% − 576px) + 24px, kolumna 528 px),
+            szerokość wynika z wolnego miejsca, wysokość z proporcji (najwyżej cała wysokość
+            pasa ≈ 529 px). Krawędzie wygaszone maską, bo przy mniejszej wysokości obraz
+            nie sięga góry i dołu pasa */}
+        <div
+          className="absolute right-0 top-1/2 hidden aspect-[1.744/1] w-[min(calc(100%_-_max(0px,50%_-_576px)_-_584px),923px)] -translate-y-1/2 [mask-composite:intersect] [mask-image:linear-gradient(to_right,transparent,#000_10%),linear-gradient(to_bottom,transparent,#000_8%,#000_92%,transparent)] xl:block"
+          aria-hidden="true"
+        >
           <Image
-            src="/o-nas/hero-abstrakcja.jpg"
+            src="/o-nas/hero-psion-zebra.jpg"
             alt=""
             fill
             priority
-            sizes="100vw"
-            className="object-contain object-right"
+            sizes="(min-width: 1280px) 923px, 0px"
+            className="object-cover"
           />
-          {/* Ilustracja mieści się w wysokości pasa (nic nie jest ucięte); po lewej
-              zostaje tło pasa, a gradient zlewa je z ciemną ścianą na obrazie */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#010E29] via-[#010E29]/60 to-transparent" />
         </div>
 
         <div className="relative mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-12 lg:py-14">
@@ -143,10 +147,10 @@ export default function AboutPage() {
               <span className="text-gray-300">O nas</span>
             </nav>
 
-            <h1 className="text-3xl font-bold leading-tight sm:text-4xl">
+            <h1 className="text-3xl font-bold leading-tight sm:text-4xl xl:max-w-[33rem]">
               Naprawiamy Zebrę, odkąd nazywała się jeszcze Psion
             </h1>
-            <p className="mt-4 max-w-xl text-base leading-relaxed text-gray-300">
+            <p className="mt-4 max-w-xl text-base leading-relaxed text-gray-300 xl:max-w-[33rem]">
               Zaczynaliśmy w 1999 roku od terminali Psion. Przez zmiany Psion → Symbol → Motorola → Zebra
               nie zmieniło się jedno: ten sam zespół, ten sam warsztat i ta sama wiedza o urządzeniach,
               na których pracuje Twoja firma.
@@ -167,7 +171,7 @@ export default function AboutPage() {
             </div>
 
             {/* Liczby — jeden dyskretny rząd w hero, bez osobnej sekcji */}
-            <dl className="mt-8 grid grid-cols-2 gap-y-4 border-t border-white/15 pt-6 sm:flex sm:flex-wrap sm:gap-x-8">
+            <dl className="mt-8 grid grid-cols-2 gap-y-4 border-t border-white/15 pt-6 sm:flex sm:flex-wrap sm:gap-x-8 xl:max-w-[33rem]">
               {stats.map((stat) => (
                 <div key={stat.label}>
                   <dd className="text-xl font-bold leading-none text-white sm:text-2xl">{stat.number}</dd>
@@ -177,15 +181,15 @@ export default function AboutPage() {
             </dl>
           </div>
 
-          {/* Telefon i tablet: ta sama ilustracja pod tekstem, w całości widoczna */}
-          <div className="relative mt-8 aspect-[16/9] overflow-hidden rounded-xl lg:hidden">
+          {/* Telefon, tablet i laptop do 1279 px: ta sama ilustracja pod tekstem, w całości widoczna */}
+          <div className="relative mt-8 aspect-[1.744/1] overflow-hidden rounded-xl lg:max-w-3xl xl:hidden">
             <Image
-              src="/o-nas/hero-abstrakcja.jpg"
-              alt="Symbole autoryzowanego serwisu Zebra: tarcza z ptaszkiem, odznaka, klucz, kody kreskowe i zebrowe pasy"
+              src="/o-nas/hero-psion-zebra.jpg"
+              alt="Cztery generacje terminali mobilnych, które serwisujemy: Psion Workabout Pro 3, Symbol MC3000, Motorola MC9190-G i Zebra MC9400"
               fill
               priority
-              sizes="100vw"
-              className="object-cover object-right"
+              sizes="(min-width: 1024px) 768px, 100vw"
+              className="object-cover"
             />
           </div>
         </div>
