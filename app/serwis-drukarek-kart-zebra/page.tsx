@@ -301,7 +301,7 @@ export default function SerwisDrukarekKartPage() {
 
         {/* Autoryzacja Zebra dla drukarek kart: wąski pasek pod hero */}
         <section id="autoryzacja" className="py-3 scroll-mt-20">
-          <div className="max-w-6xl mx-auto px-3 sm:px-4 flex flex-col sm:flex-row items-center gap-2 sm:gap-5 text-center sm:text-left">
+          <div className="max-w-6xl mx-auto px-3 sm:px-4 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-5 text-center sm:text-left">
             <Image
               src="/zebra-repair-specialist-card-printer.png"
               alt={`Zebra Premier Solution Partner – ${STATUS_KART}`}
