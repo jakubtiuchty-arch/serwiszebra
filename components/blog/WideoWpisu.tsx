@@ -29,6 +29,7 @@ export default function WideoWpisu({
   className = 'mb-8',
   rozmiary = '(min-width: 896px) 896px, 100vw',
   kompakt = false,
+  schemat = true,
 }: {
   film: NonNullable<BlogPost['video']>
   priorytet?: boolean
@@ -36,6 +37,8 @@ export default function WideoWpisu({
   /** `sizes` kadru — w siatce kilku filmów na karcie kadr zajmuje ćwierć szerokości */
   rozmiary?: string
   kompakt?: boolean
+  /** false, gdy ten sam film jest na stronie drugi raz (np. osobny układ na telefon) — schemat VideoObject wystarczy raz */
+  schemat?: boolean
 }) {
   const [odtwarzany, setOdtwarzany] = useState(false)
 
@@ -136,7 +139,7 @@ export default function WideoWpisu({
           </div>,
           document.body
         )}
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+        {schemat && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />}
       </figure>
     )
   }
@@ -147,7 +150,7 @@ export default function WideoWpisu({
         {odtwarzany ? odtwarzacz : kadr}
       </div>
       <figcaption className="mt-2 text-center text-sm text-gray-500">{film.podpis}</figcaption>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      {schemat && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />}
     </figure>
   )
 }

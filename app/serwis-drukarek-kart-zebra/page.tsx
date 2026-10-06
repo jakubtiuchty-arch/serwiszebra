@@ -1,13 +1,13 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
-import { ChevronRight, Phone, Play, PlayCircle, FileText, CheckCircle2 } from 'lucide-react'
+import { ChevronRight, Phone, Play, FileText, CheckCircle2 } from 'lucide-react'
 import { blogPosts } from '@/lib/blog'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import RepairProcessSteps from '@/components/RepairProcessSteps'
 import WideoWpisu from '@/components/blog/WideoWpisu'
-import { FILM_PAKOWANIE_ZC } from '@/lib/filmy-zc'
+import { FILM_CZYSZCZENIE_ZC, FILM_KARTY_ZC, FILM_PAKOWANIE_ZC, FILM_TASMA_ZC, FILM_ZACIECIE_ZC } from '@/lib/filmy-zc'
 
 const URL = 'https://www.serwis-zebry.pl/serwis-drukarek-kart-zebra'
 
@@ -73,35 +73,35 @@ const objawy = [
     objaw: 'Wskaźnik kart miga na czerwono',
     znaczenie: 'Karta zacięła się w drukarce.',
     najpierw: 'Należy usunąć kartę według instrukcji producenta. Nie wolno używać narzędzi.',
-    film: { href: 'https://youtu.be/Q0nssePVFAY', label: 'Film: usuwanie zaciętej karty' },
+    film: FILM_ZACIECIE_ZC,
     serwis: 'Zacięcia powtarzają się mimo prawidłowych kart.',
   },
   {
     objaw: 'Wskaźnik taśmy świeci na czerwono',
     znaczenie: 'Drukarka nie rozpoznaje wkładu z taśmą.',
     najpierw: 'Należy sprawdzić, czy wkład jest oryginalny i czy jest prawidłowo założony.',
-    film: { href: 'https://youtu.be/SrsZWpj703g', label: 'Film: zakładanie taśmy barwiącej' },
+    film: FILM_TASMA_ZC,
     serwis: 'Błąd pozostaje po założeniu nowego, oryginalnego wkładu.',
   },
   {
     objaw: 'Smugi lub białe linie na karcie',
     znaczenie: 'Głowica albo rolki są zabrudzone lub zużyte.',
     najpierw: 'Należy wyczyścić drukarkę kartą czyszczącą.',
-    film: { href: 'https://youtu.be/gU8xJxHorHI', label: 'Film: czyszczenie drukarki' },
+    film: FILM_CZYSZCZENIE_ZC,
     serwis: 'Wady wydruku pozostają po czyszczeniu.',
   },
   {
     objaw: 'Drukarka nie pobiera kart z podajnika',
     znaczenie: 'Karty są sklejone, mają złą grubość albo rolka podajnika jest zużyta.',
     najpierw: 'Należy rozdzielić karty i sprawdzić ich grubość. Drukarki ZC przyjmują karty od 0,25 mm do ok. 1 mm.',
-    film: { href: 'https://youtu.be/g1ryEuggfqw', label: 'Film: wkładanie kart PVC' },
+    film: FILM_KARTY_ZC,
     serwis: 'Drukarka nadal nie pobiera prawidłowych kart.',
   },
   {
     objaw: 'Błędy kodowania paska magnetycznego',
     znaczenie: 'Karta jest źle ułożona albo koder jest uszkodzony.',
     najpierw: 'Należy sprawdzić ułożenie kart. Pasek magnetyczny ma być na dole, po prawej stronie.',
-    film: { href: 'https://youtu.be/g1ryEuggfqw', label: 'Film: wkładanie kart PVC' },
+    film: FILM_KARTY_ZC,
     serwis: 'Błąd powtarza się przy prawidłowo ułożonych kartach.',
   },
 ]
@@ -124,11 +124,12 @@ const wysylka = [
   'Zamknąć karton.',
 ]
 
+// Filmy o zacięciu, taśmie, czyszczeniu i wkładaniu kart są w tabeli objawów — tu pozostałe filmy serii
 const filmy = [
-  { id: 'Q0nssePVFAY', tytul: 'Usuwanie zaciętej karty', kadr: '/wideo/zaciecie-karty-zebra-zc100-zc300.jpg', modele: 'ZC100 i ZC300' },
-  { id: 'gU8xJxHorHI', tytul: 'Czyszczenie drukarki kartą czyszczącą', kadr: '/wideo/czyszczenie-zebra-zc100-zc300.jpg', modele: 'ZC100 i ZC300' },
-  { id: 'SrsZWpj703g', tytul: 'Zakładanie taśmy barwiącej', kadr: '/wideo/tasma-zebra-zc100-zc300.jpg', modele: 'ZC100 i ZC300' },
-  { id: 'g1ryEuggfqw', tytul: 'Wkładanie kart PVC do podajnika', kadr: '/wideo/karty-zebra-zc100-zc300.jpg', modele: 'ZC100 i ZC300' },
+  { id: '2erR1I2QAkk', tytul: 'Ręczne podawanie pojedynczych kart', kadr: '/wideo/podawanie-reczne-zebra-zc100-zc300.jpg', modele: 'ZC100 i ZC300' },
+  { id: 'RbyIzmDSPFs', tytul: 'Drukowanie karty testowej', kadr: '/wideo/karta-testowa-zebra-zc100-zc300.jpg', modele: 'ZC100 i ZC300' },
+  { id: 'OctL8hy3iQo', tytul: 'Wyjmowanie odrzuconej karty', kadr: '/wideo/karta-odrzucona-zebra-zc100-zc300.jpg', modele: 'ZC100 i ZC300' },
+  { id: 'MkprCJxSlSI', tytul: 'Wyświetlacz i menu drukarki', kadr: '/wideo/wyswietlacz-zebra-zc300.jpg', modele: 'ZC300' },
   { id: 'STPBJnAqY-k', tytul: 'Pakowanie drukarki do wysyłki', kadr: '/wideo/pakowanie-zebra-zc100-zc300.jpg', modele: 'ZC100 i ZC300' },
   { id: 'WtXUGeNWRXE', tytul: 'Wymiana rolki podajnika kart', kadr: '/wideo/rolka-podajnika-zebra-zc300.jpg', modele: 'ZC300' },
 ]
@@ -374,10 +375,7 @@ export default function SerwisDrukarekKartPage() {
                   <p className="text-gray-600 mt-1">{o.znaczenie}</p>
                   <p className="text-xs text-gray-500 mt-3">Co należy zrobić najpierw</p>
                   <p className="text-gray-700 mt-0.5">{o.najpierw}</p>
-                  <a href={o.film.href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 mt-2 text-blue-700 hover:text-blue-900 font-medium">
-                    <PlayCircle className="w-4 h-4" />
-                    {o.film.label}
-                  </a>
+                  <WideoWpisu film={o.film} kompakt priorytet={false} schemat={false} className="mt-3 w-64 max-w-full" rozmiary="256px" />
                   <p className="text-xs text-gray-500 mt-3">Kiedy zgłosić drukarkę do serwisu</p>
                   <p className="text-gray-700 mt-0.5">{o.serwis}</p>
                 </div>
@@ -393,7 +391,7 @@ export default function SerwisDrukarekKartPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {objawy.map((o) => (
+                  {objawy.map((o, i) => (
                     <tr key={o.objaw} className="border-b border-gray-200 align-top">
                       <td className="py-4 pr-4">
                         <p className="font-semibold text-gray-900">{o.objaw}</p>
@@ -401,10 +399,8 @@ export default function SerwisDrukarekKartPage() {
                       </td>
                       <td className="py-4 pr-4 text-gray-700">
                         <p>{o.najpierw}</p>
-                        <a href={o.film.href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 mt-2 text-blue-700 hover:text-blue-900 font-medium">
-                          <PlayCircle className="w-4 h-4" />
-                          {o.film.label}
-                        </a>
+                        {/* Schemat VideoObject tylko przy pierwszym wystąpieniu filmu: wkładanie kart jest przy dwóch objawach */}
+                        <WideoWpisu film={o.film} kompakt priorytet={false} schemat={objawy.findIndex((x) => x.film === o.film) === i} className="mt-3 w-56" rozmiary="224px" />
                       </td>
                       <td className="py-4 text-gray-700">{o.serwis}</td>
                     </tr>
@@ -475,7 +471,7 @@ export default function SerwisDrukarekKartPage() {
           <div className="max-w-6xl mx-auto px-3 sm:px-4">
             <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 mb-6">
               <div>
-                <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-2">Poradniki wideo do ZC100 i ZC300</h2>
+                <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-2">Więcej poradników wideo do ZC100 i ZC300</h2>
                 <p className="text-sm text-gray-600">Filmy z polskim lektorem na podstawie instrukcji Zebry.</p>
               </div>
               <a href="https://www.youtube.com/playlist?list=PLAZeMwgDPflA" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-sm font-medium text-blue-700 hover:text-blue-900">
