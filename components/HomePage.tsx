@@ -7,7 +7,6 @@ import RepairForm from '@/components/RepairForm'
 import Image from 'next/image'
 import { createClient } from '@/lib/supabase/client'
 import OpinieGoogle from '@/components/OpinieGoogle'
-import WideoJakToDziala from '@/components/WideoJakToDziala'
 import type { OpinieGoogleDane } from '@/lib/google-reviews'
 import {
   Clock,
@@ -1415,8 +1414,6 @@ export default function HomePage({ opinie }: { opinie: OpinieGoogleDane | null }
             </div>
           </div>
 
-          {/* Film z całym przebiegiem naprawy (wersja 16:9 „desktop” z kanału TAKMA) */}
-          <WideoJakToDziala />
         </div>
       </section>
 
