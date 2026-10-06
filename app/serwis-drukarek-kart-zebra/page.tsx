@@ -13,7 +13,7 @@ const URL = 'https://www.serwis-zebry.pl/serwis-drukarek-kart-zebra'
 
 const TYTUL = 'Autoryzowany serwis drukarek kart Zebra ZC100, ZC300 | TAKMA'
 const OPIS = 'Autoryzowany serwis Zebra dla drukarek kart (Printer Repair Specialist – Card Printer). Naprawa ZC100, ZC300, ZC350 i ZXP, odbiór kurierem, 12 mies. gwarancji.'
-const OG_OBRAZ = { url: '/og-serwis-drukarek-kart.jpg', width: 1200, height: 630, alt: 'Warsztat serwisu Zebra: drukarki kart ZXP Series 7, ZC100 i otwarta ZC300 z komunikatem błędu, na ścianie szyld Zebra Printer Repair Specialist – Card Printer' }
+const OG_OBRAZ = { url: '/og-serwis-drukarek-kart.jpg', width: 1200, height: 630, alt: 'Serwis drukarki kart Zebra ZC300: drukarka ze zdjętą osłoną boczną i widocznym mechanizmem, obok zdjęta srebrna osłona' }
 
 // Status serwisowy Zebra dla drukarek kart (od 2026 r.), certyfikat odnawiany co roku
 const STATUS_KART = 'Printer Repair Specialist – Card Printer'
@@ -268,7 +268,7 @@ export default function SerwisDrukarekKartPage() {
               <div className="absolute inset-y-0 left-0 w-1/5 bg-gradient-to-r from-[#0b1020] to-transparent" />
             </div>
             {/* Maska kończy się tuż za kolumną tekstu (lg: 448 px, xl: 576 px od lewej krawędzi max-w-6xl),
-                żeby szyld z logo statusu i ZXP Series 7 były odsłonięte; lewa krawędź kolumny = max(16px, 50% − 560px) */}
+                żeby drukarka i zdjęta osłona były odsłonięte; lewa krawędź kolumny = max(16px, 50% − 560px) */}
             <div className="absolute inset-0 bg-[#0b1020]/[0.86] lg:bg-transparent lg:bg-[linear-gradient(to_right,rgba(11,16,32,0.95)_0%,rgba(11,16,32,0.9)_max(474px,calc(50%_-_102px)),rgba(11,16,32,0)_max(564px,calc(50%_-_12px)))] xl:bg-[linear-gradient(to_right,rgba(11,16,32,0.95)_0%,rgba(11,16,32,0.9)_calc(50%_+_30px),rgba(11,16,32,0)_calc(50%_+_140px))]" />
           </div>
           <div className="relative max-w-6xl mx-auto px-3 sm:px-4 text-center md:text-left">
@@ -299,9 +299,8 @@ export default function SerwisDrukarekKartPage() {
           </div>
         </section>
 
-        {/* Autoryzacja Zebra dla drukarek kart: wąski pasek pod hero tylko na telefonie i tablecie —
-            od lg logo statusu widać na szyldzie w grafice hero */}
-        <section id="autoryzacja" className="py-3 scroll-mt-20 lg:hidden">
+        {/* Autoryzacja Zebra dla drukarek kart: wąski pasek pod hero */}
+        <section id="autoryzacja" className="py-3 scroll-mt-20">
           <div className="max-w-6xl mx-auto px-3 sm:px-4 flex flex-col sm:flex-row items-center gap-2 sm:gap-5 text-center sm:text-left">
             <Image
               src="/zebra-repair-specialist-card-printer.png"
