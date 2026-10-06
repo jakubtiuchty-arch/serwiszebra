@@ -3,7 +3,8 @@ import type { BlogPost } from './blog'
 /**
  * Filmy serii ZC100/ZC300 z kanału YouTube (polski lektor, 2.10.2026) w kształcie pola `video`
  * wpisu, żeby pokazać je kafelkami `WideoWpisu kompakt`. Czas i data publikacji z YouTube.
- * Film o wyświetlaczu dotyczy tylko ZC300 — ZC100 nie ma wyświetlacza, więc `krotko` mówi to wprost.
+ * Filmy o wyświetlaczu i o rolce podajnika dotyczą tylko ZC300 (ZC100 nie ma wyświetlacza, a nagrania
+ * wymiany rolki w ZC100 nie ma), więc `krotko` mówi to wprost.
  */
 type Film = NonNullable<BlogPost['video']>
 
@@ -93,6 +94,17 @@ export const FILM_WYSWIETLACZ_ZC300: Film = {
   dodano: '2026-10-02T23:06:49+02:00',
   podpis: 'Film: wyświetlacz i menu drukarki kart Zebra ZC300 (3:45).',
   krotko: 'Wyświetlacz ZC300',
+}
+
+export const FILM_ROLKA_ZC300: Film = {
+  youtubeId: 'WtXUGeNWRXE',
+  tytul: 'Wymiana rolki podajnika kart w drukarce Zebra ZC300',
+  opis: 'Wymiana rolki podajnika kart w drukarce Zebra ZC300. Przy błędzie podawania kart najpierw sprawdza się karty i czyści drukarkę. Wymiana rolki wymaga częściowego demontażu drukarki.',
+  kadr: '/wideo/rolka-podajnika-zebra-zc300.jpg',
+  czas: 'PT4M24S',
+  dodano: '2026-10-02T23:06:30+02:00',
+  podpis: 'Film: wymiana rolki podajnika kart w drukarce Zebra ZC300 (4:24).',
+  krotko: 'Wymiana rolki ZC300',
 }
 
 export const FILM_PAKOWANIE_ZC: Film = {

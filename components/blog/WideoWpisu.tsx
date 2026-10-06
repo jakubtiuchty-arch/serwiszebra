@@ -15,6 +15,9 @@ import type { BlogPost } from '@/lib/blog'
  * `kompakt` — mały kafelek w siatce kilku filmów na karcie: krótki tytuł z czasem zamiast podpisu
  * i mniejszy przycisk. W kafelku szerokości ćwierci karty odtwarzacz byłby za mały, więc film
  * otwiera się w oknie na środku ekranu (zamyka je Esc, krzyżyk albo kliknięcie w tło).
+ *
+ * `schemat={false}` — bez danych strukturalnych VideoObject, gdy ten sam film stoi na stronie drugi raz
+ * (np. przy dwóch objawach albo w wersji tabeli tylko na telefon).
  */
 
 /** Czas ISO 8601 z pola `czas` na zapis z kafelka: PT3M10S → 3:10 */
@@ -29,6 +32,7 @@ export default function WideoWpisu({
   className = 'mb-8',
   rozmiary = '(min-width: 896px) 896px, 100vw',
   kompakt = false,
+  schemat = true,
 }: {
   film: NonNullable<BlogPost['video']>
   priorytet?: boolean
@@ -36,6 +40,7 @@ export default function WideoWpisu({
   /** `sizes` kadru — w siatce kilku filmów na karcie kadr zajmuje ćwierć szerokości */
   rozmiary?: string
   kompakt?: boolean
+  schemat?: boolean
 }) {
   const [odtwarzany, setOdtwarzany] = useState(false)
 
@@ -136,7 +141,7 @@ export default function WideoWpisu({
           </div>,
           document.body
         )}
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+        {schemat && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />}
       </figure>
     )
   }
@@ -147,7 +152,7 @@ export default function WideoWpisu({
         {odtwarzany ? odtwarzacz : kadr}
       </div>
       <figcaption className="mt-2 text-center text-sm text-gray-500">{film.podpis}</figcaption>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      {schemat && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />}
     </figure>
   )
 }

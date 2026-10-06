@@ -1,13 +1,13 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
-import { ChevronRight, Phone, Play, PlayCircle, FileText, CheckCircle2 } from 'lucide-react'
+import { ChevronRight, Phone, PlayCircle, FileText, CheckCircle2 } from 'lucide-react'
 import { blogPosts } from '@/lib/blog'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import RepairProcessSteps from '@/components/RepairProcessSteps'
 import WideoWpisu from '@/components/blog/WideoWpisu'
-import { FILM_PAKOWANIE_ZC } from '@/lib/filmy-zc'
+import { FILM_PAKOWANIE_ZC, FILM_ZACIECIE_ZC, FILM_TASMA_ZC, FILM_CZYSZCZENIE_ZC, FILM_KARTY_ZC, FILM_ROLKA_ZC300 } from '@/lib/filmy-zc'
 
 const URL = 'https://www.serwis-zebry.pl/serwis-drukarek-kart-zebra'
 
@@ -73,35 +73,35 @@ const objawy = [
     objaw: 'Wskaźnik kart miga na czerwono',
     znaczenie: 'Karta zacięła się w drukarce.',
     najpierw: 'Należy usunąć kartę według instrukcji producenta. Nie wolno używać narzędzi.',
-    film: { href: 'https://youtu.be/Q0nssePVFAY', label: 'Film: usuwanie zaciętej karty' },
+    filmy: [FILM_ZACIECIE_ZC],
     serwis: 'Zacięcia powtarzają się mimo prawidłowych kart.',
   },
   {
     objaw: 'Wskaźnik taśmy świeci na czerwono',
     znaczenie: 'Drukarka nie rozpoznaje wkładu z taśmą.',
     najpierw: 'Należy sprawdzić, czy wkład jest oryginalny i czy jest prawidłowo założony.',
-    film: { href: 'https://youtu.be/SrsZWpj703g', label: 'Film: zakładanie taśmy barwiącej' },
+    filmy: [FILM_TASMA_ZC],
     serwis: 'Błąd pozostaje po założeniu nowego, oryginalnego wkładu.',
   },
   {
     objaw: 'Smugi lub białe linie na karcie',
     znaczenie: 'Głowica albo rolki są zabrudzone lub zużyte.',
     najpierw: 'Należy wyczyścić drukarkę kartą czyszczącą.',
-    film: { href: 'https://youtu.be/gU8xJxHorHI', label: 'Film: czyszczenie drukarki' },
+    filmy: [FILM_CZYSZCZENIE_ZC],
     serwis: 'Wady wydruku pozostają po czyszczeniu.',
   },
   {
     objaw: 'Drukarka nie pobiera kart z podajnika',
     znaczenie: 'Karty są sklejone, mają złą grubość albo rolka podajnika jest zużyta.',
     najpierw: 'Należy rozdzielić karty i sprawdzić ich grubość. Drukarki ZC przyjmują karty od 0,25 mm do ok. 1 mm.',
-    film: { href: 'https://youtu.be/g1ryEuggfqw', label: 'Film: wkładanie kart PVC' },
+    filmy: [FILM_KARTY_ZC, FILM_ROLKA_ZC300],
     serwis: 'Drukarka nadal nie pobiera prawidłowych kart.',
   },
   {
     objaw: 'Błędy kodowania paska magnetycznego',
     znaczenie: 'Karta jest źle ułożona albo koder jest uszkodzony.',
     najpierw: 'Należy sprawdzić ułożenie kart. Pasek magnetyczny ma być na dole, po prawej stronie.',
-    film: { href: 'https://youtu.be/g1ryEuggfqw', label: 'Film: wkładanie kart PVC' },
+    filmy: [FILM_KARTY_ZC],
     serwis: 'Błąd powtarza się przy prawidłowo ułożonych kartach.',
   },
 ]
@@ -124,14 +124,9 @@ const wysylka = [
   'Zamknąć karton.',
 ]
 
-const filmy = [
-  { id: 'Q0nssePVFAY', tytul: 'Usuwanie zaciętej karty', kadr: '/wideo/zaciecie-karty-zebra-zc100-zc300.jpg', modele: 'ZC100 i ZC300' },
-  { id: 'gU8xJxHorHI', tytul: 'Czyszczenie drukarki kartą czyszczącą', kadr: '/wideo/czyszczenie-zebra-zc100-zc300.jpg', modele: 'ZC100 i ZC300' },
-  { id: 'SrsZWpj703g', tytul: 'Zakładanie taśmy barwiącej', kadr: '/wideo/tasma-zebra-zc100-zc300.jpg', modele: 'ZC100 i ZC300' },
-  { id: 'g1ryEuggfqw', tytul: 'Wkładanie kart PVC do podajnika', kadr: '/wideo/karty-zebra-zc100-zc300.jpg', modele: 'ZC100 i ZC300' },
-  { id: 'STPBJnAqY-k', tytul: 'Pakowanie drukarki do wysyłki', kadr: '/wideo/pakowanie-zebra-zc100-zc300.jpg', modele: 'ZC100 i ZC300' },
-  { id: 'WtXUGeNWRXE', tytul: 'Wymiana rolki podajnika kart', kadr: '/wideo/rolka-podajnika-zebra-zc300.jpg', modele: 'ZC300' },
-]
+/** Ten sam film może stać przy dwóch objawach: dane strukturalne VideoObject tylko przy pierwszym */
+const pierwszyObjawFilmu = (youtubeId: string) =>
+  objawy.findIndex((o) => o.filmy.some((f) => f.youtubeId === youtubeId))
 
 const wpisySlugi = [
   'serwis-drukarki-kart-zebra-zc100-zc300-diagnostyka-naprawa',
@@ -374,10 +369,11 @@ export default function SerwisDrukarekKartPage() {
                   <p className="text-gray-600 mt-1">{o.znaczenie}</p>
                   <p className="text-xs text-gray-500 mt-3">Co należy zrobić najpierw</p>
                   <p className="text-gray-700 mt-0.5">{o.najpierw}</p>
-                  <a href={o.film.href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 mt-2 text-blue-700 hover:text-blue-900 font-medium">
-                    <PlayCircle className="w-4 h-4" />
-                    {o.film.label}
-                  </a>
+                  <div className="mt-3 grid grid-cols-2 gap-3">
+                    {o.filmy.map((f) => (
+                      <WideoWpisu key={f.youtubeId} film={f} kompakt priorytet={false} schemat={false} className="" rozmiary="50vw" />
+                    ))}
+                  </div>
                   <p className="text-xs text-gray-500 mt-3">Kiedy zgłosić drukarkę do serwisu</p>
                   <p className="text-gray-700 mt-0.5">{o.serwis}</p>
                 </div>
@@ -393,7 +389,7 @@ export default function SerwisDrukarekKartPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {objawy.map((o) => (
+                  {objawy.map((o, i) => (
                     <tr key={o.objaw} className="border-b border-gray-200 align-top">
                       <td className="py-4 pr-4">
                         <p className="font-semibold text-gray-900">{o.objaw}</p>
@@ -401,10 +397,19 @@ export default function SerwisDrukarekKartPage() {
                       </td>
                       <td className="py-4 pr-4 text-gray-700">
                         <p>{o.najpierw}</p>
-                        <a href={o.film.href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 mt-2 text-blue-700 hover:text-blue-900 font-medium">
-                          <PlayCircle className="w-4 h-4" />
-                          {o.film.label}
-                        </a>
+                        <div className="mt-3 grid grid-cols-2 gap-3">
+                          {o.filmy.map((f) => (
+                            <WideoWpisu
+                              key={f.youtubeId}
+                              film={f}
+                              kompakt
+                              priorytet={false}
+                              schemat={pierwszyObjawFilmu(f.youtubeId) === i}
+                              className=""
+                              rozmiary="(min-width: 1024px) 210px, 150px"
+                            />
+                          ))}
+                        </div>
                       </td>
                       <td className="py-4 text-gray-700">{o.serwis}</td>
                     </tr>
@@ -412,11 +417,18 @@ export default function SerwisDrukarekKartPage() {
                 </tbody>
               </table>
             </div>
-            <Link href="/blog/serwis-drukarki-kart-zebra-zc100-zc300-diagnostyka-naprawa" className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-blue-700 hover:text-blue-900">
-              <FileText className="w-4 h-4 shrink-0" />
-              Wszystkie diody LED i komunikaty błędów drukarek ZC100 i ZC300
-              <ChevronRight className="w-4 h-4 shrink-0" />
-            </Link>
+            <div className="mt-6 flex flex-col sm:flex-row sm:flex-wrap gap-x-8 gap-y-3 text-sm font-medium">
+              <Link href="/blog/serwis-drukarki-kart-zebra-zc100-zc300-diagnostyka-naprawa" className="inline-flex items-center gap-2 text-blue-700 hover:text-blue-900">
+                <FileText className="w-4 h-4 shrink-0" />
+                Wszystkie diody LED i komunikaty błędów drukarek ZC100 i ZC300
+                <ChevronRight className="w-4 h-4 shrink-0" />
+              </Link>
+              <a href="https://www.youtube.com/playlist?list=PLAZeMwgDPflA" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-blue-700 hover:text-blue-900">
+                <PlayCircle className="w-4 h-4 shrink-0" />
+                Wszystkie filmy o ZC100 i ZC300 (14)
+                <ChevronRight className="w-4 h-4 shrink-0" />
+              </a>
+            </div>
           </div>
         </section>
 
@@ -470,40 +482,8 @@ export default function SerwisDrukarekKartPage() {
           </div>
         </section>
 
-        {/* Filmy */}
-        <section className="py-10 sm:py-12 md:py-14 bg-gray-50 border-y border-gray-200">
-          <div className="max-w-6xl mx-auto px-3 sm:px-4">
-            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 mb-6">
-              <div>
-                <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-2">Poradniki wideo do ZC100 i ZC300</h2>
-                <p className="text-sm text-gray-600">Filmy z polskim lektorem na podstawie instrukcji Zebry.</p>
-              </div>
-              <a href="https://www.youtube.com/playlist?list=PLAZeMwgDPflA" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-sm font-medium text-blue-700 hover:text-blue-900">
-                Wszystkie filmy o ZC100 i ZC300 (14)
-                <ChevronRight className="w-4 h-4" />
-              </a>
-            </div>
-            <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-6">
-              {filmy.map((f) => (
-                <a key={f.id} href={`https://youtu.be/${f.id}`} target="_blank" rel="noopener noreferrer" className="group block">
-                  <div className="relative aspect-video overflow-hidden rounded-lg border border-gray-200 bg-gray-900">
-                    <Image src={f.kadr} alt={`${f.tytul} – Zebra ${f.modele}`} fill className="object-cover" sizes="(min-width: 1024px) 33vw, 50vw" />
-                    <span className="absolute inset-0 flex items-center justify-center" aria-hidden="true">
-                      <span className="flex items-center justify-center h-11 w-11 sm:h-14 sm:w-14 rounded-full bg-red-600 shadow-lg transition group-hover:scale-110">
-                        <Play className="ml-0.5 h-5 w-5 sm:h-7 sm:w-7 text-white" fill="white" />
-                      </span>
-                    </span>
-                  </div>
-                  <p className="mt-2 text-sm font-medium text-gray-900 group-hover:text-blue-700">{f.tytul}</p>
-                  <p className="text-xs text-gray-500">Zebra {f.modele}</p>
-                </a>
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* Instrukcje i poradniki */}
-        <section className="py-10 sm:py-12 md:py-14">
+        <section className="py-10 sm:py-12 md:py-14 border-t border-gray-200">
           <div className="max-w-6xl mx-auto px-3 sm:px-4 grid lg:grid-cols-2 gap-10 lg:gap-14">
             <div>
               <h2 className="text-xl sm:text-2xl font-semibold text-gray-900 mb-4">Instrukcje obsługi po polsku</h2>
