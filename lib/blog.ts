@@ -29180,8 +29180,8 @@ Jako **autoryzowany serwis Zebra** pomagamy w inwentaryzacji floty, przygotowani
       role: 'Autoryzowany serwis Zebra'
     },
     publishedAt: '2026-01-08',
-    updatedAt: '2026-08-17', // Poprawiona ścieżka konfiguracji (zebra.com/asr + Nucleus Connector), pełna lista modeli z ZE511/ZE521, kody odpowiedzi 0/100/101, tryb wycofania z eksploatacji, ostrzeżenie o portach 9100
-    readingTime: 13,
+    updatedAt: '2026-10-07', // Zgodność z zebra.com/asr (7.10.2026): Nucleus Connector dla Windows przez USB albo Ethernet, pamięć USB (Link-OS 7.6+), aplikacje Android/iOS, lista modeli bez ZD888, wycofanie z eksploatacji nie wyłącza trybu chronionego, reset-advanced-security-mode, TKIP; forma bez „ty”
+    readingTime: 15,
     deviceType: 'drukarki',
     subDeviceType: 'etykiet',
     category: 'aktualnosci',
@@ -29213,7 +29213,7 @@ Jako **autoryzowany serwis Zebra** pomagamy w inwentaryzacji floty, przygotowani
       ]
     },
     content: `
-> **⚠️ Nowa drukarka Zebra prosi o hasło i nie chce pracować?** Od **1 sierpnia 2025** drukarki wprowadzane na rynek EMEA wychodzą z fabryki w trybie chronionym. Zanim zaczniesz konfigurację, przeczytaj sekcję **„Zanim zaczniesz"** — pominięcie jednego przełącznika kończy się telefonem „skonfigurowałem i teraz nie drukuje z systemu".
+> **⚠️ Nowa drukarka Zebra prosi o hasło i nie pracuje w sieci?** Drukarki wprowadzone na rynek w regionie EMEA od **1 sierpnia 2025** wychodzą z fabryki w trybie zaawansowanych zabezpieczeń. Przed konfiguracją należy przeczytać sekcję **„Przed konfiguracją”**. Jedna pominięta opcja powoduje, że po konfiguracji drukarka nie drukuje z systemu firmowego.
 
 ---
 
@@ -29223,21 +29223,25 @@ Jako **autoryzowany serwis Zebra** pomagamy w inwentaryzacji floty, przygotowani
 
 | Aspekt | Jak jest |
 |--------|----------|
-| **Obowiązuje od** | 1 sierpnia 2025 |
-| **Region** | EMEA (Europa, Bliski Wschód, Afryka) |
+| **Obowiązuje od** | 1 sierpnia 2025 (data wprowadzenia drukarki na rynek) |
+| **Region** | EMEA (Europa, Bliski Wschód, Afryka), także kraje spoza Unii Europejskiej |
 | **Firmware** | Link-OS 7.4.2 lub nowszy |
-| **Co się zmienia** | drukarka startuje w trybie chronionym i czeka na plik konfiguracyjny |
-| **Czego nie zmienia** | egzemplarze kupione wcześniej pracują bez zmian |
+| **Co się zmienia** | tryb chroniony jest włączony, ale hasło nie jest ustawione; część usług jest wyłączona |
+| **Czego nie zmienia** | egzemplarze wprowadzone na rynek wcześniej pracują bez zmian |
 
-Kryterium jest proste: **drukarka sprzedana w regionie EMEA po 1 sierpnia 2025, z systemem Link-OS 7.4.2 lub nowszym**. Nie chodzi o to, czy egzemplarz ma moduł WiFi — chodzi o datę wprowadzenia na rynek i wersję oprogramowania.
+Kryterium jest proste: **drukarka wprowadzona na rynek w regionie EMEA 1 sierpnia 2025 lub później, z systemem Link-OS 7.4.2 lub nowszym**. Nie ma znaczenia, czy egzemplarz ma moduł Wi-Fi. Decydują data wprowadzenia na rynek i wersja oprogramowania.
 
-> **💡 Najczęstsze zaskoczenie:** domyślne hasło **1234**, znane ze starszych modeli, w tych drukarkach nie działa. To nie jest usterka i nie ma sensu szukać innego hasła — urządzenie czeka na konfigurację, a nie na logowanie.
+> **💡 Najczęstsze zaskoczenie:** domyślne hasło **1234**, znane ze starszych modeli, w tych drukarkach nie działa. To nie jest usterka. Drukarka nie ma hasła fabrycznego. Hasło trybu chronionego ustala administrator podczas konfiguracji.
+
+Drukarki z kolorowym ekranem dotykowym wymagają też czterocyfrowego kodu PIN panelu. Bez kodu PIN panel nie pozwala zmieniać ustawień.
 
 ---
 
 ## Które modele są objęte
 
-**Drukarki biurkowe:** ZD220, ZD230, ZD888, ZD411, ZD421, ZD611, ZD621
+Zmiana dotyczy egzemplarzy poniższych modeli wprowadzonych na rynek w regionie EMEA od 1 sierpnia 2025.
+
+**Drukarki biurkowe:** ZD220, ZD230, ZD411, ZD421, ZD611, ZD621
 
 **Drukarki mobilne:** ZQ310 Plus, ZQ320 Plus, ZQ511, ZQ521, ZQ610 Plus, ZQ620 Plus, ZQ630 Plus
 
@@ -29245,7 +29249,7 @@ Kryterium jest proste: **drukarka sprzedana w regionie EMEA po 1 sierpnia 2025, 
 
 **Moduły drukujące (print engine):** ZE511, ZE521
 
-> **📌 Uwaga dla integratorów:** moduły ZE511 i ZE521 też są na tej liście. Przy wymianie modułu w linii pakującej trzeba doliczyć czas na konfigurację zabezpieczeń — inaczej maszyna stoi.
+> **📌 Uwaga dla integratorów:** moduły ZE511 i ZE521 też są na tej liście. Przy wymianie modułu w linii pakującej należy zaplanować czas na konfigurację zabezpieczeń. Bez tej konfiguracji linia nie drukuje etykiet z systemu.
 
 ---
 
@@ -29253,117 +29257,182 @@ Kryterium jest proste: **drukarka sprzedana w regionie EMEA po 1 sierpnia 2025, 
 
 | Objaw | Co oznacza |
 |-------|------------|
-| Drukarka nie przyjmuje hasła **1234** | tryb chroniony, czeka na plik konfiguracyjny |
-| Karta z instrukcją i kodem QR w pudełku | egzemplarz objęty nowymi wymaganiami |
-| Brak dostępu do części menu | interfejsy zablokowane do czasu konfiguracji |
-| Nie wchodzi na WiFi mimo poprawnych ustawień | radio wyłączone w trybie chronionym |
-| Nie drukuje z systemu po porcie 9100 **po konfiguracji** | port surowy nie został włączony (patrz niżej) |
+| Drukarka nie przyjmuje hasła **1234** | hasło trybu chronionego nie jest jeszcze ustawione |
+| Ulotka z kodem QR i adresem strony konfiguracji w pudełku | egzemplarz objęty nowymi wymaganiami |
+| Panel z kolorowym ekranem nie pozwala zmieniać ustawień | nie ustawiono kodu PIN panelu |
+| Nie można skonfigurować Wi-Fi | Wi-Fi jest niedostępne do czasu ustawienia hasła trybu chronionego |
+| Brak połączenia z Wi-Fi mimo poprawnego hasła sieci | punkt dostępu używa szyfrowania TKIP albo trybu mieszanego TKIP/WPA2 |
+| Strony WWW drukarki się nie otwierają | strony WWW są fabrycznie wyłączone |
+| Brak wydruków z systemu przez port 9100 **po konfiguracji** | porty TCP/IP Raw nie zostały włączone (patrz niżej) |
 
 ---
 
-## Zanim zaczniesz — dwie decyzje, o których łatwo zapomnieć
+## Przed konfiguracją — dwie decyzje, o których łatwo zapomnieć
 
-Konfigurację przechodzi się raz, a dwa ustawienia decydują o tym, czy drukarka będzie działać w Twoim środowisku. **Ustal je, zanim wyślesz plik do drukarki.**
+Konfigurację wykonuje się raz. Dwa ustawienia decydują, czy drukarka będzie działać w systemie firmy. **Należy je ustalić przed zapisaniem ustawień w drukarce.**
 
 ### 1. Porty TCP/IP Raw: 9100, 9200, 9300
 
-Jeśli drukujesz z systemu ERP, WMS, z serwera wydruku albo przez kolejkę systemową kierowaną na surowy port — **musisz włączyć porty TCP/IP Raw w konfiguracji zabezpieczeń**. W trybie chronionym są domyślnie zamknięte.
+Wydruki z systemu ERP, WMS, z serwera wydruku albo z kolejki systemowej często trafiają na port surowy. W takim przypadku należy włączyć porty TCP/IP Raw. W kreatorze zabezpieczeń służy do tego opcja **Enable TCP/IP Raw Ports**. Z tych portów korzysta też Zebra Printer Profile Manager Enterprise (PPME). W drukarkach EU RED porty są fabrycznie wyłączone.
 
-To najczęstsza przyczyna zgłoszeń po wdrożeniu: drukarka jest skonfigurowana, świeci na zielono, drukuje stronę testową z panelu — ale system magazynowy nie może się do niej dobić.
+Z obserwacji naszego serwisu wynika, że to najczęstsza przyczyna zgłoszeń po wdrożeniu. Drukarka jest skonfigurowana i drukuje stronę testową z panelu. System magazynowy nie może jednak nawiązać z nią połączenia.
 
-### 2. Aktualizacje firmware przez EMM/MDM
+### 2. Aktualizacje firmware
 
-Osobny przełącznik. Jeśli zarządzasz flotą przez system MDM i planujesz zdalne aktualizacje oprogramowania drukarek, włącz go od razu. Do samego połączenia z EMM/MDM skonfiguruj na drukarce protokół **MQTT**.
+Pobieranie firmware jest fabrycznie zablokowane. W kreatorze zabezpieczeń odblokowuje je opcja **Allow Firmware Updates**. Opcję należy włączyć od razu, jeśli drukarki mają otrzymywać aktualizacje, także zdalne, np. z systemu MDM.
 
-> **🔧 Z naszej praktyki:** przed konfiguracją zapytaj w firmie o dwie rzeczy — czy cokolwiek drukuje po porcie 9100 i czy drukarki są w MDM. Dwie minuty rozmowy oszczędzają ponownego przechodzenia procedury na każdym urządzeniu.
+> **🔧 Z naszej praktyki:** przed konfiguracją należy ustalić w dziale IT dwie rzeczy. Czy jakiś system drukuje przez port 9100? Czy drukarki mają otrzymywać aktualizacje firmware? Te odpowiedzi pozwalają uniknąć powtarzania procedury na każdej drukarce.
 
 ---
 
 ## Konfiguracja krok po kroku
 
-### Krok 1: Wejdź na stronę konfiguracji zabezpieczeń
+### Krok 1: Otwarcie kreatora zabezpieczeń
 
-Kreator konfiguracji znajduje się pod adresem **zebra.com/asr**. To tam powstaje plik z ustawieniami — nie szukaj kreatora wewnątrz Printer Setup Utilities, tam go nie ma.
+Kreator konfiguracji zabezpieczeń (Security Setup Wizard) jest na stronie **zebra.com/asr**. Adres jest też na ulotce z kodem QR w pudełku drukarki. Kreator należy otworzyć na urządzeniu, którym będzie konfigurowana drukarka.
 
-Wybierz metodę odpowiadającą Twojemu środowisku (Windows, dublowanie USB, macOS/Linux).
+Kreator oferuje cztery metody:
 
-### Krok 2: Pobierz Nucleus Connector (metoda Windows)
+| Metoda | Połączenie z drukarką | Ograniczenia |
+|--------|-----------------------|--------------|
+| **Komputer Windows** | przewód USB albo port Ethernet | — |
+| **Pamięć USB** | port hosta USB drukarki | Link-OS 7.6 lub nowszy; nie dla ZQ310 Plus, ZQ320 Plus, ZQ610 Plus, ZQ620 Plus, ZQ630 Plus |
+| **Telefon z systemem Android** | aplikacja Nucleus Connector, parowanie z drukarką | drukarka z modułem Bluetooth Classic |
+| **Telefon z systemem iOS** | aplikacja Nucleus Connector, parowanie z drukarką | drukarka z modułem Bluetooth Classic |
 
-Dla metody windowsowej potrzebny jest **Zebra Nucleus Connector w wersji dla regionu EMEA**. Zwykły instalator z innego regionu nie obsłuży tej konfiguracji.
+Jeśli drukarka nie ma modułu Bluetooth Classic, należy wybrać metodę z komputerem Windows. Kolejne kroki opisują tę metodę.
 
-### Krok 3: Podłącz drukarkę kablem USB
+### Krok 2: Pobranie Nucleus Connector (metoda Windows)
 
-Pierwsza konfiguracja idzie **wyłącznie przez USB** — nie przez sieć. Włącz drukarkę i poczekaj, aż zostanie wykryta przez komputer.
+Metoda Windows wymaga aplikacji **Zebra Nucleus Connector dla systemu Windows**. Aplikację pobiera się ze strony **zebra.com/setup**. Należy wybrać wersję oznaczoną jako przeznaczona tylko dla regionu EMEA.
 
-### Krok 4: Ustaw hasło i przełączniki
+Ta wersja nie instaluje sterownika drukarki. Sterownik instaluje się programem Zebra Setup Utilities (ZSU), dostępnym na tej samej stronie.
 
-W kreatorze ustawiasz hasło administratora oraz opcje z sekcji „Zanim zaczniesz": porty TCP/IP Raw i zgodę na aktualizacje firmware.
+### Krok 3: Podłączenie drukarki
 
-**Hasło ustalasz sam** — kreator pilnuje wymagań co do długości i złożoności. Zapisz je w firmowym menedżerze haseł. Zebra go nie przechowuje i wsparcie producenta nie jest w stanie go odzyskać.
+1. Założyć rolkę etykiet.
+2. Włączyć drukarkę.
+3. Połączyć drukarkę z komputerem przewodem USB albo przez port Ethernet.
+4. Uruchomić aplikację Nucleus Connector.
 
-Jedno hasło może obsługiwać wiele drukarek w firmie — to wygodne przy wdrożeniach i nie łamie wymagań.
+Aplikacja wykrywa drukarkę i pokazuje jej stan.
 
-### Krok 5: Wyślij plik do drukarki
+### Krok 4: Hasło i tryb chroniony
 
-Plik konfiguracyjny można dostarczyć na kilka sposobów — wybierz ten, który pasuje do Twojego stanowiska:
+1. Kliknąć kafelek **Security Settings Wizard**.
+2. Kliknąć przycisk **Begin Security Settings Wizard**.
+3. Wpisać hasło trybu chronionego w oba pola.
+4. Wybrać **Protected Mode On** albo **Protected Mode Off**.
+5. Kliknąć **Next**.
 
-| Metoda | Kiedy jej użyć |
-|--------|----------------|
-| **Nucleus Connector** | pojedyncza drukarka na stanowisku z Windows |
-| **Sterownik ZDesigner** | drukarka już zainstalowana w systemie |
-| **ZDownloader** | kilka drukarek, jedna po drugiej |
-| **Toolbox / Zebra Setup Utilities** | gdy chcesz od razu widzieć odpowiedź drukarki |
-| **Wysyłka polecenia z terminala** | stanowiska macOS i Linux |
+Hasło ma od 14 do 128 znaków. Można użyć liter, cyfr i znaków specjalnych. Hasło należy zapisać w firmowym menedżerze haseł. Zebra nie przechowuje tego hasła.
 
-### Krok 6: Sprawdź odpowiedź drukarki
+Opcja **Protected Mode Off** pozwala zmieniać ustawienia Wi-Fi, sieci i aktualizacji firmware bez hasła. Opcja **Protected Mode On** wymaga hasła przy każdej zmianie tych ustawień. Zebra zaleca włączenie trybu chronionego po zakończeniu konfiguracji drukarki.
 
-To jest krok, który najczęściej się pomija — a bez niego nie wiesz, czy konfiguracja weszła.
+Jedno hasło może obsługiwać wiele drukarek w firmie. Osobne hasła dla każdej drukarki są możliwe, ale wymagają dodatkowej ewidencji.
+
+### Krok 5: Dodatkowe ustawienia zabezpieczeń
+
+Ekran **Additional Security Settings** zawiera kod PIN panelu i przełączniki usług. Fabrycznie wszystkie przełączniki są wyłączone.
+
+| Opcja | Działanie |
+|-------|-----------|
+| **Set Front Panel PIN Code** | ustawia czterocyfrowy kod PIN panelu; bez kodu panel nie pozwala zmieniać ustawień |
+| **Allow Firmware Updates** | pozwala aktualizować firmware |
+| **Enable TCP/IP Raw Ports** | włącza nieszyfrowane porty 9100, 9200 i 9300 |
+| **Enable LPD** | włącza protokół LPD (port 515) |
+| **Enable Access to Printer Web Pages** | włącza strony WWW drukarki przez HTTPS (port 443) |
+
+Usługi, które nie są potrzebne, powinny pozostać wyłączone. Po wyborze opcji należy kliknąć **Next**.
+
+### Krok 6: Zapis ustawień w drukarce
+
+> **⚠️ Uwaga:** plik ustawień zawiera hasło trybu chronionego. Nie wolno go udostępniać osobom nieupoważnionym.
+
+1. Sprawdzić podsumowanie na ekranie **Review Security Settings**.
+2. Jeśli te same ustawienia otrzymają kolejne drukarki, zaznaczyć **Save settings to file**.
+3. Kliknąć **Apply Settings**.
+
+Aplikacja wysyła ustawienia do drukarki.
 
 ---
 
 ## Jak sprawdzić, czy się udało
 
-Po wysłaniu pliku drukarka odsyła status. W Toolboksie lub Zebra Setup Utilities zobaczysz odpowiedź w postaci JSON:
+Polecenia JSON można też wysyłać ręcznie, np. w oknie komunikacji z drukarką w Zebra Setup Utilities. Po każdym poleceniu drukarka odsyła status w postaci JSON:
 
 | Status | Znaczenie | Co zrobić |
 |--------|-----------|-----------|
 | **status: 0** | polecenie wykonane poprawnie | gotowe, drukarka pracuje normalnie |
-| **status: 100** | brak lub nieprawidłowa nazwa użytkownika albo hasło | przejdź do sekcji poniżej |
-| **status: 101** | nieprawidłowa nazwa użytkownika lub hasło | przejdź do sekcji poniżej |
+| **status: 100** | brak lub nieprawidłowa nazwa użytkownika albo hasło | przejść do sekcji poniżej |
+| **status: 101** | nieprawidłowa nazwa użytkownika lub hasło | przejść do sekcji poniżej |
 
 Pełna odpowiedź wygląda tak: **{"protect":{"status":0,"operation":"setup"}}** — liczy się wartość przy status.
 
-> **💡 Wskazówka:** jeśli konfigurujesz metodą, która nie pokazuje odpowiedzi, wyślij plik jeszcze raz przez Toolbox. Dwie minuty pewności są warte więcej niż telefon od klienta za tydzień.
+> **💡 Wskazówka:** zmiany nie zawsze działają od razu. Jeśli strony WWW drukarki się nie otwierają, należy odczekać około 5 minut. Następnie należy wykonać pełny restart: wyłączyć drukarkę i ponownie ją włączyć.
 
 ---
 
 ## Status 100 albo 101 — co dalej
 
-Nie, nie trzeba robić resetu fabrycznego i nie trzeba wysyłać drukarki do serwisu.
+Status 100 lub 101 oznacza, że hasło w poleceniu nie zgadza się z hasłem w drukarce. Reset do ustawień fabrycznych nie wyłącza zabezpieczeń EU RED.
 
-Urządzenie ma **tryb wycofania z eksploatacji** (decommission), który zdejmuje tryb chroniony i pozwala przejść konfigurację od nowa:
+**Hasło jest znane.** Należy sprawdzić wielkość liter i znaki specjalne. Od Link-OS 7.6.1 jest też polecenie JSON **reset-advanced-security-mode**. Polecenie przywraca hasło trybu chronionego do stanu domyślnego. Pozostałe ustawienia drukarki zostają zachowane. Polecenie wymaga podania obecnego hasła:
 
-**Polecenie:** ~PMa — gdzie **a** zastępujesz numerem seryjnym swojej drukarki.
+    {}{
+      "protect":{
+        "authentication":{
+          "username":"admin",
+          "password":"ObecneHasloTrybuChronionego",
+          "type":"basic"
+        },
+        "operation":"reset-advanced-security-mode",
+        "reset-advanced-security-mode":{}
+      }
+    }
 
-Ten sam efekt osiągniesz w Toolboksie: w profilu drukarki kliknij dwukrotnie **Tryb chroniony**, a następnie wybierz **Tryb wycofywania z eksploatacji**.
+**Hasło jest nieznane.** Zebra przewiduje wycofanie drukarki z eksploatacji (decommission).
 
-Po wycofaniu wróć do kroku 1 i przejdź konfigurację jeszcze raz — tym razem z pewnym hasłem.
+> **⚠️ Uwaga:** wycofanie z eksploatacji usuwa wszystkie dane użytkownika i wszystkie ustawienia drukarki.
+
+1. Połączyć drukarkę z komputerem przewodem USB.
+2. Wysłać polecenie **~PMa**, gdzie **a** to numer seryjny drukarki.
+3. Poczekać na ponowne uruchomienie drukarki.
+4. Ustawić nowe hasło trybu chronionego (kroki 1–6).
+
+Drukarka przyjmuje polecenie ~PM wyłącznie przez port USB. Ignoruje je na innych portach i przy niezgodnym numerze seryjnym.
+
+Wycofanie z eksploatacji nie wyłącza zabezpieczeń EU RED. Po ponownym uruchomieniu drukarka:
+
+- nadal ma włączony tryb chroniony,
+- nadal ma wyłączone niezabezpieczone usługi, np. FTP, HTTP i SNMP,
+- nadal blokuje pobieranie firmware,
+- wymaga ustawienia nowego hasła trybu chronionego.
+
+Po ustawieniu hasła należy ponownie włączyć potrzebne usługi i skonfigurować sieć.
 
 ---
 
 ## Kilka albo kilkadziesiąt drukarek
 
-### Dublowanie USB (Link-OS 7.6 i nowsze)
+### Pamięć USB (Link-OS 7.6 i nowsze)
 
-Najszybsza droga przy wdrożeniu: zaufane kopiowanie lustrzane z nośnika USB. Przygotowujesz jeden nośnik i obsługujesz nim kolejne drukarki, bez podłączania każdej do komputera. Wymaga Link-OS w wersji 7.6 lub nowszej.
+Przy wdrożeniu wielu drukarek Zebra zaleca metodę z pamięcią USB (zaufane kopiowanie lustrzane, USB Mirror). Kreator na stronie zebra.com/asr przygotowuje pliki do zapisania w pamięci USB:
 
-### Ten sam plik do wielu drukarek
+- **Zebra/security/credentials.json** — hasło trybu chronionego,
+- **Zebra/commands** — polecenia konfiguracyjne.
 
-Plik konfiguracyjny wygenerowany raz można wysłać do kolejnych urządzeń przez ZDownloader albo Toolbox. Przy jednym wspólnym haśle dla floty to kwestia około dwóch minut na drukarkę.
+Pamięć USB wkłada się do portu hosta USB drukarki. Drukarka najpierw ustawia hasło z pliku credentials.json. Następnie wykonuje polecenia z folderu commands. Kopiowanie startuje automatycznie, także gdy ustawienie usb.mirror.enable jest wyłączone. Ta sama pamięć USB obsługuje kolejne drukarki.
+
+Metoda wymaga Link-OS 7.6 lub nowszego. Nie obsługuje drukarek ZQ310 Plus, ZQ320 Plus, ZQ610 Plus, ZQ620 Plus i ZQ630 Plus.
+
+### Ten sam plik ustawień do wielu drukarek
+
+Opcja **Save settings to file** w aplikacji Nucleus Connector zapisuje ustawienia w pliku. Plik służy do konfiguracji kolejnych drukarek z tymi samymi ustawieniami. Przy jednym wspólnym haśle dla floty konfiguracja kolejnej drukarki trwa około dwóch minut.
 
 ### Zarządzanie flotą
 
-Przy większych instalacjach warto oprzeć się o system zarządzania i MQTT — wtedy konfiguracja zabezpieczeń staje się częścią standardowego wdrożenia urządzenia, a nie osobną czynnością. Zebra ma do tego własną platformę chmurową obsługującą drukarki, skanery i terminale w jednej konsoli: [Zebra Nucleus – jedna konsola do całej floty urządzeń](/blog/zebra-nucleus-zarzadzanie-flota-urzadzen).
+Przy większych instalacjach warto oprzeć się na systemie zarządzania i MQTT — wtedy konfiguracja zabezpieczeń staje się częścią standardowego wdrożenia urządzenia, a nie osobną czynnością. Zebra ma do tego własną platformę chmurową obsługującą drukarki, skanery i terminale w jednej konsoli: [Zebra Nucleus – jedna konsola do całej floty urządzeń](/blog/zebra-nucleus-zarzadzanie-flota-urzadzen).
 
 Więcej o zabezpieczaniu drukarek w firmie: [PrintSecure – przewodnik administratora IT](/blog/zebra-printsecure-przewodnik-administratora-it)
 
@@ -29373,95 +29442,103 @@ Więcej o zabezpieczaniu drukarek w firmie: [PrintSecure – przewodnik administ
 
 ### Dlaczego nowa drukarka Zebra prosi o hasło?
 
-Bo została wprowadzona na rynek EMEA po 1 sierpnia 2025 i pracuje w trybie chronionym wymaganym przez dyrektywę EU RED. To nie jest usterka ani blokada handlowa — urządzenie czeka na plik konfiguracyjny.
+Drukarka została wprowadzona na rynek w regionie EMEA 1 sierpnia 2025 lub później. Pracuje w trybie zaawansowanych zabezpieczeń wymaganym przez dyrektywę EU RED. To nie jest usterka ani blokada handlowa. Drukarka czeka na ustawienie hasła trybu chronionego.
 
 ### Czy hasło 1234 gdzieś zadziała?
 
-Nie. W drukarkach objętych nowymi wymaganiami domyślne hasło nie istnieje. Hasło powstaje dopiero w trakcie konfiguracji i ustalasz je sam.
+Nie. Drukarki objęte nowymi wymaganiami nie mają hasła domyślnego. Hasło ustala administrator podczas konfiguracji. Drukarki z kolorowym ekranem dotykowym wymagają też czterocyfrowego kodu PIN panelu.
 
-### Czy mogę pominąć konfigurację?
+### Czy można pominąć konfigurację?
 
-Nie. Bez niej drukarka nie udostępni pełnej funkcjonalności sieciowej.
+Nie. Bez hasła trybu chronionego nie można skonfigurować Wi-Fi. Porty TCP/IP Raw, strony WWW i aktualizacje firmware pozostają wyłączone.
 
-### Co, jeśli zapomnę hasła?
+### Co zrobić po utracie hasła?
 
-Użyj trybu wycofania z eksploatacji (polecenie ~PMa z numerem seryjnym) i przejdź konfigurację od nowa. Reset fabryczny nie jest do tego potrzebny.
+Reset do ustawień fabrycznych nie wyłącza zabezpieczeń. Zebra przewiduje wycofanie z eksploatacji poleceniem ~PM z numerem seryjnym drukarki, wysłanym przez port USB. Polecenie usuwa wszystkie dane i ustawienia drukarki. Tryb chroniony pozostaje włączony. Po ponownym uruchomieniu należy ustawić nowe hasło i ponownie skonfigurować drukarkę. Polecenie reset-advanced-security-mode (Link-OS 7.6.1) wymaga obecnego hasła, więc po utracie hasła nie można go użyć.
 
-### Czy mogę ustawić jedno hasło dla wszystkich drukarek w firmie?
+### Czy można ustawić jedno hasło dla wszystkich drukarek w firmie?
 
-Tak. Przy flocie to wręcz zalecane — upraszcza późniejszą obsługę i nie stoi w sprzeczności z wymaganiami.
+Tak. Zebra dopuszcza jeden plik ustawień dla wszystkich drukarek. Upraszcza to późniejszą obsługę floty. Osobne hasła dla każdej drukarki wymagają dodatkowej ewidencji.
 
-### Czy konfigurację da się zrobić przez WiFi albo Ethernet?
+### Czy konfigurację można wykonać przez Ethernet albo Wi-Fi?
 
-Nie, pierwsza konfiguracja wymaga połączenia USB. Po jej zakończeniu drukarką zarządzasz normalnie przez sieć.
+Przez Ethernet tak. Metoda z komputerem Windows działa przez przewód USB albo przez port Ethernet. Przez Wi-Fi nie, ponieważ Wi-Fi jest niedostępne do czasu ustawienia hasła. Pozostałe metody to pamięć USB oraz aplikacja Nucleus Connector na telefon.
 
-### Skonfigurowałem drukarkę i przestała drukować z systemu. Dlaczego?
+### Po konfiguracji drukarka przestała drukować z systemu. Dlaczego?
 
-Najprawdopodobniej Twój system wysyła wydruki na surowy port TCP/IP (9100, 9200 lub 9300), a ten nie został włączony podczas konfiguracji. Trzeba przejść konfigurację ponownie z włączonym przełącznikiem portów.
+System najprawdopodobniej wysyła wydruki na port TCP/IP Raw (9100, 9200 lub 9300). Te porty są fabrycznie wyłączone. Należy je włączyć w kreatorze zabezpieczeń opcją Enable TCP/IP Raw Ports.
 
-### Czy stare drukarki też wymagają konfiguracji?
+### Czy starsze drukarki też wymagają konfiguracji?
 
 Nie. Egzemplarze wprowadzone na rynek przed 1 sierpnia 2025 pracują bez zmian.
 
-### Mam macOS albo Linux — jestem odcięty?
+### Czy drukarkę można skonfigurować z komputera macOS albo Linux?
 
-Nie. Plik konfiguracyjny wysyła się poleceniem z terminala; metoda windowsowa z Nucleus Connectorem jest tylko jedną z dostępnych dróg.
+Kreator Zebry nie ma metody dla systemów macOS i Linux. Można użyć pamięci USB albo aplikacji Nucleus Connector na telefon z systemem Android lub iOS. Zaawansowani użytkownicy mogą wysyłać polecenia JSON samodzielnie, np. przez port USB.
 
 ### Ile to trwa?
 
-Pierwsza drukarka: 10–15 minut razem z pobraniem narzędzi. Każda kolejna z gotowym plikiem: około dwóch minut.
+Pierwsza drukarka: 10–15 minut razem z pobraniem aplikacji. Każda kolejna z gotowym plikiem ustawień: około dwóch minut.
 
 ---
 
 ## Rozwiązywanie problemów
 
-### Drukarka nie odpowiada na wysłany plik
+### Aplikacja nie wykrywa drukarki
 
-1. Sprawdź, czy połączenie idzie **kablem USB**, nie przez sieć
-2. Upewnij się, że narzędzie widzi drukarkę na liście urządzeń
-3. Spróbuj innego portu USB, najlepiej bezpośrednio w komputerze, bez koncentratora
-4. Wyłącz drukarkę na 30 sekund i podłącz ponownie
+1. Sprawdzić, czy drukarka jest włączona.
+2. Sprawdzić, czy w drukarce jest założona rolka etykiet.
+3. Sprawdzić połączenie: przewód USB albo port Ethernet.
+4. Podłączyć przewód USB do innego portu komputera, bez koncentratora.
+5. Wyłączyć drukarkę na 30 sekund.
+6. Włączyć drukarkę.
 
 ### Odpowiedź status 100 lub 101
 
-Nazwa użytkownika albo hasło nie zgadzają się z tym, co jest w drukarce. Wycofaj urządzenie z eksploatacji poleceniem **~PMa** i przejdź konfigurację od nowa.
+Hasło w poleceniu nie zgadza się z hasłem w drukarce. Wycofanie z eksploatacji usuwa wszystkie ustawienia drukarki. Jeśli hasło jest nieznane, należy wycofać drukarkę z eksploatacji poleceniem **~PMa** przez port USB. Potem należy ustawić nowe hasło trybu chronionego.
 
 ### Po konfiguracji nie drukuje z systemu magazynowego
 
-Porty TCP/IP Raw nie zostały włączone. Powtórz konfigurację z włączonym przełącznikiem portów surowych.
+Porty TCP/IP Raw nie zostały włączone. Należy włączyć opcję **Enable TCP/IP Raw Ports** w kreatorze zabezpieczeń.
 
-### Nie mogę zaktualizować oprogramowania drukarki
+### Nie można zaktualizować oprogramowania drukarki
 
-Sprawdź, czy podczas konfiguracji włączono zgodę na aktualizacje firmware. Bez niej tryb chroniony blokuje wgranie nowej wersji.
+Należy sprawdzić, czy podczas konfiguracji włączono opcję **Allow Firmware Updates**. Bez niej drukarka blokuje wgranie nowej wersji firmware.
 
-### Radio dalej wyłączone po konfiguracji
+### Strony WWW drukarki się nie otwierają
 
-Wykonaj pełny restart drukarki (zasilanie odłączone na 30 sekund) i skonfiguruj sieć bezprzewodową normalną drogą.
+Strony WWW są fabrycznie wyłączone. Włącza je opcja **Enable Access to Printer Web Pages**. Strony działają przez HTTPS (port 443). Jeśli po konfiguracji strony nadal się nie otwierają, należy odczekać około 5 minut. Następnie należy wyłączyć drukarkę i ponownie ją włączyć.
+
+### Drukarka nie łączy się z Wi-Fi
+
+Wi-Fi można skonfigurować dopiero po ustawieniu hasła trybu chronionego. Drukarka nie łączy się z siecią z szyfrowaniem TKIP. Nie łączy się też z siecią w trybie mieszanym TKIP/WPA2. Punkt dostępu musi używać szyfrowania WPA2 albo WPA3.
 
 ---
 
 ## Podsumowanie
 
-- **Kogo dotyczy:** drukarki sprzedane w EMEA po 1 sierpnia 2025 z Link-OS 7.4.2 lub nowszym
-- **Objaw:** hasło 1234 nie działa, drukarka czeka na konfigurację
-- **Kreator:** zebra.com/asr, dla Windows dodatkowo Nucleus Connector w wersji EMEA
-- **Połączenie:** pierwsza konfiguracja wyłącznie przez USB
-- **Ustaw od razu:** porty TCP/IP Raw i zgodę na aktualizacje firmware
-- **Sprawdź wynik:** status 0 znaczy gotowe, 100 i 101 to złe hasło
-- **Złe hasło:** tryb wycofania z eksploatacji (~PMa), nie reset fabryczny
-- **Flota:** dublowanie USB od Link-OS 7.6 albo jeden plik wysyłany po kolei
+- **Kogo dotyczy:** drukarki wprowadzone na rynek w regionie EMEA od 1 sierpnia 2025, z Link-OS 7.4.2 lub nowszym
+- **Objaw:** hasło 1234 nie działa, drukarka czeka na ustawienie hasła trybu chronionego
+- **Kreator:** zebra.com/asr; dla Windows aplikacja Nucleus Connector dla Windows (tylko EMEA) ze strony zebra.com/setup
+- **Połączenie:** przewód USB albo port Ethernet (Windows), pamięć USB (Link-OS 7.6 lub nowszy), telefon z systemem Android lub iOS
+- **Hasło:** od 14 do 128 znaków; kod PIN panelu: 4 cyfry
+- **Do włączenia od razu:** porty TCP/IP Raw i aktualizacje firmware
+- **Wynik polecenia JSON:** status 0 oznacza sukces, 100 i 101 to niezgodne hasło
+- **Utrata hasła:** wycofanie z eksploatacji (~PMa przez port USB); tryb chroniony pozostaje włączony, należy ustawić nowe hasło
+- **Flota:** pamięć USB od Link-OS 7.6 albo plik ustawień z Nucleus Connector
+- **Wi-Fi:** tylko WPA2 albo WPA3, bez TKIP
 
 ---
 
 ## Obejrzyj poradnik wideo
 
-> 🎬 **[Dyrektywa RED – co oznacza dla drukarek Zebra? →](/poradniki-wideo)** — obejrzyj na naszym kanale poradników wideo
+> 🎬 **[Film: tryb chroniony (Protected Mode) i EU RED w drukarkach Zebra →](https://youtu.be/j23hH5QW_c8)** — konfiguracja w aplikacji Nucleus Connector krok po kroku
 
 ---
 
 ## Potrzebujesz pomocy?
 
-Konfigurujemy drukarki objęte trybem chronionym na co dzień — także zdalnie, razem z ustawieniem portów pod system klienta.
+Konfigurujemy drukarki objęte trybem chronionym na co dzień — także zdalnie, razem z ustawieniem portów pod system klienta. Pomagamy też po utracie hasła trybu chronionego.
 
 > 📞 **Zadzwoń:** +48 601 619 898 — pomożemy skonfigurować drukarkę zdalnie
 
@@ -29469,7 +29546,7 @@ Konfigurujemy drukarki objęte trybem chronionym na co dzień — także zdalnie
 
 > 💬 **Szybka pomoc:** [Czat z AI →](/#czat) — diagnostyka 24/7
 
-Jako **autoryzowany serwis Zebra** prowadzimy też wdrożenia flotowe: przygotowanie pliku konfiguracyjnego pod środowisko klienta, konfigurację partii drukarek i przekazanie procedury działowi IT.
+Jako **autoryzowany serwis Zebra** prowadzimy też wdrożenia flotowe: przygotowanie pliku ustawień pod środowisko klienta, konfigurację partii drukarek i przekazanie procedury działowi IT.
 `
   }
 ,
@@ -29483,7 +29560,8 @@ Jako **autoryzowany serwis Zebra** prowadzimy też wdrożenia flotowe: przygotow
       role: 'Autoryzowany serwis Zebra'
     },
     publishedAt: '2026-01-08',
-    readingTime: 15,
+    updatedAt: '2026-10-07', // Zgodność z Zebra (zebra.com/asr, PrintSecure Administration Guide): pełna lista usług wyłączonych w ASM, modele i data EU RED, Nucleus Connector, pamięć USB, PIN panelu, TKIP, szyfry TLS, utrata hasła, port 9100; bez Telnetu; forma bez „ty”
+    readingTime: 18,
     deviceType: 'drukarki',
     subDeviceType: 'etykiet',
     category: 'poradniki',
@@ -29515,7 +29593,7 @@ Jako **autoryzowany serwis Zebra** prowadzimy też wdrożenia flotowe: przygotow
       ]
     },
     content: `
-> **🔒 Zabezpieczasz infrastrukturę druku w firmie?** Drukarki etykiet często pomijane w strategiach cyberbezpieczeństwa, stanowią potencjalny wektor ataku. Ten przewodnik pomoże Ci wdrożyć pełne zabezpieczenia PrintSecure na drukarkach Zebra Link-OS.
+> **🔒 Zabezpieczenia infrastruktury druku w firmie.** Drukarki etykiet bywają pomijane w strategiach cyberbezpieczeństwa, a stanowią potencjalny wektor ataku. Przewodnik opisuje wdrożenie zabezpieczeń PrintSecure w drukarkach Zebra z systemem Link-OS.
 
 ---
 
@@ -29523,11 +29601,11 @@ Jako **autoryzowany serwis Zebra** prowadzimy też wdrożenia flotowe: przygotow
 
 **PrintSecure** to kompleksowe rozwiązanie zabezpieczające drukarki Zebra z platformą **Link-OS**. Umożliwia administratorom IT pełną kontrolę nad:
 
-- **Usługami sieciowymi** – FTP, HTTP, HTTPS, Telnet, SNMP
+- **Usługami sieciowymi** – FTP, HTTP, HTTPS, LPD, SNMP, TCP, UDP
 - **Szyfrowaniem komunikacji** – TLS, certyfikaty SSL
 - **Uwierzytelnianiem użytkowników** – hasła, PIN-y, dostęp WWW
 - **Ochroną firmware'u** – blokada nieautoryzowanych aktualizacji
-- **Komunikacją bezprzewodową** – WiFi, Bluetooth
+- **Komunikacją bezprzewodową** – Wi-Fi, Bluetooth
 
 ---
 
@@ -29545,11 +29623,13 @@ Administrowanie drukarkami Zebra opiera się na modelu **CIA (Confidentiality, I
 
 ## Tryb chroniony (Protected Mode) – klucz do bezpieczeństwa
 
-**Protected Mode** to fundamentalna funkcja blokująca nieautoryzowane zmiany krytycznych ustawień.
+**Protected Mode** to fundamentalna funkcja blokująca nieautoryzowane zmiany krytycznych ustawień. Gdy tryb jest włączony, zmiana ustawień chronionych wymaga hasła. Chronione są głównie ustawienia sieci i zabezpieczeń. Ustawienia druku, np. zaczernienie, nie są chronione.
 
-### Włączanie trybu chronionego
+### Ustawienie hasła trybu chronionego (operacja setup)
 
-Aby włączyć Protected Mode, wyślij do drukarki komendę JSON:
+Hasło ustawia się poleceniem JSON z operacją **setup**. W drukarce bez hasła pole password w sekcji authentication jest puste. W drukarce bez trybu chronionego ta operacja ustawia hasło i włącza tryb chroniony.
+
+W drukarkach EU RED tryb chroniony jest włączony fabrycznie, ale hasło nie jest ustawione. Operacja setup ustawia w nich pierwsze hasło. Zwykle wykonuje ją kreator zabezpieczeń Zebry (opis w sekcji o trybie ASM).
 
     {}{
       "protect":{   
@@ -29561,12 +29641,14 @@ Aby włączyć Protected Mode, wyślij do drukarki komendę JSON:
         "operation":"setup",
         "setup":{
           "username":"admin",
-          "password":"TwojeHaslo14Znakow!"
+          "password":"NoweHasloAdmina2026!"
         }
       }
     }
 
 > **⚠️ WAŻNE:** Hasło musi mieć **od 14 do 128 znaków** i zawierać tylko drukowalne znaki ASCII.
+
+Odpowiedź **{"protect":{"status":0,"operation":"setup"}}** oznacza, że hasło zostało ustawione.
 
 ### Sprawdzenie stanu Protected Mode
 
@@ -29576,78 +29658,161 @@ Drukarka odpowie wartością "on" lub "off".
 
 ### Lista chronionych ustawień
 
-- **Usługi sieciowe:** FTP, HTTP, HTTPS, LPD, SNMP, Telnet, TCP, UDP
+- **Usługi sieciowe:** FTP, HTTP, HTTPS, LPD, SNMP, TCP, UDP
 - **Komunikacja bezprzewodowa:** Wi-Fi, Bluetooth, wykrywalność BT
 - **Bezpieczeństwo:** hasła, certyfikaty, poziomy
 - **Firmware:** kontrola aktualizacji
 - **Interfejs:** hasło do panelu, blokady menu
 
+Gdy tryb chroniony jest włączony, ustawienia chronione zmienia się operacją **set** w poleceniu protect, z hasłem.
+
 ---
 
 ## Advanced Security Mode (ASM) i EU RED
 
-Od wersji **Link-OS 7.4.2** drukarki w regionie EMEA są fabrycznie konfigurowane w trybie **Advanced Security Mode** – zgodnie z wymogami **dyrektywy EU RED**.
+Tryb **Advanced Security Mode (ASM)** wprowadzono w **Link-OS 7.4.2**. Przełącza on drukarkę w stan „bezpieczna domyślnie” (secure by default). W tym trybie polecenie ! U1 getvar "device.advanced_security_mode" zwraca wartość "advanced".
+
+### Których drukarek dotyczy
+
+Drukarki wprowadzone na rynek w regionie EMEA (Europa, Bliski Wschód, Afryka) od **1 sierpnia 2025** mają tryb ASM włączony fabrycznie. Wymaga tego **dyrektywa EU RED** (2014/53/EU). Zebra stosuje te same zmiany w krajach EMEA spoza Unii Europejskiej. Tryb dotyczy następujących modeli:
+
+- **Drukarki biurkowe:** ZD220, ZD230, ZD411, ZD421, ZD611, ZD621
+- **Drukarki przemysłowe:** ZT111, ZT211, ZT231, ZT411, ZT421, ZT510, ZT610, ZT620
+- **Moduły drukujące:** ZE511, ZE521
+- **Drukarki mobilne:** ZQ310 Plus, ZQ320 Plus, ZQ610 Plus, ZQ620 Plus, ZQ630 Plus, ZQ511, ZQ521
+
+Drukarki wprowadzone na rynek wcześniej nie mają tych ustawień fabrycznie. Tryb chroniony i wyłączenie usług konfiguruje w nich administrator, według tego przewodnika.
+
+### Stan drukarki po wyjęciu z pudełka
+
+- Tryb chroniony jest włączony, ale hasło nie jest ustawione.
+- Do czasu ustawienia hasła nie można zmieniać ustawień chronionych, np. Wi-Fi.
+- Drukarki z kolorowym ekranem dotykowym wymagają kodu PIN panelu (4 cyfry).
+- Pobieranie części plików jest zablokowane, np. certyfikatów i plików emulacji języka drukarki.
+- Reset do ustawień fabrycznych nie wyłącza tych zabezpieczeń.
+- Wycofanie z eksploatacji (decommission) też ich nie wyłącza.
 
 ### Domyślnie wyłączone w ASM
 
-- firmware downloads (no)
-- FTP, HTTP, HTTPS, SNMP, Telnet (off)
-- Wi-Fi (off)
+| Usługa | Polecenie SGD | Wartość domyślna |
+|--------|---------------|------------------|
+| Pobieranie firmware | device.allow_firmware_downloads | no |
+| Automatyczna konfiguracja przez DHCP | ip.dhcp.auto_provision | off |
+| FTP | ip.ftp.enable | off |
+| HTTP | ip.http.enable | off |
+| HTTPS (strony WWW drukarki) | ip.https.enable | off |
+| IPP | ip.ipp.mode | ipps (tylko IPPS) |
+| LPD | ip.lpd.enable | off |
+| POP3 | ip.pop3.enable | off |
+| SMTP | ip.smtp.enable | off |
+| SNMP | ip.snmp.enable | off |
+| TCP Raw (porty 9100, 9200, 9300) | ip.tcp.enable | off |
+| UDP | ip.udp.enable | off |
+| Kopiowanie lustrzane USB (USB Mirror) | usb.mirror.enable | off |
+| ZBI | zbi.enable | off |
+| Wi-Fi (WLAN) | wlan.enable | off |
+
+Wi-Fi można skonfigurować dopiero po ustawieniu hasła trybu chronionego. Hasło stron WWW (ip.http.admin_password) i kod PIN panelu (display.password.current) są puste. Minimalny poziom zabezpieczeń Bluetooth wynosi 2 w drukarkach bez wyświetlacza. W pozostałych drukarkach wynosi 3.
 
 ### Włączone w ASM
 
 - Bluetooth (on) – do konfiguracji
 - Ethernet (on)
-- IPPS (on) – szyfrowany druk
+- IPP (on) – tylko IPPS, szyfrowany druk
 - TLS (on) – szyfrowana komunikacja
+- Wykrywanie drukarki w sieci (on)
+
+Po konfiguracji należy wyłączyć usługi, które nie są potrzebne.
+
+### Interfejsy dostępne przy pierwszej konfiguracji
+
+- port szeregowy,
+- USB,
+- Bluetooth,
+- IPPS (IPP przez TLS),
+- port TCP 9143 (dane surowe przez TLS),
+- port TCP 9243 (JSON przez TLS).
+
+### Konfiguracja drukarki EU RED
+
+Hasło i usługi ustawia się kreatorem zabezpieczeń (Security Setup Wizard) na stronie **zebra.com/asr**. Kreator oferuje cztery metody:
+
+- **Komputer Windows** – aplikacja **Zebra Nucleus Connector dla systemu Windows** ze strony zebra.com/setup. Wersja jest przeznaczona tylko dla regionu EMEA. Drukarkę łączy się przewodem USB albo przez port Ethernet.
+- **Pamięć USB** – kreator przygotowuje pliki do zapisania w pamięci USB. Drukarka sama ustawia hasło i wykonuje polecenia. Metoda wymaga Link-OS 7.6 lub nowszego i nie obsługuje drukarek ZQ310 Plus, ZQ320 Plus, ZQ610 Plus, ZQ620 Plus i ZQ630 Plus.
+- **Telefon z systemem Android** – aplikacja Nucleus Connector z Google Play.
+- **Telefon z systemem iOS** – aplikacja Nucleus Connector z App Store.
+
+Jeśli drukarka nie ma modułu Bluetooth Classic, należy wybrać metodę z komputerem Windows.
+
+Nucleus Connector dla Windows nie instaluje sterownika drukarki. Sterownik instaluje się programem Zebra Setup Utilities (ZSU).
+
+Na ekranie **Additional Security Settings** kreator pozwala ustawić:
+
+- **Set Front Panel PIN Code** – czterocyfrowy kod PIN panelu,
+- **Allow Firmware Updates** – aktualizacje firmware,
+- **Enable TCP/IP Raw Ports** – porty 9100, 9200 i 9300,
+- **Enable LPD** – protokół LPD (port 515),
+- **Enable Access to Printer Web Pages** – strony WWW drukarki przez HTTPS (port 443).
+
+Instrukcję krok po kroku zawiera wpis [Twoja Zebra wymaga hasła? Konfiguracja trybu chronionego i dyrektywy EU RED](/blog/zebra-wymaga-hasla-dyrektywa-red-konfiguracja).
+
+Własne skrypty konfiguracyjne należy uzupełnić o hasło trybu chronionego. Bez hasła drukarka nie przyjmie zmian ustawień chronionych, np. Wi-Fi, sieci i firmware.
+
+### Wi-Fi w drukarkach EU RED
+
+Drukarki EU RED nie obsługują szyfrowania TKIP. Wymaga tego norma EN 18031-1.
+
+- Drukarka nie łączy się z siecią z szyfrowaniem TKIP.
+- Drukarka nie łączy się z siecią w trybie mieszanym TKIP/WPA2.
+- Punkt dostępu musi używać szyfrowania WPA2 albo WPA3.
 
 ---
 
 ## 10 najlepszych praktyk bezpieczeństwa
 
-### 1. Planuj bezpieczeństwo od początku
+### 1. Planowanie bezpieczeństwa od początku
 
-Przygotuj **politykę bezpieczeństwa** przed wdrożeniem drukarek – określ hasła, certyfikaty i wymagane ustawienia.
+**Politykę bezpieczeństwa** należy przygotować przed wdrożeniem drukarek – określić hasła, certyfikaty i wymagane ustawienia.
 
-### 2. Używaj szyfrowanych połączeń
+### 2. Szyfrowane połączenia
 
-Zawsze preferuj **HTTPS zamiast HTTP**, **IPPS zamiast IPP**, **TLS zamiast TCP**. Unikaj podłączania drukarek bezpośrednio do internetu.
+Zawsze należy wybierać **HTTPS zamiast HTTP**, **IPPS zamiast IPP**, **TLS zamiast TCP**. Drukarek nie należy podłączać bezpośrednio do internetu.
 
-### 3. Rotuj hasła i poświadczenia
+### 3. Rotacja haseł i poświadczeń
 
-Planuj **regularną rotację haseł** (co 90 dni). Im dłużej hasło pozostaje niezmienione, tym większe ryzyko kompromitacji.
+Należy planować **regularną rotację haseł** (co 90 dni). Im dłużej hasło pozostaje niezmienione, tym większe ryzyko kompromitacji.
 
-### 4. Wyłącz nieużywane usługi
+### 4. Wyłączenie nieużywanych usług
 
 Każda włączona usługa zwiększa powierzchnię ataku:
 
     ! U1 setvar "ip.ftp.enable" "off"
-    ! U1 setvar "ip.telnet.enable" "off"
+    ! U1 setvar "ip.lpd.enable" "off"
     ! U1 setvar "ip.http.enable" "off"
 
-### 5. Wykorzystaj zdalne zarządzanie
+### 5. Zdalne zarządzanie
 
 **Zebra Printer Profile Manager Enterprise** umożliwia masowe wdrażanie ustawień bezpieczeństwa na całej flocie.
 
-### 6. Ogranicz ujawnianie informacji
+### 6. Ograniczenie ujawniania informacji
 
-Nie informuj niepotrzebnie o infrastrukturze drukarek. Ogranicz dostęp do dokumentacji konfiguracji.
+Nie należy niepotrzebnie informować o infrastrukturze drukarek. Dostęp do dokumentacji konfiguracji powinien być ograniczony.
 
-### 7. Monitoruj zaginione urządzenia
+### 7. Monitorowanie zaginionych urządzeń
 
-Jeśli drukarka została skradziona – **natychmiast cofnij poświadczenia** (hasła, certyfikaty, dostępy).
+Jeśli drukarka została skradziona, należy **natychmiast cofnąć poświadczenia** (hasła, certyfikaty, dostępy).
 
-### 8. Wybieraj urządzenia z długim wsparciem
+### 8. Urządzenia z długim wsparciem
 
 Drukarki Zebra Link-OS otrzymują aktualizacje bezpieczeństwa przez wiele lat.
 
-### 9. Planuj wycofanie urządzeń
+### 9. Plan wycofania urządzeń
 
-Przed utylizacją wykonaj **decommissioning** – usuń dane, certyfikaty i hasła z pamięci.
+Przed utylizacją należy wykonać **decommissioning** – usunąć dane, certyfikaty i hasła z pamięci.
 
-### 10. Stosuj model CIA na każdym etapie
+### 10. Model CIA na każdym etapie
 
-Od wdrożenia, przez eksploatację, aż po wycofanie – uwzględniaj poufność, integralność i dostępność.
+Od wdrożenia, przez eksploatację, aż po wycofanie – należy uwzględniać poufność, integralność i dostępność.
 
 ---
 
@@ -29661,19 +29826,19 @@ Od wdrożenia, przez eksploatację, aż po wycofanie – uwzględniaj poufność
 **HTTP:**
     ! U1 setvar "ip.http.enable" "off"
 
-**Telnet:**
-    ! U1 setvar "ip.telnet.enable" "off"
-
 **SNMP:**
     ! U1 setvar "ip.snmp.enable" "off"
 
 **LPD:**
     ! U1 setvar "ip.lpd.enable" "off"
 
+**UDP:**
+    ! U1 setvar "ip.udp.enable" "off"
+
 **TCP Raw:**
     ! U1 setvar "ip.tcp.enable" "off"
 
-> **💡 Wskazówka:** Telnet przesyła dane w postaci niezaszyfrowanej – **zawsze wyłączaj** w środowisku produkcyjnym.
+> **💡 Wskazówka:** gdy tryb chroniony jest włączony, polecenie setvar nie zmienia ustawień chronionych. Zmianę należy wysłać operacją **set** w poleceniu protect, z hasłem trybu chronionego.
 
 ---
 
@@ -29697,10 +29862,13 @@ Od wdrożenia, przez eksploatację, aż po wycofanie – uwzględniaj poufność
 ### Obsługiwane szyfry TLS (Link-OS 7.4.2)
 
 - ECDHE-ECDSA-AES256-GCM-SHA384
+- ECDHE-ECDSA-AES128-GCM-SHA256
+- ECDHE-ECDSA-AES256-SHA384
+- ECDHE-ECDSA-AES128-SHA256
 - ECDHE-RSA-AES256-GCM-SHA384
 - ECDHE-RSA-AES128-GCM-SHA256
-- AES256-GCM-SHA384
-- AES128-GCM-SHA256
+
+Od Link-OS 7.4.2 drukarki nie obsługują szyfrów ChaCha20, AES-CBC i AES-CTR.
 
 ---
 
@@ -29708,9 +29876,9 @@ Od wdrożenia, przez eksploatację, aż po wycofanie – uwzględniaj poufność
 
 ### Wykrywalność Bluetooth
 
-Od Link-OS 6 wykrywalność BT jest **domyślnie wyłączona**. Aby sparować urządzenie:
-- Przytrzymaj przycisk FEED przez 5 sekund, lub
-- Włącz programowo: ! U1 setvar "bluetooth.discoverable" "on"
+Od Link-OS 6 wykrywalność BT jest **domyślnie wyłączona**. Aby sparować urządzenie, należy:
+- przytrzymać przycisk FEED przez 5 sekund lub
+- włączyć wykrywalność programowo: ! U1 setvar "bluetooth.discoverable" "on"
 
 ### Poziomy bezpieczeństwa Bluetooth
 
@@ -29739,7 +29907,7 @@ W trybie chronionym, aby autoryzować pojedynczą aktualizację:
       "protect":{
         "authentication":{
           "username":"admin",
-          "password":"TwojeHaslo",
+          "password":"HasloTrybuChronionego",
           "type":"basic"
         },
         "operation":"allow-next-firmware-download"
@@ -29770,9 +29938,10 @@ W trybie chronionym, aby autoryzować pojedynczą aktualizację:
 
 ### Krok 1: Inwentaryzacja
 
-- Zidentyfikuj wszystkie drukarki w organizacji
-- Sprawdź model, wersję firmware, opcje komunikacyjne
-- Oceń aktualne ustawienia zabezpieczeń
+- Zidentyfikować wszystkie drukarki w organizacji
+- Sprawdzić model, wersję firmware, opcje komunikacyjne
+- Ocenić aktualne ustawienia zabezpieczeń
+- Sprawdzić, które drukarki wprowadzono na rynek EMEA od 1 sierpnia 2025 (tryb ASM)
 
 ### Krok 2: Analiza wymagań
 
@@ -29782,43 +29951,52 @@ W trybie chronionym, aby autoryzować pojedynczą aktualizację:
 
 ### Krok 3: Konfiguracja
 
-- Ustaw hasła administratora (min. 14 znaków)
-- Wyłącz nieużywane usługi
-- Skonfiguruj szyfrowanie TLS
-- Włącz Protected Mode
+- Ustawić hasła administratora (od 14 do 128 znaków)
+- Wyłączyć nieużywane usługi
+- Skonfigurować szyfrowanie TLS
+- Włączyć Protected Mode
 
 ### Krok 4: Weryfikacja
 
-- Wydrukuj raport konfiguracji
-- Sprawdź stan trybu chronionego
-- Przetestuj połączenia szyfrowane
-- Zweryfikuj blokadę nieautoryzowanych zmian
+- Wydrukować raport konfiguracji
+- Sprawdzić stan trybu chronionego
+- Przetestować połączenia szyfrowane
+- Zweryfikować blokadę nieautoryzowanych zmian
 
 ---
 
 ## Narzędzia do zarządzania
 
 - **Printer Profile Manager Enterprise** – masowe zarządzanie flotą
-- **Zebra Setup Utilities** – konfiguracja pojedynczych drukarek
+- **Zebra Nucleus Connector** – konfiguracja zabezpieczeń drukarek EU RED (Windows, Android, iOS); wersja dla Windows tylko w regionie EMEA, ze strony zebra.com/setup
+- **Zebra Setup Utilities** – konfiguracja pojedynczych drukarek i instalacja sterownika Windows
 - **Link-OS SDK** – integracja z systemami korporacyjnymi
 
-> **💡 Pobierz narzędzia:** [Strona ze sterownikami i oprogramowaniem](/sterowniki)
+> **💡 Sterowniki i oprogramowanie:** [Strona ze sterownikami i oprogramowaniem](/sterowniki)
 
 ---
 
 ## FAQ – Najczęściej zadawane pytania
 
-### Czy muszę włączyć Protected Mode na każdej drukarce osobno?
+### Czy Protected Mode trzeba włączać na każdej drukarce osobno?
 
-Nie. Możesz użyć **Printer Profile Manager Enterprise** do masowego wdrożenia ustawień na całej flocie.
+Nie. Do masowego wdrożenia ustawień na całej flocie służy **Printer Profile Manager Enterprise**. W drukarkach EU RED wiele drukarek obsługuje też jeden plik ustawień z Nucleus Connector albo jedna pamięć USB (Link-OS 7.6 lub nowszy).
 
-### Jak odzyskać dostęp po zapomnieniu hasła Protected Mode?
+### Jak odzyskać dostęp po utracie hasła Protected Mode?
 
-Konieczny jest **reset fabryczny** drukarki, który usunie wszystkie ustawienia. Zebra nie przechowuje haseł.
+Zebra nie przechowuje haseł. Reset do ustawień fabrycznych nie wyłącza zabezpieczeń drukarki EU RED.
+
+Zebra przewiduje wycofanie z eksploatacji poleceniem ~PM z numerem seryjnym drukarki. Polecenie działa wyłącznie przez port USB. Usuwa wszystkie dane użytkownika i ustawienia drukarki. W drukarce EU RED tryb chroniony pozostaje włączony, a niezabezpieczone usługi pozostają wyłączone. Po ponownym uruchomieniu należy ustawić nowe hasło i ponownie skonfigurować drukarkę.
+
+Od Link-OS 7.6.1 jest też polecenie JSON reset-advanced-security-mode. Polecenie przywraca hasło trybu chronionego do stanu domyślnego. Pozostałe ustawienia drukarki zostają zachowane. Polecenie wymaga jednak podania obecnego hasła, więc po utracie hasła nie można go użyć.
+
+W razie trudności pomagamy jako autoryzowany serwis Zebra.
 
 ### Czy wyłączenie HTTP uniemożliwi drukowanie?
 
-Nie. Drukowanie odbywa się przez inne protokoły (IPP, TCP 9100, TLS). HTTP służy tylko do konfiguracji przez przeglądarkę.
+Nie. HTTP służy tylko do konfiguracji przez przeglądarkę. Drukowanie odbywa się przez inne protokoły, np. IPP, TCP 9100 lub TLS.
+
+W drukarkach EU RED port 9100 jest jednak fabrycznie wyłączony. Fabrycznie działa tylko szyfrowany druk przez IPPS i TLS. Port 9100 włącza się w kreatorze zabezpieczeń: ekran **Additional Security Settings**, opcja **Enable TCP/IP Raw Ports**. Opcja włącza porty 9100, 9200 i 9300.
 
 ### Jakie drukarki obsługują PrintSecure?
 
@@ -29839,6 +30017,7 @@ Minimalnie. Szyfrowanie dodaje niewielki narzut, ale korzyści bezpieczeństwa z
 | **EU RED** | European Union Radio Equipment Directive |
 | **IPPS** | Internet Printing Protocol Secure (szyfrowany IPP) |
 | **Link-OS** | Platforma oprogramowania drukarek Zebra |
+| **Nucleus Connector** | Aplikacja Zebra do konfiguracji zabezpieczeń drukarek EU RED |
 | **Protected Mode** | Tryb chroniony blokujący nieautoryzowane zmiany |
 | **SGD** | Set-Get-Do – format komend konfiguracyjnych Zebra |
 | **TLS** | Transport Layer Security – protokół szyfrowania |
@@ -29848,14 +30027,14 @@ Minimalnie. Szyfrowanie dodaje niewielki narzut, ale korzyści bezpieczeństwa z
 ## Powiązane materiały
 
 - 📰 [Twoja Zebra wymaga hasła? Konfiguracja trybu chronionego i dyrektywy EU RED](/blog/zebra-wymaga-hasla-dyrektywa-red-konfiguracja) – podstawowy przewodnik dla użytkowników
-- 🎬 [Dyrektywa RED – co oznacza dla drukarek Zebra?](/poradniki-wideo) – film instruktażowy
-- 📥 [Sterowniki i oprogramowanie Zebra](/sterowniki) – pobierz Printer Setup Utilities
+- 🎬 [Film: tryb chroniony (Protected Mode) i EU RED w drukarkach Zebra](https://youtu.be/j23hH5QW_c8) – konfiguracja krok po kroku
+- 📥 [Sterowniki i oprogramowanie Zebra](/sterowniki) – Zebra Setup Utilities do instalacji sterownika Windows
 
 ---
 
 ## Potrzebujesz pomocy z wdrożeniem?
 
-Jeśli potrzebujesz wsparcia przy zabezpieczaniu floty drukarek:
+Pomagamy przy zabezpieczaniu floty drukarek:
 
 > 📞 **Zadzwoń:** +48 601 619 898 — konsultacje dla działów IT
 
@@ -29866,6 +30045,7 @@ Jako **autoryzowany serwis Zebra** oferujemy:
 - Wdrożenia PrintSecure i Protected Mode
 - Szkolenia dla administratorów IT
 - Wsparcie przy zgodności z EU RED
+- Konfigurację drukarek EU RED i pomoc po utracie hasła trybu chronionego
 `
   },
 

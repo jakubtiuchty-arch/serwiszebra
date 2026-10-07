@@ -266,9 +266,10 @@ Naciśnij **FEED** - powinna wysunąć się **dokładnie jedna etykieta**. Jeśl
         title: '7. Podłączenie do komputera',
         videos: [
           { youtubeId: 'LCzG5DxX9Nk', title: 'Porty i złącza w ZD421t', thumbnail: '/zd421t_porty.jpeg' },
-          { youtubeId: '1Av1j5J83eo', title: 'Konfiguracja sieci LAN (Ethernet) w drukarkach Zebra ZD411, ZD421, ZD611 i ZD621', thumbnail: '/wideo/siec-lan-zebra-zd411-zd421-zd611-zd621.jpg' },
+          { youtubeId: 'toQDjn2_W5U', title: 'Konfiguracja sieci LAN (Ethernet) w drukarkach Zebra ZD411, ZD421, ZD611 i ZD621', thumbnail: '/wideo/siec-lan-zebra-zd411-zd421-zd611-zd621.jpg' },
           { youtubeId: 'd-CNBSrBzGQ', title: 'Montaż modułu Ethernet w drukarkach Zebra', thumbnail: '/motaż_eth.jpeg' },
           { youtubeId: 'lF-pJbhYeVM', title: 'Konfiguracja Wi-Fi w ZD421', thumbnail: '/wifi_zd421.jpeg' },
+          { youtubeId: 'j23hH5QW_c8', title: 'Tryb chroniony (Protected Mode) i EU RED w drukarkach Zebra: hasło i konfiguracja', thumbnail: '/wideo/tryb-chroniony-eu-red-zebra.jpg' },
         ],
         content: `
 ### Wymagane sterowniki
@@ -687,9 +688,10 @@ Naciśnij **FEED** - powinna wysunąć się **dokładnie jedna etykieta**. Jeśl
       {
         title: '6. Podłączenie do komputera',
         videos: [
-          { youtubeId: '1Av1j5J83eo', title: 'Konfiguracja sieci LAN (Ethernet) w drukarkach Zebra ZD411, ZD421, ZD611 i ZD621', thumbnail: '/wideo/siec-lan-zebra-zd411-zd421-zd611-zd621.jpg' },
+          { youtubeId: 'toQDjn2_W5U', title: 'Konfiguracja sieci LAN (Ethernet) w drukarkach Zebra ZD411, ZD421, ZD611 i ZD621', thumbnail: '/wideo/siec-lan-zebra-zd411-zd421-zd611-zd621.jpg' },
           { youtubeId: 'd-CNBSrBzGQ', title: 'Montaż modułu Ethernet w drukarkach Zebra', thumbnail: '/motaż_eth.jpeg' },
           { youtubeId: 'lF-pJbhYeVM', title: 'Konfiguracja Wi-Fi w ZD421', thumbnail: '/wifi_zd421.jpeg' },
+          { youtubeId: 'j23hH5QW_c8', title: 'Tryb chroniony (Protected Mode) i EU RED w drukarkach Zebra: hasło i konfiguracja', thumbnail: '/wideo/tryb-chroniony-eu-red-zebra.jpg' },
         ],
         content: `
 ### Wymagane sterowniki
@@ -1178,8 +1180,9 @@ Naciśnij **FEED** - powinna wysunąć się **dokładnie jedna etykieta**. Jeśl
       {
         title: '7. Podłączenie do komputera',
         videos: [
-          { youtubeId: '1Av1j5J83eo', title: 'Konfiguracja sieci LAN (Ethernet) w drukarkach Zebra ZD411, ZD421, ZD611 i ZD621', thumbnail: '/wideo/siec-lan-zebra-zd411-zd421-zd611-zd621.jpg' },
+          { youtubeId: 'toQDjn2_W5U', title: 'Konfiguracja sieci LAN (Ethernet) w drukarkach Zebra ZD411, ZD421, ZD611 i ZD621', thumbnail: '/wideo/siec-lan-zebra-zd411-zd421-zd611-zd621.jpg' },
           { youtubeId: 'd-CNBSrBzGQ', title: 'Montaż modułu Ethernet w drukarkach Zebra', thumbnail: '/motaż_eth.jpeg' },
+          { youtubeId: 'j23hH5QW_c8', title: 'Tryb chroniony (Protected Mode) i EU RED w drukarkach Zebra: hasło i konfiguracja', thumbnail: '/wideo/tryb-chroniony-eu-red-zebra.jpg' },
         ],
         content: `
 ### Wymagane sterowniki
@@ -1652,8 +1655,9 @@ Naciśnij **FEED** - powinna wysunąć się **dokładnie jedna etykieta**. Jeśl
       {
         title: '6. Podłączenie do komputera',
         videos: [
-          { youtubeId: '1Av1j5J83eo', title: 'Konfiguracja sieci LAN (Ethernet) w drukarkach Zebra ZD411, ZD421, ZD611 i ZD621', thumbnail: '/wideo/siec-lan-zebra-zd411-zd421-zd611-zd621.jpg' },
+          { youtubeId: 'toQDjn2_W5U', title: 'Konfiguracja sieci LAN (Ethernet) w drukarkach Zebra ZD411, ZD421, ZD611 i ZD621', thumbnail: '/wideo/siec-lan-zebra-zd411-zd421-zd611-zd621.jpg' },
           { youtubeId: 'd-CNBSrBzGQ', title: 'Montaż modułu Ethernet w drukarkach Zebra', thumbnail: '/motaż_eth.jpeg' },
+          { youtubeId: 'j23hH5QW_c8', title: 'Tryb chroniony (Protected Mode) i EU RED w drukarkach Zebra: hasło i konfiguracja', thumbnail: '/wideo/tryb-chroniony-eu-red-zebra.jpg' },
         ],
         content: `
 ### Wymagane sterowniki
@@ -2166,8 +2170,9 @@ Po załadowaniu nowego materiału RFID:
       {
         title: '7. Podłączenie do komputera',
         videos: [
-          { youtubeId: '1Av1j5J83eo', title: 'Konfiguracja sieci LAN (Ethernet) w drukarkach Zebra ZD411, ZD421, ZD611 i ZD621', thumbnail: '/wideo/siec-lan-zebra-zd411-zd421-zd611-zd621.jpg' },
+          { youtubeId: 'toQDjn2_W5U', title: 'Konfiguracja sieci LAN (Ethernet) w drukarkach Zebra ZD411, ZD421, ZD611 i ZD621', thumbnail: '/wideo/siec-lan-zebra-zd411-zd421-zd611-zd621.jpg' },
           { youtubeId: 'd-CNBSrBzGQ', title: 'Montaż modułu Ethernet w drukarkach Zebra', thumbnail: '/motaż_eth.jpeg' },
+          { youtubeId: 'j23hH5QW_c8', title: 'Tryb chroniony (Protected Mode) i EU RED w drukarkach Zebra: hasło i konfiguracja', thumbnail: '/wideo/tryb-chroniony-eu-red-zebra.jpg' },
         ],
         content: `
 ### Wymagane sterowniki
@@ -2706,9 +2711,10 @@ Naciśnij **FEED** - powinna wysunąć się **dokładnie jedna etykieta**. Jeśl
       {
         title: '7. Podłączenie do komputera',
         videos: [
-          { youtubeId: '1Av1j5J83eo', title: 'Konfiguracja sieci LAN (Ethernet) w drukarkach Zebra ZD411, ZD421, ZD611 i ZD621', thumbnail: '/wideo/siec-lan-zebra-zd411-zd421-zd611-zd621.jpg' },
+          { youtubeId: 'toQDjn2_W5U', title: 'Konfiguracja sieci LAN (Ethernet) w drukarkach Zebra ZD411, ZD421, ZD611 i ZD621', thumbnail: '/wideo/siec-lan-zebra-zd411-zd421-zd611-zd621.jpg' },
           { youtubeId: 'd-CNBSrBzGQ', title: 'Montaż modułu Ethernet w drukarkach Zebra', thumbnail: '/motaż_eth.jpeg' },
           { youtubeId: 'nAVvr1W81pQ', title: 'Port szeregowy RS-232 w ZD411 i ZD611', thumbnail: '/wideo/port-rs232-zebra-zd411.jpg' },
+          { youtubeId: 'j23hH5QW_c8', title: 'Tryb chroniony (Protected Mode) i EU RED w drukarkach Zebra: hasło i konfiguracja', thumbnail: '/wideo/tryb-chroniony-eu-red-zebra.jpg' },
         ],
         content: `
 ### Wymagane sterowniki
@@ -3226,9 +3232,10 @@ Naciśnij **FEED** - powinna wysunąć się **dokładnie jedna etykieta**. Jeśl
       {
         title: '6. Podłączenie do komputera',
         videos: [
-          { youtubeId: '1Av1j5J83eo', title: 'Konfiguracja sieci LAN (Ethernet) w drukarkach Zebra ZD411, ZD421, ZD611 i ZD621', thumbnail: '/wideo/siec-lan-zebra-zd411-zd421-zd611-zd621.jpg' },
+          { youtubeId: 'toQDjn2_W5U', title: 'Konfiguracja sieci LAN (Ethernet) w drukarkach Zebra ZD411, ZD421, ZD611 i ZD621', thumbnail: '/wideo/siec-lan-zebra-zd411-zd421-zd611-zd621.jpg' },
           { youtubeId: 'd-CNBSrBzGQ', title: 'Montaż modułu Ethernet w drukarkach Zebra', thumbnail: '/motaż_eth.jpeg' },
           { youtubeId: 'nAVvr1W81pQ', title: 'Port szeregowy RS-232 w ZD411 i ZD611', thumbnail: '/wideo/port-rs232-zebra-zd411.jpg' },
+          { youtubeId: 'j23hH5QW_c8', title: 'Tryb chroniony (Protected Mode) i EU RED w drukarkach Zebra: hasło i konfiguracja', thumbnail: '/wideo/tryb-chroniony-eu-red-zebra.jpg' },
         ],
         content: `
 ### Wymagane sterowniki
@@ -3771,8 +3778,9 @@ Naciśnij **FEED** - powinna wysunąć się **dokładnie jedna etykieta**. Jeśl
       {
         title: '6. Podłączenie do komputera',
         videos: [
-          { youtubeId: '1Av1j5J83eo', title: 'Konfiguracja sieci LAN (Ethernet) w drukarkach Zebra ZD411, ZD421, ZD611 i ZD621', thumbnail: '/wideo/siec-lan-zebra-zd411-zd421-zd611-zd621.jpg' },
+          { youtubeId: 'toQDjn2_W5U', title: 'Konfiguracja sieci LAN (Ethernet) w drukarkach Zebra ZD411, ZD421, ZD611 i ZD621', thumbnail: '/wideo/siec-lan-zebra-zd411-zd421-zd611-zd621.jpg' },
           { youtubeId: 'd-CNBSrBzGQ', title: 'Montaż modułu Ethernet w drukarkach Zebra', thumbnail: '/motaż_eth.jpeg' },
+          { youtubeId: 'j23hH5QW_c8', title: 'Tryb chroniony (Protected Mode) i EU RED w drukarkach Zebra: hasło i konfiguracja', thumbnail: '/wideo/tryb-chroniony-eu-red-zebra.jpg' },
         ],
         content: `
 ### Wymagane sterowniki
@@ -4358,8 +4366,9 @@ Naciśnij **FEED** - powinna wysunąć się **dokładnie jedna etykieta**. Jeśl
       {
         title: '7. Podłączenie do komputera',
         videos: [
-          { youtubeId: '1Av1j5J83eo', title: 'Konfiguracja sieci LAN (Ethernet) w drukarkach Zebra ZD411, ZD421, ZD611 i ZD621', thumbnail: '/wideo/siec-lan-zebra-zd411-zd421-zd611-zd621.jpg' },
+          { youtubeId: 'toQDjn2_W5U', title: 'Konfiguracja sieci LAN (Ethernet) w drukarkach Zebra ZD411, ZD421, ZD611 i ZD621', thumbnail: '/wideo/siec-lan-zebra-zd411-zd421-zd611-zd621.jpg' },
           { youtubeId: 'd-CNBSrBzGQ', title: 'Montaż modułu Ethernet w drukarkach Zebra', thumbnail: '/motaż_eth.jpeg' },
+          { youtubeId: 'j23hH5QW_c8', title: 'Tryb chroniony (Protected Mode) i EU RED w drukarkach Zebra: hasło i konfiguracja', thumbnail: '/wideo/tryb-chroniony-eu-red-zebra.jpg' },
         ],
         content: `
 ### Wymagane sterowniki
@@ -4964,8 +4973,9 @@ Resetowanie liczników: **RFID** > **RFID Valid Count** lub **RFID Void Count**
       {
         title: '9. Podłączenie do komputera',
         videos: [
-          { youtubeId: '1Av1j5J83eo', title: 'Konfiguracja sieci LAN (Ethernet) w drukarkach Zebra ZD411, ZD421, ZD611 i ZD621', thumbnail: '/wideo/siec-lan-zebra-zd411-zd421-zd611-zd621.jpg' },
+          { youtubeId: 'toQDjn2_W5U', title: 'Konfiguracja sieci LAN (Ethernet) w drukarkach Zebra ZD411, ZD421, ZD611 i ZD621', thumbnail: '/wideo/siec-lan-zebra-zd411-zd421-zd611-zd621.jpg' },
           { youtubeId: 'd-CNBSrBzGQ', title: 'Montaż modułu Ethernet w drukarkach Zebra', thumbnail: '/motaż_eth.jpeg' },
+          { youtubeId: 'j23hH5QW_c8', title: 'Tryb chroniony (Protected Mode) i EU RED w drukarkach Zebra: hasło i konfiguracja', thumbnail: '/wideo/tryb-chroniony-eu-red-zebra.jpg' },
         ],
         content: `
 ### Wymagane sterowniki
@@ -5377,6 +5387,9 @@ Naciśnij **FEED** - powinna wysunąć się **dokładnie jedna etykieta**. Jeśl
       },
       {
         title: '6. Podłączenie do komputera',
+        videos: [
+          { youtubeId: 'j23hH5QW_c8', title: 'Tryb chroniony (Protected Mode) i EU RED w drukarkach Zebra: hasło i konfiguracja', thumbnail: '/wideo/tryb-chroniony-eu-red-zebra.jpg' },
+        ],
         content: `
 ### Wymagane sterowniki
 
@@ -5834,6 +5847,9 @@ Naciśnij **FEED** - powinna wysunąć się **dokładnie jedna etykieta**. Jeśl
       },
       {
         title: '7. Podłączenie do komputera',
+        videos: [
+          { youtubeId: 'j23hH5QW_c8', title: 'Tryb chroniony (Protected Mode) i EU RED w drukarkach Zebra: hasło i konfiguracja', thumbnail: '/wideo/tryb-chroniony-eu-red-zebra.jpg' },
+        ],
         content: `
 ### Wymagane sterowniki
 
@@ -6237,6 +6253,9 @@ Naciśnij **FEED** - powinna wysunąć się **dokładnie jedna etykieta**. Jeśl
       },
       {
         title: '6. Podłączenie do komputera',
+        videos: [
+          { youtubeId: 'j23hH5QW_c8', title: 'Tryb chroniony (Protected Mode) i EU RED w drukarkach Zebra: hasło i konfiguracja', thumbnail: '/wideo/tryb-chroniony-eu-red-zebra.jpg' },
+        ],
         content: `
 ### Wymagane sterowniki
 
@@ -6728,6 +6747,9 @@ Naciśnij **FEED** - powinna wysunąć się **dokładnie jedna etykieta**. Jeśl
       },
       {
         title: '7. Podłączenie do komputera',
+        videos: [
+          { youtubeId: 'j23hH5QW_c8', title: 'Tryb chroniony (Protected Mode) i EU RED w drukarkach Zebra: hasło i konfiguracja', thumbnail: '/wideo/tryb-chroniony-eu-red-zebra.jpg' },
+        ],
         content: `
 ### Wymagane sterowniki
 
@@ -7246,6 +7268,9 @@ Naciśnij **FEED** - powinna wysunąć się **dokładnie jedna etykieta**. Jeśl
       },
       {
         title: '7. Podłączenie do komputera',
+        videos: [
+          { youtubeId: 'j23hH5QW_c8', title: 'Tryb chroniony (Protected Mode) i EU RED w drukarkach Zebra: hasło i konfiguracja', thumbnail: '/wideo/tryb-chroniony-eu-red-zebra.jpg' },
+        ],
         content: `
 ### Instalacja sterowników
 
@@ -8665,6 +8690,9 @@ Ręczne ustawienie pozycji programowania tagu:
       },
       {
         title: '7. Kreatory konfiguracji',
+        videos: [
+          { youtubeId: 'j23hH5QW_c8', title: 'Tryb chroniony (Protected Mode) i EU RED w drukarkach Zebra: hasło i konfiguracja', thumbnail: '/wideo/tryb-chroniony-eu-red-zebra.jpg' },
+        ],
         content: `
 ### RFID Wizard
 
@@ -9068,6 +9096,9 @@ Pokrętła regulacji docisku mają oznaczenia 1-4:
       },
       {
         title: '7. Podłączenie do komputera',
+        videos: [
+          { youtubeId: 'j23hH5QW_c8', title: 'Tryb chroniony (Protected Mode) i EU RED w drukarkach Zebra: hasło i konfiguracja', thumbnail: '/wideo/tryb-chroniony-eu-red-zebra.jpg' },
+        ],
         content: `
 ### Instalacja sterowników
 
@@ -9479,6 +9510,9 @@ ZT411 posiada **ruchomy czujnik mediów**. Przesuń czujnik w poziomie aby dopas
       },
       {
         title: '7. Podłączenie do komputera',
+        videos: [
+          { youtubeId: 'j23hH5QW_c8', title: 'Tryb chroniony (Protected Mode) i EU RED w drukarkach Zebra: hasło i konfiguracja', thumbnail: '/wideo/tryb-chroniony-eu-red-zebra.jpg' },
+        ],
         content: `
 ### EU RED – Protected Mode (EMEA od 1.08.2025)
 
@@ -9876,6 +9910,9 @@ ZT421 posiada **ruchomy czujnik mediów**. Przesuń czujnik w poziomie aby dopas
       },
       {
         title: '7. Podłączenie do komputera',
+        videos: [
+          { youtubeId: 'j23hH5QW_c8', title: 'Tryb chroniony (Protected Mode) i EU RED w drukarkach Zebra: hasło i konfiguracja', thumbnail: '/wideo/tryb-chroniony-eu-red-zebra.jpg' },
+        ],
         content: `
 ### EU RED – Protected Mode (EMEA od 1.08.2025)
 
@@ -10584,32 +10621,45 @@ Zbliż telefon z aplikacją Zebra Printer Setup Utility do logo NFC na drukarce 
       {
         title: '14. Protected Mode / EU RED',
         videos: [
-          { youtubeId: 'j0PRe-dGXBM', title: 'Dyrektywa RED — co oznacza dla drukarek Zebra', thumbnail: '/drukarki-zebra-dyrektywa-red.jpeg' },
+          { youtubeId: 'j23hH5QW_c8', title: 'Tryb chroniony (Protected Mode) i EU RED w drukarkach Zebra: hasło i konfiguracja', thumbnail: '/wideo/tryb-chroniony-eu-red-zebra.jpg' },
         ],
         content: `
-### Dyrektywa EU RED 2025
+### Dyrektywa EU RED
 
-Od **1 sierpnia 2025** nowe drukarki Zebra są dostarczane z włączonym **Protected Mode**. Przy pierwszym uruchomieniu musisz ustawić hasło administratora.
+Drukarki Zebra wprowadzone na rynek w Europie od **1 sierpnia 2025** mają fabrycznie włączony **tryb chroniony (Protected Mode)**. Przed zmianą ustawień sieci i zabezpieczeń należy ustawić hasło trybu chronionego.
 
-### Pierwsze uruchomienie
+Fabrycznie wyłączone są między innymi:
+- port 9100 (druk przez TCP),
+- strony WWW drukarki,
+- FTP i SNMP,
+- pobieranie firmware,
+- sieć Wi-Fi (do czasu ustawienia hasła).
 
-1. Włącz drukarkę
-2. Pojawi się kreator konfiguracji (Setup Wizard)
-3. Ustaw hasło administratora (min. 8 znaków)
-4. Zapisz hasło w bezpiecznym miejscu!
-5. Zakończ konfigurację
+ZT610 ma kolorowy ekran dotykowy, dlatego kreator wymaga też **4-cyfrowego kodu PIN panelu**.
 
-### Problemy z Protected Mode
+### Pierwsza konfiguracja (Windows)
 
-Jeśli drukarka jest zablokowana i nie znasz hasła:
-- Sprawdź dokumentację od dostawcy
-- Poszukaj domyślnego hasła na ulotce
-- Skontaktuj się z serwisem: **serwis-zebry.pl**
+**UWAGA:** Zebra nie przechowuje hasła. Hasło należy zapisać w bezpiecznym miejscu przed rozpoczęciem konfiguracji.
+
+1. Pobrać aplikację **Zebra Nucleus Connector** dla systemu Windows ze strony zebra.com/setup.
+2. Podłączyć drukarkę do komputera przewodem USB albo przez port Ethernet.
+3. Uruchomić aplikację i wybrać **Security Settings Wizard**.
+4. Wpisać hasło trybu chronionego: od 14 do 128 znaków.
+5. Wybrać **Protected Mode On** albo **Off**. Zebra zaleca On po zakończeniu konfiguracji.
+6. Ustawić kod PIN panelu.
+7. Włączyć potrzebne usługi, np. port 9100 albo strony WWW drukarki.
+8. Kliknąć **Apply Settings**.
+
+Inne metody konfiguracji to pamięć USB (Link-OS 7.6 lub nowszy) oraz aplikacja Nucleus Connector na Android i iOS. Wszystkie metody opisuje strona zebra.com/asr. Sterownik drukarki instaluje się nadal programem Zebra Setup Utilities.
+
+### Zapomniane hasło
+
+Reset fabryczny nie wyłącza trybu chronionego. Po utracie hasła należy skontaktować się z autoryzowanym serwisem Zebra: **serwis-zebry.pl**.
 
 ### Więcej informacji
 
-Szczegółowy przewodnik po dyrektywie EU RED i PrintSecure znajdziesz na:
-[Dyrektywa EU RED – konfiguracja](/blog/zebra-wymaga-hasla-dyrektywa-red-konfiguracja)
+- [Zebra PrintSecure – przewodnik dla administratorów IT](/blog/zebra-printsecure-przewodnik-administratora-it)
+- [Dyrektywa EU RED – konfiguracja drukarki Zebra](/blog/zebra-wymaga-hasla-dyrektywa-red-konfiguracja)
 `
       },
       {
@@ -11002,6 +11052,9 @@ ZT620 posiada dwa elementy regulacji:
       },
       {
         title: '8. Podłączenie do komputera',
+        videos: [
+          { youtubeId: 'j23hH5QW_c8', title: 'Tryb chroniony (Protected Mode) i EU RED w drukarkach Zebra: hasło i konfiguracja', thumbnail: '/wideo/tryb-chroniony-eu-red-zebra.jpg' },
+        ],
         content: `
 ### EU RED – Protected Mode (EMEA od 1.08.2025)
 
@@ -11470,6 +11523,9 @@ Czujnik mediów można przesuwać w poziomie aby dopasować do pozycji przerw/na
       },
       {
         title: '8. Podłączenie do komputera',
+        videos: [
+          { youtubeId: 'j23hH5QW_c8', title: 'Tryb chroniony (Protected Mode) i EU RED w drukarkach Zebra: hasło i konfiguracja', thumbnail: '/wideo/tryb-chroniony-eu-red-zebra.jpg' },
+        ],
         content: `
 ### EU RED – Protected Mode (EMEA od 1.08.2025)
 
@@ -13166,6 +13222,9 @@ Zestaw wkładek (p/n KIT-MPM-MD2SPR5-01) umożliwia obsługę materiałów **50,
       },
       {
         title: '6. Komunikacja',
+        videos: [
+          { youtubeId: 'j23hH5QW_c8', title: 'Tryb chroniony (Protected Mode) i EU RED w drukarkach Zebra: hasło i konfiguracja', thumbnail: '/wideo/tryb-chroniony-eu-red-zebra.jpg' },
+        ],
         content: `
 ### USB
 
@@ -13518,6 +13577,9 @@ Zestaw wkładek (p/n KIT-MPM-MDSPR5-01) umożliwia obsługę materiałów **76,2
       },
       {
         title: '6. Komunikacja',
+        videos: [
+          { youtubeId: 'j23hH5QW_c8', title: 'Tryb chroniony (Protected Mode) i EU RED w drukarkach Zebra: hasło i konfiguracja', thumbnail: '/wideo/tryb-chroniony-eu-red-zebra.jpg' },
+        ],
         content: `
 ### USB
 
@@ -14764,6 +14826,9 @@ Czas ładowania: **< 4 godziny** (bateria 2-komórkowa), **< 6 godzin** (bateria
       },
       {
         title: '6. Komunikacja',
+        videos: [
+          { youtubeId: 'j23hH5QW_c8', title: 'Tryb chroniony (Protected Mode) i EU RED w drukarkach Zebra: hasło i konfiguracja', thumbnail: '/wideo/tryb-chroniony-eu-red-zebra.jpg' },
+        ],
         content: `
 ### USB
 
@@ -15298,6 +15363,9 @@ Czas ładowania: **< 4 godziny** (bateria 2-komórkowa), **< 6 godzin** (bateria
       },
       {
         title: '6. Komunikacja',
+        videos: [
+          { youtubeId: 'j23hH5QW_c8', title: 'Tryb chroniony (Protected Mode) i EU RED w drukarkach Zebra: hasło i konfiguracja', thumbnail: '/wideo/tryb-chroniony-eu-red-zebra.jpg' },
+        ],
         content: `
 ### USB
 
@@ -15882,6 +15950,9 @@ Do druku i kodowania RFID należy używać **certyfikowanych materiałów Zebra 
       },
       {
         title: '7. Komunikacja',
+        videos: [
+          { youtubeId: 'j23hH5QW_c8', title: 'Tryb chroniony (Protected Mode) i EU RED w drukarkach Zebra: hasło i konfiguracja', thumbnail: '/wideo/tryb-chroniony-eu-red-zebra.jpg' },
+        ],
         content: `
 ### USB
 
@@ -16485,6 +16556,9 @@ Do druku i kodowania RFID należy używać **certyfikowanych materiałów Zebra 
       },
       {
         title: '7. Komunikacja',
+        videos: [
+          { youtubeId: 'j23hH5QW_c8', title: 'Tryb chroniony (Protected Mode) i EU RED w drukarkach Zebra: hasło i konfiguracja', thumbnail: '/wideo/tryb-chroniony-eu-red-zebra.jpg' },
+        ],
         content: `
 ### USB
 
@@ -18271,6 +18345,9 @@ Opcjonalnie dostępna jest bateria rozszerzona 4-ogniwowa dla dłuższego czasu 
       },
       {
         title: '6. Łączność bezprzewodowa',
+        videos: [
+          { youtubeId: 'j23hH5QW_c8', title: 'Tryb chroniony (Protected Mode) i EU RED w drukarkach Zebra: hasło i konfiguracja', thumbnail: '/wideo/tryb-chroniony-eu-red-zebra.jpg' },
+        ],
         content: `
 ### Wi-Fi 6 (802.11ax)
 
@@ -18851,6 +18928,9 @@ Opcjonalnie dostępna jest bateria rozszerzona 4-ogniwowa dla dłuższego czasu 
       },
       {
         title: '6. Łączność bezprzewodowa',
+        videos: [
+          { youtubeId: 'j23hH5QW_c8', title: 'Tryb chroniony (Protected Mode) i EU RED w drukarkach Zebra: hasło i konfiguracja', thumbnail: '/wideo/tryb-chroniony-eu-red-zebra.jpg' },
+        ],
         content: `
 ### Wi-Fi 6 (802.11ax)
 
@@ -19469,6 +19549,9 @@ Drukarka ZQ630 Plus wykorzystuje inteligentną baterię litowo-jonową **4-ogniw
       },
       {
         title: '7. Łączność bezprzewodowa',
+        videos: [
+          { youtubeId: 'j23hH5QW_c8', title: 'Tryb chroniony (Protected Mode) i EU RED w drukarkach Zebra: hasło i konfiguracja', thumbnail: '/wideo/tryb-chroniony-eu-red-zebra.jpg' },
+        ],
         content: `
 ### Wi-Fi 6 (802.11ax)
 
@@ -20152,6 +20235,9 @@ Komendy SGD umożliwiają zaawansowaną konfigurację RFID przez port szeregowy 
       },
       {
         title: '10. Integracja z systemami',
+        videos: [
+          { youtubeId: 'j23hH5QW_c8', title: 'Tryb chroniony (Protected Mode) i EU RED w drukarkach Zebra: hasło i konfiguracja', thumbnail: '/wideo/tryb-chroniony-eu-red-zebra.jpg' },
+        ],
         content: `
 ### Popularne platformy RFID
 

@@ -64,6 +64,19 @@ export interface TrescKarty {
   filmy?: NonNullable<BlogPost['video']>[]
 }
 
+/** „Tryb chroniony (Protected Mode) i EU RED w drukarkach Zebra: hasło i konfiguracja" (7.10.2026). Dotyczy drukarek
+ *  wprowadzonych na rynek w EMEA od 1.08.2025 (lista modeli Zebry: zebra.com/asr), więc film stoi na kartach wszystkich tych modeli */
+const FILM_TRYB_CHRONIONY: NonNullable<BlogPost['video']> = {
+  youtubeId: 'j23hH5QW_c8',
+  tytul: 'Tryb chroniony (Protected Mode) i EU RED w drukarkach Zebra: hasło i konfiguracja',
+  opis: 'Poradnik serwis-zebry.pl z polskim lektorem: których drukarek dotyczą zabezpieczenia EU RED, co jest fabrycznie wyłączone, hasło trybu chronionego, aplikacja Zebra Nucleus Connector i kreator zabezpieczeń krok po kroku, pamięć USB i telefon.',
+  kadr: '/wideo/tryb-chroniony-eu-red-zebra.jpg',
+  czas: 'PT6M25S',
+  dodano: '2026-10-07T14:00:47+02:00',
+  podpis: 'Film: tryb chroniony (Protected Mode) i EU RED w drukarkach Zebra (6:25).',
+  krotko: 'Tryb chroniony',
+}
+
 /** „Zakładanie taśmy (kalki) w drukarce Zebra ZD421t" (v4, 7.10.2026). Zakładanie rolki jest w ZD421t i ZD621t takie samo,
  *  więc film stoi na obu kartach; końcówka z panelem (SUPPLIES, FEED, FEED + CANCEL) dotyczy ZD421t (decyzja usera 7.10) */
 const FILM_TASMA_ZD421_ZD621: NonNullable<BlogPost['video']> = {
@@ -415,7 +428,7 @@ const FILM_AKUMULATOR_ZD421_ZD621: NonNullable<BlogPost['video']> = {
 
 export const TRESC_KART: Record<string, TrescKarty> = {
   'zebra-zd421t': {
-    filmy: [FILM_TASMA_ZD421_ZD621, FILM_ADAPTERY_ZD421_ZD621, FILM_AKUMULATOR_ZD421_ZD621],
+    filmy: [FILM_TASMA_ZD421_ZD621, FILM_ADAPTERY_ZD421_ZD621, FILM_AKUMULATOR_ZD421_ZD621, FILM_TRYB_CHRONIONY],
     poradniki: [
       'serwis-drukarki-zebra-zd420-zd421-diagnostyka-naprawa',
       'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',
@@ -531,7 +544,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
   },
 
   'zebra-zd421d': {
-    filmy: [FILM_ADAPTERY_ZD421_ZD621, FILM_AKUMULATOR_ZD421_ZD621],
+    filmy: [FILM_ADAPTERY_ZD421_ZD621, FILM_AKUMULATOR_ZD421_ZD621, FILM_TRYB_CHRONIONY],
     poradniki: [
       'serwis-drukarki-zebra-zd420-zd421-diagnostyka-naprawa',
       'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',
@@ -650,7 +663,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
   },
 
   'zebra-zd220d': {
-    filmy: [FILM_URUCHOMIENIE_ZD220D_ZD230D, FILM_ETYKIETY_ZD220D_ZD230D, FILM_KALIBRACJA_ZD220D_ZD230D, FILM_CZYSZCZENIE_ZD220D_ZD230D, FILM_ODKLEJAK_ZD220D_ZD230D],
+    filmy: [FILM_URUCHOMIENIE_ZD220D_ZD230D, FILM_ETYKIETY_ZD220D_ZD230D, FILM_KALIBRACJA_ZD220D_ZD230D, FILM_CZYSZCZENIE_ZD220D_ZD230D, FILM_ODKLEJAK_ZD220D_ZD230D, FILM_TRYB_CHRONIONY],
     poradniki: [
       'serwis-drukarki-zebra-zd220-diagnostyka-naprawa',
       'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',
@@ -767,7 +780,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
   },
 
   'zebra-zd220t': {
-    filmy: [FILM_BUDOWA_ZD220T_ZD230T, FILM_URUCHOMIENIE_ZD220T_ZD230T, FILM_KALIBRACJA_ZD220T_ZD230T, FILM_TRYB_DRUKU_ZD220T_ZD230T, FILM_TASMA_ZD220_ZD230, FILM_CZYSZCZENIE_ZD220T_ZD230T, FILM_ODKLEJAK_ZD220T_ZD230T],
+    filmy: [FILM_BUDOWA_ZD220T_ZD230T, FILM_URUCHOMIENIE_ZD220T_ZD230T, FILM_KALIBRACJA_ZD220T_ZD230T, FILM_TRYB_DRUKU_ZD220T_ZD230T, FILM_TASMA_ZD220_ZD230, FILM_CZYSZCZENIE_ZD220T_ZD230T, FILM_ODKLEJAK_ZD220T_ZD230T, FILM_TRYB_CHRONIONY],
     poradniki: [
       'serwis-drukarki-zebra-zd220-diagnostyka-naprawa',
       'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',
@@ -881,7 +894,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
   },
 
   'zebra-zd230d': {
-    filmy: [FILM_URUCHOMIENIE_ZD220D_ZD230D, FILM_ETYKIETY_ZD220D_ZD230D, FILM_KALIBRACJA_ZD220D_ZD230D, FILM_CZYSZCZENIE_ZD220D_ZD230D, FILM_ODKLEJAK_ZD220D_ZD230D, FILM_OBCINAK_ZD230D],
+    filmy: [FILM_URUCHOMIENIE_ZD220D_ZD230D, FILM_ETYKIETY_ZD220D_ZD230D, FILM_KALIBRACJA_ZD220D_ZD230D, FILM_CZYSZCZENIE_ZD220D_ZD230D, FILM_ODKLEJAK_ZD220D_ZD230D, FILM_OBCINAK_ZD230D, FILM_TRYB_CHRONIONY],
     poradniki: [
       'serwis-drukarki-zebra-zd220-diagnostyka-naprawa',
       'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',
@@ -1003,7 +1016,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     ],
   },
   'zebra-zd230t': {
-    filmy: [FILM_BUDOWA_ZD220T_ZD230T, FILM_URUCHOMIENIE_ZD220T_ZD230T, FILM_KALIBRACJA_ZD220T_ZD230T, FILM_TRYB_DRUKU_ZD220T_ZD230T, FILM_TASMA_ZD220_ZD230, FILM_CZYSZCZENIE_ZD220T_ZD230T, FILM_ODKLEJAK_ZD220T_ZD230T, FILM_OBCINAK_ZD230T],
+    filmy: [FILM_BUDOWA_ZD220T_ZD230T, FILM_URUCHOMIENIE_ZD220T_ZD230T, FILM_KALIBRACJA_ZD220T_ZD230T, FILM_TRYB_DRUKU_ZD220T_ZD230T, FILM_TASMA_ZD220_ZD230, FILM_CZYSZCZENIE_ZD220T_ZD230T, FILM_ODKLEJAK_ZD220T_ZD230T, FILM_OBCINAK_ZD230T, FILM_TRYB_CHRONIONY],
     poradniki: [
       'serwis-drukarki-zebra-zd220-diagnostyka-naprawa',
       'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',
@@ -1138,6 +1151,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     ],
   },
   'zebra-zd621d': {
+    filmy: [FILM_TRYB_CHRONIONY],
     poradniki: [
       'serwis-drukarki-zebra-zd620-zd621-diagnostyka-naprawa',
       'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',
@@ -1276,7 +1290,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     ],
   },
   'zebra-zd621t': {
-    filmy: [FILM_TASMA_ZD421_ZD621],
+    filmy: [FILM_TASMA_ZD421_ZD621, FILM_TRYB_CHRONIONY],
     poradniki: [
       'serwis-drukarki-zebra-zd620-zd621-diagnostyka-naprawa',
       'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',
@@ -1418,7 +1432,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     ],
   },
   'zebra-zd411d': {
-    filmy: [FILM_ETYKIETY_ZD411D_ZD611D, FILM_KALIBRACJA_ZD411_ZD611, FILM_SZEROKOSC_ZD411_ZD611, FILM_ZACZERNIENIE_ZD411_ZD611, FILM_ODKLEJAK_ZD411_ZD611, FILM_WALEK_ZD411_ZD611, FILM_GLOWICA_ZD411D_ZD611D, FILM_CZYSZCZENIE_ZD411D_ZD611D, FILM_OBCINAK_ZD411_ZD611, FILM_PRINT_TOUCH_ZD411, FILM_RS232_ZD411_ZD611],
+    filmy: [FILM_ETYKIETY_ZD411D_ZD611D, FILM_KALIBRACJA_ZD411_ZD611, FILM_SZEROKOSC_ZD411_ZD611, FILM_ZACZERNIENIE_ZD411_ZD611, FILM_ODKLEJAK_ZD411_ZD611, FILM_WALEK_ZD411_ZD611, FILM_GLOWICA_ZD411D_ZD611D, FILM_CZYSZCZENIE_ZD411D_ZD611D, FILM_OBCINAK_ZD411_ZD611, FILM_PRINT_TOUCH_ZD411, FILM_RS232_ZD411_ZD611, FILM_TRYB_CHRONIONY],
     poradniki: [
       'najczestsze-awarie-drukarek-zebra-top10',
       'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',
@@ -1537,7 +1551,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     ],
   },
   'zebra-zd411t': {
-    filmy: [FILM_KALIBRACJA_ZD411_ZD611, FILM_SZEROKOSC_ZD411_ZD611, FILM_ZACZERNIENIE_ZD411_ZD611, FILM_ODKLEJAK_ZD411_ZD611, FILM_WALEK_ZD411_ZD611, FILM_TASMA_ZD411T_ZD611T, FILM_OBCINAK_ZD411_ZD611, FILM_PRINT_TOUCH_ZD411, FILM_RS232_ZD411_ZD611],
+    filmy: [FILM_KALIBRACJA_ZD411_ZD611, FILM_SZEROKOSC_ZD411_ZD611, FILM_ZACZERNIENIE_ZD411_ZD611, FILM_ODKLEJAK_ZD411_ZD611, FILM_WALEK_ZD411_ZD611, FILM_TASMA_ZD411T_ZD611T, FILM_OBCINAK_ZD411_ZD611, FILM_PRINT_TOUCH_ZD411, FILM_RS232_ZD411_ZD611, FILM_TRYB_CHRONIONY],
     poradniki: [
       'najczestsze-awarie-drukarek-zebra-top10',
       'blady-wydruk-drukarka-zebra-przyczyny-rozwiazania',
@@ -1664,6 +1678,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     ],
   },
   'zebra-zq610-plus': {
+    filmy: [FILM_TRYB_CHRONIONY],
     rekomendowanyPn: 'ZQ61-AUXAE14-00',
     zdjecieGlowne: '/sklep_photo/urzadzenia/zq610plus_3.webp',
     wSkrocie: [
@@ -1788,6 +1803,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     ],
   },
   'zebra-zq620-plus': {
+    filmy: [FILM_TRYB_CHRONIONY],
     rekomendowanyPn: 'ZQ62-AUXAE14-00',
     zdjecieGlowne: '/sklep_photo/urzadzenia/zq620plus_1.webp',
     wSkrocie: [
@@ -1913,6 +1929,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     ],
   },
   'zebra-zq630-plus': {
+    filmy: [FILM_TRYB_CHRONIONY],
     rekomendowanyPn: 'ZQ63-AUXAE14-00',
     zdjecieGlowne: '/sklep_photo/urzadzenia/zq630plus_2.webp',
     wSkrocie: [
@@ -2037,6 +2054,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     ],
   },
   'zebra-zq511': {
+    filmy: [FILM_TRYB_CHRONIONY],
     rekomendowanyPn: 'ZQ51-BUW000E-00',
     zdjecieGlowne: '/sklep_photo/urzadzenia/zq511_1.webp',
     wSkrocie: [
@@ -2176,6 +2194,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     ],
   },
   'zebra-zq521': {
+    filmy: [FILM_TRYB_CHRONIONY],
     rekomendowanyPn: 'ZQ52-BUE000E-00',
     zdjecieGlowne: '/sklep_photo/urzadzenia/zq521_1.webp',
     wSkrocie: [
@@ -2314,6 +2333,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     ],
   },
   'zebra-zq310-plus': {
+    filmy: [FILM_TRYB_CHRONIONY],
     rekomendowanyPn: 'ZQ31-A0E04TE-00',
     zdjecieGlowne: '/sklep_photo/urzadzenia/zq310plus_1.webp',
     wSkrocie: [
@@ -2440,6 +2460,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     ],
   },
   'zebra-zq320-plus': {
+    filmy: [FILM_TRYB_CHRONIONY],
     rekomendowanyPn: 'ZQ32-A0E04TE-00',
     zdjecieGlowne: '/sklep_photo/urzadzenia/zq320plus_1.webp',
     wSkrocie: [
@@ -2810,6 +2831,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     ],
   },
   'zebra-zt111': {
+    filmy: [FILM_TRYB_CHRONIONY],
     rekomendowanyPn: 'ZT11142-T0E000FZ',
     zdjecieGlowne: '/sklep_photo/urzadzenia/zt111_1.webp',
     wSkrocie: [
@@ -2943,6 +2965,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     ],
   },
   'zebra-zt231': {
+    filmy: [FILM_TRYB_CHRONIONY],
     rekomendowanyPn: 'ZT23142-T0E000FZ',
     zdjecieGlowne: '/sklep_photo/urzadzenia/zt231_1.webp',
     wSkrocie: [
@@ -3090,6 +3113,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
   },
 
   'zebra-zt411': {
+    filmy: [FILM_TRYB_CHRONIONY],
     rekomendowanyPn: 'ZT41142-T0E0000Z',
     zdjecieGlowne: '/sklep_photo/urzadzenia/zt411_1.webp',
     wSkrocie: [
@@ -3243,6 +3267,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     ],
   },
   'zebra-zt421': {
+    filmy: [FILM_TRYB_CHRONIONY],
     rekomendowanyPn: 'ZT42162-T0E0000Z',
     zdjecieGlowne: '/sklep_photo/urzadzenia/zt421_1.webp',
     wSkrocie: [
@@ -3383,6 +3408,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     ],
   },
   'zebra-zt510': {
+    filmy: [FILM_TRYB_CHRONIONY],
     rekomendowanyPn: 'ZT51042-T0E0000Z',
     zdjecieGlowne: '/sklep_photo/urzadzenia/zt510_1.webp',
     wSkrocie: [
@@ -3535,6 +3561,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     ],
   },
   'zebra-zt610': {
+    filmy: [FILM_TRYB_CHRONIONY],
     rekomendowanyPn: 'ZT61042-T0E0100Z',
     zdjecieGlowne: '/sklep_photo/urzadzenia/zt610_1.webp',
     wSkrocie: [
@@ -3688,6 +3715,7 @@ export const TRESC_KART: Record<string, TrescKarty> = {
     ],
   },
   'zebra-zt620': {
+    filmy: [FILM_TRYB_CHRONIONY],
     rekomendowanyPn: 'ZT62062-T0E0100Z',
     zdjecieGlowne: '/sklep_photo/urzadzenia/zt620_1.webp',
     wSkrocie: [
