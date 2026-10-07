@@ -19,7 +19,7 @@ const faqItems = [
   },
   {
     question: 'Jaki jest czas dostawy?',
-    answer: 'Produkty dostępne na magazynie wysyłamy w ciągu 24 godzin od złożenia zamówienia. Części sprowadzane z magazynu centralnego Zebra dostarczamy w ciągu 3-7 dni roboczych. Aktualny status dostępności widoczny jest przy każdym produkcie.'
+    answer: 'Termin zależy od lokalizacji magazynu. Magazyn PL: wysyłka w 24 h; magazyn EU: wysyłka w 2–3 dni robocze. Przy produktach bez stanu magazynowego potwierdzamy termin indywidualnie. Aktualną dostępność sprawdź na karcie produktu.'
   },
   {
     question: 'Czy oferujecie wymianę głowicy w serwisie?',
@@ -82,7 +82,7 @@ export default function SklepPage() {
             </h1>
 
             <p className="text-sm text-gray-200 mb-4 max-w-xl">
-              Drukarki etykiet, terminale, skanery i tablety Zebra oraz części zamienne:
+              Drukarki etykiet Zebra oraz oryginalne części zamienne:
               głowice 203, 300 i 600 dpi, wałki dociskowe, akumulatory i moduły łączności.
               Ceny i stany magazynowe pobieramy na żywo od dystrybutorów, a naprawy
               gwarancyjne prowadzimy we własnym autoryzowanym serwisie Zebry.
@@ -91,6 +91,16 @@ export default function SklepPage() {
           </div>
         </section>
 
+        <nav aria-label="Wybierz ofertę sklepu" className="max-w-6xl mx-auto px-4 pt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <Link href="/sklep/drukarki-etykiet" className="rounded-xl border border-gray-200 bg-white p-5 hover:border-blue-400">
+            <h2 className="font-semibold text-gray-900">Drukarki etykiet Zebra →</h2>
+            <p className="mt-1 text-sm text-gray-600">Porównaj modele i wybierz rozdzielczość oraz łączność.</p>
+          </Link>
+          <Link href="/sklep/glowice" className="rounded-xl border border-gray-200 bg-white p-5 hover:border-blue-400">
+            <h2 className="font-semibold text-gray-900">Części zamienne →</h2>
+            <p className="mt-1 text-sm text-gray-600">Znajdź część po modelu urządzenia lub numerze katalogowym.</p>
+          </Link>
+        </nav>
         {/* Interactive Shop - Client Component */}
         <ShopMainPage />
 
@@ -121,7 +131,7 @@ export default function SklepPage() {
                 105SL Plus, ZM400). Najpopularniejsze Part Numbers w naszym sklepie to:{' '}
                 <strong>P1058930-009</strong> (ZT411 203 DPI),{' '}
                 <strong>P1058930-010</strong> (ZT411 300 DPI),{' '}
-                <strong>P1112640-019</strong> (ZD421 203 DPI) oraz{' '}
+                <strong>P1112640-019</strong> (ZD421d 203 DPI) oraz{' '}
                 <strong>P1083320-010</strong> (ZT610 203 DPI).
                 Żywotność oryginalnej głowicy Zebra to <strong>1-2 miliony cali druku</strong> (25-50 km etykiet)
                 w zależności od rozdzielczości i stosowanych materiałów.
@@ -165,9 +175,9 @@ export default function SklepPage() {
                     </tr>
                     <tr className="hover:bg-gray-50">
                       <td className="px-4 py-2 font-medium text-gray-900">Żywotność</td>
-                      <td className="px-4 py-2 text-gray-600">50-150 km</td>
-                      <td className="px-4 py-2 text-gray-600">30-100 km</td>
-                      <td className="px-4 py-2 text-gray-600">20-50 km</td>
+                      <td className="px-4 py-2 text-gray-600">Zależna od modelu i eksploatacji</td>
+                      <td className="px-4 py-2 text-gray-600">Zależna od modelu i eksploatacji</td>
+                      <td className="px-4 py-2 text-gray-600">Zależna od modelu i eksploatacji</td>
                     </tr>
                     <tr className="hover:bg-gray-50">
                       <td className="px-4 py-2 font-medium text-gray-900">Min. kod kreskowy</td>
@@ -238,7 +248,7 @@ export default function SklepPage() {
               Popularne modele drukarek Zebra i dostępne części zamienne
             </h2>
             <p className="text-sm text-gray-600 mb-4">
-              Poniższa tabela zawiera najczęściej zamawiane modele drukarek Zebra wraz z Part Numbers głowic.
+              Poniższa tabela zawiera najczęściej zamawiane modele drukarek Zebra z odnośnikami do doboru głowic.
               Jeśli nie widzisz swojego modelu — <a href="tel:+48601619898" className="text-blue-600 hover:text-blue-800">zadzwoń</a>,
               sprowadzamy części do wszystkich modeli Zebra.
             </p>
@@ -249,7 +259,7 @@ export default function SklepPage() {
                     <th className="px-3 py-3 font-semibold text-gray-700 border-b border-gray-200">Model drukarki</th>
                     <th className="px-3 py-3 font-semibold text-gray-700 border-b border-gray-200">Rozdzielczości</th>
                     <th className="px-3 py-3 font-semibold text-gray-700 border-b border-gray-200">Typ</th>
-                    <th className="px-3 py-3 font-semibold text-gray-700 border-b border-gray-200">Part Number głowicy</th>
+                    <th className="px-3 py-3 font-semibold text-gray-700 border-b border-gray-200">Dobór głowicy</th>
                     <th className="px-3 py-3 font-semibold text-gray-700 border-b border-gray-200">Części</th>
                   </tr>
                 </thead>
@@ -262,7 +272,7 @@ export default function SklepPage() {
                     <td className="px-3 py-2.5 font-medium text-gray-900">ZD220t / ZD230t</td>
                     <td className="px-3 py-2.5 text-gray-600">203 DPI</td>
                     <td className="px-3 py-2.5 text-gray-600">Biurkowa</td>
-                    <td className="px-3 py-2.5 text-gray-600 font-mono text-xs">P1115690-007</td>
+                    <td className="px-3 py-2.5 text-gray-600 font-mono text-xs">Dobierz na karcie modelu</td>
                     <td className="px-3 py-2.5">
                       <Link href="/sklep/glowice/drukarki-biurkowe" className="text-blue-600 hover:text-blue-800 text-xs font-medium">Głowice →</Link>
                     </td>
@@ -271,7 +281,7 @@ export default function SklepPage() {
                     <td className="px-3 py-2.5 font-medium text-gray-900">ZD411t</td>
                     <td className="px-3 py-2.5 text-gray-600">203, 300 DPI</td>
                     <td className="px-3 py-2.5 text-gray-600">Biurkowa</td>
-                    <td className="px-3 py-2.5 text-gray-600 font-mono text-xs">P1112640-019 / -020</td>
+                    <td className="px-3 py-2.5 text-gray-600 font-mono text-xs">Dobierz na karcie modelu</td>
                     <td className="px-3 py-2.5">
                       <Link href="/sklep/glowice/drukarki-biurkowe" className="text-blue-600 hover:text-blue-800 text-xs font-medium">Głowice →</Link>
                     </td>
@@ -280,7 +290,7 @@ export default function SklepPage() {
                     <td className="px-3 py-2.5 font-medium text-gray-900">ZD421t</td>
                     <td className="px-3 py-2.5 text-gray-600">203, 300 DPI</td>
                     <td className="px-3 py-2.5 text-gray-600">Biurkowa</td>
-                    <td className="px-3 py-2.5 text-gray-600 font-mono text-xs">P1112640-019 / -020</td>
+                    <td className="px-3 py-2.5 text-gray-600 font-mono text-xs">Dobierz na karcie modelu</td>
                     <td className="px-3 py-2.5">
                       <Link href="/sklep/glowice/drukarki-biurkowe/zebra-zd421t" className="text-blue-600 hover:text-blue-800 text-xs font-medium">Głowice →</Link>
                     </td>
@@ -289,7 +299,7 @@ export default function SklepPage() {
                     <td className="px-3 py-2.5 font-medium text-gray-900">ZD611t / ZD621t</td>
                     <td className="px-3 py-2.5 text-gray-600">203, 300 DPI</td>
                     <td className="px-3 py-2.5 text-gray-600">Biurkowa</td>
-                    <td className="px-3 py-2.5 text-gray-600 font-mono text-xs">P1112640-019 / -020</td>
+                    <td className="px-3 py-2.5 text-gray-600 font-mono text-xs">Dobierz na karcie modelu</td>
                     <td className="px-3 py-2.5">
                       <Link href="/sklep/glowice/drukarki-biurkowe/zebra-zd621t" className="text-blue-600 hover:text-blue-800 text-xs font-medium">Głowice →</Link>
                     </td>
@@ -298,7 +308,7 @@ export default function SklepPage() {
                     <td className="px-3 py-2.5 font-medium text-gray-900">GK420t / GK420d</td>
                     <td className="px-3 py-2.5 text-gray-600">203 DPI</td>
                     <td className="px-3 py-2.5 text-gray-600">Biurkowa</td>
-                    <td className="px-3 py-2.5 text-gray-600 font-mono text-xs">105934-037</td>
+                    <td className="px-3 py-2.5 text-gray-600 font-mono text-xs">Dobierz na karcie modelu</td>
                     <td className="px-3 py-2.5">
                       <Link href="/sklep/glowice/drukarki-biurkowe/zebra-gk420t" className="text-blue-600 hover:text-blue-800 text-xs font-medium">Głowice →</Link>
                     </td>
@@ -307,7 +317,7 @@ export default function SklepPage() {
                     <td className="px-3 py-2.5 font-medium text-gray-900">GX420t / GX420d</td>
                     <td className="px-3 py-2.5 text-gray-600">203 DPI</td>
                     <td className="px-3 py-2.5 text-gray-600">Biurkowa</td>
-                    <td className="px-3 py-2.5 text-gray-600 font-mono text-xs">105934-037</td>
+                    <td className="px-3 py-2.5 text-gray-600 font-mono text-xs">Dobierz na karcie modelu</td>
                     <td className="px-3 py-2.5">
                       <Link href="/sklep/glowice/drukarki-biurkowe" className="text-blue-600 hover:text-blue-800 text-xs font-medium">Głowice →</Link>
                     </td>
@@ -316,7 +326,7 @@ export default function SklepPage() {
                     <td className="px-3 py-2.5 font-medium text-gray-900">GX430t</td>
                     <td className="px-3 py-2.5 text-gray-600">300 DPI</td>
                     <td className="px-3 py-2.5 text-gray-600">Biurkowa</td>
-                    <td className="px-3 py-2.5 text-gray-600 font-mono text-xs">105934-038</td>
+                    <td className="px-3 py-2.5 text-gray-600 font-mono text-xs">Dobierz na karcie modelu</td>
                     <td className="px-3 py-2.5">
                       <Link href="/sklep/glowice/drukarki-biurkowe" className="text-blue-600 hover:text-blue-800 text-xs font-medium">Głowice →</Link>
                     </td>
@@ -329,7 +339,7 @@ export default function SklepPage() {
                     <td className="px-3 py-2.5 font-medium text-gray-900">ZT230</td>
                     <td className="px-3 py-2.5 text-gray-600">203, 300 DPI</td>
                     <td className="px-3 py-2.5 text-gray-600">Przemysłowa</td>
-                    <td className="px-3 py-2.5 text-gray-600 font-mono text-xs">P1037974-010 / -011</td>
+                    <td className="px-3 py-2.5 text-gray-600 font-mono text-xs">Dobierz na karcie modelu</td>
                     <td className="px-3 py-2.5">
                       <Link href="/sklep/glowice/drukarki-przemyslowe/zebra-zt230" className="text-blue-600 hover:text-blue-800 text-xs font-medium">Głowice →</Link>
                     </td>
@@ -338,7 +348,7 @@ export default function SklepPage() {
                     <td className="px-3 py-2.5 font-medium text-gray-900">ZT410 / ZT411</td>
                     <td className="px-3 py-2.5 text-gray-600">203, 300, 600 DPI</td>
                     <td className="px-3 py-2.5 text-gray-600">Przemysłowa</td>
-                    <td className="px-3 py-2.5 text-gray-600 font-mono text-xs">P1058930-009 / -010 / -011</td>
+                    <td className="px-3 py-2.5 text-gray-600 font-mono text-xs">Dobierz na karcie modelu</td>
                     <td className="px-3 py-2.5">
                       <Link href="/sklep/glowice/drukarki-przemyslowe/zebra-zt411" className="text-blue-600 hover:text-blue-800 text-xs font-medium">Głowice →</Link>
                     </td>
@@ -347,7 +357,7 @@ export default function SklepPage() {
                     <td className="px-3 py-2.5 font-medium text-gray-900">ZT420 / ZT421</td>
                     <td className="px-3 py-2.5 text-gray-600">203, 300 DPI</td>
                     <td className="px-3 py-2.5 text-gray-600">Przemysłowa</td>
-                    <td className="px-3 py-2.5 text-gray-600 font-mono text-xs">P1058930-012 / -013</td>
+                    <td className="px-3 py-2.5 text-gray-600 font-mono text-xs">Dobierz na karcie modelu</td>
                     <td className="px-3 py-2.5">
                       <Link href="/sklep/glowice/drukarki-przemyslowe/zebra-zt421" className="text-blue-600 hover:text-blue-800 text-xs font-medium">Głowice →</Link>
                     </td>
@@ -356,7 +366,7 @@ export default function SklepPage() {
                     <td className="px-3 py-2.5 font-medium text-gray-900">ZT510</td>
                     <td className="px-3 py-2.5 text-gray-600">203, 300 DPI</td>
                     <td className="px-3 py-2.5 text-gray-600">Przemysłowa</td>
-                    <td className="px-3 py-2.5 text-gray-600 font-mono text-xs">P1083347-005 / -006</td>
+                    <td className="px-3 py-2.5 text-gray-600 font-mono text-xs">Dobierz na karcie modelu</td>
                     <td className="px-3 py-2.5">
                       <Link href="/sklep/glowice/drukarki-przemyslowe" className="text-blue-600 hover:text-blue-800 text-xs font-medium">Głowice →</Link>
                     </td>
@@ -365,7 +375,7 @@ export default function SklepPage() {
                     <td className="px-3 py-2.5 font-medium text-gray-900">ZT610</td>
                     <td className="px-3 py-2.5 text-gray-600">203, 300, 600 DPI</td>
                     <td className="px-3 py-2.5 text-gray-600">Przemysłowa</td>
-                    <td className="px-3 py-2.5 text-gray-600 font-mono text-xs">P1083320-010 / -011 / -012</td>
+                    <td className="px-3 py-2.5 text-gray-600 font-mono text-xs">Dobierz na karcie modelu</td>
                     <td className="px-3 py-2.5">
                       <Link href="/sklep/glowice/drukarki-przemyslowe/zebra-zt610" className="text-blue-600 hover:text-blue-800 text-xs font-medium">Głowice →</Link>
                     </td>
@@ -374,7 +384,7 @@ export default function SklepPage() {
                     <td className="px-3 py-2.5 font-medium text-gray-900">ZT620</td>
                     <td className="px-3 py-2.5 text-gray-600">203, 300 DPI</td>
                     <td className="px-3 py-2.5 text-gray-600">Przemysłowa</td>
-                    <td className="px-3 py-2.5 text-gray-600 font-mono text-xs">P1083320-015 / -016</td>
+                    <td className="px-3 py-2.5 text-gray-600 font-mono text-xs">Dobierz na karcie modelu</td>
                     <td className="px-3 py-2.5">
                       <Link href="/sklep/glowice/drukarki-przemyslowe/zebra-zt620" className="text-blue-600 hover:text-blue-800 text-xs font-medium">Głowice →</Link>
                     </td>
@@ -383,7 +393,7 @@ export default function SklepPage() {
                     <td className="px-3 py-2.5 font-medium text-gray-900">105SL Plus</td>
                     <td className="px-3 py-2.5 text-gray-600">203, 300 DPI</td>
                     <td className="px-3 py-2.5 text-gray-600">Przemysłowa</td>
-                    <td className="px-3 py-2.5 text-gray-600 font-mono text-xs">P1053360-018 / -019</td>
+                    <td className="px-3 py-2.5 text-gray-600 font-mono text-xs">Dobierz na karcie modelu</td>
                     <td className="px-3 py-2.5">
                       <Link href="/sklep/glowice/drukarki-przemyslowe" className="text-blue-600 hover:text-blue-800 text-xs font-medium">Głowice →</Link>
                     </td>
@@ -392,7 +402,7 @@ export default function SklepPage() {
                     <td className="px-3 py-2.5 font-medium text-gray-900">ZM400</td>
                     <td className="px-3 py-2.5 text-gray-600">203, 300, 600 DPI</td>
                     <td className="px-3 py-2.5 text-gray-600">Przemysłowa</td>
-                    <td className="px-3 py-2.5 text-gray-600 font-mono text-xs">79800M / 79801M / 79802M</td>
+                    <td className="px-3 py-2.5 text-gray-600 font-mono text-xs">Dobierz na karcie modelu</td>
                     <td className="px-3 py-2.5">
                       <Link href="/sklep/glowice/drukarki-przemyslowe" className="text-blue-600 hover:text-blue-800 text-xs font-medium">Głowice →</Link>
                     </td>
@@ -401,7 +411,7 @@ export default function SklepPage() {
                     <td className="px-3 py-2.5 font-medium text-gray-900">S4M</td>
                     <td className="px-3 py-2.5 text-gray-600">203, 300 DPI</td>
                     <td className="px-3 py-2.5 text-gray-600">Przemysłowa</td>
-                    <td className="px-3 py-2.5 text-gray-600 font-mono text-xs">G41400M / G41401M</td>
+                    <td className="px-3 py-2.5 text-gray-600 font-mono text-xs">Dobierz na karcie modelu</td>
                     <td className="px-3 py-2.5">
                       <Link href="/sklep/glowice/drukarki-przemyslowe" className="text-blue-600 hover:text-blue-800 text-xs font-medium">Głowice →</Link>
                     </td>

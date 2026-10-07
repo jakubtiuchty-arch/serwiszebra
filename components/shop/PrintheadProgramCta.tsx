@@ -10,7 +10,7 @@ const LIME = '#A8F000'
 interface PrintheadProgramCtaProps {
   productName?: string | null
   deviceModel?: string | null
-  priceBrutto: number
+  priceBrutto?: number
 }
 
 /**
@@ -52,7 +52,7 @@ export default function PrintheadProgramCta({ productName, deviceModel, priceBru
           ...form,
           productName: productName || undefined,
           deviceModel: deviceModel || undefined,
-          priceBrutto,
+
           pageUrl: typeof window !== 'undefined' ? window.location.href : undefined,
         }),
       })

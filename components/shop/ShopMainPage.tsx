@@ -1,6 +1,8 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { applyLiveOffer, parseLiveOffer, type LiveOffer } from '@/lib/shop-live-offer'
+
+import { useState, useEffect, useMemo } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useCartStore } from '@/lib/cart-store'
@@ -58,6 +60,7 @@ function getProductImage(product: Product): string | null {
 export default function ShopMainPage() {
   const [products, setProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(true)
+  const [loadError, setLoadError] = useState(false)
   const [sortBy, setSortBy] = useState('name')
   const [filters, setFilters] = useState<FilterState>({
     productType: 'glowica',
@@ -71,7 +74,7 @@ export default function ShopMainPage() {
   const [expandedProductTypes, setExpandedProductTypes] = useState<string[]>(['glowica'])
   const [showMobileFilters, setShowMobileFilters] = useState(false)
 
-  const [liveStockMap, setLiveStockMap] = useState<Record<string, number>>({})
+  const [liveStockMap, setLiveStockMap] = useState<Record<string, LiveOffer>>({})
   const addToCart = useCartStore((state) => state.addItem)
 
   // Pobierz live stock z Ingram API dla załadowanych produktów
@@ -84,15 +87,15 @@ export default function ShopMainPage() {
       skus.map(sku =>
         fetch(`/api/shop/product-stock?sku=${encodeURIComponent(sku)}`, { signal: controller.signal })
           .then(r => r.json())
-          .then(data => data.found ? { sku, total: data.total_stock ?? 0 } : null)
+          .then(data => data.found ? { sku, ...parseLiveOffer(data) } : null)
           .catch(() => null)
       )
     ).then(results => {
-      const map: Record<string, number> = {}
+      const map: Record<string, LiveOffer> = {}
       for (const r of results) {
-        if (r) map[r.sku] = r.total
+        if (r) map[r.sku] = r
       }
-      setLiveStockMap(map)
+      if (!controller.signal.aborted) setLiveStockMap(map)
     })
 
     return () => controller.abort()
@@ -104,6 +107,7 @@ export default function ShopMainPage() {
 
   async function fetchProducts() {
     setLoading(true)
+    setLoadError(false)
     try {
       if (filters.search) {
         const params = new URLSearchParams()
@@ -112,6 +116,7 @@ export default function ShopMainPage() {
         params.append('limit', '50')
 
         const res = await fetch(`/api/search?${params.toString()}`)
+        if (!res.ok) throw new Error(`Catalog HTTP ${res.status}`)
         const data = await res.json()
         setProducts(data.products || [])
 
@@ -126,15 +131,24 @@ export default function ShopMainPage() {
         if (sortBy) params.append('sortBy', sortBy)
 
         const res = await fetch(`/api/products?${params.toString()}`)
+        if (!res.ok) throw new Error(`Catalog HTTP ${res.status}`)
         const data = await res.json()
         setProducts(data.products || [])
       }
     } catch (error) {
+      setLoadError(true)
       console.error('Error fetching products:', error)
     } finally {
       setLoading(false)
     }
   }
+
+  const displayProducts = useMemo(() => {
+    const offers = products.map(product => applyLiveOffer(product, liveStockMap))
+    if (sortBy === 'price_asc') offers.sort((a, b) => a.price - b.price)
+    if (sortBy === 'price_desc') offers.sort((a, b) => b.price - a.price)
+    return offers
+  }, [products, liveStockMap, sortBy])
 
   const handleAddToCart = (e: React.MouseEvent, product: Product) => {
     e.preventDefault()
@@ -386,14 +400,14 @@ export default function ShopMainPage() {
                 <div className="flex items-center justify-center py-16">
                   <Loader2 className="w-8 h-8 text-gray-400 animate-spin" />
                 </div>
-              ) : products.length === 0 ? (
+              ) : loadError || products.length === 0 ? (
                 <div className="bg-white rounded-xl border border-gray-200 p-8 sm:p-12 text-center">
                   <Package className="w-10 h-10 text-gray-300 mx-auto mb-3" />
                   <p className="text-sm font-semibold text-gray-900 mb-1">
-                    Nie znaleziono produktów
+                    {loadError ? 'Nie udało się pobrać katalogu' : 'Nie znaleziono produktów'}
                   </p>
                   <p className="text-xs text-gray-500 mb-4">
-                    Zmień filtry lub wyszukiwanie
+                    {loadError ? 'Odśwież stronę lub skontaktuj się z nami.' : 'Zmień filtry lub wyszukiwanie'}
                   </p>
                   <a
                     href="tel:+48601619898"
@@ -405,7 +419,7 @@ export default function ShopMainPage() {
                 </div>
               ) : (
                 <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3">
-                  {products.map((product) => {
+                  {displayProducts.map((product) => {
                     const imageUrl = getProductImage(product)
 
                     return (
@@ -442,7 +456,7 @@ export default function ShopMainPage() {
                           {(() => {
                             const hasLiveData = product.sku in liveStockMap
                             const isAvailable = hasLiveData
-                              ? liveStockMap[product.sku] > 0
+                              ? liveStockMap[product.sku].total > 0
                               : (product.stock > 0 || (product.attributes?.stock_pl ?? 0) > 0 || (product.attributes?.stock_de ?? 0) > 0)
                             return (
                               <>

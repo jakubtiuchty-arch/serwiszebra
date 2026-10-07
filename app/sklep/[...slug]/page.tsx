@@ -388,8 +388,7 @@ function generateSeoDescription(product: Product): string {
   }
   const prefix = genderPrefix[product.product_type] || 'Oryginalny'
   const productName = product.name.charAt(0).toLowerCase() + product.name.slice(1)
-  const pricePL = product.price_brutto.toFixed(2).replace('.', ',')
-  return `${prefix} ${productName}. Cena: ${pricePL} zł brutto. Gwarancja 12 mies., wysyłka 24h. ${product.sku}. Autoryzowany dystrybutor Zebra – TAKMA.`
+  return `${prefix} ${productName}. Sprawdź aktualną cenę na karcie produktu. Gwarancja 12 mies., termin wysyłki przy produkcie. ${product.sku}. Autoryzowany dystrybutor Zebra – TAKMA.`
 }
 
 // Helper: Generuj tytuł SEO (max ~70 znaków, nazwa najpierw + PN)
@@ -535,7 +534,7 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
       const availablePrices = glowice.filter(p => (p.stock ?? 0) > 0).map(p => p.price)
       const minPrice = availablePrices.length > 0 ? Math.floor(Math.min(...availablePrices)) : 422
       const glowiceTitle = `Głowice do drukarek Zebra 203/300/600 DPI od ${minPrice} zł | TAKMA`
-      const glowiceDescription = `Oryginalne głowice do drukarek etykiet Zebra: ZD421, ZD621, ZT411, ZT610, GK420. 203/300/600 DPI, ceny od ${minPrice} zł netto. Wysyłka 24h, gwarancja 12 mies.`
+      const glowiceDescription = `Oryginalne głowice do drukarek etykiet Zebra: ZD421, ZD621, ZT411, ZT610, GK420. 203/300/600 DPI, ceny od ${minPrice} zł netto. Termin wysyłki przy produkcie, gwarancja 12 mies.`
       return {
         title: glowiceTitle,
         description: glowiceDescription,
@@ -564,7 +563,7 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
       const availablePrices = walki.filter(p => (p.stock ?? 0) > 0).map(p => p.price)
       const minPrice = availablePrices.length > 0 ? Math.floor(Math.min(...availablePrices)) : 73
       const walkiTitle = `Wałki dociskowe do drukarek Zebra od ${minPrice} zł | TAKMA`
-      const walkiDescription = `Oryginalne wałki dociskowe (platen roller) do drukarek Zebra: ZD220, ZD421, ZD621, ZT411, ZT610. Ceny od ${minPrice} zł netto. Wysyłka 24h, gwarancja 12 mies.`
+      const walkiDescription = `Oryginalne wałki dociskowe (platen roller) do drukarek Zebra: ZD220, ZD421, ZD621, ZT411, ZT610. Ceny od ${minPrice} zł netto. Termin wysyłki przy produkcie, gwarancja 12 mies.`
       return {
         title: walkiTitle,
         description: walkiDescription,
@@ -593,7 +592,7 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
       const availablePrices = konwertery.filter(p => (p.stock ?? 0) > 0).map(p => p.price)
       const minPrice = availablePrices.length > 0 ? Math.floor(Math.min(...availablePrices)) : 1398
       const kTitle = `Konwertery DPI do drukarek Zebra ZT, ZE od ${minPrice} zł | TAKMA`
-      const kDescription = `Zestawy konwersji DPI do drukarek przemysłowych Zebra ZT i ZE. Zmień rozdzielczość 203/300/600 DPI bez wymiany drukarki. Ceny od ${minPrice} zł netto, wysyłka 24h.`
+      const kDescription = `Zestawy konwersji DPI do drukarek przemysłowych Zebra ZT i ZE. Zmień rozdzielczość 203/300/600 DPI bez wymiany drukarki. Ceny od ${minPrice} zł netto, termin wysyłki przy produkcie.`
       return {
         title: kTitle,
         description: kDescription,
@@ -621,7 +620,7 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
       const availablePrices = zasilacze.filter(p => (p.stock ?? 0) > 0).map(p => p.price)
       const minPrice = availablePrices.length > 0 ? Math.floor(Math.min(...availablePrices)) : 553
       const zasTitle = `Zasilacze do drukarek Zebra ZD, ZT i Xi4 od ${minPrice} zł | TAKMA`
-      const zasDescription = `Oryginalne zasilacze do drukarek Zebra: GK420, ZD411, ZT230, ZT411, ZT421, ZT510, Xi4. Ceny od ${minPrice} zł netto. Wysyłka 24h, gwarancja 12 miesięcy.`
+      const zasDescription = `Oryginalne zasilacze do drukarek Zebra: GK420, ZD411, ZT230, ZT411, ZT421, ZT510, Xi4. Ceny od ${minPrice} zł netto. Termin wysyłki przy produkcie, gwarancja 12 miesięcy.`
       return {
         title: zasTitle,
         description: zasDescription,
@@ -650,7 +649,7 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
       const availablePrices = akumulatory.filter(p => (p.stock ?? 0) > 0).map(p => p.price)
       const minPrice = availablePrices.length > 0 ? Math.floor(Math.min(...availablePrices)) : 205
       const akumTitle = `Akumulatory do urządzeń Zebra TC, MC, ZQ od ${minPrice} zł | TAKMA`
-      const akumDescription = `Oryginalne akumulatory do terminali Zebra TC21, TC22, MC9400, drukarek mobilnych ZQ511, ZQ630 i tabletów ET60. Ceny od ${minPrice} zł netto. Wysyłka 24h.`
+      const akumDescription = `Oryginalne akumulatory do terminali Zebra TC21, TC22, MC9400, drukarek mobilnych ZQ511, ZQ630 i tabletów ET60. Ceny od ${minPrice} zł netto. Termin wysyłki przy produkcie.`
       return {
         title: akumTitle,
         description: akumDescription,
@@ -701,7 +700,7 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
     if (productType.id === 'glowica' && printerCategory.id === 'industrial') {
       return {
         title: 'Głowice do drukarek przemysłowych Zebra ZT411, ZT610 | TAKMA',
-        description: 'Oryginalne głowice drukujące do drukarek przemysłowych Zebra: ZT411, ZT421, ZT510, ZT610, ZT620. Rozdzielczości 203/300/600 DPI. Wysyłka 24h, gwarancja 12 mies.',
+        description: 'Oryginalne głowice drukujące do drukarek przemysłowych Zebra: ZT411, ZT421, ZT510, ZT610, ZT620. Rozdzielczości 203/300/600 DPI. Termin wysyłki przy produkcie, gwarancja 12 mies.',
         keywords: 'głowica zt411, głowica zt421, głowica zt610, głowica zebra przemysłowa, głowica 300 dpi, głowica 600 dpi, printhead zebra industrial',
         openGraph: {
           title: 'Głowice do drukarek przemysłowych Zebra | TAKMA',
@@ -751,10 +750,10 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
     if (productType.id === 'akumulator' && printerCategory.id === 'terminals') {
       return {
         title: 'Akumulatory do terminali Zebra TC21, TC22, MC9400 | TAKMA',
-        description: 'Oryginalne akumulatory do terminali Zebra: TC21/TC26, TC22/TC27, TC53/TC58, MC22/MC27, MC3300x, MC9400. Standard, Extended i Freezer. Wysyłka 24h.',
+        description: 'Oryginalne akumulatory do terminali Zebra: TC21/TC26, TC22/TC27, TC53/TC58, MC22/MC27, MC3300x, MC9400. Standard, Extended i Freezer. Termin wysyłki przy produkcie.',
         openGraph: {
           title: 'Akumulatory do terminali Zebra | TAKMA',
-          description: 'Oryginalne baterie Standard, Extended i Freezer do terminali TC i MC. Wysyłka 24h, gwarancja 12 mies.',
+          description: 'Oryginalne baterie Standard, Extended i Freezer do terminali TC i MC. Termin wysyłki przy produkcie, gwarancja 12 mies.',
           url: 'https://www.serwis-zebry.pl/sklep/akumulatory/terminale',
           type: 'website',
           siteName: 'TAKMA - Autoryzowany Serwis Zebra',
@@ -775,10 +774,10 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
     if (productType.id === 'akumulator' && printerCategory.id === 'mobile') {
       return {
         title: 'Akumulatory do drukarek mobilnych Zebra ZQ | TAKMA',
-        description: 'Oryginalne akumulatory do drukarek mobilnych Zebra: ZQ220 Plus, ZQ310 Plus, ZQ511, ZQ610, ZQ630. Od 2200 do 6800 mAh. Wysyłka 24h, gwarancja 12 mies.',
+        description: 'Oryginalne akumulatory do drukarek mobilnych Zebra: ZQ220 Plus, ZQ310 Plus, ZQ511, ZQ610, ZQ630. Od 2200 do 6800 mAh. Termin wysyłki przy produkcie, gwarancja 12 mies.',
         openGraph: {
           title: 'Akumulatory do drukarek mobilnych Zebra | TAKMA',
-          description: 'Oryginalne baterie do drukarek ZQ220, ZQ310, ZQ511, ZQ610, ZQ630. Wysyłka 24h, gwarancja 12 mies.',
+          description: 'Oryginalne baterie do drukarek ZQ220, ZQ310, ZQ511, ZQ610, ZQ630. Termin wysyłki przy produkcie, gwarancja 12 mies.',
           url: 'https://www.serwis-zebry.pl/sklep/akumulatory/drukarki-mobilne',
           type: 'website',
           siteName: 'TAKMA - Autoryzowany Serwis Zebra',
@@ -799,7 +798,7 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
     if (productType.id === 'walek' && printerCategory.id === 'industrial') {
       return {
         title: 'Wałki dociskowe do drukarek przemysłowych Zebra ZT | TAKMA',
-        description: 'Oryginalne wałki dociskowe (platen roller) do drukarek przemysłowych Zebra: ZT230, ZT411, ZT421, ZT510, ZT610, ZT620. Wysyłka 24h, gwarancja 12 mies.',
+        description: 'Oryginalne wałki dociskowe (platen roller) do drukarek przemysłowych Zebra: ZT230, ZT411, ZT421, ZT510, ZT610, ZT620. Termin wysyłki przy produkcie, gwarancja 12 mies.',
         keywords: 'wałek zt411, wałek zt610, wałek zt620, platen roller zebra, wałek dociskowy zebra przemysłowa, wymiana wałka zebra',
         openGraph: {
           title: 'Wałki dociskowe do drukarek przemysłowych Zebra | TAKMA',
@@ -824,7 +823,7 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
     if (productType.id === 'walek' && printerCategory.id === 'desktop') {
       return {
         title: 'Wałki dociskowe do drukarek biurkowych Zebra ZD | TAKMA',
-        description: 'Oryginalne wałki dociskowe (platen roller) do drukarek biurkowych Zebra: ZD220, ZD230, ZD421, ZD621, ZD510-HC. Wysyłka 24h, gwarancja 12 miesięcy.',
+        description: 'Oryginalne wałki dociskowe (platen roller) do drukarek biurkowych Zebra: ZD220, ZD230, ZD421, ZD621, ZD510-HC. Termin wysyłki przy produkcie, gwarancja 12 miesięcy.',
         keywords: 'wałek zd421, wałek zd621, wałek zd220, platen roller zebra biurkowa, wałek dociskowy 203 dpi, wymiana wałka zebra',
         openGraph: {
           title: 'Wałki dociskowe do drukarek biurkowych Zebra | TAKMA',
@@ -868,10 +867,10 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
     const catGenitive = genitive[printerCategory.name] || printerCategory.name.toLowerCase()
     return {
       title: `${productType.namePlural} do ${catGenitive} Zebra | TAKMA`,
-      description: `Oryginalne ${productType.namePlural.toLowerCase()} do ${catGenitive} Zebra. Gwarancja producenta, wysyłka 24h. Autoryzowany dystrybutor.`,
+      description: `Oryginalne ${productType.namePlural.toLowerCase()} do ${catGenitive} Zebra. Gwarancja producenta, termin wysyłki przy produkcie. Autoryzowany dystrybutor.`,
       openGraph: {
         title: `${productType.namePlural} do ${catGenitive} Zebra | TAKMA`,
-        description: `Oryginalne ${productType.namePlural.toLowerCase()} do ${catGenitive} Zebra. Wysyłka 24h.`,
+        description: `Oryginalne ${productType.namePlural.toLowerCase()} do ${catGenitive} Zebra. Termin wysyłki przy produkcie.`,
         url: `https://www.serwis-zebry.pl/sklep/${slugPath.join('/')}`,
         type: 'website',
         siteName: 'TAKMA - Autoryzowany Serwis Zebra',
@@ -889,10 +888,10 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
       const typeLabel = productType.namePlural
       return {
         title: `${typeLabel} do ${model.name} — oryginalne | TAKMA`,
-        description: `Oryginalne ${productType.namePlural.toLowerCase()} do drukarki ${model.name}. Gwarancja producenta, wysyłka 24h. Sprawdź cenę i dostępność.`,
+        description: `Oryginalne ${productType.namePlural.toLowerCase()} do drukarki ${model.name}. Gwarancja producenta, termin wysyłki przy produkcie. Sprawdź cenę i dostępność.`,
         openGraph: {
           title: `${typeLabel} do ${model.name} | TAKMA`,
-          description: `Oryginalne ${productType.namePlural.toLowerCase()} do ${model.name}. Wysyłka 24h, gwarancja.`,
+          description: `Oryginalne ${productType.namePlural.toLowerCase()} do ${model.name}. Termin wysyłki przy produkcie, gwarancja.`,
           url: `https://www.serwis-zebry.pl/sklep/${slugPath.join('/')}`,
           type: 'website',
           siteName: 'TAKMA - Autoryzowany Serwis Zebra',
@@ -1131,15 +1130,13 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
     }
 
     // Generuj "Szybka odpowiedź" (Paragraph 0 — AEO snippet) dla każdego typu produktu
-    const deliveryInfo = product.stock > 0 ? '24h z magazynu w Polsce' : '3-7 dni'
-    const priceInfo = `${product.price_brutto.toFixed(2).replace('.', ',')} zł brutto`
     let quickAnswer: string | null = null
     if (product.product_type === 'glowica' && product.resolution_dpi) {
-      quickAnswer = `Głowica ${product.sku} to oryginalna część ${product.resolution_dpi} DPI do ${product.device_model || 'drukarki Zebra'}. Cena: ${priceInfo}. Wysyłka ${deliveryInfo}. Gwarancja producenta 12 miesięcy. TAKMA — autoryzowany dystrybutor i serwis Zebra Technologies w Polsce od 2008 roku.`
+      quickAnswer = `Głowica ${product.sku} to oryginalna część ${product.resolution_dpi} DPI do ${product.device_model || 'drukarki Zebra'}. Aktualną cenę i termin wysyłki znajdziesz w panelu zakupu. Gwarancja producenta 12 miesięcy. TAKMA — autoryzowany dystrybutor i serwis Zebra Technologies w Polsce od 2008 roku.`
     } else if (product.product_type === 'walek') {
-      quickAnswer = `Wałek dociskowy ${product.sku} to oryginalny platen roller do ${product.device_model || 'drukarki Zebra'}. Cena: ${priceInfo}. Wysyłka ${deliveryInfo}. Gwarancja 12 miesięcy. TAKMA — autoryzowany dystrybutor i serwis Zebra Technologies w Polsce od 2008 roku.`
+      quickAnswer = `Wałek dociskowy ${product.sku} to oryginalny platen roller do ${product.device_model || 'drukarki Zebra'}. Aktualną cenę i termin wysyłki znajdziesz w panelu zakupu. Gwarancja 12 miesięcy. TAKMA — autoryzowany dystrybutor i serwis Zebra Technologies w Polsce od 2008 roku.`
     } else if (product.product_type === 'akumulator') {
-      quickAnswer = `Akumulator ${product.sku} to oryginalna bateria Li-Ion do ${product.device_model || 'urządzenia Zebra'}. Cena: ${priceInfo}. Wysyłka ${deliveryInfo}. Gwarancja producenta 12 miesięcy. TAKMA — autoryzowany dystrybutor i serwis Zebra Technologies w Polsce od 2008 roku.`
+      quickAnswer = `Akumulator ${product.sku} to oryginalna bateria Li-Ion do ${product.device_model || 'urządzenia Zebra'}. Aktualną cenę i termin wysyłki znajdziesz w panelu zakupu. Gwarancja producenta 12 miesięcy. TAKMA — autoryzowany dystrybutor i serwis Zebra Technologies w Polsce od 2008 roku.`
     }
 
     return (
@@ -1291,7 +1288,11 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
                 {product.description_long && (
                   <div 
                     className="product-description"
-                    dangerouslySetInnerHTML={{ __html: product.description_long }} 
+                    dangerouslySetInnerHTML={{ __html: product.sku === 'P1112640-019'
+                      ? product.description_long
+                          .replace('Ta głowica pasuje też do modeli ZD421t i ZD421c.', 'Przed zamówieniem porównaj numer katalogowy z oznaczeniem obecnej głowicy.')
+                          .replace('Kompatybilność: ZD421d, ZD421t, ZD421c', 'Model drukarki: ZD421d')
+                      : product.description_long }}
                   />
                 )}
                 {!product.description && !product.description_long && (
@@ -2002,7 +2003,7 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
             </h1>
 
             <p className={`text-sm sm:text-base mb-5 sm:mb-6 max-w-2xl text-center md:text-left md:mx-0 ${heroImage ? 'text-gray-200' : 'text-gray-600'}`}>
-              {pageSubtitle}. Wysyłka 24h, gwarancja producenta.
+              {pageSubtitle}. Termin wysyłki przy produkcie, gwarancja producenta.
             </p>
 
             <div className="flex flex-wrap justify-center md:justify-start gap-2 sm:gap-3">
@@ -2010,7 +2011,7 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
                 <span className={heroImage ? 'text-gray-100' : 'text-gray-700'}>Oryginalne części</span>
               </div>
               <div className={`backdrop-blur-sm border px-3 py-1.5 rounded-full text-xs sm:text-sm shadow-sm ${heroImage ? 'bg-white/10 border-white/25' : 'bg-white/80 border-gray-200'}`}>
-                <span className={heroImage ? 'text-gray-100' : 'text-gray-700'}>Wysyłka 24h</span>
+                <span className={heroImage ? 'text-gray-100' : 'text-gray-700'}>Termin wysyłki przy produkcie</span>
               </div>
               <div className={`backdrop-blur-sm border px-3 py-1.5 rounded-full text-xs sm:text-sm shadow-sm ${heroImage ? 'bg-white/10 border-white/25' : 'bg-white/80 border-gray-200'}`}>
                 <span className={heroImage ? 'text-gray-100' : 'text-gray-700'}>Gwarancja</span>
@@ -2057,7 +2058,7 @@ export default async function ShopCategoryPage({ params }: { params: { slug: str
                   Oferujemy <strong>oryginalne głowice drukujące Zebra</strong> w rozdzielczościach 203, 300 i 600 DPI
                   do drukarek biurkowych (ZD421, ZD621, GK420) i przemysłowych (ZT411, ZT610, ZT620).
                   Żywotność oryginalnej głowicy: <strong>1-2 mln cali druku</strong> (25-50 km).
-                  Gwarancja producenta 12 miesięcy. Wysyłka 24h z magazynu w Polsce.
+                  Gwarancja producenta 12 miesięcy. Termin wysyłki zależy od magazynu — sprawdź dostępność produktu.
                   Ceny od {formatPln(glowicaMinPrice)} zł netto (203 DPI) do {formatPln(glowicaMaxPrice)} zł (600 DPI).
                 </p>
               </div>

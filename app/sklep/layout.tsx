@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Sklep Zebra – drukarki, terminale, skanery i części | TAKMA',
-  description: 'Drukarki etykiet, terminale, skanery i tablety Zebra oraz oryginalne części: głowice 203/300/600 DPI, wałki, akumulatory. Ceny na żywo, wysyłka 24h.',
+  description: 'Drukarki etykiet, terminale, skanery i tablety Zebra oraz oryginalne części: głowice 203/300/600 DPI, wałki, akumulatory. Ceny na żywo, termin wysyłki przy produkcie.',
   keywords: [
     'głowica zebra',
     'głowica drukująca zebra',
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     title: 'Sklep Zebra – drukarki, terminale, skanery i części | TAKMA',
-    description: 'Urządzenia Zebra i oryginalne części: głowice 203/300/600 DPI, wałki, akumulatory. Ceny na żywo, wysyłka 24h.',
+    description: 'Urządzenia Zebra i oryginalne części: głowice 203/300/600 DPI, wałki, akumulatory. Ceny na żywo, termin wysyłki przy produkcie.',
     url: 'https://www.serwis-zebry.pl/sklep',
     type: 'website',
     siteName: 'TAKMA - Autoryzowany Serwis Zebra',
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Sklep Zebra – urządzenia i części zamienne | TAKMA',
-    description: 'Drukarki etykiet, terminale i skanery Zebra oraz oryginalne części zamienne. Wysyłka 24h, gwarancja w autoryzowanym serwisie.',
+    description: 'Drukarki etykiet, terminale i skanery Zebra oraz oryginalne części zamienne. Termin wysyłki przy produkcie, gwarancja w autoryzowanym serwisie.',
   },
   alternates: {
     canonical: 'https://www.serwis-zebry.pl/sklep',

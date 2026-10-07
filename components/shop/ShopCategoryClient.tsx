@@ -1,5 +1,7 @@
 'use client'
 
+import { applyLiveOffer, parseLiveOffer, type LiveOffer } from '@/lib/shop-live-offer'
+
 import { useState, useMemo, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -63,7 +65,7 @@ export default function ShopCategoryClient({
 }: ShopCategoryClientProps) {
   const [selectedResolutions, setSelectedResolutions] = useState<number[]>([])
   const [sortBy, setSortBy] = useState('name')
-  const [liveStockMap, setLiveStockMap] = useState<Record<string, number>>({})
+  const [liveStockMap, setLiveStockMap] = useState<Record<string, LiveOffer>>({})
   const addToCart = useCartStore((state) => state.addItem)
 
   // Pobierz live stock z Ingram API dla wszystkich produktów
@@ -76,15 +78,15 @@ export default function ShopCategoryClient({
       skus.map(sku =>
         fetch(`/api/shop/product-stock?sku=${encodeURIComponent(sku)}`, { signal: controller.signal })
           .then(r => r.json())
-          .then(data => data.found ? { sku, total: data.total_stock ?? 0 } : null)
+          .then(data => data.found ? { sku, ...parseLiveOffer(data) } : null)
           .catch(() => null)
       )
     ).then(results => {
-      const map: Record<string, number> = {}
+      const map: Record<string, LiveOffer> = {}
       for (const r of results) {
-        if (r) map[r.sku] = r.total
+        if (r) map[r.sku] = r
       }
-      setLiveStockMap(map)
+      if (!controller.signal.aborted) setLiveStockMap(map)
     })
 
     return () => controller.abort()
@@ -92,7 +94,7 @@ export default function ShopCategoryClient({
 
   // Filtruj i sortuj produkty
   const filteredProducts = useMemo(() => {
-    let products = [...initialProducts]
+    let products = initialProducts.map(product => applyLiveOffer(product, liveStockMap))
 
     // Filtruj po rozdzielczości
     if (selectedResolutions.length > 0) {
@@ -114,7 +116,7 @@ export default function ShopCategoryClient({
     })
 
     return products
-  }, [initialProducts, selectedResolutions, sortBy])
+  }, [initialProducts, selectedResolutions, sortBy, liveStockMap])
 
   const toggleResolution = (res: number) => {
     setSelectedResolutions(prev => 
@@ -218,7 +220,7 @@ export default function ShopCategoryClient({
             // Dostępność: priorytet live data z Ingram API, fallback na dane z DB
             const hasLiveData = product.sku in liveStockMap
             const isAvailable = hasLiveData
-              ? liveStockMap[product.sku] > 0
+              ? liveStockMap[product.sku].total > 0
               : (product.stock > 0 || (product.attributes?.stock_pl ?? 0) > 0 || (product.attributes?.stock_de ?? 0) > 0)
 
             return (

@@ -13,7 +13,6 @@ interface PrintheadProgramBannerProps {
  * na kartach głowic, gdzie klient właśnie widzi cenę wymiany.
  */
 export default function PrintheadProgramBanner({ priceBrutto, deviceModel, productName }: PrintheadProgramBannerProps) {
-  const price = priceBrutto.toFixed(2).replace('.', ',')
 
   return (
     <section className="relative overflow-hidden rounded-xl bg-gray-950 p-5 sm:p-6 mb-4 sm:mb-6 shadow-sm">
@@ -37,7 +36,7 @@ export default function PrintheadProgramBanner({ priceBrutto, deviceModel, produ
           </h2>
 
           <p className="mt-2 text-sm text-white/70 leading-relaxed">
-            Ta wymiana kosztuje {price} zł brutto. Zebra pokrywa koszt głowic zamiennych
+            Zebra pokrywa koszt głowic zamiennych
             {deviceModel ? ` do drukarek ${deviceModel}` : ''} tym firmom, które kupują u nas jej
             oryginalne etykiety i taśmy. Drukarki nie trzeba nigdzie odsyłać.
           </p>
@@ -67,7 +66,6 @@ export default function PrintheadProgramBanner({ priceBrutto, deviceModel, produ
           <PrintheadProgramCta
             productName={productName}
             deviceModel={deviceModel}
-            priceBrutto={priceBrutto}
           />
         </div>
       </div>
