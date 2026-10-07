@@ -584,23 +584,7 @@ export default function HomePage({ opinie }: { opinie: OpinieGoogleDane | null }
 
         <div className="max-w-7xl mx-auto w-full relative z-10">
           <div className="text-center max-w-5xl mx-auto mb-7 lg:mb-8">
-            <h1 className="flex flex-col items-center justify-center gap-1 text-[28px] lg:text-[32px] font-medium text-gray-900 tracking-tight leading-tight">
-              <span>Autoryzowany Serwis</span>
-              {/* Logo zastępuje wyraz „Zebra". Marka musi zostać w TEKŚCIE nagłówka —
-                  strona walczy o frazę „serwis zebra", a tekst w H1 waży więcej niż
-                  atrybut alt. Stąd pusty alt (grafika ozdobna) i wyraz czytany przez
-                  czytniki ekranu oraz wyszukiwarki obok niej. */}
-              <Image
-                src="/IMAGES/partners/logo_zebra.png"
-                alt=""
-                aria-hidden="true"
-                width={800}
-                height={300}
-                className="h-[1.5em] w-auto"
-              />
-              <span className="sr-only">{' Zebra'}</span>
-            </h1>
-            <p className="mt-3 text-[15px] leading-relaxed text-gray-600">
+            <p className="text-[15px] leading-relaxed text-gray-600">
               Zanim wyślesz urządzenie do serwisu, opisz problem. Być może uda nam się rozwiązać go od ręki.
             </p>
           </div>
@@ -608,6 +592,23 @@ export default function HomePage({ opinie }: { opinie: OpinieGoogleDane | null }
           <div className="relative">
             {czatDesktop !== false && <AIChatBox variant="floating" />}
           </div>
+
+          <h1 className="mt-8 flex flex-col items-center justify-center gap-1 text-[28px] lg:text-[32px] font-medium text-gray-900 tracking-tight leading-tight">
+            <span>Autoryzowany Serwis</span>
+            {/* Logo zastępuje wyraz „Zebra". Marka musi zostać w TEKŚCIE nagłówka —
+                strona walczy o frazę „serwis zebra", a tekst w H1 waży więcej niż
+                atrybut alt. Stąd pusty alt (grafika ozdobna) i wyraz czytany przez
+                czytniki ekranu oraz wyszukiwarki obok niej. */}
+            <Image
+              src="/IMAGES/partners/logo_zebra.png"
+              alt=""
+              aria-hidden="true"
+              width={800}
+              height={300}
+              className="h-[1.5em] w-auto"
+            />
+            <span className="sr-only">{' Zebra'}</span>
+          </h1>
         </div>
       </section>
     </main> {/* Close gradient wrapper / main content */}
