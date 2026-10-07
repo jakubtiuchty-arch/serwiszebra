@@ -628,7 +628,7 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
           className={`min-h-0 overflow-y-auto flex flex-col ${messages.length > 0 ? 'flex-1' : 'flex-none'}`}
         >
           <div className="text-center px-1 pt-6 pb-4">
-            <p className="text-sm leading-relaxed text-gray-600">
+            <p className="text-base leading-relaxed text-gray-600">
               Zanim wyślesz urządzenie do serwisu, opisz problem. Być może uda nam się rozwiązać go od ręki.
             </p>
           </div>

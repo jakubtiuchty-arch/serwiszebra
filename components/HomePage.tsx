@@ -584,7 +584,7 @@ export default function HomePage({ opinie }: { opinie: OpinieGoogleDane | null }
 
         <div className="max-w-7xl mx-auto w-full relative z-10">
           <div className="text-center max-w-5xl mx-auto mb-7 lg:mb-8">
-            <p className="text-[15px] leading-relaxed text-gray-600">
+            <p className="text-[18px] lg:text-[20px] leading-relaxed text-gray-600">
               Zanim wyślesz urządzenie do serwisu, opisz problem. Być może uda nam się rozwiązać go od ręki.
             </p>
           </div>
@@ -593,7 +593,8 @@ export default function HomePage({ opinie }: { opinie: OpinieGoogleDane | null }
             {czatDesktop !== false && <AIChatBox variant="floating" />}
           </div>
 
-          <h1 className="mt-8 flex flex-col items-center justify-center gap-1 text-[28px] lg:text-[32px] font-medium text-gray-900 tracking-tight leading-tight">
+          {/* Bez gap: PNG logo ma ~0.24em przezroczystego marginesu z lewej i to on robi odstęp od tekstu */}
+          <h1 className="mt-5 flex items-center justify-center text-[28px] lg:text-[32px] font-medium text-gray-900 tracking-tight leading-tight">
             <span>Autoryzowany Serwis</span>
             {/* Logo zastępuje wyraz „Zebra". Marka musi zostać w TEKŚCIE nagłówka —
                 strona walczy o frazę „serwis zebra", a tekst w H1 waży więcej niż
