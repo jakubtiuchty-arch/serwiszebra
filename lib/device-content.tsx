@@ -64,15 +64,17 @@ export interface TrescKarty {
   filmy?: NonNullable<BlogPost['video']>[]
 }
 
-/** „Zakładanie taśmy (kalki) w Zebra ZD421t i ZD621t" — procedura jest w obu modelach taka sama */
+/** „Zakładanie taśmy (kalki) w drukarce Zebra ZD421t" (v4, 7.10.2026). Zakładanie rolki jest w ZD421t i ZD621t takie samo,
+ *  więc film stoi na obu kartach; końcówka z panelem (SUPPLIES, FEED, FEED + CANCEL) dotyczy ZD421t (decyzja usera 7.10) */
 const FILM_TASMA_ZD421_ZD621: NonNullable<BlogPost['video']> = {
-  youtubeId: 'h6j_W7V1DGE',
-  tytul: 'Zakładanie taśmy (kalki) w Zebra ZD421t i ZD621t krok po kroku',
-  opis: 'Poradnik serwis-zebry.pl z polskim lektorem: pusta gilza na górne trzpienie, folia i pasek kleju, rolka taśmy, początek taśmy przed głowicą i nawinięcie. Do tego FEED, tryb termotransferowy, raport konfiguracji oraz taśmy 300 m z adapterami gilz.',
-  kadr: '/wideo/zakladanie-tasmy-zebra-zd421t.jpg',
-  czas: 'PT3M2S',
-  dodano: '2026-09-27T18:54:01+02:00',
-  podpis: 'Film: zakładanie taśmy termotransferowej w Zebra ZD421t i ZD621t krok po kroku (3:02).',
+  youtubeId: 'NK0PaDKg4lg',
+  tytul: 'Zakładanie taśmy (kalki) w drukarce Zebra ZD421t',
+  opis: 'Poradnik serwis-zebry.pl z polskim lektorem: koniec taśmy i zdjęcie zużytej rolki, dobór taśmy, gilza odbiorcza i rolka podająca, przyklejenie i nawinięcie taśmy, taśma 300 m z adapterami. Na końcu FEED, tryb druku termotransferowego i raport konfiguracji.',
+  kadr: '/wideo/zakladanie-tasmy-zebra-zd421t-v4.jpg',
+  czas: 'PT5M18S',
+  dodano: '2026-10-07T11:47:45+02:00',
+  podpis: 'Film: zakładanie taśmy (kalki) w drukarce Zebra ZD421t (5:18).',
+  krotko: 'Zakładanie taśmy',
 }
 
 /** „Wymiana taśmy (kalki) w Zebra ZD220t i ZD230t" — procedura jest w obu modelach taka sama */

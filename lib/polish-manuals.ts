@@ -161,7 +161,7 @@ Zebra ZD421t to kompaktowa drukarka etykiet wykorzystująca technologię **druku
       {
         title: '4. Ładowanie taśmy ribbon',
         videos: [
-          { youtubeId: 'h6j_W7V1DGE', title: 'Zakładanie taśmy (kalki) w ZD421t i ZD621t krok po kroku', thumbnail: '/wideo/zakladanie-tasmy-zebra-zd421t.jpg' },
+          { youtubeId: 'NK0PaDKg4lg', title: 'Zakładanie taśmy (kalki) w drukarce Zebra ZD421t', thumbnail: '/wideo/zakladanie-tasmy-zebra-zd421t-v4.jpg' },
         ],
         content: `
 > **WAŻNE:** Ribbon musi być **szerszy niż materiał**, aby chronić głowicę drukującą.
@@ -266,7 +266,7 @@ Naciśnij **FEED** - powinna wysunąć się **dokładnie jedna etykieta**. Jeśl
         title: '7. Podłączenie do komputera',
         videos: [
           { youtubeId: 'LCzG5DxX9Nk', title: 'Porty i złącza w ZD421t', thumbnail: '/zd421t_porty.jpeg' },
-          { youtubeId: 'PwC9AJpV-l0', title: 'Konfiguracja sieci LAN w drukarkach Zebra', thumbnail: '/lan_all.jpeg' },
+          { youtubeId: '1Av1j5J83eo', title: 'Konfiguracja sieci LAN (Ethernet) w drukarkach Zebra ZD411, ZD421, ZD611 i ZD621', thumbnail: '/wideo/siec-lan-zebra-zd411-zd421-zd611-zd621.jpg' },
           { youtubeId: 'd-CNBSrBzGQ', title: 'Montaż modułu Ethernet w drukarkach Zebra', thumbnail: '/motaż_eth.jpeg' },
           { youtubeId: 'lF-pJbhYeVM', title: 'Konfiguracja Wi-Fi w ZD421', thumbnail: '/wifi_zd421.jpeg' },
         ],
@@ -687,7 +687,7 @@ Naciśnij **FEED** - powinna wysunąć się **dokładnie jedna etykieta**. Jeśl
       {
         title: '6. Podłączenie do komputera',
         videos: [
-          { youtubeId: 'PwC9AJpV-l0', title: 'Konfiguracja sieci LAN w drukarkach Zebra', thumbnail: '/lan_all.jpeg' },
+          { youtubeId: '1Av1j5J83eo', title: 'Konfiguracja sieci LAN (Ethernet) w drukarkach Zebra ZD411, ZD421, ZD611 i ZD621', thumbnail: '/wideo/siec-lan-zebra-zd411-zd421-zd611-zd621.jpg' },
           { youtubeId: 'd-CNBSrBzGQ', title: 'Montaż modułu Ethernet w drukarkach Zebra', thumbnail: '/motaż_eth.jpeg' },
           { youtubeId: 'lF-pJbhYeVM', title: 'Konfiguracja Wi-Fi w ZD421', thumbnail: '/wifi_zd421.jpeg' },
         ],
@@ -1051,7 +1051,7 @@ Zebra ZD621t to zaawansowana drukarka etykiet z serii **Premium**, wykorzystują
       {
         title: '4. Ładowanie taśmy ribbon',
         videos: [
-          { youtubeId: 'h6j_W7V1DGE', title: 'Zakładanie taśmy (kalki) w ZD421t i ZD621t krok po kroku', thumbnail: '/wideo/zakladanie-tasmy-zebra-zd421t.jpg' },
+          { youtubeId: 'NK0PaDKg4lg', title: 'Zakładanie taśmy (kalki) w drukarce Zebra ZD421t', thumbnail: '/wideo/zakladanie-tasmy-zebra-zd421t-v4.jpg' },
         ],
         content: `
 > **WAŻNE:** Ribbon musi być **szerszy niż materiał**, aby chronić głowicę drukującą.
@@ -1178,7 +1178,7 @@ Naciśnij **FEED** - powinna wysunąć się **dokładnie jedna etykieta**. Jeśl
       {
         title: '7. Podłączenie do komputera',
         videos: [
-          { youtubeId: 'PwC9AJpV-l0', title: 'Konfiguracja sieci LAN w drukarkach Zebra', thumbnail: '/lan_all.jpeg' },
+          { youtubeId: '1Av1j5J83eo', title: 'Konfiguracja sieci LAN (Ethernet) w drukarkach Zebra ZD411, ZD421, ZD611 i ZD621', thumbnail: '/wideo/siec-lan-zebra-zd411-zd421-zd611-zd621.jpg' },
           { youtubeId: 'd-CNBSrBzGQ', title: 'Montaż modułu Ethernet w drukarkach Zebra', thumbnail: '/motaż_eth.jpeg' },
         ],
         content: `
@@ -1652,7 +1652,7 @@ Naciśnij **FEED** - powinna wysunąć się **dokładnie jedna etykieta**. Jeśl
       {
         title: '6. Podłączenie do komputera',
         videos: [
-          { youtubeId: 'PwC9AJpV-l0', title: 'Konfiguracja sieci LAN w drukarkach Zebra', thumbnail: '/lan_all.jpeg' },
+          { youtubeId: '1Av1j5J83eo', title: 'Konfiguracja sieci LAN (Ethernet) w drukarkach Zebra ZD411, ZD421, ZD611 i ZD621', thumbnail: '/wideo/siec-lan-zebra-zd411-zd421-zd611-zd621.jpg' },
           { youtubeId: 'd-CNBSrBzGQ', title: 'Montaż modułu Ethernet w drukarkach Zebra', thumbnail: '/motaż_eth.jpeg' },
         ],
         content: `
@@ -2053,7 +2053,7 @@ Antena RFID znajduje się **między wałkiem napędowym a kanałem czujnika mate
       {
         title: '4. Ładowanie taśmy ribbon',
         videos: [
-          { youtubeId: 'h6j_W7V1DGE', title: 'Zakładanie taśmy (kalki) w ZD421t i ZD621t krok po kroku', thumbnail: '/wideo/zakladanie-tasmy-zebra-zd421t.jpg' },
+          { youtubeId: 'NK0PaDKg4lg', title: 'Zakładanie taśmy (kalki) w drukarce Zebra ZD421t', thumbnail: '/wideo/zakladanie-tasmy-zebra-zd421t-v4.jpg' },
         ],
         content: `
 > **WAŻNE:** Ribbon musi być **szerszy niż materiał**, aby chronić głowicę drukującą.
@@ -2166,7 +2166,7 @@ Po załadowaniu nowego materiału RFID:
       {
         title: '7. Podłączenie do komputera',
         videos: [
-          { youtubeId: 'PwC9AJpV-l0', title: 'Konfiguracja sieci LAN w drukarkach Zebra', thumbnail: '/lan_all.jpeg' },
+          { youtubeId: '1Av1j5J83eo', title: 'Konfiguracja sieci LAN (Ethernet) w drukarkach Zebra ZD411, ZD421, ZD611 i ZD621', thumbnail: '/wideo/siec-lan-zebra-zd411-zd421-zd611-zd621.jpg' },
           { youtubeId: 'd-CNBSrBzGQ', title: 'Montaż modułu Ethernet w drukarkach Zebra', thumbnail: '/motaż_eth.jpeg' },
         ],
         content: `
@@ -2706,7 +2706,7 @@ Naciśnij **FEED** - powinna wysunąć się **dokładnie jedna etykieta**. Jeśl
       {
         title: '7. Podłączenie do komputera',
         videos: [
-          { youtubeId: 'PwC9AJpV-l0', title: 'Konfiguracja sieci LAN w drukarkach Zebra', thumbnail: '/lan_all.jpeg' },
+          { youtubeId: '1Av1j5J83eo', title: 'Konfiguracja sieci LAN (Ethernet) w drukarkach Zebra ZD411, ZD421, ZD611 i ZD621', thumbnail: '/wideo/siec-lan-zebra-zd411-zd421-zd611-zd621.jpg' },
           { youtubeId: 'd-CNBSrBzGQ', title: 'Montaż modułu Ethernet w drukarkach Zebra', thumbnail: '/motaż_eth.jpeg' },
           { youtubeId: 'nAVvr1W81pQ', title: 'Port szeregowy RS-232 w ZD411 i ZD611', thumbnail: '/wideo/port-rs232-zebra-zd411.jpg' },
         ],
@@ -3226,7 +3226,7 @@ Naciśnij **FEED** - powinna wysunąć się **dokładnie jedna etykieta**. Jeśl
       {
         title: '6. Podłączenie do komputera',
         videos: [
-          { youtubeId: 'PwC9AJpV-l0', title: 'Konfiguracja sieci LAN w drukarkach Zebra', thumbnail: '/lan_all.jpeg' },
+          { youtubeId: '1Av1j5J83eo', title: 'Konfiguracja sieci LAN (Ethernet) w drukarkach Zebra ZD411, ZD421, ZD611 i ZD621', thumbnail: '/wideo/siec-lan-zebra-zd411-zd421-zd611-zd621.jpg' },
           { youtubeId: 'd-CNBSrBzGQ', title: 'Montaż modułu Ethernet w drukarkach Zebra', thumbnail: '/motaż_eth.jpeg' },
           { youtubeId: 'nAVvr1W81pQ', title: 'Port szeregowy RS-232 w ZD411 i ZD611', thumbnail: '/wideo/port-rs232-zebra-zd411.jpg' },
         ],
@@ -3771,7 +3771,7 @@ Naciśnij **FEED** - powinna wysunąć się **dokładnie jedna etykieta**. Jeśl
       {
         title: '6. Podłączenie do komputera',
         videos: [
-          { youtubeId: 'PwC9AJpV-l0', title: 'Konfiguracja sieci LAN w drukarkach Zebra', thumbnail: '/lan_all.jpeg' },
+          { youtubeId: '1Av1j5J83eo', title: 'Konfiguracja sieci LAN (Ethernet) w drukarkach Zebra ZD411, ZD421, ZD611 i ZD621', thumbnail: '/wideo/siec-lan-zebra-zd411-zd421-zd611-zd621.jpg' },
           { youtubeId: 'd-CNBSrBzGQ', title: 'Montaż modułu Ethernet w drukarkach Zebra', thumbnail: '/motaż_eth.jpeg' },
         ],
         content: `
@@ -4358,7 +4358,7 @@ Naciśnij **FEED** - powinna wysunąć się **dokładnie jedna etykieta**. Jeśl
       {
         title: '7. Podłączenie do komputera',
         videos: [
-          { youtubeId: 'PwC9AJpV-l0', title: 'Konfiguracja sieci LAN w drukarkach Zebra', thumbnail: '/lan_all.jpeg' },
+          { youtubeId: '1Av1j5J83eo', title: 'Konfiguracja sieci LAN (Ethernet) w drukarkach Zebra ZD411, ZD421, ZD611 i ZD621', thumbnail: '/wideo/siec-lan-zebra-zd411-zd421-zd611-zd621.jpg' },
           { youtubeId: 'd-CNBSrBzGQ', title: 'Montaż modułu Ethernet w drukarkach Zebra', thumbnail: '/motaż_eth.jpeg' },
         ],
         content: `
@@ -4964,7 +4964,7 @@ Resetowanie liczników: **RFID** > **RFID Valid Count** lub **RFID Void Count**
       {
         title: '9. Podłączenie do komputera',
         videos: [
-          { youtubeId: 'PwC9AJpV-l0', title: 'Konfiguracja sieci LAN w drukarkach Zebra', thumbnail: '/lan_all.jpeg' },
+          { youtubeId: '1Av1j5J83eo', title: 'Konfiguracja sieci LAN (Ethernet) w drukarkach Zebra ZD411, ZD421, ZD611 i ZD621', thumbnail: '/wideo/siec-lan-zebra-zd411-zd421-zd611-zd621.jpg' },
           { youtubeId: 'd-CNBSrBzGQ', title: 'Montaż modułu Ethernet w drukarkach Zebra', thumbnail: '/motaż_eth.jpeg' },
         ],
         content: `
