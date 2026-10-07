@@ -594,7 +594,7 @@ export default function HomePage({ opinie }: { opinie: OpinieGoogleDane | null }
           </div>
 
           {/* Bez gap: PNG logo ma ~0.24em przezroczystego marginesu z lewej i to on robi odstęp od tekstu */}
-          <h1 className="mt-5 flex items-center justify-center text-[28px] lg:text-[32px] font-medium text-gray-900 tracking-tight leading-tight">
+          <h1 className="mt-5 flex items-center justify-center text-[26px] font-medium text-gray-900 tracking-tight leading-tight">
             <span>Autoryzowany Serwis</span>
             {/* Logo zastępuje wyraz „Zebra". Marka musi zostać w TEKŚCIE nagłówka —
                 strona walczy o frazę „serwis zebra", a tekst w H1 waży więcej niż
