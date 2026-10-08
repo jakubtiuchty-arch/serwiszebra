@@ -50,7 +50,7 @@ interface DeviceProduct {
 async function getDevice(slug: string): Promise<DeviceProduct | null> {
   try {
     const res = await fetch(
-      `${supabaseUrl}/rest/v1/products?slug=eq.${slug}&product_type=eq.drukarka&is_active=eq.${process.env.CARD_PRINTER_PREVIEW === '1' ? 'false' : 'true'}&select=id,name,slug,sku,price,price_brutto,description,device_model,meta_title,meta_description,image_urls,attributes`,
+      `${supabaseUrl}/rest/v1/products?slug=eq.${slug}&product_type=eq.drukarka${process.env.CARD_PRINTER_PREVIEW === '1' ? '' : '&is_active=eq.true'}&select=id,name,slug,sku,price,price_brutto,description,device_model,meta_title,meta_description,image_urls,attributes`,
       { headers: { apikey: supabaseKey }, next: { revalidate: 300 } }
     )
     if (!res.ok) return null
@@ -303,7 +303,6 @@ export default async function DevicePage({
   }
 
 
-  const faqSchema = null
   const klasa: ReturnType<typeof klasaBySlug> = undefined as ReturnType<typeof klasaBySlug>
 
   const breadcrumbSchema = {
@@ -356,9 +355,6 @@ export default async function DevicePage({
         />
       )}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      {faqSchema && (
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-      )}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
@@ -626,6 +622,7 @@ export default async function DevicePage({
               <h2 className="text-sm sm:text-base font-semibold text-gray-900">
                 Wideoporadniki
               </h2>
+              <p className="mt-2 text-sm text-gray-600">Film o wyświetlaczu i menu dotyczy tylko Zebra ZC300. Zebra ZC100 nie ma wyświetlacza.</p>
               {filmy.length === 1 && (
                 <WideoWpisu film={filmy[0]} priorytet={false} className="mt-4" />
               )}

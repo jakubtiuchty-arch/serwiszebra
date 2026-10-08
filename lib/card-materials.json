@@ -1,0 +1,606 @@
+[
+  {
+    "pn": "800300-250EM",
+    "specs": [
+      {
+        "name": "Typ taśmy",
+        "value": "YMCKO (Yellow-Magenta-Cyan-blacK-Overlay)"
+      },
+      {
+        "name": "Wydajność",
+        "value": "200 wydruków (jednostronnych, pełnokolorowych)"
+      },
+      {
+        "name": "Kompatybilność",
+        "value": "Zebra ZC100, ZC300"
+      },
+      {
+        "name": "Part Number",
+        "value": "800300-250EM"
+      },
+      {
+        "name": "Warstwa ochronna",
+        "value": "Przezroczysta warstwa Overlay"
+      }
+    ],
+    "slug": "zebra-800300-250em",
+    "name": "Zebra 800300-250EM — Taśma YMCKO — 200 wydruków",
+    "models": [
+      "ZC100",
+      "ZC300"
+    ],
+    "kind": "Taśmy",
+    "unit": "1 taśma",
+    "description": "Taśma Zebra 800300-250EM służy do druku kart plastikowych. Panele YMCKO drukują kolorowy obraz, czarny tekst i przezroczystą warstwę ochronną.",
+    "image": "/sklep_photo/materialy-kart/800300-250em.webp"
+  },
+  {
+    "pn": "800300-255EM",
+    "specs": [
+      {
+        "name": "Typ taśmy",
+        "value": "YMCKO (Yellow-Magenta-Cyan-blacK-Overlay)"
+      },
+      {
+        "name": "Wydajność",
+        "value": "300 wydruków jednostronnych"
+      },
+      {
+        "name": "Kompatybilność",
+        "value": "Zebra ZC100, ZC300"
+      },
+      {
+        "name": "Part Number",
+        "value": "800300-255EM"
+      },
+      {
+        "name": "Warstwa ochronna",
+        "value": "Przezroczysta warstwa Overlay"
+      },
+      {
+        "name": "Wymagane oprogramowanie układowe",
+        "value": "V201.01.18 lub nowsze"
+      }
+    ],
+    "slug": "zebra-800300-255em",
+    "name": "Zebra 800300-255EM — Taśma YMCKO — 300 wydruków",
+    "models": [
+      "ZC100",
+      "ZC300"
+    ],
+    "kind": "Taśmy",
+    "unit": "1 taśma",
+    "description": "Taśma Zebra 800300-255EM służy do druku kart plastikowych. Panele YMCKO drukują kolorowy obraz, czarny tekst i przezroczystą warstwę ochronną. Drukarka wymaga oprogramowania układowego V201.01.18 lub nowszego.",
+    "image": "/sklep_photo/materialy-kart/800300-255em.webp"
+  },
+  {
+    "pn": "800300-254EM",
+    "specs": [
+      {
+        "name": "Typ taśmy",
+        "value": "YMCKO (Yellow-Magenta-Cyan-blacK-Overlay)"
+      },
+      {
+        "name": "Wydajność",
+        "value": "800 wydruków jednostronnych (opakowanie zbiorcze)"
+      },
+      {
+        "name": "Kompatybilność",
+        "value": "Zebra ZC100, ZC300"
+      },
+      {
+        "name": "Part Number",
+        "value": "800300-254EM"
+      },
+      {
+        "name": "Szerokość taśmy",
+        "value": "58 mm"
+      },
+      {
+        "name": "Zawartość zestawu",
+        "value": "1 pusta kaseta, 4 rolki taśmy po 200 wydruków, 4 rolki czyszczące"
+      },
+      {
+        "name": "Wymagane oprogramowanie układowe",
+        "value": "V201.01.17 lub nowsze"
+      }
+    ],
+    "slug": "zebra-800300-254em",
+    "name": "Zebra 800300-254EM — Taśmy YMCKO — opakowanie zbiorcze, 800 wydruków",
+    "models": [
+      "ZC100",
+      "ZC300"
+    ],
+    "kind": "Taśmy",
+    "unit": "opakowanie zbiorcze, 800 wydruków",
+    "description": "Taśma Zebra 800300-254EM służy do druku kart plastikowych. Panele YMCKO drukują kolorowy obraz, czarny tekst i przezroczystą warstwę ochronną. Cena dotyczy opakowania zbiorczego o łącznej wydajności 800 wydruków, a nie jednej taśmy. Zestaw zawiera pustą kasetę wielokrotnego użytku, 4 rolki taśmy po 200 wydruków i 4 rolki czyszczące. Drukarka wymaga oprogramowania układowego V201.01.17 lub nowszego. Kaseta obsługuje cztery rolki z zestawu, łącznie 800 wydruków. Po ich zużyciu wymień cały zestaw.",
+    "image": "/sklep_photo/materialy-kart/800300-254em.webp"
+  },
+  {
+    "pn": "800300-370EM",
+    "specs": [
+      {
+        "name": "Typ taśmy",
+        "value": "1/2 YMCKO (panele kolorowe o połowie długości karty)"
+      },
+      {
+        "name": "Wydajność",
+        "value": "400 wydruków jednostronnych"
+      },
+      {
+        "name": "Kompatybilność",
+        "value": "Zebra ZC100, ZC300"
+      },
+      {
+        "name": "Part Number",
+        "value": "800300-370EM"
+      },
+      {
+        "name": "Warstwa ochronna",
+        "value": "Overlay na całej karcie"
+      }
+    ],
+    "slug": "zebra-800300-370em",
+    "name": "Zebra 800300-370EM — Taśma półpanelowa YMCKO — 400 wydruków",
+    "models": [
+      "ZC100",
+      "ZC300"
+    ],
+    "kind": "Taśmy",
+    "unit": "1 taśma",
+    "description": "Taśma Zebra 800300-370EM służy do druku kart plastikowych. Panele YMCKO drukują kolorowy obraz, czarny tekst i przezroczystą warstwę ochronną. Panele kolorowe obejmują połowę długości karty. Czarny nadruk i warstwa ochronna obejmują całą kartę.",
+    "image": "/sklep_photo/materialy-kart/800300-370em.webp"
+  },
+  {
+    "pn": "800300-301",
+    "specs": [
+      {
+        "name": "Typ taśmy",
+        "value": "Monochromatyczna czarna (K)"
+      },
+      {
+        "name": "Wydajność",
+        "value": "2 000 wydruków (jednostronnych)"
+      },
+      {
+        "name": "Kompatybilność",
+        "value": "Zebra ZC100, ZC300"
+      },
+      {
+        "name": "Part Number",
+        "value": "800300-301"
+      }
+    ],
+    "slug": "zebra-800300-301",
+    "name": "Zebra 800300-301 — Taśma czarna — 2000 wydruków",
+    "models": [
+      "ZC100",
+      "ZC300"
+    ],
+    "kind": "Taśmy",
+    "unit": "1 taśma",
+    "description": "Taśma Zebra 800300-301 służy do druku kart plastikowych. Taśma drukuje tekst i grafikę w jednym kolorze.",
+    "image": "/sklep_photo/materialy-kart/800300-301.webp"
+  },
+  {
+    "pn": "800300-309EM",
+    "specs": [
+      {
+        "name": "Typ taśmy",
+        "value": "Monochromatyczna biała (W)"
+      },
+      {
+        "name": "Wydajność",
+        "value": "1 500 wydruków (jednostronnych)"
+      },
+      {
+        "name": "Kompatybilność",
+        "value": "Zebra ZC100, ZC300"
+      },
+      {
+        "name": "Part Number",
+        "value": "800300-309EM"
+      }
+    ],
+    "slug": "zebra-800300-309em",
+    "name": "Zebra 800300-309EM — Taśma biała — 1500 wydruków",
+    "models": [
+      "ZC100",
+      "ZC300"
+    ],
+    "kind": "Taśmy",
+    "unit": "1 taśma",
+    "description": "Taśma Zebra 800300-309EM służy do druku kart plastikowych. Taśma drukuje tekst i grafikę w jednym kolorze.",
+    "image": "/sklep_photo/materialy-kart/800300-309em.webp"
+  },
+  {
+    "pn": "800300-302",
+    "specs": [
+      {
+        "name": "Typ taśmy",
+        "value": "monochromatyczna — czerwona"
+      },
+      {
+        "name": "Wydajność",
+        "value": "1500 wydruków jednostronnych"
+      },
+      {
+        "name": "Kompatybilność",
+        "value": "Zebra ZC100, ZC300"
+      },
+      {
+        "name": "Part Number",
+        "value": "800300-302"
+      },
+      {
+        "name": "Warstwa ochronna",
+        "value": "brak — taśma bez panelu Overlay"
+      }
+    ],
+    "slug": "zebra-800300-302",
+    "name": "Zebra 800300-302 — Taśma czerwona — 1500 wydruków",
+    "models": [
+      "ZC100",
+      "ZC300"
+    ],
+    "kind": "Taśmy",
+    "unit": "1 taśma",
+    "description": "Taśma Zebra 800300-302 służy do druku kart plastikowych. Taśma drukuje tekst i grafikę w jednym kolorze.",
+    "image": "/sklep_photo/materialy-kart/800300-302.webp"
+  },
+  {
+    "pn": "800300-304",
+    "specs": [
+      {
+        "name": "Typ taśmy",
+        "value": "monochromatyczna — niebieska"
+      },
+      {
+        "name": "Wydajność",
+        "value": "1500 wydruków jednostronnych"
+      },
+      {
+        "name": "Kompatybilność",
+        "value": "Zebra ZC100, ZC300"
+      },
+      {
+        "name": "Part Number",
+        "value": "800300-304"
+      },
+      {
+        "name": "Warstwa ochronna",
+        "value": "brak — taśma bez panelu Overlay"
+      }
+    ],
+    "slug": "zebra-800300-304",
+    "name": "Zebra 800300-304 — Taśma niebieska — 1500 wydruków",
+    "models": [
+      "ZC100",
+      "ZC300"
+    ],
+    "kind": "Taśmy",
+    "unit": "1 taśma",
+    "description": "Taśma Zebra 800300-304 służy do druku kart plastikowych. Taśma drukuje tekst i grafikę w jednym kolorze.",
+    "image": "/sklep_photo/materialy-kart/800300-304.webp"
+  },
+  {
+    "pn": "800300-306",
+    "specs": [
+      {
+        "name": "Typ taśmy",
+        "value": "monochromatyczna — złota metaliczna"
+      },
+      {
+        "name": "Wydajność",
+        "value": "1500 wydruków jednostronnych"
+      },
+      {
+        "name": "Kompatybilność",
+        "value": "Zebra ZC100, ZC300"
+      },
+      {
+        "name": "Part Number",
+        "value": "800300-306"
+      },
+      {
+        "name": "Warstwa ochronna",
+        "value": "brak — taśma bez panelu Overlay"
+      }
+    ],
+    "slug": "zebra-800300-306",
+    "name": "Zebra 800300-306 — Taśma złota — 1500 wydruków",
+    "models": [
+      "ZC100",
+      "ZC300"
+    ],
+    "kind": "Taśmy",
+    "unit": "1 taśma",
+    "description": "Taśma Zebra 800300-306 służy do druku kart plastikowych. Taśma drukuje tekst i grafikę w jednym kolorze.",
+    "image": "/sklep_photo/materialy-kart/800300-306.webp"
+  },
+  {
+    "pn": "800300-307",
+    "specs": [
+      {
+        "name": "Typ taśmy",
+        "value": "monochromatyczna — srebrna metaliczna"
+      },
+      {
+        "name": "Wydajność",
+        "value": "1500 wydruków jednostronnych"
+      },
+      {
+        "name": "Kompatybilność",
+        "value": "Zebra ZC100, ZC300"
+      },
+      {
+        "name": "Part Number",
+        "value": "800300-307"
+      },
+      {
+        "name": "Warstwa ochronna",
+        "value": "brak — taśma bez panelu Overlay"
+      }
+    ],
+    "slug": "zebra-800300-307",
+    "name": "Zebra 800300-307 — Taśma srebrna — 1500 wydruków",
+    "models": [
+      "ZC100",
+      "ZC300"
+    ],
+    "kind": "Taśmy",
+    "unit": "1 taśma",
+    "description": "Taśma Zebra 800300-307 służy do druku kart plastikowych. Taśma drukuje tekst i grafikę w jednym kolorze.",
+    "image": "/sklep_photo/materialy-kart/800300-307.webp"
+  },
+  {
+    "pn": "800300-360EM",
+    "specs": [
+      {
+        "name": "Typ taśmy",
+        "value": "YMCKOK (kolor + dwa panele czarne)"
+      },
+      {
+        "name": "Wydajność",
+        "value": "200 wydruków dwustronnych"
+      },
+      {
+        "name": "Kompatybilność",
+        "value": "Zebra ZC300 z drukiem dwustronnym"
+      },
+      {
+        "name": "Part Number",
+        "value": "800300-360EM"
+      },
+      {
+        "name": "Warstwa ochronna",
+        "value": "Overlay na stronie kolorowej"
+      }
+    ],
+    "slug": "zebra-800300-360em",
+    "name": "Zebra 800300-360EM — Taśma YMCKOK — 200 kart dwustronnych",
+    "models": [
+      "ZC300"
+    ],
+    "kind": "Taśmy",
+    "unit": "1 taśma",
+    "description": "Taśma Zebra 800300-360EM służy do druku kart plastikowych. Taśma drukuje kolorowy przód i czarny tył karty. Wymaga drukarki Zebra ZC300 z modułem druku dwustronnego.",
+    "image": "/sklep_photo/materialy-kart/800300-360em.webp"
+  },
+  {
+    "pn": "800300-320EM",
+    "specs": [
+      {
+        "name": "Typ taśmy",
+        "value": "KdO — czerń sublimacyjna z warstwą ochronną"
+      },
+      {
+        "name": "Wydajność",
+        "value": "700 wydruków jednostronnych"
+      },
+      {
+        "name": "Kompatybilność",
+        "value": "Zebra ZC300"
+      },
+      {
+        "name": "Part Number",
+        "value": "800300-320EM"
+      },
+      {
+        "name": "Warstwa ochronna",
+        "value": "Overlay"
+      }
+    ],
+    "slug": "zebra-800300-320em",
+    "name": "Zebra 800300-320EM — Taśma KdO — 700 wydruków",
+    "models": [
+      "ZC300"
+    ],
+    "kind": "Taśmy",
+    "unit": "1 taśma",
+    "description": "Taśma Zebra 800300-320EM służy do druku kart plastikowych. Czerń sublimacyjna pozwala drukować zdjęcia w odcieniach szarości. Panel O nakłada warstwę ochronną. Taśma pasuje do ZC300. Nie pasuje do ZC100.",
+    "image": "/sklep_photo/materialy-kart/800300-320em.webp"
+  },
+  {
+    "pn": "800300-321EM",
+    "specs": [
+      {
+        "name": "Typ taśmy",
+        "value": "KrO — czerń żywiczna z warstwą ochronną"
+      },
+      {
+        "name": "Wydajność",
+        "value": "700 wydruków jednostronnych"
+      },
+      {
+        "name": "Kompatybilność",
+        "value": "Zebra ZC300"
+      },
+      {
+        "name": "Part Number",
+        "value": "800300-321EM"
+      },
+      {
+        "name": "Warstwa ochronna",
+        "value": "Overlay"
+      }
+    ],
+    "slug": "zebra-800300-321em",
+    "name": "Zebra 800300-321EM — Taśma KrO — 700 wydruków",
+    "models": [
+      "ZC300"
+    ],
+    "kind": "Taśmy",
+    "unit": "1 taśma",
+    "description": "Taśma Zebra 800300-321EM służy do druku kart plastikowych. Czerń żywiczna służy do druku tekstu i kodów kreskowych. Panel O nakłada warstwę ochronną. Taśma pasuje do ZC300. Nie pasuje do ZC100.",
+    "image": "/sklep_photo/materialy-kart/800300-321em.webp"
+  },
+  {
+    "pn": "105999-310-01",
+    "specs": [
+      {
+        "name": "Zawartość opakowania",
+        "value": "2 karty czyszczące"
+      },
+      {
+        "name": "Kompatybilność",
+        "value": "Zebra ZC100, ZC300"
+      },
+      {
+        "name": "Part Number",
+        "value": "105999-310-01"
+      },
+      {
+        "name": "Częstotliwość czyszczenia",
+        "value": "Co 1000 wydrukowanych kart lub po komunikacie drukarki"
+      }
+    ],
+    "slug": "zebra-105999-310-01",
+    "name": "Zebra 105999-310-01 — Karty czyszczące — 2 szt.",
+    "models": [
+      "ZC100",
+      "ZC300"
+    ],
+    "kind": "Czyszczenie",
+    "unit": "opakowanie: 2 karty czyszczące",
+    "description": "Karty czyszczące Zebra 105999-310-01 służą do czyszczenia toru kart w drukarce. Uruchom procedurę czyszczenia zgodnie z instrukcją drukarki.",
+    "image": "/sklep_photo/materialy-kart/105999-310-01.webp"
+  },
+  {
+    "pn": "105999-311-01",
+    "specs": [
+      {
+        "name": "Zawartość opakowania",
+        "value": "5 kart czyszczących"
+      },
+      {
+        "name": "Kompatybilność",
+        "value": "Zebra ZC100, ZC300"
+      },
+      {
+        "name": "Part Number",
+        "value": "105999-311-01"
+      },
+      {
+        "name": "Częstotliwość czyszczenia",
+        "value": "Co 1000 wydrukowanych kart lub po komunikacie drukarki"
+      }
+    ],
+    "slug": "zebra-105999-311-01",
+    "name": "Zebra 105999-311-01 — Karty czyszczące — 5 szt.",
+    "models": [
+      "ZC100",
+      "ZC300"
+    ],
+    "kind": "Czyszczenie",
+    "unit": "opakowanie: 5 kart czyszczących",
+    "description": "Karty czyszczące Zebra 105999-311-01 służą do czyszczenia toru kart w drukarce. Uruchom procedurę czyszczenia zgodnie z instrukcją drukarki.",
+    "image": "/sklep_photo/materialy-kart/105999-311-01.webp"
+  },
+  {
+    "pn": "104523-210",
+    "specs": [
+      {
+        "name": "Format",
+        "value": "CR-80 (85,6 × 54 mm) ISO 7810 ID-1"
+      },
+      {
+        "name": "Grubość",
+        "value": "0,25 mm (10 mil)"
+      },
+      {
+        "name": "Materiał",
+        "value": "PVC (polichlorek winylu)"
+      },
+      {
+        "name": "Kolor",
+        "value": "Biały"
+      },
+      {
+        "name": "Opakowanie",
+        "value": "500 szt."
+      },
+      {
+        "name": "Part Number",
+        "value": "104523-210"
+      },
+      {
+        "name": "Kompatybilność",
+        "value": "Zebra ZC100, ZC300"
+      }
+    ],
+    "slug": "zebra-104523-210",
+    "name": "Zebra 104523-210 — Karty PVC Premier 0,25 mm — 500 szt.",
+    "models": [
+      "ZC100",
+      "ZC300"
+    ],
+    "kind": "Karty PVC",
+    "unit": "opakowanie: 500 kart",
+    "description": "Białe karty PVC Zebra Premier 104523-210 służą do druku identyfikatorów. Opakowanie zawiera 500 kart w formacie CR-80.",
+    "image": "/sklep_photo/materialy-kart/104523-210.webp"
+  },
+  {
+    "pn": "104523-111",
+    "specs": [
+      {
+        "name": "Format",
+        "value": "CR-80 (85,6 × 54 mm) ISO 7810 ID-1"
+      },
+      {
+        "name": "Grubość",
+        "value": "0,76 mm (30 mil)"
+      },
+      {
+        "name": "Materiał",
+        "value": "PVC (polichlorek winylu)"
+      },
+      {
+        "name": "Kolor",
+        "value": "Biały"
+      },
+      {
+        "name": "Opakowanie",
+        "value": "500 szt."
+      },
+      {
+        "name": "Part Number",
+        "value": "104523-111"
+      },
+      {
+        "name": "Kompatybilność",
+        "value": "Zebra ZC100, ZC300"
+      }
+    ],
+    "slug": "zebra-104523-111",
+    "name": "Zebra 104523-111 — Karty PVC Premier 0,76 mm — 500 szt.",
+    "models": [
+      "ZC100",
+      "ZC300"
+    ],
+    "kind": "Karty PVC",
+    "unit": "opakowanie: 500 kart",
+    "description": "Białe karty PVC Zebra Premier 104523-111 służą do druku identyfikatorów. Opakowanie zawiera 500 kart w formacie CR-80.",
+    "image": "/sklep_photo/materialy-kart/104523-111.webp"
+  }
+]

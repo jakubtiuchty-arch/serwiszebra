@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { Truck, Check, Clock } from 'lucide-react'
+import { Truck, Clock } from 'lucide-react'
 
 interface RealTimeStockProps {
   sku: string
@@ -33,7 +33,6 @@ export default function RealTimeStock({
   fallbackStockPL = 0,
   fallbackStockDE = 0,
   fallbackInDelivery = 0,
-  totalStock = 0,
   onStockLoaded,
   onPriceLoaded,
 }: RealTimeStockProps) {
@@ -42,7 +41,7 @@ export default function RealTimeStock({
     stockPL: fallbackStockPL,
     stockEU: fallbackStockDE,
     inDelivery: fallbackInDelivery,
-    total: totalStock || (fallbackStockPL + fallbackStockDE),
+    total: fallbackStockPL + fallbackStockDE,
   })
 
   useEffect(() => {
@@ -56,7 +55,7 @@ export default function RealTimeStock({
       .then(res => res.json())
       .then(data => {
         if (data.found) {
-          const total = data.total_stock ?? 0
+          const total = (data.stock_pl ?? 0) + (data.stock_de ?? 0)
           setStock({
             stockPL: data.stock_pl ?? 0,
             stockEU: data.stock_de ?? 0,
@@ -100,18 +99,11 @@ export default function RealTimeStock({
               </span>
             </div>
           )}
-          {stock.stockPL === 0 && stock.stockEU === 0 && (
-            <div className="flex items-center gap-2 text-green-600">
-              <Check className="w-4 h-4" />
-              <span className="text-sm font-medium">Dostępny</span>
-              <span className="text-xs text-gray-500">({stock.total} szt.)</span>
-            </div>
-          )}
         </>
       ) : stock.inDelivery > 0 ? (
         <div className="flex items-center gap-2 text-amber-600">
           <Truck className="w-4 h-4" />
-          <span className="text-sm font-medium">Wysyłka 3-5 dni</span>
+          <span className="text-sm font-medium">W dostawie</span>
           <span className="text-xs text-amber-500">({stock.inDelivery} szt. w drodze)</span>
         </div>
       ) : (stock.jarltechIncoming ?? 0) > 0 && stock.jarltechEta ? (

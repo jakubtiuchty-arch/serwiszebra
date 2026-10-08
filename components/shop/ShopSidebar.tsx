@@ -136,6 +136,19 @@ export default function ShopSidebar({
             )}
           </div>
 
+          <div>
+            <div className="flex items-center justify-between gap-2 rounded-lg px-2 py-2 text-sm font-medium text-gray-800 hover:bg-gray-50">
+              <Link href="/sklep/drukarki-kart-zebra" onClick={handleLinkClick} className="flex-1 hover:text-blue-600">Drukarki kart</Link>
+              <button type="button" aria-label="Rozwiń drukarki kart" aria-expanded={expandedProductTypes.includes('drukarka-kart')} onClick={() => toggleProductType('drukarka-kart')} className="rounded p-2 hover:bg-gray-200">
+                <ChevronDown className={`h-5 w-5 text-gray-500 transition-transform ${expandedProductTypes.includes('drukarka-kart') ? 'rotate-180' : ''}`} />
+              </button>
+            </div>
+            {expandedProductTypes.includes('drukarka-kart') && <div className="ml-3 mt-1 space-y-1 border-l-2 border-gray-100 pl-3">
+              {['ZC100', 'ZC300'].map(model => <Link key={model} href={`/sklep/drukarki-kart-zebra/zebra-${model.toLowerCase()}`} onClick={handleLinkClick} className="block rounded-lg px-2 py-1.5 text-sm text-gray-600 hover:bg-gray-50 hover:text-blue-600">Zebra {model}</Link>)}
+              <Link href="/sklep/materialy-do-drukarek-kart" onClick={handleLinkClick} className="block rounded-lg px-2 py-1.5 text-sm text-gray-600 hover:bg-gray-50 hover:text-blue-600">Taśmy i karty PVC</Link>
+            </div>}
+          </div>
+
           {getEnabledCategories().map((productType) => {
             const isExpanded = expandedProductTypes.includes(productType.id)
             const isCurrent = currentProductType === productType.id

@@ -40,6 +40,7 @@ const STRONY_STATYCZNE: Array<[string, string, Czestosc, number]> = [
   ['', '2026-09-04', 'weekly', 1.0],
   ['/blog', '2026-08-26', 'daily', 0.9],
   ['/sklep', '2026-10-08', 'weekly', 0.8],
+  ['/sklep/materialy-do-drukarek-kart', '2026-10-08', 'weekly', 0.9],
   ['/sklep/drukarki-kart-zebra', '2026-10-08', 'weekly', 0.9],
   ['/sklep/drukarki-kart-zebra/zebra-zc100', '2026-10-08', 'weekly', 0.9],
   ['/sklep/drukarki-kart-zebra/zebra-zc300', '2026-10-08', 'weekly', 0.9],
@@ -196,6 +197,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     if (products) {
       for (const product of products) {
+        if (product.product_type === 'material_kart') {
+          shopPages.push({ url: `${baseUrl}/sklep/materialy-do-drukarek-kart/${product.slug}`, lastModified: new Date('2026-10-08'), changeFrequency: 'weekly', priority: 0.9 })
+          continue
+        }
         const categoryPath = getCategoryPathForProduct(product)
         if (categoryPath) {
           shopPages.push({

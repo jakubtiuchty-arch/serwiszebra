@@ -214,3 +214,24 @@ Tablety: ET60, ET65
 - [Zebra ZC100](https://www.serwis-zebry.pl/sklep/drukarki-kart-zebra/zebra-zc100): druk jednostronny, 300 dpi, do 150 kolorowych kart/h przy taśmie YMCKO.
 - [Zebra ZC300](https://www.serwis-zebry.pl/sklep/drukarki-kart-zebra/zebra-zc300): druk jedno- lub dwustronny zależnie od PN, 300 dpi, do 200 kolorowych kart/h jednostronnie.
 - [Serwis drukarek kart](https://www.serwis-zebry.pl/serwis-drukarek-kart-zebra): naprawy i konserwacja drukarek kart Zebra.
+
+## Materiały Zebra do drukarek kart
+
+- [Materiały do ZC100 i ZC300](https://www.serwis-zebry.pl/sklep/materialy-do-drukarek-kart): taśmy, karty PVC i zestawy czyszczące.
+- [Zebra 800300-250EM — Taśma YMCKO — 200 wydruków](https://www.serwis-zebry.pl/sklep/materialy-do-drukarek-kart/zebra-800300-250em): 1 taśma; ZC100, ZC300.
+- [Zebra 800300-255EM — Taśma YMCKO — 300 wydruków](https://www.serwis-zebry.pl/sklep/materialy-do-drukarek-kart/zebra-800300-255em): 1 taśma; ZC100, ZC300.
+- [Zebra 800300-254EM — Taśmy YMCKO — opakowanie zbiorcze, 800 wydruków](https://www.serwis-zebry.pl/sklep/materialy-do-drukarek-kart/zebra-800300-254em): opakowanie zbiorcze, 800 wydruków; ZC100, ZC300.
+- [Zebra 800300-370EM — Taśma półpanelowa YMCKO — 400 wydruków](https://www.serwis-zebry.pl/sklep/materialy-do-drukarek-kart/zebra-800300-370em): 1 taśma; ZC100, ZC300.
+- [Zebra 800300-301 — Taśma czarna — 2000 wydruków](https://www.serwis-zebry.pl/sklep/materialy-do-drukarek-kart/zebra-800300-301): 1 taśma; ZC100, ZC300.
+- [Zebra 800300-309EM — Taśma biała — 1500 wydruków](https://www.serwis-zebry.pl/sklep/materialy-do-drukarek-kart/zebra-800300-309em): 1 taśma; ZC100, ZC300.
+- [Zebra 800300-302 — Taśma czerwona — 1500 wydruków](https://www.serwis-zebry.pl/sklep/materialy-do-drukarek-kart/zebra-800300-302): 1 taśma; ZC100, ZC300.
+- [Zebra 800300-304 — Taśma niebieska — 1500 wydruków](https://www.serwis-zebry.pl/sklep/materialy-do-drukarek-kart/zebra-800300-304): 1 taśma; ZC100, ZC300.
+- [Zebra 800300-306 — Taśma złota — 1500 wydruków](https://www.serwis-zebry.pl/sklep/materialy-do-drukarek-kart/zebra-800300-306): 1 taśma; ZC100, ZC300.
+- [Zebra 800300-307 — Taśma srebrna — 1500 wydruków](https://www.serwis-zebry.pl/sklep/materialy-do-drukarek-kart/zebra-800300-307): 1 taśma; ZC100, ZC300.
+- [Zebra 800300-360EM — Taśma YMCKOK — 200 kart dwustronnych](https://www.serwis-zebry.pl/sklep/materialy-do-drukarek-kart/zebra-800300-360em): 1 taśma; ZC300 z drukiem dwustronnym.
+- [Zebra 800300-320EM — Taśma KdO — 700 wydruków](https://www.serwis-zebry.pl/sklep/materialy-do-drukarek-kart/zebra-800300-320em): 1 taśma; ZC300.
+- [Zebra 800300-321EM — Taśma KrO — 700 wydruków](https://www.serwis-zebry.pl/sklep/materialy-do-drukarek-kart/zebra-800300-321em): 1 taśma; ZC300.
+- [Zebra 105999-310-01 — Karty czyszczące — 2 szt.](https://www.serwis-zebry.pl/sklep/materialy-do-drukarek-kart/zebra-105999-310-01): opakowanie: 2 karty czyszczące; ZC100, ZC300.
+- [Zebra 105999-311-01 — Karty czyszczące — 5 szt.](https://www.serwis-zebry.pl/sklep/materialy-do-drukarek-kart/zebra-105999-311-01): opakowanie: 5 kart czyszczących; ZC100, ZC300.
+- [Zebra 104523-210 — Karty PVC Premier 0,25 mm — 500 szt.](https://www.serwis-zebry.pl/sklep/materialy-do-drukarek-kart/zebra-104523-210): opakowanie: 500 kart; ZC100, ZC300.
+- [Zebra 104523-111 — Karty PVC Premier 0,76 mm — 500 szt.](https://www.serwis-zebry.pl/sklep/materialy-do-drukarek-kart/zebra-104523-111): opakowanie: 500 kart; ZC100, ZC300.

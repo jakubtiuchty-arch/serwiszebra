@@ -1,6 +1,16 @@
 import type { TrescKarty } from './device-content'
-import { FILM_KARTY_ZC, FILM_TASMA_ZC, FILM_CZYSZCZENIE_ZC } from './filmy-zc'
+import { FILMY_ZC_DIAGNOSTYKA } from './filmy-zc'
 import Link from 'next/link'
+
+export const PORADNIKI_KART = [
+  'serwis-drukarki-kart-zebra-zc100-zc300-diagnostyka-naprawa',
+  'kody-bledow-drukarki-kart-zebra-zc300-zxp',
+  'drukarka-zebra-zacina-karty-przyczyny-rozwiazania',
+  'biala-linia-na-karcie-wymiana-glowicy-zebra',
+  'bledy-kodowania-paska-magnetycznego-zebra',
+  'zebra-cardstudio-projektowanie-kart-poradnik',
+  'porownanie-drukarek-kart-zebra-zc100-zc300-zxp',
+]
 
 const service = '/serwis-drukarek-kart-zebra'
 export const TRESC_KART: Record<string, TrescKarty> = Object.fromEntries(['ZC100', 'ZC300'].map(model => {
@@ -9,8 +19,8 @@ export const TRESC_KART: Record<string, TrescKarty> = Object.fromEntries(['ZC100
     rekomendowanyPn: '',
     zdjecieGlowne: `/sklep_photo/urzadzenia/${model.toLowerCase()}_1.webp`,
     zweryfikowano: '2026-10-08',
-    filmy: [FILM_KARTY_ZC, FILM_TASMA_ZC, FILM_CZYSZCZENIE_ZC],
-    poradniki: ['serwis-drukarki-kart-zebra-zc100-zc300-diagnostyka-naprawa'],
+    filmy: FILMY_ZC_DIAGNOSTYKA,
+    poradniki: PORADNIKI_KART,
     wSkrocie: [
       `Zebra ${model} drukuje identyfikatory i karty plastikowe bezpośrednio na powierzchni karty.`,
       `Zebra ${model} drukuje w rozdzielczości 300 dpi, w kolorze lub monochromatycznie.`,
@@ -32,7 +42,7 @@ export const TRESC_KART: Record<string, TrescKarty> = Object.fromEntries(['ZC100
     faq: [
       {q: `Czy Zebra ${model} drukuje dwustronnie?`, a: simple ? 'Nie. ZC100 drukuje jednostronnie. Do automatycznego druku obu stron wybierz ZC300 w wersji ZC32.' : 'Tak, w konfiguracji ZC32. Konfiguracja ZC31 drukuje jednostronnie.', href: '/sklep/drukarki-kart-zebra', link: 'Porównaj modele'},
       {q: `Czy Zebra ${model} koduje karty?`, a: 'Kodowanie zależy od PN. Wersja bez kodera wykonuje tylko nadruk. Dopasuj koder do technologii kart i systemu kontroli dostępu.', href: service, link: 'Pomoc w doborze'},
-      {q: 'Jaką taśmę wybrać do kolorowego identyfikatora?', a: 'Do jednostronnego druku kolorowego wybierz taśmę YMCKO 800300-250EM na 200 wydruków. Do ZC300 dwustronnej dobierz taśmę według układu kolorów na obu stronach.', href: '/sklep/drukarki-kart-zebra#materialy', link: 'Materiały do druku kart'},
+      {q: 'Jaką taśmę wybrać do kolorowego identyfikatora?', a: 'Do jednostronnego druku kolorowego wybierz taśmę YMCKO 800300-250EM na 200 wydruków. Do ZC300 dwustronnej dobierz taśmę według układu kolorów na obu stronach.', href: '/sklep/materialy-do-drukarek-kart', link: 'Materiały do druku kart'},
       {q: 'Czy taśma i karty znajdują się w zestawie?', a: 'Standardowe konfiguracje z tej tabeli wymagają osobnego zakupu taśmy i kart. Zestawy startowe mają odrębne PN i własną listę wyposażenia.', href: '/kontakt', link: 'Dobierz zestaw startowy'},
       {q: `Jaka gwarancja obejmuje Zebra ${model}?`, a: 'Ograniczona gwarancja producenta obejmuje drukarkę i głowicę przez 3 lata. Wymaga użytkowania i konserwacji zgodnie z instrukcją. Nie zastępuje kontraktu obejmującego uszkodzenia przypadkowe.', href: service, link: 'Serwis drukarek kart'},
     ],

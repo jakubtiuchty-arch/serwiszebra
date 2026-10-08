@@ -1,3 +1,4 @@
+import { deviceUrl } from './device-url'
 // Hierarchia kategorii sklepu
 // URL: /sklep/{productType}/{printerCategory}/{model}/{product-slug}
 
@@ -394,6 +395,8 @@ export function getProductUrl(product: {
   product_type: string
   device_model: string
 }): string {
+  if (product.product_type === 'material_kart') return `/sklep/materialy-do-drukarek-kart/${product.slug}`
+
   // Usługi mają własne strony poza katalogiem części
   if (product.product_type === 'kontrakt') {
     return '/kontrakt-serwisowy'
@@ -402,7 +405,7 @@ export function getProductUrl(product: {
   // Urządzenia stoją poza drzewem części: karta drukarki to
   // /sklep/drukarki-etykiet/<slug>, nie /sklep/<slug>
   if (product.product_type === 'drukarka') {
-    return `/sklep/drukarki-etykiet/${product.slug}`
+    return deviceUrl(product.slug)
   }
 
   const categoryPath = getCategoryPathForProduct(product)

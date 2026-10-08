@@ -1,6 +1,6 @@
 'use client'
 
-import { deviceUrl } from '@/lib/device-url'
+import { getProductUrl } from '@/lib/shop-categories'
 import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -153,9 +153,7 @@ export default function KoszykPage() {
                         href={
                           item.is_service
                             ? '/kontrakt-serwisowy'
-                            : item.product_type === 'drukarka'
-                              ? `${deviceUrl(item.slug)}${item.variant_pn ? `?pn=${encodeURIComponent(item.variant_pn)}` : ''}`
-                              : `/sklep/${item.slug}`
+                            : `${getProductUrl({ slug: item.slug, product_type: item.product_type, device_model: item.device_model || '' })}${item.variant_pn ? `?pn=${encodeURIComponent(item.variant_pn)}` : ''}`
                         }
                         className="text-xs sm:text-sm font-semibold text-gray-900 hover:text-blue-600 line-clamp-2 mb-0.5 sm:mb-1"
                       >

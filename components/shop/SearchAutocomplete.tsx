@@ -1,6 +1,6 @@
 'use client'
 
-import { deviceUrl } from '@/lib/device-url'
+import { getProductUrl } from '@/lib/shop-categories'
 import { useState, useEffect, useRef, useCallback } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
@@ -235,11 +235,7 @@ export default function SearchAutocomplete({
     // wybór drukarki z podpowiedzi kończył się stroną 404
     const slug = product.slug
     if (!slug) return
-    router.push(
-      product.product_type === 'drukarka'
-        ? deviceUrl(slug)
-        : `/sklep/${slug}`
-    )
+    router.push(getProductUrl(product))
   }, [router])
 
   // Keyboard navigation

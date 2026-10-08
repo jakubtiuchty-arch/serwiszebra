@@ -82,7 +82,7 @@ export default function SklepPage() {
             </h1>
 
             <p className="text-sm text-gray-200 mb-4 max-w-xl">
-              Drukarki etykiet Zebra oraz oryginalne części zamienne:
+              Drukarki etykiet i kart Zebra oraz oryginalne części zamienne:
               głowice 203, 300 i 600 dpi, wałki dociskowe, akumulatory i moduły łączności.
               Ceny i stany magazynowe pobieramy na żywo od dystrybutorów, a naprawy
               gwarancyjne prowadzimy we własnym autoryzowanym serwisie Zebry.
@@ -91,20 +91,6 @@ export default function SklepPage() {
           </div>
         </section>
 
-        <nav aria-label="Wybierz ofertę sklepu" className="max-w-6xl mx-auto px-4 pt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <Link href="/sklep/drukarki-etykiet" className="rounded-xl border border-gray-200 bg-white p-5 hover:border-blue-400">
-            <h2 className="font-semibold text-gray-900">Drukarki etykiet Zebra →</h2>
-            <p className="mt-1 text-sm text-gray-600">Porównaj modele i wybierz rozdzielczość oraz łączność.</p>
-          </Link>
-          <Link href="/sklep/drukarki-kart-zebra" className="rounded-xl border border-gray-200 bg-white p-5 hover:border-blue-400">
-            <h2 className="font-semibold text-gray-900">Drukarki kart Zebra →</h2>
-            <p className="mt-1 text-sm text-gray-600">Porównaj ZC100 i ZC300. Dobierz druk, łączność oraz koder.</p>
-          </Link>
-          <Link href="/sklep/glowice" className="rounded-xl border border-gray-200 bg-white p-5 hover:border-blue-400">
-            <h2 className="font-semibold text-gray-900">Części zamienne →</h2>
-            <p className="mt-1 text-sm text-gray-600">Znajdź część po modelu urządzenia lub numerze katalogowym.</p>
-          </Link>
-        </nav>
         {/* Interactive Shop - Client Component */}
         <ShopMainPage />
 
