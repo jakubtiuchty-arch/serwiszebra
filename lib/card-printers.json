@@ -1,0 +1,106 @@
+[
+  {
+    "model": "ZC100",
+    "slug": "zebra-zc100",
+    "name": "Drukarka kart Zebra ZC100",
+    "images": [
+      "/sklep_photo/urzadzenia/zc100_1.webp",
+      "/sklep_photo/urzadzenia/zc100_2.webp",
+      "/sklep_photo/urzadzenia/zc100_3.webp"
+    ],
+    "variants": [
+      {
+        "pn": "ZC11-0000000EM00",
+        "dpi": 300,
+        "label": "Jednostronny, USB, koder: brak",
+        "cechy": {
+          "Druk": "Jednostronny",
+          "Łączność": "USB",
+          "Koder": "Brak"
+        }
+      },
+      {
+        "pn": "ZC11-000C000EM00",
+        "dpi": 300,
+        "label": "Jednostronny, USB, Ethernet, koder: brak",
+        "cechy": {
+          "Druk": "Jednostronny",
+          "Łączność": "USB, Ethernet",
+          "Koder": "Brak"
+        }
+      },
+      {
+        "pn": "ZC11-0M00000EM00",
+        "dpi": 300,
+        "label": "Jednostronny, USB, koder: magnetyczny",
+        "cechy": {
+          "Druk": "Jednostronny",
+          "Łączność": "USB",
+          "Koder": "Magnetyczny"
+        }
+      },
+      {
+        "pn": "ZC11-0M0C000EM00",
+        "dpi": 300,
+        "label": "Jednostronny, USB, Ethernet, koder: magnetyczny",
+        "cechy": {
+          "Druk": "Jednostronny",
+          "Łączność": "USB, Ethernet",
+          "Koder": "Magnetyczny"
+        }
+      }
+    ]
+  },
+  {
+    "model": "ZC300",
+    "slug": "zebra-zc300",
+    "name": "Drukarka kart Zebra ZC300",
+    "images": [
+      "/sklep_photo/urzadzenia/zc300_1.webp",
+      "/sklep_photo/urzadzenia/zc300_2.webp",
+      "/sklep_photo/urzadzenia/zc300_3.webp"
+    ],
+    "variants": [
+      {
+        "pn": "ZC31-000C000EM00",
+        "dpi": 300,
+        "label": "Jednostronny, USB, Ethernet, koder: brak",
+        "cechy": {
+          "Druk": "Jednostronny",
+          "Łączność": "USB, Ethernet",
+          "Koder": "Brak"
+        }
+      },
+      {
+        "pn": "ZC31-0M0C000EM00",
+        "dpi": 300,
+        "label": "Jednostronny, USB, Ethernet, koder: magnetyczny",
+        "cechy": {
+          "Druk": "Jednostronny",
+          "Łączność": "USB, Ethernet",
+          "Koder": "Magnetyczny"
+        }
+      },
+      {
+        "pn": "ZC32-000C000EM00",
+        "dpi": 300,
+        "label": "Dwustronny, USB, Ethernet, koder: brak",
+        "cechy": {
+          "Druk": "Dwustronny",
+          "Łączność": "USB, Ethernet",
+          "Koder": "Brak"
+        }
+      },
+      {
+        "pn": "ZC32-0M0C000EM00",
+        "dpi": 300,
+        "label": "Dwustronny, USB, Ethernet, koder: magnetyczny",
+        "cechy": {
+          "Druk": "Dwustronny",
+          "Łączność": "USB, Ethernet",
+          "Koder": "Magnetyczny"
+        }
+      }
+    ]
+  }
+]

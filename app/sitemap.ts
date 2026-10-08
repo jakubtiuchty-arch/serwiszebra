@@ -39,7 +39,10 @@ type Czestosc = MetadataRoute.Sitemap[number]['changeFrequency']
 const STRONY_STATYCZNE: Array<[string, string, Czestosc, number]> = [
   ['', '2026-09-04', 'weekly', 1.0],
   ['/blog', '2026-08-26', 'daily', 0.9],
-  ['/sklep', '2026-09-01', 'weekly', 0.8],
+  ['/sklep', '2026-10-08', 'weekly', 0.8],
+  ['/sklep/drukarki-kart-zebra', '2026-10-08', 'weekly', 0.9],
+  ['/sklep/drukarki-kart-zebra/zebra-zc100', '2026-10-08', 'weekly', 0.9],
+  ['/sklep/drukarki-kart-zebra/zebra-zc300', '2026-10-08', 'weekly', 0.9],
   ['/sklep/drukarki-etykiet', '2026-09-04', 'weekly', 0.9],
   ['/kontrakt-serwisowy', '2026-09-01', 'monthly', 0.8],
   ['/kontakt', '2026-08-30', 'monthly', 0.7],
@@ -87,7 +90,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const dataKarty = (slug: string) =>
     TRESC_KART[slug]?.zweryfikowano ?? '2026-08-25'
 
-  const printerPages: MetadataRoute.Sitemap = MODELE_SKLEPU.map((m) => ({
+  const printerPages: MetadataRoute.Sitemap = MODELE_SKLEPU.filter(m => !m.sciezka).map((m) => ({
     url: `${baseUrl}/sklep/drukarki-etykiet/${m.slug}`,
     lastModified: new Date(dataKarty(m.slug)),
     changeFrequency: 'weekly',

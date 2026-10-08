@@ -1,5 +1,6 @@
 'use client'
 
+import { deviceUrl } from '@/lib/device-url'
 import { useState, useEffect, useRef, useCallback } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
@@ -236,7 +237,7 @@ export default function SearchAutocomplete({
     if (!slug) return
     router.push(
       product.product_type === 'drukarka'
-        ? `/sklep/drukarki-etykiet/${slug}`
+        ? deviceUrl(slug)
         : `/sklep/${slug}`
     )
   }, [router])

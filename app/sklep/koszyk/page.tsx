@@ -1,5 +1,6 @@
 'use client'
 
+import { deviceUrl } from '@/lib/device-url'
 import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -153,7 +154,7 @@ export default function KoszykPage() {
                           item.is_service
                             ? '/kontrakt-serwisowy'
                             : item.product_type === 'drukarka'
-                              ? `/sklep/drukarki-etykiet/${item.slug}${item.variant_pn ? `?pn=${encodeURIComponent(item.variant_pn)}` : ''}`
+                              ? `${deviceUrl(item.slug)}${item.variant_pn ? `?pn=${encodeURIComponent(item.variant_pn)}` : ''}`
                               : `/sklep/${item.slug}`
                         }
                         className="text-xs sm:text-sm font-semibold text-gray-900 hover:text-blue-600 line-clamp-2 mb-0.5 sm:mb-1"

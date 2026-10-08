@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  distDir: process.env.NEXT_BUILD_DIR || '.next',
   // Zwiększony timeout dla dużych stron (default: 60s)
   staticPageGenerationTimeout: 180,
   

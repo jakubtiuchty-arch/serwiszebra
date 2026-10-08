@@ -96,6 +96,10 @@ export default function SklepPage() {
             <h2 className="font-semibold text-gray-900">Drukarki etykiet Zebra →</h2>
             <p className="mt-1 text-sm text-gray-600">Porównaj modele i wybierz rozdzielczość oraz łączność.</p>
           </Link>
+          <Link href="/sklep/drukarki-kart-zebra" className="rounded-xl border border-gray-200 bg-white p-5 hover:border-blue-400">
+            <h2 className="font-semibold text-gray-900">Drukarki kart Zebra →</h2>
+            <p className="mt-1 text-sm text-gray-600">Porównaj ZC100 i ZC300. Dobierz druk, łączność oraz koder.</p>
+          </Link>
           <Link href="/sklep/glowice" className="rounded-xl border border-gray-200 bg-white p-5 hover:border-blue-400">
             <h2 className="font-semibold text-gray-900">Części zamienne →</h2>
             <p className="mt-1 text-sm text-gray-600">Znajdź część po modelu urządzenia lub numerze katalogowym.</p>

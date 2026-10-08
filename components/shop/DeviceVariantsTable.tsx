@@ -1,5 +1,6 @@
 'use client'
 
+import { deviceUrl } from '@/lib/device-url'
 import { useEffect, useMemo, useState } from 'react'
 import { ShoppingCart, Check } from 'lucide-react'
 import PowiadomODostepnosci from './PowiadomODostepnosci'
@@ -337,7 +338,7 @@ export default function DeviceVariantsTable({
         <PowiadomODostepnosci
           sku={v.pn}
           nazwa={`${name} — ${v.label}`}
-          url={`/sklep/drukarki-etykiet/${slug}?pn=${encodeURIComponent(v.pn)}`}
+          url={`${deviceUrl(slug)}?pn=${encodeURIComponent(v.pn)}`}
         />
       )
     }

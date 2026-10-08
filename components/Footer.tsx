@@ -140,6 +140,7 @@ export default function Footer() {
               <ul className="space-y-2 sm:space-y-3">
                 {[
                   { href: '/sklep/drukarki-etykiet', label: 'Drukarki etykiet Zebra', external: false },
+                  { href: '/sklep/drukarki-kart-zebra', label: 'Drukarki kart Zebra', external: false },
                   { href: '/blog', label: 'Blog', external: false },
                   { href: '/sterowniki', label: 'Sterowniki', external: false },
                   { href: '/faq', label: 'FAQ', external: false },

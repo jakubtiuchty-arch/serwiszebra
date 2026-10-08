@@ -207,3 +207,10 @@ Tablety: ET60, ET65
 - Faktury VAT dla firm (B2B)
 - Profesjonalny serwis z odbiorem kurierskim
 - Autoryzowany partner serwisowy Zebra
+
+## Drukarki kart Zebra
+
+- [Drukarki kart Zebra](https://www.serwis-zebry.pl/sklep/drukarki-kart-zebra): porównanie ZC100 i ZC300, warianty PN, ceny i dostępność.
+- [Zebra ZC100](https://www.serwis-zebry.pl/sklep/drukarki-kart-zebra/zebra-zc100): druk jednostronny, 300 dpi, do 150 kolorowych kart/h przy taśmie YMCKO.
+- [Zebra ZC300](https://www.serwis-zebry.pl/sklep/drukarki-kart-zebra/zebra-zc300): druk jedno- lub dwustronny zależnie od PN, 300 dpi, do 200 kolorowych kart/h jednostronnie.
+- [Serwis drukarek kart](https://www.serwis-zebry.pl/serwis-drukarek-kart-zebra): naprawy i konserwacja drukarek kart Zebra.

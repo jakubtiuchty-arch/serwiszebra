@@ -277,6 +277,7 @@ export default function SerwisDrukarekKartPage() {
               <span className="mx-1.5">/</span>
               <span className="text-gray-300">Drukarki kart</span>
             </nav>
+            <Link href="/sklep/drukarki-kart-zebra" className="mb-4 inline-flex rounded-lg bg-white px-4 py-2 text-sm font-semibold text-gray-900">Drukarki kart Zebra — oferta sklepu →</Link>
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-white mb-3 sm:mb-4 md:max-w-md xl:max-w-xl">
               Serwis drukarek kart plastikowych Zebra{' '}
               <span className="block text-base sm:text-lg md:text-xl font-normal text-[#A8F000] mt-1 sm:mt-2">

@@ -18,6 +18,7 @@ export interface ModelSklepu {
   /** Klucz z tabeli `manuals` (wielkie litery, bez spacji) — most z instrukcji */
   kluczInstrukcji: string
   klasa: KlasaSlug
+  sciezka?: string
 }
 
 export const MODELE_SKLEPU: ModelSklepu[] = [
@@ -53,14 +54,19 @@ export const MODELE_SKLEPU: ModelSklepu[] = [
   { slug: 'zebra-zt620', model: 'ZT620', kluczInstrukcji: 'ZT620', klasa: 'przemyslowe' },
 ]
 
+export const MODELE_KART: ModelSklepu[] = [
+  { slug: 'zebra-zc100', model: 'ZC100', kluczInstrukcji: 'ZC100', klasa: 'biurkowe', sciezka: '/sklep/drukarki-kart-zebra' },
+  { slug: 'zebra-zc300', model: 'ZC300', kluczInstrukcji: 'ZC300', klasa: 'biurkowe', sciezka: '/sklep/drukarki-kart-zebra' },
+]
+
 export const URL_KART = '/sklep/drukarki-etykiet'
 
-export const urlKarty = (m: ModelSklepu) => `${URL_KART}/${m.slug}`
+export const urlKarty = (m: ModelSklepu) => `${m.sciezka || URL_KART}/${m.slug}`
 
-export const modeleKlasy = (klasa: KlasaSlug) => MODELE_SKLEPU.filter((m) => m.klasa === klasa)
+export const modeleKlasy = (klasa: KlasaSlug) => MODELE_SKLEPU.filter((m) => m.klasa === klasa && !m.sciezka)
 
 export const modelDlaInstrukcji = (kluczInstrukcji: string) =>
-  MODELE_SKLEPU.find((m) => m.kluczInstrukcji === kluczInstrukcji.toUpperCase())
+  [...MODELE_SKLEPU, ...MODELE_KART].find((m) => m.kluczInstrukcji === kluczInstrukcji.toUpperCase())
 
 /**
  * Modele, o których mówi tekst (tytuł wpisu, tagi). „ZD421" bez litery
@@ -69,7 +75,7 @@ export const modelDlaInstrukcji = (kluczInstrukcji: string) =>
  */
 export function modeleWTekscie(tekst: string): ModelSklepu[] {
   const t = tekst.toUpperCase().replace(/\s+PLUS\b/g, 'PLUS')
-  return MODELE_SKLEPU.filter((m) => {
+  return [...MODELE_SKLEPU, ...MODELE_KART].filter((m) => {
     const pelny = m.kluczInstrukcji
     const rodzina = pelny.replace(/PLUS$/, '').replace(/[DT]$/, '')
     return new RegExp(`\\b${pelny}\\b`).test(t) || new RegExp(`\\b${rodzina}(?![0-9A-Z])`).test(t)

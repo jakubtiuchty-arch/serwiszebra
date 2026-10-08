@@ -321,7 +321,7 @@ export default function DevicePurchasePanel({
               height={24}
               className="mx-auto h-6 w-6"
             />
-            <span className="mt-1 block text-[11px] font-semibold text-gray-900">Gwarancja 24 mies.</span>
+            <span className="mt-1 block text-[11px] font-semibold text-gray-900">Gwarancja {variants.length > 0 && variants.every(v => /^ZC(11|31|32)-/.test(v.pn)) ? 36 : 24} mies.</span>
             <span className="block text-[10px] text-gray-500">naprawy w naszym serwisie</span>
           </li>
         </ul>
