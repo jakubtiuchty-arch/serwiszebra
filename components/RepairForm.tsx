@@ -679,7 +679,7 @@ export default function RepairForm() {
                     className="w-full px-3 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
                   >
                     <option value="">Wybierz typ urządzenia</option>
-                    <option value="drukarka">Drukarka etykiet</option>
+                    <option value="drukarka">Drukarka etykiet lub kart</option>
                     <option value="terminal">Terminal mobilny</option>
                     <option value="skaner">Skaner kodów</option>
                     <option value="tablet">Tablet przemysłowy</option>
@@ -1052,7 +1052,7 @@ export default function RepairForm() {
                     <h4 className="font-semibold text-gray-900 mb-2">Urządzenie</h4>
                     <div className="space-y-2 text-sm">
                       <p><span className="text-gray-600">Typ:</span> <span className="font-medium">
-                        {formData.deviceType === 'drukarka' && 'Drukarka etykiet'}
+                        {formData.deviceType === 'drukarka' && 'Drukarka etykiet lub kart'}
                         {formData.deviceType === 'terminal' && 'Terminal mobilny'}
                         {formData.deviceType === 'skaner' && 'Skaner kodów'}
                         {formData.deviceType === 'tablet' && 'Tablet przemysłowy'}
