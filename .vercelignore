@@ -1,0 +1,7 @@
+.claude/
+.next/
+.next-card-*/
+screenshots/
+design-qa.md
+*.tsbuildinfo
+.env*.local
