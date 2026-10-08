@@ -5,3 +5,9 @@ screenshots/
 design-qa.md
 *.tsbuildinfo
 .env*.local
+google-cloud-key.json
+*.pem
+.env*
+node_modules/
+.git/
+.vercel/
