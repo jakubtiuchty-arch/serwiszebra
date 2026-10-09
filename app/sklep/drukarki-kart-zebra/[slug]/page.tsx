@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
+import Image from 'next/image'
 import type { Metadata } from 'next'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
@@ -13,10 +14,12 @@ import { pobierzStany, stanDlaPN } from '@/lib/stock-server'
 import { gtinyDlaPN } from '@/lib/gtin-drukarek'
 import { klasaBySlug } from '@/lib/printer-classes'
 import { trescKarty } from '@/lib/card-printer-content'
+import { cardPrinterProducts } from '@/lib/card-printer-shop'
+import kartyKatalog from '@/lib/card-printers.json'
 import { getPostBySlug } from '@/lib/blog'
 import ShopSubheader from '@/components/shop/ShopSubheader'
 import WideoWpisu from '@/components/blog/WideoWpisu'
-import { Info, FileText, Download, Wrench, Phone } from 'lucide-react'
+import { Info, FileText, Download, Wrench, Phone, ArrowRight } from 'lucide-react'
 
 /** Jedna karta modelu; konfiguracje PN wybierane wewnątrz karty. */
 const SITE = 'https://www.serwis-zebry.pl'
@@ -126,10 +129,35 @@ export default async function DevicePage({
   // strukturalnych, a nie dopiero po dociągnięciu ich JavaScriptem.
   // Akcesoria i stany nie zależą od siebie, więc idą równolegle — po kolei
   // dokładały się do TTFB (audyt ZT421: 625–706 ms).
-  const [akcesoria, stany] = await Promise.all([
+  // Pozostałe drukarki kart do sekcji „Inne drukarki kart Zebra" — ich ceny idą tym samym
+  // zapytaniem o stany, a lista aktywnych z bazy pilnuje, żeby link nie prowadził do 404
+  const inneZKatalogu = kartyKatalog.filter((m) => m.slug !== product.slug)
+  const [akcesoria, stany, aktywneKarty] = await Promise.all([
     product.device_model ? getAkcesoriaDlaModelu(product.device_model) : Promise.resolve([]),
-    pobierzStany(variants.map((v) => v.pn)),
+    pobierzStany([...variants.map((v) => v.pn), ...inneZKatalogu.flatMap((m) => m.variants.map((v) => v.pn))]),
+    cardPrinterProducts().then((lista) => new Set(lista.map((m) => m.slug))).catch(() => new Set<string>()),
   ])
+  const inneDrukarki = inneZKatalogu
+    .filter((m) => aktywneKarty.has(m.slug))
+    .map((m) => {
+      const oferty = m.variants
+        .map((v) => stanDlaPN(stany, v.pn))
+        .filter((st): st is NonNullable<typeof st> => !!st && st.netto > 0)
+      const dostepne = oferty.filter((st) => st.totalStock > 0)
+      const najtansza = [...(dostepne.length ? dostepne : oferty)].sort((a, b) => a.netto - b.netto)[0]
+      const druk = new Set(m.variants.map((v) => v.cechy.Druk))
+      const predkosc = trescKarty(m.slug)?.spec.find(([k]) => k === 'Kolor YMCKO, jedna strona')?.[1]
+      return {
+        slug: m.slug,
+        model: m.model,
+        zdjecie: m.images[0],
+        opis: [
+          druk.size > 1 ? 'Druk jedno- lub dwustronny' : druk.has('Dwustronny') ? 'Druk dwustronny' : 'Druk jednostronny',
+          predkosc ? `${predkosc.replace(/^Do /, 'do ')} w kolorze` : null,
+        ].filter(Boolean).join(', '),
+        netto: najtansza?.netto ?? null,
+      }
+    })
 
   // Kształt, którego oczekują komponenty klienckie — bez tego cena pojawiałaby
   // się dopiero po dociągnięciu danych z przeglądarki
@@ -388,6 +416,7 @@ export default async function DevicePage({
             // odnośnik w pasku prowadziłby donikąd
             ...(filmy.length > 0 ? [['#wideoporadniki', 'Wideoporadniki']] : []),
             ...(poradniki.length > 0 ? [['#poradniki', 'Poradniki']] : []),
+            ...(inneDrukarki.length > 0 ? [['#inne-drukarki', 'Inne modele']] : []),
           ].map(([href, label]) => (
             <a
               key={href}
@@ -666,7 +695,50 @@ export default async function DevicePage({
             </section>
           )}
 
-
+          {/* Pozostałe drukarki kart na samym dole — klient, który doczytał kartę do końca
+              i nie jest przekonany do tego modelu, ma przejść do sąsiedniego, a nie wracać
+              do kategorii. Tylko modele aktywne w bazie. */}
+          {inneDrukarki.length > 0 && (
+            <section
+              id="inne-drukarki"
+              className="scroll-mt-24 bg-white rounded-xl border border-gray-200 p-4 sm:p-6 mb-4 sm:mb-6"
+            >
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <h2 className="text-sm sm:text-base font-semibold text-gray-900">Inne drukarki kart Zebra</h2>
+                <Link href="/sklep/drukarki-kart-zebra#porownanie" className="text-xs font-medium text-gray-600 underline hover:text-gray-900">
+                  Porównaj modele
+                </Link>
+              </div>
+              <ul className="mt-4 grid list-none grid-cols-1 gap-3 p-0 sm:grid-cols-2">
+                {inneDrukarki.map((d) => (
+                  <li key={d.slug}>
+                    <Link
+                      href={`/sklep/drukarki-kart-zebra/${d.slug}`}
+                      className="group flex h-full items-center gap-4 rounded-lg border border-gray-200 p-3 transition hover:border-gray-400 hover:shadow-sm"
+                    >
+                      <span className="relative h-24 w-24 flex-shrink-0 sm:h-28 sm:w-28">
+                        <Image src={d.zdjecie} alt={`Drukarka kart Zebra ${d.model}`} fill sizes="112px" className="object-contain" />
+                      </span>
+                      <span className="min-w-0 flex-1">
+                        <span className="block text-sm font-semibold text-gray-900 group-hover:underline">Zebra {d.model}</span>
+                        <span className="mt-1 block text-xs text-gray-600">{d.opis}</span>
+                        {d.netto !== null && (
+                          <span className="mt-2 block text-sm font-semibold text-gray-900">
+                            od {d.netto.toLocaleString('pl-PL', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} zł
+                            <span className="ml-1 text-xs font-normal text-gray-500">netto</span>
+                          </span>
+                        )}
+                        <span className="mt-1 inline-flex items-center gap-1 text-xs font-medium text-gray-900">
+                          Zobacz model
+                          <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5" />
+                        </span>
+                      </span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
         </article>
       </main>
 
