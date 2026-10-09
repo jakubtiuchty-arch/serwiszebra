@@ -1,15 +1,55 @@
-import Link from 'next/link'
-import Image from 'next/image'
 import type { Metadata } from 'next'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import ShopSubheader from '@/components/shop/ShopSubheader'
 import ShopSidebar from '@/components/shop/ShopSidebar'
+import KafelekCzesci from '@/components/shop/KafelekCzesci'
 import { cardMaterialProducts, CARD_MATERIAL_PATH } from '@/lib/card-material-shop'
 export const dynamic = 'force-dynamic'
 export const metadata: Metadata = { title: 'Materiały Zebra ZC100 i ZC300 — taśmy, karty, czyszczenie', description: 'Oryginalne taśmy Zebra, karty PVC i karty czyszczące do ZC100 i ZC300. Sprawdź zgodność, zawartość opakowania, aktualną cenę i dostępność.', alternates: { canonical: `https://www.serwis-zebry.pl${CARD_MATERIAL_PATH}` } }
+
 export default async function Page({ searchParams }: { searchParams: { model?: string } }) {
   const model = ['ZC100', 'ZC300'].includes(searchParams.model || '') ? searchParams.model : undefined
   const products = (await cardMaterialProducts()).filter(p => !model || p.models.includes(model))
-  return <><Header /><ShopSubheader breadcrumbs={[{ label: 'Sklep', href: '/sklep' }, { label: 'Materiały do drukarek kart', href: CARD_MATERIAL_PATH }]} /><main id="main-content" className="min-h-screen bg-gray-50"><div className="mx-auto max-w-6xl px-4 py-6"><div className="flex items-start gap-6"><div className="hidden lg:block lg:w-64 lg:flex-shrink-0"><ShopSidebar currentProductType="material_kart" /></div><div className="min-w-0 flex-1"><details className="mb-5 rounded-xl border border-gray-200 bg-white p-4 lg:hidden"><summary className="cursor-pointer font-semibold">Kategorie sklepu</summary><div className="mt-4"><ShopSidebar currentProductType="material_kart" /></div></details><h1 className="text-3xl font-bold">Materiały do drukarek kart Zebra{model ? ` ${model}` : ' ZC100 i ZC300'}</h1><p className="mt-4 max-w-3xl text-gray-600">Wybierz taśmę, karty PVC lub zestaw czyszczący. Cena dotyczy całego opakowania podanego przy produkcie. Taśmy YMCKOK, KdO i KrO są przeznaczone do ZC300.</p><nav aria-label="Filtruj materiały według drukarki" className="my-6 flex flex-wrap gap-2">{[{value: undefined, label: 'Wszystkie'}, {value: 'ZC100', label: 'Do ZC100'}, {value: 'ZC300', label: 'Do ZC300'}].map(filter => <Link key={filter.label} href={`${CARD_MATERIAL_PATH}${filter.value ? `?model=${filter.value}` : ''}`} aria-current={model === filter.value ? 'page' : undefined} className={`rounded-lg border px-4 py-2 text-sm font-medium transition ${model === filter.value ? 'border-gray-900 bg-gray-900 text-white' : 'border-gray-200 bg-white text-gray-700 hover:border-gray-400 hover:bg-gray-100'}`}>{filter.label}</Link>)}</nav>{['Taśmy', 'Karty PVC', 'Czyszczenie'].map(kind => <section key={kind} className="my-10"><h2 className="mb-5 text-2xl font-semibold">{kind}</h2><div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">{products.filter(p => p.kind === kind).map(p => <Link href={`${CARD_MATERIAL_PATH}/${p.slug}`} key={p.pn} className="rounded-xl border border-gray-200 bg-white p-5 transition hover:border-blue-400 hover:shadow-sm"><Image src={p.image} alt={p.name} width={300} height={220} className="h-44 w-full object-contain" /><h3 className="mt-4 font-semibold">{p.name}</h3><p className="mt-2 text-sm text-gray-600">{p.unit} · {p.models.join(', ')}{p.pn === '800300-360EM' ? ' z drukiem dwustronnym' : ''}</p><p className="mt-4 text-xl font-bold">{p.price.toFixed(2).replace('.', ',')} zł netto</p><p className="text-sm text-gray-500">{p.price_brutto.toFixed(2).replace('.', ',')} zł brutto</p><p className="mt-2 text-sm">{p.stock > 0 ? 'Dostępny' : 'Sprawdź dostępność'}</p></Link>)}</div></section>)}</div></div></div></main><Footer /></>
+  // Wybór drukarki jest w kolumnie kategorii (ShopSidebar), jak modele przy częściach
+  const sidebar = <ShopSidebar currentProductType="material_kart" currentCardModel={model} />
+  return <>
+    <Header currentPage="other" />
+    <ShopSubheader breadcrumbs={[{ label: 'Sklep', href: '/sklep' }, { label: 'Materiały do drukarek kart', href: CARD_MATERIAL_PATH }, ...(model ? [{ label: `Do ${model}`, href: `${CARD_MATERIAL_PATH}?model=${model}` }] : [])]} />
+    <main id="main-content" className="min-h-screen bg-gray-50">
+      <div className="mx-auto max-w-6xl px-4 py-6">
+        <div className="flex items-start gap-6">
+          <div className="hidden lg:block lg:w-64 lg:flex-shrink-0">{sidebar}</div>
+          <div className="min-w-0 flex-1">
+            <details className="mb-5 rounded-xl border border-gray-200 bg-white lg:hidden"><summary className="cursor-pointer px-4 py-3 text-sm font-semibold text-gray-900">Kategorie sklepu</summary><div className="border-t border-gray-100 p-3">{sidebar}</div></details>
+            <h1 className="text-3xl font-semibold text-gray-900 sm:text-4xl">Materiały do drukarek kart Zebra{model ? ` ${model}` : ' ZC100 i ZC300'}</h1>
+            <p className="mt-4 max-w-3xl text-lg text-gray-700">Wybierz taśmę, karty PVC lub zestaw czyszczący. Cena dotyczy całego opakowania podanego przy produkcie. Taśmy YMCKOK, KdO i KrO są przeznaczone do ZC300.</p>
+            {['Taśmy', 'Karty PVC', 'Czyszczenie'].map(kind => {
+              const lista = products.filter(p => p.kind === kind)
+              if (!lista.length) return null
+              return <section key={kind} className="mt-8">
+                <h2 className="mb-3 text-xl font-semibold text-gray-900">{kind}</h2>
+                <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3">
+                  {lista.map(p => <KafelekCzesci
+                    key={p.pn}
+                    href={`${CARD_MATERIAL_PATH}/${p.slug}`}
+                    // Nazwa bez „Zebra {PN} — ", PN osobną linią — inaczej przycięcie do dwóch linii zjadało wydajność taśmy.
+                    // Taśmy tylko do ZC300 (YMCKOK, KdO, KrO) mówią o tym w nazwie, bo kafelek nie ma listy zgodności
+                    nazwa={p.name.replace(`Zebra ${p.pn} — `, '') + (p.models.length === 1 ? ` (tylko ${p.models[0]})` : '')}
+                    pn={p.pn}
+                    obraz={p.image}
+                    alt={p.name}
+                    cenaNetto={p.price}
+                    dostepny={p.stock > 0}
+                    doKoszyka={{ id: p.id, name: p.name, slug: p.slug, sku: p.pn, price: p.price, price_brutto: p.price_brutto, product_type: p.product_type, stock: p.stock, image: p.image }}
+                  />)}
+                </div>
+              </section>
+            })}
+          </div>
+        </div>
+      </div>
+    </main>
+    <Footer />
+  </>
 }

@@ -3,10 +3,8 @@
 import { applyLiveOffer, parseLiveOffer, type LiveOffer } from '@/lib/shop-live-offer'
 
 import { useState, useMemo, useEffect } from 'react'
-import Image from 'next/image'
-import Link from 'next/link'
-import { Package, Printer, Battery, Cable, Phone, ArrowUpDown, ShoppingCart } from 'lucide-react'
-import { useCartStore } from '@/lib/cart-store'
+import { Package, Printer, Battery, Cable, Phone, ArrowUpDown } from 'lucide-react'
+import KafelekCzesci from './KafelekCzesci'
 import { getProductUrl } from '@/lib/shop-categories'
 import { getProductFallbackImage } from '@/lib/product-images'
 
@@ -66,7 +64,6 @@ export default function ShopCategoryClient({
   const [selectedResolutions, setSelectedResolutions] = useState<number[]>([])
   const [sortBy, setSortBy] = useState('name')
   const [liveStockMap, setLiveStockMap] = useState<Record<string, LiveOffer>>({})
-  const addToCart = useCartStore((state) => state.addItem)
 
   // Pobierz live stock z Ingram API dla wszystkich produktów
   useEffect(() => {
@@ -124,23 +121,6 @@ export default function ShopCategoryClient({
         ? prev.filter(r => r !== res)
         : [...prev, res]
     )
-  }
-
-  const handleAddToCart = (e: React.MouseEvent, product: Product) => {
-    e.preventDefault()
-    addToCart({
-      id: product.id,
-      name: product.name,
-      slug: product.slug || '',
-      price: product.price,
-      price_brutto: product.price_brutto,
-      product_type: product.product_type,
-      image: product.image_url || `/placeholder-${product.product_type}.png`,
-      sku: product.sku,
-      stock: product.stock,
-      device_model: product.device_model || '',
-      resolution_dpi: product.resolution_dpi || 0
-    })
   }
 
   return (
@@ -224,73 +204,29 @@ export default function ShopCategoryClient({
               : (product.stock > 0 || (product.attributes?.stock_pl ?? 0) > 0 || (product.attributes?.stock_de ?? 0) > 0)
 
             return (
-              <Link
+              <KafelekCzesci
                 key={product.id}
                 href={productUrl}
-                className="bg-white rounded-xl border border-gray-200 overflow-hidden hover:border-blue-300 hover:shadow-md active:bg-gray-50 transition-all group"
-              >
-                {/* Image - większe i wycentrowane */}
-                <div className="relative h-36 sm:h-44 bg-white flex items-center justify-center p-4">
-                  {imageUrl ? (
-                    <Image
-                      src={imageUrl}
-                      alt={`${product.name} - oryginalna część Zebra`}
-                      width={140}
-                      height={140}
-                      className="object-contain max-h-full"
-                    />
-                  ) : (
-                    <Image
-                      src={getProductFallbackImage(product.product_type, product.device_model, product.resolution_dpi, product.sku) || '/sklep_photo/glowica-203dpi-do-drukarki-zebra-zd421t.png'}
-                      alt={product.name}
-                      width={140}
-                      height={140}
-                      className="object-contain max-h-full opacity-60"
-                    />
-                  )}
-                </div>
-
-                {/* Content */}
-                <div className="p-3 sm:p-4 border-t border-gray-100">
-                  <h3 className="text-xs sm:text-sm font-semibold text-gray-900 group-hover:text-blue-600 mb-2 line-clamp-2 leading-tight">
-                    {product.name}
-                  </h3>
-
-                  {/* Dostępność */}
-                  <div className="mb-2">
-                    {isAvailable ? (
-                      <span className="text-[10px] sm:text-xs text-green-600 font-medium">
-                        ✓ Dostępny
-                      </span>
-                    ) : (
-                      <span className="text-[10px] sm:text-xs text-red-500 font-medium">
-                        Chwilowo niedostępny
-                      </span>
-                    )}
-                  </div>
-
-                  {/* Price - netto główna */}
-                  <div className="flex items-end justify-between">
-                    <div>
-                      <div className="text-base sm:text-lg font-bold text-gray-900">
-                        {product.price.toFixed(2).replace('.', ',')} zł
-                      </div>
-                      <div className="text-[10px] sm:text-xs text-gray-500">netto</div>
-                    </div>
-                    
-                    <button
-                      onClick={(e) => handleAddToCart(e, product)}
-                      className={`p-2 sm:p-2.5 rounded-lg text-white transition-colors ${
-                        isAvailable
-                          ? 'bg-[#A8F000] hover:bg-[#96D800] text-gray-900'
-                          : 'bg-red-500 hover:bg-red-600'
-                      }`}
-                    >
-                      <ShoppingCart className="w-4 h-4" />
-                    </button>
-                  </div>
-                </div>
-              </Link>
+                nazwa={product.name}
+                obraz={imageUrl || '/sklep_photo/glowica-203dpi-do-drukarki-zebra-zd421t.png'}
+                alt={imageUrl ? `${product.name} - oryginalna część Zebra` : product.name}
+                wyblakly={!imageUrl}
+                cenaNetto={product.price}
+                dostepny={isAvailable}
+                doKoszyka={{
+                  id: product.id,
+                  name: product.name,
+                  slug: product.slug || '',
+                  price: product.price,
+                  price_brutto: product.price_brutto,
+                  product_type: product.product_type,
+                  image: product.image_url || `/placeholder-${product.product_type}.png`,
+                  sku: product.sku,
+                  stock: product.stock,
+                  device_model: product.device_model || '',
+                  resolution_dpi: product.resolution_dpi || 0
+                }}
+              />
             )
           })}
         </div>
