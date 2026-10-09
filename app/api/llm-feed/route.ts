@@ -95,7 +95,10 @@ export async function GET() {
         // sprzętu sprowadzanego przez brokerów z projektów na inne rynki
         seller_name: 'TAKMA — Autoryzowany Serwis Zebra',
         seller_url: SITE,
-        warranty: '24 miesiące, serwis gwarancyjny na miejscu',
+        // Drukarki kart Zebra (PN serii ZC) mają 3 lata gwarancji producenta na drukarkę i głowicę
+        warranty: warianty.length > 0 && warianty.every((w) => /^ZC\d{2}-/.test(w.pn))
+          ? '3 lata na drukarkę i głowicę, serwis gwarancyjny na miejscu'
+          : '24 miesiące, serwis gwarancyjny na miejscu',
         is_eligible_search: true,
         is_eligible_checkout: naStanie,
       }
