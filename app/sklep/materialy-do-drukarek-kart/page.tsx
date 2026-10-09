@@ -21,7 +21,6 @@ const RODZAJE = [
   { klucz: 'karty-pvc', kind: 'Karty PVC', etykieta: 'Karty PVC' },
   { klucz: 'czyszczenie', kind: 'Czyszczenie', etykieta: 'Karty czyszczące' },
 ]
-const odmianaProduktow = (n: number) => n === 1 ? 'produkt' : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? 'produkty' : 'produktów'
 
 /**
  * Treść kategorii pisana według zasad ASD-STE100: krótkie zdania, jedno
@@ -139,10 +138,10 @@ export default async function Page({ searchParams }: { searchParams: SearchParam
         <div className="flex flex-col gap-6 lg:flex-row lg:items-start">
           <FiltryMaterialow grupy={grupy} aktywne={pigulki.length} wyczyscHref={CARD_MATERIAL_PATH} />
           <div className="min-w-0 flex-1">
-            <div className="mb-4 flex flex-wrap items-center gap-2">
-              <p className="text-xs text-gray-500">{products.length} {odmianaProduktow(products.length)}{pigulki.length ? ` z ${wszystkie.length}` : ''}</p>
+            {/* Pigułki wybranych filtrów — na telefonie panel jest zwinięty, więc to jedyne miejsce, gdzie widać i można cofnąć wybór */}
+            {pigulki.length > 0 && <div className="mb-4 flex flex-wrap items-center gap-2">
               {pigulki.map(f => <Link key={f.etykieta} href={f.href} scroll={false} className="inline-flex items-center gap-1 rounded-full bg-gray-900 py-1 pl-3 pr-2 text-xs font-medium text-white">{f.etykieta}<X className="h-3 w-3" /></Link>)}
-            </div>
+            </div>}
             {products.length === 0 && <div className="rounded-xl border border-gray-200 bg-white p-6 text-center"><p className="text-sm text-gray-700">Żaden materiał nie spełnia wszystkich warunków naraz.</p><Link href={CARD_MATERIAL_PATH} className="mt-3 inline-flex min-h-[40px] items-center rounded-lg bg-[#A8F000] px-4 text-sm font-semibold text-gray-900">Pokaż wszystkie materiały</Link></div>}
             {['Taśmy', 'Karty PVC', 'Czyszczenie'].map(kind => {
               const lista = products.filter(p => p.kind === kind)
