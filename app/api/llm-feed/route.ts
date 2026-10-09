@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { deviceUrl } from '@/lib/device-url'
 import { pobierzStany, stanDlaPN } from '@/lib/stock-server'
 import { trescKarty } from '@/lib/device-content'
 
@@ -63,7 +64,8 @@ export async function GET() {
 
     const tresc = trescKarty(d.slug)
     const zdjecie = tresc?.zdjecieGlowne || d.image_urls?.[0]
-    const kartaUrl = `${SITE}/sklep/drukarki-etykiet/${d.slug}`
+    // deviceUrl: drukarki kart mają własną ścieżkę /sklep/drukarki-kart-zebra/
+    const kartaUrl = `${SITE}${deviceUrl(d.slug)}`
 
     return warianty.map((v) => {
       const stan = stanDlaPN(stany, v.pn)

@@ -41,6 +41,14 @@ const nextConfig = {
   // Redirecty 301 dla zmienionych URL-i
   async redirects() {
     return [
+      // Drukarki kart mają product_type 'drukarka', więc szablon /sklep/drukarki-etykiet/[slug]
+      // renderował je pod drugim adresem z własnym canonicalem (duplikat, audyt SEO 9.10.2026).
+      // Lista z katalogu — nowa drukarka kart dostaje przekierowanie sama; ?pn= przechodzi dalej.
+      ...require('./lib/card-printers.json').map((m) => ({
+        source: `/sklep/drukarki-etykiet/${m.slug}`,
+        destination: `/sklep/drukarki-kart-zebra/${m.slug}`,
+        permanent: true,
+      })),
       {
         source: '/blog/zebra-tc501-tc701-terminal-mobilny-ai-premiera-2026',
         destination: '/blog/zebra-tc501-tc701-specyfikacja-cena-premiera',

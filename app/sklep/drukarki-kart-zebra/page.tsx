@@ -12,7 +12,9 @@ import {cardPrinterProducts} from '@/lib/card-printer-shop'
 import {pobierzStany,stanDlaPN} from '@/lib/stock-server'
 const URL='https://www.serwis-zebry.pl/sklep/drukarki-kart-zebra'
 export const dynamic='force-dynamic'
-export const metadata: Metadata={title:'Drukarki kart Zebra ZC100, ZC300 i ZC350 — sklep | TAKMA',description:'Porównaj drukarki kart Zebra ZC100, ZC300 i ZC350. Wybierz druk jednej lub obu stron i koder. Sprawdź ceny, dostępność oraz zgodne taśmy i karty PVC.',alternates:{canonical:URL},openGraph:{title:'Drukarki kart Zebra — ZC100, ZC300 i ZC350',url:URL,type:'website',locale:'pl_PL',images:['/sklep_photo/urzadzenia/zc300_1.webp']}}
+export const metadata: Metadata={title:'Drukarki kart Zebra ZC100, ZC300 i ZC350 — sklep | TAKMA',description:'Porównaj drukarki kart Zebra ZC100, ZC300 i ZC350. Wybierz druk jednej lub obu stron i koder. Sprawdź ceny, dostępność oraz zgodne taśmy i karty PVC.',alternates:{canonical:URL},openGraph:{title:'Drukarki kart Zebra — ZC100, ZC300 i ZC350',url:URL,type:'website',locale:'pl_PL',images:['/sklep_photo/urzadzenia/zc300_1.webp']},
+ // Bez własnej sekcji karta Twittera dziedziczyła tytuł i opis z /sklep („Sklep Zebra – urządzenia i części…”)
+ twitter:{card:'summary_large_image',title:'Drukarki kart Zebra — ZC100, ZC300 i ZC350',description:'Porównaj drukarki kart Zebra ZC100, ZC300 i ZC350. Wybierz druk jednej lub obu stron i koder. Sprawdź ceny, dostępność oraz zgodne taśmy i karty PVC.',images:['/sklep_photo/urzadzenia/zc300_1.webp']}}
 const faq=[
  ['Jaką drukarkę Zebra wybrać do identyfikatorów?','Wybierz ZC100, jeśli potrzebujesz jednostronnego nadruku. Wybierz ZC300 w wersji ZC32, jeśli chcesz automatycznie drukować obie strony. Wybierz ZC350, jeśli potrzebujesz wyższej prędkości albo taśm specjalnych: perłowej, metalicznej lub YMCKLL. Łączność i kodowanie dobierz według numeru PN.'],
  ['Czym różni się Zebra ZC100 od ZC300?','ZC100 drukuje jednostronnie, do 150 kolorowych kart/h. ZC300 drukuje jednostronnie do 200 kart/h, ma ekran LCD oraz wersje dwustronne. Podane prędkości dotyczą taśmy YMCKO i seryjnego druku przez USB.'],

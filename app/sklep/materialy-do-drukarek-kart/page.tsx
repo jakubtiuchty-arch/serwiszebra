@@ -12,7 +12,15 @@ type SearchParams = { model?: string; rodzaj?: string }
 /** Kanoniczny zostaje czysty adres kategorii; kombinacje filtra dostają `noindex, follow` jak strony klas drukarek */
 export async function generateMetadata({ searchParams }: { searchParams: SearchParams }): Promise<Metadata> {
   const zFiltrem = !!(searchParams.model || searchParams.rodzaj)
-  return { title: 'Taśmy i karty PVC do Zebra ZC100, ZC300 i ZC350 — sklep | TAKMA', description: 'Oryginalne taśmy Zebra 800300 i 800350: YMCKO, YMCKOK, KdO, KrO, perłowa, metaliczna i jednokolorowe, karty PVC oraz karty czyszczące do ZC100, ZC300 i ZC350. Zgodność i koszt wydruku.', alternates: { canonical: URL }, ...(zFiltrem ? { robots: { index: false, follow: true } } : {}) }
+  const title = 'Taśmy i karty PVC do Zebra ZC100, ZC300 i ZC350 — sklep | TAKMA'
+  const description = 'Oryginalne taśmy Zebra 800300 i 800350: YMCKO, YMCKOK, KdO, KrO, perłowa, metaliczna i jednokolorowe, karty PVC oraz karty czyszczące do ZC100, ZC300 i ZC350. Zgodność i koszt wydruku.'
+  const obraz = '/sklep_photo/materialy-kart/800300-250em.webp'
+  return {
+    title, description, alternates: { canonical: URL }, ...(zFiltrem ? { robots: { index: false, follow: true } } : {}),
+    // Własne OG i karta Twittera — bez nich tytuł i opis dziedziczyły się z /sklep
+    openGraph: { title: 'Taśmy i karty PVC do drukarek kart Zebra', description, url: URL, type: 'website', locale: 'pl_PL', images: [obraz] },
+    twitter: { card: 'summary_large_image', title: 'Taśmy i karty PVC do drukarek kart Zebra', description, images: [obraz] },
+  }
 }
 
 const MODELE = ['ZC100', 'ZC300', 'ZC350']

@@ -1,5 +1,5 @@
 /**
- * Kody GTIN (EAN/UPC) drukarek etykiet Zebra wg numeru katalogowego — do feedu Google Merchant.
+ * Kody GTIN (EAN/UPC) drukarek etykiet i drukarek kart Zebra wg numeru katalogowego — do feedu Google Merchant.
  *
  * Źródło: katalog Icecat (rekordy zatwierdzone, kod produktu = numer katalogowy), pobrane 4.10.2026.
  * Sumy kontrolne sprawdzone; usunięte kody z prefiksów zastrzeżonych (200–299 do użytku
@@ -152,6 +152,17 @@ export const GTIN_DRUKAREK: Record<string, string[]> = {
   'ZT62063-T0EC100Z': ['8596375178472'],
   'ZT62063-T1E0100Z': ['8596375178489'],
   'ZT62063-T2E0100Z': ['8596375178496', '5715063388297'],
+  // Drukarki kart Zebra (serie ZC). Źródło: dane produktów takma.com.pl (gtin13), sumy kontrolne
+  // EAN-13 sprawdzone 9.10.2026. Wersje z koderem magnetycznym ZC11-0M…, ZC36-0M… bez znanego kodu.
+  'ZC11-0000000EM00': ['8596375174955'],
+  'ZC11-000C000EM00': ['8596375174962'],
+  'ZC31-000C000EM00': ['8596375174993'],
+  'ZC31-0M0C000EM00': ['8596375175006'],
+  'ZC32-000C000EM00': ['8596375175013'],
+  'ZC32-0M0C000EM00': ['8596375175020'],
+  'ZC35-000C000EM00': ['8596375175037'],
+  'ZC35-0M0C000EM00': ['8596375175044'],
+  'ZC36-000C000EM00': ['8596375175068'],
 }
 
 /** Kody GTIN dla numeru katalogowego (wielkość liter bez znaczenia) */

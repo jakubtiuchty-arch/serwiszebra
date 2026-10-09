@@ -93,7 +93,8 @@ export default function ShopSidebar({
 
       {/* Kategorie */}
       <div className="bg-white rounded-xl border border-gray-200 p-4">
-        <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">Kategorie</h3>
+        {/* Etykieta nawigacji, nie nagłówek treści — jako h3 stała przed pierwszym h2 strony (skok h1 → h3) */}
+        <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">Kategorie</p>
         <div className="space-y-1">
           {/* Urządzenia nad częściami — rozwijane do czterech klas drukarek */}
           <div>
