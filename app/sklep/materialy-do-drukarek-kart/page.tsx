@@ -16,6 +16,7 @@ export async function generateMetadata({ searchParams }: { searchParams: SearchP
 }
 
 const MODELE = ['ZC100', 'ZC300']
+const odmianaProduktow = (n: number) => n === 1 ? 'produkt' : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? 'produkty' : 'produktów'
 const RODZAJE = [
   { klucz: 'tasmy', kind: 'Taśmy', etykieta: 'Taśmy' },
   { klucz: 'karty-pvc', kind: 'Karty PVC', etykieta: 'Karty PVC' },
@@ -139,32 +140,28 @@ export default async function Page({ searchParams }: { searchParams: SearchParam
           <FiltryMaterialow grupy={grupy} aktywne={pigulki.length} wyczyscHref={CARD_MATERIAL_PATH} />
           <div className="min-w-0 flex-1">
             {/* Pigułki wybranych filtrów — na telefonie panel jest zwinięty, więc to jedyne miejsce, gdzie widać i można cofnąć wybór */}
-            {pigulki.length > 0 && <div className="mb-4 flex flex-wrap items-center gap-2">
+            <div className="mb-4 flex flex-wrap items-center gap-2">
+              <p className="text-xs text-gray-500">{products.length} {odmianaProduktow(products.length)}{pigulki.length ? ` z ${wszystkie.length}` : ''}</p>
               {pigulki.map(f => <Link key={f.etykieta} href={f.href} scroll={false} className="inline-flex items-center gap-1 rounded-full bg-gray-900 py-1 pl-3 pr-2 text-xs font-medium text-white">{f.etykieta}<X className="h-3 w-3" /></Link>)}
-            </div>}
+            </div>
             {products.length === 0 && <div className="rounded-xl border border-gray-200 bg-white p-6 text-center"><p className="text-sm text-gray-700">Żaden materiał nie spełnia wszystkich warunków naraz.</p><Link href={CARD_MATERIAL_PATH} className="mt-3 inline-flex min-h-[40px] items-center rounded-lg bg-[#A8F000] px-4 text-sm font-semibold text-gray-900">Pokaż wszystkie materiały</Link></div>}
-            {['Taśmy', 'Karty PVC', 'Czyszczenie'].map(kind => {
-              const lista = products.filter(p => p.kind === kind)
-              if (!lista.length) return null
-              return <section key={kind} className="mb-8 last:mb-0">
-                <h2 className="mb-3 text-xl font-semibold text-gray-900">{kind}</h2>
-                <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3">
-                  {lista.map(p => <KafelekCzesci
-                    key={p.pn}
-                    href={`${CARD_MATERIAL_PATH}/${p.slug}`}
-                    // Nazwa bez „Zebra {PN} — ", PN osobną linią — inaczej przycięcie do dwóch linii zjadało wydajność taśmy.
-                    // Taśmy tylko do ZC300 (YMCKOK, KdO, KrO) mówią o tym w nazwie, bo kafelek nie ma listy zgodności
-                    nazwa={p.name.replace(`Zebra ${p.pn} — `, '') + (p.models.length === 1 ? ` (tylko ${p.models[0]})` : '')}
-                    pn={p.pn}
-                    obraz={p.image}
-                    alt={p.name}
-                    cenaNetto={p.price}
-                    dostepny={p.stock > 0}
-                    doKoszyka={{ id: p.id, name: p.name, slug: p.slug, sku: p.pn, price: p.price, price_brutto: p.price_brutto, product_type: p.product_type, stock: p.stock, image: p.image }}
-                  />)}
-                </div>
-              </section>
-            })}
+            {/* Jedna siatka bez nagłówków rodzajów, jak na stronach drukarek — rodzaj wybiera się w filtrach.
+                Kolejność zostaje: taśmy, karty PVC, czyszczenie */}
+            {products.length > 0 && <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3">
+              {RODZAJE.flatMap(r => products.filter(p => p.kind === r.kind)).map(p => <KafelekCzesci
+                key={p.pn}
+                href={`${CARD_MATERIAL_PATH}/${p.slug}`}
+                // Nazwa bez „Zebra {PN} — ", PN osobną linią — inaczej przycięcie do dwóch linii zjadało wydajność taśmy.
+                // Taśmy tylko do ZC300 (YMCKOK, KdO, KrO) mówią o tym w nazwie, bo kafelek nie ma listy zgodności
+                nazwa={p.name.replace(`Zebra ${p.pn} — `, '') + (p.models.length === 1 ? ` (tylko ${p.models[0]})` : '')}
+                pn={p.pn}
+                obraz={p.image}
+                alt={p.name}
+                cenaNetto={p.price}
+                dostepny={p.stock > 0}
+                doKoszyka={{ id: p.id, name: p.name, slug: p.slug, sku: p.pn, price: p.price, price_brutto: p.price_brutto, product_type: p.product_type, stock: p.stock, image: p.image }}
+              />)}
+            </div>}
 
           </div>
         </div>
