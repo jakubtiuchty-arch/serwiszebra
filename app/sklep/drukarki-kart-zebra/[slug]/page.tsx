@@ -489,12 +489,9 @@ export default async function DevicePage({
               wcześniej wydłużały drogę do odpowiedzi „który wariant wybrać?" */}
           <DeviceAccessories items={akcesoria} />
 
-          {/* Materiały eksploatacyjne zaraz po częściach: klient, który wybrał
-              już wersję, następnym pytaniem pyta o etykiety. Rodzaj druku
-              czytamy z ostatniej litery modelu („t" zużywa taśmę i etykiety,
-              „d" wyłącznie etykiety), z cechy wariantu albo z rodziny: serie
-              przemysłowe ZT, ZM, ZE i 105SL drukują termotransferowo bez
-              sufiksu w nazwie — ZT411 pokazywał przez to same etykiety termiczne. */}
+          {/* Materiały zaraz po częściach: klient, który wybrał już wersję,
+              następnym pytaniem pyta o taśmę i karty — drukarka nie ma ich
+              w standardowej konfiguracji. Lista tylko zgodna z tym modelem. */}
           <CardMaterials model={product.device_model || "ZC300"} />
 
           {tresc && (
