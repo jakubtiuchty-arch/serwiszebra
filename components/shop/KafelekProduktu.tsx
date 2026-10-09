@@ -35,9 +35,13 @@ const zl = (v: number) =>
  */
 export default function KafelekProduktu({ p }: { p: KafelekProduktuDane }) {
   return (
+    /* Subgrid: kafelki w jednym rzędzie siatki dzielą wysokości wierszy (zdjęcie,
+       nazwa, chipy, cena, przycisk), więc ceny stoją w jednej linii także wtedy,
+       gdy chipy jednego modelu zajmują jeden rząd, a sąsiada dwa (ZC100 obok ZC300).
+       gap-y-0 zastępuje odstęp siatki rodzica wewnątrz kafelka. */
     <Link
       href={p.href || `/sklep/drukarki-etykiet/${p.slug}`}
-      className="group flex flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+      className="group row-span-5 grid grid-rows-subgrid gap-y-0 overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
     >
       <span className="relative block aspect-[5/4] overflow-hidden bg-white">
         {p.zdjecie && (
@@ -52,9 +56,9 @@ export default function KafelekProduktu({ p }: { p: KafelekProduktuDane }) {
         )}
       </span>
 
-      <span className="flex flex-1 flex-col border-t border-gray-100 p-4">
-        <h2 className="text-base font-bold tracking-tight text-gray-900">{p.nazwa}</h2>
+      <h2 className="border-t border-gray-100 px-4 pt-4 text-base font-bold tracking-tight text-gray-900">{p.nazwa}</h2>
 
+      <span className="block self-start px-4">
         {p.cechy.length > 0 && (
           <span className="mt-2 flex flex-wrap gap-1.5">
             {p.cechy.map((c) => (
@@ -74,29 +78,31 @@ export default function KafelekProduktu({ p }: { p: KafelekProduktuDane }) {
             {p.wszystkichWersji} wersji
           </span>
         )}
+      </span>
 
-        {/* flex-wrap + nowrap ceny: przy czterocyfrowej cenie i „wysyłka 2-3 dni" dostępność
-            schodzi pod cenę, zamiast łamać „zł" do nowej linii (ZC350) */}
-        <span className="mb-3 mt-3 flex flex-wrap items-end justify-between gap-x-2 gap-y-1">
-          <span>
-            <span className="block whitespace-nowrap text-lg font-bold leading-tight text-gray-900">
-              od {zl(p.netto)} zł
-            </span>
-            <span className="block text-xs text-gray-500">{zl(p.brutto)} zł brutto</span>
+      {/* flex-wrap + nowrap ceny: przy czterocyfrowej cenie i „wysyłka 2-3 dni" dostępność
+          schodzi pod cenę, zamiast łamać „zł" do nowej linii (ZC350). self-start trzyma
+          cenę u góry wiersza, więc wyższy blok sąsiada jej nie przesuwa */}
+      <span className="flex flex-wrap items-end justify-between gap-x-2 gap-y-1 self-start px-4 pb-3 pt-3">
+        <span>
+          <span className="block whitespace-nowrap text-lg font-bold leading-tight text-gray-900">
+            od {zl(p.netto)} zł
           </span>
-          {p.dostepny && (
-            <span className="flex items-center gap-1.5 whitespace-nowrap pb-0.5 text-xs text-gray-600">
-              <span
-                className={`h-2 w-2 rounded-full ${p.magazynPL ? 'bg-green-500' : 'bg-yellow-500'}`}
-              />
-              {p.magazynPL ? 'wysyłka 24h' : 'wysyłka 2-3 dni'}
-            </span>
-          )}
+          <span className="block text-xs text-gray-500">{zl(p.brutto)} zł brutto</span>
         </span>
+        {p.dostepny && (
+          <span className="flex items-center gap-1.5 whitespace-nowrap pb-0.5 text-xs text-gray-600">
+            <span
+              className={`h-2 w-2 rounded-full ${p.magazynPL ? 'bg-green-500' : 'bg-yellow-500'}`}
+            />
+            {p.magazynPL ? 'wysyłka 24h' : 'wysyłka 2-3 dni'}
+          </span>
+        )}
+      </span>
 
-        {/* mt-auto — CTA zawsze przy dolnej krawędzi kafelka, niezależnie od
-            tego, ile rzędów zajęły chipy (ZD220d ma jeden, ZD421 dwa) */}
-        <span className="mt-auto flex min-h-[42px] items-center justify-center gap-1.5 rounded-lg bg-[#A8F000] px-4 text-sm font-semibold text-gray-900 transition group-hover:brightness-95">
+      {/* self-end — CTA zawsze przy dolnej krawędzi kafelka */}
+      <span className="self-end px-4 pb-4">
+        <span className="flex min-h-[42px] items-center justify-center gap-1.5 rounded-lg bg-[#A8F000] px-4 text-sm font-semibold text-gray-900 transition group-hover:brightness-95">
           {p.liczbaWersji > 1
             ? `Wybierz z ${p.liczbaWersji} wersji`
             : p.href
