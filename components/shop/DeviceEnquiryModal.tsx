@@ -177,7 +177,7 @@ export default function DeviceEnquiryModal({ productName, variantPn, priceNetto 
               <div className="rounded-t-2xl bg-gray-950 px-5 py-5 sm:px-6">
                 {/* Uchwyt arkusza — na telefonie sygnalizuje, że to panel do zamknięcia */}
                 <div className="mx-auto mb-3 h-1 w-10 rounded-full bg-white/20 sm:hidden" />
-                <h2 id="pytanie-o-urzadzenie-tytul" className="text-lg font-semibold text-white">
+                <h2 id="pytanie-o-urzadzenie-tytul" className="pr-8 text-lg font-semibold text-white">
                   Zapytaj o {productName.replace(/^Drukarka etykiet\s+/i, '')}
                 </h2>
                 <p className="mt-1 text-sm text-gray-400">

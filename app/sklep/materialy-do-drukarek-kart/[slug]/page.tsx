@@ -7,6 +7,7 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import ShopSubheader from '@/components/shop/ShopSubheader'
 import ProductPurchasePanel from '@/components/shop/ProductPurchasePanel'
+import ZapytajOProdukt from '@/components/shop/ZapytajOProdukt'
 import catalog from '@/lib/card-materials.json'
 import { cardMaterialProducts, CARD_MATERIAL_PATH } from '@/lib/card-material-shop'
 import { getPostBySlug } from '@/lib/blog'
@@ -69,7 +70,8 @@ export default async function Page({ params }: { params: { slug: string } }) {
             <figcaption className="sr-only">{p.name} — oryginalny materiał Zebra</figcaption>
           </figure>
 
-          <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6 flex-1">
+          <div className="flex-1">
+          <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6">
             <h1 className="text-lg sm:text-xl font-semibold text-gray-900 mb-1 sm:mb-1.5">{p.name}</h1>
             <p className="text-xs text-gray-500 mb-3">
               PN: <span className="font-mono font-medium text-gray-600">{p.pn}</span>
@@ -82,6 +84,9 @@ export default async function Page({ params }: { params: { slug: string } }) {
               fallbackStockDE={p.stockEU}
               fallbackInDelivery={p.inDelivery}
             />
+          </div>
+          {/* Pod ramką, nie w niej — jak na kartach drukarek: zakup to jedna ścieżka, pytanie druga */}
+          <ZapytajOProdukt productName={p.name} pn={p.pn} priceNetto={p.price} miejsce="karta_materialu_kart" />
           </div>
         </div>
 
