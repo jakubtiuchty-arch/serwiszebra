@@ -52,8 +52,8 @@ export default async function CardCategory(){
  return <KafelekProduktu key={p.slug} p={{slug:p.slug,nazwa:p.name.replace(/^Drukarka kart\s+/i,''),zdjecie:p.images[0],cechy:chipy(p.variants),netto:cheapest?.netto || Number(p.price),brutto:cheapest?.brutto || Number(p.price_brutto),liczbaWersji:p.variants.length,dostepny:!!cheapest && cheapest.stockPL+cheapest.stockEU>0,magazynPL:!!cheapest && cheapest.stockPL>0,href:'/sklep/drukarki-kart-zebra/'+p.slug,priorytet:i<4}}/>
  })}</section>
  <section className="rounded-xl border border-gray-200 bg-white p-5 sm:p-6">
- <h2 className="text-xl font-semibold text-gray-900">Jak wybrać drukarkę do identyfikatorów?</h2>
- <p className="mt-3 text-sm leading-relaxed text-gray-700">Zacznij od projektu karty. Ustal, czy zdjęcie, nazwisko i kod mieszczą się na jednej stronie. Sprawdź też, czy karta ma tylko identyfikować osobę, czy działać w systemie kontroli dostępu.</p>
+ <h2 className="text-xl font-semibold text-gray-900">Jak wybrać drukarkę do kart plastikowych?</h2>
+ <p className="mt-3 text-sm leading-relaxed text-gray-700">Na drukarce do kart plastikowych najczęściej powstają identyfikatory pracownicze, przepustki i legitymacje. Zacznij od projektu karty. Ustal, czy zdjęcie, nazwisko i kod mieszczą się na jednej stronie. Sprawdź też, czy karta ma tylko identyfikować osobę, czy działać w systemie kontroli dostępu.</p>
  <h3 className="mt-5 font-semibold">Jedna strona czy automatyczny druk obu stron?</h3>
  <p className="mt-2 text-sm leading-relaxed text-gray-700">Zebra ZC100 drukuje jedną stronę karty. To wybór do identyfikatorów z informacjami na awersie. Zebra ZC300 w wersji ZC31 również drukuje jednostronnie. Wersja ZC32 automatycznie odwraca kartę i drukuje jej rewers. Wybierz ZC32, jeśli na odwrocie potrzebujesz regulaminu, danych kontaktowych lub dodatkowego kodu. Zebra ZC350 drukuje jedną stronę w wersji ZC35 i obie strony w wersji ZC36. O liczbie drukowanych stron decyduje konfiguracja PN.</p>
  <h3 className="mt-5 font-semibold">Liczba kart i czas przygotowania</h3>
