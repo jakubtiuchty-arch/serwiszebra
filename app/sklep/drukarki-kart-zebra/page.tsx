@@ -24,18 +24,30 @@ const faq=[
  ['Ile kart mieści podajnik Zebra ZC100 i ZC300?','Podajnik każdego modelu mieści 100 kart o grubości 0,76 mm. Przy większej serii trzeba go uzupełniać.'],
  ['Ile kosztuje wydruk jednej karty?','Koszt materiałów to cena taśmy podzielona przez liczbę wydruków oraz cena pustej karty. Do pełnego kosztu dodaj czyszczenie, odrzuty i eksploatację urządzenia. Wydajność taśmy zależy od jej PN i układu nadruku.'],
 ]
+type Wariant={dpi:number;cechy:Record<string,string>}
+/** Chipy liczone z wersji, jak na kafelkach drukarek etykiet: rozdzielczość, łączność, rodzaj druku */
+const chipy=(warianty:Wariant[])=>{
+ const unikalne=(w:string[])=>Array.from(new Set(w))
+ const lacznosc=unikalne(warianty.flatMap(v=>(v.cechy['Łączność']||'').split(', ').filter(Boolean))).map(w=>w==='Ethernet'?'LAN':w)
+ const druk=unikalne(warianty.map(v=>v.cechy.Druk))
+ return [unikalne(warianty.map(v=>`${v.dpi}`)).join(' / ')+' dpi',lacznosc.join(' · '),druk.length>1?'jedno- i dwustronny':druk[0]==='Dwustronny'?'dwustronny':'jednostronny'].filter(Boolean)
+}
+const odmianaWersji=(n:number)=>n===1?'wersja':n%10>=2&&n%10<=4&&(n%100<12||n%100>14)?'wersje':'wersji'
 export default async function CardCategory(){
  const products=await cardPrinterProducts();const stock=await pobierzStany(products.flatMap(p=>p.variants.map(v=>v.pn)))
+ const wersji=products.reduce((s,p)=>s+p.variants.length,0)
  const poradniki = PORADNIKI_KART.map(getPostBySlug).filter((p): p is NonNullable<typeof p> => !!p)
  const schema={'@context':'https://schema.org','@graph':[{'@type':'CollectionPage','@id':URL,name:'Drukarki kart Zebra',url:URL,mainEntity:{'@id':URL+'#lista'}},{'@type':'ItemList','@id':URL+'#lista',itemListElement:products.map((p,i)=>({'@type':'ListItem',position:i+1,name:p.name,url:URL+'/'+p.slug}))},{'@type':'BreadcrumbList',itemListElement:[{'@type':'ListItem',position:1,name:'Sklep',item:'https://www.serwis-zebry.pl/sklep'},{'@type':'ListItem',position:2,name:'Drukarki kart Zebra',item:URL}]}]}
  return <><Header currentPage="other"/><ShopSubheader breadcrumbs={[{label:'Sklep',href:'/sklep'},{label:'Drukarki kart Zebra',href:'/sklep/drukarki-kart-zebra'}]}/><script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(schema)}}/><main id="main-content" className="min-h-screen bg-gray-50"><div className="mx-auto max-w-6xl px-4 py-6"><div className="flex flex-col gap-6 lg:flex-row"><div className="hidden lg:block lg:w-64 lg:shrink-0"><ShopSidebar currentProductType="drukarka-kart"/></div><div className="min-w-0 flex-1">
  <h1 className="text-3xl font-semibold text-gray-900 sm:text-4xl">Drukarki kart Zebra</h1><p className="mt-4 max-w-3xl text-lg text-gray-700">Drukarki kart Zebra służą do tworzenia identyfikatorów, przepustek i kart członkowskich. Porównaj ZC100 oraz ZC300. Wybierz liczbę drukowanych stron, łączność i koder.</p>
  <details className="mt-5 rounded-xl border border-gray-200 bg-white lg:hidden"><summary className="cursor-pointer px-4 py-3 text-sm font-semibold text-gray-900">Kategorie sklepu</summary><div className="border-t border-gray-100 p-3"><ShopSidebar currentProductType="drukarka-kart"/></div></details>
- <section id="modele" aria-label="Modele drukarek kart" className="my-6 grid gap-4 sm:grid-cols-2">{products.map((p,i)=>{
+ <p className="mb-4 mt-6 text-xs text-gray-500">{wersji} {odmianaWersji(wersji)} w {products.length} {products.length===1?'modelu':'modelach'}</p>
+ {/* Ta sama siatka co na stronach klas drukarek etykiet — dwa modele zajmują dwie z trzech kolumn, więc kafelki mają tę samą wielkość */}
+ <section id="modele" aria-label="Modele drukarek kart" className="mb-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">{products.map((p,i)=>{
  const offers=p.variants.map(v=>stanDlaPN(stock,v.pn)).filter((st): st is NonNullable<typeof st> => !!st && st.netto>0)
  const available=offers.filter(st=>st.stockPL+st.stockEU>0)
  const cheapest=[...(available.length?available:offers)].sort((a,b)=>a.netto-b.netto)[0]
- return <KafelekProduktu key={p.slug} p={{slug:p.slug,nazwa:p.name,zdjecie:p.images[0],cechy:p.model==='ZC100'?['300 dpi','Druk jednostronny','USB; Ethernet zależnie od PN']:['300 dpi','Jedna lub obie strony','USB i Ethernet'],netto:cheapest?.netto || Number(p.price),brutto:cheapest?.brutto || Number(p.price_brutto),liczbaWersji:p.variants.length,dostepny:!!cheapest && cheapest.stockPL+cheapest.stockEU>0,magazynPL:!!cheapest && cheapest.stockPL>0,href:'/sklep/drukarki-kart-zebra/'+p.slug,priorytet:i===0}}/>
+ return <KafelekProduktu key={p.slug} p={{slug:p.slug,nazwa:p.name.replace(/^Drukarka kart\s+/i,''),zdjecie:p.images[0],cechy:chipy(p.variants),netto:cheapest?.netto || Number(p.price),brutto:cheapest?.brutto || Number(p.price_brutto),liczbaWersji:p.variants.length,dostepny:!!cheapest && cheapest.stockPL+cheapest.stockEU>0,magazynPL:!!cheapest && cheapest.stockPL>0,href:'/sklep/drukarki-kart-zebra/'+p.slug,priorytet:i<4}}/>
  })}</section>
  <section className="rounded-xl border border-gray-200 bg-white p-5 sm:p-6">
  <h2 className="text-xl font-semibold text-gray-900">Jak wybrać drukarkę do identyfikatorów?</h2>
