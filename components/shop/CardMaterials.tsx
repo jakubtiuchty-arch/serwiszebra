@@ -8,8 +8,10 @@ type Material = Awaited<ReturnType<typeof cardMaterialProducts>>[number]
 const RODZAJE = ['Taśmy', 'Karty PVC', 'Czyszczenie']
 const ETYKIETY: Record<string, string> = { 'Taśmy': 'Taśma', 'Karty PVC': 'Karty PVC', 'Czyszczenie': 'Karty czyszczące' }
 
-/** Materiały, bez których drukarka nie wydrukuje pierwszej karty — skrót na stronie kategorii */
-const NA_START = ['800300-250EM', '104523-111', '105999-310-01']
+/** Materiały, bez których drukarka nie wydrukuje pierwszej karty — skrót na stronie kategorii.
+    Dwie taśmy YMCKO, bo ZC350 nie przyjmuje kolorowych taśm 800300 */
+const NA_START = ['800300-250EM', '800350-250EM', '104523-111', '105999-310-01']
+const WSZYSTKIE_MODELE = 3
 
 /** Błąd odczytu materiałów chowa sekcję, ale nie wykłada karty drukarki */
 async function pobierz(): Promise<Material[]> {
@@ -28,7 +30,8 @@ function Kafelek({ p }: { p: Material }) {
       href={href}
       nazwa={p.name.replace(`Zebra ${p.pn} — `, '')}
       nazwaPelna={p.name}
-      etykieta={`${ETYKIETY[p.kind] || p.kind}${p.pn === '800300-360EM' ? ' · druk dwustronny' : ''}`}
+      // Zgodność w etykiecie, gdy materiał nie pasuje do całej serii ZC — inaczej taśmy 800300-250EM i 800350-250EM wyglądałyby tak samo
+      etykieta={`${ETYKIETY[p.kind] || p.kind}${p.pn.endsWith('-360EM') ? ' · druk dwustronny' : ''}${p.models.length < WSZYSTKIE_MODELE ? ` · ${p.models.join(', ')}` : ''}`}
       pn={p.pn}
       obraz={p.image}
       netto={p.price > 0 ? p.price : null}
@@ -47,7 +50,7 @@ const Siatka = ({ lista }: { lista: Material[] }) => (
 
 /** Materiały zgodne z modelem — na karcie produktu, w układzie sekcji akcesoriów drukarek etykiet */
 export default async function CardMaterials({ model }: { model: string }) {
-  const selectedModel = ['ZC100', 'ZC300'].includes(model.toUpperCase()) ? model.toUpperCase() : null
+  const selectedModel = ['ZC100', 'ZC300', 'ZC350'].includes(model.toUpperCase()) ? model.toUpperCase() : null
   const materials = (await pobierz()).filter(p => !selectedModel || p.models.includes(selectedModel))
   if (!materials.length) return null
   const rodzaje = RODZAJE.filter(kind => materials.some(p => p.kind === kind))
@@ -59,7 +62,8 @@ export default async function CardMaterials({ model }: { model: string }) {
     <p className="text-xs text-gray-500">Drukarka w standardowej konfiguracji nie zawiera taśmy ani kart.</p>
     {rodzaje.map((kind, i) => <div key={kind}>
       <h3 className={`text-sm font-semibold text-gray-900 ${i === 0 ? 'mt-4' : 'mt-6 border-t border-gray-100 pt-5'}`}>{kind}</h3>
-      <div className="mt-3"><Siatka lista={materials.filter(p => p.kind === kind)} /></div>
+      {/* Najpierw materiały dedykowane modelowi (np. taśmy 800350 na karcie ZC350), wspólne dla całej serii ZC na końcu */}
+      <div className="mt-3"><Siatka lista={materials.filter(p => p.kind === kind).sort((a, b) => Number(a.models.length === WSZYSTKIE_MODELE) - Number(b.models.length === WSZYSTKIE_MODELE))} /></div>
     </div>)}
   </section>
 }
@@ -74,8 +78,8 @@ export async function CardMaterialsSkrot() {
   const materials = NA_START.flatMap(pn => wszystkie.filter(p => p.pn === pn))
   if (!materials.length) return null
   return <section id="materialy" className="my-6 rounded-xl border border-gray-200 bg-white p-5 sm:p-6">
-    <h2 className="text-xl font-semibold text-gray-900">Taśmy i karty do ZC100 i ZC300</h2>
-    <p className="mt-2 max-w-3xl text-sm leading-relaxed text-gray-700">Drukarka w standardowej konfiguracji nie zawiera taśmy ani kart. Do pierwszego wydruku potrzebujesz kasety z taśmą, kart PVC i karty czyszczącej.</p>
+    <h2 className="text-xl font-semibold text-gray-900">Taśmy i karty do ZC100, ZC300 i ZC350</h2>
+    <p className="mt-2 max-w-3xl text-sm leading-relaxed text-gray-700">Drukarka w standardowej konfiguracji nie zawiera taśmy ani kart. Do pierwszego wydruku potrzebujesz kasety z taśmą, kart PVC i karty czyszczącej. ZC350 wymaga taśm serii 800350.</p>
     <div className="mt-4"><Siatka lista={materials} /></div>
     <div className="mt-5"><Link className="inline-flex min-h-[42px] items-center justify-center gap-1.5 rounded-lg bg-[#A8F000] px-5 text-sm font-semibold text-gray-900 transition hover:bg-[#96D800]" href={CARD_MATERIAL_PATH}>Wszystkie taśmy i karty<ArrowRight className="h-4 w-4" /></Link></div>
   </section>

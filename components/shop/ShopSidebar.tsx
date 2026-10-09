@@ -10,7 +10,7 @@ interface ShopSidebarProps {
   currentProductType?: string
   currentPrinterCategory?: string
   currentModel?: string
-  /** Drukarka wybrana na liście materiałów do drukarek kart (?model=ZC100 / ZC300) */
+  /** Drukarka wybrana na liście materiałów do drukarek kart (?model=ZC100 / ZC300 / ZC350) */
   currentCardModel?: string
   onClose?: () => void
 }
@@ -148,11 +148,11 @@ export default function ShopSidebar({
               </button>
             </div>
             {expandedProductTypes.includes('drukarka-kart') && <div className="ml-3 mt-1 space-y-1 border-l-2 border-gray-100 pl-3">
-              {['ZC100', 'ZC300'].map(model => <Link key={model} href={`/sklep/drukarki-kart-zebra/zebra-${model.toLowerCase()}`} onClick={handleLinkClick} className="block rounded-lg px-2 py-1.5 text-sm text-gray-600 hover:bg-gray-50 hover:text-blue-600">Zebra {model}</Link>)}
+              {['ZC100', 'ZC300', 'ZC350'].map(model => <Link key={model} href={`/sklep/drukarki-kart-zebra/zebra-${model.toLowerCase()}`} onClick={handleLinkClick} className="block rounded-lg px-2 py-1.5 text-sm text-gray-600 hover:bg-gray-50 hover:text-blue-600">Zebra {model}</Link>)}
               <Link href="/sklep/materialy-do-drukarek-kart" onClick={handleLinkClick} className={`block rounded-lg px-2 py-1.5 text-sm ${currentProductType === 'material_kart' ? 'font-medium text-blue-600' : 'text-gray-600 hover:bg-gray-50 hover:text-blue-600'}`}>Taśmy i karty PVC</Link>
               {/* Wybór drukarki dla materiałów — jak modele pod kategorią części */}
               <div className="ml-3 space-y-0.5 border-l-2 border-gray-100 pl-3">
-                {['ZC100', 'ZC300'].map(model => <Link key={model} href={`/sklep/materialy-do-drukarek-kart?model=${model}`} onClick={handleLinkClick} aria-current={currentCardModel === model ? 'page' : undefined} className={`block rounded px-2 py-1.5 text-xs ${currentCardModel === model ? 'bg-blue-600 text-white' : 'text-gray-500 hover:bg-gray-50 hover:text-blue-600 active:bg-gray-100'}`}>Do Zebra {model}</Link>)}
+                {['ZC100', 'ZC300', 'ZC350'].map(model => <Link key={model} href={`/sklep/materialy-do-drukarek-kart?model=${model}`} onClick={handleLinkClick} aria-current={currentCardModel === model ? 'page' : undefined} className={`block rounded px-2 py-1.5 text-xs ${currentCardModel === model ? 'bg-blue-600 text-white' : 'text-gray-500 hover:bg-gray-50 hover:text-blue-600 active:bg-gray-100'}`}>Do Zebra {model}</Link>)}
               </div>
             </div>}
           </div>

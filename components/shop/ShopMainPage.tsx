@@ -240,7 +240,7 @@ export default function ShopMainPage() {
               </button>
             </div>
             {expandedProductTypes.includes('drukarka-kart') && <div className="ml-3 mt-1 space-y-1 border-l-2 border-gray-100 pl-3">
-              {['ZC100', 'ZC300'].map(model => <Link key={model} href={`/sklep/drukarki-kart-zebra/zebra-${model.toLowerCase()}`} onClick={() => setShowMobileFilters(false)} className="block rounded-lg px-2 py-1.5 text-sm text-gray-600 hover:bg-gray-50 hover:text-blue-600">Zebra {model}</Link>)}
+              {['ZC100', 'ZC300', 'ZC350'].map(model => <Link key={model} href={`/sklep/drukarki-kart-zebra/zebra-${model.toLowerCase()}`} onClick={() => setShowMobileFilters(false)} className="block rounded-lg px-2 py-1.5 text-sm text-gray-600 hover:bg-gray-50 hover:text-blue-600">Zebra {model}</Link>)}
               <Link href="/sklep/materialy-do-drukarek-kart" onClick={() => setShowMobileFilters(false)} className="block rounded-lg px-2 py-1.5 text-sm text-gray-600 hover:bg-gray-50 hover:text-blue-600">Taśmy i karty PVC</Link>
             </div>}
           </div>

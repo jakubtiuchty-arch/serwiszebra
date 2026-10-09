@@ -75,9 +75,11 @@ export default function KafelekProduktu({ p }: { p: KafelekProduktuDane }) {
           </span>
         )}
 
-        <span className="mb-3 mt-3 flex items-end justify-between gap-2">
+        {/* flex-wrap + nowrap ceny: przy czterocyfrowej cenie i „wysyłka 2-3 dni" dostępność
+            schodzi pod cenę, zamiast łamać „zł" do nowej linii (ZC350) */}
+        <span className="mb-3 mt-3 flex flex-wrap items-end justify-between gap-x-2 gap-y-1">
           <span>
-            <span className="block text-lg font-bold leading-tight text-gray-900">
+            <span className="block whitespace-nowrap text-lg font-bold leading-tight text-gray-900">
               od {zl(p.netto)} zł
             </span>
             <span className="block text-xs text-gray-500">{zl(p.brutto)} zł brutto</span>

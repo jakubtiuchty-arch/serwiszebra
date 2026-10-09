@@ -14,6 +14,7 @@ export default function KafelekCzesci({
   href,
   nazwa,
   pn,
+  dopisek,
   obraz,
   alt,
   wyblakly = false,
@@ -25,6 +26,8 @@ export default function KafelekCzesci({
   nazwa: string
   /** Numer katalogowy pod nazwą — gdy nazwa go nie zawiera */
   pn?: string
+  /** Krótka linia pod PN, np. zgodność „Do ZC350" */
+  dopisek?: string
   obraz: string
   alt: string
   /** Zdjęcie zastępcze (brak własnego) — przygaszone */
@@ -56,7 +59,8 @@ export default function KafelekCzesci({
         <h3 className={`text-xs sm:text-sm font-semibold text-gray-900 group-hover:text-blue-600 line-clamp-2 leading-tight ${pn ? 'mb-1' : 'mb-2'}`}>
           {nazwa}
         </h3>
-        {pn && <p className="mb-2 font-mono text-[10px] sm:text-xs text-gray-500">{pn}</p>}
+        {pn && <p className={`${dopisek ? '' : 'mb-2 '}font-mono text-[10px] sm:text-xs text-gray-500`}>{pn}</p>}
+        {dopisek && <p className="mb-2 text-[10px] sm:text-xs text-gray-500">{dopisek}</p>}
 
         {/* Dostępność */}
         <div className="mb-2">

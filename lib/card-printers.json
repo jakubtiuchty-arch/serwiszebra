@@ -102,5 +102,57 @@
         }
       }
     ]
+  },
+  {
+    "model": "ZC350",
+    "slug": "zebra-zc350",
+    "name": "Drukarka kart Zebra ZC350",
+    "images": [
+      "/sklep_photo/urzadzenia/zc350_1.webp",
+      "/sklep_photo/urzadzenia/zc350_2.webp",
+      "/sklep_photo/urzadzenia/zc350_3.webp"
+    ],
+    "variants": [
+      {
+        "pn": "ZC35-000C000EM00",
+        "dpi": 300,
+        "label": "Jednostronny, USB, Ethernet, koder: brak",
+        "cechy": {
+          "Druk": "Jednostronny",
+          "Łączność": "USB, Ethernet",
+          "Koder": "Brak"
+        }
+      },
+      {
+        "pn": "ZC35-0M0C000EM00",
+        "dpi": 300,
+        "label": "Jednostronny, USB, Ethernet, koder: magnetyczny",
+        "cechy": {
+          "Druk": "Jednostronny",
+          "Łączność": "USB, Ethernet",
+          "Koder": "Magnetyczny"
+        }
+      },
+      {
+        "pn": "ZC36-000C000EM00",
+        "dpi": 300,
+        "label": "Dwustronny, USB, Ethernet, koder: brak",
+        "cechy": {
+          "Druk": "Dwustronny",
+          "Łączność": "USB, Ethernet",
+          "Koder": "Brak"
+        }
+      },
+      {
+        "pn": "ZC36-0M0C000EM00",
+        "dpi": 300,
+        "label": "Dwustronny, USB, Ethernet, koder: magnetyczny",
+        "cechy": {
+          "Druk": "Dwustronny",
+          "Łączność": "USB, Ethernet",
+          "Koder": "Magnetyczny"
+        }
+      }
+    ]
   }
 ]

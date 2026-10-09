@@ -44,6 +44,7 @@ const STRONY_STATYCZNE: Array<[string, string, Czestosc, number]> = [
   ['/sklep/drukarki-kart-zebra', '2026-10-08', 'weekly', 0.9],
   ['/sklep/drukarki-kart-zebra/zebra-zc100', '2026-10-08', 'weekly', 0.9],
   ['/sklep/drukarki-kart-zebra/zebra-zc300', '2026-10-08', 'weekly', 0.9],
+  ['/sklep/drukarki-kart-zebra/zebra-zc350', '2026-10-09', 'weekly', 0.9],
   ['/sklep/drukarki-etykiet', '2026-09-04', 'weekly', 0.9],
   ['/kontrakt-serwisowy', '2026-09-01', 'monthly', 0.8],
   ['/kontakt', '2026-08-30', 'monthly', 0.7],
