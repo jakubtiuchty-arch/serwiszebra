@@ -8,7 +8,7 @@ import { getPostBySlug } from '@/lib/blog'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import ShopSubheader from '@/components/shop/ShopSubheader'
-import CardMaterials from '@/components/shop/CardMaterials'
+import { CardMaterialsSkrot } from '@/components/shop/CardMaterials'
 import {cardPrinterProducts} from '@/lib/card-printer-shop'
 import {pobierzStany,stanDlaPN} from '@/lib/stock-server'
 const URL='https://www.serwis-zebry.pl/sklep/drukarki-kart-zebra'
@@ -64,7 +64,7 @@ export default async function CardCategory(){
  <p className="mt-2 text-sm leading-relaxed text-gray-700">ZC100 i ZC300 drukują bezpośrednio na powierzchni kart PVC oraz kompozytowych PVC. Obsługują grubość od 0,25 do 1,02 mm. Przy kartach z chipem lub paskiem sprawdź zgodność konkretnej karty i rozmieszczenie nadruku. Nie wybieraj materiału wyłącznie na podstawie grubości. Standardowe konfiguracje wymagają osobnego zakupu kasety z taśmą i kart. Do projektowania identyfikatorów potrzebujesz też oprogramowania.</p>
  </section>
  <section id="porownanie" className="my-6 rounded-xl border border-gray-200 bg-white p-5 sm:p-6"><h2 className="text-2xl font-semibold">Zebra ZC100 czy ZC300?</h2><div className="mt-5 overflow-x-auto"><table className="w-full text-left text-sm"><caption className="sr-only">Porównanie drukarek kart Zebra ZC100 i ZC300</caption><thead><tr className="bg-gray-100"><th className="p-3">Parametr</th><th className="p-3">ZC100</th><th className="p-3">ZC300</th></tr></thead><tbody>{[['Druk','Jednostronny','ZC31: jednostronny; ZC32: dwustronny'],['Kolor YMCKO, jedna strona','Do 150 kart/h','Do 200 kart/h'],['Kolor YMCKOK, obie strony','Brak','Do 140 kart/h'],['Rozdzielczość','300 dpi','300 dpi'],['Podajnik (karty 0,76 mm)','100 kart','100 kart'],['Łączność w tej ofercie','USB; Ethernet zależnie od PN','USB i Ethernet'],['Koder magnetyczny','Zależnie od PN','Zależnie od PN'],['Gwarancja producenta','3 lata na drukarkę i głowicę','3 lata na drukarkę i głowicę']].map(row=><tr key={row[0]} className="border-b border-gray-200"><th scope="row" className="p-3 font-medium">{row[0]}</th><td className="p-3">{row[1]}</td><td className="p-3">{row[2]}</td></tr>)}</tbody></table></div><p className="mt-3 text-sm text-gray-600">Prędkości dotyczą druku seryjnego przez USB. Wynik zależy od komputera i zadania. Gwarancja wymaga użytkowania oraz konserwacji zgodnie z instrukcją.</p></section>
- <CardMaterials model="ZC100 i ZC300"/>
+ <CardMaterialsSkrot/>
  <section className="my-6 rounded-xl border border-gray-200 bg-white p-5 sm:p-6">
  <h2 className="text-xl font-semibold text-gray-900">Zakup i obsługa drukarki kart</h2>
  <p className="mt-3 text-sm leading-relaxed text-gray-700">TAKMA dobiera konfiguracje i prowadzi serwis drukarek kart Zebra. Skorzystaj z instrukcji oraz filmów po polsku. Przed zakupem kodera ustalimy zgodność z Twoim systemem.</p>
