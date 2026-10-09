@@ -7,7 +7,6 @@ import { PORADNIKI_KART } from '@/lib/card-printer-content'
 import { getPostBySlug } from '@/lib/blog'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
-import ShopSubheader from '@/components/shop/ShopSubheader'
 import { CardMaterialsSkrot } from '@/components/shop/CardMaterials'
 import {cardPrinterProducts} from '@/lib/card-printer-shop'
 import {pobierzStany,stanDlaPN} from '@/lib/stock-server'
@@ -38,10 +37,12 @@ export default async function CardCategory(){
  const wersji=products.reduce((s,p)=>s+p.variants.length,0)
  const poradniki = PORADNIKI_KART.map(getPostBySlug).filter((p): p is NonNullable<typeof p> => !!p)
  const schema={'@context':'https://schema.org','@graph':[{'@type':'CollectionPage','@id':URL,name:'Drukarki kart Zebra',url:URL,mainEntity:{'@id':URL+'#lista'}},{'@type':'ItemList','@id':URL+'#lista',itemListElement:products.map((p,i)=>({'@type':'ListItem',position:i+1,name:p.name,url:URL+'/'+p.slug}))},{'@type':'BreadcrumbList',itemListElement:[{'@type':'ListItem',position:1,name:'Sklep',item:'https://www.serwis-zebry.pl/sklep'},{'@type':'ListItem',position:2,name:'Drukarki kart Zebra',item:URL}]}]}
- return <><Header currentPage="other"/><ShopSubheader breadcrumbs={[{label:'Sklep',href:'/sklep'},{label:'Drukarki kart Zebra',href:'/sklep/drukarki-kart-zebra'}]}/><script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(schema)}}/><main id="main-content" className="min-h-screen bg-gray-50"><div className="mx-auto max-w-6xl px-4 py-6"><div className="flex flex-col gap-6 lg:flex-row"><div className="hidden lg:block lg:w-64 lg:shrink-0"><ShopSidebar currentProductType="drukarka-kart"/></div><div className="min-w-0 flex-1">
- <h1 className="text-3xl font-semibold text-gray-900 sm:text-4xl">Drukarki kart Zebra</h1><p className="mt-4 max-w-3xl text-lg text-gray-700">Drukarki kart Zebra służą do tworzenia identyfikatorów, przepustek i kart członkowskich. Porównaj ZC100 oraz ZC300. Wybierz liczbę drukowanych stron, łączność i koder.</p>
- <details className="mt-5 rounded-xl border border-gray-200 bg-white lg:hidden"><summary className="cursor-pointer px-4 py-3 text-sm font-semibold text-gray-900">Kategorie sklepu</summary><div className="border-t border-gray-100 p-3"><ShopSidebar currentProductType="drukarka-kart"/></div></details>
- <p className="mb-4 mt-6 text-xs text-gray-500">{wersji} {odmianaWersji(wersji)} w {products.length} {products.length===1?'modelu':'modelach'}</p>
+ return <><Header currentPage="other"/><script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(schema)}}/><main id="main-content" className="min-h-screen bg-gray-50">
+ {/* Ciemne hero z limonkową linią — ten sam wzorzec co materiały do drukarek kart i klasy drukarek etykiet */}
+ <section className="bg-gradient-to-br from-gray-800 via-gray-900 to-gray-900 text-white"><div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-12"><nav aria-label="Okruszki" className="mb-4 text-xs text-gray-400"><Link href="/sklep" className="hover:text-white">Sklep</Link><span className="mx-1.5">/</span><span className="text-gray-300">Drukarki kart</span></nav><h1 className="text-2xl font-bold sm:text-3xl">Drukarki kart Zebra</h1><p className="mt-3 text-base leading-relaxed text-gray-300">Drukarki kart Zebra służą do tworzenia identyfikatorów, przepustek i kart członkowskich. Porównaj ZC100 oraz ZC300. Wybierz liczbę drukowanych stron, łączność i koder.</p></div><div className="h-1 bg-[#A8F000]"/></section>
+ <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6"><div className="flex flex-col gap-6 lg:flex-row lg:items-start"><div className="hidden lg:block lg:w-64 lg:shrink-0"><ShopSidebar currentProductType="drukarka-kart"/></div><div className="min-w-0 flex-1">
+ <details className="mb-5 rounded-xl border border-gray-200 bg-white lg:hidden"><summary className="cursor-pointer px-4 py-3 text-sm font-semibold text-gray-900">Kategorie sklepu</summary><div className="border-t border-gray-100 p-3"><ShopSidebar currentProductType="drukarka-kart"/></div></details>
+ <p className="mb-4 text-xs text-gray-500">{wersji} {odmianaWersji(wersji)} w {products.length} {products.length===1?'modelu':'modelach'}</p>
  {/* Ta sama siatka co na stronach klas drukarek etykiet — dwa modele zajmują dwie z trzech kolumn, więc kafelki mają tę samą wielkość */}
  <section id="modele" aria-label="Modele drukarek kart" className="mb-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">{products.map((p,i)=>{
  const offers=p.variants.map(v=>stanDlaPN(stock,v.pn)).filter((st): st is NonNullable<typeof st> => !!st && st.netto>0)
