@@ -372,29 +372,20 @@ export default function DeviceVariantsTable({
   }
 
   return (
+    /* Bez nagłówka i opisu nad tabelą — kolumny mówią same za siebie,
+       a nazwa sekcji zostaje dla czytników ekranu */
     <section
       id="warianty"
+      aria-label="Numery katalogowe"
       className="mb-4 scroll-mt-24 overflow-hidden rounded-xl border border-gray-200 bg-white sm:mb-6"
     >
-      <div className="p-4 pb-3 sm:p-6">
-        <h2 className="text-sm font-semibold text-gray-900 sm:text-base">
-          Wybierz numer katalogowy
-        </h2>
-        {onWybierz && (
-          <p className="mt-1 text-sm text-gray-600">
-            Kliknij wersję, żeby zobaczyć jej cenę i termin na górze strony. Wersje bez
-            stanu magazynowego sprowadzamy na zamówienie — zostaw adres, a napiszemy,
-            gdy wrócą.
-          </p>
-        )}
-      </div>
 
       <p aria-live="polite" className="sr-only">
         {dodane ? `Dodano ${dodane} do koszyka` : ''}
       </p>
 
       {/* MOBILE — karta na wariant, wszystko widoczne bez przewijania w bok */}
-      <ul className="list-none space-y-3 px-4 pb-4 sm:hidden">
+      <ul className="list-none space-y-3 p-4 sm:hidden">
         {doPokazania.map((v) => {
           const s = stany[v.pn]
           const wyrozniony = v.pn === wybranyPn
@@ -491,7 +482,7 @@ export default function DeviceVariantsTable({
               najszerszej kolumnie i między Łącznością a ceną rośnie pusty pas,
               a Dostępność klei się do ceny */}
           <thead>
-            <tr className="border-y border-gray-200 bg-gray-100">
+            <tr className="border-b border-gray-200 bg-gray-100">
               <th
                 scope="col"
                 style={{ width: szer('pn') }}
