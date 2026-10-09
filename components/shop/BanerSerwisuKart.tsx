@@ -8,9 +8,9 @@ const LIME = '#A8F000'
 const STATUS_KART = 'Printer Repair Specialist – Card Printer'
 
 const PUNKTY = [
-  '3 lata gwarancji producenta na drukarkę i głowicę',
-  'Naprawy gwarancyjne w naszym serwisie, bez wysyłki do producenta',
-  'Naprawy pogwarancyjne i konserwacja na oryginalnych częściach Zebry',
+  '3 lata gwarancji na drukarkę i głowicę',
+  'Naprawy gwarancyjne u nas',
+  'Serwis pogwarancyjny i części Zebry',
 ]
 
 /**
@@ -22,7 +22,7 @@ export default function BanerSerwisuKart({ model }: { model?: string | null }) {
   return (
     <section
       aria-labelledby="serwis-kart-tytul"
-      className="relative mb-4 overflow-hidden rounded-xl bg-gray-950 p-5 shadow-sm sm:mb-6 sm:p-6"
+      className="relative mb-4 overflow-hidden rounded-xl bg-gray-950 p-4 shadow-sm sm:mb-6 sm:px-5"
     >
       <div
         aria-hidden
@@ -30,30 +30,31 @@ export default function BanerSerwisuKart({ model }: { model?: string | null }) {
         style={{ background: LIME }}
       />
 
-      <div className="relative md:flex md:items-center md:gap-8">
+      <div className="relative md:flex md:items-center md:gap-6">
         <div className="md:flex-1">
           <span
-            className="inline-flex items-center rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide text-gray-950"
+            className="inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-gray-950"
             style={{ background: LIME }}
           >
             Autoryzowany serwis Zebra
           </span>
 
-          <h2 id="serwis-kart-tytul" className="mt-3 text-lg font-bold leading-snug text-white sm:text-xl">
+          <h2 id="serwis-kart-tytul" className="mt-2 text-base font-bold leading-snug text-white">
             Kupujesz u autoryzowanego serwisu drukarek kart Zebra
           </h2>
 
-          <p className="mt-2 text-sm leading-relaxed text-white/70">
-            TAKMA ma status Zebra {STATUS_KART}. Naprawy gwarancyjne i pogwarancyjne
-            {model ? ` Zebra ${model}` : ' drukarek kart Zebra'} wykonujemy we własnym serwisie.
+          <p className="mt-1 text-xs leading-relaxed text-white/70 sm:text-sm">
+            {/* Status Zebry pokazuje plakietka obok — tu tylko to, co z niego wynika dla klienta */}
+            Naprawy gwarancyjne i pogwarancyjne{model ? ` Zebra ${model}` : ' drukarek kart Zebra'} wykonujemy we własnym serwisie.
           </p>
 
-          <ul className="mt-4 space-y-2">
+          {/* Punkty w jednym rzędzie na szerszym ekranie — baner ma być wąskim paskiem, nie sekcją */}
+          <ul className="mt-3 flex flex-col gap-1.5 sm:flex-row sm:flex-wrap sm:gap-x-5">
             {PUNKTY.map((p) => (
-              <li key={p} className="flex gap-2.5 text-sm leading-snug text-white/90">
+              <li key={p} className="flex items-center gap-2 text-xs leading-snug text-white/90">
                 <span
                   aria-hidden
-                  className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full text-gray-950"
+                  className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full text-gray-950"
                   style={{ background: LIME }}
                 >
                   <Check className="h-3 w-3" strokeWidth={3} />
@@ -64,23 +65,24 @@ export default function BanerSerwisuKart({ model }: { model?: string | null }) {
           </ul>
         </div>
 
-        <div className="mt-5 md:mt-0 md:w-64 md:shrink-0">
-          <div className="rounded-lg bg-white p-3">
+        <div className="mt-4 flex flex-col items-center md:mt-0 md:w-48 md:shrink-0">
+          <div className="w-full max-w-[220px] rounded-lg bg-white p-2.5">
             <Image
               src="/zebra-repair-specialist-card-printer.png"
               alt={`Zebra Premier Solution Partner – ${STATUS_KART}`}
               width={1891}
               height={540}
-              sizes="(max-width: 768px) 90vw, 256px"
+              sizes="220px"
               className="h-auto w-full"
             />
           </div>
+          {/* Link wyśrodkowany pod plakietką */}
           <Link
             href="/serwis-drukarek-kart-zebra"
-            className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-white/90 transition hover:text-white"
+            className="mt-2 inline-flex items-center gap-1.5 text-xs font-semibold text-white/90 transition hover:text-white"
           >
             <span className="underline decoration-white/30 underline-offset-4">Serwis drukarek kart</span>
-            <ArrowRight className="h-4 w-4" />
+            <ArrowRight className="h-3.5 w-3.5" />
           </Link>
         </div>
       </div>
