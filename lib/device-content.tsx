@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react'
 import Link from 'next/link'
 import type { BlogPost } from './blog'
+import type { TrescZestawu } from '@/components/shop/BanerZestawuStartowego'
 
 /**
  * Treść kart urządzeń — wszystko, co na karcie jest PISANE per model:
@@ -62,6 +63,12 @@ export interface TrescKarty {
    * `dodano` = publikacja na YouTube.
    */
   filmy?: NonNullable<BlogPost['video']>[]
+  /**
+   * Baner zestawu startowego pod tabelą wersji — tylko modele, które Zebra sprzedaje też
+   * w zestawie z taśmą, kartami i programem (QuikCard: ZC100, ZC300). Zawartość pudełka
+   * wyłącznie według Zebry; ceny i różnicę wobec samej drukarki baner liczy na żywo.
+   */
+  zestawStartowy?: TrescZestawu
 }
 
 /** „Tryb chroniony (Protected Mode) i EU RED w drukarkach Zebra: hasło i konfiguracja" (7.10.2026). Dotyczy drukarek

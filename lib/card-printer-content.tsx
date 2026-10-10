@@ -22,7 +22,9 @@ export const TRESC_KART: Record<string, TrescKarty> = {}
 
 /**
  * ZC100: tylko druk jednostronny, diody zamiast wyświetlacza, z koderów tylko pasek magnetyczny.
- * Dane według karty specyfikacji Zebra ZC100 (SS-ZC100, 12/2022).
+ * Dane według karty specyfikacji Zebra ZC100 (SS-ZC100, 12/2022). Zestaw startowy według opisu PN
+ * w Zebra Solutions Pathway i fact sheetu QuikCard (FS-QCZC100ZC300, 01/2023), sprawdzone 10.10.2026:
+ * numeru taśmy w zestawie ani koloru kart Zebra nie podaje, więc treść ich nie wymienia.
  */
 TRESC_KART['zebra-zc100'] = {
   rekomendowanyPn: '',
@@ -42,7 +44,7 @@ TRESC_KART['zebra-zc100'] = {
   opis: [
     <>Zebra ZC100 to podstawowy model serii ZC, przeznaczony do jednostronnych identyfikatorów pracowniczych, kart gościa, kart członkowskich i karnetów. Drukarka nanosi kolor metodą termosublimacji, a czarny lub jednokolorowy nadruk — metodą termotransferu. Obraz pokrywa całą powierzchnię karty, bez białego marginesu przy krawędziach.</>,
     <>Obudowa ma 157 mm szerokości, więc drukarka mieści się pod ladą recepcji albo na półce. Podajnik sam dopasowuje się do grubości kart i nie wymaga regulacji przy zmianie partii. Stan drukarki pokazują trzy wielokolorowe diody, a przy ręcznym podawaniu pojedynczej karty podświetlona prowadnica wskazuje, gdzie ją włożyć. Chip w kasecie przekazuje drukarce rodzaj taśmy i informuje o konieczności jej wymiany.</>,
-    <>W standardzie ZC100 łączy się z komputerem przez USB 2.0. Wersje ZC11-000C i ZC11-0M0C mają też Ethernet 10/100 i przyjmują zadania z kilku stanowisk w sieci, a wersje ZC11-0M zapisują pasek magnetyczny. Sterowniki są dostępne dla systemów Windows, Linux i macOS. Ten model nie drukuje automatycznie obu stron karty i nie koduje kart chipowych — do takich zadań wybierz <Link href="/sklep/drukarki-kart-zebra/zebra-zc300">Zebra ZC300</Link>, która ma też kolorowy wyświetlacz z komunikatami po polsku.</>,
+    <>W standardzie ZC100 łączy się z komputerem przez USB 2.0. Wersje ZC11-000C i ZC11-0M0C mają też Ethernet 10/100 i przyjmują zadania z kilku stanowisk w sieci, a wersje ZC11-0M zapisują pasek magnetyczny. Sterowniki są dostępne dla systemów Windows, Linux i macOS. Zestaw startowy ZC11-0000Q00EM00 to wersja z USB, w której pudełku są też taśma YMCKO na 200 wydruków, 200 kart PVC i licencja programu Zebra CardStudio 2.0 Standard. Ten model nie drukuje automatycznie obu stron karty i nie koduje kart chipowych — do takich zadań wybierz <Link href="/sklep/drukarki-kart-zebra/zebra-zc300">Zebra ZC300</Link>, która ma też kolorowy wyświetlacz z komunikatami po polsku.</>,
   ],
   osie: [
     {tytul: 'Łączność', pozycje: [
@@ -53,7 +55,20 @@ TRESC_KART['zebra-zc100'] = {
       {termin: 'Bez kodera', opis: 'Tylko nadruk, bez zapisu danych na pasku magnetycznym.'},
       {termin: 'Z koderem', opis: 'Koder zapisuje pasek magnetyczny ISO 7811: ścieżki 1–3, o wysokiej i niskiej koercji. Pasek musi być na tylnej stronie karty o grubości 0,76 mm.'},
     ]},
+    {tytul: 'Zestaw', pozycje: [
+      {termin: 'Sama drukarka', opis: 'Taśmę, karty i program do projektowania kart dobiera się osobno.'},
+      {termin: 'Zestaw startowy', opis: 'ZC11-0000Q00EM00: wersja z USB i bez kodera, z taśmą YMCKO na 200 wydruków, 200 kartami PVC 0,76 mm i licencją CardStudio 2.0 Standard.'},
+    ]},
   ],
+  zestawStartowy: {
+    wstep: 'Zebra sprzedaje ZC100 także w zestawie z materiałami i programem do projektowania kart. Pierwsze identyfikatory wydrukujesz bez dokupowania taśmy i kart.',
+    wPudelku: [
+      'Drukarka Zebra ZC100 z USB, bez kodera',
+      'Kolorowa taśma YMCKO na 200 wydruków',
+      '200 kart PVC o grubości 0,76 mm',
+      'Licencja Zebra CardStudio 2.0 Standard: wbudowana baza danych, przykładowe projekty kart, import danych z Excela. Program pobiera się i aktywuje przez internet',
+    ],
+  },
   faqNaglowek: 'Pytania o Zebra ZC100',
   faq: [
     {q: 'Czy Zebra ZC100 drukuje karty dwustronnie?', a: 'Nie. ZC100 nie ma mechanizmu odwracania kart i zadrukowuje jedną stronę. Do automatycznego druku obu stron wybierz Zebra ZC300 w wersji ZC32 — z taśmą YMCKOK drukuje do 140 kart dwustronnych na godzinę.', href: '/sklep/drukarki-kart-zebra/zebra-zc300', link: 'Zebra ZC300'},
@@ -61,6 +76,7 @@ TRESC_KART['zebra-zc100'] = {
     {q: 'Jakie karty zakoduje Zebra ZC100?', a: 'Tylko karty z paskiem magnetycznym, w wersji z koderem ZC11-0M. Koder zapisuje ścieżki 1–3 w standardzie ISO 7811 na kartach 0,76 mm z paskiem na tylnej stronie. Kart zbliżeniowych MIFARE i kart stykowych ZC100 nie koduje.', href: '/blog/bledy-kodowania-paska-magnetycznego-zebra', link: 'Kodowanie paska magnetycznego'},
     {q: 'Jak sprawdzić błąd w Zebra ZC100 bez wyświetlacza?', a: 'Po kolorach i miganiu trzech diod na panelu drukarki. Stan drukarki i treść błędu pokazuje też sterownik na komputerze. Znaczenie diod i sposób usunięcia najczęstszych błędów opisaliśmy w poradniku.', href: '/blog/serwis-drukarki-kart-zebra-zc100-zc300-diagnostyka-naprawa', link: 'Diody i błędy ZC100'},
     {q: 'Czy Zebra ZC100 zastępuje ZXP Series 1?', a: 'Tak. ZC100 jest następczynią ZXP Series 1 i według producenta drukuje do 30% szybciej jednym kolorem i do 15% szybciej w kolorze. Taśmy od ZXP Series 1 do niej nie pasują — ZC100 przyjmuje kasety serii 800300.', href: '/blog/porownanie-drukarek-kart-zebra-zc100-zc300-zxp', link: 'Porównanie ZC100, ZC300 i ZXP'},
+    {q: 'Co jest w zestawie startowym Zebra ZC100?', a: 'Drukarka ZC100 z USB, kolorowa taśma YMCKO na 200 wydruków, 200 kart PVC o grubości 0,76 mm i licencja programu Zebra CardStudio 2.0 Standard — wszystko pod jednym numerem ZC11-0000Q00EM00. Program pobiera się i aktywuje przez internet. Zestaw nie ma Ethernetu ani kodera paska magnetycznego.', href: '/blog/zebra-cardstudio-projektowanie-kart-poradnik', link: 'Poradnik CardStudio 2.0'},
   ],
   spec: [
     ['Technologia', 'Termosublimacja (kolor) i termotransfer (jeden kolor) bezpośrednio na karcie'], ['Rozdzielczość', '300 dpi (11,8 pkt/mm)'],
@@ -73,13 +89,15 @@ TRESC_KART['zebra-zc100'] = {
     ['Kodowanie', 'Koder paska magnetycznego ISO 7811 w wersjach ZC11-0M; pasek na tylnej stronie karty 0,76 mm'],
     ['Zabezpieczenia', 'Uwierzytelnianie hosta, szyfrowanie danych AES, gniazdo Kensington; obudowa zamykana na klucz jako opcja'],
     ['Wymiary (wys. × szer. × gł.)', '258 × 157 × 383 mm'], ['Waga', '3,9 kg'], ['Sterowniki', 'Windows, Linux (Ubuntu), macOS'],
-    ['Taśma', 'Oryginalna kaseta Zebra serii 800300 z wałkiem czyszczącym'], ['Gwarancja producenta', '3 lata na drukarkę i głowicę; zgodnie z warunkami gwarancji'],
+    ['Taśma', 'Oryginalna kaseta Zebra serii 800300 z wałkiem czyszczącym'],
+    ['Zestaw startowy', 'ZC11-0000Q00EM00: drukarka z USB, taśma YMCKO na 200 wydruków, 200 kart PVC 0,76 mm, licencja CardStudio 2.0 Standard'],
+    ['Gwarancja producenta', '3 lata na drukarkę i głowicę; zgodnie z warunkami gwarancji'],
   ],
 }
 
 /**
  * ZC300: kolorowy wyświetlacz, wersja dwustronna ZC32, kodery MIFARE, stykowy i UHF jako opcje.
- * Dane według karty specyfikacji Zebra ZC300 (SS-ZC300, 11/2025).
+ * Dane według karty specyfikacji Zebra ZC300 (SS-ZC300, 11/2025); zestawy startowe jak przy ZC100.
  */
 TRESC_KART['zebra-zc300'] = {
   rekomendowanyPn: '',
@@ -98,7 +116,7 @@ TRESC_KART['zebra-zc300'] = {
   opis: [
     <>Zebra ZC300 to środkowy model serii ZC. Drukuje identyfikatory pracownicze, karty dostępu do budynków, karty członkowskie i lojalnościowe, a w wersji ZC32 także karty z nadrukiem po obu stronach — np. ze zdjęciem z przodu i regulaminem lub kodem kreskowym z tyłu. Druk kolorowy wykorzystuje termosublimację barwników, a druk czarny i jednokolorowy — termotransfer z taśmy. Nadruk sięga krawędzi karty CR-80.</>,
     <>Kolorowy wyświetlacz pokazuje ikony, animacje i komunikaty po polsku. Prowadzi operatora przy zakładaniu taśmy, uzupełnianiu kart i usuwaniu zaciętej karty, co ułatwia pracę osobom drukującym karty okazjonalnie. Wersja ZC32 odwraca kartę wewnątrz drukarki i zadrukowuje drugą stronę w tym samym zadaniu, a karty odrzucone, np. po błędzie kodowania, odkłada do osobnego odbiornika na 10 kart. Taśma KdO drukuje zdjęcie w odcieniach szarości, a KrO — ostry czarny tekst i kody kreskowe; obie nakładają warstwę ochronną.</>,
-    <>Wszystkie wersje ZC300 w tej ofercie mają USB 2.0 i Ethernet 10/100, więc drukarka może pracować w sieci i przyjmować zadania z kilku stanowisk. Koder magnetyczny zależy od numeru PN, a koder MIFARE z gniazdem SAM, koder stykowy z certyfikatem EMV poziomu 1 i koder RFID UHF montuje się jako opcje. Do identyfikatorów jednostronnych bez kodowania wystarczy <Link href="/sklep/drukarki-kart-zebra/zebra-zc100">Zebra ZC100</Link>. Taśmy specjalne — perłową, metaliczną i YMCKLL — oferujemy w serii 800350 do <Link href="/sklep/drukarki-kart-zebra/zebra-zc350">Zebra ZC350</Link>.</>,
+    <>Wszystkie wersje ZC300 w tej ofercie mają USB 2.0 i Ethernet 10/100, więc drukarka może pracować w sieci i przyjmować zadania z kilku stanowisk. Koder magnetyczny zależy od numeru PN, a koder MIFARE z gniazdem SAM, koder stykowy z certyfikatem EMV poziomu 1 i koder RFID UHF montuje się jako opcje. Zestawy startowe ZC31-000CQ00EM00 i ZC32-000CQ00EM00 to wersje bez kodera, w których pudełku są też taśma na 200 wydruków, 200 kart PVC i licencja programu Zebra CardStudio 2.0 Standard. Do identyfikatorów jednostronnych bez kodowania wystarczy <Link href="/sklep/drukarki-kart-zebra/zebra-zc100">Zebra ZC100</Link>. Taśmy specjalne — perłową, metaliczną i YMCKLL — oferujemy w serii 800350 do <Link href="/sklep/drukarki-kart-zebra/zebra-zc350">Zebra ZC350</Link>.</>,
   ],
   osie: [
     {tytul: 'Druk karty', pozycje: [
@@ -109,7 +127,20 @@ TRESC_KART['zebra-zc300'] = {
       {termin: 'Bez kodera', opis: 'Drukarka nanosi sam obraz i nie zapisuje danych w karcie. Koder MIFARE, stykowy lub UHF można zamontować później.'},
       {termin: 'Z koderem', opis: 'Koder magnetyczny zapisuje pasek ISO 7811: ścieżki 1–3, o wysokiej i niskiej koercji. W ZC32 pasek może być z przodu lub z tyłu karty.'},
     ]},
+    {tytul: 'Zestaw', pozycje: [
+      {termin: 'Sama drukarka', opis: 'Taśmę, karty i program do projektowania kart dobiera się osobno.'},
+      {termin: 'Zestaw startowy', opis: 'Jednostronna ZC31-000CQ00EM00 z taśmą YMCKO albo dwustronna ZC32-000CQ00EM00 z taśmą YMCKOK, obie bez kodera. W pudełku taśma na 200 wydruków, 200 kart PVC 0,76 mm i licencja CardStudio 2.0 Standard.'},
+    ]},
   ],
+  zestawStartowy: {
+    wstep: 'Zebra sprzedaje ZC300 także w zestawie z materiałami i programem do projektowania kart, w wersji jednostronnej i dwustronnej. Pierwsze karty wydrukujesz bez dokupowania taśmy i kart.',
+    wPudelku: [
+      'Drukarka Zebra ZC300 z USB i Ethernetem, bez kodera: jednostronna ZC31 albo dwustronna ZC32',
+      'Kolorowa taśma na 200 wydruków: YMCKO w zestawie jednostronnym, YMCKOK w dwustronnym (kolor z przodu, czerń z tyłu)',
+      '200 kart PVC o grubości 0,76 mm',
+      'Licencja Zebra CardStudio 2.0 Standard: wbudowana baza danych, przykładowe projekty kart, import danych z Excela. Program pobiera się i aktywuje przez internet',
+    ],
+  },
   faqNaglowek: 'Pytania o Zebra ZC300',
   faq: [
     {q: 'Czym różni się Zebra ZC31 od ZC32?', a: 'ZC31 drukuje jedną stronę karty, a ZC32 obie, bez ręcznego odwracania. ZC32 drukuje do 140 kart dwustronnych na godzinę z taśmą YMCKOK, ma odbiornik odrzutów na 10 kart i waży 4,4 kg zamiast 4,0 kg.', href: '/sklep/drukarki-kart-zebra', link: 'Porównaj drukarki kart'},
@@ -117,6 +148,7 @@ TRESC_KART['zebra-zc300'] = {
     {q: 'Czy Zebra ZC300 koduje karty zbliżeniowe MIFARE?', a: 'Tak, z koderem MIFARE montowanym u klienta. Koder obsługuje karty ISO 14443 A i B o częstotliwości 13,56 MHz, ma 1 gniazdo SAM i koduje też karty stykowe ISO 7816. Wersje w tabeli mają koder magnetyczny albo są bez kodera, a koder kart zbliżeniowych trzeba dobrać do systemu kontroli dostępu.', href: service, link: 'Pomoc w doborze kodera'},
     {q: 'Co oznacza komunikat na wyświetlaczu Zebra ZC300?', a: 'Komunikat nazywa problem — np. brak kart, koniec taśmy albo zaciętą kartę — a animacja pokazuje, jak go usunąć. Kody błędów drukarek kart Zebra wraz z rozwiązaniami zebraliśmy w poradniku.', href: '/blog/kody-bledow-drukarki-kart-zebra-zc300-zxp', link: 'Kody błędów ZC300'},
     {q: 'Ile kart wydrukuje Zebra ZC300 z jednej taśmy?', a: 'Od 200 do 2000 kart, zależnie od taśmy: YMCKO na 200 lub 300 kart, ½ YMCKO na 400, KdO i KrO na 700, czarna na 2000. Przy czarnym nadruku na obu stronach w ZC32 jedna karta zużywa 2 wydruki.', href: '/sklep/materialy-do-drukarek-kart?model=ZC300', link: 'Taśmy do ZC300'},
+    {q: 'Co jest w zestawie startowym Zebra ZC300?', a: 'Drukarka ZC300 z USB i Ethernetem, kolorowa taśma na 200 wydruków, 200 kart PVC o grubości 0,76 mm i licencja programu Zebra CardStudio 2.0 Standard. Zestaw jednostronny ZC31-000CQ00EM00 ma taśmę YMCKO, a dwustronny ZC32-000CQ00EM00 taśmę YMCKOK: kolor z przodu, czerń z tyłu. Oba są bez kodera, a program pobiera się i aktywuje przez internet.', href: '/blog/zebra-cardstudio-projektowanie-kart-poradnik', link: 'Poradnik CardStudio 2.0'},
   ],
   spec: [
     ['Technologia', 'Termosublimacja (kolor) i termotransfer (jeden kolor) bezpośrednio na karcie'], ['Rozdzielczość', '300 dpi (11,8 pkt/mm)'],
@@ -130,7 +162,9 @@ TRESC_KART['zebra-zc300'] = {
     ['Kodowanie', 'Koder magnetyczny ISO 7811 zależnie od PN; MIFARE ISO 14443 z koderem stykowym ISO 7816 i RFID UHF jako opcje'],
     ['Zabezpieczenia', 'Uwierzytelnianie hosta, szyfrowanie danych AES, gniazdo Kensington; obudowa zamykana na klucz jako opcja'],
     ['Wymiary (wys. × szer. × gł.)', '258 × 157 × 383 mm (ZC31); 258 × 157 × 468 mm (ZC32)'], ['Waga', '4,0 kg (ZC31); 4,4 kg (ZC32)'],
-    ['Taśma', 'Oryginalna kaseta Zebra serii 800300 z wałkiem czyszczącym'], ['Gwarancja producenta', '3 lata na drukarkę i głowicę; zgodnie z warunkami gwarancji'],
+    ['Taśma', 'Oryginalna kaseta Zebra serii 800300 z wałkiem czyszczącym'],
+    ['Zestaw startowy', 'ZC31-000CQ00EM00 z taśmą YMCKO lub ZC32-000CQ00EM00 z taśmą YMCKOK, po 200 wydruków; 200 kart PVC 0,76 mm, licencja CardStudio 2.0 Standard'],
+    ['Gwarancja producenta', '3 lata na drukarkę i głowicę; zgodnie z warunkami gwarancji'],
   ],
 }
 

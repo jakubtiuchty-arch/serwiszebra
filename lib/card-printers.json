@@ -6,7 +6,8 @@
     "images": [
       "/sklep_photo/urzadzenia/zc100_1.webp",
       "/sklep_photo/urzadzenia/zc100_2.webp",
-      "/sklep_photo/urzadzenia/zc100_3.webp"
+      "/sklep_photo/urzadzenia/zc100_3.webp",
+      "/sklep_photo/urzadzenia/zc100_zestaw.webp"
     ],
     "variants": [
       {
@@ -16,7 +17,20 @@
         "cechy": {
           "Druk": "Jednostronny",
           "Łączność": "USB",
-          "Koder": "Brak"
+          "Koder": "Brak",
+          "Zestaw": "Sama drukarka"
+        }
+      },
+      {
+        "pn": "ZC11-0000Q00EM00",
+        "dpi": 300,
+        "label": "Zestaw startowy QuikCard: jednostronny, USB, taśma YMCKO, 200 kart, CardStudio 2.0",
+        "zdjecie": "/sklep_photo/urzadzenia/zc100_zestaw.webp",
+        "cechy": {
+          "Druk": "Jednostronny",
+          "Łączność": "USB",
+          "Koder": "Brak",
+          "Zestaw": "Zestaw startowy"
         }
       },
       {
@@ -26,7 +40,8 @@
         "cechy": {
           "Druk": "Jednostronny",
           "Łączność": "USB, Ethernet",
-          "Koder": "Brak"
+          "Koder": "Brak",
+          "Zestaw": "Sama drukarka"
         }
       },
       {
@@ -36,7 +51,8 @@
         "cechy": {
           "Druk": "Jednostronny",
           "Łączność": "USB",
-          "Koder": "Magnetyczny"
+          "Koder": "Magnetyczny",
+          "Zestaw": "Sama drukarka"
         }
       },
       {
@@ -46,7 +62,8 @@
         "cechy": {
           "Druk": "Jednostronny",
           "Łączność": "USB, Ethernet",
-          "Koder": "Magnetyczny"
+          "Koder": "Magnetyczny",
+          "Zestaw": "Sama drukarka"
         }
       }
     ]
@@ -58,7 +75,8 @@
     "images": [
       "/sklep_photo/urzadzenia/zc300_1.webp",
       "/sklep_photo/urzadzenia/zc300_2.webp",
-      "/sklep_photo/urzadzenia/zc300_3.webp"
+      "/sklep_photo/urzadzenia/zc300_3.webp",
+      "/sklep_photo/urzadzenia/zc300_zestaw.webp"
     ],
     "variants": [
       {
@@ -68,7 +86,20 @@
         "cechy": {
           "Druk": "Jednostronny",
           "Łączność": "USB, Ethernet",
-          "Koder": "Brak"
+          "Koder": "Brak",
+          "Zestaw": "Sama drukarka"
+        }
+      },
+      {
+        "pn": "ZC31-000CQ00EM00",
+        "dpi": 300,
+        "label": "Zestaw startowy QuikCard: jednostronny, USB, Ethernet, taśma YMCKO, 200 kart, CardStudio 2.0",
+        "zdjecie": "/sklep_photo/urzadzenia/zc300_zestaw.webp",
+        "cechy": {
+          "Druk": "Jednostronny",
+          "Łączność": "USB, Ethernet",
+          "Koder": "Brak",
+          "Zestaw": "Zestaw startowy"
         }
       },
       {
@@ -78,7 +109,8 @@
         "cechy": {
           "Druk": "Jednostronny",
           "Łączność": "USB, Ethernet",
-          "Koder": "Magnetyczny"
+          "Koder": "Magnetyczny",
+          "Zestaw": "Sama drukarka"
         }
       },
       {
@@ -88,7 +120,20 @@
         "cechy": {
           "Druk": "Dwustronny",
           "Łączność": "USB, Ethernet",
-          "Koder": "Brak"
+          "Koder": "Brak",
+          "Zestaw": "Sama drukarka"
+        }
+      },
+      {
+        "pn": "ZC32-000CQ00EM00",
+        "dpi": 300,
+        "label": "Zestaw startowy QuikCard: dwustronny, USB, Ethernet, taśma YMCKOK, 200 kart, CardStudio 2.0",
+        "zdjecie": "/sklep_photo/urzadzenia/zc300_zestaw.webp",
+        "cechy": {
+          "Druk": "Dwustronny",
+          "Łączność": "USB, Ethernet",
+          "Koder": "Brak",
+          "Zestaw": "Zestaw startowy"
         }
       },
       {
@@ -98,7 +143,8 @@
         "cechy": {
           "Druk": "Dwustronny",
           "Łączność": "USB, Ethernet",
-          "Koder": "Magnetyczny"
+          "Koder": "Magnetyczny",
+          "Zestaw": "Sama drukarka"
         }
       }
     ]
@@ -120,7 +166,8 @@
         "cechy": {
           "Druk": "Jednostronny",
           "Łączność": "USB, Ethernet",
-          "Koder": "Brak"
+          "Koder": "Brak",
+          "Zestaw": "Sama drukarka"
         }
       },
       {
@@ -130,7 +177,8 @@
         "cechy": {
           "Druk": "Jednostronny",
           "Łączność": "USB, Ethernet",
-          "Koder": "Magnetyczny"
+          "Koder": "Magnetyczny",
+          "Zestaw": "Sama drukarka"
         }
       },
       {
@@ -140,7 +188,8 @@
         "cechy": {
           "Druk": "Dwustronny",
           "Łączność": "USB, Ethernet",
-          "Koder": "Brak"
+          "Koder": "Brak",
+          "Zestaw": "Sama drukarka"
         }
       },
       {
@@ -150,7 +199,8 @@
         "cechy": {
           "Druk": "Dwustronny",
           "Łączność": "USB, Ethernet",
-          "Koder": "Magnetyczny"
+          "Koder": "Magnetyczny",
+          "Zestaw": "Sama drukarka"
         }
       }
     ]

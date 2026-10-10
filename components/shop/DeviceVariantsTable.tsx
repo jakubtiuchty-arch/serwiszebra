@@ -37,6 +37,13 @@ const zl = (v: number) =>
   v.toLocaleString('pl-PL', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
 
 /**
+ * Znacznik wybranego wariantu — atrybut, nie `id`: wyróżniony wariant istnieje w obu
+ * układach naraz (karta na telefonie, wiersz na desktopie), a jeden z nich jest ukryty
+ * przez CSS. Po nim przewijają do wybranej wersji tabela i baner zestawu startowego.
+ */
+export const ZNACZNIK_WYBRANEGO = 'data-wariant-wybrany'
+
+/**
  * Podpowiedzi do cech — po NAZWIE cechy, nie po sztywnym polu. Cecha bez
  * wpisu po prostu nie dostaje dymka, więc dodanie nowej osi (np. „Pamięć"
  * przy terminalach) nie wymaga zmian w kodzie.
@@ -99,6 +106,14 @@ const OPISY_CECH: Record<string, Wyjasnienie> = {
       ['Nawijak podkładu', 'odklejak, który zwija zużyty podkład na szpulę'],
       ['Nawijak etykiet', 'odklejak, który nawija zadrukowane etykiety z powrotem na pełną rolkę'],
       ['Gilotyna', 'odcina wydruk; do przywieszek i etykiet o zmiennej długości'],
+    ],
+  },
+  // Drukarki kart — zestaw startowy QuikCard według Zebry: ta sama drukarka plus materiały i program
+  Zestaw: {
+    wstep: 'Co jest w pudełku:',
+    pozycje: [
+      ['Sama drukarka', 'bez taśmy i kart; materiały i program do projektowania kupuje się osobno'],
+      ['Zestaw startowy', 'drukarka, kolorowa taśma na 200 wydruków, 200 kart PVC i licencja CardStudio 2.0 Standard'],
     ],
   },
 }
@@ -168,10 +183,8 @@ export default function DeviceVariantsTable({
   const addItem = useCartStore((s) => s.addItem)
   const loading = !zaladowane && Object.keys(stany).length === 0
   const [dodane, setDodane] = useState<string | null>(null)
-  // Znacznik zamiast refa: wyróżniony wariant istnieje w obu układach naraz
-  // (karta na telefonie, wiersz na desktopie), a jeden z nich jest ukryty przez
-  // CSS. Atrybut, nie `id` — dwa elementy z tym samym `id` to niepoprawny HTML.
-  const ZNACZNIK = 'data-wariant-wybrany'
+  // Znacznik zamiast refa — opis przy ZNACZNIK_WYBRANEGO
+  const ZNACZNIK = ZNACZNIK_WYBRANEGO
 
   // Kolumny powstają z CECH wariantów, nie ze sztywnej listy pól. Pokazujemy
   // tylko te, które realnie różnicują: cecha o jednej wartości we wszystkich
@@ -264,7 +277,8 @@ export default function DeviceVariantsTable({
       product_type: 'drukarka',
       stock: s?.total ?? 1,
       variant_pn: v.pn,
-      image: zdjecie,
+      // Zestaw startowy trafia do koszyka ze zdjęciem pudełka, nie samej drukarki
+      image: v.zdjecie || zdjecie,
     })
     setDodane(v.pn)
     setTimeout(() => setDodane(null), 2000)

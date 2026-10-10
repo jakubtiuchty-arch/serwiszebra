@@ -28,6 +28,13 @@ export interface DeviceVariant {
    * cechy, które realnie różnicują warianty.
    */
   cechy?: Record<string, string>
+  /**
+   * Własne zdjęcie wersji, gdy pudełko różni się od samej drukarki — zestaw startowy
+   * drukarki kart z taśmą i kartami. Musi być też w galerii karty (`image_urls`):
+   * panel przełącza się na nie po wyborze wersji, a feed Merchant, schemat i koszyk
+   * pokazują je przy tej wersji zamiast zdjęcia samej drukarki.
+   */
+  zdjecie?: string
 }
 
 /** Cena i stan jednego numeru katalogowego, policzone serwerowo */
@@ -129,9 +136,24 @@ export default function DevicePurchasePanel({
     .map((v) => v.pn)
     .sort((a, b) => (ceny(a) || Infinity) - (ceny(b) || Infinity))[0]
 
-  const [foto, setFoto] = useState(0)
+  /** Indeks zdjęcia wybranej wersji w galerii; -1, gdy wersja nie ma własnego */
+  const zdjecieWersji = (p: string | null) => {
+    const z = p ? variants.find((v) => v.pn === p)?.zdjecie : undefined
+    return z ? images.indexOf(z) : -1
+  }
+  // Wejście z `?pn=` zestawu otwiera galerię od razu na zdjęciu zestawu
+  const [foto, setFoto] = useState(() => Math.max(zdjecieWersji(wybrany), 0))
   const [mounted, setMounted] = useState(false)
   useEffect(() => setMounted(true), [])
+
+  // Wybór wersji z własnym zdjęciem (zestaw startowy) pokazuje jej pudełko; powrót do
+  // samej drukarki zdejmuje zdjęcie zestawu, ale nie rusza zdjęcia wybranego ręcznie
+  useEffect(() => {
+    const i = zdjecieWersji(wybrany)
+    if (i >= 0) setFoto(i)
+    else setFoto((f) => (variants.some((v) => v.zdjecie && v.zdjecie === images[f]) ? 0 : f))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [wybrany])
 
   const s = stany[pn]
   const stockPL = s?.stockPL ?? 0

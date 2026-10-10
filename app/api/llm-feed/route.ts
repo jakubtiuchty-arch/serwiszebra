@@ -30,6 +30,8 @@ interface WariantDb {
   label: string
   dpi?: number
   cechy?: Record<string, string>
+  /** Własne zdjęcie wersji — zestaw startowy drukarki kart z taśmą i kartami */
+  zdjecie?: string
 }
 
 interface DrukarkaDb {
@@ -82,7 +84,8 @@ export async function GET() {
         description: d.description || '',
         url: `${kartaUrl}?pn=${encodeURIComponent(v.pn)}`,
         brand: 'Zebra',
-        ...(zdjecie ? { image_url: `${SITE}${zdjecie}` } : {}),
+        // Zestaw startowy pokazuje pudełko z taśmą i kartami, nie samą drukarkę
+        ...(v.zdjecie || zdjecie ? { image_url: `${SITE}${v.zdjecie || zdjecie}` } : {}),
         ...(cena ? { price: `${cena.toFixed(2)} PLN` } : {}),
         availability: naStanie ? 'in_stock' : 'out_of_stock',
         // Grupowanie wariantów — bez tego każdy numer katalogowy jest osobnym

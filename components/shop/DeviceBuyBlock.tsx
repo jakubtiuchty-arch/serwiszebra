@@ -7,6 +7,7 @@ import DevicePurchasePanel, {
 } from './DevicePurchasePanel'
 import DeviceVariantsTable from './DeviceVariantsTable'
 import type { RodzajSerwisu } from './BanerSerwisu'
+import BanerZestawuStartowego, { type TrescZestawu } from './BanerZestawuStartowego'
 
 interface Props {
   productId: string
@@ -23,6 +24,8 @@ interface Props {
   /** Baner autoryzowanego serwisu w panelu zakupu — tylko drukarki kart i etykiet */
   serwis?: RodzajSerwisu
   model?: string | null
+  /** Baner zestawu startowego pod tabelą — tylko karty z wersją „Zestaw startowy” (ZC100, ZC300) */
+  zestawStartowy?: TrescZestawu
 }
 
 /**
@@ -51,6 +54,7 @@ export default function DeviceBuyBlock({
   rekomendowanyPn,
   serwis,
   model,
+  zestawStartowy,
 }: Props) {
   const [wybranyPn, setWybranyPn] = useState<string | undefined>(wybranyPnStart)
 
@@ -153,6 +157,20 @@ export default function DeviceBuyBlock({
         przewinDoWybranego={!!wybranyPnStart}
         onWybierz={wybierz}
       />
+
+      {/* Ten sam snapshot cen i ten sam wybór co tabela — różnica ceny zestawu
+          i podświetlenie wiersza nie mogą się z nią rozjechać */}
+      {zestawStartowy && (
+        <BanerZestawuStartowego
+          name={name}
+          variants={variants}
+          stany={stany}
+          zaladowane={zaladowane}
+          wybranyPn={wybranyPn}
+          tresc={zestawStartowy}
+          onWybierz={wybierz}
+        />
+      )}
     </>
   )
 }

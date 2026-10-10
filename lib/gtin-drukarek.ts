@@ -163,6 +163,12 @@ export const GTIN_DRUKAREK: Record<string, string[]> = {
   'ZC35-000C000EM00': ['8596375175037'],
   'ZC35-0M0C000EM00': ['8596375175044'],
   'ZC36-000C000EM00': ['8596375175068'],
+  // Zestawy startowe QuikCard (drukarka + taśma + 200 kart + CardStudio 2.0 Standard) — własne kody
+  // zestawu, nie drukarki. Źródło: Open Icecat, rekordy marki Zebra, pobrane 10.10.2026; każdy kod
+  // wyszukany odwrotnie wraca do tego samego PN, sumy kontrolne EAN-13 sprawdzone.
+  'ZC11-0000Q00EM00': ['5706998771438'],
+  'ZC31-000CQ00EM00': ['5706998845634', '8596375234109'],
+  'ZC32-000CQ00EM00': ['5706998774552', '8596375234161'],
 }
 
 /** Kody GTIN dla numeru katalogowego (wielkość liter bez znaczenia) */

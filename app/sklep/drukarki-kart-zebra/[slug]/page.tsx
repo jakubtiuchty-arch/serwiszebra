@@ -259,7 +259,8 @@ export default async function DevicePage({
         ...(gtinyDlaPN(v.pn)[0] ? { gtin: gtinyDlaPN(v.pn)[0] } : {}),
         brand: { '@type': 'Brand', name: 'Zebra' },
         url: urlWariantu(v.pn),
-        ...(zdjecie ? { image: [zdjecie] } : {}),
+        // Zestaw startowy ma własne zdjęcie pudełka (drukarka, taśma, karty) — to samo co w feedzie Merchant
+        ...(v.zdjecie ? { image: [`${SITE}${v.zdjecie}`] } : zdjecie ? { image: [zdjecie] } : {}),
         // Cechy wariantu 1:1 z tego, co widzi klient w tabeli
         additionalProperty: Object.entries(v.cechy || {}).map(([name, value]) => ({
           '@type': 'PropertyValue',
@@ -445,6 +446,8 @@ export default async function DevicePage({
             // Baner autoryzowanego serwisu drukarek kart stoi w panelu zakupu, obok ceny
             serwis="karty"
             model={product.device_model}
+            // Zestaw startowy QuikCard pod tabelą — tylko ZC100 i ZC300 (treść w lib/card-printer-content.tsx)
+            zestawStartowy={tresc?.zestawStartowy}
           />
 
           {tresc && (

@@ -136,9 +136,13 @@ async function ofertyDrukarek(supabaseUrl: string, supabaseKey: string) {
   let pominiete = 0
 
   for (const d of drukarki) {
+    // Zdjęcie przypisane do wersji (zestaw startowy: drukarka, taśma, karty) nie trafia do
+    // ofert samej drukarki — pokazywałoby rzeczy, których w jej pudełku nie ma
+    const zdjeciaWersji = new Set((d.attributes?.variants || []).map((v) => v.zdjecie).filter(Boolean))
     const zdjecia = [trescKarty(d.slug)?.zdjecieGlowne, ...(d.image_urls || [])]
       .filter((s): s is string => !!s)
       .filter((s, i, a) => a.indexOf(s) === i)
+      .filter((s) => !zdjeciaWersji.has(s))
     if (zdjecia.length === 0) {
       pominiete += d.attributes?.variants?.length || 0
       continue
@@ -164,6 +168,10 @@ async function ofertyDrukarek(supabaseUrl: string, supabaseKey: string) {
       // deviceUrl: drukarki kart mają własną ścieżkę /sklep/drukarki-kart-zebra/ — pod
       // /sklep/drukarki-etykiet/ trafiały na przekierowanie (wcześniej na duplikat strony)
       const link = `${SITE_URL}${deviceUrl(d.slug)}?pn=${encodeURIComponent(v.pn)}`
+      // Oferta zestawu startowego otwiera się zdjęciem całego pudełka — Google zaleca, by
+      // tytuł, opis i zdjęcie opisywały cały zestaw. `is_bundle` celowo pominięte: QuikCard
+      // to zestaw producenta z własnym PN i GTIN, a Google każe go wtedy nie podawać.
+      const zdjeciaOferty = v.zdjecie ? [v.zdjecie, ...zdjecia] : zdjecia
 
       const lines = [
         '    <item>',
@@ -171,8 +179,8 @@ async function ofertyDrukarek(supabaseUrl: string, supabaseKey: string) {
         `      <title>${escapeXml(truncate(tytul, 150))}</title>`,
         `      <description>${escapeXml(opis)}</description>`,
         `      <link>${escapeXml(link)}</link>`,
-        `      <g:image_link>${escapeXml(SITE_URL + zdjecia[0])}</g:image_link>`,
-        ...zdjecia.slice(1, 11).map((z) => `      <g:additional_image_link>${escapeXml(SITE_URL + z)}</g:additional_image_link>`),
+        `      <g:image_link>${escapeXml(SITE_URL + zdjeciaOferty[0])}</g:image_link>`,
+        ...zdjeciaOferty.slice(1, 11).map((z) => `      <g:additional_image_link>${escapeXml(SITE_URL + z)}</g:additional_image_link>`),
         `      <g:price>${stan.brutto.toFixed(2)} PLN</g:price>`,
         `      <g:availability>${naStanie ? 'in_stock' : 'out_of_stock'}</g:availability>`,
         `      <g:brand>Zebra</g:brand>`,

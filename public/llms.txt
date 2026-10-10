@@ -211,8 +211,8 @@ Tablety: ET60, ET65
 ## Drukarki kart Zebra
 
 - [Drukarki kart Zebra](https://www.serwis-zebry.pl/sklep/drukarki-kart-zebra): porównanie ZC100, ZC300 i ZC350, warianty PN, ceny i dostępność.
-- [Zebra ZC100](https://www.serwis-zebry.pl/sklep/drukarki-kart-zebra/zebra-zc100): druk jednostronny, 300 dpi, do 150 kolorowych kart/h przy taśmie YMCKO.
-- [Zebra ZC300](https://www.serwis-zebry.pl/sklep/drukarki-kart-zebra/zebra-zc300): druk jedno- lub dwustronny zależnie od PN, 300 dpi, do 200 kolorowych kart/h jednostronnie.
+- [Zebra ZC100](https://www.serwis-zebry.pl/sklep/drukarki-kart-zebra/zebra-zc100): druk jednostronny, 300 dpi, do 150 kolorowych kart/h przy taśmie YMCKO; także zestaw startowy QuikCard ZC11-0000Q00EM00 z taśmą YMCKO na 200 wydruków, 200 kartami PVC i licencją CardStudio 2.0 Standard.
+- [Zebra ZC300](https://www.serwis-zebry.pl/sklep/drukarki-kart-zebra/zebra-zc300): druk jedno- lub dwustronny zależnie od PN, 300 dpi, do 200 kolorowych kart/h jednostronnie; zestawy startowe QuikCard ZC31-000CQ00EM00 (taśma YMCKO) i ZC32-000CQ00EM00 (taśma YMCKOK) z 200 kartami PVC i licencją CardStudio 2.0 Standard.
 - [Zebra ZC350](https://www.serwis-zebry.pl/sklep/drukarki-kart-zebra/zebra-zc350): druk jedno- (ZC35) lub dwustronny (ZC36), 300 dpi, do 225 kolorowych kart/h jednostronnie; taśmy serii 800350, w tym perłowa, metaliczna i YMCKLL.
 - [Serwis drukarek kart](https://www.serwis-zebry.pl/serwis-drukarek-kart-zebra): naprawy i konserwacja drukarek kart Zebra.
 
