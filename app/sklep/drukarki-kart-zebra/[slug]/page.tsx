@@ -653,9 +653,12 @@ export default async function DevicePage({
               <h2 className="text-sm sm:text-base font-semibold text-gray-900">
                 Wideoporadniki
               </h2>
+              {/* ZC100 nie dostaje filmu o wyświetlaczu (lib/card-printer-content.tsx), więc jej filmy dotyczą obu modeli */}
               <p className="mt-2 text-sm text-gray-600">{product.device_model === 'ZC350'
                 ? 'Filmy nagraliśmy na drukarkach ZC100 i ZC300 z tej samej serii.'
-                : 'Film o wyświetlaczu i menu dotyczy tylko Zebra ZC300. Zebra ZC100 nie ma wyświetlacza.'}</p>
+                : product.device_model === 'ZC100'
+                  ? 'Filmy dotyczą obu modeli: Zebra ZC100 i ZC300.'
+                  : 'Film o wyświetlaczu i menu dotyczy tylko Zebra ZC300. Zebra ZC100 nie ma wyświetlacza.'}</p>
               {filmy.length === 1 && (
                 <WideoWpisu film={filmy[0]} priorytet={false} className="mt-4" />
               )}
