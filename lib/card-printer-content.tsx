@@ -61,13 +61,8 @@ TRESC_KART['zebra-zc100'] = {
     ]},
   ],
   zestawStartowy: {
-    wstep: 'Zebra sprzedaje ZC100 także w zestawie z materiałami i programem do projektowania kart. Pierwsze identyfikatory wydrukujesz bez dokupowania taśmy i kart.',
-    wPudelku: [
-      'Drukarka Zebra ZC100 z USB, bez kodera',
-      'Kolorowa taśma YMCKO na 200 wydruków',
-      '200 kart PVC o grubości 0,76 mm',
-      'Licencja Zebra CardStudio 2.0 Standard: wbudowana baza danych, przykładowe projekty kart, import danych z Excela. Program pobiera się i aktywuje przez internet',
-    ],
+    // Bez żargonu (YMCKO, 0,76 mm) — szczegóły są w FAQ i specyfikacji; taśma na 200 wydruków jednostronnych = 200 kart
+    zawartosc: 'kolorową taśmę na 200 kart, 200 kart PVC i program CardStudio 2.0 do projektowania kart',
   },
   faqNaglowek: 'Pytania o Zebra ZC100',
   faq: [
@@ -133,13 +128,8 @@ TRESC_KART['zebra-zc300'] = {
     ]},
   ],
   zestawStartowy: {
-    wstep: 'Zebra sprzedaje ZC300 także w zestawie z materiałami i programem do projektowania kart, w wersji jednostronnej i dwustronnej. Pierwsze karty wydrukujesz bez dokupowania taśmy i kart.',
-    wPudelku: [
-      'Drukarka Zebra ZC300 z USB i Ethernetem, bez kodera: jednostronna ZC31 albo dwustronna ZC32',
-      'Kolorowa taśma na 200 wydruków: YMCKO w zestawie jednostronnym, YMCKOK w dwustronnym (kolor z przodu, czerń z tyłu)',
-      '200 kart PVC o grubości 0,76 mm',
-      'Licencja Zebra CardStudio 2.0 Standard: wbudowana baza danych, przykładowe projekty kart, import danych z Excela. Program pobiera się i aktywuje przez internet',
-    ],
+    // Bez żargonu (YMCKO/YMCKOK, 0,76 mm) — szczegóły są w FAQ i specyfikacji; obie taśmy wystarczają na 200 kart
+    zawartosc: 'kolorową taśmę na 200 kart, 200 kart PVC i program CardStudio 2.0 do projektowania kart',
   },
   faqNaglowek: 'Pytania o Zebra ZC300',
   faq: [
