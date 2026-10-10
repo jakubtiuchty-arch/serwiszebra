@@ -77,9 +77,9 @@ const PANELE = [
 
 const FAQ = [
   { q: 'Jaką taśmę wybrać do Zebra ZC300?', a: 'Do koloru na jednej stronie wybierz taśmę YMCKO: 800300-250EM, 800300-255EM lub zestaw 800300-254EM. Do koloru z przodu i czerni z tyłu wybierz taśmę YMCKOK 800300-360EM. Ta taśma wymaga ZC300 z drukiem dwustronnym (ZC32). Do druku czarno-białego wybierz taśmę K, KdO lub KrO.' },
-  { q: 'Jakie taśmy pasują do Zebra ZC100?', a: 'Do ZC100 pasują taśmy serii 800300: YMCKO, ½ YMCKO oraz taśmy jednokolorowe: czarna, biała, czerwona, niebieska, złota i srebrna. Taśmy YMCKOK, KdO i KrO nie pasują do ZC100.' },
+  { q: 'Jakie taśmy pasują do Zebra ZC100?', a: 'Do ZC100 pasują taśmy serii 800300: YMCKO na 200 wydruków (800300-250EM i zestaw 800300-254EM), ½ YMCKO oraz taśmy jednokolorowe: czarna, biała, czerwona, niebieska, złota i srebrna. Taśma YMCKO na 300 wydruków (800300-255EM) oraz taśmy YMCKOK, KdO i KrO nie pasują do ZC100.' },
   { q: 'Jakie taśmy pasują do Zebra ZC350?', a: 'Do ZC350 pasują taśmy serii 800350: YMCKO, YMCKOK, ½ YMCKO, KdO, KrO, biała oraz specjalne YMCPKO, SrDYMCKO i YMCKLL. Pasują też czarna taśma 800300-301 i taśmy 800300 w kolorze czerwonym, niebieskim, złotym i srebrnym. Kolorowe taśmy 800300 od ZC100 i ZC300 nie pasują, bo drukarka sprawdza chip kasety.' },
-  { q: 'Ile kart wydrukuje taśma 800300-250EM?', a: 'Taśma 800300-250EM wykonuje 200 wydruków w pełnym kolorze. Jeden wydruk to jedna strona karty. Do większych serii wybierz 800300-255EM (300 wydruków) lub zestaw 800300-254EM (800 wydruków).' },
+  { q: 'Ile kart wydrukuje taśma 800300-250EM?', a: 'Taśma 800300-250EM wykonuje 200 wydruków w pełnym kolorze. Jeden wydruk to jedna strona karty. Do większych serii wybierz zestaw 800300-254EM (800 wydruków), a w ZC300 także taśmę 800300-255EM (300 wydruków).' },
   { q: 'Czym różni się taśma KdO od KrO?', a: 'Taśma KdO ma czerń sublimacyjną. Wybierz ją do zdjęć w odcieniach szarości. Taśma KrO ma czerń żywiczną. Wybierz ją do tekstu i kodów kreskowych. Obie taśmy mają panel O. Taśmy 800300-320EM i 800300-321EM pasują do ZC300. Do ZC350 służą taśmy 800350-320EM i 800350-321EM.' },
   { q: 'Czy karty PVC w tej kategorii mają pasek magnetyczny lub chip?', a: 'Nie. Karty 104523-111 i 104523-210 to białe karty PVC bez paska i bez układu elektronicznego. Do kodowania potrzebujesz drukarki z koderem i kart z paskiem lub układem. Zapytaj nas o zgodne karty.' },
   { q: 'Jak często czyścić drukarkę kart Zebra?', a: 'Czyść tor kart co 1000 wydrukowanych kart. Czyść go także po komunikacie drukarki. Użyj karty czyszczącej Zebra i wykonaj procedurę z instrukcji drukarki.' },
@@ -125,7 +125,9 @@ export default async function Page({ searchParams }: { searchParams: SearchParam
     .map(pn => ({ pn, koszt: kosztWydruku(pn) }))
     .filter((x): x is { pn: string; koszt: number } => x.koszt !== null)
     .sort((a, b) => a.koszt - b.koszt)[0]
-  const najtanszyKolor = najtanszy(['800300-250EM', '800300-255EM', '800300-254EM'])
+  const najtanszyKolor = najtanszy(['800300-250EM', '800300-254EM'])
+  // 800300-255EM pasuje tylko do ZC300 (opis SKU w katalogu Zebry), więc nie może wygrać porównania „do ZC100 i ZC300”
+  const najtanszyKolorZc300 = najtanszy(['800300-250EM', '800300-255EM', '800300-254EM'])
   const najtanszyKolor350 = najtanszy(['800350-250EM', '800350-252EM'])
   const tasmy = wszystkie.filter(p => p.kind === 'Taśmy' && TASMY[p.pn])
 
@@ -245,6 +247,7 @@ export default async function Page({ searchParams }: { searchParams: SearchParam
             <p className={akapit}>Przykład: karta z kolorem na jednej stronie w ZC100 lub ZC300. Taśma 800300-250EM kosztuje {zl(kosztTasmy250)} zł netto na wydruk. Karta 0,76 mm kosztuje {zl(kosztKarty)} zł netto. Razem: {zl(grosze(kosztTasmy250) + grosze(kosztKarty))} zł netto za kartę.</p>
             {kosztTasmy350 !== null && <p className={akapit}>W ZC350 taśma 800350-250EM kosztuje {zl(kosztTasmy350)} zł netto na wydruk. Razem z kartą 0,76 mm: {zl(grosze(kosztTasmy350) + grosze(kosztKarty))} zł netto za kartę.</p>}
             {najtanszyKolor && najtanszyKolor.pn !== '800300-250EM' && <p className={akapit}>Najniższy koszt wydruku w kolorze do ZC100 i ZC300 ma teraz {tasmaLink(najtanszyKolor.pn)}: {zl(najtanszyKolor.koszt)} zł netto.</p>}
+            {najtanszyKolorZc300?.pn === '800300-255EM' && <p className={akapit}>W samej ZC300 najniższy koszt wydruku w kolorze ma {tasmaLink('800300-255EM')} na 300 wydruków: {zl(najtanszyKolorZc300.koszt)} zł netto. Do ZC100 ta taśma nie pasuje.</p>}
             {najtanszyKolor350 && najtanszyKolor350.pn !== '800350-250EM' && <p className={akapit}>Najniższy koszt wydruku w kolorze do ZC350 ma teraz {tasmaLink(najtanszyKolor350.pn)}: {zl(najtanszyKolor350.koszt)} zł netto.</p>}
             <p className={akapit}>Do kosztu materiałów dodaj karty czyszczące i karty z błędnym nadrukiem.</p>
           </section>

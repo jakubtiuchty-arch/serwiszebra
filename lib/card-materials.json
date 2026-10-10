@@ -47,7 +47,7 @@
       },
       {
         "name": "Kompatybilność",
-        "value": "Zebra ZC100, ZC300"
+        "value": "Zebra ZC300"
       },
       {
         "name": "Part Number",
@@ -65,12 +65,11 @@
     "slug": "zebra-800300-255em",
     "name": "Zebra 800300-255EM — Taśma YMCKO — 300 wydruków",
     "models": [
-      "ZC100",
       "ZC300"
     ],
     "kind": "Taśmy",
     "unit": "1 taśma",
-    "description": "Taśma Zebra 800300-255EM służy do druku kart plastikowych. Panele YMCKO drukują kolorowy obraz, czarny tekst i przezroczystą warstwę ochronną. Drukarka wymaga oprogramowania układowego V201.01.18 lub nowszego. Taśma nie pasuje do Zebra ZC350. Do ZC350 służy taśma 800350-252EM.",
+    "description": "Taśma Zebra 800300-255EM służy do druku kart plastikowych. Panele YMCKO drukują kolorowy obraz, czarny tekst i przezroczystą warstwę ochronną. Drukarka wymaga oprogramowania układowego V201.01.18 lub nowszego. Taśma pasuje tylko do Zebra ZC300. Do ZC100 służy taśma 800300-250EM na 200 wydruków, a do ZC350 taśma 800350-252EM.",
     "image": "/sklep_photo/materialy-kart/800300-255em.webp"
   },
   {
