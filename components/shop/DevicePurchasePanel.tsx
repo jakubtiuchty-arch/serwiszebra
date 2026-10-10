@@ -6,6 +6,7 @@ import { Loader2, ShoppingCart, Phone } from 'lucide-react'
 import { terminDostawy } from '@/lib/delivery-date'
 import { trackPhoneClick } from '@/lib/analytics'
 import DeviceEnquiryModal from './DeviceEnquiryModal'
+import BanerSerwisu, { type RodzajSerwisu } from './BanerSerwisu'
 
 const TELEFON = '+48601619898'
 
@@ -59,6 +60,11 @@ interface DevicePurchasePanelProps {
   zaladowane?: boolean
   /** Aktualnie wybrany numer katalogowy */
   wybranyPn?: string
+  /** Baner autoryzowanego serwisu zamiast dopisku pod ikonami — tylko drukarki
+   *  (kart i etykiet); karta bez tego pola, np. terminala, dostaje sam dopisek */
+  serwis?: RodzajSerwisu
+  /** Model do zdania o naprawach w banerze, np. „ZC300” */
+  model?: string | null
 }
 
 const zl = (v: number) =>
@@ -86,6 +92,8 @@ export default function DevicePurchasePanel({
   stany = {},
   zaladowane = false,
   wybranyPn,
+  serwis,
+  model,
 }: DevicePurchasePanelProps) {
   // Wejście z adresu wariantu (`?pn=`) ma od razu pokazywać JEGO cenę i stan,
   // a nie najtańszą wersję, której klient wcale nie wybierał
@@ -333,10 +341,14 @@ export default function DevicePurchasePanel({
             wsparcia gwarancyjnego producenta w Polsce. Klient widzi wyłącznie
             dwie liczby i nie wie, że porównuje różne rzeczy; to zdanie nazywa
             różnicę, nie atakując nikogo. */}
-        <p className="mt-3 border-t border-gray-100 pt-3 text-[11px] leading-relaxed text-gray-500">
-          Sprzęt pochodzi z oficjalnej dystrybucji Zebry. Gwarancję i późniejsze naprawy
-          prowadzimy w naszym serwisie, na oryginalnych częściach.
-        </p>
+        {serwis ? (
+          <BanerSerwisu rodzaj={serwis} model={model} />
+        ) : (
+          <p className="mt-3 border-t border-gray-100 pt-3 text-[11px] leading-relaxed text-gray-500">
+            Sprzęt pochodzi z oficjalnej dystrybucji Zebry. Gwarancję i późniejsze naprawy
+            prowadzimy w naszym serwisie, na oryginalnych częściach.
+          </p>
+        )}
         </div>
 
         {/* Pod ramką, nie w niej: zakup to jedna ścieżka, pytanie to druga.

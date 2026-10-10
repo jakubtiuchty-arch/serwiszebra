@@ -8,7 +8,6 @@ import { type DeviceVariant } from '@/components/shop/DevicePurchasePanel'
 import DeviceBuyBlock from '@/components/shop/DeviceBuyBlock'
 import DeviceAccessories from '@/components/shop/DeviceAccessories'
 import CardMaterials from '@/components/shop/CardMaterials'
-import BanerSerwisuKart from '@/components/shop/BanerSerwisuKart'
 import PoradnikiKaruzela from '@/components/shop/PoradnikiKaruzela'
 import { getAkcesoriaDlaModelu } from '@/lib/device-accessories'
 import { pobierzStany, stanDlaPN } from '@/lib/stock-server'
@@ -443,11 +442,10 @@ export default async function DevicePage({
             stanyPoczatkowe={stanyDlaKomponentow}
             wybranyPnStart={wybranyPn}
             rekomendowanyPn={tresc?.rekomendowanyPn}
+            // Baner autoryzowanego serwisu drukarek kart stoi w panelu zakupu, obok ceny
+            serwis="karty"
+            model={product.device_model}
           />
-
-          {/* Zaraz pod blokiem zakupu: klient wybiera wersję i widzi, że gwarancję
-              i późniejsze naprawy prowadzi autoryzowany serwis drukarek kart */}
-          <BanerSerwisuKart model={product.device_model} />
 
           {tresc && (
             <section

@@ -6,6 +6,7 @@ import DevicePurchasePanel, {
   type StanWariantu,
 } from './DevicePurchasePanel'
 import DeviceVariantsTable from './DeviceVariantsTable'
+import type { RodzajSerwisu } from './BanerSerwisu'
 
 interface Props {
   productId: string
@@ -19,6 +20,9 @@ interface Props {
   /** Wariant z adresu (`?pn=`) — stan początkowy wyboru */
   wybranyPnStart?: string
   rekomendowanyPn?: string
+  /** Baner autoryzowanego serwisu w panelu zakupu — tylko drukarki kart i etykiet */
+  serwis?: RodzajSerwisu
+  model?: string | null
 }
 
 /**
@@ -45,6 +49,8 @@ export default function DeviceBuyBlock({
   stanyPoczatkowe,
   wybranyPnStart,
   rekomendowanyPn,
+  serwis,
+  model,
 }: Props) {
   const [wybranyPn, setWybranyPn] = useState<string | undefined>(wybranyPnStart)
 
@@ -128,6 +134,8 @@ export default function DeviceBuyBlock({
         stany={stany}
         zaladowane={zaladowane}
         wybranyPn={wybranyPn}
+        serwis={serwis}
+        model={model}
       />
 
       <DeviceVariantsTable

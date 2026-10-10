@@ -1,91 +1,102 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowRight, Check } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 
 const LIME = '#A8F000'
 
-/** Status serwisowy Zebra dla drukarek kart — ten sam co na /serwis-drukarek-kart-zebra */
-const STATUS_KART = 'Printer Repair Specialist – Card Printer'
+/**
+ * Rodzaj sprzętu, przy którym klient kupuje od autoryzowanego serwisu Zebry.
+ * Terminali celowo tu nie ma — ich karta nie dostaje banera.
+ */
+export type RodzajSerwisu = 'karty' | 'etykiety'
 
-const PUNKTY = [
-  '3 lata gwarancji na drukarkę i głowicę',
-  'Naprawy gwarancyjne u nas',
-  'Serwis pogwarancyjny i części Zebry',
-]
+/** Status serwisowy Zebry i plakietka — te same co na stronach serwisu i w „O nas” */
+const SERWIS: Record<RodzajSerwisu, {
+  tytul: string
+  plakietka: { src: string; width: number; height: number; alt: string }
+  link: { href: string; tekst: string }
+}> = {
+  karty: {
+    tytul: 'Kupujesz u autoryzowanego serwisu drukarek kart Zebra',
+    plakietka: {
+      src: '/zebra-repair-specialist-card-printer.png',
+      width: 1891,
+      height: 540,
+      alt: 'Zebra Premier Solution Partner – Printer Repair Specialist – Card Printer',
+    },
+    link: { href: '/serwis-drukarek-kart-zebra', tekst: 'Serwis drukarek kart' },
+  },
+  etykiety: {
+    tytul: 'Kupujesz u autoryzowanego serwisu drukarek Zebra',
+    plakietka: {
+      src: '/zebra-premier-repair-specialist.jpeg',
+      width: 1823,
+      height: 540,
+      alt: 'Zebra Premier Solution Partner – Printer Repair Specialist',
+    },
+    link: { href: '/serwis-drukarek-zebra', tekst: 'Serwis drukarek Zebra' },
+  },
+}
 
 /**
- * Na kartach drukarek kart: klient kupuje u autoryzowanego serwisu drukarek kart Zebra.
- * Ten sam język wizualny co baner programu głowic (ciemne tło, limonkowy akcent),
- * z oficjalną plakietką Zebry na białym polu — plakietka jest czarna na białym.
+ * Baner w panelu zakupu, w miejscu dawnego dopisku „Sprzęt pochodzi z oficjalnej
+ * dystrybucji Zebry…”. Panel ma od ok. 310 px (telefon) do ok. 535 px (desktop), a przy
+ * md tylko ok. 345 px obok galerii — dlatego plakietka stoi obok tekstu przy sm i od lg,
+ * a przy md pod nim. Ten sam język wizualny co baner programu głowic: ciemne tło,
+ * limonkowy akcent, oficjalna plakietka Zebry na białym polu.
  */
-export default function BanerSerwisuKart({ model }: { model?: string | null }) {
+export default function BanerSerwisu({ rodzaj, model }: { rodzaj: RodzajSerwisu; model?: string | null }) {
+  const s = SERWIS[rodzaj]
   return (
-    <section
-      aria-labelledby="serwis-kart-tytul"
-      className="relative mb-4 overflow-hidden rounded-xl bg-gray-950 p-4 shadow-sm sm:mb-6 sm:px-5"
+    <aside
+      aria-label="Autoryzowany serwis Zebra"
+      className="relative mt-4 overflow-hidden rounded-lg bg-gray-950 p-3.5"
     >
       <div
         aria-hidden
-        className="pointer-events-none absolute -right-16 -top-16 h-44 w-44 rounded-full opacity-20 blur-3xl"
+        className="pointer-events-none absolute -right-12 -top-12 h-32 w-32 rounded-full opacity-20 blur-3xl"
         style={{ background: LIME }}
       />
 
-      <div className="relative md:flex md:items-center md:gap-6">
-        <div className="md:flex-1">
+      <div className="relative sm:flex sm:items-center sm:gap-4 md:block lg:flex">
+        <div className="min-w-0 sm:flex-1">
           <span
             className="inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-gray-950"
             style={{ background: LIME }}
           >
             Autoryzowany serwis Zebra
           </span>
-
-          <h2 id="serwis-kart-tytul" className="mt-2 text-base font-bold leading-snug text-white">
-            Kupujesz u autoryzowanego serwisu drukarek kart Zebra
-          </h2>
-
-          <p className="mt-1 text-xs leading-relaxed text-white/70 sm:text-sm">
-            {/* Status Zebry pokazuje plakietka obok — tu tylko to, co z niego wynika dla klienta */}
-            Naprawy gwarancyjne i pogwarancyjne{model ? ` Zebra ${model}` : ' drukarek kart Zebra'} wykonujemy we własnym serwisie.
+          <p className="mt-1.5 text-sm font-bold leading-snug text-white">{s.tytul}</p>
+          {/* Zdanie o oficjalnej dystrybucji zostaje: część sprzedawców sprowadza Zebry od
+              brokerów, bez wsparcia gwarancyjnego producenta w Polsce — ono nazywa różnicę w cenie */}
+          <p className="mt-1 text-xs leading-relaxed text-white/70">
+            Sprzęt pochodzi z oficjalnej dystrybucji Zebry. Naprawy gwarancyjne i
+            pogwarancyjne{model ? ` Zebra ${model}` : ''} wykonujemy we własnym serwisie,
+            na oryginalnych częściach.
           </p>
-
-          {/* Punkty w jednym rzędzie na szerszym ekranie — baner ma być wąskim paskiem, nie sekcją */}
-          <ul className="mt-3 flex flex-col gap-1.5 sm:flex-row sm:flex-wrap sm:gap-x-5">
-            {PUNKTY.map((p) => (
-              <li key={p} className="flex items-center gap-2 text-xs leading-snug text-white/90">
-                <span
-                  aria-hidden
-                  className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full text-gray-950"
-                  style={{ background: LIME }}
-                >
-                  <Check className="h-3 w-3" strokeWidth={3} />
-                </span>
-                {p}
-              </li>
-            ))}
-          </ul>
         </div>
 
-        <div className="mt-4 flex flex-col items-center md:mt-0 md:w-48 md:shrink-0">
-          <div className="w-full max-w-[220px] rounded-lg bg-white p-2.5">
+        <div className="mt-3 flex flex-col items-center sm:mt-0 sm:w-44 sm:shrink-0 md:mt-3 md:w-auto lg:mt-0 lg:w-48">
+          <div className="w-full max-w-[200px] rounded-md bg-white p-2">
             <Image
-              src="/zebra-repair-specialist-card-printer.png"
-              alt={`Zebra Premier Solution Partner – ${STATUS_KART}`}
-              width={1891}
-              height={540}
-              sizes="220px"
+              src={s.plakietka.src}
+              alt={s.plakietka.alt}
+              width={s.plakietka.width}
+              height={s.plakietka.height}
+              sizes="200px"
               className="h-auto w-full"
             />
           </div>
           {/* Link wyśrodkowany pod plakietką */}
           <Link
-            href="/serwis-drukarek-kart-zebra"
-            className="mt-2 inline-flex items-center gap-1.5 text-xs font-semibold text-white/90 transition hover:text-white"
+            href={s.link.href}
+            className="mt-1.5 inline-flex items-center gap-1 text-[11px] font-semibold text-white/90 transition hover:text-white"
           >
-            <span className="underline decoration-white/30 underline-offset-4">Serwis drukarek kart</span>
-            <ArrowRight className="h-3.5 w-3.5" />
+            <span className="underline decoration-white/30 underline-offset-4">{s.link.tekst}</span>
+            <ArrowRight className="h-3 w-3" />
           </Link>
         </div>
       </div>
-    </section>
+    </aside>
   )
 }
