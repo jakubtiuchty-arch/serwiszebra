@@ -96,6 +96,9 @@ sprawdzPokrycie('bledne_dane', 'Zalecił ZDesigner v10 dla GK420d, a ten model o
 sprawdzPokrycie('gwarancja', 'Potwierdził domysł klienta o gwarancji.',
   'To jest duża szansa, że głowica mieści się jeszcze w gwarancji.', true)
 sprawdzPokrycie('bledne_dane', 'Podał zły wymiar karty.', PROGRAM, true)
+// Rada, żeby wymienić zużytą baterię, to nie jest słowo o gwarancji (9.10.2026, terminal TC25)
+const ZUZYTA_BATERIA = 'Ten wynik praktycznie potwierdza, że bateria jest zużyta. Najpierw wymień baterię na sprawną i zrób test zejścia poniżej 30%.'
+sprawdzPokrycie('gwarancja', 'Asystent zasugerował wymianę baterii, co może sugerować bezpłatną naprawę.', ZUZYTA_BATERIA, false)
 // Czas diagnostyki 24–48 h to zasada serwisu, nie obietnica; przyjazd technika nadal jest
 sprawdzPokrycie('obietnica', 'Asystent obiecał konkretny czas diagnostyki. Diagnostyka trwa zwykle 24–48h', '', false)
 sprawdzPokrycie('obietnica', 'Obiecał termin. Wykonamy diagnostykę 24-48h', '', true)
@@ -322,6 +325,18 @@ const PRZYPADKI = [
     ['drukarka kart nie widzi tasmy pokazuje 0, tasma nowa, kalibracja zrobiona', 'Wyłącz drukarkę, wyjmij kasetę z taśmą, sprawdź czy taśma jest równo napięta i wsuń kasetę do końca, aż kliknie. Zamknij pokrywę i włącz drukarkę. Nadal pokazuje 0?'],
     ['tak, blad 5001', 'Wyjmij kasetę i obejrzyj taśmę — czy nie jest zerwana. Jeśli jest cała, przewiń rolkę odbiorczą o kilka centymetrów do lekkiego napięcia, włóż kasetę do oporu i zamknij pokrywę. Dalej 5001?'],
     ['dalej blad', 'Skoro taśma jest nowa, kaseta osadzona, a taśma napięta, przy błędzie 5001 najbardziej prawdopodobny jest problem z odczytem kasety albo czujnikiem w drukarce. Proponuję wysłać drukarkę do serwisu. Orientacyjnie naprawa mechanizmu w ZC300 to rząd 350–850 zł netto. To tylko wstępne, orientacyjne widełki — wiążącą wycenę podamy dopiero po diagnozie urządzenia w serwisie i może się ona różnić od tej kwoty. Kurier odbierze urządzenie z podanego adresu. Diagnostyka trwa 24–48 h i jest bezpłatna przy akceptacji naprawy, a przy rezygnacji koszt wynosi 99 zł netto.'],
+  ]},
+
+  // --- fałszywy alarm z 9.10.2026 (rozmowa odtworzona, bez wypowiedzi klienta) ---
+
+  // Podświetlenie gaśnie przy ok. 30% baterii i wraca dopiero po ładowaniu. Czat doszedł do zużytej
+  // baterii i kazał ją wymienić, zgodnie z regułą „bateria lub ładowanie: inna bateria”. O gwarancji
+  // i o kosztach nie padło ani słowo, a oceniający zgłaszał „gwarancja” za sugerowanie bezpłatnej naprawy.
+  { nazwa: 'TC25: zużyta bateria, wymiana bez słowa o gwarancji', oczekiwany: null, tury: [
+    ['tc25 przy okolo 30% baterii gasnie ekran, ale terminal dalej chodzi', 'To wygląda na wyłączanie podświetlenia ekranu przy niskim poziomie baterii — skoro pod światło obraz widać, wyświetlacz i system dalej działają. Wejdź w Ustawienia → Bateria → Oszczędzanie baterii i wyłącz automatyczne włączanie oszczędzania przy niskim poziomie baterii. Potem ustaw jasność ręcznie na stałą wartość. Zejdź z baterią poniżej 30% i sprawdź, czy ekran dalej gaśnie. Pomogło?'],
+    ['moze to bateria do wymiany?', 'Tak, może być potrzebna wymiana baterii — szczególnie jeśli przy ok. 30% napięcie siada i terminal ogranicza podświetlenie. To typowy objaw zużytego akumulatora. Sprawdź w terminalu: Ustawienia → Bateria i poszukaj informacji o kondycji baterii. Jaki status baterii pokazuje?'],
+    ['nie ma tam kondycji baterii', 'W TC25 starsze wersje Androida często nie pokazują kondycji baterii wprost, więc zróbmy test objawowy. Gdy ekran zgaśnie przy ok. 30%, nie restartuj terminala — podłącz go od razu do ładowarki albo stacji i zostaw na 1–2 minuty. Podświetlenie wraca po podłączeniu zasilania?'],
+    ['wraca, ale dopiero po dluzszym ladowaniu', 'Ten wynik praktycznie potwierdza, że bateria jest zużyta. Gdy napięcie spada przy ok. 30%, terminal jeszcze działa, ale podświetlenie nie dostaje stabilnego zasilania. Najpierw wymień baterię na sprawną, oryginalną i zrób test zejścia poniżej 30%. Jeśli na nowej baterii objaw zniknie, terminal jest sprawny. Jeśli będzie tak samo, podejrzany będzie układ zasilania albo podświetlenia i wtedy warto wysłać terminal do diagnostyki.\n\nW sprawach zakupu urządzeń, etykiet, akcesoriów i materiałów eksploatacyjnych zapraszam do sklepu TAKMA — autoryzowanego partnera Zebra: **[takma.com.pl](https://www.takma.com.pl)** lub telefonicznie: +48 601 619 898.'],
   ]},
 
   // Prawdziwa wpadka z 5.10.2026, którą ma łapać czujka po poprawce promptu czatu z 9.10.2026:
