@@ -50,7 +50,7 @@ interface DefinicjaAlertu {
  */
 export const ALERTY: Record<TypAlertu, DefinicjaAlertu> = {
   bledne_dane: {
-    opis: 'Podał nieprawdziwe dane o urządzeniu: parametr, ścieżkę w menu, wersję sterownika albo oprogramowania. Zalecenie sterownika ZDesigner v10 dla drukarki sprzed Link-OS (GK420d, GK420t, GC420d, GC420t, GT800, LP2844, TLP2844) jest zawsze błędem — te modele obsługuje wyłącznie v5. UWAGA: nie masz instrukcji serwisowych, więc NIE oceniaj z własnej pamięci, jak zbudowane jest urządzenie ani ile trwa dana operacja. Zgłoś ten typ tylko wtedy, gdy błąd wynika wprost z reguł podanych Ci wyżej albo gdy sam asystent zaprzecza sobie w tej samej rozmowie. Domysł typu „chyba ten podzespół jest osobny" albo „ten czas wydaje mi się zbyt optymistyczny" to NIE jest podstawa do alertu',
+    opis: 'Podał nieprawdziwe dane o urządzeniu: parametr, ścieżkę w menu, wersję sterownika albo oprogramowania. Zalecenie sterownika ZDesigner v10 dla drukarki sprzed Link-OS (GK420d, GK420t, GC420d, GC420t, GT800, LP2844, TLP2844) jest zawsze błędem — te modele obsługuje wyłącznie v5. Tak samo zawsze błędem jest przy drukarce w trybie chronionym (EU RED) kazać włączać port lub usługi sieciowe komendą setvar, obiecywać monit o hasło w Zebra Setup Utilities albo twierdzić, że wersja ZSU klienta jest za stara. UWAGA: nie masz instrukcji serwisowych, więc NIE oceniaj z własnej pamięci, jak zbudowane jest urządzenie ani ile trwa dana operacja. Zgłoś ten typ tylko wtedy, gdy błąd wynika wprost z reguł podanych Ci wyżej albo gdy sam asystent zaprzecza sobie w tej samej rozmowie. Domysł typu „chyba ten podzespół jest osobny" albo „ten czas wydaje mi się zbyt optymistyczny" to NIE jest podstawa do alertu',
     prog: 0.9,
     waga: 'krytyczny',
   },
@@ -158,7 +158,11 @@ Zasady, które obowiązują asystenta:
   wtedy, gdy klient naprawdę pisze o czymś innym niż sprzęt, usterka, wysyłka do serwisu czy zakup urządzenia.
 - Asystent ma nie zalecać resetu fabrycznego drukarki, która nie odpowiada po sieci, i ma uprzedzić, że przy
   włączonym trybie chronionym konfiguracja wymaga hasła administratora. Jedno i drugie jest zgodne z zasadami
-  i NIE jest problemem.
+  i NIE jest problemem. Zgodne z zasadami jest też nazwanie trybu „secure by default" (EU RED), gdy klient
+  potwierdził, że ping przechodzi, a port 9100 nie odpowiada, oraz skierowanie do aplikacji Nucleus Connector.
+- Drukarki EU RED: przy włączonym trybie chronionym komenda setvar nie włącza portu ani usług sieciowych,
+  a Zebra Setup Utilities nie pyta o hasło. Błędem jest kazać włączać port lub usługi komendą setvar,
+  obiecywać monit o hasło w ZSU albo twierdzić, że wersja ZSU klienta jest za stara.
 
 CZEGO NIE ZGŁASZAĆ — to są twarde filtry, zastosuj je do KAŻDEGO problemu, zanim trafi do wyniku:
 
@@ -166,7 +170,7 @@ CZEGO NIE ZGŁASZAĆ — to są twarde filtry, zastosuj je do KAŻDEGO problemu,
    Twierdzenia o tym, który podzespół jest wbudowany w który, co zawiera kaseta, wkład albo moduł, jak
    przebiega procedura, ile trwa operacja i jakie wartości są typowe — SĄ POZA TWOJĄ OCENĄ. Nawet jeśli
    masz silne przekonanie, że asystent się myli, nie zgłaszaj tego. Jedyne fakty techniczne, które wolno
-   Ci rozstrzygać, to wersje sterownika ZDesigner wypisane wyżej.
+   Ci rozstrzygać, to wersje sterownika ZDesigner i zasady o drukarkach EU RED wypisane wyżej.
    Przykłady, których NIE WOLNO zgłaszać: „ta rolka nie jest częścią kasety", „ten czas odpowiedzi jest
    zbyt optymistyczny", „ta komenda może nie działać na każdym firmware", „ten parametr zwraca co innego".
 2. NIE ZGŁASZASZ BRAKU ZDANIA, KTÓRE W ODPOWIEDZI JEST. Zanim napiszesz, że asystent czegoś nie dodał,
@@ -236,6 +240,132 @@ export function podajeKwoteZaNaprawe(tekstAsystenta: string): boolean {
   return false
 }
 
+/**
+ * Czy zarzut dotyczy czegoś, o czym asystent w ogóle pisał.
+ *
+ * Nie da się podać złego sterownika, nie wspominając o sterowniku, ani źle opisać gwarancji,
+ * nie pisząc o gwarancji. Oceniający mimo to przypisywał takie zarzuty rozmowom, w których
+ * temat nie padł (22.09.2026: „powinien wskazać ZDesigner v5" przy uszkodzonym zasilaczu,
+ * „modele niezgodne z ZDesigner v10" przy rozmowie o programie do legitymacji, „sugeruje brak
+ * gwarancji" w rozmowie bez słowa o gwarancji). Reguła o sterownikach stoi w prompcie, więc
+ * model dopasowuje ją na siłę — sprawdzamy to w kodzie, jak kwotę za naprawę.
+ */
+const RE_ZDESIGNER_W_ZARZUCIE = /zdesigner|sterownik\w* v ?(?:5|10)\b/i
+const RE_STEROWNIK_U_ASYSTENTA = /zdesigner|\bv ?(?:5|10)\b/i
+
+// Czas diagnostyki 24–48 h to zasada serwisu, którą prompt czatu każe podawać przy każdej
+// propozycji wysyłki. Oceniający mimo wyjątku w opisie typu brał go za „obietnicę" (23.09.2026,
+// pętla restartu terminala: ocena 2/5, więc próg 0,6 i mail o zdaniu zgodnym z regulaminem).
+const RE_CZAS_DIAGNOSTYKI = /diagnost\w*[^.]{0,40}?24\s*[-–]\s*48\s*h/i
+const RE_PRAWDZIWA_OBIETNICA = /technik|zastępcz|zwrot|termin|jutro|dzisiaj|gwarantuj/i
+
+// Zarzut „zalecił reset fabryczny" wymaga, żeby asystent o resecie fabrycznym w ogóle pisał.
+// 7.10.2026 oceniający nazwał tak wyjęcie baterii w terminalu, który się nie włącza.
+const RE_RESET_FABRYCZNY = /reset\S*\s+(?:do\s+)?(?:ustawie\S*\s+)?fabryczn|factory\s+(?:reset|default)|ustawie\S*\s+fabryczn/i
+
+export function zarzutMaPokrycie(typ: string, dlaczego: string, tekstAsystenta: string): boolean {
+  const tekst = tekstAsystenta || ''
+  if (RE_ZDESIGNER_W_ZARZUCIE.test(dlaczego || '') && !RE_STEROWNIK_U_ASYSTENTA.test(tekst)) return false
+  if (typ === 'gwarancja' && !/gwaranc/i.test(tekst)) return false
+  if (typ === 'obietnica' && RE_CZAS_DIAGNOSTYKI.test(dlaczego || '') && !RE_PRAWDZIWA_OBIETNICA.test(dlaczego || '')) return false
+  if (RE_RESET_FABRYCZNY.test(dlaczego || '') && !RE_RESET_FABRYCZNY.test(tekst)) return false
+  return true
+}
+
+/**
+ * Oceniający potrafi zwrócić typ przetłumaczony na angielski („cost_transport" zamiast
+ * „koszt_transportu", 23.09.2026). Filtr po liście typów po cichu gubił wtedy prawdziwą wpadkę,
+ * a test „darmowy kurier" przestawał przechodzić. Znane warianty sprowadzamy do nazwy z listy.
+ */
+const ALIASY_TYPOW: Record<string, TypAlertu> = {
+  cost_transport: 'koszt_transportu',
+  transport_cost: 'koszt_transportu',
+  shipping_cost: 'koszt_transportu',
+  warranty: 'gwarancja',
+  promise: 'obietnica',
+  wrong_data: 'bledne_dane',
+  premature_quote: 'wycena_przedwczesnie',
+}
+
+export function normalizujTyp(typ: unknown): string {
+  const t = String(typ || '').trim().toLowerCase()
+  return ALIASY_TYPOW[t] || t
+}
+
+const LITERY = 'a-ząćęłńóśźż'
+
+/**
+ * Czy zarzut „bledne_dane" dotyczy faktów, które oceniający może rozstrzygnąć.
+ *
+ * Oceniający nie ma instrukcji, a mimo opisu typu i filtra w prompcie zgłaszał błędne dane
+ * z własnej pamięci (3–8.10.2026: sześć alertów na osiem, wszystkie fałszywe). „ZT231 nie ma
+ * opcji Gap/Notch" i „ZC300 nie obsługuje YMCKOK" — obie rzeczy stoją w instrukcjach tych
+ * drukarek — a inne zarzuty miały uzasadnienie „nie ma tego w instrukcji". Pole z podstawą
+ * zarzutu w odpowiedzi modelu nie pomogło: model wpisywał „zasada" także przy domysłach.
+ * Dlatego kod przepuszcza błędne dane tylko w trzech sytuacjach, które widać w tekście:
+ * zarzut o sterownik ZDesigner (czy asystent o nim pisał, sprawdza zarzutMaPokrycie),
+ * błędna procedura dla drukarek EU RED w odpowiedziach asystenta oraz zarzut oparty na tym,
+ * co padło wcześniej w tej samej rozmowie.
+ */
+const RE_TEMAT_STEROWNIKA = /zdesigner|sterownik\S*\s+v\s?(?:5|10)\b|wersj\S*\s+sterownik/i
+const RE_TEMAT_EU_RED = /setvar|zsu|setup utilities|hasł|wersj|chronion|protected/i
+// Kroki, których prompt czatu zakazuje przy trybie chronionym (sekcja o EU RED od 9.10.2026).
+const RE_BLEDNA_PROCEDURA_EU_RED = [
+  /setvar\s+"(?:ip|internal_wired|wlan)\./i,
+  /(?:zsu|setup utilities)[\s\S]{0,160}?(?:poprosi|zapyta|prośb|monit)[^.]{0,40}hasł/i,
+  /(?:zsu|setup utilities)[^.]{0,80}(?:star(?:[aąyeę]|sz)|przestarzał|nieaktualn)|najnowsz\S*\s+wersj\S*\s+(?:zsu|zebra setup)/i,
+]
+const RE_ODWOLANIE_DO_ROZMOWY =
+  /sprzeczn|wcześniej\S*[^.]{0,40}(?:napisał|podał|twierdził|stwierdził)|klient\S*[^.]{0,40}(?:nie (?:podał|napisał|potwierdził)|napisał|podał|odpowiedział)/i
+
+// Temat sterownika i odwołanie do rozmowy bierzemy z uzasadnienia oceniającego, nie z cytatu:
+// zdanie asystenta „sprawdź w sterowniku" przepuściłoby każdy zarzut z tej samej odpowiedzi.
+export function zarzutMaPodstawe(typ: string, dlaczego: string, cytat: string, tekstAsystenta: string): boolean {
+  if (typ !== 'bledne_dane') return true
+  const uzasadnienie = dlaczego || ''
+  if (RE_TEMAT_STEROWNIKA.test(uzasadnienie) || RE_ODWOLANIE_DO_ROZMOWY.test(uzasadnienie)) return true
+  const blednaProcedura = RE_BLEDNA_PROCEDURA_EU_RED.some((re) => re.test(tekstAsystenta || ''))
+  return blednaProcedura && RE_TEMAT_EU_RED.test(`${uzasadnienie} ${cytat || ''}`)
+}
+
+/**
+ * Czy wycena przyszła zgodnie z zasadą czatu: po co najmniej dwóch turach z darmowym krokiem
+ * i ze zdaniem o wiążącej wycenie po diagnozie w każdej turze, która podaje kwotę.
+ *
+ * Prompt czatu każe po dwóch nieudanych krokach (najwyżej trzech) zaproponować serwis
+ * z widełkami z cennika. Oceniający zgłaszał w takich rozmowach „wycena_przedwczesnie"
+ * z pewnością 1,0 (7 i 8.10.2026: drukarka kart z błędem taśmy, GK420d z czujnikiem pokrywy):
+ * „nie wyczerpał darmowych kroków" po trzech krokach albo „nie dodał zdania o wiążącej
+ * wycenie", choć zdanie stało w odpowiedzi. Oba warunki typu da się sprawdzić w tekście,
+ * więc sprawdzamy je w kodzie, tak jak samą obecność kwoty.
+ */
+const MIN_KROKOW_PRZED_WYCENA = 2
+// Polecenie czynności przy urządzeniu albo w programie, także w formie „sprawdźmy", „zróbmy".
+// Bez „podaj", „przepisz" i „prześlij": prośba o model albo zdjęcie naklejki nie jest krokiem.
+const RE_POLECENIE = new RegExp(
+  `(?<![${LITERY}])(?:sprawdź|wyjmij|włóż|wsuń|otwórz|zamknij|naciśnij|przytrzymaj|wyłącz|włącz|podłącz|odłącz|podepnij|` +
+  `przetrzyj|wyczyść|załóż|przewiń|obróć|przesuń|uruchom|zrestartuj|wejdź|kliknij|wybierz|ustaw|zmień|wklej|wpisz|` +
+  `wydrukuj|zeskanuj|zrób|odczekaj|dociśnij|wymień|spróbuj|użyj|puść|zainstaluj|pobierz|zaznacz|przełącz|obejrzyj|` +
+  `zdejmij|połącz|wykonaj)(?:my)?(?![${LITERY}])`, 'i')
+const RE_PYTANIE_O_MODEL = /model|naklejk|S\/N|numer\S* seryjn|tabliczk|zdjęci/i
+const RE_ZASTRZEZENIE_WYCENY = new RegExp(
+  `(?:wiążąc|ostateczn)[${LITERY}]*\\s+wycen|wycen[${LITERY}]*[^.]{0,60}po\\s+diagnoz`, 'i')
+
+function maKrok(odpowiedz: string): boolean {
+  return (odpowiedz || '')
+    .split(/(?<=[.!?:])\s+|\n+/)
+    .some((zdanie) => RE_POLECENIE.test(zdanie) && !RE_PYTANIE_O_MODEL.test(zdanie))
+}
+
+export function wycenaZgodnaZZasadami(odpowiedzi: string[]): boolean {
+  const zKwota = odpowiedzi.map((o) => podajeKwoteZaNaprawe(o))
+  const pierwsza = zKwota.indexOf(true)
+  if (pierwsza < 0) return true
+  const kroki = odpowiedzi.slice(0, pierwsza).filter(maKrok).length
+  const zastrzezenie = odpowiedzi.every((o, i) => !zKwota[i] || RE_ZASTRZEZENIE_WYCENY.test(o))
+  return kroki >= MIN_KROKOW_PRZED_WYCENA && zastrzezenie
+}
+
 export function zbudujTranskrypt(tury: Tura[]): string {
   return tury
     .map((t, i) => {
@@ -265,11 +395,19 @@ export async function ocenRozmowe(tury: Tura[]): Promise<OcenaRozmowy | null> {
     const kategoria = KATEGORIE.includes(parsed.kategoria) ? parsed.kategoria : 'other'
     const ocena = Number.isFinite(parsed.ocena) ? Math.min(5, Math.max(1, Math.round(parsed.ocena))) : 3
     // Bez kwoty za naprawę w całej rozmowie typ „wycena_przedwczesnie" nie ma o czym mówić.
-    const bylaKwota = podajeKwoteZaNaprawe(tury.map((t) => t.ai_response || '').join('\n'))
+    const odpowiedzi = tury.map((t) => t.ai_response || '')
+    const tekstAsystenta = odpowiedzi.join('\n')
+    const bylaKwota = podajeKwoteZaNaprawe(tekstAsystenta)
+    // Kwota po dwóch krokach i ze zdaniem o wiążącej wycenie to dokładnie to, czego wymaga prompt czatu.
+    const wycenaPoZasadach = wycenaZgodnaZZasadami(odpowiedzi)
 
     const problemy: ZnalezionyProblem[] = (Array.isArray(parsed.problemy) ? parsed.problemy : [])
-      .filter((p: any) => p && typeof p.typ === 'string' && (p.typ as TypAlertu) in ALERTY)
-      .filter((p: any) => p.typ !== 'wycena_przedwczesnie' || bylaKwota)
+      .filter((p: any) => p && typeof p.typ === 'string')
+      .map((p: any) => ({ ...p, typ: normalizujTyp(p.typ) }))
+      .filter((p: any) => (p.typ as TypAlertu) in ALERTY)
+      .filter((p: any) => p.typ !== 'wycena_przedwczesnie' || (bylaKwota && !wycenaPoZasadach))
+      .filter((p: any) => zarzutMaPokrycie(p.typ, `${p.dlaczego || ''} ${p.cytat || ''}`, tekstAsystenta))
+      .filter((p: any) => zarzutMaPodstawe(p.typ, String(p.dlaczego || ''), String(p.cytat || ''), tekstAsystenta))
       .map((p: any) => ({
         typ: p.typ as TypAlertu,
         waga: Math.min(1, Math.max(0, Number(p.waga) || 0)),
