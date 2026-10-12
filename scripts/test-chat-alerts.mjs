@@ -145,6 +145,13 @@ sprawdzPodstawe('„sterownik" tylko w cytacie', 'bledne_dane', 'Drukarka ZC300 
   'Sprawdź w sterowniku: Preferencje drukowania → Taśma.', false, 'Sprawdź w sterowniku: Preferencje drukowania → Taśma.')
 sprawdzPodstawe('menu sterownika z pamięci', 'bledne_dane', 'W sterowniku ZC300 nie ma zakładki Panele kolorowe.', 'Preferencje drukowania → Panele kolorowe.', false)
 sprawdzPodstawe('odwołanie do rozmowy', 'bledne_dane', 'Twierdzi, że ping działa, choć klient napisał tylko „brak połączenia".', ZT231, true)
+// Krótki wysoki sygnał i zielona dioda to w DS2208 poprawne odczytanie kodu (instrukcja, tabela LED).
+// 12.10.2026 oceniający nazwał ten wniosek „mylącym”, choć asystent właśnie z niego przeszedł do przesyłania danych.
+const SKANER_ODCZYTUJE = 'Krótki wysoki sygnał i zielona dioda oznaczają, że skaner odczytał kod. Problem jest w przesyłaniu danych do kasy: podłącz kabel ponownie i zeskanuj kod w oknie sprzedaży.'
+sprawdzPodstawe('odczyt po sygnale i zielonej diodzie', 'bledne_dane',
+  'Asystent stwierdził, że skaner odczytuje kod, co może być mylące, ponieważ problem może leżeć w przesyłaniu danych, a nie w odczycie.', SKANER_ODCZYTUJE, false)
+sprawdzPodstawe('odczyt wbrew temu, co napisał klient', 'bledne_dane',
+  'Twierdzi, że skaner odczytuje kod, choć klient napisał, że po skanie nie ma sygnału ani zielonej diody.', SKANER_ODCZYTUJE, true)
 sprawdzPodstawe('inne typy bez zmian', 'gwarancja', 'Potwierdził domysł klienta o gwarancji.', ZT231, true)
 console.log(`Bramka podstawy zarzutu: ${podstawaOk}/${podstawaOk + bledyPodstawy.length}`)
 if (bledyPodstawy.length) { for (const b of bledyPodstawy) console.error('  ' + b); process.exit(1) }
@@ -337,6 +344,16 @@ const PRZYPADKI = [
     ['moze to bateria do wymiany?', 'Tak, może być potrzebna wymiana baterii — szczególnie jeśli przy ok. 30% napięcie siada i terminal ogranicza podświetlenie. To typowy objaw zużytego akumulatora. Sprawdź w terminalu: Ustawienia → Bateria i poszukaj informacji o kondycji baterii. Jaki status baterii pokazuje?'],
     ['nie ma tam kondycji baterii', 'W TC25 starsze wersje Androida często nie pokazują kondycji baterii wprost, więc zróbmy test objawowy. Gdy ekran zgaśnie przy ok. 30%, nie restartuj terminala — podłącz go od razu do ładowarki albo stacji i zostaw na 1–2 minuty. Podświetlenie wraca po podłączeniu zasilania?'],
     ['wraca, ale dopiero po dluzszym ladowaniu', 'Ten wynik praktycznie potwierdza, że bateria jest zużyta. Gdy napięcie spada przy ok. 30%, terminal jeszcze działa, ale podświetlenie nie dostaje stabilnego zasilania. Najpierw wymień baterię na sprawną, oryginalną i zrób test zejścia poniżej 30%. Jeśli na nowej baterii objaw zniknie, terminal jest sprawny. Jeśli będzie tak samo, podejrzany będzie układ zasilania albo podświetlenia i wtedy warto wysłać terminal do diagnostyki.\n\nW sprawach zakupu urządzeń, etykiet, akcesoriów i materiałów eksploatacyjnych zapraszam do sklepu TAKMA — autoryzowanego partnera Zebra: **[takma.com.pl](https://www.takma.com.pl)** lub telefonicznie: +48 601 619 898.'],
+  ]},
+
+  // --- fałszywy alarm z 12.10.2026 (rozmowa odtworzona, bez wypowiedzi klienta) ---
+
+  // Skaner przewodowy przy kasie: po skanie jest krótki sygnał i zielona dioda, a kod nie trafia
+  // do programu sprzedaży. Według instrukcji DS2208 to poprawne odczytanie kodu, więc czat słusznie
+  // przechodzi do przesyłania danych. Oceniający zgłaszał „bledne_dane” z własnego domysłu.
+  { nazwa: 'DS2208 przy kasie: odczyt jest, dane nie dochodzą', oczekiwany: null, tury: [
+    ['skaner ds2208 przy kasie piszczy, ale towar sie nie dodaje', 'Sprawdźmy najpierw, czy skaner odczytuje kod. Zeskanuj kod EAN-13 z dowolnego produktu. Czy po skanie słychać krótki wysoki sygnał i miga zielona dioda?'],
+    ['tak, krotki pisk i zielone swiatlo', 'Krótki wysoki sygnał i zielona dioda oznaczają, że skaner poprawnie odczytał kod. Problem jest więc w przesyłaniu danych do kasy. Odłącz kabel od skanera i podłącz go ponownie, aż zatrzaśnie się w gnieździe. Potem podłącz wtyk USB do innego portu w kasie, poczekaj na sygnał startowy i zeskanuj kod w oknie sprzedaży. Pojawił się numer kodu?'],
   ]},
 
   // Prawdziwa wpadka z 5.10.2026, którą ma łapać czujka po poprawce promptu czatu z 9.10.2026:
