@@ -140,6 +140,8 @@ Zasady, które obowiązują asystenta:
 - Gwarancja producenta: 12 miesięcy na urządzenie, 6–12 miesięcy na głowicę zależnie od modelu i przy
   oryginalnych materiałach, 12 miesięcy na baterię. O tym, czy naprawa jest gwarancyjna, decyduje serwis
   po oględzinach. Asystentowi nie wolno potwierdzać domysłu klienta ani obiecywać bezpłatnej naprawy.
+- Gwarancja serwisu: na wykonaną naprawę 12 miesięcy, na usługę i wymienione części (regulamin, §7).
+  To osobna gwarancja, nie producenta. Zdanie o niej jest prawdziwe i dozwolone.
 - O kosztach transportu asystent nie pisze nic. Jedyne dozwolone zdanie: kurier odbierze urządzenie
   z podanego adresu. Opłata 99 zł netto za diagnostykę przy rezygnacji z naprawy jest prawdziwa i dozwolona.
 - Zanim padnie cena naprawy, asystent ma wyczerpać darmowe kroki, które klient wykona przy urządzeniu.
@@ -263,10 +265,16 @@ const RE_PRAWDZIWA_OBIETNICA = /technik|zastępcz|zwrot|termin|jutro|dzisiaj|gwa
 // 7.10.2026 oceniający nazwał tak wyjęcie baterii w terminalu, który się nie włącza.
 const RE_RESET_FABRYCZNY = /reset\S*\s+(?:do\s+)?(?:ustawie\S*\s+)?fabryczn|factory\s+(?:reset|default)|ustawie\S*\s+fabryczn/i
 
+// 12 miesięcy gwarancji na naszą naprawę to regulamin serwisu (§7), a prompt czatu każe to zdanie
+// podawać przy propozycji wysyłki. Oceniający brał je za gwarancję producenta „bez pokrycia"
+// (13.10.2026, pęknięty ekran terminala). Zarzut o gwarancję musi mieć oparcie w czymś innym.
+const RE_GWARANCJA_NA_NAPRAWE =
+  /12[\s-]*miesi[eę]c\S*\s+gwarancj\S*\s+na\s+(?:wykonan\S*\s+)?(?:usług|napraw)\S*(?:\s+i\s+wymienion\S*\s+częś\S*)?/gi
+
 export function zarzutMaPokrycie(typ: string, dlaczego: string, tekstAsystenta: string): boolean {
   const tekst = tekstAsystenta || ''
   if (RE_ZDESIGNER_W_ZARZUCIE.test(dlaczego || '') && !RE_STEROWNIK_U_ASYSTENTA.test(tekst)) return false
-  if (typ === 'gwarancja' && !/gwaranc/i.test(tekst)) return false
+  if (typ === 'gwarancja' && !/gwaranc/i.test(tekst.replace(RE_GWARANCJA_NA_NAPRAWE, ''))) return false
   if (typ === 'obietnica' && RE_CZAS_DIAGNOSTYKI.test(dlaczego || '') && !RE_PRAWDZIWA_OBIETNICA.test(dlaczego || '')) return false
   if (RE_RESET_FABRYCZNY.test(dlaczego || '') && !RE_RESET_FABRYCZNY.test(tekst)) return false
   return true
@@ -338,8 +346,20 @@ export function zarzutMaPodstawe(typ: string, dlaczego: string, cytat: string, t
  * „nie wyczerpał darmowych kroków" po trzech krokach albo „nie dodał zdania o wiążącej
  * wycenie", choć zdanie stało w odpowiedzi. Oba warunki typu da się sprawdzić w tekście,
  * więc sprawdzamy je w kodzie, tak jak samą obecność kwoty.
+ *
+ * Gdy klient przed pierwszą kwotą opisał uszkodzenie widoczne gołym okiem — pęknięty ekran,
+ * zalanie, wyrwane gniazdo, urwany przycisk — kroki nie są wymagane: zasady czatu i opis typu
+ * kierują wtedy prosto do serwisu. Oceniający mimo tego wyjątku zgłaszał „wycena_przedwczesnie"
+ * z pewnością 1,0 (13.10.2026, pęknięty ekran terminala MC3300). Zdanie o wiążącej wycenie
+ * obowiązuje także wtedy.
  */
 const MIN_KROKOW_PRZED_WYCENA = 2
+// Rdzenie słów, także bez polskich znaków i z literówkami klienta („pęknienty", „zalal").
+// Zaprzeczenie tuż przed słowem („nie jest pęknięty") nie zwalnia z kroków.
+const RE_USZKODZENIE_EWIDENTNE = new RegExp(
+  `(?<!(?<![${LITERY}])nie\\s+(?:(?:jest|s[aą]|by[łl][aoy]?)\\s+)?)(?<![${LITERY}])(?:` +
+  `(?:po|s)?p[eę]k(?:n|[łl]|an)|(?:roz|z)bit|st[łl]u[ck]|zala[nłl]|(?:wy|u|ode)rwa[nłl]|` +
+  `(?:z|po|u|od)[łl]ama[nłl]|zgni(?:ec|ót|ot)|rozchwian)`, 'i')
 // Polecenie czynności przy urządzeniu albo w programie, także w formie „sprawdźmy", „zróbmy".
 // Bez „podaj", „przepisz" i „prześlij": prośba o model albo zdjęcie naklejki nie jest krokiem.
 const RE_POLECENIE = new RegExp(
@@ -357,13 +377,14 @@ function maKrok(odpowiedz: string): boolean {
     .some((zdanie) => RE_POLECENIE.test(zdanie) && !RE_PYTANIE_O_MODEL.test(zdanie))
 }
 
-export function wycenaZgodnaZZasadami(odpowiedzi: string[]): boolean {
+export function wycenaZgodnaZZasadami(odpowiedzi: string[], wiadomosciKlienta: string[] = []): boolean {
   const zKwota = odpowiedzi.map((o) => podajeKwoteZaNaprawe(o))
   const pierwsza = zKwota.indexOf(true)
   if (pierwsza < 0) return true
   const kroki = odpowiedzi.slice(0, pierwsza).filter(maKrok).length
   const zastrzezenie = odpowiedzi.every((o, i) => !zKwota[i] || RE_ZASTRZEZENIE_WYCENY.test(o))
-  return kroki >= MIN_KROKOW_PRZED_WYCENA && zastrzezenie
+  const uszkodzenieEwidentne = wiadomosciKlienta.slice(0, pierwsza + 1).some((w) => RE_USZKODZENIE_EWIDENTNE.test(w || ''))
+  return (uszkodzenieEwidentne || kroki >= MIN_KROKOW_PRZED_WYCENA) && zastrzezenie
 }
 
 export function zbudujTranskrypt(tury: Tura[]): string {
@@ -398,8 +419,9 @@ export async function ocenRozmowe(tury: Tura[]): Promise<OcenaRozmowy | null> {
     const odpowiedzi = tury.map((t) => t.ai_response || '')
     const tekstAsystenta = odpowiedzi.join('\n')
     const bylaKwota = podajeKwoteZaNaprawe(tekstAsystenta)
-    // Kwota po dwóch krokach i ze zdaniem o wiążącej wycenie to dokładnie to, czego wymaga prompt czatu.
-    const wycenaPoZasadach = wycenaZgodnaZZasadami(odpowiedzi)
+    // Kwota po dwóch krokach (albo od razu przy ewidentnym uszkodzeniu) i ze zdaniem o wiążącej
+    // wycenie to dokładnie to, czego wymaga prompt czatu.
+    const wycenaPoZasadach = wycenaZgodnaZZasadami(odpowiedzi, tury.map((t) => t.user_message || ''))
 
     const problemy: ZnalezionyProblem[] = (Array.isArray(parsed.problemy) ? parsed.problemy : [])
       .filter((p: any) => p && typeof p.typ === 'string')

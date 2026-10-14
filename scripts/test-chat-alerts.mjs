@@ -99,6 +99,13 @@ sprawdzPokrycie('bledne_dane', 'Podał zły wymiar karty.', PROGRAM, true)
 // Rada, żeby wymienić zużytą baterię, to nie jest słowo o gwarancji (9.10.2026, terminal TC25)
 const ZUZYTA_BATERIA = 'Ten wynik praktycznie potwierdza, że bateria jest zużyta. Najpierw wymień baterię na sprawną i zrób test zejścia poniżej 30%.'
 sprawdzPokrycie('gwarancja', 'Asystent zasugerował wymianę baterii, co może sugerować bezpłatną naprawę.', ZUZYTA_BATERIA, false)
+// 12 miesięcy gwarancji na naszą naprawę to regulamin serwisu, nie gwarancja producenta (13.10.2026)
+const GWARANCJA_NA_NAPRAWE = 'Kurier odbierze urządzenie z podanego adresu. Po naprawie dajemy 12 miesięcy gwarancji na wykonaną usługę i wymienione części.'
+sprawdzPokrycie('gwarancja', 'Zasugerował gwarancję na wymienione części, a o gwarancji decyduje serwis po oględzinach.', GWARANCJA_NA_NAPRAWE, false)
+sprawdzPokrycie('gwarancja', 'Podał okres bez pokrycia.', 'Udzielamy 12-miesięcznej gwarancji na wykonaną naprawę.', false)
+sprawdzPokrycie('gwarancja', 'Obiecał bezpłatną naprawę w ramach gwarancji.',
+  `${GWARANCJA_NA_NAPRAWE} Wymiana ekranu będzie bezpłatna, bo terminal jest jeszcze na gwarancji.`, true)
+sprawdzPokrycie('gwarancja', 'Zawyżył okres gwarancji na naprawę.', 'Po naprawie dajemy 24 miesiące gwarancji na wykonaną usługę.', true)
 // Czas diagnostyki 24–48 h to zasada serwisu, nie obietnica; przyjazd technika nadal jest
 sprawdzPokrycie('obietnica', 'Asystent obiecał konkretny czas diagnostyki. Diagnostyka trwa zwykle 24–48h', '', false)
 sprawdzPokrycie('obietnica', 'Obiecał termin. Wykonamy diagnostykę 24-48h', '', true)
@@ -159,8 +166,8 @@ if (bledyPodstawy.length) { for (const b of bledyPodstawy) console.error('  ' + 
 // Bramka wyceny: dwa kroki przed kwotą i zdanie o wiążącej wycenie to zasada czatu (7–8.10.2026)
 let wycenaOk = 0
 const bledyWyceny = []
-const sprawdzWycene = (nazwa, odpowiedzi, oczekiwane) => {
-  const wynik = wycenaZgodnaZZasadami(odpowiedzi)
+const sprawdzWycene = (nazwa, odpowiedzi, oczekiwane, wiadomosciKlienta = []) => {
+  const wynik = wycenaZgodnaZZasadami(odpowiedzi, wiadomosciKlienta)
   if (wynik === oczekiwane) wycenaOk++
   else bledyWyceny.push(`wycenaZgodnaZZasadami(${nazwa}) = ${wynik}, oczekiwano ${oczekiwane}`)
 }
@@ -178,6 +185,17 @@ sprawdzWycene('kwota bez zastrzeżenia po dwóch krokach', [KROK_1, KROK_2, WYCE
 sprawdzWycene('druga kwota bez zastrzeżenia', [KROK_1, KROK_2, WYCENA_Z_ZASTRZEZENIEM, WYCENA_BEZ_ZASTRZEZENIA], false)
 sprawdzWycene('kwota w pierwszej odpowiedzi', [WYCENA_Z_ZASTRZEZENIEM], false)
 sprawdzWycene('bez kwoty za naprawę', [KROK_1, 'Przy rezygnacji z naprawy diagnostyka kosztuje 99 zł netto.'], true)
+// Uszkodzenie widoczne gołym okiem zwalnia z kroków, ale nie ze zdania o wiążącej wycenie (13.10.2026)
+const WYCENA_EKRANU = 'Pęknięty ekran wymaga naprawy serwisowej. Orientacyjnie wymiana wyświetlacza to około 800–1200 zł netto. To tylko wstępne, orientacyjne widełki — wiążącą wycenę podamy dopiero po diagnozie urządzenia w serwisie.'
+const EKRAN_BEZ_ZASTRZEZENIA = 'Orientacyjnie wymiana wyświetlacza to około 800–1200 zł netto. Kurier odbierze urządzenie z podanego adresu.'
+sprawdzWycene('pęknięty ekran, od razu kwota ze zdaniem', [WYCENA_EKRANU], true, ['terminal ma pęknięty ekran'])
+sprawdzWycene('literówka i brak polskich znaków', [WYCENA_EKRANU], true, ['peknienty ekran w terminalu'])
+sprawdzWycene('zalanie', [WYCENA_EKRANU], true, ['skaner zalany kawa, nie wlacza sie'])
+sprawdzWycene('wyrwane gniazdo w drugiej wiadomości', [PYTANIE_O_MODEL, WYCENA_EKRANU], true, ['nie laduje sie', 'gniazdo ladowania wyrwane'])
+sprawdzWycene('pęknięty ekran bez zdania o wycenie', [EKRAN_BEZ_ZASTRZEZENIA], false, ['terminal ma pęknięty ekran'])
+sprawdzWycene('zaprzeczenie uszkodzenia', [WYCENA_EKRANU], false, ['ekran nie jest pękniety, tylko nie reaguje na dotyk'])
+sprawdzWycene('uszkodzenie opisane dopiero po kwocie', [WYCENA_EKRANU, KROK_1], false, ['ekran nie reaguje na dotyk', 'aha, jest pekniety'])
+sprawdzWycene('objaw bez uszkodzenia mechanicznego', [WYCENA_EKRANU], false, ['ekran nie reaguje na dotyk'])
 console.log(`Bramka wyceny po krokach: ${wycenaOk}/${wycenaOk + bledyWyceny.length}`)
 if (bledyWyceny.length) { for (const b of bledyWyceny) console.error('  ' + b); process.exit(1) }
 
@@ -196,7 +214,7 @@ async function ocen(tury) {
   // te same filtry co w ocenRozmowe() w lib/chat-alerts.ts
   const odpowiedzi = tury.map((t) => t[1])
   const bylaKwota = podajeKwoteZaNaprawe(odpowiedzi.join('\n'))
-  const wycenaPoZasadach = wycenaZgodnaZZasadami(odpowiedzi)
+  const wycenaPoZasadach = wycenaZgodnaZZasadami(odpowiedzi, tury.map((t) => t[0]))
   const problemy = (p.problemy || [])
     .map((x) => ({ ...x, typ: normalizujTyp(x.typ) }))
     .filter((x) => ALERTY[x.typ])
@@ -354,6 +372,15 @@ const PRZYPADKI = [
   { nazwa: 'DS2208 przy kasie: odczyt jest, dane nie dochodzą', oczekiwany: null, tury: [
     ['skaner ds2208 przy kasie piszczy, ale towar sie nie dodaje', 'Sprawdźmy najpierw, czy skaner odczytuje kod. Zeskanuj kod EAN-13 z dowolnego produktu. Czy po skanie słychać krótki wysoki sygnał i miga zielona dioda?'],
     ['tak, krotki pisk i zielone swiatlo', 'Krótki wysoki sygnał i zielona dioda oznaczają, że skaner poprawnie odczytał kod. Problem jest więc w przesyłaniu danych do kasy. Odłącz kabel od skanera i podłącz go ponownie, aż zatrzaśnie się w gnieździe. Potem podłącz wtyk USB do innego portu w kasie, poczekaj na sygnał startowy i zeskanuj kod w oknie sprzedaży. Pojawił się numer kodu?'],
+  ]},
+
+  // --- fałszywy alarm z 13.10.2026 (rozmowa odtworzona, bez wypowiedzi klienta) ---
+
+  // Pęknięty ekran to uszkodzenie ewidentne, więc widełki z cennika od razu są poprawne, a zdanie
+  // o wiążącej wycenie jest na miejscu. 12 miesięcy gwarancji na naprawę to regulamin serwisu (§7).
+  // Oceniający zgłaszał „wycena_przedwczesnie" z pewnością 1,0 i „gwarancja" za zdanie o naszej naprawie.
+  { nazwa: 'MC3300: pęknięty ekran, widełki od razu', oczekiwany: null, tury: [
+    ['terminal mc3300 spadl i ma pekniety ekran', 'Pęknięty ekran w MC3300 wymaga naprawy serwisowej — tego nie da się bezpiecznie usunąć zdalnie.\n\nOrientacyjnie wymiana wyświetlacza w serii MC33/MC3300 to około **800–1200 zł netto**. To tylko wstępne, orientacyjne widełki — wiążącą wycenę podamy dopiero po diagnozie urządzenia w serwisie i może się ona różnić od tej kwoty.\n\nKurier odbierze urządzenie z podanego adresu. Diagnostyka trwa zwykle 24–48 h i jest bezpłatna przy akceptacji naprawy, a przy rezygnacji koszt wynosi 99 zł netto. Po naprawie dajemy 12 miesięcy gwarancji na wykonaną usługę i wymienione części.\n\nModel i numer seryjny są na naklejce z S/N — wpiszesz je w zgłoszeniu albo dołączysz zdjęcie naklejki. Zgłoszenie założysz przyciskiem „Wyślij do serwisu” pod tą wiadomością. [SERIOUS_ISSUE]'],
   ]},
 
   // Prawdziwa wpadka z 5.10.2026, którą ma łapać czujka po poprawce promptu czatu z 9.10.2026:
