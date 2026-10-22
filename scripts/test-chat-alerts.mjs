@@ -159,6 +159,14 @@ sprawdzPodstawe('odczyt po sygnale i zielonej diodzie', 'bledne_dane',
   'Asystent stwierdził, że skaner odczytuje kod, co może być mylące, ponieważ problem może leżeć w przesyłaniu danych, a nie w odczycie.', SKANER_ODCZYTUJE, false)
 sprawdzPodstawe('odczyt wbrew temu, co napisał klient', 'bledne_dane',
   'Twierdzi, że skaner odczytuje kod, choć klient napisał, że po skanie nie ma sygnału ani zielonej diody.', SKANER_ODCZYTUJE, true)
+// Set Factory Defaults przywraca w DS2208 wszystkie parametry do wartości domyślnych (instrukcja,
+// rozdz. 5, Default Parameters), więc wracają też sufiks, typ interfejsu i włączone symbologie.
+// 22.10.2026 oceniający zgłosił uprzedzenie o tym jako „bledne_dane”, bo „nie ma tego w instrukcji”.
+const RESET_SKANERA = 'Zeskanuj poniższy kod — przywróci ustawienia fabryczne skanera, więc po resecie mogą zniknąć ustawienia typu Enter/Tab, tryb interfejsu i włączone/wyłączone symbologie: [BARCODE:/Set%20Defaults.png]'
+sprawdzPodstawe('skutki resetu fabrycznego skanera', 'bledne_dane',
+  'Asystent nie powinien sugerować, że reset fabryczny może usunąć konkretne ustawienia, ponieważ nie ma tego w instrukcji.', RESET_SKANERA, false)
+sprawdzPodstawe('skutki resetu wbrew temu, co napisał klient', 'bledne_dane',
+  'Twierdzi, że po resecie zniknie sufiks Enter, choć klient napisał, że skaner wysyła kod bez Entera.', RESET_SKANERA, true)
 sprawdzPodstawe('inne typy bez zmian', 'gwarancja', 'Potwierdził domysł klienta o gwarancji.', ZT231, true)
 console.log(`Bramka podstawy zarzutu: ${podstawaOk}/${podstawaOk + bledyPodstawy.length}`)
 if (bledyPodstawy.length) { for (const b of bledyPodstawy) console.error('  ' + b); process.exit(1) }
@@ -251,8 +259,12 @@ const PRZYPADKI = [
     ['terminal TC21 przestal skanowac kody', 'Sprawdźmy najpierw konfigurację. Wejdź w DataWedge → Profile0 i sprawdź, czy zaznaczone są Profile enabled oraz Barcode input enabled.'],
     ['barcode input bylo odznaczone, wlaczylem i dziala', 'Dobrze, że to była konfiguracja, a nie moduł skanujący. Jeśli profil znowu się wyłączy po aktualizacji, napisz — ustawimy go na stałe.'],
   ]},
+  // Od 23.09.2026 (ede1317) samo pytanie o koszt przy objawie, który może wynikać z ustawień, nie
+  // zwalnia z darmowego kroku: czat daje krok i pisze, że koszt podamy, jeśli okaże się potrzebna
+  // naprawa. Wcześniejsza wersja tego przypadku podawała widełki bez kroku, czyli łamała tę regułę,
+  // i 22.10.2026 czujka zgłaszała ją w 2 przebiegach na 3.
   { nazwa: 'uczciwa odmowa wyceny bez diagnozy', oczekiwany: null, tury: [
-    ['ile kosztuje naprawa ZD421 ktora nie drukuje, nie chce diagnozy podaj cene', 'Bez obejrzenia drukarki nie podam jednej kwoty, bo przyczyny są różne. Orientacyjnie: czyszczenie i kalibracja 150–250 zł netto, wymiana głowicy 330–530 zł netto. Wiążącą wycenę podamy po diagnozie w serwisie.'],
+    ['ile kosztuje naprawa ZD421 ktora nie drukuje, nie chce diagnozy podaj cene', 'Bez diagnozy nie podam kwoty, bo „nie drukuje” ma wiele przyczyn, a część z nich da się usunąć bez serwisu. Zacznijmy od jednego darmowego kroku: otwórz pokrywę, sprawdź, czy etykiety przechodzą między prowadnicami i pod czujnikiem, zamknij pokrywę i naciśnij Feed. Koszt podamy, jeśli okaże się potrzebna naprawa. Wysunęła się jedna etykieta?'],
   ]},
 
   // --- fałszywe alarmy z 22.09.2026: czujka zgłosiła rozmowy, w których czat miał rację ---
@@ -381,6 +393,18 @@ const PRZYPADKI = [
   // Oceniający zgłaszał „wycena_przedwczesnie" z pewnością 1,0 i „gwarancja" za zdanie o naszej naprawie.
   { nazwa: 'MC3300: pęknięty ekran, widełki od razu', oczekiwany: null, tury: [
     ['terminal mc3300 spadl i ma pekniety ekran', 'Pęknięty ekran w MC3300 wymaga naprawy serwisowej — tego nie da się bezpiecznie usunąć zdalnie.\n\nOrientacyjnie wymiana wyświetlacza w serii MC33/MC3300 to około **800–1200 zł netto**. To tylko wstępne, orientacyjne widełki — wiążącą wycenę podamy dopiero po diagnozie urządzenia w serwisie i może się ona różnić od tej kwoty.\n\nKurier odbierze urządzenie z podanego adresu. Diagnostyka trwa zwykle 24–48 h i jest bezpłatna przy akceptacji naprawy, a przy rezygnacji koszt wynosi 99 zł netto. Po naprawie dajemy 12 miesięcy gwarancji na wykonaną usługę i wymienione części.\n\nModel i numer seryjny są na naklejce z S/N — wpiszesz je w zgłoszeniu albo dołączysz zdjęcie naklejki. Zgłoszenie założysz przyciskiem „Wyślij do serwisu” pod tą wiadomością. [SERIOUS_ISSUE]'],
+  ]},
+
+  // --- fałszywy alarm z 22.10.2026 (rozmowa odtworzona, bez wypowiedzi klienta) ---
+
+  // Skaner czyta inne kody QR, a jeden kod zawsze daje ten sam krótki tekst, więc kłopot jest w treści
+  // tego kodu. Klient i tak prosi o reset, a czat daje kod i uprzedza, co wróci do wartości domyślnych —
+  // zgodnie z instrukcją DS2208. Oceniający zgłaszał „bledne_dane” 3/3 z pewnością 0,9.
+  { nazwa: 'DS2208: kod resetu na prośbę, z uprzedzeniem o skutkach', oczekiwany: null, tury: [
+    ['ds2208 nie czyta jednego kodu qr', 'Sprawdźmy, czy skaner w ogóle dekoduje ten QR. Otwórz Notatnik i zeskanuj kod. Co się pojawiło?'],
+    ['pojawia sie tylko krotki ciag znakow, za kazdym razem ten sam', 'Skoro tekst pojawia się za każdym razem, skaner ten kod odczytuje. Zeskanuj do Notatnika inny kod QR, z innej etykiety. Też wychodzi ten sam krótki tekst?'],
+    ['nie, inny qr czyta normalnie', 'To oznacza, że skaner działa i czyta QR poprawnie. Problem dotyczy tego jednego kodu: ma zapisany taki tekst albo jest źle wygenerowany. Co powinno się pojawić zamiast tego tekstu?'],
+    ['daj kod do resetu fabrycznego', 'Zeskanuj poniższy kod — przywróci ustawienia fabryczne skanera, więc po resecie mogą zniknąć ustawienia typu Enter/Tab, tryb interfejsu i włączone/wyłączone symbologie:\n\n[BARCODE:/Set%20Defaults.png]\n\nPo resecie sprawdź ponownie QR w Notatniku. Działa poprawnie?'],
   ]},
 
   // Prawdziwa wpadka z 5.10.2026, którą ma łapać czujka po poprawce promptu czatu z 9.10.2026:
