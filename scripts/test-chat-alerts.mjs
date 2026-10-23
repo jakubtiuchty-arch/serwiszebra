@@ -50,7 +50,7 @@ const ts = (await import('typescript')).default
 const kodBramek = ts.transpileModule(
   src.slice(src.indexOf('const RE_KWOTA_ZL'), src.indexOf('export function zbudujTranskrypt')),
   { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } }).outputText
-const { podajeKwoteZaNaprawe, zarzutMaPokrycie, normalizujTyp, zarzutMaPodstawe, wycenaZgodnaZZasadami } =
+const { podajeKwoteZaNaprawe, zarzutMaPokrycie, normalizujTyp, zarzutMaPodstawe, wycenaZgodnaZZasadami, ocenaPoBramce } =
   await import(`data:text/javascript,${encodeURIComponent(kodBramek)}`)
 
 let jednostkowe = 0
@@ -127,8 +127,8 @@ if (bledyPokrycia.length) { for (const b of bledyPokrycia) console.error('  ' + 
 // do tego, co padło w rozmowie (alerty 3–8.10.2026 — sześć zarzutów z własnej pamięci oceniającego)
 let podstawaOk = 0
 const bledyPodstawy = []
-const sprawdzPodstawe = (nazwa, typ, dlaczego, tekst, oczekiwane, cytat = '') => {
-  const wynik = zarzutMaPodstawe(typ, dlaczego, cytat, tekst)
+const sprawdzPodstawe = (nazwa, typ, dlaczego, tekst, oczekiwane, cytat = '', tekstKlienta = '') => {
+  const wynik = zarzutMaPodstawe(typ, dlaczego, cytat, tekst, tekstKlienta)
   if (wynik === oczekiwane) podstawaOk++
   else bledyPodstawy.push(`zarzutMaPodstawe(${nazwa}) = ${wynik}, oczekiwano ${oczekiwane}`)
 }
@@ -142,7 +142,17 @@ sprawdzPodstawe('Gap/Notch z pamięci', 'bledne_dane', 'Drukarka ZT231 nie ma op
 sprawdzPodstawe('YMCKOK z pamięci', 'bledne_dane', 'Drukarka ZC300 nie obsługuje taśmy YMCKOK.', 'Potrzebna jest pełna taśma YMCKO albo YMCKOK.', false)
 sprawdzPodstawe('„nie ma w instrukcji"', 'bledne_dane', 'Nie powinien stwierdzać trybu secure by default, bo nie ma tego w instrukcji.', RED_POPRAWNIE, false)
 sprawdzPodstawe('hasło przy poprawnej procedurze', 'bledne_dane', 'Twierdzi, że tryb chroniony nie ma hasła.', RED_POPRAWNIE, false)
-sprawdzPodstawe('sterownik', 'bledne_dane', 'Zalecił ZDesigner v10 dla GK420d, a ten model obsługuje tylko v5.', 'Pobierz ZDesigner v10.', true)
+sprawdzPodstawe('sterownik', 'bledne_dane', 'Zalecił ZDesigner v10 dla GK420d, a ten model obsługuje tylko v5.', 'Pobierz ZDesigner v10.', true, '', 'mam GK420d i windows 11')
+// Zarzut o sterownik tylko przy v10 w odpowiedzi i modelu obsługiwanym wyłącznie przez v5 w rozmowie.
+// 22.10.2026 oceniający uznał, że ZT230 bez Link-OS wymaga v5, a Zebra obsługuje ZT230 sterownikiem v10.
+sprawdzPodstawe('v10 dla GK420d w odpowiedzi', 'bledne_dane', 'GK420d obsługuje wyłącznie ZDesigner v5, a nie v10.',
+  'Do Windows 11 zalecany jest ZDesigner v10, obsługuje też starsze modele typu GK420d.', true)
+sprawdzPodstawe('v10 dla ZT230', 'bledne_dane', 'ZT230 to model sprzed Link-OS, wymaga ZDesigner v5, a nie v10.',
+  'Usuń sterownik i zainstaluj ZDesigner v10 jako administrator.', false, '', 'ZT230 na USB, zadania stoją w kolejce')
+sprawdzPodstawe('wersja sterownika, której asystent nie podał', 'bledne_dane', 'Asystent powinien wskazać, że dla ZT230 należy używać sterownika ZDesigner v5, a nie v10.',
+  'Usuń drukarkę i sterownik Zebra/ZDesigner, uruchom komputer ponownie i dodaj drukarkę od nowa.', false, '', 'ZT230 nie zwalnia zadań z kolejki')
+sprawdzPodstawe('sprzeczność co do sterownika', 'bledne_dane', 'Wcześniej napisał, że ZD421 wymaga ZDesigner v5, a teraz zaleca v10 — to sprzeczne.',
+  'Zainstaluj ZDesigner v10.', true)
 sprawdzPodstawe('setvar w trybie chronionym', 'bledne_dane', 'Każe włączać port komendą setvar przy trybie chronionym.', RED_SETVAR, true)
 sprawdzPodstawe('obiecany monit o hasło w ZSU', 'bledne_dane', 'Obiecuje, że ZSU poprosi o hasło.', RED_MONIT, true)
 sprawdzPodstawe('„stara wersja ZSU"', 'bledne_dane', 'Twierdzi, że wersja ZSU klienta jest za stara.', RED_STARA_WERSJA, true)
@@ -207,6 +217,20 @@ sprawdzWycene('objaw bez uszkodzenia mechanicznego', [WYCENA_EKRANU], false, ['e
 console.log(`Bramka wyceny po krokach: ${wycenaOk}/${wycenaOk + bledyWyceny.length}`)
 if (bledyWyceny.length) { for (const b of bledyWyceny) console.error('  ' + b); process.exit(1) }
 
+// Ocena alarmowa oparta na zarzucie odrzuconym przez bramkę nie ma podstawy (alert 22.10.2026).
+// Podnosimy ją tuż nad próg 2, a dobrej oceny nie ruszamy.
+let ocenyOk = 0
+const bledyOcen = []
+for (const [ocena, odrzucono, oczekiwane] of [
+  [2, true, 3], [1, true, 3], [3, true, 3], [5, true, 5], [2, false, 2], [1, false, 1],
+]) {
+  const wynik = ocenaPoBramce(ocena, odrzucono)
+  if (wynik === oczekiwane) ocenyOk++
+  else bledyOcen.push(`ocenaPoBramce(${ocena}, ${odrzucono}) = ${wynik}, oczekiwano ${oczekiwane}`)
+}
+console.log(`Ocena po odrzuconym zarzucie: ${ocenyOk}/${ocenyOk + bledyOcen.length}`)
+if (bledyOcen.length) { for (const b of bledyOcen) console.error('  ' + b); process.exit(1) }
+
 const promptSrc = src.match(/const PROMPT = `([\s\S]*?)`\n\nfunction zbudujPrompt/)[1]
 const typy = Object.entries(ALERTY).map(([k, v]) => `- ${k}: ${v.opis}`).join('\n')
 const PROMPT = promptSrc.replace('TYPY', typy)
@@ -219,19 +243,23 @@ async function ocen(tury) {
     messages: [{ role: 'system', content: PROMPT }, { role: 'user', content: transkrypt }],
   })
   const p = JSON.parse(r.choices[0].message.content)
-  // te same filtry co w ocenRozmowe() w lib/chat-alerts.ts
+  // te same filtry i ta sama korekta oceny co w ocenRozmowe() w lib/chat-alerts.ts
   const odpowiedzi = tury.map((t) => t[1])
+  const wiadomosciKlienta = tury.map((t) => t[0])
   const bylaKwota = podajeKwoteZaNaprawe(odpowiedzi.join('\n'))
-  const wycenaPoZasadach = wycenaZgodnaZZasadami(odpowiedzi, tury.map((t) => t[0]))
-  const problemy = (p.problemy || [])
+  const wycenaPoZasadach = wycenaZgodnaZZasadami(odpowiedzi, wiadomosciKlienta)
+  const znane = (p.problemy || [])
     .map((x) => ({ ...x, typ: normalizujTyp(x.typ) }))
     .filter((x) => ALERTY[x.typ])
+  const problemy = znane
     .filter((x) => x.typ !== 'wycena_przedwczesnie' || (bylaKwota && !wycenaPoZasadach))
     .filter((x) => zarzutMaPokrycie(x.typ, `${x.dlaczego || ''} ${x.cytat || ''}`, odpowiedzi.join('\n')))
-    .filter((x) => zarzutMaPodstawe(x.typ, String(x.dlaczego || ''), String(x.cytat || ''), odpowiedzi.join('\n')))
+    .filter((x) => zarzutMaPodstawe(x.typ, String(x.dlaczego || ''), String(x.cytat || ''), odpowiedzi.join('\n'), wiadomosciKlienta.join('\n')))
+  const ocenaModelu = Number.isFinite(p.ocena) ? Math.min(5, Math.max(1, Math.round(p.ocena))) : 3
+  const ocena = ocenaPoBramce(ocenaModelu, problemy.length < znane.length)
   // ta sama reguła co doAlertu() w lib/chat-alerts.ts
-  const prog = (x) => (p.ocena <= 2 ? Math.min(ALERTY[x.typ].prog, 0.6) : ALERTY[x.typ].prog)
-  return { ocena: p.ocena, wszystkie: problemy, alerty: problemy.filter((x) => Number(x.waga) >= prog(x)) }
+  const prog = (x) => (ocena <= 2 ? Math.min(ALERTY[x.typ].prog, 0.6) : ALERTY[x.typ].prog)
+  return { ocena, wszystkie: problemy, alerty: problemy.filter((x) => Number(x.waga) >= prog(x)) }
 }
 
 const PRZYPADKI = [
@@ -414,6 +442,26 @@ const PRZYPADKI = [
     ['zd421 nowa, ping true, tcp false', 'To tryb secure by default. Podłącz drukarkę kablem USB, w Zebra Setup Utilities otwórz okno komunikacji z drukarką i wklej tylko tę jedną linię: ! U1 setvar "ip.tcp.enable" "on". ZSU poprosi o ustawienie hasła administratora. Poszło bez błędu?'],
     ['bez bledu, ale po restarcie getvar ip.tcp.enable dalej off, a hasla nie pytalo. mam zsu 1.1.9.1327', 'Ta wersja ZSU jest stara dla nowych ZD421 z firmware EU RED — stąd brak monitu o hasło. Zainstaluj najnowszą wersję Zebra Setup Utilities, uruchom ją jako administrator i wyślij jeszcze raz: ! U1 setvar "ip.tcp.enable" "on". Przyjęło?'],
   ]},
+
+  // --- fałszywe alarmy z 22.10.2026 (rozmowy odtworzone, bez wypowiedzi klientów) ---
+
+  // Oceniający uznał, że ZT230 jako model bez Link-OS wymaga ZDesigner v5. Zebra wymienia
+  // ZT210, ZT220 i ZT230 na liście drukarek obsługiwanych przez ZDesigner v10 (informacje
+  // o wydaniu 10.6.26), a v5 jest obowiązkowy tylko dla GK, GC, GT800 i LP/TLP 28xx.
+  { nazwa: 'ZDesigner v10 dla ZT230', oczekiwany: null, tury: [
+    ['ZT230 na USB drukuje pierwsza etykiete, a kolejne zadania stoja w kolejce Windows', 'Wejdź we Właściwości drukarki → Porty i odznacz „Włącz obsługę dwukierunkową”. Zastosuj, wyczyść kolejkę i wyślij dwie etykiety testowe. Znikają z kolejki?'],
+    ['nie, dalej stoja', 'Zróbmy czystą instalację. Usuń ZT230 z „Drukarki i skanery”, we Właściwościach serwera wydruku → Sterowniki usuń sterownik ZDesigner i uruchom komputer ponownie. Potem zainstaluj ZDesigner v10 jako administrator — ZT230 jest na liście drukarek obsługiwanych przez v10. Wyślij jedną etykietę testową. Znika z kolejki?'],
+  ]},
+
+  // Darmowe kroki wyczerpane, potem wysyłka do serwisu z regulaminową opłatą 99 zł netto.
+  // Oceniający dawał 2/5 za zarzut „wycena_przedwczesnie", który bramka kwoty odrzuca, i sama
+  // ocena wpisywała rozmowę bez żadnego zarzutu na listę do naprawy.
+  { nazwa: 'wysyłka po darmowych krokach z opłatą 99 zł', oczekiwany: null, tury: [
+    ['ZT230 pokazuje gotowosc, ale nic nie drukuje', 'Sprawdźmy drukarkę bez komputera. Przytrzymaj jednocześnie FEED i CANCEL przez około 2 sekundy — ZT230 powinna wydrukować etykietę konfiguracji. Wydrukowała?'],
+    ['nie', 'Naciśnij raz krótko FEED. Drukarka powinna wysunąć jedną pustą etykietę. Wysuwa?'],
+    ['nie', 'Wyłącz ZT230 przełącznikiem, odczekaj 30 sekund, włącz ją i po powrocie do gotowości naciśnij raz FEED. Etykieta się wysunęła?'],
+    ['nie', 'Drukarka nie drukuje etykiety konfiguracji i po restarcie dalej nie podaje materiału, więc zdalne kroki się skończyły. Proponuję diagnostykę w naszym serwisie. Kurier odbierze urządzenie z podanego adresu. Diagnostyka trwa zwykle 24–48 h i jest bezpłatna przy akceptacji naprawy, a przy rezygnacji kosztuje 99 zł netto. Wiążącą wycenę podamy po diagnozie. Zgłoszenie założysz przyciskiem „Wyślij do serwisu” pod tą wiadomością.'],
+  ]},
 ]
 
 let ok = 0
@@ -423,9 +471,11 @@ for (const p of PRZYPADKI) {
   const typy = alerty.map((a) => a.typ)
   // Liczy się, czy rozmowa w ogóle zapali alert — typ problemu bywa niestabilny,
   // a w mailu i tak jest zdanie „dlaczego", nie sam typ.
-  const trafil = p.oczekiwany ? alerty.length > 0 : alerty.length === 0
+  // Dobra rozmowa nie może też dostać oceny 2 lub niższej: taką sesję scripts/alerty-do-naprawy.mjs
+  // wypisuje do naprawy nawet bez jednego zarzutu (alert 22.10.2026).
+  const trafil = p.oczekiwany ? alerty.length > 0 : alerty.length === 0 && ocena > 2
   if (trafil) ok++
-  else bledy.push(`${p.nazwa}: oczekiwano ${p.oczekiwany ?? 'braku alertów'}, dostałem [${typy.join(', ') || 'brak'}]`)
+  else bledy.push(`${p.nazwa}: oczekiwano ${p.oczekiwany ?? 'braku alertów i oceny powyżej 2'}, dostałem [${typy.join(', ') || 'brak'}], ocena ${ocena}/5`)
   const zapala = (x) => Number(x.waga) >= (ocena <= 2 ? Math.min(ALERTY[x.typ].prog, 0.6) : ALERTY[x.typ].prog)
   const szczegoly = wszystkie.map((x) => `${x.typ}=${x.waga}${zapala(x) ? '*' : ''}`).join(' ')
   console.log(`${trafil ? 'OK  ' : 'BŁĄD'} ${p.nazwa.padEnd(42)} ocena ${ocena}/5  ${szczegoly || '—'}`)

@@ -582,6 +582,18 @@ sprawdz('blog EU RED: Nucleus Connector ze strony zebra.com/setup', /Nucleus Con
 sprawdz('blog PrintSecure: setvar nie zmienia ustawień chronionych',
   /polecenie setvar nie zmienia ustawień chronionych/.test(wpisPrintSecure), true, 'wpis o PrintSecure')
 
+// --- runda 10: sterownik dla serii ZT200 (alert 22.10.2026) ------------------
+// ZDesigner v5 jest obowiązkowy tylko dla GK, GC, GT800 i LP/TLP 28xx. Zdania „v10 nie obsługuje
+// modeli sprzed Link-OS" prowadziły do wniosku, że ZT230 bez Link-OS potrzebuje v5, a Zebra
+// wymienia ZT210, ZT220 i ZT230 wśród drukarek obsługiwanych przez v10.
+for (const [nazwa, wzor] of [
+  ['v10 nie obsługuje modeli sprzed Link-OS', /\*\*ZDesigner v10 NIE obsługuje\*\* modeli sprzed Link-OS/],
+  ['modele sprzed Link-OS obsługuje v5', /modele sprzed Link-OS obsługuje \*\*ZDesigner v5\*\*/],
+]) sprawdz('blog: bez uogólnienia o Link-OS', wzor.test(blog), false, nazwa)
+const listaV10 = blog.slice(blog.indexOf('**ZDesigner v10 obsługuje:**'), blog.indexOf('**ZDesigner v10 NIE obsługuje**'))
+for (const model of ['ZT210', 'ZT220', 'ZT230'])
+  sprawdz('blog: model na liście ZDesigner v10', listaV10.length > 0 && new RegExp(`\\b${model}\\b`).test(listaV10), true, model)
+
 // --- wynik -----------------------------------------------------------------
 console.log(`\nZaliczone: ${zaliczone}/${zaliczone + bledy.length}`)
 if (bledy.length) {

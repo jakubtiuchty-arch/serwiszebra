@@ -50,7 +50,7 @@ interface DefinicjaAlertu {
  */
 export const ALERTY: Record<TypAlertu, DefinicjaAlertu> = {
   bledne_dane: {
-    opis: 'Podał nieprawdziwe dane o urządzeniu: parametr, ścieżkę w menu, wersję sterownika albo oprogramowania. Zalecenie sterownika ZDesigner v10 dla drukarki sprzed Link-OS (GK420d, GK420t, GC420d, GC420t, GT800, LP2844, TLP2844) jest zawsze błędem — te modele obsługuje wyłącznie v5. Tak samo zawsze błędem jest przy drukarce w trybie chronionym (EU RED) kazać włączać port lub usługi sieciowe komendą setvar, obiecywać monit o hasło w Zebra Setup Utilities albo twierdzić, że wersja ZSU klienta jest za stara. UWAGA: nie masz instrukcji serwisowych, więc NIE oceniaj z własnej pamięci, jak zbudowane jest urządzenie ani ile trwa dana operacja. Zgłoś ten typ tylko wtedy, gdy błąd wynika wprost z reguł podanych Ci wyżej albo gdy sam asystent zaprzecza sobie w tej samej rozmowie. Domysł typu „chyba ten podzespół jest osobny" albo „ten czas wydaje mi się zbyt optymistyczny" to NIE jest podstawa do alertu',
+    opis: 'Podał nieprawdziwe dane o urządzeniu: parametr, ścieżkę w menu, wersję sterownika albo oprogramowania. Przy sterownikach jedynym błędem jest zalecenie ZDesigner v10 dla modelu GK420d, GK420t, GC420d, GC420t, GT800, LP2844 albo TLP2844 — te modele obsługuje wyłącznie v5. Tak samo zawsze błędem jest przy drukarce w trybie chronionym (EU RED) kazać włączać port lub usługi sieciowe komendą setvar, obiecywać monit o hasło w Zebra Setup Utilities albo twierdzić, że wersja ZSU klienta jest za stara. UWAGA: nie masz instrukcji serwisowych, więc NIE oceniaj z własnej pamięci, jak zbudowane jest urządzenie ani ile trwa dana operacja. Zgłoś ten typ tylko wtedy, gdy błąd wynika wprost z reguł podanych Ci wyżej albo gdy sam asystent zaprzecza sobie w tej samej rozmowie. Domysł typu „chyba ten podzespół jest osobny" albo „ten czas wydaje mi się zbyt optymistyczny" to NIE jest podstawa do alertu',
     prog: 0.9,
     waga: 'krytyczny',
   },
@@ -154,8 +154,9 @@ Zasady, które obowiązują asystenta:
   serwisu było słuszne i gdy kwotę opisano słowem „orientacyjnie".
 - Asystent nie twierdzi, że urządzenie czegoś nie ma, chyba że ma to wprost w instrukcji.
 - Asystent nie obiecuje terminów, przyjazdu technika ani sprzętu zastępczego.
-- Sterowniki: ZDesigner v10 obsługuje drukarki Link-OS (serie ZD, ZT, ZQ, ZC). Modele sprzed Link-OS —
-  GK420d, GK420t, GC420d, GC420t, GT800, LP2844, TLP2844 — wymagają ZDesigner v5; v10 potrafi je unieruchomić.
+- Sterowniki: modele GK420d, GK420t, GC420d, GC420t, GT800, LP2844 i TLP2844 wymagają ZDesigner v5 — v10 potrafi je
+  unieruchomić. Pozostałe drukarki etykiet Zebra, także ZT210, ZT220 i ZT230, obsługuje ZDesigner v10 i jego zalecenie
+  jest poprawne. Nie wyprowadzaj wersji sterownika z tego, czy model ma Link-OS.
 - Gotowa odmowa „jestem asystentem specjalizującym się wyłącznie w urządzeniach Zebra" jest na miejscu tylko
   wtedy, gdy klient naprawdę pisze o czymś innym niż sprzęt, usterka, wysyłka do serwisu czy zakup urządzenia.
 - Asystent ma nie zalecać resetu fabrycznego drukarki, która nie odpowiada po sieci, i ma uprzedzić, że przy
@@ -314,8 +315,17 @@ const LITERY = 'a-ząćęłńóśźż'
  * zarzut o sterownik ZDesigner (czy asystent o nim pisał, sprawdza zarzutMaPokrycie),
  * błędna procedura dla drukarek EU RED w odpowiedziach asystenta oraz zarzut oparty na tym,
  * co padło wcześniej w tej samej rozmowie.
+ *
+ * Zarzut o sterownik przechodzi tylko wtedy, gdy asystent napisał o v10, a w rozmowie pada jeden
+ * z siedmiu modeli obsługiwanych wyłącznie przez v5 — to jedyny błąd sterownika, który oceniający
+ * może rozstrzygnąć. 22.10.2026 oceniający uznał, że ZT230 jako model bez Link-OS wymaga v5,
+ * choć Zebra wymienia ZT230 wśród drukarek obsługiwanych przez v10. Po przepisaniu reguły na
+ * zamkniętą listę modeli dalej zgłaszał „błąd" przy poprawnym zaleceniu v10 dla ZT230,
+ * z uzasadnieniem przeczącym samemu sobie.
  */
 const RE_TEMAT_STEROWNIKA = /zdesigner|sterownik\S*\s+v\s?(?:5|10)\b|wersj\S*\s+sterownik/i
+const RE_V10 = /\bv\s?10\b/i
+const RE_MODEL_TYLKO_V5 = /\b(?:G[KC]\s?420[dt]?|GT\s?800|T?LP\s?2844)\b/i
 const RE_TEMAT_EU_RED = /setvar|zsu|setup utilities|hasł|wersj|chronion|protected/i
 // Kroki, których prompt czatu zakazuje przy trybie chronionym (sekcja o EU RED od 9.10.2026).
 const RE_BLEDNA_PROCEDURA_EU_RED = [
@@ -328,10 +338,14 @@ const RE_ODWOLANIE_DO_ROZMOWY =
 
 // Temat sterownika i odwołanie do rozmowy bierzemy z uzasadnienia oceniającego, nie z cytatu:
 // zdanie asystenta „sprawdź w sterowniku" przepuściłoby każdy zarzut z tej samej odpowiedzi.
-export function zarzutMaPodstawe(typ: string, dlaczego: string, cytat: string, tekstAsystenta: string): boolean {
+// Model drukarki często podaje tylko klient, dlatego sprawdzamy też jego wiadomości.
+export function zarzutMaPodstawe(typ: string, dlaczego: string, cytat: string, tekstAsystenta: string, tekstKlienta = ''): boolean {
   if (typ !== 'bledne_dane') return true
   const uzasadnienie = dlaczego || ''
-  if (RE_TEMAT_STEROWNIKA.test(uzasadnienie) || RE_ODWOLANIE_DO_ROZMOWY.test(uzasadnienie)) return true
+  if (RE_ODWOLANIE_DO_ROZMOWY.test(uzasadnienie)) return true
+  if (RE_TEMAT_STEROWNIKA.test(uzasadnienie)) {
+    return RE_V10.test(tekstAsystenta || '') && RE_MODEL_TYLKO_V5.test(`${tekstAsystenta || ''}\n${tekstKlienta || ''}`)
+  }
   const blednaProcedura = RE_BLEDNA_PROCEDURA_EU_RED.some((re) => re.test(tekstAsystenta || ''))
   return blednaProcedura && RE_TEMAT_EU_RED.test(`${uzasadnienie} ${cytat || ''}`)
 }
@@ -387,6 +401,27 @@ export function wycenaZgodnaZZasadami(odpowiedzi: string[], wiadomosciKlienta: s
   return (uszkodzenieEwidentne || kroki >= MIN_KROKOW_PRZED_WYCENA) && zastrzezenie
 }
 
+/** Poniżej tej oceny całej rozmowy alertujemy nawet przy średniej pewności pojedynczego problemu. */
+const OCENA_ALARMOWA = 2
+
+/**
+ * Ocena rozmowy po tym, jak bramka w kodzie odrzuciła zarzut.
+ *
+ * Oceniający wystawia ocenę razem z zarzutami, a bramki odrzucają zarzut dopiero po fakcie.
+ * Ocena zostawała więc taka, jakby zarzut był prawdziwy. 22.10.2026: drukarka po trzech
+ * darmowych krokach skierowana do serwisu z regulaminową opłatą 99 zł — w trzech powtórkach
+ * oceny za każdym razem 2/5 i jeden zarzut, „wycena_przedwczesnie", odrzucany przez bramkę kwoty.
+ * Rozmowa bez żadnego zapisanego problemu trafiała przez samą ocenę na listę do naprawy
+ * (scripts/alerty-do-naprawy.mjs bierze każdą sesję z oceną 2 lub niższą), a w doAlertu()
+ * obniżała próg pewności dla pozostałych zarzutów.
+ *
+ * Podnosimy ocenę tylko tuż nad próg alarmowy. Wyżej nie idziemy, bo nie wiemy, jak model
+ * oceniłby rozmowę bez tego zarzutu.
+ */
+export function ocenaPoBramce(ocena: number, bramkaOdrzucilaZarzut: boolean): number {
+  return bramkaOdrzucilaZarzut ? Math.max(ocena, OCENA_ALARMOWA + 1) : ocena
+}
+
 export function zbudujTranskrypt(tury: Tura[]): string {
   return tury
     .map((t, i) => {
@@ -421,15 +456,20 @@ export async function ocenRozmowe(tury: Tura[]): Promise<OcenaRozmowy | null> {
     const bylaKwota = podajeKwoteZaNaprawe(tekstAsystenta)
     // Kwota po dwóch krokach (albo od razu przy ewidentnym uszkodzeniu) i ze zdaniem o wiążącej
     // wycenie to dokładnie to, czego wymaga prompt czatu.
-    const wycenaPoZasadach = wycenaZgodnaZZasadami(odpowiedzi, tury.map((t) => t.user_message || ''))
+    const wiadomosciKlienta = tury.map((t) => t.user_message || '')
+    const wycenaPoZasadach = wycenaZgodnaZZasadami(odpowiedzi, wiadomosciKlienta)
 
-    const problemy: ZnalezionyProblem[] = (Array.isArray(parsed.problemy) ? parsed.problemy : [])
+    const znane = (Array.isArray(parsed.problemy) ? parsed.problemy : [])
       .filter((p: any) => p && typeof p.typ === 'string')
       .map((p: any) => ({ ...p, typ: normalizujTyp(p.typ) }))
       .filter((p: any) => (p.typ as TypAlertu) in ALERTY)
+    const przyjete = znane
       .filter((p: any) => p.typ !== 'wycena_przedwczesnie' || (bylaKwota && !wycenaPoZasadach))
       .filter((p: any) => zarzutMaPokrycie(p.typ, `${p.dlaczego || ''} ${p.cytat || ''}`, tekstAsystenta))
-      .filter((p: any) => zarzutMaPodstawe(p.typ, String(p.dlaczego || ''), String(p.cytat || ''), tekstAsystenta))
+      .filter((p: any) =>
+        zarzutMaPodstawe(p.typ, String(p.dlaczego || ''), String(p.cytat || ''), tekstAsystenta, wiadomosciKlienta.join('\n')))
+
+    const problemy: ZnalezionyProblem[] = przyjete
       .map((p: any) => ({
         typ: p.typ as TypAlertu,
         waga: Math.min(1, Math.max(0, Number(p.waga) || 0)),
@@ -438,15 +478,13 @@ export async function ocenRozmowe(tury: Tura[]): Promise<OcenaRozmowy | null> {
         dlaczego: String(p.dlaczego || '').slice(0, 300),
       }))
 
-    return { kategoria, ocena, problemy }
+    return { kategoria, ocena: ocenaPoBramce(ocena, przyjete.length < znane.length), problemy }
   } catch (error: any) {
     console.error('❌ Ocena rozmowy nie powiodła się:', error?.message || error)
     return null
   }
 }
 
-/** Poniżej tej oceny całej rozmowy alertujemy nawet przy średniej pewności pojedynczego problemu. */
-const OCENA_ALARMOWA = 2
 const PEWNOSC_PRZY_ZLEJ_OCENIE = 0.6
 
 /**
