@@ -26198,7 +26198,7 @@ Jako **autoryzowany serwis Zebra** pomożemy Ci:
 
 - **95%** problemów ze sterownikami Zebra rozwiązuje reinstalacja ZDesigner v10
 - Aktualizacja **KB5055528** usunęła sterowniki u tysięcy użytkowników Windows 11
-- **ZDesigner v10** to zalecany sterownik dla Windows 11 (w tym 24H2) dla drukarek Link-OS; modele sprzed Link-OS obsługuje **ZDesigner v5**
+- **ZDesigner v10** to zalecany sterownik dla Windows 11 (w tym 24H2) dla drukarek serii ZD, ZT, ZQ i ZC, także dla ZT210, ZT220 i ZT230; starsze modele GK, GC, GT800 i LP/TLP 28xx obsługuje **ZDesigner v5**
 - Instalacja trwa **2-5 minut** przy połączeniu USB
 
 ---
@@ -26264,10 +26264,10 @@ Zebra oferuje **dwa główne typy sterowników**:
 | Seria | Modele |
 |-------|--------|
 | **Desktop** | ZD220, ZD230, ZD420, ZD421, ZD620, ZD621 |
-| **Industrial** | ZT230, ZT410, ZT411, ZT420, ZT421, ZT510, ZT610, ZT620 |
+| **Industrial** | ZT210, ZT220, ZT230, ZT231, ZT410, ZT411, ZT420, ZT421, ZT510, ZT610, ZT620 |
 | **Mobile** | ZQ310, ZQ320, ZQ510, ZQ520, ZQ610, ZQ620, ZQ630 |
 
-**ZDesigner v10 NIE obsługuje** modeli sprzed Link-OS — dla nich pobierz [ZDesigner v5](/api/downloads/zdesigner-v5):
+**ZDesigner v10 NIE obsługuje** tylko tych starszych modeli — dla nich pobierz [ZDesigner v5](/api/downloads/zdesigner-v5):
 
 | Seria | Modele |
 |-------|--------|
